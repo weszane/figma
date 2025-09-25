@@ -10,11 +10,11 @@ import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { isInvalidValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
-import { e as _$$e } from "../905/579635";
-import { $j } from "../figma_app/178475";
-import { sJ } from "../figma_app/841644";
-import { _X } from "../figma_app/260445";
-import { p as _$$p } from "../905/427409";
+import { conditionalWrapper } from "../905/579635";
+import { LengthInput } from "../figma_app/178475";
+import { FormattedInputWrapper } from "../figma_app/841644";
+import { FormattedInputWithWrapper } from "../figma_app/260445";
+import { FormattedInputContext } from "../905/427409";
 import { k as _$$k } from "../905/67286";
 import { hf, KY, Kk } from "../905/71683";
 export function $$I0({
@@ -43,9 +43,9 @@ export function $$I0({
       });
     }
   }, [C, t, w]);
-  return jsx(_$$e, {
+  return jsx(conditionalWrapper, {
     condition: !S,
-    wrapper: r => jsx(_X, {
+    wrapper: r => jsx(FormattedInputWithWrapper, {
       fields: ["PARAGRAPH_SPACING"],
       resolvedType: VariableResolvedDataType.FLOAT,
       editingStyleGuid: t,
@@ -66,7 +66,7 @@ export function $$I0({
         children: r
       })
     }),
-    children: jsx($j, {
+    children: jsx(LengthInput, {
       bigNudgeAmount: y,
       "data-tooltip": getI18nString("fullscreen.type_panel.paragraph_spacing"),
       "data-tooltip-type": KindEnum.TEXT,
@@ -95,7 +95,7 @@ function E({
   children: o,
   controlRef: l
 }) {
-  let d = useContext(_$$p);
+  let d = useContext(FormattedInputContext);
   let u = useCallback(() => {
     a.current && d?.showBindingUI(a.current, {
       currentFieldValue: t,
@@ -106,7 +106,7 @@ function E({
       })
     });
   }, [d, t, i, a, l]);
-  return jsx(sJ, {
+  return jsx(FormattedInputWrapper, {
     ref: l,
     inputClassName: e,
     currentFieldValue: t,

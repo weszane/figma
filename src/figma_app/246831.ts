@@ -35,7 +35,7 @@ import { hideStylePicker, hidePickerThunk, showPickerThunk, showStylePicker } fr
 import { hideModal, showModalHandler } from "../905/156213";
 import { sw, rk } from "../figma_app/914957";
 import { hideTooltip } from "../905/765855";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { compareLibraryItemsAlias, compareWithGeneratedKey, compareLibraryItemWithKey } from "../905/709171";
 import { formatFontMetrics, teamLibraryCache } from "../figma_app/80990";
 import { b as _$$b } from "../905/217163";
@@ -68,7 +68,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { i as _$$i } from "../figma_app/85949";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { Um } from "../905/848862";
 import { useCurrentUserOrg } from "../905/845253";
 import { getBasename } from "../905/309735";
@@ -111,7 +111,7 @@ let eD = memo(function ({
     v.current = e;
     setKeyboardNavigationElement(e);
   };
-  let x = kl("numTextStyleOverrides");
+  let x = useSelectionPropertyValue("numTextStyleOverrides");
   useEffect(() => {
     keyboardNavigationItem && m.current && h && !p && (window.requestAnimationFrame(() => {
       keyboardNavigationItem.fauxFocus();
@@ -769,7 +769,7 @@ function eG({
                   disabled: !L || eb && !eT,
                   onClick: () => L?.(eh?.left ?? Z.x, eh?.top ?? Z.y),
                   htmlAttributes: {
-                    onMouseDown: dG,
+                    onMouseDown: stopPropagation,
                     "data-tooltip": getI18nString("design_systems.styles.tooltips.create"),
                     "data-tooltip-type": KindEnum.TEXT
                   },

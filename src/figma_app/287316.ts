@@ -21,7 +21,7 @@ import { colorCSSManipulatorInstance } from "../905/989956";
 import { Ii } from "../figma_app/644079";
 import { CB } from "../figma_app/442259";
 import { l as _$$l } from "../905/831968";
-import { A5 } from "../905/275640";
+import { useUpdateSelectionProperty } from "../905/275640";
 import { useIsProgressBarHiddenOrLocked, useCurrentTool } from "../figma_app/722362";
 import { Ef, se, HS, yx } from "../figma_app/546509";
 import { WC, T$, wi } from "../figma_app/792783";
@@ -1488,7 +1488,7 @@ export function $$em6() {
   let r = void 0 !== e;
   let n = HS();
   let a = yx();
-  let s = A5("opacity");
+  let s = useUpdateSelectionProperty("opacity");
   let [o, l] = useState(!1);
   useEffect(() => {
     let r = ec(e);

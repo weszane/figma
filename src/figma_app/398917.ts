@@ -20,7 +20,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import { useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { c$, wv } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -29,7 +29,7 @@ import { BK } from "../905/848862";
 import { kG } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
-import { $j } from "../figma_app/178475";
+import { LengthInput } from "../figma_app/178475";
 import { Cf, it } from "../905/504727";
 import { Zk, ks } from "../figma_app/626177";
 import { Z as _$$Z } from "../905/278240";
@@ -278,7 +278,7 @@ function ee({
             icon: void 0
           }), jsx(fn, {
             leftInput: getI18nString("sites.panel.responsive_text_style.min_width"),
-            rightInput: jsx($j, {
+            rightInput: jsx(LengthInput, {
               value: h,
               id: "responsive_text_style_variant_custom_min_width",
               onValueChange: t => {
@@ -443,7 +443,7 @@ function er({
             rightLabel: void 0
           }), jsx(fn, {
             leftInput: getI18nString("sites.panel.responsive_text_style.min_width"),
-            rightInput: jsx($j, {
+            rightInput: jsx(LengthInput, {
               value: g,
               id: "responsive_text_style_variant_min_width" + r,
               onValueChange: r => {
@@ -490,7 +490,7 @@ function en({
     bigNudgeAmount,
     smallNudgeAmount
   } = getNudgeAmounts();
-  let p = jsx(_$$E, {
+  let p = jsx(AutoInteractableWrapper, {
     name: "responsive_text_style_variant_font_size",
     children: jsx(_$$Z, {
       id: "responsive_text_style_variant_font_size" + t,
@@ -501,7 +501,7 @@ function en({
       recordingKey: "responsiveTextStylesFontSize"
     })
   });
-  let _ = jsx(_$$E, {
+  let _ = jsx(AutoInteractableWrapper, {
     name: "responsive_text_style_variant_line_height",
     children: jsx(_$$a, {
       lineHeight: e.lineHeight,
@@ -513,7 +513,7 @@ function en({
       rowElementRef: l
     })
   });
-  let h = jsx(_$$E, {
+  let h = jsx(AutoInteractableWrapper, {
     name: "responsive_text_style_variant_letter_spacing",
     children: jsx(_$$I, {
       letterSpacing: e.letterSpacing,
@@ -525,7 +525,7 @@ function en({
       dispatch: a
     })
   });
-  let m = jsx(_$$E, {
+  let m = jsx(AutoInteractableWrapper, {
     name: "responsive_text_style_variant_paragraph_spacing",
     children: jsx(_$$e2, {
       paragraphSpacing: e.paragraphSpacing,

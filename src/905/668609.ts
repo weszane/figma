@@ -28,7 +28,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { rM } from "../figma_app/241541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, isValidValue } from "../905/216495";
-import { A5, lJ } from "../905/275640";
+import { useUpdateSelectionProperty, useSelectionProperty } from "../905/275640";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { u as _$$u2 } from "../figma_app/110635";
 import { T6 } from "../figma_app/156285";
@@ -356,14 +356,14 @@ let $$em4 = ed(function ({
     activeToolId,
     activateTool
   } = rM(_$$u2);
-  let p = A5("strokeBrushGuid");
-  let m = A5("dynamicStrokeSettings");
-  let [h, g] = lJ("variableWidthPoints");
-  let [f, _] = lJ("strokePaints");
-  let [A, y] = lJ("strokeWeight");
-  let b = A5("strokeAlign");
-  let v = A5("strokeCap");
-  let I = A5("strokeJoin");
+  let p = useUpdateSelectionProperty("strokeBrushGuid");
+  let m = useUpdateSelectionProperty("dynamicStrokeSettings");
+  let [h, g] = useSelectionProperty("variableWidthPoints");
+  let [f, _] = useSelectionProperty("strokePaints");
+  let [A, y] = useSelectionProperty("strokeWeight");
+  let b = useUpdateSelectionProperty("strokeAlign");
+  let v = useUpdateSelectionProperty("strokeCap");
+  let I = useUpdateSelectionProperty("strokeJoin");
   let E = useCallback(() => {
     if (!f || isInvalidValue(f)) {
       t();

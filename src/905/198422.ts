@@ -7,7 +7,7 @@ import { U } from "../905/331038";
 import { w } from "../905/113805";
 import { Lz, Zc } from "../905/497882";
 import { k$ } from "../figma_app/975811";
-import { Q7 } from "../905/203369";
+import { FormattedInputVariant1 } from "../905/203369";
 import { R9 } from "../905/840929";
 import { A as _$$A } from "../905/567946";
 import { pK, S1, iZ, z3, rc } from "../905/235660";
@@ -60,7 +60,7 @@ let $$A0 = forwardRef(function ({
       children: [jsx("div", {
         className: S1,
         children: "$"
-      }), jsx(Q7, {
+      }), jsx(FormattedInputVariant1, {
         ref: b,
         className: o()(iZ, {
           [z3]: !!A

@@ -9,7 +9,7 @@ import { Oe, nh, AV } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, normalizeValue, isInvalidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
 import { paintManager, isGradientType } from "../figma_app/385874";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { bL } from "../figma_app/852050";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -52,7 +52,7 @@ export function $$A7(e) {
   return useMemo(() => i && a && a.type === VariableDataType.COLOR ? $$v4(a.value) : isValidValue(e) ? e : $$v4(blackColor), [i, a, e]);
 }
 export function $$x0() {
-  let [e] = lJ("imageOverlayPaint");
+  let [e] = useSelectionProperty("imageOverlayPaint");
   return useCallback((t, r) => {
     paintManager.clearCache();
     let n = [t];
@@ -120,7 +120,7 @@ export function $$L2() {
     let t = e.mirror.selectionProperties.fillPaints;
     return isInvalidValue(t) ? MIXED_MARKER : t?.length;
   });
-  let [t] = lJ("imageOverlayPaint");
+  let [t] = useSelectionProperty("imageOverlayPaint");
   let r = t && isValidValue(t);
   return valueOrFallback(e, 0) > (r ? 2 : 1);
 }

@@ -25,7 +25,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { isValidValue, arrayOrMixed, normalizeValue, AUTO_MARKER, isInvalidValue } from "../905/216495";
 import { M as _$$M3 } from "../figma_app/634148";
-import { zj, lJ, kl } from "../905/275640";
+import { useSelectionPropertyValues, useSelectionProperty, useSelectionPropertyValue } from "../905/275640";
 import { o as _$$o } from "../905/237202";
 import { F as _$$F } from "../905/258517";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -145,7 +145,7 @@ export function $$Q4(e) {
       stackVerticalPadding,
       stackPaddingRight,
       stackHorizontalPadding
-    } = zj("stackPaddingBottom", "stackVerticalPadding", "stackPaddingRight", "stackHorizontalPadding");
+    } = useSelectionPropertyValues("stackPaddingBottom", "stackVerticalPadding", "stackPaddingRight", "stackHorizontalPadding");
     return useCallback((n, i) => {
       isValidValue(stackVerticalPadding) && isValidValue(stackPaddingBottom) && isValidValue(stackHorizontalPadding) && isValidValue(stackPaddingRight) && _$$F.trackFromFullscreen("Autolayout Padding Changed", {
         side: $$K29[n],
@@ -317,13 +317,13 @@ function eu(e, t, r) {
 }
 export function $$ep13() {
   let e = trackFileEventWithUser();
-  let [t, r] = lJ("minHeight");
-  let [i, a] = lJ("maxHeight");
-  let [s, o] = lJ("minWidth");
-  let [l, d] = lJ("maxWidth");
-  let c = kl("width");
-  let u = kl("height");
-  let p = $$eK32(kl("stackMode"));
+  let [t, r] = useSelectionProperty("minHeight");
+  let [i, a] = useSelectionProperty("maxHeight");
+  let [s, o] = useSelectionProperty("minWidth");
+  let [l, d] = useSelectionProperty("maxWidth");
+  let c = useSelectionPropertyValue("width");
+  let u = useSelectionPropertyValue("height");
+  let p = $$eK32(useSelectionPropertyValue("stackMode"));
   let _ = useMemo(() => ({
     minOrMax: "min",
     widthOrHeight: "height",

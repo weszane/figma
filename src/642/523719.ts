@@ -5,7 +5,7 @@ import { e as _$$e } from "../905/149844";
 import { O } from "../905/487602";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { MIXED_MARKER } from "../905/216495";
 import { fI, nV } from "../figma_app/626177";
 import { n as _$$n } from "../642/950153";
@@ -38,7 +38,7 @@ export function $$g0({
     disabled: f,
     "aria-label": S ?? getI18nString("fullscreen.properties_panel.add"),
     htmlAttributes: {
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       "data-testid": C ?? "",
       "data-tooltip-type": "text",
       "data-tooltip": S ?? ""
@@ -50,7 +50,7 @@ export function $$g0({
     disabled: g,
     "aria-label": k ?? getI18nString("fullscreen.properties_panel.remove"),
     htmlAttributes: {
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       "data-testid": C ?? "",
       "data-tooltip-type": "text",
       "data-tooltip": k ?? ""

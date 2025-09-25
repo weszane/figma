@@ -140,7 +140,7 @@ import { A as _$$A21 } from "../1617/19958";
 import { Q as _$$Q } from "../905/350210";
 import { A as _$$A22 } from "../905/676119";
 import { GW } from "../figma_app/975811";
-import { Q7 } from "../905/203369";
+import { FormattedInputVariant1 } from "../905/203369";
 import { iu as _$$iu, Ql, Ay as _$$Ay } from "../905/918143";
 import { A as _$$A23 } from "../905/440661";
 import { A as _$$A24 } from "../905/826099";
@@ -1673,7 +1673,7 @@ function ih({
         })]
       }), l && jsxs("div", {
         className: _$$er,
-        children: [jsx(Q7, {
+        children: [jsx(FormattedInputVariant1, {
           placeholder: e ? getI18nString("community.seller.add_percent") : getI18nString("community.seller.percent_discount"),
           property: n,
           formatter: new GW(),

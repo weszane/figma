@@ -70,7 +70,7 @@ export function getIsChromeOS(): boolean {
  * Checks if the device is mobile based on user agent.
  * Original: $$_23
  */
-const isMobileUA: boolean = /Mobi/.test(navigator.userAgent)
+export const isMobileUA: boolean = /Mobi/.test(navigator.userAgent)
 
 /**
  * Returns true if the device is mobile.

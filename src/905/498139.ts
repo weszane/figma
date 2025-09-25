@@ -9,7 +9,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { Um } from "../905/848862";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
@@ -26,7 +26,7 @@ import { U as _$$U } from "../905/708285";
 import { h as _$$h } from "../905/207101";
 import { LazyInputForwardRef } from "../905/408237";
 import { $ } from "../905/483620";
-import { Cr } from "../figma_app/260445";
+import { VariableBindingsDropdown } from "../figma_app/260445";
 import { I3, gJ } from "../905/923433";
 import { _Z, hF, h$, mL, NI } from "../905/306456";
 import { dGl } from "../figma_app/27776";
@@ -75,7 +75,7 @@ function D({
       labelFor: I3,
       input: jsx("div", {
         className: hF,
-        children: jsxs(Cr, {
+        children: jsxs(VariableBindingsDropdown, {
           resolvedType: a,
           variableValue: i.varValue,
           onVariableValueChange: l,
@@ -197,7 +197,7 @@ function U({
       let n = i ? e.mirror.sceneGraph.get(i) : null;
       return n?.textContent ?? "";
     });
-    let n = kl("visible");
+    let n = useSelectionPropertyValue("visible");
     let r = WB(e) === ComponentPropType.BOOL;
     return resolveVariableValue(e, r ? n : i);
   }(i);

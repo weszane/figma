@@ -4,11 +4,11 @@ import { A as _$$A } from "../905/891805";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue, getCommonFromArray } from "../905/216495";
-import { Gt } from "../905/275640";
+import { useNonMixedSelectionPropertyValue } from "../905/275640";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { a2 } from "../figma_app/762558";
@@ -24,7 +24,7 @@ import { F as _$$F } from "../905/427107";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { o as _$$o } from "../905/96108";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { bC, kC, Ey } from "../figma_app/789050";
 import { sK } from "../905/794875";
 import { OH, EN, Gp, Sp, SO, NC, yh } from "../905/149861";
@@ -105,7 +105,7 @@ function j(e) {
     },
     "aria-label": getI18nString("fullscreen.properties_panel.fill.swap_start_and_end_points"),
     htmlAttributes: {
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       "data-tooltip": getI18nString("fullscreen.properties_panel.fill.swap_start_and_end_points"),
       "data-tooltip-type": KindEnum.TEXT
     },
@@ -249,7 +249,7 @@ function G({
   stopPropagation: o,
   toggleSettings: l
 }) {
-  return l && t ? jsx(_$$E, {
+  return l && t ? jsx(AutoInteractableWrapper, {
     name: "toggle_advanced_settings_button",
     children: jsx(_$$d, {
       "aria-expanded": s,
@@ -288,7 +288,7 @@ export function $$H0(e) {
   let r = V0();
   let a = Jt();
   let s = CL();
-  let o = Gt("strokeBrushGuid");
+  let o = useNonMixedSelectionPropertyValue("strokeBrushGuid");
   let d = getCommonFromArray(o);
   let c = Kt();
   return jsxs(Fragment, {

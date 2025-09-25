@@ -52,7 +52,7 @@ import { x as _$$x2 } from "../905/437800";
 import { BrowserInfo } from "../figma_app/778880";
 import { mZ, AS } from "../figma_app/991227";
 import { JR, p4, De } from "../905/496627";
-import { ft } from "../figma_app/753501";
+import { shouldHandleMultiTouchOrPressure } from "../figma_app/753501";
 import { F as _$$F } from "../905/258517";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Y as _$$Y } from "../905/1768";
@@ -1358,7 +1358,7 @@ function tc({
       1 === c && s(e);
       0 === t && (c = 0, p = null, u(!1));
     };
-    let E = ft(!0);
+    let E = shouldHandleMultiTouchOrPressure(!0);
     E ? (document.addEventListener("pointerdown", _, !0), document.addEventListener("pointermove", g, !0), document.addEventListener("pointerup", f, !0), document.addEventListener("pointercancel", f, !0)) : (document.addEventListener("mousedown", a, !0), document.addEventListener("mouseup", s, !0), document.addEventListener("mouseleave", s, !0));
     document.addEventListener("keydown", i);
     return () => {

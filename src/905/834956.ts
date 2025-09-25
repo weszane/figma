@@ -10,7 +10,7 @@ import { KindEnum } from '../905/129884';
 import { Pg } from '../905/149328';
 import { e as _$$e } from '../905/149844';
 import { W as _$$W } from '../905/187396';
-import { Q7 } from '../905/203369';
+import { FormattedInputVariant1 } from '../905/203369';
 import { getI18nString } from '../905/303541';
 import { UI3ConditionalWrapper } from '../905/341359';
 import { s as _$$s } from '../905/403855';
@@ -246,7 +246,7 @@ class H extends z {
         onPointerUp: e => {
           e.stopPropagation();
         },
-        children: jsx(Q7, {
+        children: jsx(FormattedInputVariant1, {
           property: t.input.value,
           style: {
             width: t.input.width ?? 50

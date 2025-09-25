@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { A } from "../905/920165";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { isInvalidValue, isValidValue } from "../905/216495";
 export function $$a0({
   value: e,
@@ -20,7 +20,7 @@ export function $$a0({
     className: "slides_slider_input_row--sliderInputRow--Z9EzC ui3_rows--_row--DnZFk ui3_rows--_grid--cP2Wu",
     children: [jsx("div", {
       className: "slides_slider_input_row--slider--M8t1y",
-      children: jsx(E, {
+      children: jsx(AutoInteractableWrapper, {
         name: p,
         children: jsx(A, {
           "aria-label": x,

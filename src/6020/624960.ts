@@ -17,7 +17,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { lW } from "../figma_app/11182";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, valueOrFallback } from "../905/216495";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { qb, Rv } from "../figma_app/2590";
 import { serializeFullViewerQueryParams } from "../figma_app/831696";
@@ -109,7 +109,7 @@ let B = function ({
   });
 };
 export function $$F1(t) {
-  let [e, o] = lJ("prototypeStartingPoint");
+  let [e, o] = useSelectionProperty("prototypeStartingPoint");
   let m = !!selectWithShallowEqual(L);
   let [h, R] = useState(!1);
   let [S, C] = useState(normalizeValue(e)?.name || "");

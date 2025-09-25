@@ -21,7 +21,7 @@ import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { syncFetchedVersionsThunk } from "../figma_app/147952";
 import { IN } from "../905/116101";
 import { p as _$$p } from "../469e6e40/489933";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Gt } from "../figma_app/248118";
 import { useCanPerformAction } from "../figma_app/844435";
@@ -306,7 +306,7 @@ function K({
         },
         "aria-label": getI18nString("dev_handoff.inspect_panel.more_plugins"),
         htmlAttributes: {
-          onMouseDown: dG,
+          onMouseDown: stopPropagation,
           "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("dev_handoff.inspect_panel.more_plugins")
         },

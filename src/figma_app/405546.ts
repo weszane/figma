@@ -4,7 +4,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { AP } from "../figma_app/755783";
 import { Xd } from "../figma_app/359164";
 import { F2, Y4 } from "../figma_app/384713";
@@ -83,7 +83,7 @@ export function $$y1(e, t) {
   let [l, p] = useAtomValueAndSetter(e);
   let _ = get(l);
   let h = useSelector(e => e.mirror.selectionProperties.numSelected);
-  let m = kl(t);
+  let m = useSelectionPropertyValue(t);
   let g = AP();
   let f = !!h || g;
   return [f ? m : _, useCallback(e => {

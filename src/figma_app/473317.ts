@@ -11,7 +11,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { vx } from "../figma_app/175258";
 import { fullscreenValue } from "../figma_app/455680";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { ae } from "../905/566585";
 import { DE } from "../figma_app/811257";
@@ -23,7 +23,7 @@ export function $$b1() {
     textAutoResize: e.mirror.selectionProperties.textAutoResize,
     missingFont: e.mirror.selectionProperties.missingFont
   }));
-  let r = kl("numSelectedByType");
+  let r = useSelectionPropertyValue("numSelectedByType");
   return {
     hasSelectedText: !!r && vx(r, "TEXT"),
     disableFontControls: !fullscreenValue?.isFontListLoaded() || !!missingFont,

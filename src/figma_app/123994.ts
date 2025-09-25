@@ -4,7 +4,7 @@ import { debounce } from "../905/915765";
 import { BackgroundPattern } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
 import { getI18nString } from "../905/303541";
@@ -64,7 +64,7 @@ export function $$C3({
   dispatch: i,
   ariaLabel: a
 }) {
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "export_video_type_select",
     children: jsx(v, {
       ariaLabel: a,
@@ -93,7 +93,7 @@ export function $$w0({
   dispatch: i,
   ariaLabel: a
 }) {
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "export_image_type_select",
     children: jsxs(I, {
       ariaLabel: a,
@@ -139,7 +139,7 @@ export function $$O2({
     recordingKey: generateRecordingKey("constraints", e.value),
     fullWidth: !0
   }, t));
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "export_constraint_combo_box",
     children: jsx(x, {
       ariaLabel: s,

@@ -12,8 +12,8 @@ import { isValidValue } from '../905/216495';
 import { C as _$$C } from '../905/217042';
 import { n6 } from '../905/234821';
 import { Label } from '../905/270045';
-import { kl, lJ } from '../905/275640';
-import { E as _$$E } from '../905/277716';
+import { useSelectionPropertyValue, useSelectionProperty } from '../905/275640';
+import { AutoInteractableWrapper } from '../905/277716';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { IconButton } from '../905/443068';
@@ -73,7 +73,7 @@ import { W as _$$W2 } from '../figma_app/691750';
 import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { bh, VE, X9 } from '../figma_app/730706';
 import { getPropertiesPanelSplitPosition } from '../figma_app/740163';
-import { dG } from '../figma_app/753501';
+import { stopPropagation } from '../figma_app/753501';
 import { AppStateTsApi, CmsRepeaterHelpers, ItemType, ViewType, LayoutTabType, InteractionCpp, Command, InsertSourceType, ChildRelationshipStatus } from '../figma_app/763686';
 import { bw, gc, jw, Xl } from '../figma_app/781981';
 import { generateRecordingKey } from '../figma_app/878298';
@@ -230,7 +230,7 @@ function ey() {
   let r = useCallback(() => {
     t.goToSource();
   }, [t]);
-  return e ? jsx(_$$E, {
+  return e ? jsx(AutoInteractableWrapper, {
     name: 'layer_go_to_source_button',
     children: jsx('div', {
       'data-non-interactive': !0,
@@ -283,7 +283,7 @@ function ek() {
       preventHoisting: !1
     };
   }();
-  return getFeatureFlags().cms_bindings_ux_improvements && e ? jsx(_$$E, {
+  return getFeatureFlags().cms_bindings_ux_improvements && e ? jsx(AutoInteractableWrapper, {
     name: 'layer_header_button',
     alsoTrack: () => ({
       layerButtonAction: `open_submenu_${camelToSnake(e.getTitle())}`
@@ -492,8 +492,8 @@ function eK({
 }) {
   let i = r.current;
   let a = !!i && i.offsetWidth < i.scrollWidth;
-  let [s] = lJ('leftEndCap');
-  let [o] = lJ('rightEndCap');
+  let [s] = useSelectionProperty('leftEndCap');
+  let [o] = useSelectionProperty('rightEndCap');
   let l = isValidValue(s) ? s : void 0;
   let d = isValidValue(o) ? o : void 0;
   let c = sO();
@@ -579,10 +579,10 @@ function eK({
 let eY = new _$$J();
 let e5 = 'sites-disabled-create-symbol-button';
 function e8() {
-  let e = kl('videoMediaLoop');
-  let t = kl('videoAutoplay');
-  let r = kl('videoMuted');
-  let i = kl('videoShowControls');
+  let e = useSelectionPropertyValue('videoMediaLoop');
+  let t = useSelectionPropertyValue('videoAutoplay');
+  let r = useSelectionPropertyValue('videoMuted');
+  let i = useSelectionPropertyValue('videoShowControls');
   return jsx('div', {
     className: 'x78zum5 xdt5ytf x8rdmch xctkrei x1k70j0n x1jnr06f',
     children: jsx('div', {
@@ -675,7 +675,7 @@ function tr({
     orderedHoistableToolbarItems,
     hasAnyPreventHoistingItems
   } = $$ts6(O);
-  let k = kl('containsResponsiveSets');
+  let k = useSelectionPropertyValue('containsResponsiveSets');
   let M = useRef(null);
   let F = RW({
     shouldShowComponentPropertiesPanel: r,
@@ -721,7 +721,7 @@ function tr({
   }();
   let eC = useContext(_$$Q);
   if (!(!(!q && (em || S || ep || ea) && !v) && !em && !eg)) return null;
-  let ew = o && j ? j : eE > 0 && jsx(_$$E, {
+  let ew = o && j ? j : eE > 0 && jsx(AutoInteractableWrapper, {
     name: 'layer_overflow_menu_button',
     children: jsx(_$$S, {
       enabledToolbarItems: ef,
@@ -760,7 +760,7 @@ function tr({
           'className': p()(gF, {
             [_$$ek]: !['INSTANCE', 'FRAME', 'REPEATER'].includes(F || '')
           }),
-          'children': [U.map(e => e.type === ZU.FLYOUT ? jsx(_$$E, {
+          'children': [U.map(e => e.type === ZU.FLYOUT ? jsx(AutoInteractableWrapper, {
             name: 'layer_header_button',
             alsoTrack: () => ({
               layerButtonAction: `open_flyout_${camelToSnake(e.dropdownKey)}`
@@ -769,7 +769,7 @@ function tr({
               flyoutConfig: e,
               recordingKey: generateRecordingKey($$e90, e.flyoutRecordingKey)
             })
-          }, e.dropdownKey) : e.type === ZU.ACTION ? jsx(_$$E, {
+          }, e.dropdownKey) : e.type === ZU.ACTION ? jsx(AutoInteractableWrapper, {
             name: 'layer_header_button',
             alsoTrack: () => ({
               layerButtonAction: `${camelToSnake(e.action)}`
@@ -779,7 +779,7 @@ function tr({
               numUnreadComments: eI,
               recordingKey: T
             })
-          }, e.recordingKey) : e.type === ZU.ACTION_SUBMENU ? jsx(_$$E, {
+          }, e.recordingKey) : e.type === ZU.ACTION_SUBMENU ? jsx(AutoInteractableWrapper, {
             name: 'layer_header_button',
             alsoTrack: () => ({
               layerButtonAction: `open_submenu_${camelToSnake(e.getTitle())}`
@@ -852,8 +852,8 @@ export function $$ti7(e, t) {
   }();
   let m = LF();
   let g = useIsFullscreenSitesView();
-  let f = kl('containsNodesInResponsiveSets');
-  let E = kl('containsSitesLayouts');
+  let f = useSelectionPropertyValue('containsNodesInResponsiveSets');
+  let E = useSelectionPropertyValue('containsSitesLayouts');
   let b = g && !!E;
   let I = I9();
   let S = F();
@@ -906,7 +906,7 @@ export function $$to1({
 }) {
   let t = e.customActionType === Wg.DIALOG_TRIGGER_BUTTON;
   let r = e.customActionType === Wg.DROPDOWN_TRIGGER_BUTTON;
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: 'layer_header_button',
     alsoTrack: () => ({
       layerButtonAction: `${camelToSnake(e.getTitle())}`
@@ -920,7 +920,7 @@ export function $$to1({
         'aria-label': e.getTitle(),
         'onClick': e.onClick,
         'htmlAttributes': {
-          onMouseDown: dG
+          onMouseDown: stopPropagation
         },
         'children': e.icon
       })

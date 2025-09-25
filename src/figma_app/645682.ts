@@ -12,7 +12,7 @@ import { showPickerThunk, hideStylePicker, hidePickerThunk } from "../figma_app/
 import { sw } from "../figma_app/914957";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, valueOrFallback, isValidValue } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { V4 } from "../figma_app/383828";
 import { lm } from "../figma_app/745458";
@@ -32,7 +32,7 @@ import { p as _$$p } from "../figma_app/295764";
 import { n as _$$n } from "../figma_app/763473";
 import { sanitizeAndExtractText } from "../905/973142";
 import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_app/9619";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { Tg } from "../figma_app/967154";
 import { Ad } from "../figma_app/811257";
 import { NA } from "../figma_app/760428";
@@ -69,7 +69,7 @@ let G = forwardRef(function ({
     input: jsx("button", {
       className: "instance_description_preview--ui3DescriptionButton--dZnej",
       disabled: !p,
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       onClick: _,
       children: jsx("div", {
         ref: c,
@@ -87,7 +87,7 @@ export function $$W1(e) {
   return t && !nestedInstances.length ? void 0 : NA.INSTANCE_SWAP_PICKER;
 }
 export let $$K0 = memo(function (e) {
-  let t = normalizeValue(kl("resettableInstanceOverrides"));
+  let t = normalizeValue(useSelectionPropertyValue("resettableInstanceOverrides"));
   let r = useSelector(e => e.pickerShown);
   let s = useSelector(generateDescription);
   let o = useSelector(selectSceneGraphSelectionKeys);

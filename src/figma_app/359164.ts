@@ -4,7 +4,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { vx } from "../figma_app/175258";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback, MIXED_MARKER, isInvalidValue } from "../905/216495";
-import { zj, Gt } from "../905/275640";
+import { useSelectionPropertyValues, useNonMixedSelectionPropertyValue } from "../905/275640";
 import { useSceneGraphSelection } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -33,8 +33,8 @@ export function $$g13() {
     strokeCapSize,
     leftCapSize,
     rightCapSize
-  } = zj("strokeAlign", "strokeCap", "terminalCap", "strokeJoin", "arcRadius", "arcSweep", "connectorLineStyle", "miterLimitAngle", "leftEndCap", "rightEndCap", "dashPattern", "dashCap", "strokePaints", "strokeWeight", "borderSharedWeight", "styleIdForStrokeFill", "inheritFillStyleKeyForStroke", "strokeCapSize", "leftCapSize", "rightCapSize");
-  let T = Gt("maxStrokeWeight");
+  } = useSelectionPropertyValues("strokeAlign", "strokeCap", "terminalCap", "strokeJoin", "arcRadius", "arcSweep", "connectorLineStyle", "miterLimitAngle", "leftEndCap", "rightEndCap", "dashPattern", "dashCap", "strokePaints", "strokeWeight", "borderSharedWeight", "styleIdForStrokeFill", "inheritFillStyleKeyForStroke", "strokeCapSize", "leftCapSize", "rightCapSize");
+  let T = useNonMixedSelectionPropertyValue("maxStrokeWeight");
   return {
     strokeAlign,
     strokeCap,
@@ -42,7 +42,7 @@ export function $$g13() {
     strokeJoin,
     arcRadius,
     arcSweep,
-    numSelectedByType: Gt("numSelectedByType"),
+    numSelectedByType: useNonMixedSelectionPropertyValue("numSelectedByType"),
     connectorLineStyle,
     miterLimitAngle,
     leftEndCap,

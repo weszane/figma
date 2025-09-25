@@ -25,10 +25,10 @@ import { Point } from "../905/736624";
 import { TI } from "../905/713722";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { cn } from "../905/959568";
-import { Pd, gq, qd, dE } from "../figma_app/178475";
+import { OpacityInput, ExpressionInput, TimeDurationInput, TimeSecondsInput } from "../figma_app/178475";
 import { J as _$$J3 } from "../905/225412";
 import { h as _$$h } from "../905/65944";
-import { AN } from "../905/203369";
+import { FormattedInputVariant3 } from "../905/203369";
 import { A as _$$A, F as _$$F } from "../897/590880";
 import { subscribeObservable } from "../figma_app/84367";
 import { Zk, fI, nV } from "../figma_app/626177";
@@ -216,7 +216,7 @@ function K({
       opacity: X,
       recordingKey: generateRecordingKey(t, "chit"),
       className: "overlay_panel--chit--Zn66r paint_panels--chit--twQEy"
-    }), jsx(AN, {
+    }), jsx(FormattedInputVariant3, {
       className: "overlay_panel--colorInputUI3--ozOrK paint_panels--colorInput--nSz13",
       noLeftBorder: !0,
       formatter: U,
@@ -225,7 +225,7 @@ function K({
       onChange: W,
       recordingKey: generateRecordingKey(t, "colorInput"),
       noBorderOnFocus: !0
-    }), jsx(Pd, {
+    }), jsx(OpacityInput, {
       className: "overlay_panel--opacity--vrrjV paint_panels--opacityInputContainer--oqlsk",
       value: X,
       onValueChange: G,
@@ -1374,7 +1374,7 @@ function tc({
     y: 0
   });
   if (!i || "SCROLL_TO" !== t) return null;
-  let x = jsx(gq, {
+  let x = jsx(ExpressionInput, {
     bigNudgeAmount,
     "data-tooltip": getI18nString("proto.trigger.y_offset"),
     "data-tooltip-type": KindEnum.TEXT,
@@ -1392,7 +1392,7 @@ function tc({
       children: renderI18nText("proto.scroll_options.scroll_offset.y")
     })
   });
-  let g = jsx(gq, {
+  let g = jsx(ExpressionInput, {
     bigNudgeAmount,
     "data-tooltip": getI18nString("proto.trigger.x_offset"),
     "data-tooltip-type": KindEnum.TEXT,
@@ -1536,7 +1536,7 @@ function tf({
       disabled: !1
     }, "UPDATE_MEDIA_SKIP_BACKWARD")]
   });
-  let O = jsx(qd, {
+  let O = jsx(TimeDurationInput, {
     className: "prototype_video_action_options--timestampContainer---DdaI",
     "data-tooltip": getI18nString("proto.trigger.timestamp_to_set_to"),
     "data-tooltip-type": KindEnum.TEXT,
@@ -1554,7 +1554,7 @@ function tf({
     children: jsx(_$$Y2, {})
   });
   let D = "SKIP_BACKWARD" === d ? getI18nString("proto.trigger.duration_to_jump_backward") : getI18nString("proto.trigger.duration_to_jump_forward");
-  let R = jsx(dE, {
+  let R = jsx(TimeSecondsInput, {
     className: "prototype_video_action_options--timeAmountContainer--5kpHn",
     "data-tooltip": D,
     "data-tooltip-type": KindEnum.TEXT,

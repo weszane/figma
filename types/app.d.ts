@@ -3016,6 +3016,7 @@ export interface SceneGraphSelection {
 }
 
 export interface SelectedStyleProperties {
+  guid: any
   intrinsicLineHeight: number
   leadingTrimEnabled: boolean
 }
@@ -3083,6 +3084,8 @@ export interface Color {
 }
 
 export interface SelectionProperties {
+  cooperTemplateData: any
+  textAutoResize: any
   styleIdForStrokeFill: StyleIDFor
   styleIdForFill: StyleIDFor
   styleIdForEffect: StyleIDFor
@@ -3270,6 +3273,9 @@ export interface SelectionProperties {
   intrinsicLineHeight: number
   fontFamily: string
   fontStyle: string
+  'arcStart': any
+  'arcSweep': any
+  'arcRadius': any
 }
 
 export interface AriaAttributes {
@@ -3498,8 +3504,8 @@ export interface MusicMusic {
 }
 
 export interface OpenFile {
-  id: ID
-  key: ID
+  id: string
+  key: string
   _name: string
   teamId: string
   clientMeta: null

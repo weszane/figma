@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { StateHierarchy } from "../figma_app/763686";
-import { E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { renameNode } from "../figma_app/741237";
@@ -21,7 +21,7 @@ export function $$_0({
   } = z6();
   if (!containingProductComponent) return null;
   let f = stateGroupSelectionMode === StateHierarchy.STATE && !e;
-  return jsx(E, {
+  return jsx(AutoInteractableWrapper, {
     name: "component_title_control",
     children: jsx(_$$R, {
       onSubmit: e => {

@@ -32,7 +32,7 @@ import { Kx } from "../905/401389";
 import { Bf } from "../905/937445";
 import { bL, RT } from "../905/867927";
 import { q as _$$q } from "../905/932270";
-import { $j, Pd, w2, gq } from "../figma_app/178475";
+import { LengthInput, OpacityInput, PercentageBaseInput, ExpressionInput } from "../figma_app/178475";
 import { aO, UF, ml, gA, vG, qq, IK } from "../905/210945";
 import { Id, Zk } from "../figma_app/626177";
 import { cS, Zo } from "../figma_app/334459";
@@ -44,15 +44,15 @@ import { assertNotNullish } from "../figma_app/465776";
 import { convertVariableIdToKiwi, convertKiwiToVariableIdString } from "../905/805904";
 import $ from "classnames";
 import { Oe as _$$Oe } from "../figma_app/933328";
-import { sJ } from "../figma_app/841644";
-import { hu } from "../figma_app/260445";
+import { FormattedInputWithWrapper } from "../figma_app/841644";
+import { ControlledVariablePickerProvider } from "../figma_app/260445";
 import { MH } from "../figma_app/394327";
 import { oz } from "../figma_app/406976";
 import { E as _$$E } from "../905/53857";
 import { bL as _$$bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { Point } from "../905/736624";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { Rk } from "../figma_app/844696";
 import { bL as _$$bL2, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
@@ -163,11 +163,11 @@ function ed({
     });
   }, [c, s, a, t]);
   let p = useRef(null);
-  return jsx(hu, {
+  return jsx(ControlledVariablePickerProvider, {
     boundVariableId: l,
     resolvedType: VariableResolvedDataType.FLOAT,
     onVariableSelected: u,
-    children: jsx(sJ, {
+    children: jsx(FormattedInputWithWrapper, {
       inputClassName: i,
       currentFieldValue: l,
       hasBindingContextMenu: !0,
@@ -253,7 +253,7 @@ function ep(e) {
   } = e;
   let r = jsx(cS, {
     label: getI18nString("properties_panel.effects.blur.start_blur"),
-    input: jsx($j, {
+    input: jsx(LengthInput, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.effects.blur.start_blur"),
@@ -286,7 +286,7 @@ function ep(e) {
         effect: e.effect,
         onChange: e.onChange,
         inputClassName: ei,
-        children: jsx($j, {
+        children: jsx(LengthInput, {
           autoFocus: !0,
           bigNudgeAmount: e.bigNudgeAmount,
           "data-tooltip": isProgressiveBlur ? getI18nString("properties_panel.effects.blur.end_blur") : getI18nString("properties_panel.effects.blur_radius"),
@@ -394,7 +394,7 @@ function eh(e) {
           effect: e.effect,
           onChange: e.onChange,
           inputClassName: ei,
-          children: jsx($j, {
+          children: jsx(LengthInput, {
             autoFocus: !0,
             bigNudgeAmount: e.bigNudgeAmount,
             "data-tooltip": getI18nString("properties_panel.effects.blur_radius"),
@@ -989,7 +989,7 @@ function e8(e) {
   } = e;
   let r = jsx(cS, {
     label: renderI18nText("properties_panel.effects.texture.noise_size"),
-    input: jsx($j, {
+    input: jsx(LengthInput, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.effects.texture.noise_size"),
@@ -1014,7 +1014,7 @@ function e8(e) {
   });
   let a = jsx(cS, {
     label: renderI18nText("properties_panel.effects.texture.radius"),
-    input: jsx($j, {
+    input: jsx(LengthInput, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.effects.texture.radius"),
@@ -1143,7 +1143,7 @@ function ta(e) {
       paint: e.paint,
       recordingKey: generateRecordingKey(e, "value"),
       visible: !0
-    }), jsx(Pd, {
+    }), jsx(OpacityInput, {
       className: Z()("paint_with_opacity--opacityInputContainer--x9eKU", n1),
       dispatch: t,
       inputClassName: "paint_with_opacity--opacityInput--SKlru",
@@ -1240,7 +1240,7 @@ function to(e) {
   } = e;
   let l = jsx(cS, {
     label: renderI18nText("properties_panel.noise.noise_size"),
-    input: jsx($j, {
+    input: jsx(LengthInput, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.noise.noise_size"),
@@ -1264,7 +1264,7 @@ function to(e) {
   });
   let d = jsx(cS, {
     label: renderI18nText("properties_panel.effects.noise.density"),
-    input: jsx(w2, {
+    input: jsx(PercentageBaseInput, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.effects.noise.density"),
@@ -1285,7 +1285,7 @@ function to(e) {
   });
   let c = jsx(cS, {
     label: renderI18nText("properties_panel.effects.noise.opacity"),
-    input: jsx(w2, {
+    input: jsx(PercentageBaseInput, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.effects.noise.opacity"),
@@ -1584,7 +1584,7 @@ function tm(e) {
         effect: e.effect,
         onChange: e.onChange,
         inputClassName: ei,
-        children: jsx(gq, {
+        children: jsx(ExpressionInput, {
           autoFocus: !0,
           bigNudgeAmount: e.bigNudgeAmount,
           className: ei,
@@ -1613,7 +1613,7 @@ function tm(e) {
         effect: e.effect,
         onChange: e.onChange,
         inputClassName: ei,
-        children: jsx(gq, {
+        children: jsx(ExpressionInput, {
           bigNudgeAmount: e.bigNudgeAmount,
           className: ei,
           "data-tooltip": getI18nString("properties_panel.effects.y"),
@@ -1643,7 +1643,7 @@ function tm(e) {
       effect: e.effect,
       onChange: e.onChange,
       inputClassName: ei,
-      children: jsx($j, {
+      children: jsx(LengthInput, {
         bigNudgeAmount: e.bigNudgeAmount,
         "data-tooltip": getI18nString("properties_panel.effects.blur_radius"),
         "data-tooltip-type": KindEnum.TEXT,
@@ -1674,7 +1674,7 @@ function tm(e) {
       effect: e.effect,
       onChange: e.onChange,
       inputClassName: ei,
-      children: jsx(gq, {
+      children: jsx(ExpressionInput, {
         bigNudgeAmount: e.bigNudgeAmount,
         "data-tooltip": spreadTooltipText,
         "data-tooltip-type": KindEnum.TEXT,
@@ -1915,7 +1915,7 @@ function tg(e) {
           iconClassName: "ui3_effects_settings_picker--effectSelectIcon--VPt73",
           id: e.pickerId,
           onChange: e.onTypeChange,
-          onMouseDown: dG,
+          onMouseDown: stopPropagation,
           property: e.effect.type,
           recordingKey: "effects_settings_picker.title.select"
         }), o]

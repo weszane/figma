@@ -8,19 +8,19 @@ import { getI18nString } from "../905/303541";
 import { setupHyperlinkHandler } from "../figma_app/815170";
 import { createEmbedAnalyticsHandler, LinkMetadataEvent } from "../figma_app/671547";
 import { normalizeValue } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { n as _$$n } from "../9410/774045";
 import { V as _$$V } from "../figma_app/144634";
 import { K0 } from "../figma_app/439493";
 import { A } from "../svg/305639";
 let x = () => {
-  let e = kl("embedData");
+  let e = useSelectionPropertyValue("embedData");
   return decodeURIComponent(normalizeValue(e)?.url || normalizeValue(e)?.srcUrl || "");
 };
 export function $$y1() {
   let e = useDispatch();
   let t = x();
-  let i = kl("embedData");
+  let i = useSelectionPropertyValue("embedData");
   let r = createEmbedAnalyticsHandler(i);
   return useCallback(() => {
     t && (r(LinkMetadataEvent.OPEN_PREVIEW), e(setupHyperlinkHandler({

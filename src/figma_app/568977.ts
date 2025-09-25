@@ -15,7 +15,7 @@ import { hidePickerThunk } from "../figma_app/91703";
 import { DEFAULT_FINE_NUDGE, DEFAULT_COARSE_NUDGE } from "../905/668764";
 import { Lk } from "../figma_app/975811";
 import { getSmallNudgeAmount, getBigNudgeAmount, EditorPreferencesApi } from "../figma_app/740163";
-import { Q7 } from "../905/203369";
+import { FormattedInputVariant1 } from "../905/203369";
 import { cS } from "../figma_app/334459";
 import { md8 } from "../figma_app/27776";
 import { h as _$$h2, b as _$$b } from "../905/916167";
@@ -74,7 +74,7 @@ export function $$x1(e) {
         }
       })
     })]
-  }) : jsx(Q7, {
+  }) : jsx(FormattedInputVariant1, {
     ariaLabel: getI18nString("fullscreen.nudge.small_nudge"),
     className: _$$h2,
     formatter: x,
@@ -99,7 +99,7 @@ export function $$x1(e) {
         }
       })
     })]
-  }) : jsx(Q7, {
+  }) : jsx(FormattedInputVariant1, {
     ariaLabel: getI18nString("fullscreen.nudge.big_nudge"),
     className: _$$b,
     formatter: N,

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { Ay } from "@stylexjs/stylex";
 import { isValidValue } from "../905/216495";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { J } from "../905/225412";
 let d = {
   chit: {
@@ -28,7 +28,7 @@ let c = {
   blendMode: "NORMAL"
 };
 export function $$u0(e) {
-  let [t] = lJ("dividedSwatchColors");
+  let [t] = useSelectionProperty("dividedSwatchColors");
   return useMemo(() => isValidValue(e) && e && e.color ? [e.color] : Array.isArray(t) && t.length > 1 ? t : [{
     r: 1,
     g: 1,

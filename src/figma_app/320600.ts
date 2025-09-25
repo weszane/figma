@@ -41,7 +41,7 @@ import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { isInvalidValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
-import { Ht } from "../figma_app/178475";
+import { NumericInput } from "../figma_app/178475";
 import { uw, i$ } from "../figma_app/582377";
 import { hF, Pf as _$$Pf, kL as _$$kL } from "../905/875676";
 import { io } from "../figma_app/73698";
@@ -114,7 +114,7 @@ function q(e) {
       [e.configPropertyName]: t
     });
   }, [t, e.configPropertyName]);
-  return jsx(Ht, {
+  return jsx(NumericInput, {
     bigNudgeAmount: e.bigNudgeAmount,
     className: hF,
     "data-tooltip": e.propertyDescription,

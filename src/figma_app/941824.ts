@@ -6,7 +6,7 @@ import { setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955"
 import { SV } from "../figma_app/272902";
 import d from "classnames";
 import { SvgComponent } from "../905/714743";
-import { e as _$$e } from "../905/579635";
+import { conditionalWrapper } from "../905/579635";
 import { Rv, _v, es, Wy, PU, Kk, hF, PO, wH, eK, nB, E3, q0, H_, KW, yr, cB, Vb, Pv, Hq, cd, ig, by, o as _$$o, yU, Sk, tp, kI, gB } from "../905/454970";
 import { A } from "../5724/713301";
 var c = d;
@@ -368,7 +368,7 @@ function S({
   let {
     isDragging
   } = useContext($$v9);
-  return e || t && !isDragging ? null : jsx(_$$e, {
+  return e || t && !isDragging ? null : jsx(conditionalWrapper, {
     condition: menuItems.length > 0,
     wrapper: e => jsxs(Fragment, {
       children: [jsx(MenuRootComp, {

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { xk } from "@stylexjs/stylex";
-import { E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { If, XS, fJ, b_, yG } from "../figma_app/319440";
 import { S } from "../figma_app/924300";
 import { ZU } from "../figma_app/986347";
@@ -18,7 +18,7 @@ function f({
 }) {
   switch (e.type) {
     case ZU.FLYOUT:
-      return jsx(E, {
+      return jsx(AutoInteractableWrapper, {
         name: "selection_actions_button",
         alsoTrack: () => ({
           layerButtonAction: `open_flyout_${camelToSnake(e.dropdownKey)}`
@@ -29,7 +29,7 @@ function f({
         })
       }, e.dropdownKey);
     case ZU.ACTION:
-      return jsx(E, {
+      return jsx(AutoInteractableWrapper, {
         name: "selection_actions_button",
         alsoTrack: () => ({
           layerButtonAction: `${camelToSnake(e.action)}`
@@ -45,7 +45,7 @@ function f({
         item: e
       }, e.recordingKey);
     case ZU.ACTION_SUBMENU:
-      return jsx(E, {
+      return jsx(AutoInteractableWrapper, {
         name: "selection_actions_button",
         alsoTrack: () => ({
           layerButtonAction: `open_submenu_${camelToSnake(e.getTitle())}`
@@ -80,7 +80,7 @@ export let $$_0 = memo(e => {
       return jsx(f, {
         action: e
       }, t);
-    }), h && jsx(E, {
+    }), h && jsx(AutoInteractableWrapper, {
       name: "selection_actions_overflow_menu",
       children: jsx(S, {
         enabledToolbarItems: p,

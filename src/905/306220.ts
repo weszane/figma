@@ -6,7 +6,7 @@ import { RecordingPureComponent, handlePointerEvent, SKIP_RECORDING, handleWheel
 import { Point } from "../905/736624";
 import { n as _$$n } from "../905/734251";
 import { colorCSSManipulatorInstance } from "../905/989956";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { dM } from "../figma_app/837840";
 import { createColorDataUri } from "../905/248569";
 import { shouldUsePolyfill, getColorSpaceString } from "../figma_app/622881";
@@ -236,7 +236,7 @@ class f extends RecordingPureComponent {
         className: "slider_control--handle--5pBjz",
         onKeyDown: this.onKeyDown,
         onLostPointerCapture: this.onPointerUp,
-        onMouseDown: dG,
+        onMouseDown: stopPropagation,
         onPointerDown: this.onPointerDown,
         onPointerMove: this.onPointerMove,
         onPointerUp: this.onPointerUp,
@@ -244,7 +244,7 @@ class f extends RecordingPureComponent {
         style: s,
         tabIndex: 0
       }), jsx(_$$n.div, {
-        onMouseDown: dG,
+        onMouseDown: stopPropagation,
         onPointerDown: this.onPointerDown,
         onPointerUp: this.onPointerUp,
         onLostPointerCapture: this.onPointerUp,

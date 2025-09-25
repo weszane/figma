@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { $ } from "../905/455748";
 import { isInvalidValue } from "../905/216495";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { useSceneGraphSelection } from "../figma_app/722362";
 import { getSelectedView } from "../figma_app/386952";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -14,7 +14,7 @@ import { Tv } from "../figma_app/151869";
 import { isFullscreenSitesView } from "../905/561485";
 import { rO } from "../figma_app/409807";
 export function $$E0() {
-  let [e, t] = lJ("stackCounterAlignItems");
+  let [e, t] = useSelectionProperty("stackCounterAlignItems");
   let r = trackFileEventWithUser();
   let a = useSelector(selectSceneGraphSelectionKeys);
   let o = T(e, "CENTER", e => !e || isInvalidValue(e) || "BASELINE" === e);
@@ -38,7 +38,7 @@ export function $$y2() {
   };
 }
 export function $$b1() {
-  let [e, t] = lJ("stackPrimaryAlignItems");
+  let [e, t] = useSelectionProperty("stackPrimaryAlignItems");
   let r = trackFileEventWithUser();
   let {
     selection,

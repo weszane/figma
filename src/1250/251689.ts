@@ -15,7 +15,7 @@ import { l as _$$l } from "../905/479687";
 import { LinkPrimitive } from "../figma_app/496441";
 import { B as _$$B } from "../1250/314515";
 import { T as _$$T } from "../7021/675372";
-import { wo } from "../figma_app/753501";
+import { preventDefault } from "../figma_app/753501";
 import { useDispatch } from "react-redux";
 import { CH, g4 } from "../figma_app/770359";
 import { IconButton } from "../905/443068";
@@ -109,7 +109,7 @@ javascript:(function()%7Bfunction%20callback()%7BCodeConnect%3F.default%3F.init(
           trackEventAnalytics("Codebase Suggestions Setup Steps Bookmarklet Dragged");
         }
       },
-      onClick: wo,
+      onClick: preventDefault,
       style: {
         pointerEvents: n ? "none" : "auto",
         opacity: n ? .5 : 1

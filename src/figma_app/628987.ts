@@ -19,7 +19,7 @@ import { buildStaticUrl } from "../figma_app/169182";
 import { generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { E as _$$E2 } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { XHR } from "../905/910117";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -242,7 +242,7 @@ export function $$em2({
       }
       let a = ef?.id === eo;
       let o = eG || (ep ?? getI18nString("fullscreen.mixed"));
-      let u = jsx(_$$E2, {
+      let u = jsx(AutoInteractableWrapper, {
         name: "open_font_picker_button",
         children: jsxs(ButtonPrimitive, {
           actionOnPointerDown: !0,

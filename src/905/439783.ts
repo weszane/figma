@@ -15,13 +15,13 @@ import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
-import { e as _$$e } from "../905/579635";
-import { Jl } from "../figma_app/178475";
-import { sJ } from "../figma_app/841644";
+import { conditionalWrapper } from "../905/579635";
+import { PixelInput } from "../figma_app/178475";
+import { FormattedInputWrapper } from "../figma_app/841644";
 import { h$ } from "../905/566585";
 import { P as _$$P } from "../905/460261";
-import { _X } from "../figma_app/260445";
-import { p as _$$p } from "../905/427409";
+import { FormattedInputWithWrapper } from "../figma_app/260445";
+import { FormattedInputContext } from "../905/427409";
 import { u3 } from "../figma_app/152690";
 import { k as _$$k } from "../905/67286";
 import { ZC, kL, KY, Kk } from "../905/71683";
@@ -56,9 +56,9 @@ export function $$N0({
     }
   }, [L, i, D]);
   let U = !!i;
-  return jsx(_$$e, {
+  return jsx(conditionalWrapper, {
     condition: !E,
-    wrapper: t => jsx(_X, {
+    wrapper: t => jsx(FormattedInputWithWrapper, {
       fields: ["LETTER_SPACING"],
       resolvedType: VariableResolvedDataType.FLOAT,
       editingStyleGuid: i,
@@ -78,7 +78,7 @@ export function $$N0({
         children: t
       })
     }),
-    children: jsx(Jl, {
+    children: jsx(PixelInput, {
       bigNudgeAmount: y,
       className: E ? p()({
         [ZC]: !0,
@@ -131,7 +131,7 @@ function P({
   controlRef: s,
   children: o
 }) {
-  let l = useContext(_$$p);
+  let l = useContext(FormattedInputContext);
   let d = SG(["LETTER_SPACING"]).data ?? [];
   let c = useCallback(() => {
     i.current && l?.showBindingUI(i.current, {
@@ -143,7 +143,7 @@ function P({
       })
     });
   }, [i, l, e, s, t]);
-  return jsx(sJ, {
+  return jsx(FormattedInputWrapper, {
     ref: s,
     currentFieldValue: e,
     inputClassName: p()({

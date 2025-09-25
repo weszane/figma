@@ -21,7 +21,7 @@ import { isDevHandoffEditorType } from "../figma_app/976749";
 import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { selectOpenFileKey, selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { qb, Rv } from "../figma_app/2590";
@@ -168,7 +168,7 @@ function F({
   }, i.nodeID);
 }
 export let $$L0 = function (t) {
-  let e = kl("prototypeStartingPointsInfo");
+  let e = useSelectionPropertyValue("prototypeStartingPointsInfo");
   let o = useSelector(selectOpenFileKey) || "";
   let l = selectCurrentFile();
   let s = useOpenFileObjectWithSinatraType({

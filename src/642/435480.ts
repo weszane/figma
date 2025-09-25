@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { isFullscreenDesignModeNotFocused } from "../figma_app/327588";
 import { e as _$$e } from "../1528/93111";
 import { q } from "../figma_app/590592";
-import { Gt } from "../905/275640";
+import { useNonMixedSelectionPropertyValue } from "../905/275640";
 import { o3, nt } from "../905/226610";
 import { m as _$$m } from "../905/99004";
 import { aZ } from "../figma_app/481279";
@@ -46,7 +46,7 @@ export function $$b1({
   });
 }
 export function $$C2() {
-  let e = Gt("numSelectedByType");
+  let e = useNonMixedSelectionPropertyValue("numSelectedByType");
   return useMemoStable(() => function (e) {
     if (e) return aZ(NodePropertyCategory.FILL, e);
   }(e), [e]);

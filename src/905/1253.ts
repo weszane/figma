@@ -11,7 +11,7 @@ import { Zl } from "../905/211621";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { zE } from "../905/8732";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { isValidValue, isInvalidValue } from "../905/216495";
 import { getBasename } from "../905/309735";
 import { VZ, TS } from "../905/959568";
@@ -82,7 +82,7 @@ export function $$k1(e) {
       recordingKey: generateRecordingKey("instanceSwapToggle", pickerID),
       htmlAttributes: {
         id: $$w0,
-        onMouseDown: dG,
+        onMouseDown: stopPropagation,
         "data-testid": "instance-swap-toggle-button"
       },
       children: [jsx("span", {

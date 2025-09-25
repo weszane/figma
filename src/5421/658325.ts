@@ -22,7 +22,7 @@ import { R1, u3 } from "../figma_app/152690";
 import { setupHyperlinkHandler } from "../figma_app/815170";
 import { TrackingProvider } from "../figma_app/831799";
 import { fullscreenValue } from "../figma_app/455680";
-import { kl, lJ } from "../905/275640";
+import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
 import { useSceneGraphSelection, useSceneGraphSelector } from "../figma_app/722362";
 import { copyHyperlinkToClipboard } from "../905/250387";
 import { xT } from "../figma_app/841415";
@@ -77,7 +77,7 @@ export function $$z0({
     let t = l.get(e);
     return t?.type === "TEXT" && !ol(n);
   });
-  let m = kl("hyperlink");
+  let m = useSelectionPropertyValue("hyperlink");
   let x = c && m && Object.keys(m).length > 0 || !!p4(n);
   if (!((d || x) && Object.keys(a).every(e => {
     let t = l.get(e);
@@ -375,7 +375,7 @@ function Z({
   isInteractionModal: y,
   recordingKey: f
 }) {
-  let [v, E] = lJ("hyperlink");
+  let [v, E] = useSelectionProperty("hyperlink");
   let j = useSceneGraphSelection();
   let {
     variableConsumptionMap,

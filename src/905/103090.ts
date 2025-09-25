@@ -6,8 +6,8 @@ import { shallowEqual, useSelector } from 'react-redux'
  * @returns The selected state.
  * @see $$r0
  */
-export function selectWithShallowEqual(selector: (state: any) => any) {
-  return useSelector(selector, shallowEqual)
+export function selectWithShallowEqual<S, T>(selector: (state: S) => T) {
+  return useSelector<S, T>(selector, shallowEqual)
 }
 
 // Export alias for compatibility with original usage

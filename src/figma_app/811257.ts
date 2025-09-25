@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import s from "classnames";
 import { RecordableDiv } from "../905/511649";
 import { SvgComponent } from "../905/714743";
-import { e as _$$e } from "../905/579635";
+import { conditionalWrapper } from "../905/579635";
 import { V } from "../905/460261";
 import { Aw } from "../figma_app/459377";
 import { $f, Vp, ON, iv, dk, Wy, pK, o7, wm, xx, cN, jz, q1, eK, H_, qv, wH, d1, kW, to, gB, kR, CZ, r_, kc, P6, tp, kI, Qb, iV } from "../905/235035";
@@ -308,7 +308,7 @@ export function $$N2({
   alwaysShowLabel: r,
   useAsLegend: i
 }) {
-  return V() || r ? jsx(_$$e, {
+  return V() || r ? jsx(conditionalWrapper, {
     condition: !!i,
     wrapper: e => jsx("legend", {
       children: e

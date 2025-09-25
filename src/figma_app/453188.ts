@@ -4,7 +4,7 @@ import { c as _$$c } from "../905/486270";
 import { getI18nString } from "../905/303541";
 import { getCommunityFileUrl } from "../905/612685";
 import { KindEnum } from "../905/129884";
-import { e as _$$e } from "../905/579635";
+import { conditionalWrapper } from "../905/579635";
 import { eH } from "../figma_app/318590";
 import { getSingletonSceneGraph } from "../905/700578";
 import { uQ } from "../figma_app/311375";
@@ -27,7 +27,7 @@ export function $$m0({
     hubFileId,
     hubFileName
   } = r;
-  return jsx(_$$e, {
+  return jsx(conditionalWrapper, {
     condition: !!e,
     wrapper: e => jsx(_$$u, {
       children: e

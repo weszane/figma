@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import s from "classnames";
 import { KeyCodes, isModifierMatch, ModifierKeyCodes } from "../905/63728";
 import { RecordableButton } from "../905/511649";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { f7 } from "../figma_app/896988";
 import { isInvalidValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
@@ -57,7 +57,7 @@ function p({
       a || t(E(), e);
     },
     onKeyDown: x ? u : j ? e => e.stopPropagation() : void 0,
-    onMouseDown: dG,
+    onMouseDown: stopPropagation,
     recordingKey: h,
     role: w,
     type: "button",

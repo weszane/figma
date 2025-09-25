@@ -56,7 +56,7 @@ import { t as _$$t2 } from "../905/54003";
 import { ar } from "../7a72fc59/842982";
 import { MIXED_MARKER, isInvalidValue, isValidValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
-import { gq } from "../figma_app/178475";
+import { ExpressionInput } from "../figma_app/178475";
 import { U1 } from "../figma_app/343967";
 import { W1 } from "../figma_app/439493";
 import { xE } from "../figma_app/581520";
@@ -506,7 +506,7 @@ function eS() {
         className: "x78zum5 xdt5ytf x167g77z",
         children: v ? jsxs("div", {
           ...t,
-          children: [jsx(gq, {
+          children: [jsx(ExpressionInput, {
             value: g["top-left"],
             dispatch: d,
             onValueChange: (e, t) => {
@@ -521,7 +521,7 @@ function eS() {
             children: jsx(_$$a2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), jsx(gq, {
+          }), jsx(ExpressionInput, {
             value: g["top-right"],
             dispatch: d,
             onValueChange: (e, t) => {
@@ -536,7 +536,7 @@ function eS() {
             children: jsx(_$$$, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), N, A, jsx(gq, {
+          }), N, A, jsx(ExpressionInput, {
             value: g["bottom-left"],
             dispatch: d,
             onValueChange: (e, t) => {
@@ -551,7 +551,7 @@ function eS() {
             children: jsx(_$$w, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), jsx(gq, {
+          }), jsx(ExpressionInput, {
             value: g["bottom-right"],
             dispatch: d,
             onValueChange: (e, t) => {
@@ -569,7 +569,7 @@ function eS() {
           })]
         }) : jsxs("div", {
           ...n,
-          children: [jsx(gq, {
+          children: [jsx(ExpressionInput, {
             bigNudgeAmount: 10,
             "data-tooltip": getI18nString("figmake.toolbar.corner_radius"),
             "data-tooltip-type": KindEnum.TEXT,
@@ -1185,7 +1185,7 @@ function ty() {
           })]
         }), k ? jsxs("div", {
           ...e,
-          children: [jsx(gq, {
+          children: [jsx(ExpressionInput, {
             value: f.left,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1200,7 +1200,7 @@ function ty() {
             children: jsx(_$$R4, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), jsx(gq, {
+          }), jsx(ExpressionInput, {
             value: f.top,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1215,7 +1215,7 @@ function ty() {
             children: jsx(_$$z2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), B, jsx(gq, {
+          }), B, jsx(ExpressionInput, {
             value: f.right,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1230,7 +1230,7 @@ function ty() {
             children: jsx(_$$M, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), jsx(gq, {
+          }), jsx(ExpressionInput, {
             value: f.bottom,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1248,7 +1248,7 @@ function ty() {
           })]
         }) : jsxs("div", {
           ...e,
-          children: [jsx(gq, {
+          children: [jsx(ExpressionInput, {
             value: I,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1264,7 +1264,7 @@ function ty() {
             children: jsx(_$$y2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), jsx(gq, {
+          }), jsx(ExpressionInput, {
             value: N,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1294,7 +1294,7 @@ function ty() {
           })]
         }), O ? jsxs("div", {
           ...e,
-          children: [jsx(gq, {
+          children: [jsx(ExpressionInput, {
             value: _.left,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1309,7 +1309,7 @@ function ty() {
             children: jsx(_$$R4, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), jsx(gq, {
+          }), jsx(ExpressionInput, {
             value: _.top,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1324,7 +1324,7 @@ function ty() {
             children: jsx(_$$z2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), H, jsx(gq, {
+          }), H, jsx(ExpressionInput, {
             value: _.right,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1339,7 +1339,7 @@ function ty() {
             children: jsx(_$$M, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), jsx(gq, {
+          }), jsx(ExpressionInput, {
             value: _.bottom,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1357,7 +1357,7 @@ function ty() {
           })]
         }) : jsxs("div", {
           ...e,
-          children: [jsx(gq, {
+          children: [jsx(ExpressionInput, {
             value: A,
             dispatch: K,
             onValueChange: (e, t) => {
@@ -1373,7 +1373,7 @@ function ty() {
             children: jsx(_$$y2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
-          }), jsx(gq, {
+          }), jsx(ExpressionInput, {
             value: w,
             dispatch: K,
             onValueChange: (e, t) => {

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { A } from "../905/891805";
 import { AppStateTsApi, StateHierarchy, ItemType } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
@@ -67,7 +67,7 @@ export function $$A0() {
       containingProductComponent
     } = z6();
     return !!getObservableOrFallback(AppStateTsApi.propertiesPanelState().shownPropertiesPanels)[ItemType.COMPONENT_ITEM] && !containingProductComponent && stateGroupSelectionMode === StateHierarchy.NON_STATE_COMPONENTS && e > 1;
-  }() ? null : jsx(_$$E, {
+  }() ? null : jsx(AutoInteractableWrapper, {
     name: "layer_component_panel_button",
     children: jsx("div", {
       "data-non-interactive": !0,

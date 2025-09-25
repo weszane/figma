@@ -13,7 +13,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
 import { formatI18nMessage } from "../905/482208";
-import { jo } from "../figma_app/753501";
+import { preventDefaultAndStopPropagation } from "../figma_app/753501";
 import { A0, Br } from "../figma_app/454974";
 import { selectCurrentFile } from "../figma_app/516028";
 import { KindEnum } from "../905/129884";
@@ -79,7 +79,7 @@ export function $$M0({
         children: [jsx(JU, {
           recordingKey: generateRecordingKey(s, "layersCollapsedRow"),
           htmlAttributes: {
-            onContextMenu: jo
+            onContextMenu: preventDefaultAndStopPropagation
           },
           children: renderI18nText("fullscreen.pages_panel.layers_tab")
         }), e && jsx(X0, {

@@ -8,14 +8,14 @@ import { getFeatureFlags } from "../905/601108";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey, useHandleMouseEvent, useHandleKeyboardEvent } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Kl } from "../figma_app/175258";
 import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
-import { kl, lJ } from "../905/275640";
+import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
 import { useSceneGraphSelection, useOnSelectionChange } from "../figma_app/722362";
 import { selectSceneGraphSelectionKeys, selectSelectedNodes } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
@@ -27,9 +27,9 @@ import { O as _$$O } from "../905/587457";
 import { normalizeValue, isInvalidValue, isValidValue, MIXED_MARKER, getCommonValue } from "../905/216495";
 import { F as _$$F } from "../905/258517";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { gq } from "../figma_app/178475";
+import { ExpressionInput } from "../figma_app/178475";
 import { fn, DE } from "../figma_app/811257";
-import { Xs, Df } from "../figma_app/98483";
+import { getNudgeMultipliers, createShownTransformControlsObservable } from "../figma_app/98483";
 import { BP, hF, QK, sC, BG, Kw, X8 } from "../figma_app/100987";
 import { l as _$$l } from "../figma_app/603241";
 import { R as _$$R2 } from "../905/726507";
@@ -150,16 +150,16 @@ let E = memo(function (e) {
 });
 function B(e) {
   let t = useDispatch();
-  let n = Xs();
-  let a = kl("detectedList");
-  let s = kl("detectableListAxis");
+  let n = getNudgeMultipliers();
+  let a = useSelectionPropertyValue("detectedList");
+  let s = useSelectionPropertyValue("detectableListAxis");
   let c = normalizeValue(a);
   let d = Zr("arrange-as-grid");
   let u = useRef(null);
   if (!c && null == u.current && !d && null == s) return null;
   let h = c?.canvasSpacingBetweenItemsX != null || "X" === s || d || u.current === Axis.X;
   let g = c?.canvasSpacingBetweenItemsY != null || "Y" === s || d || u.current === Axis.Y;
-  let m = jsx(gq, {
+  let m = jsx(ExpressionInput, {
     dispatch: t,
     min: F(c, "X"),
     mixedMathHandler: new G(Axis.X),
@@ -183,7 +183,7 @@ function B(e) {
       className: QK
     })
   });
-  let x = jsx(gq, {
+  let x = jsx(ExpressionInput, {
     dispatch: t,
     min: F(c, "Y"),
     mixedMathHandler: new G(Axis.Y),
@@ -309,7 +309,7 @@ function ea(e) {
       t.current = e;
       return n;
     }(r);
-    let o = kl("aspectRatioLockToggled");
+    let o = useSelectionPropertyValue("aspectRatioLockToggled");
     let s = useMemo(() => {
       if (a.selection !== r.selection || !o) return e;
       let t = Q()(e);
@@ -345,7 +345,7 @@ function ea(e) {
   let a = Fp();
   let o = useRef(null);
   let s = !e.visible || !tH(n);
-  let c = kl("aspectRatioLockToggled");
+  let c = useSelectionPropertyValue("aspectRatioLockToggled");
   if (Nu(!s, () => a("minmax", null, qi.YES), o, e.widthHeightRowRef), s) return null;
   let d = 0;
   let u = 0;
@@ -456,9 +456,9 @@ function es(e) {
     minMaxApi,
     shouldFocus
   } = e;
-  let a = kl("isNonEditableInstanceSublayerSelected");
-  let s = kl(minMaxApi.widthOrHeight);
-  let c = kl(minMaxApi.minOrMaxWidthOrHeight);
+  let a = useSelectionPropertyValue("isNonEditableInstanceSublayerSelected");
+  let s = useSelectionPropertyValue(minMaxApi.widthOrHeight);
+  let c = useSelectionPropertyValue(minMaxApi.minOrMaxWidthOrHeight);
   let d = Fp();
   let u = useRef(0);
   let h = useRef(new Map());
@@ -901,10 +901,10 @@ function ez({
   className: e,
   recordingKey: t
 }) {
-  let n = kl("stackMode");
-  let a = kl("stackWrap");
-  let [s, c] = lJ("stackPrimaryAlignItems");
-  let [u, g] = lJ("stackCounterAlignItems");
+  let n = useSelectionPropertyValue("stackMode");
+  let a = useSelectionPropertyValue("stackWrap");
+  let [s, c] = useSelectionProperty("stackPrimaryAlignItems");
+  let [u, g] = useSelectionProperty("stackCounterAlignItems");
   let [m, _] = useState(void 0);
   let [x, v] = useState(void 0);
   let f = sR();
@@ -1062,7 +1062,7 @@ function ez({
     stackPrimaryAlignItems: s,
     stackWrap: a
   });
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "alignment_view",
     children: H
   });
@@ -1168,13 +1168,13 @@ function td({
   recordingKey: e,
   isSelectionStackOrGrid: t
 }) {
-  let n = kl("stackMode");
+  let n = useSelectionPropertyValue("stackMode");
   let i = useSelector(selectSceneGraphSelectionKeys);
   let a = b7();
   let o = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
-  let s = kl("isInstanceSelected");
-  let c = kl("isSlotSelected");
-  let d = kl("nodesAllAcceptLayoutChanges");
+  let s = useSelectionPropertyValue("isInstanceSelected");
+  let c = useSelectionPropertyValue("isSlotSelected");
+  let d = useSelectionPropertyValue("nodesAllAcceptLayoutChanges");
   let u = i.length > 1;
   let {
     propertiesPanelShouldShowAddAutoLayout,
@@ -1276,8 +1276,8 @@ function td({
   }) : null;
 }
 function tu(e) {
-  let t = kl("stackMode");
-  let n = kl("stackWrap");
+  let t = useSelectionPropertyValue("stackMode");
+  let n = useSelectionPropertyValue("stackWrap");
   let i = trackFileEventWithUser();
   let a = useSelector(selectSceneGraphSelectionKeys);
   let c = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
@@ -1359,7 +1359,7 @@ function t_({
     },
     children: jsx(_$$s, {})
   });
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "stack_padding_controls",
     children: jsx(tx, {
       showAllPaddingControls: t,
@@ -1522,10 +1522,10 @@ function tN({
   disabled: a = !1
 }) {
   let o = e ? renderI18nText("fullscreen.properties_panel.stack_panel.auto_layout") : renderI18nText("fullscreen.properties_panel.stack_panel.layout");
-  let s = kl("numSelectedByType");
+  let s = useSelectionPropertyValue("numSelectedByType");
   let c = !!s && Kl(s, ["CODE_INSTANCE", "CODE_LAYER", "CODE_COMPONENT", "CODE_FILE", "CODE_LIBRARY"]);
   let d = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
-  let u = kl("stackMode");
+  let u = useSelectionPropertyValue("stackMode");
   let h = Zr("resize-to-fit") && "NONE" === u;
   return jsxs(Zk, {
     "data-onboarding-key": _$$W2,
@@ -1554,10 +1554,10 @@ let tI = memo(function ({
     showMigrationUi,
     wrappingEnabled
   } = ta();
-  let d = Df();
-  let u = kl("stackMode");
+  let d = createShownTransformControlsObservable();
+  let u = useSelectionPropertyValue("stackMode");
   let h = useRef(null);
-  let g = kl("nodesAreAllInsideStacks");
+  let g = useSelectionPropertyValue("nodesAreAllInsideStacks");
   let m = rX();
   let {
     hasSelectedText,
@@ -1707,7 +1707,7 @@ function tE() {
 function tR(e) {
   let t = Wx();
   let n = Y9();
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "stack_spacing_control",
     children: jsx(KI, {
       onBlur: () => t(SpacingConstants.SPACING, !1),
@@ -1726,7 +1726,7 @@ function tR(e) {
 function tL(e) {
   let t = Wx();
   let n = Y9();
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "stack_counter_spacing_input",
     children: jsx(_$$q2, {
       inputTestId: "stack-counter-spacing",

@@ -8,7 +8,7 @@ import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { createEmbedAnalyticsHandler, LinkMetadataEvent } from "../figma_app/671547";
 import { normalizeValue } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { n as _$$n } from "../9410/774045";
 import { uQ } from "../figma_app/151869";
 import { V } from "../figma_app/144634";
@@ -43,7 +43,7 @@ let s = memo(function (e) {
 });
 export function $$b1(e) {
   let t = uQ() || "";
-  let i = kl("embedData");
+  let i = useSelectionPropertyValue("embedData");
   let r = decodeURIComponent(normalizeValue(i)?.originalText || "");
   let a = createEmbedAnalyticsHandler(i);
   let s = Xr(_$$n);
@@ -56,7 +56,7 @@ export function $$b1(e) {
 export function $$C0(e) {
   let t = useAtomWithSubscription(_$$n);
   let i = uQ() || "";
-  let n = kl("embedData");
+  let n = useSelectionPropertyValue("embedData");
   let a = decodeURIComponent(normalizeValue(n)?.originalText || "");
   let l = $$b1(SourceType.USER);
   return n && i && a && (!t || e.inModal) ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(V, {

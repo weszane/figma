@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import { debugState } from "../905/407919";
-import { UE } from "../figma_app/753501";
+import { isFullscreenPreventEventCapture } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { BI, m0, pI } from "../figma_app/546509";
 import { xN } from "../figma_app/1722";
@@ -14,7 +14,7 @@ export function $$_1() {
   let r = pI();
   let _ = useSelector(e => e.mirror.appModel.currentTool);
   useEffect(() => {
-    e?.shouldAllowNativeGestures && t && (t._allow_native_gestures_on_points = e => e.every(e => !UE(document.elementFromPoint(e.x, e.y))), t._allow_web_gestures = e => {
+    e?.shouldAllowNativeGestures && t && (t._allow_native_gestures_on_points = e => e.every(e => !isFullscreenPreventEventCapture(document.elementFromPoint(e.x, e.y))), t._allow_web_gestures = e => {
       fullscreenValue.allowWebGestures && fullscreenValue.allowWebGestures(e ? 1 : 0);
     });
   }, [e, t]);
@@ -40,7 +40,7 @@ export function $$_1() {
             case xN.BEGAN:
               let _ = debugState.getState().mirror.appModel.currentTool;
               let g = n[0];
-              if (r = !UE(document.elementFromPoint(g.x, g.y)), t._auto_draw_with_pencil) {
+              if (r = !isFullscreenPreventEventCapture(document.elementFromPoint(g.x, g.y)), t._auto_draw_with_pencil) {
                 let e = $$u0.includes(_);
                 let {
                   multiplayerEmoji
@@ -85,7 +85,7 @@ export function $$_1() {
   }, [m, e, t]);
   useEffect(() => {
     r && (r._take_indirect_pinch_gesture = (e, t, r, n) => {
-      fullscreenValue.takeIndirectPinchGesture && !UE(document.elementFromPoint(r.x, r.y)) && fullscreenValue.takeIndirectPinchGesture(e, t, r.x, r.y, n);
+      fullscreenValue.takeIndirectPinchGesture && !isFullscreenPreventEventCapture(document.elementFromPoint(r.x, r.y)) && fullscreenValue.takeIndirectPinchGesture(e, t, r.x, r.y, n);
     });
   }, [r]);
   return null;

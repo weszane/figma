@@ -28,7 +28,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
 import v from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { A5, fC, kl, pw, DQ } from "../905/275640";
+import { useUpdateSelectionProperty, useNonMixedSelectionPropertyValues, useSelectionPropertyValue, useSelectedStyleOrSelectionPropertyValues, useNonMixedSelectedStyleOrSelectionPropertyValues } from "../905/275640";
 import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Y as _$$Y } from "../a88a4c5a/211633";
 import { pq } from "../8826/642528";
@@ -220,8 +220,8 @@ function L({
   selected: s,
   setIsSelected: o
 }) {
-  let a = A5("gridTrackSizingType");
-  let d = A5("gridTrackSize");
+  let a = useUpdateSelectionProperty("gridTrackSizingType");
+  let d = useUpdateSelectionProperty("gridTrackSize");
   let p = useMemo(() => new _$$K2({
     maximumFractionDigits: 2
   }), []);
@@ -560,7 +560,7 @@ function ty() {
   let {
     numSelected,
     stateGroupSelectionInfo
-  } = fC("numSelected", "stateGroupSelectionInfo");
+  } = useNonMixedSelectionPropertyValues("numSelected", "stateGroupSelectionInfo");
   let o = SQ();
   return jsxs(Fragment, {
     children: [jsx(useCachedSubtree, {
@@ -699,19 +699,19 @@ function tb({
   let C = U4(b);
   let k = So(b, !0);
   let V = hD();
-  let v = kl("exportSettings");
+  let v = useSelectionPropertyValue("exportSettings");
   let {
     numSelected,
     stateGroupSelectionInfo
-  } = fC("numSelected", "stateGroupSelectionInfo");
+  } = useNonMixedSelectionPropertyValues("numSelected", "stateGroupSelectionInfo");
   let {
     areOnlyResponsiveSetsSelected,
     maskType
-  } = pw("areOnlyResponsiveSetsSelected", "maskType");
+  } = useSelectedStyleOrSelectionPropertyValues("areOnlyResponsiveSetsSelected", "maskType");
   let {
     numSelected: _numSelected,
     pluginRelaunchData
-  } = DQ("pluginRelaunchData", "numSelected");
+  } = useNonMixedSelectedStyleOrSelectionPropertyValues("pluginRelaunchData", "numSelected");
   let K = useAppModelProperty("currentPage");
   let L = useAppModelProperty("currentSelectedProperty");
   let U = Ws(b, j);
@@ -968,20 +968,20 @@ function tw({
   let P = useAppModelPropsShallow("currentPage", "currentSelectedProperty");
   let w = qh();
   let C = hD();
-  let k = kl("exportSettings");
+  let k = useSelectionPropertyValue("exportSettings");
   let V = So(S, !0);
   let {
     numSelected,
     stateGroupSelectionInfo
-  } = fC("numSelected", "stateGroupSelectionInfo");
+  } = useNonMixedSelectionPropertyValues("numSelected", "stateGroupSelectionInfo");
   let {
     maskType,
     areOnlyResponsiveSetsSelected
-  } = pw("maskType", "areOnlyResponsiveSetsSelected");
+  } = useSelectedStyleOrSelectionPropertyValues("maskType", "areOnlyResponsiveSetsSelected");
   let {
     pluginRelaunchData,
     numSelected: _numSelected2
-  } = DQ("pluginRelaunchData", "numSelected");
+  } = useNonMixedSelectedStyleOrSelectionPropertyValues("pluginRelaunchData", "numSelected");
   let D = SJ();
   let K = o3(nt.designSelectionActionsPanel);
   let L = !tx() && K;

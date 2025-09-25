@@ -5,10 +5,10 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { normalizeValue } from "../905/216495";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { b } from "../905/181535";
-import { p_ } from "../905/203369";
+import { ScrubbableControl } from "../905/181535";
+import { FormattedInput } from "../905/203369";
 import { c$, sK, l6 } from "../905/794875";
-import { $ } from "../905/45781";
+import { TokenizableInput } from "../905/45781";
 import { r as _$$r } from "../905/211029";
 import { be, Wv, kL, Qz, t_, Lt, $$in, f0, d_, hL, hF } from "../figma_app/18327";
 var s = a;
@@ -96,7 +96,7 @@ export class $$b1 extends PureComponent {
     !this.props.disabled && (this.state.isMouseOver || this.state.isFocused) && (a = Wv);
     let g = kL;
     this.props.disabled && (g = Qz);
-    let _ = this.props.isTokenizable ? $ : p_;
+    let _ = this.props.isTokenizable ? TokenizableInput : FormattedInput;
     let y = e => {
       this.props.disableSelectFocus && "ArrowDown" === e.key && e.metaKey ? (e.preventDefault(), this.props.dispatch(showDropdownThunk({
         type: this.props.id
@@ -153,7 +153,7 @@ export class $$b1 extends PureComponent {
         targetDomNode: this.props.targetDomNode,
         willShowDropdown: this.props.willShowDropdown,
         children: [t, this.props.children]
-      }), this.props.scrubbableControlProps ? jsx(b, {
+      }), this.props.scrubbableControlProps ? jsx(ScrubbableControl, {
         onMouseEnter: this.onMouseEnterScrubbableControl,
         onMouseLeave: this.onMouseLeaveScrubbableControl,
         ...this.props.scrubbableControlProps,

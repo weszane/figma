@@ -21,7 +21,7 @@ import { memoizeByArgs } from "../figma_app/815945";
 import S from "classnames";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { generateRecordingKey, createRecordingCallback } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { k as _$$k3 } from "../905/582200";
 import { Point } from "../905/736624";
 import { ph } from "../figma_app/709893";
@@ -31,7 +31,7 @@ import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { C9 } from "../figma_app/8833";
 import { mz } from "../figma_app/975811";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { A as _$$A } from "../905/51490";
 import { ZH } from "../figma_app/504823";
@@ -524,12 +524,12 @@ let eF = forwardRef(function ({
   }, t));
   let j = {
     onClick: T,
-    onMouseDown: dG,
+    onMouseDown: stopPropagation,
     "data-tooltip": getI18nString("fullscreen.export_panel.export_settings"),
     "data-tooltip-type": KindEnum.TEXT
   };
   let U = L("settings");
-  let B = jsx(_$$E, {
+  let B = jsx(AutoInteractableWrapper, {
     name: "export_constraint_combo_box",
     children: jsx(ow, {
       value: {
@@ -553,7 +553,7 @@ let eF = forwardRef(function ({
           isTokenizable: !0,
           onChange: l,
           onKeyDown: k,
-          onMouseDown: dG,
+          onMouseDown: stopPropagation,
           property: t.constraint,
           recordingKey: L("contraints"),
           children: M
@@ -562,7 +562,7 @@ let eF = forwardRef(function ({
     })
   });
   let G = useRef(null);
-  let V = jsx(_$$E, {
+  let V = jsx(AutoInteractableWrapper, {
     name: "export_image_type_select",
     children: D ? jsxs(bL, {
       value: t.imageType,
@@ -600,7 +600,7 @@ let eF = forwardRef(function ({
       id: `export-image-type-${s}`,
       inputClassName: SL,
       onChange: d,
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       property: t.imageType,
       recordingKey: L("imageType"),
       children: [jsx(eP, {
@@ -618,7 +618,7 @@ let eF = forwardRef(function ({
       })]
     })
   });
-  let H = jsx(_$$E, {
+  let H = jsx(AutoInteractableWrapper, {
     name: "toggle_export_settings_modal_button",
     children: jsx("span", {
       className: uX,
@@ -634,14 +634,14 @@ let eF = forwardRef(function ({
       })
     })
   });
-  let z = !!y && jsx(_$$E, {
+  let z = !!y && jsx(AutoInteractableWrapper, {
     name: "remove_export_button",
     children: jsx(IconButton, {
       onClick: y,
       "aria-label": getI18nString("fullscreen.properties_panel.tooltip_remove"),
       recordingKey: L("removeButton"),
       htmlAttributes: {
-        onMouseDown: dG,
+        onMouseDown: stopPropagation,
         "data-tooltip": getI18nString("fullscreen.properties_panel.tooltip_remove"),
         "data-tooltip-type": KindEnum.TEXT
       },
@@ -865,7 +865,7 @@ class eG extends PureComponent {
   }
   render() {
     return this.props.numSelected > 1 ? null : jsxs("div", {
-      children: [jsx(_$$E, {
+      children: [jsx(AutoInteractableWrapper, {
         name: "toggle_export_preview_visibility_button",
         children: jsxs(fI, {
           onClick: this.toggleShown,

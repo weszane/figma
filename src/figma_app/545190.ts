@@ -55,7 +55,7 @@ import { getVariableSetErrorMessage, PanelWidth, DefinitionAssignment, computeBa
 import { D5, Tj } from '../figma_app/218448';
 import { c$, ms } from '../figma_app/236327';
 import { VariableIdHandler } from '../figma_app/243058';
-import { JV } from '../figma_app/260445';
+import { useVariablePickerForFields } from '../figma_app/260445';
 import { deleteProperties, findBestMatchingState, withDeferredVariantPropDefBackfill, renameProperty, EM_DASH, trackStateGroupAnalytics, formatPropertyValues } from '../figma_app/264776';
 import { aq } from '../figma_app/305626';
 import { Pe } from '../figma_app/323320';
@@ -884,7 +884,7 @@ function $$e6(e) {
       variableConsumptionMapValue: variantProperties
     };
   }(e.variantPropDef, guids);
-  let [F, j] = JV(['VARIANT_PROPERTIES'], onExpressionSubmitted && x.type === 'TOGGLE' ? VariableResolvedDataType.BOOLEAN : VariableResolvedDataType.STRING, setBinding, {
+  let [F, j] = useVariablePickerForFields(['VARIANT_PROPERTIES'], onExpressionSubmitted && x.type === 'TOGGLE' ? VariableResolvedDataType.BOOLEAN : VariableResolvedDataType.STRING, setBinding, {
     requestedTypes: x.type === 'TOGGLE' ? [VariableResolvedDataType.BOOLEAN] : [VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT],
     metadata: e.variantPropDef.name
   }, onExpressionSubmitted);

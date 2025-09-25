@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef } from "react";
 import { Ay } from "../figma_app/272902";
 import s from "classnames";
-import { e as _$$e } from "../905/579635";
+import { conditionalWrapper } from "../905/579635";
 import { i as _$$i, m as _$$m } from "../905/186077";
 import { bb, zr, Pf } from "../figma_app/755571";
 var o = s;
@@ -22,7 +22,7 @@ export let $$u0 = forwardRef(function ({
     }, zr, t),
     "aria-label": e,
     ...h,
-    children: jsx(_$$e, {
+    children: jsx(conditionalWrapper, {
       condition: "start" === s,
       wrapper: e => jsx("span", {
         className: Pf,

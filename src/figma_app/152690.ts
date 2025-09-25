@@ -25,7 +25,7 @@ import { isDevHandoffEditorType } from "../figma_app/976749";
 import { trackDefinedFileEvent } from "../figma_app/314264";
 import { MIXED_MARKER, normalizeValue, isValidValue, isInvalidValue } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
-import { A5, lJ, kl } from "../905/275640";
+import { useUpdateSelectionProperty, useSelectionProperty, useSelectionPropertyValue } from "../905/275640";
 import { u as _$$u, G6, jI, iC } from "../figma_app/852050";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { I7, P1 } from "../figma_app/745458";
@@ -68,7 +68,7 @@ export function $$et7() {
     let t = e.mirror.selectionProperties.variableConsumptionInfo;
     return normalizeValue(t)?.variableConsumptionMap || {};
   });
-  let t = A5("variableConsumptionInfo");
+  let t = useUpdateSelectionProperty("variableConsumptionInfo");
   return {
     variableConsumptionMap: e,
     setVariableConsumptionMap: useCallback((e, r = yesNoTrackingEnum.YES) => {
@@ -80,7 +80,7 @@ export function $$et7() {
 }
 export function $$er24(e) {
   let t = useSelector(selectSceneGraph);
-  let [r] = lJ("variableConsumptionInfo");
+  let [r] = useSelectionProperty("variableConsumptionInfo");
   let a = useCallback(r => {
     for (let n of e) {
       if (!r) {
@@ -114,7 +114,7 @@ export function $$en2() {
   return normalizeValue(_$$b("variableConsumptionMap")) || {};
 }
 function ei(e) {
-  return kl(1 === e ? "focusNodeVariableConsumptionInfo" : "variableConsumptionInfo");
+  return useSelectionPropertyValue(1 === e ? "focusNodeVariableConsumptionInfo" : "variableConsumptionInfo");
 }
 export function $$ea20(e = 0) {
   let t = ei(e);
@@ -188,7 +188,7 @@ let es = getFeatureFlags().ds_modes_util_include_subtree_by_default;
 export function $$eo5({
   includeSubtree: e = es
 } = {}) {
-  let t = kl("variableConsumptionInfo");
+  let t = useSelectionPropertyValue("variableConsumptionInfo");
   return useMemoStable(() => (e ? normalizeValue(t)?.variableSetKeyToModeIncludingSubtree : normalizeValue(t)?.variableSetKeyToMode) ?? {}, [t, e]);
 }
 export function $$el31(e) {
@@ -214,7 +214,7 @@ export function $$ed15(e = 0) {
 }
 export function $$ec17(e = 0) {
   let t = useDispatch();
-  let r = lJ("numSelectedByType")[0];
+  let r = useSelectionProperty("numSelectedByType")[0];
   let s = function () {
     let e = useDevModeFocusId();
     let t = useDeepEqualSceneValue((e, t) => {
@@ -563,7 +563,7 @@ function eR() {
       variableSetUpdatesForCurrentPage,
       libraryAssetUpdatesForCurrentPage
     } = useAtomWithSubscription(P1);
-    let a = kl("directlySubscribedAssetKeys");
+    let a = useSelectionPropertyValue("directlySubscribedAssetKeys");
     let s = [];
     let o = [];
     let l = [];

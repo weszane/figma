@@ -12,7 +12,7 @@ import { getFeatureFlags } from "../905/601108";
 import h from "classnames";
 import { generateRecordingKey, RecordingPureComponent } from "../figma_app/878298";
 import { logWarning } from "../905/714362";
-import { E as _$$E2 } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { ph } from "../figma_app/709893";
 import { SvgComponent } from "../905/714743";
@@ -606,7 +606,7 @@ export class $$eE1 extends RecordingPureComponent {
     let a = this.props.isWidget;
     let s = !!this.props.showPresetOptions && !this.props.isSection;
     let o = !this.props.isOrInInstance;
-    return jsx(_$$E2, {
+    return jsx(AutoInteractableWrapper, {
       name: "frame_preset_select",
       children: jsxs(l6, {
         ariaLabel: getI18nString("proto.frame_preset_panel.frame"),

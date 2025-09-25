@@ -1,22 +1,22 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { useCallback, useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { assertNotNullish } from "../figma_app/465776";
-import { VariableResolvedDataType, Fullscreen, VariableDataType, OperationType, PropertyScope } from "../figma_app/763686";
-import { convertVariableIdToKiwi } from "../905/805904";
-import { Yi, Oe } from "../figma_app/933328";
-import { fullscreenValue } from "../figma_app/455680";
-import { isInvalidValue } from "../905/216495";
-import { yesNoTrackingEnum } from "../figma_app/198712";
-import { _X, V5, hu } from "../figma_app/260445";
-import { u3, y$ } from "../figma_app/152690";
-import { Io, MH } from "../figma_app/394327";
-import { SlotSymbolType } from "../figma_app/338442";
-import { permissionScopeHandler } from "../905/189185";
-import { selectWithShallowEqual } from "../905/103090";
-import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
-import { Yc } from "../figma_app/930914";
-import { On } from "../figma_app/323320";
+import { useCallback, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import { jsx, jsxs } from 'react/jsx-runtime';
+import { selectWithShallowEqual } from '../905/103090';
+import { permissionScopeHandler } from '../905/189185';
+import { isInvalidValue } from '../905/216495';
+import { convertVariableIdToKiwi } from '../905/805904';
+import { u3, y$ } from '../figma_app/152690';
+import { yesNoTrackingEnum } from '../figma_app/198712';
+import { FormattedInputWithWrapper, ControlledVariablePickerProvider, VariablePicker } from '../figma_app/260445';
+import { On } from '../figma_app/323320';
+import { SlotSymbolType } from '../figma_app/338442';
+import { Io, MH } from '../figma_app/394327';
+import { fullscreenValue } from '../figma_app/455680';
+import { assertNotNullish } from '../figma_app/465776';
+import { Fullscreen, OperationType, PropertyScope, VariableDataType, VariableResolvedDataType } from '../figma_app/763686';
+import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
+import { Yc } from '../figma_app/930914';
+import { Oe, Yi } from '../figma_app/933328';
 export function $$I3({
   children: e
 }) {
@@ -30,7 +30,7 @@ export function $$I3({
       consumedVariable,
       updateVariableConsumption,
       clearVariableConsumption
-    } = u3(["TEXT_DATA"]);
+    } = u3(['TEXT_DATA']);
     let s = useCallback(t => {
       if (!t) {
         clearVariableConsumption();
@@ -39,7 +39,7 @@ export function $$I3({
       e(Yi({
         item: t,
         callback: e => {
-          t.resolvedType === VariableResolvedDataType.STRING ? (permissionScopeHandler.user("delete-prop-ref", () => Fullscreen.deleteComponentPropRef(SlotSymbolType.TEXT)), updateVariableConsumption(y$(VariableResolvedDataType.STRING, e))) : t.resolvedType === VariableResolvedDataType.FLOAT && (permissionScopeHandler.user("delete-prop-ref", () => Fullscreen.deleteComponentPropRef(SlotSymbolType.TEXT)), updateVariableConsumption({
+          t.resolvedType === VariableResolvedDataType.STRING ? (permissionScopeHandler.user('delete-prop-ref', () => Fullscreen.deleteComponentPropRef(SlotSymbolType.TEXT)), updateVariableConsumption(y$(VariableResolvedDataType.STRING, e))) : t.resolvedType === VariableResolvedDataType.FLOAT && (permissionScopeHandler.user('delete-prop-ref', () => Fullscreen.deleteComponentPropRef(SlotSymbolType.TEXT)), updateVariableConsumption({
             resolvedType: VariableResolvedDataType.STRING,
             type: VariableDataType.EXPRESSION,
             value: {
@@ -59,7 +59,7 @@ export function $$I3({
     }));
     let p = Yc(SlotSymbolType.TEXT, l);
     let m = useCallback(e => {
-      permissionScopeHandler.user("add-prop-ref", () => {
+      permissionScopeHandler.user('add-prop-ref', () => {
         clearVariableConsumption();
         Fullscreen.addComponentPropRef(SlotSymbolType.TEXT, e.value.explicitDefId);
       });
@@ -72,15 +72,15 @@ export function $$I3({
       onComponentPropSelected: !p || textPropReferencedBySelection ? m : void 0
     };
   }();
-  let l = useMemo(() => ["TEXT_DATA"], []);
-  return jsxs(_X, {
+  let l = useMemo(() => ['TEXT_DATA'], []);
+  return jsxs(FormattedInputWithWrapper, {
     fields: l,
     resolvedType: VariableResolvedDataType.STRING,
     requestedTypes: Io.TEXT_DATA,
     onVariableSelected: updateConsumption,
     onExpressionSubmitted,
     onComponentPropSelected,
-    children: [jsx(V5, {
+    children: [jsx(VariablePicker, {
       variableScope: PropertyScope.TEXT_CONTENT
     }), e]
   });
@@ -91,7 +91,7 @@ export function $$E0({
   children: i
 }) {
   let u = useDispatch();
-  let g = useMemo(() => ["FONT_FAMILY"], []);
+  let g = useMemo(() => ['FONT_FAMILY'], []);
   let {
     updateVariableConsumption,
     clearVariableConsumption
@@ -102,21 +102,23 @@ export function $$E0({
       assertNotNullish(convertVariableIdToKiwi(i));
       updateVariableConsumption(y$(VariableResolvedDataType.STRING, i));
       t?.();
-    } else clearVariableConsumption(yesNoTrackingEnum.YES);
-    fullscreenValue.triggerAction("leave-edit-mode");
+    } else {
+      clearVariableConsumption(yesNoTrackingEnum.YES);
+    }
+    fullscreenValue.triggerAction('leave-edit-mode');
   }
-  return jsxs(_X, {
+  return jsxs(FormattedInputWithWrapper, {
     fields: g,
     resolvedType: VariableResolvedDataType.STRING,
     onVariableSelected: A,
-    children: [jsx(V5, {
+    children: [jsx(VariablePicker, {
       variableScope: PropertyScope.FONT_FAMILY
     }), i]
   });
 }
 function x() {
   let e = useDispatch();
-  let t = useMemo(() => ["FONT_STYLE"], []);
+  let t = useMemo(() => ['FONT_STYLE'], []);
   let {
     consumedVariable,
     updateVariableConsumption,
@@ -158,12 +160,12 @@ export function $$S1({
     updateVariableConsumption
   } = x();
   let r = MH(consumedVariable);
-  return jsxs(hu, {
+  return jsxs(ControlledVariablePickerProvider, {
     boundVariableId: r ?? void 0,
     resolvedType: VariableResolvedDataType.STRING,
     requestedTypes: Io.FONT_STYLE,
     onVariableSelected: updateVariableConsumption,
-    children: [jsx(V5, {
+    children: [jsx(VariablePicker, {
       variableScope: PropertyScope.FONT_STYLE
     }), e]
   });
@@ -179,7 +181,7 @@ export function $$w2({
   let a = async e => {
     await updateVariableConsumption(e);
   };
-  return jsx(hu, {
+  return jsx(ControlledVariablePickerProvider, {
     boundVariableId: r ?? void 0,
     resolvedType: VariableResolvedDataType.FLOAT,
     onVariableSelected: a,

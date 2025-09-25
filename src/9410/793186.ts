@@ -36,7 +36,7 @@ import M from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { normalizeValue, isInvalidValue } from "../905/216495";
-import { lJ, kl } from "../905/275640";
+import { useSelectionProperty, useSelectionPropertyValue } from "../905/275640";
 import { floatToString } from "../figma_app/164212";
 import { lerp, clamp } from "../figma_app/492908";
 import { isCommandEvent } from "../905/63728";
@@ -300,8 +300,8 @@ function ee(e) {
 }
 function et() {
   let e;
-  let [t, i] = lJ("gridTrackSize");
-  let [n, a] = lJ("gridTrackSizingType");
+  let [t, i] = useSelectionProperty("gridTrackSize");
+  let [n, a] = useSelectionProperty("gridTrackSizingType");
   let {
     axis,
     width,
@@ -313,8 +313,8 @@ function et() {
     initialText: e.mirror.appModel.onCanvasNameEditorInfo.initialText,
     shouldOpenDropdown: e.mirror.appModel.onCanvasNameEditorInfo.shouldOpenDropdown
   }));
-  let u = normalizeValue(kl("gridRowCount"));
-  let p = normalizeValue(kl("gridColumnCount"));
+  let u = normalizeValue(useSelectionPropertyValue("gridRowCount"));
+  let p = normalizeValue(useSelectionPropertyValue("gridColumnCount"));
   if (!t || null == n || !width || !p || !u || isInvalidValue(t) || isInvalidValue(n)) return null;
   e = axis === Axis.X ? Math.round(width / p) : Math.round(width / u);
   let h = getFeatureFlags().ce_tv_grid_hug ? "Fill" : "Auto";
@@ -520,7 +520,7 @@ function em() {
   });
 }
 function ef() {
-  let [e, t] = lJ("prototypeStartingPoint");
+  let [e, t] = useSelectionProperty("prototypeStartingPoint");
   let i = normalizeValue(e)?.name || "";
   return i ? jsx(Q, {
     name: i,

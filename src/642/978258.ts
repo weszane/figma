@@ -8,7 +8,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import { useDebounce } from 'use-debounce';
 import { FQ } from "../9410/571209";
 import { getCurrentFileType } from "../figma_app/976749";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { getViewportInfo, scaleRect, applyOffsetToViewport, isRectInside } from "../figma_app/62612";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { f as _$$f } from "../905/299537";
@@ -51,7 +51,7 @@ export function $$_0({
   let M = l || E?.boundingBox || I;
   let A = JI();
   let P = useSelector(e => e.mirror.sceneGraphSelection);
-  let L = kl("isTableSublayerSelected");
+  let L = useSelectionPropertyValue("isTableSublayerSelected");
   f = Positioning.ABOVE;
   E?.preferredPosition ? f = E.preferredPosition : L && (f = Positioning.BELOW);
   let R = f;

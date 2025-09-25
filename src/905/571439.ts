@@ -1,6 +1,6 @@
-import { Gt } from "../905/275640";
+import { useNonMixedSelectionPropertyValue } from "../905/275640";
 export function $$r1() {
-  let e = Gt("numSelectedByType");
+  let e = useNonMixedSelectionPropertyValue("numSelectedByType");
   return !!(e && (e.FRAME || e.INSTANCE || e.SYMBOL));
 }
 export function $$a0(e) {

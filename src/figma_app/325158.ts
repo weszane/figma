@@ -19,7 +19,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
-import { lJ, kl } from "../905/275640";
+import { useSelectionProperty, useSelectionPropertyValue } from "../905/275640";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { V } from "../figma_app/144634";
 import { j as _$$j } from "../figma_app/628249";
@@ -142,7 +142,7 @@ export function $$B2() {
   });
 }
 export function $$G12() {
-  let [e, t] = lJ("imageHasNoStroke");
+  let [e, t] = useSelectionProperty("imageHasNoStroke");
   return () => {
     t(!e);
     trackEventAnalytics("figjam_image_border_change", {
@@ -151,7 +151,7 @@ export function $$G12() {
   };
 }
 export function $$V1() {
-  let e = kl("imageHasNoStroke");
+  let e = useSelectionPropertyValue("imageHasNoStroke");
   let t = $$G12();
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(V, {
     variant: "toggle",
@@ -172,7 +172,7 @@ export function $$V1() {
 }
 export function $$H3(e = {}) {
   let t = e.setIsEditorOpen;
-  let r = kl("accessibleLabel");
+  let r = useSelectionPropertyValue("accessibleLabel");
   return t ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(V, {
     variant: "button",
     tooltip: r ? getI18nString("whiteboard.inline_menu.edit_image_description") : getI18nString("whiteboard.inline_menu.add_image_description"),
@@ -347,11 +347,11 @@ export function $$q5(e) {
   }
 }
 export function $$J9() {
-  let e = kl("imageOriginalAspectRatio");
-  let t = kl("imageAspectRatio");
-  let r = kl("cornerRadius");
-  let n = kl("width");
-  let i = kl("height");
+  let e = useSelectionPropertyValue("imageOriginalAspectRatio");
+  let t = useSelectionPropertyValue("imageAspectRatio");
+  let r = useSelectionPropertyValue("cornerRadius");
+  let n = useSelectionPropertyValue("width");
+  let i = useSelectionPropertyValue("height");
   if (!(!n || !i || isInvalidValue(e) || isInvalidValue(t) || isInvalidValue(n) || isInvalidValue(i))) return function (e, t, r) {
     if (t) {
       if (t === r) return "Original";
@@ -369,7 +369,7 @@ export function $$Z8() {
 }
 export function $$Q11() {
   let e = $$J9();
-  let t = kl("imageOriginalAspectRatio");
+  let t = useSelectionPropertyValue("imageOriginalAspectRatio");
   return isInvalidValue(t) ? null : r => {
     if (r !== e) {
       let e = function (e, t) {

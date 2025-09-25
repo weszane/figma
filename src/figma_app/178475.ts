@@ -1,719 +1,955 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useContext, useRef, useEffect, useCallback, useMemo } from "react";
-import a from "classnames";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { DEFAULT_FINE_NUDGE, DEFAULT_COARSE_NUDGE } from "../905/668764";
-import { Lk, X9, ag, i5, NB, PZ, f0, LN, cu, h7 } from "../figma_app/975811";
-import { dG } from "../figma_app/753501";
-import { MIXED_MARKER, isInvalidValue } from "../905/216495";
-import { yesNoTrackingEnum } from "../figma_app/198712";
-import { KindEnum } from "../905/129884";
-import { e as _$$e } from "../905/579635";
-import { a3 } from "../905/188421";
-import { p_ } from "../905/203369";
-import { $ } from "../905/45781";
-import { Qu } from "../figma_app/941824";
-import { P } from "../905/460261";
-import { s as _$$s, b as _$$b } from "../905/181535";
-import { V, sC, WC, IB, Ww, QK } from "../figma_app/779179";
-var s = a;
-let I = {
+import classNames from 'classnames';
+import { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { TokenizableInput } from '../905/45781';
+import { KindEnum } from '../905/129884';
+import { ScrubbableContext, ScrubbableControl } from '../905/181535';
+import { a3 } from '../905/188421';
+import { FormattedInput } from '../905/203369';
+import { isInvalidValue, MIXED_MARKER } from '../905/216495';
+import { getI18nString, renderI18nText } from '../905/303541';
+import { P } from '../905/460261';
+import { conditionalWrapper } from '../905/579635';
+import { DEFAULT_COARSE_NUDGE, DEFAULT_FINE_NUDGE } from '../905/668764';
+import { yesNoTrackingEnum } from '../figma_app/198712';
+import { stopPropagation } from '../figma_app/753501';
+import { IB, QK, sC, V, WC, Ww } from '../figma_app/779179';
+import { Qu } from '../figma_app/941824';
+import { ag, cu, f0, h7, i5, Lk, LN, NB, PZ, X9 } from '../figma_app/975811';
+
+// Define common types for props
+interface BaseScrubbableProps {
+  noBorderOnHover: any;
+  scrubMultiplier: any;
+  tooltipForScreenReadersOnly: any;
+  shouldClearOnFocus: any;
+  value?: any;
+  onValueChange?: (value: any, tracking?: any) => void;
+  disabled?: boolean;
+  scrubbingDisabled?: boolean;
+  min?: number;
+  max?: number;
+  smallNudgeAmount?: number;
+  bigNudgeAmount?: number;
+  formatter?: any;
+  className?: string;
+  inputClassName?: string;
+  placeholder?: string;
+  dataTestId?: string;
+  recordingKey?: string;
+  forwardedRef?: any;
+  onBlur?: () => void;
+  onFocus?: () => void;
+  onKeyDown?: (e: any) => void;
+  onKeyUp?: (e: any) => void;
+  onClick?: () => void;
+  onMouseDown?: () => void;
+  mixedMathHandler?: any;
+  mixedMathCallback?: any;
+  onMixedMathNudge?: any;
+  allowEmpty?: boolean;
+  autoFocus?: boolean;
+  noLeftBorder?: boolean;
+  squareRightBorder?: boolean;
+  softDisabled?: boolean;
+  isTokenizable?: boolean;
+  children?: any;
+  childrenAtEnd?: boolean;
+  endNode?: any;
+  minimizeScrubTargetWidth?: boolean;
+  dispatch: (action: any) => void;
+}
+interface DropdownProps extends BaseScrubbableProps {
+  ariaLabel?: string;
+  chevronClassName?: string;
+  dispatch: (action: any) => void;
+  dropdownAlignment?: any;
+  dropdownClassName?: string;
+  dropdownShown?: boolean;
+  dropdownWidth?: any;
+  enablePreview?: boolean;
+  hasIconStyle?: boolean;
+  icon?: any;
+  id?: string;
+  noPlaceholderLine?: boolean;
+  omitValueFromDropdown?: boolean;
+  onInputBlur?: () => void;
+  onInputFocus?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  onMouseEnterNonPropagating?: () => void;
+  onboardingKey?: string;
+  openBelowTarget?: boolean;
+  optionsWithDisabledPreviews?: any;
+  scrubbableControlProps?: any;
+  targetDomNode?: any;
+  unNamespacedInputRecordingKey?: string;
+  willShowDropdown?: boolean;
+  disableSelectFocus?: boolean;
+  noBorderOnFocus?: boolean;
+}
+interface PercentageProps extends BaseScrubbableProps {
+  'decimals'?: number;
+  'hidePercentSign'?: boolean;
+  'ui3RightJustifyPercentSign'?: boolean;
+  'reverseScrub'?: boolean;
+  'resolution'?: number;
+  'displayFractions'?: boolean;
+  'onEvaluateExpressionError'?: any;
+  'floatingPointFormat'?: any;
+  'shouldClearOnFocus'?: boolean;
+  'onNudge'?: any;
+  'onPaste'?: any;
+  'source'?: string;
+  'onScrubBegin'?: (e: any) => void;
+  'onScrubEnd'?: (e: any) => void;
+  'tooltipForScreenReadersOnly'?: boolean;
+  'noBorderOnHover'?: boolean;
+  'data-tooltip'?: string;
+  'data-tooltip-type'?: any;
+  'dispatch': (action: any) => void;
+}
+
+// Common scrub config
+const defaultScrubConfig = {
   scrubMultiplier: 1,
   wheelMultiplier: 1,
   smallNudgeAmount: DEFAULT_FINE_NUDGE,
   bigNudgeAmount: DEFAULT_COARSE_NUDGE
 };
-function S({
-  children: e,
-  onNormalClick: t
+
+// Percentage scrub config
+const percentageScrubConfig = {
+  ...defaultScrubConfig,
+  scrubMultiplier: 4,
+  wheelMultiplier: 2
+};
+
+/**
+ * Original: S
+ * Component for handling scrubbing behavior on children.
+ */
+export function ScrubWrapper({
+  children,
+  onNormalClick
+}: {
+  children: any;
+  onNormalClick?: () => void;
 }) {
-  let {
+  const {
     setScrubbableElement
-  } = useContext(_$$s);
-  let a = useRef(null);
-  let s = useRef(null);
-  let o = useRef(!1);
-  let l = useRef(null);
-  let d = useRef(null);
-  useEffect(() => (setScrubbableElement(a.current), () => setScrubbableElement(null)), [setScrubbableElement]);
-  let c = useCallback(e => {
-    o.current = !1;
-    l.current = {
+  } = useContext(ScrubbableContext);
+  const elementRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<number | NodeJS.Timeout | null>(null);
+  const isScrubbingRef = useRef(false);
+  const deltaRef = useRef({
+    x: 0,
+    y: 0
+  });
+  const startPosRef = useRef({
+    x: 0,
+    y: 0
+  });
+  useEffect(() => {
+    setScrubbableElement(elementRef.current);
+    return () => setScrubbableElement(null);
+  }, [setScrubbableElement]);
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    isScrubbingRef.current = false;
+    deltaRef.current = {
       x: 0,
       y: 0
     };
-    d.current = {
+    startPosRef.current = {
       x: e.clientX,
       y: e.clientY
     };
-    let t = window.setTimeout(() => {
-      s.current = null;
+    const timeout = setTimeout(() => {
+      timeoutRef.current = null;
     }, 500);
-    s.current = t;
+    timeoutRef.current = timeout;
   }, []);
-  let u = useCallback(() => {
-    null === s.current || o.current || (clearTimeout(s.current), t?.());
-    s.current = null;
-    l.current = null;
-    d.current = null;
-  }, [t]);
-  let p = useCallback(e => {
-    if (!l.current) return;
-    let t = e.movementX;
-    let r = e.movementY;
-    null == t && null == r && d.current && (t = e.clientX - d.current.x, r = e.clientY - d.current.y, d.current = {
-      x: e.clientX,
-      y: e.clientY
-    });
-    l.current.x += t;
-    l.current.y += r;
-    let {
+  const handlePointerUp = useCallback(() => {
+    if (timeoutRef.current !== null && !isScrubbingRef.current) {
+      clearTimeout(timeoutRef.current);
+      onNormalClick?.();
+    }
+    timeoutRef.current = null;
+    deltaRef.current = null;
+    startPosRef.current = null;
+  }, [onNormalClick]);
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    if (!deltaRef.current) return;
+    let dx = e.movementX;
+    let dy = e.movementY;
+    if (dx == null && dy == null && startPosRef.current) {
+      dx = e.clientX - startPosRef.current.x;
+      dy = e.clientY - startPosRef.current.y;
+      startPosRef.current = {
+        x: e.clientX,
+        y: e.clientY
+      };
+    }
+    deltaRef.current.x += dx;
+    deltaRef.current.y += dy;
+    const {
       x,
       y
-    } = l.current;
-    Math.sqrt(x * x + y * y) > 5 && (o.current = !0);
+    } = deltaRef.current;
+    if (Math.sqrt(x * x + y * y) > 5) {
+      isScrubbingRef.current = true;
+    }
   }, []);
   useEffect(() => () => {
-    null !== s.current && clearTimeout(s.current);
+    if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
   }, []);
-  return jsx("div", {
-    ref: a,
-    onPointerDown: c,
-    onPointerUp: u,
-    onPointerMove: p,
-    children: e
+  return jsx('div', {
+    ref: elementRef,
+    onPointerDown: handlePointerDown,
+    onPointerUp: handlePointerUp,
+    onPointerMove: handlePointerMove,
+    children
   });
 }
-export function $$v15(e) {
-  let {
+
+/**
+ * Original: $$v15
+ * Basic scrubbable input component.
+ */
+export function ScrubbableInput(props: BaseScrubbableProps) {
+  const {
     onValueChange,
     forwardedRef,
     onKeyDown
-  } = e;
-  let o = useRef(null);
-  let l = forwardedRef ?? o;
-  let d = Qu();
-  let _ = useCallback(e => {
-    d(e);
+  } = props;
+  const inputRef = useRef<any>(null);
+  const ref = forwardedRef ?? inputRef;
+  const handleKeyDown = Qu();
+  const wrappedKeyDown = useCallback((e: any) => {
+    handleKeyDown(e);
     onKeyDown?.(e);
-  }, [d, onKeyDown]);
-  let m = useCallback(e => onValueChange?.(e, yesNoTrackingEnum.YES), [onValueChange]);
-  let y = useCallback(() => {
-    l.current?.focus();
-    l.current?.select();
-  }, [l]);
-  let v = e.isTokenizable ? $ : p_;
-  let A = useCallback(e => jsx(S, {
-    onNormalClick: y,
-    children: e
-  }), [y]);
-  let x = !e.minimizeScrubTargetWidth;
-  return jsxs(_$$b, {
-    ...I,
-    ...e,
-    scrubbingDisabled: e.scrubbingDisabled || e.disabled || null == e.value || e.value === MIXED_MARKER && !e.mixedMathHandler,
-    children: [e.childrenAtEnd ? null : jsx(_$$e, {
-      condition: !!e.children || !!x,
-      wrapper: A,
+  }, [handleKeyDown, onKeyDown]);
+  const handleChange = useCallback((e: any) => onValueChange?.(e, yesNoTrackingEnum.YES), [onValueChange]);
+  const focusAndSelect = useCallback(() => {
+    ref.current?.focus();
+    ref.current?.select();
+  }, [ref]);
+  const InputComponent = props.isTokenizable ? TokenizableInput : FormattedInput;
+  const wrapper = useCallback((children: any) => jsx(ScrubWrapper, {
+    onNormalClick: focusAndSelect,
+    children
+  }), [focusAndSelect]);
+  const hasScrubTarget = !props.minimizeScrubTargetWidth;
+  return jsxs(ScrubbableControl, {
+    ...defaultScrubConfig,
+    ...props,
+    scrubbingDisabled: props.scrubbingDisabled || props.disabled || props.value == null || props.value === MIXED_MARKER && !props.mixedMathHandler,
+    children: [props.childrenAtEnd ? null : jsx(conditionalWrapper, {
+      condition: !!props.children || !!hasScrubTarget,
+      wrapper,
       children: jsx(Fragment, {
-        children: e.children ? e.children : x ? jsx("div", {
+        children: props.children ? props.children : hasScrubTarget ? jsx('div', {
           className: V
         }) : null
       })
-    }), jsx(v, {
-      allowEmpty: e.allowEmpty,
-      autoFocus: e.autoFocus,
-      className: s()(e.inputClassName, {
-        [sC]: !0,
-        [WC]: !e.childrenAtEnd && !e.children && x
+    }), jsx(InputComponent, {
+      allowEmpty: props.allowEmpty,
+      autoFocus: props.autoFocus,
+      className: classNames(props.inputClassName, {
+        [sC]: true,
+        [WC]: !props.childrenAtEnd && !props.children && hasScrubTarget
       }),
-      dataTestId: e.dataTestId,
-      disabled: e.disabled ?? null === e.value,
-      ellipsis: !0,
-      formatter: e.formatter,
-      forwardedRef: l,
-      mixedMathCallback: e.mixedMathCallback,
-      mixedMathHandler: e.mixedMathHandler,
-      noBorderOnFocus: !0,
-      noLeftBorder: e.noLeftBorder,
-      onBlur: e.onBlur,
-      onChange: m,
-      onClick: e.onClick,
-      onFocus: e.onFocus,
-      onKeyDown: _,
-      onKeyUp: e.onKeyUp,
-      onMixedMathNudge: e.onMixedMathNudge,
-      onMouseDown: dG,
-      placeholder: e.placeholder,
-      property: e.value ?? null,
-      recordingKey: e.recordingKey,
-      softDisabled: e.softDisabled,
-      squareRightBorder: e.squareRightBorder
-    }), e.childrenAtEnd ? jsx(_$$e, {
-      condition: !!e.children,
-      wrapper: A,
+      dataTestId: props.dataTestId,
+      disabled: props.disabled ?? props.value === null,
+      ellipsis: true,
+      formatter: props.formatter,
+      forwardedRef: ref,
+      mixedMathCallback: props.mixedMathCallback,
+      mixedMathHandler: props.mixedMathHandler,
+      noBorderOnFocus: true,
+      noLeftBorder: props.noLeftBorder,
+      onBlur: props.onBlur,
+      onChange: handleChange,
+      onClick: props.onClick,
+      onFocus: props.onFocus,
+      onKeyDown: wrappedKeyDown,
+      onKeyUp: props.onKeyUp,
+      onMixedMathNudge: props.onMixedMathNudge,
+      onMouseDown: stopPropagation,
+      placeholder: props.placeholder,
+      property: props.value ?? null,
+      recordingKey: props.recordingKey,
+      softDisabled: props.softDisabled,
+      squareRightBorder: props.squareRightBorder
+    }), props.childrenAtEnd ? jsx(conditionalWrapper, {
+      condition: !!props.children,
+      wrapper,
       children: jsx(Fragment, {
-        children: e.children
+        children: props.children
       })
-    }) : null, e.endNode]
+    }) : null, props.endNode]
   });
 }
-export function $$A12({
-  onMouseEnter: e,
-  onMouseLeave: t,
-  onMouseEnterNonPropagating: r,
-  ...i
-}) {
-  let a = {
-    ...I,
-    ...i,
-    noBorderOnFocus: i.noBorderOnFocus || i.disableSelectFocus
+
+/**
+ * Original: $$A12
+ * Scrubbable dropdown input component.
+ */
+export function ScrubbableDropdownInput({
+  onMouseEnter,
+  onMouseLeave,
+  onMouseEnterNonPropagating,
+  ...props
+}: DropdownProps) {
+  const config = {
+    ...defaultScrubConfig,
+    ...props,
+    noBorderOnFocus: props.noBorderOnFocus || props.disableSelectFocus
   };
-  return jsx("div", {
-    className: i.className,
+  return jsx('div', {
+    className: props.className,
     children: jsx(a3, {
-      allowEmpty: i.allowEmpty,
-      ariaLabel: i.ariaLabel,
-      autoFocus: i.autoFocus,
-      chevronClassName: i.chevronClassName,
-      dataTestId: i.dataTestId,
-      disableSelectFocus: i.disableSelectFocus,
-      disabled: i.disabled,
-      dispatch: i.dispatch,
-      dropdownAlignment: i.dropdownAlignment,
-      dropdownClassName: i.dropdownClassName,
-      dropdownShown: i.dropdownShown,
-      dropdownWidth: i.dropdownWidth,
-      enablePreview: i.enablePreview,
-      formatter: i.formatter,
-      forwardedRef: i.forwardedRef,
-      hasIconStyle: i.hasIconStyle,
-      icon: i.icon,
-      id: i.id,
-      inputClassName: i.inputClassName,
-      isTokenizable: i.isTokenizable,
-      mixedMathHandler: i.mixedMathHandler,
-      noPlaceholderLine: i.noPlaceholderLine,
-      omitValueFromDropdown: i.omitValueFromDropdown,
-      onChange: (e, t = yesNoTrackingEnum.YES) => {
-        i.onValueChange?.(e, t);
-      },
-      onInputBlur: i.onBlur,
-      onInputFocus: i.onFocus,
-      onKeyDown: i.onKeyDown,
-      onKeyUp: i.onKeyUp,
-      onMouseEnter: e,
-      onMouseEnterNonPropagating: r,
-      onMouseLeave: t,
-      onboardingKey: i.onboardingKey,
-      openBelowTarget: i.openBelowTarget,
-      optionsWithDisabledPreviews: i.optionsWithDisabledPreviews,
-      placeholder: i.placeholder,
-      property: i.value,
-      recordingKey: i.recordingKey,
-      scrubbableControlProps: a,
-      targetDomNode: i.targetDomNode,
-      unNamespacedInputRecordingKey: i.unNamespacedInputRecordingKey,
-      willShowDropdown: i.willShowDropdown,
-      children: i.children
+      allowEmpty: props.allowEmpty,
+      ariaLabel: props.ariaLabel,
+      autoFocus: props.autoFocus,
+      chevronClassName: props.chevronClassName,
+      dataTestId: props.dataTestId,
+      disableSelectFocus: props.disableSelectFocus,
+      disabled: props.disabled,
+      dispatch: props.dispatch,
+      dropdownAlignment: props.dropdownAlignment,
+      dropdownClassName: props.dropdownClassName,
+      dropdownShown: props.dropdownShown,
+      dropdownWidth: props.dropdownWidth,
+      enablePreview: props.enablePreview,
+      formatter: props.formatter,
+      forwardedRef: props.forwardedRef,
+      hasIconStyle: props.hasIconStyle,
+      icon: props.icon,
+      id: props.id,
+      inputClassName: props.inputClassName,
+      isTokenizable: props.isTokenizable,
+      mixedMathHandler: props.mixedMathHandler,
+      noPlaceholderLine: props.noPlaceholderLine,
+      omitValueFromDropdown: props.omitValueFromDropdown,
+      onChange: (e: any, t = yesNoTrackingEnum.YES) => props.onValueChange?.(e, t),
+      onInputBlur: props.onBlur,
+      onInputFocus: props.onFocus,
+      onKeyDown: props.onKeyDown,
+      onKeyUp: props.onKeyUp,
+      onMouseEnter,
+      onMouseEnterNonPropagating,
+      onMouseLeave,
+      onboardingKey: props.onboardingKey,
+      openBelowTarget: props.openBelowTarget,
+      optionsWithDisabledPreviews: props.optionsWithDisabledPreviews,
+      placeholder: props.placeholder,
+      property: props.value,
+      recordingKey: props.recordingKey,
+      scrubbableControlProps: config,
+      targetDomNode: props.targetDomNode,
+      unNamespacedInputRecordingKey: props.unNamespacedInputRecordingKey,
+      willShowDropdown: props.willShowDropdown,
+      children: props.children
     })
   });
 }
-export function $$x17(e) {
-  let {
+
+/**
+ * Original: $$x17
+ * Numeric dropdown input component.
+ */
+export function NumericDropdownInput(props: BaseScrubbableProps) {
+  const {
     min,
     max,
     smallNudgeAmount,
     bigNudgeAmount,
     formatter
-  } = e;
-  let l = useMemo(() => new Lk({
+  } = props;
+  const fmt = useMemo(() => new Lk({
     min,
     max,
     smallNudgeAmount,
     bigNudgeAmount
   }), [min, max, smallNudgeAmount, bigNudgeAmount]);
-  return jsx($$A12, {
-    ...e,
-    formatter: formatter ?? l
+  return jsx(ScrubbableDropdownInput, {
+    ...props,
+    formatter: formatter ?? fmt
   });
 }
-export function $$N2(e) {
-  let {
+
+/**
+ * Original: $$N2
+ * Numeric input component.
+ */
+export function NumericInput(props: BaseScrubbableProps) {
+  const {
     min,
     max,
     smallNudgeAmount,
     bigNudgeAmount
-  } = e;
-  let o = useMemo(() => new X9({
+  } = props;
+  const fmt = useMemo(() => new X9({
     min,
     max,
     smallNudgeAmount,
     bigNudgeAmount
   }), [min, max, smallNudgeAmount, bigNudgeAmount]);
-  return jsx($$v15, {
-    ...e,
-    formatter: o
+  return jsx(ScrubbableInput, {
+    ...props,
+    formatter: fmt
   });
 }
-export function $$C9(e) {
-  let {
+
+/**
+ * Original: $$C9
+ * Numeric dropdown input with icon.
+ */
+export function NumericDropdownWithIcon(props: BaseScrubbableProps & {
+  icon?: any;
+}) {
+  const {
     min,
     max,
     smallNudgeAmount,
     bigNudgeAmount,
     formatter,
     icon
-  } = e;
-  let u = useMemo(() => new X9({
+  } = props;
+  const fmt = useMemo(() => new X9({
     min,
     max,
     smallNudgeAmount,
     bigNudgeAmount
   }), [min, max, smallNudgeAmount, bigNudgeAmount]);
-  return jsx($$A12, {
-    ...e,
-    formatter: formatter ?? u,
-    className: s()(e.className, {
+  return jsx(ScrubbableDropdownInput, {
+    ...props,
+    formatter: formatter ?? fmt,
+    className: classNames(props.className, {
       [IB]: !!icon
     })
   });
 }
-export function $$w19(e) {
-  let {
+
+/**
+ * Original: $$w19
+ * Scale input component.
+ */
+export function ScaleInput(props: BaseScrubbableProps & {
+  icon?: any;
+}) {
+  const {
     formatter,
     icon
-  } = e;
-  return jsx($$A12, {
-    ...e,
+  } = props;
+  return jsx(ScrubbableDropdownInput, {
+    ...props,
     formatter,
-    className: s()(e.className, {
+    className: classNames(props.className, {
       [IB]: !!icon
     }),
-    postScrubMultiplier: .001,
-    postBigNudgeAmount: .1
+    postScrubMultiplier: 0.001,
+    postBigNudgeAmount: 0.1
   });
 }
-export function $$O7(e) {
-  let {
+
+/**
+ * Original: $$O7
+ * Time input component.
+ */
+export function TimeInput(props: BaseScrubbableProps & {
+  icon?: any;
+}) {
+  const {
     min,
     max,
     icon
-  } = e;
-  let o = useMemo(() => new ag(i5.MILLISECONDS, max, min), [max, min]);
-  return jsx($$A12, {
-    ...e,
-    formatter: o,
-    className: s()(e.className, {
+  } = props;
+  const fmt = useMemo(() => new ag(i5.MILLISECONDS, max, min), [max, min]);
+  return jsx(ScrubbableDropdownInput, {
+    ...props,
+    formatter: fmt,
+    className: classNames(props.className, {
       [IB]: !!icon
     })
   });
 }
-export function $$R13(e) {
-  let {
+
+/**
+ * Original: $$R13
+ * Expression input component.
+ */
+export function ExpressionInput(props: BaseScrubbableProps & {
+  onEvaluateExpressionError?: any;
+}) {
+  const {
     min,
     max,
     smallNudgeAmount,
     bigNudgeAmount,
     onEvaluateExpressionError
-  } = e;
-  let l = useMemo(() => new Lk({
+  } = props;
+  const fmt = useMemo(() => new Lk({
     min,
     max,
     smallNudgeAmount,
     bigNudgeAmount,
     onEvaluateExpressionError
   }), [min, max, smallNudgeAmount, bigNudgeAmount, onEvaluateExpressionError]);
-  return jsx($$v15, {
-    ...e,
-    formatter: l
+  return jsx(ScrubbableInput, {
+    ...props,
+    formatter: fmt
   });
 }
-export function $$L1({
-  min: e = 0,
-  max: t,
-  floatingPointFormat: r,
-  onEvaluateExpressionError: a,
-  ...s
+
+/**
+ * Original: $$L1
+ * Length input component.
+ */
+export function LengthInput(props: BaseScrubbableProps & {
+  floatingPointFormat?: any;
+  onEvaluateExpressionError?: any;
 }) {
-  let {
-    smallNudgeAmount,
-    bigNudgeAmount
-  } = s;
-  let c = useMemo(() => new Lk({
-    min: Math.max(e, 0),
-    max: t,
+  const {
+    min = 0,
+    max,
+    floatingPointFormat,
+    onEvaluateExpressionError,
     smallNudgeAmount,
     bigNudgeAmount,
-    floatingPointFormat: r,
-    onEvaluateExpressionError: a
-  }), [e, t, smallNudgeAmount, bigNudgeAmount, r, a]);
-  return jsx($$v15, {
-    ...s,
-    formatter: c
+    ...rest
+  } = props;
+  const fmt = useMemo(() => new Lk({
+    min: Math.max(min, 0),
+    max,
+    smallNudgeAmount,
+    bigNudgeAmount,
+    floatingPointFormat,
+    onEvaluateExpressionError
+  }), [min, max, smallNudgeAmount, bigNudgeAmount, floatingPointFormat, onEvaluateExpressionError]);
+  return jsx(ScrubbableInput, {
+    ...rest,
+    formatter: fmt
   });
 }
-export function $$P14({
-  min: e = 0,
-  max: t,
-  ...r
-}) {
-  let {
+
+/**
+ * Original: $$P14
+ * Percentage input component (min=0).
+ */
+export function PercentageInput(props: PercentageProps) {
+  const {
+    min = 0,
+    max,
     smallNudgeAmount,
     bigNudgeAmount
-  } = r;
-  let o = useRef(!1);
-  let l = useMemo(() => new NB({
-    min: Math.max(e, 0),
-    max: t,
+  } = props;
+  const isScrubbingRef = useRef(false);
+  const fmt = useMemo(() => new NB({
+    min: Math.max(min, 0),
+    max,
     smallNudgeAmount,
     bigNudgeAmount
-  }), [e, t, smallNudgeAmount, bigNudgeAmount]);
-  let c = isInvalidValue(r.value) && r.mixedMathHandler;
-  let _ = r.disabled || r.scrubbingDisabled || "number" != typeof r.value && !Array.isArray(r.value) && !c;
-  let h = r.isTokenizable ? $ : p_;
-  return jsxs(_$$b, {
-    ...I,
-    ...r,
-    formatter: l,
-    scrubbingDisabled: _,
-    onScrubBegin: e => {
-      o.current = !0;
-      r.onScrubBegin?.(e);
+  }), [min, max, smallNudgeAmount, bigNudgeAmount]);
+  const isInvalid = isInvalidValue(props.value) && props.mixedMathHandler;
+  const scrubbingDisabled = props.disabled || props.scrubbingDisabled || typeof props.value !== 'number' && !Array.isArray(props.value) && !isInvalid;
+  const InputComponent = props.isTokenizable ? TokenizableInput : FormattedInput;
+  return jsxs(ScrubbableControl, {
+    ...defaultScrubConfig,
+    ...props,
+    formatter: fmt,
+    scrubbingDisabled,
+    onScrubBegin: (e: any) => {
+      isScrubbingRef.current = true;
+      props.onScrubBegin?.(e);
     },
-    onScrubEnd: e => {
-      o.current = !1;
-      r.onScrubEnd?.(e);
+    onScrubEnd: (e: any) => {
+      isScrubbingRef.current = false;
+      props.onScrubEnd?.(e);
     },
-    className: r.className,
-    children: [r.children, jsx(h, {
-      className: r.inputClassName,
-      dataTestId: r.dataTestId,
-      disabled: r.disabled,
-      formatter: l,
-      forwardedRef: r.forwardedRef,
-      mixedMathHandler: r.mixedMathHandler,
-      noBorderOnFocus: !0,
-      onBlur: r.onBlur,
-      onChange: e => r.onValueChange(e, yesNoTrackingEnum.YES),
-      onClick: r.onClick,
-      onFocus: r.onFocus,
-      onKeyDown: r.onKeyDown,
-      onMixedMathNudge: r.onMixedMathNudge,
-      onNudge: r.onNudge,
-      onPaste: r.onPaste,
-      placeholder: r.placeholder,
-      property: r.value ?? null,
-      recordingKey: r.recordingKey,
-      shouldClearOnFocus: r.shouldClearOnFocus,
-      source: o.current ? "scrub" : "document"
+    className: props.className,
+    children: [props.children, jsx(InputComponent, {
+      className: props.inputClassName,
+      dataTestId: props.dataTestId,
+      disabled: props.disabled,
+      formatter: fmt,
+      forwardedRef: props.forwardedRef,
+      mixedMathHandler: props.mixedMathHandler,
+      noBorderOnFocus: true,
+      onBlur: props.onBlur,
+      onChange: (e: any) => props.onValueChange?.(e, yesNoTrackingEnum.YES),
+      onClick: props.onClick,
+      onFocus: props.onFocus,
+      onKeyDown: props.onKeyDown,
+      onMixedMathNudge: props.onMixedMathNudge,
+      onNudge: props.onNudge,
+      onPaste: props.onPaste,
+      placeholder: props.placeholder,
+      property: props.value ?? null,
+      recordingKey: props.recordingKey,
+      shouldClearOnFocus: props.shouldClearOnFocus,
+      source: isScrubbingRef.current ? 'scrub' : 'document'
     })]
   });
 }
-export function $$D0({
-  min: e,
-  max: t,
-  ...r
-}) {
-  let {
+
+/**
+ * Original: $$D0
+ * Percentage input component (with min/max).
+ */
+export function PercentageInputWithMinMax(props: PercentageProps) {
+  const {
+    min,
+    max,
     smallNudgeAmount,
     bigNudgeAmount
-  } = r;
-  let o = useRef(!1);
-  let l = useMemo(() => new NB({
-    min: e,
-    max: t,
+  } = props;
+  const isScrubbingRef = useRef(false);
+  const fmt = useMemo(() => new NB({
+    min,
+    max,
     smallNudgeAmount,
     bigNudgeAmount
-  }), [e, t, smallNudgeAmount, bigNudgeAmount]);
-  let c = isInvalidValue(r.value) && r.mixedMathHandler;
-  let _ = r.disabled || r.scrubbingDisabled || "number" != typeof r.value && !Array.isArray(r.value) && !c;
-  let h = r.isTokenizable ? $ : p_;
-  return jsxs(_$$b, {
-    ...I,
-    ...r,
-    formatter: l,
-    scrubbingDisabled: _,
-    onScrubBegin: e => {
-      o.current = !0;
-      r.onScrubBegin?.(e);
+  }), [min, max, smallNudgeAmount, bigNudgeAmount]);
+  const isInvalid = isInvalidValue(props.value) && props.mixedMathHandler;
+  const scrubbingDisabled = props.disabled || props.scrubbingDisabled || typeof props.value !== 'number' && !Array.isArray(props.value) && !isInvalid;
+  const InputComponent = props.isTokenizable ? TokenizableInput : FormattedInput;
+  return jsxs(ScrubbableControl, {
+    ...defaultScrubConfig,
+    ...props,
+    formatter: fmt,
+    scrubbingDisabled,
+    onScrubBegin: (e: any) => {
+      isScrubbingRef.current = true;
+      props.onScrubBegin?.(e);
     },
-    onScrubEnd: e => {
-      o.current = !1;
-      r.onScrubEnd?.(e);
+    onScrubEnd: (e: any) => {
+      isScrubbingRef.current = false;
+      props.onScrubEnd?.(e);
     },
-    className: r.className,
-    children: [r.children, jsx(h, {
-      className: r.inputClassName,
-      dataTestId: r.dataTestId,
-      disabled: r.disabled,
-      formatter: l,
-      forwardedRef: r.forwardedRef,
-      mixedMathHandler: r.mixedMathHandler,
-      noBorderOnFocus: !0,
-      onBlur: r.onBlur,
-      onChange: e => r.onValueChange(e, yesNoTrackingEnum.YES),
-      onClick: r.onClick,
-      onFocus: r.onFocus,
-      onKeyDown: r.onKeyDown,
-      onMixedMathNudge: r.onMixedMathNudge,
-      onNudge: r.onNudge,
-      onPaste: r.onPaste,
-      placeholder: r.placeholder,
-      property: r.value ?? null,
-      recordingKey: r.recordingKey,
-      shouldClearOnFocus: r.shouldClearOnFocus,
-      source: o.current ? "scrub" : "document"
+    className: props.className,
+    children: [props.children, jsx(InputComponent, {
+      className: props.inputClassName,
+      dataTestId: props.dataTestId,
+      disabled: props.disabled,
+      formatter: fmt,
+      forwardedRef: props.forwardedRef,
+      mixedMathHandler: props.mixedMathHandler,
+      noBorderOnFocus: true,
+      onBlur: props.onBlur,
+      onChange: (e: any) => props.onValueChange?.(e, yesNoTrackingEnum.YES),
+      onClick: props.onClick,
+      onFocus: props.onFocus,
+      onKeyDown: props.onKeyDown,
+      onMixedMathNudge: props.onMixedMathNudge,
+      onNudge: props.onNudge,
+      onPaste: props.onPaste,
+      placeholder: props.placeholder,
+      property: props.value ?? null,
+      recordingKey: props.recordingKey,
+      shouldClearOnFocus: props.shouldClearOnFocus,
+      source: isScrubbingRef.current ? 'scrub' : 'document'
     })]
   });
 }
-export function $$k6({
-  min: e,
-  max: t,
-  allowEmpty: r,
-  ...a
+
+/**
+ * Original: $$k6
+ * Color input component.
+ */
+export function ColorInput(props: PercentageProps & {
+  allowEmpty?: boolean;
 }) {
-  let {
+  const {
+    min,
+    max,
+    allowEmpty,
     smallNudgeAmount,
     bigNudgeAmount
-  } = a;
-  let l = useRef(!1);
-  let c = useMemo(() => new PZ({
-    min: e,
-    max: t,
+  } = props;
+  const isScrubbingRef = useRef(false);
+  const fmt = useMemo(() => new PZ({
+    min,
+    max,
     smallNudgeAmount,
     bigNudgeAmount,
-    allowEmpty: r
-  }), [e, t, smallNudgeAmount, bigNudgeAmount, r]);
-  let _ = isInvalidValue(a.value) && a.mixedMathHandler;
-  let h = a.disabled || a.scrubbingDisabled || "number" != typeof a.value && !_;
-  let m = a.isTokenizable ? $ : p_;
-  return jsxs(_$$b, {
-    ...I,
-    ...a,
-    formatter: c,
-    scrubbingDisabled: h,
-    onScrubBegin: e => {
-      l.current = !0;
-      a.onScrubBegin?.(e);
+    allowEmpty
+  }), [min, max, smallNudgeAmount, bigNudgeAmount, allowEmpty]);
+  const isInvalid = isInvalidValue(props.value) && props.mixedMathHandler;
+  const scrubbingDisabled = props.disabled || props.scrubbingDisabled || typeof props.value !== 'number' && !isInvalid;
+  const InputComponent = props.isTokenizable ? TokenizableInput : FormattedInput;
+  return jsxs(ScrubbableControl, {
+    ...defaultScrubConfig,
+    ...props,
+    formatter: fmt,
+    scrubbingDisabled,
+    onScrubBegin: (e: any) => {
+      isScrubbingRef.current = true;
+      props.onScrubBegin?.(e);
     },
-    onScrubEnd: e => {
-      l.current = !1;
-      a.onScrubEnd?.(e);
+    onScrubEnd: (e: any) => {
+      isScrubbingRef.current = false;
+      props.onScrubEnd?.(e);
     },
-    className: a.className,
-    children: [a.children, jsx(m, {
-      allowEmpty: r,
-      className: a.inputClassName,
-      dataTestId: a.dataTestId,
-      disabled: a.disabled,
-      formatter: c,
-      forwardedRef: a.forwardedRef,
-      mixedMathHandler: a.mixedMathHandler,
-      noBorderOnFocus: !0,
-      onBlur: a.onBlur,
-      onChange: e => a.onValueChange(e, yesNoTrackingEnum.YES),
-      onFocus: a.onFocus,
-      onKeyDown: a.onKeyDown,
-      onMixedMathNudge: a.onMixedMathNudge,
-      onNudge: a.onNudge,
-      onPaste: a.onPaste,
-      placeholder: a.placeholder,
-      property: a.value ?? null,
-      recordingKey: a.recordingKey,
-      shouldClearOnFocus: a.shouldClearOnFocus,
-      source: l.current ? "scrub" : "document"
+    className: props.className,
+    children: [props.children, jsx(InputComponent, {
+      allowEmpty,
+      className: props.inputClassName,
+      dataTestId: props.dataTestId,
+      disabled: props.disabled,
+      formatter: fmt,
+      forwardedRef: props.forwardedRef,
+      mixedMathHandler: props.mixedMathHandler,
+      noBorderOnFocus: true,
+      onBlur: props.onBlur,
+      onChange: (e: any) => props.onValueChange?.(e, yesNoTrackingEnum.YES),
+      onFocus: props.onFocus,
+      onKeyDown: props.onKeyDown,
+      onMixedMathNudge: props.onMixedMathNudge,
+      onNudge: props.onNudge,
+      onPaste: props.onPaste,
+      placeholder: props.placeholder,
+      property: props.value ?? null,
+      recordingKey: props.recordingKey,
+      shouldClearOnFocus: props.shouldClearOnFocus,
+      source: isScrubbingRef.current ? 'scrub' : 'document'
     })]
   });
 }
-export function $$M8({
-  min: e = .001,
-  max: t = 10,
-  resolution: r = .001,
-  ...a
+
+/**
+ * Original: $$M8
+ * Time milliseconds input component.
+ */
+export function TimeMillisecondsInput(props: BaseScrubbableProps & {
+  resolution?: number;
 }) {
-  let s = useMemo(() => new ag(i5.MILLISECONDS, t, e), [t, e]);
-  return jsx($$v15, {
-    ...a,
-    resolution: r,
-    formatter: s
+  const {
+    min = 0.001,
+    max = 10,
+    resolution = 0.001
+  } = props;
+  const fmt = useMemo(() => new ag(i5.MILLISECONDS, max, min), [max, min]);
+  return jsx(ScrubbableInput, {
+    ...props,
+    resolution,
+    formatter: fmt
   });
 }
-export function $$F11({
-  min: e = .001,
-  max: t = 10,
-  resolution: r = .001,
-  ...a
+
+/**
+ * Original: $$F11
+ * Time seconds input component.
+ */
+export function TimeSecondsInput(props: BaseScrubbableProps & {
+  resolution?: number;
 }) {
-  let s = useMemo(() => new ag(i5.SECONDS, t, e), [t, e]);
-  return jsx($$v15, {
-    ...a,
-    resolution: r,
-    formatter: s
+  const {
+    min = 0.001,
+    max = 10,
+    resolution = 0.001
+  } = props;
+  const fmt = useMemo(() => new ag(i5.SECONDS, max, min), [max, min]);
+  return jsx(ScrubbableInput, {
+    ...props,
+    resolution,
+    formatter: fmt
   });
 }
-export function $$j16({
-  max: e = 3600,
-  displayFractions: t = !1,
-  ...r
+
+/**
+ * Original: $$j16
+ * Time duration input component.
+ */
+export function TimeDurationInput(props: BaseScrubbableProps & {
+  displayFractions?: boolean;
 }) {
-  let a = useMemo(() => new f0(e, t), [e, t]);
-  return jsx($$v15, {
-    ...r,
-    formatter: a
+  const {
+    max = 3600,
+    displayFractions = false
+  } = props;
+  const fmt = useMemo(() => new f0(max, displayFractions), [max, displayFractions]);
+  return jsx(ScrubbableInput, {
+    ...props,
+    formatter: fmt
   });
 }
-let U = {
-  ...I,
-  scrubMultiplier: 4,
-  wheelMultiplier: 2
-};
-export function $$B18({
-  min: e = 0,
-  max: t = 1,
-  decimals: r,
-  hidePercentSign: a,
-  ...s
-}) {
-  let {
+
+/**
+ * Original: $$B18
+ * Base percentage input component.
+ */
+export function PercentageBaseInput(props: PercentageProps) {
+  const {
+    min = 0,
+    max = 1,
+    decimals,
+    hidePercentSign,
     smallNudgeAmount,
     bigNudgeAmount
-  } = s;
-  let c = useMemo(() => new LN({
-    min: e,
-    max: t,
+  } = props;
+  const fmt = useMemo(() => new LN({
+    min,
+    max,
     smallNudgeAmount,
     bigNudgeAmount,
-    decimals: r,
-    hidePercentSign: a
-  }), [e, t, smallNudgeAmount, bigNudgeAmount, r, a]);
-  return jsx($$v15, {
-    ...U,
-    ...s,
-    formatter: c,
-    postScrubMultiplier: .001,
-    postBigNudgeAmount: .1
+    decimals,
+    hidePercentSign
+  }), [min, max, smallNudgeAmount, bigNudgeAmount, decimals, hidePercentSign]);
+  return jsx(ScrubbableInput, {
+    ...percentageScrubConfig,
+    ...props,
+    formatter: fmt,
+    postScrubMultiplier: 0.001,
+    postBigNudgeAmount: 0.1
   });
 }
-export function $$G5(e) {
-  let {
+
+/**
+ * Original: $$G5
+ * Opacity input component.
+ */
+export function OpacityInput(props: PercentageProps & {
+  ui3RightJustifyPercentSign?: boolean;
+}) {
+  const {
     inputClassName,
-    ...r
-  } = e;
-  let i = e.ui3RightJustifyPercentSign ?? !0;
-  let a = P(getI18nString("fullscreen.scrubbable.opacity"));
-  return jsx($$B18, {
-    ...r,
-    inputClassName: s()(inputClassName, {
-      [Ww]: i
+    ui3RightJustifyPercentSign = true,
+    ...rest
+  } = props;
+  const tooltip = P(getI18nString('fullscreen.scrubbable.opacity'));
+  return jsx(PercentageBaseInput, {
+    ...rest,
+    'inputClassName': classNames(inputClassName, {
+      [Ww]: ui3RightJustifyPercentSign
     }),
-    "data-tooltip-type": KindEnum.TEXT,
-    "data-tooltip": a,
-    hidePercentSign: i,
-    childrenAtEnd: i,
-    children: i ? jsx("span", {
+    'data-tooltip-type': KindEnum.TEXT,
+    'data-tooltip': tooltip,
+    'hidePercentSign': ui3RightJustifyPercentSign,
+    'childrenAtEnd': ui3RightJustifyPercentSign,
+    'children': ui3RightJustifyPercentSign ? jsx('span', {
       className: QK,
-      children: renderI18nText("fullscreen.scrubbable.percent")
-    }) : e.children
+      children: renderI18nText('fullscreen.scrubbable.percent')
+    }) : props.children
   });
 }
-export function $$V10(e) {
-  let {
+
+/**
+ * Original: $$V10
+ * Angle input component.
+ */
+export function AngleInput(props: BaseScrubbableProps & {
+  reverseScrub?: boolean;
+}) {
+  const {
     smallNudgeAmount,
     bigNudgeAmount
-  } = e;
-  let a = useMemo(() => new cu({
+  } = props;
+  const fmt = useMemo(() => new cu({
     smallNudgeAmount,
     bigNudgeAmount
   }), [smallNudgeAmount, bigNudgeAmount]);
-  return jsx($$v15, {
-    ...e,
-    formatter: a,
-    postScrubMultiplier: e.reverseScrub ? .5 : -.5,
-    postWheelMultiplier: e.reverseScrub ? .2 : -.2,
-    postBigNudgeAmount: .1
+  return jsx(ScrubbableInput, {
+    ...props,
+    formatter: fmt,
+    postScrubMultiplier: props.reverseScrub ? 0.5 : -0.5,
+    postWheelMultiplier: props.reverseScrub ? 0.2 : -0.2,
+    postBigNudgeAmount: 0.1
   });
 }
-export function $$H4(e) {
-  let t = useMemo(() => new cu({
+
+/**
+ * Original: $$H4
+ * Angle input component (fixed range).
+ */
+export function AngleInputFixed(props: BaseScrubbableProps) {
+  const fmt = useMemo(() => new cu({
     min: 7.16,
     max: 180
   }), []);
-  return jsx($$v15, {
-    ...e,
-    formatter: t,
-    postScrubMultiplier: .5,
-    postBigNudgeAmount: .1,
-    postWheelMultiplier: .2
+  return jsx(ScrubbableInput, {
+    ...props,
+    formatter: fmt,
+    postScrubMultiplier: 0.5,
+    postBigNudgeAmount: 0.1,
+    postWheelMultiplier: 0.2
   });
 }
-export function $$z3(e) {
-  let {
+
+/**
+ * Original: $$z3
+ * Pixel input component.
+ */
+export function PixelInput(props: BaseScrubbableProps) {
+  const {
     min,
     smallNudgeAmount = DEFAULT_FINE_NUDGE,
     bigNudgeAmount = DEFAULT_COARSE_NUDGE,
     formatter
-  } = e;
-  let o = useRef(!1);
-  let c = useMemo(() => formatter ?? new h7({
+  } = props;
+  const isScrubbingRef = useRef(false);
+  const fmt = useMemo(() => formatter ?? new h7({
     min,
     smallPixelNudgeAmount: smallNudgeAmount,
     bigPixelNudgeAmount: bigNudgeAmount
   }), [min, smallNudgeAmount, bigNudgeAmount, formatter]);
-  let u = e.isTokenizable ? $ : p_;
-  return jsxs(_$$b, {
-    ...I,
+  const InputComponent = props.isTokenizable ? TokenizableInput : FormattedInput;
+  return jsxs(ScrubbableControl, {
+    ...defaultScrubConfig,
     bigNudgeAmount,
-    className: e.className,
-    "data-tooltip": e["data-tooltip"],
-    "data-tooltip-type": e["data-tooltip-type"],
-    disabled: e.disabled,
-    dispatch: e.dispatch,
-    formatter: c,
-    noBorderOnHover: e.noBorderOnHover,
-    onScrubBegin: () => {
-      o.current = !0;
+    'className': props.className,
+    'data-tooltip': props['data-tooltip'],
+    'data-tooltip-type': props['data-tooltip-type'],
+    'disabled': props.disabled,
+    'dispatch': props.dispatch,
+    'formatter': fmt,
+    'noBorderOnHover': props.noBorderOnHover,
+    'onScrubBegin': () => {
+      isScrubbingRef.current = true;
     },
-    onScrubEnd: () => {
-      o.current = !1;
+    'onScrubEnd': () => {
+      isScrubbingRef.current = false;
     },
-    onValueChange: e.onValueChange,
-    scrubMultiplier: e.scrubMultiplier,
-    scrubbingDisabled: e.disabled,
+    'onValueChange': props.onValueChange,
+    'scrubMultiplier': props.scrubMultiplier,
+    'scrubbingDisabled': props.disabled,
     smallNudgeAmount,
-    tooltipForScreenReadersOnly: e.tooltipForScreenReadersOnly,
-    value: e.value,
-    children: [e.children, jsx(u, {
-      className: e.inputClassName,
-      disabled: e.disabled,
-      formatter: c,
-      noBorderOnFocus: !0,
-      onChange: t => e.onValueChange(t, yesNoTrackingEnum.YES),
-      placeholder: e.placeholder,
-      property: e.value,
-      recordingKey: e.recordingKey,
-      shouldClearOnFocus: e.shouldClearOnFocus,
-      source: o.current ? "scrub" : "document"
+    'tooltipForScreenReadersOnly': props.tooltipForScreenReadersOnly,
+    'value': props.value,
+    'children': [props.children, jsx(InputComponent, {
+      className: props.inputClassName,
+      disabled: props.disabled,
+      formatter: fmt,
+      noBorderOnFocus: true,
+      onChange: (t: any) => props.onValueChange?.(t, yesNoTrackingEnum.YES),
+      placeholder: props.placeholder,
+      property: props.value,
+      recordingKey: props.recordingKey,
+      shouldClearOnFocus: props.shouldClearOnFocus,
+      source: isScrubbingRef.current ? 'scrub' : 'document'
     })]
   });
 }
-export const $$ = $$D0;
-export const $j = $$L1;
-export const Ht = $$N2;
-export const Jl = $$z3;
-export const M4 = $$H4;
-export const Pd = $$G5;
-export const Se = $$k6;
-export const W0 = $$O7;
-export const W4 = $$M8;
-export const YZ = $$C9;
-export const Zp = $$V10;
-export const dE = $$F11;
-export const fl = $$A12;
-export const gq = $$R13;
-export const ig = $$P14;
-export const j5 = $$v15;
-export const qd = $$j16;
-export const vD = $$x17;
-export const w2 = $$B18;
-export const xW = $$w19;
+
+// Exports with refactored names
+export const $$ = PercentageInputWithMinMax;
+export const $j = LengthInput;
+export const Ht = NumericInput;
+export const Jl = PixelInput;
+export const M4 = AngleInputFixed;
+export const Pd = OpacityInput;
+export const Se = ColorInput;
+export const W0 = TimeInput;
+export const W4 = TimeMillisecondsInput;
+export const YZ = NumericDropdownWithIcon;
+export const Zp = AngleInput;
+export const dE = TimeSecondsInput;
+export const fl = ScrubbableDropdownInput;
+export const gq = ExpressionInput;
+export const ig = PercentageInput;
+export const j5 = ScrubbableInput;
+export const qd = TimeDurationInput;
+export const vD = NumericDropdownInput;
+export const w2 = PercentageBaseInput;
+export const xW = ScaleInput;

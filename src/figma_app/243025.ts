@@ -16,7 +16,7 @@ import { resolveLanguageUnit, getPluginInfo, getCodeExtensionPreferences, useUpd
 import { KD } from "../figma_app/975811";
 import { Um } from "../905/848862";
 import { registerModal } from "../905/102752";
-import { Q7 } from "../905/203369";
+import { FormattedInputVariant1 } from "../905/203369";
 import { l6, c$ } from "../905/794875";
 import { DT, iF, j8, rc, hq, IC, A3, D0 } from "../905/89739";
 let v = new KD({
@@ -137,7 +137,7 @@ export let $$w2 = registerModal(function (e) {
           })]
         }) : jsx("div", {
           className: hq,
-          children: jsx(Q7, {
+          children: jsx(FormattedInputVariant1, {
             className: IC,
             property: R,
             formatter: v,

@@ -24,12 +24,12 @@ import { F as _$$F2 } from "../905/258517";
 import { getCurrentTeam } from "../figma_app/598018";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { Pd, j5 } from "../figma_app/178475";
+import { OpacityInput, ScrubbableInput } from "../figma_app/178475";
 import { $z } from "../figma_app/297733";
 import { D as _$$D } from "../905/225412";
 import { nZ, Mu } from "../905/28111";
 import { X7 } from "../905/713167";
-import { AN } from "../905/203369";
+import { FormattedInputVariant3 } from "../905/203369";
 import { YW } from "../figma_app/778125";
 import { Id, fI } from "../figma_app/626177";
 import { p as _$$p } from "../figma_app/284426";
@@ -390,7 +390,7 @@ export function $$er4(e) {
   return jsxs(et, {
     ref: r,
     isWhiteboard: s,
-    children: [jsx(AN, {
+    children: [jsx(FormattedInputVariant3, {
       autoFocus: !BrowserInfo.isIpad && !e.preventAutoFocus,
       className: p()({
         [uh]: !s,
@@ -403,7 +403,7 @@ export function $$er4(e) {
       property: e.color,
       recordingKey: generateRecordingKey(e, "color"),
       squareRightBorder: !0
-    }), l && jsx(Pd, {
+    }), l && jsx(OpacityInput, {
       className: ke,
       value: e.color.a,
       onValueChange: (t, r) => {
@@ -448,7 +448,7 @@ export class $$en3 extends RecordingPureComponent {
   }
   render() {
     return jsxs(et, {
-      children: [jsx(j5, {
+      children: [jsx(ScrubbableInput, {
         autoFocus: !this.props.preventAutoFocus,
         className: Qh,
         "data-tooltip": getI18nString("fullscreen.color_controls.red"),
@@ -462,7 +462,7 @@ export class $$en3 extends RecordingPureComponent {
         scrubMultiplier: 1 / 255,
         squareRightBorder: !0,
         value: this.props.color.r
-      }), jsx(j5, {
+      }), jsx(ScrubbableInput, {
         className: Qh,
         "data-tooltip": getI18nString("fullscreen.color_controls.green"),
         "data-tooltip-type": KindEnum.TEXT,
@@ -476,7 +476,7 @@ export class $$en3 extends RecordingPureComponent {
         scrubMultiplier: 1 / 255,
         squareRightBorder: !0,
         value: this.props.color.g
-      }), jsx(j5, {
+      }), jsx(ScrubbableInput, {
         className: Qh,
         "data-tooltip": getI18nString("fullscreen.color_controls.blue"),
         "data-tooltip-type": KindEnum.TEXT,
@@ -490,7 +490,7 @@ export class $$en3 extends RecordingPureComponent {
         scrubMultiplier: 1 / 255,
         squareRightBorder: !0,
         value: this.props.color.b
-      }), !this.props.hideOpacity && jsx(Pd, {
+      }), !this.props.hideOpacity && jsx(OpacityInput, {
         className: ke,
         dispatch: this.props.dispatch,
         value: this.props.color.a,
@@ -510,7 +510,7 @@ export class $$ei6 extends RecordingPureComponent {
   }
   render() {
     return jsx(et, {
-      children: jsx(AN, {
+      children: jsx(FormattedInputVariant3, {
         className: AH,
         formatter: this.formatter,
         property: this.props.color,
@@ -561,7 +561,7 @@ export class $$ea5 extends RecordingPureComponent {
   }
   render() {
     return jsxs(et, {
-      children: [jsx(j5, {
+      children: [jsx(ScrubbableInput, {
         autoFocus: !this.props.preventAutoFocus,
         className: Qh,
         "data-tooltip": getI18nString("fullscreen.color_controls.hue"),
@@ -575,7 +575,7 @@ export class $$ea5 extends RecordingPureComponent {
         scrubMultiplier: 1 / 360,
         squareRightBorder: !0,
         value: this.props.value.h
-      }), jsx(j5, {
+      }), jsx(ScrubbableInput, {
         className: Qh,
         "data-tooltip": getI18nString("fullscreen.color_controls.saturation"),
         "data-tooltip-type": KindEnum.TEXT,
@@ -589,7 +589,7 @@ export class $$ea5 extends RecordingPureComponent {
         scrubMultiplier: .01,
         squareRightBorder: !0,
         value: this.props.value.s
-      }), jsx(j5, {
+      }), jsx(ScrubbableInput, {
         className: Qh,
         "data-tooltip": "l" in this.props.value ? getI18nString("fullscreen.color_controls.lightness") : getI18nString("fullscreen.color_controls.brightness"),
         "data-tooltip-type": KindEnum.TEXT,
@@ -603,7 +603,7 @@ export class $$ea5 extends RecordingPureComponent {
         scrubMultiplier: .01,
         squareRightBorder: !0,
         value: "l" in this.props.value ? this.props.value.l : this.props.value.v
-      }), !this.props.hideOpacity && jsx(Pd, {
+      }), !this.props.hideOpacity && jsx(OpacityInput, {
         className: ke,
         dispatch: this.props.dispatch,
         value: this.props.color.a,
@@ -634,7 +634,7 @@ export function $$es7(e) {
         color: e.color,
         onMouseDown: e.onChitMouseDown,
         recordingKey: generateRecordingKey(e.recordingKey, "chit")
-      }), jsx(AN, {
+      }), jsx(FormattedInputVariant3, {
         className: p()(uh, {
           [ym]: s
         }),
@@ -645,7 +645,7 @@ export function $$es7(e) {
         onChange: e.onColorChange,
         recordingKey: generateRecordingKey(e, "color")
       })]
-    }), jsx(Pd, {
+    }), jsx(OpacityInput, {
       decimals: e.opacityDecimals,
       className: ke,
       value: e.color.a,

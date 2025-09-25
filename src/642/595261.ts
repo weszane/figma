@@ -8,18 +8,18 @@ import { valueOrFallback, isInvalidValue } from "../905/216495";
 import { SG, u as _$$u } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
 import { VZ } from "../905/959568";
-import { $j } from "../figma_app/178475";
-import { sJ } from "../figma_app/841644";
+import { LengthInput } from "../figma_app/178475";
+import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { E as _$$E } from "../642/160266";
 import { GI, OK, cv, dB, c5, fN, ih, gP, ve } from "../figma_app/328423";
 import { fn } from "../figma_app/811257";
-import { JV } from "../figma_app/260445";
-import { p as _$$p } from "../905/427409";
+import { useVariablePickerForFields } from "../figma_app/260445";
+import { FormattedInputContext } from "../905/427409";
 import { u3, y$ } from "../figma_app/152690";
 import { MH, eF } from "../figma_app/394327";
 import { d9 } from "../905/579068";
 import { jp } from "../figma_app/960196";
-import { Xs } from "../figma_app/98483";
+import { getNudgeMultipliers } from "../figma_app/98483";
 import { h as _$$h, k as _$$k } from "../642/927471";
 export function $$w0({
   hideVariableIcon: e,
@@ -186,17 +186,17 @@ let T = forwardRef(({
     bigNudgeAmount,
     wheelMultiplier,
     scrubMultiplier
-  } = Xs();
+  } = getNudgeMultipliers();
   let {
     consumedVariable
   } = u3(e);
   let w = useId();
-  return jsx(sJ, {
+  return jsx(FormattedInputWithWrapper, {
     ref: f,
     currentFieldValue: valueOrFallback(t, 0),
     disableEntryPoint: a,
     hideIcon: p,
-    children: jsx($j, {
+    children: jsx(LengthInput, {
       bigNudgeAmount,
       "data-tooltip": s,
       "data-tooltip-proxy-element-id": consumedVariable ? w : void 0,
@@ -234,8 +234,8 @@ function N({
   let a = MH(consumedVariable);
   let o = _$$u(a ?? void 0);
   let d = !!o && eF(o);
-  let [u, p, h] = JV(e, VariableResolvedDataType.FLOAT);
-  return jsx(_$$p.Provider, {
+  let [u, p, h] = useVariablePickerForFields(e, VariableResolvedDataType.FLOAT);
+  return jsx(FormattedInputContext.Provider, {
     value: {
       boundVariableId: a,
       isBoundVariableDeleted: d,

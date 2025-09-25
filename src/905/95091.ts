@@ -9,7 +9,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { X } from "../905/190511";
 import { logCmsError } from "../905/937198";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { u as _$$u } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
 import { J } from "../905/225412";
@@ -75,7 +75,7 @@ export function $$x1({
       onClick: e,
       recordingKey: generateRecordingKey(t, "paint", "detachVariableButton"),
       htmlAttributes: {
-        onMouseDown: dG,
+        onMouseDown: stopPropagation,
         "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
         "data-tooltip-type": KindEnum.TEXT
       },

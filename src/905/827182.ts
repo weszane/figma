@@ -21,7 +21,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { getVisibleTheme } from "../905/640017";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { isInvalidValue, isValidValue } from "../905/216495";
-import { lJ, kl } from "../905/275640";
+import { useSelectionProperty, useSelectionPropertyValue } from "../905/275640";
 import { getObservableValue } from "../figma_app/84367";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -146,10 +146,10 @@ export function $$G1(e) {
   let t = !il();
   let i = X7();
   let s = Kt();
-  let [d, c] = lJ("variableWidthPoints");
+  let [d, c] = useSelectionProperty("variableWidthPoints");
   let [f] = useDebounce(d, 200);
   let _ = j(d);
-  let v = kl("strokeCap");
+  let v = useSelectionPropertyValue("strokeCap");
   let L = "dark" === getVisibleTheme();
   let F = getObservableValue(AppStateTsApi?.widthProfilePreviewState().widthProfilePreviewNodeId, void 0);
   let [M, G] = useState();
@@ -292,7 +292,7 @@ function z(e) {
 }
 export function $$H0(e) {
   let t = !il();
-  let [i, r] = lJ("variableWidthPoints");
+  let [i, r] = useSelectionProperty("variableWidthPoints");
   return jsx(IconButton, {
     recordingKey: e.recordingKey,
     "aria-label": getI18nString("fullscreen.properties_panel.width_profile.flip_horizonal"),

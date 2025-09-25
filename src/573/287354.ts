@@ -8,7 +8,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { normalizeValue } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { getViewportInfo, viewportToScreen } from "../figma_app/62612";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { viewportNavigatorContext } from "../figma_app/298911";
@@ -21,7 +21,7 @@ let T = "offscreen_indicators--indicatorGraphicPurple--FAz-M";
 let k = parsePxNumber(y9S);
 export function $$E0() {
   let e = [];
-  let t = kl("selectionRegions");
+  let t = useSelectionPropertyValue("selectionRegions");
   let s = normalizeValue(t);
   s && (e = s);
   let r = useSelector(e => e.mirror.appModel.hoveredNode);

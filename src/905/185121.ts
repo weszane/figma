@@ -28,15 +28,15 @@ import { W3 } from "../905/232641";
 import { vx } from "../figma_app/175258";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { useHasSceneGraphSelection } from "../figma_app/722362";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { $j, M4 } from "../figma_app/178475";
+import { LengthInput, AngleInputFixed } from "../figma_app/178475";
 import { u as _$$u } from "../figma_app/110635";
 import { Tv } from "../figma_app/151869";
-import { nA } from "../905/203369";
+import { FormattedInputVariant2 } from "../905/203369";
 import { M as _$$M } from "../905/983212";
 import { Wn, dG } from "../figma_app/789050";
 import { qJ, Hd, x4 } from "../figma_app/359164";
@@ -660,7 +660,7 @@ function eV(e) {
       recordingKey: generateRecordingKey(e, "CUSTOM_DASH")
     })]
   });
-  let ee = jsx($j, {
+  let ee = jsx(LengthInput, {
     bigNudgeAmount: 10,
     "data-tooltip": getI18nString("fullscreen.properties_panel.stroke_settings.dash"),
     "data-tooltip-type": KindEnum.TEXT,
@@ -684,7 +684,7 @@ function eV(e) {
     tooltipForScreenReadersOnly: !0,
     value: eB(dashPattern)
   });
-  let et = jsx($j, {
+  let et = jsx(LengthInput, {
     bigNudgeAmount: 10,
     "data-tooltip": getI18nString("fullscreen.properties_panel.stroke_settings.gap"),
     "data-tooltip-type": KindEnum.TEXT,
@@ -710,7 +710,7 @@ function eV(e) {
     tooltipForScreenReadersOnly: !0,
     value: void 0 !== R && isValidValue(R) && E && k === R ? void 0 : R
   });
-  let ei = jsx(nA, {
+  let ei = jsx(FormattedInputVariant2, {
     forwardedRef: F,
     formatter: N,
     property: e.dashPattern,
@@ -796,7 +796,7 @@ function eG(e) {
     }), !e.disabled && "MITER" === e.strokeJoin && jsx(cS, {
       label: renderI18nText("fullscreen.properties_panel.stroke_settings.miter_angle"),
       appendedClassName: eD,
-      input: jsx(M4, {
+      input: jsx(AngleInputFixed, {
         disabled: e.disabled || "MITER" !== e.strokeJoin,
         value: e.miterLimitAngle,
         onValueChange: t => {
@@ -841,7 +841,7 @@ export function $$ez0(e) {
     activeToolId,
     activateTool
   } = rM(_$$u);
-  let [W] = lJ("variableWidthPoints");
+  let [W] = useSelectionProperty("variableWidthPoints");
   let q = useCallback(e => {
     switch (("Dynamic" === e || "Brush" === e) && p && scopeAwareFunction.user("advanced-stroke-set-seed", () => {
       for (let e of p) Fullscreen?.initializeStrokeSeed(e);

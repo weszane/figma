@@ -18,15 +18,15 @@ import { isValidValue } from "../905/216495";
 import { Um } from "../905/848862";
 import { TK } from "../905/129660";
 import { KindEnum } from "../905/129884";
-import { vD } from "../figma_app/178475";
+import { NumericDropdownInput } from "../figma_app/178475";
 import { a2 } from "../figma_app/762558";
 import { ow } from "../905/188421";
 import { c$, sK, tV } from "../905/794875";
 import { pW, gm } from "../figma_app/335781";
 import { t as _$$t2 } from "../905/1946";
 import { B as _$$B2 } from "../905/957400";
-import { hu, V5 } from "../figma_app/260445";
-import { p as _$$p } from "../905/427409";
+import { ControlledVariablePickerProvider, VariablePicker } from "../figma_app/260445";
+import { FormattedInputContext } from "../905/427409";
 import { u3, y$ } from "../figma_app/152690";
 import { MH } from "../figma_app/394327";
 import { k as _$$k2 } from "../905/67286";
@@ -65,11 +65,11 @@ export function $$M0({
       });
     }, e) : await v(e => updateVariableConsumption(y$(VariableResolvedDataType.FLOAT, e)), clearVariableConsumption, e);
   }, [g, v, p, clearVariableConsumption, updateVariableConsumption]);
-  return jsxs(hu, {
+  return jsxs(ControlledVariablePickerProvider, {
     boundVariableId: b,
     resolvedType: VariableResolvedDataType.FLOAT,
     onVariableSelected: I,
-    children: [jsx(V5, {
+    children: [jsx(VariablePicker, {
       variableScope: PropertyScope.FONT_SIZE
     }), jsx(j, {
       id: e,
@@ -95,7 +95,7 @@ function j({
   hideVariableOptions: M,
   responsiveTextStyleVariantIndex: j
 }) {
-  let B = useContext(_$$p);
+  let B = useContext(FormattedInputContext);
   let V = useRef(null);
   let G = useDispatch();
   let z = Um();
@@ -161,7 +161,7 @@ function j({
         value: {
           chevron: _$$t2
         },
-        children: jsx(vD, {
+        children: jsx(NumericDropdownInput, {
           ariaLabel: getI18nString("fullscreen.type_panel.font_size"),
           bigNudgeAmount,
           className: Ej,

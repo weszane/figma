@@ -29,7 +29,7 @@ export function createRealtimeManager() {
   // State variables with descriptive names
   let websocket: WebSocket | null = null
   let isConnected = false
-  let pingInterval: NodeJS.Timeout | null = null
+  let pingInterval: NodeJS.Timeout | number | null = null
   let reconnectCallbacks: (() => void)[] = []
   let activeSubscriptions: Record<string, any> = {}
   let subscriptionIdCounter = -1
@@ -41,9 +41,9 @@ export function createRealtimeManager() {
   let isReconnecting = true
   let lastPongTime = Date.now()
   let reconnectAttempts = 0
-  let reconnectTimeout: NodeJS.Timeout | null = null
+  let reconnectTimeout: NodeJS.Timeout | number| null = null
   let isEnabled = true
-  let disconnectTimeout: NodeJS.Timeout | null = null
+  let disconnectTimeout: NodeJS.Timeout | number | null = null
   let visibilityChangeHandler: (() => void) | null = null
   let onlineHandler: (() => void) | null = null
 

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { A } from "../905/891805";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Rb } from "../figma_app/852050";
@@ -35,7 +35,7 @@ export function $$_0() {
           onClick: t,
           "data-onboarding-key": "local-variables-panel-title",
           children: renderI18nText("variables.local_variables_panel.local_variables_title")
-        }), jsx(E, {
+        }), jsx(AutoInteractableWrapper, {
           name: "variables_modal_button",
           children: jsx(_$$d, {
             onClick: t,

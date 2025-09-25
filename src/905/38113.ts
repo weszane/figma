@@ -13,7 +13,7 @@ import { f0 } from "../figma_app/975811";
 import { getBigNudgeAmount } from "../figma_app/740163";
 import { _P } from "../figma_app/2590";
 import { KindEnum } from "../905/129884";
-import { qd } from "../figma_app/178475";
+import { TimeDurationInput } from "../figma_app/178475";
 import { X7 } from "../905/713167";
 import { fI } from "../figma_app/626177";
 import { wz, vn, cK, Ym, dE, Zd, aU, JH, EC, CN } from "../905/119782";
@@ -47,7 +47,7 @@ export function $$E0(e) {
     }));
   }, [O, R]);
   let M = () => {
-    if (!playing && isVideoLoaded) return jsx(qd, {
+    if (!playing && isVideoLoaded) return jsx(TimeDurationInput, {
       className: p()({
         [wz]: !P,
         [vn]: P

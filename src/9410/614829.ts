@@ -6,7 +6,7 @@ import o from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useIsFullscreenOverview } from "../figma_app/88239";
-import { jo } from "../figma_app/753501";
+import { preventDefaultAndStopPropagation } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { dh, nn } from "../figma_app/186343";
 import { _ as _$$_ } from "../9410/218531";
@@ -39,7 +39,7 @@ export function $$v0({
   let D = o || getFeatureFlags().interop_pages;
   let M = (e || R) && !!w;
   let P = useCallback(e => {
-    jo(e);
+    preventDefaultAndStopPropagation(e);
     t || S?.({
       nodeId: N,
       clientX: e.clientX,

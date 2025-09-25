@@ -22,7 +22,7 @@ import { Um as _$$Um } from "../905/848862";
 import { _P } from "../figma_app/2590";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { W4 } from "../figma_app/178475";
+import { TimeMillisecondsInput } from "../figma_app/178475";
 import { R as _$$R } from "../897/631032";
 import { PQ, F4, xX } from "../897/564585";
 import { w_, J5 } from "../897/602108";
@@ -317,7 +317,7 @@ export function $$q2({
     recordingKey: generateRecordingKey(l, "easingDropdown")
   });
   let er = jsxs(Fragment, {
-    children: [Q && jsx(W4, {
+    children: [Q && jsx(TimeMillisecondsInput, {
       className: Lp,
       "data-tooltip": getI18nString("proto.animation_panel.easing_duration_tooltip"),
       "data-tooltip-type": KindEnum.TEXT,
@@ -344,7 +344,7 @@ export function $$q2({
       wheelMultiplier: T / 10,
       children: jsx(_$$A, {})
     }), !ee && isValidValue(e.easing) && $(e.easing) && isValidValue(e.easingFunction) && jsx(_$$y.Consumer, {
-      children: ([e]) => jsx(W4, {
+      children: ([e]) => jsx(TimeMillisecondsInput, {
         className: Lp,
         "data-tooltip": getI18nString("proto.animation_panel.easing_duration_tooltip"),
         "data-tooltip-type": KindEnum.TEXT,

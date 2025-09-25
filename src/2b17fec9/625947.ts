@@ -89,7 +89,7 @@ import { permissionScopeHandler as _$$l, scopeAwareFunction as _$$nc, zk } from 
 import { r as _$$r2 } from '../905/189361';
 import { oM as _$$oM, F5 } from '../905/192343';
 import { D as _$$D6 } from '../905/198083';
-import { Q7 } from '../905/203369';
+import { FormattedInputVariant1 } from '../905/203369';
 import { h as _$$h2 } from '../905/207101';
 import { A as _$$A78 } from '../905/215698';
 import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback } from '../905/216495';
@@ -107,7 +107,7 @@ import { F as _$$F5 } from '../905/258517';
 import { y as _$$y4 } from '../905/263077';
 import { HiddenLabel } from '../905/270045';
 import { H as _$$H6 } from '../905/270307';
-import { lJ as _$$lJ2, A5, kl } from '../905/275640';
+import { useSelectionProperty, useUpdateSelectionProperty, useSelectionPropertyValue } from '../905/275640';
 import { q as _$$q2 } from '../905/276489';
 import { $J as _$$$J, o2 as _$$o4, sd as _$$sd, Cq, NI } from '../905/278499';
 import { a as _$$a8 } from '../905/290931';
@@ -10270,7 +10270,7 @@ let uq = {
   }
 };
 function u6(e) {
-  let [t, i] = _$$lJ2('accessibleLabel');
+  let [t, i] = useSelectionProperty('accessibleLabel');
   let [n, r] = useState(t);
   let {
     setIsEditorOpen
@@ -10878,15 +10878,15 @@ function hz(e) {
 function hZ({
   isColorPopoverOpen: e
 }) {
-  let [t, i] = _$$lJ2('shapeWithTextFillType');
+  let [t, i] = useSelectionProperty('shapeWithTextFillType');
   let n = {
     [VisibilityState.VISIBLE]: getI18nString('whiteboard.inline_menu.shape_visibility_visible'),
     [VisibilityState.TRANSPARENT]: getI18nString('whiteboard.inline_menu.shape_visibility_transparent'),
     [VisibilityState.TRANSPARENT_CUSTOM]: getI18nString('whiteboard.inline_menu.shape_visibility_transparent'),
     [VisibilityState.HIDDEN]: getI18nString('whiteboard.inline_menu.shape_visibility_hidden')
   };
-  let [r, a] = _$$lJ2('connectorTextBackgroundTransparent');
-  let [s, l] = _$$lJ2('platformShapeFillType');
+  let [r, a] = useSelectionProperty('connectorTextBackgroundTransparent');
+  let [s, l] = useSelectionProperty('platformShapeFillType');
   let d = hV();
   let u = hG(d);
   let p = hK(d, t, r, s);
@@ -11124,8 +11124,8 @@ function ma() {
   };
 }
 function mc() {
-  let e = kl('whiteboardColor');
-  let t = kl('whiteboardDividedSwatchColors');
+  let e = useSelectionPropertyValue('whiteboardColor');
+  let t = useSelectionPropertyValue('whiteboardDividedSwatchColors');
   return isInvalidValue(t) ? (console.error('whiteboardDividedSwatchColors should never be mixed'), []) : e && isValidValue(e) ? e : t ?? [];
 }
 function mu() {
@@ -11230,11 +11230,11 @@ function mR(e, t, i) {
   if (n) return isInvalidValue(i) ? mk.get(t === 'START' ? 'left' : 'right')?.get(n) : mk.get(i)?.get(n);
 }
 function mM() {
-  let e = kl('connectorStartCapForSelection');
+  let e = useSelectionPropertyValue('connectorStartCapForSelection');
   return mw.get(e);
 }
 function mD() {
-  let e = kl('connectorEndCapForSelection');
+  let e = useSelectionPropertyValue('connectorEndCapForSelection');
   return mw.get(e);
 }
 function mP(e) {
@@ -11286,7 +11286,7 @@ function mV() {
 }
 let mG = new Map([['sansSerif', buildUploadUrl('4d90c5e665fa16415b0b261e302696e4c706553a')], ['serif', buildUploadUrl('14457d0d904ce9c5c570f9557fc760a18cde12ea')], ['monospace', buildUploadUrl('a96474304a571c7ef149023afd13beb0c196f764')], ['script', buildUploadUrl('6e257bdd5a3789fd0013eb9611f503d44b1c4a56')]]);
 function mK() {
-  let e = kl('whiteboardFontFamilies');
+  let e = useSelectionPropertyValue('whiteboardFontFamilies');
   if (!(!e || isInvalidValue(e))) return e;
 }
 let mW = 'FONT_SIZE/';
@@ -11310,7 +11310,7 @@ function m$() {
   return e;
 }
 function mY() {
-  let e = kl('whiteboardFontSizes');
+  let e = useSelectionPropertyValue('whiteboardFontSizes');
   if (e && isValidValue(e)) return e;
 }
 let mX = 'IMAGE_CROP/';
@@ -12138,7 +12138,7 @@ function fd() {
   });
 }
 function fp() {
-  let e = kl('washiTapePaint');
+  let e = useSelectionPropertyValue('washiTapePaint');
   let t = useMemo(() => !e || isInvalidValue(e) ? null : _$$dG('fillPaints', e), [e]);
   let i = t?.data;
   let n = i && i.length > 0 ? i[0] : void 0;
@@ -12157,7 +12157,7 @@ function fh({
   recordingKey: e
 }) {
   let [t, i] = fp();
-  let n = kl('washiTapePaintIsMixed');
+  let n = useSelectionPropertyValue('washiTapePaintIsMixed');
   let r = t.length === 1 ? t[0] : t;
   let [a, s] = useState(!1);
   let [d, u] = useState(!1);
@@ -12486,21 +12486,21 @@ let fS = (e, t) => {
     return new Map([['TIDY_UP', Zr('tidy-up')], ['GROUP_SELECTION', Zr('group-selection')], ['UNGROUP_SELECTION', fd() ?? !1], ['CREATE_SECTION', Zr('create-section-from-selection')], ['ALIGNMENT', Zr('align-top') && i !== LayoutTabType.RASTER], ['AI_QUICK_ACTIONS', !e && t]]);
   }();
   let r = function () {
-    let e = kl('imageHasNoStroke');
-    let t = kl('sectionContentsHidden');
+    let e = useSelectionPropertyValue('imageHasNoStroke');
+    let t = useSelectionPropertyValue('sectionContentsHidden');
     let i = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo.mode === DiagramElementType.SECTION_NAME);
     let n = getObservableValue(AppStateTsApi?.editorState().selectionIsHyperlink, !1);
-    let r = kl('authorVisibility');
+    let r = useSelectionPropertyValue('authorVisibility');
     return new Map([['TEXT_DECORATION_BOLD', useSelector(e => _$$N6(e.mirror.selectionProperties.fontStyle?.toString() || ''))], ['TEXT_DECORATION_STRIKETHROUGH', useSelector(e => e.mirror.selectionProperties.whiteboardTextDecoration === 'STRIKETHROUGH')], ['ORDERED_LIST', h9()], ['UNORDERED_LIST', h4()], ['IMAGE_BORDER', !1 === e], ['SECTION_SHOW_HIDE', !0 === t], ['SECTION_RENAME', i], ['HYPERLINK', !0 === n], ['AUTHOR_VISIBILITY', !0 === r]]);
   }();
   let a = function () {
-    let e = kl('sectionContentsHidden');
-    let t = kl('name');
+    let e = useSelectionPropertyValue('sectionContentsHidden');
+    let t = useSelectionPropertyValue('name');
     let i = !t || t.trim() === '';
     return new Map([['SECTION_SHOW_HIDE', e ? buildUploadUrl('4bd0b77f61f3fb82ef05fd310b8e2687b869c06a') : buildUploadUrl('84b3f8771f16c5ea90e5d8274335a9ba095035af')], ['SECTION_RENAME', i ? buildUploadUrl('88f9ce67669812647d9c63f5efc7a1c5d2524337') : buildUploadUrl('9900d0f2ba10afd0b725938bcdbd81b642b9f473')]]);
   }();
   let s = function () {
-    let e = kl('whiteboardColor');
+    let e = useSelectionPropertyValue('whiteboardColor');
     let t = mc();
     let [i, n] = fp();
     let r = new Map();
@@ -12544,7 +12544,7 @@ let fS = (e, t) => {
   }();
   let o = function () {
     let e;
-    switch (kl('whiteboardTextAlignHorizontal')) {
+    switch (useSelectionPropertyValue('whiteboardTextAlignHorizontal')) {
       case 'CENTER':
         e = buildUploadUrl('d229c1db5d7709c1242ee4743c6ccf918e955dbb');
         break;
@@ -12555,11 +12555,11 @@ let fS = (e, t) => {
       case 'RIGHT':
         e = buildUploadUrl('e1b765fa3f0498e863004a473d9afd59791fa85d');
     }
-    let t = kl('connectorStartCapDirection');
-    let i = kl('connectorEndCapDirection');
+    let t = useSelectionPropertyValue('connectorStartCapDirection');
+    let i = useSelectionPropertyValue('connectorEndCapDirection');
     let n = mM();
     let r = mD();
-    let a = kl('connectorLineStyleForSelection');
+    let a = useSelectionPropertyValue('connectorLineStyleForSelection');
     let s = mK();
     let o = Object.keys(pR).find(e => {
       let t = pR[e];
@@ -12595,7 +12595,7 @@ let fS = (e, t) => {
   }();
   let p = generateSessionId();
   let h = fI(!1, p);
-  let f = kl('locked');
+  let f = useSelectionPropertyValue('locked');
   let _ = function () {
     let e = mb();
     let t = hG(hV());
@@ -12643,14 +12643,14 @@ let fS = (e, t) => {
     return u;
   }();
   let x = function () {
-    let e = kl('shapeWithTextFillType');
-    let t = kl('connectorTextBackgroundTransparent');
-    let i = kl('platformShapeFillType');
+    let e = useSelectionPropertyValue('shapeWithTextFillType');
+    let t = useSelectionPropertyValue('connectorTextBackgroundTransparent');
+    let i = useSelectionPropertyValue('platformShapeFillType');
     let n = mb();
     let r = hK(hV(), e, t, i);
-    let a = kl('whiteboardStrokeStyle');
-    let s = kl('whiteboardStrokeWeight');
-    let o = kl('whiteboardTextAlignHorizontal');
+    let a = useSelectionPropertyValue('whiteboardStrokeStyle');
+    let s = useSelectionPropertyValue('whiteboardStrokeWeight');
+    let o = useSelectionPropertyValue('whiteboardTextAlignHorizontal');
     let l = function () {
       let e = mM();
       let t = mD();
@@ -12663,7 +12663,7 @@ let fS = (e, t) => {
       }
       return i;
     }();
-    let d = kl('connectorLineStyleForSelection');
+    let d = useSelectionPropertyValue('connectorLineStyleForSelection');
     let u = mp.map(e => [e, !1]);
     let p = function () {
       let e = mK();
@@ -12698,7 +12698,7 @@ let fS = (e, t) => {
     _$$tj.forEach((e, t) => {
       g.set(t, s === e);
     });
-    let j = kl('shapeWithTextTypeForSelection');
+    let j = useSelectionPropertyValue('shapeWithTextTypeForSelection');
     _$$p6.forEach(e => {
       e.items.forEach(e => {
         g.set(e.identifier, e.identifier === j);
@@ -12708,11 +12708,11 @@ let fS = (e, t) => {
   }();
   let g = h1('MENU', h0.CONTEXTUAL_TOOLBAR);
   let j = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
-  let b = kl('connectorStartCapDirection');
-  let y = kl('connectorEndCapDirection');
+  let b = useSelectionPropertyValue('connectorStartCapDirection');
+  let y = useSelectionPropertyValue('connectorEndCapDirection');
   let v = mY();
-  let T = kl('opacity');
-  let E = kl('whiteboardColor');
+  let T = useSelectionPropertyValue('opacity');
+  let E = useSelectionPropertyValue('whiteboardColor');
   let S = _$$nB2();
   let w = function () {
     let e = v1();
@@ -13035,11 +13035,11 @@ function fR() {
   let e = kM();
   let t = function () {
     let e = _$$Xb();
-    let [t, i] = _$$lJ2('sectionContentsHidden');
+    let [t, i] = useSelectionProperty('sectionContentsHidden');
     let n = ma();
     let r = _$$f5();
     let a = _$$o6(SourceType.USER);
-    let [s, o] = _$$lJ2('authorVisibility');
+    let [s, o] = useSelectionProperty('authorVisibility');
     return new Map([['TEXT_DECORATION_BOLD', () => Jm('toggle-bold')], ['TEXT_DECORATION_STRIKETHROUGH', () => Jm('text-toggle-strikethrough')], ['TIDY_UP', () => Jm('tidy-up')], ['CREATE_SECTION', () => Jm('create-section-from-selection')], ['GROUP_SELECTION', () => Jm('group-selection')], ['UNGROUP_SELECTION', () => Jm('ungroup-selection')], ['RESIZE_TO_FIT', () => Jm('resize-to-fit')], ['DUPLICATE', () => {
       Jm('leave-edit-mode');
       Jm('duplicate-in-place');
@@ -13054,17 +13054,17 @@ function fR() {
     });
   }, [t, e]);
   let i = hV();
-  let n = A5('shapeWithTextTypeForSelection');
-  let r = A5('shapeWithTextFillType');
-  let a = A5('connectorTextBackgroundTransparent');
-  let s = A5('platformShapeFillType');
-  let u = A5('whiteboardStrokeStyle');
-  let p = A5('whiteboardStrokeWeight');
-  let h = A5('connectorStartCapForSelection');
-  let m = A5('connectorEndCapForSelection');
-  let f = A5('connectorLineStyleForSelection');
-  let _ = A5('whiteboardFontFamilies');
-  let x = A5('whiteboardFontSizes');
+  let n = useUpdateSelectionProperty('shapeWithTextTypeForSelection');
+  let r = useUpdateSelectionProperty('shapeWithTextFillType');
+  let a = useUpdateSelectionProperty('connectorTextBackgroundTransparent');
+  let s = useUpdateSelectionProperty('platformShapeFillType');
+  let u = useUpdateSelectionProperty('whiteboardStrokeStyle');
+  let p = useUpdateSelectionProperty('whiteboardStrokeWeight');
+  let h = useUpdateSelectionProperty('connectorStartCapForSelection');
+  let m = useUpdateSelectionProperty('connectorEndCapForSelection');
+  let f = useUpdateSelectionProperty('connectorLineStyleForSelection');
+  let _ = useUpdateSelectionProperty('whiteboardFontFamilies');
+  let x = useUpdateSelectionProperty('whiteboardFontSizes');
   let g = _$$te();
   useEffect(() => {
     e && (e._native_contextual_toolbar_activate_submenu_item = e => {
@@ -13162,7 +13162,7 @@ function fR() {
     e.set('STICKY_COLOR', new Map(LK('STICKY').map(([e, t]) => [t, e])));
     return e;
   }();
-  let v = A5('whiteboardColor');
+  let v = useUpdateSelectionProperty('whiteboardColor');
   useEffect(() => {
     e && (e._native_toolbar_set_palette_color = (e, t) => {
       v(t);
@@ -13641,12 +13641,12 @@ let _d = {
 let _c = ['ROUND', 'ARROW_LINES', 'ARROW_EQUILATERAL', 'TRIANGLE_FILLED', 'CIRCLE_FILLED', 'DIAMOND_FILLED'];
 let _u = e => function () {
   let t;
-  let [i, n] = _$$lJ2(e === 'connectorStartCap' ? 'connectorStartCapForSelection' : 'connectorEndCapForSelection');
-  let r = kl(e === 'connectorStartCap' ? 'connectorStartCapDirection' : 'connectorEndCapDirection');
+  let [i, n] = useSelectionProperty(e === 'connectorStartCap' ? 'connectorStartCapForSelection' : 'connectorEndCapForSelection');
+  let r = useSelectionPropertyValue(e === 'connectorStartCap' ? 'connectorStartCapDirection' : 'connectorEndCapDirection');
   let a = e === 'connectorStartCap' ? getI18nString('whiteboard.inline_menu.connector_start_point') : getI18nString('whiteboard.inline_menu.connector_end_point');
   let s = useMemo(() => generateUUIDv4(), []);
   let [d, p] = useState(!1);
-  let h = kl('connectorLineStyleForSelection');
+  let h = useSelectionPropertyValue('connectorLineStyleForSelection');
   let m = e => {
     n(e);
     h === 'STRAIGHT' && WhiteboardTsApi?.snapshotStraightConnectorCaps();
@@ -13880,7 +13880,7 @@ function _I(e) {
 }
 function _O(e) {
   let t = _$$uQ3();
-  let i = kl('embedData');
+  let i = useSelectionPropertyValue('embedData');
   let n = createEmbedAnalyticsHandler(i);
   let [r, a] = useAtomValueAndSetter(_$$n9);
   let s = useCallback(() => {
@@ -15098,7 +15098,7 @@ function xw() {
 }
 let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let e;
-  let t = A5('whiteboardColor');
+  let t = useUpdateSelectionProperty('whiteboardColor');
   let i = mc();
   let [n, r] = useState(!1);
   let a = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
@@ -15112,10 +15112,10 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     });
   });
   let h = mu();
-  let m = A5('shapeWithTextOpacityOverride');
-  let f = A5('platformShapeOpacityOverride');
-  let _ = kl('shapeWithTextFillType');
-  let x = kl('platformShapeFillType');
+  let m = useUpdateSelectionProperty('shapeWithTextOpacityOverride');
+  let f = useUpdateSelectionProperty('platformShapeOpacityOverride');
+  let _ = useSelectionPropertyValue('shapeWithTextFillType');
+  let x = useSelectionPropertyValue('platformShapeFillType');
   let g = a ? a.SHAPE_WITH_TEXT ?? 0 : 0;
   let j = a && a.SHAPE_WITH_TEXT === u;
   let b = s === u;
@@ -15166,7 +15166,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     value: i
   });
 }], [WhiteboardFeatures.STICKY_COLOR, function () {
-  let e = A5('whiteboardColor');
+  let e = useUpdateSelectionProperty('whiteboardColor');
   let t = mc();
   let [i, n] = useState(!1);
   return jsx(ZE, {
@@ -15181,7 +15181,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     setIsColorPopoverOpen: n
   });
 }], [WhiteboardFeatures.HIGHLIGHT_COLOR, function () {
-  let e = A5('whiteboardColor');
+  let e = useUpdateSelectionProperty('whiteboardColor');
   let t = mc();
   let [i, n] = useState(!1);
   return jsx(ZE, {
@@ -15195,7 +15195,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     setIsColorPopoverOpen: n
   });
 }], [WhiteboardFeatures.PENCIL_COLOR, function () {
-  let e = A5('whiteboardColor');
+  let e = useUpdateSelectionProperty('whiteboardColor');
   let t = mc();
   let [i, n] = useState(!1);
   let r = function () {
@@ -15214,7 +15214,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     setIsColorPopoverOpen: n
   });
 }], [WhiteboardFeatures.WHITEBOARD_STROKE, _$$nm], [WhiteboardFeatures.WHITEBOARD_SHAPE, function () {
-  let [e, t] = _$$lJ2('shapeWithTextTypeForSelection');
+  let [e, t] = useSelectionProperty('shapeWithTextTypeForSelection');
   let i = generateUUIDv4();
   if (!e) return null;
   let n = isInvalidValue(e) || !e ? '1' : `${xS.format(e)}`;
@@ -15379,7 +15379,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     })
   });
 }], [WhiteboardFeatures.FONT_FAMILY, function () {
-  let [e, t] = _$$lJ2('whiteboardFontFamilies');
+  let [e, t] = useSelectionProperty('whiteboardFontFamilies');
   let i = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
   let n = isPrimaryLocaleEnglish();
   let [r, a] = useState(void 0);
@@ -15575,7 +15575,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     manager
   } = setupMenu();
   let h = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
-  let [m, f] = _$$lJ2('whiteboardFontSizes');
+  let [m, f] = useSelectionProperty('whiteboardFontSizes');
   if (!m || !isValidValue(m)) return null;
   let _ = isValidValue(m) ? m : [];
   let x = e => {
@@ -15714,7 +15714,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
           optionProps: {
             ...v,
             children: jsx(Fragment, {
-              children: jsx(Q7, {
+              children: jsx(FormattedInputVariant1, {
                 formatter: e,
                 onChange: _$$lQ,
                 className: FY,
@@ -15767,7 +15767,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
         ...v,
         selected: _.length === 1 && !hh.has(_[0]),
         ariaLabel: T,
-        children: jsx(Q7, {
+        children: jsx(FormattedInputVariant1, {
           ariaLabel: getI18nString('whiteboard.inline_menu.custom_font_size'),
           autoFocus: !0,
           className: QR,
@@ -15805,7 +15805,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     recordingKey: 'startMindMapControl'
   });
 }], [WhiteboardFeatures.TEXT_ALIGN_H, function () {
-  let e = kl('whiteboardTextAlignHorizontal');
+  let e = useSelectionPropertyValue('whiteboardTextAlignHorizontal');
   let t = getI18nString('whiteboard.inline_menu.text_alignment');
   let i = _$$nc.user('set-text-align', e => {
     p8(e);
@@ -15913,7 +15913,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     onToggleMenuOpen: a
   });
 }], [WhiteboardFeatures.TEXT_ALIGN_V, function () {
-  let e = kl('whiteboardTextAlignVertical');
+  let e = useSelectionPropertyValue('whiteboardTextAlignVertical');
   let t = getI18nString('whiteboard.inline_menu.text_alignment_v');
   let i = useId();
   let [n, r] = useState(!1);
@@ -16021,7 +16021,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   });
 }], [WhiteboardFeatures.CONNECTOR_LINE_STYLE, function () {
   let e;
-  let [t, i] = _$$lJ2('connectorLineStyleForSelection');
+  let [t, i] = useSelectionProperty('connectorLineStyleForSelection');
   let [n, r] = useState(!1);
   let a = getFeatureFlags().ad_curved_connectors ? ['ELBOWED', 'CURVED', 'STRAIGHT'] : ['ELBOWED', 'STRAIGHT'];
   let s = e => {
@@ -16101,7 +16101,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     onToggleMenuOpen: r
   });
 }], [WhiteboardFeatures.CONNECTOR_START_CAP, __], [WhiteboardFeatures.CONNECTOR_END_CAP, _x], [WhiteboardFeatures.AUTHOR_VISIBILITY, function () {
-  let [e, t] = _$$lJ2('authorVisibility');
+  let [e, t] = useSelectionProperty('authorVisibility');
   let i = () => {
     t(!e);
   };
@@ -16142,7 +16142,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     recordingKey: 'addTextControl'
   });
 }], [WhiteboardFeatures.DIVIDER, () => jsx(_$$wv4, {})], [WhiteboardFeatures.CODE_BLOCK_LANGUAGE, function () {
-  let [e, t] = _$$lJ2('codeBlockLanguage');
+  let [e, t] = useSelectionProperty('codeBlockLanguage');
   let i = trackFileEventWithUser();
   let {
     getTriggerProps,
@@ -16209,7 +16209,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     }, e))
   });
 }], [WhiteboardFeatures.CODE_BLOCK_THEME, function () {
-  let [e, t] = _$$lJ2('codeBlockTheme');
+  let [e, t] = useSelectionProperty('codeBlockTheme');
   let i = trackFileEventWithUser();
   let [n, r] = useState(!1);
   return jsx(ZE, {
@@ -16239,7 +16239,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
 }], [WhiteboardFeatures.EMBED_CONVERT_TO_TEXT, function () {
   return jsx(_$$S3, {});
 }], [WhiteboardFeatures.IMAGE, AZ], [WhiteboardFeatures.REMOVE_IMAGE_BACKGROUND, function () {
-  let e = A5('imageHasNoStroke');
+  let e = useUpdateSelectionProperty('imageHasNoStroke');
   let t = () => {
     let t = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
     B3(JT.REMOVE_BACKGROUND);
@@ -16263,7 +16263,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     onClick: t
   });
 }], [WhiteboardFeatures.BORDER, _$$rT], [WhiteboardFeatures.DESCRIPTION, Dz], [WhiteboardFeatures.SECTION_SHOW_HIDE, function () {
-  let [e, t] = _$$lJ2('sectionContentsHidden');
+  let [e, t] = useSelectionProperty('sectionContentsHidden');
   let i = () => {
     t(!e);
   };
@@ -16292,7 +16292,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
 }], [WhiteboardFeatures.SECTION_RENAME, function () {
   let e = mr();
   let t = ma();
-  let i = kl('name');
+  let i = useSelectionPropertyValue('name');
   let n = !i || i.trim() === '';
   let r = n ? getI18nString('fullscreen_actions.add-title') : getI18nString('fullscreen_actions.rename-section');
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
@@ -16317,8 +16317,8 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     recordingKey: 'washiTapePatternControl'
   });
 }], [WhiteboardFeatures.RESIZE_TO_FIT, function () {
-  let e = kl('sectionContentsOverflowing');
-  let t = kl('sectionContentsHidden');
+  let e = useSelectionPropertyValue('sectionContentsOverflowing');
+  let t = useSelectionPropertyValue('sectionContentsHidden');
   let i = () => {
     fullscreenValue.triggerActionInUserEditScope('resize-to-fit');
   };
@@ -16340,7 +16340,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     recordingKey: 'resizeToFitSection'
   });
 }], [WhiteboardFeatures.FACE_STAMP, function () {
-  let e = kl('stampData');
+  let e = useSelectionPropertyValue('stampData');
   let {
     label,
     loading
@@ -16403,8 +16403,8 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     })]
   }) : null;
 }], [WhiteboardFeatures.LOCK, function () {
-  let e = kl('locked');
-  let t = kl('sectionContentsHidden');
+  let e = useSelectionPropertyValue('locked');
+  let t = useSelectionPropertyValue('sectionContentsHidden');
   let [i, n] = useState(void 0);
   let r = generateUUIDv4();
   let {
@@ -16949,7 +16949,7 @@ let gm = memo(({
   let f = useSelector(e => e.mirror.sceneGraphSelection);
   let _ = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardControls);
   let x = !!_?.includes(WhiteboardFeatures.DESCRIPTION);
-  let g = !!kl('locked');
+  let g = !!useSelectionPropertyValue('locked');
   let [j, b] = useState(!1);
   let [y, v] = useState(g);
   let C = _$$$3(f);
@@ -17083,7 +17083,7 @@ let g_ = memo(({
   let s = useSelector(e => e.mirror.sceneGraphSelection);
   let u = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardControls);
   let f = !!u?.includes(WhiteboardFeatures.DESCRIPTION);
-  let _ = !!kl('locked');
+  let _ = !!useSelectionPropertyValue('locked');
   let [x, g] = useState(!1);
   let [j, b] = useState(_);
   let y = _$$$3(s);
@@ -17372,7 +17372,7 @@ let gT = memo(({
   focusableDivTestId: t
 }) => {
   let i = useRef(null);
-  return kl('locked') ? jsx(W1, {
+  return useSelectionPropertyValue('locked') ? jsx(W1, {
     testID: e,
     menuRef: i,
     children: jsx(fG, {})
@@ -23631,11 +23631,11 @@ let vv = '#0D99FF';
 function vC() {
   let e = Zr('quick-create');
   let t = Zr('quick-create-diagram-sibling');
-  let i = kl('singleDiagramNodeDirection');
-  let n = kl('isDiagramRootNode');
+  let i = useSelectionPropertyValue('singleDiagramNodeDirection');
+  let n = useSelectionPropertyValue('isDiagramRootNode');
   let r = function (e, t) {
-    let i = kl('isSingleDiagramNodeSelected');
-    let n = kl('locked');
+    let i = useSelectionPropertyValue('isSingleDiagramNodeSelected');
+    let n = useSelectionPropertyValue('locked');
     let r = useSelector(e => e.mirror.appModel.activeUserAction);
     return !!(i && !n && (e || t) && r !== UserActionState.DRAGGING && r !== UserActionState.RESIZING && r !== UserActionState.ROTATING);
   }(e, t);

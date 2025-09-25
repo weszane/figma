@@ -3,7 +3,7 @@ import { useState, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { k } from "../905/582200";
 import { v as _$$v } from "../642/135773";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -12,7 +12,7 @@ import { Yr } from "../figma_app/8833";
 import { z5 } from "../905/713722";
 import { normalizeValue, isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
 import { Zr } from "../figma_app/678782";
-import { kl, lJ } from "../905/275640";
+import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
 import { cn } from "../905/959568";
 import { Ao } from "../905/748636";
 import { C } from "../642/180963";
@@ -48,10 +48,10 @@ export function $$C0({
     closeOnEsc: !0,
     ignore: [h, p]
   });
-  let f = kl("imageOverlayPaint");
+  let f = useSelectionPropertyValue("imageOverlayPaint");
   let y = normalizeValue(f ?? null) || T;
   return jsxs(Fragment, {
-    children: [jsx(_$$E, {
+    children: [jsx(AutoInteractableWrapper, {
       name: "slides_overlay_input",
       children: jsx(C, {
         isOpen: l,
@@ -105,7 +105,7 @@ function N({
       bigStep: .1,
       max: 1,
       min: 0,
-      numberInput: jsx(_$$E, {
+      numberInput: jsx(AutoInteractableWrapper, {
         name: "slides_image_overlay_opacity_slider",
         children: jsx(Y, {
           "data-tooltip": getI18nString("fullscreen.scrubbable.opacity"),
@@ -137,7 +137,7 @@ function N({
 }
 export function $$w1() {
   let e = Zr("add-image-overlay");
-  let [t, l] = lJ("imageOverlayPaint");
+  let [t, l] = useSelectionProperty("imageOverlayPaint");
   return {
     canAddOverlay: e,
     overlayPaint: t,

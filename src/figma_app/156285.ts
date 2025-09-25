@@ -15,7 +15,7 @@ import { GI, Vi } from "../905/125333";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { toArray, normalizeMixedValue } from "../905/216495";
-import { Gt } from "../905/275640";
+import { useNonMixedSelectionPropertyValue } from "../905/275640";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from "../figma_app/167249";
 import { iM } from "../figma_app/405546";
@@ -114,7 +114,7 @@ export function $$F1() {
 }
 export function $$j3() {
   let e = $$F1();
-  let t = toArray(Gt("strokeBrushGuid")).map(e => sessionLocalIDToString(e));
+  let t = toArray(useNonMixedSelectionPropertyValue("strokeBrushGuid")).map(e => sessionLocalIDToString(e));
   let r = e.filter(e => t.includes(e.guid));
   return 0 === r.length ? null : r.every(e => e.type === DistributionType.SCATTER) ? DistributionType.SCATTER : r.every(e => e.type === DistributionType.STRETCH) ? DistributionType.STRETCH : null;
 }

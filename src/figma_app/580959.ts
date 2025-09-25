@@ -45,14 +45,14 @@ import { yJ, F7 } from "../figma_app/8833";
 import { formatI18nMessage } from "../905/482208";
 import { C1, rC } from "../905/713722";
 import { ZB } from "../figma_app/451499";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { isValidValue, normalizeValue, MIXED_MARKER, valueOrFallback, isAutoMarker, isInvalidValue } from "../905/216495";
 import { isSolidType, paintManager, defaultGrayColor } from "../figma_app/385874";
 import { SK } from "../905/619652";
 import { b as _$$b } from "../figma_app/755529";
-import { kl, ER } from "../905/275640";
+import { useSelectionPropertyValue, useHasSelectedStyle } from "../905/275640";
 import { Rb, Pt as _$$Pt } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { useAppModelProperty } from "../figma_app/722362";
@@ -68,7 +68,7 @@ import { yesNoTrackingEnum } from "../figma_app/198712";
 import { K as _$$K2 } from "../905/733706";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
-import { Pd } from "../figma_app/178475";
+import { OpacityInput } from "../figma_app/178475";
 import { a2 } from "../figma_app/762558";
 import { executeWithDSAAction } from "../905/135117";
 import { om } from "../figma_app/395097";
@@ -78,7 +78,7 @@ import { zK } from "../905/182453";
 import { xm, Rz, ku } from "../905/149223";
 import { hasAliasedColorsInGradient } from "../905/706046";
 import { Kx } from "../905/401389";
-import { AN } from "../905/203369";
+import { FormattedInputVariant3 } from "../905/203369";
 import { b as _$$b3, O as _$$O2 } from "../905/916974";
 import { Zk, fI, nV } from "../figma_app/626177";
 import { CL } from "../figma_app/722913";
@@ -492,7 +492,7 @@ let $$tc5 = memo(function ({
   let X = useCallback((e, t) => {
     r([e], t, void 0, VisibilityCondition.ONLY_WHEN_NOT_DISABLED);
   }, [r]);
-  let q = kl("numSelectedByType");
+  let q = useSelectionPropertyValue("numSelectedByType");
   let J = y5(R || null);
   let Z = useCallback(() => {
     o();
@@ -575,7 +575,7 @@ export function $$tu7(e) {
   let r = useDispatch();
   let n = null != t;
   let o = useCallback(() => n, [n]);
-  let l = ER();
+  let l = useHasSelectedStyle();
   let d = normalizeValue(_$$b("guid"));
   let c = useSelector(t => {
     let r = e.selectedPropertyType === NodePropertyCategory.STROKE ? "strokePaints" : "fillPaints";
@@ -885,7 +885,7 @@ export class $$tp1 extends PureComponent {
             onClick: this.onDetachVariableClick,
             recordingKey: generateRecordingKey(this.props, "paint", "detachVariableButton"),
             htmlAttributes: {
-              onMouseDown: dG,
+              onMouseDown: stopPropagation,
               "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
               "data-tooltip-type": KindEnum.TEXT
             },
@@ -913,7 +913,7 @@ export class $$tp1 extends PureComponent {
           htmlAttributes: {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("fullscreen.properties_panel.fill.remove"),
-            onMouseDown: dG
+            onMouseDown: stopPropagation
           },
           children: jsx(_$$O, {})
         })
@@ -1238,7 +1238,7 @@ export function $$th8(e) {
       onBlur: e.onInputBlur,
       visible: e.paint.visible,
       onTypeMouseDown: t,
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       onColorChange: t => {
         let n = {
           ...e.paint,
@@ -1249,7 +1249,7 @@ export function $$th8(e) {
       },
       recordingKey: generateRecordingKey(e, "value"),
       noBorderOnFocus: !0
-    }), (!e.allowAutoAndMixed || !isAutoMarker(e.paint.color) && !isInvalidValue(e.paint.color)) && jsx(Pd, {
+    }), (!e.allowAutoAndMixed || !isAutoMarker(e.paint.color) && !isInvalidValue(e.paint.color)) && jsx(OpacityInput, {
       className: n1,
       dispatch: o,
       inputClassName: n,
@@ -1257,7 +1257,7 @@ export function $$th8(e) {
       noLeftBorder: !0,
       onBlur: e.onInputBlur,
       onFocus: e.onInputFocus,
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       onScrubBegin: e.onScrubBegin,
       onScrubEnd: e.onScrubEnd,
       onValueChange: (t, r) => {
@@ -1295,7 +1295,7 @@ export function $$tg3(e) {
     e.onTypeMouseDown?.(t);
   });
   let o = Qu();
-  return "SOLID" === e.paint.type ? jsx(AN, {
+  return "SOLID" === e.paint.type ? jsx(FormattedInputVariant3, {
     ariaLabel: getI18nString("fullscreen.color"),
     className: w()(e.visible ? EX : wh, e.appendedColorInputClassname),
     formatter: t,
@@ -1765,7 +1765,7 @@ $$t_2.displayName = "Paint";
             onClick: this.onDetachVariableClick,
             recordingKey: generateRecordingKey(this.props, "paint", "detachVariableButton"),
             htmlAttributes: {
-              onMouseDown: dG,
+              onMouseDown: stopPropagation,
               "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
               "data-tooltip-type": KindEnum.TEXT
             },

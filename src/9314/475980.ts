@@ -55,7 +55,7 @@ import { $4, fI, K0, ks, Zk } from '../figma_app/626177';
 import { PrimaryWorkflowEnum } from '../figma_app/633080';
 import { groupStylesByType, sortStyles, STYLE_TYPES, getStyleTypeLabel, getStyleTypeLabelPlural } from '../figma_app/646357';
 import { useAppModelProperty } from '../figma_app/722362';
-import { dG, ft } from '../figma_app/753501';
+import { stopPropagation, shouldHandleMultiTouchOrPressure } from '../figma_app/753501';
 import { DesignGraphElements, Fullscreen, LayoutTabType } from '../figma_app/763686';
 import { parsePxInt } from '../figma_app/783094';
 import { memoizeByArgs } from '../figma_app/815945';
@@ -444,7 +444,7 @@ function eu({
         'htmlAttributes': {
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': a ? getI18nString('design_systems.styles.edit_style') : getI18nString('design_systems.styles.view_style'),
-          'onMouseDown': dG,
+          'onMouseDown': stopPropagation,
           'tabIndex': 0,
           'onKeyDown': e => {
             (e.key === 'Enter' || e.key === 'Space') && (e.preventDefault(), q());
@@ -943,7 +943,7 @@ function eY({
     let e = () => {
       !B && (a(setLocalStyleSelection(null)), i.isShown && (a(sw()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID)));
     };
-    let t = ft();
+    let t = shouldHandleMultiTouchOrPressure();
     t ? window.addEventListener('pointerdown', e) : window.addEventListener('mousedown', e);
     return () => {
       t ? window.removeEventListener('pointerdown', e) : window.removeEventListener('mousedown', e);

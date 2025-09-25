@@ -14,7 +14,7 @@ import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
 import { selectInstanceKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
-import { e as _$$e } from "../905/579635";
+import { conditionalWrapper } from "../905/579635";
 import { Yj, kt, xA, _F } from "../figma_app/92985";
 import { $ } from "../905/330495";
 import { u as _$$u } from "../figma_app/398802";
@@ -66,7 +66,7 @@ export function $$A0(e) {
   }, [x, N]);
   return !N && A && "loaded" !== A.status ? jsx("div", {
     className: "ui3_instance_attribution_button--loadingPlaceholder--6uYUv"
-  }) : text && icon ? jsx(_$$e, {
+  }) : text && icon ? jsx(conditionalWrapper, {
     condition: !!e.isInDesignSAP,
     wrapper: e => jsx(_$$u, {
       children: e

@@ -32,7 +32,7 @@ import { useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { hideDropdownAction } from "../905/929976";
 import { updateMultiplayerStateThunk } from "../figma_app/91703";
 import { postUserFlag } from "../905/985254";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { hx } from "../figma_app/290668";
 import { isIntegrationContext } from "../figma_app/469876";
@@ -233,7 +233,7 @@ let ej = forwardRef(function (e, t) {
       "aria-label": getI18nString("search.search_file_users"),
       autoFocus: !0,
       onChange: setQuery,
-      onClick: dG,
+      onClick: stopPropagation,
       placeholder: getI18nString("collaboration.spotlight.menu.search.placeholder"),
       spellCheck: !1,
       value: query
@@ -676,7 +676,7 @@ let $$eO0 = memo(function (e) {
   let ec = useMemo(() => I?.filter(e => !ed.some(t => e.userID === t.userID) && e.userID !== currentUser.userID), [ed, I, currentUser]);
   let eu = trackFileEventWithUser();
   let ep = useCallback(e => {
-    if (dG(e), !_.current) return;
+    if (stopPropagation(e), !_.current) return;
     x.current = _.current.getBoundingClientRect();
     let t = dropdownShown?.type === eA;
     M(toggleDropdown({
@@ -773,7 +773,7 @@ let $$eO0 = memo(function (e) {
       "data-tooltip-offset-y": _.current && f.current ? f.current.clientHeight / 2 - _.current.clientHeight / 2 : 0,
       "data-tooltip-type": KindEnum.TEXT,
       id: "multiplayer-toolbar-container",
-      onClick: dG,
+      onClick: stopPropagation,
       onKeyDown: e => {
         hx({
           e,
@@ -793,7 +793,7 @@ let $$eO0 = memo(function (e) {
       },
       onMouseOverCapture: e => {
         G(!0);
-        dG(e);
+        stopPropagation(e);
       },
       ...eR,
       children: [jsx("span", {

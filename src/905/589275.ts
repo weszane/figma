@@ -36,7 +36,7 @@ import { x as _$$x } from "../905/587214";
 import { Zl } from "../905/211621";
 import { SecureLink } from "../figma_app/637027";
 import { zE } from "../905/8732";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { TS } from "../905/959568";
 import { fieldContainer, fieldContainerFaded, label, learnMore, buttons, thumbnailGrid, contextMenu, warningPublish, warningIcon, listItemContainer, skeletonThumbnailList, skeletonText, skeletonThumbnailGrid, outerContainerBorderBottom, outerContainer, listContainer, gridContainer } from "../figma_app/527659";
 function F({
@@ -155,7 +155,7 @@ function Y(e) {
       children: jsx(SecureLink, {
         href: "https://help.figma.com/hc/articles/5579474826519-Explore-component-properties#preferred",
         target: "_blank",
-        onClick: dG,
+        onClick: stopPropagation,
         trusted: !0,
         children: renderI18nText("general.learn_more")
       })

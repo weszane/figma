@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { IconButton } from "../905/443068";
 import { F } from "../905/427107";
 import { getI18nString } from "../905/303541";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { H } from "../905/777871";
@@ -30,7 +30,7 @@ export function $$p0({
     disabled: e.stops.length < 2,
     "aria-label": getI18nString("fullscreen.properties_panel.flip_gradient"),
     htmlAttributes: {
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       "data-tooltip": getI18nString("fullscreen.properties_panel.flip_gradient"),
       "data-tooltip-type": KindEnum.TEXT
     },

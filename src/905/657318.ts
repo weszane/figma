@@ -20,7 +20,7 @@ import v from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E2 } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { Point } from "../905/736624";
 import { c$ } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -287,7 +287,7 @@ class eA extends RecordingPureComponent {
     }) : null;
   }
   renderAdvancedSettings() {
-    return this.props.onToggleAdvancedSettings && this.props.advancedSettingsTooltip ? jsx(_$$E2, {
+    return this.props.onToggleAdvancedSettings && this.props.advancedSettingsTooltip ? jsx(AutoInteractableWrapper, {
       name: "toggle_advanced_settings_button",
       children: jsx(IconButton, {
         onClick: this.props.onToggleAdvancedSettings,
@@ -350,7 +350,7 @@ class eA extends RecordingPureComponent {
       }),
       children: [0 === t && null != this.props.styleVisibility && jsx("span", {
         className: v9,
-        children: jsx(_$$E2, {
+        children: jsx(AutoInteractableWrapper, {
           name: "toggle_style_visibility_button",
           children: jsx(_$$B, {
             visible: this.props.styleVisibility.styleIsVisible,
@@ -359,7 +359,7 @@ class eA extends RecordingPureComponent {
           })
         })
       }), !this.props.isUI3 && this.renderAdvancedSettings(), this.renderStyleButtons(t), this.props.insetRightButton, jsx(zK.Consumer, {
-        children: e => !e && 0 !== t && !this.props.hideTextStyleControl && jsx(_$$E2, {
+        children: e => !e && 0 !== t && !this.props.hideTextStyleControl && jsx(AutoInteractableWrapper, {
           name: "toggle_style_or_variables_picker",
           children: jsx("span", {
             className: `${this.props.isEmpty && c ? "" : DV} ${N4}`,
@@ -381,7 +381,7 @@ class eA extends RecordingPureComponent {
       }), jsx("div", {
         className: LG,
         children: 0 !== t && !!i && jsxs(Fragment, {
-          children: [jsx(_$$E2, {
+          children: [jsx(AutoInteractableWrapper, {
             name: "add_property_button",
             children: jsx("span", {
               className: N4,

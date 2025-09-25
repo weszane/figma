@@ -162,7 +162,7 @@ import { DashboardSection } from '../figma_app/650409';
 import { QN, v4 } from '../figma_app/655139';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { AuthTypeEnum, UserTypeEnum, ApprovalStatusEnum, USEURegionEnum } from '../figma_app/736948';
-import { dG } from '../figma_app/753501';
+import { stopPropagation } from '../figma_app/753501';
 import { ls, V0 } from '../figma_app/755395';
 import { Rs as _$$Rs } from '../figma_app/761870';
 import { MeasurementUnit } from '../figma_app/763686';
@@ -2020,7 +2020,7 @@ function aM({
             'onClick': () => {
               e.unpinPlugin(t.plugin_id);
             },
-            'onMouseDown': dG,
+            'onMouseDown': stopPropagation,
             'recordingKey': 'overflow_pins',
             'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip': getI18nString('settings_tab.pinned_plugins_remove'),

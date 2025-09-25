@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { F } from "../905/680873";
 import { o3, nt } from "../905/226610";
 import { U2, MF, ET, fK, R8 } from "../905/939257";
-import { f as _$$f } from "../905/896141";
+import { InteractivityContext } from "../905/896141";
 import { C } from "../905/213457";
 export function $$d0({
   name: e,
@@ -38,7 +38,7 @@ export function $$d0({
     depth: trackablePath.length,
     getTooltipText: _
   });
-  return jsx(_$$f.Provider, {
+  return jsx(InteractivityContext.Provider, {
     value: p,
     children: c
   });

@@ -15,7 +15,7 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { getFileKey } from "../905/412913";
-import { wo } from "../figma_app/753501";
+import { preventDefault } from "../figma_app/753501";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -128,7 +128,7 @@ export function $$F1({
       children: [s && jsx(LoadingSpinner, {
         className: _$$S
       }), jsx(oW, {
-        onDragStart: wo,
+        onDragStart: preventDefault,
         className: uP,
         src: t,
         alt: e,

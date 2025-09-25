@@ -120,7 +120,7 @@ import { logError } from "../905/714362";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { updateHoveredNode, replaceSelection } from "../figma_app/741237";
 import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback, normalizeValue } from "../905/216495";
-import { A5, lJ as _$$lJ, kl, pw, DQ, Gt, fC } from "../905/275640";
+import { useUpdateSelectionProperty, useSelectionProperty, useSelectionPropertyValue, useSelectedStyleOrSelectionPropertyValues, useNonMixedSelectedStyleOrSelectionPropertyValues, useNonMixedSelectionPropertyValue, useNonMixedSelectionPropertyValues } from "../905/275640";
 import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Yh } from "../figma_app/357047";
 import { cn as _$$cn } from "../905/959568";
@@ -143,7 +143,7 @@ import { useDebounce } from 'use-debounce';
 import { OI, Dm, Yr } from "../figma_app/8833";
 import { useCachedSubtree } from "../figma_app/679183";
 import { Bf } from "../figma_app/249941";
-import { W0, YZ, xW } from "../figma_app/178475";
+import { TimeInput, NumericDropdownWithIcon, ScaleInput } from "../figma_app/178475";
 import { ow as _$$ow, a3 as _$$a } from "../905/188421";
 import { c$ as _$$c$, tV as _$$tV, l6 as _$$l6, sK as _$$sK } from "../905/794875";
 import { gm, pW } from "../figma_app/335781";
@@ -252,7 +252,7 @@ import { S as _$$S } from "../figma_app/316019";
 import { B as _$$B3 } from "../905/946243";
 import { TabLoop } from "../905/718764";
 import { l as _$$l8 } from "../905/241412";
-import { E as _$$E5 } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { k as _$$k7 } from "../905/582200";
 import { hx } from "../figma_app/290668";
 import { Mk, sP as _$$sP } from "../897/50897";
@@ -389,7 +389,7 @@ import { M as _$$M } from "../6388/719644";
 import { A as _$$A0 } from "../svg/106736";
 import { A as _$$A1 } from "../svg/392615";
 import { a as _$$a4 } from "../905/558168";
-import { Qr } from "../figma_app/98483";
+import { getShownTransformControl } from "../figma_app/98483";
 import { E as _$$E6 } from "../905/235326";
 import { customHistory } from "../905/612521";
 import { F as _$$F3 } from "../897/590880";
@@ -2970,7 +2970,7 @@ function nj({
     let t = e.mirror.selectionProperties.objectAnimationDuration;
     return isValidValue(t) && void 0 !== t ? Math.round(1e3 * t) / 1e3 : t;
   });
-  let a = A5("objectAnimationDuration");
+  let a = useUpdateSelectionProperty("objectAnimationDuration");
   let o = xl();
   return void 0 === l ? null : jsx(_LabelInputRow2, {
     labelTx: renderI18nText("slides.properties_panel.object_animations.duration"),
@@ -2983,7 +2983,7 @@ function nj({
         value: {
           chevron: _$$t2
         },
-        children: jsx(W0, {
+        children: jsx(TimeInput, {
           ariaLabel: getI18nString("slides.properties_panel.slide_transition.duration"),
           "data-tooltip": getI18nString("slides.properties_panel.object_animations.duration"),
           "data-tooltip-type": KindEnum.TEXT,
@@ -3030,7 +3030,7 @@ let nT = new class {
 function nS({
   recordingKey: e
 }) {
-  let [t, i] = _$$lJ("objectAnimationPhase");
+  let [t, i] = useSelectionProperty("objectAnimationPhase");
   let n = _$$sQ();
   return t ? jsx(_LabelInputRow3, {
     labelTx: renderI18nText("slides.properties_panel.object_animations.animation_phase"),
@@ -3106,7 +3106,7 @@ function nR({
   recordingKey: e
 }) {
   let t = useSelector(selectSingleSelectedNode);
-  let [i, n] = _$$lJ("objectAnimationType");
+  let [i, n] = useSelectionProperty("objectAnimationType");
   let l = _$$tx2();
   if (!i) return null;
   let o = e => {
@@ -3864,7 +3864,7 @@ function nZ({
   recordingKey: e
 }) {
   let t;
-  let i = kl("objectAnimationType");
+  let i = useSelectionPropertyValue("objectAnimationType");
   let n = isValidValue(i) && void 0 !== i && "NONE" !== i;
   let l = useSelector(e => e.mirror.sceneGraphSelection);
   let a = _$$l5();
@@ -5008,7 +5008,7 @@ function sg({
 }) {
   let i = useDispatch();
   let n = Um();
-  return jsx(_$$E5, {
+  return jsx(AutoInteractableWrapper, {
     name: "slides_delay_dropdown",
     children: jsx(_$$ow, {
       value: {
@@ -5019,7 +5019,7 @@ function sg({
         value: {
           chevron: _$$t2
         },
-        children: jsx(W0, {
+        children: jsx(TimeInput, {
           "data-tooltip": getI18nString("slides.properties_panel.slide_transition.delay"),
           "data-tooltip-type": KindEnum.TEXT,
           dispatch: i,
@@ -5051,7 +5051,7 @@ function sb({
 }) {
   let n = useDispatch();
   let l = Um();
-  return jsx(_$$E5, {
+  return jsx(AutoInteractableWrapper, {
     name: "slides_duration_dropdown",
     children: jsx(_$$ow, {
       value: {
@@ -5062,7 +5062,7 @@ function sb({
         value: {
           chevron: _$$t2
         },
-        children: jsx(W0, {
+        children: jsx(TimeInput, {
           ariaLabel: getI18nString("slides.properties_panel.slide_transition.duration"),
           "data-tooltip": getI18nString("slides.properties_panel.slide_transition.duration"),
           "data-tooltip-type": KindEnum.TEXT,
@@ -5093,7 +5093,7 @@ function sT({
   onChange: t,
   recordingKey: i
 }) {
-  return jsx(_$$E5, {
+  return jsx(AutoInteractableWrapper, {
     name: "slide_transition_easing",
     children: jsxs(_$$bL, {
       value: e,
@@ -5127,7 +5127,7 @@ function sN({
   onChange: t,
   recordingKey: i
 }) {
-  return jsx(_$$E5, {
+  return jsx(AutoInteractableWrapper, {
     name: "slide_transition_style",
     children: jsxs(_$$bL, {
       value: e,
@@ -5391,7 +5391,7 @@ function sU({
           onChange: o,
           recordingKey: generateRecordingKey(i, "styleControl")
         })
-      }), _ && jsx(_$$E5, {
+      }), _ && jsx(AutoInteractableWrapper, {
         name: "slide_transition_direction",
         children: jsx(LabelInputRow, {
           labelTx: renderI18nText("slides.properties_panel.slide_transition.direction"),
@@ -5496,7 +5496,7 @@ function as({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let [i] = _$$lJ("slideNumber");
+  let [i] = useSelectionProperty("slideNumber");
   let n = "SLIDE" === i || "SECTION" === i || "SUBSECTION" === i || "TOTAL_WITHIN_DECK" === i || "TOTAL_WITHIN_SECTION" === i;
   let l = isInvalidValue(i);
   let a = "TOTAL_WITHIN_DECK" === i || "TOTAL_WITHIN_SECTION" === i;
@@ -5530,10 +5530,10 @@ function aa({
 }) {
   let t = useDispatch();
   let i = Um();
-  let [n, l] = _$$lJ("slideNumber");
+  let [n, l] = useSelectionProperty("slideNumber");
   return jsx(No, {
     label: renderI18nText("slides.properties_panel.slide_number.slide_number_type"),
-    input: jsx(_$$E5, {
+    input: jsx(AutoInteractableWrapper, {
       name: "slide_number_count_selector",
       children: jsxs(_$$l6, {
         id: "slide-number-select",
@@ -5574,10 +5574,10 @@ let ao = {
 function ad({
   includeTotal: e
 }) {
-  let [t, i] = _$$lJ("slideNumber");
+  let [t, i] = useSelectionProperty("slideNumber");
   return jsx(No, {
     label: renderI18nText("slides.properties_panel.slide_number.include_total"),
-    input: jsx(_$$E5, {
+    input: jsx(AutoInteractableWrapper, {
       name: "slide_number_include_total_switch",
       children: jsx(_$$d5, {
         label: jsx(HiddenLabel, {
@@ -5596,8 +5596,8 @@ function ac({
 }) {
   let t = useDispatch();
   let i = Um();
-  let [n] = _$$lJ("slideNumber");
-  let [o, d] = _$$lJ("slideNumberSeparator");
+  let [n] = useSelectionProperty("slideNumber");
+  let [o, d] = useSelectionProperty("slideNumberSeparator");
   let u = function (e) {
     let t = n6();
     let {
@@ -5636,7 +5636,7 @@ function ac({
   }(n);
   return jsx(No, {
     label: renderI18nText("slides.properties_panel.slide_number.format"),
-    input: jsx(_$$E5, {
+    input: jsx(AutoInteractableWrapper, {
       name: "slide_number_format_selector",
       children: jsxs(_$$l6, {
         id: "slide-number-format",
@@ -5668,8 +5668,8 @@ function ap({
 }) {
   let t = useDispatch();
   let i = Um();
-  let [n, l] = _$$lJ("codeBlockLanguage");
-  let [a, o] = _$$lJ("codeBlockTheme");
+  let [n, l] = useSelectionProperty("codeBlockLanguage");
+  let [a, o] = useSelectionProperty("codeBlockTheme");
   n || console.warn("<SlidesCodeBlockPanel /> expected selection property codeBlockLanguage");
   return jsx(_$$k7, {
     name: "slides_code_block_panel",
@@ -5793,14 +5793,14 @@ function a_({
   let I = So(y, !0);
   let {
     maskType
-  } = pw("maskType", "numSelected");
+  } = useSelectedStyleOrSelectionPropertyValues("maskType", "numSelected");
   let {
     areOnlyResponsiveSetsSelected,
     pluginRelaunchData,
     numSelected
-  } = DQ("pluginRelaunchData", "areOnlyResponsiveSetsSelected", "numSelected");
-  let O = kl("exportSettings");
-  let A = Gt("stateGroupSelectionInfo");
+  } = useNonMixedSelectedStyleOrSelectionPropertyValues("pluginRelaunchData", "areOnlyResponsiveSetsSelected", "numSelected");
+  let O = useSelectionPropertyValue("exportSettings");
+  let A = useNonMixedSelectionPropertyValue("stateGroupSelectionInfo");
   let L = SJ();
   let P = useAppModelPropsShallow("currentPage", "currentSelectedProperty");
   return y[ItemType.FRAME_PRESETS] ? jsx(TabLoop, {
@@ -6035,14 +6035,14 @@ function ay({
     numSelected,
     pluginRelaunchData,
     areOnlyResponsiveSetsSelected
-  } = DQ("numSelected", "pluginRelaunchData", "areOnlyResponsiveSetsSelected");
+  } = useNonMixedSelectedStyleOrSelectionPropertyValues("numSelected", "pluginRelaunchData", "areOnlyResponsiveSetsSelected");
   let {
     maskType
-  } = pw("maskType");
-  let L = kl("exportSettings");
+  } = useSelectedStyleOrSelectionPropertyValues("maskType");
+  let L = useSelectionPropertyValue("exportSettings");
   let {
     stateGroupSelectionInfo
-  } = fC("stateGroupSelectionInfo");
+  } = useNonMixedSelectionPropertyValues("stateGroupSelectionInfo");
   let D = SJ();
   return jsxs(TabLoop, {
     children: [0 === Object.keys(g).length && jsx(Mw, {
@@ -6272,7 +6272,7 @@ let a0 = memo(function ({
   let t = useSelector(selectSceneGraphSelectionKeys);
   let i = useSelector(selectInstanceKeys);
   let n = useSelector(Z3);
-  let l = normalizeValue(kl("resettableInstanceOverrides"));
+  let l = normalizeValue(useSelectionPropertyValue("resettableInstanceOverrides"));
   let {
     onlyInstances,
     onlyInstanceSublayers
@@ -6454,7 +6454,7 @@ function oU({
       recordingKey: "subscribedStylePicker",
       stylePickerListLayout: !0,
       styleType: StyleType.TEXT
-    }), jsx(_$$E5, {
+    }), jsx(AutoInteractableWrapper, {
       name: "slides_toggle_library_text_style_picker",
       children: jsx(_$$d6, {
         "aria-expanded": !!d,
@@ -6490,8 +6490,8 @@ function o$({
   let u = _$$s6();
   let p = _$$Xo(u);
   let x = useMemo(() => e?.node_id && p.some(t => t.node_id === e.node_id), [e?.node_id, p]);
-  let h = kl("fontFamily");
-  let m = kl("fontSize");
+  let h = useSelectionPropertyValue("fontFamily");
+  let m = useSelectionPropertyValue("fontSize");
   let _ = kO(u);
   let g = isInvalidValue(h) || isInvalidValue(m);
   let y = !_ && !g;
@@ -6715,8 +6715,8 @@ function oH({
   closePicker: e,
   recordingKey: t
 }) {
-  let i = kl("fontFamily");
-  let n = kl("fontSize");
+  let i = useSelectionPropertyValue("fontFamily");
+  let n = useSelectionPropertyValue("fontSize");
   return jsxs("div", {
     className: cssBuilderInstance.pb4.$,
     children: [jsx("div", {
@@ -7080,14 +7080,14 @@ function o5({
   recordingKey: n
 }) {
   let a = useDispatch();
-  let o = valueOrFallback(kl("missingFont"), !1);
+  let o = valueOrFallback(useSelectionPropertyValue("missingFont"), !1);
   let d = !!fullscreenValue?.isFontListLoaded();
   let u = o || !d;
-  let p = kl("fontFamily");
-  let x = kl("fontStyle");
-  let h = kl("fontSize");
-  let m = kl("lineHeight");
-  let _ = kl("letterSpacing");
+  let p = useSelectionPropertyValue("fontFamily");
+  let x = useSelectionPropertyValue("fontStyle");
+  let h = useSelectionPropertyValue("fontSize");
+  let m = useSelectionPropertyValue("lineHeight");
+  let _ = useSelectionPropertyValue("letterSpacing");
   let {
     bigNudgeAmount,
     smallNudgeAmount
@@ -7131,7 +7131,7 @@ function o5({
     showPlaceholder: !1,
     versionsForStyles: t
   }) : null;
-  let N = p && x ? jsx(_$$E5, {
+  let N = p && x ? jsx(AutoInteractableWrapper, {
     name: "slides_font_style",
     children: jsx(zz, {
       dropdownAlignment: "right",
@@ -7160,7 +7160,7 @@ function o5({
       versionsForStyles: t
     })
   }) : null;
-  let k = h ? jsx(_$$E5, {
+  let k = h ? jsx(AutoInteractableWrapper, {
     name: "slides_font_size",
     children: jsx(_$$Z6, {
       id: "slides-type-panel-font-size",
@@ -7299,7 +7299,7 @@ function o6({
   trackingName: s,
   recordingKey: a
 }) {
-  return jsx(_$$E5, {
+  return jsx(AutoInteractableWrapper, {
     name: s,
     children: jsx(ButtonPrimitive, {
       className: iG()("slides_type_panel--formatButton--71QdB", _$$t3, {
@@ -7322,17 +7322,17 @@ function o6({
 function o8({
   recordingKey: e
 }) {
-  let t = kl("textAlignVertical") || MIXED_MARKER;
+  let t = useSelectionPropertyValue("textAlignVertical") || MIXED_MARKER;
   return jsx(_$$g4, {
     leftLabel: null,
-    leftInput: jsx(_$$E5, {
+    leftInput: jsx(AutoInteractableWrapper, {
       name: "slides_text_align_horizontal",
       children: jsx(jw, {
         recordingKey: generateRecordingKey(e, "textAlignHorizontal")
       })
     }),
     rightLabel: null,
-    rightInput: jsx(_$$E5, {
+    rightInput: jsx(AutoInteractableWrapper, {
       name: "slides_text_align_vertical",
       children: jsx(Ln, {
         textAlignVertical: t,
@@ -7599,10 +7599,10 @@ function df({
     presetOptions,
     onChange
   } = function () {
-    let [e, t] = _$$lJ("dashPattern");
-    let [i, n] = _$$lJ("strokePaints");
+    let [e, t] = useSelectionProperty("dashPattern");
+    let [i, n] = useSelectionProperty("strokePaints");
     let s = i ? isValidValue(i) ? i[0] : MIXED_MARKER : void 0;
-    let a = kl("numSelectedByType");
+    let a = useSelectionPropertyValue("numSelectedByType");
     let o = a && isValidValue(a) && Kl(a, ["LINE", "TABLE", "CONNECTOR"]);
     let d = useMemo(() => ({
       NONE: {
@@ -7655,8 +7655,8 @@ function df({
     disabled,
     onChange: _onChange
   } = function () {
-    let [e, t] = _$$lJ("strokeWeight");
-    let i = kl("numSelectedByType");
+    let [e, t] = useSelectionProperty("strokeWeight");
+    let i = useSelectionPropertyValue("numSelectedByType");
     return {
       strokeWeight: e,
       borderWidthPresetOptions: d_,
@@ -7673,10 +7673,10 @@ function df({
     inheritStyleName,
     onChange: _onChange2
   } = function () {
-    let [e, t] = _$$lJ("strokePaints");
-    let [i] = _$$lJ("inheritFillStyleKeyForStroke");
-    let [n] = _$$lJ("inheritFillStyleNameForStroke");
-    let [r] = _$$lJ("styleIdForStrokeFill");
+    let [e, t] = useSelectionProperty("strokePaints");
+    let [i] = useSelectionProperty("inheritFillStyleKeyForStroke");
+    let [n] = useSelectionProperty("inheritFillStyleNameForStroke");
+    let [r] = useSelectionProperty("styleIdForStrokeFill");
     return {
       paint: e ? isValidValue(e) ? e[0] : MIXED_MARKER : void 0,
       inheritStyleId: r,
@@ -7709,7 +7709,7 @@ function df({
           recordingKey: e
         }),
         rightLabel: renderI18nText("slides.properties_panel.border_panel.width_slider_tooltip"),
-        rightInput: jsx(_$$E5, {
+        rightInput: jsx(AutoInteractableWrapper, {
           name: "slides_corner_radius_dropdown",
           children: jsx(dv, {
             dropdownId: "border-width-select",
@@ -7785,7 +7785,7 @@ function dv({
     bigNudgeAmount
   } = getNudgeAmounts();
   return jsx(dT, {
-    children: jsx(YZ, {
+    children: jsx(NumericDropdownWithIcon, {
       bigNudgeAmount,
       "data-tooltip": getI18nString("slides.properties_panel.border_panel.width_slider_tooltip"),
       "data-tooltip-type": KindEnum.TEXT,
@@ -7837,11 +7837,11 @@ class dC extends X9 {
 function dw({
   recordingKey: e
 }) {
-  return Qr(GeometricValues.CORNER_RADIUS) ? jsx(_$$k7, {
+  return getShownTransformControl(GeometricValues.CORNER_RADIUS) ? jsx(_$$k7, {
     name: "slides_corner_panel",
     children: jsx(bz, {
       titleTx: renderI18nText("slides.properties_panel.corner"),
-      input: jsx(_$$E5, {
+      input: jsx(AutoInteractableWrapper, {
         name: "slides_corner_radius_dropdown",
         children: jsx(dO, {
           dropdownId: "corner-radius-select",
@@ -7867,7 +7867,7 @@ function dO({
     smallNudgeAmount,
     bigNudgeAmount
   }), [smallNudgeAmount, bigNudgeAmount]);
-  let [p, x] = _$$lJ("cornerRadius");
+  let [p, x] = useSelectionProperty("cornerRadius");
   let h = useCallback(e => {
     x(e);
   }, [x]);
@@ -7882,7 +7882,7 @@ function dO({
       value: {
         chevron: _$$t2
       },
-      children: jsxs(YZ, {
+      children: jsxs(NumericDropdownWithIcon, {
         "data-tooltip": getI18nString("slides.properties_panel.corner_radius"),
         "data-tooltip-type": KindEnum.TEXT,
         dispatch: n,
@@ -7977,7 +7977,7 @@ function dU({
     children: [jsx("label", {
       id: u,
       children: renderI18nText("slides.properties_panel.embeddable_prototype.flow_label")
-    }), jsx(_$$E5, {
+    }), jsx(AutoInteractableWrapper, {
       name: "slide_embeddable_prototype_flow_selector",
       children: jsx(_$$l6, {
         ariaLabelledBy: u,
@@ -8041,7 +8041,7 @@ function dK({
     className: dM,
     children: [jsx("label", {
       children: renderI18nText("slides.properties_panel.embeddable_prototype.device_frame_label")
-    }), jsx(_$$E5, {
+    }), jsx(AutoInteractableWrapper, {
       name: "slides_embeddable_prototype_device_frame_switch",
       children: jsx(_$$d5, {
         label: jsx(HiddenLabel, {
@@ -8077,7 +8077,7 @@ function cr({
     ignore: [d, u]
   });
   return jsxs(Fragment, {
-    children: [jsx(_$$E5, {
+    children: [jsx(AutoInteractableWrapper, {
       name: "slides_blur_input",
       children: jsx(_$$C2, {
         isOpen: i,
@@ -8117,7 +8117,7 @@ function cl({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let [i, n] = _$$lJ("blur");
+  let [i, n] = useSelectionProperty("blur");
   let a = useCallback(e => n(100 * e), [n]);
   return jsx(_$$k7, {
     name: "slides_blur_controls",
@@ -8126,7 +8126,7 @@ function cl({
       bigStep: 0.1,
       max: 1,
       min: 0,
-      numberInput: jsx(_$$E5, {
+      numberInput: jsx(AutoInteractableWrapper, {
         name: "slides_blur_strength_input",
         children: jsx(_$$Y8, {
           "data-tooltip": getI18nString("slides.properties_panel.blur.strength"),
@@ -8229,7 +8229,7 @@ function co({
         }) : null, jsx(_$$k8, {
           isVisible: !1,
           wrapperClassName: iG()(cssBuilderInstance.absolute.top0.bottom0.left0.right0.flex.itemsCenter.justifyCenter.$, CL),
-          children: jsx(_$$E5, {
+          children: jsx(AutoInteractableWrapper, {
             name: "slides_media_upload",
             children: jsx(_$$v7, {
               uploadImagePaint: () => {
@@ -8251,7 +8251,7 @@ function co({
     }), R ? null : jsxs(Fragment, {
       children: [jsx("div", {
         className: cssBuilderInstance.py4.pr8.pl16.$,
-        children: jsx(_$$E5, {
+        children: jsx(AutoInteractableWrapper, {
           name: "slides_image_scale_mode",
           children: jsxs(_$$bL, {
             value: e.imageScaleMode ?? "FILL",
@@ -8318,10 +8318,10 @@ function cd() {
     getTriggerProps,
     manager
   } = setupMenu();
-  let i = kl("videoMediaLoop");
-  let n = kl("videoAutoplay");
-  let s = kl("videoMuted");
-  let a = kl("videoShowControls");
+  let i = useSelectionPropertyValue("videoMediaLoop");
+  let n = useSelectionPropertyValue("videoAutoplay");
+  let s = useSelectionPropertyValue("videoMuted");
+  let a = useSelectionPropertyValue("videoShowControls");
   let o = useMemo(() => {
     let e = [];
     !0 === i && e.push("mediaLoop");
@@ -8418,15 +8418,15 @@ function ch({
   let t = useSelector(e => e.mirror.selectionProperties.numSelectedByType);
   let i = !!t && OU(t, ["SLIDE"]);
   let n = t && Kl(t, ["SLIDE", "TEXT"]);
-  let [o] = _$$lJ("fillsType");
+  let [o] = useSelectionProperty("fillsType");
   let d = useSelector(e => {
     let t = e.mirror.selectionProperties.fillPaints;
     return isInvalidValue(t) ? MIXED_MARKER : t?.[0];
   });
-  let [u] = _$$lJ("imageOverlayPaint");
-  let [p] = _$$lJ("inheritFillStyleKey");
-  let [x] = _$$lJ("inheritFillStyleName");
-  let [h] = _$$lJ("styleIdForFill");
+  let [u] = useSelectionProperty("imageOverlayPaint");
+  let [p] = useSelectionProperty("inheritFillStyleKey");
+  let [x] = useSelectionProperty("inheritFillStyleName");
+  let [h] = useSelectionProperty("styleIdForFill");
   let _ = useMemo(() => ({
     NONE: {
       displayText: getI18nString("slides.properties_panel.fill.fill_type_none"),
@@ -8638,7 +8638,7 @@ function cv({
     children: [jsx("label", {
       id: a,
       children: renderI18nText("slides.properties_panel.interactive_widget.theme_selector_label")
-    }), jsx(_$$E5, {
+    }), jsx(AutoInteractableWrapper, {
       name: "slides_interactive_widget_theme_selector",
       children: jsxs(_$$l6, {
         ariaLabelledBy: a,
@@ -8680,7 +8680,7 @@ function cS({
     className: dM,
     children: [jsx("label", {
       children: renderI18nText("slides.properties_panel.interactive_widget.background_label")
-    }), jsx(_$$E5, {
+    }), jsx(AutoInteractableWrapper, {
       name: "slides_interactive_widget_background_switch",
       children: jsx(_$$d5, {
         label: jsx(HiddenLabel, {
@@ -8699,7 +8699,7 @@ function cC({
 }) {
   let t = useDispatch();
   let i = Um();
-  let n = kl("hyperlink");
+  let n = useSelectionPropertyValue("hyperlink");
   let o = normalizeValue(n);
   let d = null;
   o && void 0 !== o.guid ? d = {
@@ -8809,7 +8809,7 @@ function cL({
 }) {
   let t = useDispatch();
   let i = Um();
-  let [n, l] = _$$lJ("opacity");
+  let [n, l] = useSelectionProperty("opacity");
   let a = new cO();
   let o = void 0 === n || isInvalidValue(n) ? MIXED_MARKER : n;
   let d = jsx(_$$N2, {});
@@ -8817,7 +8817,7 @@ function cL({
     name: "slides_opacity_panel",
     children: jsx(bz, {
       titleTx: renderI18nText("slides.properties_panel.opacity"),
-      input: jsx(_$$E5, {
+      input: jsx(AutoInteractableWrapper, {
         name: "slides_opacity_dropdown",
         children: jsx(_$$ow, {
           value: {
@@ -8828,7 +8828,7 @@ function cL({
             value: {
               chevron: _$$t2
             },
-            children: jsx(xW, {
+            children: jsx(ScaleInput, {
               "data-tooltip": getI18nString("slides.properties_panel.opacity"),
               "data-tooltip-type": KindEnum.TEXT,
               dispatch: t,
@@ -8874,7 +8874,7 @@ function cM({
   let p = selectCurrentFile();
   let {
     numSelectedByType
-  } = fC("numSelectedByType");
+  } = useNonMixedSelectionPropertyValues("numSelectedByType");
   let h = SJ();
   let {
     jsxNodeId

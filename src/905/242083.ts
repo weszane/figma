@@ -281,7 +281,7 @@ import { jx } from '../figma_app/171569';
 import { j as _$$j2 } from '../figma_app/172303';
 import { v as _$$v } from '../figma_app/176476';
 import { XT as _$$XT, _I } from '../figma_app/176634';
-import { Ht, j5 } from '../figma_app/178475';
+import { NumericInput, ScrubbableInput } from '../figma_app/178475';
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 import { parseHex } from '../figma_app/191804';
 import { LC } from '../figma_app/192142';
@@ -1748,7 +1748,7 @@ function nW() {
         children: [jsx(JU, {
           className: 'perf_tools--label--LWmjv',
           children: renderI18nText('fake_mp.modal.cursors')
-        }), jsx(Ht, {
+        }), jsx(NumericInput, {
           'className': nL,
           'value': e,
           'onValueChange': t,
@@ -1760,7 +1760,7 @@ function nW() {
             className: nO,
             svg: _$$A3
           })
-        }), jsx(j5, {
+        }), jsx(ScrubbableInput, {
           'className': nL,
           'value': i,
           'onValueChange': n,
@@ -1772,7 +1772,7 @@ function nW() {
             className: nO,
             svg: _$$A2
           })
-        }), jsx(Ht, {
+        }), jsx(NumericInput, {
           'className': nL,
           'value': r,
           'onValueChange': s,
@@ -1785,7 +1785,7 @@ function nW() {
             className: nO,
             svg: _$$A4
           })
-        }), jsx(j5, {
+        }), jsx(ScrubbableInput, {
           'className': nL,
           'value': d,
           'onValueChange': c,
@@ -1797,7 +1797,7 @@ function nW() {
             className: nO,
             children: `${getI18nString('fake_mp.modal.center_x')}:`
           })
-        }), jsx(j5, {
+        }), jsx(ScrubbableInput, {
           'className': nL,
           'value': p,
           'onValueChange': m,
@@ -1886,7 +1886,7 @@ function nJ() {
       }), jsxs(DialogBody, {
         children: [jsx(Label, {
           children: renderI18nText('tsmer_config.modal.levers_label')
-        }), jsx(j5, {
+        }), jsx(ScrubbableInput, {
           'className': nL,
           'value': 0.016 + e,
           'onValueChange': t,
@@ -1901,7 +1901,7 @@ function nJ() {
             className: nO,
             svg: _$$A3
           })
-        }), jsx(Ht, {
+        }), jsx(NumericInput, {
           'className': nL,
           'value': 250 + i,
           'onValueChange': n,
@@ -1914,7 +1914,7 @@ function nJ() {
             className: nO,
             svg: _$$A4
           })
-        }), jsx(j5, {
+        }), jsx(ScrubbableInput, {
           'className': nL,
           'value': r,
           'onValueChange': s,
@@ -3132,7 +3132,7 @@ class aZ extends PureComponent {
         children: [jsx('span', {
           className: 'rename_modal--sequenceLabel--UTwnc',
           children: this.state.sequenceLabel
-        }), jsx(Ht, {
+        }), jsx(NumericInput, {
           'className': 'rename_modal--sequenceInput--KWIQX',
           'value': this.state.sequenceStart,
           'onValueChange': this.onSequenceStartChange,

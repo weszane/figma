@@ -22,7 +22,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
 import { getColorFormat } from "../figma_app/740163";
 import { isGradientType, validateGradientPaint, getSolidPaint, getColorAtStop, paintManager } from "../figma_app/385874";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { tZ } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { useCurrentTool, useAppModelProperty } from "../figma_app/722362";
@@ -123,7 +123,7 @@ export function $$J0({
     defaultActive: () => "custom_color"
   });
   let C = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
-  let w = kl("numSelectedByType");
+  let w = useSelectionPropertyValue("numSelectedByType");
   let O = useMemo(() => {
     if (w) return aZ(NodePropertyCategory.FILL, w);
   }, [w]);

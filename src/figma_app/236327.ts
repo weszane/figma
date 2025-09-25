@@ -13,7 +13,7 @@ import { S } from "../905/339549";
 import { hideDropdownAction } from "../905/929976";
 import { s4, Dm } from "../figma_app/8833";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
-import { ft, dG, wo } from "../figma_app/753501";
+import { shouldHandleMultiTouchOrPressure, stopPropagation, preventDefault } from "../figma_app/753501";
 import { gD, FR, Rp, Ts, E7, zT, ep, Vi, tZ, DE, Wh, fG, Wm, DY, _S, rU, IZ, wY, uK, me, se, jv, o6 as _$$o, cY, z6, pH, bv } from "../905/255309";
 import { A } from "../6828/954206";
 import { A as _$$A } from "../6828/364616";
@@ -212,7 +212,7 @@ export class $$C11 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.stopPropagationForPointerDown = e => {
-      ft() && dG(e);
+      shouldHandleMultiTouchOrPressure() && stopPropagation(e);
     };
     this.onClick = handleMouseEvent(this, "click", e => {
       if (!this.props.onClick) return SKIP_RECORDING;
@@ -235,14 +235,14 @@ export class $$C11 extends RecordingPureComponent {
       "data-testid": this.props["data-testid"],
       id: this.props.id,
       onClick: this.onClick,
-      onContextMenu: wo,
+      onContextMenu: preventDefault,
       onFocus: this.props.onFocus,
       onKeyDown: this.props.onKeyDown,
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       onPointerDown: this.stopPropagationForPointerDown,
-      onScroll: this.props.stopScrollPropagation ? dG : this.props.onScroll,
-      onTouchStart: dG,
-      onWheel: this.props.preventZoom ? void 0 : dG,
+      onScroll: this.props.stopScrollPropagation ? stopPropagation : this.props.onScroll,
+      onTouchStart: stopPropagation,
+      onWheel: this.props.preventZoom ? void 0 : stopPropagation,
       role: "menu",
       style: this.props.style,
       tabIndex: this.props.tabIndex ?? 0,
@@ -479,7 +479,7 @@ export class $$B6 extends RecordingPureComponent {
       onMouseDown: this.onMouseDown,
       onMouseMove: this.onMouseMove,
       onMouseUp: this.onMouseUp,
-      onContextMenu: wo,
+      onContextMenu: preventDefault,
       "data-does-not-dismiss-modal": !0
     });
   }

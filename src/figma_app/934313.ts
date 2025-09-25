@@ -6,7 +6,7 @@ import { xj, Cs, Dq, Qz, gP, W7, tr } from "../figma_app/655717";
 import { oc } from "../figma_app/451499";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue, isValidValue } from "../905/216495";
-import { Gt, kl } from "../905/275640";
+import { useNonMixedSelectionPropertyValue, useSelectionPropertyValue } from "../905/275640";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { aj } from "../figma_app/803932";
 import { We, xe } from "../figma_app/481857";
@@ -19,24 +19,24 @@ let b = new SQ();
 let T = new oc();
 function I() {
   let e = isDevHandoffEditorType();
-  let t = Gt("stackMode");
-  let r = Gt("inferredAutoLayoutResult");
+  let t = useNonMixedSelectionPropertyValue("stackMode");
+  let r = useNonMixedSelectionPropertyValue("inferredAutoLayoutResult");
   return e ? xj(t, r) : Cs(t);
 }
 function S() {
   let e = isDevHandoffEditorType();
-  let t = Gt("stackMode");
-  let r = Gt("inferredAutoLayoutResult");
+  let t = useNonMixedSelectionPropertyValue("stackMode");
+  let r = useNonMixedSelectionPropertyValue("inferredAutoLayoutResult");
   return e ? Dq(t, r) : Cs(t);
 }
 function v({
   property: e
 }) {
-  let t = Gt(e);
+  let t = useNonMixedSelectionPropertyValue(e);
   let r = n4({
     value: t
   }) ?? t ?? 0;
-  let i = kl("width" === e ? "stackHorizontalSize" : "stackVerticalSize");
+  let i = useSelectionPropertyValue("width" === e ? "stackHorizontalSize" : "stackVerticalSize");
   let o = I();
   return jsx(p7, {
     name: "width" === e ? getI18nString("inspect_panel.properties.width") : getI18nString("inspect_panel.properties.height"),
@@ -63,7 +63,7 @@ function A() {
   let t = Qz(gP.RIGHT);
   let r = Qz(gP.BOTTOM);
   let i = Qz(gP.LEFT);
-  let a = kl("dashPattern");
+  let a = useSelectionPropertyValue("dashPattern");
   let l = isDevHandoffEditorType();
   return jsxs(Fragment, {
     children: [jsx(bh, {
@@ -164,7 +164,7 @@ function N() {
   });
 }
 function C() {
-  let e = kl("stackPrimaryAlignItems");
+  let e = useSelectionPropertyValue("stackPrimaryAlignItems");
   let t = S();
   let r = useCallback(r => {
     let n = t && rO(e) ? void 0 : r;
@@ -208,7 +208,7 @@ function O() {
   });
 }
 function R() {
-  return "GRID" !== Gt("stackMode") ? null : jsxs(Fragment, {
+  return "GRID" !== useNonMixedSelectionPropertyValue("stackMode") ? null : jsxs(Fragment, {
     children: [jsx(QG, {
       label: getI18nString("inspect_panel.properties.flow.grid")
     }), jsx(_$, {
@@ -236,7 +236,7 @@ function R() {
 }
 let L = e => void 0 !== e ? e + 1 : 0;
 function P() {
-  let e = Gt("stackMode");
+  let e = useNonMixedSelectionPropertyValue("stackMode");
   let t = uQ();
   return useDeepEqualSceneValue((e, t) => {
     let r = e?.get(t ?? "");
@@ -271,7 +271,7 @@ function P() {
 }
 function D() {
   let e = S();
-  let t = kl("stackPrimaryAlignItems");
+  let t = useSelectionPropertyValue("stackPrimaryAlignItems");
   let r = e && rO(t);
   return jsx(_p, {
     name: getI18nString("inspect_panel.properties.justify"),
@@ -280,7 +280,7 @@ function D() {
   });
 }
 function k() {
-  let e = Gt("blendMode");
+  let e = useNonMixedSelectionPropertyValue("blendMode");
   return jsx(aj, {
     blendMode: e,
     layout: !0
@@ -296,7 +296,7 @@ export function $$M0({
     setCopyValue,
     hasCopyAllContent
   } = We();
-  return 1 !== kl("numSelected") ? null : jsx(VZ, {
+  return 1 !== useSelectionPropertyValue("numSelected") ? null : jsx(VZ, {
     title: getI18nString("inspect_panel.properties.layout"),
     copyAllValue: copyAll,
     disableCopyAll: !hasCopyAllContent,

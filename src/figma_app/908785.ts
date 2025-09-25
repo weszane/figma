@@ -31,8 +31,8 @@ import { getObservableValue } from "../figma_app/84367";
 import { cn } from "../905/959568";
 import { d as _$$d } from "../905/976845";
 import { A as _$$A } from "../905/891805";
-import { E as _$$E2 } from "../905/277716";
-import { Gt } from "../905/275640";
+import { AutoInteractableWrapper } from "../905/277716";
+import { useNonMixedSelectionPropertyValue } from "../905/275640";
 import { Um } from "../905/848862";
 import { KindEnum } from "../905/129884";
 import { Kt } from "../figma_app/156285";
@@ -121,7 +121,7 @@ function $(e) {
   let a = Um();
   let s = Xo();
   let l = Jt();
-  let d = Gt("strokeBrushGuid");
+  let d = useNonMixedSelectionPropertyValue("strokeBrushGuid");
   let c = getCommonFromArray(d);
   let p = Kt();
   return jsx(_2, {
@@ -166,7 +166,7 @@ function X(e) {
     }, [t, e, r]);
   }(e.forwardedRef);
   let r = U();
-  return jsx(_$$E2, {
+  return jsx(AutoInteractableWrapper, {
     name: "toggle_advanced_settings_button",
     children: jsx(_$$d, {
       "aria-expanded": r,

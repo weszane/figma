@@ -6,14 +6,14 @@ import o from "classnames";
 import { M as _$$M } from "../figma_app/648761";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getNudgeAmounts } from "../figma_app/740163";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { SG } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { fl } from "../figma_app/178475";
-import { JV } from "../figma_app/260445";
-import { p as _$$p } from "../905/427409";
+import { ScrubbableDropdownInput } from "../figma_app/178475";
+import { useVariablePickerForFields } from "../figma_app/260445";
+import { FormattedInputContext } from "../905/427409";
 import { u3, lC, Ek } from "../figma_app/152690";
 import { MH, eF } from "../figma_app/394327";
 import { SvgComponent } from "../905/714743";
@@ -23,7 +23,7 @@ import { vP, wO } from "../figma_app/100987";
 import { $$default } from "../svg/764361";
 var l = o;
 export function $$N1(e, t) {
-  let [r, n, a] = JV([e], t);
+  let [r, n, a] = useVariablePickerForFields([e], t);
   let {
     clearVariableConsumption,
     consumedVariable
@@ -128,10 +128,10 @@ export function $$C0({
     }
     return i;
   }(Q, eg.length > 0, ed);
-  let eS = kl("WIDTH" === b ? "stackHorizontalSize" : "stackVerticalSize") === LayoutSizingMode.FIXED || !["WIDTH", "HEIGHT"].includes(b);
-  return jsx(_$$p.Provider, {
+  let eS = useSelectionPropertyValue("WIDTH" === b ? "stackHorizontalSize" : "stackVerticalSize") === LayoutSizingMode.FIXED || !["WIDTH", "HEIGHT"].includes(b);
+  return jsx(FormattedInputContext.Provider, {
     value: eS ? memoizedProviderValue : void 0,
-    children: jsx(fl, {
+    children: jsx(ScrubbableDropdownInput, {
       allowEmpty: J,
       autoFocus: ea,
       bigNudgeAmount,

@@ -12,27 +12,27 @@ import { KindEnum } from "../905/129884";
 import { t as _$$t2 } from "../figma_app/480016";
 import { fn } from "../figma_app/811257";
 import { a as _$$a } from "../905/361302";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { yb } from "../905/608681";
 import { Z } from "../905/557139";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { o3, nt } from "../905/226610";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Zp } from "../figma_app/178475";
-import { KG } from "../figma_app/98483";
+import { AngleInput } from "../figma_app/178475";
+import { useTransformInputHandler } from "../figma_app/98483";
 import { BP, hF, QK } from "../figma_app/100987";
 function x(e) {
-  let [t, r] = lJ("angle");
+  let [t, r] = useSelectionProperty("angle");
   let i = o3(nt.fplScrubbableInput);
   let {
     smallNudgeAmount,
     bigNudgeAmount,
     ...o
-  } = KG({
+  } = useTransformInputHandler({
     key: "angle",
     setValue: r
   });
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "rotation_input",
     children: i ? jsx(Z, {
       "aria-label": getI18nString("fullscreen.properties_panel.transform_panel.rotation"),
@@ -45,7 +45,7 @@ function x(e) {
       mixedMathHandler: o.mixedMathHandler,
       recordingKey: generateRecordingKey(e, "angleInput"),
       incrementDirection: yb.Counterclockwise
-    }) : jsx(Zp, {
+    }) : jsx(AngleInput, {
       className: BP,
       inputClassName: hF,
       value: t,

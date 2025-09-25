@@ -9,7 +9,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon, VisualBellType } from "../905/576487";
 import { fullscreenValue } from "../figma_app/455680";
-import { kl, Gt } from "../905/275640";
+import { useSelectionPropertyValue, useNonMixedSelectionPropertyValue } from "../905/275640";
 import { getObservableValue } from "../figma_app/84367";
 import { ZU, Wg } from "../figma_app/986347";
 import { v as _$$v } from "../figma_app/339170";
@@ -91,8 +91,8 @@ export function $$R1() {
   let t = sO();
   let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let a = t && r === SelfDesignType.SELF;
-  let s = kl("propertiesPanelShouldShowRemoveAutoLayout");
-  let d = Gt("numSelectedByType");
+  let s = useSelectionPropertyValue("propertiesPanelShouldShowRemoveAutoLayout");
+  let d = useNonMixedSelectionPropertyValue("numSelectedByType");
   let f = !!d?.CANVAS_ROW;
   if (a && s && !f) return {
     type: ZU.CUSTOM_ACTION,

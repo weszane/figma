@@ -4,12 +4,12 @@ import { Xx } from "../figma_app/243213";
 import { h } from "../905/207101";
 import { trackEventAnalytics } from "../905/449184";
 import { wu, xd } from "../905/729783";
-import { f } from "../905/896141";
+import { InteractivityContext } from "../905/896141";
 export function $$c4(e) {
   return useRef(e).current;
 }
 export function $$u5(e) {
-  let t = useContext(f);
+  let t = useContext(InteractivityContext);
   let i = t.error ? t.error : t.trackablePath[t.trackablePath.length - 1] ? t.interactable ? "<Interactable /> cannot be nested inside another <Interactable />" : void 0 : "<Interactable /> must be nested inside a <Trackable />";
   h(() => {
     i && !t.error && logger.error(i);
@@ -31,7 +31,7 @@ export function $$p1({
   return r.join("\n");
 }
 export function $$m6(e) {
-  let t = useContext(f);
+  let t = useContext(InteractivityContext);
   let i = t.error ? t.error : t.interactable ? "<Trackable /> cannot be nested inside an <Interactable />" : void 0;
   h(() => {
     i && !t.error && logger.error(i);

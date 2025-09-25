@@ -12,12 +12,12 @@ import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, MIXED_MARKER, AUTO_MARKER, isAutoMarker } from "../905/216495";
-import { kl, lJ } from "../905/275640";
+import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
 import { F } from "../905/258517";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { Se } from "../figma_app/178475";
-import { sA } from "../figma_app/841644";
+import { ColorInput } from "../figma_app/178475";
+import { VariableBindingInput } from "../figma_app/841644";
 import { ow } from "../905/188421";
 import { c$, tV } from "../905/794875";
 import { t as _$$t2 } from "../905/1946";
@@ -60,9 +60,9 @@ export function $$M0({
     smallNudgeAmount,
     bigNudgeAmount
   } = getNudgeAmounts();
-  let U = kl("stackDistributionMode");
-  let B = kl("stackMode");
-  let [G, V] = lJ("stackSpacing");
+  let U = useSelectionPropertyValue("stackDistributionMode");
+  let B = useSelectionPropertyValue("stackMode");
+  let [G, V] = useSelectionProperty("stackSpacing");
   let {
     selection,
     selectedChildCount
@@ -119,14 +119,14 @@ export function $$M0({
     value: AUTO_MARKER
   }, "auto")];
   let ea = useMemo(() => [P], []);
-  return r ? jsx(sA, {
+  return r ? jsx(VariableBindingInput, {
     recordingKey: u.recordingKey,
     inputClassName: u.outerClassName,
     fields: ea,
     currentFieldValue: "number" == typeof Q ? Q : void 0,
     resolvedType: VariableResolvedDataType.FLOAT,
     disableEntryPoint: r,
-    children: jsx(Se, {
+    children: jsx(ColorInput, {
       bigNudgeAmount,
       "data-tooltip": et,
       "data-tooltip-max-width": 200,

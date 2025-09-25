@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useMemo, useState, useEffect, useCallback } from "react";
 import i from "classnames";
 import { useDebouncedCallback } from "use-debounce";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 var s = i;
 function d(e) {
   return jsx("div", {
@@ -11,7 +11,7 @@ function d(e) {
     id: e.id,
     onPointerOver: e.onHover,
     onPointerOut: e.onHoverOut,
-    onMouseDown: dG,
+    onMouseDown: stopPropagation,
     onMouseUp: e.onClick,
     role: e.role,
     children: e.displayText

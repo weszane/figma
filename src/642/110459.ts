@@ -9,12 +9,12 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { SG, u as _$$u } from "../figma_app/852050";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { Tn, On } from "../figma_app/323320";
-import { JQ } from "../figma_app/841644";
+import { PickerControl } from "../figma_app/841644";
 import { u3 } from "../figma_app/152690";
 import { ND, $V } from "../figma_app/755783";
 import { RK } from "../1528/277451";
@@ -34,7 +34,7 @@ export function $$S0(e) {
     visibilityIsBoundToComponentProp: v(e, selectSceneGraphSelectionKeys(e), SlotSymbolType.VISIBLE)
   }));
   let w = SG(["VISIBLE"]).data ?? [];
-  let [T] = lJ("visible");
+  let [T] = useSelectionProperty("visible");
   let {
     consumedVariable
   } = u3(["VISIBLE"]);
@@ -48,7 +48,7 @@ export function $$S0(e) {
   let D = T ? getI18nString("fullscreen.properties_panel.tooltip_hide") : getI18nString("fullscreen.properties_panel.tooltip_show");
   return jsx("div", {
     className: RK,
-    children: jsx(JQ, {
+    children: jsx(PickerControl, {
       ref: I,
       currentFieldValue: !!isInvalidValue(T) || T,
       isActive: E,

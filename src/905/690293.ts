@@ -4,8 +4,8 @@ import { createRecordingCallback } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { KindEnum } from "../905/129884";
-import { $j } from "../figma_app/178475";
-import { Xs } from "../figma_app/98483";
+import { LengthInput } from "../figma_app/178475";
+import { getNudgeMultipliers } from "../figma_app/98483";
 import { fn } from "../figma_app/811257";
 import { Yq, sI } from "../figma_app/183248";
 import { hF, QK } from "../figma_app/100987";
@@ -33,10 +33,10 @@ function f({
 }) {
   let v = "width" === u ? Yq.Width : Yq.Height;
   let I = useDispatch();
-  let E = Xs();
+  let E = getNudgeMultipliers();
   let x = isInvalidValue(t) ? g : {};
   let S = createRecordingCallback(A);
-  return jsx($j, {
+  return jsx(LengthInput, {
     className: z,
     "data-tooltip": "width" === u ? getI18nString("fullscreen.properties_panel.transform_panel.width") : getI18nString("fullscreen.properties_panel.transform_panel.height"),
     "data-tooltip-type": KindEnum.TEXT,

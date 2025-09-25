@@ -1,320 +1,451 @@
-import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { forwardRef, useId, useContext, useRef, useCallback, memo } from "react";
-import { IconButton } from "../905/443068";
-import { ButtonPrimitive } from "../905/632989";
-import { m as _$$m } from "../905/886380";
-import { o as _$$o } from "../905/949628";
-import { Ay } from "../figma_app/272902";
-import c from "classnames";
-import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { RecordableDiv } from "../905/511649";
-import { SvgComponent } from "../905/714743";
-import { getI18nString } from "../905/303541";
-import { i as _$$i } from "../figma_app/85949";
-import { SG } from "../figma_app/852050";
-import { BK } from "../905/848862";
-import { KindEnum } from "../905/129884";
-import { _X } from "../figma_app/260445";
-import { p as _$$p } from "../905/427409";
-import { v as _$$v, G as _$$G } from "../905/77111";
-import { Gp } from "../figma_app/779179";
-import { mc, vu, li, KH, r9, fE, I6, Nb, zm, wQ, jX, NH, AM, Ab, UU } from "../905/838262";
-import { $$default } from "../svg/764361";
-var u = c;
-let x = forwardRef(function ({
-  children: e,
-  disabled: t,
-  icons: r,
-  iconLayout: i = "absolute",
-  inputClassName: a,
-  isActive: s,
-  nonTextChild: o,
-  noBorder: l,
-  fullHeight: d,
-  onMouseDownCapture: c,
-  onContextMenuCapture: h,
-  onFocus: m,
-  onBlur: g,
-  onKeyDown: f,
-  recordingKey: E
-}, y) {
+import classNames from 'classnames'
+import { forwardRef, memo, useCallback, useContext, useId, useRef } from 'react'
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { G as _$$G, v as _$$v } from '../905/77111'
+import { KindEnum } from '../905/129884'
+import { getI18nString } from '../905/303541'
+import { FormattedInputContext } from '../905/427409'
+import { IconButton } from '../905/443068'
+import { RecordableDiv } from '../905/511649'
+import { ButtonPrimitive } from '../905/632989'
+import { SvgComponent } from '../905/714743'
+import { Ab, AM, fE, I6, jX, KH, li, mc, Nb, NH, r9, UU, vu, wQ, zm } from '../905/838262'
+import { BK } from '../905/848862'
+import { m as _$$m } from '../905/886380'
+import { o as _$$o } from '../905/949628'
+import { i as _$$i } from '../figma_app/85949'
+import { FormattedInputWithWrapper } from '../figma_app/260445'
+import { Ay } from '../figma_app/272902'
+import { Gp } from '../figma_app/779179'
+import { SG } from '../figma_app/852050'
+import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298'
+import { _$$default as $$default } from '../svg/764361'
+
+// Define interfaces for props to improve type safety
+interface ComboInputContainerProps {
+  children: React.ReactNode
+  disabled?: boolean
+  icons?: React.ReactNode[]
+  iconLayout?: 'absolute' | string
+  inputClassName?: string
+  isActive?: boolean
+  nonTextChild?: boolean
+  noBorder?: boolean
+  fullHeight?: boolean
+  onMouseDownCapture?: (event: React.MouseEvent) => void
+  onContextMenuCapture?: (event: React.MouseEvent) => void
+  onFocus?: (event: React.FocusEvent) => void
+  onBlur?: (event: React.FocusEvent) => void
+  onKeyDown?: (event: React.KeyboardEvent) => void
+  recordingKey?: string
+}
+
+/**
+ * ComboInputContainer component - renders a container for combo input controls with icons and event handlers.
+ * Original name: x
+ */
+const ComboInputContainer = forwardRef<HTMLDivElement, ComboInputContainerProps>(({
+  children,
+  disabled = false,
+  icons,
+  iconLayout = 'absolute',
+  inputClassName,
+  isActive = false,
+  nonTextChild = false,
+  noBorder = false,
+  fullHeight = false,
+  onMouseDownCapture,
+  onContextMenuCapture,
+  onFocus,
+  onBlur,
+  onKeyDown,
+  recordingKey,
+}, ref) => {
   return jsxs(RecordableDiv, {
-    forwardedRef: y,
-    recordingKey: generateRecordingKey(E, "comboInputControl", "container"),
-    className: u()(a, {
-      [mc]: !0,
-      [vu]: s,
-      [li]: l,
-      [KH]: !l,
-      [r9]: t,
-      [fE]: o
+    forwardedRef: ref,
+    recordingKey: generateRecordingKey(recordingKey, 'comboInputControl', 'container'),
+    className: classNames(inputClassName, {
+      [mc]: true,
+      [vu]: isActive,
+      [li]: noBorder,
+      [KH]: !noBorder,
+      [r9]: disabled,
+      [fE]: nonTextChild,
     }),
-    onMouseDownCapture: c,
-    onContextMenuCapture: h,
-    onFocus: m,
-    onBlur: g,
-    onKeyDown: f,
-    children: [jsx("div", {
-      className: u()(I6, {
-        [Nb]: d
+    onMouseDownCapture,
+    onContextMenuCapture,
+    onFocus,
+    onBlur,
+    onKeyDown,
+    children: [jsx('div', {
+      className: classNames(I6, {
+        [Nb]: fullHeight,
       }),
-      children: e
-    }), !t && jsx("span", {
-      className: u()(zm, {
-        [wQ]: "absolute" === i
+      children,
+    }), !disabled && jsx('span', {
+      className: classNames(zm, {
+        [wQ]: iconLayout === 'absolute',
       }),
-      children: r
-    })]
-  });
-});
-let $$N2 = forwardRef(function ({
-  inputClassName: e,
-  inputRef: t,
-  currentFieldValue: r,
-  recordingKey: a,
-  disabled: s,
-  children: o,
-  hideIcon: l = !1,
-  iconLayout: c = "absolute",
-  nonTextChild: _,
-  isActive: h,
-  onPickerOpen: m,
-  disableEntryPoint: g = !1,
-  noBorder: f,
-  fullHeight: y,
-  hasBindingContextMenu: b,
-  onClickDetachButton: v,
-  onFocus: A,
-  onBlur: N,
-  handleClearOverride: C
-}, w) {
-  let L = useId();
-  let P = useContext(_$$p);
-  let D = P?.boundVariableId;
-  let k = useRef(null);
-  let {
+      children: icons,
+    })],
+  })
+})
+interface FormattedInputWrapperProps {
+  inputClassName?: string
+  inputRef?: React.RefObject<HTMLInputElement>
+  currentFieldValue?: any
+  recordingKey?: string
+  disabled?: boolean
+  children: React.ReactNode
+  hideIcon?: boolean
+  iconLayout?: 'absolute' | string
+  nonTextChild?: boolean
+  isActive?: boolean
+  onPickerOpen?: () => void
+  disableEntryPoint?: boolean
+  noBorder?: boolean
+  fullHeight?: boolean
+  hasBindingContextMenu?: boolean
+  onClickDetachButton?: () => void
+  onFocus?: (event: React.FocusEvent) => void
+  onBlur?: (event: React.FocusEvent) => void
+  handleClearOverride?: () => void
+}
+
+/**
+ * FormattedInputWrapper component - wraps input with binding and icon logic.
+ * Original name: $$N2
+ */
+export const FormattedInputWrapper = forwardRef<HTMLDivElement, FormattedInputWrapperProps>(({
+  inputClassName,
+  inputRef,
+  currentFieldValue,
+  recordingKey,
+  disabled = false,
+  children,
+  hideIcon = false,
+  iconLayout = 'absolute',
+  nonTextChild = false,
+  isActive,
+  onPickerOpen,
+  disableEntryPoint = false,
+  noBorder = false,
+  fullHeight = false,
+  hasBindingContextMenu = false,
+  onClickDetachButton,
+  onFocus,
+  onBlur,
+  handleClearOverride,
+}, ref) => {
+  const id = useId()
+  const context = useContext(FormattedInputContext)
+  const boundVariableId = context?.boundVariableId
+  const containerRef = useRef<HTMLDivElement>(null)
+  const {
     showing,
     show,
     data,
-    hide
-  } = BK(_$$v + L);
-  let B = useCallback(() => {
-    m ? m() : P?.showBindingUI(k.current, {
-      currentFieldValue: r
-    });
-    hide();
-  }, [r, hide, m, P]);
-  let G = useCallback(() => {
-    P?.onVariableSelected?.(void 0);
-    hide();
-    v?.();
-  }, [hide, P, v]);
-  let V = useHandleMouseEvent(generateRecordingKey(a, "detachIcon"), "click", G);
-  let H = useHandleMouseEvent(a, "mousedown", e => {
-    if (e && !g && e.shiftKey) {
-      B();
-      e.preventDefault();
-      e.stopPropagation();
-      return;
+    hide,
+  } = BK(_$$v + id)
+  const handlePickerOpen = useCallback(() => {
+    if (onPickerOpen) {
+      onPickerOpen()
     }
-  });
-  let z = useHandleMouseEvent(a, "contextmenu", e => {
-    e && !g && b && t?.current && (show({
-      data: {
-        position: {
-          top: e.clientY,
-          left: e.clientX
-        }
-      }
-    }), e.preventDefault(), e.stopPropagation());
-  });
-  let W = [C && jsx(O, {
-    handleClearOverride: C,
-    recordingKey: generateRecordingKey(a, "clearOverrideButton")
-  }, "clearOverrideButton"), !(l || g) && jsx(R, {
-    boundVariableId: D,
-    handleUnbind: V,
-    handlePickerOpen: B,
-    recordingKey: a
-  }, "variableBindingButton")].filter(Boolean);
+    else {
+      context?.showBindingUI(containerRef.current, {
+        currentFieldValue,
+      })
+    }
+    hide()
+  }, [currentFieldValue, hide, onPickerOpen, context])
+  const handleDetach = useCallback(() => {
+    context?.onVariableSelected?.(undefined)
+    hide()
+    onClickDetachButton?.()
+  }, [hide, context, onClickDetachButton])
+  const detachMouseHandler = useHandleMouseEvent(generateRecordingKey(recordingKey, 'detachIcon'), 'click', handleDetach)
+  const mouseDownHandler = useHandleMouseEvent(recordingKey, 'mousedown', (event) => {
+    if (event && !disableEntryPoint && event.shiftKey) {
+      handlePickerOpen()
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  })
+  const contextMenuHandler = useHandleMouseEvent(recordingKey, 'contextmenu', (event) => {
+    if (event && !disableEntryPoint && hasBindingContextMenu && inputRef?.current) {
+      show({
+        data: {
+          position: {
+            top: event.clientY,
+            left: event.clientX,
+          },
+        },
+      })
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  })
+  const icons = [handleClearOverride && jsx(ClearOverrideButton, {
+    handleClearOverride,
+    recordingKey: generateRecordingKey(recordingKey, 'clearOverrideButton'),
+  }, 'clearOverrideButton'), !(hideIcon || disableEntryPoint) && jsx(VariableBindingButton, {
+    boundVariableId,
+    handleUnbind: detachMouseHandler,
+    handlePickerOpen,
+    recordingKey,
+  }, 'variableBindingButton')].filter(Boolean)
   return jsxs(Fragment, {
-    children: [jsx(x, {
-      ref: Ay(w, k),
-      disabled: s,
-      fullHeight: y,
-      iconLayout: c,
-      icons: W,
-      inputClassName: u()(e, {
-        [Gp]: W.length > 0 && "absolute" === c
+    children: [jsx(ComboInputContainer, {
+      ref: Ay(ref, containerRef),
+      disabled,
+      fullHeight,
+      iconLayout,
+      icons,
+      inputClassName: classNames(inputClassName, {
+        [Gp]: icons.length > 0 && iconLayout === 'absolute',
       }),
-      isActive: null != h ? h : !!P?.isShowingBindingUI,
-      noBorder: f,
-      nonTextChild: _,
-      onBlur: N,
-      onContextMenuCapture: z,
-      onFocus: A,
-      onMouseDownCapture: H,
-      recordingKey: a,
-      children: o
-    }), b && t && showing && "number" == typeof data?.position?.top && "number" == typeof data?.position?.left && jsx(_$$G, {
-      inputRef: t,
-      isBound: !!P?.boundVariableId,
+      isActive: isActive ?? !!context?.isShowingBindingUI,
+      noBorder,
+      nonTextChild,
+      onBlur,
+      onContextMenuCapture: contextMenuHandler,
+      onFocus,
+      onMouseDownCapture: mouseDownHandler,
+      recordingKey,
+      children,
+    }), hasBindingContextMenu && inputRef && showing && typeof data?.position?.top === 'number' && typeof data?.position?.left === 'number' && jsx(_$$G, {
+      inputRef,
+      isBound: !!context?.boundVariableId,
       left: data.position.left,
       onClose: hide,
-      onOpenVariablePicker: B,
-      onUnbindVariable: V,
-      recordingKey: generateRecordingKey(a, "contextMenu"),
-      top: data.position.top
-    })]
-  });
-});
-let $$C1 = memo(function ({
-  fields: e,
-  currentFieldValue: t,
-  resolvedType: r,
-  editingStyleGuid: i,
-  inputClassName: a,
-  inputRef: s,
-  disabled: o,
-  recordingKey: l,
-  disableEntryPoint: d,
-  hideIcon: c,
-  noBorder: u,
-  children: p,
-  hasBindingContextMenu: _,
-  fullHeight: h,
-  onClickDetachButton: m,
-  onBlur: g,
-  onFocus: E
-}) {
-  let y = SG(e).data ?? [];
-  return jsx(_X, {
-    fields: e,
-    resolvedType: r,
-    editingStyleGuid: i,
-    children: jsx($$N2, {
-      currentFieldValue: t,
-      disableEntryPoint: !!d || 0 === y.length,
-      disabled: o,
-      fullHeight: h,
-      hasBindingContextMenu: _,
-      hideIcon: c,
-      inputClassName: a,
-      inputRef: s,
-      noBorder: u,
-      onBlur: g,
-      onClickDetachButton: m,
-      onFocus: E,
-      recordingKey: l,
-      children: p
-    })
-  });
-});
-let $$w0 = forwardRef(function ({
-  currentFieldValue: e,
-  disabled: t,
-  isActive: r,
-  recordingKey: a,
-  children: s,
-  onPickerOpen: o,
-  dataTestId: l,
-  openOnRightClick: c,
-  inputClassName: _,
-  tooltip: h
-}, m) {
-  let f = useContext(_$$p);
-  let E = useRef(null);
-  let b = useCallback(() => {
-    o ? o() : f?.showBindingUI(E.current, {
-      currentFieldValue: e
-    });
-  }, [e, o, f]);
-  let I = useHandleMouseEvent(a, "mousedown", e => {
-    if (e && !t) {
-      if (c) {
-        if (_$$i(e)) {
-          e.preventDefault();
-          e.stopPropagation();
-          return;
+      onOpenVariablePicker: handlePickerOpen,
+      onUnbindVariable: detachMouseHandler,
+      recordingKey: generateRecordingKey(recordingKey, 'contextMenu'),
+      top: data.position.top,
+    })],
+  })
+})
+interface VariableBindingInputProps {
+  fields?: any[]
+  currentFieldValue?: number
+  resolvedType?: any
+  editingStyleGuid?: string
+  inputClassName?: string
+  inputRef?: React.RefObject<HTMLInputElement>
+  disabled?: boolean
+  recordingKey?: string
+  disableEntryPoint?: boolean
+  hideIcon?: boolean
+  noBorder?: boolean
+  children: React.ReactNode
+  hasBindingContextMenu?: boolean
+  fullHeight?: boolean
+  onClickDetachButton?: () => void
+  onBlur?: (event: React.FocusEvent) => void
+  onFocus?: (event: React.FocusEvent) => void
+}
+
+/**
+ * VariableBindingInput component - memoized wrapper for variable binding input logic.
+ * Original name: $$C1
+ */
+export const VariableBindingInput = memo<VariableBindingInputProps>(({
+  fields,
+  currentFieldValue,
+  resolvedType,
+  editingStyleGuid,
+  inputClassName,
+  inputRef,
+  disabled = false,
+  recordingKey,
+  disableEntryPoint = false,
+  hideIcon = false,
+  noBorder = false,
+  children,
+  hasBindingContextMenu = false,
+  fullHeight = false,
+  onClickDetachButton,
+  onBlur,
+  onFocus,
+}) => {
+  const availableFields = SG(fields).data ?? []
+  return jsx(FormattedInputWithWrapper, {
+    fields,
+    resolvedType,
+    editingStyleGuid,
+    children: jsx(FormattedInputWrapper, {
+      currentFieldValue,
+      disableEntryPoint: disableEntryPoint || availableFields.length === 0,
+      disabled,
+      fullHeight,
+      hasBindingContextMenu,
+      hideIcon,
+      inputClassName,
+      inputRef,
+      noBorder,
+      onBlur,
+      onClickDetachButton,
+      onFocus,
+      recordingKey,
+      children,
+    }),
+  })
+})
+interface PickerControlProps {
+  currentFieldValue?: any
+  disabled?: boolean
+  isActive?: boolean
+  recordingKey?: string
+  children: React.ReactNode
+  onPickerOpen?: () => void
+  dataTestId?: string
+  openOnRightClick?: boolean
+  inputClassName?: string
+  tooltip?: string
+}
+
+/**
+ * PickerControl component - handles picker opening on mouse events.
+ * Original name: $$w0
+ */
+export const PickerControl = forwardRef<HTMLDivElement, PickerControlProps>(({
+  currentFieldValue,
+  disabled = false,
+  isActive = false,
+  recordingKey,
+  children,
+  onPickerOpen,
+  dataTestId,
+  openOnRightClick = false,
+  inputClassName,
+  tooltip,
+}, ref) => {
+  const context = useContext(FormattedInputContext)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const handlePickerOpen = useCallback(() => {
+    if (onPickerOpen) {
+      onPickerOpen()
+    }
+    else {
+      context?.showBindingUI(containerRef.current, {
+        currentFieldValue,
+      })
+    }
+  }, [currentFieldValue, onPickerOpen, context])
+  const mouseDownHandler = useHandleMouseEvent(recordingKey, 'mousedown', (event) => {
+    if (event && !disabled) {
+      if (openOnRightClick) {
+        if (_$$i(event)) {
+          event.preventDefault()
+          event.stopPropagation()
+          return
         }
-        if (e.shiftKey && 1 & e.buttons) {
-          b();
-          e.preventDefault();
-          e.stopPropagation();
-          return;
+        if (event.shiftKey && event.buttons & 1) {
+          handlePickerOpen()
+          event.preventDefault()
+          event.stopPropagation()
         }
-      } else if (1 & e.buttons) {
-        b();
-        e.preventDefault();
-        e.stopPropagation();
-        return;
+      }
+      else if (event.buttons & 1) {
+        handlePickerOpen()
+        event.preventDefault()
+        event.stopPropagation()
       }
     }
-  });
-  let S = useHandleMouseEvent(a, "contextmenu", e => {
-    e && !t && (b(), e.preventDefault(), e.stopPropagation());
-  });
-  return jsx("div", {
-    ref: Ay(m, E),
-    className: u()(_, {
-      [jX]: !0,
-      [NH]: r && !_
+  })
+  const contextMenuHandler = useHandleMouseEvent(recordingKey, 'contextmenu', (event) => {
+    if (event && !disabled) {
+      handlePickerOpen()
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  })
+  return jsx('div', {
+    'ref': Ay(ref, containerRef),
+    'className': classNames(inputClassName, {
+      [jX]: true,
+      [NH]: isActive && !inputClassName,
     }),
-    onMouseDownCapture: I,
-    onContextMenu: S,
-    "data-testid": l,
-    "data-tooltip-type": h ? KindEnum.TEXT : void 0,
-    "data-tooltip": h ?? void 0,
-    children: s
-  });
-});
-function O({
-  handleClearOverride: e,
-  recordingKey: t
-}) {
+    'onMouseDownCapture': mouseDownHandler,
+    'onContextMenu': contextMenuHandler,
+    'data-testid': dataTestId,
+    'data-tooltip-type': tooltip ? KindEnum.TEXT : undefined,
+    'data-tooltip': tooltip,
+    children,
+  })
+})
+interface ClearOverrideButtonProps {
+  handleClearOverride: () => void
+  recordingKey?: string
+}
+
+/**
+ * ClearOverrideButton component - button to clear overrides.
+ * Original name: O
+ */
+function ClearOverrideButton({
+  handleClearOverride,
+  recordingKey,
+}: ClearOverrideButtonProps) {
   return jsx(IconButton, {
-    "aria-label": getI18nString("variables.authoring_modal.table.clear_override"),
-    actionOnPointerDown: !0,
-    onClick: e,
-    recordingKey: t,
-    htmlAttributes: {
-      "data-tooltip-type": KindEnum.TEXT,
-      "data-tooltip": getI18nString("variables.authoring_modal.table.clear_override")
+    'aria-label': getI18nString('variables.authoring_modal.table.clear_override'),
+    'actionOnPointerDown': true,
+    'onClick': handleClearOverride,
+    'recordingKey': recordingKey,
+    'htmlAttributes': {
+      'data-tooltip-type': KindEnum.TEXT,
+      'data-tooltip': getI18nString('variables.authoring_modal.table.clear_override'),
     },
-    children: jsx(_$$m, {})
-  }, "clearOverrideButton");
+    'children': jsx(_$$m, {}),
+  }, 'clearOverrideButton')
 }
-function R({
-  boundVariableId: e,
-  handleUnbind: t,
-  handlePickerOpen: r,
-  recordingKey: i
-}) {
-  return e ? jsx(ButtonPrimitive, {
-    className: u()(AM, Ab),
-    htmlAttributes: {
-      "data-tooltip-type": KindEnum.TEXT,
-      "data-tooltip": getI18nString("variables.binding_ui.detach_variable_tooltip")
-    },
-    "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
-    onClick: t,
-    children: jsx(_$$o, {})
-  }) : jsx(ButtonPrimitive, {
-    className: UU,
-    htmlAttributes: {
-      "data-tooltip-type": KindEnum.TEXT,
-      "data-tooltip": getI18nString("fullscreen.properties_panel.apply_variable"),
-      "data-test-id": generateRecordingKey("variable-control-icon", i ?? ""),
-      tabIndex: -1
-    },
-    "aria-label": getI18nString("fullscreen.properties_panel.apply_variable"),
-    onClick: r,
-    recordingKey: generateRecordingKey(i, "comboBoxButton"),
-    children: jsx(SvgComponent, {
-      svg: $$default
+interface VariableBindingButtonProps {
+  boundVariableId?: string
+  handleUnbind: () => void
+  handlePickerOpen: () => void
+  recordingKey?: string
+}
+
+/**
+ * VariableBindingButton component - button for variable binding actions.
+ * Original name: R
+ */
+function VariableBindingButton({
+  boundVariableId,
+  handleUnbind,
+  handlePickerOpen,
+  recordingKey,
+}: VariableBindingButtonProps) {
+  if (boundVariableId) {
+    return jsx(ButtonPrimitive, {
+      'className': classNames(AM, Ab),
+      'htmlAttributes': {
+        'data-tooltip-type': KindEnum.TEXT,
+        'data-tooltip': getI18nString('variables.binding_ui.detach_variable_tooltip'),
+      },
+      'aria-label': getI18nString('variables.binding_ui.detach_variable_tooltip'),
+      'onClick': handleUnbind,
+      'children': jsx(_$$o, {}),
     })
-  });
+  }
+  return jsx(ButtonPrimitive, {
+    'className': UU,
+    'htmlAttributes': {
+      'data-tooltip-type': KindEnum.TEXT,
+      'data-tooltip': getI18nString('fullscreen.properties_panel.apply_variable'),
+      'data-test-id': generateRecordingKey('variable-control-icon', recordingKey ?? ''),
+      'tabIndex': -1,
+    },
+    'aria-label': getI18nString('fullscreen.properties_panel.apply_variable'),
+    'onClick': handlePickerOpen,
+    'recordingKey': generateRecordingKey(recordingKey, 'comboBoxButton'),
+    'children': jsx(SvgComponent, {
+      svg: $$default,
+    }),
+  })
 }
-export const JQ = $$w0;
-export const sA = $$C1;
-export const sJ = $$N2;
+
+// Update exports to use refactored names
+export const JQ = PickerControl
+export const sA = VariableBindingInput
+export const sJ = FormattedInputWithWrapper

@@ -20,7 +20,7 @@ import { ey as _$$ey } from "../figma_app/451499";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { o3, nt } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -43,7 +43,7 @@ import { q as _$$q } from "../905/932270";
 import { O as _$$O3 } from "../905/599243";
 import { cS, Cm } from "../figma_app/334459";
 import { q as _$$q2 } from "../905/74101";
-import { Zp } from "../figma_app/178475";
+import { AngleInput } from "../figma_app/178475";
 import { dD, Gi } from "../figma_app/941824";
 import { Y9 } from "../figma_app/811257";
 import { MF } from "../figma_app/473914";
@@ -270,7 +270,7 @@ function ee(e) {
   });
 }
 function ei(e) {
-  let t = jsx(Zp, {
+  let t = jsx(AngleInput, {
     value: e.value ?? 0,
     inputClassName: "ui3_transform_modifiers_settings_picker--input--S-N-R",
     onValueChange: e.onValueChange,
@@ -639,7 +639,7 @@ function eB(e) {
     productType,
     useLargePreviewRows
   } = e;
-  let Y = kl("isInstanceSublayerSelected");
+  let Y = useSelectionPropertyValue("isInstanceSublayerSelected");
   let q = generateRecordingKey(e);
   let $ = `transformModifiers-flyout-${id}`;
   let Z = pickerShown && pickerShown.id === id && pickerShown.data?.type === 0 ? pickerShown : null;

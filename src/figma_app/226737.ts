@@ -1,11 +1,11 @@
 import { isValidValue } from "../905/216495";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$s0() {
   return useDeepEqualSceneValue(e => e.getRoot().slideThemeId);
 }
 export function $$o2() {
-  let [e] = lJ("themeId");
+  let [e] = useSelectionProperty("themeId");
   return e;
 }
 export function $$l1() {

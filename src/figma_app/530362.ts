@@ -36,8 +36,8 @@ import { Xo } from "../figma_app/482495";
 import { o3, nt } from "../905/226610";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
-import { e as _$$e } from "../905/579635";
-import { sJ } from "../figma_app/841644";
+import { conditionalWrapper } from "../905/579635";
+import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { v as _$$v } from "../905/318279";
 import { q as _$$q } from "../figma_app/905311";
 import { S as _$$S2 } from "../905/459477";
@@ -48,7 +48,7 @@ import { ow, OC, NA } from "../figma_app/150804";
 import { renameProperty, sanitizePropertyName, formatPropertyValues } from "../figma_app/264776";
 import { dD, lt, Qu } from "../figma_app/941824";
 import { Y9, oO } from "../figma_app/811257";
-import { hu, V5 } from "../figma_app/260445";
+import { ControlledVariablePickerProvider, VariablePicker } from "../figma_app/260445";
 import { y$ } from "../figma_app/152690";
 import { eF } from "../figma_app/394327";
 import { P as _$$P2 } from "../figma_app/120873";
@@ -498,9 +498,9 @@ function eS({
   }, [e, r]);
   return jsx("div", {
     className: eu,
-    children: jsx(_$$e, {
+    children: jsx(conditionalWrapper, {
       condition: t,
-      wrapper: e => jsx(sJ, {
+      wrapper: e => jsx(FormattedInputWithWrapper, {
         noBorder: !0,
         recordingKey: generateRecordingKey("componentPropDefTextInput", "variableInputControl"),
         children: e
@@ -533,9 +533,9 @@ function ev({
   }, [e, r]);
   return jsx("div", {
     className: eu,
-    children: jsx(_$$e, {
+    children: jsx(conditionalWrapper, {
       condition: t,
-      wrapper: e => jsx(sJ, {
+      wrapper: e => jsx(FormattedInputWithWrapper, {
         noBorder: !0,
         recordingKey: generateRecordingKey("componentPropDefNumberInput", "variableInputControl"),
         children: e
@@ -670,14 +670,14 @@ function eC({
     children: [jsx("p", {
       className: ec,
       children: renderI18nText("design_systems.component_properties.default_value")
-    }), jsx(_$$e, {
+    }), jsx(conditionalWrapper, {
       condition: c,
-      wrapper: e => (assertNotNullish(variableType), jsxs(hu, {
+      wrapper: e => (assertNotNullish(variableType), jsxs(ControlledVariablePickerProvider, {
         boundVariableId: void 0,
         resolvedType: variableType,
         requestedTypes,
         onVariableSelected: u,
-        children: [jsx(V5, {
+        children: [jsx(VariablePicker, {
           variableScope
         }), e]
       })),

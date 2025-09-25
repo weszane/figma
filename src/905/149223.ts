@@ -20,7 +20,7 @@ import { Ep } from "../figma_app/504823";
 import { getColorFormat } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { paintManager, isGradientType, validateGradientPaint } from "../figma_app/385874";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { selectCurrentFile } from "../figma_app/516028";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { executeWithDSAAction } from "../905/135117";
@@ -261,12 +261,12 @@ export function $$j1({
     currentSelectedGradientStop: e.mirror.appModel.currentSelectedGradientStop
   }));
   let $ = Ep();
-  let [Z, X] = lJ("height");
-  let [Q, J] = lJ("width");
-  let [ee, et] = lJ("angle");
-  let [ei, en] = lJ("leftEndCap");
-  let [er, ea] = lJ("rightEndCap");
-  let [es, eo] = lJ("hasReflection");
+  let [Z, X] = useSelectionProperty("height");
+  let [Q, J] = useSelectionProperty("width");
+  let [ee, et] = useSelectionProperty("angle");
+  let [ei, en] = useSelectionProperty("leftEndCap");
+  let [er, ea] = useSelectionProperty("rightEndCap");
+  let [es, eo] = useSelectionProperty("hasReflection");
   let el = useContext(d2);
   let ed = useMemo(() => {
     let t = {

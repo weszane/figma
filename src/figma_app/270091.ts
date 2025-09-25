@@ -36,7 +36,7 @@ import { loadingStateDelete } from "../figma_app/714946";
 import { showModalHandler } from "../905/156213";
 import { hideTooltip } from "../905/765855";
 import { postUserFlag } from "../905/985254";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { mapFileToProductType } from "../figma_app/314264";
 import { compareLibraryKeyWithString, compareLibraryItemsAlias } from "../905/709171";
@@ -1069,7 +1069,7 @@ export function $$e$0({
     onClick: m,
     recordingKey: generateRecordingKey("toggleGridViewButton", t ? "preferredValues" : "instanceSwapPicker"),
     htmlAttributes: {
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       "data-tooltip": c ? getI18nString("design_systems.instance_swap_picker.show_as_grid") : getI18nString("design_systems.instance_swap_picker.show_as_list"),
       "data-tooltip-type": KindEnum.TEXT
     },

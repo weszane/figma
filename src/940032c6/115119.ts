@@ -113,7 +113,7 @@ import { googleMapsEmbedConfig } from '../905/194327';
 import { h as _$$h2 } from '../905/200386';
 import { Hz, Of, Yw } from '../905/201596';
 import { q as _$$q4 } from '../905/202542';
-import { Q7 } from '../905/203369';
+import { FormattedInputVariant1 } from '../905/203369';
 import { h as _$$h3 } from '../905/207101';
 import { O as _$$O9 } from '../905/208152';
 import { N2 } from '../905/213527';
@@ -137,9 +137,9 @@ import { m as _$$m3 } from '../905/270214';
 import { O as _$$O3 } from '../905/273186';
 import { Checkbox } from '../905/274480';
 import { U as _$$U3 } from '../905/275247';
-import { Gt as _$$Gt, kl as _$$kl, lJ as _$$lJ2, tN as _$$tN, A5, DQ, zj } from '../905/275640';
+import { useNonMixedSelectionPropertyValue, useSelectionPropertyValue, useSelectionProperty, useSelectedStyleOrSelectionPropertyValue, useUpdateSelectionProperty, useNonMixedSelectedStyleOrSelectionPropertyValues, useSelectionPropertyValues } from '../905/275640';
 import { b as _$$b } from '../905/275748';
-import { E as _$$E11 } from '../905/277716';
+import { AutoInteractableWrapper } from '../905/277716';
 import { j4 as _$$j9, G5 } from '../905/278499';
 import { Z as _$$Z5 } from '../905/279476';
 import { useTheme } from '../905/289770';
@@ -519,7 +519,7 @@ import { showStylePicker, showPickerThunk, setLeftPanelTab, hideStylePicker, hid
 import { Iy, XS } from '../figma_app/95367';
 import { isNotNullish, isNullish } from '../figma_app/95419';
 import { hE as _$$hE2, sO as _$$sO } from '../figma_app/97020';
-import { Df, Jo, Xs } from '../figma_app/98483';
+import { createShownTransformControlsObservable, createEnabledTransformControlsObservable, getNudgeMultipliers } from '../figma_app/98483';
 import { wg as _$$wg, LZ } from '../figma_app/101956';
 import { Fz } from '../figma_app/106207';
 import { S as _$$S9 } from '../figma_app/106763';
@@ -547,7 +547,7 @@ import { OU as _$$OU } from '../figma_app/175258';
 import { N as _$$N3 } from '../figma_app/176280';
 import { aQ as _$$aQ } from '../figma_app/176302';
 import { U1 } from '../figma_app/178419';
-import { $j, gq as _$$gq, j5 as _$$j0, Pd as _$$Pd, vD as _$$vD2, w2 as _$$w4, Ht, W4, Zp } from '../figma_app/178475';
+import { LengthInput, ExpressionInput, ScrubbableInput, OpacityInput, NumericDropdownInput, PercentageBaseInput, NumericInput, TimeMillisecondsInput, AngleInput } from '../figma_app/178475';
 import { R as _$$R2 } from '../figma_app/184628';
 import { $P, dh as _$$dh, A$ } from '../figma_app/186343';
 import { _Y as _$$_Y, KB as _$$KB, G_, QK } from '../figma_app/191312';
@@ -737,7 +737,7 @@ import { useCurrentOrgAdminInfo } from '../figma_app/740025';
 import { getNudgeAmounts, EditorPreferencesApi, getSmallNudgeAmount, getColorFormat, getBigNudgeAmount } from '../figma_app/740163';
 import { addToSelection, getPropertiesPanelTab, normalizeTrackingEnum, removeFromSelection, renameNode, replaceSelection, setPropertiesPanelTab, transferSelection, updateHoveredNode } from '../figma_app/741237';
 import { s as _$$s9 } from '../figma_app/749682';
-import { wo as _$$wo } from '../figma_app/753501';
+import { preventDefault } from '../figma_app/753501';
 import { c as _$$c5 } from '../figma_app/763535';
 import { AccessibilityAttributes, AppStateTsApi, ChatMessageType, CmsHelpers, CodeComponentHelper, Command, ComponentPropType, CustomPosition, DataLoadStatus, DesignGraphElements, DesignWorkspace, EqualityType, FontHelpers, FontSourceType, Fullscreen, GraphicObjectTypes, ImageExportType, InsertSourceType, ItemType, MatchType, MixedBlockType, Multiplayer, NodePropertyCategory, NodeTsApi, PanelType, PrototypingTsApi, SceneGraphHelpers, ScrollBehavior, SelectionPanelType, SideType, SitesBindingsCpp, SquareShapes, TextBlockType, TrackType, UIVisibilitySetting, UserInterfaceElements, VariableDataType, VariableResolvedDataType, ViewType } from '../figma_app/763686';
 import { C as _$$C } from '../figma_app/765025';
@@ -20059,7 +20059,7 @@ function fW(e) {
       currentLayoutSet: e.currentLayoutSet,
       isFullPagePreview: e.isFullPagePreview
     }), !e.hideSizeSettings && jsxs(Fragment, {
-      children: [jsx($j, {
+      children: [jsx(LengthInput, {
         'bigNudgeAmount': 10,
         'className': fX,
         'data-tooltip': getI18nString('fullscreen.properties_panel.transform_panel.width'),
@@ -20078,7 +20078,7 @@ function fW(e) {
           className: `${fG} svg`,
           children: renderI18nText('fullscreen.properties_panel.transform_panel.w')
         })
-      }), jsx($j, {
+      }), jsx(LengthInput, {
         'bigNudgeAmount': 10,
         'className': fX,
         'data-tooltip': getI18nString('fullscreen.properties_panel.transform_panel.height'),
@@ -20096,7 +20096,7 @@ function fW(e) {
           className: `${fG} svg`,
           children: renderI18nText('fullscreen.properties_panel.transform_panel.h')
         })
-      }), jsx($j, {
+      }), jsx(LengthInput, {
         'bigNudgeAmount': 1,
         'className': fX,
         'data-tooltip': getI18nString('sites.preview.scale'),
@@ -21705,7 +21705,7 @@ function bd({
         className: 'sites_template_tile--loadingSpinner--uPkfX',
         children: jsx(_$$k7, {})
       }), jsx(_$$oW, {
-        onDragStart: _$$wo,
+        onDragStart: preventDefault,
         className: 'sites_template_tile--tileImage---JSpP',
         src: t,
         alt: e,
@@ -22307,8 +22307,8 @@ function bH() {
 function bQ({
   recordingKey: e
 }) {
-  let [t, i] = _$$lJ2('stackCounterSizing');
-  let [n, s] = _$$lJ2('stackPrimarySizing');
+  let [t, i] = useSelectionProperty('stackCounterSizing');
+  let [n, s] = useSelectionProperty('stackPrimarySizing');
   let r = 'NONE';
   r = t === 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE' && n === 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE' ? 'WIDTH_AND_HEIGHT' : t === 'FIXED' && n === 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE' ? 'HEIGHT' : 'NONE';
   let o = useCallback((e, t) => {
@@ -22984,12 +22984,12 @@ let yY = forwardRef(({
     bigNudgeAmount,
     wheelMultiplier,
     scrubMultiplier
-  } = Xs();
+  } = getNudgeMultipliers();
   let g = useId();
   let f = useCallback((e, t) => {
     r(n, e, t);
   }, [r, n]);
-  return jsx($j, {
+  return jsx(LengthInput, {
     bigNudgeAmount,
     'data-tooltip': t,
     'data-tooltip-type': KindEnum.TEXT,
@@ -23131,7 +23131,7 @@ let yZ = memo(({
       })
     }), jsx(_$$fn2, {
       ref: r,
-      leftInput: jsx(_$$Pd, {
+      leftInput: jsx(OpacityInput, {
         disabled: !f,
         dispatch: _,
         forwardedRef: d,
@@ -23203,7 +23203,7 @@ function ve({
         value: {
           chevron: _$$t9
         },
-        children: jsx(_$$vD2, {
+        children: jsx(NumericDropdownInput, {
           'ariaLabel': getI18nString('fullscreen.type_panel.font_size'),
           bigNudgeAmount,
           'className': Ej,
@@ -23322,7 +23322,7 @@ function vs({
   return jsx(_$$fn2, {
     ref: n,
     leftLabel: renderI18nText('properties.label.alignment'),
-    leftInput: jsx(_$$E11, {
+    leftInput: jsx(AutoInteractableWrapper, {
       name: 'text_align_horizontal',
       children: jsx(vo, {
         textAlignHorizontal: r,
@@ -23332,7 +23332,7 @@ function vs({
       })
     }),
     rightLabel: null,
-    rightInput: jsx(_$$E11, {
+    rightInput: jsx(AutoInteractableWrapper, {
       name: 'text_align_vertical',
       children: jsx(vd, {
         textAlignVertical: d,
@@ -23599,8 +23599,8 @@ function vU(e) {
   return [];
 }
 function vq() {
-  let e = _$$kl('accessibilityLabelType');
-  let t = _$$kl('accessibilityCategory');
+  let e = useSelectionPropertyValue('accessibilityLabelType');
+  let t = useSelectionPropertyValue('accessibilityCategory');
   let i = useDeepEqualSceneValue(e => {
     let t;
     for (let i of e.getDirectlySelectedNodes()) {
@@ -23618,7 +23618,7 @@ function vq() {
   return _$$b13(e, t, i);
 }
 function vX() {
-  let [e, t] = _$$lJ2('isDecorativeImage');
+  let [e, t] = useSelectionProperty('isDecorativeImage');
   return [e, t];
 }
 function vV(e) {
@@ -23642,7 +23642,7 @@ function vG(e) {
   }
 }
 function vW() {
-  let [e] = _$$lJ2('ariaAttributes');
+  let [e] = useSelectionProperty('ariaAttributes');
   let t = vV('sites_add_accessibility_tag');
   let i = vV('sites_remove_accessibility_tag');
   let n = useMemo(() => {
@@ -23867,7 +23867,7 @@ var js = (e => (e[e.NONE = 0] = 'NONE', e[e.TAG = 1] = 'TAG', e[e.LABEL = 2] = '
 function jr(e) {
   let t = vq();
   let [i, n] = function () {
-    let [e, t] = _$$lJ2('accessibleLabel');
+    let [e, t] = useSelectionProperty('accessibleLabel');
     return [e, t];
   }();
   let [o, d] = vW();
@@ -24182,7 +24182,7 @@ function jx({
   let s = useId();
   let [o, d] = function () {
     let e = vq();
-    let [t, i] = _$$lJ2('accessibleHTMLTag');
+    let [t, i] = useSelectionProperty('accessibleHTMLTag');
     let n = t;
     n || (n = _$$_11.AUTO);
     e.tagEditable || (n = e.tagDefaultValue);
@@ -24498,11 +24498,11 @@ function jw(e) {
     } catch (t) {
       e && console.error('Error parsing HTML Widget selection property value', e, t);
     }
-  }(_$$kl(e));
+  }(useSelectionPropertyValue(e));
 }
 function jS(e) {
   let t = jw(e);
-  let i = A5(e);
+  let i = useUpdateSelectionProperty(e);
   return [t, useCallback((e, t) => {
     i(e ? e.toString() : '', t);
   }, [i])];
@@ -24672,7 +24672,7 @@ function jz({
           },
           'recordingKey': n ? `${n}-slider` : void 0
         })
-      }), jsx(Ht, {
+      }), jsx(NumericInput, {
         'className': 'embed_config_controls--scrubbableIntInput--OrgR9',
         'value': o,
         'onValueChange': e => {
@@ -25150,7 +25150,7 @@ function j1() {
 }
 let j4 = 'responsivenessPanel';
 function j3() {
-  let e = _$$kl('responsiveSetScalingMode');
+  let e = useSelectionPropertyValue('responsiveSetScalingMode');
   let t = useId();
   return getFeatureFlags().sites ? jsxs(_$$Zk, {
     children: [jsx(_$$r8, {
@@ -25190,7 +25190,7 @@ function j3() {
 function j8({
   ariaLabelledBy: e
 }) {
-  let t = _$$kl('responsiveSetScalingMode') ?? 'REFLOW';
+  let t = useSelectionPropertyValue('responsiveSetScalingMode') ?? 'REFLOW';
   let i = useDispatch();
   let n = Um();
   let a = trackFileEventWithStore();
@@ -25242,10 +25242,10 @@ function j6({
 function j7({
   property: e
 }) {
-  let t = _$$kl(e);
+  let t = useSelectionPropertyValue(e);
   isInvalidValue(t);
   let i = t;
-  return jsx(Q7, {
+  return jsx(FormattedInputVariant1, {
     property: i,
     formatter: kt,
     onChange: t => {
@@ -25259,10 +25259,10 @@ function j7({
 function j9({
   property: e
 }) {
-  let t = _$$kl(e);
+  let t = useSelectionPropertyValue(e);
   isInvalidValue(t);
   let i = t;
-  return jsx(Q7, {
+  return jsx(FormattedInputVariant1, {
     property: i,
     formatter: kt,
     onChange: t => {
@@ -25303,12 +25303,12 @@ let kd = _$$c$6;
 function kc(e) {
   let t = useDispatch();
   let i = Um();
-  let n = Df();
-  let o = Jo();
+  let n = createShownTransformControlsObservable();
+  let o = createEnabledTransformControlsObservable();
   let [d, c] = Xw();
   let p = useCurrentFileKey();
-  let [x, m] = _$$lJ2('stackPositioning');
-  let g = _$$kl('scrollBehavior');
+  let [x, m] = useSelectionProperty('stackPositioning');
+  let g = useSelectionPropertyValue('scrollBehavior');
   let f = G7();
   let _ = _$$Tv();
   let y = useMemo(() => {
@@ -25447,12 +25447,12 @@ function ku({
     numSelected,
     areOnlyResponsiveSetsSelected,
     pluginRelaunchData
-  } = DQ('numSelected', 'areOnlyResponsiveSetsSelected', 'pluginRelaunchData');
+  } = useNonMixedSelectedStyleOrSelectionPropertyValues('numSelected', 'areOnlyResponsiveSetsSelected', 'pluginRelaunchData');
   let {
     exportSettings,
     maskType
-  } = zj('exportSettings', 'maskType');
-  let D = _$$Gt('stateGroupSelectionInfo');
+  } = useSelectionPropertyValues('exportSettings', 'maskType');
+  let D = useNonMixedSelectionPropertyValue('stateGroupSelectionInfo');
   let z = _$$SJ();
   return jsxs(TabLoop, {
     children: [jsx(_$$_i, {
@@ -25724,7 +25724,7 @@ function kO({
   update: l = () => void 0,
   context: s
 }) {
-  let [r, o] = _$$lJ2(e);
+  let [r, o] = useSelectionProperty(e);
   return [kF({
     behaviorType: e,
     get: i,
@@ -25747,7 +25747,7 @@ function kF({
   get: t,
   context: i
 }) {
-  let n = _$$kl(e);
+  let n = useSelectionPropertyValue(e);
   return isInvalidValue(n) ? MIXED_MARKER : t(n && n || void 0, i);
 }
 let k$ = 'styles-module--previewRow--ma294 ui3_modal_rows--_row--x9xQX ui3_rows--_row--DnZFk ui3_rows--_grid--cP2Wu';
@@ -25962,7 +25962,7 @@ function wl({
   return jsx(Fragment, {
     children: isValidValue(e) && e != null && t != null && jsx(k5, {
       label: renderI18nText('sites.panel.interactions_panel.transition_delay'),
-      input: jsx(W4, {
+      input: jsx(TimeMillisecondsInput, {
         'data-tooltip': getI18nString('sites.panel.interactions_panel.transition_delay'),
         'data-tooltip-type': KindEnum.TEXT,
         'dispatch': a,
@@ -25996,7 +25996,7 @@ function wa({
     children: isValidValue(c) && isValidValue(t) && (!p || c === 'CUSTOM_SPRING') && jsx(k5, {
       label: renderI18nText('sites.panel.interactions_panel.transition_duration'),
       input: p ? jsx(_$$y11.Consumer, {
-        children: ([e]) => jsx(W4, {
+        children: ([e]) => jsx(TimeMillisecondsInput, {
           'dispatch': d,
           'value': _$$xX(_$$w_(e)),
           'onValueChange': x,
@@ -26007,7 +26007,7 @@ function wa({
           'tooltipForScreenReadersOnly': !0,
           'recordingKey': generateRecordingKey(a, 'springDurationInput')
         })
-      }) : jsx(W4, {
+      }) : jsx(TimeMillisecondsInput, {
         'dispatch': d,
         'value': i,
         'onValueChange': n,
@@ -26254,12 +26254,12 @@ function wy({
   recordingKey: x
 }) {
   let m = useDispatch();
-  let h = Xs();
+  let h = getNudgeMultipliers();
   let g = e => e.stopPropagation();
   return jsxs(k8, {
     children: [jsx(k5, {
       label: renderI18nText('sites.panel.interactions_panel.opacity'),
-      input: jsx(_$$Pd, {
+      input: jsx(OpacityInput, {
         inputClassName: kV,
         value: i,
         onValueChange: n,
@@ -26273,7 +26273,7 @@ function wy({
       })
     }), jsx(k5, {
       label: renderI18nText('sites.panel.interactions_panel.scale'),
-      input: jsx(_$$j0, {
+      input: jsx(ScrubbableInput, {
         'bigNudgeAmount': 0.1,
         'data-tooltip': getI18nString('sites.panel.interactions_panel.scale'),
         'data-tooltip-type': KindEnum.TEXT,
@@ -26294,7 +26294,7 @@ function wy({
       })
     }), jsx(k3, {
       label: renderI18nText('sites.panel.interactions_panel.offset'),
-      leftInput: jsx(_$$gq, {
+      leftInput: jsx(ExpressionInput, {
         'inputClassName': kV,
         'value': a,
         'onValueChange': r,
@@ -26309,7 +26309,7 @@ function wy({
           children: renderI18nText('fullscreen.properties_panel.transform_panel.x')
         })
       }),
-      rightInput: jsx(_$$gq, {
+      rightInput: jsx(ExpressionInput, {
         'inputClassName': kV,
         'value': o,
         'onValueChange': d,
@@ -26326,7 +26326,7 @@ function wy({
       })
     }), jsx(k5, {
       label: renderI18nText('fullscreen.properties_panel.transform_panel.rotation'),
-      input: jsx(Zp, {
+      input: jsx(AngleInput, {
         'inputClassName': kV,
         'value': c,
         'onValueChange': p,
@@ -27264,7 +27264,7 @@ function Sv(e) {
         })]
       })
     }), g === 'manual' && jsx(k3, {
-      leftInput: jsx(_$$gq, {
+      leftInput: jsx(ExpressionInput, {
         'value': d,
         'onValueChange': c,
         'smallNudgeAmount': i,
@@ -27277,7 +27277,7 @@ function Sv(e) {
           children: renderI18nText('sites.panel.interactions_panel.x')
         })
       }),
-      rightInput: jsx(_$$gq, {
+      rightInput: jsx(ExpressionInput, {
         'value': p,
         'onValueChange': x,
         'smallNudgeAmount': i,
@@ -27405,7 +27405,7 @@ function SN(e) {
           value: {
             inputComponent: SE
           },
-          children: jsx(_$$vD2, {
+          children: jsx(NumericDropdownInput, {
             'bigNudgeAmount': g,
             'data-tooltip': getI18nString('sites.panel.interactions_panel.marquee_speed_tooltip'),
             'data-tooltip-type': KindEnum.TEXT,
@@ -27617,7 +27617,7 @@ function SK({
   behaviorType: e
 }) {
   let t = function (e) {
-    let t = _$$kl(e);
+    let t = useSelectionPropertyValue(e);
     return {
       behaviorType: e,
       ...t
@@ -27636,7 +27636,7 @@ function SH({
   let n = useRef(null);
   let s = useRef(null);
   let r = useSceneGraphSelector();
-  let o = _$$kl('opacity');
+  let o = useSelectionPropertyValue('opacity');
   let d = useMemo(() => ({
     opacity: isInvalidValue(o) ? void 0 : o
   }), [o]);
@@ -27850,13 +27850,13 @@ function Sq({
   behavior: e
 }) {
   let t = function () {
-    let e = _$$kl('numSelectedByType');
-    let t = _$$kl('numSelected');
+    let e = useSelectionPropertyValue('numSelectedByType');
+    let t = useSelectionPropertyValue('numSelected');
     return !!(e && isValidValue(e)) && t !== 0 && _$$OU(e, ['TEXT']);
   }();
   let i = function () {
-    let e = _$$kl('numSelectedByType');
-    let t = _$$kl('numSelected');
+    let e = useSelectionPropertyValue('numSelectedByType');
+    let t = useSelectionPropertyValue('numSelected');
     return !!(e && isValidValue(e)) && t !== 0 && _$$OU(e, ['FRAME']);
   }();
   let n = i || !t && !i;
@@ -28496,7 +28496,7 @@ function CU(e) {
   return jsxs(k8, {
     children: [jsx(k5, {
       label: renderI18nText('sites.panel.interactions_panel.speed'),
-      input: jsx(_$$w4, {
+      input: jsx(PercentageBaseInput, {
         'bigNudgeAmount': CV,
         'data-tooltip': getI18nString('sites.panel.interactions_panel.speed'),
         'data-tooltip-type': KindEnum.TEXT,
@@ -29376,7 +29376,7 @@ function Th(e) {
 }
 let Tg = function (e) {
   return () => {
-    let [t, i] = _$$lJ2(Xc.Code);
+    let [t, i] = useSelectionProperty(Xc.Code);
     let n = Array.isArray(t) ? function (e) {
       let t = e.filter(e => !!e || (kP || (reportError(ServiceCategories.MAKE, new Error('Expected code behavior on selected node but none found')), kP = !0), !1));
       return t.length !== 0 ? t : void 0;
@@ -29814,8 +29814,8 @@ function TA(e) {
     s.length !== 1 || n ? fullscreenValue.hidePicker() : ex(t, i);
   }, [ef, Z, selectedInteractions, V, G, ex, ee]);
   let ey = function () {
-    let e = _$$kl('containsResponsiveSets');
-    let t = _$$kl('containsSitesLayouts');
+    let e = useSelectionPropertyValue('containsResponsiveSets');
+    let t = useSelectionPropertyValue('containsSitesLayouts');
     let i = !e && t;
     return !0 === i && !isInvalidValue(i);
   }();
@@ -29825,7 +29825,7 @@ function TA(e) {
     isLayoutNodeSelected: i,
     appliedCodeBehaviors: n
   }) {
-    let s = _$$kl('nodesAreAllStacksOrText');
+    let s = useSelectionPropertyValue('nodesAreAllStacksOrText');
     let d = useSceneGraphSelection();
     let c = function () {
       let e = _$$mU();
@@ -29846,8 +29846,8 @@ function TA(e) {
         codeBehaviorData: t.codeBehaviorData
       })) : [];
     }();
-    let x = _$$kl('isInFixedScrollingTree');
-    let m = _$$kl('isInStickyScrollingTree');
+    let x = useSelectionPropertyValue('isInFixedScrollingTree');
+    let m = useSelectionPropertyValue('isInStickyScrollingTree');
     let g = x || m;
     let f = !0 === g || isInvalidValue(g);
     let _ = [{
@@ -30368,15 +30368,15 @@ function TL(e) {
   });
 }
 let TP = () => {
-  let e = _$$kl(Xc.Appear);
-  let t = _$$kl(Xc.ScrollParallax);
-  let i = _$$kl(Xc.ScrollTransform);
-  let n = _$$kl(Xc.Marquee);
-  let l = _$$kl(Xc.Cursor);
-  let a = _$$kl(Xc.Hover);
-  let s = _$$kl(Xc.Focus);
-  let r = _$$kl(Xc.Press);
-  let o = _$$kl(Xc.Code);
+  let e = useSelectionPropertyValue(Xc.Appear);
+  let t = useSelectionPropertyValue(Xc.ScrollParallax);
+  let i = useSelectionPropertyValue(Xc.ScrollTransform);
+  let n = useSelectionPropertyValue(Xc.Marquee);
+  let l = useSelectionPropertyValue(Xc.Cursor);
+  let a = useSelectionPropertyValue(Xc.Hover);
+  let s = useSelectionPropertyValue(Xc.Focus);
+  let r = useSelectionPropertyValue(Xc.Press);
+  let o = useSelectionPropertyValue(Xc.Code);
   return {
     [Xc.Appear]: e,
     [Xc.ScrollParallax]: t,
@@ -30613,7 +30613,7 @@ function TY({
 }) {
   let a = selectCurrentFile();
   let o = useSelector(e => e.userFlags);
-  let d = _$$tN('containsResponsiveSets');
+  let d = useSelectedStyleOrSelectionPropertyValue('containsResponsiveSets');
   let c = !n[ItemType.FRAME_PRESETS] && !n[ItemType.PENCIL_TOOL] && !d;
   let p = z0();
   let x = Object.keys(i).length > 0 && _$$Yh(p, 'create-code-layer-from-design');

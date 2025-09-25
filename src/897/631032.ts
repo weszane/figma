@@ -8,8 +8,8 @@ import { isSitesFileType } from "../figma_app/976749";
 import { _P } from "../figma_app/2590";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { $j } from "../figma_app/178475";
-import { nA } from "../905/203369";
+import { LengthInput } from "../figma_app/178475";
+import { FormattedInputVariant2 } from "../905/203369";
 import { y as _$$y } from "../897/572017";
 import { A as _$$A } from "../897/590880";
 import { $2, BG } from "../897/961984";
@@ -660,7 +660,7 @@ export let $$Y0 = memo(function (e) {
     });
   };
   let A = n => {
-    let r = jsx($j, {
+    let r = jsx(LengthInput, {
       bigNudgeAmount: 10,
       className: N,
       "data-tooltip": getI18nString("proto.easing_editor.spring_stiffness"),
@@ -685,7 +685,7 @@ export let $$Y0 = memo(function (e) {
     });
   };
   let g = n => {
-    let r = jsx($j, {
+    let r = jsx(LengthInput, {
       bigNudgeAmount: 10,
       className: N,
       "data-tooltip": getI18nString("proto.easing_editor.spring_damping"),
@@ -710,7 +710,7 @@ export let $$Y0 = memo(function (e) {
     });
   };
   let f = n => {
-    let r = jsx($j, {
+    let r = jsx(LengthInput, {
       bigNudgeAmount: 10,
       className: N,
       "data-tooltip": getI18nString("proto.easing_editor.spring_mass"),
@@ -735,7 +735,7 @@ export let $$Y0 = memo(function (e) {
     });
   };
   let x = t => {
-    let n = jsx(nA, {
+    let n = jsx(FormattedInputVariant2, {
       className: "prototype_easing_editor--input--2fhlq",
       formatter: _$$n,
       property: t,

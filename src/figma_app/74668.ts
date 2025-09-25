@@ -26,7 +26,7 @@ import { S as _$$S } from "../figma_app/552746";
 import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { _j, Dh } from "../figma_app/843119";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { i as _$$i2 } from "../figma_app/85949";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
@@ -617,7 +617,7 @@ export function $$eh0({
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.styles.edit_style"),
           "data-tooltip-type": KindEnum.TEXT,
-          onMouseDown: dG
+          onMouseDown: stopPropagation
         },
         "aria-expanded": M,
         onClick: F,

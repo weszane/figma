@@ -359,7 +359,7 @@ import { FUSE_CONFIG_PROFILE, FUSE_CONFIG_COMMENT } from '../figma_app/740025';
 import { EditorPreferencesApi } from '../figma_app/740163';
 import { U as _$$U2 } from '../figma_app/751728';
 import { h as _$$h5 } from '../figma_app/752483';
-import { dG } from '../figma_app/753501';
+import { stopPropagation } from '../figma_app/753501';
 import { F as _$$F2 } from '../figma_app/757236';
 import { ActionType, AppStateTsApi, AssetSource, ColorFormatEnum, ComponentPropsAiCPPBindings, ContentFillNudgesStateBindings, DesignGraphElements, DesignToBuzzHelpers, FirstDraftHelpers, Fullscreen, ImageToolsBindings, LayoutTabType, SceneGraphHelpers, UiParserHelpers } from '../figma_app/763686';
 import { w as _$$w3 } from '../figma_app/774411';
@@ -9059,7 +9059,7 @@ function lv({
         widget: e.name
       }),
       'onClick': s,
-      'onPointerUp': dG,
+      'onPointerUp': stopPropagation,
       'className': rB()(cssBuilderInstance.bgTransparent.h24.$),
       'data-testid': 'extension-options-button',
       'children': o
@@ -9067,7 +9067,7 @@ function lv({
       'role': 'button',
       'tabIndex': 0,
       'onClick': s,
-      'onPointerUp': dG,
+      'onPointerUp': stopPropagation,
       'className': rB()(cssBuilderInstance.bgTransparent.h24.$),
       'data-testid': 'extension-options-button',
       'children': o

@@ -1,14 +1,14 @@
 import { getI18nString } from "../905/303541";
 import { isValidValue } from "../905/216495";
 import { isArrowEndCap } from "../figma_app/385874";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$l1({
   getTypeCountAndNodeOverrides: e,
   getNodeTypeStringOverrides: t
 } = {}) {
-  let [r] = lJ("leftEndCap");
-  let [c] = lJ("rightEndCap");
+  let [r] = useSelectionProperty("leftEndCap");
+  let [c] = useSelectionProperty("rightEndCap");
   let u = isValidValue(r) ? r : void 0;
   let p = isValidValue(c) ? c : void 0;
   return useDeepEqualSceneValue((e, t, r) => {

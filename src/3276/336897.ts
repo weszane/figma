@@ -15,7 +15,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { hideDropdownAction } from "../905/929976";
 import { hideTooltip } from "../905/765855";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { isUIHiddenOrLocked } from "../905/868547";
 import { Py, AD } from "../figma_app/578768";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -179,7 +179,7 @@ function V(e) {
       }), jsx("span", {
         className: vO,
         children: secondaryActions && secondaryActions.length > 0 && (getFeatureFlags().a11y_multiplayer_dropdown ? et() : jsxs("div", {
-          onMouseUp: dG,
+          onMouseUp: stopPropagation,
           children: [jsx("div", {
             className: G7,
             ref: Z,

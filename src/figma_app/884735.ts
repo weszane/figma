@@ -11,7 +11,7 @@ import { nt, o3 } from '../905/226610';
 import { fd, K8, LC, Me, Q_, RH, t$, UD, uZ, V_, YM } from '../905/246565';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { i as _$$i } from '../905/415810';
-import { p as _$$p } from '../905/427409';
+import { FormattedInputContext } from '../905/427409';
 import { sD, Xn } from '../905/429125';
 import { IconButton } from '../905/443068';
 import { a as _$$a } from '../905/632329';
@@ -49,7 +49,7 @@ export function $$H0(e) {
     label
   } = e;
   let c = useMemo(_$$en, []);
-  let _ = useContext(_$$p);
+  let _ = useContext(FormattedInputContext);
   let {
     containingProductComponentGUID,
     containingInstanceGUID,

@@ -8,11 +8,11 @@ import { A as _$$A } from "../905/891805";
 import { getFeatureFlags } from "../905/601108";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
 import { isInvalidValue } from "../905/216495";
-import { kl, lJ } from "../905/275640";
+import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
 import { Um } from "../905/848862";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
@@ -107,7 +107,7 @@ function P({
   children: e,
   name: t
 }) {
-  return t ? jsx(_$$E, {
+  return t ? jsx(AutoInteractableWrapper, {
     name: t,
     children: e
   }) : jsx(Fragment, {
@@ -410,7 +410,7 @@ function q({
   setHoveredSetting: t,
   recordingKey: n
 }) {
-  let i = kl("stackMode");
+  let i = useSelectionPropertyValue("stackMode");
   return jsxs(Fragment, {
     children: [jsx(U, {
       setting: e.setting,
@@ -438,14 +438,14 @@ function J({
 }) {
   let n = useDispatch();
   let o = Um();
-  let [c, k] = lJ("stackReverseZIndex");
+  let [c, k] = useSelectionProperty("stackReverseZIndex");
   let y = trackFileEventWithUser();
   let S = useSelector(selectSceneGraphSelectionKeys);
   let j = getI18nState()?.getPrimaryLocale(!0) === languageCodes.EN ? 120 : 180;
   let b = isInvalidValue(c);
   let N = !0 === c;
   let I = useId();
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "stacking_order_control",
     children: jsx(_$$L, {
       label: getI18nString("fullscreen.properties_panel.stack_panel.canvas_stacking_order"),
@@ -527,11 +527,11 @@ function ee({
   updatePreview: e,
   recordingKey: t
 }) {
-  let n = kl("stackMode");
-  let i = "BASELINE" === kl("stackCounterAlignItems");
+  let n = useSelectionPropertyValue("stackMode");
+  let i = "BASELINE" === useSelectionPropertyValue("stackCounterAlignItems");
   let r = "HORIZONTAL" !== n;
   let a = sR();
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "baseline_alignment_control",
     children: jsx(_$$k2, {
       label: getI18nString("fullscreen.properties_panel.stack_panel.align_text_baseline"),
@@ -568,13 +568,13 @@ function et({
 }) {
   let n = useDispatch();
   let a = Um();
-  let [o, c] = lJ("bordersTakeSpace");
+  let [o, c] = useSelectionProperty("bordersTakeSpace");
   let m = trackFileEventWithUser();
   let k = useSelector(selectSceneGraphSelectionKeys);
   let y = isInvalidValue(o);
   let S = !0 === o;
   let j = useId();
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "borders_take_space_control",
     children: jsx(_$$L, {
       label: getI18nString("fullscreen.properties_panel.stack_panel.borders_take_space"),

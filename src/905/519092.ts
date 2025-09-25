@@ -11,7 +11,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { Dm } from "../figma_app/8833";
-import { ft } from "../figma_app/753501";
+import { shouldHandleMultiTouchOrPressure } from "../figma_app/753501";
 import { K1, CY, Y5, zB, Vw, jT, yl, P9, nd, SM, x7, EJ, EO, UR, xR, qG, JF, Wc, Rh, Jg, eo, fp, hS, TX, R2 } from "../905/634218";
 var l = o;
 let y = "header-modal-title";
@@ -192,7 +192,7 @@ export class $$I2 extends Component {
       recordingKey: generateRecordingKey(this.props, "headerModalContainer"),
       dataTestId: generateRecordingKey(this.props, "headerModalContainer") + ".close-button"
     });
-    let r = ft();
+    let r = shouldHandleMultiTouchOrPressure();
     return jsxs("div", {
       className: `${this.props.className || ""}`,
       ref: this.props.containerRef,

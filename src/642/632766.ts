@@ -8,11 +8,11 @@ import { getNudgeAmounts } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { ig } from "../figma_app/178475";
-import { sA } from "../figma_app/841644";
+import { PercentageInput } from "../figma_app/178475";
+import { VariableBindingInput } from "../figma_app/841644";
 import { u3 } from "../figma_app/152690";
 import { useLatestRef } from "../figma_app/922077";
-import { p as _$$p } from "../905/427409";
+import { FormattedInputContext } from "../905/427409";
 import { HF, C8, wH, Jj, mx } from "../figma_app/409807";
 import { QK, hF } from "../figma_app/960598";
 var d = o;
@@ -20,7 +20,7 @@ function _({
   setShowSinglePaddingControl: e,
   containsFocus: t
 }) {
-  let s = useContext(_$$p);
+  let s = useContext(FormattedInputContext);
   let r = s?.isShowingBindingUI;
   let i = useLatestRef(r);
   let l = useLatestRef(t);
@@ -92,7 +92,7 @@ export function $$j0({
     children: [jsx(_, {
       setShowSinglePaddingControl: x,
       containsFocus: D
-    }), jsx(ig, {
+    }), jsx(PercentageInput, {
       bigNudgeAmount,
       "data-tooltip": M,
       "data-tooltip-proxy-element-id": consumedVariable ? E : void 0,
@@ -145,7 +145,7 @@ export function $$j0({
       })
     })]
   }), [x, D, inputClassName, v, smallNudgeAmount, bigNudgeAmount, P, j, noBorderOnFocus, noLeftBorder, squareRightBorder, M, consumedVariable, E, onFocus, onBlur, onNudge, onMouseEnter, onMouseLeave, onClick, onKeyDown, onPaste, recordingKey, inputTestId, O, I, k, s, onScrubBegin, onScrubEnd]);
-  return jsx(sA, {
+  return jsx(VariableBindingInput, {
     recordingKey: y.recordingKey,
     fields: L,
     disableEntryPoint: o,

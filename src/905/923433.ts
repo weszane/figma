@@ -18,14 +18,14 @@ import { getBigNudgeAmount, getSmallNudgeAmount } from "../figma_app/740163";
 import { Kd, BQ, u as _$$u, t8 } from "../figma_app/852050";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { gq, Pd } from "../figma_app/178475";
-import { sJ } from "../figma_app/841644";
+import { ExpressionInput, OpacityInput } from "../figma_app/178475";
+import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { J as _$$J } from "../905/225412";
 import { h as _$$h } from "../905/65944";
-import { AN } from "../905/203369";
+import { FormattedInputVariant3 } from "../905/203369";
 import { $, b as _$$b } from "../905/483620";
-import { nE } from "../figma_app/260445";
-import { p as _$$p } from "../905/427409";
+import { VariableAliasProvider } from "../figma_app/260445";
+import { FormattedInputContext } from "../905/427409";
 import { _r, oG } from "../905/176258";
 import { Oi, eF } from "../figma_app/394327";
 import { G } from "../905/658204";
@@ -62,7 +62,7 @@ export function $$G1(e) {
     });
   }, [e.containerRef]));
   let c = (getFeatureFlags().prototype_variable_debug_view ? d : void 0) ?? a ?? l ?? resolveVariableValue(e.variable.resolvedType);
-  return c ? jsx(nE, {
+  return c ? jsx(VariableAliasProvider, {
     variableSetId: e.variableSetId,
     variableID: e.variable.node_id,
     modeID: e.modeID,
@@ -102,7 +102,7 @@ export function $$z2(e) {
           [M]: i === $.CELL,
           [j]: i === $.FORM
         }),
-        children: jsx(sJ, {
+        children: jsx(FormattedInputWithWrapper, {
           noBorder: !0,
           recordingKey: generateRecordingKey(e.recordingKey, "stringVariableInputControl"),
           iconLayout: i === $.CELL ? "flex" : "absolute",
@@ -128,7 +128,7 @@ export function $$z2(e) {
           "variables_modal_value_input--booleanForm--l1Pjp variables_modal_value_input--booleanCell--kwjjI": i === $.FORM,
           [F]: e.isInaccessible
         }, e.innerContainerClassName),
-        children: jsx(sJ, {
+        children: jsx(FormattedInputWithWrapper, {
           noBorder: !0,
           recordingKey: generateRecordingKey(e.recordingKey, "booleanVariableInputControl"),
           iconLayout: i === $.CELL ? "flex" : "absolute",
@@ -156,7 +156,7 @@ export function $$z2(e) {
     case VariableDataType.FLOAT:
       {
         let r = jsx(w, {
-          children: jsx(gq, {
+          children: jsx(ExpressionInput, {
             bigNudgeAmount: u,
             "data-tooltip": v ?? "",
             "data-tooltip-type": KindEnum.TEXT,
@@ -188,7 +188,7 @@ export function $$z2(e) {
             [j]: i === $.FORM,
             [F]: e.isInaccessible
           }),
-          children: e.onPickerOpen ? jsx(sJ, {
+          children: e.onPickerOpen ? jsx(FormattedInputWithWrapper, {
             disabled: e.isInaccessible,
             iconLayout: i === $.CELL ? "flex" : "absolute",
             inputClassName: e.inputClassName,
@@ -198,7 +198,7 @@ export function $$z2(e) {
             onPickerOpen: e.onPickerOpen,
             recordingKey: generateRecordingKey(e.recordingKey, "numberInput"),
             children: r
-          }) : jsx(sJ, {
+          }) : jsx(FormattedInputWithWrapper, {
             disabled: e.isInaccessible,
             inputClassName: e.inputClassName,
             recordingKey: generateRecordingKey(e.recordingKey, "numberInput"),
@@ -263,7 +263,7 @@ function H({
   let p = useRef(null);
   let m = useRef(null);
   let [g, A] = useState(!1);
-  let b = useContext(_$$p);
+  let b = useContext(FormattedInputContext);
   let v = g && s || !!b?.isShowingBindingUI;
   let S = (e, n) => {
     e && i({
@@ -293,7 +293,7 @@ function H({
         color: t.value,
         recordingKey: generateRecordingKey(d, "openColorPicker")
       })
-    }), jsx(AN, {
+    }), jsx(FormattedInputVariant3, {
       className: "variables_modal_value_input--colorInput--l-7v7",
       disabled: o,
       formatter: TI,
@@ -302,7 +302,7 @@ function H({
       noBorderOnFocus: !0,
       dataTestId: generateRecordingKey(d, "textInput"),
       recordingKey: generateRecordingKey(d, "textInput")
-    }), e === $.CELL ? t.value.a < 1 && jsx(Pd, {
+    }), e === $.CELL ? t.value.a < 1 && jsx(OpacityInput, {
       disabled: o,
       className: U,
       inputClassName: B,
@@ -317,7 +317,7 @@ function H({
       noBorderOnFocus: !0,
       dispatch: u,
       recordingKey: generateRecordingKey(d, "opacityInput")
-    }) : jsx(Pd, {
+    }) : jsx(OpacityInput, {
       disabled: o,
       className: U,
       inputClassName: B,
@@ -354,7 +354,7 @@ function H({
 }
 function W(e) {
   let t = useRef(null);
-  let i = useContext(_$$p);
+  let i = useContext(FormattedInputContext);
   let a = _$$u(e.variableID);
   let s = t8(e.variableID, e.varSetKeyToModeID);
   return jsx("div", {

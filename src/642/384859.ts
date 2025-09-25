@@ -7,13 +7,13 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { kG } from "../figma_app/482495";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { E as _$$E } from "../642/160266";
-import { Jo, Df } from "../figma_app/98483";
+import { createEnabledTransformControlsObservable, createShownTransformControlsObservable } from "../figma_app/98483";
 export function $$_0({
   recordingKey: e,
   rowRef: t
@@ -23,8 +23,8 @@ export function $$_0({
   } = selectWithShallowEqual(e => ({
     selectedGUIDs: selectSceneGraphSelectionKeys(e)
   }));
-  let i = Jo();
-  let l = Df();
+  let i = createEnabledTransformControlsObservable();
+  let l = createShownTransformControlsObservable();
   let o = kG("corner-smoothing");
   let [d, p] = useState(!1);
   let h = l.cornerRadius;
@@ -62,7 +62,7 @@ export let $$b1 = memo(function ({
   disabled: s,
   recordingKey: n
 }) {
-  return jsx(E, {
+  return jsx(AutoInteractableWrapper, {
     name: "independent_corner_radius_toggle",
     children: jsx(_$$d, {
       actionOnPointerDown: !0,

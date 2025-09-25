@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { EventShield } from "../905/821217";
 import { LayoutTabType } from "../figma_app/763686";
 import { convertKiwiToVariableIdString } from "../905/805904";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { Point } from "../905/736624";
 import { e as _$$e, v as _$$v } from "../642/135773";
 import { o as _$$o2 } from "../905/96108";
@@ -224,7 +224,7 @@ function B({
     u ? y() : f();
   }, [u, y, f]);
   let L = !j && T && !e.colorVar && !N;
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "slides_color_input",
     children: L ? jsx(O, {
       paint: e,

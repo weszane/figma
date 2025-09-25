@@ -10,11 +10,11 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, MIXED_MARKER, AUTO_MARKER, isAutoMarker, isValidValue } from "../905/216495";
-import { lJ, kl } from "../905/275640";
+import { useSelectionProperty, useSelectionPropertyValue } from "../905/275640";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { Se } from "../figma_app/178475";
-import { sA } from "../figma_app/841644";
+import { ColorInput } from "../figma_app/178475";
+import { VariableBindingInput } from "../figma_app/841644";
 import { ow } from "../905/188421";
 import { c$, tV } from "../905/794875";
 import { t as _$$t2 } from "../905/1946";
@@ -37,9 +37,9 @@ export function $$M0({
     smallNudgeAmount,
     bigNudgeAmount
   } = getNudgeAmounts();
-  let [L, R] = lJ("stackCounterSpacing");
-  let O = kl("stackCounterSpacingSynced");
-  let [D, F] = lJ("stackCounterAlignContent");
+  let [L, R] = useSelectionProperty("stackCounterSpacing");
+  let O = useSelectionPropertyValue("stackCounterSpacingSynced");
+  let [D, F] = useSelectionProperty("stackCounterAlignContent");
   let B = trackFileEventWithUser();
   let K = useRef(!1);
   let G = isInvalidValue(D) ? MIXED_MARKER : "SPACE_BETWEEN" === D ? AUTO_MARKER : L;
@@ -129,14 +129,14 @@ export function $$M0({
       })
     });
   }
-  return jsx(sA, {
+  return jsx(VariableBindingInput, {
     recordingKey: d.recordingKey,
     inputClassName: d.outerClassName,
     fields: E,
     currentFieldValue: isValidValue(L) ? L : void 0,
     resolvedType: VariableResolvedDataType.FLOAT,
     disableEntryPoint: s,
-    children: jsx(Se, {
+    children: jsx(ColorInput, {
       allowEmpty: !0,
       bigNudgeAmount,
       "data-tooltip": Y,

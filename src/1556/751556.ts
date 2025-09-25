@@ -74,7 +74,7 @@ import { d8i } from "../figma_app/27776";
 import { trackEventAnalytics } from "../905/449184";
 import { X9 } from "../figma_app/236327";
 import { J as _$$J3 } from "../1577/181415";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { N as _$$N2 } from "../1577/472492";
 import { selectCurrentFile } from "../figma_app/516028";
 import { X2, td as _$$td } from "../figma_app/273118";
@@ -1134,7 +1134,7 @@ export function $$th1() {
         "data-tooltip": v,
         "data-tooltip-show-below": !0,
         "data-tooltip-max-width": 300,
-        onMouseDown: dG
+        onMouseDown: stopPropagation
       },
       onClick: () => {
         let e = o.current?.getBoundingClientRect();

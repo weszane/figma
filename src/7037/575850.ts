@@ -6,7 +6,7 @@ import { BaseLinkComponent } from "../905/551536";
 import { h1 } from "../905/986103";
 import { H8, Pf } from "../905/590952";
 import { selectViewAction } from "../905/929976";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { InterProfileType } from "../905/895626";
 var d = a;
 let f = "feed_profile_header--profile--BBFn9";
@@ -50,7 +50,7 @@ export function $$h0(e) {
     children: [!e.noAvatar && jsx(BaseLinkComponent, {
       onClick: n,
       trusted: !0,
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       children: jsx(H8, {
         user: e.user,
         size: e.size ?? Pf.LARGE

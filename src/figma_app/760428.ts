@@ -9,7 +9,7 @@ import { useMemoStable } from "../905/19536";
 import u from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { TQ, Zl } from "../905/211621";
 import { SvgComponent } from "../905/714743";
 import { o as _$$o } from "../905/96108";
@@ -210,7 +210,7 @@ export function $$J2({
     className: t4,
     svg: _$$A3
   });
-  return jsxs(_$$E, {
+  return jsxs(AutoInteractableWrapper, {
     name: "instance_title_control",
     children: [0 === instanceNameDisplayOverride ? jsx("div", {
       className: U ? Bt : Qp,

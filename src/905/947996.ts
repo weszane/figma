@@ -8,7 +8,7 @@ import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { H8 } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
-import { wo } from "../figma_app/753501";
+import { preventDefault } from "../figma_app/753501";
 import { E as _$$E } from "../905/511388";
 import { D } from "../905/621624";
 var $$n0;
@@ -118,7 +118,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
         gap: "3px"
       }).$,
       role: "button",
-      onPointerDown: wo,
+      onPointerDown: preventDefault,
       tabIndex: 0,
       children: e
     });

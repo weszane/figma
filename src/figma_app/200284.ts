@@ -24,7 +24,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { LN } from "../figma_app/975811";
 import { D as _$$D } from "../figma_app/451499";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { A as _$$A2 } from "../905/639174";
 import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
@@ -44,7 +44,7 @@ import { Y as _$$Y2 } from "../905/513028";
 import { K as _$$K2 } from "../figma_app/622160";
 import { A as _$$A3 } from "../905/502895";
 import { $O } from "../905/194758";
-import { Q7 } from "../905/203369";
+import { FormattedInputVariant1 } from "../905/203369";
 import { u as _$$u } from "../figma_app/365543";
 import { c as _$$c } from "../905/913880";
 import { Id, fI } from "../figma_app/626177";
@@ -578,7 +578,7 @@ class eA extends PureComponent {
       formatter: this.imageScaleModeFormatter,
       id: "image-scale-mode-select",
       onChange: this.onImageScaleModeChange,
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       property: this.props.paint.imageScaleMode,
       recordingKey: this.props.recordingKey,
       children: e
@@ -595,7 +595,7 @@ class ex extends PureComponent {
     });
   }
   render() {
-    return jsx(Q7, {
+    return jsx(FormattedInputVariant1, {
       className: this.props.className,
       formatter: this.formatter,
       property: this.props.value,

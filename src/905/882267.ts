@@ -56,7 +56,7 @@ import { cn } from "../905/959568";
 import { e0 } from "../905/696396";
 import { fI } from "../figma_app/626177";
 import { We } from "../905/805224";
-import { p as _$$p } from "../905/427409";
+import { FormattedInputContext } from "../905/427409";
 import { d9 } from "../905/579068";
 import { Ao } from "../905/748636";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
@@ -916,7 +916,7 @@ function eW({
   currentFieldValue: i,
   onHidePicker: a
 }) {
-  let s = useContext(_$$p);
+  let s = useContext(FormattedInputContext);
   let o = useRef(null);
   let l = useCallback(() => {
     o.current && (s?.isShowingBindingUI ? a?.() : s?.showBindingUI(o.current, {

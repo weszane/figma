@@ -2,10 +2,10 @@ import { jsx } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
 import a from "classnames";
 import { Lk } from "../figma_app/975811";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { KindEnum } from "../905/129884";
-import { Zp, j5, gq, w2 } from "../figma_app/178475";
-import { KG } from "../figma_app/98483";
+import { AngleInput, ScrubbableInput, ExpressionInput, PercentageBaseInput } from "../figma_app/178475";
+import { useTransformInputHandler } from "../figma_app/98483";
 var s = a;
 function p(e) {
   return s()("scrubbable_style_overrides--scrubbable--P1-fg", e.className, {
@@ -18,9 +18,9 @@ export function $$m0(e) {
     dataTooltip,
     ...a
   } = e;
-  return jsx(Zp, {
+  return jsx(AngleInput, {
     ...a,
-    onKeyDown: dG,
+    onKeyDown: stopPropagation,
     dispatch: lQ,
     className: p(e),
     "data-tooltip-type": KindEnum.TEXT,
@@ -56,9 +56,9 @@ export function $$g1(e) {
       maxNumDigits: 2
     }
   });
-  return jsx(j5, {
+  return jsx(ScrubbableInput, {
     ...a,
-    onKeyDown: dG,
+    onKeyDown: stopPropagation,
     formatter: s,
     dispatch: lQ,
     "data-tooltip-type": KindEnum.TEXT,
@@ -71,7 +71,7 @@ export function $$g1(e) {
   });
 }
 export function $$f3(e) {
-  let t = KG({
+  let t = useTransformInputHandler({
     key: "x",
     setValue: e.onValueChange
   });
@@ -81,10 +81,10 @@ export function $$f3(e) {
     dataTooltipShowAbove,
     ...s
   } = e;
-  return jsx(gq, {
+  return jsx(ExpressionInput, {
     ...t,
     ...s,
-    onKeyDown: dG,
+    onKeyDown: stopPropagation,
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": dataTooltip,
     "data-tooltip-show-above": dataTooltipShowAbove,
@@ -100,9 +100,9 @@ export function $$_2(e) {
     dataTooltip,
     ...a
   } = e;
-  return jsx(w2, {
+  return jsx(PercentageBaseInput, {
     ...a,
-    onKeyDown: dG,
+    onKeyDown: stopPropagation,
     dispatch: lQ,
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": dataTooltip,

@@ -25,7 +25,7 @@ import { MediaQuerySvgComponent } from "../905/331623";
 import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { jr } from "../figma_app/896988";
 import { isValidValue, MIXED_MARKER, normalizeValue, isAutoMarker } from "../905/216495";
@@ -113,7 +113,7 @@ function X(e) {
       e.onMouseLeave && e.onMouseLeave(t);
       a(!1);
     },
-    onPointerDown: e.isDisabled ? void 0 : dG,
+    onPointerDown: e.isDisabled ? void 0 : stopPropagation,
     recordingKey: e.recordingKey,
     style: {
       width: e.inputWidth,
@@ -134,7 +134,7 @@ function X(e) {
       e.onMouseLeave && e.onMouseLeave(t);
       a(!1);
     },
-    onPointerDown: e.isDisabled ? void 0 : dG,
+    onPointerDown: e.isDisabled ? void 0 : stopPropagation,
     style: {
       width: e.inputWidth,
       border: e.borderless ? "1px solid transparent" : void 0
@@ -807,7 +807,7 @@ class et extends RecordingPureComponent {
     return jsxs("div", {
       className: e,
       ref: this.containerRef,
-      onClick: dG,
+      onClick: stopPropagation,
       onMouseDown: this.props.onMouseDown,
       onMouseEnter: this.props.onMouseEnter,
       onMouseLeave: this.props.onMouseLeave,
@@ -988,8 +988,8 @@ class es extends PureComponent {
         style: e,
         onMouseEnter: this.onMouseEnterIndicator(-8),
         onMouseLeave: this.onMouseLeaveIndicator,
-        onMouseDown: dG,
-        onClick: dG,
+        onMouseDown: stopPropagation,
+        onClick: stopPropagation,
         onWheel: this.onWheelIndicator,
         children: jsx(SvgComponent, {
           className: w$,
@@ -1000,8 +1000,8 @@ class es extends PureComponent {
         style: t,
         onMouseEnter: this.onMouseEnterIndicator(8),
         onMouseLeave: this.onMouseLeaveIndicator,
-        onMouseDown: dG,
-        onClick: dG,
+        onMouseDown: stopPropagation,
+        onClick: stopPropagation,
         onWheel: this.onWheelIndicator,
         children: jsx(SvgComponent, {
           className: w$,

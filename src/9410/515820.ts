@@ -9,7 +9,7 @@ import { dh, nn, rE } from "../figma_app/186343";
 import { uF } from "../9410/398228";
 import { generateRecordingKey } from "../figma_app/878298";
 import { useIsFullscreenOverview } from "../figma_app/88239";
-import { jo } from "../figma_app/753501";
+import { preventDefaultAndStopPropagation } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { _ as _$$_ } from "../9410/218531";
 import { i as _$$i } from "../9410/799000";
@@ -64,7 +64,7 @@ function C({
   let j = a || getFeatureFlags().interop_pages;
   let I = (e || w || S) && !!d;
   let k = useCallback(e => {
-    jo(e);
+    preventDefaultAndStopPropagation(e);
     t || c?.({
       nodeId: E,
       clientX: e.clientX,

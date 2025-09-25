@@ -15,7 +15,7 @@ import { lW } from "../figma_app/11182";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { getColorFormat } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { u as _$$u, hg } from "../figma_app/852050";
 import { useDeepEqualSceneValue, useSingleSceneValue, useMultipleSceneValues, useSimpleSceneValue } from "../figma_app/167249";
 import { OE } from "../figma_app/155647";
@@ -37,7 +37,7 @@ export function $$C4() {
 export function $$w13() {
   let e = useSelector(e => e.mirror.selectionProperties?.numSelected === 1);
   let t = useSelector(e => e.mirror.sceneGraphSelection);
-  let r = kl("primaryBreakpointFrameGuid") ?? null;
+  let r = useSelectionPropertyValue("primaryBreakpointFrameGuid") ?? null;
   return e ? Object.keys(t).find(e => e) || null : r && isValidValue(r) ? r : null;
 }
 export function $$O10() {

@@ -31,7 +31,7 @@ import { JU } from "../figma_app/626177";
 import { l6, c$ as _$$c$ } from "../905/794875";
 import { NF } from "../figma_app/406976";
 import { $ } from "../905/483620";
-import { Cr } from "../figma_app/260445";
+import { VariableBindingsDropdown } from "../figma_app/260445";
 import { y$ } from "../figma_app/152690";
 import { Wc } from "../905/782020";
 import { gJ } from "../905/923433";
@@ -299,7 +299,7 @@ export function $$Z1({
       label: renderI18nText("variables.create_modal.value_label"),
       input: jsx("div", {
         className: hF,
-        children: jsxs(Cr, {
+        children: jsxs(VariableBindingsDropdown, {
           resolvedType: r,
           variableValue: s.varValue,
           onVariableValueChange: e => b(e),

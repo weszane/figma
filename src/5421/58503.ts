@@ -9,7 +9,7 @@ import { getI18nString } from "../905/303541";
 import { KD } from "../figma_app/975811";
 import { Um } from "../905/848862";
 import { createTrackedAtom } from "../figma_app/615482";
-import { Q7 } from "../905/203369";
+import { FormattedInputVariant1 } from "../905/203369";
 import { l6, c$ } from "../905/794875";
 var g = (e => (e.ANDROID_COMPACT = "ANDROID_COMPACT", e.ANDROID_MEDIUM = "ANDROID_MEDIUM", e.CUSTOM = "CUSTOM", e.IPHONE_16 = "IPHONE_16", e.IPHONE_16_PRO = "IPHONE_16_PRO", e.IPHONE_16_PRO_MAX = "IPHONE_16_PRO_MAX", e.IPHONE_16_PLUS = "IPHONE_16_PLUS", e.IPHONE_SE = "IPHONE_SE", e))(g || {});
 let $$y2 = {
@@ -154,7 +154,7 @@ export function $$A3() {
         children: [jsx("span", {
           className: "x10l6tqk xncym2f x19up5dg xwa60dl x1cb1t30 x52n8ys x47corl x1j6dyjg x1vjfegm",
           children: getI18nString("figmake.mobile_preview.labels.width")
-        }), jsx(Q7, {
+        }), jsx(FormattedInputVariant1, {
           className: "xd3ty66 x1v8gsql xfj9a5l x1et26g5 x3sae66 x177gm3j xl0cjzi",
           property: C,
           formatter: new KD(),
@@ -170,7 +170,7 @@ export function $$A3() {
         children: [jsx("span", {
           className: "x10l6tqk xncym2f x19up5dg xwa60dl x1cb1t30 x52n8ys x47corl x1j6dyjg x1vjfegm",
           children: getI18nString("figmake.mobile_preview.labels.height")
-        }), jsx(Q7, {
+        }), jsx(FormattedInputVariant1, {
           className: "xd3ty66 x1v8gsql xfj9a5l x1et26g5 x3sae66 x177gm3j xl0cjzi",
           property: h,
           formatter: new KD(),

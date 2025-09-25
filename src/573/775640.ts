@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { TrackingProvider } from "../figma_app/831799";
-import { Gt } from "../905/275640";
+import { useNonMixedSelectionPropertyValue } from "../905/275640";
 import { useSceneGraphSelection } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCachedSubtree } from "../figma_app/679183";
@@ -14,7 +14,7 @@ export function $$g0({
 }) {
   let t = selectCurrentFile();
   let s = useSceneGraphSelection();
-  let g = Gt("prototypeStartingPointsInfo");
+  let g = useNonMixedSelectionPropertyValue("prototypeStartingPointsInfo");
   let y = !g || g.length > 0;
   let m = 0 === Object.keys(s).length;
   let f = t?.canEdit;

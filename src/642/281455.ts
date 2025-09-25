@@ -8,7 +8,7 @@ import { isInvalidValue, isValidValue, MIXED_MARKER, normalizeValue } from '../9
 import { B as _$$B } from '../905/229357';
 import { Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
-import { zj } from '../905/275640';
+import { useSelectionPropertyValues } from '../905/275640';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { Q as _$$Q } from '../905/346809';
 import { w as _$$w } from '../905/442596';
@@ -140,7 +140,7 @@ export function $$G0(e) {
     backgroundEnabled,
     backgroundOpacity,
     exportBackgroundDisabled
-  } = zj('backgroundColor', 'backgroundEnabled', 'backgroundOpacity', 'exportBackgroundDisabled');
+  } = useSelectionPropertyValues('backgroundColor', 'backgroundEnabled', 'backgroundOpacity', 'exportBackgroundDisabled');
   let G = e => fullscreenValue.updateSelectionProperties({
     backgroundEnabled: e
   });

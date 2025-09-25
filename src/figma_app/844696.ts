@@ -11,7 +11,7 @@ import { Q } from "../figma_app/67145";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { ro } from "../figma_app/451499";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { normalizeValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
 import { Z, m as _$$m } from "../905/423399";
@@ -48,7 +48,7 @@ function N(e) {
       }) : jsx(K0, {
         className: s,
         tabIndex: -1,
-        onPointerDown: dG,
+        onPointerDown: stopPropagation,
         onMouseDown: e,
         "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
@@ -108,7 +108,7 @@ let R = memo(function (e) {
       inputClassName: p6,
       minTop: 6,
       onChange: e.onBlendModeChange,
-      onMouseDown: dG,
+      onMouseDown: stopPropagation,
       property: e.blendMode,
       recordingKey: e.recordingKey,
       children: r

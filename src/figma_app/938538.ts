@@ -4,7 +4,7 @@ import { lQ } from "../905/934246";
 import { ButtonPrimitive } from "../905/632989";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import l from "classnames";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { KindEnum } from "../905/129884";
 import { Yq } from "../figma_app/769863";
 import { sg } from "../figma_app/48566";
@@ -71,7 +71,7 @@ export function $$f1({
     "toolbelt_button--hovered--njMdl": p
   });
   let v = useHandleMouseEvent(y, "mousedown", r);
-  let A = g ? dG : lQ;
+  let A = g ? stopPropagation : lQ;
   return jsx("div", {
     ref: I,
     "aria-label": e,

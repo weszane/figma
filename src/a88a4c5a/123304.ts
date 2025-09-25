@@ -59,7 +59,7 @@ import { A as _$$A4 } from '../905/251970';
 import { Label } from '../905/270045';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { O as _$$O5 } from '../905/273186';
-import { tN as _$$tN, Gt, pw } from '../905/275640';
+import { useSelectedStyleOrSelectionPropertyValue, useNonMixedSelectionPropertyValue, useSelectedStyleOrSelectionPropertyValues } from '../905/275640';
 import { h as _$$h2 } from '../905/284399';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -10044,10 +10044,10 @@ function ai({
   let u = useAppModelProperty('currentSelectedProperty');
   let c = isDevHandoffEditorType();
   let p = d && !c;
-  let h = Gt('numSelected');
+  let h = useNonMixedSelectionPropertyValue('numSelected');
   let {
     exportSettings
-  } = pw('exportSettings');
+  } = useSelectedStyleOrSelectionPropertyValues('exportSettings');
   let m = Wd();
   return jsx(useCachedSubtree, {
     isVisible: !0,
@@ -10080,7 +10080,7 @@ function ap({
 }) {
   let s = selectCurrentFile();
   let d = useIsFullscreenSitesView();
-  let u = _$$tN('containsResponsiveSets');
+  let u = useSelectedStyleOrSelectionPropertyValue('containsResponsiveSets');
   let c = !i[ItemType.FRAME_PRESETS] && !i[ItemType.PENCIL_TOOL] && !u;
   return jsxs(Fragment, {
     children: [jsx(useCachedSubtree, {

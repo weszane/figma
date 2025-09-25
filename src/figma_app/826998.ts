@@ -8,7 +8,7 @@ import { Yq, J3, $Q } from "../figma_app/315578";
 import { wf } from "../figma_app/975811";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue } from "../905/216495";
-import { Gt } from "../905/275640";
+import { useNonMixedSelectionPropertyValue } from "../905/275640";
 import { u as _$$u, t8 } from "../figma_app/852050";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
@@ -360,7 +360,7 @@ export function $$H14({
   redact: o,
   subPropertyRow: l
 }) {
-  let d = Gt(i) ?? void 0;
+  let d = useNonMixedSelectionPropertyValue(i) ?? void 0;
   let c = a ? "function" == typeof a ? a(d) : a.format(d) : d;
   let u = s ? "function" == typeof s ? s(r ?? d) : s.format(r ?? d) : r ?? d;
   return jsx($$V9, {
@@ -476,7 +476,7 @@ export function $$X11({
   isTextProperty: s,
   subPropertyRow: o
 }) {
-  let l = Gt(r) ?? void 0;
+  let l = useNonMixedSelectionPropertyValue(r) ?? void 0;
   let d = i ? i(l) : l;
   return jsx($, {
     name: e,
@@ -500,7 +500,7 @@ export function $$q12({
   disableSuggestions: u,
   disableDetailModalEntry: p
 }) {
-  let _ = Gt(r) ?? void 0;
+  let _ = useNonMixedSelectionPropertyValue(r) ?? void 0;
   let m = s ? s(_) : _;
   let g = pc(i, "number" == typeof m ? m : _, a, u);
   return jsx($, {
@@ -632,7 +632,7 @@ export function $$ee13({
   disableDetailModalEntry: o,
   subPropertyRow: l
 }) {
-  let d = Gt(r) ?? 0;
+  let d = useNonMixedSelectionPropertyValue(r) ?? 0;
   let c = pc(i, d, a, s);
   let u = c?.variable?.node_id;
   return jsx($$V9, {
@@ -734,7 +734,7 @@ export function $$ei16({
   valueFormatter: i,
   subPropertyRow: a
 }) {
-  let s = Gt(r) ?? 0;
+  let s = useNonMixedSelectionPropertyValue(r) ?? 0;
   let o = i ? i(s) : s;
   return jsx($$V9, {
     name: e,
@@ -772,7 +772,7 @@ export function $$es10({
   selectionPropertyKey: r,
   subPropertyRow: i
 }) {
-  let a = Gt(r) ?? void 0;
+  let a = useNonMixedSelectionPropertyValue(r) ?? void 0;
   return jsx($$V9, {
     name: e,
     value: a,

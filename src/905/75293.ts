@@ -15,7 +15,7 @@ import f from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { useSetupPlayback, generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -32,17 +32,17 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
-import { fl, Ht, Pd } from "../figma_app/178475";
-import { sJ } from "../figma_app/841644";
+import { ScrubbableDropdownInput, NumericInput, OpacityInput } from "../figma_app/178475";
+import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { executeWithDSAAction } from "../905/135117";
 import { J as _$$J } from "../905/225412";
 import { h as _$$h2 } from "../905/65944";
-import { AN } from "../905/203369";
+import { FormattedInputVariant3 } from "../905/203369";
 import { Id } from "../figma_app/626177";
 import { l6, c$ as _$$c$, Z0, sK } from "../905/794875";
 import { cS } from "../figma_app/334459";
-import { hu, V5 } from "../figma_app/260445";
-import { p as _$$p } from "../905/427409";
+import { ControlledVariablePickerProvider, VariablePicker } from "../figma_app/260445";
+import { FormattedInputContext } from "../905/427409";
 import { MH } from "../figma_app/394327";
 import { oz } from "../figma_app/406976";
 import { Ao } from "../905/748636";
@@ -119,7 +119,7 @@ export function $$el2({
     bigNudgeAmount: l,
     smallNudgeAmount: u
   };
-  let F = jsx(_$$E, {
+  let F = jsx(AutoInteractableWrapper, {
     name: "grid_settings_pattern_select",
     children: getFeatureFlags().ce_tv_fpl_select ? jsx("span", {
       className: ee,
@@ -320,7 +320,7 @@ function eu({
   children: i,
   ...a
 }) {
-  let s = useContext(_$$p);
+  let s = useContext(FormattedInputContext);
   let o = useRef(null);
   let l = t ?? o;
   let d = useCallback((t, i) => {
@@ -329,7 +329,7 @@ function eu({
       e && s?.showBindingUI(e);
     } else e(t, i);
   }, [e, l, s]);
-  return jsxs(fl, {
+  return jsxs(ScrubbableDropdownInput, {
     ...a,
     onValueChange: d,
     forwardedRef: l,
@@ -361,7 +361,7 @@ let ep = memo(function ({
       sectionSizeVar: void 0
     });
   };
-  let u = () => jsx(Ht, {
+  let u = () => jsx(NumericInput, {
     ...(d ? {
       className: e
     } : {
@@ -383,7 +383,7 @@ let ep = memo(function ({
     tooltipForScreenReadersOnly: !0,
     value: d ? void 0 : t.sectionSize
   });
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "grid_settings_section_size_input",
     children: d ? u() : jsx(eb, {
       recordingKey: generateRecordingKey(r, "sectionSizeVar"),
@@ -404,7 +404,7 @@ let em = memo(function ({
   smallNudgeAmount: o
 }) {
   let l = useDispatch();
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "grid_settings_gutter_size_input",
     children: jsx(eb, {
       recordingKey: generateRecordingKey(r, "gutterSizeVar"),
@@ -412,7 +412,7 @@ let em = memo(function ({
       inputClassName: e,
       layoutGrid: t,
       onChange: i,
-      children: jsx(Ht, {
+      children: jsx(NumericInput, {
         bigNudgeAmount: s,
         className: J,
         "data-tooltip": getI18nString("fullscreen.grids_panel.grid_settings.gutter"),
@@ -466,7 +466,7 @@ let eh = memo(function ({
     });
   };
   let h = d === languageCodes.EN ? "grid_settings--stripesTypeDropdown--V6Bp3" : "grid_settings--stripesTypeDropdownL10n--R1Ksc";
-  return getFeatureFlags().ce_tv_fpl_select ? jsx(_$$E, {
+  return getFeatureFlags().ce_tv_fpl_select ? jsx(AutoInteractableWrapper, {
     name: "grid_settings_layout_type_select",
     children: jsxs(_$$bL, {
       onChange: m,
@@ -493,7 +493,7 @@ let eh = memo(function ({
         })]
       })]
     })
-  }) : jsx(_$$E, {
+  }) : jsx(AutoInteractableWrapper, {
     name: "grid_settings_layout_type_select",
     children: jsxs(en, {
       ariaLabel: getI18nString("fullscreen.grid_panel.layout_guide_type"),
@@ -539,7 +539,7 @@ let eg = memo(function ({
       offsetVar: void 0
     });
   };
-  let u = () => jsx(Ht, {
+  let u = () => jsx(NumericInput, {
     ...(d ? {
       className: e
     } : {
@@ -559,7 +559,7 @@ let eg = memo(function ({
     tooltipForScreenReadersOnly: !0,
     value: d ? 0 : t.offset
   });
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "grid_settings_offset_input",
     children: d ? u() : jsx(eb, {
       recordingKey: generateRecordingKey(r, "offsetVar"),
@@ -578,9 +578,9 @@ let ef = memo(function ({
   recordingKey: r
 }) {
   let a = TI;
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "grid_settings_color_input",
-    children: jsx(AN, {
+    children: jsx(FormattedInputVariant3, {
       className: e,
       noLeftBorder: !0,
       property: t.color,
@@ -602,9 +602,9 @@ function e_({
   recordingKey: i
 }) {
   let r = useDispatch();
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "grid_settings_opacity_input",
-    children: jsx(Pd, {
+    children: jsx(OpacityInput, {
       className: "grid_settings--gridOpacity--yH4u- paint_panels--opacityInputContainer--oqlsk",
       value: e,
       onValueChange: t,
@@ -727,7 +727,7 @@ function eb({
   }, [p, t, s, l]);
   let f = useRef(null);
   let _ = e;
-  d && (_ = jsx(sJ, {
+  d && (_ = jsx(FormattedInputWithWrapper, {
     recordingKey: c,
     inputClassName: i,
     currentFieldValue: u,
@@ -737,11 +737,11 @@ function eb({
       forwardedRef: f
     })
   }));
-  return jsxs(hu, {
+  return jsxs(ControlledVariablePickerProvider, {
     boundVariableId: u,
     resolvedType: VariableResolvedDataType.FLOAT,
     onVariableSelected: g,
-    children: [jsx(V5, {}), _]
+    children: [jsx(VariablePicker, {}), _]
   });
 }
 export const t_ = $$ea0;

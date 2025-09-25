@@ -10,14 +10,14 @@ import { UT } from "../figma_app/95266";
 import { Tv } from "../figma_app/151869";
 import { c as _$$c } from "../figma_app/94664";
 import { ZU, Wg } from "../figma_app/986347";
-import { p as _$$p } from "../905/427409";
+import { FormattedInputContext } from "../905/427409";
 export function $$g0() {
   let e = useRef(null);
   let t = useAtomWithSubscription(_$$c);
   let {
     isShowingBindingUI,
     showBindingUI
-  } = useContext(_$$p) ?? {};
+  } = useContext(FormattedInputContext) ?? {};
   let f = Tv() || [];
   let E = useDeepEqualSceneValue((e, t) => {
     for (let r of t) {

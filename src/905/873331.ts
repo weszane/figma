@@ -11,13 +11,13 @@ import { getI18nString } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, isValidValue } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { Um } from "../905/848862";
 import { useOnSelectionChange } from "../figma_app/722362";
 import { KindEnum } from "../905/129884";
-import { e as _$$e } from "../905/579635";
-import { $j } from "../figma_app/178475";
-import { sA } from "../figma_app/841644";
+import { conditionalWrapper } from "../905/579635";
+import { LengthInput } from "../figma_app/178475";
+import { VariableBindingInput } from "../figma_app/841644";
 import { Jz } from "../905/504727";
 import { fn } from "../figma_app/811257";
 import { lF, TV, Yp, XG } from "../905/62223";
@@ -236,9 +236,9 @@ function L({
         return "BORDER_RIGHT_WEIGHT";
     }
   }(t)], [t]);
-  return jsx(_$$e, {
+  return jsx(conditionalWrapper, {
     condition: !0,
-    wrapper: t => jsx(sA, {
+    wrapper: t => jsx(VariableBindingInput, {
       recordingKey: generateRecordingKey(o, "independentStrokeWeightInputWrapper"),
       fields: E,
       resolvedType: VariableResolvedDataType.FLOAT,
@@ -247,7 +247,7 @@ function L({
       inputClassName: e,
       children: t
     }),
-    children: jsx($j, {
+    children: jsx(LengthInput, {
       bigNudgeAmount,
       className: e,
       "data-tooltip": getI18nString("fullscreen.properties_panel.borders.stroke_width"),
@@ -273,8 +273,8 @@ function L({
 }
 export function $$F1(e) {
   let t = XG();
-  let i = kl("borderStrokeWeightsIndependent");
-  let a = kl("strokeWeight");
+  let i = useSelectionPropertyValue("borderStrokeWeightsIndependent");
+  let a = useSelectionPropertyValue("strokeWeight");
   let s = useMemo(() => [kF.LEFT, kF.RIGHT, kF.TOP, kF.BOTTOM].reduce((e, i) => (e[i] = t(i), e), {}), [t]);
   let o = useMemo(() => i ? {} : {
     [s.Top.property]: a,

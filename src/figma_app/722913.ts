@@ -8,7 +8,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { toArray, MIXED_MARKER, isInvalidValue } from "../905/216495";
-import { Gt } from "../905/275640";
+import { useNonMixedSelectionPropertyValue } from "../905/275640";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { iM, SA } from "../figma_app/405546";
 import { lN, lF, QE, F2, Ge, dg, Y4 } from "../figma_app/384713";
@@ -22,15 +22,15 @@ let E = e => {
   return !(("frequency" in e ? e.frequency === frequency : "interval" in e ? e.interval === frequency : throwTypeError) && e.wiggle === wiggle && e.smoothen === smoothen);
 };
 export function $$y1() {
-  let e = toArray(Gt("strokeBrushGuid"));
-  let t = toArray(Gt("dynamicStrokeSettings"));
+  let e = toArray(useNonMixedSelectionPropertyValue("strokeBrushGuid"));
+  let t = toArray(useNonMixedSelectionPropertyValue("dynamicStrokeSettings"));
   return e.length > 0 && e.every(e => f(sessionLocalIDToString(e))) ? "Brush" : t.length > 0 && t.every(e => e && E(e)) ? "Dynamic" : e.some(e => f(sessionLocalIDToString(e))) || t.some(e => e && E(e)) ? MIXED_MARKER : "Basic";
 }
 export function $$b6() {
-  return toArray(Gt("strokeBrushGuid")).every(e => !f(sessionLocalIDToString(e)));
+  return toArray(useNonMixedSelectionPropertyValue("strokeBrushGuid")).every(e => !f(sessionLocalIDToString(e)));
 }
 export function $$T2() {
-  return toArray(Gt("dynamicStrokeSettings")).every(e => !e || !E(e));
+  return toArray(useNonMixedSelectionPropertyValue("dynamicStrokeSettings")).every(e => !e || !E(e));
 }
 export function $$I0(e) {
   let t = useAtomWithSubscription(e);

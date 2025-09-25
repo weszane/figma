@@ -11,7 +11,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
 import { trackFileEventWithStore } from "../figma_app/901889";
-import { E as _$$E2 } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
 import { SvgComponent } from "../905/714743";
@@ -25,9 +25,9 @@ import { XH } from "../1250/322393";
 import { useCooperFrameSelectionInfo } from "../figma_app/334505";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { isInvalidValue, isValidValue, MIXED_MARKER } from "../905/216495";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { KindEnum } from "../905/129884";
-import { $j } from "../figma_app/178475";
+import { LengthInput } from "../figma_app/178475";
 import { A as _$$A } from "../905/139173";
 import { A as _$$A2 } from "../6828/364616";
 import { A as _$$A3 } from "../6828/844411";
@@ -39,7 +39,7 @@ let D = "template_type_dropdown_button--scrollIndicatorChevron--IVcq2";
 let U = "cooperInlineMenuTemplateTypeControl";
 export function $$G0() {
   return jsx(_$$R, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_.TemplateTypeSelector,
       children: jsx($$Q1, {})
     })
@@ -306,8 +306,8 @@ function $() {
 let H = e => EditorPreferencesApi().renderRulerUnitAsInches.getCopy() ? 300 * e : EditorPreferencesApi().renderRulerUnitAsCentimeters.getCopy() ? 300 * e / 2.54 : e;
 function Z() {
   let e = useDispatch();
-  let [t, n] = lJ("width");
-  let [s, o] = lJ("height");
+  let [t, n] = useSelectionProperty("width");
+  let [s, o] = useSelectionProperty("height");
   let a = 25;
   let c = 10;
   let d = "number" == typeof t ? t : 0;
@@ -335,7 +335,7 @@ function Z() {
   }, []);
   return jsxs("div", {
     className: "template_type_dropdown_button--dimensionsControlContainer--IIY39",
-    children: [jsx($j, {
+    children: [jsx(LengthInput, {
       bigNudgeAmount: c,
       "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.width"),
       "data-tooltip-type": KindEnum.TEXT,
@@ -350,7 +350,7 @@ function Z() {
         className: `${O} svg`,
         children: renderI18nText("fullscreen.properties_panel.transform_panel.w")
       })
-    }), jsx($j, {
+    }), jsx(LengthInput, {
       bigNudgeAmount: c,
       "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.height"),
       "data-tooltip-type": KindEnum.TEXT,

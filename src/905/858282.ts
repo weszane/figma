@@ -9,7 +9,7 @@ import { RecordingComponent, handleMouseEvent, SKIP_RECORDING, generateRecording
 import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Uu, Dm } from "../figma_app/8833";
-import { ft } from "../figma_app/753501";
+import { shouldHandleMultiTouchOrPressure } from "../figma_app/753501";
 import { KeyboardReceiver, KeyboardEventWrapper } from "../905/826900";
 import { ZD } from "../905/519092";
 import { O } from "../905/208152";
@@ -172,11 +172,11 @@ export class $$w2 extends RecordingComponent {
   }
   componentDidMount() {
     super.componentDidMount();
-    ft() ? (document.addEventListener("pointermove", this.documentMouseMove), document.addEventListener("pointerup", this.documentMouseUp, !0)) : (document.addEventListener("mousemove", this.documentMouseMove), document.addEventListener("mouseup", this.documentMouseUp, !0));
+    shouldHandleMultiTouchOrPressure() ? (document.addEventListener("pointermove", this.documentMouseMove), document.addEventListener("pointerup", this.documentMouseUp, !0)) : (document.addEventListener("mousemove", this.documentMouseMove), document.addEventListener("mouseup", this.documentMouseUp, !0));
   }
   componentWillUnmount() {
     super.componentWillUnmount();
-    ft() ? (document.removeEventListener("pointermove", this.documentMouseMove), document.removeEventListener("pointerup", this.documentMouseUp, !0)) : (document.removeEventListener("mousemove", this.documentMouseMove), document.removeEventListener("mouseup", this.documentMouseUp, !0));
+    shouldHandleMultiTouchOrPressure() ? (document.removeEventListener("pointermove", this.documentMouseMove), document.removeEventListener("pointerup", this.documentMouseUp, !0)) : (document.removeEventListener("mousemove", this.documentMouseMove), document.removeEventListener("mouseup", this.documentMouseUp, !0));
   }
   render() {
     let e = this.computeStyles(this.props.position);
@@ -189,7 +189,7 @@ export class $$w2 extends RecordingComponent {
     this.props.minSize && (i += ` ${cssBuilderInstance.minW200.minH200.$}`);
     this.props.fullFrame && (i += ` ${cssBuilderInstance.wFull.hFull.$}`);
     this.props.overflowHidden && (i += ` ${cssBuilderInstance.overflowHidden.$}`);
-    let a = ft();
+    let a = shouldHandleMultiTouchOrPressure();
     let o = jsx("div", {
       className: `${hQ} ${this.props.contentContainerClassName || ""}`,
       onPointerDown: a ? this.onContentMouseDown : void 0,

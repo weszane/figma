@@ -1,19 +1,19 @@
 import { useCallback, useMemo } from "react";
 import { deepEqual } from "../905/382883";
 import { isValidValue, arrayOrMixed, isInvalidValue, MIXED_MARKER } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { Xb, f3, P6, ac } from "../figma_app/641313";
 import { R1 } from "../figma_app/152690";
 import { kF, om } from "../figma_app/395097";
 export function $$c2() {
-  let e = kl("angle");
-  let t = kl("hasReflection");
-  let i = kl("borderTopWeight");
-  let r = kl("borderRightWeight");
-  let l = kl("borderBottomWeight");
-  let c = kl("borderLeftWeight");
-  let u = kl("borderStrokeWeightsIndependent");
-  let p = kl("strokeWeight");
+  let e = useSelectionPropertyValue("angle");
+  let t = useSelectionPropertyValue("hasReflection");
+  let i = useSelectionPropertyValue("borderTopWeight");
+  let r = useSelectionPropertyValue("borderRightWeight");
+  let l = useSelectionPropertyValue("borderBottomWeight");
+  let c = useSelectionPropertyValue("borderLeftWeight");
+  let u = useSelectionPropertyValue("borderStrokeWeightsIndependent");
+  let p = useSelectionPropertyValue("strokeWeight");
   u || (i = p, r = p, l = p, c = p);
   return useCallback((n, s) => {
     let u = [{
@@ -47,10 +47,10 @@ export function $$c2() {
 }
 let u = [kF.TOP, kF.BOTTOM, kF.LEFT, kF.RIGHT];
 export function $$p3(e = !0) {
-  let t = kl("borderTopVisible");
-  let i = kl("borderBottomVisible");
-  let r = kl("borderLeftVisible");
-  let o = kl("borderRightVisible");
+  let t = useSelectionPropertyValue("borderTopVisible");
+  let i = useSelectionPropertyValue("borderBottomVisible");
+  let r = useSelectionPropertyValue("borderLeftVisible");
+  let o = useSelectionPropertyValue("borderRightVisible");
   let l = $$c2();
   return useMemo(() => {
     let n = arrayOrMixed([t, i, r, o]);
@@ -69,8 +69,8 @@ export function $$p3(e = !0) {
 }
 export function $$m4() {
   let e = $$p3(!1);
-  let t = kl("borderSharedWeight");
-  let i = kl("borderStrokeWeightsIndependent");
+  let t = useSelectionPropertyValue("borderSharedWeight");
+  let i = useSelectionPropertyValue("borderStrokeWeightsIndependent");
   if (isInvalidValue(e)) return om.MIXED;
   if (0 === e.length) return om.ALL;
   if (1 === e.length) return e[0];

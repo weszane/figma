@@ -14,7 +14,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { clearSelection } from "../figma_app/741237";
 import { valueOrFallback, isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
-import { kl, lJ, pw, zj, DQ, fC, Gt } from "../905/275640";
+import { useSelectionPropertyValue, useSelectionProperty, useSelectedStyleOrSelectionPropertyValues, useSelectionPropertyValues, useNonMixedSelectedStyleOrSelectionPropertyValues, useNonMixedSelectionPropertyValues, useNonMixedSelectionPropertyValue } from "../905/275640";
 import { _P, $J, Qx } from "../figma_app/2590";
 import { e0 as _$$e } from "../905/696396";
 import { Mw, ON } from "../3276/43946";
@@ -28,7 +28,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { hY, yr, $X, Fh, r6, J_, AG, $w, dr } from "../figma_app/349969";
 import { TI, z5 } from "../905/713722";
 import { KindEnum } from "../905/129884";
-import { $j } from "../figma_app/178475";
+import { LengthInput } from "../figma_app/178475";
 import { Q as _$$Q } from "../905/346809";
 import { Point } from "../905/736624";
 import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
@@ -36,7 +36,7 @@ import { $T } from "../figma_app/8833";
 import { cn } from "../905/959568";
 import { J as _$$J2 } from "../905/225412";
 import { h as _$$h2 } from "../905/65944";
-import { AN } from "../905/203369";
+import { FormattedInputVariant3 } from "../905/203369";
 import { TN, dx } from "../figma_app/334459";
 import { hl, nV, fI, Zk } from "../figma_app/626177";
 import { hg, bi } from "../figma_app/425489";
@@ -146,7 +146,7 @@ function z(e) {
       opacity: c.a,
       recordingKey: generateRecordingKey(e, "chit"),
       className: "prototype_background_panel--chit--F--d0 paint_panels--chit--twQEy"
-    }), jsx(AN, {
+    }), jsx(FormattedInputVariant3, {
       className: "prototype_background_panel--color--e5Pc8 paint_panels--colorInput--nSz13",
       noLeftBorder: !0,
       formatter: TI,
@@ -377,7 +377,7 @@ function Q(e) {
       }
     });
   }, [e.prototypeDevice.size.x, e.prototypeDevice.rotation]);
-  let r = jsx($j, {
+  let r = jsx(LengthInput, {
     bigNudgeAmount: e.bigNudgeAmount,
     className: "prototype_device_panel--scrubbableInputLeftCol--P2T66 prototype_device_panel--scrubbableInput--0TFVb",
     "data-tooltip": getI18nString("presets.device_panel.device_width_tooltip"),
@@ -394,7 +394,7 @@ function Q(e) {
       children: renderI18nText("proto.device_panel.width")
     })
   });
-  let a = jsx($j, {
+  let a = jsx(LengthInput, {
     bigNudgeAmount: e.bigNudgeAmount,
     className: "prototype_device_panel--scrubbableInput--0TFVb",
     "data-tooltip": getI18nString("presets.device_panel.device_height_tooltip"),
@@ -769,8 +769,8 @@ function eK(e) {
   let [a, l] = function () {
     let e = getObservableValue(AppStateTsApi?.propertiesPanelState().shownPropertiesPanels, [])[ItemType.OVERFLOW_ITEM];
     let t = useIsFullscreenSitesView();
-    let n = kl("isSection");
-    let o = kl("anyTopLevelFramesInSelection");
+    let n = useSelectionPropertyValue("isSection");
+    let o = useSelectionPropertyValue("anyTopLevelFramesInSelection");
     return [e, !t && !n && !o];
   }();
   let s = useId();
@@ -812,8 +812,8 @@ function ez({
   recordingKey: t
 }) {
   let n = useDispatch();
-  let [a] = lJ("showWontScrollWarning");
-  let [l] = lJ("scrollDirection");
+  let [a] = useSelectionProperty("showWontScrollWarning");
+  let [l] = useSelectionProperty("scrollDirection");
   let s = eq();
   let d = useCallback(() => s ? eV : "HORIZONTAL" === l ? eR : eM, [s, l]);
   let c = useId();
@@ -871,7 +871,7 @@ function eG({
   recordingKey: t
 }) {
   let n = useDispatch();
-  let a = kl("scrollBehavior") || "SCROLLS";
+  let a = useSelectionPropertyValue("scrollBehavior") || "SCROLLS";
   let l = useCallback(e => {
     let t;
     switch (n(_P({
@@ -934,7 +934,7 @@ function eG({
 }
 function eY(e) {
   let t = useDispatch();
-  let n = kl("scrollBehavior");
+  let n = useSelectionPropertyValue("scrollBehavior");
   let {
     fixedScrollingDisabled
   } = eX();
@@ -974,7 +974,7 @@ function eY(e) {
   });
 }
 let eq = () => {
-  let [e] = lJ("marquee");
+  let [e] = useSelectionProperty("marquee");
   return !!isDefined(e);
 };
 let eX = () => selectWithShallowEqual(e => {
@@ -1056,8 +1056,8 @@ export let $$e70 = withTracking(function (e) {
     prototypeStartingPointsInfo,
     transitionNodeID
   } = function (e) {
-    let t = e ? pw : zj;
-    let n = e ? DQ : fC;
+    let t = e ? useSelectedStyleOrSelectionPropertyValues : useSelectionPropertyValues;
+    let n = e ? useNonMixedSelectedStyleOrSelectionPropertyValues : useNonMixedSelectionPropertyValues;
     return {
       ...t("prototypeDevice", "prototypeBackgroundColor", "numSelected", "numVideosSelected", "transitionNodeID", "isInstanceSublayerSelected", "isInstanceSelected", "isCodeInstanceSelected", "isValidPrototypingSourceSelected", "isTopLevelFrameAndValidPrototypeSourceSelected"),
       ...n("isSectionSelected", "numTransitionsOnCurrentPage", "prototypeStartingPointsInfo")
@@ -1069,10 +1069,10 @@ export let $$e70 = withTracking(function (e) {
     smallNudgeAmount
   } = getNudgeAmounts();
   let B = function (e) {
-    let t = Gt("videoMediaLoop");
-    let n = Gt("videoAutoplay");
-    let o = Gt("videoMuted");
-    let i = Gt("numVideosSelected");
+    let t = useNonMixedSelectionPropertyValue("videoMediaLoop");
+    let n = useNonMixedSelectionPropertyValue("videoAutoplay");
+    let o = useNonMixedSelectionPropertyValue("videoMuted");
+    let i = useNonMixedSelectionPropertyValue("numVideosSelected");
     if (e) {
       assertNotNullish(t);
       assertNotNullish(n);

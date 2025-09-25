@@ -1,7 +1,7 @@
 import { useSetAtom } from 'jotai/react';
 import { useEffect, useMemo, useRef } from 'react';
 import { normalizeValue } from '../905/216495';
-import { kl } from '../905/275640';
+import { useSelectionPropertyValue } from '../905/275640';
 import { selectCurrentUser } from '../905/372672';
 import { getObservableValue } from '../figma_app/84367';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
@@ -21,7 +21,7 @@ export function $$g1() {
 export function $$f3() {
   let e = useSetAtom(b);
   let t = useRef(null);
-  let r = kl('productComponentGUIDBackingInstances');
+  let r = useSelectionPropertyValue('productComponentGUIDBackingInstances');
   let i = normalizeValue(r);
   let s = useDeepEqualSceneValue((e, t) => {
     if (t) {

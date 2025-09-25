@@ -69,7 +69,7 @@ import { wp, jv } from "../905/886545";
 import { createPortal } from "react-dom";
 import { trackEventAnalytics } from "../905/449184";
 import { VZ } from "../905/959568";
-import { Gx } from "../figma_app/260445";
+import { useVariablePickerForAlias } from "../figma_app/260445";
 import { He, ED, kL, ok, qr } from "../905/24780";
 import { fr } from "../905/530789";
 import { ButtonPrimitive } from "../905/632989";
@@ -82,7 +82,7 @@ import { isCommandEvent } from "../905/63728";
 import { RecordableDiv } from "../905/511649";
 import { G as _$$G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
-import { dG, wo } from "../figma_app/753501";
+import { stopPropagation, preventDefault } from "../figma_app/753501";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { J as _$$J2 } from "../905/125993";
 import { debugState } from "../905/407919";
@@ -1254,7 +1254,7 @@ function eX(e) {
   let a = i?.type === VariableDataType.ALIAS;
   let s = i?.type === VariableDataType.EXPRESSION;
   let o = getFeatureFlags().ds_reactive_variables ? (a || s) && !t : a && !t;
-  let [d, c] = Gx(e.variableSet.node_id, e.variable.node_id, e.modeID, i.resolvedType);
+  let [d, c] = useVariablePickerForAlias(e.variableSet.node_id, e.variable.node_id, e.modeID, i.resolvedType);
   let u = useCallback(() => {
     c(e.cellElement, {
       initialView: "library"
@@ -2045,7 +2045,7 @@ function t1({
         })
       }), jsx("div", {
         className: "variables_modal_sidebar--sidebarContent--lXlAP",
-        onMouseDown: dG,
+        onMouseDown: stopPropagation,
         children: jsxs(hh, {
           children: [getFeatureFlags().ds_variables_modal_improvements_sidebar && jsx(tj, {
             currentVariableSet: v,
@@ -3141,7 +3141,7 @@ function iL({
     "aria-hidden": !0,
     htmlAttributes: {
       tabIndex: -1,
-      onPointerDown: wo
+      onPointerDown: preventDefault
     },
     children: jsx(_$$w, {})
   });

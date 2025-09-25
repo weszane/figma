@@ -70,8 +70,8 @@ import { PluginUIManager } from '../905/261467';
 import { V as _$$V4 } from '../905/261687';
 import { n as _$$n5 } from '../905/264891';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
-import { lJ as _$$lJ2, kl } from '../905/275640';
-import { E as _$$E2 } from '../905/277716';
+import { useSelectionProperty, useSelectionPropertyValue } from '../905/275640';
+import { AutoInteractableWrapper } from '../905/277716';
 import { Cj } from '../905/291654';
 import { Wv as _$$Wv, IA } from '../905/291714';
 import { y as _$$y } from '../905/292472';
@@ -345,7 +345,7 @@ import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from '../figma_a
 import { buildUploadUrl, isLocalCluster, isProdCluster } from '../figma_app/169182';
 import { Kl, OU } from '../figma_app/175258';
 import { N as _$$N } from '../figma_app/176280';
-import { j5 } from '../figma_app/178475';
+import { ScrubbableInput } from '../figma_app/178475';
 import { APIParameterUtils, createPaginatedValidator } from '../figma_app/181241';
 import { dh as _$$dh } from '../figma_app/186343';
 import { FFileType, FOrganizationLevelType, FPlanNameType } from '../figma_app/191312';
@@ -4645,7 +4645,7 @@ function rP() {
     children: jsx(_$$A7, {
       className: 'xxk0z11',
       positionY: _$$j5,
-      target: jsx(_$$E2, {
+      target: jsx(AutoInteractableWrapper, {
         name: _$$_2.CornersControlEntryPoint,
         children: jsx(rO, {
           isActive: isPopoverOpen,
@@ -4684,7 +4684,7 @@ function rM({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let [n, l] = _$$lJ2('cornerRadius');
+  let [n, l] = useSelectionProperty('cornerRadius');
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -4695,7 +4695,7 @@ function rM({
   let c = n ? isInvalidValue(n) ? MIXED_MARKER : n : 0;
   let u = e => l(e, yesNoTrackingEnum.YES);
   return jsx(rs, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.CornersSlider,
       children: jsx('div', {
         className: 'x12xui46 xe8ttls',
@@ -4707,9 +4707,9 @@ function rM({
           value: c,
           onChange: u,
           ariaLabel: getI18nString('cooper.inline_menu.corners'),
-          numberInput: jsx(_$$E2, {
+          numberInput: jsx(AutoInteractableWrapper, {
             name: _$$_2.CornersInput,
-            children: jsx(j5, {
+            children: jsx(ScrubbableInput, {
               bigNudgeAmount,
               'data-tooltip': getI18nString('cooper.inline_menu.corners'),
               'data-tooltip-type': KindEnum.TEXT,
@@ -4903,8 +4903,8 @@ function ib(e, t) {
 }
 let i_ = ['SOLID', 'GRADIENT_LINEAR', 'GRADIENT_ANGULAR', 'GRADIENT_DIAMOND', 'GRADIENT_RADIAL', 'IMAGE', 'VIDEO'];
 function ij() {
-  let [e] = _$$lJ2('imageOverlayPaint');
-  let t = kl('fillPaints');
+  let [e] = useSelectionProperty('imageOverlayPaint');
+  let t = useSelectionPropertyValue('fillPaints');
   return useCallback((n, l) => {
     paintManager.clearCache();
     let r = [{
@@ -4929,7 +4929,7 @@ function iv(e, t) {
   let o = r.every(e => !iI(e));
   let a = !n || i ? 0 : void 0;
   let s = !l || o ? 0 : void 0;
-  let d = kl('fontStyle');
+  let d = useSelectionPropertyValue('fontStyle');
   return useMemoStable(() => {
     if (!d || isInvalidValue(d)) {
       return {
@@ -4959,7 +4959,7 @@ function iS() {
   return !e || isInvalidValue(e) ? null : e[0];
 }
 function ik() {
-  let [e] = _$$lJ2('fillsType');
+  let [e] = useSelectionProperty('fillsType');
   return function (e, t, n) {
     if (!t) return;
     if (isInvalidValue(t)) {
@@ -4988,7 +4988,7 @@ function ik() {
         index: 0
       };
     }
-  }(e, kl('fillPaints'), kl('imageOverlayPaint'));
+  }(e, useSelectionPropertyValue('fillPaints'), useSelectionPropertyValue('imageOverlayPaint'));
 }
 function iD() {
   let {
@@ -5017,9 +5017,9 @@ function iD() {
   });
 }
 function i$() {
-  let e = kl('lineHeight');
+  let e = useSelectionPropertyValue('lineHeight');
   let t = _$$B2();
-  let n = kl('letterSpacing');
+  let n = useSelectionPropertyValue('letterSpacing');
   return jsxs(rs, {
     children: [jsx(iV, {
       lineHeight: e,
@@ -5037,7 +5037,7 @@ function iV({
   let l = vK();
   return !e || l ? null : jsx(_$$R4, {
     ref: n,
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.LineHeightInput,
       children: jsx('span', {
         'data-testid': 'cooper-inline-line-height-control',
@@ -5064,7 +5064,7 @@ function iG({
   let r = createRef();
   return e ? jsx(_$$R4, {
     ref: r,
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.FontSpacingInput,
       children: jsx('span', {
         'data-testid': 'cooper-inline-letter-spacing-control',
@@ -5164,7 +5164,7 @@ function iQ({
         label: n,
         enabled: l,
         icon: r
-      }]) => jsx(_$$E2, {
+      }]) => jsx(AutoInteractableWrapper, {
         name: _$$_2.LayoutAlignmentSelector,
         children: jsx(_$$ar, {
           'aria-label': n,
@@ -5936,7 +5936,7 @@ function an({
       styleIdForText: e.mirror.selectionProperties.styleIdForText || null
     }));
     let n = WH(e, styleIdForText, 'TEXT');
-    let l = kl('fontFamily');
+    let l = useSelectionPropertyValue('fontFamily');
     return useMemo(() => {
       let e = {
         fontFamily: isInvalidValue(l) ? getI18nString('common.mixed') : normalizeValue(l),
@@ -5962,7 +5962,7 @@ function an({
     ref: t,
     children: jsx(_$$A7, {
       positionY: _$$j5,
-      target: jsx(_$$E2, {
+      target: jsx(AutoInteractableWrapper, {
         name: _$$_2.FontFamilyControlEntryPoint,
         children: jsx(ar, {
           fontFamily,
@@ -5986,7 +5986,7 @@ function al({
   isShown: e,
   onNewFontSelected: t
 }) {
-  let n = kl('fontFamily');
+  let n = useSelectionPropertyValue('fontFamily');
   let l = normalizeValue(n);
   let r = useRef(null);
   let i = 'inheritTextStyleKey';
@@ -6068,7 +6068,7 @@ function al({
       'className': 'xafpxmx xg7h5cd',
       'ref': r,
       'data-testid': 'cooper-inline-font-family-picker',
-      'children': [jsx(_$$E2, {
+      'children': [jsx(AutoInteractableWrapper, {
         name: _$$_2.FontPicker,
         children: jsx(oO, {
           currentFont: l,
@@ -6081,7 +6081,7 @@ function al({
           localFontAgentVersion: T,
           onFontChange: C,
           recordingKey: 'cooper_inline_font_family_control',
-          searchRowButton: jsx(_$$E2, {
+          searchRowButton: jsx(AutoInteractableWrapper, {
             name: _$$_2.LibraryFontStyle,
             children: jsx('div', {
               className: 'controls--libraryFontPickerButton--H8P2S',
@@ -6141,8 +6141,8 @@ function ai({
 }) {
   let t = useSelector(e => e.fonts);
   let n = useMemo(() => _$$pn(t), [t]);
-  let l = kl('fontFamily');
-  let r = kl('fontStyle');
+  let l = useSelectionPropertyValue('fontFamily');
+  let r = useSelectionPropertyValue('fontStyle');
   let i = l ? LM({
     fontFamily: l,
     fontStyle: r,
@@ -6163,7 +6163,7 @@ function ai({
       'onPointerDownCapture': () => {
         document.dispatchEvent(new Event('pointerdown'));
       },
-      'children': jsx(_$$E2, {
+      'children': jsx(AutoInteractableWrapper, {
         name: _$$_2.FontStyleSelector,
         children: jsx(zz, {
           dropdownAlignment: 'right',
@@ -6201,7 +6201,7 @@ function ap() {
     togglePopover,
     closePopover
   } = _$$j6(_$$p5.TEXT_ALIGNMENT);
-  let [l, r] = _$$lJ2('textAlignHorizontal');
+  let [l, r] = useSelectionProperty('textAlignHorizontal');
   let i = useMemo(() => ({
     LEFT: {
       label: getI18nString('fullscreen.type_panel.align_left'),
@@ -6220,7 +6220,7 @@ function ap() {
       icon: () => jsx(_$$h4, {})
     }
   }), []);
-  let [s, d] = _$$lJ2('textAlignVertical');
+  let [s, d] = useSelectionProperty('textAlignVertical');
   let c = useMemo(() => ({
     TOP: {
       label: getI18nString('fullscreen.type_panel.align_top'),
@@ -6238,7 +6238,7 @@ function ap() {
   return jsx(_$$R4, {
     children: jsx(_$$A7, {
       positionY: _$$j5,
-      target: jsx(_$$E2, {
+      target: jsx(AutoInteractableWrapper, {
         name: _$$_2.TextAlignmentControlEntryPoint,
         children: jsx(_$$ar, {
           'data-testid': 'cooper-inline-text-alignment-control',
@@ -6308,7 +6308,7 @@ function ah({
       icon: i
     }]) => {
       let a = isValidValue(e) && e === t;
-      return jsx(_$$E2, {
+      return jsx(AutoInteractableWrapper, {
         name: _$$_2.TextHorizontalAlignmentSelector,
         children: jsx(_$$ar, {
           'aria-label': r,
@@ -6338,7 +6338,7 @@ function ag({
       icon: i
     }]) => {
       let a = isValidValue(e) && e === t;
-      return jsx(_$$E2, {
+      return jsx(AutoInteractableWrapper, {
         name: _$$_2.TextVerticalAlignmentSelector,
         children: jsx(_$$ar, {
           'aria-label': r,
@@ -6377,7 +6377,7 @@ function af() {
   });
 }
 function ab() {
-  let [e, t] = _$$lJ2('textDecoration');
+  let [e, t] = useSelectionProperty('textDecoration');
   let n = e && !isInvalidValue(e) && e === 'UNDERLINE';
   let l = useCallback(() => {
     n ? t('NONE', yesNoTrackingEnum.YES) : t('UNDERLINE', yesNoTrackingEnum.YES);
@@ -6439,7 +6439,7 @@ function ay() {
   });
 }
 function aE() {
-  let e = kl('fontSize');
+  let e = useSelectionPropertyValue('fontSize');
   let t = useCallback(e => {
     fullscreenValue.updateSelectionProperties({
       fontSize: e
@@ -6448,7 +6448,7 @@ function aE() {
     });
   }, []);
   return e ? jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.FontSizeInput,
       children: jsx('span', {
         'data-testid': 'cooper-inline-text-size-control',
@@ -6469,15 +6469,15 @@ function aE() {
 }
 function av() {
   let e = useSelector(e => e.fonts);
-  let t = kl('fontFamily');
+  let t = useSelectionPropertyValue('fontFamily');
   let n = iv(useMemo(() => _$$pn(e), [e]), t);
   return jsxs(Fragment, {
-    children: [jsx(_$$E2, {
+    children: [jsx(AutoInteractableWrapper, {
       name: _$$_2.ToggleBold,
       children: jsx(a_, {
         state: n.bold
       })
-    }), jsx(_$$E2, {
+    }), jsx(AutoInteractableWrapper, {
       name: _$$_2.ToggleItalic,
       children: jsx(aj, {
         state: n.italic
@@ -6486,7 +6486,7 @@ function av() {
   });
 }
 function aT() {
-  return jsx(_$$E2, {
+  return jsx(AutoInteractableWrapper, {
     name: _$$_2.ToggleUnderline,
     children: jsx(af, {})
   });
@@ -6501,7 +6501,7 @@ function aS() {
 }
 function ak() {
   return jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.MultiEditText,
       children: jsx(JE, {
         'aria-label': getI18nString('fullscreen_actions.multi-edit-text'),
@@ -6701,10 +6701,10 @@ function aN({
       return anyCooperFrames ? null : t;
     }();
     let r = function () {
-      let e = kl('inheritTextStyleKey');
+      let e = useSelectionPropertyValue('inheritTextStyleKey');
       let t = aI();
       let n = useSelector(e => e.fonts);
-      let l = kl('fontFamily');
+      let l = useSelectionPropertyValue('fontFamily');
       let r = iv(useMemo(() => _$$pn(n), [n]), l);
       let i = [];
       e || r.bold === iy.DISABLED || i.push({
@@ -6817,7 +6817,7 @@ function aN({
         }]
       });
     }(t), function () {
-      let e = kl('locked');
+      let e = useSelectionPropertyValue('locked');
       let t = !!(isInvalidValue(e) || e);
       let n = 'lock-selected-nodes';
       let l = getI18nString('cooper.inline_menu.more_options.lock_selection');
@@ -6876,7 +6876,7 @@ function aN({
       remainingSections: null
     };
   }(l !== null ? 0 : Math.min(Math.floor((e - 34 - 8) / 34), 2), n);
-  let c = kl('locked');
+  let c = useSelectionPropertyValue('locked');
   let u = !!(isInvalidValue(c) || c);
   return topLevelActions || l || remainingSections || u ? jsxs(Fragment, {
     children: [l && jsx(aL, {
@@ -6884,7 +6884,7 @@ function aN({
     }), topLevelActions && jsx(aw, {
       actions: topLevelActions
     }), u && jsx(_$$R4, {
-      children: jsx(_$$E2, {
+      children: jsx(AutoInteractableWrapper, {
         name: _$$_2.ToggleLock,
         children: jsx(_$$ar, {
           'data-testid': 'cooper-inline-top-level-unlock-action',
@@ -6917,7 +6917,7 @@ function aw({
 }) {
   return jsx(Fragment, {
     children: e.map((e, t) => e.type === 1 && e.asTopLevelAction ? e.asTopLevelAction() : jsx(_$$R4, {
-      children: jsx(_$$E2, {
+      children: jsx(AutoInteractableWrapper, {
         name: e.trackingId,
         children: jsx(_$$ar, {
           'data-testid': 'cooper-inline-top-level-action',
@@ -6951,7 +6951,7 @@ function aL({
   return jsx(_$$R4, {
     children: jsx(_$$A7, {
       positionY: _$$j5,
-      target: jsx(_$$E2, {
+      target: jsx(AutoInteractableWrapper, {
         name: _$$_2.AIToolsEntryPoint,
         children: jsx(_$$ar, {
           'aria-label': getI18nString('cooper.inline_menu.ai_tools'),
@@ -6994,7 +6994,7 @@ function aP({
   return jsx(_$$R4, {
     children: jsx(_$$A7, {
       positionY: _$$j5,
-      target: jsx(_$$E2, {
+      target: jsx(AutoInteractableWrapper, {
         name: _$$_2.ActionOverflowEntryPoint,
         children: jsx(_$$ar, {
           'data-testid': 'cooper-inline-more-actions',
@@ -7062,7 +7062,7 @@ function aM({
 }) {
   let l;
   e.type === 0 && (l = e.fullscreenAction);
-  return jsx(_$$E2, {
+  return jsx(AutoInteractableWrapper, {
     name: e.trackingId,
     children: jsx('div', {
       className: 'x163pfp xy13l1i',
@@ -7115,7 +7115,7 @@ function aV({
   recordingKey: t
 }) {
   let n = useDispatch();
-  let [l, r] = _$$lJ2('blur');
+  let [l, r] = useSelectionProperty('blur');
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -7127,7 +7127,7 @@ function aV({
   let x = l ? isInvalidValue(l) ? MIXED_MARKER : l : 0;
   return jsx(aD, {
     padding: e,
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.BlurSlider,
       children: jsx(rS, {
         min: 0,
@@ -7137,9 +7137,9 @@ function aV({
         value: x,
         onChange: u,
         ariaLabel: getI18nString('cooper.inline_menu.blur_strength'),
-        numberInput: jsx(_$$E2, {
+        numberInput: jsx(AutoInteractableWrapper, {
           name: _$$_2.BlurInput,
-          children: jsx(j5, {
+          children: jsx(ScrubbableInput, {
             bigNudgeAmount,
             'data-tooltip': getI18nString('cooper.inline_menu.blur_strength'),
             'data-tooltip-type': KindEnum.TEXT,
@@ -7201,11 +7201,11 @@ function aH({
   recordingKey: t
 }) {
   let n = useDispatch();
-  let [l, r] = _$$lJ2('opacity');
+  let [l, r] = useSelectionProperty('opacity');
   let i = isInvalidValue(l) ? MIXED_MARKER : valueOrFallback(l, 1);
   return jsx(aD, {
     padding: e,
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.OpacitySlider,
       children: jsx(rS, {
         value: i,
@@ -7215,7 +7215,7 @@ function aH({
         bigStep: 0.1,
         onChange: e => r(e, yesNoTrackingEnum.YES),
         ariaLabel: getI18nString('cooper.inline_menu.opacity'),
-        numberInput: jsx(_$$E2, {
+        numberInput: jsx(AutoInteractableWrapper, {
           name: _$$_2.OpacityInput,
           children: jsx(_$$Y2, {
             'dispatch': n,
@@ -7304,7 +7304,7 @@ function aZ({
     onOpacityChange
   } = a0();
   return jsxs(rT, {
-    children: [jsx(_$$E2, {
+    children: [jsx(AutoInteractableWrapper, {
       name: _$$_2.OverlayOpacitySlider,
       children: jsx(_$$A6, {
         'aria-label': getI18nString('cooper.inline_menu.overlay_opacity'),
@@ -7318,7 +7318,7 @@ function aZ({
         'step': 0.01,
         'value': isValidValue(opacity) ? opacity ?? 0 : 0
       })
-    }), jsx(_$$E2, {
+    }), jsx(AutoInteractableWrapper, {
       name: _$$_2.OverlayOpacityInput,
       children: jsx(_$$Y2, {
         'data-tooltip': getI18nString('cooper.inline_menu.opacity'),
@@ -7329,7 +7329,7 @@ function aZ({
         'labelWidth': 88,
         'recordingKey': generateRecordingKey(n, 'overlayOpacityInput')
       })
-    }), jsx(_$$E2, {
+    }), jsx(AutoInteractableWrapper, {
       name: _$$_2.OverlayColorPicker,
       children: jsx(aq, {
         'aria-expanded': e,
@@ -7371,7 +7371,7 @@ function a5({
   }, [selectedShadowStyle, onChangeShadowStyleControl]);
   return jsx(aD, {
     padding: e,
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.ShadowSlider,
       children: jsx(rS, {
         value: shadowOpacity,
@@ -7381,7 +7381,7 @@ function a5({
         bigStep: 0.1,
         onChange: onChangeShadowOpacity,
         ariaLabel: getI18nString('cooper.inline_menu.shadow_opacity'),
-        numberInput: jsx(_$$E2, {
+        numberInput: jsx(AutoInteractableWrapper, {
           name: _$$_2.ShadowInput,
           children: jsx(_$$Y2, {
             'labelWidth': 88,
@@ -7410,7 +7410,7 @@ function a4() {
     children: jsx(_$$A7, {
       className: 'xxk0z11',
       positionY: _$$j5,
-      target: jsx(_$$E2, {
+      target: jsx(AutoInteractableWrapper, {
         name: _$$_2.EffectsEntryPoint,
         children: jsx(a6, {
           isActive: isPopoverOpen,
@@ -7783,7 +7783,7 @@ function sh({
     children: [jsxs('div', {
       className: 'fill_colors--documentColorsHeader--QL-tJ',
       ref: s,
-      children: [getI18nString('cooper.inline_menu.fill_submenu.color.document_colors'), r && jsx(_$$E2, {
+      children: [getI18nString('cooper.inline_menu.fill_submenu.color.document_colors'), r && jsx(AutoInteractableWrapper, {
         name: _$$_2.LibraryColorPicker,
         children: jsx(ButtonPrimitive, {
           onClick: () => r(s),
@@ -7840,7 +7840,7 @@ function sh({
 function sg({
   children: e
 }) {
-  return jsx(_$$E2, {
+  return jsx(AutoInteractableWrapper, {
     name: _$$_2.ColorChit,
     children: jsx('div', {
       className: sm,
@@ -8098,7 +8098,7 @@ function sj({
 function sy({
   children: e
 }) {
-  return jsx(_$$E2, {
+  return jsx(AutoInteractableWrapper, {
     name: _$$_2.ColorChit,
     children: jsx('div', {
       className: 'color_control_submenu--colorContainer--a0th4',
@@ -8127,7 +8127,7 @@ function sz({
   return r ? jsx(sb, {
     children: jsxs('div', {
       className: 'gradient_control_submenu--gradientSubmenuContainer--0scDr',
-      children: [jsx(_$$E2, {
+      children: [jsx(AutoInteractableWrapper, {
         name: _$$_2.Gradient,
         children: jsx(sR, {
           gradientPaint: r,
@@ -8143,13 +8143,13 @@ function sz({
         })
       }), jsxs('div', {
         className: 'gradient_control_submenu--gradientSubmenuButtonsContainer--pFvmo',
-        children: [jsx(_$$E2, {
+        children: [jsx(AutoInteractableWrapper, {
           name: _$$_2.FlipGradient,
           children: jsx(_$$n5, {
             gradientPaint: r,
             onChange: l
           })
-        }), jsx(_$$E2, {
+        }), jsx(AutoInteractableWrapper, {
           name: _$$_2.RotateGradient,
           children: jsx(sN, {})
         })]
@@ -8279,7 +8279,7 @@ function sM({
 function sF() {
   let e = Zr(JT.REMOVE_BACKGROUND);
   let t = MK(JT.REMOVE_BACKGROUND);
-  return jsx(_$$E2, {
+  return jsx(AutoInteractableWrapper, {
     name: _$$_2.AIRemoveBackground,
     children: jsxs(MenuItemComp, {
       'aria-label': getI18nString('cooper.inline_menu.image.remove_background'),
@@ -8299,7 +8299,7 @@ function sB({
 }) {
   let t = Zr(JT.UPSCALE_IMAGE);
   let n = MK(JT.UPSCALE_IMAGE);
-  return jsx(_$$E2, {
+  return jsx(AutoInteractableWrapper, {
     name: _$$_2.AIUpscaleImage,
     children: jsxs(MenuItemComp, {
       'aria-label': getI18nString('cooper.inline_menu.image.boost_resolution'),
@@ -8341,7 +8341,7 @@ function sD() {
   let e = Zr(JT.EDIT_IMAGE);
   let t = MK(JT.EDIT_IMAGE);
   let n = ii();
-  return jsx(_$$E2, {
+  return jsx(AutoInteractableWrapper, {
     name: _$$_2.AIEditImage,
     children: jsxs(MenuItemComp, {
       'aria-label': getI18nString('cooper.inline_menu.edit_image'),
@@ -8401,7 +8401,7 @@ function sH({
   return jsx(_$$R4, {
     children: jsxs(MenuRootComp, {
       manager,
-      children: [jsx(_$$E2, {
+      children: [jsx(AutoInteractableWrapper, {
         name: _$$_2.ChooseMediaEntryPoint,
         children: jsx(sX, {
           triggerProps: getTriggerProps(),
@@ -8500,7 +8500,7 @@ function sY({
     n();
   }, [m, n]);
   return jsxs(MenuContainerComp, {
-    children: [jsx(_$$E2, {
+    children: [jsx(AutoInteractableWrapper, {
       name: _$$_2.UploadMedia,
       children: jsxs(MenuItemComp, {
         'aria-label': getI18nString('buzz.inline_menu.choose_media.upload'),
@@ -8511,7 +8511,7 @@ function sY({
           children: jsx(_$$A15, {})
         }), renderI18nText('buzz.inline_menu.choose_media.upload')]
       })
-    }), r && jsx(_$$E2, {
+    }), r && jsx(AutoInteractableWrapper, {
       name: _$$_2.BrowseStockPhotos,
       children: jsxs(MenuItemComp, {
         'aria-label': getI18nString('buzz.inline_menu.choose_media.browse'),
@@ -8521,7 +8521,7 @@ function sY({
           children: jsx(_$$s4, {})
         }), renderI18nText('buzz.inline_menu.choose_media.browse')]
       })
-    }), i && d && jsx(_$$E2, {
+    }), i && d && jsx(AutoInteractableWrapper, {
       name: _$$_2.AIMakeImage,
       children: jsxs(MenuItemComp, {
         'aria-label': getI18nString('buzz.inline_menu.choose_media.make_image'),
@@ -8653,7 +8653,7 @@ function sZ({
 }) {
   let n = !!getFeatureFlags().buzz_video_export;
   let l = sW(n, e, t);
-  return jsx(_$$E2, {
+  return jsx(AutoInteractableWrapper, {
     name: _$$_2.UploadMedia,
     children: jsx(Button, {
       'recordingKey': 'cooperInlineMenuFillControlUploadMedia',
@@ -8672,15 +8672,15 @@ function s0({
   let n = getFeatureFlags().buzz_video_export;
   let l = hasJubileePermissionForDesign();
   return t && n ? jsx(Fragment, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.AdjustVideoControl,
       children: jsx(sP, {})
     })
   }) : e ? jsxs(Fragment, {
-    children: [jsx(_$$E2, {
+    children: [jsx(AutoInteractableWrapper, {
       name: _$$_2.AdjustImageControl,
       children: jsx(sL, {})
-    }), l && jsx(_$$E2, {
+    }), l && jsx(AutoInteractableWrapper, {
       name: _$$_2.AIToolsEntryPoint,
       children: jsx(sM, {
         trackingSource: 'buzz-inline-toolbar'
@@ -8755,7 +8755,7 @@ function s4() {
   return jsx(_$$R4, {
     children: jsx(_$$A7, {
       positionY: _$$j5,
-      target: jsx(_$$E2, {
+      target: jsx(AutoInteractableWrapper, {
         name: _$$_2.FillControlEntryPoint,
         children: jsx(_$$ar, {
           'recordingKey': 'cooperInlineMenuFillControl',
@@ -8819,7 +8819,7 @@ function s6({
     let o = useRef(void 0);
     let c = useRef(void 0);
     let u = useRef(void 0);
-    let [x] = _$$lJ2('dividedSwatchColors');
+    let [x] = useSelectionProperty('dividedSwatchColors');
     let p = useRef(x);
     p.current = x;
     let m = _$$$(t.activeTab);
@@ -8967,7 +8967,7 @@ function dt({
   return jsx(_$$R4, {
     children: jsx(_$$A7, {
       positionY: _$$j5,
-      target: jsx(_$$E2, {
+      target: jsx(AutoInteractableWrapper, {
         name: _$$_2.ImageCropEntryPoint,
         children: jsx(_$$ar, {
           'data-testid': 'cooper-inline-crop-image-button',
@@ -9121,7 +9121,7 @@ function da({
     s && (s < n && l(s), s > r && i(s));
   }, [n, r, s]);
   return jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.ImageCropSlider,
       children: jsx('div', {
         className: cssBuilderInstance.w150.contentCenter.$,
@@ -9159,7 +9159,7 @@ function ds({
     })) : fullscreenValue.triggerActionInUserEditScope('rotate-90-clockwise');
   }, [e, n, t]);
   return jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.ImageRotate,
       children: jsx(_$$ar, {
         'aria-label': getI18nString('cooper.inline_menu.image.rotate_image'),
@@ -9178,7 +9178,7 @@ function dd({
   disabled: t
 }) {
   return jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.ImageFlipHorizontal,
       children: jsx(_$$ar, {
         'aria-label': getI18nString('fullscreen_actions.flip-horizontal'),
@@ -9200,7 +9200,7 @@ function dc({
   disabled: t
 }) {
   return jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.ImageFlipVertical,
       children: jsx(_$$ar, {
         'aria-label': getI18nString('fullscreen_actions.flip-vertical'),
@@ -9299,7 +9299,7 @@ function d_() {
 function dj() {
   let e = df(AssetCategoryEnum.FIELDS);
   return jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.EditContent,
       children: jsx(JE, {
         'aria-label': getI18nString('cooper.inline_menu.edit-content'),
@@ -9314,7 +9314,7 @@ function dy() {
   let e = !!getFeatureFlags().buzz_video_export;
   let t = sW(e);
   return jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.UploadMedia,
       children: jsx(JE, {
         'aria-label': getI18nString(e ? 'cooper.inline_menu.upload_media_button' : 'cooper.inline_menu.upload_image_button'),
@@ -9329,7 +9329,7 @@ function dE() {
   let e = useDispatch();
   let [t, n] = useState(!1);
   return jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.RemoveEditingRestrictions,
       children: jsx('span', {
         onMouseEnter: () => n(!0),
@@ -9369,7 +9369,7 @@ function dv() {
     let i = aI();
     let o = isNotInFocusedNodeView();
     let a = function () {
-      let e = kl('numSelectedByType');
+      let e = useSelectionPropertyValue('numSelectedByType');
       return !(!e || isInvalidValue(e)) && OU(e, ['TEXT', 'TEXT_PATH']);
     }();
     let c = ['REMOVE_EDITING_RESTRICTIONS'];
@@ -9405,7 +9405,7 @@ function dI() {
     onlyCooperFrames
   } = useCooperFrameSelectionInfo();
   return !onlyCooperFrames && e?.allStates && e?.selectedStates ? jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.VariantSwapEntryPoint,
       children: jsx(dS, {})
     })
@@ -9466,8 +9466,8 @@ function dR({
   strokePaintPickerOpen: t,
   onStrokePaintClick: n
 }) {
-  let [l, r] = _$$lJ2('dashPattern');
-  let [i, s] = _$$lJ2('strokeWeight');
+  let [l, r] = useSelectionProperty('dashPattern');
+  let [i, s] = useSelectionProperty('strokeWeight');
   let d = useMemo(() => ({
     NONE: {
       label: getI18nString('cooper.inline_menu.no_border_label')
@@ -9533,7 +9533,7 @@ function dw({
   return jsxs(Fragment, {
     children: [jsx('div', {
       className: 'xe8ttls',
-      children: jsx(_$$E2, {
+      children: jsx(AutoInteractableWrapper, {
         name: _$$_2.StrokeDashPatternSelector,
         children: jsx(aU, {
           manager: p,
@@ -9591,7 +9591,7 @@ function dO({
     bigNudgeAmount
   } = getNudgeAmounts();
   return jsxs(rT, {
-    children: [jsx(_$$E2, {
+    children: [jsx(AutoInteractableWrapper, {
       name: _$$_2.StrokeWeightSlider,
       children: jsx(_$$A6, {
         'min': 0,
@@ -9604,9 +9604,9 @@ function dO({
         'onChange': r,
         'aria-label': getI18nString('cooper.inline_menu.border_width')
       })
-    }), jsx(_$$E2, {
+    }), jsx(AutoInteractableWrapper, {
       name: _$$_2.StrokeWeightInput,
-      children: jsx(j5, {
+      children: jsx(ScrubbableInput, {
         'dispatch': i,
         smallNudgeAmount,
         bigNudgeAmount,
@@ -9618,7 +9618,7 @@ function dO({
         'labelWidth': 88,
         'children': jsx(_$$E5, {})
       })
-    }), jsx(_$$E2, {
+    }), jsx(AutoInteractableWrapper, {
       name: _$$_2.StrokePaintPicker,
       children: jsx(aq, {
         'aria-expanded': t,
@@ -9629,7 +9629,7 @@ function dO({
   });
 }
 function dM() {
-  let e = kl('strokePaints');
+  let e = useSelectionPropertyValue('strokePaints');
   let t = e ? isValidValue(e) ? e[0] : MIXED_MARKER : void 0;
   let {
     isPopoverOpen,
@@ -9639,7 +9639,7 @@ function dM() {
   return jsx(_$$R4, {
     children: jsx(_$$A7, {
       positionY: _$$j5,
-      target: jsx(_$$E2, {
+      target: jsx(AutoInteractableWrapper, {
         name: _$$_2.StrokeControlEntryPoint,
         children: jsx(_$$ar, {
           'recordingKey': 'cooperInlineMenuStrokeControl',
@@ -9680,7 +9680,7 @@ function d$({
   return getFeatureFlags().buzz_video_export ? jsx(_$$R4, {
     children: jsx(_$$A7, {
       positionY: _$$j5,
-      target: jsx(_$$E2, {
+      target: jsx(AutoInteractableWrapper, {
         name: _$$_2.VideoVolumeControl,
         children: jsx(_$$ar, {
           'data-testid': 'buzz-inline-volume-control-button',
@@ -9715,7 +9715,7 @@ function dV({
     children: jsx(rs, {
       children: jsxs('div', {
         className: 'x705fwa x1vqgdyp x3nfvp2 x8rdmch x3t71xm x1nfngrj x6s0dn4 xl56j7k',
-        children: [jsx(_$$E2, {
+        children: [jsx(AutoInteractableWrapper, {
           name: _$$_2.VideoVolumeControl,
           children: jsx(_$$ar, {
             'data-testid': 'buzz-inline-volume-mute-control',
@@ -9887,7 +9887,7 @@ function dW({}) {
 }
 function dH() {
   return jsx(_$$R4, {
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: _$$_2.SwitchToDesignMode,
       children: jsxs(JE, {
         'data-testid': 'cooper-inline-effects-entry-point',
@@ -11709,7 +11709,7 @@ function u4({
         forceUpdate: !1
       }), (n || s) && !t && isMedia && jsx('div', {
         className: 'x10l6tqk x13vifvy xu96u03 x3m8u43 x1ey2m1c x78zum5 x1a02dak xl56j7k x6s0dn4 xc26acl x167g77z x1yqky9x',
-        children: jsxs(_$$E2, {
+        children: jsxs(AutoInteractableWrapper, {
           name: 'cooper_media_upload',
           children: [isImage && jsx('div', {
             className: 'x19y5rnk x16v0e3u',
@@ -13928,7 +13928,7 @@ function pB({
   onPaintChange: l
 }) {
   let r = U1();
-  let i = kl('numSelectedByType');
+  let i = useSelectionPropertyValue('numSelectedByType');
   let c = function (e) {
     let t = useDispatch();
     return useCallback(async n => {
@@ -14048,7 +14048,7 @@ function pK({
           paint: e
         })
       }), jsx(DialogActionStrip, {
-        children: jsx(_$$E2, {
+        children: jsx(AutoInteractableWrapper, {
           name: _$$_2.LibraryColorPicker,
           children: jsx(_$$d3, {
             'aria-expanded': !!(r && r.id === pF),
@@ -14137,7 +14137,7 @@ function pH({
       children: jsx('div', {
         className: 'floating_color_picker_panel--gradientControlContainer--eSs0A',
         ref: e,
-        children: jsx(_$$E2, {
+        children: jsx(AutoInteractableWrapper, {
           name: _$$_2.Gradient,
           children: jsx(_$$i3, {
             paint: h,
@@ -14150,7 +14150,7 @@ function pH({
           })
         })
       })
-    }), jsx(_$$E2, {
+    }), jsx(AutoInteractableWrapper, {
       name: _$$_2.CustomColor,
       children: jsx(pR, {
         paint: t,
@@ -14178,7 +14178,7 @@ function pX({
     className: 'floating_color_picker_panel--gradientSubmenuButtonsContainer--REE5o',
     children: [jsx('div', {
       className: pG,
-      children: jsx(_$$E2, {
+      children: jsx(AutoInteractableWrapper, {
         name: _$$_2.FlipGradient,
         children: jsx(ButtonWide, {
           variant: 'secondary',
@@ -14205,7 +14205,7 @@ function pX({
       })
     }), jsx('div', {
       className: pG,
-      children: jsx(_$$E2, {
+      children: jsx(AutoInteractableWrapper, {
         name: _$$_2.RotateGradient,
         children: jsx(ButtonWide, {
           variant: 'secondary',
@@ -14239,7 +14239,7 @@ function pJ({
   }, [e, t]);
   return jsx('div', {
     className: 'x61vf09 x1m21vav',
-    children: pY.map(t => jsx(_$$E2, {
+    children: pY.map(t => jsx(AutoInteractableWrapper, {
       name: n,
       children: jsx(_$$ih, {
         propertyName: t,
@@ -14284,7 +14284,7 @@ function p5() {
     noBackground: !0
   }, e)])), [n, l]);
   return jsx(Fragment, {
-    children: Array.from(c.entries()).map(([e, n]) => jsx(_$$E2, {
+    children: Array.from(c.entries()).map(([e, n]) => jsx(AutoInteractableWrapper, {
       name: _$$_2.VariantTile,
       children: jsx(p2, {
         isActive: d.has(e),
@@ -14339,7 +14339,7 @@ let p7 = {
           };
         }();
         let n = function () {
-          let [e, t] = _$$lJ2('strokePaints');
+          let [e, t] = useSelectionProperty('strokePaints');
           return {
             paint: e ? isValidValue(e) ? e[0] : MIXED_MARKER : void 0,
             onPaintChange: useCallback((e, n) => {
@@ -14372,7 +14372,7 @@ let p7 = {
     headerLeft: getI18nString('cooper.inline_menu.floating_panel.adjust_image'),
     body: jsx(() => {
       let e = function () {
-        let e = kl('fillPaints');
+        let e = useSelectionPropertyValue('fillPaints');
         if (!e || isInvalidValue(e)) return null;
         for (let t = e.length - 1; t >= 0; t--) {
           let n = e[t];
@@ -14393,7 +14393,7 @@ let p7 = {
     body: jsx(() => {
       let e = getFeatureFlags().buzz_video_export;
       let t = function () {
-        let e = kl('fillPaints');
+        let e = useSelectionPropertyValue('fillPaints');
         if (!e || isInvalidValue(e)) return null;
         for (let t = e.length - 1; t >= 0; t--) {
           let n = e[t];

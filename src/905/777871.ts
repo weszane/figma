@@ -10,7 +10,7 @@ import { RecordableDiv } from "../905/511649";
 import { showDropdownThunk } from "../905/929976";
 import { Vl } from "../figma_app/8833";
 import { colorCSSManipulatorInstance } from "../905/989956";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { dM, Eh } from "../figma_app/837840";
 import { getColorSpaceString } from "../figma_app/622881";
@@ -370,7 +370,7 @@ class k extends RecordingPureComponent {
       }),
       onKeyDown: this.onKeyDown,
       onMouseDown: this.onMouseDown,
-      onPointerDown: dG,
+      onPointerDown: stopPropagation,
       recordingKey: this.props.recordingKey,
       ref: this.panelRef,
       tabIndex: -1,

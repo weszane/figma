@@ -184,7 +184,7 @@ import { tK as _$$tK } from "../905/432392";
 import { KD } from "../figma_app/975811";
 import { getCodegenLanguages } from "../905/661977";
 import { X as _$$X } from "../905/839893";
-import { Q7 } from "../905/203369";
+import { FormattedInputVariant1 } from "../905/203369";
 import { Cg } from "../7492/487492";
 import { A as _$$A6 } from "../6828/191424";
 import { A as _$$A7 } from "../svg/386094";
@@ -303,7 +303,7 @@ import { ConfirmationModal2 } from "../figma_app/918700";
 import { setupAutofocusHandler } from "../905/128376";
 import { KeyCodes } from "../905/63728";
 import { dh as _$$dh } from "../figma_app/186343";
-import { kl, Gt } from "../905/275640";
+import { useSelectionPropertyValue, useNonMixedSelectionPropertyValue } from "../905/275640";
 import { go } from "../figma_app/57551";
 import { DS, Os, jh } from "../figma_app/571341";
 import { ku, L$ } from "../figma_app/241341";
@@ -484,10 +484,10 @@ import { QV } from "../9410/608002";
 import { selectedViewToPath } from "../figma_app/193867";
 import { M as _$$M6 } from "../figma_app/339170";
 import { P as _$$P3 } from "../3271/828600";
-import { E as _$$E9 } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { n as _$$n0 } from "../940032c6/563173";
-import { $j } from "../figma_app/178475";
-import { KG } from "../figma_app/98483";
+import { LengthInput } from "../figma_app/178475";
+import { useTransformInputHandler } from "../figma_app/98483";
 import { N as _$$N4 } from "../figma_app/673778";
 import { hF as _$$hF, QK } from "../figma_app/100987";
 import { TP, TQ } from "../1250/224366";
@@ -3127,7 +3127,7 @@ function ij() {
         onDropdownHidden: _$$lQ,
         className: "configuration_wizard--scaleFactorDropdown--IVy1Q",
         inputClassName: "configuration_wizard--scaleFactorDropdownInput--h8Jr2 text--fontPos13Whyte--VhWqH text--_fontBaseWhyte--efAjI"
-      }) : jsx(Q7, {
+      }) : jsx(FormattedInputVariant1, {
         className: "configuration_wizard--scaleFactorInput--ezaTA text--fontPos13Whyte--VhWqH text--_fontBaseWhyte--efAjI",
         property: c,
         formatter: ib,
@@ -6670,7 +6670,7 @@ function s1({
   let h = xY("cc_dropdown_detached_component");
   let f = _$$uQ();
   let g = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.type === "INSTANCE", f);
-  let x = kl("overrides");
+  let x = useSelectionPropertyValue("overrides");
   let m = x && !isInvalidValue(x) ? x.instanceGuid : null;
   let v = Xn(m);
   let b = Xr(go);
@@ -6909,7 +6909,7 @@ function s6() {
   let s = _$$i2();
   let r = function () {
     let e;
-    let t = kl("overrides");
+    let t = useSelectionPropertyValue("overrides");
     if (!t || isInvalidValue(t)) return null;
     let n = t.isPrimary;
     let a = t.overriddenProperties;
@@ -10242,7 +10242,7 @@ function ug({
   });
 }
 function ux() {
-  let e = Gt("assets");
+  let e = useNonMixedSelectionPropertyValue("assets");
   let t = function () {
     let e = useCurrentFileKey() ?? "";
     let t = useAtomWithSubscription(_$$O6);
@@ -12876,14 +12876,14 @@ let fs = memo(function (e) {
       isComponentSet: _isComponentSet
     };
   }(useDevModeFocusId(), e.dimension);
-  let c = KG({
+  let c = useTransformInputHandler({
     key: e.dimension,
     setValue
   });
   let u = isSection ? getI18nString("dev_handoff.workflows.focus_view.resizing_disabled_section") : isComponentSet ? getI18nString("dev_handoff.workflows.focus_view.resizing_disabled_component_set") : hasHug ? getI18nString("dev_handoff.focus_view.resize_disabled_hugged_element") : "";
-  return jsx(_$$E9, {
+  return jsx(AutoInteractableWrapper, {
     name: `focus_view_${e.dimension}_input`,
-    children: jsx($j, {
+    children: jsx(LengthInput, {
       disabled: isSection || isComponentSet || hasHug,
       inputClassName: _$$hF,
       isTokenizable: !0,

@@ -55,7 +55,7 @@ import { useCurrentOrgAdminInfo } from "../figma_app/740025";
 import { getColorFormat } from "../figma_app/740163";
 import { isValidValue, getCommonFromArray, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
 import { blackColor, defaultGrayColor } from "../figma_app/385874";
-import { Gt, A5, kl, fC, pw, DQ } from "../905/275640";
+import { useNonMixedSelectionPropertyValue, useUpdateSelectionProperty, useSelectionPropertyValue, useNonMixedSelectionPropertyValues, useSelectedStyleOrSelectionPropertyValues, useNonMixedSelectedStyleOrSelectionPropertyValues } from "../905/275640";
 import { Um } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { selectCurrentUser } from "../905/372672";
@@ -93,7 +93,7 @@ import { N as _$$N2 } from "../905/720559";
 import { SlotSymbolType } from "../figma_app/338442";
 import { generateRecordingKey } from "../figma_app/878298";
 import { L as _$$L2 } from "../figma_app/884735";
-import { sA } from "../figma_app/841644";
+import { VariableBindingInput } from "../figma_app/841644";
 import { ei as _$$ei } from "../642/384859";
 import { I_, qP, Rv, ZJ } from "../642/755347";
 import { C as _$$C2 } from "../642/110459";
@@ -231,7 +231,7 @@ let e9 = memo(function (e) {
         recordingKey: "frameLevel"
       })
     }), jsx(DE, {
-      input: jsx(sA, {
+      input: jsx(VariableBindingInput, {
         currentFieldValue: isValidValue(opacity) ? opacity : void 0,
         disabled: !1,
         fields: qP,
@@ -310,10 +310,10 @@ let tj = "illustration_stroke_panel--secondaryHeader--NfF0G";
 function tS(e) {
   Gx();
   let t = Bu();
-  let i = Gt("strokeBrushGuid");
+  let i = useNonMixedSelectionPropertyValue("strokeBrushGuid");
   let n = getCommonFromArray(i);
-  let s = A5("strokeBrushGuid");
-  let o = A5("scatterStrokeSettings");
+  let s = useUpdateSelectionProperty("strokeBrushGuid");
+  let o = useUpdateSelectionProperty("scatterStrokeSettings");
   let d = Kt();
   return jsxs(Zk, {
     className: tw,
@@ -557,7 +557,7 @@ function tM(e) {
   let j = useSelector(e => e.stylePickerShown);
   let S = zr();
   let k = CL();
-  let E = kl("strokePaints");
+  let E = useSelectionPropertyValue("strokePaints");
   let C = E && (isInvalidValue(E) || E.length > 0);
   let A = normalizeValue(_$$b4("guid"));
   let I = yT({
@@ -659,19 +659,19 @@ function tP({
   let S = useSelector(e => e.saveAsState);
   let k = useCurrentOrgAdminInfo();
   let E = hD();
-  let C = kl("exportSettings");
+  let C = useSelectionPropertyValue("exportSettings");
   let {
     numSelected,
     stateGroupSelectionInfo
-  } = fC("numSelected", "stateGroupSelectionInfo");
+  } = useNonMixedSelectionPropertyValues("numSelected", "stateGroupSelectionInfo");
   let {
     areOnlyResponsiveSetsSelected,
     maskType
-  } = pw("areOnlyResponsiveSetsSelected", "maskType");
+  } = useSelectedStyleOrSelectionPropertyValues("areOnlyResponsiveSetsSelected", "maskType");
   let {
     numSelected: _numSelected,
     pluginRelaunchData
-  } = DQ("pluginRelaunchData", "numSelected");
+  } = useNonMixedSelectedStyleOrSelectionPropertyValues("pluginRelaunchData", "numSelected");
   let P = useAppModelProperty("currentPage");
   let F = useAppModelProperty("currentSelectedProperty");
   let V = SJ();

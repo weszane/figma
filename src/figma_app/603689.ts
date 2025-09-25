@@ -71,7 +71,7 @@ import { F as _$$F } from '../905/268366';
 import { Label } from '../905/270045';
 import { memoizeWithDeepEquality } from '../905/270781';
 import { b as _$$b } from '../905/275748';
-import { E as _$$E8 } from '../905/277716';
+import { AutoInteractableWrapper } from '../905/277716';
 import { handleUrlAction } from '../905/280005';
 import { h as _$$h5 } from '../905/284399';
 import { ConnectedAppModal } from '../905/292707';
@@ -137,7 +137,7 @@ import { d as _$$d8, O as _$$O } from '../905/572941';
 import { FlashActions } from '../905/573154';
 import { jO } from '../905/573265';
 import { VisualBellIcon } from '../905/576487';
-import { e as _$$e7 } from '../905/579635';
+import { conditionalWrapper } from '../905/579635';
 import { uo as _$$uo } from '../905/581543';
 import { k as _$$k6 } from '../905/582200';
 import { loadFeatureFlags } from '../905/586361';
@@ -7643,20 +7643,20 @@ function pm(e) {
         style: {
           display: 'contents'
         },
-        children: hoistedToolbeltItems.map(e => e.type === ZU.FLYOUT ? jsx(_$$E8, {
+        children: hoistedToolbeltItems.map(e => e.type === ZU.FLYOUT ? jsx(AutoInteractableWrapper, {
           name: 'layer_header_button',
           children: jsx(_$$F8, {
             flyoutConfig: e,
             recordingKey: generateRecordingKey(If, e.flyoutRecordingKey)
           })
-        }, e.dropdownKey) : e.type === ZU.ACTION ? jsx(_$$E8, {
+        }, e.dropdownKey) : e.type === ZU.ACTION ? jsx(AutoInteractableWrapper, {
           name: 'layer_header_button',
           children: jsx(QE, {
             item: e,
             numUnreadComments: 0,
             recordingKey: If
           })
-        }, e.recordingKey) : e.type === ZU.ACTION_SUBMENU ? jsx(_$$E8, {
+        }, e.recordingKey) : e.type === ZU.ACTION_SUBMENU ? jsx(AutoInteractableWrapper, {
           name: 'layer_header_button',
           children: jsx(QE, {
             item: e,
@@ -8651,7 +8651,7 @@ function _v({
   let r = _$$o(_$$nt.interopFiles);
   let n = useAtomWithSubscription(V1);
   let i = Xr(XU);
-  let a = jsx(_$$e7, {
+  let a = jsx(conditionalWrapper, {
     condition: r,
     wrapper: e => jsxs(Fragment, {
       children: [jsx(cE, {}), jsx(_$$P.div, {

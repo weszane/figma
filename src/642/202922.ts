@@ -39,7 +39,7 @@ import { y as _$$y } from "../905/582657";
 import { f as _$$f } from "../905/335032";
 import { S as _$$S2 } from "../figma_app/552746";
 import { TextWithTruncation } from "../905/984674";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { t8, R$, e6 } from "../figma_app/545190";
 import { K4, Z3 } from "../figma_app/461594";
 import { uQ } from "../figma_app/151869";
@@ -181,7 +181,7 @@ function es({
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.component_properties.unbubble_instance"),
           "data-tooltip-type": KindEnum.TEXT,
-          onMouseDown: dG
+          onMouseDown: stopPropagation
         },
         children: jsx(_$$f, {})
       })

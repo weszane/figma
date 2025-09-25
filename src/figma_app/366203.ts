@@ -13,7 +13,7 @@ import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { isValidValue } from "../905/216495";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { Yv } from "../figma_app/616107";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -66,8 +66,8 @@ export function $$z0() {
   return e && t;
 }
 export function $$W3() {
-  let [e, t] = lJ("whiteboardStrokeStyle");
-  let [r, a] = lJ("whiteboardStrokeWeight");
+  let [e, t] = useSelectionProperty("whiteboardStrokeStyle");
+  let [r, a] = useSelectionProperty("whiteboardStrokeWeight");
   let [l, d] = useState(!1);
   let c = $$U1("VECTOR");
   let p = $$U1("HIGHLIGHT");
@@ -75,7 +75,7 @@ export function $$W3() {
   let b = $$U1("INSTANCE");
   let I = $$U1("SECTION");
   let S = ($$U1("SHAPE_WITH_TEXT") || I || b) && !y && !p && !c;
-  let [v, A] = lJ("whiteboardStrokeColor");
+  let [v, A] = useSelectionProperty("whiteboardStrokeColor");
   let x = useCallback(e => {
     e && t(e, yesNoTrackingEnum.NO);
   }, [t]);

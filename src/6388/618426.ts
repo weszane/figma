@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux";
 import { c$ } from "../905/867927";
 import { f as _$$f } from "../905/335032";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { useOnSelectionChange } from "../figma_app/722362";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { r as _$$r } from "../figma_app/711157";
@@ -112,7 +112,7 @@ export function $$I0({
         bigStep: .1,
         max: 1,
         min: 0,
-        numberInput: jsx(_$$E, {
+        numberInput: jsx(AutoInteractableWrapper, {
           name: "slides_shadow_opacity_input",
           children: jsx(Y, {
             "data-tooltip": getI18nString("slides.properties_panel.shadow_opacity"),
@@ -132,7 +132,7 @@ export function $$I0({
   });
 }
 export function $$T1() {
-  let [e, t] = lJ("shadow");
+  let [e, t] = useSelectionProperty("shadow");
   let l = useMemo(() => ({
     NONE: {
       value: null,

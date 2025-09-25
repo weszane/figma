@@ -14,7 +14,7 @@ import { selectCurrentFile } from '../figma_app/516028';
 import { S } from '../figma_app/552746';
 import { Qs, yA } from '../figma_app/581520';
 import { aT } from '../figma_app/613182';
-import { ft, UE } from '../figma_app/753501';
+import { shouldHandleMultiTouchOrPressure, isFullscreenPreventEventCapture } from '../figma_app/753501';
 import { BrowserInfo } from '../figma_app/778880';
 import { x } from '../figma_app/859253';
 import { handleMouseEvent, RecordingComponent, SKIP_RECORDING } from '../figma_app/878298';
@@ -36,9 +36,9 @@ class E extends RecordingComponent {
       this.hideDropdown();
     };
     this.hideDropdownsIfShowingForPointerEvent = e => {
-      if (ft()) {
+      if (shouldHandleMultiTouchOrPressure()) {
         let t = e.target;
-        t instanceof Element && !UE(t) && this.hideDropdownsIfShowing(e);
+        t instanceof Element && !isFullscreenPreventEventCapture(t) && this.hideDropdownsIfShowing(e);
       }
     };
     this.onClick = handleMouseEvent(this, 'click', e => {

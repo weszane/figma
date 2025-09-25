@@ -13,24 +13,24 @@ import { AppStateTsApi, TextAlignmentOptions } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { MIXED_MARKER, valueOrFallback } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { fI } from "../figma_app/626177";
 import { vK } from "../905/566585";
 import { DE, fn } from "../figma_app/811257";
 import { lY, Xh, qf } from "../905/71683";
 export function $$C0(e) {
-  let t = jsx(_$$E, {
+  let t = jsx(AutoInteractableWrapper, {
     name: "text_align_horizontal",
     children: jsx($$O3, {
       recordingKey: generateRecordingKey(e.recordingKey, "textAlignHorizontal")
     })
   });
-  let r = jsx(_$$E, {
+  let r = jsx(AutoInteractableWrapper, {
     name: "text_align_vertical",
     children: jsx($$R1, {
       textAlignVertical: e.textAlignVertical || MIXED_MARKER,
@@ -75,8 +75,8 @@ export function $$O3({
   recordingKey: e,
   loggingCallback: t
 }) {
-  let r = kl("textAlignHorizontal") || MIXED_MARKER;
-  let u = valueOrFallback(kl("missingFont"), !1);
+  let r = useSelectionPropertyValue("textAlignHorizontal") || MIXED_MARKER;
+  let u = valueOrFallback(useSelectionPropertyValue("missingFont"), !1);
   let p = !((0 | getObservableOrFallback(AppStateTsApi.propertiesPanelState().enabledTypePanelControls)) & 1 << TextAlignmentOptions.TEXT_ALIGN_HORIZONTAL);
   let _ = vK();
   debug(!!(r || p), "TypePanel missing textAlignHorizontal");
@@ -113,7 +113,7 @@ export function $$O3({
   });
 }
 export function $$R1(e) {
-  let t = valueOrFallback(kl("missingFont"), !1);
+  let t = valueOrFallback(useSelectionPropertyValue("missingFont"), !1);
   let r = !((0 | getObservableOrFallback(AppStateTsApi.propertiesPanelState().enabledTypePanelControls)) & 1 << TextAlignmentOptions.TEXT_ALIGN_VERTICAL);
   let i = vK();
   return jsxs(bL, {

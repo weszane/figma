@@ -51,7 +51,7 @@ import { Op, qQ, Vp } from "../figma_app/405038";
 import { A as _$$A3 } from "../figma_app/121266";
 import { Y as _$$Y2 } from "../5421/483739";
 import { getBigNudgeAmount } from "../figma_app/740163";
-import { W4, qd } from "../figma_app/178475";
+import { TimeMillisecondsInput, TimeDurationInput } from "../figma_app/178475";
 import { GameControllerListener } from "../905/550169";
 import { _i, E8, U8 as _$$U, RI, pu, wb } from "../figma_app/800999";
 import { A as _$$A4 } from "../897/590880";
@@ -338,7 +338,7 @@ function ew(e) {
       children: _
     });
     let I = jsxs(Fragment, {
-      children: [x && eA(getI18nString("proto.delay"), jsx(W4, {
+      children: [x && eA(getI18nString("proto.delay"), jsx(TimeMillisecondsInput, {
         className: Lp,
         "data-tooltip": getI18nString("proto.trigger.after_delay_timeout"),
         "data-tooltip-type": KindEnum.TEXT,
@@ -366,7 +366,7 @@ function ew(e) {
         value: h,
         shouldFocusKeyCaptureField: l,
         setShouldFocusKeyCaptureField: s
-      }), c), g && eA(getI18nString("proto.time"), jsx(qd, {
+      }), c), g && eA(getI18nString("proto.time"), jsx(TimeDurationInput, {
         className: Ym,
         "data-tooltip": getI18nString("proto.trigger.video_hit_time"),
         "data-tooltip-type": KindEnum.TEXT,
@@ -386,7 +386,7 @@ function ew(e) {
         value: e.mediaHitTime,
         wheelMultiplier: o / 1e3,
         children: jsx(_$$Y2, {})
-      }), c), y && eA(getI18nString("proto.delay"), jsx(W4, {
+      }), c), y && eA(getI18nString("proto.delay"), jsx(TimeMillisecondsInput, {
         allowEmpty: !0,
         className: Lp,
         "data-tooltip": getI18nString("proto.trigger.after_delay_timeout"),

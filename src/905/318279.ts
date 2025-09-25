@@ -5,8 +5,8 @@ import { cZ } from "../figma_app/272902";
 import { parsePxNumber } from "../figma_app/783094";
 import { KeyCodes } from "../905/63728";
 import { LazyInputForwardRef } from "../905/408237";
-import { dG } from "../figma_app/753501";
-import { p as _$$p } from "../905/427409";
+import { stopPropagation } from "../figma_app/753501";
+import { FormattedInputContext } from "../905/427409";
 import { P } from "../figma_app/120873";
 import { pc, PQ } from "../figma_app/973219";
 export class $$h0 extends Component {
@@ -117,7 +117,7 @@ export class $$h0 extends Component {
         onFocus: this.onFocus,
         onKeyDown: this.onKeyDown,
         onKeyUp: this.props.onKeyUp,
-        onMouseDown: dG,
+        onMouseDown: stopPropagation,
         onMouseLeave: this.props.onMouseLeave,
         onMouseUp: this.props.onMouseUp,
         onPaste: this.props.onPaste,
@@ -130,5 +130,5 @@ export class $$h0 extends Component {
   }
 }
 $$h0.displayName = "ExpandingTextarea";
-$$h0.contextType = _$$p;
+$$h0.contextType = FormattedInputContext;
 export const v = $$h0;

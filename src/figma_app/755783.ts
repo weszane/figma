@@ -12,7 +12,7 @@ import { t } from "../905/62933";
 import { Yc } from "../figma_app/930914";
 import { FLATTENED_BOOLEAN_VALUES } from "../figma_app/264776";
 import { Z } from "../figma_app/221818";
-import { JV, eT } from "../figma_app/260445";
+import { useVariablePickerForFields, createBooleanExpressionVariable } from "../figma_app/260445";
 import { u3 } from "../figma_app/152690";
 import { Pr } from "../figma_app/394327";
 export function $$b0() {
@@ -24,7 +24,7 @@ export function $$b0() {
   return !!consumedVariable && !!r;
 }
 export function $$T4(e) {
-  return JV(["VISIBLE"], VariableResolvedDataType.BOOLEAN, void 0, {
+  return useVariablePickerForFields(["VISIBLE"], VariableResolvedDataType.BOOLEAN, void 0, {
     requestedTypes: [VariableResolvedDataType.BOOLEAN, VariableResolvedDataType.FLOAT, VariableResolvedDataType.STRING],
     variableFilters: {
       [t.MUST_INCLUDE_ONE_OF]: {
@@ -34,7 +34,7 @@ export function $$T4(e) {
         [VariableResolvedDataType.FLOAT]: !0
       }
     },
-    mapVariableIdToTypedValue: eT,
+    mapVariableIdToTypedValue: createBooleanExpressionVariable,
     metadata: e
   }, void 0, function () {
     let e = selectWithShallowEqual(e => selectSceneGraphSelectionKeys(e));

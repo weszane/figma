@@ -101,14 +101,14 @@ import { yesNoTrackingEnum } from "../figma_app/198712";
 import { executeWithDSAAction } from "../905/135117";
 import { p as _$$p2 } from "../905/725707";
 import { ZB } from "../figma_app/451499";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { MH } from "../figma_app/394327";
 import { oz } from "../figma_app/406976";
 import { n as _$$n } from "../905/264891";
 import { i as _$$i2 } from "../905/777871";
 import { sortByPosition, transformColorStop, sortByPositionWithDefault, interpolateGradientColor } from "../905/706046";
 import { O as _$$O } from "../905/487602";
-import { w2, gq } from "../figma_app/178475";
+import { PercentageBaseInput, ExpressionInput } from "../figma_app/178475";
 import { rM } from "../905/95091";
 import { Qh } from "../figma_app/228217";
 import { bL as _$$bL2, c$ as _$$c$3 } from "../905/867927";
@@ -118,7 +118,7 @@ import { colorCSSManipulatorInstance } from "../905/989956";
 import { rC } from "../905/713722";
 import { getVisibleTheme, useThemeContext } from "../905/640017";
 import { getThemeBorderStyle } from "../905/187165";
-import { AN } from "../905/203369";
+import { FormattedInputVariant3 } from "../905/203369";
 import { cS, Zo } from "../figma_app/334459";
 import { Button } from "../905/521428";
 import { o as _$$o } from "../905/298519";
@@ -808,7 +808,7 @@ function ty(e) {
     inputClassName: "type_select--typeSelectInput--dpSQO",
     minTop: 6,
     onChange: e.onChange,
-    onMouseDown: dG,
+    onMouseDown: stopPropagation,
     property: e.paint.type,
     recordingKey: e.recordingKey,
     children: e.paintTypeOptions.map((t, i) => jsx(tA, {
@@ -957,7 +957,7 @@ function tR({
         className: _()("gradient_stop_list--position--0dUS0", {
           "gradient_stop_list--positionNewUI--bUNK-": C
         }),
-        children: jsx(w2, {
+        children: jsx(PercentageBaseInput, {
           "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.stop_position"),
           "data-tooltip-type": KindEnum.TEXT,
           decimals: 0,
@@ -997,7 +997,7 @@ function tR({
           htmlAttributes: {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.delete_stop"),
-            onMouseDown: dG,
+            onMouseDown: stopPropagation,
             onBlur: () => A(!1),
             onFocus: () => A(!0),
             onKeyDown: v
@@ -1351,7 +1351,7 @@ function tz(e) {
             className: "noise_settings_modal--chit--KFm5o",
             color: e.paint.color,
             opacity: 1
-          }), jsx(AN, {
+          }), jsx(FormattedInputVariant3, {
             property: e.paint.color,
             onChange: d,
             formatter: _,
@@ -1361,7 +1361,7 @@ function tz(e) {
         })
       }), jsx(cS, {
         label: renderI18nText("properties_panel.noise.opacity"),
-        input: jsx(w2, {
+        input: jsx(PercentageBaseInput, {
           "data-tooltip": getI18nString("properties_panel.noise.opacity"),
           "data-tooltip-type": KindEnum.TEXT,
           dispatch: e.dispatch,
@@ -1377,7 +1377,7 @@ function tz(e) {
         })
       }), jsx(cS, {
         label: renderI18nText("properties_panel.noise.noise_size"),
-        input: jsx(gq, {
+        input: jsx(ExpressionInput, {
           "data-tooltip": getI18nString("properties_panel.noise.noise_size"),
           "data-tooltip-type": KindEnum.TEXT,
           dispatch: e.dispatch,
@@ -1398,7 +1398,7 @@ function tz(e) {
         })
       }), jsx(cS, {
         label: renderI18nText("properties_panel.noise.density"),
-        input: jsx(w2, {
+        input: jsx(PercentageBaseInput, {
           "data-tooltip": getI18nString("properties_panel.noise.density"),
           "data-tooltip-type": KindEnum.TEXT,
           dispatch: e.dispatch,
@@ -1606,7 +1606,7 @@ function t9(e) {
       })
     }), jsx(cS, {
       label: renderI18nText("properties_panel.pattern.scale"),
-      input: jsx(w2, {
+      input: jsx(PercentageBaseInput, {
         bigNudgeAmount: 10,
         "data-tooltip": getI18nString("properties_panel.pattern.scale"),
         "data-tooltip-type": KindEnum.TEXT,
@@ -1630,7 +1630,7 @@ function t9(e) {
       })
     }), jsx(cS, {
       label: renderI18nText("properties_panel.pattern.spacing"),
-      input: jsx(w2, {
+      input: jsx(PercentageBaseInput, {
         bigNudgeAmount: 10,
         "data-tooltip": getI18nString("properties_panel.pattern.spacing"),
         "data-tooltip-type": KindEnum.TEXT,
@@ -1659,7 +1659,7 @@ function t9(e) {
       })
     }), jsx(cS, {
       label: null,
-      input: jsx(w2, {
+      input: jsx(PercentageBaseInput, {
         bigNudgeAmount: 10,
         "data-tooltip": getI18nString("properties_panel.pattern.spacing"),
         "data-tooltip-type": KindEnum.TEXT,

@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { a as _$$a } from "../905/558168";
 import { Q } from "../figma_app/447352";
 import { getI18nString } from "../905/303541";
-import { lJ } from "../905/275640";
-import { Xs } from "../figma_app/98483";
+import { useSelectionProperty } from "../905/275640";
+import { getNudgeMultipliers } from "../figma_app/98483";
 import { S2 } from "../figma_app/328423";
 import { EX } from "../figma_app/709323";
 import { eN } from "../905/331848";
@@ -15,8 +15,8 @@ export function $$p0({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = Xs();
-  let [h, m] = lJ("cornerRadius");
+  } = getNudgeMultipliers();
+  let [h, m] = useSelectionProperty("cornerRadius");
   let g = eN({
     min: 0,
     max: 200

@@ -29,10 +29,10 @@ import { y3 } from "../figma_app/741785";
 import { Xx } from "../figma_app/632975";
 import { FX } from "../figma_app/831569";
 import { DE } from "../figma_app/811257";
-import { p as _$$p } from "../905/427409";
+import { FormattedInputContext } from "../905/427409";
 import { u3 } from "../figma_app/152690";
 import { P as _$$P, J } from "../figma_app/120873";
-import { V5 } from "../figma_app/260445";
+import { VariablePicker } from "../figma_app/260445";
 import { eF, MH } from "../figma_app/394327";
 import { k as _$$k } from "../905/67286";
 import { wG, J2 } from "../905/331989";
@@ -45,7 +45,7 @@ let M = memo(function ({
   recordingKey: i
 }) {
   let a;
-  let s = useContext(_$$p);
+  let s = useContext(FormattedInputContext);
   let d = useRef(null);
   let {
     isShowingBindingUI,
@@ -125,7 +125,7 @@ export function $$W1({
   isInStyleModal: a,
   invalid: o = !1
 }) {
-  let l = useContext(_$$p);
+  let l = useContext(FormattedInputContext);
   let d = BQ(t.node_id ?? void 0);
   return jsx(ButtonPrimitive, {
     className: Cl,
@@ -272,7 +272,7 @@ function $({
     isCmsTextNode: o
   });
   let u = jsxs(Fragment, {
-    children: [jsx(V5, {
+    children: [jsx(VariablePicker, {
       variableScope: PropertyScope.TEXT_CONTENT
     }), jsx(_$$K, {
       recordingKey: generateRecordingKey(e, "assignTextContent"),
@@ -337,7 +337,7 @@ export function $$X4({
   dataTestId: t,
   recordingKey: i
 }) {
-  let s = useContext(_$$p);
+  let s = useContext(FormattedInputContext);
   let o = useSelector(e => UT(e) ?? "");
   let l = isInvalidValue(o) ? getI18nString("fullscreen.mixed") : o;
   return jsx(YW, {
@@ -362,7 +362,7 @@ export let $$Q3 = forwardRef(function ({
   currentFieldValue: i,
   isInStyleModal: n
 }, a) {
-  let s = useContext(_$$p);
+  let s = useContext(FormattedInputContext);
   useImperativeHandle(a, () => ({
     showVariablePicker: () => {
       t.current && s?.showBindingUI(t.current, {

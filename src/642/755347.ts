@@ -9,17 +9,17 @@ import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue } from "../905/216495";
-import { kl, lJ } from "../905/275640";
+import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { Yc, yQ } from "../figma_app/930914";
 import { L as _$$L } from "../figma_app/884735";
 import { Tn, On } from "../figma_app/323320";
-import { Pd } from "../figma_app/178475";
-import { sA } from "../figma_app/841644";
+import { OpacityInput } from "../figma_app/178475";
+import { VariableBindingInput } from "../figma_app/841644";
 import { ei as _$$ei } from "../642/384859";
 import { Zk } from "../figma_app/626177";
 import { C as _$$C } from "../figma_app/531250";
-import { Jo, Df } from "../figma_app/98483";
+import { createEnabledTransformControlsObservable, createShownTransformControlsObservable } from "../figma_app/98483";
 import { K as _$$K } from "../642/473452";
 import { j as _$$j } from "../642/595261";
 import { Cs, cU, Je } from "../figma_app/938628";
@@ -44,7 +44,7 @@ import { MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { SU } from "../figma_app/451499";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { Um } from "../905/848862";
 import { J as _$$J } from "../642/436925";
 import { Z as _$$Z, m as _$$m2 } from "../905/423399";
@@ -169,7 +169,7 @@ function ec({
     id: t,
     minTop: 6,
     onChange: l,
-    onMouseDown: dG,
+    onMouseDown: stopPropagation,
     property: n,
     recordingKey: generateRecordingKey(s, "blendMode"),
     willShowDropdown: () => (trackEventAnalytics("editor-blend-mode-dropdown-show"), Promise.resolve()),
@@ -245,9 +245,9 @@ let $$eg1 = "layer-blend-mode";
 let $$ef2 = "layer-blend-mode-select";
 let $$ex3 = ["OPACITY"];
 export function $$ey4() {
-  let e = Jo();
-  let t = Df();
-  let s = kl("visible");
+  let e = createEnabledTransformControlsObservable();
+  let t = createShownTransformControlsObservable();
+  let s = useSelectionPropertyValue("visible");
   let r = $H();
   let i = useMemo(On, []);
   let {
@@ -258,7 +258,7 @@ export function $$ey4() {
     selectedGUIDs: selectSceneGraphSelectionKeys(e)
   }));
   let c = !Yc(SlotSymbolType.VISIBLE, selectedGUIDs) || isDefReferencedBySelection;
-  let [u] = lJ("opacity");
+  let [u] = useSelectionProperty("opacity");
   let h = useRef(null);
   let x = useCallback((e, t) => {
     fullscreenValue.updateSelectionProperties({
@@ -283,7 +283,7 @@ export function $$ey4() {
     opacity: u,
     opacityInputRef: h,
     onOpacityChange: x,
-    handleMirroring: kl("handleMirroring"),
+    handleMirroring: useSelectionPropertyValue("handleMirroring"),
     isVectorEditMode: _,
     selectedGUIDs
   };
@@ -341,7 +341,7 @@ let $$e_0 = memo(function (e) {
       })]
     }), jsx(fn, {
       ref: t,
-      leftInput: jsx(sA, {
+      leftInput: jsx(VariableBindingInput, {
         recordingKey: generateRecordingKey(e, "layerOpacityInputWrapper"),
         fields: $$ex3,
         disabled: !1,
@@ -349,7 +349,7 @@ let $$e_0 = memo(function (e) {
         currentFieldValue: isValidValue(opacity) ? opacity : void 0,
         inputRef: opacityInputRef,
         hasBindingContextMenu: !0,
-        children: jsx(Pd, {
+        children: jsx(OpacityInput, {
           dispatch: W,
           forwardedRef: opacityInputRef,
           inputClassName: _$$h,

@@ -14,7 +14,7 @@ import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -220,7 +220,7 @@ export class $$B5 extends PureComponent {
         recordingKey: this.props.recordingKey
       }), "PDF" === e.imageType ? null : jsx(fI, {
         className: nM,
-        children: jsx(_$$E, {
+        children: jsx(AutoInteractableWrapper, {
           name: "export_settings_use_contents_only_checkbox",
           children: jsx(Checkbox, {
             checked: !!e.contentsOnly,
@@ -233,7 +233,7 @@ export class $$B5 extends PureComponent {
         })
       }), Fullscreen && Fullscreen.shouldShowTextNodeExportOptions() && jsx(fI, {
         className: nM,
-        children: jsx(_$$E, {
+        children: jsx(AutoInteractableWrapper, {
           name: "export_settings_use_absolute_bounds_checkbox",
           children: jsx(Checkbox, {
             checked: !!e.useAbsoluteBounds,
@@ -292,7 +292,7 @@ export function $$z2({
   inBuzzPrint: l,
   ...d
 }) {
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "export_settings_color_profile_select",
     children: jsxs(_$$bL, {
       value: i?.toString() ?? "DOCUMENT",
@@ -329,7 +329,7 @@ export function $$K1({
   dispatch: a,
   ...s
 }) {
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "export_settings_quality_select",
     children: jsxs(_$$bL, {
       value: OK(t, i).toString(),
@@ -423,7 +423,7 @@ function X({
   dispatch: r,
   ...a
 }) {
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "export_settings_image_sampling_select",
     children: jsxs(_$$bL, {
       value: t ? "BICUBIC" : "DEFAULT",
@@ -474,7 +474,7 @@ function J({
   recordingKey: i
 }) {
   let a = useId();
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "export_settings_suffix_text_input",
     children: jsx(dx, {
       left: jsx(Label, {

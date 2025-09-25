@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, isMixedArray, isValidValue, normalizeValue, MIXED_MARKER } from "../905/216495";
-import { lJ } from "../905/275640";
+import { useSelectionProperty } from "../905/275640";
 import { F } from "../905/258517";
 import { TK } from "../905/129660";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -14,7 +14,7 @@ import { bi } from "../figma_app/836943";
 import { El } from "../905/361629";
 export function $$_4() {
   let e = trackFileEventWithUser();
-  let [t, i] = lJ("textAutoResize");
+  let [t, i] = useSelectionProperty("textAutoResize");
   return useCallback((n, r, a) => {
     getFeatureFlags().ce_properties_panel_tracking && t !== n && e("editor_type_panel_change", {
       key: "autoResize",

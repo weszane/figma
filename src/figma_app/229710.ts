@@ -13,7 +13,7 @@ import { getColorFormat, getNudgeAmounts } from "../figma_app/740163";
 import { m as _$$m } from "../905/571439";
 import { MIXED_MARKER, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
 import { defaultGrayColor } from "../figma_app/385874";
-import { kl, pw, zj, ER, wR, DQ, fC } from "../905/275640";
+import { useSelectionPropertyValue, useSelectedStyleOrSelectionPropertyValues, useSelectionPropertyValues, useHasSelectedStyle, useSelectedStylePropertyValue, useNonMixedSelectedStyleOrSelectionPropertyValues, useNonMixedSelectionPropertyValues } from "../905/275640";
 import { SG } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { useCachedSubtree } from "../figma_app/679183";
@@ -48,8 +48,8 @@ import { $Y, sI, sH, Yq, Ps, be } from "../figma_app/183248";
 import { logError } from "../905/714362";
 import { g as _$$g } from "../905/151072";
 import { KindEnum } from "../905/129884";
-import { $j } from "../figma_app/178475";
-import { Xs } from "../figma_app/98483";
+import { LengthInput } from "../figma_app/178475";
+import { getNudgeMultipliers } from "../figma_app/98483";
 import { hF, QK } from "../figma_app/100987";
 import { z as _$$z } from "../905/282554";
 import eh from "../vendor/805353";
@@ -102,9 +102,9 @@ function ec(e) {
     }
     return MIXED_MARKER;
   }();
-  let g = Xs();
+  let g = getNudgeMultipliers();
   let f = isInvalidValue(m) ? ed : {};
-  return jsx($j, {
+  return jsx(LengthInput, {
     className: _$$z,
     "data-tooltip": "width" === property ? getI18nString("fullscreen.properties_panel.transform_panel.width") : getI18nString("fullscreen.properties_panel.transform_panel.height"),
     "data-tooltip-type": KindEnum.TEXT,
@@ -188,14 +188,14 @@ let eE = () => {
 };
 function ey(e) {
   let t = useSelector(e => e.mirror.sceneGraphSelection);
-  let r = kl("selectionRegions");
+  let r = useSelectionPropertyValue("selectionRegions");
   let n = normalizeValue(r);
   let i = useLatestRef(n);
   let a = useRef(0);
   let [s, o] = useState(void 0);
   let u = useLatestRef(s);
   let p = useRef(null);
-  let m = kl("selectionResizable");
+  let m = useSelectionPropertyValue("selectionResizable");
   let g = valueOrFallback(m, !1);
   let f = useAppModelProperty("activeUserAction");
   let y = useLatestRef(f);
@@ -618,7 +618,7 @@ export var $$eO8 = (e => (e[e.DEFAULT_EXPANDED = 0] = "DEFAULT_EXPANDED", e[e.DE
     exportSettings,
     exportBackgroundDisabled,
     styleIdForFill
-  } = (e.shouldUseSelectedStyleProperties ? pw : zj)("inheritFillStyleKey", "exportSettings", "exportBackgroundDisabled", "styleIdForFill");
+  } = (e.shouldUseSelectedStyleProperties ? useSelectedStyleOrSelectionPropertyValues : useSelectionPropertyValues)("inheritFillStyleKey", "exportSettings", "exportBackgroundDisabled", "styleIdForFill");
   let s = _$$m();
   return jsx(_$$eT, {
     colorFormat: t,
@@ -659,7 +659,7 @@ export let $$eR2 = n.ConnectedFillPanel;
   stylePickerShown: e.stylePickerShown,
   openFile: e.openFile
 }))(function (e) {
-  let t = ER();
+  let t = useHasSelectedStyle();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -673,8 +673,8 @@ export let $$eR2 = n.ConnectedFillPanel;
     framelikeWithoutClipping,
     anyNonFrameLikesSelected,
     styleIdForEffect
-  } = (e.shouldUseSelectedStyleProperties ? pw : zj)("effects", "inheritEffectStyleKey", "containsAnyKnockoutShadowEligibleNodes", "framelikeWithoutFills", "framelikeWithoutClipping", "anyNonFrameLikesSelected", "containsOnlySpreadEligibleNodes", "styleIdForEffect");
-  let _ = wR("guid") ?? null;
+  } = (e.shouldUseSelectedStyleProperties ? useSelectedStyleOrSelectionPropertyValues : useSelectionPropertyValues)("effects", "inheritEffectStyleKey", "containsAnyKnockoutShadowEligibleNodes", "framelikeWithoutFills", "framelikeWithoutClipping", "anyNonFrameLikesSelected", "containsOnlySpreadEligibleNodes", "styleIdForEffect");
+  let _ = useSelectedStylePropertyValue("guid") ?? null;
   return jsx(_$$F, {
     anyNonFrameLikesSelected: !!anyNonFrameLikesSelected,
     bigNudgeAmount,
@@ -715,7 +715,7 @@ export let $$eL1 = i.ConnectedEffectsPanel;
   } = getNudgeAmounts();
   let {
     transformModifiers
-  } = zj("transformModifiers");
+  } = useSelectionPropertyValues("transformModifiers");
   return jsx(_$$H, {
     bigNudgeAmount,
     currentSelectedProperty: e.currentSelectedProperty,
@@ -754,8 +754,8 @@ export let $$eP4 = a.ConnectedTransformModifiersPanel;
     layoutGrids,
     inheritGridStyleKey,
     styleIdForGrid
-  } = (e.shouldUseSelectedStyleProperties ? pw : zj)("styleIdForGrid", "layoutGrids", "inheritGridStyleKey");
-  let d = wR("guid") ?? null;
+  } = (e.shouldUseSelectedStyleProperties ? useSelectedStyleOrSelectionPropertyValues : useSelectionPropertyValues)("styleIdForGrid", "layoutGrids", "inheritGridStyleKey");
+  let d = useSelectedStylePropertyValue("guid") ?? null;
   return jsx(_$$S, {
     bigNudgeAmount,
     colorFormat: t,
@@ -807,8 +807,8 @@ export let $$eD3 = s.ConnectedGridsPanel;
   }))(function (e) {
     let r = useContext(zK);
     let n = getObservableOrFallback(AppStateTsApi.propertiesPanelState().enabledTypePanelControls);
-    let i = e.shouldUseSelectedStyleProperties ? pw : zj;
-    let a = e.shouldUseSelectedStyleProperties ? DQ : fC;
+    let i = e.shouldUseSelectedStyleProperties ? useSelectedStyleOrSelectionPropertyValues : useSelectionPropertyValues;
+    let a = e.shouldUseSelectedStyleProperties ? useNonMixedSelectedStyleOrSelectionPropertyValues : useNonMixedSelectionPropertyValues;
     let {
       fontFamily,
       fontStyle,
@@ -859,7 +859,7 @@ export let $$eD3 = s.ConnectedGridsPanel;
       textBidiVersion,
       fontVariations
     } = a("hasHadRTLText", "textUserLayoutVersion", "textExplicitLayoutVersion", "textBidiVersion", "fontVariations");
-    let eg = wR("guid") ?? null;
+    let eg = useSelectedStylePropertyValue("guid") ?? null;
     (0 | n) & 1 << TextAlignmentOptions.TEXT_TRUNCATION && debug(null != maxLines, "TypePanel missing maxLines");
     let {
       smallNudgeAmount,

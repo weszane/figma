@@ -33,7 +33,7 @@ import { getAnnualPriceString } from "../figma_app/808294";
 import { U as _$$U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { l4 } from "../figma_app/975811";
-import { Q7 } from "../905/203369";
+import { FormattedInputVariant1 } from "../905/203369";
 import { pK, _Z, z3, PW, vz, Dq } from "../905/235660";
 import { A as _$$A4 } from "../905/601732";
 import { t as _$$t3 } from "../905/104116";
@@ -222,7 +222,7 @@ let H = forwardRef(function ({
     error: o,
     children: jsxs("div", {
       className: pK,
-      children: [jsx(Q7, {
+      children: [jsx(FormattedInputVariant1, {
         ref: d,
         className: F()(_Z, {
           [z3]: !!o

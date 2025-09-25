@@ -5,7 +5,7 @@ import { KindEnum } from '../905/129884';
 import { e as _$$e } from '../905/149844';
 import { scopeAwareFunction } from '../905/189185';
 import { isValidValue } from '../905/216495';
-import { E as _$$E2 } from '../905/277716';
+import { AutoInteractableWrapper } from '../905/277716';
 import { getI18nString } from '../905/303541';
 import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/582200';
@@ -222,7 +222,7 @@ function K({
     }),
     removeBottomPadding: p.length === 0,
     showBottomBorder: !0,
-    children: jsx(_$$E2, {
+    children: jsx(AutoInteractableWrapper, {
       name: 'slides_theme_colors',
       children: p.map(({
         paint: t,
@@ -312,7 +312,7 @@ function $({
   return jsxs(X, {
     title: getI18nString('slides.properties_panel.color_picker.document_colors'),
     removeBottomPadding: E,
-    children: [jsx(_$$E2, {
+    children: [jsx(AutoInteractableWrapper, {
       name: 'slides_add_custom_color',
       children: jsx('div', {
         className: cssBuilderInstance.flex.justifyCenter.itemsCenter.w32.h32.$,
@@ -332,7 +332,7 @@ function $({
           })
         })
       })
-    }), jsxs(_$$E2, {
+    }), jsxs(AutoInteractableWrapper, {
       name: 'slides_document_colors',
       children: [f.map((t, i) => jsx($$q2, {
         backgroundString: colorCSSManipulatorInstance.format(t.color),

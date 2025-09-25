@@ -10,7 +10,7 @@ import { useHandleMouseEvent } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { compareLibraryKeyWithString } from "../905/709171";
 import { isInvalidValue } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
 import { getBasename } from "../905/309735";
 import { getStyleThumbnail } from "../905/405710";
@@ -48,9 +48,9 @@ export let $$O0 = memo(function ({
     let e = M.current;
     j(!!(e && e.offsetWidth < e.scrollWidth));
   }, [M, L?.name, B]);
-  let V = kl("numTextStyleOverrides");
-  let H = kl("textStyleOverrideType");
-  let z = kl("anyNonFrameLikesSelected");
+  let V = useSelectionPropertyValue("numTextStyleOverrides");
+  let H = useSelectionPropertyValue("textStyleOverrideType");
+  let z = useSelectionPropertyValue("anyNonFrameLikesSelected");
   let W = !!(isInvalidValue(z) || z);
   let K = function (e, t) {
     if (!e || isInvalidValue(e)) return "";

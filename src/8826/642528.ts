@@ -7,7 +7,7 @@ import { ScreenReaderOnly } from '../905/172252';
 import { S as _$$S } from '../905/177206';
 import { permissionScopeHandler } from '../905/189185';
 import { isAutoMarker, isInvalidValue, isValidValue } from '../905/216495';
-import { kl, lJ } from '../905/275640';
+import { useSelectionPropertyValue, useSelectionProperty } from '../905/275640';
 import { getI18nString } from '../905/303541';
 import { getFeatureFlags } from '../905/601108';
 import { ButtonPrimitive } from '../905/632989';
@@ -21,7 +21,7 @@ import { lQ } from '../905/934246';
 import { o as _$$o } from '../8826/796619';
 import { getObservableOrFallback } from '../figma_app/84367';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
-import { $j, Ht } from '../figma_app/178475';
+import { LengthInput, NumericInput } from '../figma_app/178475';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { wx, Wx, Y9 } from '../figma_app/409807';
 import { fullscreenValue } from '../figma_app/455680';
@@ -32,7 +32,7 @@ import { M as _$$M } from '../figma_app/634148';
 import { getNudgeAmounts, EditorPreferencesApi } from '../figma_app/740163';
 import { Axis, GridDirection, GridLayoutApi, LayoutSizingType, SceneGraphHelpers, SpacingConstants, VariableResolvedDataType } from '../figma_app/763686';
 import { fn } from '../figma_app/811257';
-import { sA } from '../figma_app/841644';
+import { VariableBindingInput } from '../figma_app/841644';
 import { generateRecordingKey } from '../figma_app/878298';
 import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
 import { hF, qE, QK } from '../figma_app/960598';
@@ -54,8 +54,8 @@ function W({
   disabled: t
 }) {
   let [n, r] = useState(!1);
-  let [a, o] = lJ('gridColumnCount');
-  let [s, u] = lJ('gridRowCount');
+  let [a, o] = useSelectionProperty('gridColumnCount');
+  let [s, u] = useSelectionProperty('gridRowCount');
   let g = a && isValidValue(a) ? a : null;
   let m = s && isValidValue(s) ? s : null;
   let _ = useRef(null);
@@ -290,7 +290,7 @@ let q = memo(({
   onCommit: i,
   onClick: r
 }) => {
-  return jsx(Ht, {
+  return jsx(NumericInput, {
     'className': hF,
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.number_of_columns'),
     'data-tooltip-type': KindEnum.TEXT,
@@ -323,7 +323,7 @@ let J = memo(({
   onCommit: i,
   onClick: r
 }) => {
-  return jsx(Ht, {
+  return jsx(NumericInput, {
     'className': hF,
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.number_of_rows'),
     'data-tooltip-type': KindEnum.TEXT,
@@ -587,7 +587,7 @@ function ec({
     children: [jsx(fn, {
       leftLabel: 'Rows',
       rightLabel: 'Columns',
-      leftInput: jsx(Ht, {
+      leftInput: jsx(NumericInput, {
         'value': n?.rowAnchorIndex ?? void 0,
         'onValueChange': e => r(GridDirection.ROW, e),
         'recordingKey': generateRecordingKey(e, 'grid-rows'),
@@ -600,7 +600,7 @@ function ec({
           children: getI18nString('fullscreen.properties_panel.grid_panel.r')
         })
       }),
-      rightInput: jsx(Ht, {
+      rightInput: jsx(NumericInput, {
         'value': n?.columnAnchorIndex ?? void 0,
         'onValueChange': e => r(GridDirection.COLUMN, e),
         'recordingKey': generateRecordingKey(e, 'grid-columns'),
@@ -617,7 +617,7 @@ function ec({
     }), jsx(fn, {
       leftLabel: 'Rows',
       rightLabel: 'Columns',
-      leftInput: jsx(Ht, {
+      leftInput: jsx(NumericInput, {
         'value': n?.rowSpan,
         'onValueChange': e => o(GridDirection.ROW, e),
         'recordingKey': generateRecordingKey(e, 'grid-rows'),
@@ -630,7 +630,7 @@ function ec({
           className: QK
         })
       }),
-      rightInput: jsx(Ht, {
+      rightInput: jsx(NumericInput, {
         'value': n?.columnSpan,
         'onValueChange': e => o(GridDirection.COLUMN, e),
         'recordingKey': generateRecordingKey(e, 'grid-columns'),
@@ -743,9 +743,9 @@ export function $$eu0({
 function ep({
   recordingKey: e
 }) {
-  let t = kl('isInstanceSelected');
-  let n = kl('isNonEditableInstanceSublayerSelected');
-  return kl('stackMode') !== 'GRID' ? null : jsx(iZ, {
+  let t = useSelectionPropertyValue('isInstanceSelected');
+  let n = useSelectionPropertyValue('isNonEditableInstanceSublayerSelected');
+  return useSelectionPropertyValue('stackMode') !== 'GRID' ? null : jsx(iZ, {
     leftLabel: getI18nString('fullscreen.properties_panel.stack_panel.grid'),
     rightLabel: getI18nString('fullscreen.properties_panel.section_autoLayout.label_gap'),
     leftInput: jsx(Y, {
@@ -774,13 +774,13 @@ function eg({
     bigNudgeAmount,
     smallNudgeAmount
   } = getNudgeAmounts();
-  let [u, h] = lJ('gridColumnGap');
+  let [u, h] = useSelectionProperty('gridColumnGap');
   let g = useCallback((e, t) => {
     permissionScopeHandler.user('grid-panel', () => {
       isAutoMarker(e) || h(e, t);
     });
   }, [h]);
-  let m = jsx($j, {
+  let m = jsx(LengthInput, {
     bigNudgeAmount,
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.gap_between_columns'),
     'data-tooltip-type': KindEnum.TEXT,
@@ -803,7 +803,7 @@ function eg({
       className: QK
     })
   });
-  return getFeatureFlags().grid_gap_vars ? jsx(sA, {
+  return getFeatureFlags().grid_gap_vars ? jsx(VariableBindingInput, {
     fields: eh,
     resolvedType: VariableResolvedDataType.FLOAT,
     currentFieldValue: isValidValue(u) ? u : void 0,
@@ -820,13 +820,13 @@ function e_({
     bigNudgeAmount,
     smallNudgeAmount
   } = getNudgeAmounts();
-  let [u, h] = lJ('gridRowGap');
+  let [u, h] = useSelectionProperty('gridRowGap');
   let g = useCallback((e, t) => {
     permissionScopeHandler.user('grid-panel', () => {
       isAutoMarker(e) || h(e, t);
     });
   }, [h]);
-  let m = jsx($j, {
+  let m = jsx(LengthInput, {
     bigNudgeAmount,
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.gap_between_rows'),
     'data-tooltip-type': KindEnum.TEXT,
@@ -849,7 +849,7 @@ function e_({
       className: QK
     })
   });
-  return getFeatureFlags().grid_gap_vars ? jsx(sA, {
+  return getFeatureFlags().grid_gap_vars ? jsx(VariableBindingInput, {
     fields: em,
     resolvedType: VariableResolvedDataType.FLOAT,
     currentFieldValue: isValidValue(u) ? u : void 0,

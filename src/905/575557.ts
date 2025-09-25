@@ -17,13 +17,13 @@ import { SG } from "../figma_app/852050";
 import { oZ, LS, TK, F6, UH } from "../905/129660";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { e as _$$e2 } from "../905/579635";
-import { Jl } from "../figma_app/178475";
-import { sJ } from "../figma_app/841644";
+import { conditionalWrapper } from "../905/579635";
+import { PixelInput } from "../figma_app/178475";
+import { FormattedInputWrapper } from "../figma_app/841644";
 import { h$ } from "../905/566585";
 import { P as _$$P } from "../905/460261";
-import { _X } from "../figma_app/260445";
-import { p as _$$p } from "../905/427409";
+import { FormattedInputWithWrapper } from "../figma_app/260445";
+import { FormattedInputContext } from "../905/427409";
 import { k as _$$k } from "../905/67286";
 import { hf, KY, Kk } from "../905/71683";
 export function $$N0({
@@ -75,9 +75,9 @@ export function $$N0({
       });
     }
   }, [N, s, T]);
-  return jsx(_$$e2, {
+  return jsx(conditionalWrapper, {
     condition: !A,
-    wrapper: e => jsx(_X, {
+    wrapper: e => jsx(FormattedInputWithWrapper, {
       fields: ["LINE_HEIGHT"],
       resolvedType: VariableResolvedDataType.FLOAT,
       editingStyleGuid: s,
@@ -98,7 +98,7 @@ export function $$N0({
         children: e
       })
     }),
-    children: jsx(Jl, {
+    children: jsx(PixelInput, {
       bigNudgeAmount,
       className: A ? hf : void 0,
       "data-tooltip": _$$P(getI18nString("fullscreen.type_panel.line_height")),
@@ -230,7 +230,7 @@ function O({
   controlRef: o,
   children: l
 }) {
-  let d = useContext(_$$p);
+  let d = useContext(FormattedInputContext);
   let c = SG(["LINE_HEIGHT"]).data ?? [];
   let u = useCallback(() => {
     a.current && d?.showBindingUI(a.current, {
@@ -242,7 +242,7 @@ function O({
       })
     });
   }, [d, t, i, a, o]);
-  return jsx(sJ, {
+  return jsx(FormattedInputWrapper, {
     ref: o,
     inputClassName: e,
     currentFieldValue: t,

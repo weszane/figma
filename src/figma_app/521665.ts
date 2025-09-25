@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
 import { parsePxNumber } from "../figma_app/783094";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { h as _$$h } from "../figma_app/648675";
 let d = parsePxNumber("24px");
 let c = parsePxNumber("8px");
@@ -279,7 +279,7 @@ export function $$D0({
   shouldAnimateIn: e = !0
 }) {
   let t = _$$h();
-  let r = kl("aspectRatioLockToggled");
+  let r = useSelectionPropertyValue("aspectRatioLockToggled");
   let i = useSelector(e => e.mirror.sceneGraphSelection);
   let s = k(i);
   let d = k(r);

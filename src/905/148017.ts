@@ -13,12 +13,12 @@ import { atomStoreManager } from "../figma_app/27355";
 import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E2 } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { getI18nString } from "../905/303541";
 import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
 import { F as _$$F } from "../figma_app/8833";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { c6 } from "../905/950959";
 import { valueOrFallback } from "../905/216495";
@@ -365,7 +365,7 @@ class es extends PureComponent {
     } = i;
     e = "GRID" === pattern ? jsx(_$$E, {}) : "X" === axis ? jsx(_$$m, {}) : jsx(_$$Y, {});
     let h = ee(i, "ui3" === this.props.version);
-    let g = jsx(_$$E2, {
+    let g = jsx(AutoInteractableWrapper, {
       name: "toggle_settings_picker_button",
       children: jsx(_$$d, {
         ref: this.windowButtonRef,
@@ -378,7 +378,7 @@ class es extends PureComponent {
           onKeyDown: e => {
             this.props.useFPLGrid && " " === e.key && e.shiftKey && e.preventDefault();
           },
-          onMouseUp: dG,
+          onMouseUp: stopPropagation,
           "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("fullscreen.grid_panel.layout_guide_settings")
         },
@@ -395,7 +395,7 @@ class es extends PureComponent {
         })
       })
     });
-    let y = jsx(_$$E2, {
+    let y = jsx(AutoInteractableWrapper, {
       name: "toggle_grid_visibility_button",
       children: jsx(_$$B, {
         visible: this.props.layoutGrid.visible,
@@ -403,14 +403,14 @@ class es extends PureComponent {
         recordingKey: generateRecordingKey(this.props, "visibleToggle")
       })
     });
-    let v = jsx(_$$E2, {
+    let v = jsx(AutoInteractableWrapper, {
       name: "remove_grid_button",
       children: jsx(IconButton, {
         recordingKey: generateRecordingKey(this.props, "removeButton"),
         onClick: this.props.onRemoveGrid,
         "aria-label": getI18nString("fullscreen.grid_panel.remove_layout_guide"),
         htmlAttributes: {
-          onMouseDown: dG
+          onMouseDown: stopPropagation
         },
         children: jsx(_$$O, {})
       })

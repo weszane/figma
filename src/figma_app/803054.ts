@@ -5,7 +5,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { OU } from "../figma_app/175258";
 import { isZoomIntegration } from "../figma_app/469876";
 import { isInvalidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
-import { Gt, kl, ER, pw, zj } from "../905/275640";
+import { useNonMixedSelectionPropertyValue, useSelectionPropertyValue, useHasSelectedStyle, useSelectedStyleOrSelectionPropertyValues, useSelectionPropertyValues } from "../905/275640";
 import { useHasSceneGraphSelection, useAppModelProperty } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
 import { isExportRestricted } from "../figma_app/12796";
@@ -24,7 +24,7 @@ export function $$y12(e, t, r) {
   return !!(!e && !n && !i && !a && !s && (t.propertiesPanelShouldShowAddAutoLayout || t.propertiesPanelShouldShowRemoveAutoLayout || r?.propertiesPanelShouldShowAddAutoLayout || r?.propertiesPanelShouldShowRemoveAutoLayout));
 }
 export function $$b13() {
-  let e = Gt("numSelectedByType");
+  let e = useNonMixedSelectionPropertyValue("numSelectedByType");
   let t = useHasSceneGraphSelection();
   let r = sO();
   let n = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
@@ -48,13 +48,13 @@ export function $$S2(e) {
 }
 export function $$v8(e, t) {
   return function (e, t, r) {
-    let n = kl("containsResponsiveSets");
+    let n = useSelectionPropertyValue("containsResponsiveSets");
     let a = function (e) {
-      let t = Gt("numSelectedByType");
+      let t = useNonMixedSelectionPropertyValue("numSelectedByType");
       let {
         propertiesPanelShouldShowAddAutoLayout,
         propertiesPanelShouldShowRemoveAutoLayout
-      } = (ER() ? pw : zj)("propertiesPanelShouldShowAddAutoLayout", "propertiesPanelShouldShowRemoveAutoLayout");
+      } = (useHasSelectedStyle() ? useSelectedStyleOrSelectionPropertyValues : useSelectionPropertyValues)("propertiesPanelShouldShowAddAutoLayout", "propertiesPanelShouldShowRemoveAutoLayout");
       let i = !!t?.SLIDE;
       let a = !!t?.CANVAS_ROW;
       let s = !!t?.CODE_INSTANCE;
@@ -79,7 +79,7 @@ export function $$C3(e) {
   return !!e[ItemType.INSTANCE_ITEM];
 }
 export function $$w9(e) {
-  let t = kl("transformModifiers");
+  let t = useSelectionPropertyValue("transformModifiers");
   return !!e[ItemType.TRANSFORM_MODIFIERS_ITEM] && !!t && t !== MIXED_MARKER && valueOrFallback(t, []).length > 0;
 }
 export function $$O11(e) {
@@ -99,8 +99,8 @@ export function $$D19(e, t) {
   return !$$I4(e) && 0 === Object.keys(t).length && !e[ItemType.FRAME_PRESETS];
 }
 export function $$k7() {
-  let e = Gt("numSelectedByType");
-  let t = kl("vectorOperationVersion");
+  let e = useNonMixedSelectionPropertyValue("numSelectedByType");
+  let t = useSelectionPropertyValue("vectorOperationVersion");
   return !!getFeatureFlags().ce_vector_ops_use_all_geometry && !!e?.VECTOR_OPERATION && (0 === t || t === MIXED_MARKER);
 }
 export function $$M0(e) {

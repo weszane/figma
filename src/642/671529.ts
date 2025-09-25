@@ -72,7 +72,7 @@ import { Zk, fI } from "../figma_app/626177";
 import { logError } from "../905/714362";
 import { S as _$$S } from "../figma_app/552746";
 import { vq } from "../905/8732";
-import { ft } from "../figma_app/753501";
+import { shouldHandleMultiTouchOrPressure } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
@@ -457,7 +457,7 @@ function eK({
   let w = sO();
   let T = !s || !b;
   let N = !S && T;
-  let I = ft();
+  let I = shouldHandleMultiTouchOrPressure();
   let E = G$();
   d = {
     tab: DesignWorkspace[e],

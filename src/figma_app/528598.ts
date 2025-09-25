@@ -49,8 +49,8 @@ import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { qo } from "../905/959568";
-import { e as _$$e2 } from "../905/579635";
-import { j5 } from "../figma_app/178475";
+import { conditionalWrapper } from "../905/579635";
+import { ScrubbableInput } from "../figma_app/178475";
 import { v as _$$v } from "../905/318279";
 import { MB } from "../figma_app/525558";
 import { e as _$$e3 } from "../figma_app/522702";
@@ -64,15 +64,15 @@ import { x as _$$x } from "../905/1253";
 import { P as _$$P } from "../905/201667";
 import { g as _$$g } from "../figma_app/594353";
 import { Hm } from "../figma_app/47085";
-import { hu, V5 } from "../figma_app/260445";
-import { p as _$$p } from "../905/427409";
+import { ControlledVariablePickerProvider, VariablePicker } from "../figma_app/260445";
+import { FormattedInputContext } from "../905/427409";
 import { Px, y$ } from "../figma_app/152690";
 import { eF as _$$eF } from "../figma_app/394327";
 import { P as _$$P2 } from "../figma_app/120873";
 import { oz } from "../figma_app/406976";
 import { U as _$$U } from "../905/708285";
 import { selectWithShallowEqual } from "../905/103090";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { aA } from "../figma_app/632975";
 import { f as _$$f } from "../figma_app/884735";
 import { selectContainingInstance } from "../figma_app/505098";
@@ -96,7 +96,7 @@ function eO({
   onClearBinding: u,
   recordingKey: p
 }) {
-  let h = kl("isInstanceSublayerSelected");
+  let h = useSelectionPropertyValue("isInstanceSublayerSelected");
   let m = selectWithShallowEqual(selectContainingInstance);
   let g = e.type === VariableDataType.ALIAS ? e.value : void 0;
   let f = e.type === VariableDataType.NODE_FIELD_ALIAS ? aA(e.value.stablePathToNode, e.value.indexOrKey) : void 0;
@@ -119,13 +119,13 @@ function eO({
       "aria-label": getI18nString("design_systems.component_properties.detach_property"),
       children: jsx(_$$U, {})
     })
-  }) : (assertNotNullish(r), jsxs(hu, {
+  }) : (assertNotNullish(r), jsxs(ControlledVariablePickerProvider, {
     boundVariableId: void 0,
     resolvedType: r,
     requestedTypes: s,
     onComponentPropSelected: c,
     onVariableSelected: l,
-    children: [jsx(V5, {
+    children: [jsx(VariablePicker, {
       onPickerClose: () => {
         setHoveredComponentPropDef({
           nodeIDs: [],
@@ -299,9 +299,9 @@ function eU(e) {
       children: ec
     })
   });
-  let e_ = jsx(_$$e2, {
+  let e_ = jsx(conditionalWrapper, {
     condition: X,
-    wrapper: e => (assertNotNullish(variableType), jsxs(hu, {
+    wrapper: e => (assertNotNullish(variableType), jsxs(ControlledVariablePickerProvider, {
       boundVariableId: void 0,
       resolvedType: variableType,
       requestedTypes,
@@ -326,7 +326,7 @@ function eU(e) {
           defID: ""
         });
       },
-      children: [jsx(V5, {
+      children: [jsx(VariablePicker, {
         variableScope
       }), e]
     })),
@@ -556,7 +556,7 @@ function eH({
   let r = e.value;
   let s = _$$u(r);
   let o = Px();
-  let l = useContext(_$$p);
+  let l = useContext(FormattedInputContext);
   let d = useMemo(() => VariablesBindings?.getVariableSetKeyForPublish(s?.variableSetId ?? "") ?? "", [s?.variableSetId]);
   let c = d in o ? o[yG(d)] : void 0;
   let u = useMemo(() => c ? {
@@ -822,7 +822,7 @@ function e$({
       className: w()(eG(l), {
         [mD]: d
       }),
-      children: jsx(j5, {
+      children: jsx(ScrubbableInput, {
         value: E ?? g,
         onValueChange: (e, t) => {
           void 0 !== _ && e < _ ? e = _ : void 0 !== h && e > h && (e = h);

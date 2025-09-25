@@ -17,7 +17,7 @@ import { getI18nString } from '../905/303541';
 import { s as _$$s2 } from '../905/403855';
 import { globalPerfTimer } from '../905/542194';
 import { useIsFullscreenSitesView } from '../905/561485';
-import { e as _$$e2 } from '../905/579635';
+import { conditionalWrapper } from '../905/579635';
 import { getFeatureFlags } from '../905/601108';
 import { r as _$$r2 } from '../905/619088';
 import { ButtonPrimitive } from '../905/632989';
@@ -787,7 +787,7 @@ let eA = memo(e => {
           children: e4
         })
       })]
-    }), jsx(_$$e2, {
+    }), jsx(conditionalWrapper, {
       condition: e1,
       wrapper: e => jsx('div', {
         style: styleBuilderInstance.absolute.wFull.eventsNone.$,

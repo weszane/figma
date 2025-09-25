@@ -8,9 +8,9 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { LN } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Q7 } from "../905/203369";
+import { FormattedInputVariant1 } from "../905/203369";
 import { Id, nV } from "../figma_app/626177";
 export function $$x0(e) {
   return jsx(bL, {
@@ -38,7 +38,7 @@ function y({
   recordingKey: e
 }) {
   let t = useMemo(() => new LN(), []);
-  let s = valueOrFallback(kl("cornerSmoothing"), 0);
+  let s = valueOrFallback(useSelectionPropertyValue("cornerSmoothing"), 0);
   return jsxs("div", {
     className: "corner_smoothing--root--tqWdN",
     children: [jsx("div", {
@@ -58,7 +58,7 @@ function y({
         step: .01,
         value: s
       })
-    }), jsx(Q7, {
+    }), jsx(FormattedInputVariant1, {
       recordingKey: generateRecordingKey(e, "modal"),
       className: "corner_smoothing--cornerSmoothingInput--diqdz",
       formatter: t,

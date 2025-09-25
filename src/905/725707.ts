@@ -5,7 +5,7 @@ import { xk } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { Q } from "../figma_app/104130";
 import { KindEnum } from "../905/129884";
-import { w2 } from "../figma_app/178475";
+import { PercentageBaseInput } from "../figma_app/178475";
 import { fI, JU } from "../figma_app/626177";
 import { WC } from "../figma_app/973219";
 let m = {
@@ -24,7 +24,7 @@ export function $$h0(e) {
         children: [jsx(JU, {
           className: "x1xdureb x1447hjg",
           children: getI18nString("fullscreen.scrubbable.opacity")
-        }), jsx(w2, {
+        }), jsx(PercentageBaseInput, {
           ...xk(m.input, e.positionOverride),
           inputClassName: WC,
           "data-tooltip": getI18nString("fullscreen.scrubbable.opacity"),

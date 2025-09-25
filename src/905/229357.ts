@@ -4,7 +4,7 @@ import { setupToggleButton } from "../905/167712";
 import { j } from "../905/519202";
 import { _ } from "../905/410717";
 import { getI18nString } from "../905/303541";
-import { dG } from "../figma_app/753501";
+import { stopPropagation } from "../figma_app/753501";
 import { MIXED_MARKER } from "../905/216495";
 import { KindEnum } from "../905/129884";
 export function $$p0({
@@ -28,8 +28,8 @@ export function $$p0({
       disabled: i,
       htmlAttributes: {
         ...g,
-        onPointerDown: dG,
-        onMouseDown: dG
+        onPointerDown: stopPropagation,
+        onMouseDown: stopPropagation
       },
       mixed: e === MIXED_MARKER,
       offIcon: jsx(j, {}),

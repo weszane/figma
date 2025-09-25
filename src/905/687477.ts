@@ -19,7 +19,7 @@ import { gk, tj } from '../figma_app/540726';
 import { isDebugSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { getInitialDynamicConfig } from '../figma_app/594947';
 import { checkStackInvariants } from '../figma_app/603466';
-import { wo } from '../figma_app/753501';
+import { preventDefault } from '../figma_app/753501';
 import { KeyboardLayout, EventTypeEnum, InsertErrorType, Fullscreen, PointerType, PanelType, DesignGraphElements, HTMLWindow, PageNavigation, ClipboardAction } from '../figma_app/763686';
 import { isMobileUA } from '../figma_app/778880';
 import { ty } from '../figma_app/844818';
@@ -413,8 +413,8 @@ class W {
         return e && (e.getAttribute('data-fullscreen-intercept') || e.getAttribute('data-fullscreen-intercept-dangerously-include-tab'));
       }(t) && t.classList.add('focus-target');
     }, !0);
-    e.addEventListener('dragenter', G(wo));
-    e.addEventListener('dragover', G(wo));
+    e.addEventListener('dragenter', G(preventDefault));
+    e.addEventListener('dragover', G(preventDefault));
     window.addEventListener('focus', G(() => {
       this.lastViewHandleWithFocus !== null && (getFeatureFlags().a11y_design_dom_mirror && this.cppAPI.focusEvent(EventTypeEnum.APP_FOCUS_GAINED, this.lastViewHandleWithFocus), this.focusView(this.lastViewHandleWithFocus, !0));
     }));
@@ -774,7 +774,7 @@ class W {
       capture: !0
     }), document.addEventListener('pointercancel', G(e => {
       this.pointerState && (this.pointerState = this.pointerState.next(e));
-    })), browserCapabilities.isIpad() && (this.viewElement.addEventListener('touchmove', wo), this.viewElement.addEventListener('touchstart', wo, {
+    })), browserCapabilities.isIpad() && (this.viewElement.addEventListener('touchmove', preventDefault), this.viewElement.addEventListener('touchstart', preventDefault, {
       passive: !1
     }))) : (this.viewElement.addEventListener('mousedown', G(e), {
       passive: !1

@@ -13,12 +13,12 @@ import { getNudgeAmounts } from "../figma_app/740163";
 import { getCommonValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
-import { ig, $j } from "../figma_app/178475";
-import { sJ } from "../figma_app/841644";
+import { PercentageInput, LengthInput } from "../figma_app/178475";
+import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { Gz } from "../905/62223";
 import { ui, om } from "../figma_app/395097";
 import { l6, c$ } from "../905/794875";
-import { hu, V5 } from "../figma_app/260445";
+import { ControlledVariablePickerProvider, VariablePicker } from "../figma_app/260445";
 import { u3, y$ } from "../figma_app/152690";
 import { MH } from "../figma_app/394327";
 import { fE } from "../figma_app/359164";
@@ -83,7 +83,7 @@ export function $$L3(e) {
       inputRef: o,
       field: S || "STROKE_WEIGHT",
       recordingKey: generateRecordingKey(e, "strokeWeightInputWrapper"),
-      children: getFeatureFlags().ce_multi_border_weight_input ? jsx(ig, {
+      children: getFeatureFlags().ce_multi_border_weight_input ? jsx(PercentageInput, {
         bigNudgeAmount,
         className: c()(TL, {
           [py]: e.gridRight
@@ -104,7 +104,7 @@ export function $$L3(e) {
         tooltipForScreenReadersOnly: !0,
         value: f,
         children: jsx($$R0, {})
-      }) : jsx($j, {
+      }) : jsx(LengthInput, {
         bigNudgeAmount,
         className: c()(TL, {
           [py]: e.gridRight
@@ -217,11 +217,11 @@ function M({
       _clearVariableConsumption();
     }
   }, [clearVariableConsumption, _clearVariableConsumption, c, updateVariableConsumption]);
-  return l ? jsxs(hu, {
+  return l ? jsxs(ControlledVariablePickerProvider, {
     boundVariableId: y,
     resolvedType: VariableResolvedDataType.FLOAT,
     onVariableSelected: T,
-    children: [jsx(sJ, {
+    children: [jsx(FormattedInputWithWrapper, {
       inputRef: s,
       inputClassName: t,
       currentFieldValue: y,
@@ -234,7 +234,7 @@ function M({
         isTokenizable: !0,
         noBorderOnHover: !0
       })
-    }), jsx(V5, {
+    }), jsx(VariablePicker, {
       variableScope: PropertyScope.STROKE_FLOAT
     })]
   }) : cloneElement(Children.only(e), {

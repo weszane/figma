@@ -4,14 +4,14 @@ import { useSelector } from "react-redux";
 import { IconButton } from "../905/443068";
 import { wY } from "../figma_app/708845";
 import { generateRecordingKey } from "../figma_app/878298";
-import { E as _$$E } from "../905/277716";
+import { AutoInteractableWrapper } from "../905/277716";
 import { k as _$$k } from "../905/582200";
 import { getI18nString } from "../905/303541";
 import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { vm, yU, Zr } from "../figma_app/678782";
-import { kl } from "../905/275640";
+import { useSelectionPropertyValue } from "../905/275640";
 import { BK } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
@@ -169,7 +169,7 @@ export function $$Y0(e) {
   yU(e.actions);
   let a = getI18nString("fullscreen.properties_panel.tooltip_moreActions");
   return jsxs(Fragment, {
-    children: [jsx(_$$E, {
+    children: [jsx(AutoInteractableWrapper, {
       name: "toggle_align_options_button",
       children: jsx(IconButton, {
         ref: r,
@@ -190,7 +190,7 @@ export function $$Y0(e) {
         },
         children: jsx(Z, {})
       })
-    }), t.showing && jsx(_$$E, {
+    }), t.showing && jsx(AutoInteractableWrapper, {
       name: "dropdown",
       children: jsx(Cf, {
         targetRect: t.data.targetRect,
@@ -234,14 +234,14 @@ function X({
   return t && jsx(t, {});
 }
 function q() {
-  let e = kl("detectableListAxis");
+  let e = useSelectionPropertyValue("detectableListAxis");
   let t = G[Zr("arrange-as-grid") ? "arrange-as-grid" : `arrange-as-list-${valueOrFallback(e, "Y")}`];
   return t && jsx(t, {});
 }
 function J(e) {
   let t = Zr(e.action);
   let r = Xo();
-  return jsx(_$$E, {
+  return jsx(AutoInteractableWrapper, {
     name: "align_button",
     alsoTrack: () => ({
       alignButtonAction: e.action
