@@ -1,105 +1,179 @@
-import { createAtomWithEquality, t_, atomStoreManager, atom, Ut } from "../figma_app/27355";
-import { getConsentRegion } from "../figma_app/169182";
-import { W } from "../905/423575";
-let s = "pref";
-export var $$o4 = (e => (e.UNLOADED = "unloaded", e.NO = "no", e.YES = "yes", e))($$o4 || {});
-function l() {
-  let e = W();
-  if (e) return e.get(s);
+import { getCookieManager } from '../905/423575'
+import { atom, atomStoreManager, createAtomWithEquality, t_, Ut } from '../figma_app/27355'
+import { getConsentRegion } from '../figma_app/169182'
+// ConsentStatus Enum (original: $$o4)
+/**
+ * Enum representing consent status.
+ */
+export enum ConsentStatus {
+  UNLOADED = 'unloaded',
+  NO = 'no',
+  YES = 'yes',
 }
-async function d(e = "background") {
+
+// Cookie key constant (original: s)
+const COOKIE_PREF_KEY = 'pref'
+
+// getConsentCookie (original: l)
+/**
+ * Retrieves the consent cookie value.
+ */
+function getConsentCookie(): any {
+  const cookieManager = getCookieManager()
+  return cookieManager ? cookieManager.get(COOKIE_PREF_KEY) : undefined
+}
+
+// getConsentCookieAsync (original: d)
+/**
+ * Asynchronously retrieves the consent cookie value with optional priority.
+ * @param priority - Task priority.
+ */
+async function getConsentCookieAsync(priority: string = 'background'): Promise<any> {
   try {
-    return await scheduler.postTask(() => l(), {
-      priority: e
-    });
-  } catch {
-    return;
+    return await scheduler.postTask(() => getConsentCookie(), { priority })
+  }
+  catch {
+    return undefined
   }
 }
-async function c(e, t = "background") {
+
+// setConsentCookie (original: c)
+/**
+ * Asynchronously sets the consent cookie value.
+ * @param value - Value to set.
+ * @param priority - Task priority.
+ */
+async function setConsentCookie(value: any, priority: string = 'background'): Promise<void> {
   try {
-    await scheduler.postTask(() => function (e) {
-      let t = W();
-      t && t.set(s, e, {
-        maxAge: 31536e3
-      });
-    }(e), {
-      priority: t
-    });
-  } catch {}
-}
-let u = createAtomWithEquality(t_(() => l()));
-async function p() {
-  atomStoreManager.set(u, await d());
-}
-async function m(e) {
-  atomStoreManager.set(u, e);
-  await c(e);
-}
-export async function $$h2({
-  consentRegion: e,
-  cookiesEnabled: t
-}) {
-  await m({
-    t: e,
-    f: t,
-    a: t,
-    m: t
-  });
-}
-window.addEventListener("focus", () => p());
-let $$g0 = atom(e => {
-  switch (e(u)) {
-    case Ut:
-    case void 0:
-      return "unloaded";
-    case null:
-      return "no";
-    default:
-      return "yes";
+    await scheduler.postTask(() => {
+      const cookieManager = getCookieManager()
+      if (cookieManager) {
+        cookieManager.set(COOKIE_PREF_KEY, value, { maxAge: 31536e3 })
+      }
+    }, { priority })
   }
-});
-let $$f1 = atom(e => {
-  let t = e(u);
-  switch (t) {
+  catch {}
+}
+
+// consentAtom (original: u)
+const consentAtom = createAtomWithEquality(t_(() => getConsentCookie()))
+
+// updateConsentAtom (original: p)
+/**
+ * Updates the consent atom with the current cookie value.
+ */
+async function updateConsentAtom(): Promise<void> {
+  atomStoreManager.set(consentAtom, await getConsentCookieAsync())
+}
+
+// setConsent (original: m)
+/**
+ * Sets the consent atom and updates the cookie.
+ * @param value - Consent value.
+ */
+async function setConsent(value: any): Promise<void> {
+  atomStoreManager.set(consentAtom, value)
+  await setConsentCookie(value)
+}
+
+// setConsentFromRegion (original: $$h2)
+/**
+ * Sets consent based on region and cookies enabled.
+ * @param params - Object containing consentRegion and cookiesEnabled.
+ */
+export async function setConsentFromRegion({
+  consentRegion,
+  cookiesEnabled,
+}: { consentRegion: string, cookiesEnabled: boolean }): Promise<void> {
+  await setConsent({
+    t: consentRegion,
+    f: cookiesEnabled,
+    a: cookiesEnabled,
+    m: cookiesEnabled,
+  })
+}
+
+// Update consent atom on window focus
+window.addEventListener('focus', () => updateConsentAtom())
+
+// consentStatusAtom (original: $$g0)
+/**
+ * Atom representing the consent status.
+ */
+export const consentStatusAtom = atom((getStatus) => {
+  switch (getStatus(consentAtom)) {
     case Ut:
-    case void 0:
-      return !1;
+    case undefined:
+      return ConsentStatus.UNLOADED
     case null:
-      return "explicit" !== getConsentRegion();
+      return ConsentStatus.NO
     default:
-      return t.a;
+      return ConsentStatus.YES
   }
-});
-let $$_6 = atom(e => {
-  let t = e(u);
-  switch (t) {
+})
+
+// consentAllowedAtom (original: $$f1)
+/**
+ * Atom representing if consent is allowed.
+ */
+export const consentAllowedAtom = atom((getStatus) => {
+  const consent = getStatus(consentAtom)
+  switch (consent) {
     case Ut:
-    case void 0:
-      return !1;
+    case undefined:
+      return false
     case null:
-      return !getConsentRegion();
+      return getConsentRegion() !== 'explicit'
     default:
-      return t.m;
+      return consent.a
   }
-});
-let $$A5 = atom(e => {
-  let t = e(u);
-  switch (t) {
+})
+
+// consentMarketingAtom (original: $$_6)
+/**
+ * Atom representing if marketing consent is allowed.
+ */
+export const consentMarketingAtom = atom((getStatus) => {
+  const consent = getStatus(consentAtom)
+  switch (consent) {
     case Ut:
-    case void 0:
-      return !1;
+    case undefined:
+      return false
     case null:
-      return "explicit" !== getConsentRegion();
+      return !getConsentRegion()
     default:
-      return t.f;
+      return consent.m
   }
-});
-let $$y3 = atom(0);
-export const Dr = $$g0;
-export const EA = $$f1;
-export const L3 = $$h2;
-export const P4 = $$y3;
-export const S6 = $$o4;
-export const Zu = $$A5;
-export const cQ = $$_6;
+})
+
+// consentFunctionalAtom (original: $$A5)
+/**
+ * Atom representing if functional consent is allowed.
+ */
+export const consentFunctionalAtom = atom((getStatus) => {
+  const consent = getStatus(consentAtom)
+  switch (consent) {
+    case Ut:
+    case undefined:
+      return false
+    case null:
+      return getConsentRegion() !== 'explicit'
+    default:
+      return consent.f
+  }
+})
+
+// consentCounterAtom (original: $$y3)
+/**
+ * Atom representing a consent counter.
+ */
+export const consentCounterAtom = atom(0)
+
+// Exported names for refactored atoms and functions
+export const Dr = consentStatusAtom
+export const EA = consentAllowedAtom
+export const L3 = setConsentFromRegion
+export const P4 = consentCounterAtom
+export const S6 = ConsentStatus
+export const Zu = consentFunctionalAtom
+export const cQ = consentMarketingAtom

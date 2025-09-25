@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { MenuRootComp, MenuContainerComp, MenuItemComp, MenuGroupComp, setupMenu } from "../figma_app/860955";
 import { A as _$$A } from "../905/351112";
 import { getSearchSessionIdFromSelector, getCurrentQueryId } from "../figma_app/387599";
@@ -16,14 +16,14 @@ import { q } from "../905/600041";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { i as _$$i } from "../905/977961";
 import { a as _$$a } from "../905/329735";
-import { cz, i8 } from "../905/14017";
+import { LikeCountDisplay, UsageCountDisplay } from "../905/14017";
 import { EU } from "../figma_app/835219";
 import { Q } from "../905/978641";
 import { ResourceTypeEnum } from "../figma_app/306946";
 import { l as _$$l } from "../905/716947";
 import { useLibrary } from "../905/420347";
 import { throwTypeError } from "../figma_app/465776";
-import { F } from "../905/171275";
+import { DesignsList } from "../905/171275";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { VisualBellActions } from "../905/302958";
@@ -74,11 +74,11 @@ function E({
       children: EU(e)
     }), "\xa0\xa0\xb7\xa0\xa0", jsxs("div", {
       className: "x78zum5 x1q0g3np x6s0dn4 x17d4w8g",
-      children: [jsx(cz, {
+      children: [jsx(LikeCountDisplay, {
         currentUserLiked: !1,
         likeCount: e.like_count,
         disableFontStyling: !0
-      }), jsx(i8, {
+      }), jsx(UsageCountDisplay, {
         usageCount: getResourceUserCount(e),
         disableFontStyling: !0
       })]
@@ -97,21 +97,21 @@ function E({
     thumbnailType: function (e) {
       switch (e) {
         case ResourceTypeEnum.FIGJAM_TEMPLATE:
-          return F.WHITEBOARD;
+          return DesignsList.WHITEBOARD;
         case ResourceTypeEnum.SLIDE_TEMPLATE:
-          return F.SLIDES;
+          return DesignsList.SLIDES;
         case ResourceTypeEnum.SITE_TEMPLATE:
-          return F.SITES;
+          return DesignsList.SITES;
         case ResourceTypeEnum.PROTOTYPE:
         case ResourceTypeEnum.DESIGN_TEMPLATE:
         case ResourceTypeEnum.UI_KIT:
         case ResourceTypeEnum.PLUGIN:
         case ResourceTypeEnum.WIDGET:
         case ResourceTypeEnum.FIGMAKE_TEMPLATE:
-          return F.DESIGN;
+          return DesignsList.DESIGN;
         case ResourceTypeEnum.COOPER_TEMPLATE_FILE:
         case ResourceTypeEnum.COOPER_TEMPLATE_ASSET:
-          return F.COOPER;
+          return DesignsList.COOPER;
         default:
           throwTypeError(e);
       }
@@ -268,7 +268,7 @@ export function $$F0({
   resources: e,
   isLoading: t = !1,
   loadingTileCount: r = 10,
-  resourceImpressionTracking: h = lQ
+  resourceImpressionTracking: h = noop
 }) {
   let x = useDispatch();
   let f = useResourceRouteParams();

@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import _ from "classnames";
 import { useSprigWithSampling } from "../905/99656";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { getI18nString } from "../905/303541";
 import { a as _$$a2 } from "../6658/303587";
 import { k1 } from "../1250/428971";
@@ -490,7 +490,7 @@ function B({
         className: m()(v6, {
           [Kk]: S
         }),
-        children: jsx(oW, {
+        children: jsx(WAFImage, {
           "data-onboarding-key": ee ? k1.Step1 : void 0,
           className: I$,
           src: H.thumbnail_url,

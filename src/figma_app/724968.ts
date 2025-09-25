@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useRef, useMemo, useEffect } from "react";
 import { ImageModelType, ImageProviderType } from "../905/585727";
 import { MAX_IMAGE_URLS } from "../905/869092";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuTitleComp, MenuItemComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/976845";
@@ -18,16 +18,16 @@ import { getFeatureFlags } from "../905/601108";
 import { createLocalStorageAtom, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { KeyCodes } from "../905/63728";
 import { uint8ArrayToBase64, base64ToUint8Array } from "../figma_app/930338";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { canvasGridAtom } from "../905/618447";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { zD } from "../figma_app/109758";
 import { fullscreenValue } from "../figma_app/455680";
 import { processImageWithThumbnail } from "../figma_app/624361";
-import { Mo } from "../905/913055";
+import { getMatchingNodesToUpdateForQuery } from "../905/913055";
 import { useCurrentUserOrg } from "../905/845253";
-import { XJ, VG, gg, qY } from "../905/23253";
+import { findImageFillByHash, getImagePaintSignedUrl, getImageProcessingStatus, setupPlaybackHandler } from "../905/23253";
 import { JT, LC } from "../figma_app/632248";
 import { s as _$$s2, w as _$$w } from "../905/286488";
 import { RL, B3, qy } from "../figma_app/862289";
@@ -70,11 +70,11 @@ export async function $$el1(e) {
     try {
       let r = xJ(e.imageHash);
       let n = uint8ArrayToBase64(r);
-      let i = XJ({
+      let i = findImageFillByHash({
         node: t,
         hash: n
       });
-      return await VG(i);
+      return await getImagePaintSignedUrl(i);
     } catch (e) {
       console.error("[ReferenceImages] Failed:", e.message || e);
       return null;
@@ -137,7 +137,7 @@ export function $$ec2({
         disabled: t,
         children: getI18nString("image_ai.edit_image.upload_image")
       }), jsx(MenuItemComp, {
-        onClick: lQ,
+        onClick: noop,
         disabled: t,
         children: getI18nString("image_ai.edit_image.select_from_canvas")
       })]
@@ -340,7 +340,7 @@ function eg({
     state,
     aiTrackingContext
   } = eo;
-  let ef = gg(state);
+  let ef = getImageProcessingStatus(state);
   let eE = useCallback(() => {
     ey.current = void 0;
     ea(void 0);
@@ -368,7 +368,7 @@ function eg({
       let r = await processImageWithThumbnail(base64ToUint8Array(e), "image/png", G);
       t === ey.current && s(r);
     };
-    let n = qY(e);
+    let n = setupPlaybackHandler(e);
     let i = Math.max(e.size.x, e.size.y);
     let a = "componentPropDefId" in t ? {
       width: i,
@@ -408,7 +408,7 @@ function eg({
       eE();
       return;
     }
-    t !== e && (r(e), e_(e, aiTrackingContext), Mo(n, "fill-paint-data").forEach(t => {
+    t !== e && (r(e), e_(e, aiTrackingContext), getMatchingNodesToUpdateForQuery(n, "fill-paint-data").forEach(t => {
       let r = Number(e);
       if (isNaN(r) || !l[r] || "SUCCESS" !== l[r].state) return;
       let n = l[r].image;
@@ -574,7 +574,7 @@ function ef({
     state,
     aiTrackingContext
   } = ef;
-  let eS = gg(state);
+  let eS = getImageProcessingStatus(state);
   let ev = useCallback(() => {
     eA.current = void 0;
     eu(void 0);
@@ -610,13 +610,13 @@ function ef({
       let r = await processImageWithThumbnail(base64ToUint8Array(t), "image/png", H);
       e === eA.current && s(r);
     };
-    let a = qY(node);
+    let a = setupPlaybackHandler(node);
     let o = {
       width: fill.originalImageWidth ?? node.size.x,
       height: fill.originalImageHeight ?? node.size.y
     };
     try {
-      let e = await VG(fill);
+      let e = await getImagePaintSignedUrl(fill);
       let t = await $$el1(referenceImages);
       await start({
         action: JT.EDIT_IMAGE,
@@ -646,7 +646,7 @@ function ef({
       node,
       fill
     } = n;
-    t !== e && (r(e), e_(e, aiTrackingContext), Mo(node, "fill-paint-data").forEach(t => {
+    t !== e && (r(e), e_(e, aiTrackingContext), getMatchingNodesToUpdateForQuery(node, "fill-paint-data").forEach(t => {
       let r;
       if ("original" === e) {
         if (!ed) return;
@@ -705,7 +705,7 @@ function ef({
     return jsx(_$$R, {
       iterateOptions: [{
         type: is.MAKE_CHANGES,
-        callback: lQ
+        callback: noop
       }],
       targets: es ? [es.guid] : [],
       content: jsxs(Fragment, {
@@ -904,7 +904,7 @@ function eT({
               c.current?.focus();
               a(l);
             },
-            children: jsx(oW, {
+            children: jsx(WAFImage, {
               className: "x10l6tqk xh8yej3 x5yr21d xl1xv1r",
               crossOrigin: "anonymous",
               draggable: !0,

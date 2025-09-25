@@ -1,16 +1,16 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useContext } from "react";
 import { A } from "../vendor/723372";
-import { r as _$$r } from "../905/5729";
-import { b } from "../905/22449";
-import { c as _$$c } from "../905/34525";
+import { RadioPrimivteContext } from "../905/5729";
+import { RadioPrimitiveRoot } from "../905/22449";
+import { RadioPrimitiveOption } from "../905/34525";
 import { s as _$$s } from "../905/536340";
 var c = "radio-like-primitive__hiddenInput__-rswg";
 var u = "radio-like-primitive__optionRoot__9WImp";
 export let $$p2 = forwardRef(({
   legend: e,
   ...t
-}, i) => jsxs(b, {
+}, i) => jsxs(RadioPrimitiveRoot, {
   ref: i,
   ...t,
   children: [e, jsx("div", {
@@ -30,11 +30,11 @@ export let $$m1 = forwardRef(({
 }, g) => {
   let {
     name
-  } = useContext(_$$r);
+  } = useContext(RadioPrimivteContext);
   let _ = `${name}-${t}`;
   return jsxs("div", {
     className: A(u, p),
-    children: [jsx(_$$c, {
+    children: [jsx(RadioPrimitiveOption, {
       className: c,
       ref: g,
       id: _,
@@ -63,7 +63,7 @@ export let $$h0 = forwardRef(({
   ...o
 }, d) => jsxs("div", {
   className: A(u, s),
-  children: [jsx(_$$c, {
+  children: [jsx(RadioPrimitiveOption, {
     className: c,
     ref: d,
     id: e,

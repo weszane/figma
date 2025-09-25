@@ -1,57 +1,62 @@
-import { registerModal } from "../905/102752";
-import { jsx, jsxs } from "react/jsx-runtime";
-import { useModalManager } from "../905/437088";
-import { ModalRootComponent } from "../905/38914";
-import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
-import { Button } from "../905/521428";
-import { permissionScopeHandler } from "../905/189185";
-import { renderI18nText, getI18nString } from "../905/303541";
-import { fullscreenValue } from "../figma_app/455680";
-export let $$u0 = registerModal(function (e) {
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { ModalRootComponent } from '../905/38914'
+import { registerModal } from '../905/102752'
+import { permissionScopeHandler } from '../905/189185'
+import { getI18nString, renderI18nText } from '../905/303541'
+import { useModalManager } from '../905/437088'
+import { Button } from '../905/521428'
+import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243'
+import { fullscreenValue } from '../figma_app/455680'
+
+export let fullscreenRestoreModal = registerModal((e) => {
   let t = useModalManager({
     open: e.open,
     onClose: e.onClose,
-    preventUserClose: !0
-  });
+    preventUserClose: !0,
+  })
   return jsx(ModalRootComponent, {
     manager: t,
-    width: "lg",
+    width: 'lg',
     children: jsxs(DialogContents, {
       children: [jsx(DialogHeader, {
         children: jsx(DialogTitle, {
-          children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.restore_component")
-        })
+          children: renderI18nText('fullscreen.fullscreen_view.restore_component_modal.restore_component'),
+        }),
       }), jsx(DialogBody, {
-        children: jsx("div", {
-          children: e.movedToFile ? jsxs("p", {
-            children: [renderI18nText("fullscreen.fullscreen_view.restore_component_modal.this_component_was_moved", {
-              otherFile: "another file" === e.movedToFile ? getI18nString("fullscreen.fullscreen_view.restore_component_modal.another_file") : jsx("strong", {
-                children: `${e.movedToFile}`
+        children: jsx('div', {
+          children: e.movedToFile
+            ? jsxs('p', {
+                children: [renderI18nText('fullscreen.fullscreen_view.restore_component_modal.this_component_was_moved', {
+                  otherFile: e.movedToFile === 'another file'
+                    ? getI18nString('fullscreen.fullscreen_view.restore_component_modal.another_file')
+                    : jsx('strong', {
+                        children: `${e.movedToFile}`,
+                      }),
+                }), jsx('br', {}), renderI18nText('fullscreen.fullscreen_view.restore_component_modal.accept_component_updates'), jsx('br', {}), jsx('br', {}), renderI18nText('fullscreen.fullscreen_view.restore_component_modal.restoring_will_allow')],
               })
-            }), jsx("br", {}), renderI18nText("fullscreen.fullscreen_view.restore_component_modal.accept_component_updates"), jsx("br", {}), jsx("br", {}), renderI18nText("fullscreen.fullscreen_view.restore_component_modal.restoring_will_allow")]
-          }) : jsx("p", {
-            children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.restore_the_main_component_to_continue_making_edits_to_it")
-          })
-        })
+            : jsx('p', {
+                children: renderI18nText('fullscreen.fullscreen_view.restore_component_modal.restore_the_main_component_to_continue_making_edits_to_it'),
+              }),
+        }),
       }), jsx(DialogFooter, {
         children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: e.onClose,
-            variant: "secondary",
-            children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.cancel")
+            variant: 'secondary',
+            children: renderI18nText('fullscreen.fullscreen_view.restore_component_modal.cancel'),
           }), jsx(Button, {
             onClick: () => {
-              permissionScopeHandler.user("restore-component", () => {
-                fullscreenValue.restoreSoftDeletedNode(e.nodeId);
-              });
-              e.onClose();
+              permissionScopeHandler.user('restore-component', () => {
+                fullscreenValue.restoreSoftDeletedNode(e.nodeId)
+              })
+              e.onClose()
             },
-            variant: "primary",
-            children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.restore")
-          })]
-        })
-      })]
-    })
-  });
-}, "fullscreen-restore-component-modal");
-export const l = $$u0;
+            variant: 'primary',
+            children: renderI18nText('fullscreen.fullscreen_view.restore_component_modal.restore'),
+          })],
+        }),
+      })],
+    }),
+  })
+}, 'fullscreen-restore-component-modal')
+export const l = fullscreenRestoreModal

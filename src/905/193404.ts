@@ -2,12 +2,12 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useState, useRef, useCallback } from "react";
 import { sortByPropertyWithOptions, sortByProperty, sortByDateProperty } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { e as _$$e } from "../905/916195";
 import { useAtomValueAndSetter, createLocalStorageAtom } from "../figma_app/27355";
 import u from "classnames";
 import { w as _$$w } from "../905/835474";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { h1 } from "../905/986103";
 import { o as _$$o } from "../905/605383";
 import { Ph } from "../905/160095";
@@ -257,7 +257,7 @@ function F({
         listKey: x,
         children: v.map(e => jsx(U, {
           stat: e,
-          onRowClick: i ?? lQ,
+          onRowClick: i ?? noop,
           columns: l,
           withCaret: !!i
         }, u(e)))
@@ -662,7 +662,7 @@ function K({
   shouldSplitName: t = !1
 }) {
   return jsxs(Fragment, {
-    children: [jsx(oW, {
+    children: [jsx(WAFImage, {
       src: e.thumbnail_url,
       className: "stats_table--componentAvatar--GQaA5",
       alt: ""

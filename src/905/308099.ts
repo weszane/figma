@@ -3,14 +3,14 @@ import { forwardRef } from "react";
 import { Description } from "../905/21985";
 import { generateInputId, generateDescId } from "../905/786321";
 import { useSelectionProvider } from "../905/751750";
-import { b as _$$b, c as _$$c } from "../905/618904";
+import { ManuallyLabeledRadioRoot, ManuallyLabeledRadioOption } from "../905/618904";
 import { UX, zr, h_ } from "../905/434007";
 export let $$c0 = forwardRef(function ({
   legend: e,
   children: t,
   ...i
 }, r) {
-  return jsxs(_$$b, {
+  return jsxs(ManuallyLabeledRadioRoot, {
     ref: r,
     ...i,
     children: [e, jsx("div", {
@@ -34,7 +34,7 @@ export let $$u1 = forwardRef(function ({
     value: p,
     children: jsxs("div", {
       className: zr,
-      children: [jsx(_$$c, {
+      children: [jsx(ManuallyLabeledRadioOption, {
         id: h,
         ...r,
         htmlAttributes: i,

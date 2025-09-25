@@ -12,7 +12,7 @@ import { FOrganizationLevelType, FPlanNameType, FResourceCategoryType } from "..
 import { useTeamPlanFeatures } from "../figma_app/465071";
 import { N as _$$N } from "../905/809096";
 import { useDispatch, useSelector } from "react-redux";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -33,7 +33,7 @@ import { h as _$$h2, d as _$$d } from "../figma_app/603561";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { resourceUtils } from "../905/989992";
 import { un } from "../figma_app/457899";
-import { IX } from "../905/712921";
+import { RenewalTermEnum } from "../905/712921";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
 import { E as _$$E } from "../905/53857";
 import { AutoLayout, Spacer } from "../905/470281";
@@ -70,7 +70,7 @@ function T({
     children: [jsx("div", {
       className: "x78zum5 x1qughib",
       children: jsx(Ay, {
-        ...xk(_$$g.textBodyMediumStrong),
+        ...xk(textDisplayConfig.textBodyMediumStrong),
         htmlFor: e,
         children: t
       })
@@ -89,7 +89,7 @@ function W(e) {
     let r = un({
       planKey: e.key,
       currentSeatType: ViewAccessTypeEnum.VIEW,
-      currentSeatBillingInterval: e.type === FOrganizationLevelType.ORG ? IX.YEAR : IX.MONTH,
+      currentSeatBillingInterval: e.type === FOrganizationLevelType.ORG ? RenewalTermEnum.YEAR : RenewalTermEnum.MONTH,
       enabled: n && !a
     });
     return "loading" === t.status ? resourceUtils.loadingSuspendable(t.suspense) : r;
@@ -212,11 +212,11 @@ function U({
 }
 let Z = {
   optionSeatName: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   optionSeatSecondaryText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "xoq6bns",
     maxWidth: "x1j9u4d2",
     whiteSpace: "xeaf4i8",
@@ -367,7 +367,7 @@ function er({
     workspaceId: r,
     seatType: d,
     configs: {
-      groupNameClassName: xk(_$$g.textBodyMediumStrong).className
+      groupNameClassName: xk(textDisplayConfig.textBodyMediumStrong).className
     }
   });
   let S = useId();
@@ -489,7 +489,7 @@ function eb({
     let n = ((e = [...new Set(z)]).length <= 3 ? e : [...e.slice(0, 2), getI18nString("plan_invite_modal.team.seat_already_assigned.n_others", {
       n: e.length - 2
     })]).map(e => jsx("span", {
-      ...xk(_$$g.textBodyMediumStrong),
+      ...xk(textDisplayConfig.textBodyMediumStrong),
       children: e
     }, e));
     return renderI18nText("plan_invite_modal.team.seat_already_assigned", {

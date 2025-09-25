@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { t as _$$t } from "../905/150656";
 import { r as _$$r } from "../905/571838";
 import { k as _$$k } from "../905/792988";
@@ -43,7 +43,7 @@ import { cq } from "../905/794154";
 import { _M } from "../905/487011";
 import { $L } from "../figma_app/737746";
 import { Ev } from "../figma_app/297822";
-import { Jc, Sn } from "../905/946805";
+import { AssetTabType, ExtensionFeatureKey } from "../905/946805";
 import { dd, Rt, Lk, Q8 } from "../figma_app/604494";
 import { b as _$$b2 } from "../905/222272";
 import { n as _$$n } from "../905/895449";
@@ -185,12 +185,12 @@ export function $$ef1({
       query_type: currentSearch?.input.type,
       query_text: currentSearch?.input.type === "input-text" ? currentSearch.input.query : "",
       query_node_id: currentSearch?.input.type === "input-selection" ? currentSearch.input.node.guid : "",
-      assets_tab_type: Jc.ASSETS
+      assets_tab_type: AssetTabType.ASSETS
     });
   });
   let ej = currentSearch?.result.status === "errors" && (!r || o?.result.status === "errors") && (!s || l?.result.status === "errors");
   if (iC({
-    activeTab: Jc.ASSETS,
+    activeTab: AssetTabType.ASSETS,
     isLoading: r && o?.result.status === "loading" || s && l?.result.status === "loading",
     passthroughErrorMessage: ej ? getI18nString("assets_in_actions.error.description") : null,
     query: ev,
@@ -259,7 +259,7 @@ export function $$ef1({
       ...d3(G4.ACTIONS_ASSETS_TAB, f, t ? t.searchId : "", t ? t.input : null, !1, void 0, e)
     });
     push({
-      name: Sn.ASSETS_TAB_DETAIL_VIEW,
+      name: ExtensionFeatureKey.ASSETS_TAB_DETAIL_VIEW,
       module: s ? r : jsx($$eE0, {
         initialTab: e ? xA.COMMUNITY : xA.FRAGMENTS
       })
@@ -292,7 +292,7 @@ export function $$ef1({
                 initialSearchTagType: r ? qG.COMPONENTS : void 0
               });
               push({
-                name: Sn.ASSETS_TAB_DETAIL_VIEW,
+                name: ExtensionFeatureKey.ASSETS_TAB_DETAIL_VIEW,
                 module: s ? e : jsx($$eE0, {})
               }, {
                 shouldResetSearchQuery: !1
@@ -437,7 +437,7 @@ export function $$eE0({
     eL({
       type: _$$I.ALL
     });
-    mX(atomStoreManager.get(Q8), lQ, d, c, ek, G4.ACTIONS_ASSETS_TAB_DETAIL);
+    mX(atomStoreManager.get(Q8), noop, d, c, ek, G4.ACTIONS_ASSETS_TAB_DETAIL);
   });
   let eB = g5(FDocumentType.Design).productComponents.length;
   let eG = recentFragments ? recentFragments.length : 0;
@@ -487,7 +487,7 @@ export function $$eE0({
         searchQuery: query,
         numSearchResults: loaded ? results.length : t,
         currentSelection: o,
-        module: Sn.ASSETS_TAB_DETAIL_VIEW,
+        module: ExtensionFeatureKey.ASSETS_TAB_DETAIL_VIEW,
         moduleFilters: e,
         qaVersion: $L,
         searchQueryResults: ""
@@ -530,7 +530,7 @@ export function $$eE0({
   }, [w, R, eU.activeTab, d, c, debouncedAssetSearch, eR, debouncedFragmentTextSearch, _debouncedFragmentTextSearch]);
   let eW = jsxs(fu, {
     value: eU.activeTab,
-    onChange: lQ,
+    onChange: noop,
     numItems: c ? 3 : 2,
     children: [jsx(oz, {
       tabId: xA.COMPONENTS,

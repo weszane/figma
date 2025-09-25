@@ -10,7 +10,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { A as _$$A } from "../5885/54359";
-import { D as _$$D } from "../905/251759";
+import { CurrencySwitcherDropdown } from "../905/251759";
 import { UpgradeAction } from "../905/370443";
 import { withTrackedClick } from "../figma_app/831799";
 import { Um } from "../905/848862";
@@ -76,7 +76,7 @@ export function $$b0({
           "data-testid": "cart-sidebar-currency-switcher",
           children: [jsx("p", {
             children: renderI18nText("checkout.sidebar.currency_label")
-          }), jsx(_$$D, {
+          }), jsx(CurrencySwitcherDropdown, {
             currency: c,
             dropdownShown: D,
             supportedCurrencies: getAllowedCartCurrencies(),

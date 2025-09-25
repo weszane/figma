@@ -1,4 +1,6 @@
+import { noop } from 'lodash-es'
+
 export function $$n1() {}
-export let $$r0 = () => !0;
-export const af = $$r0;
-export const lQ = $$n1;
+export let returnTrue = () => !0
+export const af = returnTrue
+export const lQ = noop

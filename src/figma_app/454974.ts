@@ -8,7 +8,7 @@ import { openFileAtom } from "../figma_app/516028";
 import { hasJubileePermissionForWhiteboard } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3, Ag } from "../figma_app/862289";
-import { Sn } from "../905/946805";
+import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { A } from "../905/51743";
 import { NB, jX, Ay } from "../905/281495";
@@ -50,7 +50,7 @@ export function $$E3(e) {
       beforeModuleOpen: () => {
         B3(JT.AUTO_RENAME_LAYERS);
       },
-      name: Sn.RENAME_LAYERS_TOAST
+      name: ExtensionFeatureKey.RENAME_LAYERS_TOAST
     },
     trackingData: {
       source: "ready_for_dev_auto_rename_layers"
@@ -74,7 +74,7 @@ export function $$y1({
           overwriteNames: !1
         });
       },
-      name: Sn.RENAME_LAYERS_TOAST
+      name: ExtensionFeatureKey.RENAME_LAYERS_TOAST
     },
     trackingData: {
       source: t

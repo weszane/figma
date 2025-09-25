@@ -73,7 +73,7 @@ import { useDispatch } from "react-redux";
 import { C as _$$C } from "../905/222694";
 import { trackEventAnalytics } from "../905/449184";
 import { ContentFilterType } from "../figma_app/70618";
-import { V as _$$V } from "../905/480825";
+import { PluginImage } from "../905/480825";
 import { Ho } from "../figma_app/878651";
 import { A6 } from "../905/350234";
 import { Wi, JR } from "../figma_app/162641";
@@ -898,7 +898,7 @@ function te({
     onClickOverride: r ? () => r(i, e.id, "plugin") : void 0,
     children: [jsxs("div", {
       className: "related_content--relatedContentTilePluginContentWrapper--ie8pw",
-      children: [jsx(_$$V, {
+      children: [jsx(PluginImage, {
         className: "related_content--relatedContentPluginTileImage--4Jsqh",
         plugin: n
       }), jsx("div", {
@@ -1284,7 +1284,7 @@ function tA({
     className: "version_history--versionHistory--yOsFW text--fontPos14--OL9Hp text--_fontBase--QdLsd",
     children: [jsxs("div", {
       className: "version_history--header--jdIyg",
-      children: [jsx(_$$V, {
+      children: [jsx(PluginImage, {
         className: "version_history--icon--pnnmo",
         plugin: a
       }), jsx("span", {

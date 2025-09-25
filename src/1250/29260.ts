@@ -14,7 +14,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { buildUploadUrl } from "../figma_app/169182";
 import { getAtomWithEnabledCheck } from "../figma_app/566371";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { v as _$$v, L as _$$L } from "../1250/232926";
@@ -22,7 +22,7 @@ import { OG } from "../1250/340571";
 import { XU } from "../1250/282084";
 import { getVisibleTheme } from "../905/640017";
 import { getLibraryName } from "../905/506188";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { L as _$$L2 } from "../1250/681431";
 import { i6 } from "../1250/36596";
 import { O as _$$O } from "../1250/664647";
@@ -64,7 +64,7 @@ function O({
       children: jsx(i6, {
         items: t,
         maxItems: 99,
-        onAddItem: lQ,
+        onAddItem: noop,
         onClearItems: () => n([]),
         onFocus: () => o(!0),
         onKeyDown: e => {
@@ -229,7 +229,7 @@ function z({
   return jsxs("div", {
     children: [jsxs("div", {
       className: R,
-      children: [jsx(oW, {
+      children: [jsx(WAFImage, {
         src: t,
         alt: getI18nString("dev_handoff.component_browser_onboarding.connected_projects_icon"),
         className: M
@@ -314,7 +314,7 @@ function $({
   return jsxs("div", {
     children: [jsxs("div", {
       className: R,
-      children: [jsx(oW, {
+      children: [jsx(WAFImage, {
         src: t,
         alt: getI18nString("dev_handoff.component_browser_onboarding.connected_projects_icon"),
         className: M

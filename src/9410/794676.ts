@@ -48,7 +48,7 @@ import { KeyboardLayout, SchemaJoinStatus, Multiplayer, FullscreenPerfInfo, Core
 import { As, CZ, rd, v7 } from "../figma_app/475303";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { FU } from "../905/26824";
+import { setKeyboardShortcutPanelTab } from "../905/26824";
 import { postUserFlag } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 import { $$, ZN } from "../figma_app/781852";
@@ -62,7 +62,7 @@ import { M as _$$M } from "../905/540025";
 import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 import { YG, Wg } from "../905/921418";
 import { liveStoreInstance } from "../905/713695";
-import { x as _$$x2 } from "../figma_app/612938";
+import { useUpgradeHandler } from "../figma_app/612938";
 import { useInitializeLeftPanelTab } from "../figma_app/457074";
 import { RECENT_PLUGINS_FIGMA_DESIGN, RECENT_PLUGINS_FIGJAM, RECENT_PLUGINS_SLIDES, RECENT_WIDGETS_FIGMA_DESIGN, RECENT_WIDGETS_FIGJAM, RECENT_FACE_STAMPS_FIGJAM, RECENT_WHITEBOARD_TOOLS_FIGJAM } from "../figma_app/190980";
 import { DW } from "../figma_app/578011";
@@ -76,7 +76,7 @@ import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { useSubscription } from "../figma_app/288654";
 import { FileByKey } from "../figma_app/43951";
 import { getFileKeyFromSelectedView } from "../figma_app/193867";
-import { K as _$$K } from "../905/12775";
+import { isMfaForGuestEnabled } from "../905/12775";
 import { M as _$$M2 } from "../figma_app/333189";
 import { Button } from "../905/521428";
 import eY from "classnames";
@@ -108,7 +108,7 @@ import { e as _$$e2 } from "../figma_app/630744";
 import { v6, kO } from "../figma_app/442916";
 import { ox } from "../figma_app/197286";
 import { Wz } from "../figma_app/211694";
-import { u as _$$u2 } from "../905/14084";
+import { NuxSeatRequestConfirmationModal } from "../905/14084";
 import { base64ToUint8Array } from "../figma_app/930338";
 import { Yk } from "../figma_app/644079";
 import { getAutosaveManagerInstance } from "../figma_app/840917";
@@ -166,7 +166,7 @@ let W = debounce((e, t) => {
 }, 250);
 let el = "keyboard-layout-preference";
 let ed = (e, t, i) => {
-  t && e(FU({
+  t && e(setKeyboardShortcutPanelTab({
     tab: t
   }));
   i || fullscreenValue.triggerAction("toggle-keyboard-shortcuts");
@@ -673,7 +673,7 @@ export function $$t80({
     let i = getUserId();
     let r = useCurrentUserOrgId();
     let [s, o] = useState(!1);
-    let d = _$$K();
+    let d = isMfaForGuestEnabled();
     let c = useSubscription(FileByKey, {
       fileKey: t ?? ""
     }, {
@@ -839,7 +839,7 @@ export function $$t80({
       W($0(n), wX(n));
     }, [r, e, s, h, c, d, o, m, l, u, p, f, g, _, x, y, b, C, v, E, i, t]);
   }();
-  _$$x2();
+  useUpgradeHandler();
   (function () {
     let e = getSelectedEditorType();
     let t = useCallback(() => {
@@ -1096,7 +1096,7 @@ export function $$t80({
     let [t, i] = Wz("nux_seat_selection_show_confirmation", null);
     useEffect(() => {
       t && ("autoApproved" in t && "seatType" in t && e(showModalHandler({
-        type: _$$u2,
+        type: NuxSeatRequestConfirmationModal,
         data: {
           ...t
         }

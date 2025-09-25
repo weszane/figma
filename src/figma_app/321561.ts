@@ -16,7 +16,7 @@ import { j } from "../905/813868";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
-import { R as _$$R } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { ShelfViewType } from "../figma_app/45218";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { manifestContainsWidget } from "../figma_app/155287";
@@ -70,7 +70,7 @@ export function $$O0({
   let Y = useCanRunExtensions();
   let $ = useCallback(() => {
     close();
-    _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
+    PluginManager.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
   }, [close]);
   let X = useCallback(() => {
     manifestContainsWidget(extension) ? permissionScopeHandler.user("insert-widget", () => R(extension)) : H && t ? W(t.current) : V();

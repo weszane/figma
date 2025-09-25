@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -366,7 +366,7 @@ export function $$H1(e, t, r) {
       items: K,
       lean: t,
       minWidth: 280,
-      onSelectItem: lQ,
+      onSelectItem: noop,
       parentRect: g?.data.targetRect,
       rootAndSubmenuMaxWidth: 280,
       showPoint: !1,

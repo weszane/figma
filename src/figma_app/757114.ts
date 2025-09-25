@@ -9,7 +9,7 @@ import { processImageWithThumbnail } from "../figma_app/624361";
 import { b, $ } from "../905/776478";
 import { fetchImageAsByteArray } from "../905/866640";
 import { k4 } from "../figma_app/878113";
-import { A } from "../905/929620";
+import { generateShimmerOverlay } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 export let $$g0 = async ({
   params: e,
@@ -21,7 +21,7 @@ export let $$g0 = async ({
     modelType
   } = e;
   nodes.map(e => {
-    Vm(e.guid, jsx(A, {
+    Vm(e.guid, jsx(generateShimmerOverlay, {
       borderRadiusStyle: b(e)
     }));
   });

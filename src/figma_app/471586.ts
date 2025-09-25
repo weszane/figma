@@ -9,7 +9,7 @@ import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { rq } from "../905/425180";
-import { R } from "../905/11928";
+import { NotModalType } from "../905/11928";
 import { F_ } from "../905/858282";
 import { OKV } from "../figma_app/6204";
 let f = userFlagExistsAtomFamily("seen_dtm_deprecation_file_overlay");
@@ -77,7 +77,7 @@ export function $$y0(e) {
     title: v,
     trackingContextName: "Dtm Deprecation File Overlay",
     width: 350,
-    zIndex: R.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 export const O = $$y0;

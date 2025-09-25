@@ -26,7 +26,7 @@ import { h as _$$h } from "../905/207101";
 import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
-import { bG } from "../905/149328";
+import { getThemePx } from "../905/149328";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -240,7 +240,7 @@ export let $$eZ0 = registerModal(function (e) {
     E("missing_fonts_modal_opened", {
       missing_font_families: [...new Set(e.missingFonts.map(e => e.family))]
     });
-    C(new Point(window.innerWidth / 2 - eW / 2, bG() + 12));
+    C(new Point(window.innerWidth / 2 - eW / 2, getThemePx() + 12));
   });
   let er = useMemo(() => isSelectionBased && 0 === missingFonts.filter(e => e.inSelection).length, [isSelectionBased, missingFonts]);
   let {

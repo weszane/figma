@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect, useLayoutEffect } from "react";
 import { shallowEqual } from "react-redux";
 import { clamp } from "../figma_app/492908";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { xk } from "@stylexjs/stylex";
 import { Te } from "../vendor/813803";
 import { BrowserInfo } from "../figma_app/778880";
@@ -441,7 +441,7 @@ export function $$I0(e) {
       handleClick: J(i),
       handleContextMenu: ee(i),
       handleDrag: et(i),
-      handleDragEnd: e.isDraggable ? e.handleDragEnd : lQ,
+      handleDragEnd: e.isDraggable ? e.handleDragEnd : noop,
       isDraggable: !!e.isDraggable,
       isSelected: C.has(i) || k.has(i),
       item: r,

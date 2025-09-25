@@ -41,7 +41,7 @@ import { e as _$$e2 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N2 } from "../figma_app/268271";
 import { rq } from "../905/425180";
-import { R as _$$R } from "../905/11928";
+import { NotModalType } from "../905/11928";
 import { F_ } from "../905/858282";
 import { QpH } from "../figma_app/6204";
 import { _9, J4, YU, Iz } from "../figma_app/907616";
@@ -83,7 +83,7 @@ function X() {
     targetKey: q,
     title: renderI18nText("rcs.sharing_clarity.project_creation_permissions_title"),
     trackingContextName: "Sharing Clarity Project Creation Permission Onboarding",
-    zIndex: _$$R.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 let et = "folder_creation_modal--sectionHeader--EcWYc text--fontPos11--2LvXf text--_fontBase--QdLsd";

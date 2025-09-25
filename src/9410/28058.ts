@@ -9,7 +9,7 @@ import { sz } from "../figma_app/216696";
 import { Qx, Dm } from "../figma_app/8833";
 import { TrackingProvider } from "../figma_app/831799";
 import { u2 } from "../figma_app/223206";
-import { D as _$$D } from "../905/12032";
+import { overlayStateAtom } from "../905/12032";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { Tc } from "../905/797478";
 import { getSidebarSplitPosition } from "../figma_app/740163";
@@ -110,7 +110,7 @@ export function $$W0() {
   let n = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []).flat().length > 0;
   let a = useAtomWithSubscription(q7);
   let l = EI();
-  let d = useAtomWithSubscription(_$$D);
+  let d = useAtomWithSubscription(overlayStateAtom);
   let c = useAtomWithSubscription(userFlagExistsAtomFamily(Kt)).data;
   let u = useAtomWithSubscription(VZ);
   let p = useAtomWithSubscription(u2);

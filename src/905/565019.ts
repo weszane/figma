@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ConfirmationModal } from "../905/441305";
 import { getI18nString } from "../905/303541";
 export let $$l0 = registerModal(function ({
@@ -25,7 +25,7 @@ export let $$l0 = registerModal(function ({
     autofocusConfirm: !0,
     onCancel: p,
     onConfirm: u,
-    onClose: lQ,
+    onClose: noop,
     confirmText: getI18nString("general.delete"),
     destructive: !0,
     recordingKey: "commentDeleteConfirmModal",

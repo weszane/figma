@@ -10,7 +10,7 @@ import { wg } from "../figma_app/101956";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { isQaSearchFrecencyEnabled } from "../figma_app/144974";
-import { Jc, Sn } from "../905/946805";
+import { AssetTabType, ExtensionFeatureKey } from "../905/946805";
 import { rE } from "../figma_app/604494";
 import { OZ } from "../905/783179";
 import { gc, RA, Nv, NP, uP, tq, l4, W3, OW, Be, qE } from "../figma_app/737746";
@@ -62,12 +62,12 @@ export function $$b0() {
 }
 export function $$T8(e) {
   switch (e) {
-    case Jc.ALL:
+    case AssetTabType.ALL:
       return isQaSearchFrecencyEnabled() ? Nv : NP;
-    case Jc.EXTENSIONS:
+    case AssetTabType.EXTENSIONS:
       return uP;
-    case Jc.ASSETS:
-    case Sn.ASSETS_TAB_DETAIL_VIEW:
+    case AssetTabType.ASSETS:
+    case ExtensionFeatureKey.ASSETS_TAB_DETAIL_VIEW:
       return tq;
     default:
       throwTypeError(e);
@@ -115,45 +115,45 @@ export function $$v6(e) {
 }
 export function $$A1(e) {
   if (!e) return !1;
-  if (e === Jc.ALL || e === Jc.ASSETS || e === Jc.EXTENSIONS) return !0;
+  if (e === AssetTabType.ALL || e === AssetTabType.ASSETS || e === AssetTabType.EXTENSIONS) return !0;
   switch (e) {
-    case Sn.ASSETS_TAB_DETAIL_VIEW:
-    case Sn.VISUAL_SEARCH:
+    case ExtensionFeatureKey.ASSETS_TAB_DETAIL_VIEW:
+    case ExtensionFeatureKey.VISUAL_SEARCH:
       return !0;
-    case Sn.EXTENSION_DETAILS:
-    case Sn.REGENERATE_TEXT_TOAST:
-    case Sn.MAGIC_LINK_DONE_TOAST:
-    case Sn.BACKGROUND_REMOVE_TOAST:
-    case Sn.UPSCALE_IMAGE_TOAST:
-    case Sn.RENAME_LAYERS_TOAST:
-    case Sn.GENERATE_IMAGE:
-    case Sn.EDIT_IMAGE:
-    case Sn.IMAGE_TO_DESIGN:
-    case Sn.IMAGE_TO_DESIGN_ORACLE:
-    case Sn.MAGIC_LINK:
-    case Sn.PLUGIN_PARAMETER_ENTRY:
-    case Sn.PLUGIN_SUBMENU_ENTRY:
-    case Sn.TRANSLATE:
-    case Sn.REWRITE:
-    case Sn.SHORTEN:
-    case Sn.FIRST_DRAFT:
-    case Sn.FIRST_DRAFT_KIT_PICKER:
-    case Sn.FIRST_DRAFT_MAKE_CHANGES:
-    case Sn.FIRST_DRAFT_LINT:
-    case Sn.FIRST_DRAFT_DEBUG:
-    case Sn.FIRST_DRAFT_MAKE_KIT_DEBUG:
-    case Sn.FIRST_DRAFT_MAKE_KIT:
-    case Sn.MAKE_EDITS:
-    case Sn.MAKE_EDITS_DEBUG:
-    case Sn.MAKE_EDITS_DEBUG_REVIEW:
-    case Sn.FIRST_DRAFT_FINE_TUNE:
-    case Sn.ASSISTANT_CHAT:
-    case Sn.LINK_TO_COMPONENT:
-    case Sn.FOR_TESTING:
-    case Sn.FIGJAM_AI_CONTEXTUAL_FEATURES:
-    case Sn.LIBRARY_CSS_EXTRACTION:
-    case Sn.MERMAID_TO_DIAGRAM:
-    case Sn.MAKE_VIDEO:
+    case ExtensionFeatureKey.EXTENSION_DETAILS:
+    case ExtensionFeatureKey.REGENERATE_TEXT_TOAST:
+    case ExtensionFeatureKey.MAGIC_LINK_DONE_TOAST:
+    case ExtensionFeatureKey.BACKGROUND_REMOVE_TOAST:
+    case ExtensionFeatureKey.UPSCALE_IMAGE_TOAST:
+    case ExtensionFeatureKey.RENAME_LAYERS_TOAST:
+    case ExtensionFeatureKey.GENERATE_IMAGE:
+    case ExtensionFeatureKey.EDIT_IMAGE:
+    case ExtensionFeatureKey.IMAGE_TO_DESIGN:
+    case ExtensionFeatureKey.IMAGE_TO_DESIGN_ORACLE:
+    case ExtensionFeatureKey.MAGIC_LINK:
+    case ExtensionFeatureKey.PLUGIN_PARAMETER_ENTRY:
+    case ExtensionFeatureKey.PLUGIN_SUBMENU_ENTRY:
+    case ExtensionFeatureKey.TRANSLATE:
+    case ExtensionFeatureKey.REWRITE:
+    case ExtensionFeatureKey.SHORTEN:
+    case ExtensionFeatureKey.FIRST_DRAFT:
+    case ExtensionFeatureKey.FIRST_DRAFT_KIT_PICKER:
+    case ExtensionFeatureKey.FIRST_DRAFT_MAKE_CHANGES:
+    case ExtensionFeatureKey.FIRST_DRAFT_LINT:
+    case ExtensionFeatureKey.FIRST_DRAFT_DEBUG:
+    case ExtensionFeatureKey.FIRST_DRAFT_MAKE_KIT_DEBUG:
+    case ExtensionFeatureKey.FIRST_DRAFT_MAKE_KIT:
+    case ExtensionFeatureKey.MAKE_EDITS:
+    case ExtensionFeatureKey.MAKE_EDITS_DEBUG:
+    case ExtensionFeatureKey.MAKE_EDITS_DEBUG_REVIEW:
+    case ExtensionFeatureKey.FIRST_DRAFT_FINE_TUNE:
+    case ExtensionFeatureKey.ASSISTANT_CHAT:
+    case ExtensionFeatureKey.LINK_TO_COMPONENT:
+    case ExtensionFeatureKey.FOR_TESTING:
+    case ExtensionFeatureKey.FIGJAM_AI_CONTEXTUAL_FEATURES:
+    case ExtensionFeatureKey.LIBRARY_CSS_EXTRACTION:
+    case ExtensionFeatureKey.MERMAID_TO_DIAGRAM:
+    case ExtensionFeatureKey.MAKE_VIDEO:
       return !1;
     default:
       throwTypeError(e);

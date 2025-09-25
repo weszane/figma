@@ -5,7 +5,7 @@ import { C as _$$C } from "../5430/935440";
 import { e as _$$e2 } from "../905/693478";
 import l from "classnames";
 import { reportError } from "../905/11";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { c as _$$c } from "../905/320067";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { getSearchSessionIdFromSelector, getCurrentQueryId } from "../figma_app/387599";
@@ -16,7 +16,7 @@ import { getResourceType } from "../figma_app/427318";
 import { ResourceTypeEnum } from "../figma_app/306946";
 import { dn } from "../figma_app/994403";
 import { a as _$$a } from "../905/329735";
-import { my } from "../905/14017";
+import { ResourceTile } from "../905/14017";
 import { Mr } from "../figma_app/795938";
 import { A6 } from "../905/350234";
 import { A } from "../1617/424579";
@@ -45,7 +45,7 @@ export function $$I1({
     crossOrigin: "use-credentials"
   }) : reportError(ServiceCategories.COMMUNITY, Error("ResourceTileImage: resource has no thumbnail_url")) : [ResourceTypeEnum.PLUGIN, ResourceTypeEnum.WIDGET].includes(n) && (e.icon_url ? r = jsxs("div", {
     className: "resource_tile--iconWrapper--K9Ds6",
-    children: [jsx(oW, {
+    children: [jsx(WAFImage, {
       className: c()({
         "resource_tile--pluginIcon--jtOsZ": n === ResourceTypeEnum.PLUGIN,
         "resource_tile--widgetIcon--G6Tsn": n === ResourceTypeEnum.WIDGET
@@ -136,7 +136,7 @@ export function $$E0({
         resource: e,
         showMonetizationBadge: !1
       })]
-    }), !r && jsx(my, {
+    }), !r && jsx(ResourceTile, {
       resource: e
     })]
   });

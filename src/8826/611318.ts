@@ -53,7 +53,7 @@ import { W as _$$W2 } from "../figma_app/605682";
 import { Link } from "../905/438674";
 import { customHistory } from "../905/612521";
 import { ignoreCommandOrShift, KeyCodes, isCommandEvent } from "../905/63728";
-import { ex as _$$ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { clamp } from "../figma_app/492908";
 import { jr, W0, VA } from "../figma_app/896988";
 import { getSelectedView } from "../figma_app/386952";
@@ -71,7 +71,7 @@ import { C as _$$C } from "../8826/771306";
 import { g as _$$g } from "../8826/914688";
 import { setupThemeContext } from "../905/614223";
 import { p as _$$p } from "../figma_app/353099";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
 import { UpgradeAction } from "../905/370443";
@@ -607,7 +607,7 @@ function es(e) {
     })
   });
 }
-let ev = _$$ex("autolayout_v3_migration_info", function (e) {
+let ev = registerTooltip("autolayout_v3_migration_info", function (e) {
   let {
     tooltipText
   } = e;
@@ -1100,7 +1100,7 @@ function tl() {
   }, [e, t]);
   _$$h(() => {
     show({
-      canShow: (e, t) => e && null != t && _$$A(t).isBefore("2025-05-07")
+      canShow: (e, t) => e && null != t && dayjs(t).isBefore("2025-05-07")
     });
   });
   let a = () => {
@@ -1303,7 +1303,7 @@ function tu(e) {
     recordingKey: generateRecordingKey(e, "stackWrap")
   });
 }
-let tp = _$$ex("grid_beta_special_tooltip", function ({
+let tp = registerTooltip("grid_beta_special_tooltip", function ({
   gridString: e,
   betaString: t
 }) {

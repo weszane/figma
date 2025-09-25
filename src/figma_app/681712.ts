@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import a from "classnames";
 import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
-import { G } from "../figma_app/361869";
+import { renderCheckoutDevModeText } from "../figma_app/361869";
 import { Spacing, linkWithTracking } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
@@ -209,7 +209,7 @@ export function $$A4({
     }), _ && jsxs(Fragment, {
       children: [jsx(Spacing, {
         multiple: .2
-      }), jsx(G, {}), jsx(Spacing, {
+      }), jsx(renderCheckoutDevModeText, {}), jsx(Spacing, {
         multiple: .1
       })]
     }), jsxs("div", {

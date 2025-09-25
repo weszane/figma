@@ -8,7 +8,7 @@ import { AutoLayout } from "../905/470281";
 import { c1, r4, dB } from "../905/589717";
 import { Cc, lX } from "../905/545842";
 import { AJ } from "../905/235262";
-import { IV } from "../905/154591";
+import { renderBadgesLayout } from "../905/154591";
 var o = s;
 let g = "badge_display--canUnderline--aufN5";
 export function $$f8({
@@ -185,7 +185,7 @@ function P({
     onClick: () => s(e.id),
     children: jsxs(AutoLayout, {
       spacing: 4,
-      children: [jsx(IV, {
+      children: [jsx(renderBadgesLayout, {
         badges: e.displayProperties.leftBadges
       }), jsx("span", {
         className: o()(N[3], g),

@@ -4,8 +4,8 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { Link } from "../905/438674";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Zc, Lz } from "../905/497882";
-import { A } from "../905/567946";
+import { canSetFieldValue, getFieldValueOrDefault } from "../905/497882";
+import { FieldContainer } from "../905/567946";
 export let $$u0 = forwardRef(function ({
   tosAcceptedField: e
 }, t) {
@@ -14,9 +14,9 @@ export let $$u0 = forwardRef(function ({
     focus: e => {
       i.current?.focus(e);
     }
-  }), []), !Zc(e)) return jsx(Fragment, {});
-  let u = Lz(e, void 0);
-  return jsx(A, {
+  }), []), !canSetFieldValue(e)) return jsx(Fragment, {});
+  let u = getFieldValueOrDefault(e, void 0);
+  return jsx(FieldContainer, {
     label: getI18nString("community.publishing.community_terms_of_service"),
     required: !0,
     children: jsx(Checkbox, {

@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { getI18nString } from "../905/303541";
 var $$s0 = (e => (e.DAY = "24_hours", e.WEEK = "7_days", e.CUSTOM = "custom", e))($$s0 || {});
 var $$o1 = (e => (e.TWENTY_SEC = "20_seconds", e.CURRENT = "current", e.DAY = "24_hours", e.WEEK = "7_days", e.CUSTOM = "custom", e))($$o1 || {});
@@ -12,7 +12,7 @@ export function $$l2(e, t) {
     case "7_days":
       return p(e.clone().add(7, "d"));
     default:
-      return A();
+      return dayjs();
   }
 }
 export function $$d9(e, t) {
@@ -86,10 +86,10 @@ export function $$g8(e) {
   return e.format("HH:mm");
 }
 export function $$f4(e, t) {
-  return A(e + " " + t, "YYYY-MM-DD HH:mm");
+  return dayjs(e + " " + t, "YYYY-MM-DD HH:mm");
 }
 export function $$_3(e, t) {
-  let i = e.isSame(A().add(1, "day"), "day");
+  let i = e.isSame(dayjs().add(1, "day"), "day");
   let n = $$m10(e);
   if (i && !t) return getI18nString("file_access_row.expiration.24_hours.timestamp", {
     time: n
@@ -99,7 +99,7 @@ export function $$_3(e, t) {
     month: "short",
     day: "numeric"
   });
-  return A().isSame(e, "year") ? getI18nString("file_access_row.expiration.date.timestamp", {
+  return dayjs().isSame(e, "year") ? getI18nString("file_access_row.expiration.date.timestamp", {
     date: s,
     time: n
   }) : e.format("L LT");

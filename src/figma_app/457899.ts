@@ -2,12 +2,12 @@ import { useMemo } from "react";
 import { isNullish } from "../figma_app/95419";
 import { resourceUtils } from "../905/989992";
 import { setupResourceAtomHandler, handleSuspenseRetainRelease } from "../figma_app/566371";
-import { Ln } from "../905/84777";
+import { setupCurrentContractPricesTransform } from "../905/84777";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
 import { c as _$$c } from "../figma_app/681090";
 import { ModifyPlanUserSeatModalView } from "../figma_app/43951";
-import { IX } from "../905/712921";
+import { RenewalTermEnum } from "../905/712921";
 export function $$_1({
   prices: e,
   currentSeatType: t,
@@ -29,19 +29,19 @@ export function $$h2({
 }) {
   let [s, l] = useMemo(() => {
     let t = _$$c[e.type];
-    let n = t.includes(IX.MONTH);
-    let i = (!n || r === IX.YEAR) && t.includes(IX.YEAR);
+    let n = t.includes(RenewalTermEnum.MONTH);
+    let i = (!n || r === RenewalTermEnum.YEAR) && t.includes(RenewalTermEnum.YEAR);
     return [n, i];
   }, [e.type, r]);
-  let u = Ln(e, collaboratorSet, {
-    renewalTerm: IX.MONTH,
-    unit: IX.MONTH
+  let u = setupCurrentContractPricesTransform(e, collaboratorSet, {
+    renewalTerm: RenewalTermEnum.MONTH,
+    unit: RenewalTermEnum.MONTH
   }, {
     enabled: i && s
   });
-  let h = Ln(e, collaboratorSet, {
-    renewalTerm: IX.YEAR,
-    unit: IX.MONTH
+  let h = setupCurrentContractPricesTransform(e, collaboratorSet, {
+    renewalTerm: RenewalTermEnum.YEAR,
+    unit: RenewalTermEnum.MONTH
   }, {
     enabled: i && l
   });

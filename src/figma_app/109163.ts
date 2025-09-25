@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { sha1HexFromBytes } from "../905/125019";
 import { DesignGraphElements, ToolType, Fullscreen, NodePropertyCategory } from "../figma_app/763686";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
@@ -451,7 +451,7 @@ export function $$Y1({
         toolType: t,
         color: "",
         isSelected: i,
-        onTap: lQ,
+        onTap: noop,
         IconNoRef: d,
         isDrawingSubmenuTool: !0,
         isHovered: e,

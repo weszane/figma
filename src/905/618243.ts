@@ -35,8 +35,8 @@ import { V as _$$V } from "../905/223767";
 import { FPlanNameType } from "../figma_app/191312";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
-import { RO, Q1, zS, xp, Xj } from "../905/472146";
-import { lQ } from "../905/934246";
+import { OrgChartFeatureKeys, StarterChartFeatureKeys, PlanHighlightBadgeType, reorderFeatureKeysByPlanTier, ChartFeatureKey } from "../905/472146";
+import { noop } from 'lodash-es';
 import { TrackingProvider } from "../figma_app/831799";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { A as _$$A } from "../5724/768410";
@@ -386,7 +386,7 @@ function Y({
       hideOnConfirm: !1,
       onCancel: s,
       onConfirm: r,
-      overrideOnHide: lQ,
+      overrideOnHide: noop,
       size: "fitContent",
       titleClass: "upsell_modal_template--title--q0HZ-",
       trackedConfirmationProperties: {
@@ -477,7 +477,7 @@ let X = registerModal(function ({
     }),
     onClickPrimaryCta: t ? () => {
       let t = hasTeamPaidAccess(e);
-      let i = t ? RO : Q1;
+      let i = t ? OrgChartFeatureKeys : StarterChartFeatureKeys;
       n(showModalHandler({
         type: _$$V,
         data: {
@@ -485,8 +485,8 @@ let X = registerModal(function ({
           teamId: e.id,
           isProCurrent: t,
           overrideHighlightedPlan: FPlanNameType.ORG,
-          overrideHighlightedBadgeText: zS.RECOMMENDED,
-          featureList: xp(i, Xj.BRANCHING_AND_MERGING),
+          overrideHighlightedBadgeText: PlanHighlightBadgeType.RECOMMENDED,
+          featureList: reorderFeatureKeysByPlanTier(i, ChartFeatureKey.BRANCHING_AND_MERGING),
           openCheckoutInNewTab: !0
         }
       }));

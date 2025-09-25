@@ -11,7 +11,7 @@ import { FStudentTeamStatusType } from "../figma_app/191312";
 import { OrgTeamsInAdminView, OrgTeamView } from "../figma_app/43951";
 import { Ef } from "../905/81982";
 import { SortDirection } from "../figma_app/967319";
-import { ig } from "../figma_app/713624";
+import { TeamMembershipStatus } from "../figma_app/713624";
 import { teamVisibilityEnum } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
 import { S } from "../905/335273";
@@ -237,7 +237,7 @@ function x(e, t, r) {
       org_id: e.orgId || void 0
     },
     experiment_assignments: [],
-    userTeamMembership: null === e.roleOnObjectTeamForUser ? ig.NOT_JOINED : ig.JOINED,
+    userTeamMembership: null === e.roleOnObjectTeamForUser ? TeamMembershipStatus.NOT_JOINED : TeamMembershipStatus.JOINED,
     sanctioned_at: e.sanctionedAt?.toISOString() || null
   };
 }
@@ -266,7 +266,7 @@ export function $$C2(e, t, r, n) {
       member_of_filter: null !== t.teamMembershipFilter
     }),
     ...(t?.teamMembershipFilter && {
-      teams_member_of: t.teamMembershipFilter === ig.JOINED
+      teams_member_of: t.teamMembershipFilter === TeamMembershipStatus.JOINED
     }),
     ...(t?.workspaceFilter && {
       workspace_id: t.workspaceFilter

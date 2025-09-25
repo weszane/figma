@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getI18nString } from "../905/303541";
 import { jU } from "../figma_app/544879";
 import { showDropdownThunk } from "../905/929976";
@@ -16,7 +16,7 @@ export function $$c0({
   let m = useRef(null);
   let h = !!m.current && p?.data?.targetRef === m.current;
   if ("loaded" !== e.status) return {
-    toggle: lQ,
+    toggle: noop,
     buttonRef: m,
     isDropdownShown: h,
     tooltip: getI18nString("favorited_resources.add_to_sidebar")

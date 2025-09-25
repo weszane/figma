@@ -1,6 +1,6 @@
 import n from "../vendor/116389";
 import a from "../vendor/260986";
-import { A } from "../905/17894";
+import { unsetSymbol } from "../905/17894";
 import { getResourceTags, MAX_FEED_ITEMS } from "../figma_app/740025";
 import { Tn } from "../905/104173";
 var r = n;
@@ -14,7 +14,7 @@ export let $$u0 = {
     existingResourceContent: e,
     categoryField: t
   }) => {
-    if (t.currentValue === A || t.deps.viewerModeField?.currentValue === A) return A;
+    if (t.currentValue === unsetSymbol || t.deps.viewerModeField?.currentValue === unsetSymbol) return unsetSymbol;
     let i = e?.tags_v2 ? Object.keys(e.tags_v2) : [];
     if (i.length > 0 && t.currentValue?.id) {
       let n = await Tn({
@@ -43,14 +43,14 @@ export let $$u0 = {
       data: {
         duplicateTags: t.filter((e, i) => t.findIndex(t => $$c1(e, t)) !== i)
       }
-    }), e.deps.viewerModeField?.currentValue === A) return;
+    }), e.deps.viewerModeField?.currentValue === unsetSymbol) return;
     let n = await Tn({
       figFile: e.deps.figFile,
       currentViewerMode: e.deps.viewerModeField && e.deps.viewerModeField.currentValue,
       existingResourceContent: e.deps.existingResourceContent,
       localExtension: e.deps.localExtension
     });
-    if (void 0 !== e.currentValue && e.currentValue !== A) {
+    if (void 0 !== e.currentValue && e.currentValue !== unsetSymbol) {
       let r = getResourceTags(n, e.currentValue.id);
       let a = t.filter(e => !r.some(t => $$c1(e, t)));
       a.length > 0 && i.push({
@@ -64,7 +64,7 @@ export let $$u0 = {
   },
   canSet: ({
     categoryField: e
-  }) => e.currentValue !== A && void 0 !== e.currentValue,
+  }) => e.currentValue !== unsetSymbol && void 0 !== e.currentValue,
   isEqual: (e, t) => e.length === t.length && e.every(e => t.some(t => $$c1(e, t)))
 };
 export const m = $$u0;

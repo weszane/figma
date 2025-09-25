@@ -5,10 +5,10 @@ import { Link } from "../905/438674";
 import { x } from "../905/811596";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
-import { U } from "../905/331038";
-import { Lz, Zc } from "../905/497882";
+import { findFirstResult } from "../905/331038";
+import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { lD } from "../905/57749";
-import { A } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 let h = e => {
   if (e && "validation" === e.type) {
     let t = e.key;
@@ -33,12 +33,12 @@ let h = e => {
 function g({
   profileHandleField: e
 }) {
-  return Lz(e, "").length > 0 ? jsxs("span", {
+  return getFieldValueOrDefault(e, "").length > 0 ? jsxs("span", {
     className: "profile_handle_input--successText--PNJ-J",
     children: [jsx(x, {
       className: "profile_handle_input--successIcon--ihkC1"
     }), getI18nString("community.change_profile_handle_modal.profile_handle_is_available", {
-      profileHandle: Lz(e, "")
+      profileHandle: getFieldValueOrDefault(e, "")
     })]
   }) : null;
 }
@@ -54,8 +54,8 @@ export let $$f0 = forwardRef(function ({
     }
   }), []);
   let f = t && "error" === e.status ? e.errors : [];
-  let _ = U(f, h);
-  return Zc(e) ? jsx(A, {
+  let _ = findFirstResult(f, h);
+  return canSetFieldValue(e) ? jsx(FieldContainer, {
     label: getI18nString("community.publishing.set_a_unique_handle_for_your_new_community_profile"),
     error: _,
     afterErrorContent: t && !_ && jsx(g, {
@@ -76,7 +76,7 @@ export let $$f0 = forwardRef(function ({
       children: [jsx(BigTextInputForwardRef, {
         ref: o,
         className: "profile_handle_input--regularTextInputUI3--NDhZA",
-        value: Lz(e, ""),
+        value: getFieldValueOrDefault(e, ""),
         onChange: t => {
           i?.();
           e.setValue?.(t.currentTarget.value);

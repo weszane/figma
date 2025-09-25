@@ -16,7 +16,7 @@ import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
-import { um } from "../905/14223";
+import { fetchContactsOptimist } from "../905/14223";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { KQ as _$$KQ } from "../figma_app/475472";
@@ -116,7 +116,7 @@ export let $$K0 = registerModal(function (e) {
     });
   }, []);
   useEffect(() => {
-    t(um());
+    t(fetchContactsOptimist());
   }, [t]);
   let V = useSubscription(TeamCreationWorkspaceView({
     orgId: a

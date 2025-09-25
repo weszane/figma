@@ -34,10 +34,10 @@ import { VZ } from "../figma_app/60023";
 import { E as _$$E } from "../9410/583075";
 import { FProductAccessType, FPlanNameType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { MB, b_, hx, uy, J5 } from "../figma_app/835688";
 function U() {
-  return jsx(oW, {
+  return jsx(WAFImage, {
     src: buildUploadUrl("b5ff672e289f44685a5e04d3de9f17f154fb2455"),
     alt: "Figma Slides carousel",
     width: 332

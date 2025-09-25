@@ -5,9 +5,9 @@ import { observabilityClient } from "../905/602906";
 import { reportError } from "../905/11";
 import { logWarning, logError } from "../905/714362";
 import { useSprigWithSampling } from "../905/99656";
-import { B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { sZ } from "../figma_app/948389";
-import { JB } from "../905/843553";
+import { BaseCustomError } from "../905/843553";
 import { JT } from "../figma_app/632248";
 import { Dl, as, Uu } from "../905/487011";
 import { dM, F9 } from "../905/278499";
@@ -110,7 +110,7 @@ export async function $$v0(e, t, r, n?: any) {
     logError("quick-actions", "Error encountered running action", {
       error: t
     });
-    t instanceof JB && !1 === t.reportToSentry || reportError(I[e] ?? ServiceCategories.UNOWNED, t);
+    t instanceof BaseCustomError && !1 === t.reportToSentry || reportError(I[e] ?? ServiceCategories.UNOWNED, t);
     atomStoreManager.set(s, e => ({
       state: "error",
       error: t,
@@ -124,7 +124,7 @@ export async function $$v0(e, t, r, n?: any) {
       status: dM.FAILED,
       reason: F9.ERROR,
       errorReason: sZ(t),
-      errorMessage: sZ(t) === B.GENERIC ? t.message ?? t.toString?.() : void 0
+      errorMessage: sZ(t) === ErrorType.GENERIC ? t.message ?? t.toString?.() : void 0
     });
   }
 }

@@ -6,7 +6,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { isWhiteboardFileType } from "../figma_app/976749";
 import { cortexAPI } from "../figma_app/432652";
-import { B as _$$B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { wC, JT, pY } from "../figma_app/632248";
 import { s as _$$s, w as _$$w } from "../905/286488";
@@ -256,9 +256,9 @@ export function $$A0() {
           if (v.current) onRun(v.current);else throw new ay("Last parameters is null");
         }
       }];
-      (error instanceof Vz || sZ(error) === _$$B.CONTENT_LENGTH_LIMIT) && (B = renderI18nText("ai.error.content_length_limit"), K = []);
+      (error instanceof Vz || sZ(error) === ErrorType.CONTENT_LENGTH_LIMIT) && (B = renderI18nText("ai.error.content_length_limit"), K = []);
       error instanceof Jd && (B = renderI18nText("ai_text_tools.missing_fonts"), K = []);
-      sZ(error) === _$$B.UNSAFE_OR_HARMFUL_CONTENT && (K = []);
+      sZ(error) === ErrorType.UNSAFE_OR_HARMFUL_CONTENT && (K = []);
       M > 0 && P > 0 && P < M && (G = renderI18nText("ai_text_tools.translate.couldnt_count", {
         failed: P,
         total: M

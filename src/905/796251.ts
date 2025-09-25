@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getI18nString } from "../905/303541";
 import { showMobileNav } from "../905/34809";
 import { U6, to, pS } from "../figma_app/909778";
@@ -36,7 +36,7 @@ export function $$c0({
     alwaysShowCheckMarkOffset: !0,
     callback: () => b(!(m && h === e.id), e.id)
   }));
-  let I = [...u(m, null, lQ, {
+  let I = [...u(m, null, noop, {
     separator: !0
   }), ...u(m, getI18nString("favorited_resources.remove_from_sidebar"), () => b(!1))];
   let E = [...u(!t, getI18nString("favorited_resources.create_a_new_section"), () => {
@@ -63,7 +63,7 @@ export function $$c0({
   return g.length > 4 ? [{
     displayText: w,
     children: [...v, ...x, ...E]
-  }, ...I] : [...u(!0, getI18nString("favorited_resources.add_to_sidebar"), lQ, {
+  }, ...I] : [...u(!0, getI18nString("favorited_resources.add_to_sidebar"), noop, {
     disabled: !0
   }), ...v, ...x, ...I, ...x, ...E];
 }

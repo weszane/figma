@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { sha1HexFromBytes } from "../905/125019";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { _L } from "../9410/635978";
@@ -238,8 +238,8 @@ function I({
           T(e);
           e && M();
         },
-        setIsMaximized: lQ,
-        setIsVideoHovered: lQ,
+        setIsMaximized: noop,
+        setIsVideoHovered: noop,
         setVideoControls: G,
         shouldHideControlBar: U,
         shouldHideFullscreenButton: E,

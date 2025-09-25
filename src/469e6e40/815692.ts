@@ -29,7 +29,7 @@ import { consumptionPaywallUtils } from '../905/224';
 import { renderRequestErrorInterstitial } from '../905/3140';
 import { CloseButton } from '../905/17223';
 import { ModalRootComponent } from '../905/38914';
-import { Fq, ic, vK } from '../905/84777';
+import { BillingPriceSource, setupCurrentContractRatesTransform, getContractCurrency } from '../905/84777';
 import { registerModal } from '../905/102752';
 import { t as _$$t3 } from '../905/117577';
 import { KindEnum } from '../905/129884';
@@ -60,7 +60,7 @@ import { Link } from '../905/438674';
 import { v as _$$v } from '../905/442517';
 import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
-import { V as _$$V2 } from '../905/480825';
+import { PluginImage } from '../905/480825';
 import { openWindow } from '../905/508367';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { getCodegenLanguagePreference } from '../905/515076';
@@ -78,10 +78,10 @@ import { F as _$$F2 } from '../905/634016';
 import { FeatureFlag } from '../905/652992';
 import { ResourceStatus } from '../905/663269';
 import { In } from '../905/672640';
-import { g as _$$g2 } from '../905/687265';
+import { textDisplayConfig } from '../905/687265';
 import { X as _$$X } from '../905/698965';
 import { S3 } from '../905/708054';
-import { Ju as _$$Ju, IX } from '../905/712921';
+import { ProductTierEnum, RenewalTermEnum } from '../905/712921';
 import { SvgComponent } from '../905/714743';
 import { getResourceDataOrFallback } from '../905/723791';
 import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
@@ -96,7 +96,7 @@ import { Um } from '../905/848862';
 import { n as _$$n } from '../905/861286';
 import { FDocumentType } from '../905/862883';
 import { XHR } from '../905/910117';
-import { A as _$$A } from '../905/920142';
+import { dayjs } from '../905/920142';
 import { selectViewAction } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
 import { styleBuilderInstance } from '../905/941192';
@@ -504,8 +504,8 @@ let ew = 'billing_emails_modal--subtitle--AtE9I';
 let eC = registerModal(e => {
   let t = useDispatch();
   let s = () => t(popModalStack());
-  _$$A.extend(r);
-  _$$A(e.subscriptionStart).format('Do');
+  dayjs.extend(r);
+  dayjs(e.subscriptionStart).format('Do');
   return jsx(OJ, {
     onClose: s,
     title: getI18nString('billing_emails_modal.billing_emails_info.what_billing_emails'),
@@ -1035,21 +1035,21 @@ let tE = {
 };
 let tC = {
   labelText: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   noteText: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   },
   successText: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'xq6u9c4',
     $$css: !0
   },
   secondaryText: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -1684,7 +1684,7 @@ function tX(e) {
       }), jsx('div', {
         className: tV,
         children: renderI18nText('settings_tab.connected_apps.connected_since', {
-          date: _$$A(e.token.granted_at).format('LL')
+          date: dayjs(e.token.granted_at).format('LL')
         })
       }), jsx('div', {
         className: tV,
@@ -2006,7 +2006,7 @@ function aM({
         className: cssBuilderInstance.justifyBetween.flex.h32.alignCenter.$,
         children: [jsxs('div', {
           className: cssBuilderInstance.flex.itemsCenter.$,
-          children: [jsx(_$$V2, {
+          children: [jsx(PluginImage, {
             className: cssBuilderInstance.w16.h16.br2.$,
             plugin: t
           }), jsx('div', {
@@ -2412,7 +2412,7 @@ function aV({
 }) {
   return e ? jsxs('div', {
     className: cssBuilderInstance.flex.py8.itemsCenter.$,
-    children: [jsx(_$$V2, {
+    children: [jsx(PluginImage, {
       className: cssBuilderInstance.w24.h24.br2.$,
       plugin: e
     }), jsx('div', {
@@ -4035,9 +4035,9 @@ let nF = registerModal(e => {
   });
 }, 'ConfirmPublicSharingOffModal');
 let nY = {
-  pro: _$$Ju.PRO,
-  org: _$$Ju.ORG,
-  enterprise: _$$Ju.ENTERPRISE
+  pro: ProductTierEnum.PRO,
+  org: ProductTierEnum.ORG,
+  enterprise: ProductTierEnum.ENTERPRISE
 };
 let nK = nJ;
 function n5(e) {
@@ -4046,7 +4046,7 @@ function n5(e) {
 function n3(e) {
   let t;
   let a;
-  let r = vK({
+  let r = getContractCurrency({
     planParentId: e.orgId,
     planType: FOrganizationLevelType.ORG
   });
@@ -4063,13 +4063,13 @@ function n3(e) {
       billableProductKey: e,
       billableProductVariantKey: null,
       tier: n,
-      renewalTerm: IX.YEAR,
-      unit: IX.MONTH
+      renewalTerm: RenewalTermEnum.YEAR,
+      unit: RenewalTermEnum.MONTH
     }));
-    let i = ic(s, {
+    let i = setupCurrentContractRatesTransform(s, {
       planType: FOrganizationLevelType.ORG,
       planParentId: a
-    }, Fq.ADMIN_SETTINGS);
+    }, BillingPriceSource.ADMIN_SETTINGS);
     let [r] = handleSuspenseRetainRelease(i);
     if (r.data === null) throw new Error('Price data is null');
     let l = r.data;
@@ -4989,7 +4989,7 @@ export function $$sr0(e) {
     settings: []
   };
   if (ee.status === 'loaded') {
-    let t = e.renewalDate && ((a = e.renewalDate) ? _$$A(a).format('MMMM D, YYYY') : '');
+    let t = e.renewalDate && ((a = e.renewalDate) ? dayjs(a).format('MMMM D, YYYY') : '');
     let s = !!ee.data?.scheduled_cancellation?.cancel_at_period_end;
     let i = ee.data?.scheduled_cancellation?.scheduled_cancellation_date;
     let r = e => jsx('span', {
@@ -5019,7 +5019,7 @@ export function $$sr0(e) {
       });
     };
     getFeatureFlags().scheduled_cancellation_enabled ? s && i ? o(getI18nString('org_admin_settings.settings_tab.billing.subscription_cancelled', {
-      scheduledCancellationDate: _$$A(i).toDate()
+      scheduledCancellationDate: dayjs(i).toDate()
     })) : !s && t && o(renderI18nText('org_admin_settings.settings_tab.billing.subscription_renewing', {
       billing_date: r(t),
       more: l(t)
@@ -5074,7 +5074,7 @@ export function $$sr0(e) {
           dispatch: $,
           isCurfEnabledForMembers: t,
           currency,
-          renewalTerm: IX.YEAR
+          renewalTerm: RenewalTermEnum.YEAR
         })
       }, 'auto-approval-settings');
     }

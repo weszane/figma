@@ -9,7 +9,7 @@ import { getEditorTypeOrNull, editorTypeAtom } from "../figma_app/976749";
 import { N } from "../905/482239";
 import { getUserId } from "../905/372672";
 import { FrecencyHistoryView } from "../figma_app/43951";
-import { I as _$$I } from "../905/454965";
+import { actionsHistoryHandler } from "../905/454965";
 import { isQaSearchFrecencyEnabled } from "../figma_app/144974";
 import { l as _$$l } from "../905/131889";
 import { B } from "../905/108119";
@@ -54,7 +54,7 @@ class I {
     };
     this.numItems > this.MAX_ENTRIES && this.prune();
     this.save();
-    _$$I.updateFrecencyHistory({
+    actionsHistoryHandler.updateFrecencyHistory({
       actionKey: e,
       timestamp: Date.now(),
       editorType: this.fullscreenEditorType

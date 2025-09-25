@@ -22,7 +22,7 @@ import { C as _$$C } from "../642/180963";
 import { jj, Gc, Mg, NQ } from "../figma_app/952764";
 import { pg, GY } from "../figma_app/78309";
 import { jP, Ph } from "../figma_app/998161";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import M from "classnames";
@@ -84,7 +84,7 @@ function O({
         e.stopPropagation();
         d && i();
       },
-      onTypeMouseDown: lQ,
+      onTypeMouseDown: noop,
       paint: e,
       recordingKey: o,
       visible: !0

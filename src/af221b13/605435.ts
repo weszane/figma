@@ -3,7 +3,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { S as _$$S } from "../5430/465757";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { renderI18nText, getI18nString } from "../905/303541";
 import { FPublicationStatusType } from "../figma_app/191312";
 import { SubscriptionStatus } from "../905/272080";
@@ -71,7 +71,7 @@ function h(e) {
   return jsx(_$$C, {
     content: s,
     editorType: FEditorType.Design,
-    onDismiss: lQ
+    onDismiss: noop
   });
 }
 function y(e) {
@@ -89,7 +89,7 @@ function y(e) {
   return jsx(_$$C, {
     content: i,
     editorType: FEditorType.Design,
-    onDismiss: lQ
+    onDismiss: noop
   });
 }
 function f(e) {
@@ -107,7 +107,7 @@ function f(e) {
   return jsx(_$$C, {
     content: i,
     editorType: FEditorType.Design,
-    onDismiss: lQ
+    onDismiss: noop
   });
 }
 let w = _$$H;
@@ -123,7 +123,7 @@ function E(e) {
   };
   return jsx(_$$C, {
     content: t,
-    onDismiss: lQ
+    onDismiss: noop
   });
 }
 let Y = "MANAGE_RESOURCE_DROPDOWN_TYPE";
@@ -285,7 +285,7 @@ function V(e) {
     children: [jsx(_$$C, {
       content: et,
       editorType: FEditorType.Design,
-      onDismiss: lQ
+      onDismiss: noop
     }), c.current && d && jsx(_$$j, {
       dispatch: r,
       items: K,

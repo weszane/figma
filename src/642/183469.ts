@@ -24,7 +24,7 @@ import { V as _$$V } from "../905/418494";
 import { BrowserInfo } from "../figma_app/778880";
 import { useHandleMouseEvent, RecordingPureComponent, handleMouseEvent, SKIP_RECORDING, generateRecordingKey } from "../figma_app/878298";
 import { reportNullOrUndefined } from "../905/11";
-import { bG } from "../905/149328";
+import { getThemePx } from "../905/149328";
 import { Point } from "../905/736624";
 import { V as _$$V2 } from "../905/506207";
 import { P as _$$P } from "../905/347284";
@@ -972,12 +972,12 @@ class ez extends RecordingPureComponent {
     fullscreenValue.commit();
   }
   relativeY(e) {
-    let t = bG();
+    let t = getThemePx();
     this.scrollContainerEl && (t = this.scrollContainerEl.getBoundingClientRect().top);
     return e - t + this.state.scrollTop;
   }
   clientY(e) {
-    let t = bG();
+    let t = getThemePx();
     this.scrollContainerEl && (t = this.scrollContainerEl.getBoundingClientRect().top);
     return e + t - this.state.scrollTop;
   }

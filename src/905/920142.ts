@@ -18,7 +18,7 @@ let p = u
 let h = m
 let f = g
 let $$A = _
-let b = y
+
 dayjs.extend(f())
 dayjs.extend(utc)
 dayjs.extend(s())
@@ -27,5 +27,7 @@ dayjs.extend(isSameOrAfter)
 dayjs.extend(p())
 dayjs.extend(h())
 dayjs.extend($$A())
-export let day = dayjs()
-export const A = dayjs
+// export let day = dayjs()
+// export const A = day
+export const day = dayjs
+export { dayjs }

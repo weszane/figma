@@ -1,4 +1,4 @@
-import { ex as _$$ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, PureComponent, useState, useId, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +21,7 @@ import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { h as _$$h } from "../905/589458";
 import { o as _$$o } from "../905/918279";
 import { k as _$$k2 } from "../905/443820";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { G5, S6 } from "../figma_app/795674";
 import { SvgComponent } from "../905/714743";
 import { Ph } from "../905/160095";
@@ -199,7 +199,7 @@ function R({
 }
 let N = [];
 function L(e) {
-  return _$$A(e).format("MMM D");
+  return dayjs(e).format("MMM D");
 }
 let V = "library_analytics_view--csvLinkWrapper--sKpaJ";
 let G = "library_analytics_view--dotContainer--PRTz9";
@@ -661,7 +661,7 @@ function eE({
     status: p
   }), [p, u, c]);
 }
-let eS = _$$ex("dsa_graph", function ({
+let eS = registerTooltip("dsa_graph", function ({
   numInsertions: e,
   dateString: t
 }) {

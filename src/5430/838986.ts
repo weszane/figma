@@ -3,7 +3,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { formatNumber } from "../figma_app/930338";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
-import { W, B as _$$B } from "../905/841666";
+import { getCommunityHubLikeStatus, getCommunityHubLikeStatusByResourceId } from "../905/841666";
 import { getResourceUserCount, getResourceTypeDisplayText } from "../figma_app/777551";
 import { getResourceType, hasContent } from "../figma_app/427318";
 import { If, M1, lp, E7 } from "../5430/14019";
@@ -19,8 +19,8 @@ export function $$m0({
 }) {
   let y = e.like_count > 0;
   let g = getResourceUserCount(e) > 0;
-  let v = W(t.id, getResourceType(t), !hasContent(e));
-  let b = _$$B(e.id, hasContent(e));
+  let v = getCommunityHubLikeStatus(t.id, getResourceType(t), !hasContent(e));
+  let b = getCommunityHubLikeStatusByResourceId(e.id, hasContent(e));
   let j = hasContent(e) ? b.data?.[0] : v.data?.[0];
   let w = hasContent(e) ? b.data?.[1] : v.data?.[1];
   let C = _$$w(e, !!j, w || null, m || "")();

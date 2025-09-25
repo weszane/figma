@@ -55,10 +55,10 @@ import { Z as _$$Z } from "../905/279476";
 import { W as _$$W2 } from "../9410/92046";
 import { d as _$$d } from "../1006/820986";
 import { Tj } from "../figma_app/342207";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { SceneGraphHelpers, InsertErrorType, ChatMessageType } from "../figma_app/763686";
 import { A as _$$A2 } from "../vendor/454088";
-import { A as _$$A3 } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { useLatestRef } from "../figma_app/922077";
 import { isDevEnvironment } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
@@ -68,7 +68,7 @@ import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { useParentOrgOfOpenFile } from "../figma_app/543529";
 import { y as _$$y } from "../1250/295724";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
-import { B as _$$B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { A0, sZ, Ay as _$$Ay } from "../figma_app/948389";
 import { selectCurrentFile, openFileTeamAtom, useCurrentFileKey } from "../figma_app/516028";
 import { getCommunityFileUrl } from "../905/612685";
@@ -174,7 +174,7 @@ import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { q as _$$q2 } from "../1156/234923";
 import { OL } from "../1156/31019";
 import { a as _$$a2 } from "../905/964520";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { V as _$$V2, ct, Re, pr, M_, a_ } from "../1156/90859";
 import { D as _$$D2 } from "../1156/189378";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -395,15 +395,15 @@ function eU() {
 }
 let eG = {
   textBodyMedium: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   textBodyMediumStrong: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   textBodyMediumSecondary: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     $$css: !0
   }
@@ -881,7 +881,7 @@ let tz = {
     $$css: !0
   },
   stopButtonText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     overflow: "xb3r6kr",
     overflowX: null,
     overflowY: null,
@@ -1085,7 +1085,7 @@ function tP() {
   };
   let r = A0(meterResetDate);
   return r ? {
-    resetDate: _$$A3(r).format("LL"),
+    resetDate: dayjs(r).format("LL"),
     meteringWindow
   } : {
     resetDate: null,
@@ -1302,8 +1302,8 @@ function tX({
   let d = !1;
   if (error.message === T_.ATTACHMENTS_TOO_LARGE || error.message === T_.MAX_CONTENT_LENGTH_EXCEEDED || error.message === T_.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK) d = !0;else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0;else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0;else {
     let e = sZ(error);
-    c = [_$$B.GENERIC, _$$B.OFFLINE, _$$B.NETWORK_ERROR, _$$B.RATE_LIMIT_EXCEEDED].includes(e);
-    d = [_$$B.CONTENT_LENGTH_LIMIT, _$$B.UNSAFE_OR_HARMFUL_CONTENT].includes(e);
+    c = [ErrorType.GENERIC, ErrorType.OFFLINE, ErrorType.NETWORK_ERROR, ErrorType.RATE_LIMIT_EXCEEDED].includes(e);
+    d = [ErrorType.CONTENT_LENGTH_LIMIT, ErrorType.UNSAFE_OR_HARMFUL_CONTENT].includes(e);
   }
   return jsx(eB, {
     variant: d ? "warning" : "error",
@@ -1562,8 +1562,8 @@ let tQ = forwardRef((e, t) => {
     } = xD(e);
     let l = Tf();
     if (n && function (e) {
-      let t = _$$A3(new Date()).tz("America/Los_Angeles");
-      return _$$A3(e).tz("America/Los_Angeles").isBefore(t, "month");
+      let t = dayjs(new Date()).tz("America/Los_Angeles");
+      return dayjs(e).tz("America/Los_Angeles").isBefore(t, "month");
     }(n.updatedAt)) t(postUserFlag({
       [th]: !1
     }));else if (n) return {
@@ -2127,11 +2127,11 @@ function nC({
 }
 let nE = {
   textBodyLargeStrong: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   textBodyLargeSecondary: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: "x1n0bwc9",
     $$css: !0
   }
@@ -2464,7 +2464,7 @@ function nB() {
 }
 let nq = {
   textBodyLargeStrong: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   }
 };
@@ -2663,7 +2663,7 @@ function nJ({
 }
 let nZ = {
   textBodyLargeStrong: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   }
 };
@@ -3266,7 +3266,7 @@ function rA({
     let a = void 0 !== t ? t : clientHeight * n;
     return scrollHeight - scrollTop - clientHeight < a;
   }, [n, e]);
-  let b = useCallback((n = "smooth", r = lQ) => {
+  let b = useCallback((n = "smooth", r = noop) => {
     if (!e.current || f.current) return;
     if (e.current && _(5)) {
       r();
@@ -4367,7 +4367,7 @@ let ih = {
     rowGap: null,
     columnGap: null,
     flexShrink: "x2lah0s",
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     border: "x1bamp8i",
     borderWidth: null,
     borderInlineWidth: null,
@@ -4558,7 +4558,7 @@ function iy({
       className: "xuk1p4z xv2f06h xmdyj57 x1lqa7cf x1ug7bdz xxhr3t",
       disabled: !0,
       key: "libraryImportButton",
-      onClick: lQ
+      onClick: noop
     }, jsx("div", {
       className: "x10739mo xlup9mm xb3r6kr xlyipyv xuxw1ft",
       children: A.library.library_name

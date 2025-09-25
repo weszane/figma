@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import s from "classnames";
 import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
@@ -29,9 +29,9 @@ export let $$h0 = forwardRef(function ({
   dataTestId: S,
   ariaLabel: w
 }, C) {
-  let T = useHandleMouseEvent(g, "click", i || lQ);
+  let T = useHandleMouseEvent(g, "click", i || noop);
   let k = g ? T : i;
-  let R = useHandleMouseEvent(g, "mousedown", s || lQ);
+  let R = useHandleMouseEvent(g, "mousedown", s || noop);
   let N = g ? R : s;
   let P = useCallback(e => {
     j?.(e) || (m?.(e), e.keyCode === KeyCodes.ESCAPE && e.currentTarget.blur());

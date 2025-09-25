@@ -1,8 +1,8 @@
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-export let $$s0 = ex("style_info", function (e) {
+export let $$s0 = registerTooltip("style_info", function (e) {
   let {
     styleName,
     styleDescription,

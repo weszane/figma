@@ -1,6 +1,6 @@
 import { useRef, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { XHR } from "../905/910117";
 import { handleAtomEvent } from "../905/502364";
 import { showModalHandler } from "../905/156213";
@@ -15,7 +15,7 @@ function h(e) {
 let m = (e, t) => {
   let r = useRef(null);
   useEffect(() => {
-    let n = e ? A(e).diff(A()) : void 0;
+    let n = e ? dayjs(e).diff(dayjs()) : void 0;
     void 0 !== n && n < 0x7fffffff ? (r.current && clearTimeout(r.current), r.current = setTimeout(() => {
       r.current = null;
       t();

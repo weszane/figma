@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
 import { A as _$$A } from "../905/24328";
@@ -218,7 +218,7 @@ export let $$L0 = function (t) {
     children: jsx(Zk, {
       className: K ? "noBottomPadding" : void 0,
       children: jsx(h6, {
-        addProperty: lQ,
+        addProperty: noop,
         boldHeaderRow: U,
         currentSelectedProperty: p,
         dispatch: w,

@@ -8,7 +8,7 @@ import { J as _$$J } from "../905/125993";
 import { getFeatureFlags } from "../905/601108";
 import m from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { Av } from "../905/149328";
+import { getFileTypePx } from "../905/149328";
 import { c$ } from "../figma_app/236327";
 import { h1 } from "../905/986103";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -290,7 +290,7 @@ function q(e) {
   let t = useSelector(e => e.multiplayer);
   let n = useSelector(e => "prototype" === e.selectedView.view ? e.prototype.showProgressBar : isUIHiddenOrLocked(e?.progressBarState?.mode));
   let a = t.allUsers.length > 1;
-  Av();
+  getFileTypePx();
   let {
     user,
     onClick,

@@ -4,7 +4,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import s from "classnames";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
-import { D } from "../905/12032";
+import { overlayStateAtom } from "../905/12032";
 import { X, Y } from "../figma_app/916469";
 import { iN } from "../figma_app/634656";
 import { l as _$$l } from "../figma_app/265420";
@@ -39,7 +39,7 @@ export function $$f1({
   optimizeForCompactSize: p,
   overflowChildren: h
 }) {
-  let m = useAtomWithSubscription(D);
+  let m = useAtomWithSubscription(overlayStateAtom);
   useEffect(() => {
     e && m && !_$$l.has(m) && handleAtomEvent({
       id: X,

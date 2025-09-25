@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories } from "../905/165054";
 import n from "classnames";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
-import { G } from "../figma_app/361869";
+import { renderCheckoutDevModeText } from "../figma_app/361869";
 import { CloseButton } from "../905/17223";
 import { ErrorBoundaryCrash } from "../905/751457";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
@@ -16,7 +16,7 @@ import { selectViewAction } from "../905/929976";
 import { hideModal } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
 import { withTracking } from "../figma_app/831799";
-import { vK, vu, ic, Fq, jv } from "../905/84777";
+import { getContractCurrency, ensureLoadedResource, setupCurrentContractRatesTransform, BillingPriceSource, setupPricesTransform } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { designSet } from "../905/332483";
 import { renderRequestErrorInterstitial } from "../905/3140";
@@ -25,7 +25,7 @@ import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { getCurrentTeam } from "../figma_app/598018";
-import { Ju, IX } from "../905/712921";
+import { ProductTierEnum, RenewalTermEnum } from "../905/712921";
 import { FeatureFlag } from "../905/652992";
 import { N as _$$N } from "../905/809096";
 import { ModalView } from "../figma_app/918700";
@@ -93,7 +93,7 @@ export function $$$1(e) {
         className: Q$,
         children: [renderI18nText("plan_details.figma"), jsx("div", {
           className: gt,
-          children: jsx(G, {})
+          children: jsx(renderCheckoutDevModeText, {})
         })]
       }), jsx("div", {
         children: jsx("p", {
@@ -132,9 +132,9 @@ function U(e) {
     planParentId: t.key.parentId || "",
     planType: t.key.type
   };
-  let r = vK(a);
+  let r = getContractCurrency(a);
   let [n] = handleSuspenseRetainRelease(r);
-  let c = vu(n);
+  let c = ensureLoadedResource(n);
   if (null === c.data) throw Error("Contract prices currency was null");
   let _ = c.data;
   let u = designSet.exclude([ProductAccessTypeEnum.DEV_MODE]);
@@ -142,24 +142,24 @@ function U(e) {
     currency: _,
     billableProductKey: e,
     billableProductVariantKey: null,
-    tier: Ju.PRO,
-    renewalTerm: IX.YEAR,
-    unit: IX.MONTH
+    tier: ProductTierEnum.PRO,
+    renewalTerm: RenewalTermEnum.YEAR,
+    unit: RenewalTermEnum.MONTH
   }));
-  let x = ic(h, a, Fq.UPSELL_MODALS_CONTRACT);
-  let y = jv({
+  let x = setupCurrentContractRatesTransform(h, a, BillingPriceSource.UPSELL_MODALS_CONTRACT);
+  let y = setupPricesTransform({
     billableProductKeys: designSet,
     baseQuery: {
       currency: _,
-      tier: Ju.ORG,
-      renewalTerm: IX.YEAR,
-      unit: IX.MONTH
+      tier: ProductTierEnum.ORG,
+      renewalTerm: RenewalTermEnum.YEAR,
+      unit: RenewalTermEnum.MONTH
     }
   });
   let [j, b] = handleSuspenseRetainRelease(x, y);
-  let C = vu(j);
+  let C = ensureLoadedResource(j);
   if (null === C.data) throw Error("Contract price data was null");
-  let I = vu(b);
+  let I = ensureLoadedResource(b);
   if (null === I.data) throw Error("Sticker price data was null");
   let P = C.data;
   let M = I.data;

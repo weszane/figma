@@ -17,7 +17,7 @@ import { h1 } from "../905/986103";
 import { SvgComponent } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { A as _$$A } from "../905/222027";
-import { y as _$$y } from "../905/171275";
+import { SizeOption } from "../905/171275";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { NA } from "../905/738636";
@@ -79,7 +79,7 @@ let K = (e, a) => debounce(() => e(NA({
   openNewFileIn: TabOpenBehavior.NEW_TAB,
   source: NotificationType.AUTOSAVE_MODAL
 })));
-let Q = _$$y.SMALL;
+let Q = SizeOption.SMALL;
 function W(e, a, s) {
   return isAutosaveFile(a) ? {
     fileName: a.file.name,

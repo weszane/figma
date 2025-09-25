@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { useLatestRef } from "../figma_app/922077";
 import { At, vV, CX, UU, Z5 } from "../figma_app/770088";
 import { I_ } from "../905/234821";
@@ -73,8 +73,8 @@ export function $$E1(e, t, r, a, o) {
     });
   }, [h, r]);
   useEffect(() => {
-    h && !h._recenter_comment && (h._recenter_comment = lQ);
-    h && !h._recenter_draft_comment && (h._recenter_draft_comment = lQ);
+    h && !h._recenter_comment && (h._recenter_comment = noop);
+    h && !h._recenter_draft_comment && (h._recenter_draft_comment = noop);
   }, [h]);
 }
 export function $$y0(e, t, r, s, l) {

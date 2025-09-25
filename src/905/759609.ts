@@ -15,7 +15,7 @@ import { xj, Mx, yx } from "../figma_app/851625";
 import { h as _$$h } from "../905/207101";
 import { KeyCodes } from "../905/63728";
 import { reportError } from "../905/11";
-import { J9 } from "../905/149328";
+import { defaultPx } from "../905/149328";
 import { Point } from "../905/736624";
 import { or, Ss, BL, xY, qW, u as _$$u } from "../905/720292";
 import { ec } from "../figma_app/449837";
@@ -47,7 +47,7 @@ function H({
   let s = useCallback(t => {
     t.event.keyCode === KeyCodes.TAB && null != e.current && (e.current.focus(), t.accept());
   }, [e]);
-  let o = new Point((window.innerWidth - tA) / 2, J9 + 12);
+  let o = new Point((window.innerWidth - tA) / 2, defaultPx + 12);
   return jsx(Ao, {
     dragHeaderOnly: !0,
     onClose: () => {

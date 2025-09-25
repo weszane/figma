@@ -64,7 +64,7 @@ import { getObservableValue } from "../figma_app/84367";
 import { l6, c$ as _$$c$2 } from "../905/794875";
 import { iE } from "../figma_app/711157";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { ex as _$$ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { A as _$$A5 } from "../svg/94747";
 import { A as _$$A6 } from "../svg/330785";
 import { useIsFullscreenSitesView } from "../905/561485";
@@ -737,15 +737,15 @@ function eD(e) {
     })]
   });
 }
-let eR = _$$ex("prototype_scroll_horizontal_info", eD, () => ({
+let eR = registerTooltip("prototype_scroll_horizontal_info", eD, () => ({
   type: "horizontal",
   unconstrainWidth: !0
 }));
-let eM = _$$ex("prototype_scroll_vertical_info", eD, () => ({
+let eM = registerTooltip("prototype_scroll_vertical_info", eD, () => ({
   type: "vertical",
   unconstrainWidth: !0
 }));
-let eV = _$$ex("prototype_scroll_marquee_info", function () {
+let eV = registerTooltip("prototype_scroll_marquee_info", function () {
   return jsx("div", {
     className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
     children: jsx("span", {

@@ -1,6 +1,6 @@
 import { isValidEmail } from "../figma_app/416935";
 import { isValidUrl } from "../figma_app/930338";
-import { A } from "../905/17894";
+import { unsetSymbol } from "../905/17894";
 import { wC } from "../905/448440";
 import { trimOrEmpty } from "../figma_app/740025";
 let $$l1 = 100;
@@ -10,7 +10,7 @@ let $$d2 = {
     existingResourceContent: e,
     priceField: t,
     valueRequired: i
-  }) => t.currentValue === A ? A : e && (e.support_contact ?? void 0) || (i ? t.deps.user.email : void 0),
+  }) => t.currentValue === unsetSymbol ? unsetSymbol : e && (e.support_contact ?? void 0) || (i ? t.deps.user.email : void 0),
   validate: ({
     priceField: e,
     valueRequired: t

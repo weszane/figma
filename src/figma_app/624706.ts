@@ -11,7 +11,7 @@ import _ from "classnames";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { openWindow } from "../905/508367";
 import { Tf } from "../905/280919";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions, buildUploadUrl, isDevEnvironment, isGovCluster, isLocalCluster, isStagingCluster } from "../figma_app/169182";
@@ -40,7 +40,7 @@ import { F as _$$F } from "../5132/756360";
 import { S as _$$S } from "../figma_app/420927";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nState } from "../figma_app/363242";
-import { FU } from "../905/26824";
+import { setKeyboardShortcutPanelTab } from "../905/26824";
 import { yJ } from "../figma_app/24841";
 import { postUserFlag } from "../905/985254";
 import { isTryWhiteboardFile } from "../figma_app/976749";
@@ -70,7 +70,7 @@ import { J_ } from "../figma_app/598952";
 import { lk2, Yd_, FR6, nRk } from "../figma_app/6204";
 import { jH, cl, bb } from "../figma_app/926950";
 import { qf } from "../905/817095";
-import { g as _$$g2 } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Button } from "../905/521428";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { P as _$$P } from "../vendor/348225";
@@ -105,7 +105,7 @@ import { A as _$$A6 } from "../svg/969232";
 import { F_ } from "../905/858282";
 import { defaultLanguage, languageCodes } from "../905/816253";
 import { T as _$$T, e as _$$e3 } from "../905/949616";
-import { W as _$$W } from "../905/423575";
+import { getCookieManager } from "../905/423575";
 import { j as _$$j } from "../905/270643";
 import { D as _$$D } from "../905/629114";
 import { Fullscreen, ColorConversionEnum } from "../figma_app/763686";
@@ -261,7 +261,7 @@ function eL() {
   }, [t]);
   let s = useSelector(e => e.user?.created_at);
   let o = useSelector(e => e.user?.email);
-  let l = !!s && _$$A().diff(_$$A(s), "days") >= 14;
+  let l = !!s && dayjs().diff(dayjs(s), "days") >= 14;
   let d = !!o && o.includes("@figma.com");
   let c = useAtomWithSubscription(jH);
   return (_$$E2(r.uniqueId, "Fullscreen Loaded", () => {
@@ -305,7 +305,7 @@ function eM({
       children: e
     }), jsx("span", {
       ...Ay.props(eF.timestamp),
-      children: _$$A(t.updatedAt).format("MMM D, YYYY h:mm A")
+      children: dayjs(t.updatedAt).format("MMM D, YYYY h:mm A")
     }), jsx("span", {
       ...Ay.props(eF.action),
       children: jsx(Button, {
@@ -318,13 +318,13 @@ function eM({
 }
 let eF = {
   action: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     whiteSpace: "xuxw1ft",
     $$css: !0
   },
   flagName: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     overflow: "xb3r6kr",
     overflowX: null,
     overflowY: null,
@@ -333,7 +333,7 @@ let eF = {
     $$css: !0
   },
   timestamp: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     whiteSpace: "xuxw1ft",
     $$css: !0
@@ -386,13 +386,13 @@ function ej({
 }
 let eU = {
   action: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     whiteSpace: "xuxw1ft",
     $$css: !0
   },
   flagName: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     overflow: "xb3r6kr",
     overflowX: null,
     overflowY: null,
@@ -420,7 +420,7 @@ let eU = {
     borderBottomWidth: null,
     borderBottomStyle: null,
     borderBottomColor: null,
-    ..._$$g2.textBodySmallStrong,
+    ...textDisplayConfig.textBodySmallStrong,
     color: "x1n0bwc9",
     $$css: !0
   },
@@ -474,12 +474,12 @@ let eU = {
     borderBottomColor: null,
     backgroundColor: "x1yjdb4r",
     color: "x1n0bwc9",
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     "::placeholder_color": "xuggh6c",
     $$css: !0
   },
   timestamp: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     whiteSpace: "xuxw1ft",
     $$css: !0
@@ -2244,7 +2244,7 @@ function tM({
   t = "product_locale";
   let r = useMemo(() => function (e) {
     if (!_$$j(e)) return;
-    let t = _$$W();
+    let t = getCookieManager();
     if (null != t) return t.get(e);
   }(t), [t]);
   let a = getI18nState()?.getPrimaryLocale(!0) ?? defaultLanguage;
@@ -2732,7 +2732,7 @@ export function $$t60(e) {
     if ("loaded" !== o.status) return !1;
     let p = o.data.currentUser.teamRoles;
     if (!p?.length) return !1;
-    let _ = !!e.user && _$$A().diff(_$$A(e.user.created_at), "days") >= 7;
+    let _ = !!e.user && dayjs().diff(dayjs(e.user.created_at), "days") >= 7;
     let h = !!t && !t.teamId;
     let m = p.some(e => e.team && !e.team.subscription && e.team.canEdit);
     let g = !p.some(e => e.team?.subscription && e.team.canEdit);
@@ -2855,7 +2855,7 @@ let t7 = class e extends RecordingPureComponent {
       }));
     };
     this.onClickKeyboardLayoutSelector = () => {
-      fullscreenValue.isReady() && (this.props.dispatch(FU({
+      fullscreenValue.isReady() && (this.props.dispatch(setKeyboardShortcutPanelTab({
         tab: "layout"
       })), this.onClickKeyboardShortcuts());
     };

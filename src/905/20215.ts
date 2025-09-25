@@ -1,3 +1,4 @@
+import type { PrimitiveAtom } from 'jotai'
 import { atom } from 'jotai'
 
 /**
@@ -9,7 +10,7 @@ import { atom } from 'jotai'
  */
 export function setupDebounceAtoms<T>(initialValue: T, delay = 500, skipImmediate = false) {
   // Atom to store the timeout ID
-  const timeoutAtom = atom<number | undefined>(undefined)
+  const timeoutAtom = atom<number | undefined>(undefined) as PrimitiveAtom<number>
 
   // Atom to store the current value
   const valueAtom = atom<T>(initialValue)

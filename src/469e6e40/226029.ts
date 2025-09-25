@@ -37,7 +37,7 @@ import { useIsLoading } from "../905/18797";
 import { UserGroupRole, GroupType } from "../905/441038";
 import { DUserRole, SectionType } from "../figma_app/858344";
 import { z6 } from "../figma_app/805373";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { _ as _$$_ } from "../7021/243271";
 import { S as _$$S } from "../905/794163";
 import { e as _$$e2 } from "../905/295932";
@@ -146,7 +146,7 @@ function ev(e) {
   let s = Xf(orgId);
   let r = s.data?.invoices || [];
   let o = SM(orgId);
-  let d = r.length ? o : lQ;
+  let d = r.length ? o : noop;
   let c = !isEnterprise && "loaded" === s.status && 0 === r.length;
   let _ = useMemo(() => function (e, t, a) {
     let s = "orgAdminSettings";

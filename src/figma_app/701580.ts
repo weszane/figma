@@ -41,7 +41,7 @@ import { L as _$$L, I as _$$I } from "../1577/16430";
 import { selectCurrentUser } from "../905/372672";
 import { avG } from "../figma_app/27776";
 import { i as _$$i } from "../figma_app/566312";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { _3 } from "../figma_app/502363";
 import { A as _$$A } from "../6828/44395";
 import { IconButton } from "../905/443068";
@@ -443,7 +443,7 @@ function eo({
         isInsertingTemplate: r(e),
         previewHubFile: () => s(e)
       }, `hub-file-template-${e}`))]
-    }), d && !isLoading && jsx(_$$a, {
+    }), d && !isLoading && jsx(IntersectionSentinel, {
       onIntersectionChange: ({
         isIntersecting: e
       }) => {

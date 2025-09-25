@@ -1,51 +1,82 @@
-import { jsx } from "react/jsx-runtime";
-import { forwardRef, useId, useMemo } from "react";
-import { setupRecordingHandler } from "../905/458642";
-import { defaultComponentAttribute } from "../905/577641";
-import { r as _$$r2 } from "../905/5729";
-export let $$l0 = forwardRef(function ({
-  autofocus: e = !1,
-  htmlAttributes: t,
-  onChange: i,
-  recordingKey: l,
-  readonly: d,
-  ...c
-}, u) {
-  let p = useId();
-  let {
+import { forwardRef, useId, useMemo } from 'react';
+import { jsx } from 'react/jsx-runtime';
+import { RadioPrimivteContext } from '../905/5729';
+import { setupRecordingHandler } from '../905/458642';
+import { defaultComponentAttribute } from '../905/577641';
+
+/**
+ * RadioPrimitiveRoot - Refactored radio group root component.
+ *
+ * @param props - Props for the radio group root.
+ * @param ref - Forwarded ref for the fieldset element.
+ * @returns JSX.Element
+ */
+export const RadioPrimitiveRoot = forwardRef<HTMLFieldSetElement, {
+  autofocus?: boolean;
+  htmlAttributes?: React.FieldsetHTMLAttributes<HTMLFieldSetElement>;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  recordingKey?: string;
+  readonly?: boolean;
+  value?: string;
+  className?: string;
+  children?: React.ReactNode;
+  [key: string]: any;
+}>(({
+  autofocus = false,
+  htmlAttributes,
+  onChange: userOnChange,
+  recordingKey,
+  readonly,
+  value,
+  className,
+  children,
+  ...restProps
+}, ref) => {
+  // Generate unique id for radio group
+  const radioGroupId = useId();
+
+  // Setup recording handler for radio group changes
+  const {
     onChange
   } = setupRecordingHandler({
-    disabled: d,
-    onChange: i,
-    recordingKey: l,
-    readonly: d,
-    ...c
+    disabled: readonly,
+    onChange: userOnChange,
+    recordingKey,
+    readonly,
+    value,
+    className,
+    children,
+    ...restProps
   });
-  let {
-    value
-  } = c;
-  let g = useMemo(() => ({
-    name: p,
-    value: value ?? "",
+
+  // Memoize radio group context value
+  const radioGroupContextValue = useMemo(() => ({
+    name: radioGroupId,
+    value: value ?? '',
     onChange,
-    readonlyGroup: d,
-    autofocus: e
-  }), [p, onChange, value, d, e]);
-  return jsx("fieldset", {
-    ...t,
-    ...c,
+    readonlyGroup: readonly,
+    autofocus
+  }), [radioGroupId, onChange, value, readonly, autofocus]);
+
+  // Render radio group fieldset
+  return jsx('fieldset', {
+    ...htmlAttributes,
+    ...restProps,
     ...defaultComponentAttribute,
-    ref: u,
-    role: "radiogroup",
-    "aria-readonly": d || void 0,
-    "aria-disabled": d || void 0,
-    "aria-labelledby": c["aria-labelledby"] ?? void 0,
-    className: c.className,
-    children: jsx(_$$r2.Provider, {
-      value: g,
-      children: c.children
+    ref,
+    'role': 'radiogroup',
+    'aria-readonly': readonly || undefined,
+    'aria-disabled': readonly || undefined,
+    'aria-labelledby': restProps['aria-labelledby'] ?? undefined,
+    className,
+    'children': jsx(RadioPrimivteContext.Provider, {
+      value: radioGroupContextValue,
+      children
     })
   });
 });
-$$l0.displayName = "RadioPrimitive.Root";
-export const b = $$l0;
+// Original name: RadioPrimitiveRoot
+RadioPrimitiveRoot.displayName = 'RadioPrimitive.Root';
+
+// Refactored export name for RadioPrimitiveRoot
+export const b = RadioPrimitiveRoot;

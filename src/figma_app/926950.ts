@@ -4,7 +4,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { l as _$$l3, U as _$$U } from '../905/30301';
 import { registerModal } from '../905/102752';
 import { $1, _Z, AX, cR, Dq, dX, GC, HI, kB, lM, Lw, oE, Pf, Tg, U3, UM, uu, VL, vw, y8, yK, yl, Yz } from '../905/105972';
-import { Av } from '../905/149328';
+import { getFileTypePx } from '../905/149328';
 import { hideModal } from '../905/156213';
 import { getGpuDeviceInfo } from '../905/190247';
 import { h as _$$h } from '../905/207101';
@@ -415,7 +415,7 @@ function ep(e) {
   let r = e.isPerformanceIssue ?? !1;
   let s = Um();
   let p = useDispatch();
-  let h = Av();
+  let h = getFileTypePx();
   let {
     windowInnerHeight
   } = _$$l();

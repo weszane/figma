@@ -13,7 +13,7 @@ import { selectViewAction } from "../905/929976";
 import { UpgradeAction } from "../905/370443";
 import { getSelectedViewType } from "../figma_app/386952";
 import { FVisibilityType } from "../figma_app/191312";
-import { IX } from "../905/712921";
+import { RenewalTermEnum } from "../905/712921";
 import { DashboardSection } from "../figma_app/650409";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -52,7 +52,7 @@ function j() {
   let e = useDispatch();
   let t = useSelector(e => e.teamBilling);
   let a = t.summary.currency;
-  let r = t.summary.monthly_subscription ? IX.MONTH : IX.YEAR;
+  let r = t.summary.monthly_subscription ? RenewalTermEnum.MONTH : RenewalTermEnum.YEAR;
   let i = getRumLoggingConfig();
   return jsx($z, {
     htmlAttributes: {
@@ -84,7 +84,7 @@ function I({
   }) : _$$S({
     dispatch: a,
     currency: l,
-    renewalTerm: IX.YEAR,
+    renewalTerm: RenewalTermEnum.YEAR,
     isCurfEnabledForMembers: t === FVisibilityType.MEMBERS
   });
   let p = getRumLoggingConfig();

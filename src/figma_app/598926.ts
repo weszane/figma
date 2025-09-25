@@ -1,5 +1,5 @@
 import { createActionCreator } from "../905/73481";
-import { Q } from "../905/150006";
+import { handleOptimistTransactionWithError } from "../905/150006";
 import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -139,7 +139,7 @@ let $$w11 = createOptimistThunk((e, t) => {
     }
     return i;
   });
-  return Q({
+  return handleOptimistTransactionWithError({
     store: e,
     requestPromise: l,
     fallbackError: getI18nString("file_browser.file_browser_actions.create_project_error"),
@@ -157,7 +157,7 @@ createOptimistThunk((e, {
   let l = XHR.put(`/api/folders/${t}`, {
     is_subscribed: n
   });
-  Q({
+  handleOptimistTransactionWithError({
     store: e,
     requestPromise: l,
     fallbackError: getI18nString("file_browser.file_browser_actions.update_project_error"),

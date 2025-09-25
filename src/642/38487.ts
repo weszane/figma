@@ -22,7 +22,7 @@ import { getFeatureFlags } from '../905/601108';
 import { r as _$$r2 } from '../905/619088';
 import { ButtonPrimitive } from '../905/632989';
 import { f as _$$f2 } from '../905/640587';
-import { g as _$$g } from '../905/687265';
+import { textDisplayConfig } from '../905/687265';
 import { getSingletonSceneGraph } from '../905/700578';
 import { SvgComponent } from '../905/714743';
 import { getFilteredFeatureFlags } from '../905/717445';
@@ -273,7 +273,7 @@ function eb({
 }
 let eC = {
   semanticTagLabel: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textAlign: 'x1hr2gdg',
     fontFamily: 'xwjs1nl',
     color: 'xtd9kr2',

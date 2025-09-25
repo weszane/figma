@@ -1,4 +1,4 @@
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { l as _$$l } from "../905/716947";
 import { atom, createRemovableAtomFamily, mg, createAtomWithEquality, setupCustomAtom } from "../figma_app/27355";
 import s from "../vendor/239910";
@@ -8,7 +8,7 @@ import { canAdminPublish } from "../figma_app/275462";
 import { figmaLibrariesEnabledAtom } from "../figma_app/657017";
 import { getProviderConfigType } from "../figma_app/155411";
 import { hasRootPath } from "../figma_app/528509";
-import { J } from "../905/9585";
+import { mapLoadedFileComponents } from "../905/9585";
 import { i as _$$i } from "../905/667910";
 import { o as _$$o } from "../905/738144";
 import { F } from "../905/686267";
@@ -65,7 +65,7 @@ let $$k4 = (() => {
     let i = e(CommunityLibraryComponentsAndStateGroups.Query({
       hubFileId: t
     }));
-    let a = J(i);
+    let a = mapLoadedFileComponents(i);
     let s = _$$o(i);
     let l = e(CommunityLibraryStyleData.Query({
       hubFileId: t
@@ -93,7 +93,7 @@ let $$k4 = (() => {
     n.stateGroups = o()(s, "node_id");
     n.modules = o()(b, "node_id");
     return n;
-  }, lQ));
+  }, noop));
   let t = setupReduxAtomWithState(e, "SET_OPEN_HUB_FILE_PUBLISHED_LIVEGRAPH", {
     variableSets: {},
     variables: {},

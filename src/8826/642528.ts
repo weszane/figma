@@ -17,7 +17,7 @@ import { N as _$$N } from '../905/696319';
 import { getSingletonSceneGraph } from '../905/700578';
 import { SvgComponent } from '../905/714743';
 import { TabLoop } from '../905/718764';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { o as _$$o } from '../8826/796619';
 import { getObservableOrFallback } from '../figma_app/84367';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
@@ -295,7 +295,7 @@ let q = memo(({
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.number_of_columns'),
     'data-tooltip-type': KindEnum.TEXT,
     'dataTestId': 'grid-columns',
-    'dispatch': lQ,
+    'dispatch': noop,
     'id': 'grid-columns',
     'inputClassName': qE,
     'max': 100,
@@ -328,7 +328,7 @@ let J = memo(({
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.number_of_rows'),
     'data-tooltip-type': KindEnum.TEXT,
     'dataTestId': 'grid-rows',
-    'dispatch': lQ,
+    'dispatch': noop,
     'id': 'grid-rows',
     'inputClassName': qE,
     'max': 100,
@@ -592,7 +592,7 @@ function ec({
         'onValueChange': e => r(GridDirection.ROW, e),
         'recordingKey': generateRecordingKey(e, 'grid-rows'),
         'id': 'grid-rows',
-        'dispatch': lQ,
+        'dispatch': noop,
         'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.grid.row_index'),
         'children': jsx('span', {
@@ -605,7 +605,7 @@ function ec({
         'onValueChange': e => r(GridDirection.COLUMN, e),
         'recordingKey': generateRecordingKey(e, 'grid-columns'),
         'id': 'grid-columns',
-        'dispatch': lQ,
+        'dispatch': noop,
         'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.grid.column_index'),
         'children': jsx('span', {
@@ -622,7 +622,7 @@ function ec({
         'onValueChange': e => o(GridDirection.ROW, e),
         'recordingKey': generateRecordingKey(e, 'grid-rows'),
         'id': 'grid-rows',
-        'dispatch': lQ,
+        'dispatch': noop,
         'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.grid.vertical_span'),
         'children': jsx(SvgComponent, {
@@ -635,7 +635,7 @@ function ec({
         'onValueChange': e => o(GridDirection.COLUMN, e),
         'recordingKey': generateRecordingKey(e, 'grid-columns'),
         'id': 'grid-columns',
-        'dispatch': lQ,
+        'dispatch': noop,
         'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.grid.horizontal_span'),
         'children': jsx(SvgComponent, {
@@ -785,7 +785,7 @@ function eg({
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.gap_between_columns'),
     'data-tooltip-type': KindEnum.TEXT,
     'dataTestId': 'grid-col-spacing-control',
-    'dispatch': lQ,
+    'dispatch': noop,
     'inputClassName': hF,
     'isTokenizable': !0,
     'noBorderOnHover': !0,
@@ -831,7 +831,7 @@ function e_({
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.gap_between_rows'),
     'data-tooltip-type': KindEnum.TEXT,
     'dataTestId': 'grid-row-spacing-control',
-    'dispatch': lQ,
+    'dispatch': noop,
     'inputClassName': hF,
     'isTokenizable': !0,
     'noBorderOnHover': !0,

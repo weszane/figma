@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
-import { EA } from "../905/18800";
+import { consentAllowedAtom } from "../905/18800";
 import { SprigContext } from "../905/99656";
 import { An, Ay } from "../905/931912";
 import { m } from "../figma_app/714966";
@@ -22,7 +22,7 @@ export function $$h0({
   onSurveyClose: r,
   geofence: d = {}
 }) {
-  let p = useAtomWithSubscription(EA);
+  let p = useAtomWithSubscription(consentAllowedAtom);
   let _ = $z({
     canUseCookieForAnalytics: p,
     geofence: d

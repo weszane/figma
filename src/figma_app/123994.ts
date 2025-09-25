@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { AutoInteractableWrapper } from "../905/277716";
 import { Point } from "../905/736624";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { getI18nString } from "../905/303541";
 import { mz } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
@@ -163,7 +163,7 @@ function R({
 }) {
   return jsx("div", {
     className: cT,
-    children: jsx(oW, {
+    children: jsx(WAFImage, {
       src: e.src,
       width: e.displaySize.x,
       height: e.displaySize.y,

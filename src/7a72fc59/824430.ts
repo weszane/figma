@@ -13,7 +13,6 @@ import { n as _$$n9 } from '../573/512493';
 import { L as _$$L5 } from '../642/269105';
 import { J as _$$J7 } from '../642/485582';
 import { A as _$$A20 } from '../642/502017';
-import { noop } from '../642/671529';
 import { o as _$$o3 } from '../642/854123';
 import { k as _$$k5 } from '../642/978258';
 import { reportError } from '../905/11';
@@ -164,10 +163,10 @@ import { R as _$$R7 } from '../905/649743';
 import { FeatureFlag } from '../905/652992';
 import { y as _$$y2 } from '../905/661502';
 import { communityShelfService } from '../905/665703';
-import { oW as _$$oW } from '../905/675859';
+import { WAFImage } from '../905/675859';
 import { e as _$$e8 } from '../905/678389';
 import { p as _$$p6 } from '../905/682418';
-import { g as _$$g2 } from '../905/687265';
+import { textDisplayConfig } from '../905/687265';
 import { e2 as _$$e6, kF as _$$kF, sp as _$$sp, G8, HP, Km, Qr } from '../905/690539';
 import { Uw } from '../905/698759';
 import { UN } from '../905/700578';
@@ -210,11 +209,11 @@ import { V as _$$V3 } from '../905/900932';
 import { bL as _$$bL } from '../905/911410';
 import { e as _$$e7 } from '../905/916195';
 import { A as _$$A6 } from '../905/920165';
-import { a as _$$a5 } from '../905/925868';
+import { IntersectionSentinel } from '../905/925868';
 import { q as _$$q7 } from '../905/932270';
 import { W as _$$W6 } from '../905/933320';
-import { lQ as _$$lQ } from '../905/934246';
-import { Sn } from '../905/946805';
+import { noop } from 'lodash-es';
+import { ExtensionFeatureKey } from '../905/946805';
 import { t as _$$t6 } from '../905/947268';
 import { Uh as _$$Uh } from '../905/956994';
 import { B as _$$B2 } from '../905/957400';
@@ -620,7 +619,7 @@ function X({
       children: jsx(_$$c, {
         videoState: 'dormant',
         buttonSize: 'lg',
-        togglePlay: _$$lQ,
+        togglePlay: noop,
         inExportView: !1
       })
     })
@@ -1752,7 +1751,7 @@ let tZ = {
     overflowX: null,
     overflowY: null,
     whiteSpace: 'xuxw1ft',
-    ..._$$g2.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   icon: {
@@ -1812,7 +1811,7 @@ let t0 = {
     overflowX: null,
     overflowY: null,
     whiteSpace: 'xuxw1ft',
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   icon: {
@@ -2009,7 +2008,7 @@ let ne = {
   },
   title: {
     color: 'x1akne3o',
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   icon: {
@@ -2148,7 +2147,7 @@ let nt = {
   },
   title: {
     color: 'x1akne3o',
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   icon: {
@@ -2577,7 +2576,7 @@ let n$ = {
   },
   text: {
     color: 'x1akne3o',
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     paddingTop: 'x1gskr33',
     $$css: !0
   }
@@ -2609,7 +2608,7 @@ function nH({
   }();
   let d = VU();
   return jsxs('section', {
-    children: [jsx(_$$a5, {
+    children: [jsx(IntersectionSentinel, {
       onIntersectionChange: ({
         isIntersecting: e
       }) => {
@@ -2686,7 +2685,7 @@ function nX({
         })]
       }) : void 0,
       description: f && jsx('div', {
-        ..._$$xk(nZ.templateDescription, l ? _$$g2.textBodyMedium : _$$g2.textBodyLarge),
+        ..._$$xk(nZ.templateDescription, l ? textDisplayConfig.textBodyMedium : textDisplayConfig.textBodyLarge),
         dangerouslySetInnerHTML: {
           __html: sanitizeHtml(f)
         }
@@ -2847,7 +2846,7 @@ function nQ({
 }
 let nZ = {
   templateName: {
-    ..._$$g2.textBodySmall,
+    ...textDisplayConfig.textBodySmall,
     color: 'x1akne3o',
     textOverflow: 'xlyipyv',
     overflow: 'xb3r6kr',
@@ -2902,7 +2901,7 @@ let nZ = {
     $$css: !0
   },
   collapsibleHeader: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     width: 'xh8yej3',
     textAlign: 'xdpxx8g',
     paddingLeft: 'x1kpt5kx',
@@ -2966,7 +2965,7 @@ function n0({
       numColumns: r ? 1 : i ? 2 : 3,
       isLeftRail: i,
       getItemHeight: e => nI(Kq(e))
-    }), jsx(_$$a5, {
+    }), jsx(IntersectionSentinel, {
       onIntersectionChange: ({
         isIntersecting: e
       }) => {
@@ -3046,7 +3045,7 @@ function n8({
     className: 'x78zum5 x2iayur xdt5ytf x1cy8zhl x167g77z xkh2ocl',
     children: jsxs('div', {
       className: 'x78zum5 xwn6lyq x6s0dn4 x18x6v2m xkh2ocl x19y5rnk x1sjmt1f x1n2onr6',
-      children: [jsx(_$$oW, {
+      children: [jsx(WAFImage, {
         src: n7,
         className: 'xafpxmx x1fb2l0r xgwsg93'
       }), jsxs('div', {
@@ -3089,12 +3088,12 @@ function n8({
 let n3 = {
   header: {
     color: 'x1akne3o',
-    ..._$$g2.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   subheader: {
     color: 'x1akne3o',
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -3273,7 +3272,7 @@ function lb({
       }), jsx(n0, {
         assets: l.map(e => e.model)
       })]
-    }), jsx(_$$a5, {
+    }), jsx(IntersectionSentinel, {
       onIntersectionChange: ({
         isIntersecting: e
       }) => {
@@ -3333,7 +3332,7 @@ function lj({
 let ly = {
   emptyStateText: {
     color: 'xge78cn',
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -3544,7 +3543,7 @@ function lC({
       dimensions: n
     }), jsx(n0, {
       assets: c.slice(0, 4),
-      fetchNextPage: _$$lQ,
+      fetchNextPage: noop,
       hasNextPage: !1,
       isFetchingNextPage: s,
       singleColumn: u
@@ -3832,11 +3831,11 @@ function lw({
 }
 let lL = {
   bodyMedium: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   bodyMediumStrong: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   }
 };
@@ -3859,7 +3858,7 @@ function lM({
         ...Ay.props(lF.subheader),
         children: renderI18nText('cooper.templates.internal.creation_banner_subheader')
       })]
-    }), jsx(_$$oW, {
+    }), jsx(WAFImage, {
       src: lO,
       className: 'x1cvmir6 x1ohnph8 x2lah0s x1159492 x19y5rnk xehbxol x3nwc95'
     }), jsxs('div', {
@@ -3875,13 +3874,13 @@ let lF = {
   header: {
     color: 'x1akne3o',
     textAlign: 'x2b8uid',
-    ..._$$g2.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     $$css: !0
   },
   subheader: {
     color: 'x1akne3o',
     textAlign: 'x2b8uid',
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     maxWidth: 'xpqan2r',
     $$css: !0
   }
@@ -4807,7 +4806,7 @@ let r6 = {
     $$css: !0
   },
   shortcutText: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'xkrz9af',
     $$css: !0
   },
@@ -4864,7 +4863,7 @@ function ii() {
         moduleToOpen: {
           type: 'custom',
           module: jsx(Tu, {}),
-          name: Sn.EDIT_IMAGE
+          name: ExtensionFeatureKey.EDIT_IMAGE
         },
         trackingData: {
           source: 'buzz-inline-toolbar'
@@ -6183,8 +6182,8 @@ function ai({
               shouldCommit: t,
               fontVariations: n,
               lineHeightInContext: d,
-              showVariableFontSettings: _$$lQ,
-              showTypeVariablePicker: _$$lQ
+              showVariableFontSettings: noop,
+              showTypeVariablePicker: noop
             });
           },
           showMissingIcon: !1,
@@ -6553,7 +6552,7 @@ function aN({
               $I({
                 moduleToOpen: {
                   type: 'custom',
-                  name: Sn.REWRITE,
+                  name: ExtensionFeatureKey.REWRITE,
                   module: jsx(_$$w, {}),
                   beforeModuleOpen: () => {
                     B3(JT.REWRITE_TEXT);
@@ -6578,7 +6577,7 @@ function aN({
               $I({
                 moduleToOpen: {
                   type: 'custom',
-                  name: Sn.TRANSLATE,
+                  name: ExtensionFeatureKey.TRANSLATE,
                   module: jsx(_$$K3, {}),
                   beforeModuleOpen: () => {
                     B3(JT.TRANSLATE_TEXT);
@@ -6622,7 +6621,7 @@ function aN({
             $I({
               moduleToOpen: {
                 type: 'custom',
-                name: Sn.UPSCALE_IMAGE_TOAST,
+                name: ExtensionFeatureKey.UPSCALE_IMAGE_TOAST,
                 beforeModuleOpen: () => {
                   let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
                   B3(JT.UPSCALE_IMAGE);
@@ -7698,7 +7697,7 @@ function sr({
     'className': cssBuilderInstance.h32.w32.flex.itemsCenter.justifyCenter.$,
     'aria-label': getI18nString('cooper.inline_menu.fill_panel.custom_color_picker_button_tooltip'),
     'onClick': e,
-    'children': jsx(_$$oW, {
+    'children': jsx(WAFImage, {
       src: sn,
       alt: '',
       className: cssBuilderInstance.w24.h24.$
@@ -8311,7 +8310,7 @@ function sB({
         $I({
           moduleToOpen: {
             type: 'custom',
-            name: Sn.UPSCALE_IMAGE_TOAST,
+            name: ExtensionFeatureKey.UPSCALE_IMAGE_TOAST,
             beforeModuleOpen: () => {
               let t = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
               B3(JT.UPSCALE_IMAGE);
@@ -8473,7 +8472,7 @@ function sY({
           moduleToOpen: {
             type: 'custom',
             module: jsx(_$$Ay2, {}),
-            name: Sn.GENERATE_IMAGE
+            name: ExtensionFeatureKey.GENERATE_IMAGE
           },
           trackingData: {
             source: 'buzz-inline-toolbar'
@@ -10187,7 +10186,7 @@ let c_ = memo(e => {
 let cR = createReduxSubscriptionAtomWithState(e => e.universalInsertModal);
 let cw = {
   headerTextOverride: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   }
 };
@@ -10396,7 +10395,7 @@ function c$({
 }
 let cV = {
   sectionHeader: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     color: 'x1akne3o',
     $$css: !0
   },
@@ -10460,7 +10459,7 @@ function cG({
         'data-not-draggable': !0,
         'children': jsx(kx, {
           setPreviewResource,
-          setSelectedCategory: _$$lQ,
+          setSelectedCategory: noop,
           searchQuery: t,
           children: jsx(FN, {
             addLibraryButtonType: 'small',
@@ -10492,7 +10491,7 @@ function cU({
 let cK = createReduxSubscriptionAtomWithState(e => e.universalInsertModal);
 let cW = {
   headerTextOverride: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   }
 };
@@ -10692,7 +10691,7 @@ function cJ({
 }
 let cZ = {
   fontCombinationsHeader: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     color: 'x1akne3o',
     paddingTop: 'x1w4f5ud',
     paddingBottom: 'xdmjnt8',
@@ -11198,20 +11197,20 @@ let uk = {
   addDataTitle: {
     marginBottom: 'x1ah0xmj',
     textAlign: 'x2b8uid',
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   addDataInstructions: {
     color: 'x1n0bwc9',
     textAlign: 'x2b8uid',
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   addDataDescription: {
     marginTop: 'x7hzu26',
     color: 'x1n0bwc9',
     textAlign: 'x2b8uid',
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -11309,7 +11308,7 @@ function uR({
 let uw = {
   pillText: {
     color: 'x1tk3asg',
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -11802,11 +11801,11 @@ function xe({
 }
 let xt = {
   editRestrictionBannerTitle: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   editRestrictionBannerMessage: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   },
@@ -11814,7 +11813,7 @@ let xt = {
     'display': 'x78zum5',
     'alignItems': 'x6s0dn4',
     'color': 'x1n0bwc9',
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     'gap': 'x167g77z',
     'rowGap': null,
     'columnGap': null,
@@ -11855,7 +11854,7 @@ let xt = {
     '$$css': !0
   },
   emptyOrErrorState: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     padding: 'x15fnm84',
     paddingInline: null,
@@ -12091,7 +12090,7 @@ function xx({
     className: 'x78zum5 x6s0dn4 x1nfngrj xeuugli',
     children: [n.titleIconURL && jsx('div', {
       className: _$$eo,
-      children: jsx(_$$oW, {
+      children: jsx(WAFImage, {
         src: n.titleIconURL,
         alt: ''
       })
@@ -12249,7 +12248,7 @@ function xI({
       style: {
         aspectRatio: width / height
       },
-      children: jsx(_$$oW, {
+      children: jsx(WAFImage, {
         src: regular,
         alt: x,
         loading: 'eager',
@@ -12335,7 +12334,7 @@ function xk({
 }
 let xC = {
   attribution: {
-    ..._$$g2.textBodySmall,
+    ...textDisplayConfig.textBodySmall,
     display: 'x78zum5',
     flexDirection: 'xdt5ytf',
     color: 'x1n0bwc9',
@@ -12372,7 +12371,7 @@ let xN = memo(({
       htmlAttributes: {
         'data-testid': 'buzz-stock-photos-image-tile'
       },
-      children: jsx(_$$oW, {
+      children: jsx(WAFImage, {
         src: e,
         alt: t,
         loading: 'eager',
@@ -12499,7 +12498,7 @@ function xL({
     }), r && jsx('div', {
       className: 'x78zum5 xl56j7k x6s0dn4 x1aaf699',
       children: jsx(_$$k7, {})
-    }), jsx(_$$a5, {
+    }), jsx(IntersectionSentinel, {
       onIntersectionChange: ({
         isIntersecting: e
       }) => {
@@ -12565,7 +12564,7 @@ function xM({
 }
 let xF = {
   headerTitle: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     paddingBottom: 'x1ihwiht',
     color: 'x1n0bwc9',
     $$css: !0
@@ -12633,12 +12632,12 @@ function xV({
 }
 let xG = {
   title: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   subtitle: {
     textAlign: 'x2b8uid',
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -12815,7 +12814,7 @@ function xX() {
         moduleToOpen: {
           type: 'custom',
           module: jsx(_$$Ay2, {}),
-          name: Sn.GENERATE_IMAGE
+          name: ExtensionFeatureKey.GENERATE_IMAGE
         },
         trackingData: {
           source: 'image_settings_swap_image_generate_new'
@@ -12946,12 +12945,12 @@ function xJ({
 }
 let xQ = {
   buttonTitle: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     color: 'x1akne3o',
     $$css: !0
   },
   buttonSecondary: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     maxWidth: 'x16em4ew',
     $$css: !0
@@ -13434,7 +13433,7 @@ function x3({
 }
 let x9 = {
   closeableHeaderContainer: {
-    ..._$$g2.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     display: 'x78zum5',
     justifyContent: 'x1qughib',
     alignItems: 'x6s0dn4',
@@ -14001,7 +14000,7 @@ function pB({
           recordingKey: generateRecordingKey('cooperColorPicker', 'libraryColors'),
           onVariableSelected: c,
           onStyleSelected: u,
-          onClose: _$$lQ,
+          onClose: noop,
           variableScopes: g
         })
       })]
@@ -14585,15 +14584,15 @@ let mS = memo(({
       return jsx(n, {
         ref: i,
         backgroundColorHex: 'f5f5f5',
-        closeInlinePreview: _$$lQ,
+        closeInlinePreview: noop,
         contentScalingMode: 'fixed',
         iframeFocused: !1,
         isOpen: !0,
-        onIframeFocus: _$$lQ,
+        onIframeFocus: noop,
         openFileKey: s || void 0,
         pageId: e,
         scalingMode: 'contain',
-        setIframeFocused: _$$lQ
+        setIframeFocused: noop
       }, e);
     })()
   });

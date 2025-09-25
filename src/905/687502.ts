@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Link } from "../905/438674";
 import { Button } from "../905/521428";
-import { g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { customHistory } from "../905/612521";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -27,7 +27,7 @@ export function $$c0() {
 }
 let u = {
   textBodyMedium: {
-    ...g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };

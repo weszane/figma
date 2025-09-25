@@ -10,7 +10,7 @@ import { hasJubileePermissionForWhiteboard } from "../figma_app/251115";
 import { $L, OW } from "../figma_app/737746";
 import { x } from "../905/179739";
 import { eg, WZ, mi } from "../figma_app/297822";
-import { Jc } from "../905/946805";
+import { AssetTabType } from "../905/946805";
 import { Q8, dd, Rt, rE } from "../figma_app/604494";
 import { ee } from "../figma_app/995580";
 export function $$E2() {
@@ -55,9 +55,9 @@ export function $$y5({
     action: ee(e),
     searchQuery: t,
     numSearchResults: n,
-    rankingAlgorithm: eg(Jc.ALL),
+    rankingAlgorithm: eg(AssetTabType.ALL),
     searchPosition: i,
-    module: Jc.ALL,
+    module: AssetTabType.ALL,
     qaVersion: r,
     isAi: $$S0(e),
     isPlugin: d,
@@ -78,9 +78,9 @@ export function $$b6({
     action: t,
     searchQuery: e,
     numSearchResults: i,
-    rankingAlgorithm: eg(Jc.EXTENSIONS),
+    rankingAlgorithm: eg(AssetTabType.EXTENSIONS),
     searchPosition: n,
-    module: Jc.EXTENSIONS,
+    module: AssetTabType.EXTENSIONS,
     qaVersion: $L,
     isAi: !1,
     isPlugin: !0,

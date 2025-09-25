@@ -7,7 +7,7 @@ import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { rq } from "../905/425180";
-import { R } from "../905/11928";
+import { NotModalType } from "../905/11928";
 import { F_ } from "../905/858282";
 import { ak5 } from "../figma_app/6204";
 let g = userFlagExistsAtomFamily("seen_dtm_deprecation_post_migration_overlay");
@@ -76,7 +76,7 @@ export function $$f0(e) {
     title: h,
     trackingContextName: "Dtm Deprecation Post Migration Overlay",
     width: 350,
-    zIndex: R.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 export const a = $$f0;

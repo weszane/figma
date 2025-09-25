@@ -8,7 +8,7 @@ import { permissionScopeHandler } from '../905/189185';
 import { trackEventAnalytics } from '../905/449184';
 import { getFeatureFlags } from '../905/601108';
 import { getSingletonSceneGraph } from '../905/700578';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { v as _$$v, Z } from '../6401/653234';
 import { U } from '../6401/846751';
 import { getViewportInfo, scaleRect } from '../figma_app/62612';
@@ -151,7 +151,7 @@ function D({
     if (s) return;
     let i = getSingletonSceneGraph().get(e);
     if (!i || i.type !== 'INTERACTIVE_SLIDE_ELEMENT') return;
-    let n = lQ;
+    let n = noop;
     t = () => {
       n = function (e, t, i) {
         let n = t.interactiveSlideElementType;

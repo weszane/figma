@@ -5,7 +5,7 @@ import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { $$default } from "../vendor/73080";
 import { ResourceStatus } from "../905/663269";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { qr } from "../figma_app/827447";
 import { reportError } from "../905/11";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -3879,7 +3879,7 @@ export function $$eh0(e) {
             children: _.toString()
           }), jsx("div", {
             className: eu,
-            children: _$$A(s.created_at).format("h:mma")
+            children: dayjs(s.created_at).format("h:mma")
           })]
         }), s.is_figma_admin_action || !s.actor?.email ? jsxs("div", {
           className: e_,

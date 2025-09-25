@@ -7,7 +7,7 @@ import { reportNullOrUndefined } from "../905/11";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
-import { Q9 } from "../905/70982";
+import { markPrototypeViewed } from "../905/70982";
 import { z4 } from "../905/37051";
 import { m as _$$m } from "../905/575846";
 import { mapFileSummary } from "../figma_app/349248";
@@ -71,7 +71,7 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
     }).then(({
       data: t
     }) => {
-      e.dispatch(Q9({
+      e.dispatch(markPrototypeViewed({
         fileKey: t.meta.file_key,
         pageId: t.meta.page_id
       }));

@@ -1,51 +1,51 @@
-import { ServiceCategories } from "../905/165054";
-import { IAssertResource } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { atomStoreManager } from "../figma_app/27355";
-import { delay } from "../905/236856";
-import { trackEventAnalytics } from "../905/449184";
-import { logger } from "../905/651849";
-import { desktopAPIInstance } from "../figma_app/876459";
-import { debugState } from "../905/407919";
-import { isE2ETraffic, isDevEnvironment } from "../figma_app/169182";
-import { reportError } from "../905/11";
-import { isInteractionPathCheck } from "../figma_app/897289";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { VisualBellIcon } from "../905/576487";
-import { assetCategoryAtom, AssetCategoryEnum } from "../figma_app/639711";
-import { addWidgetToRecentsThunk, addPluginToRecentsThunk } from "../figma_app/147952";
-import { mapEditorTypeTo } from "../905/808775";
-import { fullscreenValue } from "../figma_app/455680";
-import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
-import { isVsCodeEnvironment } from "../905/858738";
-import { canPerformAction, canRunExtensions } from "../figma_app/12796";
-import { setupPluginCodeCache } from "../905/827944";
-import { showVisualBell, joinStringSegments, PluginPermissions, getFullscreenViewEditorType, isValidForCooper, isDevModeWithInspectPanel, isValidForCooperSelectedView, isBuzzPlugin, loadLocalPluginSource, loadPluginManifest, isValidForFullscreenView, clearVisualBell, hasSpecialCapability } from "../figma_app/300692";
-import { C3, SH } from "../figma_app/790714";
-import { hasMonetizedResourceMetadata } from "../figma_app/45218";
-import { SubscriptionStatus } from "../905/272080";
-import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
-import { hasLocalFileId } from "../figma_app/155287";
-import { d4 } from "../figma_app/474636";
-import { getCurrentUserOrgId, getSelectedView, getPluginDevMode } from "../905/622391";
-import { createDefaultPluginOptions, createPluginInstance } from "../905/472793";
-import { NoOpVm } from "../905/700654";
-import { gH, Yx, Ew } from "../figma_app/985200";
-import { getPluginApiDebugCopy } from "../905/535481";
-import { dequeuePluginStatus } from "../905/571565";
-import { PluginApiMetrics } from "../905/545265";
-import { JX } from "../905/104019";
-import { n as _$$n } from "../905/347702";
-import { yA } from "../905/642684";
-import { hM, p1, Tj, Yd, Nq } from "../905/266529";
-import { parseAndRemoveSourceMapComments } from "../905/751771";
-import { ls, a7 } from "../905/917898";
-import { R as _$$R } from "../figma_app/612938";
-import { waitForAllPagesForPlugin } from "../905/916933";
-import { isGlobalPluginActive, handlePluginError, setResetGlobalPluginAPI, setGlobalPluginCloseFunc, pluginState, generateRandomID, setPluginData, setPluginTriggeredFrom, setFAtom, closeCurrentPlugin, setPluginCloseFunc, resetPluginState } from "../905/753206";
-import { localStorageRef } from "../905/657224";
-import { pS } from "../905/588985";
+import { reportError } from '../905/11';
+import { JX } from '../905/104019';
+import { ServiceCategories } from '../905/165054';
+import { delay } from '../905/236856';
+import { hM, Nq, p1, Tj, Yd } from '../905/266529';
+import { SubscriptionStatus } from '../905/272080';
+import { VisualBellActions } from '../905/302958';
+import { getI18nString } from '../905/303541';
+import { n as _$$n } from '../905/347702';
+import { debugState } from '../905/407919';
+import { trackEventAnalytics } from '../905/449184';
+import { createDefaultPluginOptions, createPluginInstance } from '../905/472793';
+import { getPluginApiDebugCopy } from '../905/535481';
+import { PluginApiMetrics } from '../905/545265';
+import { dequeuePluginStatus } from '../905/571565';
+import { VisualBellIcon } from '../905/576487';
+import { pS } from '../905/588985';
+import { getFeatureFlags } from '../905/601108';
+import { getCurrentUserOrgId, getPluginDevMode, getSelectedView } from '../905/622391';
+import { yA } from '../905/642684';
+import { logger } from '../905/651849';
+import { localStorageRef } from '../905/657224';
+import { NoOpVm } from '../905/700654';
+import { parseAndRemoveSourceMapComments } from '../905/751771';
+import { closeCurrentPlugin, generateRandomID, handlePluginError, isGlobalPluginActive, pluginState, resetPluginState, setFAtom, setGlobalPluginCloseFunc, setPluginCloseFunc, setPluginData, setPluginTriggeredFrom, setResetGlobalPluginAPI } from '../905/753206';
+import { mapEditorTypeTo } from '../905/808775';
+import { setupPluginCodeCache } from '../905/827944';
+import { isVsCodeEnvironment } from '../905/858738';
+import { waitForAllPagesForPlugin } from '../905/916933';
+import { a7, ls } from '../905/917898';
+import { canPerformAction, canRunExtensions } from '../figma_app/12796';
+import { atomStoreManager } from '../figma_app/27355';
+import { hasMonetizedResourceMetadata } from '../figma_app/45218';
+import { mapEditorTypeToStringWithObfuscated } from '../figma_app/53721';
+import { addPluginToRecentsThunk, addWidgetToRecentsThunk } from '../figma_app/147952';
+import { hasLocalFileId } from '../figma_app/155287';
+import { isDevEnvironment, isE2ETraffic } from '../figma_app/169182';
+import { clearVisualBell, getFullscreenViewEditorType, hasSpecialCapability, isBuzzPlugin, isDevModeWithInspectPanel, isValidForCooper, isValidForCooperSelectedView, isValidForFullscreenView, joinStringSegments, loadLocalPluginSource, loadPluginManifest, PluginPermissions, showVisualBell } from '../figma_app/300692';
+import { fullscreenValue } from '../figma_app/455680';
+import { d4 } from '../figma_app/474636';
+import { PluginManager } from '../figma_app/612938';
+import { assetCategoryAtom, AssetCategoryEnum } from '../figma_app/639711';
+import { setSelectedDevModePropertiesPanelTab } from '../figma_app/741237';
+import { IAssertResource } from '../figma_app/763686';
+import { C3, SH } from '../figma_app/790714';
+import { desktopAPIInstance } from '../figma_app/876459';
+import { isInteractionPathCheck } from '../figma_app/897289';
+import { Ew, gH, Yx } from '../figma_app/985200';
 let n;
 let r;
 let a;
@@ -71,7 +71,7 @@ let $ = `const __html__ = (() => {
       },
     },
   );
-})();`.replace(/\n/g, " ");
+})();`.replace(/\n/g, ' ');
 async function Z(e) {
   let t;
   let i;
@@ -107,14 +107,14 @@ async function Z(e) {
     enableNativeJsx,
     enableResponsiveSetHierarchyMutations
   } = e;
-  let F = isWidget ? "widget" : "plugin";
-  if (stats.markTime("timeToRunPluginCodeInternalMs"), "0.6.0" === apiVersion || "1.0.0" === apiVersion) ;else throw Error(`Unknown ${F} api version "${apiVersion}"`);
+  let F = isWidget ? 'widget' : 'plugin';
+  if (stats.markTime('timeToRunPluginCodeInternalMs'), apiVersion === '0.6.0' || apiVersion === '1.0.0') ;else throw new Error(`Unknown ${F} api version "${apiVersion}"`);
   if (showRuntimeErrors) {
     let e;
     e = 0;
     let i = t => {
-      let i = t.startsWith("Error") ? t.replace("Error", "error") : t;
-      let n = "";
+      let i = t.startsWith('Error') ? t.replace('Error', 'error') : t;
+      let n = '';
       ++e > 1 && (n = ` (${e} errors total)`);
       isWidget ? showVisualBell(`Widget ${i}${n}`) : showVisualBell(`Plugin ${i}${n}`);
     };
@@ -122,7 +122,9 @@ async function Z(e) {
       i(e);
       errorHandler(e);
     } : i;
-  } else t = errorHandler || (() => {});
+  } else {
+    t = errorHandler || (() => {});
+  }
   let M = code;
   if (!getFeatureFlags().plugins_remove_syntax_checking && !1 !== checkSyntax) {
     let e;
@@ -136,25 +138,25 @@ async function Z(e) {
         description
       } = e.error;
       let r = `Syntax error on line ${lineNumber}: ${description}`;
-      let a = code.split("\n");
-      let o = "";
+      let a = code.split('\n');
+      let o = '';
       if (lineNumber >= 1 && lineNumber <= a.length && column >= 1 && column < 100) {
-        let e = a[lineNumber - 1].replace(/\t/g, " ").slice(0, column + 100);
+        let e = a[lineNumber - 1].replace(/\t/g, ' ').slice(0, column + 100);
         o += `
 ${e}
-${" ".repeat(column - 1)}^`;
+${' '.repeat(column - 1)}^`;
       }
       noConsoleError || yA(r + o);
-      return Error(r);
+      return new Error(r);
     }
-    "realms" === vmType && e && e.success && (M = joinStringSegments(code, e.rangesToRemove));
+    vmType === 'realms' && e && e.success && (M = joinStringSegments(code, e.rangesToRemove));
   }
   let j = null;
   ({
     html: j,
     code: M
   } = (i = null, {
-    code: M.replace(/^const __html__ = ("(.*?)([^\\]|^)");/, (e, t) => (i = JSON.parse(t.split('"+"').join("")), $)),
+    code: M.replace(/^const __html__ = ("(.*?)([^\\]|^)");/, (e, t) => (i = JSON.parse(t.split('"+"').join('')), $)),
     html: i
   }));
   return ls({
@@ -177,7 +179,7 @@ ${" ".repeat(column - 1)}^`;
     permissions,
     pluginCounter,
     pluginID: e.pluginID,
-    pluginRunID: "",
+    pluginRunID: '',
     pluginVersionID: e.pluginVersionID,
     queryMode,
     securityCheckReporter,
@@ -332,8 +334,8 @@ async function ei(e) {
       figma.closePlugin()
     }
   `;
-  localStorageRef && (localStorageRef["figma-extension-guard"] = "guard");
-  let r = "";
+  localStorageRef && (localStorageRef['figma-extension-guard'] = 'guard');
+  let r = '';
   let {
     runResult
   } = await Z({
@@ -342,22 +344,22 @@ async function ei(e) {
     capabilities: [],
     checkSyntax: !1,
     code: n,
-    command: "",
+    command: '',
     disableSilenceConsole: !0,
     enablePrivatePluginApi: !1,
     enableProposedApi: !1,
     errorHandler: e => {
-      t = t || e || "unknown error";
+      t = t || e || 'unknown error';
     },
     isLocal: !0,
     isWidget: !1,
-    name: "Security Checker",
-    openFileKey: "",
+    name: 'Security Checker',
+    openFileKey: '',
     permissions: PluginPermissions.none(),
     pluginCounter: -1,
-    pluginID: "",
-    pluginRunID: "",
-    pluginVersionID: "",
+    pluginID: '',
+    pluginRunID: '',
+    pluginVersionID: '',
     queryMode: !1,
     securityCheckReporter: e => {
       r = e;
@@ -365,9 +367,9 @@ async function ei(e) {
     showLaunchErrors: !1,
     showRuntimeErrors: !1,
     stats: new PluginApiMetrics(),
-    titleIconURL: "",
+    titleIconURL: '',
     triggeredFrom: void 0,
-    userID: "",
+    userID: '',
     vmType: e,
     editorType: [],
     html: null,
@@ -379,17 +381,19 @@ async function ei(e) {
   let s = !1;
   for (let e of [Array.prototype, Function.prototype, Object.prototype, Date.prototype, Object.getPrototypeOf(function* () {
     yield 0;
-  }), "Object.getPrototypeOf(async () => {})", "Object.getPrototypeOf(async function*(){ yield 0 })"]) {
-    if ("string" == typeof e) try {
-      e = (0, eval)(e);
-    } catch (e) {
-      continue;
+  }), 'Object.getPrototypeOf(async () => {})', 'Object.getPrototypeOf(async function*(){ yield 0 })']) {
+    if (typeof e == 'string') {
+      try {
+        e = (0, eval)(e);
+      } catch (e) {
+        continue;
+      }
     }
     e.hackedSandbox && (s = !0, delete e.hackedSandbox);
   }
-  if (s) throw Error("Prototypes not isolated");
-  if (void 0 !== t) throw Error("Security checks triggered error");
-  if ("ok" !== r) throw Error(r);
+  if (s) throw new Error('Prototypes not isolated');
+  if (void 0 !== t) throw new Error('Security checks triggered error');
+  if (r !== 'ok') throw new Error(r);
 }
 async function en(e, t) {
   await a7(e);
@@ -398,17 +402,17 @@ async function en(e, t) {
   })), Yx.getInstanceLoading(Ew({
     triggeredFrom: t
   }))]);
-  "realms" === e && (r || (r = ei("realms").catch(e => {
-    trackEventAnalytics("Plugin Sandbox Failure", {
-      error: e + "",
-      vm: "realms"
+  e === 'realms' && (r || (r = ei('realms').catch(e => {
+    trackEventAnalytics('Plugin Sandbox Failure', {
+      error: `${e}`,
+      vm: 'realms'
     });
     return e;
   })), await r);
-  "cppvm" === e && (a || (a = ei("cppvm").catch(e => {
-    trackEventAnalytics("Plugin Sandbox Failure", {
-      error: e + "",
-      vm: "cppvm"
+  e === 'cppvm' && (a || (a = ei('cppvm').catch(e => {
+    trackEventAnalytics('Plugin Sandbox Failure', {
+      error: `${e}`,
+      vm: 'cppvm'
     });
     return e;
   })), await a);
@@ -435,13 +439,15 @@ export function $$ea2(e) {
     if (isGlobalPluginActive()) return;
     n && function (e) {
       let t = new NoOpVm();
-      let i = [() => t.destroy(), () => JX, () => fullscreenValue.triggerAction("commit")];
+      let i = [() => t.destroy(), () => JX, () => fullscreenValue.triggerAction('commit')];
       let n = () => {
         let e;
-        for (let t of i) try {
-          t();
-        } catch (t) {
-          e || (e = t);
+        for (let t of i) {
+          try {
+            t();
+          } catch (t) {
+            e || (e = t);
+          }
         }
         if (i = [], e) throw e;
       };
@@ -454,7 +460,7 @@ export function $$ea2(e) {
         userID: e.userID,
         closePlugin: r,
         addShutdownAction: e => {
-          -1 === i.indexOf(e) && i.push(e);
+          !i.includes(e) && i.push(e);
         },
         incrementalSafeApi: !0,
         allowIncrementalUnsafeApiCalls: !0,
@@ -463,7 +469,7 @@ export function $$ea2(e) {
       setGlobalPluginCloseFunc(r);
     }(e);
   } catch (e) {
-    isDevEnvironment() && "fullscreen" === t.selectedView.view && console.error(e);
+    isDevEnvironment() && t.selectedView.view === 'fullscreen' && console.error(e);
   }
 }
 export function $$es1({
@@ -478,7 +484,7 @@ export let $$eo4 = _$$n(async e => {
   let i = new PluginApiMetrics();
   pluginState.stats = i;
   let n = e.plugin;
-  trackEventAnalytics("Plugin Start Initiated", {
+  trackEventAnalytics('Plugin Start Initiated', {
     pluginID: n.plugin_id,
     trigger: e.triggeredFrom,
     runMode: e.runMode,
@@ -489,142 +495,148 @@ export let $$eo4 = _$$n(async e => {
     pluginRunID: t,
     editorType: getFullscreenViewEditorType(),
     ...(hasLocalFileId(n) ? {
-      pluginVersionID: "",
-      source: "development",
-      name: "<local plugin>"
+      pluginVersionID: '',
+      source: 'development',
+      name: '<local plugin>'
     } : {
       pluginVersionID: n.id,
-      source: "imported",
+      source: 'imported',
       name: n.name
     })
   });
   let {
     isCancelled
-  } = await i.markDuration("waitForAllPagesMs", async () => await waitForAllPagesForPlugin(e));
+  } = await i.markDuration('waitForAllPagesMs', async () => await waitForAllPagesForPlugin(e));
   if (!isCancelled) {
     if (isValidForCooper(e.triggeredFrom)) {
-      if (!isDevModeWithInspectPanel(e.plugin)) throw Error('Plugin not compatible to run in dev handoff panel. Make sure you have "dev" as an editorType and "inspect" as a capability in your manifest.json.');
-      atomStoreManager.set(d4, "LOADING");
+      if (!isDevModeWithInspectPanel(e.plugin)) throw new Error('Plugin not compatible to run in dev handoff panel. Make sure you have "dev" as an editorType and "inspect" as a capability in your manifest.json.');
+      atomStoreManager.set(d4, 'LOADING');
       setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
     }
     if (isValidForCooperSelectedView(e.triggeredFrom)) {
-      if (!isBuzzPlugin(e.plugin)) throw Error('Plugin not compatible to run in buzz panel. Make sure you have "buzz" as an editorType in your manifest.json.');
-      atomStoreManager.set(d4, "LOADING");
+      if (!isBuzzPlugin(e.plugin)) throw new Error('Plugin not compatible to run in buzz panel. Make sure you have "buzz" as an editorType in your manifest.json.');
+      atomStoreManager.set(d4, 'LOADING');
       atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS);
     }
     e.isWidget || e.ignoreForRunLastPlugin || C3(e);
     setPluginData(e.plugin);
     setPluginTriggeredFrom(e.triggeredFrom);
-    "default" === e.runMode && isValidForCooper(e.triggeredFrom) && (e.runMode = "inspect");
+    e.runMode === 'default' && isValidForCooper(e.triggeredFrom) && (e.runMode = 'inspect');
     setFAtom(e.runMode);
     try {
-      if (hasLocalFileId(e.plugin)) try {
-        let n = await ed(e, i, e.plugin);
-        await ec({
-          localPlugin: e.plugin,
-          runPluginArgs: e,
-          stats: i,
-          pluginRunID: t,
-          code: n
-        });
-      } catch (t) {
-        yA(t);
-        el(t, e.isWidget);
-      } else try {
-        let n = await ed(e, i, e.plugin);
-        await function ({
-          pluginVersion: e,
-          runPluginArgs: t,
-          stats: i,
-          pluginRunID: n,
-          code: r
-        }) {
-          let {
-            command,
-            queryMode,
-            triggeredFrom,
-            openFileKey,
-            deferRunEvent,
-            parameterValues,
-            isWidget,
-            widgetAction,
-            forcePluginVersionId
-          } = t;
-          let f = getSelectedView();
-          if (!f) throw new er(t.isWidget ? getI18nString("plugins.cannot_run_widget_logged_out") : getI18nString("plugins.cannot_run_plugin_logged_out"));
-          if (e = {
-            ...e,
-            id: forcePluginVersionId || e.id
-          }, pluginState.currentPluginRunID !== n) return;
-          let _ = debugState.getState().selectedView.editorType;
-          let y = {
-            storeInRecentsKey: mapEditorTypeTo(_),
-            id: e.plugin_id,
-            version: e.version,
-            currentUserId: getSelectedView()
-          };
-          isWidget ? debugState.dispatch(addWidgetToRecentsThunk(y)) : debugState.dispatch(addPluginToRecentsThunk(y));
-          let b = debugState.getState().publishedPlugins[e.plugin_id];
-          let v = hasMonetizedResourceMetadata(b);
-          let x = {
-            pluginID: e.plugin_id,
-            pluginVersionID: e.id,
-            trigger: triggeredFrom,
-            source: "imported",
-            command,
-            name: e.name,
-            fileKey: openFileKey,
-            pluginRunID: n,
-            queryMode,
-            deferRunEvent: !!deferRunEvent,
-            runWithParameters: !!parameterValues,
-            manifest: JSON.stringify(e.manifest),
-            productType: mapEditorTypeToStringWithObfuscated(_),
-            isWidget,
-            isMonetized: v,
-            paidStatus: function (e) {
-              let t = hasMonetizedResourceMetadata(e);
-              let i = e?.community_resource_payment;
-              return t && i ? i.status === SubscriptionStatus.TRIALING ? "trial" : "paid" : "none";
-            }(b),
-            widgetAction: widgetAction ?? null,
-            isReadOnly: debugState.getState().mirror.appModel.isReadOnly,
-            editorType: getFullscreenViewEditorType(),
-            incrementalMode: "dynamic-page" === e.manifest.documentAccess,
-            isVsCode: isVsCodeEnvironment(),
-            orgId: getCurrentUserOrgId() ?? null
-          };
-          trackEventAnalytics("Plugin Start", x, isWidget ? {
-            forwardToDatadog: !0
-          } : {});
-          return $$ep5(em({
-            runPluginArgs: t,
-            manifest: e.manifest,
+      if (hasLocalFileId(e.plugin)) {
+        try {
+          let n = await ed(e, i, e.plugin);
+          await ec({
+            localPlugin: e.plugin,
+            runPluginArgs: e,
             stats: i,
-            isLocal: !1,
-            customOverrides: {
-              code: r,
-              name: e.name,
+            pluginRunID: t,
+            code: n
+          });
+        } catch (t) {
+          yA(t);
+          el(t, e.isWidget);
+        }
+      } else {
+        try {
+          let n = await ed(e, i, e.plugin);
+          await function ({
+            pluginVersion: e,
+            runPluginArgs: t,
+            stats: i,
+            pluginRunID: n,
+            code: r
+          }) {
+            let {
+              command,
+              queryMode,
+              triggeredFrom,
               openFileKey,
-              permissions: PluginPermissions.forInstalledPlugin(e),
-              pluginID: e.plugin_id,
-              pluginRunID: n,
-              pluginVersionID: e.id,
-              titleIconURL: e.redirect_icon_url,
-              userID: f,
-              enablePrivatePluginApi: !!(e.manifest.enablePrivatePluginApi && e.is_private)
+              deferRunEvent,
+              parameterValues,
+              isWidget,
+              widgetAction,
+              forcePluginVersionId
+            } = t;
+            let f = getSelectedView();
+            if (!f) throw new er(t.isWidget ? getI18nString('plugins.cannot_run_widget_logged_out') : getI18nString('plugins.cannot_run_plugin_logged_out'));
+            if (e = {
+              ...e,
+              id: forcePluginVersionId || e.id
+            }, pluginState.currentPluginRunID !== n) {
+              return;
             }
-          }));
-        }({
-          pluginVersion: e.plugin,
-          runPluginArgs: e,
-          stats: i,
-          pluginRunID: t,
-          code: n
-        });
-      } catch (t) {
-        t instanceof er || reportError(ServiceCategories.EXTENSIBILITY, t);
-        el(t, e.isWidget);
+            let _ = debugState.getState().selectedView.editorType;
+            let y = {
+              storeInRecentsKey: mapEditorTypeTo(_),
+              id: e.plugin_id,
+              version: e.version,
+              currentUserId: getSelectedView()
+            };
+            isWidget ? debugState.dispatch(addWidgetToRecentsThunk(y)) : debugState.dispatch(addPluginToRecentsThunk(y));
+            let b = debugState.getState().publishedPlugins[e.plugin_id];
+            let v = hasMonetizedResourceMetadata(b);
+            let x = {
+              pluginID: e.plugin_id,
+              pluginVersionID: e.id,
+              trigger: triggeredFrom,
+              source: 'imported',
+              command,
+              name: e.name,
+              fileKey: openFileKey,
+              pluginRunID: n,
+              queryMode,
+              deferRunEvent: !!deferRunEvent,
+              runWithParameters: !!parameterValues,
+              manifest: JSON.stringify(e.manifest),
+              productType: mapEditorTypeToStringWithObfuscated(_),
+              isWidget,
+              isMonetized: v,
+              paidStatus: function (e) {
+                let t = hasMonetizedResourceMetadata(e);
+                let i = e?.community_resource_payment;
+                return t && i ? i.status === SubscriptionStatus.TRIALING ? 'trial' : 'paid' : 'none';
+              }(b),
+              widgetAction: widgetAction ?? null,
+              isReadOnly: debugState.getState().mirror.appModel.isReadOnly,
+              editorType: getFullscreenViewEditorType(),
+              incrementalMode: e.manifest.documentAccess === 'dynamic-page',
+              isVsCode: isVsCodeEnvironment(),
+              orgId: getCurrentUserOrgId() ?? null
+            };
+            trackEventAnalytics('Plugin Start', x, isWidget ? {
+              forwardToDatadog: !0
+            } : {});
+            return $$ep5(em({
+              runPluginArgs: t,
+              manifest: e.manifest,
+              stats: i,
+              isLocal: !1,
+              customOverrides: {
+                code: r,
+                name: e.name,
+                openFileKey,
+                permissions: PluginPermissions.forInstalledPlugin(e),
+                pluginID: e.plugin_id,
+                pluginRunID: n,
+                pluginVersionID: e.id,
+                titleIconURL: e.redirect_icon_url,
+                userID: f,
+                enablePrivatePluginApi: !!(e.manifest.enablePrivatePluginApi && e.is_private)
+              }
+            }));
+          }({
+            pluginVersion: e.plugin,
+            runPluginArgs: e,
+            stats: i,
+            pluginRunID: t,
+            code: n
+          });
+        } catch (t) {
+          t instanceof er || reportError(ServiceCategories.EXTENSIBILITY, t);
+          el(t, e.isWidget);
+        }
       }
     } finally {
       setPluginData(null);
@@ -634,40 +646,40 @@ export let $$eo4 = _$$n(async e => {
   }
 });
 function el(e, t) {
-  let i = (e instanceof er ? e?.message : void 0) ?? (t ? getI18nString("plugins.error_loading_environment_widget") : getI18nString("plugins.error_loading_environment_plugin"));
+  let i = (e instanceof er ? e?.message : void 0) ?? (t ? getI18nString('plugins.error_loading_environment_widget') : getI18nString('plugins.error_loading_environment_plugin'));
   showVisualBell(i);
 }
 async function ed(e, t, i) {
   let n = hasLocalFileId(i);
   try {
     fullscreenValue.dispatch(VisualBellActions.enqueue({
-      message: getI18nString("plugins.loading_plugin", {
+      message: getI18nString('plugins.loading_plugin', {
         pluginName: i.name
       }),
       icon: VisualBellIcon.SPINNER,
-      type: "loading-plugin",
+      type: 'loading-plugin',
       delay: 200,
       timeoutOverride: 1 / 0
     }));
-    let r = n ? getPluginDevMode() : "cppvm";
-    let [a, s] = await Promise.all([(async () => await (n ? i.testCode ? i.testCode : loadLocalPluginSource(i.localFileId) : t.markDuration("pluginCodeDownloadedMs", async () => await setupPluginCodeCache.getAndCache(i, getCurrentUserOrgId()))))(), (async () => {
-      await t.markDuration("loadSandboxAndRunSecurityChecksMs", async () => {
+    let r = n ? getPluginDevMode() : 'cppvm';
+    let [a, s] = await Promise.all([(async () => await (n ? i.testCode ? i.testCode : loadLocalPluginSource(i.localFileId) : t.markDuration('pluginCodeDownloadedMs', async () => await setupPluginCodeCache.getAndCache(i, getCurrentUserOrgId()))))(), (async () => {
+      await t.markDuration('loadSandboxAndRunSecurityChecksMs', async () => {
         try {
           await en(r, e.triggeredFrom);
         } catch (i) {
-          let t = e.isWidget ? getI18nString("plugins.error_loading_environment_widget") : getI18nString("plugins.error_loading_environment_plugin");
+          let t = e.isWidget ? getI18nString('plugins.error_loading_environment_widget') : getI18nString('plugins.error_loading_environment_plugin');
           throw new er(t);
         }
       });
     })()]);
     if (!a) {
-      let t = e.isWidget ? getI18nString("plugins.no_code_found_for_widget") : getI18nString("plugins.no_code_found_for_plugin");
+      let t = e.isWidget ? getI18nString('plugins.no_code_found_for_widget') : getI18nString('plugins.no_code_found_for_plugin');
       throw new er(t);
     }
     return a;
   } finally {
     fullscreenValue.dispatch(VisualBellActions.dequeue({
-      matchType: "loading-plugin"
+      matchType: 'loading-plugin'
     }));
   }
 }
@@ -689,16 +701,16 @@ async function ec({
     parameterValues
   } = t;
   let g = getSelectedView();
-  if (!g) throw new er(isWidget ? getI18nString("plugins.cannot_run_widget_logged_out") : getI18nString("plugins.cannot_run_plugin_logged_out"));
+  if (!g) throw new er(isWidget ? getI18nString('plugins.cannot_run_widget_logged_out') : getI18nString('plugins.cannot_run_plugin_logged_out'));
   let f = debugState.getState().selectedView.editorType;
   if (e.manifest) {
     let t = {
-      pluginID: e.manifest.id || "",
-      pluginVersionID: "",
+      pluginID: e.manifest.id || '',
+      pluginVersionID: '',
       trigger: triggeredFrom,
-      source: "development",
+      source: 'development',
       command,
-      name: "<local plugin>",
+      name: '<local plugin>',
       fileKey: openFileKey,
       pluginRunID: i,
       queryMode,
@@ -710,11 +722,11 @@ async function ec({
       widgetAction: widgetAction ?? null,
       isReadOnly: debugState.getState().mirror.appModel.isReadOnly,
       editorType: getFullscreenViewEditorType(),
-      incrementalMode: "dynamic-page" === e.manifest.documentAccess,
+      incrementalMode: e.manifest.documentAccess === 'dynamic-page',
       isVsCode: isVsCodeEnvironment(),
       orgId: getCurrentUserOrgId() ?? null
     };
-    trackEventAnalytics("Plugin Start", t, isWidget ? {
+    trackEventAnalytics('Plugin Start', t, isWidget ? {
       forwardToDatadog: !0
     } : {});
   }
@@ -722,13 +734,13 @@ async function ec({
     storeInRecentsKey: mapEditorTypeTo(f),
     id: String(e.localFileId),
     isDevelopment: !0,
-    version: "",
+    version: '',
     currentUserId: getSelectedView()
   };
   isWidget ? debugState.dispatch(addWidgetToRecentsThunk(_)) : debugState.dispatch(addPluginToRecentsThunk(_));
   try {
     let a = e.testCode ? e.manifest : await loadPluginManifest(e.localFileId, {
-      resourceType: isWidget ? "widget" : "plugin",
+      resourceType: isWidget ? 'widget' : 'plugin',
       ignoreMissingEditorType: !0,
       isPublishing: !1
     });
@@ -742,10 +754,10 @@ async function ec({
         openFileKey,
         permissions: PluginPermissions.forLocalPlugin(e),
         enablePrivatePluginApi: !!a.enablePrivatePluginApi,
-        pluginID: a.id || "",
+        pluginID: a.id || '',
         pluginRunID: i,
-        pluginVersionID: "",
-        titleIconURL: "",
+        pluginVersionID: '',
+        titleIconURL: '',
         userID: g
       }
     });
@@ -755,27 +767,27 @@ async function ec({
     dequeuePluginStatus({
       shouldShowVisualBell: !0
     });
-    let e = (t instanceof er ? t?.message : void 0) ?? (isWidget ? getI18nString("plugins.error_occured_while_running_widget") : getI18nString("plugins.error_occured_while_running_plugin"));
+    let e = (t instanceof er ? t?.message : void 0) ?? (isWidget ? getI18nString('plugins.error_occured_while_running_widget') : getI18nString('plugins.error_occured_while_running_plugin'));
     showVisualBell(e);
   }
 }
 export let $$eu3 = _$$n(({
   newTriggeredFrom: e
 } = {
-  newTriggeredFrom: "runlast"
+  newTriggeredFrom: 'runlast'
 }) => {
   let t = SH();
-  t && isValidForFullscreenView(t) && (e && (t.triggeredFrom = e), _$$R.instance.enqueue({
-    mode: "run-forever",
+  t && isValidForFullscreenView(t) && (e && (t.triggeredFrom = e), PluginManager.instance.enqueue({
+    mode: 'run-forever',
     runPluginArgs: t
   }));
 });
 export function $$ep5(e) {
   if (pluginState.currentPluginRunID !== e.pluginRunID) return Promise.resolve();
-  getPluginApiDebugCopy() && logger.debug("[Plugin API]", `Plugin run ${e.pluginRunID} started`, e);
+  getPluginApiDebugCopy() && logger.debug('[Plugin API]', `Plugin run ${e.pluginRunID} started`, e);
   let t = e.stats;
-  t.markTime("timeToRunPluginCodeStartMs");
-  let i = e.isWidget ? "widget" : "plugin";
+  t.markTime('timeToRunPluginCodeStartMs');
+  let i = e.isWidget ? 'widget' : 'plugin';
   clearVisualBell();
   let n = p1();
   Tj(n);
@@ -798,12 +810,14 @@ export function $$ep5(e) {
           widgetNodeID,
           pluginID: e.pluginID
         };
-      } else pluginState.currentWidget = void 0;
+      } else {
+        pluginState.currentWidget = void 0;
+      }
     } catch {
       pluginState.currentWidget = void 0;
     }
     try {
-      if (isInteractionPathCheck() && (await en("cppvm", e?.triggeredFrom)), desktopAPIInstance && hasSpecialCapability(e.permissions.permissions) && (pluginState.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && desktopAPIInstance && (pluginState.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await desktopAPIInstance.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await delay(0), Nq() !== n) {
+      if (isInteractionPathCheck() && (await en('cppvm', e?.triggeredFrom)), desktopAPIInstance && hasSpecialCapability(e.permissions.permissions) && (pluginState.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && desktopAPIInstance && (pluginState.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await desktopAPIInstance.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await delay(0), Nq() !== n) {
         t();
         return;
       }
@@ -822,7 +836,7 @@ export function $$ep5(e) {
         r = closePlugin;
         let e = await runResult;
         e && fullscreenValue.dispatch(VisualBellActions.enqueue({
-          type: "plugins-supplied-message",
+          type: 'plugins-supplied-message',
           message: e
         }));
       }
@@ -836,9 +850,11 @@ export function $$ep5(e) {
     }
   }).catch(t => {
     if (e.noConsoleError || yA(t), e.showLaunchErrors) {
-      let i = (t instanceof er ? t?.message : void 0) ?? (e.isWidget ? getI18nString("plugins.error_occured_while_running_widget") : getI18nString("plugins.error_occured_while_running_plugin"));
+      let i = (t instanceof er ? t?.message : void 0) ?? (e.isWidget ? getI18nString('plugins.error_occured_while_running_widget') : getI18nString('plugins.error_occured_while_running_plugin'));
       showVisualBell(i);
-    } else throw t;
+    } else {
+      throw t;
+    }
   });
   let a = () => {
     let n = {
@@ -867,17 +883,17 @@ export function $$ep5(e) {
       sharedPluginDataTotalSetSize: t.sharedPluginDataTotalSetSize(),
       pluginDataMaximumKeyCountExceeded: t.pluginDataMaximumKeyCountExceeded()
     };
-    getPluginApiDebugCopy() && logger.debug("[Plugin API]", `Plugin run ${e.pluginRunID} finished`, {
+    getPluginApiDebugCopy() && logger.debug('[Plugin API]', `Plugin run ${e.pluginRunID} finished`, {
       pluginEndEventData: n,
       setPluginDataStats: r
     });
-    trackEventAnalytics("Plugin End", {
+    trackEventAnalytics('Plugin End', {
       ...n,
       ...r
     }, {
       forwardToDatadog: !0
     });
-    e.pluginID && t.hasResizedNodeWithMissingFont() && (trackEventAnalytics("Plugin resized node with missing font", {
+    e.pluginID && t.hasResizedNodeWithMissingFont() && (trackEventAnalytics('Plugin resized node with missing font', {
       pluginID: e.pluginID
     }), console.warn(`This ${i} resized a node with missing fonts. Text layout for node will not be applied.`));
   };
@@ -897,7 +913,7 @@ function em({
       let {
         networkAccess
       } = e;
-      return networkAccess ? t && networkAccess.devAllowedDomains ? networkAccess.devAllowedDomains.includes("*") || networkAccess.allowedDomains.includes("none") ? networkAccess.devAllowedDomains : Array.from(new Set([...networkAccess.devAllowedDomains, ...networkAccess.allowedDomains])) : networkAccess.allowedDomains : gH;
+      return networkAccess ? t && networkAccess.devAllowedDomains ? networkAccess.devAllowedDomains.includes('*') || networkAccess.allowedDomains.includes('none') ? networkAccess.devAllowedDomains : Array.from(new Set([...networkAccess.devAllowedDomains, ...networkAccess.allowedDomains])) : networkAccess.allowedDomains : gH;
     }(e, t),
     apiVersion: e.api,
     capabilities: e.capabilities ?? [],
@@ -908,7 +924,7 @@ function em({
     enableProposedApi: t && !!e.enableProposedApi,
     showLaunchErrors: !t,
     showRuntimeErrors: t,
-    vmType: t ? getPluginDevMode() : "cppvm",
+    vmType: t ? getPluginDevMode() : 'cppvm',
     ...r,
     command: n.command,
     queryMode: n.queryMode,
@@ -918,12 +934,12 @@ function em({
     parameterValues: n.parameterValues,
     isWidget: n.isWidget,
     editorType: n.plugin.manifest.editorType ?? [],
-    incrementalSafeApi: "dynamic-page" === e.documentAccess,
+    incrementalSafeApi: e.documentAccess === 'dynamic-page',
     enableNativeJsx: !!getFeatureFlags().ext_full_jsx,
     enableResponsiveSetHierarchyMutations: !0
   };
 }
-export { hM } from "../905/266529";
+export { hM } from '../905/266529';
 export const mK = $$es1;
 export const s2 = $$ea2;
 export const A9 = $$eu3;

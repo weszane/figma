@@ -9,12 +9,12 @@ import { getInitialOptions } from "../figma_app/169182";
 import { postUserFlag } from "../905/985254";
 import { e as _$$e } from "../905/621515";
 import { y as _$$y } from "../905/958284";
-import { a as _$$a } from "../905/12032";
+import { overlayIdsAtom } from "../905/12032";
 import { NT, g5 } from "../figma_app/579169";
 import { selectUserFlag } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
 import { M } from "../905/152487";
-import { d as _$$d } from "../905/14910";
+import { isAllowedToSeeNux } from "../905/14910";
 import { e as _$$e2 } from "../905/107684";
 import { hib } from "../figma_app/6204";
 import { useState, useCallback } from "react";
@@ -22,7 +22,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogCustomContents, DialogTitle } from "../figma_app/272243";
 import { LinkPrimitive } from "../figma_app/496441";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -31,7 +31,7 @@ import { TextWithTruncation } from "../905/984674";
 import { UpgradeAction } from "../905/370443";
 let D = {
   body: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     paddingBlock: "xapmr0x",
     paddingTop: null,
     paddingBottom: null,
@@ -108,7 +108,7 @@ function L({
 export function $$F0({
   waitForNux: e = !0
 }) {
-  let t = useAtomWithSubscription(_$$a);
+  let t = useAtomWithSubscription(overlayIdsAtom);
   let i = useAtomWithSubscription(NT);
   let I = useAtomWithSubscription(g5);
   let {
@@ -128,7 +128,7 @@ export function $$F0({
     let t = () => show({
       canShow: (e, t) => {
         let i = R.current.some(e => _$$e2.includes(_$$y(e)));
-        let n = _$$d({
+        let n = isAllowedToSeeNux({
           emailValidatedAt: t,
           jobTitle: e
         });

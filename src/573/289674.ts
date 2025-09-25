@@ -14,7 +14,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { logger } from "../905/651849";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { F as _$$F } from "../905/422355";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { uQ, NM } from "../figma_app/311375";
@@ -684,7 +684,7 @@ export function $$X0() {
                 selectedNodeIds: r
               },
               contextPromise: void 0,
-              setThinkingState: lQ,
+              setThinkingState: noop,
               aiTrackingContext: {
                 action: JT.MAKE_EDITS,
                 source: lV.AI_ASSISTANT,

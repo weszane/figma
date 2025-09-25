@@ -45,7 +45,7 @@ import { s as _$$s2 } from '../905/761565';
 import { h as _$$h } from '../905/864281';
 import { K as _$$K2 } from '../905/899124';
 import { selectViewAction } from '../905/929976';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { fileEntityDataMapper } from '../905/943101';
 import { TextWithTruncation } from '../905/984674';
 import { A as _$$A2 } from '../5724/142155';
@@ -67,7 +67,7 @@ import { teamConstant } from '../figma_app/630077';
 import { SecureLink, BigTextInputForwardRef } from '../figma_app/637027';
 import { filterNotNullish } from '../figma_app/656233';
 import { fm, Y9 } from '../figma_app/680166';
-import { Kq } from '../figma_app/713624';
+import { TeamPropertyKey } from '../figma_app/713624';
 import { jB, LU, xd } from '../figma_app/722141';
 import { getProductAccessTypeOrDefault } from '../figma_app/765689';
 import { TrackingProvider } from '../figma_app/831799';
@@ -340,7 +340,7 @@ function eb(e) {
 }
 function ev(e) {
   let t = jsx(_$$B, {
-    onShouldFetchNextPage: lQ,
+    onShouldFetchNextPage: noop,
     children: e.teamsList.map(t => jsx(_$$P2, {
       teamId: t.id,
       teamName: t.name,
@@ -591,7 +591,7 @@ let eR = registerModal(e => {
       discoverabilityFilter: null
     },
     sortConfig: {
-      columnName: Kq.NAME,
+      columnName: TeamPropertyKey.NAME,
       isReversed: !1
     },
     membersMap: {},
@@ -1188,7 +1188,7 @@ function eB(e, t, i, a, s, o, l = !1) {
         draftsToMove: e && !t ? [fileEntityDataMapper.toLiveGraph(e)] : [],
         onMoveSuccess: a?.handlesVisualBell ? a.callback : void 0,
         onClose: () => i(hideModal()),
-        setSynchronousFileTransferInProgress: lQ
+        setSynchronousFileTransferInProgress: noop
       }
     }));
   }

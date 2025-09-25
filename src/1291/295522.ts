@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { renderI18nText } from "../905/303541";
 import { lW } from "../figma_app/850075";
@@ -7,7 +7,7 @@ import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { E } from "../905/511388";
 let c = {
   communitySourceText: {
-    ...g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     textOverflow: "xlyipyv",
     $$css: !0

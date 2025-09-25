@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, createRef } from "react";
 import { debounce } from "../905/915765";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { RecordingPureComponent, handleDragEvent } from "../figma_app/878298";
 let l = () => !0;
 let d = {
@@ -16,9 +16,9 @@ let $$c0 = forwardRef(function (e, t) {
     ...e,
     forwardedRef: t,
     isDragTarget: l,
-    onTargetDragEnter: lQ,
-    onTargetDragLeave: lQ,
-    onTargetDrop: lQ
+    onTargetDragEnter: noop,
+    onTargetDragLeave: noop,
+    onTargetDrop: noop
   });
 });
 export class $$u1 extends RecordingPureComponent {

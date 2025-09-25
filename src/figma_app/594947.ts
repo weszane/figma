@@ -170,4 +170,4 @@ export const Bf = ConfigManagerProxy
 export const iO = DynamicConfig
 export const w$ = FrozenConfigManager
 
-export { fetchDynamicConfig, FrozenConfigManager }
+export { fetchDynamicConfig, FrozenConfigManager, getInitialDynamicConfig }

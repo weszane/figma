@@ -6,7 +6,7 @@ import { E as _$$E } from "../905/53857";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tw } from "../figma_app/755939";
 import { useSelectedAndFocusedNodeIds } from "../figma_app/334505";
@@ -73,7 +73,7 @@ export function $$N2() {
       })
     }),
     isShowing,
-    media: jsx(oW, {
+    media: jsx(WAFImage, {
       src: buildUploadUrl(N ? "e612d68148023be0522bcd3b3251aaa6bb7c716d" : "31fcc873278da276aab06196bdcb7e377d28ab6e"),
       alt: getI18nString("cooper.onboarding.welcome.image_alt"),
       width: 332

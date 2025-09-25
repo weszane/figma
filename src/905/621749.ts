@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { p as _$$p } from "../905/636263";
 import { e as _$$e } from "../905/295932";
 import { a as _$$a } from "../905/676930";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
@@ -336,7 +336,7 @@ export let $$z0 = registerModal(function ({
   let i = useStarterGlobalFileLimitsExperiment();
   let y = useSelector(e => {
     let t = e.teamBilling.summary.annual_subscription?.current_period_end || e.teamBilling.summary.monthly_subscription?.current_period_end;
-    return t ? _$$A(t).format("LL") : void 0;
+    return t ? dayjs(t).format("LL") : void 0;
   });
   let b = useDispatch();
   let [I, N] = useState(!1);

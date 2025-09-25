@@ -1,7 +1,7 @@
 import { ColorSpaceEnum, ColorConversionEnum, Fullscreen } from "../figma_app/763686";
 import { jg } from "../905/707098";
 import { nk } from "../905/432392";
-import { t2 } from "../905/8035";
+import { isNotNull } from "../905/8035";
 import { FormatDisplayP3Color } from "../905/248569";
 import { kz } from "../905/77776";
 export let $$d0 = {
@@ -16,7 +16,7 @@ function u(e) {
 }
 function p(e) {
   let t = e.a;
-  return t2(t) && 1 !== t;
+  return isNotNull(t) && 1 !== t;
 }
 export function $$m1(e, t = 0) {
   return `${nk(100 * e, t)}%`;

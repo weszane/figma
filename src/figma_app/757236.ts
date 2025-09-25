@@ -2,19 +2,19 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import a, { ImageSourceType } from "../905/585727";
 import { assertNotNullish, throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { c as _$$c } from "../905/752260";
 import { ComponentPropsAiCPPBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText } from "../905/303541";
 import { cortexAPI } from "../figma_app/432652";
-import { B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { sZ } from "../figma_app/948389";
-import { Lg, Aq } from "../905/843553";
+import { TooManyNodesError, NoDuplicateNodesError } from "../905/843553";
 import { F1, LJ } from "../figma_app/757114";
 import { c as _$$c2 } from "../905/932790";
-import { i2 } from "../905/913055";
+import { getSelectedNodesWithinBreakpointFrame } from "../905/913055";
 import { useSceneGraphSelection } from "../figma_app/722362";
 import { JT, KL } from "../figma_app/632248";
 import { s as _$$s, w as _$$w } from "../905/286488";
@@ -90,7 +90,7 @@ function k({
   let L = RL(JT.IMAGE_FILL, F1);
   let D = useMemo(() => {
     if (getFeatureFlags().aip_content_fill_image && I) {
-      let e = i2();
+      let e = getSelectedNodesWithinBreakpointFrame();
       return LJ(e);
     }
     return [];
@@ -105,7 +105,7 @@ function k({
   let F = () => {
     let e = [];
     if (getFeatureFlags().aip_content_fill_image) {
-      let t = i2();
+      let t = getSelectedNodesWithinBreakpointFrame();
       e = LJ(t);
     }
     addPromptToHistory(_);
@@ -274,7 +274,7 @@ function $$F({
   return jsx(k, {
     aiTrackingContext,
     onChangePrompt: t,
-    onMakeChanges: lQ,
+    onMakeChanges: noop,
     onRun: u,
     onUndo: _,
     prompt: e,
@@ -295,11 +295,11 @@ function j(e) {
   } = r;
   let l = tasks.length;
   let d = tasks.filter(e => e.state === z8.FAILED).length;
-  return error instanceof Vz || error instanceof Lg || sZ(error) === B.CONTENT_LENGTH_LIMIT ? jsx(_$$E, {
+  return error instanceof Vz || error instanceof TooManyNodesError || sZ(error) === ErrorType.CONTENT_LENGTH_LIMIT ? jsx(_$$E, {
     error,
     aiTrackingContext: r.aiTrackingContext,
     customMessage: renderI18nText("ai.error.content_length_limit")
-  }) : (error instanceof Jd && (t = renderI18nText("fullscreen_actions.ai_content_fill.missing_font")), error instanceof Aq) ? jsx(_$$E, {
+  }) : (error instanceof Jd && (t = renderI18nText("fullscreen_actions.ai_content_fill.missing_font")), error instanceof NoDuplicateNodesError) ? jsx(_$$E, {
     error,
     aiTrackingContext: r.aiTrackingContext,
     customMessage: renderI18nText("fullscreen_actions.ai_content_fill.no_duplicates_to_replace_error")
@@ -311,7 +311,7 @@ function j(e) {
     aiTrackingContext,
     customMessage: t,
     secondaryMessage: i
-  }) : sZ(error) === B.UNSAFE_OR_HARMFUL_CONTENT ? jsx(_$$E, {
+  }) : sZ(error) === ErrorType.UNSAFE_OR_HARMFUL_CONTENT ? jsx(_$$E, {
     error: r.error,
     secondaryMessage: i,
     aiTrackingContext

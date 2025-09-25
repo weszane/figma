@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { Xr } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
@@ -78,7 +78,7 @@ export function $$S0(e) {
       children: [jsx(TextWithTruncation, {
         truncate: !0,
         children: jsx("span", {
-          ...Ay.props(_$$g.textBodyMediumStrong),
+          ...Ay.props(textDisplayConfig.textBodyMediumStrong),
           children: k
         })
       }), jsx(w, {

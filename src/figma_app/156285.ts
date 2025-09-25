@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { DistributionType, Thumbnail, NodePropertyCategory, Fullscreen } from "../figma_app/763686";
 import { defaultSessionLocalIDString, sessionLocalIDToString, defaultSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -157,7 +157,7 @@ let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function () {
       } : e;
     });
   }, [i, r, a]);
-} : lQ;
+} : noop;
 let $$G6 = setupRemovableAtomFamily(() => atom(null));
 export function $$V9() {
   let [e, t] = useAtomValueAndSetter(Vi);

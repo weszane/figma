@@ -2,7 +2,7 @@ import b from 'classnames';
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { um } from '../905/14223';
+import { fetchContactsOptimist } from '../905/14223';
 import { ModalCloseButton } from '../905/17223';
 import { d as _$$d2 } from '../905/49800';
 import { rw } from '../905/54367';
@@ -23,7 +23,7 @@ import { k as _$$k } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { AutoLayout } from '../905/470281';
 import { OJ } from '../905/519092';
-import { ex as _$$ex } from '../905/524523';
+import { registerTooltip } from '../905/524523';
 import { r6 } from '../905/542608';
 import { DashboardSections, NavigationRoutes } from '../905/548208';
 import { AccessLevelEnum } from '../905/557142';
@@ -97,7 +97,7 @@ import { A as _$$A4 } from '../svg/443105';
 import { A as _$$A8 } from '../svg/783902';
 import { A as _$$A2 } from '../svg/977613';
 let y = b;
-let F = _$$ex('restricted_edu_tooltip', e => {
+let F = registerTooltip('restricted_edu_tooltip', e => {
   let {
     text,
     title
@@ -1382,7 +1382,7 @@ let $$tT0 = registerModal(e => {
   let x = useSelector(e => e.teams[h.team.id]);
   let f = useSelector(e => e.avatarEditorState);
   if (useEffect(() => {
-    t(um());
+    t(fetchContactsOptimist());
   }, [t]), useEffect(() => {
     x && t(tj({
       teamId: x.id,

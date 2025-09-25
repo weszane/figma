@@ -15,7 +15,7 @@ import { ServiceCategories } from '../905/165054';
 import { R as _$$R2 } from '../905/165069';
 import { h as _$$h } from '../905/207101';
 import { U as _$$U } from '../905/275247';
-import { w as _$$w2 } from '../905/281010';
+import { accountTypeRequestHandler } from '../905/281010';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { collaboratorSet } from '../905/332483';
@@ -42,7 +42,8 @@ import { AutoLayout } from '../905/470281';
 import { OrganizationType } from '../905/833838';
 import { useCurrentUserOrg } from '../905/845253';
 import { selectViewAction } from '../905/929976';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';
+;
 import { O as _$$O2 } from '../905/936515';
 import { styleBuilderInstance } from '../905/941192';
 import { ck } from '../905/952832';
@@ -1009,7 +1010,7 @@ function tu({
         numRequestsToApprove: e5,
         filteredRowCount: e4,
         isELA: eQ,
-        onConfirm: y ? lQ : () => {
+        onConfirm: y ? noop : () => {
           tp({
             approve: !0,
             approveAll: !0,
@@ -1065,7 +1066,7 @@ function tu({
   }) => {
     F(e => new Set(e).add(t));
     E(e ? 'approving' : 'declining');
-    let r = e ? _$$w2.approveRequests.bind(_$$w2) : _$$w2.denyRequests.bind(_$$w2);
+    let r = e ? accountTypeRequestHandler.approveRequests.bind(accountTypeRequestHandler) : accountTypeRequestHandler.denyRequests.bind(accountTypeRequestHandler);
     let l = e9.find(e => e.id === t);
     r({
       plan_id: Q,
@@ -1166,7 +1167,7 @@ function tu({
       s && Y(e => e + 1);
       f && j(!1);
     };
-    e ? _$$w2.approveRequests.bind(_$$w2)(o).then(e => {
+    e ? accountTypeRequestHandler.approveRequests.bind(accountTypeRequestHandler)(o).then(e => {
       if (d(e.status, e.data.meta.failed_attempts, e.data.meta.successful_attempts), i) {
         let t = e.data.meta.processed_request_ids;
         $(e => new Set([...e, ...new Set(t)]));
@@ -1179,7 +1180,7 @@ function tu({
         matchType: tl
       }));
       c();
-    }) : _$$w2.denyRequests.bind(_$$w2)(o).then(e => {
+    }) : accountTypeRequestHandler.denyRequests.bind(accountTypeRequestHandler)(o).then(e => {
       d(e.status, e.data.meta.failed_attempts, e.data.meta.successful_attempts);
     }).catch(() => {
       dispatchGenericError();
@@ -1247,7 +1248,7 @@ function tu({
                 variant: 'primary',
                 onClick: () => {
                   if (e4 === null || e5 === null) return;
-                  let t = y ? lQ : () => tp({
+                  let t = y ? noop : () => tp({
                     approve: !0,
                     approveAll: !0,
                     selectedRequestIds: []

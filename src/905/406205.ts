@@ -1,8 +1,8 @@
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { LinkPrimitive } from "../figma_app/496441";
 import { resourceUtils } from "../905/989992";
 import d from "classnames";
@@ -25,7 +25,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { trackNavTreeClicked, trackFileClicked } from "../figma_app/976345";
-import { R as _$$R } from "../905/731725";
+import { setupFolderPreviewHandler } from "../905/731725";
 import { W as _$$W } from "../905/95038";
 import { E as _$$E2 } from "../905/391888";
 import { t as _$$t2 } from "../905/53773";
@@ -60,7 +60,7 @@ import { X as _$$X } from "../905/718513";
 import { A as _$$A } from "../5724/361376";
 import { A as _$$A2 } from "../5724/663128";
 var c = d;
-let eo = ex("team_folder_rename", function (e) {
+let eo = registerTooltip("team_folder_rename", function (e) {
   let {
     folderId
   } = e;
@@ -168,12 +168,12 @@ function em(e) {
   IT(F);
   return jsx("div", {
     className: e.inItemsView ? "folder_list_card--folderCardInItemsView--9JpPY" : "folder_list_card--folderCard--f45e1",
-    onClick: e.inItemsView ? lQ : e => {
+    onClick: e.inItemsView ? noop : e => {
       e.preventDefault();
       e.stopPropagation();
       (2 === e.detail || BrowserInfo.mobile || BrowserInfo.tablet) && w(e);
     },
-    onContextMenu: e.inItemsView ? lQ : i => {
+    onContextMenu: e.inItemsView ? noop : i => {
       i.stopPropagation();
       i.preventDefault();
       let n = {
@@ -253,7 +253,7 @@ export function $$eh1(e) {
 export function $$eg0(e) {
   let t = useSelector(t => _$$Z(t, e.folder));
   let i = getSelectedView();
-  let r = _$$R({
+  let r = setupFolderPreviewHandler({
     folderId: e.folder.id,
     shouldShowOnlyTrashedFiles: "trashedFolders" === i.view
   });

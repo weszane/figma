@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import n from "classnames";
 import { logError, logWarning } from "../905/714362";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { isPluginResource, isWidgetResource } from "../figma_app/427318";
 import { Ek } from "../905/483217";
 import { Sl } from "../figma_app/578832";
@@ -26,12 +26,12 @@ export function $$p0({
       [zn]: _
     }),
     image: e,
-    onLoad: lQ,
+    onLoad: noop,
     hubFileId: r,
     alt: n,
     thumbnailContext: c,
     resizedThumbnailUrls: t
-  }) : e ? p = jsx(oW, {
+  }) : e ? p = jsx(WAFImage, {
     className: o()(mH, {
       [zn]: _
     }),
@@ -58,7 +58,7 @@ export function $$h3({
   altText: t,
   resourceId: r
 }) {
-  return jsx(oW, {
+  return jsx(WAFImage, {
     className: mH,
     src: e,
     loading: "lazy",

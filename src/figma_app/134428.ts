@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { createLocalStorageAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import { useStorageEventSync } from "../905/657224";
 import { useIsFullscreenSitesView } from "../905/561485";
@@ -20,7 +20,7 @@ export function $$u1() {
     shouldSyncValue: r
   });
   let u = useIsFullscreenSitesView();
-  return useMemo(() => u ? ["grid", lQ] : [e, t], [e, u, t]);
+  return useMemo(() => u ? ["grid", noop] : [e, t], [e, u, t]);
 }
 let p = "asset-panel-show-folders";
 let _ = createLocalStorageAtom(p, !1);

@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hZ, cL } from "../905/748726";
-import { um } from "../905/14223";
+import { fetchContactsOptimist } from "../905/14223";
 import { selectUser } from "../905/372672";
 import { yI, t9 } from "../905/915142";
 import { initialDomainsState } from "../905/158283";
@@ -14,7 +14,7 @@ export function $$c0({
   let p = useSelector(e => e.contacts);
   let u = selectUser();
   useEffect(() => {
-    c(um());
+    c(fetchContactsOptimist());
   }, [c]);
   let _ = t ?? initialDomainsState;
   let m = useCallback(e => yI(e, p.usersByEmail[e] || e, null, _, u.email), [p.usersByEmail, u.email, _]);

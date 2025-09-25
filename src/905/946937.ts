@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogBody, DialogHeader, DialogTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -106,7 +106,7 @@ export let $$V0 = registerModal(function (e) {
 function G(e) {
   let t = _$$R();
   let i = useModalManager({
-    onClose: lQ,
+    onClose: noop,
     open: !0,
     preventUserClose: !0
   });

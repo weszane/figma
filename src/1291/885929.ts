@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { fG } from "../figma_app/973927";
 import { Cn } from "../905/862913";
@@ -50,7 +50,7 @@ export function $$y1(e) {
             })
           }), jsx(Wh.Center, {
             children: jsx(_$$i, {
-              insertTemplate: lQ,
+              insertTemplate: noop,
               isInsertingTemplate: e.isInsertingTemplate,
               shouldUseOpaqueBackground: !0,
               children: Ve(e.templateInsertionLocation)
@@ -95,7 +95,7 @@ export function $$j0() {
     }),
     bottomRow: jsx(dY.FigJamMetadata, {
       name: "\xa0",
-      onClick: lQ,
+      onClick: noop,
       publishers: []
     })
   });

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
@@ -38,7 +38,7 @@ function C({
       isBold: !0,
       fixedWidth: 316,
       arrowPosition: F_.BOTTOM,
-      onTargetLost: lQ,
+      onTargetLost: noop,
       children: jsx(mI, {
         bodyText: jsx("span", {
           style: {

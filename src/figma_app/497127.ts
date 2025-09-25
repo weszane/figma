@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { IconButton } from "../905/443068";
 import { C } from "../905/520159";
 import { BrowserInfo } from "../figma_app/778880";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -72,7 +72,7 @@ export function $$f0({
             isInsertingTemplate: E(e.fileKey)
           }, e.fileKey))
         })
-      }), jsx(_$$a, {
+      }), jsx(IntersectionSentinel, {
         className: cssBuilderInstance.relative.$,
         style: {
           bottom: "250px"

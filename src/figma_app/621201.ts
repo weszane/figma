@@ -1,5 +1,5 @@
 import { atomStoreManager } from "../figma_app/27355";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { y } from "../905/958284";
 import { FC } from "../figma_app/502422";
 import { FP } from "../905/98947";
@@ -12,7 +12,7 @@ export function $$u1() {
 export let $$p0 = new m("LimitDevModeUpsellFrequency", "Prevent showing more than on dev mode upsell in a 24 hour period", (e, t) => {
   if (atomStoreManager.get(FP)) return !1;
   let r = y(t.id);
-  return !c.has(r) || !e.lastSeenDevModeUpsell || !(e.lastSeenDevModeUpsell > A().subtract(1, "day").toDate());
+  return !c.has(r) || !e.lastSeenDevModeUpsell || !(e.lastSeenDevModeUpsell > dayjs().subtract(1, "day").toDate());
 });
 export const RI = $$p0;
 export const o9 = $$u1;

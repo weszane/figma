@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
-import { a as _$$a } from '../905/10468';
+import { UserAuthList } from '../905/10468';
 import { isSuccess, isLoading } from '../905/18797';
 import { UserAPIHandlers } from '../905/93362';
 import { popModalStack } from '../905/156213';
@@ -25,7 +25,7 @@ import { appendSearchParam } from '../905/508367';
 import { ZD } from '../905/519092';
 import { Button } from '../905/521428';
 import { FlashActions } from '../905/573154';
-import { k as _$$k } from '../905/585996';
+import { CustomSpacer } from '../905/585996';
 import { customHistory } from '../905/612521';
 import { k as _$$k2 } from '../905/644504';
 import { I8, TA } from '../905/667970';
@@ -36,7 +36,8 @@ import { Q9 } from '../905/773401';
 import { AuthAction, AuthErrorCode, AuthField, AuthFlowStep, AuthProvider, ClientPlatform } from '../905/862321';
 import { t as _$$t2 } from '../905/897919';
 import { XHR } from '../905/910117';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';
+;
 import { styleBuilderInstance } from '../905/941192';
 import { f1, Iu, Ng, q_ } from '../905/997533';
 import { A as _$$A5 } from '../1617/720259';
@@ -418,14 +419,14 @@ function H(e) {
       type: 'hidden',
       name: 'saml_session_id',
       value: y
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsx(k, {
       type: 'submit',
       loading: e.auth.loading,
       className: 'two_factor--wideButton--4uVoN auth_view--wideButton--Db9su auth_view--fullWidth--ffDfw',
       children: getI18nString('auth.two-factor.log-in')
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsxs('div', {
       className: 'two_factor--center--c14hu',
@@ -439,7 +440,7 @@ function H(e) {
             o(!0);
           },
           children: e.auth.hint ? renderI18nText('auth.two-factor.resend-sms-code') : renderI18nText('auth.two-factor.send-sms-code')
-        }), jsx(_$$k, {
+        }), jsx(CustomSpacer, {
           multiple: 2
         })]
       }), jsx(Link, {
@@ -505,14 +506,14 @@ function Q(e) {
       header: getI18nString('permissions.join_org.access_needed'),
       onSubmit: e.onFormSubmit,
       isLoading: void 0 === p,
-      children: [m, jsx(_$$k, {
+      children: [m, jsx(CustomSpacer, {
         multiple: 2
       }), jsx('div', {
         className: X,
         children: renderI18nText('permissions.join_org.ask_an_org_admin', {
           orgName: p
         })
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 4
       }), jsx(Q9, {
         name: 'request_org_access_modal_cta',
@@ -539,14 +540,14 @@ function Q(e) {
         fullWidth: !1,
         loading: s,
         children: renderI18nText('permissions.join_org.ask_to_be_added')
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 4
       }), jsx('div', {
         className: 'join_org--modalFooter--1qtlt',
         children: renderI18nText('permissions.join_org.you_are_requesting_to_be_added_as_email', {
           email: d.email
         })
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 1
       }), jsx('div', {
         className: 'join_org--link--cdSS1',
@@ -577,13 +578,13 @@ function et(e) {
     children: [jsx(ZH, {
       ...e,
       showUpdatedInputDesign: !0
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsx(k, {
       loading: e.auth.loading,
       disabled: !isValidEmail(e.auth.email),
       children: getI18nString('auth.password-reset.reset-password-button')
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsx('div', {
       className: ee,
@@ -650,7 +651,7 @@ function en(e) {
       autoCorrect: 'off',
       isInvalid: AuthField.PASSWORD === e.auth.invalidInput,
       showUpdatedInputDesign: !0
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 3
     }), jsx(gK, {
       name: 'password_retype',
@@ -660,12 +661,12 @@ function en(e) {
       autoCorrect: 'off',
       isInvalid: AuthField.PASSWORD === e.auth.invalidInput,
       showUpdatedInputDesign: !0
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 4
     }), jsx(k, {
       loading: e.auth.loading,
       children: getI18nString('auth.password-reset.submit')
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 4
     }), jsx('div', {
       className: 'password_reset--center--Z4tPu',
@@ -742,7 +743,7 @@ function ey(e) {
       children: [jsx('h1', {
         className: ec,
         children: getI18nString('auth.go-to-browser-to-complete-login')
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 3
       }), jsxs('div', {
         className: y()(em, eh),
@@ -766,7 +767,7 @@ function ey(e) {
       children: [jsx('h1', {
         className: ec,
         children: e.header ?? getI18nString('auth.welcome-to-figma')
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 3
       }), e.auth.error && jsxs(Fragment, {
         children: [jsx(_$$T, {
@@ -775,12 +776,12 @@ function ey(e) {
             className: 'app_auth--error--EpXOP',
             children: e.auth.error
           })
-        }), jsx(_$$k, {
+        }), jsx(CustomSpacer, {
           multiple: 1
         })]
       }), e.subtitle && jsxs('div', {
         className: 'app_auth--subtitle--Z5k4f auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw',
-        children: [e.subtitle, jsx(_$$k, {
+        children: [e.subtitle, jsx(CustomSpacer, {
           multiple: 1
         })]
       }), jsx(k, {
@@ -790,7 +791,7 @@ function ey(e) {
           e_(!1, e.appType, d, l);
         },
         children: getI18nString('auth.log-in-with-browser')
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 4
       }), jsxs('div', {
         className: y()(em, eh),
@@ -904,13 +905,13 @@ function eb(e) {
         children: renderI18nText('auth.log-in-with-account', {
           email: C
         })
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 3
       }), jsx(R, {
         className: 'app_auth--redeemButton--Uh-Db',
         onClick: () => A(w.id),
         children: i
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 4
       }), jsx('div', {
         className: y()(em, eh),
@@ -931,7 +932,7 @@ function eb(e) {
           })
         })
       })]
-    }) : jsx(_$$a, {
+    }) : jsx(UserAuthList, {
       dispatch: d,
       header: s,
       users: e.auth.appAuthUsers,
@@ -954,7 +955,7 @@ function eb(e) {
           className: ec,
           children: [getI18nString('auth.your-login-session-has-expired'), jsx('br', {}), i]
         })
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 3
       }), jsx(R, {
         onClick: () => {
@@ -1053,7 +1054,7 @@ function ex({
       children: c
     })
   }) : renderI18nText('auth.account-picker');
-  return jsx(_$$a, {
+  return jsx(UserAuthList, {
     dispatch: t,
     users: s.authed_users,
     hints: s.authed_user_access_reason,
@@ -1082,7 +1083,7 @@ function eP(e) {
     children: [jsx(ZH, {
       ...e,
       showUpdatedInputDesign: !0
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 4
     }), jsx(k, {
       type: 'submit',
@@ -1100,7 +1101,7 @@ function eD() {
       header: getI18nString('auth.cookies_are_disabled'),
       subtitle: getI18nString('auth.cookies_are_required_to_use_figma'),
       id: 'enable-cookies-form',
-      onSubmit: lQ,
+      onSubmit: noop,
       children: jsx(R, {
         trackingProperties: {
           trackingDescriptor: UpgradeAction.TRY_AGAIN
@@ -1154,7 +1155,7 @@ function ej(e) {
       ...e,
       showDomainSuggestions: !0,
       showUpdatedInputDesign: !0
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsx(k, {
       type: 'submit',
@@ -1162,7 +1163,7 @@ function ej(e) {
       loading: e.auth.loading,
       disabled: !isValidEmail(e.auth.email),
       children: getI18nString('auth.saml-start.log-in-plain')
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsx('div', {
       className: ew,
@@ -1199,7 +1200,7 @@ function eB(e) {
         children: r
       })
     }), e.onForgotPassword && jsxs(Fragment, {
-      children: [jsx(_$$k, {
+      children: [jsx(CustomSpacer, {
         multiple: 2
       }), jsx('div', {
         className: ek,
@@ -1210,7 +1211,7 @@ function eB(e) {
         })
       })]
     }), e.onChangeFormClick && jsxs(Fragment, {
-      children: [jsx(_$$k, {
+      children: [jsx(CustomSpacer, {
         multiple: 2
       }), jsx('div', {
         className: ek,
@@ -1308,7 +1309,7 @@ function ez(e) {
       className: f,
       id: 'email-error-text',
       children: auth.error
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsx(Wv, {
       showUpdatedInputDesign: !0,
@@ -1322,7 +1323,7 @@ function ez(e) {
       type: 'hidden',
       name: 'email_token',
       value: h
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 3
     }), jsx(R, {
       type: 'submit',
@@ -1331,10 +1332,10 @@ function ez(e) {
         trackingDescriptor: e.isSignUp ? UpgradeAction.SIGN_UP : UpgradeAction.LOGIN
       },
       children: e.submitText
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), e.isSignUp && jsxs(Fragment, {
-      children: [jsx(_$$k, {
+      children: [jsx(CustomSpacer, {
         multiple: 2
       }), jsx('div', {
         className: 'x78zum5 x6s0dn4 xl56j7k xfifm61',
@@ -1352,7 +1353,7 @@ function ez(e) {
             children: getI18nString('auth.footer-sign-up-switch-form-link')
           })]
         })
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 4
       })]
     }), c ? jsx(eB, {
@@ -1441,7 +1442,7 @@ function eX(e) {
       className: r,
       id: 'email-error-text',
       children: auth.error
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 3
     }), jsx(R, {
       type: 'submit',
@@ -1452,7 +1453,7 @@ function eX(e) {
       },
       children: e.submitText
     }), e.requiresGoogle && jsxs(Fragment, {
-      children: [jsx(_$$k, {
+      children: [jsx(CustomSpacer, {
         multiple: 3
       }), jsx('div', {
         className: cssBuilderInstance.flex.$,
@@ -1605,7 +1606,7 @@ function eJ(e) {
       },
       loading: e.auth.loading,
       children: getI18nString('auth.sso-gate.log-in-saml')
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 4
     }), jsx('div', {
       className: ew,
@@ -1660,7 +1661,7 @@ function e2(e) {
     }), jsx('div', {
       className: e1,
       children: getI18nString('auth.validate-code.secondary-description')
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 3
     }), jsx(gK, {
       'autoComplete': 'off',
@@ -1678,13 +1679,13 @@ function e2(e) {
     }), e.auth.invalidInput === AuthField.VERIFICATION_CODE && e.auth.error && jsx('div', {
       className: 'validate_code--error--gBEWv auth_form--error--EtrjX auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw',
       children: e.auth.error
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsx(k, {
       loading: e.auth.loading,
       disabled: i.length !== 6,
       children: getI18nString('auth.validate-code.submit-button')
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsx('div', {
       className: 'validate_code--footerRow--CJ4m0',
@@ -1907,12 +1908,12 @@ function te() {
       })
     }), d ? jsxs('p', {
       className: c,
-      children: [jsx(_$$k, {
+      children: [jsx(CustomSpacer, {
         multiple: 2
       }), renderI18nText('auth.magic_link_check_email.body_login_with_code')]
     }) : null, d ? jsxs('form', {
       onSubmit: v,
-      children: [jsx(_$$k, {
+      children: [jsx(CustomSpacer, {
         multiple: 2
       }), jsx(gK, {
         onChange: e => {
@@ -1925,7 +1926,7 @@ function te() {
         placeholder: getI18nString('auth.two-factor.authentication-code'),
         isInvalid: !b(p),
         showUpdatedInputDesign: !0
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 2
       }), jsx(k, {
         type: 'submit',

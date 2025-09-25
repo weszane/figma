@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { q } from "../905/600041";
-import { F, y } from "../905/171275";
+import { DesignsList, SizeOption } from "../905/171275";
 import s from "classnames";
 import { SvgComponent } from "../905/714743";
 import { A } from "../5724/971107";
@@ -26,27 +26,27 @@ function p({
   size: t
 }) {
   switch (e) {
-    case F.WHITEBOARD:
-    case F.DEFAULT_WHITEBOARD:
+    case DesignsList.WHITEBOARD:
+    case DesignsList.DEFAULT_WHITEBOARD:
       return jsx(c, {
         additionalClassName: o()("thumbnail_locked_icon--keyCircleWhiteboard--LThE1", {
-          [u]: t === y.SMALL
+          [u]: t === SizeOption.SMALL
         })
       });
-    case F.PROTOTYPE:
+    case DesignsList.PROTOTYPE:
       return jsx(c, {
         additionalClassName: o()("thumbnail_locked_icon--keyCirclePrototype--an6UQ", {
-          [u]: t === y.SMALL
+          [u]: t === SizeOption.SMALL
         }),
         iconClassName: "thumbnail_locked_icon--keyCirclePrototypeIcon--VYwDO"
       });
-    case F.OFFLINE:
-    case F.DESIGN:
-    case F.DEFAULT_DESIGN:
+    case DesignsList.OFFLINE:
+    case DesignsList.DESIGN:
+    case DesignsList.DEFAULT_DESIGN:
     default:
       return jsx(c, {
         additionalClassName: o()("thumbnail_locked_icon--keyCircleDesign--HClG5", {
-          [u]: t === y.SMALL
+          [u]: t === SizeOption.SMALL
         })
       });
   }
@@ -59,11 +59,11 @@ export function $$m0({
 }) {
   let o;
   switch (e) {
-    case F.WHITEBOARD:
-    case F.DEFAULT_WHITEBOARD:
+    case DesignsList.WHITEBOARD:
+    case DesignsList.DEFAULT_WHITEBOARD:
       o = "locked_thumbnail--lockedWhiteboardBackground--GH-Yl";
       break;
-    case F.PROTOTYPE:
+    case DesignsList.PROTOTYPE:
       o = "locked_thumbnail--lockedPrototypeBackground---DSZl";
       break;
     default:

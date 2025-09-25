@@ -86,11 +86,12 @@ import { ProjectDevelopmentPhases } from '../905/869235';
 import { m as _$$m } from '../905/871166';
 import { areSessionLocalIDsEqual, sessionLocalIDToString } from '../905/871411';
 import { XHR } from '../905/910117';
-import { A as _$$A0 } from '../905/920142';
+import { dayjs } from '../905/920142';
 import { selectViewAction } from '../905/929976';
 import { $n as _$$$n } from '../905/930279';
 import { q as _$$q } from '../905/932270';
-import o, { lQ } from '../905/934246';
+import o, { noop } from 'lodash-es';
+;
 import { fileEntityDataMapper } from '../905/943101';
 import { a as _$$a } from '../905/964520';
 import { filesByLibraryKeyAtom } from '../905/977779';
@@ -1379,9 +1380,9 @@ let tw = memo(e => {
       header: getFeatureFlags().branching_system_updates_copy ? getI18nString('collaboration.branching_chunk.non_visible_updates') : 'System improvements',
       images: {},
       initiallyCollapsed: !1,
-      onAllChunksRendered: lQ,
-      onChangeVisibleGroups: lQ,
-      onChunkClick: lQ,
+      onAllChunksRendered: noop,
+      onChangeVisibleGroups: noop,
+      onChunkClick: noop,
       pageIdToInfo: {},
       systemImprovements
     }, 'system')
@@ -1511,7 +1512,7 @@ function tM({
   let t = tD(e.detailDisplayGroup);
   return jsx(tO, {
     selected: !0,
-    onClick: lQ,
+    onClick: noop,
     header: t
   });
 }
@@ -2040,7 +2041,7 @@ function ik({
     className: 'variables_diff--booleanValue--TPFPs',
     children: [jsx(_$$d, {
       checked: e,
-      onChange: lQ,
+      onChange: noop,
       label: jsx(HiddenLabel, {
         children: e ? getI18nString('variables.values.boolean.true') : getI18nString('variables.values.boolean.false')
       })
@@ -2695,7 +2696,7 @@ function nf(e) {
           })]
         }), o && jsx('div', {
           className: 'reviewer_row--timestamp--hUbn-',
-          children: _$$A0(o).format('MMM DD YYYY h:mm a')
+          children: dayjs(o).format('MMM DD YYYY h:mm a')
         })]
       })]
     })
@@ -5668,7 +5669,7 @@ function rD(e) {
   return jsx(rO, {
     mergeDirection: e.mergeDirection,
     sourceCheckpointKey: e.sourceCheckpointKey,
-    onClose: lQ,
+    onClose: noop,
     preventUserClose: !0,
     children: jsx(wy, {
       children: jsxs('div', {

@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -20,7 +20,7 @@ import { Xg } from "../905/375175";
 import { SortField } from "../figma_app/756995";
 import { w4 } from "../905/445814";
 import { e as _$$e2 } from "../905/457828";
-import { y as _$$y } from "../905/171275";
+import { SizeOption } from "../905/171275";
 import { C as _$$C } from "../905/226458";
 import { A as _$$A } from "../905/100919";
 function _(e) {
@@ -92,14 +92,14 @@ function E(e) {
     }), jsx(TextWithTruncation, {
       truncate: !0,
       children: jsx("span", {
-        ...Ay.props(_$$g.textBodyMedium),
+        ...Ay.props(textDisplayConfig.textBodyMedium),
         children: t
       })
     })]
   }) : jsx(TextWithTruncation, {
     truncate: !0,
     children: jsx("span", {
-      ...Ay.props(_$$g.textBodyMedium),
+      ...Ay.props(textDisplayConfig.textBodyMedium),
       children: "--"
     })
   });
@@ -118,7 +118,7 @@ function N(e) {
         })
       }), jsx(_$$e2, {
         tile: e.tile,
-        size: _$$y.SMALL,
+        size: SizeOption.SMALL,
         borderRadius: 4
       })]
     }), jsx("div", {
@@ -166,7 +166,7 @@ export function $$D1({
   return jsx(TextWithTruncation, {
     truncate: e,
     children: jsx("span", {
-      ...Ay.props(_$$g.textBodyMedium),
+      ...Ay.props(textDisplayConfig.textBodyMedium),
       children: t
     })
   });

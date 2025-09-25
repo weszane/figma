@@ -8,15 +8,15 @@ import { Q } from "../1250/220026";
 import { q } from "../905/838985";
 import { _ as _$$_ } from "../905/563242";
 import { e as _$$e } from "../905/149844";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import f from "classnames";
 import { openWindow } from "../905/508367";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { A as _$$A } from "../905/615098";
-import { F as _$$F } from "../905/171275";
+import { DesignsList } from "../905/171275";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -88,7 +88,7 @@ export function $$q8({
           children: jsx(_$$A, {
             thumbnailUrl: n,
             additionalThumbnailUrls: r || [],
-            thumbnailType: _$$F.COOPER,
+            thumbnailType: DesignsList.COOPER,
             noBorder: !0
           })
         }) : jsx("div", {
@@ -170,7 +170,7 @@ export function $$H7({
       hasVideo: l,
       children: jsx("span", {
         className: cssBuilderInstance.flex.justifyCenter.itemsCenter.overflowHidden.wFull.hFull.$,
-        children: jsx(oW, {
+        children: jsx(WAFImage, {
           onLoad: () => {
             c(!0);
           },
@@ -202,7 +202,7 @@ export function $$H7({
 }
 let K = {
   assetTypeName: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     $$css: !0
   }
@@ -256,7 +256,7 @@ export function $$Q6({
           style: o < 2.5 && o > .4 ? {
             aspectRatio: dimension.x / dimension.y
           } : void 0,
-          children: t && jsx(oW, {
+          children: t && jsx(WAFImage, {
             src: t,
             alt: name,
             draggable: !1,
@@ -306,7 +306,7 @@ export function $$Z5({
       ...d,
       children: [t ? jsx("div", {
         className: F,
-        children: jsx(oW, {
+        children: jsx(WAFImage, {
           src: t,
           alt: name,
           draggable: !1,

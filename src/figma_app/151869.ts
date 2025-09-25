@@ -10,7 +10,7 @@ import { t as _$$t2 } from "../905/241707";
 import { sQ } from "../905/191741";
 import { isCodegenSupportedForLanguage, getScaledValueWithUnit } from "../figma_app/120227";
 import { v as _$$v } from "../905/50227";
-import { OX } from "../905/232489";
+import { toSlug } from "../905/232489";
 import { lW } from "../figma_app/11182";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { getColorFormat } from "../figma_app/740163";
@@ -134,7 +134,7 @@ export function $$j12(e) {
   e.copyPairs = r;
   let n = ["true", "false", "nil", "null"];
   function l(e, t) {
-    return `var(--${OX(t)}, ${e})`;
+    return `var(--${toSlug(t)}, ${e})`;
   }
   e.unquoteEnumerableValues = function (e) {
     return e.map(e => {

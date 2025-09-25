@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { Button } from "../905/521428";
 import { ButtonPrimitive } from "../905/632989";
 import { Multiplayer } from "../figma_app/763686";
@@ -20,7 +20,7 @@ import { getSelectedViewType } from "../figma_app/386952";
 import { a as _$$a } from "../905/298663";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { useIsFullscreenSitesView } from "../905/561485";
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 let w = "view_user_profile_tooltip--base--SgkjR tooltip--column--zo-M5 text--fontPos11--2LvXf text--_fontBase--QdLsd";
 let C = "view_user_profile_tooltip--handle--RzZyC";
 let T = "view_user_profile_tooltip--userHandleAndLink--b3O-1 view_user_profile_tooltip--base--SgkjR tooltip--column--zo-M5 text--fontPos11--2LvXf text--_fontBase--QdLsd";
@@ -93,7 +93,7 @@ function O(e) {
 function D(e) {
   return jsx(P, {
     actionText: null,
-    actionCallback: lQ,
+    actionCallback: noop,
     userHandle: e.userHandle
   });
 }
@@ -237,7 +237,7 @@ let L = {
   },
   none: D
 };
-let $$F1 = ex("view_user_profile", function (e) {
+let $$F1 = registerTooltip("view_user_profile", function (e) {
   let {
     action,
     profileUrl,

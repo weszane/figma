@@ -29,7 +29,7 @@ import { J2, wG } from "../905/331989";
 import { B9 } from "../905/782020";
 import { getLocalVariableInfo, getLocalVariableSetInfo } from "../figma_app/633080";
 import { X as _$$X } from "../905/55424";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { f as _$$f } from "../37/573389";
 import en from "../vendor/73823";
 import { logError } from "../905/714362";
@@ -629,9 +629,9 @@ function eO({
         disabledVariableIds: new Set(),
         highlightedItemID: r,
         listItems: e,
-        onItemContextMenu: lQ,
+        onItemContextMenu: noop,
         onItemHighlight: p,
-        onItemMouseLeave: lQ,
+        onItemMouseLeave: noop,
         onItemSelect: e => {
           d();
           c.update(() => {

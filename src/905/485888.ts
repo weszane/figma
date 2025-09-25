@@ -4,7 +4,7 @@ import { debugState } from "../905/407919";
 import { applyCodeExtensionPreferences } from "../905/515076";
 import { isCopyExportAllowed } from "../figma_app/12796";
 import { o5, Cu, f$ } from "../figma_app/603466";
-import { R } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { getCurrentGRAtom, handlePluginError } from "../905/753206";
 import { hasLocalFileId } from "../figma_app/155287";
 import { findCodegenLanguage } from "../905/661977";
@@ -17,7 +17,7 @@ let m = class {
   }) {
     let c = i.pluginLanguage;
     if (applyCodeExtensionPreferences(e, c ? findCodegenLanguage(e, c) : null), !isCopyExportAllowed(n)) throw Error("Not allowed to run codegen");
-    return (await R.instance.enqueue({
+    return (await PluginManager.instance.enqueue({
       runPluginArgs: {
         plugin: e,
         command: "generate",

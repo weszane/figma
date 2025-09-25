@@ -7,7 +7,7 @@ import { setupThemeContext } from "../905/614223";
 import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atom } from "../figma_app/27355";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { customHistory } from "../905/612521";
 import { buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { XHR } from "../905/910117";
@@ -46,7 +46,7 @@ import { A as _$$A3 } from "../905/251970";
 import { resourceUtils } from "../905/989992";
 import Q from "classnames";
 import { k as _$$k3 } from "../905/582200";
-import { oW as _$$oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { x as _$$x } from "../905/211326";
 import { Ph } from "../905/160095";
 import { TrackingProvider } from "../figma_app/831799";
@@ -86,7 +86,7 @@ function ed(e) {
     let t = e.asset.bg ? {
       backgroundColor: e.asset.bg
     } : void 0;
-    return "image" === e.asset.type ? jsx(_$$oW, {
+    return "image" === e.asset.type ? jsx(WAFImage, {
       src: e.asset.src,
       className: X()("brand" === e.layoutStyle ? es : ei, {
         [er]: e.asset.noPaddingTop
@@ -494,7 +494,7 @@ export function $$ex0(e) {
   let y = useSelector(e => e.userAnalyticsData);
   let C = useSelector(e => e.selectedView);
   let w = x?.created_at;
-  let j = _$$A(w).add(14, "day").isSameOrAfter(_$$A());
+  let j = dayjs(w).add(14, "day").isSameOrAfter(dayjs());
   let k = isUserNotLoggedInAndEditorSupported();
   let P = WN();
   let T = useMemo(() => "prototype" === C.view ? void 0 : AppStateTsApi, [C.view]);

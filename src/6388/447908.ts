@@ -8,7 +8,7 @@ import { J } from "../905/129695";
 import { I as _$$I } from "../905/783004";
 import { _ as _$$_ } from "../905/144222";
 import { l as _$$l } from "../905/479687";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Fullscreen, PageSelectionType } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
@@ -17,7 +17,7 @@ import { TextImageEnum, useSelectedImageNodeGuids } from "../figma_app/334505";
 import { clearSelection } from "../figma_app/741237";
 import { KindEnum } from "../905/129884";
 import { I9 } from "../figma_app/151869";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 function E({
   data: e,
   blockEnabled: t,
@@ -61,7 +61,7 @@ function I({
     children: s.map((e, s) => createElement("div", {
       className: "x1n2onr6 x1l7klhg x1cpjm7i xtql2tq x1hmns74 x1y3wzot x1wlytlt xszcg87 x1rmj1tg xz8fyzm x1fo1fc9 xrhax15 x1ppfn1",
       key: s
-    }, jsx(oW, {
+    }, jsx(WAFImage, {
       src: e,
       alt: getI18nString("buzz.bulk_create.image_preview_alt", {
         count: s + 1
@@ -141,7 +141,7 @@ let w = {
     borderBottomRightRadius: null,
     backgroundColor: "x1v8gsql",
     color: "x1akne3o",
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -343,7 +343,7 @@ let A = {
   },
   titleBase: {
     color: "x1n0bwc9",
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textOverflow: "xlyipyv",
     overflow: "xb3r6kr",
     overflowX: null,

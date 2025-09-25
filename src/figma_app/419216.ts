@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useCallback, useEffect, forwardRef, useLayoutEffect } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { Button } from "../905/521428";
 import { setupThemeContext } from "../905/614223";
 import { defaultSessionLocalIDString } from "../905/871411";
@@ -346,7 +346,7 @@ export let $$k1 = forwardRef(function (e, t) {
     null != t && (t.current = e);
   }, [t]);
   let l = useRef(null);
-  let d = e.disableClickOutsideToHide ? lQ : e.dismissModal;
+  let d = e.disableClickOutsideToHide ? noop : e.dismissModal;
   ww(l, d);
   let c = useRef(null);
   let p = eP({

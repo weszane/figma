@@ -1,6 +1,6 @@
 import { useState, useCallback, useLayoutEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { MeasurementUnit } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
@@ -78,7 +78,7 @@ export function $$g0() {
     codeLanguageOptions: k,
     activeCodegenPlugin: C,
     formatter: T,
-    onCodeLanguageChange: lQ
+    onCodeLanguageChange: noop
   };
   let N = OQ;
   return {

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { useHandleChangeEvent, useHandleKeyboardEvent, useHandleGenericEvent } from "../figma_app/878298";
 import { LazyInputForwardRef } from "../905/408237";
 import { useSyncedRef } from "../905/633914";
@@ -13,7 +13,7 @@ export function $$p0({
   type: i,
   autoFocus: u = !1,
   noBorderOnFocus: p,
-  onCancel: m = lQ,
+  onCancel: m = noop,
   onChange: h,
   onSubmit: g,
   onFinish: f,

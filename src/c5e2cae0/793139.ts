@@ -12,7 +12,7 @@ import { P as _$$P } from '../905/347284';
 import { AutoLayout } from '../905/470281';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { Dd, OJ } from '../905/519092';
-import { ex } from '../905/524523';
+import { registerTooltip } from '../905/524523';
 import { getFeatureFlags } from '../905/601108';
 import { SvgComponent } from '../905/714743';
 import { showTooltip } from '../905/765855';
@@ -24,7 +24,7 @@ import { nR } from '../figma_app/60079';
 import { $L, us } from '../figma_app/136698';
 import { compareProductAccessTypes, getProductAccessTypeByKey } from '../figma_app/217457';
 import { logAndTrackCTA } from '../figma_app/314264';
-import { G } from '../figma_app/361869';
+import { renderCheckoutDevModeText } from '../figma_app/361869';
 import { CurrencyFormatter } from '../figma_app/514043';
 import { ButtonBasePrimary, FocusCheckbox } from '../figma_app/637027';
 import { mx } from '../figma_app/681712';
@@ -33,7 +33,7 @@ import { TrackingProvider } from '../figma_app/831799';
 import { ModalView } from '../figma_app/918700';
 import { A as _$$A } from '../svg/433566';
 import { A as _$$A2 } from '../svg/927263';
-let O = ex('org_upgrade_user_info_extended', ({
+let O = registerTooltip('org_upgrade_user_info_extended', ({
   teamIds: e,
   teamNames: t
 }) => {
@@ -275,7 +275,7 @@ registerModal(e => {
         }), r.shouldShowDevModeIncludedText && jsxs(Fragment, {
           children: [jsx(z, {
             height: 4
-          }), jsx(G, {})]
+          }), jsx(renderCheckoutDevModeText, {})]
         }), jsx(z, {
           height: 12
         }), jsx(_$$s, {

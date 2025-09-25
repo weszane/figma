@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { lV, U1 } from "../figma_app/617606";
 import { eB } from "../figma_app/178419";
 import { assert } from "../figma_app/465776";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { ChatMessageType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
@@ -140,11 +140,11 @@ function E({
 }
 let A = {
   textBodyLarge: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     $$css: !0
   },
   textBodyLargeStrong: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   }
 };

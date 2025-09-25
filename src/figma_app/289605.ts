@@ -46,7 +46,7 @@ import { yK, Px } from "../figma_app/152690";
 import { Hr, eF } from "../figma_app/394327";
 import { B3, wG } from "../905/331989";
 import { Us } from "../figma_app/481279";
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { qf, Ct, h6, h_, L$, cG, Yv, FV, Fj, VL, xZ, Iw, WF, YI, FO, g7, _Z, LU, aI, my, mH, X1, Kk, Pn, Uq, TQ, Ur, W7, e9, n8, jl, Kv, qg, Wu } from "../905/881983";
 var E = f;
 function ee({
@@ -397,7 +397,7 @@ function ec(e, t) {
     [e]: t
   } : r, [r, e, t]);
 }
-let eu = ex("variable_value_from_other_mode", function ({
+let eu = registerTooltip("variable_value_from_other_mode", function ({
   modeName: e,
   collectionName: t
 }) {

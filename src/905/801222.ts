@@ -9,7 +9,7 @@ import { buildQueryObject, createCreatorFacet, MAX_TRUNCATE_LENGTH, isLongText }
 import { e as _$$e } from "../905/404280";
 import { n as _$$n } from "../905/624711";
 import { k as _$$k } from "../905/252342";
-import { P as _$$P } from "../905/16832";
+import { setupFacetQueryAnalytics } from "../905/16832";
 import { F as _$$F } from "../905/801537";
 import { selectedItemAtom } from "../905/61477";
 import { nv } from "../905/182534";
@@ -32,7 +32,7 @@ export function $$v0({
   let [R, N] = useAtomValueAndSetter(a3);
   let P = _$$n();
   let O = _$$k();
-  let D = _$$P();
+  let D = setupFacetQueryAnalytics();
   useEffect(() => {
     "loaded" === E.status && l.length > 0 && R !== k && (N(k), D(l, CreatorResourceType.CREATOR, InputType.DROPDOWN));
   }, [E]);

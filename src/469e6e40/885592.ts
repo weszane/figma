@@ -19,8 +19,8 @@ import { b as _$$b2 } from '../905/484176';
 import { DashboardSections } from '../905/548208';
 import { getFeatureFlags } from '../905/601108';
 import { A3, Hj } from '../905/682977';
-import { g as _$$g } from '../905/687265';
-import { A as _$$A } from '../905/920142';
+import { textDisplayConfig } from '../905/687265';
+import { dayjs } from '../905/920142';
 import { selectViewAction } from '../905/929976';
 import { styleBuilderInstance } from '../905/941192';
 import { a as _$$a } from '../905/964520';
@@ -63,22 +63,22 @@ let q = {
     $$css: !0
   },
   totalLineDefault: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   },
   totalLineFinal: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     color: 'x1akne3o',
     $$css: !0
   },
   genericBreakdownHeading: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: 'x1akne3o',
     $$css: !0
   },
   genericBreakdownSubheading: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -139,13 +139,13 @@ function z(e) {
   let t = new CurrencyFormatter(e.invoice.currency);
   let a = _k(e.invoice);
   let i = useMemo(() => ({
-    startDate: _$$A(a ? e.invoice.issued_at : e.invoice.period_starts_at).toDate(),
-    endDate: _$$A(e.invoice.period_ends_at).toDate()
+    startDate: dayjs(a ? e.invoice.issued_at : e.invoice.period_starts_at).toDate(),
+    endDate: dayjs(e.invoice.period_ends_at).toDate()
   }), [e.invoice, a]);
   let r = useCallback(() => _8(e.invoice) ? {
     heading: getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_heading'),
     subheading: null
-  } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === BillingCycle.MONTH && e.invoice.subtype === ly.SUBSCRIPTION_RENEWED && _$$A(e.invoice.issued_at).isAfter(_$$A.utc('2018-05-01')) ? {
+  } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === BillingCycle.MONTH && e.invoice.subtype === ly.SUBSCRIPTION_RENEWED && dayjs(e.invoice.issued_at).isAfter(dayjs.utc('2018-05-01')) ? {
     heading: getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_heading'),
     subheading: e.invoice.state === qH.PENDING ? getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading.pending', i) : getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading', i)
   } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === BillingCycle.MONTH ? {
@@ -355,12 +355,12 @@ function z(e) {
 }
 let V = {
   label: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   },
   value: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1akne3o',
     $$css: !0
   }
@@ -674,11 +674,11 @@ function eg(e) {
 }
 let eb = {
   label: {
-    ..._$$g.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     $$css: !0
   },
   dateRange: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -711,7 +711,7 @@ function ev(e) {
         }), jsx('div', {
           ...Ay.props(eb.dateRange),
           children: getI18nString('plan_invoices.invoice_date_with_value', {
-            date: _$$A(e.invoice.issued_at).toDate()
+            date: dayjs(e.invoice.issued_at).toDate()
           })
         })]
       })]

@@ -13,7 +13,7 @@ import { Jz } from '../905/504727';
 import { Button } from '../905/521428';
 import { getSingletonSceneGraph } from '../905/700578';
 import { BK } from '../905/848862';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { d as _$$d } from '../905/976845';
 import { defaultSerializationOptions, extractBooleanFieldDescriptions } from '../905/998509';
 import { cssBuilderInstance } from '../cssbuilder/589278';
@@ -290,7 +290,7 @@ export function $$A0({
               width: '100%'
             },
             value: JSON.stringify(_, null, 2),
-            onChange: lQ
+            onChange: noop
           })
         })]
       }), el.length > 0 && jsxs('div', {
@@ -313,7 +313,7 @@ export function $$A0({
               width: '100%'
             },
             value: JSON.stringify(w, null, 2),
-            onChange: lQ
+            onChange: noop
           })
         })]
       }), A && jsxs('div', {
@@ -328,7 +328,7 @@ export function $$A0({
               width: '100%'
             },
             value: A,
-            onChange: lQ
+            onChange: noop
           })
         })]
       }), R && Object.keys(R).length > 0 && jsxs('div', {
@@ -343,7 +343,7 @@ export function $$A0({
               width: '100%'
             },
             value: JSON.stringify(R, null, 2),
-            onChange: lQ
+            onChange: noop
           })
         })]
       }), D && jsxs('div', {
@@ -353,7 +353,7 @@ export function $$A0({
             width: '100%'
           },
           value: D,
-          onChange: lQ
+          onChange: noop
         })]
       })]
     })]

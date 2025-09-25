@@ -10,7 +10,7 @@ import { reportError, reportNullOrUndefined, setTagGlobal } from '../905/11';
 import { isWidgetRendering } from '../905/2122';
 import { PluginAction } from '../905/15667';
 import { ACTIVITY_LOG_STORE, createSessionGreaterEqualKeyRange, createSessionNodeKeyRange, EDITOR_SESSIONS_STORE, executeDatabaseTransaction, getAutosaveDatabaseWithErrorHandling, NEW_FILES_STORE, NODE_CHANGES_STORE, SESSION_INDEX } from '../905/25189';
-import { FU, v6 } from '../905/26824';
+import { setKeyboardShortcutPanelTab, handleKeyboardShortcutUsage } from '../905/26824';
 import { P as _$$P } from '../905/35881';
 import { z4 as _$$z, Ln } from '../905/37051';
 import { ModalFormContents, ModalRootComponent } from '../905/38914';
@@ -226,9 +226,10 @@ import { hD } from '../905/921139';
 import { hideDropdownAction, selectViewAction, showDropdownThunk, updateDropdownSelectionAction } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
 import { c as _$$c5 } from '../905/932790';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';
+;
 import { parse, unparse } from '../905/945633';
-import { Jc, Sn } from '../905/946805';
+import { AssetTabType, ExtensionFeatureKey } from '../905/946805';
 import { $3 } from '../905/946937';
 import { DEFAULT_PICKER_WIDTH } from '../905/959568';
 import { L as _$$L } from '../905/970585';
@@ -374,7 +375,7 @@ import { getNextSessionId, rejectAllSessionPromises, resolveSessionPromise, subs
 import { PluginCallbacks, setupEventHandlers } from '../figma_app/603466';
 import { Lk as _$$Lk, dd } from '../figma_app/604494';
 import { nd as _$$nd } from '../figma_app/612001';
-import { R as _$$R4 } from '../figma_app/612938';
+import { PluginManager } from '../figma_app/612938';
 import { OX } from '../figma_app/617606';
 import { _b as _$$_b, uP } from '../figma_app/618665';
 import { getColorSpaceSupportStatus } from '../figma_app/622881';
@@ -1753,7 +1754,7 @@ function nW() {
           'value': e,
           'onValueChange': t,
           'min': 0,
-          'dispatch': lQ,
+          'dispatch': noop,
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fake_mp.modal.clients'),
           'children': jsx(SvgComponent, {
@@ -1765,7 +1766,7 @@ function nW() {
           'value': i,
           'onValueChange': n,
           'formatter': nV,
-          'dispatch': lQ,
+          'dispatch': noop,
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fake_mp.modal.frequency'),
           'children': jsx(SvgComponent, {
@@ -1778,7 +1779,7 @@ function nW() {
           'onValueChange': s,
           'min': 5,
           'max': 200,
-          'dispatch': lQ,
+          'dispatch': noop,
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fake_mp.modal.steps'),
           'children': jsx(SvgComponent, {
@@ -1789,7 +1790,7 @@ function nW() {
           'className': nL,
           'value': d,
           'onValueChange': c,
-          'dispatch': lQ,
+          'dispatch': noop,
           'formatter': nG,
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fake_mp.modal.center_x'),
@@ -1801,7 +1802,7 @@ function nW() {
           'className': nL,
           'value': p,
           'onValueChange': m,
-          'dispatch': lQ,
+          'dispatch': noop,
           'formatter': nG,
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fake_mp.modal.center_y'),
@@ -1835,7 +1836,7 @@ function nW() {
         }), jsx(Button, {
           variant: 'primary',
           type: 'submit',
-          onClick: lQ,
+          onClick: noop,
           children: renderI18nText('fake_mp.modal.apply')
         })]
       })]
@@ -1894,7 +1895,7 @@ function nJ() {
             min: 0.016,
             max: 0.5
           }),
-          'dispatch': lQ,
+          'dispatch': noop,
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('tsmer_config.modal.edit_frame_budget_seconds'),
           'children': jsx(SvgComponent, {
@@ -1907,7 +1908,7 @@ function nJ() {
           'onValueChange': n,
           'min': 250,
           'max': 2e3,
-          'dispatch': lQ,
+          'dispatch': noop,
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('tsmer_config.modal.edit_frame_budget_framebuffer_switches'),
           'children': jsx(SvgComponent, {
@@ -1922,7 +1923,7 @@ function nJ() {
             min: 0,
             max: 5
           }),
-          'dispatch': lQ,
+          'dispatch': noop,
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('tsmer_config.modal.max_edit_frame_time_seconds'),
           'children': jsx(SvgComponent, {
@@ -2077,7 +2078,7 @@ function rL() {
         triggeredFrom: 'quick-actions',
         displayName: '',
         parameterOnly: !0,
-        terminate: lQ,
+        terminate: noop,
         hideOnRun: !1,
         handler: {
           triggerParameterInputEvent: ({
@@ -4935,7 +4936,7 @@ class lV {
     });
   }
   clickWidget(e, t, i) {
-    if (!isValidWidgetType(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(PluginAction.RUN_WIDGET);
+    if (!isValidWidgetType(e) && !checkCanRunExtensions()) return PluginManager.instance.handleUpgrade(PluginAction.RUN_WIDGET);
     widgetInteractionTracker.startInteraction(e, 'click');
     lM.runUserInitiatedWidget({
       pluginID: e,
@@ -4954,7 +4955,7 @@ class lV {
     });
   }
   runPropertyMenuCallback(e, t, i, n) {
-    if (!isValidWidgetType(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(PluginAction.RUN_WIDGET);
+    if (!isValidWidgetType(e) && !checkCanRunExtensions()) return PluginManager.instance.handleUpgrade(PluginAction.RUN_WIDGET);
     this.didCallTextEditEnd = !1;
     Fullscreen.setDefaultEditMode();
     let r = {
@@ -5528,7 +5529,7 @@ let lX = class e extends sP(sN(sR)) {
           beforeModuleOpen: () => {
             atomStoreManager.set(Gh, void 0);
           },
-          name: Sn.MAGIC_LINK_DONE_TOAST
+          name: ExtensionFeatureKey.MAGIC_LINK_DONE_TOAST
         },
         trackingData: {
           source: 'fullscreen_action_make_prototype'
@@ -5542,7 +5543,7 @@ let lX = class e extends sP(sN(sR)) {
         moduleToOpen: {
           type: 'custom',
           module: jsx(rL, {}),
-          name: Sn.LINK_TO_COMPONENT
+          name: ExtensionFeatureKey.LINK_TO_COMPONENT
         },
         trackingData: {
           source: 'fullscreen_action_link_to_component'
@@ -5779,7 +5780,7 @@ let lX = class e extends sP(sN(sR)) {
   openShortcuts() {
     if (fullscreenValue.isReady()) {
       let e = this._store.getState().selectedView;
-      e && e.view === 'fullscreen' && e.editorType === FEditorType.Whiteboard && this._store.getState().screenreader.enabled && this.dispatch(FU({
+      e && e.view === 'fullscreen' && e.editorType === FEditorType.Whiteboard && this._store.getState().screenreader.enabled && this.dispatch(setKeyboardShortcutPanelTab({
         tab: _$$J2.ACCESSIBILITY
       }));
       fullscreenValue.triggerAction('toggle-keyboard-shortcuts');
@@ -5869,7 +5870,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   usedKeyboardShortcut(e) {
-    this.dispatch(v6({
+    this.dispatch(handleKeyboardShortcutUsage({
       key: e
     }));
   }
@@ -6453,7 +6454,7 @@ let lX = class e extends sP(sN(sR)) {
             nodesFromMagicHandle: n
           });
         },
-        name: Sn.REGENERATE_TEXT_TOAST
+        name: ExtensionFeatureKey.REGENERATE_TEXT_TOAST
       },
       trackingData: {
         source: 'fullscreen_action_regenerate_text'
@@ -7972,7 +7973,7 @@ let lX = class e extends sP(sN(sR)) {
           isVisualSearch: !0
         }) : jsx(WS, {}),
         beforeModuleOpen: () => jp(e || G4.EDITOR_CONTEXT_MENU),
-        name: Sn.VISUAL_SEARCH
+        name: ExtensionFeatureKey.VISUAL_SEARCH
       },
       trackingData: {
         source: 'fragment_search_context_menu'
@@ -7993,9 +7994,9 @@ let lX = class e extends sP(sN(sR)) {
           closeOnEscape: !0
         }),
         beforeModuleOpen: () => {
-          atomStoreManager.set(_$$Lk, Jc.ASSETS);
+          atomStoreManager.set(_$$Lk, AssetTabType.ASSETS);
         },
-        name: Sn.ASSETS_TAB_DETAIL_VIEW
+        name: ExtensionFeatureKey.ASSETS_TAB_DETAIL_VIEW
       },
       trackingData: {
         source: e,
@@ -8204,7 +8205,7 @@ let lX = class e extends sP(sN(sR)) {
             isBatch: e.length > 1
           });
         },
-        name: Sn.BACKGROUND_REMOVE_TOAST
+        name: ExtensionFeatureKey.BACKGROUND_REMOVE_TOAST
       },
       trackingData: {
         source: 'fullscreen_action_remove_image'
@@ -8228,7 +8229,7 @@ let lX = class e extends sP(sN(sR)) {
             isBatch: i.length > 1
           });
         },
-        name: Sn.BACKGROUND_REMOVE_TOAST
+        name: ExtensionFeatureKey.BACKGROUND_REMOVE_TOAST
       },
       trackingData: {
         source: 'fullscreen_action_upscale_image'

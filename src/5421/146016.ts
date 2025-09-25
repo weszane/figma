@@ -18,7 +18,7 @@ import { setupThemeContext } from '../905/614223';
 import { ButtonPrimitive } from '../905/632989';
 import { Um } from '../905/848862';
 import { areSessionLocalIDsEqual, defaultSessionLocalID, sessionLocalIDToString } from '../905/871411';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { x as _$$x } from '../5421/193325';
 import { t as _$$t2 } from '../5421/711842';
 import { b as _$$b } from '../5421/909298';
@@ -300,7 +300,7 @@ function Y({
           className: 'prototype_action_verbose_title--setVariablePreviewContainer--6omxy',
           children: jsx(y3, {
             targetVariableData: e.targetVariableData,
-            onClick: lQ,
+            onClick: noop,
             showVariableThumbnails: !1,
             isNarrowPanel: c,
             isInConditional: !0
@@ -312,7 +312,7 @@ function Y({
           let t = e.conditionalActions.length > 0 ? e.conditionalActions[0].condition : void 0;
           return jsx(y3, {
             targetVariableData: t,
-            onClick: lQ,
+            onClick: noop,
             isInConditional: !0,
             showVariableThumbnails: !1
           });

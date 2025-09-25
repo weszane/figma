@@ -13,7 +13,7 @@ import { AutoLayout } from "../905/470281";
 import { p as _$$p } from "../905/597320";
 import { b as _$$b } from "../905/168239";
 import { K } from "../905/628118";
-import { L as _$$L } from "../905/16143";
+import { FolderPreview } from "../905/16143";
 import { selectViewAction } from "../905/929976";
 import { TrackingProvider } from "../figma_app/831799";
 import { PaginatedAbandonedDraftsView } from "../figma_app/43951";
@@ -175,7 +175,7 @@ export function $$U0(e) {
       columns: [{
         name: getI18nString("abandoned_drafts_table.folder_name"),
         className: "abandoned_drafts_table--folderNameColumn--I7WIR abandoned_drafts_table--column--ZtlI6 table--column--974RA",
-        cellComponent: e => jsx(_$$L, {
+        cellComponent: e => jsx(FolderPreview, {
           folder: e,
           fontSize: 11
         }),

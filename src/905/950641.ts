@@ -12,14 +12,14 @@ import { e6, Ih } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { lk } from "../figma_app/109538";
-import { B } from "../905/380801";
-import { D as _$$D } from "../905/251759";
+import { SalesUpsellModalType } from "../905/380801";
+import { CurrencySwitcherDropdown } from "../905/251759";
 import { showModalHandler } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
 import { isNonUsdUserCurrency, getAllowedCartCurrencies } from "../figma_app/514043";
-import { Hw } from "../figma_app/698052";
+import { isNonAllowedDomainEmail } from "../figma_app/698052";
 import { SubscriptionType } from "../figma_app/831101";
 import { KindEnum } from "../905/129884";
 import { hK } from "../figma_app/211706";
@@ -53,7 +53,7 @@ function R() {
       onClick: () => e(showModalHandler({
         type: lk,
         data: {
-          source: B.PLAN_COMPARISON
+          source: SalesUpsellModalType.PLAN_COMPARISON
         }
       })),
       children: renderI18nText("universal_upgrade.enterpise_plan_banner.contact_sales")
@@ -142,11 +142,11 @@ export function $$P0({
     badge: null
   };
   let M = Qu().filter(e => L.includes(e.planTier));
-  let j = !u && Hw(w);
+  let j = !u && isNonAllowedDomainEmail(w);
   return jsxs("div", {
     children: [isNonUsdUserCurrency() && jsx("div", {
       className: cssBuilderInstance.flex.justifyEnd.$,
-      children: jsx(_$$D, {
+      children: jsx(CurrencySwitcherDropdown, {
         currency: e,
         dropdownShown: v,
         supportedCurrencies: getAllowedCartCurrencies(),
@@ -255,7 +255,7 @@ function O({
                 onClick: () => u(showModalHandler({
                   type: lk,
                   data: {
-                    source: B.PLAN_COMPARISON
+                    source: SalesUpsellModalType.PLAN_COMPARISON
                   }
                 })),
                 children: renderI18nText("plan_comparison.campfire.contact_sales")

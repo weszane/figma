@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { isNullish } from "../figma_app/95419";
 import { O6, bL } from "../905/598775";
 import { Link } from "../905/438674";
@@ -82,7 +82,7 @@ function j({
       className: $$m()("seat_options--seatOption--kaalu", {
         "seat_options--selected--bkEKZ": t
       }),
-      onClick: e ? lQ : () => r(i),
+      onClick: e ? noop : () => r(i),
       htmlAttributes: {
         "data-testid": `seat-option-button--${i}`
       }

@@ -12,7 +12,7 @@ import { g as _$$g } from "../905/607862";
 import h from "classnames";
 import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { xk } from "@stylexjs/stylex";
 import { Te } from "../vendor/813803";
 import { useHandleKeyboardEvent } from "../figma_app/878298";
@@ -396,7 +396,7 @@ function N(e) {
       handleClick: U(r),
       handleContextMenu: B(r),
       handleDrag: V(r),
-      handleDragEnd: e.isDraggable ? e.handleDragEnd : lQ,
+      handleDragEnd: e.isDraggable ? e.handleDragEnd : noop,
       isAboveSelected: g.has(r - 1),
       isBelowSelected: g.has(r + 1),
       isDraggable: !!e.isDraggable,

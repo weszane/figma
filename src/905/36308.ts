@@ -158,7 +158,7 @@ import { b as _$$b2 } from '../905/874849';
 import { $ as _$$$2 } from '../905/922405';
 import { hideDropdownAction } from '../905/929976';
 import { I as _$$I } from '../905/932503';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { O as _$$O4 } from '../905/936515';
 import { U as _$$U2 } from '../905/944163';
 import { dL, qz } from '../905/944871';
@@ -598,7 +598,7 @@ async function tR(e) {
     message: 'Single button bell',
     button: {
       text: 'Do it',
-      action: lQ
+      action: noop
     }
   });
   i({
@@ -606,7 +606,7 @@ async function tR(e) {
     icon: VisualBellIcon.RETURN_TO_INSTANCE,
     button: {
       text: 'Do it',
-      action: lQ
+      action: noop
     }
   });
   i({
@@ -614,11 +614,11 @@ async function tR(e) {
     button: {
       primary: {
         text: 'Do one thing',
-        action: lQ
+        action: noop
       },
       secondary: {
         text: 'Do another',
-        action: lQ
+        action: noop
       }
     }
   });
@@ -626,7 +626,7 @@ async function tR(e) {
     message: '',
     button: {
       text: 'Button without message',
-      action: lQ
+      action: noop
     }
   });
   await new Promise(t => {

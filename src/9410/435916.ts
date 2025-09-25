@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect, useState, createElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { SettingsAction, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -19,7 +19,7 @@ import { EditorPreferencesApi } from "../figma_app/740163";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { N as _$$N } from "../figma_app/268271";
 import { U as _$$U } from "../905/455766";
-import { d as _$$d } from "../905/14910";
+import { isAllowedToSeeNux } from "../905/14910";
 import { w as _$$w, tX } from "../figma_app/728657";
 import { useIsCanvasEditDisabled } from "../905/595131";
 import { selectWithShallowEqual } from "../905/103090";
@@ -630,7 +630,7 @@ function et() {
   let [u, p] = useState(!1);
   let m = _$$A({
     numSteps: ee.length,
-    onComplete: lQ
+    onComplete: noop
   });
   let {
     show,
@@ -646,7 +646,7 @@ function et() {
     isShowing || !e || t || show({
       canShow: (e, t, i, r, n, a) => {
         let s = !isAnyMobile && !isIOSUA;
-        let o = _$$d({
+        let o = isAllowedToSeeNux({
           emailValidatedAt: n,
           jobTitle: a
         });

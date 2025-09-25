@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useRef } from "react";
 import { throwError } from "../figma_app/465776";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { capitalize } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
@@ -126,7 +126,7 @@ let g = Object.values({
 function f(e, t = new Date()) {
   let i;
   if (null === t) return "Invalid Date";
-  i = "string" == typeof t || "number" == typeof t ? _$$A.utc(t).toDate() : t;
+  i = "string" == typeof t || "number" == typeof t ? dayjs.utc(t).toDate() : t;
   let n = new Date();
   if (isNaN(i.getTime())) return i.toString();
   let r = i.getTime() - n.getTime();
@@ -154,7 +154,7 @@ export function $$_0(e, t) {
 }
 function A(e) {
   if (!e) return 0;
-  let t = Math.abs(_$$A.utc(e).diff(new Date()));
+  let t = Math.abs(dayjs.utc(e).diff(new Date()));
   return t < h(1, "hour") ? h(30, "second") : t < h(1, "day") ? h(30, "minute") : h(6, "hour");
 }
 export const $$ = $$_0;

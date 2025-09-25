@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Button } from "../905/521428";
 import { k } from "../905/443820";
 import { S } from "../5132/724052";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { SvgComponent } from "../905/714743";
 import { G } from "../905/750789";
@@ -167,7 +167,7 @@ export function $$C1() {
 }
 let E = {
   orgName: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     maxWidth: "x256u9z",
     whiteSpace: "xuxw1ft",
     overflow: "xb3r6kr",
@@ -177,20 +177,20 @@ let E = {
     $$css: !0
   },
   textBodyLargeStrong: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   textBodyMediumSecondary: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     $$css: !0
   },
   textBodyMedium: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   orgText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     maxWidth: "x256u9z",
     whiteSpace: "xuxw1ft",

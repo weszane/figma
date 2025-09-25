@@ -9,7 +9,7 @@ import { e as _$$e } from "../905/621515";
 import { N } from "../figma_app/268271";
 import { y as _$$y } from "../905/129046";
 import { rq } from "../905/425180";
-import { R } from "../905/11928";
+import { NotModalType } from "../905/11928";
 import { F_ } from "../905/748636";
 import { d as _$$d } from "../905/811033";
 import { iX } from "../905/415545";
@@ -113,7 +113,7 @@ export function $$E0({
     title: calloutTitle,
     trackingContextName: "Browser Notifications Onboarding",
     width: V_,
-    zIndex: R.MODAL
+    zIndex: NotModalType.MODAL
   };
   return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseDown"],
@@ -126,7 +126,7 @@ export function $$E0({
       ...k,
       arrowPosition,
       targetKey,
-      zIndex: e === iX.NOTIFICATION_BELL ? R.NOTIFICATION_MODAL : void 0
+      zIndex: e === iX.NOTIFICATION_BELL ? NotModalType.NOTIFICATION_MODAL : void 0
     })
   });
 }

@@ -54,7 +54,7 @@ import { qm } from "../figma_app/431689";
 import { R as _$$R2 } from "../3674/430035";
 import { customHistory } from "../905/612521";
 import { VisualBellActions } from "../905/302958";
-import { w as _$$w } from "../905/281010";
+import { accountTypeRequestHandler } from "../905/281010";
 import { n as _$$n } from "../3674/214307";
 import { DevModeUI } from "../905/15667";
 import { getThemeContextOrDefault } from "../905/158740";
@@ -68,7 +68,7 @@ import { d as _$$d2 } from "../3682/659785";
 import { n as _$$n2 } from "../1528/289390";
 import { Q as _$$Q } from "../9410/629866";
 import { A as _$$A } from "../6828/523860";
-import { lQ as _$$lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { O as _$$O } from "../905/587457";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { ue as _$$ue, n2 as _$$n3, vl, yT } from "../figma_app/332598";
@@ -128,7 +128,7 @@ import { wV } from "../figma_app/779965";
 import { GC } from "../905/782020";
 import { postUserFlag } from "../905/985254";
 import { jK } from "../figma_app/934707";
-import { D as _$$D2 } from "../905/12032";
+import { overlayStateAtom } from "../905/12032";
 import { qZ, px as _$$px } from "../905/201014";
 import { T as _$$T, q as _$$q } from "../figma_app/590592";
 import { L3 } from "../figma_app/701001";
@@ -170,8 +170,8 @@ import { trackFileEventWithUser, trackFileEventWithStore, trackDefinedFileEventW
 import { userFlagAtomFamily, userFlagExistsAtomFamily } from "../figma_app/545877";
 import { DEV_HAND } from "../figma_app/910914";
 import { setupUserPluginPreferences } from "../figma_app/545541";
-import { b as _$$b3 } from "../905/22449";
-import { c as _$$c3 } from "../905/34525";
+import { RadioPrimitiveRoot } from "../905/22449";
+import { RadioPrimitiveOption } from "../905/34525";
 import { Link } from "../905/438674";
 import { S as _$$S2 } from "../5132/724052";
 import { dP as _$$dP } from "../figma_app/119475";
@@ -205,7 +205,7 @@ import { Te as _$$Te } from "../vendor/813803";
 import { vp } from "../vendor/279343";
 import { Uy, ei as _$$ei, E1, L as _$$L } from "../figma_app/9054";
 import { parsePxNumber } from "../figma_app/783094";
-import { A as _$$A12 } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { V as _$$V } from "../905/506207";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { fullscreenValue } from "../figma_app/455680";
@@ -250,7 +250,7 @@ import { getLocalPlugins, usePublishedPlugins, usePluginManifestsByIds, useCanRu
 import { se as _$$se, Ut, hasDevResourceOpenCallback, runDevResourceOpenCallback, runTimeoutDevResourceOpenCallback } from "../figma_app/603466";
 import { validateURLPattern, getPluginVersion, hasInspectOrPanelCapability } from "../figma_app/300692";
 import { createDeferredPromise } from "../905/263346";
-import { R as _$$R3 } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { hasLocalFileId, ManifestEditorType } from "../figma_app/155287";
 import { d as _$$d5 } from "../905/485888";
 import { debugState } from "../905/407919";
@@ -342,7 +342,7 @@ import { s as _$$s5 } from "../figma_app/504088";
 import { initialViewAtom, defaultViewAtom } from "../figma_app/69680";
 import { iT as _$$iT } from "../figma_app/74165";
 import { qs } from "../469e6e40/556776";
-import { d as _$$d9 } from "../905/480825";
+import { PluginIconDisplay } from "../905/480825";
 import { iA as _$$iA } from "../3674/705006";
 import { TabLoop } from "../905/718764";
 import { StyleType } from "../figma_app/276332";
@@ -626,7 +626,7 @@ function eu({
     primaryButtonProps: {
       label: renderI18nText("dev_handoff.paywall.request_reminder_modal.button.send_a_reminder"),
       onClick: () => {
-        _$$w.nudgeRequest({
+        accountTypeRequestHandler.nudgeRequest({
           request_id: e
         }).catch(() => {
           s();
@@ -1591,7 +1591,7 @@ let t7 = [{
 let t8 = {
   inspectionMode: "code",
   inspectionModes: ["properties", "code"],
-  setInspectionMode: _$$lQ,
+  setInspectionMode: noop,
   supportsAlternativeUnits: !0,
   preferenceOptions: [],
   preferences: {},
@@ -1600,7 +1600,7 @@ let t8 = {
       type: "first-party",
       id: _$$uz
     },
-    onCodeLanguageChange: _$$lQ,
+    onCodeLanguageChange: noop,
     activeCodegenPlugin: null,
     codeLanguageOptions: [],
     formatter: {
@@ -1698,7 +1698,7 @@ function t6() {
               content: jsx(t3, {}),
               shouldShowMore: !1,
               showMoreLinesCount: 0,
-              onShowMore: _$$lQ,
+              onShowMore: noop,
               leftGutter: vl(t5)
             }), jsx("div", {
               className: cssBuilderInstance.wFull.h12.$
@@ -2977,7 +2977,7 @@ function i_({
     children: [jsx("div", {
       className: ia,
       children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.what_platform")
-    }), jsx(_$$b3, {
+    }), jsx(RadioPrimitiveRoot, {
       value: String(t),
       onChange: e,
       className: a2,
@@ -2990,7 +2990,7 @@ function i_({
         children: [jsx(SvgComponent, {
           svg: n,
           className: "configuration_wizard--platformIcon--F7N2s"
-        }), jsx(_$$c3, {
+        }), jsx(RadioPrimitiveOption, {
           value: e,
           id: e,
           className: "configuration_wizard--radioOption--Yfm0j"
@@ -3040,7 +3040,7 @@ function iy({
     children: [jsx("div", {
       className: ia,
       children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.what_framework")
-    }), jsx(_$$b3, {
+    }), jsx(RadioPrimitiveRoot, {
       value: String(t),
       onChange: e => {
         n("true" === e);
@@ -3056,7 +3056,7 @@ function iy({
           children: [jsx("div", {
             className: a8,
             children: t
-          }), jsx(_$$c3, {
+          }), jsx(RadioPrimitiveOption, {
             value: String(e),
             id: String(e),
             className: a6
@@ -3096,7 +3096,7 @@ function ij() {
     children: [jsx("div", {
       className: ia,
       children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.what_units")
-    }), jsx(_$$b3, {
+    }), jsx(RadioPrimitiveRoot, {
       value: String(n),
       onChange: e => s(parseInt(e)),
       className: a2,
@@ -3110,7 +3110,7 @@ function ij() {
           children: [jsx("div", {
             className: a8,
             children: t
-          }), jsx(_$$c3, {
+          }), jsx(RadioPrimitiveOption, {
             value: String(e),
             id: String(e),
             className: a6
@@ -3124,7 +3124,7 @@ function ij() {
       }), u ? jsx(Rg, {
         scaleFactor: c,
         onChange: d,
-        onDropdownHidden: _$$lQ,
+        onDropdownHidden: noop,
         className: "configuration_wizard--scaleFactorDropdown--IVy1Q",
         inputClassName: "configuration_wizard--scaleFactorDropdownInput--h8Jr2 text--fontPos13Whyte--VhWqH text--_fontBaseWhyte--efAjI"
       }) : jsx(FormattedInputVariant1, {
@@ -4493,7 +4493,7 @@ function iq() {
   let d = useModalManager({
     open: isShowing,
     preventUserClose: !0,
-    onClose: _$$lQ
+    onClose: noop
   });
   _$$h(() => {
     show({
@@ -4802,7 +4802,7 @@ let oZ = class {
     link: t
   }) {
     try {
-      let n = await _$$R3.instance.enqueue(this.createEnqueueArgs({
+      let n = await PluginManager.instance.enqueue(this.createEnqueueArgs({
         command: "linkpreview",
         plugin: e,
         onStart: () => _$$se({
@@ -4838,7 +4838,7 @@ let oZ = class {
   }) {
     setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
     try {
-      return (await _$$R3.instance.enqueue(this.createEnqueueArgs({
+      return (await PluginManager.instance.enqueue(this.createEnqueueArgs({
         command: "auth",
         plugin: e,
         onStart: () => Ut(t)
@@ -4996,13 +4996,13 @@ function o8({
         isInherited: e.isInherited,
         nodeId: e.nodeId
       };
-      let c = _$$R3.instance.isCurrentlyRunning(r);
-      return (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), c && hasDevResourceOpenCallback()) ? _$$R3.instance.enqueue({
+      let c = PluginManager.instance.isCurrentlyRunning(r);
+      return (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), c && hasDevResourceOpenCallback()) ? PluginManager.instance.enqueue({
         ...r,
         onStart: async () => await runDevResourceOpenCallback({
           devResource: d
         })
-      }) : _$$R3.instance.enqueue({
+      }) : PluginManager.instance.enqueue({
         ...r,
         reuseExistingRunState: !1,
         onStart: async () => (runTimeoutDevResourceOpenCallback(5e3, {
@@ -5792,8 +5792,8 @@ function lY({
     link: o,
     isEditable: !1,
     hintInMenu: getI18nString("dev_handoff.developer_related_links.cant_edit_component_doc_link"),
-    onOpenDeleteModal: _$$lQ,
-    onOpenEditModal: _$$lQ,
+    onOpenDeleteModal: noop,
+    onOpenEditModal: noop,
     appendLabel: t
   });
 }
@@ -6214,8 +6214,8 @@ function sx({
       isInherited: !0,
       isVariant: t
     },
-    onOpenDeleteModal: _$$lQ,
-    onOpenEditModal: _$$lQ
+    onOpenDeleteModal: noop,
+    onOpenEditModal: noop
   });
 }
 let sm = atom(!1);
@@ -6682,19 +6682,19 @@ function s1({
   let A = useMemo(() => ({
     displayText: getI18nString("dev_handoff.compare_changes.entrypoint.compare_versions"),
     disabled: n || !c || !o,
-    callback: c ? p : _$$lQ,
+    callback: c ? p : noop,
     recordingKey: "compareChanges.entrypoint.dropdown.compareVersions"
   }), [o, n, c, p]);
   let I = useMemo(() => l ? {
     displayText: getI18nString("dev_handoff.compare_changes.entrypoint.compare_main_component"),
     disabled: n || !c,
-    callback: c ? h : _$$lQ,
+    callback: c ? h : noop,
     recordingKey: "compareChanges.entrypoint.dropdown.compareDetachedComponent"
   } : null, [l, n, c, h]);
   let E = useMemo(() => s || g ? {
     displayText: getI18nString("dev_handoff.compare_changes.entrypoint.compare_main_component"),
     disabled: !s || n || !c,
-    callback: c ? v : _$$lQ,
+    callback: c ? v : noop,
     recordingKey: "compareChanges.entrypoint.dropdown.compareOverrides"
   } : null, [s, g, n, c, v]);
   let C = useMemo(() => [A, I, E].filter(isNotNullish), [A, I, E]);
@@ -6971,9 +6971,9 @@ function s6() {
   }();
   let d = !!n?.lastEditedAt && (!l || l && !!n?.createdAt);
   let c = d ? l ? getI18nString("dev_handoff.nodes_panel.created", {
-    at: _$$A12(n?.createdAt).fromNow()
+    at: dayjs(n?.createdAt).fromNow()
   }) : getI18nString("dev_handoff.nodes_panel.edited", {
-    at: _$$A12(n?.lastEditedAt).fromNow()
+    at: dayjs(n?.lastEditedAt).fromNow()
   }) : "-";
   let u = _$$sD(c);
   if (!e || !s) return null;
@@ -7609,7 +7609,7 @@ let rk = memo(function (e) {
   let g = E1();
   let _ = _$$ei(guid);
   let v = _$$L(guid, g, h);
-  let b = useMemo(() => _ ? _$$A12(_.lastEditedAt).fromNow() : "", [_]);
+  let b = useMemo(() => _ ? dayjs(_.lastEditedAt).fromNow() : "", [_]);
   let j = getObservableOrFallback(AppStateTsApi.devHandoffState().focusAnimationIsRunning);
   let {
     width = 0,
@@ -8227,7 +8227,7 @@ function r4({
           direction: "horizontal",
           verticalAlignItems: "center",
           spacing: 8,
-          children: [jsx(_$$d9, {
+          children: [jsx(PluginIconDisplay, {
             plugin: e
           }), jsx(TextWithTruncation, {
             fontWeight: "bold",
@@ -8466,7 +8466,7 @@ function df({
           style: styleBuilderInstance.add({
             marginTop: "-3px"
           }).$,
-          children: jsx(_$$d9, {
+          children: jsx(PluginIconDisplay, {
             plugin: e
           })
         }), jsx(TextWithTruncation, {
@@ -9573,7 +9573,7 @@ let c9 = memo(({
           })]
         }), q && (!getFeatureFlags().dt_insp_impr_assets || !n) && jsxs(Fragment, {
           children: [!getFeatureFlags().dt_insp_impr_assets && jsxs(_$$bL3, {
-            onChange: _$$lQ,
+            onChange: noop,
             value: J ? "GIF" : "MP4",
             children: [jsx(_$$l3, {
               disabled: !0,
@@ -11356,7 +11356,7 @@ function pj(e) {
         children: jsx(_$$P2, {
           ref: h,
           className: "inspect_panel--scrollContainer--wwC0l properties_panel--scrollContainer--o2LxW",
-          onContextMenu: _$$lQ,
+          onContextMenu: noop,
           scrollingDisabled: !!p,
           enableOverscroll: !0,
           containerId: INSPECT_PANEL,
@@ -11456,7 +11456,7 @@ function pk({
     isAllowedToChangeVersion: () => !1,
     label: "activity-row",
     last: !0,
-    onSelect: _$$lQ,
+    onSelect: noop,
     time: n ? void 0 : e.edited_at,
     user: e.user.handle,
     userUrl: e.user.img_url,
@@ -11573,7 +11573,7 @@ let pL = memo(function () {
   let A = jsx(KeyboardReceiver, {
     name: "rightPanels",
     focusOnMount: !0,
-    handleKeyDown: _$$lQ,
+    handleKeyDown: noop,
     children: jsx("div", {
       id: "dev-handoff-inspect-panel",
       children: jsxs(de, {
@@ -11978,7 +11978,7 @@ function hc({
   let d = useCallback(() => {
     r(hideModal());
   }, [r]);
-  !function (e = _$$lQ) {
+  !function (e = noop) {
     let t = _$$uQ();
     let n = useLatestRef(t);
     useEffect(() => {
@@ -13208,7 +13208,7 @@ export function $$fg0() {
       notificationAPI.enrollUserInStatusChange({
         fileKey: u
       })?.then(e => {
-        let t = atomStoreManager.get(_$$D2);
+        let t = atomStoreManager.get(overlayStateAtom);
         e.data?.meta?.newEnrollment && !t && d(jK({
           userId: s?.id ?? "",
           fileKey: u

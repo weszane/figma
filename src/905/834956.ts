@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { noop } from 'lodash-es';
 import { createElement, forwardRef } from 'react';
 import { createPortal, findDOMNode } from 'react-dom';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
@@ -7,7 +8,7 @@ import { y as _$$y } from '../905/52479';
 import { KeyCodes } from '../905/63728';
 import { J as _$$J2 } from '../905/125993';
 import { KindEnum } from '../905/129884';
-import { Pg } from '../905/149328';
+import { getFileTypeLargePx } from '../905/149328';
 import { e as _$$e } from '../905/149844';
 import { W as _$$W } from '../905/187396';
 import { FormattedInputVariant1 } from '../905/203369';
@@ -21,7 +22,6 @@ import { hX, km } from '../905/701417';
 import { Point } from '../905/736624';
 import { KeyboardReceiver } from '../905/826900';
 import { hideDropdownAction } from '../905/929976';
-import { lQ } from '../905/934246';
 import { b as _$$b } from '../905/946806';
 import { h as _$$h } from '../905/994594';
 import { ms, wv } from '../figma_app/236327';
@@ -101,7 +101,7 @@ class z extends RecordingPureComponent {
     this.delayedMount.reset();
   }
 }
-class H extends z {
+class MultilevelDropdownOption extends z {
   constructor() {
     super(...arguments);
     this.optionRef = null;
@@ -166,11 +166,11 @@ class H extends z {
       'onClick': this.stopPropagation,
       'onFocus': t.allowClickThrough ? void 0 : this.onFocus,
       'onKeyDown': this.onKeyDown,
-      'onPointerDown': p ? lQ : this.onPointerDown,
-      'onPointerEnter': header || u ? lQ : this.onPointerEnter,
-      'onPointerLeave': header ? lQ : this.onPointerLeave,
-      'onPointerMove': header ? lQ : this.onPointerMove,
-      'onPointerUp': p ? lQ : this.onPointerUp,
+      'onPointerDown': p ? noop : this.onPointerDown,
+      'onPointerEnter': header || u ? noop : this.onPointerEnter,
+      'onPointerLeave': header ? noop : this.onPointerLeave,
+      'onPointerMove': header ? noop : this.onPointerMove,
+      'onPointerUp': p ? noop : this.onPointerUp,
       'onTouchEnd': this.preventDefault,
       'role': 'menuitemcheckbox',
       'tabIndex': this.props.isActive && !t.allowClickThrough ? 0 : -1,
@@ -262,7 +262,7 @@ class H extends z {
     });
   }
 }
-H.displayName = 'MultilevelDropdownOption';
+MultilevelDropdownOption.displayName = 'MultilevelDropdownOption';
 let Y = ms;
 let q = wv;
 let $ = parsePxInt(km);
@@ -281,7 +281,7 @@ function ei(e) {
 function en(e) {
   return e.map(ei).reduce((e, t) => e + t, 0);
 }
-let er = class e extends RecordingPureComponent {
+let MultilevelDropdown = class e extends RecordingPureComponent {
   constructor(t) {
     super(t);
     this.rootMenuTop = 0;
@@ -551,7 +551,7 @@ let er = class e extends RecordingPureComponent {
       if (e.separator) return jsx(q, {}, t);
       let r = this.props.parentKey ? `${this.props.parentKey}.` : '';
       let a = `${this.props.recordingKey}.${r}${e.recordingKey}`;
-      return jsx(H, {
+      return jsx(MultilevelDropdownOption, {
         ref: e => this.optionRef(t, e),
         id: this.getItemID(e, t),
         isActive: this.isActiveItem(e, t),
@@ -780,10 +780,10 @@ let er = class e extends RecordingPureComponent {
     }), createPortal(e, document.body)) : e;
   }
 };
-er.displayName = 'MultilevelDropdown';
+MultilevelDropdown.displayName = 'MultilevelDropdown';
 export let $$ea0 = forwardRef((e, t) => {
-  let i = Pg();
-  return e.items.length === 0 || e.items.every(e => e.separator) ? null : jsx(er, {
+  let i = getFileTypeLargePx();
+  return e.items.length === 0 || e.items.every(e => e.separator) ? null : jsx(MultilevelDropdown, {
     ...e,
     toolbarHeightAndMargin: i,
     depth: e.depth ?? 0,

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import s from "classnames";
 import { KeyCodes } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
@@ -35,7 +35,7 @@ export function $$p0({
     disableBorderStyles: !0,
     focusOnMount: !0,
     onChange: e => p(e.currentTarget.value),
-    onEscape: lQ,
+    onEscape: noop,
     onFocus: h,
     onKeyDown: e => {
       switch (e.keyCode) {

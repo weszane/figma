@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
@@ -24,13 +24,13 @@ import { $ as _$$$ } from "../1291/295522";
 import { kL, xl, ts, Do, pr, R5, BF, Ox } from "../1291/62942";
 let C = {
   attributionContainer: {
-    ..._$$g.textBodySmall,
+    ...textDisplayConfig.textBodySmall,
     height: "x47omn1",
     marginBottom: "x1ef8nbk",
     $$css: !0
   },
   nameContainer: {
-    ..._$$g.textBodySmall,
+    ...textDisplayConfig.textBodySmall,
     height: "x47omn1",
     marginBottom: "x1ef8nbk",
     paddingLeft: "xilkfi8",

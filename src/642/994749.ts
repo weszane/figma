@@ -8,7 +8,7 @@ import { i as _$$i } from "../642/423085";
 import { y as _$$y } from "../905/757816";
 import { setupThemeContext } from "../905/614223";
 import { Ay } from "@stylexjs/stylex";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { Qp, JR } from "../figma_app/162641";
 import { getI18nString } from "../905/303541";
 import { getVisibleTheme } from "../905/640017";
@@ -71,7 +71,7 @@ export function $$C1(e) {
       });
       break;
     default:
-      t = S && C ? jsx(oW, {
+      t = S && C ? jsx(WAFImage, {
         className: "x5yr21d xh8yej3 x4ouu4z",
         style: {
           objectFit: "contain",

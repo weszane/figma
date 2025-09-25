@@ -5,7 +5,7 @@ import { Y } from "../vendor/435990";
 import { mergeRegister } from "../vendor/425002";
 import d from "classnames";
 import { $isNodeSelection, $getSelection, $getNodeByKey, SELECTION_CHANGE_COMMAND, COMMAND_PRIORITY_LOW, CLICK_COMMAND, DRAGSTART_COMMAND, KEY_DELETE_COMMAND, KEY_BACKSPACE_COMMAND } from "lexical";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { Eh } from "../940032c6/718024";
 var i = d;
 let m = new Set();
@@ -28,7 +28,7 @@ function f({
       };
     });
   }(n);
-  return jsx(oW, {
+  return jsx(WAFImage, {
     className: i()("image_node--imgContainer--zeypc", {
       "image_node--focused--97PZB": s,
       "image_node--draggable--d0R7d": u

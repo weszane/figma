@@ -12,7 +12,7 @@ import { FInheritanceType, FOrganizationLevelType, FPlanNameType } from "../figm
 import { AutoRunPluginsView } from "../figma_app/43951";
 import { useCurrentPrivilegedPlan, getParentOrgIdIfOrgLevel, useCurrentPublicPlan } from "../figma_app/465071";
 import { isDevModeWithInspectPanel } from "../figma_app/300692";
-import { R } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { Lx } from "../figma_app/474636";
 import { s as _$$s } from "../figma_app/961559";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
@@ -348,7 +348,7 @@ function k(e, t) {
 }
 async function M(e, t, r) {
   r(!0);
-  await R.instance.enqueue({
+  await PluginManager.instance.enqueue({
     runPluginArgs: {
       plugin: e,
       command: "",

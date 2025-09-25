@@ -26,7 +26,7 @@ import { Yh } from "../figma_app/357047";
 import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3, qy, wj } from "../figma_app/862289";
-import { Sn } from "../905/946805";
+import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { iV, YH } from "../figma_app/604494";
 import { w as _$$w } from "../figma_app/588564";
@@ -460,7 +460,7 @@ function eo({
     tonePosition,
     setPositionAndRun
   } = useContext(_$$u);
-  let s = useAtomWithSubscription(iV(Sn.REWRITE));
+  let s = useAtomWithSubscription(iV(ExtensionFeatureKey.REWRITE));
   let l = useDispatch();
   let d = useRef(null);
   x(d, {
@@ -497,7 +497,7 @@ function eo({
             moduleToOpen: {
               type: "custom",
               module: jsx(_$$w, {}),
-              name: Sn.REWRITE,
+              name: ExtensionFeatureKey.REWRITE,
               beforeModuleOpen: () => {
                 B3(JT.REWRITE_TEXT);
               }

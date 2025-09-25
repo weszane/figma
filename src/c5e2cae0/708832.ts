@@ -24,12 +24,12 @@ import { Up, O$, s$, GL, vm, VB } from "../figma_app/361035";
 import { Vh, kV, N9 } from "../figma_app/692987";
 import { gu, Tj, gS, R9, Jh } from "../figma_app/441925";
 import { lk } from "../figma_app/109538";
-import { B as _$$B2 } from "../905/380801";
+import { SalesUpsellModalType } from "../905/380801";
 import { wW, VE } from "../c5e2cae0/793139";
 import { _ as _$$_2 } from "../c5e2cae0/173602";
 import { On } from "../9420/975542";
 import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
-import { Ju, IX } from "../905/712921";
+import { ProductTierEnum, RenewalTermEnum } from "../905/712921";
 import { OnboardingStepEnum } from "../figma_app/736948";
 import { UpgradeSteps, BillingCycle, createEmptyAddress, isAddressEmpty, SubscriptionType } from "../figma_app/831101";
 import { CreateUpgradeAction } from "../figma_app/707808";
@@ -48,7 +48,7 @@ import { MN } from "../figma_app/482142";
 import { postUserFlag } from "../905/985254";
 import { useSeparateBillingShippingExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
-import { jv } from "../905/84777";
+import { setupPricesTransform } from "../905/84777";
 import { wn } from "../9420/795870";
 import { trackUserEvent } from "../figma_app/314264";
 import { collaboratorSet } from "../905/332483";
@@ -179,7 +179,7 @@ function U(e) {
           analyticsEventManager.trackDefinedEvent("monetization_upgrades.checkout_breadcrumb_navigation", {
             fromStep: e.currentStep,
             toStep: t.step,
-            tier: Ju.ORG,
+            tier: ProductTierEnum.ORG,
             isCampfireCart: !!e.isCampfireCart
           });
           let a = function (e) {
@@ -345,8 +345,8 @@ function ek({
 }) {
   let d = _$$G({
     currency: n,
-    tier: Ju.ORG,
-    renewalTerm: IX.YEAR,
+    tier: ProductTierEnum.ORG,
+    renewalTerm: RenewalTermEnum.YEAR,
     showCents: !1
   });
   let [o] = handleSuspenseRetainRelease(d);
@@ -371,7 +371,7 @@ function ek({
       changeUserSeatType,
       selectSeatsState,
       setAdditionalSeats,
-      tier: Ju.ORG
+      tier: ProductTierEnum.ORG
     })
   });
 }
@@ -580,7 +580,7 @@ export class $$eM2 extends Component {
       this.props.dispatch(showModalHandler({
         type: lk,
         data: {
-          source: _$$B2.ORG_SELF_SERVE_UPGRADE_MODAL
+          source: SalesUpsellModalType.ORG_SELF_SERVE_UPGRADE_MODAL
         }
       }));
     };
@@ -627,7 +627,7 @@ export class $$eM2 extends Component {
             currency: e
           });
         },
-        tier: Ju.ORG,
+        tier: ProductTierEnum.ORG,
         title: getI18nString("checkout.your_organization_plan"),
         trackingProperties: {
           selectedTeamIds: gu(Array.from(this.state.selectedTeamIds)),
@@ -691,7 +691,7 @@ export class $$eM2 extends Component {
       R9({
         eligibleTeamIds: e.meta.eligible_teams.map(e => e.id),
         eligibleTeamUsers: e.meta.eligible_team_users,
-        tier: Ju.ORG,
+        tier: ProductTierEnum.ORG,
         step: this.effectiveStep()
       });
       let {
@@ -942,7 +942,7 @@ export class $$eM2 extends Component {
         },
         shippingAddress: this.state.shippingAddress,
         taxPercent: this.state.taxRate,
-        tier: Ju.ORG,
+        tier: ProductTierEnum.ORG,
         title: getI18nString("checkout.upgrade_to_an_organization_plan"),
         userEmail: this.state.orgDetails.actorEmail
       });
@@ -1115,13 +1115,13 @@ export function $$eR1(e) {
       document.body.removeChild(e);
     };
   });
-  let o = jv({
+  let o = setupPricesTransform({
     billableProductKeys: collaboratorSet,
     baseQuery: {
       currency: d,
-      tier: Ju.ORG,
-      renewalTerm: IX.YEAR,
-      unit: IX.YEAR
+      tier: ProductTierEnum.ORG,
+      renewalTerm: RenewalTermEnum.YEAR,
+      unit: RenewalTermEnum.YEAR
     }
   });
   let [c] = handleSuspenseRetainRelease(o);

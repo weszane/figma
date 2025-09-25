@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { e as _$$e } from "../905/579755";
 import { z4 } from "../figma_app/86921";
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { Hl, Jn } from "../905/497688";
-export let $$l0 = ex("facepile_overflow", function (e) {
+export let $$l0 = registerTooltip("facepile_overflow", function (e) {
   return jsx("div", {
     children: e.overflowUsers.map(t => jsxs("div", {
       className: Hl,

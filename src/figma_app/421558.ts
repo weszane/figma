@@ -79,7 +79,7 @@ import { Bu } from "../figma_app/604494";
 import { T as _$$T3 } from "../figma_app/399971";
 import { I as _$$I2 } from "../figma_app/109163";
 import { buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { Vi, _o, GI } from "../905/125333";
 import { defaultColorManipulator } from "../905/713722";
 import { getVisibleTheme } from "../905/640017";
@@ -250,11 +250,11 @@ function eV({
   }, [r]);
   return jsxs("div", {
     className: "assets--relContainer--A42xz",
-    children: [jsx(oW, {
+    children: [jsx(WAFImage, {
       src: buildUploadUrl(t.base)
     }), a && jsx(t.Wash, {
       color: a
-    }), a && jsx(oW, {
+    }), a && jsx(WAFImage, {
       src: buildUploadUrl(t.overlay),
       className: eF
     })]

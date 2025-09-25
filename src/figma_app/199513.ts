@@ -1,5 +1,5 @@
 import { unstable_batchedUpdates } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { isNotNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
@@ -291,7 +291,7 @@ let $$Q8 = liveStoreInstance.Query({
     mutate: t,
     livegraphClient: r
   }) => {
-    if (!e || !getFeatureFlags().team_page_folder_creation_live_updates) return lQ;
+    if (!e || !getFeatureFlags().team_page_folder_creation_live_updates) return noop;
     let n = new Date(new Date().setHours(0, 0, 0, 0));
     return r.subscribe(TeamFoldersQuerySyncView, {
       teamId: e,

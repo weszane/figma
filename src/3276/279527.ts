@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -94,8 +94,8 @@ export function $$N0() {
     element: I,
     additionalButton: C(getI18nString("rcs.mobile_comment_reply_upsell.email_me_instead")),
     ctaText: getI18nString("rcs.rcs_shared.done"),
-    ctaOnClick: lQ,
-    onManualDismiss: lQ
+    ctaOnClick: noop,
+    onManualDismiss: noop
   }], [C]);
   let j = useMemo(() => w.map((e, t) => jsx(_$$h, {
     additionalButton: e.additionalButton,
@@ -110,7 +110,7 @@ export function $$N0() {
       _.next();
       e.ctaOnClick();
     },
-    onClose: lQ,
+    onClose: noop,
     onManualDismiss: () => {
       n.complete();
       e.onManualDismiss();

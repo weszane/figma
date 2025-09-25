@@ -6,12 +6,12 @@ import { subscribeAndAwaitData } from "../905/553831";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { UserFlagByName } from "../figma_app/43951";
-import { H } from "../905/17478";
+import { userFlagService } from "../905/17478";
 class p {
   constructor(e) {
     this.pendingIncrementCount = 0;
-    this.makeDebouncedUpsertRequest = _(e => H.upsertUserFlagWithCount(this.userFlagName, e), 1e3);
-    this.makeDebouncedResetRequest = _(() => H.resetUserFlag(this.userFlagName), 1e3);
+    this.makeDebouncedUpsertRequest = _(e => userFlagService.upsertUserFlagWithCount(this.userFlagName, e), 1e3);
+    this.makeDebouncedResetRequest = _(() => userFlagService.resetUserFlag(this.userFlagName), 1e3);
     this.increment = async () => {
       let e;
       let t = getInitialOptions().user_data?.id;

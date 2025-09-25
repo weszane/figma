@@ -7,7 +7,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { jr } from "../figma_app/896988";
 import { KeyboardReceiver } from "../905/826900";
 import { x } from "../905/179739";
-import { Jc, Sn } from "../905/946805";
+import { AssetTabType, ExtensionFeatureKey } from "../905/946805";
 export function $$_4() {
   let [e, t] = useState(!1);
   useEffect(() => {
@@ -43,46 +43,46 @@ let g = (e, t) => {
   if (!e) return !1;
   if (void 0 !== t) return t;
   switch (e) {
-    case Jc.ALL:
-    case Jc.EXTENSIONS:
-    case Sn.PLUGIN_PARAMETER_ENTRY:
-    case Sn.PLUGIN_SUBMENU_ENTRY:
-    case Jc.ASSETS:
-    case Sn.ASSETS_TAB_DETAIL_VIEW:
-    case Sn.ASSISTANT_CHAT:
-    case Sn.FIRST_DRAFT_MAKE_KIT:
-    case Sn.FIRST_DRAFT_LINT:
-    case Sn.FIRST_DRAFT_DEBUG:
-    case Sn.FIRST_DRAFT_MAKE_KIT_DEBUG:
-    case Sn.MAKE_EDITS_DEBUG:
-    case Sn.MAKE_EDITS_DEBUG_REVIEW:
-    case Sn.LINK_TO_COMPONENT:
-    case Sn.IMAGE_TO_DESIGN:
-    case Sn.IMAGE_TO_DESIGN_ORACLE:
-    case Sn.FIRST_DRAFT_KIT_PICKER:
+    case AssetTabType.ALL:
+    case AssetTabType.EXTENSIONS:
+    case ExtensionFeatureKey.PLUGIN_PARAMETER_ENTRY:
+    case ExtensionFeatureKey.PLUGIN_SUBMENU_ENTRY:
+    case AssetTabType.ASSETS:
+    case ExtensionFeatureKey.ASSETS_TAB_DETAIL_VIEW:
+    case ExtensionFeatureKey.ASSISTANT_CHAT:
+    case ExtensionFeatureKey.FIRST_DRAFT_MAKE_KIT:
+    case ExtensionFeatureKey.FIRST_DRAFT_LINT:
+    case ExtensionFeatureKey.FIRST_DRAFT_DEBUG:
+    case ExtensionFeatureKey.FIRST_DRAFT_MAKE_KIT_DEBUG:
+    case ExtensionFeatureKey.MAKE_EDITS_DEBUG:
+    case ExtensionFeatureKey.MAKE_EDITS_DEBUG_REVIEW:
+    case ExtensionFeatureKey.LINK_TO_COMPONENT:
+    case ExtensionFeatureKey.IMAGE_TO_DESIGN:
+    case ExtensionFeatureKey.IMAGE_TO_DESIGN_ORACLE:
+    case ExtensionFeatureKey.FIRST_DRAFT_KIT_PICKER:
       return !1;
-    case Sn.BACKGROUND_REMOVE_TOAST:
-    case Sn.UPSCALE_IMAGE_TOAST:
-    case Sn.FIRST_DRAFT_MAKE_CHANGES:
-    case Sn.MAKE_EDITS:
-    case Sn.FIRST_DRAFT_FINE_TUNE:
-    case Sn.MAGIC_LINK:
-    case Sn.MAGIC_LINK_DONE_TOAST:
-    case Sn.REGENERATE_TEXT_TOAST:
-    case Sn.RENAME_LAYERS_TOAST:
-    case Sn.SHORTEN:
-    case Sn.EXTENSION_DETAILS:
-    case Sn.TRANSLATE:
-    case Sn.VISUAL_SEARCH:
-    case Sn.FIGJAM_AI_CONTEXTUAL_FEATURES:
-    case Sn.MERMAID_TO_DIAGRAM:
-    case Sn.REWRITE:
-    case Sn.FIRST_DRAFT:
-    case Sn.GENERATE_IMAGE:
-    case Sn.EDIT_IMAGE:
-    case Sn.MAKE_VIDEO:
-    case Sn.LIBRARY_CSS_EXTRACTION:
-    case Sn.FOR_TESTING:
+    case ExtensionFeatureKey.BACKGROUND_REMOVE_TOAST:
+    case ExtensionFeatureKey.UPSCALE_IMAGE_TOAST:
+    case ExtensionFeatureKey.FIRST_DRAFT_MAKE_CHANGES:
+    case ExtensionFeatureKey.MAKE_EDITS:
+    case ExtensionFeatureKey.FIRST_DRAFT_FINE_TUNE:
+    case ExtensionFeatureKey.MAGIC_LINK:
+    case ExtensionFeatureKey.MAGIC_LINK_DONE_TOAST:
+    case ExtensionFeatureKey.REGENERATE_TEXT_TOAST:
+    case ExtensionFeatureKey.RENAME_LAYERS_TOAST:
+    case ExtensionFeatureKey.SHORTEN:
+    case ExtensionFeatureKey.EXTENSION_DETAILS:
+    case ExtensionFeatureKey.TRANSLATE:
+    case ExtensionFeatureKey.VISUAL_SEARCH:
+    case ExtensionFeatureKey.FIGJAM_AI_CONTEXTUAL_FEATURES:
+    case ExtensionFeatureKey.MERMAID_TO_DIAGRAM:
+    case ExtensionFeatureKey.REWRITE:
+    case ExtensionFeatureKey.FIRST_DRAFT:
+    case ExtensionFeatureKey.GENERATE_IMAGE:
+    case ExtensionFeatureKey.EDIT_IMAGE:
+    case ExtensionFeatureKey.MAKE_VIDEO:
+    case ExtensionFeatureKey.LIBRARY_CSS_EXTRACTION:
+    case ExtensionFeatureKey.FOR_TESTING:
       return !0;
     default:
       throwTypeError(e);

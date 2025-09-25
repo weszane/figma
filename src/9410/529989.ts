@@ -11,7 +11,7 @@ import { NT, g5 } from "../figma_app/579169";
 import { selectUserFlag } from "../905/940356";
 import { N } from "../figma_app/268271";
 import { b as _$$b2 } from "../9864/543300";
-import { d as _$$d } from "../905/14910";
+import { isAllowedToSeeNux } from "../905/14910";
 import { pC } from "../905/98947";
 import { j0N } from "../figma_app/6204";
 export function $$y0(e) {
@@ -36,7 +36,7 @@ export function $$y0(e) {
         emailValidatedAt: t,
         isK12SSOOrg: i
       }) {
-        return i ? !(e && ["student", "educator"].includes(e)) : !_$$d({
+        return i ? !(e && ["student", "educator"].includes(e)) : !isAllowedToSeeNux({
           jobTitle: e,
           emailValidatedAt: t
         });

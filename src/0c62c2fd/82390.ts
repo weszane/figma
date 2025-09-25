@@ -30,15 +30,15 @@ import { a as _$$a1, R as _$$R7 } from '../0c62c2fd/950366';
 import { I as _$$I, SidebarRow } from '../451de8f0/94979';
 import { reportError, SeverityLevel } from '../905/11';
 import { consumptionPaywallUtils } from '../905/224';
-import { O as _$$O7 } from '../905/6519';
-import { R as _$$R5 } from '../905/11928';
-import { K as _$$K2 } from '../905/12775';
+import { PlanComparisonChart } from '../905/6519';
+import { NotModalType } from '../905/11928';
+import { isMfaForGuestEnabled } from '../905/12775';
 import { L as _$$L2 } from '../905/13390';
-import { cz as _$$cz, i8 as _$$i6 } from '../905/14017';
-import { um as _$$um } from '../905/14223';
+import { LikeCountDisplay, UsageCountDisplay } from '../905/14017';
+import { fetchContactsOptimist } from '../905/14223';
 import { DeepLinkType } from '../905/15667';
 import { CloseButton } from '../905/17223';
-import { H as _$$H6 } from '../905/17478';
+import { userFlagService } from '../905/17478';
 import { NotificationType } from '../905/18613';
 import { isLoaded, isLoading, useIsLoaded, useIsLoading } from '../905/18797';
 import { useMemoStable } from '../905/19536';
@@ -58,7 +58,7 @@ import { isCommandOrShift, KeyCodes } from '../905/63728';
 import { y as _$$y4 } from '../905/76789';
 import { n as _$$n5 } from '../905/79930';
 import { an as _$$an, y$ as _$$y$, PW } from '../905/81009';
-import { jv as _$$jv, vu } from '../905/84777';
+import { setupPricesTransform, ensureLoadedResource } from '../905/84777';
 import { combineWithHyphen, ShareContext } from '../905/91820';
 import { UserAPIHandlers } from '../905/93362';
 import { setLastVisitedPlan } from '../905/93909';
@@ -81,7 +81,7 @@ import { Y5 } from '../905/163189';
 import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { NotificationCategory } from '../905/170564';
-import { F as _$$F4, y as _$$y2 } from '../905/171275';
+import { DesignsList, SizeOption } from '../905/171275';
 import { Be as _$$Be } from '../905/172516';
 import { Cm } from '../905/174697';
 import { ResourceTypes, ResourceTypeSubset } from '../905/178090';
@@ -224,9 +224,9 @@ import { d as _$$d2 } from '../905/647058';
 import { PageFolderFile } from '../905/652992';
 import { getResourceDataOrFallback } from '../905/663269';
 import { In } from '../905/672640';
-import { oW as _$$oW } from '../905/675859';
+import { WAFImage } from '../905/675859';
 import { CustomModalComponent } from '../905/684425';
-import { g as _$$g3 } from '../905/687265';
+import { textDisplayConfig } from '../905/687265';
 import { R as _$$R2 } from '../905/687502';
 import { a as _$$a10 } from '../905/692930';
 import { e as _$$e17 } from '../905/693478';
@@ -237,7 +237,7 @@ import { X as _$$X } from '../905/698965';
 import { L as _$$L4 } from '../905/704296';
 import { H as _$$H3 } from '../905/706055';
 import { D as _$$D5 } from '../905/711533';
-import { Ju as _$$Ju } from '../905/712921';
+import { ProductTierEnum } from '../905/712921';
 import { getAtomMutate, setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { SvgComponent } from '../905/714743';
 import { X as _$$X6 } from '../905/718513';
@@ -269,7 +269,7 @@ import { BK, Um } from '../905/848862';
 import { h as _$$h0 } from '../905/857431';
 import { EL, F_ } from '../905/858282';
 import { Cn } from '../905/862913';
-import { w as _$$w4 } from '../905/863010';
+import { TeamExtendedDataMapper } from '../905/863010';
 import { h as _$$h3 } from '../905/864281';
 import { u as _$$u5 } from '../905/866761';
 import { generateUUIDv4 } from '../905/871474';
@@ -283,13 +283,13 @@ import { le as _$$le } from '../905/904854';
 import { Z as _$$Z } from '../905/909123';
 import { XHR } from '../905/910117';
 import { F as _$$F2 } from '../905/915030';
-import { A as _$$A3 } from '../905/920142';
-import { a as _$$a } from '../905/925868';
+import { dayjs } from '../905/920142';
+import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
 import { J as _$$J8 } from '../905/931050';
 import { I as _$$I2 } from '../905/932503';
 import { ProfileRouteState, ResourceHubProfileRouteState } from '../905/934145';
-import { lQ as _$$lQ } from '../905/934246';
+import { noop } from 'lodash-es';
 import { v as _$$v4 } from '../905/939922';
 import { selectUserFlag } from '../905/940356';
 import { styleBuilderInstance } from '../905/941192';
@@ -588,13 +588,13 @@ import { canCreateAnyFileType, canCreateFileType, getDisabledCreationButtonReaso
 import { xH as _$$xH, vM, w3 } from '../figma_app/692865';
 import { Vh } from '../figma_app/692987';
 import { A as _$$A9, K as _$$K3 } from '../figma_app/694593';
-import { hF as _$$hF, j as _$$j2, VY as _$$VY, CJ } from '../figma_app/698052';
+import { getTeamCountTypeForUpsell, shouldShowOrgUpsell, TeamCountType, dismissOrgUpsell } from '../figma_app/698052';
 import { EO } from '../figma_app/701982';
 import { w as _$$w5 } from '../figma_app/705249';
 import { CreateUpgradeAction, draftViews, EntityType, SidebarSection, TeamType, teamViews } from '../figma_app/707808';
 import { wY } from '../figma_app/708845';
 import { q as _$$q2 } from '../figma_app/712384';
-import { hJ as _$$hJ } from '../figma_app/713624';
+import { TeamExtendedSchema } from '../figma_app/713624';
 import { f4 as _$$f2, yH as _$$yH, Zm } from '../figma_app/722141';
 import { BillingSettingEnum, OnboardingStepEnum } from '../figma_app/736948';
 import { isCommunityHubView } from '../figma_app/740025';
@@ -673,7 +673,7 @@ import oc from '../vendor/879378';
 import { z as _$$z9 } from '../vendor/999105';
 let U = B;
 let ev = 'seen_org_admin_moved_unassigned_drafts_onboarding';
-let ey = _$$A3('2024-10-15').startOf('day');
+let ey = dayjs('2024-10-15').startOf('day');
 let ew = userFlagExistsAtomFamily(ev);
 function ej() {
   let e = useAtomWithSubscription(ew);
@@ -687,7 +687,7 @@ function ej() {
   }, [e]);
   let n = useSelector(e => getCurrentUserOrgUser(e));
   let o = n?.created_at;
-  let l = !!o && _$$A3(o).isSameOrAfter(ey);
+  let l = !!o && dayjs(o).isSameOrAfter(ey);
   _$$h(() => {
     show({
       canShow: e => !(e || l)
@@ -788,7 +788,7 @@ function e0(e) {
     targetKey: eZ,
     trackingContextName: 'Connected Projects Admin Settings Onboarding',
     width: 350,
-    zIndex: _$$R5.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 let e1 = 'go_to_admin_row--goToAdminRow--OPVDe';
@@ -1034,7 +1034,7 @@ function tg(e) {
     title: n,
     trackingContextName: 'Dtm Deprecation Nav To Plan Overlay',
     width: 350,
-    zIndex: _$$R5.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 function tv(e) {
@@ -1819,11 +1819,11 @@ function rW({
   ...r
 }) {
   return t ? jsx(_$$N2, {
-    thumbnailType: _$$F4.PROTOTYPE,
+    thumbnailType: DesignsList.PROTOTYPE,
     ...r
   }) : jsx(_$$V3, {
     thumbnailUrl: e,
-    thumbnailType: _$$F4.PROTOTYPE,
+    thumbnailType: DesignsList.PROTOTYPE,
     ...r
   });
 }
@@ -2855,19 +2855,19 @@ function ai(e) {
   }, [t, _]);
   if (_.length === 0) return jsx(Fragment, {});
   let h = _.map(t => jsx(rH, {
-    clearRearrangeDragState: _$$lQ,
+    clearRearrangeDragState: noop,
     favorite: t,
     isFavoritesToMove_DEPRECATED: !0,
     isSelected: !1,
-    onSetResourceFavoriteDragDrop: _$$lQ,
+    onSetResourceFavoriteDragDrop: noop,
     preventHoverStyle: !1,
     previewYOffset: e.previewYOffset,
     rearrangeDragState: void 0,
-    reorderOrInsertFavorite: _$$lQ,
+    reorderOrInsertFavorite: noop,
     sections: [],
     setShowPreviewDelay: o,
     showPreviewDelay: r,
-    updateRearrangeDragState: _$$lQ
+    updateRearrangeDragState: noop
   }, t.resource.resourceId));
   return jsx(TrackingProvider, {
     name: _$$e7.FAVORITES_TO_MOVE_SECTION,
@@ -3099,7 +3099,7 @@ function aI({
 }
 let aN = {
   title: {
-    ..._$$g3.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     textAlign: 'x2b8uid',
     marginTop: 'x7hzu26',
     $$css: !0
@@ -3327,28 +3327,28 @@ function a1({
 }) {
   let t = useDispatch();
   let r = useSelector(e => e.userFlags);
-  let s = e === _$$VY.SINGLE_TEAM ? renderI18nText('upgrade.access_cross_team_design_libraries_sso_and_more') : renderI18nText('upgrade.centralize_your_teams_and_share_design_libraries');
-  let n = `${e === _$$VY.SINGLE_TEAM ? 'Single-Team' : 'Multi-Team'} Dismissible Org Upgrade Section`;
+  let s = e === TeamCountType.SINGLE_TEAM ? renderI18nText('upgrade.access_cross_team_design_libraries_sso_and_more') : renderI18nText('upgrade.centralize_your_teams_and_share_design_libraries');
+  let n = `${e === TeamCountType.SINGLE_TEAM ? 'Single-Team' : 'Multi-Team'} Dismissible Org Upgrade Section`;
   return jsx(a$, {
     trackingContext: n,
     icon: jsx(_$$L, {}),
     bodyText: s,
     ctaText: renderI18nText('upgrade.view_plans'),
     onClickCTA: () => {
-      e === _$$VY.SINGLE_TEAM && t(showModalHandler({
+      e === TeamCountType.SINGLE_TEAM && t(showModalHandler({
         type: HS,
         data: {
           upsellSource: UpsellModalType.ORG_UPGRADE_SECTION
         }
       }));
-      e === _$$VY.MULTIPLE_TEAMS && t(showModalHandler({
+      e === TeamCountType.MULTIPLE_TEAMS && t(showModalHandler({
         type: _$$u,
         data: {
           upsellSource: UpsellModalType.ORG_UPGRADE_SECTION
         }
       }));
     },
-    onDismiss: () => t(CJ(r)),
+    onDismiss: () => t(dismissOrgUpsell(r)),
     ctaDataTestId: 'org-upgrade-cta'
   });
 }
@@ -3408,17 +3408,17 @@ function a8(e) {
 }
 function ss(e, t, r) {
   let a = function (e, t) {
-    let r = _$$jv({
+    let r = setupPricesTransform({
       billableProductKeys: collaboratorSet,
       baseQuery: {
         currency: e,
-        tier: _$$Ju.PRO,
+        tier: ProductTierEnum.PRO,
         renewalTerm: t,
         unit: t
       }
     });
     let [a] = handleSuspenseRetainRelease(r);
-    let s = vu(a);
+    let s = ensureLoadedResource(a);
     if (s.data === null) throw new Error('Price data is null');
     return _$$s$(s.data);
   }(e, t);
@@ -3710,10 +3710,10 @@ function sj() {
       } : null));
       return t.currentTeamId ? r.transform(({
         team: r
-      }) => _$$hF(t, e, r)) : resourceUtils.loaded(_$$hF(t, e, null));
+      }) => getTeamCountTypeForUpsell(t, e, r)) : resourceUtils.loaded(getTeamCountTypeForUpsell(t, e, null));
     }();
-    let r = _$$j2(e);
-    return t.transform(e => e === _$$VY.NONE || r ? null : {
+    let r = shouldShowOrgUpsell(e);
+    return t.transform(e => e === TeamCountType.NONE || r ? null : {
       type: so.ORG_UPGRADE,
       props: {
         orgUpsellEligibility: e
@@ -3818,7 +3818,7 @@ let sC = {
     $$css: !0
   },
   text: {
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -3866,7 +3866,7 @@ function sL() {
 let sD = {
   button: {
     color: 'x1quhyk7',
-    ..._$$g3.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   }
 };
@@ -4128,7 +4128,7 @@ function sZ(e) {
         innerClassName: 'sidebar--innerScrollContainer--JaOLM',
         scrollingDisabled: !1,
         onScroll: e => f(e),
-        children: [jsx(_$$a, {
+        children: [jsx(IntersectionSentinel, {
           onIntersectionChange: t => {
             w(!t.isIntersecting);
             t.isIntersecting || g || (e.trackScroll(), x(!0));
@@ -4251,7 +4251,7 @@ function sZ(e) {
                 children: L()
               })]
             })
-          }), jsx(_$$a, {
+          }), jsx(IntersectionSentinel, {
             onInitialLoad: e => {
               v(!e);
             },
@@ -4476,7 +4476,7 @@ function iN(e) {
     selectedView: e
   }) => e);
   let n = _$$E7();
-  let d = _$$K2();
+  let d = isMfaForGuestEnabled();
   let u = useCurrentUserOrg();
   let m = d && u && !draftViews.includes(r.view);
   !function () {
@@ -4863,7 +4863,7 @@ function i2(e, t) {
     newValue: r
   }) => {
     let a = e[1];
-    return e.length !== 2 || typeof a != 'string' || (!i6.includes(a) || !!t || !!r) && a in _$$hJ.shape && !i8.includes(a);
+    return e.length !== 2 || typeof a != 'string' || (!i6.includes(a) || !!t || !!r) && a in TeamExtendedSchema.shape && !i8.includes(a);
   });
 }
 let i5 = createComparator({
@@ -5733,7 +5733,7 @@ function nq({
         containerStyle: nQ.grid,
         doNotFocusOnLoad: !0,
         getAriaLabel: e => e.name,
-        handleContextMenu: _$$lQ,
+        handleContextMenu: noop,
         isDraggable: !1,
         items: l,
         keepSelectionOnFocusLost: !0,
@@ -5929,7 +5929,7 @@ let n2 = registerModal(({
       isDisabled: !0,
       query: l,
       onSearchChange: b,
-      clearSearch: _$$lQ,
+      clearSearch: noop,
       searchPlaceholder: getI18nString('file_browser.choose_file_modal.search_for_a_file'),
       children: jsx('div', {
         className: U()(cssBuilderInstance.flex.itemsCenter.justifyCenter.wFull.hFull.flexGrow1.$),
@@ -6036,7 +6036,7 @@ function os({
           children: jsx(NM, {
             file: e,
             noBorder: !0,
-            size: _$$y2.SMALL
+            size: SizeOption.SMALL
           })
         }),
         tileBorderRadius: 8,
@@ -6098,7 +6098,7 @@ function oi({
 }
 let on = {
   fileName: {
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textOverflow: 'xlyipyv',
     whiteSpace: 'xuxw1ft',
     overflow: 'xb3r6kr',
@@ -6322,11 +6322,11 @@ function oy({
 }
 let ow = {
   title: {
-    ..._$$g3.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   subtitle: {
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -6465,7 +6465,7 @@ function oI({
       children: jsx(_$$e1, {
         tile: i,
         noBorder: !0,
-        size: _$$y2.SMALL
+        size: SizeOption.SMALL
       })
     })]
   });
@@ -6490,7 +6490,7 @@ function oN({
 }
 let oC = {
   fileName: {
-    ..._$$g3.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     textOverflow: 'xlyipyv',
     whiteSpace: 'xuxw1ft',
     overflow: 'xb3r6kr',
@@ -6579,7 +6579,7 @@ function oR({
       let t = [];
       for (let r of e) {
         if (r.team) {
-          let e = _$$w4.toSinatra(r.team);
+          let e = TeamExtendedDataMapper.toSinatra(r.team);
           t.push({
             ...e,
             pro_team: !1,
@@ -6704,12 +6704,12 @@ function oq({
 }
 let oX = {
   headerText: {
-    ..._$$g3.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     paddingTop: 'xz9dl7a',
     $$css: !0
   },
   subHeaderText: {
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     paddingTop: 'x1y1aw1k',
     color: 'x1n0bwc9',
     $$css: !0
@@ -7295,7 +7295,7 @@ function lA({
 }) {
   return jsx('div', {
     className: 'x10l6tqk x1y0lptx xxbcxho x78zum5 x1q0g3np x1v2ro7d x1g75g36',
-    children: e.map((e, r) => jsx(_$$oW, {
+    children: e.map((e, r) => jsx(WAFImage, {
       ..._$$xk(lO.image, lR.card, t && lO.hoveredImage),
       src: buildUploadUrl(e),
       alt: ''
@@ -7325,11 +7325,11 @@ function lF({
   isHovered: t
 }) {
   return jsxs(Fragment, {
-    children: [jsx(_$$oW, {
+    children: [jsx(WAFImage, {
       ..._$$xk(lP.image, lP.frontImage, lR.card, t && lP.frontImageHovered),
       src: buildUploadUrl(e[0]),
       alt: ''
-    }), jsx(_$$oW, {
+    }), jsx(WAFImage, {
       ..._$$xk(lP.image, lP.backImage, lR.card, t && lP.backImageHovered),
       src: buildUploadUrl(e[1]),
       alt: ''
@@ -7372,7 +7372,7 @@ function lL({
 }) {
   return jsx('div', {
     className: 'x10l6tqk x1d9swqr x5yr21d',
-    children: jsx(_$$oW, {
+    children: jsx(WAFImage, {
       ..._$$xk(lD.image, t && lD.hoveredImage),
       src: buildUploadUrl(e),
       alt: ''
@@ -7400,7 +7400,7 @@ function lM({
   let s = t === 'sheetStyle' ? lB.hoveredSheetImage : lB.hoveredWidgetImage;
   return jsx('div', {
     ..._$$xk(lB[t]),
-    children: jsx(_$$oW, {
+    children: jsx(WAFImage, {
       ..._$$xk(lB.image, r && s),
       src: buildUploadUrl(e),
       alt: ''
@@ -7448,15 +7448,15 @@ function lU({
   isHovered: t
 }) {
   return jsxs(Fragment, {
-    children: [jsx(_$$oW, {
+    children: [jsx(WAFImage, {
       ..._$$xk(lW.image, lW.bottomImage),
       src: buildUploadUrl(e[0]),
       alt: ''
-    }), jsx(_$$oW, {
+    }), jsx(WAFImage, {
       ..._$$xk(lW.image, lW.middleImage, t && lW.hoveredMiddleImage),
       src: buildUploadUrl(e[1]),
       alt: ''
-    }), jsx(_$$oW, {
+    }), jsx(WAFImage, {
       ..._$$xk(lW.image, lW.topImage, t && lW.hoveredTopImage),
       src: buildUploadUrl(e[2]),
       alt: ''
@@ -7540,7 +7540,7 @@ function l$({
 }
 let lG = {
   headerText: {
-    ..._$$g3.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     lineHeight: 'x1o2sk6j',
     $$css: !0
   }
@@ -7890,7 +7890,7 @@ let lK = {
     $$css: !0
   },
   title: {
-    ..._$$g3.textHeadingSmall,
+    ...textDisplayConfig.textHeadingSmall,
     fontWeight: 'xk50ysn',
     $$css: !0
   }
@@ -8331,7 +8331,7 @@ function l1({
       className: 'x78zum5 xdt5ytf x6s0dn4 xh8yej3 x16g6g8t xgqmno8 x1sjmt1f xl56j7k',
       children: [jsx('div', {
         className: 'x78zum5 xdt5ytf x6s0dn4 x14o0rcq',
-        children: jsx(_$$oW, {
+        children: jsx(WAFImage, {
           className: 'x193iq5w xl1xv1r',
           src: buildUploadUrl('8b7c6fb3e353c1972267681e37a56765b96f5b3c'),
           alt: getI18nString('community.resource_hub.your_admins_have_restricted_access'),
@@ -8364,13 +8364,13 @@ function l1({
 let l4 = {
   heading: {
     color: 'x1akne3o',
-    ..._$$g3.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     textAlign: 'x2b8uid',
     $$css: !0
   },
   description: {
     color: 'x1n0bwc9',
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textAlign: 'x2b8uid',
     $$css: !0
   }
@@ -8505,7 +8505,7 @@ function dd({
       className: 'x78zum5 x1q0g3np xh8yej3 xeq9io7 xgqmno8 x3s0vfn',
       children: [jsx('div', {
         className: 'x3nfvp2 x13a6bvl xgqmno8 xb3r6kr',
-        children: jsx(_$$oW, {
+        children: jsx(WAFImage, {
           className: 'xnq0rdo x15elv7b x1sy10c2 x1d6c7ev xl1xv1r',
           src: t,
           alt: getI18nString('community.resource_hub.get_more_done'),
@@ -8534,12 +8534,12 @@ function dd({
 let dc = {
   heading: {
     color: 'x1akne3o',
-    ..._$$g3.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     $$css: !0
   },
   description: {
     color: 'x1n0bwc9',
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -8570,7 +8570,7 @@ function du({
       className: 'x78zum5 xdt5ytf x6s0dn4 xh8yej3 x16g6g8t xgqmno8 x1sjmt1f xl56j7k',
       children: [jsx('div', {
         className: 'x78zum5 xdt5ytf x6s0dn4 xvue9z xwbyk0q x2lah0s xk1l47c',
-        children: jsx(_$$oW, {
+        children: jsx(WAFImage, {
           className: 'x193iq5w xl1xv1r xetamn0',
           src: r,
           alt: d,
@@ -8608,19 +8608,19 @@ function du({
 let dm = {
   heading: {
     color: 'x1akne3o',
-    ..._$$g3.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     textAlign: 'x2b8uid',
     $$css: !0
   },
   description: {
     color: 'x1n0bwc9',
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textAlign: 'x2b8uid',
     $$css: !0
   },
   browseResourcesFromCommunity: {
     color: 'x1quhyk7',
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textAlign: 'x2b8uid',
     cursor: 'x1ypdohk',
     $$css: !0
@@ -8649,7 +8649,7 @@ function dp({
       className: 'x78zum5 xdt5ytf x6s0dn4 xh8yej3 x16g6g8t xgqmno8 x1sjmt1f xl56j7k',
       children: [jsx('div', {
         className: 'x78zum5 xdt5ytf x6s0dn4 xvue9z xwbyk0q x2lah0s xk1l47c',
-        children: jsx(_$$oW, {
+        children: jsx(WAFImage, {
           className: 'x193iq5w xl1xv1r xetamn0',
           src: color === 'dark' ? buildUploadUrl('199fc5fd43ab7b8cdb2208db7a7a1c8b4f039119') : buildUploadUrl('363ceafa11ccd8ba7b2d9fe2b9aba1f8f8477596'),
           alt: getI18nString('community.resource_hub.custom_templates_for_your_team'),
@@ -8691,19 +8691,19 @@ function dp({
 let df = {
   heading: {
     color: 'x1akne3o',
-    ..._$$g3.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     textAlign: 'x2b8uid',
     $$css: !0
   },
   description: {
     color: 'x1n0bwc9',
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textAlign: 'x2b8uid',
     $$css: !0
   },
   browseResourcesFromCommunity: {
     color: 'x1quhyk7',
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textAlign: 'x2b8uid',
     cursor: 'x1ypdohk',
     $$css: !0
@@ -9517,7 +9517,7 @@ let dq = {
     'paddingTop': null,
     'paddingBottom': null,
     'outlineOffset': 'x1g40iwv',
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     ':hover_backgroundColor': 'x133fa97',
     '$$css': !0
   }
@@ -9917,7 +9917,7 @@ function cl({
 }
 let cd = {
   headerText: {
-    ..._$$g3.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     $$css: !0
   }
 };
@@ -9969,7 +9969,7 @@ function cv() {
     className: 'x78zum5 xdt5ytf x6s0dn4 xh8yej3 x16g6g8t xgqmno8 x1sjmt1f xl56j7k',
     children: [jsx('div', {
       className: 'x78zum5 xdt5ytf x6s0dn4 xvue9z x2lah0s xl0j6f1 x1wft13i',
-      children: jsx(_$$oW, {
+      children: jsx(WAFImage, {
         className: 'x193iq5w xl1xv1r',
         src: e,
         alt: getI18nString('community.saves.no_saves_title'),
@@ -9993,13 +9993,13 @@ function cv() {
 let cy = {
   heading: {
     color: 'x1akne3o',
-    ..._$$g3.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     textAlign: 'x2b8uid',
     $$css: !0
   },
   description: {
     color: 'x1n0bwc9',
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textAlign: 'x2b8uid',
     $$css: !0
   }
@@ -11474,11 +11474,11 @@ function uS({
 }
 let uk = {
   title: {
-    ..._$$g3.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   description: {
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     paddingRight: 'xmzs88n',
     paddingInlineStart: null,
     paddingInlineEnd: null,
@@ -13193,7 +13193,7 @@ function m3(e, t, r) {
     if (!e.currentUserOrgId || !isOrgDelinquent(e.currentUserOrgId, e)) return null;
     let n = e.orgById[e.currentUserOrgId];
     if (!n) return null;
-    let o = n.past_due_at && _$$A3(n.past_due_at).add(2, 'weeks') > _$$A3(new Date());
+    let o = n.past_due_at && dayjs(n.past_due_at).add(2, 'weeks') > dayjs(new Date());
     if (!r && o) return null;
     let l = e.orgUsersByOrgId[e.currentUserOrgId] ?? {};
     let d = getTopAdminUsers(l).map(e => jsxs('span', {
@@ -13627,7 +13627,7 @@ function m9(e, t, r, i, n, l) {
         trackingContextName: 'Unified Legacy / Beta File Limit Banner'
       };
     } else if (U) {
-      let e = _$$A3(l.grace_period_end).toDate();
+      let e = dayjs(l.grace_period_end).toDate();
       let t = renderI18nText('payments.pro_plan_ends_relative_time_string', {
         relative_time_string: jsx(_$$h6, {
           date: e
@@ -15185,7 +15185,7 @@ function _0({
   return jsx(_$$e1, {
     tile: t,
     noBorder: !0,
-    size: _$$y2.SMALL
+    size: SizeOption.SMALL
   });
 }
 function _1({
@@ -16135,7 +16135,7 @@ function p5({
                     folderId: t.id
                   }
                 }));
-                E && v && _$$H6.upsertUserFlagWithCount(p4, 3);
+                E && v && userFlagService.upsertUserFlagWithCount(p4, 3);
               },
               'aria-label': getI18nString('file_browser.folder_settings_modal.tooltip.settings'),
               'htmlAttributes': {
@@ -16531,7 +16531,7 @@ function fn() {
         children: jsx(_$$m3, {
           folderList: o,
           dataOnboardingKeyIndex: void 0,
-          onChangeSortOptions: _$$lQ,
+          onChangeSortOptions: noop,
           viewType: ViewMode.GRID,
           isSharerInfoIncluded: !1
         })
@@ -17333,7 +17333,7 @@ let fz = {
     '$$css': !0
   },
   text: {
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'xiuzu7u',
     $$css: !0
   },
@@ -17770,11 +17770,11 @@ function gf({
         })
       }), '\xA0\xA0\xB7\xA0\xA0', jsxs('div', {
         className: 'home_shelf_resource_tile--metrics--riQEm',
-        children: [jsx(_$$cz, {
+        children: [jsx(LikeCountDisplay, {
           currentUserLiked: !1,
           likeCount: e.like_count,
           disableFontStyling: !0
-        }), jsx(_$$i6, {
+        }), jsx(UsageCountDisplay, {
           usageCount: getResourceUserCount(e),
           disableFontStyling: !0
         })]
@@ -17806,15 +17806,15 @@ function gb() {
     'aria-label': getI18nString('community.home_shelf.see_more_on_community'),
     'children': [jsxs('div', {
       className: 'x1lliihq x1n2onr6 x1vjfegm xh8yej3 x1mxnbhz x176lpz5 xb3r6kr xdr6sbx x1klh5xi',
-      children: [jsx(_$$oW, {
+      children: [jsx(WAFImage, {
         className: 'x1vjfegm xxcbz4w x17muf8i x10l6tqk xm6i5cn x2e2xj7 x19y5rnk xbngzmg xgk9eko',
         src: buildUploadUrl('2f1ddf99a93705a145b3e9258c29994c2bcc3296'),
         alt: ''
-      }), jsx(_$$oW, {
+      }), jsx(WAFImage, {
         className: 'xhtitgo xzc2ltc xjndpiq x10l6tqk xm6i5cn x2e2xj7 x19y5rnk xbngzmg xgk9eko',
         src: buildUploadUrl('3b5e7024cc8ec5912d46ce4c4f555f79de8afa22'),
         alt: ''
-      }), jsx(_$$oW, {
+      }), jsx(WAFImage, {
         className: 'xzkaem6 x156by65 x1366x3a x10l6tqk xm6i5cn x2e2xj7 x19y5rnk xbngzmg xgk9eko',
         src: buildUploadUrl('1922e9623fd798bcb563e1f4e9ae105b54d904b4'),
         alt: ''
@@ -17832,7 +17832,7 @@ function gb() {
 }
 let gv = {
   linkText: {
-    ..._$$g3.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     width: 'xh8yej3',
     textAlign: 'xdpxx8g',
     color: 'x1quhyk7',
@@ -18153,7 +18153,7 @@ let gE = {
   },
   homeShelfTitle: {
     color: 'x1akne3o',
-    ..._$$g3.textHeadingSmall,
+    ...textDisplayConfig.textHeadingSmall,
     $$css: !0
   },
   homeShelfTabContent: {
@@ -19712,8 +19712,8 @@ function hD({
     }
   });
   useEffect(() => {
-    let e = _$$um.loadingKeyForPayload();
-    isLoading(u, e) || isLoaded(u, e) || _(_$$um());
+    let e = fetchContactsOptimist.loadingKeyForPayload();
+    isLoading(u, e) || isLoaded(u, e) || _(fetchContactsOptimist());
   }, [_, u]);
   useEffect(() => {
     d && _(Rw());
@@ -20114,7 +20114,7 @@ function hM({
           key: iq.INVITE,
           element: jsx(_$$c2, {
             variant: 'secondary',
-            onClick: c ? _$$lQ : d,
+            onClick: c ? noop : d,
             disabled: c,
             htmlAttributes: {
               'data-tooltip': g,
@@ -20815,7 +20815,7 @@ let xr = e => {
             sortConfig: h.sort,
             viewType: ViewMode.GRID,
             gridContainerStyle: xs.grid,
-            sortBy: _$$lQ
+            sortBy: noop
           }), (() => {
             let e = _data?.tile ?? null;
             return jsx(TrackingProvider, {
@@ -20914,7 +20914,7 @@ function xd(e) {
       userHandle: r.handle
     }),
     error: !0,
-    onDismiss: _$$lQ
+    onDismiss: noop
   })), setEditorDocumentTitle(r.handle), {
     userNotInPlan: !!(l && !a),
     userId: e.userId,
@@ -21892,7 +21892,7 @@ function xz({
   });
   if (c) {
     if (c.deleted_at) {
-      let e = _$$A3(c.deleted_at).add(28, 'days').toDate();
+      let e = dayjs(c.deleted_at).add(28, 'days').toDate();
       t = getI18nString('team_restore.confirm_restore_header', {
         teamName: c.name
       });
@@ -22069,7 +22069,7 @@ function xq(e) {
                 chooseOrgPlan: m,
                 planComparisonModalHeaderOverride: null
               })
-            }) : jsx(_$$O7, {
+            }) : jsx(PlanComparisonChart, {
               currency: r,
               chooseStarterPlan: u,
               chooseProPlan: e => c(null, e),
@@ -22372,7 +22372,7 @@ export function $$bo0() {
   let [F, P] = useState(0);
   let [L, D] = useState(0);
   let [M, B] = useState(!1);
-  _$$h(() => (document.body.classList.add(bi), document.documentElement.classList.add(bs), $o(), trackFileBrowserLoaded(I, t, k, R), getExperimentConfigAsync('exp_aa_test_file_browser_view').catch(_$$lQ), () => {
+  _$$h(() => (document.body.classList.add(bi), document.documentElement.classList.add(bs), $o(), trackFileBrowserLoaded(I, t, k, R), getExperimentConfigAsync('exp_aa_test_file_browser_view').catch(noop), () => {
     document.body.classList.remove(bi);
     document.documentElement.classList.remove(bs);
     $E();

@@ -14,12 +14,12 @@ import { V } from "../905/355181";
 import { TextWithTruncation } from "../905/984674";
 import { UpgradeAction } from "../905/370443";
 import { TrackedAnchor, TrackedDiv, TrackingProvider } from "../figma_app/831799";
-import { SK, Fq } from "../905/84777";
+import { setupActiveRatesTransform, BillingPriceSource } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { designSet } from "../905/332483";
 import { renderRequestErrorInterstitial } from "../905/3140";
 import { getUserCurrency, CurrencyFormatter } from "../figma_app/514043";
-import { Ju, IX } from "../905/712921";
+import { ProductTierEnum, RenewalTermEnum } from "../905/712921";
 import { N as _$$N } from "../905/809096";
 import { ModalView } from "../figma_app/918700";
 var $$n = c;
@@ -95,11 +95,11 @@ function E() {
     currency: e,
     billableProductKey: l,
     billableProductVariantKey: null,
-    tier: Ju.PRO,
-    renewalTerm: IX.YEAR,
-    unit: IX.MONTH
+    tier: ProductTierEnum.PRO,
+    renewalTerm: RenewalTermEnum.YEAR,
+    unit: RenewalTermEnum.MONTH
   }));
-  let i = SK(l, Fq.UPSELL_MODALS);
+  let i = setupActiveRatesTransform(l, BillingPriceSource.UPSELL_MODALS);
   let [a] = handleSuspenseRetainRelease(i);
   if (null === a.data) throw Error("Price data is null");
   let r = new CurrencyFormatter(e);

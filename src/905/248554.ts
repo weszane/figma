@@ -3,7 +3,7 @@ import { c as _$$c } from "../905/543659";
 import { N } from "../905/64868";
 import { R } from "../905/927840";
 import { t } from "../905/367656";
-import { Z3 } from "../905/8035";
+import { normalizeObjectKeys } from "../905/8035";
 import { F } from "../905/136718";
 import { H2, fl, wI, $r, ut } from "../905/707098";
 export class $$u0 {
@@ -46,7 +46,7 @@ export class $$u0 {
     return this.readValue("clipsContent", e => e.clipsContent);
   }
   get properties() {
-    return this.readValue("properties", e => Z3(e.componentProperties));
+    return this.readValue("properties", e => normalizeObjectKeys(e.componentProperties));
   }
   get opacity() {
     return this.readValue("opacity", e => e.opacity);

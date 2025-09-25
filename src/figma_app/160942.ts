@@ -1,6 +1,6 @@
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
-import { SK, Fq, vu } from "../905/84777";
-import { Ju, IX } from "../905/712921";
+import { setupActiveRatesTransform, BillingPriceSource, ensureLoadedResource } from "../905/84777";
+import { ProductTierEnum, RenewalTermEnum } from "../905/712921";
 import { UpgradeSteps, SubscriptionType } from "../figma_app/831101";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { designSet } from "../905/332483";
@@ -15,23 +15,23 @@ export function $$c0({
     currency: e,
     billableProductKey: t,
     billableProductVariantKey: null,
-    tier: Ju.PRO,
-    renewalTerm: IX.YEAR,
-    unit: IX.MONTH
+    tier: ProductTierEnum.PRO,
+    renewalTerm: RenewalTermEnum.YEAR,
+    unit: RenewalTermEnum.MONTH
   }));
   let d = t.dict(t => ({
     currency: e,
     billableProductKey: t,
     billableProductVariantKey: null,
-    tier: Ju.PRO,
-    renewalTerm: IX.MONTH,
-    unit: IX.MONTH
+    tier: ProductTierEnum.PRO,
+    renewalTerm: RenewalTermEnum.MONTH,
+    unit: RenewalTermEnum.MONTH
   }));
-  let c = SK(r, Fq.PRO_CART);
-  let u = SK(d, Fq.PRO_CART);
+  let c = setupActiveRatesTransform(r, BillingPriceSource.PRO_CART);
+  let u = setupActiveRatesTransform(d, BillingPriceSource.PRO_CART);
   let [p, _] = handleSuspenseRetainRelease(c, u);
-  let h = vu(p);
-  let m = vu(_);
+  let h = ensureLoadedResource(p);
+  let m = ensureLoadedResource(_);
   if (!h.data || !m.data) throw Error("Prices data was null");
   let g = h.data[ProductAccessTypeEnum.DESIGN].amount;
   let f = h.data[ProductAccessTypeEnum.FIGJAM].amount;

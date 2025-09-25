@@ -1,4 +1,4 @@
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { AppStateTsApi } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import s from "../vendor/781591";
@@ -48,7 +48,7 @@ export async function $$A1({
           atomStoreManager.set(BT, void 0);
           s(o()(e, "dispatch"));
         },
-        onPublishProgress: lQ,
+        onPublishProgress: noop,
         onPublishError: e => {
           atomStoreManager.set(BT, void 0);
           l(e);

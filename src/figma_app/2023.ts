@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { getResourceDataOrFallback } from "../905/663269";
 import a from "../vendor/961736";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { encodeUri } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { getProductAccessTypeByKey } from "../figma_app/217457";
@@ -307,7 +307,7 @@ let x = e => {
     accessReverted,
     expiresAt
   } = e;
-  return !accessReverted && !!expiresAt && A().isAfter(expiresAt);
+  return !accessReverted && !!expiresAt && dayjs().isAfter(expiresAt);
 };
 export function $$N2(e) {
   return !!(!e.canEdit && e.viewer_export_restricted && e.link_access === FPermissionLevelType.INHERIT);

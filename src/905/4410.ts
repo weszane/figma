@@ -1,61 +1,105 @@
-import { createContext, forwardRef, useContext, useLayoutEffect, useState } from 'react';
-import { jsx } from 'react/jsx-runtime';
-import { InputComponent } from '../905/185998';
-import { Stepper } from '../905/294086';
-import { E } from '../905/427996';
-import { l as _$$l } from '../905/490996';
-import { hasIncrementBy } from '../905/687992';
-import { setupRefUpdater } from '../905/823680';
-let c = createContext(null);
-let u = createContext(_$$l);
-function p({
-  children: e
+import { noop } from 'lodash-es'
+import { createContext, forwardRef, useContext, useLayoutEffect, useState } from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { InputComponent } from '../905/185998'
+import { Stepper } from '../905/294086'
+
+import { useFormattedTextInput } from '../905/427996'
+import { hasIncrementBy } from '../905/687992'
+import { setupRefUpdater } from '../905/823680'
+
+/**
+ * Context for formatted input value.
+ * @originalName c
+ */
+export const FormattedInputValueContext = createContext(null)
+
+/**
+ * Context for formatted input setter.
+ * @originalName u
+ */
+export const FormattedInputSetterContext = createContext(noop)
+
+/**
+ * Provider for formatted input context.
+ * @param props - React children.
+ * @originalName p
+ */
+export function FormattedInputProvider({
+  children,
+}: {
+  children: React.ReactNode
 }) {
-  let [t, i] = useState(null);
-  return jsx(c.Provider, {
-    value: t,
-    children: jsx(u.Provider, {
-      value: i,
-      children: e
-    })
-  });
-}
-p.displayName = 'FormattedInputContext';
-export let $$h1 = forwardRef((e, t) => jsx(p, {
-  children: jsx(InputComponent.Root, {
-    ...e,
-    ref: t
+  const [value, setValue] = useState(null)
+  return jsx(FormattedInputValueContext.Provider, {
+    value,
+    children: jsx(FormattedInputSetterContext.Provider, {
+      value: setValue,
+      children,
+    }),
   })
-}));
-$$h1.displayName = 'FormattedInput.Root';
-let g = forwardRef((e, t) => {
-  let i = useContext(u);
-  let a = E(e);
-  useLayoutEffect(() => i(a), [a]);
-  let {
-    inputProps
-  } = a;
-  let c = setupRefUpdater(t, inputProps.ref);
+}
+FormattedInputProvider.displayName = 'FormattedInputContext'
+
+/**
+ * Root component for formatted input.
+ * @originalName $$h1
+ */
+export const FormattedInputRoot = forwardRef((props, ref) =>
+  jsx(FormattedInputProvider, {
+    children: jsx(InputComponent.Root, {
+      ...props,
+      ref,
+    }),
+  }),
+)
+FormattedInputRoot.displayName = 'FormattedInput.Root'
+
+/**
+ * Field component for formatted input.
+ * @originalName g
+ */
+export const FormattedInputField = forwardRef((props, ref) => {
+  const setValue = useContext(FormattedInputSetterContext)
+  const formattedInput = useFormattedTextInput(props)
+  useLayoutEffect(() => setValue(formattedInput), [formattedInput])
+  const { inputProps } = formattedInput
+  const mergedRef = setupRefUpdater(ref, inputProps.ref)
   return jsx(InputComponent, {
     ...inputProps,
-    ref: c
-  });
-});
-g.displayName = 'FormattedInput.Field';
-export let $$f0 = g;
-forwardRef((e, t) => {
-  let i = useContext(c);
-  return i && !i.inputProps.disabled && hasIncrementBy(i.formatter) ? jsx(Stepper, {
-    ref: t,
-    value: i.value,
-    formatter: i.formatter,
-    getStringValue: i.getStringValue,
-    onChange: e => i.onChange(e, {
-      commit: !0,
-      source: 'stepper'
-    }),
-    onChangeRestricted: i.onChangeRestricted
-  }) : null;
-}).displayName = 'FormattedInput.Stepper';
-export const D0 = $$f0;
-export const bL = $$h1;
+    ref: mergedRef,
+  })
+})
+FormattedInputField.displayName = 'FormattedInput.Field'
+
+/**
+ * Stepper component for formatted input.
+ * @originalName FormattedInput.Stepper
+ */
+export const FormattedInputStepper = forwardRef((props, ref) => {
+  const context = useContext(FormattedInputValueContext)
+  if (
+    context
+    && !context.inputProps.disabled
+    && hasIncrementBy(context.formatter)
+  ) {
+    return jsx(Stepper, {
+      ref,
+      value: context.value,
+      formatter: context.formatter,
+      getStringValue: context.getStringValue,
+      onChange: value =>
+        context.onChange(value, {
+          commit: true,
+          source: 'stepper',
+        }),
+      onChangeRestricted: context.onChangeRestricted,
+    })
+  }
+  return null
+})
+FormattedInputStepper.displayName = 'FormattedInput.Stepper'
+
+// Export aliases for backward compatibility
+export const D0 = FormattedInputField
+export const bL = FormattedInputRoot

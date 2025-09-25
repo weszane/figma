@@ -25,7 +25,7 @@ import { customHistory } from "../905/612521";
 import { isMobilePlatformNotFigmaMobile } from "../figma_app/778880";
 import { getViewerInstance } from "../figma_app/632319";
 import { InputPrimitive } from "../905/246212";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { A as _$$A2 } from "../b2835def/363895";
 import { ButtonLarge } from "../905/521428";
 import { _ as _$$_ } from "../905/410717";
@@ -645,7 +645,7 @@ function en({
       "data-tooltip-subtext": t?.subtext,
       "data-tooltip-offset-y": 8
     },
-    children: jsx(oW, {
+    children: jsx(WAFImage, {
       className: G,
       src: _$$p(e.thumbnailUrl),
       alt: e.name,
@@ -687,7 +687,7 @@ function er({
       svg: _$$A2
     }), e ? jsx("div", {
       className: "facepile--previewStamp--TbFAQ",
-      children: jsx(oW, {
+      children: jsx(WAFImage, {
         className: G,
         src: _$$p(e.thumbnailUrl),
         alt: e.name,

@@ -7,7 +7,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { isWhiteboardFileType } from "../figma_app/976749";
 import { cortexAPI } from "../figma_app/432652";
-import { B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { JT, pY } from "../figma_app/632248";
 import { s as _$$s, w as _$$w } from "../905/286488";
@@ -221,9 +221,9 @@ export function $$M0() {
           });
         }
       }];
-      (error instanceof Vz || sZ(error) === B.CONTENT_LENGTH_LIMIT) && (ea = renderI18nText("ai.error.content_length_limit"), el = []);
+      (error instanceof Vz || sZ(error) === ErrorType.CONTENT_LENGTH_LIMIT) && (ea = renderI18nText("ai.error.content_length_limit"), el = []);
       error instanceof Jd && (ea = renderI18nText("ai_text_tools.missing_fonts"), el = []);
-      sZ(error) === B.UNSAFE_OR_HARMFUL_CONTENT && (el = []);
+      sZ(error) === ErrorType.UNSAFE_OR_HARMFUL_CONTENT && (el = []);
       en > 0 && ei > 0 && ei < en && (eo = renderI18nText("ai_text_tools.rewrite.couldnt_count", {
         failed: ei,
         total: en

@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ButtonPrimitive } from "../905/632989";
 import { AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
@@ -10,7 +10,7 @@ import { Ay } from "@stylexjs/stylex";
 import { Xr, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import h from "classnames";
 import { Point } from "../905/736624";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { LoadingSpinner } from "../figma_app/858013";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -127,7 +127,7 @@ export function $$F1({
       },
       children: [s && jsx(LoadingSpinner, {
         className: _$$S
-      }), jsx(oW, {
+      }), jsx(WAFImage, {
         onDragStart: preventDefault,
         className: uP,
         src: t,
@@ -255,7 +255,7 @@ function K({
         })
       }), jsx(Wh.Center, {
         children: jsx(i, {
-          insertTemplate: lQ,
+          insertTemplate: noop,
           isInsertingTemplate: !1,
           shouldUseOpaqueBackground: !0,
           children: m

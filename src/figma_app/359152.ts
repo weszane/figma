@@ -6,7 +6,7 @@ import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { rr, Jn, wv, Ve } from "../figma_app/236327";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -215,7 +215,7 @@ export function $$P2(e) {
       children: [jsx("div", {
         className: cssBuilderInstance.$$if(e.minimalSpacing, cssBuilderInstance.px0.mb0, cssBuilderInstance.px24.mb20).$,
         children: e.children
-      }), jsx(_$$a, {
+      }), jsx(IntersectionSentinel, {
         "data-testid": `load-more-team-${e.teamId}`,
         onIntersectionChange: ({
           isIntersecting: t
@@ -223,7 +223,7 @@ export function $$P2(e) {
           t && e.onRequestLoadMoreForTeam(e.teamId);
         }
       })]
-    }), jsx(_$$a, {
+    }), jsx(IntersectionSentinel, {
       onIntersectionChange: ({
         isIntersecting: e
       }) => {
@@ -383,7 +383,7 @@ export function $$k3(e) {
           onRequestLoadMoreForTeam: requestLoadMoreForTeam,
           children: l
         }, t);
-      }), jsx(_$$a, {
+      }), jsx(IntersectionSentinel, {
         "data-testid": "load-more-teams",
         className: cssBuilderInstance.relative.$,
         style: {

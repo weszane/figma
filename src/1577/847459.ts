@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useEffect, useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import r, { C as _$$C } from "../905/222694";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { C as _$$C2 } from "../905/520159";
 import { A as _$$A } from "../905/251970";
 import { J } from "../905/125993";
@@ -11,7 +11,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { B as _$$B } from "../905/907815";
 import { useSubscription } from "../figma_app/288654";
 import p, { generateUUIDv4 } from "../905/871474";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { LoadingOverlay } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { J as _$$J } from "../1577/181415";
@@ -200,7 +200,7 @@ function z(e) {
       children: [jsxs("div", {
         className: "quick_reply_thread_view--preview--I47Ds",
         children: [jsx(_$$B, {
-          children: jsx(oW, {
+          children: jsx(WAFImage, {
             src: A || void 0,
             className: "quick_reply_thread_view--previewImage--gSK-n",
             style: {
@@ -342,8 +342,8 @@ function V(e) {
           prevAuthor: 0 === n ? null : loadedComments[n - 1].user_id,
           setHyperlinkEditorRef: z,
           setHyperlinkLocation: U,
-          setIsEditorFocused: lQ,
-          setResolved: lQ,
+          setIsEditorFocused: noop,
+          setResolved: noop,
           showEditedIndicator: !!e.edited_at,
           submitEdit,
           thread: {
@@ -378,7 +378,7 @@ function V(e) {
       mentionables: commentMentionables,
       messageMeta: y,
       mountInputFocused: !0,
-      onCancel: lQ,
+      onCancel: noop,
       onComposeFocus: void 0,
       onSubmit: () => {
         submitReply({
@@ -392,7 +392,7 @@ function V(e) {
       replyContainerRef: V,
       setHyperlinkEditorRef: z,
       setHyperlinkLocation: U,
-      setIsEditorFocused: lQ,
+      setIsEditorFocused: noop,
       submitText: getI18nString("comments.reply"),
       threadId,
       threadPosition: null,

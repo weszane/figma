@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { roundTo2Decimals } from "../figma_app/492908";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { isNullish } from "../figma_app/95419";
 import { Fullscreen } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
@@ -59,7 +59,7 @@ export function $$f0() {
     e.unshift({
       type: ZU.CUSTOM_ACTION,
       customActionType: Wg.DROPDOWN_GROUP_HEADER,
-      onClick: lQ,
+      onClick: noop,
       getTitle: () => getI18nString("slides.properties_panel.text_styles.styles"),
       preventHoisting: !0,
       recordingKey: "stylesHeader"

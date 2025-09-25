@@ -4,7 +4,7 @@ import { deepEqual } from '../905/382883';
 import { observableState } from '../905/441145';
 import { RetainedPromiseManager } from '../905/491061';
 import { getFeatureFlags } from '../905/601108';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { createLoadingState } from '../905/957591';
 import { resourceUtils } from '../905/989992';
 import { atom, atomStoreManager, atomWithDefault, createRemovableAtomFamily, setupAtomWithMount } from '../figma_app/27355';
@@ -129,7 +129,7 @@ function sanitizeCacheData(data: any): any {
   if (Array.isArray(data) && 'hasNextPage' in data) {
     const result: any = [];
     for (const key in data) {
-      const value = typeof data[key] === 'function' ? lQ : data[key];
+      const value = typeof data[key] === 'function' ? noop : data[key];
       result[key] = value;
     }
     return result;
@@ -197,7 +197,7 @@ export function createAtomFamilyAlias(getStore: () => any, cacheTTL: number, cac
      */
     const atomFamily = createRemovableAtomFamily((key: any) => {
       // Suspense handler for promise management (original: suspenseHandler)
-      const suspenseHandler = new RetainedPromiseManager(() => atomStoreManager.sub(atomFamily, () => { }));
+      const suspenseHandler = new RetainedPromiseManager(() => atomStoreManager.sub(atomFamily, () => {}));
       // Handle null key case
       if (key === null) {
         return atom(resourceUtils.disabledSuspendable(suspenseHandler));
@@ -281,7 +281,7 @@ export function sanitizeResourceData(data: any): any {
   if (Array.isArray(data) && 'hasNextPage' in data) {
     const sanitized: any[] = [];
     for (const i in data) {
-      const value = typeof data[i] === 'function' ? lQ : data[i];
+      const value = typeof data[i] === 'function' ? noop : data[i];
       Object.assign(sanitized, {
         [i]: value
       });

@@ -18,7 +18,7 @@ import { h1 } from "../905/986103";
 import { y2 } from "../figma_app/563413";
 import { lv } from "../figma_app/204891";
 import { V as _$$V } from "../figma_app/385855";
-import { y as _$$y } from "../905/171275";
+import { SizeOption } from "../905/171275";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
@@ -287,7 +287,7 @@ function ee(e) {
             children: jsx(_$$V, {
               thumbnailUrl: e.signedThumbnailUrl,
               thumbnailType: lv(e.editorType, !1),
-              size: _$$y.SMALL,
+              size: SizeOption.SMALL,
               borderRadius: 4
             })
           }), jsx("span", {

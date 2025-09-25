@@ -3,12 +3,12 @@ import { useState, useCallback, useLayoutEffect } from "react";
 import { C } from "../905/222694";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import o from "classnames";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { B } from "../905/907815";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { A as _$$A2 } from "../905/222027";
 import { q } from "../905/600041";
-import { F, y as _$$y } from "../905/171275";
+import { DesignsList, SizeOption } from "../905/171275";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { J } from "../905/337735";
 import { Kf, _k, gc, pQ } from "../905/188961";
@@ -27,7 +27,7 @@ export function $$y0({
   disableSmartBackground: v,
   hideUntilLoaded: A = !0
 }) {
-  let x = !v && t !== F.DEFAULT_DESIGN && t !== F.DEFAULT_WHITEBOARD && t !== F.SLIDES && t !== F.COOPER;
+  let x = !v && t !== DesignsList.DEFAULT_DESIGN && t !== DesignsList.DEFAULT_WHITEBOARD && t !== DesignsList.SLIDES && t !== DesignsList.COOPER;
   let {
     latestThumbnailUrl,
     smartBackgroundColor
@@ -37,7 +37,7 @@ export function $$y0({
     needsSmartBackground: r
   }) {
     let [n, a] = useAtomValueAndSetter(E);
-    let o = !e || _$$A(e).isBefore(_$$A().subtract(4, "seconds"));
+    let o = !e || dayjs(e).isBefore(dayjs().subtract(4, "seconds"));
     let l = !r || t && !!n[t];
     let [c, u] = useState(o && t && l ? t : null);
     let p = useCallback(e => {
@@ -61,7 +61,7 @@ export function $$y0({
     useLayoutEffect(() => {
       if (t) {
         if (e) {
-          let r = _$$A(e).diff(_$$A().subtract(4, "seconds"));
+          let r = dayjs(e).diff(dayjs().subtract(4, "seconds"));
           if (r <= 0) {
             p(t);
             return;
@@ -86,33 +86,33 @@ export function $$y0({
     touchedAt: r,
     needsSmartBackground: x
   });
-  if (t === F.OFFLINE) return jsx(_$$A2, {
+  if (t === DesignsList.OFFLINE) return jsx(_$$A2, {
     size: y,
     borderRadius: b,
     noBorder: T
   });
-  let w = t !== F.SLIDES ? C(o) : void 0;
-  let O = t === F.DEFAULT_DESIGN || t === F.DEFAULT_WHITEBOARD || t === F.COOPER;
+  let w = t !== DesignsList.SLIDES ? C(o) : void 0;
+  let O = t === DesignsList.DEFAULT_DESIGN || t === DesignsList.DEFAULT_WHITEBOARD || t === DesignsList.COOPER;
   return jsx(q, {
     borderRadius: b,
     backgroundClassName: l()({
-      [Kf]: t === F.WHITEBOARD || t === F.DEFAULT_WHITEBOARD,
-      [_k]: t === F.DEFAULT_DESIGN && (!w || "transparent" === w),
-      [gc]: t === F.PROTOTYPE || t === F.SLIDES || t === F.SITES && !(x && smartBackgroundColor) && (!w || "transparent" === w)
+      [Kf]: t === DesignsList.WHITEBOARD || t === DesignsList.DEFAULT_WHITEBOARD,
+      [_k]: t === DesignsList.DEFAULT_DESIGN && (!w || "transparent" === w),
+      [gc]: t === DesignsList.PROTOTYPE || t === DesignsList.SLIDES || t === DesignsList.SITES && !(x && smartBackgroundColor) && (!w || "transparent" === w)
     }),
     noBorder: T,
     backgroundColor: x ? smartBackgroundColor : w,
     children: null !== latestThumbnailUrl && jsx(B, {
       enabled: A,
-      children: jsx(oW, {
+      children: jsx(WAFImage, {
         src: latestThumbnailUrl,
         alt: "",
         draggable: !!S,
         className: l()(cssBuilderInstance.hFull.wFull.$, pQ, {
-          [cssBuilderInstance.p10.$]: O && y !== _$$y.SMALL,
-          [cssBuilderInstance.p4.$]: O && y === _$$y.SMALL,
-          [cssBuilderInstance.py12.$]: O && t === F.COOPER,
-          [cssBuilderInstance.px6.$]: O && t === F.COOPER
+          [cssBuilderInstance.p10.$]: O && y !== SizeOption.SMALL,
+          [cssBuilderInstance.p4.$]: O && y === SizeOption.SMALL,
+          [cssBuilderInstance.py12.$]: O && t === DesignsList.COOPER,
+          [cssBuilderInstance.px6.$]: O && t === DesignsList.COOPER
         }),
         ...(v ? {} : {
           crossOrigin: "anonymous"

@@ -23,7 +23,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { fullscreenValue } from "../figma_app/455680";
 import w from "../vendor/7508";
 import { VS } from "../905/696699";
-import { TF } from "../905/18922";
+import { VectorPathBuilder } from "../905/18922";
 import { Vy, zT } from "../905/484695";
 import { XMLParser } from "../vendor/870203";
 import { F as _$$F } from "../905/422355";
@@ -404,7 +404,7 @@ let ec = ({
       let e = parseInt(G(t, ["w"]) ?? "0", 10);
       let a = parseInt(G(t, ["h"]) ?? "0", 10);
       let s = t.elements ?? [];
-      let o = new TF("NONE");
+      let o = new VectorPathBuilder("NONE");
       s.forEach(t => {
         switch (t.name) {
           case "a:moveTo":

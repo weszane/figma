@@ -77,7 +77,7 @@ import { e as _$$e } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { getVisibleTheme } from '../905/640017';
 import { N as _$$N3 } from '../905/645480';
-import { oW } from '../905/675859';
+import { WAFImage } from '../905/675859';
 import { getSingletonSceneGraph } from '../905/700578';
 import { L as _$$L } from '../905/704296';
 import { logError } from '../905/714362';
@@ -109,12 +109,12 @@ import { e as _$$e2 } from '../905/916195';
 import { A as _$$A3 } from '../905/925160';
 import { showDropdownThunk, hideDropdownAction } from '../905/929976';
 import { q as _$$q2 } from '../905/932270';
-import { lQ as _$$lQ } from '../905/934246';
+import { noop } from 'lodash-es';
 import { logCmsError } from '../905/937198';
 import { lY as _$$lY } from '../905/939482';
 import { selectUserFlag } from '../905/940356';
 import { styleBuilderInstance } from '../905/941192';
-import { Sn } from '../905/946805';
+import { ExtensionFeatureKey } from '../905/946805';
 import { $3 } from '../905/946937';
 import { t as _$$t7 } from '../905/947268';
 import { U as _$$U } from '../905/966438';
@@ -1912,7 +1912,7 @@ function sc({
             width: c,
             height: d
           },
-          children: jsx(oW, {
+          children: jsx(WAFImage, {
             src: e.thumbnail_url,
             className: 'site_kit_embeds--thumbnail---2jDe'
           })
@@ -1989,7 +1989,7 @@ function sh(e) {
       zIndex: e.zIndexOverride,
       opacity: e.opacityOverride ? e.opacityOverride : 1
     },
-    children: jsx(oW, {
+    children: jsx(WAFImage, {
       src: t.draggingResource.preview_url,
       alt: ''
     })
@@ -4513,7 +4513,7 @@ function nU({
           ...u
         },
         className: e.thumbnailShouldCover ? 'asset_panel_library--libraryPreviewCover---Jx5R asset_panel_library--libraryPreview--jl-5n' : 'asset_panel_library--libraryPreview--jl-5n'
-      }), thumbnailUrl && jsx(oW, {
+      }), thumbnailUrl && jsx(WAFImage, {
         src: thumbnailUrl,
         onLoad: c,
         className: 'asset_panel_library--hiddenImage--a-LoJ',
@@ -6871,7 +6871,7 @@ let i2 = e => {
   let {
     isActive,
     start
-  } = _$$Z(_$$lQ);
+  } = _$$Z(noop);
   useEffect(() => {
     e !== t && start(1e4);
   }, [e, t, start]);
@@ -7384,7 +7384,7 @@ function lb({
       onBlur: E,
       onChange: w,
       onClearSearch: M,
-      onFocus: _$$lQ,
+      onFocus: noop,
       path: [SectionType.HEADER, SearchType.SEARCH_AND_FILTER],
       placeholder: P,
       query,
@@ -7766,7 +7766,7 @@ function lQ({
           closeOnEscape: !0
         }) : jsx(WS, {}),
         beforeModuleOpen: () => jp(G4.ASSETS_PANEL_VISUAL_SEARCH),
-        name: Sn.VISUAL_SEARCH
+        name: ExtensionFeatureKey.VISUAL_SEARCH
       },
       trackingData: {
         source: G4.ASSETS_PANEL_VISUAL_SEARCH
@@ -7783,7 +7783,7 @@ function lQ({
           closeOnEscape: !0
         }) : jsx(WS, {}),
         beforeModuleOpen: () => qF(G4.ASSETS_PANEL_VISUAL_SEARCH, t),
-        name: Sn.VISUAL_SEARCH
+        name: ExtensionFeatureKey.VISUAL_SEARCH
       },
       trackingData: {
         source: G4.ASSETS_PANEL_VISUAL_SEARCH

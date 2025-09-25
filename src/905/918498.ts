@@ -8,7 +8,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { lk, u3 } from "../figma_app/109538";
-import { B } from "../905/380801";
+import { SalesUpsellModalType } from "../905/380801";
 import { b as _$$b, A as _$$A } from "../905/723768";
 import { selectViewAction } from "../905/929976";
 import { hideModal, showModalHandler } from "../905/156213";
@@ -50,7 +50,7 @@ export let $$v0 = registerModal(function (e) {
     plan.tier === FPlanNameType.ORG ? i(showModalHandler({
       type: lk,
       data: {
-        source: B.CONNECTED_PROJECTS_MAXIMUM_CONNECTIONS_UPSELL
+        source: SalesUpsellModalType.CONNECTED_PROJECTS_MAXIMUM_CONNECTIONS_UPSELL
       }
     })) : plan.tier === FPlanNameType.PRO && i(showModalHandler({
       type: u3,

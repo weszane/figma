@@ -51,7 +51,7 @@ import { GQ } from "../figma_app/32128";
 import { findNodeByCriteria, findFirstNodeOfType, navigateAndSelect } from "../figma_app/202626";
 import { w as _$$w2 } from "../905/129046";
 import { rq } from "../905/425180";
-import { R as _$$R2, Q as _$$Q } from "../905/11928";
+import { NotModalType, Ui3PositionType } from "../905/11928";
 import { F_ } from "../905/748636";
 import { fullscreenValue } from "../figma_app/455680";
 import { xT } from "../figma_app/195407";
@@ -422,7 +422,7 @@ function ef(e) {
     },
     title: renderI18nText("dev_mode_demo_file.tour.annotations_title"),
     trackingContextName: "Dev Mode Demo File Tour Annotations Tooltip",
-    zIndex: _$$R2.UNSET
+    zIndex: NotModalType.UNSET
   }) : null;
 }
 function e_(e) {
@@ -569,7 +569,7 @@ function eT(e) {
       hideBorder: !0
     }),
     onClose: e.onClose,
-    position: _$$Q.BOTTOM_RIGHT,
+    position: Ui3PositionType.BOTTOM_RIGHT,
     primaryCta: {
       label: renderI18nText("dev_mode_demo_file.tour.start_button"),
       ctaTrackingDescriptor: UpgradeAction.TRY_IT_OUT,
@@ -670,7 +670,7 @@ function ej(e) {
     },
     title: renderI18nText("dev_mode_demo_file.tour.statuses_title"),
     trackingContextName: "Dev Mode Demo File Tour Statuses Tooltip",
-    zIndex: _$$R2.UNSET
+    zIndex: NotModalType.UNSET
   }) : null;
 }
 function eN({

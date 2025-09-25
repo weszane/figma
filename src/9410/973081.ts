@@ -8,7 +8,7 @@ import { W as _$$W3 } from '../0c62c2fd/624465';
 import { t as _$$t5 } from '../469e6e40/489933';
 import { reportError } from '../905/11';
 import { isLoading } from '../905/18797';
-import { FU } from '../905/26824';
+import { setKeyboardShortcutPanelTab } from '../905/26824';
 import { P as _$$P3 } from '../905/35881';
 import { P as _$$P2 } from '../905/36308';
 import { z4 } from '../905/37051';
@@ -17,7 +17,7 @@ import { A as _$$A9 } from '../905/51743';
 import { u as _$$u2 } from '../905/56919';
 import { R as _$$R3 } from '../905/57445';
 import { KeyCodes, isExactModifier, ModifierKeyCodes } from '../905/63728';
-import { s as _$$s7 } from '../905/73603';
+import { addRecentlyUsedAction } from '../905/73603';
 import { n as _$$n3 } from '../905/79930';
 import { setSideHandler } from '../905/80656';
 import { combineWithHyphen, ShareContext } from '../905/91820';
@@ -29,7 +29,7 @@ import { mW, qN } from '../905/123443';
 import { J as _$$J2 } from '../905/129695';
 import { KindEnum } from '../905/129884';
 import { N as _$$N } from '../905/130112';
-import { Av, Pg } from '../905/149328';
+import { getFileTypePx, getFileTypeLargePx } from '../905/149328';
 import { t as _$$t7 } from '../905/150656';
 import { showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
@@ -75,7 +75,7 @@ import { k as _$$k4 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { useDraftsFolderProject } from '../905/461685';
 import { AutoLayout, Spacer } from '../905/470281';
-import { V as _$$V3 } from '../905/480825';
+import { PluginImage } from '../905/480825';
 import { formatI18nMessage } from '../905/482208';
 import { gR } from '../905/486443';
 import { nP as _$$nP, LU } from '../905/487011';
@@ -108,7 +108,7 @@ import { O as _$$O } from '../905/655700';
 import { useLocalStorageSync } from '../905/657224';
 import { getResourceDataOrFallback } from '../905/663269';
 import { F as _$$F3 } from '../905/680873';
-import { g as _$$g } from '../905/687265';
+import { textDisplayConfig } from '../905/687265';
 import { getSingletonSceneGraph } from '../905/700578';
 import { U as _$$U } from '../905/707331';
 import { u as _$$u } from '../905/712485';
@@ -139,13 +139,14 @@ import { XHR } from '../905/910117';
 import { bL } from '../905/911410';
 import { Y as _$$Y2 } from '../905/912236';
 import { debounce } from '../905/915765';
-import { A as _$$A6 } from '../905/920142';
+import { dayjs } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
 import { hideDropdownAction, selectViewAction } from '../905/929976';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';
+;
 import { styleBuilderInstance } from '../905/941192';
 import { dL, qz } from '../905/944871';
-import { Jc, Sn } from '../905/946805';
+import { AssetTabType, ExtensionFeatureKey } from '../905/946805';
 import { Vd } from '../905/964786';
 import { TextWithTruncation } from '../905/984674';
 import { NONE_SYMBOL } from '../905/992467';
@@ -295,7 +296,7 @@ import { xE } from '../figma_app/581520';
 import { jz as _$$jz } from '../figma_app/587765';
 import { getCurrentTeam } from '../figma_app/598018';
 import { Bu, dd, Lk, Rt } from '../figma_app/604494';
-import { R as _$$R4 } from '../figma_app/612938';
+import { PluginManager } from '../figma_app/612938';
 import { Ih } from '../figma_app/617427';
 import { hasCmsCollection } from '../figma_app/618433';
 import { J3, JU, kD, kN } from '../figma_app/622574';
@@ -500,7 +501,7 @@ function J() {
   }, [Sprig, query, sessionId]);
   useEffect(() => {
     if (getFeatureFlags().assets_tab_sprig_tracking && !c.current) {
-      t === Jc.ASSETS && loaded && (i ? o.current = setTimeout(() => {
+      t === AssetTabType.ASSETS && loaded && (i ? o.current = setTimeout(() => {
         p();
       }, 3e4) : (p(), u()));
       return u;
@@ -1064,7 +1065,7 @@ function tS() {
   let t = useSelector(e => e.exportableItems);
   let i = useSelector(e => e.dropdownShown);
   let s = !!e && isExportRestricted(e);
-  let o = Av();
+  let o = getFileTypePx();
   let d = useSelector(e => e.saveAsState);
   let c = useSelector(e => e.mirror.appModel.currentPage);
   let u = useDispatch();
@@ -1519,7 +1520,7 @@ function tG({
   });
   let i = isWhiteboardFileType();
   let r = Ye();
-  let a = Pg();
+  let a = getFileTypeLargePx();
   let s = _o();
   let {
     left,
@@ -4035,7 +4036,7 @@ let ns = class e extends PureComponent {
                 overwriteNames: !1
               });
             },
-            name: Sn.RENAME_LAYERS_TOAST
+            name: ExtensionFeatureKey.RENAME_LAYERS_TOAST
           },
           trackingData: {
             source: 'selection_context_menu_rename_layers'
@@ -4327,7 +4328,7 @@ function nl(e) {
   });
 }
 ns.displayName = 'SelectionContextMenu';
-ns.refreshCache = new _$$O2(_$$A6.duration(1, 'day'));
+ns.refreshCache = new _$$O2(dayjs.duration(1, 'day'));
 var nd = (e => (e.SINGLE_SLIDE_VIEW = 'single_slide_view', e.COOPER_CAROUSEL = 'cooper_carousel', e))(nd || {});
 function nc(e) {
   let t = useSelector(selectOpenFile);
@@ -4894,12 +4895,12 @@ let nN = {
   },
   header: {
     paddingTop: 'x1iorvi4',
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   subheader: {
     paddingBottom: 'xjkvuk6',
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -6302,7 +6303,7 @@ function aQ({
       h(t);
       e(t);
     },
-    validateToken: lQ,
+    validateToken: noop,
     getSearchResults: e => u.searchIncludeKey(o, e.inputValue).filter(([e, t]) => !t.parametersRequired).map(([e, t]) => ({
       id: `${Dz(t)}-${t.pluginId}-${EG(t)}`,
       searchKey: e,
@@ -8112,7 +8113,7 @@ function sH({
       }), jsx(ButtonPrimitive, {
         'className': 'keyboard_shortcut_panel--closeX--QSyPA',
         'onClick': function () {
-          h(FU({
+          h(setKeyboardShortcutPanelTab({
             tab: null
           }));
           fullscreenValue.triggerAction('toggle-keyboard-shortcuts');
@@ -8431,7 +8432,7 @@ class ow extends RecordingPureComponent {
         searchQuery: e,
         numSearchResults: this.state.searchResults.length,
         currentSelection: this.props.currentSelection,
-        module: Jc.ALL,
+        module: AssetTabType.ALL,
         moduleFilters: null,
         qaVersion: _$$U4,
         searchQueryResults: _$$X2(t)
@@ -8531,7 +8532,7 @@ class ow extends RecordingPureComponent {
         let i = !1;
         if (e.itemParameterArgs) {
           if (e.runPluginArgs && !this.state.searchQuery) {
-            _$$R4.instance.enqueue({
+            PluginManager.instance.enqueue({
               mode: 'run-forever',
               runPluginArgs: e.runPluginArgs
             });
@@ -8647,7 +8648,7 @@ class ow extends RecordingPureComponent {
     });
     this.props.dispatch(recentlyUsedQuickCommands(r));
     this.props.updateFrecencyHistory(e, this.state.searchQuery);
-    _$$s7({
+    addRecentlyUsedAction({
       displayText: i,
       runPluginArgs: t,
       localFileIdOrPluginId: e.pluginLocalFileId ?? e.pluginId
@@ -8663,7 +8664,7 @@ class ow extends RecordingPureComponent {
           ...this.props.pluginAndWidgetMenuArgs.publishedPlugins,
           ...this.props.pluginAndWidgetMenuArgs.publishedWidgets
         }
-      })), t && !hasLocalFileId(t)) ? jsx(_$$V3, {
+      })), t && !hasLocalFileId(t)) ? jsx(PluginImage, {
         className: ZR,
         plugin: t,
         role: 'presentation'
@@ -9183,7 +9184,7 @@ function o1(e) {
     location: new Point(C, v),
     onInputChange: h,
     onInputKeyDown: m,
-    onBlur: lQ,
+    onBlur: noop,
     onClickTrash: f
   });
 }
@@ -9419,7 +9420,7 @@ export function $$lr0({
   let V = !t.showUi && TY(t.dropdownShown);
   let W = t.dropdownShown?.type === jv;
   let Y = W ? t.dropdownShown?.data?.parameterEntryArgs : void 0;
-  let Z = t.dropdownShown?.data?.fireQuickActionsTrackingEvent || lQ;
+  let Z = t.dropdownShown?.data?.fireQuickActionsTrackingEvent || noop;
   let Q = !_$$ty();
   let ee = useCallback(e => {
     i(_$$r({

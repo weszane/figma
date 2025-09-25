@@ -2,19 +2,19 @@ import { CortexError } from "../figma_app/691470";
 import { ServiceCategories } from "../905/165054";
 import { setTagGlobal, reportError } from "../905/11";
 import { renderI18nText } from "../905/303541";
-import { B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { _0, PI, sZ, Gx } from "../figma_app/948389";
 import { T_ } from "../figma_app/883638";
 let c = {
-  [B.RATE_LIMIT_EXCEEDED]: renderI18nText("figmake.errors.generic"),
-  [B.CONTENT_LENGTH_LIMIT]: renderI18nText("ai.error.chat_content_length_limit"),
-  [B.UNSAFE_OR_HARMFUL_CONTENT]: renderI18nText("figmake.errors.unsafe_or_harmful"),
-  [B.GENERIC]: renderI18nText("figmake.errors.generic"),
-  [B.OFFLINE]: renderI18nText("ai.error.offline"),
-  [B.METER_EXCEEDED]: renderI18nText("ai.error.generic"),
-  [B.NOT_IMPLEMENTED]: renderI18nText("ai.error.not_implemented"),
-  [B.NETWORK_ERROR]: renderI18nText("ai.error.network_error"),
-  [B.UNCLOSED_TAGS_BENIGN]: renderI18nText("ai.error.generic")
+  [ErrorType.RATE_LIMIT_EXCEEDED]: renderI18nText("figmake.errors.generic"),
+  [ErrorType.CONTENT_LENGTH_LIMIT]: renderI18nText("ai.error.chat_content_length_limit"),
+  [ErrorType.UNSAFE_OR_HARMFUL_CONTENT]: renderI18nText("figmake.errors.unsafe_or_harmful"),
+  [ErrorType.GENERIC]: renderI18nText("figmake.errors.generic"),
+  [ErrorType.OFFLINE]: renderI18nText("ai.error.offline"),
+  [ErrorType.METER_EXCEEDED]: renderI18nText("ai.error.generic"),
+  [ErrorType.NOT_IMPLEMENTED]: renderI18nText("ai.error.not_implemented"),
+  [ErrorType.NETWORK_ERROR]: renderI18nText("ai.error.network_error"),
+  [ErrorType.UNCLOSED_TAGS_BENIGN]: renderI18nText("ai.error.generic")
 };
 let u = {
   [T_.ATTACHMENTS_TOO_LARGE]: renderI18nText("ai.error.attachments_too_large"),

@@ -57,7 +57,7 @@ import { PerfTimer } from '../905/609396';
 import { setupThemeContext } from '../905/614223';
 import { ButtonPrimitive } from '../905/632989';
 import { getVisibleTheme } from '../905/640017';
-import { oW } from '../905/675859';
+import { WAFImage } from '../905/675859';
 import { getSingletonSceneGraph } from '../905/700578';
 import { L as _$$L } from '../905/704296';
 import { $y, Jy, Zu } from '../905/708651';
@@ -77,7 +77,7 @@ import { useHasParentOrgId } from '../905/882262';
 import { A as _$$A9 } from '../905/891805';
 import { e as _$$e6 } from '../905/916195';
 import { selectViewAction } from '../905/929976';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { selectUserFlag } from '../905/940356';
 import { postUserFlag } from '../905/985254';
 import { Ak } from '../905/986103';
@@ -262,7 +262,7 @@ function Z({
       children: [jsxs('div', {
         className: 'codebase_suggestions_onboarding--header--cIvzn',
         children: [jsx('div', {
-          children: jsx(oW, {
+          children: jsx(WAFImage, {
             src: a ? q : X,
             height: 111,
             width: 155,
@@ -282,7 +282,7 @@ function Z({
           description: e.renderDescription(),
           iconBackgroundStyle: 'light',
           onClick: () => i?.(e.installMethod),
-          children: jsx(oW, {
+          children: jsx(WAFImage, {
             src: a ? e.thumbnailUrls.dark : e.thumbnailUrls.light,
             alt: e.renderTitle(),
             className: ['codebase_suggestions_onboarding--installMethodThumbnail--qYsut', e.thumbnailAlignment === Y7.RIGHT_ALIGNED ? 'codebase_suggestions_onboarding--installMethodThumbnailRightAligned--xqXeV' : 'codebase_suggestions_onboarding--installMethodThumbnailCentered--7z0rq'].join(' ')
@@ -342,7 +342,7 @@ function Q({
         className: 'codebase_suggestions_onboarding--methodContent--lMPrS',
         children: [jsx('div', {
           className: 'codebase_suggestions_onboarding--methodHeaderIcon--5uHPs',
-          children: jsx(oW, {
+          children: jsx(WAFImage, {
             src: s ? q : X,
             alt: getI18nString('dev_handoff.component_browser_onboarding.connect_your_running_app'),
             height: 111,
@@ -458,7 +458,7 @@ let en = function ({
         className: 'component_browser_onboarding--content--Um63s',
         children: [jsxs('div', {
           className: 'component_browser_onboarding--header--ka15q',
-          children: [jsx(oW, {
+          children: [jsx(WAFImage, {
             src: c,
             alt: getI18nString('dev_handoff.component_browser_onboarding.connected_projects_icon'),
             className: 'component_browser_onboarding--headerImage--6Y9rK'
@@ -509,7 +509,7 @@ let en = function ({
               g('codebase-suggestion-options');
             },
             iconBackgroundStyle: 'light',
-            children: jsx(oW, {
+            children: jsx(WAFImage, {
               src: u,
               alt: getI18nString('dev_handoff.component_browser_onboarding.connected_projects_icon'),
               style: {
@@ -520,7 +520,7 @@ let en = function ({
           }), !o && jsx(B, {
             title: getI18nString('dev_handoff.component_browser_onboarding.connect_to_github'),
             description: getI18nString('dev_handoff.component_browser_onboarding.map_files_from_your_repo'),
-            onClick: lQ,
+            onClick: noop,
             disabled: !0,
             badge: jsx(_$$E, {
               children: getI18nString('dev_handoff.component_browser_onboarding.coming_soon')
@@ -537,7 +537,7 @@ let en = function ({
             description: getI18nString('dev_handoff.component_browser_onboarding.copy_and_paste_links'),
             onClick: e,
             iconBackgroundStyle: 'light',
-            children: jsx(oW, {
+            children: jsx(WAFImage, {
               src: p,
               alt: getI18nString('dev_handoff.component_browser_onboarding.connected_projects_icon')
             })
@@ -1319,7 +1319,7 @@ function th({
         dropdownShown: i,
         multiplayer: s,
         currentUser: t,
-        onUserClick: lQ,
+        onUserClick: noop,
         disableFollowing: !0
       }), o && jsx(_$$w, {
         user: l,

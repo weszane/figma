@@ -7,7 +7,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { mergeRegister, $findMatchingParent } from "../vendor/425002";
 import { createCommand, $getSelection, SELECTION_CHANGE_COMMAND, COMMAND_PRIORITY_LOW, $setSelection, KEY_MODIFIER_COMMAND, $isRangeSelection, COMMAND_PRIORITY_HIGH, COMMAND_PRIORITY_CRITICAL, CLICK_COMMAND } from "lexical";
 import { setupHyperlinkHandler } from "../figma_app/815170";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { Point } from "../905/736624";
 import { c as _$$c } from "../905/196462";
 import { normalizeUrl, getRelevantSelectionRange, getRelativePosition, isSelectionWithinLink, getSelectionLinkUrl, getRelevantSelectionNode } from "../905/999278";
@@ -193,7 +193,7 @@ function x({
       onInputChange: e => {
         x(e.target.value);
       },
-      onBlur: lQ,
+      onBlur: noop,
       onClickTrash: () => {
         w();
       }

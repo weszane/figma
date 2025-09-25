@@ -2,7 +2,7 @@ import { assert, throwTypeError } from "../figma_app/465776";
 import { createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { oE } from "../905/953718";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { C5 } from "../905/147383";
 import { FC } from "../figma_app/502422";
 import { transformAtom } from "../905/401885";
@@ -66,7 +66,7 @@ export function $$_0({
           throwTypeError(e);
       }
     }(e);
-    return A(t).isAfter(A().subtract(i, "day"));
+    return dayjs(t).isAfter(dayjs().subtract(i, "day"));
   }(t.cooldown, e.updatedAt) ? {
     reasonType: oE.LifecycleCheckFail,
     cause: "COOLDOWN"

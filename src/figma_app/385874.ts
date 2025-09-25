@@ -311,7 +311,7 @@ class PaintManager {
    * @param r - Parameter 3.
    * @returns The generated ID.
    */
-  private getId(e: any, t: any, r: any): string {
+  getId(e: any, t: any, r: any): string {
     return `${r}-${t}-${e}`
   }
 
@@ -521,7 +521,7 @@ class PaintManager {
   }
 }
 
-const paintManager = new PaintManager()
+export const paintManager = new PaintManager()
 
 // Default image paint
 let defaultImagePaint: any = null

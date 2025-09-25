@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ButtonWide } from "../905/521428";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { _ } from "../905/381235";
@@ -9,7 +9,7 @@ import { hx } from "../905/66449";
 import { W } from "../905/729905";
 export function $$p0({
   publishedLibrary: e,
-  onSubscribe: t = lQ,
+  onSubscribe: t = noop,
   kbPath: i,
   kbColumn: s,
   entrypoint: o,

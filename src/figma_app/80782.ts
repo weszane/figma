@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { range } from "../figma_app/492908";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { k as _$$k } from "../905/443820";
 import { Link } from "../905/438674";
 import c from "classnames";
@@ -140,7 +140,7 @@ export function $$M0(e) {
         name,
         publishers,
         hoverText: e.onPreview ? getI18nString("browse_templates_modal.view_details") : void 0,
-        onClick: e.onPreview || lQ
+        onClick: e.onPreview || noop
       })
     }), jsx($$D6, {
       template: e.template

@@ -1,14 +1,33 @@
-import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-export let $$r0 = new class {
+import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
+/**
+ * Validator and API handler for Hub File Metadata.
+ */
+export class HubFileMetadataHandler {
+  private hubFileMetadataSchemaValidator
+
   constructor() {
-    this.HubFileMetadataSchemaValidator = createNoOpValidator();
+    // Original: HubFileMetadataSchemaValidator
+    this.hubFileMetadataSchemaValidator = createNoOpValidator()
   }
-  getHubFileMetadata(e) {
-    return this.HubFileMetadataSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/hub_file_metadata", APIParameterUtils.toAPIParameters({
-      file_key: e.fileKey
-    })));
+
+  /**
+   * Validates and fetches Hub File Metadata from the API.
+   * @param params - Object containing fileKey property.
+   * @returns Promise resolving to the API response.
+   */
+  async getHubFileMetadata(params: { fileKey: string }) {
+    // Original: getHubFileMetadata
+    return this.hubFileMetadataSchemaValidator.validate(async ({ xr: t }) =>
+      await t.get(
+        '/api/hub_file_metadata',
+        APIParameterUtils.toAPIParameters({ file_key: params.fileKey }),
+      ),
+    )
   }
-}();
-export const D = $$r0;
+}
+
+// Export with refactored name for clarity and traceability.
+// Original: $$r0
+export const HubFileMetadata = new HubFileMetadataHandler()
+// Original: D
+export const D = HubFileMetadata

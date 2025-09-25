@@ -7,8 +7,8 @@ import { APILoadingStatus } from "../905/520829";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { p as _$$p } from "../905/896627";
-import { A as _$$A } from "../905/17894";
-import { Zc, Lz } from "../905/497882";
+import { unsetSymbol } from "../905/17894";
+import { canSetFieldValue, getFieldValueOrDefault } from "../905/497882";
 import { nK, Gp } from "../figma_app/599979";
 import { hasId, hasBuffer } from "../figma_app/809727";
 var a = r;
@@ -90,7 +90,7 @@ export function $$b0(e, t) {
     let {
       currentValue
     } = e;
-    if (currentValue !== _$$A) {
+    if (currentValue !== unsetSymbol) {
       o()(r.current, ...currentValue.allMedia).filter(e => hasBuffer(e) && (i.status !== APILoadingStatus.SUCCESS || e.url !== i.value?.url)).forEach(e => {
         nK(e);
       });
@@ -100,7 +100,7 @@ export function $$b0(e, t) {
     }
   }, [i, e]);
   let s = useMemo(() => {
-    if (!Zc(e)) return;
+    if (!canSetFieldValue(e)) return;
     let {
       currentValue,
       setValue
@@ -126,20 +126,20 @@ export function $$b0(e, t) {
   }, [e]);
   let u = useRef(!1);
   useEffect(() => {
-    !u.current && e.currentValue !== _$$A && i.status === APILoadingStatus.SUCCESS && s && (!e.currentValue.thumbnailMedium && i.value && s(i.value), u.current = !0);
+    !u.current && e.currentValue !== unsetSymbol && i.status === APILoadingStatus.SUCCESS && s && (!e.currentValue.thumbnailMedium && i.value && s(i.value), u.current = !0);
   }, [i, e.currentValue, s]);
   let b = useMemo(() => {
     if (!s) return;
     let t = i.status === APILoadingStatus.SUCCESS ? i.value : void 0;
     if (t) {
-      if (Lz(e, void 0)?.thumbnailMedium?.sha1 === t.sha1) return;
+      if (getFieldValueOrDefault(e, void 0)?.thumbnailMedium?.sha1 === t.sha1) return;
       return function () {
         s(t);
       };
     }
   }, [i, e, s]);
   let v = useMemo(() => {
-    if (!Zc(e)) return;
+    if (!canSetFieldValue(e)) return;
     let {
       currentValue,
       setValue
@@ -152,7 +152,7 @@ export function $$b0(e, t) {
     };
   }, [e]);
   let I = useMemo(() => {
-    if (!Zc(e)) return;
+    if (!canSetFieldValue(e)) return;
     let {
       currentValue,
       setValue
@@ -181,7 +181,7 @@ export function $$b0(e, t) {
     };
   }, [e.deps.allowVideos, s]);
   let x = useMemo(() => {
-    if (!Zc(e)) return;
+    if (!canSetFieldValue(e)) return;
     let {
       currentValue,
       setValue

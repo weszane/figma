@@ -1,5 +1,5 @@
 import { createRemovableAtomFamily } from "../figma_app/27355";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { Q } from "../905/467310";
 import { D } from "../905/347702";
 import { FOrganizationType } from "../figma_app/191312";
@@ -16,7 +16,7 @@ var n;
   };
   e.getBillingTrialStatus = D(t => e.isDeactivated(t) ? Q.DEACTIVATED : e.isExpired(t) ? Q.EXPIRED : e.isValidated(t) ? Q.ACTIVE : Q.PENDING);
   e.isDeactivated = D(e => !!e.deactivatedAt);
-  e.isExpired = D(e => A().utc().isAfter(A(e.trialPeriodEnd).utc()));
+  e.isExpired = D(e => dayjs().utc().isAfter(dayjs(e.trialPeriodEnd).utc()));
   e.isValidated = D(e => {
     let t = e.metadata;
     return !!t?.validated_at || !!t?.validatedAt;

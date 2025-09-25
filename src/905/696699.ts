@@ -1,6 +1,6 @@
 import { assertNotNullish } from "../figma_app/465776";
 import { deepClone } from "../905/284190";
-import { TF, vf, kz } from "../905/18922";
+import { VectorPathBuilder, parseVectorPathData, getPathCommandArgCount } from "../905/18922";
 import { parseSessionLocalID } from "../905/871411";
 import { yX, bW, iZ } from "../905/642476";
 import { dC, wv } from "../905/850029";
@@ -446,7 +446,7 @@ export function $$A0(e) {
   let n = [];
   if (t.isEmpty()) return [];
   for (let e of t.regions) {
-    let r = new TF(e.windingRule);
+    let r = new VectorPathBuilder(e.windingRule);
     for (let n of e.loops) {
       let e = null;
       for (let {
@@ -486,7 +486,7 @@ export function $$A0(e) {
     a === n && (l.isClosed = !0);
   }
   if (s.length > 0) {
-    let e = new TF("NONE");
+    let e = new VectorPathBuilder("NONE");
     for (let i of (n.push(e), s)) {
       let n = i.startingVertex;
       let r = t.vertices[n];
@@ -554,12 +554,12 @@ export function $$y2(e) {
     d = null;
   }
   for (let t of e) {
-    let e = vf(t);
+    let e = parseVectorPathData(t);
     let i = e.length;
     let s = 0;
     for (; s < i;) {
       let t = e[s++];
-      let n = kz(t);
+      let n = getPathCommandArgCount(t);
       if (void 0 === n || s + n > i) throw Error("Failed to convert path to network, invalid commands data");
       switch (t) {
         case "M":

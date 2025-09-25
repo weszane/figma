@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { isMessageMetaEmpty, flattenMessageMeta } from "../figma_app/819288";
 import { getI18nString } from "../905/303541";
 import { ComposerType, NEW_COMMENT_ID } from "../905/380385";
@@ -70,7 +70,7 @@ export function $$g0(e) {
         onSubmit: v,
         placeholderText: e.placeholderText ? e.placeholderText : getI18nString("fig_feed.add_a_comment"),
         recordingKey: ComposerType.feed,
-        scrollToBottom: e.scrollToBottom ? e.scrollToBottom : lQ,
+        scrollToBottom: e.scrollToBottom ? e.scrollToBottom : noop,
         setIsEditorFocused: g.setIsEditorFocused,
         submitOnEnter: e.submitOnEnter,
         submitText: getI18nString("comments.post"),

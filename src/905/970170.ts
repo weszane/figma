@@ -7,7 +7,7 @@ import { ER } from "../905/466026";
 import { VK, YK } from "../905/880488";
 import { FilesForTeam, FilesForProject, FileByKeyForRealtimeShim, FilesForRepo } from "../figma_app/43951";
 import { H } from "../905/715533";
-import { fJ, aj, w7, Ut } from "../905/25169";
+import { teamMembersChannelHandler, folderChannelHandler, fileChannelHandler, fileRepoChannelHandler } from "../905/25169";
 function m(e) {
   let t = isIOSUA && e.getState().selectedView?.view === "prototype";
   return isFigmaMobileWithoutTripleTaps() || t;
@@ -61,7 +61,7 @@ function g(e, t) {
 }
 let $$f3 = new H({
   name: "TeamChannelFilesShim",
-  ...fJ,
+  ...teamMembersChannelHandler,
   livegraphView: FilesForTeam,
   livegraphArgs: (e, t) => ({
     teamId: e,
@@ -95,7 +95,7 @@ let $$f3 = new H({
 });
 let $$_1 = new H({
   name: "FolderChannelFilesShim",
-  ...aj,
+  ...folderChannelHandler,
   livegraphView: FilesForProject,
   livegraphArgs: (e, t) => ({
     projectId: e,
@@ -129,7 +129,7 @@ let $$_1 = new H({
 });
 let $$A4 = new H({
   name: "FileChannelFilesShim",
-  ...w7,
+  ...fileChannelHandler,
   livegraphView: FileByKeyForRealtimeShim,
   livegraphArgs: e => ({
     fileKey: e
@@ -166,7 +166,7 @@ let $$A4 = new H({
 });
 let $$y5 = new H({
   name: "FileRepoChannelFilesShim",
-  ...Ut,
+  ...fileRepoChannelHandler,
   livegraphView: FilesForRepo,
   livegraphArgs: e => ({
     repoId: e

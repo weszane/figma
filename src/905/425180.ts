@@ -14,7 +14,7 @@ import { b as _$$b } from "../figma_app/199304";
 import { j } from "../figma_app/928756";
 import { l as _$$l } from "../figma_app/826369";
 import { M as _$$M } from "../figma_app/826981";
-import { R } from "../905/11928";
+import { NotModalType } from "../905/11928";
 import { P, h as _$$h } from "../figma_app/546366";
 var o = s;
 function I(e) {
@@ -95,17 +95,17 @@ export function $$x0(e) {
   });
 }
 let S = {
-  [R.MODAL]: cssBuilderInstance.zIndexModal,
-  [R.SECONDARY_MODAL]: cssBuilderInstance.zIndexSecondaryModal,
-  [R.TERTIARY_MODAL]: cssBuilderInstance.zIndexTertiaryModal,
-  [R.UNSET]: cssBuilderInstance,
-  [R.NOTIFICATION_MODAL]: cssBuilderInstance
+  [NotModalType.MODAL]: cssBuilderInstance.zIndexModal,
+  [NotModalType.SECONDARY_MODAL]: cssBuilderInstance.zIndexSecondaryModal,
+  [NotModalType.TERTIARY_MODAL]: cssBuilderInstance.zIndexTertiaryModal,
+  [NotModalType.UNSET]: cssBuilderInstance,
+  [NotModalType.NOTIFICATION_MODAL]: cssBuilderInstance
 };
 function w(e) {
   let {
     location,
     onClose,
-    zIndex = R.SECONDARY_MODAL
+    zIndex = NotModalType.SECONDARY_MODAL
   } = e;
   let s = cssBuilderInstance.fixed.borderBox.bRadius2.pb16.pl16.pr16.fontInter.flex.flexColumn.match(zIndex, S).$$if(!!e.media, cssBuilderInstance.pt12, cssBuilderInstance.pt16).$;
   let u = e.width ?? 240;
@@ -127,7 +127,7 @@ function w(e) {
     }), jsxs(_$$M, {
       isTooltip: e.isTooltip,
       className: o()(s, P, {
-        [_$$h]: e.zIndex === R.NOTIFICATION_MODAL
+        [_$$h]: e.zIndex === NotModalType.NOTIFICATION_MODAL
       }),
       style: p,
       ref: e.innerRef,

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { defaultInputState } from "../905/768014";
 import { isFakeTouchEvent } from "../905/955878";
 import { isNonTextInput } from "../905/705398";
@@ -55,9 +55,9 @@ function h({
   children: e
 }) {
   let t = function (e) {
-    let t = useRef(lQ);
-    let r = useRef(lQ);
-    let n = useRef(lQ);
+    let t = useRef(noop);
+    let r = useRef(noop);
+    let n = useRef(noop);
     let d = useRef(!1);
     return useCallback(e => {
       cZ(void 0, e);
@@ -95,6 +95,6 @@ function m(e) {
   return !e.currentTarget.contains(e.target);
 }
 function g(e, t, r) {
-  return e ? (e.addEventListener(t, r), () => e.removeEventListener(t, r)) : lQ;
+  return e ? (e.addEventListener(t, r), () => e.removeEventListener(t, r)) : noop;
 }
 export const bo = $$p0;

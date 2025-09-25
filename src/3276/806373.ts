@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { appendSearchParam } from "../905/508367";
 import { parsePxNumber } from "../figma_app/783094";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { O7 } from "../figma_app/578832";
 import { addWhiteboardToolToRecentsAction } from "../figma_app/147952";
 import { fG } from "../figma_app/973927";
@@ -310,7 +310,7 @@ function G({
       tabIndex: 0,
       children: jsx("div", {
         className: "dlt_universal_insert_item--recentTool--fZfmo",
-        children: jsx(oW, {
+        children: jsx(WAFImage, {
           src: p,
           alt: _$$E(e),
           className: F,

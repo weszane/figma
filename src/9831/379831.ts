@@ -29,21 +29,21 @@ import { X9, nE, IO } from "../905/721983";
 import { debounce } from "../905/915765";
 import { isNotNullish } from "../figma_app/95419";
 import { G2 } from "../figma_app/314591";
-import { IV } from "../905/154591";
+import { renderBadgesLayout } from "../905/154591";
 import { nK } from "../905/836986";
 import { ww } from "../figma_app/194956";
 import { ms, c$, wv } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { E as _$$E2 } from "../905/142894";
 import { R as _$$R } from "../905/741991";
-import { Z as _$$Z } from "../905/27174";
+import { TreeRow } from "../905/27174";
 import eE from "classnames";
 import { R as _$$R2 } from "../905/307199";
 import { dP, M3 } from "../figma_app/119475";
 import { SvgComponent } from "../905/714743";
 import { A as _$$A2 } from "../f2246930/129503";
 import { A as _$$A3 } from "../6828/718668";
-import { o as _$$o } from "../905/153787";
+import { VimFocusProvider } from "../905/153787";
 import { P as _$$P } from "../905/625912";
 import { SecureLink } from "../figma_app/637027";
 import { e as _$$e } from "../9831/266717";
@@ -342,7 +342,7 @@ let em = memo(function ({
       }
     });
   }, [t, y]);
-  return jsxs(_$$Z, {
+  return jsxs(TreeRow, {
     changeType: e,
     indent: a,
     isExpanded: c,
@@ -360,7 +360,7 @@ let em = memo(function ({
     select: () => j(t),
     style: m,
     toggleExpanded: e => b(t, e),
-    children: [jsx(IV, {
+    children: [jsx(renderBadgesLayout, {
       badges: l
     }), jsx(nK, {
       id: r
@@ -371,9 +371,9 @@ let em = memo(function ({
       title: g,
       className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
       children: g
-    }), jsx(Spacer, {}), jsx(IV, {
+    }), jsx(Spacer, {}), jsx(renderBadgesLayout, {
       badges: f
-    }), x && jsx(IV, {
+    }), x && jsx(renderBadgesLayout, {
       badges: x
     }), null != p && jsxs("span", {
       className: cssBuilderInstance.colorTextSecondary.$,
@@ -753,7 +753,7 @@ function eU({
     onClick: r,
     children: jsxs(AutoLayout, {
       spacing: 4,
-      children: [jsx(IV, {
+      children: [jsx(renderBadgesLayout, {
         badges: displayProperties.leftBadges
       }), jsx(nK, {
         id: object.displayProperties.primaryId
@@ -1144,7 +1144,7 @@ function e9({
         },
         children: [jsx(eY, {
           searchRef: f
-        }), jsxs(_$$o, {
+        }), jsxs(VimFocusProvider, {
           className: _H,
           children: [jsx("div", {
             ...w({
@@ -1172,7 +1172,7 @@ function e9({
         }), (F || P) && jsxs("div", {
           className: _t,
           ref: x,
-          children: [jsxs(_$$o, {
+          children: [jsxs(VimFocusProvider, {
             className: S3,
             style: {
               width: b
@@ -1196,7 +1196,7 @@ function e9({
               diffItems: P?.rawProperties,
               extraItems: void 0
             }, A)]
-          }), jsx(_$$o, {
+          }), jsx(VimFocusProvider, {
             className: xK,
             children: jsx(_$$P, {
               panel: "right",

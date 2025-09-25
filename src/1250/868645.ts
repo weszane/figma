@@ -3,7 +3,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { a as _$$a } from "../905/29104";
 import { Ph } from "../905/160095";
 import { renderI18nText } from "../905/303541";
@@ -99,7 +99,7 @@ export function $$I1() {
   });
 }
 function A() {
-  return jsx(oW, {
+  return jsx(WAFImage, {
     src: buildUploadUrl("d158cef30c1ce26cce260c1051ecdf35dd527c94"),
     alt: "Figma Rev Terms of Service",
     width: 332

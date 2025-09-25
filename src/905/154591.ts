@@ -1,149 +1,178 @@
-import { jsx } from "react/jsx-runtime";
-import { cssBuilderInstance } from "../cssbuilder/589278";
-import { AutoLayout } from "../905/470281";
-import { x, z } from "../905/407439";
-import { YY, nP } from "../figma_app/722791";
-import { SP, p7, uy } from "../905/252555";
-export function $$d0({
-  badges: e
-}) {
-  return jsx(AutoLayout, {
-    width: "hug-contents",
-    children: e.map((e, t) => jsx(c, {
-      badge: e
-    }, t))
-  });
-}
+import { jsx } from 'react/jsx-runtime'
+import { AppDomain, getNodeTypeDomain, NodeTypeMap } from '../905/252555'
+import { ENTITY_STATUS_CODES, ENTITY_STATUS_SYMBOLS } from '../905/407439'
+import { AutoLayout } from '../905/470281'
+import { cssBuilderInstance } from '../cssbuilder/589278'
+import { nP, YY } from '../figma_app/722791'
+
 function c({
-  badge: e
+  badge: e,
 }) {
   switch (e.type) {
-    case "type":
+    case 'type':
       return jsx(I, {
         type: e.value,
-        tracked: e.tracked
-      });
-    case "phase":
+        tracked: e.tracked,
+      })
+    case 'phase':
       return jsx(C, {
-        phase: e.value
-      });
-    case "change":
-      return jsx($$x1, {
-        type: e.value
-      });
-    case "editType":
+        phase: e.value,
+      })
+    case 'change':
+      return jsx(renderChangeBadge, {
+        type: e.value,
+      })
+    case 'editType':
       return jsx(P, {
-        type: e.value
-      });
+        type: e.value,
+      })
     default:
       return jsx(D, {
-        ...e
-      });
+        ...e,
+      })
   }
 }
-let u = cssBuilderInstance.px4.minW10.inlineBlock.bRadius4.h16.flex.alignCenter.justifyCenter.fontSemiBold;
-let p = u.colorBgSecondary.colorText.$;
-let m = u.colorBgBrandSecondary.colorTextOnbrand.$;
-let h = u.colorBgBrand.colorTextOnbrand.$;
-let g = u.colorBgSuccess.colorTextOnsuccess.$;
-let f = u.colorBgWarning.colorTextOnwarning.$;
-let _ = u.colorBgDanger.colorTextOndanger.$;
-let A = u.minW28.w28.colorBg.b1.h14;
+let u = cssBuilderInstance.px4.minW10.inlineBlock.bRadius4.h16.flex.alignCenter.justifyCenter.fontSemiBold
+let p = u.colorBgSecondary.colorText.$
+let m = u.colorBgBrandSecondary.colorTextOnbrand.$
+let h = u.colorBgBrand.colorTextOnbrand.$
+let g = u.colorBgSuccess.colorTextOnsuccess.$
+let f = u.colorBgWarning.colorTextOnwarning.$
+let _ = u.colorBgDanger.colorTextOndanger.$
+let A = u.minW28.w28.colorBg.b1.h14
 let y = {
-  [SP.Editor]: A.colorBorderDesign.colorTextDesignSecondary.$,
-  [SP.DesignSystems]: A.colorBorderComponent.colorTextComponent.$,
-  [SP.FigJam]: A.colorBorderFigjam.colorBorderFigjam.$,
-  [SP.Page]: A.colorBorder.colorText.$,
-  [SP.Other]: A.colorBorderSuccess.colorTextSuccessSecondary.$
-};
+  [AppDomain.Editor]: A.colorBorderDesign.colorTextDesignSecondary.$,
+  [AppDomain.DesignSystems]: A.colorBorderComponent.colorTextComponent.$,
+  [AppDomain.FigJam]: A.colorBorderFigjam.colorBorderFigjam.$,
+  [AppDomain.Page]: A.colorBorder.colorText.$,
+  [AppDomain.Other]: A.colorBorderSuccess.colorTextSuccessSecondary.$,
+}
 let b = {
   fontSize: 9,
-  lineHeight: "16px",
-  fontStyle: "normal"
-};
+  lineHeight: '16px',
+  fontStyle: 'normal',
+}
 let v = {
   fontSize: 9,
-  lineHeight: "14px",
-  fontStyle: "normal"
-};
+  lineHeight: '14px',
+  fontStyle: 'normal',
+}
 function I({
   type: e,
-  tracked: t = !0
+  tracked: t = !0,
 }) {
-  return jsx("div", {
-    title: `${e}${t ? " (tracked)" : " (untracked)"}`,
-    className: y[p7(e)],
+  return jsx('div', {
+    title: `${e}${t ? ' (tracked)' : ' (untracked)'}`,
+    className: y[getNodeTypeDomain(e)],
     style: {
       ...v,
-      ...(t ? {} : {
-        borderStyle: "dashed"
-      })
+      ...(t
+        ? {}
+        : {
+            borderStyle: 'dashed',
+          }),
     },
-    children: uy[e]
-  });
+    children: NodeTypeMap[e],
+  })
 }
 let E = {
   CREATED: g,
   MODIFIED: m,
   CHILD_MODIFIED: h,
-  REMOVED: _
-};
-export function $$x1({
-  type: e
-}) {
-  return jsx("div", {
-    title: e,
-    className: E[e],
-    style: b,
-    children: x[e]
-  });
+  REMOVED: _,
 }
-let S = u.minW24.w24.colorBg.b1.h14;
+
+let S = u.minW24.w24.colorBg.b1.h14
 let w = {
   CREATED: S.colorBorderSuccess.colorTextSuccessSecondary.$,
   MODIFIED: S.colorBorderBrand.colorTextBrandSecondary.$,
-  REMOVED: S.colorBorderDanger.colorTextDangerSecondary.$
-};
+  REMOVED: S.colorBorderDanger.colorTextDangerSecondary.$,
+}
+let T = u.minW28.w28.colorBg.b1.h14
+let k = T.colorBorderComponent.colorTextComponent.$
+let R = T.colorBorderComponent.colorTextComponentTertiary.$
+let N = T.colorBorderWarning.colorTextWarning.$
+
 function C({
-  phase: e
+  phase: e,
 }) {
-  return jsx("div", {
+  return jsx('div', {
     title: e,
     className: w[e],
     style: v,
-    children: z[e]
-  });
+    children: ENTITY_STATUS_CODES[e],
+  })
 }
-let T = u.minW28.w28.colorBg.b1.h14;
-let k = T.colorBorderComponent.colorTextComponent.$;
-let R = T.colorBorderComponent.colorTextComponentTertiary.$;
-let N = T.colorBorderWarning.colorTextWarning.$;
+
 function P({
-  type: e
+  type: e,
 }) {
-  return jsx("div", {
+  return jsx('div', {
     title: `Edit scope type: ${e}`,
-    className: "MIXED" === e ? R : YY.has(e) ? k : N,
+    className: e === 'MIXED' ? R : YY.has(e) ? k : N,
     style: v,
-    children: nP[e]
-  });
+    children: nP[e],
+  })
 }
 let O = {
   info: p,
   warning: f,
-  error: _
-};
+  error: _,
+}
+
 function D({
   type: e,
   value: t,
-  title: i
+  title: i,
 }) {
-  return jsx("div", {
+  return jsx('div', {
     title: i,
     className: O[e],
     style: b,
-    children: t
-  });
+    children: t,
+  })
 }
-export const IV = $$d0;
-export const gp = $$x1;
+
+/**
+ * Renders a change badge with appropriate style and symbol.
+ * @param props - Props containing the badge type.
+ * @returns JSX.Element
+ * (Original function: $$x1)
+ */
+export function renderChangeBadge({
+  type,
+}: {
+  type: keyof typeof E
+}) {
+  return jsx('div', {
+    title: type,
+    className: E[type],
+    style: b,
+    children: ENTITY_STATUS_SYMBOLS[type],
+  })
+}
+
+/**
+ * Renders a list of badges inside an AutoLayout container.
+ * @param props - Props containing the badges array.
+ * @returns JSX.Element
+ * (Original function: $$d0)
+ */
+export function renderBadgesLayout({
+  badges,
+}: {
+  badges: Array<{ type: string, value?: string, tracked?: boolean, title?: string }>
+}) {
+  return jsx(AutoLayout, {
+    width: 'hug-contents',
+    children: badges.map((badge, idx) =>
+      jsx(c, {
+        badge,
+      }, idx),
+    ),
+  })
+}
+
+// Refactored exports to match new names
+export const IV = renderBadgesLayout
+export const gp = renderChangeBadge

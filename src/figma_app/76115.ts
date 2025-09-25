@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { sortByPropertyWithOptions, sortByWithOptions } from "../figma_app/656233";
-import { af } from "../905/934246";
+import { returnTrue lodash-es5/934246";
 import { l as _$$l } from "../905/716947";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -141,7 +141,7 @@ export function $$w11(e) {
 function O({
   itemsByTeamId: e,
   fileDataByLibraryKey: t,
-  predicate: r = af
+  predicate: r = returnTrue
 }) {
   let i = useIsAssetPublishedForCurrentFile();
   return useMemo(() => {

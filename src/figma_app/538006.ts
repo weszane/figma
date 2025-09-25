@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useContext, useMemo, createContext } from "react";
-import { c as _$$c } from "../905/34525";
-import { b } from "../905/22449";
+import { RadioPrimitiveOption } from "../905/34525";
+import { RadioPrimitiveRoot } from "../905/22449";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { KeyCodes } from "../905/63728";
 import { z3 } from "../figma_app/119475";
@@ -68,7 +68,7 @@ export function $$b2({
       active,
       children: jsxs("div", {
         className: _$$e,
-        children: [jsx(_$$c, {
+        children: [jsx(RadioPrimitiveOption, {
           id: e,
           value: e
         }), jsx("label", {
@@ -90,7 +90,7 @@ export function $$T1({
     gap: 8,
     fullWidth: !0,
     justify: "space-between",
-    children: jsx(b, {
+    children: jsx(RadioPrimitiveRoot, {
       value: r,
       onChange: t,
       className: _$$g,

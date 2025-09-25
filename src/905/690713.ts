@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
-import { B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { _0, PI, sZ } from "../figma_app/948389";
 import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
@@ -41,15 +41,15 @@ function x({
   });
 }
 let C = {
-  [B.RATE_LIMIT_EXCEEDED]: renderI18nText("ai.error.rate_limited"),
-  [B.CONTENT_LENGTH_LIMIT]: renderI18nText("ai.error.content_length_limit"),
-  [B.UNSAFE_OR_HARMFUL_CONTENT]: renderI18nText("ai.error.unsafe_or_harmful"),
-  [B.GENERIC]: renderI18nText("ai.error.generic"),
-  [B.OFFLINE]: renderI18nText("ai.error.offline"),
-  [B.METER_EXCEEDED]: renderI18nText("ai.error.generic"),
-  [B.NOT_IMPLEMENTED]: renderI18nText("ai.error.not_implemented"),
-  [B.NETWORK_ERROR]: renderI18nText("ai.error.network_error"),
-  [B.UNCLOSED_TAGS_BENIGN]: renderI18nText("ai.error.generic")
+  [ErrorType.RATE_LIMIT_EXCEEDED]: renderI18nText("ai.error.rate_limited"),
+  [ErrorType.CONTENT_LENGTH_LIMIT]: renderI18nText("ai.error.content_length_limit"),
+  [ErrorType.UNSAFE_OR_HARMFUL_CONTENT]: renderI18nText("ai.error.unsafe_or_harmful"),
+  [ErrorType.GENERIC]: renderI18nText("ai.error.generic"),
+  [ErrorType.OFFLINE]: renderI18nText("ai.error.offline"),
+  [ErrorType.METER_EXCEEDED]: renderI18nText("ai.error.generic"),
+  [ErrorType.NOT_IMPLEMENTED]: renderI18nText("ai.error.not_implemented"),
+  [ErrorType.NETWORK_ERROR]: renderI18nText("ai.error.network_error"),
+  [ErrorType.UNCLOSED_TAGS_BENIGN]: renderI18nText("ai.error.generic")
 };
 export var $$T0 = (e => (e.LEARN_MORE = "LEARN_MORE", e.TRY_AGAIN = "TRY_AGAIN", e.GO_BACK = "GO_BACK", e.OK = "OK", e.BOOST_ANYWAY = "BOOST_ANYWAY", e.SELECT = "SELECT", e))($$T0 || {});
 function k({

@@ -3,7 +3,7 @@ import { ImageToolsBindings, SceneGraphHelpers, AppStateTsApi, GridLayoutApi, Fu
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { fullscreenValue } from "../figma_app/455680";
-import { i2 } from "../905/913055";
+import { getSelectedNodesWithinBreakpointFrame } from "../905/913055";
 import { useSceneGraphSelection } from "../figma_app/722362";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 export let $$p2 = e => Uint8Array.from(e.match(/.{1,2}/g).map(e => parseInt(e, 16)));
@@ -25,7 +25,7 @@ export function $$h0({
   let h = getSingletonSceneGraph();
   let m = h.getCurrentPage();
   if (!m) throw Error("Something went wrong");
-  let g = i2();
+  let g = getSelectedNodesWithinBreakpointFrame();
   let f = t && t.length > 0;
   let E = SceneGraphHelpers?.hasGridCellSelection();
   let y = null;

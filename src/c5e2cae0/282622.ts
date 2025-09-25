@@ -4,7 +4,7 @@ import { clickableBaseLinkTracked, linkWithTracking } from "../figma_app/637027"
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
-import { Ju } from "../905/712921";
+import { ProductTierEnum } from "../905/712921";
 import { isAddressEmpty, BillingCycle } from "../figma_app/831101";
 import { x as _$$x } from "../c5e2cae0/907085";
 import { useState } from "react";
@@ -27,7 +27,7 @@ function _(e) {
     title: getI18nString("checkout.cart_plan_details.subtitle"),
     dataTestId: "cart-plan-details",
     children: [jsx(u, {
-      header: e.tier === Ju.ORG ? getI18nString("checkout.cart_plan_details.organization_name") : getI18nString("checkout.cart_plan_details.team_name"),
+      header: e.tier === ProductTierEnum.ORG ? getI18nString("checkout.cart_plan_details.organization_name") : getI18nString("checkout.cart_plan_details.team_name"),
       value: e.displayName,
       dataTestId: "cart-plan-details-plan-name"
     }), e.legalName && jsx(u, {
@@ -103,7 +103,7 @@ function A({
     label: jsx(Label, {
       children: jsx("span", {
         className: cssBuilderInstance.font13.$,
-        children: p === Ju.ORG ? jsx(W, {}) : jsx(Um, {})
+        children: p === ProductTierEnum.ORG ? jsx(W, {}) : jsx(Um, {})
       })
     }),
     checked: S,
@@ -158,13 +158,13 @@ function I({
   return IP() ? jsx(k, {
     tier: e,
     isAnnual: t
-  }) : e === Ju.ORG ? jsx(P, {}) : null;
+  }) : e === ProductTierEnum.ORG ? jsx(P, {}) : null;
 }
 function k({
   tier: e,
   isAnnual: t
 }) {
-  let a = e === Ju.ORG ? "https://help.figma.com/hc/articles/360040328293-Manage-billing-on-the-Organization-and-Enterprise-plans" : "https://help.figma.com/hc/articles/360041061034-Manage-billing-on-the-Professional-plan";
+  let a = e === ProductTierEnum.ORG ? "https://help.figma.com/hc/articles/360040328293-Manage-billing-on-the-Organization-and-Enterprise-plans" : "https://help.figma.com/hc/articles/360041061034-Manage-billing-on-the-Professional-plan";
   return jsx("div", {
     className: cssBuilderInstance.mt24.$,
     "data-testid": "cart-review-upgrade-information-banner",
@@ -176,9 +176,9 @@ function k({
       }), jsx("p", {
         children: function (e, t) {
           switch (e) {
-            case Ju.ORG:
+            case ProductTierEnum.ORG:
               return renderI18nText("checkout.cart_review_upgrade_info_org");
-            case Ju.PRO:
+            case ProductTierEnum.PRO:
               return t ? renderI18nText("checkout.cart_review_upgrade_info_pro_annual", {
                 monthlyPriceLink: E
               }) : renderI18nText("checkout.cart_review_upgrade_info_pro_monthly");

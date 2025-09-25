@@ -5,7 +5,7 @@ import { H } from '../905/203408';
 import { getI18nString } from '../905/303541';
 import { IconButton } from '../905/443068';
 import { k as _$$k } from '../905/443820';
-import { g as _$$g } from '../905/687265';
+import { textDisplayConfig } from '../905/687265';
 import { K as _$$K2 } from '../905/851274';
 import { createDeferredPromise } from '../905/874553';
 import { p as _$$p } from '../905/951634';
@@ -65,7 +65,7 @@ let N = {
   timeDisplay: {
     color: 'x1tk3asg',
     fontVariantNumeric: 'xss6m8b',
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textAlign: 'x2b8uid',
     $$css: !0
   }

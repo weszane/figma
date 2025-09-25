@@ -1,7 +1,7 @@
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { p } from "../905/896627";
-import { A } from "../905/17894";
-import { Lz } from "../905/497882";
+import { unsetSymbol } from "../905/17894";
+import { getFieldValueOrDefault } from "../905/497882";
 import { LK } from "../905/104173";
 function l({
   error: e,
@@ -19,11 +19,11 @@ export function $$d0(e) {
   } = e.deps;
   let [u] = setupResourceAtomHandler(LK({
     figFile,
-    currentViewerMode: viewerModeField && Lz(viewerModeField, void 0),
+    currentViewerMode: viewerModeField && getFieldValueOrDefault(viewerModeField, void 0),
     existingResourceContent,
     localExtension
   }), {
-    enabled: viewerModeField?.currentValue !== A
+    enabled: viewerModeField?.currentValue !== unsetSymbol
   });
   return {
     ...e,

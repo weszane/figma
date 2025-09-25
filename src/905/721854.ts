@@ -9,7 +9,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { setupHyperlinkHandler } from "../figma_app/815170";
-import { JT } from "../905/913055";
+import { useSelectedNodesWithinBreakpointFrame } from "../905/913055";
 import { Yh } from "../figma_app/357047";
 import { Bf } from "../figma_app/249941";
 import { cq } from "../905/794154";
@@ -89,7 +89,7 @@ export function $$x0({
   shouldAutoFocus: k,
   customActionPrefix: R
 }) {
-  let N = JT();
+  let N = useSelectedNodesWithinBreakpointFrame();
   let P = useSelector(t => Yh(t.mirror.appModel, e));
   let {
     close

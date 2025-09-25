@@ -13,7 +13,7 @@ import { positiveModulo, clamp } from "../905/875826";
 import { isSafari } from "../905/881471";
 import { setupDragHandler } from "../905/97346";
 import { containsActiveElement, focusAndSelect } from "../905/117474";
-import { N as _$$N } from "../905/427996";
+import { useFormattedTextInput } from "../905/427996";
 import { l as _$$l } from "../905/490996";
 import { Stepper } from "../905/294086";
 import { KindEnum } from "../905/129884";
@@ -241,7 +241,7 @@ let H = forwardRef(({
   ...t
 }, i) => {
   let a = useContext(j);
-  let p = _$$N(t);
+  let p = useFormattedTextInput(t);
   let _ = function ({
     value: e,
     getStringValue: t,

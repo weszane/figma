@@ -11,28 +11,28 @@ import { b as _$$b } from "../figma_app/199304";
 import { j } from "../figma_app/928756";
 import { l as _$$l } from "../figma_app/826369";
 import { M as _$$M } from "../figma_app/826981";
-import { Q } from "../905/11928";
+import { Ui3PositionType } from "../905/11928";
 import { helpWidgetSizePlusMargin, designToolbarHeight } from "../figma_app/786175";
 import { P } from "../figma_app/546366";
 var o = s;
 let b = e => {
   switch (e) {
-    case Q.BOTTOM_RIGHT:
+    case Ui3PositionType.BOTTOM_RIGHT:
       return {
         bottom: "24px",
         right: helpWidgetSizePlusMargin
       };
-    case Q.CENTER:
+    case Ui3PositionType.CENTER:
       return {
         top: "50%",
         left: "50%"
       };
-    case Q.EDITOR_TOP_LEFT:
+    case Ui3PositionType.EDITOR_TOP_LEFT:
       return {
         top: `${parsePxInt(designToolbarHeight) + 12}px`,
         left: "calc(var(--left-panel-width) + 12px)"
       };
-    case Q.UI3_EDITOR_TOP_LEFT:
+    case Ui3PositionType.UI3_EDITOR_TOP_LEFT:
       return {
         top: "calc(var(--editor-banner-height) + 12px)",
         left: "calc(var(--left-panel-width) + 24px)"
@@ -64,7 +64,7 @@ function v(e) {
       className: o()(p, P),
       style: A,
       ref: i,
-      transformString: e.position === Q.CENTER ? "translate(-50%, -50%)" : void 0,
+      transformString: e.position === Ui3PositionType.CENTER ? "translate(-50%, -50%)" : void 0,
       children: jsx(_$$b, {
         ...e
       })

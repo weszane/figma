@@ -82,13 +82,13 @@ export const resourceUtils = {
   from(resource) {
     switch (resource.status) {
       case 'disabled':
-        return this.disabled()
-      case 'loading':
-        return this.loading()
+        return this.disabled() as DisabledResource
+      case 'loading': 
+        return this.loading() as LoadedResource
       case 'errors':
-        return this.error(resource.errors)
+        return this.error(resource.errors) as ErrorResource
       case 'loaded':
-        return this.loaded(resource.data, resource.errors)
+        return this.loaded(resource.data, resource.errors) as LoadedResource
       default:
         throwTypeError(resource)
     }
@@ -236,7 +236,7 @@ class LoadingSuspendableResource {
 }
 
 // Original: g class
-class DisabledResource {
+export class DisabledResource {
   status = 'disabled'
   data = null
   errors = null

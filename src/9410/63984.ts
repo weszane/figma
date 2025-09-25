@@ -1,4 +1,4 @@
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { j } from "../figma_app/602140";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -14,7 +14,7 @@ export function $$o0(e, t, i = getI18nString("first_draft.share_trace_nudge_in_m
         j(JSON.stringify(t, null, 2), "trace.json");
       }
     },
-    onDismiss: lQ,
+    onDismiss: noop,
     timeoutOverride: 2e4,
     timeoutType: "exact"
   }));

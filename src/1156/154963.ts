@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { e as _$$e } from "../905/693478";
-import { g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { Xr } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
@@ -11,7 +11,7 @@ import { mC } from "../figma_app/325537";
 import { t as _$$t2 } from "../1156/670515";
 let h = {
   emptyStateContainer: {
-    ...g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     width: "x1h93xvk",
     display: "x78zum5",
     flexDirection: "xdt5ytf",

@@ -5,7 +5,7 @@ import { bL, O6, hE, HG } from "../905/598775";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { Y } from "../905/506207";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { A } from "../5724/713301";
@@ -45,7 +45,7 @@ export function $$y1(e) {
       "data-onboarding-key": e["data-onboarding-key"],
       "data-testid": e.dataTestId,
       onClick: e.onClick,
-      children: [jsx(_$$a, {
+      children: [jsx(IntersectionSentinel, {
         onInitialLoad: l
       }), jsxs("div", {
         id: t,
@@ -100,7 +100,7 @@ export function $$C0(e) {
     children: [jsx(O6, {
       className: "sidebar_row--draftRow--JkpSx",
       onClick: e.onClick
-    }), jsx(_$$a, {
+    }), jsx(IntersectionSentinel, {
       onInitialLoad: l
     }), jsxs("div", {
       id: t,

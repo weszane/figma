@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, Children, useRef, useEffect, useCallback, cloneElement, forwardRef, PureComponent } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { setupThemeContext } from "../905/614223";
 import { Ay } from "../figma_app/272902";
 import l from "classnames";
@@ -100,7 +100,7 @@ export function $$v2(e) {
         return !!(t.disabled || t.header);
       }
       return !1;
-    })(n[e]) ? lQ : t => s.current[e] = t,
+    })(n[e]) ? noop : t => s.current[e] = t,
     onKeyDown: r => {
       switch (r.stopPropagation(), r.nativeEvent && r.nativeEvent.stopImmediatePropagation(), r.key) {
         case "Escape":

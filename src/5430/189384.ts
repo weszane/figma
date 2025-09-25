@@ -3,7 +3,7 @@ import { useCallback, createRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePrefersMediaQuery } from "../figma_app/469468";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { e as _$$e } from "../905/435763";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
@@ -98,7 +98,7 @@ let E = registerModal(function ({
     });
   }, [E, e, o, j]);
   return jsxs(ModalView, {
-    hide: lQ,
+    hide: noop,
     disableClickOutsideToHide: !0,
     className: "use_preset_options_modal--presetOptionsModal--MPCAv",
     children: [jsx("div", {

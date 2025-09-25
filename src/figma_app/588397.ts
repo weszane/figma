@@ -12,7 +12,7 @@ import { getSecondaryTextColorForBackground } from "../figma_app/191804";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { useHandleMouseEvent } from "../figma_app/878298";
-import { bG } from "../905/149328";
+import { getThemePx } from "../905/149328";
 import { Point } from "../905/736624";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
@@ -160,7 +160,7 @@ export function $$er1(e) {
     }) => {
       if (t === e.item.node_id && r.current) {
         let e = r.current.getBoundingClientRect();
-        e.top < bG() + q ? r.current.scrollIntoView() : e.bottom > window.innerHeight - bG() && r.current.scrollIntoView(!1);
+        e.top < getThemePx() + q ? r.current.scrollIntoView() : e.bottom > window.innerHeight - getThemePx() && r.current.scrollIntoView(!1);
       }
     };
     fullscreenValue.fromFullscreen.on("scrollToNode", t);

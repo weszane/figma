@@ -14,7 +14,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { AUTH_INIT } from "../905/194276";
 import { AuthFlowStep } from "../905/862321";
 import { F0 } from "../905/178707";
-import { k as _$$k } from "../905/585996";
+import { CustomSpacer } from "../905/585996";
 import { BigTextInput } from "../figma_app/637027";
 import { Ak } from "../905/773401";
 import { lR, $z } from "../figma_app/617427";
@@ -129,7 +129,7 @@ function H({
         className: "workshop_modals--figjamTryHeader--5gdQ2 text--fontPos20--Bcz97 text--_fontBase--QdLsd",
         children: renderI18nText("figjam_try.onboarding_title")
       })
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 1
     }), jsx("div", {
       className: U,
@@ -137,7 +137,7 @@ function H({
         className: "workshop_modals--figjamTrySubtitle--XIYgl text--fontPos13--xW8hS text--_fontBase--QdLsd",
         children: renderI18nText("figjam_try.onboarding_subtext")
       })
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 3
     }), BrowserInfo.isMeetDevice ? jsx(lR, {
       onClick: onClose,
@@ -154,13 +154,13 @@ function H({
       }), isNameError && jsx("div", {
         className: "workshop_modals--figjamTryError--tCLy- text--fontPos14--OL9Hp text--_fontBase--QdLsd",
         children: renderI18nText("figjam_try.onboarding_name_validation_error")
-      }), jsx(_$$k, {
+      }), jsx(CustomSpacer, {
         multiple: 2
       }), jsx(lR, {
         type: "submit",
         children: renderI18nText("figjam_try.onboarding_submit")
       })]
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 3
     }), jsx("div", {
       className: G,
@@ -174,7 +174,7 @@ function H({
           title: getI18nString("figjam_try.onboarding_disclaimer_privacy_policy")
         })
       })
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 1
     }), d && !BrowserInfo.isMeetDevice && jsx("div", {
       className: G,
@@ -213,7 +213,7 @@ function z({
         className: "workshop_modals--headerFilename--Z60l0 workshop_modals--header--1TwZ- text--fontPos24Whyte--gYiFz text--_fontBaseWhyte--efAjI",
         children: t?.name
       })]
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsx("div", {
       className: U,
@@ -221,7 +221,7 @@ function z({
         className: "workshop_modals--subtitle---dQsr text--fontPos16Whyte--OfwSP text--_fontBaseWhyte--efAjI",
         children: renderI18nText("whiteboard.open_sessions.onboarding_subtext")
       })
-    }), jsx(_$$k, {
+    }), jsx(CustomSpacer, {
       multiple: 2
     }), jsxs("form", {
       onSubmit,
@@ -234,7 +234,7 @@ function z({
         }), isNameError && jsx("div", {
           className: "workshop_modals--brandError--wMV-m text--fontPos16Whyte--OfwSP text--_fontBaseWhyte--efAjI",
           children: renderI18nText("whiteboard.open_sessions.onboarding_name_validation_error")
-        }), jsx(_$$k, {
+        }), jsx(CustomSpacer, {
           multiple: 2
         })]
       }), jsx(Ak, {
@@ -244,7 +244,7 @@ function z({
         })
       })]
     }), l && jsxs(Fragment, {
-      children: [jsx(_$$k, {
+      children: [jsx(CustomSpacer, {
         multiple: 2
       }), jsxs("div", {
         className: U,
@@ -262,7 +262,7 @@ function z({
             })
           })
         }), !BrowserInfo.isMeetDevice && jsxs(Fragment, {
-          children: [jsx(_$$k, {
+          children: [jsx(CustomSpacer, {
             multiple: 1
           }), jsx("div", {
             className: B,

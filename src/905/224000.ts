@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
 import a from "classnames";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 var s = a;
 export function $$d0({
@@ -27,7 +27,7 @@ export function $$d0({
       className: s()(i, t ? "library_modal_thumbnail--libraryModalCoverThumbnail--08sGL library_modal_thumbnail--libraryModalThumbnail--lPDXG" : "library_modal_thumbnail--libraryModalThumbnail--lPDXG"),
       role: "img",
       "aria-label": d
-    }), e && jsx(oW, {
+    }), e && jsx(WAFImage, {
       src: e,
       onLoad: m,
       className: cssBuilderInstance.hidden.$,

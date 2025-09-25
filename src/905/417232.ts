@@ -3,7 +3,7 @@ import { useRef, useContext, useEffect, useMemo, createContext, useState } from 
 import { i as _$$i } from "../vendor/218335";
 import { H } from "../vendor/373976";
 import { u } from "../vendor/363976";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 var $$d0 = (e => (e[e.BEFORE = 1] = "BEFORE", e[e.INSIDE = 2] = "INSIDE", e[e.AFTER = 3] = "AFTER", e))($$d0 || {});
 let c = {
   dropPositionThreshold: .5,
@@ -127,7 +127,7 @@ export function $$u1(e) {
 }
 let p = createContext({
   lastHoveredItem: null,
-  setLastHoveredItem: () => lQ
+  setLastHoveredItem: () => noop
 });
 export function $$m2({
   children: e

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { Jt } from "../figma_app/28323";
-if (443 == require.j) { }
+if (443 == require.j) {}
 export function $$u0() {
   let e = useDispatch();
   return {
@@ -27,7 +27,7 @@ export function $$u0() {
         message: n,
         icon: t ? VisualBellIcon.CHECK_WITH_CIRCLE : void 0,
         type: t ? "requests-approved" : "requests-denied",
-        onDismiss: lQ
+        onDismiss: noop
       }));
     },
     dispatchSuccessWithRequesterName: ({
@@ -39,7 +39,7 @@ export function $$u0() {
         }),
         icon: VisualBellIcon.CHECK_WITH_CIRCLE,
         type: "requests-approved",
-        onDismiss: lQ
+        onDismiss: noop
       }));
     },
     dispatchRequestAlreadyHandled: () => {

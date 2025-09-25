@@ -31,7 +31,7 @@ import { selectViewAction } from "../905/929976";
 import { H3 } from "../figma_app/920435";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
-import { Y$ } from "../905/84777";
+import { BillingPriceStatus } from "../905/84777";
 import { YL, Zz, $$in } from "../figma_app/84966";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
@@ -225,7 +225,7 @@ function J(e) {
             textAlign: "left",
             gridColumnWidth: "auto",
             cellComponent: e => jsx(_$$T, {
-              contractPriceType: Y$.AT_NEXT_RENEWAL,
+              contractPriceType: BillingPriceStatus.AT_NEXT_RENEWAL,
               planKey: p.key,
               seatType: e,
               showMonthlyAnnualPriceComparison: !0

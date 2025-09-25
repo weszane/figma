@@ -1,10 +1,10 @@
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { ex } from '../905/524523';
+import { registerTooltip } from '../905/524523';
 import { x } from '../905/719609';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { y } from '../figma_app/13082';
 import { JT } from '../figma_app/632248';
-export let $$l0 = ex('ai_beta', ({
+export let $$l0 = registerTooltip('ai_beta', ({
   text: e,
   helpUrlVariant: t
 }) => {

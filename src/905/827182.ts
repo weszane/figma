@@ -15,7 +15,7 @@ import f from "classnames";
 import { useDebounce } from 'use-debounce';
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { Qp } from "../figma_app/162641";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getVisibleTheme } from "../905/640017";
@@ -135,7 +135,7 @@ function V(e) {
     className: _()("stroke_width_profile_control--customProfileContainer--r2oFG", F, {
       [L]: e.darkBackground
     }),
-    children: jsx(oW, {
+    children: jsx(WAFImage, {
       src: e.imageUrl,
       alt: getI18nString("fullscreen.properties_panel.width_profile.custom.alt_label"),
       className: "stroke_width_profile_control--customProfile--M0j9K"

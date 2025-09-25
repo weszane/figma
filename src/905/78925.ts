@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useRef, useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { VariableDataType, VariableResolvedDataType, Command } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
@@ -133,7 +133,7 @@ export function $$b0({
     onCMSFieldSelected: T,
     onClose: e,
     onSearchInputChange: b,
-    onVariableSelected: lQ,
+    onVariableSelected: noop,
     pickerControls: jsx(Fragment, {}),
     pickerType: "fields",
     recordingKey: "cmsBindingsDropdown",

@@ -18,7 +18,7 @@ import { G } from '../905/658204';
 import { formattedColorManipulator } from '../905/713722';
 import { Point } from '../905/736624';
 import { resolveVariableValue } from '../905/929949';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { J as _$$J2, P as _$$P } from '../figma_app/120873';
 import { ExpressionInput, OpacityInput } from '../figma_app/178475';
 import { yesNoTrackingEnum } from '../figma_app/198712';
@@ -114,7 +114,7 @@ export function $$z2(e) {
               noBorderOnFocus: i === $.CELL,
               onCancel: m,
               onSubmit: m,
-              onFinish: lQ,
+              onFinish: noop,
               originalValue: _.value,
               recordingKey: generateRecordingKey(e.recordingKey, 'textInput'),
               type: $.CELL

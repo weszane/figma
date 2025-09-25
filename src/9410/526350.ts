@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -192,7 +192,7 @@ let c = {
     $$css: !0
   },
   titleText: {
-    ...g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     color: "x1akne3o",
     margin: "x1ghz6dp",
     marginInline: null,
@@ -206,7 +206,7 @@ let c = {
     $$css: !0
   },
   subtitleText: {
-    ...g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     margin: "x1ghz6dp",
     marginInline: null,

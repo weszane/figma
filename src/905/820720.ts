@@ -16,7 +16,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { isDevModeWithCodegen } from "../figma_app/300692";
 import { hasLocalFileId, isPluginAllowListed } from "../figma_app/155287";
 import { getCodegenLanguages } from "../905/661977";
-import { d as _$$d } from "../905/480825";
+import { PluginIconDisplay } from "../905/480825";
 var d = l;
 function E(e, t, i, r = {}) {
   let a = [];
@@ -26,7 +26,7 @@ function E(e, t, i, r = {}) {
     if (0 === s.length) return;
     let o = hasLocalFileId(e) ? void 0 : jsx("div", {
       className: cssBuilderInstance.mr4.$,
-      children: jsx(_$$d, {
+      children: jsx(PluginIconDisplay, {
         plugin: e
       })
     });

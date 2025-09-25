@@ -13,7 +13,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { BrowserInfo, isMobileNotFigmaMobile, isAnyMobile } from "../figma_app/778880";
 import { y7, oJ, $ as _$$$, jA, NB, L3, KI } from "../figma_app/385215";
 import { Fj, Dv, ah, uc } from "../905/763714";
-import { Av } from "../905/149328";
+import { getFileTypePx } from "../905/149328";
 import { getViewerInstance } from "../figma_app/632319";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { O1, KD } from "../figma_app/317394";
@@ -39,7 +39,7 @@ export let $$U3 = 5;
 var G = (e => (e[e.Default = 0] = "Default", e[e.Mobile = 1] = "Mobile", e[e.Prototype = 2] = "Prototype", e[e.Slide = 3] = "Slide", e))(G || {});
 let K = (e, t) => {
   let i = getBasicViewportRect();
-  let r = Av();
+  let r = getFileTypePx();
   let a = _o();
   let s = useAppModelProperty("showUi");
   let o = getSelectedView();

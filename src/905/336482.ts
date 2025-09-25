@@ -28,8 +28,8 @@ import { r as _$$r } from "../905/334940";
 import { o as _$$o } from "../905/785255";
 import { r as _$$r2 } from "../905/290294";
 import { D as _$$D } from "../905/572843";
-import { o as _$$o2, A as _$$A2 } from "../905/17894";
-import { i_, c_, Lz, Zc } from "../905/497882";
+import { withSubmissionError, unsetSymbol } from "../905/17894";
+import { isFieldValidated, assertFieldReady, getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { a as _$$a } from "../905/94741";
 import { A as _$$A3 } from "../905/601732";
 import { __, tZ, Mm } from "../905/271611";
@@ -51,7 +51,7 @@ import J from "../vendor/781591";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { getValueOrFallback } from "../905/872825";
-import { T as _$$T, e as _$$e2 } from "../905/15569";
+import { setupFormValidationHandler, setupAtomFormHandler } from "../905/15569";
 import { q as _$$q } from "../905/840070";
 import { v as _$$v, V as _$$V } from "../905/513628";
 import { S as _$$S4 } from "../905/622482";
@@ -84,7 +84,7 @@ import { KT, Cd, DK, $o, ME, jc } from "../905/54042";
 import { r as _$$r3 } from "../905/490676";
 import { PrototypingTsApi } from "../figma_app/763686";
 import { t as _$$t3 } from "../905/104116";
-import { P as _$$P } from "../905/19648";
+import { CategorySelectDropdown } from "../905/19648";
 import { $ as _$$$ } from "../905/410306";
 import { H as _$$H2 } from "../905/367945";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -94,7 +94,7 @@ import { x as _$$x } from "../905/956141";
 import { K as _$$K } from "../905/198422";
 import { d as _$$d } from "../905/49800";
 import { HiddenLabel } from "../905/270045";
-import { A as _$$A9 } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 import { vj } from "../905/652712";
 import { l as _$$l } from "../905/493845";
 import { Z9 } from "../905/104173";
@@ -311,7 +311,7 @@ let ey = {
     publishableComponentNodeIds: t,
     localComponents: i
   }),
-  canSubmit: ({}, e) => Object.keys(e).every(t => i_(e[t])),
+  canSubmit: ({}, e) => Object.keys(e).every(t => isFieldValidated(e[t])),
   submit: async (e, t) => {
     let i;
     let n;
@@ -327,10 +327,10 @@ let ey = {
       description
     } = t;
     if (createNewVersionOnSubmit) try {
-      i = (await maybeCreateSavepoint(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
+      i = (await maybeCreateSavepoint(figFile.key, "Published to Community hub", assertFieldReady(description).currentValue, debugState.dispatch))?.id;
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_CREATING_SAVEPOINT",
         data: {
           rawError: e,
@@ -348,7 +348,7 @@ let ey = {
       });
     } catch (n) {
       reportError(ServiceCategories.COMMUNITY, n);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPLOADING_IMAGES",
         data: {
           rawError: n,
@@ -380,7 +380,7 @@ let ey = {
       });
     } catch (t) {
       reportError(ServiceCategories.COMMUNITY, t);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_FINALIZING_VERSION",
         data: t instanceof YI ? {
           rawError: t.rawError,
@@ -405,7 +405,7 @@ let ey = {
       });
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
           rawError: e
@@ -421,7 +421,7 @@ let ey = {
     } catch (t) {
       let e = t instanceof Error ? t : void 0;
       e && reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_PUBLISHING_LIBRARY_CHANGES",
         data: {
           rawError: e,
@@ -437,7 +437,7 @@ let ey = {
       if (void 0 === e) {
         let e = Error("Validations not passed in time");
         reportError(ServiceCategories.COMMUNITY, e);
-        return new _$$o2.SubmissionError({
+        return new withSubmissionError.SubmissionError({
           key: "ERROR_VALIDATIONS_NOT_PASSED_IN_TIME",
           data: {
             rawError: e
@@ -448,7 +448,7 @@ let ey = {
       RN(r, "CooperForm.submit");
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_VALIDATING_STATUS",
         data: {
           rawError: e
@@ -459,7 +459,7 @@ let ey = {
       nz(r);
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
           rawError: e
@@ -473,8 +473,8 @@ let ey = {
     };
   }
 };
-let eb = _$$T(ey);
-let ev = _$$e2(eb, fe);
+let eb = setupFormValidationHandler(ey);
+let ev = setupAtomFormHandler(eb, fe);
 function eM({
   draft: e
 }) {
@@ -512,13 +512,13 @@ function eM({
   } = _$$o([{
     id: "details",
     checkpoints: [{
-      check: () => i_(e.fieldStates.name),
+      check: () => isFieldValidated(e.fieldStates.name),
       onFail: () => __(tZ.NAME_INPUT)
     }, {
-      check: () => i_(e.fieldStates.description),
+      check: () => isFieldValidated(e.fieldStates.description),
       onFail: () => __(tZ.DESCRIPTION_INPUT)
     }, {
-      check: () => i_(e.fieldStates.tagsV1),
+      check: () => isFieldValidated(e.fieldStates.tagsV1),
       onFail: () => __(tZ.TAGS_SECTION)
     }],
     onFail: () => {
@@ -529,16 +529,16 @@ function eM({
   }, {
     id: "advanced",
     checkpoints: [{
-      check: () => i_(e.fieldStates.profileHandle),
+      check: () => isFieldValidated(e.fieldStates.profileHandle),
       onFail: () => __(tZ.PROFILE_HANDLE_INPUT)
     }, {
-      check: () => i_(e.fieldStates.cocreators),
+      check: () => isFieldValidated(e.fieldStates.cocreators),
       onFail: () => __(tZ.COCREATORS_INPUT)
     }, {
-      check: () => i_(e.fieldStates.tosAccepted),
+      check: () => isFieldValidated(e.fieldStates.tosAccepted),
       onFail: () => __(tZ.TOS_AGREED_CHECKBOX)
     }, {
-      check: () => i_(e.fieldStates.supportContact),
+      check: () => isFieldValidated(e.fieldStates.supportContact),
       onFail: () => __(tZ.SUPPORT_CONTACT_INPUT)
     }],
     onFail: () => {
@@ -731,7 +731,7 @@ function eM({
       step: PublishModalState.OPENED
     });
   }, [c]);
-  let eo = Lz(e.fieldStates.name, "");
+  let eo = getFieldValueOrDefault(e.fieldStates.name, "");
   let el = useDebouncedCallback(() => {
     c.current($$in, {
       step: PublishModalState.EDIT_NAME
@@ -740,7 +740,7 @@ function eM({
   useEffect(() => {
     eo && p.name.touched && el();
   }, [eo, el, p.name.touched]);
-  let ed = Lz(e.fieldStates.description, "");
+  let ed = getFieldValueOrDefault(e.fieldStates.description, "");
   let ec = useDebouncedCallback(() => {
     c.current($$in, {
       step: PublishModalState.EDIT_DESCRIPTION
@@ -820,7 +820,7 @@ function ej(e) {
     localComponents
   });
   _$$h(() => {
-    f.fieldStates.carouselMedia.currentValue !== _$$A2 && f.fieldStates.carouselMedia.resetValue();
+    f.fieldStates.carouselMedia.currentValue !== unsetSymbol && f.fieldStates.carouselMedia.resetValue();
   });
   let [_, A] = useAtomValueAndSetter(pz);
   useLayoutEffect(() => {
@@ -866,8 +866,8 @@ function eY({
 function e0({
   viewerModeField: e
 }) {
-  let t = Lz(e, void 0);
-  return Zc(e) || t === FTemplateCategoryType.PROTOTYPE ? jsx(_$$A9, {
+  let t = getFieldValueOrDefault(e, void 0);
+  return canSetFieldValue(e) || t === FTemplateCategoryType.PROTOTYPE ? jsx(FieldContainer, {
     label: getI18nString("community.publishing.prototype_preview"),
     children: jsxs("div", {
       className: cssBuilderInstance.flex.itemsCenter.gap8.$,
@@ -879,7 +879,7 @@ function e0({
         onChange: t => {
           e.setValue?.(t ? FTemplateCategoryType.PROTOTYPE : FTemplateCategoryType.CANVAS);
         },
-        disabled: !Zc(e)
+        disabled: !canSetFieldValue(e)
       }), getI18nString("community.publishing.include_prototypes_in_thumbnail")]
     })
   }) : null;
@@ -892,7 +892,7 @@ async function e9({
   hubFile: r
 }) {
   let a = Object.values(t).map(e => e.node_id);
-  let s = i(c_(n).currentValue) ? a : e;
+  let s = i(assertFieldReady(n).currentValue) ? a : e;
   if (s.length > 0) {
     let {
       onPublishSuccess,
@@ -927,7 +927,7 @@ let te = {
     fetchInitialValue: ({
       existingHubFile: e,
       viewerModeField: t
-    }) => t.currentValue === _$$A2 ? _$$A2 : t.currentValue === FTemplateCategoryType.PROTOTYPE ? e?.scaling_mode ? e.scaling_mode : nV : void 0,
+    }) => t.currentValue === unsetSymbol ? unsetSymbol : t.currentValue === FTemplateCategoryType.PROTOTYPE ? e?.scaling_mode ? e.scaling_mode : nV : void 0,
     validate: ({
       viewerModeField: e
     }, t) => {
@@ -943,7 +943,7 @@ let te = {
           }
         }];
       }
-      if (e.currentValue !== _$$A2 && e.currentValue !== FTemplateCategoryType.PROTOTYPE && void 0 !== t) return [{
+      if (e.currentValue !== unsetSymbol && e.currentValue !== FTemplateCategoryType.PROTOTYPE && void 0 !== t) return [{
         key: "VIEWER_MODE_NOT_PROTOTYPE",
         data: {
           viewerMode: e.currentValue
@@ -962,7 +962,7 @@ let te = {
   price: WN,
   supportContact: aS
 };
-let tt = _$$T({
+let tt = setupFormValidationHandler({
   displayName: "HubFileForm",
   fields: te,
   fieldToDeps: {
@@ -1179,7 +1179,7 @@ let tt = _$$T({
   },
   canSubmit: ({
     renameSlideThemeForTemplatePublish: e
-  }, t) => (t.viewerMode.currentValue !== FTemplateCategoryType.SLIDE_TEMPLATE || !!e) && Object.keys(t).every(e => i_(t[e])),
+  }, t) => (t.viewerMode.currentValue !== FTemplateCategoryType.SLIDE_TEMPLATE || !!e) && Object.keys(t).every(e => isFieldValidated(t[e])),
   submit: async (e, t) => {
     let i;
     let n;
@@ -1195,10 +1195,10 @@ let tt = _$$T({
       viewerMode
     } = t;
     if (createNewVersionOnSubmit) try {
-      i = (await maybeCreateSavepoint(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
+      i = (await maybeCreateSavepoint(figFile.key, "Published to Community hub", assertFieldReady(description).currentValue, debugState.dispatch))?.id;
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_CREATING_SAVEPOINT",
         data: {
           rawError: e,
@@ -1216,7 +1216,7 @@ let tt = _$$T({
       });
     } catch (n) {
       reportError(ServiceCategories.COMMUNITY, n);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPLOADING_IMAGES",
         data: {
           rawError: n,
@@ -1248,7 +1248,7 @@ let tt = _$$T({
       });
     } catch (t) {
       reportError(ServiceCategories.COMMUNITY, t);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_FINALIZING_VERSION",
         data: t instanceof YI ? {
           rawError: t.rawError,
@@ -1278,7 +1278,7 @@ let tt = _$$T({
       }));
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
           rawError: e
@@ -1290,7 +1290,7 @@ let tt = _$$T({
       if (void 0 === e) {
         let e = Error("Validations not passed in time");
         reportError(ServiceCategories.COMMUNITY, e);
-        return new _$$o2.SubmissionError({
+        return new withSubmissionError.SubmissionError({
           key: "ERROR_VALIDATIONS_NOT_PASSED_IN_TIME",
           data: {
             rawError: e
@@ -1301,7 +1301,7 @@ let tt = _$$T({
       RN(r, "HubFileForm.submit");
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_VALIDATING_STATUS",
         data: {
           rawError: e
@@ -1312,7 +1312,7 @@ let tt = _$$T({
       nz(r);
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
           rawError: e
@@ -1326,7 +1326,7 @@ let tt = _$$T({
     };
   }
 });
-let ti = _$$e2(tt, fe);
+let ti = setupAtomFormHandler(tt, fe);
 function ts({
   error: e,
   resetValue: t
@@ -1370,7 +1370,7 @@ function td({
     tagsV1Field: e.fieldStates.tagsV1,
     tagsV2Field: e.fieldStates.tagsV2
   });
-  let Q = _$$n(e.fieldStates.carouselMedia, useMemo(() => e.fieldStates.viewerMode.currentValue === _$$A2 ? void 0 : {
+  let Q = _$$n(e.fieldStates.carouselMedia, useMemo(() => e.fieldStates.viewerMode.currentValue === unsetSymbol ? void 0 : {
     promise: _$$V(canvasThumbnailPromise, e.fieldStates.viewerMode.currentValue),
     source: "file_thumbnail"
   }, [canvasThumbnailPromise, e.fieldStates.viewerMode.currentValue]));
@@ -1391,16 +1391,16 @@ function td({
   } = _$$o([{
     id: "details",
     checkpoints: [{
-      check: () => i_(e.fieldStates.name),
+      check: () => isFieldValidated(e.fieldStates.name),
       onFail: () => __(tZ.NAME_INPUT)
     }, {
-      check: () => i_(e.fieldStates.description),
+      check: () => isFieldValidated(e.fieldStates.description),
       onFail: () => __(tZ.DESCRIPTION_INPUT)
     }, {
-      check: () => i_(e.fieldStates.category),
+      check: () => isFieldValidated(e.fieldStates.category),
       onFail: () => __(tZ.CATEGORY_SELECT)
     }, {
-      check: () => i_(e.fieldStates.tagsV2) && i_(e.fieldStates.tagsV1),
+      check: () => isFieldValidated(e.fieldStates.tagsV2) && isFieldValidated(e.fieldStates.tagsV1),
       onFail: () => __(tZ.TAGS_SECTION)
     }],
     onFail: () => {
@@ -1413,7 +1413,7 @@ function td({
   }, {
     id: "thumbnail",
     checkpoints: [{
-      check: () => i_(e.fieldStates.carouselMedia),
+      check: () => isFieldValidated(e.fieldStates.carouselMedia),
       onFail: () => {
         let t = e.fieldStates.carouselMedia;
         let i = "error" === t.status ? t.errors[0] : void 0;
@@ -1439,19 +1439,19 @@ function td({
   }, {
     id: "advanced",
     checkpoints: [{
-      check: () => i_(e.fieldStates.profileHandle),
+      check: () => isFieldValidated(e.fieldStates.profileHandle),
       onFail: () => __(tZ.PROFILE_HANDLE_INPUT)
     }, {
-      check: () => i_(e.fieldStates.cocreators),
+      check: () => isFieldValidated(e.fieldStates.cocreators),
       onFail: () => __(tZ.COCREATORS_INPUT)
     }, {
-      check: () => i_(e.fieldStates.tosAccepted),
+      check: () => isFieldValidated(e.fieldStates.tosAccepted),
       onFail: () => __(tZ.TOS_AGREED_CHECKBOX)
     }, {
-      check: () => i_(e.fieldStates.price),
+      check: () => isFieldValidated(e.fieldStates.price),
       onFail: () => __(tZ.PRICE_INPUT)
     }, {
-      check: () => i_(e.fieldStates.supportContact),
+      check: () => isFieldValidated(e.fieldStates.supportContact),
       onFail: () => __(tZ.SUPPORT_CONTACT_INPUT)
     }],
     onFail: () => {
@@ -1541,12 +1541,12 @@ function td({
           })
         }), jsx(Mm, {
           id: tZ.CATEGORY_SELECT,
-          children: e => jsx(_$$P, {
+          children: e => jsx(CategorySelectDropdown, {
             ref: e,
             categoryFieldManager: x,
             ...b.category
           })
-        }), i_(e.fieldStates.category) && jsx(Mm, {
+        }), isFieldValidated(e.fieldStates.category) && jsx(Mm, {
           id: tZ.TAGS_SECTION,
           children: e => X.validV2Tags.length > 0 ? jsx(vj, {
             ref: e,
@@ -1714,7 +1714,7 @@ function td({
       step: PublishModalState.OPENED
     });
   }, [p]);
-  let ef = Lz(e.fieldStates.name, "");
+  let ef = getFieldValueOrDefault(e.fieldStates.name, "");
   let e_ = useDebouncedCallback(() => {
     p.current($$in, {
       step: PublishModalState.EDIT_NAME
@@ -1723,7 +1723,7 @@ function td({
   useEffect(() => {
     ef && b.name.touched && e_();
   }, [ef, e_, b.name.touched]);
-  let eA = Lz(e.fieldStates.description, "");
+  let eA = getFieldValueOrDefault(e.fieldStates.description, "");
   let ey = useDebouncedCallback(() => {
     p.current($$in, {
       step: PublishModalState.EDIT_DESCRIPTION

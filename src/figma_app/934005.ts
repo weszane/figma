@@ -1,7 +1,7 @@
 import { ServiceCategories } from "../905/165054";
 import { z } from "../905/239603";
 import a from "../vendor/241899";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { reportError } from "../905/11";
 import { toTitleCase } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
@@ -87,16 +87,16 @@ let R = ["uncollectible", "void"];
 let L = [...R, "pending"];
 export var $$P4 = (e => (e.REVIEW = "review", e.LOCKED = "locked", e))($$P4 || {});
 export function $$D21(e, t) {
-  return "open" === e.state && _$$A(t).isAfter($$F13(e));
+  return "open" === e.state && dayjs(t).isAfter($$F13(e));
 }
 export function $$k10(e) {
-  return _$$A(e.issued_at).toDate();
+  return dayjs(e.issued_at).toDate();
 }
 export function $$M14(e) {
-  return e.paid_at ? _$$A(e.paid_at).toDate() : null;
+  return e.paid_at ? dayjs(e.paid_at).toDate() : null;
 }
 export function $$F13(e) {
-  return _$$A(e.past_due_at).toDate();
+  return dayjs(e.past_due_at).toDate();
 }
 export function $$j8(e) {
   return getI18nString("plan_invoices.date_long", {
@@ -219,7 +219,7 @@ export function $$W20(e) {
 function K(e, t, r) {
   let n = $$k10(e);
   let i = $$k10(t);
-  let a = (_$$A(n).isAfter(i) ? -1 : 0) + (_$$A(i).isAfter(n) ? 1 : 0);
+  let a = (dayjs(n).isAfter(i) ? -1 : 0) + (dayjs(i).isAfter(n) ? 1 : 0);
   return r?.reverse ? -a : a;
 }
 function Y(e, t) {
@@ -240,7 +240,7 @@ function q(e) {
 }
 function J(e) {
   let t = e[0];
-  return t ? e.filter(e => 1 >= Math.abs(_$$A($$k10(t)).diff($$k10(e), "days"))) : [];
+  return t ? e.filter(e => 1 >= Math.abs(dayjs($$k10(t)).diff($$k10(e), "days"))) : [];
 }
 export function $$Z16(e, t) {
   return [...J([...e.filter(e => X(e)).filter(e => !("pending" !== e.state || $$et19(e) && !(e.plan_parent_type === FOrganizationLevelType.ORG && (t?.allowLegacyOrgAnnual && "legacy" === e.billing_mechanics || t?.allowProratedOrgAnnual && "prorated" === e.billing_mechanics))))].sort((e, t) => K(t, e)))].sort((e, t) => Y(t, e))[0] ?? null;
@@ -256,7 +256,7 @@ export function $$et19(e) {
 }
 export function $$er11(e) {
   let t = null;
-  for (let r of e) q(r) && $$et19(r) && (!t || _$$A(r.issued_at).isAfter(t.issued_at)) && (t = r);
+  for (let r of e) q(r) && $$et19(r) && (!t || dayjs(r.issued_at).isAfter(t.issued_at)) && (t = r);
   return t;
 }
 export function $$en15(e) {

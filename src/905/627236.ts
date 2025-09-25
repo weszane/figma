@@ -30,7 +30,7 @@ import { g as _$$g } from "../905/119656";
 import { T as _$$T } from "../905/292816";
 import { wn } from "../figma_app/920435";
 import { TrackingProvider } from "../figma_app/831799";
-import { Y$ } from "../905/84777";
+import { BillingPriceStatus } from "../905/84777";
 import { xQ, $$in } from "../figma_app/84966";
 import { collaboratorSet } from "../905/332483";
 import { compareProductAccessTypes } from "../figma_app/217457";
@@ -263,7 +263,7 @@ function X(e) {
             textAlign: "left",
             gridColumnWidth: "auto",
             cellComponent: e => jsx(_$$T, {
-              contractPriceType: Y$.CURRENT,
+              contractPriceType: BillingPriceStatus.CURRENT,
               planKey: g.key,
               seatType: e,
               showMonthlyAnnualPriceComparison: !0

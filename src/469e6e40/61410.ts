@@ -1,4 +1,4 @@
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { Zy, vn, Ph } from "../figma_app/109538";
 import { showModalHandler } from "../905/156213";
 import { getFutureDateOrNull } from "../figma_app/345997";
@@ -21,7 +21,7 @@ export function $$o0(e) {
   return a ? {
     id: "trial_read_only",
     trialEnd: a
-  } : A(e.currentDate).isAfter(A(t.current_period_end).subtract(30, "days")) ? {
+  } : dayjs(e.currentDate).isAfter(dayjs(t.current_period_end).subtract(30, "days")) ? {
     id: "adjust_renewal_seats",
     perform: ({
       dispatch: e
@@ -29,7 +29,7 @@ export function $$o0(e) {
       e(showModalHandler({
         type: vn,
         data: {
-          renewalDate: A(t.current_period_end).toDate()
+          renewalDate: dayjs(t.current_period_end).toDate()
         }
       }));
     }

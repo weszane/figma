@@ -62,18 +62,18 @@ import { I as _$$I } from "../905/293573";
 import { o as _$$o2 } from "../905/785255";
 import { r as _$$r2 } from "../905/290294";
 import { D as _$$D } from "../905/572843";
-import { Lz, Zc, i_, c_ } from "../905/497882";
+import { getFieldValueOrDefault, canSetFieldValue, isFieldValidated, assertFieldReady } from "../905/497882";
 import { __, tZ, Mm } from "../905/271611";
 import { _ as _$$_ } from "../905/144222";
 import { c as _$$c2 } from "../905/598842";
 import { B as _$$B2 } from "../905/950875";
 import { A as _$$A6 } from "../905/813387";
 import { A as _$$A7 } from "../905/144978";
-import { lQ } from "../905/934246";
-import { b as _$$b } from "../905/22449";
-import { c as _$$c3 } from "../905/34525";
+import { noop } from "lodash-es";
+import { RadioPrimitiveRoot } from "../905/22449";
+import { RadioPrimitiveOption } from "../905/34525";
 import { nl } from "../905/590952";
-import { A as _$$A8 } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 import { iy, uK, O0, Ee, I1 } from "../905/916525";
 import { X as _$$X2, S as _$$S } from "../905/109653";
 import { Ai, vu } from "../905/870778";
@@ -84,8 +84,8 @@ import { i as _$$i2 } from "../905/970229";
 import { uploadRequest } from "../905/827765";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
-import { T as _$$T, e as _$$e3 } from "../905/15569";
-import { o as _$$o3 } from "../905/17894";
+import { setupFormValidationHandler, setupAtomFormHandler } from "../905/15569";
+import { withSubmissionError } from "../905/17894";
 import { v as _$$v } from "../905/513628";
 import { z as _$$z2 } from "../905/348343";
 import { om } from "../905/175462";
@@ -283,13 +283,13 @@ function eU({
 }) {
   let t = useCurrentUserOrg();
   let i = getCurrentTeam();
-  let n = Lz(e, void 0);
-  return jsx(_$$A8, {
+  let n = getFieldValueOrDefault(e, void 0);
+  return jsx(FieldContainer, {
     label: getI18nString("templates.publishing.scope.label"),
-    children: jsxs(_$$b, {
+    children: jsxs(RadioPrimitiveRoot, {
       className: iy,
       value: n,
-      onChange: Zc(e) ? t => e.setValue(t) : lQ,
+      onChange: canSetFieldValue(e) ? t => e.setValue(t) : noop,
       children: [i && jsx(eB, {
         publishScope: ContainerTypeMap.TEAM,
         publishScopeEntity: i
@@ -308,7 +308,7 @@ function eB({
     className: uK,
     children: [jsx(nl, {
       team: t
-    }), jsx(_$$c3, {
+    }), jsx(RadioPrimitiveOption, {
       value: e,
       id: e,
       className: O0
@@ -371,7 +371,7 @@ let e3 = {
   },
   carouselMedia: _$$v
 };
-let e6 = _$$T({
+let e6 = setupFormValidationHandler({
   displayName: "TemplateForm",
   fields: e3,
   fieldToDeps: {
@@ -429,7 +429,7 @@ let e6 = _$$T({
     publishableComponentNodeIds: t,
     localComponents: i
   }),
-  canSubmit: ({}, e) => Object.keys(e).every(t => i_(e[t])),
+  canSubmit: ({}, e) => Object.keys(e).every(t => isFieldValidated(e[t])),
   submit: async (e, t) => {
     let i;
     let {
@@ -442,7 +442,7 @@ let e6 = _$$T({
       publishScope,
       carouselMedia
     } = t;
-    let d = e2[c_(publishScope).currentValue];
+    let d = e2[assertFieldReady(publishScope).currentValue];
     try {
       await PH({
         publishableComponentNodeIds,
@@ -452,7 +452,7 @@ let e6 = _$$T({
     } catch (t) {
       let e = t instanceof Error ? t : void 0;
       e && reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o3.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_PUBLISHING_LIBRARY_CHANGES",
         data: {
           rawError: e
@@ -460,7 +460,7 @@ let e6 = _$$T({
       });
     }
     let c = null;
-    let u = c_(carouselMedia).currentValue.thumbnailMedium || null;
+    let u = assertFieldReady(carouselMedia).currentValue.thumbnailMedium || null;
     let p = u && "buffer" in u ? u.buffer : null;
     if (p) {
       let {
@@ -471,7 +471,7 @@ let e6 = _$$T({
       } = await _$$q.uploadTemplateCoverImage({
         fileKey: figFile.key
       });
-      if (200 !== status) return new _$$o3.SubmissionError({
+      if (200 !== status) return new withSubmissionError.SubmissionError({
         key: "ERROR_UPLOADING_IMAGES",
         data: {
           rawError: Error("Failed to upload cover image")
@@ -490,7 +490,7 @@ let e6 = _$$T({
         await uploadRequest(cover_image_upload_url, a);
       } catch (e) {
         reportError(ServiceCategories.COMMUNITY, e);
-        return new _$$o3.SubmissionError({
+        return new withSubmissionError.SubmissionError({
           key: "ERROR_UPLOADING_IMAGES",
           data: {
             rawError: e
@@ -505,15 +505,15 @@ let e6 = _$$T({
       i = (await _$$q.upsertTemplate({
         fileKey: figFile.key,
         payload: {
-          name: c_(name).currentValue,
-          description: c_(description).currentValue,
-          publish_scope: c_(publishScope).currentValue
+          name: assertFieldReady(name).currentValue,
+          description: assertFieldReady(description).currentValue,
+          publish_scope: assertFieldReady(publishScope).currentValue
         },
         params: e
       })).data;
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o3.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_FINALIZING_TEMPLATE",
         data: {
           rawError: e
@@ -525,7 +525,7 @@ let e6 = _$$T({
         file: {
           key: figFile.key
         },
-        name: c_(name).currentValue
+        name: assertFieldReady(name).currentValue
       }));
       debugState.dispatch(filePutAction({
         file: {
@@ -535,7 +535,7 @@ let e6 = _$$T({
       }));
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o3.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
           rawError: e
@@ -547,7 +547,7 @@ let e6 = _$$T({
     };
   }
 });
-let e7 = _$$e3(e6, ({
+let e7 = setupAtomFormHandler(e6, ({
   figFile: e,
   existingTemplate: t
 }) => t ? `new_from_${e.key}_based_on_${t.id}` : `new_from_${e.key}`);
@@ -643,13 +643,13 @@ function ta({
   } = _$$o2([{
     id: "details",
     checkpoints: [{
-      check: () => i_(_.fieldStates.name),
+      check: () => isFieldValidated(_.fieldStates.name),
       onFail: () => __(tZ.NAME_INPUT)
     }, {
-      check: () => i_(_.fieldStates.carouselMedia),
+      check: () => isFieldValidated(_.fieldStates.carouselMedia),
       onFail: () => __(tZ.THUMBNAIL_UPLOADER)
     }, {
-      check: () => i_(_.fieldStates.description),
+      check: () => isFieldValidated(_.fieldStates.description),
       onFail: () => __(tZ.DESCRIPTION_INPUT)
     }],
     onFail: () => {
@@ -740,7 +740,7 @@ function ta({
       step: PublishModalState.OPENED
     });
   }, [g]);
-  let O = Lz(_.fieldStates.name, "");
+  let O = getFieldValueOrDefault(_.fieldStates.name, "");
   let D = useDebouncedCallback(() => {
     g.current(INTERNAL_PUBLISH_MODAL, {
       step: PublishModalState.EDIT_NAME
@@ -749,7 +749,7 @@ function ta({
   useEffect(() => {
     O && A.name.touched && D();
   }, [O, D, A.name.touched]);
-  let L = Lz(_.fieldStates.description, "");
+  let L = getFieldValueOrDefault(_.fieldStates.description, "");
   let M = useDebouncedCallback(() => {
     g.current(INTERNAL_PUBLISH_MODAL, {
       step: PublishModalState.EDIT_DESCRIPTION

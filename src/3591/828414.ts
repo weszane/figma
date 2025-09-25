@@ -26,10 +26,10 @@ import { useCanRunExtensions, findLocalPluginById } from "../figma_app/844435";
 import { Um } from "../905/848862";
 import { M as _$$M } from "../figma_app/170366";
 import { getPluginsMenuOpenDirectory, hasOrgRole, getPluginVersion } from "../figma_app/300692";
-import { R as _$$R2 } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { HubTypeEnum } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
-import { V as _$$V } from "../905/480825";
+import { PluginImage } from "../905/480825";
 import { Cf } from "../905/504727";
 import { YW } from "../figma_app/626177";
 import { A as _$$A } from "../3591/199070";
@@ -90,7 +90,7 @@ export function $$ed0(e) {
     propagateCloseClick: !0,
     children: [jsx(c$, {
       onClick: t => {
-        if (t.stopPropagation(), i(KE()), !n) return _$$R2.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
+        if (t.stopPropagation(), i(KE()), !n) return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
         i(showModalHandler({
           type: _$$h,
           data: {
@@ -103,7 +103,7 @@ export function $$ed0(e) {
       onClick: e => {
         if (e.stopPropagation(), !n) {
           i(KE());
-          return _$$R2.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
+          return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
         }
         i(JZ({
           resourceType: s ? "widget" : "plugin"
@@ -434,7 +434,7 @@ function eg(e) {
           }));
         },
         optionsIconRef: l,
-        pluginIcon: jsx(_$$V, {
+        pluginIcon: jsx(PluginImage, {
           plugin: p
         }),
         showEditorTypeIcon: !0,
@@ -467,7 +467,7 @@ function eg(e) {
       className: yq,
       children: [jsx("div", {
         className: zr,
-        children: jsx(_$$V, {
+        children: jsx(PluginImage, {
           plugin: i
         })
       }), jsx(li.BadgeContainer, {
@@ -506,7 +506,7 @@ withTrackedClick(function ({
       className: yk,
       children: [jsx("div", {
         className: A9,
-        children: jsx(_$$V, {
+        children: jsx(PluginImage, {
           plugin: n
         })
       }), jsx(li.BadgeContainer, {

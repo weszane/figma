@@ -1,4 +1,4 @@
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { uF, LP, a8 } from "../figma_app/559491";
 import { isNullOrFailure } from "../905/18797";
 export let $$s1 = new class {
@@ -36,9 +36,9 @@ export class $$o0 {
   }
   debounceRefresh(e, t, r) {
     if (e in this.lastRefreshed) {
-      if (A(this.lastRefreshed[e]).add(this.expireDuration).valueOf() > Date.now()) return;
+      if (dayjs(this.lastRefreshed[e]).add(this.expireDuration).valueOf() > Date.now()) return;
     } else if (!r) {
-      this.lastRefreshed[e] = A(Date.now());
+      this.lastRefreshed[e] = dayjs(Date.now());
       return;
     }
     try {
@@ -46,7 +46,7 @@ export class $$o0 {
     } catch (e) {
       throw e;
     } finally {
-      this.lastRefreshed[e] = A(Date.now());
+      this.lastRefreshed[e] = dayjs(Date.now());
     }
   }
 }

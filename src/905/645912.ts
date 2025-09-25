@@ -22,7 +22,7 @@ import { getUserId } from "../905/372672";
 import { $z } from "../figma_app/297733";
 import { XG } from "../figma_app/98578";
 import { eg } from "../figma_app/297822";
-import { Jc } from "../905/946805";
+import { AssetTabType } from "../905/946805";
 import { dd } from "../figma_app/604494";
 import { xA } from "../905/742325";
 import { m as _$$m } from "../905/654466";
@@ -130,7 +130,7 @@ export function $$L0(e, t) {
       }
       s || XG({
         isSearchResult: !0,
-        rankingAlgorithm: eg(Jc.ASSETS),
+        rankingAlgorithm: eg(AssetTabType.ASSETS),
         numSearchResults: null,
         moduleFilters: i ? xA.COMMUNITY : xA.FRAGMENTS,
         action: "insert-asset-fragment-search",

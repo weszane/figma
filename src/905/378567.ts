@@ -19,7 +19,7 @@ import { getPluginVersion } from "../figma_app/300692";
 import { ShelfViewType } from "../figma_app/45218";
 import { WidgetSortField } from "../figma_app/162807";
 import { ViewMode } from "../figma_app/756995";
-import { V } from "../905/480825";
+import { PluginImage } from "../905/480825";
 import { y2 } from "../905/776312";
 import { Qi } from "../figma_app/599917";
 import { ho } from "../figma_app/870683";
@@ -101,7 +101,7 @@ export function $$F1(e, t) {
           href: ho(e.id),
           className: PI,
           children: [jsxs(li.IconAndBadgeContainer, {
-            children: [jsx(V, {
+            children: [jsx(PluginImage, {
               plugin: t,
               className: HE,
               alt: ""

@@ -36,7 +36,7 @@ import { EL, F_ } from "../905/858282";
 import { Msu, DE1, XIg, Ql8, Q16, O5v, rQs, HaT } from "../figma_app/6204";
 import { N as _$$N2 } from "../figma_app/268271";
 import { X as _$$X } from "../905/482718";
-import { Q as _$$Q } from "../905/11928";
+import { Ui3PositionType } from "../905/11928";
 import { M as _$$M } from "../469e6e40/490222";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
@@ -85,13 +85,13 @@ import { o0 } from "../905/844131";
 import { buildUploadUrl } from "../figma_app/169182";
 import { y as _$$y } from "../905/129046";
 import { y as _$$y2 } from "../905/375507";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { isEmptyObject } from "../figma_app/493477";
 import { IconButton } from "../905/443068";
 import { v as _$$v } from "../469e6e40/843735";
 import e2 from "classnames";
 import e5 from "../vendor/128080";
-import { A as _$$A2 } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { isValidEmail } from "../figma_app/416935";
 import { isMobileUA } from "../figma_app/778880";
 import { truncate, formatList } from "../figma_app/930338";
@@ -358,7 +358,7 @@ function K() {
   });
   return jsx(_$$X, {
     isShowing,
-    position: _$$Q.CENTER,
+    position: Ui3PositionType.CENTER,
     trackingContextName: "OrgAdminAuthorityOverlay",
     title: renderI18nText("org_admin_authority_overlay.title"),
     description: renderI18nText("org_admin_authority_overlay.description"),
@@ -568,7 +568,7 @@ function eK() {
       aspectRatio: 600 / 208
     }),
     onClose: complete,
-    position: _$$Q.BOTTOM_RIGHT,
+    position: Ui3PositionType.BOTTOM_RIGHT,
     primaryCta: {
       label: renderI18nText("rcs.got_it"),
       type: "button",
@@ -1233,26 +1233,26 @@ let tK = (e, t, a) => [tD, {
 }] : []), ...tW, ...tH, ...tP];
 let tX = [{
   value: {
-    start: _$$A2().format("YYYY-MM-DD"),
-    end: _$$A2().format("YYYY-MM-DD")
+    start: dayjs().format("YYYY-MM-DD"),
+    end: dayjs().format("YYYY-MM-DD")
   },
   description: renderI18nText("activity_log.filter.today")
 }, {
   value: {
-    start: _$$A2().subtract(1, "days").format("YYYY-MM-DD"),
-    end: _$$A2().format("YYYY-MM-DD")
+    start: dayjs().subtract(1, "days").format("YYYY-MM-DD"),
+    end: dayjs().format("YYYY-MM-DD")
   },
   description: renderI18nText("activity_log.filter.yesterday")
 }, {
   value: {
-    start: _$$A2().subtract(7, "days").format("YYYY-MM-DD"),
-    end: _$$A2().format("YYYY-MM-DD")
+    start: dayjs().subtract(7, "days").format("YYYY-MM-DD"),
+    end: dayjs().format("YYYY-MM-DD")
   },
   description: renderI18nText("activity_log.filter.last_week")
 }, {
   value: {
-    start: _$$A2().subtract(30, "days").format("YYYY-MM-DD"),
-    end: _$$A2().format("YYYY-MM-DD")
+    start: dayjs().subtract(30, "days").format("YYYY-MM-DD"),
+    end: dayjs().format("YYYY-MM-DD")
   },
   description: renderI18nText("activity_log.filter.last_month")
 }];
@@ -1449,7 +1449,7 @@ class tZ extends PureComponent {
     };
   }
   initialFilterState() {
-    let e = this.props.initialStartTime ? _$$A2(this.props.initialStartTime) : _$$A2().subtract(30, "days");
+    let e = this.props.initialStartTime ? dayjs(this.props.initialStartTime) : dayjs().subtract(30, "days");
     let t = _$$Rs();
     this.props.initialEmail && (t = {
       ...t,
@@ -1464,7 +1464,7 @@ class tZ extends PureComponent {
       event: tD,
       date: {
         start: e.format("YYYY-MM-DD"),
-        end: _$$A2().format("YYYY-MM-DD")
+        end: dayjs().format("YYYY-MM-DD")
       },
       showCustomDatePicker: !!this.props.initialStartTime
     };
@@ -1686,7 +1686,7 @@ function t0(e) {
                 children: [jsx(wv, {}), jsx(MM, {
                   disabled: !0,
                   checked: !1,
-                  onClick: lQ,
+                  onClick: noop,
                   children: jsx("span", {
                     className: tO,
                     children: t.description
@@ -1847,7 +1847,7 @@ let aw = registerModal(function (e) {
               message: e.message ?? getI18nString("billing_groups_table.delete_modal.an_error_occurred_while_deleting_billing_groups")
             }));
           });
-        } : lQ,
+        } : noop,
         children: [jsx(DialogHeader, {
           children: jsx(DialogTitle, {
             children: getI18nString("billing_groups_table.delete_n_billing_groups", {
@@ -2604,7 +2604,7 @@ function a3(e) {
       cancelAtPeriodEnd: g.cancel_at_period_end
     });
     return a?.id !== _$$a.UNSCHEDULE ? null : {
-      expiresAt: _$$A2(a.scheduledCancellationDate).toDate(),
+      expiresAt: dayjs(a.scheduledCancellationDate).toDate(),
       onReactivateClick: () => {
         a.perform({
           dispatch: t,
@@ -2691,8 +2691,8 @@ function ni(e) {
         })
       }), jsx("div", {
         children: renderI18nText("org_admin_settings.billing_banner_figjam.due_date_message", {
-          dueDate: _$$A2(e.issuedAt).format("MMM D"),
-          pastDueDate: _$$A2(e.pastDueAt).format("MMM D"),
+          dueDate: dayjs(e.issuedAt).format("MMM D"),
+          pastDueDate: dayjs(e.pastDueAt).format("MMM D"),
           differenceDays: t,
           payInvoiceLink: jsx("button", {
             onClick: () => {
@@ -2728,7 +2728,7 @@ function nr(e) {
         })
       }), jsx("div", {
         children: renderI18nText("org_admin_settings.billing_banner_figjam.invoice_overdue", {
-          dueDate: _$$A2(e.issuedAt).format("MMM D"),
+          dueDate: dayjs(e.issuedAt).format("MMM D"),
           amount: t.formatMoney(e.total, {
             showCents: e.showCents
           }),

@@ -4,13 +4,13 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { Link } from "../905/438674";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { U } from "../905/331038";
-import { w } from "../905/113805";
-import { Zc } from "../905/497882";
+import { findFirstResult } from "../905/331038";
+import { getValidationErrors } from "../905/113805";
+import { canSetFieldValue } from "../905/497882";
 import { Zj, Z3, wC } from "../905/448440";
 import { isWidgetOrPlugin } from "../figma_app/45218";
 import { __, tZ } from "../905/271611";
-import { A as _$$A } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 let f = e => {
   if (e && "validation" === e.type) switch (e.key) {
     case "AUTHOR_MUST_BE_USER":
@@ -66,11 +66,11 @@ export function $$A0({
     existingResourceContent,
     localExtension
   }) : Z3(e.deps);
-  let A = w(e);
-  let y = U(A, f);
-  return o.some(e => ["USER_CANNOT_SELL_ON_COMMUNITY", "CANNOT_SELL_PRIVATE_EXTENSION"].includes(e.key)) ? null : jsx(_$$A, {
+  let A = getValidationErrors(e);
+  let y = findFirstResult(A, f);
+  return o.some(e => ["USER_CANNOT_SELL_ON_COMMUNITY", "CANNOT_SELL_PRIVATE_EXTENSION"].includes(e.key)) ? null : jsx(FieldContainer, {
     label: getI18nString("community.publishing.monetization"),
-    disabled: !Zc(e),
+    disabled: !canSetFieldValue(e),
     error: y,
     afterErrorContent: o.length > 0 ? _(o[0]) : void 0,
     children: jsx(Checkbox, {
@@ -79,9 +79,9 @@ export function $$A0({
       }),
       checked: wC(e),
       onChange: () => {
-        Zc(e) && (wC(e) ? e.setValue(0) : (e.setValue(void 0), __(tZ.PRICE_INPUT)));
+        canSetFieldValue(e) && (wC(e) ? e.setValue(0) : (e.setValue(void 0), __(tZ.PRICE_INPUT)));
       },
-      disabled: !Zc(e)
+      disabled: !canSetFieldValue(e)
     })
   });
 }

@@ -3,9 +3,9 @@ import { Y } from "../905/185567";
 import { xk } from "@stylexjs/stylex";
 import s from "classnames";
 import { getI18nString } from "../905/303541";
-import { cz, i8 } from "../905/14017";
+import { LikeCountDisplay, UsageCountDisplay } from "../905/14017";
 import { Q } from "../905/978641";
-import { Lz } from "../905/497882";
+import { getFieldValueOrDefault } from "../905/497882";
 import { getResourceUserCount } from "../figma_app/777551";
 import { j4 } from "../figma_app/599979";
 var o = s;
@@ -20,9 +20,9 @@ export function $$g0({
   showThumbnailWithLetterbox: A,
   thumbnailStyle: y
 }) {
-  let b = Lz(s, void 0)?.thumbnailMedium;
-  let v = g && Lz(g, void 0);
-  let I = _ && Lz(_, void 0);
+  let b = getFieldValueOrDefault(s, void 0)?.thumbnailMedium;
+  let v = g && getFieldValueOrDefault(g, void 0);
+  let I = _ && getFieldValueOrDefault(_, void 0);
   let E = I ? j4(I)?.name : i && "publishedByUser" in i ? i.publishedByUser?.name : void 0;
   return jsxs("div", {
     className: o()("preview_tile--container--ecHQW", {
@@ -77,9 +77,9 @@ export function $$g0({
         })]
       }), "large" === e && !t && jsxs("div", {
         className: "preview_tile--likeAndUsage--T-Yc4",
-        children: [jsx(cz, {
+        children: [jsx(LikeCountDisplay, {
           likeCount: i && "like_count" in i ? i.like_count : 0
-        }), jsx(i8, {
+        }), jsx(UsageCountDisplay, {
           usageCount: i && "like_count" in i ? getResourceUserCount(i) : 0
         })]
       })]

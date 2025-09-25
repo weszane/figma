@@ -13,7 +13,7 @@ import { W as _$$W } from '../905/200727';
 import { h as _$$h } from '../905/207101';
 import { GW, iS, Jo, sp } from '../905/223565';
 import { R as _$$R } from '../905/263821';
-import { w as _$$w } from '../905/281010';
+import { accountTypeRequestHandler } from '../905/281010';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { $ as _$$$ } from '../905/355181';
@@ -30,7 +30,7 @@ import { requestUpgrade } from '../905/584989';
 import { getFeatureFlags } from '../905/601108';
 import { setupThemeContext } from '../905/614223';
 import { getVisibleTheme } from '../905/640017';
-import { oW } from '../905/675859';
+import { WAFImage } from '../905/675859';
 import { e0 } from '../905/696396';
 import { SvgComponent } from '../905/714743';
 import { c as _$$c2, t as _$$t2 } from '../905/722657';
@@ -204,7 +204,7 @@ function eh(e) {
     }) : null,
     children: [jsxs('div', {
       className: 'request_upgrade_modal--curfHeader--xqBWN',
-      children: [jsx(oW, {
+      children: [jsx(WAFImage, {
         src: getProductBackgroundImgUrl(licenseType, w),
         className: 'request_upgrade_modal--imgPositioning---Y2Z-'
       }), jsx('div', {
@@ -572,7 +572,7 @@ export function $$eb0(e) {
                 autoFocus: !0,
                 className: 'request_upgrade_modal--confirmButton--IP-Y6',
                 onClick: e => {
-                  er ? (O && _$$w.updateRequestMessage({
+                  er ? (O && accountTypeRequestHandler.updateRequestMessage({
                     request_id: ee,
                     message: O
                   }).catch(() => {

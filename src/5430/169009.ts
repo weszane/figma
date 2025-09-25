@@ -14,7 +14,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { hasMorePages } from "../figma_app/661371";
 import { LoadingSpinner } from "../figma_app/858013";
 import { x as _$$x } from "../905/211326";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { Zl, getResourceType } from "../figma_app/427318";
@@ -991,7 +991,7 @@ function eA(e) {
           includeShowResolved: !1,
           isLoggedIn: V
         })]
-      }), jsx(_$$a, {
+      }), jsx(IntersectionSentinel, {
         onIntersectionChange: e => {
           p || (I(!0), trackEventAnalytics("Community Comments Section Impressed", {
             resourceType: z,

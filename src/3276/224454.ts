@@ -1,9 +1,9 @@
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { LinkPrimitive } from "../figma_app/496441";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-export let $$$$r0 = ex("share_button_disabled_personal_draft", function (e) {
+export let $$$$r0 = registerTooltip("share_button_disabled_personal_draft", function (e) {
   let {
     isCurrentUserFileOwner
   } = e;

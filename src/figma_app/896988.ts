@@ -1,4 +1,4 @@
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { EventTypeEnum, KeyboardLayout, Fullscreen } from "../figma_app/763686";
 import { isCommandEvent, KeyCodes, isModifierMatch, ModifierKeyCodes, isArrowKey, getModifierBitmask } from "../905/63728";
 import { v7 } from "../figma_app/475303";
@@ -8,7 +8,7 @@ import { n as _$$n } from "../905/91142";
 import { fullscreenValue } from "../figma_app/455680";
 var $$u3 = (e => (e[e.YES = 0] = "YES", e[e.NO = 1] = "NO", e))($$u3 || {});
 var $$p2 = (e => (e[e.YES = 0] = "YES", e[e.NO = 1] = "NO", e))($$p2 || {});
-let _ = lQ;
+let _ = noop;
 export function $$h6(e) {
   _ = e;
 }

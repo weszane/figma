@@ -10,7 +10,7 @@ import { handleEnterMode } from "../figma_app/806075";
 import { W as _$$W } from "../905/200727";
 import { d as _$$d } from "../905/692836";
 import { t as _$$t, c as _$$c } from "../905/722657";
-import { r as _$$r } from "../905/12476";
+import { hideAllPickersAndPreviews } from "../905/12476";
 import { selectViewAction } from "../905/929976";
 import { setProgressBarState } from "../figma_app/91703";
 import { IN, pM, KE } from "../905/116101";
@@ -98,7 +98,7 @@ export function $$k0(e, t) {
         view: "fullscreen",
         editorType: FEditorType.Illustration
       }));
-      r(_$$r);
+      r(hideAllPickersAndPreviews);
       handleEnterMode(n, FEditorType.Illustration, e, t, ee);
       return !0;
     }

@@ -10,7 +10,7 @@ import { r as _$$r } from "../905/216849";
 import { e as _$$e } from "../905/693478";
 import { E as _$$E } from "../905/500201";
 import { s as _$$s } from "../905/539471";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { registerModal } from "../905/102752";
@@ -25,7 +25,7 @@ import { tI, Zc, Ul, R6 } from "../905/127813";
 import { ButtonLarge, Button } from "../905/521428";
 import { O as _$$O } from "../905/587457";
 import { buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { r as _$$r2 } from "../905/571838";
 import { useDispatch } from "react-redux";
 import { E as _$$E2 } from "../905/53857";
@@ -113,7 +113,7 @@ function P({
         },
         children: jsx("div", {
           className: "xesecky x1nhvcw1 x2lah0s x6s0dn4 xh8yej3 x5yr21d xb3r6kr x78zum5",
-          children: jsx(oW, {
+          children: jsx(WAFImage, {
             src: buildUploadUrl("8f9ea4299394b01641704355fb378c6159f05a52"),
             width: 839,
             height: 884,
@@ -130,11 +130,11 @@ function P({
 }
 let O = {
   title: {
-    ..._$$g.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     $$css: !0
   },
   subtitle: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -170,12 +170,12 @@ function L({
 }
 let F = {
   title: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     textAlign: "x2b8uid",
     $$css: !0
   },
   errorSubtitle: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "xv1l7n4",
     textAlign: "x2b8uid",
     maxWidth: "x1racy4e",
@@ -392,12 +392,12 @@ function Y({
 }
 let q = {
   title: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     textAlign: "x2b8uid",
     $$css: !0
   },
   subtitle: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "xv1l7n4",
     alignSelf: "xkh2ocl",
     textAlign: "x2b8uid",
@@ -406,11 +406,11 @@ let q = {
     $$css: !0
   },
   stateHeader: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   optionalText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "xv1l7n4",
     marginLeft: "x8x9d4c",
     marginInlineStart: null,
@@ -504,7 +504,7 @@ function ei({
 }
 let en = {
   rightPanelHeaderText: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     paddingLeft: "xpymby5",
     paddingInlineStart: null,
     paddingInlineEnd: null,
@@ -517,7 +517,7 @@ let en = {
     $$css: !0
   },
   updateStylesWindowText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -654,7 +654,7 @@ function ed() {
 }
 let ec = {
   rightPanelHeaderText: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     paddingLeft: "xpymby5",
     paddingInlineStart: null,
     paddingInlineEnd: null,
@@ -666,11 +666,11 @@ let ec = {
 };
 let eu = {
   leftPanelHeaderTitle: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   leftPanelHeaderSubtitle: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   leftPanelTab: {
@@ -716,11 +716,11 @@ let eu = {
     $$css: !0
   },
   leftPanelTabTextTitle: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   leftPanelTabTextSubtitle: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textAlign: "xdpxx8g",
     $$css: !0
   }

@@ -1,91 +1,270 @@
-import { jJ, Tj, pb, I6, zN, Si, U9 } from "../905/809288";
-export class $$r0 {
-  constructor(e) {
-    this.id = e;
+import { collectTree, countTree, everyInTree, filterTree, findInTree, someInTree, traverseTree } from '../905/809288'
+/**
+ * Type definition for tree node properties.
+ */
+export interface TreeNodeProps {
+  id: string
+  parent?: TreeNode | null
+  children?: TreeNode[]
+}
+
+/**
+ * Type definition for cached properties.
+ */
+interface CachedProperties {
+  _cachedDisplayProperties?: any
+  _cachedSearchProperties?: any
+  _cachedRawProperties?: any
+  _cachedComputedProperties?: any
+}
+
+/**
+ * TreeNode class (original: $$r0)
+ * Represents a node in a tree structure with various property caching and traversal utilities.
+ */
+export class TreeNode implements TreeNodeProps, CachedProperties {
+  id: string
+  parent?: TreeNode | null
+  children?: TreeNode[]
+  _cachedDisplayProperties?: any
+  _cachedSearchProperties?: any
+  _cachedRawProperties?: any
+  _cachedComputedProperties?: any
+
+  constructor(id: string) {
+    this.id = id
   }
-  get displayProperties() {
-    this._cachedDisplayProperties || (this._cachedDisplayProperties = this.generateDisplayProperties());
-    return this._cachedDisplayProperties;
+
+  /**
+   * Lazily generates and caches display properties.
+   */
+  get displayProperties(): any {
+    if (!this._cachedDisplayProperties) {
+      this._cachedDisplayProperties = this.generateDisplayProperties()
+    }
+    return this._cachedDisplayProperties
   }
-  get searchProperties() {
-    this._cachedSearchProperties || (this._cachedSearchProperties = this.generateSearchProperties());
-    return this._cachedSearchProperties;
+
+  /**
+   * Lazily generates and caches search properties.
+   */
+  get searchProperties(): any {
+    if (!this._cachedSearchProperties) {
+      this._cachedSearchProperties = this.generateSearchProperties()
+    }
+    return this._cachedSearchProperties
   }
-  get rawProperties() {
-    this._cachedRawProperties || (this._cachedRawProperties = this.generateRawProperties());
-    return this._cachedRawProperties;
+
+  /**
+   * Lazily generates and caches raw properties.
+   */
+  get rawProperties(): any {
+    if (!this._cachedRawProperties) {
+      this._cachedRawProperties = this.generateRawProperties()
+    }
+    return this._cachedRawProperties
   }
-  get computedProperties() {
-    this._cachedComputedProperties || (this._cachedComputedProperties = this.generateComputedProperties());
-    return this._cachedComputedProperties;
+
+  /**
+   * Lazily generates and caches computed properties.
+   */
+  get computedProperties(): any {
+    if (!this._cachedComputedProperties) {
+      this._cachedComputedProperties = this.generateComputedProperties()
+    }
+    return this._cachedComputedProperties
   }
-  freeze() {
-    return new a(this);
+
+  /**
+   * Returns a frozen version of this node.
+   * (original: freeze)
+   */
+  freeze(): FrozenTreeNode {
+    return new FrozenTreeNode(this)
   }
-  forEachAncestor(e, t) {
-    return jJ(this, "parent", e, t);
+
+  /**
+   * Traverses ancestors of this node.
+   * (original: forEachAncestor)
+   */
+  forEachAncestor(callback: (node: TreeNode) => void, context?: any): void {
+    traverseTree(this, 'parent', callback, context)
   }
-  forEachDescendant(e, t) {
-    return jJ(this, "children", e, t);
+
+  /**
+   * Traverses descendants of this node.
+   * (original: forEachDescendant)
+   */
+  forEachDescendant(callback: (node: TreeNode) => void, context?: any): void {
+    traverseTree(this, 'children', callback, context)
   }
-  mapAncestors(e, t) {
-    return Tj(this, "parent", e, t);
+
+  /**
+   * Maps ancestors of this node.
+   * (original: mapAncestors)
+   */
+  mapAncestors<T>(callback: (node: TreeNode) => T, context?: any): T[] {
+    return collectTree(this, 'parent', callback, context)
   }
-  mapDescendants(e, t) {
-    return Tj(this, "children", e, t);
+
+  /**
+   * Maps descendants of this node.
+   * (original: mapDescendants)
+   */
+  mapDescendants<T>(callback: (node: TreeNode) => T, context?: any): T[] {
+    return collectTree(this, 'children', callback, context)
   }
-  filterAncestors(e, t) {
-    return pb(this, "parent", e, t);
+
+  /**
+   * Filters ancestors of this node.
+   * (original: filterAncestors)
+   */
+  filterAncestors(callback: (node: TreeNode) => boolean, context?: any): TreeNode[] {
+    return filterTree(this, 'parent', callback, context)
   }
-  filterDescendants(e, t) {
-    return pb(this, "children", e, t);
+
+  /**
+   * Filters descendants of this node.
+   * (original: filterDescendants)
+   */
+  filterDescendants(callback: (node: TreeNode) => boolean, context?: any): TreeNode[] {
+    return filterTree(this, 'children', callback, context)
   }
-  findAncestor(e, t) {
-    return I6(this, "parent", e, t);
+
+  /**
+   * Finds an ancestor node.
+   * (original: findAncestor)
+   */
+  findAncestor(callback: (node: TreeNode) => boolean, context?: any): TreeNode | undefined {
+    return findInTree(this, 'parent', callback, context)
   }
-  findDescendant(e, t) {
-    return I6(this, "children", e, t);
+
+  /**
+   * Finds a descendant node.
+   * (original: findDescendant)
+   */
+  findDescendant(callback: (node: TreeNode) => boolean, context?: any): TreeNode | undefined {
+    return findInTree(this, 'children', callback, context)
   }
-  someAncestor(e, t) {
-    return zN(this, "parent", e, t);
+
+  /**
+   * Checks if some ancestor matches the callback.
+   * (original: someAncestor)
+   */
+  someAncestor(callback: (node: TreeNode) => boolean, context?: any): boolean {
+    return someInTree(this, 'parent', callback, context)
   }
-  someDescendant(e, t) {
-    return zN(this, "children", e, t);
+
+  /**
+   * Checks if some descendant matches the callback.
+   * (original: someDescendant)
+   */
+  someDescendant(callback: (node: TreeNode) => boolean, context?: any): boolean {
+    return someInTree(this, 'children', callback, context)
   }
-  everyAncestor(e, t) {
-    return Si(this, "parent", e, t);
+
+  /**
+   * Checks if every ancestor matches the callback.
+   * (original: everyAncestor)
+   */
+  everyAncestor(callback: (node: TreeNode) => boolean, context?: any): boolean {
+    return everyInTree(this, 'parent', callback, context)
   }
-  everyDescendant(e, t) {
-    return Si(this, "children", e, t);
+
+  /**
+   * Checks if every descendant matches the callback.
+   * (original: everyDescendant)
+   */
+  everyDescendant(callback: (node: TreeNode) => boolean, context?: any): boolean {
+    return everyInTree(this, 'children', callback, context)
   }
-  countAncestors(e, t) {
-    return U9(this, "parent", e, t);
+
+  /**
+   * Counts ancestors matching the callback.
+   * (original: countAncestors)
+   */
+  countAncestors(callback: (node: TreeNode) => boolean, context?: any): number {
+    return countTree(this, 'parent', callback, context)
   }
-  countDescendants(e, t) {
-    return U9(this, "children", e, t);
+
+  /**
+   * Counts descendants matching the callback.
+   * (original: countDescendants)
+   */
+  countDescendants(callback: (node: TreeNode) => boolean, context?: any): number {
+    return countTree(this, 'children', callback, context)
+  }
+
+  /**
+   * Generates display properties. Override in subclasses.
+   */
+  protected generateDisplayProperties(): any {
+    // Implement logic in subclass or override
+    return {}
+  }
+
+  /**
+   * Generates search properties. Override in subclasses.
+   */
+  protected generateSearchProperties(): any {
+    // Implement logic in subclass or override
+    return {}
+  }
+
+  /**
+   * Generates raw properties. Override in subclasses.
+   */
+  protected generateRawProperties(): any {
+    // Implement logic in subclass or override
+    return {}
+  }
+
+  /**
+   * Generates computed properties. Override in subclasses.
+   */
+  protected generateComputedProperties(): any {
+    // Implement logic in subclass or override
+    return {}
   }
 }
-class a extends $$r0 {
-  constructor(e) {
-    super(e.id);
-    this.parent = e.parent;
-    this.children = e.children;
-    this._cachedDisplayProperties = e.displayProperties;
-    this._cachedSearchProperties = e.searchProperties;
-    this._cachedRawProperties = e.rawProperties;
-    this._cachedComputedProperties = e.computedProperties;
+
+/**
+ * FrozenTreeNode class (original: a)
+ * Represents an immutable/frozen version of TreeNode.
+ */
+export class FrozenTreeNode extends TreeNode {
+  constructor(node: TreeNode) {
+    super(node.id)
+    this.parent = node.parent
+    this.children = node.children
+    this._cachedDisplayProperties = node.displayProperties
+    this._cachedSearchProperties = node.searchProperties
+    this._cachedRawProperties = node.rawProperties
+    this._cachedComputedProperties = node.computedProperties
   }
-  generateDisplayProperties() {
-    return this._cachedDisplayProperties;
+
+  /** Returns cached display properties. */
+  protected generateDisplayProperties(): any {
+    return this._cachedDisplayProperties
   }
-  generateSearchProperties() {
-    return this._cachedSearchProperties;
+
+  /** Returns cached search properties. */
+  protected generateSearchProperties(): any {
+    return this._cachedSearchProperties
   }
-  generateRawProperties() {
-    return this._cachedRawProperties;
+
+  /** Returns cached raw properties. */
+  protected generateRawProperties(): any {
+    return this._cachedRawProperties
   }
-  generateComputedProperties() {
-    return this._cachedComputedProperties;
+
+  /** Returns cached computed properties. */
+  protected generateComputedProperties(): any {
+    return this._cachedComputedProperties
   }
 }
-export const s = $$r0;
+
+/**
+ * Export for backward compatibility (original: s)
+ */
+export const s = TreeNode

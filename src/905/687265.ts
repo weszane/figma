@@ -1,4 +1,4 @@
-export let $$n0 = {
+export let textDisplayConfig = {
   textDisplay: {
     fontFamily: "xvi11cr",
     fontSize: "xb78eko",
@@ -80,4 +80,4 @@ export let $$n0 = {
     $$css: !0
   }
 };
-export const g = $$n0;
+export const g = textDisplayConfig;

@@ -6,7 +6,7 @@ import { runSpellCheckCallback, hasSpellCheckCallback, hasPluginPageLoadedCallba
 import { canRunPlugin } from "../figma_app/300692";
 import { SH } from "../figma_app/790714";
 import { hM } from "../905/851937";
-import { R } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { handlePluginError } from "../905/753206";
 import { hasLocalFileId } from "../figma_app/155287";
 let h = class {
@@ -56,7 +56,7 @@ let h = class {
       };
       hasLocalFileId(t) && console.log(`Starting local text review plugin: ${t.name}`);
       this.onExitTextEditModeCallbackCalled = !1;
-      this.runningPlugin = R.instance.enqueue({
+      this.runningPlugin = PluginManager.instance.enqueue({
         mode: "run-forever",
         runPluginArgs: {
           plugin: t,

@@ -20,7 +20,7 @@ import { recordAccessibilityDomActive } from "../figma_app/682945";
 import { computeFullscreenViewportForNode, getViewportInfo } from "../figma_app/62612";
 import { getObservableValue, subscribeObservable, getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { useDebouncedCallback } from "use-debounce";
 import { c1 } from "../figma_app/357047";
 import { Q as _$$Q } from "../905/249555";
@@ -64,7 +64,7 @@ function O({
 }) {
   let [t, r] = useState(null);
   let a = useDebouncedCallback(() => r(!0), 500);
-  let s = t ? lQ : a;
+  let s = t ? noop : a;
   useEffect(s);
   return t && jsx("div", {
     className: _$$Q,
@@ -428,7 +428,7 @@ function eE({
       let n = useCallback(() => !!t?.getCopy(), [t]);
       let a = useCallback(e => t ? subscribeObservable(t, {
         onChangeImmediate: e
-      }) : lQ, [t]);
+      }) : noop, [t]);
       let s = useSyncExternalStore(a, r);
       return {
         isPickCursorActive: useSyncExternalStore(a, n),
@@ -478,7 +478,7 @@ function ey(e, t) {
     let t = useCallback(() => !!e?.getCopy(), [e]);
     let r = useCallback(t => e ? subscribeObservable(e, {
       onChangeImmediate: t
-    }) : lQ, [e]);
+    }) : noop, [e]);
     return useSyncExternalStore(r, t);
   }();
   let n = void 0 !== K(t || "-1:-1");

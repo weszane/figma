@@ -5,7 +5,7 @@ import type { EarlyArgs, Fig as FigType, InitialOptions } from './global.d.ts'
 import { TaskController as TaskControllerPrority } from '../src/figma_app/946103.js'
 
 declare global {
-  type Fn = (...args: any[]) => void
+  type Fn = (...args: any[]) => any
   interface ObjectOf<T = any> { [key: string]: T }
   let scheduler: any
   let createFileImporter: any

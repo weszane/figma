@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogBody } from "../figma_app/272243";
@@ -562,7 +562,7 @@ export function $$X0({
   let g = _$$W();
   let x = useModalManager({
     open: !0,
-    onClose: lQ,
+    onClose: noop,
     preventUserClose: !0,
     recordingKey: "dev-mode-paywall-modal"
   });

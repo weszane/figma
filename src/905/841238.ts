@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { TabLoop } from "../905/718764";
 import { Button } from "../905/521428";
 import { ComponentPropType, Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
@@ -264,7 +264,7 @@ let $$X0 = registerModal(function (e) {
       initialPosition: ey,
       initialVariableValue: resolveVariableValue(e, er),
       resolvedType: e === VariableResolvedDataType.TEXT_DATA ? VariableResolvedDataType.STRING : e,
-      onCreateVariable: lQ,
+      onCreateVariable: noop,
       onClose: () => {
         isInstanceSwapPickerShown ? U(hideInstanceSwapPicker()) : U(hideModal());
         U(hidePickerThunk());

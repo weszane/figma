@@ -20,17 +20,17 @@ import { wT, UR, HX, G6, qu } from "../905/671449";
 import { is } from "../905/744076";
 import { R as _$$R } from "../905/240644";
 import { i as _$$i } from "../905/810360";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { deepClone } from "../905/284190";
 import { A as _$$A2 } from "../1617/755299";
 import { A as _$$A3 } from "../1617/230645";
 var d = l;
 let C = createContext({
   canShowErrors: !1,
-  setCanShowErrors: lQ,
+  setCanShowErrors: noop,
   numberOfErrors: 0,
   optedOutOfSecurityForm: !1,
-  setOptedOutOfSecurityForm: lQ,
+  setOptedOutOfSecurityForm: noop,
   extensionType: "plugin"
 });
 function T({

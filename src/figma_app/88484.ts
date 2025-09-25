@@ -4,7 +4,7 @@ import { resourceUtils } from "../905/989992";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
 import { batchPutFileAction } from "../figma_app/78808";
-import { q0, Am } from "../905/70982";
+import { prototypeResetRecents, recentPrototypePost } from "../905/70982";
 import { uo as _$$uo, nF } from "../905/466026";
 import { trackMultipleFileEvent } from "../figma_app/314264";
 import { FileBrowserRecentFilesByEditorTypeView, FileBrowserRecentFilesView } from "../figma_app/43951";
@@ -62,12 +62,12 @@ export let $$S3 = function () {
     }).then(({
       data: t
     }) => {
-      e(q0());
+      e(prototypeResetRecents());
       let {
         recent_prototypes,
         recent_prototype_repos
       } = t.meta;
-      for (let t of recent_prototypes) e(Am({
+      for (let t of recent_prototypes) e(recentPrototypePost({
         prototype: t
       }));
       e(_$$uo({

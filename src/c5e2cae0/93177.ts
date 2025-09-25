@@ -49,7 +49,7 @@ import { postUserFlag } from "../905/985254";
 import { hasStarterTeamLoopholeAccess, useSeparateBillingShippingExperiment, useCartSeatSelectionClarityExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { withTrackedInput, TrackingProvider } from "../figma_app/831799";
-import { jv, vu } from "../905/84777";
+import { setupPricesTransform, ensureLoadedResource } from "../905/84777";
 import { lo, wn, dl } from "../9420/795870";
 import { isCollaboratorType, ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
@@ -67,7 +67,7 @@ import { isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
 import { useCurrentPlanUser } from "../figma_app/465071";
 import { selectedViewToPath } from "../figma_app/193867";
 import { UpsellModalType } from "../905/165519";
-import { Ju } from "../905/712921";
+import { ProductTierEnum } from "../905/712921";
 import { UpgradeSteps, BillingCycle, SubscriptionType } from "../figma_app/831101";
 import { CreateUpgradeAction, TeamType, isCreateOrUpgrade } from "../figma_app/707808";
 import { e0 } from "../905/696396";
@@ -432,7 +432,7 @@ function eW({
 }) {
   let n = _$$G({
     currency: t,
-    tier: Ju.PRO,
+    tier: ProductTierEnum.PRO,
     renewalTerm: a,
     showCents: !1
   });
@@ -459,7 +459,7 @@ function eW({
     changeUserSeatType,
     selectSeatsState,
     setAdditionalSeats,
-    tier: Ju.PRO
+    tier: ProductTierEnum.PRO
   });
 }
 let eJ = liveStoreInstance.Query({
@@ -514,17 +514,17 @@ function eY(e) {
   let eB = useLatestRef(eD);
   let eL = collaboratorSet.dict(e => x.cartSelections?.countBySeatType?.[e] || 0);
   let e$ = eA && getBillingCycleFromSubscriptionType(eA) || BillingCycle.YEAR;
-  let eU = jv({
+  let eU = setupPricesTransform({
     billableProductKeys: collaboratorSet,
     baseQuery: {
       currency: eC,
-      tier: Ju.PRO,
+      tier: ProductTierEnum.PRO,
       renewalTerm: e$,
       unit: e$
     }
   });
   let [ez] = handleSuspenseRetainRelease(eU);
-  let eF = vu(ez);
+  let eF = ensureLoadedResource(ez);
   if (null === eF.data) throw Error("Price data is null");
   let eG = eF.data;
   let eH = s$(eG);
@@ -607,7 +607,7 @@ function eY(e) {
     "loaded" === tm.status && R9({
       eligibleTeamIds: [eP],
       eligibleTeamUsers: tm.data.eligible_team_users,
-      tier: Ju.PRO,
+      tier: ProductTierEnum.PRO,
       step: R
     });
   }, [tm]);
@@ -1000,7 +1000,7 @@ function eY(e) {
             },
             shippingAddress,
             taxPercent: x.taxes?.tax_percent,
-            tier: Ju.PRO,
+            tier: ProductTierEnum.PRO,
             title: getI18nString("checkout.upgrade_to_a_professional_plan"),
             userEmail: a?.email || ""
           })]
@@ -1062,7 +1062,7 @@ function eY(e) {
               }));
             },
             onSwitchCurrency: eE,
-            tier: Ju.PRO,
+            tier: ProductTierEnum.PRO,
             title: getI18nString("checkout.your_professional_plan"),
             trackingProperties: {
               selectedUserSeatTypes: Tj(x.cartSelections?.selectedUserSeatTypes),

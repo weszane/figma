@@ -57,7 +57,7 @@ export function throwError(message: string): never {
  * No-op debug function.
  * (Original: $$d1)
  */
-export function debug(_arg1: unknown, _arg2: unknown, ..._rest: unknown[]): void { }
+export function debug(_arg1: unknown, _arg2: unknown, ..._rest: unknown[]): any { }
 
 /**
  * Returns the second argument.

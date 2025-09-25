@@ -7,7 +7,7 @@ import { processImageWithThumbnail } from "../figma_app/624361";
 import { $, b as _$$b } from "../905/776478";
 import { D } from "../905/629114";
 import { fetchImageAsByteArray } from "../905/866640";
-import { A as _$$A } from "../905/929620";
+import { generateShimmerOverlay } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 import { sF } from "../figma_app/193952";
 export async function $$m0({
@@ -133,7 +133,7 @@ async function y({
     height: o.size.y
   };
   try {
-    Vm(o.guid, jsx(_$$A, {
+    Vm(o.guid, jsx(generateShimmerOverlay, {
       borderRadiusStyle: _$$b(o)
     }), {
       parentNodeId: f

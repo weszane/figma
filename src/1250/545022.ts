@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { selectExperimentConfigHook } from "../figma_app/594947";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { QS, Tq } from "../9864/183809";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -52,7 +52,7 @@ function I(e) {
       },
       ctaTrackingDescriptor: UpgradeAction.UPDATE_LANGUAGE_SETTINGS
     },
-    media: jsx(oW, {
+    media: jsx(WAFImage, {
       width: 332,
       height: 404,
       src: buildUploadUrl("dark" === n ? "18dcbb2ade042dcce59156457f26cf74bff4c14a" : "705f5bf3c6cdb84a903c3a2fcd7e70de3294fc96"),

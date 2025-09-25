@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { n3, ey, yG } from "../905/859698";
 import a from "../vendor/923386";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { mapVariableResolvedDataType } from "../figma_app/349248";
 import { LibraryAgeEnum } from "../figma_app/633080";
 var s = a;
@@ -23,7 +23,7 @@ export function $$u3(e) {
     date: p(e.week_start),
     value: e.insertions
   }));
-  let i = p(_$$A().format("YYYY-MM-DD"));
+  let i = p(dayjs().format("YYYY-MM-DD"));
   t[0].date.getDate() !== i.getDate() && t.unshift({
     date: i,
     value: 0
@@ -31,7 +31,7 @@ export function $$u3(e) {
   return t;
 }
 function p(e) {
-  let t = _$$A(e);
+  let t = dayjs(e);
   return 6 === t.day() ? t.toDate() : t.day(6).toDate();
 }
 export function $$m1(e, t, i) {

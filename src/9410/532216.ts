@@ -20,7 +20,7 @@ import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/273
 import { collaborationHostNameAtom, handleCollaborationHostNameMessage } from "../figma_app/564528";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { OA } from "../figma_app/419216";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { EventShield } from "../905/821217";
 import { ColorSpaceEnum, ColorProfileEnum, Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { getResourceDataOrFallback } from "../905/663269";
@@ -698,7 +698,7 @@ let ti = memo(function ({
     onClick: publish ? () => {
       closeSelectMenu();
       publish();
-    } : lQ,
+    } : noop,
     children: getI18nString("fullscreen.filename_view.publish-styles-and-components")
   });
   let tT = eV && jsx(Pu, {

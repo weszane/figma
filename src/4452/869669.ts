@@ -6,7 +6,7 @@ import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { rq } from "../905/425180";
-import { R } from "../905/11928";
+import { NotModalType } from "../905/11928";
 import { F_ } from "../905/858282";
 import { jkr } from "../figma_app/6204";
 let $$p0 = "sc_team_creation_modal_onboarding_key";
@@ -40,7 +40,7 @@ export function $$x1() {
     title: renderI18nText("rcs.sharing_clarity.team_creation_modal_title"),
     trackingContextName: "Sharing Clarity Team Creation Modal Onboarding",
     userFlagOnShow: g,
-    zIndex: R.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 export const F = $$p0;

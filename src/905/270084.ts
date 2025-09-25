@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState, useRef, useMemo, useCallback, useEffect, useLayoutEffect, PureComponent, Component, createRef } from "react";
 import { z } from "../vendor/999105";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { Checkbox } from "../905/274480";
 import { HiddenLabel } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
@@ -125,7 +125,7 @@ function P(e) {
   }, [onSetSortState]);
   let eN = useCallback((e, n, r = !1) => {
     eA.current = null;
-    let o = onSelectedItemsChange ?? lQ;
+    let o = onSelectedItemsChange ?? noop;
     n ? r ? (eg(new Set()), e_(!1), o([])) : (eg(t => {
       let i = new Set(t);
       e.forEach(e => i.$$delete(e));
@@ -245,7 +245,7 @@ function P(e) {
         className: i.className,
         children: i.cellComponent(e, t, highlightState ?? {
           itemKey: null,
-          setItemKey: lQ
+          setItemKey: noop
         }, r)
       }, i.name)), rightActionColumns && jsx(L, {
         rightActionColumns,
@@ -547,7 +547,7 @@ class j extends Component {
     };
     this.toggleSelectMultiple = (e, t, i = !1) => {
       this.rangeSelectAnchorRowKey = null;
-      let n = this.props.onSelectedItemsChange ?? lQ;
+      let n = this.props.onSelectedItemsChange ?? noop;
       if (t) {
         if (i) {
           this.setState({
@@ -688,7 +688,7 @@ class j extends Component {
           className: r.className,
           children: r.cellComponent(e, t, this.props.highlightState ?? {
             itemKey: null,
-            setItemKey: lQ
+            setItemKey: noop
           }, i)
         }, r.name)), this.props.rightActionColumns && jsx(V, {
           rightActionColumns: this.props.rightActionColumns,

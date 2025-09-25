@@ -4,7 +4,7 @@ import { O as _$$O } from "../905/487602";
 import { PluginHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import o from "classnames";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { generateRecordingKey, RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
 import { interactiveAnchorTracked } from "../figma_app/637027";
@@ -18,13 +18,13 @@ import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
 import { canRunPlugin, getRelaunchablePlugins } from "../figma_app/300692";
 import { O as _$$O2 } from "../figma_app/185954";
-import { R as _$$R } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { HubTypeEnum } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { ManifestEditorType, hasLocalFileId, relaunchMixedDescription } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
 import { checkCanRunExtensions } from "../905/622391";
-import { V } from "../905/480825";
+import { PluginImage } from "../905/480825";
 import { VZ } from "../figma_app/727192";
 import { Q as _$$Q2 } from "../905/346809";
 import { Zk, fI } from "../figma_app/626177";
@@ -41,7 +41,7 @@ let P = class e extends PureComponent {
       let t = this.props.openFileKey;
       if (!t) return;
       if (!checkCanRunExtensions()) {
-        _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
+        PluginManager.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
         return;
       }
       let {
@@ -50,7 +50,7 @@ let P = class e extends PureComponent {
         plugin: e.plugin,
         editorType: this.props.editorType ?? FEditorType.Design
       });
-      if (canRun) return await _$$R.instance.enqueue({
+      if (canRun) return await PluginManager.instance.enqueue({
         mode: "run-forever",
         runPluginArgs: {
           plugin: e.plugin,
@@ -113,7 +113,7 @@ let P = class e extends PureComponent {
   }
 };
 P.displayName = "PluginPanel";
-P.refreshCache = new _$$O2(_$$A.duration(1, "day"));
+P.refreshCache = new _$$O2(dayjs.duration(1, "day"));
 export let $$F0 = P;
 class M extends RecordingPureComponent {
   constructor() {
@@ -145,7 +145,7 @@ function B(e) {
     })
   }) : jsx("div", {
     className: "plugin_panel--pluginIcon--TvCDA plugin--pluginIconBase--yAG5F",
-    children: jsx(V, {
+    children: jsx(PluginImage, {
       plugin
     })
   });

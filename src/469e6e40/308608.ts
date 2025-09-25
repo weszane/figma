@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useLayoutEffect, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import d from "classnames";
 import { ResourceStatus } from "../905/957591";
@@ -57,7 +57,7 @@ import { OrgUsersByIdView, AdminRequestDashboardView, AdminRequestDashOrgInfo } 
 import { $ as _$$$2 } from "../figma_app/126651";
 import { UpgradeRequestSetting } from "../figma_app/482728";
 import { e0 as _$$e2 } from "../905/696396";
-import { w as _$$w } from "../905/281010";
+import { accountTypeRequestHandler } from "../905/281010";
 import { az } from "../figma_app/805373";
 import { p as _$$p } from "../figma_app/353099";
 import { Cj } from "../905/270084";
@@ -758,7 +758,7 @@ export function $$eD0({
             }, e.key)), jsx(wv, {}), jsx(MM, {
               disabled: !0,
               checked: !1,
-              onClick: lQ,
+              onClick: noop,
               children: renderI18nText(eK === V7.ALL_ORG_REQUESTS ? "admin_dashboard.requests.billing_groups" : "admin_dashboard.requests.your_billing_groups")
             }), e.map(e => jsx(MM, {
               checked: eQ === e.id,
@@ -866,7 +866,7 @@ export function $$eD0({
     successHandler: r = tL
   }) => {
     eP(e => new Set(e).add(n));
-    (e ? _$$w.approveRequests.bind(_$$w) : _$$w.denyRequests.bind(_$$w))({
+    (e ? accountTypeRequestHandler.approveRequests.bind(accountTypeRequestHandler) : accountTypeRequestHandler.denyRequests.bind(accountTypeRequestHandler))({
       plan_id: a,
       plan_type: t,
       included_request_ids: [n],
@@ -962,7 +962,7 @@ export function $$eD0({
       r && eV(e => e + 1);
       W && H(!1);
     };
-    e ? _$$w.approveRequests.bind(_$$w)(d).then(e => {
+    e ? accountTypeRequestHandler.approveRequests.bind(accountTypeRequestHandler)(d).then(e => {
       if (c(e.status, e.data.meta.failed_attempts, e.data.meta.successful_attempts), l) {
         let t = e.data.meta.processed_request_ids;
         eF(e => new Set([...e, ...new Set(t)]));
@@ -975,7 +975,7 @@ export function $$eD0({
         matchType: eO
       }));
       _();
-    }) : _$$w.denyRequests.bind(_$$w)(d).then(e => {
+    }) : accountTypeRequestHandler.denyRequests.bind(accountTypeRequestHandler)(d).then(e => {
       c(e.status, e.data.meta.failed_attempts, e.data.meta.successful_attempts);
     }).catch(() => {
       tR();
@@ -1183,7 +1183,7 @@ export function $$eD0({
           variant: "primary",
           onClick: () => {
             if (null === tp || null === tg) return;
-            let e = ex ? lQ : () => tP({
+            let e = ex ? noop : () => tP({
               approve: !0,
               approveAll: !0,
               selectedRequestIds: []
@@ -1254,7 +1254,7 @@ export function $$eD0({
               children: [jsx(_$$V2, {
                 variant: "toolbar-secondary",
                 disabled: !!ex,
-                onClick: ex ? lQ : () => tP({
+                onClick: ex ? noop : () => tP({
                   approve: !1,
                   selectedRequestIds: e.map(e => e.id),
                   sprig: Sprig
@@ -1268,7 +1268,7 @@ export function $$eD0({
               }), jsx(_$$V2, {
                 variant: "primary",
                 disabled: !!ex,
-                onClick: ex ? lQ : () => tP({
+                onClick: ex ? noop : () => tP({
                   approve: !0,
                   selectedRequestIds: e.map(e => e.id)
                 }),
@@ -1351,7 +1351,7 @@ export function $$eD0({
           onSelectedItemsChange: e => {
             0 === e.length && H(!1);
           },
-          onSetSortState: lQ,
+          onSetSortState: noop,
           onToggleSelectAll: e => {
             H(!e);
           },

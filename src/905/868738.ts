@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getI18nString, renderI18nText } from "../905/303541";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
@@ -10,7 +10,7 @@ export let $$d0 = registerModal(function () {
     confirmationTitle: getI18nString("file_browser.modal.cant_transfer_ownership_title"),
     confirmText: getI18nString("file_browser.modal.got_it"),
     hideCancel: !0,
-    onConfirm: lQ,
+    onConfirm: noop,
     popStack: !0,
     children: jsx("div", {
       className: jE,

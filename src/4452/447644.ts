@@ -3,7 +3,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ServiceCategories } from "../905/165054";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
@@ -67,7 +67,7 @@ import { FUserRoleType } from "../figma_app/191312";
 import { AdminRequestDashboardView, AdminRequestDashOrgInfo } from "../figma_app/43951";
 import { UpgradeRequestSetting } from "../figma_app/482728";
 import { KindEnum } from "../905/129884";
-import { w as _$$w } from "../905/281010";
+import { accountTypeRequestHandler } from "../905/281010";
 import { az } from "../figma_app/805373";
 import { Cj } from "../905/270084";
 import { VU } from "../4452/650793";
@@ -546,7 +546,7 @@ export function $$e$0({
   }) => {
     e8(e => new Set(e).add(t));
     eW(e ? "approving" : "declining");
-    let r = e ? _$$w.approveRequests.bind(_$$w) : _$$w.denyRequests.bind(_$$w);
+    let r = e ? accountTypeRequestHandler.approveRequests.bind(accountTypeRequestHandler) : accountTypeRequestHandler.denyRequests.bind(accountTypeRequestHandler);
     let i = tV.find(e => e.id === t);
     r({
       plan_id: $,
@@ -650,7 +650,7 @@ export function $$e$0({
       n && ts(e => e + 1);
       ew && eN(!1);
     };
-    e ? _$$w.approveRequests.bind(_$$w)(d).then(e => {
+    e ? accountTypeRequestHandler.approveRequests.bind(accountTypeRequestHandler)(d).then(e => {
       if (c(e.status, e.data.meta.failed_attempts, e.data.meta.successful_attempts), r) {
         let t = e.data.meta.processed_request_ids;
         e6(e => new Set([...e, ...new Set(t)]));
@@ -663,7 +663,7 @@ export function $$e$0({
         matchType: eG
       }));
       u();
-    }) : _$$w.denyRequests.bind(_$$w)(d).then(e => {
+    }) : accountTypeRequestHandler.denyRequests.bind(accountTypeRequestHandler)(d).then(e => {
       c(e.status, e.data.meta.failed_attempts, e.data.meta.successful_attempts);
       tr(e => e + 1);
     }).catch(() => {
@@ -846,7 +846,7 @@ export function $$e$0({
       variant: "primary",
       onClick: () => {
         if (null === tO || null === tL) return;
-        let t = e$ ? lQ : () => t4({
+        let t = e$ ? noop : () => t4({
           approve: !0,
           approveAll: !0,
           selectedRequestIds: []
@@ -979,7 +979,7 @@ export function $$e$0({
             }, e.key)), jsx(wv, {}), jsx(MM, {
               disabled: !0,
               checked: !1,
-              onClick: lQ,
+              onClick: noop,
               children: renderI18nText(ti === V7.ALL_ORG_REQUESTS ? "admin_dashboard.requests.billing_groups" : "admin_dashboard.requests.your_billing_groups")
             }), e.map(e => jsx(MM, {
               checked: to === e.id,
@@ -1020,7 +1020,7 @@ export function $$e$0({
             children: [jsx(_$$V, {
               variant: "toolbar-secondary",
               disabled: !!e$,
-              onClick: e$ ? lQ : () => t4({
+              onClick: e$ ? noop : () => t4({
                 approve: !1,
                 selectedRequestIds: t.map(e => e.id),
                 sprig: Sprig
@@ -1038,7 +1038,7 @@ export function $$e$0({
             }), jsx(_$$V, {
               variant: "primary",
               disabled: !!e$,
-              onClick: e$ ? lQ : () => eS(showModalHandler({
+              onClick: e$ ? noop : () => eS(showModalHandler({
                 type: ee,
                 data: {
                   plan: e,

@@ -1,5 +1,5 @@
 import { arraysEqual } from "../figma_app/656233";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { isNotNullish } from "../figma_app/95419";
 import { ey, yG } from "../905/859698";
 import { AppStateTsApi, VariablesBindings } from "../figma_app/763686";
@@ -246,7 +246,7 @@ let er = atom(e => {
 let en = atom(e => ({
   ...e(et),
   ...e(er)
-}), lQ);
+}), noop);
 let $$ei12 = setupReduxAtomWithState(en, "SYNC_ATOM_USED_LIBRARY_VARIABLES_BY_KEY", {});
 let ea = atom(e => {
   let t = [...new Set(Object.values(e(et)).map(e => e.data?.variable?.variableCollection.key).filter(isNotNullish))];
@@ -259,7 +259,7 @@ let ea = atom(e => {
   return e(variableCollectionByKeyResourceAtomFamily(i.map(e => ({
     key: e
   })))).reduce((e, t) => (e[yG(t.args.key)] = t.result, e), {});
-}, lQ);
+}, noop);
 let es = atom(e => {
   let t = [...new Set(Object.values(e(er)).map(e => e.data?.variable?.variableCollection.key).filter(isNotNullish))].sort().map(e => ({
     key: e
@@ -279,7 +279,7 @@ let es = atom(e => {
 let eo = atom(e => ({
   ...e(ea),
   ...e(es)
-}), lQ);
+}), noop);
 let $$el25 = setupReduxAtomWithState(eo, "SYNC_ATOM_USED_LIBRARY_VARIABLE_SETS_BY_KEY", {});
 atom(e => {
   let t = Object.keys(e($$G26));

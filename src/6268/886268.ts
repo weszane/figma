@@ -60,7 +60,7 @@ import { I as _$$I } from "../905/932503";
 import { openWindow } from "../905/508367";
 import { buildUploadUrl } from "../figma_app/169182";
 import { H as _$$H } from "../figma_app/47866";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { f as _$$f3 } from "../figma_app/258006";
 import { G as _$$G, A as _$$A4 } from "../1250/975106";
 import { bL as _$$bL, RT } from "../905/867927";
@@ -1532,7 +1532,7 @@ function nN({
           className: nf,
           children: [jsx("div", {
             className: nh,
-            children: jsx(oW, {
+            children: jsx(WAFImage, {
               src: l,
               alt: getI18nString("dev_handoff.component_browser_onboarding.connected_projects_icon"),
               className: "component_browser_settings_panel--cardImage--YKour"

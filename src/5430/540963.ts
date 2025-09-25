@@ -40,8 +40,8 @@ import { getFeatureFlags } from '../905/601108';
 import { profileServiceAPI } from '../905/608932';
 import { customHistory } from '../905/612521';
 import { e as _$$e2 } from '../905/621515';
-import { oW } from '../905/675859';
-import { g as _$$g2 } from '../905/687265';
+import { WAFImage } from '../905/675859';
+import { textDisplayConfig } from '../905/687265';
 import { e0 as _$$e } from '../905/696396';
 import { setupLoadingStateHandler } from '../905/696711';
 import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
@@ -55,10 +55,11 @@ import { Um } from '../905/848862';
 import { generateUUIDv4 } from '../905/871474';
 import { getValueOrFallback } from '../905/872825';
 import { XHR } from '../905/910117';
-import { a as _$$a2 } from '../905/925868';
+import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
 import { getProfileRouteHref, ProfileRouteState, ResourceHubProfileRouteState } from '../905/934145';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';
+;
 import { V as _$$V } from '../1577/311426';
 import { A as _$$A5 } from '../1617/230645';
 import { J as _$$J } from '../5132/948584';
@@ -449,17 +450,17 @@ function ex({
 }
 let ef = {
   profileName: {
-    ..._$$g2.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     marginTop: 'x1bz8wuu',
     $$css: !0
   },
   profileDescription: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   },
   profileStat: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   }
 };
@@ -480,7 +481,7 @@ function eI({
     ...xk(_$$Z.container),
     children: [jsx('div', {
       ...xk(_$$Z.assetContainer),
-      children: jsx(oW, {
+      children: jsx(WAFImage, {
         ...xk(_$$Z.asset),
         src: t,
         alt: getI18nString('community.profiles.you_don_t_have_any_resources_yet'),
@@ -585,7 +586,7 @@ function eR({
 }
 let ek = {
   resourcesHeaderTitle: {
-    ..._$$g2.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     $$css: !0
   }
 };
@@ -683,7 +684,7 @@ class e4 extends PureComponent {
     return jsxs('div', {
       className: ['community_hub_view_bar--container--PBrf3', this.props.user ? 'community_hub_view_bar--viewBarSignedInSticky--swRMi' : 'community_hub_view_bar--viewBarSignedOutSticky--fpGkz'].join(' '),
       ref: e => this.node = e,
-      children: [jsx(_$$a2, {
+      children: [jsx(IntersectionSentinel, {
         onIntersectionChange: this.onIntersectionChange,
         className: this.props.user ? 'community_hub_view_bar--scrollSentinelSignedIn--u73PI' : 'community_hub_view_bar--scrollSentinelSignedOut--9xL9d'
       }), jsx(e1, {
@@ -785,7 +786,7 @@ let tE = registerModal(() => {
     title: getI18nString('community.seller.community_payout_statements'),
     titleClassName: 'creator_payout_statements_modal--title--t9wed',
     confirmText: getI18nString(r.length === 0 ? 'general.got_it' : 'general.done'),
-    onConfirm: lQ,
+    onConfirm: noop,
     hideConfirmationTitle: !0,
     hideCancel: !0,
     children: a ? jsx('div', {

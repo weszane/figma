@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useMemo, Fragment } from "react";
 import { useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { q as _$$q } from "../905/932270";
 import { Fullscreen } from "../figma_app/763686";
 import { xk } from "@stylexjs/stylex";
@@ -241,7 +241,7 @@ export function $$W3() {
         }),
         value: G(e),
         htmlAttributes: {
-          onPointerUp: l ? e => d(e) : lQ,
+          onPointerUp: l ? e => d(e) : noop,
           onMouseLeave: M,
           onMouseEnter: () => F(e)
         },

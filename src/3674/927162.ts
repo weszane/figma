@@ -6,7 +6,7 @@ import { sQ } from "../905/191741";
 import { selectIsCopyExportAllowed } from "../figma_app/212807";
 import { useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
-import { d as _$$d } from "../905/480825";
+import { PluginIconDisplay } from "../905/480825";
 import { J } from "../905/225412";
 import { rb } from "../figma_app/151869";
 import { q } from "../905/296913";
@@ -46,7 +46,7 @@ export function $$_1({
 }) {
   return jsx(_$$E, {
     variant: "defaultOutline",
-    iconPrefix: jsx(_$$d, {
+    iconPrefix: jsx(PluginIconDisplay, {
       plugin: e
     }),
     children: e.name

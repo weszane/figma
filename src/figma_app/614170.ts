@@ -1,4 +1,4 @@
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { AR } from "../figma_app/327564";
 export function $$a0(e, t, r) {
   return e.find(e => {
@@ -21,22 +21,22 @@ export function $$d7(e) {
   return !!t && $$l6(t);
 }
 export function $$c11(e) {
-  return A(e) < A().add(14, "days");
+  return dayjs(e) < dayjs().add(14, "days");
 }
 export function $$u10(e, t) {
-  return t && A().isBefore(e);
+  return t && dayjs().isBefore(e);
 }
 export function $$p12(e) {
-  return $$a0(e, "open", e => A(e.past_due_at).isBefore(A()));
+  return $$a0(e, "open", e => dayjs(e.past_due_at).isBefore(dayjs()));
 }
 export function $$_9(e) {
   let t = $$a0(e, "open");
-  return !!t && A(t.past_due_at) < A();
+  return !!t && dayjs(t.past_due_at) < dayjs();
 }
 export function $$h8(e) {
   return $$d7(e) || function (e) {
     let t = $$a0(e, "open");
-    return !!t && A() < A(t.past_due_at);
+    return !!t && dayjs() < dayjs(t.past_due_at);
   }(e) || $$_9(e);
 }
 export var $$m2 = (e => (e.BILLING_STATUS = "billing_status", e.TAX_ID_STATUS = "tax_id_status", e.DEV_MODE_SUGGESTED_UPGRADES = "dev_mode_suggested_upgrades", e))($$m2 || {});
@@ -46,7 +46,7 @@ export function $$g4(e) {
   return t ? 1 === t.quarter ? t.period_start_at : t.period_end_at : null;
 }
 export function $$f3(e, t) {
-  return !!t && 1 === e.quarter && 0 === A(e.period_start_at).diff(t, "days");
+  return !!t && 1 === e.quarter && 0 === dayjs(e.period_start_at).diff(t, "days");
 }
 export function $$E13(e) {
   return "upcoming" === e.status || "locked" === e.status ? null : `${AR}${e.id}`;

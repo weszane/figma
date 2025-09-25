@@ -29,7 +29,7 @@ import { u as _$$u2 } from '../905/831362';
 import { useCurrentUserOrgId } from '../905/845253';
 import { ud } from '../905/862913';
 import { ev } from '../905/909811';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { b as _$$b } from '../905/937225';
 import { librariesAPI } from '../905/939602';
 import { filesByLibraryKeyAtom } from '../905/977779';
@@ -193,7 +193,7 @@ function K(e) {
             numStyles: 0,
             publishedLibrary: e.publishedLibrary,
             thumbnailUrl: R,
-            viewFile: lQ
+            viewFile: noop
           }, i)]
         }), jsx(ev, {
           width: e.width,
@@ -451,7 +451,7 @@ let $$eu0 = registerModal(e => {
             children: jsx(es, {
               library: t,
               viewFile: A,
-              onUpdateClick: lQ
+              onUpdateClick: noop
             })
           }), _ && y && jsx('div', {
             className: _.libraryKey ? el : ed,

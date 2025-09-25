@@ -5,7 +5,7 @@ import { q as _$$q } from "../figma_app/905311";
 import { useDispatch, useSelector } from "react-redux";
 import { flatten } from "../figma_app/656233";
 import { assertNotNullish } from "../figma_app/465776";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories } from "../905/165054";
 import { IconButton } from "../905/443068";
@@ -384,7 +384,7 @@ function eU(e) {
         isPickerOpen: Z,
         onPickerOpen: ee,
         onPickerClose: er,
-        onDropImage: onDropImage ?? lQ
+        onDropImage: onDropImage ?? noop
       }) : jsx(Fragment, {});
     })()
   });
@@ -482,9 +482,9 @@ function eU(e) {
       [c1]: isDragHover
     }),
     isDragTarget: onDropImage ? eZ : eQ,
-    onTargetDragEnter: onDragEnter ?? lQ,
-    onTargetDragLeave: onDragLeave ?? lQ,
-    onTargetDrop: onDropImage ?? lQ,
+    onTargetDragEnter: onDragEnter ?? noop,
+    onTargetDragLeave: onDragLeave ?? noop,
+    onTargetDrop: onDropImage ?? noop,
     recordingKey: generateRecordingKey(`componentPropertyRow.${index}`, "dropTarget"),
     children: eI()
   }) : eI();
@@ -1150,7 +1150,7 @@ function e0({
                 className: km,
                 animatedImage: R,
                 animationFrame: d.animationFrame ?? 0,
-                onUpdateFrameData: lQ,
+                onUpdateFrameData: noop,
                 playing: !!R
               }, C) : jsx(_$$K3, {
                 imagePaint: d,

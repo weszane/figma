@@ -5,11 +5,11 @@ import { EventShield } from "../905/821217";
 import o from "classnames";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
-import { U } from "../905/331038";
-import { w } from "../905/113805";
-import { Lz, Zc } from "../905/497882";
+import { findFirstResult } from "../905/331038";
+import { getValidationErrors } from "../905/113805";
+import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { Bs } from "../905/772769";
-import { A as _$$A } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 import { _Z, z3 } from "../905/235660";
 var l = o;
 let _ = e => {
@@ -35,15 +35,15 @@ let $$A0 = forwardRef(function ({
   touched: i,
   onTouched: a
 }, o) {
-  let A = w(t, !i);
-  let y = U(A, _);
+  let A = getValidationErrors(t, !i);
+  let y = findFirstResult(A, _);
   let b = useRef(null);
   useImperativeHandle(o, () => ({
     focus: e => {
       b.current?.focus(e);
     }
   }), []);
-  return jsx(_$$A, {
+  return jsx(FieldContainer, {
     label: getI18nString("community.publishing.support_contact"),
     error: y,
     required: Bs(t.deps.valueRequired, e),
@@ -59,9 +59,9 @@ let $$A0 = forwardRef(function ({
           a?.();
           t.setValue?.(e.currentTarget.value);
         },
-        value: Lz(t, void 0) ?? "",
+        value: getFieldValueOrDefault(t, void 0) ?? "",
         placeholder: getI18nString("community.publishing.email_or_website_where_users_can_contact_you"),
-        disabled: !Zc(t)
+        disabled: !canSetFieldValue(t)
       })
     })
   });

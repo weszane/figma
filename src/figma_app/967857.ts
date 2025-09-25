@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuTitleComp, MenuItemComp, MenuItemLead, MenuLinkComp } from "../figma_app/860955";
 import { E as _$$E } from "../905/53857";
 import { EventShield } from "../905/821217";
@@ -93,7 +93,7 @@ export function $$ei4() {
     expandSelectedMindmapNode
   } = _$$S();
   return e => {
-    let i = lQ;
+    let i = noop;
     let a = "";
     if (e) {
       switch (e.type) {
@@ -325,7 +325,7 @@ let eo = withTrackedClick(function ({
     },
     caret: "down",
     disabled: o,
-    onClick: o ? lQ : () => {
+    onClick: o ? noop : () => {
       e();
       setUserFlagsCallback();
     },
@@ -452,7 +452,7 @@ let ec = withTrackedClick(function ({
       fullWidth: !0,
       height: 32,
       ignoreCheck: !0,
-      onMouseUp: o ? lQ : l,
+      onMouseUp: o ? noop : l,
       recordingKey: `aiQuickActionsOption-${t}`,
       selected: !1,
       style: {

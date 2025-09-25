@@ -10,16 +10,16 @@ import { O as _$$O } from "../905/164014";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { p as _$$p } from "../figma_app/882803";
-import { U as _$$U } from "../905/331038";
-import { w as _$$w } from "../905/113805";
-import { Lz } from "../905/497882";
+import { findFirstResult } from "../905/331038";
+import { getValidationErrors } from "../905/113805";
+import { getFieldValueOrDefault } from "../905/497882";
 import { en } from "../905/759470";
 import { $$in, PublishModalState, FileInputDropType } from "../figma_app/350203";
 import { useTracking } from "../figma_app/831799";
 import { CW } from "../figma_app/599979";
 import { VIDEO_TYPE_VALUES } from "../905/966582";
 import { L as _$$L } from "../905/597048";
-import { A as _$$A } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 var u = c;
 function w(e) {
   if (e && "exception" !== e.type) switch (e.key) {
@@ -67,9 +67,9 @@ export let $$C0 = forwardRef(function ({
     addMediaFromInput,
     deleteMedia
   } = e;
-  let P = _$$w(e, !t);
-  let O = _$$U(P, w);
-  let D = Lz(e, void 0);
+  let P = getValidationErrors(e, !t);
+  let O = findFirstResult(P, w);
+  let D = getFieldValueOrDefault(e, void 0);
   let L = D?.allMedia ?? [];
   let F = D?.thumbnailMedium;
   let M = useRef(null);
@@ -111,7 +111,7 @@ export let $$C0 = forwardRef(function ({
     onDragStart,
     onDragEnd
   } = _$$O();
-  return deps.viewerModeField?.currentValue === y4I.PROTOTYPE ? null : jsxs(_$$A, {
+  return deps.viewerModeField?.currentValue === y4I.PROTOTYPE ? null : jsxs(FieldContainer, {
     label: deps.allowVideos ? getI18nString("community.publishing.add_up_to_n_images_and_videos_to_your_carousel", {
       maxMedia: en - 1
     }) : getI18nString("community.publishing.add_up_to_n_images_to_your_carousel", {

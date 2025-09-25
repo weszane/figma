@@ -4,7 +4,7 @@ import { CortexErrorV2, ProviderRateLimitExceededError, ProviderOverloadedError,
 import { atomStoreManager } from "../figma_app/27355";
 import { getTrackingSessionId } from "../905/471229";
 import { J } from "../905/915227";
-import { B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { _s } from "../figma_app/33126";
 import { userIdAtom } from "../figma_app/864723";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
@@ -28,36 +28,36 @@ export function $$m3(e) {
   if (e.data.resetsAt) return $$h0(new Date(e.data.resetsAt));
 }
 export function $$g5(e) {
-  if (e instanceof TypeError && !navigator.onLine) return B.OFFLINE;
+  if (e instanceof TypeError && !navigator.onLine) return ErrorType.OFFLINE;
   if (function (e) {
     if (!e.message || !e.name || "TypeError" !== e.name || "string" != typeof e.message) return !1;
     let t = e.message.toLowerCase();
     return t.includes("network") || t.includes("fetch") || t.includes("load") || t.includes("connection") || t.includes("terminated");
-  }(e)) return B.NETWORK_ERROR;
+  }(e)) return ErrorType.NETWORK_ERROR;
   if (e instanceof CortexErrorV2) {
-    if (ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e)) return B.RATE_LIMIT_EXCEEDED;
-    if (ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e)) return B.CONTENT_LENGTH_LIMIT;
-    if (UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e)) return B.UNSAFE_OR_HARMFUL_CONTENT;
-    if (NotImplementedError.isInstance(e)) return B.NOT_IMPLEMENTED;else if (OfflineError.isInstance(e)) return B.OFFLINE;else if (MeterExceededError.isInstance(e)) return B.METER_EXCEEDED;else if (PayloadTooLargeError.isInstance(e) || e?.statusCode === 413) return B.CONTENT_LENGTH_LIMIT;
+    if (ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e)) return ErrorType.RATE_LIMIT_EXCEEDED;
+    if (ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e)) return ErrorType.CONTENT_LENGTH_LIMIT;
+    if (UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e)) return ErrorType.UNSAFE_OR_HARMFUL_CONTENT;
+    if (NotImplementedError.isInstance(e)) return ErrorType.NOT_IMPLEMENTED;else if (OfflineError.isInstance(e)) return ErrorType.OFFLINE;else if (MeterExceededError.isInstance(e)) return ErrorType.METER_EXCEEDED;else if (PayloadTooLargeError.isInstance(e) || e?.statusCode === 413) return ErrorType.CONTENT_LENGTH_LIMIT;
   }
   if (e instanceof CortexError) switch (e.type) {
     case "rate_limit_exceeded":
-      return B.RATE_LIMIT_EXCEEDED;
+      return ErrorType.RATE_LIMIT_EXCEEDED;
     case "content_length_limit_exceeded":
     case "payload_too_large":
-      return B.CONTENT_LENGTH_LIMIT;
+      return ErrorType.CONTENT_LENGTH_LIMIT;
     case "unsafe_or_harmful_content":
-      return B.UNSAFE_OR_HARMFUL_CONTENT;
+      return ErrorType.UNSAFE_OR_HARMFUL_CONTENT;
     case "offline":
-      return B.OFFLINE;
+      return ErrorType.OFFLINE;
     case "meter_exceeded":
-      return B.METER_EXCEEDED;
+      return ErrorType.METER_EXCEEDED;
     case "unclosed_tags_benign":
-      return B.UNCLOSED_TAGS_BENIGN;
+      return ErrorType.UNCLOSED_TAGS_BENIGN;
     case "generic":
-      if (e.data && "status" in e.data && 413 === e.data.status) return B.CONTENT_LENGTH_LIMIT;
+      if (e.data && "status" in e.data && 413 === e.data.status) return ErrorType.CONTENT_LENGTH_LIMIT;
   }
-  return B.GENERIC;
+  return ErrorType.GENERIC;
 }
 export function $$f2(e) {
   if (e instanceof TypeError && !navigator.onLine) return new M_({

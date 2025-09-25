@@ -23,7 +23,7 @@ import { useSubscription } from "../figma_app/288654";
 import { APILoadingStatus } from "../905/520829";
 import { BrowserInfo } from "../figma_app/778880";
 import { logError } from "../905/714362";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { O as _$$O } from "../905/257139";
 import { oz, zq } from "../figma_app/782261";
 import { IW } from "../figma_app/563413";
@@ -69,7 +69,7 @@ import { B as _$$B2 } from "../905/222272";
 import { y as _$$y } from "../905/236825";
 import { z as _$$z } from "../905/491916";
 import { cw, BT } from "../905/514666";
-import { Sn } from "../905/946805";
+import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { z as _$$z2 } from "../905/550439";
 import { l as _$$l } from "../905/29665";
@@ -84,7 +84,7 @@ import { liveStoreInstance } from "../905/713695";
 import { bL as _$$bL, mc, c$ } from "../905/493196";
 import { useSelectPrimitiveState, SelectPrimitiveTrigger } from "../905/408073";
 import { r as _$$r3 } from "../905/571562";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { selectWithShallowEqual } from "../905/103090";
 import { ms, MM, c$ as _$$c$ } from "../figma_app/236327";
 import { LoadingSpinner } from "../figma_app/858013";
@@ -117,7 +117,7 @@ import { L as _$$L } from "../905/332753";
 import { getAndResetThumbnailAtom, toPngDataUrl } from "../905/405710";
 import { J as _$$J2 } from "../905/273120";
 import { zi } from "../905/824449";
-import { ex as _$$ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { Gu0 } from "../figma_app/27776";
 import { A as _$$A3 } from "../5724/388041";
 import { A as _$$A4 } from "../svg/660901";
@@ -241,7 +241,7 @@ function ey() {
 let ez = "PUBLISH_SCOPE_DROPDOWN";
 let eH = {
   trigger: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     display: "x78zum5",
     alignItems: "x6s0dn4",
     padding: "x1ptoiqv",
@@ -634,7 +634,7 @@ function ty({
     draggable: !1
   });
 }
-let tI = _$$ex("publish_as_move_info", function (e) {
+let tI = registerTooltip("publish_as_move_info", function (e) {
   let {
     fileNameForMove,
     moveAssetType
@@ -654,7 +654,7 @@ let tI = _$$ex("publish_as_move_info", function (e) {
   fileNameForMove: e.getAttribute("data-tooltip-file-name-for-move"),
   moveAssetType: e.getAttribute("data-tooltip-move-asset-type")
 }));
-let tE = _$$ex("publish_destination_as_copy_info", function () {
+let tE = registerTooltip("publish_destination_as_copy_info", function () {
   return jsx("div", {
     children: renderI18nText("design_systems.publishing_modal.publish_destination_as_copy_info")
   });
@@ -678,11 +678,11 @@ function tx(e) {
     })
   });
 }
-let tS = _$$ex("publish_source_component_as_copy_info", tx, e => ({
+let tS = registerTooltip("publish_source_component_as_copy_info", tx, e => ({
   isComponent: !0,
   fileNameForMove: e.getAttribute("data-tooltip-file-name-for-move")
 }));
-let tw = _$$ex("publish_source_style_as_copy_info", tx, e => ({
+let tw = registerTooltip("publish_source_style_as_copy_info", tx, e => ({
   isComponent: !1,
   fileNameForMove: e.getAttribute("data-tooltip-file-name-for-move")
 }));
@@ -1785,7 +1785,7 @@ function t0({
                         B3(_$$JT.PUBLISH_LIBRARY_FOR_AI);
                         Ag(_$$JT.PUBLISH_LIBRARY_FOR_AI, Iq, null);
                       },
-                      name: Sn.LIBRARY_CSS_EXTRACTION
+                      name: ExtensionFeatureKey.LIBRARY_CSS_EXTRACTION
                     },
                     trackingData: {
                       source: "publishing_modal"
@@ -1801,7 +1801,7 @@ function t0({
           })]
         }), jsx("div", {
           className: "x19y5rnk xb3r6kr x78zum5 x6s0dn4 xl56j7k",
-          children: jsx(oW, {
+          children: jsx(WAFImage, {
             src: buildUploadUrl("6da5a2fd80fe0ad897cd34ad32a53d4e6d22e289"),
             width: 135
           })

@@ -8,7 +8,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { isPluginVersionPublished } from "../figma_app/300692";
 import { hasLocalFileId, isPrivatePlugin, manifestContainsWidget } from "../figma_app/155287";
-import { BY } from "../905/946805";
+import { PluginSourceType } from "../905/946805";
 import { Ag } from "../905/235578";
 export function $$m4() {
   let e = useLastAddedTimestamps();
@@ -133,15 +133,15 @@ export function $$b3(e) {
 export function $$T8(e) {
   let t = getUserId();
   switch (e) {
-    case BY.ALL:
+    case PluginSourceType.ALL:
       return () => !0;
-    case BY.PLUGINS:
+    case PluginSourceType.PLUGINS:
       return e => !manifestContainsWidget(e.extension);
-    case BY.WIDGETS:
+    case PluginSourceType.WIDGETS:
       return e => manifestContainsWidget(e.extension);
-    case BY.FROM_ORG:
+    case PluginSourceType.FROM_ORG:
       return e => e.types.has(Ag.ORG_PRIVATE);
-    case BY.DEVELOPMENT:
+    case PluginSourceType.DEVELOPMENT:
       return e => e.types.has(Ag.LOCAL) || function (e, t) {
         let {
           publishedExtension,

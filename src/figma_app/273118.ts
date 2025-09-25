@@ -1,5 +1,5 @@
 import { WB } from "../905/761735";
-import { Q } from "../905/150006";
+import { handleOptimistTransactionWithError } from "../905/150006";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { createOptimistThunk } from "../905/350402";
@@ -28,7 +28,7 @@ export let $$_0 = createOptimistThunk((e, t) => {
     e.dispatch(Q$(t));
     return;
   }
-  return Q({
+  return handleOptimistTransactionWithError({
     requestPromise: XHR.put("/api/user_notifications_bell/community/clear"),
     fallbackError: getI18nString("user_notification.an_error_occurred_marking_all_as_read"),
     store: e,

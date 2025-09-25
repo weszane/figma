@@ -2,7 +2,7 @@ import n from "../vendor/635";
 import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { n as _$$n } from "../905/347702";
-import { Cj, XJ, fk, jM, zs, PE, VG } from "../905/23253";
+import { modifyImages, findImageFillByHash, ImageModificationError, ImageTooLargeError, ImageTooSmallError, AlreadyMaxUpscaledError, getImagePaintSignedUrl } from "../905/23253";
 var r = n;
 let $$d1 = ({
   params: e,
@@ -23,7 +23,7 @@ let u = _$$n(async ({
   params: e,
   clientLifecycleId: t,
   bypassMaxUpscaleCheck: i
-}) => await Cj({
+}) => await modifyImages({
   name: "upscale_image",
   ...e,
   suffix: "[Upscaled]",
@@ -33,11 +33,11 @@ let u = _$$n(async ({
     isBatch: o
   }) => {
     let d = r()(n.map(t => {
-      let n = XJ({
+      let n = findImageFillByHash({
         node: t,
         hash: e
       });
-      if (void 0 === n.originalImageWidth || void 0 === n.originalImageHeight) throw new fk("Image dimensions are not available", {
+      if (void 0 === n.originalImageWidth || void 0 === n.originalImageHeight) throw new ImageModificationError("Image dimensions are not available", {
         reportToSentry: !0
       });
       return function ({
@@ -54,8 +54,8 @@ let u = _$$n(async ({
         let o = r && r % 180 != 0;
         let d = o ? t.height : t.width;
         let c = o ? t.width : t.height;
-        if (width > 2048 || height > 2048) throw new jM("Image is too large to upscale");
-        if (width < 16 || height < 16) throw new zs("Image is too small to upscale");
+        if (width > 2048 || height > 2048) throw new ImageTooLargeError("Image is too large to upscale");
+        if (width < 16 || height < 16) throw new ImageTooSmallError("Image is too small to upscale");
         let u = function ({
           imageWidth: e,
           imageHeight: t,
@@ -65,7 +65,7 @@ let u = _$$n(async ({
           imageScaleMode: a
         }) {
           if ("TILE" === a || r) return 2;
-          if (e >= 4 * i && t >= 4 * n) throw new PE("Image has already been upscaled to 4x node size");
+          if (e >= 4 * i && t >= 4 * n) throw new AlreadyMaxUpscaledError("Image has already been upscaled to 4x node size");
           let s = e < 2 * i || t < 2 * n ? 2 : 4;
           return Math.max(s * i / e, s * n / t);
         }({
@@ -113,10 +113,10 @@ let u = _$$n(async ({
       width: e,
       height: t
     }) => e * t);
-    if (!n[0] || !d) throw new fk("No nodes found", {
+    if (!n[0] || !d) throw new ImageModificationError("No nodes found", {
       reportToSentry: !0
     });
-    let c = await VG(XJ({
+    let c = await getImagePaintSignedUrl(findImageFillByHash({
       node: n[0],
       hash: e
     }));

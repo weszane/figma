@@ -5,7 +5,7 @@ import { NG, UK } from "../figma_app/506549";
 import { c4 } from "../figma_app/805925";
 import { useAppModelProperty } from "../figma_app/722362";
 import { EG } from "../figma_app/995580";
-import { s as _$$s } from "../905/73603";
+import { addRecentlyUsedAction } from "../905/73603";
 export function $$u1() {
   let e = useSelector(e => e.recentlyUsedQuickCommands);
   let t = useDispatch();
@@ -18,7 +18,7 @@ export function $$u1() {
       runPluginArgs: i
     });
     t(recentlyUsedQuickCommands(s));
-    _$$s({
+    addRecentlyUsedAction({
       displayText: n,
       runPluginArgs: i,
       localFileIdOrPluginId: r.pluginLocalFileId ?? r.pluginId

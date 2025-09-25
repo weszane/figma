@@ -15,7 +15,7 @@ import { pu } from "../7037/430062";
 import { K2, R6, q2, pV } from "../7021/970540";
 import { languageCodes, defaultLanguage } from "../905/816253";
 import { buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { getI18nState } from "../figma_app/363242";
 import { useSelector } from "react-redux";
 import { SvgComponent } from "../905/714743";
@@ -717,7 +717,7 @@ function B({
     editorType: e,
     mode: r
   });
-  return jsx(oW, {
+  return jsx(WAFImage, {
     src: buildUploadUrl(t),
     className: "xh8yej3 x5yr21d"
   });

@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { c as _$$c } from "../905/320067";
 import { renderI18nText } from "../905/303541";
 import { Xy } from "../figma_app/578832";
-import { cz, i8 } from "../905/14017";
+import { LikeCountDisplay, UsageCountDisplay } from "../905/14017";
 import { L, I } from "../1577/16430";
 import { _ as _$$_ } from "../5430/533104";
 import { getCurrentVersion, buildCommunityPathById } from "../figma_app/471982";
@@ -69,7 +69,7 @@ function f({
         className: Sl,
         image: e.thumbnail_url,
         hubFileId: e.id,
-        onLoad: lQ,
+        onLoad: noop,
         alt: s.name,
         resizedThumbnailUrls: e.resized_thumbnail_urls
       })]
@@ -192,10 +192,10 @@ function w({
       })]
     }), jsxs("div", {
       className: uK,
-      children: [jsx(cz, {
+      children: [jsx(LikeCountDisplay, {
         likeCount: e.like_count,
         currentUserLiked: !1
-      }), jsx(i8, {
+      }), jsx(UsageCountDisplay, {
         usageCount: getResourceUserCount(e)
       })]
     })]

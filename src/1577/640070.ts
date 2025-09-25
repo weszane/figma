@@ -1,10 +1,10 @@
 import { createContext } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 export let $$o0 = createContext({
   onClick: () => !1,
-  toggleQuickReply: lQ,
-  onMouseMove: lQ,
-  onRemove: lQ,
+  toggleQuickReply: noop,
+  onMouseMove: noop,
+  onRemove: noop,
   inDesktopTray: !1
 });
 export const H = $$o0;

@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { renderI18nText } from "../905/303541";
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { fj } from "../905/736956";
-export let $$o0 = ex("permissions_modal_seat_status_owner", function () {
+export let $$o0 = registerTooltip("permissions_modal_seat_status_owner", function () {
   return jsx("div", {
     className: fj,
     children: jsx("p", {

@@ -41,8 +41,8 @@ import { EG, JY, sH as _$$sH, mG, wd } from "../9410/236102";
 import { xk, Ay } from "@stylexjs/stylex";
 import { k as _$$k2 } from "../905/443820";
 import { l as _$$l2 } from "../905/479687";
-import { g as _$$g } from "../905/687265";
-import { oW as _$$oW } from "../905/675859";
+import { textDisplayConfig } from "../905/687265";
+import { WAFImage } from "../905/675859";
 import { fq, Jn, NG, m4, S7 } from "../7222/396421";
 import { useMemoStable } from "../905/19536";
 import { B4 } from "../figma_app/385215";
@@ -80,7 +80,7 @@ import { renameFileOptimistic } from "../figma_app/78808";
 import { fullscreenValue } from "../figma_app/455680";
 import { convertMarkdownToEditorState } from "../905/877554";
 import { Q as _$$Q2, ic as _$$ic } from "../figma_app/688398";
-import { A as _$$A2 } from "../905/929620";
+import { generateShimmerOverlay } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
@@ -104,7 +104,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { _ as _$$_3 } from "../905/263184";
 import { x as _$$x2 } from "../905/587214";
 import { N as _$$N } from "../905/7587";
-import { lQ as _$$lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { KindEnum } from "../905/129884";
 import { useClickOutside } from "../905/1768";
 import { g2 } from "../9410/341455";
@@ -186,7 +186,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N3 } from "../figma_app/268271";
 import { U as _$$U } from "../905/455766";
 import { rq as _$$rq } from "../905/425180";
-import { R as _$$R } from "../905/11928";
+import { NotModalType } from "../905/11928";
 import { O0, eg as _$$eg } from "../figma_app/452252";
 import { F_ } from "../905/858282";
 import { s1f } from "../figma_app/6204";
@@ -305,7 +305,7 @@ import { aG as _$$aG, lD as _$$lD } from "../figma_app/998062";
 import { $ as _$$$2 } from "../905/411599";
 import { J as _$$J5 } from "../905/494216";
 import { PE } from "../figma_app/251115";
-import { Sn } from "../905/946805";
+import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { w as _$$w2, q as _$$q5 } from "../905/112768";
 import { ZU, Wg } from "../figma_app/986347";
@@ -634,19 +634,19 @@ let Z = {
     $$css: !0
   },
   title: {
-    ..._$$g.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     $$css: !0
   },
   subtitle: {
-    ..._$$g.textHeadingSmall,
+    ...textDisplayConfig.textHeadingSmall,
     $$css: !0
   },
   chapter: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   slide: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     $$css: !0
   }
 };
@@ -666,7 +666,7 @@ let ee = {
 };
 let et = {
   stepText: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     transition: "x1op4zxa",
     transitionBehavior: null,
     transitionDelay: null,
@@ -785,7 +785,7 @@ function er({
   }, []);
   let a = useCallback((e, t) => jsxs("div", {
     className: "x78zum5 xl56j7k x6s0dn4 xi4r6k5 x10gahu4 x1n2onr6",
-    children: [jsx(_$$oW, {
+    children: [jsx(WAFImage, {
       ...xk(ee.thumbnail, t && ee.thumbnailSpotlighted),
       src: e.thumbnailUrl,
       alt: `Slide ${e.slideIndex}`,
@@ -1288,7 +1288,7 @@ async function tl({
   let d = await serializeJSX(a, {
     strict: !1
   });
-  Vm(e, createElement(_$$A2));
+  Vm(e, createElement(generateShimmerOverlay));
   let c = () => {
     ks(e);
   };
@@ -1364,7 +1364,7 @@ function tu(e) {
 let tf = {
   createDeckOptionContainer: {
     height: "x5yr21d",
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -1840,7 +1840,7 @@ let tz = {
     outlineStyle: null,
     outlineWidth: null,
     backgroundColor: "xjbqb8w",
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: "x1akne3o",
     "::placeholder_color": "x1x7eeca",
     $$css: !0
@@ -1878,7 +1878,7 @@ let tG = forwardRef(function ({
   }, [n, a]);
   return jsx("textarea", {
     ref: d,
-    ...xk(tz.textarea, _$$g[i]),
+    ...xk(tz.textarea, textDisplayConfig[i]),
     value: e,
     onChange: p,
     placeholder: t,
@@ -1890,7 +1890,7 @@ let tG = forwardRef(function ({
 });
 let tH = {
   slideNumberDisplay: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     color: "x1n0bwc9",
     $$css: !0
   }
@@ -2083,7 +2083,7 @@ function tQ({
 }
 let t6 = {
   minimizedPromptDisplay: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: "x1akne3o",
     textOverflow: "xlyipyv",
     overflow: "xb3r6kr",
@@ -2227,7 +2227,7 @@ function ii({
   return jsxs("div", {
     className: "x78zum5 x6s0dn4 xc7ga6q x1rjybxy",
     children: [jsx(ir, {
-      onClick: _$$lQ
+      onClick: noop
     }), jsx("div", {
       className: "x1iyjqo2"
     }), jsx(il, {
@@ -2295,7 +2295,7 @@ function ia() {
       "data-tooltip-offset-y": "-2px",
       "data-tooltip-show-above": !0
     },
-    children: s?.thumbnail_url && jsx(_$$oW, {
+    children: s?.thumbnail_url && jsx(WAFImage, {
       src: s.thumbnail_url,
       alt: s.name,
       loading: "lazy",
@@ -4196,7 +4196,7 @@ function rF({
     targetKey: w1,
     title: renderI18nText("slides.onboarding.template_publish.title"),
     trackingContextName: "SlidesTemplateOnboarding > TemplatePublishStep",
-    zIndex: _$$R.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 function rB() {
@@ -6449,7 +6449,7 @@ function oU({
         }));
         n();
       },
-      onToggleListLayout: _$$lQ,
+      onToggleListLayout: noop,
       picker: d,
       recordingKey: "subscribedStylePicker",
       stylePickerListLayout: !0,
@@ -7151,8 +7151,8 @@ function o5({
           shouldCommit: t,
           fontVariations: n,
           lineHeightInContext: b,
-          showVariableFontSettings: _$$lQ,
-          showTypeVariablePicker: _$$lQ
+          showVariableFontSettings: noop,
+          showTypeVariablePicker: noop
         });
       },
       recordingKey: generateRecordingKey(n, "fontStyle"),
@@ -7460,7 +7460,7 @@ let dt = memo(() => {
               isBatch: e.length > 1
             });
           },
-          name: Sn.BACKGROUND_REMOVE_TOAST
+          name: ExtensionFeatureKey.BACKGROUND_REMOVE_TOAST
         },
         trackingData: {
           source: "image_settings_remove_background"
@@ -7499,7 +7499,7 @@ let dt = memo(() => {
               isBatch: e.length > 1
             });
           },
-          name: Sn.UPSCALE_IMAGE_TOAST
+          name: ExtensionFeatureKey.UPSCALE_IMAGE_TOAST
         },
         trackingData: {
           source: "slides-image-menu"

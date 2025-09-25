@@ -5,10 +5,10 @@ import { X } from "../905/647103";
 import { ImageToolsBindings, SceneGraphHelpers, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { useSceneGraphSelection } from "../figma_app/722362";
-import { fk, jM, zs, PE, gg, ME } from "../905/23253";
+import { ImageModificationError, ImageTooLargeError, ImageTooSmallError, AlreadyMaxUpscaledError, getImageProcessingStatus, MeterExceededError } from "../905/23253";
 import { r6, sj } from "../905/507950";
 import { J } from "../905/494216";
 import { JT, LC } from "../figma_app/632248";
@@ -47,13 +47,13 @@ export function $$S0({
   });
 }
 function $$w(e) {
-  if (getFeatureFlags().aip_batch_image_modify && (e instanceof fk || sZ(e) === B.GENERIC)) return getI18nString("image_ai.background_remove.failed");
+  if (getFeatureFlags().aip_batch_image_modify && (e instanceof ImageModificationError || sZ(e) === ErrorType.GENERIC)) return getI18nString("image_ai.background_remove.failed");
 }
 function C(e) {
-  return e instanceof jM ? getI18nString("image_ai.upscale_image.image_too_large_error") : e instanceof zs ? getI18nString("image_ai.upscale_image.image_too_small_error") : e instanceof PE ? getI18nString("image_ai.upscale_image.image_already_max_upscaled_error") : e instanceof fk || sZ(e) === B.GENERIC ? getFeatureFlags().aip_batch_image_modify ? getI18nString("image_ai.upscale_image.failed") : getI18nString("image_ai.upscale_image.image_error") : void 0;
+  return e instanceof ImageTooLargeError ? getI18nString("image_ai.upscale_image.image_too_large_error") : e instanceof ImageTooSmallError ? getI18nString("image_ai.upscale_image.image_too_small_error") : e instanceof AlreadyMaxUpscaledError ? getI18nString("image_ai.upscale_image.image_already_max_upscaled_error") : e instanceof ImageModificationError || sZ(e) === ErrorType.GENERIC ? getFeatureFlags().aip_batch_image_modify ? getI18nString("image_ai.upscale_image.failed") : getI18nString("image_ai.upscale_image.image_error") : void 0;
 }
 function T(e, t) {
-  return e instanceof PE ? [{
+  return e instanceof AlreadyMaxUpscaledError ? [{
     type: _$$f.BOOST_ANYWAY,
     callback: () => {
       let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
@@ -88,7 +88,7 @@ function k({
     state,
     aiTrackingContext
   } = w;
-  let k = gg(state);
+  let k = getImageProcessingStatus(state);
   let R = useCallback(() => {
     let e = ImageToolsBindings?.getNodeImagePairsForEdit().length ?? 0;
     return getFeatureFlags().aip_batch_image_modify ? e > 25 ? renderI18nText("image_ai.image_modification.max_images", {
@@ -122,7 +122,7 @@ function k({
       let i;
       let r = t[0]?.error;
       let a = t.every(e => e.error?.message === r?.message);
-      i = r && a ? r : new fk("Mixed errors occurred", {
+      i = r && a ? r : new ImageModificationError("Mixed errors occurred", {
         reportToSentry: !1
       });
       let s = u ? u(i) : void 0;
@@ -167,7 +167,7 @@ function k({
     let {
       error
     } = w;
-    if (error instanceof ME) return jsx(_$$E, {
+    if (error instanceof MeterExceededError) return jsx(_$$E, {
       error,
       aiTrackingContext,
       customMessage: jsx("div", {

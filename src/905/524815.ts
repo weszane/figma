@@ -4,9 +4,9 @@ import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { getValueOrFallback } from "../905/872825";
 import { L } from "../905/884941";
-import { T as _$$T, e as _$$e2 } from "../905/15569";
-import { o as _$$o } from "../905/17894";
-import { i_, c_ } from "../905/497882";
+import { setupFormValidationHandler, setupAtomFormHandler } from "../905/15569";
+import { withSubmissionError } from "../905/17894";
+import { isFieldValidated, assertFieldReady } from "../905/497882";
 import { q } from "../905/840070";
 import { v as _$$v } from "../905/513628";
 import { Z9 } from "../905/104173";
@@ -241,7 +241,7 @@ let $$P2 = {
       data: {}
     }];
   },
-  canSubmit: ({}, e) => Object.keys(e).every(t => i_(e[t])),
+  canSubmit: ({}, e) => Object.keys(e).every(t => isFieldValidated(e[t])),
   submit: async (e, t) => {
     let i;
     let d;
@@ -257,10 +257,10 @@ let $$P2 = {
       description
     } = t;
     if (createNewVersionOnSubmit) try {
-      i = (await maybeCreateSavepoint(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
+      i = (await maybeCreateSavepoint(figFile.key, "Published to Community hub", assertFieldReady(description).currentValue, debugState.dispatch))?.id;
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_CREATING_SAVEPOINT",
         data: {
           rawError: e,
@@ -275,7 +275,7 @@ let $$P2 = {
       await _$$r(figFile.key);
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_PUBLISHING_SITE",
         data: {
           rawError: e
@@ -290,7 +290,7 @@ let $$P2 = {
       });
     } catch (r) {
       reportError(ServiceCategories.COMMUNITY, r);
-      return new _$$o.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPLOADING_IMAGES",
         data: {
           rawError: r,
@@ -322,7 +322,7 @@ let $$P2 = {
       });
     } catch (t) {
       reportError(ServiceCategories.COMMUNITY, t);
-      return new _$$o.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_FINALIZING_VERSION",
         data: t instanceof YI ? {
           rawError: t.rawError,
@@ -347,7 +347,7 @@ let $$P2 = {
       });
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
           rawError: e
@@ -359,7 +359,7 @@ let $$P2 = {
       if (void 0 === e) {
         let e = Error("Validations not passed in time");
         reportError(ServiceCategories.COMMUNITY, e);
-        return new _$$o.SubmissionError({
+        return new withSubmissionError.SubmissionError({
           key: "ERROR_VALIDATIONS_NOT_PASSED_IN_TIME",
           data: {
             rawError: e
@@ -370,7 +370,7 @@ let $$P2 = {
       RN(p, "SitesForm.submit");
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_VALIDATING_STATUS",
         data: {
           rawError: e
@@ -381,7 +381,7 @@ let $$P2 = {
       nz(p);
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
           rawError: e
@@ -395,8 +395,8 @@ let $$P2 = {
     };
   }
 };
-let O = _$$T($$P2);
-let $$D0 = _$$e2(O, fe);
+let O = setupFormValidationHandler($$P2);
+let $$D0 = setupAtomFormHandler(O, fe);
 export const AC = $$D0;
 export const Oo = $$N1;
 export const PT = $$P2;

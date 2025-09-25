@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useRef, useEffect, useImperativeHandle, useMemo, useId } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import s from "classnames";
 import { useDebouncedCallback } from "use-debounce";
 import { trackEventAnalytics } from "../905/449184";
@@ -384,7 +384,7 @@ export function $$E0({
             J(null);
           } : void 0,
           "aria-selected": t === Q,
-          onClick: e.disabled ? lQ : () => eE(e),
+          onClick: e.disabled ? noop : () => eE(e),
           children: jsx(w, {
             searchResult: e,
             isSelected: t === Q

@@ -2,8 +2,8 @@ import { useCallback, useMemo, useEffect } from "react";
 import r from "../vendor/336892";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { p as _$$p } from "../905/896627";
-import { A } from "../905/17894";
-import { Zc, Lz } from "../905/497882";
+import { unsetSymbol } from "../905/17894";
+import { canSetFieldValue, getFieldValueOrDefault } from "../905/497882";
 import { LK } from "../905/104173";
 import { s as _$$s } from "../905/924751";
 import { validateTagString, getResourceTags, normalizeSearchString } from "../figma_app/740025";
@@ -32,7 +32,7 @@ export function $$m0({
           let {
             invalidTags
           } = t.data;
-          if (Zc(e)) {
+          if (canSetFieldValue(e)) {
             n(a()(i, ...invalidTags));
             e.setValue([...e.currentValue, ...invalidTags.map(e => e.text.toLowerCase()).filter(e => !validateTagString(e)).filter(t => !e.currentValue.includes(t))]);
             return !0;
@@ -52,19 +52,19 @@ export function $$m0({
   } = categoryField.deps;
   let [f] = setupResourceAtomHandler(LK({
     figFile,
-    currentViewerMode: viewerModeField && Lz(viewerModeField, void 0),
+    currentViewerMode: viewerModeField && getFieldValueOrDefault(viewerModeField, void 0),
     existingResourceContent,
     localExtension
   }), {
-    enabled: viewerModeField?.currentValue !== A
+    enabled: viewerModeField?.currentValue !== unsetSymbol
   });
   let _ = useMemo(() => {
     if ("loaded" !== f.status) return [];
-    let e = Lz(categoryField, void 0);
+    let e = getFieldValueOrDefault(categoryField, void 0);
     return e ? getResourceTags(f.data, e.id) : [];
   }, [categoryField, f.data, f.status]);
   useEffect(() => {
-    if ("loaded" === f.status && Zc(e) && Zc(t)) {
+    if ("loaded" === f.status && canSetFieldValue(e) && canSetFieldValue(t)) {
       let i = [];
       let n = e.currentValue.filter(e => {
         let n = _.find(t => normalizeSearchString(e) === t.text.toLowerCase());

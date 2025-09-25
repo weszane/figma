@@ -1,47 +1,103 @@
-export class $$n2 extends Error {
-  constructor(e) {
+/**
+ * Base error class for custom errors.
+ * Original name: $$n2
+ */
+export class BaseCustomError extends Error {
+  reportToSentry: boolean;
+
+  /**
+   * @param reportToSentry - Whether to report this error to Sentry.
+   */
+  constructor(reportToSentry?: boolean) {
     super();
-    this.reportToSentry = !!e;
+    this.reportToSentry = !!reportToSentry;
   }
 }
-export class $$r1 extends $$n2 {
-  constructor(e, t) {
-    super(t?.reportToSentry);
-    this.name = "ContentFillInternalError";
-    e && (this.message = e);
+
+/**
+ * Error for internal content fill issues.
+ * Original name: $$r1
+ */
+export class ContentFillInternalError extends BaseCustomError {
+  /**
+   * @param message - Error message.
+   * @param options - Optional object with reportToSentry property.
+   */
+  constructor(message?: string, options?: { reportToSentry?: boolean }) {
+    super(options?.reportToSentry);
+    this.name = 'ContentFillInternalError';
+    if (message) this.message = message;
   }
 }
-export class $$a4 extends $$n2 {
-  constructor(e, t) {
-    super(t?.reportToSentry);
-    this.name = "InvalidSelectionError";
-    e && (this.message = e);
+
+/**
+ * Error for invalid selection.
+ * Original name: $$a4
+ */
+export class InvalidSelectionError extends BaseCustomError {
+  /**
+   * @param message - Error message.
+   * @param options - Optional object with reportToSentry property.
+   */
+  constructor(message?: string, options?: { reportToSentry?: boolean }) {
+    super(options?.reportToSentry);
+    this.name = 'InvalidSelectionError';
+    if (message) this.message = message;
   }
 }
-export class $$s5 extends $$n2 {
-  constructor(e, t) {
-    super(t?.reportToSentry);
-    this.name = "LayerGenerationError";
-    e && (this.message = e);
+
+/**
+ * Error for layer generation failures.
+ * Original name: $$s5
+ */
+export class LayerGenerationError extends BaseCustomError {
+  /**
+   * @param message - Error message.
+   * @param options - Optional object with reportToSentry property.
+   */
+  constructor(message?: string, options?: { reportToSentry?: boolean }) {
+    super(options?.reportToSentry);
+    this.name = 'LayerGenerationError';
+    if (message) this.message = message;
   }
 }
-export class $$o3 extends $$n2 {
-  constructor(e, t) {
-    super(t?.reportToSentry);
-    this.name = "TooManyNodesError";
-    e && (this.message = e);
+
+/**
+ * Error for too many nodes.
+ * Original name: $$o3
+ */
+export class TooManyNodesError extends BaseCustomError {
+  /**
+   * @param message - Error message.
+   * @param options - Optional object with reportToSentry property.
+   */
+  constructor(message?: string, options?: { reportToSentry?: boolean }) {
+    super(options?.reportToSentry);
+    this.name = 'TooManyNodesError';
+    if (message) this.message = message;
   }
 }
-export class $$l0 extends $$n2 {
-  constructor(e, t) {
-    super(t?.reportToSentry);
-    this.name = "NoDuplicateNodesError";
-    e && (this.message = e);
+
+/**
+ * Error for duplicate nodes.
+ * Original name: $$l0
+ */
+export class NoDuplicateNodesError extends BaseCustomError {
+  /**
+   * @param message - Error message.
+   * @param options - Optional object with reportToSentry property.
+   */
+  constructor(message?: string, options?: { reportToSentry?: boolean }) {
+    super(options?.reportToSentry);
+    this.name = 'NoDuplicateNodesError';
+    if (message) this.message = message;
   }
 }
-export const Aq = $$l0;
-export const IL = $$r1;
-export const JB = $$n2;
-export const Lg = $$o3;
-export const SA = $$a4;
-export const YK = $$s5;
+
+// Refactored exports to match new class names
+export const Aq = NoDuplicateNodesError;
+export const IL = ContentFillInternalError;
+export const JB = BaseCustomError;
+export const Lg = TooManyNodesError;
+export const SA = InvalidSelectionError;
+export const YK = LayerGenerationError;

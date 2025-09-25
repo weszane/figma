@@ -3,12 +3,12 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import a from "classnames";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { QP, op } from "../figma_app/487970";
 import { X as _$$X } from "../figma_app/514836";
-import { W as _$$W } from "../905/841666";
+import { getCommunityHubLikeStatus } from "../905/841666";
 import { getCommunityResourcePayment } from "../figma_app/4253";
 import { getSearchSessionIdFromSelector, getCurrentQueryId } from "../figma_app/387599";
 import { buildCommunityPath, buildCarouselMedia, getCurrentVersion, buildCommunityPathById, TransparentGifDataUri, buildProfileRouteState } from "../figma_app/471982";
@@ -20,7 +20,7 @@ import { Ay } from "../905/506641";
 import { useResourceRouteParams, useResourceFuid } from "../figma_app/979714";
 import { TrackedLink } from "../figma_app/831799";
 import { ShelfViewType, hasMonetizedResourceMetadata, hasFreemiumCode, ResourceTypeNoComment } from "../figma_app/45218";
-import { V as _$$V } from "../905/480825";
+import { PluginImage } from "../905/480825";
 import { FM } from "../5430/773914";
 import { AG } from "../figma_app/999312";
 import { Z as _$$Z } from "../figma_app/947784";
@@ -29,7 +29,7 @@ import { A6 } from "../905/350234";
 import { ResourceType } from "../figma_app/354658";
 import { EditorType } from "../figma_app/155287";
 import { gz, kJ, GJ } from "../5430/455879";
-import { cz, i8 } from "../905/14017";
+import { LikeCountDisplay, UsageCountDisplay } from "../905/14017";
 import { trackEventAnalytics } from "../905/449184";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
@@ -224,7 +224,7 @@ function en({
       onClick: t,
       className: "plugin_row--pluginRowImageContainer--mYY6b",
       onClickOverride: i ? r => ei(t, o, e, r, a) : void 0,
-      children: jsx(_$$V, {
+      children: jsx(PluginImage, {
         className: "plugin_row--pluginRowIcon--cDHTC",
         alt: `Figma plugin "${r.name}"`,
         plugin: {
@@ -256,7 +256,7 @@ function eo({
       children: r
     }), !t && jsxs("div", {
       className: e ? "plugin_row--pluginRowMetricsV2--XYuc4 text--fontPos13--xW8hS text--_fontBase--QdLsd" : "plugin_row--pluginRowMetrics--TZFF7 text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: [jsx(cz, {
+      children: [jsx(LikeCountDisplay, {
         currentUserLiked: i,
         likeCount: n.like_count,
         inPluginRow: !0
@@ -266,7 +266,7 @@ function eo({
         preview: renderI18nText("community.try.used_by_n_people", {
           num: n.unique_run_count
         }),
-        children: jsx(i8, {
+        children: jsx(UsageCountDisplay, {
           usageCount: getResourceUserCount(n),
           inPluginRow: !0
         })
@@ -341,7 +341,7 @@ export function $$ea0({
   let em = () => trackResourceClickEvent("plugin", e.id, a, D, V);
   let e_ = (e.community_publishers.accepted ?? [])[0];
   let ep = buildProfileRouteState(e_?.profile_handle ?? "", P, F ?? void 0, U);
-  let eh = !!_$$W(e.id, ResourceTypeNoComment.PLUGIN).data?.[0];
+  let eh = !!getCommunityHubLikeStatus(e.id, ResourceTypeNoComment.PLUGIN).data?.[0];
   if (e_) {
     let e = jsx(_$$e, {
       adtlClassName: "plugin_row--avatarBoxShadowOverride--MBDpQ",
@@ -476,7 +476,7 @@ export function $$ea0({
   let ej = k ? eb : ev;
   return jsxs("div", {
     "data-testid": "plugin-row",
-    children: [jsx(_$$a, {
+    children: [jsx(IntersectionSentinel, {
       onIntersectionChange: e => t?.(e)
     }), P && ea ? jsxs("button", {
       className: l()(k ? K : J, k && "plugin_row--pluginRowAsButton--l32Qa", et, "oneColumn" === T && ee),

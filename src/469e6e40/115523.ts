@@ -20,7 +20,7 @@ import { e0 } from "../905/696396";
 import { K as _$$K2 } from "../4452/401058";
 import { A as _$$A } from "../4452/239888";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { Button } from "../905/521428";
 import { d as _$$d } from "../c5e2cae0/368426";
 import { Q as _$$Q } from "../905/553231";
@@ -44,7 +44,7 @@ import { m as _$$m } from "../4452/688074";
 import { selectViewAction } from "../905/929976";
 import { Link } from "../905/438674";
 import { _ as _$$_ } from "../7021/243271";
-import { A as _$$A2 } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { h1 } from "../905/986103";
 import { SvgComponent } from "../905/714743";
 import { nl, Pf } from "../905/590952";
@@ -160,7 +160,7 @@ function ey(e) {
       className: cssBuilderInstance.colorBorder.bSolid.bt1.wFull.$
     })
   });
-  let E = e => e ? e.toLocaleDateString(_$$A2(e).locale(), {
+  let E = e => e ? e.toLocaleDateString(dayjs(e).locale(), {
     year: "numeric",
     month: "short",
     day: "numeric"
@@ -966,7 +966,7 @@ function eU(e) {
       onRowClick: e => {
         e.id === highlightedItem?.id ? clearHighlightedItemId() : setHighlightedItemId(e.id);
       },
-      onSetSortState: lQ,
+      onSetSortState: noop,
       rightActionColumns: [{
         name: "",
         className: "connected_projects_table--iconColumn--RU6JC",

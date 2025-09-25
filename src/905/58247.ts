@@ -1,6 +1,6 @@
 import { debugState } from "../905/407919";
 import { En, pM } from "../905/116101";
-import { BY, Jc, Sn } from "../905/946805";
+import { PluginSourceType, AssetTabType, ExtensionFeatureKey } from "../905/946805";
 import { RM, $I } from "../figma_app/322845";
 import { s as _$$s } from "../figma_app/504088";
 export function $$l1(e) {
@@ -8,23 +8,23 @@ export function $$l1(e) {
     let t = function (e, t) {
       if (t) switch (t) {
         case "development":
-          return BY.DEVELOPMENT;
+          return PluginSourceType.DEVELOPMENT;
         case "org":
-          return BY.FROM_ORG;
+          return PluginSourceType.FROM_ORG;
       }
       switch (e) {
         case _$$s.PLUGIN:
-          return BY.PLUGINS;
+          return PluginSourceType.PLUGINS;
         case _$$s.WIDGET:
-          return BY.WIDGETS;
+          return PluginSourceType.WIDGETS;
         default:
-          return BY.ALL;
+          return PluginSourceType.ALL;
       }
     }(e.initialFdResourceTab, e.initialFdView);
     $I({
       moduleToOpen: {
         type: "tab",
-        module: Jc.EXTENSIONS,
+        module: AssetTabType.EXTENSIONS,
         filter: t
       },
       trackingData: {
@@ -38,7 +38,7 @@ export function $$d0(e, t) {
     moduleToOpen: {
       type: "custom",
       module: t,
-      name: Sn.EXTENSION_DETAILS
+      name: ExtensionFeatureKey.EXTENSION_DETAILS
     },
     trackingData: {
       source: e.source

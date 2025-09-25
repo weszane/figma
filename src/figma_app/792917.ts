@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
 import { Label } from "../905/270045";
@@ -142,7 +142,7 @@ let C = registerModal(function (e) {
   let r = useDispatch();
   return jsxs(ModalView, {
     size: "small",
-    hide: lQ,
+    hide: noop,
     title: getI18nString("community.buyer.refund_requested"),
     children: [jsx(ModalCloseButton, {
       dispatch: r

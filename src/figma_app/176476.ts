@@ -1,7 +1,7 @@
 import { createRef, PureComponent } from 'react';
 import { H } from 'react-dom';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { bG } from '../905/149328';
+import { getThemePx } from '../905/149328';
 import { n5, Q3, vY, wP } from '../905/457102';
 import { reactTimerGroup } from '../905/542194';
 import { PerformanceLogger } from '../905/817498';
@@ -359,7 +359,7 @@ class y extends PureComponent {
   }
   render() {
     let e = this.props.isFigjamFile ? 0 : parseInt(uj0, 10) + 5;
-    let t = bG() + 5;
+    let t = getThemePx() + 5;
     return jsx('div', {
       className: vY,
       style: {

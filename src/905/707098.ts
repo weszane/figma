@@ -1,4 +1,4 @@
-import { t2 } from "../905/8035";
+import { isNotNull } from "../905/8035";
 var $$r5 = (e => (e[e.StyleNotSet = 0] = "StyleNotSet", e[e.StyleNotFound = 1] = "StyleNotFound", e))($$r5 || {});
 export function $$a1(e, t, i, n) {
   if (!(t in e)) {
@@ -11,7 +11,7 @@ export function $$s6(e, t) {
   let i;
   if ("string" == typeof e.fillStyleId) {
     let r = e.fillStyleId;
-    return (i = t.resolveColor(r), t2(i)) ? i : 1;
+    return (i = t.resolveColor(r), isNotNull(i)) ? i : 1;
   }
   return 0;
 }
@@ -19,7 +19,7 @@ export function $$o10(e, t) {
   let i;
   if ("string" == typeof e.strokeStyleId) {
     let r = e.strokeStyleId;
-    return (i = t.resolveColor(r), t2(i)) ? i : 1;
+    return (i = t.resolveColor(r), isNotNull(i)) ? i : 1;
   }
   return 0;
 }
@@ -27,7 +27,7 @@ export function $$l0(e, t) {
   let i;
   if ("string" == typeof e.effectStyleId) {
     let r = e.effectStyleId;
-    return (i = t.resolveEffect(r), t2(i)) ? i : 1;
+    return (i = t.resolveEffect(r), isNotNull(i)) ? i : 1;
   }
   return 0;
 }
@@ -35,7 +35,7 @@ export function $$d4(e, t) {
   let i;
   if ("string" == typeof e.textStyleId) {
     let r = e.textStyleId;
-    return (i = t.resolveTextStyle(r), t2(i)) ? i : 1;
+    return (i = t.resolveTextStyle(r), isNotNull(i)) ? i : 1;
   }
   return 0;
 }

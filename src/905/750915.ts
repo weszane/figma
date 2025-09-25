@@ -13,7 +13,7 @@ import { a_, Aq, Bi, dS, iG, lf, pV, sw, tW, YE, z_ } from '../905/427932';
 import { trackEventAnalytics } from '../905/449184';
 import { e as _$$e } from '../905/579755';
 import { SvgComponent } from '../905/714743';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { A as _$$A } from '../6828/718668';
 import { isOrgOrTeam } from '../figma_app/11961';
 import { A as _$$A2 } from '../figma_app/122760';
@@ -165,7 +165,7 @@ function PrePurchaseUserSelectorContent({
       adtlClassName: avatar
     }),
     description: publisher.email,
-    onClick: lQ,
+    onClick: noop,
     disabledText: {
       displayText: getI18nString('community.try.not_allowed'),
       tooltipText: getI18nString('community.buyer.user_is_a_publisher')

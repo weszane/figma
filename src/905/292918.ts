@@ -42,7 +42,7 @@ import { ModalContainer, ConfirmationModal2 } from "../figma_app/918700";
 import { ss } from "../905/746499";
 import { $l } from "../905/721248";
 import { jS } from "../figma_app/557024";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import J from "../vendor/338009";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
@@ -298,7 +298,7 @@ let el = registerModal(function ({
     };
     let a = ur(r);
     return jsx(jP, {
-      dispatch: lQ,
+      dispatch: noop,
       displayText: jsx(YL, {
         item: r
       }),
@@ -321,7 +321,7 @@ let el = registerModal(function ({
     }, e.id);
   });
   let _ = jsx(jP, {
-    dispatch: lQ,
+    dispatch: noop,
     displayText: renderI18nText("collaboration.feedback.incremental_update_modal.latest_version"),
     editorType: null,
     first: !0,

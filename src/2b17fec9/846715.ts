@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, memo, useCallback, useEffect, useMemo, useContext, useRef, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { U1 } from "../figma_app/343967";
 import { DesignGraphElements, Fullscreen, ViewType, ToolType, AlignmentPosition, ConfirmationLevel, LayoutTabType } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
@@ -1091,8 +1091,8 @@ let tw = memo(function () {
       })]
     })
   }) : null;
-  let ed = _$$C()?.setWhiteboardToolbeltNode || lQ;
-  let ec = _$$C()?.setWhiteboardToolbeltContainerNode || lQ;
+  let ed = _$$C()?.setWhiteboardToolbeltNode || noop;
+  let ec = _$$C()?.setWhiteboardToolbeltContainerNode || noop;
   let eu = CSS.supports && CSS.supports("overflow", "clip");
   let ep = U1(ed);
   let em = useRef(null);

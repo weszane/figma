@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createContext, useState, useRef, useLayoutEffect, useContext } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { assertNotNullish } from "../figma_app/95419";
 import { r as _$$r } from "../figma_app/67145";
 import { u as _$$u } from "../905/39877";
@@ -26,8 +26,8 @@ export function $$c0({
           reportWidth: e,
           value: "addToFile",
           children: jsx(_$$u, {
-            subscribeCallback: lQ,
-            unsubscribeCallback: lQ,
+            subscribeCallback: noop,
+            unsubscribeCallback: noop,
             libraryName: ""
           })
         }), jsx(u, {
@@ -35,8 +35,8 @@ export function $$c0({
           value: "removeFromFile",
           children: jsx(_$$u, {
             isSubscribedTo: !0,
-            subscribeCallback: lQ,
-            unsubscribeCallback: lQ,
+            subscribeCallback: noop,
+            unsubscribeCallback: noop,
             libraryName: ""
           })
         })]

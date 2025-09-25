@@ -83,7 +83,7 @@ import { X as _$$X } from "../5430/712117";
 import { C as _$$C } from "../figma_app/514836";
 import { rS } from "../af221b13/10766";
 import { e as _$$e3, v8, LV } from "../5430/686342";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { C as _$$C2 } from "../figma_app/198698";
 import { om, x1 } from "../figma_app/465413";
 import { A as _$$A8 } from "../5724/965092";
@@ -128,7 +128,7 @@ import { A as _$$A12 } from "../svg/927263";
 import { u as _$$u2 } from "../5430/521178";
 import { $ as _$$$2 } from "../905/302575";
 import { useTheme } from "../905/289770";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { n as _$$n2 } from "../5430/496973";
 import { T as _$$T } from "../5430/373013";
 import { M as _$$M2 } from "../5430/704379";
@@ -159,7 +159,7 @@ import { A as _$$A26 } from "../svg/330773";
 import { A as _$$A27 } from "../svg/478386";
 import { A as _$$A28 } from "../svg/442990";
 import { A as _$$A29 } from "../svg/484954";
-import { g as _$$g2 } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { xk, Ay as _$$Ay5 } from "@stylexjs/stylex";
 import { logAndTrackCTA, trackContextViewed } from "../figma_app/314264";
 import { e0 as _$$e4 } from "../905/696396";
@@ -186,7 +186,7 @@ import { UI3ConditionalWrapper } from "../905/341359";
 import { useLatestRef } from "../figma_app/922077";
 import { PricingOptions } from "../905/237873";
 import { generateUUIDv4 } from "../905/871474";
-import { a as _$$a5 } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { mergePublishedPluginThunk } from "../905/172918";
 import { getResourceName } from "../figma_app/777551";
 import { ResourceTypeMap, ViewSectionMap } from "../figma_app/701107";
@@ -1453,7 +1453,7 @@ function tv() {
   };
   return jsx(_$$C2, {
     content: e,
-    onDismiss: lQ
+    onDismiss: noop
   });
 }
 let tj = _$$i;
@@ -3221,7 +3221,7 @@ let i4 = "buzz_sites_promo_banner--cooperImageBase--BiJz0";
 function i8({
   altText: e
 }) {
-  return jsx(oW, {
+  return jsx(WAFImage, {
     alt: e,
     src: buildUploadUrl("1d9c0dc489280071bb2af0f93f6f29bb5218d702"),
     className: "buzz_sites_promo_banner--seascapeImage--GHxOc"
@@ -3231,15 +3231,15 @@ function i9({
   altText: e
 }) {
   return jsxs(Fragment, {
-    children: [jsx(oW, {
+    children: [jsx(WAFImage, {
       alt: e,
       src: buildUploadUrl("d0e7c89e4e69e4695f9759c77c17889ee632db42"),
       className: e9()(i4, "buzz_sites_promo_banner--cooperLeftImage--PeFAT")
-    }), jsx(oW, {
+    }), jsx(WAFImage, {
       alt: e,
       src: buildUploadUrl("67ca9ff05354bb92047f9d565af3a615e474020d"),
       className: e9()(i4, "buzz_sites_promo_banner--cooperCenterImage---nwYC")
-    }), jsx(oW, {
+    }), jsx(WAFImage, {
       alt: e,
       src: buildUploadUrl("c8082260001892c5664284870328e39e9c60325f"),
       className: e9()(i4, "buzz_sites_promo_banner--cooperRightImage--iNWTv")
@@ -4348,7 +4348,7 @@ function nX() {
           className: "x5yr21d xh8yej3 x9f619 x1n2onr6 x78zum5 x6s0dn4 xb3r6kr xz0h9cu x4pepcl x1qughib x5mp9sv xkh2ocl",
           children: [jsx("div", {
             className: "x10l6tqk x13vifvy xu96u03 xh8yej3 x5yr21d xhtitgo",
-            children: jsx(oW, {
+            children: jsx(WAFImage, {
               src: buildUploadUrl("32b8239aca2ec078bdc2f54ca050c727c22e4b02"),
               alt: "img",
               width: "100%",
@@ -4375,7 +4375,7 @@ function nX() {
             })]
           }), !n && jsx("div", {
             ...xk(nV.imgFrame, i && !s && nV.imgFrameMiddle, i && s && nV.imgFrameSmall),
-            children: jsx(oW, {
+            children: jsx(WAFImage, {
               src: buildUploadUrl("9d79a1d2b292d8aadc4345be9b76cf9f94bfe56d"),
               alt: "img",
               width: "450",
@@ -4470,18 +4470,18 @@ let nV = {
     $$css: !0
   },
   newDropLabel: {
-    ..._$$g2.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: "xglum8b",
     fontWeight: "x1s688f",
     $$css: !0
   },
   title: {
-    ..._$$g2.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     color: "x1tk3asg",
     $$css: !0
   },
   description: {
-    ..._$$g2.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: "xglum8b",
     lineHeight: "x1o2sk6j",
     $$css: !0
@@ -5025,7 +5025,7 @@ function au() {
 }
 let am = {
   headline: {
-    ..._$$g2.textHeadingLarge,
+    ...textDisplayConfig.textHeadingLarge,
     color: "x1akne3o",
     margin: "x1ghz6dp",
     marginInline: null,
@@ -5118,13 +5118,13 @@ let af = {
   },
   heading: {
     color: "x1akne3o",
-    ..._$$g2.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     $$css: !0
   },
   subheading: {
     marginTop: "x7r5mf7",
     color: "x1n0bwc9",
-    ..._$$g2.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     $$css: !0
   }
 };
@@ -5403,12 +5403,12 @@ let aw = {
     $$css: !0
   },
   title: {
-    ..._$$g2.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     color: "x1akne3o",
     $$css: !0
   },
   subtitle: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     $$css: !0
   },
@@ -5488,10 +5488,10 @@ function aE({
         })]
       }), jsxs("div", {
         className: "x1n2onr6 x78zum5 x1d7z9mz x10wjd1d",
-        children: [jsx(oW, {
+        children: [jsx(WAFImage, {
           src: i,
           ..._$$Ay5.props(aw.imgBase, aw.imgLeft, o && aw.cardFanLeft)
-        }), jsx(oW, {
+        }), jsx(WAFImage, {
           src: n,
           ..._$$Ay5.props(aw.imgBase, aw.imgRight, o && aw.cardFanRight)
         })]
@@ -5731,13 +5731,13 @@ let aR = {
     marginBottom: null,
     paddingBottom: "x1eo74n3",
     justifyContent: "xl56j7k",
-    ..._$$g2.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     $$css: !0
   },
   feed: {
     width: "xh8yej3",
     maxWidth: "x193iq5w",
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -6083,7 +6083,7 @@ function sr({
       hasScrolled: o
     }), jsx("div", {
       className: "resource_page--mobileScrollSentinelContainer--AkI9N",
-      children: jsx(_$$a5, {
+      children: jsx(IntersectionSentinel, {
         className: "resource_page--scrollSentinel--yWuQV",
         onIntersectionChange: e => l(!e.isIntersecting)
       })

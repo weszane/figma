@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
-import { A } from "../905/17894";
-import { Lz, Zc } from "../905/497882";
+import { unsetSymbol } from "../905/17894";
+import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { findProfile, trimOrEmpty } from "../figma_app/740025";
 import { jr, Z7, MO } from "../figma_app/599979";
 import { profileServiceAPI } from "../905/608932";
@@ -11,9 +11,9 @@ function u(e) {
     authorField,
     authedProfilesById
   } = e;
-  let r = Lz(authorField, void 0);
+  let r = getFieldValueOrDefault(authorField, void 0);
   if (getFeatureFlags().ext_plugin_publish_rearch) {
-    if (!Zc(authorField)) return !1;
+    if (!canSetFieldValue(authorField)) return !1;
     let e = r && (jr(r) && findProfile({
       userId: r.user_id,
       authedProfilesById
@@ -36,7 +36,7 @@ export let $$p0 = {
   displayName: "ProfileHandleField",
   fetchInitialValue: ({
     authorField: e
-  }) => e.currentValue === A ? A : "",
+  }) => e.currentValue === unsetSymbol ? unsetSymbol : "",
   validate: async (e, t) => {
     if (!u(e)) return;
     let i = trimOrEmpty(t);

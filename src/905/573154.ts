@@ -142,12 +142,7 @@ export const FlashActions = {
  * Handles promise errors and dispatches error flash
  * (original: $$m0)
  */
-export const handlePromiseError = createOptimistThunk<{ promise: Promise<any>, fallbackError?: string }, void>(
-  /**
-   * @param context - OptimistThunkContext
-   * @param payload - { promise, fallbackError }
-   */
-  (context: OptimistThunkContext, { promise, fallbackError }) => {
+export const handlePromiseError = createOptimistThunk((context, { promise, fallbackError }) => {
     promise.catch(({ response }) => {
       try {
         const parsed = JSON.parse(response)

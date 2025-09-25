@@ -5,7 +5,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -26,7 +26,7 @@ import { o as _$$o } from "../905/268099";
 import { f as _$$f } from "../905/287602";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useTeamPlanFeatures } from "../figma_app/465071";
-import { Kq } from "../figma_app/713624";
+import { TeamPropertyKey } from "../figma_app/713624";
 import { c as _$$c } from "../905/32166";
 import { ButtonPrimitive } from "../905/632989";
 import { useSubscription } from "../figma_app/288654";
@@ -213,7 +213,7 @@ let z = registerModal(function (e) {
       discoverabilityFilter: null
     },
     sortConfig: {
-      columnName: Kq.NAME,
+      columnName: TeamPropertyKey.NAME,
       isReversed: !1
     },
     membersMap: {},
@@ -375,7 +375,7 @@ export let $$W0 = registerModal(function (e) {
               color: _$$S.WARNING,
               text: renderI18nText("resource_connection.request_modal.asset_transfer_request_will_be_revoked")
             })
-          }), jsx(oW, {
+          }), jsx(WAFImage, {
             className: CE,
             src: buildUploadUrl("79f17ef7df0c5ed50af97e6c5e98651536c94352"),
             alt: "Connected projects logo"

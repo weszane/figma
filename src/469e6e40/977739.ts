@@ -23,7 +23,7 @@ import { Rs } from "../figma_app/761870";
 import { fm, X4, Cn, by, UI } from "../c5e2cae0/453906";
 import { registerModal } from "../905/102752";
 import { hK } from "../figma_app/211706";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { Wi } from "../figma_app/162641";
 import { H8, Pf } from "../905/590952";
 import { Pg } from "../figma_app/990058";
@@ -104,7 +104,7 @@ function $$q(e) {
       autocomplete,
       autocompleteResultsClassName: "admin_search_input--autocompleteResults--N5LMj",
       onChange: setAutocomplete,
-      validateToken: lQ,
+      validateToken: noop,
       getSearchResults: e => {
         let t = new Ef([], {
           keys: ["name", "email"],

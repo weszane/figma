@@ -18,7 +18,7 @@ import { O } from "../0c62c2fd/621155";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { eC } from "../905/539601";
 import { E as _$$E } from "../0c62c2fd/358013";
@@ -36,9 +36,9 @@ export function $$C0({
       if (t) {
         if (!r.lifecycleState || 0 === r.lifecycleState.count) return !1;
         let e = new Date(r.lifecycleState.updatedAt);
-        if (_$$A(e).isAfter(_$$A().subtract(14, "day"))) return !1;
+        if (dayjs(e).isAfter(dayjs().subtract(14, "day"))) return !1;
       }
-      return !(a || (s.lifecycleState?.count ?? 0) > 0 && _$$A(s.lifecycleState?.updatedAt).isAfter(_$$A().subtract(3, "day"))) && e;
+      return !(a || (s.lifecycleState?.count ?? 0) > 0 && dayjs(s.lifecycleState?.updatedAt).isAfter(dayjs().subtract(3, "day"))) && e;
     });
   }();
   let r = useMakeFileCreationTooltipExperiment();

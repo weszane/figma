@@ -8,7 +8,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogActionStrip } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { P as _$$P } from "../905/347284";
@@ -42,7 +42,7 @@ function D() {
 function k(e) {
   let t = (getResourceDataOrFallback(e.recentFileVersions) || []).filter(e => !e.user.isSystemUser).find(e => 7 !== e.view);
   if (t) {
-    let r = t.checkpoint && _$$A.utc(t.checkpoint?.createdAt).toDate();
+    let r = t.checkpoint && dayjs.utc(t.checkpoint?.createdAt).toDate();
     return {
       file_key: e.key,
       user: t.user,

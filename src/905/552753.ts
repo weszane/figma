@@ -1,4 +1,4 @@
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { Fragment as _$$Fragment, forwardRef, useRef, useState, useLayoutEffect } from "react";
 import { ButtonPrimitive } from "../905/632989";
@@ -46,7 +46,7 @@ let m = [{
     native: String.fromCodePoint(parseInt(i, 16))
   };
 });
-let g = ex("emoji_reaction_tooltip", function (e) {
+let g = registerTooltip("emoji_reaction_tooltip", function (e) {
   let {
     emojiUnicodeList,
     emojiShortcodeToUsers

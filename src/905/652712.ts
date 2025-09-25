@@ -6,12 +6,12 @@ import { l as _$$l } from "../905/479687";
 import { J } from "../905/129695";
 import d from "classnames";
 import { getI18nString } from "../905/303541";
-import { U } from "../905/331038";
-import { w as _$$w } from "../905/113805";
-import { Lz, Zc } from "../905/497882";
+import { findFirstResult } from "../905/331038";
+import { getValidationErrors } from "../905/113805";
+import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { s as _$$s } from "../905/924751";
 import { MAX_FEED_ITEMS, getDynamicContentTranslation } from "../figma_app/740025";
-import { A as _$$A } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 import { lN, Hs } from "../905/488777";
 var c = d;
 export function $$y1(e) {
@@ -34,9 +34,9 @@ let b = forwardRef(function ({
     },
     validV2Tags
   } = e;
-  let u = Lz(e.tagsV2Field, []);
+  let u = getFieldValueOrDefault(e.tagsV2Field, []);
   let p = useCallback(e => !!u.find(t => _$$s(t, e)), [u]);
-  let m = useCallback(t => !Zc(e.tagsV2Field) || !p(t) && u.length >= MAX_FEED_ITEMS, [p, u.length, e.tagsV2Field]);
+  let m = useCallback(t => !canSetFieldValue(e.tagsV2Field) || !p(t) && u.length >= MAX_FEED_ITEMS, [p, u.length, e.tagsV2Field]);
   let _ = useCallback(e => {
     setValue && (p(e) ? setValue(u.filter(t => !_$$s(t, e))) : setValue([...u, e]));
   }, [p, u, setValue]);
@@ -84,7 +84,7 @@ let $$v0 = forwardRef(function ({
   tagsFieldsManager: e,
   touchedFieldsTracker: t,
   autoScrollAutocompleteResultsIntoView: i,
-  PublishModalRowComponent: a = _$$A,
+  PublishModalRowComponent: a = FieldContainer,
   autocompleteInputContainerClassName: o
 }, l) {
   let {
@@ -92,12 +92,12 @@ let $$v0 = forwardRef(function ({
     tagsV2Field,
     validV2Tags
   } = e;
-  let v = _$$w(tagsV1Field, !t.tagsV1.touched);
-  let I = U(v, lN, validV2Tags);
-  let E = _$$w(tagsV2Field, !t.tagsV2.touched);
-  let x = U(E, $$y1);
-  let S = Lz(tagsV1Field, []);
-  let w = useRef(Lz(tagsV1Field, []).length > 0);
+  let v = getValidationErrors(tagsV1Field, !t.tagsV1.touched);
+  let I = findFirstResult(v, lN, validV2Tags);
+  let E = getValidationErrors(tagsV2Field, !t.tagsV2.touched);
+  let x = findFirstResult(E, $$y1);
+  let S = getFieldValueOrDefault(tagsV1Field, []);
+  let w = useRef(getFieldValueOrDefault(tagsV1Field, []).length > 0);
   let [C, T] = useState(w.current);
   useEffect(() => {
     S.length > 0 && T(!0);

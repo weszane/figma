@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { zm } from "../figma_app/384673";
-import { P4 } from "../905/18800";
+import { consentCounterAtom } from "../905/18800";
 import { r as _$$r } from "../figma_app/375550";
 import { isInteractionReady } from "../figma_app/433958";
 import { useDevModeFocusId } from "../figma_app/88239";
@@ -40,7 +40,7 @@ export function $$L2() {
 }
 export function $$P0() {
   let e = isWhiteboardFileType();
-  let t = useAtomWithSubscription(P4);
+  let t = useAtomWithSubscription(consentCounterAtom);
   let r = useAtomWithSubscription(O);
   let n = getObservableValue(AppStateTsApi?.editorPreferences()?.showFigmaScope, !1);
   let d = getDevHandoffInspectSplitPosition();

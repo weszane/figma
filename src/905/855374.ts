@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useMemo, useEffect, forwardRef, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
 import { trackFileEventWithStore } from "../figma_app/901889";
@@ -129,10 +129,9 @@ import { H_, CU, z6 } from "../905/963340";
 import { S as _$$S3 } from "../905/989967";
 import { k as _$$k4 } from "../905/727631";
 import { a as _$$a } from "../905/5627";
-import { noop } from "../905/419236";
 import { h as _$$h2 } from "../905/994594";
 import { w as _$$w } from "../905/955293";
-import { g as _$$g2 } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
 import { deepEqual } from "../905/382883";
@@ -749,7 +748,7 @@ function em(e) {
             type: _$$$.FORM,
             disabled: !onSubmitRenameVar,
             onSubmit: e => onSubmitRenameVar?.(variable.node_id, e) ?? !1,
-            onFinish: lQ,
+            onFinish: noop,
             originalValue: variable.name,
             placeholder: getI18nString("variables.edit_modal.input_placeholder.name"),
             recordingKey: generateRecordingKey(e.recordingKey, "nameInput")
@@ -768,7 +767,7 @@ function em(e) {
             disabled: !setVariableDescription,
             id: "description",
             multiline: !0,
-            onFinish: lQ,
+            onFinish: noop,
             onSubmit: e => setVariableDescription?.(variable, e) ?? !1,
             originalValue: variable.description ?? "",
             placeholder: getI18nString("variables.edit_modal.input_label.description_placeholder"),
@@ -886,7 +885,7 @@ function eg(e) {
             variableSetId,
             modeID: r.id,
             isInaccessible: !e.onSubmitVariableValue || o >= modeLimit,
-            onContextMenu: lQ,
+            onContextMenu: noop,
             onSubmit: (t, i) => e.onSubmitVariableValue?.(e.variable.node_id, r.id, t, i) ?? !1
           }, r.id + "value")
         })]
@@ -1665,15 +1664,15 @@ function tM({
     }, e.id), jsxs(MenuContainerComp, {
       children: [jsxs(MenuItemComp, {
         disabled: !0,
-        onClick: lQ,
+        onClick: noop,
         children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.copy_link_to_collection")]
       }), jsxs(MenuItemComp, {
         disabled: !0,
-        onClick: lQ,
+        onClick: noop,
         children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.go_to_collection")]
       }), jsx(MenuSeparator, {}), jsxs(MenuItemComp, {
         disabled: !0,
-        onClick: lQ,
+        onClick: noop,
         children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.duplicate_collection")]
       }), jsx(MenuItemComp, {
         onClick: () => {
@@ -1682,7 +1681,7 @@ function tM({
         children: renderI18nText("variables.authoring_modal.sidebar.context_menu.extend_collection")
       }), jsx(MenuSeparator, {}), jsxs(MenuItemComp, {
         disabled: !0,
-        onClick: lQ,
+        onClick: noop,
         children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.export_modes")]
       })]
     })]
@@ -2733,19 +2732,19 @@ function it({
           modeID: "",
           modeLimit: 0,
           name: "",
-          onDeleteMode: lQ,
-          onDuplicateMode: lQ,
+          onDeleteMode: noop,
+          onDuplicateMode: noop,
           onRenameMode: () => !1,
-          onSetModeAsDefault: lQ,
+          onSetModeAsDefault: noop,
           renamingModeGUID: b,
           selectedModeID: q,
-          setDraggingModeID: lQ,
-          setDropTargetModeID: lQ,
-          setIsDragging: lQ,
-          setRenamingModeGUID: lQ,
-          setSelectedModeID: lQ,
-          setSelectedVariableIDs: lQ,
-          showModesCTA: lQ,
+          setDraggingModeID: noop,
+          setDropTargetModeID: noop,
+          setIsDragging: noop,
+          setRenamingModeGUID: noop,
+          setSelectedModeID: noop,
+          setSelectedVariableIDs: noop,
+          showModesCTA: noop,
           varSetID: w.node_id
         }), i && jsx(em, {
           hasPadding: !1,
@@ -3175,7 +3174,7 @@ let iF = {
     $$css: !0
   },
   inputTypography: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   input: {
@@ -3625,7 +3624,7 @@ function i2({
   return jsxs(_$$k2, {
     name: "variables_modal",
     children: [I && jsx(_$$bL2, {
-      onClose: lQ,
+      onClose: noop,
       draggable: "header",
       children: jsx("div", {
         "data-testid": "variables-modal-backdrop",
@@ -4413,11 +4412,11 @@ export let $$i50 = registerModal(function () {
         hideContextMenu: hide,
         onCopyVariables: et,
         onCreateGroup: actions.createGroup,
-        onDeleteEmptyGroup: lQ,
+        onDeleteEmptyGroup: noop,
         onDeleteVariables: actions.deleteVariables,
         onDuplicateVariables: actions.duplicateVariables,
         onPasteVariables: ei,
-        onSetAllVariablesSelected: lQ,
+        onSetAllVariablesSelected: noop,
         onUngroup: actions.ungroup,
         recordingKey: generateRecordingKey("variablesModal", "contextMenuDropdown"),
         toggleEditVariableModal: actions.toggleEditVariableModal

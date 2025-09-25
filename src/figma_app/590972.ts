@@ -21,7 +21,7 @@ import { r as _$$r } from "../905/334940";
 import { o as _$$o } from "../905/785255";
 import { r as _$$r2 } from "../905/290294";
 import { D as _$$D } from "../905/572843";
-import { i_, MQ, Lz } from "../905/497882";
+import { isFieldValidated, isFormValidatedOrError, getFieldValueOrDefault } from "../905/497882";
 import { a as _$$a } from "../905/94741";
 import { A as _$$A2 } from "../905/601732";
 import { __, tZ, Mm } from "../905/271611";
@@ -32,7 +32,7 @@ import { A as _$$A6 } from "../905/144978";
 import { x as _$$x } from "../905/956141";
 import { S as _$$S } from "../905/60183";
 import { m as _$$m } from "../905/964225";
-import { A as _$$A7 } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 import { X as _$$X, S as _$$S2 } from "../905/109653";
 import { jT } from "../905/870778";
 import { a as _$$a2 } from "../905/482941";
@@ -45,8 +45,8 @@ import { wC } from "../905/448440";
 import $ from "lodash-es/mapValues";
 import q from "../vendor/781591";
 import Z from "../vendor/52566";
-import { T as _$$T, e } from "../905/15569";
-import { A as _$$A8 } from "../905/17894";
+import { setupFormValidationHandler, setupAtomFormHandler } from "../905/15569";
+import { unsetSymbol } from "../905/17894";
 import { zX } from "../905/104173";
 import { fe } from "../905/234639";
 import { O as _$$O } from "../905/592467";
@@ -135,10 +135,10 @@ let eo = {
     }
   }
 };
-let el = _$$T(eo);
-let ed = e(el, fe, e => {
+let el = setupFormValidationHandler(eo);
+let ed = setupAtomFormHandler(el, fe, e => {
   let t = X()(e, "currentValue");
-  let r = Q()(t, e => e === _$$A8);
+  let r = Q()(t, e => e === unsetSymbol);
   return J()(r, "carouselMedia");
 });
 function eO({
@@ -187,13 +187,13 @@ function eO({
   } = _$$o([{
     id: "details",
     checkpoints: [{
-      check: () => i_(e.fieldStates.name),
+      check: () => isFieldValidated(e.fieldStates.name),
       onFail: () => __(tZ.NAME_INPUT)
     }, {
-      check: () => i_(e.fieldStates.description),
+      check: () => isFieldValidated(e.fieldStates.description),
       onFail: () => __(tZ.DESCRIPTION_INPUT)
     }, {
-      check: () => i_(e.fieldStates.tagsV2) && i_(e.fieldStates.tagsV1),
+      check: () => isFieldValidated(e.fieldStates.tagsV2) && isFieldValidated(e.fieldStates.tagsV1),
       onFail: () => __(tZ.TAGS_SECTION)
     }],
     onFail: () => {
@@ -205,7 +205,7 @@ function eO({
   }, {
     id: "thumbnail",
     checkpoints: [{
-      check: () => i_(e.fieldStates.carouselMedia),
+      check: () => isFieldValidated(e.fieldStates.carouselMedia),
       onFail: () => __(tZ.THUMBNAIL_UPLOADER)
     }],
     onFail: () => {
@@ -214,16 +214,16 @@ function eO({
   }, {
     id: "advanced",
     checkpoints: [{
-      check: () => i_(e.fieldStates.profileHandle),
+      check: () => isFieldValidated(e.fieldStates.profileHandle),
       onFail: () => __(tZ.PROFILE_HANDLE_INPUT)
     }, {
-      check: () => i_(e.fieldStates.cocreators),
+      check: () => isFieldValidated(e.fieldStates.cocreators),
       onFail: () => __(tZ.COCREATORS_INPUT)
     }, {
-      check: () => i_(e.fieldStates.tosAccepted),
+      check: () => isFieldValidated(e.fieldStates.tosAccepted),
       onFail: () => __(tZ.TOS_AGREED_CHECKBOX)
     }, {
-      check: () => i_(e.fieldStates.supportContact),
+      check: () => isFieldValidated(e.fieldStates.supportContact),
       onFail: () => __(tZ.SUPPORT_CONTACT_INPUT)
     }],
     onFail: () => {
@@ -245,11 +245,11 @@ function eO({
       step: PublishModalState.PUBLISH
     });
   }, [X]));
-  let eT = useRef(r ? MQ(e) ? "ready" : "waiting_for_draft_to_stabilize" : "disabled");
+  let eT = useRef(r ? isFormValidatedOrError(e) ? "ready" : "waiting_for_draft_to_stabilize" : "disabled");
   useEffect(() => {
     switch (eT.current) {
       case "waiting_for_draft_to_stabilize":
-        MQ(e) && (eT.current = "ready");
+        isFormValidatedOrError(e) && (eT.current = "ready");
         break;
       case "ready":
         checkOverallProgress();
@@ -329,7 +329,7 @@ function eO({
             descriptionField: e.fieldStates.description,
             ...J.description
           })
-        }), i_(e.fieldStates.category) && jsx(Mm, {
+        }), isFieldValidated(e.fieldStates.category) && jsx(Mm, {
           id: tZ.TAGS_SECTION,
           children: e => Z.validV2Tags.length > 0 ? jsx(vj, {
             ref: e,
@@ -348,7 +348,7 @@ function eO({
               block: "end"
             }
           })
-        }), t && jsx(_$$A7, {
+        }), t && jsx(FieldContainer, {
           label: getI18nString("community.publishing.preview_url"),
           children: jsx(Link, {
             href: t.fullURL,
@@ -481,7 +481,7 @@ function eO({
       step: PublishModalState.OPENED
     });
   }, [X]);
-  let ex = Lz(e.fieldStates.name, "");
+  let ex = getFieldValueOrDefault(e.fieldStates.name, "");
   let eN = useDebouncedCallback(() => {
     X.current($$in, {
       step: PublishModalState.EDIT_NAME
@@ -490,7 +490,7 @@ function eO({
   useEffect(() => {
     ex && J.name.touched && eN();
   }, [ex, eN, J.name.touched]);
-  let eO = Lz(e.fieldStates.description, "");
+  let eO = getFieldValueOrDefault(e.fieldStates.description, "");
   let eR = useDebouncedCallback(() => {
     X.current($$in, {
       step: PublishModalState.EDIT_DESCRIPTION
@@ -630,7 +630,7 @@ function eP({
     }), d.current?.("source_file_cannot_be_published"));
   }, [s, d, _]);
   useEffect(() => {
-    !h && !e.submit && MQ(e) && (_.current($$in, {
+    !h && !e.submit && isFormValidatedOrError(e) && (_.current($$in, {
       step: PublishModalState.ERROR,
       errorType: "errors_in_form"
     }), m({

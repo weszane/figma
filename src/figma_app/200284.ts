@@ -52,7 +52,7 @@ import { l6, c$ as _$$c$ } from "../905/794875";
 import { getJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3 } from "../figma_app/862289";
-import { Sn } from "../905/946805";
+import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { Tu } from "../figma_app/724968";
 import { Os } from "../905/705135";
@@ -675,7 +675,7 @@ function eC({
         moduleToOpen: {
           type: "custom",
           module: jsx(Tu, {}),
-          name: Sn.EDIT_IMAGE
+          name: ExtensionFeatureKey.EDIT_IMAGE
         },
         trackingData: {
           source: "image_settings"

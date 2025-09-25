@@ -1,8 +1,8 @@
-import { ex as _$$ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, memo, useMemo, useCallback, useRef, useContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { Label } from "../905/270045";
 import { d as _$$d } from "../905/976845";
 import { IconButton } from "../905/443068";
@@ -54,7 +54,7 @@ import { Yh } from "../figma_app/357047";
 import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3, Ag } from "../figma_app/862289";
-import { Sn } from "../905/946805";
+import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { p as _$$p } from "../figma_app/398051";
 import { e as _$$e2 } from "../905/462154";
@@ -104,7 +104,7 @@ function eu() {
           moduleToOpen: {
             type: "custom",
             module: jsx(_$$p, {}),
-            name: Sn.MAGIC_LINK,
+            name: ExtensionFeatureKey.MAGIC_LINK,
             beforeModuleOpen: () => {
               e(Zh({
                 name: "prototype.ai_magic_link_entry_clicked",
@@ -129,7 +129,7 @@ function eu() {
     })
   });
 }
-let ey = _$$ex("prototype_info", function (e) {
+let ey = registerTooltip("prototype_info", function (e) {
   let {
     tooltipText
   } = e;
@@ -352,7 +352,7 @@ function eS(e) {
         useGrid: p
       },
       children: jsx(h6, {
-        addProperty: lQ,
+        addProperty: noop,
         currentSelectedProperty: e.currentSelectedProperty,
         dispatch: e.dispatch,
         hideAddButton: !0,

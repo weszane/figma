@@ -11,7 +11,7 @@ import { reportError } from "../905/11";
 import { trackFileEvent } from "../figma_app/314264";
 import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay2 } from "../figma_app/948389";
-import { JB } from "../905/843553";
+import { BaseCustomError } from "../905/843553";
 import { fullscreenValue } from "../figma_app/455680";
 import { r8, uK, bK, oZ } from "../figma_app/178273";
 import { z8 } from "../figma_app/862289";
@@ -71,19 +71,19 @@ export function $$E6(e) {
 }
 var x = (e => (e[e.ALL = 0] = "ALL", e[e.TOP_LEVEL = 1] = "TOP_LEVEL", e))(x || {});
 let S = new Set([ActionType.CREATE_COMPONENT, ActionType.CREATE_FRAME, ActionType.DRAW_FRAME_AROUND_NODES, ActionType.STACK_SELECTION, ActionType.EXPORT_FRAME, ActionType.EXPORT_PICKER]);
-export class $$w2 extends JB {
+export class $$w2 extends BaseCustomError {
   constructor() {
     super(!1);
     this.name = "NoNameableLayersError";
   }
 }
-export class $$C3 extends JB {
+export class $$C3 extends BaseCustomError {
   constructor() {
     super(!1);
     this.name = "NoSelectedLayersError";
   }
 }
-export class $$T1 extends JB {
+export class $$T1 extends BaseCustomError {
   constructor(e) {
     super(!1);
     this.name = "LayerLimitExceededError";

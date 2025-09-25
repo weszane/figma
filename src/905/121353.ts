@@ -20,12 +20,12 @@ import { r as _$$r } from "../905/334940";
 import { o as _$$o } from "../905/785255";
 import { r as _$$r2 } from "../905/290294";
 import { D as _$$D } from "../905/572843";
-import { i_, Lz } from "../905/497882";
+import { isFieldValidated, getFieldValueOrDefault } from "../905/497882";
 import { a as _$$a } from "../905/94741";
 import { A as _$$A2 } from "../905/601732";
 import { __, tZ, Mm } from "../905/271611";
 import { t as _$$t3 } from "../905/104116";
-import { P as _$$P } from "../905/19648";
+import { CategorySelectDropdown } from "../905/19648";
 import { A as _$$A3 } from "../905/554063";
 import { A as _$$A4 } from "../905/425801";
 import { A as _$$A5 } from "../905/813387";
@@ -105,16 +105,16 @@ function ep({
   } = _$$o([{
     id: "details",
     checkpoints: [{
-      check: () => i_(e.fieldStates.name),
+      check: () => isFieldValidated(e.fieldStates.name),
       onFail: () => __(tZ.NAME_INPUT)
     }, {
-      check: () => i_(e.fieldStates.description),
+      check: () => isFieldValidated(e.fieldStates.description),
       onFail: () => __(tZ.DESCRIPTION_INPUT)
     }, {
-      check: () => i_(e.fieldStates.category),
+      check: () => isFieldValidated(e.fieldStates.category),
       onFail: () => __(tZ.CATEGORY_SELECT)
     }, {
-      check: () => i_(e.fieldStates.tagsV2) && i_(e.fieldStates.tagsV1),
+      check: () => isFieldValidated(e.fieldStates.tagsV2) && isFieldValidated(e.fieldStates.tagsV1),
       onFail: () => __(tZ.TAGS_SECTION)
     }],
     onFail: () => {
@@ -127,7 +127,7 @@ function ep({
   }, {
     id: "thumbnail",
     checkpoints: [{
-      check: () => i_(e.fieldStates.carouselMedia),
+      check: () => isFieldValidated(e.fieldStates.carouselMedia),
       onFail: () => {
         let t = e.fieldStates.carouselMedia;
         let i = "error" === t.status ? t.errors[0] : void 0;
@@ -153,16 +153,16 @@ function ep({
   }, {
     id: "advanced",
     checkpoints: [{
-      check: () => i_(e.fieldStates.profileHandle),
+      check: () => isFieldValidated(e.fieldStates.profileHandle),
       onFail: () => __(tZ.PROFILE_HANDLE_INPUT)
     }, {
-      check: () => i_(e.fieldStates.cocreators),
+      check: () => isFieldValidated(e.fieldStates.cocreators),
       onFail: () => __(tZ.COCREATORS_INPUT)
     }, {
-      check: () => i_(e.fieldStates.tosAccepted),
+      check: () => isFieldValidated(e.fieldStates.tosAccepted),
       onFail: () => __(tZ.TOS_AGREED_CHECKBOX)
     }, {
-      check: () => i_(e.fieldStates.supportContact),
+      check: () => isFieldValidated(e.fieldStates.supportContact),
       onFail: () => __(tZ.SUPPORT_CONTACT_INPUT)
     }],
     onFail: () => {
@@ -250,12 +250,12 @@ function ep({
           })
         }), jsx(Mm, {
           id: tZ.CATEGORY_SELECT,
-          children: e => jsx(_$$P, {
+          children: e => jsx(CategorySelectDropdown, {
             ref: e,
             categoryFieldManager: ea,
             ...er.category
           })
-        }), i_(e.fieldStates.category) && jsx(Mm, {
+        }), isFieldValidated(e.fieldStates.category) && jsx(Mm, {
           id: tZ.TAGS_SECTION,
           children: e => es.validV2Tags.length > 0 ? jsx(vj, {
             ref: e,
@@ -405,7 +405,7 @@ function ep({
       step: PublishModalState.OPENED
     });
   }, [Y]);
-  let ew = Lz(e.fieldStates.name, "");
+  let ew = getFieldValueOrDefault(e.fieldStates.name, "");
   let eC = useDebouncedCallback(() => {
     Y.current($$in, {
       step: PublishModalState.EDIT_NAME
@@ -414,7 +414,7 @@ function ep({
   useEffect(() => {
     ew && er.name.touched && eC();
   }, [ew, eC, er.name.touched]);
-  let eT = Lz(e.fieldStates.description, "");
+  let eT = getFieldValueOrDefault(e.fieldStates.description, "");
   let ek = useDebouncedCallback(() => {
     Y.current($$in, {
       step: PublishModalState.EDIT_DESCRIPTION

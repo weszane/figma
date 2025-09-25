@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import i from "classnames";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { getEmailDomain } from "../figma_app/416935";
 import { toTitleCase } from "../figma_app/930338";
 import { bv } from "../figma_app/421401";
@@ -73,7 +73,7 @@ export function $$R0(e) {
     },
     getSecondarySortValue: ({
       member: e
-    }) => e.assigned_at ? _$$A(e.assigned_at).unix() : 0,
+    }) => e.assigned_at ? dayjs(e.assigned_at).unix() : 0,
     sortSecondaryReversed: !0,
     cellComponent: ({
       member: a,

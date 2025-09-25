@@ -8,9 +8,9 @@ import { J as _$$J } from "../905/931050";
 import { getResourceDataOrFallback, Xm, gB, e1 as _$$e } from "../905/723791";
 import { Eh } from "../figma_app/617654";
 import { Rw } from "../figma_app/475472";
-import { Kq, ig, xZ } from "../figma_app/713624";
+import { TeamPropertyKey, TeamMembershipStatus, getInitialTeamStats } from "../figma_app/713624";
 import { Ki, _q } from "../figma_app/328188";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { Button } from "../905/521428";
 import { e as _$$e2 } from "../905/149844";
 import { A as _$$A } from "../905/891805";
@@ -260,8 +260,8 @@ let eV = registerModal(function ({
   let a = useDispatch();
   let r = useCurrentUserOrgId();
   let [o, d] = useState({
-    columnName: Kq.NAME,
-    sortingKey: Kq.NAME,
+    columnName: TeamPropertyKey.NAME,
+    sortingKey: TeamPropertyKey.NAME,
     isReversed: !1
   });
   let _ = useCallback(e => {
@@ -318,7 +318,7 @@ let eV = registerModal(function ({
   let F = [{
     name: getI18nString("teams_table.team_name"),
     className: "add_unassigned_teams_modal--nameColumn--H2d4L members_table--avatarColumn--SoUiA members_table--column--e-buT admin_settings_page--membersColumn--E3seT table--column--974RA",
-    sorting_key: Kq.NAME,
+    sorting_key: TeamPropertyKey.NAME,
     getSortValue: e => e.name,
     cellComponent: e => jsxs(AutoLayout, {
       direction: "horizontal",
@@ -388,7 +388,7 @@ let eV = registerModal(function ({
   }, {
     name: getI18nString("teams_table.owner"),
     className: "add_unassigned_teams_modal--ownerColumn--jLx2z",
-    sorting_key: Kq.OWNER,
+    sorting_key: TeamPropertyKey.OWNER,
     getSortValue: e => e.owner?.handle ? `a${e.owner.handle}` : `z${e.name}`,
     cellComponent: e => jsx(AutoLayout, {
       width: "fill-parent",
@@ -1209,7 +1209,7 @@ let tN = registerModal(function (e) {
               });
               x(!0);
             },
-            validateToken: lQ,
+            validateToken: noop,
             getSearchResults: e => {
               let t = new Ef([], {
                 keys: ["name"],
@@ -1275,8 +1275,8 @@ let tN = registerModal(function (e) {
 var tA = (e => (e[e.SEARCH = 0] = "SEARCH", e[e.FILTER = 1] = "FILTER", e))(tA || {});
 var tR = (e => (e.MEMBERSHIP = "MEMBERSHIP", e.ACCESS = "ACCESS", e))(tR || {});
 let tO = () => ({
-  [ig.JOINED]: getI18nString("teams_table.membership_filter.my_teams_option"),
-  [ig.NOT_JOINED]: getI18nString("teams_table.membership_filter.not_my_teams_option")
+  [TeamMembershipStatus.JOINED]: getI18nString("teams_table.membership_filter.my_teams_option"),
+  [TeamMembershipStatus.NOT_JOINED]: getI18nString("teams_table.membership_filter.not_my_teams_option")
 });
 function tL(e) {
   var t;
@@ -1338,7 +1338,7 @@ function tL(e) {
     onAddToWorkspace,
     onRemoveFromWorkspace
   } = e7(teamRoleRequests, el, ed, ec);
-  let e$ = useMemo(() => "loaded" === e.orgTeamCountsViewResult.status ? e.orgTeamCountsViewResult.data : xZ(), [e.orgTeamCountsViewResult]);
+  let e$ = useMemo(() => "loaded" === e.orgTeamCountsViewResult.status ? e.orgTeamCountsViewResult.data : getInitialTeamStats(), [e.orgTeamCountsViewResult]);
   let eB = useSelector(({
     selectedView: e
   }) => e);
@@ -1475,7 +1475,7 @@ function tL(e) {
     e.push({
       name: getI18nString("teams_table.team_name"),
       className: "paginated_teams_table--teamNameColumn--TacEL paginated_teams_table--column--egVf3 table--column--974RA",
-      sorting_key: Kq.NAME,
+      sorting_key: TeamPropertyKey.NAME,
       getSortValue: e => e.name,
       cellComponent: e => jsxs(AutoLayout, {
         children: [jsx(rE, {
@@ -1491,7 +1491,7 @@ function tL(e) {
     e.push({
       name: getI18nString("teams_table.owner"),
       className: "paginated_teams_table--ownerColumn--nbyvF paginated_teams_table--column--egVf3 table--column--974RA",
-      sorting_key: Kq.OWNER,
+      sorting_key: TeamPropertyKey.OWNER,
       getSortValue: e => e.owner?.handle ? `a${e.owner.handle}` : `z${e.name}`,
       cellComponent: e => e.owner ? jsx(_$$r2, {
         entity: e.owner,
@@ -1502,7 +1502,7 @@ function tL(e) {
     e.push({
       name: getI18nString("teams_table.projects"),
       className: "paginated_teams_table--projectsColumn--yfCnG paginated_teams_table--column--egVf3 table--column--974RA",
-      sorting_key: Kq.PROJECTS,
+      sorting_key: TeamPropertyKey.PROJECTS,
       getSortValue: e => e.projects ?? 0,
       sortNumerically: !0,
       cellComponent: e => renderI18nText("teams_table.project_count", {
@@ -1512,7 +1512,7 @@ function tL(e) {
     e.push({
       name: getI18nString("teams_table.members"),
       className: "paginated_teams_table--membersColumn--cYGDk paginated_teams_table--column--egVf3 table--column--974RA",
-      sorting_key: Kq.MEMBERS,
+      sorting_key: TeamPropertyKey.MEMBERS,
       getSortValue: e => "number" == typeof e.member_count ? e.member_count : -1,
       sortNumerically: !0,
       cellComponent: e => "number" == typeof e.member_count ? renderI18nText("teams_table.member_count", {
@@ -1521,7 +1521,7 @@ function tL(e) {
     });
     org.bigma_enabled && eQ.length > 0 && e.push({
       name: getI18nString("teams_table.enterprise.workspace"),
-      sorting_key: Kq.WORKSPACE,
+      sorting_key: TeamPropertyKey.WORKSPACE,
       getSortValue: e => e.workspace_id && eZ[e.workspace_id]?.name || "",
       className: "paginated_teams_table--workspaceColumn--PnQOi paginated_teams_table--column--egVf3 table--column--974RA",
       cellComponent: e6
@@ -1558,10 +1558,10 @@ function tL(e) {
         value: null
       }, {
         display: getI18nString("admin_filters.filter_values.my_teams"),
-        value: ig.JOINED
+        value: TeamMembershipStatus.JOINED
       }, {
         display: getI18nString("admin_filters.filter_values.not_my_teams"),
-        value: ig.NOT_JOINED
+        value: TeamMembershipStatus.NOT_JOINED
       }]
     }, ...(eG ? [{
       type: "workspaceFilter",
@@ -1797,9 +1797,9 @@ function tL(e) {
                 getDisplayText: e => tO()[e],
                 getSelectedDisplayText: e => {
                   switch (e) {
-                    case ig.JOINED:
+                    case TeamMembershipStatus.JOINED:
                       return getI18nString("teams_table.membership_filter.my_teams_label");
-                    case ig.NOT_JOINED:
+                    case TeamMembershipStatus.NOT_JOINED:
                       return getI18nString("teams_table.membership_filter.not_my_teams_label");
                     default:
                       return getI18nString("teams_table.membership_filter.all");
@@ -1809,7 +1809,7 @@ function tL(e) {
                 updateFilter: e => onFilter({
                   teamMembershipFilter: e
                 }),
-                values: Object.values(ig),
+                values: Object.values(TeamMembershipStatus),
                 dispatch: en
               }), jsxs(TrackedDiv, {
                 className: $u,
@@ -1822,7 +1822,7 @@ function tL(e) {
                 },
                 children: [jsx(FocusCheckbox, {
                   checked: filters.orphanedTeamFilter,
-                  onChange: lQ
+                  onChange: noop
                 }), renderI18nText("teams_table.teams_without_owners")]
               })]
             })]
@@ -1907,7 +1907,7 @@ export function $$tP0(e) {
   let [w, k] = useState("");
   let [E, C] = useState({});
   let [S, N] = useState({
-    columnName: Kq.NAME,
+    columnName: TeamPropertyKey.NAME,
     isReversed: !1
   });
   let {
@@ -1974,7 +1974,7 @@ export function $$tP0(e) {
     return {
       orgTeamCountsViewResult: m
     };
-  }(e.org.id, w, _$$R2(v.orgAccessFilter, v.discoverabilityFilter), v.orphanedTeamFilter, null !== v.teamMembershipFilter ? v.teamMembershipFilter === ig.JOINED : void 0, v.workspaceFilter);
+  }(e.org.id, w, _$$R2(v.orgAccessFilter, v.discoverabilityFilter), v.orphanedTeamFilter, null !== v.teamMembershipFilter ? v.teamMembershipFilter === TeamMembershipStatus.JOINED : void 0, v.workspaceFilter);
   let U = status !== APILoadingStatus.SUCCESS || !!fetchMore;
   return jsx(tL, {
     addOptimisticIds,

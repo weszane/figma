@@ -4,7 +4,7 @@ import { debugState } from "../905/407919";
 import { Ay } from "../905/931912";
 import { G } from "../figma_app/714966";
 import { $z } from "../905/62762";
-import { EA } from "../905/18800";
+import { consentAllowedAtom } from "../905/18800";
 import { trackDefinedFileEvent } from "../figma_app/314264";
 import { Nt } from "../figma_app/342355";
 import { a as _$$a } from "../905/882689";
@@ -81,7 +81,7 @@ export function $$h1({
   });
 }
 export function $$g0(e) {
-  let t = atomStoreManager.get(EA);
+  let t = atomStoreManager.get(consentAllowedAtom);
   $z({
     canUseCookieForAnalytics: t,
     geofence: {}

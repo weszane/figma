@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, memo } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ButtonPrimitive } from "../905/632989";
 import { s as _$$s } from "../905/403855";
 import { r as _$$r } from "../905/619088";
@@ -304,7 +304,7 @@ function J(e) {
     children: [jsx($$U2, {
       visible: !1,
       expanded: !1,
-      onMouseDown: lQ,
+      onMouseDown: noop,
       name: e.name
     }), jsx(X, {
       guid: t,

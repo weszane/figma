@@ -6,7 +6,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { R as _$$R } from "../905/256203";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { countGraphemes } from "../figma_app/819288";
 import { w4 } from "../905/445814";
@@ -21,12 +21,12 @@ import { selectViewAction } from "../905/929976";
 import { fA } from "../figma_app/543100";
 import { getSelectedView } from "../figma_app/386952";
 import { DUserRole, TGroupType } from "../figma_app/858344";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { atomStoreManager } from "../figma_app/27355";
 import C from "classnames";
 import { dN as _$$dN } from "../vendor/291472";
 import { P as _$$P } from "../905/347284";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { ph } from "../905/50769";
 import { iX } from "../6443/426443";
 import { In } from "../905/672640";
@@ -99,23 +99,23 @@ function B({
           orgUsers: {}
         },
         dispatch: d,
-        editorOnClear: lQ,
-        editorOnInsert: lQ,
+        editorOnClear: noop,
+        editorOnInsert: noop,
         mentionables: M,
         messageMeta: t,
         mountInputFocused: !0,
-        onCancel: lQ,
-        onFocus: lQ,
-        onSubmit: o ?? lQ,
-        onUpdateTextArea: lQ,
+        onCancel: noop,
+        onFocus: noop,
+        onSubmit: o ?? noop,
+        onUpdateTextArea: noop,
         placeholderText: e,
-        setIsEditorFocused: lQ,
+        setIsEditorFocused: noop,
         submitOnEnter: !1,
         typeahead: c,
         updateMessage: ([e, t]) => {
           r(e);
         }
-      }), jsx(_$$a, {
+      }), jsx(IntersectionSentinel, {
         onInitialLoad: e => m(!e),
         onIntersectionChange: e => m(!e.isIntersecting)
       })]
@@ -270,11 +270,11 @@ export function $$W1(e, t) {
 }
 let $ = {
   title: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   subtitle: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };

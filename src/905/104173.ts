@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { A } from "../905/17894";
+import { unsetSymbol } from "../905/17894";
 import { editorUtilities } from "../905/22009";
 import { nT } from "../905/448740";
 import { allCategoriesQuery } from "../figma_app/188671";
@@ -80,7 +80,7 @@ let $$g2 = {
     viewerModeField: i,
     localExtension: n
   }) => {
-    if (t?.category_id) return i?.currentValue === A ? A : (await $$h1({
+    if (t?.category_id) return i?.currentValue === unsetSymbol ? unsetSymbol : (await $$h1({
       figFile: e,
       currentViewerMode: i && i.currentValue,
       existingResourceContent: t,
@@ -97,7 +97,7 @@ let $$g2 = {
       key: "MISSING_CATEGORY",
       data: {}
     }];
-    if (t?.currentValue === A) return;
+    if (t?.currentValue === unsetSymbol) return;
     let s = await $$h1({
       figFile: e,
       currentViewerMode: t && t.currentValue,
@@ -125,7 +125,7 @@ let $$f4 = {
   fetchInitialValue: async ({
     urlSlug: e,
     viewerModeField: t
-  }) => t?.currentValue === A ? A : (await $$h1({
+  }) => t?.currentValue === unsetSymbol ? unsetSymbol : (await $$h1({
     figFile: void 0,
     existingResourceContent: void 0,
     currentViewerMode: t && t.currentValue,

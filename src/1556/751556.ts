@@ -58,7 +58,7 @@ import { kL, v0 } from "../figma_app/639088";
 import { nT } from "../1556/690522";
 import { ScreenReaderOnly } from "../905/172252";
 import { SubTrigger, MenuItemPrimitive } from "../905/465888";
-import { g as _$$g3 } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { resolveDisplayName } from "../figma_app/11961";
 import { switchCommunityProfileThunk } from "../figma_app/530167";
 import { K as _$$K } from "../1556/124168";
@@ -325,7 +325,7 @@ let eE = {
     paddingBlock: null,
     paddingTop: null,
     paddingBottom: null,
-    ..._$$g3.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   userName: {

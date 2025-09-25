@@ -89,7 +89,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { xF, m$, DY, HL } from "../5421/389127";
 import { useClickOutside } from "../905/1768";
 import { s as _$$s } from "../905/551945";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { A as _$$A2 } from "../905/639174";
 import { IMAGE_TYPE_VALUES } from "../905/966582";
 import { z as _$$z } from "../905/634240";
@@ -112,7 +112,7 @@ import { W as _$$W2 } from "../905/378870";
 import { f as _$$f2 } from "../905/335032";
 import { x as _$$x2 } from "../905/587214";
 import { LazyInputForwardRef } from "../905/408237";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { bL as _$$bL, c$ as _$$c$ } from "../905/867927";
 import { q as _$$q3 } from "../905/932270";
 import { G as _$$G } from "../905/865520";
@@ -957,7 +957,7 @@ function ti() {
       disabled: !imageSwapEnabled,
       children: jsx("div", {
         className: "xvy4d1p x78zum5 xl56j7k x6s0dn4 xy3p2pi x9f619 xb3r6kr x18xcxx1 xsb15dp",
-        children: d ? jsx(oW, {
+        children: d ? jsx(WAFImage, {
           src: d,
           alt: getI18nString("figmake.toolbar.image"),
           ...c
@@ -1003,7 +1003,7 @@ function tr({
         accept: IMAGE_TYPE_VALUES.join(","),
         onChange: s,
         className: "x1s85apg"
-      }), jsx(oW, {
+      }), jsx(WAFImage, {
         src: e,
         alt: getI18nString("figmake.toolbar.upload_alt"),
         className: "x193iq5w xmz0i5r x19kjcj4 x1tbiz1a x1xsqp64 xiy17q3"
@@ -1884,7 +1884,7 @@ function t6({
   return jsx(_$$R, {
     children: jsxs(_$$bL, {
       value: e,
-      onChange: n ? lQ : t,
+      onChange: n ? noop : t,
       legend: jsx(_$$q3, {
         children: getI18nString("figmake.toolbar.toggle_style")
       }),

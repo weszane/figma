@@ -35,7 +35,7 @@ import { Sn, wr } from '../469e6e40/875985';
 import { S as _$$S4 } from '../469e6e40/885592';
 import { k as _$$k2 } from '../469e6e40/952112';
 import { q as _$$q } from '../469e6e40/977739';
-import { Q as _$$Q } from '../905/11928';
+import { Ui3PositionType } from '../905/11928';
 import { isLoaded, isLoading } from '../905/18797';
 import { createModalConfig, registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
@@ -80,7 +80,7 @@ import { s as _$$s4 } from '../905/645504';
 import { adminPermissionConfig } from '../905/654645';
 import { A as _$$A3 } from '../905/658244';
 import { e0 as _$$e4 } from '../905/696396';
-import { IX } from '../905/712921';
+import { RenewalTermEnum } from '../905/712921';
 import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { gB, getResourceDataOrFallback, Xm } from '../905/723791';
@@ -89,7 +89,7 @@ import { OrganizationType } from '../905/833838';
 import { teamAPIClient } from '../905/834575';
 import { tb as _$$tb } from '../905/848667';
 import { EL, F_ } from '../905/858282';
-import { A as _$$A } from '../905/920142';
+import { dayjs } from '../905/920142';
 import { hideDropdownAction, selectViewAction } from '../905/929976';
 import { styleBuilderInstance } from '../905/941192';
 import { b as _$$b } from '../905/946806';
@@ -388,7 +388,7 @@ let e5 = withTracking(e => {
     dispatch,
     team
   } = e;
-  let d = billing.summary.monthly_subscription ? IX.MONTH : IX.YEAR;
+  let d = billing.summary.monthly_subscription ? RenewalTermEnum.MONTH : RenewalTermEnum.YEAR;
   let c = useCallback(e => {
     dispatch(II({
       emailList: e
@@ -940,14 +940,14 @@ function e8(e) {
     message: getI18nString('file_browser.file_browser_actions.team_member_fetch_error'),
     error: !0
   })) : u = _.data || {};
-  let m = _$$A().subtract(3, 'days');
-  let p = _$$A().subtract(30, 'days');
-  let x = _$$A().subtract(3, 'months');
+  let m = dayjs().subtract(3, 'days');
+  let p = dayjs().subtract(30, 'days');
+  let x = dayjs().subtract(3, 'months');
   let b = Object.values(u);
   n && (d2.set(Object.values(u)), b = d2.search(n));
   b = b.filter(e => {
     if (t.lastActiveFilter) {
-      let a = e.last_active ? _$$A(1e3 * e.last_active) : 0;
+      let a = e.last_active ? dayjs(1e3 * e.last_active) : 0;
       if (t.lastActiveFilter === UW.MORE_SEVEN_DAYS && a > m || t.lastActiveFilter === UW.MORE_THIRTY_DAYS && a > p || t.lastActiveFilter === UW.MORE_THREE_MONTHS && a > x) return !1;
     }
     return !!b_(e, t.seatTypeFilter) && (!t.billingIntervalFilter || !('current_seat_billing_interval' in e) || e.current_seat_billing_interval === t.billingIntervalFilter);
@@ -965,7 +965,7 @@ function e8(e) {
     }
   };
   Object.values(b).forEach(e => {
-    let t = e.last_active ? _$$A(1e3 * e.last_active) : 0;
+    let t = e.last_active ? dayjs(1e3 * e.last_active) : 0;
     if (t < x && (v.lastActive[UW.MORE_THREE_MONTHS] += 1), t < p && (v.lastActive[UW.MORE_THIRTY_DAYS] += 1), t < m && (v.lastActive[UW.MORE_SEVEN_DAYS] += 1), Ji(e, v), 'current_seat_billing_interval' in e && e.current_seat_billing_interval && v.billingInterval) {
       let t = e.current_seat_billing_interval;
       v.billingInterval[t] ??= 0;
@@ -1135,7 +1135,7 @@ let t$ = {
   aiFeaturesEnableButton: 'ai-features-enable-button'
 };
 function tB(e) {
-  return e ? _$$A(e).format('MMMM D, YYYY') : '';
+  return e ? dayjs(e).format('MMMM D, YYYY') : '';
 }
 function tG(e) {
   let t;
@@ -1436,7 +1436,7 @@ let tz = ({
   let p = _$$l({
     teamBillingSummary: e,
     hasOpenInvoice: !!m.data?.length,
-    currentDate: _$$A().toDate()
+    currentDate: dayjs().toDate()
   });
   switch (p?.id) {
     case _$$m.ADD_ANNUAL_PLAN:
@@ -1644,7 +1644,7 @@ let tH = ({
       dispatch: a
     })
   })), c) {
-    let n = e && !t || e && t ? IX.MONTH : IX.YEAR;
+    let n = e && !t || e && t ? RenewalTermEnum.MONTH : RenewalTermEnum.YEAR;
     u.push(jsx(x8, {
       label: getI18nString('plan_settings.auto_approval_settings'),
       description: getI18nString('plan_settings.auto_approval_settings_description'),
@@ -1744,7 +1744,7 @@ function an() {
   });
   return jsx(_$$X, {
     isShowing,
-    position: _$$Q.CENTER,
+    position: Ui3PositionType.CENTER,
     trackingContextName: 'TeamAdminAuthorityOverlay',
     title: renderI18nText('team_admin_authority_overlay.title'),
     description: renderI18nText('team_admin_authority_overlay.description'),
@@ -2024,12 +2024,12 @@ function aO(e) {
   let _ = useMemo(() => function (e, t) {
     if (!e.plan_canceled) return null;
     let a = [e.annual_subscription, e.monthly_subscription].map(e => e?.canceled_at ? e?.current_period_end : null).filter(isNotNullish);
-    let n = a.filter(e => _$$A(e).isAfter(t));
-    let s = ad()(n, e => _$$A(e).valueOf());
-    if (s) return _$$A(s).toDate();
-    let i = a.filter(e => _$$A(e).isBefore(t));
-    let r = al()(i, e => _$$A(e).valueOf());
-    return r ? _$$A(r).toDate() : null;
+    let n = a.filter(e => dayjs(e).isAfter(t));
+    let s = ad()(n, e => dayjs(e).valueOf());
+    if (s) return dayjs(s).toDate();
+    let i = a.filter(e => dayjs(e).isBefore(t));
+    let r = al()(i, e => dayjs(e).valueOf());
+    return r ? dayjs(r).toDate() : null;
   }(e.billingSummary, a), [e.billingSummary, a]);
   let u = useMemo(() => e.isBillingSummaryLoading || c.status !== 'loaded' ? null : _$$l({
     teamBillingSummary: e.billingSummary,

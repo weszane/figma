@@ -19,7 +19,7 @@ import { trackFileEventWithUser } from "../figma_app/901889";
 import { ignoreCommandOrShift } from "../905/63728";
 import { Vi, B4, tu, oJ } from "../figma_app/385215";
 import { ah, Dv } from "../905/763714";
-import { Av } from "../905/149328";
+import { getFileTypePx } from "../905/149328";
 import { WN } from "../figma_app/638601";
 import { pz } from "../figma_app/60079";
 import { ButtonBasePrimary } from "../figma_app/637027";
@@ -262,7 +262,7 @@ function eI({
   let M = useRef(null);
   let [P, F] = useState(0);
   let B = useDispatch();
-  let U = Av();
+  let U = getFileTypePx();
   let G = Math.min(window.innerHeight - U - 22, 465);
   useLayoutEffect(() => {
     x.current && y.current && R(G - x.current.offsetHeight - y.current.offsetHeight - 16 * P);
@@ -435,7 +435,7 @@ function ek({
   let G = useRef(null);
   let [K, z] = useState(0);
   let Y = useDispatch();
-  let J = Av();
+  let J = getFileTypePx();
   let q = Math.min(window.innerHeight - J - 22, 465);
   useLayoutEffect(() => {
     O.current && L.current && U(Math.min(q - O.current.offsetHeight - L.current.offsetHeight - 16 * K, 310));

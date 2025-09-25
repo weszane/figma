@@ -1,7 +1,7 @@
 import { KeyboardLayout, Fullscreen } from "../figma_app/763686";
 import { localStorageRef } from "../905/657224";
 import { getI18nString } from "../905/303541";
-import { FU } from "../905/26824";
+import { setKeyboardShortcutPanelTab } from "../905/26824";
 import { trackUserEvent } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { debugState } from "../905/407919";
@@ -124,7 +124,7 @@ export function $$S8() {
   return 0 === $$I3().length ? [] : [{
     name: "keyboard-layout-menu-option",
     callback: (e, t, r) => {
-      r(FU({
+      r(setKeyboardShortcutPanelTab({
         tab: "layout"
       }));
       fullscreenValue.triggerAction("toggle-keyboard-shortcuts");

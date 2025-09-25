@@ -30,14 +30,14 @@ import { noop } from "../905/813868";
 import { xG } from "../905/277373";
 import { M as _$$M } from "../figma_app/170366";
 import { getFullscreenViewEditorType, getCurrentPluginVersion, canRunPlugin } from "../figma_app/300692";
-import { R as _$$R } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { handlePluginError } from "../905/753206";
 import { HubTypeEnum } from "../figma_app/45218";
 import { PageTypeEnum } from "../figma_app/10554";
 import { hasLocalFileId } from "../figma_app/155287";
 import { mN, Wh } from "../figma_app/985200";
 import { h as _$$h } from "../figma_app/752483";
-import { nO } from "../905/12045";
+import { runPluginParameterEntry } from "../905/12045";
 import { p as _$$p } from "../905/42189";
 import { s as _$$s2 } from "../figma_app/504088";
 let W = _$$M();
@@ -95,7 +95,7 @@ export function $$J0(e, t, i) {
   switch (i.type) {
     case "insert-local-widget":
       {
-        if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_WIDGET);
+        if (O) return PluginManager.instance.handleUpgrade(PluginAction.RUN_WIDGET);
         if (!Z(e)) {
           reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
             tags: {
@@ -123,7 +123,7 @@ export function $$J0(e, t, i) {
       }
     case "insert-installed-widget":
       {
-        if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_WIDGET);
+        if (O) return PluginManager.instance.handleUpgrade(PluginAction.RUN_WIDGET);
         if (!Z(e)) {
           reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
             tags: {
@@ -148,7 +148,7 @@ export function $$J0(e, t, i) {
       }
     case "run-local-plugin":
       {
-        if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
+        if (O) return PluginManager.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
         if (!$(e)) {
           reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
             tags: {
@@ -158,7 +158,7 @@ export function $$J0(e, t, i) {
           return;
         }
         if (i.parameterOnly && i.parameterEntry) {
-          nO(i, t, fullscreenValue.dispatch);
+          runPluginParameterEntry(i, t, fullscreenValue.dispatch);
           return;
         }
         let r = localExtensions[i.localFileId];
@@ -177,7 +177,7 @@ export function $$J0(e, t, i) {
         let s = canRunPlugin({
           plugin: r
         });
-        s.canRun ? _$$R.instance.enqueue({
+        s.canRun ? PluginManager.instance.enqueue({
           mode: "run-forever",
           runPluginArgs: {
             plugin: r,
@@ -198,7 +198,7 @@ export function $$J0(e, t, i) {
       }
     case "run-installed-plugin":
       {
-        if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
+        if (O) return PluginManager.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
         if (!$(e)) {
           reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
             tags: {
@@ -208,7 +208,7 @@ export function $$J0(e, t, i) {
           return;
         }
         if (i.parameterOnly && i.parameterEntry) {
-          nO(i, t, fullscreenValue.dispatch);
+          runPluginParameterEntry(i, t, fullscreenValue.dispatch);
           return;
         }
         let r = function (e, t) {
@@ -242,7 +242,7 @@ export function $$J0(e, t, i) {
         let s = canRunPlugin({
           plugin: r
         });
-        s.canRun ? _$$R.instance.enqueue({
+        s.canRun ? PluginManager.instance.enqueue({
           mode: "run-forever",
           runPluginArgs: {
             plugin: r,
@@ -263,12 +263,12 @@ export function $$J0(e, t, i) {
         return;
       }
     case "set-text-review-plugin":
-      if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
+      if (O) return PluginManager.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
       updateActiveTextReviewPlugin(i.textReviewPluginInfo);
       $4.reset();
       return;
     case "run-last":
-      if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
+      if (O) return PluginManager.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
       fullscreenValue.triggerAction("plugins-run-last", {
         source: "menu"
       });
@@ -398,7 +398,7 @@ export function $$J0(e, t, i) {
         return;
       }
     case "publish-widget":
-      if (O) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
+      if (O) return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
       if (!openFile) {
         q();
         return;
@@ -416,7 +416,7 @@ export function $$J0(e, t, i) {
         return;
       }
     case "create-new-plugin":
-      if (O) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
+      if (O) return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h,
         data: {
@@ -425,7 +425,7 @@ export function $$J0(e, t, i) {
       }));
       return;
     case "create-new-widget":
-      if (O) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
+      if (O) return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h,
         data: {
@@ -434,13 +434,13 @@ export function $$J0(e, t, i) {
       }));
       return;
     case "import-widget-from-manifest":
-      if (O) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
+      if (O) return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
       fullscreenValue.dispatch(JZ({
         resourceType: "widget"
       }));
       return;
     case "import-plugin-from-manifest":
-      if (O) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
+      if (O) return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
       fullscreenValue.dispatch(JZ({
         resourceType: "plugin"
       }));

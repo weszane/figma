@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component, useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { TabLoop } from "../905/718764";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
@@ -357,7 +357,7 @@ export class $$R0 extends Component {
             ctaText: e.ctaText,
             dismissModal: this.props.dismissModal,
             onClickPrimaryCta: this.props.onClickPrimaryCta,
-            onClickSecondaryCta: e.preventDismissOnClickSecondaryCta ? lQ : this.props.dismissModal,
+            onClickSecondaryCta: e.preventDismissOnClickSecondaryCta ? noop : this.props.dismissModal,
             secondaryCtaText: e.secondaryCtaText,
             shouldCenterArrow: e.shouldCenterArrow,
             shouldCenterModal: e.shouldCenterModal,

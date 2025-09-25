@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useCallback, Fragment as _$$Fragment } fro
 import { bL, l9, mc, c$, wv } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { r as _$$r } from "../905/571562";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
@@ -258,11 +258,11 @@ export function $$L2({
 }
 let P = {
   selectPrimaryText: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   selectSecondaryText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "xoq6bns",
     maxWidth: "x256u9z",
     textWrap: "xk4td0m",

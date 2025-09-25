@@ -1,9 +1,9 @@
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { truncate } from "../figma_app/930338";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Ro } from "../figma_app/805373";
-export let $$o0 = ex("user_info", function (e) {
+export let $$o0 = registerTooltip("user_info", function (e) {
   let {
     userImgUrl,
     userHandle

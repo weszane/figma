@@ -30,7 +30,7 @@ import { fetchTeamRoles } from "../905/672897";
 import { FEditorType } from "../figma_app/53721";
 import { SelectorType } from "../figma_app/707808";
 import { teamAPIClient } from "../905/834575";
-import { l as _$$l } from "../905/26554";
+import { fullscreenRestoreModal } from "../905/26554";
 import { on } from "../figma_app/292324";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { getFullscreenViewFile } from "../figma_app/516028";
@@ -117,7 +117,7 @@ let $$H = createOptimistThunk((e, t, {
         let n = findLibraryNameForAsset(i, f.library.movedLibraryItems.local, f.library.publishedByLibraryKey.components, t) || void 0;
         let r = await getFullscreenViewFile(e);
         r?.canEdit ? e.dispatch(showModalHandler({
-          type: _$$l,
+          type: fullscreenRestoreModal,
           data: {
             nodeId: i,
             movedToFile: n

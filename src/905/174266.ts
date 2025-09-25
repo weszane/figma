@@ -10,7 +10,7 @@ import { memo, useRef, useCallback, useEffect, useMemo, createContext } from "re
 import { useFplStrings } from "../figma_app/415899";
 import { ensureContext } from "../905/61417";
 import { defaultComponentAttribute } from "../905/577641";
-import { y as _$$y } from "../905/658036";
+import { isModifierKey } from "../905/658036";
 import { T } from "../905/745591";
 let p = memo(function (e) {
   return jsx("svg", {
@@ -76,7 +76,7 @@ function _({
         0 === l.subscriberCount && i?.("dismiss");
       },
       onKeyDown: e => {
-        _$$y(e) || "Escape" !== e.key || i?.("dismiss");
+        isModifierKey(e) || "Escape" !== e.key || i?.("dismiss");
       },
       ...o,
       children: jsx("div", {

@@ -4,7 +4,7 @@ import { TextWithTruncation } from "../905/984674";
 import { UpgradeAction } from "../905/370443";
 import { Ho } from "../figma_app/236178";
 import { rq } from "../905/425180";
-import { R } from "../905/11928";
+import { NotModalType } from "../905/11928";
 export function $$c0(e) {
   let t = Ho(e.libraryKey) ? jsx(TextWithTruncation, {
     children: renderI18nText("design_systems.libraries_modal.confirm_override.description_org")
@@ -39,7 +39,7 @@ export function $$c0(e) {
       children: renderI18nText("design_systems.libraries_modal.confirm_override.title")
     }),
     trackingContextName: "confirm_library_override_callout",
-    zIndex: R.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 export const X = $$c0;

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { t as _$$t } from "../905/150656";
 import { ButtonPrimitive } from "../905/632989";
 import { k as _$$k } from "../905/792988";
@@ -49,7 +49,7 @@ import { z as _$$z } from "../905/654860";
 import { cq } from "../905/794154";
 import { H as _$$H } from "../905/286442";
 import { _M } from "../905/487011";
-import { Jc, Sn } from "../905/946805";
+import { AssetTabType, ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { Q8, Rt, dd } from "../figma_app/604494";
 import { o as _$$o } from "../905/223420";
@@ -357,7 +357,7 @@ export function $$eR6({
   let tC = tN && tN.length > 20;
   let tw = jsxs(fu, {
     value: tc.activeTab,
-    onChange: lQ,
+    onChange: noop,
     numItems: to ? 2 : 1,
     children: [jsx(oz, {
       tabId: Qx.PLAN_FILE_ASSETS,
@@ -426,7 +426,7 @@ export function $$eR6({
   _$$h(() => (analyticsEventManager.trackDefinedEvent("asset_search.actions_search_panel_open", {
     ...tb
   }), () => {
-    $$eL4(atomStoreManager.get(Q8), lQ, Q, !0, tq, G4.ACTIONS_ASSETS_TAB_DETAIL);
+    $$eL4(atomStoreManager.get(Q8), noop, Q, !0, tq, G4.ACTIONS_ASSETS_TAB_DETAIL);
     atomStoreManager.set(q4);
     ta({
       type: _$$I.ALL
@@ -724,7 +724,7 @@ export function $$eD0() {
   $I({
     moduleToOpen: {
       type: "tab",
-      module: Jc.ASSETS
+      module: AssetTabType.ASSETS
     },
     trackingData: {
       source: "onboarding_tour_visual_search_callout"
@@ -776,7 +776,7 @@ export function $$ek2({
             initialTab: e
           }),
           beforeModuleOpen: () => jp(G4.ACTIONS_SEARCH_BAR_ICON),
-          name: Sn.VISUAL_SEARCH
+          name: ExtensionFeatureKey.VISUAL_SEARCH
         },
         trackingData: {
           source: "search_bar_visual_search_button"
@@ -824,7 +824,7 @@ export function $$eM3(e) {
           closeOnEscape: !0
         }) : jsx(WS, {}),
         beforeModuleOpen: () => qF(G4.ACTIONS_SEARCH_BAR_PASTED_IMAGE, r),
-        name: Sn.VISUAL_SEARCH
+        name: ExtensionFeatureKey.VISUAL_SEARCH
       },
       trackingData: {
         source: G4.ACTIONS_SEARCH_BAR_PASTED_IMAGE

@@ -16,7 +16,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { RecordingPureComponent, handleMouseEvent, handleKeyboardEvent, SKIP_RECORDING, handleGenericEvent, generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { bG } from "../905/149328";
+import { getThemePx } from "../905/149328";
 import { generateUUIDv4 } from "../905/871474";
 import { R as _$$R } from "../905/307199";
 import { gw, wv } from "../figma_app/236327";
@@ -624,7 +624,7 @@ class et extends RecordingPureComponent {
     return this.props.dropdownMarginBottom || 8;
   }
   getDropdownMarginTop() {
-    return this.getDropdownMarginBottom() + bG();
+    return this.getDropdownMarginBottom() + getThemePx();
   }
   positionForFormattedValue(e) {
     let t = 0;

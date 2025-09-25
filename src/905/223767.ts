@@ -26,7 +26,7 @@ import { getEditableTeamsWithoutPaidAccess } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
 import { N as _$$N } from "../905/809096";
 import { ModalView } from "../figma_app/918700";
-import { O as _$$O } from "../905/6519";
+import { PlanComparisonChart } from "../905/6519";
 import { I as _$$I } from "../905/641938";
 function O(e) {
   let t = useDispatch();
@@ -84,7 +84,7 @@ function O(e) {
             innerText: "close"
           }), jsx("div", {
             className: "upgrade_choose_plan_modal--planModalBody--cFsix",
-            children: jsx(_$$O, {
+            children: jsx(PlanComparisonChart, {
               chooseOrgPlan: () => {
                 t(hideModal());
                 t(Bq({

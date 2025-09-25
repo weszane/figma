@@ -8,7 +8,7 @@ import d from "classnames";
 import u from "../vendor/241899";
 import { useHandleKeyboardEvent, SKIP_RECORDING, generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Yl, j4, W3 } from "../905/232641";
 import { getVisibleTheme } from "../905/640017";
@@ -190,7 +190,7 @@ function X(e) {
           className: pi
         }), jsx("div", {
           className: nO,
-          children: l && jsx(oW, {
+          children: l && jsx(WAFImage, {
             src: l,
             alt: brush.name
           })
@@ -426,7 +426,7 @@ let ei = forwardRef((e, t) => {
           className: nO,
           children: e.isMixed ? jsx("div", {
             children: renderI18nText("common.mixed")
-          }) : o && jsx(oW, {
+          }) : o && jsx(WAFImage, {
             style: {
               width: "100%"
             },

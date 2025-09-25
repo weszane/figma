@@ -10,7 +10,7 @@ import { getFeatureFlags } from "../905/601108";
 import m from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { wR } from "../905/346715";
@@ -98,7 +98,7 @@ export function $$w0() {
           })]
         })]
       })
-    }), jsx(oW, {
+    }), jsx(WAFImage, {
       src: buildUploadUrl("1afa222e66cf25ca6e6364b97885e5354321145f"),
       alt: "Connected projects logo",
       width: 115,

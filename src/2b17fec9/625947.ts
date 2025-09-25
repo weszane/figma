@@ -42,10 +42,10 @@ import { i as _$$i6 } from '../642/423085';
 import { J as _$$J } from '../642/485582';
 import { k as _$$k6 } from '../642/978258';
 import { reportError } from '../905/11';
-import { D as _$$D } from '../905/12032';
+import { overlayStateAtom } from '../905/12032';
 import { isNullOrFailure, useIsLoaded, useIsLoading } from '../905/18797';
 import { i as _$$i9 } from '../905/22844';
-import { qY, VG } from '../905/23253';
+import { setupPlaybackHandler, getImagePaintSignedUrl } from '../905/23253';
 import { a as _$$a6 } from '../905/29104';
 import { z4 as _$$z7 } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
@@ -147,7 +147,7 @@ import { L as _$$L2 } from '../905/453756';
 import { $ as _$$$3, h as _$$h8 } from '../905/455748';
 import { K as _$$K4 } from '../905/459096';
 import { AutoLayout } from '../905/470281';
-import { V as _$$V3 } from '../905/480825';
+import { PluginImage } from '../905/480825';
 import { formatI18nMessage } from '../905/482208';
 import { u as _$$u3 } from '../905/486140';
 import { e2 as _$$e1 } from '../905/486443';
@@ -190,10 +190,10 @@ import { b as _$$b4 } from '../905/635568';
 import { z as _$$z5 } from '../905/654860';
 import { getStorage } from '../905/657224';
 import { L as _$$L } from '../905/657783';
-import { oW as _$$oW2 } from '../905/675859';
+import { WAFImage } from '../905/675859';
 import { F as _$$F8 } from '../905/680873';
 import { p as _$$p8 } from '../905/682418';
-import { g as _$$g } from '../905/687265';
+import { textDisplayConfig } from '../905/687265';
 import { E as _$$E7 } from '../905/690713';
 import { PopoverPrimitiveContainer, usePopoverPrimitive } from '../905/691059';
 import { e0 as _$$e8 } from '../905/696396';
@@ -224,7 +224,6 @@ import { f as _$$f9 } from '../905/809171';
 import { EventShield } from '../905/821217';
 import { z as _$$z6 } from '../905/821223';
 import { KeyboardFocusManager } from '../905/826900';
-import { noop } from '../905/834956';
 import { dY as _$$dY, sU as _$$sU, WM } from '../905/838765';
 import { useCurrentUserOrg } from '../905/845253';
 import { BK, Um } from '../905/848862';
@@ -245,13 +244,13 @@ import { is as _$$is } from '../905/904596';
 import { z as _$$z3 } from '../905/905430';
 import { n as _$$n6 } from '../905/913636';
 import { e as _$$e3 } from '../905/916195';
-import { A as _$$A4 } from '../905/920142';
+import { dayjs } from '../905/920142';
 import { Ow } from '../905/921418';
 import { useFullscreenReady } from '../905/924253';
-import { a as _$$a2 } from '../905/925868';
+import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, showDropdownThunk } from '../905/929976';
 import { q as _$$q4 } from '../905/932270';
-import { lQ as _$$lQ } from '../905/934246';
+import { noop } from 'lodash-es';
 import { selectUserFlag } from '../905/940356';
 import { styleBuilderInstance } from '../905/941192';
 import { p as _$$p9 } from '../905/951634';
@@ -1152,7 +1151,7 @@ function tc({
 }) {
   return jsxs(Fragment, {
     children: [jsx('div', {
-      ..._$$xk(i ? _$$g.textBodyMediumStrong : _$$g.textBodyMedium),
+      ..._$$xk(i ? textDisplayConfig.textBodyMediumStrong : textDisplayConfig.textBodyMedium),
       children: e
     }), jsx('div', {
       className: 'xm2njfp x8x9d4c',
@@ -1178,7 +1177,7 @@ function tu({
     }), jsx(ButtonLargeWide, {
       onClick: t,
       children: jsx('span', {
-        ..._$$xk(_$$g.textBodyMediumStrong),
+        ..._$$xk(textDisplayConfig.textBodyMediumStrong),
         children: getI18nString('whiteboard.shapes_sidebar.view_plans')
       })
     })]
@@ -1928,7 +1927,7 @@ function tz({
   }, []);
   return jsxs(Fragment, {
     children: [jsx('div', {
-      ..._$$xk(_$$g.textBodyMediumStrong, tW.otherLibrariesHeaderRow, a && tW.withBottomBorder),
+      ..._$$xk(textDisplayConfig.textBodyMediumStrong, tW.otherLibrariesHeaderRow, a && tW.withBottomBorder),
       'style': {
         height: GN
       },
@@ -2085,7 +2084,7 @@ function t$() {
     'ref': e,
     'size': qm,
     'defaultSize': qm,
-    'onResize': _$$lQ,
+    'onResize': noop,
     'className': ex()(_$$cx, cssBuilderInstance.relative.wFitContent.flex.flexShrink1.flexGrow1.overflowAuto.$, Dm),
     'disableResizing': !0,
     'side': 'right',
@@ -3535,7 +3534,7 @@ function n5() {
   }
   {
     let t = _$$mW(e, 'seen_fj_upsell_draft_modal_1') ? _$$mW(e, 'seen_fj_upsell_draft_modal_2') ? _$$mW(e, 'seen_fj_upsell_draft_modal_3') ? null : s.seen_fj_upsell_draft_modal_2.fileKey !== n || s.seen_fj_upsell_draft_modal_2.sessionId !== r ? 'seen_fj_upsell_draft_modal_3' : null : s.seen_fj_upsell_draft_modal_1.fileKey !== n || s.seen_fj_upsell_draft_modal_1.sessionId !== r ? 'seen_fj_upsell_draft_modal_2' : null : 'seen_fj_upsell_draft_modal_1';
-    return !t || _$$A4(a).add(7, 'day').isSameOrAfter(_$$A4()) ? null : jsx(n4, {
+    return !t || dayjs(a).add(7, 'day').isSameOrAfter(dayjs()) ? null : jsx(n4, {
       mainText: n9(t),
       userFlag: t,
       secondaryText: n8(t),
@@ -3865,7 +3864,7 @@ let av = forwardRef((e, t) => {
         }) : C(),
         children: [jsx('div', {
           className: af,
-          children: m && h ? jsx(_$$V3, {
+          children: m && h ? jsx(PluginImage, {
             plugin: h,
             loading: 'lazy',
             alt: ''
@@ -4049,7 +4048,7 @@ let aT = memo(e => {
             className: 'browse_plugins_universal_modal_tiles--redDot--rXNiG red_dot--baseRedDot--pgZV7'
           }), jsx('div', {
             className: af,
-            children: jsx(_$$V3, {
+            children: jsx(PluginImage, {
               plugin: pluginVersion,
               loading: 'lazy',
               alt: '',
@@ -4759,7 +4758,7 @@ function s_({
             })
           }), jsx(zx.Center, {
             children: jsx(_$$i4, {
-              insertTemplate: _$$lQ,
+              insertTemplate: noop,
               isInsertingTemplate: isInsertingTemplate(primaryKey),
               shouldUseOpaqueBackground: !0,
               children: Ve(RD.CURRENT_FILE)
@@ -6222,7 +6221,7 @@ function la(e) {
         templateInsertionLocation: RD.CURRENT_FILE
       }), !e.teamTemplatesFromSearchIsLoading && jsx('div', {
         className: cssBuilderInstance.relative.$,
-        children: jsx(_$$a2, {
+        children: jsx(IntersectionSentinel, {
           'className': cssBuilderInstance.absolute.h300.$,
           'style': {
             top: '-150px'
@@ -6629,7 +6628,7 @@ function lN({
           type: _$$n4.TeamTemplateLg,
           template: e
         }))
-      }), jsx(_$$a2, {
+      }), jsx(IntersectionSentinel, {
         className: cssBuilderInstance.relative.$,
         style: {
           bottom: '250px'
@@ -6991,7 +6990,7 @@ function lF({
     requestLoadMoreTeamTemplatesFromSearch
   } = _$$Ib();
   let W = useCurrentUserOrg();
-  let z = useAtomWithSubscription(_$$D);
+  let z = useAtomWithSubscription(overlayStateAtom);
   useEffect(() => {
     z && !_$$l7.has(z) && handleAtomEvent({
       id: _$$X,
@@ -7202,7 +7201,7 @@ function lF({
             templates: n
           })
         })
-      }, e)), jsx(_$$a2, {
+      }, e)), jsx(IntersectionSentinel, {
         'data-testid': 'load-more-teams',
         'className': cssBuilderInstance.relative.$,
         'style': {
@@ -8101,7 +8100,7 @@ function d9({
           e.key !== 'Enter' || c || (e.preventDefault(), u(!0), d.focus());
         }
       },
-      onClick: _$$lQ,
+      onClick: noop,
       ref: p,
       children: getI18nString('whiteboard.ai_modal.edit_prompt_button')
     }), jsx(_$$a7, {
@@ -8828,7 +8827,7 @@ async function c7(e) {
   try {
     let t = _$$R4(e);
     return {
-      content: await VG(t),
+      content: await getImagePaintSignedUrl(t),
       type: 'image'
     };
   } catch (e) {
@@ -9692,7 +9691,7 @@ function uB() {
           }
         }
       });
-      let j = qY(g);
+      let j = setupPlaybackHandler(g);
       t([...o, g.id]);
       l && l.length > 0 && WhiteboardCanvasAIBindings?.deleteGeneratedNodes(l);
       try {
@@ -9936,7 +9935,7 @@ let uV = {
     'color': (e ? Tj.textFigjam : Tj.textSecondary) == null ? null : 'xfx01vb',
     'backgroundColor': (e ? Tj.bgFigjamTertiary : null) == null ? null : 'xr5ldyu',
     '--color-icon': (e ? Tj.iconFigjam : Tj.iconSecondary) == null ? null : 'xhxir3b',
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     '$$css': !0
   }, {
     '--color': (e ? Tj.textFigjam : Tj.textSecondary) != null ? e ? Tj.textFigjam : Tj.textSecondary : void 0,
@@ -10929,7 +10928,7 @@ function hZ({
             'value': i,
             'aria-label': n[t],
             'htmlAttributes': {
-              onPointerUp: e ? () => h(i) : _$$lQ
+              onPointerUp: e ? () => h(i) : noop
             },
             'children': n[t]
           }, generateRecordingKey('shapeWithTextFillTypeKey', hU[t]));
@@ -15127,7 +15126,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     (y && t || v && n) && (e = Array.isArray(i) ? i.length > 0 ? i[0].a : void 0 : i.a);
   }
   return p ? jsx(_$$$n, {
-    onClick: _$$lQ,
+    onClick: noop,
     active: 'NONE',
     caret: 'down',
     tooltip: getI18nString('whiteboard.no-edit-hidden-section-tooltip'),
@@ -15716,7 +15715,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
             children: jsx(Fragment, {
               children: jsx(FormattedInputVariant1, {
                 formatter: e,
-                onChange: _$$lQ,
+                onChange: noop,
                 className: FY,
                 property: null,
                 size: C.length,
@@ -15773,7 +15772,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
           className: QR,
           dataTestId: 'whiteboardTextStyleNumberInputDataTestId',
           formatter: e,
-          onChange: _$$lQ,
+          onChange: noop,
           onKeyDown: g,
           placeholder: C,
           property: _.length === 1 ? _[0] : null,
@@ -16777,7 +16776,7 @@ let x4 = memo(() => {
         })
       }), jsx(MenuContainerComp, {
         children: jsx(x5, {
-          onClose: _$$lQ
+          onClose: noop
         })
       })]
     })
@@ -17829,7 +17828,7 @@ function g9({
   }, [i, e, p, t]);
   i || (x = t.map(e => jsx(_$$c$3, {
     value: e,
-    icon: jsx(_$$oW2, {
+    icon: jsx(WAFImage, {
       src: e.album_art,
       alt: `album art for ${e.title}`,
       className: g5
@@ -17842,7 +17841,7 @@ function g9({
     },
     options: x,
     formatOption: e => g8.format(e.props.value),
-    getIcon: e => jsx(_$$oW2, {
+    getIcon: e => jsx(WAFImage, {
       src: e.props.value.album_art,
       alt: `album art for ${e.props.value.album_art.title}`,
       className: g5
@@ -19720,7 +19719,7 @@ function jd(e) {
       'turntable--spinningAlbumXSmall--vzhVj': e.size === 'xsmall',
       'turntable--spinningAlbumLarge--SWUZ2': e.size === 'large'
     }),
-    children: [r && jsx(_$$oW2, {
+    children: [r && jsx(WAFImage, {
       className: ex()('turntable--spinningAlbumImage--H-qwO', {
         'turntable--spinningAlbumPlaying--UDk-I': t?.isPaused === !1,
         [jn]: !n
@@ -22451,7 +22450,7 @@ function yj(e) {
     m();
   }, [m]);
   return jsx('div', {
-    onTouchEnd: muteOnTouch ? f : _$$lQ,
+    onTouchEnd: muteOnTouch ? f : noop,
     children: jsx(_$$K7, {
       'onClick': m,
       'className': ex()('volume_control_button--button--6JyR-', {

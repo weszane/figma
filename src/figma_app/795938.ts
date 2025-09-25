@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import a from "classnames";
 import { formatNumber } from "../figma_app/930338";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -18,10 +18,10 @@ import { ProfileRouteState } from "../905/934145";
 import { TrackedLink } from "../figma_app/831799";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { ResourceTypeNoComment, isWidget, isPlugin } from "../figma_app/45218";
-import { V } from "../905/480825";
+import { PluginImage } from "../905/480825";
 import { dn } from "../figma_app/994403";
 import { Wc } from "../figma_app/947784";
-import { my } from "../905/14017";
+import { ResourceTile } from "../905/14017";
 import { BQ, zA, ZW, XO, Sl, nJ, $c, wr, JM, IQ, ZR, A$, HL, gO, zG, r6, $P, nz, Az, mU, QX, JQ, jm, vR } from "../figma_app/583284";
 import { A as _$$A } from "../1617/424579";
 var s = a;
@@ -75,7 +75,7 @@ export function $$R0({
   return jsxs("div", {
     className: Sl,
     "data-testid": "hub-file-tile",
-    children: [jsx(_$$a, {
+    children: [jsx(IntersectionSentinel, {
       onIntersectionChange: e => r?.(e)
     }), jsx(A6, {
       to: buildCommunityPathById({
@@ -106,7 +106,7 @@ export function $$R0({
           showMonetizationBadge: !1
         })]
       })
-    }), !t && jsx(my, {
+    }), !t && jsx(ResourceTile, {
       resource: e,
       type: ResourceTypeNoComment.HUB_FILE
     })]
@@ -125,7 +125,7 @@ export function $$L4({
   return jsxs("div", {
     className: IQ,
     "data-testid": "plugin-tile",
-    children: [jsx(_$$a, {
+    children: [jsx(IntersectionSentinel, {
       onIntersectionChange: e => r?.(e)
     }), jsx(A6, {
       to: buildCommunityPathById({
@@ -140,7 +140,7 @@ export function $$L4({
         className: s()(XO, $c),
         children: [jsx("div", {
           className: ZR,
-          children: jsx(V, {
+          children: jsx(PluginImage, {
             plugin: c,
             alt: `Figma plugin "${c.name}"`,
             onLoad: e => e.target.style.opacity = "1",
@@ -161,7 +161,7 @@ export function $$L4({
           })]
         })]
       })
-    }), !t && jsx(my, {
+    }), !t && jsx(ResourceTile, {
       resource: e,
       type: ResourceTypeNoComment.PLUGIN
     })]
@@ -180,7 +180,7 @@ export function $$P3({
   return jsxs("div", {
     className: HL,
     "data-testid": "widget-tile",
-    children: [jsx(_$$a, {
+    children: [jsx(IntersectionSentinel, {
       onIntersectionChange: e => r?.(e)
     }), jsx(A6, {
       to: buildCommunityPathById({
@@ -210,7 +210,7 @@ export function $$P3({
           })]
         })]
       })
-    }), !t && jsx(my, {
+    }), !t && jsx(ResourceTile, {
       resource: e,
       type: ResourceTypeNoComment.WIDGET
     })]

@@ -3,7 +3,7 @@ import { getResourceDataOrFallback } from "../905/663269";
 import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { w } from "../905/281010";
+import { accountTypeRequestHandler } from "../905/281010";
 export function $$d1(e) {
   let t = getResourceDataOrFallback(e.createdAt) || new Date();
   let r = Date.now() - t.getTime() < 2592e5;
@@ -33,7 +33,7 @@ export function $$c0() {
   };
   return {
     nudgeUpgradeRequest: r => {
-      w.nudgeRequest({
+      accountTypeRequestHandler.nudgeRequest({
         request_id: r
       }).then(r => {
         if (200 !== r.status) {

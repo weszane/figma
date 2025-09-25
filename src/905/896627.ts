@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { A } from "../905/17894";
+import { unsetSymbol } from "../905/17894";
 export function $$a0(e, t) {
   useEffect(() => {
     let {
@@ -8,7 +8,7 @@ export function $$a0(e, t) {
       setValue,
       resetValue
     } = e;
-    if (currentValue === A) return;
+    if (currentValue === unsetSymbol) return;
     let o = "error" === status ? e.errors : [];
     if (0 !== o.length) {
       for (let e of o) if ("validation" === e.type && t({

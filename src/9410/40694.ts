@@ -6,7 +6,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { SourceType } from "../figma_app/763686";
 import d from "classnames";
 import { Point } from "../905/736624";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { addFaceStampToRecentsAction } from "../figma_app/147952";
@@ -156,7 +156,7 @@ function N(e) {
     htmlAttributes: {
       "data-testid": `facestamp-${e.username}${e.mini ? "-mini" : ""}`
     },
-    children: jsx(oW, {
+    children: jsx(WAFImage, {
       draggable: !1,
       src: e.stampImageUrl,
       className: c()(iE, {
@@ -178,7 +178,7 @@ function A(e) {
     return new Point(50, 50).scale(zoomScale);
   }();
   let i = e.dragState.dragPosition.subtract(new Point(e.dragState.grabbedPointerPercentageOffset.x * t.x, e.dragState.grabbedPointerPercentageOffset.y * t.y));
-  return createPortal(jsx(oW, {
+  return createPortal(jsx(WAFImage, {
     alt: "",
     className: c()($J, {
       [Yg]: e.dragState.isDraggingOverCanvas

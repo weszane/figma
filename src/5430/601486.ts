@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { AutoLayout } from "../905/470281";
 import { T } from "../5132/203178";
 import { Gm } from "../5430/873109";
@@ -26,7 +26,7 @@ export function $$u0({
       layout: "twoColumn"
     }), jsx(U6, {
       resource: e
-    }), jsx(_$$a, {
+    }), jsx(IntersectionSentinel, {
       onIntersectionChange: e => {
         if (u) return;
         let t = e.boundingClientRect.top < 0;

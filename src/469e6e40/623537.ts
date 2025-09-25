@@ -75,7 +75,7 @@ import { getResourceDataOrFallback } from '../905/663269';
 import { In } from '../905/672640';
 import { BannerButton } from '../905/692618';
 import { P as _$$P } from '../905/697522';
-import { IX } from '../905/712921';
+import { RenewalTermEnum } from '../905/712921';
 import { u as _$$u } from '../905/774364';
 import { OrganizationType } from '../905/833838';
 import { TextWithTruncation } from '../905/838445';
@@ -85,9 +85,10 @@ import { Um } from '../905/848862';
 import { EL, F_ } from '../905/858282';
 import { XHR } from '../905/910117';
 import { debounce } from '../905/915765';
-import { A as _$$A } from '../905/920142';
+import { dayjs } from '../905/920142';
 import { hideDropdownAction, selectViewAction } from '../905/929976';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';
+;
 import { styleBuilderInstance } from '../905/941192';
 import { b as _$$b2 } from '../905/946806';
 import { A as _$$A4 } from '../905/956262';
@@ -1030,9 +1031,9 @@ function tk(e) {
   let u = NV(e.licenseGroup, o);
   let m = 'default';
   u ? (m = 'warn', t = getI18nString('license_group_admin.billing_dashboard.billing_banner.review_and_confirm'), a = getI18nString('license_group_admin.billing_banner.review.subtitle.seat_rename')) : (_ ? (m = 'success', t = getI18nString('license_group_admin.billing_banner.completed_at_date_new', {
-    date: _$$A(e.licenseGroup.last_reviewed_at).toDate()
+    date: dayjs(e.licenseGroup.last_reviewed_at).toDate()
   })) : t = getI18nString('license_group_admin.billing_banner.default_new', {
-    date: _$$A(d.due_at).toDate()
+    date: dayjs(d.due_at).toDate()
   }), a = null);
   let p = m === 'warn' ? {
     variant: m
@@ -2757,7 +2758,7 @@ function nn(e) {
             label: jsx(Label, {
               children: getI18nString('members_table.menu_bar_filter.new_charges_since_last_invoice')
             }),
-            onChange: lQ
+            onChange: noop
           })
         })]
       })
@@ -2838,8 +2839,8 @@ function nn(e) {
           data: {
             workspaceId: t,
             licenseGroupId: a,
-            addPendingOrgUserIds: e.addPendingOrgUserIds || lQ,
-            queueOrgUsersRefetch: e.queueOrgUsersRefetch || lQ,
+            addPendingOrgUserIds: e.addPendingOrgUserIds || noop,
+            queueOrgUsersRefetch: e.queueOrgUsersRefetch || noop,
             invoices: e.invoices
           }
         }));
@@ -2904,8 +2905,8 @@ function nn(e) {
     }), eN && jsx('div', {
       className: 'x7hzu26 x5hng5x',
       children: jsx(tE, {
-        queueOrgUsersRefetch: e.queueOrgUsersRefetch || lQ,
-        addPendingOrgUserIds: e.addPendingOrgUserIds || lQ
+        queueOrgUsersRefetch: e.queueOrgUsersRefetch || noop,
+        addPendingOrgUserIds: e.addPendingOrgUserIds || noop
       })
     }), !isMobileUA && e.sortedItems.length > 0 && jsxs(Fragment, {
       children: [jsx(_$$p2, {
@@ -3076,7 +3077,7 @@ function nn(e) {
         orgUsersByUserId: e.allOrgUsersByUserId,
         planType: FOrganizationLevelType.ORG,
         queueFilterCountsRefetch: e.queueFilterCountsRefetch,
-        renewalTerm: IX.YEAR,
+        renewalTerm: RenewalTermEnum.YEAR,
         workspacesCanMoveTo: e.workspacesCanMoveTo
       })
     })]
@@ -3189,7 +3190,7 @@ export function $$nc0(e) {
       let t;
       if (isUserObject(e) && (t = e.last_edit), !t) return !1;
       let a = null;
-      if (i === '3mo' ? a = _$$A().subtract(3, 'month') : i === '6mo' ? a = _$$A().subtract(6, 'month') : i === '1yr' && (a = _$$A().subtract(1, 'year')), _$$A(t).isAfter(a)) return !1;
+      if (i === '3mo' ? a = dayjs().subtract(3, 'month') : i === '6mo' ? a = dayjs().subtract(6, 'month') : i === '1yr' && (a = dayjs().subtract(1, 'year')), dayjs(t).isAfter(a)) return !1;
     }
     if (r && !isUserObject(e)) return !1;
     if (a) {

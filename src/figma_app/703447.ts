@@ -1,4 +1,4 @@
-import { pr } from '../905/16438';
+import { SeverityError } from '../905/16438';
 import { T as _$$T } from '../905/38485';
 import { aT } from '../905/55191';
 import { z } from '../905/179410';
@@ -243,7 +243,7 @@ function y(e) {
   return e ? `${0 | e.sessionID}:${0 | e.localID}` : null;
 }
 function T(e, t) {
-  throw new pr(t ?? `Uncaught type ${JSON.stringify(e)}`);
+  throw new SeverityError(t ?? `Uncaught type ${JSON.stringify(e)}`);
 }
 function I(e, t) {
   let r;

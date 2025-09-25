@@ -1,34 +1,33 @@
-import md5 from 'md5'
-import { encodeStringToBase64 } from '../905/561685'
-import { A as day } from '../905/920142'
-import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
+import md5 from 'md5';
+import { encodeStringToBase64 } from '../905/561685';
+import { dayjs } from '../905/920142';
+import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 
 // Original o - Refactored to InsertionActionType
 export const InsertionActionType = {
   INSERTION: 'insertion',
-  DETACHMENT: 'detachment',
-} as const
+  DETACHMENT: 'detachment'
+} as const;
 
 // Original l - Refactored to DetachmentActionType
 export const DetachmentActionType = {
   INSERTION: 'insertion',
-  DETACHMENT: 'detachment',
-} as const
+  DETACHMENT: 'detachment'
+} as const;
 
 // Original $$d1 - Refactored to ActionType
 export const InsertionDetachment = {
   INSERTION: 'insertion',
-  DETACHMENT: 'detachment',
-} as const
+  DETACHMENT: 'detachment'
+} as const;
 
 // Original c - Refactored to generateDSAToken with added types and documentation
 interface DSATokenParams {
-  [key: string]: any
+  [key: string]: any;
 }
-
 interface DSAToken {
-  dsaToken: string
-  dsaTokenKey: string
+  dsaToken: string;
+  dsaTokenKey: string;
 }
 
 /**
@@ -37,40 +36,40 @@ interface DSAToken {
  * @returns An object containing the DSA token and key.
  */
 function generateDSAToken(params: DSATokenParams): DSAToken {
-  const apiParams = APIParameterUtils.toAPIParameters(params) ?? {}
-  const keys = Object.keys(apiParams)
-  const values = keys.map(key => apiParams[key])
-  const timestamp = day().utc().unix()
-  const data = ['please_use_the_public_api', timestamp, ...values].join(',')
-  const token = md5(data).slice(0, 10)
-  const keyData = [timestamp, ...keys].join(',')
+  const apiParams = APIParameterUtils.toAPIParameters(params) ?? {};
+  const keys = Object.keys(apiParams);
+  const values = keys.map(key => apiParams[key]);
+  const timestamp = dayjs().utc().unix();
+  const data = ['please_use_the_public_api', timestamp, ...values].join(',');
+  const token = md5(data).slice(0, 10);
+  const keyData = [timestamp, ...keys].join(',');
   return {
     dsaToken: token,
-    dsaTokenKey: encodeStringToBase64(keyData),
-  }
+    dsaTokenKey: encodeStringToBase64(keyData)
+  };
 }
 
 // Original $$u0 - Refactored to DSAApiService class with grouped methods, added types, documentation, and helper methods
 export class DSAApiService {
-  LibraryWeeklyInsertionsSchemaValidator = createNoOpValidator()
-  LibraryTeamUsageSchemaValidator = createNoOpValidator()
-  LibraryPublishedComponentsUsagesSchemaValidator = createNoOpValidator()
-  LibraryPublishedComponentsActionsSchemaValidator = createNoOpValidator()
-  LibraryOverviewSchemaValidator = createNoOpValidator()
-  LibrariesSchemaValidator = createNoOpValidator()
-  NumTeamsSchemaValidator = createNoOpValidator()
-  StateGroupComponentsSchemaValidator = createNoOpValidator()
-  ComponentFileUsageSchemaValidator = createNoOpValidator()
-  ComponentSchemaValidator = createNoOpValidator()
-  StateGroupSchemaValidator = createNoOpValidator()
-  OrgMigrationStatusSchemaValidator = createNoOpValidator()
-  LibraryStyleOverviewValidator = createNoOpValidator()
-  LibraryStyleDetailsValidator = createNoOpValidator()
-  LibraryVariableOverviewValidator = createNoOpValidator()
-  LibraryVariableDetailsValidator = createNoOpValidator()
-  RecordStylesActionValidator = createNoOpValidator()
-  RecordVariablesActionValidator = createNoOpValidator()
-  RecordComponentActionValidator = createNoOpValidator()
+  LibraryWeeklyInsertionsSchemaValidator = createNoOpValidator();
+  LibraryTeamUsageSchemaValidator = createNoOpValidator();
+  LibraryPublishedComponentsUsagesSchemaValidator = createNoOpValidator();
+  LibraryPublishedComponentsActionsSchemaValidator = createNoOpValidator();
+  LibraryOverviewSchemaValidator = createNoOpValidator();
+  LibrariesSchemaValidator = createNoOpValidator();
+  NumTeamsSchemaValidator = createNoOpValidator();
+  StateGroupComponentsSchemaValidator = createNoOpValidator();
+  ComponentFileUsageSchemaValidator = createNoOpValidator();
+  ComponentSchemaValidator = createNoOpValidator();
+  StateGroupSchemaValidator = createNoOpValidator();
+  OrgMigrationStatusSchemaValidator = createNoOpValidator();
+  LibraryStyleOverviewValidator = createNoOpValidator();
+  LibraryStyleDetailsValidator = createNoOpValidator();
+  LibraryVariableOverviewValidator = createNoOpValidator();
+  LibraryVariableDetailsValidator = createNoOpValidator();
+  RecordStylesActionValidator = createNoOpValidator();
+  RecordVariablesActionValidator = createNoOpValidator();
+  RecordComponentActionValidator = createNoOpValidator();
 
   // Library-related methods
   /**
@@ -78,7 +77,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getLibraryWeeklyInsertions(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/library/${params.fileKey}/weekly_insertions`, params, this.LibraryWeeklyInsertionsSchemaValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.fileKey}/weekly_insertions`, params, this.LibraryWeeklyInsertionsSchemaValidator);
   }
 
   /**
@@ -86,7 +85,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getLibraryTeamUsage(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/library/${params.fileKey}/team_usage`, params, this.LibraryTeamUsageSchemaValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.fileKey}/team_usage`, params, this.LibraryTeamUsageSchemaValidator);
   }
 
   /**
@@ -99,9 +98,9 @@ export class DSAApiService {
       end_ts: params.endTs,
       org_id: params.orgIdForLogging,
       entrypoint: params.entrypointForLogging,
-      library_file_key: params.libraryFileKey,
-    }
-    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/published_components_usages`, requestParams, this.LibraryPublishedComponentsUsagesSchemaValidator)
+      library_file_key: params.libraryFileKey
+    };
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/published_components_usages`, requestParams, this.LibraryPublishedComponentsUsagesSchemaValidator);
   }
 
   /**
@@ -114,9 +113,9 @@ export class DSAApiService {
       end_ts: params.endTs,
       org_id: params.orgIdForLogging,
       entrypoint: params.entrypointForLogging,
-      library_file_key: params.libraryFileKey,
-    }
-    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/published_components_actions`, requestParams, this.LibraryPublishedComponentsActionsSchemaValidator)
+      library_file_key: params.libraryFileKey
+    };
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/published_components_actions`, requestParams, this.LibraryPublishedComponentsActionsSchemaValidator);
   }
 
   /**
@@ -124,7 +123,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getLibraryOverview(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/library_overview/${params.libraryFileKey}`, params, this.LibraryOverviewSchemaValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/library_overview/${params.libraryFileKey}`, params, this.LibraryOverviewSchemaValidator);
   }
 
   /**
@@ -132,7 +131,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getLibraries(params: any) {
-    return this.makeValidatedGetRequest('/api/dsa/libraries', params, this.LibrariesSchemaValidator)
+    return this.makeValidatedGetRequest('/api/dsa/libraries', params, this.LibrariesSchemaValidator);
   }
 
   /**
@@ -140,7 +139,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getLibraryStyleOverview(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/styles/overview`, params, this.LibraryStyleOverviewValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/styles/overview`, params, this.LibraryStyleOverviewValidator);
   }
 
   /**
@@ -148,7 +147,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getLibraryStyleDetails(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/styles/${params.styleKey}/details`, params, this.LibraryStyleDetailsValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/styles/${params.styleKey}/details`, params, this.LibraryStyleDetailsValidator);
   }
 
   /**
@@ -156,7 +155,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getLibraryVariableOverview(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/variables/overview`, params, this.LibraryVariableOverviewValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/variables/overview`, params, this.LibraryVariableOverviewValidator);
   }
 
   /**
@@ -164,7 +163,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getLibraryVariableDetails(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/variables/${params.variableKey}/details`, params, this.LibraryVariableDetailsValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/variables/${params.variableKey}/details`, params, this.LibraryVariableDetailsValidator);
   }
 
   // Component-related methods
@@ -173,7 +172,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getComponentFileUsage(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/component/${params.componentKey}/file_usage`, params, this.ComponentFileUsageSchemaValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/component/${params.componentKey}/file_usage`, params, this.ComponentFileUsageSchemaValidator);
   }
 
   /**
@@ -181,7 +180,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getComponent(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/component/${params.componentKey}`, params, this.ComponentSchemaValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/component/${params.componentKey}`, params, this.ComponentSchemaValidator);
   }
 
   /**
@@ -189,7 +188,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   recordComponentAction(params: any) {
-    return this.makeValidatedPostRequest('/api/dsa/record/component/action', params, this.RecordComponentActionValidator)
+    return this.makeValidatedPostRequest('/api/dsa/record/component/action', params, this.RecordComponentActionValidator);
   }
 
   // State group-related methods
@@ -198,7 +197,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getStateGroupComponents(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/state_group/${params.stateGroupKey}/components`, params, this.StateGroupComponentsSchemaValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/state_group/${params.stateGroupKey}/components`, params, this.StateGroupComponentsSchemaValidator);
   }
 
   /**
@@ -206,7 +205,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getStateGroup(params: any) {
-    return this.makeValidatedGetRequest(`/api/dsa/state_group/${params.stateGroupKey}`, params, this.StateGroupSchemaValidator)
+    return this.makeValidatedGetRequest(`/api/dsa/state_group/${params.stateGroupKey}`, params, this.StateGroupSchemaValidator);
   }
 
   // Organization-related methods
@@ -215,7 +214,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getNumTeams(params: any) {
-    return this.makeValidatedGetRequest('/api/dsa/num_teams', params, this.NumTeamsSchemaValidator)
+    return this.makeValidatedGetRequest('/api/dsa/num_teams', params, this.NumTeamsSchemaValidator);
   }
 
   /**
@@ -223,7 +222,9 @@ export class DSAApiService {
    * @param params - Original e
    */
   getOrgMigrationStatus(params: any) {
-    return this.OrgMigrationStatusSchemaValidator.validate(async ({ xr }) => await xr.get(`/api/dsa/migration_status/${params.orgId}`))
+    return this.OrgMigrationStatusSchemaValidator.validate(async ({
+      xr
+    }) => await xr.get(`/api/dsa/migration_status/${params.orgId}`));
   }
 
   // Record action methods
@@ -232,7 +233,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   recordStylesAction(params: any) {
-    return this.makeValidatedPostRequest('/api/dsa/record/style/action', params, this.RecordStylesActionValidator)
+    return this.makeValidatedPostRequest('/api/dsa/record/style/action', params, this.RecordStylesActionValidator);
   }
 
   /**
@@ -240,20 +241,25 @@ export class DSAApiService {
    * @param params - Original e
    */
   recordVariablesAction(params: any) {
-    return this.makeValidatedPostRequest('/api/dsa/record/variable/action', params, this.RecordVariablesActionValidator)
+    return this.makeValidatedPostRequest('/api/dsa/record/variable/action', params, this.RecordVariablesActionValidator);
   }
 
   // Helper methods for common API call patterns
   private makeValidatedGetRequest(endpoint: string, params: any, validator: any) {
-    const token = generateDSAToken(params)
-    return validator.validate(async ({ xr }: any) => await xr.get(endpoint, APIParameterUtils.toAPIParameters({ ...params, ...token })))
+    const token = generateDSAToken(params);
+    return validator.validate(async ({
+      xr
+    }: any) => await xr.get(endpoint, APIParameterUtils.toAPIParameters({
+      ...params,
+      ...token
+    })));
   }
-
   private makeValidatedPostRequest(endpoint: string, params: any, validator: any) {
-    return validator.validate(async ({ xr }: any) => await xr.post(endpoint, APIParameterUtils.toAPIParameters(params)))
+    return validator.validate(async ({
+      xr
+    }: any) => await xr.post(endpoint, APIParameterUtils.toAPIParameters(params)));
   }
 }
-
-export const DSAApiServiceInstance = new DSAApiService()
-export const PT = DSAApiServiceInstance
-export const Wc = InsertionDetachment
+export const DSAApiServiceInstance = new DSAApiService();
+export const PT = DSAApiServiceInstance;
+export const Wc = InsertionDetachment;

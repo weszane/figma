@@ -1,12 +1,12 @@
 import { filterNotNullish } from "../figma_app/656233";
 import { getFeatureFlags } from "../905/601108";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { wN } from "../figma_app/591738";
 import { FTrialType } from "../figma_app/191312";
 import { hasEditableLockedTeams, hasTeamPaidAccess } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
 import { a as _$$a } from "../905/692930";
-import { w } from "../905/863010";
+import { TeamExtendedDataMapper } from "../905/863010";
 import { isRecentsAndSharingView } from "../figma_app/193867";
 var $$n3;
 let h = "pro_trials_v3";
@@ -50,9 +50,9 @@ let $$T2 = "dismissed_pro_trials_v3_unlocked_expiry_banner";
     let n = Object.values(r.teams);
     let a = filterNotNullish(n.map(n => e.getProTrial(n, !!t[n.id]?.[$$f4], r)));
     let o = a.filter(e => e.status === _$$a.TRIAL_EXPIRED && e.userCanEditTeam);
-    o.sort((e, t) => A(e.trialExpiresAt).diff(t.trialExpiresAt));
+    o.sort((e, t) => dayjs(e.trialExpiresAt).diff(t.trialExpiresAt));
     let l = a.filter(e => e.status === _$$a.IN_TRIAL && e.userCanEditTeam);
-    l.sort((e, t) => A(e.trialExpiresAt).diff(t.trialExpiresAt));
+    l.sort((e, t) => dayjs(e.trialExpiresAt).diff(t.trialExpiresAt));
     return {
       ongoingTrials: l,
       expiredTrials: o
@@ -65,9 +65,9 @@ let $$T2 = "dismissed_pro_trials_v3_unlocked_expiry_banner";
     return s;
   };
   e.canStartProTrial = function (t, r, n, i, a, o) {
-    return !(!t || !e.entryEnabled() || hasTeamPaidAccess(i) || i.stripe_customer_id || !r || n || !canEditTeam(i.id, a) || 30 > A().utc().diff(A(t.created_at).utc(), "days", !0) || A().utc().diff(A(t.created_at).utc(), "days", !0) > 90 || e.getProTrialStatus(i) || Object.keys(o).some(e => !!o[e][$$f4])) && !!e.isUserInVariant(t.id);
+    return !(!t || !e.entryEnabled() || hasTeamPaidAccess(i) || i.stripe_customer_id || !r || n || !canEditTeam(i.id, a) || 30 > dayjs().utc().diff(dayjs(t.created_at).utc(), "days", !0) || dayjs().utc().diff(dayjs(t.created_at).utc(), "days", !0) > 90 || e.getProTrialStatus(i) || Object.keys(o).some(e => !!o[e][$$f4])) && !!e.isUserInVariant(t.id);
   };
-  let t = e => Math.max(Math.ceil(A(e).diff(A(), "days", !0)), 0);
+  let t = e => Math.max(Math.ceil(dayjs(e).diff(dayjs(), "days", !0)), 0);
   function r(t) {
     return e.uxEnabled() && t.grace_period_end && t.grace_period_type && g === t.grace_period_type ? new Date(t.grace_period_end) < new Date() ? _$$a.TRIAL_EXPIRED : _$$a.IN_TRIAL : null;
   }
@@ -76,7 +76,7 @@ let $$T2 = "dismissed_pro_trials_v3_unlocked_expiry_banner";
   }
   e.getProTrialStatus = r;
   e.getProTrialStatusLG = function (e) {
-    return r(w.toSinatra(e));
+    return r(TeamExtendedDataMapper.toSinatra(e));
   };
   e.isEligibleTrialEntryView = function (e) {
     return "folder" === e.view || "team" === e.view || isRecentsAndSharingView(e);
@@ -87,7 +87,7 @@ let $$T2 = "dismissed_pro_trials_v3_unlocked_expiry_banner";
   };
   e.canSeeProTrialExpiryUx = function (t) {
     if (!e.expiryEnabled() || !t || t.status !== _$$a.TRIAL_EXPIRED) return !1;
-    let r = A().utc().diff(A(t.trialExpiresAt).utc(), "days", !0);
+    let r = dayjs().utc().diff(dayjs(t.trialExpiresAt).utc(), "days", !0);
     return !(r < 0) && r < 7;
   };
   e.canSeeExpiredProTrialBanner = function (t, r, n) {

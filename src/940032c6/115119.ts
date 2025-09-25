@@ -30,7 +30,7 @@ import { j2 as _$$j12 } from '../642/384859';
 import { qh } from '../642/435480';
 import { J as _$$J2 } from '../642/485582';
 import { A as _$$A19 } from '../642/502017';
-import { u as _$$u9, noop } from '../642/638075';
+import { u as _$$u9 } from '../642/638075';
 import { c as _$$c0 } from '../642/688711';
 import { B as _$$B8 } from '../642/707257';
 import { X2 } from '../642/755347';
@@ -52,7 +52,7 @@ import { consumptionPaywallUtils } from '../905/224';
 import { ChevronContainer } from '../905/1946';
 import { a as _$$a6 } from '../905/5627';
 import { r as _$$r9 } from '../905/11924';
-import { D as _$$D6 } from '../905/12032';
+import { overlayStateAtom } from '../905/12032';
 import { DeepLinkType } from '../905/15667';
 import { getRumLoggingConfig } from '../905/16237';
 import { useMemoStable } from '../905/19536';
@@ -90,7 +90,7 @@ import { KindEnum } from '../905/129884';
 import { MM } from '../905/136701';
 import { _ as _$$_9 } from '../905/144222';
 import { Q as _$$Q4 } from '../905/149004';
-import { Av } from '../905/149328';
+import { getFileTypePx } from '../905/149328';
 import { x as _$$x2 } from '../905/149501';
 import { e as _$$e9 } from '../905/149844';
 import { hideModal, hideModalHandler, popModalStack, showModal, showModalConditional, showModalHandler } from '../905/156213';
@@ -208,7 +208,7 @@ import { h as _$$h9 } from '../905/513745';
 import { C as _$$C6 } from '../905/520159';
 import { Z as _$$Z3 } from '../905/521211';
 import { Button, ButtonLarge, ButtonWide } from '../905/521428';
-import { ex as _$$ex } from '../905/524523';
+import { registerTooltip } from '../905/524523';
 import { r6 as _$$r6 } from '../905/542608';
 import { insertSharedLibraryAsset } from '../905/545750';
 import { s as _$$s7 } from '../905/551945';
@@ -243,8 +243,8 @@ import { i as _$$i3 } from '../905/661697';
 import { getResourceDataOrFallback, ResourceStatus } from '../905/663269';
 import { N as _$$N0 } from '../905/670143';
 import { F as _$$F6 } from '../905/672930';
-import { oW as _$$oW } from '../905/675859';
-import { g as _$$g } from '../905/687265';
+import { WAFImage } from '../905/675859';
+import { textDisplayConfig } from '../905/687265';
 import { Qr as _$$Qr } from '../905/690539';
 import { a as _$$a7 } from '../905/693578';
 import { e0 as _$$e4 } from '../905/696396';
@@ -312,12 +312,12 @@ import { $S, $Y } from '../905/918620';
 import { A as _$$A21 } from '../905/920165';
 import { X as _$$X4 } from '../905/924044';
 import { A as _$$A16 } from '../905/925160';
-import { a as _$$a11 } from '../905/925868';
+import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
 import { z as _$$z8 } from '../905/931953';
 import { q as _$$q2 } from '../905/932270';
 import { I as _$$I4 } from '../905/932503';
-import { lQ as _$$lQ } from '../905/934246';
+import { noop } from 'lodash-es';
 import { O as _$$O } from '../905/936515';
 import { logCmsError } from '../905/937198';
 import { selectUserFlag } from '../905/940356';
@@ -1764,7 +1764,7 @@ let t0 = memo(e => {
 });
 let iy = {
   emptyStateContainer: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     width: 'x1h93xvk',
     display: 'x78zum5',
     flexDirection: 'xdt5ytf',
@@ -1880,7 +1880,7 @@ let iA = {
     marginInlineStart: null,
     marginInlineEnd: null,
     userSelect: 'x87ps6o',
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   }
 };
@@ -2637,7 +2637,7 @@ function ny({
     getCurrentContainerBounds: t,
     isResizing: i,
     setIsResizing: n,
-    setResizeDirections: _$$lQ,
+    setResizeDirections: noop,
     lockAspectRatio: !1,
     hidden: !1,
     recordingKey: s,
@@ -2691,7 +2691,7 @@ function nI() {
 let nM = {
   mobilePopupPromptBody: {
     marginTop: 'x7hzu26',
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     flex: 'x98rzlu',
     flexGrow: null,
     flexShrink: null,
@@ -2700,7 +2700,7 @@ let nM = {
     $$css: !0
   },
   mobilePopupPromptModel: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'xv1l7n4',
     lineHeight: 'x1o2sk6j',
     marginRight: 'x17qaar8',
@@ -2709,12 +2709,12 @@ let nM = {
     $$css: !0
   },
   mobilePopupCardTitle: {
-    ..._$$g.textHeadingLarge,
+    ...textDisplayConfig.textHeadingLarge,
     color: 'x1mqxbix',
     $$css: !0
   },
   mobilePopupCardBody: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     marginTop: 'x15r87gk',
     color: 'x1mqxbix',
     $$css: !0
@@ -2722,7 +2722,7 @@ let nM = {
   mobilePopupCardButton: {
     marginTop: 'xehsoiq',
     width: 'xh8yej3',
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     $$css: !0
   }
 };
@@ -2756,7 +2756,7 @@ function nz() {
             }
           }), jsxs('div', {
             className: 'x10l6tqk x1dfx0jo x1nrll8i x11lhmoz x78zum5 xdt5ytf x1nhvcw1 x1r7xphn x1dc814f x1xiyphd x1cpyowe xktia5q x18n5i07 xixl9f9 xhtitgo x1tamke2 x9f619',
-            children: [jsx(_$$oW, {
+            children: [jsx(WAFImage, {
               className: 'x46vnbo x11daxxc x12oqio5',
               src: buildUploadUrl('c5b8c66d1796d0246ed3ef72acd4fd12075444af'),
               alt: getI18nString('figmake.toolbar.upload_alt')
@@ -2897,7 +2897,7 @@ let nX = {
     '--paddingRight': (e => typeof e == 'number' ? `${e}px` : e != null ? e : void 0)(e ? '8px' : '0px')
   }],
   headerTitle: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     display: 'x78zum5',
     alignItems: 'x6s0dn4',
     $$css: !0
@@ -3639,7 +3639,7 @@ function aA() {
 }
 let aL = {
   publishingSubtext: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     marginBottom: 'xod5an3',
     color: 'x1n0bwc9',
     $$css: !0
@@ -3785,7 +3785,7 @@ function aV() {
       className: 'show_love_modal--header--5nCB3',
       children: [jsx('div', {
         className: 'show_love_modal--imgContainer--LA7Fk',
-        children: jsx(_$$oW, {
+        children: jsx(WAFImage, {
           src: buildUploadUrl(s ? '8c5f36e7686970472553e5da4650c78cb52673b0' : '5181875ecee4c670077941a2e262b305b425f77b')
         })
       }), jsx('div', {
@@ -3800,14 +3800,14 @@ function aV() {
 let a0 = aQ;
 let a4 = {
   collectionLabel: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     color: 'x3vvef7',
     marginBottom: 'xkdneqi',
     fontWeight: 'xh88oxj',
     $$css: !0
   },
   title: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1akne3o',
     overflow: 'xb3r6kr',
     overflowX: null,
@@ -3817,7 +3817,7 @@ let a4 = {
     $$css: !0
   },
   author: {
-    ..._$$g.textBodySmall,
+    ...textDisplayConfig.textBodySmall,
     color: 'x1n0bwc9',
     overflow: 'xb3r6kr',
     overflowX: null,
@@ -4048,11 +4048,11 @@ function st() {
 }
 let si = {
   strongLabel: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   subtitle: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     textAlign: 'xdpxx8g',
     $$css: !0
@@ -4669,7 +4669,7 @@ function sv(e) {
       let e = hasPendingUpgradeRequestCallback();
       let t = upgradeEligibilityCallback() === _$$q4.CANNOT_UPGRADE;
       return {
-        handlePublish: t ? _$$lQ : handleUpgradeCallback(),
+        handlePublish: t ? noop : handleUpgradeCallback(),
         isPublishingDisabled: t,
         publishButtonTooltipHtmlAttributes: {
           'data-tooltip': e ? getI18nString('fullscreen.toolbar.we_ve_sent_your_request_to_your_team_s_admins_we_ll_let_you_know_when_they_respond') : null,
@@ -4816,7 +4816,7 @@ function sA({
         }), getI18nString('sites.toolbar.make_publish_menu.preview_in_new_tab')]
       }), jsxs(MenuItemComp, {
         disabled: r.isPublishingDisabled,
-        onClick: r.handlePublish ?? _$$lQ,
+        onClick: r.handlePublish ?? noop,
         htmlAttributes: {
           'data-onboarding-key': _$$eq
         },
@@ -4922,7 +4922,7 @@ function sJ({
     children: getI18nString('figmake.make_a_copy')
   }) : jsx(Fragment, {});
 }
-let sZ = _$$ex('figmake_open_fullscreen_preview_new_tab', () => {
+let sZ = registerTooltip('figmake_open_fullscreen_preview_new_tab', () => {
   return jsxs('div', {
     className: 'x78zum5 xdt5ytf xl56j7k x6s0dn4',
     children: [jsx('div', {
@@ -5305,7 +5305,7 @@ function rt() {
       multiplayer: e,
       dropdownShown: null,
       currentUser: t,
-      onUserClick: _$$lQ
+      onUserClick: noop
     })
   }) : null;
 }
@@ -5368,7 +5368,7 @@ function rx() {
       children: [jsxs('div', {
         className: 'x78zum5 xdt5ytf x1cy8zhl',
         children: [jsx('p', {
-          ..._$$Ay.props(_$$g.textBodyLargeStrong),
+          ..._$$Ay.props(textDisplayConfig.textBodyLargeStrong),
           children: getI18nString('figmake.settings.connect_existing_project.status.title')
         }), jsx('p', {
           ..._$$Ay.props(rm.textBodyMediumSecondary),
@@ -5382,7 +5382,7 @@ function rx() {
 }
 let rm = {
   textBodyMediumSecondary: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -5680,7 +5680,7 @@ function rR({
 }
 let rA = {
   textBodyMediumSecondary: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -5714,11 +5714,11 @@ function rP() {
 }
 let rO = {
   textBodyLargeStrong: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   textBodyMediumSecondary: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -5884,7 +5884,7 @@ function rD({
 }
 let rz = {
   textBodyMediumSecondary: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -6021,11 +6021,11 @@ function rq({
 }
 let rX = {
   textBodyLargeStrong: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   textBodyLargeSecondary: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -6106,7 +6106,7 @@ let rQ = registerModal(({
 }, 'DeleteUploadedFontModal');
 let r0 = {
   bodyText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1akne3o',
     $$css: !0
   }
@@ -6186,12 +6186,12 @@ function r3() {
 }
 let r8 = {
   name: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1akne3o',
     $$css: !0
   },
   summary: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -6327,7 +6327,7 @@ function on({
 }
 let ol = {
   styleName: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -6416,13 +6416,13 @@ function oc({
 }
 let ou = {
   title: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     color: 'x1akne3o',
     paddingBottom: 'x1120s5i',
     $$css: !0
   },
   subtext: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -7174,7 +7174,7 @@ let oP = {
   },
   webpageItemActive: {
     backgroundColor: 'x1v8gsql',
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   webpageItemNoIcon: {
@@ -7228,7 +7228,7 @@ let oG = registerModal(e => {
 }, 'CustomSubdomainConfirmationModal');
 let oW = {
   domain: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     marginRight: 'x17qaar8',
     marginInlineStart: null,
@@ -7236,7 +7236,7 @@ let oW = {
     $$css: !0
   },
   description: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   },
@@ -7342,7 +7342,7 @@ let oW = {
     '$$css': !0
   },
   inputField: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     'flex': 'x98rzlu',
     'flexGrow': null,
     'flexShrink': null,
@@ -7409,12 +7409,12 @@ let oW = {
     '$$css': !0
   },
   warningMessage: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x12fzf0q',
     $$css: !0
   },
   errorMessage: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x172n1ly',
     $$css: !0
   }
@@ -7579,7 +7579,7 @@ function oY({
 }
 let oJ = {
   description: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   },
@@ -7602,23 +7602,23 @@ let oJ = {
   customDomain: {
     color: 'x1quhyk7',
     cursor: 'x1ypdohk',
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   secondaryText: {
     color: 'x1n0bwc9',
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   publishStatusRow: {
     gap: 'x167g77z',
     rowGap: null,
     columnGap: null,
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   loadingText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     width: 'x2pejg6',
     $$css: !0
   }
@@ -7632,7 +7632,7 @@ function oZ({
     children: [jsxs('div', {
       className: 'x78zum5 xdt5ytf xg2d0mh xod5an3',
       children: [jsx('div', {
-        ..._$$xk(_$$g.textBodyLargeStrong),
+        ..._$$xk(textDisplayConfig.textBodyLargeStrong),
         children: renderI18nText('sites.metadata.domains.base_domain')
       }), jsx('div', {
         ..._$$xk(oJ.description),
@@ -7779,7 +7779,7 @@ function o2({
 }
 let o9 = {
   redirectDescription: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   }
@@ -7818,7 +7818,7 @@ function dt({
       children: [jsxs('div', {
         className: 'x98rzlu',
         children: [jsx('div', {
-          ..._$$xk(_$$g.textBodyMediumStrong),
+          ..._$$xk(textDisplayConfig.textBodyMediumStrong),
           children: getI18nString('sites.metadata.domains.add_subdomain_redirect')
         }), jsx('div', {
           ..._$$xk(o9.redirectDescription),
@@ -7955,7 +7955,7 @@ function dn({
           'data-testid': 'warning-icon'
         })]
       }), d ? jsx('div', {
-        ..._$$xk(_$$g.textBodyMedium, di.warning),
+        ..._$$xk(textDisplayConfig.textBodyMedium, di.warning),
         children: d
       }) : null]
     }), g && f && jsx(dt, {
@@ -8258,7 +8258,7 @@ let dg = {
     rowGap: null,
     columnGap: null,
     height: 'xxk0z11',
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -8338,14 +8338,14 @@ let dj = {
     paddingRight: 'xy13l1i',
     paddingInlineStart: null,
     paddingInlineEnd: null,
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   tableHeader: {
     color: 'x1n0bwc9',
     textAlign: 'xdpxx8g',
     backgroundColor: 'x1yjdb4r',
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   tableCell: {
@@ -8553,12 +8553,12 @@ function dC({
 }
 let dT = {
   header: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     paddingBottom: 'xjkvuk6',
     $$css: !0
   },
   text: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     paddingBottom: 'xsag5q8',
     $$css: !0
@@ -8566,12 +8566,12 @@ let dT = {
   customDomain: {
     color: 'x1quhyk7',
     cursor: 'x1ypdohk',
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   secondaryText: {
     color: 'x1n0bwc9',
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -9062,11 +9062,11 @@ function dz({
 }
 let dB = {
   labelText: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   descriptionText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     $$css: !0
   },
@@ -9112,7 +9112,7 @@ let dB = {
     $$css: !0
   },
   errorMessage: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x172n1ly',
     marginTop: 'x15r87gk',
     $$css: !0
@@ -9208,7 +9208,7 @@ let d5 = memo(e => {
 });
 let d3 = {
   description: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     margin: 'x1ghz6dp',
     marginInline: null,
     marginInlineStart: null,
@@ -9222,7 +9222,7 @@ let d3 = {
     $$css: !0
   },
   trigger: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     'display': 'x78zum5',
     'alignItems': 'x6s0dn4',
     'padding': 'x1717udv',
@@ -10543,7 +10543,7 @@ let cN = {
     paddingTop: null,
     paddingBottom: null,
     alignItems: 'x6s0dn4',
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   }
 };
@@ -10744,7 +10744,7 @@ let cJ = forwardRef(({
 }));
 let cZ = {
   text: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1akne3o',
     fontWeight: 'x10p5zqr',
     fontSize: 'x1j6dyjg',
@@ -11000,7 +11000,7 @@ function c7({
   return jsxs(ButtonPrimitive, {
     className: 'x19y5rnk xfp4ol3 x78zum5 xdt5ytf x1i71x30 x1cy8zhl x1ypdohk x1y2ay1z x1dwso5e',
     onClick: i,
-    children: [jsx(_$$oW, {
+    children: [jsx(WAFImage, {
       src: e,
       className: 'xfp4ol3 xtuhdl6 x19y5rnk xb3r6kr x71s49j x1auwtj7 x1e3tvwc'
     }), jsxs('div', {
@@ -11017,7 +11017,7 @@ function c7({
 }
 let c9 = {
   cardTitle: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     color: 'x1akne3o',
     fontSize: 'x4z9k3i',
     lineHeight: 'x19v9tvf',
@@ -11026,7 +11026,7 @@ let c9 = {
     $$css: !0
   },
   cardSubtitle: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     fontSize: 'x1j6dyjg',
     lineHeight: 'x1d3mw78',
@@ -11233,7 +11233,7 @@ function ud() {
 }
 let uc = {
   title: {
-    ..._$$g.textHeadingLarge,
+    ...textDisplayConfig.textHeadingLarge,
     color: 'x1akne3o',
     marginBottom: 'x1buy44e',
     $$css: !0
@@ -12958,7 +12958,7 @@ function xh({
   }, [e, n, i]), t) ? jsxs(Fragment, {
     children: [jsx('div', {
       className: 'dakota_table--chitBorder--8-ask',
-      children: jsx(_$$oW, {
+      children: jsx(WAFImage, {
         src: t.url,
         className: 'dakota_table--chitThumbnail--neJkB',
         alt: t.altText
@@ -13799,7 +13799,7 @@ function x3({
 }
 let x8 = {
   calendarWeekDay: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     fontWeight: 'xk50ysn',
     textAlign: 'x2b8uid',
@@ -13821,7 +13821,7 @@ let x8 = {
 };
 let x6 = {
   calendarCell: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     width: 'x1j4bni0',
     height: 'x100nsjd',
     backgroundColor: 'xjbqb8w',
@@ -13911,7 +13911,7 @@ let x6 = {
     transitionDuration: null,
     transitionProperty: null,
     transitionTimingFunction: null,
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1akne3o',
     boxSizing: 'x9f619',
     backgroundColor: 'xjbqb8w xv2f06h',
@@ -14135,7 +14135,7 @@ function mt({
 }
 let mi = {
   dateSegment: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     border: 'x1gs6z28',
     borderWidth: null,
     borderInlineWidth: null,
@@ -17861,7 +17861,7 @@ function gs(e) {
       a ? i.bindingCollectionId.set(e.collectionId) : n(e.collectionId);
       t(new Set());
     },
-    onContextMenu: _$$lQ,
+    onContextMenu: noop,
     isRenaming: !1,
     disabled: u
   });
@@ -18222,7 +18222,7 @@ function gR({
       tag: 'div',
       children: [I && A ? jsx('div', {
         className: 'x2lah0s x15yg21f x1vqgdyp x1cum3z5 x1kylzug x7z60cl x1n2onr6 xb3r6kr',
-        children: jsx(_$$oW, {
+        children: jsx(WAFImage, {
           ..._$$Ay.props(gA.thumbnail, h ? gA.thumbnailBorderSelected : gA.thumbnailBorder),
           src: A.src,
           alt: v
@@ -19439,7 +19439,7 @@ function fy() {
       })
     }),
     isShowing,
-    media: jsx(_$$oW, {
+    media: jsx(WAFImage, {
       src: buildUploadUrl('5cce6a0fbea25e98e646f188d32b8441a0aa0679'),
       alt: getI18nString('sites.onboarding.welcome.alt'),
       width: 332
@@ -20483,7 +20483,7 @@ function _t({
     getCurrentContainerBounds: t,
     isResizing: i,
     setIsResizing: n,
-    setResizeDirections: _$$lQ,
+    setResizeDirections: noop,
     lockAspectRatio: !1,
     hidden: !1,
     recordingKey: s,
@@ -21389,7 +21389,7 @@ function _X({
       windowInnerWidth,
       windowInnerHeight
     } = _$$l4();
-    let l = Av();
+    let l = getFileTypePx();
     let [s, r] = useState(() => _r(windowInnerWidth, e.x));
     let [o, d] = useState(() => _o(windowInnerHeight, l, e.y));
     let c = PN() ? 100 : t.x;
@@ -21704,7 +21704,7 @@ function bd({
       children: [n && jsx('div', {
         className: 'sites_template_tile--loadingSpinner--uPkfX',
         children: jsx(_$$k7, {})
-      }), jsx(_$$oW, {
+      }), jsx(WAFImage, {
         onDragStart: preventDefault,
         className: 'sites_template_tile--tileImage---JSpP',
         src: t,
@@ -21770,7 +21770,7 @@ function bu({
         })
       }), jsx(_$$Wh.Center, {
         children: jsx(_$$i6, {
-          insertTemplate: _$$lQ,
+          insertTemplate: noop,
           isInsertingTemplate: !1,
           shouldUseOpaqueBackground: !0,
           children: renderI18nText('slides.templates.view_template')
@@ -21867,7 +21867,7 @@ function bg() {
     },
     children: [jsx(bm, {
       templates: x
-    }), jsx(_$$a11, {
+    }), jsx(IntersectionSentinel, {
       onIntersectionChange: ({
         isIntersecting: e
       }) => {
@@ -22043,7 +22043,7 @@ function bC({
   }, [url, d]);
   return jsx('div', {
     className: 'sites_template_view--gridMediaContainer--BDoVK',
-    children: jsx(_$$oW, {
+    children: jsx(WAFImage, {
       className: 'sites_template_view--gridMedia--H7y40',
       src: n,
       loading: 'lazy',
@@ -22239,7 +22239,7 @@ function bA({
 function bL() {
   let e = useAppModelProperty('isReadOnly');
   let t = EI();
-  let i = useAtomWithSubscription(_$$D6);
+  let i = useAtomWithSubscription(overlayStateAtom);
   let n = userFlagExistsAtomFamily(_$$at);
   let a = useAtomWithSubscription(n);
   let s = a.status === 'loaded' && !0 === a.data;
@@ -22408,7 +22408,7 @@ function yi({
         dsStyle: s,
         displayAsDonut: !1,
         onClick: i,
-        onMouseDown: _$$lQ,
+        onMouseDown: noop,
         selected: n,
         isNarrow: !1,
         libraryKey: a,
@@ -22513,7 +22513,7 @@ function ya({
           rowTop: t
         });
       },
-      onToggleListLayout: _$$lQ,
+      onToggleListLayout: noop,
       picker: _,
       recordingKey: 'cmsRichTextStylePicker',
       stylePickerListLayout: !0,
@@ -26569,7 +26569,7 @@ function wS({
     n || n || i(renderI18nText('sites.panel.interactions_panel.transition'), jsx(wS, {
       stateName: e,
       recordingKey: t,
-      pushDetailsComponent: _$$lQ,
+      pushDetailsComponent: noop,
       showExtendedTransitionPropertiesView: !0
     }));
   }, [n, i, e, t]);
@@ -27228,7 +27228,7 @@ function Sv(e) {
     children: [jsx('div', {
       className: cssBuilderInstance.flex.flexColumn.px16.pb8.pt4.$,
       children: jsx(d8, {
-        addImage: _$$lQ,
+        addImage: noop,
         base64String: y,
         disableUpload: !0,
         imageCandidates: k,
@@ -27988,7 +27988,7 @@ function SV({
         position: 'relative'
       },
       children: n ? jsxs(Fragment, {
-        children: [jsx(_$$oW, {
+        children: [jsx(WAFImage, {
           style: {
             width: `${r.x}px`,
             height: `${r.y}px`
@@ -28070,7 +28070,7 @@ function SY({
     n || n || i(renderI18nText('sites.panel.interactions_panel.transition'), jsx(SY, {
       behaviorType: e,
       recordingKey: t,
-      pushDetailsComponent: _$$lQ,
+      pushDetailsComponent: noop,
       showExtendedTransitionPropertiesView: !0
     }));
   }, [n, i, e, t]);
@@ -28665,7 +28665,7 @@ function CZ({
   let x = useCallback(() => {
     i || i || t(renderI18nText('sites.panel.interactions_panel.transition'), jsx(CZ, {
       recordingKey: e,
-      pushDetailsComponent: _$$lQ,
+      pushDetailsComponent: noop,
       showExtendedTransitionPropertiesView: !0
     }));
   }, [i, t, e]);

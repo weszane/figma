@@ -12,7 +12,7 @@ import { getI18nString, renderI18nText, getLocalizedPath } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { CTA_CLICKED } from "../figma_app/314264";
-import { P4, L3, Dr, S6 } from "../905/18800";
+import { consentCounterAtom, setConsentFromRegion, consentStatusAtom, ConsentStatus } from "../905/18800";
 import { V } from "../905/182752";
 import { a as _$$a } from "../905/720941";
 import { kL, gC, Vt, ut, Id, Yp, rf, o1, X8, MW } from "../figma_app/146905";
@@ -23,7 +23,7 @@ function I(e) {
     trackEvent
   } = useTracking();
   let l = useRef(null);
-  let c = Xr(P4);
+  let c = Xr(consentCounterAtom);
   let u = wY(l) ?? cU;
   let y = t ? u.height + (e.verticalPadding || 0) : 0;
   useEffect(() => {
@@ -31,7 +31,7 @@ function I(e) {
   }, [y, c]);
   let I = async () => {
     r(!1);
-    await L3({
+    await setConsentFromRegion({
       consentRegion: "explicit",
       cookiesEnabled: !1
     });
@@ -41,7 +41,7 @@ function I(e) {
   };
   let S = async () => {
     r(!1);
-    await L3({
+    await setConsentFromRegion({
       consentRegion: "explicit",
       cookiesEnabled: !0
     });
@@ -51,7 +51,7 @@ function I(e) {
   };
   let v = async () => {
     r(!1);
-    await L3({
+    await setConsentFromRegion({
       consentRegion: "explicit",
       cookiesEnabled: !1
     });
@@ -102,10 +102,10 @@ function I(e) {
   }) || null;
 }
 export function $$S1(e) {
-  let t = useAtomWithSubscription(Dr);
+  let t = useAtomWithSubscription(consentStatusAtom);
   let r = !1;
-  return (t === S6.UNLOADED && (r = !0), t !== S6.YES || e.persistentMessage || (r = !0), V() && (r = !0), getInitialOptions().user_data?.id && (r = !0), (getInitialOptions().is_embed || isIframe()) && (r = !0), BrowserInfo.isMeetDevice && (r = !0), useEffect(() => {
-    !r && BrowserInfo.isIpadNative && L3({
+  return (t === ConsentStatus.UNLOADED && (r = !0), t !== ConsentStatus.YES || e.persistentMessage || (r = !0), V() && (r = !0), getInitialOptions().user_data?.id && (r = !0), (getInitialOptions().is_embed || isIframe()) && (r = !0), BrowserInfo.isMeetDevice && (r = !0), useEffect(() => {
+    !r && BrowserInfo.isIpadNative && setConsentFromRegion({
       consentRegion: "explicit",
       cookiesEnabled: !1
     });
@@ -116,7 +116,7 @@ export function $$S1(e) {
     },
     children: jsx(I, {
       ...e,
-      showBanner: t === S6.NO
+      showBanner: t === ConsentStatus.NO
     })
   });
 }

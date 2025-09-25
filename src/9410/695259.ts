@@ -3,7 +3,7 @@ import { atom } from "../figma_app/27355";
 import { F } from "../905/680873";
 import { useLatestRef } from "../figma_app/922077";
 import { l as _$$l } from "../905/745972";
-import { bG } from "../905/149328";
+import { getThemePx } from "../905/149328";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { y0 } from "../figma_app/718307";
 import { fr, UA, Cg, uF, ym } from "../9410/398228";
@@ -41,7 +41,7 @@ export function $$h0({
       let r = e * fr;
       r = Math.ceil(r / fr) * fr + t + UA;
       n && (r += fr);
-      return Math.min(r, Math.round(.25 * (a - bG() - Cg - i)));
+      return Math.min(r, Math.round(.25 * (a - getThemePx() - Cg - i)));
     }, [i, t, a, e, n]);
   }({
     numberOfPages: t,

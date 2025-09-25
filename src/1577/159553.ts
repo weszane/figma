@@ -51,7 +51,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { logError } from "../905/714362";
 import { p as _$$p } from "../figma_app/941287";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { TabLoop } from "../905/718764";
 import { C as _$$C } from "../905/807275";
 import { y as _$$y } from "../905/52479";
@@ -727,8 +727,8 @@ function eV(e) {
   let [t, i] = useState(null);
   let [a, r] = useState(0);
   let l = selectCurrentFile();
-  let s = useRef(lQ);
-  let c = useRef(lQ);
+  let s = useRef(noop);
+  let c = useRef(noop);
   let d = useRef(null);
   let _ = useRef(null);
   let m = zr(l, t);
@@ -753,7 +753,7 @@ function eV(e) {
     function e(e, t, a) {
       let n = window.innerWidth > 900 && window.innerHeight > 650;
       f.current.notificationId = e.notification_id;
-      n && UC(e) ? (i(AS(e)), r(t), s.current = a) : (i(null), s.current = lQ);
+      n && UC(e) ? (i(AS(e)), r(t), s.current = a) : (i(null), s.current = noop);
       f.current.mouseLocationHistory.clear();
     }
     return {
@@ -811,8 +811,8 @@ function eV(e) {
         onMouseLeave: () => {
           clearTimeout(f.current?.scheduledMarkAsRead);
           c.current();
-          c.current = lQ;
-          s.current = lQ;
+          c.current = noop;
+          s.current = noop;
         },
         children: jsx(TabLoop, {
           children: jsx(_$$d, {

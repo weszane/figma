@@ -4,7 +4,7 @@ import { VisualBellActions } from "../905/302958";
 import { showModalHandler } from "../905/156213";
 import { setupLoadingStateHandler } from "../905/696711";
 import { L } from "../905/92291";
-import { $ } from "../905/20253";
+import { googleDeviceClaimSuccessModal } from "../905/20253";
 import { createOptimistThunk } from "../905/350402";
 let $$u1 = createOptimistThunk((e, {
   fileKey: t,
@@ -48,7 +48,7 @@ let $$p0 = createOptimistThunk((e, {
   setupLoadingStateHandler(a, e, r);
   a.then(() => {
     e.dispatch(showModalHandler({
-      type: $,
+      type: googleDeviceClaimSuccessModal,
       data: {}
     }));
   }).catch(t => {

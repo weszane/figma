@@ -20,7 +20,7 @@ import { HiddenLabel } from "../905/270045";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { T as _$$T } from "../905/68180";
 import { K as _$$K2 } from "../905/621139";
-import { bL as _$$bL2, D0 } from "../905/4410";
+import { FormattedInputRoot, FormattedInputField } from "../905/4410";
 import { A as _$$A } from "../905/251970";
 import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
@@ -247,8 +247,8 @@ function L({
         children: [jsx(HiddenLabel, {
           htmlFor: "grid-track-size-input",
           children: "ROWS" === n ? getI18nString("fullscreen.properties_panel.grid.row_height") : getI18nString("fullscreen.properties_panel.grid.column_width")
-        }), jsx(_$$bL2, {
-          children: jsx(D0, {
+        }), jsx(FormattedInputRoot, {
+          children: jsx(FormattedInputField, {
             id: "grid-track-size-input",
             formatter: p,
             value: l,

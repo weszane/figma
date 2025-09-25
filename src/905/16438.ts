@@ -1,10 +1,10 @@
-export class $$n0 extends Error {
+export class SeverityError extends Error {
   severity = "high";
   errorDetail;
   constructor(e, t) {
     super(e);
-    Object.setPrototypeOf(this, $$n0.prototype);
+    Object.setPrototypeOf(this, SeverityError.prototype);
     t && t instanceof Error && (this.cause = t);
   }
 }
-export const pr = $$n0;
+export const pr = SeverityError;

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { ButtonPrimitive } from "../905/632989";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
@@ -102,7 +102,7 @@ let g = {
     $$css: !0
   },
   selectedProductDescriptionText: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: "x1quhyk7",
     marginTop: "x1bz8wuu",
     $$css: !0

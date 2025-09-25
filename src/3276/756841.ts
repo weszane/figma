@@ -91,7 +91,7 @@ import { h as _$$h } from "../905/994594";
 import { L as _$$L } from "../905/704296";
 import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { H_, z6, CU, $Q, a2 } from "../905/963340";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
@@ -1104,7 +1104,7 @@ function tp() {
   if ("loaded" !== n.status) return jsx(MenuContainerComp, {
     children: jsx(MenuItemComp, {
       disabled: !0,
-      onClick: lQ,
+      onClick: noop,
       children: renderI18nText("comments.error_loading_notification_preferences")
     })
   });

@@ -1,5 +1,5 @@
 import { createActionCreator } from "../905/73481";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { _H } from "../figma_app/598111";
 import { XHR } from "../905/910117";
@@ -108,10 +108,10 @@ let $$P18 = createOptimistThunk((e, {
     } = e.getState().teamBilling.summary;
     let c = annual_subscription?.quantity ? annual_subscription.current_period_end : null;
     let u = monthly_subscription?.quantity ? monthly_subscription.current_period_end : null;
-    let h = c && u ? A(c).isAfter(A(u)) ? c : u : c || u;
+    let h = c && u ? dayjs(c).isAfter(dayjs(u)) ? c : u : c || u;
     e.dispatch(FlashActions.flash(h ? getI18nString("flash.team_will_become_free_starter_team_on_date", {
       teamName: r.name,
-      cancelDate: A(h).toDate()
+      cancelDate: dayjs(h).toDate()
     }) : getI18nString("flash.team_will_be_downgraded_at_the_end_of_the_current_subscription_period", {
       teamName: r.name
     }), 8e3));

@@ -5,7 +5,7 @@ import o from "../vendor/239910";
 import { parsePxNumber } from "../figma_app/783094";
 import { useLatestRef } from "../figma_app/922077";
 import { getInitialOptions } from "../figma_app/169182";
-import { Av } from "../905/149328";
+import { getFileTypePx } from "../905/149328";
 import { Ww } from "../figma_app/440875";
 import { Ro } from "../figma_app/805373";
 import { W } from "../figma_app/54182";
@@ -47,7 +47,7 @@ export function $$j1(e) {
     user,
     tooltipOffsetY
   } = e;
-  Av();
+  getFileTypePx();
   let o = function (e) {
     let [t, i] = useState("");
     let r = useLatestRef(e);

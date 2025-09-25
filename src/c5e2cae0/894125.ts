@@ -12,7 +12,7 @@ import { TrackedButton } from "../figma_app/831799";
 import { Al } from "../9420/394825";
 import { selectCurrentUser } from "../905/372672";
 import { OI, Mt } from "../c5e2cae0/2942";
-import { Ju } from "../905/712921";
+import { ProductTierEnum } from "../905/712921";
 import { SubscriptionType, UpgradeSteps } from "../figma_app/831101";
 import { CreateUpgradeAction, TeamType, isCreateOrUpgrade, isCreateOrPlanComparison, isUpgradeExistingTeam } from "../figma_app/707808";
 import { Nd, N6 } from "../figma_app/81441";
@@ -147,7 +147,7 @@ export function $$b1(e) {
         analyticsEventManager.trackDefinedEvent("monetization_upgrades.checkout_breadcrumb_navigation", {
           fromStep: paymentStep,
           toStep: r.step,
-          tier: Ju.PRO,
+          tier: ProductTierEnum.PRO,
           isCampfireCart: !!e.isCampfireCart,
           teamId: teamId ?? void 0
         });

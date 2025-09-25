@@ -8,7 +8,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCurrentUserOrg } from "../905/845253";
 import { registerModal } from "../905/102752";
-import { K } from "../905/12775";
+import { isMfaForGuestEnabled } from "../905/12775";
 import { H } from "../905/444904";
 import { A } from "../5724/965092";
 let g = cssBuilderInstance.colorIcon.h32.w28.pb32.$;
@@ -20,7 +20,7 @@ let $$y0 = registerModal(function () {
   } = getInitialOptions();
   let t = isIframe() && frame_context?.type === "embed";
   let r = useCurrentUserOrg();
-  return K() && r ? jsx(H, {
+  return isMfaForGuestEnabled() && r ? jsx(H, {
     org: r
   }) : jsx(CustomModalComponent, {
     imageSrc: A,

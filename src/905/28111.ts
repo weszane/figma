@@ -22,7 +22,7 @@ import { formattedColorManipulator, defaultColorManipulator } from '../905/71372
 import { F_ } from '../905/748636';
 import { useCurrentUserOrgId } from '../905/845253';
 import { A as _$$A } from '../905/891805';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { j$, xm } from '../905/936278';
 import { calculatePickerPositionLeft } from '../905/959568';
 import { d as _$$d } from '../905/976845';
@@ -112,27 +112,27 @@ export function $$Z0({
 }
 export let $$X1 = createContext({
   colorContrastInfo: {
-    setFgHue: lQ,
-    setFgAlpha: lQ,
+    setFgHue: noop,
+    setFgAlpha: noop,
     showAutocorrectPreview: !1,
-    setShowAutocorrectPreview: lQ,
+    setShowAutocorrectPreview: noop,
     showColorSwatchInfoFlyout: !1,
-    setShowColorSwatchInfoFlyout: lQ
+    setShowColorSwatchInfoFlyout: noop
   },
   settings: {
     contrastInfoShown: !1,
-    setIsColorContrastInfoShown: lQ,
+    setIsColorContrastInfoShown: noop,
     contrastLevelForCategory: bm.AA,
     contrastLevelSelected: bm.AA,
-    setContrastLevelSelected: lQ,
+    setContrastLevelSelected: noop,
     categorySelected: Zf.auto,
-    setCategorySelected: lQ
+    setCategorySelected: noop
   },
   showColorContrast: !1,
   pickerSize: 0,
   isUnavailable: !0,
   toolStatus: j$.LOADING,
-  setIgnoreTimeout: lQ
+  setIgnoreTimeout: noop
 });
 export function $$Q2({
   recordingKey: e,

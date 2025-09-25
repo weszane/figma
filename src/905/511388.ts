@@ -17,7 +17,7 @@ import { KindEnum } from "../905/129884";
 import { Rs as _$$Rs } from "../905/991973";
 import { Link } from "../905/438674";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { setupThemeContext } from "../905/614223";
 import { BaseLinkComponent } from "../figma_app/637027";
 import { b as _$$b } from "../905/217163";
@@ -47,7 +47,7 @@ let o = memo(function (e) {
   });
 });
 var p = u;
-let S = ex("apple_ui_kit", function () {
+let S = registerTooltip("apple_ui_kit", function () {
   let e = jsx(Link, {
     trusted: !1,
     newTab: !0,
@@ -64,7 +64,7 @@ let S = ex("apple_ui_kit", function () {
     })
   });
 });
-let C = ex("community_fragment_license_tooltip", function () {
+let C = registerTooltip("community_fragment_license_tooltip", function () {
   let e = jsx("div", {
     className: "x1rg5ohu x14atkfc",
     children: jsx(Link, {
@@ -89,7 +89,7 @@ let C = ex("community_fragment_license_tooltip", function () {
     })
   });
 });
-let T = ex("figma_ui_kit", function () {
+let T = registerTooltip("figma_ui_kit", function () {
   let e = jsx(Link, {
     trusted: !1,
     newTab: !0,
@@ -106,7 +106,7 @@ let T = ex("figma_ui_kit", function () {
     })
   });
 });
-let k = ex("google_ui_kit", function () {
+let k = registerTooltip("google_ui_kit", function () {
   let e = jsx(Link, {
     trusted: !1,
     newTab: !0,
@@ -123,7 +123,7 @@ let k = ex("google_ui_kit", function () {
     })
   });
 });
-let N = ex("visual_assets_tooltip", function (e) {
+let N = registerTooltip("visual_assets_tooltip", function (e) {
   let t = jsx(BaseLinkComponent, {
     className: cssBuilderInstance.colorTextBrand.justifyCenter.hAuto.$,
     trusted: !1,

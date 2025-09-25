@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { $7, Sy, yq, Ao, CN, Wz } from "../figma_app/651866";
 import { LI, qk, xK } from "../905/543466";
 import { ImageSourceType } from "../905/585727";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ServiceCategories } from "../905/165054";
 import { ComponentPropsAiCPPBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -12,7 +12,7 @@ import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
 import { reportError } from "../905/11";
 import { trackFileEvent } from "../figma_app/314264";
-import { IL, Lg, SA, YK, Aq } from "../905/843553";
+import { ContentFillInternalError, TooManyNodesError, InvalidSelectionError, LayerGenerationError, NoDuplicateNodesError } from "../905/843553";
 import { logInfo } from "../905/714362";
 import { cortexAPI, StreamAsyncIterator } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
@@ -20,11 +20,11 @@ import { Zr } from "../figma_app/462456";
 import { JT } from "../figma_app/632248";
 import { pP } from "../figma_app/862289";
 import { mg, Xu, zA, SZ } from "../905/987149";
-import { Mo } from "../905/913055";
+import { getMatchingNodesToUpdateForQuery } from "../905/913055";
 import { b as _$$b } from "../905/776478";
 import { dd } from "../figma_app/604494";
 import { Jd } from "../figma_app/878113";
-import { A as _$$A } from "../905/929620";
+import { generateShimmerOverlay } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 import { xS } from "../figma_app/757114";
 var S = (e => (e[e.IN_PROGRESS = 0] = "IN_PROGRESS", e[e.CANCELLED = 1] = "CANCELLED", e))(S || {});
@@ -99,7 +99,7 @@ async function R(e, t, i, n, a, s, o, d, c, u) {
       e.name = i.cortex_error.type;
       e.message = i.cortex_error.data;
       return e;
-    } else if (i.trace) d.trace = i.trace;else if (!i.trace) throw new IL("Received invalid message from Cortex");
+    } else if (i.trace) d.trace = i.trace;else if (!i.trace) throw new ContentFillInternalError("Received invalid message from Cortex");
   }
   if (m) {
     let e = Zr(m, () => {
@@ -186,10 +186,10 @@ async function N(e, t, i, n, a, s, o, d = !1) {
 }
 async function U(e, t, i, n, s, o, c, u, p) {
   !function (e) {
-    if (0 === e.length) throw new IL("No nodes selected");
+    if (0 === e.length) throw new ContentFillInternalError("No nodes selected");
     let t = e[0].parentNode;
-    if (!t) throw new IL("No container node found for AutoContent Node");
-    if (ComponentPropsAiCPPBindings?.nodeHasTooManyChildrenForRepeatingContent(t.guid)) throw new Lg();
+    if (!t) throw new ContentFillInternalError("No container node found for AutoContent Node");
+    if (ComponentPropsAiCPPBindings?.nodeHasTooManyChildrenForRepeatingContent(t.guid)) throw new TooManyNodesError();
   }(e);
   let m = 1;
   let h = i;
@@ -199,11 +199,11 @@ async function U(e, t, i, n, s, o, c, u, p) {
     let i = ComponentPropsAiCPPBindings?.getNumHeaderNodes() ?? 0;
     let y = LI(e, i, h, t, u);
     if (!y) {
-      let e = new SA("Can't regenerate text - no selected nodes");
+      let e = new InvalidSelectionError("Can't regenerate text - no selected nodes");
       reportError(ServiceCategories.AI_PRODUCTIVITY, e);
       return e;
     }
-    if (!y.continuationNodes.length) throw new SA("Can't regenerate text - no replaceable nodes", {
+    if (!y.continuationNodes.length) throw new InvalidSelectionError("Can't regenerate text - no replaceable nodes", {
       reportToSentry: !1
     });
     if (Ao(y.continuationNodes)) throw new Jd();
@@ -214,7 +214,7 @@ async function U(e, t, i, n, s, o, c, u, p) {
       break;
     }
     if (0 === b.numReplaced && m > 1) {
-      let e = new YK("Failed to replace text content in all rows");
+      let e = new LayerGenerationError("Failed to replace text content in all rows");
       reportError(ServiceCategories.AI_PRODUCTIVITY, e, {
         extra: {
           attempts: m
@@ -225,7 +225,7 @@ async function U(e, t, i, n, s, o, c, u, p) {
     b.numReplaceableNodes <= b.numReplaced ? f = !0 : (m++, h += b.numReplaced);
   }
   if (m > 4) {
-    let e = new YK("Failed to replace text content in all rows after maximum retries");
+    let e = new LayerGenerationError("Failed to replace text content in all rows after maximum retries");
     reportError(ServiceCategories.AI_PRODUCTIVITY, e, {
       extra: {
         attempts: m,
@@ -253,11 +253,11 @@ export let $$B0 = async ({
     userPrompt
   } = t;
   let v = atomStoreManager.get(dd);
-  if (numExampleRows < 0) throw new SA("numExampleRows must be zero or higher");
-  if ("DUPLICATE_SESSION_TOAST" === source && guids.length <= 1) throw new Aq("No additional duplicate nodes found");
+  if (numExampleRows < 0) throw new InvalidSelectionError("numExampleRows must be zero or higher");
+  if ("DUPLICATE_SESSION_TOAST" === source && guids.length <= 1) throw new NoDuplicateNodesError("No additional duplicate nodes found");
   let I = (ComponentPropsAiCPPBindings?.getActiveNodeIds() ?? []).map(e => getSingletonSceneGraph().get(e)).filter(e => !!e);
   if (ComponentPropsAiCPPBindings?.imageFillAvailable()) {
-    await Promise.all(I.map(async t => (Vm(t.guid, jsx(_$$A, {
+    await Promise.all(I.map(async t => (Vm(t.guid, jsx(generateShimmerOverlay, {
       borderRadiusStyle: _$$b(t)
     })), await xS({
       node: t,
@@ -270,7 +270,7 @@ export let $$B0 = async ({
         ...t,
         guids: I.map(e => e.guid)
       },
-      reset: lQ
+      reset: noop
     };
   }
   let E = new Map();
@@ -354,7 +354,7 @@ export let $$B0 = async ({
       (function (e) {
         for (let [t, i] of e.entries()) {
           let e = getSingletonSceneGraph().get(t);
-          if (e) for (let t of Mo(e, "text-data")) t && t.isAlive && t.visible && !t.locked && permissionScopeHandler.ai("content_fill", () => {
+          if (e) for (let t of getMatchingNodesToUpdateForQuery(e, "text-data")) t && t.isAlive && t.visible && !t.locked && permissionScopeHandler.ai("content_fill", () => {
             ComponentPropsAiCPPBindings?.setTextContentOnTextNode(t.guid, i);
           });
         }
@@ -363,7 +363,7 @@ export let $$B0 = async ({
         let t = getSingletonSceneGraph();
         for (let i of e) {
           let e = t.get(i);
-          if (e) for (let t of Mo(e, "text-data")) t && t.isAlive && permissionScopeHandler.ai("content_fill", () => {
+          if (e) for (let t of getMatchingNodesToUpdateForQuery(e, "text-data")) t && t.isAlive && permissionScopeHandler.ai("content_fill", () => {
             t.removeSelfAndChildren();
           });
         }

@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { h as _$$h } from "../905/207101";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
@@ -87,7 +87,7 @@ export function $$M0() {
   let n = useAtomWithSubscription($5);
   let u = useAtomWithSubscription(T);
   let x = getUserCreatedAt();
-  let b = A().subtract(7, "day").isBefore(A(x));
+  let b = dayjs().subtract(7, "day").isBefore(dayjs(x));
   let y = _$$e({
     overlay: aI5,
     priority: N.DEFAULT_MODAL

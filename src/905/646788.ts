@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, memo, useEffect, useMemo, useRef, PureComponent, useLayoutEffect, Component, useId, createContext, useContext } from "react";
 import { useSelector, useDispatch, connect } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { assertNotNullish } from "../figma_app/95419";
 import { fileSelectedShareModalTab } from "../figma_app/91703";
 import { DeepLinkType } from "../905/15667";
@@ -112,7 +112,7 @@ import { rn as _$$rn } from "../figma_app/903573";
 import { N as _$$N } from "../figma_app/268271";
 import { R as _$$R2 } from "../905/298004";
 import { WZ } from "../905/893645";
-import { R as _$$R3 } from "../905/11928";
+import { NotModalType } from "../905/11928";
 import { GCV, KdZ, tzJ, ePo } from "../figma_app/6204";
 import { Link } from "../905/438674";
 import { Checkbox } from "../905/274480";
@@ -142,7 +142,7 @@ import { ServiceCategories } from "../905/165054";
 import { _ as _$$_ } from "../905/263184";
 import { R as _$$R4 } from "../905/256203";
 import { B as _$$B2 } from "../905/950875";
-import { A as _$$A5 } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { b as _$$b3 } from "../905/966382";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { reportError } from "../905/11";
@@ -181,7 +181,7 @@ import { deepEqual } from "../905/382883";
 import { useMemoShallow } from "../905/19536";
 import nA from "../vendor/241899";
 import { MediaQuerySvgComponent } from "../905/331623";
-import { W as _$$W2 } from "../905/841666";
+import { getCommunityHubLikeStatus } from "../905/841666";
 import { decimalToPercent } from "../figma_app/808294";
 import { isResourcePendingPublishing, isResourceDelisted } from "../figma_app/777551";
 import { M as _$$M2 } from "../905/759470";
@@ -1140,14 +1140,14 @@ function tV(e) {
     trackingContextName: "Sharing Clarity File Modal Onboarding Step 1",
     targetKey: tF,
     emphasized: !0,
-    zIndex: _$$R3.MODAL
+    zIndex: NotModalType.MODAL
   }, {
     title: renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_2_title"),
     description: c,
     trackingContextName: "Sharing Clarity File Modal Onboarding Step 2",
     targetKey: tM,
     emphasized: !0,
-    zIndex: _$$R3.MODAL
+    zIndex: NotModalType.MODAL
   }];
   e.showPrototypeStep && u.push({
     title: renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_3_title"),
@@ -1155,7 +1155,7 @@ function tV(e) {
     trackingContextName: "Sharing Clarity File Modal Onboarding Step 3",
     targetKey: tj,
     emphasized: !0,
-    zIndex: _$$R3.MODAL
+    zIndex: NotModalType.MODAL
   });
   return jsx(WZ, {
     isShowing,
@@ -2133,7 +2133,7 @@ function i3(e, t, i) {
   let s = 23;
   e.isSame(n, "day") ? s = t.hour() : i && e.isSame(i, "day") && (s = i.isSame(t, "day") ? i.hour() - t.hour() - 1 : i.hour());
   let o = e.isSame(t, "day");
-  let l = i4(o ? t.clone().add(1, "hour").startOf("hour") : _$$A5().startOf("day"));
+  let l = i4(o ? t.clone().add(1, "hour").startOf("hour") : dayjs().startOf("day"));
   if ("00:00" === l.key && o) return [];
   for (r.push(l); a < s;) {
     let t = i4(_$$U2(W7(e), r[a].key).clone().add(1, "hour"));
@@ -2152,7 +2152,7 @@ function i7(e) {
   let {
     onChangeExpiration
   } = e;
-  let i = e.expiration && _$$A5(e.expiration) || e.defaultExpiration;
+  let i = e.expiration && dayjs(e.expiration) || e.defaultExpiration;
   let [a, s] = useState(i);
   let o = i3(a, e.currentTimestamp, e.orgMaxExpiration);
   let [l, d] = useState(i6(o, a, cH(i)));
@@ -2183,7 +2183,7 @@ function i7(e) {
   }, [a, l, e.isSharingClarity, u]);
   let m = e.displayState === i0.EDIT_PWD_AND_EXP;
   let h = e.errorMessage && m ? p4 : R8;
-  let g = e.orgMaxExpiration ? _$$A5(e.orgMaxExpiration) : e.currentTimestamp.clone().add(1, "year");
+  let g = e.orgMaxExpiration ? dayjs(e.orgMaxExpiration) : e.currentTimestamp.clone().add(1, "year");
   return jsxs(Fragment, {
     children: [e.orgMaxExpirationInHrs && e.orgMaxExpirationInHrs > 24 && !e.isSharingClarity && jsx("div", {
       className: _O,
@@ -2210,7 +2210,7 @@ function i7(e) {
           type: "date",
           className: h,
           onChange: t => {
-            let i = _$$A5(t.target.value);
+            let i = dayjs(t.target.value);
             if (i.isValid()) {
               s(i);
               e.isSharingClarity && u(i, l);
@@ -2286,7 +2286,7 @@ function i8(e) {
   let [t, i] = useState(e.orgMaxExpirationInHrs.toString());
   let a = e.displayState === i0.EDIT_PWD_AND_EXP;
   let s = t => {
-    let i = _$$A5().add(parseInt(t), "hours");
+    let i = dayjs().add(parseInt(t), "hours");
     e.onChangeExpiration(i);
   };
   let o = function (e) {
@@ -2378,7 +2378,7 @@ function nt(e) {
   let [s, o] = useState(null);
   let l = e.orgMaxExpirationInHrs ? e.currentTimestamp.clone().add(e.orgMaxExpirationInHrs, "hours") : null;
   let d = l ? cH(l, !0) : Fn(e.currentTimestamp, $j.WEEK);
-  let c = e.expiresAt ? _$$A5(e.expiresAt) : d;
+  let c = e.expiresAt ? dayjs(e.expiresAt) : d;
   let [u, p] = useState(e.savedExpiration ? Dp.CURRENT : e.orgMaxExpirationInHrs ? Dp.CUSTOM : Dp.WEEK);
   let m = !!(e.orgMaxExpirationInHrs && e.orgMaxExpirationInHrs <= 24);
   let h = !!(e.orgMaxExpirationInHrs && e.orgMaxExpirationInHrs <= 168);
@@ -2411,9 +2411,9 @@ function nt(e) {
         children: [e.savedExpiration && jsx(_$$c$, {
           value: Dp.CURRENT,
           height: 28,
-          rightLabel: e.savedExpiration && _$$M(_$$A5(e.savedExpiration), !0),
+          rightLabel: e.savedExpiration && _$$M(dayjs(e.savedExpiration), !0),
           rightLabelStyle: i2,
-          children: i5(Dp.CURRENT, e.currentTimestamp, _$$A5(e.savedExpiration))
+          children: i5(Dp.CURRENT, e.currentTimestamp, dayjs(e.savedExpiration))
         }), e.savedExpiration && jsx(sK, {}), isDevEnvironment() && jsx(_$$c$, {
           value: Dp.TWENTY_SEC,
           height: 28,
@@ -2604,7 +2604,7 @@ function na({
   let [q, $] = useState((!!_$$d2(mainFileLinkExpirationConfig) || Q3(d)) && W());
   let [Z, X] = useState(W() ? _$$d2(mainFileLinkExpirationConfig) : null);
   let [Q, J] = useState(!viewer_export_restricted || R.linkAccess === FPermissionLevelType.EDIT);
-  let ee = _$$A5();
+  let ee = dayjs();
   let et = W() ? _$$d2(mainFileLinkExpirationConfig) : null;
   let en = v && null !== R.protoLinkAccess ? p8[R.protoLinkAccess].shareAudience : fb[R.linkAccess].shareAudience;
   let er = v ? J4.VIEW : fb[R.linkAccess].audienceAccessLevel || J4.VIEW;
@@ -4018,7 +4018,7 @@ function rn(e) {
     }
     return !1;
   })();
-  let A = !!_$$W2(d, ResourceTypeNoComment.HUB_FILE).data?.[0];
+  let A = !!getCommunityHubLikeStatus(d, ResourceTypeNoComment.HUB_FILE).data?.[0];
   let y = o?.editorType === _YF.SLIDES;
   let b = o && _$$W(o.editorType);
   let v = canPublishAsHubFile && !_ && "loading" !== p.status && (!HF(h) || isResourceDelisted(h)) && b;
@@ -4819,7 +4819,7 @@ function ae() {
     userFlagOnShow: r7,
     onClose: complete,
     targetKey: r9,
-    zIndex: _$$R3.MODAL,
+    zIndex: NotModalType.MODAL,
     emphasized: !0
   });
 }
@@ -4851,7 +4851,7 @@ function ar() {
     userFlagOnShow: at,
     onClose: complete,
     targetKey: an,
-    zIndex: _$$R3.MODAL,
+    zIndex: NotModalType.MODAL,
     emphasized: !0
   });
 }
@@ -4883,7 +4883,7 @@ function al() {
     userFlagOnShow: aa,
     onClose: complete,
     targetKey: ao,
-    zIndex: _$$R3.MODAL,
+    zIndex: NotModalType.MODAL,
     emphasized: !0
   });
 }
@@ -4926,7 +4926,7 @@ function ad(e) {
                 let {
                   num,
                   unit
-                } = lX(_$$A5(), _$$A5(e.expiresAt));
+                } = lX(dayjs(), dayjs(e.expiresAt));
                 let r = null;
                 switch (unit) {
                   case "minute":
@@ -5300,7 +5300,7 @@ function aI() {
 }
 let aw = {
   inviteLevel: AccessLevelEnum.NONE,
-  changeInviteLevel: lQ,
+  changeInviteLevel: noop,
   inviteLevelOptions: []
 };
 let aC = createContext(void 0);
@@ -6436,7 +6436,7 @@ function sp({
   if (ee) return null;
   if (ei === _$$q.CAN_UPGRADE) {
     er || (handleUpgrade({
-      afterUpgradeCallback: lQ,
+      afterUpgradeCallback: noop,
       licenseType: et,
       upgradeReason: _$$i.DRAFTS_SHARE,
       entryPoint: DeepLinkType.SHARE_DRAFTS

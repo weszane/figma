@@ -13,7 +13,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { buildUploadUrl } from "../figma_app/169182";
 import { setupAdvancedLazyLoader, NONE_SYMBOL } from "../905/992467";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { getI18nString } from "../905/303541";
 import { zR } from "../figma_app/817077";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
@@ -225,7 +225,7 @@ export function $$I0({
               children: [jsx(ButtonPrimitive, {
                 className: "x78zum5 xdt5ytf x167g77z",
                 onClick: () => A(e.type),
-                children: jsx(oW, {
+                children: jsx(WAFImage, {
                   src: buildUploadUrl(e.icon),
                   alt: e.title,
                   className: Ay.props(E.image, I === e.type && E.selectedImage).className

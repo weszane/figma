@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
@@ -16,7 +16,7 @@ export function $$d5(e, t) {
     return !!t && r;
   }("campfire_admin_dash_edu");
   return !!(e && r && r?.campfireModelEnabledAt && a && $$c0({
-    date: A(r.campfireModelEnabledAt).add(1, "day").toDate()
+    date: dayjs(r.campfireModelEnabledAt).add(1, "day").toDate()
   }) && $$u3({
     date: new Date(e)
   }) && (!t || $$u3({
@@ -24,13 +24,13 @@ export function $$d5(e, t) {
   })));
 }
 export function $$c0(e) {
-  let t = e?.date ? A(e.date) : A();
+  let t = e?.date ? dayjs(e.date) : dayjs();
   let r = getInitialOptions().analyze_data_flow_v2_until;
-  return !!r && A(r).isBefore(t);
+  return !!r && dayjs(r).isBefore(t);
 }
 export function $$u3(e) {
   let t = getInitialOptions().analyze_data_flow_v2_until;
-  return !!t && A(e.date).isBefore(A(t));
+  return !!t && dayjs(e.date).isBefore(dayjs(t));
 }
 export function $$p4() {
   let e = $$l1();

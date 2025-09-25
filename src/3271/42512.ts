@@ -52,7 +52,7 @@ import { Um } from '../905/848862';
 import { getVsCodeLinkProps } from '../905/850671';
 import { isVsCodeEnvironment } from '../905/858738';
 import { W as _$$W } from '../905/865092';
-import { a as _$$a } from '../905/925868';
+import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, showDropdownThunk } from '../905/929976';
 import { d as _$$d } from '../905/976845';
 import { TextWithTruncation } from '../905/984674';
@@ -1193,7 +1193,7 @@ function tJ({
         },
         ctaText: l ? getI18nString('universal_insert.all_approved_widgets') : getI18nString('universal_insert.all_approved_plugins')
       }) : jsxs(Fragment, {
-        children: [jsx(tf, {}), jsx(_$$a, {
+        children: [jsx(tf, {}), jsx(IntersectionSentinel, {
           onIntersectionChange: e => {
             e.isIntersecting && trackEventAnalytics('community_feed_bottom_reached', {
               location: 'inserts',

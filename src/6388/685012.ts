@@ -18,7 +18,7 @@ import { TextImageEnum } from "../figma_app/334505";
 import { processImageWithThumbnail } from "../figma_app/624361";
 import { replaceSelection } from "../figma_app/741237";
 import { useSceneGraphSelector } from "../figma_app/722362";
-import { A as _$$A } from "../905/929620";
+import { generateShimmerOverlay } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 let I = "Buzz bulk create update";
 export function $$T1(e) {
@@ -72,7 +72,7 @@ export function $$C0({
               let e = a.split(",")[1];
               let t = a.split(";")[0]?.split(":")[1] || "";
               if (!e || !t) continue;
-              Vm(s.guid, jsx(_$$A, {}));
+              Vm(s.guid, jsx(generateShimmerOverlay, {}));
               let l = base64ToUint8Array(e);
               processImageWithThumbnail(l, t, "File").then(e => {
                 let t = -1;

@@ -43,6 +43,7 @@
     "@types/node": "^24.3.0",
     "@zip.js/zip.js": "^2.8.2",
     "a11y-dialog": "^8.1.4",
+    "async-mutex": "^0.5.0",
     "blakejs": "^1.2.1",
     "bowser": "^1.9.4",
     "classnames": "^2.5.1",

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef } from "react";
 import { ServiceCategories } from "../905/165054";
-import { eu } from "../vendor/421718";
+import { Mutex } from "async-mutex";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions, isDevEnvironment } from "../figma_app/169182";
@@ -68,7 +68,7 @@ let N = () => P() || O();
 let P = () => "errored" === window.arkose;
 let O = () => "timed-out" === window.arkose;
 let D = () => "completed" === window.arkose;
-let L = new eu();
+let L = new Mutex();
 let F = _$$D(e => e ? 864e5 : 1e4);
 let M = _$$D(() => new Date().getTime());
 let j = _$$D(() => !getFalseValue());

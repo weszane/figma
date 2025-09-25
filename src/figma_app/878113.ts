@@ -18,7 +18,7 @@ import { trackFileEvent } from "../figma_app/314264";
 import { StreamAsyncIterator } from "../figma_app/432652";
 import { Ay, Gx } from "../figma_app/948389";
 import { fullscreenValue } from "../figma_app/455680";
-import { Mo, i2 } from "../905/913055";
+import { getMatchingNodesToUpdateForQuery, getSelectedNodesWithinBreakpointFrame } from "../905/913055";
 import { Zr } from "../figma_app/462456";
 import { JT } from "../figma_app/632248";
 import { pP, z8, RL } from "../figma_app/862289";
@@ -262,7 +262,7 @@ export async function $$M0({
       let c = a.selectionRange?.end ?? a.node.characters.length;
       let u = a.node;
       _.has(a) || (permissionScopeHandler.ai(editScopeLabel, () => {
-        for (let e of Mo(u, "text-data")) {
+        for (let e of getMatchingNodesToUpdateForQuery(u, "text-data")) {
           c > e.characters.length && (c = e.characters.length);
           e.spliceCharacters(s, c, "", "BEFORE");
           onNodeStreamEvent?.({
@@ -279,7 +279,7 @@ export async function $$M0({
             t.abort();
             return;
           }
-          for (let e of Mo(u, "text-data")) {
+          for (let e of getMatchingNodesToUpdateForQuery(u, "text-data")) {
             e.spliceCharacters(h, h, delta, "BEFORE");
             onNodeStreamEvent?.({
               eventType: "AFTER_STREAM_CHUNK",
@@ -356,7 +356,7 @@ export function $$F1({
           nodeText,
           selectionRange
         } of g.targets) if (node.isAlive) {
-          for (let e of Mo(node, "text-data")) e.characters = nodeText;
+          for (let e of getMatchingNodesToUpdateForQuery(node, "text-data")) e.characters = nodeText;
           if (selectionRange) {
             let {
               start,
@@ -377,7 +377,7 @@ export function $$F1({
     },
     lastParameters: y,
     onRun: async function (l) {
-      let u = i2();
+      let u = getSelectedNodesWithinBreakpointFrame();
       let p = {
         targets: on(u, {
           allowEmpty: r,
@@ -416,7 +416,7 @@ export function $$j5(e, t) {
     onlyAllowSingular,
     allowEmptyText
   } = t;
-  let a = i2();
+  let a = getSelectedNodesWithinBreakpointFrame();
   let s = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
   let o = t.instruction ?? renderI18nText("ai_text_tools.selection_instruction");
   if (onlyAllowSingular && a && (0 === a.length || a.length > 1 || "TEXT" !== a[0].type)) return o;

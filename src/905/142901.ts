@@ -2,25 +2,25 @@ import { isNullish } from "../figma_app/95419";
 import { getI18nString } from "../905/303541";
 import { s$ } from "../figma_app/361035";
 import { JT } from "../figma_app/847597";
-import { jv } from "../905/84777";
+import { setupPricesTransform } from "../905/84777";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { collaboratorSet, viewCollaboratorSet } from "../905/332483";
 import { useFormatProductNamesForSeatType } from "../figma_app/217457";
 import { CurrencyFormatter } from "../figma_app/514043";
-import { IX } from "../905/712921";
+import { RenewalTermEnum } from "../905/712921";
 export function $$m0({
   currency: e,
   tier: t,
   renewalTerm: i,
   showCents: m
 }) {
-  let h = jv({
+  let h = setupPricesTransform({
     billableProductKeys: collaboratorSet,
     baseQuery: {
       currency: e,
       tier: t,
       renewalTerm: i,
-      unit: IX.MONTH
+      unit: RenewalTermEnum.MONTH
     }
   });
   let g = useFormatProductNamesForSeatType({

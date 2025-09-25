@@ -12,7 +12,7 @@ import { EMPTY_SPACE_MAP, createSpaceFacetFromMap, buildQueryObject, MAX_TRUNCAT
 import { e as _$$e } from "../905/404280";
 import { n as _$$n2 } from "../905/624711";
 import { k as _$$k } from "../905/252342";
-import { P as _$$P } from "../905/16832";
+import { setupFacetQueryAnalytics } from "../905/16832";
 import { A as _$$A } from "../905/421315";
 import { F as _$$F } from "../905/801537";
 import { selectedItemAtom } from "../905/61477";
@@ -70,7 +70,7 @@ export function $$R0({
   let R = useAtomWithSubscription(selectedItemAtom);
   let P = useAtomWithSubscription(wf);
   let [O, D] = useAtomValueAndSetter(a3);
-  let L = _$$P();
+  let L = setupFacetQueryAnalytics();
   useEffect(() => {
     "loaded" === d.status && s.length > 0 && O !== P && (D(P), L(s, CreatorResourceType.SPACE, InputType.DROPDOWN));
   }, [d]);

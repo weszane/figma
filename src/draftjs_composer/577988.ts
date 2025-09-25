@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { Button } from "../905/521428";
 import l from "classnames";
 import { Point } from "../905/736624";
@@ -161,9 +161,9 @@ export function $$D1(e) {
       mentionables: _$$j,
       messageMeta,
       mountInputFocused: e.focusOnMount || !1,
-      onCancel: onCancel || lQ,
+      onCancel: onCancel || noop,
       onFocus: z,
-      onSubmit: onSubmit || lQ,
+      onSubmit: onSubmit || noop,
       onUpdateTextArea: K,
       openFileKey: h,
       openFileTeamId: T,

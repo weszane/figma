@@ -11,7 +11,7 @@ import { tT } from "../905/723791";
 import { P as _$$P } from "../905/347284";
 import { y2 } from "../figma_app/563413";
 import { V as _$$V } from "../figma_app/385855";
-import { F as _$$F, y as _$$y } from "../905/171275";
+import { DesignsList, SizeOption } from "../905/171275";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -71,7 +71,7 @@ import { A as _$$A2 } from "../6828/555288";
 import { Xs, gi, Ti } from "../469e6e40/412963";
 import ek from "classnames";
 import { ResourceStatus } from "../905/663269";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { z as _$$z, Z as _$$Z } from "../905/306088";
 import { X as _$$X2 } from "../905/376628";
 import { handleWorkspaceLibrarySubscription, handleOrgLibrarySubscription, handleDeleteWorkspaceLibrarySubscription } from "../figma_app/430563";
@@ -299,7 +299,7 @@ let ey = function ({
       height: 120,
       children: jsx(_$$V, {
         thumbnailUrl: e.thumbnailUrl,
-        thumbnailType: _$$F.DEFAULT_DESIGN,
+        thumbnailType: DesignsList.DEFAULT_DESIGN,
         borderRadius: 4,
         noBorder: !0
       })
@@ -1033,7 +1033,7 @@ function ta({
 }) {
   let [t, a] = useState(!1);
   return jsxs(Fragment, {
-    children: [jsx(_$$a, {
+    children: [jsx(IntersectionSentinel, {
       onIntersectionChange: e => {
         a(!e.isIntersecting);
       }
@@ -1288,9 +1288,9 @@ function tg({
           width: 80,
           children: jsx(_$$V, {
             thumbnailUrl: isCommunityLibrary(e) ? e.thumbnail_url : "loaded" === r.status ? getResourceDataOrFallback(r.data?.file)?.thumbnailUrl : null,
-            thumbnailType: _$$F.DEFAULT_DESIGN,
+            thumbnailType: DesignsList.DEFAULT_DESIGN,
             borderRadius: 4,
-            size: _$$y.SMALL
+            size: SizeOption.SMALL
           })
         }), jsxs("div", {
           className: cssBuilderInstance.flex.alignCenter.$,

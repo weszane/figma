@@ -1,251 +1,387 @@
-import { useRef, useEffect, useCallback, useLayoutEffect } from "react";
-import { SKIP_RECORDING, useRecording } from "../905/959312";
-import { executeEventHandler, preventAndStopEvent, markEventAsProcessed } from "../905/955878";
-import { isActiveElement } from "../905/117474";
-import { F } from "../905/658036";
-import { hasIncrementBy, getIncrementTargets, performNudge, handleParseWithError, areValuesEqual, parseValue } from "../905/687992";
-import { A } from "../vendor/723372";
-import { hasTextSelection } from "../905/914656";
-function l(e, t) {
-  isActiveElement(e) && (t?.select ? t.select(e) : e.select());
-}
-function c(e, t, i) {
-  if (t && hasIncrementBy(e) && e.getSelection) {
-    let {
-      start,
-      end
-    } = e.getSelection(i.value, t);
-    i.setSelectionRange(start, end);
-    return !0;
+import classNames from 'classnames'
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import { isActiveElement } from '../905/117474'
+import { isCommandKeyActive } from '../905/658036'
+import { areValuesEqual, getIncrementTargets, handleParseWithError, hasIncrementBy, parseValue, performNudge } from '../905/687992'
+import { hasTextSelection } from '../905/914656'
+import { executeEventHandler, markEventAsProcessed, preventAndStopEvent } from '../905/955878'
+import { SKIP_RECORDING, useRecording } from '../905/959312'
+
+/**
+ * Selects the input element using the provided selection handler or default select.
+ * @param input - The input element to select.
+ * @param selectionHandler - Optional selection handler.
+ * @returns void
+ * @originalName l
+ */
+function selectInputElement(input: HTMLInputElement, selectionHandler?: { select?: (el: HTMLInputElement) => void }) {
+  if (isActiveElement(input)) {
+    selectionHandler?.select ? selectionHandler.select(input) : input.select()
   }
-  return !1;
 }
-let m = function (...e) {
-  return (t, i) => {
-    let r = useRef({});
-    for (let n of (i && Object.assign(r.current, i), e)) t = n(t, r.current);
-    return t;
-  };
-}(({
-  ref: e,
-  formatter: t,
-  value: i,
-  onChange: s,
-  onChangeRestricted: o,
-  onKeyDown: l,
-  ...u
-}, p) => {
-  let m = useRef(null);
-  useEffect(() => {
-    p && (p.select = e => {
-      if (m.current) {
-        let i = m.current;
-        if (m.current = null, c(t, i, e)) return;
-      }
-      if (t.defaultSelection) {
-        let {
-          start,
-          end
-        } = t.defaultSelection(e.value);
-        e.setSelectionRange(start, end);
-      } else e.select();
-    });
-  }, [p, t]);
-  let h = t.format(i);
-  let g = n => {
-    if (executeEventHandler(n, l) || !hasIncrementBy(t)) return SKIP_RECORDING;
-    switch (n.key) {
-      case "ArrowUp":
-      case "ArrowDown":
-        {
-          let r = e.current;
-          let a = n.shiftKey;
-          let l = "ArrowDown" === n.key ? -1 : 1;
-          let u = getIncrementTargets(t, r);
-          p?.commit?.();
-          let h = e => performNudge(t, e, l, {
-            big: a,
-            incrementTargets: u
-          });
-          let g = r.value;
-          let f = handleParseWithError(t, g, i, "nudge", n);
-          if (!f) break;
-          if (f.callback) {
-            f.callback(e => h(e).value, {
-              commit: !0
-            });
-            break;
-          }
-          let _ = f.value;
-          let A = h(_);
-          areValuesEqual(t, _, A.value) || s(A.value, "nudge");
-          A.value !== A.preClamped && o?.(A.preClamped, {
-            value: A.value
-          });
-          m.current = u;
-          c(t, u, r);
-          break;
-        }
-      default:
-        return SKIP_RECORDING;
+
+/**
+ * Handles selection range for incrementable input.
+ * @param input - The input element.
+ * @param incrementTargets - Increment targets.
+ * @param props - Input props containing value and setSelectionRange.
+ * @returns boolean
+ * @originalName c
+ */
+function handleIncrementSelection(
+  input: any,
+  incrementTargets: any,
+  props: { value: any, setSelectionRange: (start: number, end: number) => void },
+): boolean {
+  if (incrementTargets && hasIncrementBy(input) && input.getSelection) {
+    const { start, end } = input.getSelection(props.value, incrementTargets)
+    props.setSelectionRange(start, end)
+    return true
+  }
+  return false
+}
+
+/**
+ * Composes multiple input handlers for text input.
+ * @param {...Function} handlers - Handler functions.
+ * @returns Function
+ * @originalName m
+ */
+export function setupTextInputHandlers(...handlers: Fn[]) {
+  return (props: any, context: any) => {
+    const ref = useRef({})
+    if (context)
+      Object.assign(ref.current, context)
+    let result = props
+    for (const handler of handlers) {
+      result = handler(result, ref.current)
     }
-    preventAndStopEvent(n);
-  };
-  let f = useRecording(g, {
-    eventName: "keydown",
-    recordingKey: p?.recordingKey
-  }, [g]);
-  return {
-    ...u,
-    ref: e,
-    value: h,
-    onChange: n => {
-      let r = handleParseWithError(t, n, i, "change", null);
-      if (r) {
-        if (r.callback) r.callback(e => parseValue(t, n, e).value, {
-          commit: !0
-        });else {
-          if (r.value === i) ;else {
-            s(r.value, "change");
-            return;
-          }
-          r.value !== r.parsedValue && o?.(r.parsedValue, {
-            value: r.value
-          });
+    return result
+  }
+}
+
+/**
+ * Handles formatted input logic.
+ * @param props - Input props.
+ * @param context - Context object.
+ * @returns object
+ * @originalName (first handler in m)
+ */
+function formattedInputHandler(
+  {
+    ref,
+    formatter,
+    value,
+    onChange,
+    onChangeRestricted,
+    onKeyDown,
+    ...rest
+  }: any,
+  context: any,
+) {
+  const selectionRef = useRef(null)
+
+  useEffect(() => {
+    if (context) {
+      context.select = (input: any) => {
+        if (selectionRef.current) {
+          const targets = selectionRef.current
+          selectionRef.current = null
+          if (handleIncrementSelection(formatter, targets, input))
+            return
+        }
+        if (formatter.defaultSelection) {
+          const { start, end } = formatter.defaultSelection(input.value)
+          input.setSelectionRange(start, end)
+        }
+        else {
+          input.select()
         }
       }
-      e.current.value = h;
-    },
-    onKeyDown: f
-  };
-}, ({
-  ref: e,
-  value: t,
-  onChange: i,
-  onKeyDown: d,
-  onBlur: c,
-  ...u
-}, p) => {
-  let m = useRef(!1);
-  let h = useRecording(i, {
-    eventName: "commit",
-    recordingKey: p?.recordingKey
-  }, [i]);
-  let g = useCallback(() => {
-    let i = e.current;
-    if (i && isActiveElement(i) && l(i, p), !m.current) return;
-    let n = i.value;
-    n !== t && (i.value = t, h?.(n));
-    m.current = !1;
-  }, [p, h, e, t]);
-  useEffect(() => {
-    p && (p.commit = g);
-  }, [p, g]);
-  useLayoutEffect(() => {
-    let i = e.current;
-    !m.current && (i.value = t ?? "", isActiveElement(i) && l(i, p));
-  }, [t]);
-  return {
-    ...u,
-    ref: e,
-    defaultValue: t,
-    onKeyDown(e) {
-      if (executeEventHandler(e, d)) return;
-      let i = e.currentTarget;
-      switch (e.code) {
-        case "Enter":
-          i.blur();
-          break;
-        case "Escape":
-          if (!m.current) return;
-          m.current = !1;
-          i.value = t ?? "";
-          l(i, p);
-          break;
-        case "KeyZ":
-          F(e) && !m.current && markEventAsProcessed(e);
-          return;
-        default:
-          return;
+    }
+  }, [context, formatter])
+
+  const formattedValue = formatter.format(value)
+
+  /**
+   * Handles keydown events for nudge and increment.
+   * @param event - Keyboard event.
+   * @returns any
+   * @originalName g
+   */
+  const handleKeyDown = (event: any) => {
+    if (executeEventHandler(event, onKeyDown) || !hasIncrementBy(formatter))
+      return SKIP_RECORDING
+    switch (event.key) {
+      case 'ArrowUp':
+      case 'ArrowDown': {
+        const input = ref.current
+        const isBig = event.shiftKey
+        const direction = event.key === 'ArrowDown' ? -1 : 1
+        const incrementTargets = getIncrementTargets(formatter, input)
+        context?.commit?.()
+        const nudge = (val: any) => performNudge(formatter, val, direction, { big: isBig, incrementTargets })
+        const currentValue = input.value
+        const parseResult = handleParseWithError(formatter, currentValue, value, 'nudge', event)
+        if (!parseResult)
+          break
+        if (parseResult.callback) {
+          parseResult.callback((val: any) => nudge(val).value, { commit: true })
+          break
+        }
+        const parsedValue = parseResult.value
+        const nudged = nudge(parsedValue)
+        if (!areValuesEqual(formatter, parsedValue, nudged.value)) {
+          onChange(nudged.value, 'nudge')
+        }
+        if (nudged.value !== nudged.preClamped) {
+          onChangeRestricted?.(nudged.preClamped, { value: nudged.value })
+        }
+        selectionRef.current = incrementTargets
+        handleIncrementSelection(formatter, incrementTargets, input)
+        break
       }
-      preventAndStopEvent(e);
+      default:
+        return SKIP_RECORDING
+    }
+    preventAndStopEvent(event)
+  }
+
+  const recordingKeyDown = useRecording(handleKeyDown, {
+    eventName: 'keydown',
+    recordingKey: context?.recordingKey,
+  }, [handleKeyDown])
+
+  return {
+    ...rest,
+    ref,
+    value: formattedValue,
+    onChange: (inputValue: any) => {
+      const parseResult = handleParseWithError(formatter, inputValue, value, 'change', null)
+      if (parseResult) {
+        if (parseResult.callback) {
+          parseResult.callback((val: any) => parseValue(formatter, inputValue, val).value, { commit: true })
+        }
+        else {
+          if (parseResult.value !== value) {
+            onChange(parseResult.value, 'change')
+            return
+          }
+          if (parseResult.value !== parseResult.parsedValue) {
+            onChangeRestricted?.(parseResult.parsedValue, { value: parseResult.value })
+          }
+        }
+      }
+      ref.current.value = formattedValue
     },
-    onBlur(e) {
-      c?.(e);
-      g();
+    onKeyDown: recordingKeyDown,
+  }
+}
+
+/**
+ * Handles commit and blur logic for input.
+ * @param props - Input props.
+ * @param context - Context object.
+ * @returns object
+ * @originalName (second handler in m)
+ */
+function commitBlurInputHandler(
+  {
+    ref,
+    value,
+    onChange,
+    onKeyDown,
+    onBlur,
+    ...rest
+  }: any,
+  context: any,
+) {
+  const isDirtyRef = useRef(false)
+  const commitRecording = useRecording(onChange, {
+    eventName: 'commit',
+    recordingKey: context?.recordingKey,
+  }, [onChange])
+
+  /**
+   * Commits the input value if changed.
+   * @originalName g
+   */
+  const commitInput = useCallback(() => {
+    const input = ref.current
+    if (input && isActiveElement(input))
+      selectInputElement(input, context)
+    if (!isDirtyRef.current)
+      return
+    const currentValue = input.value
+    if (currentValue !== value) {
+      input.value = value
+      commitRecording?.(currentValue)
+    }
+    isDirtyRef.current = false
+  }, [context, commitRecording, ref, value])
+
+  useEffect(() => {
+    if (context)
+      context.commit = commitInput
+  }, [context, commitInput])
+
+  useLayoutEffect(() => {
+    const input = ref.current
+    if (!isDirtyRef.current) {
+      input.value = value ?? ''
+      if (isActiveElement(input))
+        selectInputElement(input, context)
+    }
+  }, [value])
+
+  return {
+    ...rest,
+    ref,
+    defaultValue: value,
+    onKeyDown(event: any) {
+      if (executeEventHandler(event, onKeyDown))
+        return
+      const input = event.currentTarget
+      switch (event.code) {
+        case 'Enter':
+          input.blur()
+          break
+        case 'Escape':
+          if (!isDirtyRef.current)
+            return
+          isDirtyRef.current = false
+          input.value = value ?? ''
+          selectInputElement(input, context)
+          break
+        case 'KeyZ':
+          if (isCommandKeyActive(event) && !isDirtyRef.current)
+            markEventAsProcessed(event)
+          return
+        default:
+          return
+      }
+      preventAndStopEvent(event)
+    },
+    onBlur(event: any) {
+      onBlur?.(event)
+      commitInput()
     },
     onChange() {
-      m.current = !0;
-    }
-  };
-}, ({
-  onPointerDown: e,
-  onFocus: t,
-  onClick: i,
-  className: r,
-  ...s
-}, o) => {
-  let d = useRef(!1);
-  return {
-    ...s,
-    onPointerDown(t) {
-      e?.(t);
-      d.current = !1;
+      isDirtyRef.current = true
     },
-    onFocus(e) {
-      t?.(e);
-      d.current = !0;
-    },
-    onClick(e) {
-      let t = d.current;
-      if (d.current = !1, executeEventHandler(e, i)) return;
-      let n = e.currentTarget;
-      !t || hasTextSelection(n) || l(n, o);
-    },
-    className: A(r, "inputs__text__FIVwi")
-  };
-});
-export function $$h0({
-  value: e,
-  formatter: t,
-  onChange: i,
-  recordingKey: a,
-  id: s,
-  "aria-label": o,
-  htmlAttributes: l,
-  ...d
-}) {
-  let c = useRecording((e, t) => d.disabled ? SKIP_RECORDING : (i(e, t), t.commit && "change" !== t.source && "nudge" !== t.source) ? void 0 : SKIP_RECORDING, {
-    eventName: "change",
-    recordingKey: a
-  }, [i, d.disabled]);
-  let u = useRef(null);
-  let p = m({
-    ...d,
-    ...l,
-    ref: u,
-    value: e,
-    formatter: t,
-    onChange: (e, t) => c(e, {
-      commit: !0,
-      source: t
-    })
-  }, {
-    recordingKey: a
-  });
-  return {
-    value: e,
-    formatter: t,
-    onChange: c,
-    onChangeRestricted: d.onChangeRestricted,
-    getStringValue: () => u.current.value,
-    inputProps: {
-      id: s,
-      "aria-label": o,
-      ...p
-    }
-  };
+  }
 }
-export let $$g1 = $$h0;
-export const E = $$h0;
-export const N = $$g1;
+
+/**
+ * Handles pointer, focus, and click events for input.
+ * @param props - Input props.
+ * @param context - Context object.
+ * @returns object
+ * @originalName (third handler in m)
+ */
+function pointerFocusClickHandler(
+  {
+    onPointerDown,
+    onFocus,
+    onClick,
+    className,
+    ...rest
+  }: any,
+  context: any,
+) {
+  const isFocusedRef = useRef(false)
+
+  return {
+    ...rest,
+    onPointerDown(event: any) {
+      onPointerDown?.(event)
+      isFocusedRef.current = false
+    },
+    onFocus(event: any) {
+      onFocus?.(event)
+      isFocusedRef.current = true
+    },
+    onClick(event: any) {
+      const wasFocused = isFocusedRef.current
+      isFocusedRef.current = false
+      if (executeEventHandler(event, onClick))
+        return
+      const input = event.currentTarget
+      if (!wasFocused || hasTextSelection(input))
+        return
+      selectInputElement(input, context)
+    },
+    className: classNames(className, 'inputs__text__FIVwi'),
+  }
+}
+
+// Compose the handlers for text input
+export const getInputProps = setupTextInputHandlers(
+  formattedInputHandler,
+  commitBlurInputHandler,
+  pointerFocusClickHandler,
+)
+
+/**
+ * Main hook for text input with formatting and recording.
+ * @param props - Input props.
+ * @returns object
+ * @originalName $$h0
+ */
+export function useFormattedTextInput({
+  value,
+  formatter,
+  onChange,
+  recordingKey,
+  id,
+  'aria-label': ariaLabel,
+  htmlAttributes,
+  ...rest
+}: any) {
+  const changeRecording = useRecording(
+    (val: any, source: any) =>
+      rest.disabled
+        ? SKIP_RECORDING
+        : (onChange(val, source), source.commit && source.source !== 'change' && source.source !== 'nudge')
+            ? undefined
+            : SKIP_RECORDING,
+    {
+      eventName: 'change',
+      recordingKey,
+    },
+    [onChange, rest.disabled],
+  )
+
+  const inputRef = useRef(null)
+
+  const inputProps = getInputProps(
+    {
+      ...rest,
+      ...htmlAttributes,
+      ref: inputRef,
+      value,
+      formatter,
+      onChange: (val: any, source: any) =>
+        changeRecording(val, { commit: true, source }),
+    },
+    { recordingKey },
+  )
+
+  return {
+    value,
+    formatter,
+    onChange: changeRecording,
+    onChangeRestricted: rest.onChangeRestricted,
+    getStringValue: () => inputRef.current.value,
+    inputProps: {
+      id,
+      'aria-label': ariaLabel,
+      ...inputProps,
+    },
+  }
+}
+
+// Export aliases for compatibility
+export let $$g1 = useFormattedTextInput
+// export const E = useFormattedTextInput
+export const N = useFormattedTextInput

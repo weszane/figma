@@ -33,7 +33,7 @@ import { D as _$$D } from "../905/261307";
 import { $ as _$$$ } from "../905/724765";
 import { t as _$$t2 } from "../905/789267";
 import { YG, PK } from "../905/223565";
-import { u as _$$u } from "../905/14084";
+import { NuxSeatRequestConfirmationModal } from "../905/14084";
 var _ = p;
 export function $$B5(e) {
   let t = selectCurrentFile();
@@ -647,7 +647,7 @@ export function $$z2({
         autoApproved: !0
       });
       t(showModalHandler({
-        type: _$$u,
+        type: NuxSeatRequestConfirmationModal,
         data: {
           autoApproved: !0,
           seatType: m
@@ -771,7 +771,7 @@ export function $$Y3({
         seatType: c
       });
       t(showModalHandler({
-        type: _$$u,
+        type: NuxSeatRequestConfirmationModal,
         data: {
           autoApproved: !1,
           seatType: c,

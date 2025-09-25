@@ -29,7 +29,7 @@ import { conditionalFeatureFlag } from "../figma_app/169182";
 import { VisualBellActions } from "../905/302958";
 import { zC, hB, OT } from "../905/70369";
 import { VisualBellDismissReason, VisualBellIcon } from "../905/576487";
-import { L as _$$L } from "../905/22352";
+import { calculateNotificationTimeout } from "../905/22352";
 import { H as _$$H } from "../905/861007";
 let M = {
   offscreen: {
@@ -127,7 +127,7 @@ export function $$B0(e) {
   let S = function (e, t) {
     let r = performance.now();
     let n = useMemo(() => r, [e]);
-    return useMemo(() => e ? _$$L(e, t) : 1 / 0, [e, t]) - (r - n);
+    return useMemo(() => e ? calculateNotificationTimeout(e, t) : 1 / 0, [e, t]) - (r - n);
   }(bell, queueDepth);
   let A = function (e, t) {
     let r = useRef(void 0);

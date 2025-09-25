@@ -6,7 +6,7 @@ import { IconButton } from "../905/443068";
 import { f as _$$f } from "../905/257420";
 import { _ as _$$_ } from "../905/821768";
 import { _ as _$$_2 } from "../905/862468";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Fullscreen, Command, ActionType } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -52,7 +52,7 @@ let E = {
     borderBottomRightRadius: null,
     height: "xxk0z11",
     width: "xh8yej3",
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     "--color-icon": "xmauxvm x1x9btor",
     backgroundColor: "xv2f06h",
     color: "x1n0bwc9 x1c5oinq",

@@ -5,7 +5,7 @@ import { D } from '../905/490996'
  * Constant used to indicate that recording should be skipped
  * Original name: $$a2
  */
-const SKIP_RECORDING = 'SKIP_RECORDING'
+export const SKIP_RECORDING = 'SKIP_RECORDING'
 
 /**
  * Context for managing recording state

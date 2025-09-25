@@ -3,7 +3,7 @@ import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
 import { ModalRootComponent } from '../905/38914';
-import { Ln } from '../905/84777';
+import { setupCurrentContractPricesTransform } from '../905/84777';
 import { registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
@@ -22,9 +22,9 @@ import { ProductAccessTypeEnum } from '../905/513035';
 import { Button } from '../905/521428';
 import { VisualBellIcon } from '../905/576487';
 import { getResourceDataOrFallback } from '../905/663269';
-import { g as _$$g } from '../905/687265';
+import { textDisplayConfig } from '../905/687265';
 import { e0 } from '../905/696396';
-import { IX } from '../905/712921';
+import { RenewalTermEnum } from '../905/712921';
 import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { N as _$$N2 } from '../905/809096';
 import { AutoLayout } from '../905/470281';
@@ -225,9 +225,9 @@ function er(e) {
     billableProductKeyContractPrices,
     status
   } = function (e, t, a) {
-    let s = Ln(e.key, collaboratorSet, {
+    let s = setupCurrentContractPricesTransform(e.key, collaboratorSet, {
       renewalTerm: a,
-      unit: IX.MONTH
+      unit: RenewalTermEnum.MONTH
     });
     let [n] = handleSuspenseRetainRelease(s);
     let r = isProrationBillingEnabledForCurrentPlan();
@@ -404,7 +404,7 @@ function el() {
         direction: 'vertical',
         spacing: 4,
         children: [jsx('p', {
-          ...xk(_$$g.textBodyMediumStrong),
+          ...xk(textDisplayConfig.textBodyMediumStrong),
           children: renderI18nText('plan_settings.auto_approval_settings.scim_badge.title')
         }), jsx('p', {
           children: renderI18nText('plan_settings.auto_approval_settings.scim_badge.subtitle')

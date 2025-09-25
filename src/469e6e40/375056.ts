@@ -44,10 +44,10 @@ import { setupToggleButton } from "../905/167712";
 import { O as _$$O } from "../905/487602";
 import { e as _$$e3 } from "../905/149844";
 import { m as _$$m2 } from "../905/270214";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { E as _$$E2 } from "../905/53857";
 import { _ as _$$_2 } from "../7021/243271";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { Pd, yn } from "../figma_app/84966";
 import { e5 as _$$e4, x$, Hx, iy, Bf, GK, Dc, TV } from "../469e6e40/616503";
 import { a } from "../905/964520";
@@ -306,7 +306,7 @@ function X() {
 let ed = {
   heading: {
     color: "x1akne3o",
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   content: {
@@ -319,13 +319,13 @@ let ed = {
     rowGap: null,
     columnGap: null,
     color: "x1n0bwc9",
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
 let ec = {
   heading: {
-    ..._$$g.textHeadingSmall,
+    ...textDisplayConfig.textHeadingSmall,
     $$css: !0
   }
 };
@@ -500,21 +500,21 @@ function em(e) {
 }
 let ef = {
   headerRightP: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     textAlign: "x1hr2gdg",
     $$css: !0
   },
   heading: {
-    ..._$$g.textHeadingSmall,
+    ...textDisplayConfig.textHeadingSmall,
     $$css: !0
   },
   subheading: {
-    ..._$$g.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     $$css: !0
   },
   lineText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -635,10 +635,10 @@ function ek(e) {
     return e.willCancelAt ? getI18nString("admin_settings.plan_subscription_card.ending_date", {
       endingAt: e.willCancelAt
     }) : e.latestAnnualInvoice ? e.shouldAutoRenew ? getI18nString("admin_settings.plan_subscription_card.next_renewal_date", {
-      renewalAt: _$$A(e.latestAnnualInvoice.period_ends_at).toDate()
+      renewalAt: dayjs(e.latestAnnualInvoice.period_ends_at).toDate()
     }) : getI18nString("admin_settings.plan_subscription_card.date_range", {
-      startsAt: _$$A(e.latestAnnualInvoice.period_starts_at).toDate(),
-      endsAt: _$$A(e.latestAnnualInvoice.period_ends_at).toDate()
+      startsAt: dayjs(e.latestAnnualInvoice.period_starts_at).toDate(),
+      endsAt: dayjs(e.latestAnnualInvoice.period_ends_at).toDate()
     }) : getI18nString("admin_settings.plan_subscription_card.no_invoices");
   }, [e.upcomingAnnualInvoice, e.willCancelAt, e.latestAnnualInvoice, e.planStarting, e.upcomingRenewalWillPause, e.shouldAutoRenew, r, i]);
   let c = useMemo(() => {
@@ -873,13 +873,13 @@ function eM(e) {
 }
 let eP = {
   title: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     color: "x1akne3o",
     display: "xt0psk2",
     $$css: !0
   },
   lineCopy: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: "x1akne3o",
     marginTop: "xsj8jdm",
     $$css: !0

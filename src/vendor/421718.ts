@@ -1,4 +1,4 @@
-let $$i1 = Error("timeout while waiting for mutex to become available");
+let E_TIMEOUT = Error("timeout while waiting for mutex to become available");
 Error("mutex already locked");
 let s = Error("request for lock canceled");
 var o = function (e, r, n, i) {
@@ -28,7 +28,7 @@ var o = function (e, r, n, i) {
     d((i = i.apply(e, r || [])).next());
   });
 };
-class a {
+class Semaphore {
   constructor(e, r = s) {
     this._value = e;
     this._cancelError = r;
@@ -157,9 +157,9 @@ var p = function (e, r, n, i) {
     d((i = i.apply(e, r || [])).next());
   });
 };
-export class $$g0 {
+export class Mutex {
   constructor(e) {
-    this._semaphore = new a(1, e);
+    this._semaphore = new Semaphore(1, e);
   }
   acquire() {
     return p(this, arguments, void 0, function* (e = 0) {
@@ -210,7 +210,7 @@ var m = function (e, r, n, i) {
     d((i = i.apply(e, r || [])).next());
   });
 };
-export function $$v2(e, r, n = $$i1) {
+export function withTimeout(e, r, n = E_TIMEOUT) {
   return {
     acquire: (i, s) => {
       let o;
@@ -268,6 +268,6 @@ export function $$v2(e, r, n = $$i1) {
 function y(e) {
   return void 0 !== e.getValue;
 }
-export const eu = $$g0;
-export const iu = $$i1;
-export const wj = $$v2;
+export const eu = Mutex;
+export const iu = E_TIMEOUT;
+export const wj = withTimeout;

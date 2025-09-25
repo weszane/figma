@@ -3,7 +3,7 @@ import { useCallback, useMemo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { w4, Z9 } from "../figma_app/770359";
 import { lV, lr } from "../figma_app/617606";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { IconButton } from "../905/443068";
 import { k as _$$k } from "../905/443820";
 import { R as _$$R } from "../905/256203";
@@ -76,7 +76,7 @@ function $({
     }),
     children: [T && jsx(IconButton, {
       "aria-label": getI18nString("sites.panel.code_component_multiplayer_warning"),
-      onClick: lQ,
+      onClick: noop,
       htmlAttributes: {
         "data-tooltip": getI18nString("sites.panel.code_component_multiplayer_warning"),
         "data-tooltip-type": KindEnum.TEXT

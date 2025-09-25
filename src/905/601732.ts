@@ -1,17 +1,17 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
-import { b } from "../905/22449";
-import { c as _$$c } from "../905/34525";
+import { noop } from 'lodash-es';
+import { RadioPrimitiveRoot } from "../905/22449";
+import { RadioPrimitiveOption } from "../905/34525";
 import { getI18nString } from "../905/303541";
 import { H8, nl } from "../905/590952";
-import { Lz, Zc } from "../905/497882";
+import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { LG } from "../905/448440";
 import { jr, j4, Z7, MO } from "../figma_app/599979";
 import { isWidgetOrPlugin } from "../figma_app/45218";
 import { TeamOrgType } from "../figma_app/10554";
-import { A as _$$A } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 import { iy, uK, O0, Ee, I1 } from "../905/916525";
 export function $$$$A0({
   authorField: e
@@ -20,19 +20,19 @@ export function $$$$A0({
     allowedAuthors,
     existingResourceContent
   } = e.deps;
-  let a = Lz(e, void 0);
+  let a = getFieldValueOrDefault(e, void 0);
   let s = useMemo(() => LG(existingResourceContent) ? allowedAuthors.filter(e => jr(e)) : [...allowedAuthors].sort((e, t) => v(e) - v(t)), [allowedAuthors, existingResourceContent]);
-  return existingResourceContent && isWidgetOrPlugin(existingResourceContent) && !Zc(e) ? jsx(x, {
+  return existingResourceContent && isWidgetOrPlugin(existingResourceContent) && !canSetFieldValue(e) ? jsx(x, {
     existingResourceContent
-  }) : jsx(_$$A, {
+  }) : jsx(FieldContainer, {
     label: getI18nString("community.publishing.author_share_as"),
-    children: jsx(b, {
+    children: jsx(RadioPrimitiveRoot, {
       className: iy,
       value: a ? $$b1(a) : void 0,
-      readonly: !Zc(e),
+      readonly: !canSetFieldValue(e),
       onChange: t => {
         let i = s.find(e => $$b1(e) === t);
-        Zc(e) && e.setValue(i);
+        canSetFieldValue(e) && e.setValue(i);
       },
       children: s.map(e => jsx(y, {
         author: e,
@@ -49,7 +49,7 @@ function y({
   let r = $$b1(e);
   return i ? jsxs("label", {
     className: uK,
-    children: [E(e, i), jsx(_$$c, {
+    children: [E(e, i), jsx(RadioPrimitiveOption, {
       value: r,
       id: r,
       className: O0
@@ -81,13 +81,13 @@ function x({
   let {
     id
   } = e.publisher;
-  return jsx(_$$A, {
+  return jsx(FieldContainer, {
     label: getI18nString("community.publishing.author_share_as"),
-    children: jsx(b, {
+    children: jsx(RadioPrimitiveRoot, {
       className: iy,
       value: id,
       readonly: !0,
-      onChange: lQ,
+      onChange: noop,
       children: jsx(S, {
         publisher: e.publisher,
         value: id
@@ -115,7 +115,7 @@ function S({
         imageUrl: img_url,
         name
       }
-    }), jsx(_$$c, {
+    }), jsx(RadioPrimitiveOption, {
       value: t,
       id: t,
       className: O0

@@ -3,7 +3,7 @@ import { createContext, createRef, useCallback, useContext, useEffect, useId, us
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { hideInstanceSwapPicker } from '../905/8732';
-import { r as _$$r2 } from '../905/12476';
+import { hideAllPickersAndPreviews } from '../905/12476';
 import { useMemoStable } from '../905/19536';
 import { k as _$$k } from '../905/44647';
 import { d as _$$d2 } from '../905/49800';
@@ -1096,7 +1096,7 @@ function e9({
       onChange: t => {
         r(e.property, t);
       },
-      onMouseDown: () => _(_$$r2),
+      onMouseDown: () => _(hideAllPickersAndPreviews),
       property: t,
       recordingKey: generateRecordingKey(s, `select-${e.property}`),
       children: [...l].map(t => jsx(_$$c$, {

@@ -3,7 +3,7 @@ import { then } from "../181e8476/626372";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import i, { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ServiceCategories } from "../905/165054";
 import { Link } from "../905/438674";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
@@ -22,7 +22,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { useLocalStorageSync } from "../905/657224";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
-import { A as _$$A2 } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { isDevEnvironment } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { Badge, BadgeColor } from "../figma_app/919079";
@@ -899,7 +899,7 @@ function eH(e) {
   return !!t && isPublishedLibraryWithAssets(t) && isCommunityLibrary(t);
 }
 let ez = (e, t) => {
-  let r = useMemo(() => e ? _$$A2(e).fromNow() : void 0, [e]);
+  let r = useMemo(() => e ? dayjs(e).fromNow() : void 0, [e]);
   return r ? t ? getI18nString("dev_handoff.figmadocs.connected_last_published_at_to_target", {
     lastPublishedAt: r,
     target: t
@@ -1411,7 +1411,7 @@ export function $$eQ0({
             formatter: eZ,
             id: w,
             onChange: e => setSelectedLabel(e),
-            onDropdownHidden: lQ,
+            onDropdownHidden: noop,
             property: D.doc.label,
             children: availableLabels.map(e => jsx(c$, {
               value: e
@@ -1458,7 +1458,7 @@ export function $$eQ0({
               formatter: eZ,
               id: w,
               onChange: e => setSelectedLabel(e),
-              onDropdownHidden: lQ,
+              onDropdownHidden: noop,
               property: doc.label,
               children: availableLabels.map(e => jsx(c$, {
                 value: e

@@ -12,7 +12,7 @@ import { p as _$$p, u as _$$u } from "../1250/964548";
 import { V } from "../0c62c2fd/421640";
 import { ud } from "../figma_app/681697";
 import { useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
@@ -148,7 +148,7 @@ export function $$R0({
               return r;
             case m.CANNOT_CREATE:
             case m.UPGRADE_PENDING:
-              return lQ;
+              return noop;
             case m.CAN_AUTO_UPGRADE:
             case m.CAN_REQUEST_UPGRADE:
               return n => function ({

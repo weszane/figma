@@ -1,3 +1,4 @@
+import type { DisabledResource } from '../905/989992'
 import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useStableMemo } from '../905/19536'
 import { SubscriptionManager } from '../905/417830'

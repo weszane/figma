@@ -24,7 +24,7 @@ import { g as _$$g3 } from '../642/794951';
 import { o as _$$o5 } from '../642/854123';
 import { Ay as _$$Ay3 } from '../642/964720';
 import { r as _$$r7 } from '../905/11924';
-import { Q as _$$Q2 } from '../905/11928';
+import { Ui3PositionType } from '../905/11928';
 import { DevModeUI } from '../905/15667';
 import { isLoading } from '../905/18797';
 import { z4 } from '../905/37051';
@@ -110,8 +110,8 @@ import { e as _$$e2 } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { getVisibleTheme } from '../905/640017';
 import { XF } from '../905/661614';
-import { oW as _$$oW } from '../905/675859';
-import { g as _$$g } from '../905/687265';
+import { WAFImage } from '../905/675859';
+import { textDisplayConfig } from '../905/687265';
 import { eA as _$$eA } from '../905/695660';
 import { qo, UN } from '../905/700578';
 import { defaultColorManipulator } from '../905/713722';
@@ -140,11 +140,11 @@ import { ManuallyLabeledCheckbox } from '../905/909715';
 import { XHR } from '../905/910117';
 import { bL as _$$bL, _L } from '../905/911410';
 import { e as _$$e5 } from '../905/916195';
-import { A as _$$A2 } from '../905/920142';
+import { dayjs } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
 import { Jn } from '../905/927294';
 import { q as _$$q5 } from '../905/932270';
-import { lQ as _$$lQ } from '../905/934246';
+import { noop } from 'lodash-es';
 import { Violation } from '../905/940056';
 import { selectUserFlag } from '../905/940356';
 import { b as _$$b5 } from '../905/946806';
@@ -920,7 +920,7 @@ function eb() {
     recordingKey: 'ai_assistant_prompt_box_view',
     value: prompt,
     duplicateAndRun: !1,
-    setDuplicateAndRun: _$$lQ
+    setDuplicateAndRun: noop
   }) : null;
 }
 function ej() {
@@ -1269,7 +1269,7 @@ function e7() {
       aspectRatio: 480 / 270
     }),
     onClose: complete,
-    position: _$$Q2.BOTTOM_RIGHT,
+    position: Ui3PositionType.BOTTOM_RIGHT,
     primaryCta: {
       label: renderI18nText('upsell.dev_mode.contextual_overlay.cta'),
       onClick: () => {
@@ -1307,7 +1307,7 @@ function th() {
     }
   }, [t]);
   let s = wW(l && 'userId' in l ? l.userId : null);
-  let o = !!l && _$$A2.unix(l.lastUpdateUnixTimestamp).isAfter(_$$A2().subtract(60, 'day'));
+  let o = !!l && dayjs.unix(l.lastUpdateUnixTimestamp).isAfter(dayjs().subtract(60, 'day'));
   let a = _$$U2('upsell');
   let d = useAtomWithSubscription(LZ);
   let u = useCanAccessFullDevMode();
@@ -1360,7 +1360,7 @@ function th() {
   let E = _$$W();
   let S = useModalManager({
     open: !0,
-    onClose: _$$lQ,
+    onClose: noop,
     preventUserClose: !0,
     recordingKey: 'dev-mode-paywall-modal'
   });
@@ -1501,7 +1501,7 @@ function tq({
         },
         onClick: e,
         className: 'x11g6tue xzjbwwf x3w9dv2',
-        children: jsx(_$$oW, {
+        children: jsx(WAFImage, {
           className: 'xb3r6kr',
           alt: 'A graphic showing the demo file thumbnail',
           src: buildUploadUrl('eab479b46c1a94910464200211143d64fe917ae1')
@@ -1561,7 +1561,7 @@ function tW() {
 }
 let t1 = {
   title: {
-    ..._$$g.textHeadingSmall,
+    ...textDisplayConfig.textHeadingSmall,
     $$css: !0
   },
   assetContainer: {
@@ -1624,7 +1624,7 @@ let t1 = {
     minHeight: 'x4wtjwi',
     width: 'xeq5yr9',
     alignSelf: 'xpvyfi4',
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -1970,7 +1970,7 @@ function lw({
               children: [jsx('div', {
                 className: lj,
                 children: getI18nString('starting_points.website')
-              }), jsx(_$$oW, {
+              }), jsx(WAFImage, {
                 className: lv,
                 src: buildUploadUrl(b.website),
                 alt: 'Website template'
@@ -1986,7 +1986,7 @@ function lw({
               children: [jsx('div', {
                 className: lj,
                 children: getI18nString('starting_points.mobile_app')
-              }), jsx(_$$oW, {
+              }), jsx(WAFImage, {
                 className: lv,
                 src: buildUploadUrl(b.mobile),
                 alt: 'Mobile app template'
@@ -2002,7 +2002,7 @@ function lw({
               children: [jsx('div', {
                 className: lj,
                 children: getI18nString('starting_points.desktop_app')
-              }), jsx(_$$oW, {
+              }), jsx(WAFImage, {
                 className: 'starting_points_templates_modal--desktopTemplateImage--3kplg',
                 src: buildUploadUrl(b.desktop),
                 alt: 'Desktop app template'
@@ -2138,7 +2138,7 @@ function lV() {
     },
     trackingContextName: 'Visual Assets Intro Tooltip',
     userFlagOnShow: bo,
-    position: _$$Q2.UI3_EDITOR_TOP_LEFT,
+    position: Ui3PositionType.UI3_EDITOR_TOP_LEFT,
     onClose: complete
   });
 }
@@ -3124,27 +3124,27 @@ function no({
 }
 let na = {
   landingPageHeader: {
-    ..._$$g.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     color: 'xiuzu7u',
     $$css: !0
   },
   landingPageSubheader: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'xv1l7n4',
     $$css: !0
   },
   featureHeader: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     color: 'xiuzu7u',
     $$css: !0
   },
   featureSubheader: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'xv1l7n4',
     $$css: !0
   },
   layerCountText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'xv1l7n4',
     textAlign: 'x2b8uid',
     userSelect: 'x87ps6o',
@@ -3206,7 +3206,7 @@ let nj = {
     borderBottomLeftRadius: null,
     borderBottomRightRadius: null,
     backgroundColor: 'x1v8gsql',
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -3560,12 +3560,12 @@ let nX = {
     $$css: !0
   },
   listItemHeader: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     width: 'x1oysuqx',
     $$css: !0
   },
   listItemSubheader: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     width: 'x1oysuqx',
     $$css: !0
@@ -3739,11 +3739,11 @@ function n0() {
 }
 let n1 = {
   instructions: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   headerText: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   errorState: {
@@ -3759,7 +3759,7 @@ let n1 = {
     paddingBlock: null,
     paddingTop: null,
     paddingBottom: null,
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     $$css: !0
   }
 };
@@ -3920,7 +3920,7 @@ function iE({
   display: l,
   searchQuery: i
 }) {
-  let r = useAtomWithSubscription(_$$rg) ?? _$$lQ;
+  let r = useAtomWithSubscription(_$$rg) ?? noop;
   let s = useAtomWithSubscription(jV) ?? (() => !1);
   return l === 'GRID' ? jsx(iR, {
     items: t,
@@ -4137,7 +4137,7 @@ function iR({
             s(e.id);
             r();
           },
-          children: jsx(_$$oW, {
+          children: jsx(WAFImage, {
             src: e.thumbnail_url,
             alt: e.name
           })
@@ -4858,13 +4858,13 @@ function i2({
 }
 let i5 = {
   header: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   numLibraries: {
     display: 'x78zum5',
     alignItems: 'x6s0dn4',
-    ..._$$g.textBodySmall,
+    ...textDisplayConfig.textBodySmall,
     userSelect: 'x87ps6o',
     $$css: !0
   }
@@ -5107,7 +5107,7 @@ let ro = memo(({
         backgroundImage: `url(${bg})`
       })
     },
-    children: jsx(_$$oW, {
+    children: jsx(WAFImage, {
       src: i.src,
       className: 'x19kjcj4 x193iq5w xmz0i5r',
       alt: getI18nString('design_linter.penalty_box.thumbnail_alt')
@@ -5123,7 +5123,7 @@ let ro = memo(({
 let ra = {
   loadingText: {
     color: 'x1n0bwc9',
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     marginLeft: 'xrybvsa',
     marginRight: 'x17qaar8',
     marginInlineStart: null,
@@ -5133,7 +5133,7 @@ let ra = {
     $$css: !0
   },
   description: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     marginLeft: 'xrybvsa',
     marginInlineStart: null,
     marginInlineEnd: null,
@@ -5234,7 +5234,7 @@ let ra = {
     $$css: !0
   },
   groupTitle: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1akne3o',
     $$css: !0
   },
@@ -6455,7 +6455,7 @@ let r8 = {
     '--height': (e => typeof e == 'number' ? `${e}px` : e != null ? e : void 0)(`calc(${t ?? 540}px - ${rc.suggestionsModalHeaderHeight} - ${rc.previewHeaderHeight})`)
   }],
   comparableTitle: {
-    ..._$$g.textBodySmall,
+    ...textDisplayConfig.textBodySmall,
     color: 'x1n0bwc9',
     textAlign: 'x2b8uid',
     backgroundColor: 'x1v8gsql',
@@ -6534,7 +6534,7 @@ let r8 = {
     $$css: !0
   },
   previewContent: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     userSelect: 'x87ps6o',
     padding: 'xiqviz9',
     paddingInline: null,
@@ -7263,7 +7263,7 @@ function sV() {
 }
 let sD = {
   rowListHeader: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     padding: 'xp41m2r',
     paddingInline: null,
     paddingStart: null,
@@ -7285,7 +7285,7 @@ let sD = {
     $$css: !0
   },
   titleContent: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     display: 'x78zum5',
     $$css: !0
   },
@@ -7312,7 +7312,7 @@ let sD = {
     $$css: !0
   },
   blockActionButtonText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1quhyk7',
     $$css: !0
   },
@@ -7411,7 +7411,7 @@ let sD = {
     $$css: !0
   },
   currentValueContainer: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     display: 'x78zum5',
     color: 'x1n0bwc9',
     alignItems: 'x6s0dn4',
@@ -7503,7 +7503,7 @@ let sD = {
     $$css: !0
   },
   selectedSuggestion: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     display: 'xrvj5dj',
     gridTemplateColumns: 'xju1xpo',
     width: 'xh8yej3',
@@ -7970,7 +7970,7 @@ function s4({
     className: 'x78zum5 x6s0dn4 xe8ttls xe3gq44',
     children: [jsx('div', {
       className: 'x6s0dn4 xkawg4k xsb15dp x1sxf85j x78zum5 x2lah0s xl56j7k xyo1k6t x187nhsf xn3w4p2',
-      children: jsx(_$$oW, {
+      children: jsx(WAFImage, {
         alt: i.name,
         src: i.thumbnail_url,
         className: 'xq8v1hd xdnzh0y'
@@ -8356,11 +8356,11 @@ function s6({
 }
 let s9 = {
   header: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   },
   fromLibrarySubheader: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     display: 'x78zum5',
     alignItems: 'x6s0dn4',
     color: 'x1n0bwc9',
@@ -8723,7 +8723,7 @@ function oa({
 }
 let od = {
   subtypeLabel: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     color: 'x1akne3o',
     display: 'x78zum5',
     alignItems: 'x6s0dn4',
@@ -8733,13 +8733,13 @@ let od = {
     $$css: !0
   },
   explanationText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1akne3o',
     lineHeight: 'x37zpob',
     $$css: !0
   },
   fixButton: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1quhyk7',
     padding: 'xm22vyk',
     paddingInline: null,
@@ -8763,7 +8763,7 @@ let od = {
     $$css: !0
   },
   ignoreButton: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     padding: 'xm22vyk',
     paddingInline: null,
@@ -9449,7 +9449,7 @@ function oS({
     type: kQ.TEXT
   });
 }
-_$$g.textBodyMediumStrong;
+textDisplayConfig.textBodyMediumStrong;
 let ow = 'design-linter-group-view-next-button';
 let oR = memo(() => {
   let [e, t] = useState(!1);
@@ -9713,7 +9713,7 @@ let oN = memo(() => {
 });
 let oA = {
   noViolations: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1n0bwc9',
     display: 'x78zum5',
     justifyContent: 'xl56j7k',
@@ -9753,7 +9753,7 @@ let oM = memo(() => {
 let oO = {
   noViolationsContainer: {
     color: 'x1n0bwc9',
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     display: 'x78zum5',
     width: 'xh8yej3',
     height: 'x5yr21d',
@@ -10452,7 +10452,7 @@ function dc({
 }
 let dx = {
   nameInfoText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: 'x1akne3o',
     $$css: !0
   },

@@ -8,7 +8,7 @@ import { useMemo, useCallback } from "react";
 import { bL, gZ } from "../905/598775";
 import { ButtonPrimitive } from "../905/632989";
 import { e as _$$e } from "../905/916195";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -33,7 +33,7 @@ let E = {
     $$css: !0
   },
   leftSideUi3: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   row: {

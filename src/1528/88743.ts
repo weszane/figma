@@ -42,7 +42,7 @@ import { oe } from "../figma_app/376315";
 import { throwTypeError } from "../figma_app/465776";
 import { ZH } from "../figma_app/504823";
 import { ButtonPrimitive } from "../905/632989";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { eI as _$$eI, GC } from "../1528/961203";
 import { _j, kV } from "../9410/486658";
 import { Checkbox } from "../905/274480";
@@ -359,7 +359,7 @@ let ee = {
     $$css: !0
   },
   exportCarouselHeader: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     textAlign: "x2b8uid",
     $$css: !0
   }

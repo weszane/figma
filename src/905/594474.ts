@@ -22,22 +22,22 @@ import { r as _$$r } from "../905/334940";
 import { o as _$$o } from "../905/785255";
 import { r as _$$r2 } from "../905/290294";
 import { D as _$$D } from "../905/572843";
-import { A as _$$A2, o as _$$o2 } from "../905/17894";
-import { Zc, Lz, i_ as _$$i_, c_ } from "../905/497882";
+import { unsetSymbol, withSubmissionError } from "../905/17894";
+import { canSetFieldValue, getFieldValueOrDefault, isFieldValidated, assertFieldReady } from "../905/497882";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { __, tZ as _$$tZ, Mm } from "../905/271611";
-import { A as _$$A3 } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 import L from "classnames";
 import { getAnnualPriceString } from "../figma_app/808294";
-import { U as _$$U } from "../905/331038";
-import { w as _$$w } from "../905/113805";
+import { findFirstResult } from "../905/331038";
+import { getValidationErrors } from "../905/113805";
 import { l4 } from "../figma_app/975811";
 import { FormattedInputVariant1 } from "../905/203369";
 import { pK, _Z, z3, PW, vz, Dq } from "../905/235660";
 import { A as _$$A4 } from "../905/601732";
 import { t as _$$t3 } from "../905/104116";
-import { P as _$$P } from "../905/19648";
+import { CategorySelectDropdown } from "../905/19648";
 import { A as _$$A5 } from "../905/554063";
 import { A as _$$A6 } from "../905/425801";
 import { $ as _$$$ } from "../905/410306";
@@ -70,13 +70,13 @@ import { G6, ir as _$$ir } from "../905/671449";
 import { g as _$$g } from "../905/356410";
 import { ButtonPrimitive } from "../905/632989";
 import { A as _$$A0 } from "../905/251970";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { getValueOrFallback } from "../905/872825";
 import { CW, M0, Rd, Gf, f7, Dd, MO, Z7, Q4, Kg, jr, l8, UU, of } from "../figma_app/599979";
 import { IMAGE_TYPES } from "../905/966582";
 import { L as _$$L } from "../905/597048";
-import { b as _$$b3 } from "../905/22449";
-import { c as _$$c3 } from "../905/34525";
+import { RadioPrimitiveRoot } from "../905/22449";
+import { RadioPrimitiveOption } from "../905/34525";
 import { iy as _$$iy, BA, lR, Ee, uK, O0, I1 } from "../905/916525";
 import { H as _$$H2 } from "../905/367945";
 import { A as _$$A1 } from "../905/144978";
@@ -97,7 +97,7 @@ import { O as _$$O } from "../905/483217";
 import { T as _$$T } from "../905/943304";
 import { K as _$$K2 } from "../905/198422";
 import { S as _$$S3 } from "../905/60183";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { $ as _$$$4 } from "../905/379902";
 import { Y as _$$Y } from "../905/185567";
 import { isAnyPublisher, isAcceptedPublisher } from "../figma_app/564095";
@@ -116,7 +116,7 @@ import { l as _$$l } from "../905/493845";
 import { B as _$$B } from "../905/536646";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
-import { T as _$$T2, e as _$$e2 } from "../905/15569";
+import { setupFormValidationHandler, setupAtomFormHandler } from "../905/15569";
 import { q as _$$q } from "../905/840070";
 import { v as _$$v2 } from "../905/513628";
 import { Z9 } from "../905/104173";
@@ -160,11 +160,11 @@ import { KT, Cd, ME, jc, DK, $o } from "../905/54042";
 function D({
   annualDiscountField: e
 }) {
-  if (!Zc(e)) return null;
+  if (!canSetFieldValue(e)) return null;
   let {
     currentValue
   } = e;
-  return jsx(_$$A3, {
+  return jsx(FieldContainer, {
     label: getI18nString("community.seller.discount"),
     children: jsx(Checkbox, {
       label: jsx(Label, {
@@ -205,19 +205,19 @@ let H = forwardRef(function ({
   touched: t,
   onTouched: i
 }, a) {
-  let s = _$$w(e, !t);
-  let o = _$$U(s, z);
-  let l = Lz(e.deps.priceField, void 0);
+  let s = getValidationErrors(e, !t);
+  let o = findFirstResult(s, z);
+  let l = getFieldValueOrDefault(e.deps.priceField, void 0);
   let d = useRef(null);
   if (useImperativeHandle(a, () => ({
     focus: e => {
       d.current?.focus(e);
     }
-  }), []), !Zc(e)) return null;
+  }), []), !canSetFieldValue(e)) return null;
   let {
     currentValue
   } = e;
-  return currentValue.isActive ? jsx(_$$A3, {
+  return currentValue.isActive ? jsx(FieldContainer, {
     label: getI18nString("community.seller.yearly_discount_percentage"),
     error: o,
     children: jsxs("div", {
@@ -236,7 +236,7 @@ let H = forwardRef(function ({
             discountPercentage: t
           });
         }
-      }), _$$i_(e) && jsx("div", {
+      }), isFieldValidated(e) && jsx("div", {
         className: PW,
         children: getAnnualPriceString(l, currentValue.discountPercentage)
       })]
@@ -290,7 +290,7 @@ let em = forwardRef(function ({
   }
   return jsxs("div", {
     ref: o,
-    children: [jsx(_$$A3, {
+    children: [jsx(FieldContainer, {
       label: c,
       children: jsx(ey, {
         pendingId: l,
@@ -299,19 +299,19 @@ let em = forwardRef(function ({
         isWidget: a,
         localExtension: e
       })
-    }), jsx(_$$A3, {
+    }), jsx(FieldContainer, {
       label: getI18nString("community.publishing.compatibility"),
       children: jsx(ev, {
         existingExtension: t,
         localExtension: e
       })
-    }), u && jsx(_$$A3, {
+    }), u && jsx(FieldContainer, {
       label: getI18nString("community.publishing.network"),
       children: jsx(eb, {
         isWidget: a,
         manifest: u
       })
-    }), e && Rc(e) && jsx(_$$A3, {
+    }), e && Rc(e) && jsx(FieldContainer, {
       label: getI18nString("community.publishing.documentAccess"),
       children: jsx(gG, {})
     })]
@@ -322,7 +322,7 @@ function eh({
   dataTestId: t,
   children: i
 }) {
-  return jsx(_$$A3, {
+  return jsx(FieldContainer, {
     label: getI18nString("universal_insert.manifest_error_title"),
     children: jsxs(BannerInset, {
       variant: "danger",
@@ -485,7 +485,7 @@ function ew({
   isWidget: e,
   isSubscriptionField: t
 }) {
-  let i = Lz(t, !1);
+  let i = getFieldValueOrDefault(t, !1);
   let r = LG(t.deps.existingExtension);
   return jsx("div", {
     className: cssBuilderInstance.pt8.pb8.$,
@@ -509,9 +509,9 @@ function eL({
     currentValue,
     existingStatus
   } = e;
-  if (void 0 === currentValue || currentValue === _$$A2) return null;
+  if (void 0 === currentValue || currentValue === unsetSymbol) return null;
   let s = null === currentValue;
-  return jsxs(_$$A3, {
+  return jsxs(FieldContainer, {
     label: t ? getI18nString("community.publishing.security_form.share_how_your_widget_handles_data") : getI18nString("community.publishing.security_form.share_how_your_plugin_handles_data"),
     subLabel: t ? getI18nString("community.publishing.security_form.widget_description") : getI18nString("community.publishing.security_form.plugin_description"),
     children: [jsx(Checkbox, {
@@ -773,9 +773,9 @@ let eX = forwardRef(function ({
     setIconFromInput,
     deleteIcon
   } = e;
-  let d = _$$w(e, !t);
-  let u = _$$U(d, eZ);
-  let p = Lz(e, void 0);
+  let d = getValidationErrors(e, !t);
+  let u = findFirstResult(d, eZ);
+  let p = getFieldValueOrDefault(e, void 0);
   let m = useRef(null);
   let [h, g] = useState(!1);
   let f = useCallback(e => {
@@ -828,7 +828,7 @@ let eX = forwardRef(function ({
       onClick: f,
       children: [jsx("div", {
         className: "icon_uploader--icon--YQ31-",
-        children: jsx(oW, {
+        children: jsx(WAFImage, {
           src: p.url,
           loading: "lazy",
           alt: getI18nString("community.publishing.extension_icon_image"),
@@ -858,7 +858,7 @@ let eX = forwardRef(function ({
       })]
     })]
   });
-  return jsx(_$$A3, {
+  return jsx(FieldContainer, {
     label: getI18nString("community.publishing.set_an_icon"),
     subLabel: getI18nString("community.publishing.recommended_size_in_pixels", {
       mediaWidth: 128,
@@ -880,15 +880,15 @@ let e1 = forwardRef(function ({
       a.current?.focus(e);
     }
   }), []), e.deps.isWidget) return null;
-  let s = !Zc(e);
-  return jsx(_$$A3, {
+  let s = !canSetFieldValue(e);
+  return jsx(FieldContainer, {
     label: getI18nString("community.seller.payment_type"),
     required: !0,
     disabled: s,
-    children: jsxs(_$$b3, {
+    children: jsxs(RadioPrimitiveRoot, {
       className: _$$iy,
       readonly: s,
-      value: Lz(e, !1) ? PaymentType.SUBSCRIPTION : PaymentType.ONE_TIME,
+      value: getFieldValueOrDefault(e, !1) ? PaymentType.SUBSCRIPTION : PaymentType.ONE_TIME,
       onChange: i => {
         t?.();
         let n = i === PaymentType.SUBSCRIPTION;
@@ -910,7 +910,7 @@ function e2({
 }) {
   return jsxs("label", {
     className: BA,
-    children: [jsx(_$$c3, {
+    children: [jsx(RadioPrimitiveOption, {
       value: e,
       id: e,
       className: lR
@@ -925,20 +925,20 @@ function e6({
   publishRoleField: t
 }) {
   var i;
-  if (!Zc(e)) return null;
+  if (!canSetFieldValue(e)) return null;
   let {
     existingExtension
   } = e.deps;
-  let a = Lz(e, !1);
+  let a = getFieldValueOrDefault(e, !1);
   let s = 0;
   existingExtension && (s = parseInt(getCurrentPluginVersion(existingExtension)?.version || "0"));
   a && s++;
-  return jsx(_$$A3, {
+  return jsx(FieldContainer, {
     label: getI18nString("community.publishing.version"),
     afterLabelContent: `${getI18nString("community.publishing.version")} ${s}`,
     children: jsx(Checkbox, {
       label: jsx(Label, {
-        children: (i = Lz(t, void 0), i?.is_public ? existingExtension && isResourceApprovedPublic(existingExtension) ? getI18nString("community.publishing.publish_a_new_version") : existingExtension && isResourcePendingPublishing(existingExtension) ? getI18nString("community.publishing.resubmit_a_new_version") : getI18nString("community.publishing.submit_a_new_version") : getI18nString("community.publishing.publish_a_new_version"))
+        children: (i = getFieldValueOrDefault(t, void 0), i?.is_public ? existingExtension && isResourceApprovedPublic(existingExtension) ? getI18nString("community.publishing.publish_a_new_version") : existingExtension && isResourcePendingPublishing(existingExtension) ? getI18nString("community.publishing.resubmit_a_new_version") : getI18nString("community.publishing.submit_a_new_version") : getI18nString("community.publishing.publish_a_new_version"))
       }),
       checked: a,
       onChange: () => {
@@ -958,7 +958,7 @@ let tu = forwardRef(function ({
   onTouched: t
 }, i) {
   let s = getUserId() ?? void 0;
-  let o = Lz(e, void 0)?.playgroundFile;
+  let o = getFieldValueOrDefault(e, void 0)?.playgroundFile;
   let [l] = setupResourceAtomHandler(tm(o?.key || ""));
   let d = l.data;
   let c = o?.editor_type ? mapFileTypeToEnum(o.editor_type) : null;
@@ -970,15 +970,15 @@ let tu = forwardRef(function ({
     }
   }), []);
   let m = useDispatch();
-  let h = _$$w(e, !1);
-  let g = _$$U(h, tc);
-  if (!Zc(e)) return null;
+  let h = getValidationErrors(e, !1);
+  let g = findFirstResult(h, tc);
+  if (!canSetFieldValue(e)) return null;
   let {
     existingExtension,
     localExtension,
     isWidget
   } = e.deps;
-  let y = Lz(e, void 0)?.playgroundFilePublishType;
+  let y = getFieldValueOrDefault(e, void 0)?.playgroundFilePublishType;
   let v = getLocalFileId(existingExtension, localExtension);
   let I = i => {
     t?.();
@@ -1056,7 +1056,7 @@ let tu = forwardRef(function ({
       })
     })]
   });
-  return jsx(_$$A3, {
+  return jsx(FieldContainer, {
     label: getI18nString("community.publishing.include_a_playground_file"),
     subLabel: jsx("div", {
       children: renderI18nText("community.publishing.plugin_playground_file_help_text_new", {
@@ -1163,8 +1163,8 @@ function tS({
   publishRoleField: e,
   isDraftPaidResource: t
 }) {
-  let i = !Zc(e) || t;
-  let a = Lz(e, void 0);
+  let i = !canSetFieldValue(e) || t;
+  let a = getFieldValueOrDefault(e, void 0);
   let s = getI18nString("community.publishing.paid_extensions_cannot_be_published_privately");
   let o = a?.is_public ? PublisherType.PUBLIC : PublisherType.ORG;
   let l = tI(e.deps);
@@ -1177,14 +1177,14 @@ function tS({
       });
     };
   }, [e, l, i]);
-  return jsx(_$$A3, {
+  return jsx(FieldContainer, {
     label: getI18nString("community.publishing.publish_to"),
     afterErrorContent: a && tx(tv(e.deps, a)) || (t ? s : void 0),
-    children: jsxs(_$$b3, {
+    children: jsxs(RadioPrimitiveRoot, {
       className: _$$iy,
       value: o,
       readonly: i,
-      onChange: d ?? lQ,
+      onChange: d ?? noop,
       children: [l && jsx(tw, {
         icon: jsx(_$$$4, {}),
         roleToPublishAs: PublisherType.ORG,
@@ -1207,7 +1207,7 @@ function tw({
 }) {
   return jsxs("label", {
     className: uK,
-    children: [e, jsx(_$$c3, {
+    children: [e, jsx(RadioPrimitiveOption, {
       value: t,
       id: t,
       className: O0
@@ -1229,8 +1229,8 @@ let tk = forwardRef(function ({
   onTouched: i
 }, a) {
   let s = useRef(null);
-  let o = _$$w(e, !t);
-  let l = _$$U(o, tT);
+  let o = getValidationErrors(e, !t);
+  let l = findFirstResult(o, tT);
   useImperativeHandle(a, () => ({
     focus: () => {
       s.current?.focus();
@@ -1239,8 +1239,8 @@ let tk = forwardRef(function ({
   let {
     newVersionField
   } = e.deps;
-  let c = Lz(newVersionField, !1);
-  let u = Lz(e, {
+  let c = getFieldValueOrDefault(newVersionField, !1);
+  let u = getFieldValueOrDefault(e, {
     newVersion: "",
     oldVersion: ""
   });
@@ -1255,7 +1255,7 @@ let tk = forwardRef(function ({
       oldVersion: n
     });
   }, [c, u, e, i]);
-  return Zc(e) ? jsx(_$$A3, {
+  return canSetFieldValue(e) ? jsx(FieldContainer, {
     label: getI18nString("community.publishing.version_release_notes"),
     error: l,
     children: jsx(EventShield, {
@@ -1285,9 +1285,9 @@ let tP = forwardRef(function ({
   touched: t,
   onTouched: i
 }, a) {
-  let s = _$$w(e, !t);
-  let o = _$$U(s, tN);
-  let l = Lz(e, void 0);
+  let s = getValidationErrors(e, !t);
+  let o = findFirstResult(s, tN);
+  let l = getFieldValueOrDefault(e, void 0);
   let d = useRef(null);
   let u = useRef(null);
   useImperativeHandle(a, () => ({
@@ -1308,7 +1308,7 @@ let tP = forwardRef(function ({
     setSnapshotFromInput
   } = e;
   let v = !l;
-  return Zc(e) ? jsx(_$$A3, {
+  return canSetFieldValue(e) ? jsx(FieldContainer, {
     label: getI18nString("community.publishing.set_a_widget_snapshot"),
     error: o,
     afterErrorContent: v && jsx(BannerInset, {
@@ -1419,9 +1419,9 @@ let tB = forwardRef(function ({
   onTouched: a
 }, s) {
   let o = useRef(null);
-  let l = _$$w(e, !i);
-  let d = _$$U(l, tU);
-  let c = trimOrEmpty(Lz(e, "")).length;
+  let l = getValidationErrors(e, !i);
+  let d = findFirstResult(l, tU);
+  let c = trimOrEmpty(getFieldValueOrDefault(e, "")).length;
   let u = useId();
   let p = `${u}-input`;
   let m = `${u}-character-count`;
@@ -1431,7 +1431,7 @@ let tB = forwardRef(function ({
       o.current?.focus(e);
     }
   }), []);
-  return jsx(_$$A3, {
+  return jsx(FieldContainer, {
     label: getI18nString("community.general.tagline"),
     labelHtmlFor: p,
     afterLabelContent: jsxs("div", {
@@ -1465,14 +1465,14 @@ let tB = forwardRef(function ({
           [z3]: !!d
         }),
         dataTestId: "publish-modal-tagline",
-        disabled: !Zc(e),
+        disabled: !canSetFieldValue(e),
         id: p,
         onChange: t => {
           a?.();
           e.setValue?.(t.currentTarget.value);
         },
         placeholder: t ? getI18nString("community.publishing.widget_tagline_input_placeholder") : getI18nString("community.publishing.plugin_tagline_input_placeholder"),
-        value: Lz(e, "")
+        value: getFieldValueOrDefault(e, "")
       })
     })
   });
@@ -1491,11 +1491,11 @@ async function it(e) {
   } = e;
   let c = {
     manifest,
-    release_notes: c_(releaseNotes).currentValue.newVersion,
-    name: c_(name).currentValue,
-    description: c_(description).currentValue,
-    tagline: c_(tagline).currentValue,
-    category_id: c_(category).currentValue?.id ?? null,
+    release_notes: assertFieldReady(releaseNotes).currentValue.newVersion,
+    name: assertFieldReady(name).currentValue,
+    description: assertFieldReady(description).currentValue,
+    tagline: assertFieldReady(tagline).currentValue,
+    category_id: assertFieldReady(category).currentValue?.id ?? null,
     images_sha1: uploadImages
   };
   return await PluginUploadApi.postPluginUpload(c, validExtensionId, isWidget);
@@ -1512,7 +1512,7 @@ async function ii(e) {
     code
   } = e;
   code && "codeUploadUrl" in imagePaths && (t = uT(imagePaths.codeUploadUrl, code), validatePluginCodeSize(code));
-  let d = c_(icon).currentValue?.buffer;
+  let d = assertFieldReady(icon).currentValue?.buffer;
   if (null != d) {
     i = M0(imagePaths.iconUploadUrl, d);
     let e = _$$i(d) ?? "image/png";
@@ -1520,11 +1520,11 @@ async function ii(e) {
       type: e
     }));
   }
-  let c = c_(snapshot).currentValue?.buffer;
+  let c = assertFieldReady(snapshot).currentValue?.buffer;
   null != c && imagePaths.snapshotUploadUrl && (n = M0(imagePaths.snapshotUploadUrl, c));
   let {
     allMedia
-  } = c_(carouselMedia).currentValue;
+  } = assertFieldReady(carouselMedia).currentValue;
   let p = Rd(imagePaths.carouselImages, allMedia);
   return await Promise.all([t, i, n, ...p]);
 }
@@ -1555,7 +1555,7 @@ async function ia({
   isWidget: i,
   dataSecurityPromise: n
 }) {
-  let r = c_(e).currentValue;
+  let r = assertFieldReady(e).currentValue;
   let a = i ? "widget" : "plugin";
   let s = (await n).formVersion;
   null === r ? s && (await _$$is.deleteSecurityFormResponse(t, a, s)) : await _$$is.submitSecurityFormResponse(t, a, r);
@@ -1580,39 +1580,39 @@ async function is(e) {
     user,
     localExtension
   } = e;
-  let y = c_(category).currentValue?.id;
+  let y = assertFieldReady(category).currentValue?.id;
   assertNotNullish(y);
-  let b = !!c_(price).currentValue;
+  let b = !!assertFieldReady(price).currentValue;
   let v = function (e, t, i, n) {
     if (t && isAcceptedPublisher(t, n.id)) return;
-    let r = c_(e).currentValue;
+    let r = assertFieldReady(e).currentValue;
     if (r) {
       if (i && f7(i, r) && !Fh(t)) return;
       return r;
     }
   }(author, existingExtension, existingAuthor, user);
-  let I = !!c_(publishRole).currentValue?.is_public;
-  let E = c_(isSubscription).currentValue;
+  let I = !!assertFieldReady(publishRole).currentValue?.is_public;
+  let E = assertFieldReady(isSubscription).currentValue;
   let x = {
-    tags: [...c_(tagsV1).currentValue],
-    tags_v2: (tagsV2 && c_(tagsV2).currentValue.map(e => e.text)) ?? [],
-    support_contact: c_(supportContact).currentValue ?? "",
+    tags: [...assertFieldReady(tagsV1).currentValue],
+    tags_v2: (tagsV2 && assertFieldReady(tagsV2).currentValue.map(e => e.text)) ?? [],
+    support_contact: assertFieldReady(supportContact).currentValue ?? "",
     ...(v && {
       author_org_id: "org_id" in v ? v.org_id : "",
       author_team_id: "team_id" in v ? v.team_id : ""
     }),
-    publisher_ids: I ? c_(cocreators).currentValue.map(({
+    publisher_ids: I ? assertFieldReady(cocreators).currentValue.map(({
       id: e
     }) => e) : [],
-    agreed_to_tos: c_(tosAccepted).currentValue || !0,
+    agreed_to_tos: assertFieldReady(tosAccepted).currentValue || !0,
     is_paid: b,
     is_subscription: E,
-    price: b ? c_(price).currentValue : void 0,
+    price: b ? assertFieldReady(price).currentValue : void 0,
     has_freemium_code: Kc(localExtension, existingExtension),
     category_id: y,
     is_public: I,
-    annual_discount_percentage: E ? c_(annualDiscount).currentValue?.discountPercentage : void 0,
-    is_annual_discount_active: E ? c_(annualDiscount).currentValue?.isActive : void 0
+    annual_discount_percentage: E ? assertFieldReady(annualDiscount).currentValue?.discountPercentage : void 0,
+    is_annual_discount_active: E ? assertFieldReady(annualDiscount).currentValue?.isActive : void 0
   };
   return await PluginUploadApi.updateExtension(x, validExtensionId, isWidget);
 }
@@ -1626,14 +1626,14 @@ async function io(e) {
     user,
     isExistingExtensionUnpublished
   } = e;
-  let l = c_(publishRole).currentValue;
+  let l = assertFieldReady(publishRole).currentValue;
   let d = hasRoleOrOrgChanged(publishedExtension, l);
   let c = Dd(publishedExtension, user.id) || isExistingExtensionUnpublished;
   if (!d || !c) return;
   let u = {
     org_id: l?.org?.id,
     is_public: !!l?.is_public,
-    agreed_to_tos: c_(tosAccepted).currentValue || !0
+    agreed_to_tos: assertFieldReady(tosAccepted).currentValue || !0
   };
   let {
     data
@@ -1674,30 +1674,30 @@ async function il(e) {
     signature,
     code
   } = e;
-  let E = c_(icon).currentValue?.buffer;
-  let x = c_(snapshot).currentValue?.buffer;
-  let S = c_(author).currentValue;
-  let w = c_(publishRole).currentValue;
+  let E = assertFieldReady(icon).currentValue?.buffer;
+  let x = assertFieldReady(snapshot).currentValue?.buffer;
+  let S = assertFieldReady(author).currentValue;
+  let w = assertFieldReady(publishRole).currentValue;
   S && (MO(S) ? t = S.org_id : Z7(S) ? t = debugState.getState().teams[S.team_id]?.org_id || void 0 : "org" in w && (t = w.org?.id));
-  let C = c_(category).currentValue?.id;
+  let C = assertFieldReady(category).currentValue?.id;
   assertNotNullish(C);
-  let T = c_(releaseNotes).currentValue;
+  let T = assertFieldReady(releaseNotes).currentValue;
   let R = {
     icon_uploaded: !!E,
     snapshot_uploaded: !!x,
     carousel_media: allMedia,
     code_uploaded: !!code,
-    comments_setting: c_(commentsSetting).currentValue,
+    comments_setting: assertFieldReady(commentsSetting).currentValue,
     category_id: C,
     signature,
     image_upload_nonce: imageUploadNonce,
-    agreed_to_tos: c_(tosAccepted).currentValue ?? !0,
+    agreed_to_tos: assertFieldReady(tosAccepted).currentValue ?? !0,
     org_id: t,
-    playground_fig_file_key: c_(playgroundFile).currentValue?.playgroundFile?.key,
-    playground_file_publish_type: c_(playgroundFile).currentValue.playgroundFilePublishType,
-    name: c_(name).currentValue,
-    description: c_(description).currentValue,
-    tagline: c_(tagline).currentValue,
+    playground_fig_file_key: assertFieldReady(playgroundFile).currentValue?.playgroundFile?.key,
+    playground_file_publish_type: assertFieldReady(playgroundFile).currentValue.playgroundFilePublishType,
+    name: assertFieldReady(name).currentValue,
+    description: assertFieldReady(description).currentValue,
+    tagline: assertFieldReady(tagline).currentValue,
     release_notes: isCreatingNewVersion ? T.newVersion : T.oldVersion
   };
   return await PluginUploadApi.updateExtensionVersion(R, validExtensionId, versionId, isWidget);
@@ -1854,7 +1854,7 @@ let id = {
       oldVersion: t,
       newVersion: i
     }) => {
-      let n = Lz(e, void 0) ? i : t;
+      let n = getFieldValueOrDefault(e, void 0) ? i : t;
       if (n.length > 1e4) return [{
         key: "RELEASE_NOTES_TOO_LONG",
         data: {
@@ -1865,7 +1865,7 @@ let id = {
     },
     canSet: ({
       newVersionField: e
-    }) => Zc(e)
+    }) => canSetFieldValue(e)
   },
   price: WN,
   isSubscription: {
@@ -1924,7 +1924,7 @@ let id = {
     },
     canSet: ({
       isSubscriptionField: e
-    }) => !!Lz(e, void 0)
+    }) => !!getFieldValueOrDefault(e, void 0)
   },
   publishRole: {
     displayName: "PublishRoleField",
@@ -1968,7 +1968,7 @@ let id = {
   tosAccepted: _$$Y2,
   supportContact: aS
 };
-let ic = _$$T2({
+let ic = setupFormValidationHandler({
   displayName: "ExtensionForm",
   fields: id,
   fieldToDeps: {
@@ -2286,7 +2286,7 @@ let ic = _$$T2({
     localExtension: e,
     existingExtension: t,
     user: i
-  }, n) => !EX(e, t, i) && Object.keys(n).every(e => _$$i_(n[e])),
+  }, n) => !EX(e, t, i) && Object.keys(n).every(e => isFieldValidated(n[e])),
   submit: async ({
     localExtension: e,
     existingExtension: t,
@@ -2302,21 +2302,21 @@ let ic = _$$T2({
     let p;
     let m;
     let h = e?.manifest?.id ?? i;
-    if (!h) return new _$$o2.SubmissionError({
+    if (!h) return new withSubmissionError.SubmissionError({
       key: "ERROR_INVALID_EXTENSION_ID",
       data: {
         rawError: Error("No valid extension ID found")
       }
     });
-    let g = c_(d.newVersion).currentValue;
-    let f = c_(d.carouselMedia).currentValue.allMedia;
+    let g = assertFieldReady(d.newVersion).currentValue;
+    let f = assertFieldReady(d.carouselMedia).currentValue.allMedia;
     let {
       uploadImages,
       uploadVideos,
       allMedia
     } = Kg(f);
     if (g) {
-      if (!e?.localFileId) return new _$$o2.SubmissionError({
+      if (!e?.localFileId) return new withSubmissionError.SubmissionError({
         key: "ERROR_INVALID_EXTENSION_ID",
         data: {
           rawError: Error("No valid extension ID found")
@@ -2329,7 +2329,7 @@ let ic = _$$T2({
         }), loadLocalPluginSource(e?.localFileId)]);
       } catch (e) {
         reportError(ServiceCategories.COMMUNITY, e);
-        return new _$$o2.SubmissionError({
+        return new withSubmissionError.SubmissionError({
           key: "ERROR_GETTING_EXTENSION_MANIFEST",
           data: {
             rawError: e
@@ -2346,7 +2346,7 @@ let ic = _$$T2({
         });
       } catch (e) {
         reportError(ServiceCategories.COMMUNITY, e);
-        return new _$$o2.SubmissionError({
+        return new withSubmissionError.SubmissionError({
           key: "ERROR_CREATING_EXTENSION_VERSION",
           data: {
             rawError: e
@@ -2357,7 +2357,7 @@ let ic = _$$T2({
       p = await PluginUploadApi.postPluginImagesUpload(h, n, uploadImages);
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_POST_EXTENSION_IMAGES",
         data: {
           rawError: e
@@ -2371,13 +2371,13 @@ let ic = _$$T2({
         code: c
       });
     } catch (e) {
-      if (reportError(ServiceCategories.COMMUNITY, e), n1(e)) return new _$$o2.SubmissionError({
+      if (reportError(ServiceCategories.COMMUNITY, e), n1(e)) return new withSubmissionError.SubmissionError({
         key: "ERROR_FILE_TOO_LARGE",
         data: {
           rawError: e
         }
       });
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_CODE_AND_IMAGE_UPLOAD",
         data: {
           rawError: e
@@ -2393,7 +2393,7 @@ let ic = _$$T2({
       });
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_VIDEO_UPLOAD",
         data: {
           rawError: e
@@ -2409,7 +2409,7 @@ let ic = _$$T2({
       });
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPDATE_SECURITY_FORM",
         data: {
           rawError: e
@@ -2418,7 +2418,7 @@ let ic = _$$T2({
     }
     try {
       let e = "versionId" in p ? p.versionId : t?.current_plugin_version_id;
-      if (!e) return new _$$o2.SubmissionError({
+      if (!e) return new withSubmissionError.SubmissionError({
         key: "ERROR_INVALID_EXTENSION_ID",
         data: {
           rawError: Error("No valid version ID found")
@@ -2442,7 +2442,7 @@ let ic = _$$T2({
       m = data.meta.plugin;
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_FINALIZING_VERSION",
         data: {
           rawError: e
@@ -2460,7 +2460,7 @@ let ic = _$$T2({
       });
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_UPDATE_ROLES",
         data: {
           rawError: e
@@ -2482,7 +2482,7 @@ let ic = _$$T2({
       m = data.meta;
     } catch (e) {
       reportError(ServiceCategories.COMMUNITY, e);
-      return new _$$o2.SubmissionError({
+      return new withSubmissionError.SubmissionError({
         key: "ERROR_FINALIZING_EXTENSION",
         data: {
           rawError: e
@@ -2498,7 +2498,7 @@ let ic = _$$T2({
         manifest,
         code
       } = e;
-      let o = c_(icon).currentValue?.buffer;
+      let o = assertFieldReady(icon).currentValue?.buffer;
       let l = o?.byteLength || 0;
       isCreatingNewVersion ? trackEventAnalytics("Hub Plugin Publish Version", {
         pluginId: validExtensionId,
@@ -2526,9 +2526,9 @@ let ic = _$$T2({
       src: "updatePublishedPlugin"
     }));
     !function (e) {
-      let t = c_(e.profileHandle).currentValue;
+      let t = assertFieldReady(e.profileHandle).currentValue;
       if (t) {
-        let i = c_(e.author).currentValue;
+        let i = assertFieldReady(e.author).currentValue;
         let n = {
           profileHandle: t,
           userId: i && jr(i) ? i.user_id : void 0,
@@ -2545,7 +2545,7 @@ let ic = _$$T2({
     };
   }
 });
-let iu = _$$e2(ic, bo);
+let iu = setupAtomFormHandler(ic, bo);
 let iF = {
   details: !0,
   media: !0,
@@ -2579,7 +2579,7 @@ function iM({
       let {
         currentValue
       } = e;
-      if (currentValue !== _$$A2) {
+      if (currentValue !== unsetSymbol) {
         !currentValue && n?.current?.url && URL.revokeObjectURL(n.current.url);
         return () => {
           n.current = currentValue;
@@ -2587,12 +2587,12 @@ function iM({
       }
     }, [e]);
     let a = useMemo(() => {
-      if (Zc(e)) return function (t) {
+      if (canSetFieldValue(e)) return function (t) {
         e.setValue(t);
       };
     }, [e]);
     let s = useMemo(() => {
-      if (Zc(e)) return function () {
+      if (canSetFieldValue(e)) return function () {
         e.setValue(void 0);
       };
     }, [e]);
@@ -2639,7 +2639,7 @@ function iM({
       let {
         currentValue
       } = e;
-      if (currentValue === _$$A2) return;
+      if (currentValue === unsetSymbol) return;
       let r = n?.current?.url;
       let a = i.status !== APILoadingStatus.SUCCESS || r !== i.value?.url;
       let s = r && r !== currentValue?.url;
@@ -2649,7 +2649,7 @@ function iM({
       };
     }, [i, e]);
     let a = useMemo(() => {
-      if (Zc(e)) return function (t) {
+      if (canSetFieldValue(e)) return function (t) {
         e.setValue(t);
       };
     }, [e]);
@@ -2661,7 +2661,7 @@ function iM({
       };
     }, [i, a]);
     let o = useMemo(() => {
-      if (Zc(e)) return function () {
+      if (canSetFieldValue(e)) return function () {
         e.setValue(void 0);
       };
     }, [e]);
@@ -2742,7 +2742,7 @@ function iM({
       };
     }, [n, i, d, t, u, o]);
     let h = useMemo(() => function (t, i) {
-      let n = Lz(e, void 0);
+      let n = getFieldValueOrDefault(e, void 0);
       if (!n) return;
       let r = n.questions[t];
       if (r?.inputType !== "single_select") return;
@@ -2764,7 +2764,7 @@ function iM({
       });
     }, [e]);
     let g = useMemo(() => function (t, i) {
-      let n = Lz(e, void 0);
+      let n = getFieldValueOrDefault(e, void 0);
       if (!n) return;
       let r = n.questions[t];
       if (r?.inputType !== "multi_select") return;
@@ -2789,7 +2789,7 @@ function iM({
       });
     }, [e]);
     let _ = useMemo(() => function (t, i) {
-      let n = Lz(e, void 0);
+      let n = getFieldValueOrDefault(e, void 0);
       if (!n) return;
       let r = function (e, t, i) {
         let [n, r, a] = t;
@@ -2819,7 +2819,7 @@ function iM({
         setValue
       } = e;
       return function (e, n) {
-        if (!currentValue || currentValue === _$$A2) return;
+        if (!currentValue || currentValue === unsetSymbol) return;
         let r = currentValue.questions[e];
         if (r?.inputType !== "text") return;
         let a = [...currentValue.questions];
@@ -2845,7 +2845,7 @@ function iM({
     };
   }(e.fieldStates.dataSecurity, e.deps.isWidget, e.deps.existingExtension?.id);
   let M = function (e) {
-    let t = _$$w(e, !1).find(e => "validation" === e.type);
+    let t = getValidationErrors(e, !1).find(e => "validation" === e.type);
     if (!t) return;
     let i = t?.data?.firstPathWithErrors;
     if (i) return _$$tZ.DATA_SECURITY_QUESTION(i?.join(","));
@@ -2869,19 +2869,19 @@ function iM({
   } = _$$o([{
     id: "details",
     checkpoints: [{
-      check: () => _$$i_(e.fieldStates.name),
+      check: () => isFieldValidated(e.fieldStates.name),
       onFail: () => __(_$$tZ.NAME_INPUT)
     }, {
-      check: () => _$$i_(e.fieldStates.tagline),
+      check: () => isFieldValidated(e.fieldStates.tagline),
       onFail: () => __(_$$tZ.TAGLINE_INPUT)
     }, {
-      check: () => _$$i_(e.fieldStates.description),
+      check: () => isFieldValidated(e.fieldStates.description),
       onFail: () => __(_$$tZ.DESCRIPTION_INPUT)
     }, {
-      check: () => _$$i_(e.fieldStates.category),
+      check: () => isFieldValidated(e.fieldStates.category),
       onFail: () => __(_$$tZ.CATEGORY_SELECT)
     }, {
-      check: () => _$$i_(e.fieldStates.tagsV2) && _$$i_(e.fieldStates.tagsV1),
+      check: () => isFieldValidated(e.fieldStates.tagsV2) && isFieldValidated(e.fieldStates.tagsV1),
       onFail: () => __(_$$tZ.TAGS_SECTION)
     }],
     onFail: () => {
@@ -2895,16 +2895,16 @@ function iM({
   }, {
     id: "media",
     checkpoints: [{
-      check: () => _$$i_(e.fieldStates.icon),
+      check: () => isFieldValidated(e.fieldStates.icon),
       onFail: () => __(_$$tZ.ICON_UPLOADER)
     }, {
-      check: () => _$$i_(e.fieldStates.snapshot),
+      check: () => isFieldValidated(e.fieldStates.snapshot),
       onFail: () => __(_$$tZ.SNAPSHOT_UPLOADER)
     }, {
-      check: () => _$$i_(e.fieldStates.playgroundFile),
+      check: () => isFieldValidated(e.fieldStates.playgroundFile),
       onFail: () => __(_$$tZ.PLAYGROUND_FILE_SELECT)
     }, {
-      check: () => _$$i_(e.fieldStates.carouselMedia),
+      check: () => isFieldValidated(e.fieldStates.carouselMedia),
       onFail: () => {
         let t = e.fieldStates.carouselMedia;
         let i = "error" === t.status ? t.errors[0] : void 0;
@@ -2933,7 +2933,7 @@ function iM({
   }, {
     id: "security",
     checkpoints: [{
-      check: () => (V.dataSecurity.onTouched?.(), _$$i_(e.fieldStates.dataSecurity)),
+      check: () => (V.dataSecurity.onTouched?.(), isFieldValidated(e.fieldStates.dataSecurity)),
       onFail: () => {
         M && __(M);
       }
@@ -2944,25 +2944,25 @@ function iM({
   }, {
     id: "advanced",
     checkpoints: [{
-      check: () => _$$i_(e.fieldStates.profileHandle),
+      check: () => isFieldValidated(e.fieldStates.profileHandle),
       onFail: () => __(_$$tZ.PROFILE_HANDLE_INPUT)
     }, {
-      check: () => _$$i_(e.fieldStates.cocreators),
+      check: () => isFieldValidated(e.fieldStates.cocreators),
       onFail: () => __(_$$tZ.COCREATORS_INPUT)
     }, {
-      check: () => _$$i_(e.fieldStates.tosAccepted),
+      check: () => isFieldValidated(e.fieldStates.tosAccepted),
       onFail: () => __(_$$tZ.TOS_AGREED_CHECKBOX)
     }, {
-      check: () => _$$i_(e.fieldStates.releaseNotes),
+      check: () => isFieldValidated(e.fieldStates.releaseNotes),
       onFail: () => __(_$$tZ.RELEASE_NOTES_INPUT)
     }, {
-      check: () => _$$i_(e.fieldStates.price),
+      check: () => isFieldValidated(e.fieldStates.price),
       onFail: () => __(_$$tZ.PRICE_INPUT)
     }, {
-      check: () => _$$i_(e.fieldStates.annualDiscount),
+      check: () => isFieldValidated(e.fieldStates.annualDiscount),
       onFail: () => __(_$$tZ.ANNUAL_DISCOUNT_INPUT)
     }, {
-      check: () => _$$i_(e.fieldStates.supportContact),
+      check: () => isFieldValidated(e.fieldStates.supportContact),
       onFail: () => __(_$$tZ.SUPPORT_CONTACT_INPUT)
     }, {
       check: () => !EX(e.deps.localExtension, e.deps.existingExtension, e.deps.user),
@@ -3081,12 +3081,12 @@ function iM({
           })
         }), jsx(Mm, {
           id: _$$tZ.CATEGORY_SELECT,
-          children: e => jsx(_$$P, {
+          children: e => jsx(CategorySelectDropdown, {
             ref: e,
             categoryFieldManager: y,
             ...V.category
           })
-        }), _$$i_(e.fieldStates.category) && jsx(Mm, {
+        }), isFieldValidated(e.fieldStates.category) && jsx(Mm, {
           id: _$$tZ.TAGS_SECTION,
           children: e => R.validV2Tags.length > 0 ? jsx(_$$vj, {
             ref: e,
@@ -3296,7 +3296,7 @@ function iM({
       step: PublishModalState.OPENED
     });
   }, [A]);
-  let eb = Lz(e.fieldStates.name, "");
+  let eb = getFieldValueOrDefault(e.fieldStates.name, "");
   let ev = useDebouncedCallback(() => {
     A.current($$in, {
       step: PublishModalState.EDIT_NAME
@@ -3305,7 +3305,7 @@ function iM({
   useEffect(() => {
     eb && V.name.touched && ev();
   }, [eb, ev, V.name.touched]);
-  let eI = Lz(e.fieldStates.description, "");
+  let eI = getFieldValueOrDefault(e.fieldStates.description, "");
   let eE = useDebouncedCallback(() => {
     A.current($$in, {
       step: PublishModalState.EDIT_DESCRIPTION
@@ -3416,7 +3416,7 @@ function ij(e) {
     dataSecurityPromise: p
   });
   _$$h(() => {
-    x.fieldStates.snapshot.currentValue !== _$$A2 && x.fieldStates.snapshot.resetValue();
+    x.fieldStates.snapshot.currentValue !== unsetSymbol && x.fieldStates.snapshot.resetValue();
   });
   let S = !!localExtension && Rc(localExtension);
   useEffect(() => {

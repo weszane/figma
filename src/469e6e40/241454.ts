@@ -8,7 +8,7 @@ import { debugState } from "../905/407919";
 import { XHR } from "../905/910117";
 import { SvgComponent } from "../905/714743";
 import { NU } from "../figma_app/204891";
-import { y as _$$y } from "../905/171275";
+import { SizeOption } from "../905/171275";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -700,7 +700,7 @@ let $$Y0 = registerModal(function (e) {
             children: jsx(NU, {
               file: o.file,
               borderRadius: 4,
-              size: _$$y.SMALL
+              size: SizeOption.SMALL
             })
           }), jsxs("div", {
             children: [renderI18nText("org_join_request.description_would_like_to_join", {

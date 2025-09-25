@@ -48,7 +48,7 @@ import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { useSubscription } from "../figma_app/288654";
-import { Av } from "../905/149328";
+import { getFileTypePx } from "../905/149328";
 import { O as _$$O } from "../905/257139";
 import { dP, q_, M3 } from "../figma_app/119475";
 import { LoadingSpinner } from "../figma_app/858013";
@@ -1115,7 +1115,7 @@ function t9({
   let x = useSelector(e => e.userFlags.has_dismissed_component_sidebar_library_upsell_banner);
   let v = useSelector(e => e.isFreeUser);
   let _ = useSelector(e => e.user);
-  let T = Av();
+  let T = getFileTypePx();
   let k = selectCurrentFile();
   let S = _$$D();
   let {

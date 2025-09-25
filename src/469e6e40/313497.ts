@@ -11,10 +11,10 @@ import { w as _$$w } from "../905/770105";
 import { J } from "../469e6e40/577626";
 import { a as _$$a } from "../905/676930";
 import { B as _$$B } from "../905/950875";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { logger } from "../905/651849";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { rb, $z, c as _$$c } from "../figma_app/617427";
 import { Ph, o as _$$o } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -169,11 +169,11 @@ async function q(e) {
 }
 let $ = {
   pseudoTitle: {
-    ..._$$g.textHeadingMedium,
+    ...textDisplayConfig.textHeadingMedium,
     $$css: !0
   },
   ifYouCancelList: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     display: "xrvj5dj",
     gridTemplateColumns: "x1wlfl8j",
     gap: "x1nfngrj",
@@ -183,12 +183,12 @@ let $ = {
     $$css: !0
   },
   wontBeAbleToUse: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     marginTop: "xehsoiq",
     $$css: !0
   },
   wontBeAbleToUseItem: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     display: "x78zum5",
     alignItems: "x6s0dn4",
     paddingRight: "xctkrei",
@@ -246,7 +246,7 @@ let $ = {
     $$css: !0
   },
   contactSupportBanner: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     backgroundColor: "x1ghs5zp",
     display: "x78zum5",
     alignItems: "x6s0dn4",
@@ -274,7 +274,7 @@ let $ = {
     $$css: !0
   },
   ifYouCancelMoreList: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     display: "x78zum5",
     flexDirection: "xdt5ytf",
     alignItems: "x1qjc9v5",
@@ -285,7 +285,7 @@ let $ = {
     $$css: !0
   },
   ifYouCancelMoreItem: {
-    ..._$$g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     display: "x78zum5",
     alignItems: "x6s0dn4",
     paddingRight: "xctkrei",
@@ -630,7 +630,7 @@ function z(e) {
 }
 function V(e) {
   let [t, a] = useState("if_you_cancel");
-  let n = useMemo(() => _$$A(e.scheduledCancellationDate).toDate(), [e.scheduledCancellationDate]);
+  let n = useMemo(() => dayjs(e.scheduledCancellationDate).toDate(), [e.scheduledCancellationDate]);
   return jsx("div", {
     style: {
       display: "contents"
@@ -667,7 +667,7 @@ function W(e) {
     ...e,
     preventUserClose: n
   });
-  let r = useMemo(() => _$$A(e.scheduledCancellationDate).toDate(), [e.scheduledCancellationDate]);
+  let r = useMemo(() => dayjs(e.scheduledCancellationDate).toDate(), [e.scheduledCancellationDate]);
   let c = useCallback(() => {
     s(!0);
     (async () => {

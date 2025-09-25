@@ -5,7 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { consumptionPaywallUtils } from '../905/224';
 import { getRumLoggingConfig } from '../905/16237';
 import { CloseButton } from '../905/17223';
-import { cw, Fq, I8, jv, vK, vu, yF } from '../905/84777';
+import { contractRatesQuery, BillingPriceSource, I8, setupPricesTransform, getContractCurrency, ensureLoadedResource, setupResourceTransform } from '../905/84777';
 import { registerModal } from '../905/102752';
 import { g as _$$g } from '../905/125190';
 import { ServiceCategories } from '../905/165054';
@@ -19,7 +19,7 @@ import { AutoLayout } from '../905/470281';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { q as _$$q } from '../905/636218';
 import { FeatureFlag } from '../905/652992';
-import { IX, Ju } from '../905/712921';
+import { RenewalTermEnum, ProductTierEnum } from '../905/712921';
 import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { N as _$$N } from '../905/809096';
 import { h as _$$h } from '../905/864281';
@@ -34,7 +34,7 @@ import { hK } from '../figma_app/211706';
 import { compareProductAccessTypes } from '../figma_app/217457';
 import { useSubscription } from '../figma_app/288654';
 import { sx as _$$sx } from '../figma_app/307841';
-import { G as _$$G } from '../figma_app/361869';
+import { renderCheckoutDevModeText } from '../figma_app/361869';
 import { Jh } from '../figma_app/441925';
 import { useCurrentPublicPlan } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
@@ -157,11 +157,11 @@ function ei({
 function en(e) {
   switch (e) {
     case consumptionPaywallUtils.Plan.PRO:
-      return Ju.PRO;
+      return ProductTierEnum.PRO;
     case consumptionPaywallUtils.Plan.ORG:
-      return Ju.ORG;
+      return ProductTierEnum.ORG;
     case consumptionPaywallUtils.Plan.ENTERPRISE:
-      return Ju.ENTERPRISE;
+      return ProductTierEnum.ENTERPRISE;
     default:
       throwTypeError(e);
   }
@@ -179,16 +179,16 @@ function er({
   let [d] = handleSuspenseRetainRelease(l);
   let c = d.data?.key;
   if (i) {
-    let e = en(t) === Ju.PRO ? FOrganizationLevelType.TEAM : FOrganizationLevelType.ORG;
+    let e = en(t) === ProductTierEnum.PRO ? FOrganizationLevelType.TEAM : FOrganizationLevelType.ORG;
     let i = {
       planParentId: c?.parentId || '',
       planType: e
     };
-    s = cw(i);
-    o = Fq.UPSELL_MODALS_CONTRACT;
+    s = contractRatesQuery(i);
+    o = BillingPriceSource.UPSELL_MODALS_CONTRACT;
   } else {
     s = I8(null);
-    o = Fq.UPSELL_MODALS;
+    o = BillingPriceSource.UPSELL_MODALS;
   }
   let u = function (e, t) {
     let i = en(e);
@@ -197,13 +197,13 @@ function er({
       billableProductKey: e,
       billableProductVariantKey: null,
       tier: i,
-      renewalTerm: IX.YEAR,
-      unit: IX.MONTH
+      renewalTerm: RenewalTermEnum.YEAR,
+      unit: RenewalTermEnum.MONTH
     }));
   }(t, e);
-  let p = yF(o, u, s);
+  let p = setupResourceTransform(o, u, s);
   let [m] = handleSuspenseRetainRelease(p);
-  let h = vu(m);
+  let h = ensureLoadedResource(m);
   let f = a ? [a] : [FFileType.DESIGN, FFileType.WHITEBOARD];
   let A = new CurrencyFormatter(e);
   let y = h.data;
@@ -231,7 +231,7 @@ function er({
     return e === FFileType.DESIGN ? jsxs('div', {
       className: cssBuilderInstance.flex.flexColumn.lh14.rowGap2.$,
       children: [t, jsx('span', {
-        children: jsx(_$$G, {})
+        children: jsx(renderCheckoutDevModeText, {})
       })]
     }) : t;
   };
@@ -273,13 +273,13 @@ function ea({
     baseQuery: {
       currency: e,
       tier: en(t),
-      renewalTerm: IX.YEAR,
-      unit: IX.MONTH
+      renewalTerm: RenewalTermEnum.YEAR,
+      unit: RenewalTermEnum.MONTH
     }
   };
-  let a = jv(r);
+  let a = setupPricesTransform(r);
   let [l] = handleSuspenseRetainRelease(a);
-  let d = vu(l).data;
+  let d = ensureLoadedResource(l).data;
   let c = new CurrencyFormatter(e);
   return jsx(TrackingProvider, {
     name: 'Pricing Component',
@@ -592,10 +592,10 @@ function ec(e) {
       let r = n?.parentId;
       return r ? {
         planParentId: r,
-        planType: en(e) === Ju.PRO ? FOrganizationLevelType.TEAM : FOrganizationLevelType.ORG
+        planType: en(e) === ProductTierEnum.PRO ? FOrganizationLevelType.TEAM : FOrganizationLevelType.ORG
       } : null;
     }(e);
-    let n = vK(i || {}, {
+    let n = getContractCurrency(i || {}, {
       enabled: t && !!i
     });
     let [r] = handleSuspenseRetainRelease(n);

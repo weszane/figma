@@ -17,7 +17,7 @@ import { _ as _$$_2 } from "../vendor/853977";
 import { selectWithShallowEqual } from "../905/103090";
 import { useHandleChangeEvent, useHandleKeyboardEvent, generateRecordingKey } from "../figma_app/878298";
 import { RecordableButton } from "../905/511649";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -37,7 +37,7 @@ import { Vi } from "../figma_app/955650";
 import { A as _$$A } from "../b2835def/22707";
 import { go } from "../figma_app/524655";
 import { setupThemeContext } from "../905/614223";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { permissionScopeHandler } from "../905/189185";
 import { isCommandEvent } from "../905/63728";
 import { b as _$$b } from "../1528/127188";
@@ -296,7 +296,7 @@ function et({
           value: x
         })
       }) : jsx("div", {
-        ...xk(ee.rowTitleContent, u && (j ? ee.stateGroupTitleContentDarkMode : ee.stateGroupTitleContent), u && _$$g.textBodyMedium, !C && ee.rowTitleContentGrey),
+        ...xk(ee.rowTitleContent, u && (j ? ee.stateGroupTitleContentDarkMode : ee.stateGroupTitleContent), u && textDisplayConfig.textBodyMedium, !C && ee.rowTitleContentGrey),
         "data-tooltip": i,
         "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip-show-above": !0,
@@ -710,7 +710,7 @@ export function $$ed1({
         ...Ay.props(es.buzzVideoIcon, n && es.buzzVideoIconSmallSquares),
         children: jsx(_$$_, {})
       })
-    }), jsx(oW, {
+    }), jsx(WAFImage, {
       src: r,
       id: "carousel-item-thumbnail-image",
       alt: "",

@@ -25,7 +25,7 @@ import { Cc } from "../905/545842";
 import { aj, W6, Iu, F6, le, h8, Bc, KN, DA, pX, P0, a2 } from "../905/836986";
 import { c6 } from "../figma_app/659187";
 import { J as _$$J } from "../905/273120";
-import { Z as _$$Z } from "../905/27174";
+import { TreeRow } from "../905/27174";
 var u = c;
 let v = parsePxNumber(HJx);
 let I = parsePxNumber(EJM);
@@ -523,7 +523,7 @@ let eh = memo(function ({
   togglePropertyExpanded: y,
   togglePropertyPinned: b
 }) {
-  return jsxs(_$$Z, {
+  return jsxs(TreeRow, {
     changeType: _,
     indent: l ? 0 : i,
     isChanging: a,

@@ -23,7 +23,7 @@ import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { calculatePickerPositionLeft, calculatePickerPositionBelow } from "../905/959568";
 import { UG } from "../figma_app/628987";
 import { Ao } from "../905/748636";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { bL as _$$bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogActionStrip, DialogBody } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
@@ -584,11 +584,11 @@ function ex({
             editIcon: jsx(_$$A, {}),
             isEditing: s,
             isSelected: s,
-            onClick: lQ,
+            onClick: noop,
             onClickEdit: () => {
               N(e);
             },
-            onContextMenu: lQ,
+            onContextMenu: noop,
             opacity: paint.color.a,
             recordingKey: generateRecordingKey(t, "colorChit", variableId),
             showEditIcon: !0,
@@ -860,7 +860,7 @@ function eV({
           className: cssBuilderInstance.block.$,
           children: jsx(_$$A3, {
             fontItem: s[e],
-            setPreviewState: lQ,
+            setPreviewState: noop,
             hasFetchedGoogleFontPreviews: !!o,
             fallbackClass: cssBuilderInstance.font15.noWrap.$,
             fallbackUnloadedGooglePreview: !0

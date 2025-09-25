@@ -1,6 +1,6 @@
 import { R } from "../905/927840";
 import { t } from "../905/367656";
-import { t2 } from "../905/8035";
+import { isNotNull } from "../905/8035";
 import { H2, fl, _2, wI, ut } from "../905/707098";
 export class $$o0 {
   constructor(e, t) {
@@ -70,7 +70,7 @@ export class $$o0 {
   async getDocumentAsync() {
     let e = this._EXPENSIVE_TO_READ_node;
     if (!e) throw Error("Node reference does not exist");
-    if (!t2(this._cachedProperties.document)) {
+    if (!isNotNull(this._cachedProperties.document)) {
       let t = new window.DOMParser();
       let i = new TextDecoder().decode(await e.exportAsync({
         format: "SVG"

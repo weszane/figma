@@ -10,7 +10,7 @@ import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { isValidEmail } from "../figma_app/416935";
 import { isGovCluster, includesGovDomain, buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
@@ -164,7 +164,7 @@ let $$F0 = registerModal(function (e) {
           children: jsx("div", {
             className: cssBuilderInstance.pb12.$,
             children: 1 === L ? jsxs(Fragment, {
-              children: [jsx(oW, {
+              children: [jsx(WAFImage, {
                 className: CE,
                 src: buildUploadUrl("679f86548ac7c464e28b281f1090fa6f744cf61b"),
                 alt: "Connected projects logo"

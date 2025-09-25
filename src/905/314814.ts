@@ -27,7 +27,7 @@ import { g as _$$g } from "../905/119656";
 import { T as _$$T } from "../905/292816";
 import { H3 } from "../figma_app/920435";
 import { TrackingProvider } from "../figma_app/831799";
-import { Y$ } from "../905/84777";
+import { BillingPriceStatus } from "../905/84777";
 import { xQ, Zz, LY, $$in } from "../figma_app/84966";
 import { collaboratorSet } from "../905/332483";
 import { compareProductAccessTypes } from "../figma_app/217457";
@@ -154,7 +154,7 @@ function H(e) {
     } = Zz(e);
     let {
       prices: _prices
-    } = LY(Y$.AT_NEXT_RENEWAL, e);
+    } = LY(BillingPriceStatus.AT_NEXT_RENEWAL, e);
     return getFeatureFlags().coterm_modal_ui_improvements && prices && _prices ? collaboratorSet.dict(e => {
       let r = t[e];
       let a = _prices[e];
@@ -241,7 +241,7 @@ function H(e) {
             textAlign: "left",
             gridColumnWidth: "auto",
             cellComponent: e => jsx(_$$T, {
-              contractPriceType: Y$.AT_NEXT_RENEWAL,
+              contractPriceType: BillingPriceStatus.AT_NEXT_RENEWAL,
               planKey: d.key,
               seatType: e,
               showMonthlyAnnualPriceComparison: !0

@@ -4,14 +4,14 @@ import { EventShield } from "../905/821217";
 import s from "classnames";
 import { formatNumber } from "../figma_app/930338";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { U } from "../905/331038";
-import { w as _$$w } from "../905/113805";
-import { Lz } from "../905/497882";
+import { findFirstResult } from "../905/331038";
+import { getValidationErrors } from "../905/113805";
+import { getFieldValueOrDefault } from "../905/497882";
 import { PUBLISHER_INPUT_KEYS, MAX_TAGS_LENGTH } from "../figma_app/740025";
 import { d as _$$d } from "../905/44199";
 import { BuyerAPIHandler } from "../905/180";
 import { P } from "../905/392438";
-import { A } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 var o = s;
 export function $$A2(e, t = []) {
   if (e && "exception" !== e.type) switch (e.key) {
@@ -52,9 +52,9 @@ let $$y0 = forwardRef(function ({
   autoScrollAutocompleteResultsIntoView: _,
   autocompleteInputContainerClassName: y
 }, b) {
-  let E = Lz(e, []);
-  let x = _$$w(e, !i);
-  let S = U(x, $$A2, t);
+  let E = getFieldValueOrDefault(e, []);
+  let x = getValidationErrors(e, !i);
+  let S = findFirstResult(x, $$A2, t);
   let [w, C] = useMemo(() => {
     let e = new Set();
     let t = new Set();
@@ -146,11 +146,11 @@ let $$b1 = forwardRef(function ({
   touched: t,
   onTouched: i,
   autoScrollAutocompleteResultsIntoView: r,
-  PublishModalRowComponent: a = A,
+  PublishModalRowComponent: a = FieldContainer,
   autocompleteInputContainerClassName: s
 }, o) {
-  let l = _$$w(e, !t);
-  let p = U(l, $$A2);
+  let l = getValidationErrors(e, !t);
+  let p = findFirstResult(l, $$A2);
   return jsx(a, {
     label: getI18nString("community.publishing.tags"),
     error: p,

@@ -1,7 +1,7 @@
 import ea from 'lodash-es/camelCase';
 import $ from 'lodash-es/snakeCase';
 import { reportError } from '../905/11';
-import { t2 as _$$t, HP, Iq, jO } from '../905/8035';
+import { isNotNull, objectKeys, findMaxKey, objectEntries } from '../905/8035';
 import { h as _$$h } from '../905/34040';
 import { A2, bv } from '../905/49095';
 import { kz } from '../905/77776';
@@ -10,7 +10,7 @@ import { toMatrix2x3 } from '../905/117560';
 import { F as _$$F } from '../905/136718';
 import { BL, fw, J3, KH, qn, u_, XQ } from '../905/139004';
 import { ServiceCategories } from '../905/165054';
-import { LE, O$ } from '../905/232489';
+import { toDefaultName, toCamelName } from '../905/232489';
 import { LI as _$$LI, O$ as _$$O$, lS, QE, Qf, RU } from '../905/235413';
 import { a3, bE, DX, Eu, F$, hO, JT, jX, Kp, LI, mJ, nb, nK, oE, oy, pO, vV, ZN, zr } from '../905/246310';
 import { B as _$$B2 } from '../905/248554';
@@ -55,7 +55,7 @@ function I([e, t], [i, n]) {
   return v.indexOf(e) - v.indexOf(i);
 }
 function E(e, t, i) {
-  let n = c()(jO({
+  let n = c()(objectEntries({
     ...e
   }).sort(I), ([e, t]) => t ? y(t, 1) : []);
   let r = n.length > 0 ? [{
@@ -113,10 +113,10 @@ class O {
     this.preferences = r;
   }
   get value() {
-    return `Variables.${pO(LE(this.name), this.boundVariable, this.preferences)}`;
+    return `Variables.${pO(toDefaultName(this.name), this.boundVariable, this.preferences)}`;
   }
   getDefinition() {
-    return `val ${pO(LE(this.name), this.boundVariable, this.preferences)}: ${this.typeName} = ${this.wrappedValue}${this.typeName === 'Dp' || this.typeName === 'Sp' ? `.${this.typeName.toLowerCase()}` : ''}`;
+    return `val ${pO(toDefaultName(this.name), this.boundVariable, this.preferences)}: ${this.typeName} = ${this.wrappedValue}${this.typeName === 'Dp' || this.typeName === 'Sp' ? `.${this.typeName.toLowerCase()}` : ''}`;
   }
 }
 function D(e, t, i, n, r) {
@@ -160,7 +160,7 @@ function F(e, t) {
     strokeLeftWeight,
     strokeRightWeight
   };
-  let l = Iq(o, (e, t) => e.rawValue > t.rawValue);
+  let l = findMaxKey(o, (e, t) => e.rawValue > t.rawValue);
   let d = o[l];
   let c = !deepEqual(d, strokeTopWeight) || !deepEqual(d, strokeBottomWeight) || !deepEqual(d, strokeLeftWeight) || !deepEqual(d, strokeRightWeight);
   let p = M(e, t);
@@ -614,7 +614,7 @@ function W(e) {
   };
 }
 function K(e, t) {
-  let i = [n8('Image('), n8(`painter = painterResource(id = R.drawable.${LE(e)}),`, 1), n8('contentDescription = "image description",', 1)];
+  let i = [n8('Image('), n8(`painter = painterResource(id = R.drawable.${toDefaultName(e)}),`, 1), n8('contentDescription = "image description",', 1)];
   switch (t) {
     case 'FIT':
       i.push(n8('contentScale = ContentScale.Fit', 1));
@@ -1327,20 +1327,20 @@ class ek {
   }
   set(e, t, i = !1) {
     let n = this.get(e);
-    if (_$$t(n) && !i) throw new Error(`Property "${e}" has already been set, old value: "${n?.value}", new value: "${t?.value}"`);
+    if (isNotNull(n) && !i) throw new Error(`Property "${e}" has already been set, old value: "${n?.value}", new value: "${t?.value}"`);
     this.styles[e] = t;
   }
   mergeValue(e, t) {
     let i = this.get(e);
     let n = eC[e];
-    _$$t(i) ? this.styles[e] = n(i, t) : this.styles[e] = t;
+    isNotNull(i) ? this.styles[e] = n(i, t) : this.styles[e] = t;
   }
   merge(e, t = !1) {
-    for (let i of e.keys()) _$$t(eC[i]) ? this.mergeValue(i, e.get(i)) : this.set(i, e.get(i), t);
+    for (let i of e.keys()) isNotNull(eC[i]) ? this.mergeValue(i, e.get(i)) : this.set(i, e.get(i), t);
   }
   getStyles() {
     let e = {};
-    for (let [t, i] of jO({
+    for (let [t, i] of objectEntries({
       ...this.styles
     })) e[t] = i?.value;
     return {
@@ -1351,7 +1351,7 @@ class ek {
     return this.size === 0;
   }
   keys() {
-    return HP(this.styles);
+    return objectKeys(this.styles);
   }
   difference(e) {
     let t = new ek();
@@ -1370,7 +1370,7 @@ class ek {
   hasDefaultValue(e) {
     let t = eT(this.get(e));
     let i = eT(eS[e]);
-    return !!t && _$$t(i) && t.equals(i);
+    return !!t && isNotNull(i) && t.equals(i);
   }
   clone() {
     let e = new ek();
@@ -1771,7 +1771,7 @@ function eY(e, t, i = _$$DX) {
       blendModes: blendMode.some(e => e !== 'NORMAL') ? blendMode : void 0
     };
   }(e, t, i);
-  if (_$$t(backgrounds)) {
+  if (isNotNull(backgrounds)) {
     let i = backgrounds.map(e => e.fill);
     let a = i.some(ej);
     let s = oQ(e.fillStyle);
@@ -1797,7 +1797,7 @@ function eY(e, t, i = _$$DX) {
       n.set(l, i);
     }
   }
-  if (_$$t(blendModes)) {
+  if (isNotNull(blendModes)) {
     let e = eu.fromFigmaBlendMode(blendModes);
     n.set('background-blend-mode', e);
     let t = e.contains('plus-lighter');
@@ -2592,7 +2592,7 @@ async function tp(e, t) {
       styleMap.set('column-gap', g);
       eX(e, styleMap, o, suggestedVars, t);
     }
-    _$$t(eH(e)) && e.isLayoutContainer() && !e.autoLayout.strokesIncludedInLayout && (o.border = A2.BordersDontTakeUpSpace, o['border-bottom'] = A2.BordersDontTakeUpSpace, o['border-left'] = A2.BordersDontTakeUpSpace, o['border-right'] = A2.BordersDontTakeUpSpace, o['border-top'] = A2.BordersDontTakeUpSpace);
+    isNotNull(eH(e)) && e.isLayoutContainer() && !e.autoLayout.strokesIncludedInLayout && (o.border = A2.BordersDontTakeUpSpace, o['border-bottom'] = A2.BordersDontTakeUpSpace, o['border-left'] = A2.BordersDontTakeUpSpace, o['border-right'] = A2.BordersDontTakeUpSpace, o['border-top'] = A2.BordersDontTakeUpSpace);
     e.clipsContent && styleMap.set('overflow', new _$$O$('hidden'));
     return {
       styleMap,
@@ -2796,10 +2796,10 @@ async function tm(e, t) {
   let P = [];
   let O = [];
   let D = styleMap.filterDefaultValues();
-  [...jO(fallbackStyleMap?.filterDefaultValues().getStyles() ?? {}).map(e => ({
+  [...objectEntries(fallbackStyleMap?.filterDefaultValues().getStyles() ?? {}).map(e => ({
     isFallback: !0,
     style: e
-  })), ...jO(D.getStyles()).map(e => ({
+  })), ...objectEntries(D.getStyles()).map(e => ({
     isFallback: !1,
     style: e
   }))].sort((e, t) => tc(e.style, t.style)).forEach(({
@@ -2927,7 +2927,7 @@ async function tm(e, t) {
   }) => {
     let r = [];
     let a = [];
-    jO(i.filterDefaultValues().getStyles()).sort((e, t) => tc(e, t)).forEach(e => {
+    objectEntries(i.filterDefaultValues().getStyles()).sort((e, t) => tc(e, t)).forEach(e => {
       let [i, n] = e;
       let s = tu(i, n, 0, t);
       g.includes(i) ? a.push(s) : r.push(s);
@@ -3026,7 +3026,7 @@ async function tA(e, t, i) {
       styleMap
     } = await tp(e, t);
     let o = [];
-    if (jO(styleMap.filterDefaultValues().getStyles()).sort(tc).map(([e, i]) => {
+    if (objectEntries(styleMap.filterDefaultValues().getStyles()).sort(tc).map(([e, i]) => {
       let n = td(e, i, t);
       return [e.replace(/-([a-z])/g, (e, t) => t.toUpperCase()), n];
     }).forEach(([e, t]) => {
@@ -3052,10 +3052,10 @@ class ty {
     this.preferences = r;
   }
   get value() {
-    return `Constants.${pO(O$(this.name), this.boundVariable, this.preferences)}`;
+    return `Constants.${pO(toCamelName(this.name), this.boundVariable, this.preferences)}`;
   }
   getDefinition() {
-    return `static let ${pO(O$(this.name), this.boundVariable, this.preferences)}: ${this.typeName} = ${this.wrappedValue}`;
+    return `static let ${pO(toCamelName(this.name), this.boundVariable, this.preferences)}: ${this.typeName} = ${this.wrappedValue}`;
   }
 }
 function tb(e, t, i, n, r) {
@@ -3375,7 +3375,7 @@ function tO({
   matchingVars: r = []
 }) {
   let a = [{
-    lines: jO({
+    lines: objectEntries({
       ...t
     }).sort(tP).flatMap(([e, t]) => t ? y(t, n[e] ?? 0) : []),
     language: 'swift',
@@ -3679,7 +3679,7 @@ function tW(e, t) {
     strokeLeftWeight,
     strokeRightWeight
   };
-  let h = Iq(m, (e, t) => e.rawValue > t.rawValue);
+  let h = findMaxKey(m, (e, t) => e.rawValue > t.rawValue);
   let g = m[h];
   let {
     lines,
@@ -3692,7 +3692,7 @@ function tW(e, t) {
       topRightRadius: n,
       bottomLeftRadius: r
     };
-    let o = Iq(s);
+    let o = findMaxKey(s);
     let l = s[o];
     let d = l !== t || l !== i || l !== n || l !== r;
     let c = l > 0 ? hX(l, a).toString() : '';

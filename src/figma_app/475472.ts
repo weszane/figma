@@ -1,6 +1,6 @@
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
-import { Q } from "../905/150006";
+import { handleOptimistTransactionWithError } from "../905/150006";
 import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -184,7 +184,7 @@ let $$w0 = createOptimistThunk((e, t) => {
       }
     }
   }, u);
-  return Q({
+  return handleOptimistTransactionWithError({
     requestPromise: u,
     fallbackError: "An error occurred while renaming this team.",
     store: e,
@@ -203,7 +203,7 @@ let $$O6 = createOptimistThunk((e, t) => {
     oldHidden: t.team.hidden,
     newHidden: t.hidden
   });
-  return Q({
+  return handleOptimistTransactionWithError({
     requestPromise: XHR.put(`/api/teams/${r}`, {
       sharing_audience_control: t.sharingAudienceControl,
       org_browsable: t.orgBrowsable,

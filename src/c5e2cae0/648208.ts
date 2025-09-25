@@ -15,12 +15,12 @@ import { gS } from "../figma_app/441925";
 import { tI } from "../figma_app/847597";
 import { UR } from "../figma_app/307841";
 import { TrackingProvider } from "../figma_app/831799";
-import { jv } from "../905/84777";
+import { setupPricesTransform } from "../905/84777";
 import { ProductAccessTypeEnum, isValidAccessType } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
 import { compareProductAccessTypes } from "../figma_app/217457";
 import { CurrencyFormatter } from "../figma_app/514043";
-import { Ju } from "../905/712921";
+import { ProductTierEnum } from "../905/712921";
 import { BillingCycle } from "../figma_app/831101";
 import { e0 } from "../905/696396";
 if (443 == require.j) {}
@@ -35,7 +35,7 @@ export function $$E0({
   tier: l
 }) {
   let o = UR();
-  let x = jv({
+  let x = setupPricesTransform({
     billableProductKeys: collaboratorSet,
     baseQuery: {
       currency: a,
@@ -44,7 +44,7 @@ export function $$E0({
       unit: t
     }
   });
-  let N = jv({
+  let N = setupPricesTransform({
     billableProductKeys: collaboratorSet,
     baseQuery: {
       currency: a,
@@ -241,9 +241,9 @@ function I({
   isAnnual: t
 }) {
   switch (e) {
-    case Ju.ORG:
+    case ProductTierEnum.ORG:
       return renderI18nText("checkout.purchase_summary.plan_renewal_org");
-    case Ju.PRO:
+    case ProductTierEnum.PRO:
       return t ? renderI18nText("checkout.purchase_summary.plan_renewal_pro_annual") : renderI18nText("checkout.purchase_summary.plan_renewal_pro_monthly");
     default:
       throwError(e);

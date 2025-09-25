@@ -1,20 +1,41 @@
-import { getCurrentFileType } from "../figma_app/976749";
-import { parsePxNumber } from "../figma_app/783094";
-import { tui, LdP, IuL, MJh } from "../figma_app/27776";
-let s = parsePxNumber(tui);
-let $$o1 = parsePxNumber(LdP);
-let l = parsePxNumber(IuL);
-let d = parsePxNumber(MJh);
-export function $$c0() {
-  return "whiteboard" === getCurrentFileType() ? s : $$o1;
+import { parsePxNumber } from '../figma_app/783094'
+import { getCurrentFileType } from '../figma_app/976749'
+
+/**
+ * Pre-parsed pixel values for use in theme logic.
+ * Original variables: s, $$o1, l, d
+ */
+const whiteboardPx = parsePxNumber('48px')
+const defaultPx = parsePxNumber('48px')
+const whiteboardLargePx = parsePxNumber('92px')
+const defaultLargePx = parsePxNumber('60px')
+
+/**
+ * Returns the pixel value for the current file type.
+ * Original function: $$c0
+ */
+export function getFileTypePx(): number {
+  return getCurrentFileType() === 'whiteboard' ? whiteboardPx : defaultPx
 }
-export function $$u2() {
-  return "whiteboard" === getCurrentFileType() ? l : d;
+
+/**
+ * Returns the large pixel value for the current file type.
+ * Original function: $$u2
+ */
+export function getFileTypeLargePx(): number {
+  return getCurrentFileType() === 'whiteboard' ? whiteboardLargePx : defaultLargePx
 }
-export function $$p3() {
-  return "whiteboard" === document.body.getAttribute("data-editor-theme") ? s : $$o1;
+
+/**
+ * Returns the pixel value based on the editor theme.
+ * Original function: $$p3
+ */
+export function getThemePx(): number {
+  return document.body.getAttribute('data-editor-theme') === 'whiteboard' ? whiteboardPx : defaultPx
 }
-export const Av = $$c0;
-export const J9 = $$o1;
-export const Pg = $$u2;
-export const bG = $$p3;
+
+// Export aliases for compatibility with original code
+export const Av = getFileTypePx
+export const J9 = defaultPx
+export const Pg = getFileTypeLargePx
+export const bG = getThemePx

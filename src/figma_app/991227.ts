@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { DesignGraphElements } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
 import { buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { getI18nString } from "../905/303541";
 import { x } from "../figma_app/943271";
 import { K } from "../figma_app/824081";
@@ -73,7 +73,7 @@ export function $$S3({
   let t = "fake_cursor--handCursor--3jlcf fake_cursor--cursor--xDDWs";
   e === DesignGraphElements.SELECT ? t = "fake_cursor--selectCursorUI3--FjJsi fake_cursor--cursor--xDDWs" : e === DesignGraphElements.DROPPER_COLOR && (t = "fake_cursor--eyedropperCursor--uXak0 fake_cursor--cursor--xDDWs");
   let r = f[e];
-  return r ? jsx(oW, {
+  return r ? jsx(WAFImage, {
     className: t,
     src: buildUploadUrl(r),
     alt: I(e)

@@ -1,14 +1,14 @@
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { isValidEmail } from "../figma_app/416935";
 export function $$a0(e) {
   let t = new Date();
   return {
-    today: A(t).format("YYYY-MM-DD"),
-    minDate: A(t).subtract(e || 366, "days").format("YYYY-MM-DD")
+    today: dayjs(t).format("YYYY-MM-DD"),
+    minDate: dayjs(t).subtract(e || 366, "days").format("YYYY-MM-DD")
   };
 }
 export function $$s1(e) {
-  return e ? A(e).add(1, "day").subtract(1, "second").format() : null;
+  return e ? dayjs(e).add(1, "day").subtract(1, "second").format() : null;
 }
 export function $$o2(e, t, r) {
   if (t) for (let e of t) {
@@ -22,8 +22,8 @@ export function $$o2(e, t, r) {
     if (t) return t;
   }
   return function (e, t) {
-    let r = A(e.start);
-    let i = A(e.end);
+    let r = dayjs(e.start);
+    let i = dayjs(e.end);
     if (!r.isValid()) return {
       message: "The start date is invalid",
       field: "startDate"

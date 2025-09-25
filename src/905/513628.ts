@@ -3,7 +3,7 @@ import { deepEqual } from "../905/382883";
 import a from "../vendor/223926";
 import o from "../vendor/149674";
 import { buildCarouselMedia, fetchImageWithSha1 } from "../figma_app/471982";
-import { A } from "../905/17894";
+import { unsetSymbol } from "../905/17894";
 import { en, DM } from "../905/759470";
 import { FTemplateCategoryType } from "../figma_app/191312";
 var s = a;
@@ -63,7 +63,7 @@ export let $$g1 = {
     viewerModeField: e,
     createNewVersionOnSubmit: t,
     generateInitialValue: i
-  }) => !i?.disallowManualUpdate && e?.currentValue !== A && (t || e?.currentValue !== FTemplateCategoryType.PROTOTYPE),
+  }) => !i?.disallowManualUpdate && e?.currentValue !== unsetSymbol && (t || e?.currentValue !== FTemplateCategoryType.PROTOTYPE),
   validate: ({
     allowVideos: e,
     disallowExtraMedia: t,

@@ -30,7 +30,7 @@ import { z as _$$z } from "../905/654860";
 import { cq } from "../905/794154";
 import { m as _$$m } from "../figma_app/321561";
 import { M$ } from "../figma_app/297822";
-import { Sn } from "../905/946805";
+import { ExtensionFeatureKey } from "../905/946805";
 import { t as _$$t2 } from "../905/605191";
 import { R as _$$R2 } from "../905/240644";
 import { n as _$$n } from "../905/895449";
@@ -341,7 +341,7 @@ export function $$ea1({
       publishedExtension: e.publishedExtension
     };
     push({
-      name: Sn.EXTENSION_DETAILS,
+      name: ExtensionFeatureKey.EXTENSION_DETAILS,
       module: jsx(Q, {
         augmentedExtension: t
       })

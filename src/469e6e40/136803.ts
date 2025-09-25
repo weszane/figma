@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import l from "../vendor/805353";
 import { xj, Cz } from "../figma_app/851625";
 import { J } from "../905/931050";
@@ -79,7 +79,7 @@ export function $$j0(e) {
     inputWrapperClassName: h,
     onChange: j,
     placeholder: e.placeholder,
-    validateToken: lQ
+    validateToken: noop
   });
 }
 export const g = $$j0;

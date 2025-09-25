@@ -1,11 +1,11 @@
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { h } from "../905/142086";
 import { hideDropdownAction } from "../905/929976";
 import { getRepoByIdAlt } from "../905/760074";
 import { liveStoreInstance } from "../905/713695";
 import { L } from "../905/657783";
 export function $$d0(e, t) {
-  return !!e && !!t && (e.creatorId === t.id && A(e.createdAt).add(30, "s").isAfter(A()) || e.canEdit);
+  return !!e && !!t && (e.creatorId === t.id && dayjs(e.createdAt).add(30, "s").isAfter(dayjs()) || e.canEdit);
 }
 export function $$c2(e, t, r, n) {
   return () => {

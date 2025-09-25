@@ -7,7 +7,7 @@ import { debugState } from "../905/407919";
 import { trackFileEvent } from "../figma_app/314264";
 import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay, sZ } from "../figma_app/948389";
-import { fk } from "../905/23253";
+import { ImageModificationError } from "../905/23253";
 import { JT } from "../figma_app/632248";
 export function $$h3(e) {
   if (getFeatureFlags().aip_make_images_one_request_only) return 1;
@@ -55,7 +55,7 @@ export let $$g1 = async ({
         clientLifecycleId: _
       };
       if (i.length > 0) {
-        if (h === ImageModelType.GPT_4O_IMAGE && (h = ImageProviderType.OPENAI_GPT_IMAGE_1), h && (l = h, !Object.values(ImageProviderType).includes(l))) throw new fk("Invalid edit image model type", {
+        if (h === ImageModelType.GPT_4O_IMAGE && (h = ImageProviderType.OPENAI_GPT_IMAGE_1), h && (l = h, !Object.values(ImageProviderType).includes(l))) throw new ImageModificationError("Invalid edit image model type", {
           reportToSentry: !0
         });
         a = (await cortexAPI.design.imagesEdit({
@@ -70,7 +70,7 @@ export let $$g1 = async ({
           modelType: h
         }, d)).base64_image;
       } else {
-        if (h && (m = h, !Object.values(ImageModelType).includes(m))) throw new fk("Invalid make image model type", {
+        if (h && (m = h, !Object.values(ImageModelType).includes(m))) throw new ImageModificationError("Invalid make image model type", {
           reportToSentry: !0
         });
         let e = await cortexAPI.design.generateImages({
@@ -83,7 +83,7 @@ export let $$g1 = async ({
           numImages: 1,
           modelType: h
         }, d);
-        if (!e.images[0]) throw new fk("Generate image did not return an image", {
+        if (!e.images[0]) throw new ImageModificationError("Generate image did not return an image", {
           reportToSentry: !0
         });
         a = e.images[0];

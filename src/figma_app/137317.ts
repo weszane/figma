@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { t as _$$t } from "../905/150656";
 import { bL, RT } from "../905/867927";
 import { q } from "../905/932270";
@@ -16,7 +16,7 @@ import { yt } from "../figma_app/451499";
 import { z4 } from "../905/37051";
 import { Um } from "../905/848862";
 import { selectIsCopyExportAllowed } from "../figma_app/212807";
-import { d as _$$d } from "../905/480825";
+import { PluginIconDisplay } from "../905/480825";
 import { VZ } from "../figma_app/727192";
 import { c$, l6 } from "../905/794875";
 import { Q } from "../905/217916";
@@ -68,7 +68,7 @@ export function $$N0({
         formatter: a9,
         id: `${e}_dev_handoff_inspection_mode`,
         onChange: setInspectionMode,
-        onShowDropdownOverride: d ? void 0 : lQ,
+        onShowDropdownOverride: d ? void 0 : noop,
         property: inspectionMode,
         recordingKey: "dev_handoff_inspection_mode",
         children: f
@@ -131,7 +131,7 @@ function w({
     codeLanguageOptions,
     formatter
   } = t;
-  let p = activeCodegenPlugin && "first-party" !== codeLanguage.type ? jsx(_$$d, {
+  let p = activeCodegenPlugin && "first-party" !== codeLanguage.type ? jsx(PluginIconDisplay, {
     plugin: activeCodegenPlugin
   }) : null;
   let h = formatter.format(codeLanguage);

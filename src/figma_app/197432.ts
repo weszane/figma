@@ -4,7 +4,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
 import { showFileBrowserOrError } from "../905/87821";
-import { _ } from "../905/401345";
+import { isCurrentUserMfaRestrictedAtom } from "../905/401345";
 let n;
 export function $$u2() {
   Multiplayer?.detach();
@@ -28,7 +28,7 @@ export function $$h1(e, t) {
   } = e;
   let f = atomStoreManager.get(p).size > 0;
   if (null == openFile) {
-    wasInWorkshop || ($$u2(), atomStoreManager.get(_) || (desktopAPIInstance && desktopAPIInstance.hasFeature("webErrorPageType") && previousFileKey ? desktopAPIInstance.reportFatalError(previousFileKey, {
+    wasInWorkshop || ($$u2(), atomStoreManager.get(isCurrentUserMfaRestrictedAtom) || (desktopAPIInstance && desktopAPIInstance.hasFeature("webErrorPageType") && previousFileKey ? desktopAPIInstance.reportFatalError(previousFileKey, {
       type: "web",
       title: getI18nString("403.file_permissions_error.title"),
       description: getI18nString("404.file_no_access.title")

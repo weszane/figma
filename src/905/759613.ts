@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { setupThemeContext } from "../905/614223";
-import { g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { logger } from "../905/651849";
 import { x } from "../905/211326";
@@ -34,7 +34,7 @@ let m = {
     paddingBlock: null,
     paddingTop: null,
     paddingBottom: null,
-    ...g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };

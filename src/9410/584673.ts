@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuItemComp, MenuItemLead, MenuItemTrail, MenuLinkComp, MenuSubMenu, MenuSubTrigger, MenuSubContainerComp } from "../figma_app/860955";
 import { E as _$$E } from "../905/53857";
 import { EventShield } from "../905/821217";
@@ -280,7 +280,7 @@ let J = withTrackedClick(function ({
     },
     caret: "down",
     disabled: l,
-    onClick: l ? lQ : () => {
+    onClick: l ? noop : () => {
       e();
       d && c(postUserFlag({
         [z]: !0
@@ -386,7 +386,7 @@ function q({
               children: a.map((e, t) => X({
                 value: e,
                 onClick: () => i(e),
-                onKeyDown: lQ,
+                onKeyDown: noop,
                 isSelected: !1,
                 isFocused: o === t
               }))
@@ -503,8 +503,8 @@ let Q = withTrackedClick(function ({
         fullWidth: !0,
         height: 32,
         ignoreCheck: !0,
-        onKeyDown: o ? lQ : c,
-        onMouseUp: o ? lQ : l,
+        onKeyDown: o ? noop : c,
+        onMouseUp: o ? noop : l,
         recordingKey: Z(t),
         selected: !1,
         style: {

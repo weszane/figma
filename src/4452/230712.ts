@@ -7,7 +7,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_
 import { Button } from "../905/521428";
 import { B } from "../905/950875";
 import { buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { LoadingOverlay } from "../figma_app/858013";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -79,7 +79,7 @@ export let $$A0 = registerModal(function (e) {
           })
         }), jsxs(DialogBody, {
           padding: 0,
-          children: [jsx(oW, {
+          children: [jsx(WAFImage, {
             src: buildUploadUrl("79f17ef7df0c5ed50af97e6c5e98651536c94352"),
             alt: "Connected projects logo",
             className: cssBuilderInstance.maxWFull.$

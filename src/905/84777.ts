@@ -1,329 +1,453 @@
-import { isNullish } from "../figma_app/95419";
-import { ServiceCategories } from "../905/165054";
-import { resourceUtils } from "../905/989992";
-import s from "lodash-es/mapValues";
-import { reportError } from "../905/11";
-import { y as _$$y } from "../figma_app/681090";
-import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
-import { createMetaValidator } from "../figma_app/181241";
-import { F6 } from "../905/712921";
-var o = s;
-let m = new class {
+import { mapValues } from 'lodash-es'
+import { reportError } from '../905/11'
+import { ServiceCategories } from '../905/165054'
+import { ProductPricesSchema } from '../905/712921'
+import { liveStoreInstance, setupResourceAtomHandler } from '../905/713695'
+import { resourceUtils } from '../905/989992'
+import { isNullish } from '../figma_app/95419'
+import { createMetaValidator } from '../figma_app/181241'
+import { y as _$$y } from '../figma_app/681090'
+/**
+ * Types for plan and pricing queries
+ */
+export interface PlanKey {
+  type: string
+  parentId: string | null
+}
+
+export interface ContractRatesParams {
+  planType: string
+  planParentId: string
+}
+
+export interface AdminTeamPricesParams extends ContractRatesParams {
+  renewalTerm: string
+  nextInvoiceInterval: string
+}
+
+export interface ResourceAtomOptions {
+  enabled?: boolean
+  [key: string]: any
+}
+
+/**
+ * RatesService - encapsulates pricing API calls and schema validation
+ */
+class RatesService {
+  public RatesSchemaValidator: ReturnType<typeof createMetaValidator>
+
   constructor() {
-    this.RatesSchemaValidator = createMetaValidator("RatesSchemaValidator", F6, null);
+    // RatesSchemaValidator
+    this.RatesSchemaValidator = createMetaValidator('RatesSchemaValidator', ProductPricesSchema, null)
   }
-  getRates(e) {
-    return this.RatesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/pricing/rates", e ? {
-      plan_parent_id: e.parentId,
-      plan_type: e.type
-    } : {}));
+
+  /**
+   * getRates - fetches current rates
+   */
+  async getRates(params?: { parentId?: string, type?: string }) {
+    return this.RatesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/pricing/rates', params
+        ? {
+            plan_parent_id: params.parentId,
+            plan_type: params.type,
+          }
+        : {}),
+    )
   }
-  getContractRates({
-    planType: e,
-    planParentId: t
-  }) {
-    return this.RatesSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get("/api/pricing/contract_rates", {
-      plan_parent_id: t,
-      plan_type: e
-    }));
+
+  /**
+   * getContractRates - fetches contract rates
+   */
+  async getContractRates({ planType, planParentId }: ContractRatesParams) {
+    return this.RatesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/pricing/contract_rates', {
+        plan_parent_id: planParentId,
+        plan_type: planType,
+      }),
+    )
   }
-  getAdminContractRates({
-    planType: e,
-    planParentId: t
-  }) {
-    return this.RatesSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get("/api/admin/pricing/contract_rates", {
-      plan_parent_id: t,
-      plan_type: e
-    }));
+
+  /**
+   * getAdminContractRates - fetches admin contract rates
+   */
+  async getAdminContractRates({ planType, planParentId }: ContractRatesParams) {
+    return this.RatesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/admin/pricing/contract_rates', {
+        plan_parent_id: planParentId,
+        plan_type: planType,
+      }),
+    )
   }
-  getPricesAtContractRenewal({
-    planType: e,
-    planParentId: t
-  }) {
-    return this.RatesSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get("/api/pricing/prices_at_contract_renewal", {
-      plan_parent_id: t,
-      plan_type: e
-    }));
+
+  /**
+   * getPricesAtContractRenewal - fetches prices at contract renewal
+   */
+  async getPricesAtContractRenewal({ planType, planParentId }: ContractRatesParams) {
+    return this.RatesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/pricing/prices_at_contract_renewal', {
+        plan_parent_id: planParentId,
+        plan_type: planType,
+      }),
+    )
   }
-  getAdminPricesAtContractRenewal({
-    planType: e,
-    planParentId: t
-  }) {
-    return this.RatesSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get("/api/admin/pricing/prices_at_contract_renewal", {
-      plan_parent_id: t,
-      plan_type: e
-    }));
+
+  /**
+   * getAdminPricesAtContractRenewal - fetches admin prices at contract renewal
+   */
+  async getAdminPricesAtContractRenewal({ planType, planParentId }: ContractRatesParams) {
+    return this.RatesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/admin/pricing/prices_at_contract_renewal', {
+        plan_parent_id: planParentId,
+        plan_type: planType,
+      }),
+    )
   }
-  getAdminTeamPricesAtNextInvoice({
-    planType: e,
-    planParentId: t,
-    renewalTerm: i,
-    nextInvoiceInterval: n
-  }) {
-    return this.RatesSchemaValidator.validate(async ({
-      xr: r
-    }) => await r.get("/api/admin/pricing/team_prices_at_next_invoice", {
-      plan_parent_id: t,
-      plan_type: e,
-      renewal_term: i,
-      next_invoice_interval: n
-    }));
+
+  /**
+   * getAdminTeamPricesAtNextInvoice - fetches admin team prices at next invoice
+   */
+  async getAdminTeamPricesAtNextInvoice(params: AdminTeamPricesParams) {
+    return this.RatesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/admin/pricing/team_prices_at_next_invoice', {
+        plan_parent_id: params.planParentId,
+        plan_type: params.planType,
+        renewal_term: params.renewalTerm,
+        next_invoice_interval: params.nextInvoiceInterval,
+      }),
+    )
   }
-}();
-var $$h0 = (e => (e.CURRENT = "current", e.AT_NEXT_RENEWAL = "atNextRenewal", e))($$h0 || {});
-var $$g1 = (e => (e.ADMIN_SETTINGS = "admin-settings", e.ORG_CART = "org-cart", e.PRO_CART = "pro-cart", e.UPSELL_MODALS = "upsell-modals", e.UPSELL_MODALS_CONTRACT = "upsell-modals-contract", e))($$g1 || {});
-function f(e) {
-  reportError(ServiceCategories.BILLING, e, t => (t.setExtras({
-    error: e
-  }), t));
 }
-let $$_2 = liveStoreInstance.Query({
-  fetch: e => m.getRates(e).then(e => e.data.meta).catch(e => {
-    f(e);
-    return e;
-  }),
-  key: "billing_prices_active_rates"
-});
-let $$A3 = liveStoreInstance.Query({
-  fetch: e => m.getContractRates(e).then(e => e.data.meta).catch(e => {
-    f(e);
-    return e;
-  }),
-  key: "billing_prices_contract_rates"
-});
-let y = liveStoreInstance.Query({
-  fetch: async ({
-    planKey: e
-  }) => {
+
+const ratesService = new RatesService()
+
+/**
+ * BillingPriceStatus - enum for billing price status
+ */
+export enum BillingPriceStatus {
+  CURRENT = 'current',
+  AT_NEXT_RENEWAL = 'atNextRenewal',
+}
+
+/**
+ * BillingPriceSource - enum for billing price sources
+ */
+export enum BillingPriceSource {
+  ADMIN_SETTINGS = 'admin-settings',
+  ORG_CART = 'org-cart',
+  PRO_CART = 'pro-cart',
+  UPSELL_MODALS = 'upsell-modals',
+  UPSELL_MODALS_CONTRACT = 'upsell-modals-contract',
+}
+
+/**
+ * reportBillingError - error reporter for billing
+ */
+function reportBillingError(error: any) {
+  reportError(ServiceCategories.BILLING, error, (t) => {
+    t.setExtras({ error })
+    return t
+  })
+}
+
+/**
+ * activeRatesQuery - query for active rates
+ */
+export const activeRatesQuery = liveStoreInstance.Query({
+  fetch: (params: any) =>
+    ratesService.getRates(params).then(res => res.data.meta).catch((err) => {
+      reportBillingError(err)
+      return err
+    }),
+  key: 'billing_prices_active_rates',
+})
+
+/**
+ * contractRatesQuery - query for contract rates
+ */
+export const contractRatesQuery = liveStoreInstance.Query({
+  fetch: (params: ContractRatesParams) =>
+    ratesService.getContractRates(params).then(res => res.data.meta).catch((err) => {
+      reportBillingError(err)
+      return err
+    }),
+  key: 'billing_prices_contract_rates',
+})
+
+/**
+ * currentContractRatesQuery - query for current contract rates
+ */
+export const currentContractRatesQuery = liveStoreInstance.Query({
+  fetch: async ({ planKey }: { planKey: PlanKey }) => {
     try {
-      return (await m.getContractRates({
-        planType: e.type,
-        planParentId: e.parentId || ""
-      })).data.meta;
-    } catch (e) {
-      f(e);
-      return e;
+      return (await ratesService.getContractRates({
+        planType: planKey.type,
+        planParentId: planKey.parentId || '',
+      })).data.meta
+    }
+    catch (err) {
+      reportBillingError(err)
+      return err
     }
   },
-  enabled: ({
-    planKey: e
-  }) => null !== e.parentId && "" !== e.parentId,
-  key: "billing_prices_current_contract_rates"
-});
-let b = liveStoreInstance.Query({
-  fetch: async ({
-    planKey: e
-  }) => {
+  enabled: ({ planKey }: { planKey: PlanKey }) => planKey.parentId !== null && planKey.parentId !== '',
+  key: 'billing_prices_current_contract_rates',
+})
+
+/**
+ * contractRenewalQuery - query for prices at contract renewal
+ */
+export const contractRenewalQuery = liveStoreInstance.Query({
+  fetch: async ({ planKey }: { planKey: PlanKey }) => {
     try {
-      return (await m.getPricesAtContractRenewal({
-        planType: e.type,
-        planParentId: e.parentId || ""
-      })).data.meta;
-    } catch (e) {
-      f(e);
-      return e;
+      return (await ratesService.getPricesAtContractRenewal({
+        planType: planKey.type,
+        planParentId: planKey.parentId || '',
+      })).data.meta
+    }
+    catch (err) {
+      reportBillingError(err)
+      return err
     }
   },
-  enabled: ({
-    planKey: e
-  }) => null !== e.parentId,
-  key: "billing_prices_at_contract_renewal"
-});
-function v(e, t) {
+  enabled: ({ planKey }: { planKey: PlanKey }) => planKey.parentId !== null,
+  key: 'billing_prices_at_contract_renewal',
+})
+
+/**
+ * transformResource - transforms resource using mapping
+ */
+function transformResource(resource: any, mapping: any) {
   try {
-    return e.transform(e => o()(t, t => _$$y(e, t)));
-  } catch (e) {
-    reportError(ServiceCategories.BILLING, e);
-    return resourceUtils.errorSuspendable(e, {
-      release: () => {}
-    });
+    return resource.transform((data: any) => mapValues(mapping, key => _$$y(data, key)))
+  }
+  catch (err) {
+    reportError(ServiceCategories.BILLING, err)
+    return resourceUtils.errorSuspendable(err, { release: () => {} })
   }
 }
-export function $$I11(e, t, i, n = {}) {
-  let [r] = setupResourceAtomHandler(i, n);
-  return v(r, t);
+
+/**
+ * setupResourceTransform - sets up resource atom handler and transforms
+ */
+export function setupResourceTransform(mapping: any, resource: any, query: any, options: ResourceAtomOptions = {}) {
+  const [atom] = setupResourceAtomHandler(query, options)
+  return transformResource(atom, resource)
 }
-export function $$E5(e, t, i = {}) {
-  let n = $$_2(null);
-  let [r] = setupResourceAtomHandler(n, i);
-  return v(r, e);
+
+/**
+ * setupActiveRatesTransform - sets up resource atom handler for active rates
+ */
+export function setupActiveRatesTransform(mapping: any, t:any, options: ResourceAtomOptions = {}) {
+  const query = activeRatesQuery(null)
+  const [atom] = setupResourceAtomHandler(query, options)
+  return transformResource(atom, mapping)
 }
-export function $$x8(e, t = {}) {
-  !function (e) {
-    let {
-      planParentId,
-      planType
-    } = e;
-    return "" !== planParentId && !isNullish(planType);
-  }(e) && (t.enabled = !1);
-  let [i] = setupResourceAtomHandler($$A3(e), t);
-  return i.transform(({
-    product_prices: e
-  }) => e[0]?.currency ?? null);
+
+/**
+ * getContractCurrency - gets contract currency from contract rates
+ */
+export function getContractCurrency(params: ContractRatesParams, options: ResourceAtomOptions = {}) {
+  if (!(params.planParentId !== '' && !isNullish(params.planType))) {
+    (options as ResourceAtomOptions).enabled = false
+  }
+  const [atom] = setupResourceAtomHandler(contractRatesQuery(params), options)
+  return atom.transform(({ product_prices }) => product_prices[0]?.currency ?? null)
 }
-export function $$S6(e, t, i, n = {}) {
-  return $$I11(i, e, y({
+
+/**
+ * setupCurrentContractRatesTransform - sets up resource atom handler for current contract rates
+ */
+export function setupCurrentContractRatesTransform(mapping: any, params: ContractRatesParams, query: any, options: ResourceAtomOptions) {
+  return setupResourceTransform(mapping, params, currentContractRatesQuery({
     planKey: {
-      type: t.planType,
-      parentId: t.planParentId
-    }
-  }), n);
+      type: params.planType,
+      parentId: params.planParentId,
+    },
+  }), options)
 }
+
+/**
+ * Admin queries
+ */
 liveStoreInstance.Query({
-  fetch: async ({
-    planKey: e
-  }) => {
+  fetch: async ({ planKey }: { planKey: PlanKey }) => {
     try {
-      return (await m.getAdminContractRates({
-        planType: e.type,
-        planParentId: e.parentId || ""
-      })).data.meta;
-    } catch (e) {
-      f(e);
-      return e;
+      return (await ratesService.getAdminContractRates({
+        planType: planKey.type,
+        planParentId: planKey.parentId || '',
+      })).data.meta
+    }
+    catch (err) {
+      reportBillingError(err)
+      return err
     }
   },
-  enabled: ({
-    planKey: e
-  }) => null !== e.parentId,
-  key: "billing_prices_admin_current_contract_rates"
-});
+  enabled: ({ planKey }: { planKey: PlanKey }) => planKey.parentId !== null,
+  key: 'billing_prices_admin_current_contract_rates',
+})
+
 liveStoreInstance.Query({
-  fetch: async ({
-    planKey: e
-  }) => {
+  fetch: async ({ planKey }: { planKey: PlanKey }) => {
     try {
-      return (await m.getAdminPricesAtContractRenewal({
-        planType: e.type,
-        planParentId: e.parentId || ""
-      })).data.meta;
-    } catch (e) {
-      f(e);
-      return e;
+      return (await ratesService.getAdminPricesAtContractRenewal({
+        planType: planKey.type,
+        planParentId: planKey.parentId || '',
+      })).data.meta
+    }
+    catch (err) {
+      reportBillingError(err)
+      return err
     }
   },
-  enabled: ({
-    planKey: e
-  }) => null !== e.parentId,
-  key: "billing_prices_admin_at_contract_renewal"
-});
+  enabled: ({ planKey }: { planKey: PlanKey }) => planKey.parentId !== null,
+  key: 'billing_prices_admin_at_contract_renewal',
+})
+
 liveStoreInstance.Query({
-  fetch: async ({
-    planKey: e,
-    renewalTerm: t,
-    nextInvoiceInterval: i
-  }) => {
+  fetch: async ({ planKey, renewalTerm, nextInvoiceInterval }: { planKey: PlanKey, renewalTerm: string, nextInvoiceInterval: string }) => {
     try {
-      return (await m.getAdminTeamPricesAtNextInvoice({
-        planType: e.type,
-        planParentId: e.parentId || "",
-        renewalTerm: t,
-        nextInvoiceInterval: i
-      })).data.meta;
-    } catch (e) {
-      f(e);
-      return e;
+      return (await ratesService.getAdminTeamPricesAtNextInvoice({
+        planType: planKey.type,
+        planParentId: planKey.parentId || '',
+        renewalTerm,
+        nextInvoiceInterval,
+      })).data.meta
+    }
+    catch (err) {
+      reportBillingError(err)
+      return err
     }
   },
-  enabled: ({
-    planKey: e
-  }) => null !== e.parentId,
-  key: "billing_prices_admin_team_at_next_invoice"
-});
-class w extends Error {}
-function C(e, t) {
-  let i = e[0]?.[t];
-  if (i && e.every(e => e[t] === i)) return i;
-  throw new w(`Could not infer value for ${t} from price data`);
+  enabled: ({ planKey }: { planKey: PlanKey }) => planKey.parentId !== null,
+  key: 'billing_prices_admin_team_at_next_invoice',
+})
+
+/**
+ * PriceInferenceError - error for inferring price values
+ */
+class PriceInferenceError extends Error {}
+
+/**
+ * inferPriceValue - infers a value from price data
+ */
+function inferPriceValue(prices: any[], key: string) {
+  const value = prices[0]?.[key]
+  if (value && prices.every(price => price[key] === value)) {
+    return value
+  }
+  throw new PriceInferenceError(`Could not infer value for ${key} from price data`)
 }
-export function $$T4(e) {
-  return C(Object.values(e), "currency");
+
+/**
+ * getCurrencyFromPrices - gets currency from prices
+ */
+export function getCurrencyFromPrices(prices: Record<string, any>) {
+  return inferPriceValue(Object.values(prices), 'currency')
 }
-function k(e, t, i, s) {
+
+/**
+ * transformPrices - transforms prices with mapping and inference
+ */
+function transformPrices(resource: any, mapping: any, base: any, requireNonEmpty?: boolean) {
   try {
-    return e.transform(e => {
-      if (s && 0 === e.product_prices.length) return null;
-      let a = "currency" in i ? i.currency : C(e.product_prices, "currency");
-      let o = "tier" in i ? i.tier : C(e.product_prices, "tier");
-      let c = t.dict(t => {
-        let n = {
-          billableProductKey: t,
+    return resource.transform((data: any) => {
+      if (requireNonEmpty && data.product_prices.length === 0)
+        return null
+      const currency = 'currency' in base ? base.currency : inferPriceValue(data.product_prices, 'currency')
+      const tier = 'tier' in base ? base.tier : inferPriceValue(data.product_prices, 'tier')
+      const result = mapping.dict((key: string) => {
+        const params = {
+          billableProductKey: key,
           billableProductVariantKey: null,
-          ...i,
-          currency: a,
-          tier: o
-        };
-        try {
-          return _$$y(e, n);
-        } catch (e) {
-          reportError(ServiceCategories.BILLING, e);
-          return;
+          ...base,
+          currency,
+          tier,
         }
-      });
-      if (Object.keys(c).forEach(e => {
-        isNullish(c[e]) && delete c[e];
-      }), 0 === Object.keys(c).length) throw Error("No prices found");
-      return c;
-    });
-  } catch (e) {
-    reportError(ServiceCategories.BILLING, e);
-    return resourceUtils.errorSuspendable(e, {
-      release: () => {}
-    });
+        try {
+          return _$$y(data, params)
+        }
+        catch (err) {
+          reportError(ServiceCategories.BILLING, err)
+        }
+      })
+      Object.keys(result).forEach((key) => {
+        if (isNullish(result[key]))
+          delete result[key]
+      })
+      if (Object.keys(result).length === 0)
+        throw new Error('No prices found')
+      return result
+    })
+  }
+  catch (err) {
+    reportError(ServiceCategories.BILLING, err)
+    return resourceUtils.errorSuspendable(err, { release: () => {} })
   }
 }
-export function $$R12({
-  billableProductKeys: e,
-  baseQuery: t,
-  planKey: i,
-  options: n = {}
+
+/**
+ * setupPricesTransform - sets up resource atom handler for prices
+ */
+export function setupPricesTransform({
+  billableProductKeys,
+  baseQuery,
+  planKey,
+  options = {},
+}: {
+  billableProductKeys: any
+  baseQuery: any
+  planKey: PlanKey | null
+  options?: ResourceAtomOptions
 }) {
-  let r = $$_2(i ?? null);
-  let [a] = setupResourceAtomHandler(r, n);
-  return k(a, e, t);
+  const query = activeRatesQuery(planKey ?? null)
+  const [atom] = setupResourceAtomHandler(query, options)
+  return transformPrices(atom, billableProductKeys, baseQuery)
 }
-export function $$N9(e, t, i, n = {}) {
-  let r = y({
-    planKey: e
-  });
-  let [a] = setupResourceAtomHandler(r, n);
-  return k(a, t, i, !0);
+
+/**
+ * setupCurrentContractPricesTransform - sets up resource atom handler for current contract prices
+ */
+export function setupCurrentContractPricesTransform(planKey: PlanKey, mapping: any, base: any, options: ResourceAtomOptions = {}) {
+  const query = currentContractRatesQuery({ planKey })
+  const [atom] = setupResourceAtomHandler(query, options)
+  return transformPrices(atom, mapping, base, true)
 }
-export function $$P7(e, t, i, n = {}) {
-  let r = b({
-    planKey: e
-  });
-  let [a] = setupResourceAtomHandler(r, n);
-  return k(a, t, i, !0);
+
+/**
+ * setupContractRenewalPricesTransform - sets up resource atom handler for contract renewal prices
+ */
+export function setupContractRenewalPricesTransform(planKey: PlanKey, mapping: any, base: any, options: ResourceAtomOptions = {}) {
+  const query = contractRenewalQuery({ planKey })
+  const [atom] = setupResourceAtomHandler(query, options)
+  return transformPrices(atom, mapping, base, true)
 }
-export function $$O10(e) {
-  if ("loaded" === e.status) return e;
-  if ("errors" === e.status) {
-    let t = [e.errors].flat()[0];
-    if (t) throw t;
+
+/**
+ * ensureLoadedResource - ensures resource is loaded or throws error
+ */
+export function ensureLoadedResource(resource: any) {
+  if (resource.status === 'loaded')
+    return resource
+  if (resource.status === 'errors') {
+    const error = [resource.errors].flat()[0]
+    if (error)
+      throw error
   }
-  throw Error(`Unexpected result status: ${JSON.stringify(e)}`);
+  throw new Error(`Unexpected result status: ${JSON.stringify(resource)}`)
 }
-export const Y$ = $$h0;
-export const Fq = $$g1;
-export const I8 = $$_2;
-export const cw = $$A3;
-export const Tc = $$T4;
-export const SK = $$E5;
-export const ic = $$S6;
-export const SG = $$P7;
-export const vK = $$x8;
-export const Ln = $$N9;
-export const vu = $$O10;
-export const yF = $$I11;
-export const jv = $$R12;
+
+// Exported aliases for refactored names
+export const Y$ = BillingPriceStatus
+export const Fq = BillingPriceSource
+export const getI18nString = activeRatesQuery
+export const cw = contractRatesQuery
+export const Tc = getCurrencyFromPrices
+export const SK = setupActiveRatesTransform
+export const ic = setupCurrentContractRatesTransform
+export const SG = setupContractRenewalPricesTransform
+export const vK = getContractCurrency
+export const jv = setupPricesTransform
+export const Ln = setupCurrentContractPricesTransform
+
+export const vu = ensureLoadedResource
+export const yF = setupResourceTransform

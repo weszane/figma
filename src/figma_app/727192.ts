@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, createContext, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { X as _$$X } from "../905/736922";
 import { findScrollableOrVisibleParent } from "../figma_app/387100";
 import { useAtomValueAndSetter, atom } from "../figma_app/27355";
@@ -175,7 +175,7 @@ export function $$j2(e, t) {
     name: (t || r).recordingKey
   }), [t, r]);
   let a = j(e, n);
-  return (t || r).recordingKey ? a : lQ;
+  return (t || r).recordingKey ? a : noop;
 }
 export function $$U1(e) {
   let {
@@ -309,7 +309,7 @@ export function $$V0(e, t = !1) {
         ...t,
         [e]: r
       }));
-    }) : lQ, [e]);
+    }) : noop, [e]);
     return useMemo(() => e ? atom(r => r(B)[e] ?? t, (e, t, n) => {
       r(t, n);
     }) : null, [e, r, t]);

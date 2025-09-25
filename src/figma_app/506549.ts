@@ -1,9 +1,9 @@
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getI18nString } from "../905/303541";
 import { z } from "../905/905430";
 import { IK } from "../figma_app/248118";
 import { manifestContainsWidget } from "../figma_app/155287";
-import { o0 } from "../905/12045";
+import { getPluginParameterEntry } from "../905/12045";
 import { qs, Im } from "../905/608145";
 import { Nh, pI, bf, S3 } from "../figma_app/567902";
 export function $$u2(e) {
@@ -55,7 +55,7 @@ export const UK = function e(t) {
         name: "plugins-menu-item",
         extensionSearchString: Nh(item, isSubmenuChild),
         itemPath: t,
-        itemParameterArgs: o0(item.menuAction),
+        itemParameterArgs: getPluginParameterEntry(item.menuAction),
         callback: () => Im(extensionMenuProps, "quick-actions", item.menuAction),
         menuActionType: item.menuAction.type,
         pluginId: "run-installed-plugin" === item.menuAction.type || "insert-installed-widget" === item.menuAction.type ? item.menuAction.pluginId : void 0,
@@ -83,7 +83,7 @@ export const UK = function e(t) {
         name: "plugins-menu-item",
         extensionSearchString: bf(item),
         itemPath: [item.name],
-        callback: lQ,
+        callback: noop,
         submenu: item.submenu.map(t => e({
           item: t,
           isReadOnly,

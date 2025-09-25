@@ -23,7 +23,7 @@ import { ZE } from "../figma_app/932285";
 import { wv, $n } from "../figma_app/439493";
 import { T1 } from "../figma_app/90441";
 import { D9, oO, ZS } from "../figma_app/639798";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { EventShield } from "../905/821217";
 import { _ as _$$_ } from "../905/569825";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
@@ -256,8 +256,8 @@ function J({
   });
   let f = !("canZoomIn" in a) || a.canZoomIn;
   let _ = !("canZoomOut" in a) || a.canZoomOut;
-  let A = "onZoomIn" in a ? a.onZoomIn : lQ;
-  let y = "onZoomOut" in a ? a.onZoomOut : lQ;
+  let A = "onZoomIn" in a ? a.onZoomIn : noop;
+  let y = "onZoomOut" in a ? a.onZoomOut : noop;
   return jsx("div", {
     className: sH,
     children: jsx(EventShield, {

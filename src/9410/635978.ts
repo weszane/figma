@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { clamp } from "../figma_app/492908";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { k as _$$k } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { p as _$$p } from "../905/673591";
@@ -56,10 +56,10 @@ export function $$j1({
   pointerDownOnVideo: N,
   setVideoControls: L,
   shouldHideFullscreenButton: R = !1,
-  onSeekStart: D = lQ,
-  onSeekEnd: M = lQ,
-  onMute: P = lQ,
-  onUnmute: F = lQ
+  onSeekStart: D = noop,
+  onSeekEnd: M = noop,
+  onMute: P = noop,
+  onUnmute: F = noop
 }) {
   let [B, U] = useState(0);
   let G = useRef(!1);

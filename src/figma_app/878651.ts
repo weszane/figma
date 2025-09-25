@@ -35,7 +35,7 @@ import { getPluginVersion, getPluginMetadata } from "../figma_app/300692";
 import { ResourceTypeNoComment, isWidget } from "../figma_app/45218";
 import { PluginInstallStatus } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
-import { V as _$$V } from "../905/480825";
+import { PluginImage } from "../905/480825";
 import { Ro } from "../figma_app/805373";
 import { f as _$$f2 } from "../figma_app/750432";
 import { W as _$$W } from "../905/316655";
@@ -128,7 +128,7 @@ function ep(e) {
       })
     }), jsx("div", {
       className: _$$wA,
-      children: jsx(_$$V, {
+      children: jsx(PluginImage, {
         plugin: i,
         className: Az,
         loading: "lazy",
@@ -782,7 +782,7 @@ $$ev7.defaultProps = {
             className: IC,
             onClick: this.onPluginClick,
             href: t ? YW(this.props.resource.id) : ho(this.props.resource.id),
-            children: [jsx(_$$V, {
+            children: [jsx(PluginImage, {
               className: pt,
               plugin: e,
               loading: "lazy",

@@ -81,7 +81,7 @@ import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { V as _$$V4 } from '../905/453354';
 import { e as _$$e4 } from '../905/462154';
 import { L0, MQ } from '../905/479155';
-import { V as _$$V } from '../905/480825';
+import { PluginImage } from '../905/480825';
 import { sendMetric } from '../905/485103';
 import { as as _$$as, _M, Dl, hm, Q0, SX, zQ } from '../905/487011';
 import { stripHtmlTags } from '../905/491152';
@@ -119,7 +119,7 @@ import { getVisibleTheme } from '../905/640017';
 import { X as _$$X } from '../905/647103';
 import { z as _$$z3 } from '../905/654860';
 import { getSessionStorage } from '../905/657224';
-import { g as _$$g } from '../905/687265';
+import { textDisplayConfig } from '../905/687265';
 import { E as _$$E4, f as _$$f5 } from '../905/690713';
 import { getSingletonSceneGraph } from '../905/700578';
 import { y as _$$y } from '../905/705736';
@@ -165,15 +165,15 @@ import { partitionByPredicate } from '../905/918929';
 import { A as _$$A5 } from '../905/920165';
 import { Ow, Wg, YG } from '../905/921418';
 import { $ as _$$$ } from '../905/922405';
-import { r as _$$r4 } from '../905/924231';
-import { A as _$$A0 } from '../905/929620';
+import { setupPluginCommandHandler } from '../905/924231';
+import { generateShimmerOverlay } from '../905/929620';
 import { hideDropdownAction, showDropdownThunk } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
-import { lQ as _$$lQ } from '../905/934246';
+import { noop } from 'lodash-es';
 import { selectUserFlag } from '../905/940356';
 import { styleBuilderInstance } from '../905/941192';
 import { ou as _$$ou } from '../905/942991';
-import { BY, Jc, Sn } from '../905/946805';
+import { PluginSourceType, AssetTabType, ExtensionFeatureKey } from '../905/946805';
 import { b as _$$b3 } from '../905/946806';
 import { a as _$$a4 } from '../905/964520';
 import { IMAGE_TYPE_VALUES } from '../905/966582';
@@ -336,7 +336,7 @@ import { Dd } from '../figma_app/599979';
 import { a as _$$a6, z as _$$z4 } from '../figma_app/601188';
 import { dd as _$$dd, rE as _$$rE, Bu, IH, JB, jh, Lk, P_, Q8, Rt } from '../figma_app/604494';
 import { DP as _$$DP, xk as _$$xk } from '../figma_app/612859';
-import { R as _$$R2 } from '../figma_app/612938';
+import { PluginManager } from '../figma_app/612938';
 import { processImageWithThumbnail } from '../figma_app/624361';
 import { i0 as _$$i3, JT as _$$JT, OZ, UW, wC } from '../figma_app/632248';
 import { resolveFileParentOrgId, getSubscribedAssetKeys } from '../figma_app/646357';
@@ -785,7 +785,7 @@ async function ty(e, t) {
     disableSilenceConsole: !0,
     enablePrivatePluginApi: !1,
     enableProposedApi: !1,
-    errorHandler: _$$lQ,
+    errorHandler: noop,
     isLocal: !0,
     isWidget: !1,
     name: 'Assistant plugin',
@@ -4632,7 +4632,7 @@ function sc({
       interaction_type: bp.BUTTON_CLICK
     });
     hasLastSelectedKit ? pop() : push({
-      name: Sn.FIRST_DRAFT,
+      name: ExtensionFeatureKey.FIRST_DRAFT,
       module: jsx(t, {})
     });
   }, [t, e, setSelectedKit, hasLastSelectedKit, pop, push]);
@@ -4698,7 +4698,7 @@ function sc({
           className: cssBuilderInstance.wFull.pl8.pr8.$,
           children: v ? jsxs(fu, {
             value: _,
-            onChange: _$$lQ,
+            onChange: noop,
             numItems: 2,
             children: [jsx(_$$oz, {
               tabId: sl.ORG,
@@ -5429,7 +5429,7 @@ function sw({
   useEffect(() => {
     if (M || !hasLastSelectedKit) {
       return (hasLastSelectedKit ? push : replace)({
-        name: Sn.FIRST_DRAFT_KIT_PICKER,
+        name: ExtensionFeatureKey.FIRST_DRAFT_KIT_PICKER,
         module: jsx(sc, {
           aiTrackingContext,
           ParentComponent: sT
@@ -5762,7 +5762,7 @@ async function sK(e, t, i, r, n, a, s, o = 'Image') {
 }
 async function sH(e, t, i, r, a, s, o) {
   let l = await sK(e, t, i, r, a, s, o, 'Placeholder');
-  Vm(l.guid, jsx(_$$A0, {}));
+  Vm(l.guid, jsx(generateShimmerOverlay, {}));
   return l;
 }
 async function sz(e, t, i, r, n, a, s, o) {
@@ -6459,7 +6459,7 @@ function ot({
       },
       alwaysEnabled: !0,
       module: {
-        name: Sn.FIGJAM_AI_CONTEXTUAL_FEATURES,
+        name: ExtensionFeatureKey.FIGJAM_AI_CONTEXTUAL_FEATURES,
         module: jsx(rC, {
           action: e,
           actionType: t,
@@ -6472,7 +6472,7 @@ function ot({
   };
 }
 let oi = [{
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.TRANSLATE_TEXT,
   flags: ['edit', 'design', 'slides', 'sites', 'cooper', 'whiteboard'],
   featureFlags: ['qa_text_features'],
@@ -6483,14 +6483,14 @@ let oi = [{
     },
     alwaysEnabled: !0,
     module: {
-      name: Sn.TRANSLATE,
+      name: ExtensionFeatureKey.TRANSLATE,
       module: jsx(_$$K2, {})
     }
   },
   iconType: jsx(_$$R4, {}),
   searchSynonyms: ['change language']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.REWRITE_TEXT,
   flags: ['edit', 'design', 'slides', 'sites', 'cooper', 'whiteboard'],
   featureFlags: ['qa_text_features'],
@@ -6499,7 +6499,7 @@ let oi = [{
       B3(_$$JT.REWRITE_TEXT);
     },
     module: {
-      name: Sn.REWRITE,
+      name: ExtensionFeatureKey.REWRITE,
       module: jsx(_$$w, {})
     },
     alwaysEnabled: !0
@@ -6541,13 +6541,13 @@ let oi = [{
   tags: [_$$$.AI],
   searchSynonyms: ['adjust tone', 'tone dial', 'professional', 'casual', 'concise', 'expanded']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.SHORTEN_TEXT,
   flags: ['edit', 'design', 'slides', 'sites', 'cooper', 'whiteboard'],
   featureFlags: ['qa_text_features'],
   quickAction: {
     module: {
-      name: Sn.SHORTEN,
+      name: ExtensionFeatureKey.SHORTEN,
       module: jsx(_$$J3, {})
     },
     alwaysEnabled: !0,
@@ -6563,14 +6563,14 @@ let oi = [{
   tags: [_$$$.AI],
   searchSynonyms: ['make concise', 'condense', 'reduce', 'abbreviate', 'shorter']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.FIRST_DRAFT,
   flags: ['edit', 'design'],
   featureFlags: [],
   quickAction: {
     module: {
       module: jsx(sT, {}),
-      name: Sn.FIRST_DRAFT
+      name: ExtensionFeatureKey.FIRST_DRAFT
     },
     beforeModuleOpen: () => {
       B3(_$$JT.FIRST_DRAFT);
@@ -6580,14 +6580,14 @@ let oi = [{
   tags: [_$$$.AI],
   searchSynonyms: ['first draft', 'make designs', 'generate design', 'create design', 'let\'s design']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.MAKE_EDITS,
   flags: ['edit', 'design'],
   featureFlags: ['make_edits'],
   quickAction: {
     module: {
       module: jsx(bt, {}),
-      name: Sn.MAKE_EDITS
+      name: ExtensionFeatureKey.MAKE_EDITS
     },
     beforeModuleOpen: () => {
       B3(_$$JT.MAKE_EDITS);
@@ -6597,14 +6597,14 @@ let oi = [{
   tags: [_$$$.AI],
   searchSynonyms: ['make edit', 'edit design', 'prompt to edit']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.MAKE_EDITS_DEBUG,
   flags: ['edit', 'design', 'whiteboard', 'slides'],
   featureFlags: ['make_edits', 'make_edits_debug'],
   quickAction: {
     module: {
       module: jsx(Aw, {}),
-      name: Sn.MAKE_EDITS_DEBUG
+      name: ExtensionFeatureKey.MAKE_EDITS_DEBUG
     },
     beforeModuleOpen: () => {
       B3(_$$JT.MAKE_EDITS);
@@ -6614,7 +6614,7 @@ let oi = [{
   searchSynonyms: ['debug make edits'],
   tags: [_$$$.AI]
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.MAKE_EDITS_DEBUG_REVIEW,
   flags: ['edit', 'design', 'whiteboard', 'slides'],
   featureFlags: ['make_edits', 'make_edits_debug'],
@@ -6624,7 +6624,7 @@ let oi = [{
         fallback: null,
         children: jsx(oe, {})
       }),
-      name: Sn.MAKE_EDITS_DEBUG_REVIEW
+      name: ExtensionFeatureKey.MAKE_EDITS_DEBUG_REVIEW
     },
     beforeModuleOpen: () => {
       B3(_$$JT.MAKE_EDITS);
@@ -6634,14 +6634,14 @@ let oi = [{
   searchSynonyms: ['debug make edits review'],
   tags: [_$$$.AI]
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.MAKE_EDITS,
   flags: ['whiteboard'],
   featureFlags: ['make_edits_figjam'],
   quickAction: {
     module: {
       module: jsx(bt, {}),
-      name: Sn.MAKE_EDITS
+      name: ExtensionFeatureKey.MAKE_EDITS
     },
     beforeModuleOpen: () => {
       B3(_$$JT.MAKE_EDITS);
@@ -6651,14 +6651,14 @@ let oi = [{
   tags: [_$$$.AI],
   searchSynonyms: ['make edit', 'edit design', 'prompt to edit']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.MAKE_EDITS,
   flags: ['slides'],
   featureFlags: ['make_edits_slides'],
   quickAction: {
     module: {
       module: jsx(bt, {}),
-      name: Sn.MAKE_EDITS
+      name: ExtensionFeatureKey.MAKE_EDITS
     },
     beforeModuleOpen: () => {
       B3(_$$JT.MAKE_EDITS);
@@ -6668,7 +6668,7 @@ let oi = [{
   tags: [_$$$.AI],
   searchSynonyms: ['make edit', 'edit design', 'prompt to edit']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.FIRST_DRAFT_FINE_TUNE,
   flags: ['edit', 'design'],
   featureFlags: ['first_draft_fine_tune'],
@@ -6700,7 +6700,7 @@ let oi = [{
           })
         });
       }, {}),
-      name: Sn.FIRST_DRAFT_FINE_TUNE
+      name: ExtensionFeatureKey.FIRST_DRAFT_FINE_TUNE
     },
     beforeModuleOpen: () => {
       B3(_$$JT.FIRST_DRAFT_FINE_TUNE);
@@ -6711,7 +6711,7 @@ let oi = [{
   tags: [_$$$.AI],
   searchSynonyms: ['fine tune', 'first draft fine tune']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.FIRST_DRAFT_MAKE_CHANGES,
   flags: ['edit', 'design'],
   featureFlags: ['first_draft_native', 'first_draft_make_changes', 'first_draft_make_changes_reopen'],
@@ -6725,14 +6725,14 @@ let oi = [{
           initialRootGuid: t || null
         });
       }, {}),
-      name: Sn.FIRST_DRAFT_MAKE_CHANGES
+      name: ExtensionFeatureKey.FIRST_DRAFT_MAKE_CHANGES
     }
   },
   iconType: jsx(i$, {}),
   tags: [_$$$.AI],
   searchSynonyms: ['make changes', 'adjust design', 'modify design', 'edit design']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.FIRST_DRAFT_MAKE_KIT,
   flags: ['edit', 'design'],
   featureFlags: ['first_draft_native', 'first_draft_make_kit'],
@@ -6754,7 +6754,7 @@ let oi = [{
           })
         });
       }, {}),
-      name: Sn.FIRST_DRAFT_MAKE_KIT
+      name: ExtensionFeatureKey.FIRST_DRAFT_MAKE_KIT
     },
     beforeModuleOpen: () => {
       B3(_$$JT.FIRST_DRAFT_MAKE_KIT);
@@ -6766,7 +6766,7 @@ let oi = [{
   tags: [_$$$.AI],
   searchSynonyms: ['make kit', 'create kit', 'generate kit', 'design kit']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.FIRST_DRAFT_MAKE_KIT_DEBUG,
   flags: ['edit', 'design'],
   featureFlags: ['first_draft_native', 'first_draft_make_kit', 'first_draft_debug'],
@@ -6971,7 +6971,7 @@ let oi = [{
           })
         });
       }, {}),
-      name: Sn.FIRST_DRAFT_MAKE_KIT_DEBUG
+      name: ExtensionFeatureKey.FIRST_DRAFT_MAKE_KIT_DEBUG
     },
     beforeModuleOpen: () => {
       B3(_$$JT.FIRST_DRAFT_MAKE_KIT);
@@ -6983,19 +6983,19 @@ let oi = [{
   searchSynonyms: ['debug kit', 'debug make kit'],
   tags: [_$$$.AI]
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.FIRST_DRAFT_LINTING,
   flags: ['edit', 'design'],
   featureFlags: ['first_draft_native', 'first_draft_publish_ux'],
   quickAction: {
     module: {
       module: jsx(S6, {}),
-      name: Sn.FIRST_DRAFT_LINT
+      name: ExtensionFeatureKey.FIRST_DRAFT_LINT
     }
   },
   tags: [_$$$.AI]
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.FIRST_DRAFT_DEBUG,
   flags: ['edit', 'design'],
   featureFlags: ['first_draft_native', 'first_draft_debug'],
@@ -7022,7 +7022,7 @@ let oi = [{
           })
         });
       }, {}),
-      name: Sn.FIRST_DRAFT_DEBUG
+      name: ExtensionFeatureKey.FIRST_DRAFT_DEBUG
     }
   },
   tags: [_$$$.AI]
@@ -7035,13 +7035,13 @@ let oi = [{
   tags: [_$$$.AI],
   flags: ['design', 'slides', 'cooper'],
   featureFlags: getFeatureFlags().hub_file_fragments ? [] : ['asset_suggestions'],
-  callback: _$$lQ,
+  callback: noop,
   quickAction: {
     module: {
       module: getFeatureFlags().hub_file_fragments ? jsx(z6, {
         isVisualSearch: !0
       }) : jsx(WS, {}),
-      name: Sn.VISUAL_SEARCH
+      name: ExtensionFeatureKey.VISUAL_SEARCH
     },
     beforeModuleOpen: () => jp(G4.ACTIONS_LIST)
   },
@@ -7058,7 +7058,7 @@ let oi = [{
       module: jsx(_$$w4, {
         source: 'quick-actions'
       }),
-      name: Sn.BACKGROUND_REMOVE_TOAST
+      name: ExtensionFeatureKey.BACKGROUND_REMOVE_TOAST
     },
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
@@ -7073,7 +7073,7 @@ let oi = [{
       }
     }
   },
-  callback: _$$lQ,
+  callback: noop,
   searchSynonyms: ['clean up image', 'clean up picture', 'make transparent', 'delete background', 'erase background', 'eliminate background', 'isolate subject']
 }, {
   action: _$$JT.UPSCALE_IMAGE,
@@ -7086,7 +7086,7 @@ let oi = [{
       module: jsx(_$$q4, {
         source: 'quick-actions'
       }),
-      name: Sn.UPSCALE_IMAGE_TOAST
+      name: ExtensionFeatureKey.UPSCALE_IMAGE_TOAST
     },
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
@@ -7101,10 +7101,10 @@ let oi = [{
       }
     }
   },
-  callback: _$$lQ,
+  callback: noop,
   searchSynonyms: ['boost resolution', 'sharpen image', 'sharpen picture', 'upscale image', 'scale up', 'enlarge image', 'refine image', 'improve image', 'unblur', 'reduce blur', 'increase size', 'increase quality', 'enhance clarity', 'crisp']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.AUTO_RENAME_LAYERS,
   featureFlags: ['eai_auto_rename_layers'],
   tags: [_$$$.AI],
@@ -7115,7 +7115,7 @@ let oi = [{
       module: jsx(_$$A10, {
         source: ActionType.QUICK_ACTIONS
       }),
-      name: Sn.RENAME_LAYERS_TOAST
+      name: ExtensionFeatureKey.RENAME_LAYERS_TOAST
     },
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
@@ -7128,7 +7128,7 @@ let oi = [{
   },
   searchSynonyms: ['rename all layers', 'name layers']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.GENERATE_IMAGE,
   featureFlags: [],
   tags: [_$$$.AI],
@@ -7137,7 +7137,7 @@ let oi = [{
   quickAction: {
     module: {
       module: jsx(_$$Ay4, {}),
-      name: Sn.GENERATE_IMAGE
+      name: ExtensionFeatureKey.GENERATE_IMAGE
     },
     beforeModuleOpen: () => {
       B3(_$$JT.GENERATE_IMAGE);
@@ -7145,7 +7145,7 @@ let oi = [{
   },
   searchSynonyms: ['generate image', 'make a picture', 'generate graphic', 'generate picture', 'generate illustration', 'create image']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.EDIT_IMAGE,
   featureFlags: [],
   tags: [_$$$.AI],
@@ -7154,7 +7154,7 @@ let oi = [{
   quickAction: {
     module: {
       module: jsx(Tu, {}),
-      name: Sn.EDIT_IMAGE
+      name: ExtensionFeatureKey.EDIT_IMAGE
     },
     beforeModuleOpen: () => {
       B3(_$$JT.EDIT_IMAGE);
@@ -7163,7 +7163,7 @@ let oi = [{
   },
   searchSynonyms: ['edit image', 'edit picture', 'edit graphic', 'edit illustration', 'modify image', 'change image', 'style image']
 }, {
-  callback: _$$lQ,
+  callback: noop,
   action: _$$JT.MAKE_VIDEO,
   featureFlags: ['aip_mw_video'],
   tags: [_$$$.AI],
@@ -7258,7 +7258,7 @@ let oi = [{
             return null;
         }
       }, {}),
-      name: Sn.MAKE_VIDEO
+      name: ExtensionFeatureKey.MAKE_VIDEO
     },
     beforeModuleOpen: () => {
       B3(_$$JT.MAKE_VIDEO);
@@ -7273,7 +7273,7 @@ let oi = [{
   quickAction: {
     module: {
       module: jsx(_$$p3, {}),
-      name: Sn.MAGIC_LINK
+      name: ExtensionFeatureKey.MAGIC_LINK
     },
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
@@ -7298,7 +7298,7 @@ let oi = [{
   quickAction: {
     module: {
       module: jsx(_$$F2, {}),
-      name: Sn.REGENERATE_TEXT_TOAST
+      name: ExtensionFeatureKey.REGENERATE_TEXT_TOAST
     },
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
@@ -7315,7 +7315,7 @@ let oi = [{
   quickAction: {
     module: {
       module: jsx(t5, {}),
-      name: Sn.ASSISTANT_CHAT
+      name: ExtensionFeatureKey.ASSISTANT_CHAT
     },
     beforeModuleOpen: () => {
       atomStoreManager.set(ta, {
@@ -7345,7 +7345,7 @@ let oi = [{
           }
         });
       }, {}),
-      name: Sn.IMAGE_TO_DESIGN
+      name: ExtensionFeatureKey.IMAGE_TO_DESIGN
     },
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
@@ -7382,7 +7382,7 @@ let oi = [{
           }
         });
       }, {}),
-      name: Sn.IMAGE_TO_DESIGN_ORACLE
+      name: ExtensionFeatureKey.IMAGE_TO_DESIGN_ORACLE
     },
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
@@ -7452,7 +7452,7 @@ let oi = [{
             return null;
         }
       }, {}),
-      name: Sn.MERMAID_TO_DIAGRAM
+      name: ExtensionFeatureKey.MERMAID_TO_DIAGRAM
     },
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
@@ -7551,7 +7551,7 @@ function od(e) {
       onAction: () => {
         if (submenuItem.submenu) {
           push({
-            name: Sn.PLUGIN_SUBMENU_ENTRY,
+            name: ExtensionFeatureKey.PLUGIN_SUBMENU_ENTRY,
             module: jsx(oc, {
               item: submenuItem,
               path: path.concat(s)
@@ -7905,7 +7905,7 @@ function oF({
     if (x.isPending() && x.cancel(), e.disabled) return;
     if (e.name === 'plugins-menu-item' && !m) {
       _();
-      _$$R2.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
+      PluginManager.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
       return;
     }
     let s = !!e.itemParameterArgs;
@@ -7933,7 +7933,7 @@ function oF({
               })
             };
             d = async () => {
-              await _$$R2.instance.enqueue({
+              await PluginManager.instance.enqueue({
                 mode: 'run-forever',
                 runPluginArgs: t
               });
@@ -7941,12 +7941,12 @@ function oF({
           } else if (e.parametersRequired) {
             let t = e.itemParameterArgs;
             push({
-              name: Sn.PLUGIN_PARAMETER_ENTRY,
-              module: jsx(_$$r4, {
+              name: ExtensionFeatureKey.PLUGIN_PARAMETER_ENTRY,
+              module: jsx(setupPluginCommandHandler, {
                 command: t.command,
                 displayName: t.displayName,
                 initialParameterValues: e.runPluginArgs?.parameterValues,
-                onExitParameterEntry: _$$lQ,
+                onExitParameterEntry: noop,
                 parameterOnly: t.parameterOnly,
                 parameters: t.parameters,
                 pluginId: t.pluginId,
@@ -7963,12 +7963,12 @@ function oF({
           if (e.itemParameterArgs) {
             let t = e.itemParameterArgs;
             push({
-              name: Sn.PLUGIN_PARAMETER_ENTRY,
-              module: jsx(_$$r4, {
+              name: ExtensionFeatureKey.PLUGIN_PARAMETER_ENTRY,
+              module: jsx(setupPluginCommandHandler, {
                 command: t.command,
                 displayName: t.displayName,
                 initialParameterValues: e.runPluginArgs?.parameterValues,
-                onExitParameterEntry: _$$lQ,
+                onExitParameterEntry: noop,
                 parameterOnly: t.parameterOnly,
                 parameters: t.parameters,
                 pluginId: t.pluginId,
@@ -7987,7 +7987,7 @@ function oF({
     }
     if (l) {
       push({
-        name: Sn.PLUGIN_SUBMENU_ENTRY,
+        name: ExtensionFeatureKey.PLUGIN_SUBMENU_ENTRY,
         module: jsx(oc, {
           item: e,
           path: [TW(e)]
@@ -8085,7 +8085,7 @@ function oF({
               ...k,
               ...N
             }
-          })), t && !hasLocalFileId(t)) ? jsx(_$$V, {
+          })), t && !hasLocalFileId(t)) ? jsx(PluginImage, {
             className: cssBuilderInstance.colorIcon.w20.h20.m2.bRadius4.$,
             plugin: t,
             role: 'presentation'
@@ -8325,7 +8325,7 @@ function oB({
     }();
     return useMemo(() => [...e, ...o, ...l, ...i, {
       name: 'wand-menu',
-      callback: _$$lQ,
+      callback: noop,
       children: t
     }, ...r], [e, t, i, r, o, l]);
   }();
@@ -8587,7 +8587,7 @@ function oB({
                 }) : jsx(_$$B3, {
                   initialTab: xA.COMMUNITY
                 }),
-                name: Sn.ASSETS_TAB_DETAIL_VIEW
+                name: ExtensionFeatureKey.ASSETS_TAB_DETAIL_VIEW
               },
               beforeModuleOpen: () => {
                 r?.key && Hl({
@@ -8635,7 +8635,7 @@ function oB({
             quickAction: {
               module: {
                 module: m ? jsx(z6, {}) : jsx(_$$B3, {}),
-                name: Sn.ASSETS_TAB_DETAIL_VIEW
+                name: ExtensionFeatureKey.ASSETS_TAB_DETAIL_VIEW
               },
               retainSearchQuery: !0,
               beforeModuleOpen: t => {
@@ -8685,7 +8685,7 @@ function oB({
             quickAction: {
               module: {
                 module: m ? jsx(z6, {}) : jsx(_$$B3, {}),
-                name: Sn.ASSETS_TAB_DETAIL_VIEW
+                name: ExtensionFeatureKey.ASSETS_TAB_DETAIL_VIEW
               },
               beforeModuleOpen: t => {
                 ES({
@@ -8722,7 +8722,7 @@ function oB({
             quickAction: {
               module: {
                 module: jsx(t5, {}),
-                name: Sn.ASSISTANT_CHAT
+                name: ExtensionFeatureKey.ASSISTANT_CHAT
               },
               beforeModuleOpen: e => {
                 atomStoreManager.set(ta, {
@@ -8753,7 +8753,7 @@ function oB({
             }),
             iconType: jsx(_$$u, {}),
             callback: () => {
-              t.setActiveTab(Jc.EXTENSIONS);
+              t.setActiveTab(AssetTabType.EXTENSIONS);
             },
             keepMenuOpen: !0,
             disabled: !i || !h
@@ -8790,12 +8790,12 @@ function oB({
     return i;
   }(x);
   _$$iC({
-    activeTab: Jc.ALL,
+    activeTab: AssetTabType.ALL,
     query: p,
     resultsCount: b
   });
   useEffect(() => {
-    i === Jc.ALL && r && t({
+    i === AssetTabType.ALL && r && t({
       quickActionsSessionId: r,
       quickActionsQueryId: u.current,
       searchQuery: m,
@@ -8894,13 +8894,13 @@ function oH({
   let r = useCurrentUserOrg();
   let s = useIsUserGuestInOrg();
   let o = useMemo(() => ({
-    [BY.ALL]: getI18nString('qa.filter.all'),
-    [BY.PLUGINS]: getI18nString('qa.filter.plugins'),
-    [BY.WIDGETS]: getI18nString('qa.filter.widgets'),
-    [BY.FROM_ORG]: getI18nString('qa.filter.from_org_name', {
+    [PluginSourceType.ALL]: getI18nString('qa.filter.all'),
+    [PluginSourceType.PLUGINS]: getI18nString('qa.filter.plugins'),
+    [PluginSourceType.WIDGETS]: getI18nString('qa.filter.widgets'),
+    [PluginSourceType.FROM_ORG]: getI18nString('qa.filter.from_org_name', {
       org_name: r?.name || ''
     }),
-    [BY.DEVELOPMENT]: getI18nString('qa.filter.development')
+    [PluginSourceType.DEVELOPMENT]: getI18nString('qa.filter.development')
   }), [r?.name]);
   let l = useMemo(() => {
     let e = !!r && !s;
@@ -8908,31 +8908,31 @@ function oH({
     let n = [];
     i && n.push({
       type: 'checkableOption',
-      value: BY.ALL,
-      text: o[BY.ALL]
+      value: PluginSourceType.ALL,
+      text: o[PluginSourceType.ALL]
     });
     n.push({
       type: 'checkableOption',
-      value: BY.PLUGINS,
-      text: o[BY.PLUGINS]
+      value: PluginSourceType.PLUGINS,
+      text: o[PluginSourceType.PLUGINS]
     });
     i && n.push({
       type: 'checkableOption',
-      value: BY.WIDGETS,
-      text: o[BY.WIDGETS]
+      value: PluginSourceType.WIDGETS,
+      text: o[PluginSourceType.WIDGETS]
     });
     (e || t) && n.push({
       type: 'separator'
     });
     e && n.push({
       type: 'checkableOption',
-      value: BY.FROM_ORG,
-      text: o[BY.FROM_ORG]
+      value: PluginSourceType.FROM_ORG,
+      text: o[PluginSourceType.FROM_ORG]
     });
     t && n.push({
       type: 'checkableOption',
-      value: BY.DEVELOPMENT,
-      text: o[BY.DEVELOPMENT]
+      value: PluginSourceType.DEVELOPMENT,
+      text: o[PluginSourceType.DEVELOPMENT]
     });
     return n;
   }, [r, s, i, o]);
@@ -8970,14 +8970,14 @@ function la({
     publishedExtension
   } = e;
   if (!hasLocalFileId(extension)) {
-    return jsx(_$$V, {
+    return jsx(PluginImage, {
       'aria-hidden': t,
       'plugin': extension,
       'className': cssBuilderInstance.colorIcon.w20.h20.m2.bRadius4.$
     });
   }
   let a = publishedExtension && getCurrentPluginVersion(publishedExtension);
-  return a && a.redirect_icon_url ? jsx(_$$V, {
+  return a && a.redirect_icon_url ? jsx(PluginImage, {
     'aria-hidden': t,
     'plugin': a,
     'className': cssBuilderInstance.colorIcon.w20.h20.m2.bRadius4.$
@@ -9409,7 +9409,7 @@ function lI({
 function lk(e) {
   let t = useDispatch();
   let i = isEditorTypeSupported();
-  return hasDesktopAPI() && [BY.DEVELOPMENT, BY.ALL].includes(e) ? [{
+  return hasDesktopAPI() && [PluginSourceType.DEVELOPMENT, PluginSourceType.ALL].includes(e) ? [{
     itemKey: 'newPlugin',
     text: getI18nString('whiteboard.inserts.plugin_development_options_new_plugin'),
     svg: _$$e2,
@@ -9461,9 +9461,9 @@ function lN({
       PV({
         action: e,
         isAi: !1,
-        module: Jc.EXTENSIONS,
+        module: AssetTabType.EXTENSIONS,
         qaVersion: $L,
-        rankingAlgorithm: _$$eg(Jc.EXTENSIONS),
+        rankingAlgorithm: _$$eg(AssetTabType.EXTENSIONS),
         searchPosition: target?.index ?? 0,
         isPlugin: !1,
         numSearchResults: a.numResults,
@@ -9620,14 +9620,14 @@ function l2({
     selectedFilter: i
   }) {
     switch (i) {
-      case BY.PLUGINS:
+      case PluginSourceType.PLUGINS:
         return e;
-      case BY.WIDGETS:
+      case PluginSourceType.WIDGETS:
         return t;
-      case BY.ALL:
-      case BY.DEVELOPMENT:
+      case PluginSourceType.ALL:
+      case PluginSourceType.DEVELOPMENT:
         return [...e, ...t];
-      case BY.FROM_ORG:
+      case PluginSourceType.FROM_ORG:
         return [];
       default:
         throwTypeError(i);
@@ -9930,7 +9930,7 @@ function ds({
     let n = [];
     let a = [];
     e.filter(e => e.canRun || e.canRequest).filter(e => i(e)).forEach(e => {
-      wj(e) ? r.push(e) : t === BY.FROM_ORG && jb(e) || t !== BY.FROM_ORG && Nf(e) ? n.push(e) : t === BY.FROM_ORG && a.push(e);
+      wj(e) ? r.push(e) : t === PluginSourceType.FROM_ORG && jb(e) || t !== PluginSourceType.FROM_ORG && Nf(e) ? n.push(e) : t === PluginSourceType.FROM_ORG && a.push(e);
     });
     let s = 0;
     let o = e => {
@@ -9950,8 +9950,8 @@ function ds({
   }(extensions, t);
   let y = lk(t);
   let b = myExtensions.length + suggestedExtensions.length + otherExtensionsFromOrg.length + y.length;
-  let v = t === BY.DEVELOPMENT;
-  let S = t === BY.FROM_ORG;
+  let v = t === PluginSourceType.DEVELOPMENT;
+  let S = t === PluginSourceType.FROM_ORG;
   let I = loaded || S || v;
   let N = function ({
     myExtensions: e,
@@ -9971,7 +9971,7 @@ function ds({
     extensionActions: y
   });
   return (useEffect(() => {
-    r === Jc.EXTENSIONS && o && I && i({
+    r === AssetTabType.EXTENSIONS && o && I && i({
       quickActionsSessionId: o,
       quickActionsQueryId: l,
       searchQuery: '',
@@ -9983,7 +9983,7 @@ function ds({
       searchQueryResults: N
     });
   }, [i, r, o, I, l, b, u, t, N]), _$$iC({
-    activeTab: Jc.EXTENSIONS,
+    activeTab: AssetTabType.EXTENSIONS,
     query: d,
     resultsCount: b
   }), b === 0) ? jsx(da, {}) : jsx(M6, {
@@ -10259,7 +10259,7 @@ function dv({
     communityExtensions
   });
   return (useEffect(() => {
-    r === Jc.EXTENSIONS && l && !loading && i({
+    r === AssetTabType.EXTENSIONS && l && !loading && i({
       quickActionsSessionId: l,
       quickActionsQueryId: h,
       searchQuery: p,
@@ -10271,7 +10271,7 @@ function dv({
       searchQueryResults: A
     });
   }, [m, i, r, N, l, h, t, loading, A, p]), _$$iC({
-    activeTab: Jc.EXTENSIONS,
+    activeTab: AssetTabType.EXTENSIONS,
     isLoading: loading,
     passthroughErrorMessage: GX(p) ? getI18nString('search.error.max_query_length_exceeded') : null,
     query: d,
@@ -10422,7 +10422,7 @@ function dI() {
   _$$b({
     disabled: !x
   });
-  let T = u === Jc.ASSETS;
+  let T = u === AssetTabType.ASSETS;
   let {
     debouncedAssetSearch,
     clearAssetSearchAndCancelDebounce
@@ -10461,29 +10461,29 @@ function dI() {
     _$$lw();
   }, [p]);
   let ed = useCallback(() => {
-    mX(i, () => el(Jc.ASSETS), b, v, y, G4.ACTIONS_ASSETS_TAB);
+    mX(i, () => el(AssetTabType.ASSETS), b, v, y, G4.ACTIONS_ASSETS_TAB);
   }, [i, el, b, v, y]);
   let ec = useRef(null);
   let eu = _$$U3(b);
   let ep = useSelector(canPerformAction);
   let eh = isEditorTypeSupported();
   useEffect(() => {
-    eh || l !== BY.ALL && l !== BY.WIDGETS || d(BY.PLUGINS);
+    eh || l !== PluginSourceType.ALL && l !== PluginSourceType.WIDGETS || d(PluginSourceType.PLUGINS);
   }, [eh, l, d]);
   let em = jsxs(fu, {
     value: u,
-    onChange: _$$lQ,
+    onChange: noop,
     numItems: ep ? 3 : 2,
     children: [jsx(_$$oz, {
-      tabId: Jc.ALL,
-      onAction: () => el(Jc.ALL),
+      tabId: AssetTabType.ALL,
+      onAction: () => el(AssetTabType.ALL),
       navigatingShortcut: {
         key: KeyCodes.KEY_1,
         modifier: [ModifierKeyCodes.ALT]
       },
       children: renderI18nText('qa.all')
     }), defaultViewAssetsTabVisible && jsx(_$$oz, {
-      tabId: Jc.ASSETS,
+      tabId: AssetTabType.ASSETS,
       onAction: ed,
       navigatingShortcut: {
         key: KeyCodes.KEY_2,
@@ -10491,8 +10491,8 @@ function dI() {
       },
       children: renderI18nText('qa.assets')
     }), ep && jsx(_$$oz, {
-      tabId: Jc.EXTENSIONS,
-      onAction: () => el(Jc.EXTENSIONS),
+      tabId: AssetTabType.EXTENSIONS,
+      onAction: () => el(AssetTabType.EXTENSIONS),
       navigatingShortcut: {
         key: KeyCodes.KEY_3,
         modifier: [ModifierKeyCodes.ALT]
@@ -10515,7 +10515,7 @@ function dI() {
       recordingKey: generateRecordingKey('defaultView', 'visualSearchIconButton')
     })
   }) : void 0;
-  let ex = u === Jc.EXTENSIONS;
+  let ex = u === AssetTabType.EXTENSIONS;
   let ey = Xr(FX);
   let eb = useId();
   let eC = _$$o(_$$nt.quickActionsA11y);
@@ -10550,16 +10550,16 @@ function dI() {
       }), jsx(_$$n.Body, {
         children: function () {
           switch (u) {
-            case Jc.ALL:
+            case AssetTabType.ALL:
               ey(!0);
               return jsx(oB, {
                 setActiveTab: el
               });
-            case Jc.ASSETS:
+            case AssetTabType.ASSETS:
               return jsx(_$$t2, {
                 searchHandle: ec
               });
-            case Jc.EXTENSIONS:
+            case AssetTabType.EXTENSIONS:
               return jsx(dS, {
                 extensions,
                 hasLoadedExtensions: loaded,
@@ -10899,7 +10899,7 @@ function dB() {
 }
 let dU = {
   text: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   }
 };

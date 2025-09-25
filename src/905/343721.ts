@@ -3,7 +3,7 @@ import { I5, jl } from '../905/112861'
 import { getIconColor } from '../905/499018'
 import { SvgComponent } from '../905/714743'
 
-let o = jl
+
 export function $$l0({
   icon: e,
   fill: t = 'default',
@@ -11,7 +11,7 @@ export function $$l0({
   ariaHidden: l,
 }) {
   let d = e.split('-').join(' ')
-  let c = e in o
+  let c = e in jl
   return jsx(SvgComponent, {
     style: {
       fill: getIconColor(t),

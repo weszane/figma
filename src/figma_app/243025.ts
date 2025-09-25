@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogActionStrip, DialogBody } from "../figma_app/272243";
@@ -129,7 +129,7 @@ export let $$w2 = registerModal(function (e) {
           children: [jsx($$N1, {
             scaleFactor: R,
             onChange: A,
-            onDropdownHidden: lQ,
+            onDropdownHidden: noop,
             className: j8,
             autoFocus: !0
           }), jsx("div", {

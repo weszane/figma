@@ -9,7 +9,7 @@ import { VisualBellActions } from "../905/302958";
 import { ps, Xv } from "../figma_app/845611";
 import { QL, EM } from "../905/609392";
 import { AccountTypeRequestByIdView } from "../figma_app/43951";
-import { w } from "../905/281010";
+import { accountTypeRequestHandler } from "../905/281010";
 var m = (e => (e.AdminUpgradeEmail = "admin_upgrade_email", e.UnknownDeeplink = "unknown_deeplink", e))(m || {});
 let h = {
   approvalRequestId: "approvalRequestId",
@@ -57,7 +57,7 @@ export function $$f1() {
       let n = findMatchingValue(m, s || "") ?? m.UnknownDeeplink;
       let i = findMatchingValue(ps, t.planType) || ps.TEAM;
       try {
-        let a = await w.approveRequests({
+        let a = await accountTypeRequestHandler.approveRequests({
           plan_id: t.planId,
           plan_type: i,
           selection_method: Xv.DEEPLINK,

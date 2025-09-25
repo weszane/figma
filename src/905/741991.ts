@@ -6,11 +6,11 @@ import { hashToHexString } from "../figma_app/385874";
 import { STYLE_TYPES } from "../figma_app/646357";
 import { c1, dB } from "../905/589717";
 import { STYLE_PROPERTY_IDS, BACKGROUND_PAINT_PROPERTIES } from "../905/71";
-import { s as _$$s } from "../905/6512";
-import { uy } from "../905/252555";
+import { TreeNode } from "../905/6512";
+import { NodeTypeMap } from "../905/252555";
 import { QB, B_, $7 } from "../905/258397";
 import { redactText } from "../figma_app/841197";
-export class $$g0 extends _$$s {
+export class $$g0 extends TreeNode {
   constructor(e, t, i) {
     super(e);
     this.id = e;
@@ -314,7 +314,7 @@ export class $$g0 extends _$$s {
     return {
       id: this.id,
       guid: this.guid,
-      type: [this.type, this.nodeType, uy[this.type]],
+      type: [this.type, this.nodeType, NodeTypeMap[this.type]],
       parentGuid: this.parentGuid,
       overrideKey: this.overrideKey,
       backingSymbolId: this.backingSymbolId,

@@ -1,37 +1,90 @@
-import { jsx } from "react/jsx-runtime";
-import { PureComponent, createRef } from "react";
-export class $$$$a0 extends PureComponent {
-  constructor() {
-    super(...arguments);
-    this.scrollSentinel = createRef();
-    this.intersectionObserver = null;
-    this._isIntersecting = !1;
-    this.initialIntersectionState = null;
+import { createRef, PureComponent } from 'react'
+import { jsx } from 'react/jsx-runtime'
+
+/**
+ * Props for IntersectionSentinel component.
+ */
+export interface IntersectionSentinelProps {
+  className?: string
+  style?: React.CSSProperties
+  rootMargin?: string
+  onInitialLoad?: (isIntersecting: boolean) => void
+  onIntersectionChange?: (entry: IntersectionObserverEntry) => void
+}
+
+/**
+ * IntersectionSentinel monitors intersection state of its DOM node.
+ * Original class name: $$$$a0
+ */
+export class IntersectionSentinel extends PureComponent<IntersectionSentinelProps> {
+  /** Ref to the sentinel DOM node */
+  private scrollSentinel = createRef<HTMLDivElement>()
+  /** IntersectionObserver instance */
+  private intersectionObserver: IntersectionObserver | null = null
+  /** Current intersection state */
+  private _isIntersecting = false
+  /** Initial intersection state */
+  private initialIntersectionState: boolean | null = null
+
+  /**
+   * Returns current intersection state.
+   */
+  get isIntersecting(): boolean {
+    return this._isIntersecting
   }
-  get isIntersecting() {
-    return this._isIntersecting;
-  }
-  componentDidMount() {
-    if (window.IntersectionObserver) {
-      this.intersectionObserver = new IntersectionObserver(e => {
-        let t = e[0];
-        t && (this.props.onInitialLoad && null === this.initialIntersectionState && (this.initialIntersectionState = t.isIntersecting, this.props.onInitialLoad(this.initialIntersectionState)), t.isIntersecting !== this._isIntersecting && (this._isIntersecting = t.isIntersecting, this.props.onIntersectionChange?.(t)));
-      }, {
-        rootMargin: this.props.rootMargin
-      });
-      let e = this.scrollSentinel.current;
-      e && this.intersectionObserver.observe(e);
+
+  /**
+   * Sets up IntersectionObserver after mount.
+   */
+  componentDidMount(): void {
+    if (!window.IntersectionObserver) return
+
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        if (!entry) return
+
+        // Handle initial load
+        if (this.props.onInitialLoad && this.initialIntersectionState === null) {
+          this.initialIntersectionState = entry.isIntersecting
+          this.props.onInitialLoad(this.initialIntersectionState)
+        }
+
+        // Handle intersection change
+        if (entry.isIntersecting !== this._isIntersecting) {
+          this._isIntersecting = entry.isIntersecting
+          this.props.onIntersectionChange?.(entry)
+        }
+      },
+      {
+        rootMargin: this.props.rootMargin,
+      }
+    )
+
+    const node = this.scrollSentinel.current
+    if (node) {
+      this.intersectionObserver.observe(node)
     }
   }
-  componentWillUnmount() {
-    this.intersectionObserver && this.intersectionObserver.disconnect();
+
+  /**
+   * Cleans up IntersectionObserver before unmount.
+   */
+  componentWillUnmount(): void {
+    this.intersectionObserver?.disconnect()
   }
+
+  /**
+   * Renders the sentinel div.
+   */
   render() {
-    return jsx("div", {
+    return jsx('div', {
       ref: this.scrollSentinel,
       className: this.props.className,
-      style: this.props.style
-    });
+      style: this.props.style,
+    })
   }
 }
-export const a = $$$$a0;
+
+/** Export for refactored IntersectionSentinel (original: a) */
+export const a = IntersectionSentinel

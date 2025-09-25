@@ -7,7 +7,7 @@ import l from "../vendor/524488";
 import { getI18nString } from "../905/303541";
 import { isEditorTypeSupported } from "../figma_app/844435";
 import { o3, nt } from "../905/226610";
-import { Jc } from "../905/946805";
+import { AssetTabType } from "../905/946805";
 var d = l;
 let h = createContext({
   state: {
@@ -75,21 +75,21 @@ export function $$f1({
           length: 24
         });
         switch (e) {
-          case Jc.ALL:
+          case AssetTabType.ALL:
             return {
               status: getI18nString("qa.accessibility_status.all_tab.no_results", {
                 query: t
               }),
               type: "error"
             };
-          case Jc.ASSETS:
+          case AssetTabType.ASSETS:
             return {
               status: getI18nString("qa.accessibility_status.assets_tab.no_results", {
                 query: t
               }),
               type: "error"
             };
-          case Jc.EXTENSIONS:
+          case AssetTabType.EXTENSIONS:
             return {
               status: l ? getI18nString("qa.accessibility_status.extensions_tab.include_widgets.no_results", {
                 query: t

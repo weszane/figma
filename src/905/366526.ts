@@ -9,12 +9,12 @@ import { Statsig } from 'statsig-react';
 import { reportError, setContextGlobal, setTagGlobal, SeverityLevel } from '../905/11';
 import { resolveAndResetPromise, resolvePromise } from '../905/2848';
 import { hideInstanceSwapPicker } from '../905/8732';
-import { cL as _$$cL4, hZ as _$$hZ2 } from '../905/14223';
+import { resetContacts, setContacts } from '../905/14223';
 import { isNullOrFailure } from '../905/18797';
-import { R as _$$R4 } from '../905/22352';
-import { aj as _$$aj, uf as _$$uf, uu as _$$uu, fJ, Ut, w7 } from '../905/25169';
+import { getNotificationTimeout } from '../905/22352';
+import { folderChannelHandler, orgMembersChannelHandler, meChannelHandler, teamMembersChannelHandler, fileRepoChannelHandler, fileChannelHandler } from '../905/25169';
 import { W as _$$W } from '../905/25249';
-import { yu as _$$yu, FU } from '../905/26824';
+import { usedKeyboardShortcut, setKeyboardShortcutPanelTab } from '../905/26824';
 import { T as _$$T2 } from '../905/27228';
 import { iZ as _$$iZ } from '../905/29425';
 import { beginCreateNewFolder, hideMobileNav, searchResultClicked, setBrowserTileSortView, setDeletedFiles, setDeletedRepos, setFileBrowserLoading, showMobileNav, stopCreateNewFolder } from '../905/34809';
@@ -27,7 +27,7 @@ import { A as _$$A8 } from '../905/47292';
 import { mJ as _$$mJ, CK, SF, TW } from '../905/55862';
 import { u as _$$u2 } from '../905/56919';
 import { m as _$$m4 } from '../905/65216';
-import { $9, cL as _$$cL, ku as _$$ku, q0 as _$$q2, sM as _$$sM, uh as _$$uh, _b, AF, Am, BZ, Mo, Q4, RO, U3, xY, y3 } from '../905/70982';
+import { prototypeSetPages, prototypeReset, prototypeSetProgressBarMode, prototypeResetRecents, deleteRecentPrototype, prototypeSetCurrentPage, prototypeShowComments, prototypeSetIsReconnecting, recentPrototypePost, prototypeHideComments, prototypeSetBackgroundColor, recentPrototypeUnmarkViewed, prototypeShowOnlyMyComments, prototypeShowResolvedComments, restoreRecentPrototype, prototypeSetIsFooterVisible } from '../905/70982';
 import { createActionCreator } from '../905/73481';
 import { an as _$$an2, PW as _$$PW, y$ as _$$y$, TK } from '../905/81009';
 import { cY as _$$cY, fk as _$$fk, lg as _$$lg, n$ as _$$n$2, rf as _$$rf, rj as _$$rj, Fd, Fj, GR, JK, JR, Ud } from '../905/81459';
@@ -51,7 +51,7 @@ import { filterNavigationConfig, navigationConfig } from '../905/139708';
 import { A as _$$A11 } from '../905/142432';
 import { Kz as _$$Kz } from '../905/145989';
 import { CL } from '../905/148074';
-import { Q as _$$Q3 } from '../905/150006';
+import { handleOptimistTransactionWithError } from '../905/150006';
 import { t as _$$t5 } from '../905/150656';
 import { liveStoreFileBinding } from '../905/155850';
 import { hideModal, hideSpecificModal, popModalStack, popPrevModal, showModal, showModalHandler, updateModal } from '../905/156213';
@@ -124,7 +124,7 @@ import { Cs as _$$Cs } from '../905/381612';
 import { generateUniqueKey } from '../905/383708';
 import { getWAFChallengeType, wafManager } from '../905/394005';
 import { orgsBatchPut, orgsLockAccount, orgsLockOrgs, orgsSetOrgId, orgsUnlockOrgs } from '../905/395917';
-import { _ as _$$_ } from '../905/401345';
+import { isCurrentUserMfaRestrictedAtom } from '../905/401345';
 import { U as _$$U3 } from '../905/402186';
 import { withParsedMeta } from '../905/405710';
 import { debugState } from '../905/407919';
@@ -170,7 +170,7 @@ import { OJ } from '../905/519092';
 import { APILoadingStatus } from '../905/520829';
 import { J as _$$J2 } from '../905/521144';
 import { Button } from '../905/521428';
-import { ex as _$$ex } from '../905/524523';
+import { registerTooltip } from '../905/524523';
 import { UN } from '../905/525678';
 import { oU as _$$oU, B3, Sr } from '../905/535224';
 import { q as _$$q5 } from '../905/540614';
@@ -217,7 +217,7 @@ import { j2 } from '../905/667970';
 import { S as _$$S4 } from '../905/669334';
 import { measureAsyncDuration, measureSyncDuration } from '../905/670985';
 import { fetchFileRoles, fetchFolderRoles, fetchRepoRoles, fetchTeamRoles } from '../905/672897';
-import { oW as _$$oW } from '../905/675859';
+import { WAFImage } from '../905/675859';
 import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456';
 import { tD as _$$tD, FO, Hj } from '../905/682977';
 import { hasStatsigClientApiKey, isPlanKeyTargetingEnabled, RETRY_COUNT, setEnvironmentFlag } from '../905/683495';
@@ -294,7 +294,7 @@ import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n2, Rf, VariableStyleId } from '../905/859698';
 import { AuthAction, AuthErrorCode, AuthField, AuthFlowStep, AuthProvider, SIGNED_UP_FROM_OPEN_SESSIONS } from '../905/862321';
 import { RD } from '../905/862913';
-import { w as _$$w2 } from '../905/863010';
+import { TeamExtendedDataMapper } from '../905/863010';
 import { xH as _$$xH2 } from '../905/869282';
 import { areSessionLocalIDsEqual, defaultSessionLocalIDString } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
@@ -310,7 +310,7 @@ import { t as _$$t } from '../905/897919';
 import { Au, h8, UK } from '../905/898493';
 import { XHR } from '../905/910117';
 import { F as _$$F6 } from '../905/915030';
-import { A as _$$A5 } from '../905/920142';
+import { dayjs } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
 import { E as _$$E5, v as _$$v2 } from '../905/928543';
 import { hideDropdownAction, initAction, selectViewAction, showDropdownAction, updateDropdownSelectionAction, userStateLoadedAction } from '../905/929976';
@@ -1969,7 +1969,7 @@ let iz = e => t => function (i) {
       label: i.payload.label,
       description: i.payload.description
     });
-    _$$Q3({
+    handleOptimistTransactionWithError({
       requestPromise: n,
       fallbackError: getI18nString('file_browser.file_browser_actions.version_update_error'),
       store: e,
@@ -1987,7 +1987,7 @@ let iz = e => t => function (i) {
         r();
         return e;
       });
-      let a = _$$Q3({
+      let a = handleOptimistTransactionWithError({
         requestPromise: n,
         fallbackError: getI18nString('file_browser.file_browser_actions.file_processing_error'),
         store: e,
@@ -2026,7 +2026,7 @@ let iz = e => t => function (i) {
         key: fileKey
       });
     });
-    _$$Q3({
+    handleOptimistTransactionWithError({
       requestPromise: a,
       fallbackError: getI18nString('file_browser.file_browser_actions.version_restore_error'),
       store: e,
@@ -2132,7 +2132,7 @@ let i2 = e => t => function (i) {
       type: BEGIN,
       id: m
     }), e.dispatch(p), i.payload.userInitiated && i.payload.teamDelete) {
-      return _$$Q3({
+      return handleOptimistTransactionWithError({
         requestPromise: XHR.del(`/api/teams/${o}`).then(() => {
           e.dispatch(FlashActions.flash(getI18nString('team_delete_modal.post_delete_flash', {
             teamName: i.payload.team.name
@@ -2155,7 +2155,7 @@ let i2 = e => t => function (i) {
       if (!n.user) return t(i);
       let r = n.roles.byTeamId[i.payload.team.id][n.user.id];
       trackRoleEvent('Role Deleted', r);
-      return _$$Q3({
+      return handleOptimistTransactionWithError({
         requestPromise: XHR.del(`/api/roles/${r.id}`).then(() => {
           e.dispatch(FlashActions.flash(getI18nString('leave_team_modal.post_leave_flash', {
             teamName: i.payload.team.name
@@ -2200,7 +2200,7 @@ let i2 = e => t => function (i) {
 let i6 = e => t => function (i) {
   if (_$$yJ.matches(i)) {
     if (i.payload.userInitiated) {
-      return _$$Q3({
+      return handleOptimistTransactionWithError({
         requestPromise: UserAPIHandlers.putUser({
           user: i.payload.user
         }),
@@ -2251,7 +2251,7 @@ let i6 = e => t => function (i) {
     });
   } else if (_$$bE3.matches(i)) {
     let n = XHR.post('/api/user/user_team_flags', i.payload);
-    return _$$Q3({
+    return handleOptimistTransactionWithError({
       requestPromise: n,
       fallbackError: getI18nString('api_user.error.an_unknown_error_occurred'),
       store: e,
@@ -2485,7 +2485,7 @@ let nS = e => t => function (i) {
       };
       desktopAPIInstance.setTabPreviewData(e);
     }
-  } else if (Am.matches(i)) {
+  } else if (recentPrototypePost.matches(i)) {
     if (e.getState().selectedView.view === 'prototype') {
       let e = i.payload.prototype;
       if (e.thumbnail_url && e.accessed_at) {
@@ -2500,7 +2500,7 @@ let nS = e => t => function (i) {
         });
       }
     }
-  } else if (_$$uh.matches(i)) {
+  } else if (prototypeSetCurrentPage.matches(i)) {
     let t = e.getState().openFile;
     let n = e.getState().prototype.currentPageId;
     let r = i.payload.currentPageId;
@@ -2762,7 +2762,7 @@ let nQ = e => t => function (i) {
           editorType: FEditorType.Design
         })) : desktopAPIInstance ? i.payload.userInitiated || customHistory.reload('File deleted', {
           key: t.openFile?.key || null
-        }) : atomStoreManager.get(_$$_) || e.dispatch(selectViewAction({
+        }) : atomStoreManager.get(isCurrentUserMfaRestrictedAtom) || e.dispatch(selectViewAction({
           view: 'recentsAndSharing'
         }));
       }
@@ -3586,7 +3586,7 @@ async function av(e) {
 }
 let aT = new _$$H6({
   name: 'CommunityResourcePaymentShim',
-  ..._$$uu,
+  ...meChannelHandler,
   livegraphView: CommunityPaymentsForRealtimeShim,
   livegraphArgs: () => ({}),
   convertLivegraphMessage: (e, t, {}, i) => function (e, t) {
@@ -3717,7 +3717,7 @@ function aM(e) {
 }
 let aj = new _$$H6({
   name: 'TeamChannelComponentsShim',
-  ...fJ,
+  ...teamMembersChannelHandler,
   livegraphView: ComponentUpdatesForTeam,
   livegraphArgs: e => ({
     teamId: e
@@ -3761,7 +3761,7 @@ let aj = new _$$H6({
 });
 let aU = new _$$H6({
   name: 'ProjectChannelComponentsShim',
-  ..._$$aj,
+  ...folderChannelHandler,
   livegraphView: ComponentUpdatesForProject,
   livegraphArgs: e => ({
     projectId: e
@@ -3806,7 +3806,7 @@ let aU = new _$$H6({
 });
 let aB = new _$$H6({
   name: 'FileChannelComponentsShim',
-  ...w7,
+  ...fileChannelHandler,
   livegraphView: ComponentUpdatesForFile,
   livegraphArgs: e => ({
     fileKey: e
@@ -3932,7 +3932,7 @@ function aG(e) {
 }
 let az = new _$$H6({
   name: 'TeamChannelStateGroupShim',
-  ...fJ,
+  ...teamMembersChannelHandler,
   livegraphView: StateGroupUpdatesForTeam,
   livegraphArgs: e => ({
     teamId: e
@@ -3976,7 +3976,7 @@ let az = new _$$H6({
 });
 let aH = new _$$H6({
   name: 'ProjectChannelStateGroupShim',
-  ..._$$aj,
+  ...folderChannelHandler,
   livegraphView: StateGroupUpdatesForProject,
   livegraphArgs: e => ({
     projectId: e
@@ -4021,7 +4021,7 @@ let aH = new _$$H6({
 });
 let aW = new _$$H6({
   name: 'FileChannelStateGroupShim',
-  ...w7,
+  ...fileChannelHandler,
   livegraphView: StateGroupUpdatesForFile,
   livegraphArgs: e => ({
     fileKey: e
@@ -4136,7 +4136,7 @@ function aX(e, t) {
 }
 let aQ = new _$$H6({
   name: 'FontFileForTeamShim',
-  ...fJ,
+  ...teamMembersChannelHandler,
   livegraphView: FontFileForTeamView,
   livegraphArgs: (e, t) => ({
     teamId: e ?? null,
@@ -4153,7 +4153,7 @@ let aQ = new _$$H6({
 });
 let aJ = new _$$H6({
   name: 'FontFileForOrgShim',
-  ..._$$uf,
+  ...orgMembersChannelHandler,
   livegraphView: FontFileForOrgView,
   livegraphArgs: (e, t) => ({
     orgId: e ?? null,
@@ -4170,7 +4170,7 @@ let aJ = new _$$H6({
 });
 let a1 = new _$$H6({
   name: 'OrgShim',
-  ..._$$uf,
+  ...orgMembersChannelHandler,
   livegraphView: OrgByIdForRealtimeShim,
   livegraphArgs: e => ({
     orgId: e
@@ -4193,7 +4193,7 @@ let a1 = new _$$H6({
 });
 let a2 = new _$$H6({
   name: 'OrgUserShim',
-  ..._$$uu,
+  ...meChannelHandler,
   livegraphView: OrgUsersForRealtimeShim,
   livegraphArgs: e => ({}),
   convertLivegraphMessage: (e, t, i, n) => function (e, t) {
@@ -4264,7 +4264,7 @@ function a3(e, t) {
 }
 let a6 = new _$$H6({
   name: 'PluginShim',
-  ..._$$uf,
+  ...orgMembersChannelHandler,
   livegraphView: PluginUpdatesForOrg,
   livegraphArgs: (e, t) => ({
     orgId: e ?? null,
@@ -4440,7 +4440,7 @@ function st(e, t) {
 }
 let si = new _$$H6({
   name: 'FileRepoChannelRepoShim',
-  ...Ut,
+  ...fileRepoChannelHandler,
   livegraphView: RepoByIdForRealtimeShim,
   livegraphArgs: e => ({
     repoId: e
@@ -4468,7 +4468,7 @@ let si = new _$$H6({
 });
 let sn = new _$$H6({
   name: 'FileChannelRepoShim',
-  ...w7,
+  ...fileChannelHandler,
   livegraphView: ReposForFile,
   livegraphArgs: e => ({
     fileKey: e
@@ -4496,7 +4496,7 @@ let sn = new _$$H6({
 });
 let sr = new _$$H6({
   name: 'TeamChannelRepoShim',
-  ...fJ,
+  ...teamMembersChannelHandler,
   livegraphView: ReposForTeam,
   livegraphArgs: (e, t) => ({
     teamId: e,
@@ -4525,7 +4525,7 @@ let sr = new _$$H6({
 });
 let sa = new _$$H6({
   name: 'FolderChannelRepoShim',
-  ..._$$aj,
+  ...folderChannelHandler,
   livegraphView: ReposForProject,
   livegraphArgs: (e, t) => ({
     folderId: e,
@@ -4663,7 +4663,7 @@ function su(e, t) {
 }
 let sm = new _$$H6({
   name: 'TeamsShim',
-  ...fJ,
+  ...teamMembersChannelHandler,
   livegraphView: TeamByIdForRealtimeShim,
   livegraphArgs: e => ({
     teamId: e
@@ -4730,7 +4730,7 @@ function sg(e) {
   };
   if (t = e.id, !(Object.keys(sh).length >= 5) && (void 0 === sh[t] && (sh[t] = 5), sh[t]--, sh[t] > 0)) {
     let t = {
-      ..._$$w2.toSinatra(e),
+      ...TeamExtendedDataMapper.toSinatra(e),
       org_team: !!e.orgId,
       pro_team: !e.orgId && e.subscription !== null && e.subscription !== FPaymentHealthStatusType.INCOMPLETE
     };
@@ -4748,7 +4748,7 @@ function sg(e) {
 }
 let sf = new _$$H6({
   name: 'MeChannelRolesShim',
-  ..._$$uu,
+  ...meChannelHandler,
   livegraphView: RoleUpdatesForUser,
   livegraphArgs: (e, t) => ({
     updatedAtTimestamp: t
@@ -4865,7 +4865,7 @@ let sf = new _$$H6({
 });
 let s_ = new _$$H6({
   name: 'TeamChannelRolesShim',
-  ...fJ,
+  ...teamMembersChannelHandler,
   livegraphView: RoleUpdatesForTeam,
   livegraphArgs: (e, t) => ({
     teamId: e,
@@ -5091,7 +5091,7 @@ class sI {
 }
 let sS = new _$$H6({
   name: 'TeamRoleRequestShim',
-  ..._$$uu,
+  ...meChannelHandler,
   livegraphView: UserTeamRoleRequestView,
   livegraphArgs: (e, t) => ({
     updatedAtTimestamp: t
@@ -5149,7 +5149,7 @@ let sT = e => ({
 });
 let sk = new _$$H6({
   name: 'UserEduGracePeriodShim',
-  ..._$$uu,
+  ...meChannelHandler,
   livegraphView: EduGracePeriodsForUser,
   livegraphArgs: (e, t, i) => ({
     updatedAtTimestamp: t
@@ -5175,7 +5175,7 @@ let sk = new _$$H6({
 let sN = '';
 let sP = new _$$H6({
   name: 'UserShim',
-  ..._$$uu,
+  ...meChannelHandler,
   livegraphView: UserForRealtimeShim,
   livegraphArgs: e => ({}),
   convertLivegraphMessage: (e, t, i, n) => function (e, t) {
@@ -5256,7 +5256,7 @@ let sP = new _$$H6({
 });
 let sO = new _$$H6({
   name: 'UserTeamFlagShim',
-  ..._$$uu,
+  ...meChannelHandler,
   livegraphView: UserTeamFlagsForRealtimeShim,
   livegraphArgs: e => ({}),
   convertLivegraphMessage: (e, t, i, n) => function (e, t) {
@@ -5305,7 +5305,7 @@ let sO = new _$$H6({
 let sL = new Map();
 let sF = new _$$H6({
   name: 'WhitelistedPluginShim',
-  ..._$$uf,
+  ...orgMembersChannelHandler,
   livegraphView: WhitelistedPluginsForOrg,
   livegraphArgs: e => ({
     orgId: e
@@ -5357,7 +5357,7 @@ let sF = new _$$H6({
 });
 let sM = new _$$H6({
   name: 'WidgetShim',
-  ..._$$uf,
+  ...orgMembersChannelHandler,
   livegraphView: WidgetUpdatesForOrg,
   livegraphArgs: (e, t) => ({
     orgId: e ?? null,
@@ -8504,14 +8504,14 @@ function lH(e = lz, t) {
   }
 }
 function lW(e, t) {
-  if (!e || _$$q2.matches(t)) return [];
-  if (Am.matches(t)) {
+  if (!e || prototypeResetRecents.matches(t)) return [];
+  if (recentPrototypePost.matches(t)) {
     let i = e.findIndex(e => e.file_key === t.payload.prototype.file_key && e.page_id === t.payload.prototype.page_id);
     let n = [...e];
     i !== -1 && n.splice(i, 1);
     return [t.payload.prototype].concat(n);
   }
-  if (Q4.matches(t)) return e.filter(e => e.file_key !== t.payload.fileKey || e.page_id !== t.payload.pageId);
+  if (recentPrototypeUnmarkViewed.matches(t)) return e.filter(e => e.file_key !== t.payload.fileKey || e.page_id !== t.payload.pageId);
   if (_$$iN.matches(t) || _$$X4.matches(t)) {
     let i = e.findIndex(e => e.file_key === t.payload.prototype.file_key && e.page_id === t.payload.prototype.page_id);
     if (i === -1) return e;
@@ -8534,12 +8534,12 @@ function lW(e, t) {
       });
       return i;
     }
-  } else if (_$$sM.matches(t)) {
+  } else if (deleteRecentPrototype.matches(t)) {
     return e.map(e => t.payload.fileKeys.includes(e.file_key) ? {
       ...e,
       trashed: !0
     } : e);
-  } else if (xY.matches(t)) {
+  } else if (restoreRecentPrototype.matches(t)) {
     return e.map(e => t.payload.fileKeys.includes(e.file_key) ? {
       ...e,
       trashed: !1
@@ -9972,7 +9972,7 @@ let ch = {
   tab: null
 };
 function cg(e = ch, t) {
-  return FU.matches(t) ? {
+  return setKeyboardShortcutPanelTab.matches(t) ? {
     ...e,
     ...t.payload
   } : e;
@@ -10091,7 +10091,7 @@ if (localStorageRef) {
   } catch (e) {}
 }
 function cN(e = cR, t) {
-  if (_$$yu.matches(t)) {
+  if (usedKeyboardShortcut.matches(t)) {
     let i;
     let n = t.payload.key;
     i = n in e ? {
@@ -10657,62 +10657,62 @@ let uM = {
 };
 let uj = {
   prototype(e = uM, t) {
-    if (_$$cL.matches(t)) {
+    if (prototypeReset.matches(t)) {
       return {
         ...uM
       };
     }
-    if (_b.matches(t)) {
+    if (prototypeShowComments.matches(t)) {
       return {
         ...e,
         showComments: !0
       };
     }
-    if (BZ.matches(t)) {
+    if (prototypeHideComments.matches(t)) {
       return {
         ...e,
         showComments: !1
       };
     }
-    if (U3.matches(t)) {
+    if (prototypeShowResolvedComments.matches(t)) {
       return {
         ...e,
         showResolvedComments: t.payload.showResolved
       };
     }
-    if (RO.matches(t)) {
+    if (prototypeShowOnlyMyComments.matches(t)) {
       return {
         ...e,
         showOnlyParticipatingComments: t.payload.showOnlyParticipating
       };
     }
-    if (AF.matches(t)) {
+    if (prototypeSetIsReconnecting.matches(t)) {
       return {
         ...e,
         isReconnecting: t.payload.isReconnecting
       };
     }
-    if ($9.matches(t)) {
+    if (prototypeSetPages.matches(t)) {
       return {
         ...e,
         pages: t.payload.pages
       };
-    } else if (_$$uh.matches(t)) {
+    } else if (prototypeSetCurrentPage.matches(t)) {
       return {
         ...e,
         currentPageId: t.payload.currentPageId
       };
-    } else if (Mo.matches(t)) {
+    } else if (prototypeSetBackgroundColor.matches(t)) {
       return {
         ...e,
         backgroundColor: t.payload.color
       };
-    } else if (_$$ku.matches(t)) {
+    } else if (prototypeSetProgressBarMode.matches(t)) {
       return {
         ...e,
         showProgressBar: t.payload.showProgress
       };
-    } else if (y3.matches(t)) {
+    } else if (prototypeSetIsFooterVisible.matches(t)) {
       return {
         ...e,
         isFooterVisible: t.payload.isFooterVisible
@@ -11163,7 +11163,7 @@ let pg = {
     usersByEmail: {},
     users: []
   }, t) {
-    if (_$$hZ2.matches(t)) {
+    if (setContacts.matches(t)) {
       let i = {
         ...e,
         appData: {
@@ -11179,7 +11179,7 @@ let pg = {
       }
       return i;
     }
-    return _$$cL4.matches(t) ? {
+    return resetContacts.matches(t) ? {
       appData: {
         contactsFetched: !1
       },
@@ -11260,11 +11260,11 @@ let pg = {
         t.message === i.message && t.interpolate?.nodes && i.interpolate?.nodes && (i.interpolate.nodes = [...t.interpolate.nodes, ...i.interpolate.nodes]);
         n.pop();
       }
-      if (_$$R4(i) === 1 / 0) {
+      if (getNotificationTimeout(i) === 1 / 0) {
         n.push(i);
       } else {
         let e = n.length - 1;
-        for (; e >= 0 && _$$R4(n[e]) === 1 / 0;) e--;
+        for (; e >= 0 && getNotificationTimeout(n[e]) === 1 / 0;) e--;
         n.splice(e + 1, 0, i);
       }
       if (isInteractionOrEvalMode() || getFalseValue()) {
@@ -11276,7 +11276,7 @@ let pg = {
     if (VisualBellActions.dequeue.matches(t)) {
       return e.length === 0 ? e : t.payload.matchType || t.payload.matchTimeout || t.payload.shouldDequeueFunc ? e.filter(e => {
         if (e.type === t.payload.matchType) return !1;
-        let i = _$$R4(e);
+        let i = getNotificationTimeout(e);
         return (t.payload.matchTimeout !== 'persistent' || i !== 1 / 0) && (t.payload.matchTimeout !== 'ephemeral' || i === 1 / 0) && (!t.payload.shouldDequeueFunc || !t.payload.shouldDequeueFunc(e));
       }) : e.slice(1);
     }
@@ -12936,7 +12936,7 @@ function pv({
       top: `${t}px`
     },
     ref: s,
-    children: jsx(_$$oW, {
+    children: jsx(WAFImage, {
       className: py,
       src: pb[r],
       alt: getI18nString('desktop_open_views.interstitial.figma_app_logo')
@@ -12971,7 +12971,7 @@ function pE() {
   });
 }
 function px() {
-  return jsx(_$$oW, {
+  return jsx(WAFImage, {
     className: pA,
     src: buildUploadUrl('3214f8f4f9e232539e7f89f2f34bd066db442f69'),
     alt: getI18nString('desktop_open_views.interstitial.figma_app_logo')
@@ -13816,7 +13816,7 @@ function hE() {
   (e.has(A7) || e.has(EL)) && (e.$$delete(A7), e.$$delete(EL), customHistory.replace(`${customHistory.location.pathname}?${e.toString()}${customHistory.location.hash}`, customHistory.location.state));
   customHistory.reload('Cleared frontend commit preview cookie');
 }
-let hx = _$$ex('frontend_commit_preview_indicator', ({
+let hx = registerTooltip('frontend_commit_preview_indicator', ({
   desiredCommitSha: e,
   blockedReason: t
 }) => {
@@ -14260,23 +14260,23 @@ export async function $$hz0(e, t, d = {
       let e = getI18nState()?.getPrimaryLocale(!1);
       switch (e) {
         case 'ja':
-          _$$A5.locale(e);
+          dayjs.locale(e);
           return;
         case 'es-es':
         case 'es-la':
-          _$$A5.locale('es');
+          dayjs.locale('es');
           return;
         case 'fr':
-          _$$A5.locale('fr');
+          dayjs.locale('fr');
           return;
         case 'de':
-          _$$A5.locale('de');
+          dayjs.locale('de');
           return;
         case 'pt-br':
-          _$$A5.locale('pt-br');
+          dayjs.locale('pt-br');
           return;
         case 'ko-kr':
-          _$$A5.locale('ko');
+          dayjs.locale('ko');
         default:
       }
     })();

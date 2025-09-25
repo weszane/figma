@@ -1,112 +1,203 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { useContext, useEffect, useRef, useCallback } from "react";
-import a from "classnames";
-import { useLatestRef } from "../figma_app/922077";
-import { M3, yn, lv } from "../figma_app/119475";
-import { AutoLayout } from "../905/470281";
-import { gp } from "../905/154591";
-import { G } from "../905/153787";
-var s = a;
-let p = "tree_row--expansionToggle--mYjsb";
-export function $$m0({
-  children: e,
-  changeType: t,
-  isExpanded: i,
-  isLeaf: a,
-  isPinned: m,
-  isSelected: f,
-  isSelectedSecondary: _,
-  isChanging: A,
-  indent: y,
-  style: b,
-  keyboardNavigationPath: v,
-  toggleExpanded: I,
-  togglePinned: E,
-  select: x,
-  onContextMenu: S,
-  onMouseEnter: w,
-  onMouseLeave: C
+import classNames from 'classnames'
+import { useCallback, useContext, useEffect, useRef } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { VimFocusContext } from '../905/153787'
+import { renderChangeBadge } from '../905/154591'
+import { AutoLayout } from '../905/470281'
+import { lv, M3, yn } from '../figma_app/119475'
+import { useLatestRef } from '../figma_app/922077'
+
+let p = 'tree_row--expansionToggle--mYjsb'
+/**
+ * TreeRow component (original: $$m0)
+ * Renders a tree row with expansion, selection, pinning, and change badge.
+ */
+export function TreeRow({
+  children,
+  changeType,
+  isExpanded,
+  isLeaf,
+  isPinned,
+  isSelected,
+  isSelectedSecondary,
+  isChanging,
+  indent,
+  style,
+  keyboardNavigationPath,
+  toggleExpanded,
+  togglePinned,
+  select,
+  onContextMenu,
+  onMouseEnter,
+  onMouseLeave,
+}: {
+  children: React.ReactNode
+  changeType?: string
+  isExpanded: boolean
+  isLeaf: boolean
+  isPinned?: boolean
+  isSelected: boolean
+  isSelectedSecondary?: boolean
+  isChanging?: boolean
+  indent: number
+  style?: React.CSSProperties
+  keyboardNavigationPath: any
+  toggleExpanded: (metaKey: boolean) => void
+  togglePinned?: () => void
+  select: () => void
+  onContextMenu?: React.MouseEventHandler
+  onMouseEnter?: React.MouseEventHandler
+  onMouseLeave?: React.MouseEventHandler
 }) {
-  let {
+  // Keyboard navigation setup (original: M3)
+  const {
     setKeyboardNavigationElement,
     keyboardNavigationItem,
-    isFocused
+    isFocused,
   } = M3({
-    path: v
-  });
-  let N = useContext(G);
-  let P = useLatestRef(f);
+    path: keyboardNavigationPath,
+  })
+
+  const vimFocus = useContext(VimFocusContext)
+  const latestIsSelectedRef = useLatestRef(isSelected)
+
+  // Focus management effect (original: useEffect in $$m0)
   useEffect(() => {
-    !P && f && !isFocused && N() && keyboardNavigationItem?.focus();
-  }, [isFocused, P, f, keyboardNavigationItem, N]);
-  let O = useRef(!1);
-  let D = useCallback(e => e.target instanceof Element && "BUTTON" === e.target.tagName, []);
-  let L = useCallback(e => !!(e.target instanceof Element && (e.target.classList.contains(p) || e.target.parentElement?.classList.contains(p))), []);
-  return jsx("button", {
+    if (!latestIsSelectedRef && isSelected && !isFocused && vimFocus() && keyboardNavigationItem) {
+      keyboardNavigationItem.focus()
+    }
+  }, [isFocused, latestIsSelectedRef, isSelected, keyboardNavigationItem, vimFocus])
+
+  const mouseDownHandledRef = useRef(false)
+
+  // Helper: isButtonTarget (original: D)
+  const isButtonTarget = useCallback(
+    (e: React.MouseEvent) =>
+      e.target instanceof Element && e.target.tagName === 'BUTTON',
+    [],
+  )
+
+  // Helper: isExpansionToggleTarget (original: L)
+  const isExpansionToggleTarget = useCallback(
+    (e: React.MouseEvent) =>
+      !!(
+        e.target instanceof Element
+        && (e.target.classList.contains(p)
+          || e.target.parentElement?.classList.contains(p))
+      ),
+    [],
+  )
+
+  // Render
+  return jsx('button', {
     ref: setKeyboardNavigationElement,
-    className: s()("tree_row--treeItem--6gIYH", {
-      "tree_row--selectedSecondary--8QYCx": _ && !(f || isFocused),
-      "tree_row--selected--url1U": f || isFocused,
-      "tree_row--changing--E9CSm": A
+    className: classNames('tree_row--treeItem--6gIYH', {
+      'tree_row--selectedSecondary--8QYCx': isSelectedSecondary && !(isSelected || isFocused),
+      'tree_row--selected--url1U': isSelected || isFocused,
+      'tree_row--changing--E9CSm': isChanging,
     }),
-    onClick: e => {
-      O.current ? O.current = !1 : I(e.metaKey || e.altKey);
-      e.currentTarget.focus();
+    onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (mouseDownHandledRef.current) {
+        mouseDownHandledRef.current = false
+      }
+      else {
+        toggleExpanded(e.metaKey || e.altKey)
+      }
+      e.currentTarget.focus()
     },
-    onContextMenu: S,
-    onDoubleClick: e => {
-      L(e) || I(e.metaKey);
+    onContextMenu,
+    onDoubleClick: (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (!isExpansionToggleTarget(e)) {
+        toggleExpanded(e.metaKey)
+      }
     },
-    onFocus: x,
-    onKeyDown: e => {
-      (i && yn(e.code, !0) || !i && lv(e.code, !0)) && I(e.metaKey);
+    onFocus: select,
+    onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      if ((isLeaf && yn(e.code, true)) || (!isLeaf && lv(e.code, true))) {
+        toggleExpanded(e.metaKey)
+      }
     },
-    onMouseDown: e => {
-      (D(e) || L(e)) && e.detail > 1 && e.preventDefault();
-      L(e) ? O.current = e.detail > 1 : O.current = !0;
+    onMouseDown: (e: React.MouseEvent<HTMLButtonElement>) => {
+      if ((isButtonTarget(e) || isExpansionToggleTarget(e)) && e.detail > 1) {
+        e.preventDefault()
+      }
+      if (isExpansionToggleTarget(e)) {
+        mouseDownHandledRef.current = e.detail > 1
+      }
+      else {
+        mouseDownHandledRef.current = true
+      }
     },
-    onMouseEnter: w,
-    onMouseLeave: C,
-    style: b,
+    onMouseEnter,
+    onMouseLeave,
+    style,
     children: jsxs(AutoLayout, {
-      children: [jsx(h, {
-        indent: y,
-        isLeaf: a,
-        isExpanded: i
-      }), e, E && jsx(g, {
-        isPinned: !!m,
-        togglePinned: E
-      }), t && jsx(gp, {
-        type: t
-      })]
-    })
-  });
+      children: [
+        jsx(TreeIndent, {
+          indent,
+          isLeaf,
+          isExpanded,
+        }),
+        children,
+        togglePinned
+        && jsx(PinToggle, {
+          isPinned: !!isPinned,
+          togglePinned,
+        }),
+        changeType
+        && jsx(renderChangeBadge, {
+          type: changeType,
+        }),
+      ],
+    }),
+  })
 }
-function h({
-  indent: e,
-  isLeaf: t,
-  isExpanded: i
+
+/**
+ * TreeIndent component (original: h)
+ * Renders the indentation and expansion arrow.
+ */
+export function TreeIndent({
+  indent,
+  isLeaf,
+  isExpanded,
+}: {
+  indent: number
+  isLeaf: boolean
+  isExpanded: boolean
 }) {
-  return jsx("div", {
-    className: s()(p, !t && "tree_row--clickable--ttIc9"),
+  return jsx('div', {
+    className: classNames(p, !isLeaf && 'tree_row--clickable--ttIc9'),
     style: {
-      paddingLeft: 14 * e,
+      paddingLeft: 14 * indent,
       width: 14,
-      minHeight: 14
+      minHeight: 14,
     },
-    children: jsx("span", {
-      children: t ? "" : i ? "\u25BC" : "\u25B6"
-    })
-  });
+    children: jsx('span', {
+      children: isLeaf ? '' : isExpanded ? '\u25BC' : '\u25B6',
+    }),
+  })
 }
-function g({
-  isPinned: e,
-  togglePinned: t
+
+/**
+ * PinToggle component (original: g)
+ * Renders the pin/unpin toggle.
+ */
+export function PinToggle({
+  isPinned,
+  togglePinned,
+}: {
+  isPinned: boolean
+  togglePinned: () => void
 }) {
-  return jsx("span", {
-    onClick: t,
-    className: e ? "tree_row--unpinToggle--CU4-x tree_row--_pinToggleBase--W1djM" : "tree_row--pinToggle--wbULT tree_row--_pinToggleBase--W1djM",
-    children: e ? "Unpin" : "Pin"
-  });
+  return jsx('span', {
+    onClick: togglePinned,
+    className: isPinned
+      ? 'tree_row--unpinToggle--CU4-x tree_row--_pinToggleBase--W1djM'
+      : 'tree_row--pinToggle--wbULT tree_row--_pinToggleBase--W1djM',
+    children: isPinned ? 'Unpin' : 'Pin',
+  })
 }
-export const Z = $$m0;
+
+// Refactored export for compatibility (original: Z)
+export const Z = TreeRow

@@ -2,7 +2,7 @@
 
 import type { IPoint } from '../905/736624';
 import type { Fn } from '../../types/global';
-import { R as _$$R } from '../905/22352';
+import { getNotificationTimeout } from '../905/22352';
 import { z4 } from '../905/37051';
 import { d as _$$d } from '../905/68441';
 import { VisualBellActions } from '../905/302958';
@@ -594,7 +594,7 @@ export class PluginUIManager {
    */
   cancelNonErrorPersistentVisualBells(): void {
     fullscreenValue.dispatch(VisualBellActions.dequeue({
-      shouldDequeueFunc: (e: any) => e.type !== 'plugins-runtime-error' && _$$R(e) === Infinity
+      shouldDequeueFunc: (e: any) => e.type !== 'plugins-runtime-error' && getNotificationTimeout(e) === Infinity
     }));
   }
 

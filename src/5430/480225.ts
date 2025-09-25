@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { xk } from "@stylexjs/stylex";
 import { buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { PricingOptions } from "../905/237873";
@@ -116,7 +116,7 @@ function C(e) {
     ...xk(Z.container),
     children: [jsx("div", {
       ...xk(Z.assetContainer),
-      children: jsx(oW, {
+      children: jsx(WAFImage, {
         ...xk(Z.asset),
         src: buildUploadUrl(v[e.resourceType]),
         loading: "lazy",

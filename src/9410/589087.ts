@@ -7,9 +7,9 @@ import { atomStoreManager } from "../figma_app/27355";
 import { renderI18nText } from "../905/303541";
 import { on } from "../figma_app/456871";
 import { cortexAPI } from "../figma_app/432652";
-import { B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { sZ } from "../figma_app/948389";
-import { i2 } from "../905/913055";
+import { getSelectedNodesWithinBreakpointFrame } from "../905/913055";
 import { JT, pY } from "../figma_app/632248";
 import { B3, z8, qy } from "../figma_app/862289";
 import { cq } from "../905/794154";
@@ -41,7 +41,7 @@ let $$S0 = async ({
   let {
     featureType
   } = e;
-  let a = i2();
+  let a = getSelectedNodesWithinBreakpointFrame();
   let s = {
     targets: on(a, {
       allowEmpty: !1,
@@ -134,9 +134,9 @@ export function $$j1() {
         callback: () => onRun(lastParameters)
       }];
       let L = null;
-      (error instanceof Vz || sZ(error) === B.CONTENT_LENGTH_LIMIT) && (N = renderI18nText("ai.error.content_length_limit"), O = []);
+      (error instanceof Vz || sZ(error) === ErrorType.CONTENT_LENGTH_LIMIT) && (N = renderI18nText("ai.error.content_length_limit"), O = []);
       error instanceof Jd && (N = renderI18nText("ai_text_tools.missing_fonts"), O = []);
-      sZ(error) === B.UNSAFE_OR_HARMFUL_CONTENT && (O = []);
+      sZ(error) === ErrorType.UNSAFE_OR_HARMFUL_CONTENT && (O = []);
       I > 0 && k > 0 && k < I && (L = renderI18nText("ai_text_tools.shorten.couldnt_count", {
         failed: k,
         total: I

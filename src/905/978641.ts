@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { memo, useRef, useState } from "react";
 import { xk } from "@stylexjs/stylex";
 import { g as _$$g } from "../905/211118";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 var $$l1 = (e => (e.COMMUNITY_HUB_FILE_THUMBNAIL = "COMMUNITY_HUB_FILE_THUMBNAIL", e))($$l1 || {});
 let $$d0 = memo(function ({
   containerStyle: e,
@@ -17,7 +17,7 @@ let $$d0 = memo(function ({
   return jsx("div", {
     ref: m,
     ...xk(c.container, !!h && c.tintedContainer(h), e),
-    children: jsx(oW, {
+    children: jsx(WAFImage, {
       ...d,
       ...xk(c.img, t, l && !f ? c.imgFadedOut : c.imgFadedIn),
       ...(i ? {

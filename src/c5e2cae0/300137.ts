@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { b as _$$b } from "../905/946806";
 import { getFeatureFlags } from "../905/601108";
 import { openWindow } from "../905/508367";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
 import { isStudentValidated } from "../figma_app/141320";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -56,7 +56,7 @@ function y({
     };
   }(!0);
   let T = getInitialOptions().analyze_data_flow_v2_until;
-  let N = isStudentValidated(v) && t ? y?.edu_info.replace(/\[BILLING_REMODEL_GA_DATE\]/g, A(T).format("MMMM D, YYYY")) : y?.info.replace(/\[NEXT_RENEWAL_DATE\]/g, j(e));
+  let N = isStudentValidated(v) && t ? y?.edu_info.replace(/\[BILLING_REMODEL_GA_DATE\]/g, dayjs(T).format("MMMM D, YYYY")) : y?.info.replace(/\[NEXT_RENEWAL_DATE\]/g, j(e));
   let b = getI18nString("checkout.banner.price_change", {
     date: j(e)
   });
@@ -89,7 +89,7 @@ function j(e) {
   let a = new Date();
   a.setFullYear(2025);
   a.getDate() >= 11 ? a.setMonth(2) : a.setMonth(3);
-  return A(e === SubscriptionType.ANNUAL ? t : a).format("MMMM D, YYYY");
+  return dayjs(e === SubscriptionType.ANNUAL ? t : a).format("MMMM D, YYYY");
 }
 let S = withTrackedClick(function ({
   onClick: e,

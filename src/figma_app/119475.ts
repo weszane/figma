@@ -4,7 +4,7 @@ import { useStableMemo } from '../905/19536';
 import { isExactModifier, ModifierKeyCodes } from '../905/63728';
 import { RecordableDiv } from '../905/511649';
 import { logger } from '../905/651849';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { assertNotNullish, isNullish } from '../figma_app/95419';
 import { throwTypeError } from '../figma_app/465776';
 import { findNearest, findNext, findPrevious, popLast } from '../figma_app/656233';
@@ -168,9 +168,9 @@ let $$E4 = forwardRef(({
   }, []);
   let C = useRef(null);
   let w = useRef(null);
-  let O = useRef(lQ);
+  let O = useRef(noop);
   let R = useCallback(e => {
-    e === C.current && (C.current = null, O.current(), O.current = lQ);
+    e === C.current && (C.current = null, O.current(), O.current = noop);
   }, []);
   let L = useCallback((e, t) => {
     C.current && R(C.current);

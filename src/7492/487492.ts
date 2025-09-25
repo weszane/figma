@@ -15,7 +15,7 @@ import { MediaQuerySvgComponent } from '../905/331623';
 import { s as _$$s } from '../905/403855';
 import { IconButton } from '../905/443068';
 import { AutoLayout } from '../905/470281';
-import { V as _$$V } from '../905/480825';
+import { PluginImage } from '../905/480825';
 import { stripHtmlTags } from '../905/491152';
 import { SvgComponent } from '../905/714743';
 import { j as _$$j } from '../905/813868';
@@ -23,7 +23,7 @@ import { j as _$$j2 } from '../905/834956';
 import { useCurrentUserOrg } from '../905/845253';
 import { Um } from '../905/848862';
 import { hideDropdownAction, showDropdownThunk } from '../905/929976';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { styleBuilderInstance } from '../905/941192';
 import { postUserFlag } from '../905/985254';
 import { A as _$$A5 } from '../1617/579393';
@@ -286,7 +286,7 @@ export function $$eT0({
   onClick: t
 }) {
   let l = {
-    viewPluginDetails: lQ,
+    viewPluginDetails: noop,
     keyboardNavigationPath: void 0,
     shouldFocusFirstItem: void 0
   };
@@ -561,7 +561,7 @@ function eB({
   let [r, d] = useState(!!t);
   return jsx('div', {
     className: p()(r ? lP : _$$vt),
-    children: t || jsx(_$$V, {
+    children: t || jsx(PluginImage, {
       plugin: {
         name: i,
         plugin_id: e,

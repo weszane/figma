@@ -1,27 +1,64 @@
-import { YT } from "../905/232489";
-export function $$r4(e) {
-  return null != e;
-}
-export let $$a3 = Object.entries;
-Object.values;
-export let $$s0 = Object.keys;
-export function $$o2(e) {
-  let t = {};
-  for (let [i, r] of $$a3(e)) {
-    let e = i;
-    if (e.includes("#")) {
-      let t = e.split("#");
-      e = t.slice(0, t.length - 1).join("");
+import { toIdentifier } from '../905/232489'
+
+/**
+ * Checks if a value is not null or undefined.
+ * Original: $$r4
+ * @param value - The value to check.
+ * @returns True if value is not null or undefined.
+ */
+export const isNotNull = (value: unknown): boolean => value != null
+
+/**
+ * Returns the entries of an object as [key, value] pairs.
+ * Original: $$a3
+ */
+export const objectEntries = Object.entries
+
+/**
+ * Returns the keys of an object.
+ * Original: $$s0
+ */
+export const objectKeys = Object.keys
+
+/**
+ * Converts object keys to identifiers, removing any suffix after '#'.
+ * Original: $$o2
+ * @param obj - The object to process.
+ * @returns A new object with processed keys.
+ */
+export function normalizeObjectKeys(obj: Record<string, any>): Record<string, any> {
+  const result: Record<string, any> = {}
+  for (const [key, value] of objectEntries(obj)) {
+    let normalizedKey = key
+    if (normalizedKey.includes('#')) {
+      const parts = normalizedKey.split('#')
+      normalizedKey = parts.slice(0, parts.length - 1).join('')
     }
-    t[e = YT(e)] = r;
+    normalizedKey = toIdentifier(normalizedKey)
+    result[normalizedKey] = value
   }
-  return t;
+  return result
 }
-export function $$l1(e, t = (e, t) => e > t) {
-  return Object.entries(e).reduce((e, i) => t(e[1], i[1]) ? e : i)[0];
+
+/**
+ * Finds the key with the maximum value according to a comparator.
+ * Original: $$l1
+ * @param obj - The object to search.
+ * @param comparator - Function to compare values.
+ * @returns The key with the maximum value.
+ */
+export function findMaxKey<T>(
+  obj: Record<string, T>,
+  comparator: (a: T, b: T) => boolean = (a, b) => a > b
+): string {
+  return objectEntries(obj).reduce((max, entry) =>
+    comparator(max[1], entry[1]) ? max : entry
+  )[0]
 }
-export const HP = $$s0;
-export const Iq = $$l1;
-export const Z3 = $$o2;
-export const jO = $$a3;
-export const t2 = $$r4;
+
+// Export aliases for refactored names
+export const HP = objectKeys
+export const Iq = findMaxKey
+export const Z3 = normalizeObjectKeys
+export const jO = objectEntries
+export const t2 = isNotNull

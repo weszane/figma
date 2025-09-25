@@ -27,7 +27,7 @@ import { L as _$$L } from "../9864/861465";
 import { m as _$$m } from "../9864/958952";
 import { Xg } from "../7021/854265";
 import { CAe } from "../figma_app/6204";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { normalizeJobRole } from "../3973/538504";
 import { useCurrentUserOrg } from "../905/845253";
 import { useCurrentPublicPlan, useIsStarterPlan } from "../figma_app/465071";
@@ -43,7 +43,7 @@ export function $$F0({
     let a = useCurrentUserOrg();
     let i = n.profile.job_title;
     let o = normalizeJobRole(i);
-    return useCallback(() => !(a && a.k12_google_org || n.email.endsWith(".edu") || t || _$$A(n.email_validated_at).add(14, "day").isAfter(_$$A(Date.now()))) && (!i || ("something_else" === i ? !!_$$A(n.email_validated_at).isBefore(_$$A(new Date("2024-12-10"))) : "other" === o && (!a || !a.saml_sso_only))), [a, t, o, i, n.email, n.email_validated_at]);
+    return useCallback(() => !(a && a.k12_google_org || n.email.endsWith(".edu") || t || dayjs(n.email_validated_at).add(14, "day").isAfter(dayjs(Date.now()))) && (!i || ("something_else" === i ? !!dayjs(n.email_validated_at).isBefore(dayjs(new Date("2024-12-10"))) : "other" === o && (!a || !a.saml_sso_only))), [a, t, o, i, n.email, n.email_validated_at]);
   }();
   let n = Xr(bk);
   let i = Xr(Q7);

@@ -113,7 +113,7 @@ import { X as _$$X2 } from '../905/857208';
 import { BQ } from '../905/865071';
 import { iv as _$$iv, mc as _$$mc, UC, Uj } from '../905/872285';
 import { XHR, XHRError } from '../905/910117';
-import { A as _$$A6 } from '../905/920142';
+import { dayjs } from '../905/920142';
 import { removeCommunityProfileUser, changeCommunityProfilePrimaryUser } from '../905/926523';
 import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
 import { q as _$$q } from '../905/932270';
@@ -1933,7 +1933,7 @@ let iv = registerModal(e => {
     numDays: e
   });
   let y = useMemo(() => n > 0 ? renderI18nText('tokens.settings.dev_token_modal.expiration_description', {
-    expiry: _$$A6().add(n, 'day').toDate()
+    expiry: dayjs().add(n, 'day').toDate()
   }) : renderI18nText('tokens.settings.dev_token_modal.expiration_description_never'), [n]);
   let I = (e, t) => {
     u({
@@ -2073,7 +2073,7 @@ let iv = registerModal(e => {
               _(ip({
                 desc: t,
                 scopes: Wc(d),
-                expiration: n === 0 ? void 0 : _$$A6.duration({
+                expiration: n === 0 ? void 0 : dayjs.duration({
                   days: n
                 }).asSeconds()
               }));
@@ -2117,7 +2117,7 @@ function iw(e) {
     let n = E0(t);
     return `${i}: ${n}`;
   }).join('\n');
-  if (token.expires_at && _$$A6.utc(token.expires_at).isBefore(_$$A6.utc())) return null;
+  if (token.expires_at && dayjs.utc(token.expires_at).isBefore(dayjs.utc())) return null;
   let p = token.expires_at ? renderI18nText('tokens.settings.expires', {
     relativeTimeString: jsx(h1, {
       date: token.expires_at
@@ -2172,7 +2172,7 @@ function iw(e) {
       horizontalAlignItems: 'end',
       children: [jsx('div', {
         children: token.last_used ? renderI18nText('tokens.settings.last_used', {
-          relativeTimeString: _$$A6(token.last_used).from(Date.now())
+          relativeTimeString: dayjs(token.last_used).from(Date.now())
         }) : renderI18nText('tokens.settings.never_used')
       }), jsx('button', {
         onClick: d,

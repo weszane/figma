@@ -1,7 +1,7 @@
 import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 import { useSelector, useStore } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
@@ -441,7 +441,7 @@ export function $$Y7({
   } : {
     templates: void 0,
     isLoading: !1,
-    requestLoadMoreTemplates: lQ
+    requestLoadMoreTemplates: noop
   };
 }
 export function $$$14({

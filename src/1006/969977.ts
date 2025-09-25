@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { scopeAwareFunction } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { memoizeLRU } from "../figma_app/815945";
@@ -239,7 +239,7 @@ function W({
     label: t.tooltip,
     propertyName: t.propertyName,
     icon: n,
-    onClick: lQ,
+    onClick: noop,
     href: "https://www.figma.com/exit?url=" + i
   });
 }

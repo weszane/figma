@@ -5,7 +5,7 @@ import { zD, L8, jM, J, P_, l4, a3, wf } from "../905/124270";
 import { Hz, RF, p2, H9, aI } from "../905/714062";
 import { getFacetPrefix, createResourceFacet, getFacetDisplayValue, getFacetValueLabel, updateCreatorFacet, FacetOperation, updateSpaceFacet, buildSearchQuery, getFacetQueryParams, buildQueryObject } from "../905/171315";
 import { CreatorResourceType, PublicModelType, InputType } from "../figma_app/162807";
-import { P } from "../905/16832";
+import { setupFacetQueryAnalytics } from "../905/16832";
 import { useSelector } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/484713";
@@ -166,7 +166,7 @@ export function $$k0({
         trackEventAnalytics("facet_type_shown", r);
       };
     }();
-    let A = P();
+    let A = setupFacetQueryAnalytics();
     let y = _$$A();
     useEffect(() => {
       e && (e.suggestionType === aI.TYPE ? _(e.facetType) : f.length > 0 && t !== h && (i(h), A(f, e.facetType, InputType.AUTOCOMPLETE)));

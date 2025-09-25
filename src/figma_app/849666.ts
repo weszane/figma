@@ -31,7 +31,7 @@ import { kL, qr, PU, hz, Qw, Lo, wV } from "../905/478905";
 import { A as _$$A } from "../3850/566892";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { P as _$$P } from "../figma_app/650304";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { c as _$$c } from "../figma_app/769913";
 import { getFeatureFlags } from "../905/601108";
 import { appendSearchParams, getCurrentPath } from "../905/508367";
@@ -55,7 +55,7 @@ import ei from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { isValidEmail } from "../figma_app/416935";
 import { APILoadingStatus } from "../905/520829";
-import { k as _$$k2 } from "../905/585996";
+import { CustomSpacer } from "../905/585996";
 import { BigTextInput } from "../figma_app/637027";
 import { x as _$$x } from "../905/211326";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -190,7 +190,7 @@ let eE = registerModal(function (e) {
               className: DX,
               children: renderI18nText("google_device_try_file_modal.enter_email")
             })
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 1
           }), jsx("div", {
             className: FS,
@@ -198,7 +198,7 @@ let eE = registerModal(function (e) {
               className: Kc,
               children: renderI18nText("google_device_try_file_modal.enter_email.description")
             })
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 3
           }), jsx(BigTextInput, {
             autoFocus: !0,
@@ -212,7 +212,7 @@ let eE = registerModal(function (e) {
           }), o && jsx("div", {
             className: mV,
             children: renderI18nText("google_device_try_file_modal.enter_email.error_message")
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 2
           }), jsx(lR, {
             type: "submit",
@@ -235,7 +235,7 @@ let eE = registerModal(function (e) {
               className: cssBuilderInstance.flex.justifyCenter.$,
               children: () => renderI18nText("google_device_try_file_modal.enter_email.button")
             })
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 3
           }), jsx("div", {
             className: NJ,
@@ -249,7 +249,7 @@ let eE = registerModal(function (e) {
                 title: getI18nString("google_device_try_file_modal.onboarding_disclaimer_privacy_policy")
               })
             })
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 1
           })]
         })
@@ -280,7 +280,7 @@ let eb = registerModal(function (e) {
             src: buildUploadUrl("b0feff5e4abc5e66f99064463f2ad5d0a7f6c072.png"),
             alt: "",
             className: ZQ
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 2
           }), jsx("div", {
             className: FS,
@@ -288,7 +288,7 @@ let eb = registerModal(function (e) {
               className: DX,
               children: renderI18nText("google_device_try_file_modal.got_mail")
             })
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 1
           }), jsx("div", {
             className: FS,
@@ -301,7 +301,7 @@ let eb = registerModal(function (e) {
                 })
               })
             })
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 3
           }), jsx(lR, {
             onClick: e => {
@@ -310,7 +310,7 @@ let eb = registerModal(function (e) {
               i(hideModal());
             },
             children: renderI18nText("google_device_try_file_modal.got_mail.close")
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 3
           }), jsx("div", {
             className: NJ,
@@ -331,7 +331,7 @@ let eb = registerModal(function (e) {
                 children: renderI18nText("google_device_try_file_modal.got_mail.email_not_received.send_again")
               })
             })
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 2
           }), jsx("div", {
             className: NJ,
@@ -405,7 +405,7 @@ function ex({
           ...u
         }
       },
-      onDismiss: lQ,
+      onDismiss: noop,
       editorType: a
     })
   });

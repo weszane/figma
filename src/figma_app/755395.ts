@@ -15,7 +15,7 @@ import { Z } from "../905/820720";
 import { aq } from "../figma_app/399472";
 import { useCurrentUserOrg } from "../905/845253";
 import { isPluginAllowListed } from "../figma_app/155287";
-import { d as _$$d } from "../905/480825";
+import { PluginIconDisplay } from "../905/480825";
 import { _d, mL, ZU, aC } from "../905/79137";
 export function $$I1({
   codeLanguage: e,
@@ -83,7 +83,7 @@ export function $$v3({
     formatter,
     codeLanguageOptions
   } = r;
-  let l = activeCodegenPlugin && "first-party" !== codeLanguage.type ? jsx(_$$d, {
+  let l = activeCodegenPlugin && "first-party" !== codeLanguage.type ? jsx(PluginIconDisplay, {
     plugin: activeCodegenPlugin
   }) : null;
   return jsx($$x2, {

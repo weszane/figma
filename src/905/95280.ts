@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { sanitizeInput } from "../905/241044";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -10,7 +10,7 @@ import { VisualBellIcon, VisualBellShape } from "../905/576487";
 import { hideModal, showModalHandler } from "../905/156213";
 import { startCompareChanges, findVersionById } from "../figma_app/841351";
 import { jsx } from "react/jsx-runtime";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { HISTORY_DOCUMENT_INDEX } from "../figma_app/518682";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { DS, _W } from "../figma_app/571341";
@@ -30,7 +30,7 @@ let b = registerModal(function (e) {
   let [_, b] = useState(!1);
   let v = {
     inspectionMode: "properties",
-    setInspectionMode: lQ,
+    setInspectionMode: noop,
     inspectionModes: ["properties"]
   };
   let [I, E] = useState(void 0);
@@ -117,7 +117,7 @@ export function $$I0(e, t, i, n) {
     t(VisualBellActions.enqueue({
       message: getI18nString("collaboration.feedback.compare_changes_modal.action_text", {
         lastEditedBy: r,
-        lastEditedAt: _$$A(i.touched_at).fromNow()
+        lastEditedAt: dayjs(i.touched_at).fromNow()
       }),
       type: "view_changes",
       button: {

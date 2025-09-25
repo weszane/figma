@@ -20,7 +20,7 @@ import { f as _$$f } from "../1250/46310";
 import { xZ } from "../1250/927871";
 import { useEffect, useState, useCallback, useMemo, createElement, useRef, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getStorage } from "../905/657224";
 import { useLatestRef } from "../figma_app/922077";
 import { buildStaticUrl, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
@@ -39,7 +39,7 @@ import { q3, M_ } from "../figma_app/450829";
 import { S as _$$S } from "../1556/805548";
 import { UpgradeAction } from "../905/370443";
 import { X as _$$X } from "../905/482718";
-import { Q as _$$Q, R as _$$R } from "../905/11928";
+import { Ui3PositionType, NotModalType } from "../905/11928";
 import { EventShield } from "../905/821217";
 import { pP, nz as _$$nz } from "../1250/214905";
 import { l as _$$l } from "../1250/135829";
@@ -247,7 +247,7 @@ function en(e) {
     emphasized: !0,
     isShowing: e.isShowing,
     onClose: e.onManualDismiss,
-    position: _$$Q.BOTTOM_RIGHT,
+    position: Ui3PositionType.BOTTOM_RIGHT,
     primaryCta: {
       label: renderI18nText("rcs.take_tour.let_s_go"),
       type: "button",
@@ -676,7 +676,7 @@ function eW(e) {
     isShowing: !0,
     children: useMemo(() => steps.map((e, a) => createElement(e, {
       onClickPrimaryCta: r.next,
-      onClose: lQ,
+      onClose: noop,
       onManualDismiss: onComplete,
       isShowing: !0,
       currentStepIndex: a,
@@ -725,7 +725,7 @@ function eZ() {
       aspectRatio: 1.75
     }),
     onClose: n.complete,
-    position: _$$Q.CENTER,
+    position: Ui3PositionType.CENTER,
     primaryCta: {
       label: renderI18nText("rcs.rcs_shared.done"),
       type: "button",
@@ -1054,7 +1054,7 @@ function tS() {
     next
   } = _$$A({
     numSteps: 2,
-    onComplete: lQ
+    onComplete: noop
   });
   let T = [{
     title: renderI18nText("rcs.plan_spaces_onboarding_sequence.drafts_in_a_team"),
@@ -1115,7 +1115,7 @@ function tS() {
       isShowing,
       modalType: q3.FEATURE_UPDATE,
       onClickPrimaryCta: _ ? complete : next,
-      onClose: lQ,
+      onClose: noop,
       onManualDismiss: complete,
       trackingContextName: "plan_spaces_launch_modal",
       userFlagOnShow: "seen_limited_spaces_onboarding"
@@ -2303,7 +2303,7 @@ function n$() {
     targetKey: Jo,
     trackingContextName: "Team Project Link Overlay",
     userFlagOnShow: nW,
-    zIndex: _$$R.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 function n0() {

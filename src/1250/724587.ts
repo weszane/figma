@@ -1,4 +1,4 @@
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { jsx, Fragment } from "react/jsx-runtime";
 import { Badge, BadgeColor, BadgeLabels } from "../figma_app/919079";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -48,7 +48,7 @@ function p(e) {
     text: g
   });
 }
-let O = ex("pro_trial", function (e) {
+let O = registerTooltip("pro_trial", function (e) {
   let t = jsx("span", {
     style: {
       fontWeight: 600

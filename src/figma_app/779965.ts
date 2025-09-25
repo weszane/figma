@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { createContext, useContext, forwardRef, useCallback, useRef } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { setupDragHandler } from "../905/97346";
 import { useHandlePointerEvent } from "../figma_app/878298";
 import l from "classnames";
@@ -116,9 +116,9 @@ function f({
     })
   };
   let m = {
-    onPointerDown: useHandlePointerEvent(c, "pointerdown", _.onPointerDown ?? lQ, h),
-    onPointerMove: useHandlePointerEvent(c, "pointermove", _.onPointerMove ?? lQ, h),
-    onPointerUp: useHandlePointerEvent(c, "pointerup", _.onPointerUp ?? lQ, h)
+    onPointerDown: useHandlePointerEvent(c, "pointerdown", _.onPointerDown ?? noop, h),
+    onPointerMove: useHandlePointerEvent(c, "pointermove", _.onPointerMove ?? noop, h),
+    onPointerUp: useHandlePointerEvent(c, "pointerup", _.onPointerUp ?? noop, h)
   };
   return jsx("div", {
     "data-testid": c,

@@ -37,7 +37,7 @@ import { useCurrentPlanUser } from "../figma_app/465071";
 import { i as _$$i } from "../905/46262";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
-import { w as _$$w } from "../905/281010";
+import { accountTypeRequestHandler } from "../905/281010";
 import { rq } from "../905/425180";
 import { F_, EL } from "../905/858282";
 import { qm, q0 } from "../figma_app/431689";
@@ -286,7 +286,7 @@ function Z(e) {
         },
         onClose: () => {
           s(!1);
-          showNudgeEligibility && _$$w.dismissNudgeRequestBadge({
+          showNudgeEligibility && accountTypeRequestHandler.dismissNudgeRequestBadge({
             request_id: upgradeRequestId
           });
         }

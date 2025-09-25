@@ -1,6 +1,6 @@
 import { H } from "../905/730910";
 import { t } from "../905/367656";
-import { Z3 } from "../905/8035";
+import { normalizeObjectKeys } from "../905/8035";
 import { H2 } from "../905/707098";
 export class $$o0 {
   constructor(e, t) {
@@ -21,7 +21,7 @@ export class $$o0 {
     return this.readValue("layout", e => new t(e, this.nodeCache));
   }
   get properties() {
-    return this.readValue("properties", e => Z3(e.componentPropertyDefinitions));
+    return this.readValue("properties", e => normalizeObjectKeys(e.componentPropertyDefinitions));
   }
   get children() {
     return this.readValue("children", e => H(this.nodeCache, e));

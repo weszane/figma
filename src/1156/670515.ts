@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { ButtonPrimitive } from "../905/632989";
-import { g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 let l = {
   suggestion: {
-    ...g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     padding: "xdqdrvq",
     paddingInline: null,
     paddingStart: null,

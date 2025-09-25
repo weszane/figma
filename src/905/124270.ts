@@ -6,8 +6,8 @@ import { atom, atomStoreManager, createAtomWithEquality, createRemovableAtomFami
 import { CreatorResourceType, FolderType, SearchModelType } from '../figma_app/162807'
 import { hO } from '../figma_app/545293'
 
-let $$m3 = atom(null)
-let $$h15 = atom(null)
+let facetSessionIdAtom = atom(null)
+let facetQueryIdAtom = atom(null)
 let $$g6 = atom(null)
 let $$f16 = atom(null)
 let $$_0 = atom((e) => {
@@ -211,7 +211,7 @@ export function $$B13() {
 export const CZ = $$_0
 export const J = $$E1
 export const L8 = $$A2
-export const OM = $$m3
+export const OM = facetSessionIdAtom
 export const P_ = $$x4
 export const _4 = $$k5
 export const a3 = $$g6
@@ -223,6 +223,6 @@ export const q$ = $$w11
 export const q4 = $$F12
 export const qB = $$B13
 export const rG = $$v14
-export const wf = $$h15
+export const wf = facetQueryIdAtom
 export const z5 = $$f16
 export const zD = $$S17

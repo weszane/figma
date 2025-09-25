@@ -1,67 +1,100 @@
-import { jsx } from "react/jsx-runtime";
-import { debug } from "../figma_app/465776";
-import { lQ } from "../905/934246";
-import { showDropdownThunk } from "../905/929976";
-import { jv } from "../figma_app/357047";
-import { Sn } from "../905/946805";
-import { r as _$$r } from "../905/924231";
-import { gn, $I } from "../figma_app/322845";
-export function $$u1(e) {
-  if ("run-installed-plugin" !== e.type && "run-local-plugin" !== e.type || !e.parameterEntry || 0 === e.parameterEntry.parameters.length) return null;
-  let t = e.parameterEntry.parameters.map(({
-    valueType: e,
-    ...t
-  }) => ({
-    ...t,
-    type: e
-  }));
-  let i = "run-installed-plugin" === e.type ? e.pluginId : void 0;
-  let n = "run-local-plugin" === e.type ? e.localFileId : void 0;
+import { noop } from 'lodash-es'
+import { jsx } from 'react/jsx-runtime'
+import { setupPluginCommandHandler } from '../905/924231'
+import { showDropdownThunk } from '../905/929976'
+import { ExtensionFeatureKey } from '../905/946805'
+import { $I, gn } from '../figma_app/322845'
+import { jv } from '../figma_app/357047'
+import { debug } from '../figma_app/465776'
+
+/**
+ * Transforms a plugin command event into a parameter entry object.
+ * Original function name: $$u1
+ * @param event - The plugin command event object.
+ * @returns The parameter entry object or null if not applicable.
+ */
+export function getPluginParameterEntry(event: any) {
+  if (
+    (event.type !== 'run-installed-plugin' && event.type !== 'run-local-plugin')
+    || !event.parameterEntry
+    || event.parameterEntry.parameters.length === 0
+  ) {
+    return null
+  }
+
+  // Map parameters to expected format
+  const parameters = event.parameterEntry.parameters.map(({ valueType, ...rest }) => ({
+    ...rest,
+    type: valueType,
+  }))
+
+  const pluginId = event.type === 'run-installed-plugin' ? event.pluginId : undefined
+  const pluginLocalFileId = event.type === 'run-local-plugin' ? event.localFileId : undefined
+
   return {
-    parameters: t,
-    command: e.command,
-    displayName: e.parameterEntry.commandName,
-    pluginId: i,
-    pluginLocalFileId: n,
-    parameterOnly: !!e.parameterOnly
-  };
+    parameters,
+    command: event.command,
+    displayName: event.parameterEntry.commandName,
+    pluginId,
+    pluginLocalFileId,
+    parameterOnly: !!event.parameterOnly,
+  }
 }
-export function $$p0(e, t, i) {
-  let p = function (e, t) {
-    let i = $$u1(e);
-    return i ? {
-      ...i,
-      triggeredFrom: t
-    } : null;
-  }(e, t);
-  if (debug(null !== p, "Can only run parameter entry for plugins that have parameters"), gn()) {
+
+/**
+ * Handles running a plugin parameter entry, opening the appropriate UI or dropdown.
+ * Original function name: $$p0
+ * @param event - The plugin command event object.
+ * @param triggeredFrom - The source of the trigger.
+ * @param showDropdown - Callback to show dropdown UI.
+ */
+export function runPluginParameterEntry(event: any, triggeredFrom: string, showDropdown: (action: any) => void) {
+  // Helper to build parameter entry args
+  const parameterEntryArgs = (() => {
+    const entry = getPluginParameterEntry(event)
+    return entry
+      ? {
+          ...entry,
+          triggeredFrom,
+        }
+      : null
+  })()
+
+  // Debug: Can only run parameter entry for plugins that have parameters
+  if (debug(parameterEntryArgs !== null, 'Can only run parameter entry for plugins that have parameters') && gn()) {
     $I({
       moduleToOpen: {
-        type: "custom",
-        module: jsx(_$$r, {
-          onExitParameterEntry: lQ,
-          triggeredFrom: t,
-          parameters: p.parameters,
-          displayName: p.displayName,
-          parameterOnly: p.parameterOnly,
-          pluginId: p.pluginId,
-          pluginLocalFileId: p.pluginLocalFileId,
-          command: p.command
+        type: 'custom',
+        module: jsx(setupPluginCommandHandler, {
+          onExitParameterEntry: noop,
+          triggeredFrom,
+          parameters: parameterEntryArgs.parameters,
+          displayName: parameterEntryArgs.displayName,
+          parameterOnly: parameterEntryArgs.parameterOnly,
+          pluginId: parameterEntryArgs.pluginId,
+          pluginLocalFileId: parameterEntryArgs.pluginLocalFileId,
+          command: parameterEntryArgs.command,
         }),
-        name: Sn.PLUGIN_PARAMETER_ENTRY
+        name: ExtensionFeatureKey.PLUGIN_PARAMETER_ENTRY,
       },
       trackingData: {
-        source: `extension-parameter-entry-${t}`
-      }
-    });
-    return;
+        source: `extension-parameter-entry-${triggeredFrom}`,
+      },
+    })
+    return
   }
-  i(showDropdownThunk({
-    type: jv,
-    data: {
-      parameterEntryArgs: p
-    }
-  }));
+
+  // Fallback: Show dropdown UI
+  showDropdown(
+    showDropdownThunk({
+      type: jv,
+      data: {
+        parameterEntryArgs,
+      },
+    }),
+  )
 }
-export const nO = $$p0;
-export const o0 = $$u1;
+
+// Export refactored names for external usage
+export const nO = runPluginParameterEntry
+export const o0 = getPluginParameterEntry

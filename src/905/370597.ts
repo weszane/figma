@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useEffect, useCallback, forwardRef } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { t } from "../905/150656";
 import { T as _$$T } from "../905/336775";
 import { s as _$$s } from "../905/551945";
@@ -159,7 +159,7 @@ export function $$ec2({
   }, [W, z, currentSearch]);
   let Y = jsxs(fu, {
     value: W.activeTab,
-    onChange: lQ,
+    onChange: noop,
     numItems: eh(),
     children: [jsx(oz, {
       tabId: xA.FRAGMENTS,

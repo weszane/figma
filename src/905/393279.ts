@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { ButtonWhite, ButtonBasePrimaryTracked } from "../figma_app/637027";
@@ -22,7 +22,7 @@ export class $$A0 extends PureComponent {
       let t = 0 === this.props.autocomplete.tokens.length;
       if (this.props.hideDropdownOnEmpty && t && e) return null;
       let {
-        onInviteLevelChange = lQ,
+        onInviteLevelChange = noop,
         getSelectText,
         getSelectTextDescription
       } = this.props;

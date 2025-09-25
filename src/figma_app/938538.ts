@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useContext, useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ButtonPrimitive } from "../905/632989";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import l from "classnames";
@@ -71,7 +71,7 @@ export function $$f1({
     "toolbelt_button--hovered--njMdl": p
   });
   let v = useHandleMouseEvent(y, "mousedown", r);
-  let A = g ? stopPropagation : lQ;
+  let A = g ? stopPropagation : noop;
   return jsx("div", {
     ref: I,
     "aria-label": e,
@@ -85,7 +85,7 @@ export function $$f1({
     "data-tooltip-type": KindEnum.TEXT,
     id: b,
     onClick: A,
-    onMouseDown: l ? lQ : v,
+    onMouseDown: l ? noop : v,
     tabIndex: 0,
     children: f
   });

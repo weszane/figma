@@ -101,7 +101,7 @@ export interface AppState {
   mobileNavShown: boolean
   creatingNewFolder: null
   tileSelect: TileSelect
-  teamCreation: ActiveFileUsers
+  teamCreation: TeamCreation
   activeFileUsers: ActiveFileUsers
   teamView: TeamView
   teamRoleRequests: ActiveFileUsers

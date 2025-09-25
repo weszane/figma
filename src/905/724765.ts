@@ -8,7 +8,7 @@ import { renderI18nText } from '../905/303541';
 import { UpgradeAction } from '../905/370443';
 import { T } from '../905/434246';
 import { useModalManager } from '../905/437088';
-import { g as _$$g } from '../905/687265';
+import { textDisplayConfig } from '../905/687265';
 import { generateUUIDv4 } from '../905/871474';
 import { Xr } from '../figma_app/27355';
 import { FProductAccessType } from '../figma_app/191312';
@@ -18,7 +18,7 @@ import { $z } from '../figma_app/617427';
 import { TrackingProvider } from '../figma_app/831799';
 let v = {
   title: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   }
 };

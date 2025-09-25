@@ -13,7 +13,7 @@ import { Tj, gS, gu } from "../figma_app/441925";
 import { getRumLoggingConfig } from "../905/16237";
 import { useCartSeatSelectionClarityExperiment } from "../figma_app/297957";
 import { TrackingProvider } from "../figma_app/831799";
-import { Ju } from "../905/712921";
+import { ProductTierEnum } from "../905/712921";
 import { e0 } from "../905/696396";
 import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
@@ -238,7 +238,7 @@ function Z({
   let d = getUserId();
   let o = e.id === d;
   let c = useCartSeatSelectionClarityExperiment();
-  let u = i === Ju.PRO && c();
+  let u = i === ProductTierEnum.PRO && c();
   let p = () => {
     n(showModalHandler({
       type: H,
@@ -302,7 +302,7 @@ function Z({
           children: [t[a].displayName, jsx(_$$k, {})]
         })
       })
-    }), i === Ju.ORG && jsx("td", {
+    }), i === ProductTierEnum.ORG && jsx("td", {
       className: Y,
       children: e.teams
     }), jsx("td", {
@@ -351,7 +351,7 @@ export function $$q0({
   let k = UL(iB(a.selectedUserSeatTypes));
   let P = UL(a.additionalSeatCounts);
   let M = useCartSeatSelectionClarityExperiment();
-  let R = S === Ju.PRO && M();
+  let R = S === ProductTierEnum.PRO && M();
   return jsx(TrackingProvider, {
     name: e0.SELECT_SEATS_TABLE,
     properties: {
@@ -396,7 +396,7 @@ export function $$q0({
                 }), jsx("th", {
                   className: J,
                   children: R ? renderI18nText("checkout.select_seats_table.seat_column_exp") : renderI18nText("checkout.select_seats_table.seat_column")
-                }), S === Ju.ORG && jsx("th", {
+                }), S === ProductTierEnum.ORG && jsx("th", {
                   className: Y,
                   children: renderI18nText("checkout.select_seats_table.team_column")
                 }), jsx("th", {
@@ -418,12 +418,12 @@ export function $$q0({
                     previousSeatType: a.selectedUserSeatTypes[e.id],
                     newSeatType: t,
                     tier: S,
-                    teamId: S === Ju.PRO ? C.selectedTeamIds[0] : void 0
+                    teamId: S === ProductTierEnum.PRO ? C.selectedTeamIds[0] : void 0
                   });
                   y(e.id, t);
                 },
                 tier: S,
-                teamId: S === Ju.PRO ? C.selectedTeamIds[0] : void 0
+                teamId: S === ProductTierEnum.PRO ? C.selectedTeamIds[0] : void 0
               }, e.id))
             })]
           })

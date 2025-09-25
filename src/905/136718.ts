@@ -3,7 +3,7 @@ import { c } from "../905/543659";
 import { N } from "../905/64868";
 import { R } from "../905/927840";
 import { t } from "../905/367656";
-import { Z3 } from "../905/8035";
+import { normalizeObjectKeys } from "../905/8035";
 import { H2, fl, wI, $r, ut } from "../905/707098";
 export class $$c0 {
   constructor(e, t) {
@@ -61,8 +61,8 @@ export class $$c0 {
       let t;
       if (e.parent?.type === "COMPONENT_SET") {
         let i = e.parent;
-        t = Z3(i.componentPropertyDefinitions);
-      } else t = Z3(e.componentPropertyDefinitions);
+        t = normalizeObjectKeys(i.componentPropertyDefinitions);
+      } else t = normalizeObjectKeys(e.componentPropertyDefinitions);
       return t;
     });
   }

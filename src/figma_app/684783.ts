@@ -25,7 +25,7 @@ import { defaultViewportState } from "../figma_app/298911";
 import { VL } from "../figma_app/112055";
 import { handleExternalRedirect } from "../905/508367";
 import { customHistory } from "../905/612521";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/487602";
@@ -54,7 +54,7 @@ import { atom } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { hY } from "../figma_app/349969";
 import { useViewer } from "../figma_app/632319";
-import { ex as _$$ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { Pz, Ac, GP, IK, Ti, Yu, Xl, Qd } from "../figma_app/292324";
 import { A as _$$A2 } from "../6828/154709";
 import { A as _$$A3 } from "../svg/64643";
@@ -78,7 +78,7 @@ import { A as _$$A6 } from "../svg/640328";
 import { Zo } from "../figma_app/479760";
 var n;
 var R = (e => (e.SET_CANVAS_SPACE_CENTER = "SET_CANVAS_SPACE_CENTER", e.SET_CURRENT_PAGE_ID = "SET_CURRENT_PAGE_ID", e.ADJUST_ZOOM = "ADJUST_ZOOM", e.SET_ZOOM = "SET_ZOOM", e.RESET_ZOOM_TO_FIT_CANVAS_CONTENT = "RESET_ZOOM_TO_FIT_CANVAS_CONTENT", e.SET_COMMENT_MODE = "SET_COMMENT_MODE", e.SET_CURSOR_STYLE = "SET_CURSOR_STYLE", e.SET_SCROLL_TO_PAN = "SET_SCROLL_TO_PAN", e))(R || {});
-_$$ex("preload_success", function () {
+registerTooltip("preload_success", function () {
   return jsxs("div", {
     className: cssBuilderInstance.pr8.$,
     children: [jsx("div", {
@@ -90,7 +90,7 @@ _$$ex("preload_success", function () {
     })]
   });
 });
-_$$ex("preload_error", function ({
+registerTooltip("preload_error", function ({
   isSlides: e
 }) {
   return jsxs("div", {
@@ -405,7 +405,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
             m(e);
             d(hideDropdownAction());
           },
-          cancel: lQ
+          cancel: noop
         })
       }), jsx(wv, {}), jsxs(c$, {
         onClick: adjustZoomInFactory("clickFromDropdown"),
@@ -1231,7 +1231,7 @@ class eK extends PureComponent {
             currentZoomScale: this.getCurrentZoomScale(),
             adjustZoom: this.props.viewer.adjustZoom,
             setZoom: this.props.viewer.setZoom,
-            resetZoomToFitCanvasContent: lQ
+            resetZoomToFitCanvasContent: noop
           }), this.props.viewer?.hasActiveScene() && this.prototypeZoomButtonContainerRef.current && jsx(n.PrototypeZoomDropdown, {
             viewer: this.props.viewer,
             targetRect: this.prototypeZoomButtonContainerRef.current.getBoundingClientRect(),
@@ -1249,7 +1249,7 @@ class eK extends PureComponent {
               },
               children: jsx(n.ButtonContainer, {
                 children: jsx(n.FullscreenButton, {
-                  toggleFullscreen: lQ,
+                  toggleFullscreen: noop,
                   isFullscreen: !0
                 })
               })

@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { createRemovableAtomFamily, atom, useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { Xf } from "../figma_app/153916";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { getResourceDataOrFallback, Xm, gB } from "../905/723791";
 import { dl } from "../figma_app/307841";
 import { useSeatBillingTermsExperiment } from "../figma_app/297957";
@@ -35,8 +35,8 @@ export function $$f0(e) {
   } = function (e) {
     let l = Xf(e);
     let i = l.data?.analyze_data_contract_v2_start;
-    let t = i ? A(i) : null;
-    let a = A();
+    let t = i ? dayjs(i) : null;
+    let a = dayjs();
     function r(e, l, i) {
       return {
         warningType: e,
@@ -73,7 +73,7 @@ export function $$f0(e) {
     isAdminView: g,
     isTermsOfServiceUpdateOn: function (e) {
       let l = !!getFeatureFlags().terms_of_service_may_2025_update;
-      let i = A();
+      let i = dayjs();
       let t = !!e && i.isBefore(e) && 30 >= e.diff(i, "day");
       return l && t;
     }(renewalDate)

@@ -14,7 +14,7 @@ import { B } from "../905/524020";
 import { FFileType } from "../figma_app/191312";
 import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
 import { X } from "../905/482718";
-import { Q } from "../905/11928";
+import { Ui3PositionType } from "../905/11928";
 function y(e) {
   switch (e) {
     case "developer":
@@ -119,7 +119,7 @@ export function $$j0(e) {
   }, [s, t, e]);
   return jsx(X, {
     trackingContextName: j,
-    position: Q.BOTTOM_RIGHT,
+    position: Ui3PositionType.BOTTOM_RIGHT,
     title,
     onClose: I,
     description: body,

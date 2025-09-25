@@ -9,7 +9,7 @@ import { N } from "../905/57692";
 import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/976845";
 import { Ay } from "@stylexjs/stylex";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { _ as _$$_ } from "../figma_app/658134";
 import { A } from "../9314/687951";
 import { o3, nt } from "../905/226610";
@@ -123,13 +123,13 @@ export function $$C0() {
     id: "insert",
     label: "Insert",
     icon: jsx(_$$s, {}),
-    onClick: lQ,
+    onClick: noop,
     type: r.ICON
   }, {
     id: "find",
     label: "Find",
     icon: jsx(_$$h, {}),
-    onClick: lQ,
+    onClick: noop,
     type: r.ICON
   }, {
     id: "make",

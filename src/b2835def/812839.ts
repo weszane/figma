@@ -18,7 +18,7 @@ import { KindEnum } from "../905/129884";
 import { LinkPrimitive } from "../figma_app/496441";
 import { customHistory } from "../905/612521";
 import { ignoreCommandOrShift } from "../905/63728";
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { n8, xG } from "../figma_app/121043";
 import { $0 } from "../1556/751556";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -33,7 +33,7 @@ import { J } from "../9410/617561";
 let S = "hub_file_tooltips--hubFileInfo--mO1Xa text--fontPos11--2LvXf text--_fontBase--QdLsd";
 let k = "hub_file_tooltips--handle--n3W-M";
 let E = "hub_file_tooltips--link--fRVPc blue_link--blueLink--9rlnd";
-let C = ex("hub_file_in_review", function (e) {
+let C = registerTooltip("hub_file_in_review", function (e) {
   let {
     url
   } = e;
@@ -60,7 +60,7 @@ let C = ex("hub_file_in_review", function (e) {
 }, e => ({
   url: e.getAttribute("data-tooltip-hub-file-url") || ""
 }));
-let A = ex("hub_file_info", function (e) {
+let A = registerTooltip("hub_file_info", function (e) {
   let {
     lastPublishedAt,
     url
@@ -94,7 +94,7 @@ let A = ex("hub_file_info", function (e) {
     url: t
   };
 });
-let I = ex("hub_file_info_unverified", function (e) {
+let I = registerTooltip("hub_file_info_unverified", function (e) {
   let {
     verificationStatus
   } = e;

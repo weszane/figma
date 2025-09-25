@@ -1,294 +1,427 @@
-import { jsx } from "react/jsx-runtime";
-import { useState, useEffect } from "react";
-import { bytesToHex } from "../905/125019";
-import { NodePropertyCategory, Fullscreen, TextModificationAction } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
-import { getSingletonSceneGraph } from "../905/700578";
-import { getResourceDataOrFallback } from "../905/663269";
-import { debugState } from "../905/407919";
-import { WB } from "../905/761735";
-import { uint8ArrayToBase64, base64ToUint8Array } from "../figma_app/930338";
-import { getI18nString } from "../905/303541";
-import { showPickerThunk } from "../figma_app/91703";
-import { trackFileEvent } from "../figma_app/314264";
-import { B } from "../905/969273";
-import { sZ } from "../figma_app/948389";
-import { JB } from "../905/843553";
-import { fullscreenValue } from "../figma_app/455680";
-import { getImageManager, processImageWithThumbnail } from "../figma_app/624361";
-import { Mo } from "../905/913055";
-import { paintManager } from "../figma_app/385874";
-import { AiMeterUsageView } from "../figma_app/43951";
-import { qy } from "../figma_app/862289";
-import { A as _$$A } from "../905/929620";
-import { Vm, ks } from "../figma_app/838407";
-export function $$C6(e) {
-  let [t, i] = useState("");
+import { useEffect, useState } from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { bytesToHex } from '../905/125019'
+import { permissionScopeHandler } from '../905/189185'
+import { getI18nString } from '../905/303541'
+import { debugState } from '../905/407919'
+import { getResourceDataOrFallback } from '../905/663269'
+import { getSingletonSceneGraph } from '../905/700578'
+import { WB } from '../905/761735'
+import { BaseCustomError } from '../905/843553'
+import { getMatchingNodesToUpdateForQuery } from '../905/913055'
+import { generateShimmerOverlay } from '../905/929620'
+import { ErrorType } from '../905/969273'
+import { AiMeterUsageView } from '../figma_app/43951'
+import { showPickerThunk } from '../figma_app/91703'
+import { trackFileEvent } from '../figma_app/314264'
+import { paintManager } from '../figma_app/385874'
+import { fullscreenValue } from '../figma_app/455680'
+import { getImageManager, processImageWithThumbnail } from '../figma_app/624361'
+import { Fullscreen, NodePropertyCategory, TextModificationAction } from '../figma_app/763686'
+import { ks, Vm } from '../figma_app/838407'
+import { qy } from '../figma_app/862289'
+import { base64ToUint8Array, uint8ArrayToBase64 } from '../figma_app/930338'
+import { sZ } from '../figma_app/948389'
+
+/**
+ * Returns a status message for long-running AI image processing.
+ * Original: $$C6
+ */
+export function getImageProcessingStatus(status: typeof qy[keyof typeof qy]) {
+  const [message, setMessage] = useState('')
   useEffect(() => {
-    if (e === qy.RUNNING) {
-      let e = setTimeout(() => i(getI18nString("image_ai.processing.long_loading_time")), 1e4);
-      let t = setTimeout(() => i(getI18nString("image_ai.processing.extra_long_loading_time")), 2e4);
+    if (status === qy.RUNNING) {
+      const longTimeout = setTimeout(() => setMessage(getI18nString('image_ai.processing.long_loading_time')), 10000)
+      const extraLongTimeout = setTimeout(() => setMessage(getI18nString('image_ai.processing.extra_long_loading_time')), 20000)
       return () => {
-        clearTimeout(e);
-        clearTimeout(t);
-      };
+        clearTimeout(longTimeout)
+        clearTimeout(extraLongTimeout)
+      }
     }
-    i("");
-  }, [e]);
-  return t;
+    setMessage('')
+  }, [status])
+  return message
 }
-export class $$T5 extends JB {
-  constructor(e, t) {
-    super(t?.reportToSentry);
-    this.name = this.constructor.name;
-    this.message = e;
+
+/**
+ * Custom error for general image modification errors.
+ * Original: $$T5
+ */
+export class ImageModificationError extends BaseCustomError {
+  constructor(message: string, options?: { reportToSentry?: boolean }) {
+    super(options?.reportToSentry)
+    this.name = this.constructor.name
+    this.message = message
   }
 }
-export class $$k1 extends JB {
-  constructor(e, t) {
-    super(!1);
-    this.name = this.constructor.name;
-    this.message = e;
-    this.remaining = t;
+
+/**
+ * Custom error for exceeded AI meter usage.
+ * Original: $$k1
+ */
+export class MeterExceededError extends BaseCustomError {
+  remaining: number
+  constructor(message: string, remaining: number) {
+    super(false)
+    this.name = this.constructor.name
+    this.message = message
+    this.remaining = remaining
   }
 }
-export class $$R7 extends JB {
-  constructor(e) {
-    super(!1);
-    this.name = this.constructor.name;
-    this.message = e;
+
+/**
+ * Custom error for image too large.
+ * Original: $$R7
+ */
+export class ImageTooLargeError extends BaseCustomError {
+  constructor(message: string) {
+    super(false)
+    this.name = this.constructor.name
+    this.message = message
   }
 }
-export class $$N9 extends JB {
-  constructor(e) {
-    super(!1);
-    this.name = this.constructor.name;
-    this.message = e;
+
+/**
+ * Custom error for image too small.
+ * Original: $$N9
+ */
+export class ImageTooSmallError extends BaseCustomError {
+  constructor(message: string) {
+    super(false)
+    this.name = this.constructor.name
+    this.message = message
   }
 }
-export class $$P2 extends JB {
-  constructor(e) {
-    super(!1);
-    this.name = this.constructor.name;
-    this.message = e;
+
+/**
+ * Custom error for already max upscaled image.
+ * Original: $$P2
+ */
+export class AlreadyMaxUpscaledError extends BaseCustomError {
+  constructor(message: string) {
+    super(false)
+    this.name = this.constructor.name
+    this.message = message
   }
 }
-export function $$O4({
-  node: e,
-  hash: t
+
+/**
+ * Finds the image fill in a node matching the given hash.
+ * Throws ImageModificationError if not found.
+ * Original: $$O4
+ */
+export function findImageFillByHash({
+  node,
+  hash,
+}: {
+  node: any
+  hash: string
 }) {
-  let i = e.fills.find(e => e.image && e.image.hash && uint8ArrayToBase64(e.image.hash) === t);
-  if (!i) throw new $$T5("No image paint matching target", {
-    reportToSentry: !0
-  });
-  return i;
+  const fill = node.fills.find(
+    (f: any) => f.image && f.image.hash && uint8ArrayToBase64(f.image.hash) === hash,
+  )
+  if (!fill) {
+    throw new ImageModificationError('No image paint matching target', {
+      reportToSentry: true,
+    })
+  }
+  return fill
 }
-export async function $$D3(e) {
-  if (!e || !e.image || !e.image.hash) throw new $$T5("No image paint available", {
-    reportToSentry: !0
-  });
-  let t = bytesToHex(e.image.hash);
-  await getImageManager().imageUploadPromise();
-  let i = getImageManager().getSignedUrls([t]);
-  let n = i.get(t);
-  if (!n && (await new Promise(e => setTimeout(e, 1e3)), !(n = (i = getImageManager().getSignedUrls([t])).get(t)))) throw new $$T5("No image URL available", {
-    reportToSentry: !0
-  });
-  return n;
+
+/**
+ * Gets a signed URL for the image paint.
+ * Throws ImageModificationError if not available.
+ * Original: $$D3
+ */
+export async function getImagePaintSignedUrl(paint: any) {
+  if (!paint || !paint.image || !paint.image.hash) {
+    throw new ImageModificationError('No image paint available', {
+      reportToSentry: true,
+    })
+  }
+  const hashHex = bytesToHex(paint.image.hash)
+  await getImageManager().imageUploadPromise()
+  let signedUrls = getImageManager().getSignedUrls([hashHex])
+  let url = signedUrls.get(hashHex)
+  if (
+    !url
+    && (await new Promise(resolve => setTimeout(resolve, 1000)),
+    !(url = (signedUrls = getImageManager().getSignedUrls([hashHex])).get(hashHex)))
+  ) {
+    throw new ImageModificationError('No image URL available', {
+      reportToSentry: true,
+    })
+  }
+  return url
 }
-let L = {
-  upscale_image: "upscale_image",
-  bg_removal: "remove_background"
-};
-let F = async ({
-  name: e,
-  needed: t
-}) => {
-  let i = WB();
-  let n = debugState.getState();
-  let r = n.openFile?.key;
-  i && r && (await new Promise((n, a) => {
-    let s = i.subscribe(AiMeterUsageView, {
-      fileKey: r
-    }, i => {
-      if ("loaded" === i.status) {
-        s?.();
-        let r = getResourceDataOrFallback(i.data.aiMeterUsage);
-        let o = L[e];
-        for (let e of r?.filter(e => e.name === o) ?? []) {
-          let i = Number(e.remaining);
-          if (i < t) {
-            a(new $$k1("Not enough usages remaining", i));
-            return;
+
+const aiMeterNameMap = {
+  upscale_image: 'upscale_image',
+  bg_removal: 'remove_background',
+}
+
+/**
+ * Checks if enough AI meter usages remain for the given operation.
+ * Throws MeterExceededError if not enough usages.
+ * Original: F
+ */
+async function checkAiMeterUsage({
+  name,
+  needed,
+}: {
+  name: keyof typeof aiMeterNameMap
+  needed: number
+}) {
+  const wbInstance = WB()
+  const state = debugState.getState()
+  const fileKey = state.openFile?.key
+  if (wbInstance && fileKey) {
+    await new Promise<void>((resolve, reject) => {
+      const unsubscribe = wbInstance.subscribe(
+        AiMeterUsageView,
+        { fileKey },
+        (result: any) => {
+          if (result.status === 'loaded') {
+            unsubscribe?.()
+            const usageData = getResourceDataOrFallback(result.data.aiMeterUsage)
+            const meterName = aiMeterNameMap[name]
+            for (const usage of usageData?.filter((u: any) => u.name === meterName) ?? []) {
+              const remaining = Number(usage.remaining)
+              if (remaining < needed) {
+                reject(new MeterExceededError('Not enough usages remaining', remaining))
+                return
+              }
+            }
+            resolve()
           }
-        }
-        n();
-      } else "loading" !== i.status && (s?.(), n());
-    });
-  }));
-};
-export async function $$M0({
-  source: e,
-  targets: t,
-  name: i,
-  suffix: n,
-  action: r,
-  modifyPaint: a
-}) {
-  let d = debugState.getState();
-  let u = new Map();
-  for (let e of t) {
-    let t = getSingletonSceneGraph().get(e.guid);
-    t && u.set(e.hash, [...(u.get(e.hash) || []), t]);
+          else if (result.status !== 'loading') {
+            unsubscribe?.()
+            resolve()
+          }
+        },
+      )
+    })
   }
-  let m = {
-    source: e,
-    node_count: t.length,
-    image_count: u.size
-  };
-  let A = {
+}
+
+/**
+ * Main image modification handler.
+ * Original: $$M0
+ */
+export async function modifyImages({
+  source,
+  targets,
+  name,
+  suffix,
+  action,
+  modifyPaint,
+}: {
+  source: any
+  targets: Array<{ guid: string, hash: string }>
+  name: keyof typeof aiMeterNameMap
+  suffix: string
+  action: (args: { hash: string, nodes: any[], isBatch: boolean }) => Promise<string>
+  modifyPaint?: (paint: any) => void
+}) {
+  const state = debugState.getState()
+  const nodeMap = new Map<string, any[]>()
+  for (const target of targets) {
+    const node = getSingletonSceneGraph().get(target.guid)
+    if (node) {
+      nodeMap.set(target.hash, [...(nodeMap.get(target.hash) || []), node])
+    }
+  }
+  const eventMeta = {
+    source,
+    node_count: targets.length,
+    image_count: nodeMap.size,
+  }
+  const errorCounts = {
     too_large_error_count: 0,
     too_small_error_count: 0,
     already_max_upscaled_error_count: 0,
-    total_error_count: 0
-  };
-  trackFileEvent(`${i}_started`, d.openFile?.key, d, m);
-  let E = performance.now();
-  let x = {};
-  let S = [];
+    total_error_count: 0,
+  }
+  trackFileEvent(`${name}_started`, state.openFile?.key, state, eventMeta)
+  const startTime = performance.now()
+  const cleanupMap: Record<string, () => void> = {}
+  const modifiedNodes: Array<{ guid: string, error?: Error }> = []
   try {
-    if (u.size > 1 && (await F({
-      name: i,
-      needed: u.size
-    })), await Promise.allSettled(Array.from(u.entries()).map(async ([e, l]) => {
-      try {
-        l.forEach(e => {
-          x[e.guid] = $$j8(e);
-        });
-        let d = await r({
-          hash: e,
-          nodes: l,
-          isBatch: t.length > 1
-        });
-        let u = base64ToUint8Array(d);
-        let m = await processImageWithThumbnail(u, "image/png", `${i} ${n}`);
-        l.forEach(t => {
-          (function ({
-            node: e,
-            image: t,
-            previousHash: i,
-            modifyPaint: n
-          }) {
-            e.isAlive && (permissionScopeHandler.ai("image-modification", () => {
-              let r = e.fills.findIndex(e => "IMAGE" === e.type && e.image?.hash && uint8ArrayToBase64(e.image.hash) === i);
-              Mo(e, "fill-paint-data").forEach(e => {
-                if (-1 !== r) {
-                  let i = {
-                    ...e.fills[r]
-                  };
-                  let a = [...e.fills];
-                  n && n(i);
-                  a.splice(r + 1, 0, i);
-                  e.fills = a;
-                  fullscreenValue.updateAppModel({
-                    currentSelectedProperty: {
-                      type: NodePropertyCategory.FILL,
-                      indices: [r + 1]
-                    }
-                  });
-                  e.setFillPaintEnabled(r, !1);
-                  e.setImageInFillPaint(t, r + 1);
-                  (function (e) {
-                    if (debugState.getState().mirror.appModel.currentSelectedProperty.type !== NodePropertyCategory.FILL) return;
-                    let t = debugState.getState().pickerShown;
-                    if (!t) return;
-                    let {
-                      initialX,
-                      initialY
-                    } = t;
-                    void 0 !== initialX && void 0 !== initialY && debugState.dispatch(showPickerThunk({
-                      id: e,
-                      initialX,
-                      initialY,
-                      data: {
-                        isInStyleModal: !1
-                      }
-                    }));
-                  })(paintManager.getId(r + 1, NodePropertyCategory.FILL, "paint"));
-                } else e.insertImageInFillPaint(t);
-              });
-            }), Fullscreen && (Fullscreen.requestNextCommitMergeWithPrevious(TextModificationAction.AI_IMAGE_MODIFICATION), Fullscreen.triggerAction("commit", {})));
-          })({
-            node: t,
-            image: m,
-            previousHash: e,
-            modifyPaint: a
-          });
-          S.push({
-            guid: t.guid
-          });
-        });
-      } catch (e) {
-        e instanceof $$R7 ? A.too_large_error_count++ : e instanceof $$N9 ? A.too_small_error_count++ : e instanceof $$P2 && A.already_max_upscaled_error_count++;
-        A.total_error_count++;
-        l.forEach(t => {
-          S.push({
-            guid: t.guid,
-            error: e
-          });
-        });
-      } finally {
-        l.forEach(e => {
-          x[e.guid]?.();
-        });
-      }
-    })), S.every(e => e.error)) {
-      let e = S[0]?.error;
-      if (S.every(t => t.error?.message === e?.message)) throw e;
-      throw new $$T5("All images failed to modify", {
-        reportToSentry: !0
-      });
+    if (nodeMap.size > 1) {
+      await checkAiMeterUsage({ name, needed: nodeMap.size })
     }
-    trackFileEvent(`${i}_completed`, d.openFile?.key, d, {
-      total_time_ms: performance.now() - E,
-      ...m,
-      ...A
-    });
-    return {
-      modifiedNodes: S
-    };
-  } catch (t) {
-    let e = sZ(t);
-    t instanceof $$k1 && (e = B.METER_EXCEEDED);
-    trackFileEvent(`${i}_failed`, d.openFile?.key, d, {
-      total_time_ms: performance.now() - E,
-      reason: e,
-      ...m,
-      ...A
-    });
-    return t;
-  } finally {
-    Object.values(x).forEach(e => e());
+    await Promise.allSettled(
+      Array.from(nodeMap.entries()).map(async ([hash, nodes]) => {
+        try {
+          nodes.forEach((node) => {
+            cleanupMap[node.guid] = setupPlaybackHandler(node)
+          })
+          const resultBase64 = await action({
+            hash,
+            nodes,
+            isBatch: targets.length > 1,
+          })
+          const imageData = base64ToUint8Array(resultBase64)
+          const processedImage = await processImageWithThumbnail(imageData, 'image/png', `${name} ${suffix}`)
+          nodes.forEach((node) => {
+            // Original logic for updating node paint
+            updateNodePaint({
+              node,
+              image: processedImage,
+              previousHash: hash,
+              modifyPaint,
+            })
+            modifiedNodes.push({ guid: node.guid })
+          })
+        }
+        catch (error) {
+          if (error instanceof ImageTooLargeError)
+            errorCounts.too_large_error_count++
+          else if (error instanceof ImageTooSmallError)
+            errorCounts.too_small_error_count++
+          else if (error instanceof AlreadyMaxUpscaledError)
+            errorCounts.already_max_upscaled_error_count++
+          errorCounts.total_error_count++
+          nodes.forEach((node) => {
+            modifiedNodes.push({ guid: node.guid, error })
+          })
+        }
+        finally {
+          nodes.forEach((node) => {
+            cleanupMap[node.guid]?.()
+          })
+        }
+      }),
+    )
+    if (modifiedNodes.every(n => n.error)) {
+      const firstError = modifiedNodes[0]?.error
+      if (modifiedNodes.every(n => n.error?.message === firstError?.message))
+        throw firstError
+      throw new ImageModificationError('All images failed to modify', { reportToSentry: true })
+    }
+    trackFileEvent(`${name}_completed`, state.openFile?.key, state, {
+      total_time_ms: performance.now() - startTime,
+      ...eventMeta,
+      ...errorCounts,
+    })
+    return { modifiedNodes }
+  }
+  catch (error) {
+    let reason = sZ(error)
+    if (error instanceof MeterExceededError)
+      reason = ErrorType.METER_EXCEEDED
+    trackFileEvent(`${name}_failed`, state.openFile?.key, state, {
+      total_time_ms: performance.now() - startTime,
+      reason,
+      ...eventMeta,
+      ...errorCounts,
+    })
+    return error
+  }
+  finally {
+    Object.values(cleanupMap).forEach(cleanup => cleanup())
   }
 }
-export function $$j8(e) {
-  let t = Mo(e, "fill-paint-data");
-  t.forEach(e => {
-    Vm(e.guid, jsx(_$$A, {}));
-  });
+
+/**
+ * Sets up shimmer overlay for nodes and returns a cleanup function.
+ * Original: $$j8
+ */
+export function setupPlaybackHandler(node: any) {
+  const nodesToUpdate = getMatchingNodesToUpdateForQuery(node, 'fill-paint-data')
+  nodesToUpdate.forEach((n) => {
+    Vm(n.guid, jsx(generateShimmerOverlay, {}))
+  })
   return () => {
-    t.forEach(e => {
-      ks(e.guid);
-    });
-  };
+    nodesToUpdate.forEach((n) => {
+      ks(n.guid)
+    })
+  }
 }
-export const Cj = $$M0;
-export const ME = $$k1;
-export const PE = $$P2;
-export const VG = $$D3;
-export const XJ = $$O4;
-export const fk = $$T5;
-export const gg = $$C6;
-export const jM = $$R7;
-export const qY = $$j8;
-export const zs = $$N9;
+
+/**
+ * Updates node paint with new image and handles UI logic.
+ * Original: inline in $$M0
+ */
+function updateNodePaint({
+  node,
+  image,
+  previousHash,
+  modifyPaint,
+}: {
+  node: any
+  image: any
+  previousHash: string
+  modifyPaint?: (paint: any) => void
+}) {
+  if (!node.isAlive)
+    return
+  permissionScopeHandler.ai('image-modification', () => {
+    const fillIndex = node.fills.findIndex(
+      (f: any) => f.type === 'IMAGE' && f.image?.hash && uint8ArrayToBase64(f.image.hash) === previousHash,
+    )
+    getMatchingNodesToUpdateForQuery(node, 'fill-paint-data').forEach((n: any) => {
+      if (fillIndex !== -1) {
+        const newPaint = { ...n.fills[fillIndex] }
+        const fills = [...n.fills]
+        if (modifyPaint)
+          modifyPaint(newPaint)
+        fills.splice(fillIndex + 1, 0, newPaint)
+        n.fills = fills
+        fullscreenValue.updateAppModel({
+          currentSelectedProperty: {
+            type: NodePropertyCategory.FILL,
+            indices: [fillIndex + 1],
+          },
+        })
+        n.setFillPaintEnabled(fillIndex, false)
+        n.setImageInFillPaint(image, fillIndex + 1)
+        handlePickerShown(paintManager.getId(fillIndex + 1, NodePropertyCategory.FILL, 'paint'))
+      }
+      else {
+        n.insertImageInFillPaint(image)
+      }
+    })
+  })
+  if (Fullscreen) {
+    Fullscreen.requestNextCommitMergeWithPrevious(TextModificationAction.AI_IMAGE_MODIFICATION)
+    Fullscreen.triggerAction('commit', {})
+  }
+}
+
+/**
+ * Handles picker UI logic after paint update.
+ * Original: inline in $$M0
+ */
+function handlePickerShown(paintId: string) {
+  const state = debugState.getState()
+  if (state.mirror.appModel.currentSelectedProperty.type !== NodePropertyCategory.FILL)
+    return
+  const pickerShown = state.pickerShown
+  if (!pickerShown)
+    return
+  const { initialX, initialY } = pickerShown
+  if (initialX !== undefined && initialY !== undefined) {
+    debugState.dispatch(
+      showPickerThunk({
+        id: paintId,
+        initialX,
+        initialY,
+        data: { isInStyleModal: false },
+      }),
+    )
+  }
+}
+
+// Export refactored names
+
+export const Cj = modifyImages
+export const ME = MeterExceededError
+export const PE = AlreadyMaxUpscaledError
+export const VG = getImagePaintSignedUrl
+export const XJ = findImageFillByHash
+export const fk = ImageModificationError
+export const gg = getImageProcessingStatus
+export const jM = ImageTooLargeError
+export const qY = setupPlaybackHandler
+export const zs = ImageTooSmallError

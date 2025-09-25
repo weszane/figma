@@ -11,7 +11,7 @@ import { SvgComponent } from "../905/714743";
 import { UpgradeAction } from "../905/370443";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { CTA_CLICKED } from "../figma_app/314264";
-import { P4, L3, Dr, S6 } from "../905/18800";
+import { consentCounterAtom, setConsentFromRegion, consentStatusAtom, ConsentStatus } from "../905/18800";
 import { V } from "../905/182752";
 import { a as _$$a } from "../905/720941";
 import { kL, gC, Vt, ut, Id, Yp, rf, o1, X8, MW } from "../figma_app/146905";
@@ -21,7 +21,7 @@ function T(e) {
   let [s, l] = useState(!1);
   let c = useRef(null);
   let u = useRef();
-  let E = Xr(P4);
+  let E = Xr(consentCounterAtom);
   let T = wY(c) ?? cU;
   let I = t ? T.height + (e.verticalPadding || 0) : 0;
   useEffect(() => {
@@ -39,7 +39,7 @@ function T(e) {
     c.current?.contains(e.target) || (l(!0), window.removeEventListener("click", A), u.current = setTimeout(async () => {
       if (!t) return null;
       r(!1);
-      await L3({
+      await setConsentFromRegion({
         consentRegion: "implicit",
         cookiesEnabled: !0
       });
@@ -50,7 +50,7 @@ function T(e) {
   }, [t]);
   let x = useCallback(async () => {
     clearTimeout(u.current);
-    s && (await L3({
+    s && (await setConsentFromRegion({
       consentRegion: "implicit",
       cookiesEnabled: !0
     }), v.current(CTA_CLICKED, {
@@ -70,7 +70,7 @@ function T(e) {
   let N = async () => {
     r(!1);
     window.removeEventListener("click", A);
-    await L3({
+    await setConsentFromRegion({
       consentRegion: "implicit",
       cookiesEnabled: !1
     });
@@ -81,7 +81,7 @@ function T(e) {
   let C = async () => {
     r(!1);
     window.removeEventListener("click", A);
-    await L3({
+    await setConsentFromRegion({
       consentRegion: "implicit",
       cookiesEnabled: !0
     });
@@ -150,10 +150,10 @@ function T(e) {
   }) || null;
 }
 export function $$I0(e) {
-  let t = useAtomWithSubscription(Dr);
+  let t = useAtomWithSubscription(consentStatusAtom);
   let r = !1;
-  return (t === S6.UNLOADED && (r = !0), t !== S6.YES || e.persistentMessage || (r = !0), V() && (r = !0), getInitialOptions().user_data?.id && (r = !0), (getInitialOptions().is_embed || isIframe()) && (r = !0), BrowserInfo.isMeetDevice && (r = !0), useEffect(() => {
-    !r && BrowserInfo.isIpadNative && L3({
+  return (t === ConsentStatus.UNLOADED && (r = !0), t !== ConsentStatus.YES || e.persistentMessage || (r = !0), V() && (r = !0), getInitialOptions().user_data?.id && (r = !0), (getInitialOptions().is_embed || isIframe()) && (r = !0), BrowserInfo.isMeetDevice && (r = !0), useEffect(() => {
+    !r && BrowserInfo.isIpadNative && setConsentFromRegion({
       consentRegion: "explicit",
       cookiesEnabled: !1
     });
@@ -164,7 +164,7 @@ export function $$I0(e) {
     },
     children: jsx(T, {
       ...e,
-      showBanner: t === S6.NO
+      showBanner: t === ConsentStatus.NO
     })
   });
 }

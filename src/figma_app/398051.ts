@@ -23,7 +23,7 @@ import { e as _$$e } from "../905/462154";
 import { JT, Xy } from "../figma_app/632248";
 import { RL, qy, cT, Ag, B3 } from "../figma_app/862289";
 import { cq } from "../905/794154";
-import { Sn } from "../905/946805";
+import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { A as _$$A } from "../905/51743";
 import { E as _$$E } from "../905/690713";
@@ -181,7 +181,7 @@ function U() {
             module: jsx(_$$A, {
               source: ActionType.MAGIC_LINK
             }),
-            name: Sn.RENAME_LAYERS_TOAST,
+            name: ExtensionFeatureKey.RENAME_LAYERS_TOAST,
             beforeModuleOpen: () => {
               cT(JT.MAGIC_LINK);
               Yh(debugState.getState().mirror.appModel, JT.AUTO_RENAME_LAYERS) && Ag(JT.AUTO_RENAME_LAYERS, Ay, {
@@ -212,7 +212,7 @@ export function $$B0(e) {
     moduleToOpen: {
       type: "custom",
       module: jsx($$M1, {}),
-      name: Sn.MAGIC_LINK,
+      name: ExtensionFeatureKey.MAGIC_LINK,
       beforeModuleOpen: () => {
         t(Zh({
           name: "prototype.ai_magic_link_entry_clicked",

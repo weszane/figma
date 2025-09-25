@@ -1,4 +1,4 @@
-import { ex as _$$ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useCallback, PureComponent, useId, useMemo, Fragment as _$$Fragment, memo, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -1044,7 +1044,7 @@ function e9() {
     })
   });
 }
-let e7 = _$$ex("prototype_state_management_info", function () {
+let e7 = registerTooltip("prototype_state_management_info", function () {
   return jsx("div", {
     className: "prototype_state_management_info_tooltip--stateManagementMoreInfo---gER1 tooltip--text--Ll1mS",
     children: jsx(e9, {})

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { trackEventAnalytics } from "../905/449184";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { XHR } from "../905/910117";
 async function l(e) {
   try {
@@ -10,7 +10,7 @@ async function l(e) {
 }
 export function $$d0(e) {
   let [t, i] = useState(!0);
-  return jsx(oW, {
+  return jsx(WAFImage, {
     sizes: e.sizes,
     srcSet: e.srcSet,
     src: e.src,

@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { T as _$$T } from "../905/256551";
 import { x as _$$x } from "../905/587214";
 import { f as _$$f } from "../905/54715";
@@ -189,7 +189,7 @@ function D({
           type: "file",
           accept: [...CW, ...(e ? VIDEO_TYPE_VALUES : [])].join(","),
           ref: z,
-          onChange: l ? lQ : () => O(z, c, w, V, e, R, D, U, B, L),
+          onChange: l ? noop : () => O(z, c, w, V, e, R, D, U, B, L),
           multiple: !0
         }), renderI18nText("community.publishing.upload_instructions", {
           chooseFileLink: jsx("label", {
@@ -260,19 +260,19 @@ function D({
     }),
     ref: G,
     role: "button",
-    onDrop: l ? lQ : H,
-    onDragOver: l ? lQ : e => {
+    onDrop: l ? noop : H,
+    onDragOver: l ? noop : e => {
       e.preventDefault();
       e.stopPropagation();
       e.dataTransfer.dropEffect = "copy";
       G.current && (G.current.style.opacity = "0.5", G.current.style.border = "2px solid var(--color-border-selected-strong)");
     },
-    onDragLeave: l ? lQ : e => {
+    onDragLeave: l ? noop : e => {
       e.preventDefault();
       e.stopPropagation();
       G.current && (G.current.style.opacity = "1.0", G.current.style.border = "2px solid var(--color-bg)");
     },
-    onPaste: l ? lQ : W,
+    onPaste: l ? noop : W,
     tabIndex: 0,
     children: c.length > 0 ? X : Z
   });
@@ -384,7 +384,7 @@ function B({
         as: "ol",
         axis: "x",
         values: i,
-        onReorder: t ? lQ : e => {
+        onReorder: t ? noop : e => {
           g({
             carouselMedia: e
           });

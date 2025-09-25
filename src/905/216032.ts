@@ -1,4 +1,4 @@
-import { pr } from "../905/16438";
+import { SeverityError } from "../905/16438";
 import { Mi } from "../905/609505";
 export class $$a0 {
   origin;
@@ -91,7 +91,7 @@ export class $$a0 {
     if (this.isInvalid() || e.isInvalid()) return $$a0.invalidRect();
     let t = Mi.max(this.origin, e.origin);
     let i = new $$a0(t, Mi.min(this.bottomRight(), e.bottomRight()).minus(t));
-    if (i.origin.hasNaN() || i.size.hasNaN()) throw new pr("Rect.intersectWith produced a result with NaN");
+    if (i.origin.hasNaN() || i.size.hasNaN()) throw new SeverityError("Rect.intersectWith produced a result with NaN");
     i.isInvalid() && (i = $$a0.invalidRect());
     return i;
   }

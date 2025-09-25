@@ -4,7 +4,7 @@ import { d as _$$d } from "../905/976845";
 import { u as _$$u } from "../905/911813";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
-import { D } from "../905/12032";
+import { overlayStateAtom } from "../905/12032";
 import { KindEnum } from "../905/129884";
 import { FX } from "../figma_app/831569";
 import { FormattedInputContext } from "../905/427409";
@@ -20,7 +20,7 @@ export function $$g0({
   let f = useContext(FormattedInputContext);
   let _ = e ?? f?.isShowingBindingUI;
   let A = t ?? f?.showBindingUI;
-  let y = useAtomWithSubscription(D);
+  let y = useAtomWithSubscription(overlayStateAtom);
   return jsx("span", {
     className: d()({
       [c6]: "OnboardNewTextContentRowLocation" !== y && !g,

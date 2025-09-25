@@ -5,14 +5,14 @@ import { oo, ul } from '../905/114390';
 import { HV } from '../905/125333';
 import { Alignment, ElementTypeEnum, KindEnum, StatusEnum, PositionEnum } from '../905/129884';
 import { z } from '../905/147443';
-import { bG } from '../905/149328';
+import { getThemePx } from '../905/149328';
 import { F as _$$F } from '../905/162860';
 import { x as _$$x } from '../905/439735';
 import { trackEventAnalytics } from '../905/449184';
 import { Sh } from '../905/470286';
 import { formatI18nMessage } from '../905/482208';
 import { createRect, compareRects } from '../905/508367';
-import { $L, TN } from '../905/524523';
+import { isTooltipRegistered, getTooltipEntry } from '../905/524523';
 import { getFeatureFlags } from '../905/601108';
 import { isFigmaDomain } from '../905/691205';
 import { Point } from '../905/736624';
@@ -127,7 +127,7 @@ function W(e) {
       });
     }
     {
-      let e = TN(t.key);
+      let e = getTooltipEntry(t.key);
       if (e) {
         let r = e.component;
         return t.data ? jsx(r, {
@@ -527,7 +527,7 @@ export function $$Y4(e, t, r, n) {
       case KindEnum.SPECIAL:
         {
           let t = e.getAttribute('data-tooltip');
-          debug(Object.values(Position).includes(t) || $L(t), 'missing/invalid tooltip key');
+          debug(Object.values(Position).includes(t) || isTooltipRegistered(t), 'missing/invalid tooltip key');
           let r = {
             kind: ElementTypeEnum.ELEMENT,
             key: t
@@ -553,7 +553,7 @@ export function $$Y4(e, t, r, n) {
               }
             };
           } else {
-            let n = TN(t);
+            let n = getTooltipEntry(t);
             n && n.getProps && (r = {
               ...r,
               data: n.getProps(e)
@@ -614,7 +614,7 @@ function q(e, t) {
     if (!e) return null;
     let t = fullscreenValue.getViewportInfo();
     let r = scaleRect(t, e.bounds);
-    r.y += bG();
+    r.y += getThemePx();
     r.x += t.x;
     return {
       target: {

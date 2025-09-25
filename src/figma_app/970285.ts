@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent, useRef, useCallback, memo, forwardRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getFirstKey } from "../figma_app/493477";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
@@ -301,7 +301,7 @@ let ex = class e extends PureComponent {
             isMixed: isInvalidValue(this.props.exportSettings),
             isPanelBodyCollapsedAtom: this.props.isPanelBodyCollapsedAtom,
             onChange: this.onExportChange,
-            onHeaderClick: t.length > 0 ? this.props.onHeaderClick : lQ,
+            onHeaderClick: t.length > 0 ? this.props.onHeaderClick : noop,
             openFile: this.props.openFile,
             pickerShown: this.props.pickerShown,
             propertyList: t,

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { J9 } from "../905/149328";
+import { defaultPx } from "../905/149328";
 import { Point } from "../905/736624";
 import { H } from "../905/216861";
 import { Ao } from "../905/748636";
@@ -11,7 +11,7 @@ export function $$d0({
   modalRef: d
 }) {
   let c = H();
-  let u = new Point((window.innerWidth - t) / 2, J9 + 12);
+  let u = new Point((window.innerWidth - t) / 2, defaultPx + 12);
   return jsx(Ao, {
     ref: d,
     autoflowHeight: !0,

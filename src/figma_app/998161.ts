@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { IconButton } from "../905/443068";
 import { DialogHeader, DialogTitle, DialogActionStrip, DialogContents, DialogBody } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
@@ -185,7 +185,7 @@ export function $$J0({
               recordingKey: generateRecordingKey("slidesCustomColorPicker", "libraryColors"),
               onVariableSelected: m,
               onStyleSelected: f,
-              onClose: lQ,
+              onClose: noop,
               variableScopes: O
             })
           }), jsx(ee, {

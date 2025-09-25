@@ -7,7 +7,7 @@ import { ActionType, Fullscreen } from "../figma_app/763686";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { B as _$$B } from "../905/969273";
+import { ErrorType } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { jX, Ay, NB, BT, tS, eJ } from "../905/281495";
 import { I9 } from "../figma_app/151869";
@@ -275,7 +275,7 @@ export function $$D0(e) {
           selected: error.layerCount,
           limit: NB
         }), r = []);
-        sZ(error) === _$$B.UNSAFE_OR_HARMFUL_CONTENT && (r = []);
+        sZ(error) === ErrorType.UNSAFE_OR_HARMFUL_CONTENT && (r = []);
         return jsx(_$$E, {
           error,
           buttons: r,

@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { analyticsEventManager } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
 import { u as _$$u } from "../905/918498";
@@ -50,7 +50,7 @@ export function $$y0(e, t, r) {
   });
   let m = "loaded" === h.status ? h.data.plan : null;
   return useCallback(() => {
-    if (!m) return lQ;
+    if (!m) return noop;
     m && m.connectionCount >= b[m.tier] && !m.unlimitedConnectionsEnabled && !m.testingOnlyUnlimitedConnectionsEnabled ? (analyticsEventManager.trackDefinedEvent("workflow.connected_projects_maximum_connections_paywall_hit", {
       planId: m.key.parentId || void 0,
       planType: m.key.type,

@@ -10,7 +10,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { applyOffsetToViewport } from "../figma_app/62612";
 import { checkZoomWidgetAccess } from "../figma_app/12796";
 import { showVisualBell, getFullscreenViewEditorType } from "../figma_app/300692";
-import { R as _$$R } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { getSelectedView, checkCanRunExtensions, getPluginDevMode } from "../905/622391";
 import { setSyncedValues } from "../905/486749";
 import { notifyPluginStatus } from "../905/571565";
@@ -39,7 +39,7 @@ export function $$I0({
     };
   }
   if (getFeatureFlags().ext_require_appropriate_seat && !checkCanRunExtensions()) {
-    _$$R.instance.handleUpgrade(PluginAction.RUN_WIDGET);
+    PluginManager.instance.handleUpgrade(PluginAction.RUN_WIDGET);
     return {
       widgetNodeID: void 0,
       widgetRunPromise: void 0

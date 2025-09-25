@@ -30,7 +30,7 @@ import { tV } from '../905/794875';
 import { K as _$$K2 } from '../905/799615';
 import { Ig } from '../905/805224';
 import { Y as _$$Y } from '../905/912236';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { styleBuilderInstance } from '../905/941192';
 import { d as _$$d } from '../905/976845';
 import { cssBuilderInstance } from '../cssbuilder/589278';
@@ -129,7 +129,7 @@ function F() {
     return {
       type: ZU.CUSTOM_ACTION,
       customActionType: Wg.STANDARD_BUTTON,
-      onClick: lQ,
+      onClick: noop,
       icon: jsx(_$$T, {}),
       getTitle: () => getI18nString('dakota.collection_selector.connect_submenu_title'),
       recordingKey: 'cmsCollectionAction',
@@ -150,7 +150,7 @@ function F() {
     customActionType: Wg.DROPDOWN_GROUP_HEADER,
     getTitle: () => getI18nString('dakota.collection_selector.connect_submenu_title'),
     recordingKey: 'cmsPageBindingLabel',
-    onClick: lQ,
+    onClick: noop,
     preventHoisting: !0,
     disabled: !0
   };
@@ -262,7 +262,7 @@ function ek() {
       customActionType: Wg.DROPDOWN_GROUP_HEADER,
       getTitle: () => getI18nString('dakota.collection_selector.connect_submenu_title'),
       recordingKey: 'cmsPageBindingLabel',
-      onClick: lQ,
+      onClick: noop,
       preventHoisting: !0,
       disabled: !0
     }, ...(s ?? []).map(e => ({
@@ -837,7 +837,7 @@ export function $$ti7(e, t) {
       return {
         type: ZU.CUSTOM_ACTION,
         customActionType: Wg.STANDARD_BUTTON,
-        onClick: lQ,
+        onClick: noop,
         icon: jsx(_$$K2, {
           style: {
             '--color-icon': 'var(--color-icon-disabled)'

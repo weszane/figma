@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import s from "classnames";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
-import { b } from "../905/22449";
-import { c as _$$c } from "../905/34525";
+import { RadioPrimitiveRoot } from "../905/22449";
+import { RadioPrimitiveOption } from "../905/34525";
 import { xk } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { YX } from "../905/98947";
@@ -55,7 +55,7 @@ let h = {
 function _(e) {
   let r = useAtomWithSubscription(YX);
   let t = r => !!(e.isSingleSelect && e.selectedOptions?.size > 0) && !e.selectedOptions?.has(r);
-  return jsxs(b, {
+  return jsxs(RadioPrimitiveRoot, {
     "data-testid": "signal-option-container",
     onChange: r => {
       let t = new Set(e.selectedOptions);
@@ -78,7 +78,7 @@ function _(e) {
         ...xk(r && h.optionsAnswerButton, r && l && h.optionsAnswerButtonSelected, r && n && h.optionsAnswerButtonDimmed),
         "data-testid": `signal-option-${s}`,
         htmlFor: s,
-        children: [jsx(_$$c, {
+        children: [jsx(RadioPrimitiveOption, {
           className: "xeh89do x1hyvwdk xjm9jq1 xb3r6kr x10l6tqk xuxw1ft x1i1rx1s",
           value: s,
           id: s

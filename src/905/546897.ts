@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useContext } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { getVisibleTheme } from "../905/640017";
 import { getAssetBackgroundColor } from "../figma_app/80990";
@@ -30,7 +30,7 @@ export function $$y0({
   let w = useContext(ThemeContext);
   let C = getVisibleTheme();
   let T = useMemo(() => !!x && !!getThemeBorderStyle(w, x, C), [w, x, C]);
-  let k = "string" == typeof s ? jsx(oW, {
+  let k = "string" == typeof s ? jsx(WAFImage, {
     src: s,
     className: "asset_panel_preview--img--bo9vu",
     style: y?.style

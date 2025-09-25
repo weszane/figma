@@ -18,7 +18,7 @@ import { m as _$$m } from "../905/561236";
 import { dp, DH } from "../905/508893";
 import { LoadingSpinner } from "../figma_app/858013";
 import { buildViewerQueryParams } from "../figma_app/831696";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { useLatestRef } from "../figma_app/922077";
 import { Fe, uz } from "../905/284552";
@@ -141,7 +141,7 @@ function H(e) {
   let q = useCallback(() => {
     u.current = !0;
     let e = t.current;
-    e && (e.muted = !0, e.play().catch(lQ));
+    e && (e.muted = !0, e.play().catch(noop));
   }, []);
   let ee = useCallback(() => {
     let e = t.current;

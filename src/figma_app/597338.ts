@@ -5,7 +5,7 @@ import { L as _$$L } from "../905/704296";
 import { HistoryChangesBindings, ChangeType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -16,8 +16,8 @@ import { K0 } from "../figma_app/778125";
 import { A as _$$A } from "../6828/315990";
 let E = "diffing_compare_summary--comparingDetailsText--WlaVi";
 export function $$b1(e, t = !1) {
-  let r = A(new Date());
-  let n = A(e);
+  let r = dayjs(new Date());
+  let n = dayjs(e);
   return n.isSame(r, "day") ? getI18nString("collaboration.feedback.time_hour_minutes", {
     time: n.toDate()
   }) : n.isSame(r, "year") ? getI18nString("collaboration.feedback.time_date_minutes_without_year", {

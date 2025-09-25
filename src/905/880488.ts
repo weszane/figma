@@ -2,7 +2,7 @@ import { createActionCreator } from "../905/73481";
 import { createOptimistThunk } from "../905/350402";
 import { liveStoreInstance } from "../905/713695";
 import { xy } from "../905/844322";
-import { sM } from "../905/70982";
+import { deleteRecentPrototype } from "../905/70982";
 let $$l0 = liveStoreInstance.Mutation((e, {
   objects: t,
   reduxStore: i
@@ -21,7 +21,7 @@ let $$c4 = createActionCreator("DELETE_FILES_PERMANENTLY");
 let $$u1 = createActionCreator("DELETE_FILES");
 let $$p2 = createOptimistThunk((e, t) => {
   e.dispatch($$u1(t));
-  e.dispatch(sM({
+  e.dispatch(deleteRecentPrototype({
     fileKeys: Object.keys(t.fileKeys)
   }));
 });

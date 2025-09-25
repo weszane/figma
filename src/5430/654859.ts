@@ -8,7 +8,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { A6 } from '../905/350234';
 import { trackEventAnalytics } from '../905/449184';
-import { V as _$$V } from '../905/480825';
+import { PluginImage } from '../905/480825';
 import { e as _$$e } from '../905/579755';
 import { getFeatureFlags } from '../905/601108';
 import { PerfTimer } from '../905/609396';
@@ -136,7 +136,7 @@ function q({
             document.activeElement.blur();
             t();
           },
-          children: [jsx(_$$V, {
+          children: [jsx(PluginImage, {
             plugin: a,
             className: O,
             alt: a.name,

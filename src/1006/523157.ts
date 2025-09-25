@@ -1,11 +1,11 @@
-import { ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ButtonLarge } from "../905/521428";
 import { generateRecordingKey } from "../figma_app/878298";
 import p from "../vendor/223926";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
 import { af } from "../figma_app/559491";
@@ -15,12 +15,12 @@ import { useCanRunExtensions } from "../figma_app/844435";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getRelaunchablePlugins, canRunPlugin } from "../figma_app/300692";
 import { O as _$$O } from "../figma_app/185954";
-import { R as _$$R } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { HubTypeEnum } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { hasLocalFileId, ManifestEditorType } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
-import { V as _$$V } from "../905/480825";
+import { PluginImage } from "../905/480825";
 import { _r } from "../905/291714";
 import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O2 } from "../905/969533";
@@ -43,7 +43,7 @@ let a = memo(function (e) {
   });
 });
 var u = p;
-let I = ex("figjam_plugin_relaunch_button_info", function (e) {
+let I = registerTooltip("figjam_plugin_relaunch_button_info", function (e) {
   let {
     name,
     description
@@ -122,7 +122,7 @@ function S(e) {
     showChevron: hasMultipleOptions,
     ariaLabel: u,
     ...s,
-    children: hasLocalFileId(plugin) ? jsx(a, {}) : jsx(_$$V, {
+    children: hasLocalFileId(plugin) ? jsx(a, {}) : jsx(PluginImage, {
       className: "plugin_relaunch_content--pluginIcon--dxgZD plugin--pluginIconBase--yAG5F",
       plugin,
       alt: plugin.name
@@ -202,7 +202,7 @@ export function $$F0() {
   let r = selectWithShallowEqual(e => e.localPlugins);
   let a = useCurrentOrgAdminInfo();
   let p = useCurrentFileKey();
-  let C = useRef(new _$$O(_$$A.duration(1, "day")));
+  let C = useRef(new _$$O(dayjs.duration(1, "day")));
   let T = useCanRunExtensions();
   let I = useDispatch();
   let D = e => I(af({
@@ -216,7 +216,7 @@ export function $$F0() {
     var n;
     if (!p) return;
     if (!T) {
-      _$$R.instance.handleUpgrade(PluginAction.RUN_WIDGET);
+      PluginManager.instance.handleUpgrade(PluginAction.RUN_WIDGET);
       return;
     }
     t = getI18nString("whiteboard.inline_menu.relaunching_plugin", {
@@ -235,7 +235,7 @@ export function $$F0() {
       plugin: e.plugin,
       editorType: FEditorType.Whiteboard
     });
-    canRun && _$$R.instance.enqueue({
+    canRun && PluginManager.instance.enqueue({
       mode: "run-forever",
       runPluginArgs: {
         plugin: e.plugin,

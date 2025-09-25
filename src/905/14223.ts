@@ -1,29 +1,57 @@
-import { createActionCreator } from "../905/73481";
-import { createOptimistThunk } from "../905/350402";
-import { setupLoadingStateHandler } from "../905/696711";
-import { U } from "../figma_app/477548";
-let $$o2 = createOptimistThunk((e, t, {
-  loadingKey: i
-}) => {
-  let n = e.getState();
-  let r = n.openFile ? n.openFile.key : void 0;
-  if (n.contacts.appData.contactsFetched && (!r || n.contacts.appData.fileKey === r)) return;
-  let o = U.getContacts({
-    orgId: n.currentUserOrgId || void 0,
-    fileKey: r
-  }).then(({
-    data: t
-  }) => {
-    let i = t.meta;
-    e.dispatch($$l1({
-      users: i,
-      fileKey: r
-    }));
-  }).catch(e => {});
-  setupLoadingStateHandler(o, e, i);
-});
-let $$l1 = createActionCreator("CONTACTS_SET");
-let $$d0 = createActionCreator("CONTACTS_RESET");
-export const cL = $$d0;
-export const hZ = $$l1;
-export const um = $$o2;
+import { createActionCreator } from '../905/73481'
+import { createOptimistThunk } from '../905/350402'
+import { setupLoadingStateHandler } from '../905/696711'
+import { U } from '../figma_app/477548'
+
+/**
+ * Action creator for setting contacts.
+ * Original name: $$l1
+ */
+export const setContacts = createActionCreator('CONTACTS_SET')
+
+/**
+ * Action creator for resetting contacts.
+ * Original name: $$d0
+ */
+export const resetContacts = createActionCreator('CONTACTS_RESET')
+
+/**
+ * Thunk for fetching contacts with optimist pattern.
+ * Original name: $$o2
+ */
+export const fetchContactsOptimist = createOptimistThunk((context, { loadingKey }) => {
+  const state = context.getState()
+  const fileKey = state.openFile ? state.openFile.key : undefined
+
+  // Guard clause: Only fetch if contacts not already fetched or fileKey changed
+  if (
+    state.contacts.appData.contactsFetched
+    && (!fileKey || state.contacts.appData.fileKey === fileKey)
+  ) {
+    return
+  }
+
+  const contactsPromise = U.getContacts({
+    orgId: state.currentUserOrgId || undefined,
+    fileKey,
+  })
+    .then(({ data }) => {
+      const users = data.meta
+      context.dispatch(setContacts({
+        users,
+        fileKey,
+      }))
+    })
+    .catch(() => {
+      // Error handling can be expanded if needed
+    })
+
+  setupLoadingStateHandler(contactsPromise, context, loadingKey)
+})
+
+/**
+ * Exported variables with refactored names.
+ */
+export const cL = resetContacts
+export const hZ = setContacts
+export const um = fetchContactsOptimist

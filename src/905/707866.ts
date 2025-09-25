@@ -8,7 +8,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { useLatestRef } from "../figma_app/922077";
 import { h1 } from "../905/986103";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { getI18nState } from "../figma_app/363242";
 import { KindEnum } from "../905/129884";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -34,7 +34,7 @@ function f(e) {
       year: "numeric",
       hour: "numeric",
       minute: "numeric"
-    }).format(_$$A.utc(e).toDate());
+    }).format(dayjs.utc(e).toDate());
   }(e.date, e.locale);
   return jsx("span", {
     "data-tooltip-type": KindEnum.TEXT,

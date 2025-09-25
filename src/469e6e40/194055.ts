@@ -33,7 +33,7 @@ import { Ef } from "../905/81982";
 import { l as _$$l } from "../469e6e40/774192";
 import { A as _$$A3 } from "../5724/663128";
 import { SvgComponent } from "../905/714743";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { z as _$$z2 } from "../905/239603";
 import { c$, ms } from "../figma_app/236327";
 import { consumptionPaywallUtils } from "../905/224";
@@ -646,7 +646,7 @@ function ei(e) {
         className: cssBuilderInstance.block.$,
         children: [jsxs(ButtonBase, {
           defaultClass: "",
-          onClick: a ? lQ : () => m(!c),
+          onClick: a ? noop : () => m(!c),
           dataTestId: "user-workspace-dropdown",
           children: [0 === l ? renderI18nText("resources_tab.extension_usage_data.users") : renderI18nText("resources_tab.extension_usage_data.workspaces"), !a && jsx(SvgComponent, {
             svg: _$$A4,

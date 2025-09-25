@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { LicenseGroupUpdateReasonEnum } from "../figma_app/35887";
@@ -75,7 +75,7 @@ export function $$E2(e, t, r) {
   };
 }
 export function $$y7(e, t) {
-  return e.last_reviewed_at && A(e.last_reviewed_at).add(14, "days").isAfter(t);
+  return e.last_reviewed_at && dayjs(e.last_reviewed_at).add(14, "days").isAfter(t);
 }
 export function $$b4(e, t) {
   let r = C5(t ?? [], "upcoming");

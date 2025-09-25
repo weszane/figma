@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, forwardRef, memo, useContext, useMemo } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
 import { um, useAtomWithSubscription, useAtomValueAndSetter, Xr, atom } from "../figma_app/27355";
 import { wY } from "../figma_app/708845";
@@ -11,7 +11,7 @@ import { XS, Iy } from "../figma_app/95367";
 import { X as _$$X } from "../905/350405";
 import { sg, kF } from "../figma_app/48566";
 import { f as _$$f } from "../figma_app/109947";
-import { P4 } from "../905/18800";
+import { consentCounterAtom } from "../905/18800";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { xn } from "../figma_app/644079";
@@ -160,7 +160,7 @@ let Q = um({
       return e;
   }
 });
-function ee(e = lQ, t = !0) {
+function ee(e = noop, t = !0) {
   let i = useAtomWithSubscription(Q);
   let [n, s] = useState({
     isHovered: !1,
@@ -4135,7 +4135,7 @@ function iD({
     onMouseLeave,
     onTouchStart,
     onTouchEnd
-  } = ee(lQ, _);
+  } = ee(noop, _);
   let C = useCallback((e, t) => {
     permissionScopeHandler.user("drop-sticky-on-canvas", () => Fullscreen?.dropDiagramItemOntoCanvas(DesignGraphElements.STICKY, Math.round(e.x - 55), Math.round(e.y - 55), Math.round(t.x), Math.round(t.y), AlignmentPosition.TOP_LEFT, ConfirmationLevel.NO));
     l(!1);
@@ -4171,7 +4171,7 @@ function iD({
         isHovered,
         onDragEnd: C,
         onDragStart: T,
-        onTap: lQ,
+        onTap: noop,
         stickyAnimationState: u,
         toolType: "sticky",
         toolbarIconScale: e
@@ -4268,15 +4268,15 @@ function iF({
   }();
   !function (e, t) {
     let i = _$$C();
-    let n = i?.setWhiteboardToolbeltContainerNode || lQ;
-    let s = i?.setWhiteboardToolbeltNode || lQ;
+    let n = i?.setWhiteboardToolbeltContainerNode || noop;
+    let s = i?.setWhiteboardToolbeltNode || noop;
     useEffect(() => {
       e && n(e.current);
       t && s(t.current);
     }, [e, n, t, s]);
   }(t, useAtomWithSubscription(_$$f));
   let i = xn();
-  let s = useAtomWithSubscription(P4);
+  let s = useAtomWithSubscription(consentCounterAtom);
   let d = useMemo(() => ({
     marginBottom: i + s
   }), [i, s]);

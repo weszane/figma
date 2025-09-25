@@ -7,10 +7,10 @@ import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../fig
 import { dP } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Spacer } from "../905/470281";
-import { IV } from "../905/154591";
+import { renderBadgesLayout } from "../905/154591";
 import { nK } from "../905/836986";
 import { P } from "../905/625912";
-import { Z } from "../905/27174";
+import { TreeRow } from "../905/27174";
 import { HA } from "../figma_app/618665";
 import { c1 } from "../905/589717";
 import { Pd, io } from "../905/440046";
@@ -73,7 +73,7 @@ let S = memo(function ({
   onSelect: g,
   toggleExpanded: f
 }) {
-  return jsxs(Z, {
+  return jsxs(TreeRow, {
     keyboardNavigationPath: [i],
     isSelected: a,
     isLeaf: o,
@@ -82,7 +82,7 @@ let S = memo(function ({
     style: s,
     select: () => g(e),
     toggleExpanded: t => f(e, t),
-    children: [jsx(IV, {
+    children: [jsx(renderBadgesLayout, {
       badges: h
     }), jsx(nK, {
       id: t

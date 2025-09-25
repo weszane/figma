@@ -1,4 +1,4 @@
-import { g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 export let $$i0 = {
   container: {
     display: "x78zum5",
@@ -24,12 +24,12 @@ export let $$i0 = {
     $$css: !0
   },
   title: {
-    ...g.textHeadingSmall,
+    ...textDisplayConfig.textHeadingSmall,
     marginBottom: "x1ef8nbk",
     $$css: !0
   },
   description: {
-    ...g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };

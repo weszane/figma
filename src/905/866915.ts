@@ -1,9 +1,9 @@
 import { useContext, useState, useRef, useEffect, useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { SKIP_RECORDING } from "../figma_app/878298";
 import { nS } from "../figma_app/274383";
 import { T } from "../905/355691";
-export function $$l0(e = lQ, t = !1, i = !0) {
+export function $$l0(e = noop, t = !1, i = !0) {
   let {
     state
   } = useContext(nS);

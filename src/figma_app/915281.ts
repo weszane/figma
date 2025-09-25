@@ -1,14 +1,14 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { createContext, useState, useCallback, useMemo, useEffect, useContext } from "react";
 import { debounce } from "../905/915765";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
 import { h as _$$h } from "../905/207101";
 import { M } from "../figma_app/749682";
 import { loadStyleCanvases } from "../figma_app/646357";
 let u = createContext({
-  registerStyle: lQ,
-  unregisterStyle: lQ
+  registerStyle: noop,
+  unregisterStyle: noop
 });
 export function $$p1({
   children: e

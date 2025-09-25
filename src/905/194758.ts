@@ -16,7 +16,7 @@ import { KindEnum } from "../905/129884";
 import { j } from "../905/834956";
 import { JT } from "../figma_app/632248";
 import { B3, Ag } from "../figma_app/862289";
-import { Sn } from "../905/946805";
+import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { w as _$$w, q } from "../905/112768";
 import { r6 } from "../905/507950";
@@ -51,7 +51,7 @@ export function $$C0({
             isBatch: e.length > 1
           });
         },
-        name: Sn.BACKGROUND_REMOVE_TOAST
+        name: ExtensionFeatureKey.BACKGROUND_REMOVE_TOAST
       },
       trackingData: {
         source: "image_settings_remove_background"
@@ -80,7 +80,7 @@ export function $$C0({
             isBatch: e.length > 1
           });
         },
-        name: Sn.UPSCALE_IMAGE_TOAST
+        name: ExtensionFeatureKey.UPSCALE_IMAGE_TOAST
       },
       trackingData: {
         source: "image_settings_upscale_image"

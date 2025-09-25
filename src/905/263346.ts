@@ -8,7 +8,7 @@ let resolver: ((value?: unknown) => void) | undefined;
  * @returns {Promise<unknown>} A promise that can be resolved externally.
  * @originalName $$r0
  */
-export function createDeferredPromise(): Promise<unknown> {
+export function createDeferredPromise<T>(): Promise<T> {
   return new Promise(resolve => {
     resolver = resolve;
   });

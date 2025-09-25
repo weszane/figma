@@ -1,7 +1,7 @@
 import { t_, atom, atomStoreManager, Xr, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { handleAtomEvent } from "../905/502364";
-import { a as _$$a, D as _$$D2 } from "../905/12032";
+import { overlayIdsAtom, overlayStateAtom } from "../905/12032";
 import { Z3, FQ, Oi, oE } from "../905/953718";
 import { getLaunchDarklyFlagsExport, getInitialOptions, isDevEnvironment } from "../figma_app/169182";
 import { y as _$$y, t as _$$t } from "../905/958284";
@@ -16,7 +16,7 @@ import { isSyntheticTesterEmail } from "../figma_app/416935";
 import { QL } from "../905/609392";
 import { getFeatureFlags } from "../905/601108";
 import { N as _$$N } from "../figma_app/268271";
-import { d as _$$d } from "../905/14910";
+import { isAllowedToSeeNux } from "../905/14910";
 import { e as _$$e } from "../905/107684";
 import { h as _$$h } from "../905/881732";
 import { RI } from "../figma_app/621201";
@@ -68,7 +68,7 @@ let T = new _$$m("DenyIfNuxHasNotShown", "Don't show any overlays if the user ha
     emailValidatedAt: e,
     jobTitle: t
   }) {
-    return !_$$d({
+    return !isAllowedToSeeNux({
       emailValidatedAt: e,
       jobTitle: t
     });
@@ -85,7 +85,7 @@ let O = atom(e => {
   let i = e(modalTypeAtom);
   let n = e(notificationTypeAtom);
   let r = e(NT);
-  let a = e(_$$a);
+  let a = e(overlayIdsAtom);
   let o = "string" == typeof r || void 0 === r ? r : "loaded" === r.status ? r.data : void 0;
   let l = e(userFlagAtomFamily("last_seen_dev_mode_upsell"));
   return {
@@ -121,7 +121,7 @@ window.Curator = {
   enableDebugLogging: () => _$$L("debug"),
   disableLogging: () => _$$L("disabled"),
   getMountedOverlays: function () {
-    return atomStoreManager.get(_$$a);
+    return atomStoreManager.get(overlayIdsAtom);
   },
   sendEvent: function (e) {
     handleAtomEvent(e);
@@ -179,10 +179,10 @@ export function $$es0({
       }), n.current = !0), getFeatureFlags().curator_file_browser_ordering ? 0 : t);
     }, [e, i, t]);
   }(r, t.priority);
-  let p = Xr(_$$D2);
+  let p = Xr(overlayStateAtom);
   let m = useAtomWithSubscription(l);
   let g = useAtomWithSubscription(L);
-  let f = Xr(_$$a);
+  let f = Xr(overlayIdsAtom);
   let _ = useAtomWithSubscription(eC(e.lifecycle));
   let A = useRef(_);
   A.current = _;

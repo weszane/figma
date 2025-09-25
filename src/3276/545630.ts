@@ -70,7 +70,7 @@ import { nq as _$$nq, _B, H6, hC, uB, WM, zf } from '../905/852370';
 import { generateUUIDv4 } from '../905/871474';
 import { V as _$$V } from '../905/890500';
 import { showDropdownThunk } from '../905/929976';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { C as _$$C2, e as _$$e3 } from '../905/937623';
 import { postUserFlag } from '../905/985254';
 import { JD } from '../905/986103';
@@ -2563,7 +2563,7 @@ function nP(e) {
               placeholderText: $,
               recordingKey: ComposerType.$$new,
               scrollToBottom: u,
-              setHyperlinkEditorRef: lQ,
+              setHyperlinkEditorRef: noop,
               setHyperlinkLocation: T,
               setIsEditorFocused: e.setIsEditorFocused,
               submitText: getI18nString('comments.post'),

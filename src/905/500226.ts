@@ -17,7 +17,7 @@ import { Nv } from "../figma_app/318590";
 import { WP } from "../905/198599";
 import { cq } from "../905/794154";
 import { eg } from "../figma_app/297822";
-import { Jc } from "../905/946805";
+import { AssetTabType } from "../905/946805";
 import { dd } from "../figma_app/604494";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { xA } from "../905/742325";
@@ -95,7 +95,7 @@ export function $$C1({
         action: "insert-asset-component-search",
         searchPosition: i,
         numSearchResults: null,
-        rankingAlgorithm: eg(Jc.ASSETS)
+        rankingAlgorithm: eg(AssetTabType.ASSETS)
       });
       $z();
       close();

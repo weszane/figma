@@ -38,9 +38,9 @@ import { SvgComponent } from "../905/714743";
 import { $z } from "../figma_app/617427";
 import { getI18nState } from "../figma_app/363242";
 import { A as _$$A2 } from "../b2835def/491732";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { styleBuilderInstance } from "../905/941192";
-import { FU } from "../905/26824";
+import { setKeyboardShortcutPanelTab } from "../905/26824";
 import { showModalHandler } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
 import { kA, IO } from "../905/962318";
@@ -337,7 +337,7 @@ function ee({
         t && (n(2), i(e), l(t));
       } else e.resource === Z.VIDEO_TUTORIALS ? openWindow("https://www.youtube.com/playlist?list=PLXDU_eVOJTx4iS4wLdfAcM1msnqZmVwC5", "_blank", "noopener") : (n(2), i(e));
     },
-    children: [jsx(oW, {
+    children: [jsx(WAFImage, {
       src: e.image,
       alt: "",
       style: styleBuilderInstance.m0.add({
@@ -411,7 +411,7 @@ function ea() {
   let t = [{
     label: getI18nString("help_widget.menu.change_keyboard_layout"),
     onClick: function () {
-      fullscreenValue.isReady() && (e(FU({
+      fullscreenValue.isReady() && (e(setKeyboardShortcutPanelTab({
         tab: "layout"
       })), fullscreenValue.triggerAction("toggle-keyboard-shortcuts"));
     }
@@ -639,7 +639,7 @@ function ej({
     children: jsx("div", {
       className: "third_level_resources--enlargedImageContainer--EqCOz",
       children: jsx(DialogContents, {
-        children: jsx(oW, {
+        children: jsx(WAFImage, {
           src: e?.src,
           alt: e?.alt,
           className: "third_level_resources--enlargedImage--l3atX"
@@ -748,7 +748,7 @@ function ek() {
       let s = await e(0x130e9f996b97);
       s && t(s);
     },
-    children: [jsx(oW, {
+    children: [jsx(WAFImage, {
       src: buildUploadUrl("c657cef6e7f2fec74ceef573832e097f2d0ce4cd"),
       alt: "",
       style: styleBuilderInstance.m0.add({

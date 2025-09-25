@@ -5,7 +5,7 @@ import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { getFeatureFlags } from "../905/601108";
 import { Xf } from "../figma_app/153916";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { pW } from "../905/160095";
@@ -25,7 +25,7 @@ function v({
   ignoreErrorLog: g = !1
 }) {
   let x = getFeatureFlags().team_admin_billing_cost_banner;
-  let b = A(e);
+  let b = dayjs(e);
   if (!x) return null;
   if (!e || !b.isValid()) {
     g || reportError(ServiceCategories.MONETIZATION_UPGRADES, Error(`Contract Start have invalid date: ${e}`), {
@@ -34,7 +34,7 @@ function v({
     return null;
   }
   let v = getInitialOptions().analyze_data_flow_v2_until;
-  let f = v ? A(v) : null;
+  let f = v ? dayjs(v) : null;
   let j = getFeatureFlags().contract_start_banner_renewal_copy && f && f.add(30, "days").isAfter(b) && d;
   let y = j ? getI18nString("admin_settings.contract_start_banner.renewal_close_to_ga.title", {
     planName: t,

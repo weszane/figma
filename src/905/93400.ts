@@ -2,10 +2,10 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useEffect, useState } from "react";
 import a from "../vendor/116389";
 import { H } from "../905/620380";
-import { d as _$$d } from "../905/381451";
-import { U } from "../905/331038";
-import { w as _$$w } from "../905/113805";
-import { A as _$$A } from "../905/17894";
+import { useFieldValidation } from "../905/381451";
+import { findFirstResult } from "../905/331038";
+import { getValidationErrors } from "../905/113805";
+import { unsetSymbol } from "../905/17894";
 import { lN, Yv } from "../905/488777";
 import { w8, vj } from "../905/652712";
 import { Z9 } from "../905/104173";
@@ -29,17 +29,17 @@ export function $$b0({
   let S = useMemo(() => {
     if (e) return b.find(t => t.id === e);
   }, [e, b]);
-  let w = _$$d(Z9, {
+  let w = useFieldValidation(Z9, {
     existingResourceContent: a
   }, S);
   useEffect(() => {
     w.setValue?.(S);
   }, [S, w]);
   let C = J({
-    tagsV1Field: _$$d(_$$f, {
+    tagsV1Field: useFieldValidation(_$$f, {
       existingResourceContent: a
     }, t),
-    tagsV2Field: _$$d(_$$m, {
+    tagsV2Field: useFieldValidation(_$$m, {
       categoryField: w,
       existingResourceContent: a
     }, useMemo(() => i ? s()(i.map(e => S?.tags?.find(t => t.text === e))) : [], [S?.tags, i]))
@@ -51,16 +51,16 @@ export function $$b0({
   } = C;
   useEffect(() => {
     E.current({
-      tags: tagsV1Field.currentValue === _$$A ? [] : [...tagsV1Field.currentValue],
-      tagsV2: tagsV2Field.currentValue === _$$A ? [] : tagsV2Field.currentValue.map(e => e.text)
+      tags: tagsV1Field.currentValue === unsetSymbol ? [] : [...tagsV1Field.currentValue],
+      tagsV2: tagsV2Field.currentValue === unsetSymbol ? [] : tagsV2Field.currentValue.map(e => e.text)
     });
   }, [E, tagsV1Field.currentValue, tagsV2Field.currentValue]);
   let [N, P] = useState(!1);
-  let O = _$$w(tagsV1Field, !N);
-  let D = U(O, lN);
+  let O = getValidationErrors(tagsV1Field, !N);
+  let D = findFirstResult(O, lN);
   let [L, F] = useState(!1);
-  let M = _$$w(tagsV2Field, !L);
-  let j = U(M, w8);
+  let M = getValidationErrors(tagsV2Field, !L);
+  let j = findFirstResult(M, w8);
   useEffect(() => {
     x.current({
       tags: D,

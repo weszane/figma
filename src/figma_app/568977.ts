@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { HiddenLabel } from "../905/270045";
 import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
-import { bL as _$$bL, D0 } from "../905/4410";
+import { FormattedInputRoot, FormattedInputField } from "../905/4410";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxInt } from "../figma_app/783094";
 import { KeyCodes } from "../905/63728";
@@ -62,8 +62,8 @@ export function $$x1(e) {
     children: [jsx(HiddenLabel, {
       htmlFor: "small-nudge-input",
       children: renderI18nText("fullscreen.nudge.small_nudge")
-    }), jsx(_$$bL, {
-      children: jsx(D0, {
+    }), jsx(FormattedInputRoot, {
+      children: jsx(FormattedInputField, {
         id: "small-nudge-input",
         formatter: I,
         value: r,
@@ -87,8 +87,8 @@ export function $$x1(e) {
     children: [jsx(HiddenLabel, {
       htmlFor: "big-nudge-input",
       children: renderI18nText("fullscreen.nudge.big_nudge")
-    }), jsx(_$$bL, {
-      children: jsx(D0, {
+    }), jsx(FormattedInputRoot, {
+      children: jsx(FormattedInputField, {
         id: "big-nudge-input",
         formatter: v,
         value: c,

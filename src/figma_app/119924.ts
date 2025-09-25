@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { wt, At, Je } from "../figma_app/74043";
 export function $$l0({
@@ -22,8 +22,8 @@ export function $$l0({
     setRulerVisibilityOnDragEnd: u,
     shouldShowGhostRulers: (t || r) && l
   } : {
-    setRulerVisibilityOnInitialSizeChange: lQ,
-    setRulerVisibilityOnDragEnd: lQ,
+    setRulerVisibilityOnInitialSizeChange: noop,
+    setRulerVisibilityOnDragEnd: noop,
     shouldShowGhostRulers: !1
   };
 }

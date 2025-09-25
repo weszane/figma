@@ -31,7 +31,7 @@ import { HubTypeEnum } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
 import { be } from "../figma_app/474636";
 import { setupUserPluginPreferences } from "../figma_app/545541";
-import { V as _$$V } from "../905/480825";
+import { PluginImage } from "../905/480825";
 import { j as _$$j } from "../905/834956";
 import { Cf } from "../905/504727";
 import { s as _$$s2 } from "../figma_app/504088";
@@ -83,7 +83,7 @@ function G() {
       return () => window.removeEventListener("mousemove", e);
     }
   }, [t]);
-  return e ? createPortal(jsx(_$$V, {
+  return e ? createPortal(jsx(PluginImage, {
     plugin: e,
     className: cssBuilderInstance.h16.w16.bRadius2.$,
     style: {
@@ -249,7 +249,7 @@ function V({
         })), l(!1));
       },
       onContextMenu: G,
-      children: jsx(_$$V, {
+      children: jsx(PluginImage, {
         plugin: e,
         draggable: !1,
         className: cssBuilderInstance.h16.w16.bRadius2.$,

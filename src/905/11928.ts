@@ -1,4 +1,24 @@
-var $$n0 = (e => (e.BOTTOM_RIGHT = 'bottom_right', e.CENTER = 'center', e.EDITOR_TOP_LEFT = 'editor_top_left', e.UI3_EDITOR_TOP_LEFT = 'ui3_editor_top_left', e))($$n0 || {})
-var $$r1 = (e => (e.TERTIARY_MODAL = 'TERTIARY_MODAL', e.SECONDARY_MODAL = 'SECONDARY_MODAL', e.MODAL = 'MODAL', e.UNSET = 'UNSET', e.NOTIFICATION_MODAL = 'NOTIFICATION_MODAL', e))($$r1 || {})
-export const Q = $$n0
-export const R = $$r1
+/**
+ * Enum for position types (original: $$n0).
+ */
+export enum Ui3PositionType {
+  BOTTOM_RIGHT = 'bottom_right',
+  CENTER = 'center',
+  EDITOR_TOP_LEFT = 'editor_top_left',
+  UI3_EDITOR_TOP_LEFT = 'ui3_editor_top_left',
+}
+
+/**
+ * Enum for modal types (original: $$r1).
+ */
+export enum NotModalType {
+  TERTIARY_MODAL = 'TERTIARY_MODAL',
+  SECONDARY_MODAL = 'SECONDARY_MODAL',
+  MODAL = 'MODAL',
+  UNSET = 'UNSET',
+  NOTIFICATION_MODAL = 'NOTIFICATION_MODAL',
+}
+
+// Refactored exports to match new names
+export const Q = Ui3PositionType; // original: Q
+export const R = NotModalType;    // original: R

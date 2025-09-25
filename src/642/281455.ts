@@ -19,7 +19,7 @@ import { k as _$$k2 } from '../905/582200';
 import { a as _$$a } from '../905/597867';
 import { getFeatureFlags } from '../905/601108';
 import { Point } from '../905/736624';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { calculatePickerPositionLeft } from '../905/959568';
 import { wu } from '../1528/306300';
 import { k8 } from '../figma_app/8833';
@@ -197,7 +197,7 @@ export function $$G0(e) {
     dragging: !1,
     hasFocus: !1,
     onPreviewClick: W,
-    onRowFocus: lQ,
+    onRowFocus: noop,
     paint: Y(),
     previewActive: !1,
     secondIconButton: q(),

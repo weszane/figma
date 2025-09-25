@@ -23,7 +23,7 @@ import { yH } from "../figma_app/722141";
 import { ViewTypeEnum } from "../figma_app/471068";
 import { SortOrder } from "../figma_app/756995";
 import { Xg, qf, mM } from "../905/375175";
-import { y as _$$y } from "../905/171275";
+import { SizeOption } from "../905/171275";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
 import { E as _$$E2 } from "../905/53857";
@@ -66,7 +66,7 @@ function N(e) {
       className: "tile_drag_image--thumbnailContainer--1rhVM",
       children: jsx(_$$e, {
         tile: e.tile,
-        size: _$$y.SMALL,
+        size: SizeOption.SMALL,
         borderRadius: 4,
         hideUntilLoaded: !1
       })

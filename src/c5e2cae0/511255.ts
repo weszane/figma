@@ -5,7 +5,7 @@ import { ServiceCategories } from "../905/165054";
 import { s as _$$s } from "../905/403855";
 import { buildUploadUrl } from "../figma_app/169182";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
-import { G as _$$G } from "../figma_app/361869";
+import { renderCheckoutDevModeText } from "../figma_app/361869";
 import { CloseButton } from "../905/17223";
 import { ErrorBoundaryCrash } from "../905/751457";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
@@ -19,13 +19,13 @@ import { selectViewAction } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
 import { withTracking } from "../figma_app/831799";
-import { jv, SK, Fq } from "../905/84777";
+import { setupPricesTransform, setupActiveRatesTransform, BillingPriceSource } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { collaboratorSet, designSet } from "../905/332483";
 import { renderRequestErrorInterstitial } from "../905/3140";
 import { CurrencyFormatter, createUserCurrencyFormatter } from "../figma_app/514043";
 import { getFilteredTeamMemberIds } from "../figma_app/598018";
-import { Ju, IX } from "../905/712921";
+import { ProductTierEnum, RenewalTermEnum } from "../905/712921";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N } from "../905/809096";
 import { ModalView } from "../figma_app/918700";
@@ -35,7 +35,7 @@ import { A as _$$A } from "../905/251970";
 import { g as _$$g } from "../905/125190";
 import { e6, Ih } from "../figma_app/617427";
 import { lk } from "../figma_app/109538";
-import { B as _$$B2 } from "../905/380801";
+import { SalesUpsellModalType } from "../905/380801";
 import { B as _$$B3 } from "../905/261906";
 import { b as _$$b } from "../905/723768";
 import { compareProductAccessTypes } from "../figma_app/217457";
@@ -88,7 +88,7 @@ function X({
                 onClick: () => n(showModalHandler({
                   type: lk,
                   data: {
-                    source: _$$B2.ORG_SELF_SERVE_UPGRADE_MODAL
+                    source: SalesUpsellModalType.ORG_SELF_SERVE_UPGRADE_MODAL
                   }
                 })),
                 children: renderI18nText("plan_comparison.campfire.contact_sales")
@@ -112,11 +112,11 @@ function W({
 }) {
   let t = {
     currency: e,
-    tier: Ju.ORG,
-    renewalTerm: IX.YEAR,
-    unit: IX.MONTH
+    tier: ProductTierEnum.ORG,
+    renewalTerm: RenewalTermEnum.YEAR,
+    unit: RenewalTermEnum.MONTH
   };
-  let a = jv({
+  let a = setupPricesTransform({
     billableProductKeys: collaboratorSet,
     baseQuery: t
   });
@@ -247,11 +247,11 @@ function ea(e) {
     currency: P.currency,
     billableProductKey: e,
     billableProductVariantKey: null,
-    tier: Ju.ORG,
-    renewalTerm: IX.YEAR,
-    unit: IX.MONTH
+    tier: ProductTierEnum.ORG,
+    renewalTerm: RenewalTermEnum.YEAR,
+    unit: RenewalTermEnum.MONTH
   }));
-  let O = SK(R, Fq.UPSELL_MODALS);
+  let O = setupActiveRatesTransform(R, BillingPriceSource.UPSELL_MODALS);
   let [D] = handleSuspenseRetainRelease(O);
   if (null === D.data) throw Error("Price data is null");
   let B = D.data;
@@ -368,7 +368,7 @@ function ea(e) {
               className: Q$,
               children: [renderI18nText("org_upgrade.multi_team.figma"), jsx("div", {
                 className: gt,
-                children: jsx(_$$G, {})
+                children: jsx(renderCheckoutDevModeText, {})
               })]
             }), jsx("div", {
               children: renderI18nText("org_upgrade.multi_team.billing_cost_per_month.seat_rename", {

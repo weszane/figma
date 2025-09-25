@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { customHistory } from "../905/612521";
 import { AUTH_INIT } from "../905/194276";
 import { getI18nString } from "../905/303541";
@@ -33,8 +33,8 @@ export function $$_1(e) {
   };
 }
 function h(e) {
-  let t = A();
-  let r = Math.max(0, Math.ceil(A(e).diff(t, "minutes", !0)));
+  let t = dayjs();
+  let r = Math.max(0, Math.ceil(dayjs(e).diff(t, "minutes", !0)));
   if (r >= 60) {
     let e = Math.ceil(r / 60);
     return getI18nString("figjam_try_v2.timer_hours_left", {

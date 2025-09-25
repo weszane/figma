@@ -22,12 +22,12 @@ import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { getPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { C3 } from "../figma_app/790714";
 import { createDeferredPromise } from "../905/263346";
-import { R as _$$R } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { waitForAllPagesForPlugin } from "../905/916933";
 import { handlePluginError } from "../905/753206";
-import { V } from "../905/480825";
+import { PluginImage } from "../905/480825";
 import { U3 } from "../figma_app/737746";
-import { s as _$$s } from "../905/73603";
+import { addRecentlyUsedAction } from "../905/73603";
 import { yh, ov, O8, rj } from "../905/462694";
 import { h as _$$h, H } from "../9410/649740";
 import { wM, FV, h8, w8, nW, yL, ed, Kf, ON, t6, l4, qf, CZ, WL, $8, Io, iu } from "../figma_app/627977";
@@ -325,7 +325,7 @@ class K extends RecordingPureComponent {
       isWidget: !1
     };
     let i = createDeferredPromise();
-    _$$R.instance.enqueue({
+    PluginManager.instance.enqueue({
       mode: "run-forever",
       runPluginArgs: this.runArgs
     });
@@ -469,7 +469,7 @@ class K extends RecordingPureComponent {
             runPluginArgs: t
           }
         }));
-        _$$s({
+        addRecentlyUsedAction({
           displayText: e,
           runPluginArgs: t,
           localFileIdOrPluginId: this.props.pluginLocalFileId ?? this.props.pluginId
@@ -535,7 +535,7 @@ class K extends RecordingPureComponent {
           {
             let n = e[i];
             n || (n = t[i] && getPluginVersion(t[i]));
-            return jsx(V, {
+            return jsx(PluginImage, {
               className: nW,
               plugin: n,
               alt: "plugin icon"

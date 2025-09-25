@@ -78,7 +78,7 @@ import { A as _$$A } from '../905/891805';
 import { bL as _$$bL } from '../905/911410';
 import { A as _$$A3 } from '../905/920165';
 import { q as _$$q } from '../905/932270';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { FONT_SF_PRO_DISPLAY } from '../905/946258';
 import { L as _$$L } from '../905/954291';
 import { calculatePickerPositionLeft } from '../905/959568';
@@ -346,7 +346,7 @@ class eY extends PureComponent {
   }
 }
 eY.defaultProps = {
-  mouseHoverHandler: lQ
+  mouseHoverHandler: noop
 };
 function eJ({
   inputClassName: e,

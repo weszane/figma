@@ -47,7 +47,7 @@ import { openFileAtom, selectCurrentFile, useCurrentFileKey, useFullscreenViewFi
 import { modalTypeAtom } from "../figma_app/386952";
 import { I as _$$I } from "../figma_app/51637";
 import { FEditorType } from "../figma_app/53721";
-import { A as _$$A3 } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { userCreatedAtAtom } from "../figma_app/864723";
 import { selectUserFlag } from "../905/940356";
 import { VisualBellActions } from "../905/302958";
@@ -65,11 +65,11 @@ import { E as _$$E2 } from "../905/453826";
 import { mp as _$$mp, t as _$$t2, tH as _$$tH, Ot, M$, Fy } from "../figma_app/579169";
 import { userFlagExistsAtomFamily, userFlagAtomFamily } from "../figma_app/545877";
 import { UpsellModalType } from "../905/165519";
-import { xp, Q1, Xj } from "../905/472146";
+import { reorderFeatureKeysByPlanTier, StarterChartFeatureKeys, ChartFeatureKey } from "../905/472146";
 import { IR } from "../figma_app/625596";
 import { w as _$$w, y as _$$y } from "../905/129046";
 import { X as _$$X } from "../905/482718";
-import { Q as _$$Q, R as _$$R } from "../905/11928";
+import { Ui3PositionType, NotModalType } from "../905/11928";
 import { OS } from "../9410/635666";
 import { rq as _$$rq } from "../905/425180";
 import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
@@ -111,7 +111,7 @@ import { zP, Uj, SS, ZQ } from "../figma_app/330088";
 import { s as _$$s3 } from "../figma_app/354567";
 import { QL, EM } from "../905/609392";
 import { APILoadingStatus } from "../905/520829";
-import { k as _$$k2 } from "../905/585996";
+import { CustomSpacer } from "../905/585996";
 import { x as _$$x } from "../905/211326";
 import { lR, $z, Me, c as _$$c2 } from "../figma_app/617427";
 import { Q as _$$Q2 } from "../5132/668270";
@@ -149,7 +149,7 @@ import { w as _$$w4 } from "../3276/726467";
 import { b as _$$b3 } from "../3276/369349";
 import { C as _$$C } from "../1250/50098";
 import { NuxOnboardingOverlay } from "../4452/529989";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { handleAtomEvent } from "../905/502364";
 import { Dv, Du, NJ } from "../figma_app/419216";
 import { O as _$$O } from "../9410/435916";
@@ -219,7 +219,7 @@ import { isNotAllowedEmail } from "../figma_app/416935";
 import { isOssSalesExperimentValueMatch, markOssSalesExperimentChecked } from "../figma_app/323326";
 import { AutoLayout } from "../905/470281";
 import { lk } from "../figma_app/109538";
-import { B as _$$B3 } from "../905/380801";
+import { SalesUpsellModalType } from "../905/380801";
 import { Bq } from "../figma_app/482142";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
@@ -723,7 +723,7 @@ function eD() {
       aspectRatio: 1.75
     }),
     onClose: complete,
-    position: _$$Q.BOTTOM_RIGHT,
+    position: Ui3PositionType.BOTTOM_RIGHT,
     primaryCta: {
       label: renderI18nText("upsell.advanced_prototyping.see_plans"),
       type: "button",
@@ -734,7 +734,7 @@ function eD() {
             upsellSource: UpsellModalType.ADVANCED_PROTOTYPING_UPSELL,
             teamId: n?.team?.id,
             openCheckoutInNewTab: !0,
-            featureList: xp(Q1.filter(e => e !== Xj.AUDIO_CONVERSATIONS), Xj.ADVANCED_PROTOTYPING)
+            featureList: reorderFeatureKeysByPlanTier(StarterChartFeatureKeys.filter(e => e !== ChartFeatureKey.AUDIO_CONVERSATIONS), ChartFeatureKey.ADVANCED_PROTOTYPING)
           }
         }));
         complete();
@@ -1071,7 +1071,7 @@ function tC() {
       src: buildUploadUrl("cedfb41ea4da3cb80d5d062e5b648aa1d6a5cf1b")
     }),
     onClose: p,
-    position: _$$Q.BOTTOM_RIGHT,
+    position: Ui3PositionType.BOTTOM_RIGHT,
     primaryCta: {
       label: renderI18nText("desktop_download_modal_prompt.get_the_desktop_app"),
       type: "button",
@@ -1171,7 +1171,7 @@ function tV({
   if (useEffect(() => {
     c && e();
   }, [c, e]), !i || !a) return null;
-  let u = _$$A3(a).isAfter(_$$A3().subtract(5, "minutes"));
+  let u = dayjs(a).isAfter(dayjs().subtract(5, "minutes"));
   return jsx("div", {
     className: "figjam_try_confirm_save_steps--modalContent--DezcS",
     children: jsxs("div", {
@@ -1179,7 +1179,7 @@ function tV({
       children: [jsx("h1", {
         className: "figjam_try_confirm_save_steps--headline--RRPzl text--fontPos20--Bcz97 text--_fontBase--QdLsd",
         children: renderI18nText("figjam_try.save_modal.headline")
-      }), jsx(_$$k2, {
+      }), jsx(CustomSpacer, {
         multiple: 1
       }), jsx("p", {
         className: "figjam_try_confirm_save_steps--description--bpGw9 text--fontPos13--xW8hS text--_fontBase--QdLsd",
@@ -1193,7 +1193,7 @@ function tV({
             children: renderI18nText("figjam_try.save_modal.file_duplicates")
           })
         })
-      }), jsx(_$$k2, {
+      }), jsx(CustomSpacer, {
         multiple: 3
       }), jsx(lR, {
         onClick: () => {
@@ -1296,7 +1296,7 @@ function t$(e) {
               className: "figjam_try_confirm_save--googleTryDeviceAlreadyClaimedHeader--vNLRA text--fontPos20--Bcz97 text--_fontBase--QdLsd",
               children: renderI18nText("figjam_try.already_claimed_modal.header")
             })
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 1
           }), jsx("div", {
             className: tZ,
@@ -1309,7 +1309,7 @@ function t$(e) {
                 })
               })
             })
-          }), jsx(_$$k2, {
+          }), jsx(CustomSpacer, {
             multiple: 3
           }), jsx(lR, {
             onClick: e.onClose,
@@ -1569,7 +1569,7 @@ function i_() {
     }),
     isShowing,
     onClose: complete,
-    position: _$$Q.BOTTOM_RIGHT,
+    position: Ui3PositionType.BOTTOM_RIGHT,
     primaryCta: {
       label: renderI18nText("fullscreen.link_shortcuts_onboarding.got_it"),
       type: "button",
@@ -1655,7 +1655,7 @@ function ik() {
   let t = useAtomWithSubscription(iI);
   let i = useSelector(e => e.userAnalyticsData?.is_active_mobile_user);
   let o = useSelector(e => e.user?.created_at);
-  let l = _$$A3(o).add(14, "day").isSameOrAfter(_$$A3());
+  let l = dayjs(o).add(14, "day").isSameOrAfter(dayjs());
   let {
     isShowing,
     show,
@@ -1691,7 +1691,7 @@ function ik() {
     onClose: () => {
       complete();
     },
-    position: _$$Q.BOTTOM_RIGHT,
+    position: Ui3PositionType.BOTTOM_RIGHT,
     primaryCta: {
       label: renderI18nText("mobile_download_prompts.email_me"),
       type: "button",
@@ -1997,7 +1997,7 @@ function rl({
     onTargetLost: t,
     targetKey: _$$pb,
     trackingContextName: "Share to Google Classroom Share Option Pointer",
-    zIndex: _$$R.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 let rd = "seen_figjam_share_to_google_classroom_existing_user_onboarding";
@@ -2133,7 +2133,7 @@ function ry({
     isShowing: i,
     children: useMemo(() => e.map(e => createElement(e, {
       onClickPrimaryCta: next,
-      onClose: lQ,
+      onClose: noop,
       onManualDismiss: t,
       isShowing: i
     })), [next, t, i, e])
@@ -4866,7 +4866,7 @@ function ny() {
   }, [t, e]);
   return jsx(nh, {
     onClickPrimaryCta: d,
-    onClose: lQ,
+    onClose: noop,
     onManualDismiss: d,
     isShowing
   });
@@ -5049,13 +5049,13 @@ function nB() {
     let e = i6.map(e => jsx(e, {
       isShowing,
       onClickPrimaryCta: next,
-      onClose: lQ,
+      onClose: noop,
       onManualDismiss: v
     }, e.name));
     m && e.push(jsx(nF, {
       isShowing,
       onClickPrimaryCta: next,
-      onClose: lQ,
+      onClose: noop,
       onManualDismiss: v,
       testId: "open_figjam_tutorial_overlay"
     }, "OpenFigJamTutorialOverlay"));
@@ -7052,7 +7052,7 @@ let sr = registerModal(function ({
       i(showModalHandler({
         type: lk,
         data: {
-          source: _$$B3.LIBRARY_DUPLICATE_OSS_SALES_UPSELL,
+          source: SalesUpsellModalType.LIBRARY_DUPLICATE_OSS_SALES_UPSELL,
           overridePlaceholderText: getI18nString("oss_sales_upsell_overlay.contact_sales_form.text_placeholder")
         }
       }));
@@ -7155,7 +7155,7 @@ function sa({
       return jsx("div", {});
     },
     trackingContextName: "oss_sales_upsell_overlay",
-    onClickPrimaryCta: lQ,
+    onClickPrimaryCta: noop,
     onClose: l.complete,
     onManualDismiss: l.complete,
     testId: "oss_sales_upsell_overlay_test_id"
@@ -7882,7 +7882,7 @@ function oo() {
       }),
       description: renderI18nText("rcs.figjam_diagram_onboarding.connectors"),
       targetKey: BC,
-      onClose: lQ
+      onClose: noop
     }, {
       title: renderI18nText("rcs.figjam_diagram_onboarding.shapes_title"),
       trackingContextName: or.shapes,
@@ -7894,7 +7894,7 @@ function oo() {
       }),
       description: renderI18nText("rcs.figjam_diagram_onboarding.shapes"),
       targetKey: BC,
-      onClose: lQ
+      onClose: noop
     }, {
       title: renderI18nText("rcs.figjam_diagram_onboarding.templates_title"),
       trackingContextName: or.templates,
@@ -7918,7 +7918,7 @@ function oo() {
           e.complete();
         }
       },
-      onClose: lQ
+      onClose: noop
     }], [t, e]);
   }(t);
   _$$h2(() => {
@@ -8162,7 +8162,7 @@ function oG(e) {
   let u = o.branchMatchesRepo;
   let p = o.linkExpiresAt;
   let h = Ch(o.filePermissionsData, e.org);
-  let m = M3(_$$A3(p));
+  let m = M3(dayjs(p));
   let f = !u && c ? renderI18nText("link_expired_overlay.different_branch_permissions_header") : renderI18nText("link_expired_overlay.header");
   t = u ? renderI18nText("link_expired_overlay.same_branch_permissions_body", {
     formattedTimestamp: m,
@@ -8314,7 +8314,7 @@ function o2({
     title: renderI18nText("slides.templates.pro_templates_announcement.header"),
     trackingContextName: "Slides Pro Templates Announcement",
     userFlagOnShow: "seen_slides_pro_templates_announcement",
-    zIndex: _$$R.MODAL
+    zIndex: NotModalType.MODAL
   });
 }
 function o7() {
@@ -8392,7 +8392,7 @@ export let $$le0 = memo(function ({
   (function (e) {
     let t = useAtomWithSubscription(_$$a3);
     let i = useSelector(e => e.user?.created_at);
-    let r = !!i && _$$A3("2023-05-01").isBefore(i);
+    let r = !!i && dayjs("2023-05-01").isBefore(i);
     useEffect(() => {
       if (!r) {
         e.current = !0;
@@ -8426,7 +8426,7 @@ export let $$le0 = memo(function ({
   (function (e) {
     let t = useDispatch();
     let i = useAtomWithSubscription(userCreatedAtAtom);
-    let r = null != i && _$$A3("2023-10-31").isBefore(i);
+    let r = null != i && dayjs("2023-10-31").isBefore(i);
     let a = !!selectUserFlag("has_opened_design_editor");
     let [o, l] = useAtomValueAndSetter(eu);
     useEffect(() => {

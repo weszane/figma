@@ -1,7 +1,7 @@
 import { R } from "../905/531474";
 import { ComponentPropsAiCPPBindings } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
-import { Mo } from "../905/913055";
+import { getMatchingNodesToUpdateForQuery } from "../905/913055";
 import { hm } from "../905/487011";
 import { $J, o2, sd, Cq } from "../905/278499";
 export function $$d2(e) {
@@ -20,7 +20,7 @@ export function $$c1(e) {
   });
   e.forEach(e => {
     if (!e || !e.isAlive) return;
-    let i = Mo(e, "text-data");
+    let i = getMatchingNodesToUpdateForQuery(e, "text-data");
     t.set(e.guid, i);
   });
   return {

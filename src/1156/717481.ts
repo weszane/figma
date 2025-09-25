@@ -10,7 +10,7 @@ import { setupToggleButton } from "../905/167712";
 import { _ as _$$_ } from "../905/263184";
 import { _ as _$$_2 } from "../905/410717";
 import { j as _$$j } from "../905/519202";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { b as _$$b } from "../905/966382";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -215,11 +215,11 @@ let F = {
     $$css: !0
   },
   textBodyMediumStrong: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   textBodyMediumSecondary: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     $$css: !0
   }

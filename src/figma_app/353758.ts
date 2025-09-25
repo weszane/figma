@@ -17,7 +17,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { executeInIgnoreUndoRedoScope } from "../905/955316";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { Ts } from "../905/994545";
-import { A as _$$A } from "../905/929620";
+import { generateShimmerOverlay } from "../905/929620";
 import { ks, Vm } from "../figma_app/838407";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { H as _$$H } from "../figma_app/414056";
@@ -522,7 +522,7 @@ export let $$eu0 = new class {
       Vm(e, createElement(O, {}));
       this._codeSnapshotOverlays.add(e);
     } else if (t === SnapshotStatus.SNAPSHOTTING || t === SnapshotStatus.INITIAL) {
-      if (this.isCodeSnapshotStale(t, i)) l(M.STALE);else if (Vm(e, createElement(_$$A, {})), this._codeSnapshotOverlays.add(e), i) {
+      if (this.isCodeSnapshotStale(t, i)) l(M.STALE);else if (Vm(e, createElement(generateShimmerOverlay, {})), this._codeSnapshotOverlays.add(e), i) {
         let t = setTimeout(() => {
           this._staleSnapshotTimers.$$delete(e);
           ks(e);

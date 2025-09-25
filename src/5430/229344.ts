@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { C } from "../figma_app/514836";
@@ -41,7 +41,7 @@ export function $$p1({
           resource: e,
           resourceContent: t,
           is16to9AspectRatio: p
-        }), jsx(_$$a, {
+        }), jsx(IntersectionSentinel, {
           className: sR,
           onIntersectionChange: e => {
             h || u(!e.isIntersecting);

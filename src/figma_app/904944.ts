@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import s from "classnames";
 var o = s;
@@ -58,7 +58,7 @@ let u = {
     whiteSpace: "xuxw1ft",
     width: "xh8yej3",
     textAlign: "xdpxx8g",
-    ...g.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     $$css: !0
   },
   selectedItemText: {
@@ -69,7 +69,7 @@ let u = {
     whiteSpace: "xuxw1ft",
     width: "xh8yej3",
     textAlign: "xdpxx8g",
-    ...g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     $$css: !0
   }
 };

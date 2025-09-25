@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sortByPropertyWithOptions, MAX_LENGTH } from "../figma_app/656233";
 import { ButtonPrimitive } from "../905/632989";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { l as _$$l } from "../905/716947";
 import { Ay } from "@stylexjs/stylex";
 import { useMemoStable } from "../905/19536";
@@ -53,7 +53,7 @@ let V = "library_items_compact_view--fullWidth--wDe9K";
 let Y = "library_items_compact_view--hasFocusOutline--rLh3r";
 let J = {
   standardizedLibraryTitleStyle: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1akne3o",
     textAlign: "xdpxx8g",
     textOverflow: "xlyipyv",
@@ -180,7 +180,7 @@ let er = {
     $$css: !0
   },
   bodyLargeSectionTitleText: {
-    ..._$$g.textBodyLargeStrong,
+    ...textDisplayConfig.textBodyLargeStrong,
     whiteSpace: "xuxw1ft",
     textOverflow: "xlyipyv",
     overflow: "xb3r6kr",
@@ -189,7 +189,7 @@ let er = {
     $$css: !0
   },
   bodyMediumSectionTitleText: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     whiteSpace: "xuxw1ft",
     textOverflow: "xlyipyv",
     overflow: "xb3r6kr",

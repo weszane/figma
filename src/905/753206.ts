@@ -168,7 +168,7 @@ export async function closeCurrentPlugin(params?: any): Promise<void> {
  * Atom reset handler for plugin errors.
  * (Original: $$C12)
  */
-export async function handlePluginError(error: any) {
+export async function handlePluginError(error?: any) {
   await closeCurrentPlugin(error ? {
     message: `${error}`,
     isError: true

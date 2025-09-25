@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { U1 } from "../figma_app/343967";
 import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -22,7 +22,7 @@ import { Zr } from "../figma_app/678782";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { KindEnum } from "../905/129884";
 import { q as _$$q } from "../figma_app/57000";
-import { P4 } from "../905/18800";
+import { consentCounterAtom } from "../905/18800";
 import { isMobileCommunity } from "../figma_app/471982";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { U as _$$U } from "../905/492359";
@@ -184,7 +184,7 @@ let $$eh0 = memo(function () {
   let e = useDispatch();
   let t = isSitesFileType();
   let r = useCanUseDevModeDemoFile();
-  let i = _$$C()?.setBottomRightToolsNode || lQ;
+  let i = _$$C()?.setBottomRightToolsNode || noop;
   let u = U1(i);
   let _ = _$$v();
   let h = getFeatureFlags().dev_mode_demo_file || getFeatureFlags().logged_out_dev_mode_demo_file;
@@ -209,7 +209,7 @@ let $$eh0 = memo(function () {
   let F = useIsFigmakeFullscreenPreview(L);
   let j = !!g?.shouldOptimizeForIpadApp || z4.getIsExtension() && isDevHandoff || F || w;
   let U = $$eg1();
-  let H = useAtomWithSubscription(P4);
+  let H = useAtomWithSubscription(consentCounterAtom);
   let W = getObservableValue(AppStateTsApi?.uiState().inProductHelpSidePanelWidth, 0);
   if (isMobileCommunity() || !_ && j) return null;
   let q = jsxs("div", {

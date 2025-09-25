@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId, useRef, useState, useEffect, Fragment as _$$Fragment, useCallback, forwardRef, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ServiceCategories } from "../905/165054";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { ButtonPrimitive } from "../905/632989";
@@ -11,18 +11,18 @@ import { t as _$$t } from "../905/150656";
 import { s as _$$s } from "../905/403855";
 import { B as _$$B } from "../905/950875";
 import { setupThemeContext } from "../905/614223";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import b from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { getJobRoleDisplay } from "../3973/538504";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { P as _$$P } from "../905/347284";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
@@ -564,7 +564,7 @@ function e$(e) {
 }
 let eB = {
   date: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     marginLeft: "x1iog12x",
     marginInlineStart: null,
     marginInlineEnd: null,
@@ -574,11 +574,11 @@ let eB = {
     $$css: !0
   },
   sectionHeader: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   longText: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1akne3o",
     $$css: !0
   }
@@ -822,7 +822,7 @@ function eH(e) {
     label: getI18nString("member_flyout_modal.job_title_select_label"),
     options: [a],
     selectedOption: a.key,
-    onChange: lQ,
+    onChange: noop,
     disabled: !0
   });
 }
@@ -840,7 +840,7 @@ function eY(e) {
       text: getI18nString("member_flyout_modal.billing_interval.annually")
     }],
     selectedOption: e.billingInterval,
-    onChange: lQ,
+    onChange: noop,
     disabled: !0
   }) : null;
 }
@@ -875,7 +875,7 @@ function eK(e) {
     let t = useDispatch();
     let a = !!e;
     return useCallback(n => {
-      if (!a) return lQ;
+      if (!a) return noop;
       t(_$$rq({
         emails: [n],
         resourceType: FResourceCategoryType.TEAM,
@@ -1085,7 +1085,7 @@ function e0(e) {
       })]
     }), jsxs(_$$P, {
       dataTestId: "activity-log-table-body",
-      children: [jsx(_$$a, {
+      children: [jsx(IntersectionSentinel, {
         onIntersectionChange: e => {
           u(!e.isIntersecting);
         }
@@ -1099,12 +1099,12 @@ function e0(e) {
             children: [jsx(TextWithTruncation, {
               color: "default",
               children: renderI18nText("recent_activity_modal.activity_log_created_at", {
-                creationDate: _$$A(e.created_at).toDate()
+                creationDate: dayjs(e.created_at).toDate()
               })
             }), jsx(TextWithTruncation, {
               color: "secondary",
               children: renderI18nText("recent_activity_modal.activity_log_created_at_time", {
-                creationDate: _$$A(e.created_at).toDate()
+                creationDate: dayjs(e.created_at).toDate()
               })
             })]
           }), jsx("div", {

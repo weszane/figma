@@ -41,7 +41,7 @@ import { nZ, tX as _$$tX, O1, AG } from "../905/28111";
 import { s2 } from "../905/107436";
 import { mu, Rh, S7 } from "../figma_app/259578";
 import { SY } from "../figma_app/200284";
-import { b as _$$b } from "../905/22449";
+import { RadioPrimitiveRoot } from "../905/22449";
 import { c$ } from "../905/575478";
 import { ButtonPrimitive } from "../905/632989";
 import { H as _$$H } from "../905/762413";
@@ -77,7 +77,7 @@ import { x7 } from "../figma_app/492929";
 import { X7 } from "../905/713167";
 import { isNullish } from "../figma_app/95419";
 import { D as _$$D, J as _$$J } from "../905/225412";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { A as _$$A } from "../905/442873";
 import { bR, UV, Do, PC } from "../905/438367";
 import { Id, fI, Zk } from "../figma_app/626177";
@@ -268,7 +268,7 @@ function eC({
       children: jsx(ey, {
         selectVideoFill: () => s("VIDEO")
       })
-    }), jsx(_$$b, {
+    }), jsx(RadioPrimitiveRoot, {
       value: e,
       onChange: s,
       className: eb,
@@ -402,9 +402,9 @@ function eV() {
 }
 let eK = createContext({
   isLoading: !1,
-  registerItem: lQ,
-  unregisterItem: lQ,
-  setLoading: lQ
+  registerItem: noop,
+  unregisterItem: noop,
+  setLoading: noop
 });
 function eY({
   children: e

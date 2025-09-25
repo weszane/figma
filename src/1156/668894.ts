@@ -3,7 +3,7 @@ import { k as _$$k } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { Button } from "../905/521428";
 import { e } from "../905/149844";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { setupResourceAtomHandler } from "../figma_app/566371";
@@ -146,11 +146,11 @@ function P({
 }
 let U = {
   textBodyMediumStrong: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   textBodyMediumSecondary: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     $$css: !0
   }
@@ -244,7 +244,7 @@ function H({
 }
 let W = {
   textBodyMedium: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   }
 };
@@ -567,22 +567,22 @@ function Z() {
 }
 let Q = {
   textBodyMediumSecondary: {
-    ..._$$g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1n0bwc9",
     $$css: !0
   },
   textBodyMediumSecondaryStrong: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     color: "x1n0bwc9",
     $$css: !0
   },
   textBodyMediumSuccessStrong: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     color: "xq6u9c4",
     $$css: !0
   },
   textBodyMediumStrong: {
-    ..._$$g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   }
 };

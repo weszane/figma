@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { H8, Pf } from "../905/590952";
 import { isFullscreenView } from "../figma_app/976749";
 import { getVisibleTheme } from "../905/640017";
@@ -36,7 +36,7 @@ export function $$m0({
   let f = getProductIcon(e);
   return jsxs("div", {
     className: "avatar_with_product_background--imgComponent--uUymq",
-    children: [jsx(oW, {
+    children: [jsx(WAFImage, {
       src: getProductBackgroundImgUrl(e, h),
       className: "avatar_with_product_background--imgPositioning--M---c",
       "aria-hidden": !0

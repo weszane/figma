@@ -26,10 +26,10 @@ import { h as _$$h } from "../figma_app/198885";
 import { h1 } from "../905/986103";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
-import { L as _$$L } from "../905/16143";
+import { FolderPreview } from "../905/16143";
 import { n as _$$n } from "../905/502036";
 import { BV } from "../905/811749";
-import { g as _$$g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Wi, JR } from "../figma_app/162641";
 import { t as _$$t2 } from "../905/53773";
 import { x as _$$x } from "../905/98916";
@@ -57,7 +57,7 @@ function B({
   }) : jsx(TextWithTruncation, {
     truncate: !0,
     children: jsx("span", {
-      ...Ay.props(_$$g.textBodyMedium),
+      ...Ay.props(textDisplayConfig.textBodyMedium),
       children: getI18nString("file_browser.folder.number_of_files", {
         formattedNumFiles: _$$t2(i.data),
         numFiles: i.data
@@ -117,7 +117,7 @@ let Y = (e, t, i) => ({
     itemIndex: a
   }) => {
     let s = !!i && r.team_id === i.teamId && i.isLockedTeam;
-    return jsx(_$$L, {
+    return jsx(FolderPreview, {
       folder: r,
       dataOnboardingKey: a === t ? e : "",
       showViewOnlyLabel: s

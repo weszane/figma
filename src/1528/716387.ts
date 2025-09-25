@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, useMemo, useContext, useState, useRef, useLayoutEffect, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { z as _$$z } from "../vendor/999105";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { TabLoop } from "../905/718764";
 import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
@@ -273,7 +273,7 @@ function eR(e, t, n, a) {
         }
       });
     }, [e, t, n]);
-    return a ? i : lQ;
+    return a ? i : noop;
   }();
   let d = function () {
     let e = _$$Z("canvas_search_navigate");
@@ -290,7 +290,7 @@ function eR(e, t, n, a) {
         }
       });
     }, [e, t, n]);
-    return a ? i : lQ;
+    return a ? i : noop;
   }();
   let c = useContext(EA);
   return useCallback(l => {
@@ -584,7 +584,7 @@ function eM({
         }
       });
     }, [t, n, a, i, e]);
-    return o ? d : lQ;
+    return o ? d : noop;
   }(J, Q);
   let er = function () {
     let e = _$$Z("canvas_search_navigate");
@@ -597,7 +597,7 @@ function eM({
         }
       });
     }, [e, t]);
-    return n ? a : lQ;
+    return n ? a : noop;
   }();
   let [ei, es] = function (...e) {
     let [t, n] = useState(() => e.reduce((e, t) => (e[t] = !0, e), {}));
@@ -795,7 +795,7 @@ function eM({
           }
         });
       }, [t, n, a, i, e]);
-      return o ? d : lQ;
+      return o ? d : noop;
     }(n, a);
     let u = useContext(EA);
     let p = eR(e, i, eL, o);
@@ -1080,7 +1080,7 @@ function eG({
       t.preventDefault();
       t.stopPropagation();
     },
-    onDoubleClick: p || R ? lQ : u,
+    onDoubleClick: p || R ? noop : u,
     onMouseEnter: () => {
       e.pageId === zeroSessionLocalIDString || e.pageId !== n ? _(null) : _({
         nodeGuid: e.resultGuid,

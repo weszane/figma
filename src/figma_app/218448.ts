@@ -5,7 +5,7 @@ import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
-import { r } from "../905/12476";
+import { hideAllPickersAndPreviews } from "../905/12476";
 import { isValidValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
 import { l6, c$ } from "../905/794875";
@@ -73,7 +73,7 @@ function y(e) {
           onChange: e => {
             onSelectProperty(property, e);
           },
-          onMouseDown: () => dispatch(r),
+          onMouseDown: () => dispatch(hideAllPickersAndPreviews),
           property: A,
           recordingKey: generateRecordingKey(e, `select-${property}`),
           children: [...x].map(t => jsx(c$, {

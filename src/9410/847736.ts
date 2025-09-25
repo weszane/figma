@@ -38,7 +38,7 @@ import { FDocumentType } from "../905/862883";
 import { cd } from "../905/381612";
 import { ZW } from "../figma_app/861982";
 import { _ as _$$_2, Q as _$$Q2 } from "../7222/460441";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { SvgComponent } from "../905/714743";
 import { NH, gp } from "../figma_app/973927";
 import { A as _$$A } from "../6828/625002";
@@ -46,7 +46,7 @@ import { me, Tn, GM, HE, m_, qr, Vg, Fj, eg as _$$eg } from "../9410/148230";
 import { setupResourceAtomHandler } from "../905/713695";
 import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { ServiceCategories } from "../905/165054";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { logInfo, logError } from "../905/714362";
@@ -399,7 +399,7 @@ function eo({
         children: i.map(e => jsx(AK, {
           template: e
         }, NH(e)))
-      }), jsx(_$$a, {
+      }), jsx(IntersectionSentinel, {
         onIntersectionChange: ({
           isIntersecting: e
         }) => {
@@ -1110,8 +1110,8 @@ function to({
       className: cssBuilderInstance.px16.overflowHidden.$,
       children: jsx(oJ, {})
     }), d === Ji.OVERLAY_MODAL && !c && jsx(tt, {
-      createOutline: lQ,
-      addAllSlides: lQ,
+      createOutline: noop,
+      addAllSlides: noop,
       disabled: !0
     })]
   }) : jsx(tl, {
@@ -1288,7 +1288,7 @@ function th({
     }) : void 0,
     children: [t.map(e => jsx(AK, {
       template: e
-    }, gp(e))), jsx(_$$a, {
+    }, gp(e))), jsx(IntersectionSentinel, {
       onIntersectionChange: i
     })]
   });

@@ -1,6 +1,6 @@
 import { centsToDollars, MIN_PRICE, MAX_PRICE, isRatioHigh, isGreater } from "../figma_app/808294";
-import { A } from "../905/17894";
-import { Lz } from "../905/497882";
+import { unsetSymbol } from "../905/17894";
+import { getFieldValueOrDefault } from "../905/497882";
 import { isResourcePendingPublishing } from "../figma_app/777551";
 import { Kc, Fh } from "../905/448740";
 import { isWidgetOrPlugin } from "../figma_app/45218";
@@ -59,7 +59,7 @@ export let $$u1 = {
         currentValue: c
       }
     });
-    let p = Lz(e, void 0);
+    let p = getFieldValueOrDefault(e, void 0);
     !p || "user_id" in p || u.push({
       key: "AUTHOR_MUST_BE_USER",
       data: {
@@ -76,7 +76,7 @@ export let $$u1 = {
       let c = [];
       if (!isResourcePendingPublishing(e) && !Kc(t, e)) {
         let t = e.monetized_resource_metadata?.price;
-        i && Lz(i, void 0) && t && isRatioHigh(t / 100, r) && c.push({
+        i && getFieldValueOrDefault(i, void 0) && t && isRatioHigh(t / 100, r) && c.push({
           key: "PRICE_INCREASE_OUT_OF_RANGE",
           data: {}
         });
@@ -166,7 +166,7 @@ export function $$m3(e) {
     existingResourceContent,
     localExtension
   } = e;
-  publishRoleField && !Lz(publishRoleField, void 0)?.is_public && t.push({
+  publishRoleField && !getFieldValueOrDefault(publishRoleField, void 0)?.is_public && t.push({
     key: "CANNOT_SELL_PRIVATE_EXTENSION",
     data: {
       existingResourceContent
@@ -193,7 +193,7 @@ export function $$m3(e) {
   return t;
 }
 export function $$h5(e) {
-  return e.currentValue !== A && 0 !== e.currentValue;
+  return e.currentValue !== unsetSymbol && 0 !== e.currentValue;
 }
 function g(e) {
   return !e.monetized_resource_metadata?.price;

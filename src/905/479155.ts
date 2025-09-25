@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, createRef, useContext, useEffect, useCallback, useRef, useId, useState, useLayoutEffect } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { generateUUIDv4 } from "../905/871474";
 import { Um } from "../905/848862";
 class l {
@@ -41,7 +41,7 @@ export class $$d6 {
     this.items = [];
     this.listeners = new Map();
   }
-  register(e, t = lQ) {
+  register(e, t = noop) {
     null === e.ref.current || this.items.findIndex(t => t.id === e.id) > -1 || (this.items = [...this.items, e].sort((e, t) => {
       var i;
       return e.ref.current && t.ref.current ? (i = e.ref.current, t.ref.current.compareDocumentPosition(i) & Node.DOCUMENT_POSITION_PRECEDING) ? -1 : 1 : 0;
@@ -71,7 +71,7 @@ export class $$d6 {
 let $$c5 = createContext({
   tracker: new $$d6(),
   renderId: 0,
-  setRenderId: lQ
+  setRenderId: noop
 });
 let $$u3 = createContext({
   trackerRef: createRef(),

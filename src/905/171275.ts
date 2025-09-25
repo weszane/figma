@@ -1,4 +1,28 @@
-var $$n1 = (e => (e.SMALL = "small", e.DEFAULT = "default", e))($$n1 || {});
-var $$r0 = (e => (e.DESIGN = "design", e.WHITEBOARD = "whiteboard", e.DEFAULT_DESIGN = "default_design", e.DEFAULT_WHITEBOARD = "default_whiteboard", e.OFFLINE = "offline", e.SLIDES = "slides", e.PROTOTYPE = "prototype", e.SITES = "sites", e.COOPER = "cooper", e))($$r0 || {});
-export const F = $$r0;
-export const y = $$n1;
+/**
+ * Enum for size options.
+ * @originalName $$n1
+ */
+export enum SizeOption {
+  SMALL = "small",
+  DEFAULT = "default",
+}
+
+/**
+ * Enum for design types.
+ * @originalName $$r0
+ */
+export enum DesignsList {
+  DESIGN = "design",
+  WHITEBOARD = "whiteboard",
+  DEFAULT_DESIGN = "default_design",
+  DEFAULT_WHITEBOARD = "default_whiteboard",
+  OFFLINE = "offline",
+  SLIDES = "slides",
+  PROTOTYPE = "prototype",
+  SITES = "sites",
+  COOPER = "cooper",
+}
+
+// Refactored exports to match new names
+export const F = DesignsList; // $$r0
+export const y = SizeOption; // $$n1

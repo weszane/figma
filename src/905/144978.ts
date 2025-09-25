@@ -6,12 +6,12 @@ import { EventShield } from "../905/821217";
 import l from "classnames";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
-import { U } from "../905/331038";
-import { w as _$$w } from "../905/113805";
-import { Lz, Zc } from "../905/497882";
+import { findFirstResult } from "../905/331038";
+import { getValidationErrors } from "../905/113805";
+import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { EM } from "../905/175462";
 import { trimOrEmpty } from "../figma_app/740025";
-import { A as _$$A } from "../905/567946";
+import { FieldContainer } from "../905/567946";
 import { Dq, _Z, z3 } from "../905/235660";
 var d = l;
 let y = e => {
@@ -39,9 +39,9 @@ let $$b0 = forwardRef(function ({
   onTouched: i
 }, a) {
   let l = useRef(null);
-  let b = _$$w(e, !t);
-  let v = U(b, y);
-  let I = trimOrEmpty(Lz(e, "")).length;
+  let b = getValidationErrors(e, !t);
+  let v = findFirstResult(b, y);
+  let I = trimOrEmpty(getFieldValueOrDefault(e, "")).length;
   let E = useId();
   let x = `${E}-input`;
   let S = `${E}-character-count`;
@@ -51,7 +51,7 @@ let $$b0 = forwardRef(function ({
       l.current?.focus(e);
     }
   }), []);
-  return jsx(_$$A, {
+  return jsx(FieldContainer, {
     label: getI18nString("community.general.name"),
     labelHtmlFor: x,
     afterLabelContent: jsxs("div", {
@@ -85,13 +85,13 @@ let $$b0 = forwardRef(function ({
           [z3]: !!v
         }),
         dataTestId: "resource-publishing-name-input",
-        disabled: !Zc(e),
+        disabled: !canSetFieldValue(e),
         id: x,
         onChange: t => {
           i?.();
           e.setValue?.(t.currentTarget.value);
         },
-        value: Lz(e, "")
+        value: getFieldValueOrDefault(e, "")
       })
     })
   });

@@ -25,7 +25,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { R as _$$R } from "../905/792510";
-import { W as _$$W } from "../905/841666";
+import { getCommunityHubLikeStatus } from "../905/841666";
 import { Lj } from "../figma_app/835219";
 import { buildFullCommunityUrl, getCurrentVersion } from "../figma_app/471982";
 import { canvasGridAtom } from "../905/618447";
@@ -84,7 +84,7 @@ import { A as _$$A0 } from "../905/440661";
 import { A as _$$A1 } from "../905/826099";
 import { A as _$$A10 } from "../905/560753";
 import { Q as _$$Q } from "../905/350210";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { P as _$$P } from "../905/392438";
 import { A as _$$A11 } from "../905/972270";
 import { A as _$$A12 } from "../905/676119";
@@ -180,7 +180,7 @@ function eH({
         maxCreatorsPerResource: MAX_PUBLISHERS_PER_RESOURCE
       }),
       onChange: t,
-      validateToken: lQ,
+      validateToken: noop,
       TokenComponent: eW,
       SearchResultComponent: eK,
       getSearchResults: i,
@@ -1365,7 +1365,7 @@ let $$tl0 = registerModal(function (e) {
     let t = e.figFilePublishedAsHubFile[i.key];
     return t ? e.hubFiles[t] ?? null : null;
   });
-  let a = _$$W(n?.id, ResourceTypeNoComment.HUB_FILE);
+  let a = getCommunityHubLikeStatus(n?.id, ResourceTypeNoComment.HUB_FILE);
   let o = useAtomWithSubscription(_g);
   let l = Xr(pz);
   return i ? _$$W2(i.editor_type) ? jsx(_$$T, {

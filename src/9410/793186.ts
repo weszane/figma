@@ -61,7 +61,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { L as _$$L } from "../905/657783";
 import { ConfirmationModal2, ModalView } from "../figma_app/918700";
 import { jE, yl, DD } from "../figma_app/639088";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 var P = M;
 let q = "on_canvas_name_editor--frameNameInput--VpLPf sf_pro--uiFontWithSFProFallback--m-p9V";
 function X(e, t, i) {
@@ -786,7 +786,7 @@ let eA = registerModal(function (e) {
     size: "small",
     className: yl,
     disableClickOutsideToHide: !0,
-    hide: lQ,
+    hide: noop,
     children: [jsx("div", {
       className: DD,
       children: renderI18nText("file_migration.updating.title")

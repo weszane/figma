@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, useMemo, useId, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { IconButton } from "../905/443068";
 import { setupDragHandler } from "../905/97346";
 import { O as _$$O } from "../905/487602";
@@ -40,7 +40,7 @@ import { AutoLayout } from "../905/470281";
 import { rp, Zk, fI, U8, JU, nV } from "../figma_app/626177";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { ex as _$$ex } from "../905/524523";
+import { registerTooltip } from "../905/524523";
 import { A as _$$A2 } from "../svg/420906";
 import { j as _$$j, u as _$$u } from "../642/638075";
 import { rC } from "../5421/658325";
@@ -81,7 +81,7 @@ import { c as _$$c, P as _$$P3 } from "../905/200950";
 import { prototypeInteractionModalWidth, prototypeInteractionModalExpandedWidth } from "../figma_app/786175";
 let o;
 var f = y;
-let Y = _$$ex("prototype_action_info", function () {
+let Y = registerTooltip("prototype_action_info", function () {
   return jsxs("div", {
     className: cssBuilderInstance.flex.itemsCenter.justifyCenter.$,
     children: [jsx(SvgComponent, {
@@ -1401,10 +1401,10 @@ function e4({
         isNarrowPanel: !0,
         isNestedInConditional: !0,
         numActions: mergedActions.length,
-        onDeleteAction: lQ,
-        onDrop: lQ,
-        onExpand: lQ,
-        onSelect: lQ,
+        onDeleteAction: noop,
+        onDrop: noop,
+        onExpand: noop,
+        onSelect: noop,
         recordingKey: generateRecordingKey(dJ, Qe, _$$eG, m),
         selectedActionIndex: e,
         selectedInteractions,
@@ -1427,10 +1427,10 @@ function e4({
       isNarrowPanel: !0,
       isNestedInConditional: !1,
       numActions: mergedActions.length,
-      onDeleteAction: lQ,
-      onDrop: lQ,
+      onDeleteAction: noop,
+      onDrop: noop,
       onExpand: n,
-      onSelect: lQ,
+      onSelect: noop,
       recordingKey: generateRecordingKey(dJ, Qe, _$$eG, m),
       selectedActionIndex: e,
       selectedInteractions,

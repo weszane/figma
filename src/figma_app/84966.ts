@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import l from "../vendor/923386";
 import { Xf } from "../figma_app/153916";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
 import { handleSuspenseRetainRelease, setupResourceAtomHandler } from "../figma_app/566371";
@@ -14,18 +14,18 @@ import { T as _$$T } from "../1577/951568";
 import { Az } from "../5132/863145";
 import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { hY } from "../figma_app/80683";
-import { Y$, Ln, SG, Tc } from "../905/84777";
+import { BillingPriceStatus, setupCurrentContractPricesTransform, setupContractRenewalPricesTransform, getCurrencyFromPrices } from "../905/84777";
 import { FOrganizationLevelType, FOrganizationEntityType } from "../figma_app/191312";
 import { PendingConfirmedRenewalSeatCountsView } from "../figma_app/43951";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { getFutureDateOrNull } from "../figma_app/345997";
-import { IX } from "../905/712921";
+import { RenewalTermEnum } from "../905/712921";
 import { BillingCycle } from "../figma_app/831101";
 import { ProductAccessTypeEnum, isValidAccessType, ViewAccessTypeEnum } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
 var d = l;
 function w(e, t, r, n) {
-  let i = (e === Y$.CURRENT ? Ln : SG)(t, collaboratorSet, {
+  let i = (e === BillingPriceStatus.CURRENT ? setupCurrentContractPricesTransform : setupContractRenewalPricesTransform)(t, collaboratorSet, {
     renewalTerm: r,
     unit: n
   });
@@ -43,7 +43,7 @@ function w(e, t, r, n) {
       localizeCurrency: null
     };
   }
-  let l = Tc(o);
+  let l = getCurrencyFromPrices(o);
   return {
     prices: o,
     localizeCurrency: new CurrencyFormatter(l)
@@ -51,21 +51,21 @@ function w(e, t, r, n) {
 }
 export let $$O11 = 500;
 export function $$R8(e) {
-  return w(Y$.AT_NEXT_RENEWAL, e, IX.YEAR, IX.YEAR);
+  return w(BillingPriceStatus.AT_NEXT_RENEWAL, e, RenewalTermEnum.YEAR, RenewalTermEnum.YEAR);
 }
 export function $$L0(e, t) {
-  return w(e, t, IX.YEAR, IX.MONTH);
+  return w(e, t, RenewalTermEnum.YEAR, RenewalTermEnum.MONTH);
 }
 export function $$P9(e, t) {
-  return w(e, t, IX.MONTH, IX.MONTH);
+  return w(e, t, RenewalTermEnum.MONTH, RenewalTermEnum.MONTH);
 }
 export function $$D2(e, t) {
-  return w(e, t, IX.MONTH, IX.YEAR);
+  return w(e, t, RenewalTermEnum.MONTH, RenewalTermEnum.YEAR);
 }
 function k(e) {
   let t = getInitialOptions().analyze_data_flow_v2_until;
-  let r = t && _$$A().isBefore(t) ? e.postGaRenewal : e.nextRenewal;
-  return r ? _$$A(r).toDate() : null;
+  let r = t && dayjs().isBefore(t) ? e.postGaRenewal : e.nextRenewal;
+  return r ? dayjs(r).toDate() : null;
 }
 export function $$M6(e) {
   let t = e.annual_subscription;
@@ -77,7 +77,7 @@ export function $$M6(e) {
 export function $$F15() {
   let e = useSelector(e => e.teamBilling);
   let t = e.summary.monthly_subscription?.current_period_end;
-  return useMemo(() => t ? _$$A(t).toDate() : null, [t]);
+  return useMemo(() => t ? dayjs(t).toDate() : null, [t]);
 }
 export function $$j14(e) {
   let t = e.annual_subscription?.trial_end;
@@ -103,7 +103,7 @@ export function $$B3(e) {
 }
 function G(e, t) {
   if (!t) return null;
-  let r = e.pendingConfirmedRenewalSeatCounts?.filter(e => _$$A(e.billingPeriodStart).add(1, "day").toDate() > t && _$$A(e.billingPeriodStart).subtract(1, "day").toDate() < t);
+  let r = e.pendingConfirmedRenewalSeatCounts?.filter(e => dayjs(e.billingPeriodStart).add(1, "day").toDate() > t && dayjs(e.billingPeriodStart).subtract(1, "day").toDate() < t);
   if (!r || !r.length) return null;
   let n = collaboratorSet.dict(e => 0);
   let i = collaboratorSet.dict(e => 0);
@@ -157,7 +157,7 @@ export function $$z7(e) {
   return useMemo(() => t ? i ? a.transform(e => !!G(e, r)) : resourceUtils.loaded(!1) : resourceUtils.disabled(), [t, r, i, a]);
 }
 export function $$W16(e, t = 30) {
-  return !!e && _$$A().add(t, "days").isAfter(e);
+  return !!e && dayjs().add(t, "days").isAfter(e);
 }
 export function $$K13(e) {
   let t = !!e;

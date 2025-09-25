@@ -10,7 +10,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { setupToggleButton } from '../905/167712'
 import { j as Icon1 } from '../905/253683'
 import { getI18nString } from '../905/303541'
-import { N as _$$N } from '../905/430294'
+import { N as SVG } from '../905/430294'
 import { formatShortcutKey } from '../905/491152'
 import { Z } from '../905/498136'
 import { I as Icon3 } from '../905/542485'
@@ -211,8 +211,8 @@ export function ToolbarPlugin({
       }),
       jsx(setupToggleButton, {
         'aria-label': getI18nString('lexical_editor_toolbar.strikethrough') + formatShortcutKey({ keyShortcutShift: true, keyShortcutKey: 'X' }),
-        'onIcon': jsx(_$$N, {}),
-        'offIcon': jsx(_$$N, {}),
+        'onIcon': jsx(SVG, {}),
+        'offIcon': jsx(SVG, {}),
         'checked': isStrikethrough,
         'variant': 'highlighted',
         'onChange': () => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough'),

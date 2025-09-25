@@ -20,7 +20,7 @@ import { b2 } from "../figma_app/622574";
 import { setupFlushTimer, setupConnectionStateHandler } from "../figma_app/582924";
 import { isLoading } from "../905/18797";
 import { TabState } from "../figma_app/915202";
-import { l as _$$l } from "../905/26554";
+import { fullscreenRestoreModal } from "../905/26554";
 import { $5 } from "../figma_app/869006";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
@@ -388,7 +388,7 @@ export class $$eu0 {
     if (t) {
       let r = findLibraryNameForAsset(e, i.library.movedLibraryItems.local, i.library.publishedByLibraryKey.components, n) || void 0;
       t.canEdit ? this.store.dispatch(showModalHandler({
-        type: _$$l,
+        type: fullscreenRestoreModal,
         data: {
           nodeId: e,
           movedToFile: r

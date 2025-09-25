@@ -1,11 +1,11 @@
-import { g } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 export let $$r0 = {
   textBodyMedium: {
-    ...g.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   textBodyMediumStrong: {
-    ...g.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     $$css: !0
   },
   colorText: {

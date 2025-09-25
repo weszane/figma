@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import a from "classnames";
 import { Lk } from "../figma_app/975811";
 import { stopPropagation } from "../figma_app/753501";
@@ -21,7 +21,7 @@ export function $$m0(e) {
   return jsx(AngleInput, {
     ...a,
     onKeyDown: stopPropagation,
-    dispatch: lQ,
+    dispatch: noop,
     className: p(e),
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": dataTooltip,
@@ -60,7 +60,7 @@ export function $$g1(e) {
     ...a,
     onKeyDown: stopPropagation,
     formatter: s,
-    dispatch: lQ,
+    dispatch: noop,
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": dataTooltip,
     className: p(e),
@@ -103,7 +103,7 @@ export function $$_2(e) {
   return jsx(PercentageBaseInput, {
     ...a,
     onKeyDown: stopPropagation,
-    dispatch: lQ,
+    dispatch: noop,
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": dataTooltip,
     hidePercentSign: !1,

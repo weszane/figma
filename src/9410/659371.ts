@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { O } from "../figma_app/114128";
 import { D } from "../905/993374";
 import { c as _$$c } from "../905/90943";
@@ -223,7 +223,7 @@ export function $$z4() {
   let l = iX();
   let d = $$P9();
   return e => {
-    let u = lQ;
+    let u = noop;
     let p = "";
     if (e) {
       switch (e.type) {

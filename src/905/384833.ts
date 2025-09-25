@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Suspense, useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories } from "../905/165054";
 import { useModalManager } from "../905/437088";
@@ -35,7 +35,7 @@ import { zz } from "../figma_app/80683";
 import { selectViewAction } from "../905/929976";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
-import { Y$ } from "../905/84777";
+import { BillingPriceStatus } from "../905/84777";
 import { YL, Zz } from "../figma_app/84966";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
@@ -108,7 +108,7 @@ function ea(e) {
           type: "update-org-renewal-counts",
           icon: VisualBellIcon.CHECK_WITH_CIRCLE,
           message: getI18nString("billing_modals.renewal.seats_at_renewal_confirmed"),
-          onDismiss: lQ
+          onDismiss: noop
         }));
         t();
       }).catch(e => {
@@ -235,7 +235,7 @@ function ea(e) {
               textAlign: "left",
               gridColumnWidth: "auto",
               cellComponent: e => jsx(_$$T, {
-                contractPriceType: Y$.AT_NEXT_RENEWAL,
+                contractPriceType: BillingPriceStatus.AT_NEXT_RENEWAL,
                 planKey: i.key,
                 seatType: e
               }),

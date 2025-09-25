@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { useProjectFileCreationPermissions } from "../figma_app/687776";
 import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
@@ -133,7 +133,7 @@ export function $$I0() {
 function A() {
   return jsx("div", {
     className: "x165vjil x14ggrba",
-    children: jsx(oW, {
+    children: jsx(WAFImage, {
       src: buildUploadUrl("0b908885241f3422b8940078d7f3be979a8fece0"),
       alt: "Figma Make promotional image",
       width: 332

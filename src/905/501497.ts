@@ -9,7 +9,7 @@ import { getJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3 } from "../figma_app/862289";
 import { cq } from "../905/794154";
-import { Sn } from "../905/946805";
+import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { Ay } from "../figma_app/724968";
 import { sO } from "../figma_app/21029";
@@ -50,7 +50,7 @@ export function $$b0({
               moduleToOpen: {
                 type: "custom",
                 module: jsx(Ay, {}),
-                name: Sn.GENERATE_IMAGE
+                name: ExtensionFeatureKey.GENERATE_IMAGE
               },
               trackingData: {
                 source: "image_settings_swap_image_generate_new"

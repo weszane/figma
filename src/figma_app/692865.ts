@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
 import { debounce } from "../905/915765";
-import { a as _$$a } from "../905/925868";
+import { IntersectionSentinel } from "../905/925868";
 import { renderI18nText } from "../905/303541";
 import { NJ } from "../figma_app/419216";
 import { q3 } from "../figma_app/450829";
@@ -41,7 +41,7 @@ function T({
     display: "hidden",
     containerRef: t,
     className: pO,
-    children: [jsx(_$$a, {
+    children: [jsx(IntersectionSentinel, {
       onIntersectionChange: u
     }), jsx("div", {
       className: Hj,

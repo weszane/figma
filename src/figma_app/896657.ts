@@ -13,7 +13,7 @@ import { trackUserEvent } from "../figma_app/314264";
 import { canRunExtensions } from "../figma_app/12796";
 import { getPermissionsState } from "../figma_app/642025";
 import { getPublishingData } from "../figma_app/300692";
-import { R as _$$R } from "../figma_app/612938";
+import { PluginManager } from "../figma_app/612938";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { PageTypeEnum } from "../figma_app/10554";
 import { pluginAPIService } from "../905/3209";
@@ -31,7 +31,7 @@ export let $$x0 = createOptimistThunk(async (e, {
   localSnapshotBlob: w,
   widgetNodeId: O
 }) => {
-  if (c === PageTypeEnum.EDITOR && !canRunExtensions(e.getState())) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
+  if (c === PageTypeEnum.EDITOR && !canRunExtensions(e.getState())) return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
   if (null != r) {
     let [t, n] = await Promise.all([pluginAPIService.getPlugins({
       id: r

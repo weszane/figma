@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createPortal } from "react-dom";
 import a from "classnames";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { AE } from "../9410/36414";
 import { Az, Yg, _D } from "../figma_app/357202";
 var s = a;
@@ -20,7 +20,7 @@ export function $$c0(e) {
       height: e.dragState.draggingThumbSize?.y
     },
     children: e.icon
-  }) : jsx(oW, {
+  }) : jsx(WAFImage, {
     src: i,
     alt: "",
     className: s()(_D, {

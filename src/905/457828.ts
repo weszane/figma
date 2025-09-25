@@ -5,7 +5,7 @@ import { useSubscription } from "../figma_app/288654";
 import { useState, useRef, useCallback } from "react";
 import { selectExperimentConfigHook } from "../figma_app/594947";
 import { V } from "../figma_app/385855";
-import { F } from "../905/171275";
+import { DesignsList } from "../905/171275";
 import { FFileType } from "../figma_app/191312";
 import { A as _$$A } from "../905/615098";
 import { _ as _$$_ } from "../905/264868";
@@ -86,7 +86,7 @@ function f({
   let y = useRef(null);
   switch (s) {
     case FFileType.WHITEBOARD:
-      if (t === F.WHITEBOARD) break;
+      if (t === DesignsList.WHITEBOARD) break;
       return jsx(g, {
         thumbnailUrl: e,
         clientMeta: r,
@@ -128,7 +128,7 @@ function f({
 let v = e => {
   let t = Tf.getIsThumbnailFullWidth(e);
   let i = Tf.getEditorType(e);
-  return e.type === nb.PROTOTYPE ? F.PROTOTYPE : e.type === nb.OFFLINE_FILE ? F.OFFLINE : i === FFileType.SLIDES ? F.SLIDES : i === FFileType.WHITEBOARD ? t ? F.WHITEBOARD : F.DEFAULT_WHITEBOARD : t ? F.DESIGN : F.DEFAULT_DESIGN;
+  return e.type === nb.PROTOTYPE ? DesignsList.PROTOTYPE : e.type === nb.OFFLINE_FILE ? DesignsList.OFFLINE : i === FFileType.SLIDES ? DesignsList.SLIDES : i === FFileType.WHITEBOARD ? t ? DesignsList.WHITEBOARD : DesignsList.DEFAULT_WHITEBOARD : t ? DesignsList.DESIGN : DesignsList.DEFAULT_DESIGN;
 };
 export function $$I0({
   tile: e,

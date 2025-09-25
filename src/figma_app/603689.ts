@@ -9,12 +9,12 @@ import _require3 from '../7a72fc59/824430';
 import _require from '../451de8f0/94979';
 import { captureException, reportError } from '../905/11';
 import { consumptionPaywallUtils } from '../905/224';
-import { s as _$$s5 } from '../905/6512';
-import { a as _$$a1 } from '../905/10468';
-import { D as _$$D7 } from '../905/12032';
+import { TreeNode } from '../905/6512';
+import { UserAuthList } from '../905/10468';
+import { overlayStateAtom } from '../905/12032';
 import { L as _$$L3 } from '../905/13390';
 import { isLoading, isNullOrFailure } from '../905/18797';
-import { P4 as _$$P2 } from '../905/18800';
+import { consentCounterAtom } from '../905/18800';
 import { useMemoCustom, useMemoStable, useStableMemo } from '../905/19536';
 import { a as _$$a8 } from '../905/29104';
 import { z4 } from '../905/37051';
@@ -96,7 +96,7 @@ import { h as _$$h6 } from '../905/388624';
 import { A as _$$A0 } from '../905/389851';
 import { transformAtom } from '../905/401885';
 import { U as _$$U2 } from '../905/405962';
-import { x as _$$x4 } from '../905/407439';
+import { ENTITY_STATUS_SYMBOLS } from '../905/407439';
 import { debugState } from '../905/407919';
 import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A8 } from '../905/408320';
@@ -127,7 +127,7 @@ import { v as _$$v } from '../905/516963';
 import { dD as _$$dD } from '../905/519113';
 import { APILoadingStatus } from '../905/520829';
 import { Button, ButtonLarge } from '../905/521428';
-import { ex as _$$ex } from '../905/524523';
+import { registerTooltip } from '../905/524523';
 import { d as _$$d2 } from '../905/531325';
 import { _T as _$$_T, E5, jv, k4, Yi } from '../905/531551';
 import { B3, Sr } from '../905/535224';
@@ -158,7 +158,7 @@ import { i as _$$i3 } from '../905/610691';
 import { customHistory } from '../905/612521';
 import { getDesignFileUrl } from '../905/612685';
 import { setupThemeContext } from '../905/614223';
-import { b as _$$b4, c as _$$c4 } from '../905/618904';
+import { ManuallyLabeledRadioRoot, ManuallyLabeledRadioOption } from '../905/618904';
 import { e as _$$e8 } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { parseAndNormalizeQuery, parseQuery, parseQuerySimple } from '../905/634134';
@@ -169,7 +169,7 @@ import { FeatureFlag, PageFolderFile } from '../905/652992';
 import { getSessionStorage } from '../905/657224';
 import { isLocalFileKey } from '../905/657242';
 import { Z as _$$Z4 } from '../905/658753';
-import { oW as _$$oW } from '../905/675859';
+import { WAFImage } from '../905/675859';
 import { CustomModalComponent } from '../905/684425';
 import { IM } from '../905/687477';
 import { BannerButton } from '../905/692618';
@@ -235,14 +235,14 @@ import { getRequest, XHR } from '../905/910117';
 import { _L as _$$_L } from '../905/911410';
 import { fullscreenCrashHandler } from '../905/913008';
 import { F as _$$F6 } from '../905/915030';
-import { A as _$$A6 } from '../905/920142';
+import { dayjs } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
 import { Jn } from '../905/927294';
 import { selectViewAction } from '../905/929976';
 import { J as _$$J2 } from '../905/931050';
 import { q as _$$q2, s as _$$s6 } from '../905/932270';
 import { I as _$$I2 } from '../905/932503';
-import { lQ as _$$lQ } from '../905/934246';
+import { noop } from 'lodash-es';
 import { v as _$$v4 } from '../905/939922';
 import { selectUserFlag } from '../905/940356';
 import { styleBuilderInstance } from '../905/941192';
@@ -627,8 +627,8 @@ function ec(e) {
   });
   let y = useMemo(() => ({
     onClick: () => !1,
-    onMouseMove: _$$lQ,
-    onRemove: _$$lQ,
+    onMouseMove: noop,
+    onRemove: noop,
     inDesktopTray: !0,
     toggleQuickReply: (e, t, r) => (o(selectViewAction({
       view: 'feed',
@@ -2096,7 +2096,7 @@ function iL() {
                 },
                 children: [titleIconURL && jsx('div', {
                   className: _$$eo,
-                  children: jsx(_$$oW, {
+                  children: jsx(WAFImage, {
                     src: titleIconURL,
                     alt: ''
                   })
@@ -2445,7 +2445,7 @@ class af extends _$$R3 {
     return Promise.resolve(this.combinedSearchDB);
   }
 }
-class aE extends _$$s5 {
+class aE extends TreeNode {
   constructor(e, {
     canvasId: t,
     canvasName: r,
@@ -2611,7 +2611,7 @@ class aC extends _$$R3 {
     return Promise.resolve(this.combinedSearchDB);
   }
 }
-class aw extends _$$s5 {
+class aw extends TreeNode {
   constructor({
     startSequenceNumber: e,
     endSequenceNumber: t,
@@ -2829,7 +2829,7 @@ class aR extends _$$R2 {
       ...this.scene.journal.searchProperties,
       ...super.generateSearchProperties(),
       name: this.nodeChange.name,
-      phase: [this.phase, _$$x4[this.phase]],
+      phase: [this.phase, ENTITY_STATUS_SYMBOLS[this.phase]],
       editScopeLabel: this.editScopes.map(e => e.label).filter(isNotNullish)
     };
   }
@@ -3604,8 +3604,8 @@ function so({
   return jsx(_$$Y, {
     isDragTarget: a,
     onTargetDrop: s,
-    onTargetDragEnter: _$$lQ,
-    onTargetDragLeave: _$$lQ,
+    onTargetDragEnter: noop,
+    onTargetDragLeave: noop,
     style: styleBuilderInstance.hFull.$,
     children: jsx(_$$J3, {
       onClose: n,
@@ -3959,7 +3959,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
     });
   }
   function n(e) {
-    return jsx(_$$b4, {
+    return jsx(ManuallyLabeledRadioRoot, {
       'value': e.currentChoice,
       'onChange': e.onClickChoice,
       'aria-labelledby': e.id,
@@ -3976,7 +3976,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           children: [jsx(q9, {
             htmlFor: `${e.id}-${t}`,
             children: t
-          }), jsx(_$$c4, {
+          }), jsx(ManuallyLabeledRadioOption, {
             id: `${e.id}-${t}`,
             value: t
           })]
@@ -4252,7 +4252,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
     children: [void 0 !== t.upcomingState && jsx(e.OffscreenModalView, {
       fadingOut: !1,
       ref: r,
-      dismissModal: _$$lQ,
+      dismissModal: noop,
       hideCloseButton: t.shouldHideCloseButton(t.upcomingState),
       width: t.getDefaultWidth ? t.getDefaultWidth(t.upcomingState) : void 0,
       height: t.getDefaultHeight ? t.getDefaultHeight(t.upcomingState) : void 0,
@@ -4428,7 +4428,7 @@ function od() {
       children: jsx(s7, {
         dismissModal: i.complete,
         onClickPrimaryCta: i.complete,
-        forceRender: _$$lQ
+        forceRender: noop
       })
     })
   });
@@ -4653,7 +4653,7 @@ function oj(e) {
   }) : jsx(TextWithTruncation, {
     children: renderI18nText('payments_modal.org_trial_pending.your_trial_is_almost_ready')
   });
-  let p = _$$A6(orgTrial.trialPeriodEnd).utc().format('ll');
+  let p = dayjs(orgTrial.trialPeriodEnd).utc().format('ll');
   let _ = _$$A7.getEstimatedEditorCount(orgTrial);
   let h = jsx(SecureLink, {
     'href': '/ssa/',
@@ -4845,7 +4845,7 @@ function oZ({
     }
   }, [t, r, e, i, n]);
   if (e.status !== _$$Q4.PENDING) return null;
-  let o = _$$A6(e.trialPeriodEnd).local().format('ll');
+  let o = dayjs(e.trialPeriodEnd).local().format('ll');
   let d = jsx(SecureLink, {
     'href': '/ssa/',
     'target': '_blank',
@@ -6787,7 +6787,7 @@ function c2() {
     });
   }, [I, e, d, r, f, c, n?.id, y]);
 }
-let c6 = _$$ex('dev_mode_toggle_disabled_tracked_tooltip', () => {
+let c6 = registerTooltip('dev_mode_toggle_disabled_tracked_tooltip', () => {
   let e = trackFileEventWithStore();
   let t = selectCurrentUser();
   let r = useCurrentPlanUser('ModeSwitcherTrackedTooltip').unwrapOr(null);
@@ -6813,7 +6813,7 @@ let c6 = _$$ex('dev_mode_toggle_disabled_tracked_tooltip', () => {
 }, () => ({
   unconstrainWidth: !0
 }));
-let c7 = _$$ex('devmode_toggle_disabled_personal_draft', ({
+let c7 = registerTooltip('devmode_toggle_disabled_personal_draft', ({
   isCurrentUserFileOwner: e
 }) => {
   let t = trackFileEventWithStore();
@@ -7494,7 +7494,7 @@ function u8() {
       children: [jsx('div', {
         className: CL,
         children: t && jsx(_$$c8, {})
-      }), jsx(_$$oW, {
+      }), jsx(WAFImage, {
         src: e.imageUrl,
         alt: e.name,
         className: _$$tw
@@ -7506,7 +7506,7 @@ function u8() {
     children: [jsxs('button', {
       className: j()(zH, _$$rr),
       ...getTriggerProps(),
-      children: [jsx(_$$oW, {
+      children: [jsx(WAFImage, {
         src: r[c]?.imageUrl,
         alt: c,
         className: _$$tw
@@ -8147,7 +8147,7 @@ function pY() {
   let n = getDevHandoffInspectSplitPosition();
   let i = xn();
   let a = r && !(isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev) ? n : 0;
-  let s = useAtomWithSubscription(_$$P2);
+  let s = useAtomWithSubscription(consentCounterAtom);
   return jsx('div', {
     className: j()(_$$z4, {
       [_$$D6]: t
@@ -8489,7 +8489,7 @@ function _m(e) {
   let r = isHelpWidgetHidden();
   let n = W6();
   let i = useDispatch();
-  let a = useAtomWithSubscription(_$$D7);
+  let a = useAtomWithSubscription(overlayStateAtom);
   let s = t[0]?.type ?? null;
   return (useEffect(() => {
     a && s !== null && trackEventAnalytics('curator_collision', {
@@ -8559,7 +8559,7 @@ function _I() {
       'data-testid': 'LockedAccountView',
       'children': jsx('div', {
         className: 'locked_account_view--contentContainer--pfiqF',
-        children: s.length > 0 ? jsx(_$$a1, {
+        children: s.length > 0 ? jsx(UserAuthList, {
           dispatch: e,
           header: o(() => a ? renderI18nText('locked_org.description_no_other_accounts', {
             orgName: a.name

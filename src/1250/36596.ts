@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useState, useCallback, Fragment as _$$Fragment, useRef, useMemo, useEffect } from "react";
-import { lQ } from "../905/934246";
+import { noop } from 'lodash-es';
 import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { Button } from "../905/521428";
@@ -113,7 +113,7 @@ let $$B3 = forwardRef((e, t) => {
       ref: t,
       items: [],
       maxItems: 1,
-      onRemoveLastItem: lQ,
+      onRemoveLastItem: noop,
       ...d
     })]
   });

@@ -5,7 +5,7 @@ import { yJ, bE, HA, yH } from "../figma_app/598926";
 import { componentDeleteForFile } from "../905/879323";
 import { ProjectsForTeam, ProjectByIdForRealtimeShim } from "../figma_app/43951";
 import { H } from "../905/715533";
-import { fJ, aj } from "../905/25169";
+import { teamMembersChannelHandler, folderChannelHandler } from "../905/25169";
 export function $$u2(e, t, i = !1) {
   if (t.folder) switch (t.method) {
     case "put":
@@ -38,7 +38,7 @@ export function $$u2(e, t, i = !1) {
 }
 let $$p3 = new H({
   name: "TeamChannelFoldersShim",
-  ...fJ,
+  ...teamMembersChannelHandler,
   livegraphView: ProjectsForTeam,
   livegraphArgs: (e, t) => ({
     teamId: e,
@@ -75,7 +75,7 @@ let $$p3 = new H({
 let m = getFalseValue() ? new Date("1970-01-01T00:00:00.000Z") : new Date();
 let $$h1 = new H({
   name: "FolderChannelFoldersShim",
-  ...aj,
+  ...folderChannelHandler,
   livegraphView: ProjectByIdForRealtimeShim,
   livegraphArgs: e => ({
     projectId: e

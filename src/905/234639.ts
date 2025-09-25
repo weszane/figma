@@ -2,7 +2,7 @@ import { PresentationValidationStatus } from "../figma_app/763686";
 import r from "../vendor/336892";
 import { debugState } from "../905/407919";
 import { processHubFilesThunk } from "../905/359847";
-import { c_ } from "../905/497882";
+import { assertFieldReady } from "../905/497882";
 import { V } from "../905/513628";
 import { Z } from "../905/909123";
 import { updateProfileThunk } from "../figma_app/530167";
@@ -23,7 +23,7 @@ export async function $$y2({
   let {
     thumbnailMedium,
     allMedia
-  } = c_(e).currentValue;
+  } = assertFieldReady(e).currentValue;
   let o = thumbnailMedium && "buffer" in thumbnailMedium ? thumbnailMedium.buffer : null;
   let {
     cover_image: {
@@ -65,25 +65,25 @@ async function v({
   carouselImages: A,
   carouselThumbnailPosition: y
 }) {
-  let b = c_(t).currentValue.thumbnailMedium;
+  let b = assertFieldReady(t).currentValue.thumbnailMedium;
   return {
-    name: trimOrEmpty(c_(i).currentValue),
-    description: trimOrEmpty(c_(n).currentValue),
-    category_id: (r && c_(r).currentValue?.id) ?? null,
-    tags: [...c_(a).currentValue],
-    tags_v2: (s && c_(s).currentValue.map(e => e.text)) ?? [],
-    viewer_mode: c_(o).currentValue,
-    scaling_mode: (c && c_(c).currentValue) ?? null,
+    name: trimOrEmpty(assertFieldReady(i).currentValue),
+    description: trimOrEmpty(assertFieldReady(n).currentValue),
+    category_id: (r && assertFieldReady(r).currentValue?.id) ?? null,
+    tags: [...assertFieldReady(a).currentValue],
+    tags_v2: (s && assertFieldReady(s).currentValue.map(e => e.text)) ?? [],
+    viewer_mode: assertFieldReady(o).currentValue,
+    scaling_mode: (c && assertFieldReady(c).currentValue) ?? null,
     creator_policy: "",
-    publisher_ids: c_(u).currentValue.map(e => e.id),
-    price: c_(p).currentValue,
-    support_contact: c_(m).currentValue,
+    publisher_ids: assertFieldReady(u).currentValue.map(e => e.id),
+    price: assertFieldReady(p).currentValue,
+    support_contact: assertFieldReady(m).currentValue,
     carousel_images: A,
     cover_image_carousel_image: A[y],
     signature: _,
     cover_image_uploaded: f,
-    has_custom_uploaded_thumbnail: !!b && b.sha1 !== (e && (await V(e, c_(o).currentValue)))?.sha1,
-    comments_setting: c_(g).currentValue
+    has_custom_uploaded_thumbnail: !!b && b.sha1 !== (e && (await V(e, assertFieldReady(o).currentValue)))?.sha1,
+    comments_setting: assertFieldReady(g).currentValue
   };
 }
 export class $$I5 extends Error {
@@ -101,15 +101,15 @@ export async function $$E1(e) {
     tosAccepted,
     price
   } = e;
-  let o = c_(author).currentValue;
+  let o = assertFieldReady(author).currentValue;
   let d = {
     ...(await v(e)),
     file_version_id: newVersionId,
     valid_prototype: figFilePrototypeStatus === PresentationValidationStatus.VALID,
     author_org_id: o && "org_id" in o ? o.org_id : "",
     author_team_id: o && "team_id" in o ? o.team_id : "",
-    is_paid: (c_(price).currentValue ?? 0) > 0,
-    agreed_to_tos: c_(tosAccepted).currentValue
+    is_paid: (assertFieldReady(price).currentValue ?? 0) > 0,
+    agreed_to_tos: assertFieldReady(tosAccepted).currentValue
   };
   try {
     let {
@@ -166,7 +166,7 @@ export async function $$S3({
     profile_created: n
   })), await new Promise(e => {
     debugState.dispatch(updateProfileThunk({
-      profileHandle: c_(r).currentValue,
+      profileHandle: assertFieldReady(r).currentValue,
       profileId: i.id,
       onSuccess: e
     }));

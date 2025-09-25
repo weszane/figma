@@ -1,29 +1,52 @@
-import { defaultValidator } from "../figma_app/181241";
-export let $$r0 = new class {
-  upsertUserFlagWithCount(e, t) {
-    return defaultValidator.validate(({
-      xr: i
-    }) => i.put(`/api/user/flag/${e}`, {
-      count: t
-    }));
+import { defaultValidator } from '../figma_app/181241'
+
+/**
+ * UserFlagService - Handles user flag operations.
+ */
+export class UserFlagService {
+  /**
+   * Upserts a user flag with a count.
+   * @param flagName - The name of the flag.
+   * @param count - The count to set for the flag.
+   * @returns Promise from the validator.
+   * (Original: upsertUserFlagWithCount)
+   */
+  upsertUserFlagWithCount(flagName: string, count: number) {
+    return defaultValidator.validate(({ xr }) =>
+      xr.put(`/api/user/flag/${flagName}`, { count })
+    );
   }
-  resetUserFlag(e) {
-    return defaultValidator.validate(({
-      xr: t
-    }) => t.post("/api/user/flags", {
-      flags: {
-        [e]: !1
-      }
-    }));
+
+  /**
+   * Resets a user flag.
+   * @param flagName - The name of the flag to reset.
+   * @returns Promise from the validator.
+   * (Original: resetUserFlag)
+   */
+  resetUserFlag(flagName: string) {
+    return defaultValidator.validate(({ xr }) =>
+      xr.post('/api/user/flags', {
+        flags: { [flagName]: false },
+      })
+    );
   }
-  setUserFlag(e, t) {
-    return defaultValidator.validate(({
-      xr: i
-    }) => i.post("/api/user/flags", {
-      flags: {
-        [e]: t
-      }
-    }));
+
+  /**
+   * Sets a user flag.
+   * @param flagName - The name of the flag.
+   * @param value - The value to set for the flag.
+   * @returns Promise from the validator.
+   * (Original: setUserFlag)
+   */
+  setUserFlag(flagName: string, value: boolean) {
+    return defaultValidator.validate(({ xr }) =>
+      xr.post('/api/user/flags', {
+        flags: { [flagName]: value },
+      })
+    );
   }
-}();
-export const H = $$r0;
+}
+
+// Export instance with refactored name
+export const userFlagService = new UserFlagService();
+export const H = userFlagService;

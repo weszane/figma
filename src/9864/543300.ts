@@ -89,7 +89,7 @@ import { SvgComponent } from "../905/714743";
 import { A as _$$A } from "../svg/546647";
 import { A as _$$A2 } from "../svg/831814";
 import { throwTypeError } from "../figma_app/465776";
-import { g as _$$g2 } from "../905/687265";
+import { textDisplayConfig } from "../905/687265";
 import { Ph, o as _$$o } from "../905/160095";
 import { sx as _$$sx } from "../figma_app/307841";
 import { pA, eI as _$$eI, QP } from "../7021/724859";
@@ -100,11 +100,11 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { styleBuilderInstance } from "../905/941192";
 import { B as _$$B3 } from "../905/261906";
-import { jv } from "../905/84777";
+import { setupPricesTransform } from "../905/84777";
 import { designSet, collaboratorSet } from "../905/332483";
 import { compareProductAccessTypes } from "../figma_app/217457";
 import { getUserCurrency, CurrencyFormatter } from "../figma_app/514043";
-import { Ju, IX } from "../905/712921";
+import { ProductTierEnum, RenewalTermEnum } from "../905/712921";
 import { rI as _$$rI, Jg, OA, QM, Gz, wd, sV, Sd, On, ik, qD, Mg, B_, MY as _$$MY, dv, yG, Oj, PB, O0, X3, TB, m$, Vz, yo, f6 as _$$f2, kr, _7, w9, XI, Q2, PG as _$$PG, PJ, xx, y8, ih as _$$ih, rv as _$$rv, dD, XK, HN, $r, HS, h0, DM, jG, Bi, nc, ZA, Bu, Pm, _t, pR, Gr, mx } from "../7021/762792";
 import { Link } from "../905/438674";
 import { A as _$$A3 } from "../svg/831652";
@@ -1044,22 +1044,22 @@ function r_() {
   let t = designSet.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let i = {
     currency: r,
-    tier: Ju.PRO,
-    renewalTerm: IX.YEAR,
-    unit: IX.MONTH
+    tier: ProductTierEnum.PRO,
+    renewalTerm: RenewalTermEnum.YEAR,
+    unit: RenewalTermEnum.MONTH
   };
   let s = {
     currency: r,
-    tier: Ju.ORG,
-    renewalTerm: IX.YEAR,
-    unit: IX.MONTH
+    tier: ProductTierEnum.ORG,
+    renewalTerm: RenewalTermEnum.YEAR,
+    unit: RenewalTermEnum.MONTH
   };
   let n = t.dict(() => null);
-  let a = jv({
+  let a = setupPricesTransform({
     billableProductKeys: t,
     baseQuery: i
   });
-  let d = jv({
+  let d = setupPricesTransform({
     billableProductKeys: t,
     baseQuery: s
   });
@@ -1083,21 +1083,21 @@ function rp() {
   let r = getUserCurrency();
   let t = {
     currency: r,
-    tier: Ju.PRO,
-    renewalTerm: IX.YEAR,
-    unit: IX.MONTH
+    tier: ProductTierEnum.PRO,
+    renewalTerm: RenewalTermEnum.YEAR,
+    unit: RenewalTermEnum.MONTH
   };
   let i = {
     currency: r,
-    tier: Ju.ORG,
-    renewalTerm: IX.YEAR,
-    unit: IX.MONTH
+    tier: ProductTierEnum.ORG,
+    renewalTerm: RenewalTermEnum.YEAR,
+    unit: RenewalTermEnum.MONTH
   };
-  let s = jv({
+  let s = setupPricesTransform({
     billableProductKeys: collaboratorSet,
     baseQuery: t
   });
-  let n = jv({
+  let n = setupPricesTransform({
     billableProductKeys: collaboratorSet,
     baseQuery: i
   });
@@ -1573,11 +1573,11 @@ function rT(e) {
 }
 let rR = {
   textBodyMedium: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     $$css: !0
   },
   textBodySmall: {
-    ..._$$g2.textBodySmall,
+    ...textDisplayConfig.textBodySmall,
     $$css: !0
   },
   verticalDivider: {
@@ -2982,22 +2982,22 @@ let tN = forwardRef(function (e, r) {
 });
 let tT = {
   modalCheckboxText: {
-    ..._$$g2.textBodyMediumStrong,
+    ...textDisplayConfig.textBodyMediumStrong,
     userSelect: "x87ps6o",
     $$css: !0
   },
   modalOptInDesccription: {
-    ..._$$g2.textBodySmall,
+    ...textDisplayConfig.textBodySmall,
     color: "x1akne3o",
     $$css: !0
   },
   checkboxText: {
-    ..._$$g2.textBodyLarge,
+    ...textDisplayConfig.textBodyLarge,
     userSelect: "x87ps6o",
     $$css: !0
   },
   standardDisclaimer: {
-    ..._$$g2.textBodyMedium,
+    ...textDisplayConfig.textBodyMedium,
     color: "x1akne3o",
     $$css: !0
   },

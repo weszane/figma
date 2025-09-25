@@ -22,7 +22,7 @@ import { oh, Yg } from "../905/526509";
 import { JT } from "../figma_app/632248";
 import { mP, U3 } from "../figma_app/737746";
 import { Fi, WZ, zF, Mq } from "../figma_app/297822";
-import { Jc } from "../905/946805";
+import { AssetTabType } from "../905/946805";
 import { dd, Q8, rE, Bu, Lk, YH, ZG } from "../figma_app/604494";
 import { b as _$$b } from "../905/825224";
 import { t as _$$t } from "../905/572040";
@@ -88,7 +88,7 @@ export function $$M0({
           qaVersion: U3,
           quickActionsSessionId: e,
           timeToShowModal: globalPerfTimer.tryStop(mP) || 0,
-          module: Jc.ALL
+          module: AssetTabType.ALL
         });
       }
     }
@@ -153,7 +153,7 @@ export function $$H2(e = {}) {
 export function $$z8() {
   return useAtomWithSubscription(P);
 }
-export function $$W9(e) {
+export function $$W9(e?: any) {
   let t = AppStateTsApi.uiState().isUI3.getCopy();
   let r = debugState.getState().selectedView;
   let n = getEditorTypeIfFullscreen(r);

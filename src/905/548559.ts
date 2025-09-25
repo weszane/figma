@@ -142,7 +142,7 @@ export class KiwiCodec {
    * Encodes data for a given definition name.
    * Original: encode
    */
-  encode(defName: string, data: any): Uint8Array {
+  encode(defName: string, data: any) {
     const def = this.definitions[defName]
     if (!def)
       throw new Error(`Invalid definition ${defName}`)
@@ -421,7 +421,7 @@ export class KiwiCodec {
    * Encodes an object.
    * Original: encodeObject
    */
-  private encodeObject(def: any, obj: any, buffer?: ByteBuffer): Uint8Array | void {
+  private encodeObject(def: any, obj: any, buffer?: ByteBuffer) {
     const isNewBuffer = !buffer
     buffer = buffer || new ByteBuffer()
 
@@ -528,7 +528,7 @@ export class KiwiCodec {
 export const KiwiCodecAlias = KiwiCodec
 export const createKiwiCodecAlias = createKiwiCodec
 export function createKiwiCodec(
-  schema: string | Uint8Array | ByteBuffer | any,
+  schema: string | Uint8Array | ByteBuffer | boolean,
   options?: any,
   sensitiveFields?: Set<string>,
   shouldIgnoreForRedaction?: any,

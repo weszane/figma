@@ -6,7 +6,7 @@ import { isEventTargetOutside, preventAndStopEvent } from "../905/955878";
 import { setupFocusNavigator } from "../905/117474";
 import { defaultInputState } from "../905/768014";
 import { mergeProps } from "../905/475481";
-import { y } from "../905/658036";
+import { isModifierKey } from "../905/658036";
 function p(e) {
   return "INPUT" === e.tagName && "radio" === e.type;
 }
@@ -56,7 +56,7 @@ let $$h0 = forwardRef(({
               return;
             case "ArrowRight":
             case "ArrowDown":
-              if (m[e].includes(t.code) && !y(t)) {
+              if (m[e].includes(t.code) && !isModifierKey(t)) {
                 _.focusNext({
                   wrap: !t.repeat
                 });
@@ -65,7 +65,7 @@ let $$h0 = forwardRef(({
               return;
             case "ArrowLeft":
             case "ArrowUp":
-              if (m[e].includes(t.code) && !y(t)) {
+              if (m[e].includes(t.code) && !isModifierKey(t)) {
                 _.focusPrevious({
                   wrap: !t.repeat
                 });
@@ -79,7 +79,7 @@ let $$h0 = forwardRef(({
         }
       },
       onKeyDown: t => {
-        if (!(isEventTargetOutside(t) || y(t))) {
+        if (!(isEventTargetOutside(t) || isModifierKey(t))) {
           switch (t.code) {
             case "ArrowRight":
             case "ArrowDown":

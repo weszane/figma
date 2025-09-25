@@ -92,7 +92,7 @@ import { $z } from '../905/909811';
 import { XHR } from '../905/910117';
 import { n as _$$n } from '../905/913636';
 import { hideDropdownAction } from '../905/929976';
-import { lQ } from '../905/934246';
+import { noop } from 'lodash-es';;
 import { Xm as _$$Xm } from '../905/935570';
 import { styleBuilderInstance } from '../905/941192';
 import { $3 } from '../905/946937';
@@ -139,7 +139,7 @@ import { isPublishedLibraryWithAssets, isPublishedTeamLibrary, isTeamLibrary, Li
 import { AssetFilterMode, getAssetKey, getAssetLibraryKey, getAssetVersion, LibrarySubscriptionContext, useCurrentUserOrg, useSubscribedAssets } from '../figma_app/646357';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { i as _$$i2 } from '../figma_app/709177';
-import { ig as _$$ig } from '../figma_app/713624';
+import { TeamMembershipStatus } from '../figma_app/713624';
 import { jk as _$$jk, t_ as _$$t_, Bw, kK, mO, pk, S9, wy, Yy } from '../figma_app/745458';
 import { E1 } from '../figma_app/757606';
 import { Fullscreen, Multiplayer, PluginModalType } from '../figma_app/763686';
@@ -263,7 +263,7 @@ function ea({
     }) : jsx(_$$I, {
       bodyOnly: !0,
       libraryKey: e.library_key,
-      onBack: lQ,
+      onBack: noop,
       width: p,
       canEditSubscriptions: o,
       showSubscriptionsForTeamId: null,
@@ -1437,7 +1437,7 @@ function tl({
         orgId: t ?? '',
         firstPageSize: 100,
         queryParams: f9(void 0, {
-          teamMembershipFilter: _$$ig.JOINED,
+          teamMembershipFilter: TeamMembershipStatus.JOINED,
           workspaceFilter: null,
           orgAccessFilter: null,
           orphanedTeamFilter: !1,
@@ -1651,7 +1651,7 @@ function tc() {
       type: $3,
       data: {
         team: t,
-        afterFileMove: lQ
+        afterFileMove: noop
       }
     }));
     analyticsEventManager.trackDefinedEvent('library_modal.starter_cta_clicked', {
@@ -3552,7 +3552,7 @@ function nM() {
       forwardedRef: l,
       isNewAssetsPanel: !0,
       isVisible: !0,
-      onBlur: lQ,
+      onBlur: noop,
       onChange: setSearchQuery,
       onClearSearch: clearSearchQuery,
       onFocus: o,

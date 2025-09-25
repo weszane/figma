@@ -7,7 +7,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { normalizeJobRole, getJobRoleDisplay } from "../3973/538504";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
@@ -364,7 +364,7 @@ function er({
   jobTitle: l
 }) {
   if (!useProUserContextInDowngradeExperiment()()) return null;
-  let d = t && 7 >= _$$A().diff(_$$A(t), "days");
+  let d = t && 7 >= dayjs().diff(dayjs(t), "days");
   let c = a ? tb(a.toISOString()) : null;
   let u = l && "other" !== normalizeJobRole(l);
   return jsxs(AutoLayout, {

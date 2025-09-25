@@ -54,7 +54,7 @@ import { FDocumentType, ITemplateType } from "../905/862883";
 import { PreviewMode } from "../figma_app/707808";
 import { fileActionEnum } from "../figma_app/630077";
 import { BuyerAPIHandler } from "../905/180";
-import { D as _$$D } from "../905/17527";
+import { HubFileMetadata } from "../905/17527";
 import { hubFileAPI } from "../905/473998";
 import { z as _$$z } from "../905/931953";
 import { AuthModal } from "../905/749159";
@@ -268,7 +268,7 @@ let $$eI20 = createOptimistThunk(async (e, {
 let $$eS17 = createOptimistThunk(async (e, {
   fileKey: t
 }) => {
-  getInitialOptions().user_data && (await _$$D.getHubFileMetadata({
+  getInitialOptions().user_data && (await HubFileMetadata.getHubFileMetadata({
     fileKey: t
   }).then(({
     data: r

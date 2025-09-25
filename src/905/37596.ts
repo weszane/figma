@@ -23,7 +23,7 @@ import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { C as _$$C } from "../905/520159";
 import { Hg, Bs } from "../905/672745";
-import { A as _$$A } from "../905/920142";
+import { dayjs } from "../905/920142";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { VisualBellActions } from "../905/302958";
 import { nl, Pf } from "../905/590952";
@@ -87,7 +87,7 @@ let Y = registerModal(function (e) {
     v = totalResourceConnectedUsers ? Number(totalResourceConnectedUsers) - b : 0;
   }
   let E = "loading" === g.status;
-  let V = e => e ? e.toLocaleDateString(_$$A(e).locale(), {
+  let V = e => e ? e.toLocaleDateString(dayjs(e).locale(), {
     year: "numeric",
     month: "short",
     day: "numeric"

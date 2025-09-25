@@ -4,7 +4,7 @@ import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { e as _$$e } from "../905/149844";
 import { buildUploadUrl } from "../figma_app/169182";
-import { oW } from "../905/675859";
+import { WAFImage } from "../905/675859";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -31,7 +31,7 @@ export function $$h0(e) {
     verticalAlignItems: "center",
     spacing: 16,
     padding: 32,
-    children: [jsx(oW, {
+    children: [jsx(WAFImage, {
       src: buildUploadUrl("1afa222e66cf25ca6e6364b97885e5354321145f"),
       alt: "Connected projects logo",
       width: 150

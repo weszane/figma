@@ -1,7 +1,7 @@
 import { W } from "../905/187396";
 import { KeyCodes } from "../905/63728";
 import { isMobileUA } from "../figma_app/778880";
-import { bG } from "../905/149328";
+import { getThemePx } from "../905/149328";
 import { e } from "../905/361125";
 let l = class e {
   constructor(t, r) {
@@ -39,7 +39,7 @@ let l = class e {
       let r = e.clientY;
       let n = window.innerHeight - e.clientY;
       let i = 85 > Math.abs(window.innerWidth / 2 + t / 2 - e.clientX) && n < 60;
-      r < bG() ? this.showUiAndScheduleFade() : i ? this.showUiAndScheduleFade() : this.scheduleFadeIfNecessary();
+      r < getThemePx() ? this.showUiAndScheduleFade() : i ? this.showUiAndScheduleFade() : this.scheduleFadeIfNecessary();
     };
     this.handleHeaderOrFooterMove = e => {
       this._hideUITask.reset();
