@@ -18,7 +18,7 @@ import { normalizeValue, getCommonFromArray } from "../905/216495";
 import { paintManager, defaultGrayColor, blackColor } from "../figma_app/385874";
 import { selectCurrentFile } from "../figma_app/516028";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { zK } from "../905/182453";
 import { u as _$$u } from "../figma_app/365543";
 import { W4, Gg, z1 } from "../figma_app/580959";
@@ -130,7 +130,7 @@ function B(e) {
       onClick: () => {
         if (e.pickerShown?.id === t) w(hidePickerThunk());else {
           if (!z) return;
-          let e = cn(z.current);
+          let e = calculatePickerPositionLeft(z.current);
           w(showPickerThunk({
             id: t,
             initialX: e.x,

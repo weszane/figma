@@ -25,7 +25,7 @@ import { o3, nt } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { a2 } from "../figma_app/762558";
 import { e as _$$e } from "../figma_app/905311";
 import { h6 } from "../905/401389";
@@ -716,7 +716,7 @@ function eB(e) {
       dispatch(hidePickerThunk());
       fullscreenValue.deselectProperty();
     } else {
-      let e = cn(Q.current);
+      let e = calculatePickerPositionLeft(Q.current);
       fullscreenValue.updateAppModel({
         currentSelectedProperty: {
           type: NodePropertyCategory.TRANSFORM_MODIFIER,

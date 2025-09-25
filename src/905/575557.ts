@@ -24,7 +24,7 @@ import { h$ } from "../905/566585";
 import { P as _$$P } from "../905/460261";
 import { FormattedInputWithWrapper } from "../figma_app/260445";
 import { FormattedInputContext } from "../905/427409";
-import { k as _$$k } from "../905/67286";
+import { calculatePickerPosition } from "../905/67286";
 import { hf, KY, Kk } from "../905/71683";
 export function $$N0({
   lineHeight: e,
@@ -83,7 +83,7 @@ export function $$N0({
       editingStyleGuid: s,
       responsiveTextStyleVariantIndex: T,
       onVariableSelected: void 0 !== T ? V : void 0,
-      initialPickerPosition: () => _$$k({
+      initialPickerPosition: () => calculatePickerPosition({
         inputRef: j,
         rowRef: o,
         isInStyleModal: !!s
@@ -235,7 +235,7 @@ function O({
   let u = useCallback(() => {
     a.current && d?.showBindingUI(a.current, {
       currentFieldValue: t,
-      initialPosition: _$$k({
+      initialPosition: calculatePickerPosition({
         inputRef: o,
         rowRef: a,
         isInStyleModal: i

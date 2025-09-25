@@ -10,7 +10,7 @@ var f;
 var d;
 var c;
 var p;
-var m;
+var getDefaultFrameProps;
 var g;
 var _;
 var y;
@@ -244,7 +244,7 @@ f = new WeakMap();
 d = new WeakMap();
 c = new WeakMap();
 p = new WeakMap();
-m = new WeakSet();
+getDefaultFrameProps = new WeakSet();
 g = function (e, t) {
   let i = U(this, p).findIndex(e => e.start <= t && t < e.start + U(this, c));
   -1 === i && (i = B(this, v, k).call(this, t));
@@ -260,7 +260,7 @@ g = function (e, t) {
     for (let e = 0; e < U(this, p).length - 1; e++) U(this, p)[e].shouldFlush = !0;
     B(this, w, b).call(this);
   }
-  s.byteLength < e.byteLength && B(this, m, g).call(this, e.subarray(s.byteLength), t + s.byteLength);
+  s.byteLength < e.byteLength && B(this, getDefaultFrameProps, g).call(this, e.subarray(s.byteLength), t + s.byteLength);
 };
 _ = new WeakSet();
 y = function (e, t) {

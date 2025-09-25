@@ -1,103 +1,275 @@
-import { noop } from '../figma_app/465776';
-import { wh } from '../figma_app/841197';
-export let $$a2 = new Set(['styleIdForFill', 'styleIdForStrokeFill', 'styleIdForText', 'styleIdForEffect', 'styleIdForGrid']);
-export function $$s15(e) {
-  return $$a2.has(e);
+import { noop } from '../figma_app/465776'
+import { REDACTABLE_PROPERTIES } from '../figma_app/841197'
+
+/** Set of style-related property IDs that can be checked for existence */
+export const STYLE_PROPERTY_IDS = new Set<string>([
+  'styleIdForFill',
+  'styleIdForStrokeFill',
+  'styleIdForText',
+  'styleIdForEffect',
+  'styleIdForGrid',
+])
+
+/**
+ * Checks if a given property is a style property ID
+ * @param property - The property to check
+ * @returns true if the property is a style property ID, false otherwise
+ */
+export function isStylePropertyId(property: string): boolean {
+  return STYLE_PROPERTY_IDS.has(property)
 }
-noop($$a2);
-export let $$o0 = new Set(['backgroundPaints']);
-export function $$l7(e) {
-  return e === 'id' || e === 'alias' || e === 'overriddenVariableId';
+
+// Initialize the set (likely for side effects or module loading)
+noop(STYLE_PROPERTY_IDS)
+
+/** Set of background paint properties */
+export const BACKGROUND_PAINT_PROPERTIES = new Set<string>(['backgroundPaints'])
+
+/**
+ * Checks if a property relates to variable identification
+ * @param property - The property to check
+ * @returns true if the property is a variable ID property, false otherwise
+ */
+export function isVariableIdProperty(property: string): boolean {
+  return property === 'id' || property === 'alias' || property === 'overriddenVariableId'
 }
-export function $$d20(e) {
-  return e === 'variableSetID' || e === 'backingVariableSetId' || e === 'parentVariableSetId';
+
+/**
+ * Checks if a property relates to variable sets
+ * @param property - The property to check
+ * @returns true if the property is a variable set ID property, false otherwise
+ */
+export function isVariableSetIdProperty(property: string): boolean {
+  return property === 'variableSetID' || property === 'backingVariableSetId' || property === 'parentVariableSetId'
 }
-export function $$c22(e) {
-  return e === 'exportedFromCodeFileId' || e === 'codeFileId';
+
+/**
+ * Checks if a property relates to code file identification
+ * @param property - The property to check
+ * @returns true if the property is a code file ID property, false otherwise
+ */
+export function isCodeFileIdProperty(property: string): boolean {
+  return property === 'exportedFromCodeFileId' || property === 'codeFileId'
 }
-export function $$u21(e) {
-  return e === 'backingCodeComponentId';
+
+/**
+ * Checks if a property is a backing code component ID
+ * @param property - The property to check
+ * @returns true if the property is a backing code component ID, false otherwise
+ */
+export function isBackingCodeComponentIdProperty(property: string): boolean {
+  return property === 'backingCodeComponentId'
 }
-export function $$p1(e) {
-  return e === 'belongsToCodeLibraryId';
+
+/**
+ * Checks if a property belongs to a code library
+ * @param property - The property to check
+ * @returns true if the property is a code library ID property, false otherwise
+ */
+export function isCodeLibraryIdProperty(property: string): boolean {
+  return property === 'belongsToCodeLibraryId'
 }
-export function $$m17(e) {
-  return e === 'codeFileCanvasNodeId';
+
+/**
+ * Checks if a property is a canvas node ID in a code file
+ * @param property - The property to check
+ * @returns true if the property is a code file canvas node ID, false otherwise
+ */
+export function isCodeFileCanvasNodeIdProperty(property: string): boolean {
+  return property === 'codeFileCanvasNodeId'
 }
-export function $$h13(e, t) {
-  return e === 'symbolID' || e === 'overriddenSymbolID' || e === 'endpointNodeID' || e === 'currentPage' || e === 'strokeBrushGuid' || e === 'sourceNodeId' || e === 'guid' && t === 'diagramParentIndex';
+
+/**
+ * Checks if a property relates to symbol identification or special GUID handling
+ * @param property - The property name to check
+ * @param context - Optional context for additional checks
+ * @returns true if the property matches symbol/GUID criteria, false otherwise
+ */
+export function isSymbolOrSpecialIdProperty(property: string, context?: string): boolean {
+  return property === 'symbolID'
+    || property === 'overriddenSymbolID'
+    || property === 'endpointNodeID'
+    || property === 'currentPage'
+    || property === 'strokeBrushGuid'
+    || property === 'sourceNodeId'
+    || (property === 'guid' && context === 'diagramParentIndex')
 }
-export function $$g12(e) {
-  return ['r', 'g', 'b', 'a'].every(t => t in e);
+
+/**
+ * Checks if an object has RGBA color properties
+ * @param obj - The object to check
+ * @returns true if the object contains r, g, b, a properties, false otherwise
+ */
+export function hasRgbaColorProperties(obj: Record<string, unknown>): boolean {
+  return ['r', 'g', 'b', 'a'].every(prop => prop in obj)
 }
-export function $$f16(e) {
-  return 'guids' in e && Array.isArray(e.guids) && e.guids.every($$_11);
+
+/**
+ * Checks if an object contains valid GUID array data
+ * @param obj - The object to check
+ * @returns true if the object has guids array with valid entries, false otherwise
+ */
+export function hasValidGuidArray(obj: Record<string, unknown>): boolean {
+  return 'guids' in obj
+    && Array.isArray(obj.guids)
+    && obj.guids.every(hasSessionAndLocalIds)
 }
-export function $$_11(e) {
-  return ['sessionID', 'localID'].every(t => t in e);
+
+/**
+ * Checks if an object has session and local ID properties
+ * @param obj - The object to check
+ * @returns true if the object contains sessionID and localID properties, false otherwise
+ */
+export function hasSessionAndLocalIds(obj: Record<string, unknown>): boolean {
+  return ['sessionID', 'localID'].every(prop => prop in obj)
 }
-export function $$A6(e) {
-  return ['m00', 'm01', 'm02', 'm10', 'm11', 'm12'].every(t => t in e);
+
+/**
+ * Checks if an object has matrix transformation properties
+ * @param obj - The object to check
+ * @returns true if the object contains all matrix transformation properties, false otherwise
+ */
+export function hasMatrixTransformProperties(obj: Record<string, unknown>): boolean {
+  return ['m00', 'm01', 'm02', 'm10', 'm11', 'm12'].every(prop => prop in obj)
 }
-export function $$y23(e) {
-  return Array.isArray(e) && e.length === 2 && e.every(e => Array.isArray(e) && e.length === 3) ? {
-    m00: e[0][0],
-    m01: e[0][1],
-    m02: e[0][2],
-    m10: e[1][0],
-    m11: e[1][1],
-    m12: e[1][2]
-  } : null;
+
+/**
+ * Converts a 2D array to matrix transformation object if valid
+ * @param arr - The array to convert
+ * @returns Matrix object if valid, null otherwise
+ */
+export function arrayToMatrixTransform(arr: unknown): {
+  m00: number
+  m01: number
+  m02: number
+  m10: number
+  m11: number
+  m12: number
+} | null {
+  if (Array.isArray(arr)
+    && arr.length === 2
+    && arr.every(subArr => Array.isArray(subArr) && subArr.length === 3)) {
+    return {
+      m00: arr[0][0],
+      m01: arr[0][1],
+      m02: arr[0][2],
+      m10: arr[1][0],
+      m11: arr[1][1],
+      m12: arr[1][2],
+    }
+  }
+  return null
 }
-export function $$b10(e) {
-  return ['x', 'y'].every(t => t in e);
+
+/**
+ * Checks if an object has 2D coordinate properties
+ * @param obj - The object to check
+ * @returns true if the object contains x and y properties, false otherwise
+ */
+export function hasCoordinates(obj: Record<string, unknown>): boolean {
+  return ['x', 'y'].every(prop => prop in obj)
 }
-export function $$v14(e) {
-  return e instanceof Uint8Array;
+
+/**
+ * Checks if value is a Uint8Array
+ * @param value - The value to check
+ * @returns true if the value is a Uint8Array, false otherwise
+ */
+export function isUint8Array(value: unknown): value is Uint8Array {
+  return value instanceof Uint8Array
 }
-export function $$I19(e, t) {
-  return e instanceof Uint8Array && t === 'hash';
+
+/**
+ * Checks if a property of a Uint8Array is a hash
+ * @param value - The value to check
+ * @param property - The property name
+ * @returns true if the value is a Uint8Array and property is 'hash', false otherwise
+ */
+export function isUint8ArrayHash(value: unknown, property: string): value is Uint8Array {
+  return value instanceof Uint8Array && property === 'hash'
 }
-export function $$E5(e, t) {
-  return typeof e == 'number' && (t === 'commandsBlob' || t === 'dataBlob');
+
+/**
+ * Checks if a value is a number for specific blob properties
+ * @param value - The value to check
+ * @param property - The property name
+ * @returns true if value is number and property is blob-related, false otherwise
+ */
+export function isNumberForBlobProperty(value: unknown, property: string): value is number {
+  return typeof value === 'number' && (property === 'commandsBlob' || property === 'dataBlob')
 }
-export function $$x4(e) {
-  return typeof e == 'boolean';
+
+/**
+ * Checks if a value is a boolean
+ * @param value - The value to check
+ * @returns true if the value is a boolean, false otherwise
+ */
+export function isBoolean(value: unknown): value is boolean {
+  return typeof value === 'boolean'
 }
-export function $$S18(e) {
-  return typeof e == 'number' || typeof e == 'bigint';
+
+/**
+ * Checks if a value is a number or bigint
+ * @param value - The value to check
+ * @returns true if the value is a number or bigint, false otherwise
+ */
+export function isNumberOrBigint(value: unknown): value is number | bigint {
+  return typeof value === 'number' || typeof value === 'bigint'
 }
-export function $$w3(e) {
-  return typeof e == 'string';
+
+/**
+ * Checks if a value is a string
+ * @param value - The value to check
+ * @returns true if the value is a string, false otherwise
+ */
+export function isString(value: unknown): value is string {
+  return typeof value === 'string'
 }
-export function $$C8(e) {
-  return typeof e == 'object' && 'type' in e && 'label' in e;
+
+/**
+ * Checks if an object has type and label properties
+ * @param obj - The object to check
+ * @returns true if the object has type and label properties, false otherwise
+ */
+export function hasTypeAndLabel(obj: Record<string, unknown>): boolean {
+  return typeof obj === 'object' && 'type' in obj && 'label' in obj
 }
-export function $$T9(e, t) {
-  return typeof e == 'string' && wh.has(t);
+
+/**
+ * Checks if a string value corresponds to a redactable property
+ * @param value - The value to check
+ * @param property - The property name
+ * @returns true if value is string and property is redactable, false otherwise
+ */
+export function isStringForRedactableProperty(value: unknown, property: string): value is string {
+  return typeof value === 'string' && REDACTABLE_PROPERTIES.has(property)
 }
-noop($$o0);
-export const EI = $$o0;
-export const FE = $$p1;
-export const GP = $$a2;
-export const Kg = $$w3;
-export const Lm = $$x4;
-export const M_ = $$E5;
-export const OA = $$A6;
-export const Ox = $$l7;
-export const Rt = $$C8;
-export const SE = $$T9;
-export const WX = $$b10;
-export const W_ = $$_11;
-export const _o = $$g12;
-export const aP = $$h13;
-export const aY = $$v14;
-export const ar = $$s15;
-export const hV = $$f16;
-export const hd = $$m17;
-export const kf = $$S18;
-export const qx = $$I19;
-export const r4 = $$d20;
-export const rP = $$u21;
-export const wA = $$c22;
-export const yp = $$y23;
+
+// Initialize background paint properties set
+noop(BACKGROUND_PAINT_PROPERTIES)
+
+// Export aliases for backward compatibility
+export const EI = BACKGROUND_PAINT_PROPERTIES
+export const FE = isCodeLibraryIdProperty
+export const GP = STYLE_PROPERTY_IDS
+export const Kg = isString
+export const Lm = isBoolean
+export const M_ = isNumberForBlobProperty
+export const OA = hasMatrixTransformProperties
+export const Ox = isVariableIdProperty
+export const Rt = hasTypeAndLabel
+export const SE = isStringForRedactableProperty
+export const WX = hasCoordinates
+export const W_ = hasSessionAndLocalIds
+export const _o = hasRgbaColorProperties
+export const aP = isSymbolOrSpecialIdProperty
+export const aY = isUint8Array
+export const ar = isStylePropertyId
+export const hV = hasValidGuidArray
+export const hd = isCodeFileCanvasNodeIdProperty
+export const kf = isNumberOrBigint
+export const qx = isUint8ArrayHash
+export const r4 = isVariableSetIdProperty
+export const rP = isBackingCodeComponentIdProperty
+export const wA = isCodeFileIdProperty
+export const yp = arrayToMatrixTransform

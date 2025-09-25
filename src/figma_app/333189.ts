@@ -3,7 +3,7 @@ import { isIframe } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { ButtonBasePrimaryTracked } from "../figma_app/637027";
-import { u as _$$u } from "../905/684425";
+import { CustomModalComponent } from "../905/684425";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCurrentUserOrg } from "../905/845253";
@@ -22,7 +22,7 @@ let $$y0 = registerModal(function () {
   let r = useCurrentUserOrg();
   return K() && r ? jsx(H, {
     org: r
-  }) : jsx(_$$u, {
+  }) : jsx(CustomModalComponent, {
     imageSrc: A,
     imageClassName: g,
     headerText: getI18nString("link_expired.header"),

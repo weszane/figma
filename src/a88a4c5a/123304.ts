@@ -114,7 +114,7 @@ import { oW as _$$oW } from '../905/675859';
 import { g as _$$g } from '../905/687265';
 import { eA as _$$eA } from '../905/695660';
 import { qo, UN } from '../905/700578';
-import { z5 } from '../905/713722';
+import { defaultColorManipulator } from '../905/713722';
 import { l as _$$l3 } from '../905/716947';
 import { Q as _$$Q } from '../905/717951';
 import { E as _$$E3 } from '../905/719609';
@@ -8459,7 +8459,7 @@ function oi({
   if (!e) return null;
   let t = e.color;
   let l = e.opacity;
-  let i = `${z5.format(t)}${l && l < 1 ? ` \xB7 ${function (e) {
+  let i = `${defaultColorManipulator.format(t)}${l && l < 1 ? ` \xB7 ${function (e) {
     let t = new _$$t3({
       min: 0,
       max: 100
@@ -9074,7 +9074,7 @@ function o_({
   if (!e) return null;
   let t = e.fillColor;
   let l = e.fillOpacity;
-  let i = `${z5.format(t)}${l && l < 1 ? ` \xB7 ${function (e) {
+  let i = `${defaultColorManipulator.format(t)}${l && l < 1 ? ` \xB7 ${function (e) {
     let t = new _$$t3({
       min: 0,
       max: 100

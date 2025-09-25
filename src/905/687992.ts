@@ -1,150 +1,305 @@
-import { roundToNearestMultiple, clampWithBounds } from "../905/875826";
-let $$r0 = 1;
-let $$a11 = 10;
-let s = {
-  0: "0",
-  1: "1",
-  2: "2",
-  3: "3",
-  4: "4",
-  5: "5",
-  6: "6",
-  7: "7",
-  8: "8",
-  9: "9",
-  "-": "-",
-  ".": ".",
-  ",": ".",
-  "\u06F0": "0",
-  "\u06F1": "1",
-  "\u06F2": "2",
-  "\u06F3": "3",
-  "\u06F4": "4",
-  "\u06F5": "5",
-  "\u06F6": "6",
-  "\u06F7": "7",
-  "\u06F8": "8",
-  "\u06F9": "9",
-  "\u060C": ".",
-  "\u066B": ".",
-  "\u066C": ".",
-  "\u0660": "0",
-  "\u0661": "1",
-  "\u0662": "2",
-  "\u0663": "3",
-  "\u0664": "4",
-  "\u0665": "5",
-  "\u0666": "6",
-  "\u0667": "7",
-  "\u0668": "8",
-  "\u0669": "9"
-};
-export function $$o6(e) {
-  if ("" === e || /^-?[\d]*\.?[\d]*$/.test(e)) return e;
-  let t = !1;
-  let i = "";
-  for (let n = 0; n < e.length; n++) {
-    let r = e[n];
-    if (r in s) {
-      let e = s[r];
-      if ("." === e) {
-        if (t) continue;
-        i += e;
-        t = !0;
-        continue;
+import { clampWithBounds, roundToNearestMultiple } from '../905/875826'
+
+let unicodeDigitConverter = {
+  '0': '0',
+  '1': '1',
+  '2': '2',
+  '3': '3',
+  '4': '4',
+  '5': '5',
+  '6': '6',
+  '7': '7',
+  '8': '8',
+  '9': '9',
+  '-': '-',
+  '.': '.',
+  ',': '.',
+  '\u06F0': '0',
+  '\u06F1': '1',
+  '\u06F2': '2',
+  '\u06F3': '3',
+  '\u06F4': '4',
+  '\u06F5': '5',
+  '\u06F6': '6',
+  '\u06F7': '7',
+  '\u06F8': '8',
+  '\u06F9': '9',
+  '\u060C': '.',
+  '\u066B': '.',
+  '\u066C': '.',
+  '\u0660': '0',
+  '\u0661': '1',
+  '\u0662': '2',
+  '\u0663': '3',
+  '\u0664': '4',
+  '\u0665': '5',
+  '\u0666': '6',
+  '\u0667': '7',
+  '\u0668': '8',
+  '\u0669': '9',
+}
+/**
+ * Converts unicode digits and symbols to standard ASCII equivalents
+ * @param input - The input string to convert
+ * @returns The converted string with standard digits and decimal separators
+ */
+export function convertUnicodeDigits(input: string): string {
+  // Early return for empty strings or already valid numeric strings
+  if (input === '' || /^-?\d*(?:\.\d*)?$/.test(input))
+    return input
+
+  let hasDecimalPoint = false
+  let result = ''
+
+  for (let index = 0; index < input.length; index++) {
+    const char = input[index]
+
+    if (char in unicodeDigitConverter) {
+      const convertedChar = unicodeDigitConverter[char]
+
+      // Handle decimal point - only allow one
+      if (convertedChar === '.') {
+        if (hasDecimalPoint)
+          continue
+        result += convertedChar
+        hasDecimalPoint = true
+        continue
       }
-      i += e;
-      continue;
+
+      result += convertedChar
+      continue
     }
-    return e;
+
+    // If we encounter a non-convertible character, return original input
+    return input
   }
-  return i;
+
+  return result
 }
-export function $$l4(e) {
-  return "incrementBy" in e;
+
+/**
+ * Checks if an object has incrementBy method
+ * @param obj - The object to check
+ * @returns True if object has incrementBy property
+ */
+export function hasIncrementBy(obj: any): boolean {
+  return 'incrementBy' in obj
 }
-export function $$d7(e, t) {
-  if (!e.getIncrementTargets) return null;
-  let i = t.selectionStart || 0;
-  let n = t.selectionEnd || 0;
-  return e.getIncrementTargets(t.value, {
-    start: i,
-    end: n
-  });
+
+// Define proper function types to replace the generic Function type
+interface ControllerWithIncrementTargets {
+  getIncrementTargets?: (value: string, selection: { start: number, end: number }) => any
 }
-export function $$c9(e, t, i) {
-  return e.getNudgeAmount ? e.getNudgeAmount(t, i) : t ? $$a11 : $$r0;
+
+interface ControllerWithNudgeAmount {
+  getNudgeAmount?: (isBigStep: boolean, currentValue: any) => number
 }
-export function $$u10(e, t, i, {
-  big: r = !1,
-  incrementTargets: a = null,
-  snap: s
-} = {}) {
-  let o = e.incrementBy(t, i, a);
-  if (s) {
-    let i = $$c9(e, r, t);
-    e.snap ? o = e.snap(o, i) : "number" == typeof o && (o = roundToNearestMultiple(o, i));
+
+/**
+ * Gets increment targets from an element's selection
+ * @param controller - The controller object
+ * @param element - The HTML input element
+ * @returns The increment targets or null
+ */
+export function getIncrementTargets(
+  controller: ControllerWithIncrementTargets,
+  element: HTMLInputElement,
+): any {
+  if (!controller.getIncrementTargets)
+    return null
+
+  const selectionStart = element.selectionStart || 0
+  const selectionEnd = element.selectionEnd || 0
+
+  return controller.getIncrementTargets(element.value, {
+    start: selectionStart,
+    end: selectionEnd,
+  })
+}
+
+/**
+ * Gets the nudge amount for incrementing values
+ * @param controller - The controller object
+ * @param isBigStep - Whether this is a big step increment
+ * @param currentValue - The current value
+ * @returns The nudge amount
+ */
+export function getNudgeAmount(
+  controller: ControllerWithNudgeAmount,
+  isBigStep: boolean,
+  currentValue: any,
+): number {
+  return controller.getNudgeAmount
+    ? controller.getNudgeAmount(isBigStep, currentValue)
+    : isBigStep ? 10 : 1
+}
+
+/**
+ * Increments a value by a specified amount
+ * @param controller - The controller object
+ * @param currentValue - The current value
+ * @param incrementAmount - The amount to increment by
+ * @param options - Additional options
+ * @returns Object containing the incremented value and pre-clamped value
+ */
+export function incrementValue(
+  controller: any,
+  currentValue: any,
+  incrementAmount: number,
+  {
+    big: isBigStep = false,
+    incrementTargets = null,
+    snap,
+  }: {
+    big?: boolean
+    incrementTargets?: any
+    snap?: boolean
+  } = {},
+): { value: any, preClamped: any } {
+  let newValue = controller.incrementBy(currentValue, incrementAmount, incrementTargets)
+
+  if (snap) {
+    const nudgeAmount = getNudgeAmount(controller, isBigStep, currentValue)
+
+    if (controller.snap) {
+      newValue = controller.snap(newValue, nudgeAmount)
+    }
+    else if (typeof newValue === 'number') {
+      newValue = roundToNearestMultiple(newValue, nudgeAmount)
+    }
   }
+
   return {
-    value: $$g3(e, o),
-    preClamped: o
-  };
+    value: clampValue(controller, newValue),
+    preClamped: newValue,
+  }
 }
-export function $$p2(e, t, i, n = {}) {
-  let r = $$c9(e, n.big ?? !1, t);
-  return $$u10(e, t, r * i, n);
+
+/**
+ * Performs a nudge operation (increment/decrement)
+ * @param controller - The controller object
+ * @param currentValue - The current value
+ * @param direction - The direction to nudge (1 for increment, -1 for decrement)
+ * @param options - Additional options
+ * @returns Object containing the new value and pre-clamped value
+ */
+export function performNudge(
+  controller: any,
+  currentValue: any,
+  direction: number,
+  options: any = {},
+): { value: any, preClamped: any } {
+  const isBigStep = options.big ?? false
+  const nudgeAmount = getNudgeAmount(controller, isBigStep, currentValue)
+
+  return incrementValue(controller, currentValue, nudgeAmount * direction, options)
 }
-export function $$m5(e, t, i) {
-  let n = e.parse(t, i);
+
+/**
+ * Parses a value using the controller's parse method
+ * @param controller - The controller object
+ * @param input - The input to parse
+ * @param context - Additional context for parsing
+ * @returns Object containing the parsed value and formatted value
+ */
+export function parseValue(
+  controller: any,
+  input: any,
+  context?: any,
+): { value: any, parsedValue: any } {
+  const parsedValue = controller.parse(input, context)
+
   return {
-    value: $$l4(e) ? $$g3(e, n) : n,
-    parsedValue: n
-  };
+    value: hasIncrementBy(controller) ? clampValue(controller, parsedValue) : parsedValue,
+    parsedValue,
+  }
 }
-export function $$h8(e, t, i, n, r = null) {
+
+/**
+ * Handles parsing with error handling
+ * @param controller - The controller object
+ * @param input - The input to parse
+ * @param fallbackValue - The fallback value if parsing fails
+ * @param source - The source of the input
+ * @param event - The event that triggered the parsing
+ * @returns Object containing the parsed value and optional callback
+ */
+export function handleParseWithError(
+  controller: any,
+  input: any,
+  fallbackValue: any,
+  source: any,
+  event: any = null,
+): { value: any, parsedValue: any, callback: ((...args: any[]) => any) | null } | null {
   try {
     return {
-      ...$$m5(e, t),
-      callback: null
-    };
-  } catch (s) {
-    let a = e.onParseThrow?.(t, {
-      error: s,
-      value: i,
-      source: n,
-      event: r
-    });
-    if ("function" == typeof a) return {
-      value: null,
-      parsedValue: null,
-      callback: a
-    };
-    return null == a ? null : {
-      value: a,
-      parsedValue: a,
-      callback: null
-    };
+      ...parseValue(controller, input),
+      callback: null,
+    }
+  }
+  catch (error) {
+    const errorHandlerResult = controller.onParseThrow?.(input, {
+      error,
+      value: fallbackValue,
+      source,
+      event,
+    })
+
+    if (typeof errorHandlerResult === 'function') {
+      return {
+        value: null,
+        parsedValue: null,
+        callback: errorHandlerResult,
+      }
+    }
+
+    return errorHandlerResult == null
+      ? null
+      : {
+        value: errorHandlerResult,
+        parsedValue: errorHandlerResult,
+        callback: null,
+      }
   }
 }
-export function $$g3(e, t) {
-  let {
-    min,
-    max
-  } = e;
-  return e.clamp ? e.clamp(t, min, max) : "number" == typeof t ? clampWithBounds(t, min, max) : t;
+
+/**
+ * Clamps a value within the controller's min/max bounds
+ * @param controller - The controller object
+ * @param value - The value to clamp
+ * @returns The clamped value
+ */
+export function clampValue(controller: any, value: any): any {
+  const { min, max } = controller
+
+  if (controller.clamp) {
+    return controller.clamp(value, min, max)
+  }
+
+  return typeof value === 'number' ? clampWithBounds(value, min, max) : value
 }
-export function $$f1(e, t, i) {
-  return t === i || (e.isEqual ? e.isEqual(t, i) : e.format(t) === e.format(i));
+
+/**
+ * Checks if two values are equal using controller's isEqual method or format comparison
+ * @param controller - The controller object
+ * @param value1 - First value to compare
+ * @param value2 - Second value to compare
+ * @returns True if values are equal
+ */
+export function areValuesEqual(controller: any, value1: any, value2: any): boolean {
+  return value1 === value2
+    || (controller.isEqual
+      ? controller.isEqual(value1, value2)
+      : controller.format(value1) === controller.format(value2))
 }
-export const A0 = $$r0;
-export const Fi = $$f1;
-export const Hl = $$p2;
-export const Jq = $$g3;
-export const QT = $$l4;
-export const R2 = $$m5;
-export const S8 = $$o6;
-export const _L = $$d7;
-export const iL = $$h8;
-export const mb = $$c9;
-export const ql = $$u10;
-export const rk = $$a11;
+
+export const Fi = areValuesEqual
+export const Hl = performNudge
+export const Jq = clampValue
+export const QT = hasIncrementBy
+export const R2 = parseValue
+export const S8 = convertUnicodeDigits
+export const _L = getIncrementTargets
+export const iL = handleParseWithError
+export const mb = getNudgeAmount
+export const ql = incrementValue

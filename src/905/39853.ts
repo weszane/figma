@@ -30,7 +30,7 @@ import { F as _$$F } from "../905/422355";
 import { getImageManager } from "../figma_app/624361";
 import { U_ } from "../905/327855";
 import { FEditorType } from "../figma_app/53721";
-import { F as _$$F2 } from "../905/877554";
+import { convertMarkdownToEditorState } from "../905/877554";
 import { canCreateFileTypeAsync } from "../figma_app/687776";
 import { VisualBellActions } from "../905/302958";
 import { selectFolderView } from "../figma_app/976345";
@@ -1464,7 +1464,7 @@ async function eP(e, t, i) {
       SlidePptxImporterBindings?.insertContentIntoSlide(t, addedNodes, nodeUpdates);
       (function (e, t, i) {
         if (e) try {
-          let i = _$$F2(e);
+          let i = convertMarkdownToEditorState(e);
           let n = getSingletonSceneGraph().get(t);
           n && i && (n.slideSpeakerNotes = i);
         } catch (e) {

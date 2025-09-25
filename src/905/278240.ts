@@ -23,13 +23,13 @@ import { a2 } from "../figma_app/762558";
 import { ow } from "../905/188421";
 import { c$, sK, tV } from "../905/794875";
 import { pW, gm } from "../figma_app/335781";
-import { t as _$$t2 } from "../905/1946";
+import { ChevronContainer } from "../905/1946";
 import { B as _$$B2 } from "../905/957400";
 import { ControlledVariablePickerProvider, VariablePicker } from "../figma_app/260445";
 import { FormattedInputContext } from "../905/427409";
 import { u3, y$ } from "../figma_app/152690";
 import { MH } from "../figma_app/394327";
-import { k as _$$k2 } from "../905/67286";
+import { calculatePickerPosition } from "../905/67286";
 import { Ej, hE } from "../905/71683";
 class L extends c$ {}
 let F = [10, 11, 12, 13, 14, 15, 16, 20, 24, 32, 36, 40, 48, 64, 96, 128];
@@ -109,7 +109,7 @@ function j({
     if (h?.(), -1 === e) {
       let e = V.current;
       e && B?.showBindingUI(e, {
-        initialPosition: _$$k2({
+        initialPosition: calculatePickerPosition({
           inputRef: V,
           rowRef: N,
           isInStyleModal: Y
@@ -159,7 +159,7 @@ function j({
       },
       children: jsx(tV, {
         value: {
-          chevron: _$$t2
+          chevron: ChevronContainer
         },
         children: jsx(NumericDropdownInput, {
           ariaLabel: getI18nString("fullscreen.type_panel.font_size"),

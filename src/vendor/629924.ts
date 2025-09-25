@@ -26,7 +26,7 @@ function e(t, d, f, p, g) {
           if (g !== b) break t;
           var y = a.slice(p);
           var v = d.slice(p);
-          return m(g, y, v, c);
+          return getDefaultFrameProps(g, y, v, c);
         }
         e: if (null === u || u === o) {
           var d = e.slice(0, o);
@@ -38,7 +38,7 @@ function e(t, d, f, p, g) {
           if (x !== N) break e;
           var y = c.slice(0, c.length - A);
           var v = f.slice(0, f.length - A);
-          return m(a, y, v, x);
+          return getDefaultFrameProps(a, y, v, x);
         }
       }
       if (i.length > 0 && n && 0 === n.length) r: {
@@ -52,7 +52,7 @@ function e(t, d, f, p, g) {
         if (g !== b || x !== N) break r;
         var y = t.slice(p, s - A);
         var v = e.slice(p, l - A);
-        return m(g, y, v, x);
+        return getDefaultFrameProps(g, y, v, x);
       }
       return null;
     }(t, d, f);

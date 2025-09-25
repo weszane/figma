@@ -14,7 +14,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey, RecordingPureComponent } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { colorCSSManipulatorInstance } from "../905/989956";
-import { z5, rC } from "../905/713722";
+import { defaultColorManipulator, FormattedHexColor } from "../905/713722";
 import { o1 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { EditorPreferencesApi } from "../figma_app/740163";
@@ -144,7 +144,7 @@ export function $$Q2({
     t.onColorChange(n, r ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO_BUT_TRACK_AS_EDIT);
     r && t.analytics && _$$F2.trackFromFullscreen(t.analytics.name, {
       source: "slider",
-      color: z5.format(n),
+      color: defaultColorManipulator.format(n),
       ...t.analytics.properties
     });
     u.showColorContrast && void 0 === T.current && (T.current = standardMet);
@@ -168,7 +168,7 @@ export function $$Q2({
     t.onOpacityChange(n.a, r ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO_BUT_TRACK_AS_EDIT);
     r && t.analytics && _$$F2.trackFromFullscreen(t.analytics.name, {
       source: "slider",
-      color: z5.format(n),
+      color: defaultColorManipulator.format(n),
       ...t.analytics.properties
     });
   };
@@ -176,7 +176,7 @@ export function $$Q2({
     t.onColorChange(e, r);
     t.analytics && _$$F2.trackFromFullscreen(t.analytics.name, {
       source: "hex",
-      color: z5.format(e),
+      color: defaultColorManipulator.format(e),
       ...t.analytics.properties
     });
   };
@@ -383,7 +383,7 @@ export function $$er4(e) {
   useEffect(() => {
     s && r.current && c2(r.current, "data-preferred-theme", e.theme);
   }, [s, e.theme]);
-  let o = useMemo(() => s ? z5 : new rC({
+  let o = useMemo(() => s ? defaultColorManipulator : new FormattedHexColor({
     parseAlpha: !0
   }), [s]);
   let l = !(s || e.hideOpacity);
@@ -622,7 +622,7 @@ export function $$es7(e) {
   useEffect(() => {
     r.current && c2(r.current, "data-preferred-theme", e.theme);
   }, [e.theme]);
-  let o = useMemo(() => new rC({
+  let o = useMemo(() => new FormattedHexColor({
     parseAlpha: !0
   }), []);
   return jsxs(et, {

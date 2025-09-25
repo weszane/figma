@@ -48,10 +48,10 @@ function y(e, r) {
 }
 function b(e, r, n) {
   var i = {};
-  n.isMergeableObject(e) && m(e).forEach(function (r) {
+  n.isMergeableObject(e) && getDefaultFrameProps(e).forEach(function (r) {
     i[r] = h(e[r], n);
   });
-  m(r).forEach(function (s) {
+  getDefaultFrameProps(r).forEach(function (s) {
     y(e, s) || (v(e, s) && n.isMergeableObject(r[s]) ? i[s] = p(s, n)(e[s], r[s], n) : i[s] = h(r[s], n));
   });
   return i;

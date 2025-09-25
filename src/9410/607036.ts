@@ -26,7 +26,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { extractProtoFileId, extractValidNodeIdFromProtoUrl, isProtoViewerUrl, getProtoViewerBaseUrl } from "../figma_app/831696";
 import { KindEnum } from "../905/129884";
 import { R } from "../figma_app/53049";
-import { Y } from "../905/1768";
+import { useClickOutside } from "../905/1768";
 var h = p;
 let k = "slides_insert_embed_modal--sectionContainer--r1D85";
 let N = "slides_insert_embed_modal--recentPrototypeThumbnail--2N-ss";
@@ -49,7 +49,7 @@ export function $$R2() {
     e && fullscreenValue.triggerAction("set-tool-default", null);
     i(-1);
   }, [i]);
-  Y(() => s(!0), {
+  useClickOutside(() => s(!0), {
     closeOnEsc: !0,
     ignore: [a, Tc($$O1)]
   });

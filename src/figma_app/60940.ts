@@ -2,7 +2,7 @@ import { createSelector } from "../vendor/925040";
 import { isValidValue } from "../905/216495";
 import { XV } from "../figma_app/383828";
 import { selectSceneGraph } from "../figma_app/889655";
-import { i2 } from "../905/557338";
+import { getSelectedSymbolGUIDs } from "../905/557338";
 import { computeBackingGUIDs } from "../905/92359";
 let d = e => e.library;
 export function $$c0() {
@@ -14,7 +14,7 @@ export function $$c0() {
     return selectedItem;
   });
 }
-export let $$u1 = createSelector([d, selectSceneGraph, i2], (e, t, r) => {
+export let $$u1 = createSelector([d, selectSceneGraph, getSelectedSymbolGUIDs], (e, t, r) => {
   let n = null;
   let {
     backingSymbolGUID,

@@ -1,440 +1,607 @@
-import { filterNumberValues } from "../905/807535";
-import { packRgb } from "../figma_app/273493";
-import { Axis, InteractionCpp, LayoutDirection, HideMode } from "../figma_app/763686";
-import { Rectangle } from "../905/249071";
-import { Vector2D } from "../905/512402";
-var $$l4 = (e => (e[e.NONE = 0] = "NONE", e[e.REORDER = 1] = "REORDER", e[e.ADD = 2] = "ADD", e[e.APPEND = 3] = "APPEND", e[e.RESIZE = 4] = "RESIZE", e))($$l4 || {});
-var $$d0 = (e => (e[e.INACTIVE = 0] = "INACTIVE", e[e.HOVERED = 1] = "HOVERED", e[e.SELECTED = 2] = "SELECTED", e[e.DRAGGED = 3] = "DRAGGED", e))($$d0 || {});
-export function $$c2(e, t, i, n, o) {
-  for (let l of (e.fillRoundedRect(t.expand($$m1.borderStrokeWidth), $$m1.reorderHandleHoveredCornerRadius + 2, packRgb(1, 1, 1)), e.fillRoundedRect(t, $$m1.reorderHandleHoveredCornerRadius, i), $$m1.equalIconOffsets)) {
-    let i = new Rectangle(l, $$m1.equalIconSize);
-    i = o === Axis.X ? i : i.transpose();
-    e.fillRoundedRect(i.offsetBy(t.topLeft()), $$m1.equalIconCornerRadius, n);
+import { Rectangle } from '../905/249071'
+import { Vector2D } from '../905/512402'
+import { filterNumberValues } from '../905/807535'
+import { packRgb } from '../figma_app/273493'
+import { Axis, HideMode, InteractionCpp, LayoutDirection } from '../figma_app/763686'
+
+enum TableUIElement {
+  NONE = 0,
+  REORDER = 1,
+  ADD = 2,
+  APPEND = 3,
+  RESIZE = 4,
+}
+
+enum HandleState {
+  INACTIVE = 0,
+  HOVERED = 1,
+  SELECTED = 2,
+  DRAGGED = 3,
+}
+
+export function renderExpandedReorderHandle(canvas: any, bounds: Rectangle, backgroundColor: number, foregroundColor: number, axis: Axis) {
+  for (let offset of (canvas.fillRoundedRect(bounds.expand(TableUIRenderer.borderStrokeWidth), TableUIRenderer.reorderHandleHoveredCornerRadius + 2, packRgb(1, 1, 1)), canvas.fillRoundedRect(bounds, TableUIRenderer.reorderHandleHoveredCornerRadius, backgroundColor), TableUIRenderer.equalIconOffsets)) {
+    let iconRect = new Rectangle(offset, TableUIRenderer.equalIconSize)
+    iconRect = axis === Axis.X ? iconRect : iconRect.transpose()
+    canvas.fillRoundedRect(iconRect.offsetBy(bounds.topLeft()), TableUIRenderer.equalIconCornerRadius, foregroundColor)
   }
 }
-export function $$u3(e, t, i) {
-  e.fillRoundedRect(t.expand($$m1.borderStrokeWidth), $$m1.reorderHandleInactiveCornerRadius + 1, packRgb(1, 1, 1));
-  e.fillRoundedRect(t, $$m1.reorderHandleInactiveCornerRadius, i);
+export function renderInactiveReorderHandle(canvas: any, bounds: Rectangle, color: number) {
+  canvas.fillRoundedRect(bounds.expand(TableUIRenderer.borderStrokeWidth), TableUIRenderer.reorderHandleInactiveCornerRadius + 1, packRgb(1, 1, 1))
+  canvas.fillRoundedRect(bounds, TableUIRenderer.reorderHandleInactiveCornerRadius, color)
 }
-let p = class e {
-  constructor(t, i, n, s, o) {
-    this._bounds = t;
-    this._widths = i;
-    this._heights = n;
-    this._canvasScale = s;
-    this._shouldRender = o;
-    let l = e.cellStrokeWeight * s;
-    this._columnPositions = i.reduce((e, t, i) => (e.push(t + e[i]), e), [0]).map((e, t) => 0 === t ? e : e - l);
-    this._rowPositions = n.reduce((e, t, i) => (e.push(t + e[i]), e), [0]).map((e, t) => 0 === t ? e : e - l);
-    this._inactiveColor = InteractionCpp.getTableNodeColorInactive();
-    this._hoverColorPrimary = InteractionCpp.getTableNodeColorHoveredPrimary();
-    this._hoverColorSecondary = InteractionCpp.getTableNodeColorHoveredSecondary();
-    this._selectedColor = InteractionCpp.getTableNodeColorSelected();
-    this._whiteColor = packRgb(1, 1, 1);
-    this.numColumns = i.length;
-    this.numRows = n.length;
-    this._tableUiHorizontalAxis = this._bounds.origin.y - e.padding - e.reorderHandleInactiveSize.y / 2;
-    this._tableUiVerticalAxis = this._bounds.origin.x - e.padding - e.reorderHandleInactiveSize.y / 2;
-    this._addColumnButtonPositions = this._getAddColumnButtonPositions();
-    this._addRowButtonPositions = this._getAddRowButtonPositions();
-    this._addColumnButtonHitTestBounds = this._getAddColumnButtonHitTestBounds();
-    this._addRowButtonHitTestBounds = this._getAddRowButtonHitTestBounds();
-    this._hoveredReorderColumnHandleBounds = this._computeReorderColumnHandleBounds(!0);
-    this._hoveredReorderRowHandleBounds = this._computeReorderRowHandleBounds(!0);
-    this._inactiveReorderColumnHandleBounds = this._computeReorderColumnHandleBounds(!1);
-    this._inactiveReorderRowHandleBounds = this._computeReorderRowHandleBounds(!1);
-    this._reorderColumnHandleHitTestBounds = this._computeReorderColumnHandleHitTestBounds();
-    this._reorderRowHandleHitTestBounds = this._computeReorderRowHandleHitTestBounds();
-    this._appendColumnBounds = this._getAppendColumnBounds();
-    this._appendRowBounds = this._getAppendRowBounds();
-    this._columnDividerHitTestBounds = this._getColumnDividerBounds(!0);
-    this._rowDividerHitTestBounds = this._getRowDividerBounds(!0);
-    this._columnDividerRenderBounds = this._getColumnDividerBounds(!1);
-    this._rowDividerRenderBounds = this._getRowDividerBounds(!1);
+let TableUIRenderer = class TableUIRendererClass {
+  _bounds: Rectangle
+  _widths: number[]
+  _heights: number[]
+  _canvasScale: number
+  _shouldRender: HideMode
+  _columnPositions: number[]
+  _rowPositions: number[]
+  _inactiveColor: number
+  _hoverColorPrimary: number
+  _hoverColorSecondary: number
+  _selectedColor: number
+  _whiteColor: number
+  public numColumns: number
+  public numRows: number
+  _tableUiHorizontalAxis: number
+  _tableUiVerticalAxis: number
+  _addColumnButtonPositions: Vector2D[]
+  _addRowButtonPositions: Vector2D[]
+  _addColumnButtonHitTestBounds: Rectangle[]
+  _addRowButtonHitTestBounds: Rectangle[]
+  _hoveredReorderColumnHandleBounds: Rectangle[]
+  _hoveredReorderRowHandleBounds: Rectangle[]
+  _inactiveReorderColumnHandleBounds: Rectangle[]
+  _inactiveReorderRowHandleBounds: Rectangle[]
+  _reorderColumnHandleHitTestBounds: Rectangle[]
+  _reorderRowHandleHitTestBounds: Rectangle[]
+  _appendColumnBounds: Rectangle
+  _appendRowBounds: Rectangle
+  _columnDividerHitTestBounds: Rectangle[]
+  _rowDividerHitTestBounds: Rectangle[]
+  _columnDividerRenderBounds: Rectangle[]
+  _rowDividerRenderBounds: Rectangle[]
+
+  constructor(bounds: Rectangle, widths: number[], heights: number[], canvasScale: number, shouldRender: HideMode) {
+    this._bounds = bounds
+    this._widths = widths
+    this._heights = heights
+    this._canvasScale = canvasScale
+    this._shouldRender = shouldRender
+    let strokeWeight = TableUIRendererClass.cellStrokeWeight * canvasScale
+    this._columnPositions = widths.reduce((acc, width, index) => (acc.push(width + acc[index]), acc), [0]).map((pos, index) => index === 0 ? pos : pos - strokeWeight)
+    this._rowPositions = heights.reduce((acc, height, index) => (acc.push(height + acc[index]), acc), [0]).map((pos, index) => index === 0 ? pos : pos - strokeWeight)
+    this._inactiveColor = InteractionCpp.getTableNodeColorInactive()
+    this._hoverColorPrimary = InteractionCpp.getTableNodeColorHoveredPrimary()
+    this._hoverColorSecondary = InteractionCpp.getTableNodeColorHoveredSecondary()
+    this._selectedColor = InteractionCpp.getTableNodeColorSelected()
+    this._whiteColor = packRgb(1, 1, 1)
+    this.numColumns = widths.length
+    this.numRows = heights.length
+    this._tableUiHorizontalAxis = this._bounds.origin.y - TableUIRendererClass.padding - TableUIRendererClass.reorderHandleInactiveSize.y / 2
+    this._tableUiVerticalAxis = this._bounds.origin.x - TableUIRendererClass.padding - TableUIRendererClass.reorderHandleInactiveSize.y / 2
+    this._addColumnButtonPositions = this._getAddColumnButtonPositions()
+    this._addRowButtonPositions = this._getAddRowButtonPositions()
+    this._addColumnButtonHitTestBounds = this._getAddColumnButtonHitTestBounds()
+    this._addRowButtonHitTestBounds = this._getAddRowButtonHitTestBounds()
+    this._hoveredReorderColumnHandleBounds = this._computeReorderColumnHandleBounds(true)
+    this._hoveredReorderRowHandleBounds = this._computeReorderRowHandleBounds(true)
+    this._inactiveReorderColumnHandleBounds = this._computeReorderColumnHandleBounds(false)
+    this._inactiveReorderRowHandleBounds = this._computeReorderRowHandleBounds(false)
+    this._reorderColumnHandleHitTestBounds = this._computeReorderColumnHandleHitTestBounds()
+    this._reorderRowHandleHitTestBounds = this._computeReorderRowHandleHitTestBounds()
+    this._appendColumnBounds = this._getAppendColumnBounds()
+    this._appendRowBounds = this._getAppendRowBounds()
+    this._columnDividerHitTestBounds = this._getColumnDividerBounds(true)
+    this._rowDividerHitTestBounds = this._getRowDividerBounds(true)
+    this._columnDividerRenderBounds = this._getColumnDividerBounds(false)
+    this._rowDividerRenderBounds = this._getRowDividerBounds(false)
   }
-  isDirty(e, t, i, n, r) {
-    if (!e.equals(this._bounds) || n !== this._canvasScale || r !== this._shouldRender || t.length !== this._widths.length || i.length !== this._heights.length) return !0;
-    for (let e = 0; e < t.length; e++) if (t[e] !== this._widths[e]) return !0;
-    for (let e = 0; e < i.length; e++) if (i[e] !== this._heights[e]) return !0;
-    return !1;
+
+  isDirty(bounds: Rectangle, widths: number[], heights: number[], canvasScale: number, shouldRender: HideMode): boolean {
+    if (!bounds.equals(this._bounds) || canvasScale !== this._canvasScale || shouldRender !== this._shouldRender || widths.length !== this._widths.length || heights.length !== this._heights.length)
+      return true
+    for (let i = 0; i < widths.length; i++) {
+      if (widths[i] !== this._widths[i])
+        return true
+    }
+    for (let i = 0; i < heights.length; i++) {
+      if (heights[i] !== this._heights[i])
+        return true
+    }
+    return false
   }
-  _getBackgroundColor(e) {
-    switch (e) {
-      case 0:
-      case 1:
-        return this._hoverColorSecondary;
-      case 3:
-      case 2:
-        return this._selectedColor;
+
+  _getBackgroundColor(state: HandleState): number {
+    switch (state) {
+      case HandleState.INACTIVE:
+      case HandleState.HOVERED:
+        return this._hoverColorSecondary
+      case HandleState.DRAGGED:
+      case HandleState.SELECTED:
+        return this._selectedColor
       default:
-        return packRgb(1, 0, 0);
+        return packRgb(1, 0, 0)
     }
   }
-  _getForegroundColor(e) {
-    switch (e) {
-      case 0:
-      case 1:
-        return this._hoverColorPrimary;
-      case 3:
-      case 2:
-        return this._whiteColor;
+
+  _getForegroundColor(state: HandleState): number {
+    switch (state) {
+      case HandleState.INACTIVE:
+      case HandleState.HOVERED:
+        return this._hoverColorPrimary
+      case HandleState.DRAGGED:
+      case HandleState.SELECTED:
+        return this._whiteColor
       default:
-        return packRgb(1, 0, 0);
+        return packRgb(1, 0, 0)
     }
   }
-  _getAppendColumnBounds() {
-    let t = e.appendButtonLength;
-    let i = new Vector2D(this._bounds.right() + e.appendButtonPadding, this._bounds.top());
-    return new Rectangle(i, new Vector2D(t, this._bounds.height()));
+
+  _getAppendColumnBounds(): Rectangle {
+    let buttonLength = TableUIRendererClass.appendButtonLength
+    let origin = new Vector2D(this._bounds.right() + TableUIRendererClass.appendButtonPadding, this._bounds.top())
+    return new Rectangle(origin, new Vector2D(buttonLength, this._bounds.height()))
   }
-  _getAppendRowBounds() {
-    let t = e.appendButtonLength;
-    let i = new Vector2D(this._bounds.left(), this._bounds.bottom() + e.appendButtonPadding);
-    return new Rectangle(i, new Vector2D(this._bounds.width(), t));
+
+  _getAppendRowBounds(): Rectangle {
+    let buttonLength = TableUIRendererClass.appendButtonLength
+    let origin = new Vector2D(this._bounds.left(), this._bounds.bottom() + TableUIRendererClass.appendButtonPadding)
+    return new Rectangle(origin, new Vector2D(this._bounds.width(), buttonLength))
   }
-  _getAddColumnButtonPositions() {
-    let e = [];
-    for (let t = 0; t <= this.numColumns; t++) {
-      let i = this._bounds.origin.x + this._columnPositions[t];
-      let n = this._tableUiHorizontalAxis;
-      e.push(new Vector2D(i, n));
+
+  _getAddColumnButtonPositions(): Vector2D[] {
+    let positions: Vector2D[] = []
+    for (let i = 0; i <= this.numColumns; i++) {
+      let x = this._bounds.origin.x + this._columnPositions[i]
+      let y = this._tableUiHorizontalAxis
+      positions.push(new Vector2D(x, y))
     }
-    return e;
+    return positions
   }
-  _getAddRowButtonPositions() {
-    let e = [];
-    for (let t = 0; t <= this.numRows; t++) {
-      let i = this._tableUiVerticalAxis;
-      let n = this._bounds.origin.y + this._rowPositions[t];
-      e.push(new Vector2D(i, n));
+
+  _getAddRowButtonPositions(): Vector2D[] {
+    let positions: Vector2D[] = []
+    for (let i = 0; i <= this.numRows; i++) {
+      let x = this._tableUiVerticalAxis
+      let y = this._bounds.origin.y + this._rowPositions[i]
+      positions.push(new Vector2D(x, y))
     }
-    return e;
+    return positions
   }
-  _getAddColumnButtonHitTestBounds() {
-    let t = [];
+
+  _getAddColumnButtonHitTestBounds(): Rectangle[] {
+    let bounds: Rectangle[] = []
     for (let i = 0; i < this.numColumns; i++) {
-      let n = new Vector2D(this._columnPositions[i], -e.hitTestPaddingThreshold.y);
-      let r = this._bounds.origin.plus(n);
-      let a = Rectangle.fromCenterSize(r, e.hitTestPaddingThreshold.multiplyBy(2));
-      t.push(a);
+      let offset = new Vector2D(this._columnPositions[i], -TableUIRendererClass.hitTestPaddingThreshold.y)
+      let center = this._bounds.origin.plus(offset)
+      let rect = Rectangle.fromCenterSize(center, TableUIRendererClass.hitTestPaddingThreshold.multiplyBy(2))
+      bounds.push(rect)
     }
-    return t;
+    return bounds
   }
-  _getAddRowButtonHitTestBounds() {
-    let t = [];
+
+  _getAddRowButtonHitTestBounds(): Rectangle[] {
+    let bounds: Rectangle[] = []
     for (let i = 0; i < this.numRows; i++) {
-      let n = new Vector2D(-e.hitTestPaddingThreshold.y, this._rowPositions[i]);
-      let r = this._bounds.origin.plus(n);
-      let a = Rectangle.fromCenterSize(r, e.hitTestPaddingThreshold.multiplyBy(2).transpose());
-      t.push(a);
+      let offset = new Vector2D(-TableUIRendererClass.hitTestPaddingThreshold.y, this._rowPositions[i])
+      let center = this._bounds.origin.plus(offset)
+      let rect = Rectangle.fromCenterSize(center, TableUIRendererClass.hitTestPaddingThreshold.multiplyBy(2).transpose())
+      bounds.push(rect)
     }
-    return t;
+    return bounds
   }
-  _getRowPositions() {
-    return this._rowPositions;
+
+  _getRowPositions(): number[] {
+    return this._rowPositions
   }
-  _getColumnPositions() {
-    return this._columnPositions;
+
+  _getColumnPositions(): number[] {
+    return this._columnPositions
   }
-  _computeReorderColumnHandleHitTestBounds() {
-    let t = [];
+
+  _computeReorderColumnHandleHitTestBounds(): Rectangle[] {
+    let bounds: Rectangle[] = []
     for (let i = 0; i < this.numColumns; i++) {
-      let n = new Vector2D((this._columnPositions[i] + this._columnPositions[i + 1]) / 2, -e.hitTestPaddingThreshold.y);
-      let r = this._bounds.origin.plus(n);
-      let a = new Vector2D(this._columnPositions[i + 1] - this._columnPositions[i], 2 * e.hitTestPaddingThreshold.y);
-      t.push(Rectangle.fromCenterSize(r, a));
+      let offset = new Vector2D((this._columnPositions[i] + this._columnPositions[i + 1]) / 2, -TableUIRendererClass.hitTestPaddingThreshold.y)
+      let center = this._bounds.origin.plus(offset)
+      let size = new Vector2D(this._columnPositions[i + 1] - this._columnPositions[i], 2 * TableUIRendererClass.hitTestPaddingThreshold.y)
+      bounds.push(Rectangle.fromCenterSize(center, size))
     }
-    return t;
+    return bounds
   }
-  _computeReorderRowHandleHitTestBounds() {
-    let t = [];
+
+  _computeReorderRowHandleHitTestBounds(): Rectangle[] {
+    let bounds: Rectangle[] = []
     for (let i = 0; i < this.numRows; i++) {
-      let n = new Vector2D(-e.hitTestPaddingThreshold.y, (this._rowPositions[i] + this._rowPositions[i + 1]) / 2);
-      let r = this._bounds.origin.plus(n);
-      let a = new Vector2D(2 * e.hitTestPaddingThreshold.y, this._rowPositions[i + 1] - this._rowPositions[i]);
-      t.push(Rectangle.fromCenterSize(r, a));
+      let offset = new Vector2D(-TableUIRendererClass.hitTestPaddingThreshold.y, (this._rowPositions[i] + this._rowPositions[i + 1]) / 2)
+      let center = this._bounds.origin.plus(offset)
+      let size = new Vector2D(2 * TableUIRendererClass.hitTestPaddingThreshold.y, this._rowPositions[i + 1] - this._rowPositions[i])
+      bounds.push(Rectangle.fromCenterSize(center, size))
     }
-    return t;
+    return bounds
   }
-  _computeReorderColumnHandleBounds(t) {
-    let i = [];
-    let n = t ? e.reorderHandleHoveredSize : e.reorderHandleInactiveSize;
-    let r = n.divideBy(2);
-    let a = this._columnPositions;
-    for (let e = 0; e < this.numColumns; e++) {
-      let t = this._bounds.origin.x + (a[e] + a[e + 1]) / 2;
-      let l = this._tableUiHorizontalAxis;
-      let d = new Vector2D(t, l).minus(r);
-      let c = new Rectangle(d, n);
-      i.push(c);
+
+  _computeReorderColumnHandleBounds(isHovered: boolean): Rectangle[] {
+    let bounds: Rectangle[] = []
+    let handleSize = isHovered ? TableUIRendererClass.reorderHandleHoveredSize : TableUIRendererClass.reorderHandleInactiveSize
+    let halfSize = handleSize.divideBy(2)
+    let positions = this._columnPositions
+    for (let i = 0; i < this.numColumns; i++) {
+      let x = this._bounds.origin.x + (positions[i] + positions[i + 1]) / 2
+      let y = this._tableUiHorizontalAxis
+      let origin = new Vector2D(x, y).minus(halfSize)
+      let rect = new Rectangle(origin, handleSize)
+      bounds.push(rect)
     }
-    return i;
+    return bounds
   }
-  _computeReorderRowHandleBounds(t) {
-    let i = [];
-    let n = (t ? e.reorderHandleHoveredSize : e.reorderHandleInactiveSize).transpose();
-    let r = n.divideBy(2);
-    let a = this._rowPositions;
-    for (let e = 0; e < this.numRows; e++) {
-      let t = this._tableUiVerticalAxis;
-      let l = this._bounds.origin.y + (a[e] + a[e + 1]) / 2;
-      let d = new Vector2D(t, l).minus(r);
-      let c = new Rectangle(d, n);
-      i.push(c);
+
+  _computeReorderRowHandleBounds(isHovered: boolean): Rectangle[] {
+    let bounds: Rectangle[] = []
+    let handleSize = (isHovered ? TableUIRendererClass.reorderHandleHoveredSize : TableUIRendererClass.reorderHandleInactiveSize).transpose()
+    let halfSize = handleSize.divideBy(2)
+    let positions = this._rowPositions
+    for (let i = 0; i < this.numRows; i++) {
+      let x = this._tableUiVerticalAxis
+      let y = this._bounds.origin.y + (positions[i] + positions[i + 1]) / 2
+      let origin = new Vector2D(x, y).minus(halfSize)
+      let rect = new Rectangle(origin, handleSize)
+      bounds.push(rect)
     }
-    return i;
+    return bounds
   }
-  _getColumnDividerBounds(t) {
-    let i = [];
-    let n = e.dividerHeight + (t ? e.dividerHitTestPadding : 0);
-    for (let e = 0; e < this._addColumnButtonPositions.length; e++) {
-      let t = this._addColumnButtonPositions[e].x - n / 2;
-      let r = this._bounds.top();
-      let a = new Vector2D(t, r);
-      let l = new Vector2D(n, this._bounds.height());
-      i.push(new Rectangle(a, l));
+
+  _getColumnDividerBounds(includeHitTestPadding: boolean): Rectangle[] {
+    let bounds: Rectangle[] = []
+    let dividerWidth = TableUIRendererClass.dividerHeight + (includeHitTestPadding ? TableUIRendererClass.dividerHitTestPadding : 0)
+    for (let i = 0; i < this._addColumnButtonPositions.length; i++) {
+      let x = this._addColumnButtonPositions[i].x - dividerWidth / 2
+      let y = this._bounds.top()
+      let origin = new Vector2D(x, y)
+      let size = new Vector2D(dividerWidth, this._bounds.height())
+      bounds.push(new Rectangle(origin, size))
     }
-    return i;
+    return bounds
   }
-  _getRowDividerBounds(t) {
-    let i = [];
-    let n = e.dividerHeight + (t ? e.dividerHitTestPadding : 0);
-    for (let e = 0; e < this._addRowButtonPositions.length; e++) {
-      let t = this._bounds.left();
-      let r = this._addRowButtonPositions[e].y - n / 2;
-      let a = new Vector2D(t, r);
-      let l = new Vector2D(this._bounds.width(), n);
-      i.push(new Rectangle(a, l));
+
+  _getRowDividerBounds(includeHitTestPadding: boolean): Rectangle[] {
+    let bounds: Rectangle[] = []
+    let dividerHeight = TableUIRendererClass.dividerHeight + (includeHitTestPadding ? TableUIRendererClass.dividerHitTestPadding : 0)
+    for (let i = 0; i < this._addRowButtonPositions.length; i++) {
+      let x = this._bounds.left()
+      let y = this._addRowButtonPositions[i].y - dividerHeight / 2
+      let origin = new Vector2D(x, y)
+      let size = new Vector2D(this._bounds.width(), dividerHeight)
+      bounds.push(new Rectangle(origin, size))
     }
-    return i;
+    return bounds
   }
-  _isOutsideTableUIBounds(t) {
-    return !this._bounds.expand(2 * e.hitTestPaddingThreshold.y).containsPointIncludingBoundary(t);
+
+  _isOutsideTableUIBounds(point: Vector2D): boolean {
+    return !this._bounds.expand(2 * TableUIRendererClass.hitTestPaddingThreshold.y).containsPointIncludingBoundary(point)
   }
-  getHoveredSpan(e) {
-    if (this._isOutsideTableUIBounds(e)) return new Vector2D(-1, -1);
-    let t = this.numColumns;
-    for (let i = 1; i < this._addColumnButtonPositions.length; i++) if (e.x <= this._addColumnButtonPositions[i].x) {
-      t = i;
-      break;
+
+  getHoveredSpan(point: Vector2D): Vector2D {
+    if (this._isOutsideTableUIBounds(point))
+      return new Vector2D(-1, -1)
+    let columnIndex = this.numColumns
+    for (let i = 1; i < this._addColumnButtonPositions.length; i++) {
+      if (point.x <= this._addColumnButtonPositions[i].x) {
+        columnIndex = i
+        break
+      }
     }
-    let i = this.numRows;
-    for (let t = 1; t < this._addRowButtonPositions.length; t++) if (e.y <= this._addRowButtonPositions[t].y) {
-      i = t;
-      break;
+    let rowIndex = this.numRows
+    for (let i = 1; i < this._addRowButtonPositions.length; i++) {
+      if (point.y <= this._addRowButtonPositions[i].y) {
+        rowIndex = i
+        break
+      }
     }
-    return new Vector2D(t - 1, i - 1);
+    return new Vector2D(columnIndex - 1, rowIndex - 1)
   }
-  getHoveredRegion(e) {
-    if (this._bounds.isEmpty() || !this.shouldRender() || this._isOutsideTableUIBounds(e)) return {
-      element: 0
-    };
+
+  getHoveredRegion(point: Vector2D): { element: TableUIElement, tableAxis?: LayoutDirection, elementIndex?: number } {
+    if (this._bounds.isEmpty() || !this.shouldRender() || this._isOutsideTableUIBounds(point)) {
+      return {
+        element: TableUIElement.NONE,
+      }
+    }
     if (this.shouldRenderAddButton()) {
-      let t = this._addColumnButtonHitTestBounds;
-      for (let i = 1; i < t.length; i++) if (t[i].containsPointIncludingBoundary(e)) return {
-        element: 2,
+      let columnButtonBounds = this._addColumnButtonHitTestBounds
+      for (let i = 1; i < columnButtonBounds.length; i++) {
+        if (columnButtonBounds[i].containsPointIncludingBoundary(point)) {
+          return {
+            element: TableUIElement.ADD,
+            tableAxis: LayoutDirection.COLUMN,
+            elementIndex: i,
+          }
+        }
+      }
+      let rowButtonBounds = this._addRowButtonHitTestBounds
+      for (let i = 1; i < rowButtonBounds.length; i++) {
+        if (rowButtonBounds[i].containsPointIncludingBoundary(point)) {
+          return {
+            element: TableUIElement.ADD,
+            tableAxis: LayoutDirection.ROW,
+            elementIndex: i,
+          }
+        }
+      }
+    }
+    for (let i = 0; i < this.numColumns; i++) {
+      let bounds = this.getReorderHandleHitTestBounds(LayoutDirection.COLUMN, i)
+      if (bounds && bounds.containsPointIncludingBoundary(point)) {
+        return {
+          element: TableUIElement.REORDER,
+          tableAxis: LayoutDirection.COLUMN,
+          elementIndex: i,
+        }
+      }
+    }
+    for (let i = 0; i < this.numRows; i++) {
+      let bounds = this.getReorderHandleHitTestBounds(LayoutDirection.ROW, i)
+      if (bounds && bounds.containsPointIncludingBoundary(point)) {
+        return {
+          element: TableUIElement.REORDER,
+          tableAxis: LayoutDirection.ROW,
+          elementIndex: i,
+        }
+      }
+    }
+    if (this._appendColumnBounds.containsPointIncludingBoundary(point)) {
+      return {
+        element: TableUIElement.APPEND,
         tableAxis: LayoutDirection.COLUMN,
-        elementIndex: i
-      };
-      let i = this._addRowButtonHitTestBounds;
-      for (let t = 1; t < i.length; t++) if (i[t].containsPointIncludingBoundary(e)) return {
-        element: 2,
+      }
+    }
+    if (this._appendRowBounds.containsPointIncludingBoundary(point)) {
+      return {
+        element: TableUIElement.APPEND,
         tableAxis: LayoutDirection.ROW,
-        elementIndex: t
-      };
+      }
     }
-    for (let t = 0; t < this.numColumns; t++) {
-      let i = this.getReorderHandleHitTestBounds(LayoutDirection.COLUMN, t);
-      if (i && i.containsPointIncludingBoundary(e)) return {
-        element: 1,
-        tableAxis: LayoutDirection.COLUMN,
-        elementIndex: t
-      };
+    for (let i = 0; i < this._columnDividerHitTestBounds.length; i++) {
+      if (this._columnDividerHitTestBounds[i].containsPointIncludingBoundary(point)) {
+        return {
+          element: TableUIElement.RESIZE,
+          tableAxis: LayoutDirection.COLUMN,
+          elementIndex: i,
+        }
+      }
     }
-    for (let t = 0; t < this.numRows; t++) {
-      let i = this.getReorderHandleHitTestBounds(LayoutDirection.ROW, t);
-      if (i && i.containsPointIncludingBoundary(e)) return {
-        element: 1,
-        tableAxis: LayoutDirection.ROW,
-        elementIndex: t
-      };
+    for (let i = 0; i < this._rowDividerHitTestBounds.length; i++) {
+      if (this._rowDividerHitTestBounds[i].containsPointIncludingBoundary(point)) {
+        return {
+          element: TableUIElement.RESIZE,
+          tableAxis: LayoutDirection.ROW,
+          elementIndex: i,
+        }
+      }
     }
-    if (this._appendColumnBounds.containsPointIncludingBoundary(e)) return {
-      element: 3,
-      tableAxis: LayoutDirection.COLUMN
-    };
-    if (this._appendRowBounds.containsPointIncludingBoundary(e)) return {
-      element: 3,
-      tableAxis: LayoutDirection.ROW
-    };
-    for (let t = 0; t < this._columnDividerHitTestBounds.length; t++) if (this._columnDividerHitTestBounds[t].containsPointIncludingBoundary(e)) return {
-      element: 4,
-      tableAxis: LayoutDirection.COLUMN,
-      elementIndex: t
-    };
-    for (let t = 0; t < this._rowDividerHitTestBounds.length; t++) if (this._rowDividerHitTestBounds[t].containsPointIncludingBoundary(e)) return {
-      element: 4,
-      tableAxis: LayoutDirection.ROW,
-      elementIndex: t
-    };
     return {
-      element: 0
-    };
+      element: TableUIElement.NONE,
+    }
   }
-  getNearestSpan(e, t) {
-    let i = e === LayoutDirection.ROW ? this._addRowButtonPositions : this._addColumnButtonPositions;
-    let n = e === LayoutDirection.ROW ? Axis.Y : Axis.X;
-    for (let e = 0; e < i.length - 1; e++) if (t <= (i[e].component(n) + i[e + 1].component(n)) / 2) return e;
-    return i.length - 1;
+
+  getNearestSpan(direction: LayoutDirection, coordinate: number): number {
+    let positions = direction === LayoutDirection.ROW ? this._addRowButtonPositions : this._addColumnButtonPositions
+    let axis = direction === LayoutDirection.ROW ? Axis.Y : Axis.X
+    for (let i = 0; i < positions.length - 1; i++) {
+      if (coordinate <= (positions[i].component(axis) + positions[i + 1].component(axis)) / 2)
+        return i
+    }
+    return positions.length - 1
   }
-  getNearestColumn(e) {
-    return this.getNearestSpan(LayoutDirection.COLUMN, e);
+
+  getNearestColumn(x: number): number {
+    return this.getNearestSpan(LayoutDirection.COLUMN, x)
   }
-  getNearestRow(e) {
-    return this.getNearestSpan(LayoutDirection.ROW, e);
+
+  getNearestRow(y: number): number {
+    return this.getNearestSpan(LayoutDirection.ROW, y)
   }
-  displaceRectForSpan(e, t, i) {
-    let n = InteractionCpp.getTableSpanIdAtIndex(e, t);
-    let r = InteractionCpp.getViewportTableSpanDisplacement(n);
-    i.origin = i.origin.plus(Vector2D.fromFigVector(r));
+
+  displaceRectForSpan(direction: LayoutDirection, index: number, rect: Rectangle): void {
+    let spanId = InteractionCpp.getTableSpanIdAtIndex(direction, index)
+    let displacement = InteractionCpp.getViewportTableSpanDisplacement(spanId)
+    rect.origin = rect.origin.plus(Vector2D.fromFigVector(displacement))
   }
-  getSpanThickness(e, t) {
-    return t === LayoutDirection.COLUMN ? this._widths[e] / this._canvasScale : this._heights[e] / this._canvasScale;
+
+  getSpanThickness(index: number, direction: LayoutDirection): number {
+    return direction === LayoutDirection.COLUMN ? this._widths[index] / this._canvasScale : this._heights[index] / this._canvasScale
   }
-  getReorderHandleHitTestBounds(e, t) {
-    let i = e === LayoutDirection.ROW ? this._reorderRowHandleHitTestBounds : this._reorderColumnHandleHitTestBounds;
-    if (t < 0 || t >= i.length) return null;
-    let n = i[t].clone();
-    this.displaceRectForSpan(e, t, n);
-    return n;
+
+  getReorderHandleHitTestBounds(direction: LayoutDirection, index: number): Rectangle | null {
+    let bounds = direction === LayoutDirection.ROW ? this._reorderRowHandleHitTestBounds : this._reorderColumnHandleHitTestBounds
+    if (index < 0 || index >= bounds.length)
+      return null
+    let rect = bounds[index].clone()
+    this.displaceRectForSpan(direction, index, rect)
+    return rect
   }
-  getReorderHandleBounds(e, t, i) {
-    let n = e === LayoutDirection.COLUMN ? this._inactiveReorderColumnHandleBounds : this._inactiveReorderRowHandleBounds;
-    let r = e === LayoutDirection.COLUMN ? this._hoveredReorderColumnHandleBounds : this._hoveredReorderRowHandleBounds;
-    let s = 0 === i ? n : r;
-    if (t < 0 || t >= s.length) return null;
-    let o = s[t].clone();
-    this.displaceRectForSpan(e, t, o);
-    return o;
+
+  getReorderHandleBounds(direction: LayoutDirection, index: number, state: HandleState): Rectangle | null {
+    let inactiveBounds = direction === LayoutDirection.COLUMN ? this._inactiveReorderColumnHandleBounds : this._inactiveReorderRowHandleBounds
+    let hoveredBounds = direction === LayoutDirection.COLUMN ? this._hoveredReorderColumnHandleBounds : this._hoveredReorderRowHandleBounds
+    let targetBounds = state === HandleState.INACTIVE ? inactiveBounds : hoveredBounds
+    if (index < 0 || index >= targetBounds.length)
+      return null
+    let rect = targetBounds[index].clone()
+    this.displaceRectForSpan(direction, index, rect)
+    return rect
   }
-  renderInactiveReorderHandle(e, t, i) {
-    let n = this.getReorderHandleBounds(t, i, 0);
-    null !== n && $$u3(e, n, this._inactiveColor);
+
+  renderInactiveReorderHandle(canvas: any, direction: LayoutDirection, index: number): void {
+    let bounds = this.getReorderHandleBounds(direction, index, HandleState.INACTIVE)
+    bounds !== null && renderInactiveReorderHandle(canvas, bounds, this._inactiveColor)
   }
-  renderInactiveAddButton(t, i, n) {
-    if (!this.shouldRenderAddButton()) return;
-    let r = i === LayoutDirection.COLUMN ? this._addColumnButtonPositions : this._addRowButtonPositions;
-    if (n < 1 || n >= r.length - 1) return;
-    let s = r[n];
-    t.fillCircle(s, e.addButtonInactiveRadius + e.borderStrokeWidth, this._whiteColor);
-    t.fillCircle(s, e.addButtonInactiveRadius, this._inactiveColor);
+
+  renderInactiveAddButton(canvas: any, direction: LayoutDirection, index: number): void {
+    if (!this.shouldRenderAddButton())
+      return
+    let positions = direction === LayoutDirection.COLUMN ? this._addColumnButtonPositions : this._addRowButtonPositions
+    if (index < 1 || index >= positions.length - 1)
+      return
+    let position = positions[index]
+    canvas.fillCircle(position, TableUIRendererClass.addButtonInactiveRadius + TableUIRendererClass.borderStrokeWidth, this._whiteColor)
+    canvas.fillCircle(position, TableUIRendererClass.addButtonInactiveRadius, this._inactiveColor)
   }
-  renderHitTestBoundsForDebugging(e) {
-    for (let t = 0; t < Math.max(this.numRows, this.numColumns); ++t) for (let i of [LayoutDirection.ROW, LayoutDirection.COLUMN]) if (t < (i === LayoutDirection.ROW ? this.numRows : this.numColumns)) {
-      let n = this.getReorderHandleHitTestBounds(i, t);
-      n && e.fillRoundedRect(n, 0, packRgb(0, 1, 0));
+
+  renderHitTestBoundsForDebugging(canvas: any): void {
+    for (let i = 0; i < Math.max(this.numRows, this.numColumns); ++i) {
+      for (let direction of [LayoutDirection.ROW, LayoutDirection.COLUMN]) {
+        if (i < (direction === LayoutDirection.ROW ? this.numRows : this.numColumns)) {
+          let bounds = this.getReorderHandleHitTestBounds(direction, i)
+          bounds && canvas.fillRoundedRect(bounds, 0, packRgb(0, 1, 0))
+        }
+      }
     }
     if (this.shouldRenderAddButton()) {
-      for (let t of this._addColumnButtonHitTestBounds.slice(1)) e.fillRoundedRect(t, 0, packRgb(1, 0, 0));
-      for (let t of this._addRowButtonHitTestBounds.slice(1)) e.fillRoundedRect(t, 0, packRgb(1, 0, 0));
+      for (let bounds of this._addColumnButtonHitTestBounds.slice(1)) canvas.fillRoundedRect(bounds, 0, packRgb(1, 0, 0))
+      for (let bounds of this._addRowButtonHitTestBounds.slice(1)) canvas.fillRoundedRect(bounds, 0, packRgb(1, 0, 0))
     }
   }
-  renderExpandedReorderHandle(e, t, i, n) {
-    let r = this.getReorderHandleBounds(t, i, n);
-    if (null !== r) $$c2(e, r, this._getBackgroundColor(n), this._getForegroundColor(n), t === LayoutDirection.COLUMN ? Axis.X : Axis.Y);
+
+  renderExpandedReorderHandle(canvas: any, direction: LayoutDirection, index: number, state: HandleState): void {
+    let bounds = this.getReorderHandleBounds(direction, index, state)
+    if (bounds !== null)
+      renderExpandedReorderHandle(canvas, bounds, this._getBackgroundColor(state), this._getForegroundColor(state), direction === LayoutDirection.COLUMN ? Axis.X : Axis.Y)
   }
-  _renderPlusButton(t, i, n) {
-    let r = e.plusIconStrokeWidth;
-    let a = e.plusIconLength;
-    let l = new Rectangle(new Vector2D(i.x - a / 2, i.y - r / 2), new Vector2D(a, r));
-    let d = new Rectangle(new Vector2D(i.x - r / 2, i.y - a / 2), new Vector2D(r, a));
-    t.fillRect(l, n);
-    t.fillRect(d, n);
+
+  _renderPlusButton(canvas: any, center: Vector2D, color: number): void {
+    let strokeWidth = TableUIRendererClass.plusIconStrokeWidth
+    let iconLength = TableUIRendererClass.plusIconLength
+    let horizontalRect = new Rectangle(new Vector2D(center.x - iconLength / 2, center.y - strokeWidth / 2), new Vector2D(iconLength, strokeWidth))
+    let verticalRect = new Rectangle(new Vector2D(center.x - strokeWidth / 2, center.y - iconLength / 2), new Vector2D(strokeWidth, iconLength))
+    canvas.fillRect(horizontalRect, color)
+    canvas.fillRect(verticalRect, color)
   }
-  renderExpandedAddButton(t, i, n) {
-    t.fillCircle(i, e.addButtonHoveredRadius + e.borderStrokeWidth, this._whiteColor);
-    t.fillCircle(i, e.addButtonHoveredRadius, this._getBackgroundColor(n));
-    this._renderPlusButton(t, i, this._getForegroundColor(n));
+
+  renderExpandedAddButton(canvas: any, position: Vector2D, state: HandleState): void {
+    canvas.fillCircle(position, TableUIRendererClass.addButtonHoveredRadius + TableUIRendererClass.borderStrokeWidth, this._whiteColor)
+    canvas.fillCircle(position, TableUIRendererClass.addButtonHoveredRadius, this._getBackgroundColor(state))
+    this._renderPlusButton(canvas, position, this._getForegroundColor(state))
   }
-  renderAppendButton(t, i, n) {
-    let r = i === LayoutDirection.COLUMN ? this._appendColumnBounds : this._appendRowBounds;
-    let s = 0 === n ? this._hoverColorSecondary : this._selectedColor;
-    let o = 0 === n ? this._hoverColorPrimary : this._whiteColor;
-    t.fillRoundedRect(r, e.appendButtonCornerRadius, s);
-    this._renderPlusButton(t, r.center(), o);
+
+  renderAppendButton(canvas: any, direction: LayoutDirection, state: HandleState): void {
+    let bounds = direction === LayoutDirection.COLUMN ? this._appendColumnBounds : this._appendRowBounds
+    let backgroundColor = state === HandleState.INACTIVE ? this._hoverColorSecondary : this._selectedColor
+    let foregroundColor = state === HandleState.INACTIVE ? this._hoverColorPrimary : this._whiteColor
+    canvas.fillRoundedRect(bounds, TableUIRendererClass.appendButtonCornerRadius, backgroundColor)
+    this._renderPlusButton(canvas, bounds.center(), foregroundColor)
   }
-  renderDivider(t, i, n, r) {
-    let s = i === LayoutDirection.COLUMN ? this._columnDividerRenderBounds : this._rowDividerRenderBounds;
-    if (n < 0 || n >= s.length) return;
-    let o = s[n];
-    let l = this._getBackgroundColor(r);
-    t.fillRoundedRect(o, e.dividerCornerRadius, l);
+
+  renderDivider(canvas: any, direction: LayoutDirection, index: number, state: HandleState): void {
+    let bounds = direction === LayoutDirection.COLUMN ? this._columnDividerRenderBounds : this._rowDividerRenderBounds
+    if (index < 0 || index >= bounds.length)
+      return
+    let dividerBounds = bounds[index]
+    let color = this._getBackgroundColor(state)
+    canvas.fillRoundedRect(dividerBounds, TableUIRendererClass.dividerCornerRadius, color)
   }
-  renderAddButton(e, t, i, n) {
-    if (!this.shouldRenderAddButton()) return;
-    let r = t === LayoutDirection.COLUMN ? this._addColumnButtonPositions : this._addRowButtonPositions;
-    if (i < 0 || i > r.length) return;
-    let s = r[i];
-    this.renderExpandedAddButton(e, s, n);
+
+  renderAddButton(canvas: any, direction: LayoutDirection, index: number, state: HandleState): void {
+    if (!this.shouldRenderAddButton())
+      return
+    let positions = direction === LayoutDirection.COLUMN ? this._addColumnButtonPositions : this._addRowButtonPositions
+    if (index < 0 || index > positions.length)
+      return
+    let position = positions[index]
+    this.renderExpandedAddButton(canvas, position, state)
   }
-  renderHoveredInactiveElements(e, t) {
-    for (let i of filterNumberValues(LayoutDirection)) {
-      let n = t.component(i ? Axis.X : Axis.Y);
-      this.renderInactiveReorderHandle(e, i, n);
-      this.renderInactiveAddButton(e, i, n);
-      this.renderInactiveAddButton(e, i, n + 1);
+
+  renderHoveredInactiveElements(canvas: any, span: Vector2D): void {
+    for (let direction of filterNumberValues(LayoutDirection)) {
+      let index = span.component(direction ? Axis.X : Axis.Y)
+      this.renderInactiveReorderHandle(canvas, direction, index)
+      this.renderInactiveAddButton(canvas, direction, index)
+      this.renderInactiveAddButton(canvas, direction, index + 1)
     }
   }
-  renderAllInactiveElements(e) {
-    for (let t of filterNumberValues(LayoutDirection)) {
-      let i = t === LayoutDirection.COLUMN ? this.numColumns : this.numRows;
-      for (let n = 0; n < i; n++) this.renderInactiveReorderHandle(e, t, n);
-      for (let n = 1; n < i; n++) this.renderInactiveAddButton(e, t, n);
+
+  renderAllInactiveElements(canvas: any): void {
+    for (let direction of filterNumberValues(LayoutDirection)) {
+      let count = direction === LayoutDirection.COLUMN ? this.numColumns : this.numRows
+      for (let i = 0; i < count; i++) this.renderInactiveReorderHandle(canvas, direction, i)
+      for (let i = 1; i < count; i++) this.renderInactiveAddButton(canvas, direction, i)
     }
   }
-  renderHoveredInactiveElementsUnderEditModeUI(e, t) {
-    t.x === this.numColumns - 1 && this.renderAppendButton(e, LayoutDirection.COLUMN, 0);
-    t.y === this.numRows - 1 && this.renderAppendButton(e, LayoutDirection.ROW, 0);
+
+  renderHoveredInactiveElementsUnderEditModeUI(canvas: any, span: Vector2D): void {
+    span.x === this.numColumns - 1 && this.renderAppendButton(canvas, LayoutDirection.COLUMN, HandleState.INACTIVE)
+    span.y === this.numRows - 1 && this.renderAppendButton(canvas, LayoutDirection.ROW, HandleState.INACTIVE)
   }
-  renderAllInactiveElementsUnderEditModeUI(e) {
-    for (let t of filterNumberValues(LayoutDirection)) this.renderAppendButton(e, t, 0);
+
+  renderAllInactiveElementsUnderEditModeUI(canvas: any): void {
+    for (let direction of filterNumberValues(LayoutDirection)) this.renderAppendButton(canvas, direction, HandleState.INACTIVE)
   }
-  shouldRender() {
-    return !this._bounds.isInvalid() && this._shouldRender !== HideMode.HIDE;
+
+  shouldRender(): boolean {
+    return !this._bounds.isInvalid() && this._shouldRender !== HideMode.HIDE
   }
-  shouldRenderAddButton() {
-    return this.shouldRender() && this._shouldRender === HideMode.FULL;
+
+  shouldRenderAddButton(): boolean {
+    return this.shouldRender() && this._shouldRender === HideMode.FULL
   }
-  bounds() {
-    return this._bounds.scaledBy(1 / this._canvasScale);
+
+  bounds(): Rectangle {
+    return this._bounds.scaledBy(1 / this._canvasScale)
   }
-};
-p.hitTestPaddingThreshold = new Vector2D(11, 22);
-p.padding = 18;
-p.spacing = 18;
-p.borderStrokeWidth = 2;
-p.reorderHandleInactiveSize = new Vector2D(18, 6);
-p.reorderHandleInactiveCornerRadius = 4;
-p.reorderHandleHoveredLength = 22;
-p.reorderHandleHoveredSize = new Vector2D(p.reorderHandleHoveredLength, p.reorderHandleHoveredLength);
-p.reorderHandleHoveredCornerRadius = 6;
-p.addButtonInactiveRadius = 4;
-p.addButtonHoveredRadius = 11;
-p.appendButtonLength = 26;
-p.appendButtonCornerRadius = 5;
-p.appendButtonPadding = 10;
-p.dividerCornerRadius = 100;
-p.dividerHeight = 4;
-p.dividerHitTestPadding = 4;
-p.plusIconStrokeWidth = 2;
-p.plusIconLength = 12;
-p.equalIconSize = new Vector2D(12, 2);
-p.equalIconCornerRadius = 2;
-p.equalIconOffsets = [new Vector2D(5, 8), new Vector2D(5, 12)];
-p.cellStrokeWeight = 1;
-export let $$m1 = p;
-export const Dv = $$d0;
-export const Ro = $$m1;
-export const dw = $$c2;
-export const fl = $$u3;
-export const xT = $$l4;
+
+  static hitTestPaddingThreshold: Vector2D
+  static padding: number
+  static spacing: number
+  static borderStrokeWidth: number
+  static reorderHandleInactiveSize: Vector2D
+  static reorderHandleInactiveCornerRadius: number
+  static reorderHandleHoveredLength: number
+  static reorderHandleHoveredSize: Vector2D
+  static reorderHandleHoveredCornerRadius: number
+  static addButtonInactiveRadius: number
+  static addButtonHoveredRadius: number
+  static appendButtonLength: number
+  static appendButtonCornerRadius: number
+  static appendButtonPadding: number
+  static dividerCornerRadius: number
+  static dividerHeight: number
+  static dividerHitTestPadding: number
+  static plusIconStrokeWidth: number
+  static plusIconLength: number
+  static equalIconSize: Vector2D
+  static equalIconCornerRadius: number
+  static equalIconOffsets: Vector2D[]
+  static cellStrokeWeight: number
+}
+TableUIRenderer.hitTestPaddingThreshold = new Vector2D(11, 22)
+TableUIRenderer.padding = 18
+TableUIRenderer.spacing = 18
+TableUIRenderer.borderStrokeWidth = 2
+TableUIRenderer.reorderHandleInactiveSize = new Vector2D(18, 6)
+TableUIRenderer.reorderHandleInactiveCornerRadius = 4
+TableUIRenderer.reorderHandleHoveredLength = 22
+TableUIRenderer.reorderHandleHoveredSize = new Vector2D(TableUIRenderer.reorderHandleHoveredLength, TableUIRenderer.reorderHandleHoveredLength)
+TableUIRenderer.reorderHandleHoveredCornerRadius = 6
+TableUIRenderer.addButtonInactiveRadius = 4
+TableUIRenderer.addButtonHoveredRadius = 11
+TableUIRenderer.appendButtonLength = 26
+TableUIRenderer.appendButtonCornerRadius = 5
+TableUIRenderer.appendButtonPadding = 10
+TableUIRenderer.dividerCornerRadius = 100
+TableUIRenderer.dividerHeight = 4
+TableUIRenderer.dividerHitTestPadding = 4
+TableUIRenderer.plusIconStrokeWidth = 2
+TableUIRenderer.plusIconLength = 12
+TableUIRenderer.equalIconSize = new Vector2D(12, 2)
+TableUIRenderer.equalIconCornerRadius = 2
+TableUIRenderer.equalIconOffsets = [new Vector2D(5, 8), new Vector2D(5, 12)]
+TableUIRenderer.cellStrokeWeight = 1
+export { TableUIRenderer }
+export const Dv = HandleState
+export const Ro = TableUIRenderer
+export const dw = renderExpandedReorderHandle
+export const fl = renderInactiveReorderHandle
+export const xT = TableUIElement

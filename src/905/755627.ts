@@ -3,7 +3,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { FieldType } from "../figma_app/763686";
 import { $$default } from "../vendor/73080";
 import { logError } from "../905/714362";
-import { Kg } from "../905/71";
+import { isString } from "../905/71";
 export let $$n1;
 function c(e) {
   return !isNaN(e.getTime());
@@ -31,7 +31,7 @@ class u {
         let n = new $$default(g, h).format({
           parsedPlaceholder: f
         });
-        if (!Kg(n)) {
+        if (!isString(n)) {
           logError("renderPlaceholderImpl", "Result is not a string", {
             formatType: e,
             formatPattern: t,

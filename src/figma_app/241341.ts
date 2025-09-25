@@ -2,7 +2,7 @@ import E from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
-import { ar } from '../905/71';
+import { isStylePropertyId } from '../905/71';
 import { _ as _$$_ } from '../905/39853';
 import { useSprigWithSampling } from '../905/99656';
 import { registerModal, ModalSupportsBackground } from '../905/102752';
@@ -180,7 +180,7 @@ function eu({
             for (let [l, d] of styleIdMapping) {
               let c = null;
               let u = null;
-              if (ar(l) && (e[l] && e[l].guid && (c = sessionLocalIDToString(e[l].guid)), t[l] && t[l].guid && (u = sessionLocalIDToString(t[l].guid))), c || u) {
+              if (isStylePropertyId(l) && (e[l] && e[l].guid && (c = sessionLocalIDToString(e[l].guid)), t[l] && t[l].guid && (u = sessionLocalIDToString(t[l].guid))), c || u) {
                 let p = function (e, t) {
                   if (t) {
                     if (l === 'styleIdForStrokeFill') {

@@ -2,7 +2,7 @@ import { isBrowser } from "../905/268204";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, forwardRef, useState, useEffect, createContext, useContext, useRef, useCallback, useLayoutEffect } from "react";
 import { A as _$$A2 } from "../vendor/723372";
-import { mb, ql, Jq, iL, Fi, QT } from "../905/687992";
+import { getNudgeAmount, incrementValue, clampValue, handleParseWithError, areValuesEqual, hasIncrementBy } from "../905/687992";
 import { setupRefUpdater } from "../905/823680";
 import { InputComponent } from "../905/185998";
 import { addEventlistenerWithCleanup, preventAndStopEvent, createCleanupExecutor } from "../905/955878";
@@ -149,15 +149,15 @@ function $$N({
   });
 }
 function P(e, t, i, n, r) {
-  let a = mb(e, !1, t);
+  let a = getNudgeAmount(e, !1, t);
   let o = (n.current = n.current + i) * a;
-  let l = ql(e, t, o, {
+  let l = incrementValue(e, t, o, {
     snap: !0,
     big: r
   });
   if ("number" == typeof t) {
     let i = t + o;
-    let r = Jq(e, i);
+    let r = clampValue(e, i);
     let l = i - r;
     l && (n.current -= l / a);
   }
@@ -473,7 +473,7 @@ let H = forwardRef(({
       onScrubStart(n) {
         if (containsActiveElement(n.target) && (L.current = document.activeElement, L.current.blur()), t) {
           let n = t();
-          let r = iL(i, n, e, "scrub", null);
+          let r = handleParseWithError(i, n, e, "scrub", null);
           r?.callback ? j.current = r.callback : N.current = r?.value ?? e;
         } else N.current = e;
         O.current = 0;
@@ -497,7 +497,7 @@ let H = forwardRef(({
           commit: !1
         });else {
           let n = d(N.current);
-          Fi(i, n.value, e) || (l(n.value, Object.assign(t, {
+          areValuesEqual(i, n.value, e) || (l(n.value, Object.assign(t, {
             commit: !1
           })), F.current = !0);
           n.value !== n.preClamped && p?.(n.preClamped, {
@@ -516,7 +516,7 @@ let H = forwardRef(({
             commit: !0
           });else {
             let n = r(N.current);
-            (F.current || !Fi(i, n, e)) && l(n, Object.assign(t, {
+            (F.current || !areValuesEqual(i, n, e)) && l(n, Object.assign(t, {
               commit: !0
             }));
           }
@@ -601,7 +601,7 @@ let K = forwardRef(({
 K.displayName = "ScrubbableInput.Icon";
 forwardRef((e, t) => {
   let i = U();
-  return i && !i.ctx.inputProps.disabled && QT(i.ctx.formatter) ? jsx(_$$C, {
+  return i && !i.ctx.inputProps.disabled && hasIncrementBy(i.ctx.formatter) ? jsx(_$$C, {
     ref: t,
     value: i.ctx.value,
     formatter: i.ctx.formatter,

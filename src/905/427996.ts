@@ -3,14 +3,14 @@ import { SKIP_RECORDING, useRecording } from "../905/959312";
 import { executeEventHandler, preventAndStopEvent, markEventAsProcessed } from "../905/955878";
 import { isActiveElement } from "../905/117474";
 import { F } from "../905/658036";
-import { QT, _L, Hl, iL, Fi, R2 } from "../905/687992";
+import { hasIncrementBy, getIncrementTargets, performNudge, handleParseWithError, areValuesEqual, parseValue } from "../905/687992";
 import { A } from "../vendor/723372";
 import { hasTextSelection } from "../905/914656";
 function l(e, t) {
   isActiveElement(e) && (t?.select ? t.select(e) : e.select());
 }
 function c(e, t, i) {
-  if (t && QT(e) && e.getSelection) {
+  if (t && hasIncrementBy(e) && e.getSelection) {
     let {
       start,
       end
@@ -53,7 +53,7 @@ let m = function (...e) {
   }, [p, t]);
   let h = t.format(i);
   let g = n => {
-    if (executeEventHandler(n, l) || !QT(t)) return SKIP_RECORDING;
+    if (executeEventHandler(n, l) || !hasIncrementBy(t)) return SKIP_RECORDING;
     switch (n.key) {
       case "ArrowUp":
       case "ArrowDown":
@@ -61,14 +61,14 @@ let m = function (...e) {
           let r = e.current;
           let a = n.shiftKey;
           let l = "ArrowDown" === n.key ? -1 : 1;
-          let u = _L(t, r);
+          let u = getIncrementTargets(t, r);
           p?.commit?.();
-          let h = e => Hl(t, e, l, {
+          let h = e => performNudge(t, e, l, {
             big: a,
             incrementTargets: u
           });
           let g = r.value;
-          let f = iL(t, g, i, "nudge", n);
+          let f = handleParseWithError(t, g, i, "nudge", n);
           if (!f) break;
           if (f.callback) {
             f.callback(e => h(e).value, {
@@ -78,7 +78,7 @@ let m = function (...e) {
           }
           let _ = f.value;
           let A = h(_);
-          Fi(t, _, A.value) || s(A.value, "nudge");
+          areValuesEqual(t, _, A.value) || s(A.value, "nudge");
           A.value !== A.preClamped && o?.(A.preClamped, {
             value: A.value
           });
@@ -100,9 +100,9 @@ let m = function (...e) {
     ref: e,
     value: h,
     onChange: n => {
-      let r = iL(t, n, i, "change", null);
+      let r = handleParseWithError(t, n, i, "change", null);
       if (r) {
-        if (r.callback) r.callback(e => R2(t, n, e).value, {
+        if (r.callback) r.callback(e => parseValue(t, n, e).value, {
           commit: !0
         });else {
           if (r.value === i) ;else {

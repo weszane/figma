@@ -17,7 +17,7 @@ import { TrackedAnchor, TrackedDiv, TrackingProvider } from "../figma_app/831799
 import { SK, Fq } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { designSet } from "../905/332483";
-import { K } from "../905/3140";
+import { renderRequestErrorInterstitial } from "../905/3140";
 import { getUserCurrency, CurrencyFormatter } from "../figma_app/514043";
 import { Ju, IX } from "../905/712921";
 import { N as _$$N } from "../905/809096";
@@ -203,7 +203,7 @@ export function $$N0({
   }, z + e.headerText + l));
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "FullscreenHelpUpsellsModalBase",
-    fallback: jsx(K, {}),
+    fallback: jsx(renderRequestErrorInterstitial, {}),
     team: ServiceCategories.MONETIZATION_UPGRADES,
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {

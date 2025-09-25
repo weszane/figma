@@ -7,7 +7,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
 import { kG } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 export let $$h0 = memo(function ({
   rowRef: e,
   recordingKey: t
@@ -24,7 +24,7 @@ export let $$h0 = memo(function ({
         key: "cornerSmoothing",
         value: s.showing
       });
-      s.toggle(() => cn(e.current));
+      s.toggle(() => calculatePickerPositionLeft(e.current));
     },
     htmlAttributes: {
       "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.corner_smoothing"),

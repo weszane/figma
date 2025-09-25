@@ -5,7 +5,7 @@ import { I as _$$I } from "../905/117966";
 import { fetchDynamicConfig } from "../figma_app/594947";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { fullscreenValue } from "../figma_app/455680";
-import { z as _$$z } from "../905/223332";
+import { widgetInteractionTracker } from "../905/223332";
 import { setStackInvariantCallback } from "../figma_app/603466";
 import { nB, AK } from "../905/642684";
 import { Nq } from "../905/266529";
@@ -1218,7 +1218,7 @@ let $$eu1 = _$$n(async e => {
     enableResponsiveSetHierarchyMutations
   } = e;
   let M = await ed(e.vmType);
-  isWidget && _$$z.didVmStart(window.performance.now());
+  isWidget && widgetInteractionTracker.didVmStart(window.performance.now());
   let j = await ec();
   M.setErrorHandler(t => {
     let n = "";
@@ -1589,7 +1589,7 @@ let $$eu1 = _$$n(async e => {
         } finally {
           stats.markTime("timeToEvalTopLevelCodeMs");
         }
-        if (e.isWidget && _$$z.didEvalJSVM(), "FAILURE" === i.type) {
+        if (e.isWidget && widgetInteractionTracker.didEvalJSVM(), "FAILURE" === i.type) {
           if (isInteractionPathCheck()) {
             let e = M.toString(i.error.handle);
             t({

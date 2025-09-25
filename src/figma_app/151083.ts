@@ -19,7 +19,7 @@ import { c as _$$c } from "../905/210851";
 import { openFileAtom } from "../figma_app/516028";
 import { useSubscribedAssets, AssetFilterMode } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
-import { bd } from "../905/557338";
+import { createPrimaryInstancesSelector } from "../905/557338";
 import { KindEnum } from "../905/129884";
 import { c1, Yh } from "../figma_app/357047";
 import { $H } from "../figma_app/323320";
@@ -242,7 +242,7 @@ export function $$K4(e) {
     componentUpdatesForAllPages,
     stateGroupUpdatesForAllPages
   } = useSelector(ij);
-  let n = useMemo(bd, []);
+  let n = useMemo(createPrimaryInstancesSelector, []);
   let s = useSelector(t => n(t, e));
   let {
     componentInstanceUpdateInfo,

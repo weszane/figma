@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { convertKiwiToVariableIdString } from "../905/805904";
 import s from "classnames";
 import { getI18nString } from "../905/303541";
-import { TI } from "../905/713722";
+import { formattedColorManipulator } from "../905/713722";
 import { LN } from "../figma_app/975811";
 import { getPatternPaint, getNoisePaint } from "../figma_app/385874";
 import { u as _$$u } from "../figma_app/852050";
@@ -13,7 +13,7 @@ var o = s;
 let g = e => {
   switch (e.type) {
     case "SOLID":
-      return TI.format(e.color || {
+      return formattedColorManipulator.format(e.color || {
         r: 1,
         g: 1,
         b: 1,

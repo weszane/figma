@@ -51,7 +51,7 @@ import { Cg } from '../905/195479';
 import { g as _$$g3 } from '../905/211118';
 import { normalizeValue } from '../905/216495';
 import { c as _$$c2 } from '../905/217163';
-import { z as _$$z3 } from '../905/223332';
+import { widgetInteractionTracker } from '../905/223332';
 import { Xo } from '../905/226610';
 import { Ag as _$$Ag } from '../905/235578';
 import { delay } from '../905/236856';
@@ -230,7 +230,7 @@ import { lQ } from '../905/934246';
 import { parse, unparse } from '../905/945633';
 import { Jc, Sn } from '../905/946805';
 import { $3 } from '../905/946937';
-import { qo as _$$qo } from '../905/959568';
+import { DEFAULT_PICKER_WIDTH } from '../905/959568';
 import { L as _$$L } from '../905/970585';
 import { n as _$$n5 } from '../905/971006';
 import { setupMultiplayerSession } from '../905/977824';
@@ -1054,7 +1054,7 @@ function ik(e) {
     }));
   }, [t, e.slotNodeId, s]);
   return jsx(bL, {
-    width: _$$qo,
+    width: DEFAULT_PICKER_WIDTH,
     maxHeight: 360,
     onClose: e.onClose,
     recordingKey: 'slotPreferredContentPicker',
@@ -4884,7 +4884,7 @@ class lV {
     let n = i[0];
     let r = getSceneGraphInstance().get(n.id);
     if (r?.type !== 'TEXT') throw new Error('Can\'t have a text event on non text node');
-    _$$z3.startInteraction(e, 'textEditEnd');
+    widgetInteractionTracker.startInteraction(e, 'textEditEnd');
     this.didCallTextEditEnd = !0;
     let a = {
       pluginID: e,
@@ -4936,7 +4936,7 @@ class lV {
   }
   clickWidget(e, t, i) {
     if (!isValidWidgetType(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(PluginAction.RUN_WIDGET);
-    _$$z3.startInteraction(e, 'click');
+    widgetInteractionTracker.startInteraction(e, 'click');
     lM.runUserInitiatedWidget({
       pluginID: e,
       lifecycleCommand: {

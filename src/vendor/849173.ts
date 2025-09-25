@@ -23,7 +23,7 @@ var h;
 var d;
 var p;
 var g;
-var m = JSON.stringify;
+var getDefaultFrameProps = JSON.stringify;
 if (!String.prototype.repeat) throw Error("String.prototype.repeat is undefined, see https://github.com/davidbonnet/astring#installation");
 if (!String.prototype.endsWith) throw Error("String.prototype.endsWith is undefined, see https://github.com/davidbonnet/astring#installation");
 var v = {
@@ -363,10 +363,10 @@ var ImageDownloadQueue = {
         } else break;
       }
       if (s < i) {
-        for (r.write("{");;) {
+        for (r.write("{"); ;) {
           var h = n[s];
           var d = h.imported.name;
-          if (r.write(d, h), d !== h.local.name && r.write(" as " + h.local.name), ++s < i) r.write(", ");else break;
+          if (r.write(d, h), d !== h.local.name && r.write(" as " + h.local.name), ++s < i) r.write(", "); else break;
         }
         r.write("}");
       }
@@ -386,14 +386,14 @@ var ImageDownloadQueue = {
     null != r.expressionsPrecedence[e.declaration.type] && "F" !== e.declaration.type[0] && r.write(";");
   },
   ExportNamedDeclaration: function (e, r) {
-    if (r.write("export "), e.declaration) this[e.declaration.type](e.declaration, r);else {
+    if (r.write("export "), e.declaration) this[e.declaration.type](e.declaration, r); else {
       r.write("{");
       var n = e.specifiers;
       var i = n.length;
-      if (i > 0) for (var s = 0;;) {
+      if (i > 0) for (var s = 0; ;) {
         var o = n[s];
         var a = o.local.name;
-        if (r.write(a, o), a !== o.exported.name && r.write(" as " + o.exported.name), ++s < i) r.write(", ");else break;
+        if (r.write(a, o), a !== o.exported.name && r.write(" as " + o.exported.name), ++s < i) r.write(", "); else break;
       }
       r.write("}");
       e.source && (r.write(" from "), this.Literal(e.source, r));
@@ -471,12 +471,12 @@ var ImageDownloadQueue = {
     this[e.quasi.type](e.quasi, r);
   },
   ArrayExpression: p = function (e, r) {
-    if (r.write("["), e.elements.length > 0) for (n = e.elements, i = n.length, s = 0, void 0;;) {
+    if (r.write("["), e.elements.length > 0) for (n = e.elements, i = n.length, s = 0, void 0; ;) {
       var n;
       var i;
       var s;
       var o = n[s];
-      if (null != o && this[o.type](o, r), ++s < i) r.write(", ");else {
+      if (null != o && this[o.type](o, r), ++s < i) r.write(", "); else {
         null == o && r.write(", ");
         break;
       }
@@ -492,13 +492,13 @@ var ImageDownloadQueue = {
     if (r.write("{"), e.properties.length > 0) {
       r.write(i);
       s && null != e.comments && _(r, e.comments, o, i);
-      for (a = "," + i, h = e.properties, d = h.length, p = 0, void 0;;) {
+      for (a = "," + i, h = e.properties, d = h.length, p = 0, void 0; ;) {
         var a;
         var h;
         var d;
         var p;
         var g = h[p];
-        if (s && null != g.comments && _(r, g.comments, o, i), r.write(o), this[g.type](g, r), ++p < d) r.write(a);else break;
+        if (s && null != g.comments && _(r, g.comments, o, i), r.write(o), this[g.type](g, r), ++p < d) r.write(a); else break;
       }
       r.write(i);
       s && null != e.trailingComments && _(r, e.trailingComments, o, i);
@@ -519,11 +519,11 @@ var ImageDownloadQueue = {
     r.write(";");
   },
   ObjectPattern: function (e, r) {
-    if (r.write("{"), e.properties.length > 0) for (n = e.properties, i = n.length, s = 0, void 0;;) {
+    if (r.write("{"), e.properties.length > 0) for (n = e.properties, i = n.length, s = 0, void 0; ;) {
       var n;
       var i;
       var s;
-      if (this[n[s].type](n[s], r), ++s < i) r.write(", ");else break;
+      if (this[n[s].type](n[s], r), ++s < i) r.write(", "); else break;
     }
     r.write("}");
   },
@@ -605,7 +605,7 @@ var ImageDownloadQueue = {
     r.write("#".concat(e.name), e);
   },
   Literal: function (e, r) {
-    null != e.raw ? r.write(e.raw, e) : null != e.regex ? this.RegExpLiteral(e, r) : null != e.bigint ? r.write(e.bigint + "n", e) : r.write(m(e.value), e);
+    null != e.raw ? r.write(e.raw, e) : null != e.regex ? this.RegExpLiteral(e, r) : null != e.bigint ? r.write(e.bigint + "n", e) : r.write(getDefaultFrameProps(e.value), e);
   },
   RegExpLiteral: function (e, r) {
     var n = e.regex;

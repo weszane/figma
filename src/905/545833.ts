@@ -1,27 +1,69 @@
-exports.cssTransformFromNodeTransform = exports.mergeProps = exports.htmlColorFromFigColor = void 0;
-exports.htmlColorFromFigColor = function (e) {
-  let {
-    r: _r,
-    g,
-    b,
-    a
-  } = e;
-  return `rgba(${255 * _r}, ${255 * g}, ${255 * b}, ${a})`;
-};
-exports.mergeProps = function e(...t) {
-  let i = {};
-  for (let n of t) {
-    for (let t in i) {
-      let r = i[t];
-      let a = n[t];
-      ("attributes" === t || "style" === t) && "object" == typeof a ? i[t] = e(r, a) : "className" === t && "string" == typeof r && "string" == typeof a ? i[t] = [r, a].join(" ") : void 0 !== a && (i[t] = a);
+
+
+/**
+ * Converts a Figma color object to an HTML rgba color string.
+ * @param color - The Figma color object with r, g, b, a properties.
+ * @returns The HTML rgba color string.
+ */
+export function htmlColorFromFigColor(color) {
+  const {
+    r: red,
+    g: green,
+    b: blue,
+    a: alpha,
+  } = color
+  return `rgba(${255 * red}, ${255 * green}, ${255 * blue}, ${alpha})`
+}
+
+/**
+ * Merges multiple props objects into one, with special handling for attributes, style, and className.
+ * @param props - The array of props objects to merge.
+ * @returns The merged props object.
+ */
+export function mergeProps(...props) {
+  const result = {}
+
+  for (const prop of props) {
+    // Merge existing keys in result with new values from prop
+    for (const key in result) {
+      const resultValue = result[key]
+      const propValue = prop[key]
+
+      if ((key === 'attributes' || key === 'style') && typeof propValue === 'object') {
+        result[key] = mergeProps(resultValue, propValue)
+      }
+      else if (key === 'className' && typeof resultValue === 'string' && typeof propValue === 'string') {
+        result[key] = [resultValue, propValue].join(' ')
+      }
+      else if (propValue !== undefined) {
+        result[key] = propValue
+      }
     }
-    for (let e in n) void 0 === i[e] && (i[e] = n[e]);
+
+    // Add any new keys from prop that don't exist in result
+    for (const key in prop) {
+      if (result[key] === undefined) {
+        result[key] = prop[key]
+      }
+    }
   }
-  return i;
-};
-exports.cssTransformFromNodeTransform = function (e) {
-  if (void 0 === e) return;
-  let [[t, i, n], [r, a, s]] = e;
-  if (1 !== t || 0 !== r || 0 !== i || 1 !== a || 0 !== n || 0 !== s) return `matrix(${t},${r},${i},${a},${n},${s})`;
-};
+
+  return result
+}
+
+/**
+ * Generates a CSS transform string from a node transform matrix.
+ * @param transform - The 2x3 transformation matrix.
+ * @returns The CSS matrix transform string or undefined if no transform.
+ */
+export function cssTransformFromNodeTransform(transform) {
+  if (transform === undefined)
+    return
+
+  const [[m00, m01, m02], [m10, m11, m12]] = transform
+
+  // Only return a transform if it's not an identity matrix
+  if (m00 !== 1 || m10 !== 0 || m01 !== 0 || m11 !== 1 || m02 !== 0 || m12 !== 0) {
+    return `matrix(${m00},${m10},${m01},${m11},${m02},${m12})`
+  }
+}

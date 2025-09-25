@@ -78,7 +78,7 @@ import { Point } from "../905/736624";
 import { k8 } from "../figma_app/49598";
 import { renameFileOptimistic } from "../figma_app/78808";
 import { fullscreenValue } from "../figma_app/455680";
-import { F as _$$F2 } from "../905/877554";
+import { convertMarkdownToEditorState } from "../905/877554";
 import { Q as _$$Q2, ic as _$$ic } from "../figma_app/688398";
 import { A as _$$A2 } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
@@ -106,7 +106,7 @@ import { x as _$$x2 } from "../905/587214";
 import { N as _$$N } from "../905/7587";
 import { lQ as _$$lQ } from "../905/934246";
 import { KindEnum } from "../905/129884";
-import { Y as _$$Y } from "../905/1768";
+import { useClickOutside } from "../905/1768";
 import { g2 } from "../9410/341455";
 import { u as _$$u2 } from "../441/357009";
 import { K as _$$K2, SG } from "../6388/64652";
@@ -123,7 +123,7 @@ import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback, normalizeV
 import { useUpdateSelectionProperty, useSelectionProperty, useSelectionPropertyValue, useSelectedStyleOrSelectionPropertyValues, useNonMixedSelectedStyleOrSelectionPropertyValues, useNonMixedSelectionPropertyValue, useNonMixedSelectionPropertyValues } from "../905/275640";
 import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Yh } from "../figma_app/357047";
-import { cn as _$$cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { q as _$$q2 } from "../figma_app/905311";
 import { Wv, r as _$$r } from "../figma_app/711157";
 import { Jb, l5 as _$$l5, ax as _$$ax } from "../figma_app/224338";
@@ -147,7 +147,7 @@ import { TimeInput, NumericDropdownWithIcon, ScaleInput } from "../figma_app/178
 import { ow as _$$ow, a3 as _$$a } from "../905/188421";
 import { c$ as _$$c$, tV as _$$tV, l6 as _$$l6, sK as _$$sK } from "../905/794875";
 import { gm, pW } from "../figma_app/335781";
-import { t as _$$t2 } from "../905/1946";
+import { ChevronContainer } from "../905/1946";
 import { bL as _$$bL3, RT, c$ as _$$c$2 } from "../905/867927";
 import { q as _$$q3 } from "../905/932270";
 import { Tj } from "../figma_app/342207";
@@ -1268,7 +1268,7 @@ async function tl({
   let a = getSingletonSceneGraph().get(e);
   if (!a) return;
   _$$l3.system("outline-to-deck-write-outline-to-speaker-notes", () => {
-    let e = _$$F2(t);
+    let e = convertMarkdownToEditorState(t);
     e && (a.slideSpeakerNotes = e);
   });
   let o = function (e, t) {
@@ -2147,7 +2147,7 @@ function t7({
     a();
   }, [a]);
   let h = !i && !u;
-  _$$Y(() => {
+  useClickOutside(() => {
     h || p(!1);
   }, {
     ignore: [c.current]
@@ -2981,7 +2981,7 @@ function nj({
       },
       children: jsx(_$$tV, {
         value: {
-          chevron: _$$t2
+          chevron: ChevronContainer
         },
         children: jsx(TimeInput, {
           ariaLabel: getI18nString("slides.properties_panel.slide_transition.duration"),
@@ -3683,7 +3683,7 @@ function nW({
   }, [d]);
   let D = useMemo(() => P(), [c, P]);
   if (!d || !O) return null;
-  let R = n.current ? _$$cn(n.current, 208) : void 0;
+  let R = n.current ? calculatePickerPositionLeft(n.current, 208) : void 0;
   return jsxs(_$$tR, {
     panelClassName: "slides_object_animations_panel--panel--0bhrR",
     hideBorderBottom: !0,
@@ -5017,7 +5017,7 @@ function sg({
       },
       children: jsx(_$$tV, {
         value: {
-          chevron: _$$t2
+          chevron: ChevronContainer
         },
         children: jsx(TimeInput, {
           "data-tooltip": getI18nString("slides.properties_panel.slide_transition.delay"),
@@ -5060,7 +5060,7 @@ function sb({
       },
       children: jsx(_$$tV, {
         value: {
-          chevron: _$$t2
+          chevron: ChevronContainer
         },
         children: jsx(TimeInput, {
           ariaLabel: getI18nString("slides.properties_panel.slide_transition.duration"),
@@ -7821,7 +7821,7 @@ function dT({
     },
     children: jsx(_$$tV, {
       value: {
-        chevron: _$$t2
+        chevron: ChevronContainer
       },
       children: e
     })
@@ -7880,7 +7880,7 @@ function dO({
     },
     children: jsx(_$$tV, {
       value: {
-        chevron: _$$t2
+        chevron: ChevronContainer
       },
       children: jsxs(NumericDropdownWithIcon, {
         "data-tooltip": getI18nString("slides.properties_panel.corner_radius"),
@@ -8068,11 +8068,11 @@ function cr({
   let [i, n] = useState(!1);
   let [s, a] = useState(null);
   let o = useCallback(() => {
-    i ? n(!1) : e.current && (a(_$$cn(e.current, 240)), n(!0));
+    i ? n(!1) : e.current && (a(calculatePickerPositionLeft(e.current, 240)), n(!0));
   }, [i, e]);
   let d = useRef(null);
   let u = useRef(null);
-  _$$Y(() => n(!1), {
+  useClickOutside(() => n(!1), {
     closeOnEsc: !0,
     ignore: [d, u]
   });
@@ -8767,7 +8767,7 @@ function cC({
           },
           children: jsx(_$$tV, {
             value: {
-              chevron: _$$t2
+              chevron: ChevronContainer
             },
             children: jsx(_$$a, {
               dispatch: t,
@@ -8826,7 +8826,7 @@ function cL({
           },
           children: jsx(_$$tV, {
             value: {
-              chevron: _$$t2
+              chevron: ChevronContainer
             },
             children: jsx(ScaleInput, {
               "data-tooltip": getI18nString("slides.properties_panel.opacity"),

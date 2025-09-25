@@ -97,7 +97,7 @@ export const paintSchema = userSchema.extend({
 
 /**
  * Fill and stroke discriminated union.
- * @see m
+ * @see getDefaultFrameProps
  */
 export const fillStrokeSchema = z.discriminatedUnion('type', [
   paintSchema.extend({

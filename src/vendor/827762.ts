@@ -1,5 +1,5 @@
 exports.byteLength = p;
-exports.toByteArray = m;
+exports.toByteArray = getDefaultFrameProps;
 exports.fromByteArray = b;
 for (n = [], i = [], s = "undefined" != typeof Uint8Array ? Uint8Array : Array, o = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", a = 0, h = o.length, void 0; a < h; ++a) {
   var n;

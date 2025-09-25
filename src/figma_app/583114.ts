@@ -2,7 +2,7 @@ import { clamp, solvePolynomial } from "../figma_app/492908";
 import { colorToHex } from "../905/436288";
 import { h as _$$h } from "../vendor/771674";
 import { f as _$$f } from "../905/24905";
-import { z5 } from "../905/713722";
+import { defaultColorManipulator } from "../905/713722";
 import { r as _$$r } from "../905/583881";
 import { isValidColor, parseColor, whiteColor, calculateColorDifference, blackColor, isColorDark } from "../figma_app/191804";
 export function $$c4(e, t, r = "IGNORE", n) {
@@ -316,7 +316,7 @@ function D(e) {
   let t = [];
   let r = new Set();
   e.forEach(e => {
-    let n = z5.format(e);
+    let n = defaultColorManipulator.format(e);
     r.has(n) || (r.add(n), t.push(e));
   });
   return t;

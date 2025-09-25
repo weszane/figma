@@ -7,7 +7,7 @@ import { Yi } from "../figma_app/933328";
 import { valueOrFallback, isInvalidValue } from "../905/216495";
 import { SG, u as _$$u } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
-import { VZ } from "../905/959568";
+import { calculatePickerPositionBelow } from "../905/959568";
 import { LengthInput } from "../figma_app/178475";
 import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { E as _$$E } from "../642/160266";
@@ -51,7 +51,7 @@ export function $$w0({
   let B = useCallback((e, t) => {
     t && F({
       corner: e,
-      initialPosition: VZ(t, d9)
+      initialPosition: calculatePickerPositionBelow(t, d9)
     });
   }, []);
   let K = useCallback(() => {

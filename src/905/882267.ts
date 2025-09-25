@@ -29,7 +29,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
 import { popModalStack, showModalHandler } from "../905/156213";
-import { B as _$$B2 } from "../905/330741";
+import { hideVariablePicker } from "../905/330741";
 import { TrackingProvider } from "../figma_app/831799";
 import { consumptionPaywallUtils } from "../905/224";
 import { convertTeamToRaw } from "../905/628874";
@@ -52,7 +52,7 @@ import { FeatureFlag } from "../905/652992";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { If } from "../905/714538";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { e0 } from "../905/696396";
 import { fI } from "../figma_app/626177";
 import { We } from "../905/805224";
@@ -112,7 +112,7 @@ export function $$eD0({
   let C = useSelector(e => e.variablePickerShown);
   let T = useCallback(() => {
     i(hidePickerThunk());
-    i(_$$B2());
+    i(hideVariablePicker());
   }, [i]);
   let k = useCallback(() => {
     d?.modal && i(showPickerThunk({
@@ -122,7 +122,7 @@ export function $$eD0({
     S();
   }, [i, S, d]);
   let R = () => {
-    C.isShown && i(_$$B2());
+    C.isShown && i(hideVariablePicker());
   };
   let P = SG(["FONT_FAMILY"]).data ?? [];
   return jsx(Ao, {
@@ -321,7 +321,7 @@ function eL({
   }, [setSearchQueryPlaceholderFontFamily]);
   let e2 = useCallback(() => {
     t(hidePickerThunk());
-    t(_$$B2());
+    t(hideVariablePicker());
   }, [t]);
   let e5 = () => eo.current ? {
     id: Math.ceil(eo.current?.getScrollTop() / parsePxNumber(Ep1))
@@ -904,7 +904,7 @@ function eH({
     onChange: r,
     children: jsx(eW, {
       currentFieldValue: isNullish(t) || isInvalidValue(t) ? "" : t,
-      initialPosition: e ? cn(e, d9) : new Point(0, 0),
+      initialPosition: e ? calculatePickerPositionLeft(e, d9) : new Point(0, 0),
       onHidePicker: a,
       recordingKey: generateRecordingKey(i, "variablePicker")
     })

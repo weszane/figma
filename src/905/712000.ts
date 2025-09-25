@@ -1,158 +1,440 @@
-exports.getDefaultSpanProps = exports.getDefaultTextProps = exports.getDefaultSvgProps = exports.getDefaultRectangleProps = exports.getDefaultLineProps = exports.getDefaultEllipseProps = exports.getDefaultAutoLayoutProps = exports.getDefaultFrameProps = exports.blurEffectDefaults = exports.shadowEffectDefaults = exports.imagePaintDefaults = exports.paintDefaults = exports.textStyleDefaults = exports.autoLayoutDefaults = exports.transformDefaults = exports.autoLayoutSizeDefaults = exports.sizeDefaults = exports.cornerDefaults = exports.pathDefaults = exports.geometryDefaults = exports.baseDefaults = void 0;
-let i = {
-  type: "solid",
+// /Users/allen/sigma-main/src/905/712000.ts
+
+// Define types for default props
+interface Color {
+  r: number
+  g: number
+  b: number
+  a: number
+}
+
+interface Paint {
+  type: string
+  color: Color
+  blendMode: string
+}
+
+interface BaseProps {
+  name: string
+  hidden: boolean
+  positioning: string
+  x: number
+  y: number
+  blendMode: string
+  opacity: number
+  effect: any[]
+}
+
+interface GeometryProps {
+  fill: any[]
+  stroke: any[]
+  strokeWidth: number
+  strokeAlign: string
+}
+
+interface PathProps {
+  fillPath: any[]
+  strokePath: any[]
+}
+
+interface CornerProps {
+  cornerRadius: number
+}
+
+interface SizeProps {
+  width: number
+  height: number
+}
+
+interface AutoLayoutSizeProps {
+  width: string
+  height: string
+}
+
+interface TransformProps {
+  rotation: number
+  flipVertical: boolean
+}
+
+interface AutoLayoutProps {
+  direction: string
+  spacing: number
+  padding: number
+  horizontalAlignItems: string
+  verticalAlignItems: string
+}
+
+interface TextStyleProps {
+  fontFamily: string
+  letterSpacing: number
+  textDecoration: string
+  fontSize: number
+  italic: boolean
+  textCase: string
+  fontWeight: number
+  fontPostScriptName: string
+  fill: any[]
+}
+
+interface PaintProps {
+  visible: boolean
+  opacity: number
+  blendMode: string
+}
+
+interface ImagePaintProps extends PaintProps {
+  scaleMode: string
+  imageTransform: number[][]
+  scalingFactor: number
+  rotation: number
+}
+
+interface ShadowEffectProps {
+  blendMode: string
+  spread: number
+  visible: boolean
+}
+
+interface BlurEffectProps {
+  visible: boolean
+}
+
+interface FrameProps extends BaseProps, GeometryProps, TransformProps, CornerProps {
+  overflow: string
+}
+
+interface AutoLayoutFrameProps extends FrameProps, AutoLayoutSizeProps, AutoLayoutProps {}
+
+interface EllipseProps extends BaseProps, GeometryProps, TransformProps {}
+
+interface LineProps extends BaseProps, GeometryProps {
+  flipVertical: boolean
+  strokeWidth: number
+  direction: string
+}
+
+interface RectangleProps extends BaseProps, GeometryProps, TransformProps, CornerProps {}
+
+interface SvgProps extends BaseProps, GeometryProps, SizeProps, TransformProps, PathProps {}
+
+interface TextProps extends BaseProps, AutoLayoutSizeProps, TransformProps, TextStyleProps {
+  paragraphSpacing: number
+  paragraphIndent: number
+  horizontalAlignText: string
+  verticalAlignText: string
+  lineHeight: string
+}
+
+interface SpanProps extends BaseProps, AutoLayoutSizeProps, TransformProps, TextStyleProps {}
+
+// Basic paint default (original i)
+const defaultPaint: Paint = {
+  type: 'solid',
   color: {
     r: 0,
     g: 0,
     b: 0,
-    a: 1
+    a: 1,
   },
-  blendMode: "normal"
-};
-function n() {
-  return Object.assign(Object.assign({
-    name: "",
-    hidden: !1,
-    positioning: "auto"
-  }, {
-    x: 0,
-    y: 0
-  }), {
-    blendMode: "normal",
-    opacity: 1,
-    effect: []
-  });
+  blendMode: 'normal',
 }
-function r() {
+
+/**
+ * Returns base default properties for components.
+ * @returns {BaseProps} Base default props.
+ */
+function baseDefaults(): BaseProps {
+  return {
+    name: '',
+    hidden: false,
+    positioning: 'auto',
+    x: 0,
+    y: 0,
+    blendMode: 'normal',
+    opacity: 1,
+    effect: [],
+  }
+}
+
+/**
+ * Returns geometry default properties.
+ * @returns {GeometryProps} Geometry default props.
+ */
+function geometryDefaults(): GeometryProps {
   return {
     fill: [],
     stroke: [],
     strokeWidth: 1,
-    strokeAlign: "inside"
-  };
+    strokeAlign: 'inside',
+  }
 }
-function a() {
+
+/**
+ * Returns path default properties.
+ * @returns {PathProps} Path default props.
+ */
+function pathDefaults(): PathProps {
   return {
     fillPath: [],
-    strokePath: []
-  };
+    strokePath: [],
+  }
 }
-function s() {
+
+/**
+ * Returns corner default properties.
+ * @returns {CornerProps} Corner default props.
+ */
+function cornerDefaults(): CornerProps {
   return {
-    cornerRadius: 0
-  };
+    cornerRadius: 0,
+  }
 }
-function o() {
+
+/**
+ * Returns size default properties.
+ * @returns {SizeProps} Size default props.
+ */
+function sizeDefaults(): SizeProps {
   return {
     width: 0,
-    height: 0
-  };
+    height: 0,
+  }
 }
-function l() {
+
+/**
+ * Returns auto layout size default properties.
+ * @returns {AutoLayoutSizeProps} Auto layout size default props.
+ */
+function autoLayoutSizeDefaults(): AutoLayoutSizeProps {
   return {
-    width: "hug-contents",
-    height: "hug-contents"
-  };
+    width: 'hug-contents',
+    height: 'hug-contents',
+  }
 }
-function d() {
+
+/**
+ * Returns transform default properties.
+ * @returns {TransformProps} Transform default props.
+ */
+function transformDefaults(): TransformProps {
   return {
     rotation: 0,
-    flipVertical: !1
-  };
+    flipVertical: false,
+  }
 }
-function c() {
+
+/**
+ * Returns auto layout default properties.
+ * @returns {AutoLayoutProps} Auto layout default props.
+ */
+function autoLayoutDefaults(): AutoLayoutProps {
   return {
-    direction: "horizontal",
+    direction: 'horizontal',
     spacing: 0,
     padding: 0,
-    horizontalAlignItems: "start",
-    verticalAlignItems: "start"
-  };
+    horizontalAlignItems: 'start',
+    verticalAlignItems: 'start',
+  }
 }
-function ExpiringCache(e = !1) {
+
+/**
+ * Returns text style default properties.
+ * @param {boolean} emptyFill - Whether to use empty fill.
+ * @returns {TextStyleProps} Text style default props.
+ */
+function textStyleDefaults(emptyFill: boolean = false): TextStyleProps {
   return {
-    fontFamily: "Roboto",
+    fontFamily: 'Roboto',
     letterSpacing: 0,
-    textDecoration: "none",
+    textDecoration: 'none',
     fontSize: 16,
-    italic: !1,
-    textCase: "original",
+    italic: false,
+    textCase: 'original',
     fontWeight: 400,
-    fontPostScriptName: "",
-    fill: e ? [] : i
-  };
+    fontPostScriptName: '',
+    fill: emptyFill ? [] : [defaultPaint],
+  }
 }
-function p() {
+
+/**
+ * Returns paint default properties.
+ * @returns {PaintProps} Paint default props.
+ */
+function paintDefaults(): PaintProps {
   return {
-    visible: !0,
+    visible: true,
     opacity: 1,
-    blendMode: "normal"
-  };
+    blendMode: 'normal',
+  }
 }
-function m() {
-  return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, n()), r()), d()), s()), {
-    overflow: "hidden"
-  });
-}
-exports.baseDefaults = n;
-exports.geometryDefaults = r;
-exports.pathDefaults = a;
-exports.cornerDefaults = s;
-exports.sizeDefaults = o;
-exports.autoLayoutSizeDefaults = l;
-exports.transformDefaults = d;
-exports.autoLayoutDefaults = c;
-exports.textStyleDefaults = ExpiringCache;
-exports.paintDefaults = p;
-exports.imagePaintDefaults = function () {
-  return Object.assign(Object.assign({}, p()), {
-    scaleMode: "fill",
+
+/**
+ * Returns image paint default properties.
+ * @returns {ImagePaintProps} Image paint default props.
+ */
+function imagePaintDefaults(): ImagePaintProps {
+  return {
+    ...paintDefaults(),
+    scaleMode: 'fill',
     imageTransform: [[1, 0, 0], [0, 1, 0]],
     scalingFactor: 1,
-    rotation: 0
-  });
-};
-exports.shadowEffectDefaults = function () {
+    rotation: 0,
+  }
+}
+
+/**
+ * Returns shadow effect default properties.
+ * @returns {ShadowEffectProps} Shadow effect default props.
+ */
+function shadowEffectDefaults(): ShadowEffectProps {
   return {
-    blendMode: "normal",
+    blendMode: 'normal',
     spread: 0,
-    visible: !0
-  };
-};
-exports.blurEffectDefaults = function () {
+    visible: true,
+  }
+}
+
+/**
+ * Returns blur effect default properties.
+ * @returns {BlurEffectProps} Blur effect default props.
+ */
+function blurEffectDefaults(): BlurEffectProps {
   return {
-    visible: !0
-  };
-};
-exports.getDefaultFrameProps = m;
-exports.getDefaultAutoLayoutProps = function () {
-  return Object.assign(Object.assign(Object.assign({}, m()), l()), c());
-};
-exports.getDefaultEllipseProps = function () {
-  return Object.assign(Object.assign(Object.assign({}, n()), r()), d());
-};
-exports.getDefaultLineProps = function () {
-  return Object.assign(Object.assign(Object.assign({}, n()), r()), {
-    flipVertical: !1,
+    visible: true,
+  }
+}
+
+/**
+ * Returns default frame properties.
+ * @returns {FrameProps} Default frame props.
+ */
+function getDefaultFrameProps(): FrameProps {
+  return {
+    ...baseDefaults(),
+    ...geometryDefaults(),
+    ...transformDefaults(),
+    ...cornerDefaults(),
+    overflow: 'hidden',
+  }
+}
+
+/**
+ * Returns default auto layout properties.
+ * @returns {AutoLayoutFrameProps} Default auto layout props.
+ */
+function getDefaultAutoLayoutProps(): AutoLayoutFrameProps {
+  return {
+    ...getDefaultFrameProps(),
+    ...autoLayoutSizeDefaults(),
+    ...autoLayoutDefaults(),
+  }
+}
+
+/**
+ * Returns default ellipse properties.
+ * @returns {EllipseProps} Default ellipse props.
+ */
+function getDefaultEllipseProps(): EllipseProps {
+  return {
+    ...baseDefaults(),
+    ...geometryDefaults(),
+    ...transformDefaults(),
+  }
+}
+
+/**
+ * Returns default line properties.
+ * @returns {LineProps} Default line props.
+ */
+function getDefaultLineProps(): LineProps {
+  return {
+    ...baseDefaults(),
+    ...geometryDefaults(),
+    flipVertical: false,
     strokeWidth: 1,
-    direction: "horizontal"
-  });
-};
-exports.getDefaultRectangleProps = function () {
-  return Object.assign(Object.assign(Object.assign(Object.assign({}, n()), r()), d()), s());
-};
-exports.getDefaultSvgProps = function () {
-  return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, n()), r()), o()), d()), a());
-};
-exports.getDefaultTextProps = function () {
-  return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, n()), l()), d()), ExpiringCache(!1)), {
+    direction: 'horizontal',
+  }
+}
+
+/**
+ * Returns default rectangle properties.
+ * @returns {RectangleProps} Default rectangle props.
+ */
+function getDefaultRectangleProps(): RectangleProps {
+  return {
+    ...baseDefaults(),
+    ...geometryDefaults(),
+    ...transformDefaults(),
+    ...cornerDefaults(),
+  }
+}
+
+/**
+ * Returns default SVG properties.
+ * @returns {SvgProps} Default SVG props.
+ */
+function getDefaultSvgProps(): SvgProps {
+  return {
+    ...baseDefaults(),
+    ...geometryDefaults(),
+    ...sizeDefaults(),
+    ...transformDefaults(),
+    ...pathDefaults(),
+  }
+}
+
+/**
+ * Returns default text properties.
+ * @returns {TextProps} Default text props.
+ */
+function getDefaultTextProps(): TextProps {
+  return {
+    ...baseDefaults(),
+    ...autoLayoutSizeDefaults(),
+    ...transformDefaults(),
+    ...textStyleDefaults(false),
     paragraphSpacing: 0,
     paragraphIndent: 0,
-    horizontalAlignText: "left",
-    verticalAlignText: "top",
-    lineHeight: "auto"
-  });
-};
-exports.getDefaultSpanProps = function () {
-  return Object.assign(Object.assign(Object.assign(Object.assign({}, n()), l()), d()), ExpiringCache(!0));
-};
+    horizontalAlignText: 'left',
+    verticalAlignText: 'top',
+    lineHeight: 'auto',
+  }
+}
+
+/**
+ * Returns default span properties.
+ * @returns {SpanProps} Default span props.
+ */
+function getDefaultSpanProps(): SpanProps {
+  return {
+    ...baseDefaults(),
+    ...autoLayoutSizeDefaults(),
+    ...transformDefaults(),
+    ...textStyleDefaults(true),
+  }
+}
+
+// Exports
+export {
+  autoLayoutDefaults,
+  autoLayoutSizeDefaults,
+  baseDefaults,
+  blurEffectDefaults,
+  cornerDefaults,
+  geometryDefaults,
+  getDefaultAutoLayoutProps,
+  getDefaultEllipseProps,
+  getDefaultFrameProps,
+  getDefaultLineProps,
+  getDefaultRectangleProps,
+  getDefaultSpanProps,
+  getDefaultSvgProps,
+  getDefaultTextProps,
+  imagePaintDefaults,
+  paintDefaults,
+  pathDefaults,
+  shadowEffectDefaults,
+  sizeDefaults,
+  textStyleDefaults,
+  transformDefaults,
+}

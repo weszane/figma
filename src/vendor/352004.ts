@@ -249,7 +249,7 @@ function h(e, r) {
   return e;
 }
 function d(e, r, n) {
-  let i = e.map(e => m(e, r, n).source);
+  let i = e.map(e => getDefaultFrameProps(e, r, n).source);
   return RegExp(`(?:${i.join("|")})`, a(n));
 }
 function p(e, r, n) {
@@ -265,7 +265,7 @@ function g(e, r, n = {}) {
   let p = `[${o(void 0 === n.endsWith ? "" : n.endsWith)}]|$`;
   let m = `[${o(void 0 === n.delimiter ? "/#?" : n.delimiter)}]`;
   let v = start ? "^" : "";
-  for (let n of e) if ("string" == typeof n) v += o(encode(n));else {
+  for (let n of e) if ("string" == typeof n) v += o(encode(n)); else {
     let e = o(encode(n.prefix));
     let i = o(encode(n.suffix));
     if (n.pattern) {
@@ -612,7 +612,7 @@ var B = class {
     let e = {};
     Object.assign(e, v);
     e.encodePart = N;
-    let r = m(this.makeComponentString(), void 0, e);
+    let r = getDefaultFrameProps(this.makeComponentString(), void 0, e);
     this.shouldTreatAsStandardURL = S(r);
   }
 };

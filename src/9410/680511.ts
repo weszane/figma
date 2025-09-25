@@ -5,7 +5,7 @@ import { $ } from "../figma_app/938538";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Tc } from "../905/797478";
 import { fullscreenValue } from "../figma_app/455680";
-import { Y } from "../905/1768";
+import { useClickOutside } from "../905/1768";
 import { qM } from "../9410/607036";
 let $$p1 = atom(-1);
 let $$h2 = "slide-insert-shape-modal-button";
@@ -21,7 +21,7 @@ export function $$m0({
     g(-1);
   }, [g]);
   let x = useRef(null);
-  Y(() => _(!i), {
+  useClickOutside(() => _(!i), {
     closeOnEsc: !0,
     ignore: [x, Tc($$h2)]
   });

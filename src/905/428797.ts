@@ -1,5 +1,5 @@
 import { VariableDataType, VariableResolvedDataType, OperationType } from "../figma_app/763686";
-import { TI } from "../905/713722";
+import { formattedColorManipulator } from "../905/713722";
 import { Ub, _z, Hq, bU } from "../figma_app/632975";
 import { zS, j9, rV, lq } from "../905/914241";
 function o(e, t) {
@@ -136,7 +136,7 @@ export let $$d0 = [[{
   expressionTypeMatch: VariableDataType.COLOR,
   stringify: e => {
     let t = e.current().value;
-    return "{" + TI.format(t) + "}";
+    return "{" + formattedColorManipulator.format(t) + "}";
   }
 }, {
   tokenMatch: "TOKEN_IDENTIFIER",

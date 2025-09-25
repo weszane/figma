@@ -78,7 +78,7 @@ import { y as _$$y } from '../905/292472';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { v as _$$v3 } from '../905/318279';
-import { B as _$$B3 } from '../905/330741';
+import { hideVariablePicker } from '../905/330741';
 import { a as _$$a9 } from '../905/339331';
 import { I as _$$I2 } from '../905/342732';
 import { P as _$$P } from '../905/347284';
@@ -218,7 +218,7 @@ import { Sn } from '../905/946805';
 import { t as _$$t6 } from '../905/947268';
 import { Uh as _$$Uh } from '../905/956994';
 import { B as _$$B2 } from '../905/957400';
-import { cn as _$$cn, TS } from '../905/959568';
+import { calculatePickerPositionLeft, calculatePickerPositionRight } from '../905/959568';
 import { a as _$$a4 } from '../905/964520';
 import { O as _$$O } from '../905/969533';
 import { d as _$$d3 } from '../905/976845';
@@ -5303,7 +5303,7 @@ let oO = memo(({
   }, [setSearchQueryPlaceholderFontFamily]);
   let en = useCallback(() => {
     e(hidePickerThunk());
-    e(_$$B3());
+    e(hideVariablePicker());
   }, [e]);
   let el = E.length === 0;
   let er = _$$oh(q, el, {
@@ -6004,7 +6004,7 @@ function al({
       let {
         x,
         y
-      } = TS({
+      } = calculatePickerPositionRight({
         el: t.current
       });
       u(showPickerThunk({
@@ -14023,7 +14023,7 @@ function pK({
       let {
         x,
         y
-      } = _$$cn(t.current, n);
+      } = calculatePickerPositionLeft(t.current, n);
       i(showPickerThunk({
         id: e,
         initialX: x - 8,

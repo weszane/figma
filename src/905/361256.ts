@@ -2,7 +2,7 @@ import eN from 'classnames';
 import { createRef, forwardRef, memo, PureComponent, useCallback, useContext, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { e as _$$e } from '../905/2401';
+import { ParagraphSpacingInput } from '../905/2401';
 import { r as _$$r } from '../905/11924';
 import { JB, nb, wM, zD, zz } from '../905/32188';
 import { _ as _$$_ } from '../905/38543';
@@ -81,7 +81,7 @@ import { q as _$$q } from '../905/932270';
 import { lQ } from '../905/934246';
 import { FONT_SF_PRO_DISPLAY } from '../905/946258';
 import { L as _$$L } from '../905/954291';
-import { cn } from '../905/959568';
+import { calculatePickerPositionLeft } from '../905/959568';
 import { d as _$$d } from '../905/976845';
 import { A as _$$A7 } from '../2854/357693';
 import { A as _$$A6 } from '../5724/388041';
@@ -362,7 +362,7 @@ function eJ({
   let u = useCallback(() => {
     s.current && d?.showBindingUI(s.current, {
       currentFieldValue: i,
-      initialPosition: cn(s.current, d9)
+      initialPosition: calculatePickerPositionLeft(s.current, d9)
     });
   }, [d, i, s]);
   return jsx(FormattedInputWrapper, {
@@ -746,7 +746,7 @@ let tN = memo(e => {
     if (!A) return;
     let t = e.isEditingStyle ? h2 : AB;
     i(e.pickerShown?.id === t);
-    let n = cn(A.current);
+    let n = calculatePickerPositionLeft(A.current);
     s({
       id: Pr,
       initialX: n.x,
@@ -1766,7 +1766,7 @@ function t6(e) {
           fields: ['PARAGRAPH_SPACING'],
           resolvedType: VariableResolvedDataType.FLOAT,
           editingStyleGuid: S,
-          initialPickerPosition: () => O.current ? cn(O.current, d9) : null,
+          initialPickerPosition: () => O.current ? calculatePickerPositionLeft(O.current, d9) : null,
           children: jsx(eJ, {
             inputRef: D,
             inputClassName: eP()(tu, bO),
@@ -1932,7 +1932,7 @@ function t6(e) {
         fields: ['PARAGRAPH_INDENT'],
         resolvedType: VariableResolvedDataType.FLOAT,
         editingStyleGuid: S,
-        initialPickerPosition: () => L.current ? cn(L.current, d9) : null,
+        initialPickerPosition: () => L.current ? calculatePickerPositionLeft(L.current, d9) : null,
         children: jsx(eJ, {
           inputRef: M,
           inputClassName: eP()(tu, bO),
@@ -2948,7 +2948,7 @@ class iS extends PureComponent {
       if (this.shownSettings()) {
         this.props.dispatch(hidePickerThunk());
       } else if (e.current) {
-        let i = cn(e.current);
+        let i = calculatePickerPositionLeft(e.current);
         let n = t ? h2 : AB;
         this.props.dispatch(showPickerThunk({
           id: n,
@@ -3587,7 +3587,7 @@ function iw(e) {
   });
   let I = jsx(AutoInteractableWrapper, {
     name: 'paragraph_spacing',
-    children: jsx(_$$e, {
+    children: jsx(ParagraphSpacingInput, {
       paragraphSpacing: e.paragraphSpacing,
       isDisabled: o,
       smallNudgeAmount: e.smallNudgeAmount,

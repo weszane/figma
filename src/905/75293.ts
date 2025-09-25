@@ -23,7 +23,7 @@ import { getI18nState } from "../figma_app/363242";
 import { hidePickerThunk } from "../figma_app/91703";
 import { Oe } from "../figma_app/933328";
 import { F as _$$F } from "../figma_app/8833";
-import { TI } from "../905/713722";
+import { formattedColorManipulator } from "../905/713722";
 import { X9 } from "../figma_app/975811";
 import { Yl, W3 } from "../905/232641";
 import { fullscreenValue } from "../figma_app/455680";
@@ -31,7 +31,7 @@ import { Um } from "../905/848862";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { ScrubbableDropdownInput, NumericInput, OpacityInput } from "../figma_app/178475";
 import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { executeWithDSAAction } from "../905/135117";
@@ -107,7 +107,7 @@ export function $$el2({
     A(!1);
   };
   let O = () => {
-    f ? R() : (E(cn(C.current)), A(!0));
+    f ? R() : (E(calculatePickerPositionLeft(C.current)), A(!0));
   };
   let D = {
     layoutGrid: t,
@@ -577,7 +577,7 @@ let ef = memo(function ({
   onChange: i,
   recordingKey: r
 }) {
-  let a = TI;
+  let a = formattedColorManipulator;
   return jsx(AutoInteractableWrapper, {
     name: "grid_settings_color_input",
     children: jsx(FormattedInputVariant3, {

@@ -25,12 +25,12 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { xd, uO, qy } from "../905/972515";
-import { Zl, iN, Z4, YU, ez as _$$ez, TQ } from "../905/211621";
+import { PickerOptionType, ResourceLibraryType, getCategory, getDrilldownPickerSelectId, getLibraryKey, useModalConfig } from "../905/211621";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { setPreferredValuesPickerListLayout, setInstanceSwapPickerListLayout } from "../figma_app/91703";
-import { vq, qX } from "../905/8732";
+import { hideInstanceSwapPicker, showInstanceSwapPicker } from "../905/8732";
 import { fi } from "../figma_app/913823";
 import { loadingStateDelete } from "../figma_app/714946";
 import { showModalHandler } from "../905/156213";
@@ -171,7 +171,7 @@ function eW(e) {
     setIsSearching,
     entrypointForLogging
   } = e;
-  let eY = pickerType === Zl.INSTANCE_SWAP_PICKER || pickerType === Zl.PREFERRED_VALUES_PICKER;
+  let eY = pickerType === PickerOptionType.INSTANCE_SWAP_PICKER || pickerType === PickerOptionType.PREFERRED_VALUES_PICKER;
   let [e$] = Pk();
   let eq = !e$;
   let {
@@ -224,12 +224,12 @@ function eW(e) {
     return [null, [], void 0];
   }, [e9, rootDrilldownItemsByLibraryKey, te, eY, publishedLibraryItemsByLibraryKey, openFile.libraryKey, library]);
   let [tc, tu] = useState(() => showPreferredSectionByDefault ? {
-    type: iN.PREFERRED
+    type: ResourceLibraryType.PREFERRED
   } : to && (eY || to !== e4) ? {
-    type: iN.FILE,
+    type: ResourceLibraryType.FILE,
     libraryKey: to
   } : {
-    type: iN.RECENT
+    type: ResourceLibraryType.RECENT
   });
   _$$S.useLaunchedEvent({
     pickerType,
@@ -241,8 +241,8 @@ function eW(e) {
   let th = useStore();
   let tm = Nv(!0);
   let tg = _$$S.useOpenFileProperties();
-  let tf = useCallback(e => tc.type === iN.FILE ? tc.libraryKey === e4 ? e.filter(e => "LEAF" === e.type && e.item.isLocal) : e.filter(e => "LEAF" === e.type && compareLibraryKeyWithString(e.item, tc.libraryKey) && getAssetKey(e.item)) : tc.type === iN.PREFERRED ? e.filter(e => "LEAF" === e.type && preferredItems && !!preferredItems.find(t => t.node_id === e.item.node_id)) : e, [tc, e4, preferredItems]);
-  let tE = useMemo(() => tc.type === iN.FILE ? tc.libraryKey === e4 ? {
+  let tf = useCallback(e => tc.type === ResourceLibraryType.FILE ? tc.libraryKey === e4 ? e.filter(e => "LEAF" === e.type && e.item.isLocal) : e.filter(e => "LEAF" === e.type && compareLibraryKeyWithString(e.item, tc.libraryKey) && getAssetKey(e.item)) : tc.type === ResourceLibraryType.PREFERRED ? e.filter(e => "LEAF" === e.type && preferredItems && !!preferredItems.find(t => t.node_id === e.item.node_id)) : e, [tc, e4, preferredItems]);
+  let tE = useMemo(() => tc.type === ResourceLibraryType.FILE ? tc.libraryKey === e4 ? {
     type: _$$I.LOCAL
   } : {
     type: _$$I.FILE,
@@ -285,9 +285,9 @@ function eW(e) {
         numResults: a.length,
         numFilteredResults: n,
         aiResultsEnabled: tm,
-        dropdownType: Z4(tc, e4),
-        libraryKey: tc.type === iN.FILE ? tc.libraryKey : void 0,
-        isPreferredValues: pickerType === Zl.PREFERRED_VALUES_PICKER
+        dropdownType: getCategory(tc, e4),
+        libraryKey: tc.type === ResourceLibraryType.FILE ? tc.libraryKey : void 0,
+        isPreferredValues: pickerType === PickerOptionType.PREFERRED_VALUES_PICKER
       });
     } else trackEventAnalytics("Component Insert Search", {
       searchSessionId: t,
@@ -318,42 +318,42 @@ function eW(e) {
     validDropdownSelection,
     validRootDrilldownItems
   } = useMemo(() => {
-    if (tc.type === iN.RECENT && isSearching) return {
+    if (tc.type === ResourceLibraryType.RECENT && isSearching) return {
       validDropdownSelection: tc,
       validRootDrilldownItems: ta
     };
     let e = [];
-    tc.type === iN.PREFERRED && ts.length > 0 ? e = ts : tc.type === iN.RECENT && ta.length > 0 ? e = ta : tc.type === iN.FILE && rootDrilldownItemsByLibraryKey[tc.libraryKey] ? e = rootDrilldownItemsByLibraryKey[tc.libraryKey] : tc.type === iN.FILE && e4 === tc.libraryKey && (e = te);
+    tc.type === ResourceLibraryType.PREFERRED && ts.length > 0 ? e = ts : tc.type === ResourceLibraryType.RECENT && ta.length > 0 ? e = ta : tc.type === ResourceLibraryType.FILE && rootDrilldownItemsByLibraryKey[tc.libraryKey] ? e = rootDrilldownItemsByLibraryKey[tc.libraryKey] : tc.type === ResourceLibraryType.FILE && e4 === tc.libraryKey && (e = te);
     let t = !1;
-    if (getFeatureFlags().dse_slots && pickerType === Zl.PREFERRED_VALUES_PICKER && (e = e.filter(e => !("LEAF" === e.type && tT.has(e.item.node_id)) || (t = !0, !1))), 0 === e.length && !t) {
+    if (getFeatureFlags().dse_slots && pickerType === PickerOptionType.PREFERRED_VALUES_PICKER && (e = e.filter(e => !("LEAF" === e.type && tT.has(e.item.node_id)) || (t = !0, !1))), 0 === e.length && !t) {
       let e;
       let t;
       if (to) {
         e = {
-          type: iN.FILE,
+          type: ResourceLibraryType.FILE,
           libraryKey: to
         };
         t = tl;
       } else if (ts.length > 0) {
         e = {
-          type: iN.PREFERRED
+          type: ResourceLibraryType.PREFERRED
         };
         t = ts;
       } else if (ta.length > 0) {
         e = {
-          type: iN.RECENT
+          type: ResourceLibraryType.RECENT
         };
         t = ta;
       } else if (Object.keys(rootDrilldownItemsByLibraryKey).length > 0) {
         let r = Object.keys(rootDrilldownItemsByLibraryKey)[0];
         e = {
-          type: iN.FILE,
+          type: ResourceLibraryType.FILE,
           libraryKey: r
         };
         t = rootDrilldownItemsByLibraryKey[r];
       } else {
         e = {
-          type: iN.RECENT
+          type: ResourceLibraryType.RECENT
         };
         t = ta;
       }
@@ -400,7 +400,7 @@ function eW(e) {
   }), []);
   let tR = useCallback((e, t) => {
     tO();
-    validDropdownSelection && validDropdownSelection.type === iN.FILE && (tx({
+    validDropdownSelection && validDropdownSelection.type === ResourceLibraryType.FILE && (tx({
       [validDropdownSelection.libraryKey]: e
     }), tx({
       [validDropdownSelection.libraryKey]: e
@@ -411,16 +411,16 @@ function eW(e) {
       path: e.join(" / "),
       libraryKey: validDropdownSelection.libraryKey,
       viewMode: isListView ? "list" : "grid",
-      isPreferredValues: pickerType === Zl.PREFERRED_VALUES_PICKER
+      isPreferredValues: pickerType === PickerOptionType.PREFERRED_VALUES_PICKER
     }));
   }, [tO, isListView, eY, tg, pickerType, sessionId, tx, validDropdownSelection]);
-  let tL = useMemo(() => validDropdownSelection.type === iN.FILE && tN[validDropdownSelection.libraryKey] || [], [validDropdownSelection, tN]);
+  let tL = useMemo(() => validDropdownSelection.type === ResourceLibraryType.FILE && tN[validDropdownSelection.libraryKey] || [], [validDropdownSelection, tN]);
   let tP = _$$b2({
     hideTooltips: !0
   });
   let tD = useFigmaLibrariesEnabled();
   let tk = useCallback(() => {
-    pickerType !== Zl.PREFERRED_VALUES_PICKER && (instanceSwapPickerShown.isShown && instanceSwapPickerShown.modal ? (instanceSwapPickerShown.returnFocusToToggle && pickerToggleRef?.current && pickerToggleRef.current.focus(), e8(hideTooltip()), e8(vq())) : pickerType === Zl.RESOURCE_INSERT_MODAL && e5 && (e8(postUserFlag({
+    pickerType !== PickerOptionType.PREFERRED_VALUES_PICKER && (instanceSwapPickerShown.isShown && instanceSwapPickerShown.modal ? (instanceSwapPickerShown.returnFocusToToggle && pickerToggleRef?.current && pickerToggleRef.current.focus(), e8(hideTooltip()), e8(hideInstanceSwapPicker())) : pickerType === PickerOptionType.RESOURCE_INSERT_MODAL && e5 && (e8(postUserFlag({
       seen_component_onboarding_modal: !0
     })), tP()));
   }, [instanceSwapPickerShown, pickerToggleRef, e8, pickerType, tP, e5]);
@@ -431,12 +431,12 @@ function eW(e) {
   }, [isListView]);
   let tF = useCallback(t => {
     let r;
-    r = t.type === iN.PREFERRED ? {
-      type: iN.PREFERRED
-    } : t.type === iN.RECENT ? {
-      type: iN.RECENT
+    r = t.type === ResourceLibraryType.PREFERRED ? {
+      type: ResourceLibraryType.PREFERRED
+    } : t.type === ResourceLibraryType.RECENT ? {
+      type: ResourceLibraryType.RECENT
     } : {
-      type: iN.FILE,
+      type: ResourceLibraryType.FILE,
       libraryKey: t.libraryKey
     };
     analyticsEventManager.trackDefinedEvent("asset_search.misc_feature_usage", {
@@ -449,20 +449,20 @@ function eW(e) {
     eY ? analyticsEventManager.trackDefinedEvent("instance_swap_picker.library_switch", {
       ...tg,
       sessionId,
-      dropdownType: Z4(r, e4),
-      libraryKey: r.type === iN.FILE ? r.libraryKey : void 0,
-      isPreferredValues: pickerType === Zl.PREFERRED_VALUES_PICKER
+      dropdownType: getCategory(r, e4),
+      libraryKey: r.type === ResourceLibraryType.FILE ? r.libraryKey : void 0,
+      isPreferredValues: pickerType === PickerOptionType.PREFERRED_VALUES_PICKER
     }) : trackEventAnalytics("Component Insert Library Switch", {
       isSearching
     });
   }, [tm, e.searchBarRef, eY, tg, sessionId, e4, pickerType, isSearching]);
   let tj = useCurrentUserOrg();
   let tU = isBigmaEnabledAlias3(tj);
-  let tB = tc.type === iN.FILE ? tc.libraryKey : void 0;
+  let tB = tc.type === ResourceLibraryType.FILE ? tc.libraryKey : void 0;
   let tG = Fl();
   let tV = useMemo(() => ({
-    format: t => t.type === iN.RECENT ? isSearching ? getI18nString("design_systems.instance_swap_picker.all_libraries") : e.pickerType === Zl.RESOURCE_INSERT_MODAL ? getI18nString("universal_insert.recents") : getI18nString("design_systems.instance_swap_picker.recently_used") : t.type === iN.PREFERRED ? getI18nString("design_systems.instance_swap_picker.preferred") : t.type === iN.FILE ? t.libraryKey === e4 ? getI18nString("design_systems.instance_swap_picker.created_in_this_file") : libraryMetadataMap[t.libraryKey]?.name ?? "" : "",
-    isEqual: (e, t) => e.type === t.type && (e.type !== iN.FILE || t.type !== iN.FILE || e.libraryKey === t.libraryKey)
+    format: t => t.type === ResourceLibraryType.RECENT ? isSearching ? getI18nString("design_systems.instance_swap_picker.all_libraries") : e.pickerType === PickerOptionType.RESOURCE_INSERT_MODAL ? getI18nString("universal_insert.recents") : getI18nString("design_systems.instance_swap_picker.recently_used") : t.type === ResourceLibraryType.PREFERRED ? getI18nString("design_systems.instance_swap_picker.preferred") : t.type === ResourceLibraryType.FILE ? t.libraryKey === e4 ? getI18nString("design_systems.instance_swap_picker.created_in_this_file") : libraryMetadataMap[t.libraryKey]?.name ?? "" : "",
+    isEqual: (e, t) => e.type === t.type && (e.type !== ResourceLibraryType.FILE || t.type !== ResourceLibraryType.FILE || e.libraryKey === t.libraryKey)
   }), [isSearching, e.pickerType, e4, libraryMetadataMap]);
   let tH = useCallback(() => {
     e8(showModalHandler({
@@ -542,7 +542,7 @@ function eW(e) {
       scoreAi: r.item.ai_score ?? void 0,
       scoreLexical: r.item.lexical_score ?? void 0,
       sessionId,
-      dropdownType: Z4(tc, e4),
+      dropdownType: getCategory(tc, e4),
       fromSearch: n,
       libraryKey: o,
       libraryType: d,
@@ -557,7 +557,7 @@ function eW(e) {
       type: r.item.type === PrimaryWorkflowEnum.COMPONENT ? "component" : "state_group",
       searchSessionId: sessionId
     };
-    if (pickerType === Zl.INSTANCE_SWAP_PICKER) {
+    if (pickerType === PickerOptionType.INSTANCE_SWAP_PICKER) {
       let e = function (e) {
         return e ? e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.type === PrimaryWorkflowEnum.STATE_GROUP ? e.key : void 0 : void 0;
       };
@@ -588,7 +588,7 @@ function eW(e) {
         userId: tg.userId,
         componentSuggestionSessionId: t$
       });
-    } else if (pickerType === Zl.PREFERRED_VALUES_PICKER) {
+    } else if (pickerType === PickerOptionType.PREFERRED_VALUES_PICKER) {
       let e = tz(r);
       trackEventAnalytics("Preferred Values Picker Toggle Component", {
         ...p,
@@ -599,7 +599,7 @@ function eW(e) {
       fromSearch: n,
       altKey: s,
       viewMode: isListView ? "list" : "grid",
-      dropdownType: Z4(tc, e4)
+      dropdownType: getCategory(tc, e4)
     });
   }, [e3, multiselect, tp, tK, tk, e4, tY, tm, sessionId, tc, isListView, openFile?.editorType, tg, pickerType, tC.index, tC.parentId, tW, e8, sceneGraphSelection, selectedItems, tz, t$]);
   let tq = useRef(null);
@@ -610,15 +610,15 @@ function eW(e) {
   let tQ = jsxs(Fragment, {
     children: [jsx(_$$p, {
       ariaLabel: getI18nString("design_systems.instance_panel.swap_instance"),
-      className: pickerType === Zl.RESOURCE_INSERT_MODAL ? kc : Kv,
+      className: pickerType === PickerOptionType.RESOURCE_INSERT_MODAL ? kc : Kv,
       dataTestId: "instance-swap-picker-library-select",
       dispatch: e8,
       dropdownAlignment: "left",
       dropdownShown,
       dropdownWidth: 230,
       formatter: tV,
-      id: YU(pickerType),
-      inputClassName: pickerType === Zl.RESOURCE_INSERT_MODAL ? je : void 0,
+      id: getDrilldownPickerSelectId(pickerType),
+      inputClassName: pickerType === PickerOptionType.RESOURCE_INSERT_MODAL ? je : void 0,
       inputRef: tq,
       onChange: tF,
       onDropdownHidden: tJ,
@@ -632,25 +632,25 @@ function eW(e) {
         function e(e) {
           return jsx(_$$c, {
             value: e
-          }, _$$ez(e));
+          }, getLibraryKey(e));
         }
         function r(e) {
           return jsx(_$$c, {
             value: e,
             removeTextRightPadding: !0,
             rightSettingsIcon: jsx(_$$t3, {})
-          }, _$$ez(e));
+          }, getLibraryKey(e));
         }
         function i(e) {
           return jsx(_$$c, {
             value: e,
             removeTextRightPadding: !0,
             rightSettingsIcon: jsx(FX, {})
-          }, _$$ez(e));
+          }, getLibraryKey(e));
         }
         if (isLoadingSubscribedLibraries) return jsx(_$$c, {
           value: {
-            type: iN.FILE,
+            type: ResourceLibraryType.FILE,
             libraryKey: _$$l2("loading")
           },
           disabled: !0,
@@ -668,9 +668,9 @@ function eW(e) {
         });
         let l = [];
         if (ts.length && l.push(e({
-          type: iN.PREFERRED
+          type: ResourceLibraryType.PREFERRED
         })), e9 && e9 !== e4 && !showPreferredSectionByDefault && !tZ(e9) && e2[e9] && (l.length > 0 && l.push(jsx(sK, {}, "non-subscribed-divider")), l.push(e({
-          type: iN.FILE,
+          type: ResourceLibraryType.FILE,
           libraryKey: e9
         })), s = fail.filter(e => e !== e9)), tU && NX(tG)) {
           let e = fail.map(e => libraryMetadataMap[e] || null).filter(isNotNullish).map(({
@@ -689,36 +689,36 @@ function eW(e) {
           }) => e);
         }
         if ((isSearching || ta.length > 0) && (l.length > 0 && l.push(jsx(sK, {}, "recent-divider")), l.push(e({
-          type: iN.RECENT
+          type: ResourceLibraryType.RECENT
         }))), eY) {
           for (let r of (te.length > 0 && (l.length > 0 && l.push(jsx(sK, {}, "local-divider")), l.push(e({
-            type: iN.FILE,
+            type: ResourceLibraryType.FILE,
             libraryKey: _$$l2(openFile.libraryKey)
           }))), fail.length > 0 && l.length > 0 && l.push(jsx(sK, {}, "subscribed-divider")), fail)) tU && sF(r) ? l.push(i({
-            type: iN.FILE,
+            type: ResourceLibraryType.FILE,
             libraryKey: r
           })) : l.push(e({
-            type: iN.FILE,
+            type: ResourceLibraryType.FILE,
             libraryKey: r
           }));
           if (tD) for (let e of pass) l.push(r({
-            type: iN.FILE,
+            type: ResourceLibraryType.FILE,
             libraryKey: e
           }));
           return l;
         }
         for (let r of (te.length > 0 && l.push(e({
-          type: iN.FILE,
+          type: ResourceLibraryType.FILE,
           libraryKey: _$$l2(openFile.libraryKey)
         })), fail.length > 0 && l.push(jsx(sK, {}, "subscribed-divider")), fail)) tU && sF(r) ? l.push(i({
-          type: iN.FILE,
+          type: ResourceLibraryType.FILE,
           libraryKey: r
         })) : l.push(e({
-          type: iN.FILE,
+          type: ResourceLibraryType.FILE,
           libraryKey: r
         }));
         if (tD) for (let e of pass) l.push(r({
-          type: iN.FILE,
+          type: ResourceLibraryType.FILE,
           libraryKey: e
         }));
         return l;
@@ -727,12 +727,12 @@ function eW(e) {
   });
   let t0 = useRef(null);
   let t1 = jsxs("div", {
-    className: pickerType === Zl.RESOURCE_INSERT_MODAL ? b()(FK, k2) : _M,
+    className: pickerType === PickerOptionType.RESOURCE_INSERT_MODAL ? b()(FK, k2) : _M,
     children: [tQ, jsx("div", {
       className: cssBuilderInstance.ml4.$,
       children: jsx(sX, {
         pickerType,
-        includeFolderSetting: validDropdownSelection.type === iN.FILE && !isSearching,
+        includeFolderSetting: validDropdownSelection.type === ResourceLibraryType.FILE && !isSearching,
         ref: t0,
         sessionId,
         queryId: isSearching ? e.queryId : void 0
@@ -741,14 +741,14 @@ function eW(e) {
   });
   let t2 = useCallback(() => {
     tu({
-      type: iN.RECENT
+      type: ResourceLibraryType.RECENT
     });
     eY && analyticsEventManager.trackDefinedEvent("instance_swap_picker.search_all_libraries_from_empty", {
       ...tg,
       sessionId,
       query: e.query,
       queryId: e.queryId,
-      isPreferredValues: pickerType === Zl.PREFERRED_VALUES_PICKER
+      isPreferredValues: pickerType === PickerOptionType.PREFERRED_VALUES_PICKER
     });
   }, [eY, tg, pickerType, e.query, e.queryId, sessionId]);
   let t5 = jsx(eX, {
@@ -758,7 +758,7 @@ function eW(e) {
   let t3 = jsxs("div", {
     className: eY ? y7 : uR,
     style: {
-      height: scrollContainerHeight + (e.pickerType === Zl.RESOURCE_INSERT_MODAL ? Kr : 0)
+      height: scrollContainerHeight + (e.pickerType === PickerOptionType.RESOURCE_INSERT_MODAL ? Kr : 0)
     },
     children: [jsx("div", {
       className: eY ? qv : void 0,
@@ -794,7 +794,7 @@ function eW(e) {
   _$$K2({
     otherLibraryKeys: t6
   });
-  let t7 = useMemo(() => !!libraryMetadataLoading || (validDropdownSelection.type === iN.FILE ? validDropdownSelection.libraryKey !== e4 && !isTrackedState("INVALID-FILE-KEY-SHOULD-BE-REMOVED", validDropdownSelection.libraryKey) : validDropdownSelection.type === iN.RECENT ? isLoading(loadingState, fi) : validDropdownSelection.type === iN.PREFERRED ? isLoading(loadingState, _A(e3)) : isLoadingSubscribedLibraries || isLoading(loadingState, fi)), [libraryMetadataLoading, isLoadingSubscribedLibraries, loadingState, validDropdownSelection, e3, e4]);
+  let t7 = useMemo(() => !!libraryMetadataLoading || (validDropdownSelection.type === ResourceLibraryType.FILE ? validDropdownSelection.libraryKey !== e4 && !isTrackedState("INVALID-FILE-KEY-SHOULD-BE-REMOVED", validDropdownSelection.libraryKey) : validDropdownSelection.type === ResourceLibraryType.RECENT ? isLoading(loadingState, fi) : validDropdownSelection.type === ResourceLibraryType.PREFERRED ? isLoading(loadingState, _A(e3)) : isLoadingSubscribedLibraries || isLoading(loadingState, fi)), [libraryMetadataLoading, isLoadingSubscribedLibraries, loadingState, validDropdownSelection, e3, e4]);
   _$$x(t7);
   let t9 = Object.keys(rootDrilldownItemsByLibraryKey).length > 0;
   return jsx(uO, {
@@ -802,11 +802,11 @@ function eW(e) {
     beforeItems: t1,
     beforeItemsRefs: [tq, t0],
     contextValue: e.drilldownPickerContextValue,
-    drilldownItemsKeySupplement: tc.type === iN.FILE ? tc.libraryKey : tc.type,
+    drilldownItemsKeySupplement: tc.type === ResourceLibraryType.FILE ? tc.libraryKey : tc.type,
     drilldownItemsRecordingKey: "instanceSwapDrilldownItems",
     emptyState: t3,
-    errorComponent: tc.type === iN.PREFERRED ? preferredValuesErrorComponent : void 0,
-    extraHeightOnSearch: eY || e.pickerType === Zl.RESOURCE_INSERT_MODAL ? 0 : eU,
+    errorComponent: tc.type === ResourceLibraryType.PREFERRED ? preferredValuesErrorComponent : void 0,
+    extraHeightOnSearch: eY || e.pickerType === PickerOptionType.RESOURCE_INSERT_MODAL ? 0 : eU,
     getBackgroundColorForLeafItemThumbnail: getAssetBackgroundColor,
     getLeafItemRecordingKey: eH,
     getLeafItemThumbnail: eY || isListView ? $$eV3 : eG,
@@ -829,8 +829,8 @@ function eW(e) {
     rootDrilldownItems: validRootDrilldownItems,
     scrollContainerHeight,
     searchBarPlaceholderText: (() => {
-      if (tc.type === iN.PREFERRED) return getI18nString("design_systems.instance_swap_picker.search_preferred");
-      if (tc.type === iN.RECENT) return getI18nString("design_systems.instance_swap_picker.search_all_libraries");
+      if (tc.type === ResourceLibraryType.PREFERRED) return getI18nString("design_systems.instance_swap_picker.search_preferred");
+      if (tc.type === ResourceLibraryType.RECENT) return getI18nString("design_systems.instance_swap_picker.search_all_libraries");
       if (null != tc.libraryKey && libraryMetadataMap[tc.libraryKey]) {
         let e = libraryMetadataMap[tc.libraryKey]?.name ?? "";
         return getI18nString("design_systems.instance_swap_picker.search_filename", {
@@ -897,9 +897,9 @@ export function $$eK1(e) {
     return C && L && L !== N ? isLoading(loadingState, _A(w)) : P;
   }, [x, w, L, D, C, N, loadingState, P]);
   let M = useCallback(() => setNumSearchesForTracking?.(e => e + 1), [setNumSearchesForTracking]);
-  return (instanceSwapPickerShown.isShown || e.pickerType !== Zl.INSTANCE_SWAP_PICKER) && w && x ? jsx(eW, {
+  return (instanceSwapPickerShown.isShown || e.pickerType !== PickerOptionType.INSTANCE_SWAP_PICKER) && w && x ? jsx(eW, {
     drilldownPickerContextValue: e.drilldownPickerContextValue,
-    dropdownAccessory: e.pickerType === Zl.RESOURCE_INSERT_MODAL ? toggleGridViewButton : null,
+    dropdownAccessory: e.pickerType === PickerOptionType.RESOURCE_INSERT_MODAL ? toggleGridViewButton : null,
     entrypointForLogging,
     incrementNumSearchesForTracking: M,
     instanceSwapPickerShown,
@@ -938,7 +938,7 @@ export function $$eY2(e) {
     title,
     pickerToggleRef
   } = e;
-  let c = pickerType === Zl.INSTANCE_SWAP_PICKER || pickerType === Zl.PREFERRED_VALUES_PICKER;
+  let c = pickerType === PickerOptionType.INSTANCE_SWAP_PICKER || pickerType === PickerOptionType.PREFERRED_VALUES_PICKER;
   let {
     instanceSwapPickerShown,
     dropdownShown
@@ -951,10 +951,10 @@ export function $$eY2(e) {
   let [m, g] = useState(generateUUIDv4());
   let f = instanceSwapPickerShown.isShown ? new Point(instanceSwapPickerShown.initialX, instanceSwapPickerShown.initialY) : new Point(0, 0);
   let E = useCallback(() => {
-    dropdownShown?.type === YU(pickerType) && _(hideDropdownAction());
+    dropdownShown?.type === getDrilldownPickerSelectId(pickerType) && _(hideDropdownAction());
   }, [_, dropdownShown, pickerType]);
   let y = useCallback(() => {
-    instanceSwapPickerShown.isShown && instanceSwapPickerShown.modal && _(qX({
+    instanceSwapPickerShown.isShown && instanceSwapPickerShown.modal && _(showInstanceSwapPicker({
       ...instanceSwapPickerShown,
       modal: !1,
       returnFocusToToggle: !1
@@ -966,13 +966,13 @@ export function $$eY2(e) {
     trackEventAnalytics(`${c ? "Instance Swap Picker" : "Component Insert"} Total Searches`, {
       numSearches: b
     });
-    _(vq());
+    _(hideInstanceSwapPicker());
   }, [_, b, c]);
   let A = useRef(null);
   let x = c ? 320 : 428;
   let {
     modalWidth
-  } = TQ(pickerType);
+  } = useModalConfig(pickerType);
   let L = useCallback(() => instanceSwapPickerShown.isShown && initialHeight ? initialHeight : x, [x, initialHeight, instanceSwapPickerShown]);
   let [P, k] = useState(L);
   let F = A.current?.getEl();
@@ -1080,7 +1080,7 @@ function eX({
   onClick: e,
   type: t
 }) {
-  if (t === iN.RECENT) return null;
+  if (t === ResourceLibraryType.RECENT) return null;
   let r = renderI18nText("design_systems.instance_swap_picker.search_all_libraries");
   return jsx(Button, {
     onClick: e,

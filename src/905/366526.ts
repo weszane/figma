@@ -7,8 +7,8 @@ import iN, { BEGIN, COMMIT, REVERT } from 'redux-optimist';
 import eW from 'statsig-js';
 import { Statsig } from 'statsig-react';
 import { reportError, setContextGlobal, setTagGlobal, SeverityLevel } from '../905/11';
-import { resolvePromise, resolveAndResetPromise } from '../905/2848';
-import { vq as _$$vq } from '../905/8732';
+import { resolveAndResetPromise, resolvePromise } from '../905/2848';
+import { hideInstanceSwapPicker } from '../905/8732';
 import { cL as _$$cL4, hZ as _$$hZ2 } from '../905/14223';
 import { isNullOrFailure } from '../905/18797';
 import { R as _$$R4 } from '../905/22352';
@@ -174,7 +174,7 @@ import { ex as _$$ex } from '../905/524523';
 import { UN } from '../905/525678';
 import { oU as _$$oU, B3, Sr } from '../905/535224';
 import { q as _$$q5 } from '../905/540614';
-import { a as _$$a4, V as _$$V2 } from '../905/541060';
+import { closeFullscreenAction, closeFullscreenThunk } from '../905/541060';
 import { pluginAddFirstRanAtAction } from '../905/542113';
 import { reactTimerGroup } from '../905/542194';
 import { xH } from '../905/546357';
@@ -184,7 +184,7 @@ import { registerDeferredCallback, requestDeferredExecution } from '../905/56143
 import { i as _$$i2 } from '../905/565139';
 import { nD as _$$nD, uB as _$$uB } from '../905/572991';
 import { FlashActions } from '../905/573154';
-import { SearchAnalytics, getEntryPoint } from '../905/574958';
+import { getEntryPoint, SearchAnalytics } from '../905/574958';
 import { l as _$$l0, q as _$$q4 } from '../905/578831';
 import { pf as _$$pf } from '../905/579526';
 import { l as _$$l7 } from '../905/579959';
@@ -237,7 +237,7 @@ import { compareLibraryItemWithKey } from '../905/709171';
 import { uiVariantName } from '../905/709735';
 import { addThumbnailForDanglingStyle, replaceLocalThumbnails } from '../905/711212';
 import { S as _$$S5 } from '../905/711770';
-import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
+import { liveStoreInstance, setupResourceAtomHandler } from '../905/713695';
 import { logDebug, logError, logInfo, logWarning } from '../905/714362';
 import { lG as _$$lG } from '../905/714538';
 import { SvgComponent } from '../905/714743';
@@ -254,7 +254,7 @@ import { AuthModal } from '../905/749159';
 import { k as _$$k6 } from '../905/749197';
 import { f as _$$f3 } from '../905/749689';
 import { StatsigContext } from '../905/749933';
-import { ErrorBoundaryCrash, attachReactStackToError, errorBoundaryFallbackTypes, RootErrorBoundaryFallback } from '../905/751457';
+import { attachReactStackToError, ErrorBoundaryCrash, errorBoundaryFallbackTypes, RootErrorBoundaryFallback } from '../905/751457';
 import { handlePluginError } from '../905/753206';
 import { getRepoById, getRepoByIdAlt, isBranch, isBranchAlt } from '../905/760074';
 import { m as _$$m } from '../905/760316';
@@ -289,7 +289,7 @@ import { mergeWithObject } from '../905/848904';
 import { c as _$$c6 } from '../905/850166';
 import { hM as _$$hM } from '../905/851937';
 import { fileUpdateSavepointAction } from '../905/852057';
-import { updatePaintsDirectlyOnSingleNodeFromFullscreen, updateCurrentSelectionPaintInPicker, updateSelectionPaintsFromFullscreen, updateStylesDirectlyOnSingleNodeFromFullscreen, updateSelectionStylesFromFullscreen, clearSelectionPaintsDueToLimitExceeded, forceUpdateSelectionPaintsForUndo } from '../905/854717';
+import { clearSelectionPaintsDueToLimitExceeded, forceUpdateSelectionPaintsForUndo, updateCurrentSelectionPaintInPicker, updatePaintsDirectlyOnSingleNodeFromFullscreen, updateSelectionPaintsFromFullscreen, updateSelectionStylesFromFullscreen, updateStylesDirectlyOnSingleNodeFromFullscreen } from '../905/854717';
 import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n2, Rf, VariableStyleId } from '../905/859698';
 import { AuthAction, AuthErrorCode, AuthField, AuthFlowStep, AuthProvider, SIGNED_UP_FROM_OPEN_SESSIONS } from '../905/862321';
@@ -299,7 +299,7 @@ import { xH as _$$xH2 } from '../905/869282';
 import { areSessionLocalIDsEqual, defaultSessionLocalIDString } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
 import { createDeferredPromise } from '../905/874553';
-import { componentUpdate, setIsRenamingSelectedStyle, setShouldSearchDefaultLibraries, putMoveLibraryItemKeyMappings, componentClearPublishedItems, defaultLibraryInitializeLibraryKeys, replaceUsedLivegraphStyles, componentDeleteForFile, componentBatchUpdate, componentDelete, componentReplaceOpenFilePublishedLivegraph, setLocalStyleSelection, replaceUsedLivegraphUnnaturalKeyToNaturalKey, setAssetsSearchOptions, defaultLibraryInitialize, componentClearLocal, componentReplaceLocal, setLibraryUpdatesBannerDismissed, replaceUsedLivegraphSourceAssetKeyToDestinationKey, setAssetsSearchQuery, replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset, replaceUsedLivegraphLocalNodeIdToDestinationFileName, replaceUsedLivegraphSourceAssetKeyToFileName, replaceUsedLivegraphLocalNodeIdToDestinationKey, setAssetsSearchNoResults, setAssetsSearchResults } from '../905/879323';
+import { componentBatchUpdate, componentClearLocal, componentClearPublishedItems, componentDelete, componentDeleteForFile, componentReplaceLocal, componentReplaceOpenFilePublishedLivegraph, componentUpdate, defaultLibraryInitialize, defaultLibraryInitializeLibraryKeys, putMoveLibraryItemKeyMappings, replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset, replaceUsedLivegraphLocalNodeIdToDestinationFileName, replaceUsedLivegraphLocalNodeIdToDestinationKey, replaceUsedLivegraphSourceAssetKeyToDestinationKey, replaceUsedLivegraphSourceAssetKeyToFileName, replaceUsedLivegraphStyles, replaceUsedLivegraphUnnaturalKeyToNaturalKey, setAssetsSearchNoResults, setAssetsSearchOptions, setAssetsSearchQuery, setAssetsSearchResults, setIsRenamingSelectedStyle, setLibraryUpdatesBannerDismissed, setLocalStyleSelection, setShouldSearchDefaultLibraries } from '../905/879323';
 import { P6, VK, YF, YK } from '../905/880488';
 import { useHasParentOrgId } from '../905/882262';
 import { updateEnvironmentInfo } from '../905/883621';
@@ -322,10 +322,10 @@ import { styleBuilderInstance } from '../905/941192';
 import { F1 } from '../905/941249';
 import { Gk as _$$Gk, jH } from '../905/950959';
 import { hv as _$$hv } from '../905/952832';
-import { Mt as _$$Mt, AJ, CG, qI, vB, XJ } from '../905/959568';
+import { stackAlignmentPickerReducer, variablePickerReducer, pickerVisibilityReducer, instanceSwapPickerReducer, pickerInStyleCreationReducer, stylePickerReducer } from '../905/959568';
 import { Dk as _$$Dk, O9, qG, qS, W$, XG } from '../905/970170';
 import { S as _$$S6 } from '../905/970585';
-import { searchSetLastAckedQueryIdAction, searchSetQueryIdAction, setSearchTypeBehaviorAction, searchSessionEnteredSearchViewViaEnterAction, setResponseAction, handleSearchParameterChangeThunk, searchIncrementQueryCountAction, sortStateThunk, searchSessionEnteredSearchViewAction, searchClearQueryAction, startSearchSessionAction, setResponseSortStateAction, clearWorkspaceFilterThunk, searchEndSessionAction, searchRestoreSessionAction, searchThunk, searchSessionSeeMoreClickAction, searchSetScrollTopAction, searchClearResponsesAction, setFullResultsSearchResponseAction, searchSetParametersAction, searchResetFileTypeFilterAction, searchSelectedAction, searchSetLastLoadedQueryAction, setFocusAction, setResponsesAction } from '../905/977218';
+import { clearWorkspaceFilterThunk, handleSearchParameterChangeThunk, searchClearQueryAction, searchClearResponsesAction, searchEndSessionAction, searchIncrementQueryCountAction, searchResetFileTypeFilterAction, searchRestoreSessionAction, searchSelectedAction, searchSessionEnteredSearchViewAction, searchSessionEnteredSearchViewViaEnterAction, searchSessionSeeMoreClickAction, searchSetLastAckedQueryIdAction, searchSetLastLoadedQueryAction, searchSetParametersAction, searchSetQueryIdAction, searchSetScrollTopAction, searchThunk, setFocusAction, setFullResultsSearchResponseAction, setResponseAction, setResponsesAction, setResponseSortStateAction, setSearchTypeBehaviorAction, sortStateThunk, startSearchSessionAction } from '../905/977218';
 import { filesByLibraryKeyAtom } from '../905/977779';
 import { postUserFlag, setAllUserFlags } from '../905/985254';
 import { Y as _$$Y4 } from '../905/986107';
@@ -335,7 +335,7 @@ import { Wm } from '../905/990455';
 import { l as _$$l4 } from '../905/997221';
 import { cT as _$$cT, mI as _$$mI, P8, PG, qF, vr } from '../905/997533';
 import { OperationStatus, ProviderType } from '../3973/473379';
-import { progressSetAction, progressClearAction } from '../3973/647885';
+import { progressClearAction, progressSetAction } from '../3973/647885';
 import { numericAtom, processSelector } from '../3973/697935';
 import { trackStatsigPlanKeyBootstrap } from '../3973/890507';
 import { cssBuilderInstance } from '../cssbuilder/589278';
@@ -361,7 +361,7 @@ import { revokeThumbnailUrl, teamLibraryCache } from '../figma_app/80990';
 import { executeDeferredCallbacks, subscribeObservable } from '../figma_app/84367';
 import { nm as _$$nm, kQ, Yb } from '../figma_app/86921';
 import { isFullscreenOverview } from '../figma_app/88239';
-import { showOpenDesktopAppModal, fullscreenOpen, showUpgradeBanner, updateHyperlinkPopupPosition, updateMirror, updateCanvasMentionPopupPosition, recentlyUsedQuickCommands, showDowntimeBanner, hideStylePicker, attemptClose, updateLocalFontAgentVersion, hideDowntimeBanner, hideUpgradeBanner, setInstanceSwapPickerListLayout, updateSelectedStyleProperties, setLeftPanelTab, updateSelectedStyleThumbnailUrl, setEyedropper, showFileCreationFailureBanner, setCanvasMentionPopup, setNeedsUpgrade, setPickerListLayout, newFileLoaded, reconnectingSucceeded, setHyperlinkPopup, updateRecentlyUsedQuickCommand, setPreferredValuesPickerListLayout, updateOpenFile, updateMultiplayerState, beginRenaming, stopRenaming, hidePickerThunk, setFileVersion, setProgressBarState, reconnectingStarted, hideOpenDesktopAppModal, stopObservingOtherUser } from '../figma_app/91703';
+import { attemptClose, beginRenaming, fullscreenOpen, hideDowntimeBanner, hideOpenDesktopAppModal, hidePickerThunk, hideStylePicker, hideUpgradeBanner, newFileLoaded, recentlyUsedQuickCommands, reconnectingStarted, reconnectingSucceeded, setCanvasMentionPopup, setEyedropper, setFileVersion, setHyperlinkPopup, setInstanceSwapPickerListLayout, setLeftPanelTab, setNeedsUpgrade, setPickerListLayout, setPreferredValuesPickerListLayout, setProgressBarState, showDowntimeBanner, showFileCreationFailureBanner, showOpenDesktopAppModal, showUpgradeBanner, stopObservingOtherUser, stopRenaming, updateCanvasMentionPopupPosition, updateHyperlinkPopupPosition, updateLocalFontAgentVersion, updateMirror, updateMultiplayerState, updateOpenFile, updateRecentlyUsedQuickCommand, updateSelectedStyleProperties, updateSelectedStyleThumbnailUrl } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
 import { EightSeven } from '../figma_app/111825';
 import { getCurrentCodeExtensionPreferences } from '../figma_app/120227';
@@ -401,7 +401,7 @@ import { wl, y4 } from '../figma_app/298277';
 import { getPluginVersion } from '../figma_app/300692';
 import { g3 } from '../figma_app/304207';
 import { RR } from '../figma_app/307841';
-import { stopReactingAction, updateEmojiWheelPosition, toggleEmojiWheelAction, clearEmojiState, startReactingAction, startChattingAction } from '../figma_app/308685';
+import { clearEmojiState, startChattingAction, startReactingAction, stopReactingAction, toggleEmojiWheelAction, updateEmojiWheelPosition } from '../figma_app/308685';
 import { trackFileCopyEvent, trackFileEvent, trackRoleEvent, trackUserEvent } from '../figma_app/314264';
 import { dO as _$$dO2 } from '../figma_app/318123';
 import { mg as _$$mg, on as _$$on, j3, Ri } from '../figma_app/327577';
@@ -416,7 +416,7 @@ import { bE as _$$bE3, hV as _$$hV3, z9 } from '../figma_app/375098';
 import { Ob as _$$Ob, Po, Zy } from '../figma_app/378195';
 import { paintManager } from '../figma_app/385874';
 import { getSelectedView, getSelectedViewType } from '../figma_app/386952';
-import { setTimer, sendTimer, startMusic, setMusicIsMuted, setTimerNotification, setSelectedTypedPropDefId, setShowingFileFooter, setSelectedSongIdMusic, resetLocalTimer, setTimerAudioEnabled, setMainMusicPlayer, startTimer, setMusicStandaloneVolume, setSelectedSongId, setMusicState, resumeTimer, resumeMusic, setStartChimePlayed, setTimerAndMusicAreMuted, setMusicVolume, setTimerModal, setMusicModal, getActiveSongsSuccess, sendMusicMessage, resetLocalMusic, setStandaloneMusicPlayer } from '../figma_app/389091';
+import { getActiveSongsSuccess, resetLocalMusic, resetLocalTimer, resumeMusic, resumeTimer, sendMusicMessage, sendTimer, setMainMusicPlayer, setMusicIsMuted, setMusicModal, setMusicStandaloneVolume, setMusicState, setMusicVolume, setSelectedSongId, setSelectedSongIdMusic, setSelectedTypedPropDefId, setShowingFileFooter, setStandaloneMusicPlayer, setStartChimePlayed, setTimer, setTimerAndMusicAreMuted, setTimerAudioEnabled, setTimerModal, setTimerNotification, startMusic, startTimer } from '../figma_app/389091';
 import { adminPermissionConfig, setupShadowRead, setupShadowReadWithConfig } from '../figma_app/391338';
 import { ce as _$$ce2, cv as _$$cv, E as _$$E2, hZ } from '../figma_app/401069';
 import { configureAutocomplete, messageWithCallbackManager, messageWithResponseManager, pageLoaded, relatedLinkCreated, relatedLinkRemoved, selectedLayerGuid, selectedPageGuid, sendCssProperties, sendFileName, sendHtmlSkeleton, sendLayers, sendMappingSuggestion, sendText, sendThumbnail } from '../figma_app/415217';
@@ -447,7 +447,7 @@ import { openFileKeyAtom, selectCurrentFile } from '../figma_app/516028';
 import { df as _$$df, Sb as _$$Sb, De, WM } from '../figma_app/519839';
 import { A as _$$A9 } from '../figma_app/526287';
 import { P as _$$P, Z as _$$Z } from '../figma_app/529847';
-import { resetCommentState, setCommunityAuthedActiveProfileAlias, followEntity, unfollowEntity, setCommentReplies, setComments, hideAdminProfileBanner, flushNewCommentsQueue, savePageState, showAdminProfileBanner, setCommentState, insertCommunityMention, restrictProfile, unrestrictProfile, addFollow, deleteFollow, setCommentsActiveFeedType } from '../figma_app/530167';
+import { addFollow, deleteFollow, flushNewCommentsQueue, followEntity, hideAdminProfileBanner, insertCommunityMention, resetCommentState, restrictProfile, savePageState, setCommentReplies, setComments, setCommentsActiveFeedType, setCommentState, setCommunityAuthedActiveProfileAlias, showAdminProfileBanner, unfollowEntity, unrestrictProfile } from '../figma_app/530167';
 import { Tf } from '../figma_app/543100';
 import { Jj } from '../figma_app/546509';
 import { isFigmakeSitesEnabled } from '../figma_app/552876';
@@ -461,13 +461,13 @@ import { copyTextToClipboard } from '../figma_app/623293';
 import { getNodeStatus } from '../figma_app/623300';
 import { getDraftsSidebarString, initialLibraryStats, LIBRARY_PREFERENCES_MODAL, LibraryAgeEnum, LibraryPublishStatusEnum, NO_TEAM, PrimaryWorkflowEnum, PublishStatusEnum, SubscriptionStatusEnum } from '../figma_app/633080';
 import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
-import { dispatchDeleteLoadingStates, resetAllAsyncPromises, batchFetchFiles, clearTrackedState } from '../figma_app/646357';
+import { batchFetchFiles, clearTrackedState, dispatchDeleteLoadingStates, resetAllAsyncPromises } from '../figma_app/646357';
 import { DashboardSection, FigResourceType } from '../figma_app/650409';
 import { PAGINATION_NEXT, PAGINATION_PREV } from '../figma_app/661371';
 import { bp } from '../figma_app/678300';
-import { reportFullscreenPerfMetrics, performanceTracker, chatStateTracker } from '../figma_app/682945';
+import { chatStateTracker, performanceTracker, reportFullscreenPerfMetrics } from '../figma_app/682945';
 import { FileCreationPermissionsGenerator } from '../figma_app/687776';
-import { commitEditedComment, setShowResolved, editComment, commitCreatedComment, resetCommentStatus, commitHideComment, submitComment, commitDeletedComment } from '../figma_app/703138';
+import { commitCreatedComment, commitDeletedComment, commitEditedComment, commitHideComment, editComment, resetCommentStatus, setShowResolved, submitComment } from '../figma_app/703138';
 import { y as _$$y5 } from '../figma_app/705249';
 import { AppView, isIncludedView } from '../figma_app/707808';
 import { cL as _$$cL5, DI as _$$DI, dY as _$$dY, sV as _$$sV, NY, V2, zx } from '../figma_app/712525';
@@ -510,7 +510,7 @@ import { o as _$$o } from '../figma_app/885533';
 import { getFalseValue, isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/897289';
 import { iN as _$$iN, lF as _$$lF3, Mv as _$$Mv, pS as _$$pS, to as _$$to2, U6 as _$$U4, X7 as _$$X4, gG, jv, N9, qP } from '../figma_app/909778';
 import { nH as _$$nH, sw as _$$sw, Ev, FL } from '../figma_app/914957';
-import { TabOpenBehavior, PluginRunForContext, LoadingBarStatus } from '../figma_app/915202';
+import { LoadingBarStatus, PluginRunForContext, TabOpenBehavior } from '../figma_app/915202';
 import { l0 as _$$l9, OP } from '../figma_app/920435';
 import { useLatestRef } from '../figma_app/922077';
 import { desktopVisibilityEmitter } from '../figma_app/925651';
@@ -2627,7 +2627,7 @@ let nQ = e => t => function (i) {
       nZ(a);
       nX(a);
     })), r.view === 'fullscreen' && a.view !== 'fullscreen') {
-      e.dispatch(_$$V2());
+      e.dispatch(closeFullscreenThunk());
     } else if (r.view !== 'fullscreen' && a.view === 'fullscreen') {
       if (_$$dK2() !== xt.SUCCESS) {
         n.user && !desktopAPIInstance && e.dispatch(selectViewAction({
@@ -2713,7 +2713,7 @@ let nQ = e => t => function (i) {
       }
     } else if (r.view === 'fullscreen' && a.view === 'fullscreen') {
       if (a.fileKey && r.fileKey !== a.fileKey) {
-        e.dispatch(_$$V2());
+        e.dispatch(closeFullscreenThunk());
         e.dispatch(_$$sR({
           newSelectedView: a
         }));
@@ -10030,7 +10030,7 @@ let cE = HY({
     } : e;
   },
   sceneGraph(e = cy, t) {
-    return initAction.matches(t) || _$$a4.matches(t) ? (resolveAndResetPromise(), cy) : updateMirror.matches(t) && t.payload.invalidateSceneGraph ? (resolvePromise(), new SingletonSceneGraph()) : e;
+    return initAction.matches(t) || closeFullscreenAction.matches(t) ? (resolveAndResetPromise(), cy) : updateMirror.matches(t) && t.payload.invalidateSceneGraph ? (resolvePromise(), new SingletonSceneGraph()) : e;
   },
   sceneGraphSelection: bp,
   objectsPanelRowRebuildCounter(e = 0, t) {
@@ -10144,16 +10144,16 @@ function cO(e = null, t) {
       }),
       ...e
     };
-  }() : fullscreenOpen.matches(t) ? t.payload.file : newFileLoaded.matches(t) ? e != null && e.key === t.payload.file.key ? e : t.payload.file : _$$a4.matches(t) ? null : updateOpenFile.matches(t) ? {
+  }() : fullscreenOpen.matches(t) ? t.payload.file : newFileLoaded.matches(t) ? e != null && e.key === t.payload.file.key ? e : t.payload.file : closeFullscreenAction.matches(t) ? null : updateOpenFile.matches(t) ? {
     ...t.payload.openFile,
     name: t.payload.openFile._name || 'Untitled'
   } : e;
 }
 function cD(e = !1, t) {
-  return !(initAction.matches(t) || fullscreenOpen.matches(t)) && !_$$a4.matches(t) && (updateOpenFile.matches(t) && !!t.payload.isLiveGraphSync || e);
+  return !(initAction.matches(t) || fullscreenOpen.matches(t)) && !closeFullscreenAction.matches(t) && (updateOpenFile.matches(t) && !!t.payload.isLiveGraphSync || e);
 }
 function cL(e = !1, t) {
-  return !_$$a4.matches(t) && (!!_$$o8.matches(t) || e);
+  return !closeFullscreenAction.matches(t) && (!!_$$o8.matches(t) || e);
 }
 function cF(e = [], t) {
   return _$$o7.matches(t) ? t.payload : e;
@@ -12092,7 +12092,7 @@ let pg = {
       }
       return i;
     }
-    return fullscreenOpen.matches(t) || _$$a4.matches(t) ? {} : e;
+    return fullscreenOpen.matches(t) || closeFullscreenAction.matches(t) ? {} : e;
   },
   fetchedCanvasWidgetVersions(e = {}, t) {
     if (_$$uw.matches(t)) {
@@ -12110,7 +12110,7 @@ let pg = {
       }
       return i;
     }
-    return fullscreenOpen.matches(t) || _$$a4.matches(t) ? {} : e;
+    return fullscreenOpen.matches(t) || closeFullscreenAction.matches(t) ? {} : e;
   },
   publishingPlugins: uL,
   featuredPlugins(e = {}, t) {
@@ -13336,7 +13336,7 @@ let mm = createOptimistThunk((e, t) => {
   if (t.selection) {
     let t = r.pickerShown;
     t ? o && o[ItemType.TYPE_ITEM] && (t.id === J6 || t.id === AB || t.id === h2) || t.id === _$$o$ || t.id === _$$aN || t.id === vu || e.dispatch(hidePickerThunk()) : r.stylePickerShown.isShown && r.stylePickerShown.modal && e.dispatch(hideStylePicker());
-    r.instanceSwapPickerShown.isShown && e.dispatch(_$$vq());
+    r.instanceSwapPickerShown.isShown && e.dispatch(hideInstanceSwapPicker());
     r.stylePreviewShown.isShown && (e.dispatch(_$$sw()), Fullscreen.selectStyle(_$$n2.INVALID, VariableStyleId.INVALID));
     paintManager.clearCache();
   } else {
@@ -14202,11 +14202,11 @@ export async function $$hz0(e, t, d = {
         showingOpenDesktopAppModal: cV,
         saveStatus: cG,
         isRenaming: cP,
-        pickerShown: CG,
-        instanceSwapPickerShown: qI,
-        stylePickerShown: XJ,
+        pickerShown: pickerVisibilityReducer,
+        instanceSwapPickerShown: instanceSwapPickerReducer,
+        stylePickerShown: stylePickerReducer,
         voting: cu,
-        shouldShowStackAlignmentPicker: _$$Mt,
+        shouldShowStackAlignmentPicker: stackAlignmentPickerReducer,
         stylePreviewShown: dj,
         versionHistory: dV,
         multiplayer: cH,
@@ -14245,10 +14245,10 @@ export async function $$hz0(e, t, d = {
         selectedComponentPropDefId: up,
         showingFileFooter: um,
         canvasSearch: dK,
-        variablePickerShown: AJ,
+        variablePickerShown: variablePickerReducer,
         quickStart: cC,
         recentCustomTemplates: _$$A9,
-        pickerInStyleCreationShown: vB,
+        pickerInStyleCreationShown: pickerInStyleCreationReducer,
         ...uj
       };
       return iP()(HY(e));

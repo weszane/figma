@@ -49,7 +49,7 @@ import { dR as _$$dR2 } from '../897/641331';
 import { BP } from '../897/934363';
 import { reportError, setTagGlobal } from '../905/11';
 import { consumptionPaywallUtils } from '../905/224';
-import { t as _$$t9 } from '../905/1946';
+import { ChevronContainer } from '../905/1946';
 import { a as _$$a6 } from '../905/5627';
 import { r as _$$r9 } from '../905/11924';
 import { D as _$$D6 } from '../905/12032';
@@ -327,7 +327,7 @@ import { b as _$$b7 } from '../905/946806';
 import { B as _$$B3 } from '../905/950875';
 import { A as _$$A11 } from '../905/956262';
 import { r as _$$r } from '../905/957643';
-import { cn as _$$cn } from '../905/959568';
+import { calculatePickerPositionLeft } from '../905/959568';
 import { a as _$$a4 } from '../905/964520';
 import { b as _$$b8 } from '../905/966382';
 import { IMAGE_TYPE_VALUES } from '../905/966582';
@@ -14518,7 +14518,7 @@ function mx({
             let {
               x,
               y
-            } = _$$cn(y.current, 240).add(mo);
+            } = calculatePickerPositionLeft(y.current, 240).add(mo);
             v(showPickerThunk({
               id: j,
               initialX: x,
@@ -23201,7 +23201,7 @@ function ve({
       },
       children: jsx(_$$tV, {
         value: {
-          chevron: _$$t9
+          chevron: ChevronContainer
         },
         children: jsx(NumericDropdownInput, {
           'ariaLabel': getI18nString('fullscreen.type_panel.font_size'),
@@ -29638,7 +29638,7 @@ function TA(e) {
       eo(i);
       return;
     }
-    let l = _$$cn(n, 240);
+    let l = calculatePickerPositionLeft(n, 240);
     fullscreenValue.updateAppModel({
       currentSelectedProperty: {
         type: NodePropertyCategory.BEHAVIOR,
@@ -30332,7 +30332,7 @@ function TA(e) {
               }));
               if (n.length > 0) {
                 Fullscreen?.setSelectedInteractions(n);
-                let e = _$$cn(t.current);
+                let e = calculatePickerPositionLeft(t.current);
                 let i = new Point(e.x, e.y);
                 _$$dT(i, !1);
               }

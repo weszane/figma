@@ -39,7 +39,7 @@ import { Q as _$$Q } from "../figma_app/104130";
 import { nm, j_ } from "../figma_app/745458";
 import { directlySubscribedStylesFromLoadedPagesSelector } from "../figma_app/141508";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { executeWithDSAAction } from "../905/135117";
 import { $$ei1 } from "../905/759609";
 import { Cf } from "../905/504727";
@@ -86,7 +86,7 @@ class eA extends RecordingPureComponent {
         let {
           x,
           y
-        } = cn(this.panelTitleRef.current);
+        } = calculatePickerPositionLeft(this.panelTitleRef.current);
         this.props.onPickerIconClick({
           initialX: x,
           initialY: y
@@ -104,7 +104,7 @@ class eA extends RecordingPureComponent {
         let {
           x,
           y
-        } = this.props.openStylePickerToLeft ? cn(this.panelTitleRef.current, N2) : new Point(t, i);
+        } = this.props.openStylePickerToLeft ? calculatePickerPositionLeft(this.panelTitleRef.current, N2) : new Point(t, i);
         this.props.dispatch(showStylePicker({
           id: OS(this.props.inheritStyleKeyField),
           initialX: x,

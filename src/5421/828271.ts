@@ -39,7 +39,7 @@ import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { J as _$$J2 } from "../905/980942";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { selectAreAllSymbolsOrInstances } from "../figma_app/505098";
 import { e as _$$e } from "../figma_app/905311";
 import { h6 } from "../905/401389";
@@ -226,7 +226,7 @@ let $$eT0 = memo(function ({
       }));
       if (i.length > 0) {
         Fullscreen.setSelectedInteractions(i);
-        let e = cn(R.current);
+        let e = calculatePickerPositionLeft(R.current);
         $$eU3(new Point(e.x, e.y + parsePxNumber(rightNavGridRowHeight)), !1);
       }
       let r = [...n, ...t, ...a];
@@ -269,7 +269,7 @@ let $$eT0 = memo(function ({
     showResetInteractionsButton: C,
     toggleScrollBehaviorPicker: () => {
       if (f?.id === AO) t(hidePickerThunk());else {
-        let e = cn(R.current);
+        let e = calculatePickerPositionLeft(R.current);
         t(showPickerThunk({
           id: AO,
           initialX: e.x,
@@ -437,7 +437,7 @@ function eA({
   let eu = useRef(null);
   let eh = useCallback(() => {
     let e = U ? eu.current : ep.current;
-    $$eU3(cn(e), !1);
+    $$eU3(calculatePickerPositionLeft(e), !1);
   }, [U]);
   let eg = useCallback(() => {
     Fullscreen.setSelectedInteractions([]);

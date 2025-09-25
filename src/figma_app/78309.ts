@@ -10,14 +10,14 @@ import { getI18nString } from '../905/303541';
 import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/582200';
 import { ButtonPrimitive } from '../905/632989';
-import { z5 } from '../905/713722';
+import { defaultColorManipulator } from '../905/713722';
 import { Point } from '../905/736624';
 import { BK } from '../905/848862';
 import { areSessionLocalIDsEqual } from '../905/871411';
 import { k as _$$k } from '../905/888808';
 import { A as _$$A } from '../905/891805';
 import { bL } from '../905/911410';
-import { cn } from '../905/959568';
+import { calculatePickerPositionLeft } from '../905/959568';
 import { colorCSSManipulatorInstance } from '../905/989956';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { kX } from '../figma_app/8833';
@@ -60,7 +60,7 @@ export function $$W0({
       let {
         x,
         y
-      } = cn(T.current, jP);
+      } = calculatePickerPositionLeft(T.current, jP);
       y(new x.Mi(x, y));
       f(!0);
       b();
@@ -336,7 +336,7 @@ function $({
       name: 'slides_document_colors',
       children: [f.map((t, i) => jsx($$q2, {
         backgroundString: colorCSSManipulatorInstance.format(t.color),
-        tooltipText: z5.format(t.color),
+        tooltipText: defaultColorManipulator.format(t.color),
         tooltipSubtext: t.opacity && t.opacity !== 1 ? `${(100 * t.opacity).toFixed(0)}%` : void 0,
         opacity: t.opacity,
         onClick: () => r(t),

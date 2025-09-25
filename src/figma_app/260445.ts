@@ -1,22 +1,22 @@
-import { useCallback, useContext, useId, useMemo, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { jsx, jsxs } from 'react/jsx-runtime'
-import { h as _$$h } from '../905/65944'
-import { permissionScopeHandler } from '../905/189185'
-import { B, C } from '../905/330741'
-import { deepEqual } from '../905/382883'
-import { FormattedInputContext } from '../905/427409'
-import { d9 } from '../905/579068'
-import { Point } from '../905/736624'
-import { VZ } from '../905/959568'
-import { Ek, u3, y$ } from '../figma_app/152690'
-import { yesNoTrackingEnum } from '../figma_app/198712'
-import { eF, MH } from '../figma_app/394327'
-import { fullscreenValue } from '../figma_app/455680'
-import { OperationType, VariableDataType, VariableResolvedDataType, VariablesBindings } from '../figma_app/763686'
-import { u as _$$u, bL, BQ, mm } from '../figma_app/852050'
-import { Yi } from '../figma_app/933328'
-import { ND, Ti } from '../figma_app/960196'
+import { useCallback, useContext, useId, useMemo, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { jsx, jsxs } from 'react/jsx-runtime';
+import { h as _$$h } from '../905/65944';
+import { permissionScopeHandler } from '../905/189185';
+import { hideVariablePicker, showVariablePicker } from '../905/330741';
+import { deepEqual } from '../905/382883';
+import { FormattedInputContext } from '../905/427409';
+import { d9 } from '../905/579068';
+import { Point } from '../905/736624';
+import { calculatePickerPositionBelow } from '../905/959568';
+import { Ek, u3, y$ } from '../figma_app/152690';
+import { yesNoTrackingEnum } from '../figma_app/198712';
+import { eF, MH } from '../figma_app/394327';
+import { fullscreenValue } from '../figma_app/455680';
+import { OperationType, VariableDataType, VariableResolvedDataType, VariablesBindings } from '../figma_app/763686';
+import { u as _$$u, bL, BQ, mm } from '../figma_app/852050';
+import { Yi } from '../figma_app/933328';
+import { ND, Ti } from '../figma_app/960196';
 
 /**
  * Creates a variable data object for a boolean expression that checks if a value is truthy.
@@ -25,21 +25,21 @@ import { ND, Ti } from '../figma_app/960196'
  * @returns A VariableDataType.EXPRESSION object with IS_TRUTHY operation.
  */
 export function createBooleanExpressionVariable(e: any): {
-  type: VariableDataType.EXPRESSION
-  resolvedType: VariableResolvedDataType.BOOLEAN
+  type: VariableDataType.EXPRESSION;
+  resolvedType: VariableResolvedDataType.BOOLEAN;
   value: {
-    expressionFunction: OperationType.IS_TRUTHY
-    expressionArguments: any[]
-  }
+    expressionFunction: OperationType.IS_TRUTHY;
+    expressionArguments: any[];
+  };
 } {
   return {
     type: VariableDataType.EXPRESSION,
     resolvedType: VariableResolvedDataType.BOOLEAN,
     value: {
       expressionFunction: OperationType.IS_TRUTHY,
-      expressionArguments: ['variable' in e && 'variableId' in e ? y$(e.variable.resolvedType, e.variableId) : e],
-    },
-  }
+      expressionArguments: ['variable' in e && 'variableId' in e ? y$(e.variable.resolvedType, e.variableId) : e]
+    }
+  };
 }
 
 /**
@@ -55,50 +55,49 @@ export function createBooleanExpressionVariable(e: any): {
  * @param p - Responsive text style variant index.
  * @returns Array containing show state, show function, onVariableSelected, onExpressionSubmitted, onComponentPropSelected.
  */
-export function useVariablePickerForFields(
-  e: any,
-  t: VariableResolvedDataType,
-  r: ((variable: any) => void) | undefined,
-  n: {
-    mapVariableIdToTypedValue?: (args: { variable: any, variableId: string }) => any
-    metadata?: any
-    requestedTypes?: VariableResolvedDataType[]
-    variableFilters?: any
-  } | undefined,
-  o: any,
-  l: any,
-  d: (() => Point) | undefined,
-  p: number,
-): [boolean, (element: HTMLElement, options?: any) => void, (variable: any, options?: any) => void, any, any] {
-  const { mapVariableIdToTypedValue } = n ?? {}
-  const h = useDispatch<AppDispatch>()
-  const g = useSelector((e: any) => e.variablePickerShown)
-  const { updateVariableConsumption, clearVariableConsumption } = u3(e)
+export function useVariablePickerForFields(e: any, t: VariableResolvedDataType, r: ((variable: any) => void) | undefined, n: {
+  mapVariableIdToTypedValue?: (args: {
+    variable: any;
+    variableId: string;
+  }) => any;
+  metadata?: any;
+  requestedTypes?: VariableResolvedDataType[];
+  variableFilters?: any;
+} | undefined, o: any, l: any, d: (() => Point) | undefined, p: number): [boolean, (element: HTMLElement, options?: any) => void, (variable: any, options?: any) => void, any, any] {
+  const {
+    mapVariableIdToTypedValue
+  } = n ?? {};
+  const h = useDispatch<AppDispatch>();
+  const g = useSelector((e: any) => e.variablePickerShown);
+  const {
+    updateVariableConsumption,
+    clearVariableConsumption
+  } = u3(e);
   const T = useCallback((e: any, n?: any) => {
     if (r) {
-      r(e)
-    }
-    else if (e) {
+      r(e);
+    } else if (e) {
       h(Yi({
         item: e,
         callback: (r: string) => {
           if (mapVariableIdToTypedValue) {
-            updateVariableConsumption(mapVariableIdToTypedValue({ variable: e, variableId: r }), n)
+            updateVariableConsumption(mapVariableIdToTypedValue({
+              variable: e,
+              variableId: r
+            }), n);
+          } else {
+            updateVariableConsumption(y$(t, r), n);
           }
-          else {
-            updateVariableConsumption(y$(t, r), n)
-          }
-        },
-      }))
+        }
+      }));
+    } else {
+      clearVariableConsumption();
     }
-    else {
-      clearVariableConsumption()
-    }
-  }, [r, h, updateVariableConsumption, t, clearVariableConsumption, mapVariableIdToTypedValue])
-  const isShown = g.isShown && g.type === 'variable-picker-fields' && deepEqual(g.fields, e) && g.responsiveTextStyleVariantIndex === p && n?.metadata === g.metadata
+  }, [r, h, updateVariableConsumption, t, clearVariableConsumption, mapVariableIdToTypedValue]);
+  const isShown = g.isShown && g.type === 'variable-picker-fields' && deepEqual(g.fields, e) && g.responsiveTextStyleVariantIndex === p && n?.metadata === g.metadata;
   const showPicker = useCallback((r: HTMLElement, i?: any) => {
-    const a = i?.initialPosition ?? d?.() ?? VZ(r, d9, false)
-    h(C({
+    const a = i?.initialPosition ?? d?.() ?? calculatePickerPositionBelow(r, d9, false);
+    h(showVariablePicker({
       type: 'variable-picker-fields',
       isShown: true,
       initialPosition: a,
@@ -111,10 +110,10 @@ export function useVariablePickerForFields(
       variableFilters: n?.variableFilters,
       onExpressionSubmitted: undefined,
       onComponentPropSelected: l,
-      responsiveTextStyleVariantIndex: p,
-    }))
-  }, [d, h, e, t, n?.requestedTypes, n?.metadata, n?.variableFilters, T, l, p])
-  return [isShown, showPicker, T, undefined, l]
+      responsiveTextStyleVariantIndex: p
+    }));
+  }, [d, h, e, t, n?.requestedTypes, n?.metadata, n?.variableFilters, T, l, p]);
+  return [isShown, showPicker, T, undefined, l];
 }
 
 /**
@@ -126,34 +125,30 @@ export function useVariablePickerForFields(
  * @param n - Resolved type.
  * @returns Array containing show state, show function, onVariableSelected.
  */
-export function useVariablePickerForAlias(
-  e: string,
-  t: string,
-  r: string,
-  n: VariableResolvedDataType,
-): [boolean, (element: HTMLElement, options?: any) => void, (variable: any) => void] {
-  const { setVariableValueOrOverrideForMode } = mm()
-  const m = useDispatch<AppDispatch>()
-  const g = useSelector((e: any) => e.variablePickerShown)
+export function useVariablePickerForAlias(e: string, t: string, r: string, n: VariableResolvedDataType): [boolean, (element: HTMLElement, options?: any) => void, (variable: any) => void] {
+  const {
+    setVariableValueOrOverrideForMode
+  } = mm();
+  const m = useDispatch<AppDispatch>();
+  const g = useSelector((e: any) => e.variablePickerShown);
   const f = useCallback((i: any) => {
     if (i) {
       m(Yi({
         item: i,
         callback: (i: string) => {
-          setVariableValueOrOverrideForMode(e, t, r, y$(n, i), yesNoTrackingEnum.YES, 'alias-variable')
-        },
-      }))
-    }
-    else {
+          setVariableValueOrOverrideForMode(e, t, r, y$(n, i), yesNoTrackingEnum.YES, 'alias-variable');
+        }
+      }));
+    } else {
       if (permissionScopeHandler.user('unalias-variable', () => VariablesBindings.detachVariableValueForMode(t, r, null))) {
-        fullscreenValue.triggerAction('commit')
+        fullscreenValue.triggerAction('commit');
       }
     }
-  }, [m, n, setVariableValueOrOverrideForMode, e, t, r])
-  const isShown = g.isShown && g.type === 'variable-picker-alias' && g.variableID === t && g.modeID === r
+  }, [m, n, setVariableValueOrOverrideForMode, e, t, r]);
+  const isShown = g.isShown && g.type === 'variable-picker-alias' && g.variableID === t && g.modeID === r;
   const showPicker = useCallback((e: HTMLElement, i?: any) => {
-    const a = e.getBoundingClientRect()
-    m(C({
+    const a = e.getBoundingClientRect();
+    m(showVariablePicker({
       type: 'variable-picker-alias',
       isShown: true,
       initialPosition: new Point(a.left, a.bottom),
@@ -161,10 +156,10 @@ export function useVariablePickerForAlias(
       variableID: t,
       modeID: r,
       resolvedType: n,
-      onVariableSelected: f,
-    }))
-  }, [t, r, n, m, f])
-  return [isShown, showPicker, f]
+      onVariableSelected: f
+    }));
+  }, [t, r, n, m, f]);
+  return [isShown, showPicker, f];
 }
 
 /**
@@ -174,8 +169,17 @@ export function useVariablePickerForAlias(
  * @param props - Other props passed to the internal component.
  * @returns JSX element.
  */
-export function FormattedInputWithWrapper({ children, ...props }: { children: React.ReactNode, [key: string]: any }) {
-  return jsx(FormattedInputProvider, { ...props, children })
+export function FormattedInputWithWrapper({
+  children,
+  ...props
+}: {
+  children: React.ReactNode;
+  [key: string]: any;
+}) {
+  return jsx(FormattedInputProvider, {
+    ...props,
+    children
+  });
 }
 
 /**
@@ -203,25 +207,29 @@ function FormattedInputProvider({
   initialPickerPosition,
   onVariableSelected,
   onExpressionSubmitted,
-  onComponentPropSelected,
+  onComponentPropSelected
 }: {
-  fields: string[]
-  children: React.ReactNode
-  resolvedType: VariableResolvedDataType
-  requestedTypes?: VariableResolvedDataType[]
-  editingStyleGuid?: string
-  responsiveTextStyleVariantIndex?: number
-  initialPickerPosition?: () => Point
-  onVariableSelected?: (variable: any) => void
-  onExpressionSubmitted?: any
-  onComponentPropSelected?: any
+  fields: string[];
+  children: React.ReactNode;
+  resolvedType: VariableResolvedDataType;
+  requestedTypes?: VariableResolvedDataType[];
+  editingStyleGuid?: string;
+  responsiveTextStyleVariantIndex?: number;
+  initialPickerPosition?: () => Point;
+  onVariableSelected?: (variable: any) => void;
+  onExpressionSubmitted?: any;
+  onComponentPropSelected?: any;
 }) {
-  const { consumedVariable } = u3(fields, editingStyleGuid, responsiveTextStyleVariantIndex)
-  const h = MH(consumedVariable)
-  const m = _$$u(h ?? undefined)
-  const g = !!m && eF(m)
-  const y = Ek(fields)
-  const [T, I, v, A, x] = useVariablePickerForFields(fields, resolvedType, onVariableSelected, { requestedTypes }, onExpressionSubmitted, onComponentPropSelected, initialPickerPosition, responsiveTextStyleVariantIndex ?? 0)
+  const {
+    consumedVariable
+  } = u3(fields, editingStyleGuid, responsiveTextStyleVariantIndex);
+  const h = MH(consumedVariable);
+  const m = _$$u(h ?? undefined);
+  const g = !!m && eF(m);
+  const y = Ek(fields);
+  const [T, I, v, A, x] = useVariablePickerForFields(fields, resolvedType, onVariableSelected, {
+    requestedTypes
+  }, onExpressionSubmitted, onComponentPropSelected, initialPickerPosition, responsiveTextStyleVariantIndex ?? 0);
   const contextValue = useMemo(() => ({
     showBindingUI: I,
     isShowingBindingUI: T,
@@ -230,9 +238,12 @@ function FormattedInputProvider({
     isBoundVariableDeleted: g,
     onExpressionSubmitted: A,
     onComponentPropSelected: x,
-    mismatchedValue: y,
-  }), [I, T, v, h, g, A, y, x])
-  return jsx(FormattedInputContext.Provider, { value: contextValue, children })
+    mismatchedValue: y
+  }), [I, T, v, h, g, A, y, x]);
+  return jsx(FormattedInputContext.Provider, {
+    value: contextValue,
+    children
+  });
 }
 
 /**
@@ -250,27 +261,30 @@ export function VariableAliasProvider({
   variableID,
   modeID,
   children,
-  resolvedType,
+  resolvedType
 }: {
-  variableSetId: string
-  variableID: string
-  modeID: string
-  children: React.ReactNode
-  resolvedType: VariableResolvedDataType
+  variableSetId: string;
+  variableID: string;
+  modeID: string;
+  children: React.ReactNode;
+  resolvedType: VariableResolvedDataType;
 }) {
-  const [o, l, d] = useVariablePickerForAlias(variableSetId, variableID, modeID, resolvedType)
-  const c = bL(variableID, modeID)
-  const u = MH(c ?? null)
-  const p = _$$u(u ?? undefined)
-  const h = !!p && eF(p)
+  const [o, l, d] = useVariablePickerForAlias(variableSetId, variableID, modeID, resolvedType);
+  const c = bL(variableID, modeID);
+  const u = MH(c ?? null);
+  const p = _$$u(u ?? undefined);
+  const h = !!p && eF(p);
   const contextValue = useMemo(() => ({
     showBindingUI: l,
     isShowingBindingUI: o,
     onVariableSelected: d,
     boundVariableId: u,
-    isBoundVariableDeleted: h,
-  }), [l, o, d, u, h])
-  return jsx(FormattedInputContext.Provider, { value: contextValue, children })
+    isBoundVariableDeleted: h
+  }), [l, o, d, u, h]);
+  return jsx(FormattedInputContext.Provider, {
+    value: contextValue,
+    children
+  });
 }
 
 /**
@@ -290,45 +304,43 @@ export function VariableBindingsDropdown({
   resolvedType,
   variableValue,
   onVariableValueChange,
-  onVariableSelected,
+  onVariableSelected
 }: {
-  children: React.ReactNode
-  pickerType?: string
-  resolvedType: VariableResolvedDataType
-  variableValue: any
-  onVariableValueChange: (value: any) => void
-  onVariableSelected: (variable: any) => void
+  children: React.ReactNode;
+  pickerType?: string;
+  resolvedType: VariableResolvedDataType;
+  variableValue: any;
+  onVariableValueChange: (value: any) => void;
+  onVariableSelected: (variable: any) => void;
 }) {
-  const c = useRef<Point>()
-  const [u, p] = useState(false)
-  const h = useCallback(() => p(false), [])
+  const c = useRef<Point>();
+  const [u, p] = useState(false);
+  const h = useCallback(() => p(false), []);
   const m = useCallback((e: HTMLElement) => {
-    const t = e.getBoundingClientRect()
-    c.current = new Point(t.left, t.bottom)
-    p(true)
-  }, [])
-  const y = variableValue.type === VariableDataType.ALIAS ? variableValue.value : undefined
-  const b = _$$u(y)
-  const I = !!b && eF(b)
+    const t = e.getBoundingClientRect();
+    c.current = new Point(t.left, t.bottom);
+    p(true);
+  }, []);
+  const y = variableValue.type === VariableDataType.ALIAS ? variableValue.value : undefined;
+  const b = _$$u(y);
+  const I = !!b && eF(b);
   const contextValue = useMemo(() => ({
     showBindingUI: m,
     isShowingBindingUI: u,
     boundVariableId: y ?? null,
-    isBoundVariableDeleted: I,
-  }), [m, u, y, I])
-  const v = BQ(y)
-
+    isBoundVariableDeleted: I
+  }), [m, u, y, I]);
+  const v = BQ(y);
   const renderPicker = () => {
-    if (!u)
-      return null
+    if (!u) return null;
     if (variableValue.resolvedType !== VariableResolvedDataType.COLOR) {
       return jsx(Ti, {
         resolvedType,
         onVariableSelected,
         onClose: h,
         initialPosition: c.current,
-        pickerType,
-      })
+        pickerType
+      });
     }
     if (variableValue.type === VariableDataType.COLOR) {
       return jsx(_$$h, {
@@ -340,11 +352,14 @@ export function VariableBindingsDropdown({
         onChange: (e: any) => onVariableValueChange({
           type: VariableDataType.COLOR,
           resolvedType: VariableResolvedDataType.COLOR,
-          value: { ...e, a: 1 },
+          value: {
+            ...e,
+            a: 1
+          }
         }),
         onVariableChange: onVariableSelected,
-        onClose: h,
-      })
+        onClose: h
+      });
     }
     if (variableValue.type === VariableDataType.ALIAS) {
       return jsx(_$$h, {
@@ -356,19 +371,21 @@ export function VariableBindingsDropdown({
         onChange: (e: any) => onVariableValueChange({
           type: VariableDataType.COLOR,
           resolvedType: VariableResolvedDataType.COLOR,
-          value: { ...e, a: 1 },
+          value: {
+            ...e,
+            a: 1
+          }
         }),
         onVariableChange: onVariableSelected,
-        onClose: h,
-      })
+        onClose: h
+      });
     }
-    return null
-  }
-
+    return null;
+  };
   return jsxs(FormattedInputContext.Provider, {
     value: contextValue,
-    children: [children, renderPicker()],
-  })
+    children: [children, renderPicker()]
+  });
 }
 
 /**
@@ -390,26 +407,26 @@ export function ControlledVariablePickerProvider({
   initialPickerPosition,
   onVariableSelected,
   onComponentPropSelected,
-  children,
+  children
 }: {
-  boundVariableId?: string
-  resolvedType: VariableResolvedDataType
-  requestedTypes?: VariableResolvedDataType[]
-  initialPickerPosition?: () => Point
-  onVariableSelected: (variable: any) => void
-  onComponentPropSelected?: any
-  children: React.ReactNode
+  boundVariableId?: string;
+  resolvedType: VariableResolvedDataType;
+  requestedTypes?: VariableResolvedDataType[];
+  initialPickerPosition?: () => Point;
+  onVariableSelected: (variable: any) => void;
+  onComponentPropSelected?: any;
+  children: React.ReactNode;
 }) {
-  const p = _$$u(boundVariableId ?? undefined)
-  const h = !!p && eF(p)
+  const p = _$$u(boundVariableId ?? undefined);
+  const h = !!p && eF(p);
   const [m, g, y] = useControlledVariablePicker({
     resolvedType,
     requestedTypes,
     boundVariableId,
     initialPickerPosition,
     onVariableSelected,
-    onComponentPropSelected,
-  })
+    onComponentPropSelected
+  });
   return jsx(FormattedInputContext.Provider, {
     value: {
       boundVariableId: boundVariableId ?? null,
@@ -418,10 +435,10 @@ export function ControlledVariablePickerProvider({
       showBindingUI: g,
       onVariableSelected,
       onComponentPropSelected,
-      variableBindingContextKey: y,
+      variableBindingContextKey: y
     },
-    children,
-  })
+    children
+  });
 }
 
 /**
@@ -441,22 +458,22 @@ function useControlledVariablePicker({
   boundVariableId,
   initialPickerPosition,
   onVariableSelected,
-  onComponentPropSelected,
+  onComponentPropSelected
 }: {
-  resolvedType: VariableResolvedDataType
-  requestedTypes?: VariableResolvedDataType[]
-  boundVariableId?: string
-  initialPickerPosition?: () => Point
-  onVariableSelected: (variable: any) => void
-  onComponentPropSelected?: any
+  resolvedType: VariableResolvedDataType;
+  requestedTypes?: VariableResolvedDataType[];
+  boundVariableId?: string;
+  initialPickerPosition?: () => Point;
+  onVariableSelected: (variable: any) => void;
+  onComponentPropSelected?: any;
 }): [boolean, (element: HTMLElement, options?: any) => void, string] {
-  const l = useId()
-  const c = useDispatch()
-  const p = useSelector((e: any) => e.variablePickerShown)
-  const isShown = p.isShown && p.type === 'variable-picker-controlled' && p.key === l
+  const l = useId();
+  const c = useDispatch();
+  const p = useSelector((e: any) => e.variablePickerShown);
+  const isShown = p.isShown && p.type === 'variable-picker-controlled' && p.key === l;
   const showPicker = useCallback((i: HTMLElement, a?: any) => {
-    const rect = i.getBoundingClientRect()
-    c(C({
+    const rect = i.getBoundingClientRect();
+    c(showVariablePicker({
       type: 'variable-picker-controlled',
       isShown: true,
       initialPosition: a?.initialPosition ?? initialPickerPosition?.() ?? new Point(rect.left, rect.bottom),
@@ -466,10 +483,10 @@ function useControlledVariablePicker({
       resolvedType,
       requestedTypes,
       onVariableSelected,
-      onComponentPropSelected,
-    }))
-  }, [c, boundVariableId, l, resolvedType, requestedTypes, initialPickerPosition, onVariableSelected, onComponentPropSelected])
-  return [isShown, showPicker, l]
+      onComponentPropSelected
+    }));
+  }, [c, boundVariableId, l, resolvedType, requestedTypes, initialPickerPosition, onVariableSelected, onComponentPropSelected]);
+  return [isShown, showPicker, l];
 }
 
 /**
@@ -481,34 +498,33 @@ function useControlledVariablePicker({
  */
 export function VariablePicker({
   variableScope,
-  onPickerClose,
+  onPickerClose
 }: {
-  variableScope?: string
-  onPickerClose?: () => void
+  variableScope?: string;
+  onPickerClose?: () => void;
 }) {
-  const r = useDispatch()
+  const r = useDispatch();
   const s = useCallback(() => {
-    onPickerClose?.()
-    r(B())
-  }, [r, onPickerClose])
-  const o = useContext(FormattedInputContext)?.isShowingBindingUI
-  const l = useContext(FormattedInputContext)?.variableBindingContextKey
-  const d = useSelector((e: any) => e.variablePickerShown)
+    onPickerClose?.();
+    r(hideVariablePicker());
+  }, [r, onPickerClose]);
+  const o = useContext(FormattedInputContext)?.isShowingBindingUI;
+  const l = useContext(FormattedInputContext)?.variableBindingContextKey;
+  const d = useSelector((e: any) => e.variablePickerShown);
   if (o && d.isShown && d.type === 'variable-picker-controlled' && d.key === l) {
     return jsx(ND, {
       ...d,
       onClose: s,
-      variableScopes: variableScope ? new Set([variableScope]) : undefined,
-    })
+      variableScopes: variableScope ? new Set([variableScope]) : undefined
+    });
   }
-  return null
+  return null;
 }
-
-export const Cr = VariableBindingsDropdown
-export const Gx = useVariablePickerForAlias
-export const JV = useVariablePickerForFields
-export const V5 = VariablePicker
-export const _X = FormattedInputWithWrapper
-export const eT = createBooleanExpressionVariable
-export const hu = ControlledVariablePickerProvider
-export const nE = VariableAliasProvider
+export const Cr = VariableBindingsDropdown;
+export const Gx = useVariablePickerForAlias;
+export const JV = useVariablePickerForFields;
+export const V5 = VariablePicker;
+export const _X = FormattedInputWithWrapper;
+export const eT = createBooleanExpressionVariable;
+export const hu = ControlledVariablePickerProvider;
+export const nE = VariableAliasProvider;

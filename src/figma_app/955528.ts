@@ -28,7 +28,7 @@ import { cortexAPI } from "../figma_app/432652";
 import { TJ } from "../figma_app/482495";
 import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Yh } from "../figma_app/357047";
-import { cn, qo } from "../905/959568";
+import { calculatePickerPositionLeft, DEFAULT_PICKER_WIDTH } from "../905/959568";
 import { h as _$$h } from "../figma_app/203891";
 import { A as _$$A2 } from "../figma_app/78608";
 import { JT } from "../figma_app/632248";
@@ -75,7 +75,7 @@ export function $$X6(e, t) {
   let o = getFalseValue() ? {
     x: 0,
     y: 0
-  } : cn(s, qo);
+  } : calculatePickerPositionLeft(s, DEFAULT_PICKER_WIDTH);
   e(showPickerThunk({
     id: vu,
     initialX: o.x,

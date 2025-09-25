@@ -47,7 +47,7 @@ import { CachedSubtreeRenderer } from "../figma_app/679183";
 import { Dc, hV } from "../figma_app/151766";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { a as _$$a } from "../figma_app/997280";
 import { JH } from "../figma_app/479313";
 import { a3, ow } from "../905/188421";
@@ -60,7 +60,7 @@ import { z as _$$z } from "../905/454433";
 import { Zk, JU, fI } from "../figma_app/626177";
 import { c$ as _$$c$, l6, tV } from "../905/794875";
 import { pW, gm } from "../figma_app/335781";
-import { t as _$$t2 } from "../905/1946";
+import { ChevronContainer } from "../905/1946";
 import { dD, Qu, dp } from "../figma_app/941824";
 import { Ad } from "../figma_app/811257";
 import { JT } from "../figma_app/632248";
@@ -538,7 +538,7 @@ let eF = forwardRef(function ({
       },
       children: jsx(tV, {
         value: {
-          chevron: _$$t2
+          chevron: ChevronContainer
         },
         children: jsx(eO, {
           ariaLabel: getI18nString("fullscreen.properties_panel.export_settings.constraints.aria_label"),
@@ -757,7 +757,7 @@ function eU(e) {
           e.dispatch(hidePickerThunk());
           fullscreenValue.deselectProperty();
         } else {
-          let r = cn(t.current, _$$zk);
+          let r = calculatePickerPositionLeft(t.current, _$$zk);
           fullscreenValue.updateAppModel({
             currentSelectedProperty: {
               type: e.selectedPropertyType,

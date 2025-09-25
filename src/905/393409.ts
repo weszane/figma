@@ -408,7 +408,7 @@ function getCssBlendMode(paint: Paint, name?: string): string | undefined {
  * Creates blur filter from radius.
  * Original: _
  */
-function cssFilterFromBlurEffectRadius(radius: number): string {
+export function cssFilterFromBlurEffectRadius(radius: number): string {
   return `blur(${Math.sqrt(radius)}px)`;
 }
 
@@ -440,7 +440,7 @@ function cssBoxShadow(effect: Effect): string {
  * Creates drop shadow filter string.
  * Original: b
  */
-function cssDropShadow(effect: Effect): string {
+export function cssDropShadow(effect: Effect): string {
   const { offset, blur, color } = effect;
   return `${offset!.x}px ${offset!.y}px ${blur}px ${colorOrStringToCss(color!)}`;
 }

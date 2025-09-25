@@ -17,7 +17,7 @@ import { selectOpenFileKey } from "../figma_app/516028";
 import { V4 } from "../figma_app/383828";
 import { lm } from "../figma_app/745458";
 import { selectSceneGraphSelectionKeys, selectInstanceKeys } from "../figma_app/889655";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { PanelWidth, DefinitionAssignment } from "../figma_app/164212";
 import { e6, ME } from "../figma_app/545190";
 import { Z3 } from "../figma_app/461594";
@@ -106,7 +106,7 @@ export let $$K0 = memo(function (e) {
   let L = useMemo(() => singleBackingStateGroup?.symbolLinks ?? [], [singleBackingStateGroup]);
   let k = useCallback(e => {
     if (e) {
-      let e = cn(O.current, Im);
+      let e = calculatePickerPositionLeft(O.current, Im);
       _(showPickerThunk({
         id: uA,
         initialX: e.x,

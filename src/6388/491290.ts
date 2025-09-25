@@ -9,16 +9,16 @@ import { v as _$$v } from "../642/135773";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Yr } from "../figma_app/8833";
-import { z5 } from "../905/713722";
+import { defaultColorManipulator } from "../905/713722";
 import { normalizeValue, isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
 import { Zr } from "../figma_app/678782";
 import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { Ao } from "../905/748636";
 import { C } from "../642/180963";
 import { Y } from "../6388/262412";
 import { K } from "../6388/893524";
-import { Y as _$$Y } from "../905/1768";
+import { useClickOutside } from "../905/1768";
 import { u as _$$u } from "../642/560546";
 let I = `${Yr}-overlay`;
 let T = {
@@ -40,11 +40,11 @@ export function $$C0({
   let [l, s] = useState(!1);
   let [r, i] = useState(null);
   let d = useCallback(() => {
-    l ? s(!1) : e.current && (i(cn(e.current, 240)), s(!0));
+    l ? s(!1) : e.current && (i(calculatePickerPositionLeft(e.current, 240)), s(!0));
   }, [l, e]);
   let h = useRef(null);
   let p = useRef(null);
-  _$$Y(() => s(!1), {
+  useClickOutside(() => s(!1), {
     closeOnEsc: !0,
     ignore: [h, p]
   });
@@ -154,7 +154,7 @@ export function $$w1() {
       var o = {
         ...e
       };
-      t && e.color && t.color && z5.format(e.color) !== z5.format(t.color) && (o.opacity = t.opacity);
+      t && e.color && t.color && defaultColorManipulator.format(e.color) !== defaultColorManipulator.format(t.color) && (o.opacity = t.opacity);
       t || (o.opacity = .4);
       l(o);
     }

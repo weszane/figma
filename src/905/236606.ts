@@ -33,7 +33,7 @@ import { isVsCodeEnvironment } from "../905/858738";
 import { getSelectedView } from "../figma_app/386952";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { P as _$$P } from "../905/647955";
 var c = d;
 let N = "matching_vars_modal--libraryName--LgwjY ellipsis--ellipsis--Tjyfa";
@@ -340,7 +340,7 @@ function ee({
         ...m,
         variableIdForDetailsPanel: t
       }));else {
-        let e = cn(ref.current, StyleDetailModalWidth + ModalPadding);
+        let e = calculatePickerPositionLeft(ref.current, StyleDetailModalWidth + ModalPadding);
         d(showModal({
           type: B.type,
           data: {
@@ -423,7 +423,7 @@ function et({
         }
       }));else {
         A && f(hideModalHandler());
-        let e = cn(ref.current, VariableDetailModalWidth + ModalPadding);
+        let e = calculatePickerPositionLeft(ref.current, VariableDetailModalWidth + ModalPadding);
         f(showModal({
           type: StyleDetailModal,
           data: {
@@ -473,7 +473,7 @@ function ei({
   let d = useRef(null);
   let u = useCallback(() => {
     if (!ref?.current || !d?.current) return;
-    let e = cn(ref.current, MatchingVariablesModalWidth + ModalPadding);
+    let e = calculatePickerPositionLeft(ref.current, MatchingVariablesModalWidth + ModalPadding);
     i(showModal({
       type: L.type,
       data: {

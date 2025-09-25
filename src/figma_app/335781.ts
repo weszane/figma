@@ -20,7 +20,7 @@ import { ColorInput } from "../figma_app/178475";
 import { VariableBindingInput } from "../figma_app/841644";
 import { ow } from "../905/188421";
 import { c$, tV } from "../905/794875";
-import { t as _$$t2 } from "../905/1946";
+import { ChevronContainer } from "../905/1946";
 import { O as _$$O, S as _$$S } from "../figma_app/375482";
 import { wm } from "../figma_app/694588";
 import { s$, lW, lL } from "../figma_app/409807";
@@ -181,7 +181,7 @@ export function $$M0({
     },
     children: jsx(tV, {
       value: {
-        chevron: _$$t2
+        chevron: ChevronContainer
       },
       children: jsx(_$$S, {
         "data-tooltip-max-width": 200,

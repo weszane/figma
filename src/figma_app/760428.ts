@@ -10,18 +10,18 @@ import u from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { AutoInteractableWrapper } from "../905/277716";
-import { TQ, Zl } from "../905/211621";
+import { useModalConfig, PickerOptionType } from "../905/211621";
 import { SvgComponent } from "../905/714743";
 import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
-import { zE } from "../905/8732";
+import { toggleInstanceSwapPicker } from "../905/8732";
 import { replaceSelection } from "../figma_app/741237";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { useSceneGraphFromContext } from "../figma_app/722362";
 import { getBasename } from "../905/309735";
 import { XV } from "../figma_app/383828";
 import { KindEnum } from "../905/129884";
-import { VZ } from "../905/959568";
+import { calculatePickerPositionBelow } from "../905/959568";
 import { xP } from "../figma_app/65182";
 import { u as _$$u } from "../figma_app/940920";
 import { yQ } from "../figma_app/930914";
@@ -187,13 +187,13 @@ export function $$J2({
   }
   let {
     modalWidth
-  } = TQ(Zl.INSTANCE_SWAP_PICKER);
+  } = useModalConfig(PickerOptionType.INSTANCE_SWAP_PICKER);
   let eA = useAtomWithSubscription(_$$_);
   let ex = useCallback(() => {
     if (shouldHideButtons) return;
     let t = eA?.current || e?.current;
-    let r = t ? VZ(t, modalWidth, !1) : void 0;
-    el(zE({
+    let r = t ? calculatePickerPositionBelow(t, modalWidth, !1) : void 0;
+    el(toggleInstanceSwapPicker({
       initialPosition: r,
       id: Q,
       modal: !0
@@ -261,7 +261,7 @@ export function $$J2({
       title: getI18nString("design_systems.instance_panel.swap_instance"),
       itemsToSwap: instanceAndSublayerGUIDs,
       recordingKey: generateRecordingKey(V, "instanceSwapPicker"),
-      pickerType: Zl.INSTANCE_SWAP_PICKER,
+      pickerType: PickerOptionType.INSTANCE_SWAP_PICKER,
       preferredItems: preferredValues,
       preferredValuesErrorComponent: eo,
       entrypointForLogging: _$$S.InstancePickerEntrypoint.SELECTED_INSTANCE_SWAP

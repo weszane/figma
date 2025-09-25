@@ -4,7 +4,7 @@ import { Sb } from "../figma_app/49598";
 import { Vx, uV, fs, b6 } from "../figma_app/559491";
 import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { isNullOrFailure } from "../905/18797";
-import { d as _$$d } from "../905/751443";
+import { defaultContentService } from "../905/751443";
 let $$c1 = createActionCreator("UPDATE_FACE_STAMPS");
 let $$u3 = createActionCreator("PUT_DEFAULT_FIGJAM_INSERT_ITEMS");
 let $$p2 = createOptimistThunk(e => {
@@ -19,7 +19,7 @@ async function h(e) {
       key: $$_0
     }));
     try {
-      let r = await _$$d.getDefaultInserts({
+      let r = await defaultContentService.getDefaultInserts({
         orgId: t.currentUserOrgId || void 0
       });
       let n = [...r.data.meta.plugins, ...function (e) {

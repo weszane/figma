@@ -12,7 +12,7 @@ var d = "[object Map]";
 var f = "[object Number]";
 var p = "[object Object]";
 var g = "[object Promise]";
-var m = "[object RegExp]";
+var getDefaultFrameProps = "[object RegExp]";
 var b = "[object Set]";
 var y = "[object String]";
 var v = "[object WeakMap]";
@@ -22,7 +22,7 @@ var N = /^\[object .+?Constructor\]$/;
 var E = /^(?:0|[1-9]\d*)$/;
 var w = {};
 w["[object Float32Array]"] = w["[object Float64Array]"] = w["[object Int8Array]"] = w["[object Int16Array]"] = w["[object Int32Array]"] = w["[object Uint8Array]"] = w["[object Uint8ClampedArray]"] = w["[object Uint16Array]"] = w["[object Uint32Array]"] = !0;
-w[l] = w[o] = w[ImageDownloadQueue] = w[a] = w[x] = w[c] = w[ExpiringCache] = w[h] = w[d] = w[f] = w[p] = w[m] = w[b] = w[y] = w[v] = !1;
+w[l] = w[o] = w[ImageDownloadQueue] = w[a] = w[x] = w[c] = w[ExpiringCache] = w[h] = w[d] = w[f] = w[p] = w[getDefaultFrameProps] = w[b] = w[y] = w[v] = !1;
 var k = "object" == typeof require.g && require.g && require.g.Object === Object && require.g;
 var q = "object" == typeof self && self && self.Object === Object && self;
 var _ = k || q || Function("return this")();
@@ -460,7 +460,7 @@ module.exports = function (t, e) {
               return tL(+t, +e);
             case ExpiringCache:
               return t.name == e.name && t.message == e.message;
-            case m:
+            case getDefaultFrameProps:
             case y:
               return t == e + "";
             case d:

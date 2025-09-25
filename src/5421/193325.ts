@@ -22,9 +22,9 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { permissionScopeHandler } from "../905/189185";
 import { Point } from "../905/736624";
-import { TI } from "../905/713722";
+import { formattedColorManipulator } from "../905/713722";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { OpacityInput, ExpressionInput, TimeDurationInput, TimeSecondsInput } from "../figma_app/178475";
 import { J as _$$J3 } from "../905/225412";
 import { h as _$$h } from "../905/65944";
@@ -65,7 +65,7 @@ import { c as _$$c, P as _$$P2 } from "../905/200950";
 import { getFeatureFlags } from "../905/601108";
 import { h as _$$h2 } from "../905/207101";
 import { RecordableDiv } from "../905/511649";
-import { C as _$$C, B as _$$B2 } from "../905/330741";
+import { showVariablePicker, hideVariablePicker } from "../905/330741";
 import { tZ, u as _$$u, BQ } from "../figma_app/852050";
 import { selectAreAllSymbolsOrInstances } from "../figma_app/505098";
 import { f as _$$f } from "../37/573389";
@@ -102,7 +102,7 @@ function R(e) {
     });
   }, [e]);
 }
-let U = TI;
+let U = formattedColorManipulator;
 function F({
   children: e
 }) {
@@ -139,7 +139,7 @@ function K({
     if (d) V();else {
       p(!0);
       let e = D.current;
-      x(cn(e));
+      x(calculatePickerPositionLeft(e));
     }
   }, [d, V]);
   let H = useCallback(e => {
@@ -837,7 +837,7 @@ function eX({
   }, [C, n, e]);
   let E = () => {
     let e = p.current.getBoundingClientRect();
-    x(_$$C({
+    x(showVariablePicker({
       type: "variable-picker-set-variable-action",
       isShown: !0,
       resolvedType: VariableResolvedDataType.STRING,
@@ -847,7 +847,7 @@ function eX({
     }));
   };
   let j = useCallback(() => {
-    x(_$$B2());
+    x(hideVariablePicker());
   }, [x]);
   let [T, S] = useState(!1);
   let A = useCallback(t => {

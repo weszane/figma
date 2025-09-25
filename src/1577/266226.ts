@@ -14,7 +14,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { showModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
-import { z5 } from "../905/713722";
+import { defaultColorManipulator } from "../905/713722";
 import { getUserId } from "../905/372672";
 import { ColorPalettesForTeam } from "../figma_app/43951";
 import { getCurrentTeamId } from "../figma_app/598018";
@@ -100,7 +100,7 @@ function L({
         width: "hug-contents",
         spacing: "0px",
         children: e.baseColors.map(e => jsx(cd, {
-          value: z5.parse(e),
+          value: defaultColorManipulator.parse(e),
           paletteType: "base",
           background: "light",
           role: "img",
@@ -242,7 +242,7 @@ export let $$B0 = registerModal(function ({
                 palette: {
                   uuid: fJ,
                   name: getI18nString("whiteboard.color_palettes.figjam_colors"),
-                  baseColors: TS("base").map(e => z5.format(e)),
+                  baseColors: TS("base").map(e => defaultColorManipulator.format(e)),
                   isTeamDefault: y.data.colorPalettesForTeam.every(e => !e.isTeamDefault)
                 },
                 theme: i,

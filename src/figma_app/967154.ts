@@ -5,7 +5,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { hideDropdownAction } from "../905/929976";
 import { hidePickerThunk, showPickerThunk, hideStylePicker } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
-import { qo, cn } from "../905/959568";
+import { DEFAULT_PICKER_WIDTH, calculatePickerPositionLeft } from "../905/959568";
 import { ADD_COMPONENT_PROP_DROPDOWN } from "../figma_app/164212";
 import { selectNodeFromCombinedId, generateDescription } from "../figma_app/505098";
 import { Vr } from "../figma_app/151869";
@@ -79,10 +79,10 @@ export function $$T5(e) {
 }
 export function $$I2(e) {
   let t = useDispatch();
-  return useCallback((r, n, i = qo) => {
+  return useCallback((r, n, i = DEFAULT_PICKER_WIDTH) => {
     if (!e || !e.current) return;
     let a = e.current;
-    let s = cn(a, i);
+    let s = calculatePickerPositionLeft(a, i);
     t(showPickerThunk({
       id: n,
       initialX: s.x,

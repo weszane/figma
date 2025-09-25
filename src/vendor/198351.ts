@@ -605,4 +605,5 @@ export let $$R0 = function (e) {
     merge: $$A.bind(null, n.registered, i)
   };
 };
+// createEmotion
 export const A = $$R0;

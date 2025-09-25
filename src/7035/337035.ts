@@ -19,7 +19,7 @@ import { showModalHandler } from "../905/156213";
 import { useCurrentOrgAdminInfo } from "../figma_app/543529";
 import { useAllowlistedPlugins, useAllowlistedWidgets } from "../figma_app/844435";
 import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
-import { k as _$$k2 } from "../905/882646";
+import { generateCommunityUrl } from "../905/882646";
 import { getUserId } from "../905/372672";
 import { U3 } from "../figma_app/412189";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -91,7 +91,7 @@ export function $$S0({
         className: n === ShelfViewType.REDESIGNED_PLUGIN_ROW ? gz : n === ShelfViewType.PLUGIN_ROW ? GJ : X7,
         onClick: () => {
           if (!P) {
-            let t = _$$k2(e);
+            let t = generateCommunityUrl(e);
             F(cx({
               isWidget: J,
               redirectPath: t

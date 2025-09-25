@@ -17,7 +17,7 @@ import { isVsCodeEnvironment } from "../905/858738";
 import { getSelectedView } from "../figma_app/386952";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { P } from "../905/647955";
 import { VariableDetailModal, MatchingVariablesModal, StyleDetailModalWidth, ModalPadding, ModalWindowType, MatchingVariablesModalWidth, StyleDetailModal, VariableDetailModalWidth } from "../905/560959";
 import { Zh, g_, _o } from "../905/729876";
@@ -168,7 +168,7 @@ export function $$L1({
             variableIdForDetailsPanel: t
           }));else {
             l && n(hideModalHandler());
-            let i = cn(e?.current, StyleDetailModalWidth + ModalPadding);
+            let i = calculatePickerPositionLeft(e?.current, StyleDetailModalWidth + ModalPadding);
             n(showModal({
               type: VariableDetailModal,
               data: {
@@ -201,7 +201,7 @@ export function $$L1({
           return;
         }
         o && n(hideModalHandler());
-        let a = cn(e?.current, MatchingVariablesModalWidth + ModalPadding);
+        let a = calculatePickerPositionLeft(e?.current, MatchingVariablesModalWidth + ModalPadding);
         n(showModal({
           type: MatchingVariablesModal,
           data: {
@@ -254,7 +254,7 @@ export function $$L1({
             }
           }));else {
             u && o(hideModalHandler());
-            let r = cn(e.current, VariableDetailModalWidth + ModalPadding);
+            let r = calculatePickerPositionLeft(e.current, VariableDetailModalWidth + ModalPadding);
             o(showModal({
               type: StyleDetailModal,
               data: {

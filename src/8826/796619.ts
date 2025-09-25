@@ -27,7 +27,7 @@ import { showPickerThunk } from "../figma_app/91703";
 import { hideTooltip } from "../905/765855";
 import { fullscreenValue } from "../figma_app/455680";
 import { kG } from "../figma_app/482495";
-import { qo } from "../905/959568";
+import { DEFAULT_PICKER_WIDTH } from "../905/959568";
 import { p1 } from "../figma_app/779965";
 import H from "classnames";
 import { sR } from "../figma_app/694588";
@@ -68,7 +68,7 @@ function T({
           let {
             top
           } = t.currentTarget.getBoundingClientRect();
-          let l = qo;
+          let l = DEFAULT_PICKER_WIDTH;
           let i = c();
           i && (l = window.innerWidth - i.getBoundingClientRect().left);
           a(showPickerThunk({

@@ -21,7 +21,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { s as _$$s } from "../figma_app/874592";
 import { Dr, Ct } from "../figma_app/803787";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { Nu } from "../figma_app/23780";
 import { Cf } from "../905/504727";
 import { z6 } from "../figma_app/967154";
@@ -323,7 +323,7 @@ export function $$eg0({
   let Q = useCallback(e => {
     trackComponentPropsModalOpen(d, !1, e, DisplayMode.ICON);
     let t = J.current;
-    let r = t ? cn(t, DROPDOWN_HEIGHT) : {};
+    let r = t ? calculatePickerPositionLeft(t, DROPDOWN_HEIGHT) : {};
     s(showModalHandler({
       type: _$$n2,
       data: {
@@ -338,7 +338,7 @@ export function $$eg0({
   }, [Q, d]);
   let es = useCallback(() => {
     let e = J.current;
-    let t = e ? cn(e, DROPDOWN_HEIGHT) : {};
+    let t = e ? calculatePickerPositionLeft(e, DROPDOWN_HEIGHT) : {};
     s(showPickerThunk({
       id: BUBBLED_PROPS_PICKER,
       initialX: t?.x,

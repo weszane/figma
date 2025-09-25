@@ -81,13 +81,13 @@ import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { Qr } from "../905/690539";
 import { Xo } from "../figma_app/482495";
 import { pn as _$$pn } from "../905/714538";
-import { VZ } from "../905/959568";
+import { calculatePickerPositionBelow } from "../905/959568";
 import { Cn } from "../905/882267";
 import { UG } from "../figma_app/628987";
 import { FF } from "../905/556648";
 import { ButtonPrimitive } from "../905/632989";
 import { xF, m$, DY, HL } from "../5421/389127";
-import { Y as _$$Y } from "../905/1768";
+import { useClickOutside } from "../905/1768";
 import { s as _$$s } from "../905/551945";
 import { oW } from "../905/675859";
 import { A as _$$A2 } from "../905/639174";
@@ -831,7 +831,7 @@ function e9() {
       let {
         x,
         y
-      } = VZ(d.current, n);
+      } = calculatePickerPositionBelow(d.current, n);
       let r = container.getBoundingClientRect();
       x < r.left ? o = r.left : x + n > r.left + container.clientWidth && (o = r.left + container.clientWidth - n);
       u(showPickerThunk({
@@ -855,7 +855,7 @@ function e9() {
     (!h || h.id !== e8) && l && s(!1);
   }, [l, h, s]);
   let v = useRef(null);
-  _$$Y(_, {
+  useClickOutside(_, {
     closeOnEsc: !0,
     ignore: e => !!(v.current && v.current.contains(e))
   });

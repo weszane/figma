@@ -2,7 +2,7 @@ import c from 'classnames';
 import { createContext, createRef, useCallback, useContext, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { vq } from '../905/8732';
+import { hideInstanceSwapPicker } from '../905/8732';
 import { r as _$$r2 } from '../905/12476';
 import { useMemoStable } from '../905/19536';
 import { k as _$$k } from '../905/44647';
@@ -38,7 +38,7 @@ import { yG } from '../905/859698';
 import { A as _$$A } from '../905/891805';
 import { V as _$$V } from '../905/900932';
 import { showDropdownThunk, hideDropdownAction } from '../905/929976';
-import { cn } from '../905/959568';
+import { calculatePickerPositionLeft } from '../905/959568';
 import { O as _$$O } from '../905/969533';
 import { d as _$$d } from '../905/976845';
 import { cssBuilderInstance } from '../cssbuilder/589278';
@@ -286,9 +286,9 @@ function ew(e) {
     O(setSelectedTypedPropDefId({
       propDefId: null
     }));
-    O(vq());
+    O(hideInstanceSwapPicker());
     let e = z.current;
-    let t = e ? cn(e, DROPDOWN_HEIGHT) : {};
+    let t = e ? calculatePickerPositionLeft(e, DROPDOWN_HEIGHT) : {};
     O(showPickerThunk({
       id: aR,
       initialX: t?.x,
@@ -914,7 +914,7 @@ function $$e6(e) {
     if (A) {
       Fullscreen.replaceSymbolBackingInstancesInPlayground(i);
       updateHistory(r);
-      v?.isShown && I(vq());
+      v?.isShown && I(hideInstanceSwapPicker());
       return;
     }
     Object.keys(i).length !== 0 && (trackStateGroupAnalytics('Swapping A Variant', stateGroupGUID ?? '', {

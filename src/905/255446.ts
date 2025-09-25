@@ -21,7 +21,7 @@ import { selectOpenFileKey } from "../figma_app/516028";
 import { getAssetKey, getAssetVersion, useSubscribedAssets, AssetFilterMode } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
 import { isNodeNotVisible, getStylePublishInfoSelector, $4, selectLocalStylesWithUsagesOnLoadedPages } from "../figma_app/889655";
-import { bd } from "../905/557338";
+import { createPrimaryInstancesSelector } from "../905/557338";
 import { directlySubscribedStylesFromLoadedPagesSelector, directlySubscribedStylesNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { se, TM } from "../figma_app/435826";
@@ -366,7 +366,7 @@ export function $$z3(e, t) {
   });
 }
 export function $$H4(e) {
-  let t = useMemo(bd, []);
+  let t = useMemo(createPrimaryInstancesSelector, []);
   let i = useSelector(i => t(i, "INSTANCE_PANEL" === e.source ? e.instanceAndSublayerGUIDs : []));
   let {
     componentUpdatesForAllPages,

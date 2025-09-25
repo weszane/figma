@@ -38,12 +38,12 @@ import { U as _$$U2 } from "../905/492359";
 import { hidePickerThunk, showPickerThunk, hideStylePicker, stylePickerViewChangedThunk, showStylePicker } from "../figma_app/91703";
 import { AV, nh } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
-import { D as _$$D, w as _$$w } from "../905/295712";
+import { showPickerInStyleCreation, hidePickerInStyleCreation } from "../905/295712";
 import { updateCurrentSelectionPaintInPicker, forceUpdateSelectionPaintsForUndo } from "../905/854717";
 import { sw } from "../figma_app/914957";
 import { yJ, F7 } from "../figma_app/8833";
 import { formatI18nMessage } from "../905/482208";
-import { C1, rC } from "../905/713722";
+import { AutoColorFormatter, FormattedHexColor } from "../905/713722";
 import { ZB } from "../figma_app/451499";
 import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
@@ -67,7 +67,7 @@ import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { K as _$$K2 } from "../905/733706";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { OpacityInput } from "../figma_app/178475";
 import { a2 } from "../figma_app/762558";
 import { executeWithDSAAction } from "../905/135117";
@@ -313,7 +313,7 @@ class to extends PureComponent {
       if (this.props.pickerShown?.id === this.settingsId) this.props.dispatch(hidePickerThunk());else {
         if (!this.forwardedRef || !this.forwardedRef.current) return;
         trackEventAnalytics("editor-paints-panel-advanced-stroke-show");
-        let e = cn(this.forwardedRef.current);
+        let e = calculatePickerPositionLeft(this.forwardedRef.current);
         this.props.dispatch(showPickerThunk({
           id: this.settingsId,
           initialX: e.x,
@@ -767,7 +767,7 @@ export class $$tp1 extends PureComponent {
     this.pickerShown = () => this.isInStyleModal() ? this.props.pickerInStyleCreationShown?.id === this.props.id ? this.props.pickerInStyleCreationShown : null : this.props.pickerShown?.id === this.props.id ? this.props.pickerShown : null;
     this.showPicker = () => {
       if (!this.row.current) return;
-      let e = cn(this.row.current);
+      let e = calculatePickerPositionLeft(this.row.current);
       this.props.onPickerShown?.();
       fullscreenValue.updateAppModel({
         currentSelectedProperty: {
@@ -775,7 +775,7 @@ export class $$tp1 extends PureComponent {
           indices: [this.props.index]
         }
       });
-      this.isInStyleModal() ? this.props.dispatch(_$$D({
+      this.isInStyleModal() ? this.props.dispatch(showPickerInStyleCreation({
         id: this.props.id,
         initialX: e.x,
         initialY: e.y
@@ -790,7 +790,7 @@ export class $$tp1 extends PureComponent {
       this.isInStyleModal() || (this.props.dispatch(sw()), this.props.dispatch(hideStylePicker()));
     };
     this.hidePicker = () => {
-      this.isInStyleModal() ? this.props.dispatch(_$$w()) : this.props.dispatch(hidePickerThunk());
+      this.isInStyleModal() ? this.props.dispatch(hidePickerInStyleCreation()) : this.props.dispatch(hidePickerThunk());
       fullscreenValue.deselectProperty();
     };
     this.togglePicker = () => {
@@ -1280,9 +1280,9 @@ function tm(e) {
   }, e.componentKey);
 }
 export function $$tg3(e) {
-  let t = useMemo(() => e.allowAutoAndMixed ? new C1({
+  let t = useMemo(() => e.allowAutoAndMixed ? new AutoColorFormatter({
     parseAlpha: !0
-  }) : new rC({
+  }) : new FormattedHexColor({
     parseAlpha: !0
   }), [e.allowAutoAndMixed]);
   let r = useMemo(() => new ZB(() => e.paint), [e.paint]);
@@ -1357,7 +1357,7 @@ function tf({
     let {
       x,
       y
-    } = cn(C.current);
+    } = calculatePickerPositionLeft(C.current);
     v(showPickerThunk({
       id: A,
       initialX: x,
@@ -1530,7 +1530,7 @@ $$t_2.displayName = "Paint";
       this.pickerShown = () => this.props.pickerShown?.id === this.pickerID();
       this.showPicker = () => {
         if (!this.row.current) return;
-        let e = cn(this.row.current);
+        let e = calculatePickerPositionLeft(this.row.current);
         this.props.dispatch(showPickerThunk({
           id: this.pickerID(),
           initialX: e.x,

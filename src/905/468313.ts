@@ -34,7 +34,7 @@ import { u3 } from "../figma_app/152690";
 import { P as _$$P, J } from "../figma_app/120873";
 import { VariablePicker } from "../figma_app/260445";
 import { eF, MH } from "../figma_app/394327";
-import { k as _$$k } from "../905/67286";
+import { calculatePickerPosition } from "../905/67286";
 import { wG, J2 } from "../905/331989";
 import { XA, Ig } from "../905/805224";
 import { Cl, $1, OR, NU, Ds, X$, P as _$$P2, Dp, gb } from "../905/71683";
@@ -131,7 +131,7 @@ export function $$W1({
     className: Cl,
     onClick: function () {
       e.current && l?.showBindingUI(e.current, {
-        initialPosition: _$$k({
+        initialPosition: calculatePickerPosition({
           inputRef: e,
           isInStyleModal: a
         })
@@ -367,7 +367,7 @@ export let $$Q3 = forwardRef(function ({
     showVariablePicker: () => {
       t.current && s?.showBindingUI(t.current, {
         currentFieldValue: i,
-        initialPosition: _$$k({
+        initialPosition: calculatePickerPosition({
           inputRef: t,
           rowRef: e,
           isInStyleModal: n

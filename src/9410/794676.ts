@@ -87,7 +87,7 @@ import { customHistory } from "../905/612521";
 import { AUTH_INIT } from "../905/194276";
 import { AuthFlowStep } from "../905/862321";
 import { Ob } from "../905/191560";
-import { u as _$$u } from "../905/684425";
+import { CustomModalComponent } from "../905/684425";
 import { Ji } from "../905/739314";
 import { d as _$$d } from "../905/241150";
 import { MemoryWarningModal } from "../figma_app/453508";
@@ -306,7 +306,7 @@ function e4(e) {
       accountPickerData: e.accountPickerData
     }));
   }, [t, e.accountPickerData]);
-  return jsxs(_$$u, {
+  return jsxs(CustomModalComponent, {
     useOriginalSrcFills: !0,
     onBackClick: () => {
       i.formState === AuthFlowStep.ACCOUNT_PICKER ? e.closeAuth() : t(AUTH_INIT({

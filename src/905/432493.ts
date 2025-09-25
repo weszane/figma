@@ -9,7 +9,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { logWarning } from "../905/714362";
 import { XHR } from "../905/910117";
 import { getFileKey } from "../905/412913";
-import { z5 } from "../905/713722";
+import { defaultColorManipulator } from "../905/713722";
 import { A as _$$A } from "../905/639174";
 import { rY } from "../905/985490";
 import { getImageManager } from "../figma_app/624361";
@@ -225,7 +225,7 @@ export function $$H10(e) {
 export function $$W8(e, t) {
   let i = $$H10(t);
   let n = i.guid || "";
-  return e[n] ? e[n].backgroundColor : i?.backgroundColor ? z5.format({
+  return e[n] ? e[n].backgroundColor : i?.backgroundColor ? defaultColorManipulator.format({
     r: i.backgroundColor.red,
     g: i.backgroundColor.green,
     b: i.backgroundColor.blue,
@@ -300,7 +300,7 @@ export function $$q16(e, t, i, n) {
         let n = e.name;
         o[t.canvasId] = {
           name: n,
-          backgroundColor: i ? z5.format({
+          backgroundColor: i ? defaultColorManipulator.format({
             r: i.red,
             g: i.green,
             b: i.blue,

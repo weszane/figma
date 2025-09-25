@@ -14,7 +14,7 @@ import { a3, ow, G7 } from "../905/188421";
 import { fI } from "../figma_app/626177";
 import { c$, tV } from "../905/794875";
 import { pW, gm } from "../figma_app/335781";
-import { t as _$$t } from "../905/1946";
+import { ChevronContainer } from "../905/1946";
 import { sH, sI, Yq } from "../figma_app/183248";
 import { QK } from "../figma_app/100987";
 let I = [.25, .5, .75, 1, 2, 3, 4, 5, 10];
@@ -112,7 +112,7 @@ let $$w0 = forwardRef((e, t) => {
     },
     children: jsx(tV, {
       value: {
-        chevron: _$$t
+        chevron: ChevronContainer
       },
       children: jsx(E, {
         className: "scale_row--scaleCombobox--jimxi",

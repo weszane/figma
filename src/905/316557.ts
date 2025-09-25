@@ -20,7 +20,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
 import { getObservableValue } from "../figma_app/84367";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { cn, VZ } from "../905/959568";
+import { calculatePickerPositionLeft, calculatePickerPositionBelow } from "../905/959568";
 import { UG } from "../figma_app/628987";
 import { Ao } from "../905/748636";
 import { lQ } from "../905/934246";
@@ -505,7 +505,7 @@ function ex({
           let {
             x,
             y
-          } = cn(t.current, jP);
+          } = calculatePickerPositionLeft(t.current, jP);
           i(showPickerThunk({
             id: eE,
             initialX: x,
@@ -1127,7 +1127,7 @@ export function $$eX0({
       let {
         x,
         y
-      } = VZ(O.current, j);
+      } = calculatePickerPositionBelow(O.current, j);
       R(new y.Mi(x, y + 4));
       v(!0);
     }
@@ -1138,7 +1138,7 @@ export function $$eX0({
       let {
         x,
         y
-      } = cn(e, t);
+      } = calculatePickerPositionLeft(e, t);
       return new y.Mi(x - 8, y);
     });
   } : void 0;
@@ -1215,7 +1215,7 @@ export function $$eX0({
       let {
         x,
         y
-      } = VZ(e, t, !1);
+      } = calculatePickerPositionBelow(e, t, !1);
       return new y.Mi(x, y + 4);
     }) : W();
   }, [u, e, Y, V, W]);

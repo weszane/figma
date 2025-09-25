@@ -56,7 +56,7 @@ import { KindEnum } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { aG } from "../figma_app/728657";
 import { H as _$$H } from "../905/75186";
-import { Lm } from "../905/71";
+import { isBoolean } from "../905/71";
 import { A5, ci } from "../figma_app/274104";
 import { KeyboardFocusManager } from "../905/826900";
 import { kA, IO } from "../905/962318";
@@ -3279,7 +3279,7 @@ let t7 = class e extends RecordingPureComponent {
     }), this.zendeskRef.current?.close());
   }
   shouldShowOption(e) {
-    return !!(e.shouldShow?.() ?? !0) && (null != getInitialOptions().user_data || !isNullish(e.shouldShowUnauth) && (Lm(e.shouldShowUnauth) ? e.shouldShowUnauth : e.shouldShowUnauth()));
+    return !!(e.shouldShow?.() ?? !0) && (null != getInitialOptions().user_data || !isNullish(e.shouldShowUnauth) && (isBoolean(e.shouldShowUnauth) ? e.shouldShowUnauth : e.shouldShowUnauth()));
   }
   render() {
     let t = !this.props.hide;

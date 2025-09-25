@@ -4,7 +4,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { ColorSpaceEnum } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { colorCSSManipulatorInstance } from "../905/989956";
-import { TI } from "../905/713722";
+import { formattedColorManipulator } from "../905/713722";
 import { getVisibleTheme, useThemeContext } from "../905/640017";
 import { createColorDataUri } from "../905/248569";
 import { Ep } from "../figma_app/504823";
@@ -62,7 +62,7 @@ export let $$f1 = forwardRef(function ({
   });
 });
 export function $$$$E0(e) {
-  let t = TI.format(e);
+  let t = formattedColorManipulator.format(e);
   return getI18nString("fullscreen.accessibility.chit_solid", {
     hexValue: t
   });

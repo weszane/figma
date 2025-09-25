@@ -23,7 +23,7 @@ import { rY } from "../905/985490";
 import { renderComponentPropIcon, getComponentPropDisplayName } from "../figma_app/164212";
 import { AffineTransform } from "../905/583953";
 import { convertKiwiToVariableIdString } from "../905/805904";
-import { TI } from "../905/713722";
+import { formattedColorManipulator } from "../905/713722";
 import { LN, wf } from "../figma_app/975811";
 import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
@@ -297,7 +297,7 @@ function eA(e) {
 }
 let ey = new LN();
 function eb(e) {
-  return `${TI.format(e)} ${ey.format(e.a)}`;
+  return `${formattedColorManipulator.format(e)} ${ey.format(e.a)}`;
 }
 let ev = {
   EMOJI: () => getI18nString("collaboration.branching_node_treatments.value.emoji"),

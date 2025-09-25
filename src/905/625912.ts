@@ -20,7 +20,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { asciiStringToFloat } from "../figma_app/766708";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { y as _$$y } from "../905/829723";
-import { bU } from "../figma_app/841197";
+import { redactText } from "../figma_app/841197";
 import { Cc } from "../905/545842";
 import { aj, W6, Iu, F6, le, h8, Bc, KN, DA, pX, P0, a2 } from "../905/836986";
 import { c6 } from "../figma_app/659187";
@@ -220,7 +220,7 @@ function W({
   value: e
 }) {
   let t = useAtomWithSubscription(Cc);
-  let i = bU(e, t.sensitiveTextPolicy);
+  let i = redactText(e, t.sensitiveTextPolicy);
   return jsxs("span", {
     className: B.$,
     children: ['"', i, '"']

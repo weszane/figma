@@ -17,7 +17,7 @@ import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { Bq, WX } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
-import { K } from "../905/3140";
+import { renderRequestErrorInterstitial } from "../905/3140";
 import { setupWorkspaceIdentity } from "../905/967587";
 import { selectPermissionsState } from "../figma_app/212807";
 import { TN } from "../figma_app/211146";
@@ -48,7 +48,7 @@ function O(e) {
   let U = e.isProCurrent ? renderI18nText("plan_comparison.title.working_group") : renderI18nText("plan_comparison.title");
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "UpgradeChoosePlanModal",
-    fallback: jsx(K, {}),
+    fallback: jsx(renderRequestErrorInterstitial, {}),
     team: ServiceCategories.MONETIZATION_UPGRADES,
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {

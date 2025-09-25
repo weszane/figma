@@ -1,54 +1,108 @@
-import { useMemo } from "react";
-import { parsePxInt } from "../figma_app/783094";
-import { KeyCodes } from "../905/63728";
-import { rDe } from "../figma_app/27776";
-let o = parsePxInt(rDe);
-KeyCodes.UP_ARROW;
-KeyCodes.DOWN_ARROW;
-KeyCodes.LEFT_ARROW;
-KeyCodes.RIGHT_ARROW;
-KeyCodes.ESCAPE;
-KeyCodes.I;
-export var $$l5 = (e => (e.FILE = "file", e.RECENT = "recent", e.PREFERRED = "preferred", e))($$l5 || {});
-export function $$d4(e) {
-  switch (e.type) {
-    case "file":
-      return e.libraryKey;
-    case "recent":
-      return "recent";
-    case "preferred":
-      return "preferred";
+import { useMemo } from 'react';
+import { parsePxInt } from '../figma_app/783094';
+
+// Constant for modal width parsed from "320px"
+const MODAL_WIDTH_LARGE = parsePxInt("320px");
+
+/**
+ * Enum representing library types.
+ * Original: $$l5
+ */
+export enum ResourceLibraryType {
+  FILE = 'file',
+  RECENT = 'recent',
+  PREFERRED = 'preferred',
+}
+
+/**
+ * Gets the library key based on the type.
+ * Original: $$d4
+ * @param item - The item with type and optional libraryKey.
+ * @returns The library key or type string.
+ */
+export function getLibraryKey(item: { type: string; libraryKey?: string }): string {
+  switch (item.type) {
+    case ResourceLibraryType.FILE:
+      return item.libraryKey!;
+    case ResourceLibraryType.RECENT:
+      return ResourceLibraryType.RECENT;
+    case ResourceLibraryType.PREFERRED:
+      return ResourceLibraryType.PREFERRED;
+    default:
+      throw new Error(`Unknown type: ${item.type}`);
   }
 }
-export function $$c2(e, t) {
-  switch (e.type) {
-    case "file":
-      if (t && e.libraryKey === t) return "local";
-      return "subscribed";
-    case "recent":
-      return "recents";
-    case "preferred":
-      return "preferred";
+
+/**
+ * Gets the category for the item based on type and optional target.
+ * Original: $$c2
+ * @param item - The item with type and optional libraryKey.
+ * @param target - Optional target library key for comparison.
+ * @returns The category string.
+ */
+export function getCategory(item: { type: string; libraryKey?: string }, target?: string): string {
+  switch (item.type) {
+    case ResourceLibraryType.FILE:
+      if (target && item.libraryKey === target) {
+        return 'local';
+      }
+      return 'subscribed';
+    case ResourceLibraryType.RECENT:
+      return 'recents';
+    case ResourceLibraryType.PREFERRED:
+      return ResourceLibraryType.PREFERRED;
+    default:
+      throw new Error(`Unknown type: ${item.type}`);
   }
 }
-export var $$u3 = (e => (e[e.INSTANCE_SWAP_PICKER = 0] = "INSTANCE_SWAP_PICKER", e[e.RESOURCE_INSERT_MODAL = 1] = "RESOURCE_INSERT_MODAL", e[e.PREFERRED_VALUES_PICKER = 2] = "PREFERRED_VALUES_PICKER", e))($$u3 || {});
-export function $$p1(e) {
-  return "drilldown-picker-select-" + e;
+
+/**
+ * Enum for picker types.
+ * Original: $$u3
+ */
+export enum PickerOptionType {
+  INSTANCE_SWAP_PICKER = 0,
+  RESOURCE_INSERT_MODAL = 1,
+  PREFERRED_VALUES_PICKER = 2,
 }
-export function $$m0(e) {
-  return useMemo(() => 1 === e ? {
-    modalWidth: o,
-    numColsForSmall: 6,
-    numColsForNormal: 3
-  } : {
-    modalWidth: 240,
-    numColsForSmall: 4,
-    numColsForNormal: 2
-  }, [e]);
+
+/**
+ * Generates a drilldown picker select ID.
+ * Original: $$p1
+ * @param id - The base ID.
+ * @returns The formatted ID string.
+ */
+export function getDrilldownPickerSelectId(id: number): string {
+  return `drilldown-picker-select-${id}`;
 }
-export const TQ = $$m0;
-export const YU = $$p1;
-export const Z4 = $$c2;
-export const Zl = $$u3;
-export const ez = $$d4;
-export const iN = $$l5;
+
+/**
+ * Hook to get modal configuration based on type.
+ * Original: $$m0
+ * @param type - The type (0 or 1).
+ * @returns The modal configuration.
+ */
+export function useModalConfig(type: number) {
+  return useMemo(() => {
+    if (type === 1) {
+      return {
+        modalWidth: MODAL_WIDTH_LARGE,
+        numColsForSmall: 6,
+        numColsForNormal: 3,
+      };
+    }
+    return {
+      modalWidth: 240,
+      numColsForSmall: 4,
+      numColsForNormal: 2,
+    };
+  }, [type]);
+}
+
+// Updated exports to match refactored names
+export const TQ = useModalConfig;
+export const YU = getDrilldownPickerSelectId;
+export const Z4 = getCategory;
+export const Zl = PickerOptionType;
+export const ez = getLibraryKey;
+export const iN = ResourceLibraryType;

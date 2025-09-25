@@ -24,7 +24,7 @@ import { o3, nt } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { a2 } from "../figma_app/762558";
 import { executeWithDSAAction } from "../905/135117";
 import { zK, zM } from "../905/182453";
@@ -1336,7 +1336,7 @@ function tl(e) {
     AppStateTsApi?.setDuotoneNoiseColorTypeSelection(t);
   }, [t]);
   let c = e => {
-    t === e ? u(e) : (s(cn(l.current)), i(e));
+    t === e ? u(e) : (s(calculatePickerPositionLeft(l.current)), i(e));
   };
   let u = e => {
     e === t && i(AccessLevel.NONE);
@@ -1710,7 +1710,7 @@ function th(e) {
   let [a, s] = useState(new Point(0, 0));
   let l = createRef();
   let c = () => {
-    t ? u() : (s(cn(l.current)), i(!0));
+    t ? u() : (s(calculatePickerPositionLeft(l.current)), i(!0));
   };
   let u = () => {
     i(!1);
@@ -2362,7 +2362,7 @@ class tV extends PureComponent {
         this.props.dispatch(hidePickerThunk());
         fullscreenValue.deselectProperty();
       } else {
-        let e = cn(this.rowRef.current);
+        let e = calculatePickerPositionLeft(this.rowRef.current);
         fullscreenValue.updateAppModel({
           currentSelectedProperty: {
             type: NodePropertyCategory.EFFECT,

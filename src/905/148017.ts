@@ -25,7 +25,7 @@ import { valueOrFallback } from "../905/216495";
 import { o3, nt } from "../905/226610";
 import { Q as _$$Q } from "../figma_app/104130";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { executeWithDSAAction } from "../905/135117";
 import { zK, zM } from "../905/182453";
 import { e as _$$e } from "../figma_app/905311";
@@ -334,7 +334,7 @@ class es extends PureComponent {
         this.props.dispatch(hidePickerThunk());
         fullscreenValue.deselectProperty();
       } else {
-        let e = cn("ui3" === this.props.version ? this.ui3RowRef.current : this.rowRef.current);
+        let e = calculatePickerPositionLeft("ui3" === this.props.version ? this.ui3RowRef.current : this.rowRef.current);
         fullscreenValue.updateAppModel({
           currentSelectedProperty: {
             type: NodePropertyCategory.LAYOUT_GRID,

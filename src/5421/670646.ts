@@ -26,14 +26,14 @@ import { c$ as _$$c$, bL as _$$bL, l9, mc, wv, DZ } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import { atomStoreManager } from "../figma_app/27355";
 import { hY, yr, $X, Fh, r6, J_, AG, $w, dr } from "../figma_app/349969";
-import { TI, z5 } from "../905/713722";
+import { formattedColorManipulator, defaultColorManipulator } from "../905/713722";
 import { KindEnum } from "../905/129884";
 import { LengthInput } from "../figma_app/178475";
 import { Q as _$$Q } from "../905/346809";
 import { Point } from "../905/736624";
 import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
 import { $T } from "../figma_app/8833";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { J as _$$J2 } from "../905/225412";
 import { h as _$$h2 } from "../905/65944";
 import { FormattedInputVariant3 } from "../905/203369";
@@ -114,7 +114,7 @@ function z(e) {
   let l = useCallback(() => {
     let e = t.current;
     if (pickerShown && pickerShown.id === $T) dispatch(hidePickerThunk());else if (e && e instanceof HTMLElement) {
-      let t = cn(e);
+      let t = calculatePickerPositionLeft(e);
       dispatch(showPickerThunk({
         id: $T,
         initialX: t.x,
@@ -149,7 +149,7 @@ function z(e) {
     }), jsx(FormattedInputVariant3, {
       className: "prototype_background_panel--color--e5Pc8 paint_panels--colorInput--nSz13",
       noLeftBorder: !0,
-      formatter: TI,
+      formatter: formattedColorManipulator,
       property: c,
       onChange: s,
       recordingKey: generateRecordingKey(e, "colorInput"),
@@ -239,7 +239,7 @@ class J extends PureComponent {
         b: 0,
         a: 0
       });
-      let n = z5.format(t);
+      let n = defaultColorManipulator.format(t);
       let i = t.r > .9 && t.g > .9 && t.b > .9;
       let r = `1px solid ${i ? "#EFEFEF" : "transparent"}`;
       let a = jsx("div", {

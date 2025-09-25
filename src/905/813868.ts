@@ -16,7 +16,7 @@ import { setSyncedValues } from "../905/486749";
 import { notifyPluginStatus } from "../905/571565";
 import { k as _$$k2 } from "../figma_app/644304";
 import { x as _$$x } from "../905/239551";
-import { z } from "../905/223332";
+import { widgetInteractionTracker } from "../905/223332";
 export function $$I0({
   pluginID: e,
   widgetName: t,
@@ -62,7 +62,7 @@ export function $$I0({
     cancelCallback: () => {},
     vmType: getPluginDevMode()
   });
-  z.startInteraction(e, "insert");
+  widgetInteractionTracker.startInteraction(e, "insert");
   let P = Fullscreen.createWidget(e, t, i ?? "", w ?? "", k ?? null, R ?? null);
   if (!isInteractionPathCheck() && T && function (e, t) {
     let i = getSceneGraphInstance().get(e);

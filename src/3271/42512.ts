@@ -23,7 +23,7 @@ import { KindEnum } from '../905/129884';
 import { Y1 } from '../905/143116';
 import { e as _$$e } from '../905/149844';
 import { ServiceCategories } from '../905/165054';
-import { Zl } from '../905/211621';
+import { PickerOptionType } from '../905/211621';
 import { PricingOptions } from '../905/237873';
 import { N as _$$N3 } from '../905/301843';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -37,7 +37,7 @@ import { AutoLayout } from '../905/470281';
 import { Jz } from '../905/504727';
 import { Button } from '../905/521428';
 import { s7 } from '../905/551193';
-import { CX } from '../905/557338';
+import { selectCommonLibraryKey } from '../905/557338';
 import { r as _$$r } from '../905/571562';
 import { getFeatureFlags } from '../905/601108';
 import { EditorTargetMode } from '../905/632544';
@@ -131,7 +131,7 @@ function $(e) {
   let t = useDispatch();
   let s = useStore();
   let r = useSelector(_$$m);
-  let l = useSelector(e => CX(e));
+  let l = useSelector(e => selectCommonLibraryKey(e));
   let o = useRef(null);
   let d = NF(gC + Kr + Ix);
   useEffect(() => {
@@ -163,7 +163,7 @@ function $(e) {
         },
         entrypointForLogging: null,
         isSearching: c,
-        pickerType: Zl.RESOURCE_INSERT_MODAL,
+        pickerType: PickerOptionType.RESOURCE_INSERT_MODAL,
         query: e.query,
         recordingKey: 'componentInsert',
         scrollContainerHeight: d,

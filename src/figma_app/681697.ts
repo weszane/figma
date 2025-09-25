@@ -12,7 +12,7 @@ import { hasFolderRestrictions } from "../figma_app/345997";
 import { Mk } from "../905/163189";
 import { z } from "../905/875422";
 import { MS } from "../905/615657";
-import { Gc, TA } from "../905/769";
+import { extractBranchFiles, dispatchBranchFiles } from "../905/769";
 export let $$E2 = createOptimistThunk((e, t) => {
   fileImporter && (MS(), fileImporter.extractFilesFromDropEvent(t, (t, r) => {
     getFeatureFlags().internal_only_debug_tools && t.endsWith(".repo") ? $$T3(e, t, r) : e.dispatch(z({
@@ -34,8 +34,8 @@ export function $$b0() {
 }
 export function $$T3(e, t, r) {
   e.dispatch(GR());
-  Gc(r).then(n => {
-    n ? TA(e, n) : t = e.dispatch(z({
+  extractBranchFiles(r).then(n => {
+    n ? dispatchBranchFiles(e, n) : t = e.dispatch(z({
       name: t,
       blob: r
     }));

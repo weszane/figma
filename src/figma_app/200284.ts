@@ -37,7 +37,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { canEditBasedOnPlan } from "../figma_app/12796";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { qo } from "../905/959568";
+import { DEFAULT_PICKER_WIDTH } from "../905/959568";
 import { X7 } from "../905/713167";
 import { p as _$$p } from "../905/725707";
 import { Y as _$$Y2 } from "../905/513028";
@@ -66,7 +66,7 @@ let e_ = "image-scale-mode-select";
 let eh = l6;
 let em = _$$c$;
 let $$eg4 = atom(!1);
-let ef = qo;
+let ef = DEFAULT_PICKER_WIDTH;
 let eE = (e, t) => e.every((e, r) => e === t[r]);
 export function $$ey2(e) {
   return !!getImageOrVideoPaint(e) && e.image && "Checker" === e.image.name;

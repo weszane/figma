@@ -8,8 +8,8 @@ var h = "[\ud800-\udbff][\udc00-\udfff]";
 var d = "(?:" + i + "|" + s + ")?";
 var p = "[\\ufe0e\\ufe0f]?";
 var g = "(?:\\u200d(?:" + [o, a, h].join("|") + ")" + p + d + ")*";
-var m = p + d + g;
-var v = RegExp(s + "(?=" + s + ")|(?:" + [o + i + "?", i, a, h, n].join("|") + ")" + m, "g");
+var getDefaultFrameProps = p + d + g;
+var v = RegExp(s + "(?=" + s + ")|(?:" + [o + i + "?", i, a, h, n].join("|") + ")" + getDefaultFrameProps, "g");
 function y(e) {
   for (var r = v.lastIndex = 0; v.test(e);) ++r;
   return r;

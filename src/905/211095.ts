@@ -6,7 +6,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { l as _$$l } from "../905/745972";
 import { selectWithShallowEqual } from "../905/103090";
 import { Point } from "../905/736624";
-import { vq } from "../905/8732";
+import { hideInstanceSwapPicker } from "../905/8732";
 import { hideModal } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
 import { renameNode } from "../figma_app/741237";
@@ -61,7 +61,7 @@ export function $$C0({
     let e = useDispatch();
     return useCallback(() => {
       e(hideModal());
-      e(vq());
+      e(hideInstanceSwapPicker());
     }, [e]);
   }();
   let {

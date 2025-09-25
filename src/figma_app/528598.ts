@@ -30,11 +30,11 @@ import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { Y as _$$Y } from "../905/506207";
-import { TQ, Zl } from "../905/211621";
+import { useModalConfig, PickerOptionType } from "../905/211621";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { setSelectedTypedPropDefId } from "../figma_app/389091";
-import { vq } from "../905/8732";
+import { hideInstanceSwapPicker } from "../905/8732";
 import { Oe, uP } from "../figma_app/933328";
 import { KD } from "../figma_app/975811";
 import { isSitesFileType } from "../figma_app/976749";
@@ -48,7 +48,7 @@ import { getObservableValue } from "../figma_app/84367";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { qo } from "../905/959568";
+import { DEFAULT_PICKER_WIDTH } from "../905/959568";
 import { conditionalWrapper } from "../905/579635";
 import { ScrubbableInput } from "../figma_app/178475";
 import { v as _$$v } from "../905/318279";
@@ -60,7 +60,7 @@ import { K as _$$K3 } from "../figma_app/622160";
 import { Bc } from "../figma_app/200284";
 import { v as _$$v2 } from "../905/501497";
 import { h_ } from "../figma_app/151083";
-import { x as _$$x } from "../905/1253";
+import { InstanceSwapToggle } from "../905/1253";
 import { P as _$$P } from "../905/201667";
 import { g as _$$g } from "../figma_app/594353";
 import { Hm } from "../figma_app/47085";
@@ -531,7 +531,7 @@ function eV({
       Fullscreen?.setComponentPropAssignmentVariableData(r, s.explicitDefID, t, d);
     });
     u?.(r, s.explicitDefID, t, d);
-    _?.isShown && p(vq());
+    _?.isShown && p(hideInstanceSwapPicker());
   }, [c, _?.isShown, s.explicitDefID, r, d, p, u]);
   return jsx("div", {
     className: eB(l),
@@ -939,12 +939,12 @@ function eq({
   flatten(r.map(e => Fullscreen?.getInstanceSublayersControlledByDirectPropAssignment(e, s.explicitDefID, SlotSymbolType.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e));
   let {
     modalWidth
-  } = TQ(Zl.INSTANCE_SWAP_PICKER);
+  } = useModalConfig(PickerOptionType.INSTANCE_SWAP_PICKER);
   return jsx("div", {
     className: eB(d),
     children: jsx("div", {
       className: eG(d),
-      children: jsx(_$$x, {
+      children: jsx(InstanceSwapToggle, {
         disableToggle: t,
         entrypointForLogging: m,
         fill: d === PanelWidth.UNBOUNDED,
@@ -1015,7 +1015,7 @@ function eJ({
   }) => {
     let r = y.current?.getBoundingClientRect();
     g.current = {
-      x: (r?.left ?? e) - qo - I,
+      x: (r?.left ?? e) - DEFAULT_PICKER_WIDTH - I,
       y: (r?.top ?? t) - 8
     };
     o ? b() : T();

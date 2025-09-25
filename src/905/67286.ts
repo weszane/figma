@@ -1,12 +1,32 @@
-import { cn, VZ } from "../905/959568";
-import { d9 } from "../905/579068";
-export function $$a0({
-  inputRef: e,
-  rowRef: t,
-  isInStyleModal: i
+import { d9 } from '../905/579068'
+import { calculatePickerPositionBelow, calculatePickerPositionLeft } from '../905/959568'
+
+/**
+ * Calculates the position for a picker element based on the provided refs and modal state.
+ * @param inputRef - Reference to the input element.
+ * @param rowRef - Reference to the row element.
+ * @param isInStyleModal - Indicates if the picker is in a style modal.
+ * @returns The calculated position or undefined if no valid element is found.
+ */
+export function calculatePickerPosition({
+  inputRef,
+  rowRef,
+  isInStyleModal,
+}: {
+  inputRef: React.RefObject<HTMLElement>;
+  rowRef: React.RefObject<HTMLElement>;
+  isInStyleModal: boolean;
 }) {
-  if (i && t && t.current) return cn(t.current, d9);
-  let a = null;
-  if (a = e.current ?? t?.current ?? null) return VZ(a, d9, !1);
+  // If in style modal and rowRef is available, position left of the row element
+  if (isInStyleModal && rowRef?.current) {
+    return calculatePickerPositionLeft(rowRef.current, d9);
+  }
+
+  // Otherwise, try to get the element from inputRef or rowRef
+  const element = inputRef.current ?? rowRef?.current ?? null;
+  if (element) {
+    return calculatePickerPositionBelow(element, d9, false);
+  }
 }
-export const k = $$a0;
+
+export const k = calculatePickerPosition;

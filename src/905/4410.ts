@@ -1,11 +1,11 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, useState, forwardRef, useContext, useLayoutEffect } from "react";
-import { QT } from "../905/687992";
-import { setupRefUpdater } from "../905/823680";
-import { InputComponent } from "../905/185998";
-import { E } from "../905/427996";
-import { l as _$$l } from "../905/490996";
-import { C } from "../905/294086";
+import { createContext, forwardRef, useContext, useLayoutEffect, useState } from 'react';
+import { jsx } from 'react/jsx-runtime';
+import { InputComponent } from '../905/185998';
+import { C } from '../905/294086';
+import { E } from '../905/427996';
+import { l as _$$l } from '../905/490996';
+import { hasIncrementBy } from '../905/687992';
+import { setupRefUpdater } from '../905/823680';
 let c = createContext(null);
 let u = createContext(_$$l);
 function p({
@@ -20,14 +20,14 @@ function p({
     })
   });
 }
-p.displayName = "FormattedInputContext";
+p.displayName = 'FormattedInputContext';
 export let $$h1 = forwardRef((e, t) => jsx(p, {
   children: jsx(InputComponent.Root, {
     ...e,
     ref: t
   })
 }));
-$$h1.displayName = "FormattedInput.Root";
+$$h1.displayName = 'FormattedInput.Root';
 let g = forwardRef((e, t) => {
   let i = useContext(u);
   let a = E(e);
@@ -41,21 +41,21 @@ let g = forwardRef((e, t) => {
     ref: c
   });
 });
-g.displayName = "FormattedInput.Field";
+g.displayName = 'FormattedInput.Field';
 export let $$f0 = g;
 forwardRef((e, t) => {
   let i = useContext(c);
-  return i && !i.inputProps.disabled && QT(i.formatter) ? jsx(C, {
+  return i && !i.inputProps.disabled && hasIncrementBy(i.formatter) ? jsx(C, {
     ref: t,
     value: i.value,
     formatter: i.formatter,
     getStringValue: i.getStringValue,
     onChange: e => i.onChange(e, {
       commit: !0,
-      source: "stepper"
+      source: 'stepper'
     }),
     onChangeRestricted: i.onChangeRestricted
   }) : null;
-}).displayName = "FormattedInput.Stepper";
+}).displayName = 'FormattedInput.Stepper';
 export const D0 = $$f0;
 export const bL = $$h1;

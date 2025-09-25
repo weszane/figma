@@ -19,7 +19,7 @@ import { withTracking } from "../figma_app/831799";
 import { vK, vu, ic, Fq, jv } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { designSet } from "../905/332483";
-import { K } from "../905/3140";
+import { renderRequestErrorInterstitial } from "../905/3140";
 import { consumptionPaywallUtils } from "../905/224";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { CurrencyFormatter } from "../figma_app/514043";
@@ -253,7 +253,7 @@ export let $$z0 = withTracking(function (e) {
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "OrgUpgradeSingleTeamModal",
     team: ServiceCategories.BILLING_EXPERIENCE,
-    fallback: jsx(K, {}),
+    fallback: jsx(renderRequestErrorInterstitial, {}),
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {
         hiddenTitle: renderI18nText("org_upgrade.single_team.get_more_out_of_figma_as_you_grow"),

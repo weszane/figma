@@ -3,7 +3,7 @@ import { rgbToHsv, rgbToHsl } from "../figma_app/273493";
 import { ColorFormatEnum } from "../figma_app/763686";
 import { GP } from "../figma_app/15927";
 import { colorCSSManipulatorInstance } from "../905/989956";
-import { TI } from "../905/713722";
+import { formattedColorManipulator } from "../905/713722";
 import { o1, t6 } from "../figma_app/975811";
 import { ZB } from "../figma_app/451499";
 import { getColorFormat } from "../figma_app/740163";
@@ -43,7 +43,7 @@ export let $$h0 = (() => {
       });
       switch (e) {
         case ColorFormatEnum.HEX:
-          let s = TI.format(t, r?.hexCSSValue ? {
+          let s = formattedColorManipulator.format(t, r?.hexCSSValue ? {
             withAlpha: 1 !== t.a
           } : r?.alphaInPercent ? {
             withAlpha: 1 !== t.a,

@@ -232,7 +232,7 @@ class AppModal extends Component<AppModalProps> {
  * Connected AppModal component.
  * (original: $$_0)
  */
-const ConnectedAppModal = connect(removeOptimist)(AppModal)
+export const ConnectedAppModal = connect(removeOptimist)(AppModal)
 
 /**
  * Exported modal component (original: V)

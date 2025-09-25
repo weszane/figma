@@ -33,11 +33,11 @@ import { A as _$$A } from "../2854/952200";
 import { A as _$$A2 } from "../1617/316388";
 import { d as _$$d } from "../905/976845";
 import { x as _$$x } from "../905/587214";
-import { Zl } from "../905/211621";
+import { PickerOptionType } from "../905/211621";
 import { SecureLink } from "../figma_app/637027";
-import { zE } from "../905/8732";
+import { toggleInstanceSwapPicker } from "../905/8732";
 import { stopPropagation } from "../figma_app/753501";
-import { TS } from "../905/959568";
+import { calculatePickerPositionRight } from "../905/959568";
 import { fieldContainer, fieldContainerFaded, label, learnMore, buttons, thumbnailGrid, contextMenu, warningPublish, warningIcon, listItemContainer, skeletonThumbnailList, skeletonText, skeletonThumbnailGrid, outerContainerBorderBottom, outerContainer, listContainer, gridContainer } from "../figma_app/527659";
 function F({
   listItems: e,
@@ -127,18 +127,18 @@ function Y(e) {
   let h = useSelector(e => e.instanceSwapPickerShown);
   let f = useDispatch();
   let _ = useRef(null);
-  let A = useCallback(() => _.current ? TS({
+  let A = useCallback(() => _.current ? calculatePickerPositionRight({
     el: _.current
   }) : void 0, []);
   let y = useCallback(() => {
-    f(zE({
+    f(toggleInstanceSwapPicker({
       initialPosition: A(),
       id: pickerID,
       modal: !0
     }));
   }, [f, pickerID, A]);
   let b = useCallback(e => {
-    "Enter" === e.key && f(zE({
+    "Enter" === e.key && f(toggleInstanceSwapPicker({
       initialPosition: A(),
       id: pickerID,
       modal: !0,
@@ -184,7 +184,7 @@ function Y(e) {
         onSwapCallback,
         overrideDefaultItem,
         pickerToggleRef: _,
-        pickerType: Zl.PREFERRED_VALUES_PICKER,
+        pickerType: PickerOptionType.PREFERRED_VALUES_PICKER,
         recordingKey: generateRecordingKey("instanceSwapPicker", pickerID),
         selectedItems: preferredValues,
         shouldPerformSwapOnClick,

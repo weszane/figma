@@ -269,7 +269,7 @@ import { z as _$$z2 } from "../905/284530";
 import { Me as _$$Me } from "../figma_app/617427";
 import { Qd } from "../figma_app/570310";
 import { IO, CU, c6 as _$$c5 } from "../figma_app/659187";
-import { vq } from "../905/8732";
+import { hideInstanceSwapPicker } from "../905/8732";
 import { selectSingleSelectedNode, selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { registerModal } from "../905/102752";
 import { findCommonStateGroupId, findCommonSymbolId, PanelWidth, getComponentPropDisplayName } from "../figma_app/164212";
@@ -408,7 +408,7 @@ import { useLibraryMetadata } from "../905/726668";
 import { Dc, hV as _$$hV } from "../figma_app/151766";
 import { O as _$$O6 } from "../figma_app/301719";
 import { assetTypeEnum } from "../figma_app/198712";
-import { cn as _$$cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { jj, MU, df as _$$df } from "../figma_app/970285";
 import { n3 as _$$n9 } from "../905/668609";
 import { E as _$$E8 } from "../469e6e40/927162";
@@ -5289,7 +5289,7 @@ let lD = memo(({
   let f = "loaded" === u.status && "temp-scene" === u.result.dataLocation ? u.result : void 0;
   let g = _$$oD();
   let x = useCallback(() => {
-    s(vq());
+    s(hideInstanceSwapPicker());
   }, [s]);
   let m = useModalManager({
     ...t,
@@ -10005,7 +10005,7 @@ function uc({
   }(e);
   return jsx(_$$bL4, {
     onClose: n,
-    defaultPosition: t.current ? _$$cn(t.current, 248) : void 0,
+    defaultPosition: t.current ? calculatePickerPositionLeft(t.current, 248) : void 0,
     width: "sm",
     children: jsxs(DialogContents, {
       children: [jsx(DialogHeader, {

@@ -10,12 +10,12 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { wv } from "../figma_app/328825";
 import { h as _$$h } from "../905/78925";
-import { B } from "../905/330741";
+import { hideVariablePicker } from "../905/330741";
 import { fullscreenValue } from "../figma_app/455680";
 import { bL, u as _$$u } from "../figma_app/852050";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { selectContainingStateGroupId, selectContainingSymbolId } from "../figma_app/505098";
 import { k } from "../905/689791";
 import { l as _$$l } from "../905/331642";
@@ -92,7 +92,7 @@ export function $$D4({
 }) {
   let [u, _] = useState(!1);
   let h = useRef(null);
-  let m = h.current ? cn(h.current, _$$i) : void 0;
+  let m = h.current ? calculatePickerPositionLeft(h.current, _$$i) : void 0;
   let {
     boundVariableId,
     boundVariable
@@ -146,7 +146,7 @@ export function $$D4({
 export function $$k6() {
   let e = useDispatch();
   let t = useCallback(() => {
-    e(B());
+    e(hideVariablePicker());
   }, [e]);
   let r = useSelector(e => e.variablePickerShown);
   return r.isShown && "variable-picker-fields" === r.type ? jsx($$D4, {
@@ -167,11 +167,11 @@ function M({
 }) {
   let g = useDispatch();
   let f = useCallback(() => {
-    g(B());
+    g(hideVariablePicker());
   }, [g]);
   let [E, y] = useState(!1);
   let T = useRef(null);
-  let S = T.current ? cn(T.current, _$$i) : void 0;
+  let S = T.current ? calculatePickerPositionLeft(T.current, _$$i) : void 0;
   let {
     boundVariableId,
     boundVariable
@@ -249,7 +249,7 @@ function j({
   let y = bL(e, t);
   let b = _$$u(y?.type === VariableDataType.ALIAS ? y?.value : void 0);
   let T = useCallback(() => {
-    h(B());
+    h(hideVariablePicker());
   }, [h]);
   let S = useCallback((r, n) => {
     let i = {
@@ -318,7 +318,7 @@ export function $$B1({
   let c = _$$u(a);
   let [u, _] = useState(!1);
   let h = useRef(null);
-  let m = h.current ? cn(h.current, _$$i) : void 0;
+  let m = h.current ? calculatePickerPositionLeft(h.current, _$$i) : void 0;
   let g = {
     tabs: [{
       name: "library",
@@ -359,7 +359,7 @@ export function $$G5({
 }) {
   let t = useDispatch();
   let r = useCallback(() => {
-    t(B());
+    t(hideVariablePicker());
   }, [t]);
   let s = useSelector(e => e.variablePickerShown);
   return s.isShown && "variable-picker-controlled" === s.type ? jsx($$B1, {
@@ -377,7 +377,7 @@ export function $$V3({
 }) {
   let [o, l] = useState(!1);
   let d = useRef(null);
-  let c = d.current ? cn(d.current, _$$i) : void 0;
+  let c = d.current ? calculatePickerPositionLeft(d.current, _$$i) : void 0;
   let u = useMemo(() => IQ(e, null), [e]);
   let _ = {
     tabs: [{

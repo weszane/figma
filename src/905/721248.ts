@@ -65,7 +65,7 @@ import { G as _$$G } from '../905/702115';
 import { H as _$$H } from '../905/706055';
 import { ak as _$$ak, ed as _$$ed, es as _$$es, FD as _$$FD, Hb as _$$Hb, iG as _$$iG, tp as _$$tp, ai, Dn, G9, ho, j2, jT, k2, kb, kd, Kl, lq, lT, LX, mK, OF, oW, pG, Rm, rU, S1, sB, UT, v2, w5, Wd, WH, Wr, XA, Xl } from '../905/710747';
 import { liveStoreInstance } from '../905/713695';
-import { TI } from '../905/713722';
+import { formattedColorManipulator } from '../905/713722';
 import { logError, logInfo } from '../905/714362';
 import { SvgComponent } from '../905/714743';
 import { l as _$$l2 } from '../905/716947';
@@ -2013,7 +2013,7 @@ function iw({
     children: [jsx(_$$J2, {
       color: e
     }), jsx('span', {
-      children: TI.format(e)
+      children: formattedColorManipulator.format(e)
     })]
   });
 }

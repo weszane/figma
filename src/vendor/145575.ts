@@ -20,7 +20,7 @@ var c = i ? Symbol.$$for("react.forward_ref") : 60112;
 var h = i ? Symbol.$$for("react.suspense") : 60113;
 var p = i ? Symbol.$$for("react.suspense_list") : 60120;
 var g = i ? Symbol.$$for("react.memo") : 60115;
-var m = i ? Symbol.$$for("react.lazy") : 60116;
+var getDefaultFrameProps = i ? Symbol.$$for("react.lazy") : 60116;
 var _ = i ? Symbol.$$for("react.block") : 60121;
 var b = i ? Symbol.$$for("react.fundamental") : 60117;
 var y = i ? Symbol.$$for("react.responder") : 60118;
@@ -42,7 +42,7 @@ function w(e) {
             switch (e = e && e.$$typeof) {
               case l:
               case c:
-              case m:
+              case getDefaultFrameProps:
               case g:
               case ExpiringCache:
                 return e;
@@ -65,7 +65,7 @@ exports.ContextProvider = ExpiringCache;
 exports.Element = t;
 exports.ForwardRef = c;
 exports.Fragment = r;
-exports.Lazy = m;
+exports.Lazy = getDefaultFrameProps;
 exports.Memo = g;
 exports.Portal = f;
 exports.Profiler = o;
@@ -91,7 +91,7 @@ exports.isFragment = function (e) {
   return w(e) === r;
 };
 exports.isLazy = function (e) {
-  return w(e) === m;
+  return w(e) === getDefaultFrameProps;
 };
 exports.isMemo = function (e) {
   return w(e) === g;
@@ -109,6 +109,6 @@ exports.isSuspense = function (e) {
   return w(e) === h;
 };
 exports.isValidElementType = function (e) {
-  return "string" == typeof e || "function" == typeof e || e === r || e === s || e === o || e === a || e === h || e === p || "object" == typeof e && null !== e && (e.$$typeof === m || e.$$typeof === g || e.$$typeof === ExpiringCache || e.$$typeof === l || e.$$typeof === c || e.$$typeof === b || e.$$typeof === y || e.$$typeof === v || e.$$typeof === _);
+  return "string" == typeof e || "function" == typeof e || e === r || e === s || e === o || e === a || e === h || e === p || "object" == typeof e && null !== e && (e.$$typeof === getDefaultFrameProps || e.$$typeof === g || e.$$typeof === ExpiringCache || e.$$typeof === l || e.$$typeof === c || e.$$typeof === b || e.$$typeof === y || e.$$typeof === v || e.$$typeof === _);
 };
 exports.typeOf = w;

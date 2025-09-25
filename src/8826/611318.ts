@@ -44,7 +44,7 @@ import { O as _$$O2, S as _$$S } from "../figma_app/375482";
 import { Wr, Kl as _$$Kl, Md, Fp, tH, Nu, qi, vC, Bn, VY, jz, rO, c4, mx, Wx, Y9, rX, o0 } from "../figma_app/409807";
 import { pW, gm, KI } from "../figma_app/335781";
 import { W as _$$W } from "../figma_app/521665";
-import { t as _$$t2 } from "../905/1946";
+import { ChevronContainer } from "../905/1946";
 import { Ws } from "../figma_app/938628";
 import { SA, fB } from "../figma_app/473317";
 import { Wv } from "../figma_app/711157";
@@ -541,7 +541,7 @@ function es(e) {
     },
     children: jsx(tV, {
       value: {
-        chevron: _$$t2
+        chevron: ChevronContainer
       },
       children: jsx(_$$S, {
         allowEmpty: !0,

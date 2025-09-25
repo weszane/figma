@@ -20,7 +20,7 @@ import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { e as _$$e } from "../1528/93111";
 import { hasCmsCollection } from "../figma_app/618433";
 import { sw, Zs } from "../figma_app/914957";
-import { B as _$$B } from "../905/330741";
+import { hideVariablePicker } from "../905/330741";
 import { Dm } from "../figma_app/8833";
 import { getPropertiesPanelSplitPosition, EditorPreferencesApi } from "../figma_app/740163";
 import { q as _$$q, T as _$$T } from "../figma_app/590592";
@@ -71,7 +71,7 @@ import { b as _$$b2 } from "../905/217163";
 import { Zk, fI } from "../figma_app/626177";
 import { logError } from "../905/714362";
 import { S as _$$S } from "../figma_app/552746";
-import { vq } from "../905/8732";
+import { hideInstanceSwapPicker } from "../905/8732";
 import { shouldHandleMultiTouchOrPressure } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
@@ -446,7 +446,7 @@ function eK({
   let C = useHandleMouseEvent(l, "mousedown", () => {
     fullscreenValue.deselectProperty();
     c(hidePickerThunk());
-    c(vq());
+    c(hideInstanceSwapPicker());
     c(sw());
     c(hideStylePicker());
     _ && (y([]), Fullscreen?.setSelectedInteractions([]));
@@ -721,7 +721,7 @@ export function $$e20({
   let S = useCallback(() => {
     Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID);
     m(sw());
-    m(_$$B());
+    m(hideVariablePicker());
   }, [m]);
   let T = e === DesignWorkspace.COMMENT;
   let N = useCallback(() => void 0, []);

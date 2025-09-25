@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import s from "classnames";
 import { useHandleMouseEvent } from "../figma_app/878298";
-import { TI } from "../905/713722";
+import { formattedColorManipulator } from "../905/713722";
 import { tZ, u as _$$u, BQ } from "../figma_app/852050";
 import { Oi } from "../figma_app/394327";
 import { J2, wG } from "../905/331989";
@@ -38,7 +38,7 @@ export function $$h1({
     L && L(e);
   });
   if (R && "MIXED" !== R && R.resolvedType === VariableResolvedDataType.COLOR) {
-    let e = TI.format(R.value);
+    let e = formattedColorManipulator.format(R.value);
     if (R.value.a < 1) {
       let t = (100 * R.value.a).toLocaleString("en", {
         maximumFractionDigits: 2

@@ -14,7 +14,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { BaseLinkComponent } from "../905/551536";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Dm } from "../figma_app/8833";
-import { z5 } from "../905/713722";
+import { defaultColorManipulator } from "../905/713722";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { x as _$$x } from "../905/239551";
 import { isValidWidgetType, getWidgetMenuI18nString } from "../figma_app/364284";
@@ -115,7 +115,7 @@ function S({
   let d = {};
   let f = {};
   for (let e of s) try {
-    let t = z5.parse(e);
+    let t = defaultColorManipulator.parse(e);
     d[e] = t;
     f[colorToHex(t)] = e;
   } catch (t) {

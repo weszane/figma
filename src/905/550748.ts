@@ -1,3 +1,4 @@
+import type { Color } from '../../types/app'
 import { clamp, nearlyEqual } from '../figma_app/492908'
 
 /**
@@ -64,7 +65,7 @@ export abstract class ColorManipulator {
    * @returns The clamped color object.
    * (clamp)
    */
-  clamp(color: { [key: string]: number }): { [key: string]: number } {
+  clamp(color: Color): Color {
     const clamped = { ...color }
     for (const channel in color) {
       clamped[channel] = clamp(color[channel], 0, 1)

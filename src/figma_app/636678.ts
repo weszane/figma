@@ -15,7 +15,7 @@ import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { VU } from "../905/625959";
 import { Xo } from "../figma_app/482495";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { Xn } from "../905/429125";
 import { getSlotPropTypes, getComponentPropDisplayName, DisplayMode, DROPDOWN_HEIGHT } from "../figma_app/164212";
 import { aR } from "../figma_app/530362";
@@ -80,7 +80,7 @@ export function $$w0(e) {
       let c = useAtomWithSubscription(_$$A2);
       let u = r ?? c;
       let p = useCallback(() => {
-        let t = u?.current ? cn(u.current, DROPDOWN_HEIGHT) : {};
+        let t = u?.current ? calculatePickerPositionLeft(u.current, DROPDOWN_HEIGHT) : {};
         s(showPickerThunk({
           id: aR,
           initialX: t?.x,

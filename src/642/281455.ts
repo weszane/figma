@@ -20,7 +20,7 @@ import { a as _$$a } from '../905/597867';
 import { getFeatureFlags } from '../905/601108';
 import { Point } from '../905/736624';
 import { lQ } from '../905/934246';
-import { cn } from '../905/959568';
+import { calculatePickerPositionLeft } from '../905/959568';
 import { wu } from '../1528/306300';
 import { k8 } from '../figma_app/8833';
 import { showPickerThunk, hidePickerThunk } from '../figma_app/91703';
@@ -163,7 +163,7 @@ export function $$G0(e) {
       k(hidePickerThunk());
     } else {
       getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics('editor-background-panel-color-picker-show');
-      let e = t.current ? cn(t.current) : {
+      let e = t.current ? calculatePickerPositionLeft(t.current) : {
         x: 0,
         y: 0
       };

@@ -13,7 +13,7 @@ import { groupInstancesByState } from "../figma_app/335489";
 import { processStateHierarchy, findBestMatchingVariantState, trackStateGroupAnalytics } from "../figma_app/264776";
 import { compareWithGeneratedKey } from "../905/709171";
 import { filesByLibraryKeyAtom } from "../905/977779";
-import { QL } from "../905/557338";
+import { extractPublishInfo } from "../905/557338";
 export function $$y1(e, t, r, s, o, l, d, c, p = StateHierarchy.NONE, _, g) {
   let f = scopeAwareFunction.user("swap-to-related-symbol", (e, n) => {
     n?.componentOrStateGroup && $$S2(n.componentOrStateGroup, t, r, d, "Related Symbol Dropdown Menu", !1, _);
@@ -106,7 +106,7 @@ export function $$T3(e, t, r) {
     selectedLibraryKey: null,
     relatedItems: []
   };
-  let n = QL(e, r);
+  let n = extractPublishInfo(e, r);
   if (!n) return function (e, t) {
     let r = memoizedProcessComponentsAndStateGroups(t);
     let n = t.local.components[e] ?? t.local.stateGroups[e];

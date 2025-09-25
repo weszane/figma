@@ -8,7 +8,7 @@ import { RecordableButton } from "../905/511649";
 import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
 import { colorCSSManipulatorInstance } from "../905/989956";
-import { z5 } from "../905/713722";
+import { defaultColorManipulator } from "../905/713722";
 import { F as _$$F2 } from "../905/258517";
 import { Yv } from "../figma_app/616107";
 import { KindEnum } from "../905/129884";
@@ -397,7 +397,7 @@ function P({
       t(e);
       U && _$$F2.trackFromFullscreen("figjam_node_color_change", {
         source: "default",
-        color: z5.format(e.option),
+        color: defaultColorManipulator.format(e.option),
         ...U.properties
       });
     },

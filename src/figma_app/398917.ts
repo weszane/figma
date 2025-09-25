@@ -28,14 +28,14 @@ import { getNudgeAmounts } from "../figma_app/740163";
 import { BK } from "../905/848862";
 import { kG } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { LengthInput } from "../figma_app/178475";
 import { Cf, it } from "../905/504727";
 import { Zk, ks } from "../figma_app/626177";
 import { Z as _$$Z } from "../905/278240";
 import { I as _$$I } from "../905/439783";
 import { a as _$$a } from "../905/575557";
-import { e as _$$e2 } from "../905/2401";
+import { ParagraphSpacingInput } from "../905/2401";
 import { B as _$$B } from "../905/957400";
 import { dx } from "../figma_app/334459";
 import { Wv } from "../figma_app/711157";
@@ -128,7 +128,7 @@ export function $$Z0() {
       dropdownTargetRect: r,
       onAddNewVariant: m,
       onAddCustomVariant: () => {
-        u.toggle(() => cn(t.current, l + 240 - 20));
+        u.toggle(() => calculatePickerPositionLeft(t.current, l + 240 - 20));
         e.hide();
       }
     }), u.showing && jsx(ee, {
@@ -344,7 +344,7 @@ function et({
         ref: c,
         "aria-expanded": p.showing,
         "aria-label": getI18nString("sites.panel.responsive_text_style.settings"),
-        onClick: () => p.toggle(() => cn(c.current, s + 240 - 50)),
+        onClick: () => p.toggle(() => calculatePickerPositionLeft(c.current, s + 240 - 50)),
         children: jsx(_$$A, {})
       }),
       rightIcon: jsx(IconButton, {
@@ -527,7 +527,7 @@ function en({
   });
   let m = jsx(AutoInteractableWrapper, {
     name: "responsive_text_style_variant_paragraph_spacing",
-    children: jsx(_$$e2, {
+    children: jsx(ParagraphSpacingInput, {
       paragraphSpacing: e.paragraphSpacing,
       isDisabled: !1,
       smallNudgeAmount,

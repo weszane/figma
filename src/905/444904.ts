@@ -7,7 +7,7 @@ import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { u as _$$u } from "../905/684425";
+import { CustomModalComponent } from "../905/684425";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -55,7 +55,7 @@ export function $$I0({
     });
   }), k && !T || N) ? jsx("div", {
     className: cssBuilderInstance.zIndex0.$,
-    children: jsx(_$$u, {
+    children: jsx(CustomModalComponent, {
       headerImage: jsx(P, {}),
       headerText: N ? getI18nString("mfa_required_modal.regained_access_to_file.title") : getI18nString("mfa_required_modal.mfa_enabled.title"),
       secondaryText: e ? getI18nString("mfa_required_modal.mfa_enabled.subtile_for_file_browser") : getI18nString("mfa_required_modal.mfa_enabled.subtile"),
@@ -71,7 +71,7 @@ export function $$I0({
     })
   }) : jsx("div", {
     className: cssBuilderInstance.zIndex0.$,
-    children: jsxs(_$$u, {
+    children: jsxs(CustomModalComponent, {
       headerImage: jsx(P, {}),
       headerText: getI18nString("mfa_required_modal.title", {
         orgName: t.name

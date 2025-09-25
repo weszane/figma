@@ -1,3 +1,5 @@
+
+
 /**
  * Special marker for mixed values.
  * (original: $$n12)
@@ -59,7 +61,7 @@ export function isInvalidValue(value: any): boolean {
  * @returns {boolean}
  * (original: $$l6)
  */
-export function isAutoMarker(value: any): boolean {
+export function isAutoMarker(value: any): value is typeof AUTO_MARKER {
   return value === AUTO_MARKER
 }
 

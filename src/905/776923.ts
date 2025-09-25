@@ -1,7 +1,7 @@
 import { isNotNullish } from "../figma_app/95419";
 import { StyleIdHandler, VariableSetIdCompatHandler, VariableIdHandler, CodeComponentIdHandler, CodeFileIdHandler, CanvasNodeIdHandler, CodeLibraryIdHandler } from "../figma_app/243058";
 import { isPrintableAscii } from "../figma_app/766708";
-import { M_, Lm, kf, Kg, SE, _o, WX, ar, r4, Ox, rP, wA, hd, FE, W_, aP, hV, OA, yp, qx, aY, Rt } from "../905/71";
+import { isNumberForBlobProperty, isBoolean, isNumberOrBigint, isString, isStringForRedactableProperty, hasRgbaColorProperties, hasCoordinates, isStylePropertyId, isVariableSetIdProperty, isVariableIdProperty, isBackingCodeComponentIdProperty, isCodeFileIdProperty, isCodeFileCanvasNodeIdProperty, isCodeLibraryIdProperty, hasSessionAndLocalIds, isSymbolOrSpecialIdProperty, hasValidGuidArray, hasMatrixTransformProperties, arrayToMatrixTransform, isUint8ArrayHash, isUint8Array, hasTypeAndLabel } from "../905/71";
 import { c1 } from "../905/589717";
 import { B_, $7, o8, QB } from "../905/258397";
 export class $$d0 {
@@ -40,38 +40,38 @@ export class $$d0 {
         type: "metadata",
         value: "undefined"
       };
-      if (M_(t, e)) return {
+      if (isNumberForBlobProperty(t, e)) return {
         type: "blobIndex",
         value: t,
         scene: this
       };
-      if (Lm(t)) return {
+      if (isBoolean(t)) return {
         type: "boolean",
         value: t
       };
-      if (kf(t)) return {
+      if (isNumberOrBigint(t)) return {
         type: "numeric",
         value: t
       };
-      if (Kg(t)) return ("position" === e || "sortPosition" === e) && isPrintableAscii(t) ? {
+      if (isString(t)) return ("position" === e || "sortPosition" === e) && isPrintableAscii(t) ? {
         type: "position",
         value: t
-      } : SE(t, e) ? {
+      } : isStringForRedactableProperty(t, e) ? {
         type: "userInputtedText",
         value: t
       } : {
         type: "nonUserText",
         value: t
       };
-      if (_o(t)) return {
+      if (hasRgbaColorProperties(t)) return {
         type: "color",
         value: t
       };
-      if (WX(t)) return {
+      if (hasCoordinates(t)) return {
         type: "vector",
         value: t
       };
-      if (ar(e)) {
+      if (isStylePropertyId(e)) {
         let e = StyleIdHandler.fromKiwi(t);
         if (e) return {
           type: "styleId",
@@ -79,7 +79,7 @@ export class $$d0 {
           scene: this
         };
       }
-      if (r4(e)) {
+      if (isVariableSetIdProperty(e)) {
         let e = VariableSetIdCompatHandler.fromKiwi(t);
         if (e) return {
           type: "variableCollectionId",
@@ -87,7 +87,7 @@ export class $$d0 {
           scene: this
         };
       }
-      if (Ox(e)) {
+      if (isVariableIdProperty(e)) {
         let e = VariableIdHandler.fromKiwi(t);
         if (e) return {
           type: "variableId",
@@ -95,7 +95,7 @@ export class $$d0 {
           scene: this
         };
       }
-      if (rP(e)) {
+      if (isBackingCodeComponentIdProperty(e)) {
         let e = CodeComponentIdHandler.fromKiwi(t);
         if (e) return {
           type: "codeComponentId",
@@ -103,7 +103,7 @@ export class $$d0 {
           scene: this
         };
       }
-      if (wA(e)) {
+      if (isCodeFileIdProperty(e)) {
         let e = CodeFileIdHandler.fromKiwi(t);
         if (e) return {
           type: "codeFileId",
@@ -111,12 +111,12 @@ export class $$d0 {
           scene: this
         };
       }
-      if (hd(e)) return {
+      if (isCodeFileCanvasNodeIdProperty(e)) return {
         type: "canvasNodeId",
         value: CanvasNodeIdHandler.fromKiwi(t),
         scene: this
       };
-      if (FE(e)) {
+      if (isCodeLibraryIdProperty(e)) {
         let e = CodeLibraryIdHandler.fromKiwi(t);
         if (e) return {
           type: "codeLibraryId",
@@ -124,7 +124,7 @@ export class $$d0 {
           scene: this
         };
       }
-      if (W_(t)) return aP(e, i) ? {
+      if (hasSessionAndLocalIds(t)) return isSymbolOrSpecialIdProperty(e, i) ? {
         type: "nodeGuid",
         value: c1.fromKiwi(t),
         scene: this
@@ -137,7 +137,7 @@ export class $$d0 {
         value: t.guid,
         scene: this
       };
-      if (hV(t)) {
+      if (hasValidGuidArray(t)) {
         let {
           guids
         } = t;
@@ -149,21 +149,21 @@ export class $$d0 {
           value: "Invalid Fig.GUIDPath"
         };
       }
-      if (OA(t)) return {
+      if (hasMatrixTransformProperties(t)) return {
         type: "matrix",
         value: t
       };
-      let l = yp(t);
+      let l = arrayToMatrixTransform(t);
       return l ? {
         type: "matrix",
         value: l
-      } : qx(t, e) ? {
+      } : isUint8ArrayHash(t, e) ? {
         type: "imageHash",
         value: t
-      } : aY(t) ? {
+      } : isUint8Array(t) ? {
         type: "bytes",
         value: t
-      } : Rt(t) ? {
+      } : hasTypeAndLabel(t) ? {
         type: "editScope",
         value: t
       } : null;

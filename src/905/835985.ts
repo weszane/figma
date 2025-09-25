@@ -661,7 +661,7 @@ function reconcileNode(params: ReconcileNodeParams): SceneNodeAdapter | null {
 }
 
 /** Public API: reconcile whole widget tree (original export: $$v0) */
-function reconcileWidgetTree({
+export function reconcileWidgetTree({
   widgetNodeID,
   newVRoot,
   oldVRoot,

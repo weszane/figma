@@ -20,13 +20,13 @@ import { FDocumentType } from "../905/862883";
 import { mk } from "../figma_app/920333";
 import { qK } from "../9410/353422";
 import { useMappedEditorTypeA } from "../905/808775";
-import { d as _$$d } from "../905/751443";
+import { defaultContentService } from "../905/751443";
 var r = s;
 var d = l;
 var m = c;
 var p = u;
 let E = liveStoreInstance.Query({
-  fetch: async e => (await _$$d.getDefaultCollageItems({
+  fetch: async e => (await defaultContentService.getDefaultCollageItems({
     orgId: e
   })).data.meta
 });

@@ -1,18 +1,19 @@
 import { Ay as _$$Ay3, xk } from '@stylexjs/stylex';
 import F from 'classnames';
 import { Fragment as _$$Fragment, Children, cloneElement, createContext, createElement, forwardRef, isValidElement, memo, PureComponent, Suspense, useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { H as _$$H3 } from 'react-dom';
+import { H as _$$H3, flushSync } from 'react-dom';
+import { connect, useDispatch, useSelector, useStore } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import _require5 from '../6db9f521/460010';
 import _require3 from '../7a72fc59/824430';
 import _require from '../451de8f0/94979';
-import { reportError, captureException } from '../905/11';
+import { captureException, reportError } from '../905/11';
 import { consumptionPaywallUtils } from '../905/224';
 import { s as _$$s5 } from '../905/6512';
 import { a as _$$a1 } from '../905/10468';
 import { D as _$$D7 } from '../905/12032';
 import { L as _$$L3 } from '../905/13390';
-import { isNullOrFailure, isLoading } from '../905/18797';
+import { isLoading, isNullOrFailure } from '../905/18797';
 import { P4 as _$$P2 } from '../905/18800';
 import { useMemoCustom, useMemoStable, useStableMemo } from '../905/19536';
 import { a as _$$a8 } from '../905/29104';
@@ -87,7 +88,7 @@ import { V as _$$V4 } from '../905/355181';
 import { BannerMessage } from '../905/363675';
 import { n as _$$n } from '../905/366526';
 import { UpgradeAction } from '../905/370443';
-import { selectCurrentUser, getUserId } from '../905/372672';
+import { getUserId, selectCurrentUser } from '../905/372672';
 import { k as _$$k2 } from '../905/381239';
 import { deepEqual } from '../905/382883';
 import { e as _$$e10 } from '../905/383776';
@@ -112,6 +113,7 @@ import { E as _$$E7 } from '../905/453826';
 import { e as _$$e0 } from '../905/457828';
 import { useMenu } from '../905/465888';
 import { Q as _$$Q4 } from '../905/467310';
+import { AutoLayout } from '../905/470281';
 import { A as _$$A7 } from '../905/475480';
 import { sendHistogram } from '../905/485103';
 import { handleAtomEvent } from '../905/502364';
@@ -161,21 +163,21 @@ import { e as _$$e8 } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { parseAndNormalizeQuery, parseQuery, parseQuerySimple } from '../905/634134';
 import { eo as _$$eo, fp as _$$fp, TX } from '../905/634218';
-import { useCurrentTheme, getVisibleTheme, useThemeContext } from '../905/640017';
+import { getVisibleTheme, useCurrentTheme, useThemeContext } from '../905/640017';
 import { u as _$$u } from '../905/644087';
 import { FeatureFlag, PageFolderFile } from '../905/652992';
 import { getSessionStorage } from '../905/657224';
 import { isLocalFileKey } from '../905/657242';
 import { Z as _$$Z4 } from '../905/658753';
 import { oW as _$$oW } from '../905/675859';
-import { u as _$$u4 } from '../905/684425';
+import { CustomModalComponent } from '../905/684425';
 import { IM } from '../905/687477';
 import { BannerButton } from '../905/692618';
 import { isFigmascopeView } from '../905/694285';
 import { e0 as _$$e9, qo } from '../905/696396';
 import { getSingletonSceneGraph } from '../905/700578';
 import { liveStoreInstance } from '../905/713695';
-import { z5 as _$$z, Nv } from '../905/713722';
+import { defaultColorManipulator, alphaColorManipulator } from '../905/713722';
 import { XA } from '../905/714160';
 import { SvgComponent } from '../905/714743';
 import { l as _$$l } from '../905/716947';
@@ -183,7 +185,7 @@ import { getFilteredFeatureFlags } from '../905/717445';
 import { N as _$$N2 } from '../905/718123';
 import { S as _$$S3 } from '../905/720922';
 import { a as _$$a3 } from '../905/720941';
-import { getResourceDataOrFallback, tT as _$$tT, gB } from '../905/723791';
+import { tT as _$$tT, gB, getResourceDataOrFallback } from '../905/723791';
 import { Point } from '../905/736624';
 import { Ji } from '../905/739314';
 import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
@@ -193,7 +195,7 @@ import { c as _$$c0, s as _$$s7 } from '../905/744710';
 import { T as _$$T3 } from '../905/745591';
 import { u as _$$u5 } from '../905/747030';
 import { EL } from '../905/748636';
-import { errorBoundaryFallbackTypes, ErrorBoundaryCrash, useErrorBoundaryContext, RootErrorBoundaryFallback } from '../905/751457';
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes, RootErrorBoundaryFallback, useErrorBoundaryContext } from '../905/751457';
 import { Bm } from '../905/755627';
 import { isDefaultFile } from '../905/760074';
 import { D as _$$D2 } from '../905/771179';
@@ -208,7 +210,6 @@ import { $ as _$$$ } from '../905/819786';
 import { EventShield } from '../905/821217';
 import { m as _$$m4 } from '../905/822676';
 import { KeyboardFocusManager } from '../905/826900';
-import { AutoLayout } from '../905/470281';
 import { K as _$$K4 } from '../905/833668';
 import { l as _$$l7 } from '../905/840533';
 import { o0 as _$$o3 } from '../905/844131';
@@ -223,9 +224,9 @@ import { ud as _$$ud } from '../905/862913';
 import { q9 } from '../905/865071';
 import { bL as _$$bL2, c$ as _$$c$ } from '../905/867927';
 import { defaultSessionLocalIDString } from '../905/871411';
-import { createDeferredPromise } from '../905/874553';
-import { replaceUsedLivegraphUnnaturalKeyToNaturalKey, replaceUsedLivegraphStyles, replaceUsedLivegraphSourceAssetKeyToDestinationKey, replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset, replaceUsedLivegraphLocalNodeIdToDestinationFileName, replaceUsedLivegraphSourceAssetKeyToFileName, replaceUsedLivegraphLocalNodeIdToDestinationKey } from '../905/879323';
 import { generateUUIDv4 } from '../905/871474';
+import { createDeferredPromise } from '../905/874553';
+import { replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset, replaceUsedLivegraphLocalNodeIdToDestinationFileName, replaceUsedLivegraphLocalNodeIdToDestinationKey, replaceUsedLivegraphSourceAssetKeyToDestinationKey, replaceUsedLivegraphSourceAssetKeyToFileName, replaceUsedLivegraphStyles, replaceUsedLivegraphUnnaturalKeyToNaturalKey } from '../905/879323';
 import { Db } from '../905/881862';
 import { NP } from '../905/889931';
 import { IY } from '../905/901759';
@@ -286,15 +287,14 @@ import { aBI, Dkp, evB, GFz, KP, MYY, t8H, Ujx, Xu4 } from '../figma_app/6204';
 import { bN } from '../figma_app/16595';
 import { $t, lW as _$$lW, FC, JO, y7 } from '../figma_app/20203';
 import { H as _$$H5, U as _$$U } from '../figma_app/23564';
-import { atom, useAtomValueAndSetter, createRemovableAtomFamily, useAtomWithSubscription, mg, Xr, atomStoreManager } from '../figma_app/27355';
-import { createSnapshotComponent, setupLoadablePageManager, hideElementById } from '../figma_app/27829';
+import { atom, atomStoreManager, createRemovableAtomFamily, mg, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { createSnapshotComponent, hideElementById, setupLoadablePageManager } from '../figma_app/27829';
 import { assetMirrorInstance } from '../figma_app/31188';
 import { Ye } from '../figma_app/32128';
 import { ZS } from '../figma_app/33126';
-import { useLatestRef } from '../figma_app/922077';
 import { Y9 as _$$Y4 } from '../figma_app/42724';
 import { i as _$$i2 } from '../figma_app/43065';
-import { FileCreationDropdownView, ComponentByKey, PinnedFiles, OpenEditorFileData, DesktopPushNotificationView, ActiveFileUsersForFileView, FolderPageView, LibraryPublish, FileThumbnail, ProductTrialsView, ClientReloadView, LegacySourceStyleData, RecentIdleTimeoutSettingChangeView, DesktopNewTabRecentFilesView, RecentNetworkControlRejectionView, StyleByKey } from '../figma_app/43951';
+import { ActiveFileUsersForFileView, ClientReloadView, ComponentByKey, DesktopNewTabRecentFilesView, DesktopPushNotificationView, FileCreationDropdownView, FileThumbnail, FolderPageView, LegacySourceStyleData, LibraryPublish, OpenEditorFileData, PinnedFiles, ProductTrialsView, RecentIdleTimeoutSettingChangeView, RecentNetworkControlRejectionView, StyleByKey } from '../figma_app/43951';
 import { ComposerLocation } from '../figma_app/45218';
 import { e as _$$e11, n as _$$n5 } from '../figma_app/48514';
 import { Q6 } from '../figma_app/48566';
@@ -304,13 +304,13 @@ import { I as _$$I4 } from '../figma_app/51637';
 import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { BannerInline } from '../figma_app/59509';
 import { h as _$$h } from '../figma_app/61485';
-import { useFullscreenViewportUpdates, scaleRect } from '../figma_app/62612';
+import { scaleRect, useFullscreenViewportUpdates } from '../figma_app/62612';
 import { jm } from '../figma_app/67099';
 import { mX } from '../figma_app/76123';
 import { setActiveFileUsersAction } from '../figma_app/78808';
 import { o as _$$o2, v as _$$v3 } from '../figma_app/79979';
 import { getObservableValue } from '../figma_app/84367';
-import { useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser, useDevModeFocusId } from '../figma_app/88239';
+import { useDevModeFocusId, useIsFullscreenDevModeComponentBrowser, useIsFullscreenOverview } from '../figma_app/88239';
 import { O8, Wn } from '../figma_app/88484';
 import { handleAutosaveAndNavigationThunk } from '../figma_app/91703';
 import { Iy, XS } from '../figma_app/95367';
@@ -326,7 +326,7 @@ import { yB } from '../figma_app/120294';
 import { $ as _$$$2, E as _$$E5 } from '../figma_app/126651';
 import { F as _$$F8 } from '../figma_app/127204';
 import { Iu } from '../figma_app/141088';
-import { subscribedSymbolsUniqueKeysFromLoadedPagesSelector, allSubscribedStylesUniqueKeysFromLoadedPagesSelector } from '../figma_app/141508';
+import { allSubscribedStylesUniqueKeysFromLoadedPagesSelector, subscribedSymbolsUniqueKeysFromLoadedPagesSelector } from '../figma_app/141508';
 import { cQ as _$$cQ } from '../figma_app/144692';
 import { ub as _$$ub, jM, RO, wI } from '../figma_app/146905';
 import { rb as _$$rb } from '../figma_app/151869';
@@ -337,7 +337,7 @@ import { buildUploadUrl, getInitialOptions, setEditingFile } from '../figma_app/
 import { Zc } from '../figma_app/171569';
 import { N as _$$N8 } from '../figma_app/176280';
 import { i1 as _$$i, Dq, q0, TN } from '../figma_app/177697';
-import { FFileType, FPlanFeatureType, FBillingEntityType, FProductAccessType, FPlanTierType, FOrganizationLevelType, FPlanLimitationType } from '../figma_app/191312';
+import { FBillingEntityType, FFileType, FOrganizationLevelType, FPlanFeatureType, FPlanLimitationType, FPlanTierType, FProductAccessType } from '../figma_app/191312';
 import { getThemeBackgroundColor, isColorDarkByLuminance } from '../figma_app/191804';
 import { zT } from '../figma_app/192142';
 import { isMainView, selectedViewToPath } from '../figma_app/193867';
@@ -354,19 +354,18 @@ import { vt } from '../figma_app/231614';
 import { a as _$$a9 } from '../figma_app/234156';
 import { rM as _$$rM } from '../figma_app/241541';
 import { lS as _$$lS } from '../figma_app/242565';
-import { hasLibraryKeyInSet, styleByKeyQuery, handleResourceQuery } from '../figma_app/255679';
-import { isInteractionPathCheck, isInteractionOrEvalMode } from '../figma_app/897289';
+import { handleResourceQuery, hasLibraryKeyInSet, styleByKeyQuery } from '../figma_app/255679';
 import { gH, ZF } from '../figma_app/258114';
 import { rG as _$$rG } from '../figma_app/260703';
 import { J as _$$J6 } from '../figma_app/261874';
 import { X as _$$X2 } from '../figma_app/266084';
 import { z5 } from '../figma_app/268172';
 import { N as _$$N5 } from '../figma_app/268271';
-import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
+import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { td as _$$td } from '../figma_app/273118';
 import { fullscreenCrashStateAtom } from '../figma_app/276445';
 import { W6 } from '../figma_app/287316';
-import { useMultiSubscription, useSubscription, getLivegraphClient } from '../figma_app/288654';
+import { getLivegraphClient, useMultiSubscription, useSubscription } from '../figma_app/288654';
 import { imageAPI } from '../figma_app/291892';
 import { hasUserAccess, useHighPriorityNotificationsExperiment } from '../figma_app/297957';
 import { F$, LH, y4 } from '../figma_app/298277';
@@ -393,7 +392,7 @@ import { Tl } from '../figma_app/357433';
 import { $v } from '../figma_app/370763';
 import { r as _$$r5 } from '../figma_app/375550';
 import { LH as _$$LH, zm } from '../figma_app/384673';
-import { getSelectedView, getFullscreenFileKey, getSelectedViewType } from '../figma_app/386952';
+import { getFullscreenFileKey, getSelectedView, getSelectedViewType } from '../figma_app/386952';
 import { T as _$$T2 } from '../figma_app/399971';
 import { Cj } from '../figma_app/407993';
 import { aq as _$$aq } from '../figma_app/412189';
@@ -408,12 +407,12 @@ import { qm } from '../figma_app/431689';
 import { aE as _$$aE } from '../figma_app/433401';
 import { CB } from '../figma_app/442259';
 import { q3 } from '../figma_app/450829';
-import { flagValue, userValue, inputValue, modalValue, additionalValue, fullscreenValue, sessionValue } from '../figma_app/455680';
+import { additionalValue, flagValue, fullscreenValue, inputValue, modalValue, sessionValue, userValue } from '../figma_app/455680';
 import { Ws } from '../figma_app/459125';
 import { wV } from '../figma_app/462456';
 import { useCurrentPlanUser, useIsOrgAdminUser } from '../figma_app/465071';
 import { assert, throwTypeError } from '../figma_app/465776';
-import { useCanAccessFullDevMode, useIsLoggedOutDevModeDemoFile, useCanUseDevModeDemoFile, useCanAccessDevModeEntryPoint } from '../figma_app/473493';
+import { useCanAccessDevModeEntryPoint, useCanAccessFullDevMode, useCanUseDevModeDemoFile, useIsLoggedOutDevModeDemoFile } from '../figma_app/473493';
 import { A as _$$A4 } from '../figma_app/475340';
 import { equals } from '../figma_app/476572';
 import { $X, n6 as _$$n2, pD as _$$pD, f7, FZ, KN, LD, ZB } from '../figma_app/476677';
@@ -424,7 +423,7 @@ import { zj } from '../figma_app/502363';
 import { p as _$$p4 } from '../figma_app/502587';
 import { wG } from '../figma_app/504823';
 import { $4 } from '../figma_app/506364';
-import { useRequireOpenFileOrSuspend, useCurrentFileKey, useFileLibraryKeys, useFullscreenViewFile, selectCurrentFile, openFileKeyAtom } from '../figma_app/516028';
+import { openFileKeyAtom, selectCurrentFile, useCurrentFileKey, useFileLibraryKeys, useFullscreenViewFile, useRequireOpenFileOrSuspend } from '../figma_app/516028';
 import { D as _$$D6, z as _$$z4 } from '../figma_app/516075';
 import { _c as _$$_c, l0 as _$$l3, wV as _$$wV, BX, Dp, Eo, wF } from '../figma_app/516324';
 import { IF, Lo } from '../figma_app/518364';
@@ -438,12 +437,12 @@ import { q4 } from '../figma_app/536669';
 import { Lj, xM } from '../figma_app/539925';
 import { yH } from '../figma_app/540726';
 import { nb as _$$nb, fA, Tf } from '../figma_app/543100';
-import { userFlagExistsAtomFamily, userFlagAtomFamily, latestSurveyResponseDateAtom } from '../figma_app/545877';
+import { latestSurveyResponseDateAtom, userFlagAtomFamily, userFlagExistsAtomFamily } from '../figma_app/545877';
 import { N as _$$N, Gm } from '../figma_app/548577';
 import { isFigmakeSitesEnabled, useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { ZO as _$$ZO } from '../figma_app/557318';
 import { isUserNotLoggedInAndEditorSupported } from '../figma_app/564183';
-import { getAtomMutate, setupResourceAtomHandler, handleSuspenseRetainRelease, handleResourceAtomMetrics } from '../figma_app/566371';
+import { getAtomMutate, handleResourceAtomMetrics, handleSuspenseRetainRelease, setupResourceAtomHandler } from '../figma_app/566371';
 import { NX } from '../figma_app/568591';
 import { Pm } from '../figma_app/569743';
 import { st as _$$st } from '../figma_app/578011';
@@ -452,7 +451,7 @@ import { FP } from '../figma_app/580736';
 import { xE } from '../figma_app/581520';
 import { safeModeRenderController } from '../figma_app/582563';
 import { ConfigManagerProxy } from '../figma_app/594947';
-import { getCurrentTeam, checkTeamFileRestrictions, AddOperationType } from '../figma_app/598018';
+import { AddOperationType, checkTeamFileRestrictions, getCurrentTeam } from '../figma_app/598018';
 import { MR } from '../figma_app/598926';
 import { oR as _$$oR, wA as _$$wA } from '../figma_app/598952';
 import { PluginCallbacks } from '../figma_app/603466';
@@ -462,13 +461,13 @@ import { $z, Ih } from '../figma_app/617427';
 import { sv as _$$sv } from '../figma_app/617606';
 import { Eh } from '../figma_app/617654';
 import { imageServiceInstance } from '../figma_app/624361';
-import { normalizeTeamData, fileActionEnum } from '../figma_app/630077';
+import { fileActionEnum, normalizeTeamData } from '../figma_app/630077';
 import { getPrototypeAppBindingsForTest } from '../figma_app/632319';
-import { PublishStatusEnum, LibraryPublishStatusEnum } from '../figma_app/633080';
+import { LibraryPublishStatusEnum, PublishStatusEnum } from '../figma_app/633080';
 import { X_ } from '../figma_app/634146';
-import { BigButtonPrimaryTracked, ButtonBase, SecureLink, Spacing, EnhancedInput, interactiveAnchorTracked } from '../figma_app/637027';
+import { BigButtonPrimaryTracked, ButtonBase, EnhancedInput, interactiveAnchorTracked, SecureLink, Spacing } from '../figma_app/637027';
 import { UK, WN } from '../figma_app/638601';
-import { AssetCategoryEnum, assetCategoryAtom } from '../figma_app/639711';
+import { assetCategoryAtom, AssetCategoryEnum } from '../figma_app/639711';
 import { jW } from '../figma_app/640683';
 import { zl as _$$zl, ST } from '../figma_app/641749';
 import { xn, Yk } from '../figma_app/644079';
@@ -476,32 +475,32 @@ import { rS as _$$rS } from '../figma_app/644255';
 import { batchFetchFiles } from '../figma_app/646357';
 import { P as _$$P4 } from '../figma_app/650304';
 import { R as _$$R6 } from '../figma_app/652260';
-import { sortByDateProperty, sortByMultiple, filterNotNullish } from '../figma_app/656233';
-import { useFigmaLibrariesEnabled, figmaLibrariesEnabledAtom } from '../figma_app/657017';
+import { filterNotNullish, sortByDateProperty, sortByMultiple } from '../figma_app/656233';
+import { figmaLibrariesEnabledAtom, useFigmaLibrariesEnabled } from '../figma_app/657017';
 import { aJ as _$$aJ, Sz, ZQ } from '../figma_app/673202';
 import { Gm as _$$Gm } from '../figma_app/675605';
 import { KI, wH } from '../figma_app/680166';
 import { Z as _$$Z3 } from '../figma_app/684783';
 import { useProjectFileCreationPermissions } from '../figma_app/687776';
 import { R as _$$R7 } from '../figma_app/690591';
-import { viewMappings, PreviewMode, OnboardingStep } from '../figma_app/707808';
+import { OnboardingStep, PreviewMode, viewMappings } from '../figma_app/707808';
 import { cU as _$$cU, wY } from '../figma_app/708845';
 import { EX, xI } from '../figma_app/709323';
 import { eJ as _$$eJ, ub as _$$ub2, uh as _$$uh, D_, q8, Uv, wX } from '../figma_app/710136';
 import { k as _$$k5 } from '../figma_app/717083';
-import { useIsProgressBarHiddenOrLocked, useSceneGraphSelector, useAppModelProperty } from '../figma_app/722362';
+import { useAppModelProperty, useIsProgressBarHiddenOrLocked, useSceneGraphSelector } from '../figma_app/722362';
 import { iC as _$$iC, nd as _$$nd, tP as _$$tP, TZ } from '../figma_app/722791';
 import { fm } from '../figma_app/723183';
 import { x as _$$x5 } from '../figma_app/731109';
 import { YN as _$$YN } from '../figma_app/738358';
 import { isHubFileEmbedView, isMonetizationRedirectView } from '../figma_app/740025';
-import { isHelpWidgetHidden, getDevHandoffInspectSplitPosition } from '../figma_app/740163';
+import { getDevHandoffInspectSplitPosition, isHelpWidgetHidden } from '../figma_app/740163';
 import { C as _$$C } from '../figma_app/747354';
 import { K7 } from '../figma_app/749805';
 import { Cg } from '../figma_app/751648';
 import { YA } from '../figma_app/755939';
 import { c as _$$c6 } from '../figma_app/763535';
-import { ThemeType, OffsetPathTsApi, RichTextType, TextDirection, AppStateTsApi, DrawBindingsCpp, Fullscreen, ComponentPropType, FileSourceType, ViewType, LayoutTabType, DesignGraphElements, SimplifyVectorToolTsApi, Command, JoinType, UserAppType, PerfQuality, TextData_Internal } from '../figma_app/763686';
+import { AppStateTsApi, Command, ComponentPropType, DesignGraphElements, DrawBindingsCpp, FileSourceType, Fullscreen, JoinType, LayoutTabType, OffsetPathTsApi, PerfQuality, RichTextType, SimplifyVectorToolTsApi, TextData_Internal, TextDirection, ThemeType, UserAppType, ViewType } from '../figma_app/763686';
 import { c as _$$c7 } from '../figma_app/765216';
 import { l as _$$l2 } from '../figma_app/773170';
 import { BrowserInfo } from '../figma_app/778880';
@@ -512,14 +511,13 @@ import { Z as _$$Z } from '../figma_app/788481';
 import { em as _$$em, eN as _$$eN, lq as _$$lq, G5, I_ } from '../figma_app/792958';
 import { M0 as _$$M5 } from '../figma_app/803054';
 import { Ro } from '../figma_app/805373';
-import { handleMouseEvent, RecordingPureComponent, useHandleMouseEvent, generateRecordingKey } from '../figma_app/878298';
 import { O as _$$O3 } from '../figma_app/806649';
 import { fD } from '../figma_app/816671';
 import { I as _$$I3 } from '../figma_app/827540';
 import { TrackingProvider } from '../figma_app/831799';
 import { V1, XU } from '../figma_app/834392';
 import { autosaveFilesQuery } from '../figma_app/840917';
-import { M0, VG } from '../figma_app/841197';
+import { isServerSideRedactionEnabled, isServerSideJournalRedactionEnabled } from '../figma_app/841197';
 import { A as _$$A2 } from '../figma_app/849799';
 import { a as _$$a5 } from '../figma_app/850056';
 import { uW as _$$uW2, ux as _$$ux, NY } from '../figma_app/851625';
@@ -528,22 +526,25 @@ import { ip as _$$ip } from '../figma_app/857454';
 import { LoadingSpinner } from '../figma_app/858013';
 import { w as _$$w2 } from '../figma_app/859828';
 import { r as _$$r2 } from '../figma_app/860474';
-import { setupMenu, MenuRootComp, MenuTitleComp, MenuSubTrigger, MenuSubMenu, MenuContainerComp, MenuSubContainerComp, MenuItemComp, MenuItemLead, MenuSeparator, MenuGroupComp } from '../figma_app/860955';
+import { MenuContainerComp, MenuGroupComp, MenuItemComp, MenuItemLead, MenuRootComp, MenuSeparator, MenuSubContainerComp, MenuSubMenu, MenuSubTrigger, MenuTitleComp, setupMenu } from '../figma_app/860955';
 import { mv } from '../figma_app/861252';
 import { bellFeedAPIInstance, hasDesktopAPI } from '../figma_app/876459';
+import { generateRecordingKey, handleMouseEvent, RecordingPureComponent, useHandleMouseEvent } from '../figma_app/878298';
 import { t7 as _$$t3 } from '../figma_app/880974';
 import { ld as _$$ld } from '../figma_app/881578';
 import { selectLocalStylesWithUsagesOnLoadedPages, selectPublishableStyleNodeIds } from '../figma_app/889655';
 import { S as _$$S2 } from '../figma_app/894185';
+import { isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/897289';
 import { trackFileEventWithStore } from '../figma_app/901889';
 import { rn as _$$rn } from '../figma_app/903573';
 import { j as _$$j2 } from '../figma_app/911344';
 import { Dt } from '../figma_app/912411';
 import { f as _$$f } from '../figma_app/913332';
 import { QE, z0 } from '../figma_app/914216';
-import { TabOpenBehavior, FileBrowserLocation } from '../figma_app/915202';
+import { FileBrowserLocation, TabOpenBehavior } from '../figma_app/915202';
 import { utilityNoop } from '../figma_app/918700';
 import { Badge, BadgeColor } from '../figma_app/919079';
+import { useLatestRef } from '../figma_app/922077';
 import { w as _$$w } from '../figma_app/922802';
 import { E as _$$E } from '../figma_app/924252';
 import { w4 as _$$w3, Fj, go } from '../figma_app/927140';
@@ -558,7 +559,7 @@ import { nP as _$$nP } from '../figma_app/957070';
 import { mn } from '../figma_app/968938';
 import { e2 as _$$e4, C$, Ml } from '../figma_app/971485';
 import { flashMfaAndRedirect, handleOrgMigration, ReloadReasonEnum } from '../figma_app/976345';
-import { isSitesFileType, getCurrentFileType, isWhiteboardFileType, getSelectedEditorType, isDesignFileType, isDevHandoffEditorType, getEditorTypeOrNull, isIllustrationEditorType, getEditorTypeFromView } from '../figma_app/976749';
+import { getCurrentFileType, getEditorTypeFromView, getEditorTypeOrNull, getSelectedEditorType, isDesignFileType, isDevHandoffEditorType, isIllustrationEditorType, isSitesFileType, isWhiteboardFileType } from '../figma_app/976749';
 import { ZU } from '../figma_app/986347';
 import { gY } from '../figma_app/991245';
 import { A as _$$A11 } from '../svg/95997';
@@ -575,10 +576,8 @@ import db from '../vendor/128080';
 import { rH as _$$rH, Ck, fK, IN, zB } from '../vendor/167083';
 import av from '../vendor/260986';
 import { P as _$$P } from '../vendor/348225';
-import { useSelector, connect, useStore, useDispatch } from 'react-redux';
 import { useAtomValue } from '../vendor/525001';
 import { N as _$$N7 } from '../vendor/930821';
-import { flushSync } from 'react-dom';
 let n;
 let i;
 let a;
@@ -876,18 +875,18 @@ let e0 = new class {
     return i;
   }
 }();
-let ta = _$$z.parse('#282A36');
-let ts = _$$z.parse('#F8F8F2');
-let to = _$$z.parse('#AEAFAD');
-let tl = _$$z.parse('#999');
-let td = _$$z.parse('#6272A4');
-let tc = _$$z.parse('#8BE9FD');
-let tu = _$$z.parse('#50FA7B');
-let tp = _$$z.parse('#FFB86C');
-let t_ = _$$z.parse('#FF79C6');
-let th = _$$z.parse('#BD93F9');
-let tm = _$$z.parse('#FF5555');
-let tg = _$$z.parse('#F1FA8C');
+let ta = defaultColorManipulator.parse('#282A36');
+let ts = defaultColorManipulator.parse('#F8F8F2');
+let to = defaultColorManipulator.parse('#AEAFAD');
+let tl = defaultColorManipulator.parse('#999');
+let td = defaultColorManipulator.parse('#6272A4');
+let tc = defaultColorManipulator.parse('#8BE9FD');
+let tu = defaultColorManipulator.parse('#50FA7B');
+let tp = defaultColorManipulator.parse('#FFB86C');
+let t_ = defaultColorManipulator.parse('#FF79C6');
+let th = defaultColorManipulator.parse('#BD93F9');
+let tm = defaultColorManipulator.parse('#FF5555');
+let tg = defaultColorManipulator.parse('#F1FA8C');
 let tf = {
   backgroundColor: ta,
   defaultColor: ts,
@@ -919,12 +918,12 @@ let tf = {
     variable: td
   }
 };
-let tE = _$$z.parse('#322d29');
-let ty = _$$z.parse('#88786d');
-let tb = _$$z.parse('#bfa05a');
-let tT = _$$z.parse('#ffdac2');
-let tI = _$$z.parse('#bd987f');
-let tS = _$$z.parse('#fcc440');
+let tE = defaultColorManipulator.parse('#322d29');
+let ty = defaultColorManipulator.parse('#88786d');
+let tb = defaultColorManipulator.parse('#bfa05a');
+let tT = defaultColorManipulator.parse('#ffdac2');
+let tI = defaultColorManipulator.parse('#bd987f');
+let tS = defaultColorManipulator.parse('#fcc440');
 let tv = {
   defaultColor: tI,
   backgroundColor: tE,
@@ -935,7 +934,7 @@ let tv = {
     'prolog': ty,
     'doctype': ty,
     'cdata': ty,
-    'punctuation': _$$z.parse('#da70d6'),
+    'punctuation': defaultColorManipulator.parse('#da70d6'),
     'namespace': {
       ...tI,
       a: 0.7
@@ -966,13 +965,13 @@ let tv = {
     'important': tI
   }
 };
-let tA = _$$z.parse('#2a2d2a');
-let tx = _$$z.parse('#a1b5a2');
-let tN = _$$z.parse('#535f53');
-let tC = _$$z.parse('#a2b34d');
-let tw = _$$z.parse('#f0fff0');
-let tO = _$$z.parse('#b3d6b3');
-let tR = _$$z.parse('#e5fb79');
+let tA = defaultColorManipulator.parse('#2a2d2a');
+let tx = defaultColorManipulator.parse('#a1b5a2');
+let tN = defaultColorManipulator.parse('#535f53');
+let tC = defaultColorManipulator.parse('#a2b34d');
+let tw = defaultColorManipulator.parse('#f0fff0');
+let tO = defaultColorManipulator.parse('#b3d6b3');
+let tR = defaultColorManipulator.parse('#e5fb79');
 let tL = {
   defaultColor: tx,
   backgroundColor: tA,
@@ -1014,15 +1013,15 @@ let tL = {
     'important': tO
   }
 };
-let tP = _$$z.parse('#faf8f5');
-let tD = _$$z.parse('#728fcb');
-let tk = _$$z.parse('#063289');
-let tM = _$$z.parse('#93abdc');
-let tF = _$$z.parse('#cdc4b1');
-let tj = _$$z.parse('#b6ad9a');
-let tU = _$$z.parse('#b29762');
-let tB = _$$z.parse('#2d2006');
-let tG = _$$z.parse('#896724');
+let tP = defaultColorManipulator.parse('#faf8f5');
+let tD = defaultColorManipulator.parse('#728fcb');
+let tk = defaultColorManipulator.parse('#063289');
+let tM = defaultColorManipulator.parse('#93abdc');
+let tF = defaultColorManipulator.parse('#cdc4b1');
+let tj = defaultColorManipulator.parse('#b6ad9a');
+let tU = defaultColorManipulator.parse('#b29762');
+let tB = defaultColorManipulator.parse('#2d2006');
+let tG = defaultColorManipulator.parse('#896724');
 let tV = {
   defaultColor: tG,
   backgroundColor: tP,
@@ -1064,14 +1063,14 @@ let tV = {
     'important': tG
   }
 };
-let tH = _$$z.parse('#1d262f');
-let tz = _$$z.parse('#57718e');
-let tW = _$$z.parse('#4a5f78');
-let tK = _$$z.parse('#88b4e7');
-let tY = _$$z.parse('#0aa370');
-let t$ = _$$z.parse('#ebf4ff');
-let tX = _$$z.parse('#7eb6f6');
-let tq = _$$z.parse('#47ebb4');
+let tH = defaultColorManipulator.parse('#1d262f');
+let tz = defaultColorManipulator.parse('#57718e');
+let tW = defaultColorManipulator.parse('#4a5f78');
+let tK = defaultColorManipulator.parse('#88b4e7');
+let tY = defaultColorManipulator.parse('#0aa370');
+let t$ = defaultColorManipulator.parse('#ebf4ff');
+let tX = defaultColorManipulator.parse('#7eb6f6');
+let tq = defaultColorManipulator.parse('#47ebb4');
 let tJ = {
   defaultColor: tK,
   backgroundColor: tH,
@@ -1082,7 +1081,7 @@ let tJ = {
     'prolog': tW,
     'doctype': tW,
     'cdata': tW,
-    'punctuation': _$$z.parse('#f3cd12'),
+    'punctuation': defaultColorManipulator.parse('#f3cd12'),
     'namespace': {
       ...tz,
       a: 0.7
@@ -1113,13 +1112,13 @@ let tJ = {
     'important': tX
   }
 };
-let tZ = _$$z.parse('#24242e');
-let tQ = _$$z.parse('#8686cb');
-let t0 = _$$z.parse('#5b5b76');
-let t1 = _$$z.parse('#dd672c');
-let t2 = _$$z.parse('#ebebff');
-let t5 = _$$z.parse('#aaaaca');
-let t3 = _$$z.parse('#fe8c52');
+let tZ = defaultColorManipulator.parse('#24242e');
+let tQ = defaultColorManipulator.parse('#8686cb');
+let t0 = defaultColorManipulator.parse('#5b5b76');
+let t1 = defaultColorManipulator.parse('#dd672c');
+let t2 = defaultColorManipulator.parse('#ebebff');
+let t5 = defaultColorManipulator.parse('#aaaaca');
+let t3 = defaultColorManipulator.parse('#fe8c52');
 let t4 = {
   defaultColor: tQ,
   backgroundColor: tZ,
@@ -1161,17 +1160,17 @@ let t4 = {
     'important': t5
   }
 };
-let t8 = _$$z.parse('#9A93AE');
-let t6 = _$$z.parse('#ED4F62');
-let t7 = _$$z.parse('#EB8559');
-let t9 = _$$z.parse('#F8D41C');
-let re = _$$z.parse('#53E37C');
-let rt = _$$z.parse('#1BCDF4');
-let rr = _$$z.parse('#C3AAFF');
-let rn = _$$z.parse('#FFFFFF');
+let t8 = defaultColorManipulator.parse('#9A93AE');
+let t6 = defaultColorManipulator.parse('#ED4F62');
+let t7 = defaultColorManipulator.parse('#EB8559');
+let t9 = defaultColorManipulator.parse('#F8D41C');
+let re = defaultColorManipulator.parse('#53E37C');
+let rt = defaultColorManipulator.parse('#1BCDF4');
+let rr = defaultColorManipulator.parse('#C3AAFF');
+let rn = defaultColorManipulator.parse('#FFFFFF');
 let ri = {
   defaultColor: rn,
-  backgroundColor: _$$z.parse('#2F2746'),
+  backgroundColor: defaultColorManipulator.parse('#2F2746'),
   lineNumberColor: {
     ...rn,
     a: 0.5
@@ -1310,7 +1309,7 @@ let rd = new class {
           t === 1 && rl(i, {
             startIndex: s.length,
             endIndex: s.length + r.length,
-            color: Nv.format(o.defaultColor),
+            color: alphaColorManipulator.format(o.defaultColor),
             isItalic: !1
           });
           s.push(...r);
@@ -1322,7 +1321,7 @@ let rd = new class {
             t !== rs && rl(i, {
               startIndex: s.length,
               endIndex: s.length + n.length,
-              color: Nv.format(o.tokenColors[t] || o.defaultColor),
+              color: alphaColorManipulator.format(o.tokenColors[t] || o.defaultColor),
               isItalic: t === 'comment'
             });
           }
@@ -1334,13 +1333,13 @@ let rd = new class {
     }(e, t, r);
   }
   getBackgroundColor(e) {
-    return Nv.format(ra(e).backgroundColor);
+    return alphaColorManipulator.format(ra(e).backgroundColor);
   }
   getLineNumberColor(e) {
-    return Nv.format(ra(e).lineNumberColor);
+    return alphaColorManipulator.format(ra(e).lineNumberColor);
   }
   getCursorColor(e) {
-    return Nv.format(ra(e).cursorColor);
+    return alphaColorManipulator.format(ra(e).cursorColor);
   }
 }();
 let rx = new class {
@@ -2191,7 +2190,7 @@ function iW() {
   } = i;
   interstitialType === OnboardingStep.ONBOARDING && (e = renderI18nText('community.seller.setup_complete'), t = renderI18nText('community.seller.head_back_to_figma_to_start_selling'), r = _$$A3, n = 'community_monetization_desktop_interstitial--stripeToFigmaLogo--819Zk');
   return jsx(_$$w, {
-    children: jsx(_$$u4, {
+    children: jsx(CustomModalComponent, {
       useOriginalSrcFills: !0,
       imageSrc: r,
       imageClassName: n,
@@ -2952,7 +2951,7 @@ async function aB(e) {
   return await a$(message);
 }
 async function aG(e) {
-  if (M0()) {
+  if (isServerSideRedactionEnabled()) {
     try {
       let t = await aj(e, 'fig-file');
       return {
@@ -2972,7 +2971,7 @@ async function aG(e) {
   };
 }
 async function aV(e, t, r) {
-  if (M0()) {
+  if (isServerSideRedactionEnabled()) {
     try {
       let n = await aU(e, t, r);
       return {
@@ -2989,7 +2988,7 @@ async function aV(e, t, r) {
   });
 }
 async function aH(e) {
-  if (M0()) {
+  if (isServerSideRedactionEnabled()) {
     try {
       let t = await aj(e, 'checkpoint');
       return {
@@ -3006,7 +3005,7 @@ async function aH(e) {
   });
 }
 async function az(e) {
-  if (M0()) {
+  if (isServerSideRedactionEnabled()) {
     try {
       let t = await aj(e, 'fig-diff');
       return {
@@ -3026,7 +3025,7 @@ async function aW({
   redactedBufferUrl: e,
   unredactedMetadataUrl: t
 }) {
-  if (M0()) {
+  if (isServerSideRedactionEnabled()) {
     try {
       return {
         buffer: await a$(e),
@@ -3149,7 +3148,7 @@ async function aQ({
           schema: n
         };
       })),
-      sensitiveTextPolicy: VG() ? 'show' : 'hide',
+      sensitiveTextPolicy: isServerSideJournalRedactionEnabled() ? 'show' : 'hide',
       fileKey: e,
       startSequenceNumber: t ?? null,
       endSequenceNumber: r ?? null
@@ -3265,7 +3264,7 @@ async function a2(e, t, r) {
   })).filter(e => !(t && Number(e.endSequenceNumber) < Number(t) || r && Number(e.startSequenceNumber) > Number(r)));
 }
 async function a5(e) {
-  if (VG()) return aB(e);
+  if (isServerSideJournalRedactionEnabled()) return aB(e);
   let {
     entry
   } = (await getRequest(`/api/admin/multiplayer_journal/${e.fileKey}/${e.endSequenceNumber}`)).data.meta;

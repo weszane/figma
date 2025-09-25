@@ -1,3 +1,4 @@
+import type { UseDispatch } from 'react-redux'
 import type { Dispatch, Store } from 'redux'
 import type { AppState as App } from './app.js'
 import type { EarlyArgs, Fig as FigType, InitialOptions } from './global.d.ts'
@@ -13,7 +14,7 @@ declare global {
   let mpGlobal: any
   type AppState = App
   let TaskController = TaskControllerPrority
-  
+  type Dispatch = (action: any) => any;
   interface Window {
     INITIAL_OPTIONS: InitialOptions
     EARLY_ARGS: EarlyArgs

@@ -14,7 +14,7 @@ import { dn } from "../figma_app/994403";
 import { BrowserInfo } from "../figma_app/778880";
 import { cx } from "../figma_app/558929";
 import { showModalHandler } from "../905/156213";
-import { k as _$$k } from "../905/882646";
+import { generateCommunityUrl } from "../905/882646";
 import { selectCurrentUser } from "../905/372672";
 import { isWidget } from "../figma_app/45218";
 import { ManifestEditorType } from "../figma_app/155287";
@@ -66,7 +66,7 @@ function T(e) {
             }
             toggleSwitchEditorDropdown(d);
           } else {
-            let i = _$$k(e.resource);
+            let i = generateCommunityUrl(e.resource);
             t(cx({
               isWidget: c,
               redirectPath: i

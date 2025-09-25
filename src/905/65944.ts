@@ -34,7 +34,7 @@ import { useCurrentTool, useSceneGraphSelector, useAppModelPropsShallow } from "
 import { useCurrentUserOrgId } from "../905/845253";
 import { getCurrentTeam } from "../figma_app/598018";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { KeyboardReceiver } from "../905/826900";
 import { Rk } from "../figma_app/844696";
 import { nZ, tX as _$$tX, O1, AG } from "../905/28111";
@@ -115,7 +115,7 @@ import { bL as _$$bL2, c$ as _$$c$3 } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { Point } from "../905/736624";
 import { colorCSSManipulatorInstance } from "../905/989956";
-import { rC } from "../905/713722";
+import { FormattedHexColor } from "../905/713722";
 import { getVisibleTheme, useThemeContext } from "../905/640017";
 import { getThemeBorderStyle } from "../905/187165";
 import { FormattedInputVariant3 } from "../905/203369";
@@ -939,7 +939,7 @@ function tR({
   }, [e, i, u]);
   let D = useCallback(t => {
     t.preventDefault();
-    S.current && s(e, cn(S.current));
+    S.current && s(e, calculatePickerPositionLeft(S.current));
   }, [e, s]);
   let L = useMemo(() => ({
     blendMode: "NORMAL",
@@ -1281,7 +1281,7 @@ function tz(e) {
     a: 1
   };
   let f = colorCSSManipulatorInstance.format(g);
-  let _ = new rC({
+  let _ = new FormattedHexColor({
     parseAlpha: !1
   });
   return jsxs(Fragment, {
@@ -1346,7 +1346,7 @@ function tz(e) {
           className: "noise_settings_modal--colorValueContainer--K2zYz paint_panels--colorValueContainer--DGeSP raw_components--borderFocusWithin--BaipZ paint_panels--_baseColorValueContainer--t-UIV raw_components--base--T7G0z raw_components--singleRowHeight--dKM4t",
           children: [jsx(_$$J, {
             onClick: () => {
-              t ? l() : (s(cn(o.current)), i(!0));
+              t ? l() : (s(calculatePickerPositionLeft(o.current)), i(!0));
             },
             className: "noise_settings_modal--chit--KFm5o",
             color: e.paint.color,
@@ -1869,7 +1869,7 @@ export let $$ii1 = forwardRef(function ({
   let ew = useCallback(() => {
     let e = ed.current;
     if (!e) return;
-    let t = cn(e, _$$i);
+    let t = calculatePickerPositionLeft(e, _$$i);
     ex.current = t;
     eE(!0);
   }, [ed]);
@@ -2250,7 +2250,7 @@ export function $$io0({
   function K() {
     let e = M.current;
     if (!e) return;
-    let t = cn(e, _$$i);
+    let t = calculatePickerPositionLeft(e, _$$i);
     G.current = t;
     V(!0);
   }

@@ -42,7 +42,7 @@ import { fileActionEnum } from "../figma_app/630077";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
-import { uf, yA } from "../905/769";
+import { ImportStatus, attachBranch } from "../905/769";
 import { liveStoreInstance } from "../905/713695";
 import { PdfConfirmationModal } from "../0c62c2fd/653470";
 let J = "file_import_modal--scrollContainer--rcZDu";
@@ -59,10 +59,10 @@ function q(e) {
   let g = $$ea7();
   let h = useSelector(e => "folder" === e.selectedView.view ? e.selectedView.folderId : null);
   let x = liveStoreInstance.Folder.useValue(h).data;
-  let [v, T] = useState(uf.IMPORTING_FILES);
-  $$el6(v === uf.IMPORTING_FILES || v === uf.ATTACHING_BRANCH);
+  let [v, T] = useState(ImportStatus.IMPORTING_FILES);
+  $$el6(v === ImportStatus.IMPORTING_FILES || v === ImportStatus.ATTACHING_BRANCH);
   let I = x?.name || getI18nString("file_browser.tool_bar.drafts");
-  let N = v === uf.SUCCESS ? getI18nString("file_browser.file_import_view.imported_to_folder", {
+  let N = v === ImportStatus.SUCCESS ? getI18nString("file_browser.file_import_view.imported_to_folder", {
     folderName: I
   }) : getI18nString("file_browser.file_import_view.import_to_folder", {
     folderName: I
@@ -75,14 +75,14 @@ function q(e) {
     let s = null;
     let i = null;
     let o = null;
-    let l = $$er5(e === uf.SUCCESS, t, r);
+    let l = $$er5(e === ImportStatus.SUCCESS, t, r);
     switch (e) {
-      case uf.IMPORTING_FILES:
+      case ImportStatus.IMPORTING_FILES:
         s = l.statusIcon;
         i = l.statusMessage;
         o = l.statusMessageSecondary;
         break;
-      case uf.ATTACHING_BRANCH:
+      case ImportStatus.ATTACHING_BRANCH:
         s = jsx(LoadingSpinner, {
           imageBacked: !0,
           testId: "loadingSpinner"
@@ -101,13 +101,13 @@ function q(e) {
           })
         });
         break;
-      case uf.SUCCESS:
+      case ImportStatus.SUCCESS:
         s = l.statusIcon;
         i = l.statusMessage;
         t.importedFiles === t.totalFiles && (i = renderI18nText("file_browser.file_import_view.repo.success"));
         o = l.statusMessageSecondary;
         break;
-      case uf.ERROR:
+      case ImportStatus.ERROR:
         s = jsx(_$$R, {});
         i = renderI18nText("file_browser.file_import_view.repo.error");
         break;
@@ -138,16 +138,16 @@ function q(e) {
   });
   useEffect(() => {
     if (f) {
-      T(uf.ATTACHING_BRANCH);
+      T(ImportStatus.ATTACHING_BRANCH);
       let e = Object.values(fileImport.files);
       let r = e.find(e => e.name.includes("branch tip"))?.fileKey;
       let a = e.find(e => e.name.includes("branch point"))?.fileKey;
       let s = e.find(e => e.name.includes("main tip"))?.fileKey;
-      r && a && s ? yA(r, a, s).then(() => {
-        T(uf.SUCCESS);
+      r && a && s ? attachBranch(r, a, s).then(() => {
+        T(ImportStatus.SUCCESS);
       }).catch(() => {
-        T(uf.ERROR);
-      }) : (T(uf.ERROR), console.error("Missing branch key, branch point key, or main tip key files"));
+        T(ImportStatus.ERROR);
+      }) : (T(ImportStatus.ERROR), console.error("Missing branch key, branch point key, or main tip key files"));
     }
   }, [f, fileImport.files]);
   return jsx(ModalRootComponent, {

@@ -55,7 +55,7 @@ import { JR, p4, De } from "../905/496627";
 import { shouldHandleMultiTouchOrPressure } from "../figma_app/753501";
 import { F as _$$F } from "../905/258517";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { Y as _$$Y } from "../905/1768";
+import { useClickOutside } from "../905/1768";
 var n = {};
 require.d(n, {
   GLARE_ANIMATION: () => ej,
@@ -1250,7 +1250,7 @@ function tc({
   let _ = useCallback(() => {
     p(stopReactingAction());
   }, [p]);
-  _$$Y(_, {
+  useClickOutside(_, {
     closeOnEsc: !0,
     ignore: "allClicks"
   });

@@ -5,7 +5,7 @@ import { DesignGraphElements } from "../figma_app/763686";
 import o from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
-import { z5 } from "../905/713722";
+import { defaultColorManipulator } from "../905/713722";
 import { S7, sX } from "../figma_app/259578";
 import { nm, Gu } from "../figma_app/90441";
 import { A } from "../905/139173";
@@ -98,8 +98,8 @@ export function $$E0({
     onClose: () => {
       if (currentTool !== DesignGraphElements.DROPPER_COLOR) {
         let t = x.current?.value ?? "";
-        if (z5.format(e) !== t) try {
-          let r = z5.parse(t, e);
+        if (defaultColorManipulator.format(e) !== t) try {
+          let r = defaultColorManipulator.parse(t, e);
           a(r);
         } catch (t) {
           a(e);

@@ -31,7 +31,7 @@ import { $L, us } from "../figma_app/136698";
 import { _ as _$$_ } from "../figma_app/433187";
 import { setupCursorChatDisabledCheck } from "../figma_app/403368";
 import { Qn } from "../figma_app/580087";
-import { Y as _$$Y } from "../905/1768";
+import { useClickOutside } from "../905/1768";
 import { L as _$$L } from "../905/453756";
 import { zG } from "../figma_app/47958";
 import { b9 } from "../figma_app/765161";
@@ -296,7 +296,7 @@ function eg({
     p(stopChattingThunk());
   }, [p]);
   let T = W();
-  _$$Y(y, {
+  useClickOutside(y, {
     closeOnEsc: !0,
     ignore: [d.current, b9(), Tc(Qn)]
   });

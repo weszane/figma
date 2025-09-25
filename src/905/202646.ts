@@ -1,127 +1,205 @@
-import { imagePaintDefaults, paintDefaults, shadowEffectDefaults, blurEffectDefaults } from "../905/712000";
-import { exists } from "../905/372580";
-import { solid, WINDING_RULE_DEFAULT_VALUE, hexToRgb } from "../905/719694";
-exports.normalizeEffect = exports.normalizePadding = exports.normalizeVerticalConstraint = exports.normalizeHorizontalConstraint = exports.normalizeSvgPath = exports.normalizePath = exports.normalizeFill = exports.normalizePaint = exports.normalizeProps = void 0;
-function s(e) {
-  return "image" === e.type ? Object.assign(Object.assign({}, imagePaintDefaults()), e) : Object.assign(Object.assign({}, paintDefaults()), e);
+import { exists } from '../905/372580'
+import { blurEffectDefaults, imagePaintDefaults, paintDefaults, shadowEffectDefaults } from '../905/712000'
+import { hexToRgb, solid, WINDING_RULE_DEFAULT_VALUE } from '../905/719694'
+
+/**
+ * Normalizes a paint object by merging it with appropriate defaults
+ * (Original function: normalizePaint)
+ */
+export function normalizePaint(paint: any): any {
+  const defaults = paint.type === 'image' ? imagePaintDefaults() : paintDefaults()
+  return { ...defaults, ...paint }
 }
-function o(e = []) {
-  return "string" == typeof e ? e.startsWith("--") ? [{
-    type: "css-var",
-    value: e,
-    visible: !0
-  }] : [s(solid(e))] : Array.isArray(e) ? e.map(s) : "type" in e ? [s(e)] : [Object.assign(Object.assign({
-    type: "solid"
-  }, paintDefaults()), {
-    color: e
-  })];
-}
-function l(e) {
-  return "string" == typeof e ? {
-    path: e,
-    windingRule: WINDING_RULE_DEFAULT_VALUE
-  } : e;
-}
-function d(e = []) {
-  return Array.isArray(e) ? e.map(l) : [l(e)];
-}
-function c(e) {
-  return exists(e) ? "number" == typeof e ? {
-    type: "left",
-    offset: e
-  } : e : {
-    type: "left",
-    offset: 0
-  };
-}
-function u(e) {
-  return exists(e) ? "number" == typeof e ? {
-    type: "top",
-    offset: e
-  } : e : {
-    type: "top",
-    offset: 0
-  };
-}
-function p(e) {
-  var t;
-  var i;
-  var n;
-  var a;
-  var s;
-  var o;
-  var l;
-  var d;
-  return exists(e) && ("object" != typeof e || 0 !== Object.keys(e).length) ? "number" == typeof e ? {
-    top: e,
-    right: e,
-    bottom: e,
-    left: e
-  } : "vertical" in e || "horizontal" in e ? {
-    top: null !== (t = e.vertical) && void 0 !== t ? t : 0,
-    bottom: null !== (i = e.vertical) && void 0 !== i ? i : 0,
-    right: null !== (n = e.horizontal) && void 0 !== n ? n : 0,
-    left: null !== (a = e.horizontal) && void 0 !== a ? a : 0
-  } : {
-    top: null !== (s = e.top) && void 0 !== s ? s : 0,
-    right: null !== (o = e.right) && void 0 !== o ? o : 0,
-    bottom: null !== (l = e.bottom) && void 0 !== l ? l : 0,
-    left: null !== (d = e.left) && void 0 !== d ? d : 0
-  } : {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0
-  };
-}
-function m(e = []) {
-  return (Array.isArray(e) ? e : [e]).map(e => {
-    if ("drop-shadow" === e.type || "inner-shadow" === e.type) {
-      let t = e.color;
-      return Object.assign(Object.assign(Object.assign({}, shadowEffectDefaults()), e), {
-        color: "string" == typeof t ? hexToRgb(t) : t
-      });
+
+/**
+ * Normalizes fill values into a standardized array format
+ * (Original function: normalizeFill)
+ */
+export function normalizeFill(fill: any = []): any[] {
+  if (typeof fill === 'string') {
+    if (fill.startsWith('--')) {
+      return [{
+        type: 'css-var',
+        value: fill,
+        visible: true,
+      }]
     }
-    return Object.assign(Object.assign({}, blurEffectDefaults()), e);
-  });
-}
-exports.normalizeProps = function (e) {
-  let t = {};
-  for (let i in e) switch (i) {
-    case "fill":
-      t.fill = o(e.fill);
-      break;
-    case "fillPath":
-      t.fillPath = d(e.fillPath);
-      break;
-    case "strokePath":
-      t.strokePath = d(e.strokePath);
-      break;
-    case "stroke":
-      t.stroke = o(e.stroke);
-      break;
-    case "effect":
-      t.effect = m(e.effect);
-      break;
-    case "padding":
-      t.padding = p(e.padding);
-      break;
-    case "x":
-      t.x = c(e.x);
-      break;
-    case "y":
-      t.y = u(e.y);
-      break;
-    default:
-      t[i] = e[i];
+    return [normalizePaint(solid(fill))]
   }
-  return t;
-};
-exports.normalizePaint = s;
-exports.normalizeFill = o;
-exports.normalizePath = l;
-exports.normalizeSvgPath = d;
-exports.normalizeHorizontalConstraint = c;
-exports.normalizeVerticalConstraint = u;
-exports.normalizePadding = p;
-exports.normalizeEffect = m;
+
+  if (Array.isArray(fill)) {
+    return fill.map(normalizePaint)
+  }
+
+  if ('type' in fill) {
+    return [normalizePaint(fill)]
+  }
+
+  return [{
+    type: 'solid',
+    ...paintDefaults(),
+    color: fill,
+  }]
+}
+
+/**
+ * Normalizes a path object, ensuring it has a winding rule
+ * (Original function: normalizePath)
+ */
+export function normalizePath(path: any): any {
+  if (typeof path === 'string') {
+    return {
+      path,
+      windingRule: WINDING_RULE_DEFAULT_VALUE,
+    }
+  }
+  return path
+}
+
+/**
+ * Normalizes SVG paths into an array of normalized paths
+ * (Original function: normalizeSvgPath)
+ */
+export function normalizeSvgPath(paths: any = []): any[] {
+  return Array.isArray(paths) ? paths.map(normalizePath) : [normalizePath(paths)]
+}
+
+/**
+ * Normalizes horizontal constraint values
+ * (Original function: normalizeHorizontalConstraint)
+ */
+export function normalizeHorizontalConstraint(constraint: any): any {
+  if (exists(constraint)) {
+    if (typeof constraint === 'number') {
+      return {
+        type: 'left',
+        offset: constraint,
+      }
+    }
+    return constraint
+  }
+
+  return {
+    type: 'left',
+    offset: 0,
+  }
+}
+
+/**
+ * Normalizes vertical constraint values
+ * (Original function: normalizeVerticalConstraint)
+ */
+export function normalizeVerticalConstraint(constraint: any): any {
+  if (exists(constraint)) {
+    if (typeof constraint === 'number') {
+      return {
+        type: 'top',
+        offset: constraint,
+      }
+    }
+    return constraint
+  }
+
+  return {
+    type: 'top',
+    offset: 0,
+  }
+}
+
+/**
+ * Normalizes padding values into a consistent object structure
+ * (Original function: normalizePadding)
+ */
+export function normalizePadding(padding: any): any {
+  if (!exists(padding) || (typeof padding === 'object' && Object.keys(padding).length === 0)) {
+    return {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    }
+  }
+
+  if (typeof padding === 'number') {
+    return {
+      top: padding,
+      right: padding,
+      bottom: padding,
+      left: padding,
+    }
+  }
+
+  if ('vertical' in padding || 'horizontal' in padding) {
+    return {
+      top: padding.vertical ?? 0,
+      bottom: padding.vertical ?? 0,
+      right: padding.horizontal ?? 0,
+      left: padding.horizontal ?? 0,
+    }
+  }
+
+  return {
+    top: padding.top ?? 0,
+    right: padding.right ?? 0,
+    bottom: padding.bottom ?? 0,
+    left: padding.left ?? 0,
+  }
+}
+
+/**
+ * Normalizes effect objects by applying appropriate defaults and processing colors
+ * (Original function: normalizeEffect)
+ */
+export function normalizeEffect(effects: any = []): any[] {
+  const effectArray = Array.isArray(effects) ? effects : [effects]
+
+  return effectArray.map((effect) => {
+    if (effect.type === 'drop-shadow' || effect.type === 'inner-shadow') {
+      const color = typeof effect.color === 'string' ? hexToRgb(effect.color) : effect.color
+      return { ...shadowEffectDefaults(), ...effect, color }
+    }
+
+    return { ...blurEffectDefaults(), ...effect }
+  })
+}
+
+/**
+ * Normalizes various properties of an object according to their specific rules
+ * (Original function: normalizeProps)
+ */
+export function normalizeProps(props: any): any {
+  const normalized: any = {}
+
+  for (const key in props) {
+    switch (key) {
+      case 'fill':
+        normalized.fill = normalizeFill(props.fill)
+        break
+      case 'fillPath':
+        normalized.fillPath = normalizeSvgPath(props.fillPath)
+        break
+      case 'strokePath':
+        normalized.strokePath = normalizeSvgPath(props.strokePath)
+        break
+      case 'stroke':
+        normalized.stroke = normalizeFill(props.stroke)
+        break
+      case 'effect':
+        normalized.effect = normalizeEffect(props.effect)
+        break
+      case 'padding':
+        normalized.padding = normalizePadding(props.padding)
+        break
+      case 'x':
+        normalized.x = normalizeHorizontalConstraint(props.x)
+        break
+      case 'y':
+        normalized.y = normalizeVerticalConstraint(props.y)
+        break
+      default:
+        normalized[key] = props[key]
+    }
+  }
+
+  return normalized
+}

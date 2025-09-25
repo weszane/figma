@@ -52,7 +52,7 @@ import { jv } from "../905/84777";
 import { wn } from "../9420/795870";
 import { trackUserEvent } from "../figma_app/314264";
 import { collaboratorSet } from "../905/332483";
-import { K as _$$K } from "../905/3140";
+import { renderRequestErrorInterstitial } from "../905/3140";
 import { Al } from "../9420/394825";
 import { y4 } from "../figma_app/298277";
 import { FResourceCategoryType, FUserRoleType } from "../figma_app/191312";
@@ -1125,7 +1125,7 @@ export function $$eR1(e) {
     }
   });
   let [c] = handleSuspenseRetainRelease(o);
-  if ("loaded" !== c.status) return jsx(_$$K, {});
+  if ("loaded" !== c.status) return jsx(renderRequestErrorInterstitial, {});
   let u = c.data;
   return jsx(ErrorBoundaryCrash, {
     team: ServiceCategories.MONETIZATION_UPGRADES,

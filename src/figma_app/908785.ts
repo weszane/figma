@@ -28,7 +28,7 @@ import { hidePickerThunk, showPickerThunk, hideStylePicker } from "../figma_app/
 import { sw } from "../figma_app/914957";
 import { Xo } from "../figma_app/482495";
 import { getObservableValue } from "../figma_app/84367";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { d as _$$d } from "../905/976845";
 import { A as _$$A } from "../905/891805";
 import { AutoInteractableWrapper } from "../905/277716";
@@ -154,7 +154,7 @@ function X(e) {
     return useCallback(() => {
       if (r) t(hidePickerThunk());else {
         if (!e || !e.current) return;
-        let r = cn(e.current);
+        let r = calculatePickerPositionLeft(e.current);
         t(showPickerThunk({
           id: j,
           initialX: r.x,

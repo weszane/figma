@@ -1,128 +1,259 @@
-import { parseColor, setAlpha } from "../figma_app/191804";
-import { getI18nString } from "../905/303541";
-import { AUTO_MARKER, isInvalidValue, isAutoMarker } from "../905/216495";
-import { ColorManipulator } from "../905/550748";
-class o extends ColorManipulator {
-  constructor(e = {}) {
-    super();
-    this.options = e;
+import type { Color } from '../../types/app'
+import { AUTO_MARKER, isAutoMarker, isInvalidValue } from '../905/216495'
+import { getI18nString } from '../905/303541'
+import { ColorManipulator } from '../905/550748'
+import { parseColor, setAlpha } from '../figma_app/191804'
+
+interface ColorOptions {
+  parseAlpha?: boolean
+  formatAlpha?: boolean
+}
+
+
+interface SelectionRange {
+  start: number
+  end: number
+}
+
+interface IncrementTargets {
+  r?: boolean
+  g?: boolean
+  b?: boolean
+}
+
+class HexColorManipulator extends ColorManipulator {
+  private options: ColorOptions
+
+  constructor(options: ColorOptions = {}) {
+    super()
+    this.options = options
   }
-  parse(e, t) {
-    let i = t?.a ?? 1;
-    let r = parseColor(e, this.options.parseAlpha ? i : void 0);
-    if (!r) throw Error("Could not parse hex");
-    return this.options.parseAlpha ? r : setAlpha(r, i);
-  }
-  format(e) {
-    if (!e) return "";
-    let t = this.floatToHex(e.r);
-    let i = this.floatToHex(e.g);
-    let n = this.floatToHex(e.b);
-    if (this.options.formatAlpha && 1 !== e.a) {
-      let r = this.floatToHex(e.a);
-      return `#${t}${i}${n}${r}`.toUpperCase();
+
+  parse(colorString: string, templateColor?: Partial<Color>): Color {
+    const alpha = templateColor?.a ?? 1
+    const parsedColor = parseColor(colorString, this.options.parseAlpha ? alpha : undefined)
+
+    if (!parsedColor) {
+      throw new Error('Could not parse hex')
     }
-    return `#${t}${i}${n}`.toUpperCase();
+
+    return this.options.parseAlpha ? parsedColor : setAlpha(parsedColor, alpha)
   }
-  formatForAndroid(e) {
-    if (1 === e.a) return this.format(e);
-    let t = this.floatToHex(e.a);
-    let i = this.floatToHex(e.r);
-    let n = this.floatToHex(e.g);
-    let r = this.floatToHex(e.b);
-    return `#${t}${i}${n}${r}`.toUpperCase();
+
+  format(color: Color | null): string {
+    if (!color) {
+      return ''
+    }
+
+    const red = this.floatToHex(color.r)
+    const green = this.floatToHex(color.g)
+    const blue = this.floatToHex(color.b)
+
+    if (this.options.formatAlpha && color.a !== 1) {
+      const alpha = this.floatToHex(color.a)
+      return `#${red}${green}${blue}${alpha}`.toUpperCase()
+    }
+
+    return `#${red}${green}${blue}`.toUpperCase()
   }
-  getIncrementTargets(e, t) {
-    let {
-      start,
-      end
-    } = t;
-    let r = start === end;
-    let a = {};
-    (start <= 2 || r && 3 === start) && (a.r = !0);
-    (start <= 4 && end > 3 || r && 5 === start) && (a.g = !0);
-    (start <= 6 && end > 5 || r && 7 === start) && (a.b = !0);
-    return a;
+
+  formatForAndroid(color: Color): string {
+
+    if (color.a === 1) {
+      return this.format(color)
+    }
+
+    const alpha = this.floatToHex(color.a)
+    const red = this.floatToHex(color.r)
+    const green = this.floatToHex(color.g)
+    const blue = this.floatToHex(color.b)
+
+    return `#${alpha}${red}${green}${blue}`.toUpperCase()
   }
-  getSelection(e, t) {
-    let i = {
+
+  getIncrementTargets(value: Color, selection: SelectionRange): IncrementTargets {
+    const { start, end } = selection
+    const isSinglePosition = start === end
+    const targets: IncrementTargets = {}
+
+    if (start <= 2 || (isSinglePosition && start === 3)) {
+      targets.r = true
+    }
+
+    if (start <= 4 && end > 3 || (isSinglePosition && start === 5)) {
+      targets.g = true
+    }
+
+    if (start <= 6 && end > 5 || (isSinglePosition && start === 7)) {
+      targets.b = true
+    }
+
+    return targets
+  }
+
+  getSelection(value: Color, targets: IncrementTargets): SelectionRange {
+    const selection: SelectionRange = {
       start: 1,
-      end: 1
-    };
-    t.r ? i.start = 1 : t.g ? i.start = 3 : i.start = 5;
-    t.b ? i.end = 7 : t.g ? i.end = 5 : i.end = 3;
-    return i;
+      end: 1,
+    }
+
+    if (targets.r) {
+      selection.start = 1
+    }
+    else if (targets.g) {
+      selection.start = 3
+    }
+    else {
+      selection.start = 5
+    }
+
+    if (targets.b) {
+      selection.end = 7
+    }
+    else if (targets.g) {
+      selection.end = 5
+    }
+    else {
+      selection.end = 3
+    }
+
+    return selection
   }
-  floatToHex(e) {
-    let t = this.normalize255(e).toString(16);
-    1 === t.length && (t = "0" + t);
-    return t;
+
+  protected floatToHex(floatValue: number): string {
+    let hex = this.normalize255(floatValue).toString(16)
+    if (hex.length === 1) {
+      hex = `0${hex}`
+    }
+    return hex
   }
 }
-export class $$l3 extends o {
-  constructor(e = {}) {
-    super(e);
+
+export class FormattedHexColor extends HexColorManipulator {
+  constructor(options: ColorOptions = {}) {
+    super(options)
   }
-  format(e, {
-    withAlpha: t = !1,
-    showDot: i = !1
-  } = {}) {
-    let n = this.floatToHex(e.r);
-    let r = this.floatToHex(e.g);
-    let a = this.floatToHex(e.b);
-    let s = this.floatToHex(e.a);
-    let o = (100 * e.a).toLocaleString("en", {
-      maximumFractionDigits: 2
-    }) + "%";
-    return t ? i ? `${n}${r}${a} \xb7 ${o}`.toUpperCase() : `${n}${r}${a}${s}`.toUpperCase() : `${n}${r}${a}`.toUpperCase();
+
+  format(color: Color, options: { withAlpha?: boolean, showDot?: boolean } = {}): string {
+    const { withAlpha = false, showDot = false } = options
+
+    const red = this.floatToHex(color.r)
+    const green = this.floatToHex(color.g)
+    const blue = this.floatToHex(color.b)
+    const alpha = this.floatToHex(color.a)
+    const alphaPercentage = `${(100 * color.a).toLocaleString('en', {
+      maximumFractionDigits: 2,
+    })}%`
+
+    if (withAlpha) {
+      if (showDot) {
+        return `${red}${green}${blue} \xB7 ${alphaPercentage}`.toUpperCase()
+      }
+      return `${red}${green}${blue}${alpha}`.toUpperCase()
+    }
+
+    return `${red}${green}${blue}`.toUpperCase()
   }
-  getIncrementTargets(e, t) {
-    let {
-      start,
-      end
-    } = t;
-    let r = start === end;
-    let a = {};
-    (start <= 1 || r && 2 === start) && (a.r = !0);
-    (start <= 3 && end > 2 || r && 4 === start) && (a.g = !0);
-    (start <= 5 && end > 4 || r && 6 === start) && (a.b = !0);
-    return a;
+
+  getIncrementTargets(value: Color, selection: SelectionRange): IncrementTargets {
+    const { start, end } = selection
+    const isSinglePosition = start === end
+    const targets: IncrementTargets = {}
+
+    if (start <= 1 || (isSinglePosition && start === 2)) {
+      targets.r = true
+    }
+
+    if (start <= 3 && end > 2 || (isSinglePosition && start === 4)) {
+      targets.g = true
+    }
+
+    if (start <= 5 && end > 4 || (isSinglePosition && start === 6)) {
+      targets.b = true
+    }
+
+    return targets
   }
-  getSelection(e, t) {
-    let i = {
+
+  getSelection(value: Color, targets: IncrementTargets): SelectionRange {
+    const selection: SelectionRange = {
       start: 1,
-      end: 1
-    };
-    t.r ? i.start = 1 : t.g ? i.start = 3 : i.start = 5;
-    t.b ? i.end = 7 : t.g ? i.end = 5 : i.end = 3;
-    i.start -= 1;
-    i.end -= 1;
-    return i;
+      end: 1,
+    }
+
+    if (targets.r) {
+      selection.start = 1
+    }
+    else if (targets.g) {
+      selection.start = 3
+    }
+    else {
+      selection.start = 5
+    }
+
+    if (targets.b) {
+      selection.end = 7
+    }
+    else if (targets.g) {
+      selection.end = 5
+    }
+    else {
+      selection.end = 3
+    }
+
+    selection.start -= 1
+    selection.end -= 1
+
+    return selection
   }
 }
-export class $$d0 extends $$l3 {
-  constructor(e = {}) {
-    super(e);
+
+export class AutoColorFormatter extends FormattedHexColor {
+  constructor(options: ColorOptions = {}) {
+    super(options)
   }
-  parse(e, t) {
-    return "auto".startsWith(e.toLowerCase()) ? AUTO_MARKER : super.parse(e, t);
+
+  parse(colorString: string, templateColor?: Partial<Color>) {
+    if ('auto'.startsWith(colorString.toLowerCase())) {
+      return AUTO_MARKER
+    }
+    return super.parse(colorString, templateColor)
   }
-  format(e) {
-    return e ? isInvalidValue(e) ? getI18nString("fullscreen.mixed") : isAutoMarker(e) ? getI18nString("fullscreen.properties_panel.stack_panel.auto") : super.format(e) : "";
+
+  format(color: Color | typeof AUTO_MARKER | null): string {
+    if (!color) {
+      return ''
+    }
+
+    if (isInvalidValue(color)) {
+      return getI18nString('fullscreen.mixed')
+    }
+
+    if (isAutoMarker(color)) {
+      return getI18nString('fullscreen.properties_panel.stack_panel.auto')
+    }
+
+    return super.format(color)
   }
-  clamp(e) {
-    return isAutoMarker(e) ? e : super.clamp(e);
+
+  clamp(color: Color | typeof AUTO_MARKER) {
+    if (isAutoMarker(color)) {
+      return color
+    }
+    return super.clamp(color)
   }
 }
-let $$c4 = new o();
-let $$u1 = new o({
-  parseAlpha: !0,
-  formatAlpha: !0
-});
-let $$p2 = new $$l3();
-new $$d0();
-export const C1 = $$d0;
-export const Nv = $$u1;
-export const TI = $$p2;
-export const rC = $$l3;
-export const z5 = $$c4;
+
+export const defaultColorManipulator = new HexColorManipulator()
+export const alphaColorManipulator = new HexColorManipulator({
+  parseAlpha: true,
+  formatAlpha: true,
+})
+export const formattedColorManipulator = new FormattedHexColor()
+
+
+export const C1 = AutoColorFormatter
+export const Nv = alphaColorManipulator
+export const TI = formattedColorManipulator
+export const rC = FormattedHexColor
+export const z5 = defaultColorManipulator

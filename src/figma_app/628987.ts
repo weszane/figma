@@ -39,7 +39,7 @@ import { selectUserFlag } from "../905/940356";
 import { getObservableValue } from "../figma_app/84367";
 import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { KindEnum } from "../905/129884";
-import { cn } from "../905/959568";
+import { calculatePickerPositionLeft } from "../905/959568";
 import { a3 } from "../905/188421";
 import { Cn } from "../905/882267";
 import { q9 } from "../905/698759";
@@ -171,7 +171,7 @@ export function $$em2({
     if (ef?.id === eo) eg(hidePickerThunk());else {
       eC(!0);
       eg(hideStylePicker());
-      let e = "row" === em ? cn(ej.current, parsePxNumber(kaq)) : ej.current.getBoundingClientRect();
+      let e = "row" === em ? calculatePickerPositionLeft(ej.current, parsePxNumber(kaq)) : ej.current.getBoundingClientRect();
       eg(showPickerThunk({
         id: eo,
         initialX: e.x,

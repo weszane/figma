@@ -12,7 +12,7 @@ var d = "[object Promise]";
 var f = "[object RegExp]";
 var p = "[object Set]";
 var g = "[object String]";
-var m = "[object Symbol]";
+var getDefaultFrameProps = "[object Symbol]";
 var b = "[object WeakMap]";
 var y = "[object ArrayBuffer]";
 var v = "[object DataView]";
@@ -29,7 +29,7 @@ var O = /\w*$/;
 var S = /^\[object .+?Constructor\]$/;
 var T = /^(?:0|[1-9]\d*)$/;
 var j = {};
-j[n] = j["[object Array]"] = j[y] = j[v] = j[s] = j[l] = j[ImageDownloadQueue] = j[x] = j[N] = j[E] = j[w] = j[c] = j[ExpiringCache] = j[h] = j[f] = j[p] = j[g] = j[m] = j[k] = j[q] = j[_] = j[L] = !0;
+j[n] = j["[object Array]"] = j[y] = j[v] = j[s] = j[l] = j[ImageDownloadQueue] = j[x] = j[N] = j[E] = j[w] = j[c] = j[ExpiringCache] = j[h] = j[f] = j[p] = j[g] = j[getDefaultFrameProps] = j[k] = j[q] = j[_] = j[L] = !0;
 j["[object Error]"] = j[o] = j[b] = !1;
 var C = "object" == typeof require.g && require.g && require.g.Object === Object && require.g;
 var R = "object" == typeof self && self && self.Object === Object && self;
@@ -414,7 +414,7 @@ module.exports = function (t) {
               return a;
             case p:
               return z(i ? r(V(t), !0) : V(t), P, new t.constructor());
-            case m:
+            case getDefaultFrameProps:
               return tE ? Object(tE.call(t)) : {};
           }
         }(e, Z, t, r);

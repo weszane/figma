@@ -16,7 +16,7 @@ import { dM, Eh } from "../figma_app/837840";
 import { getColorSpaceString } from "../figma_app/622881";
 import { f7 } from "../figma_app/896988";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { qo, cn } from "../905/959568";
+import { DEFAULT_PICKER_WIDTH, calculatePickerPositionLeft } from "../905/959568";
 import { J } from "../905/225412";
 import { L } from "../905/173490";
 import { X7 } from "../905/713167";
@@ -40,7 +40,7 @@ class k extends RecordingPureComponent {
     super(e);
     this.isNewUI = this.props.gradientUIv2;
     this.MARGIN_X = this.isNewUI ? 16 : 20;
-    this.WIDTH = qo - 2 * this.MARGIN_X;
+    this.WIDTH = DEFAULT_PICKER_WIDTH - 2 * this.MARGIN_X;
     this.HEIGHT = 12;
     this.HEIGHT_UI3 = 16;
     this.HEIGHT_UI3_NEWUI = 32;
@@ -233,7 +233,7 @@ class k extends RecordingPureComponent {
       this.onMouseMoveHelper(e, yesNoTrackingEnum.NO);
     };
     this.onMouseUp = handleMouseEvent(this, "mouseup", e => {
-      this.state.isNormalClick && this.contextMenuEnabled && this.props.contextMenu?.onColorPickerToggle(this.currentSelectedStopIndex(), cn(this.panelRef.current));
+      this.state.isNormalClick && this.contextMenuEnabled && this.props.contextMenu?.onColorPickerToggle(this.currentSelectedStopIndex(), calculatePickerPositionLeft(this.panelRef.current));
       this.onMouseMoveHelper(e, yesNoTrackingEnum.YES);
       this.setState({
         isDragging: !1,

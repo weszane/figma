@@ -13,7 +13,7 @@ import { P as _$$P } from '../905/537307';
 import { findTeamById } from '../905/613917';
 import { adminPermissionConfig } from '../905/654645';
 import { e0 } from '../905/696396';
-import { z5 } from '../905/713722';
+import { defaultColorManipulator } from '../905/713722';
 import { showTooltip } from '../905/765855';
 import { G as _$$G } from '../905/865520';
 import { colorCSSManipulatorInstance } from '../905/989956';
@@ -52,7 +52,7 @@ function H({
   let m = {
     uuid: fJ,
     name: getI18nString('whiteboard.color_palettes.figjam_colors'),
-    baseColors: TS(r).map(e => z5.format(e))
+    baseColors: TS(r).map(e => defaultColorManipulator.format(e))
   };
   if (!e) return jsx('div', {});
   let g = [m].concat(e).map((e, r) => jsx(z, {

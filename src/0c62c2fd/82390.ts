@@ -225,7 +225,7 @@ import { PageFolderFile } from '../905/652992';
 import { getResourceDataOrFallback } from '../905/663269';
 import { In } from '../905/672640';
 import { oW as _$$oW } from '../905/675859';
-import { u as _$$u9 } from '../905/684425';
+import { CustomModalComponent } from '../905/684425';
 import { g as _$$g3 } from '../905/687265';
 import { R as _$$R2 } from '../905/687502';
 import { a as _$$a10 } from '../905/692930';
@@ -18848,7 +18848,7 @@ let gZ = e => jsx('span', {
 let g0 = registerModal(e => {
   let t = useDispatch();
   let r = selectCurrentUser();
-  return r ? jsxs(_$$u9, {
+  return r ? jsxs(CustomModalComponent, {
     tintedModalBackground: !0,
     headerText: getI18nString('interstitial.unsubscribe_success_header'),
     children: [jsx('div', {

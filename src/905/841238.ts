@@ -13,19 +13,19 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { RecordableInput } from "../905/511649";
 import { Point } from "../905/736624";
 import { CloseButton } from "../905/17223";
-import { TQ, Zl } from "../905/211621";
+import { useModalConfig, PickerOptionType } from "../905/211621";
 import { LazyInputForwardRef } from "../905/408237";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { hidePickerThunk } from "../figma_app/91703";
-import { vq } from "../905/8732";
+import { hideInstanceSwapPicker } from "../905/8732";
 import { uP } from "../figma_app/933328";
 import { hideModal } from "../905/156213";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { registerModal } from "../905/102752";
 import { S as _$$S } from "../905/459477";
-import { D as _$$D, x as _$$x } from "../905/1253";
+import { INSTANCE_SWAP_TOGGLE_ID, InstanceSwapToggle } from "../905/1253";
 import { NO } from "../905/498139";
 import { Xj } from "../905/748636";
 import { getComponentPropDefaultValue, computeBackingGUID, VARIABLE_TYPE_CONFIG, DROPDOWN_HEIGHT, getComponentPropDisplayName, getDefaultStateForStateGroup, normalizeComponentPropValue } from "../figma_app/164212";
@@ -236,7 +236,7 @@ let $$X0 = registerModal(function (e) {
   };
   let eu = useCallback(() => {
     U(hideModal());
-    U(vq());
+    U(hideInstanceSwapPicker());
   }, [U]);
   let ep = DD({
     propType,
@@ -253,7 +253,7 @@ let $$X0 = registerModal(function (e) {
   let ef = VARIABLE_TYPE_CONFIG[propType];
   let {
     modalWidth
-  } = TQ(Zl.INSTANCE_SWAP_PICKER);
+  } = useModalConfig(PickerOptionType.INSTANCE_SWAP_PICKER);
   let eA = _I({
     type: "create"
   });
@@ -266,7 +266,7 @@ let $$X0 = registerModal(function (e) {
       resolvedType: e === VariableResolvedDataType.TEXT_DATA ? VariableResolvedDataType.STRING : e,
       onCreateVariable: lQ,
       onClose: () => {
-        isInstanceSwapPickerShown ? U(vq()) : U(hideModal());
+        isInstanceSwapPickerShown ? U(hideInstanceSwapPicker()) : U(hideModal());
         U(hidePickerThunk());
       },
       refField,
@@ -295,11 +295,11 @@ let $$X0 = registerModal(function (e) {
     initialWidth: DROPDOWN_HEIGHT,
     contentContainerClassName: "create_component_prop_modal--modal--Ln3y-",
     onClose: isInstanceSwapPickerShown ? () => {
-      U(vq());
+      U(hideInstanceSwapPicker());
     } : () => {
       U(hideModal());
     },
-    onClick: isInstanceSwapPickerShown ? () => U(vq()) : void 0,
+    onClick: isInstanceSwapPickerShown ? () => U(hideInstanceSwapPicker()) : void 0,
     initialPosition: eA,
     alwaysEnsureModalOnScreen: !0,
     disableDragging: !0,
@@ -338,11 +338,11 @@ let $$X0 = registerModal(function (e) {
         className: $,
         children: [jsx("label", {
           className: q,
-          htmlFor: propType === ComponentPropType.INSTANCE_SWAP ? _$$D : propType === ComponentPropType.VARIANT ? "create-component-prop-variant-input" : void 0,
+          htmlFor: propType === ComponentPropType.INSTANCE_SWAP ? INSTANCE_SWAP_TOGGLE_ID : propType === ComponentPropType.VARIANT ? "create-component-prop-variant-input" : void 0,
           children: renderI18nText("design_systems.component_properties.default_value")
         }), propType === ComponentPropType.INSTANCE_SWAP && jsx("div", {
           className: "create_component_prop_modal--selectInput--Oom9E",
-          children: jsx(_$$x, {
+          children: jsx(InstanceSwapToggle, {
             pickerID: "create-prop-modal-instance-swap-picker",
             pickerWidth: modalWidth,
             shouldPerformSwapOnClick: !1,

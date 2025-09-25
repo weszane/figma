@@ -11,7 +11,7 @@ import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { Ay } from "../figma_app/272902";
 import { useStorageEventSync } from "../905/657224";
 import { analyticsEventManager } from "../905/449184";
-import { Zl } from "../905/211621";
+import { PickerOptionType } from "../905/211621";
 import { X3, MM } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -77,7 +77,7 @@ let $$k2 = forwardRef(function ({
       focusIconButton: p,
       sessionId: d,
       queryId: i,
-      isPreferredValues: e === Zl.PREFERRED_VALUES_PICKER
+      isPreferredValues: e === PickerOptionType.PREFERRED_VALUES_PICKER
     })]
   });
 });

@@ -19,12 +19,12 @@ import { KeyCodes, isCommandEvent } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { RecordableInput } from "../905/511649";
 import { Point } from "../905/736624";
-import { TQ, Zl } from "../905/211621";
+import { useModalConfig, PickerOptionType } from "../905/211621";
 import { P as _$$P } from "../905/347284";
 import { S as _$$S } from "../figma_app/552746";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
-import { vq } from "../905/8732";
+import { hideInstanceSwapPicker } from "../905/8732";
 import { uP, Oe } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection, renameNode } from "../figma_app/741237";
@@ -41,7 +41,7 @@ import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { v as _$$v } from "../905/318279";
 import { q as _$$q } from "../figma_app/905311";
 import { S as _$$S2 } from "../905/459477";
-import { x as _$$x } from "../905/1253";
+import { InstanceSwapToggle } from "../905/1253";
 import { u as _$$u2 } from "../905/419626";
 import { l6, c$ } from "../905/794875";
 import { ow, OC, NA } from "../figma_app/150804";
@@ -122,12 +122,12 @@ export function $$eE1({
   } = xP(e);
   let U = useCallback(() => {
     l(hidePickerThunk());
-    l(vq());
+    l(hideInstanceSwapPicker());
   }, [l]);
   let B = new Point(t?.initialX, t?.initialY);
   let {
     modalWidth
-  } = TQ(Zl.INSTANCE_SWAP_PICKER);
+  } = useModalConfig(PickerOptionType.INSTANCE_SWAP_PICKER);
   let V = useCallback(e => {
     e.stopPropagation();
   }, []);
@@ -139,7 +139,7 @@ export function $$eE1({
     initialWidth: DROPDOWN_HEIGHT,
     headerSize: "small",
     onClose: U,
-    onClick: o ? () => l(vq()) : void 0,
+    onClick: o ? () => l(hideInstanceSwapPicker()) : void 0,
     recordingKey: generateRecordingKey("editComponentPropDefPicker", e.kind === InstanceType.VARIANT ? e.name : e.explicitDefID),
     children: [jsxs("div", {
       className: ep,
@@ -151,7 +151,7 @@ export function $$eE1({
         forwardedRef: inputRef,
         onBlur: P,
         onChange,
-        onClick: () => l(vq()),
+        onClick: () => l(hideInstanceSwapPicker()),
         onFocus,
         onKeyDown: e => {
           e.stopPropagation();
@@ -574,7 +574,7 @@ function eA({
   }) : void 0, [preferredValuesFetchError, retryPreferredValuesFetch]);
   return jsx("div", {
     className: eu,
-    children: jsx(_$$x, {
+    children: jsx(InstanceSwapToggle, {
       entrypointForLogging: _$$S2.InstancePickerEntrypoint.EDIT_COMPONENT_PROP_PICKER,
       instanceSwapNode: r,
       onSwapCallback: t => {
@@ -694,7 +694,7 @@ function ew({
 }) {
   let {
     modalWidth
-  } = TQ(Zl.INSTANCE_SWAP_PICKER);
+  } = useModalConfig(PickerOptionType.INSTANCE_SWAP_PICKER);
   let o = useCurrentFileKey();
   let l = Um();
   let d = useSelector(t => e?.type === ComponentPropType.INSTANCE_SWAP ? computeBackingGUID([e.defaultValue], t.mirror.sceneGraph) : null);

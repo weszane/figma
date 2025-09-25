@@ -1,64 +1,129 @@
-import { _o } from "../figma_app/516324";
-import { XHR } from "../905/910117";
-import { z } from "../905/875422";
-var $$s2 = (e => (e[e.IMPORTING_FILES = 0] = "IMPORTING_FILES", e[e.ATTACHING_BRANCH = 1] = "ATTACHING_BRANCH", e[e.SUCCESS = 2] = "SUCCESS", e[e.ERROR = 3] = "ERROR", e))($$s2 || {});
-export function $$o3(e, t, i) {
-  return XHR.post("/api/files/attach_branch", {
-    branch_tip_file_key: e,
-    branch_point_file_key: t,
-    main_tip_file_key: i
-  });
+import * as zip from '@zip.js/zip.js'
+import { z } from '../905/875422'
+import { XHR } from '../905/910117'
+
+/**
+ * Enum representing the status of the import process.
+ */
+enum ImportStatus {
+  IMPORTING_FILES = 0,
+  ATTACHING_BRANCH = 1,
+  SUCCESS = 2,
+  ERROR = 3,
 }
-export async function $$l0(e) {
-  let t = await _o();
-  let i = new t.ZipReader(new t.BlobReader(e));
-  let r = await i.getEntries();
-  let a = r.find(e => "meta.json" === e.filename);
-  let s = null;
-  let o = null;
-  let l = null;
-  if (!a || void 0 === a.getData) return;
-  let d = JSON.parse(await a.getData(new t.TextWriter()));
-  let c = d.branch_file_name;
-  let u = d.source_file_name;
-  for (let e of r) if (e.getData) try {
-    let i = await e.getData(new t.BlobWriter());
-    switch (e.filename) {
-      case "branch_point.fig":
-        s = i;
-        break;
-      case "branch_tip.fig":
-        o = i;
-        break;
-      case "main_tip.fig":
-        l = i;
+
+/**
+ * Interface for the extracted branch files.
+ */
+interface BranchFiles {
+  bp: Blob
+  bt: Blob
+  mt: Blob
+  branchFileName: string
+  sourceFileName: string
+}
+
+/**
+ * Attaches a branch by making an XHR POST request to the API.
+ * @param branchTipFileKey - The file key for the branch tip.
+ * @param branchPointFileKey - The file key for the branch point.
+ * @param mainTipFileKey - The file key for the main tip.
+ * @returns The XHR response.
+ */
+function attachBranch(branchTipFileKey: string, branchPointFileKey: string, mainTipFileKey: string) {
+  return XHR.post('/api/files/attach_branch', {
+    branch_tip_file_key: branchTipFileKey,
+    branch_point_file_key: branchPointFileKey,
+    main_tip_file_key: mainTipFileKey,
+  })
+}
+
+/**
+ * Parses metadata from the zip entry.
+ * @param metaEntry - The zip entry for meta.json.
+ * @returns Parsed metadata object.
+ */
+async function parseMetaData(metaEntry: zip.FileEntry): Promise<{ branch_file_name: string, source_file_name: string }> {
+  const data = await metaEntry.getData(new zip.TextWriter())
+  return JSON.parse(data)
+}
+
+/**
+ * Extracts specific .fig files from the zip entries.
+ * @param entries - Array of zip entries.
+ * @returns Object containing the extracted blobs.
+ */
+async function extractFigFiles(entries: zip.FileEntry[]): Promise<{ bp?: Blob, bt?: Blob, mt?: Blob }> {
+  const files: { bp?: Blob, bt?: Blob, mt?: Blob } = {}
+  for (const entry of entries) {
+    if (!entry.getData)
+      continue
+    try {
+      const blob = await entry.getData(new zip.BlobWriter())
+      switch (entry.filename) {
+        case 'branch_point.fig':
+          files.bp = blob
+          break
+        case 'branch_tip.fig':
+          files.bt = blob
+          break
+        case 'main_tip.fig':
+          files.mt = blob
+          break
+      }
     }
-  } catch (e) {
-    break;
+    catch {
+      // Skip entries that fail to read
+    }
   }
-  if (s && o && l) return {
-    bp: s,
-    bt: o,
-    mt: l,
-    branchFileName: c,
-    sourceFileName: u
-  };
+  return files
 }
-export function $$d1(e, t) {
-  e.dispatch(z({
-    name: `${t.branchFileName} (branch point)`,
-    blob: t.bp
-  }));
-  e.dispatch(z({
-    name: `${t.sourceFileName} (main tip)`,
-    blob: t.mt
-  }));
-  e.dispatch(z({
-    name: `${t.branchFileName} (branch tip)`,
-    blob: t.bt
-  }));
+
+/**
+ * Extracts branch files from a zip blob.
+ * @param zipBlob - The zip file as a Blob.
+ * @returns BranchFiles object if all required files are found, otherwise undefined.
+ */
+async function extractBranchFiles(zipBlob: Blob): Promise<BranchFiles | undefined> {
+  const zipReader = new zip.ZipReader(new zip.BlobReader(zipBlob))
+  const entries = await zipReader.getEntries() as zip.FileEntry[]
+  const metaEntry = entries.find(entry => entry.filename === 'meta.json')
+  if (!metaEntry || !metaEntry.getData)
+    return
+  const metaData = await parseMetaData(metaEntry)
+  const figFiles = await extractFigFiles(entries)
+  if (figFiles.bp && figFiles.bt && figFiles.mt) {
+    return {
+      bp: figFiles.bp,
+      bt: figFiles.bt,
+      mt: figFiles.mt,
+      branchFileName: metaData.branch_file_name,
+      sourceFileName: metaData.source_file_name,
+    }
+  }
 }
-export const Gc = $$l0;
-export const TA = $$d1;
-export const uf = $$s2;
-export const yA = $$o3;
+
+/**
+ * Dispatches branch files to the store.
+ * @param dispatch - The dispatch function.
+ * @param files - The BranchFiles object.
+ */
+function dispatchBranchFiles(dispatch: (action: any) => void, files: BranchFiles): void {
+  dispatch(z({
+    name: `${files.branchFileName} (branch point)`,
+    blob: files.bp,
+  }))
+  dispatch(z({
+    name: `${files.sourceFileName} (main tip)`,
+    blob: files.mt,
+  }))
+  dispatch(z({
+    name: `${files.branchFileName} (branch tip)`,
+    blob: files.bt,
+  }))
+}
+
+export const uf = ImportStatus
+export const yA = attachBranch
+export const Gc = extractBranchFiles
+export const TA = dispatchBranchFiles

@@ -28,18 +28,18 @@ var p = {
   enqueueSetState: function () { }
 };
 var g = Object.assign;
-var m = {};
+var getDefaultFrameProps = {};
 function _(e, n, i) {
   this.props = e;
   this.context = n;
-  this.refs = m;
+  this.refs = getDefaultFrameProps;
   this.updater = i || p;
 }
 function b() { }
 function y(e, n, i) {
   this.props = e;
   this.context = n;
-  this.refs = m;
+  this.refs = getDefaultFrameProps;
   this.updater = i || p;
 }
 _.prototype.isReactComponent = {};

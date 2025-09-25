@@ -1,4 +1,4 @@
-import { S8, rk, A0 } from "../905/687992";
+import { convertUnicodeDigits } from "../905/687992";
 export class $$r0 {
   opts;
   min = void 0;
@@ -27,17 +27,17 @@ export class $$r0 {
     });
   }
   parse(e) {
-    let t = parseFloat(S8(e));
+    let t = parseFloat(convertUnicodeDigits(e));
     if (!s(t)) throw Error(`Invalid number: ${e}`);
     return 0 === t ? 0 : t;
   }
   getNudgeAmount(e) {
-    return e ? this.opts.bigNudge ?? rk : this.opts.nudge ?? A0;
+    return e ? this.opts.bigNudge ?? 10 : this.opts.nudge ?? 1;
   }
   incrementBy(e, t, i) {
     return e + t;
   }
-  normalize = S8;
+  normalize = convertUnicodeDigits;
 }
 function a(e, t) {
   let i = {

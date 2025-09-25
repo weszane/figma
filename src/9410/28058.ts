@@ -29,7 +29,7 @@ import { jY, EI } from "../figma_app/21029";
 import { G as _$$G } from "../9410/312268";
 import { Kt } from "../figma_app/835688";
 import { l as _$$l } from "../9410/430547";
-import { Y } from "../905/1768";
+import { useClickOutside } from "../905/1768";
 import { q } from "../9410/847736";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { ModalContainer } from "../figma_app/918700";
@@ -71,7 +71,7 @@ export function $$V1() {
   let m = useDispatch();
   let f = useCurrentUserOrg();
   let g = useRef(null);
-  if (Y(() => t(!1), {
+  if (useClickOutside(() => t(!1), {
     closeOnEsc: !0,
     ignore: [g, Tc("slides-template-button"), Tc(_$$G), Tc(_$$l)]
   }), useEffect(() => {

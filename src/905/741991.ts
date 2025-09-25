@@ -5,11 +5,11 @@ import { sg, Xf, iU } from "../905/859698";
 import { hashToHexString } from "../figma_app/385874";
 import { STYLE_TYPES } from "../figma_app/646357";
 import { c1, dB } from "../905/589717";
-import { GP, EI } from "../905/71";
+import { STYLE_PROPERTY_IDS, BACKGROUND_PAINT_PROPERTIES } from "../905/71";
 import { s as _$$s } from "../905/6512";
 import { uy } from "../905/252555";
 import { QB, B_, $7 } from "../905/258397";
-import { bU } from "../figma_app/841197";
+import { redactText } from "../figma_app/841197";
 export class $$g0 extends _$$s {
   constructor(e, t, i) {
     super(e);
@@ -19,10 +19,10 @@ export class $$g0 extends _$$s {
     t.guid || console.error("Node is missing guid", t);
   }
   get name() {
-    return bU(this.nodeChange.name ?? "", this.scene.resource.sensitiveTextPolicy);
+    return redactText(this.nodeChange.name ?? "", this.scene.resource.sensitiveTextPolicy);
   }
   get text() {
-    return bU(this.nodeChange.textData?.characters ?? "", this.scene.resource.sensitiveTextPolicy);
+    return redactText(this.nodeChange.textData?.characters ?? "", this.scene.resource.sensitiveTextPolicy);
   }
   get guidObj() {
     return this.nodeChange.guid ?? {
@@ -245,7 +245,7 @@ export class $$g0 extends _$$s {
   get consumedStyleIds() {
     let e = [];
     function t(t) {
-      for (let i of GP) {
+      for (let i of STYLE_PROPERTY_IDS) {
         let n = t[i];
         if (n) {
           let t = StyleIdHandler.fromKiwi(n);
@@ -266,7 +266,7 @@ export class $$g0 extends _$$s {
       let i = VariableIdHandler.fromKiwi(t);
       i && e.add(i);
     }
-    for (let e of EI) !function (e) {
+    for (let e of BACKGROUND_PAINT_PROPERTIES) !function (e) {
       for (let i of e ?? []) t(i.colorVar?.value?.alias);
     }(this.nodeChange[e]);
     function i(e) {

@@ -4,7 +4,7 @@ import { VariableResolvedDataType, VariableDataType, PlatformType, ComponentProp
 import { convertKiwiToVariableIdString } from "../905/805904";
 import { colorToRgbaString } from "../figma_app/191804";
 import { getI18nString } from "../905/303541";
-import { TI } from "../905/713722";
+import { formattedColorManipulator } from "../905/713722";
 import { normalizeValue } from "../905/216495";
 export function $$u6(e) {
   if ("MIXED" === e) return getI18nString("fullscreen.mixed");
@@ -15,7 +15,7 @@ export function $$u6(e) {
     case VariableResolvedDataType.BOOLEAN:
       return e.value ? getI18nString("variables.values.boolean.true") : getI18nString("variables.values.boolean.false");
     case VariableResolvedDataType.COLOR:
-      return TI.format(e.value);
+      return formattedColorManipulator.format(e.value);
     case VariableResolvedDataType.STRING:
       if (e.type === VariableDataType.DATE) return null;
       return e.value;

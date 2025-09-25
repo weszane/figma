@@ -22,7 +22,7 @@ import { withTracking } from "../figma_app/831799";
 import { jv, SK, Fq } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { collaboratorSet, designSet } from "../905/332483";
-import { K as _$$K } from "../905/3140";
+import { renderRequestErrorInterstitial } from "../905/3140";
 import { CurrencyFormatter, createUserCurrencyFormatter } from "../figma_app/514043";
 import { getFilteredTeamMemberIds } from "../figma_app/598018";
 import { Ju, IX } from "../905/712921";
@@ -490,7 +490,7 @@ export let $$er0 = connect(e => {
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "OrgUpgradeMultiTeamModal",
     team: ServiceCategories.BILLING_EXPERIENCE,
-    fallback: jsx(_$$K, {}),
+    fallback: jsx(renderRequestErrorInterstitial, {}),
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {
         hiddenTitle: renderI18nText("org_upgrade.multi_team.bring_your_teams_together_with_the_figma_organization_plan"),

@@ -68,7 +68,7 @@ var c = 1;
 var h = null;
 var p = 3;
 var g = !1;
-var m = !1;
+var getDefaultFrameProps = !1;
 var _ = !1;
 var b = "function" == typeof setTimeout ? setTimeout : null;
 var y = "function" == typeof clearTimeout ? clearTimeout : null;
@@ -84,9 +84,9 @@ function w(e) {
   }
 }
 function k(e) {
-  if (_ = !1, w(e), !m) {
+  if (_ = !1, w(e), !getDefaultFrameProps) {
     if (null !== t(d)) {
-      m = !0;
+      getDefaultFrameProps = !0;
       M(S);
     } else {
       var n = t(s);
@@ -95,7 +95,7 @@ function k(e) {
   }
 }
 function S(e, i) {
-  m = !1;
+  getDefaultFrameProps = !1;
   _ && (_ = !1, y(C), C = -1);
   g = !0;
   var r = p;
@@ -176,7 +176,7 @@ exports.unstable_cancelCallback = function (e) {
   e.callback = null;
 };
 exports.unstable_continueExecution = function () {
-  m || g || (m = !0, M(S));
+  getDefaultFrameProps || g || (getDefaultFrameProps = !0, M(S));
 };
 exports.unstable_forceFrameRate = function (e) {
   0 > e || 125 < e ? console.error("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported") : T = 0 < e ? Math.floor(1e3 / e) : 5;
@@ -253,7 +253,7 @@ exports.unstable_scheduleCallback = function (e, f, r) {
     expirationTime: o,
     sortIndex: -1
   };
-  r > a ? (e.sortIndex = r, i(s, e), null === t(d) && e === t(s) && (_ ? (y(C), C = -1) : _ = !0, R(k, r - a))) : (e.sortIndex = o, i(d, e), m || g || (m = !0, M(S)));
+  r > a ? (e.sortIndex = r, i(s, e), null === t(d) && e === t(s) && (_ ? (y(C), C = -1) : _ = !0, R(k, r - a))) : (e.sortIndex = o, i(d, e), getDefaultFrameProps || g || (getDefaultFrameProps = !0, M(S)));
   return e;
 };
 exports.unstable_shouldYield = L;

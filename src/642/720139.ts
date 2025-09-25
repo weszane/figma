@@ -17,7 +17,7 @@ import { c2, Nt, yn, lv } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { vq } from "../905/8732";
+import { hideInstanceSwapPicker } from "../905/8732";
 import { FU, b$, Bs } from "../figma_app/933328";
 import { replaceThumbnailsOptimist } from "../905/711212";
 import { mapFileToProductType } from "../figma_app/314264";
@@ -700,7 +700,7 @@ export function $$tu1({
     });
   });
   _$$h(() => () => {
-    ep(vq());
+    ep(hideInstanceSwapPicker());
     B(!1);
   });
   useEffect(() => {
@@ -723,7 +723,7 @@ export function $$tu1({
     requestAnimationFrame(() => D?.current?.ensureModalOnScreen());
   }, []);
   let eC = useCallback(() => {
-    ef?.isShown && ep(vq());
+    ef?.isShown && ep(hideInstanceSwapPicker());
   }, [ep, ef]);
   let ej = Hu(e.library_key);
   let ev = Nv(!0);

@@ -58,7 +58,7 @@ import { useSessionStorageSync, getSessionStorage, useLocalStorageSync } from ".
 import { hidePickerThunk } from "../figma_app/91703";
 import { Yf } from "../figma_app/933328";
 import { popModalStack, showModalHandler } from "../905/156213";
-import { B as _$$B } from "../905/330741";
+import { hideVariablePicker } from "../905/330741";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizePath } from "../905/309735";
 import { generateUniqueName, stripNumberSuffix } from "../905/578436";
@@ -68,7 +68,7 @@ import { rN as _$$rN, Pf, Lo as _$$Lo, cv, om, Qo, B9, GC, ky, ZR, nm, x9 as _$$
 import { wp, jv } from "../905/886545";
 import { createPortal } from "react-dom";
 import { trackEventAnalytics } from "../905/449184";
-import { VZ } from "../905/959568";
+import { calculatePickerPositionBelow } from "../905/959568";
 import { useVariablePickerForAlias } from "../figma_app/260445";
 import { He, ED, kL, ok, qr } from "../905/24780";
 import { fr } from "../905/530789";
@@ -1100,7 +1100,7 @@ function eZ(e) {
   let d = _$$rN(useCallback(t => {
     trackEventAnalytics(e.contextMenuData.selectedVariableRows.length > 1 ? "multi_edit_variable_modal_opened" : "edit_variable_modal_opened");
     t.stopPropagation();
-    let n = VZ(l.current, parsePxNumber($));
+    let n = calculatePickerPositionBelow(l.current, parsePxNumber($));
     e.toggleEditVariableModal(i.map(e => e.node_id), new Point(n.x, n.y));
     e.hideContextMenu();
   }, [e, i]), !!e.toggleEditVariableModal);
@@ -1815,7 +1815,7 @@ let t$ = forwardRef(function ({
       b(null);
       return;
     }
-    let e = VZ(W.current, parsePxNumber($));
+    let e = calculatePickerPositionBelow(W.current, parsePxNumber($));
     x.includes(g.node_id) ? b(x, new Point(e.x + 16 - parsePxNumber($) / 2, e.y)) : b([g.node_id], new Point(e.x + 16 - parsePxNumber($) / 2, e.y));
   };
   let q = getFeatureFlags().ds_variables_modal_resize ? v6 : Ar;
@@ -4105,7 +4105,7 @@ export let $$i50 = registerModal(function () {
                 onClose: function () {
                   t(popModalStack());
                   t(hidePickerThunk());
-                  t(_$$B());
+                  t(hideVariablePicker());
                 },
                 onSubmitRenameVar: e,
                 onSubmitVariableValue: r,

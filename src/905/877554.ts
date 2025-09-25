@@ -1,17 +1,29 @@
-import { createHeadlessEditor } from "../vendor/24766";
-import { $convertFromMarkdownString } from "../vendor/693164";
-import { TextNode } from "lexical";
-export function $$s0(e) {
-  if (!e) return null;
-  let t = createHeadlessEditor({
+import { $convertFromMarkdownString } from '@lexical/markdown'
+import { TextNode } from 'lexical'
+import { createHeadlessEditor } from '../vendor/24766'
+/**
+ * Converts a markdown string to a serialized editor state JSON string.
+ * @param markdown - The markdown string to convert.
+ * @returns A JSON string representation of the editor state, or null if input is falsy.
+ */
+export function convertMarkdownToEditorState(markdown: string): string | null {
+  if (!markdown)
+    return null
+
+  const editor = createHeadlessEditor({
     nodes: [TextNode],
-    onError: () => { }
-  });
-  t.update(() => {
-    $convertFromMarkdownString(e, []);
+    onError: (error: Error) => {
+      console.error('Editor error:', error)
+    },
+  })
+
+  editor.update(() => {
+    $convertFromMarkdownString(markdown, [])
   }, {
-    discrete: !0
-  });
-  return JSON.stringify(t.getEditorState().toJSON());
+    discrete: true,
+  })
+
+  return JSON.stringify(editor.getEditorState().toJSON())
 }
-export const F = $$s0;
+
+export const F = convertMarkdownToEditorState

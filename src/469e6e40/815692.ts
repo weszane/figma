@@ -26,7 +26,7 @@ import r from '../469e6e40/850004';
 import { q as _$$q2 } from '../469e6e40/977739';
 import { s as _$$s6 } from '../469e6e40/993242';
 import { consumptionPaywallUtils } from '../905/224';
-import { K as _$$K2 } from '../905/3140';
+import { renderRequestErrorInterstitial } from '../905/3140';
 import { CloseButton } from '../905/17223';
 import { ModalRootComponent } from '../905/38914';
 import { Fq, ic, vK } from '../905/84777';
@@ -4199,7 +4199,7 @@ function n3(e) {
 let n8 = registerModal(e => {
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'OrgChangePaymentModal',
-    fallback: jsx(_$$K2, {}),
+    fallback: jsx(renderRequestErrorInterstitial, {}),
     children: jsx(Suspense, {
       fallback: jsx(_$$N2, {
         hiddenTitle: n5(e.canSeeBillingAddressExp),

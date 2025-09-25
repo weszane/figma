@@ -4,7 +4,7 @@ import { l as _$$l } from "../905/716947";
 import { createSelector } from "../vendor/925040";
 import { analyticsEventManager } from "../905/449184";
 import { h } from "../905/207101";
-import { iN, Zl, Z4 } from "../905/211621";
+import { ResourceLibraryType, PickerOptionType, getCategory } from "../905/211621";
 var $$n0;
 (e => {
   function t() {
@@ -39,16 +39,16 @@ var $$n0;
   }) {
     let o = t();
     let u = useSelector(e => e.instanceSwapPickerListLayout);
-    let p = n.type === iN.FILE ? n.libraryKey : void 0;
+    let p = n.type === ResourceLibraryType.FILE ? n.libraryKey : void 0;
     h(() => {
-      (e === Zl.INSTANCE_SWAP_PICKER || e === Zl.PREFERRED_VALUES_PICKER) && analyticsEventManager.trackDefinedEvent("instance_swap_picker.launched", {
+      (e === PickerOptionType.INSTANCE_SWAP_PICKER || e === PickerOptionType.PREFERRED_VALUES_PICKER) && analyticsEventManager.trackDefinedEvent("instance_swap_picker.launched", {
         ...o,
         sessionId: i,
         viewMode: u ? "list" : "grid",
-        dropdownType: Z4(n, _$$l(o.libraryKey ?? "")),
+        dropdownType: getCategory(n, _$$l(o.libraryKey ?? "")),
         libraryKey: p,
         entrypoint: r ?? void 0,
-        isPreferredValues: e === Zl.PREFERRED_VALUES_PICKER
+        isPreferredValues: e === PickerOptionType.PREFERRED_VALUES_PICKER
       });
     });
   };

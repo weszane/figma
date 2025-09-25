@@ -9,7 +9,7 @@ import { V } from '../905/735518';
 import { n as _$$n } from '../905/841238';
 import { Um } from '../905/848862';
 import { showDropdownThunk } from '../905/929976';
-import { cn } from '../905/959568';
+import { calculatePickerPositionLeft } from '../905/959568';
 import { getSlotPropTypes, DisplayMode, trackComponentPropsModalOpen, DROPDOWN_HEIGHT, getComponentPropDisplayName } from '../figma_app/164212';
 import { On, p1 } from '../figma_app/323320';
 import { SlotSymbolType } from '../figma_app/338442';
@@ -66,7 +66,7 @@ export function $$v3(e, t, r, n) {
       } else {
         trackComponentPropsModalOpen(containingProductComponent, !0, o, DisplayMode.ICON);
         let n = t.current;
-        let i = n ? cn(n, DROPDOWN_HEIGHT) : {};
+        let i = n ? calculatePickerPositionLeft(n, DROPDOWN_HEIGHT) : {};
         s(showModalHandler({
           type: _$$n,
           data: {
