@@ -14,7 +14,7 @@ import { InterProfileType } from "../905/895626";
 import { az } from "../figma_app/805373";
 import { E as _$$E2 } from "../905/391888";
 import { p as _$$p } from "../905/767868";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { wW } from "../figma_app/656450";
 import { Xg } from "../905/375175";
 import { SortField } from "../figma_app/756995";
@@ -86,9 +86,9 @@ function E(e) {
   let o = wW(i).user;
   return i ? jsxs("div", {
     className: cssBuilderInstance.flex.itemsCenter.gap8.$,
-    children: [o && jsx(H8, {
+    children: [o && jsx(UserAvatar, {
       user: o,
-      size: Pf.MEDIUM
+      size: AvatarSize.MEDIUM
     }), jsx(TextWithTruncation, {
       truncate: !0,
       children: jsx("span", {

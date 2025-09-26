@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "../905/438674";
 import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { ph } from "../figma_app/709893";
@@ -32,7 +32,7 @@ function c({
   let t = useRef(null);
   let [i, a] = useState(!0);
   let [s, o] = useState(!1);
-  _$$h(() => {
+  useSingleEffect(() => {
     t.current && (t.current.focus(), o(!0));
   });
   let l = useCallback(() => {

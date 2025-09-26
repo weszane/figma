@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 function s(e) {
   if (!e || e.nodeType !== Node.ELEMENT_NODE) return null;
   let t = window.getComputedStyle(e);
@@ -25,7 +25,7 @@ function o({
       d.current = null;
     }
   };
-  h(() => p);
+  useSingleEffect(() => p);
   useEffect(() => {
     if (!d.current) {
       let t = l();

@@ -12,7 +12,7 @@ import { k as _$$k } from "../905/44647";
 import { SceneGraphHelpers, Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Y1 } from "../905/143116";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
@@ -313,7 +313,7 @@ function W({
     SceneGraphHelpers.addToSelection(e);
   }, []);
   let S = useMemo(() => t.map(e => getSingletonSceneGraph().get(e)).filter(Boolean), [t]);
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     s && b();
   }), 0 === t.length) ? null : jsxs(Fragment, {
     children: [jsxs(B, {

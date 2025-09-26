@@ -75,7 +75,7 @@ import { AUTH_COMPLETE, AUTH_EMAIL_ONLY, AUTH_GOOGLE_SIGNUP, AUTH_INIT, AUTH_RES
 import { getSelectedId } from '../905/200237';
 import { px as _$$px2 } from '../905/201014';
 import { sessionApiInstance } from '../905/202181';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { x as _$$x3 } from '../905/209285';
 import { createMixedArray, MIXED_MARKER } from '../905/216495';
 import { w as _$$w } from '../905/230422';
@@ -1197,7 +1197,7 @@ function e1({
     isPlanKeyTargetingEnabled() && (a ? s = `organization::${a}` : r && (s = `team::${r}`));
   }
   let p = getSelectedView();
-  _$$h(() => {
+  useSingleEffect(() => {
     trackStatsigPlanKeyBootstrap(getFeatureFlags().statsig_plan_key_bootstrap ?? !1, getInitialOptions().statsig_plan_key ?? 'null', getInitialOptions().org_id ?? 'null', c ?? 'null', u ?? 'null', r ?? 'null', p?.view ?? 'null', s ?? 'null', a ?? 'null', i);
   });
   !function (e, t, i) {
@@ -3426,7 +3426,7 @@ let as = registerModal(e => {
     })));
   }, [c, e.tab, t]), useEffect(() => {
     u.status !== 'loaded' || u.data || t(hideModal());
-  }, [u, t]), _$$h(() => {
+  }, [u, t]), useSingleEffect(() => {
     r && _$$y3.loadSharedFonts(t);
   }), !r || u.status === 'loading') {
     return null;

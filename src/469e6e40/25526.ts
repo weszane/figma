@@ -15,7 +15,7 @@ import { i as _$$i } from "../469e6e40/549061";
 import { ZY } from "../figma_app/845611";
 import { throwTypeError } from "../figma_app/465776";
 import { useAtomWithSubscription, atom, Xr } from "../figma_app/27355";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { qB, eh as _$$eh, u0, Lh, Ks, eI as _$$eI, gx, Iq, Bq, Pz, d1, WF, _R, eN as _$$eN } from "../figma_app/425283";
@@ -205,7 +205,7 @@ import { W as _$$W } from "../5430/573261";
 import { BaseLinkComponent } from "../905/551536";
 import { A as _$$A7 } from "../5724/933949";
 import { getResourceDataOrFallback } from "../905/723791";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { J as _$$J3 } from "../905/403084";
 import { re } from "../469e6e40/421552";
 import { Q as _$$Q4 } from "../469e6e40/815692";
@@ -322,7 +322,7 @@ function W() {
     numSteps: c.length,
     onComplete: complete
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: (e, t) => {
         if (!a || e) return !1;
@@ -353,7 +353,7 @@ function K() {
     overlay: DE1,
     priority: _$$N2.SECONDARY_MODAL
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show();
   });
   return jsx(_$$X, {
@@ -517,7 +517,7 @@ function eK() {
     overlay: XIg,
     priority: _$$N2.SECONDARY_MODAL
   }, [e]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -599,7 +599,7 @@ function tv() {
   }, [e]);
   let a = useDispatch();
   let n = zl(tx);
-  _$$h(() => {
+  useSingleEffect(() => {
     "reset" === n.currentState ? t.show() : t.show({
       canShow: e => !e
     });
@@ -1743,7 +1743,7 @@ function t0(e) {
 }
 function t1() {
   let e = _$$q(_$$f, !0);
-  _$$h(() => {
+  useSingleEffect(() => {
     e();
   });
   return null;
@@ -1766,7 +1766,7 @@ function aa() {
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
   let l = zl(ae);
-  _$$h(() => {
+  useSingleEffect(() => {
     "reset" === l.currentState ? show() : show({
       canShow: e => !e && !isMobileUA
     });
@@ -3644,7 +3644,7 @@ function nz(e) {
       children: renderI18nText("workspace_table.create_workspace_button")
     })
   }), [k]);
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     e.onRightActionsChange?.(E);
   }), o || 0 !== _.length) ? jsxs(Fragment, {
     children: [!getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
@@ -3800,7 +3800,7 @@ function nX() {
     overlay: HaT,
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -4589,8 +4589,8 @@ function sN({
   if (1 === e.length) {
     let t = e[0];
     a = jsxs(Fragment, {
-      children: [jsx(H8, {
-        size: Pf.MEDIUM,
+      children: [jsx(UserAvatar, {
+        size: AvatarSize.MEDIUM,
         user: t
       }), jsxs("div", {
         className: cssBuilderInstance.flex.flexColumn.ml8.$,

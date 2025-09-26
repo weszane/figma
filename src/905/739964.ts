@@ -1,11 +1,11 @@
-import p from 'classnames';
+import classNames from 'classnames';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { consumptionPaywallUtils } from '../905/224';
 import { getRumLoggingConfig } from '../905/16237';
 import { CloseButton } from '../905/17223';
-import { contractRatesQuery, BillingPriceSource, I8, setupPricesTransform, getContractCurrency, ensureLoadedResource, setupResourceTransform } from '../905/84777';
+import { BillingPriceSource, contractRatesQuery, ensureLoadedResource, getContractCurrency, activeRatesQuery, setupPricesTransform, setupResourceTransform } from '../905/84777';
 import { registerModal } from '../905/102752';
 import { g as _$$g } from '../905/125190';
 import { ServiceCategories } from '../905/165054';
@@ -19,8 +19,8 @@ import { AutoLayout } from '../905/470281';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { q as _$$q } from '../905/636218';
 import { FeatureFlag } from '../905/652992';
-import { RenewalTermEnum, ProductTierEnum } from '../905/712921';
-import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
+import { ProductTierEnum, RenewalTermEnum } from '../905/712921';
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { N as _$$N } from '../905/809096';
 import { h as _$$h } from '../905/864281';
 import { styleBuilderInstance } from '../905/941192';
@@ -44,10 +44,10 @@ import { Ih } from '../figma_app/617427';
 import { linkWithTracking, Spacing } from '../figma_app/637027';
 import { getProductAccessTypeFromFileType } from '../figma_app/765689';
 import { TrackingProvider } from '../figma_app/831799';
-import { utilityNoop } from '../figma_app/918700';
+import { ModalContainer } from '../figma_app/918700';
 import { Badge, BadgeColor, BadgeSize } from '../figma_app/919079';
-let m = p;
-let Q = 'consumption_paywall_modals--planDescription--cFNva';
+
+let Q = 'consumption_paywall_modals--planDescription';
 function J(e) {
   let {
     text,
@@ -76,14 +76,14 @@ function J(e) {
     'onMouseOver': () => {
       hoverText && s(!0);
     },
-    'className': m()({
+    'className': classNames({
       'consumption_paywall_modals--planFeatureDisabled--0yd7z': e.grayedOut,
       'consumption_paywall_modals--planFeatureParent--NBBWh': !0
     }),
     'children': jsxs('div', {
       className: cssBuilderInstance.flex.$,
       children: [hoverText && jsxs('span', {
-        className: m()({
+        className: classNames({
           'consumption_paywall_modals--planFeatureHoverState--hpPa3': a,
           'consumption_paywall_modals--planFeatureHoverStateHidden--pQLiS consumption_paywall_modals--planFeatureHoverState--hpPa3': !a
         }),
@@ -94,7 +94,7 @@ function J(e) {
         onMouseOver: () => {
           hoverText && s(!0);
         },
-        className: m()({
+        className: classNames({
           'consumption_paywall_modals--planFeatureHoverable--mqLZi': !!hoverText
         }, cssBuilderInstance.lh24.$),
         children: text
@@ -108,7 +108,7 @@ function ee({
   let t = jsx(linkWithTracking, {
     href: e === 'whiteboard' ? 'https://www.figma.com/pricing/#figjam' : 'https://www.figma.com/pricing/#cid-57mfNh6t0Xo7z8Q95Ww9ZV',
     target: '_blank',
-    className: m()(e === 'whiteboard' && 'consumption_paywall_modals--figjamLink---aC7d'),
+    className: classNames(e === 'whiteboard' && 'consumption_paywall_modals--figjamLink---aC7d'),
     trusted: !0,
     children: renderI18nText('consumption_paywalls.see_all_features')
   });
@@ -187,7 +187,7 @@ function er({
     s = contractRatesQuery(i);
     o = BillingPriceSource.UPSELL_MODALS_CONTRACT;
   } else {
-    s = I8(null);
+    s = activeRatesQuery(null);
     o = BillingPriceSource.UPSELL_MODALS;
   }
   let u = function (e, t) {
@@ -506,30 +506,7 @@ function el(e) {
     estimatedHeight: 573
   });
 }
-export function $$ed1(e) {
-  let t = useDispatch();
-  return jsx(ErrorBoundaryCrash, {
-    boundaryKey: 'ConsumptionPaywallModal',
-    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-    sentryTags: {
-      area: ServiceCategories.MONETIZATION_UPGRADES
-    },
-    onError: () => {
-      t(VisualBellActions.enqueue({
-        message: getI18nString('consumption_paywalls.error.modal'),
-        error: !0
-      }));
-    },
-    children: jsx(Suspense, {
-      fallback: jsx(el, {
-        ...e
-      }),
-      children: jsx(eu, {
-        ...e
-      })
-    })
-  });
-}
+
 function ec(e) {
   let t;
   let {
@@ -614,7 +591,7 @@ function ec(e) {
       ...w
     },
     trackingOptions: Z,
-    children: jsxs(utilityNoop, {
+    children: jsxs(ModalContainer, {
       'data-testid': 'consumption-paywall-modal-plans-pricing-inner-modal',
       'title': L,
       'titleClassName': C ? 'consumption_paywall_modals--campfireLargeModalTitle--1D-kj' : 'consumption_paywall_modals--largeModalTitle--kOqov',
@@ -711,6 +688,31 @@ function eu(e) {
     ...r
   });
 }
+export function $$ed1(e) {
+  let t = useDispatch();
+  return jsx(ErrorBoundaryCrash, {
+    boundaryKey: 'ConsumptionPaywallModal',
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
+    sentryTags: {
+      area: ServiceCategories.MONETIZATION_UPGRADES
+    },
+    onError: () => {
+      t(VisualBellActions.enqueue({
+        message: getI18nString('consumption_paywalls.error.modal'),
+        error: !0
+      }));
+    },
+    children: jsx(Suspense, {
+      fallback: jsx(el, {
+        ...e
+      }),
+      children: jsx(eu, {
+        ...e
+      })
+    })
+  });
+}
+export const bP = $$ed1;
+
 export let ConsumptionPaywallModalPlansPricing = registerModal($$ed1, 'ConsumptionPaywallModalPlansPricing');
 export const DV = ConsumptionPaywallModalPlansPricing;
-export const bP = $$ed1;

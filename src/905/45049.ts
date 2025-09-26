@@ -21,7 +21,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import E from "classnames";
 import { s as _$$s } from "../vendor/45699";
 import { P as _$$P } from "../vendor/348225";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
 import { styleBuilderInstance } from "../905/941192";
@@ -233,7 +233,7 @@ let K = registerModal(function ({
   let s = _$$s();
   let o = _$$s();
   let [l, d] = useState(t);
-  _$$h(() => {
+  useSingleEffect(() => {
     s.start({
       scale: 1
     }, {

@@ -25,7 +25,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { u as _$$u } from "../4452/434813";
 import { z as _$$z } from "../905/284530";
 import { kq } from "../figma_app/563413";
-import { Pf, H8 } from "../905/590952";
+import { AvatarSize, UserAvatar } from "../905/590952";
 import { q as _$$q } from "../905/749058";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
@@ -126,7 +126,7 @@ function F(e) {
   return jsxs("div", {
     className: cssBuilderInstance.flex.gap4.$,
     children: [jsx(_$$u, {
-      avatarSize: Pf.SMALL16,
+      avatarSize: AvatarSize.SMALL16,
       users: requesters,
       totalNum: requesters.length,
       numAvatarsToDisplay: 3
@@ -532,9 +532,9 @@ function ea({
           className: cssBuilderInstance.pt16.flex.justifyBetween.alignCenter.itemsCenter.$,
           children: [jsxs("div", {
             className: cssBuilderInstance.flex.breakWord.alignLeft.itemsCenter.pr8.gap8.$,
-            children: [!t && jsx(H8, {
+            children: [!t && jsx(UserAvatar, {
               user: a,
-              size: Pf.MEDIUM
+              size: AvatarSize.MEDIUM
             }), t && jsx(Ro, {
               entity: {}
             }), jsx(TextWithTruncation, {
@@ -767,9 +767,9 @@ function ed({
     className: b,
     children: [jsxs("div", {
       className: cssBuilderInstance.flex.flexRow.itemsCenter.gap8.$,
-      children: [jsx(H8, {
+      children: [jsx(UserAvatar, {
         user: g,
-        size: Pf.MEDIUM
+        size: AvatarSize.MEDIUM
       }), jsx("div", {
         role: "button",
         tabIndex: 0,

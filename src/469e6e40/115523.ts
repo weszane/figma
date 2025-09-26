@@ -47,14 +47,14 @@ import { _ as _$$_ } from "../7021/243271";
 import { dayjs } from "../905/920142";
 import { h1 } from "../905/986103";
 import { SvgComponent } from "../905/714743";
-import { nl, Pf } from "../905/590952";
+import { TeamAvatar, AvatarSize } from "../905/590952";
 import { Lg, Lq } from "../figma_app/392626";
 import { h as _$$h } from "../905/973388";
 import { K as _$$K3 } from "../905/41648";
 import { C as _$$C } from "../905/138077";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
-import { hP, CM } from "../905/144598";
+import { UserAvatar, UserTeamAvatar } from "../905/144598";
 import { A as _$$A3 } from "../6828/70690";
 import { IconButton } from "../905/443068";
 import { bL, l9, mc, c$ } from "../905/493196";
@@ -191,7 +191,7 @@ function ey(e) {
         className: "connected_projects_table--avatarSection--aXOIX",
         children: [resourceConnectedUsersWithPlan?.slice(0, 10).map(e => e?.user && jsx("span", {
           className: X,
-          children: jsx(hP, {
+          children: jsx(UserAvatar, {
             user: e.user,
             id: e.user.id,
             pending: !1,
@@ -414,8 +414,8 @@ function ey(e) {
       children: getI18nString("resource_connection.teams")
     }), jsxs("div", {
       className: T()(z, cssBuilderInstance.pb4.$),
-      children: [jsx(nl, {
-        size: Pf.MEDIUM,
+      children: [jsx(TeamAvatar, {
+        size: AvatarSize.MEDIUM,
         shape: "CIRCLE",
         team: hostPlan
       }), jsxs("div", {
@@ -436,8 +436,8 @@ function ey(e) {
       })]
     }), jsxs("div", {
       className: T()(z, cssBuilderInstance.pb12.$),
-      children: [jsx(nl, {
-        size: Pf.MEDIUM,
+      children: [jsx(TeamAvatar, {
+        size: AvatarSize.MEDIUM,
         shape: "CIRCLE",
         team: connectingPlan
       }), jsxs("div", {
@@ -607,13 +607,13 @@ function eO(e) {
           className: "connected_projects_flyout--userRow--yjbku",
           children: [jsxs("div", {
             className: "connected_projects_flyout--userAvatarAndHandle--ovISF",
-            children: [t ? jsx(CM, {
+            children: [t ? jsx(UserTeamAvatar, {
               user: e.user,
               id: e.user.id,
               plan: t
             }) : jsx("div", {
               className: "connected_projects_flyout--noPlanAvatar--8g4Kb",
-              children: jsx(hP, {
+              children: jsx(UserAvatar, {
                 user: e.user,
                 id: d.id,
                 pending: !1

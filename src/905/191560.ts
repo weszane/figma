@@ -12,7 +12,7 @@ import { ServiceCategories } from '../905/165054';
 import { gK, Wv, ZH } from '../905/178707';
 import { AUTH_CLEAR_AUTH_LOADING, AUTH_CLEAR_ERROR, AUTH_CLICKED_SAML_SIGN_IN, AUTH_COMPLETE, AUTH_EMAIL_ONLY, AUTH_REDEEM_RESET, AUTH_RESET_PASSWORD, AUTH_SAML_START_FROM_SESSION, AUTH_SEND_EMAIL_SAML_START, AUTH_SEND_PASSWORD_RESET, AUTH_SET_AUTH_LOADING, AUTH_SET_GOOGLE_ID_TOKEN, AUTH_SET_REDIRECT_URL, AUTH_SHOW_ERROR, AUTH_SIGN_IN, AUTH_SIGN_UP, changeAuthFormState, redeemTeamJoinLink } from '../905/194276';
 import { sessionApiInstance } from '../905/202181';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { resolveMessage } from '../905/231762';
 import { trackAuthEvent } from '../905/248178';
 import { VisualBellActions } from '../905/302958';
@@ -95,7 +95,7 @@ function v(e) {
     a();
     t.current = !1;
   }, [e.auth.formState, a]);
-  _$$h(a);
+  useSingleEffect(a);
   let o = 'auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw';
   let l = y()(e.className, {
     'auth_form--modal--1HV7- auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw': e.modal,
@@ -250,7 +250,7 @@ function j(e) {
   let w = () => {
     y.current !== null && (clearTimeout(y.current), y.current = null);
   };
-  _$$h(() => {
+  useSingleEffect(() => {
     o(!0);
     S();
   });
@@ -978,7 +978,7 @@ function eb(e) {
 }
 function ev(e) {
   let t = useDispatch();
-  _$$h(() => {
+  useSingleEffect(() => {
     r();
     customHistory.replace('/login', null);
   });
@@ -1377,7 +1377,7 @@ function eH(e) {
   let t = useDispatch();
   let [i, r] = useAtomValueAndSetter(Kf);
   let o = Xr(nb);
-  _$$h(() => () => {
+  useSingleEffect(() => () => {
     i && r(!1);
   });
   let l = eV(e.auth.appAuthAppType);
@@ -1486,7 +1486,7 @@ function eQ(e) {
   useEffect(() => {
     b(!1);
   }, [A]);
-  _$$h(() => () => {
+  useSingleEffect(() => () => {
     o && l(!1);
   });
   let E = () => {
@@ -2227,7 +2227,7 @@ export function $$to0(e) {
 function tl(e) {
   let t = useDispatch();
   let i = Xr(nb);
-  _$$h(() => {
+  useSingleEffect(() => {
     e.auth.formState !== AuthFlowStep.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT && e.auth.formState !== AuthFlowStep.VERIFY_HUMAN && (t(AUTH_SET_GOOGLE_ID_TOKEN({
       googleIdToken: null
     })), i(null));

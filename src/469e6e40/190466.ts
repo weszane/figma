@@ -45,7 +45,7 @@ import { getEmailDomain } from "../figma_app/416935";
 import { toTitleCase } from "../figma_app/930338";
 import { FSeatAssignmentReasonType, FOrganizationLevelType, FApprovalMethodType, FResourceCategoryType, FUserRoleType } from "../figma_app/191312";
 import { KindEnum } from "../905/129884";
-import { rq as _$$rq } from "../905/351260";
+import { sendRoleInvites } from "../905/351260";
 import { AccessLevelEnum } from "../905/557142";
 import { v as _$$v } from "../figma_app/899624";
 import { tb } from "../905/848667";
@@ -876,7 +876,7 @@ function eK(e) {
     let a = !!e;
     return useCallback(n => {
       if (!a) return noop;
-      t(_$$rq({
+      t(sendRoleInvites({
         emails: [n],
         resourceType: FResourceCategoryType.TEAM,
         resourceIdOrKey: e.teamId,

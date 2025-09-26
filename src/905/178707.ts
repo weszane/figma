@@ -5,7 +5,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { getSessionStorage } from "../905/657224";
 import l from "classnames";
 import { isValidEmail, suggestSimilarDomain } from "../figma_app/416935";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { d as _$$d } from "../905/884707";
 import { changeAuthFormState, AUTH_CHANGE_EMAIL, AUTH_SET_GOOGLE_ID_TOKEN } from "../905/194276";
 import { AuthFlowStep, AuthField } from "../905/862321";
@@ -84,7 +84,7 @@ export function $$w0(e) {
   let {
     trackEvent
   } = useTracking();
-  _$$h(() => {
+  useSingleEffect(() => {
     f && isValidEmail(f) && sT({
       email: f
     });

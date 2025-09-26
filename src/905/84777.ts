@@ -439,7 +439,7 @@ export function ensureLoadedResource(resource: any) {
 // Exported aliases for refactored names
 export const Y$ = BillingPriceStatus
 export const Fq = BillingPriceSource
-export const getI18nString = activeRatesQuery
+export const I8 = activeRatesQuery
 export const cw = contractRatesQuery
 export const Tc = getCurrencyFromPrices
 export const SK = setupActiveRatesTransform

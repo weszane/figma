@@ -20,8 +20,8 @@ import { getI18nState } from "../figma_app/363242";
 import { useSelector } from "react-redux";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { Pf } from "../905/590952";
-import { n as _$$n } from "../figma_app/537817";
+import { AvatarSize } from "../905/590952";
+import { TeamAvatar } from "../figma_app/537817";
 import { e as _$$e } from "../905/579755";
 import { A as _$$A } from "../svg/842087";
 import { A as _$$A2 } from "../5724/240681";
@@ -849,9 +849,9 @@ function es({
     className: n()(Y, "whiteboard--teamHeader--L87B-"),
     children: [jsxs("div", {
       className: cssBuilderInstance.flex.gap16.itemsCenter.$,
-      children: [jsx(_$$n, {
+      children: [jsx(TeamAvatar, {
         team: e,
-        size: Pf.LARGE40,
+        size: AvatarSize.LARGE40,
         avatarSvg: _$$A2
       }), jsx("span", {
         className: "xlyipyv xb3r6kr xuxw1ft x1va8c73 xu7hf8f xew4c2t x1dgvubu",

@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { getInitialOptions } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
@@ -328,7 +328,7 @@ export function $$q0({
       referrerUrl: window.location.href
     };
   }(n);
-  _$$h(() => {
+  useSingleEffect(() => {
     trackEventAnalytics("Codebase Suggestions Setup Steps Opened", {
       initialInstallMethod: e
     });

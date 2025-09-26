@@ -41,7 +41,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { h1, Ak } from "../905/986103";
 import { FlashActions } from "../905/573154";
 import { getI18nState } from "../figma_app/363242";
-import { Pf } from "../905/590952";
+import { AvatarSize } from "../905/590952";
 import { A as _$$A } from "../905/639174";
 import { Ro } from "../figma_app/805373";
 import { H as _$$H2 } from "../905/209153";
@@ -159,13 +159,13 @@ function e_(e) {
       className: "block_kit_row--secondaryUser--hkjpm",
       children: jsx(ec, {
         block: avatars[1],
-        size: Pf.MEDIUM
+        size: AvatarSize.MEDIUM
       })
     }), jsx("div", {
       className: "block_kit_row--primaryUser--lg4hR",
       children: jsx(ec, {
         block: avatars[0],
-        size: Pf.MEDIUM
+        size: AvatarSize.MEDIUM
       })
     }), icon && jsx(em, {
       icon
@@ -174,7 +174,7 @@ function e_(e) {
     className: en,
     children: [jsx(ec, {
       block: avatars[0],
-      size: Pf.LARGE
+      size: AvatarSize.LARGE
     }), icon && jsx(em, {
       icon
     })]
@@ -195,7 +195,7 @@ function em(e) {
       block: icon
     }) : "AvatarBlock" === icon._block_type ? jsx(ec, {
       block: icon,
-      size: Pf.SMALL16
+      size: AvatarSize.SMALL16
     }) : void 0
   });
 }
@@ -333,7 +333,7 @@ function eb(e) {
         case "AvatarBlock":
           return jsx(ec, {
             block: e,
-            size: Pf.XLARGE
+            size: AvatarSize.XLARGE
           });
         case "ImageThumbnailBlock":
           return jsx(eu, {

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { getI18nString } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { isDevHandoffEditorType } from "../figma_app/976749";
@@ -31,7 +31,7 @@ export function $$y0() {
       canShow: (e, t) => !e && t
     });
   }, [y, C]);
-  _$$h(() => {
+  useSingleEffect(() => {
     w();
   });
   let j = useCallback(() => {

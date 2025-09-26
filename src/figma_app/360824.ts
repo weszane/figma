@@ -9,7 +9,7 @@ import { A as _$$A2 } from "../905/251970";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import h from "classnames";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { KeyCodes, getModifierBitmask, ModifierKeyCodes } from "../905/63728";
 import { useHandleChangeEvent, generateRecordingKey } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
@@ -96,7 +96,7 @@ export let $$V5 = forwardRef(({
   ariaLabel: h
 }, m) => {
   let T = useRef(null);
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = m?.current;
     e && !c && (e.focus(), e.setSelectionRange(e.value.length, e.value.length), e.addEventListener("keydown", e => {
       e.keyCode === KeyCodes.ENTER && 0 === getModifierBitmask(e) && e.stopPropagation();

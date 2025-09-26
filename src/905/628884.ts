@@ -5,7 +5,7 @@ import { SceneGraphHelpers, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import { Xr, atomStoreManager } from "../figma_app/27355";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -30,7 +30,7 @@ export function $$k0({
   let t = Xr(Gh);
   let i = Xr(d_);
   let k = Xr(xP);
-  _$$h(() => (i(!0), k(!0), () => {
+  useSingleEffect(() => (i(!0), k(!0), () => {
     k(!1);
     t(e);
     fullscreenValue.triggerAction("end-magic-link", {

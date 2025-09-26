@@ -66,7 +66,7 @@ import { A as _$$A0 } from '../905/562488';
 import { FieldContainer } from '../905/567946';
 import { A as _$$A28 } from '../905/568234';
 import { VisualBellIcon } from '../905/576487';
-import { H8 } from '../905/590952';
+import { UserAvatar } from '../905/590952';
 import { $h, e0 as _$$e3, er as _$$er, EY as _$$EY, iS as _$$iS, j as _$$j, fl, Fu, jB, KG, Oc, Oh, q1, QB, r9, Ub, UI, xe, YK, YN, YT, Zg } from '../905/599844';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
@@ -910,7 +910,7 @@ function tP({
       className: cssBuilderInstance.$$with({
         opacity0_5: t
       }).$,
-      children: jsx(H8, {
+      children: jsx(UserAvatar, {
         user: e
       })
     }), jsx('div', {

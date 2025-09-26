@@ -18,7 +18,7 @@ import { handleAtomEvent } from '../905/502364';
 import { gX } from '../905/504768';
 import { Dr } from '../905/530837';
 import { FlashActions } from '../905/573154';
-import { H8, Pf } from '../905/590952';
+import { UserAvatar, AvatarSize } from '../905/590952';
 import { customHistory } from '../905/612521';
 import { e as _$$e } from '../905/621515';
 import { setEditorDocumentTitle } from '../905/697795';
@@ -56,7 +56,7 @@ import { _S, dC, IL, jS, OQ, TI, wV, ZA, ZO } from '../figma_app/809086';
 import { TrackedButton } from '../figma_app/831799';
 import { HH } from '../figma_app/841415';
 import { nr, Op, rn } from '../figma_app/903573';
-import { utilityNoop } from '../figma_app/918700';
+import { ModalContainer } from '../figma_app/918700';
 import { useLatestRef } from '../figma_app/922077';
 import { A as _$$A2 } from '../svg/628015';
 import { A as _$$A4 } from '../svg/821527';
@@ -291,7 +291,7 @@ export let $$eb0 = registerModal(e => {
       case 'errors':
         return jsx(eC, {});
       case 'loading':
-        return jsx(utilityNoop, {
+        return jsx(ModalContainer, {
           className: ef,
           size: 'any'
         });
@@ -304,7 +304,7 @@ export let $$eb0 = registerModal(e => {
     }
   }
   return jsxs(Fragment, {
-    children: [jsx(utilityNoop, {
+    children: [jsx(ModalContainer, {
       className: ef,
       size: 'any',
       children: jsx('div', {
@@ -413,7 +413,7 @@ function eT(e) {
       children: jsx(_$$B2, {
         user: e.feedPost.creator,
         date: e.feedPost.createdAt,
-        size: Pf.MEDIUM,
+        size: AvatarSize.MEDIUM,
         shortDate: !1
       })
     }), jsx(ew, {
@@ -548,9 +548,9 @@ function eI(e) {
       className: 'feed_post_detail_modal--composerContainer--bIZJV',
       children: [jsx('div', {
         className: 'feed_post_detail_modal--composerAvatar--4cjv3',
-        children: jsx(H8, {
+        children: jsx(UserAvatar, {
           user: e.currentUser,
-          size: Pf.MEDIUM
+          size: AvatarSize.MEDIUM
         })
       }), jsx(_$$o, {
         attachments: Object.values(T.attachments),

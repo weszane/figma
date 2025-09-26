@@ -18,7 +18,7 @@ import { hideModalHandler, showModalHandler } from '../905/156213';
 import { Ph } from '../905/160095';
 import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { c as _$$c2 } from '../905/210851';
 import { libraryKeyMapAtom } from '../905/221694';
 import { V as _$$V2 } from '../905/223767';
@@ -92,7 +92,8 @@ import { $z } from '../905/909811';
 import { XHR } from '../905/910117';
 import { n as _$$n } from '../905/913636';
 import { hideDropdownAction } from '../905/929976';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { Xm as _$$Xm } from '../905/935570';
 import { styleBuilderInstance } from '../905/941192';
 import { $3 } from '../905/946937';
@@ -2380,7 +2381,7 @@ function id() {
     sessionId
   } = zm();
   let o = t || !i;
-  _$$h(() => {
+  useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent('library_modal.publish_upsell_banner_shown', {
       fileKey: a?.key,
       teamId: a?.teamId ?? '',
@@ -2857,7 +2858,7 @@ function nm({
   index: e
 }) {
   let [t, i] = useState(e === 0);
-  _$$h(() => i(!0));
+  useSingleEffect(() => i(!0));
   return jsx('div', {
     className: 'updates_list_item--updateRowLoadingWrapper--XvVXf',
     style: {
@@ -3090,7 +3091,7 @@ function ny({
   let V = E === AssetFilterMode.ALL;
   let [G, z] = useState(!1);
   let [W, K] = useState(null);
-  _$$h(() => (trackEventAnalytics('updates_modal_opened', {
+  useSingleEffect(() => (trackEventAnalytics('updates_modal_opened', {
     fileKey: U || 'null',
     usingFullscreenData: V,
     isIncremental: Multiplayer?.isIncrementalSession(),
@@ -3680,7 +3681,7 @@ export function $$nG0({
   let c = m9();
   Qj();
   ry();
-  _$$h(() => {
+  useSingleEffect(() => {
     _.stop();
     _.reset();
     _.start();

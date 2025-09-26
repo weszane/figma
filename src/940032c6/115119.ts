@@ -114,7 +114,7 @@ import { h as _$$h2 } from '../905/200386';
 import { Hz, Of, Yw } from '../905/201596';
 import { q as _$$q4 } from '../905/202542';
 import { FormattedInputVariant1 } from '../905/203369';
-import { h as _$$h3 } from '../905/207101';
+import { h as _$$h3 } from '../905/791079';
 import { O as _$$O9 } from '../905/208152';
 import { N2 } from '../905/213527';
 import { isInvalidValue, isValidValue, MIXED_MARKER, toArray, valueOrFallback } from '../905/216495';
@@ -226,7 +226,7 @@ import { y as _$$y9 } from '../905/582657';
 import { AffineTransform } from '../905/583953';
 import { x as _$$x5 } from '../905/587214';
 import { O as _$$O5 } from '../905/587457';
-import { H8, Pf } from '../905/590952';
+import { UserAvatar, AvatarSize } from '../905/590952';
 import { G as _$$G8 } from '../905/594445';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
@@ -784,7 +784,7 @@ import { cF as _$$cF, iG as _$$iG2, LS as _$$LS, ZH as _$$ZH, P4, PR } from '../
 import { z0 } from '../figma_app/914216';
 import { ClipboardOperation } from '../figma_app/915202';
 import { parseEmbedInput } from '../figma_app/916560';
-import { utilityNoop } from '../figma_app/918700';
+import { ModalContainer } from '../figma_app/918700';
 import { Badge, BadgeColor, BadgeSize } from '../figma_app/919079';
 import { useLatestRef } from '../figma_app/922077';
 import { f as _$$f7 } from '../figma_app/924252';
@@ -3364,8 +3364,8 @@ function am({
             }) : null
           }), jsxs('div', {
             className: 'x78zum5 x6s0dn4 x1jnr06f',
-            children: [jsx(H8, {
-              size: Pf.SMALL,
+            children: [jsx(UserAvatar, {
+              size: AvatarSize.SMALL,
               user: e.actor || {
                 handle: ' '
               }
@@ -4244,8 +4244,8 @@ function sp({
                     className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
                     children: [jsx('div', {
                       className: cssBuilderInstance.flex.itemsCenter.justifyCenter.h24.w24.$,
-                      children: jsx(H8, {
-                        size: Pf.SMALL,
+                      children: jsx(UserAvatar, {
+                        size: AvatarSize.SMALL,
                         user: x || {
                           handle: ' '
                         }
@@ -5576,7 +5576,7 @@ function rI() {
       orgAlt: jsxs('div', {
         className: 'x78zum5 x6s0dn4 x1jnr06f',
         children: [jsx(_$$ls, {
-          size: Pf.SMALL
+          size: AvatarSize.SMALL
         }), jsx('p', {
           ..._$$Ay.props(rA.textBodyMediumSecondary),
           children: getI18nString('figmake.settings.connected_project.multiplayer.org', {
@@ -5844,9 +5844,9 @@ function rM() {
           header: projectName,
           orgAlt: jsxs('div', {
             className: 'x78zum5 x6s0dn4 x1jnr06f',
-            children: [jsx(H8, {
+            children: [jsx(UserAvatar, {
               user: ownerAvatar,
-              size: Pf.SMALL
+              size: AvatarSize.SMALL
             }), jsx('p', {
               ..._$$Ay.props(rz.textBodyMediumSecondary),
               children: orgName
@@ -22210,7 +22210,7 @@ function bA({
   let i = Xr(P4);
   let n = useDispatch();
   _$$h3(() => t('sites_template_picker_shown'));
-  return jsx(utilityNoop, {
+  return jsx(ModalContainer, {
     'className': 'sites_template_modal--templateModal--a3YSn',
     'size': 900,
     'onHide': () => {

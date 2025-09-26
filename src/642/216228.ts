@@ -29,7 +29,7 @@ import { y as _$$y2 } from '../905/175043';
 import { n as _$$n2 } from '../905/186638';
 import { permissionScopeHandler as _$$l2, scopeAwareFunction as _$$nc } from '../905/189185';
 import { AutoSuggestSessionManager } from '../905/203573';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { v as _$$v } from '../905/213481';
 import { b as _$$b2 } from '../905/217163';
 import { Cn } from '../905/225265';
@@ -6594,7 +6594,7 @@ function iW() {
   useEffect(() => {
     hw(e);
   }, [e]);
-  _$$h(() => () => hw(0));
+  useSingleEffect(() => () => hw(0));
   return {
     results: c ? h : [],
     loading: g,
@@ -8189,7 +8189,7 @@ function an({
   let c = wY(l)?.width || e;
   let [u] = MA();
   let p = selectCurrentFile();
-  _$$h(() => {
+  useSingleEffect(() => {
     trackEventAnalytics('Component Sidebar Viewed', {
       viewMode: u,
       assetsPanelVersion: 3,

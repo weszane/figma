@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { ModalCloseButton } from "../905/17223";
 import { LoadingSpinner } from "../figma_app/858013";
 import { P } from "../905/347284";
@@ -41,7 +41,7 @@ export let $$E0 = registerModal(function (e) {
   let t = useDispatch();
   let i = "loaded" === ql().status;
   let o = ud();
-  _$$h(() => {
+  useSingleEffect(() => {
     t(searchClearQueryAction({}));
     let e = document.body.style.overflowY;
     document.body.style.overflowY = "hidden";

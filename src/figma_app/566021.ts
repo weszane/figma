@@ -29,7 +29,7 @@ import { uA, Wv, Im, kL } from "../figma_app/454622";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { Point } from "../905/736624";
 import { hidePickerThunk } from "../figma_app/91703";
 import { getHostnameFromUrl, findCommonSymbolId } from "../figma_app/164212";
@@ -305,7 +305,7 @@ function X({
   let c = Tg();
   let u = c?.find(e => e);
   let p = new Point(r?.initialX, r?.initialY);
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = r?.id === uA;
     let t = getHostnameFromUrl(u?.uri);
     let n = d?.map(e => r?.id === Wv ? SceneGraphHelpers.getAssetKeyForPublish(e) : r?.id === uA ? SceneGraphHelpers.getAssetKeyForPublish(findCommonSymbolId([e], s) ?? "") : "").filter(isNotNullish).map(e => e.toString());

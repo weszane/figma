@@ -12,7 +12,7 @@ import { CloseButton } from "../905/17223";
 import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { n as _$$n } from "../figma_app/537817";
+import { TeamAvatar } from "../figma_app/537817";
 import { S as _$$S } from "../905/339549";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
@@ -81,7 +81,7 @@ function P({
     className: "team_creation_speed_bump--placeholderVisual--Oqrum",
     children: [jsxs("div", {
       className: "team_creation_speed_bump--placeholderHeader--homNf text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      children: [jsx(_$$n, {
+      children: [jsx(TeamAvatar, {
         team: {
           name: t
         }

@@ -3,7 +3,7 @@ import { useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Ay } from "../figma_app/272902";
 import { analyticsEventManager } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { M3 } from "../figma_app/119475";
 import { IW, Lp } from "../figma_app/563413";
 import { searchEndSession, searchStartSession } from "../figma_app/925970";
@@ -53,7 +53,7 @@ export function $$y1(e) {
     ref: k
   });
   let F = useCallback(e => !!(e.altKey && fullscreenValue.isReady()) && f7(e), []);
-  _$$h(() => {
+  useSingleEffect(() => {
     function e() {
       R(searchEndSession());
     }
@@ -172,7 +172,7 @@ export function $$b0({
     disabled: !p,
     onFocus: v
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     S.current && setKeyboardNavigationElement?.(S.current.searchInput);
   });
   return jsx($$y1, {

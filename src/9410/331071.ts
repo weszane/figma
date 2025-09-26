@@ -38,7 +38,7 @@ import { a as _$$a2 } from '../905/192547';
 import { LRUCache } from '../905/196201';
 import { ES, TC } from '../905/198599';
 import { l as _$$l } from '../905/202425';
-import { h as _$$h } from '../905/207101';
+import { h as _$$h } from '../905/791079';
 import { B as _$$B, b as _$$b2 } from '../905/222272';
 import { nt as _$$nt, o3 as _$$o } from '../905/226610';
 import { s as _$$s4 } from '../905/234042';
@@ -104,7 +104,7 @@ import { t as _$$t6 } from '../905/572040';
 import { VisualBellType, VisualBellIcon } from '../905/576487';
 import { O as _$$O } from '../905/587457';
 import { pS } from '../905/588985';
-import { H8, Pf } from '../905/590952';
+import { UserAvatar, AvatarSize } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
 import { t as _$$t5 } from '../905/605191';
 import { Z as _$$Z2 } from '../905/606826';
@@ -9582,9 +9582,9 @@ function l1({
     'data-testid': 'extension-invite-row',
     'children': [jsxs('div', {
       className: cssBuilderInstance.flex.gap8.itemsCenter.font11.lh16.$,
-      children: [jsx(H8, {
+      children: [jsx(UserAvatar, {
         user: e.creator,
-        size: Pf.MEDIUM
+        size: AvatarSize.MEDIUM
       }), jsx(_$$e7, {
         resource: e
       })]

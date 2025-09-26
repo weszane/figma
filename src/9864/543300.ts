@@ -16,7 +16,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { M as _$$M } from "../905/152487";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { YX, S0, bk, PG, ZE, xO, VQ, qV, r3 as _$$r, X9, bT, Nz, nt, $l, aV, uN, Q7, BG, eL as _$$eL, kd, SL, ni, fj, VN, _D, pr, JA, Xw, xo, JC } from "../905/98947";
 import { pu, XL, ug, Pp, Ig, zH, td as _$$td, nH } from "../7037/430062";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
@@ -65,7 +65,7 @@ import { CreateUpgradeAction, TeamType } from "../figma_app/707808";
 import { ProductAccessTypeEnum, ViewAccessTypeEnum, ProductAccessTypeMap } from "../905/513035";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectUserFlag } from "../905/940356";
-import { rq as _$$rq } from "../905/351260";
+import { sendRoleInvites } from "../905/351260";
 import { wH } from "../figma_app/680166";
 import { AccessLevelEnum } from "../905/557142";
 import { subscribeAndAwaitData } from "../905/553831";
@@ -205,7 +205,7 @@ function S({
   className: o
 }) {
   let l = Xr(YX);
-  _$$h(() => {
+  useSingleEffect(() => {
     l(!0);
   });
   return jsx(_$$M, {
@@ -900,7 +900,7 @@ function eJ(e) {
         });
         return;
       }
-      r(_$$rq({
+      r(sendRoleInvites({
         emails: i,
         resourceType: FResourceCategoryType.TEAM,
         resourceIdOrKey: e.team.id,

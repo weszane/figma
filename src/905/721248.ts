@@ -16,7 +16,7 @@ import { hideModal, popModalStack, showModalHandler } from '../905/156213';
 import { zW } from '../905/162414';
 import { setupToggleButton } from '../905/167712';
 import { CustomCauseError } from '../905/194389';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { x as _$$x } from '../905/211326';
 import { J as _$$J2 } from '../905/225412';
 import { waitForAnimationFrame } from '../905/236856';
@@ -3959,7 +3959,7 @@ let nF = memo(e => {
     let [p, m] = useState(null);
     let [h, g] = useState(null);
     let f = useRef(new Set());
-    _$$h(() => {
+    useSingleEffect(() => {
       try {
         _$$n(e, t, i, n, a);
         u(!0);
@@ -5190,7 +5190,7 @@ let rR = memo(e => {
       };
     }(e, t, i), [e, t, i]);
     let h = useContext(ss);
-    _$$h(() => {
+    useSingleEffect(() => {
       let e = setTimeout(() => {
         try {
           _l();
@@ -5654,7 +5654,7 @@ function rO({
 }
 function rD(e) {
   let t = useErrorBoundaryContext();
-  _$$h(() => {
+  useSingleEffect(() => {
     let i = {
       direction: e.mergeDirection,
       branchKey: e.branchKey,
@@ -5774,7 +5774,7 @@ function rM(e) {
   let i = useDispatch();
   let [s, o] = useAtomValueAndSetter(currentSelectionAtom);
   let l = s ?? e.direction;
-  _$$h(() => (o(e.direction), () => o(null)));
+  useSingleEffect(() => (o(e.direction), () => o(null)));
   let d = e.direction;
   let [c, u] = useState(null);
   let [g, f] = useState(!1);
@@ -6012,7 +6012,7 @@ function rM(e) {
   });
 }
 export let $$rj0 = registerModal(e => {
-  _$$h(() => (trackEventAnalytics('Branch Modal Opened', {
+  useSingleEffect(() => (trackEventAnalytics('Branch Modal Opened', {
     branchKey: e.branchKey,
     sourceKey: e.sourceKey,
     direction: e.direction,

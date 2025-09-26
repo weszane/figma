@@ -138,7 +138,7 @@ export const fileActionEnum = {
  * Enum for project permissions (original: $$v6)
  * @enum {string}
  */
-const projectPermissionEnum = {
+export const projectPermissionEnum = {
   PUBLISH_COMPONENTS: 'publish_components',
   USE_AUDIO: 'use_audio',
   VIEW_ONLY_PROJECT: 'view_only_project',

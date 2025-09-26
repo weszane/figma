@@ -18,8 +18,8 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { BellId } from "../905/576487";
-import { H8, Pf, nl } from "../905/590952";
-import { U as _$$U } from "../905/566881";
+import { UserAvatar, AvatarSize, TeamAvatar } from "../905/590952";
+import { HAvatarType } from "../905/566881";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { z as _$$z2 } from "../905/404751";
 import { showModalHandler, hideModalHandler } from "../905/156213";
@@ -240,12 +240,12 @@ export function $$ee2({
           className: "move_drafts_nudge_rcs_steps--avatarRow--cUnRs",
           children: i.map(e => jsx("div", {
             className: cssBuilderInstance.relative.$,
-            children: jsx(H8, {
+            children: jsx(UserAvatar, {
               user: {
                 name: e.name || e.email || "",
                 img_url: e.imgUrl
               },
-              size: Pf.LARGE
+              size: AvatarSize.LARGE
             })
           }, e.id))
         }), jsx("h1", {
@@ -275,9 +275,9 @@ export function $$ee2({
           teamName: w.name,
           projectName: w.projects[0].path
         }),
-        iconLabel: jsx(nl, {
-          size: Pf.XSMALL,
-          fallbackDisplay: _$$U.HIDDEN,
+        iconLabel: jsx(TeamAvatar, {
+          size: AvatarSize.XSMALL,
+          fallbackDisplay: HAvatarType.HIDDEN,
           team: {
             id: w.id,
             imgUrl: w.imgUrl || void 0
@@ -289,9 +289,9 @@ export function $$ee2({
           className: "move_drafts_nudge_rcs_steps--projectRow--4JZde",
           children: [jsx("div", {
             className: "move_drafts_nudge_rcs_steps--teamAvatarIcon--vjnRi",
-            children: jsx(nl, {
-              size: Pf.XSMALL,
-              fallbackDisplay: _$$U.HIDDEN,
+            children: jsx(TeamAvatar, {
+              size: AvatarSize.XSMALL,
+              fallbackDisplay: HAvatarType.HIDDEN,
               team: {
                 id: e.id,
                 imgUrl: e.imgUrl || void 0

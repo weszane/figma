@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { T1 } from "../figma_app/153916";
 import { dayjs } from "../905/920142";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { T as _$$T } from "../1577/951568";
@@ -69,7 +69,7 @@ export function $$$$k0({
     overlay: kSi,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [n]);
-  if (_$$h(() => {
+  if (useSingleEffect(() => {
     show({
       canShow: e => {
         let t = e.orgTermsInfo?.renewalDate;

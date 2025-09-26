@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { EventShield } from "../905/821217";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
@@ -31,7 +31,7 @@ export function $$k0({
     overlay: ueY,
     priority: j()
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     (async () => {
       let e = await _$$d.getPermissionPreference();
       let t = w() && y() && "prompt" === e.state;

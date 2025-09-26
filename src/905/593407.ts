@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { H } from "../905/620380";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { getInitialOptions } from "../figma_app/169182";
 import { postUserFlag } from "../905/985254";
 import { e as _$$e } from "../905/621515";
@@ -124,7 +124,7 @@ export function $$F0({
   let T = !!getInitialOptions().tos_agreement_required && !C;
   let k = getFeatureFlags().tos_blocking_fallback_modal;
   let R = H(t);
-  _$$h(() => {
+  useSingleEffect(() => {
     let t = () => show({
       canShow: (e, t) => {
         let i = R.current.some(e => _$$e2.includes(_$$y(e)));

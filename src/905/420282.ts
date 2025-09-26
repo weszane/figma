@@ -22,7 +22,7 @@ import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { AutoLayout } from "../905/470281";
-import { Pf } from "../905/590952";
+import { AvatarSize } from "../905/590952";
 import { In } from "../905/672640";
 import { TextWithTruncation } from "../905/984674";
 import { T as _$$T } from "../905/292816";
@@ -187,7 +187,7 @@ function J(e) {
           children: [jsx("div", {
             className: cssBuilderInstance.mb8.$,
             children: jsx(Ro, {
-              size: Pf.XLARGE,
+              size: AvatarSize.XLARGE,
               entity: {
                 name: p.name,
                 imgUrl: p.imgUrl

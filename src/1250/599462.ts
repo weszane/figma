@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
@@ -21,7 +21,7 @@ export function $$f0(e) {
     overlay: ak5,
     priority: N.DEFAULT_MODAL
   }, [t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });

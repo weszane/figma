@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { B } from "../905/759157";
 import { A as _$$A } from "../905/351112";
@@ -24,7 +24,7 @@ export function $$v0() {
   let t = useCurrentOrgAdminInfo();
   let r = _$$S(e, t?.id);
   let i = useDispatch();
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     i(Xt());
   }), t && 0 !== r.length) ? jsx($$A1, {
     plugins: r,

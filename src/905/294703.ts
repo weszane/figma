@@ -26,7 +26,7 @@ import { FolderSearchResult } from "../figma_app/43951";
 import { cr, yY, CO } from "../905/703676";
 import { a as _$$a } from "../905/682573";
 import { A as _$$A } from "../1617/110063";
-import { nl, Pf, H8 } from "../905/590952";
+import { TeamAvatar, AvatarSize, UserAvatar } from "../905/590952";
 import { h1 } from "../905/986103";
 import { H as _$$H } from "../905/209153";
 import { In } from "../905/672640";
@@ -128,9 +128,9 @@ function D({
     breadcrumbElement: jsx(L, {
       teamResult: e
     }),
-    icon: jsx(nl, {
+    icon: jsx(TeamAvatar, {
       team: e.model,
-      size: Pf.MEDIUM
+      size: AvatarSize.MEDIUM
     }),
     id: t,
     onClickCallback: m,
@@ -188,9 +188,9 @@ function $$j({
   let v = a.model.org_id && m[a.model.org_id] || null;
   let I = jsxs("div", {
     className: "faceted_search_preview_user_row--iconContainer--d-n6O",
-    children: [jsx(H8, {
+    children: [jsx(UserAvatar, {
       user: a.model,
-      size: Pf.MEDIUM
+      size: AvatarSize.MEDIUM
     }), v && jsx("div", {
       className: "faceted_search_preview_user_row--planIcon--bXPm0",
       children: jsx(_$$H, {

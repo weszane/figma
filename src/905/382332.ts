@@ -15,7 +15,7 @@ import { getVisibleTheme } from "../905/640017";
 import { normalizeValue, isInvalidValue, isValidValue } from "../905/216495";
 import { useSceneGraphSelection } from "../figma_app/722362";
 import { vE, W as _$$W, UH, Lk } from "../figma_app/156285";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { UpgradeAction } from "../905/370443";
 import { e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
@@ -53,7 +53,7 @@ function R() {
     priority: _$$N.DEFAULT_MODAL
   });
   let r = getFeatureFlags().ce_il_scatter_onboarding ?? !1;
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: () => r
     });

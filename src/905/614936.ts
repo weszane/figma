@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { SKIP_RECORDING } from "../figma_app/878298";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { dP } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Um } from "../905/848862";
@@ -18,7 +18,7 @@ export function $$m0({
   let [g, f] = useState(0);
   let _ = JB();
   let A = U();
-  _$$h(() => () => {
+  useSingleEffect(() => () => {
     _();
   });
   let y = Um();

@@ -17,7 +17,7 @@ import { ServiceCategories } from '../905/165054';
 import { b as _$$b } from '../905/168657';
 import { t as _$$t4 } from '../905/192333';
 import { c as _$$c2 } from '../905/196462';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { gk } from '../905/222884';
 import { nt as _$$nt, o3 } from '../905/226610';
 import { resolveMessage } from '../905/231762';
@@ -47,7 +47,7 @@ import { c as _$$c } from '../905/534105';
 import { $N, e7 as _$$e2, el as _$$el, gy as _$$gy, H as _$$H, my as _$$my, Nz as _$$Nz, rX as _$$rX, S as _$$S, tu as _$$tu, u_ as _$$u_, C_, dQ, Fm, ij, K_, kW, OF, q_, se, sz, T7, Ud, V_, wH, Ws, Zr } from '../905/540111';
 import { globalPerfTimer } from '../905/542194';
 import { W as _$$W } from '../905/569454';
-import { Pf } from '../905/590952';
+import { AvatarSize } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
 import { H as _$$H2 } from '../905/620380';
 import { eX as _$$eX, UR as _$$UR, aW, F7, MJ, OM, VM, wb, wC, wG, xe, xS } from '../905/649567';
@@ -70,7 +70,8 @@ import { nq as _$$nq, _B, H6, hC, uB, WM, zf } from '../905/852370';
 import { generateUUIDv4 } from '../905/871474';
 import { V as _$$V } from '../905/890500';
 import { showDropdownThunk } from '../905/929976';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { C as _$$C2, e as _$$e3 } from '../905/937623';
 import { postUserFlag } from '../905/985254';
 import { JD } from '../905/986103';
@@ -1273,7 +1274,7 @@ function tV(e) {
       children: [jsx(_$$B2, {
         date: x.created_at,
         user: x.user,
-        size: Pf.MEDIUM,
+        size: AvatarSize.MEDIUM,
         shortDate: !1
       }), jsxs('div', {
         className: 'feed_post_popover_modal--postThumbnailContainer--69nje',
@@ -1672,7 +1673,7 @@ function nr(e) {
     threadPosition,
     comments
   } = e.thread;
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = globalPerfTimer.tryStop('view_comment_thread');
     e && trackEventAnalytics('view_comment_thread', {
       elapsedMs: e
@@ -1701,7 +1702,7 @@ function nr(e) {
     });
     en();
   }, [submitReply, ei, es, en]);
-  _$$h(() => () => {
+  useSingleEffect(() => () => {
     comments.map(e => {
       e.uuid && e.isPendingFromSinatra && globalPerfTimer.tryStop(`comment_reply_creation_${e.uuid}`);
     });

@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { CloseButton } from "../905/17223";
 import { Spacing, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -181,7 +181,7 @@ export function $$z0(e) {
       openInNewTab: !desktopAPIInstance
     })), a("createTeam")) : a("selectTeam");
   };
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     e.plan === _$$I2.PRO && P();
   }), "selectTeam" === t) ? (() => {
     let t = getEditableTeamsWithoutPaidAccess(C);

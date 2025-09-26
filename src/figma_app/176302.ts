@@ -4,7 +4,7 @@ import { debug } from "../figma_app/465776";
 import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr, Ut } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { h as _$$h } from "../905/791079";
 import { R as _$$R } from "../905/165069";
 import { getAppVisibilityState, subscribeToAppVisibility } from "../figma_app/925651";
 import { logError } from "../905/714362";

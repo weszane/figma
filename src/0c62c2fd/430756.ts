@@ -36,7 +36,7 @@ import { Z as _$$Z } from "../figma_app/761870";
 import { e0 } from "../905/696396";
 import { e as _$$e } from "../905/393279";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { h as _$$h2 } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { e as _$$e2 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N2 } from "../figma_app/268271";
@@ -46,7 +46,7 @@ import { F_ } from "../905/858282";
 import { QpH } from "../figma_app/6204";
 import { _9, J4, YU, Iz } from "../figma_app/907616";
 import { o6, gy } from "../905/986349";
-import { F as _$$F } from "../905/154112";
+import { confirmOrgGuestInviteModal } from "../905/154112";
 let J = userFlagExistsAtomFamily("seen_sharing_clarity_project_modal_overlay");
 let q = "sc_project_creation_permission_onboarding_key";
 function X() {
@@ -59,7 +59,7 @@ function X() {
     overlay: QpH,
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
-  _$$h2(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -171,7 +171,7 @@ export function $$er0(e) {
   let eI = e => {
     if (ed && ed?.invite_whitelist_guest_invite_setting == null && e.length > 0) {
       t(showModalHandler({
-        type: _$$F,
+        type: confirmOrgGuestInviteModal,
         data: {
           emails: e,
           onConfirm: () => {

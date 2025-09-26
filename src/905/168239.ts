@@ -7,7 +7,7 @@ import l from "../vendor/116389";
 import { AutoLayout, Spacer } from "../905/470281";
 import { q } from "../905/749058";
 import { s as _$$s } from "../905/645504";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { cF, fF, BZ } from "../figma_app/425283";
 import { UpgradeAction } from "../905/370443";
@@ -36,7 +36,7 @@ function I() {
     overlay: hoH,
     priority: _$$N.DEFAULT_MODAL
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show();
   });
   return jsx(rq, {

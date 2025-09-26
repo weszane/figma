@@ -52,7 +52,6 @@ import { ThemeContext } from '../905/187165';
 import { LO } from '../905/189279';
 import { AUTH_COMPLETE } from '../905/194276';
 import { W as _$$W4 } from '../905/200727';
-import { h as _$$h9 } from '../905/207101';
 import { Z as _$$Z2 } from '../905/224161';
 import { extractFirstEmoji, removePrefixAndVariation } from '../905/225144';
 import { C as _$$C2 } from '../905/226458';
@@ -134,7 +133,7 @@ import { B3, Sr } from '../905/535224';
 import { globalPerfTimer } from '../905/542194';
 import { N as _$$N3 } from '../905/544669';
 import { lu as _$$lu } from '../905/545842';
-import { U as _$$U3 } from '../905/566881';
+import { HAvatarType } from '../905/566881';
 import { d as _$$d8, O as _$$O } from '../905/572941';
 import { FlashActions } from '../905/573154';
 import { jO } from '../905/573265';
@@ -144,7 +143,7 @@ import { uo as _$$uo } from '../905/581543';
 import { k as _$$k6 } from '../905/582200';
 import { loadFeatureFlags } from '../905/586361';
 import { c1 as _$$c2, SW } from '../905/589717';
-import { nl as _$$nl2, H8, Pf } from '../905/590952';
+import { TeamAvatar, UserAvatar, AvatarSize } from '../905/590952';
 import { K as _$$K } from '../905/591700';
 import { h as _$$h4 } from '../905/593407';
 import { useIsCanvasEditDisabled } from '../905/595131';
@@ -542,7 +541,7 @@ import { Dt } from '../figma_app/912411';
 import { f as _$$f } from '../figma_app/913332';
 import { QE, z0 } from '../figma_app/914216';
 import { FileBrowserLocation, TabOpenBehavior } from '../figma_app/915202';
-import { utilityNoop } from '../figma_app/918700';
+import { ModalContainer } from '../figma_app/918700';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { useLatestRef } from '../figma_app/922077';
 import { w as _$$w } from '../figma_app/922802';
@@ -769,7 +768,7 @@ function eu() {
           })
         }), user && jsx('div', {
           style: styleBuilderInstance.w24.h24.p8.pr0.$,
-          children: jsx(H8, {
+          children: jsx(UserAvatar, {
             user
           })
         })]
@@ -4570,7 +4569,7 @@ function oO({
 }) {
   if (!e || e.status !== _$$Q4.EXPIRED) return null;
   let t = e.planType === FPlanTierType.ENTERPRISE ? renderI18nText('payments_modal.org_trial.enterprise') : renderI18nText('payments_modal.org_trial.organization');
-  return jsxs(utilityNoop, {
+  return jsxs(ModalContainer, {
     'className': ow,
     'size': 360,
     'title': jsx(TextWithTruncation, {
@@ -4663,7 +4662,7 @@ function oj(e) {
     'children': renderI18nText('payments_modal.org_trial_pending.ssa_link')
   });
   let m = renderI18nText('payments_modal.org_trial_pending.i_agree');
-  return jsxs(utilityNoop, {
+  return jsxs(ModalContainer, {
     'className': ow,
     'size': d ? 380 : 360,
     'title': jsx(TextWithTruncation, {
@@ -5048,12 +5047,12 @@ function l_({
             className: 'desktop_new_tab_folder_dropdown--dropdownButton--99FCC',
             children: [e && jsx('div', {
               className: lp,
-              children: jsx(_$$nl2, {
+              children: jsx(TeamAvatar, {
                 size: {
-                  imgSize: Pf.SMALL,
-                  fallbackSize: Pf.XSMALL
+                  imgSize: AvatarSize.SMALL,
+                  fallbackSize: AvatarSize.XSMALL
                 },
-                fallbackDisplay: _$$U3.HIDDEN,
+                fallbackDisplay: HAvatarType.HIDDEN,
                 team: {
                   id: e.team.id
                 }
@@ -5073,12 +5072,12 @@ function l_({
               children: [jsx(MenuItemLead, {
                 children: jsx('div', {
                   className: lp,
-                  children: jsx(_$$nl2, {
+                  children: jsx(TeamAvatar, {
                     size: {
-                      imgSize: Pf.SMALL,
-                      fallbackSize: Pf.XSMALL
+                      imgSize: AvatarSize.SMALL,
+                      fallbackSize: AvatarSize.XSMALL
                     },
-                    fallbackDisplay: _$$U3.HIDDEN,
+                    fallbackDisplay: HAvatarType.HIDDEN,
                     team: {
                       id: e.id
                     }
@@ -5102,12 +5101,12 @@ function l_({
                   children: [jsx(MenuItemLead, {
                     children: jsx('div', {
                       className: lp,
-                      children: jsx(_$$nl2, {
+                      children: jsx(TeamAvatar, {
                         size: {
-                          imgSize: Pf.SMALL,
-                          fallbackSize: Pf.XSMALL
+                          imgSize: AvatarSize.SMALL,
+                          fallbackSize: AvatarSize.XSMALL
                         },
-                        fallbackDisplay: _$$U3.HIDDEN,
+                        fallbackDisplay: HAvatarType.HIDDEN,
                         team: {
                           id: e.id
                         }
@@ -6795,7 +6794,7 @@ let c6 = registerTooltip('dev_mode_toggle_disabled_tracked_tooltip', () => {
   let i = selectCurrentFile();
   let a = t?.external_restricted_org_id ? getI18nString('dev_handoff.paywall.external_content_control_hint') : i?.parentOrgId ? getI18nString('dev_handoff.paywall.org_not_member_hint') : n ? void 0 : getI18nString('dev_handoff.paywall.team_not_member_hint');
   let s = t?.external_restricted_org_id ? 'ecc' : i?.parentOrgId ? 'not_member_org' : n ? void 0 : 'not_member_pro_team';
-  _$$h9(() => {
+  useSingleEffect(() => {
     e('Dev Mode Disabled Tooltip Viewed', {
       reason: s
     });
@@ -6817,7 +6816,7 @@ let c7 = registerTooltip('devmode_toggle_disabled_personal_draft', ({
   isCurrentUserFileOwner: e
 }) => {
   let t = trackFileEventWithStore();
-  return (_$$h9(() => {
+  return (useSingleEffect(() => {
     t('Dev Mode Disabled Tooltip Viewed', {
       reason: e ? 'personal_draft_owner' : 'personal_draft'
     });
@@ -7012,7 +7011,7 @@ function ud(e) {
       id: wX(o ? 'dev' : u === 'illustration' ? 'illustration' : 'design')
     });
   }, [o, u]);
-  _$$h9(() => {
+  useSingleEffect(() => {
     m();
   });
   return jsx(Q6, {
@@ -7066,7 +7065,7 @@ function uy(e) {
     overlay: Dkp,
     priority: _$$N5.DEFAULT_MODAL
   });
-  _$$h9(() => {
+  useSingleEffect(() => {
     activeMode !== 'illustration' || illustrationLoading || show({
       canShow: () => (getFeatureFlags().ce_il_onboarding && !n) ?? !1
     });
@@ -8207,7 +8206,7 @@ function p0(e) {
 function p3(e) {
   let [t, r] = useState(!1);
   let n = useSelector(e => e.modalShown);
-  _$$h9(() => {
+  useSingleEffect(() => {
     e.showModal();
     document.body.style.backgroundColor = 'transparent';
     window.parent?.postMessage(new pQ(pZ.FILE_BROWSER_LOADED), '*');

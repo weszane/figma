@@ -6,7 +6,7 @@ import { ModalRootComponent } from '../905/38914';
 import { c as _$$c } from '../905/73189';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { showModalHandler } from '../905/156213';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { renderI18nText } from '../905/303541';
 import { selectCurrentUser } from '../905/372672';
 import { useModalManager } from '../905/437088';
@@ -178,7 +178,7 @@ let k = registerModal(e => {
   !function (e, t, i) {
     let n = selectCurrentUser();
     let r = selectCurrentFile();
-    _$$h(() => {
+    useSingleEffect(() => {
       analyticsEventManager.trackDefinedEvent('preset_libraries.apple_font_eula_displayed', {
         trigger: e,
         eulaConfig: t.eula,

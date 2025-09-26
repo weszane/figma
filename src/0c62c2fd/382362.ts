@@ -21,7 +21,7 @@ import { FPermissionLevelType, FResourceCategoryType } from "../figma_app/191312
 import { liveStoreInstance } from "../905/713695";
 import { checkDomainExists } from "../figma_app/336853";
 import { canPerformActionBasedOnLevel, getPermissionLevelName } from "../figma_app/12796";
-import { rq } from "../905/351260";
+import { sendRoleInvites } from "../905/351260";
 import { bp, Wj } from "../905/913057";
 import { initialDomainsState } from "../905/158283";
 import { AccessLevelEnum } from "../905/557142";
@@ -29,7 +29,7 @@ import { Z as _$$Z } from "../figma_app/761870";
 import { e as _$$e } from "../905/393279";
 import { o6, gy } from "../905/986349";
 import { r, X as _$$X } from "../905/308709";
-import { F as _$$F } from "../905/154112";
+import { confirmOrgGuestInviteModal } from "../905/154112";
 import { $i } from "../905/635424";
 import { w as _$$w } from "../905/733703";
 import { $ as _$$$, t as _$$t2 } from "../905/628632";
@@ -45,7 +45,7 @@ import { A as _$$A2 } from "../1617/401431";
 import { A as _$$A3 } from "../1617/442539";
 import { i as _$$i } from "../1e926454/162932";
 import { O as _$$O } from "../905/921963";
-import { E4 } from "../905/144598";
+import { getUserHandleOrEmail } from "../905/144598";
 import { DA, Vq, Zk, st, d3, TS, Lq } from "../figma_app/538002";
 function Y(e) {
   let t = e.canAdmin;
@@ -166,7 +166,7 @@ export function $$ee0(e) {
   let es = er ? er.id : null;
   let ei = et && et.workspace;
   let en = er && er.org_domains ? er.org_domains : initialDomainsState;
-  let eo = useMemo(() => ee.data?.sort((e, t) => e.pending === t.pending ? E4(e, z).toLocaleLowerCase() < E4(t, z).toLocaleLowerCase() ? -1 : 1 : e.pending ? 1 : -1) ?? [], [z, ee]);
+  let eo = useMemo(() => ee.data?.sort((e, t) => e.pending === t.pending ? getUserHandleOrEmail(e, z).toLocaleLowerCase() < getUserHandleOrEmail(t, z).toLocaleLowerCase() ? -1 : 1 : e.pending ? 1 : -1) ?? [], [z, ee]);
   let el = et && et.pendingTeamRoleRequests ? et.pendingTeamRoleRequests : [];
   let {
     default: _default,
@@ -194,7 +194,7 @@ export function $$ee0(e) {
   });
   let ef = e => {
     let t = _$$Z(e);
-    $(rq({
+    $(sendRoleInvites({
       emails: t,
       resourceType: FResourceCategoryType.TEAM,
       resourceIdOrKey: teamId,
@@ -296,7 +296,7 @@ export function $$ee0(e) {
                 let t = _$$Z(e).filter(e => isValidEmail(e) && !checkDomainExists(en.domains, e));
                 if (er?.invite_whitelist_guest_invite_setting == null && t.length > 0) {
                   $(showModalHandler({
-                    type: _$$F,
+                    type: confirmOrgGuestInviteModal,
                     data: {
                       emails: t,
                       onConfirm: () => {

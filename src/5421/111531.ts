@@ -76,7 +76,7 @@ import { n1 } from "../905/698732";
 import { tb as _$$tb } from "../figma_app/703447";
 import { O as _$$O2 } from "../905/969533";
 import { permissionScopeHandler } from "../905/189185";
-import { h as _$$h2 } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { Qr } from "../905/690539";
 import { Xo } from "../figma_app/482495";
@@ -106,7 +106,7 @@ import { N as _$$N } from "../905/568293";
 import { K as _$$K3 } from "../905/459096";
 import { h as _$$h4 } from "../905/123399";
 import { W as _$$W } from "../7a72fc59/509666";
-import { noop } from "../905/253683";
+import { j as SVG } from "../905/253683";
 import { s as _$$s3 } from "../905/702260";
 import { W as _$$W2 } from "../905/378870";
 import { f as _$$f2 } from "../905/335032";
@@ -848,7 +848,7 @@ function e9() {
     s(!l);
     l ? _() : f(e8, 300);
   }, [_, l, f, s]);
-  _$$h2(() => {
+  useSingleEffect(() => {
     h && h.id === e8 && _();
   });
   useEffect(() => {
@@ -1536,7 +1536,7 @@ function tA() {
       tooltipType: KindEnum.LOOKUP,
       isActive: r,
       onClick: a,
-      children: jsx(noop, {})
+      children: jsx(SVG, {})
     })
   });
 }

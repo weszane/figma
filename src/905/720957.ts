@@ -6,7 +6,7 @@ import { h as _$$h } from "../905/994594";
 import { A as _$$A } from "../905/251970";
 import { useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import c from "../vendor/197638";
-import { h as _$$h2 } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { M3 } from "../figma_app/119475";
 import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString } from "../905/303541";
@@ -66,7 +66,7 @@ export function $$P0({
     id: "faceted-search-bar",
     path: [0]
   });
-  _$$h2(() => {
+  useSingleEffect(() => {
     O.current && setKeyboardNavigationElement?.(O.current);
   });
   let ee = useCallback(() => {

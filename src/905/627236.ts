@@ -24,7 +24,7 @@ import { z as _$$z } from "../905/284530";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { Pf } from "../905/590952";
+import { AvatarSize } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 import { g as _$$g } from "../905/119656";
 import { T as _$$T } from "../905/292816";
@@ -230,7 +230,7 @@ function X(e) {
           children: [jsx("div", {
             className: cssBuilderInstance.mb8.$,
             children: jsx(Ro, {
-              size: Pf.XLARGE,
+              size: AvatarSize.XLARGE,
               entity: {
                 name: g.name,
                 imgUrl: g.imgUrl

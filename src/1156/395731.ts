@@ -7,7 +7,7 @@ import { Ay } from "@stylexjs/stylex";
 import { SvgComponent } from "../905/714743";
 import { G } from "../905/750789";
 import { getI18nString } from "../905/303541";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { mS, RK } from "../figma_app/791586";
 import { n1 } from "../figma_app/325912";
 import { A } from "../b2835def/114344";
@@ -155,7 +155,7 @@ export function $$k4({
   size: e
 }) {
   let t = RK();
-  return t ? jsx(H8, {
+  return t ? jsx(UserAvatar, {
     user: t,
     size: e
   }) : null;

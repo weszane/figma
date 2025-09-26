@@ -39,7 +39,7 @@ import { j as _$$j, F as _$$F } from "../4452/869669";
 import { OJ } from "../905/519092";
 import { _9, J4, YU, Kd, Iz } from "../figma_app/907616";
 import { o6, gy } from "../905/986349";
-import { F as _$$F2 } from "../905/154112";
+import { confirmOrgGuestInviteModal } from "../905/154112";
 import { A as _$$A } from "../svg/38542";
 let W = "team_creation_modal--sectionHeader--WhxZn text--fontPos11--2LvXf text--_fontBase--QdLsd";
 let z = "team_creation_modal--flexRow---ZX7J";
@@ -365,7 +365,7 @@ export let $$K0 = registerModal(function (e) {
                   e.length > 0 ? function (e) {
                     if (N?.invite_whitelist_guest_invite_setting == null && e.length > 0) {
                       t(showModalHandler({
-                        type: _$$F2,
+                        type: confirmOrgGuestInviteModal,
                         data: {
                           emails: e,
                           onConfirm: () => {

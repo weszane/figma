@@ -12,8 +12,8 @@ import { P as _$$P } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { Pf, nl } from "../905/590952";
-import { U as _$$U } from "../905/566881";
+import { AvatarSize, TeamAvatar } from "../905/590952";
+import { HAvatarType } from "../905/566881";
 import { Cy } from "../905/844322";
 import { showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
@@ -369,7 +369,7 @@ export let $$en0 = registerModal(function (e) {
                 children: [jsx("div", {
                   className: Z,
                   children: jsx(fZ, {
-                    size: Pf.MEDIUM,
+                    size: AvatarSize.MEDIUM,
                     shape: "CIRCLE",
                     removeCustomFill: !0,
                     className: e.checked ? "draft_move_modal--newStarterTeamAvatarSelected--QfQVr" : "draft_move_modal--newStarterTeamAvatar--HHodh",
@@ -564,10 +564,10 @@ function ea(e) {
     ref: e.folderRef,
     children: [jsx("div", {
       className: Z,
-      children: jsx(nl, {
-        size: Pf.MEDIUM,
+      children: jsx(TeamAvatar, {
+        size: AvatarSize.MEDIUM,
         shape: "CIRCLE",
-        fallbackDisplay: _$$U.HIDDEN,
+        fallbackDisplay: HAvatarType.HIDDEN,
         team: {
           id: e.teamId,
           imgUrl: e.imgUrl

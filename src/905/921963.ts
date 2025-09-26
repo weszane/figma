@@ -12,7 +12,7 @@ import { P as _$$P } from "../905/842406";
 import { Um } from "../905/848862";
 import { FResourceCategoryType, FOrganizationLevelType } from "../figma_app/191312";
 import { C0 } from "../905/162414";
-import { $S } from "../905/351260";
+import { resendInvite } from "../905/351260";
 import { hw, zO, lP, yN } from "../905/727738";
 import { Zm } from "../905/913057";
 import { KI } from "../figma_app/680166";
@@ -24,7 +24,7 @@ import { a as _$$a } from "../905/699981";
 import { _ as _$$_2 } from "../905/872445";
 import { b as _$$b } from "../905/173822";
 import { G as _$$G } from "../905/595923";
-import { nu, R9, E4 } from "../905/144598";
+import { generateRoleOptions, setupRoleRow, getUserHandleOrEmail } from "../905/144598";
 import { to as _$$to, vQ, UU } from "../905/372455";
 export function $$N0(e) {
   let t = useDispatch();
@@ -45,7 +45,7 @@ export function $$N0(e) {
   let j = D?.editor_type;
   let U = !!j && !!userLacksLicenseAccess(j);
   let B = () => {
-    t($S({
+    t(resendInvite({
       role: e.role
     }));
   };
@@ -56,7 +56,7 @@ export function $$N0(e) {
     let r = e.role.level === AccessLevelEnum.OWNER;
     let a = e.isOwnerOfResource;
     a ? i = !r : r ? i = !1 : n && (i = !0);
-    return nu(a, n, i, e.canMakeAdmin, e.role.pending, e.role.level, e.isPrototypeRole);
+    return generateRoleOptions(a, n, i, e.canMakeAdmin, e.role.pending, e.role.level, e.isPrototypeRole);
   }, [e.canEditRole, e.canMakeAdmin, e.isOwnerOfResource, e.isPrototypeRole, e.role, e.user]);
   let G = e.readOnlyOverrideWarningMessage;
   let z = e.isStarterTier || e.role.level === AccessLevelEnum.VIEWER || e.resource.type !== FResourceCategoryType.FILE ? null : e.user.id === e.role.user_id && U ? {
@@ -75,7 +75,7 @@ export function $$N0(e) {
     type: FOrganizationLevelType.TEAM,
     parentId: e.resource.file.team_id || ""
   } : null;
-  return jsx(R9, {
+  return jsx(setupRoleRow, {
     contacts: N,
     dropdownShown: i,
     editorType: j,
@@ -187,7 +187,7 @@ export function $$N0(e) {
         let {
           role: _role
         } = e;
-        return E4(_role, N);
+        return getUserHandleOrEmail(_role, N);
       }();
       return jsx(_$$_, {
         className: UU,

@@ -5,7 +5,7 @@ import { noop } from 'lodash-es';
 import { RadioPrimitiveRoot } from "../905/22449";
 import { RadioPrimitiveOption } from "../905/34525";
 import { getI18nString } from "../905/303541";
-import { H8, nl } from "../905/590952";
+import { UserAvatar, TeamAvatar } from "../905/590952";
 import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { LG } from "../905/448440";
 import { jr, j4, Z7, MO } from "../figma_app/599979";
@@ -70,9 +70,9 @@ export function $$b1(e) {
 }
 let v = e => jr(e) ? 1 : Z7(e) ? 2 : MO(e) ? 3 : void throwTypeError(e);
 let I = e => jr(e) ? getI18nString("community.publishing.individual_creator") : Z7(e) ? getI18nString("community.publishing.team_author") : MO(e) ? getI18nString("community.publishing.organization_author") : throwTypeError(e);
-let E = (e, t) => jr(e) ? jsx(H8, {
+let E = (e, t) => jr(e) ? jsx(UserAvatar, {
   user: t
-}) : Z7(e) || MO(e) ? jsx(nl, {
+}) : Z7(e) || MO(e) ? jsx(TeamAvatar, {
   team: t
 }) : throwTypeError(e);
 function x({
@@ -105,12 +105,12 @@ function S({
   } = e;
   return jsxs("label", {
     className: uK,
-    children: [e.entity_type === TeamOrgType.USER ? jsx(H8, {
+    children: [e.entity_type === TeamOrgType.USER ? jsx(UserAvatar, {
       user: {
         imageUrl: img_url,
         name
       }
-    }) : jsx(nl, {
+    }) : jsx(TeamAvatar, {
       team: {
         imageUrl: img_url,
         name

@@ -10,7 +10,7 @@ import { popModalStack } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { getMPVisibleTheme } from '../905/187165';
 import { W as _$$W } from '../905/200727';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { GW, iS, Jo, sp } from '../905/223565';
 import { R as _$$R } from '../905/263821';
 import { accountTypeRequestHandler } from '../905/281010';
@@ -443,7 +443,7 @@ export function $$eb0(e) {
       };
     }
   }, [er, eC]);
-  _$$h(() => {
+  useSingleEffect(() => {
     if (er && Q === 0) {
       let e = setTimeout(() => {
         ea.current?.(!0);
@@ -454,7 +454,7 @@ export function $$eb0(e) {
       };
     }
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     er && eI('');
   });
   let ek = () => {

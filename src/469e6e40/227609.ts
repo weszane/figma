@@ -44,7 +44,7 @@ import { showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { b as _$$b3 } from '../905/173822';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { V as _$$V } from '../905/223767';
 import { Cj } from '../905/270084';
 import { VisualBellActions } from '../905/302958';
@@ -52,7 +52,7 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R } from '../905/304671';
 import { collaboratorSet } from '../905/332483';
 import { createOptimistThunk } from '../905/350402';
-import { $S } from '../905/351260';
+import { resendInvite } from '../905/351260';
 import { UpgradeAction } from '../905/370443';
 import { selectCurrentUser } from '../905/372672';
 import { b as _$$b5 } from '../905/388233';
@@ -306,7 +306,7 @@ function eJ() {
     overlay: L69,
     priority: _$$N2.DEFAULT_MODAL
   }, [t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !0
     });
@@ -481,7 +481,7 @@ let e5 = withTracking(e => {
     }));
   }, [_, u, dispatch, team]);
   let v = useCallback(e => {
-    e.team_role && dispatch($S({
+    e.team_role && dispatch(resendInvite({
       role: e.team_role
     }));
   }, [dispatch]);
@@ -1174,7 +1174,7 @@ function tG(e) {
       }
     }));
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     e.billing.summary.show_vat_gst && _$$S(mL, () => {
       Hq({
         team: e.team,
@@ -1739,7 +1739,7 @@ function an() {
     overlay: iq7,
     priority: _$$N2.SECONDARY_MODAL
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show();
   });
   return jsx(_$$X, {

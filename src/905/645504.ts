@@ -1,5 +1,5 @@
 import { jsx, Fragment } from "react/jsx-runtime";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { $X, fF } from "../figma_app/425283";
 import { l4, l_ } from "../figma_app/982327";
@@ -21,7 +21,7 @@ export function $$g0({
     overlay: s3e,
     priority: N.DEFAULT_MODAL
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show();
   });
   let f = (() => {

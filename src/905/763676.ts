@@ -8,7 +8,7 @@ import { Link } from "../905/438674";
 import { PluginModalType, Fullscreen } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { trackEventAnalytics } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { ImageBackedLoading } from "../figma_app/858013";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -467,7 +467,7 @@ export function $$ef0({
 }) {
   let i = useDispatch();
   let [d, C] = useState(!0);
-  _$$h(() => {
+  useSingleEffect(() => {
     _$$J2(() => {
       handleLoadAllPagesWithVersionCheck(PluginModalType.REPLACE_LIBRARIES).then(() => {
         Fullscreen.expandInstancesWithStyleOverrides();

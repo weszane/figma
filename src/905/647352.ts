@@ -18,7 +18,7 @@ import { Label } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { sb } from "../figma_app/519839";
 import { JT } from "../figma_app/173838";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -50,7 +50,7 @@ let M = registerModal(function ({
   let r = useAtomWithSubscription(pz);
   let s = useAtomWithSubscription(_$$t2);
   let o = JT();
-  _$$h(() => {
+  useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent("design_systems_modals.unpublish_modal_opened", {
       libraryModalSessionId: e,
       orgId: i?.parentOrgId ?? void 0,

@@ -50,7 +50,7 @@ import { InputComponent } from '../905/185998';
 import { permissionScopeHandler as _$$l6 } from '../905/189185';
 import { W as _$$W } from '../905/200727';
 import { P as _$$P } from '../905/201667';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { x as _$$x } from '../905/211326';
 import { B as _$$B } from '../905/224000';
 import { J as _$$J5 } from '../905/225412';
@@ -1024,7 +1024,7 @@ function eU({
   nodeHeight: t,
   complete: l
 }) {
-  _$$h(() => {
+  useSingleEffect(() => {
     SceneGraphHelpers?.replaceSelection([e], !0);
   });
   return jsxs(NJ, {
@@ -1797,7 +1797,7 @@ function lw({
   let [z, B] = useState(!1);
   let F = GQ();
   let $ = _$$P();
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = () => {
       _(window.innerWidth);
     };
@@ -9700,7 +9700,7 @@ let oN = memo(() => {
       e.length && SceneGraphHelpers?.replaceSelection(e, !0);
     }, [e]);
   }();
-  _$$h(() => {
+  useSingleEffect(() => {
     atomStoreManager.set(rd);
   });
   return jsxs('div', {
@@ -9806,7 +9806,7 @@ function oB() {
     e.size && l(e.size);
     r(e.position);
   }, [r, l]);
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = {
       x: t.initialWidth,
       y: t.initialHeight

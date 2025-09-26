@@ -22,7 +22,7 @@ import S from "../vendor/128080";
 import C from "../vendor/523035";
 import { parsePxNumber } from "../figma_app/783094";
 import { trackFileEventWithStore } from "../figma_app/901889";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
@@ -124,7 +124,7 @@ let ex = _$$D(() => {
   if ("string" == typeof e && !isNaN(parseInt(e))) return parseInt(e);
 });
 function eS(e) {
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     Kk() || trackEventAnalytics("Missing Fonts Modal No Agent Banner Shown", {}, {
       forwardToDatadog: !0
     });
@@ -236,7 +236,7 @@ export let $$eZ0 = registerModal(function (e) {
   let Z = useSelector(e => e.userFlags);
   let ee = useSelector(e => e.selectedView);
   let en = getEditorTypeFromView(ee);
-  _$$h(() => {
+  useSingleEffect(() => {
     E("missing_fonts_modal_opened", {
       missing_font_families: [...new Set(e.missingFonts.map(e => e.family))]
     });

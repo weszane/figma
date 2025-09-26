@@ -33,7 +33,7 @@ import { KeyboardReceiver } from "../905/826900";
 import { ht } from "../figma_app/741785";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { YT, Oz, Qe, dJ, eG as _$$eG, uU, n6, iC, zt } from "../figma_app/84580";
 import { hh } from "../905/417232";
 import { AutoLayout } from "../905/470281";
@@ -678,7 +678,7 @@ function eW(e) {
     updateSelectionProperties,
     selectedInteractions
   } = Ay(e.category, e.filterOutNoneActions);
-  _$$h(() => {
+  useSingleEffect(() => {
     if (void 0 !== globalPerfTimer.get(ez)) {
       let e = globalPerfTimer.stop(ez);
       trackEventAnalytics(ez, {

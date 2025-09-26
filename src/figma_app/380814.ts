@@ -16,7 +16,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useLocalStorageSync } from "../905/657224";
 import y from "../vendor/239910";
 import { parsePxNumber } from "../figma_app/783094";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
 import { logError } from "../905/714362";
 import { LazyInputForwardRef } from "../905/408237";
@@ -257,7 +257,7 @@ export function $$Z1({
   function b(e) {
     y(s.varName, e, s.varSetID);
   }
-  _$$h(() => {
+  useSingleEffect(() => {
     f.current?.select();
     y(Wc(m, r), t ?? resolveVariableValue(r), p?.node_id ?? null);
   });

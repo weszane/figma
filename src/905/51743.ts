@@ -25,7 +25,7 @@ import { A as _$$A } from "../905/721854";
 import { is, Oq } from "../905/904596";
 import { F } from "../905/382217";
 import { setupThemeContext } from "../905/614223";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { y as _$$y2 } from "../figma_app/13082";
 function P({
   actionIcon: e,
@@ -37,7 +37,7 @@ function P({
 }) {
   let l = pP(JT.AUTO_RENAME_LAYERS);
   let p = I9();
-  _$$h(() => {
+  useSingleEffect(() => {
     s && ID({
       ...s,
       interaction: lc.VIEW,

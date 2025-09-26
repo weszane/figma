@@ -212,7 +212,7 @@ export function getPermissionLevelNameCapitalized(e) {
  * @param {boolean} t - Whether it's a branch.
  * @returns {string} The level name.
  */
-export function getPermissionLevelName(e, t) {
+export function getPermissionLevelName(e, t?: any) {
   switch (e) {
     case AccessLevelEnum.OWNER:
       return t ? getI18nString('permissions.level_name.branch_owner') : getI18nString('permissions.level_name.owner');

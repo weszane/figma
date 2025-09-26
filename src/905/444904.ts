@@ -4,7 +4,7 @@ import { ButtonLargeWide } from "../905/521428";
 import { Link } from "../905/438674";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { CustomModalComponent } from "../905/684425";
@@ -47,7 +47,7 @@ export function $$I0({
       })
     });
   }
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent("mfa.modal_shown", {
       orgId: t.id,
       userId: E ?? void 0,

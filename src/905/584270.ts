@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { AutoLayout } from "../905/470281";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 export function $$o0({
   user: e,
@@ -9,8 +9,8 @@ export function $$o0({
   return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 16,
-    children: [jsx(H8, {
-      size: Pf.XLARGE,
+    children: [jsx(UserAvatar, {
+      size: AvatarSize.XLARGE,
       user: e
     }), jsx(TextWithTruncation, {
       fontWeight: "medium",

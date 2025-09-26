@@ -84,8 +84,8 @@ import { jT } from "../figma_app/302802";
 import { Xu, gJ, d4 } from "../figma_app/588582";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { e as _$$e2 } from "../905/483726";
-import { h as _$$h } from "../905/207101";
-import { Pf, H8 } from "../905/590952";
+import { useSingleEffect } from "../905/791079";
+import { AvatarSize, UserAvatar } from "../905/590952";
 import { Xl, GV, rK as _$$rK, hR, s8 } from "../figma_app/72338";
 import { L as _$$L } from "../905/704296";
 import { ls, cG, jc, lV as _$$lV } from "../1156/395731";
@@ -311,7 +311,7 @@ function eU() {
   let u = useAtomWithSubscription(Xl);
   let x = useAtomWithSubscription(GV);
   let m = _$$A4();
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     x && m({
       showVisualBells: !1
     });
@@ -364,7 +364,7 @@ function eU() {
           }), jsxs("div", {
             className: "x78zum5 x1q0g3np x167g77z",
             children: [jsx(ls, {
-              size: Pf.LARGE
+              size: AvatarSize.LARGE
             }), jsxs("div", {
               className: "x78zum5 xdt5ytf xkvmg5q",
               children: [jsx("p", {
@@ -2017,7 +2017,7 @@ function ni({
         })]
       }), jsx("div", {
         className: "xpvyfi4 x1ty9z65",
-        children: jsx(H8, {
+        children: jsx(UserAvatar, {
           "aria-label": e.name ?? e.handle,
           user: e
         })
@@ -3964,7 +3964,7 @@ function rH({
             exit: "exit",
             initial: "hidden",
             variants: rP,
-            children: jsx(H8, {
+            children: jsx(UserAvatar, {
               user: e
             })
           })

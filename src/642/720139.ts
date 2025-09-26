@@ -10,7 +10,7 @@ import { atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/2735
 import { analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { NX } from "../figma_app/243213";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { KeyCodes } from "../905/63728";
 import { Point } from "../905/736624";
 import { c2, Nt, yn, lv } from "../figma_app/119475";
@@ -87,7 +87,7 @@ import { Y as _$$Y2 } from "../905/411989";
 import { K0 } from "../figma_app/778125";
 import { getResourceDataOrFallback } from "../905/663269";
 import { h1 } from "../905/986103";
-import { Pf, H8 } from "../905/590952";
+import { AvatarSize, UserAvatar } from "../905/590952";
 import { e as _$$e } from "../905/579755";
 import { R8, M as _$$M, G5 } from "../figma_app/933221";
 import { S as _$$S } from "../figma_app/636279";
@@ -272,15 +272,15 @@ function ez({
     if (e.type === FTeamType.COMMUNITY) return {
       avatar: jsx(_$$e, {
         entity: _$$M(e),
-        size: Pf.SMALL
+        size: AvatarSize.SMALL
       }),
       authorName: e.name
     };
     let t = G5(e);
     return null != t && t.img_url && (t.handle || t.name) ? {
-      avatar: jsx(H8, {
+      avatar: jsx(UserAvatar, {
         user: t,
-        size: Pf.SMALL
+        size: AvatarSize.SMALL
       }),
       authorName: t.handle
     } : {
@@ -686,7 +686,7 @@ export function $$tu1({
   let ef = useSelector(e => e.instanceSwapPickerShown);
   let ex = _$$k2();
   let ey = tM(O ?? "assets-panel");
-  _$$h(() => {
+  useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent("assets_panel.flyout_opened", {
       assetKey: _$$V(e),
       assetType: _$$q(e.type),
@@ -699,7 +699,7 @@ export function $$tu1({
       queryId: ey ?? void 0
     });
   });
-  _$$h(() => () => {
+  useSingleEffect(() => () => {
     ep(hideInstanceSwapPicker());
     B(!1);
   });

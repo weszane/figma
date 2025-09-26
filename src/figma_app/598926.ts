@@ -10,7 +10,7 @@ import { popModalStack } from "../905/156213";
 import { trackFolderEvent } from "../figma_app/314264";
 import { validateFolderName, generateTempId } from "../figma_app/528509";
 import { FResourceCategoryType } from "../figma_app/191312";
-import { rq } from "../905/351260";
+import { sendRoleInvites } from "../905/351260";
 import { AccessLevelEnum } from "../905/557142";
 import { roleServiceAPI } from "../figma_app/66216";
 import { createOptimistThunk } from "../905/350402";
@@ -112,7 +112,7 @@ let $$w11 = createOptimistThunk((e, t) => {
         teamAccess: t.teamAccess
       });
       let n = e.getState().user;
-      t.inviteEmails?.length && t.teamAccess && e.dispatch(rq({
+      t.inviteEmails?.length && t.teamAccess && e.dispatch(sendRoleInvites({
         emails: t.inviteEmails,
         emailsToExclude: n ? new Set([n.email]) : void 0,
         resourceType: FResourceCategoryType.FOLDER,

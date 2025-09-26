@@ -59,7 +59,7 @@ import { FOrganizationLevelType } from "../figma_app/191312";
 import { UpsellModalType } from "../905/165519";
 import { AccessLevelEnum } from "../905/557142";
 import { p as _$$p } from "../figma_app/353099";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { e as _$$e3 } from "../905/621515";
 import { UC } from "../figma_app/33126";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -216,7 +216,7 @@ function eN() {
     overlay: UDe,
     priority: _$$N2.DEFAULT_MODAL
   }, [e, s, o]);
-  _$$h(() => {
+  useSingleEffect(() => {
     d.show({
       canShow: (e, t, i) => e && t && !i && KI("LIBRARIES_WORKSPACE_ONBOARDING_KEY")
     });

@@ -11,7 +11,7 @@ import { HiddenLabel } from "../905/270045";
 import { ks } from "../905/773401";
 import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { popModalStack } from "../905/156213";
 import { aJ, kN, QC } from "../figma_app/494261";
 import { selectUser } from "../905/372672";
@@ -123,7 +123,7 @@ function v({
   let a = void 0 === i || i < AccessLevelEnum.VIEWER;
   return jsxs("div", {
     className: "request_access_modal--userRow--ijROZ",
-    children: [jsx(H8, {
+    children: [jsx(UserAvatar, {
       user: r
     }), jsx("div", {
       "data-testid": "userName",

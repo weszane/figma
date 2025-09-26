@@ -23,7 +23,7 @@ import { il, w6 } from "../figma_app/789050";
 import { c as _$$c } from "../figma_app/765216";
 import { hg, zk } from "../figma_app/947348";
 import { getFeatureFlags } from "../905/601108";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { handleAtomEvent } from "../905/502364";
 import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
@@ -73,7 +73,7 @@ function V(e) {
   });
   let s = (getFeatureFlags().ce_il_var_width_onboarding ?? !1) && !e.isVarWidthPointDisabled;
   let o = selectUserFlag("seen_draw_secondary_toolbelt_onboarding");
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: () => s && !!o?.createdAt
     });
@@ -123,7 +123,7 @@ function H() {
     overlay: PXv,
     priority: _$$N3.DEFAULT_MODAL
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: () => getFeatureFlags().ce_il_onboarding ?? !1
     });

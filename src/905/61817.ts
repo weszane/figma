@@ -4,7 +4,7 @@ import { L } from "../905/704296";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 import { TeamOrgType } from "../figma_app/10554";
 export function $$p0({
@@ -29,7 +29,7 @@ export function $$p0({
         className: cssBuilderInstance.$$with({
           opacity0_5: isPending
         }).$,
-        children: jsx(H8, {
+        children: jsx(UserAvatar, {
           user: {
             imageUrl: img_url,
             name

@@ -8,7 +8,7 @@ import d from "classnames";
 import { ResourceStatus } from "../905/957591";
 import { parsePxNumber } from "../figma_app/783094";
 import { customHistory } from "../905/612521";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { R as _$$R } from "../905/165069";
 import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
@@ -88,7 +88,7 @@ function Z(e) {
     priority: _$$N.DEFAULT_MODAL
   }, [a]);
   let d = zl(Q);
-  _$$h(() => {
+  useSingleEffect(() => {
     "reset" === d.currentState ? show() : show({
       canShow: e => !e && !isMobileUA
     });
@@ -454,7 +454,7 @@ export function $$eD0({
     selectedView: e
   }) => e);
   let eS = B ?? uH;
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = () => {
       eE(window.innerHeight);
     };

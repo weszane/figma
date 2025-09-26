@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useContext, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { APILoadingStatus } from "../905/520829";
 import { XHR } from "../905/910117";
 import { batchPutFileAction } from "../figma_app/78808";
@@ -34,7 +34,7 @@ export function $$g2({
     status: APILoadingStatus.SUCCESS,
     nodeIdToValidatedMoveInfo: Object.create(null)
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = e => e.reduce((e, t) => (t.old_key && (e[t.node_id] = t.old_key), e), Object.create(null));
     let n = e(Object.values(t.local.components));
     let r = e(Object.values(t.local.stateGroups));

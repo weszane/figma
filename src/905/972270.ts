@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 export function $$a0({
   avatarEntity: e,
   authorDisplayName: t,
@@ -7,9 +7,9 @@ export function $$a0({
 }) {
   return jsxs("div", {
     className: "author_dropdown_option--profileRow--lDH-T",
-    children: [e ? jsx(H8, {
+    children: [e ? jsx(UserAvatar, {
       user: e,
-      size: Pf.MEDIUM
+      size: AvatarSize.MEDIUM
     }) : null, jsxs("div", {
       className: "author_dropdown_option--profileTextContainer--HNSfc",
       children: [jsx("div", {

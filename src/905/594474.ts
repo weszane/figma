@@ -12,7 +12,7 @@ import { UI3ConditionalWrapper } from "../905/341359";
 import { useDebouncedCallback } from "use-debounce";
 import { customHistory } from "../905/612521";
 import { H as _$$H } from "../905/620380";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { ErrorBoundaryCrash } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -3415,7 +3415,7 @@ function ij(e) {
     widgetSnapshotPromise: u,
     dataSecurityPromise: p
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     x.fieldStates.snapshot.currentValue !== unsetSymbol && x.fieldStates.snapshot.resetValue();
   });
   let S = !!localExtension && Rc(localExtension);

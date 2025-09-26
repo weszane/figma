@@ -6,7 +6,7 @@ import { h1 } from "../905/986103";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 import { preventDefault } from "../figma_app/753501";
 import { E as _$$E } from "../905/511388";
@@ -53,7 +53,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
         }, {
           top: "0.5px"
         }).$,
-        children: jsx(H8, {
+        children: jsx(UserAvatar, {
           user: e,
           size: 14
         })

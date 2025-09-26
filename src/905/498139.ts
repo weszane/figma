@@ -23,7 +23,7 @@ import { i as _$$i } from "../905/649519";
 import { WB } from "../figma_app/394327";
 import { IconButton } from "../905/443068";
 import { U as _$$U } from "../905/708285";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { LazyInputForwardRef } from "../905/408237";
 import { $ } from "../905/483620";
 import { VariableBindingsDropdown } from "../figma_app/260445";
@@ -37,7 +37,7 @@ function D({
   resolvedType: a
 }) {
   let s = useRef(null);
-  _$$h(() => {
+  useSingleEffect(() => {
     s.current?.select();
   });
   let l = e => {

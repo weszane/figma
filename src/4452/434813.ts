@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { Pf, H8 } from "../905/590952";
+import { AvatarSize, UserAvatar } from "../905/590952";
 import { KindEnum } from "../905/129884";
 import { W } from "../figma_app/54182";
-let l = Pf.MEDIUM20;
+let l = AvatarSize.MEDIUM20;
 export function $$o0(e) {
   let t = e.users.slice(0, e.numAvatarsToDisplay);
   let a = e.users.slice(e.numAvatarsToDisplay);
@@ -19,7 +19,7 @@ export function $$o0(e) {
       className: "avatars_pile--avatar--6RPYa",
       children: jsx(W, {
         user: t,
-        children: jsx(H8, {
+        children: jsx(UserAvatar, {
           user: t,
           size: e.avatarSize ? e.avatarSize : l
         })

@@ -6,7 +6,7 @@ import { hasValidId } from "../figma_app/336853";
 import { d as _$$d } from "../905/762622";
 import { CH } from "../figma_app/805373";
 import { _ } from "../905/328370";
-import { hP } from "../905/144598";
+import { UserAvatar } from "../905/144598";
 import { gO, S6, $j, my, wo, Q, UU, Rp, JH } from "../905/70359";
 export function $$m1(e) {
   return _$$d(e.token.content) ? getFeatureFlags().user_groups ? jsx(g, {
@@ -71,7 +71,7 @@ function y(e) {
     className: e.isSelected ? S6 : $j,
     children: [jsx("div", {
       className: my,
-      children: jsx(hP, {
+      children: jsx(UserAvatar, {
         user: e.user,
         id: e.user.id,
         pending: e.user.pendingRole || !1

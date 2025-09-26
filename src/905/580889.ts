@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { PerfTimer } from "../905/609396";
 import { fi } from "../figma_app/913823";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -16,7 +16,7 @@ export function $$f0(e) {
   let i = useSelector(e => e.loadingState);
   let [l, u] = useAtomValueAndSetter(g);
   let f = e || isLoading(i, fi);
-  _$$h(() => {
+  useSingleEffect(() => {
     if (!l) {
       h.start();
       return () => {

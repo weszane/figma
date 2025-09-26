@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { deepEqual, includesEqual } from "../905/382883";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { J, jM, P_, wf, a3 } from "../905/124270";
 import { buildQueryObject, createCreatorFacet, MAX_TRUNCATE_LENGTH, isLongText } from "../905/171315";
 import { e as _$$e } from "../905/404280";
@@ -118,9 +118,9 @@ function I({
       let a = `${e}-creator-option-${r}`;
       let o = p.has(i.id);
       return jsx(b3, {
-        icon: jsx(H8, {
+        icon: jsx(UserAvatar, {
           user: i,
-          size: Pf.MEDIUM
+          size: AvatarSize.MEDIUM
         }),
         id: a,
         isChecked: o,

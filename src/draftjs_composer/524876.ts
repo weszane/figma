@@ -14,7 +14,7 @@ import { dN } from "../vendor/291472";
 import { trackEventAnalytics } from "../905/449184";
 import { createRect } from "../905/508367";
 import { isMessageMetaTooLong, isMessageMetaEmpty } from "../figma_app/819288";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { BrowserInfo } from "../figma_app/778880";
 import { UploadError } from "../905/623179";
 import { generateRecordingKey, useSetupPlayback } from "../figma_app/878298";
@@ -219,7 +219,7 @@ export function $$em1(e) {
   let ez = useCallback(e => {
     scrollToBottom && (e ? setTimeout(scrollToBottom, e) : scrollToBottom());
   }, [scrollToBottom]);
-  _$$h(() => {
+  useSingleEffect(() => {
     e.scrollToBottom && V.current && new MutationObserver(e.scrollToBottom).observe(V.current, {
       childList: !0,
       subtree: !0

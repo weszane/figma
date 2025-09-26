@@ -8,7 +8,7 @@ import { A as _$$A } from "../905/251970";
 import { getFeatureFlags } from "../905/601108";
 import u from "classnames";
 import { analyticsEventManager } from "../905/449184";
-import { h as _$$h2 } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { useLatestRef } from "../figma_app/922077";
 import { M } from "../figma_app/648761";
 import { getInitialOptions } from "../figma_app/169182";
@@ -103,7 +103,7 @@ export function $$P7(e, t) {
   useEffect(() => {
     O || !0 !== e.isFocused ? !0 === O && !1 === e.isFocused && n() : r();
   }, [n, r, O, e.isFocused]);
-  _$$h2(() => {
+  useSingleEffect(() => {
     e.focusOnMount && b.current && (b.current.focus(), g());
     e.selectTextOnMount && b.current && b.current.select();
   });

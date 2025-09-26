@@ -38,7 +38,7 @@ import { h as _$$h2 } from "../figma_app/124713";
 import { B as _$$B2 } from "../figma_app/395012";
 import { L as _$$L } from "../figma_app/288254";
 import { k as _$$k3 } from "../figma_app/121990";
-import { E4 } from "../905/144598";
+import { getUserHandleOrEmail } from "../905/144598";
 import { WZ, ix } from "../figma_app/538002";
 export let $$W0 = atom(null);
 export function $$K1(e) {
@@ -216,7 +216,7 @@ function $(e) {
   } = e;
   let d = _$$P();
   let c = _$$L();
-  let m = E4(fileRole, d);
+  let m = getUserHandleOrEmail(fileRole, d);
   let h = currentSeatType ? renderI18nText("file_permissions_modal.update_seat_tab.user_currently_has_a_current_seat_you_can_upgrade", {
     user: jsx("span", {
       className: "x1g2dr8m xiqqdae xkezfkh x14kxzw3 x1giz659",

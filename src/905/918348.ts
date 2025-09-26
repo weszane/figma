@@ -7,7 +7,7 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { zL } from "../905/294543";
 import { S as _$$S } from "../905/491708";
 import { px } from "../905/201014";
@@ -130,7 +130,7 @@ export function $$E0({
       n = !0;
     };
   }, [i, e, O, t, x, S, D, F, c, L, E, M, U, j]);
-  _$$h(() => () => {
+  useSingleEffect(() => () => {
     _$$d.instance.maybeTerminatePlugin(t);
   });
   return {

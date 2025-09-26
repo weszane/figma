@@ -31,9 +31,9 @@ import { KindEnum } from '../905/129884';
 import { hideModal, popModalStack, showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { j as _$$j } from '../905/206476';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { UNASSIGNED } from '../905/247093';
-import { H as _$$H } from '../905/256791';
+import { UserAvatar } from '../905/256791';
 import { B as _$$B } from '../905/261906';
 import { Label } from '../905/270045';
 import { Cj } from '../905/270084';
@@ -64,7 +64,7 @@ import { Dd, OJ } from '../905/519092';
 import { APILoadingStatus } from '../905/520829';
 import { Button } from '../905/521428';
 import { VisualBellIcon } from '../905/576487';
-import { Pf } from '../905/590952';
+import { AvatarSize } from '../905/590952';
 import { AdvancedSet } from '../905/596651';
 import { p as _$$p } from '../905/597320';
 import { getFeatureFlags } from '../905/601108';
@@ -577,15 +577,15 @@ function tb({
     className: 'add_unassigned_members_modal--avatarPile--rJ86G',
     children: [jsx('div', {
       className: 'add_unassigned_members_modal--user1--tV7Tv add_unassigned_members_modal--userBase--6lin9',
-      children: jsx(_$$H, {
+      children: jsx(UserAvatar, {
         user: e.orgUser.user,
-        size: Pf.MEDIUM20
+        size: AvatarSize.MEDIUM20
       })
     }), jsx('div', {
       className: 'add_unassigned_members_modal--user2---enz4 add_unassigned_members_modal--userBase--6lin9',
-      children: jsx(_$$H, {
+      children: jsx(UserAvatar, {
         user: t.orgUser.user,
-        size: Pf.MEDIUM20
+        size: AvatarSize.MEDIUM20
       })
     })]
   });
@@ -594,7 +594,7 @@ function tb({
     d = getI18nString('add_unassigned_members_modal.user_selected', {
       userName: e[0].orgUser.user.handle
     });
-    c = jsx(_$$H, {
+    c = jsx(UserAvatar, {
       user: e[0].orgUser.user
     });
   } else if (p.length === 2) {
@@ -1241,7 +1241,7 @@ function tJ(e) {
     overlay: fQh,
     priority: _$$N.SECONDARY_MODAL
   }, [a]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e && !isMobileUA
     });
@@ -1332,7 +1332,7 @@ function tQ(e) {
     overlay: swf,
     priority: _$$N.DEFAULT_MODAL
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: () => e.isOrgAdminTable && !isMobileUA
     });
@@ -1365,7 +1365,7 @@ function tZ(e) {
     overlay: EKN,
     priority: _$$N.DEFAULT_MODAL
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show();
   });
   return jsx(rq, {

@@ -17,7 +17,7 @@ import { x as _$$x } from "../905/868466";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { X as _$$X } from "../figma_app/514836";
 import { S as _$$S } from "../figma_app/11182";
 import { setupHyperlinkHandler } from "../figma_app/815170";
@@ -261,12 +261,12 @@ function en({
     className: cssBuilderInstance.pt4.flex.flexRow.itemsCenter.justifyBetween.colorTextSecondary.textBodyMedium.$,
     children: [jsxs("div", {
       className: cssBuilderInstance.flex.$,
-      children: [jsx(H8, {
+      children: [jsx(UserAvatar, {
         user: {
           img_url,
           name
         },
-        size: Pf.SMALL16
+        size: AvatarSize.SMALL16
       }), jsx("div", {
         className: cssBuilderInstance.pl8.$,
         children: kB(e)

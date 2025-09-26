@@ -45,7 +45,7 @@ import { FilePublishSitePermissions, PublishedHubFileForFile } from "../figma_ap
 import { td as _$$td } from "../figma_app/558805";
 import { isFullscreenOverview, useIsFullscreenOverview, useDevModeFocusId, useIsFullscreenDevModeComponentBrowser, useFullscreenComponentKey } from "../figma_app/88239";
 import { isFullscreenDevHandoffView } from "../905/782918";
-import { o as _$$o } from "../905/382697";
+import { setupShareModalTabHandler } from "../905/382697";
 import { r as _$$r } from "../905/857502";
 import { combineWithHyphen, ShareContext } from "../905/91820";
 import { iO as _$$iO, s5, t9 as _$$t2, yI } from "../905/915142";
@@ -102,7 +102,7 @@ import { I as _$$I } from "../905/932503";
 import { K as _$$K2 } from "../905/987240";
 import { selectExperimentConfigHook } from "../figma_app/594947";
 import { selectUserFlag } from "../905/940356";
-import { h as _$$h2 } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { postUserFlag } from "../905/985254";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
@@ -135,7 +135,7 @@ import { throwTypeError, assert, debug } from "../figma_app/465776";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { KeyCodes, ignoreCommandOrShift } from "../905/63728";
 import { i as _$$i4 } from "../905/385727";
-import { n as _$$n3 } from "../figma_app/537817";
+import { TeamAvatar } from "../figma_app/537817";
 import { xf, H as _$$H, $S as _$$$S, UU, N8, p4, R8, _O, RA, gJ, C9, x7, B5, A as _$$A3, gY, _V, AA, j7, sH, Jt, bU, rG as _$$rG, qj, ec as _$$ec, jq, JZ, H7, to as _$$to2, vQ } from "../905/372455";
 import { A as _$$A4 } from "../5724/240681";
 import { ServiceCategories } from "../905/165054";
@@ -157,7 +157,7 @@ import { _9, J4, p8, fb, YU, Iz, lG, ET, mi } from "../figma_app/907616";
 import { m_ } from "../figma_app/209680";
 import { $ as _$$$ } from "../figma_app/995722";
 import { AccessLevelEnum } from "../905/557142";
-import { R9, nu as _$$nu, E4 } from "../905/144598";
+import { setupRoleRow, generateRoleOptions, getUserHandleOrEmail } from "../905/144598";
 import { og as _$$og } from "../905/466026";
 import { IconButton } from "../905/443068";
 import { a as _$$a } from "../905/5627";
@@ -186,7 +186,7 @@ import { decimalToPercent } from "../figma_app/808294";
 import { isResourcePendingPublishing, isResourceDelisted } from "../figma_app/777551";
 import { M as _$$M2 } from "../905/759470";
 import { Pn, PP } from "../905/230175";
-import { Pf } from "../905/590952";
+import { AvatarSize } from "../905/590952";
 import { Eh } from "../figma_app/617654";
 import { Ro } from "../figma_app/805373";
 import { ax as _$$ax, ts as _$$ts2 } from "../figma_app/49598";
@@ -267,12 +267,12 @@ import { $ as _$$$2, t as _$$t8 } from "../905/628632";
 import { XHR } from "../905/910117";
 import { cL } from "../905/748726";
 import { checkDomainExists } from "../figma_app/336853";
-import { Ef, rq as _$$rq2, kF } from "../905/351260";
+import { handleInviteStatusResponses, sendRoleInvites, showInviteVisualBell } from "../905/351260";
 import { Z as _$$Z } from "../figma_app/761870";
 import { isValidEmail } from "../figma_app/416935";
 import { H as _$$H2 } from "../905/674803";
 import { t as _$$t9 } from "../figma_app/32680";
-import { F as _$$F3 } from "../905/154112";
+import { confirmOrgGuestInviteModal } from "../905/154112";
 import { LoadingSpinner } from "../figma_app/858013";
 import { N as _$$N4 } from "../905/572042";
 import { BI, m0 as _$$m3 } from "../figma_app/546509";
@@ -1125,7 +1125,7 @@ function tV(e) {
   }, [t]);
   let l = useDispatch();
   let d = _$$zl(tB);
-  _$$h2(() => {
+  useSingleEffect(() => {
     "reset" === d.currentState ? show() : show({
       canShow: e => !e
     });
@@ -1429,7 +1429,7 @@ function is({
   let b = eU();
   let v = function () {
     let e = useIsFullscreenOverview();
-    let t = _$$o();
+    let t = setupShareModalTabHandler();
     return BrowserInfo.isIpadNative || e ? null : jsx(eL, {
       onClick: () => t(ShareAction.EMBED_CODE)
     });
@@ -1441,7 +1441,7 @@ function is({
   }) {
     let r = isFullscreenView();
     let a = X();
-    let s = _$$o();
+    let s = setupShareModalTabHandler();
     let o = isFullFilePublishingEnabled();
     let l = isMakePublishingEnabled();
     let d = isMakePublishingUpdatesEnabled();
@@ -1491,7 +1491,7 @@ function is({
   let E = function ({
     file: e
   }) {
-    let t = _$$o();
+    let t = setupShareModalTabHandler();
     return t9({
       file: e
     }) ? jsx(ie, {
@@ -1637,7 +1637,7 @@ function is({
     let l = e.editor_type;
     let d = useDispatch();
     let c = isFullscreenView();
-    let u = _$$o();
+    let u = setupShareModalTabHandler();
     let p = tn(o);
     let m = useCallback(() => {
       trackEventAnalytics("google_device_screenshare_button_clicked", {
@@ -1930,7 +1930,7 @@ function iA(e) {
   let r = team.canRead ? team.name : getI18nString("file_permissions_modal.file_name_s_team", {
     fileName: e.fileName
   });
-  let a = jsx(_$$n3, {
+  let a = jsx(TeamAvatar, {
     team: {
       id: team.id,
       name: r,
@@ -2516,7 +2516,7 @@ function na({
   let p = useDispatch();
   let g = trackFileEventWithStore();
   let _ = _$$L();
-  let b = _$$o();
+  let b = setupShareModalTabHandler();
   let v = isPrototypeView();
   let I = selectCurrentUser();
   let E = mapFileTypeToEditorType(e.editor_type);
@@ -3071,7 +3071,7 @@ function nk({
       children: e.slice(0, 3).map(e => jsx(Ro, {
         className: cssBuilderInstance.borderBox.relative.b1.colorBorderBg.$,
         entity: e,
-        size: Pf.MEDIUM
+        size: AvatarSize.MEDIUM
       }, e.id))
     }), jsx("div", {
       className: "x1n0bwc9",
@@ -4155,7 +4155,7 @@ function rb() {
   let e = selectCurrentFile();
   let t = selectCurrentUser();
   let i = J();
-  let s = _$$o();
+  let s = setupShareModalTabHandler();
   let o = e?.editorType;
   let [l, d] = useState(null);
   let u = kD();
@@ -4610,7 +4610,7 @@ function rq(e) {
   });
 }
 function rZ(e) {
-  let t = _$$o();
+  let t = setupShareModalTabHandler();
   let i = useMemo(() => e.resourceConnectionSharingGroupUsers.reduce((e, t) => (e.has(t.userId) || e.add(t.userId), e), new Set()).size, [e.resourceConnectionSharingGroupUsers]);
   return jsx("div", {
     className: Em,
@@ -4724,7 +4724,7 @@ let r2 = registerModal(function (e) {
 }, "ConfirmDisableFolderAccessModal");
 function r5(e) {
   let t = useDispatch();
-  let i = _$$o();
+  let i = setupShareModalTabHandler();
   let r = e.folderAccessEnabled && e.canViewFolder;
   let s = () => {
     _$$L5.updateFolderAccessEnabled({
@@ -4804,7 +4804,7 @@ function ae() {
     overlay: KdZ,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
-  _$$h2(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -4836,7 +4836,7 @@ function ar() {
     overlay: tzJ,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
-  _$$h2(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -4868,7 +4868,7 @@ function al() {
     overlay: ePo,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
-  _$$h2(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -4889,7 +4889,7 @@ function al() {
 }
 function ad(e) {
   let t = getWorkshopModeStatus(e.fileKey);
-  let i = _$$o();
+  let i = setupShareModalTabHandler();
   let r = e.isBranch || t && t.enabled || !e.hasEditRole || e.isPrototype && e.disablePrototypeOrPresentationAudience;
   let a = e.isBranch || e.isPrototype;
   let s = e.isBranch ? r9 : ao;
@@ -5060,7 +5060,7 @@ function aA(e) {
     return s?.user_id === e.currentUser.id && n ? _$$a4 : n ? _$$_3 : null;
   })(!!d);
   c && (d = null);
-  return jsx(R9, {
+  return jsx(setupRoleRow, {
     contacts: i,
     dropdownShown: t,
     getRoleOptions: () => {
@@ -5069,7 +5069,7 @@ function aA(e) {
       let n = e.seenState.user_id === t.id;
       let r = e.isOwnerOfResource;
       (r || n) && (i = !0);
-      return _$$nu(r, n, i, e.canMakeAdmin, !1, AccessLevelEnum.VIEWER, void 0);
+      return generateRoleOptions(r, n, i, e.canMakeAdmin, !1, AccessLevelEnum.VIEWER, void 0);
     },
     id: `seen-state-${e.seenState.id}`,
     isBranchFile: !1,
@@ -5433,7 +5433,7 @@ function aq({
         t.filter(e => !e.errored).length > 0 && n(VisualBellActions.enqueue({
           message: getI18nString("file_permissions_modal.link_has_been_sent")
         }));
-        t && Ef(t, resourceType, resourceIdOrKey, n, void 0, i ? i.name : void 0);
+        t && handleInviteStatusResponses(t, resourceType, resourceIdOrKey, n, void 0, i ? i.name : void 0);
       }, e => {
         n(VisualBellActions.enqueue({
           message: e.message,
@@ -5520,7 +5520,7 @@ function a$({
           file: e
         });
         o = e.editor_type === FFileType.SLIDES ? aH.SLIDES : f ? aH.PROTOTYPE : l ? aH.HANDOFF : aH.DESIGN;
-        d(_$$rq2({
+        d(sendRoleInvites({
           emails: _$$Z(r),
           resourceType,
           resourceIdOrKey,
@@ -5538,7 +5538,7 @@ function a$({
             }));
           },
           optimisticUpdates: t => {
-            d(kF({
+            d(showInviteVisualBell({
               invites: t,
               inviteLevel: s,
               file: e,
@@ -5601,7 +5601,7 @@ function a$({
         let e = _$$Z(r).filter(e => isValidEmail(e) && !checkDomainExists(d, e));
         if (e.length > 0) {
           u(showModalHandler({
-            type: _$$F3,
+            type: confirmOrgGuestInviteModal,
             data: {
               emails: e,
               onConfirm: () => {
@@ -6307,7 +6307,7 @@ function su({
       }
       g(t);
     }, [e.key, p]);
-    _$$h2(() => {
+    useSingleEffect(() => {
       sendMetric("file_permissions_modal_initial_invite_level", {
         invite_level: h,
         editor_type: e.editor_type,
@@ -6393,7 +6393,7 @@ function sp({
       return Object.values(e).filter(e => {
         let t = e.pending ? e.user.email : e.user_id;
         return !i.has(t) && (i.add(t), !0);
-      }).sort((e, i) => e.pending === i.pending ? E4(e, t).toLocaleLowerCase() < E4(i, t).toLocaleLowerCase() ? -1 : 1 : e.pending ? 1 : -1);
+      }).sort((e, i) => e.pending === i.pending ? getUserHandleOrEmail(e, t).toLocaleLowerCase() < getUserHandleOrEmail(i, t).toLocaleLowerCase() ? -1 : 1 : e.pending ? 1 : -1);
     }({
       rolesByUserId: e,
       contacts: t

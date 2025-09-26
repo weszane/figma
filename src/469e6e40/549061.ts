@@ -13,7 +13,7 @@ import { useSprigWithSampling } from '../905/99656';
 import { showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { R as _$$R2 } from '../905/165069';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { U as _$$U } from '../905/275247';
 import { accountTypeRequestHandler } from '../905/281010';
 import { VisualBellActions } from '../905/302958';
@@ -30,7 +30,7 @@ import { k as _$$k } from '../905/443820';
 import { isCollaboratorType, ProductAccessTypeEnum } from '../905/513035';
 import { DashboardSections, MemberSections } from '../905/548208';
 import { VisualBellIcon } from '../905/576487';
-import { H8, Pf } from '../905/590952';
+import { UserAvatar, AvatarSize } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
 import { EM, QL } from '../905/609392';
 import { e as _$$e3 } from '../905/621515';
@@ -467,7 +467,7 @@ function eO({
     overlay: TaD,
     priority: _$$g(TaD)
   }, [r, t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: (e, t) => !e && !!t.name
     });
@@ -506,14 +506,14 @@ function tn({
   return jsxs('div', {
     'data-testid': 'seat-requests-mini-view-row-avatar',
     'className': 'seat_requests_table_mini_view--avatarContainer--mUfUL',
-    'children': [jsx(H8, {
+    'children': [jsx(UserAvatar, {
       user: {
         id: e.userId,
         name: e.name ?? '',
         email: e.email ?? void 0,
         imgUrl: e.imgUrl ?? ''
       },
-      size: Pf.LARGE
+      size: AvatarSize.LARGE
     }), e.hasBeenNudged ? jsx('div', {
       'className': c()(tt, 'seat_requests_table_mini_view--reminderIcon--N-ZQn'),
       'data-testid': 'seat-requests-mini-view-row-avatar-reminder',

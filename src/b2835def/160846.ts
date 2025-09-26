@@ -39,7 +39,7 @@ import { s as _$$s } from "../3682/764731";
 import { getFeatureFlags } from "../905/601108";
 import { useSprigWithSampling } from "../905/99656";
 import { globalPerfTimer } from "../905/542194";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { o as _$$o } from "../642/854123";
 import { tZ } from "../figma_app/960196";
 import { L as _$$L } from "../642/269105";
@@ -887,7 +887,7 @@ function tF() {
   });
 }
 let tV = memo(function () {
-  _$$h(() => {
+  useSingleEffect(() => {
     globalPerfTimer.tryStop("switch_to_illustration_mode.right_panel_tti");
   });
   return jsxs(_$$o, {

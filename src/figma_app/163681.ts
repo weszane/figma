@@ -35,7 +35,7 @@ import { Vr } from "../figma_app/151869";
 import { Z as _$$Z } from "../figma_app/731770";
 import { iF } from "../figma_app/511910";
 import { alwaysFalseCallback2 } from "../figma_app/275462";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { Z as _$$Z2 } from "../905/104740";
 import { F_ as _$$F_ } from "../905/748636";
 import { e as _$$e3 } from "../5132/291975";
@@ -392,7 +392,7 @@ function X(e) {
   let s = useRef(null);
   let o = e.getNodeForViewportFocus?.();
   let l = e.getNodeToSelect();
-  _$$h(() => {
+  useSingleEffect(() => {
     queueMicrotask(async function () {
       l && null === s.current ? (await navigateAndSelect({
         navigate: a,
@@ -440,7 +440,7 @@ function q(e) {
 function Z(e) {
   let [t, r] = useState(!1);
   let a = _$$Z2();
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     queueMicrotask(async function () {
       let t = e.getNodeForViewportFocus?.();
       let n = e.getNodeToSelect();

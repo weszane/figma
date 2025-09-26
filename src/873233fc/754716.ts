@@ -40,7 +40,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { Ypw } from "../figma_app/6204";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { PY, go, Px, Bl, kO, HO, aN } from "../figma_app/57551";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { UpgradeAction } from "../905/370443";
 import { Z as _$$Z } from "../905/104740";
@@ -378,7 +378,7 @@ function ef(e) {
     pointerOffset: 20,
     pointerPosition: F_.TOP
   };
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     queueMicrotask(async function () {
       s && (await d({
         centerX: s.absoluteBoundingBox.x + 120,
@@ -437,7 +437,7 @@ function e_(e) {
     preferredName: "Next Button",
     backupNames: ["Get Started Button"]
   }) || findFirstNodeOfType(t, "INSTANCE");
-  _$$h(() => {
+  useSingleEffect(() => {
     queueMicrotask(async function () {
       u && (clearSelection(), addToSelection([u.guid]), fullscreenValue.commit(), await s({
         centerX: u.absoluteBoundingBox.x + 165,
@@ -507,7 +507,7 @@ function eC(e) {
     preferredName: "Epoch / Mobile / Library A (Scrolled)",
     backupNames: ["Epoch / Mobile / Library A"]
   }) || findFirstNodeOfType(t, "FRAME");
-  _$$h(() => {
+  useSingleEffect(() => {
     queueMicrotask(async function () {
       c && (await navigateAndSelect({
         navigate: u,
@@ -635,7 +635,7 @@ function ej(e) {
     pointerOffset: 110,
     pointerPosition: F_.TOP
   };
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     queueMicrotask(async function () {
       s && (await d({
         centerX: s.absoluteBoundingBox.x + 280,

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories } from "../905/165054";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { y3 } from "../figma_app/307841";
 import { eC } from "../figma_app/982327";
@@ -45,7 +45,7 @@ function k({
     S(!0);
     complete();
   };
-  _$$h(() => {
+  useSingleEffect(() => {
     !r || h || a?.student_team || show();
   });
   _$$E(uniqueId, "settings_tab_click", () => {

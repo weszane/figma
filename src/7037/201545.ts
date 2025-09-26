@@ -5,7 +5,7 @@ import { M } from "../figma_app/749682";
 import { NONE_SYMBOL } from "../905/992467";
 import { c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
-import { Pf } from "../905/590952";
+import { AvatarSize } from "../905/590952";
 import { uy, cL, Df, pD } from "../figma_app/770088";
 import { showModalHandler } from "../905/156213";
 import { cx, v6, BC } from "../905/504768";
@@ -82,7 +82,7 @@ export function $$T0(e) {
       children: jsx(A, {
         user: e.commentUser,
         noHandle: !0,
-        size: Pf.MEDIUM
+        size: AvatarSize.MEDIUM
       })
     }), jsxs("div", {
       className: "feed_post_details_comments--commentBody--tIA5q",

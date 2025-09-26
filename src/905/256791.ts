@@ -1,20 +1,43 @@
-import { jsx } from "react/jsx-runtime";
-import { Ro } from "../figma_app/805373";
-import { P, U } from "../905/566881";
-export function $$s0({
-  user: e,
-  size: t = P.MEDIUM,
-  fallbackDisplay: i = U.FIRST_CHARACTER
-}) {
-  return jsx("div", {
-    className: "viewedAt" in e ? "user--avatarContainer--roppm" : void 0,
-    children: jsx(Ro, {
-      className: "viewedAt" in e ? "user--greyedOut--ihgyE" : void 0,
-      entity: e,
-      size: t,
-      hideFallbackInitial: i === U.HIDDEN,
-      shape: "CIRCLE"
-    })
-  });
+import { jsx } from 'react/jsx-runtime'
+import { AvatarSize, HAvatarType } from '../905/566881'
+import { Ro } from '../figma_app/805373'
+/**
+ * Renders a user avatar with optional fallback display and styling based on user properties.
+ * Original function name: $$s0
+ * @param props - Avatar rendering options
+ * @returns JSX.Element
+ */
+export interface UserAvatarProps {
+  user: {
+    viewedAt?: unknown
+    // Add other user properties as needed
+    [key: string]: any
+  }
+  size?: AvatarSize
+  fallbackDisplay?: HAvatarType
 }
-export const H = $$s0;
+
+/**
+ * UserAvatar renders a user's avatar with conditional styling.
+ */
+export function UserAvatar({
+  user,
+  size = AvatarSize.MEDIUM,
+  fallbackDisplay = HAvatarType.FIRST_CHARACTER,
+}: UserAvatarProps) {
+  const isViewed = 'viewedAt' in user
+
+  return jsx('div', {
+    className: isViewed ? 'user--avatarContainer--roppm' : undefined,
+    children: jsx(Ro, {
+      className: isViewed ? 'user--greyedOut--ihgyE' : undefined,
+      entity: user,
+      size,
+      hideFallbackInitial: fallbackDisplay === HAvatarType.HIDDEN,
+      shape: 'CIRCLE',
+    }),
+  })
+}
+
+// Refactored export for compatibility with original import usage
+export const H = UserAvatar

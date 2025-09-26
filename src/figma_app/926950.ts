@@ -7,7 +7,7 @@ import { $1, _Z, AX, cR, Dq, dX, GC, HI, kB, lM, Lw, oE, Pf, Tg, U3, UM, uu, VL,
 import { getFileTypePx } from '../905/149328';
 import { hideModal } from '../905/156213';
 import { getGpuDeviceInfo } from '../905/190247';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { o as _$$o } from '../905/240151';
 import { Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
@@ -180,7 +180,7 @@ function eu({
     D(hideModal());
   };
   let eN = selectUserFlag('seen_bug_reporter_modal');
-  _$$h(() => {
+  useSingleEffect(() => {
     eN || D(postUserFlag({
       seen_bug_reporter_modal: !0
     }));
@@ -433,7 +433,7 @@ function ep(e) {
   let ec = useId();
   let eu = useId();
   let ep = windowInnerHeight - (h + uF + _$$U) - _$$l3;
-  _$$h(() => {
+  useSingleEffect(() => {
     !0 === j && (eh(), U(!1));
   });
   let eh = () => {

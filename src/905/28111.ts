@@ -7,7 +7,7 @@ import { y as _$$y } from '../905/129046';
 import { KindEnum } from '../905/129884';
 import { Ph } from '../905/160095';
 import { bL } from '../905/163832';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { J as _$$J } from '../905/225412';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { X } from '../905/319582';
@@ -22,7 +22,8 @@ import { formattedColorManipulator, defaultColorManipulator } from '../905/71372
 import { F_ } from '../905/748636';
 import { useCurrentUserOrgId } from '../905/845253';
 import { A as _$$A } from '../905/891805';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { j$, xm } from '../905/936278';
 import { calculatePickerPositionLeft } from '../905/959568';
 import { d as _$$d } from '../905/976845';
@@ -617,7 +618,7 @@ function et() {
     showColorContrast,
     settings
   } = useContext($$X1);
-  _$$h(() => {
+  useSingleEffect(() => {
     showColorContrast && !settings.contrastInfoShown && show();
   });
   useEffect(() => {

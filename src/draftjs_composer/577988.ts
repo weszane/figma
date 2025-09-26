@@ -7,7 +7,7 @@ import l from "classnames";
 import { Point } from "../905/736624";
 import { LoadingSpinner } from "../figma_app/858013";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { i4 } from "../figma_app/770088";
 import { createComment } from "../figma_app/703138";
 import { mz } from "../figma_app/12220";
@@ -231,9 +231,9 @@ export function $$B0(e) {
     children: jsxs(Fragment, {
       children: [jsx("div", {
         className: "comment_composer--commentAvatar--5DOL1 comment_tile--commentAvatarContainer--e8z35",
-        children: jsx(H8, {
+        children: jsx(UserAvatar, {
           user: E,
-          size: Pf.LARGE
+          size: AvatarSize.LARGE
         })
       }), jsxs("div", {
         className: "comment_composer--composerForm--WR1RV",

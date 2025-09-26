@@ -7,7 +7,7 @@ import { SchemaJoinStatus } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { logger } from "../905/651849";
 import { customHistory } from "../905/612521";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { Point } from "../905/736624";
 import { XHR } from "../905/910117";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -166,7 +166,7 @@ function M(e) {
     secondaryAction
   } = i;
   let h = useDispatch();
-  _$$h(() => {
+  useSingleEffect(() => {
     trackEventAnalytics("Merge Error Modal Shown", {
       view: $$P1[e.view],
       branchKey: e.mergeParams.branchKey,

@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { editorUtilities as _$$k2 } from "../905/22009";
 import { allCategoriesQuery } from "../figma_app/188671";
 import { setupResourceAtomHandler } from "../905/713695";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { tZ, xe, DK, I$, w, gP, Kz, K_, UW } from "../905/599844";
 import { useDispatch } from "react-redux";
@@ -23,7 +23,7 @@ function m({
   let i = useCallback(e => {
     t(e.currentTarget.value);
   }, [t]);
-  _$$h(() => () => t(""));
+  useSingleEffect(() => () => t(""));
   return jsx("div", {
     className: tZ,
     children: jsx(BigTextInputForwardRef, {

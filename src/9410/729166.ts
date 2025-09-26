@@ -15,7 +15,7 @@ import { F as _$$F2 } from '../905/160142';
 import { ox } from '../905/163832';
 import { ServiceCategories } from '../905/165054';
 import { getEditorViewType } from '../905/187165';
-import { h as _$$h3 } from '../905/207101';
+import { h as _$$h3 } from '../905/791079';
 import { nt, o3 } from '../905/226610';
 import { o as _$$o2 } from '../905/237202';
 import { z as _$$z } from '../905/239603';
@@ -50,7 +50,7 @@ import { $ as _$$$ } from '../905/532878';
 import { subscribeAndAwaitData } from '../905/553831';
 import { ModalWindowType } from '../905/560959';
 import { N as _$$N2 } from '../905/572042';
-import { H8 } from '../905/590952';
+import { UserAvatar } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
 import { V as _$$V2 } from '../905/604512';
 import { PerfTimer } from '../905/609396';
@@ -77,7 +77,8 @@ import { useHasParentOrgId } from '../905/882262';
 import { A as _$$A9 } from '../905/891805';
 import { e as _$$e6 } from '../905/916195';
 import { selectViewAction } from '../905/929976';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { selectUserFlag } from '../905/940356';
 import { postUserFlag } from '../905/985254';
 import { Ak } from '../905/986103';
@@ -1414,7 +1415,7 @@ function iE({
     className: ix,
     children: [jsxs('div', {
       className: 'overview--avatarContainer--OD44p',
-      children: [jsx(H8, {
+      children: [jsx(UserAvatar, {
         user: e,
         size: 24
       }), t]

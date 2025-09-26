@@ -7,7 +7,7 @@ import { noop } from 'lodash-es';
 import { e as _$$e } from "../905/435763";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
@@ -47,7 +47,7 @@ let E = registerModal(function ({
   let r = useDispatch();
   let o = selectCurrentUser();
   let j = _$$A(e, !1, !1, t);
-  _$$h(() => {
+  useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_displayed", {
       userId: o?.id,
       hubFileId: e.id,

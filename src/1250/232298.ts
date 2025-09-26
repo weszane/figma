@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -27,7 +27,7 @@ export function $$T0() {
     overlay: hxO,
     priority: N.DEFAULT_MODAL
   }, [n, m]);
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = getInitialOptions()?.iso_code === "JP";
     let t = getInitialOptions()?.user_data?.locale === "ja";
     e && !t && x.show({

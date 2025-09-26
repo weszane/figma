@@ -6,7 +6,7 @@ import { ServiceCategories } from "../905/165054";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { getEmailDomain, isAllowedDomain } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
@@ -58,7 +58,7 @@ import { y4 } from "../figma_app/298277";
 import { FResourceCategoryType, FUserRoleType } from "../figma_app/191312";
 import { getUserIsoCode, getUserCurrency } from "../figma_app/514043";
 import { extractOrgUsersByUserId } from "../figma_app/951233";
-import { rq } from "../905/351260";
+import { sendRoleInvites } from "../905/351260";
 import { lB, Ey, To } from "../905/148137";
 import { AccessLevelEnum } from "../905/557142";
 import { e0 } from "../905/696396";
@@ -68,7 +68,7 @@ import { n as _$$n } from "../905/861286";
 import { CheckboxPrimitive } from "../905/549791";
 import { g as _$$g } from "../905/125190";
 import { EnhancedInput } from "../figma_app/637027";
-import { nl } from "../905/590952";
+import { TeamAvatar } from "../905/590952";
 import { Q as _$$Q } from "../905/249555";
 import { G as _$$G } from "../905/142901";
 import { wh, n5 } from "../c5e2cae0/705272";
@@ -248,7 +248,7 @@ function eb({
       style: styleBuilderInstance.$$if(t, styleBuilderInstance.colorBorderSelected.colorBgSelectedTertiary, styleBuilderInstance.colorBg.add({
         borderColor: "var(--color-bg)"
       })).$,
-      children: [jsx(nl, {
+      children: [jsx(TeamAvatar, {
         team: e
       }), jsxs("span", {
         className: cssBuilderInstance.maxWFull.$,
@@ -892,7 +892,7 @@ export class $$eM2 extends Component {
       this.setState({
         apiPending: !1
       }, () => this.setStep(OnboardingStepEnum.Confirmation));
-      this.state.inviteEmails.length && e.data.meta.new_team && this.props.dispatch(rq({
+      this.state.inviteEmails.length && e.data.meta.new_team && this.props.dispatch(sendRoleInvites({
         emails: this.state.inviteEmails,
         resourceType: FResourceCategoryType.TEAM,
         resourceIdOrKey: e.data.meta.new_team.id,
@@ -1104,7 +1104,7 @@ export function $$eR1(e) {
   let r = useSelector(e => extractOrgUsersByUserId(e.orgUsersByOrgId, e.user.id).some(e => e.permission === FUserRoleType.ADMIN));
   let l = useSeparateBillingShippingExperiment();
   let d = useSelector(e => e.payment).currency || getUserCurrency();
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = document.createElement("div");
     e.style.position = "fixed";
     e.style.inset = "0";

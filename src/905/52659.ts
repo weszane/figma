@@ -33,7 +33,7 @@ import { textDisplayConfig } from "../905/687265";
 import { Wi, JR } from "../figma_app/162641";
 import { t as _$$t2 } from "../905/53773";
 import { x as _$$x } from "../905/98916";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { wW } from "../figma_app/656450";
 let T = createSelector(_$$h, e => "team" === e.view ? `${e.view}-${e.teamId}` : e.view);
 let k = createSelector(_$$h, T, e => e.viewBarSortOptionsByView, e => e.tileSortFilterStateByView, (e, t, i, n) => {
@@ -80,9 +80,9 @@ function H(e) {
   let r = wW(i).user;
   return i ? jsxs("div", {
     className: cssBuilderInstance.flex.itemsCenter.gap8.$,
-    children: [r && jsx(H8, {
+    children: [r && jsx(UserAvatar, {
       user: r,
-      size: Pf.MEDIUM
+      size: AvatarSize.MEDIUM
     }), jsx(TextWithTruncation, {
       truncate: !0,
       children: t

@@ -25,7 +25,7 @@ import { registerModal } from "../905/102752";
 import { hK } from "../figma_app/211706";
 import { noop } from 'lodash-es';
 import { Wi } from "../figma_app/162641";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { Pg } from "../figma_app/990058";
 import { fetchTeamUsers } from "../905/584989";
 import { Ef } from "../905/81982";
@@ -39,9 +39,9 @@ function U(e) {
     className: e.isSelected ? "admin_search_input--userRowSelected--jfVgG autocomplete_permissions--contactRowSelected--xYJKX autocomplete_permissions--contactRow--DRMiv" : "admin_search_input--userRow--ingGG autocomplete_permissions--contactRow--DRMiv",
     children: [jsx("div", {
       className: "admin_search_input--userAvator--FG3LO autocomplete_permissions--avatar--Hb2O-",
-      children: jsx(H8, {
+      children: jsx(UserAvatar, {
         user: t,
-        size: Pf.MEDIUM
+        size: AvatarSize.MEDIUM
       })
     }), jsxs("div", {
       children: [jsx("div", {

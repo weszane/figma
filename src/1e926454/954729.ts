@@ -25,7 +25,7 @@ import { BannerInsetModal } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { N as _$$N2 } from "../905/572042";
 import { trackEventAnalytics } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { JT, tI } from "../figma_app/599327";
 import { I as _$$I } from "../905/343211";
@@ -53,7 +53,7 @@ import { dr, eb as _$$eb, oU } from "../4452/405965";
 import { selectUser } from "../905/372672";
 import { getPermissionLevelName } from "../figma_app/12796";
 import { isPaidPlan } from "../figma_app/428858";
-import { rq } from "../905/351260";
+import { sendRoleInvites } from "../905/351260";
 import { bp, Wj } from "../905/913057";
 import { TG } from "../1881/866163";
 import { AccessLevelEnum } from "../905/557142";
@@ -324,7 +324,7 @@ function et({
   });
 }
 function ei() {
-  _$$h(() => {
+  useSingleEffect(() => {
     trackEventAnalytics("seat_purchasing.non_blocking_fetch_error", {
       price_fetch_error: !0,
       view: "plan_invite_modal"
@@ -500,7 +500,7 @@ function eb({
     });
   }, [z]);
   let K = useCallback(() => {
-    l(rq({
+    l(sendRoleInvites({
       emails: $,
       resourceType: FResourceCategoryType.TEAM,
       resourceIdOrKey: I,

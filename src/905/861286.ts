@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import a from "classnames";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { EnhancedInput } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { S } from "../905/339549";
@@ -14,7 +14,7 @@ import { A as _$$A } from "../905/289352";
 import { sq } from "../905/613896";
 var s = a;
 function A(e) {
-  _$$h(() => {
+  useSingleEffect(() => {
     let t;
     let i = {
       base: {

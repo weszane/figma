@@ -28,7 +28,7 @@ import { Label } from "../905/270045";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import N from "../vendor/73823";
 import O from "../vendor/946678";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { ov, S2 } from "../905/300250";
 import { rY } from "../905/985490";
 import { zZ, n6 } from "../905/585030";
@@ -74,7 +74,7 @@ let $ = registerModal(function (e) {
   let [a, l] = useState(BranchType.MAIN);
   let [d, c] = useAtomValueAndSetter(currentSelectionAtom);
   let u = d ?? e.direction;
-  _$$h(() => (c(e.direction), () => c(null)));
+  useSingleEffect(() => (c(e.direction), () => c(null)));
   let p = useSelector(e => e.fileVersion);
   let m = useSelector(e => e.currentUserOrgId);
   let h = selectUser();

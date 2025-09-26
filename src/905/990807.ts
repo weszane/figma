@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { xk } from "@stylexjs/stylex";
 import { AutoLayout } from "../905/470281";
-import { Pf, H8 } from "../905/590952";
+import { AvatarSize, UserAvatar } from "../905/590952";
 import { getVisibleTheme } from "../905/640017";
 import { FProductAccessType } from "../figma_app/191312";
 let d = {
@@ -261,7 +261,7 @@ export function $$u0({
   users: e,
   licenseType: t,
   isInFullScreen: i,
-  size: u = Pf.MEDIUM,
+  size: u = AvatarSize.MEDIUM,
   maxShow: p = 3,
   isTooltip: m = !1
 }) {
@@ -276,7 +276,7 @@ export function $$u0({
       ...xk(d.avatarZIndex(m ? -a : a), !m && a === g.length - 1 && d.marginRight),
       children: jsx("div", {
         ...xk(d.avatar, c[t](h), t === FProductAccessType.WHITEBOARD && i && c.whiteboard("light")),
-        children: jsx(H8, {
+        children: jsx(UserAvatar, {
           user: {
             id: e.id,
             name: e.name,

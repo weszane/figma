@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { customHistory } from "../905/612521";
-import { h as _$$h } from "../905/207101";
+import { h as _$$h } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { UpgradeAction } from "../905/370443";

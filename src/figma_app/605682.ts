@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { Z } from "../905/104740";
 import { VF, uY } from "../figma_app/989514";
@@ -10,7 +10,7 @@ export let $$u1 = "design-panel-container";
 export function $$p0(e) {
   let [t, r] = useState(!1);
   let p = Z();
-  return (h(() => {
+  return (useSingleEffect(() => {
     queueMicrotask(async function () {
       let t = e.getNodeForViewportFocus?.();
       let n = e.getNodeToSelect();

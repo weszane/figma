@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { AutoLayout } from "../905/470281";
 import { useMemo, useCallback, useState, memo, useRef, useEffect } from "react";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { tg, KB, lR } from "../4452/780544";
 import { g as _$$g } from "../4452/983384";
@@ -78,7 +78,7 @@ function g(e) {
     overlay: rRT,
     priority: _$$g(rRT)
   }, [a]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !!e
     });
@@ -267,7 +267,7 @@ let ej = {
       overlay: LPt,
       priority: _$$g(LPt)
     }, [e]);
-    _$$h(() => {
+    useSingleEffect(() => {
       show({
         canShow: e => !e
       });

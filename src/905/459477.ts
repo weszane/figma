@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import { createSelector } from "../vendor/925040";
 import { analyticsEventManager } from "../905/449184";
-import { h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { ResourceLibraryType, PickerOptionType, getCategory } from "../905/211621";
 var $$n0;
 (e => {
@@ -40,7 +40,7 @@ var $$n0;
     let o = t();
     let u = useSelector(e => e.instanceSwapPickerListLayout);
     let p = n.type === ResourceLibraryType.FILE ? n.libraryKey : void 0;
-    h(() => {
+    useSingleEffect(() => {
       (e === PickerOptionType.INSTANCE_SWAP_PICKER || e === PickerOptionType.PREFERRED_VALUES_PICKER) && analyticsEventManager.trackDefinedEvent("instance_swap_picker.launched", {
         ...o,
         sessionId: i,

@@ -14,7 +14,7 @@ import { usePrefersMediaQuery } from "../figma_app/469468";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { g as _$$g } from "../1556/359896";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 import { COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { selectUser } from "../905/372672";
@@ -140,9 +140,9 @@ function eA(e) {
     onMouseLeave: e.onMouseLeave,
     onClick: e.onClick,
     tabIndex: -1,
-    children: [jsx(H8, {
+    children: [jsx(UserAvatar, {
       user: e.user,
-      size: Pf.XLARGE
+      size: AvatarSize.XLARGE
     }), jsx("div", {
       className: p()(eN, e.highlight && eI),
       children: jsx(_$$s3, {})
@@ -164,9 +164,9 @@ function eM(e) {
       onMouseEnter: e.onMouseEnter,
       onMouseLeave: e.onMouseLeave,
       tabIndex: -1,
-      children: [jsx(H8, {
+      children: [jsx(UserAvatar, {
         user: e.user,
-        size: Pf.XLARGE
+        size: AvatarSize.XLARGE
       }), jsx("div", {
         className: p()(eN, e.highlight && eI),
         children: jsx(_$$s3, {})
@@ -251,9 +251,9 @@ function eT({
   };
   let T = d && isOrgOrTeamExport(c);
   let E = jsxs(Fragment, {
-    children: [T ? jsx(H8, {
+    children: [T ? jsx(UserAvatar, {
       user: u,
-      size: Pf.XLARGE
+      size: AvatarSize.XLARGE
     }) : jsx(eR, {
       dispatch: e,
       onClick: R,
@@ -481,9 +481,9 @@ let eq = (e, t) => {
     element: jsxs(MenuItemComp, {
       onClick: l,
       children: [jsx(MenuItemLead, {
-        children: ez(jsx(H8, {
+        children: ez(jsx(UserAvatar, {
           user: e,
-          size: Pf.SMALL16
+          size: AvatarSize.SMALL16
         }))
       }), jsxs("div", {
         className: "x78zum5 xdt5ytf xeuugli x98rzlu xb3r6kr",
@@ -497,17 +497,17 @@ let eq = (e, t) => {
       subText: e.email,
       optionHeight: 40,
       className: eS,
-      icon: ez(jsx(H8, {
+      icon: ez(jsx(UserAvatar, {
         user: e,
-        size: Pf.SMALL16
+        size: AvatarSize.SMALL16
       })),
       callback: l
     }]
   };
 };
 function eW(e, t, n) {
-  let l = ez(jsx(H8, {
-    size: Pf.SMALL16,
+  let l = ez(jsx(UserAvatar, {
+    size: AvatarSize.SMALL16,
     user: e
   }));
   return {
@@ -879,9 +879,9 @@ function eX() {
     "data-testid": "ProfileButton",
     children: [jsx("div", {
       className: cssBuilderInstance.relative.inlineFlex.$,
-      children: jsx(H8, {
+      children: jsx(UserAvatar, {
         user: d && isOrgOrTeamExport(a) ? u : n,
-        size: Pf.MEDIUM
+        size: AvatarSize.MEDIUM
       })
     }), (t ? !m : !h) && jsx(TextWithTruncation, {
       fontSize: 13,

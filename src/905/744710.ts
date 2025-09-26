@@ -29,7 +29,7 @@ import { UpsellModalType } from '../905/165519';
 import { ScreenReaderOnly } from '../905/172252';
 import { InputComponent } from '../905/185998';
 import { sessionApiInstance } from '../905/202181';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { J as _$$J4 } from '../905/211135';
 import { A as _$$A8 } from '../905/215698';
 import { V as _$$V2 } from '../905/223767';
@@ -987,7 +987,7 @@ let e$ = 'purchase_page--morePurchasesStatusContent--kSbaH';
 function eZ(e) {
   let [t, i] = useState(!1);
   let [n, s] = useState(!1);
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => {
@@ -1122,7 +1122,7 @@ function eJ(e) {
   }).catch(() => {
     p(!0);
   }), [d]);
-  _$$h(() => {
+  useSingleEffect(() => {
     w();
     k();
     BuyerAPIHandler.getCommunityUserTaxInfo({
@@ -2240,7 +2240,7 @@ function iT(e) {
       id: e
     }));
   };
-  _$$h(() => {
+  useSingleEffect(() => {
     t?.[0]?.token && a(t[0].id);
   });
   return jsxs('div', {

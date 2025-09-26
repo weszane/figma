@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { ModalRootComponent } from '../905/38914';
 import { registerModal } from '../905/102752';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { renderI18nText } from '../905/303541';
 import { UpgradeAction } from '../905/370443';
 import { T } from '../905/434246';
@@ -30,7 +30,7 @@ function I(e) {
     useEffect(() => {
       t(i.current, e);
     }, [i, e, t]);
-    _$$h(() => () => {
+    useSingleEffect(() => () => {
       t(i.current, !1);
     });
   }();

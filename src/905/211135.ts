@@ -4,7 +4,7 @@ import { useModalManager } from "../905/437088";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { ModalRootComponent } from "../905/38914";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { Yu, sp } from "../905/355291";
@@ -26,7 +26,7 @@ export let $$y0 = registerModal(function (e) {
     open,
     onClose
   });
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     f && hasPasswordOrSSO(f) && b(Ve({
       token: f.password_token
     }));

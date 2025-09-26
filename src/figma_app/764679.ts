@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { h as _$$h } from "../905/791079";
 import { y1, w4 } from "../905/445814";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -24,7 +24,7 @@ import { isThirdPartyMonetized } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
 import { BuyerAPIHandler } from "../905/180";
-import { noop } from "../905/834956";
+
 import { it } from "../905/504727";
 import { S as _$$S } from "../905/404161";
 import { dn } from "../figma_app/994403";

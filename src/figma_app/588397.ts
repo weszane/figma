@@ -10,7 +10,7 @@ import u from "classnames";
 import _ from "../vendor/961736";
 import { getSecondaryTextColorForBackground } from "../figma_app/191804";
 import { parsePxInt } from "../figma_app/783094";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { getThemePx } from "../905/149328";
 import { Point } from "../905/736624";
@@ -154,7 +154,7 @@ function et(e) {
 export function $$er1(e) {
   let t;
   let r = useRef(null);
-  _$$h(() => {
+  useSingleEffect(() => {
     let t = ({
       nodeId: t
     }) => {

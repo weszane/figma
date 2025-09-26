@@ -46,7 +46,7 @@ import { localStorageRef, useStorageEventSync, useLocalStorageSync } from "../90
 import { useDebouncedCallback } from "use-debounce";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { useSubscription } from "../figma_app/288654";
 import { getFileTypePx } from "../905/149328";
 import { O as _$$O } from "../905/257139";
@@ -1072,7 +1072,7 @@ function t6({
     });
   }, 500);
   let [c, u] = useAtomValueAndSetter(e1);
-  _$$h(() => {
+  useSingleEffect(() => {
     t7(c, a);
   });
   let p = useCallback(() => {

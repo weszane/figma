@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { noop } from 'lodash-es';
 import { EventShield } from "../905/821217";
 import { getI18nString } from "../905/303541";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { findFirstResult } from "../905/331038";
 import { getValidationErrors } from "../905/113805";
 import { unsetSymbol } from "../905/17894";
@@ -136,7 +136,7 @@ function C({
     className: t ? "cocreators_input--profileRowSelected--ptknl autocomplete_permissions--contactRowSelected--xYJKX autocomplete_permissions--contactRow--DRMiv" : "cocreators_input--profileRow--Nxr-x autocomplete_permissions--contactRow--DRMiv",
     children: [e && jsx("div", {
       className: "cocreators_input--profileAvatar--u4iFV autocomplete_permissions--avatar--Hb2O-",
-      children: jsx(H8, {
+      children: jsx(UserAvatar, {
         user: e
       })
     }), jsxs("div", {

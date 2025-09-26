@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, useEffect, useRef } from "react";
 import { MenuContainerComp, MenuHiddenTitleComp, MenuItemLead, MenuSubText, MenuItemTrail, MenuShortcut, setupMenu, MenuRootComp } from "../figma_app/860955";
 import { Jo, rN } from "../905/872033";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { usePersistentValue } from "../figma_app/922077";
 import { generateRecordingKey, addInteractionPath, removeInteractionPath } from "../figma_app/878298";
 import { useDispatch } from "react-redux";
@@ -133,7 +133,7 @@ function x(e) {
   let E = null != activeToolId && wK(items, activeToolId) ? activeToolId : void 0;
   let y = useRef();
   let T = usePersistentValue(E, y);
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = () => y.current = void 0;
     addInteractionPath(e);
     return () => removeInteractionPath(e);

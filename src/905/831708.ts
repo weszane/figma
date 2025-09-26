@@ -6,7 +6,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import { SvgComponent } from "../905/714743";
 import { renderAvatar } from "../figma_app/3731";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { nl, Pf } from "../905/590952";
+import { TeamAvatar, AvatarSize } from "../905/590952";
 import { q$, P_, J, jM, wf, a3 } from "../905/124270";
 import { EMPTY_SPACE_MAP, createSpaceFacetFromMap, buildQueryObject, MAX_TRUNCATE_LENGTH, isLongText, isSpaceEmpty, getSpaceQueryParams } from "../905/171315";
 import { e as _$$e } from "../905/404280";
@@ -170,9 +170,9 @@ function N({
       appliedSpaces: e[FolderType.TEAM],
       baseId: `${t}-team`,
       basePath: [...i, 1],
-      computeOverrideIcon: e => jsx(nl, {
+      computeOverrideIcon: e => jsx(TeamAvatar, {
         team: e,
-        size: Pf.MEDIUM
+        size: AvatarSize.MEDIUM
       }),
       defaultIcon: jsx(SvgComponent, {
         className: Kk,

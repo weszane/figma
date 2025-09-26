@@ -11,7 +11,7 @@ import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
 import { o as _$$o, Ph, pW } from '../905/160095';
 import { ScreenReaderOnly } from '../905/172252';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { BannerMessage } from '../905/363675';
 import { UpgradeAction } from '../905/370443';
@@ -987,7 +987,7 @@ export function $$eI0(e) {
     },
     onClear: _$$b(eN)
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = o.getState().selectedView;
     (e.view === 'orgAdminSettings' || e.view === 'teamAdminConsole') && e.initialHighlightedInvoiceId && (setHighlightedItemId(e.initialHighlightedInvoiceId), c(selectViewAction({
       ...e,

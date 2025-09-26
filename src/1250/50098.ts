@@ -7,7 +7,7 @@ import { DialogCustomContents } from "../figma_app/272243";
 import { ButtonLarge } from "../905/521428";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { Spacing, BigTextInputForwardRef } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
@@ -57,7 +57,7 @@ export function $$F0({
     overlay: CAe,
     priority: _$$N.OVERRIDING_MODAL
   });
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     getIsAndroidOrIphoneNotFigmaMobile() || window.matchMedia("(max-width: 840px)").matches || s || show({
       canShow: t,
       onShow: () => {

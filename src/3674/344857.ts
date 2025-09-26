@@ -11,7 +11,7 @@ import { ServiceCategories } from "../905/165054";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { selectWithShallowEqual } from "../905/103090";
 import { getSelectedDevModePropertiesPanelTab, setSelectedDevModePropertiesPanelTab, updateHoveredNode, clearSelection, replaceSelection, getEnabledDevModePropertiesPanelTabs, getPropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
 import { useDeepEqualSceneValue, $y, useStrictDeepEqualSceneValue, useImmediateSceneValue } from "../figma_app/167249";
@@ -505,7 +505,7 @@ function b({
   }));
   let o = _$$uQ();
   let l = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.isTopLevelFrame(), o);
-  _$$h(() => {
+  useSingleEffect(() => {
     let t = globalPerfTimer.tryStop("switch_to_inspect_mode.right_panel_tti");
     e && t && trackEventAnalytics("switch_to_inspect_mode.right_panel_tti", {
       elapsedMs: t,
@@ -4495,7 +4495,7 @@ function iq() {
     preventUserClose: !0,
     onClose: noop
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -8020,7 +8020,7 @@ let rL = memo(() => {
     didSelectRow
   } = rT(e, _$$uQ());
   let r = useSelector(e => Object.keys(e.mirror.sceneGraphSelection).length > 0);
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = globalPerfTimer.tryStop("switch_to_inspect_mode.left_panel_tti");
     e && trackEventAnalytics("switch_to_inspect_mode.left_panel_tti", {
       elapsedMs: e,
@@ -8776,7 +8776,7 @@ function dH() {
   });
   let o = dR();
   let l = dL(complete);
-  _$$h(() => {
+  useSingleEffect(() => {
     show();
   });
   let s = useCallback(() => {
@@ -10904,7 +10904,7 @@ function u6() {
       postCheck: () => !0
     }
   }, [t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show();
   });
   return jsx(_$$rq, {
@@ -13089,7 +13089,7 @@ function ff() {
   } : e.selectedView);
   let k = useSelector(e => selectedViewToPath(e, N));
   let I = N.showOverview ? getI18nString("dev_handoff.workflows.focus_view.back_to_rfd_tooltip") : getI18nString("dev_handoff.workflows.focus_view.back_to_page_tooltip");
-  if (_$$h(() => {
+  if (useSingleEffect(() => {
     n && HandoffBindingsCpp.focusOnNode(n, !1);
     v === DesignWorkspace.PROTOTYPE && setPropertiesPanelTab(DesignWorkspace.DESIGN);
     getFeatureFlags().dt_workflows_recently_viewed && u && n && h(u, n);

@@ -72,7 +72,7 @@ import { A as _$$A7 } from "../905/144978";
 import { noop } from "lodash-es";
 import { RadioPrimitiveRoot } from "../905/22449";
 import { RadioPrimitiveOption } from "../905/34525";
-import { nl } from "../905/590952";
+import { TeamAvatar } from "../905/590952";
 import { FieldContainer } from "../905/567946";
 import { iy, uK, O0, Ee, I1 } from "../905/916525";
 import { X as _$$X2, S as _$$S } from "../905/109653";
@@ -101,7 +101,7 @@ import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { c$ as _$$c$ } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { n as _$$n3 } from "../figma_app/537817";
+import { TeamAvatar } from "../figma_app/537817";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { Um } from "../905/848862";
 import { A as _$$A9 } from "../905/794518";
@@ -306,7 +306,7 @@ function eB({
 }) {
   return jsxs("label", {
     className: uK,
-    children: [jsx(nl, {
+    children: [jsx(TeamAvatar, {
       team: t
     }), jsx(RadioPrimitiveOption, {
       value: e,
@@ -842,7 +842,7 @@ function tb(e) {
   } = e;
   return jsxs("div", {
     className: tf,
-    children: [jsx(_$$n3, {
+    children: [jsx(TeamAvatar, {
       size: 24,
       team: {
         name: item.name,
@@ -867,7 +867,7 @@ function tv(e) {
     className: cssBuilderInstance.flex.itemsCenter.justifyBetween.$,
     children: [jsxs("div", {
       className: tf,
-      children: [jsx(_$$n3, {
+      children: [jsx(TeamAvatar, {
         size: 16,
         team: {
           name: item.name,
@@ -994,7 +994,7 @@ function tx({
     }),
     children: [jsxs("div", {
       className: tf,
-      children: [jsx(_$$n3, {
+      children: [jsx(TeamAvatar, {
         size: 24,
         team: {
           name: e,

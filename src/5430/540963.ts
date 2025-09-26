@@ -16,7 +16,7 @@ import { l as _$$l } from '../905/152724';
 import { hideModal, showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { ResourceTypes } from '../905/178090';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { x as _$$x } from '../905/211326';
 import { w as _$$w } from '../905/230422';
 import { PricingOptions } from '../905/237873';
@@ -705,7 +705,7 @@ function to({
     overlay: O9D,
     priority: _$$N2.SECONDARY_MODAL
   }, [t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     r.show({
       canShow: e => !e
     });
@@ -760,7 +760,7 @@ let tE = registerModal(() => {
   let [u, m] = useState(!1);
   let [p, h] = useState(!1);
   let x = useRef(null);
-  _$$h(() => {
+  useSingleEffect(() => {
     BuyerAPIHandler.getCmtyCreatorPayoutStatements({
       userId: t?.id
     }).then(({

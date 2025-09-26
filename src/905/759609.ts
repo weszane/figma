@@ -12,7 +12,7 @@ import { e as _$$e2 } from "../905/916195";
 import { A as _$$A } from "../905/24328";
 import { Multiplayer } from "../figma_app/763686";
 import { xj, Mx, yx } from "../figma_app/851625";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { KeyCodes } from "../905/63728";
 import { reportError } from "../905/11";
 import { defaultPx } from "../905/149328";
@@ -494,7 +494,7 @@ let J = memo(function (e) {
   let t = jX(e);
   let i = Multiplayer.isIncrementalSession();
   let [a, o] = useState(!i);
-  _$$h(() => {
+  useSingleEffect(() => {
     if (!i || !t) {
       o(!0);
       return;
@@ -527,7 +527,7 @@ let ee = memo(function ({
 }) {
   let i = Multiplayer.isIncrementalSession();
   let [a, s] = useState(!i);
-  _$$h(() => {
+  useSingleEffect(() => {
     if (!i) {
       s(!0);
       return;

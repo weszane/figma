@@ -6,7 +6,7 @@ import { useSubscription } from "../figma_app/288654";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6, lR } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
-import { nl, Pf } from "../905/590952";
+import { TeamAvatar, AvatarSize } from "../905/590952";
 import { DeepLinkType } from "../905/15667";
 import { useDraftsCopyLinkExperiment } from "../figma_app/297957";
 import { TrackingProvider } from "../figma_app/831799";
@@ -173,9 +173,9 @@ function D({
   };
   return jsxs("div", {
     className: "shared_vr_draft_tooltip--svgContainer--SousN",
-    children: [jsx(nl, {
+    children: [jsx(TeamAvatar, {
       team: t,
-      size: Pf.LARGE
+      size: AvatarSize.LARGE
     }), jsx(M, {})]
   });
 }

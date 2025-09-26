@@ -72,7 +72,7 @@ import { g as _$$g } from "../8826/914688";
 import { setupThemeContext } from "../905/614223";
 import { p as _$$p } from "../figma_app/353099";
 import { dayjs } from "../905/920142";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
@@ -1098,7 +1098,7 @@ function tl() {
     overlay: c$$,
     priority: _$$N2.SECONDARY_MODAL
   }, [e, t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: (e, t) => e && null != t && dayjs(t).isBefore("2025-05-07")
     });

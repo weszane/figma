@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { dayjs } from "../905/920142";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { d9, $5 } from "../3276/240191";
@@ -108,7 +108,7 @@ export function $$M0() {
     y.complete();
     j();
   }, [y, j]);
-  _$$h(w);
+  useSingleEffect(w);
   E(y.uniqueId, MULTIPLAYER_USER_STATE_CHANGE, w);
   return jsxs(Fragment, {
     children: [jsx(_$$h2, {

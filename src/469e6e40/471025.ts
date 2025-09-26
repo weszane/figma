@@ -11,7 +11,7 @@ import { x as _$$x } from "../905/811596";
 import { _ as _$$_ } from "../469e6e40/422718";
 import { useDebounce } from 'use-debounce';
 import { analyticsEventManager } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
@@ -92,7 +92,7 @@ function C(e) {
   });
 }
 function S(e) {
-  _$$h(() => {
+  useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent("admin.seat_count_viewed", {
       seatType: e.seatType
     });

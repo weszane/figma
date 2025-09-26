@@ -16,7 +16,7 @@ import { b as _$$b } from "../905/493664";
 import { trackTeamEvent } from "../figma_app/314264";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { p9, n1 } from "../figma_app/88768";
-import { rq } from "../905/351260";
+import { sendRoleInvites } from "../905/351260";
 import { getUserState } from "../figma_app/502247";
 import { AccessLevelEnum } from "../905/557142";
 import { CreateUpgradeAction } from "../figma_app/707808";
@@ -76,7 +76,7 @@ export function $$C2(e, t, r) {
   let {
     ignoreCurrentPlan
   } = r;
-  i && !ignoreCurrentPlan && r.inviteEmails?.length && r.inviteLevel ? t.dispatch(rq({
+  i && !ignoreCurrentPlan && r.inviteEmails?.length && r.inviteLevel ? t.dispatch(sendRoleInvites({
     emails: r.inviteEmails,
     emailsToExclude: n ? new Set([n.email]) : void 0,
     resourceType: FResourceCategoryType.TEAM,
@@ -84,7 +84,7 @@ export function $$C2(e, t, r) {
     level: r.inviteLevel,
     source: "new_team_creation_modal",
     teamId: e.id
-  })) : r.teamFlowType === CreateUpgradeAction.CREATE && r.inviteEmails?.length && t.dispatch(rq({
+  })) : r.teamFlowType === CreateUpgradeAction.CREATE && r.inviteEmails?.length && t.dispatch(sendRoleInvites({
     emails: r.inviteEmails,
     emailsToExclude: n ? new Set([n.email]) : void 0,
     resourceType: FResourceCategoryType.TEAM,

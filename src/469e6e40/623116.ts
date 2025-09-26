@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { APILoadingStatus } from "../905/520829";
 import { xj, ok } from "../figma_app/851625";
 import { J as _$$J } from "../905/931050";
@@ -105,7 +105,6 @@ import { V as _$$V } from "../figma_app/312987";
 import { n as _$$n } from "../4452/511872";
 import { am } from "../4452/575555";
 import { getSelectedView } from "../figma_app/386952";
-import { noop } from "../905/834956";
 import { hP, cE, $u, ld } from "../figma_app/527041";
 import { A as _$$A3 } from "../6828/493300";
 import t_ from "../vendor/239910";
@@ -113,8 +112,8 @@ import { trackEventAnalytics } from "../905/449184";
 import { EK } from "../4452/90195";
 import { formatCount } from "../figma_app/930338";
 import { LoadingOverlay } from "../figma_app/858013";
-import { nl, Pf } from "../905/590952";
-import { U as _$$U2 } from "../905/566881";
+import { TeamAvatar, AvatarSize } from "../905/590952";
+import { HAvatarType } from "../905/566881";
 import { F as _$$F2 } from "../7021/270993";
 import { Ef } from "../905/81982";
 import { d as _$$d } from "../905/44199";
@@ -138,7 +137,7 @@ function ee(e) {
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
   let o = zl(Z);
-  _$$h(() => {
+  useSingleEffect(() => {
     "reset" === o.currentState ? show() : show({
       canShow: e => !e
     });
@@ -176,7 +175,7 @@ function e_() {
     overlay: YHe,
     priority: _$$N.DEFAULT_MODAL
   }, [a, t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: (e, t) => !isMobileUA && !e && !!t.currentUser?.baseOrgUser?.workspaceUsers?.some(e => e.permission === FOrganizationRoleType.ADMIN)
     });
@@ -1072,10 +1071,10 @@ function tE(e) {
   }
   return jsxs("div", {
     className: "default_teams_edit_modal--teamToken--ssO-d default_teams_edit_modal--flexHorizontalGap8px--BmbPK",
-    children: [jsx(nl, {
+    children: [jsx(TeamAvatar, {
       team: a,
-      size: Pf.SMALL,
-      fallbackDisplay: _$$U2.HIDDEN
+      size: AvatarSize.SMALL,
+      fallbackDisplay: HAvatarType.HIDDEN
     }), jsxs("span", {
       children: [a.name, t && ` (${t})`]
     })]
@@ -1085,7 +1084,7 @@ function tC(e) {
   let t = e.searchResult;
   return jsxs("div", {
     className: e.isSelected ? "default_teams_edit_modal--teamRowSelected--8U-Xz default_teams_edit_modal--teamRow--qzGjr default_teams_edit_modal--flexHorizontalGap8px--BmbPK" : "default_teams_edit_modal--teamRow--qzGjr default_teams_edit_modal--flexHorizontalGap8px--BmbPK",
-    children: [jsx(nl, {
+    children: [jsx(TeamAvatar, {
       team: t
     }), jsxs("div", {
       className: "default_teams_edit_modal--teamRowInfo--JlcCn",
@@ -1357,7 +1356,7 @@ function tL(e) {
   useEffect(() => {
     ed();
   }, [e0, ed]);
-  _$$h(() => {
+  useSingleEffect(() => {
     onRightActionsChange?.(jsx(Button, {
       iconPrefix: jsx(_$$e2, {}),
       onClick: e1,
@@ -1649,7 +1648,7 @@ function tL(e) {
       children: renderI18nText("teams_table.csv_export.get_csv")
     })]
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     onRightActionsChange?.(ti);
   });
   return jsxs(Fragment, {
@@ -1940,7 +1939,7 @@ export function $$tP0(e) {
     k(e);
     y(0);
   }, [k, y]);
-  _$$h(() => {
+  useSingleEffect(() => {
     b(Rw());
   });
   useEffect(() => {

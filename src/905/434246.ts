@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { WAFImage } from "../905/675859";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { isFullscreenView } from "../figma_app/976749";
 import { getVisibleTheme } from "../905/640017";
 import { getProductIcon, getProductBackgroundImgUrl } from "../905/389382";
@@ -43,9 +43,9 @@ export function $$m0({
     }), t && jsxs(Fragment, {
       children: [jsx("div", {
         className: "avatar_with_product_background--avatarPositioning--QqhQX",
-        children: jsx(H8, {
+        children: jsx(UserAvatar, {
           user: t,
-          size: Pf.LARGE
+          size: AvatarSize.LARGE
         })
       }), jsx("div", {
         className: g,

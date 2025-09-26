@@ -7,13 +7,14 @@ import { getAssociatedUserProfiles } from '../905/11536';
 import { registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
 import { hideModal } from '../905/156213';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { a_, Aq, Bi, dS, iG, lf, pV, sw, tW, YE, z_ } from '../905/427932';
 import { trackEventAnalytics } from '../905/449184';
 import { e as _$$e } from '../905/579755';
 import { SvgComponent } from '../905/714743';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { A as _$$A } from '../6828/718668';
 import { isOrgOrTeam } from '../figma_app/11961';
 import { A as _$$A2 } from '../figma_app/122760';
@@ -109,7 +110,7 @@ function PrePurchaseUserSelectorContent({
   const [purchaseMeta, setPurchaseMeta] = useState<Record<string, any>>({});
 
   // Fetch buyer associated purchases on mount
-  _$$h(() => {
+  useSingleEffect(() => {
     BuyerAPIHandler.getBuyerAssociatedPurchases({
       id: resource.monetized_resource_metadata.id
     }).then(res => {
@@ -202,7 +203,7 @@ export const PrePurchaseUserSelectorModal = registerModal((props: {
     onUserSelect: (user: any) => void;
     resource: any;
   }) {
-    _$$h(() => {
+    useSingleEffect(() => {
       trackEventAnalytics('Pre Purchase User Selector Modal - Opened', {
         resourceType: mapResourceType(resource),
         resourceId: resource.id

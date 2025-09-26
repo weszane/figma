@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { h } from "../905/207101";
+import { h } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { postUserFlag } from "../905/985254";
 import { Z } from "../905/104740";

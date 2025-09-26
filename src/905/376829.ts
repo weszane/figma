@@ -32,7 +32,7 @@ import U from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { SearchFilterWorkspaceView } from "../figma_app/43951";
 import { p as _$$p } from "../figma_app/353099";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { e as _$$e } from "../905/621515";
 import { UC } from "../figma_app/33126";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -152,7 +152,7 @@ function et() {
     overlay: tBR,
     priority: _$$N.DEFAULT_MODAL
   }, [n, i, a]);
-  _$$h(() => {
+  useSingleEffect(() => {
     o.show({
       canShow: (e, t, i) => e && t && !i
     });

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { postUserFlag } from "../905/985254";
 import { e as _$$e } from "../905/621515";
 import { A as _$$A } from "../905/956262";
@@ -49,7 +49,7 @@ export function $$O1() {
     onComplete: j.complete
   });
   let G = useDispatch();
-  _$$h(() => {
+  useSingleEffect(() => {
     null != e && e.canEdit && e.createdAt > N() && j.show({
       canShow: (t, r, n, i, a, s, l) => {
         let d = !!e && isTeamFolderV2(e.project);

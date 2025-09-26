@@ -51,7 +51,7 @@ import { showModalHandler } from "../905/156213";
 import { E as _$$E2 } from "../905/565019";
 import { H as _$$H } from "../5430/304640";
 import { SecureLink } from "../figma_app/637027";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { zC, RZ } from "../5430/39369";
@@ -242,9 +242,9 @@ let ep = registerModal(function (e) {
     children: jsxs("div", {
       className: RZ,
       "data-testid": "comment-confirm-report-modal-content",
-      children: [jsx(H8, {
+      children: [jsx(UserAvatar, {
         user: e.comment.author,
-        size: Pf.LARGE
+        size: AvatarSize.LARGE
       }), i]
     })
   });

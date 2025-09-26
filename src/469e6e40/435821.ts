@@ -14,7 +14,7 @@ import { styleBuilderInstance } from "../905/941192";
 import { FRequestStatusType } from "../figma_app/191312";
 import { registerModal } from "../905/102752";
 import { g as _$$g } from "../905/356410";
-import { utilityNoop } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { A as _$$A } from "../5724/663128";
 import { showModalHandler } from "../905/156213";
 import { KindEnum } from "../905/129884";
@@ -70,7 +70,7 @@ let w = registerModal(function ({
   }) : renderI18nText("community.detail_view.data_security_modal_explanation_plugin", {
     assessmentProgramLink: i
   });
-  return jsxs(utilityNoop, {
+  return jsxs(ModalContainer, {
     size: 600,
     title: getI18nString("community.detail_view.data_security"),
     children: [jsx(ModalCloseButton, {

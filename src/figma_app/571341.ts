@@ -12,7 +12,7 @@ import { atomStoreManager, atom, useAtomValueAndSetter } from "../figma_app/2735
 import { ei, E1 } from "../figma_app/9054";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { l as _$$l } from "../905/745972";
 import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
@@ -90,7 +90,7 @@ export function $$K1(e) {
     enabled: !!r && !!e
   });
   let [a, o] = useAtomValueAndSetter(W);
-  _$$h(() => o(""));
+  useSingleEffect(() => o(""));
   return useMemo(() => {
     if ("loaded" === n.status) {
       let t = n.data.file;

@@ -34,7 +34,7 @@ import { A as _$$A4 } from "../6828/727585";
 import { A as _$$A5 } from "../6828/559361";
 import { Link } from "../905/438674";
 import Y from "classnames";
-import { h as _$$h } from "../905/207101";
+import { h as _$$h } from "../905/791079";
 import { h1 } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { M3, dP } from "../figma_app/119475";
@@ -62,7 +62,7 @@ import { Y as _$$Y } from "../905/720957";
 import { P as _$$P } from "../905/347284";
 import { searchEndSession } from "../figma_app/925970";
 import { registerModal } from "../905/102752";
-import { utilityNoop } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { s as _$$s } from "../figma_app/576667";
 import { n as _$$n } from "../905/914485";
 import { j as _$$j } from "../905/294703";
@@ -764,7 +764,7 @@ let eK = registerModal(function () {
   let _ = t.data.width ? {
     width: `${t.data.width - 2 * ez}px`
   } : void 0;
-  return jsx(utilityNoop, {
+  return jsx(ModalContainer, {
     absolutePosition: {
       top: t.data.top,
       left: t.data.left

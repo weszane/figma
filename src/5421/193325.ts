@@ -63,7 +63,7 @@ import { processStateHierarchy } from "../figma_app/264776";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { c as _$$c, P as _$$P2 } from "../905/200950";
 import { getFeatureFlags } from "../905/601108";
-import { h as _$$h2 } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { RecordableDiv } from "../905/511649";
 import { showVariablePicker, hideVariablePicker } from "../905/330741";
 import { tZ, u as _$$u, BQ } from "../figma_app/852050";
@@ -826,7 +826,7 @@ function eX({
   let y = tZ(isValidValue(t) && "id" in t ? t.id : void 0);
   let _ = _$$u(isValidValue(t) && "id" in t ? t.id : void 0);
   let [v, I] = useState("");
-  _$$h2(() => {
+  useSingleEffect(() => {
     s && !0 === s.current && (E(), s.current = !1);
   });
   let C = BQ(isValidValue(t) && "id" in t ? t.id : void 0) ?? m9(isValidValue(t) && "nodeFieldAlias" in t ? t.nodeFieldAlias : void 0);

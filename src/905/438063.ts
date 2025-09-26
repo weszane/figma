@@ -13,7 +13,7 @@ import { t as _$$t } from "../905/117577";
 import { a as _$$a } from "../905/964520";
 import { DocumentColorProfileEnum, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k3 } from "../905/582200";
 import { getI18nString } from "../905/303541";
@@ -52,7 +52,7 @@ export let $$M0 = registerModal(function (e) {
     type: "CONTENT_SCALE",
     value: 1
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     0 === g.length && 0 === y.length && (B ? replaceSelection([U]) : replaceSelection(h));
   });
   useEffect(() => {

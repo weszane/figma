@@ -10,7 +10,7 @@ import { O } from "../905/969533";
 import { trackEventAnalytics } from "../905/449184";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { setBrowserTileSortView } from "../905/34809";
 import { isCooperFeatureEnabled } from "../figma_app/828186";
 import { trackFileBrowserSharerFilterSelected, trackFileBrowserPlanFilterSelected } from "../figma_app/314264";
@@ -25,7 +25,7 @@ export function $$x7(e) {
   let t = wW(e.userId).user;
   return jsx("div", {
     className: cssBuilderInstance.mr4.flex.itemsCenter.$,
-    children: t && jsx(H8, {
+    children: t && jsx(UserAvatar, {
       user: t,
       size: 14
     })

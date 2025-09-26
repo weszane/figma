@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
 import { S } from "../0c62c2fd/596856";
@@ -62,7 +62,7 @@ export function $$C0({
     newFileFrom: e,
     contextClicked: "make_file_creation_tooltip"
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => e
     });

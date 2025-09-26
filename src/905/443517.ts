@@ -6,7 +6,7 @@ import { KeyCodes } from '../905/63728';
 import { _ as _$$_ } from '../905/136246';
 import { ServiceCategories } from '../905/165054';
 import { Y as _$$Y } from '../905/193977';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { B as _$$B2 } from '../905/388732';
 import { IconButton } from '../905/443068';
@@ -105,7 +105,7 @@ export function $$K0(e) {
     });
     H.current = !0;
   }, [e]);
-  _$$h(() => () => {
+  useSingleEffect(() => () => {
     ed(J.current, Q.current);
   });
   _$$z();

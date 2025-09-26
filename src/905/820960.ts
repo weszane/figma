@@ -3,7 +3,7 @@ import { useMemo, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { nl } from "../905/590952";
+import { TeamAvatar } from "../905/590952";
 import { In } from "../905/672640";
 import { trackNavTreeClicked } from "../figma_app/976345";
 import { W as _$$W } from "../905/307631";
@@ -181,7 +181,7 @@ export function $$O2(e) {
       q(!0);
       e.onChildFocusChange && e.onChildFocusChange();
     },
-    headerLeft: jsx(nl, {
+    headerLeft: jsx(TeamAvatar, {
       team: e.team,
       size: 40,
       avatarSvg: _$$A

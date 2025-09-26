@@ -7,8 +7,8 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { TrackedButton } from "../figma_app/831799";
 import { P } from "../905/842406";
 import { ShareAction } from "../figma_app/707808";
-import { o as _$$o } from "../905/382697";
-import { E4, hP } from "../905/144598";
+import { setupShareModalTabHandler } from "../905/382697";
+import { getUserHandleOrEmail, UserAvatar } from "../905/144598";
 import { G2, QJ, aL, IG, u4, Lo, bv, LN, cp, Xr, Em } from "../905/959395";
 export function $$g2(e) {
   return jsxs(TrackedButton, {
@@ -53,13 +53,13 @@ export function $$f1(e) {
 export function $$_0(e) {
   let t = e.roles.length;
   let i = P();
-  let a = _$$o();
+  let a = setupShareModalTabHandler();
   let s = useMemo(() => {
     let t = e.roles.sort((e, t) => e.pending === t.pending ? 0 : e.pending ? 1 : -1);
     return [t[0], t[1]];
   }, [e.roles]);
-  let o = E4(s[0], i);
-  let d = E4(s[1], i);
+  let o = getUserHandleOrEmail(s[0], i);
+  let d = getUserHandleOrEmail(s[1], i);
   let f = renderI18nText("file_permissions_modal.collaborators_row_v2", {
     collaborator_1_name: jsx("span", {
       className: bv,
@@ -80,7 +80,7 @@ export function $$_0(e) {
     className: LN,
     children: [jsx("div", {
       className: cp,
-      children: jsx(hP, {
+      children: jsx(UserAvatar, {
         user: s[0].user,
         id: s[0].id,
         pending: s[0].pending,
@@ -88,7 +88,7 @@ export function $$_0(e) {
       })
     }), jsx("div", {
       className: Xr,
-      children: jsx(hP, {
+      children: jsx(UserAvatar, {
         user: s[1].user,
         id: s[1].id,
         pending: s[1].pending,

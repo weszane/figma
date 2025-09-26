@@ -1,7 +1,7 @@
 import { useRef, useContext } from "react";
 import { logger } from "../905/651849";
 import { Xx } from "../figma_app/243213";
-import { h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { trackEventAnalytics } from "../905/449184";
 import { wu, xd } from "../905/729783";
 import { InteractivityContext } from "../905/896141";
@@ -11,7 +11,7 @@ export function $$c4(e) {
 export function $$u5(e) {
   let t = useContext(InteractivityContext);
   let i = t.error ? t.error : t.trackablePath[t.trackablePath.length - 1] ? t.interactable ? "<Interactable /> cannot be nested inside another <Interactable />" : void 0 : "<Interactable /> must be nested inside a <Trackable />";
-  h(() => {
+  useSingleEffect(() => {
     i && !t.error && logger.error(i);
   });
   return $$c4({
@@ -33,7 +33,7 @@ export function $$p1({
 export function $$m6(e) {
   let t = useContext(InteractivityContext);
   let i = t.error ? t.error : t.interactable ? "<Trackable /> cannot be nested inside an <Interactable />" : void 0;
-  h(() => {
+  useSingleEffect(() => {
     i && !t.error && logger.error(i);
   });
   return $$c4({
@@ -68,7 +68,7 @@ export function $$g3(e) {
   return !0;
 }
 export function $$f7(e, t, i) {
-  h(() => {
+  useSingleEffect(() => {
     $$g3(e) && i && function (e, t) {
       let i = {
         ...e,

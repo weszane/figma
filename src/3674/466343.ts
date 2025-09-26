@@ -18,7 +18,7 @@ import { W as _$$W } from "../905/200727";
 import { renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { AutoLayout } from "../905/470281";
-import { Pf, H8 } from "../905/590952";
+import { AvatarSize, UserAvatar } from "../905/590952";
 import { Wi, JR } from "../figma_app/162641";
 import { useState, useEffect } from "react";
 import { FPlanNameType, FOrganizationLevelType, FUserTypeClassification, FMemberRoleType, FProductAccessType } from "../figma_app/191312";
@@ -277,7 +277,7 @@ let $$E = {
 };
 function C({
   users: e,
-  size: t = Pf.MEDIUM,
+  size: t = AvatarSize.MEDIUM,
   maxShow: n = 3,
   isTooltip: i
 }) {
@@ -293,7 +293,7 @@ function C({
       ...xk($$E.avatarZIndex(i ? -n : n), !i && n === l.length - 1 && $$E.marginRight),
       children: jsx("div", {
         ...xk($$E.avatar, $$E[s]),
-        children: jsx(H8, {
+        children: jsx(UserAvatar, {
           user: e,
           size: t
         })

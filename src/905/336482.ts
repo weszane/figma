@@ -18,7 +18,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import b from "../vendor/241899";
 import { useDebouncedCallback } from "use-debounce";
 import { H as _$$H } from "../905/620380";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { resolveMessage } from "../905/231762";
 import { b as _$$b } from "../905/403202";
 import { L as _$$L } from "../905/884941";
@@ -819,7 +819,7 @@ function ej(e) {
     publishableComponentNodeIds,
     localComponents
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     f.fieldStates.carouselMedia.currentValue !== unsetSymbol && f.fieldStates.carouselMedia.resetValue();
   });
   let [_, A] = useAtomValueAndSetter(pz);

@@ -6,7 +6,7 @@ import { ServiceCategories } from "../905/165054";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { isValidEmail } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { useLatestRef } from "../figma_app/922077";
 import { getPaymentFlowData, clearPaymentFlowData } from "../figma_app/169182";
 import { handleSuspenseRetainRelease, setupResourceAtomHandler } from "../figma_app/566371";
@@ -644,12 +644,12 @@ function eY(e) {
     cannotCreateTeamReason
   } = LM(ty, tT ?? null);
   let tb = useSelector(e => isOrgUserExternallyRestrictedFromState(e));
-  _$$h(() => {
+  useSingleEffect(() => {
     to(postUserFlag({
       entered_pro_cart_flow: !0
     }));
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = document.createElement("div");
     e.style.position = "fixed";
     e.style.inset = "0";

@@ -9,7 +9,7 @@ import { useEffect, memo, useRef, useState, useCallback, useLayoutEffect, useMem
 import { useSelector, useDispatch } from "react-redux";
 import { ServiceCategories } from "../905/165054";
 import { customHistory } from "../905/612521";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { reportError } from "../905/11";
 import { hideModal, showModalHandler, hideModalHandler } from "../905/156213";
 import { selectCurrentUser, getUserId } from "../905/372672";
@@ -711,7 +711,7 @@ function eS({
       let s = n.children[0].getBoundingClientRect().width;
       a(Math.floor(n.getBoundingClientRect().width / s));
     }, [e, a, t, i]);
-    _$$h(() => (r(), window.addEventListener("resize", r), () => window.removeEventListener("resize", r)));
+    useSingleEffect(() => (r(), window.addEventListener("resize", r), () => window.removeEventListener("resize", r)));
     return n;
   }(t);
   let n = function (e) {
@@ -5981,7 +5981,7 @@ function st() {
     overlay: cJy,
     priority: _$$N4.DEFAULT_MODAL
   }, [e]);
-  _$$h(() => {
+  useSingleEffect(() => {
     !n && i && i.has_published && show({
       canShow: e => !e
     });
@@ -6273,7 +6273,7 @@ export function $$sd0() {
   let e = useDispatch();
   let t = selectCurrentUser();
   let i = useSelector(e => e.userFlags);
-  return (_$$h(() => (function (e, t) {
+  return (useSingleEffect(() => (function (e, t) {
     let i = t.figjam_editor_onboarded || hasAnyOnboardingFlag(t) || t.editor_community_duplicate_onboarded || t.orgs_onboarded || t.welcome_onboarded;
     let n = QL("after-auth-duplicate-file-id");
     let a = QL("show_eula");

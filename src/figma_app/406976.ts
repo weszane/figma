@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { useLatestRef } from "../figma_app/922077";
 import { logError } from "../905/714362";
 import { trackFileEvent } from "../figma_app/314264";
@@ -50,7 +50,7 @@ export function $$I0({
 }) {
   let r = useLatestRef(e);
   let i = useRef();
-  _$$h(() => {
+  useSingleEffect(() => {
     i.current = performance.now();
   });
   let a = function (e) {
@@ -73,7 +73,7 @@ export function $$S1({
 }) {
   let t = useCurrentFileKey();
   let r = getUserId();
-  _$$h(() => {
+  useSingleEffect(() => {
     t && r && analyticsEventManager.trackDefinedEvent("variables.inline_creation_dialog_opened", {
       fileKey: t,
       userId: r,

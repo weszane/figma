@@ -5,7 +5,7 @@ import { setupThemeContext } from "../905/614223";
 import o from "classnames";
 import { M as _$$M } from "../figma_app/749682";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 import { Mr } from "../figma_app/795938";
 import { dY } from "../905/838765";
@@ -148,7 +148,7 @@ export function $$f0(e) {
       id: S,
       className: "publish_file_resource_modal_card--publishFileResourceModalCardFileInfo--5iE9R",
       role: "note",
-      children: [jsx(H8, {
+      children: [jsx(UserAvatar, {
         user: {
           handle: author?.name,
           imgUrl: author?.imgUrl

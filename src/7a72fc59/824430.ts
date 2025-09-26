@@ -57,7 +57,7 @@ import { P as _$$P2 } from '../905/175083';
 import { oh as _$$oh, jX, kh, R4, y8, Z7 } from '../905/188169';
 import { permissionScopeHandler as _$$l2, scopeAwareFunction as _$$nc } from '../905/189185';
 import { P as _$$P7 } from '../905/201667';
-import { h as _$$h5 } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { A as _$$A18 } from '../905/215698';
 import { isInvalidValue, isValidValue, MIXED_MARKER, normalizeValue, valueOrFallback } from '../905/216495';
 import { Cn } from '../905/225265';
@@ -470,7 +470,7 @@ import { isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/89
 import { trackFileEventWithStore } from '../figma_app/901889';
 import { j as _$$j, k as _$$k2 } from '../figma_app/904944';
 import { mY } from '../figma_app/915281';
-import { utilityNoop } from '../figma_app/918700';
+import { ModalContainer } from '../figma_app/918700';
 import { kx } from '../figma_app/920333';
 import { searchStartSession, searchEndSession } from '../figma_app/925970';
 import { capitalize } from '../figma_app/930338';
@@ -4397,7 +4397,7 @@ function l5({
   children: e
 }) {
   let t = g5('modal');
-  return jsx(utilityNoop, {
+  return jsx(ModalContainer, {
     'className': 'cooper_template_modal--templateModal--s4Z-R',
     'size': parsePxInt(CVP),
     'tintedModalBackground': !0,
@@ -11346,7 +11346,7 @@ function uF() {
   let [i, s] = useState({});
   let c = useSceneGraphSelector();
   let u = trackFileEventWithStore();
-  _$$h5(() => {
+  useSingleEffect(() => {
     t(uO.SELECT_FILE);
     r({});
   });
@@ -11445,7 +11445,7 @@ function uB() {
     });
     CooperHelpers?.setBuzzEditMode();
   }, [e]);
-  _$$h5(() => (l(), () => {
+  useSingleEffect(() => (l(), () => {
     r();
   }));
   useEffect(() => {

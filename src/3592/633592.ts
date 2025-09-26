@@ -23,7 +23,7 @@ import { atom, createLocalStorageAtom, useAtomWithSubscription, useAtomValueAndS
 import { n as _$$n } from "../draftjs_composer/589474";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { uQ } from "../figma_app/311375";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -954,7 +954,7 @@ ${l.contents}`, {
   }();
   if (!r || !o || e.hideFromUser) return null;
   if ("user" === e.role) return jsxs(eh, {
-    children: [jsx(H8, {
+    children: [jsx(UserAvatar, {
       user: o
     }), jsx(ex, {
       children: r

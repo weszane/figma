@@ -6,7 +6,7 @@ import { renderAvatar } from "../figma_app/3731";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { pW } from "../905/160095";
 import { renderI18nText } from "../905/303541";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { A } from "../905/563377";
 import { ud } from "../905/862913";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -80,9 +80,9 @@ export function $$I1({
       size: 2 === e ? 16 : 1 === e ? 24 : 32
     }), a && jsx("div", {
       className: s()(c.avatar, c.userAvatar),
-      children: jsx(H8, {
+      children: jsx(UserAvatar, {
         user: a,
-        size: 2 === e ? Pf.SMALL16 : 1 === e ? Pf.MEDIUM : Pf.LARGE
+        size: 2 === e ? AvatarSize.SMALL16 : 1 === e ? AvatarSize.MEDIUM : AvatarSize.LARGE
       })
     }), jsx("div", {
       className: c.thumbnailContainer,

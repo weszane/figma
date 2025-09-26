@@ -3,17 +3,17 @@ import { useState, useRef, Suspense } from "react";
 import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { getErrorStackHistory } from "../905/607410";
-import { h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { reportError } from "../905/11";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 function u(e) {
-  h(() => {
+  useSingleEffect(() => {
     e.onMount();
   });
   return e.fallback;
 }
 function p(e) {
-  h(() => {
+  useSingleEffect(() => {
     e.onMount();
   });
   return jsx(Fragment, {

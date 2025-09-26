@@ -1,467 +1,709 @@
-import { trackEventAnalytics } from "../905/449184";
-import { WB } from "../905/761735";
-import { XHR } from "../905/910117";
-import { FlashActions, handlePromiseError } from "../905/573154";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { createOptimistThunk } from "../905/350402";
-import { cL } from "../905/748726";
-import { popModalStack, showModalHandler } from "../905/156213";
-import { rolePostAction, roleDeleteAction } from "../905/98702";
-import { trackFileEvent, trackRoleEvent } from "../figma_app/314264";
-import { mapResourceCategoryToRole, arrayToIdMap } from "../figma_app/349248";
-import { checkDomainExists } from "../figma_app/336853";
-import { getRolesForResource, getResourceTeamId, hasEditorRoleAccessOnTeam, hasAdminRoleAccessOnTeam } from "../figma_app/642025";
-import { AccessLevelEnum } from "../905/557142";
-import { t as _$$t2 } from "../figma_app/32680";
-import { oE } from "../905/249410";
-import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "react-redux";
-import { T as _$$T } from "../figma_app/257703";
-import { TrackingProvider } from "../figma_app/831799";
-import { v as _$$v } from "../905/124421";
-import { registerModal } from "../905/102752";
-import { ConfirmationModal2 } from "../figma_app/918700";
-import { jE } from "../figma_app/639088";
-import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
-import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
-import { UpsellModalType } from "../905/165519";
-let T = registerModal(function (e) {
-  let t = useDispatch();
+import type { FResourceCategoryType } from '../figma_app/191312'
+import { useDispatch } from 'react-redux'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { roleDeleteAction, rolePostAction } from '../905/98702'
+import { registerModal } from '../905/102752'
+import { v as _$$v } from '../905/124421'
+import { popModalStack, showModalHandler } from '../905/156213'
+import { UpsellModalType } from '../905/165519'
+import { oE } from '../905/249410'
+import { VisualBellActions } from '../905/302958'
+import { getI18nString, renderI18nText } from '../905/303541'
+import { createOptimistThunk } from '../905/350402'
+import { trackEventAnalytics } from '../905/449184'
+import { AccessLevelEnum } from '../905/557142'
+import { FlashActions, handlePromiseError } from '../905/573154'
+import { cL } from '../905/748726'
+import { WB } from '../905/761735'
+import { XHR } from '../905/910117'
+import { t as _$$t2 } from '../figma_app/32680'
+import { ConfigGroups, isReduxDeprecationCutover } from '../figma_app/121751'
+import { T as _$$T } from '../figma_app/257703'
+import { trackFileEvent, trackRoleEvent } from '../figma_app/314264'
+import { checkDomainExists } from '../figma_app/336853'
+import { arrayToIdMap, mapResourceCategoryToRole } from '../figma_app/349248'
+import { adminPermissionConfig, setupShadowRead } from '../figma_app/391338'
+import { jE } from '../figma_app/639088'
+import { getResourceTeamId, getRolesForResource, hasAdminRoleAccessOnTeam, hasEditorRoleAccessOnTeam } from '../figma_app/642025'
+import { TrackingProvider } from '../figma_app/831799'
+import { ConfirmationModal2 } from '../figma_app/918700'
+
+let orgGuestsBannedModal = registerModal((e) => {
+  let t = useDispatch()
   return jsx(TrackingProvider, {
-    name: "Sharing with external users is disabled modal",
+    name: 'Sharing with external users is disabled modal',
     properties: {
       emails: e.emails.toString(),
       resourceIdOrKey: e.resourceIdOrKey,
-      resourceType: e.resourceType
+      resourceType: e.resourceType,
     },
     children: jsx(ConfirmationModal2, {
-      confirmationTitle: getI18nString("permissions.guests_banned.sharing_with_external_users_is_disabled"),
-      confirmText: getI18nString("permissions.guests_banned.got_it"),
+      confirmationTitle: getI18nString('permissions.guests_banned.sharing_with_external_users_is_disabled'),
+      confirmText: getI18nString('permissions.guests_banned.got_it'),
       onConfirm: () => t(popModalStack()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
       popStack: e.popStack,
-      size: "small",
+      size: 'small',
       hideCancel: !0,
-      children: jsx("div", {
+      children: jsx('div', {
         className: jE,
-        children: renderI18nText("permissions.guests_banned.invite_wasnt_sent_org_name", {
+        children: renderI18nText('permissions.guests_banned.invite_wasnt_sent_org_name', {
           numEmails: e.emails.length,
           listEmails: jsx(_$$T, {
-            children: e.emails.map(e => jsx("span", {
-              children: e
-            }, e))
+            children: e.emails.map(e => jsx('span', {
+              children: e,
+            }, e)),
           }),
-          orgName: e.orgName
-        })
-      })
-    })
-  });
-}, "ORG_GUESTS_BANNED_MODAL");
+          orgName: e.orgName,
+        }),
+      }),
+    }),
+  })
+}, 'ORG_GUESTS_BANNED_MODAL')
 function k(e) {
-  return jsx("div", {
+  return jsx('div', {
     style: {
-      height: e.height || 12
-    }
-  });
+      height: e.height || 12,
+    },
+  })
 }
-let R = registerModal(function (e) {
-  let t = useDispatch();
+let requestAccessWarningModal = registerModal((e) => {
+  let t = useDispatch()
   return jsx(TrackingProvider, {
-    name: "Admin approval needed modal",
+    name: 'Admin approval needed modal',
     properties: {
       emails: e.emails.toString(),
       resourceIdOrKey: e.resourceIdOrKey,
-      resourceType: e.resourceType
+      resourceType: e.resourceType,
     },
     children: jsx(ConfirmationModal2, {
-      confirmationTitle: getI18nString("permissions.invites_require_access.almost_there"),
-      confirmText: getI18nString("permissions.invites_require_access.got_it"),
+      confirmationTitle: getI18nString('permissions.invites_require_access.almost_there'),
+      confirmText: getI18nString('permissions.invites_require_access.got_it'),
       onConfirm: () => t(popModalStack()),
       disableClickOutsideToHide: !0,
       hideOnConfirm: !1,
       popStack: e.popStack,
-      size: "small",
+      size: 'small',
       hideCancel: !0,
-      children: jsxs("div", {
+      children: jsxs('div', {
         className: jE,
-        children: [renderI18nText("permissions.invites_require_access.invites_sent_but_will_require_access_org_name", {
+        children: [renderI18nText('permissions.invites_require_access.invites_sent_but_will_require_access_org_name', {
           numEmails: e.emails.length,
           listEmails: jsx(_$$T, {
-            children: e.emails.map(e => jsx("span", {
-              children: e
-            }, e))
+            children: e.emails.map(e => jsx('span', {
+              children: e,
+            }, e)),
           }),
           resourceType: _$$v(e.resourceType),
-          orgName: e.orgName
+          orgName: e.orgName,
         }), jsx(k, {
-          height: 24
-        }), renderI18nText("permissions.invites_require_access.we_ll_connect_them_with_an_admin_who_can_help")]
-      })
-    })
-  });
-}, "REQUEST_ACCESS_WARNING_MODAL");
-let N = registerModal(function (e) {
-  let t = useDispatch();
+          height: 24,
+        }), renderI18nText('permissions.invites_require_access.we_ll_connect_them_with_an_admin_who_can_help')],
+      }),
+    }),
+  })
+}, 'REQUEST_ACCESS_WARNING_MODAL')
+let inviteWhiteListErrorModal = registerModal((e) => {
+  let t = useDispatch()
   return jsx(TrackingProvider, {
-    name: "Invite whitelist error modal",
+    name: 'Invite whitelist error modal',
     properties: {
       emails: e.emails.toString(),
       resourceIdOrKey: e.resourceIdOrKey,
-      resourceType: e.resourceType
+      resourceType: e.resourceType,
     },
     children: jsx(ConfirmationModal2, {
-      confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
-      confirmText: getI18nString("permissions.invites_whitelist.got_it"),
+      confirmationTitle: getI18nString('permissions.invite_error_modal.couldn_t_send_invite'),
+      confirmText: getI18nString('permissions.invites_whitelist.got_it'),
       onConfirm: () => t(popModalStack()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
       popStack: e.popStack,
-      size: "small",
+      size: 'small',
       hideCancel: !0,
-      children: jsx("div", {
+      children: jsx('div', {
         className: jE,
-        children: renderI18nText("permissions.invites_whitelist.the_following_users_were_not_approved_guests_in_org_name_org_please_request_access_for_them", {
+        children: renderI18nText('permissions.invites_whitelist.the_following_users_were_not_approved_guests_in_org_name_org_please_request_access_for_them', {
           numEmails: e.emails.length,
           listEmails: jsx(_$$T, {
-            children: e.emails.map(e => jsx("span", {
-              children: e
-            }, e))
+            children: e.emails.map(e => jsx('span', {
+              children: e,
+            }, e)),
           }),
-          orgName: e.orgName
-        })
-      })
-    })
-  });
-}, "INVITE_WHITELIST_ERROR_MODAL");
-let P = registerModal(function (e) {
-  let t = useDispatch();
+          orgName: e.orgName,
+        }),
+      }),
+    }),
+  })
+}, 'INVITE_WHITELIST_ERROR_MODAL')
+let deprovisionedUserModal = registerModal((e) => {
+  let t = useDispatch()
   return jsx(TrackingProvider, {
-    name: "Deprovisioned user invite error modal",
+    name: 'Deprovisioned user invite error modal',
     properties: {
       emails: e.emails.toString(),
       resourceIdOrKey: e.resourceIdOrKey,
-      resourceType: e.resourceType
+      resourceType: e.resourceType,
     },
     children: jsx(ConfirmationModal2, {
-      confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
-      confirmText: getI18nString("permissions.deprovisioned_users.got_it"),
+      confirmationTitle: getI18nString('permissions.invite_error_modal.couldn_t_send_invite'),
+      confirmText: getI18nString('permissions.deprovisioned_users.got_it'),
       onConfirm: () => t(popModalStack()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
       popStack: e.popStack,
-      size: "small",
+      size: 'small',
       hideCancel: !0,
-      children: jsx("div", {
+      children: jsx('div', {
         className: jE,
-        children: renderI18nText("permissions.deprovisioned_users.these_users_are_no_longer_in_the_org_name_organization_add_them_again_through_SCIM", {
+        children: renderI18nText('permissions.deprovisioned_users.these_users_are_no_longer_in_the_org_name_organization_add_them_again_through_SCIM', {
           numEmails: e.emails.length,
           listEmails: jsx(_$$T, {
-            children: e.emails.map(e => jsx("span", {
-              children: e
-            }, e))
+            children: e.emails.map(e => jsx('span', {
+              children: e,
+            }, e)),
           }),
-          orgName: e.orgName
-        })
-      })
-    })
-  });
-}, "DEPROVISIONED_USER_MODAL");
-let O = registerModal(function (e) {
-  let t = useDispatch();
+          orgName: e.orgName,
+        }),
+      }),
+    }),
+  })
+}, 'DEPROVISIONED_USER_MODAL')
+let orgRestrictedInviteModal = registerModal((e) => {
+  let t = useDispatch()
   return jsx(TrackingProvider, {
-    name: "Deprovisioned user invite error modal",
+    name: 'Deprovisioned user invite error modal',
     properties: {
       emails: e.emails.toString(),
       resourceIdOrKey: e.resourceIdOrKey,
-      resourceType: e.resourceType
+      resourceType: e.resourceType,
     },
     children: jsx(ConfirmationModal2, {
-      confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
-      confirmText: getI18nString("permissions.org_restricted_invite.got_it"),
+      confirmationTitle: getI18nString('permissions.invite_error_modal.couldn_t_send_invite'),
+      confirmText: getI18nString('permissions.org_restricted_invite.got_it'),
       onConfirm: () => t(popModalStack()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
       popStack: e.popStack,
-      size: "small",
+      size: 'small',
       hideCancel: !0,
-      children: jsx("div", {
+      children: jsx('div', {
         className: jE,
-        children: renderI18nText("permissions.org_restricted_invite.these_invites_couldn_t_be_sent_with_org_name.seat_rename", {
+        children: renderI18nText('permissions.org_restricted_invite.these_invites_couldn_t_be_sent_with_org_name.seat_rename', {
           numEmails: e.emails.length,
           listEmails: jsx(_$$T, {
-            children: e.emails.map(e => jsx("span", {
-              children: e
-            }, e))
+            children: e.emails.map(e => jsx('span', {
+              children: e,
+            }, e)),
           }),
-          orgName: e.orgName
-        })
-      })
-    })
-  });
-}, "ORG_RESTRICTED_INVITE_MODAL");
-let $$M3 = createOptimistThunk((e, {
-  emails: t,
-  resourceType: i,
-  resourceIdOrKey: o,
-  level: l,
-  emailsToExclude: d,
-  onSuccess: _,
-  optimisticUpdates: b,
-  onFailure: v,
-  nodeId: I,
-  source: E,
-  initialView: x,
-  orgName: S,
-  billableProductKey: w,
-  teamId: C
-}) => {
-  let T = e.getState().contacts;
-  let k = {};
-  let R = [];
-  let N = t.filter(e => !(d && d.has(e)));
-  for (let t of N) {
-    let n = T.usersByEmail[t];
-    let r = {
-      id: `temp-role-${t}`,
+          orgName: e.orgName,
+        }),
+      }),
+    }),
+  })
+}, 'ORG_RESTRICTED_INVITE_MODAL')
+interface RoleInviteParams {
+  emails: string[]
+  resourceType: FResourceCategoryType
+  resourceIdOrKey: string
+  level: number
+  emailsToExclude?: Set<string>
+  onSuccess?: (meta: any, hasStatusErrors: boolean) => void
+  optimisticUpdates?: (roles: any[]) => void
+  onFailure?: () => void
+  nodeId?: string
+  source?: string
+  initialView?: string
+  orgName?: string
+  billableProductKey?: string
+  teamId?: string
+}
+
+interface InviteStatusResponse {
+  type: string
+  email: string
+  // Add other properties as needed
+}
+
+interface ResendInviteParams {
+  role: {
+    user: { email: string }
+    resource_type: string
+    resource_id_or_key: string
+  }
+}
+
+interface VisualBellMessageParams {
+  invites: Array<{ user: { email?: string } }>
+  inviteLevel: number
+  file?: { name: string }
+  folderName?: string
+}
+
+/**
+ * Creates temporary roles for invited users and sends invites
+ * Handles optimistic updates and various error cases
+ */
+export const sendRoleInvites = createOptimistThunk((
+  { dispatch, getState },
+  {
+    emails,
+    resourceType,
+    resourceIdOrKey,
+    level,
+    emailsToExclude,
+    onSuccess,
+    optimisticUpdates,
+    onFailure,
+    nodeId,
+    source,
+    initialView,
+    orgName,
+    billableProductKey,
+    teamId,
+  }: RoleInviteParams,
+) => {
+  // Get contacts state
+  const contactsState = getState().contacts
+  const tempRolesByEmail: Record<string, any> = {}
+  let tempRoles: any[] = []
+
+  // Filter out excluded emails
+  const validEmails = emails.filter(email => !(emailsToExclude && emailsToExclude.has(email)))
+
+  // Create temporary roles for each email
+  for (const email of validEmails) {
+    const user = contactsState.usersByEmail[email]
+    const tempRole = {
+      id: `temp-role-${email}`,
       created_at: Date.now(),
       user_id: null,
       user: {
-        ...n,
-        email: t
+        ...user,
+        email,
       },
-      resource_type: i,
-      resource_id_or_key: o,
-      level: l,
-      pending: !0,
-      updated_at: `${new Date()}`
-    };
-    k[t] = r;
-    R = [...R, r];
-    e.dispatch(rolePostAction({
-      role: r
-    }));
-  }
-  b?.(R);
-  let P = e.getState();
-  if (P.currentUserOrgId) {
-    let e = P.autocomplete.inputValue;
-    let r = !!e && !checkDomainExists(P.orgDomains.domains, e);
-    let a = t.filter(t => t !== e && !checkDomainExists(P.orgDomains.domains, t));
-    let s = {
-      resourceType: i,
-      resourceIdOrKey: o,
-      level: l,
-      orgId: P.currentUserOrgId,
-      numInvited: t.length,
-      numValidated: P.autocomplete.tokens.length,
-      numUnvalidated: e ? 1 : 0,
-      numValidatedGuests: a.length,
-      numUnvalidatedGuests: r ? 1 : 0,
-      initialView: x,
-      billableProductKey: w
-    };
-    "file" === i ? trackFileEvent("Invited Emails", o, P, s) : trackEventAnalytics("Invited Emails", {
-      ...s,
-      source: E
-    });
-  }
-  let O = XHR.post("/api/invites", {
-    emails: t,
-    resource_type: i,
-    resource_id_or_key: o,
-    level: l,
-    node_id: I,
-    initial_view: x,
-    billable_product_key: w
-  }).then(({
-    data: t
-  }) => {
-    for (let n of (e.dispatch(cL()), t.meta.invites)) {
-      trackRoleEvent("Role Invite Sent", n, {
-        level: n.level,
-        resourceType: i,
-        roleUserEmail: n.user?.email
-      }, {
-        forwardToDatadog: !0
-      });
-      e.dispatch(rolePostAction({
-        role: n
-      }));
+      resource_type: resourceType,
+      resource_id_or_key: resourceIdOrKey,
+      level,
+      pending: true,
+      updated_at: new Date().toString(),
     }
-    let n = !1;
-    let r = t.meta.invites_with_status;
-    r && (n = $$U0(r, i, o, e.dispatch, k, S));
-    _?.(t.meta, n);
-  }, ({
-    response: n
-  }) => {
-    e.dispatch(cL());
-    try {
-      n = JSON.parse(n);
-    } catch (e) {
-      console.error("Failed to parse invite response:", e);
-      n = {
-        error: !0,
-        reason: "json"
-      };
+
+    tempRolesByEmail[email] = tempRole
+    tempRoles = [...tempRoles, tempRole]
+    dispatch(rolePostAction({ role: tempRole }))
+  }
+
+  // Apply optimistic updates if provided
+  optimisticUpdates?.(tempRoles)
+
+  // Track analytics
+  const state = getState()
+  if (state.currentUserOrgId) {
+    const inputValue = state.autocomplete.inputValue
+    const isInputUnvalidated = !!inputValue && !checkDomainExists(state.orgDomains.domains, inputValue)
+    const validatedGuestEmails = emails.filter(
+      email => email !== inputValue && !checkDomainExists(state.orgDomains.domains, email),
+    )
+
+    const analyticsData = {
+      resourceType,
+      resourceIdOrKey,
+      level,
+      orgId: state.currentUserOrgId,
+      numInvited: emails.length,
+      numValidated: state.autocomplete.tokens.length,
+      numUnvalidated: inputValue ? 1 : 0,
+      numValidatedGuests: validatedGuestEmails.length,
+      numUnvalidatedGuests: isInputUnvalidated ? 1 : 0,
+      initialView,
+      billableProductKey,
     }
-    if (n.error && !n.message && (n.message = `An error occurred while sending ${1 === t.length ? "this invite" : "these invites"}.`), "NEEDS_PAYMENT" === n.reason) {
-      let t = null;
-      let n = e.getState();
-      let r = getRolesForResource(i, o, n);
-      r && (t = getResourceTeamId(r[0], n));
-      let a = isReduxDeprecationCutover(ConfigGroups.GROUP_7);
-      let s = setupShadowRead({
-        oldValue: t ?? "",
-        newValue: C,
-        label: adminPermissionConfig.RoleInvites.teamId,
-        enableFullRead: a
-      });
-      if (a) e.dispatch(showModalHandler({
-        type: _$$t2,
-        data: {
-          teamId: s,
-          canEditTeam: void 0
-        }
-      }));else {
-        let t = s && {
-          ...n.teams[s],
-          canEdit: hasEditorRoleAccessOnTeam(s, n),
-          canAdmin: hasAdminRoleAccessOnTeam(s, n)
-        };
-        e.dispatch(showModalHandler({
-          type: oE,
-          data: {
-            team: t,
-            editorType: null,
-            upsellSource: UpsellModalType.ADD_EDITOR
-          }
-        }));
+
+    if (resourceType === 'file') {
+      trackFileEvent('Invited Emails', resourceIdOrKey, state, analyticsData)
+    }
+    else {
+      trackEventAnalytics('Invited Emails', {
+        ...analyticsData,
+        source,
+      })
+    }
+  }
+
+  // Send invites
+  const invitePromise = XHR.post('/api/invites', {
+    emails,
+    resource_type: resourceType,
+    resource_id_or_key: resourceIdOrKey,
+    level,
+    node_id: nodeId,
+    initial_view: initialView,
+    billable_product_key: billableProductKey,
+  }).then(
+    ({ data }) => {
+      dispatch(cL())
+
+      // Process successful invites
+      for (const invite of data.meta.invites) {
+        trackRoleEvent(
+          'Role Invite Sent',
+          invite,
+          {
+            level: invite.level,
+            resourceType,
+            roleUserEmail: invite.user?.email,
+          },
+          {
+            forwardToDatadog: true,
+          },
+        )
+        dispatch(rolePostAction({ role: invite }))
       }
-    } else e.dispatch(FlashActions.error(n.message));
-    for (let t of N) e.dispatch(roleDeleteAction({
-      role: k[t]
-    }));
-    v?.();
-  });
-  let M = mapResourceCategoryToRole(i);
-  M && WB().optimisticallyCreate({
-    [M]: arrayToIdMap(N.map(e => ({
-      id: `temp-role-${e}`,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      userId: null,
-      pending: !0,
-      resourceType: i,
-      resourceId: o,
-      level: l,
-      pendingEmail: e,
-      user: null
-    })))
-  }, O);
-});
-let j = (e, t, i) => {
-  if (i) for (let n of e) t(roleDeleteAction({
-    role: i[n.email]
-  }));
-};
-export function $$U0(e, t, i, n, r, a) {
-  let l = e.reduce((e, t) => (t.type && (e[t.type] = e[t.type] || [], e[t.type].push(t)), e), Object.create(null));
-  let d = Object.keys(l).length > 0;
-  l.no_self_invite?.length > 0 && n(FlashActions.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")));
-  l.user_requires_approval?.length > 0 && a && (n(showModalHandler({
-    type: R,
-    data: {
-      emails: l.user_requires_approval.map(e => e.email),
-      resourceType: t,
-      resourceIdOrKey: i,
-      popStack: !0,
-      orgName: a
+
+      // Handle invites with status
+      let hasStatusErrors = false
+      const invitesWithStatus = data.meta.invites_with_status
+      if (invitesWithStatus) {
+        hasStatusErrors = handleInviteStatusResponses(
+          invitesWithStatus,
+          resourceType,
+          resourceIdOrKey,
+          dispatch,
+          tempRolesByEmail,
+          orgName,
+        )
+      }
+
+      onSuccess?.(data.meta, hasStatusErrors)
+    },
+    ({ response }) => {
+      dispatch(cL())
+
+      // Parse error response
+      let errorResponse
+      try {
+        errorResponse = JSON.parse(response)
+      }
+      catch (error) {
+        console.error('Failed to parse invite response:', error)
+        errorResponse = {
+          error: true,
+          reason: 'json',
+        }
+      }
+
+      // Set default error message if none provided
+      if (errorResponse.error && !errorResponse.message) {
+        errorResponse.message = `An error occurred while sending ${emails.length === 1 ? 'this invite' : 'these invites'
+        }.`
+      }
+
+      // Handle payment-related errors
+      if (errorResponse.reason === 'NEEDS_PAYMENT') {
+        const state = getState()
+        const roles = getRolesForResource(resourceType, resourceIdOrKey, state)
+        const teamIdFromRoles = roles && getResourceTeamId(roles[0], state)
+
+        const isDeprecationCutover = isReduxDeprecationCutover(ConfigGroups.GROUP_7)
+        const shadowReadValue = setupShadowRead({
+          oldValue: teamIdFromRoles ?? '',
+          newValue: teamId,
+          label: adminPermissionConfig.RoleInvites.teamId,
+          enableFullRead: isDeprecationCutover,
+        })
+
+        if (isDeprecationCutover) {
+          dispatch(
+            showModalHandler({
+              type: _$$t2,
+              data: {
+                teamId: shadowReadValue,
+                canEditTeam: undefined,
+              },
+            }),
+          )
+        }
+        else {
+          const team = shadowReadValue && {
+            ...state.teams[shadowReadValue],
+            canEdit: hasEditorRoleAccessOnTeam(shadowReadValue, state),
+            canAdmin: hasAdminRoleAccessOnTeam(shadowReadValue, state),
+          }
+
+          dispatch(
+            showModalHandler({
+              type: oE,
+              data: {
+                team,
+                editorType: null,
+                upsellSource: UpsellModalType.ADD_EDITOR,
+              },
+            }),
+          )
+        }
+      }
+      else {
+        // Show generic error message
+        dispatch(FlashActions.error(errorResponse.message))
+      }
+
+      // Clean up temporary roles on failure
+      for (const email of validEmails) {
+        dispatch(
+          roleDeleteAction({
+            role: tempRolesByEmail[email],
+          }),
+        )
+      }
+
+      onFailure?.()
+    },
+  )
+
+  // Apply optimistic creation
+  const resourceCategory = mapResourceCategoryToRole(resourceType)
+  if (resourceCategory) {
+    WB().optimisticallyCreate(
+      {
+        [resourceCategory]: arrayToIdMap(
+          validEmails.map(email => ({
+            id: `temp-role-${email}`,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            userId: null,
+            pending: true,
+            resourceType,
+            resourceId: resourceIdOrKey,
+            level,
+            pendingEmail: email,
+            user: null,
+          })),
+        ),
+      },
+      invitePromise,
+    )
+  }
+})
+
+/**
+ * Helper function to delete roles
+ */
+function deleteRoles(invites: Array<{ email: string }>, dispatchFunction: any, rolesByEmail?: Record<string, any>) {
+  if (rolesByEmail) {
+    for (const invite of invites) {
+      dispatchFunction(
+        roleDeleteAction({
+          role: rolesByEmail[invite.email],
+        }),
+      )
     }
-  })), j(l.user_requires_approval, n, r));
-  l.org_guests_banned?.length > 0 && a && (n(showModalHandler({
-    type: T,
-    data: {
-      emails: l.org_guests_banned.map(e => e.email),
-      resourceType: t,
-      resourceIdOrKey: i,
-      popStack: !0,
-      orgName: a
-    }
-  })), j(l.org_guests_banned, n, r));
-  l.org_whitelist?.length > 0 && a && (n(showModalHandler({
-    type: N,
-    data: {
-      emails: l.org_whitelist.map(e => e.email),
-      resourceType: t,
-      resourceIdOrKey: i,
-      popStack: !0,
-      orgName: a
-    }
-  })), j(l.org_whitelist, n, r));
-  l.deprovisioned?.length > 0 && a && (n(showModalHandler({
-    type: P,
-    data: {
-      emails: l.deprovisioned.map(e => e.email),
-      resourceType: t,
-      resourceIdOrKey: i,
-      popStack: !0,
-      orgName: a
-    }
-  })), j(l.deprovisioned, n, r));
-  l.org_restricted_invite?.length > 0 && a && (n(showModalHandler({
-    type: O,
-    data: {
-      emails: l.org_restricted_invite.map(e => e.email),
-      resourceType: t,
-      resourceIdOrKey: i,
-      popStack: !0,
-      orgName: a
-    }
-  })), j(l.org_restricted_invite, n, r));
-  return d;
+  }
 }
-let $$B1 = createOptimistThunk((e, {
-  invites: t,
-  inviteLevel: i,
-  file: n,
-  folderName: r
-}) => {
-  let a = n && r ? `Moved '${n.name}' to ${r}` : void 0;
-  i >= AccessLevelEnum.EDITOR && r && n ? a && e.dispatch(VisualBellActions.enqueue({
-    type: "file-moved",
-    message: ((e, t, i, n) => {
-      if (0 === e.length) return n;
-      let r = e.map(e => e.user.email).filter(e => void 0 !== e);
-      if (0 === r.length) return n;
-      let a = `been invited to edit '${t}' in ${i}`;
-      return r.length > 1 ? `${r[0]} and ` + (r.length > 2 ? `${r.length - 1} others have ` : "1 other has ") + a : `${r[0]} has ${a}`;
-    })(t, n.name, r, a)
-  })) : e.dispatch(VisualBellActions.enqueue({
-    type: "invite-sent",
-    message: getI18nString("file_permissions_modal.invited_num_people", {
-      num_invites: t.length
-    })
-  }));
-});
-let $$V2 = createOptimistThunk((e, {
-  role: t
-}) => {
-  let i = XHR.post("/api/invites/resend", {
-    email: t.user.email,
-    resource_type: t.resource_type,
-    resource_id_or_key: t.resource_id_or_key
+
+/**
+ * Handles different types of invite status responses
+ * Shows appropriate modals based on error types
+ */
+export function handleInviteStatusResponses(
+  statusResponses: InviteStatusResponse[],
+  resourceType: string,
+  resourceIdOrKey: string,
+  dispatch: any,
+  tempRolesByEmail: Record<string, any>,
+  orgName?: string,
+): boolean {
+  // Group responses by type
+  const responsesByType = statusResponses.reduce(
+    (acc, response) => {
+      if (response.type) {
+        if (!acc[response.type]) {
+          acc[response.type] = []
+        }
+        acc[response.type].push(response)
+      }
+      return acc
+    },
+    Object.create(null) as Record<string, InviteStatusResponse[]>,
+  )
+
+  const hasErrors = Object.keys(responsesByType).length > 0
+
+  // Handle self-invite errors
+  if (responsesByType.no_self_invite?.length > 0) {
+    dispatch(
+      FlashActions.error(
+        getI18nString('team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself'),
+      ),
+    )
+  }
+
+  // Handle user requires approval
+  if (responsesByType.user_requires_approval?.length > 0 && orgName) {
+    dispatch(
+      showModalHandler({
+        type: requestAccessWarningModal,
+        data: {
+          emails: responsesByType.user_requires_approval.map(invite => invite.email),
+          resourceType,
+          resourceIdOrKey,
+          popStack: true,
+          orgName,
+        },
+      }),
+    )
+    deleteRoles(responsesByType.user_requires_approval, dispatch, tempRolesByEmail)
+  }
+
+  // Handle org guests banned
+  if (responsesByType.org_guests_banned?.length > 0 && orgName) {
+    dispatch(
+      showModalHandler({
+        type: orgGuestsBannedModal,
+        data: {
+          emails: responsesByType.org_guests_banned.map(invite => invite.email),
+          resourceType,
+          resourceIdOrKey,
+          popStack: true,
+          orgName,
+        },
+      }),
+    )
+    deleteRoles(responsesByType.org_guests_banned, dispatch, tempRolesByEmail)
+  }
+
+  // Handle org whitelist errors
+  if (responsesByType.org_whitelist?.length > 0 && orgName) {
+    dispatch(
+      showModalHandler({
+        type: inviteWhiteListErrorModal,
+        data: {
+          emails: responsesByType.org_whitelist.map(invite => invite.email),
+          resourceType,
+          resourceIdOrKey,
+          popStack: true,
+          orgName,
+        },
+      }),
+    )
+    deleteRoles(responsesByType.org_whitelist, dispatch, tempRolesByEmail)
+  }
+
+  // Handle deprovisioned users
+  if (responsesByType.deprovisioned?.length > 0 && orgName) {
+    dispatch(
+      showModalHandler({
+        type: deprovisionedUserModal,
+        data: {
+          emails: responsesByType.deprovisioned.map(invite => invite.email),
+          resourceType,
+          resourceIdOrKey,
+          popStack: true,
+          orgName,
+        },
+      }),
+    )
+    deleteRoles(responsesByType.deprovisioned, dispatch, tempRolesByEmail)
+  }
+
+  // Handle org restricted invites
+  if (responsesByType.org_restricted_invite?.length > 0 && orgName) {
+    dispatch(
+      showModalHandler({
+        type: orgRestrictedInviteModal,
+        data: {
+          emails: responsesByType.org_restricted_invite.map(invite => invite.email),
+          resourceType,
+          resourceIdOrKey,
+          popStack: true,
+          orgName,
+        },
+      }),
+    )
+    deleteRoles(responsesByType.org_restricted_invite, dispatch, tempRolesByEmail)
+  }
+
+  return hasErrors
+}
+
+/**
+ * Shows visual bell notifications after sending invites
+ */
+export const showInviteVisualBell = createOptimistThunk((
+  { dispatch },
+  { invites, inviteLevel, file, folderName }: VisualBellMessageParams,
+) => {
+  const moveMessage = file && folderName ? `Moved '${file.name}' to ${folderName}` : undefined
+
+  if (inviteLevel >= AccessLevelEnum.EDITOR && folderName && file) {
+    if (moveMessage) {
+      const generateMoveMessage = (
+        inviteList: Array<{ user: { email?: string } }>,
+        fileName: string,
+        targetFolder: string,
+        defaultMessage: string,
+      ): string => {
+        if (inviteList.length === 0)
+          return defaultMessage
+
+        const emails = inviteList
+          .map(invite => invite.user.email)
+          .filter((email): email is string => email !== undefined)
+
+        if (emails.length === 0)
+          return defaultMessage
+
+        const actionText = `been invited to edit '${fileName}' in ${targetFolder}`
+        if (emails.length > 1) {
+          return `${emails[0]} and ${emails.length > 2 ? `${emails.length - 1} others have ` : '1 other has '
+          }${actionText}`
+        }
+        return `${emails[0]} has ${actionText}`
+      }
+
+      dispatch(
+        VisualBellActions.enqueue({
+          type: 'file-moved',
+          message: generateMoveMessage(invites, file.name, folderName, moveMessage),
+        }),
+      )
+    }
+  }
+  else {
+    dispatch(
+      VisualBellActions.enqueue({
+        type: 'invite-sent',
+        message: getI18nString('file_permissions_modal.invited_num_people', {
+          num_invites: invites.length,
+        }),
+      }),
+    )
+  }
+})
+
+/**
+ * Resends an invite email
+ */
+export const resendInvite = createOptimistThunk(({ dispatch }, { role }: ResendInviteParams) => {
+  const resendPromise = XHR.post('/api/invites/resend', {
+    email: role.user.email,
+    resource_type: role.resource_type,
+    resource_id_or_key: role.resource_id_or_key,
   }).then(() => {
-    e.dispatch(FlashActions.flash("Invite email sent again!"));
-  });
-  e.dispatch(handlePromiseError({
-    promise: i,
-    fallbackError: "Failed to resend invite emails."
-  }));
-});
-export const Ef = $$U0;
-export const kF = $$B1;
-export const $S = $$V2;
-export const rq = $$M3;
+    dispatch(FlashActions.flash('Invite email sent again!'))
+  })
+
+  dispatch(
+    handlePromiseError({
+      promise: resendPromise,
+      fallbackError: 'Failed to resend invite emails.',
+    }),
+  )
+})
+
+// Export functions with clearer names
+export const Ef = handleInviteStatusResponses
+export const kF = showInviteVisualBell
+export const $S = resendInvite
+export const rq = sendRoleInvites

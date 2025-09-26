@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { ServiceCategories } from "../905/165054";
 import { Mutex } from "async-mutex";
 import { trackEventAnalytics } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { getInitialOptions, isDevEnvironment } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { getFalseValue } from "../figma_app/897289";
@@ -161,12 +161,12 @@ export function $$B0(e) {
     });
     return t;
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     l(e.arkoseAction, e.onFailed).then(t => {
       t.arkose_on_for_user && V(e.prevFormState);
     }).catch(e => {});
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     let t = () => {
       window.removeEventListener("message", o);
     };

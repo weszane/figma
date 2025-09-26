@@ -29,7 +29,7 @@ import { resourceUtils } from "../905/989992";
 import G from "../vendor/575087";
 import { globalPerfTimer } from "../905/542194";
 import { y as _$$y2 } from "../figma_app/608914";
-import { h as _$$h2 } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { reportError } from "../905/11";
 import { X as _$$X } from "../figma_app/916469";
 import { eC, $1, _Z, Gx } from "../905/539601";
@@ -358,7 +358,7 @@ export function $$es0({
   useEffect(() => () => {
     m.removeOverlay(a);
   }, [m, a]);
-  _$$h2(() => (y || (b(!0), C5.removeStaleLocalStorageLifecycleNames()), _$$R({
+  useSingleEffect(() => (y || (b(!0), C5.removeStaleLocalStorageLifecycleNames()), _$$R({
     type: "triggered",
     name: "overlay_mounted",
     properties: {

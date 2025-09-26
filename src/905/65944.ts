@@ -52,7 +52,7 @@ import { k as _$$k3 } from "../905/376839";
 import { handleAtomEvent } from "../905/502364";
 import { p as _$$p } from "../figma_app/353099";
 import { openWindow } from "../905/508367";
-import { h as _$$h2 } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { UpgradeAction } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
@@ -155,7 +155,7 @@ function ey({
     overlay: Nlr,
     priority: _$$N.DEFAULT_MODAL
   }, [r]);
-  _$$h2(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => t && !!i && !e
     });

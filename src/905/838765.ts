@@ -6,7 +6,7 @@ import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { U3 } from "../figma_app/412189";
 import { U6 } from "../figma_app/599917";
 import { L } from "../905/606555";
@@ -129,9 +129,9 @@ function R(e) {
         profile: e,
         children: jsxs("div", {
           className: MP,
-          children: [jsx(H8, {
+          children: [jsx(UserAvatar, {
             user: e,
-            size: Pf.LARGE
+            size: AvatarSize.LARGE
           }), jsx("div", {
             className: Sp,
             children: e.name
@@ -199,9 +199,9 @@ function R(e) {
       className: Fb,
       children: jsx(U6, {
         profile: t,
-        children: jsx(H8, {
+        children: jsx(UserAvatar, {
           user: t,
-          size: Pf.LARGE
+          size: AvatarSize.LARGE
         })
       })
     });
@@ -227,9 +227,9 @@ function R(e) {
           profile: d,
           children: jsx("span", {
             ref: n,
-            children: jsx(H8, {
+            children: jsx(UserAvatar, {
               user: d,
-              size: Pf.LARGE
+              size: AvatarSize.LARGE
             })
           })
         })
@@ -403,7 +403,7 @@ function R(e) {
               publishers: t.publishers
             })
           }), t.rightAlignedElement && t.rightAlignedElement]
-        }), t.showUserAvatar && t.publishers?.[0] && jsx(H8, {
+        }), t.showUserAvatar && t.publishers?.[0] && jsx(UserAvatar, {
           user: t.publishers[0]
         })]
       })

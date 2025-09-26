@@ -28,7 +28,7 @@ import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { AutoLayout } from "../905/470281";
-import { Pf } from "../905/590952";
+import { AvatarSize } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 import { T as _$$T } from "../905/292816";
 import { zz } from "../figma_app/80683";
@@ -204,7 +204,7 @@ function ea(e) {
             children: [jsx("div", {
               className: cssBuilderInstance.mb8.$,
               children: jsx(Ro, {
-                size: Pf.XLARGE,
+                size: AvatarSize.XLARGE,
                 entity: {
                   name: i.name,
                   imgUrl: i.imgUrl

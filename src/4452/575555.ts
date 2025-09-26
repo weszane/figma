@@ -16,7 +16,7 @@ import { b as _$$b } from '../905/173822';
 import { V as _$$V } from '../905/223767';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { createOptimistThunk } from '../905/350402';
-import { $S } from '../905/351260';
+import { resendInvite } from '../905/351260';
 import { UpgradeAction } from '../905/370443';
 import { selectUser } from '../905/372672';
 import { k as _$$k } from '../905/443820';
@@ -28,7 +28,7 @@ import { r6 } from '../905/542608';
 import { DashboardSections, NavigationRoutes } from '../905/548208';
 import { AccessLevelEnum } from '../905/557142';
 import { FlashActions } from '../905/573154';
-import { nl } from '../905/590952';
+import { TeamAvatar } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
 import { getVisibleTheme } from '../905/640017';
 import { adminPermissionConfig } from '../905/654645';
@@ -91,7 +91,7 @@ import { az, z6 } from '../figma_app/805373';
 import { TrackedButton, TrackingProvider } from '../figma_app/831799';
 import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
 import { wO } from '../figma_app/907616';
-import { utilityNoop } from '../figma_app/918700';
+import { ModalContainer } from '../figma_app/918700';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { A as _$$A4 } from '../svg/443105';
 import { A as _$$A8 } from '../svg/783902';
@@ -166,7 +166,7 @@ function ea(e) {
     }
   };
   let _ = () => {
-    t($S({
+    t(resendInvite({
       role: e.teamRole
     }));
   };
@@ -1402,7 +1402,7 @@ let $$tT0 = registerModal(e => {
     dispatch: t,
     avatarSvg: _$$A8,
     svgSizeRatio: 0.6
-  }) : jsx(nl, {
+  }) : jsx(TeamAvatar, {
     team: x,
     size: 80,
     avatarSvg: _$$A8,
@@ -1414,7 +1414,7 @@ let $$tT0 = registerModal(e => {
       teamId: x.id,
       ...c
     },
-    children: jsxs(utilityNoop, {
+    children: jsxs(ModalContainer, {
       popStack: !0,
       size: y,
       height: v ? window.innerHeight : 0.8 * window.innerHeight,

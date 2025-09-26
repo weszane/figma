@@ -91,7 +91,7 @@ import { HM } from '../905/190597';
 import { w as _$$w3 } from '../905/191841';
 import { p as _$$p5 } from '../905/195198';
 import { J as _$$J6, q as _$$q5 } from '../905/202542';
-import { h as _$$h } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { H as _$$H5 } from '../905/209153';
 import { x as _$$x8 } from '../905/211326';
 import { V as _$$V4 } from '../905/223767';
@@ -133,7 +133,7 @@ import { Y as _$$Y8 } from '../905/347011';
 import { P as _$$P2 } from '../905/347284';
 import { n as _$$n4 } from '../905/347702';
 import { A as _$$A10 } from '../905/351112';
-import { rq as _$$rq2 } from '../905/351260';
+import { sendRoleInvites } from '../905/351260';
 import { z as _$$z6 } from '../905/353894';
 import { V as _$$V6 } from '../905/355181';
 import { LogLevelStr } from '../905/361972';
@@ -197,14 +197,14 @@ import { DashboardSections, MemberSections, NavigationRoutes } from '../905/5482
 import { AccessLevelEnum } from '../905/557142';
 import { hT as _$$hT, YM as _$$YM } from '../905/561087';
 import { isSitesFeatureEnabled } from '../905/561485';
-import { U as _$$U2 } from '../905/566881';
+import { HAvatarType } from '../905/566881';
 import { r as _$$r6 } from '../905/571562';
 import { N as _$$N4 } from '../905/572042';
 import { FlashActions } from '../905/573154';
 import { e as _$$e10 } from '../905/579755';
 import { x as _$$x2 } from '../905/587214';
 import { O as _$$O5 } from '../905/587457';
-import { nl as _$$nl, H8, Pf } from '../905/590952';
+import { TeamAvatar, UserAvatar, AvatarSize } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
 import { observabilityClient } from '../905/602906';
 import { g as _$$g5 } from '../905/607862';
@@ -688,7 +688,7 @@ function ej() {
   let n = useSelector(e => getCurrentUserOrgUser(e));
   let o = n?.created_at;
   let l = !!o && dayjs(o).isSameOrAfter(ey);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !(e || l)
     });
@@ -763,7 +763,7 @@ function e0(e) {
     overlay: kBq,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -1001,7 +1001,7 @@ function tg(e) {
     overlay: xPo,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -1514,13 +1514,13 @@ function rj(e) {
       dragKey: e.dragKey,
       icon: o.imgUrl ? jsx('div', {
         className: cssBuilderInstance.colorIcon.$,
-        children: jsx(_$$nl, {
+        children: jsx(TeamAvatar, {
           shape: 'ROUNDED_SQUARE',
           size: {
-            imgSize: Pf.SMALL,
-            fallbackSize: Pf.SMALL
+            imgSize: AvatarSize.SMALL,
+            fallbackSize: AvatarSize.SMALL
           },
-          fallbackDisplay: _$$U2.HIDDEN,
+          fallbackDisplay: HAvatarType.HIDDEN,
           team: {
             ...o,
             imgUrl: o.imgUrl
@@ -2808,10 +2808,10 @@ function ar(e) {
       children: e.checked ? jsx(SvgComponent, {
         className: cssBuilderInstance.colorIcon.$,
         svg: _$$A7
-      }) : jsx(_$$nl, {
-        size: Pf.MEDIUM,
+      }) : jsx(TeamAvatar, {
+        size: AvatarSize.MEDIUM,
         shape: 'CIRCLE',
-        fallbackDisplay: _$$U2.HIDDEN,
+        fallbackDisplay: HAvatarType.HIDDEN,
         team: {
           id: e.planId,
           imgUrl: e.imgUrl
@@ -2999,7 +2999,7 @@ function ap() {
     overlay: tZO,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -9622,7 +9622,7 @@ function d2({
     overlay: cvy,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: t => !t && !r && !e
     });
@@ -10922,7 +10922,7 @@ function us(e) {
         className: 'feed_tile--avatarFloat--h-EFM',
         children: jsx(_$$A13, {
           user: e.feedPost.creator,
-          size: Pf.LARGE,
+          size: AvatarSize.LARGE,
           noHandle: !0
         })
       }), jsx(_$$B3, {
@@ -14975,7 +14975,7 @@ function _q({
     overlay: j9$,
     priority: _$$N.DEFAULT_MODAL
   }, [t, r]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: (e, t) => !e && t
     });
@@ -15960,7 +15960,7 @@ function p5({
       }));
     }, [t, e, r]);
   }(t);
-  _$$h(() => {
+  useSingleEffect(() => {
     o && u();
   });
   let _ = useFBGNavigationUpdatesTreatment() === FBGNavigationUpdatesVariants.CONTROL;
@@ -19632,9 +19632,9 @@ function hL({
     'data-testid': 'non-member-join-content',
     'children': [jsxs('div', {
       className: 'team_page_view--header--sTxh6',
-      children: [jsx(_$$nl, {
+      children: [jsx(TeamAvatar, {
         team: e,
-        size: Pf.LARGE
+        size: AvatarSize.LARGE
       }), jsx('span', {
         className: 'team_page_view--teamName--9MXYi text--fontPos18--rYXJb text--_fontBase--QdLsd',
         children: e.name
@@ -19701,7 +19701,7 @@ function hD({
     canDeleteTeam: !!j?.canDelete,
     isInTeam: !!j?.isInTeam
   };
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = QL('team_role_redemption');
     if (e && parseInt(e) in AccessLevelEnum) {
       let e = VE();
@@ -19786,7 +19786,7 @@ function hD({
       teamViewTab: t
     }));
   }, [_, l, E, C, r, v, t, S]);
-  _$$h(() => {
+  useSingleEffect(() => {
     n && _(showModalHandler({
       type: _$$C6,
       data: {
@@ -19965,7 +19965,7 @@ function hM({
     dispatch: C,
     avatarSvg: _$$A4,
     svgSizeRatio: 0.6
-  }) : jsx(_$$nl, {
+  }) : jsx(TeamAvatar, {
     team: e,
     size: 40,
     avatarSvg: _$$A4,
@@ -20233,9 +20233,9 @@ function h1(e) {
       children: () => jsxs(Fragment, {
         children: [jsxs('div', {
           className: 'org_user_meta_content--userData--NrFpt',
-          children: [jsx(H8, {
+          children: [jsx(UserAvatar, {
             user: e.user,
-            size: Pf.LARGE
+            size: AvatarSize.LARGE
           }), jsx('div', {
             className: 'org_user_meta_content--userName--JeBfv text--fontPos18--rYXJb text--_fontBase--QdLsd',
             children: e.title
@@ -21488,7 +21488,7 @@ function xT({
   }, [d, n, l.promo, o.isEduTeam]);
   let p = useCallback(() => t.filter(e => e).map(e => e.trim()), [t]);
   let f = useCallback(() => {
-    d(_$$rq2({
+    d(sendRoleInvites({
       emails: p(),
       resourceType: FResourceCategoryType.TEAM,
       resourceIdOrKey: n.id,
@@ -22359,7 +22359,7 @@ export function $$bo0() {
   Tf.enableEventSending({
     allowResourceTracking: !0
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     E && e(Jw());
   });
   setupResourceAtomHandler(XZ({
@@ -22372,7 +22372,7 @@ export function $$bo0() {
   let [F, P] = useState(0);
   let [L, D] = useState(0);
   let [M, B] = useState(!1);
-  _$$h(() => (document.body.classList.add(bi), document.documentElement.classList.add(bs), $o(), trackFileBrowserLoaded(I, t, k, R), getExperimentConfigAsync('exp_aa_test_file_browser_view').catch(noop), () => {
+  useSingleEffect(() => (document.body.classList.add(bi), document.documentElement.classList.add(bs), $o(), trackFileBrowserLoaded(I, t, k, R), getExperimentConfigAsync('exp_aa_test_file_browser_view').catch(noop), () => {
     document.body.classList.remove(bi);
     document.documentElement.classList.remove(bs);
     $E();

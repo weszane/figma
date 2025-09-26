@@ -90,7 +90,7 @@ import { r as _$$r2 } from '../905/189361';
 import { oM as _$$oM, F5 } from '../905/192343';
 import { D as _$$D6 } from '../905/198083';
 import { FormattedInputVariant1 } from '../905/203369';
-import { h as _$$h2 } from '../905/207101';
+import { useSingleEffect } from '../905/791079';
 import { A as _$$A78 } from '../905/215698';
 import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback } from '../905/216495';
 import { B as _$$B4 } from '../905/222272';
@@ -1227,7 +1227,7 @@ function tE({
   metadata: r,
   testId: a
 }) {
-  _$$h2(() => {
+  useSingleEffect(() => {
     (async () => {
       try {
         await teamLibraryCache.getCanvas(e);
@@ -1993,7 +1993,7 @@ function t$() {
   let g = _$$es();
   let [j, b] = useAtomValueAndSetter(_$$sz);
   let y = useRef(null);
-  _$$h2(() => {
+  useSingleEffect(() => {
     void 0 === j && b(y.current ? y.current.clientHeight - Zu : 550);
   });
   let v = useMemo(() => {
@@ -17410,7 +17410,7 @@ function gP() {
     navDisabled
   } = CT();
   let x = BI();
-  _$$h2(() => {
+  useSingleEffect(() => {
     setHidden(!1);
   });
   _$$A74(inputRef, next, focusedByButtons);

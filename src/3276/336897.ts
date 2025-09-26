@@ -12,7 +12,7 @@ import { getFileTypePx } from "../905/149328";
 import { c$ } from "../figma_app/236327";
 import { h1 } from "../905/986103";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { hideDropdownAction } from "../905/929976";
 import { hideTooltip } from "../905/765855";
 import { stopPropagation } from "../figma_app/753501";
@@ -88,7 +88,7 @@ function V(e) {
     className: LH,
     children: jsx("div", {
       className: _L,
-      children: jsx(H8, {
+      children: jsx(UserAvatar, {
         user: {
           ...user,
           id: user.userID
@@ -301,7 +301,7 @@ function q(e) {
   let m = n ? K$ : "";
   if (!AD(user)) return jsxs("div", {
     className: u()(C7, m),
-    children: [jsx(H8, {
+    children: [jsx(UserAvatar, {
       user: {
         ...user,
         id: user.userID

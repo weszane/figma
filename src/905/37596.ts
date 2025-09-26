@@ -26,7 +26,7 @@ import { Hg, Bs } from "../905/672745";
 import { dayjs } from "../905/920142";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { VisualBellActions } from "../905/302958";
-import { nl, Pf } from "../905/590952";
+import { TeamAvatar, AvatarSize } from "../905/590952";
 import { h as _$$h } from "../905/973388";
 import { selectViewAction } from "../905/929976";
 import { hideModal, popModalStack, showModalHandler } from "../905/156213";
@@ -168,8 +168,8 @@ let Y = registerModal(function (e) {
               children: getI18nString("resource_connection.teams")
             }), jsxs("div", {
               className: Ec,
-              children: [jsx(nl, {
-                size: Pf.MEDIUM,
+              children: [jsx(TeamAvatar, {
+                size: AvatarSize.MEDIUM,
                 shape: "CIRCLE",
                 team: d
               }), jsxs("div", {
@@ -190,8 +190,8 @@ let Y = registerModal(function (e) {
               })]
             }), jsxs("div", {
               className: Ec,
-              children: [jsx(nl, {
-                size: Pf.MEDIUM,
+              children: [jsx(TeamAvatar, {
+                size: AvatarSize.MEDIUM,
                 shape: "CIRCLE",
                 team: c
               }), jsxs("div", {

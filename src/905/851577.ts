@@ -1,6 +1,6 @@
 import { useRef, useContext, useCallback } from "react";
 import { useStore, useDispatch } from "react-redux";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { BrowserInfo } from "../figma_app/778880";
 import { useHandlePointerEvent, generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
@@ -27,7 +27,7 @@ export function $$b0(e, t) {
     state,
     dispatch
   } = useContext(nS);
-  _$$h(() => {
+  useSingleEffect(() => {
     t.preloadThumbnail && (v.src = t.getDragPreviewSrc());
   });
   let R = _$$L({

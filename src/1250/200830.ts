@@ -14,7 +14,7 @@ import { userFlagExistsAtomFamily, fileBrowserOnboardedAtom, userFlagsAtom, user
 import { N as _$$N } from "../figma_app/268271";
 import { M as _$$M } from "../905/152487";
 import { LB2, I3H, Ob5, X5_, USq, sqw, yjU, MwQ, NdL, bGx, Qlc, I$z, Kgs, BTz, dYj, Ult, kmq, Sgd, Wb3 } from "../figma_app/6204";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { tH as _$$tH, mp, Ot, d2, Vm, Fy, Qm, zN } from "../figma_app/579169";
 import { f as _$$f } from "../1250/46310";
 import { xZ } from "../1250/927871";
@@ -106,8 +106,8 @@ import { A as _$$A4 } from "../svg/638742";
 import { FlashActions } from "../905/573154";
 import { selectViewAction } from "../905/929976";
 import { cw, g_ } from "../5885/925885";
-import { nl as _$$nl } from "../905/590952";
-import { P as _$$P3 } from "../905/566881";
+import { TeamAvatar } from "../905/590952";
+import { AvatarSize } from "../905/566881";
 import { WX } from "../figma_app/482142";
 import { X as _$$X2 } from "../5885/331878";
 import { getCookieOrStorage } from "../905/414007";
@@ -225,7 +225,7 @@ function O() {
     overlay: I3H,
     priority: _$$N.DEFAULT_MODAL
   }, [e, t, r, o]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: (e, t, a, r) => e && !r && _$$f({
         lastUsedFigjamDate: n,
@@ -644,7 +644,7 @@ function eG() {
       }
     });
   }, [u]);
-  _$$h(() => {
+  useSingleEffect(() => {
     w(!1);
   });
   _$$E(u.uniqueId, "Reset Onboarding", () => w(!0));
@@ -711,7 +711,7 @@ function eZ() {
     overlay: X5_,
     priority: _$$N.OVERRIDING_MODAL
   }, [e, t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     n.show({
       canShow: (e, t) => e === qo.ORG && !t
     });
@@ -895,7 +895,7 @@ function tc() {
     overlay: USq,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [o, s, l, d, c, t]);
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     show({
       canShow: (e, t, n, a, r, i) => e === qo.ORG && !!t && !n && !!a && 0 !== a.length && !r && !!i,
       onShow: () => {
@@ -1141,7 +1141,7 @@ function tP() {
     overlay: yjU,
     priority: _$$N.DEFAULT_MODAL
   }, [e, n]);
-  _$$h(() => {
+  useSingleEffect(() => {
     t || show({
       canShow: (e, t) => !e && t
     });
@@ -1649,9 +1649,9 @@ function nn(e) {
     onClick,
     children: [jsxs("div", {
       className: "pro_trial_form_modal--teamContainerHead--EvWS5",
-      children: [jsx(_$$nl, {
+      children: [jsx(TeamAvatar, {
         team,
-        size: _$$P3.LARGE
+        size: AvatarSize.LARGE
       }), jsx("div", {
         className: "pro_trial_form_modal--teamNameContainer--cwtSb",
         children: jsx(TextWithTruncation, {
@@ -1911,7 +1911,7 @@ function n_() {
     priority: _$$N.DEFAULT_MODAL
   });
   let t = useDispatch();
-  _$$h(() => {
+  useSingleEffect(() => {
     e.show();
   });
   return jsx(_$$h2, {
@@ -1946,7 +1946,7 @@ function nu(e) {
   } = e;
   let r = proTrial.teamId;
   let i = useDispatch();
-  _$$h(() => {
+  useSingleEffect(() => {
     t.show();
   });
   let o = useCallback(() => i(bE({
@@ -1988,7 +1988,7 @@ function nm(e) {
   } = e;
   let r = proTrial.teamId;
   let i = useDispatch();
-  _$$h(() => {
+  useSingleEffect(() => {
     t.show();
   });
   let o = useCallback(() => i(bE({
@@ -2071,7 +2071,7 @@ function nw({
   let t = useSelector(({
     payment: e
   }) => e.promo);
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     lc();
   }), useEffect(() => {
     null == t && e();
@@ -2101,7 +2101,7 @@ function nT() {
       canShow: e => !e
     });
   }, [t, n, r]);
-  _$$h(() => {
+  useSingleEffect(() => {
     o();
   });
   return jsx(_$$h2, {
@@ -2180,7 +2180,7 @@ function nA({
   })), [o]);
   return (useMultiSubscription(TeamFileCountsByTeamId, l).forEach(e => {
     s.push(e.result.data?.team?.teamFileCounts?.designFileCount ?? 0);
-  }), _$$h(() => {
+  }), useSingleEffect(() => {
     lc();
   }), useEffect(() => {
     (null == t || 0 === o.length) && e();
@@ -2205,7 +2205,7 @@ function nS() {
       canShow: e => e
     });
   }, [t, n, r]);
-  _$$h(() => {
+  useSingleEffect(() => {
     o();
   });
   return jsx(_$$h2, {
@@ -2231,7 +2231,7 @@ function nL() {
     overlay: Kgs,
     priority: _$$N.DEFAULT_MODAL
   }, [e, t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: (e, t) => !e && t && Date.now() <= new Date("2025-06-23T16:00:00Z").getTime() + 2592e6 && n
     });
@@ -2289,7 +2289,7 @@ function n$() {
       postCheck: e => !e
     }
   }, [e]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
@@ -2329,7 +2329,7 @@ function n0() {
       postCheck: () => !0
     }
   }, [t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => e?.tier === FPlanNameType.STARTER
     });
@@ -2375,7 +2375,7 @@ function n6() {
     overlay: Ult,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [e, t, n]);
-  _$$h(() => {
+  useSingleEffect(() => {
     o.show({
       canShow: (e, t, n) => !mW(e, "seen_edu_offboarding_modal") && getDaysUntilExpiration(t, n) !== 1 / 0,
       onShow: () => {
@@ -2408,7 +2408,7 @@ function an() {
     priority: _$$N.HIGH_PRIORITY_MODAL
   });
   let t = useDispatch();
-  _$$h(() => {
+  useSingleEffect(() => {
     let n = QL(n7.key);
     let a = QL(ae.key);
     n === n7.value ? e.show({
@@ -2477,7 +2477,7 @@ function a_() {
     overlay: Wb3,
     priority: _$$N.URGENT_ALERT
   }, [t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     let t = QL("upgrade");
     let a = QL("entryPoint");
     switch (t) {

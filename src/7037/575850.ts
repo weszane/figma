@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import a from "classnames";
 import { BaseLinkComponent } from "../905/551536";
 import { h1 } from "../905/986103";
-import { H8, Pf } from "../905/590952";
+import { UserAvatar, AvatarSize } from "../905/590952";
 import { selectViewAction } from "../905/929976";
 import { stopPropagation } from "../figma_app/753501";
 import { InterProfileType } from "../905/895626";
@@ -51,9 +51,9 @@ export function $$h0(e) {
       onClick: n,
       trusted: !0,
       onMouseDown: stopPropagation,
-      children: jsx(H8, {
+      children: jsx(UserAvatar, {
         user: e.user,
-        size: e.size ?? Pf.LARGE
+        size: e.size ?? AvatarSize.LARGE
       })
     }), a && jsxs("div", {
       className: "feed_profile_header--content--bTCE2",

@@ -11,7 +11,7 @@ import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { dP } from "../figma_app/119475";
 import { Ph } from "../905/160095";
 import { getI18nString } from "../905/303541";
@@ -47,7 +47,7 @@ let B = registerModal(function (e) {
     createLibraryImport
   } = S1();
   let u = useCurrentFileKey();
-  _$$h(() => {
+  useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent("ds_import.library_warning_modal_shown", {
       library_key: library.library_key,
       file_key: u || ""
@@ -197,7 +197,7 @@ function H() {
   let e = Xr(jx);
   let t = useAtomWithSubscription(FX);
   let n = useCurrentFileKey();
-  _$$h(() => {
+  useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent("ds_import.library_selector_empty_state_seen", {
       file_key: n || ""
     });

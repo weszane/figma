@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { y as _$$y } from "../905/175043";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { handleUrlAction } from "../905/280005";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -110,7 +110,7 @@ export function $$x0({
     });
     l();
   }, [m, l]);
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     m && ID({
       ...m,
       interaction: lc.VIEW,

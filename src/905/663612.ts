@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { formatList } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { C, e as _$$e } from "../905/937623";
 import { MP, i8 } from "../905/149906";
 export function $$c0(e) {
@@ -65,7 +65,7 @@ export function $$c0(e) {
     ref: e.replyContainerRef,
     children: [jsx("div", {
       className: i8,
-      children: jsx(H8, {
+      children: jsx(UserAvatar, {
         user: e.user || {}
       })
     }), i]

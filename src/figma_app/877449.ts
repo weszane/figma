@@ -6,7 +6,7 @@ import { S as _$$S } from '../905/73063';
 import { Label } from '../905/270045';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { b as _$$b, c as _$$c } from '../905/308099';
-import { o as _$$o } from '../905/382697';
+import { setupShareModalTabHandler } from '../905/382697';
 import { openWindow } from '../905/508367';
 import { Button } from '../905/521428';
 import { buildFileUrl } from '../905/612685';
@@ -69,7 +69,7 @@ export function $$P1({
   org: e,
   currentUser: t
 }) {
-  let r = _$$o();
+  let r = setupShareModalTabHandler();
   let i = e?.k12_google_org;
   let a = $$x3(t?.profile?.jobTitle || '');
   return i || a ? jsx(L, {
@@ -89,7 +89,7 @@ export function $$F2(e) {
   let t = fb[e.linkAccess].audienceAccessLevel !== J4.EDIT;
   let r = selectCurrentFile();
   let [a, s] = useState('edit');
-  let c = _$$o();
+  let c = setupShareModalTabHandler();
   return jsx(TrackingProvider, {
     name: 'google_classroom_share_modal',
     children: jsxs('div', {

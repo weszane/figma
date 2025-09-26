@@ -39,7 +39,7 @@ import { E1, BC } from "../figma_app/149367";
 import { E as _$$E } from "../905/53857";
 import { O as _$$O } from "../905/936515";
 import Y from "classnames";
-import { H8 } from "../905/590952";
+import { UserAvatar } from "../905/590952";
 import { Wi } from "../figma_app/162641";
 function w({
   onClose: e,
@@ -276,7 +276,7 @@ function Z({
     className: cssBuilderInstance.flex.flexColumn.gap16.$,
     children: [jsxs("div", {
       className: "request_flyout--avatarContainer--S-J9Y",
-      children: [jsx(H8, {
+      children: [jsx(UserAvatar, {
         size: 48,
         user: n
       }), e.hasBeenNudged ? jsx("div", {

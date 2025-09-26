@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import r from "classnames";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getPermissionLevelName } from "../figma_app/12796";
-import { CM, hP } from "../905/144598";
+import { UserTeamAvatar, UserAvatar } from "../905/144598";
 import { zn, H, $S, NE, UU } from "../905/372455";
 var a = r;
 export function $$c0(e) {
@@ -19,11 +19,11 @@ export function $$c0(e) {
     className: zn,
     children: [jsx("div", {
       className: a()(t.plan ? cssBuilderInstance.w36.mr4.$ : H),
-      children: t.plan ? jsx(CM, {
+      children: t.plan ? jsx(UserTeamAvatar, {
         user: r,
         id: t.id,
         plan: t.plan
-      }) : jsx(hP, {
+      }) : jsx(UserAvatar, {
         user: r,
         id: t.id,
         pending: e.pending

@@ -71,7 +71,7 @@ import { accountTypeRequestHandler } from "../905/281010";
 import { az } from "../figma_app/805373";
 import { Cj } from "../905/270084";
 import { VU } from "../4452/650793";
-import { h as _$$h } from "../905/207101";
+import { useSingleEffect } from "../905/791079";
 import { qf } from "../4452/780544";
 import { g as _$$g } from "../4452/983384";
 import { e as _$$e2 } from "../905/621515";
@@ -156,7 +156,7 @@ function eR(e) {
     overlay: Clh,
     priority: _$$g(Clh)
   }, [a]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });
