@@ -75,8 +75,8 @@ import { UpgradeAction } from "../905/370443";
 import { e as _$$e2 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
-import { rq } from "../905/425180";
-import { F_ } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/858282";
 import { y_w } from "../figma_app/6204";
 import { dP } from "../figma_app/947348";
 import { _ as _$$_2 } from "../642/896644";
@@ -95,7 +95,7 @@ import { X9 } from "../figma_app/730706";
 import { li, T$, PU, GQ, hg, Oy, LS, D5, FC, OD, YW, Ef, Sd, zb, s$, sM, _x, sv, vo, KM, mC } from "../figma_app/29089";
 import { L as _$$L } from "../figma_app/940186";
 import { a3, or, Ez } from "../figma_app/139805";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { b as _$$b2 } from "../905/600173";
 import { n } from "../905/796896";
@@ -397,9 +397,9 @@ function eD(e) {
     onClick: complete,
     ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     arrowPadding: 4,
-    arrowPosition: F_.RIGHT_BODY,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: renderI18nText("draw.onboarding.design_followup.description"),
     disableHighlight: !0,
     isShowing,
@@ -554,7 +554,7 @@ function th({
 }
 function ty() {
   let e = useDispatch();
-  let t = Um();
+  let t = useDropdownState();
   let n = selectCurrentFile();
   let r = GV();
   let {

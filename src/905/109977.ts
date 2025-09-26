@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
 import { renderI18nText } from "../905/303541";
-import { Q_ } from "../905/570707";
+import { librarySearchByLibraryKeyAtomFamily } from "../905/570707";
 import { setupResourceAtomHandler } from "../905/713695";
-import { h as _$$h } from "../figma_app/198885";
+import { getSelectedView } from "../figma_app/198885";
 import { isTeamLibrary } from "../figma_app/633080";
-import { We } from "../905/909811";
+import { LibraryItemTileGrid } from "../905/909811";
 import { c as _$$c } from "../905/511370";
 import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
@@ -71,9 +71,9 @@ export function $$y0(e) {
     maxShownItems = 8,
     showLibraryModalUiRefresh = !1
   } = e;
-  let _ = useSelector(_$$h);
+  let _ = useSelector(getSelectedView);
   let y = useSelector(e => e.dropdownShown);
-  let [b] = setupResourceAtomHandler(Q_(searchQuery));
+  let [b] = setupResourceAtomHandler(librarySearchByLibraryKeyAtomFamily(searchQuery));
   let E = useDispatch();
   if (!searchQuery || "loaded" !== b.status) return null;
   let x = I(b.data?.components.filteredByTeamId, maxShownItems, publishedLibrary);
@@ -111,7 +111,7 @@ export function $$y0(e) {
       style: {
         height: 12
       }
-    }), N && jsx(We, {
+    }), N && jsx(LibraryItemTileGrid, {
       dispatch: E,
       dropdownShown: y,
       items: N,
@@ -136,13 +136,13 @@ export function $$b1({
   let s = useDispatch();
   let o = e.components;
   let d = e.stateGroups;
-  let u = useSelector(_$$h);
+  let u = useSelector(getSelectedView);
   let p = useSelector(e => e.dropdownShown);
   let m = [...o, ...d].sort((e, t) => e.score < t.score ? 1 : -1).slice(0, a);
   return m.length ? jsxs(Fragment, {
     children: [jsx(v, {
       v2: !0
-    }), jsx(We, {
+    }), jsx(LibraryItemTileGrid, {
       items: m,
       sourceForTracking: "Library Modal",
       width: t,

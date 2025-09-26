@@ -15,7 +15,7 @@ import { getPartnerType } from "../905/853613";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 import { Ev, Eo } from "../figma_app/216057";
-import { y as _$$y, v as _$$v } from "../905/456837";
+import { getRecentTimeDifferences, addCurrentTimestamp } from "../905/456837";
 function T(e) {
   switch (e) {
     case VariableResolvedDataType.BOOLEAN:
@@ -104,8 +104,8 @@ export function $$A2(e, t, r) {
       let O = function () {
         if (getFeatureFlags().aip_flower_garden_design_logging && LinterCppBindings) return JSON.stringify(Object.fromEntries(LinterCppBindings.getVariableSetConsumptionForDocument()));
       }();
-      let R = _$$y(d);
-      for (let t of (_$$v(d), _)) {
+      let R = getRecentTimeDifferences(d);
+      for (let t of (addCurrentTimestamp(d), _)) {
         var n;
         let a = function (e) {
           if (getFeatureFlags().aip_flower_garden_design_logging && LinterCppBindings) return JSON.stringify(Object.fromEntries(LinterCppBindings.getVariableSetConsumptionForHighestNodeContainer(e)));

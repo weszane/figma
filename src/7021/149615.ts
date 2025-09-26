@@ -98,7 +98,7 @@ function v({
                 className: cssBuilderInstance.w8.h8.bRadiusFull.b1.$,
                 style: styleBuilderInstance.add({
                   backgroundColor: "var(--color-bg)"
-                }).$$if(t === a + 1, {
+                }).if(t === a + 1, {
                   backgroundColor: "var(--color-bg-inverse)",
                   borderColor: "var(--color-bg-inverse)",
                   borderWidth: "1.17px"

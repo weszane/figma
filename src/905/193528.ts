@@ -5,12 +5,12 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
 import { showDropdownThunk } from "../905/929976";
 import { fullscreenValue } from "../figma_app/455680";
-import { j } from "../905/881708";
+import { NameClass } from "../905/881708";
 import { b } from "../figma_app/193046";
 function p() {
   return debugState.getState().mirror.appModel.activeCanvasEditModeType === LayoutTabType.CMS_BINDING_CONSTRAINED;
 }
-export class $$m0 extends j {
+export class $$m0 extends NameClass {
   constructor(e) {
     super(e);
     this.webpageId = null;

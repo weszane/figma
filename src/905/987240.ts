@@ -12,7 +12,7 @@ import { _P, Zh } from "../figma_app/2590";
 import { isFirstPageCurrentSelector } from "../905/91038";
 import { hg } from "../figma_app/425489";
 import { xY } from "../figma_app/354027";
-import { s as _$$s } from "../905/291518";
+import { getValidPrototypeNodeId } from "../905/291518";
 import { F as _$$F } from "../905/160142";
 export let $$y0 = createOptimistThunk((e, {
   fileKey: t,
@@ -57,7 +57,7 @@ export let $$y0 = createOptimistThunk((e, {
       let e = getDevModeFocusId(x.selectedView);
       e && (t = e);
     }
-    isValidSessionLocalID(parseSessionLocalID(t)) || (t = _$$s());
+    isValidSessionLocalID(parseSessionLocalID(t)) || (t = getValidPrototypeNodeId());
     atomStoreManager.set(hg, {
       type: "OPEN_INLINE_PREVIEW",
       payload: {

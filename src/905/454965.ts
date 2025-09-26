@@ -1,4 +1,4 @@
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { APIParameterUtils } from '../figma_app/181241'
 
 /**
@@ -9,7 +9,7 @@ export class ActionsHistoryHandler {
   /**
    * Updates the recently used actions.
    * @param action - The action object containing displayName, extensionInfo, and runPluginArgs.
-   * @returns A promise from XHR.put.
+   * @returns A promise from sendWithRetry.put.
    * Original: updateRecentlyUsedActions
    */
   updateRecentlyUsedActions(action: {
@@ -43,7 +43,7 @@ export class ActionsHistoryHandler {
       selectedRunPluginArgs: buildSelectedRunPluginArgs(action.runPluginArgs),
     };
 
-    return XHR.put('/api/actions_history', {
+    return sendWithRetry.put('/api/actions_history', {
       recently_used_actions: recentlyUsedActionPayload,
     });
   }
@@ -51,11 +51,11 @@ export class ActionsHistoryHandler {
   /**
    * Updates the frecency history.
    * @param payload - The payload to be converted and sent.
-   * @returns A promise from XHR.put.
+   * @returns A promise from sendWithRetry.put.
    * Original: updateFrecencyHistory
    */
   updateFrecencyHistory(payload: any) {
-    return XHR.put('/api/actions_history', {
+    return sendWithRetry.put('/api/actions_history', {
       frecency_payload: APIParameterUtils.toAPIParameters(payload),
     });
   }

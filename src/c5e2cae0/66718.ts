@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { isValidEmail } from "../figma_app/416935";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { CloseButton } from "../905/17223";
 import { I as _$$I } from "../c5e2cae0/393403";
 import { EnhancedInput, BigSelect, Spacing, ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
@@ -149,7 +149,7 @@ export function $$E0(e) {
       result: void 0
     })), 0 === Object.keys(e).length) {
       let e = E();
-      XHR.post("/api/form_post/org-lead-gen", e).then(() => {
+      sendWithRetry.post("/api/form_post/org-lead-gen", e).then(() => {
         S(e => ({
           ...e,
           result: "success"

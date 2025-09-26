@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { VisualBellActions } from "../905/302958";
 import { I as _$$I } from "../6658/358099";
 import { s as _$$s } from "../6658/286262";
-import { b as _$$b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { getLibraryName } from "../905/506188";
 import { LoadingSpinner } from "../figma_app/858013";
 import { sD, P8 } from "../1250/807901";
@@ -449,7 +449,7 @@ function B({
   let Z = !H.code_connect_info.v1.type || "component_browser" === H.code_connect_info.v1.type;
   let ee = 0 === n;
   let en = getLibraryName(H.library_key).unwrapOr(null);
-  let eo = _$$b({
+  let eo = useLibraryFileLink({
     libraryKey: H.library_key,
     nodeId: H.node_id,
     isDevHandoff: !0

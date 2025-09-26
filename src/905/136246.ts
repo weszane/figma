@@ -69,7 +69,7 @@ function p({
     label: r
   }) : e;
   return jsx("div", {
-    className: s()(cssBuilderInstance.flex.justifyCenter.itemsCenter.flexShrink0.w24.h24.$$if(i, cssBuilderInstance.colorIconDisabled).$),
+    className: s()(cssBuilderInstance.flex.justifyCenter.itemsCenter.flexShrink0.w24.h24.if(i, cssBuilderInstance.colorIconDisabled).$),
     style: a,
     children: d
   });

@@ -86,19 +86,19 @@ import { P as _$$P6 } from '../905/184837';
 import { InputComponent } from '../905/185998';
 import { W as _$$W8 } from '../905/187396';
 import { permissionScopeHandler as _$$l, scopeAwareFunction as _$$nc, zk } from '../905/189185';
-import { r as _$$r2 } from '../905/189361';
+import { ActionButton } from '../905/189361';
 import { oM as _$$oM, F5 } from '../905/192343';
 import { D as _$$D6 } from '../905/198083';
 import { FormattedInputVariant1 } from '../905/203369';
 import { useSingleEffect } from '../905/791079';
 import { A as _$$A78 } from '../905/215698';
 import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback } from '../905/216495';
-import { B as _$$B4 } from '../905/222272';
+import { FlexBox } from '../905/222272';
 import { V as _$$V2 } from '../905/223767';
 import { Cn } from '../905/225265';
 import { nt as _$$nt, o3 as _$$o2 } from '../905/226610';
 import { n6 as _$$n0 } from '../905/234821';
-import { y as _$$y3 } from '../905/236825';
+import { Panel } from '../905/236825';
 import { Rectangle } from '../905/249071';
 import { A as _$$A2 } from '../905/251970';
 import { z as _$$z2 } from '../905/255946';
@@ -109,9 +109,9 @@ import { HiddenLabel } from '../905/270045';
 import { H as _$$H6 } from '../905/270307';
 import { useSelectionProperty, useUpdateSelectionProperty, useSelectionPropertyValue } from '../905/275640';
 import { q as _$$q2 } from '../905/276489';
-import { $J as _$$$J, o2 as _$$o4, sd as _$$sd, Cq, NI } from '../905/278499';
-import { a as _$$a8 } from '../905/290931';
-import { _r as _$$_r, IA } from '../905/291714';
+import { AIActionIterationResult, AIActionIterationStatus, AIActionIterationAction, AIActionIterationTrigger, AIActionMode } from '../905/278499';
+import { setupPromptHistory } from '../905/290931';
+import { useIsPopoverClosed, PopoverProvider } from '../905/291714';
 import { f as _$$f7 } from '../905/299537';
 import { O as _$$O3 } from '../905/301080';
 import { VisualBellActions } from '../905/302958';
@@ -217,7 +217,7 @@ import { C as _$$C2 } from '../905/771975';
 import { fG as _$$fG } from '../905/772425';
 import { L as _$$L4 } from '../905/782297';
 import { z as _$$z4 } from '../905/788559';
-import { _ as _$$_9 } from '../905/793009';
+import { trackTemplateEvent } from '../905/793009';
 import { cq as _$$cq } from '../905/794154';
 import { c$ as _$$c$3, l6 as _$$l9, sK as _$$sK, uQ as _$$uQ2 } from '../905/794875';
 import { f as _$$f9 } from '../905/809171';
@@ -226,11 +226,11 @@ import { z as _$$z6 } from '../905/821223';
 import { KeyboardFocusManager } from '../905/826900';
 import { dY as _$$dY, sU as _$$sU, WM } from '../905/838765';
 import { useCurrentUserOrg } from '../905/845253';
-import { BK, Um } from '../905/848862';
+import { useDropdown, useDropdownState } from '../905/848862';
 import { C as _$$C5 } from '../905/850064';
 import { c as _$$c6 } from '../905/850166';
 import { K as _$$K6 } from '../905/851274';
-import { EL } from '../905/858282';
+import { PositioningStrategy } from '../905/858282';
 import { isVsCodeEnvironment } from '../905/858738';
 import { FDocumentType } from '../905/862883';
 import { Cn as _$$Cn } from '../905/862913';
@@ -241,7 +241,7 @@ import { setShouldSearchDefaultLibraries } from '../905/879323';
 import { uM as _$$uM, wv as _$$wv5 } from '../905/888175';
 import { k as _$$k2 } from '../905/888808';
 import { is as _$$is } from '../905/904596';
-import { z as _$$z3 } from '../905/905430';
+import { createMenuItems as _$$z3 } from '../905/905430';
 import { n as _$$n6 } from '../905/913636';
 import { e as _$$e3 } from '../905/916195';
 import { dayjs } from '../905/920142';
@@ -2571,7 +2571,7 @@ function iN({
 }) {
   let t = _$$Z();
   let i = useDispatch();
-  let n = Um();
+  let n = useDropdownState();
   let r = n?.type === _$$eg;
   let a = useSelector(e => e.isRenaming);
   let s = selectCurrentFile();
@@ -3612,7 +3612,7 @@ function n4(e) {
       closeButtonClassName: 'figjam_upsell_modal--closeButton--MTKjp',
       disableClickOutsideToHide: !0,
       dismissModal: m,
-      shouldCenterArrow: EL.FALLBACK,
+      shouldCenterArrow: PositioningStrategy.FALLBACK,
       shouldDismissWhenLostDOMTarget: !0,
       targetKey: _$$l4,
       topPadding: 12,
@@ -3740,7 +3740,7 @@ function re(e) {
 function ad(e) {
   let t = useDispatch();
   let i = useRef(null);
-  let n = Um();
+  let n = useDropdownState();
   let r = getCurrentFileType() === 'whiteboard';
   let a = F5();
   let {
@@ -3830,7 +3830,7 @@ let av = forwardRef((e, t) => {
   let h = p?.versions[p.current_plugin_version_id];
   let m = !!h;
   let f = useRef(null);
-  let _ = Um();
+  let _ = useDropdownState();
   let x = _?.type === _$$lD && _.data.localFileId === localFileId && _.data.pluginId === u && _.data.view === view && _.data.targetRect;
   let {
     tabManager,
@@ -4060,7 +4060,7 @@ let aT = memo(e => {
           children: C
         })]
       }), jsx('div', {
-        className: ex()(cssBuilderInstance.flex.itemsCenter.mr8.$$if(isSavedForUser, cssBuilderInstance.visible).$),
+        className: ex()(cssBuilderInstance.flex.itemsCenter.mr8.if(isSavedForUser, cssBuilderInstance.visible).$),
         children: jsx(_$$_W, {
           resourceId: e.pluginId,
           resourceType: ResourceTypeNoComment.PLUGIN,
@@ -4112,7 +4112,7 @@ function aH(e) {
   let r = publishedWidget.id;
   let a = publishedWidget?.versions[publishedWidget.current_plugin_version_id];
   let s = !!a;
-  let l = Um();
+  let l = useDropdownState();
   let c = l && l?.type === _$$lD && l.data.localFileId === r && l.data.view === e.tab;
   let u = s ? a.redirect_snapshot_url || '' : _$$J8;
   return jsx(Fragment, {
@@ -4189,7 +4189,7 @@ let aV = forwardRef((e, t) => {
   let a = i[localFileId];
   let s = useUserPublishedWidgets();
   let l = usePublishingPlugins();
-  let c = Um();
+  let c = useDropdownState();
   let {
     tabManager,
     searchQuery,
@@ -5873,7 +5873,7 @@ function oQ(e) {
     publishedPlugins: {},
     publishedWidgets: {}
   };
-  let P = Um();
+  let P = useDropdownState();
   let U = P?.type === o0 && P.data.pluginId === e.pluginId;
   let F = s?.manifest.menu && s.manifest.menu.length > 0 ? _$$z3(s.manifest.menu, s) : [];
   let H = h.manifest.menu && h.manifest.menu.length > 0 ? _$$z3(h.manifest.menu, h) : [];
@@ -6766,7 +6766,7 @@ function lD(e) {
   let m = useUserPublishedWidgets().find(e => e.id === resourceId);
   let f = desktopAPIInstance && !!m && !c;
   let _ = !!c || f;
-  let x = Um();
+  let x = useDropdownState();
   let g = x?.type === lP && x.data.widgetId === resourceId;
   let j = getPluginVersion(n);
   let {
@@ -7979,7 +7979,7 @@ function d5({
         setInitialPrompt: n
       }),
       children: [jsx('div', {
-        className: ex()('prompt_editor_v2--promptBox--SdF5B', cssBuilderInstance.flex.flexColumn.colorBgSecondary.p16.mx16.bRadius6.$$if(c.status === _$$c6.LOADING, cssBuilderInstance.opacity0_5).$),
+        className: ex()('prompt_editor_v2--promptBox--SdF5B', cssBuilderInstance.flex.flexColumn.colorBgSecondary.p16.mx16.bRadius6.if(c.status === _$$c6.LOADING, cssBuilderInstance.opacity0_5).$),
         children: jsxs('div', {
           className: cssBuilderInstance.relative.flex.flexColumn.font13.resizeNone.wFull.hFull.justifyBetween.$,
           children: [jsx(_$$$2, {
@@ -8407,7 +8407,7 @@ function co() {
     throw new Error('Unsupported AI Modal Display Type');
   }
   return jsx('div', {
-    className: cssBuilderInstance.$$if(!n, cssBuilderInstance.hidden).$,
+    className: cssBuilderInstance.if(!n, cssBuilderInstance.hidden).$,
     children: e
   });
 }
@@ -8538,13 +8538,13 @@ function cu() {
             style: styleBuilderInstance.add({
               width: '51px',
               position: 'relative'
-            }).$$if(t === 1, styleBuilderInstance.add({
+            }).if(t === 1, styleBuilderInstance.add({
               width: '44px',
               top: '-5px',
               marginLeft: '-26px'
-            })).$$if(t === 0, styleBuilderInstance.add({
+            })).if(t === 0, styleBuilderInstance.add({
               top: '3px'
-            })).$$if(t === 2, styleBuilderInstance.add({
+            })).if(t === 2, styleBuilderInstance.add({
               marginLeft: '-24px',
               top: '3px'
             })).$,
@@ -8659,9 +8659,9 @@ function cW({
     let o = useCallback(() => {
       void 0 !== t && _$$hm({
         ...t,
-        status: _$$o4.COMPLETED,
-        interaction: _$$sd.DISMISS,
-        interaction_type: Cq.BUTTON_CLICK
+        status: AIActionIterationStatus.COMPLETED,
+        interaction: AIActionIterationAction.DISMISS,
+        interaction_type: AIActionIterationTrigger.BUTTON_CLICK
       });
       close();
       r?.();
@@ -8670,9 +8670,9 @@ function cW({
     let c = useCallback(() => {
       void 0 !== t && _$$hm({
         ...t,
-        status: _$$o4.COMPLETED,
-        interaction: _$$sd.DISMISS,
-        interaction_type: Cq.AUTO
+        status: AIActionIterationStatus.COMPLETED,
+        interaction: AIActionIterationAction.DISMISS,
+        interaction_type: AIActionIterationTrigger.AUTO
       });
     }, [t]);
     _$$x3({
@@ -8684,9 +8684,9 @@ function cW({
     kz(KeyCodes.ESCAPE, () => {
       t && _$$hm({
         ...t,
-        status: _$$o4.COMPLETED,
-        interaction: _$$sd.DISMISS,
-        interaction_type: Cq.KEYBOARD_SHORTCUT,
+        status: AIActionIterationStatus.COMPLETED,
+        interaction: AIActionIterationAction.DISMISS,
+        interaction_type: AIActionIterationTrigger.KEYBOARD_SHORTCUT,
         keyboard_shortcut: F1({
           key: KeyCodes.ESCAPE
         })
@@ -8717,7 +8717,7 @@ function cW({
         recordingKey: n,
         minLength: g,
         ...v
-      }), jsxs(_$$B4, {
+      }), jsxs(FlexBox, {
         fullWidth: !0,
         justify: 'space-between',
         children: [S && jsx('div', {
@@ -8725,7 +8725,7 @@ function cW({
           children: jsx(_$$z4, {
             aiTrackingContext: r
           }, 'feedbackButtons')
-        }), jsx(_$$r2, {
+        }), jsx(ActionButton, {
           shortcuts: j ? [{
             key: KeyCodes.ENTER,
             modifier: [ModifierKeyCodes.META]
@@ -8734,7 +8734,7 @@ function cW({
             r && SX({
               ...r,
               ...Q0(e),
-              interaction: NI.GENERATE
+              interaction: AIActionMode.GENERATE
             });
             f();
           },
@@ -8746,18 +8746,18 @@ function cW({
       })]
     })
   });
-  return jsx(_$$y3, {
+  return jsx(Panel, {
     extra: w,
     content: i,
     onDismiss: hasAcceptButton ? void 0 : onDismiss,
     recordingKey: generateRecordingKey(n, 'toast'),
     ref: toastRef,
     shouldAutoFocus: !0,
-    children: jsx(_$$B4, {
+    children: jsx(FlexBox, {
       justify: 'space-between',
       align: 'center',
       fullWidth: !0,
-      children: jsxs(_$$B4, {
+      children: jsxs(FlexBox, {
         gap: 4,
         align: 'center',
         children: [jsx(cz, {
@@ -9385,10 +9385,10 @@ function uD({
         })
       }), jsx('div', {
         className: 'x1swbamy',
-        children: jsxs(_$$B4, {
+        children: jsxs(FlexBox, {
           fullWidth: !0,
           justify: j || b ? 'space-between' : 'end',
-          children: [(j || b) && jsxs(_$$B4, {
+          children: [(j || b) && jsxs(FlexBox, {
             gap: 8,
             children: [jsx(_$$nj, {
               promptHistory: a,
@@ -9415,7 +9415,7 @@ function uD({
               h && SX({
                 ...h,
                 ...Q0(e),
-                interaction: NI.GENERATE
+                interaction: AIActionMode.GENERATE
               });
               m();
             }
@@ -9497,7 +9497,7 @@ function uB() {
   let [e, t] = useAtomValueAndSetter(uH);
   let {
     promptHistory
-  } = _$$a8(_$$i7, e => e);
+  } = setupPromptHistory(_$$i7, e => e);
   let n = useSceneGraphSelection();
   !function () {
     let [{
@@ -9535,7 +9535,7 @@ function uB() {
   let a = function () {
     let {
       addPromptToHistory
-    } = _$$a8(_$$i7, e => e);
+    } = setupPromptHistory(_$$i7, e => e);
     let t = RL(JT.CREATE_IDEAS, us);
     let i = uv();
     let n = useSceneGraphSelector();
@@ -9658,7 +9658,7 @@ function uB() {
     }, [o]);
     let {
       addPromptToHistory
-    } = _$$a8(_$$i7, e => e);
+    } = setupPromptHistory(_$$i7, e => e);
     return useCallback(async ({
       sourceNodeIds: o,
       generatedNodeIdsToReplace: l
@@ -9885,7 +9885,7 @@ function uB() {
         action: h.action,
         aiTrackingContext: {
           ...R,
-          iteration_view_type: _$$$J.SUCCESS_WITH_ITERATION
+          iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION
         },
         completionString: getI18nString('ai.done'),
         featureNameForInstrumentation: h.featureName,
@@ -10810,7 +10810,7 @@ function hS(e) {
 }
 function hw() {
   let e = useSelector(e => e.mirror.appModel.hyperlinkLocation);
-  let t = Um();
+  let t = useDropdownState();
   let i = useAtomWithSubscription(_$$n9);
   let n = t && t.type === K9;
   let r = useSelector(e => e.progressBarState.mode === UIVisibilitySetting.HIDE_UI);
@@ -13583,7 +13583,7 @@ function f1({
   ...i
 }) {
   let n = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   return jsx('div', {
     'data-tooltip-show-above': !0,
     'data-tooltip-type': KindEnum.TEXT,
@@ -13932,7 +13932,7 @@ function _K({
   useEffect(() => {
     faceStampServerSideSearch(n);
   }, [faceStampServerSideSearch, n]);
-  let u = BK('face_stamp_replacement_dropdown');
+  let u = useDropdown('face_stamp_replacement_dropdown');
   let p = _W(d);
   let m = _$$Tv();
   let f = useMemo(() => {
@@ -15566,7 +15566,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     max: 2e3
   });
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let [n, r] = useState(void 0);
   let [a, s] = useState(void 0);
   let {
@@ -16917,7 +16917,7 @@ let gp = memo(() => {
     return i;
   }() ? jsx(_$$k6, {
     isShown: e,
-    children: jsx(IA, {
+    children: jsx(PopoverProvider, {
       children: jsx(gh, {
         testID: 'WhiteboardInlineMenu',
         focusableDivTestId: 'WhiteboardInlineMenuFocusableDiv'
@@ -17290,7 +17290,7 @@ function gv({
 let gC = memo(() => {
   let e = function () {
     let e = useSelector(e => e.mirror.appModel.hyperlinkLocation);
-    let t = Um();
+    let t = useDropdownState();
     let i = t && t.type === K9;
     let n = useSelector(e => e.progressBarState.mode === UIVisibilitySetting.HIDE_UI);
     let r = hC();
@@ -17358,7 +17358,7 @@ let gC = memo(() => {
     isShown: e,
     centerInFrame: !0,
     anchorToRect: r,
-    children: jsx(IA, {
+    children: jsx(PopoverProvider, {
       children: jsx(gT, {
         testID: 'WhiteboardInlineQuickAddMenu',
         focusableDivTestId: 'WhiteboardInlineQuickAddMenuFocusableDiv'
@@ -23167,7 +23167,7 @@ let y9 = 'figjam_right_panel--middleSection--xMAsd';
 function y8() {
   let e = useDispatch();
   let t = selectCurrentFile();
-  let i = Um();
+  let i = useDropdownState();
   let n = useSelector(e => e.multiplayer);
   let r = _$$dR2();
   let a = selectCurrentUser();
@@ -23719,7 +23719,7 @@ function vE({
   tooltipShortcutActionKey: c,
   tooltipDirection: u
 }) {
-  let p = _$$_r();
+  let p = useIsPopoverClosed();
   let [h, m] = useState(!1);
   return jsx(_$$lM, {
     targetRect: e,
@@ -24241,7 +24241,7 @@ function vB({
         source: h,
         placeholderKey: g.key,
         starterKitPosition: m
-      }, 'starter_kit_previewed'), _$$_9('resource_previewed', {
+      }, 'starter_kit_previewed'), trackTemplateEvent('resource_previewed', {
         fileKey: n,
         resourceType: 'placeholder',
         resourceName: g.key,
@@ -24282,7 +24282,7 @@ function vB({
           source: h,
           placeholderKey: g.key,
           starterKitPosition: m
-        }, 'starter_kit_inserted'), _$$_9('resource_inserted', {
+        }, 'starter_kit_inserted'), trackTemplateEvent('resource_inserted', {
           fileKey: n,
           resourceType: 'placeholder',
           placeholderSource: h,

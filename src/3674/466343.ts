@@ -47,7 +47,7 @@ function y({
     className: cssBuilderInstance.py24.px16.cursorDefault.selectNone.flex.flexColumn.gap24.$,
     "data-testid": "paywall-modal",
     children: [jsx("div", {
-      className: cssBuilderInstance.bRadius4.overflowHidden.$$if(g && !i, cssBuilderInstance.b1.colorBorder).$,
+      className: cssBuilderInstance.bRadius4.overflowHidden.if(g && !i, cssBuilderInstance.b1.colorBorder).$,
       style: styleBuilderInstance.add({
         height: `${n}px`
       }).$,

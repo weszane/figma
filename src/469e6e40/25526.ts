@@ -31,8 +31,8 @@ import { FPlanNameType, FUserRoleType, FOrganizationLevelType, FAccessLevelType,
 import { EnterpriseOrgAdminOnboardingSequenceView, WorkspacesTableView, ExtensionRequestTableView, AllowlistPluginsSectionView, OrgTeamsIdAndName } from "../figma_app/43951";
 import { useTeamPlanPublicInfo, getParentOrgIdIfOrgLevel, useCurrentPublicPlan, useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { U as _$$U } from "../905/455766";
-import { rq } from "../905/425180";
-import { EL, F_ } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { PositioningStrategy, ArrowPosition } from "../905/858282";
 import { Msu, DE1, XIg, Ql8, Q16, O5v, rQs, HaT } from "../figma_app/6204";
 import { N as _$$N2 } from "../figma_app/268271";
 import { X as _$$X } from "../905/482718";
@@ -45,7 +45,7 @@ import { AutoLayout } from "../905/470281";
 import { b as _$$b } from "../905/168239";
 import { K as _$$K2 } from "../905/628118";
 import { TrackingProvider } from "../figma_app/831799";
-import { O as _$$O } from "../figma_app/809387";
+import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, WorkspaceTab, BillingSectionEnum, MemberView, FigResourceType } from "../figma_app/650409";
 import { e0 as _$$e3 } from "../905/696396";
 import { g as _$$g2 } from "../figma_app/638694";
@@ -65,7 +65,7 @@ import { usePlanInviteWithSeatExperiment, useSeatBillingTermsExperiment } from "
 import { g7 } from "../905/939482";
 import { vu, YM } from "../figma_app/741211";
 import { collaboratorSet, viewCollaboratorSet, designSet } from "../905/332483";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { selectPermissionsState } from "../figma_app/212807";
 import { selectCurrentUser } from "../905/372672";
@@ -83,7 +83,7 @@ import { OrganizationType } from "../905/833838";
 import { DUserRole, SectionType, defaultSectionKey } from "../figma_app/858344";
 import { o0 } from "../905/844131";
 import { buildUploadUrl } from "../figma_app/169182";
-import { y as _$$y } from "../905/129046";
+import { ImageOverlayComponent } from "../905/129046";
 import { y as _$$y2 } from "../905/375507";
 import { noop } from 'lodash-es';
 import { isEmptyObject } from "../figma_app/493477";
@@ -95,7 +95,7 @@ import { dayjs } from "../905/920142";
 import { isValidEmail } from "../figma_app/416935";
 import { isMobileUA } from "../figma_app/778880";
 import { truncate, formatList } from "../figma_app/930338";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { gw, MM, wv } from "../figma_app/236327";
 import { V as _$$V } from "../figma_app/312987";
 import { ButtonBasePrimary, BigTextInputForwardRef, ButtonSecondary, SecureLink, BUTTON_INTERNAL_CONST_Z12, ButtonBasePrimaryTracked, clickableBaseLinkTracked, ButtonSecondaryTracked, ButtonNegativeTracked } from "../figma_app/637027";
@@ -149,7 +149,7 @@ import { Button } from "../905/521428";
 import { $z } from "../figma_app/617427";
 import { registerModal } from "../905/102752";
 import { g as _$$g4 } from "../469e6e40/136803";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { SvgComponent } from "../905/714743";
 import { p as _$$p3 } from "../469e6e40/348454";
 import { styleBuilderInstance } from "../905/941192";
@@ -230,7 +230,7 @@ function V(e) {
   switch (step) {
     case "CreateFirstWorkspace":
       let l = qB;
-      return jsx(rq, {
+      return jsx(OnboardingModal, {
         arrowPosition,
         clickOutsideToHide: !0,
         description: jsx(TextWithTruncation, {
@@ -248,7 +248,7 @@ function V(e) {
           onClick: next,
           ctaTrackingDescriptor: UpgradeAction.NEXT
         },
-        shouldCenterArrow: EL.FALLBACK,
+        shouldCenterArrow: PositioningStrategy.FALLBACK,
         stepCounter: {
           stepNum: 1,
           totalNumSteps: 2
@@ -261,7 +261,7 @@ function V(e) {
         userFlagOnShow: G
       });
     case "CreateFirstBillingGroup":
-      return jsx(rq, {
+      return jsx(OnboardingModal, {
         arrowPosition,
         clickOutsideToHide: !0,
         description: jsx(TextWithTruncation, {
@@ -279,7 +279,7 @@ function V(e) {
           onClick: complete,
           ctaTrackingDescriptor: UpgradeAction.DONE
         },
-        shouldCenterArrow: EL.FALLBACK,
+        shouldCenterArrow: PositioningStrategy.FALLBACK,
         stepCounter: {
           stepNum: 2,
           totalNumSteps: 2
@@ -336,7 +336,7 @@ function W() {
     currentStep,
     isShowing,
     children: c.map((e, t) => jsx(V, {
-      arrowPosition: F_.LEFT_TITLE,
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       step: e,
       isOverlayShowing: isShowing,
       next,
@@ -396,7 +396,7 @@ function eo(e) {
     },
     children: [!getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K2, {
-        title: _$$O(DashboardSection.CONTENT)
+        title: getOrgAdminTabMessage(DashboardSection.CONTENT)
       }), jsx(_$$b, {
         tab: DashboardSection.CONTENT,
         selectedSecondaryTab: WorkspaceTab.FILE_LIST_BETA
@@ -462,7 +462,7 @@ function ed(e) {
     },
     children: [!getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K2, {
-        title: _$$O(DashboardSection.CONTENT)
+        title: getOrgAdminTabMessage(DashboardSection.CONTENT)
       }), jsx(_$$b, {
         tab: DashboardSection.CONTENT,
         selectedSecondaryTab: WorkspaceTab.ACCESS_INSIGHT
@@ -562,7 +562,7 @@ function eK() {
   return jsx(_$$X, {
     description: i,
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("8c4e048a40c1f12e59d2c74adf70bbcd3ded9bb1"),
       alt: "",
       aspectRatio: 600 / 208
@@ -902,335 +902,335 @@ let tK = (e, t, a) => [tD, {
   value: tL,
   description: renderI18nText("activity_log.filter.files")
 }, {
-  value: ["fig_file_create"],
-  description: renderI18nText("activity_log.filter.created_a_file")
-}, {
-  value: ["fig_file_duplicate"],
-  description: renderI18nText("activity_log.filter.duplicated_a_file")
-}, {
-  value: ["fig_file_export"],
-  description: renderI18nText("activity_log.filter.exported_a_file")
-}, {
-  value: ["fig_file_image_download"],
-  description: renderI18nText("activity_log.filter.downloaded_an_image")
-}, {
-  value: ["fig_file_link_access_change"],
-  description: renderI18nText("activity_log.filter.file_link_access_changed")
-}, {
-  value: ["fig_file_link_expiration_change"],
-  description: renderI18nText("activity_log.filter.file_link_expiration_changed")
-}, {
-  value: ["fig_file_viewer_access_change"],
-  description: renderI18nText("activity_log.filter.viewer_permissions_changed")
-}, {
-  value: ["fig_file_member_add", "fig_file_member_permission_change", "fig_file_member_remove"],
-  description: renderI18nText("activity_log.filter.file_membership_changed")
-}, {
-  value: ["fig_file_move"],
-  description: renderI18nText("activity_log.filter.moved_a_file")
-}, {
-  value: ["fig_file_permanent_delete"],
-  description: renderI18nText("activity_log.filter.permanently_deleted_a_file")
-}, {
-  value: ["fig_file_permanent_undelete", "fig_file_restore"],
-  description: renderI18nText("activity_log.filter.restored_a_file")
-}, {
-  value: ["fig_file_set_password"],
-  description: renderI18nText("activity_log.filter.fig_file_set_password")
-}, {
-  value: ["fig_file_unset_password"],
-  description: renderI18nText("activity_log.filter.fig_file_unset_password")
-}, {
-  value: ["fig_file_rename"],
-  description: renderI18nText("activity_log.filter.renamed_a_file")
-}, {
-  value: ["fig_file_save_as"],
-  description: renderI18nText("activity_log.filter.saved_a_file")
-}, {
-  value: ["fig_file_trash"],
-  description: renderI18nText("activity_log.filter.trashed_a_file")
-}, {
-  value: ["fig_file_view"],
-  description: renderI18nText("activity_log.filter.viewed_a_file")
-}, {
-  value: ["fig_file_view_prototype"],
-  description: renderI18nText("activity_log.filter.viewed_a_prototype")
-}, {
-  value: ["open_sessions_start"],
-  description: renderI18nText("activity_log.filter.open_sessions_start")
-}, {
-  value: ["open_sessions_end"],
-  description: renderI18nText("activity_log.filter.open_sessions_end")
-}, ...tM, ...tJ, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.projects")
-}, {
-  value: ["folder_create"],
-  description: renderI18nText("activity_log.filter.created_a_project")
-}, {
-  value: ["folder_delete", "folder_trash", "folder_export", "folder_restore"],
-  description: renderI18nText("activity_log.filter.deleted_a_project")
-}, {
-  value: ["folder_member_add", "folder_member_permission_change", "folder_member_remove"],
-  description: renderI18nText("activity_log.filter.project_membership_changed")
-}, {
-  value: ["folder_move"],
-  description: renderI18nText("activity_log.filter.moved_a_project")
-}, {
-  value: ["folder_rename"],
-  description: renderI18nText("activity_log.filter.renamed_a_project")
-}, {
-  value: ["folder_team_access_change"],
-  description: renderI18nText("activity_log.filter.changed_the_team_access_of_a_project")
-}, {
-  value: ["folder_transfer_sent", "folder_transfer_copy_sent", "folder_export"],
-  description: renderI18nText("activity_log.filter.outgoing_transfers")
-}, {
-  value: ["folder_transfer_received", "folder_transfer_copy_received", "folder_transfer_approved", "folder_transfer_copy_approved", "folder_import"],
-  description: renderI18nText("activity_log.filter.incoming_transfers")
-}, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.teams")
-}, {
-  value: ["team_create", "team_import"],
-  description: renderI18nText("activity_log.filter.created_a_team")
-}, {
-  value: ["team_delete", "team_export"],
-  description: renderI18nText("activity_log.filter.deleted_a_team")
-}, {
-  value: ["team_transfer_sent", "team_export"],
-  description: renderI18nText("activity_log.filter.outgoing_transfers")
-}, {
-  value: ["team_transfer_received", "team_transfer_approved", "team_import"],
-  description: renderI18nText("activity_log.filter.incoming_transfers")
-}, {
-  value: ["team_restore"],
-  description: renderI18nText("activity_log.filter.restored_a_team")
-}, {
-  value: ["team_member_add", "team_member_permission_change", "team_member_remove"],
-  description: renderI18nText("activity_log.filter.team_membership_changed")
-}, {
-  value: ["team_rename"],
-  description: renderI18nText("activity_log.filter.renamed_a_team")
-}, {
-  value: ["team_org_access_change"],
-  description: renderI18nText("activity_log.filter.changed_the_org_access_of_a_team")
-}, {
-  value: ["team_license_group_change", "team_workspace_change"],
-  description: renderI18nText("activity_log.filter.changed_the_workspace_of_a_team")
-}, {
-  value: ["org_team_creation_controls"],
-  description: renderI18nText("activity_log.filter.changed_team_creation_controls")
-}, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.organizations")
-}, {
-  value: ["org_merge"],
-  description: renderI18nText("activity_log.filter.org_merged")
-}, {
-  value: ["org_user_create", "org_user_permission_change", "org_user_delete"],
-  description: renderI18nText("activity_log.filter.org_membership_changed")
-}, {
-  value: ["roster_exported"],
-  description: renderI18nText("activity_log.filter.exported_the_members_list")
-}, {
-  value: ["org_team_csv_exported"],
-  description: renderI18nText("activity_log.filter.exported_the_org_team_list")
-}, {
-  value: ["workspace_team_csv_exported"],
-  description: renderI18nText("activity_log.filter.exported_the_workspace_team_list")
-}, ...(e ? tV : []), {
-  value: ["org_invite_create"],
-  description: renderI18nText("activity_log.filter.org_invite_created")
-}, {
-  value: ["org_auto_approval_setting_update"],
-  description: jsx(Fragment, {
-    children: renderI18nText("activity_log.filter.auto_approval_settings_updated")
-  })
-}, {
-  value: ["cursor_chat_setting_change"],
-  description: renderI18nText("activity_log.filter.cursor_chat_setting_change")
-}, ...(e ? [{
-  value: ["idle_timeout_setting_change"],
-  description: renderI18nText("activity_log.filter.idle_timeout_setting_change")
-}] : []), ...(e && t.shared_container_setting?.configured_upgrade_request_setting ? [{
-  value: ["configurable_upgrade_request_setting_change", "configurable_upgrade_request_message_change"],
-  description: renderI18nText("activity_log.filter.configurable_upgrade_request_flow_changed")
-}] : []), {
-  value: ["scim_token_generate", "scim_token_revoke"],
-  description: renderI18nText("activity_log.filter.scim_token_generated_revoked")
-}, {
-  value: ["ai_features_enable", "ai_features_disable"],
-  description: renderI18nText("activity_log.filter.ai_features_setting_change")
-}, {
-  value: ["ai_content_training_enable", "ai_content_training_disable"],
-  description: renderI18nText("activity_log.filter.ai_content_training_setting_change")
-}, {
-  value: ["seats_renew"],
-  description: renderI18nText("activity_log.filter.seats_renew")
-}, ...(e && a ? [{
-  value: ["mfa_required_setting_change"],
-  description: renderI18nText("activity_log.filter.mfa_required_setting_change")
-}] : []), {
-  value: tL,
-  description: renderI18nText("activity_log.filter.seat_changes")
-}, {
-  value: ["org_default_license_type_change"],
-  description: renderI18nText("activity_log.filter.changed_default_role.seat_rename")
-}, {
-  value: ["org_user_account_type_upgrade_requested", "org_user_account_type_upgrade_approved", "org_user_account_type_upgrade_denied", "provisional_access_start", "provisional_access_end_request_approved", "provisional_access_end_request_denied", "provisional_access_end_new_request"],
-  description: renderI18nText("activity_log.filter.upgrade_requests_and_activity")
-}, {
-  value: ["org_user_account_type_change", "org_user_account_type_change_to_full"],
-  description: renderI18nText("activity_log.filter.org_role_changed.seat_rename")
-}, ...(e ? tq.concat([{
-  value: ["workspace_public_link_setting_change"],
-  description: renderI18nText("activity_log.filter.changed_workspace_public_link_setting")
-}, {
-  value: ["external_collaboration_controls_setting_change"],
-  description: renderI18nText("activity_log.filter.external_collaboration_controls_setting_change")
-}]) : tq), ...(e ? tB : []), ...(e ? tG : []), ...(t.can_use_multi_idp ? tY : []), ...(e ? tz : []), ...(e ? tF : []), {
-  value: tL,
-  description: renderI18nText("activity_log.filter.libraries")
-}, {
-  value: ["org_library_setting_change"],
-  description: renderI18nText("activity_log.filter.org_library_setting_changed")
-}, ...(e ? t$ : []), ...(e && isBigmaEnabledAlias3(t) ? [{
-  value: ["workspace_library_approve", "workspace_library_unapprove"],
-  description: renderI18nText("activity_log.filter.workspace_library_approval_changed")
-}] : []), ...(e && isBigmaEnabledAlias3(t) ? [{
-  value: ["org_library_approve", "org_library_unapprove"],
-  description: renderI18nText("activity_log.filter.org_library_approval_changed")
-}] : []), {
-  value: tL,
-  description: renderI18nText("activity_log.filter.users")
-}, ...(e ? [{
-  value: ["user_idle_session_timeout"],
-  description: renderI18nText("activity_log.filter.user_session_timed_out")
-}] : []), {
-  value: ["user_sign_in", "user_sign_out"],
-  description: renderI18nText("activity_log.filter.user_signed_in_signed_out")
-}, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.community")
-}, {
-  value: ["community_hub_file_publish", "community_hub_file_update", "community_hub_file_delete"],
-  description: renderI18nText("activity_log.filter.file_published_updated_deleted")
-}, {
-  value: ["community_plugin_publish", "community_plugin_update", "community_plugin_delete"],
-  description: renderI18nText("activity_log.filter.plugin_published_updated_deleted")
-}, {
-  value: ["community_widget_publish", "community_widget_update", "community_widget_delete"],
-  description: renderI18nText("activity_log.filter.widget_published_updated_deleted")
-}, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.private_plugins")
-}, {
-  value: ["private_plugin_publish"],
-  description: renderI18nText("activity_log.filter.plugin_published")
-}, {
-  value: ["private_plugin_update"],
-  description: renderI18nText("activity_log.filter.plugin_updated")
-}, {
-  value: ["private_plugin_delete"],
-  description: renderI18nText("activity_log.filter.plugin_deleted")
-}, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.plugin_management")
-}, {
-  value: ["plugin_approvelist_enable", "plugin_approvelist_disable"],
-  description: renderI18nText("activity_log.filter.plugin_approve_list_setting_changed")
-}, {
-  value: ["plugin_approvelist_request_org"],
-  description: renderI18nText("activity_log.filter.plugin_approve_list_requested")
-}, {
-  value: ["plugin_approvelist_request_approve_org", "plugin_approvelist_request_reject_org", "plugin_approvelist_request_approve_workspace", "plugin_approvelist_request_reject_workspace", "plugin_approvelist_add", "plugin_approvelist_add_workspace", "plugin_approvelist_remove", "plugin_approvelist_remove_workspace"],
-  description: renderI18nText("activity_log.filter.approve_list_plugins_reviewed")
-}, {
-  value: ["plugin_install", "plugin_uninstall"],
-  description: renderI18nText("activity_log.filter.install_plugins_org_wide")
-}, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.plugin_publishers")
-}, {
-  value: ["plugin_publisher_accept_invite", "plugin_publisher_remove_invite"],
-  description: renderI18nText("activity_log.filter.plugin_publisher_accept_remove_invite")
-}, {
-  value: ["plugin_publisher_invite"],
-  description: renderI18nText("activity_log.filter.plugin_publisher_invite")
-}, {
-  value: ["plugin_publisher_remove"],
-  description: renderI18nText("activity_log.filter.plugin_publisher_remove")
-}, {
-  value: ["plugin_ownership_transfer"],
-  description: renderI18nText("activity_log.filter.plugin_ownership_transfer")
-}, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.private_widgets")
-}, {
-  value: ["private_widget_publish"],
-  description: renderI18nText("activity_log.filter.widget_published")
-}, {
-  value: ["private_widget_update"],
-  description: renderI18nText("activity_log.filter.widget_updated")
-}, {
-  value: ["private_widget_delete"],
-  description: renderI18nText("activity_log.filter.widget_deleted")
-}, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.widget_management")
-}, {
-  value: ["widgets_enabled", "widgets_disable"],
-  description: renderI18nText("activity_log.filter.widget_approve_list_setting_changed")
-}, {
-  value: ["widget_approvelist_request_org"],
-  description: renderI18nText("activity_log.filter.widget_approve_list_requested")
-}, {
-  value: ["widget_approvelist_request_approve_org", "widget_approvelist_request_reject_org", "widget_approvelist_request_approve_workspace", "widget_approvelist_request_reject_workspace", "widget_approvelist_add", "widget_approvelist_add_workspace", "widget_approvelist_remove", "widget_approvelist_remove_workspace"],
-  description: renderI18nText("activity_log.filter.approve_list_widgets_reviewed")
-}, {
-  value: ["widget_install", "widget_uninstall"],
-  description: renderI18nText("activity_log.filter.install_widgets_org_wide")
-}, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.widget_publishers")
-}, {
-  value: ["widget_publisher_accept_invite", "widget_publisher_remove_invite"],
-  description: renderI18nText("activity_log.filter.widget_publisher_accept_remove_invite")
-}, {
-  value: ["widget_publisher_invite"],
-  description: renderI18nText("activity_log.filter.widget_publisher_invite")
-}, {
-  value: ["widget_publisher_remove"],
-  description: renderI18nText("activity_log.filter.widget_publisher_remove")
-}, {
-  value: ["widget_ownership_transfer"],
-  description: renderI18nText("activity_log.filter.widget_ownership_transfer")
-}, ...tU, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.audio")
-}, {
-  value: ["voice_call_join_req"],
-  description: renderI18nText("activity_log.filter.user_joined_audio_call")
-}, {
-  value: tL,
-  description: renderI18nText("activity_log.filter.integrations")
-}, {
-  value: ["personal_access_token_create", "personal_access_token_delete"],
-  description: renderI18nText("activity_log.filter.personal_access_token_create_delete")
-}, {
-  value: ["oauth_token_grant", "oauth_token_revoke"],
-  description: renderI18nText("activity_log.filter.oauth_token_grant_revoke")
-}, ...(p3() ? [{
-  value: ["supabase_setting_change"],
-  description: renderI18nText("activity_log.filter.supabase_setting_change")
-}, {
-  value: ["supabase_project_connected"],
-  description: renderI18nText("activity_log.filter.supabase_project_connected")
-}, {
-  value: ["supabase_project_disconnected"],
-  description: renderI18nText("activity_log.filter.supabase_project_disconnected")
-}] : []), ...tW, ...tH, ...tP];
+    value: ["fig_file_create"],
+    description: renderI18nText("activity_log.filter.created_a_file")
+  }, {
+    value: ["fig_file_duplicate"],
+    description: renderI18nText("activity_log.filter.duplicated_a_file")
+  }, {
+    value: ["fig_file_export"],
+    description: renderI18nText("activity_log.filter.exported_a_file")
+  }, {
+    value: ["fig_file_image_download"],
+    description: renderI18nText("activity_log.filter.downloaded_an_image")
+  }, {
+    value: ["fig_file_link_access_change"],
+    description: renderI18nText("activity_log.filter.file_link_access_changed")
+  }, {
+    value: ["fig_file_link_expiration_change"],
+    description: renderI18nText("activity_log.filter.file_link_expiration_changed")
+  }, {
+    value: ["fig_file_viewer_access_change"],
+    description: renderI18nText("activity_log.filter.viewer_permissions_changed")
+  }, {
+    value: ["fig_file_member_add", "fig_file_member_permission_change", "fig_file_member_remove"],
+    description: renderI18nText("activity_log.filter.file_membership_changed")
+  }, {
+    value: ["fig_file_move"],
+    description: renderI18nText("activity_log.filter.moved_a_file")
+  }, {
+    value: ["fig_file_permanent_delete"],
+    description: renderI18nText("activity_log.filter.permanently_deleted_a_file")
+  }, {
+    value: ["fig_file_permanent_undelete", "fig_file_restore"],
+    description: renderI18nText("activity_log.filter.restored_a_file")
+  }, {
+    value: ["fig_file_set_password"],
+    description: renderI18nText("activity_log.filter.fig_file_set_password")
+  }, {
+    value: ["fig_file_unset_password"],
+    description: renderI18nText("activity_log.filter.fig_file_unset_password")
+  }, {
+    value: ["fig_file_rename"],
+    description: renderI18nText("activity_log.filter.renamed_a_file")
+  }, {
+    value: ["fig_file_save_as"],
+    description: renderI18nText("activity_log.filter.saved_a_file")
+  }, {
+    value: ["fig_file_trash"],
+    description: renderI18nText("activity_log.filter.trashed_a_file")
+  }, {
+    value: ["fig_file_view"],
+    description: renderI18nText("activity_log.filter.viewed_a_file")
+  }, {
+    value: ["fig_file_view_prototype"],
+    description: renderI18nText("activity_log.filter.viewed_a_prototype")
+  }, {
+    value: ["open_sessions_start"],
+    description: renderI18nText("activity_log.filter.open_sessions_start")
+  }, {
+    value: ["open_sessions_end"],
+    description: renderI18nText("activity_log.filter.open_sessions_end")
+  }, ...tM, ...tJ, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.projects")
+  }, {
+    value: ["folder_create"],
+    description: renderI18nText("activity_log.filter.created_a_project")
+  }, {
+    value: ["folder_delete", "folder_trash", "folder_export", "folder_restore"],
+    description: renderI18nText("activity_log.filter.deleted_a_project")
+  }, {
+    value: ["folder_member_add", "folder_member_permission_change", "folder_member_remove"],
+    description: renderI18nText("activity_log.filter.project_membership_changed")
+  }, {
+    value: ["folder_move"],
+    description: renderI18nText("activity_log.filter.moved_a_project")
+  }, {
+    value: ["folder_rename"],
+    description: renderI18nText("activity_log.filter.renamed_a_project")
+  }, {
+    value: ["folder_team_access_change"],
+    description: renderI18nText("activity_log.filter.changed_the_team_access_of_a_project")
+  }, {
+    value: ["folder_transfer_sent", "folder_transfer_copy_sent", "folder_export"],
+    description: renderI18nText("activity_log.filter.outgoing_transfers")
+  }, {
+    value: ["folder_transfer_received", "folder_transfer_copy_received", "folder_transfer_approved", "folder_transfer_copy_approved", "folder_import"],
+    description: renderI18nText("activity_log.filter.incoming_transfers")
+  }, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.teams")
+  }, {
+    value: ["team_create", "team_import"],
+    description: renderI18nText("activity_log.filter.created_a_team")
+  }, {
+    value: ["team_delete", "team_export"],
+    description: renderI18nText("activity_log.filter.deleted_a_team")
+  }, {
+    value: ["team_transfer_sent", "team_export"],
+    description: renderI18nText("activity_log.filter.outgoing_transfers")
+  }, {
+    value: ["team_transfer_received", "team_transfer_approved", "team_import"],
+    description: renderI18nText("activity_log.filter.incoming_transfers")
+  }, {
+    value: ["team_restore"],
+    description: renderI18nText("activity_log.filter.restored_a_team")
+  }, {
+    value: ["team_member_add", "team_member_permission_change", "team_member_remove"],
+    description: renderI18nText("activity_log.filter.team_membership_changed")
+  }, {
+    value: ["team_rename"],
+    description: renderI18nText("activity_log.filter.renamed_a_team")
+  }, {
+    value: ["team_org_access_change"],
+    description: renderI18nText("activity_log.filter.changed_the_org_access_of_a_team")
+  }, {
+    value: ["team_license_group_change", "team_workspace_change"],
+    description: renderI18nText("activity_log.filter.changed_the_workspace_of_a_team")
+  }, {
+    value: ["org_team_creation_controls"],
+    description: renderI18nText("activity_log.filter.changed_team_creation_controls")
+  }, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.organizations")
+  }, {
+    value: ["org_merge"],
+    description: renderI18nText("activity_log.filter.org_merged")
+  }, {
+    value: ["org_user_create", "org_user_permission_change", "org_user_delete"],
+    description: renderI18nText("activity_log.filter.org_membership_changed")
+  }, {
+    value: ["roster_exported"],
+    description: renderI18nText("activity_log.filter.exported_the_members_list")
+  }, {
+    value: ["org_team_csv_exported"],
+    description: renderI18nText("activity_log.filter.exported_the_org_team_list")
+  }, {
+    value: ["workspace_team_csv_exported"],
+    description: renderI18nText("activity_log.filter.exported_the_workspace_team_list")
+  }, ...(e ? tV : []), {
+    value: ["org_invite_create"],
+    description: renderI18nText("activity_log.filter.org_invite_created")
+  }, {
+    value: ["org_auto_approval_setting_update"],
+    description: jsx(Fragment, {
+      children: renderI18nText("activity_log.filter.auto_approval_settings_updated")
+    })
+  }, {
+    value: ["cursor_chat_setting_change"],
+    description: renderI18nText("activity_log.filter.cursor_chat_setting_change")
+  }, ...(e ? [{
+    value: ["idle_timeout_setting_change"],
+    description: renderI18nText("activity_log.filter.idle_timeout_setting_change")
+  }] : []), ...(e && t.shared_container_setting?.configured_upgrade_request_setting ? [{
+    value: ["configurable_upgrade_request_setting_change", "configurable_upgrade_request_message_change"],
+    description: renderI18nText("activity_log.filter.configurable_upgrade_request_flow_changed")
+  }] : []), {
+    value: ["scim_token_generate", "scim_token_revoke"],
+    description: renderI18nText("activity_log.filter.scim_token_generated_revoked")
+  }, {
+    value: ["ai_features_enable", "ai_features_disable"],
+    description: renderI18nText("activity_log.filter.ai_features_setting_change")
+  }, {
+    value: ["ai_content_training_enable", "ai_content_training_disable"],
+    description: renderI18nText("activity_log.filter.ai_content_training_setting_change")
+  }, {
+    value: ["seats_renew"],
+    description: renderI18nText("activity_log.filter.seats_renew")
+  }, ...(e && a ? [{
+    value: ["mfa_required_setting_change"],
+    description: renderI18nText("activity_log.filter.mfa_required_setting_change")
+  }] : []), {
+    value: tL,
+    description: renderI18nText("activity_log.filter.seat_changes")
+  }, {
+    value: ["org_default_license_type_change"],
+    description: renderI18nText("activity_log.filter.changed_default_role.seat_rename")
+  }, {
+    value: ["org_user_account_type_upgrade_requested", "org_user_account_type_upgrade_approved", "org_user_account_type_upgrade_denied", "provisional_access_start", "provisional_access_end_request_approved", "provisional_access_end_request_denied", "provisional_access_end_new_request"],
+    description: renderI18nText("activity_log.filter.upgrade_requests_and_activity")
+  }, {
+    value: ["org_user_account_type_change", "org_user_account_type_change_to_full"],
+    description: renderI18nText("activity_log.filter.org_role_changed.seat_rename")
+  }, ...(e ? tq.concat([{
+    value: ["workspace_public_link_setting_change"],
+    description: renderI18nText("activity_log.filter.changed_workspace_public_link_setting")
+  }, {
+    value: ["external_collaboration_controls_setting_change"],
+    description: renderI18nText("activity_log.filter.external_collaboration_controls_setting_change")
+  }]) : tq), ...(e ? tB : []), ...(e ? tG : []), ...(t.can_use_multi_idp ? tY : []), ...(e ? tz : []), ...(e ? tF : []), {
+    value: tL,
+    description: renderI18nText("activity_log.filter.libraries")
+  }, {
+    value: ["org_library_setting_change"],
+    description: renderI18nText("activity_log.filter.org_library_setting_changed")
+  }, ...(e ? t$ : []), ...(e && isBigmaEnabledAlias3(t) ? [{
+    value: ["workspace_library_approve", "workspace_library_unapprove"],
+    description: renderI18nText("activity_log.filter.workspace_library_approval_changed")
+  }] : []), ...(e && isBigmaEnabledAlias3(t) ? [{
+    value: ["org_library_approve", "org_library_unapprove"],
+    description: renderI18nText("activity_log.filter.org_library_approval_changed")
+  }] : []), {
+    value: tL,
+    description: renderI18nText("activity_log.filter.users")
+  }, ...(e ? [{
+    value: ["user_idle_session_timeout"],
+    description: renderI18nText("activity_log.filter.user_session_timed_out")
+  }] : []), {
+    value: ["user_sign_in", "user_sign_out"],
+    description: renderI18nText("activity_log.filter.user_signed_in_signed_out")
+  }, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.community")
+  }, {
+    value: ["community_hub_file_publish", "community_hub_file_update", "community_hub_file_delete"],
+    description: renderI18nText("activity_log.filter.file_published_updated_deleted")
+  }, {
+    value: ["community_plugin_publish", "community_plugin_update", "community_plugin_delete"],
+    description: renderI18nText("activity_log.filter.plugin_published_updated_deleted")
+  }, {
+    value: ["community_widget_publish", "community_widget_update", "community_widget_delete"],
+    description: renderI18nText("activity_log.filter.widget_published_updated_deleted")
+  }, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.private_plugins")
+  }, {
+    value: ["private_plugin_publish"],
+    description: renderI18nText("activity_log.filter.plugin_published")
+  }, {
+    value: ["private_plugin_update"],
+    description: renderI18nText("activity_log.filter.plugin_updated")
+  }, {
+    value: ["private_plugin_delete"],
+    description: renderI18nText("activity_log.filter.plugin_deleted")
+  }, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.plugin_management")
+  }, {
+    value: ["plugin_approvelist_enable", "plugin_approvelist_disable"],
+    description: renderI18nText("activity_log.filter.plugin_approve_list_setting_changed")
+  }, {
+    value: ["plugin_approvelist_request_org"],
+    description: renderI18nText("activity_log.filter.plugin_approve_list_requested")
+  }, {
+    value: ["plugin_approvelist_request_approve_org", "plugin_approvelist_request_reject_org", "plugin_approvelist_request_approve_workspace", "plugin_approvelist_request_reject_workspace", "plugin_approvelist_add", "plugin_approvelist_add_workspace", "plugin_approvelist_remove", "plugin_approvelist_remove_workspace"],
+    description: renderI18nText("activity_log.filter.approve_list_plugins_reviewed")
+  }, {
+    value: ["plugin_install", "plugin_uninstall"],
+    description: renderI18nText("activity_log.filter.install_plugins_org_wide")
+  }, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.plugin_publishers")
+  }, {
+    value: ["plugin_publisher_accept_invite", "plugin_publisher_remove_invite"],
+    description: renderI18nText("activity_log.filter.plugin_publisher_accept_remove_invite")
+  }, {
+    value: ["plugin_publisher_invite"],
+    description: renderI18nText("activity_log.filter.plugin_publisher_invite")
+  }, {
+    value: ["plugin_publisher_remove"],
+    description: renderI18nText("activity_log.filter.plugin_publisher_remove")
+  }, {
+    value: ["plugin_ownership_transfer"],
+    description: renderI18nText("activity_log.filter.plugin_ownership_transfer")
+  }, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.private_widgets")
+  }, {
+    value: ["private_widget_publish"],
+    description: renderI18nText("activity_log.filter.widget_published")
+  }, {
+    value: ["private_widget_update"],
+    description: renderI18nText("activity_log.filter.widget_updated")
+  }, {
+    value: ["private_widget_delete"],
+    description: renderI18nText("activity_log.filter.widget_deleted")
+  }, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.widget_management")
+  }, {
+    value: ["widgets_enabled", "widgets_disable"],
+    description: renderI18nText("activity_log.filter.widget_approve_list_setting_changed")
+  }, {
+    value: ["widget_approvelist_request_org"],
+    description: renderI18nText("activity_log.filter.widget_approve_list_requested")
+  }, {
+    value: ["widget_approvelist_request_approve_org", "widget_approvelist_request_reject_org", "widget_approvelist_request_approve_workspace", "widget_approvelist_request_reject_workspace", "widget_approvelist_add", "widget_approvelist_add_workspace", "widget_approvelist_remove", "widget_approvelist_remove_workspace"],
+    description: renderI18nText("activity_log.filter.approve_list_widgets_reviewed")
+  }, {
+    value: ["widget_install", "widget_uninstall"],
+    description: renderI18nText("activity_log.filter.install_widgets_org_wide")
+  }, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.widget_publishers")
+  }, {
+    value: ["widget_publisher_accept_invite", "widget_publisher_remove_invite"],
+    description: renderI18nText("activity_log.filter.widget_publisher_accept_remove_invite")
+  }, {
+    value: ["widget_publisher_invite"],
+    description: renderI18nText("activity_log.filter.widget_publisher_invite")
+  }, {
+    value: ["widget_publisher_remove"],
+    description: renderI18nText("activity_log.filter.widget_publisher_remove")
+  }, {
+    value: ["widget_ownership_transfer"],
+    description: renderI18nText("activity_log.filter.widget_ownership_transfer")
+  }, ...tU, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.audio")
+  }, {
+    value: ["voice_call_join_req"],
+    description: renderI18nText("activity_log.filter.user_joined_audio_call")
+  }, {
+    value: tL,
+    description: renderI18nText("activity_log.filter.integrations")
+  }, {
+    value: ["personal_access_token_create", "personal_access_token_delete"],
+    description: renderI18nText("activity_log.filter.personal_access_token_create_delete")
+  }, {
+    value: ["oauth_token_grant", "oauth_token_revoke"],
+    description: renderI18nText("activity_log.filter.oauth_token_grant_revoke")
+  }, ...(p3() ? [{
+    value: ["supabase_setting_change"],
+    description: renderI18nText("activity_log.filter.supabase_setting_change")
+  }, {
+    value: ["supabase_project_connected"],
+    description: renderI18nText("activity_log.filter.supabase_project_connected")
+  }, {
+    value: ["supabase_project_disconnected"],
+    description: renderI18nText("activity_log.filter.supabase_project_disconnected")
+  }] : []), ...tW, ...tH, ...tP];
 let tX = [{
   value: {
     start: dayjs().format("YYYY-MM-DD"),
@@ -1345,7 +1345,7 @@ class tZ extends PureComponent {
       icon: VisualBellIcon.SPINNER
     }));
     let t = this.displayedFilterParams();
-    XHR.post("/api/activity_logs/export", {
+    sendWithRetry.post("/api/activity_logs/export", {
       org_id: this.props.org.id,
       emails: t.emails?.join(),
       start_time: t.date.start,
@@ -1520,7 +1520,7 @@ class tZ extends PureComponent {
   render() {
     return jsxs(Fragment, {
       children: [this.state.emails.tokens.length > 0 && jsx(t1, {}), !this.props.hideHeader && jsx(_$$K2, {
-        title: _$$O(DashboardSection.ACTIVITY),
+        title: getOrgAdminTabMessage(DashboardSection.ACTIVITY),
         rightActions: jsx(IconButton, {
           "aria-label": getI18nString("activity_log.table.get_csv"),
           variant: "secondary",
@@ -1824,7 +1824,7 @@ let aw = registerModal(function (e) {
       children: jsxs(ModalFormContents, {
         onSubmit: _ ? n => {
           n.preventDefault();
-          XHR.del(`/api/orgs/${o}/license_groups`, {
+          sendWithRetry.del(`/api/orgs/${o}/license_groups`, {
             license_group_ids: d
           }).then(({
             data: n
@@ -1914,7 +1914,7 @@ function aC({
   onSubmit: d
 }) {
   let c = !!e;
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: c ? getI18nString("billing_groups_table.edit_billing_group_title") : getI18nString("billing_groups_table.create_billing_group_title"),
     onClose: l,
     minWidth: 500,
@@ -2086,11 +2086,11 @@ let aS = registerModal(function (e) {
           message: e.message
         }));
       };
-      u ? XHR.put(`/api/license_group/${e.licenseGroup.id}`, {
+      u ? sendWithRetry.put(`/api/license_group/${e.licenseGroup.id}`, {
         name: x,
         admin_user_ids: p.tokens.map(e => e.content.user.id),
         showing_billing_groups: !0
-      }).then(a).catch(n) : XHR.post(`/api/orgs/${l}/license_groups`, {
+      }).then(a).catch(n) : sendWithRetry.post(`/api/orgs/${l}/license_groups`, {
         name: x,
         admin_user_ids: p.tokens.map(e => e.content.user.id),
         showing_billing_groups: !0
@@ -2193,7 +2193,7 @@ function aL({
   count: e
 }) {
   return jsx("div", {
-    className: cssBuilderInstance.borderBox.minW16.px4.alignCenter.$$if(0 === e, cssBuilderInstance.colorBgHover, cssBuilderInstance.colorBgWarning).$,
+    className: cssBuilderInstance.borderBox.minW16.px4.alignCenter.if(0 === e, cssBuilderInstance.colorBgHover, cssBuilderInstance.colorBgWarning).$,
     style: {
       borderRadius: "100px"
     },
@@ -2559,7 +2559,7 @@ function a3(e) {
       total: 0
     }))
   }, [], {
-    release: () => {}
+    release: () => { }
   }), [a, o]);
   let c = useMemo(() => o.transform(e => {
     let t = {
@@ -2797,7 +2797,7 @@ function n_(e) {
         orgId: e.org.id
       })
     }), jsx(_$$K2, {
-      title: _$$O(DashboardSection.BILLING),
+      title: getOrgAdminTabMessage(DashboardSection.BILLING),
       rightActions: jsx(_$$p4, {})
     }), jsx(_$$b, {
       tab: DashboardSection.BILLING,
@@ -2942,7 +2942,7 @@ let nk = registerModal(function (e) {
   };
   let C = () => {
     let e = p ? `/api/workspace/${m.id}` : `/api/orgs/${o}/workspaces`;
-    let a = p ? XHR.put : XHR.post;
+    let a = p ? sendWithRetry.put : sendWithRetry.post;
     let n = p ? d : _;
     let s = !p && (!u || 0 === u.length);
     a(e, {
@@ -2984,7 +2984,7 @@ let nk = registerModal(function (e) {
     }
     n(null);
   };
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: p ? getI18nString("workspace_table.edit_workspace_title") : getI18nString("workspace_table.create_workspace_title"),
     onClose: E,
     minWidth: 500,
@@ -3011,7 +3011,7 @@ let nk = registerModal(function (e) {
             })
           }), jsx(_$$Y3, {
             className: "workspace_edit_modal--yellowIcon--uYKLJ admin_notifications_count_badge--yellowIcon--7SC5D",
-            style: styleBuilderInstance.$$if(!a, styleBuilderInstance.invisible).$
+            style: styleBuilderInstance.if(!a, styleBuilderInstance.invisible).$
           })]
         }), jsxs("label", {
           className: nv,
@@ -3100,8 +3100,8 @@ function nS() {
       canShow: e => !isMobileUA && !e
     });
   });
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     clickOutsideToHide: !0,
     description: jsx(TextWithTruncation, {
       children: renderI18nText("org_admin_onboarding.tooltip.workspace_add_teams.description")
@@ -3115,7 +3115,7 @@ function nS() {
       onClick: complete,
       ctaTrackingDescriptor: UpgradeAction.DONE
     },
-    shouldCenterArrow: EL.FALLBACK,
+    shouldCenterArrow: PositioningStrategy.FALLBACK,
     targetKey: d1,
     title: renderI18nText("org_admin_onboarding.tooltip.workspace_add_teams.title"),
     trackingContextName: `${WF} - Teams tab`,
@@ -3137,7 +3137,7 @@ let nL = registerModal(function (e) {
     properties: {
       numWorkspaces: e.workspaces.length
     },
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: getI18nString("workspace_table.delete_n_workspaces", {
         licenseGroupsCount: e.workspaces.length
       }),
@@ -3402,7 +3402,7 @@ function n$() {
   return jsxs("div", {
     className: "x17tqzrc x5yr21d",
     children: [jsx(_$$K2, {
-      title: _$$O(DashboardSection.CONTENT)
+      title: getOrgAdminTabMessage(DashboardSection.CONTENT)
     }), jsx(_$$b, {
       tab: DashboardSection.CONTENT,
       selectedSecondaryTab: WorkspaceTab.WORKSPACES
@@ -3649,7 +3649,7 @@ function nz(e) {
   }), o || 0 !== _.length) ? jsxs(Fragment, {
     children: [!getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K2, {
-        title: _$$O(DashboardSection.CONTENT)
+        title: getOrgAdminTabMessage(DashboardSection.CONTENT)
       }), jsx(_$$b, {
         tab: DashboardSection.CONTENT,
         selectedSecondaryTab: WorkspaceTab.WORKSPACES,
@@ -3723,7 +3723,7 @@ function nV(e) {
 }
 let nW = new Set([WorkspaceTab.TEAMS, WorkspaceTab.WORKSPACES]);
 function nH(e) {
-  let t = Um();
+  let t = useDropdownState();
   let [a, n] = useState(void 0);
   let r = useCallback(e => {
     n(e);
@@ -3774,7 +3774,7 @@ function nH(e) {
   }
   return jsxs(Fragment, {
     children: [jsx(_$$K2, {
-      title: _$$O(DashboardSection.CONTENT)
+      title: getOrgAdminTabMessage(DashboardSection.CONTENT)
     }), jsx(_$$b, {
       tab: DashboardSection.CONTENT,
       selectedSecondaryTab: e.activeTab,
@@ -3805,7 +3805,7 @@ function nX() {
       canShow: e => !e
     });
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     clickOutsideToHide: !0,
     description: renderI18nText("org_admin_onboarding.tooltip.unassigned_drafts_tab.body"),
     isShowing,
@@ -3816,7 +3816,7 @@ function nX() {
       onClick: complete,
       ctaTrackingDescriptor: UpgradeAction.DONE
     },
-    shouldCenterArrow: EL.FALLBACK,
+    shouldCenterArrow: PositioningStrategy.FALLBACK,
     targetKey: _R,
     title: renderI18nText("org_admin_onboarding.tooltip.unassigned_drafts_tab.title"),
     trackingContextName: `${_$$eN} - Unassigned drafts tab`,
@@ -3855,7 +3855,7 @@ function n4(e) {
     children: renderI18nText("members_table.invite_users_button")
   }) : jsx(Button, {
     variant: "primary",
-    onClick: () => {},
+    onClick: () => { },
     "aria-label": getI18nString("members_table.create_user_group_button"),
     iconPrefix: jsx(_$$x, {}),
     children: renderI18nText("members_table.create_user_group_button")
@@ -4848,7 +4848,7 @@ function sR({
   }, [v, n]);
   let f = !getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
     children: [jsx(_$$K2, {
-      title: _$$O(DashboardSection.RESOURCES)
+      title: getOrgAdminTabMessage(DashboardSection.RESOURCES)
     }), jsx(_$$b, {
       tab: DashboardSection.RESOURCES,
       selectedSecondaryTab: sO[t],
@@ -4866,7 +4866,7 @@ function sR({
           settingsText: getI18nString("resources_tab.approved_plugins.plugin_approval_banner.open_settings")
         })
       }), jsxs("div", {
-        className: cssBuilderInstance.$$if(!b, cssBuilderInstance.opacity0_3.eventsNone).$,
+        className: cssBuilderInstance.if(!b, cssBuilderInstance.opacity0_3.eventsNone).$,
         children: [jsx(sA, {
           orgId: e,
           extensionToUsageData: p.data,
@@ -4893,7 +4893,7 @@ let sD = liveStoreInstance.Query({
 });
 function sP(e) {
   let t = useDispatch();
-  let a = Um();
+  let a = useDropdownState();
   let n = selectPermissionsState();
   let l = useSelector(({
     sharedFonts: e
@@ -4953,7 +4953,7 @@ function sP(e) {
   }
   return jsxs("div", {
     children: [jsx(_$$K2, {
-      title: _$$O(DashboardSection.RESOURCES)
+      title: getOrgAdminTabMessage(DashboardSection.RESOURCES)
     }), jsx(_$$b, {
       tab: DashboardSection.RESOURCES,
       selectedSecondaryTab: e.activeTab,
@@ -5000,7 +5000,7 @@ function sB(e) {
   let y = useSelector(({
     loadingState: e
   }) => e);
-  let w = Um();
+  let w = useDropdownState();
   let k = selectPermissionsState();
   let E = useSelector(({
     sharedFonts: e
@@ -5123,7 +5123,7 @@ function sB(e) {
   }) : jsxs("div", {
     className: kL,
     children: [jsx(_$$K2, {
-      title: _$$O(e.selectedTab, e.selectedSecondaryTab)
+      title: getOrgAdminTabMessage(e.selectedTab, e.selectedSecondaryTab)
     }), jsx(LoadingOverlay, {})]
   });
   let eJ = useSubscription(OrgTeamsIdAndName({

@@ -4,9 +4,9 @@ import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import s from "classnames";
 import { P } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { H } from "../905/286442";
+import { usKeyboardFocusHandler } from "../905/286442";
 import { A as _$$A } from "../905/780920";
-import { L0, MQ, AD } from "../905/479155";
+import { useLayoutRegistration, ListLayoutContext, LayoutProvider } from "../905/479155";
 import { wY } from "../figma_app/708845";
 import { k } from "../905/341245";
 import { U } from "../905/172092";
@@ -25,7 +25,7 @@ export function $$f0({
     tracker,
     index,
     isPrimaryLayout
-  } = L0(g, i);
+  } = useLayoutRegistration(g, i);
   let y = function (e, t, i, n) {
     let [a, s] = useState(0);
     let o = void 0 === n;
@@ -64,18 +64,18 @@ export function $$f0({
     layoutIndex: index,
     primary: isPrimaryLayout
   }), [isPrimaryLayout, index, tracker]);
-  return 0 === t ? null : jsx(MQ.Provider, {
+  return 0 === t ? null : jsx(ListLayoutContext.Provider, {
     value: b,
     children: jsx("div", {
       ref: g,
-      className: cssBuilderInstance.flex.gap4.$$if(void 0 === a, cssBuilderInstance.absolute.left0.right0.top0.bottom0).$,
+      className: cssBuilderInstance.flex.gap4.if(void 0 === a, cssBuilderInstance.absolute.left0.right0.top0.bottom0).$,
       "data-testid": s,
       children: jsx(P, {
         ref: h,
         height: y,
         hideScrollbar: !0,
         className: cssBuilderInstance.wFull.$,
-        children: jsx(AD, {
+        children: jsx(LayoutProvider, {
           children: jsx("div", {
             className: o()("list--list--1-cyL", cssBuilderInstance.flex.flexColumn.pb8.$),
             children: jsx(_$$A.Provider, {
@@ -110,7 +110,7 @@ export function $$f0({
       active,
       target,
       focus
-    } = H({
+    } = usKeyboardFocusHandler({
       ref: "container" === y.type ? I : E,
       navigationOptions: ({
         inPrimaryLayout: e,
@@ -123,7 +123,7 @@ export function $$f0({
       itemsPerRow: 1,
       debug: l
     });
-    let T = cssBuilderInstance.flex.alignCenter.bRadius5.ml8.mr8.p4.flex1.$$if(active && !m, cssBuilderInstance.colorBgHover).$;
+    let T = cssBuilderInstance.flex.alignCenter.bRadius5.ml8.mr8.p4.flex1.if(active && !m, cssBuilderInstance.colorBgHover).$;
     let {
       onClickCallback
     } = k({

@@ -1,14 +1,14 @@
-import { analyticsEventManager } from '../905/449184'
-import { getFeatureFlags } from '../905/601108'
-import { W } from '../905/632622'
-import { getSingletonSceneGraph } from '../905/700578'
-import { atomStoreManager } from '../figma_app/27355'
-import { mapEditorTypeToStringWithError } from '../figma_app/53721'
-import { stringifyPoint, stringifyRectangle, stringifyVisibleArea } from '../figma_app/407767'
-import { fullscreenValue } from '../figma_app/455680'
-import { openFileKeyAtom } from '../figma_app/516028'
-import { FRAME_SELECTION_VERSION, getBestFrame, getFrameSelectionConfig } from '../figma_app/663669'
-import { editorTypeAtom } from '../figma_app/976749'
+import { analyticsEventManager } from '../905/449184';
+import { getFeatureFlags } from '../905/601108';
+import { selectedNodeGuidAtom } from '../905/632622';
+import { getSingletonSceneGraph } from '../905/700578';
+import { atomStoreManager } from '../figma_app/27355';
+import { mapEditorTypeToStringWithError } from '../figma_app/53721';
+import { stringifyPoint, stringifyRectangle, stringifyVisibleArea } from '../figma_app/407767';
+import { fullscreenValue } from '../figma_app/455680';
+import { openFileKeyAtom } from '../figma_app/516028';
+import { FRAME_SELECTION_VERSION, getBestFrame, getFrameSelectionConfig } from '../figma_app/663669';
+import { editorTypeAtom } from '../figma_app/976749';
 
 // Original function name: $$h0
 // Tracks auto-suggest trigger shadowing events with immediate and delayed logging.
@@ -17,26 +17,29 @@ import { editorTypeAtom } from '../figma_app/976749'
  * @param insertedLocation - The point where the node was inserted.
  * @param insertedNodeGuid - The GUID of the inserted node.
  */
-export function trackAutoSuggestTriggerShadowing(insertedLocation: { x: number, y: number }, insertedNodeGuid: string): void {
+export function trackAutoSuggestTriggerShadowing(insertedLocation: {
+  x: number;
+  y: number;
+}, insertedNodeGuid: string): void {
   if (!getFeatureFlags().anticipation_trigger_shadow) {
-    return
+    return;
   }
 
   // Track immediate event
   analyticsEventManager.trackDefinedEvent('auto_suggest.trigger_shadowing', buildTriggerShadowingEventData({
     insertedLocation,
     insertedNodeGuid,
-    isDelayed: false,
-  }))
+    isDelayed: false
+  }));
 
   // Track delayed event after 5 seconds
   setTimeout(() => {
     analyticsEventManager.trackDefinedEvent('auto_suggest.trigger_shadowing', buildTriggerShadowingEventData({
       insertedLocation,
       insertedNodeGuid,
-      isDelayed: true,
-    }))
-  }, 5000)
+      isDelayed: true
+    }));
+  }, 5000);
 }
 
 // Original function name: g
@@ -47,27 +50,31 @@ export function trackAutoSuggestTriggerShadowing(insertedLocation: { x: number, 
  * @returns The event data object.
  */
 function buildTriggerShadowingEventData(params: {
-  insertedLocation: { x: number, y: number }
-  insertedNodeGuid: string
-  isDelayed: boolean
+  insertedLocation: {
+    x: number;
+    y: number;
+  };
+  insertedNodeGuid: string;
+  isDelayed: boolean;
 }): Record<string, any> {
-  const { insertedLocation, insertedNodeGuid, isDelayed } = params
-
-  const lastSelectedNodeGuid = atomStoreManager.get(W)
-  const sceneGraph = getSingletonSceneGraph()
-  const insertedNode = sceneGraph.get(insertedNodeGuid)
-  const parentNode = insertedNode?.parentNode
-  const lastSelectedNode = lastSelectedNodeGuid ? sceneGraph.get(lastSelectedNodeGuid) : undefined
-  const viewportInfo = fullscreenValue.getViewportInfo()
-  const fileKey = atomStoreManager.get(openFileKeyAtom) ?? undefined
-  const editorType = atomStoreManager.get(editorTypeAtom)
-  const productType = editorType ? mapEditorTypeToStringWithError(editorType) : undefined
-
-  const startTime = performance.now()
-  const dominantFrameGuid = getBestFrame(viewportInfo, getFrameSelectionConfig())
-  const endTime = performance.now()
-  const dominantFrameNode = dominantFrameGuid ? sceneGraph.get(dominantFrameGuid) : undefined
-
+  const {
+    insertedLocation,
+    insertedNodeGuid,
+    isDelayed
+  } = params;
+  const lastSelectedNodeGuid = atomStoreManager.get(selectedNodeGuidAtom);
+  const sceneGraph = getSingletonSceneGraph();
+  const insertedNode = sceneGraph.get(insertedNodeGuid);
+  const parentNode = insertedNode?.parentNode;
+  const lastSelectedNode = lastSelectedNodeGuid ? sceneGraph.get(lastSelectedNodeGuid) : undefined;
+  const viewportInfo = fullscreenValue.getViewportInfo();
+  const fileKey = atomStoreManager.get(openFileKeyAtom) ?? undefined;
+  const editorType = atomStoreManager.get(editorTypeAtom);
+  const productType = editorType ? mapEditorTypeToStringWithError(editorType) : undefined;
+  const startTime = performance.now();
+  const dominantFrameGuid = getBestFrame(viewportInfo, getFrameSelectionConfig());
+  const endTime = performance.now();
+  const dominantFrameNode = dominantFrameGuid ? sceneGraph.get(dominantFrameGuid) : undefined;
   return {
     fileKey,
     insertedLocation: stringifyPoint(insertedLocation),
@@ -87,9 +94,9 @@ function buildTriggerShadowingEventData(params: {
     version: FRAME_SELECTION_VERSION,
     isDelayedLog: isDelayed,
     durationMs: endTime - startTime,
-    productType,
-  }
+    productType
+  };
 }
 
 // Original export name: L
-export const L = trackAutoSuggestTriggerShadowing
+export const L = trackAutoSuggestTriggerShadowing;

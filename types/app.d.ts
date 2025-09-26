@@ -1,4 +1,5 @@
-import { ke } from '../src/905/309735'
+import type { TSSceneGraph } from '../src/figma_app/518682'
+
 
 export interface AppState {
   optimist: any[]
@@ -1623,7 +1624,7 @@ export interface Mirror {
   appModel: AppModel
   selectionProperties: SelectionProperties
   selectedStyleProperties: SelectedStyleProperties
-  sceneGraph: SceneGraph
+  sceneGraph: TSSceneGraph
   sceneGraphSelection: SceneGraphSelection
   objectsPanelRowRebuildCounter: number
   selectionPaints: SelectionPaints
@@ -3273,9 +3274,9 @@ export interface SelectionProperties {
   intrinsicLineHeight: number
   fontFamily: string
   fontStyle: string
-  'arcStart': any
-  'arcSweep': any
-  'arcRadius': any
+  arcStart: any
+  arcSweep: any
+  arcRadius: any
 }
 
 export interface AriaAttributes {

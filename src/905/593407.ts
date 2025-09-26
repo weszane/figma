@@ -13,7 +13,7 @@ import { overlayIdsAtom } from "../905/12032";
 import { NT, g5 } from "../figma_app/579169";
 import { selectUserFlag } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
-import { M } from "../905/152487";
+import { OnboardingSequence } from "../905/152487";
 import { isAllowedToSeeNux } from "../905/14910";
 import { e as _$$e2 } from "../905/107684";
 import { hib } from "../figma_app/6204";
@@ -142,7 +142,7 @@ export function $$F0({
       t();
     }, 2e3) : t();
   });
-  return jsx(M, {
+  return jsx(OnboardingSequence, {
     isShowing,
     testId: "tos_agreement_overlay",
     children: jsx(L, {

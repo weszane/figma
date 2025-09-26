@@ -12,7 +12,7 @@ import { lW } from "../figma_app/850075";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { isWhiteboardFileType } from "../figma_app/976749";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { liveStoreInstance } from "../905/713695";
 import { Du, Vq, Rt } from "../figma_app/979658";
 import { PI, A5, rp } from "../figma_app/703988";
@@ -192,7 +192,7 @@ let L = ms;
 let A = c$;
 let B = "FIGJAM_LIBRARY_ITEM_DROPDOWN_KEY";
 export function $$P1() {
-  let e = Um();
+  let e = useDropdownState();
   let t = liveStoreInstance.File.useValue(e?.data?.fileKey).data;
   let s = cX().setSelectedCategory;
   let a = useDispatch();

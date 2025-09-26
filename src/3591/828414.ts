@@ -23,7 +23,7 @@ import { PluginAction } from "../905/15667";
 import { KE } from "../905/116101";
 import { withTrackedClick } from "../figma_app/831799";
 import { useCanRunExtensions, findLocalPluginById } from "../figma_app/844435";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { M as _$$M } from "../figma_app/170366";
 import { getPluginsMenuOpenDirectory, hasOrgRole, getPluginVersion } from "../figma_app/300692";
 import { PluginManager } from "../figma_app/612938";
@@ -334,7 +334,7 @@ function eg(e) {
   });
 }
 ($$n2 || ($$n2 = {})).Tile = function (e) {
-  let i = Um();
+  let i = useDropdownState();
   let t = i?.type === lD && i.data.localFileId === e.plugin.localFileId;
   let n = useDispatch();
   let s = useRef(null);
@@ -405,7 +405,7 @@ function eg(e) {
     });
   }
   e.Tile = function (e) {
-    let t = Um();
+    let t = useDropdownState();
     let n = t?.type === lD && t.data.pluginId === e.plugin.id && t.data.targetRect;
     let s = useDispatch();
     let l = useRef(null);

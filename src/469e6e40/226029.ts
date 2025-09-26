@@ -8,7 +8,7 @@ import { g as _$$g } from "../4452/983384";
 import { e as _$$e } from "../905/621515";
 import { useCurrentPrivilegedPlan, useTeamPlanFeatures, useCurrentPlanUser, checkOrgUserPermission, useCurrentPublicPlan } from "../figma_app/465071";
 import { WZ } from "../905/893645";
-import { F_, EL } from "../905/858282";
+import { ArrowPosition, PositioningStrategy } from "../905/858282";
 import { rRT, LPt } from "../figma_app/6204";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonPrimitive } from "../905/632989";
@@ -53,7 +53,7 @@ import { Ii } from "../figma_app/425283";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { UpgradeAction } from "../905/370443";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { Rb, qW, ZW, eC as _$$eC } from "../figma_app/982327";
 import { ps } from "../figma_app/845611";
 import { trackSidebarClick } from "../905/34809";
@@ -90,7 +90,7 @@ function g(e) {
         planName: a.data
       }),
       description: renderI18nText("admin_settings.sidebar.onboarding.you_can_now_manage_admin_settings_separately"),
-      arrowPosition: F_.LEFT_TITLE,
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       emphasized: !0,
       trackingContextName: `${tg} First tooltip`,
       targetKey: KB,
@@ -272,8 +272,8 @@ let ej = {
         canShow: e => !e
       });
     });
-    return jsx(rq, {
-      arrowPosition: F_.LEFT_TITLE,
+    return jsx(OnboardingModal, {
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       clickOutsideToHide: !0,
       description: renderI18nText("team_admin.onboarding.manage_unassigned_drafts.team_description"),
       isShowing,
@@ -284,7 +284,7 @@ let ej = {
         onClick: complete,
         ctaTrackingDescriptor: UpgradeAction.DONE
       },
-      shouldCenterArrow: EL.FALLBACK,
+      shouldCenterArrow: PositioningStrategy.FALLBACK,
       targetKey: Rb,
       title: renderI18nText("team_admin.onboarding.manage_unassigned_drafts.title"),
       trackingContextName: qW,
@@ -698,7 +698,7 @@ function eU() {
   }) => e);
   return jsx("div", {
     "data-test-id": "admin-sidebar-user-information",
-    className: cssBuilderInstance.bb1.bSolid.wFull.colorBorder.$$if(e, cssBuilderInstance.bt1).$,
+    className: cssBuilderInstance.bb1.bSolid.wFull.colorBorder.if(e, cssBuilderInstance.bt1).$,
     children: jsx(Xg, {})
   });
 }

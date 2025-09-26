@@ -7,7 +7,7 @@ import { getFeatureFlags } from '../905/601108';
 import { currentSelectionAtom } from '../905/617744';
 import { logError } from '../905/714362';
 import { WB as getObservableState } from '../905/761735';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { atomStoreManager } from '../figma_app/27355';
 import { FFileType } from '../figma_app/191312';
 import { encodeUri } from '../figma_app/930338';
@@ -185,8 +185,8 @@ function getEditorType(e: string, t: any): string {
 function optimizeUrl(e: URL): URL {
   try {
     const t = e.pathname.split('/')[1];
-    if (t === 'file') e.searchParams.append('type', FFileType.DESIGN);else if (t === 'design') e.searchParams.append('m', 'auto');
-  } catch {}
+    if (t === 'file') e.searchParams.append('type', FFileType.DESIGN); else if (t === 'design') e.searchParams.append('m', 'auto');
+  } catch { }
   return e;
 }
 
@@ -311,7 +311,7 @@ export async function restoreFiles(e: string[]): Promise<{
   status: 'success' | 'error';
   message?: string;
 }> {
-  const t = XHR.post('/api/files_batch/restore', {
+  const t = sendWithRetry.post('/api/files_batch/restore', {
     files: e.map(key => ({
       key
     })),

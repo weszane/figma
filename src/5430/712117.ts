@@ -54,7 +54,7 @@ function N({
         throwTypeError(r);
     }
   }, [r]);
-  let d = useMemo(() => styleBuilderInstance.$$if(!!o, {
+  let d = useMemo(() => styleBuilderInstance.if(!!o, {
     aspectRatio: o
   }).$, [o]);
   return jsx("div", {
@@ -202,7 +202,7 @@ function M({
     e.stopPropagation();
     y(!1);
   }, [y]);
-  let b = useMemo(() => styleBuilderInstance.$$if(!!c, {
+  let b = useMemo(() => styleBuilderInstance.if(!!c, {
     aspectRatio: c
   }).$, [c]);
   return f ? jsxs("div", {

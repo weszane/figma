@@ -14,8 +14,8 @@ import { SidebarRow } from "../451de8f0/94979";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { j0 } from "../1250/524544";
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
 let $$x0 = "drafts_to_move_onboarding_key";
 let y = 443 == require.j ? 3e5 : null;
 let v = new Date("2024-06-03");
@@ -42,7 +42,7 @@ export function $$w1(e) {
         },
         type: "long-running-draft-migration",
         timeoutOverride: 1 / 0,
-        onDismiss: () => {}
+        onDismiss: () => { }
       }));
       e(postUserFlag({
         long_running_draft_migration_toast_shown: !0
@@ -76,7 +76,7 @@ export function $$w1(e) {
   let j = n.seen_drafts_to_move_notice_icon ? w > 0 ? jsx(Badge, {
     text: w > 99 ? "99+" : `${w}`,
     color: T ? BadgeColor.TOOLBAR_SELECTED : BadgeColor.DEFAULT,
-    className: cssBuilderInstance.mr8.$$if(!T, cssBuilderInstance.colorBgBrandTertiary.colorText).$
+    className: cssBuilderInstance.mr8.if(!T, cssBuilderInstance.colorBgBrandTertiary.colorText).$
   }) : void 0 : jsx(_$$E, {
     className: cssBuilderInstance.mr8.$
   });

@@ -6,7 +6,7 @@ import { VideoCppBindings } from "../figma_app/763686";
 import { logger } from "../905/651849";
 import { useLatestRef } from "../figma_app/922077";
 import { Point } from "../905/736624";
-import { aB, uz } from "../905/284552";
+import { VideoPlayerError, loadVideoSource } from "../905/284552";
 import { LargeLoadingSpinner } from "../figma_app/858013";
 import { jS, Pv } from "../905/619652";
 import { _P } from "../figma_app/2590";
@@ -83,26 +83,26 @@ export function $$$$A0(e) {
     }));
   }, [L, width, height]);
   let j = useCallback(async e => {
-    if (!openFileKey || !e) throw new aB("Missing fallback meta hash");
+    if (!openFileKey || !e) throw new VideoPlayerError("Missing fallback meta hash");
     try {
       let t = await fileApiHandler.getVideosDownload({
         fileKey: openFileKey,
         hexHash: e
       });
-      if (200 !== t.status || t.data.error) throw new aB(`Request for fallback URL failed (${t.status})`);
+      if (200 !== t.status || t.data.error) throw new VideoPlayerError(`Request for fallback URL failed (${t.status})`);
       return t.data.meta.signed_url;
     } catch (e) {
-      throw new aB(`Failed to download fallback video: ${e.message ?? e}`);
+      throw new VideoPlayerError(`Failed to download fallback video: ${e.message ?? e}`);
     }
   }, [openFileKey]);
   let U = useCallback(async (e, t, i) => {
     let n = performance.now();
     try {
-      await uz(e, t, z.current);
+      await loadVideoSource(e, t, z.current);
       let r = (performance.now() - n) / 1e3;
       M(i, t, r);
     } catch (r) {
-      if (!(r instanceof aB)) throw r;
+      if (!(r instanceof VideoPlayerError)) throw r;
       let e = (performance.now() - n) / 1e3;
       F(`Failed to load ${t ? "HLS" : "fallback"} video: ${r.message ?? r}`, i, t, e);
       return r;
@@ -130,14 +130,14 @@ export function $$$$A0(e) {
     try {
       await U(srcWithHLS, !0, n);
     } catch (t) {
-      if (!(t instanceof aB)) throw t;
+      if (!(t instanceof VideoPlayerError)) throw t;
       logger.warn("Reverting to fallback media source");
       await B(n);
       let e = await j(downloadHash);
       try {
         await U(e, !1, n);
       } catch (e) {
-        if (!(e instanceof aB)) throw e;
+        if (!(e instanceof VideoPlayerError)) throw e;
       }
     }
   }, [P, j, U]);

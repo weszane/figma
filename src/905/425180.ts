@@ -1,157 +1,337 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { useRef, useState, useEffect, useCallback } from "react";
-import { UI3ConditionalWrapper } from "../905/341359";
-import s from "classnames";
-import { cssBuilderInstance } from "../cssbuilder/589278";
-import { styleBuilderInstance } from "../905/941192";
-import { TrackingProvider } from "../figma_app/831799";
-import { M } from "../905/152487";
-import { F_ } from "../905/748636";
-import { Ay, gm } from "../figma_app/419216";
-import { eP } from "../figma_app/195407";
-import { x } from "../figma_app/849451";
-import { b as _$$b } from "../figma_app/199304";
-import { j } from "../figma_app/928756";
-import { l as _$$l } from "../figma_app/826369";
-import { M as _$$M } from "../figma_app/826981";
-import { NotModalType } from "../905/11928";
-import { P, h as _$$h } from "../figma_app/546366";
-var o = s;
-function I(e) {
-  let t = useRef(null);
-  let i = e.innerRef ?? t;
-  return jsx(w, {
-    ...e,
-    innerRef: i
-  });
+import classNames from 'classnames'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { NotModalType } from '../905/11928'
+import { OnboardingSequence } from '../905/152487'
+import { UI3ConditionalWrapper } from '../905/341359'
+import { ArrowPosition } from '../905/858282'
+import { styleBuilderInstance } from '../905/941192'
+import { cssBuilderInstance } from '../cssbuilder/589278'
+import { eP } from '../figma_app/195407'
+import { b as _$$b } from '../figma_app/199304'
+import { Ay, gm } from '../figma_app/419216'
+import { h as _$$h, P } from '../figma_app/546366'
+import { l as _$$l } from '../figma_app/826369'
+import { M as _$$M } from '../figma_app/826981'
+import { TrackingProvider } from '../figma_app/831799'
+import { x } from '../figma_app/849451'
+import { j } from '../figma_app/928756'
+
+
+
+interface ModalProps {
+  innerRef?: React.RefObject<HTMLDivElement>
+  fixedPosition?: boolean
+  forceUI3Theme?: boolean
+  width?: number
+  targetKey?: string
+  isCanvasNode?: boolean
+  arrowPadding?: number
+  pointToLeftEdge?: boolean
+  pointToTopEdge?: boolean
+  shouldCenterArrow?: boolean
+  arrowPosition?: ArrowPosition
+  onTargetLost?: () => void
+  pointerOffsetOverride?: number
+  shouldRepositionOnTargetLost?: boolean
+  location?: {
+    left: number
+    top: number
+    pointerPosition?: ArrowPosition
+    pointerOffset?: number
+  }
+  onClose: (reason: string) => void
+  isTooltip?: boolean
+  emphasized?: boolean
+  disableHighlight?: boolean
+  highlightBlue?: boolean
+  media?: boolean
+  primaryCta?: unknown
+  secondaryCta?: unknown
+  clickOutsideToHide?: boolean
+  shouldDisableAnimation?: boolean
+  trackingContextName?: string
+  trackingProperties?: Record<string, unknown>
+  zIndex?: NotModalType
+  shouldHideArrow?: boolean
+  children?: React.ReactNode
 }
-function E(e) {
-  let [t, i] = useState(0);
-  let a = e.width ?? 240;
-  let [s, o] = useState({
-    top: window.innerHeight / 2 - t / 2,
-    left: window.innerWidth / 2 - a / 2
-  });
-  let l = useRef(null);
-  let d = l.current?.clientHeight;
+
+interface Position {
+  top: number
+  left: number
+}
+
+/**
+ * FixedPositionModal - Handles modals with fixed positioning
+ * (Original function: I)
+ */
+function FixedPositionModal({ innerRef, ...props }: ModalProps): JSX.Element {
+  const defaultRef = useRef<HTMLDivElement>(null)
+  const resolvedRef = innerRef ?? defaultRef
+
+  return jsx(ModalContainer, {
+    ...props,
+    innerRef: resolvedRef,
+  })
+}
+
+/**
+ * DynamicPositionModal - Handles modals with dynamic positioning
+ * (Original function: E)
+ */
+function DynamicPositionModal(props: ModalProps): JSX.Element {
+  const {
+    width = 240,
+    targetKey,
+    isCanvasNode,
+    arrowPadding = 0,
+    pointToLeftEdge,
+    pointToTopEdge,
+    shouldCenterArrow,
+    arrowPosition = ArrowPosition.TOP,
+    onTargetLost,
+    pointerOffsetOverride,
+    shouldRepositionOnTargetLost = true,
+    onClose,
+  } = props
+
+  const [modalHeight, setModalHeight] = useState<number>(0)
+  const modalRef = useRef<HTMLDivElement>(null)
+  const previousPositionRef = useRef<{ left: number; top: number; pointerPosition?: ArrowPosition; pointerOffset?: number } | null>(null)
+
+  // Calculate initial center position
+  const [centerPosition, setCenterPosition] = useState<Position>(() => ({
+    top: window.innerHeight / 2 - modalHeight / 2,
+    left: window.innerWidth / 2 - width / 2,
+  }))
+
+  // Get current modal height
+  const modalHeightCurrent = modalRef.current?.clientHeight
+
+  // Update position on resize and when height is available
   useEffect(() => {
-    let e = () => {
-      d && o({
-        top: window.innerHeight / 2 - d / 2,
-        left: window.innerWidth / 2 - a / 2
-      });
-    };
-    d && (i(d), e());
-    window.addEventListener("resize", e);
-    return () => window.removeEventListener("resize", e);
-  }, [d, a]);
-  j(() => e.onClose("escape_button_pressed"));
-  let c = e.isCanvasNode ? Ay : eP;
-  let u = useRef(null);
-  let g = c({
-    targetKey: e.targetKey,
-    height: t,
-    width: a,
-    topPadding: 4 + (e.arrowPadding ?? 0),
-    alignPointerToLeft: e.pointToLeftEdge,
-    alignPointerToTop: e.pointToTopEdge,
-    shouldCenterArrow: e.shouldCenterArrow,
-    arrowPosition: e.arrowPosition ?? F_.TOP,
-    onTargetLost: e.onTargetLost,
-    pointerOffsetOverride: e.pointerOffsetOverride
-  });
-  g && (u.current = g);
-  let f = e.shouldRepositionOnTargetLost ?? !0;
-  g || f || (g = u.current);
-  return jsx(w, {
-    ...e,
-    location: g ? {
-      left: g.left,
-      top: g.top,
-      pointerPosition: g.pointerPosition,
-      pointerOffset: g.pointerOffset
-    } : {
-      left: s.left,
-      top: s.top
-    },
-    targetKey: e.targetKey,
-    innerRef: l
-  });
+    const updatePosition = (): void => {
+      if (!modalHeightCurrent) return
+
+      setCenterPosition({
+        top: window.innerHeight / 2 - modalHeightCurrent / 2,
+        left: window.innerWidth / 2 - width / 2,
+      })
+    }
+
+    if (modalHeightCurrent) {
+      setModalHeight(modalHeightCurrent)
+      updatePosition()
+    }
+
+    window.addEventListener('resize', updatePosition)
+    return () => window.removeEventListener('resize', updatePosition)
+  }, [modalHeightCurrent, width])
+
+  // Handle escape key press
+  j(() => onClose('escape_button_pressed'))
+
+  // Calculate target position
+  const targetPositionFunction = isCanvasNode ? Ay : eP
+  const currentPosition = targetPositionFunction({
+    targetKey,
+    height: modalHeight,
+    width,
+    topPadding: 4 + arrowPadding,
+    alignPointerToLeft: pointToLeftEdge,
+    alignPointerToTop: pointToTopEdge,
+    shouldCenterArrow,
+    arrowPosition,
+    onTargetLost,
+    pointerOffsetOverride,
+  })
+
+  // Store previous position for fallback
+  if (currentPosition) {
+    previousPositionRef.current = currentPosition
+  }
+
+  // Use previous position if current is null and repositioning is disabled
+  const finalPosition = currentPosition || (shouldRepositionOnTargetLost ? null : previousPositionRef.current)
+
+  return jsx(ModalContainer, {
+    ...props,
+    location: finalPosition
+      ? {
+        left: finalPosition.left,
+        top: finalPosition.top,
+        pointerPosition: finalPosition.pointerPosition,
+        pointerOffset: finalPosition.pointerOffset,
+      }
+      : {
+        left: centerPosition.left,
+        top: centerPosition.top,
+      },
+    targetKey,
+    innerRef: modalRef,
+  })
 }
-export function $$x0(e) {
-  let {
-    forceUI3Theme = !1
-  } = e;
-  return e.fixedPosition ? jsx(UI3ConditionalWrapper, {
-    disabled: !forceUI3Theme,
-    children: jsx(I, {
-      ...e
+
+/**
+ * ModalRenderer - Main modal component that decides which positioning strategy to use
+ * (Original function: $$x0)
+ */
+export function ModalRenderer({
+  forceUI3Theme = false,
+  fixedPosition,
+  ...props
+}: ModalProps): JSX.Element {
+  return fixedPosition
+    ? jsx(UI3ConditionalWrapper, {
+      disabled: !forceUI3Theme,
+      children: jsx(FixedPositionModal, {
+        ...props,
+      }),
     })
-  }) : jsx(UI3ConditionalWrapper, {
-    disabled: !forceUI3Theme,
-    children: jsx(E, {
-      ...e
+    : jsx(UI3ConditionalWrapper, {
+      disabled: !forceUI3Theme,
+      children: jsx(DynamicPositionModal, {
+        ...props,
+      }),
     })
-  });
 }
-let S = {
+
+// Z-index mapping for different modal types
+const Z_INDEX_STYLES = {
   [NotModalType.MODAL]: cssBuilderInstance.zIndexModal,
   [NotModalType.SECONDARY_MODAL]: cssBuilderInstance.zIndexSecondaryModal,
   [NotModalType.TERTIARY_MODAL]: cssBuilderInstance.zIndexTertiaryModal,
   [NotModalType.UNSET]: cssBuilderInstance,
-  [NotModalType.NOTIFICATION_MODAL]: cssBuilderInstance
-};
-function w(e) {
-  let {
-    location,
-    onClose,
-    zIndex = NotModalType.SECONDARY_MODAL
-  } = e;
-  let s = cssBuilderInstance.fixed.borderBox.bRadius2.pb16.pl16.pr16.fontInter.flex.flexColumn.match(zIndex, S).$$if(!!e.media, cssBuilderInstance.pt12, cssBuilderInstance.pt16).$;
-  let u = e.width ?? 240;
-  let p = styleBuilderInstance.$$if(e.emphasized, styleBuilderInstance.colorBgBrand.colorTextOnbrand, styleBuilderInstance.colorBg.colorText).$$if(e.isTooltip, styleBuilderInstance.colorBgTooltip.colorTextTooltip).add({
-    width: `${u}px`,
-    boxShadow: "var(--elevation-400-menu-panel)",
-    left: `${location.left}px`,
-    top: `${location.top}px`
-  }).$;
-  let h = e.clickOutsideToHide ?? (void 0 === e.primaryCta && void 0 === e.secondaryCta);
-  let _ = useCallback(() => onClose("clicked_outside"), [onClose]);
-  _$$l(h, e.innerRef, _);
-  return jsxs(TrackingProvider, {
-    name: e.trackingContextName,
-    properties: e.trackingProperties,
-    children: [!e.disableHighlight && e.targetKey && jsx(x, {
-      target: e.targetKey,
-      isBrandColor: e.highlightBlue
-    }), jsxs(_$$M, {
-      isTooltip: e.isTooltip,
-      className: o()(s, P, {
-        [_$$h]: e.zIndex === NotModalType.NOTIFICATION_MODAL
-      }),
-      style: p,
-      ref: e.innerRef,
-      shouldDisableAnimation: e.shouldDisableAnimation,
-      children: [void 0 !== location.pointerPosition && !e.shouldHideArrow && jsx(gm, {
-        arrowPosition: location.pointerPosition,
-        arrowOffset: location.pointerOffset,
-        modalColor: p.backgroundColor
-      }), jsx(_$$b, {
-        ...e
-      })]
-    })]
-  });
-}
-export function $$C1(e) {
-  return jsx(M, {
-    isShowing: e.isShowing,
-    userFlagOnShow: e.userFlagOnShow,
-    testId: e.testId,
-    forceEditorTheme: e.forceEditorTheme,
-    children: jsx($$x0, {
-      ...e
+  [NotModalType.NOTIFICATION_MODAL]: cssBuilderInstance,
+} as const
+
+/**
+ * ModalContainer - Core modal container with styling and event handling
+ * (Original function: w)
+ */
+function ModalContainer({
+  location,
+  onClose,
+  zIndex = NotModalType.SECONDARY_MODAL,
+  width = 240,
+  emphasized,
+  isTooltip,
+  disableHighlight,
+  targetKey,
+  highlightBlue,
+  media,
+  clickOutsideToHide,
+  innerRef,
+  shouldDisableAnimation,
+  trackingContextName,
+  trackingProperties,
+  shouldHideArrow,
+  ...props
+}: ModalProps): JSX.Element {
+  // Build CSS classes
+  const containerClasses = cssBuilderInstance
+    .fixed
+    .borderBox
+    .bRadius2
+    .pb16
+    .pl16
+    .pr16
+    .fontInter
+    .flex
+    .flexColumn
+    .match(zIndex, Z_INDEX_STYLES)
+    .if(!!media, cssBuilderInstance.pt12, cssBuilderInstance.pt16)
+    .$
+
+  // Build inline styles
+  const modalStyles = styleBuilderInstance
+    .if(emphasized,
+      styleBuilderInstance.colorBgBrand.colorTextOnbrand,
+      styleBuilderInstance.colorBg.colorText)
+    .if(isTooltip,
+      styleBuilderInstance.colorBgTooltip.colorTextTooltip)
+    .add({
+      width: `${width}px`,
+      boxShadow: 'var(--elevation-400-menu-panel)',
+      left: location ? `${location.left}px` : '0px',
+      top: location ? `${location.top}px` : '0px',
     })
-  });
+    .$
+
+  // Determine if clicking outside should close the modal
+  const shouldCloseOnClickOutside = clickOutsideToHide ?? (props.primaryCta === undefined && props.secondaryCta === undefined)
+
+  // Handle outside clicks
+  const handleOutsideClick = useCallback(() => onClose('clicked_outside'), [onClose])
+  _$$l(shouldCloseOnClickOutside, innerRef, handleOutsideClick)
+
+  return jsxs(TrackingProvider, {
+    name: trackingContextName,
+    properties: trackingProperties,
+    children: [
+      // Highlight target if needed
+      !disableHighlight && targetKey && jsx(x, {
+        target: targetKey,
+        isBrandColor: highlightBlue,
+      }),
+
+      // Modal content container
+      jsxs(_$$M, {
+        isTooltip,
+        className: classNames(containerClasses, P, {
+          [_$$h]: zIndex === NotModalType.NOTIFICATION_MODAL,
+        }),
+        style: modalStyles,
+        ref: innerRef,
+        shouldDisableAnimation,
+        children: [
+          // Arrow indicator
+          location?.pointerPosition !== undefined &&
+          !shouldHideArrow &&
+          jsx(gm, {
+            arrowPosition: location.pointerPosition,
+            arrowOffset: location.pointerOffset,
+            modalColor: modalStyles.backgroundColor,
+          }),
+
+          // Modal content
+          jsx(_$$b, {
+            ...props,
+          }),
+        ],
+      }),
+    ],
+  })
 }
-export const on = $$x0;
-export const rq = $$C1;
+
+/**
+ * OnboardingModal - Modal wrapper for onboarding sequences
+ * (Original function: $$C1)
+ */
+export function OnboardingModal({
+  isShowing,
+  userFlagOnShow,
+  testId,
+  forceEditorTheme,
+  ...props
+}: ModalProps & {
+  isShowing?: boolean
+  userFlagOnShow?: string
+  testId?: string
+  forceEditorTheme?: boolean
+}): JSX.Element {
+  return jsx(OnboardingSequence, {
+    isShowing,
+    userFlagOnShow,
+    testId,
+    forceEditorTheme,
+    children: jsx(ModalRenderer, {
+      ...props,
+    }),
+  })
+}
+
+// Export aliases
+export const on = ModalRenderer
+export const rq = OnboardingModal

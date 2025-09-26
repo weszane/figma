@@ -1,6 +1,6 @@
 import { WB } from "../905/761735";
 import { handleOptimistTransactionWithError } from "../905/150006";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { createOptimistThunk } from "../905/350402";
 import { Q$ } from "../figma_app/934707";
@@ -18,7 +18,7 @@ export function $$p1(e, t, r) {
         bell: e
       }
     }
-  }, XHR.put("/api/user_notifications_bell", {
+  }, sendWithRetry.put("/api/user_notifications_bell", {
     bell: e,
     current_org_id: i
   }));
@@ -29,7 +29,7 @@ export let $$_0 = createOptimistThunk((e, t) => {
     return;
   }
   return handleOptimistTransactionWithError({
-    requestPromise: XHR.put("/api/user_notifications_bell/community/clear"),
+    requestPromise: sendWithRetry.put("/api/user_notifications_bell/community/clear"),
     fallbackError: getI18nString("user_notification.an_error_occurred_marking_all_as_read"),
     store: e,
     next: e.dispatch,

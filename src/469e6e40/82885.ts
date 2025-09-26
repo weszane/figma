@@ -8,7 +8,7 @@ import { Xf } from "../figma_app/153916";
 import { dayjs } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
 import { reportError } from "../905/11";
-import { pW } from "../905/160095";
+import { TrackedLinkButton } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { TrackingProvider } from "../figma_app/831799";
@@ -54,7 +54,7 @@ function v({
       children: [jsx(BannerMessage, {
         title: y,
         children: w
-      }), jsx(pW, {
+      }), jsx(TrackedLinkButton, {
         href: "https://help.figma.com/hc/articles/27468498501527",
         variant: "secondary",
         trusted: !0,

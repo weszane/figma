@@ -25,7 +25,7 @@ import { c$, wv } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getNudgeAmounts } from "../figma_app/740163";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { kG } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
 import { calculatePickerPositionLeft } from "../905/959568";
@@ -48,7 +48,7 @@ let X = "responsive_text_style_variants--modalBody--NAqJo";
 let q = "responsive_text_style_variants--breakpointDropdownContainer--0-xZj";
 let J = "responsive_text_style_variants--textInput--zcSFY styles_properties_form--textInput--rWj8- raw_components--textInput--t9D8g raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u";
 export function $$Z0() {
-  let e = BK("sites-responsive-text-style-dropdown");
+  let e = useDropdown("sites-responsive-text-style-dropdown");
   let t = useRef(null);
   let r = t.current?.getBoundingClientRect();
   let a = useRef(null);

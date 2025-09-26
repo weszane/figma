@@ -12,7 +12,7 @@ import { analyticsEventManager } from "../905/449184";
 import { isGovCluster, getInitialOptions } from "../figma_app/169182";
 import { b as _$$b } from "../figma_app/246400";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -54,7 +54,7 @@ export function $$M1({
       selected: s === e,
       pricing: a,
       tier: l
-    }, s)), jsx(Ph, {
+    }, s)), jsx(TrackedLink, {
       newTab: !0,
       href: s,
       trackingProperties: {
@@ -265,7 +265,7 @@ export function $$V0({
     }), jsxs("div", {
       className: D,
       children: [jsx("div", {
-        className: x.colorBorderSelected.$$if(p, cssBuilderInstance.colorBorder).$,
+        className: x.colorBorderSelected.if(p, cssBuilderInstance.colorBorder).$,
         children: jsx(U, {
           seatType: i,
           availableSeats: e,
@@ -274,7 +274,7 @@ export function $$V0({
         })
       }), k && jsx("div", {
         "data-testid": "to-seat-type-message",
-        className: $$m()(O, cssBuilderInstance.colorBgSelected.$$if(p, cssBuilderInstance.colorBgWarningTertiary).$),
+        className: $$m()(O, cssBuilderInstance.colorBgSelected.if(p, cssBuilderInstance.colorBgWarningTertiary).$),
         children: jsx(TextWithTruncation, {
           fontSize: 11,
           color: "default",

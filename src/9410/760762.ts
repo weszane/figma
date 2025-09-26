@@ -39,7 +39,7 @@ import { useStarterGlobalFileLimitsExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { h as _$$h } from "../905/864281";
 import { TeamFileCountsByTeamId } from "../figma_app/43951";
-import { EL } from "../905/748636";
+import { PositioningStrategy } from "../905/748636";
 import { CR, uv } from "../figma_app/419216";
 import { TextWithTruncation } from "../905/984674";
 import { iG } from "../figma_app/231614";
@@ -205,7 +205,7 @@ function ee(e) {
       disableClickOutsideToHide: !0,
       dismissModal,
       pointerPaddingOffset,
-      shouldCenterArrow: EL.FALLBACK,
+      shouldCenterArrow: PositioningStrategy.FALLBACK,
       shouldDismissWhenLostDOMTarget: !0,
       targetKey: _$$l,
       topPadding,
@@ -280,7 +280,7 @@ function ei({
       width: 300,
       targetKey: _$$l,
       dismissModal: e,
-      shouldCenterArrow: EL.FALLBACK,
+      shouldCenterArrow: PositioningStrategy.FALLBACK,
       hideCloseButton: !0,
       children: jsxs("div", {
         className: "pro_trial_upsell_modal--container--vCFd5",

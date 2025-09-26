@@ -111,7 +111,7 @@ export function $$w0({
         searchResultRef: L
       })]
     }) : jsx("div", {
-      className: cssBuilderInstance.$$if(d, cssBuilderInstance.hFull).$,
+      className: cssBuilderInstance.if(d, cssBuilderInstance.hFull).$,
       children: jsx(_$$S, {
         fillHeight: d,
         children: jsxs(_$$N, {
@@ -128,7 +128,7 @@ export function $$w0({
     });
   }
   if ("errors" === k.result.status) return jsxs("div", {
-    className: cssBuilderInstance.$$if(d, cssBuilderInstance.hFull).$,
+    className: cssBuilderInstance.if(d, cssBuilderInstance.hFull).$,
     children: [g && jsx(R, {
       title: g.title,
       icon: g.icon
@@ -149,7 +149,7 @@ export function $$w0({
     let e = "";
     "input-text" === k.input.type ? e = k.input.value : F && (e = F.name);
     return jsxs("div", {
-      className: cssBuilderInstance.$$if(d, cssBuilderInstance.hFull).$,
+      className: cssBuilderInstance.if(d, cssBuilderInstance.hFull).$,
       children: [g && jsx(R, {
         title: g.title,
         icon: g.icon

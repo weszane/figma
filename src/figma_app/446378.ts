@@ -1,6 +1,6 @@
 import { liveStoreInstance } from "../905/713695";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 let $$a0 = liveStoreInstance.Query({
   fetch: async e => await $$s1.getNumTemplatesByTeam({
     teamId: e.teamId,
@@ -49,7 +49,7 @@ let $$s1 = new class {
       orgId,
       ...r
     } = e;
-    return XHR.post(`/api/templates/${orgId}/browse`, r);
+    return sendWithRetry.post(`/api/templates/${orgId}/browse`, r);
   }
   getTeamTemplateLimitReached(e) {
     return this.TeamTemplateLimitValidator.validate(({

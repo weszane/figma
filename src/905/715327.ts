@@ -64,9 +64,9 @@ import { e as _$$e3 } from "../905/621515";
 import { UC } from "../figma_app/33126";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { KI } from "../figma_app/797994";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { N as _$$N2 } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { getCurrentTeamId } from "../figma_app/598018";
 import { l6, c$ } from "../905/794875";
@@ -211,7 +211,7 @@ function eN() {
   let i = UC(t);
   let s = useAtomWithSubscription(i);
   let o = useAtomWithSubscription(eR);
-  let l = Um();
+  let l = useDropdownState();
   let d = _$$e3({
     overlay: UDe,
     priority: _$$N2.DEFAULT_MODAL
@@ -224,7 +224,7 @@ function eN() {
   useEffect(() => {
     l?.type === "subscription-list-filter-select" && d.complete();
   }, [l?.type, d]);
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     isShowing: d.isShowing,
     trackingContextName: "Libraries Workspace Onboarding",
     userFlagOnShow: eT,

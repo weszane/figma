@@ -47,14 +47,14 @@ import { JT } from "../figma_app/632248";
 import { WP, TC, B1, kN, ES } from "../905/198599";
 import { z as _$$z } from "../905/654860";
 import { cq } from "../905/794154";
-import { H as _$$H } from "../905/286442";
+import { usKeyboardFocusHandler } from "../905/286442";
 import { _M } from "../905/487011";
 import { AssetTabType, ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { Q8, Rt, dd } from "../figma_app/604494";
 import { o as _$$o } from "../905/223420";
 import { t as _$$t3 } from "../905/605191";
-import { b as _$$b2 } from "../905/222272";
+import { LayoutContainer } from "../905/222272";
 import { n as _$$n } from "../905/895449";
 import { q as _$$q2 } from "../905/516087";
 import { vj } from "../figma_app/883990";
@@ -491,8 +491,8 @@ export function $$eR6({
           placeholder: eR,
           searchTag: tg ? tf(th) : void 0
         }), to && jsx("div", {
-          className: cssBuilderInstance.$$if(e, cssBuilderInstance.py4).px8.$$if(!e, cssBuilderInstance.pb8).$,
-          children: jsxs(_$$b2, {
+          className: cssBuilderInstance.if(e, cssBuilderInstance.py4).px8.if(!e, cssBuilderInstance.pb8).$,
+          children: jsxs(LayoutContainer, {
             primary: !1,
             gap: 8,
             align: "center",
@@ -503,7 +503,7 @@ export function $$eR6({
             }), jsx(_$$t.TabPanel, {
               ...td[Qx.PLAN_FILE_ASSETS],
               children: jsxs("div", {
-                className: cssBuilderInstance.$$if(!e, cssBuilderInstance.h24).$$if(e, cssBuilderInstance.h32).flex.itemsCenter.$,
+                className: cssBuilderInstance.if(!e, cssBuilderInstance.h24).if(e, cssBuilderInstance.h32).flex.itemsCenter.$,
                 children: [t1 && jsx(_$$i, {
                   onSetAssetType: t => {
                     if (currentSearch) switch (currentSearch.input.type) {
@@ -538,7 +538,7 @@ export function $$eR6({
             }), jsx(_$$t.TabPanel, {
               ...td[Qx.COMMUNITY],
               children: jsx("div", {
-                className: cssBuilderInstance.$$if(!e, cssBuilderInstance.h24).$$if(e, cssBuilderInstance.h32).flex.itemsCenter.$
+                className: cssBuilderInstance.if(!e, cssBuilderInstance.h24).if(e, cssBuilderInstance.h32).flex.itemsCenter.$
               })
             })]
           })
@@ -565,7 +565,7 @@ export function $$eR6({
                   bgTransparentUI3: !0
                 })
               }) : jsxs("div", {
-                className: y()(cssBuilderInstance.gap6.$$if(tj, cssBuilderInstance.hFull).$),
+                className: y()(cssBuilderInstance.gap6.if(tj, cssBuilderInstance.hFull).$),
                 children: [tk && jsx(_$$O, {
                   onLoadStateChange: eH,
                   header: !th && Q ? {
@@ -703,7 +703,7 @@ function eP({
   }
   _$$z(t);
   return jsx("div", {
-    className: cssBuilderInstance.flex.itemsCenter.justifyBetween.py12.$$if(s, cssBuilderInstance.bSolid.bb1.colorBorder).$$if(t, cssBuilderInstance.px12, cssBuilderInstance.px8).$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyBetween.py12.if(s, cssBuilderInstance.bSolid.bb1.colorBorder).if(t, cssBuilderInstance.px12, cssBuilderInstance.px8).$,
     ref: o,
     children: jsxs("div", {
       className: cssBuilderInstance.flex.gap6.itemsCenter.$,
@@ -740,7 +740,7 @@ export function $$ek2({
   let s = useRef(null);
   let {
     active
-  } = _$$H({
+  } = usKeyboardFocusHandler({
     ref: s,
     focusOptions: {
       enableAutoFocus: !1

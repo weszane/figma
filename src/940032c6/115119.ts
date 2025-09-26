@@ -85,7 +85,7 @@ import { sha1Hex } from '../905/125019';
 import { J as _$$J5 } from '../905/125993';
 import { A as _$$A3 } from '../905/126947';
 import { setupAutofocusHandler } from '../905/128376';
-import { w as _$$w3, y as _$$y1 } from '../905/129046';
+import { VideoOverlayComponent, ImageOverlayComponent } from '../905/129046';
 import { KindEnum } from '../905/129884';
 import { MM } from '../905/136701';
 import { _ as _$$_9 } from '../905/144222';
@@ -94,7 +94,7 @@ import { getFileTypePx } from '../905/149328';
 import { x as _$$x2 } from '../905/149501';
 import { e as _$$e9 } from '../905/149844';
 import { hideModal, hideModalHandler, popModalStack, showModal, showModalConditional, showModalHandler } from '../905/156213';
-import { pW as _$$pW } from '../905/160095';
+import { TrackedLinkButton } from '../905/160095';
 import { ServiceCategories } from '../905/165054';
 import { R as _$$R6 } from '../905/165069';
 import { EmbedOption, EmbedProvider, EmbedParamKey } from '../905/165465';
@@ -115,10 +115,10 @@ import { Hz, Of, Yw } from '../905/201596';
 import { q as _$$q4 } from '../905/202542';
 import { FormattedInputVariant1 } from '../905/203369';
 import { h as _$$h3 } from '../905/791079';
-import { O as _$$O9 } from '../905/208152';
+import { ResizeDragContext } from '../905/208152';
 import { N2 } from '../905/213527';
 import { isInvalidValue, isValidValue, MIXED_MARKER, toArray, valueOrFallback } from '../905/216495';
-import { b as _$$b14 } from '../905/217163';
+import { useLibraryFileLink } from '../905/217163';
 import { y as _$$y } from '../905/225297';
 import { resolveMessage } from '../905/231762';
 import { n6 as _$$n3 } from '../905/234821';
@@ -138,9 +138,9 @@ import { O as _$$O3 } from '../905/273186';
 import { Checkbox } from '../905/274480';
 import { U as _$$U3 } from '../905/275247';
 import { useNonMixedSelectionPropertyValue, useSelectionPropertyValue, useSelectionProperty, useSelectedStyleOrSelectionPropertyValue, useUpdateSelectionProperty, useNonMixedSelectedStyleOrSelectionPropertyValues, useSelectionPropertyValues } from '../905/275640';
-import { b as _$$b } from '../905/275748';
+import { LazyComponentFactory } from '../905/275748';
 import { AutoInteractableWrapper } from '../905/277716';
-import { j4 as _$$j9, G5 } from '../905/278499';
+import { AI_ACTION_STARTED, AI_ACTION_ENDED } from '../905/278499';
 import { Z as _$$Z5 } from '../905/279476';
 import { useTheme } from '../905/289770';
 import { createSavepoint } from '../905/294113';
@@ -171,7 +171,7 @@ import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A0 } from '../905/408320';
 import { _ as _$$_0 } from '../905/410717';
 import { h4 as _$$h1, Nz as _$$Nz } from '../905/417232';
-import { rq as _$$rq } from '../905/425180';
+import { OnboardingModal } from '../905/425180';
 import { e as _$$e10 } from '../905/428849';
 import { N as _$$N8 } from '../905/430294';
 import { useModalManager } from '../905/437088';
@@ -254,7 +254,7 @@ import { L as _$$L2 } from '../905/704296';
 import { getCollectionView } from '../905/707993';
 import { liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
-import { pn as _$$pn } from '../905/714538';
+import { getFontStyleMapping } from '../905/714538';
 import { SvgComponent } from '../905/714743';
 import { TabLoop } from '../905/718764';
 import { h4 as _$$h11, Nz as _$$Nz2 } from '../905/720338';
@@ -264,7 +264,7 @@ import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { A as _$$A22 } from '../905/744692';
 import { T as _$$T3 } from '../905/745591';
 import { l as _$$l4 } from '../905/745972';
-import { F_ as _$$F_, od as _$$od, Ao } from '../905/748636';
+import { ArrowPosition, DraggableModal, DraggableModalManager } from '../905/748636';
 import { H as _$$H6 } from '../905/748658';
 import { G as _$$G9 } from '../905/750789';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
@@ -287,9 +287,9 @@ import { KeyboardReceiver } from '../905/826900';
 import { dY as _$$dY, sU as _$$sU, Wh as _$$Wh, WM as _$$WM } from '../905/838765';
 import { q as _$$q } from '../905/838985';
 import { useCurrentUserOrg } from '../905/845253';
-import { BK, Um } from '../905/848862';
+import { useDropdown, useDropdownState } from '../905/848862';
 import { K as _$$K3 } from '../905/851274';
-import { EL, F_ } from '../905/858282';
+import { PositioningStrategy } from '../905/858282';
 import { isVsCodeEnvironment } from '../905/858738';
 import { AuthFlowStep } from '../905/862321';
 import { h as _$$h7 } from '../905/864281';
@@ -302,9 +302,9 @@ import { d as _$$d6 } from '../905/884707';
 import { k as _$$k9 } from '../905/888808';
 import { DM } from '../905/889062';
 import { A as _$$A20 } from '../905/891805';
-import { Z as _$$Z2 } from '../905/909123';
+import { resourceDetailQuery } from '../905/909123';
 import { ManuallyLabeledCheckbox } from '../905/909715';
-import { XHR, XHRError } from '../905/910117';
+import { sendWithRetry, XHRError } from '../905/910117';
 import { _L as _$$_L, bL as _$$bL2 } from '../905/911410';
 import { F as _$$F5 } from '../905/911981';
 import { e as _$$e12 } from '../905/916195';
@@ -1101,7 +1101,7 @@ function q() {
   }) : null;
 }
 function Y() {
-  let e = BK('DAKOTA_ITEM_DROPDOWN');
+  let e = useDropdown('DAKOTA_ITEM_DROPDOWN');
   let t = e.data?.layoutSetId || '';
   let i = getViewportInfo({
     subscribeToUpdates_expensive: !1
@@ -2223,7 +2223,7 @@ function iD({
   _$$sl(S);
   let C = useRef(null);
   let T = useRef(null);
-  let I = BK('OPEN_IN_CODE_VIEW_DROPDOWN');
+  let I = useDropdown('OPEN_IN_CODE_VIEW_DROPDOWN');
   let E = useAtomWithSubscription(DW);
   let N = Xr(YD);
   _$$h3(() => {
@@ -2797,7 +2797,7 @@ function nz() {
                 children: renderI18nText('figmake.mobile_blocking_banner.body')
               }), jsx('div', {
                 ..._$$xk(nM.mobilePopupCardButton),
-                children: jsx(_$$pW, {
+                children: jsx(TrackedLinkButton, {
                   size: 'lg',
                   trackingProperties: {
                     trackingDescriptor: UpgradeAction.GO_BACK
@@ -3071,9 +3071,9 @@ function l5({
   inLine: s
 }) {
   return jsxs('div', {
-    className: v()(cssBuilderInstance.$$case([[t === 'secondary', cssBuilderInstance.colorBgSecondary], [t === 'danger', cssBuilderInstance.colorBgDangerTertiary], [t === 'warning', cssBuilderInstance.colorBgWarningTertiary]]).$$if(a, cssBuilderInstance.mx16.mt16.mb20, cssBuilderInstance.mb12).$$if(s, cssBuilderInstance.flex.flexRow.itemsCenter.p8, cssBuilderInstance.pt4.pb8.px8).bRadius5.$),
+    className: v()(cssBuilderInstance.$$case([[t === 'secondary', cssBuilderInstance.colorBgSecondary], [t === 'danger', cssBuilderInstance.colorBgDangerTertiary], [t === 'warning', cssBuilderInstance.colorBgWarningTertiary]]).if(a, cssBuilderInstance.mx16.mt16.mb20, cssBuilderInstance.mb12).if(s, cssBuilderInstance.flex.flexRow.itemsCenter.p8, cssBuilderInstance.pt4.pb8.px8).bRadius5.$),
     children: [e && jsx('div', {
-      className: v()('styles-module--warningIconWrapper--1toyP', cssBuilderInstance.$$if(s, cssBuilderInstance.mbAuto, cssBuilderInstance.mb4).$),
+      className: v()('styles-module--warningIconWrapper--1toyP', cssBuilderInstance.if(s, cssBuilderInstance.mbAuto, cssBuilderInstance.mb4).$),
       children: e
     }), i && jsx('h4', {
       className: cssBuilderInstance.textBodyMediumStrong.$,
@@ -3086,7 +3086,7 @@ function an({
   dataTestId: t
 }) {
   return jsx(_$$F5, {
-    'className': cssBuilderInstance.inlineBlock.px4.bRadius5.textBodyMedium.$$if(e, cssBuilderInstance.colorBgSelected.colorTextBrand, cssBuilderInstance.colorBgSecondary.colorText).$,
+    'className': cssBuilderInstance.inlineBlock.px4.bRadius5.textBodyMedium.if(e, cssBuilderInstance.colorBgSelected.colorTextBrand, cssBuilderInstance.colorBgSecondary.colorText).$,
     'data-testid': t,
     'children': e ? renderI18nText('sites.metadata.controls.publish_status.published') : renderI18nText('sites.metadata.controls.publish_status.not_published')
   });
@@ -3272,7 +3272,7 @@ function am({
     }
   };
   let x = useDispatch();
-  let m = Um();
+  let m = useDropdownState();
   let h = useRef(null);
   let g = `site-publish-history-dropdown-${e.id}`;
   let f = m?.type === g;
@@ -3717,7 +3717,7 @@ function az({
 function aX({
   hubFileId: e
 }) {
-  let [t] = setupResourceAtomHandler(_$$Z2({
+  let [t] = setupResourceAtomHandler(resourceDetailQuery({
     apiResourceType: 'file',
     id: e
   }));
@@ -3772,7 +3772,7 @@ function aV() {
   let i = _$$yj(codeLibraryInstance);
   let n = i.map(({
     hubFileId: e
-  }) => _$$Z2({
+  }) => resourceDetailQuery({
     apiResourceType: 'file',
     id: e
   }));
@@ -5267,7 +5267,7 @@ function re() {
   } = _$$oA2();
   let d = _$$yj(codeLibraryInstance).map(({
     hubFileId: e
-  }) => _$$Z2({
+  }) => resourceDetailQuery({
     apiResourceType: 'file',
     id: e
   }));
@@ -5611,7 +5611,7 @@ function rN({
   isPending: t = !1
 }) {
   let i = useDispatch();
-  let n = BK('CONNECTED_PROJECT_MORE_MENU');
+  let n = useDropdown('CONNECTED_PROJECT_MORE_MENU');
   let r = rj();
   let o = useMemo(() => [{
     displayText: getI18nString('figmake.settings.connected_project.dropdown.disconnect'),
@@ -6043,7 +6043,7 @@ let rQ = registerModal(({
     d(!0);
     let t = 0;
     try {
-      let i = await XHR.del('/api/fonts', {
+      let i = await sendWithRetry.del('/api/fonts', {
         font_ids: e
       });
       i.status === 200 && Object.keys(i.data.meta.errors).length > 0 && (t = Object.keys(i.data.meta.errors).length);
@@ -6432,14 +6432,14 @@ var om = (e => (e[e.UPLOADS_PARTIALLY_FAILED = 0] = 'UPLOADS_PARTIALLY_FAILED', 
 async function oh(e, t, i) {
   let n = [];
   for (let l of e) {
-    let e = XHR.post('/api/upnode/font', l, {
+    let e = sendWithRetry.post('/api/upnode/font', l, {
       params: {
         resourceType: 'file',
         resourceId: i,
         acceptedFonts: encodeURIComponent(JSON.stringify(t))
       },
       headers: {
-        ...XHR.requiredHeaders,
+        ...sendWithRetry.requiredHeaders,
         'content-type': function (e) {
           let t = e.name.toLowerCase();
           let i = e.type.toLowerCase();
@@ -8125,7 +8125,7 @@ function dc({
   domainInfo: t
 }) {
   let i = useDispatch();
-  let n = Um();
+  let n = useDropdownState();
   let r = n?.type === dd;
   let o = useCallback(() => {
     r ? i(hideDropdownAction()) : i(showDropdownThunk({
@@ -9164,7 +9164,7 @@ function dK({
           }
         })]
       }), i ? jsx('div', {
-        className: cssBuilderInstance.colorTextSecondary.$$if(n, cssBuilderInstance.colorTextWarning).textBodyMedium.minH24.flex.itemsCenter.$,
+        className: cssBuilderInstance.colorTextSecondary.if(n, cssBuilderInstance.colorTextWarning).textBodyMedium.minH24.flex.itemsCenter.$,
         children: i
       }) : null]
     })
@@ -9642,7 +9642,7 @@ function cr({
     control: jsx(BigTextInputForwardRef, {
       'aria-invalid': c,
       'className': cssBuilderInstance.wFull.$,
-      'style': styleBuilderInstance.py8.px12.hAuto.$$if(c, styleBuilderInstance.colorBorderWarningStrong).$,
+      'style': styleBuilderInstance.py8.px12.hAuto.if(c, styleBuilderInstance.colorBorderWarningStrong).$,
       'onChange': e => {
         let i = e.currentTarget.value;
         i ? o(i) : o(null);
@@ -9763,7 +9763,7 @@ function cc({
     control: jsx(BigTextInputForwardRef, {
       'aria-invalid': c,
       'className': cssBuilderInstance.wFull.$,
-      'style': styleBuilderInstance.py8.px12.hAuto.$$if(c, styleBuilderInstance.colorBorderWarningStrong).$,
+      'style': styleBuilderInstance.py8.px12.hAuto.if(c, styleBuilderInstance.colorBorderWarningStrong).$,
       'maxLength': 13,
       'onChange': e => {
         let i = e.currentTarget.value;
@@ -11296,7 +11296,7 @@ function u_({
         ...c
       } = e;
       let p = n === s - 1;
-      return jsx(_$$rq, {
+      return jsx(OnboardingModal, {
         description,
         emphasized: !0,
         isShowing: i,
@@ -11364,7 +11364,7 @@ function uy() {
       targetKey: Xe,
       disableHighlight: !0,
       shouldHideArrow: !0,
-      arrowPosition: F_.TOP,
+      arrowPosition: ArrowPosition.TOP,
       arrowPadding: 10,
       pointerOffsetOverride: 10
     }, e ? {
@@ -11373,14 +11373,14 @@ function uy() {
       description: renderI18nText('figmake.onboarding.description.want_to_build_on_this_idea'),
       trackingContextName: ` ${ub} > Make a copy`,
       targetKey: _$$S$,
-      arrowPosition: F_.TOP
+      arrowPosition: ArrowPosition.TOP
     } : void 0, {
       stepId: 'share_and_invite',
       title: renderI18nText('figmake.onboarding.title.share_and_invite'),
       description: renderI18nText('figmake.onboarding.description.you_can_share_a_link_or_invite_others_via_email'),
       trackingContextName: ` ${ub} > Share and invite`,
       targetKey: _$$v9,
-      arrowPosition: F_.TOP
+      arrowPosition: ArrowPosition.TOP
     }].filter(e => e);
   }({
     showMakeACopyStep: d
@@ -11473,14 +11473,14 @@ function uN({
       description: renderI18nText('figmake.onboarding.description.want_to_build_on_this_idea'),
       trackingContextName: ` ${uE} > Make a copy`,
       targetKey: _$$S$,
-      arrowPosition: F_.TOP
+      arrowPosition: ArrowPosition.TOP
     } : {
       stepId: 'make_a_copy',
       title: renderI18nText('figmake.onboarding.title.make_a_copy'),
       description: renderI18nText('figmake.onboarding.description.want_to_build_on_this_idea_file_menu'),
       trackingContextName: ` ${uE} > Make a copy file menu`,
       targetKey: O0,
-      arrowPosition: F_.TOP
+      arrowPosition: ArrowPosition.TOP
     };
     return [{
       stepId: 'welcome_to_figma_make',
@@ -11490,15 +11490,15 @@ function uN({
       targetKey: $i,
       disableHighlight: !0,
       shouldHideArrow: !0,
-      arrowPosition: F_.BOTTOM,
-      shouldCenterArrow: EL.BEST_EFFORT
+      arrowPosition: ArrowPosition.BOTTOM,
+      shouldCenterArrow: PositioningStrategy.BEST_EFFORT
     }, t ? i : void 0, {
       stepId: 'play_around',
       title: renderI18nText('figmake.onboarding.title.play_around'),
       description: renderI18nText('figmake.onboarding.description.switch_to_full_screen'),
       trackingContextName: ` ${uE} > Play around`,
       targetKey: NR,
-      arrowPosition: F_.TOP
+      arrowPosition: ArrowPosition.TOP
     }, {
       stepId: 'share_and_invite',
       title: renderI18nText('figmake.onboarding.title.share_and_invite'),
@@ -11527,7 +11527,7 @@ let uL = [{
   trackingContextName: ` ${uA} > Got an idea`,
   targetKey: _$$HB,
   disableHighlight: !0,
-  arrowPosition: F_.BOTTOM
+  arrowPosition: ArrowPosition.BOTTOM
 }, {
   stepId: 'not_sure_what_to_make',
   title: renderI18nText('figmake.onboarding_v2.not_sure_what_to_make.title'),
@@ -11535,7 +11535,7 @@ let uL = [{
   trackingContextName: ` ${uA} > Not sure what to make`,
   targetKey: OU,
   disableHighlight: !0,
-  arrowPosition: F_.LEFT_TITLE
+  arrowPosition: ArrowPosition.LEFT_TITLE
 }];
 let uP = [{
   stepId: 'point_and_edit',
@@ -11543,7 +11543,7 @@ let uP = [{
   description: renderI18nText('figmake.onboarding_v2.point_and_edit.description'),
   trackingContextName: ` ${uA} > Point and edit`,
   targetKey: _$$kx,
-  arrowPosition: F_.TOP
+  arrowPosition: ArrowPosition.TOP
 }, {
   stepId: 'guide_with_visuals',
   title: renderI18nText('figmake.onboarding_v2.guide_with_visuals.title'),
@@ -11657,7 +11657,7 @@ function uM() {
     };
   }, []), isShowing) ? jsx(TrackingProvider, {
     name: uA,
-    children: jsx(_$$rq, {
+    children: jsx(OnboardingModal, {
       description: renderI18nText('figmake.onboarding_v2.give_it_a_try.description'),
       disableHighlight: !0,
       emphasized: !0,
@@ -11703,7 +11703,7 @@ let u$ = {
   trackingContextName: ` ${uB} > Bring frame to life`,
   targetKey: _$$HB,
   disableHighlight: !0,
-  arrowPosition: F_.BOTTOM
+  arrowPosition: ArrowPosition.BOTTOM
 };
 function uU() {
   let e = _$$ry();
@@ -11737,7 +11737,7 @@ function uU() {
     name: uB,
     children: jsx(setupThemeContext, {
       mode: 'light',
-      children: jsx(_$$rq, {
+      children: jsx(OnboardingModal, {
         ...u$,
         emphasized: !0,
         onClose: complete,
@@ -12374,7 +12374,7 @@ setupRemovableAtomFamily(() => atom(0));
 var pf = (e => (e[e.EDIT = 0] = 'EDIT', e[e.CONNECT = 1] = 'CONNECT', e))(pf || {});
 let p_ = setupRemovableAtomFamily(() => atom(0));
 let pb = setupRemovableAtomFamily(() => atom(!1));
-let pv = new _$$b({
+let pv = new LazyComponentFactory({
   name: 'dakota',
   dependencies: [],
   exports: {
@@ -13256,7 +13256,7 @@ let xE = memo(({
       });
       n(e => e.has(t.id) ? pk(e, t.id) : e);
     }, [e, n]);
-    let d = BK(_$$s);
+    let d = useDropdown(_$$s);
     return {
       editingCellId: t,
       setEditingCellId: i,
@@ -15458,7 +15458,7 @@ let mW = registerModal(({
   useEffect(() => {
     O === null && collectionFields.length > 0 && F(collectionFields[0]?.id ?? null);
   }, [O, collectionFields, F]);
-  let M = BK(Zn);
+  let M = useDropdown(Zn);
   let D = e => t => {
     t.stopPropagation();
     t.preventDefault();
@@ -16707,7 +16707,7 @@ function hb() {
   return jsxs('form', {
     onSubmit: async i => {
       if (i.preventDefault(), !_) return;
-      trackEventAnalytics(_$$j9, w, {
+      trackEventAnalytics(AI_ACTION_STARTED, w, {
         mlEvent: !0
       });
       r(!0);
@@ -16732,7 +16732,7 @@ function hb() {
       n.finish();
       r(!1);
       h(!1);
-      trackEventAnalytics(G5, w, {
+      trackEventAnalytics(AI_ACTION_ENDED, w, {
         mlEvent: !0
       });
       e(VisualBellActions.enqueue({
@@ -17902,7 +17902,7 @@ function go({
   } = getObservableOrFallback(f.bindingFieldSchema);
   let [v, w] = useAtomValueAndSetter(_$$iO);
   let S = Xr(_$$ou);
-  let C = BK(V6);
+  let C = useDropdown(V6);
   let [T, I] = useState(!1);
   let E = Xr(UU);
   let N = b === d && !id;
@@ -19670,13 +19670,13 @@ function fC({
       for (let t of e.childrenNodes) t.isPrimaryBreakpointFrame && (c.current = t);
     }
   }
-  return jsx(_$$rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: renderI18nText('sites.onboarding.webpages.description'),
     disableHighlight: !0,
     isCanvasNode: !0,
     isShowing: i,
-    media: jsx(_$$w3, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl('3d6d3d536057fa86a5aa55439449eb573cd183a3'),
       aspectRatio: f_,
       hideBorder: !0
@@ -19707,11 +19707,11 @@ function fT({
   nextStepType: r
 }) {
   let o = _$$b2();
-  return jsx(_$$rq, {
-    arrowPosition: F_.RIGHT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_TITLE,
     description: renderI18nText('sites.onboarding.blocks.description'),
     isShowing: i,
-    media: jsx(_$$w3, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl(s ? '5a06b9550cb947e69c316efaaf1e22f5754cf19b' : '5373a71c8b5908a6b35030e235cfce84981f9120'),
       aspectRatio: f_,
       hideBorder: !0
@@ -19746,11 +19746,11 @@ function fI({
       [R0]: !0
     }));
   });
-  return jsx(_$$rq, {
-    arrowPosition: F_.BOTTOM,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.BOTTOM,
     description: renderI18nText('sites.onboarding.code.description'),
     isShowing: i,
-    media: jsx(_$$y1, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl('6a84e5415e73728b6be860ca115c407b07691df8'),
       alt: getI18nString('sites.onboarding.code.alt'),
       aspectRatio: f_
@@ -19785,11 +19785,11 @@ function fE({
   totalSteps: a,
   nextStepType: s
 }) {
-  return jsx(_$$rq, {
-    arrowPosition: F_.TOP,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.TOP,
     description: renderI18nText('sites.onboarding.preview.description'),
     isShowing: i,
-    media: jsx(_$$y1, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl('f4556dd29bb49bbe6798cd4bef11e12a37ac4778'),
       alt: getI18nString('sites.onboarding.preview.alt'),
       aspectRatio: f_
@@ -19818,11 +19818,11 @@ function fN({
   totalSteps: a,
   nextStepType: s
 }) {
-  return jsx(_$$rq, {
-    arrowPosition: F_.RIGHT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_TITLE,
     description: renderI18nText('sites.onboarding.publish.description'),
     isShowing: i,
-    media: jsx(_$$y1, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl('bcd0b976a7fbe595b90b688425f8ca52eafd672a'),
       alt: getI18nString('sites.onboarding.publish.alt'),
       aspectRatio: f_
@@ -19963,7 +19963,7 @@ function fq(e) {
   }(e.currentLayoutSet, 0);
   let i = fH(t, e.previewWidth);
   let n = useRef(null);
-  let r = BK('breakpoint-picker-dropdown');
+  let r = useDropdown('breakpoint-picker-dropdown');
   let o = useMemo(() => {
     let e = t.find(e => e.type === 'mobile');
     let i = t.find(e => e.type === 'tablet');
@@ -21176,7 +21176,7 @@ function _B({
   let {
     showing,
     toggle
-  } = BK('SITES_INLINE_PREVIEW_OVERFLOW_DROPDOWN');
+  } = useDropdown('SITES_INLINE_PREVIEW_OVERFLOW_DROPDOWN');
   useEffect(() => {
     let e = new ResizeObserver(e => {
       let t = e[0];
@@ -21483,7 +21483,7 @@ function _X({
     E(!0);
   };
   let B = fU();
-  return jsx(_$$od, {
+  return jsx(DraggableModal, {
     ref: w,
     allowResizeHeight: !0,
     allowResizeWidth: !0,
@@ -21552,7 +21552,7 @@ function _V({
   let {
     isResizing,
     isDragging
-  } = useContext(_$$O9);
+  } = useContext(ResizeDragContext);
   let c = useMemo(() => isResizing || isDragging, [isResizing, isDragging]);
   let u = useMemo(() => ({
     transformOrigin: 'top left',
@@ -23182,7 +23182,7 @@ function ve({
 }) {
   let o = useRef(null);
   let d = useDispatch();
-  let c = Um();
+  let c = useDropdownState();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -23412,7 +23412,7 @@ let vc = memo(({
   let s = useRef(null);
   let r = useRef(null);
   let o = _$$xF();
-  let d = useMemo(() => _$$pn(o), [o]);
+  let d = useMemo(() => getFontStyleMapping(o), [o]);
   let c = function (e, t) {
     let i = _$$CQ('font-family', e);
     let n = 'sans-serif';
@@ -23704,7 +23704,7 @@ function vJ({
   recordingKey: n
 }) {
   let a = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   return jsx(vZ, {
     dispatch: a,
     dropdownAlignment: 'right',
@@ -23740,7 +23740,7 @@ function v3({
   recordingKey: n
 }) {
   let r = useDispatch();
-  let o = Um();
+  let o = useDropdownState();
   let d = useMemo(() => [{
     roles: vO
   }, {
@@ -23821,7 +23821,7 @@ function v9({
   ariaLabelledBy: r
 }) {
   let o = useDispatch();
-  let d = Um();
+  let d = useDropdownState();
   return jsx(je, {
     ariaLabelledBy: r,
     disabled: t.length < 2,
@@ -24402,7 +24402,7 @@ function jv({
   }, [t, n, r]);
   let d = useDispatch();
   let c = e?.sourceLibraryKey;
-  let p = _$$b14({
+  let p = useLibraryFileLink({
     libraryKey: c,
     nodeId: e?.publishID ?? void 0,
     mainComponent: !0
@@ -25192,7 +25192,7 @@ function j8({
 }) {
   let t = useSelectionPropertyValue('responsiveSetScalingMode') ?? 'REFLOW';
   let i = useDispatch();
-  let n = Um();
+  let n = useDropdownState();
   let a = trackFileEventWithStore();
   return jsxs(_$$l1, {
     ariaLabelledBy: e,
@@ -25302,7 +25302,7 @@ let ko = _$$l1;
 let kd = _$$c$6;
 function kc(e) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let n = createShownTransformControlsObservable();
   let o = createEnabledTransformControlsObservable();
   let [d, c] = Xw();
@@ -26099,7 +26099,7 @@ function wu({
   recordingKey: c
 }) {
   let p = useDispatch();
-  let x = Um();
+  let x = useDropdownState();
   let m = wl({
     delay: o,
     setDelay: d,
@@ -26153,7 +26153,7 @@ function wm({
     return useMemo(() => new _$$cP(e), [e]);
   }();
   let o = useDispatch();
-  let d = Um();
+  let d = useDropdownState();
   let c = function () {
     let e = useSceneGraphSelection();
     let t = GW();
@@ -26362,7 +26362,7 @@ function wj({
   drilldownCallback: p
 }) {
   let x = useDispatch();
-  let m = Um();
+  let m = useDropdownState();
   let h = wl({
     delay: o,
     setDelay: d,
@@ -26411,7 +26411,7 @@ function wk({
   recordingKey: t
 }) {
   let i = useDispatch();
-  let n = Um();
+  let n = useDropdownState();
   let [r, o] = wI();
   let [d, c] = wE();
   let [p, x] = wN();
@@ -26482,7 +26482,7 @@ function ww({
   recordingKey: i
 }) {
   let n = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   let [o, d] = wP(e);
   let c = null;
   switch (e) {
@@ -27344,7 +27344,7 @@ function SE({
 }
 function SN(e) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let [n, r] = SA();
   let [o, d] = SR();
   let [c, p] = SL();
@@ -28544,7 +28544,7 @@ function CW({
   recordingKey: t
 }) {
   let i = useDispatch();
-  let n = Um();
+  let n = useDropdownState();
   let [r, o] = C5();
   let [d, c] = C2();
   let [p, x] = C4();
@@ -29029,7 +29029,7 @@ function Tc({
     shouldPin
   } = t;
   let k = _$$I6(initialX, initialY, shouldPin, b, (e, t) => new Point(e, t));
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     title: jsx('div', {
       className: m ? 'styles-module--behaviorSettingsPickerTitleWithDetails--EdoDD styles-module--behaviorSettingsPickerTitle--U37nj header_modal--headerModalTitle--32hFx' : 'styles-module--behaviorSettingsPickerTitle--U37nj header_modal--headerModalTitle--32hFx',
       children: jsxs(_$$N10, {
@@ -29104,7 +29104,7 @@ function Tc({
     contentContainerClassName: s ? 'styles-module--behaviorSettingsPickerContentAnimating--lnmnE' : void 0,
     onClose: i,
     recordingKey: n,
-    arrowPosition: shouldPin ? void 0 : _$$F_.TOP,
+    arrowPosition: shouldPin ? void 0 : ArrowPosition.TOP,
     arrowRelativeX: shouldPin ? void 0 : b / 2,
     children: jsx(_$$N10, {
       mode: 'popLayout',
@@ -30759,7 +30759,7 @@ function TJ({
 }
 let TZ = memo(() => {
   let e = getColorFormat();
-  let t = Um();
+  let t = useDropdownState();
   let i = Xo();
   let n = GV();
   let a = useSelector(e => e.installedPluginVersions);

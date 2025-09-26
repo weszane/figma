@@ -16,7 +16,7 @@ import { Fl } from "../figma_app/236178";
 import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
 import { useUntransformedSubscribedLibraries } from "../figma_app/155728";
 import { getCurrentTeam } from "../figma_app/598018";
-import { ev } from "../905/909811";
+import { LibraryItemTilesByPage } from "../905/909811";
 import { Yt } from "../905/712714";
 import { c as _$$c } from "../905/511370";
 import { ZO } from "../905/691188";
@@ -156,7 +156,7 @@ export function $$F0({
       children: [jsx("h2", {
         className: FA,
         children: renderI18nText("design_systems.libraries_modal.header_components")
-      }), jsx(ev, {
+      }), jsx(LibraryItemTilesByPage, {
         width: i,
         items: Q,
         sourceForTracking: "Community Library Modal",

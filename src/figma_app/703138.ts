@@ -5,7 +5,7 @@ import { getI18nString } from '../905/303541'
 import { createOptimistAction, createOptimistThunk } from '../905/350402'
 import { NEW_COMMENT_ID } from '../905/380385'
 import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 
 // Action creators for comment operations
 export const commitCreatedComment = createActionCreator('GENERIC_COMMENT_COMMIT_CREATED_COMMENT')
@@ -78,7 +78,7 @@ export const createComment = createOptimistThunk(async ({ dispatch }, params) =>
   } = params
 
   try {
-    const response = await XHR.post('/api/community_comments', {
+    const response = await sendWithRetry.post('/api/community_comments', {
       message_meta: messageMeta,
       resource_id: resourceId,
       resource_type: resourceType,
@@ -146,7 +146,7 @@ export const editComment = createOptimistAction('GENERIC_COMMENT_EDIT', async (d
   } = params
 
   try {
-    const response = await XHR.put(`/api/community_comments/${commentId}`, {
+    const response = await sendWithRetry.put(`/api/community_comments/${commentId}`, {
       message_meta: messageMeta,
       client_meta: clientMeta,
     })
@@ -184,7 +184,7 @@ export const deleteComment = createOptimistThunk(({ dispatch, getState }, params
 
   const comment = commentsState.commentsById[commentId]
 
-  XHR.del(`/api/community_comments/${commentId}`)
+  sendWithRetry.del(`/api/community_comments/${commentId}`)
     .then(() => {
       dispatch(commitDeletedComment({
         resourceType: type,
@@ -237,7 +237,7 @@ export const reportComment = createOptimistThunk(({ dispatch, getState }, params
   // Prepare report data - include hide flag if user is admin
   const reportData = userIsAdmin ? { hide: true } : undefined
 
-  XHR.post(`/api/community_comments/${commentId}/report`, reportData)
+  sendWithRetry.post(`/api/community_comments/${commentId}/report`, reportData)
     .then(() => {
       dispatch(commitHideComment({
         commentId,

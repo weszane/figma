@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { ButtonPrimitive } from "../905/632989";
 import s from "classnames";
-import { Q } from "../905/911623";
+import { useClickHandler } from "../905/911623";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { w } from "../905/768636";
 var o = s;
@@ -31,7 +31,7 @@ export function $$u0({
     onClick,
     onMouseUp,
     onMouseLeave
-  } = Q({
+  } = useClickHandler({
     onClick: _,
     isDisabled: i
   });

@@ -65,7 +65,7 @@ import { E as _$$E2 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily, userFlagAtomFamily, userFlagsAtom } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { J_ } from "../figma_app/598952";
 import { lk2, Yd_, FR6, nRk } from "../figma_app/6204";
 import { jH, cl, bb } from "../figma_app/926950";
@@ -102,7 +102,7 @@ import { A as _$$A3 } from "../svg/745787";
 import { A as _$$A4 } from "../svg/808438";
 import { A as _$$A5 } from "../svg/600568";
 import { A as _$$A6 } from "../svg/969232";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { defaultLanguage, languageCodes } from "../905/816253";
 import { T as _$$T, e as _$$e3 } from "../905/949616";
 import { getCookieManager } from "../905/423575";
@@ -186,7 +186,7 @@ function q({
       try {
         let e = await UserAPIHandlers.getChatbotMeta();
         c(e.data.meta);
-      } catch (e) {}
+      } catch (e) { }
     })();
   });
   useEffect(() => {
@@ -273,7 +273,7 @@ function eL() {
     });
   }), useEffect(() => {
     c && r.complete();
-  }, [r, c]), r.isShowing && getFeatureFlags().bug_reporter) ? jsx(rq, {
+  }, [r, c]), r.isShowing && getFeatureFlags().bug_reporter) ? jsx(OnboardingModal, {
     isShowing: r.isShowing,
     userFlagOnShow: eO,
     title: renderI18nText("bug_reporter.announcement.title"),
@@ -776,7 +776,7 @@ function tc({
   }, [l, _, flagNumberVal]);
   if (useEffect(() => {
     e && h(!1);
-  }, [e, h]), c !== iH.FALSE) ;else if (t && !_.isShowing && !e) return jsx(_$$P.div, {
+  }, [e, h]), c !== iH.FALSE); else if (t && !_.isShowing && !e) return jsx(_$$P.div, {
     initial: {
       opacity: 1
     },
@@ -792,7 +792,7 @@ function tc({
       dismissModal: () => r(!1),
       targetKey: "help-widget-zendesk"
     })
-  });else if (_.isShowing) return jsx(tr, {
+  }); else if (_.isShowing) return jsx(tr, {
     shouldHide: e,
     dismissModal: h,
     maxSeenCount: 3,
@@ -2226,7 +2226,7 @@ function tR({
       canShow: () => t && r
     });
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     isShowing,
     targetKey: e,
     trackingContextName: "Report Korean Translation Issue",
@@ -2234,7 +2234,7 @@ function tR({
     onClose: () => {
       complete();
     },
-    arrowPosition: F_.BOTTOM
+    arrowPosition: ArrowPosition.BOTTOM
   });
 }
 function tM({
@@ -2260,7 +2260,7 @@ function tM({
   _$$h(() => {
     !r && a !== languageCodes.EN && s && show();
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     isShowing,
     targetKey: e,
     trackingContextName: "Guest Language Picker",
@@ -2271,7 +2271,7 @@ function tM({
       });
       complete();
     },
-    arrowPosition: F_.BOTTOM
+    arrowPosition: ArrowPosition.BOTTOM
   });
 }
 let tU = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/;
@@ -2752,7 +2752,7 @@ export function $$t60(e) {
     }), jsx(tR, {
       helpWidgetOnboardingKey: t8
     }), jsxs("div", {
-      className: cssBuilderInstance.$$if(e.shouldShowBottomRightZoomMenu && e.hide, cssBuilderInstance.hidden, cssBuilderInstance.flexColumn.gap12.justifyCenter.itemsEnd).$,
+      className: cssBuilderInstance.if(e.shouldShowBottomRightZoomMenu && e.hide, cssBuilderInstance.hidden, cssBuilderInstance.flexColumn.gap12.justifyCenter.itemsEnd).$,
       children: [u && jsx(tc, {
         dropdownOpen: t
       }), jsx(t9, {

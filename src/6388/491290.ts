@@ -14,7 +14,7 @@ import { normalizeValue, isInvalidValue, MIXED_MARKER, isValidValue } from "../9
 import { Zr } from "../figma_app/678782";
 import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
 import { calculatePickerPositionLeft } from "../905/959568";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { C } from "../642/180963";
 import { Y } from "../6388/262412";
 import { K } from "../6388/893524";
@@ -69,7 +69,7 @@ export function $$C0({
       })
     }), l && r && jsx("div", {
       ref: p,
-      children: jsx(Ao, {
+      children: jsx(DraggableModalManager, {
         title: getI18nString("slides.properties_panel.overlay"),
         headerSize: "small",
         initialPosition: r,

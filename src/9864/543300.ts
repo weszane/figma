@@ -15,7 +15,7 @@ import { TabLoop } from "../905/718764";
 import { useLatestRef } from "../figma_app/922077";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
-import { M as _$$M } from "../905/152487";
+import { OnboardingSequence } from "../905/152487";
 import { useSingleEffect } from "../905/791079";
 import { YX, S0, bk, PG, ZE, xO, VQ, qV, r3 as _$$r, X9, bT, Nz, nt, $l, aV, uN, Q7, BG, eL as _$$eL, kd, SL, ni, fj, VN, _D, pr, JA, Xw, xo, JC } from "../905/98947";
 import { pu, XL, ug, Pp, Ig, zH, td as _$$td, nH } from "../7037/430062";
@@ -90,7 +90,7 @@ import { A as _$$A } from "../svg/546647";
 import { A as _$$A2 } from "../svg/831814";
 import { throwTypeError } from "../figma_app/465776";
 import { textDisplayConfig } from "../905/687265";
-import { Ph, o as _$$o } from "../905/160095";
+import { TrackedLink, TrackedLinkPrimitive } from "../905/160095";
 import { sx as _$$sx } from "../figma_app/307841";
 import { pA, eI as _$$eI, QP } from "../7021/724859";
 import { l as _$$l } from "../905/479687";
@@ -117,7 +117,7 @@ import { J as _$$J2, q as _$$q } from "../905/202542";
 import { E as _$$E } from "../905/53857";
 import { f as _$$f3 } from "../905/54715";
 import { useTheme } from "../905/289770";
-import { F_ } from "../905/748636";
+import { ArrowPosition } from "../905/748636";
 import { NJ } from "../figma_app/419216";
 import { L as _$$L } from "../9864/861465";
 import { f as _$$f4 } from "../905/931050";
@@ -182,7 +182,7 @@ function v({
     window.addEventListener("beforeunload", e);
     return () => window.removeEventListener("beforeunload", e);
   }, [c]);
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     isShowing: r,
     testId: i,
     children: jsx(TabLoop, {
@@ -208,7 +208,7 @@ function S({
   useSingleEffect(() => {
     l(!0);
   });
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     isShowing: e,
     testId: t,
     children: jsx(TabLoop, {
@@ -415,7 +415,7 @@ function ey() {
   let o = r => {
     if (desktopAPIInstance) e(Vm({
       teamId: r.id
-    }));else {
+    })); else {
       let e = `/files/team/${r.id}/edu-review/${r.id}`;
       customHistory.redirect(e, "_blank");
     }
@@ -972,7 +972,7 @@ function eJ(e) {
     } else if (G) {
       let [e] = h;
       ee(e);
-    } else if (e.currentQuestion === pu.INVITE_COLLABORATORS) et();else if (ev()) e.formatAndSubmitSignalCollectionResponses();else if (e.currentQuestion === pu.CHOOSE_PLAN && (u === VN.PROFESSIONAL || u === VN.ORG)) {
+    } else if (e.currentQuestion === pu.INVITE_COLLABORATORS) et(); else if (ev()) e.formatAndSubmitSignalCollectionResponses(); else if (e.currentQuestion === pu.CHOOSE_PLAN && (u === VN.PROFESSIONAL || u === VN.ORG)) {
       let r = u === VN.ORG;
       trackEventAnalytics("NUX Last Step", {
         departedNuxFlow: !0,
@@ -1463,16 +1463,16 @@ function rk({
   planTestId: c
 }) {
   return jsxs("button", {
-    className: cssBuilderInstance.flex1.p16.alignLeft.cursorPointer.flex.bt1.bb1.flexColumn.$$if(i, cssBuilderInstance.colorBgSelected).$,
-    style: styleBuilderInstance.$$if("left" === t, styleBuilderInstance.add({
+    className: cssBuilderInstance.flex1.p16.alignLeft.cursorPointer.flex.bt1.bb1.flexColumn.if(i, cssBuilderInstance.colorBgSelected).$,
+    style: styleBuilderInstance.if("left" === t, styleBuilderInstance.add({
       borderTopLeftRadius: "13px",
       borderBottomLeftRadius: "13px",
       borderLeft: "1px"
-    })).$$if("right" === t, styleBuilderInstance.add({
+    })).if("right" === t, styleBuilderInstance.add({
       borderTopRightRadius: "13px",
       borderBottomRightRadius: "13px",
       borderRight: "1px"
-    })).bSolid.$$if(i, styleBuilderInstance.colorBorderSelected, styleBuilderInstance.colorBorder).$,
+    })).bSolid.if(i, styleBuilderInstance.colorBorderSelected, styleBuilderInstance.colorBorder).$,
     onClick: o,
     "data-testid": c,
     children: [jsxs("div", {
@@ -1498,7 +1498,7 @@ function rk({
         })]
       }), jsx(l, {})]
     }), jsx("div", {
-      className: cssBuilderInstance.wFull.my16.bSolid.bt1.$$if(i, cssBuilderInstance.colorBorderSelected, cssBuilderInstance.colorBorder).$
+      className: cssBuilderInstance.wFull.my16.bSolid.bt1.if(i, cssBuilderInstance.colorBorderSelected, cssBuilderInstance.colorBorder).$
     }), jsx(n, {}), a && jsx(a, {})]
   });
 }
@@ -1650,7 +1650,7 @@ function rI({
         }), jsx("div", {
           className: m$,
           children: renderI18nText("new_user_experience.choose_plan_card.org.education_cta_with_verified_link", {
-            verifiedLink: jsx(Ph, {
+            verifiedLink: jsx(TrackedLink, {
               href: "/education/apply",
               trusted: !0,
               newTab: !0,
@@ -1841,7 +1841,7 @@ function rA() {
     }), jsx("p", {
       ...xk(rR.textBodySmall),
       children: renderI18nText("nux.edu.free_for_verified", {
-        verifiedLink: jsx(Ph, {
+        verifiedLink: jsx(TrackedLink, {
           href: "/education/apply",
           trusted: !0,
           newTab: !0,
@@ -2106,7 +2106,7 @@ function r5({
   targetKey: r,
   productKey: t
 }) {
-  let [i, l] = useState(F_.RIGHT_BODY);
+  let [i, l] = useState(ArrowPosition.RIGHT_BODY);
   let {
     color
   } = useTheme();
@@ -2123,7 +2123,7 @@ function r5({
     [FProductAccessType.SITES]: getI18nString("seat_selection_in_nux.design_and_publish_responsive_websites")
   };
   return jsx(NJ, {
-    arrowPosition: F_.RIGHT_BODY,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     backgroundColor: "var(--color-bg)",
     className: "choose_seat_card--productCalloutParent--6MMbm",
     colorMode: color,
@@ -2139,7 +2139,7 @@ function r5({
     width: 300,
     children: jsxs("div", {
       className: "choose_seat_card--productCallout--DlABb",
-      children: [i !== F_.RIGHT_BODY && jsxs(Fragment, {
+      children: [i !== ArrowPosition.RIGHT_BODY && jsxs(Fragment, {
         children: [jsx("div", {
           className: r0,
           children: u[t]
@@ -2152,7 +2152,7 @@ function r5({
             })
           })
         })]
-      }), i === F_.RIGHT_BODY && jsxs(Fragment, {
+      }), i === ArrowPosition.RIGHT_BODY && jsxs(Fragment, {
         children: [jsx("span", {
           className: r2,
           children: jsx("img", {
@@ -2752,7 +2752,7 @@ function tm(e) {
   if (joinLink.status !== APILoadingStatus.SUCCESS || joinLink.status === APILoadingStatus.SUCCESS && (joinLink.value.disabled || !joinLink.value.link)) return null;
   let i = null;
   joinLink.status === APILoadingStatus.SUCCESS && joinLink.value.link && (i = jx(joinLink.value.link));
-  return jsxs(_$$o, {
+  return jsxs(TrackedLinkPrimitive, {
     href: "#",
     onClick: () => {
       i && r(_$$LN({
@@ -3234,7 +3234,7 @@ function tA() {
         onItemsChange: c,
         getOptionDisplay
       }), e ? jsx("div", {
-        className: a ? void 0 : cssBuilderInstance.font12.bRadius5.colorBgSecondary.p12.mt20.$$if(x, cssBuilderInstance.alignCenter).$,
+        className: a ? void 0 : cssBuilderInstance.font12.bRadius5.colorBgSecondary.p12.mt20.if(x, cssBuilderInstance.alignCenter).$,
         ..._$$Ay2.props(a && tP.disclaimerContainer),
         children: renderI18nText("new_user_experience.user_onboarding_signals.disclaimer.old_enough_to_consent.v2", {
           tos: jsx(Link, {

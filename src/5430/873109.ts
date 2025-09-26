@@ -31,7 +31,7 @@ import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback, tT } from "../905/723791";
 import { reportError } from "../905/11";
 import { generateUUIDv4 } from "../905/871474";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { AuthFlowStep } from "../905/862321";
 import { handleAtomEvent } from "../905/502364";
 import { VisualBellActions } from "../905/302958";
@@ -114,7 +114,7 @@ function et(e, t, r, s) {
     }
     if (hasClientMeta(e)) {
       let t = () => {
-        let t = XHR.post(`/api/hub_file/${e.id}/save`);
+        let t = sendWithRetry.post(`/api/hub_file/${e.id}/save`);
         let s = `optimistic-resource-save-${generateUUIDv4()}`;
         WB().optimisticallyCreate({
           ResourceSave: {
@@ -293,7 +293,7 @@ function ei(e, t, r, s) {
       action: "unsave",
       loggedIn: !!n.user,
       orgId: s
-    }), ee), hasClientMeta(e)) ? XHR.del(`/api/hub_file/${e.id}/save`).then(() => {
+    }), ee), hasClientMeta(e)) ? sendWithRetry.del(`/api/hub_file/${e.id}/save`).then(() => {
       r(VisualBellActions.enqueue({
         message: getI18nString("community.saves.file_removed_from_your_profile"),
         type: "resource-save"

@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { KindEnum } from '../905/129884';
 import { Y } from '../905/193977';
-import { b as _$$b } from '../905/222272';
+import { LayoutContainer } from '../905/222272';
 import { o as _$$o } from '../905/223420';
 import { nt, o3 } from '../905/226610';
 import { A as _$$A } from '../905/251970';
@@ -142,7 +142,7 @@ let $$P2 = forwardRef(({
       })
     }) : a ? jsx('div', {
       className: cssBuilderInstance.mr6.$,
-      children: jsx(_$$b, {
+      children: jsx(LayoutContainer, {
         children: a
       })
     }) : null]
@@ -201,7 +201,7 @@ let $$D0 = forwardRef(({
         })
       }) : s ? jsx('div', {
         className: cssBuilderInstance.mr6.$,
-        children: jsx(_$$b, {
+        children: jsx(LayoutContainer, {
           children: s
         })
       }) : null]

@@ -1,4 +1,4 @@
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { getResourceTypeLabel } from '../figma_app/471982'
 /**
  * Checks if a user is a pending plugin publisher.
@@ -41,7 +41,7 @@ export function isAnyPublisher(plugin: any, userId: string): boolean {
  * (Original: $$sendPublisherInvites)
  */
 export async function sendPublisherInvites(plugin: any, emails: string[]): Promise<{ resource: any, errors: any }> {
-  const { data } = await XHR.post(
+  const { data } = await sendWithRetry.post(
     `/api/${getResourceTypeLabel(plugin, { pluralized: true })}/${plugin.id}/publisher_invites`,
     { emails },
   )

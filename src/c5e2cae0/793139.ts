@@ -11,7 +11,7 @@ import { S as _$$S } from '../905/339549';
 import { P as _$$P } from '../905/347284';
 import { AutoLayout } from '../905/470281';
 import { ProductAccessTypeEnum } from '../905/513035';
-import { Dd, OJ } from '../905/519092';
+import { ConfirmationModal, HeaderModal } from '../905/519092';
 import { registerTooltip } from '../905/524523';
 import { getFeatureFlags } from '../905/601108';
 import { SvgComponent } from '../905/714743';
@@ -76,7 +76,7 @@ function z(e) {
   });
 }
 export function $$F1(e) {
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     containerClassName: D,
     headerSize: 'hidden',
     isCloseHidden: !0,
@@ -101,7 +101,7 @@ export function $$F1(e) {
   });
 }
 export function $$G0(e) {
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     containerClassName: D,
     headerSize: 'hidden',
     isCloseHidden: !0,
@@ -133,7 +133,7 @@ export function $$G0(e) {
   });
 }
 export function $$H2(e) {
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     containerClassName: D,
     headerSize: 'hidden',
     onClose: e.onClose,
@@ -217,7 +217,7 @@ registerModal(e => {
       shouldShowDevModeIncludedText: !1
     }
   };
-  return jsxs(Dd, {
+  return jsxs(ConfirmationModal, {
     onSubmit: () => {
       let s = !1;
       if (t.forEach(t => {

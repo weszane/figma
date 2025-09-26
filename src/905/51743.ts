@@ -15,10 +15,10 @@ import { JT, gj } from "../figma_app/632248";
 import { pP, qy, RL, z8 } from "../figma_app/862289";
 import { cq } from "../905/794154";
 import { ID } from "../905/487011";
-import { lc, dk, $J } from "../905/278499";
-import { r as _$$r } from "../905/189361";
-import { B as _$$B2 } from "../905/222272";
-import { y as _$$y } from "../905/236825";
+import { AIActionInstructionType, AIActionInstructionTrigger, AIActionIterationResult } from "../905/278499";
+import { ActionButton } from "../905/189361";
+import { FlexBox } from "../905/222272";
+import { Panel } from "../905/236825";
 import { f as _$$f, E as _$$E } from "../905/690713";
 import { u as _$$u } from "../905/704456";
 import { A as _$$A } from "../905/721854";
@@ -40,18 +40,18 @@ function P({
   useSingleEffect(() => {
     s && ID({
       ...s,
-      interaction: lc.VIEW,
-      interaction_type: dk.VIEW
+      interaction: AIActionInstructionType.VIEW,
+      interaction_type: AIActionInstructionTrigger.VIEW
     });
   });
   useEffect(() => {
     p && 0 !== p.length || l.state !== qy.INITIAL || i();
   }, [i, p, l.state]);
-  return jsx(_$$y, {
+  return jsx(Panel, {
     onDismiss: i,
     children: jsx(setupThemeContext, {
       brand: "dev-handoff",
-      children: jsxs(_$$B2, {
+      children: jsxs(FlexBox, {
         justify: "space-between",
         align: "center",
         fullWidth: !0,
@@ -74,11 +74,11 @@ function P({
           }), jsx(_$$y2, {
             helpUrlVariant: JT.AUTO_RENAME_LAYERS
           })]
-        }), jsx(_$$B2, {
+        }), jsx(FlexBox, {
           justify: "space-between",
           align: "center",
           gap: 8,
-          children: jsx(_$$r, {
+          children: jsx(ActionButton, {
             onAction: t,
             variant: "secondary",
             recordingKey: "instructionView",
@@ -141,8 +141,8 @@ export function $$D0(e) {
   let G = useCallback(() => {
     aiTrackingContext && ID({
       ...aiTrackingContext,
-      interaction: lc.DISMISS,
-      interaction_type: dk.BUTTON_CLICK
+      interaction: AIActionInstructionType.DISMISS,
+      interaction_type: AIActionInstructionTrigger.BUTTON_CLICK
     });
     pop();
   }, [aiTrackingContext, pop]);
@@ -163,8 +163,8 @@ export function $$D0(e) {
         numRenamableNodes: e.numRenamableNodesForHandoff
       });
       if (U && U.length > 0) {
-        if (0 === B) return jsx(_$$y, {
-          children: jsxs(_$$B2, {
+        if (0 === B) return jsx(Panel, {
+          children: jsxs(FlexBox, {
             justify: "space-between",
             align: "center",
             fullWidth: !0,
@@ -174,7 +174,7 @@ export function $$D0(e) {
                 className: cssBuilderInstance.textBodyMediumStrong.truncate.maxW150.$,
                 children: renderI18nText("auto_rename_layers.error.no_nameable_items")
               })
-            }), jsx(_$$r, {
+            }), jsx(ActionButton, {
               onAction: G,
               variant: "secondary",
               shortcuts: [{
@@ -185,8 +185,8 @@ export function $$D0(e) {
             })]
           })
         });
-        if (V > NB) return jsx(_$$y, {
-          children: jsxs(_$$B2, {
+        if (V > NB) return jsx(Panel, {
+          children: jsxs(FlexBox, {
             justify: "space-between",
             align: "center",
             fullWidth: !0,
@@ -202,7 +202,7 @@ export function $$D0(e) {
                   limit: NB
                 })
               })]
-            }), jsx(_$$r, {
+            }), jsx(ActionButton, {
               onAction: G,
               variant: "secondary",
               shortcuts: [{
@@ -302,7 +302,7 @@ export function $$D0(e) {
           iterateOptions: r,
           aiTrackingContext: {
             ...aiTrackingContext,
-            iteration_view_type: $J.DEFAULT_SUCCESS
+            iteration_view_type: AIActionIterationResult.DEFAULT_SUCCESS
           },
           completionString: source === ActionType.READY_FOR_DEV && renderI18nText("auto_rename_layers.renamed_n_layers", {
             n: tasks.filter(e => e.state === z8.SUCCEEDED).length

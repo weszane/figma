@@ -7,7 +7,7 @@ import { g as _$$g } from "../905/125190";
 import { setupThemeContext } from "../905/614223";
 import { buildUploadUrl } from "../figma_app/169182";
 import { e6 } from "../figma_app/617427";
-import { o as _$$o } from "../905/160095";
+import { TrackedLinkPrimitive } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { WX } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
@@ -71,7 +71,7 @@ export function $$T1(e) {
               },
               className: "x78zum5 xl56j7k x6s0dn4 x1vqgdyp x19y5rnk x4z9k3i x1o2sk6j xu5wzci x1tk3asg xk50ysn",
               children: renderI18nText("sites.starter_modal.upgrade")
-            }), jsx(_$$o, {
+            }), jsx(TrackedLinkPrimitive, {
               href: "https://help.figma.com/hc/articles/31230436657815",
               newTab: !0,
               className: "x78zum5 xl56j7k x6s0dn4 x1vqgdyp x19y5rnk x4z9k3i x1o2sk6j xv2f06h xt0e3qv x1akne3o",

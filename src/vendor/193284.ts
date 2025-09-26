@@ -838,7 +838,7 @@ function tI(e, r, n, i) {
   }
   return {
     expandOrRenewSession: throttled,
-    expandSession: function() {
+    expandSession: function () {
       tk({
         process: e => k() ? b(e) : void 0
       }, d);
@@ -856,7 +856,7 @@ function tI(e, r, n, i) {
     stop: () => {
       vG(g);
     },
-    updateSessionState: function(e) {
+    updateSessionState: function (e) {
       tk({
         process: r => ({
           ...r,
@@ -1358,10 +1358,10 @@ function rg(e, r) {
 }
 function rm(e, r) {
   let n = new XMLHttpRequest();
-  _$$q(e, n, "load", function() {
+  _$$q(e, n, "load", function () {
     200 === n.status ? r(JSON.parse(n.responseText).rum) : ry();
   });
-  _$$q(e, n, "error", function() {
+  _$$q(e, n, "error", function () {
     ry();
   });
   n.open("GET", rv(e));
@@ -1763,7 +1763,7 @@ function rz({
   };
   rL.add(i);
   return {
-    add: function(e, i) {
+    add: function (e, i) {
       let s = {
         value: e,
         startTime: i,
@@ -1779,7 +1779,7 @@ function rz({
       n.unshift(s);
       return s;
     },
-    find: function(e = rD, r = {
+    find: function (e = rD, r = {
       returnInactive: !1
     }) {
       for (let i of n) if (i.startTime <= e) {
@@ -1787,18 +1787,18 @@ function rz({
         break;
       }
     },
-    closeActive: function(e) {
+    closeActive: function (e) {
       let r = n[0];
       r && r.endTime === rD && r.close(e);
     },
-    findAll: function(e = rD, r = 0) {
+    findAll: function (e = rD, r = 0) {
       let i = Gw(e, r);
       return n.filter(r => r.startTime <= i && e <= r.endTime).map(e => e.value);
     },
-    reset: function() {
+    reset: function () {
       n = [];
     },
-    stop: function() {
+    stop: function () {
       rL.$$delete(i);
       0 === rL.size && r$ && (vG(r$), r$ = null);
     }
@@ -1918,7 +1918,7 @@ function rW({
 }
 let rY = {
   DOCUMENT: "document",
-  XHR: "xhr",
+  sendWithRetry: "xhr",
   BEACON: "beacon",
   FETCH: "fetch",
   CSS: "css",
@@ -1930,7 +1930,7 @@ let rY = {
 };
 let rG = {
   FETCH: rY.FETCH,
-  XHR: rY.XHR
+  sendWithRetry: rY.sendWithRetry
 };
 function rH(e, r, n) {
   let i = e.getReader();
@@ -1967,7 +1967,7 @@ function rH(e, r, n) {
   a();
 }
 let rK = "initial_document";
-let $$rJ = [[rY.DOCUMENT, e => rK === e], [rY.XHR, e => "xmlhttprequest" === e], [rY.FETCH, e => "fetch" === e], [rY.BEACON, e => "beacon" === e], [rY.CSS, (e, r) => /\.css$/i.test(r)], [rY.JS, (e, r) => /\.js$/i.test(r)], [rY.IMAGE, (e, r) => ["image", "img", "icon"].includes(e) || null !== /\.(gif|jpg|jpeg|tiff|png|svg|ico)$/i.exec(r)], [rY.FONT, (e, r) => null !== /\.(woff|eot|woff2|ttf)$/i.exec(r)], [rY.MEDIA, (e, r) => ["audio", "video"].includes(e) || null !== /\.(mp3|mp4)$/i.exec(r)]];
+let $$rJ = [[rY.DOCUMENT, e => rK === e], [rY.sendWithRetry, e => "xmlhttprequest" === e], [rY.FETCH, e => "fetch" === e], [rY.BEACON, e => "beacon" === e], [rY.CSS, (e, r) => /\.css$/i.test(r)], [rY.JS, (e, r) => /\.js$/i.test(r)], [rY.IMAGE, (e, r) => ["image", "img", "icon"].includes(e) || null !== /\.(gif|jpg|jpeg|tiff|png|svg|ico)$/i.exec(r)], [rY.FONT, (e, r) => null !== /\.(woff|eot|woff2|ttf)$/i.exec(r)], [rY.MEDIA, (e, r) => ["audio", "video"].includes(e) || null !== /\.(mp3|mp4)$/i.exec(r)]];
 function r0(e) {
   let r = e.name;
   if (!AY(r)) {
@@ -2103,7 +2103,7 @@ function nl(e, r, n) {
           status: i.status,
           traceId: i.traceId,
           traceSampled: i.traceSampled,
-          type: rG.XHR,
+          type: rG.sendWithRetry,
           url: i.url,
           xhr: i.xhr,
           isAborted: i.isAborted,
@@ -2344,7 +2344,7 @@ export function $$nA9(e, r) {
 export function $$nC13(e) {
   return $$nS22(e) ? e.host : e.parentNode;
 }
-!function(e) {
+!function (e) {
   e.EVENT = "event";
   e.FIRST_INPUT = "first-input";
   e.LARGEST_CONTENTFUL_PAINT = "largest-contentful-paint";
@@ -3553,7 +3553,7 @@ function sC(e, r, n) {
   let s = i ? FR(i.startTime) : e.startClocks;
   let o = sP(e, r);
   if (!r.trackResources && !o) return;
-  let a = e.type === rG.XHR ? rY.XHR : rY.FETCH;
+  let a = e.type === rG.sendWithRetry ? rY.sendWithRetry : rY.FETCH;
   let h = i ? sI(i) : void 0;
   let d = i ? r5(i) : sM(n, s, e.duration);
   let p = kg({
@@ -3839,7 +3839,7 @@ function sY(e, r, n, i) {
     i();
   });
   return {
-    stop: function() {
+    stop: function () {
       stop();
       _stop5();
       _stop6();
@@ -4261,7 +4261,7 @@ function ow(e, r, n, i, s, o, a, h) {
       oS(e, r) && (m.end(), m = v(z.ROUTE_CHANGE));
     });
   }
-  (function() {
+  (function () {
     r.subscribe(10, () => {
       m = v(z.ROUTE_CHANGE, void 0, {
         name: m.name,

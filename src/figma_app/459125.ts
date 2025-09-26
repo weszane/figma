@@ -1,10 +1,10 @@
-import { b } from "../905/275748";
+import { LazyComponentFactory } from "../905/275748";
 import _require3 from "../2b17fec9/625947";
 import _require2 from "../2b17fec9/275043";
 import _require from "../2b17fec9/846715";
 import { ServiceCategories } from "../905/165054";
 import { NONE_SYMBOL } from "../905/992467";
-let a = new b({
+let a = new LazyComponentFactory({
   name: "fullscreen_whiteboard",
   enforce: !1,
   dependencies: [],

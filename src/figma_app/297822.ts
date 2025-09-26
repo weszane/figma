@@ -12,7 +12,7 @@ import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { isQaSearchFrecencyEnabled } from "../figma_app/144974";
 import { AssetTabType, ExtensionFeatureKey } from "../905/946805";
 import { rE } from "../figma_app/604494";
-import { OZ } from "../905/783179";
+import { formatKeyboardShortcut } from "../905/783179";
 import { gc, RA, Nv, NP, uP, tq, l4, W3, OW, Be, qE } from "../figma_app/737746";
 export function $$y10() {
   globalPerfTimer.tryStop(gc);
@@ -183,7 +183,7 @@ export function $$w4(e, t) {
       let i = r.shortcut;
       n = {
         source: t,
-        shortcutText: i ? OZ(i) : "",
+        shortcutText: i ? formatKeyboardShortcut(i) : "",
         actionText: e.text || ""
       };
       trackEventAnalytics(Be, n);

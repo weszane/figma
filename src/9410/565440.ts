@@ -9,10 +9,10 @@ import { cortexAPI } from "../figma_app/432652";
 import { ErrorType } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { wC, JT, pY } from "../figma_app/632248";
-import { s as _$$s, w as _$$w } from "../905/286488";
+import { useSelectionState, SelectionState } from "../905/286488";
 import { z8, qy } from "../figma_app/862289";
 import { cq } from "../905/794154";
-import { $J } from "../905/278499";
+import { AIActionIterationResult } from "../905/278499";
 import { f as _$$f, E as _$$E } from "../905/690713";
 import { A } from "../905/721854";
 import { Oq, is } from "../905/904596";
@@ -199,7 +199,7 @@ export function $$A0() {
   let {
     close
   } = cq();
-  let D = _$$s(JT.TRANSLATE_TEXT);
+  let D = useSelectionState(JT.TRANSLATE_TEXT);
   let M = tasks.length;
   let P = tasks.filter(e => e.state === z8.FAILED).length;
   let F = useIsSelectedViewFullscreenCooper();
@@ -215,8 +215,8 @@ export function $$A0() {
       });
     case qy.INITIAL:
       switch (D.state) {
-        case _$$w.NEEDS_INITIAL_SELECTION:
-        case _$$w.SELECTION_LOST:
+        case SelectionState.NEEDS_INITIAL_SELECTION:
+        case SelectionState.SELECTION_LOST:
           return jsx(A, {
             action: JT.TRANSLATE_TEXT,
             actionLabel: renderI18nText("fullscreen_actions.quick_actions.translate-text"),
@@ -230,7 +230,7 @@ export function $$A0() {
             },
             children: renderI18nText("ai_text_tools.selection_instruction")
           });
-        case _$$w.SELECTION_OK:
+        case SelectionState.SELECTION_OK:
           return jsx(I, {
             items: t,
             onSelectItem: e => {
@@ -282,7 +282,7 @@ export function $$A0() {
         recordingKey: "translateText",
         aiTrackingContext: {
           ...aiTrackingContext,
-          iteration_view_type: $J.DEFAULT_SUCCESS
+          iteration_view_type: AIActionIterationResult.DEFAULT_SUCCESS
         },
         targets: lastRun ? lastRun.targets.map(e => e.node.guid) : []
       });

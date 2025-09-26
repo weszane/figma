@@ -58,7 +58,7 @@ import { SvgComponent } from '../905/714743';
 import { TabLoop } from '../905/718764';
 import { kJ } from '../905/723870';
 import c, { expandRect, Point } from '../905/736624';
-import { od, rk } from '../905/748636';
+import { DraggableModal, EnsureModalOnScreenMode } from '../905/748636';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { g as _$$g3 } from '../905/757007';
 import { R as _$$R } from '../905/780757';
@@ -1865,7 +1865,7 @@ function nr(e) {
     return jsxs(Fragment, {
       children: [Y && jsx(ue, {
         registrationOrigin: iX.COMMENT_REPLY
-      }), jsxs(od, {
+      }), jsxs(DraggableModal, {
         allowWheelPassthrough: !0,
         alwaysEnsureModalOnScreen: !0,
         autoflowHeight: !0,
@@ -1889,7 +1889,7 @@ function nr(e) {
         onDragEnd: e => {
           eU(!1);
           setIsPinned(!0);
-          let t = rk.CALL_ENSURE_MODAL_ON_SCREEN;
+          let t = EnsureModalOnScreenMode.CALL_ENSURE_MODAL_ON_SCREEN;
           B(e);
           return t;
         },

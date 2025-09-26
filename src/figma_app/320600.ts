@@ -32,7 +32,7 @@ import { Oq } from "../figma_app/478201";
 import { MW } from "../figma_app/570310";
 import { hideModalHandler, showModalConditional, showModalHandler } from "../905/156213";
 import { registerModal } from "../905/102752";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { kL, zN, Pf } from "../905/326616";
 import { postUserFlag } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
@@ -47,9 +47,9 @@ import { hF, Pf as _$$Pf, kL as _$$kL } from "../905/875676";
 import { io } from "../figma_app/73698";
 import { W as _$$W } from "../figma_app/467880";
 import { v as _$$v } from "../figma_app/163681";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { maybeCreateSavepoint } from "../905/294113";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { k as _$$k2 } from "../905/284709";
 import { D as _$$D } from "../figma_app/32557";
 import { O as _$$O } from "../figma_app/688952";
@@ -62,7 +62,7 @@ let U = registerModal(function () {
   let [r, a] = useAtomValueAndSetter(cH);
   let [o, l] = useAtomValueAndSetter(MW);
   let [d, c] = useAtomValueAndSetter(Oq);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     title: "Code Connect Debug Settings",
     headerSize: "small",
     initialPosition: new Point(0, 0),
@@ -136,7 +136,7 @@ let J = registerModal(function () {
   let t = useCallback(() => {
     e(hideModalHandler());
   }, [e]);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     title: "Comments Debug Settings",
     headerSize: "small",
     initialPosition: new Point(0, 0),
@@ -186,11 +186,11 @@ let J = registerModal(function () {
     })
   });
 }, "CommentDebugSettingsModal");
-class ea extends Error {}
+class ea extends Error { }
 async function es({
   dispatch: e,
   fileKey: t,
-  log: r = () => {}
+  log: r = () => { }
 }) {
   try {
     r("Generating file version...");
@@ -201,7 +201,7 @@ async function es({
       meta: {
         run_key
       }
-    } = (await XHR.post(`/api/ml/export/file_version/${n}`)).data;
+    } = (await sendWithRetry.post(`/api/ml/export/file_version/${n}`)).data;
     r(`Waiting for run ${run_key}...`);
     for (let e = 30; e >= 0; e--) {
       await new Promise(e => setTimeout(e, 1e3));
@@ -210,7 +210,7 @@ async function es({
           ready,
           s3_uri
         }
-      } = (await XHR({
+      } = (await sendWithRetry({
         url: `/api/ml/export/status/${encodeURIComponent(run_key)}`
       })).data;
       if (ready) {
@@ -252,7 +252,7 @@ let eo = registerModal(function () {
       t();
     };
   }, [t, e, o]);
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: "ML Export",
     headerSize: "large",
     minWidth: 300,

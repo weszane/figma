@@ -14,7 +14,7 @@ import { showModalHandler, popModalStack } from "../905/156213";
 import { getAuthType } from "../figma_app/336853";
 import { AuthTypeEnum } from "../figma_app/736948";
 import { registerModal } from "../905/102752";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { wz, Vq, tp, FK, jE, Yy } from "../469e6e40/442006";
 function j(e) {
   let t = useDispatch();
@@ -160,7 +160,7 @@ export let $$y0 = registerModal(function (e) {
   let r = e.orgDomains;
   let d = !s || 0 == r.length;
   let c = () => t(popModalStack());
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: getI18nString("org_settings.sso.saml_sso"),
     onClose: c,
     maxWidth: 536,

@@ -6,7 +6,7 @@ import { D as _$$D } from '../905/273829';
 import { getUserId } from '../905/372672';
 import { getCodegenLanguagePreference } from '../905/515076';
 import { getFeatureFlags } from '../905/601108';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { postUserFlag } from '../905/985254';
 import { useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
 import { PluginPreferencesView } from '../figma_app/43951';
@@ -694,7 +694,7 @@ export function setupCodegenLanguageSync() {
  * Saves user preferences to API (B)
  */
 async function saveUserPreferences(preferences: any) {
-  await XHR.post('/api/plugin_preferences/user', {
+  await sendWithRetry.post('/api/plugin_preferences/user', {
     preferences
   });
 }

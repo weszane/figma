@@ -1,7 +1,7 @@
 import { debounce } from "../905/915765";
 import { VideoCppBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { C } from "../905/991119";
 import { fileApiHandler } from "../figma_app/787550";
 import { fullscreenValue } from "../figma_app/455680";
@@ -44,9 +44,9 @@ class _ {
         }
         let l = 1;
         let d = "fileKey" === a.type ? e[a.fileKey] : t[a.libraryKey];
-        for (;;) {
+        for (; ;) {
           try {
-            let e = await XHR.put(`/api/files/${o}`, {
+            let e = await sendWithRetry.put(`/api/files/${o}`, {
               video_sha1s: [...new Set(d)],
               image_origin_file_key: "fileKey" === a.type ? a.fileKey : void 0,
               image_origin_library_key: "libraryKey" === a.type ? a.libraryKey : void 0

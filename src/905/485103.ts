@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { reportError } from '../905/11';
 import { ServiceCategories } from '../905/165054';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { getInitialOptions } from '../figma_app/169182';
 import { BrowserInfo } from '../figma_app/778880';
 import { desktopAPIInstance } from '../figma_app/876459';
@@ -53,7 +53,7 @@ const figmaUrl: string = getInitialOptions().figma_url ?? '';
  * (Original: $$m2)
  */
 export async function sendMetric(metric: string, tags: Record<string, any> = {}): Promise<void> {
-  await XHR.crossOriginPost(`${figmaUrl}/api/web_logger/metrics/${metric}`, {
+  await sendWithRetry.crossOriginPost(`${figmaUrl}/api/web_logger/metrics/${metric}`, {
     tags: [...getClientTags(), ...objectToTags(tags)].join(',')
   }, {
     rawResponse: true
@@ -68,7 +68,7 @@ export async function sendMetric(metric: string, tags: Record<string, any> = {})
  * (Original: $$h3)
  */
 export function sendHistogram(metric: string, value: number, tags: Record<string, string> = {}): void {
-  XHR.crossOriginPost(`${figmaUrl}/api/web_logger/histogram/${metric}`, {
+  sendWithRetry.crossOriginPost(`${figmaUrl}/api/web_logger/histogram/${metric}`, {
     value,
     tags: [...getClientTags(), ...objectToTags(tags)].join(',')
   }, {
@@ -90,7 +90,7 @@ export async function sendBatchedMetrics(metrics: Array<{
   tags: Record<string, string>;
 }>): Promise<void> {
   if (metrics.length === 0) return;
-  await XHR.crossOriginPost(`${figmaUrl}/api/web_logger/metrics_batched`, metrics.map(m => ({
+  await sendWithRetry.crossOriginPost(`${figmaUrl}/api/web_logger/metrics_batched`, metrics.map(m => ({
     metric: m.metric,
     tags: [...getClientTags(), ...objectToTags(m.tags)].join(',')
   })), {
@@ -109,7 +109,7 @@ export async function sendBatchedHistograms(histograms: Array<{
   tags: Record<string, string>;
 }>): Promise<void> {
   if (histograms.length === 0) return;
-  await XHR.crossOriginPost(`${figmaUrl}/api/web_logger/histogram_batched`, histograms.map(h => ({
+  await sendWithRetry.crossOriginPost(`${figmaUrl}/api/web_logger/histogram_batched`, histograms.map(h => ({
     metric: h.metric,
     value: h.value,
     tags: [...getClientTags(), ...objectToTags(h.tags)].join(',')

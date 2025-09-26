@@ -35,7 +35,7 @@ import { Z4, tB, qH, W8, fA, _k, zz, fx, gl, iv, RK } from "../figma_app/934005"
 import { Xf } from "../figma_app/153916";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { filterNotNullish } from "../figma_app/656233";
-import { pW } from "../905/160095";
+import { TrackedLinkButton } from "../905/160095";
 import { V as _$$V } from "../905/223767";
 import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { m as _$$m } from "../469e6e40/61410";
@@ -420,7 +420,7 @@ function em(e) {
       trackingDescriptor: UpgradeAction.VIEW_PLANS
     },
     children: getI18nString("admin_settings.plan_information_widget_card.cta.view_plans")
-  }) : jsx(pW, {
+  }) : jsx(TrackedLinkButton, {
     variant: "secondary",
     newTab: !0,
     href: "https://help.figma.com/hc/articles/360040328273",
@@ -660,7 +660,7 @@ function ek(e) {
           children: getI18nString("admin_settings.plan_subscription_card.preview")
         });
       }
-      if (r) return e.upcomingRenewalWillPause && t ? jsx(pW, {
+      if (r) return e.upcomingRenewalWillPause && t ? jsx(TrackedLinkButton, {
         variant: "primary",
         href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
         trackingProperties: {

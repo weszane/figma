@@ -27,7 +27,7 @@ import { zt, YT, Oz } from "../figma_app/84580";
 import { eF } from "../figma_app/394327";
 import { wG, J2 } from "../905/331989";
 import { B9 } from "../905/782020";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { X } from "../905/55424";
 import { IQ, EQ, Y_, Q6, dX, yZ, er, Xx, aA } from "../figma_app/632975";
 import { ZA } from "../905/794523";
@@ -168,7 +168,7 @@ function H({
   let R = useCallback(() => l ? getI18nString("proto.expression_builder_entry.placeholder") : getI18nString("proto.expression_builder.placeholder"), [l]);
   return jsxs("div", {
     className: Zh,
-    children: [jsx(Ao, {
+    children: [jsx(DraggableModalManager, {
       container: _$$c,
       containerProps: {
         wiggleCount: T

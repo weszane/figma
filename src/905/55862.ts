@@ -4,13 +4,12 @@ import { reportError } from '../905/11'
 import { ServiceCategories } from '../905/165054'
 import { getI18nString } from '../905/303541'
 import { trackEventAnalytics } from '../905/449184'
-import { PG, Q_ } from '../905/570707'
+import { librarySearchByLibraryKeyAtomFamily, useLibrarySearchQuery } from '../905/570707'
 import { ZO } from '../905/691188'
 import { liveStoreInstance } from '../905/713695'
-import { l as _$$l } from '../905/716947'
 import { compareWithKey } from '../905/760074'
 import { useCurrentUserOrg } from '../905/845253'
-import { hydrateFileBrowser } from '../905/929976'
+import { hydrateFileBrowser } from '../905/890368'
 import { LibrariesViewFilterStatesView } from '../figma_app/43951'
 import { selectPermissionsState } from '../figma_app/212807'
 import { useSubscription } from '../figma_app/288654'
@@ -184,8 +183,8 @@ export function $$N2(e) {
     searchQuery,
     debouncedSearchQuery,
     setSearchQuery,
-  } = PG()
-  let [a] = setupResourceAtomHandler(Q_(debouncedSearchQuery))
+  } = useLibrarySearchQuery()
+  let [a] = setupResourceAtomHandler(librarySearchByLibraryKeyAtomFamily(debouncedSearchQuery))
   let s = useMemo(() => {
     if (a.status === 'loading')
       return []
@@ -205,7 +204,7 @@ export function $$N2(e) {
       let n = e.find(e => e.library_key === t)
       if (!n)
         continue
-      let r = _$$l(t)
+      let r = t
       i.push({
         ...n,
         max_search_score: Math.max(a.data.components.maxScorePerLibrary[r] || -1 / 0, a.data.styles.maxScorePerLibrary[r] || -1 / 0),

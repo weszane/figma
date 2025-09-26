@@ -16,8 +16,8 @@ import { hasLocalFileId, isPrivatePlugin, ManifestErrorType, manifestErrorMessag
 import { isPluginConfigMatching } from "../905/240440";
 import { Ah } from "../figma_app/221114";
 import { Zm } from "../figma_app/201703";
-import { c as _$$c } from "../905/882587";
-import { z } from "../905/905430";
+import { createParameterEntry } from "../905/882587";
+import { createMenuItems } from "../905/905430";
 import { q } from "../905/276489";
 import { gy, ft, Im } from "../905/608145";
 function S(e, t) {
@@ -72,7 +72,7 @@ function C(e, t, i) {
     if (!canRun) continue;
     let s = isReadOnly && !isDevModePlugin(a);
     if (!a.manifest.menu || 0 === a.manifest.menu.length || s) {
-      let e = _$$c(a.manifest.parameters, a.name);
+      let e = createParameterEntry(a.manifest.parameters, a.name);
       let i = t.currentPlugin && isSamePlugin(a, t.currentPlugin);
       h.push({
         type: "run-menu-action",
@@ -92,7 +92,7 @@ function C(e, t, i) {
         path: []
       });
     } else {
-      let e = z(a.manifest.menu, a, [a.name]);
+      let e = createMenuItems(a.manifest.menu, a, [a.name]);
       h.push({
         type: "submenu",
         subtype: "manifest",
@@ -243,8 +243,8 @@ export function $$T0(e, t) {
               type: "submenu",
               subtype: "manifest",
               name: u,
-              submenu: z(a.manifest.menu, a, [u])
-            });else {
+              submenu: createMenuItems(a.manifest.menu, a, [u])
+            }); else {
               let t = e.currentPlugin && isSamePlugin(a, e.currentPlugin);
               o.push({
                 type: "run-menu-action",

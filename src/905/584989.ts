@@ -7,7 +7,7 @@ import { createOptimistThunk } from '../905/350402'
 import { FlashActions } from '../905/573154'
 import { setupLoadingStateHandler } from '../905/696711'
 import { teamAPIClient } from '../905/834575'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 
 /**
  * Types for requestUpgrade and fetchTeamUsers thunks
@@ -52,7 +52,7 @@ export const requestUpgrade = createOptimistThunk(
       folderId,
     } = params
 
-    XHR.post(`/api/teams/${teamId}/team_users/request_upgrade`, {
+    sendWithRetry.post(`/api/teams/${teamId}/team_users/request_upgrade`, {
       editor_type: licenseType,
       billable_product_key: seatTypeKey,
       file_key: fileKey,
@@ -116,11 +116,11 @@ export const fetchTeamUsers = createOptimistThunk(
     const state = dispatchContext.getState()
     const isTeamView
       = state.selectedView.view === 'team'
-        && (state.selectedView.teamViewTab === 'members'
-          || state.selectedView.teamViewTab === 'billing')
+      && (state.selectedView.teamViewTab === 'members'
+        || state.selectedView.teamViewTab === 'billing')
     const isOtherView
       = state.selectedView.view === 'teamUpgrade'
-        || state.selectedView.view === 'eduReview'
+      || state.selectedView.view === 'eduReview'
 
     if (!isNullOrFailure(state.loadingState, loadingKey) && !(isTeamView || isOtherView)) {
       return

@@ -34,7 +34,7 @@ import { F as _$$F } from "../figma_app/284426";
 import { Ig, dc, rP } from "../figma_app/155647";
 import { q as _$$q } from "../905/296913";
 import { s as _$$s2 } from "../figma_app/268276";
-import { P as _$$P } from "../905/907246";
+import { renderEventShield } from "../905/907246";
 import { zi } from "../905/824449";
 import { _B, QT } from "../figma_app/152690";
 import { Ku as _$$Ku } from "../figma_app/481279";
@@ -194,7 +194,7 @@ function er({
   return e?.subscriptionStatus === "LOCAL" && e?.isSoftDeleted ? jsx(_$$a, {
     "aria-label": getI18nString("variables.variable_was_deleted"),
     className: Bx
-  }) : jsx(_$$P, {
+  }) : jsx(renderEventShield, {
     children: jsx(_$$J, {
       color: t,
       forceNonInteractive: !0

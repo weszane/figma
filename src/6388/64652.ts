@@ -95,7 +95,7 @@ function Z() {
     });
     setIsOpen(e);
   }, [x, m, setIsOpen]);
-  let [b,, j] = BN(a, e);
+  let [b, , j] = BN(a, e);
   return jsxs(_$$A, {
     isFullHeight: !r,
     children: [jsx(_$$$2, {}), !t && jsx(_$$I, {
@@ -303,7 +303,7 @@ export let $$eI2 = memo(function () {
         },
         disableResizing: !y,
         unsetSizeWhenDisabled: !0,
-        className: cssBuilderInstance.relative.flex.flexColumn.$$if(!y, cssBuilderInstance.flex1.overflowHidden).$,
+        className: cssBuilderInstance.relative.flex.flexColumn.if(!y, cssBuilderInstance.flex1.overflowHidden).$,
         children: jsx(eC, {
           padding: z,
           isReadOnly: e
@@ -358,7 +358,7 @@ export function $$eT3() {
         },
         disableResizing: !1,
         unsetSizeWhenDisabled: !0,
-        className: cssBuilderInstance.relative.flex.flexColumn.$$if(!1, cssBuilderInstance.flex1.overflowHidden).$,
+        className: cssBuilderInstance.relative.flex.flexColumn.if(!1, cssBuilderInstance.flex1.overflowHidden).$,
         children: jsx(eC, {
           padding: c,
           isReadOnly: u
@@ -399,7 +399,7 @@ export function $$eN1({
   guid: n
 }) {
   return jsxs("div", {
-    className: eL(cssBuilderInstance.flex.flexColumn.overflowHidden.relative.colorBg.$$if(e, cssBuilderInstance.flexGrow1).$),
+    className: eL(cssBuilderInstance.flex.flexColumn.overflowHidden.relative.colorBg.if(e, cssBuilderInstance.flexGrow1).$),
     style: {
       marginBottom: "-1px"
     },

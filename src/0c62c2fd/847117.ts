@@ -132,7 +132,7 @@ function q(e) {
     dispatch: _,
     stats: p,
     shouldShowMoveToProjectButton: !1,
-    onMoveToProject: () => {},
+    onMoveToProject: () => { },
     filesToMove: [],
     onCancel
   });
@@ -555,14 +555,14 @@ export function $$ei1(e) {
     children: jsx("div", {
       className: cssBuilderInstance.flex.itemsCenter.justifyBetween.flex1.pl8.pr16.textBodyMedium.$,
       children: jsxs("div", {
-        className: cssBuilderInstance.flex.gap8.$$if(r, cssBuilderInstance.itemsStart, cssBuilderInstance.itemsCenter).$,
+        className: cssBuilderInstance.flex.gap8.if(r, cssBuilderInstance.itemsStart, cssBuilderInstance.itemsCenter).$,
         children: [jsx("div", {
           className: cssBuilderInstance.flex.justifyCenter.h32.w32.itemsCenter.$,
           children: jsx(en, {
             file
           })
         }), jsxs("div", {
-          className: cssBuilderInstance.$$if(r, cssBuilderInstance.pb6).$,
+          className: cssBuilderInstance.if(r, cssBuilderInstance.pb6).$,
           children: [jsx("div", {
             className: cssBuilderInstance.truncate.lh32.$,
             style: styleBuilderInstance.add({

@@ -1,4 +1,4 @@
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { l as _$$l } from "../469e6e40/229084";
@@ -8,7 +8,7 @@ import { hZ } from "../figma_app/342125";
 let $$c0 = createOptimistThunk((e, {
   orgSamlConfigId: t
 }) => {
-  XHR.post(`/api/org_saml_config/${t}/scim_api_token`).then(t => {
+  sendWithRetry.post(`/api/org_saml_config/${t}/scim_api_token`).then(t => {
     e.dispatch(showModalHandler({
       type: _$$l(),
       data: {
@@ -33,7 +33,7 @@ let $$c0 = createOptimistThunk((e, {
 let $$_1 = createOptimistThunk((e, {
   orgSamlConfigId: t
 }) => {
-  XHR.del(`/api/org_saml_config/${t}/scim_api_token`).then(({
+  sendWithRetry.del(`/api/org_saml_config/${t}/scim_api_token`).then(({
     data: t
   }) => {
     e.dispatch(hZ({

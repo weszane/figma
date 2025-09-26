@@ -1,4 +1,4 @@
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -13,7 +13,7 @@ import { p as _$$p } from "../905/42189";
 import { s as _$$s3 } from "../figma_app/504088";
 var $$g1 = (e => (e.INVITE_TILE = "invite_tile", e.COMMUNITY_PAGE = "community_page", e))($$g1 || {});
 let $$f7 = createOptimistThunk((e, t) => {
-  XHR.put("/api/community_publishers/accept", t).then(({
+  sendWithRetry.put("/api/community_publishers/accept", t).then(({
     data: t
   }) => {
     let r = T(t.meta);
@@ -30,7 +30,7 @@ let $$E5 = createOptimistThunk((e, t) => {
     plugin_id,
     widget_id
   } = t;
-  XHR.put("/api/plugin_publishers/accept", {
+  sendWithRetry.put("/api/plugin_publishers/accept", {
     plugin_id,
     widget_id
   }).then(({
@@ -69,7 +69,7 @@ let $$E5 = createOptimistThunk((e, t) => {
   });
 });
 let $$y4 = createOptimistThunk((e, t) => {
-  XHR.del("/api/community_publishers/remove", t).then(({
+  sendWithRetry.del("/api/community_publishers/remove", t).then(({
     data: t
   }) => {
     let r = T(t.meta);
@@ -81,7 +81,7 @@ let $$y4 = createOptimistThunk((e, t) => {
   });
 });
 let $$b0 = createOptimistThunk((e, t) => {
-  XHR.del("/api/plugin_publishers/remove", t).then(({
+  sendWithRetry.del("/api/plugin_publishers/remove", t).then(({
     data: r
   }) => {
     let n = r.meta;

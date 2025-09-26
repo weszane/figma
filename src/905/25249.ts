@@ -25,7 +25,7 @@ import { $S, $w, AA, j7, jq, Jt, KU, mL, rG, wk, zc, zn } from '../905/372455';
 import { selectUser } from '../905/372672';
 import { i as _$$i } from '../905/385727';
 import { e as _$$e2 } from '../905/393279';
-import { rq as _$$rq } from '../905/425180';
+import { OnboardingModal } from '../905/425180';
 import { useModalManager } from '../905/437088';
 import { Link } from '../905/438674';
 import { trackEventAnalytics } from '../905/449184';
@@ -42,7 +42,7 @@ import { cL } from '../905/748726';
 import { useCurrentUserOrg } from '../905/845253';
 import { r as _$$r } from '../905/857502';
 import { L as _$$L } from '../905/857916';
-import { F_ } from '../905/858282';
+import { ArrowPosition } from '../905/858282';
 import { WZ } from '../905/893645';
 import { bp, Wj } from '../905/913057';
 import { ob, t9, yI } from '../905/915142';
@@ -97,8 +97,8 @@ function SharingClarityProjectModalOverlay() {
       canShow: (flagValue: boolean) => !flagValue
     });
   });
-  return jsx(_$$rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: jsx('p', {
       children: renderI18nText('rcs.sharing_clarity.project_creation_team_access_description')
     }),

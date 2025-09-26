@@ -10,7 +10,7 @@ import { convertKiwiToString, convertRefToString, convertStringToKiwi } from '..
 import { logWarning } from '../905/714362'
 import { createVariableIdStringFromRef } from '../905/805904'
 import { generateFileVersionUrl, loadCanvasData } from '../905/815475'
-import { getRequest, XHR } from '../905/910117'
+import { getRequest, sendWithRetry } from '../905/910117'
 import { parseColor, setAlpha } from '../figma_app/191804'
 import { hasAssetId, PrimaryWorkflowEnum, StagingStatusEnum } from '../figma_app/633080'
 import { sortByPropertyWithOptions } from '../figma_app/656233'
@@ -130,9 +130,9 @@ export function getFillColor(fill: any) {
   return paint.type !== 'SOLID' || paint.color == null || paint.opacity == null
     ? null
     : {
-        ...paint.color,
-        a: paint.opacity,
-      }
+      ...paint.color,
+      a: paint.opacity,
+    }
 }
 
 /**
@@ -334,7 +334,7 @@ async function fetchLogData(items: any[], fileVersion: number, workflowType: Pri
       itemType = 'components'
   }
   let validItems: any[] = []
-  let responseItems = (await XHR.post(endpoint, {
+  let responseItems = (await sendWithRetry.post(endpoint, {
     [itemType]: items,
     fv: fileVersion.toString(),
   })).data.meta[itemType]

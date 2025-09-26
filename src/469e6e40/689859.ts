@@ -13,7 +13,7 @@ import { liveStoreInstance, setupResourceAtomHandler, getAtomMutate } from "../9
 import { JO, Cn, fm } from "../c5e2cae0/453906";
 import { registerModal } from "../905/102752";
 import { j as _$$j } from "../905/834956";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { v0 } from "../figma_app/639088";
 let v = "default_paid_status--inputRow--5Uarh";
 let f = "default_paid_status--inputLabel--gGP5B";
@@ -155,7 +155,7 @@ let $$C0 = registerModal(function (e) {
   let q = D?.type === F;
   return jsx(TrackingProvider, {
     name: "Default License Type Setting Modal",
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: getI18nString("default_paid_status_modal_v2.manage_default_roles.seat_rename"),
       onClose: () => t(hideModal()),
       maxWidth: 310,

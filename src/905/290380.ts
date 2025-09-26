@@ -1,196 +1,256 @@
-import _require2 from "../905/253473";
-import _require from "../vendor/496227";
-import { z } from "../vendor/744105";
-import { GENERATOR, generate } from "../vendor/849173";
-var n;
-var r = this && this.__createBinding || (Object.create ? function (e, t, i, n) {
-  void 0 === n && (n = i);
-  var r = Object.getOwnPropertyDescriptor(t, i);
-  (!r || ("get" in r ? !t.__esModule : r.writable || r.configurable)) && (r = {
-    enumerable: !0,
-    get: function () {
-      return t[i];
-    }
-  });
-  Object.defineProperty(e, n, r);
-} : function (e, t, i, n) {
-  void 0 === n && (n = i);
-  e[n] = t[i];
-});
-var a = this && this.__setModuleDefault || (Object.create ? function (e, t) {
-  Object.defineProperty(e, "default", {
-    enumerable: !0,
-    value: t
-  });
-} : function (e, t) {
-  e.$$default = t;
-});
-var s = this && this.__importStar || (n = function (e) {
-  return (n = Object.getOwnPropertyNames || function (e) {
-    var t = [];
-    for (var i in e) Object.prototype.hasOwnProperty.call(e, i) && (t[t.length] = i);
-    return t;
-  })(e);
-}, function (e) {
-  if (e && e.__esModule) return e;
-  var t = {};
-  if (null != e) for (i = n(e), s = 0, void 0; s < i.length; s++) {
-    var i;
-    var s;
-    "default" !== i[s] && r(t, e, i[s]);
-  }
-  a(t, e);
-  return t;
-});
-exports.astToString = p;
-exports.parseLooseWrapped = h;
-exports.parseLoose = function (e) {
-  return l.Parser.extend(d.AcornJsxPlugin({
-    loose: !0
-  })).parse(e, {
-    ecmaVersion: 11,
-    allowImportExportEverywhere: !1
-  });
-};
-exports.parseStrict = function (e) {
-  return l.Parser.extend(d.AcornJsxPlugin({
-    loose: !1
-  })).parse(e, {
-    ecmaVersion: 11,
-    allowImportExportEverywhere: !1
-  });
-};
-exports.parseLooseEdit = function (e) {
-  return l.Parser.extend(d.AcornJsxPlugin({
-    loose: !0,
-    editMode: !0
-  })).parse(e, {
-    ecmaVersion: 11,
-    allowImportExportEverywhere: !1
-  });
-};
-exports.jsxWithDataId = g;
-exports.extractDataIdFromJSX = f;
-exports.extractJSXWithoutDataId = function (e, t) {
-  let i = m.parse(t);
-  let n = p(h(e, {
-    addDataIds: !1
-  }));
-  let r = f(e, t);
-  return [n.slice(6, i), n.slice(i + r.length)];
-};
-let l = s(_require);
-let d = s(_require2);
-let u = Object.assign({}, GENERATOR, {
-  JSXElement: function (e, t) {
-    let i = e.openingElement;
-    for (let n of (i && this[i.type](i, t), e.children ?? [])) this[n.type](n, t);
-    let n = e.closingElement;
-    n && this[n.type](n, t);
-  },
-  JSXAttribute: function (e, t) {
-    e.name && (t.write(" "), this[e.name.type](e.name, t), t.write("="), e.value ? "JSXExpressionContainer" === e.value.type ? ("JSXEmptyExpression" !== e.value.expression.type && e.value.expression || t.write('""'), t.write("{"), this[e.value.expression.type](e.value.expression, t), t.write("}")) : (t.write('"'), t.write(e.value.value ?? ""), t.write('"')) : t.write('""'));
-  },
-  JSXOpeningElement: function (e, t) {
-    for (let i of (t.write("<"), this[e.name.type](e.name, t), e.attributes ?? [])) this[i.type](i, t);
-    e.selfClosing ? t.write("/>") : t.write(">");
-  },
-  JSXFragment: function (e, t) {
-    for (let i of (t.write("<>"), e.children ?? [])) this[i.type](i, t);
-    t.write("</>");
-  },
-  JSXClosingFragment: function (e, t) {
-    t.write("</>");
-  },
-  JSXClosingElement: function (e, t) {
-    t.write("</");
-    this[e.name.type](e.name, t);
-    t.write(">");
-  },
-  JSXText: function (e, t) {
-    t.write(e.raw);
-  },
-  JSXIdentifier: function (e, t) {
-    t.write(e.name);
-  },
-  JSXExpressionContainer: function (e, t) {
-    t.write("{");
-    this[e.expression.type](e.expression, t);
-    t.write("}");
-  },
-  JSXEmptyExpression: function (e, t) {},
-  JSXArrayExpression: function (e, t) {
-    t.write("[");
-    let i = !1;
-    for (let n = 0; n < e.elements.length; n++) {
-      i = n === e.elements.length - 1;
-      let r = e.elements[n];
-      this[r.type](r, t);
-      i || t.write(", ");
-    }
-    t.write("]");
-  },
-  JSXObject: function (e, t) {
-    t.write("{");
-    let i = !1;
-    for (let n = 0; n < e.properties.length; n++) {
-      i = n === e.properties.length - 1;
-      let r = e.properties[n];
-      this[r.type](r, t);
-      i || t.write(", ");
-    }
-    t.write("}");
-  },
-  JSXProperty: function (e, t) {
-    this[e.key.type](e.key, t);
-    t.write(": ");
-    this[e.value.type](e.value, t);
-  }
-});
-function p(e) {
-  if (!e) return JSON.stringify(e);
-  let t = generate(e, {
-    generator: u
-  });
-  t.endsWith(";\n") && (t = t.slice(0, -2));
-  return t;
-}
-let m = z.union([z.number(), z.string().transform((e, t) => {
-  let i = parseInt(e);
-  return isNaN(i) ? (t.addIssue({
-    code: z.ZodIssueCode.custom,
-    message: "Not a number"
-  }), z.NEVER) : i;
-})]);
-function h(e, t) {
-  let i = l.Parser.extend(d.AcornJsxPlugin({
-    loose: !0,
-    addDataIds: !0,
-    ...(t ?? {})
-  }));
-  let n = `<root>${e}`;
-  return i.parse(n, {
-    ecmaVersion: 11,
-    locations: !0
-  });
-}
-function g(e) {
-  return p(h(e));
-}
-function f(e, t) {
-  let i = m.parse(t);
-  let n = h(e, {
-    addDataIds: !1
-  }).body[0].expression.children || [];
-  for (; 0 !== n.length;) {
-    let e = n.pop();
-    if (e) {
-      if (e.start === i) return p(e);
-      "children" in e && "start" in e && "end" in e && e.start < i && e.end > i && n.push(...e.children);
-    }
-  }
-  console.error(`Failed to find dataId=${t} in
+import * as acorn from 'acorn'
+import { generate, GENERATOR } from 'astring'
+import { z } from 'zod'
+import { AcornJsxPlugin } from '../905/253473'
 
- ${g(e)}`);
-  return "";
+/**
+ * Refactored exports and JSX AST utilities from 290380.ts
+ * Original function/variable names are preserved in comments for traceability.
+ */
+
+/**
+ * Type for AST node, can be extended for more precise typing.
+ */
+export type AstNode = any
+
+/**
+ * Zod schema for parsing number or string as number.
+ * Original: m
+ */
+export const DataIdSchema = z.union([
+  z.number(),
+  z.string().transform((e, ctx) => {
+    const parsed = parseInt(e)
+    if (isNaN(parsed)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Not a number',
+      })
+      return z.NEVER
+    }
+    return parsed
+  }),
+])
+
+/**
+ * Custom JSX generator for AST to string conversion.
+ * Original: u
+ */
+export const JsxAstGenerator = Object.assign({}, GENERATOR, {
+  // JSXElement
+  JSXElement(node: any, writer: any) {
+    const opening = node.openingElement
+    if (opening)
+      this[opening.type](opening, writer)
+    for (const child of node.children ?? []) this[child.type](child, writer)
+    const closing = node.closingElement
+    if (closing)
+      this[closing.type](closing, writer)
+  },
+  // JSXAttribute
+  JSXAttribute(node: any, writer: any) {
+    if (node.name) {
+      writer.write(' ')
+      this[node.name.type](node.name, writer)
+      writer.write('=')
+      if (node.value) {
+        if (node.value.type === 'JSXExpressionContainer') {
+          if (node.value.expression.type !== 'JSXEmptyExpression' && node.value.expression) {
+            writer.write('{')
+            this[node.value.expression.type](node.value.expression, writer)
+            writer.write('}')
+          }
+          else {
+            writer.write('""')
+          }
+        }
+        else {
+          writer.write('"')
+          writer.write(node.value.value ?? '')
+          writer.write('"')
+        }
+      }
+      else {
+        writer.write('""')
+      }
+    }
+  },
+  // JSXOpeningElement
+  JSXOpeningElement(node: any, writer: any) {
+    writer.write('<')
+    this[node.name.type](node.name, writer)
+    for (const attr of node.attributes ?? []) this[attr.type](attr, writer)
+    writer.write(node.selfClosing ? '/>' : '>')
+  },
+  // JSXFragment
+  JSXFragment(node: any, writer: any) {
+    writer.write('<>')
+    for (const child of node.children ?? []) this[child.type](child, writer)
+    writer.write('</>')
+  },
+  // JSXClosingFragment
+  JSXClosingFragment(_node: any, writer: any) {
+    writer.write('</>')
+  },
+  // JSXClosingElement
+  JSXClosingElement(node: any, writer: any) {
+    writer.write('</')
+    this[node.name.type](node.name, writer)
+    writer.write('>')
+  },
+  // JSXText
+  JSXText(node: any, writer: any) {
+    writer.write(node.raw)
+  },
+  // JSXIdentifier
+  JSXIdentifier(node: any, writer: any) {
+    writer.write(node.name)
+  },
+  // JSXExpressionContainer
+  JSXExpressionContainer(node: any, writer: any) {
+    writer.write('{')
+    this[node.expression.type](node.expression, writer)
+    writer.write('}')
+  },
+  // JSXEmptyExpression
+  JSXEmptyExpression(_node: any, _writer: any) {},
+  // JSXArrayExpression
+  JSXArrayExpression(node: any, writer: any) {
+    writer.write('[')
+    for (let i = 0; i < node.elements.length; i++) {
+      this[node.elements[i].type](node.elements[i], writer)
+      if (i < node.elements.length - 1)
+        writer.write(', ')
+    }
+    writer.write(']')
+  },
+  // JSXObject
+  JSXObject(node: any, writer: any) {
+    writer.write('{')
+    for (let i = 0; i < node.properties.length; i++) {
+      this[node.properties[i].type](node.properties[i], writer)
+      if (i < node.properties.length - 1)
+        writer.write(', ')
+    }
+    writer.write('}')
+  },
+  // JSXProperty
+  JSXProperty(node: any, writer: any) {
+    this[node.key.type](node.key, writer)
+    writer.write(': ')
+    this[node.value.type](node.value, writer)
+  },
+})
+
+/**
+ * Converts AST to string using custom JSX generator.
+ * Original: p
+ */
+export function astToString(ast: AstNode): string {
+  if (!ast)
+    return JSON.stringify(ast)
+  let result = generate(ast, { generator: JsxAstGenerator })
+  if (result.endsWith(';\n'))
+    result = result.slice(0, -2)
+  return result
+}
+
+/**
+ * Parses JSX code loosely and wraps with a root.
+ * Original: h
+ */
+export function parseLooseWrapped(code: string, options?: Record<string, any>): AstNode {
+  const parser = acorn.Parser.extend(
+    AcornJsxPlugin({
+      loose: true,
+      addDataIds: true,
+      ...(options ?? {}),
+    }) as any,
+  )
+  const wrappedCode = `<root>${code}`
+  return parser.parse(wrappedCode, {
+    ecmaVersion: 11,
+    locations: true,
+  })
+}
+
+/**
+ * Loosely parses JSX code.
+ * Original: parseLoose
+ */
+export function parseLoose(code: string): AstNode {
+  return acorn.Parser.extend(
+    AcornJsxPlugin({ loose: true }) as any,
+  ).parse(code, {
+    ecmaVersion: 11,
+    allowImportExportEverywhere: false,
+  })
+}
+
+/**
+ * Strictly parses JSX code.
+ * Original: parseStrict
+ */
+export function parseStrict(code: string): AstNode {
+  return acorn.Parser.extend(
+    AcornJsxPlugin({ loose: false }) as any,
+  ).parse(code, {
+    ecmaVersion: 11,
+    allowImportExportEverywhere: false,
+  })
+}
+
+/**
+ * Loosely parses JSX code in edit mode.
+ * Original: parseLooseEdit
+ */
+export function parseLooseEdit(code: string): AstNode {
+  return acorn.Parser.extend(
+    AcornJsxPlugin({ loose: true, editMode: true }) as any,
+  ).parse(code, {
+    ecmaVersion: 11,
+    allowImportExportEverywhere: false,
+  })
+}
+
+/**
+ * Converts JSX code to string with data-id attributes.
+ * Original: g
+ */
+export function jsxWithDataId(code: string): string {
+  return astToString(parseLooseWrapped(code))
+}
+
+/**
+ * Extracts JSX node by data-id from code.
+ * Original: f
+ */
+export function extractDataIdFromJSX(code: string, dataId: string | number): string {
+  const id = DataIdSchema.parse(dataId)
+  const children = parseLooseWrapped(code, { addDataIds: false }).body[0].expression.children || []
+  const stack = [...children]
+  while (stack.length) {
+    const node = stack.pop()
+    if (node) {
+      if (node.start === id)
+        return astToString(node)
+      if ('children' in node && 'start' in node && 'end' in node && node.start < id && node.end > id) {
+        stack.push(...node.children)
+      }
+    }
+  }
+  console.error(`Failed to find dataId=${dataId} in\n\n${jsxWithDataId(code)}`)
+  return ''
+}
+
+/**
+ * Extracts JSX code without data-id attributes.
+ * Original: extractJSXWithoutDataId
+ */
+export function extractJSXWithoutDataId(code: string, dataId: string | number): [string, string] {
+  const id = DataIdSchema.parse(dataId)
+
+  const jsxString = astToString(parseLooseWrapped(code, { addDataIds: false }))
+  const extracted = extractDataIdFromJSX(code, dataId)
+  return [jsxString.slice(6, id), jsxString.slice(id + extracted.length)]
 }

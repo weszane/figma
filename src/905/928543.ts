@@ -9,12 +9,12 @@ import { selectWithShallowEqual } from "../905/103090";
 import { w as _$$w } from "../905/835474";
 import { G5 } from "../figma_app/795674";
 import { JD, h1 } from "../905/986103";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { P as _$$P } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { b as _$$b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { LibraryAgeEnum, getDraftsSidebarString, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { e0 } from "../905/696396";
 import { DSAApiServiceInstance } from "../905/669853";
@@ -82,7 +82,7 @@ function B({
         className: "stats_for_missing_files_view--infoIcon--4-RnW",
         "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("design_systems.dsa.not_visible_help")
-      }), renderI18nText("design_systems.dsa.not_visible"), jsx(Ph, {
+      }), renderI18nText("design_systems.dsa.not_visible"), jsx(TrackedLink, {
         newTab: !0,
         href: "https://help.figma.com/hc/articles/360039238353-View-and-explore-library-analytics",
         trusted: !0,
@@ -254,7 +254,7 @@ class X extends PureComponent {
     })) : null;
   }
   render() {
-    return jsx(_$$x, {
+    return jsx(LoadingRenderer, {
       isLoading: null == this.props.fileStats,
       children: this.renderFooterText
     });
@@ -387,7 +387,7 @@ class J extends PureComponent {
       children: jsxs(Fragment, {
         children: [jsx("div", {
           className: W,
-          children: jsx(Ph, {
+          children: jsx(TrackedLink, {
             href: `/file/${t}/${encodeURIComponent(e)}`,
             innerText: "DSAnalytics File Open",
             trackingProperties: {
@@ -476,7 +476,7 @@ class ee extends PureComponent {
 function et({
   item: e
 }) {
-  let t = _$$b({
+  let t = useLibraryFileLink({
     libraryKey: e.library_key,
     nodeId: e.node_id,
     mainComponent: !0

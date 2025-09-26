@@ -10,7 +10,7 @@ export function $$a0({
   return jsxs("div", {
     className: cssBuilderInstance.wFull.flex.itemsCenter.justifyCenter.radiusMedium.relative.$,
     children: [t, jsx("div", {
-      className: cssBuilderInstance.absolute.top0.left0.right0.bottom0.radiusMedium.eventsNone.$$if(e, a).$
+      className: cssBuilderInstance.absolute.top0.left0.right0.bottom0.radiusMedium.eventsNone.if(e, a).$
     })]
   });
 }

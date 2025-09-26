@@ -16,7 +16,7 @@ import { dequeuePluginStatus } from '../905/571565';
 import { VisualBellIcon } from '../905/576487';
 import { pS } from '../905/588985';
 import { getFeatureFlags } from '../905/601108';
-import { getCurrentUserOrgId, getPluginDevMode, getSelectedView } from '../905/622391';
+import { getCurrentUserOrgId, getPluginDevMode, handleSelectedView } from '../905/622391';
 import { yA } from '../905/642684';
 import { logger } from '../905/651849';
 import { localStorageRef } from '../905/657224';
@@ -559,7 +559,7 @@ export let $$eo4 = _$$n(async e => {
               widgetAction,
               forcePluginVersionId
             } = t;
-            let f = getSelectedView();
+            let f = handleSelectedView();
             if (!f) throw new er(t.isWidget ? getI18nString('plugins.cannot_run_widget_logged_out') : getI18nString('plugins.cannot_run_plugin_logged_out'));
             if (e = {
               ...e,
@@ -572,7 +572,7 @@ export let $$eo4 = _$$n(async e => {
               storeInRecentsKey: mapEditorTypeTo(_),
               id: e.plugin_id,
               version: e.version,
-              currentUserId: getSelectedView()
+              currentUserId: handleSelectedView()
             };
             isWidget ? debugState.dispatch(addWidgetToRecentsThunk(y)) : debugState.dispatch(addPluginToRecentsThunk(y));
             let b = debugState.getState().publishedPlugins[e.plugin_id];
@@ -700,7 +700,7 @@ async function ec({
     deferRunEvent,
     parameterValues
   } = t;
-  let g = getSelectedView();
+  let g = handleSelectedView();
   if (!g) throw new er(isWidget ? getI18nString('plugins.cannot_run_widget_logged_out') : getI18nString('plugins.cannot_run_plugin_logged_out'));
   let f = debugState.getState().selectedView.editorType;
   if (e.manifest) {
@@ -735,7 +735,7 @@ async function ec({
     id: String(e.localFileId),
     isDevelopment: !0,
     version: '',
-    currentUserId: getSelectedView()
+    currentUserId: handleSelectedView()
   };
   isWidget ? debugState.dispatch(addWidgetToRecentsThunk(_)) : debugState.dispatch(addPluginToRecentsThunk(_));
   try {

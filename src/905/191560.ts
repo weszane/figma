@@ -22,7 +22,7 @@ import { Link } from '../905/438674';
 import { k as _$$k3 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { appendSearchParam } from '../905/508367';
-import { ZD } from '../905/519092';
+import { HeaderModalContainer } from '../905/519092';
 import { Button } from '../905/521428';
 import { FlashActions } from '../905/573154';
 import { CustomSpacer } from '../905/585996';
@@ -35,7 +35,7 @@ import { T as _$$T } from '../905/745591';
 import { Q9 } from '../905/773401';
 import { AuthAction, AuthErrorCode, AuthField, AuthFlowStep, AuthProvider, ClientPlatform } from '../905/862321';
 import { t as _$$t2 } from '../905/897919';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { noop } from 'lodash-es';
 ;
 import { styleBuilderInstance } from '../905/941192';
@@ -274,7 +274,7 @@ function j(e) {
       type: 'hidden',
       name: 'email_token',
       value: C
-    }), i ? jsxs(ZD, {
+    }), i ? jsxs(HeaderModalContainer, {
       headerSize: 'hidden',
       className: 'verify_human_form--modalContainer--7IjzI',
       title: ' ',
@@ -519,7 +519,7 @@ function Q(e) {
         name: 'request_org_access_modal_cta',
         onClick: () => {
           o(!0);
-          XHR.post('/api/org_join_request', {
+          sendWithRetry.post('/api/org_join_request', {
             resource_type: FResourceCategoryType.FILE,
             resource_id_or_key: c
           }).then(() => {
@@ -696,7 +696,7 @@ let ef = (e, t) => {
   desktopAPIInstance?.startAppAuth(i);
 };
 let e_ = (e, t, i, n) => {
-  XHR.post('/api/session/app_auth', {
+  sendWithRetry.post('/api/session/app_auth', {
     app_type: t
   }).then(t => {
     let n = t.data.meta;
@@ -831,7 +831,7 @@ function eb(e) {
   let f = e => {
     let t = g(e);
     customHistory.unsafeRedirect(t);
-    XHR.post('/api/session/clear_cont');
+    sendWithRetry.post('/api/session/clear_cont');
     setTimeout(() => {
       window.close();
     }, 1e4);
@@ -842,7 +842,7 @@ function eb(e) {
     let n = new URLSearchParams();
     e.auth.revokeGrantor && n.append('revoke_grantor', e.auth.revokeGrantor.toString());
     n.toString() && (i += `?${n.toString()}`);
-    XHR.post(i, null, {
+    sendWithRetry.post(i, null, {
       headers: {
         'X-Figma-User-ID': t
       }
@@ -1000,7 +1000,7 @@ function ev(e) {
       i();
       return;
     }
-    XHR.post('/api/session/app_auth/redeem', {
+    sendWithRetry.post('/api/session/app_auth/redeem', {
       g_secret: e.auth.appAuthGSecret
     }).then(() => {
       desktopAPIInstance ? desktopAPIInstance.finishAppAuth(e.auth.redirectUrl) : setTimeout(() => {
@@ -1871,7 +1871,7 @@ function te() {
     }
     f(!0);
     try {
-      await XHR.post('/api/session/redeem_magic_code', {
+      await sendWithRetry.post('/api/session/redeem_magic_code', {
         email: t,
         code: p
       });
@@ -2085,7 +2085,7 @@ function ts() {
     };
   }, [i]);
   return jsxs('div', {
-    className: y()(cssBuilderInstance.flex.flexColumn.$$if(isAndroidOrIphoneNotFigmaMobile, cssBuilderInstance.p28, cssBuilderInstance.p36).$, e5),
+    className: y()(cssBuilderInstance.flex.flexColumn.if(isAndroidOrIphoneNotFigmaMobile, cssBuilderInstance.p28, cssBuilderInstance.p36).$, e5),
     style: {
       maxWidth: '400px',
       minHeight: '120px'

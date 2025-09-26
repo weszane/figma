@@ -2,7 +2,7 @@ import { ServiceCategories } from "../905/165054";
 import { z as _$$z, Ip } from "../905/239603";
 import { reportError } from "../905/11";
 import { createMetaValidator, createPaginatedValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getAllTimeSortOption } from "../figma_app/324237";
 import { ResourceTypeMap } from "../figma_app/701107";
 import { ResourceWithContentSchema, ResourceWithOptionalContentListSchema, RecommendationDimensionsSchema, RecommendedResourcesSchema } from "../figma_app/306946";
@@ -85,19 +85,19 @@ let $$m0 = new class {
     });
   }
   likeResource(e) {
-    return XHR.post(`/api/resource/${e.resourceId}/like`);
+    return sendWithRetry.post(`/api/resource/${e.resourceId}/like`);
   }
   unlikeResource(e) {
-    return XHR.del(`/api/resource/${e.resourceId}/like`);
+    return sendWithRetry.del(`/api/resource/${e.resourceId}/like`);
   }
   saveResource(e) {
-    return XHR.post(`/api/resource/${e.resource.id}/save`, {
+    return sendWithRetry.post(`/api/resource/${e.resource.id}/save`, {
       profile_id: e.profileId,
       org_id: e.orgId
     });
   }
   unsaveResource(e) {
-    return XHR.del(`/api/resource/${e.resource.id}/save`, {
+    return sendWithRetry.del(`/api/resource/${e.resource.id}/save`, {
       profile_id: e.profileId,
       org_id: e.orgId
     });

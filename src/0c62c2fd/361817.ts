@@ -4,7 +4,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { FPlanRestrictionType } from "../figma_app/191312";
 import { TeamType } from "../905/814802";
-import { Dd } from "../905/519092";
+import { ConfirmationModal } from "../905/519092";
 export function $$c0(e) {
   let {
     team,
@@ -29,7 +29,7 @@ export function $$c0(e) {
       memberIds: _,
       teamId: id
     },
-    children: jsxs(Dd, {
+    children: jsxs(ConfirmationModal, {
       title: p ? h ? f ? renderI18nText("team_view.downgrade_figjam_access_from_viewer_to_viewer_restricted") : renderI18nText("team_view.downgrade_design_access_from_viewer_to_viewer_restricted") : f ? renderI18nText("team_view.remove_figjam_edit_status.seat_rename") : renderI18nText("team_view.remove_design_edit_status.seat_rename") : f ? renderI18nText("team_view.grant_figjam_edit_status.seat_rename") : renderI18nText("team_view.grant_design_edit_status.seat_rename"),
       confirmText: p ? h ? getI18nString("team_view.change") : getI18nString("team_view.remove.seat_rename") : getI18nString("team_view.grant.seat_rename"),
       onConfirm: e.onConfirm,

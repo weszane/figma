@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { useSingleEffect } from "../905/791079";
 import { APILoadingStatus } from "../905/520829";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { batchPutFileAction } from "../figma_app/78808";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { dU, GS } from "../figma_app/803787";
@@ -41,7 +41,7 @@ export function $$g2({
     let a = e(Object.values(t.local.styles));
     Object.keys(n).length + Object.keys(r).length + Object.keys(a).length !== 0 && (f({
       status: APILoadingStatus.LOADING
-    }), XHR.post("/api/design_systems/move_validity", {
+    }), sendWithRetry.post("/api/design_systems/move_validity", {
       component_moves: n,
       state_group_moves: r,
       style_moves: a,

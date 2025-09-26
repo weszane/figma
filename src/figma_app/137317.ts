@@ -14,7 +14,7 @@ import { isCodegenSupportedForLanguage, getUnitForLanguage } from "../figma_app/
 import { v as _$$v } from "../905/50227";
 import { yt } from "../figma_app/451499";
 import { z4 } from "../905/37051";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { selectIsCopyExportAllowed } from "../figma_app/212807";
 import { PluginIconDisplay } from "../905/480825";
 import { VZ } from "../figma_app/727192";
@@ -42,7 +42,7 @@ export function $$N0({
     setInspectionMode,
     inspectionModes
   } = r;
-  let g = Um();
+  let g = useDropdownState();
   let f = useMemo(() => inspectionModes.map(e => jsx(c$, {
     value: e,
     recordingKey: e

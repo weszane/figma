@@ -8,9 +8,9 @@ import { e as _$$e } from "../905/621515";
 import { isViewportPanning } from "../figma_app/62612";
 import { N } from "../figma_app/268271";
 import { e0 } from "../905/696396";
-import { M } from "../905/152487";
+import { OnboardingSequence } from "../905/152487";
 import { mI } from "../9410/983167";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { Dv } from "../figma_app/419216";
 import { YiU } from "../figma_app/6204";
 import { Cb } from "../9410/659371";
@@ -37,7 +37,7 @@ function C({
       topPadding: -6,
       isBold: !0,
       fixedWidth: 316,
-      arrowPosition: F_.BOTTOM,
+      arrowPosition: ArrowPosition.BOTTOM,
       onTargetLost: noop,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -73,7 +73,7 @@ export function $$v0() {
       canShow: () => e
     });
   }, [e, show]);
-  return jsx(M, {
+  return jsx(OnboardingSequence, {
     isShowing,
     testId: "FigJamAISummarizationEntrpointPointerOverlay",
     children: jsx(TrackingProvider, {

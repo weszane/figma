@@ -14,7 +14,7 @@ import { Cr, cP, js, Z6, Od } from "../figma_app/451499";
 import { isDesignFileType, isSitesFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback, normalizeValue, isValidValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { _P, Zh } from "../figma_app/2590";
 import { J as _$$J } from "../905/980942";
 import { uQ } from "../figma_app/151869";
@@ -75,7 +75,7 @@ import { Z as _$$Z } from "../905/230174";
 import { YK, $3 } from "../figma_app/149989";
 import { wG, J2 } from "../905/331989";
 import { gJ } from "../905/923433";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { I as _$$I } from "../5421/909298";
 import { bL, Y9, JU, UC } from "../figma_app/57171";
 import { iv, Uj, mc, UC as _$$UC } from "../905/872285";
@@ -310,7 +310,7 @@ function Z({
   recordingKey: n
 }) {
   let a = useDispatch();
-  let l = Um();
+  let l = useDropdownState();
   let s = useId();
   let d = jsx(W, {
     ariaLabelledBy: s,
@@ -984,7 +984,7 @@ function eX({
   }) : null;
   return jsxs("div", {
     children: [U, g.isShown && "variable-picker-set-variable-action" === g.type && g.key === c.recordingKey ? jsxs(Fragment, {
-      children: [jsx(Ao, {
+      children: [jsx(DraggableModalManager, {
         title: "",
         headerSize: "hidden",
         initialPosition: g.initialPosition,
@@ -1633,7 +1633,7 @@ export function $$tv0({
   ...T
 }) {
   let S = useDispatch();
-  let A = Um();
+  let A = useDropdownState();
   let {
     scene
   } = selectWithShallowEqual(e => ({
@@ -1855,7 +1855,7 @@ export function $$tI1({
   setPropertiesForAnchorLink: d
 }) {
   let h = useDispatch();
-  let g = Um();
+  let g = useDropdownState();
   let {
     scene
   } = selectWithShallowEqual(e => ({

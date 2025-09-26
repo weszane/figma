@@ -5,7 +5,7 @@ import { styleBuilderInstance } from "../905/941192";
 export function $$l0(e) {
   return jsx("div", {
     className: cssBuilderInstance.overflowAuto.wFull.hFull.$,
-    style: styleBuilderInstance.$$if(!!e.maxContentWidth, styleBuilderInstance.my0.mxAuto.add({
+    style: styleBuilderInstance.if(!!e.maxContentWidth, styleBuilderInstance.my0.mxAuto.add({
       maxWidth: `calc(${e.maxContentWidth}rem / 16)`
     })).$,
     children: jsxs(P, {

@@ -15,10 +15,10 @@ import { NT, mp } from "../figma_app/579169";
 import { o9 } from "../figma_app/621201";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { N as _$$N } from "../figma_app/268271";
-import { y as _$$y } from "../905/129046";
-import { rq } from "../905/425180";
+import { ImageOverlayComponent } from "../905/129046";
+import { OnboardingModal } from "../905/425180";
 import { U } from "../figma_app/65327";
-import { EL } from "../905/748636";
+import { PositioningStrategy } from "../905/748636";
 import { oR } from "../figma_app/598952";
 import { dvJ } from "../figma_app/6204";
 let $$A1 = "https://help.figma.com/hc/articles/15023124644247-Guide-to-Dev-Mode";
@@ -58,10 +58,10 @@ export function $$E0() {
   _$$E(uniqueId, "Enter Inspect Mode", () => {
     isShowing && complete();
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     description: renderI18nText("dev_mode.onboarding_callout.switch_into_dev_mode"),
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       alt: "design displaying spacing in dev mode",
       src: I,
       aspectRatio: 240 / 136
@@ -82,7 +82,7 @@ export function $$E0() {
       href: $$A1,
       ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     targetKey: L,
     testId: "dev-mode-onboarding-tooltip",
     title: jsx("span", {

@@ -17,7 +17,7 @@ import E from "classnames";
 import { analyticsEventManager } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
-import { Fe } from "../905/284552";
+import { loadVideoJs } from "../905/284552";
 import { Y as _$$Y } from "../905/506207";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -210,7 +210,7 @@ class eI extends Component {
     };
     this.loadVideoJs = async () => {
       if (!this.state.videoJsLib) {
-        let e = await Fe();
+        let e = await loadVideoJs();
         this.setState({
           videoJsLib: e
         });

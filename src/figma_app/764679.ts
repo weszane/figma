@@ -15,7 +15,7 @@ import { getCurrentVersion } from "../figma_app/471982";
 import { lx, aI, s0 } from "../figma_app/558929";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { U3 } from "../figma_app/412189";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
@@ -24,9 +24,8 @@ import { isThirdPartyMonetized } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
 import { BuyerAPIHandler } from "../905/180";
-
 import { it } from "../905/504727";
-import { S as _$$S } from "../905/404161";
+import { ExtensionRequestModal } from "../905/404161";
 import { dn } from "../figma_app/994403";
 import { t as _$$t2, Z3, y7, CA, dD, Dh, Dr, d1, iM, K1, Yr, pz, qN, _3 } from "../905/884637";
 import { A as _$$A } from "../5724/930602";
@@ -155,7 +154,7 @@ function G(e) {
       fullscreenEditorType: null
     };
     t(showModalHandler({
-      type: _$$S,
+      type: ExtensionRequestModal,
       data: n
     }));
   };
@@ -241,7 +240,7 @@ function V({
 }
 export function $$H1(e, t, r) {
   let p = useDispatch();
-  let g = Um();
+  let g = useDropdownState();
   let f = g?.type === z && g.data.resourceId === e.id && g.data.viewContext === r;
   let y = AG();
   let A = memo(function ({

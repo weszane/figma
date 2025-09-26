@@ -1,6 +1,6 @@
 import { createActionCreator } from "../905/73481";
 import { debugState } from "../905/407919";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { createOptimistThunk } from "../905/350402";
 import { H3 } from "../figma_app/994725";
@@ -10,7 +10,7 @@ let u = e => {
   let t = debugState.getState();
   if (!t.openFile) return;
   let r = t.openFile;
-  r && r.parentOrgId && XHR.post(`/api/activity_logs/${r.key}`, {
+  r && r.parentOrgId && sendWithRetry.post(`/api/activity_logs/${r.key}`, {
     event_name: e
   });
 };

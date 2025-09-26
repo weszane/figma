@@ -61,7 +61,7 @@ import { isInteractionPathCheck } from "../figma_app/897289";
 import { VG, EX, JV, Eq } from "../figma_app/451499";
 import { dq, e7 as _$$e } from "../figma_app/316316";
 import { NE } from "../3276/373312";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { l6, c$, sK } from "../905/794875";
 import { Ay, HS } from "../figma_app/976110";
 import { dU, sQ, BX, Lp, Gl, Ym, vE, eU as _$$eU } from "../897/934363";
@@ -74,7 +74,7 @@ import { zZ } from "../figma_app/299859";
 import { lg } from "../figma_app/651753";
 import { t as _$$t2 } from "../5421/711842";
 import { b as _$$b } from "../5421/909298";
-import { Ao, F_, uF } from "../905/748636";
+import { DraggableModalManager, ArrowPosition, HEADER_HEIGHT } from "../905/748636";
 import { G as _$$G } from "../905/298663";
 import { x as _$$x } from "../897/253631";
 import { c as _$$c, P as _$$P3 } from "../905/200950";
@@ -182,7 +182,7 @@ let eC = new JV();
 let eE = new Eq();
 function ej(e) {
   let t = useDispatch();
-  let n = Um();
+  let n = useDropdownState();
   let o = useIsFullscreenSitesView();
   let {
     showVideoV2Triggers
@@ -1285,13 +1285,13 @@ let e7 = memo(function ({
       selectedInteractions
     })]
   }) : th;
-  let tw = jsx(Ao, {
+  let tw = jsx(DraggableModalManager, {
     ref: K,
     allowAutoExpanding: !0,
     allowResizeHeight: Y,
     allowResizeWidth: Y,
     allowWheelPassthrough: !0,
-    arrowPosition: x ? void 0 : F_.TOP,
+    arrowPosition: x ? void 0 : ArrowPosition.TOP,
     arrowRelativeX: x ? void 0 : eA / 2,
     beMoreAccessible: !0,
     canRenderBelowViewport: !0,
@@ -1313,7 +1313,7 @@ let e7 = memo(function ({
     fullFrame: Y,
     headerClassName: "prototype_interaction_edit_modal--multilineInteractionDetailsHeader--OE8Wr",
     headerSize: "small",
-    initialHeight: Y ? e8(showPanel).height - uF : void 0,
+    initialHeight: Y ? e8(showPanel).height - HEADER_HEIGHT : void 0,
     initialPosition: eB,
     initialWidth: Y ? e8(showPanel).width : void 0,
     maxHeight: Y ? 800 : void 0,

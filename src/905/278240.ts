@@ -15,7 +15,7 @@ import { Lk } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { TK } from "../905/129660";
 import { KindEnum } from "../905/129884";
 import { NumericDropdownInput } from "../figma_app/178475";
@@ -98,7 +98,7 @@ function j({
   let B = useContext(FormattedInputContext);
   let V = useRef(null);
   let G = useDispatch();
-  let z = Um();
+  let z = useDropdownState();
   let {
     smallNudgeAmount,
     bigNudgeAmount

@@ -20,7 +20,7 @@ import { logAndTrackCTA } from "../figma_app/314264";
 import { selectUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
-import { M as _$$M } from "../905/152487";
+import { OnboardingSequence } from "../905/152487";
 import { bk, Q7, ZE } from "../905/98947";
 import { pu } from "../7037/430062";
 import { L as _$$L } from "../9864/861465";
@@ -65,7 +65,7 @@ export function $$F0({
         i(o);
       }
     });
-  }), isShowing) ? jsx(_$$M, {
+  }), isShowing) ? jsx(OnboardingSequence, {
     testId: "job-title-prompt-overlay",
     isShowing,
     children: jsx(B, {

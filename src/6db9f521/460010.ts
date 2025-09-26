@@ -48,7 +48,7 @@ import { useMemoStable } from "../905/19536";
 import { B4 } from "../figma_app/385215";
 import { WN } from "../figma_app/638601";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
-import { Um, BK } from "../905/848862";
+import { useDropdownState, useDropdown } from "../905/848862";
 import { dR as _$$dR } from "../figma_app/440875";
 import { m as _$$m2 } from "../9410/532216";
 import { n as _$$n2 } from "../9410/783801";
@@ -169,7 +169,7 @@ import { v as _$$v3 } from "../6388/254246";
 import { uY } from "../figma_app/164260";
 import { ie as _$$ie, Z as _$$Z3, Lk as _$$Lk, Cd, Rn } from "../figma_app/524655";
 import { k as _$$k5 } from "../642/978258";
-import { IA } from "../905/291714";
+import { PopoverProvider } from "../905/291714";
 import { W1 } from "../figma_app/439493";
 import { Z as _$$Z4 } from "../6401/653234";
 import { H as _$$H3 } from "../905/821118";
@@ -185,10 +185,10 @@ import { A as _$$A4 } from "../905/956262";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N3 } from "../figma_app/268271";
 import { U as _$$U } from "../905/455766";
-import { rq as _$$rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
 import { O0, eg as _$$eg } from "../figma_app/452252";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { s1f } from "../figma_app/6204";
 import { jY, sO as _$$sO } from "../figma_app/21029";
 import { uM, Bn, R4, w1 } from "../figma_app/835688";
@@ -327,7 +327,7 @@ import { e6 as _$$e4, ME } from "../figma_app/545190";
 import { Z3 } from "../figma_app/461594";
 import { p as _$$p3 } from "../figma_app/295764";
 import { NA } from "../figma_app/760428";
-import { S as _$$S2 } from "../905/459477";
+import { fileLaunchHelper as _$$S2 } from "../905/459477";
 import { Mx, TQ, Og, aE as _$$aE, Wf } from "../figma_app/882817";
 import { j as _$$j3 } from "../905/253683";
 import { s as _$$s7 } from "../905/702260";
@@ -335,7 +335,7 @@ import { W as _$$W5 } from "../905/378870";
 import { Z as _$$Z5 } from "../905/498136";
 import { selectWithShallowEqual } from "../905/103090";
 import { u as _$$u5 } from "../figma_app/852050";
-import { pn } from "../905/714538";
+import { getFontStyleMapping } from "../905/714538";
 import { _S, OS, WH } from "../figma_app/836943";
 import { ay as _$$ay } from "../figma_app/628987";
 import { Z as _$$Z6 } from "../905/278240";
@@ -403,7 +403,7 @@ import { CK } from "../figma_app/952764";
 import { li as _$$li } from "../figma_app/998161";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuTitleComp } from "../figma_app/860955";
 import { $Q, a2 as _$$a5 } from "../905/963340";
-import { Fe } from "../905/284552";
+import { loadVideoJs } from "../905/284552";
 import { Y as _$$Y6 } from "../905/506207";
 import { k as _$$k8 } from "../6020/640789";
 import { SK } from "../905/619652";
@@ -416,7 +416,7 @@ import { F as _$$F4 } from "../905/153202";
 import { Bc, GA } from "../figma_app/200284";
 import { v as _$$v7 } from "../905/501497";
 import { V as _$$V2 } from "../905/261687";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { C as _$$C2 } from "../642/180963";
 import { Y as _$$Y8 } from "../6388/262412";
 import { K as _$$K6 } from "../6388/893524";
@@ -898,7 +898,7 @@ function eE() {
   let i = useSelector(e => e.multiplayer);
   let n = useSelector(e => e.user);
   let o = useMemo(() => i.allUsers.find(e => e.sessionID === i.sessionID) || null, [i.allUsers, i.sessionID]);
-  let d = Um();
+  let d = useDropdownState();
   let c = _$$dR();
   let u = B4();
   let p = useCallback(t => {
@@ -2950,7 +2950,7 @@ let {
   SelectOverride
 } = n;
 let ny = new _$$ag(i5.MILLISECONDS, 10);
-class nf extends _$$c$ {}
+class nf extends _$$c$ { }
 function nj({
   recordingKey: e
 }) {
@@ -2965,7 +2965,7 @@ function nj({
     label: getI18nString("slides.properties_panel.object_animations.duration.600ms")
   }];
   let i = useDispatch();
-  let n = Um();
+  let n = useDropdownState();
   let l = useSelector(e => {
     let t = e.mirror.selectionProperties.objectAnimationDuration;
     return isValidValue(t) && void 0 !== t ? Math.round(1e3 * t) / 1e3 : t;
@@ -3223,7 +3223,7 @@ function n$({
   let k = isValidSessionLocalID(parseSessionLocalID(N)) && N === E;
   let C = e.action.transitionDuration;
   let w = useRef(null);
-  let O = BK(OI);
+  let O = useDropdown(OI);
   let A = jsx(nG, {
     isInvalid: d,
     nodeId: E
@@ -3237,7 +3237,7 @@ function n$({
   return jsxs("div", {
     className: cssBuilderInstance.flex.wFull.py4.$,
     children: [jsx(RecordableDiv, {
-      className: cssBuilderInstance.h32.w16.flex.itemsCenter.$$if(b, cssBuilderInstance.opacity1, cssBuilderInstance.opacity0).$,
+      className: cssBuilderInstance.h32.w16.flex.itemsCenter.if(b, cssBuilderInstance.opacity1, cssBuilderInstance.opacity0).$,
       style: {
         "--color-icon": "var(--color-icon-secondary)"
       },
@@ -3356,7 +3356,7 @@ function nB({
     onMouseEnter: () => f(!0),
     onMouseLeave: () => f(!1),
     children: [jsx(RecordableDiv, {
-      className: cssBuilderInstance.h32.w16.flex.itemsCenter.$$if(v, cssBuilderInstance.opacity1, cssBuilderInstance.opacity0).$,
+      className: cssBuilderInstance.h32.w16.flex.itemsCenter.if(v, cssBuilderInstance.opacity1, cssBuilderInstance.opacity0).$,
       style: {
         "--color-icon": "var(--color-icon-secondary)"
       },
@@ -4060,7 +4060,7 @@ let r_ = memo(function () {
   let i = getObservableValue(AppStateTsApi?.canvasGrid().isDraggingChildren, !1) || !t.length;
   return jsx(_$$k5, {
     isShown: !i,
-    children: jsx(IA, {
+    children: jsx(PopoverProvider, {
       children: jsx(W1, {
         darkModePreferred: !0,
         children: jsx(rm, {
@@ -4125,8 +4125,8 @@ function rM({
 }) {
   let a = useDispatch();
   let o = hX(`[data-onboarding-key="${O0}"]`);
-  return jsx(_$$rq, {
-    arrowPosition: F_.RIGHT_BODY,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: jsx("span", {
       style: {
         whiteSpace: "pre-line"
@@ -4168,9 +4168,9 @@ function rF({
   onClose: n,
   totalSteps: l
 }) {
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     arrowPadding: 4,
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     clickOutsideToHide: !0,
     description: jsx("span", {
       style: {
@@ -5000,14 +5000,14 @@ class sp extends ub {
   }
 }
 let sh = [0, 0.1, 0.2, 0.3];
-class sm extends _$$c$ {}
+class sm extends _$$c$ { }
 let s_ = new _$$ag(i5.MILLISECONDS, 0.001, 30);
 function sg({
   delay: e,
   onChange: t
 }) {
   let i = useDispatch();
-  let n = Um();
+  let n = useDropdownState();
   return jsx(AutoInteractableWrapper, {
     name: "slides_delay_dropdown",
     children: jsx(_$$ow, {
@@ -5043,14 +5043,14 @@ function sg({
 }
 let sy = [0.3, 0.6, 0.9];
 let sf = new _$$ag(i5.MILLISECONDS, 0.01, 10);
-class sj extends _$$c$ {}
+class sj extends _$$c$ { }
 function sb({
   duration: e,
   easingType: t,
   onChange: i
 }) {
   let n = useDispatch();
-  let l = Um();
+  let l = useDropdownState();
   return jsx(AutoInteractableWrapper, {
     name: "slides_duration_dropdown",
     children: jsx(_$$ow, {
@@ -5529,7 +5529,7 @@ function aa({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let [n, l] = useSelectionProperty("slideNumber");
   return jsx(No, {
     label: renderI18nText("slides.properties_panel.slide_number.slide_number_type"),
@@ -5595,7 +5595,7 @@ function ac({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let [n] = useSelectionProperty("slideNumber");
   let [o, d] = useSelectionProperty("slideNumberSeparator");
   let u = function (e) {
@@ -5667,7 +5667,7 @@ function ap({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let [n, l] = useSelectionProperty("codeBlockLanguage");
   let [a, o] = useSelectionProperty("codeBlockTheme");
   n || console.warn("<SlidesCodeBlockPanel /> expected selection property codeBlockLanguage");
@@ -6459,7 +6459,7 @@ function oU({
       children: jsx(_$$d6, {
         "aria-expanded": !!d,
         onClick: () => {
-          if (d) u(hideStylePicker());else if (e.current) {
+          if (d) u(hideStylePicker()); else if (e.current) {
             let t = e.current.getBoundingClientRect();
             u(_$$sw());
             u(showStylePicker({
@@ -6526,7 +6526,7 @@ function o$({
           "aria-expanded": b,
           "aria-label": getI18nString("slides.properties_panel.text_style.create_new_style"),
           onClick: () => {
-            if (b) d(_$$sw());else if (f.current) {
+            if (b) d(_$$sw()); else if (f.current) {
               _$$l3.user("slides-create-style", () => {
                 Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !0);
                 Fullscreen?.selectStyle(_$$n5.INVALID, _$$IA.INVALID);
@@ -6666,7 +6666,7 @@ function oz({
       children: jsx(_$$d6, {
         "aria-label": getI18nString("slides.properties_panel.text_style.edit_text_style"),
         onClick: t => {
-          if (b) m(_$$sw());else if (j.current) {
+          if (b) m(_$$sw()); else if (j.current) {
             Fullscreen?.selectStyleByGuid(e.node_id);
             let t = j.current.getBoundingClientRect();
             m(_$$rk({
@@ -7025,8 +7025,8 @@ function o1({
   }));
   let n = WH(inheritTextStyleKey, styleIdForText, "TEXT");
   let a = useSelector(e => e.fonts);
-  let o = useMemo(() => pn(a), [a]);
-  let d = Um();
+  let o = useMemo(() => getFontStyleMapping(a), [a]);
+  let d = useDropdownState();
   let [u, p] = useState(null === n);
   useEffect(() => {
     d || p(!n?.node_id);
@@ -7586,7 +7586,7 @@ function dr({
     })
   });
 }
-class dm extends _$$c$ {}
+class dm extends _$$c$ { }
 let d_ = [0, 2, 4, 8, 16, 24];
 let dg = ["NONE", "SOLID", "DASHED_BIG", "DASHED_SMALL"];
 let dy = dg.filter(e => "NONE" !== e);
@@ -7779,7 +7779,7 @@ function dv({
   recordingKey: o
 }) {
   let d = useDispatch();
-  let u = Um();
+  let u = useDropdownState();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -7827,7 +7827,7 @@ function dT({
     })
   });
 }
-class dN extends _$$c$ {}
+class dN extends _$$c$ { }
 let dk = [0, 8, 16, 24, 32, 64, 96];
 class dC extends X9 {
   format(e) {
@@ -7857,7 +7857,7 @@ function dO({
   targetDomNode: i
 }) {
   let n = useDispatch();
-  let a = Um();
+  let a = useDropdownState();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -7963,7 +7963,7 @@ function dU({
   activeStartingPointId: i
 }) {
   let n = useDispatch();
-  let a = Um();
+  let a = useDropdownState();
   let o = useMemo(() => new d$(t), [t]);
   let d = useCallback(t => {
     _$$l3.user("set_slides_embeddable_prototype_starting_point", () => {
@@ -8095,7 +8095,7 @@ function cr({
       })
     }), i && s && jsx("div", {
       ref: u,
-      children: jsx(Ao, {
+      children: jsx(DraggableModalManager, {
         title: getI18nString("slides.properties_panel.blur.title"),
         headerSize: "small",
         initialPosition: s,
@@ -8172,7 +8172,7 @@ function co({
   useEffect(() => {
     D && L.current?.animationFrame != null ? (I(L.current.animationFrame), Bc(L.current).then(e => {
       k(_$$J6(e));
-    })) : R && Fe().then(e => j(e));
+    })) : R && loadVideoJs().then(e => j(e));
   }, [R, D, A?.animatedImage?.hash]);
   let M = useMemo(() => paintManager.initPaint("IMAGE", {
     r: 0,
@@ -8603,7 +8603,7 @@ function cb({
   let {
     showing,
     toggle
-  } = BK("RESET_INTERACTIVE_WIDGET_ICON_DROPDOWN_ID");
+  } = useDropdown("RESET_INTERACTIVE_WIDGET_ICON_DROPDOWN_ID");
   let s = useRef(null);
   return jsxs(Fragment, {
     children: [jsx(IconButton, {
@@ -8631,7 +8631,7 @@ function cv({
   onThemeSelected: t
 }) {
   let i = useDispatch();
-  let n = Um();
+  let n = useDropdownState();
   let a = useId();
   return jsxs("div", {
     className: dM,
@@ -8698,7 +8698,7 @@ function cC({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let n = useSelectionPropertyValue("hyperlink");
   let o = normalizeValue(n);
   let d = null;
@@ -8749,7 +8749,7 @@ function cC({
     isEqual: (e, t) => deepEqual(e, t)
   }), [carouselItemsById, x]);
   let m = _$$nc.user("slides-link-change", useCallback(e => {
-    if (null === e) Fullscreen?.setHyperlinkOnCurrentSelection("", null);else if ("guid" === e.type) Fullscreen?.setHyperlinkOnCurrentSelection(fullscreenValue.generateLinkToNode(sessionLocalIDToString(e.guid)), null);else if ("url" === e.type) {
+    if (null === e) Fullscreen?.setHyperlinkOnCurrentSelection("", null); else if ("guid" === e.type) Fullscreen?.setHyperlinkOnCurrentSelection(fullscreenValue.generateLinkToNode(sessionLocalIDToString(e.guid)), null); else if ("url" === e.type) {
       let t = e.url.match(ck) ? e.url : `https://${e.url}`;
       Fullscreen?.setHyperlinkOnCurrentSelection(t, null);
     }
@@ -8797,7 +8797,7 @@ function cC({
     })
   });
 }
-class cw extends _$$c$ {}
+class cw extends _$$c$ { }
 class cO extends LN {
   isEqual(e, t) {
     return 1e-5 > Math.abs(e - t);
@@ -8808,7 +8808,7 @@ function cL({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let [n, l] = useSelectionProperty("opacity");
   let a = new cO();
   let o = void 0 === n || isInvalidValue(n) ? MIXED_MARKER : n;
@@ -9028,7 +9028,7 @@ function cF({
 let cU = memo(function () {
   let e = getColorFormat();
   let t = selectCurrentFile();
-  let i = Um();
+  let i = useDropdownState();
   let n = Xo();
   let a = GV();
   let o = !!selectCurrentUser();

@@ -1,5 +1,5 @@
 import { createNoOpValidator } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 export let $$r0 = new class {
   constructor() {
     this.AssetTransferSchemaValidator = createNoOpValidator();
@@ -28,10 +28,10 @@ export let $$r0 = new class {
     }) => await t.get(`/api/asset_transfer/folder_transfer/${e.folderId}`));
   }
   deleteAssetTransferRequest(e) {
-    return XHR.del(`/api/asset_transfer/${e.id}`);
+    return sendWithRetry.del(`/api/asset_transfer/${e.id}`);
   }
   approveAssetTransferRequest(e) {
-    return XHR.put(`/api/asset_transfer/${e.id}/approve`, {
+    return sendWithRetry.put(`/api/asset_transfer/${e.id}/approve`, {
       remove_collaborators: e.removeCollaborators
     });
   }

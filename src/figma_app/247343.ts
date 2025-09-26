@@ -1,5 +1,5 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -75,7 +75,7 @@ export let $$h0 = createOptimistAction("TEAM_USER_UPDATE_DESIGN_PAID_STATUS", as
 }) => {
   if (c) {
     let c = r.map(e => e.user_id).concat(o || []);
-    await XHR.put(`/api/teams/${t}/team_user_batch`, {
+    await sendWithRetry.put(`/api/teams/${t}/team_user_batch`, {
       team_user_deltas: c.map(e => {
         let t = {
           user_id: e

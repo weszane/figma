@@ -9,13 +9,13 @@ import { customHistory } from "../905/612521";
 import { useSingleEffect } from "../905/791079";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { styleBuilderInstance } from "../905/941192";
@@ -63,7 +63,7 @@ import { lB, Ey, To } from "../905/148137";
 import { AccessLevelEnum } from "../905/557142";
 import { e0 } from "../905/696396";
 import { Eh } from "../figma_app/617654";
-import { V as _$$V } from "../905/57562";
+import { validateVatGstId } from "../905/57562";
 import { n as _$$n } from "../905/861286";
 import { CheckboxPrimitive } from "../905/549791";
 import { g as _$$g } from "../905/125190";
@@ -85,7 +85,7 @@ function C({
   t.forEach(t => {
     e[t].eligibleUsers.forEach(e => {
       if (!r[e]) {
-        if (s[e]) r[e] = s[e];else {
+        if (s[e]) r[e] = s[e]; else {
           let s = a[e];
           i[e] || (i[e] = []);
           i[e].push(s.recommendedSeatTypeByTeamId[t]);
@@ -245,7 +245,7 @@ function eb({
     }), jsxs("label", {
       htmlFor: `select-team-${e.id}`,
       className: K6,
-      style: styleBuilderInstance.$$if(t, styleBuilderInstance.colorBorderSelected.colorBgSelectedTertiary, styleBuilderInstance.colorBg.add({
+      style: styleBuilderInstance.if(t, styleBuilderInstance.colorBorderSelected.colorBgSelectedTertiary, styleBuilderInstance.colorBg.add({
         borderColor: "var(--color-bg)"
       })).$,
       children: [jsx(TeamAvatar, {
@@ -313,7 +313,7 @@ let eI = ({
             throw Error("sent error");
         }
       }(t, e));
-    } catch (e) {}
+    } catch (e) { }
   }, []);
   return {
     changeUserSeatType: useCallback((e, t) => {
@@ -783,7 +783,7 @@ export class $$eM2 extends Component {
     }
     if (this.setState({
       apiPending: !0
-    }), a && !(await _$$V(a, e.country, () => {}, this.onVatValidationFail))) return;
+    }), a && !(await validateVatGstId(a, e.country, () => { }, this.onVatValidationFail))) return;
     if (this.props.canSeeBillingAddressExp && !this.state.nameOnPaymentMethod) {
       let e = getI18nString("org_self_serve.payment_step.name_on_payment_method_is_required");
       this.trackError(e);
@@ -793,7 +793,7 @@ export class $$eM2 extends Component {
       });
       return;
     }
-    if (s && !(await _$$V(s, e.country, () => {}, this.onVatValidationFail, e.region))) return;
+    if (s && !(await validateVatGstId(s, e.country, () => { }, this.onVatValidationFail, e.region))) return;
     let r = this.props.canSeeBillingAddressExp ? {
       name: this.state.nameOnPaymentMethod,
       address_line1: e.line1,
@@ -804,14 +804,14 @@ export class $$eM2 extends Component {
       address_zip: e.postal_code
     } : void 0;
     Ey(t, r).then(t => {
-      if (!t.error && t.token) return To(t.token.id, this.getSubtotal(), this.state.currency).then(t => this.props.canSeeBillingAddressExp ? XHR.post("/api/orgs/validate_payment", {
+      if (!t.error && t.token) return To(t.token.id, this.getSubtotal(), this.state.currency).then(t => this.props.canSeeBillingAddressExp ? sendWithRetry.post("/api/orgs/validate_payment", {
         payment_method: t.payment_method,
         billing_address: e,
         shipping_address: isAddressEmpty(this.state.shippingAddress) ? null : this.state.shippingAddress,
         selected_currency: this.state.currency,
         vat_gst_id: this.state.vatId,
         regional_vat_gst_id: this.state.regionalVatId || null
-      }) : XHR.post("/api/orgs/validate_payment", {
+      }) : sendWithRetry.post("/api/orgs/validate_payment", {
         payment_method: t.payment_method,
         address: e,
         selected_currency: this.state.currency,
@@ -875,7 +875,7 @@ export class $$eM2 extends Component {
     this.setState({
       apiPending: !0
     });
-    XHR.post("/api/orgs", s).catch(s => (this.props.dispatch(FlashActions.error(resolveMessage(s, s.data?.message || getI18nString("org_self_serve.review_step.sorry_there_was_an_error_please_try_again")))), reportError(ServiceCategories.BILLING_EXPERIENCE, Error(`[Billing] Org checkout API failed: ${s.data?.message}`), {
+    sendWithRetry.post("/api/orgs", s).catch(s => (this.props.dispatch(FlashActions.error(resolveMessage(s, s.data?.message || getI18nString("org_self_serve.review_step.sorry_there_was_an_error_please_try_again")))), reportError(ServiceCategories.BILLING_EXPERIENCE, Error(`[Billing] Org checkout API failed: ${s.data?.message}`), {
       extra: {
         eligibleTeamsByTeamId: this.state.eligibleTeamsByTeamId,
         eligibleUsersByUserId: this.state.eligibleUsersByUserId,
@@ -959,7 +959,7 @@ export class $$eM2 extends Component {
       }), isAllowedDomain(this.props.user.email) && jsx(VE, {
         onFileBrowserClick: this.onFileBrowserClick
       }), jsxs("div", {
-        style: styleBuilderInstance.$$if(t === OnboardingStepEnum.CreateTeam, styleBuilderInstance.flex.justifyCenter, styleBuilderInstance.grid.add({
+        style: styleBuilderInstance.if(t === OnboardingStepEnum.CreateTeam, styleBuilderInstance.flex.justifyCenter, styleBuilderInstance.grid.add({
           gridTemplateColumns: "1fr 280px",
           gap: "48px"
         })).$,
@@ -1161,7 +1161,7 @@ export function $$eO0({
     }
   }(e);
   let a = function (e) {
-    let t = jsx(Ph, {
+    let t = jsx(TrackedLink, {
       href: "/pricing",
       trackingProperties: {
         trackingDescriptor: CreateUpgradeAction.LEARN_MORE_ABOUT_SEATS

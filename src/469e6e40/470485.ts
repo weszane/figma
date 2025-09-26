@@ -6,7 +6,7 @@ import l from "classnames";
 import { Wi } from "../figma_app/162641";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
-import { o as _$$o } from "../905/160095";
+import { TrackedLinkPrimitive } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { Bq } from "../figma_app/482142";
@@ -37,7 +37,7 @@ export function $$j0(e) {
     teamId: l.type === FOrganizationLevelType.TEAM ? l.key.parentId : void 0,
     planTier: l?.tier
   };
-  let S = jsx(_$$o, {
+  let S = jsx(TrackedLinkPrimitive, {
     href: "https://help.figma.com/hc/articles/360040328273",
     trusted: !0,
     newTab: !0,
@@ -57,7 +57,7 @@ export function $$j0(e) {
     className: E,
     trackingProperties: N,
     children: getI18nString("admin_settings.billing_plan_tier.upgrade_label")
-  }) : l.tier === FPlanNameType.ORG ? t = jsx(_$$o, {
+  }) : l.tier === FPlanNameType.ORG ? t = jsx(TrackedLinkPrimitive, {
     href: "https://www.figma.com/enterprise/",
     trusted: !0,
     newTab: !0,

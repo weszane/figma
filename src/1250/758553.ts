@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { hideModalHandler, showModalHandler } from "../905/156213";
@@ -56,7 +56,7 @@ export function $$y1(e) {
   let b = feedPost.reactions.length;
   let y = useCallback(() => {
     t(hideModalHandler());
-    XHR.del(`/api/feed_posts/post_uuid/${feedPost.publicUuid}`).then(() => {
+    sendWithRetry.del(`/api/feed_posts/post_uuid/${feedPost.publicUuid}`).then(() => {
       trackEventAnalytics("Team Feed Post Deleted", {
         postUuid: feedPost.publicUuid
       });

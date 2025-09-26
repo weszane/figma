@@ -7,7 +7,7 @@ import { getTranslatedDynamicContent, getI18nString } from "../905/303541";
 import { sz } from "../figma_app/216696";
 import { rL } from "../figma_app/49598";
 import { showDropdownThunk } from "../905/929976";
-import { _ as _$$_ } from "../905/793009";
+import { trackTemplateEvent } from "../905/793009";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -197,7 +197,7 @@ export function $$C1(e) {
           productType: i.viewer_mode === FTemplateCategoryType.WHITEBOARD ? "figjam" : "design",
           ...additionalCtaLoggingProps
         });
-        _$$_("resource_inserted", {
+        trackTemplateEvent("resource_inserted", {
           fileKey: e,
           resourceId: templateId,
           resourceName: m?.name,

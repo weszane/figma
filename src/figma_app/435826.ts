@@ -20,7 +20,7 @@ import { getNextSessionId, createSessionPromise, isIncrementalSessionOrValidatin
 import { wM } from "../figma_app/852050";
 import { c as _$$c } from "../905/210851";
 import { openFileAtom, selectCurrentFile } from "../figma_app/516028";
-import { Z } from "../905/116724";
+import { useDelayedCallback } from "../905/116724";
 import { getUserId } from "../905/372672";
 import { createTrackedAtom } from "../figma_app/615482";
 import { AssetFilterMode } from "../figma_app/646357";
@@ -384,7 +384,7 @@ export function $$z2({
   }, [i, a?.key, a?.parentOrgId, a?.teamId, t]);
   let {
     start
-  } = Z(() => {
+  } = useDelayedCallback(() => {
     e && _(!0);
     o(!0);
   });

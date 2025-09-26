@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import { useProjectFileCreationPermissions, canCreateFileType } from "../figma_app/687776";
 import { createOptimistThunk } from "../905/350402";
-import { le } from "../905/904854";
+import { DragDataHandler } from "../905/904854";
 import { fileImporter } from "../905/642505";
 import { GR } from "../905/81459";
 import { selectPermissionsState } from "../figma_app/212807";
@@ -22,7 +22,7 @@ export let $$E2 = createOptimistThunk((e, t) => {
   }));
 });
 export function $$y1(e) {
-  return new le(e).isFile();
+  return new DragDataHandler(e).isFile();
 }
 export function $$b0() {
   let e = useSelector(e => "folder" !== e.selectedView.view ? null : e.folders[e.selectedView.folderId] ?? null);

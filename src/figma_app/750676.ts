@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { getAllNodeGuids } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
-import { _ } from "../905/793009";
+import { trackTemplateEvent } from "../905/793009";
 class o {
   constructor() {
     this.allTemplateInfo = new Set();
@@ -37,7 +37,7 @@ class o {
     this.nodeGUIDsToTemplate.$$delete(e);
     let r = t.nodeGUIDs;
     r.$$delete(e);
-    r.size <= t.deletionThreshold && (this.stopTrackingTemplate(t), _("template_deleted", {
+    r.size <= t.deletionThreshold && (this.stopTrackingTemplate(t), trackTemplateEvent("template_deleted", {
       templateId: t.templateId,
       fileKey: t.fileKey,
       productType: "figjam",

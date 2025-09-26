@@ -1,4 +1,4 @@
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { buildStaticUrl } from '../figma_app/169182'
 /**
  * Regular expression to match sourceMappingURL comments.
@@ -38,7 +38,7 @@ let workerInitPromise: Promise<Worker> | undefined
 function loadEsprimaScript(): Promise<string> {
   if (!esprimaScriptPromise) {
     const scriptUrl = buildStaticUrl('scripts/esprima-4.0.1.min.js')
-    esprimaScriptPromise = XHR.crossOriginGetAny(scriptUrl, null, { raw: true })
+    esprimaScriptPromise = sendWithRetry.crossOriginGetAny(scriptUrl, null, { raw: true })
       .then(res => `${res.response}`)
       .catch(() => {
         esprimaScriptPromise = undefined

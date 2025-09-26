@@ -5,7 +5,7 @@ import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { T as _$$T } from "../905/745591";
 import { U1 } from "../figma_app/343967";
 import { getFeatureFlags } from "../905/601108";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AY, QY, Fm, l5, bB, NJ, Oo, Tb, UU, hx, Mv } from "../figma_app/770088";
@@ -96,7 +96,7 @@ import { H_, z6, CU, $Q, a2 } from "../905/963340";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { WB } from "../905/761735";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { c1 } from "../figma_app/357047";
 import { notificationAPI } from "../905/894881";
@@ -1053,7 +1053,7 @@ let tt = forwardRef((e, t) => {
 });
 tt.displayName = "sidebarSearchBar";
 let tl = createOptimistThunk((e, t) => {
-  let n = XHR.put(`/api/file/${t.key}/file_followers`, {
+  let n = sendWithRetry.put(`/api/file/${t.key}/file_followers`, {
     notification_preference: t.notification_preference
   }).catch(t => {
     let n = t.data?.message || "An error occurred while updating notification preference.";
@@ -1515,7 +1515,7 @@ export function $$tT0(e) {
       sorts: P,
       stackHeader: e.stackHeader,
       threadManager
-    }), jsx(_$$x, {
+    }), jsx(LoadingRenderer, {
       className: "comments_sidebar--loading--7fXvY",
       isLoading: "loading" === filteredSidebarItems.status,
       children: () => jsx(tk, {

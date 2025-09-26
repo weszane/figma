@@ -24,7 +24,7 @@ export function $$d0({
       height: m,
       hideScrollbar: !0,
       scrollingDisabled: t,
-      innerClassName: cssBuilderInstance.$$if(i, cssBuilderInstance.flex.flexColumn.hFull).$,
+      innerClassName: cssBuilderInstance.if(i, cssBuilderInstance.flex.flexColumn.hFull).$,
       useBottomPinning: d,
       enableScrollShadow: c,
       children: e

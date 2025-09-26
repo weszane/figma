@@ -8,7 +8,7 @@ import { YM } from '../905/122282';
 import { KindEnum } from '../905/129884';
 import { h as _$$h } from '../905/142086';
 import { showModalHandler } from '../905/156213';
-import { pW } from '../905/160095';
+import { TrackedLinkButton } from '../905/160095';
 import { UpsellModalType } from '../905/165519';
 import { q as _$$q } from '../905/236878';
 import { Z as _$$Z } from '../905/279476';
@@ -2015,7 +2015,7 @@ let nl = {
             name: t.name,
             renewalDate: w.toDate()
           })
-        }), E && jsx(pW, {
+        }), E && jsx(TrackedLinkButton, {
           href: E,
           variant: 'secondary',
           children: renderI18nText('non_admin_billing_terms.contact_admin_button')

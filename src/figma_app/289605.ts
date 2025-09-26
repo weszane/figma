@@ -25,11 +25,11 @@ import { J as _$$J } from "../905/45438";
 import { InspectState } from "../905/560959";
 import { g as _$$g } from "../905/246147";
 import { gs, ON, KP } from "../figma_app/31103";
-import { b as _$$b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { getColorFormat } from "../figma_app/740163";
 import { u as _$$u, G6, Kd, BQ, t8, Xv, hg } from "../figma_app/852050";
 import { isVsCodeEnvironment } from "../905/858738";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { getLibraryName } from "../905/506188";
 import { KindEnum } from "../905/129884";
 import { KeyboardReceiver } from "../905/826900";
@@ -262,7 +262,7 @@ function es({
   canOpenLibrary: a
 }) {
   let o = KP("full_table", InspectState.VariableDetailsModal);
-  let l = _$$b({
+  let l = useLibraryFileLink({
     libraryKey: t,
     isDevHandoff: !0,
     isDevModeOverview: !1,
@@ -319,7 +319,7 @@ function el({
 }) {
   let o = useDispatch();
   let l = ON();
-  let d = Um();
+  let d = useDropdownState();
   let c = useMemo(() => r.find(t => t.id === e), [e, r]);
   let u = useCallback(r => {
     l("change_mode", {
@@ -428,7 +428,7 @@ function ep({
   let _ = a?.subscriptionStatus === "LOCAL" && a.isSoftDeleted;
   let h = a?.subscriptionStatus === "SUBSCRIBED" ? a.library_key : void 0;
   let m = KP("full_table", InspectState.VariableDetailsModal);
-  let g = _$$b({
+  let g = useLibraryFileLink({
     libraryKey: h,
     isDevHandoff: !0,
     isDevModeOverview: !1,

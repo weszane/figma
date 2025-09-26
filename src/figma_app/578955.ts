@@ -2,7 +2,7 @@ import type { TSSceneGraph } from './518682'
 import { useEffect, useState } from 'react'
 import { getFeatureFlags } from '../905/601108'
 import { generateUUIDv4 } from '../905/871474'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { findComponentInStateGroup, findNearestCanvas } from '../figma_app/325988'
 import { GPTSearchType } from '../figma_app/338442'
 import { suggestComponentProps } from '../figma_app/443973'
@@ -28,7 +28,7 @@ async function performFragmentSearch(params: { node: any, file_key: string }): P
     if (!thumbnail) {
       throw new Error('Failed to export thumbnail')
     }
-    const response = await XHR.post('/api/auto_suggest_props/fragment_search', {
+    const response = await sendWithRetry.post('/api/auto_suggest_props/fragment_search', {
       input: {
         type: 'image',
         value: thumbnail,
@@ -101,15 +101,15 @@ function processComponentUsages(usages: any[], selectedNodeId: string, sceneGrap
         const def = componentInfo?.parsedDefs.find((d: any) => d.rawProp === normalizedProp)
         props[normalizedProp] = def
           ? (() => {
-              switch (def.def.type) {
-                case 'BOOLEAN':
-                  return value === 'true'
-                case 'NUMBER':
-                  return parseFloat(value as string)
-                default:
-                  return value
-              }
-            })()
+            switch (def.def.type) {
+              case 'BOOLEAN':
+                return value === 'true'
+              case 'NUMBER':
+                return parseFloat(value as string)
+              default:
+                return value
+            }
+          })()
           : value
       })
       processed.push(props)

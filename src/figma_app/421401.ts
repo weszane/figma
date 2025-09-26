@@ -9,7 +9,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
 import { TrackedDiv, TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { RG } from "../figma_app/684446";
 import { FAccessLevelType } from "../figma_app/191312";
 import { KindEnum } from "../905/129884";
@@ -94,7 +94,7 @@ export function $$C2(e) {
 export var $$w5 = (e => (e.NONE = "NONE", e.UNASSIGNED = "UNASSIGNED", e.WORKSPACE = "WORKSPACE", e))($$w5 || {});
 function O(e) {
   let t = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   let s = createRef();
   let l = 0;
   let d = e.workspaces.map(t => {
@@ -130,7 +130,7 @@ function O(e) {
 }
 export function $$R0(e) {
   let t = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   if (!RG() || 0 === e.licenseGroups.length) return null;
   let i = r?.type === A;
   return jsxs(TrackingProvider, {
@@ -152,7 +152,7 @@ export function $$R0(e) {
 }
 export function $$L1(e) {
   let t = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   if (0 === e.workspaces.length) return null;
   let i = r?.type === x;
   return jsxs(TrackingProvider, {

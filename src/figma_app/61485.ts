@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getViewerInstance } from "../figma_app/632319";
-import { M1, co } from "../905/777093";
+import { fetchFontFile, fetchFontByFamilyStyleVersion } from "../905/777093";
 let $$d1 = {
   fetchFontFile: function (e, t, r) {
     let o = debugState.getState();
@@ -22,7 +22,7 @@ let $$d1 = {
       }(o),
       orgId: o.currentUserOrgId || null
     };
-    return M1(c).then(e => {
+    return fetchFontFile(c).then(e => {
       if (getFeatureFlags().ce_track_font_fetch_time) {
         let t = "";
         t = c.source === FontSourceType.LOCAL ? "N/A" : c.id;
@@ -41,7 +41,7 @@ let $$d1 = {
   }
 };
 let $$c0 = {
-  fetchFontFile: (e, t, r) => M1({
+  fetchFontFile: (e, t, r) => fetchFontFile({
     source: e,
     id: t,
     postscriptName: r,
@@ -52,7 +52,7 @@ let $$c0 = {
   fetchFontFileWithoutPickerInfo(e, t, r) {
     var n;
     let i = getViewerInstance()?.openFileKey();
-    return i ? co(e, t, r, i, !(n = debugState.getState()) || !n.openFile || !!n.openFile.parentOrgId) : Promise.reject();
+    return i ? fetchFontByFamilyStyleVersion(e, t, r, i, !(n = debugState.getState()) || !n.openFile || !!n.openFile.parentOrgId) : Promise.reject();
   }
 };
 export const Z = $$c0;

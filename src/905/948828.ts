@@ -204,7 +204,7 @@ export function $$k2(e) {
           "--color-icon": "var(--color-icon-tertiary)"
         }
       }), jsxs("div", {
-        className: cssBuilderInstance.font13.lh24.$$if(!d, cssBuilderInstance.colorTextSecondary).$,
+        className: cssBuilderInstance.font13.lh24.if(!d, cssBuilderInstance.colorTextSecondary).$,
         children: [i, 3 === t && d && jsx(O, {}), 5 === t && d && !getFeatureFlags().ai_ga && jsx(O, {})]
       })]
     }, t) : null;

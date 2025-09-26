@@ -6,7 +6,7 @@ import { createOptimistThunk } from '../905/350402'
 import { pluginAddFirstRanAtAction } from '../905/542113'
 import { logger } from '../905/651849'
 import { FaceToolType, FetchStatus } from '../905/862883'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { HubTypeEnum, isWidget } from '../figma_app/45218'
 import { enrichPluginWithPublishers, getRecentItems } from '../figma_app/190980'
 import { getPluginVersion, resolveFrameworkType } from '../figma_app/300692'
@@ -182,7 +182,7 @@ function handlePluginRun(
   const resource = recentResources.find(item => item.id === id)
   if (resource?.run_by_user_ids?.includes(userId))
     return
-  XHR.post(`/api/plugin_runs/${id}`, { org_id: orgId })
+  sendWithRetry.post(`/api/plugin_runs/${id}`, { org_id: orgId })
     .then(({ data }) => {
       dispatch(pluginAddFirstRanAtAction({
         resourceId: id,
@@ -201,7 +201,7 @@ function handlePluginRun(
  */
 export function addResourceToRecentsByEditorType(resource: any, userId: string) {
   return (dispatch: Fn) => {
-  // addResourceToRecentsByEditorType (original: $$V16)
+    // addResourceToRecentsByEditorType (original: $$V16)
     const versionInfo = getPluginVersion(resource)
     const editorTypes = (versionInfo.manifest?.editorType ?? []).map(resolveFrameworkType)
     const addToRecentsThunk = isWidget(resource) ? addWidgetToRecentsThunk : addPluginToRecentsThunk
@@ -278,7 +278,7 @@ export function fetchAndSyncVersions(api: any, payload: { resourceType: HubTypeE
     include_pending: true,
   }
 
-  return XHR.post(`/api/${getHubTypeString(payload.resourceType)}/batch`, requestPayload)
+  return sendWithRetry.post(`/api/${getHubTypeString(payload.resourceType)}/batch`, requestPayload)
     .then(({ data }) => {
       api.dispatch(mergePublishedPluginThunk({
         publishedPlugins: data.meta,

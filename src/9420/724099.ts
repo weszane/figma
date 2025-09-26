@@ -16,7 +16,7 @@ import { E as _$$E } from "../905/712094";
 import { d2, lB } from "../905/148137";
 import { isAddressEmpty, createEmptyAddress } from "../figma_app/831101";
 import { X as _$$X } from "../905/33014";
-import { A as _$$A } from "../905/289352";
+import { VatGstInput } from "../905/289352";
 import { A as _$$A2 } from "../svg/433566";
 let $$S = "stripe_payment_and_address--error--z-IbH";
 let R = "stripe_payment_and_address--paymentDetailsCheckbox--34fJx";
@@ -86,7 +86,7 @@ export function $$N0({
       children: M.message
     })]
   }) : jsxs("div", {
-    style: styleBuilderInstance.$$if(L, {
+    style: styleBuilderInstance.if(L, {
       height: "0px",
       overflow: "hidden",
       opacity: 0
@@ -109,7 +109,7 @@ export function $$N0({
     }), V ? jsxs("div", {
       style: styleBuilderInstance.add({
         marginTop: "7px"
-      }).$$if(O && d2.includes(O), {
+      }).if(O && d2.includes(O), {
         marginTop: "15px"
       }).$,
       children: [$ && A && jsx(EnhancedInput, {
@@ -128,12 +128,12 @@ export function $$N0({
         updateAddress: N,
         canSeeBillingAddressExp: $,
         isBillingAddress: !0
-      }), !!U && jsx(_$$A, {
+      }), !!U && jsx(VatGstInput, {
         onChange: U,
         country: t.country,
         vatId: B,
         isCommunityCheckout: J === wn.COMMUNITY_CHECKOUT
-      }), !!j && jsx(_$$A, {
+      }), !!j && jsx(VatGstInput, {
         onChange: j,
         country: t.country,
         region: t.region,
@@ -145,7 +145,7 @@ export function $$N0({
         children: renderI18nText("pro_cart.payment.sepa_direct_debit_mandate")
       }), K && jsx("div", {
         className: R,
-        style: styleBuilderInstance.$$if(Q, {
+        style: styleBuilderInstance.if(Q, {
           marginBottom: "24px"
         }).$,
         "data-testid": "stripe-payment-legal-name-checkbox",
@@ -168,7 +168,7 @@ export function $$N0({
         updateLegalCompanyName: x
       }), K && jsx("div", {
         className: R,
-        style: styleBuilderInstance.$$if(H, {
+        style: styleBuilderInstance.if(H, {
           marginBottom: "24px"
         }).$,
         "data-testid": "stripe-payment-shipping-address-checkbox",

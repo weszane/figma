@@ -13,7 +13,7 @@ import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useSingleEffect } from "../905/791079";
 import { dP } from "../figma_app/119475";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -156,7 +156,7 @@ function G({
           children: getI18nString("sites.modal.select_library_banner_title")
         }), jsxs("div", {
           ...Ay.props(textDisplayConfig.textBodyMedium, P.textSecondary),
-          children: [getI18nString("sites.modal.select_library_banner_subtitle"), "\xa0", jsx(Ph, {
+          children: [getI18nString("sites.modal.select_library_banner_subtitle"), "\xa0", jsx(TrackedLink, {
             href: kC,
             newTab: !0,
             children: getI18nString("sites.modal.learn_more")
@@ -211,7 +211,7 @@ function H() {
         children: getI18nString("sites.modal.no_libraries_found")
       }), jsxs("div", {
         ...Ay.props(textDisplayConfig.textBodyMedium, P.textSecondary),
-        children: [getI18nString("sites.modal.select_library_banner_subtitle"), "\xa0", jsx(Ph, {
+        children: [getI18nString("sites.modal.select_library_banner_subtitle"), "\xa0", jsx(TrackedLink, {
           href: kC,
           newTab: !0,
           children: getI18nString("sites.modal.learn_more")

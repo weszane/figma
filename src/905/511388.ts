@@ -20,7 +20,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { registerTooltip } from "../905/524523";
 import { setupThemeContext } from "../905/614223";
 import { BaseLinkComponent } from "../figma_app/637027";
-import { b as _$$b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { getProviderConfigType } from "../figma_app/155411";
 import { isKeyInQNOrR9, getPartnerTypeFromPreset } from "../figma_app/255679";
 let o = memo(function (e) {
@@ -241,7 +241,7 @@ export function $$L0({
     tooltipLocation: u,
     isFragment: x
   });
-  let M = _$$b({
+  let M = useLibraryFileLink({
     libraryKey: e
   });
   let j = useCallback(e => {

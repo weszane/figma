@@ -3,7 +3,7 @@ import { createActionCreator } from '../905/73481'
 import { handleOptimistTransactionWithError } from '../905/150006'
 import { ServiceCategories } from '../905/165054'
 import { createOptimistThunk } from '../905/350402'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 
 /**
  * Action creators for prototype-related actions.
@@ -34,7 +34,7 @@ const recentPrototypeDelete = createActionCreator('RECENT_PROTOTYPE_DELETE') // 
  * @param payload - Object containing fileKey and pageId
  */
 export const removeRecentPrototypeViewed = createOptimistThunk((store, payload) => { // $$c14
-  const requestPromise = XHR.del(`/api/files/${payload.fileKey}/prototype/view`, {
+  const requestPromise = sendWithRetry.del(`/api/files/${payload.fileKey}/prototype/view`, {
     page_id: payload.pageId,
   })
   handleOptimistTransactionWithError({
@@ -56,7 +56,7 @@ export const removeRecentPrototypeViewed = createOptimistThunk((store, payload) 
  * @param payload - Object containing fileKey and pageId
  */
 export const markPrototypeViewed = createOptimistThunk((store, payload) => { // $$u6
-  XHR.post(`/api/files/${payload.fileKey}/prototype/view`, {
+  sendWithRetry.post(`/api/files/${payload.fileKey}/prototype/view`, {
     page_id: payload.pageId,
   }).then((response) => {
     if (!response.data.meta) {
@@ -73,7 +73,7 @@ export const markPrototypeViewed = createOptimistThunk((store, payload) => { // 
     store.dispatch(recentPrototypePost({
       prototype: response.data.meta,
     }))
-  }).catch(() => {})
+  }).catch(() => { })
 })
 
 // Export aliases for backward compatibility with original names

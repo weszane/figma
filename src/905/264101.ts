@@ -1,6 +1,6 @@
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { cT } from "../905/997533";
 import { FlashActions } from "../905/573154";
 import { getI18nString, getI18nStringAlias } from "../905/303541";
@@ -12,7 +12,7 @@ import { WJ, yJ, C$, hz, S5 } from "../figma_app/24841";
 import { yV, r6 } from "../905/990455";
 import { UserAPIHandlers } from "../905/93362";
 export let $$f5 = createOptimistThunk((e, t) => {
-  t.passwordNew !== t.passwordRetype ? e.dispatch(FlashActions.error(getI18nString("api_user.error.please_retype_your_new_password_they_don_t_match"))) : XHR.post("/api/password/change", {
+  t.passwordNew !== t.passwordRetype ? e.dispatch(FlashActions.error(getI18nString("api_user.error.please_retype_your_new_password_they_don_t_match"))) : sendWithRetry.post("/api/password/change", {
     password_old: t.passwordOld,
     password_new: t.passwordNew
   }).then(() => {
@@ -38,7 +38,7 @@ function _(e, t, i) {
   }
 }
 let $$A1 = createOptimistThunk((e, t) => {
-  XHR.post("/api/session/verify_password", {
+  sendWithRetry.post("/api/session/verify_password", {
     password: t.password
   }).then(({
     data: t
@@ -59,7 +59,7 @@ let $$A1 = createOptimistThunk((e, t) => {
 let $$y8 = createOptimistThunk((e, t) => {
   let i = e.getState().user.password_token;
   let n = e.getState().user.mfa_setup_token;
-  XHR.post("/api/user/phone_number", {
+  sendWithRetry.post("/api/user/phone_number", {
     password_verify_token: i,
     phone_number: t.phone,
     mfa_setup_token: n
@@ -78,7 +78,7 @@ let $$y8 = createOptimistThunk((e, t) => {
 let $$b10 = createOptimistThunk((e, t) => {
   let i = e.getState().user;
   let o = e.getState().user.mfa_setup_token;
-  XHR.post("/api/user/phone_number/confirm", {
+  sendWithRetry.post("/api/user/phone_number/confirm", {
     mfa_setup_token: o,
     phone_token: i.phone_token,
     code: t.code
@@ -107,7 +107,7 @@ let $$b10 = createOptimistThunk((e, t) => {
 });
 let $$v11 = createOptimistThunk(e => {
   let t = e.getState().user.password_token;
-  XHR.del("/api/user/phone_number", {
+  sendWithRetry.del("/api/user/phone_number", {
     password_verify_token: t
   }).then(({
     data: t
@@ -138,7 +138,7 @@ let $$I4 = createOptimistThunk((e, t) => {
 });
 let $$E3 = createOptimistThunk(e => {
   let t = e.getState().user.password_token;
-  XHR.post("/api/user/backup_codes", {
+  sendWithRetry.post("/api/user/backup_codes", {
     password_verify_token: t
   }).then(({
     data: t
@@ -152,7 +152,7 @@ let $$E3 = createOptimistThunk(e => {
   });
 });
 let $$x6 = createOptimistThunk((e, t) => {
-  XHR.del("/api/user/totp", {
+  sendWithRetry.del("/api/user/totp", {
     password_verify_token: t.token
   }).then(() => {
     e.dispatch(C$({
@@ -164,7 +164,7 @@ let $$x6 = createOptimistThunk((e, t) => {
   e.dispatch(r1());
 });
 let $$S7 = createOptimistThunk((e, t) => {
-  XHR.post("/api/user/totp", {
+  sendWithRetry.post("/api/user/totp", {
     password_verify_token: t.token,
     mfa_setup_token: t.mfaToken
   }).then(({
@@ -187,7 +187,7 @@ let $$w12 = createOptimistThunk((e, t) => {
   let i = r6().token;
   let o = e.getState().user;
   let d = o.mfa_setup_token;
-  XHR.post("/api/user/totp/confirm", {
+  sendWithRetry.post("/api/user/totp/confirm", {
     totp_code: t.otp,
     two_factor_token: i,
     mfa_setup_token: d
@@ -219,7 +219,7 @@ let $$w12 = createOptimistThunk((e, t) => {
 });
 let $$C0 = createOptimistThunk(e => {
   let t = e.dispatch(FlashActions.flash(getI18nString("api_user.one_moment")));
-  XHR.post("/api/password/forgot", {
+  sendWithRetry.post("/api/password/forgot", {
     username: e.getState().user.email
   }).then(() => {
     e.dispatch(FlashActions.remove({
@@ -236,7 +236,7 @@ let $$C0 = createOptimistThunk(e => {
   });
 });
 let $$T9 = createOptimistThunk(e => {
-  XHR.post("/api/validation/email/send").then(() => {
+  sendWithRetry.post("/api/validation/email/send").then(() => {
     let t = getI18nString("api_user.confirmation-email", {
       email: e.getState().user.email
     });
@@ -250,7 +250,7 @@ let $$k2 = createOptimistThunk((e, t) => {
   e.dispatch(hz({
     loading: !0
   }));
-  XHR.del("/api/user", {
+  sendWithRetry.del("/api/user", {
     password_verify_token: t.token
   }).then(({
     response: t

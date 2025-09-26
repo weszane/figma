@@ -24,7 +24,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { EditorPreferencesApi, getDevHandoffInspectSplitPosition, getColorFormat } from "../figma_app/740163";
 import { z4 } from "../905/37051";
 import { useCurrentFileKey, selectCurrentFile, useOpenFileLibraryKey, useSourceFileKey, selectOpenFileKey } from "../figma_app/516028";
-import { M as _$$M } from "../905/152487";
+import { OnboardingSequence } from "../905/152487";
 import { xT, Yh, g_, Ye } from "../figma_app/32128";
 import { t as _$$t, c as _$$c } from "../905/722657";
 import { k as _$$k2 } from "../905/443820";
@@ -148,10 +148,10 @@ import { E as _$$E3 } from "../905/453826";
 import { e as _$$e3 } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { N as _$$N } from "../figma_app/268271";
-import { y as _$$y2 } from "../905/129046";
-import { rq as _$$rq } from "../905/425180";
+import { ImageOverlayComponent } from "../905/129046";
+import { OnboardingModal } from "../905/425180";
 import { wX } from "../figma_app/710136";
-import { F_ } from "../905/748636";
+import { ArrowPosition } from "../905/748636";
 import { War, tb3, Iu5, FtN, ma5 } from "../figma_app/6204";
 import { K as _$$K } from "../figma_app/398376";
 import { EA } from "../9410/499229";
@@ -175,7 +175,7 @@ import { RadioPrimitiveOption } from "../905/34525";
 import { Link } from "../905/438674";
 import { S as _$$S2 } from "../5132/724052";
 import { dP as _$$dP } from "../figma_app/119475";
-import { n as _$$n5 } from "../905/477505";
+import { usePluginData } from "../905/477505";
 import { gB } from "../905/294543";
 import { Be, $b } from "../469e6e40/370592";
 import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
@@ -194,7 +194,7 @@ import { A as _$$A0 } from "../svg/8369";
 import { useDebouncedCallback } from "use-debounce";
 import { hideDropdownAction, showDropdownThunk, selectViewAction } from "../905/929976";
 import { setupHyperlinkHandler } from "../figma_app/815170";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { j as _$$j } from "../905/834956";
 import { A as _$$A10 } from "../svg/957897";
 import { Qh } from "../905/469533";
@@ -278,7 +278,7 @@ import { oD as _$$oD, d8 as _$$d6 } from "../1528/85853";
 import { E as _$$E6 } from "../905/235326";
 import { openUrlInContext } from "../figma_app/976345";
 import { hideModalHandler, showModalHandler, hideModal } from "../905/156213";
-import { b as _$$b5 } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { useLibraries } from "../905/420347";
 import { b as _$$b6 } from "../1528/176770";
 import { x as _$$x2 } from "../1528/887790";
@@ -359,7 +359,6 @@ import { K as _$$K4 } from "../905/918348";
 import { E as _$$E7 } from "../905/53857";
 import { Ak } from "../905/986103";
 import { isInteractiveInspectionAndRollbackEnabled, isDevModeFocusViewActive } from "../figma_app/544649";
-import { F_ as _$$F_ } from "../905/858282";
 import { WZ } from "../905/893645";
 import { setProgressBarState } from "../figma_app/91703";
 import { wg } from "../figma_app/101956";
@@ -1922,7 +1921,7 @@ function nl({
 function ns() {
   let e = selectCurrentFile();
   let t = useCanAccessDevModeEntryPoint();
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     isShowing: !0,
     children: jsx(nl, {
       fileKey: e?.key || "",
@@ -2273,7 +2272,7 @@ function nQ({
       onClick: o,
       recordingKey: r ? generateRecordingKey("dev_handoff.variables_table.sidebar_row", r) : void 0,
       children: [jsx("div", {
-        className: cssBuilderInstance.truncate.$$if(n, cssBuilderInstance.textBodyMediumStrong).$,
+        className: cssBuilderInstance.truncate.if(n, cssBuilderInstance.textBodyMediumStrong).$,
         children: e
       }), void 0 !== t && jsx("div", {
         className: ek()(cssBuilderInstance.truncate.textBodyMedium.colorTextSecondary.$, nW),
@@ -2827,14 +2826,14 @@ function a_() {
     },
     children: p(DesignGraphElements.DROPPER_COLOR)
   });
-  return jsx(_$$rq, {
-    arrowPosition: F_.BOTTOM,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.BOTTOM,
     clickOutsideToHide: !0,
     description: renderI18nText("dev_handoff.eyedropper.onboarding_body", {
       shortcutText: h
     }),
     isShowing,
-    media: jsx(_$$y2, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("0b9e6e49a3c90f0d872b021c82a55b9d0bf71927"),
       alt: getI18nString("dev_handoff.eyedropper.onboarding_image_alt"),
       aspectRatio: 1843 / 1037
@@ -2874,7 +2873,7 @@ function im() {
   let {
     codegenPlugins = [],
     loading
-  } = _$$n5();
+  } = usePluginData();
   let o = gB();
   let [s, r] = useState("first-party" === e.type ? e.id : ix);
   let [d, c] = useState(!1);
@@ -3288,7 +3287,7 @@ function iC() {
   let {
     inspectPlugins = [],
     loading
-  } = _$$n5();
+  } = usePluginData();
   let n = loading ? jsx("div", {
     className: id,
     children: jsx(_$$k2, {})
@@ -3407,7 +3406,7 @@ function iO() {
 function iM({}) {
   let e = useDispatch();
   let t = "install-messaging-dropdown";
-  let n = Um();
+  let n = useDropdownState();
   let l = useRef(null);
   let s = n?.type === t;
   let r = [{
@@ -4506,7 +4505,7 @@ function iq() {
     }));
     show();
   });
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     isShowing,
     testId: "dev_handoff_config_wizard",
     dataFullscreenIntercept: !1,
@@ -5238,7 +5237,7 @@ function lk({
 }) {
   let t = useDispatch();
   let n = useOpenFileLibraryKey();
-  let s = _$$b5({
+  let s = useLibraryFileLink({
     libraryKey: e?.sourceLibraryKey,
     nodeId: e?.publishID ?? void 0,
     mainComponent: !0
@@ -8124,7 +8123,7 @@ function rJ() {
     display: "none"
   };
   return jsx("div", {
-    className: cssBuilderInstance.hFull.wFull.$$if(u, cssBuilderInstance.block, cssBuilderInstance.hidden).$,
+    className: cssBuilderInstance.hFull.wFull.if(u, cssBuilderInstance.block, cssBuilderInstance.hidden).$,
     "data-testid": "devHandoffPluginPanel",
     children: t ? jsx(rO, {}) : jsxs(Fragment, {
       children: [d && jsx(rq, {}), jsx("div", {
@@ -8746,9 +8745,9 @@ function dD() {
     });
   }, [n, show]);
   let d = dL(complete);
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     ...dP,
-    arrowPosition: _$$F_.TOP,
+    arrowPosition: ArrowPosition.TOP,
     isShowing,
     emphasized: !1,
     onClose: d,
@@ -8816,7 +8815,7 @@ function dH() {
     trackingContextName: `${dM} Versions`,
     targetKey: dz,
     emphasized: !0,
-    arrowPosition: _$$F_.RIGHT_BODY,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     secondaryCta: r,
     onStepShow: () => clearSelection(),
     disableHighlight: !0
@@ -9966,7 +9965,7 @@ function uc({
   let [s, d] = useAtomValueAndSetter(c4);
   let [c, u] = useAtomValueAndSetter(c7);
   let p = useDispatch();
-  let h = Um();
+  let h = useDropdownState();
   let f = Xo();
   let g = selectCurrentFile();
   let x = useAppModelProperty("currentSelectedProperty");
@@ -10907,9 +10906,9 @@ function u6() {
   useSingleEffect(() => {
     show();
   });
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     arrowPadding: 16,
-    arrowPosition: _$$F_.RIGHT_BODY,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: renderI18nText("dev_handoff.mcp.upsell_description"),
     isShowing,
     onClose: complete,
@@ -11334,7 +11333,7 @@ function pj(e) {
   let d = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.type === "SECTION", l);
   let c = NM();
   let u = _$$sQ();
-  let p = Um();
+  let p = useDropdownState();
   let h = useRef(null);
   let f = useSceneGraphSelector();
   let g = z4.getIsExtension();
@@ -11677,7 +11676,7 @@ function pV({
 }) {
   let t = useDispatch();
   let [n, i, l] = pF();
-  let s = Um();
+  let s = useDropdownState();
   let r = useSceneGraphSelector().get(e);
   if (!r) return null;
   let d = s?.type === pO;
@@ -11724,7 +11723,7 @@ function pW({
 }) {
   let t = useDispatch();
   let [n, i, l] = pF();
-  let s = Um();
+  let s = useDropdownState();
   let r = s?.type === pM;
   let d = useSceneGraphSelector();
   let c = e.map(d.get).filter(isNotNullish);
@@ -12131,7 +12130,7 @@ function hh({
   isLocal: t,
   canOpenLibrary: n
 }) {
-  let i = _$$b5({
+  let i = useLibraryFileLink({
     libraryKey: e,
     isDevHandoff: !0,
     isDevModeOverview: !1,
@@ -12513,7 +12512,7 @@ function hV({
   setActiveTabId: e
 }) {
   let t = useDispatch();
-  let n = Um();
+  let n = useDropdownState();
   let s = useRef(null);
   let [d, c] = useAtomValueAndSetter(sg);
   let u = trackFileEventWithStore();

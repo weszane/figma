@@ -38,7 +38,7 @@ import { hideTooltip } from "../905/765855";
 import { stopPropagation } from "../figma_app/753501";
 import { compareLibraryItemsAlias, compareWithGeneratedKey, compareLibraryItemWithKey } from "../905/709171";
 import { formatFontMetrics, teamLibraryCache } from "../figma_app/80990";
-import { b as _$$b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, normalizeValue } from "../905/216495";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
@@ -52,7 +52,7 @@ import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
 import { bf, GC, hg } from "../figma_app/635062";
 import { m3, mY } from "../figma_app/915281";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { sO } from "../figma_app/21029";
 import { TN } from "../figma_app/177697";
 import { kj } from "../905/883812";
@@ -69,7 +69,7 @@ import { i as _$$i } from "../figma_app/85949";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
 import { useSelectionPropertyValue } from "../905/275640";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useCurrentUserOrg } from "../905/845253";
 import { getBasename } from "../905/309735";
 import { isBigmaEnabledAlias3 } from "../figma_app/336853";
@@ -95,7 +95,7 @@ let eD = memo(function ({
   initialFocusRef: m,
   isEditable: g = !0
 }) {
-  let f = Um();
+  let f = useDropdownState();
   let E = useDispatch();
   let {
     setKeyboardNavigationElement,
@@ -727,7 +727,7 @@ function eG({
       children: jsx(_$$G.Provider, {
         value: eg,
         children: jsx(mY, {
-          children: jsxs(Ao, {
+          children: jsxs(DraggableModalManager, {
             ref: e_,
             initialPosition: Z,
             initialWidth: N2,
@@ -847,7 +847,7 @@ function eW({
   } = assertNotNullish(useContext(_$$G), "Must be inside <StylePickerActionsContext>");
   let s = selectCurrentFile();
   let o = compareLibraryItemWithKey(e, s);
-  let d = _$$b({
+  let d = useLibraryFileLink({
     libraryKey: e.library_key,
     nodeId: e.node_id
   });

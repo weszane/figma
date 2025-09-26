@@ -4,7 +4,7 @@ import { isIframe } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { IpcStorageHandler } from "../905/724705";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { U2 } from "../figma_app/545293";
 import { hideSpecificModal, showModalHandler } from "../905/156213";
 import { clearAnalytics } from "../figma_app/314264";
@@ -36,7 +36,7 @@ function A(e, t, r, i, l, A) {
   };
   D(r);
   let k = () => {
-    document.hasFocus() && XHR.post(`/api/user/${e.id}/idle_timeout_last_active_at`, {
+    document.hasFocus() && sendWithRetry.post(`/api/user/${e.id}/idle_timeout_last_active_at`, {
       is_embed: C.toString() && !z4.getIsExtension()
     }).then(e => {
       let t = e.data.meta.idle_timeout_last_active_at;
@@ -47,7 +47,7 @@ function A(e, t, r, i, l, A) {
   };
   let M = () => !!A && A.getState().modalShown?.type === xn;
   let F = () => {
-    if (A && A?.getState().authedUsers.orderedIds.length === 1 && (clearAnalytics(), U2.clear()), w) customHistory.reload("idleSessionTimeout-embed");else if (O) {
+    if (A && A?.getState().authedUsers.orderedIds.length === 1 && (clearAnalytics(), U2.clear()), w) customHistory.reload("idleSessionTimeout-embed"); else if (O) {
       let {
         pathname,
         search

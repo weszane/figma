@@ -12,7 +12,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { vm, yU, Zr } from "../figma_app/678782";
 import { useSelectionPropertyValue } from "../905/275640";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
 import { c1 } from "../figma_app/357047";
@@ -164,7 +164,7 @@ let K = forwardRef(function (e, t) {
   });
 });
 export function $$Y0(e) {
-  let t = BK("FULLSCREEN_DISTRIBUTE_DROPDOWN");
+  let t = useDropdown("FULLSCREEN_DISTRIBUTE_DROPDOWN");
   let r = useRef(null);
   yU(e.actions);
   let a = getI18nString("fullscreen.properties_panel.tooltip_moreActions");

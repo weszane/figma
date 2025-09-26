@@ -1,20 +1,34 @@
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { V } from "../figma_app/473391";
-import { useComponentFlyoutModal, COMPONENT_FLYOUT_MODAL_TYPE } from "../figma_app/608944";
-export function $$o0(e) {
-  let t = useSelector(e => e.modalShown);
-  let {
-    flyoutProps
-  } = useComponentFlyoutModal();
+import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
+import { getAssetKeyForSubscription } from '../figma_app/473391'
+import { COMPONENT_FLYOUT_MODAL_TYPE, useComponentFlyoutModal } from '../figma_app/608944'
+
+export function useIsComponentFlyoutModalShownForAsset(asset: any): boolean {
+  const modalShown = useSelector((state: any) => state.modalShown)
+  const { flyoutProps } = useComponentFlyoutModal()
+
   return useMemo(() => {
-    if ((t?.type !== COMPONENT_FLYOUT_MODAL_TYPE || !t?.data?.asset) && !flyoutProps || !e) return !1;
-    let n = flyoutProps?.asset ?? t?.data?.asset;
-    try {
-      return V(e) === V(n);
-    } catch (e) {
-      return !1;
+    // Check if modal is not shown or asset is not provided
+    if (
+      (modalShown?.type !== COMPONENT_FLYOUT_MODAL_TYPE || !modalShown?.data?.asset)
+      && !flyoutProps
+      || !asset
+    ) {
+      return false
     }
-  }, [e, flyoutProps, t?.data?.asset, t?.type]);
+
+    // Get the asset from either flyoutProps or modalShown
+    const currentAsset = flyoutProps?.asset ?? modalShown?.data?.asset
+
+    try {
+      // Compare asset keys for subscription
+      return getAssetKeyForSubscription(asset) === getAssetKeyForSubscription(currentAsset)
+    }
+    catch {
+      // Return false if there's an error in comparison
+      return false
+    }
+  }, [asset, flyoutProps, modalShown?.data?.asset, modalShown?.type])
 }
-export const n = $$o0;
+
+export const n = useIsComponentFlyoutModalShownForAsset

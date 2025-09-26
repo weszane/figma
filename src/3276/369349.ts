@@ -12,8 +12,8 @@ import { PD } from "../figma_app/101956";
 import { _ as _$$_ } from "../905/361125";
 import { MULTIPLAYER_USER_STATE_CHANGE } from "../figma_app/915202";
 import { N } from "../figma_app/268271";
-import { h as _$$h2 } from "../905/284399";
-import { q3 } from "../figma_app/450829";
+import { OnboardingRenderFrame } from "../905/284399";
+import { OverlayType } from "../figma_app/450829";
 import { hPP } from "../figma_app/6204";
 let $$b = () => getI18nString("collaboration.spotlight.nudge_spotlight.title");
 export function $$y0() {
@@ -38,10 +38,10 @@ export function $$y0() {
     C.isShowing || w();
   }, [C.isShowing, w]);
   E(C.uniqueId, MULTIPLAYER_USER_STATE_CHANGE, j);
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     element: _$$_,
     isShowing: C.isShowing,
-    modalType: q3.ANNOUNCEMENT_POINTER,
+    modalType: OverlayType.ANNOUNCEMENT_POINTER,
     onClickPrimaryCta: C.complete,
     onClose: C.complete,
     onManualDismiss: C.complete,

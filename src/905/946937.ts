@@ -9,7 +9,7 @@ import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
 import { LoadingOverlay } from "../figma_app/858013";
 import { $z } from "../figma_app/617427";
-import { pW } from "../905/160095";
+import { TrackedLinkButton } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { R as _$$R } from "../905/304671";
 import { h as _$$h } from "../905/142086";
@@ -34,7 +34,7 @@ import { FeatureFlag } from "../905/652992";
 import { projectPermissionEnum } from "../figma_app/630077";
 import { registerModal } from "../905/102752";
 import { RR } from "../905/514666";
-import { bP } from "../905/739964";
+import { ConsumptionPaywallModalComponent } from "../905/739964";
 import { dD } from "../905/519113";
 export let $$V0 = registerModal(function (e) {
   let t = selectCurrentFile();
@@ -84,7 +84,7 @@ export let $$V0 = registerModal(function (e) {
       }
     }));
   };
-  return !t || team && "loaded" !== f.status && "loaded" !== _.status ? jsx(Fragment, {}) : team && f.data && !_.data ? jsx(bP, {
+  return !t || team && "loaded" !== f.status && "loaded" !== _.status ? jsx(Fragment, {}) : team && f.data && !_.data ? jsx(ConsumptionPaywallModalComponent, {
     team,
     resource: FeatureFlag.TEAM_LIBRARY,
     action: projectPermissionEnum.PUBLISH_COMPONENTS,
@@ -144,7 +144,7 @@ function G(e) {
     onStylesClick
   });
   let E = "fullscreen" === v.view ? v.nodeId ?? "" : void 0;
-  return void 0 !== E ? jsx(bP, {
+  return void 0 !== E ? jsx(ConsumptionPaywallModalComponent, {
     team: e.team,
     resource: FeatureFlag.TEAM_LIBRARY,
     action: projectPermissionEnum.PUBLISH_COMPONENTS,
@@ -200,7 +200,7 @@ function z(e) {
               },
               variant: "secondary",
               children: renderI18nText("upsell.shared.cancel")
-            }), jsx(pW, {
+            }), jsx(TrackedLinkButton, {
               href: "#",
               onClick: () => {
                 let {

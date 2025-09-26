@@ -47,10 +47,10 @@ import { KindEnum } from "../905/129884";
 import { e0 as _$$e2 } from "../905/696396";
 import { createNoOpValidator } from "../figma_app/181241";
 import { isElementHidden } from "../905/826900";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { v as _$$v } from "../905/92662";
 import { logDebug, logError } from "../905/714362";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { X0 } from "../905/784221";
 import { debounce } from "../905/915765";
@@ -849,7 +849,7 @@ export class $$e32 extends PureComponent {
         a = e.id;
         s = this.state.newFileName;
         logDebug("startMovePagesJob", "Send request to start move pages job.");
-        XHR.post(`/api/files/${t}/move_pages`, {
+        sendWithRetry.post(`/api/files/${t}/move_pages`, {
           folder_id: a,
           page_ids: r,
           file_name: s
@@ -1058,7 +1058,7 @@ export class $$e32 extends PureComponent {
     let r;
     let s = this.props.fileMoveData.modalWidth || 288;
     let i = this.getModalTitle();
-    if (!this.props.userResources.loaded) return jsx(OJ, {
+    if (!this.props.userResources.loaded) return jsx(HeaderModal, {
       title: i,
       fixedTop: !0,
       minWidth: s,
@@ -1110,7 +1110,7 @@ export class $$e32 extends PureComponent {
     return jsx(TrackingProvider, {
       name: _$$e2.FILE_MOVE_MODAL,
       properties: t,
-      children: jsxs(OJ, {
+      children: jsxs(HeaderModal, {
         title: i,
         fixedTop: !0,
         minWidth: s,

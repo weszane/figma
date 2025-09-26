@@ -34,7 +34,7 @@ import { Point } from "../905/736624";
 import { hidePickerThunk } from "../figma_app/91703";
 import { getHostnameFromUrl, findCommonSymbolId } from "../figma_app/164212";
 import { Tv } from "../figma_app/151869";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { t as _$$t2 } from "../905/150656";
 import { A as _$$A } from "../2854/372209";
 import { A as _$$A2 } from "../2854/253373";
@@ -317,7 +317,7 @@ function X({
     });
   });
   let _ = r?.id === uA ? getI18nString("design_systems.component_panel.component_documentation") : getI18nString("design_systems.component_panel.component_controls");
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     autoflowHeight: !0,
     headerSize: "small",
     initialPosition: p,

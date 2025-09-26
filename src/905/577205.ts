@@ -1,5 +1,5 @@
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 export let $$a0 = new class {
   constructor() {
     this.InContextPublishedComponentsSchemaValidator = createNoOpValidator();
@@ -20,7 +20,7 @@ export let $$a0 = new class {
     this.GithubSourceFileContentsSchemaValidator = createNoOpValidator();
   }
   getComponentNames(e) {
-    return XHR.post("/api/code_connect/component_names", {
+    return sendWithRetry.post("/api/code_connect/component_names", {
       nodes: e
     });
   }

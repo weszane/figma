@@ -1071,7 +1071,7 @@ function e0(e) {
     className: cssBuilderInstance.flex.flexColumn.hFull.$,
     "data-testid": "activity-log-table",
     children: [jsxs("div", {
-      className: cssBuilderInstance.flex.justifyBetween.fontMedium.h48.py16.px24.$$if(c, cssBuilderInstance.bb1.bSolid.colorBorder, cssBuilderInstance.b0).$,
+      className: cssBuilderInstance.flex.justifyBetween.fontMedium.h48.py16.px24.if(c, cssBuilderInstance.bb1.bSolid.colorBorder, cssBuilderInstance.b0).$,
       "data-testid": "activity-log-table-header",
       children: [jsx("div", {
         className: `${eA} ${cssBuilderInstance.colorTextSecondary.flex.justifyStart.itemsCenter.flexRow.borderBox.$}`,

@@ -53,7 +53,7 @@ import { An, fe, sh, Sp } from '../905/854258'
 import { defaultSessionLocalIDString } from '../905/871411'
 import { getParentOrgId } from '../905/872904'
 import { putMoveLibraryItemKeyMappings } from '../905/879323'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { librariesAPI } from '../905/939602'
 import { c6 } from '../905/950959'
 import { executeInIgnoreUndoRedoScope } from '../905/955316'
@@ -218,8 +218,8 @@ let swapToSharedComponent = createOptimistThunk((e, t) => {
         let a = item.type === PrimaryWorkflowEnum.STATE_GROUP
           ? Fullscreen.getSimilarStates(instanceGUIDs, t.newSymbolOrStateGroupGuid, item.default_state_key)
           : {
-              [t.newSymbolOrStateGroupGuid]: instanceGUIDs,
-            }
+            [t.newSymbolOrStateGroupGuid]: instanceGUIDs,
+          }
         permissionScopeHandler.user('replace-symbol-backing-instances', () => {
           Fullscreen.replaceSymbolBackingInstances(a, usedSwapInstanceKeyboardShortcut)
         })
@@ -311,17 +311,17 @@ let insertSharedComponent = createOptimistThunk((store, payload) => {
     const logData = getShadowSuggestionPreInsertionData()
     const insertedNodeId = fromPlayground
       ? Fullscreen.insertPlaygroundInstance({
-          x: canvasPosition.x,
-          y: canvasPosition.y,
-          percentOffsetX: percentageOffset.x,
-          percentOffsetY: percentageOffset.y,
-        }, isResourceAvailable)
+        x: canvasPosition.x,
+        y: canvasPosition.y,
+        percentOffsetX: percentageOffset.x,
+        percentOffsetY: percentageOffset.y,
+      }, isResourceAvailable)
       : Fullscreen.insertInstance(nodeId, {
-          x: canvasPosition.x,
-          y: canvasPosition.y,
-          percentOffsetX: percentageOffset.x,
-          percentOffsetY: percentageOffset.y,
-        }, logArgs, insertAsChildOfGuid ?? null, useSmartPositioning ?? false, isResourceAvailable, selectAfterInsert ?? true)
+        x: canvasPosition.x,
+        y: canvasPosition.y,
+        percentOffsetX: percentageOffset.x,
+        percentOffsetY: percentageOffset.y,
+      }, logArgs, insertAsChildOfGuid ?? null, useSmartPositioning ?? false, isResourceAvailable, selectAfterInsert ?? true)
     try {
       trackAutoSuggestTriggerShadowing(canvasPosition, insertedNodeId)
       handleShadowSuggestionOnInsertion(logData, canvasPosition, insertedNodeId, sourceForTracking)
@@ -526,17 +526,17 @@ let insertSharedStateGroup = createOptimistThunk(async (store, payload) => {
     const logData = getShadowSuggestionPreInsertionData()
     const insertedNodeId = fromPlayground
       ? Fullscreen.insertPlaygroundInstance({
-          x: canvasPosition.x,
-          y: canvasPosition.y,
-          percentOffsetX: percentageOffset.x,
-          percentOffsetY: percentageOffset.y,
-        }, isResourceAvailable)
+        x: canvasPosition.x,
+        y: canvasPosition.y,
+        percentOffsetX: percentageOffset.x,
+        percentOffsetY: percentageOffset.y,
+      }, isResourceAvailable)
       : Fullscreen.insertStateGroup(nodeId, {
-          x: canvasPosition.x,
-          y: canvasPosition.y,
-          percentOffsetX: percentageOffset.x,
-          percentOffsetY: percentageOffset.y,
-        }, logArgs, insertAsChildOfGuid ?? null, useSmartPositioning ?? false, defaultStateKey, isResourceAvailable)
+        x: canvasPosition.x,
+        y: canvasPosition.y,
+        percentOffsetX: percentageOffset.x,
+        percentOffsetY: percentageOffset.y,
+      }, logArgs, insertAsChildOfGuid ?? null, useSmartPositioning ?? false, defaultStateKey, isResourceAvailable)
     try {
       trackAutoSuggestTriggerShadowing(canvasPosition, insertedNodeId)
       handleShadowSuggestionOnInsertion(logData, canvasPosition, insertedNodeId, sourceForTracking)
@@ -694,17 +694,17 @@ let insertSharedModule = createOptimistThunk(async (e, t) => {
   let b = (t, r) => {
     let s = permissionScopeHandler.user('insert-module', () => fromPlayground
       ? Fullscreen.insertPlaygroundModuleUsage({
-          x: canvasPosition.x,
-          y: canvasPosition.y,
-          percentOffsetX: percentageOffset.x,
-          percentOffsetY: percentageOffset.y,
-        })
+        x: canvasPosition.x,
+        y: canvasPosition.y,
+        percentOffsetX: percentageOffset.x,
+        percentOffsetY: percentageOffset.y,
+      })
       : Fullscreen.insertModule(t, {
-          x: canvasPosition.x,
-          y: canvasPosition.y,
-          percentOffsetX: percentageOffset.x,
-          percentOffsetY: percentageOffset.y,
-        }, r, insertAsChildOfCanvas, useSmartPositioning ?? !1, selectAfterInsert ?? !0))
+        x: canvasPosition.x,
+        y: canvasPosition.y,
+        percentOffsetX: percentageOffset.x,
+        percentOffsetY: percentageOffset.y,
+      }, r, insertAsChildOfCanvas, useSmartPositioning ?? !1, selectAfterInsert ?? !0))
     insertionCallback?.(s, canvasPosition, isClick)
     closeComponentFlyoutModal(e.dispatch)
     fullscreenValue.triggerAction('set-tool-default')
@@ -716,7 +716,7 @@ let insertSharedModule = createOptimistThunk(async (e, t) => {
     e.dispatch(markComponentInsertionFlag())
   }
   else {
-    let t = () => {}
+    let t = () => { }
     shouldShowVisualBell && (t = (function (e) {
       e(VisualBellActions.enqueue({
         type: 'insert_template',
@@ -798,11 +798,11 @@ let insertResponsiveSet = createOptimistThunk(async (e, t) => {
   } = t
   let h = canvasPosition
     ? {
-        x: canvasPosition.x,
-        y: canvasPosition.y,
-        percentOffsetX: percentageOffset?.x || 0.5,
-        percentOffsetY: percentageOffset?.y || 0.5,
-      }
+      x: canvasPosition.x,
+      y: canvasPosition.y,
+      percentOffsetX: percentageOffset?.x || 0.5,
+      percentOffsetY: percentageOffset?.y || 0.5,
+    }
     : null
   setRecentlyUsed(item)
   let m = (t, r) => {
@@ -1561,7 +1561,7 @@ async function fetchAndUpdateStateGroups(symbolKeys: string[], stateGroupKeys: s
   }
   try {
     if (missingSymbolKeys.length > 0 || missingStateGroupKeys.length > 0) {
-      const response = await XHR.post('/api/design_systems/components_state_groups', {
+      const response = await sendWithRetry.post('/api/design_systems/components_state_groups', {
         component_keys: missingSymbolKeys,
         state_group_keys: missingStateGroupKeys,
         org_id: openFile.parentOrgId,
@@ -2000,9 +2000,9 @@ async function fetchLibraryInfo(params: {
         }
         files.push(includeThumbnails
           ? {
-              ...library,
-              thumbnail_url: library.file.thumbnail_url,
-            }
+            ...library,
+            thumbnail_url: library.file.thumbnail_url,
+          }
           : library)
         fileObjects.push(library.file)
         if (library.thumbnail_url) {

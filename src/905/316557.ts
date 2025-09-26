@@ -22,7 +22,7 @@ import { getObservableValue } from "../figma_app/84367";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { calculatePickerPositionLeft, calculatePickerPositionBelow } from "../905/959568";
 import { UG } from "../figma_app/628987";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { noop } from 'lodash-es';
 import { bL as _$$bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogActionStrip, DialogBody } from "../figma_app/272243";
@@ -61,7 +61,7 @@ import { KL, Z3 } from "../figma_app/450967";
 import { EventShield } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { O as _$$O } from "../905/969533";
-import { pn } from "../905/714538";
+import { getFontStyleMapping } from "../905/714538";
 import { A as _$$A3 } from "../905/536006";
 import { y8 } from "../905/188169";
 import { R4 } from "../figma_app/835688";
@@ -337,7 +337,7 @@ function ey({
     (void 0 === k || k && !C) && N.flush();
   }, [k, C, N]);
   let P = useCallback(() => {
-    if (E) b(sw());else if (R) Fullscreen?.findMissingFontsAndShowPopover();else if (I.current) {
+    if (E) b(sw()); else if (R) Fullscreen?.findMissingFontsAndShowPopover(); else if (I.current) {
       Fullscreen?.selectStyleByGuid(t.node_id);
       let e = I.current.getBoundingClientRect();
       b(rk({
@@ -955,7 +955,7 @@ let eW = memo(function ({
     if ((n = i.length + e.length) <= 3) return [...e, ...i].map(e => colorCSSManipulatorInstance.format(e));
     let s = [];
     let l = 3 - e.length;
-    if (1 === l) s.push(i[i.length - 1]);else for (let e = 0; e < l; e++) {
+    if (1 === l) s.push(i[i.length - 1]); else for (let e = 0; e < l; e++) {
       let t = Math.floor(e / (l - 1) * (i.length - 1));
       s.push(i[t]);
     }
@@ -972,7 +972,7 @@ let eW = memo(function ({
     return n;
   }, I);
   let k = useSelector(e => e?.selectedView);
-  let R = useMemo(() => pn(T), [T]);
+  let R = useMemo(() => getFontStyleMapping(T), [T]);
   let N = y8(T, R, !0, s, k);
   let P = {};
   for (let e of N) P[e.family] = e;
@@ -1123,7 +1123,7 @@ export function $$eX0({
   }, [O, D, z, G]);
   useEffect(() => (window.addEventListener("mousedown", H), () => window.removeEventListener("mousedown", H)), [H]);
   let W = useCallback(() => {
-    if (_) z();else if (O.current) {
+    if (_) z(); else if (O.current) {
       let {
         x,
         y
@@ -1232,7 +1232,7 @@ export function $$eX0({
       name: "slides_theme_selector_dropdown",
       children: jsxs("div", {
         ref: D,
-        children: [_ && jsx(Ao, {
+        children: [_ && jsx(DraggableModalManager, {
           headerSize: "hidden",
           initialPosition: k,
           onClose: z,
@@ -1293,7 +1293,7 @@ let eQ = forwardRef((e, t) => {
       width
     })
   }) : jsx(RecordableButton, {
-    className: g()(_$$t2, cssBuilderInstance.h48.flex.my8.wFull.radiusMedium.b1.colorBorder.borderBox.alignLeft.$$if(isActive, cssBuilderInstance.colorBgSecondary, cssBuilderInstance.colorBg).$),
+    className: g()(_$$t2, cssBuilderInstance.h48.flex.my8.wFull.radiusMedium.b1.colorBorder.borderBox.alignLeft.if(isActive, cssBuilderInstance.colorBgSecondary, cssBuilderInstance.colorBg).$),
     onMouseDown: e => {
       e.stopPropagation();
       onClick();

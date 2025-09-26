@@ -10,7 +10,7 @@ import { d as _$$d } from '../905/44199';
 import { ProductStatus } from '../905/54385';
 import { s as _$$s2 } from '../905/58247';
 import { A as _$$A19 } from '../905/61817';
-import { zE } from '../905/64735';
+import { Alert } from '../905/64735';
 import { E3, Qw, v_ } from '../905/70909';
 import { A as _$$A2 } from '../905/72153';
 import { A as _$$A27 } from '../905/81613';
@@ -82,13 +82,13 @@ import { liveStoreInstance, setupResourceAtomHandler } from '../905/713695';
 import { SvgComponent } from '../905/714743';
 import { Point } from '../905/736624';
 import { is as _$$is } from '../905/744076';
-import { Ao } from '../905/748636';
+import { DraggableModalManager } from '../905/748636';
 import { MH } from '../905/772425';
 import { A as _$$A6 } from '../905/794518';
 import { A as _$$A14 } from '../905/796878';
 import { A as _$$A24 } from '../905/826099';
 import { sU, Wh, WM } from '../905/838765';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { getVsCodeLinkProps } from '../905/850671';
 import { A as _$$A15 } from '../905/855351';
 import { A as _$$A1 } from '../905/857789';
@@ -276,7 +276,7 @@ let eD = withTrackedClick(e => {
             hasSrc: !!_
           }), jsx('div', {
             className: cssBuilderInstance.absolute.left0.top0.hFull.wFull.opacity1.eventsNone.$,
-            style: styleBuilderInstance.$$if(t, {
+            style: styleBuilderInstance.if(t, {
               opacity: 0.1
             }).$,
             children: _ && jsx(_$$z, {
@@ -326,7 +326,7 @@ function eZ(e) {
     resourceId
   } = e;
   let n = assertNotNullish(e.playgroundFigFile);
-  let o = Um();
+  let o = useDropdownState();
   let l = o?.type === 'PLAYGROUND_FILE_EDIT_DROPDOWN' && o.data.resourceId === resourceId;
   let d = useRef(null);
   let c = d.current?.getBoundingClientRect();
@@ -932,7 +932,7 @@ function tO({
   closePluginPublishModal: d
 }) {
   let c = useDispatch();
-  let u = Um();
+  let u = useDropdownState();
   let p = t === PublisherRole.OWNER ? [tR(PublisherRole.OWNER)] : [tR(PublisherRole.PUBLISHER)];
   t !== PublisherRole.OWNER && (!i && a && p.unshift(tR(PublisherRole.OWNER)), p.push({
     type: 'separator'
@@ -972,7 +972,7 @@ function tO({
                 resource: l
               }));
             },
-            onCancel: () => {}
+            onCancel: () => { }
           },
           showModalsBeneath: !0
         })) : (c(wx({
@@ -1004,7 +1004,7 @@ function tD({
       vertical: 8
     },
     spacing: 8,
-    children: [jsx(zE, {
+    children: [jsx(Alert, {
       orientation: 'vertical',
       iconSrc: _$$A9,
       variant: 'brand',
@@ -1586,7 +1586,7 @@ function il({
       setCreators: t,
       acceptedCreators: i,
       author: n
-    }), s && jsx(zE, {
+    }), s && jsx(Alert, {
       orientation: 'vertical',
       variant: 'gray',
       iconSrc: _$$A21,
@@ -2256,7 +2256,7 @@ class iW extends Component {
           onConfirm: () => {
             this.createOrUpdatePluginVersion(i);
           },
-          onCancel: () => {}
+          onCancel: () => { }
         },
         showModalsBeneath: !0
       })) : this.createOrUpdatePluginVersion(i);
@@ -2708,7 +2708,7 @@ class iW extends Component {
       try {
         let e = await ec.getPermissions(i);
         if (e.status === 200) return e.data.meta;
-      } catch (e) {}
+      } catch (e) { }
     };
     this.getPublishFormPrimaryButtonText = () => {
       let e = this.getReviewStatus();
@@ -3426,7 +3426,7 @@ function iK({
   activeTab: o,
   postFormFlow: l
 }) {
-  return jsxs(Ao, {
+  return jsxs(DraggableModalManager, {
     title: e,
     dragHeaderOnly: !0,
     onClose: i,

@@ -29,9 +29,10 @@ import { getResourceDataOrFallback, ResourceStatus } from '../905/663269';
 import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { x as _$$x } from '../905/811596';
 import { o0 } from '../905/844131';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { selectViewAction } from '../905/929976';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { b as _$$b } from '../905/946806';
 import { a as _$$a } from '../905/964520';
 import { TextWithTruncation } from '../905/984674';
@@ -1107,7 +1108,7 @@ let eL = registerModal(e => {
 }, 'VERIFY_DOMAIN_MODAL');
 let eM = 'DomainFlyout';
 function eP(e) {
-  let t = Um();
+  let t = useDropdownState();
   let a = useDispatch();
   let r = _$$B();
   let l = useRef(null);

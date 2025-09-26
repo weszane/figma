@@ -24,7 +24,7 @@ import { R as _$$R } from '../905/780757'
 import { handleOptimistTransaction } from '../905/842794'
 import { defaultSessionLocalIDArrayString, defaultSessionLocalIDStringArray } from '../905/871411'
 import { LO, Mu } from '../905/901964'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { selectViewAction } from '../905/929976'
 import { recordsWithRemove } from '../905/963222'
 import { postUserFlag } from '../905/985254'
@@ -45,7 +45,7 @@ export async function $$U4(e, t, r, n, i) {
       forceMention: t,
       onCommentValidationFailure: void 0,
     }))
-  }).catch(() => {})
+  }).catch(() => { })
 }
 export async function $$B31(e, t, r, n, i, a, s, o) {
   return await G(a.messageMeta, t, r, n, i).then((r) => {
@@ -217,7 +217,7 @@ let $$K10 = createOptimistThunk((e, t) => {
     uuid,
     parent_id,
   } = comment
-  let d = XHR.del(`/api/file/${key}/comments/${id}`)
+  let d = sendWithRetry.del(`/api/file/${key}/comments/${id}`)
   let u = getI18nString('comments.an_error_occurred_while_deleting_this_comment')
   e.dispatch(handlePromiseError({
     promise: d,
@@ -226,15 +226,15 @@ let $$K10 = createOptimistThunk((e, t) => {
   recordsWithRemove.remove(id)
   r = uuid
     ? WB().optimisticallyDeleteWithUUID({
-        Comment: {
-          [uuid]: null,
-        },
-      }, d)
+      Comment: {
+        [uuid]: null,
+      },
+    }, d)
     : WB().optimisticallyDelete({
-        Comment: {
-          [id]: null,
-        },
-      }, d)
+      Comment: {
+        [id]: null,
+      },
+    }, d)
   trackEventAnalytics('Livegraph Optimistic Comment Update', {
     flow: 'setDeleted',
     isOptimistic: !!uuid,
@@ -273,7 +273,7 @@ let $$Y34 = createOptimistThunk((e, {
       message: getI18nString('comments.comment_resolved'),
       type: 'comment-resolved',
       button: i,
-      onDismiss: () => {},
+      onDismiss: () => { },
     }))
   }
   recordsWithRemove.remove(r)
@@ -281,7 +281,7 @@ let $$Y34 = createOptimistThunk((e, {
   let d = i ? getI18nString('comments.an_error_occurred_while_resolving_this_comment') : getI18nString('comments.an_error_occurred_while_unresolving_this_comment')
   if (n && containsDash(r)) {
     let r = WB().getIdFromUuid('Comment', n).then((r) => {
-      let n = XHR.put(`/api/file/${t}/comments/${r}`, {
+      let n = sendWithRetry.put(`/api/file/${t}/comments/${r}`, {
         resolved_at: l,
       })
       e.dispatch(handlePromiseError({
@@ -304,7 +304,7 @@ let $$Y34 = createOptimistThunk((e, {
     })
   }
   else {
-    let a = XHR.put(`/api/file/${t}/comments/${r}`, {
+    let a = sendWithRetry.put(`/api/file/${t}/comments/${r}`, {
       resolved_at: l,
     })
     e.dispatch(handlePromiseError({
@@ -313,20 +313,20 @@ let $$Y34 = createOptimistThunk((e, {
     }))
     n
       ? WB().optimisticallyUpdateWithUUID({
-          Comment: {
-            [n]: {
-              uuid: n,
-              resolvedAt: i ? new Date() : null,
-            },
+        Comment: {
+          [n]: {
+            uuid: n,
+            resolvedAt: i ? new Date() : null,
           },
-        }, a)
+        },
+      }, a)
       : WB().optimisticallyUpdate({
-          Comment: {
-            [r]: {
-              resolvedAt: i ? new Date() : null,
-            },
+        Comment: {
+          [r]: {
+            resolvedAt: i ? new Date() : null,
           },
-        }, a)
+        },
+      }, a)
     trackEventAnalytics('Livegraph Optimistic Comment Update', {
       flow: 'setResolved',
       isOptimistic: !!n,
@@ -343,18 +343,18 @@ let $$$33 = createOptimistThunk((e, {
 }) => {
   let a
   n && containsDash(r)
-    ? (a = WB().getIdFromUuid('Comment', n).then(e => XHR.put(`/api/file/${t}/comments/${e}`, {
-        client_meta: i,
-      })), trackEventAnalytics('Livegraph Optimistic Comment Update', {
-        flow: 'setClientMetaWithGetIdFromUUID',
-        isOptimistic: !0,
-      }))
-    : (a = XHR.put(`/api/file/${t}/comments/${r}`, {
-        client_meta: i,
-      }), trackEventAnalytics('Livegraph Optimistic Comment Update', {
-        flow: 'setClientMeta',
-        isOptimistic: !!n,
-      }))
+    ? (a = WB().getIdFromUuid('Comment', n).then(e => sendWithRetry.put(`/api/file/${t}/comments/${e}`, {
+      client_meta: i,
+    })), trackEventAnalytics('Livegraph Optimistic Comment Update', {
+      flow: 'setClientMetaWithGetIdFromUUID',
+      isOptimistic: !0,
+    }))
+    : (a = sendWithRetry.put(`/api/file/${t}/comments/${r}`, {
+      client_meta: i,
+    }), trackEventAnalytics('Livegraph Optimistic Comment Update', {
+      flow: 'setClientMeta',
+      isOptimistic: !!n,
+    }))
   let s = getI18nString('comments.an_error_occurred_while_moving_this_comment')
   e.dispatch(handlePromiseError({
     promise: a,
@@ -362,38 +362,38 @@ let $$$33 = createOptimistThunk((e, {
   }))
   n
     ? WB().optimisticallyUpdateWithUUID({
-        Comment: {
-          [n]: {
-            uuid: n,
-            clientMeta: {
-              x: i.x,
-              y: i.y,
-              pageId: void 0 === i.page_id ? null : i.page_id,
-              nodeId: void 0 === i.node_id ? null : i.node_id,
-              nodeOffset: void 0 === i.node_offset ? null : i.node_offset,
-              inFrame: void 0 === i.in_frame ? null : i.in_frame,
-              selectionBoxAnchor: i.selection_box_anchor ? i.selection_box_anchor : null,
-              stablePath: i.stable_path ? i.stable_path : null,
-            },
+      Comment: {
+        [n]: {
+          uuid: n,
+          clientMeta: {
+            x: i.x,
+            y: i.y,
+            pageId: void 0 === i.page_id ? null : i.page_id,
+            nodeId: void 0 === i.node_id ? null : i.node_id,
+            nodeOffset: void 0 === i.node_offset ? null : i.node_offset,
+            inFrame: void 0 === i.in_frame ? null : i.in_frame,
+            selectionBoxAnchor: i.selection_box_anchor ? i.selection_box_anchor : null,
+            stablePath: i.stable_path ? i.stable_path : null,
           },
         },
-      }, a)
+      },
+    }, a)
     : WB().optimisticallyUpdate({
-        Comment: {
-          [r]: {
-            clientMeta: {
-              x: i.x,
-              y: i.y,
-              pageId: void 0 === i.page_id ? null : i.page_id,
-              nodeId: void 0 === i.node_id ? null : i.node_id,
-              nodeOffset: void 0 === i.node_offset ? null : i.node_offset,
-              inFrame: void 0 === i.in_frame ? null : i.in_frame,
-              selectionBoxAnchor: i.selection_box_anchor ? i.selection_box_anchor : null,
-              stablePath: i.stable_path ? i.stable_path : null,
-            },
+      Comment: {
+        [r]: {
+          clientMeta: {
+            x: i.x,
+            y: i.y,
+            pageId: void 0 === i.page_id ? null : i.page_id,
+            nodeId: void 0 === i.node_id ? null : i.node_id,
+            nodeOffset: void 0 === i.node_offset ? null : i.node_offset,
+            inFrame: void 0 === i.in_frame ? null : i.in_frame,
+            selectionBoxAnchor: i.selection_box_anchor ? i.selection_box_anchor : null,
+            stablePath: i.stable_path ? i.stable_path : null,
           },
         },
-      }, a)
+      },
+    }, a)
 })
 let $$X48 = createActionCreator('COMMENTS_SET_COMMENT_CONTENT')
 let $$q27 = createOptimistThunk((e, t) => {
@@ -403,7 +403,7 @@ let $$q27 = createOptimistThunk((e, t) => {
     return
   }
   let n = extractInviteTokens(t.messageMeta)
-  let i = XHR.put(`/api/file/${r}/comments/${t.comment.id}`, {
+  let i = sendWithRetry.put(`/api/file/${r}/comments/${t.comment.id}`, {
     message_meta: t.messageMeta,
     attachment_updates: getAttachmentChanges(t.attachmentUpdates),
     share_to_mentions: t.forceWithInvite || !1,
@@ -432,43 +432,43 @@ let $$q27 = createOptimistThunk((e, t) => {
   let o = Rc(t.messageMeta)
   if (s
     ? WB().optimisticallyUpdateWithUUID({
-        Comment: {
-          [s]: {
-            uuid: s,
-            messageMeta: o,
-            messageMetaStylized: o,
-          },
+      Comment: {
+        [s]: {
+          uuid: s,
+          messageMeta: o,
+          messageMetaStylized: o,
         },
-      }, i)
+      },
+    }, i)
     : WB().optimisticallyUpdate({
-        Comment: {
-          [t.comment.id]: {
-            messageMeta: o,
-            messageMetaStylized: o,
-          },
+      Comment: {
+        [t.comment.id]: {
+          messageMeta: o,
+          messageMetaStylized: o,
         },
-      }, i), trackEventAnalytics('Livegraph Optimistic Comment Update', {
-    flow: 'updateCommentContent',
-    isOptimistic: !!s,
-  }), t.attachmentUpdates) {
+      },
+    }, i), trackEventAnalytics('Livegraph Optimistic Comment Update', {
+      flow: 'updateCommentContent',
+      isOptimistic: !!s,
+    }), t.attachmentUpdates) {
     let e = LO(t.attachmentUpdates.deleted)
     e
       ? WB().optimisticallyDelete({
-          CommentAttachment: e,
-        }, i)
+        CommentAttachment: e,
+      }, i)
       : WB().emitEvent({
-          type: 'EMPTY_SYNC',
-          source: 'comment_delete',
-        })
+        type: 'EMPTY_SYNC',
+        source: 'comment_delete',
+      })
     let r = Mu(Object.values(t.attachmentUpdates.attachments), t.comment.key, t.comment.id)
     r
       ? WB().optimisticallyCreate({
-          CommentAttachment: r,
-        }, i)
+        CommentAttachment: r,
+      }, i)
       : WB().emitEvent({
-          type: 'EMPTY_SYNC',
-          source: 'comment_create',
-        })
+        type: 'EMPTY_SYNC',
+        source: 'comment_create',
+      })
   }
   e.dispatch($$X48())
 })
@@ -593,23 +593,23 @@ let $$er40 = createOptimistThunk((e, t) => {
     })), data.message && data.message.is_new_file_follower) {
       let t = commentsConfiguration.showNotificationSettings
         ? {
-            text: getI18nString('comments.manage'),
-            action: () => {
-              let t = e.getState()
-              e.dispatch($$ea23())
-              t.mirror.appModel.showUi || fullscreenValue.triggerAction('toggle-ui')
-              t.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS && fullscreenValue.triggerAction('set-tool-comments')
-              requestAnimationFrame(() => {
-                _$$h()
-              })
-            },
-          }
+          text: getI18nString('comments.manage'),
+          action: () => {
+            let t = e.getState()
+            e.dispatch($$ea23())
+            t.mirror.appModel.showUi || fullscreenValue.triggerAction('toggle-ui')
+            t.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS && fullscreenValue.triggerAction('set-tool-comments')
+            requestAnimationFrame(() => {
+              _$$h()
+            })
+          },
+        }
         : void 0
       e.dispatch(VisualBellActions.enqueue({
         message: getI18nString('comments.you_will_be_notified_about_replies'),
         type: 'comments-opted-in',
         button: t,
-        onDismiss: () => {},
+        onDismiss: () => { },
       }))
     }
     let o = data.meta
@@ -739,7 +739,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
           type: `comment-creation-failure: ${S}`,
           error: !1,
           message: getI18nString('comments.oops_one_of_your_comments_never_posted'),
-          onDismiss: () => {},
+          onDismiss: () => { },
           button: t,
           timeoutOverride: 1 / 0,
         }))
@@ -771,25 +771,25 @@ let $$ei26 = createOptimistThunk((e, t) => {
     })), data.message && data.message.is_new_file_follower) {
       let r = t.commentsConfiguration.showNotificationSettings
         ? {
-            text: getI18nString('comments.manage'),
-            action: () => {
-              let t = e.getState()
-              e.dispatch($$ea23({
-                force: !0,
-              }))
-              t.mirror.appModel.showUi || fullscreenValue.triggerAction('toggle-ui')
-              t.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS && fullscreenValue.triggerAction('set-tool-comments')
-              requestAnimationFrame(() => {
-                _$$h()
-              })
-            },
-          }
+          text: getI18nString('comments.manage'),
+          action: () => {
+            let t = e.getState()
+            e.dispatch($$ea23({
+              force: !0,
+            }))
+            t.mirror.appModel.showUi || fullscreenValue.triggerAction('toggle-ui')
+            t.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS && fullscreenValue.triggerAction('set-tool-comments')
+            requestAnimationFrame(() => {
+              _$$h()
+            })
+          },
+        }
         : void 0
       e.dispatch(VisualBellActions.enqueue({
         message: getI18nString('comments.you_will_be_notified_about_replies'),
         type: 'comments-opted-in',
         button: r,
-        onDismiss: () => {},
+        onDismiss: () => { },
       }))
     }
     let g = data.meta
@@ -880,13 +880,13 @@ let $$ea23 = createOptimistThunk((e, t) => {
   return !a && _
     ? (e.dispatch(eS(_.id)), !1)
     : (r.selectedView.view === 'fullscreen' && Fullscreen.setActiveCommentAnchorData({
-        stablePath: defaultSessionLocalIDArrayString,
-      }), r.selectedView.view === 'communityHub' && e.dispatch(selectViewAction({
-        ...r.selectedView,
-        commentThreadId: void 0,
-      })), atomStoreManager.set(_$$R, !1), e.dispatch($$eK30()), e.dispatch($$eY36()), e.dispatch($$ew1({
-        resetStatusOnly: !1,
-      })), r.tooltip && e.dispatch(hideTooltip()), !0)
+      stablePath: defaultSessionLocalIDArrayString,
+    }), r.selectedView.view === 'communityHub' && e.dispatch(selectViewAction({
+      ...r.selectedView,
+      commentThreadId: void 0,
+    })), atomStoreManager.set(_$$R, !1), e.dispatch($$eK30()), e.dispatch($$eY36()), e.dispatch($$ew1({
+      resetStatusOnly: !1,
+    })), r.tooltip && e.dispatch(hideTooltip()), !0)
 })
 let $$es0 = createActionCreator('COMMENTS_SET_NEW_COMMENT_ACTIVE')
 let $$eo5 = createOptimistThunk((e, t) => {
@@ -900,8 +900,8 @@ let $$eo5 = createOptimistThunk((e, t) => {
       let a = t?.stablePath
       a
         ? Fullscreen.setActiveCommentAnchorData({
-            stablePath: `[${a.join(',')}]`,
-          })
+          stablePath: `[${a.join(',')}]`,
+        })
         : Fullscreen.setActiveCommentAnchorData(Fullscreen.getCommentAnchorDataAtPosition(x, y))
     }
     else {

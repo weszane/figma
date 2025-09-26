@@ -11,7 +11,7 @@ import p from "classnames";
 import { reportError } from "../905/11";
 import { a as _$$a } from "../905/29104";
 import { getI18nString } from "../905/303541";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { KindEnum } from "../905/129884";
 import { j } from "../905/834956";
 import { JT } from "../figma_app/632248";
@@ -26,7 +26,7 @@ export function $$C0({
   paint: e
 }) {
   let t = useDispatch();
-  let i = BK("AI_IMAGE_TOOLS_DROPDOWN");
+  let i = useDropdown("AI_IMAGE_TOOLS_DROPDOWN");
   let p = useMemo(() => !!(e && ImageToolsBindings?.canEditSelectedImage()), [e]);
   let m = useMemo(() => [{
     displayText: getI18nString("fullscreen.properties_panel.ai_image_tools.remove_background"),

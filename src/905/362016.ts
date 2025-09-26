@@ -18,7 +18,7 @@ import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { A as _$$A } from "../905/408320";
 import { q } from "../905/820062";
 import { sortWithCollator } from "../figma_app/930338";
-import { o as _$$o } from "../905/605383";
+import { RenderListByChunks } from "../905/605383";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lX } from "../figma_app/588397";
 import { liveStoreInstance } from "../905/713695";
@@ -100,7 +100,7 @@ function R({
     children: [r.length > 0 && jsx(P, {
       items: r,
       onItemClick: t
-    }), jsx(_$$o, {
+    }), jsx(RenderListByChunks, {
       chunkSize: 5,
       listKey: s,
       children: a.map(e => {
@@ -157,7 +157,7 @@ function P({
   return jsx("div", {
     children: jsx("div", {
       className: "dsa_file_view_assets--componentContainer--PGt6T",
-      children: jsx(_$$o, {
+      children: jsx(RenderListByChunks, {
         chunkSize: 50,
         listKey: r,
         className: "dsa_file_view_assets--componentTiles--CXYEl",

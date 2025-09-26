@@ -53,7 +53,7 @@ import { h1 } from "../905/986103";
 import { getSubscriptionPriceString } from "../figma_app/808294";
 import { hasClientMeta, hasMonetizedResourceMetadata, hasFreemiumCode, isThirdPartyMonetized, isPlugin } from "../figma_app/45218";
 import { dx } from "../5430/309696";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { F as _$$F } from "../5430/373843";
 import { k as _$$k2 } from "../5430/846627";
 import { C2, Gx, J3 } from "../figma_app/699310";
@@ -90,7 +90,7 @@ import { B as _$$B2 } from "../905/950875";
 import { T as _$$T2 } from "../5430/528285";
 import { V as _$$V2 } from "../1577/311426";
 import { CW as _$$CW, P1 } from "../5430/201744";
-import { R as _$$R2 } from "../905/792510";
+import { SocialLinks } from "../905/792510";
 import { getValueOrFallback } from "../905/872825";
 import { getCurrentLocale } from "../figma_app/598412";
 import { TemplateCategory } from "../figma_app/930386";
@@ -770,7 +770,7 @@ function eq(e) {
         tabIndex: 0,
         className: Rc,
         children: renderI18nText("community.detail_view.creator_policy")
-      }), l && jsx(OJ, {
+      }), l && jsx(HeaderModal, {
         title: getI18nString("community.detail_view.creator_policy"),
         maxWidth: 450,
         onClose: () => {
@@ -1638,7 +1638,7 @@ export function $$tQ2({
       resource: t,
       showBottomDivider: m
     }) : void 0,
-    socialLinks: jsx(_$$R2, {
+    socialLinks: jsx(SocialLinks, {
       author: Lj(t),
       resourceType: getResourceType(t),
       resourceURL: buildFullCommunityUrl(t),

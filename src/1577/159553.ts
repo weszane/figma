@@ -12,7 +12,7 @@ import { ek as _$$ek, zv } from "../figma_app/640683";
 import { customHistory } from "../905/612521";
 import { F as _$$F } from "../905/680873";
 import { useLatestRef } from "../figma_app/922077";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -898,10 +898,10 @@ export function $$eY4(e, t) {
     notificationFeedMap: _,
     isFetchingNotifications: p,
     markAllAsReadFn: () => {
-      (e ? XHR.post("/api/user_notifications/community/mark_read", {
+      (e ? sendWithRetry.post("/api/user_notifications/community/mark_read", {
         currentView: u,
         source: bellFeedAPIInstance ? "desktopbell" : "web"
-      }) : XHR.post("/api/user_notifications/mark_read/plan", {
+      }) : sendWithRetry.post("/api/user_notifications/mark_read/plan", {
         current_plan_id: t,
         currentView: u,
         is_plan_org: c,
@@ -1081,7 +1081,7 @@ function eW(e, t) {
       if (!desktopAPIInstance && r) d(_$$H({
         params: n.searchParams.toString(),
         hash: n.hash
-      }));else if (t.deeplink.use_unsafe) customHistory.unsafeRedirect(n.href, desktopAPIInstance ? void 0 : "_blank");else if (e.inDesktopTray) customHistory.redirect(n.href);else try {
+      })); else if (t.deeplink.use_unsafe) customHistory.unsafeRedirect(n.href, desktopAPIInstance ? void 0 : "_blank"); else if (e.inDesktopTray) customHistory.redirect(n.href); else try {
         let e = mapPathToSelectedView(s.getState(), o);
         if ("teamFeed" === e.view) {
           m && t.plan?.id.toString() === m.id ? d(selectViewAction(e)) : customHistory.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");

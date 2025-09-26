@@ -15,7 +15,7 @@ function c({
     let i = e[t];
     i && (r += `, ${i}`);
   }
-  let a = o()(VA, cssBuilderInstance.$$if(t, cssBuilderInstance.colorTextSecondary, cssBuilderInstance.colorText).$);
+  let a = o()(VA, cssBuilderInstance.if(t, cssBuilderInstance.colorTextSecondary, cssBuilderInstance.colorText).$);
   return jsxs("div", {
     className: cssBuilderInstance.flex.itemsStart.flexColumn.$,
     children: [jsx("div", {

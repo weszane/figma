@@ -18,10 +18,10 @@ import { E as _$$E2 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { LZ } from "../figma_app/101956";
 import { N as _$$N2 } from "../figma_app/268271";
-import { y as _$$y } from "../905/129046";
+import { ImageOverlayComponent } from "../905/129046";
 import { _l } from "../figma_app/995208";
-import { rq } from "../905/425180";
-import { F_ } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/858282";
 import { SAR, jk, ODB, QKV } from "../figma_app/6204";
 import { EI } from "../figma_app/21029";
 import { XF, WW, qA, Mt, D9 } from "../1250/182479";
@@ -132,8 +132,8 @@ export function $$A0({
     e && complete();
   }, [e, complete]);
   isShowing && !o && complete();
-  return jsx(rq, {
-    arrowPosition: F_.RIGHT_BODY,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: renderI18nText("cooper.onboarding.simply_select_text_or_an", {
       connectDataBold: jsx("p", {
         className: "x1xlr1w8",
@@ -145,7 +145,7 @@ export function $$A0({
     }),
     isCanvasNode: !0,
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("3d9047607fffbfc98f0176cecba9d57fad7cac48"),
       alt: getI18nString("cooper.onboarding.bulk_create.image_alt"),
       aspectRatio: 240 / 135
@@ -180,8 +180,8 @@ export function $$O3() {
   _$$E2(uniqueId, qA, () => {
     show();
   });
-  return jsx(rq, {
-    arrowPosition: F_.RIGHT_BODY,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: renderI18nText("cooper.onboarding.internal_templates_let_you_update", {
       lineBreak: jsxs(Fragment, {
         children: [jsx("br", {}), jsx("br", {})]
@@ -218,11 +218,11 @@ export function $$L1() {
   _$$E2(uniqueId, Mt, () => {
     show();
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     arrowPadding: 8,
     description: renderI18nText("cooper.onboarding.templates_help_your_team_stay"),
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("7c5445059896c65ae2098087f34d2f35cc5a8b20"),
       alt: getI18nString("cooper.onboarding.overlay_image_alt"),
       aspectRatio: 240 / 135

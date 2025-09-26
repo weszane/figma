@@ -1,7 +1,7 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { createActionCreator } from "../905/73481";
 import { customHistory } from "../905/612521";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { AUTH_INIT } from "../905/194276";
 import { AuthFlowStep } from "../905/862321";
 import { FlashActions } from "../905/573154";
@@ -110,7 +110,7 @@ let $$S0 = createOptimistThunk(async (e, t) => {
 });
 let $$v1 = createOptimistThunk(async (e, t) => {
   try {
-    await XHR.del(`/api/org_user/${t.orgId}`);
+    await sendWithRetry.del(`/api/org_user/${t.orgId}`);
     e.dispatch(VisualBellActions.enqueue({
       type: "org_guest_leave",
       message: getI18nString("org_user_actions.you_successfully_left_organization", {
@@ -172,7 +172,7 @@ let $$A7 = createOptimistAction("ORG_USER_BATCH_UPDATE_ORG_USERS", async (e, t, 
 let $$x5 = createActionCreator("ORG_USER_BATCH_DELETE_ORG_USERS");
 let $$N3 = createOptimistThunk(async (e, t) => {
   if (e.dispatch($$x5(t)), t.userInitiated) try {
-    await XHR.del(`/api/orgs/${t.orgId}/org_users`, t.params);
+    await sendWithRetry.del(`/api/orgs/${t.orgId}/org_users`, t.params);
     let r = t.params.org_user_ids.length;
     let n = getI18nString("org_user_actions.user_has_been_removed_from_organization", {
       deletedOrgUserCount: r

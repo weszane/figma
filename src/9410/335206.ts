@@ -22,7 +22,7 @@ import { useRef, useCallback, useEffect } from "react";
 import { Tc } from "../905/797478";
 import { ts } from "../figma_app/120210";
 import { registerModal } from "../905/102752";
-import { Ao, F_ } from "../905/748636";
+import { DraggableModalManager, ArrowPosition } from "../905/748636";
 import { q } from "../3276/826587";
 import { jT, N1, hQ } from "../3276/770360";
 import { j as _$$j } from "../9410/630757";
@@ -69,9 +69,9 @@ let O = registerModal(function () {
     return () => {
       document.removeEventListener("pointerdown", e);
     };
-  }, [p, m]), initialModalPosition) ? jsx(Ao, {
+  }, [p, m]), initialModalPosition) ? jsx(DraggableModalManager, {
     ref: i,
-    arrowPosition: F_.BOTTOM,
+    arrowPosition: ArrowPosition.BOTTOM,
     arrowRelativeX: t ? void 0 : 160,
     containerClassName: jT,
     dragHeaderOnly: !0,

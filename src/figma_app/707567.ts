@@ -2,7 +2,7 @@ import { getFeatureFlags } from "../905/601108";
 import { z } from "../905/239603";
 import { debugState } from "../905/407919";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { tf, Rd, Q6, $5 } from "../905/295427";
 import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { n as _$$n } from "../905/347702";
@@ -56,7 +56,7 @@ export let $$_0 = new class {
   }
   buildHeaders() {
     return {
-      ...XHR.defaults.headers
+      ...sendWithRetry.defaults.headers
     };
   }
   getFirstDraftKitStatus() {

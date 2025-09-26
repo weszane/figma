@@ -29,7 +29,7 @@ import { uP, Oe } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection, renameNode } from "../figma_app/741237";
 import { u as _$$u, BQ } from "../figma_app/852050";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { Xo } from "../figma_app/482495";
@@ -40,7 +40,7 @@ import { conditionalWrapper } from "../905/579635";
 import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { v as _$$v } from "../905/318279";
 import { q as _$$q } from "../figma_app/905311";
-import { S as _$$S2 } from "../905/459477";
+import { fileLaunchHelper as _$$S2 } from "../905/459477";
 import { InstanceSwapToggle } from "../905/1253";
 import { u as _$$u2 } from "../905/419626";
 import { l6, c$ } from "../905/794875";
@@ -54,7 +54,7 @@ import { eF } from "../figma_app/394327";
 import { P as _$$P2 } from "../figma_app/120873";
 import { oz } from "../figma_app/406976";
 import { gJ } from "../905/923433";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { isNotVariantPropType, DROPDOWN_HEIGHT, areSlotsEnabled, normalizeComponentPropValue, BOOLEAN_FORMATTER, isValidNumberString, stringToFloat, floatToString, getDefaultStateForStateGroup, VARIABLE_TYPE_CONFIG, computeBackingGUID } from "../figma_app/164212";
 import { xP, Zu, Kn } from "../figma_app/65182";
 import { u as _$$u3 } from "../figma_app/940920";
@@ -131,7 +131,7 @@ export function $$eE1({
   let V = useCallback(e => {
     e.stopPropagation();
   }, []);
-  return (getFeatureFlags().ds_variable_props_number_def || e.type !== ComponentPropType.NUMBER) && e.type !== ComponentPropType.IMAGE && (getFeatureFlags().dse_slots || e.type !== ComponentPropType.SLOT) ? jsxs(Ao, {
+  return (getFeatureFlags().ds_variable_props_number_def || e.type !== ComponentPropType.NUMBER) && e.type !== ComponentPropType.IMAGE && (getFeatureFlags().dse_slots || e.type !== ComponentPropType.SLOT) ? jsxs(DraggableModalManager, {
     title: getI18nString("design_systems.component_properties.edit_component_property", {
       propType: throwTypeError(e.type).toLocaleLowerCase()
     }),
@@ -696,7 +696,7 @@ function ew({
     modalWidth
   } = useModalConfig(PickerOptionType.INSTANCE_SWAP_PICKER);
   let o = useCurrentFileKey();
-  let l = Um();
+  let l = useDropdownState();
   let d = useSelector(t => e?.type === ComponentPropType.INSTANCE_SWAP ? computeBackingGUID([e.defaultValue], t.mirror.sceneGraph) : null);
   let c = useMemo(() => e.type === ComponentPropType.BOOL || e.type === ComponentPropType.NUMBER || e.type === ComponentPropType.TEXT, [e.type]);
   let u = useMemo(() => c && e.varValue.type === VariableDataType.ALIAS, [c, e]);

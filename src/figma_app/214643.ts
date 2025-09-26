@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { j } from "../905/694231";
 import { l6, c$, sK } from "../905/794875";
 import { wx, Pf, VN, iE, nk, oS, UU, K0, kW, nI } from "../905/32813";
@@ -19,7 +19,7 @@ export function $$h1({
   ariaLabelledBy: _
 }) {
   let h = useDispatch();
-  let g = Um();
+  let g = useDropdownState();
   let f = "auto_inherit_mode_string";
   let E = e.modes ? e.modes[0].name : "";
   let y = useMemo(() => ({

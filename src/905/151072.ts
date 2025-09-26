@@ -5,7 +5,7 @@ import { roundToMultiple, clamp } from "../figma_app/492908";
 import { l as _$$l } from "../905/556594";
 import { O4 } from "../905/777187";
 import { createRecordingCallback } from "../figma_app/878298";
-import { q, v as _$$v } from "../905/476456";
+import { removePositionChars, parseAnchorPosition } from "../905/476456";
 import { LS } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -26,10 +26,10 @@ let S = new class {
     this.MIN_SCALE = sI;
   }
   parse(e) {
-    let t = q(e);
+    let t = removePositionChars(e);
     let i = O4(t, 1);
     if (i.error) throw new LS("Could not parse input", i.error.type);
-    let n = _$$v(e);
+    let n = parseAnchorPosition(e);
     return {
       value: i.value,
       anchorPoint: n

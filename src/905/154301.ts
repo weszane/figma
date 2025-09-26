@@ -15,7 +15,7 @@ import { FlashActions } from "../905/573154";
 import { teamAPIClient } from "../905/834575";
 import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
-import { Dd, OJ } from "../905/519092";
+import { ConfirmationModal, HeaderModal } from "../905/519092";
 import { v as _$$v } from "../905/621749";
 import { kL, Vq, _Z, v0, pL } from "../figma_app/639088";
 export let $$E0 = registerModal(function (e) {
@@ -102,7 +102,7 @@ export let $$E0 = registerModal(function (e) {
   };
   if (!e.team.org_id && e.subscriptionStatus) return jsx(TrackingProvider, {
     name: "Blocked Pro Team Delete Modal",
-    children: jsx(Dd, {
+    children: jsx(ConfirmationModal, {
       title: getI18nString("team_delete_modal.pro_plan_cancel_modal_header"),
       confirmText: getI18nString("team_delete_modal.proceed_to_cancel"),
       onConfirm: () => {
@@ -127,7 +127,7 @@ export let $$E0 = registerModal(function (e) {
     properties: {
       teamid: e.team.id
     },
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       maxWidth: 344,
       minWidth: 344,
       fixedTop: !0,
@@ -149,7 +149,7 @@ export let $$E0 = registerModal(function (e) {
     properties: {
       teamid: e.team.id
     },
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       maxWidth: 344,
       minWidth: 344,
       fixedTop: !0,

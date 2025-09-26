@@ -12,9 +12,9 @@ import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { sw, rk } from "../figma_app/914957";
 import { compareLibraryItemsAlias, compareWithGeneratedKey, compareLibraryItemWithKey } from "../905/709171";
 import { teamLibraryCache } from "../figma_app/80990";
-import { b as _$$b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { fullscreenValue } from "../figma_app/455680";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 export let $$v0 = "variable-picker-style-context-menu";
 export function $$I1() {
@@ -26,7 +26,7 @@ export function $$I1() {
     hideStyleContextMenu
   } = function () {
     let e = useDispatch();
-    let t = Um();
+    let t = useDropdownState();
     return useMemo(() => ({
       showStyleContextMenu: function ({
         dsStyle: t,
@@ -81,7 +81,7 @@ export function $$E2({
   position: t,
   recordingKey: i
 }) {
-  let a = _$$b({
+  let a = useLibraryFileLink({
     libraryKey: e.library_key,
     nodeId: e.node_id
   });

@@ -55,9 +55,9 @@ import { e as _$$e2 } from "../905/621515";
 import { $$in } from "../figma_app/76123";
 import { browserCapabilities } from "../905/409121";
 import { N as _$$N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { vx, oo } from "../642/38487";
-import { F_ } from "../905/748636";
+import { ArrowPosition } from "../905/748636";
 import { xtb } from "../figma_app/6204";
 import { m4 } from "../642/998522";
 import { uK } from "../figma_app/178273";
@@ -172,8 +172,8 @@ function ep() {
       canShow: () => !!getFeatureFlags().ce_al_show_msal_onboarding
     });
   });
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: renderI18nText("fullscreen.msal_onboarding.body"),
     disableHighlight: !0,
     emphasized: !0,

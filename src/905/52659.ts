@@ -22,7 +22,7 @@ import { mapProjectProperties } from "../figma_app/349248";
 import { createSelector } from "../vendor/925040";
 import { FolderSortKey } from "../905/316062";
 import { SortField, SortOrder } from "../figma_app/756995";
-import { h as _$$h } from "../figma_app/198885";
+import { getSelectedView } from "../figma_app/198885";
 import { h1 } from "../905/986103";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
@@ -35,8 +35,8 @@ import { t as _$$t2 } from "../905/53773";
 import { x as _$$x } from "../905/98916";
 import { UserAvatar, AvatarSize } from "../905/590952";
 import { wW } from "../figma_app/656450";
-let T = createSelector(_$$h, e => "team" === e.view ? `${e.view}-${e.teamId}` : e.view);
-let k = createSelector(_$$h, T, e => e.viewBarSortOptionsByView, e => e.tileSortFilterStateByView, (e, t, i, n) => {
+let T = createSelector(getSelectedView, e => "team" === e.view ? `${e.view}-${e.teamId}` : e.view);
+let k = createSelector(getSelectedView, T, e => e.viewBarSortOptionsByView, e => e.tileSortFilterStateByView, (e, t, i, n) => {
   if ("team" === e.view) {
     let e = n.team;
     return {

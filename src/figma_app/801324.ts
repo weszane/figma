@@ -371,7 +371,7 @@ function D(e, t) {
     strokeOpacity: styleType === BorderStyle.NONE ? .2 : 1,
     strokeDasharray: styleType === BorderStyle.DASHED ? `${i * w} ${i * w}` : "",
     strokeLinecap: "round",
-    className: cssBuilderInstance.$$if(isDragging, cssBuilderInstance.hidden).$
+    className: cssBuilderInstance.if(isDragging, cssBuilderInstance.hidden).$
   };
 }
 function k(e, t) {

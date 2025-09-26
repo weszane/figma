@@ -19,7 +19,7 @@ import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { sV, DI, zx, dY } from "../figma_app/712525";
 import { getCurrentFileType } from "../figma_app/976749";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { useAppModelProperty } from "../figma_app/722362";
 import { b4, _V, kM } from "../figma_app/421886";
 import { KindEnum } from "../905/129884";
@@ -66,7 +66,7 @@ function D({
   recordingKey: i
 }) {
   let d = useDispatch();
-  let c = BK("CANVAS_SEARCH_FILTER_DROPDOWN");
+  let c = useDropdown("CANVAS_SEARCH_FILTER_DROPDOWN");
   let h = useRef(null);
   let y = useAppModelProperty("isReadOnly");
   let N = useAtomWithSubscription(yo);

@@ -1,5 +1,5 @@
 import { BuildStatus } from "../figma_app/763686";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 export let $$a0 = new class {
   getStatusType(e) {
     switch (e) {
@@ -12,7 +12,7 @@ export let $$a0 = new class {
     }
   }
   recordStatusChange(e) {
-    XHR.post(`/api/files/${e.fileKey}/node_status`, {
+    sendWithRetry.post(`/api/files/${e.fileKey}/node_status`, {
       node_id: e.nodeId,
       node_name: e.nodeName,
       node_type: e.nodeType,

@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { useSelectedCooperFrameIds, useSelectedSlideRowGuids, useCooperFrameGuids } from "../figma_app/396464";
 import { ZH } from "../figma_app/504823";
 import { clearSelection, addToSelection, removeFromSelection } from "../figma_app/741237";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { l6, c$, sK } from "../905/794875";
 import { pu, OL } from "../figma_app/123994";
@@ -30,7 +30,7 @@ export function $$v0({
   ariaLabelledBy: e
 }) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let l = useSceneGraphSelector();
   let u = null;
   let f = useSelectedCooperFrameIds();

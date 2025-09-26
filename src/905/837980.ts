@@ -9,7 +9,7 @@ import { RecordableButton } from '../905/511649';
 import { ButtonLargeWide } from '../905/521428';
 import { getVisibleTheme } from '../905/640017';
 import { Point } from '../905/736624';
-import { Xj } from '../905/748636';
+import { DraggableModalBgDisabled } from '../905/748636';
 import { A as _$$A } from '../1617/568132';
 import { v as _$$v } from '../figma_app/79979';
 import { getProductPriceString } from '../figma_app/808294';
@@ -531,7 +531,7 @@ export let FreemiumApiPreCheckoutModal = registerModal((props: FreemiumApiPreChe
   const buttonText = getButtonText(props.monetizedResourceMetadata);
   const iconUrl = 'redirect_icon_url' in props.plugin ? props.plugin.redirect_icon_url : undefined;
   const initialPosition = calculateInitialModalPosition();
-  return jsx(Xj, {
+  return jsx(DraggableModalBgDisabled, {
     alwaysEnsureHeaderModalOnScreen: true,
     clickOutsideToHide: true,
     dragHeaderOnly: true,

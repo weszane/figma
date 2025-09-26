@@ -17,14 +17,14 @@ import { UI3ConditionalWrapper } from "../905/341359";
 import { eJ } from "../vendor/352483";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { o as _$$o } from "../905/160095";
+import { TrackedLinkPrimitive } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { getSearchSessionIdFromSelector, getCurrentQueryId } from "../figma_app/387599";
 import { y$ } from "../figma_app/835219";
 import { copyToClipboard, extractResourceInfoFromUrl, buildFullCommunityUrl } from "../figma_app/471982";
 import { getResourceName } from "../figma_app/777551";
 import { hasContent, getMainContent, hasResourceType, isFigmakeTemplate, getResourceType, getPluginOrWidgetContent, hasLibraryKey, getTemplateContent } from "../figma_app/427318";
-import { Z as _$$Z } from "../905/909123";
+import { resourceDetailQuery } from "../905/909123";
 import { ResourceHubResourceRoute } from "../figma_app/354658";
 import { useResourceRouteParams, useResourceFuid } from "../figma_app/979714";
 import { showModalHandler, hideModalHandler } from "../905/156213";
@@ -109,7 +109,7 @@ function Q({
   resourceType: s,
   sharedRouteParams: n
 }) {
-  return jsx(_$$o, {
+  return jsx(TrackedLinkPrimitive, {
     href: t,
     newTab: !0,
     onClick: () => {
@@ -163,7 +163,7 @@ let Z = registerModal(function (e) {
     apiResourceType: q,
     resourceId: Z
   }, f).href : "";
-  let [X] = setupResourceAtomHandler(_$$Z({
+  let [X] = setupResourceAtomHandler(resourceDetailQuery({
     apiResourceType: q,
     id: Z
   }), {

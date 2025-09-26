@@ -24,7 +24,7 @@ import { mapFileToProductType } from "../figma_app/314264";
 import { getAssetBackgroundColor, generateNodeThumbnail } from "../figma_app/80990";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
-import { V as _$$V, q as _$$q } from "../figma_app/473391";
+import { getAssetKeyForSubscription, mapToPrimaryWorkflow } from "../figma_app/473391";
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
 import { RR } from "../figma_app/307841";
@@ -54,10 +54,10 @@ import { _9 } from "../figma_app/76115";
 import { k as _$$k2 } from "../905/540025";
 import { H as _$$H2 } from "../905/991973";
 import { Nv } from "../figma_app/318590";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { Wi, JR } from "../figma_app/162641";
 import { q as _$$q2 } from "../figma_app/58251";
-import { b as _$$b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { E as _$$E } from "../905/511388";
 import { hasResourcePresetKey } from "../figma_app/255679";
 import { useCurrentUserOrg } from "../905/845253";
@@ -175,7 +175,7 @@ function e_({
     }), [s, t.data?.libraryKeyToFile?.file, t.data?.libraryKeyToFile?.hubFile?.currentHubFileVersion?.name, t.status]);
   }(e);
   let h = function (e, t) {
-    let s = _$$b({
+    let s = useLibraryFileLink({
       libraryKey: e,
       nodeId: t
     });
@@ -575,7 +575,7 @@ function ts({
       draggable: !1,
       item: t.asset,
       shouldGenerateLocalThumbnail: !1
-    }, _$$V(t.asset)), jsx(_$$q3, {
+    }, getAssetKeyForSubscription(t.asset)), jsx(_$$q3, {
       dragState,
       isList: !1,
       thumbnailOverrideSrc: e && t?.thumbnailData ? t.thumbnailData.src : void 0
@@ -688,8 +688,8 @@ export function $$tu1({
   let ey = tM(O ?? "assets-panel");
   useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent("assets_panel.flyout_opened", {
-      assetKey: _$$V(e),
-      assetType: _$$q(e.type),
+      assetKey: getAssetKeyForSubscription(e),
+      assetType: mapToPrimaryWorkflow(e.type),
       assetLibraryKey: e.library_key,
       isLocal: e.isLocal,
       fileParentOrgId: eu?.parentOrgId ?? void 0,
@@ -756,7 +756,7 @@ export function $$tu1({
     let i = {
       aiResultsEnabled: ev,
       assetKey: getAssetKey(e),
-      assetType: _$$q(e.type),
+      assetType: mapToPrimaryWorkflow(e.type),
       queryId: ey ?? void 0,
       scoreAi: e.ai_score ?? void 0,
       scoreLexical: e.lexical_score ?? void 0,
@@ -814,7 +814,7 @@ export function $$tu1({
   }, [closeFlyout, ep, B]);
   let ew = useCallback((t, s) => {
     let r = t.code ?? t.key;
-    let n = _$$V(e);
+    let n = getAssetKeyForSubscription(e);
     let i = L?.(n);
     if (!i) return;
     let l = t.keyCode === KeyCodes.TAB;
@@ -911,7 +911,7 @@ export function $$tu1({
         })
       })]
     })
-  }) : jsx(Ao, {
+  }) : jsx(DraggableModalManager, {
     ref: D,
     allowAutoExpanding: !0,
     alwaysEnsureModalOnScreen: !0,

@@ -1,53 +1,94 @@
-import { jsx } from "react/jsx-runtime";
-import { Component, Children } from "react";
-export class $$a0 extends Component {
-  constructor(e) {
-    super(e);
-    this.calledOnAllChunksRendered = !1;
-    this.tick = () => {
-      this.setState({
-        maxIndex: this.state.maxIndex + this.props.chunkSize
-      });
-      this.frameRequest = null;
-      this.tickIfNeeded();
-    };
-    this.tickIfNeeded = () => {
-      if (!this.frameRequest) {
-        if (Children.count(this.props.children) < this.state.maxIndex) {
-          this.props.onAllChunksRendered && !this.calledOnAllChunksRendered && (this.props.onAllChunksRendered(), this.calledOnAllChunksRendered = !0);
-          return;
-        }
-        this.frameRequest = requestAnimationFrame(this.tick);
-      }
-    };
+import type { ReactNode } from 'react'
+import { Children, Component } from 'react'
+
+import { jsx } from 'react/jsx-runtime'
+
+interface RenderListByChunksProps {
+
+  children: ReactNode
+  chunkSize: number
+  className?: string
+  forwardedRef?: React.Ref<HTMLDivElement>
+  listKey?: string
+  onAllChunksRendered?: () => void
+  style?: React.CSSProperties
+}
+
+interface RenderListByChunksState {
+  maxIndex: number
+}
+
+export class RenderListByChunks extends Component<RenderListByChunksProps, RenderListByChunksState> {
+  static displayName = 'RenderListByChunks'
+  private frameRequest: number | null = null
+  private calledOnAllChunksRendered = false
+
+  constructor(props: RenderListByChunksProps) {
+    super(props)
+
     this.state = {
-      maxIndex: 0
-    };
-    this.frameRequest = null;
+      maxIndex: 0,
+    }
   }
-  componentDidMount() {
-    this.tickIfNeeded();
+
+  componentDidMount(): void {
+    this.tickIfNeeded()
   }
-  UNSAFE_componentWillReceiveProps(e) {
-    this.props.listKey !== e.listKey && (this.setState({
-      maxIndex: this.props.chunkSize
-    }), this.tickIfNeeded());
+
+  componentDidUpdate(): void {
+    this.tickIfNeeded()
   }
-  componentDidUpdate() {
-    this.tickIfNeeded();
+
+  UNSAFE_componentWillReceiveProps(nextProps: RenderListByChunksProps): void {
+    if (this.props.listKey !== nextProps.listKey) {
+      this.setState({
+        maxIndex: nextProps.chunkSize,
+      }, () => {
+        this.tickIfNeeded()
+      })
+    }
   }
-  componentWillUnmount() {
-    this.frameRequest && cancelAnimationFrame(this.frameRequest);
+
+  componentWillUnmount(): void {
+    if (this.frameRequest) {
+      cancelAnimationFrame(this.frameRequest)
+    }
   }
-  render() {
-    let e = Children.toArray(this.props.children).slice(0, this.state.maxIndex);
-    return jsx("div", {
+
+  private tick = (): void => {
+    this.setState(prevState => ({
+      maxIndex: prevState.maxIndex + this.props.chunkSize,
+    }), () => {
+      this.frameRequest = null
+      this.tickIfNeeded()
+    })
+  }
+
+  private tickIfNeeded = (): void => {
+    if (!this.frameRequest) {
+      if (Children.count(this.props.children) <= this.state.maxIndex) {
+        if (this.props.onAllChunksRendered && !this.calledOnAllChunksRendered) {
+          this.props.onAllChunksRendered()
+          this.calledOnAllChunksRendered = true
+        }
+        return
+      }
+      this.frameRequest = requestAnimationFrame(this.tick)
+    }
+  }
+
+  render(): ReactNode {
+    const childrenArray = Children.toArray(this.props.children)
+    const visibleChildren = childrenArray.slice(0, this.state.maxIndex)
+
+    return jsx('div', {
       className: this.props.className,
       ref: this.props.forwardedRef,
       style: this.props.style,
-      children: e
-    });
+      children: visibleChildren,
+    })
   }
 }
-$$a0.displayName = "RenderListByChunks";
-export const o = $$a0;
+
+
+export const o = RenderListByChunks

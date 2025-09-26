@@ -9,8 +9,8 @@ import { isInteractionPathCheck } from "../figma_app/897289";
 import { canvasGridAtom } from "../905/618447";
 import { x7, Mu, b, js, vJ } from "../905/435079";
 import { $j, xC, iZ, Ds } from "../figma_app/3776";
-import { j } from "../905/881708";
-let g = class e extends j {
+import { NameClass } from "../905/881708";
+let g = class e extends NameClass {
   constructor(e) {
     super(e);
     this._state = {

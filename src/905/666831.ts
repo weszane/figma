@@ -1,6 +1,6 @@
 import { desktopAPIInstance } from "../figma_app/876459";
 import { logInfo } from "../905/714362";
-import { r as _$$r, l } from "../905/927060";
+import { filterSuggestions, transformLocaleCode } from "../905/927060";
 export async function $$s0() {
   if (desktopAPIInstance) {
     let e = await desktopAPIInstance.spellingGetLanguages();
@@ -28,10 +28,10 @@ export class $$o1 {
   }
   async spellCheckText(e) {
     let t = await desktopAPIInstance.spellingCheckSpelling(e, this.language);
-    return _$$r(e, t);
+    return filterSuggestions(e, t);
   }
   async setLanguage(e) {
-    this.language = l(e);
+    this.language = transformLocaleCode(e);
     return !0;
   }
   async addWords(e) {

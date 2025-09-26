@@ -213,7 +213,7 @@ export function $$P2(e) {
       })
     }), t && jsxs(Fragment, {
       children: [jsx("div", {
-        className: cssBuilderInstance.$$if(e.minimalSpacing, cssBuilderInstance.px0.mb0, cssBuilderInstance.px24.mb20).$,
+        className: cssBuilderInstance.if(e.minimalSpacing, cssBuilderInstance.px0.mb0, cssBuilderInstance.px24.mb20).$,
         children: e.children
       }), jsx(IntersectionSentinel, {
         "data-testid": `load-more-team-${e.teamId}`,
@@ -263,7 +263,7 @@ export function $$D1(e) {
         children: renderI18nText("whiteboard.inserts.see_all")
       })]
     }), jsx("div", {
-      className: cssBuilderInstance.$$if(e.minimalSpacing, cssBuilderInstance.px0.mb0, cssBuilderInstance.px24.mb20).$,
+      className: cssBuilderInstance.if(e.minimalSpacing, cssBuilderInstance.px0.mb0, cssBuilderInstance.px24.mb20).$,
       children: e.children
     })]
   });

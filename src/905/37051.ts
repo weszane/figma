@@ -4,7 +4,7 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { eN } from "../figma_app/401061";
 import { getUnitForEntry } from "../905/762943";
 import { isInteractiveInspectionAndRollbackEnabled } from "../figma_app/544649";
@@ -64,7 +64,7 @@ export class $$v0 {
       let i = this.pendingRelatedLinks;
       this.pendingRelatedLinks = [];
       let n = 1;
-      for (;;) {
+      for (; ;) {
         try {
           let t = {
             link_batch: i.map(e => ({
@@ -74,7 +74,7 @@ export class $$v0 {
               link_url: e.linkUrl
             }))
           };
-          e(XHR.post("/api/files/related_links_batch", t));
+          e(sendWithRetry.post("/api/files/related_links_batch", t));
           return;
         } catch (e) {
           if (e.status >= 400 && e.status < 500) {
@@ -179,7 +179,7 @@ export function $$I1() {
     },
     isInteractiveInspectionEnabled: () => isInteractiveInspectionAndRollbackEnabled(),
     isChangingInspectionValues: eN,
-    onUnexpectedEditInFocusView() {},
+    onUnexpectedEditInFocusView() { },
     getUnitName(e, t) {
       let i = {
         ...e,

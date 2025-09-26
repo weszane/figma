@@ -22,7 +22,7 @@ import { e0 } from "../905/696396";
 import { $l } from "../905/721248";
 import { generateRecordingKey } from "../figma_app/878298";
 import { W as _$$W } from "../905/95038";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { y as _$$y } from "../905/725962";
 import { throwTypeError } from "../figma_app/465776";
 import { useLatestRef } from "../figma_app/922077";
@@ -328,7 +328,7 @@ export function $$X0(e) {
   let c = !!(i && isBranchAlt(i));
   let u = !!i && DF(i, t);
   let p = useSelector(e => e.isRenaming);
-  let h = Um()?.type === eg;
+  let h = useDropdownState()?.type === eg;
   let m = useSelector(e => e.mergingStatus);
   let f = useSelector(e => e.openFileMerge);
   let g = useSelector(e => e.mirror.appModel.topLevelMode);

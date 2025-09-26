@@ -6,7 +6,7 @@ import { _ as _$$_ } from "../vendor/853977";
 import { parseColor } from "../figma_app/191804";
 import { M as _$$M } from "../figma_app/749682";
 import { pz } from "../figma_app/60079";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { $ as _$$$ } from "../905/355181";
@@ -21,7 +21,7 @@ import { buildViewerQueryParams } from "../figma_app/831696";
 import { noop } from 'lodash-es';
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { useLatestRef } from "../figma_app/922077";
-import { Fe, uz } from "../905/284552";
+import { loadVideoJs, loadVideoSource } from "../905/284552";
 import { g as _$$g } from "../7037/183814";
 import { A as _$$A } from "../svg/871455";
 import { A as _$$A2 } from "../1617/954184";
@@ -273,7 +273,7 @@ function H(e) {
   useEffect(() => {
     l.current || (l.current = !0, async function () {
       window.VIDEOJS_NO_DYNAMIC_STYLE = !0;
-      let n = await Fe();
+      let n = await loadVideoJs();
       if (r.current) return;
       let o = t.current;
       e.isThumbnail ? o.style.objectFit = "cover" : (o.style.maxHeight = "100%", o.style.maxWidth = "100%");
@@ -295,14 +295,14 @@ function H(e) {
       }, () => {
         e.isThumbnail || e.source === Zp.TILE || o.setAttribute("controls", "true");
         e.source === Zp.TILE && o.classList.add("feed_video_player--hideFullscreenControl--C1EYT");
-        uz(X, Q, r.current).then(() => {
+        loadVideoSource(X, Q, r.current).then(() => {
           en();
         });
       });
     }());
   }, [e.isThumbnail, e.videoContent, e.source, Q, X, en]);
   useEffect(() => {
-    r.current && $ !== e.videoContent.path && uz(X, Q, r.current).then(() => {
+    r.current && $ !== e.videoContent.path && loadVideoSource(X, Q, r.current).then(() => {
       en();
       et();
     });
@@ -501,7 +501,7 @@ function en(e) {
 }
 function eo(e) {
   return jsxs(Fragment, {
-    children: [jsx(_$$x, {
+    children: [jsx(LoadingRenderer, {
       isLoading: !e.content.imageUrl,
       children: () => jsx(K, {
         imgUrl: e.content.imageUrl,
@@ -552,7 +552,7 @@ function es(e) {
       let t = e.content;
       let n = t.mediumImageUrl ?? t.preview_image_url ?? t.image_url;
       let i = t.preview_image_url ?? t.image_url;
-      return jsx(_$$x, {
+      return jsx(LoadingRenderer, {
         isLoading: !!t.isLoading,
         children: () => jsx(K, {
           imgUrl: e.isEditing ? i : n,
@@ -658,7 +658,7 @@ export function $$ea0(e) {
       onPointerEnter: () => j(!0),
       onPointerLeave: () => j(!1),
       "data-testid": "feed-post-content-section",
-      children: [O, jsx(_$$x, {
+      children: [O, jsx(LoadingRenderer, {
         isLoading: !b,
         children: () => e.staticContent ? jsx(es, {
           content: b,

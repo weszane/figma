@@ -8,7 +8,7 @@ import { A as _$$A } from "../905/251970";
 import { J } from "../905/125993";
 import { V as _$$V } from "../1577/311426";
 import { trackEventAnalytics } from "../905/449184";
-import { B as _$$B } from "../905/907815";
+import { ImageLoadManager } from "../905/907815";
 import { useSubscription } from "../figma_app/288654";
 import p, { generateUUIDv4 } from "../905/871474";
 import { WAFImage } from "../905/675859";
@@ -199,7 +199,7 @@ function z(e) {
       },
       children: [jsxs("div", {
         className: "quick_reply_thread_view--preview--I47Ds",
-        children: [jsx(_$$B, {
+        children: [jsx(ImageLoadManager, {
           children: jsx(WAFImage, {
             src: A || void 0,
             className: "quick_reply_thread_view--previewImage--gSK-n",

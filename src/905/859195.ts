@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -43,7 +43,7 @@ export function $$f0() {
       i({
         state: VW.UNPUBLISH_TEMPLATE_INITIATED
       });
-      XHR.del(`/api/templates/file/${t}`).then(() => {
+      sendWithRetry.del(`/api/templates/file/${t}`).then(() => {
         e(VisualBellActions.enqueue({
           type: Ao,
           message: getI18nString("cooper.templates.unpublished"),

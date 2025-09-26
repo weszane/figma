@@ -22,7 +22,7 @@ import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { manifestContainsWidget } from "../figma_app/155287";
 import { Kp } from "../figma_app/189990";
 import { q8, U4, S3 } from "../figma_app/254872";
-import { S as _$$S } from "../905/404161";
+import { ExtensionRequestModal } from "../905/404161";
 import { t as _$$t2 } from "../figma_app/198180";
 import { cq } from "../905/794154";
 export function $$O0({
@@ -94,7 +94,7 @@ export function $$O0({
       fullscreenEditorType: mapFileTypeToEditorType(q.editorType)
     };
     D(showModalHandler({
-      type: _$$S,
+      type: ExtensionRequestModal,
       data: e
     }));
   }, [D, extension, q, J]);

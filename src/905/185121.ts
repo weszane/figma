@@ -61,7 +61,7 @@ import { AS, n4 } from "../figma_app/709323";
 import { Z as _$$Z, Fr } from "../905/633462";
 import { Y as _$$Y } from "../905/701291";
 import { k as _$$k2 } from "../905/988992";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { x as _$$x, o as _$$o3 } from "../905/705812";
 import { lF, lN, Y4 } from "../figma_app/384713";
 import { hhC } from "../figma_app/27776";
@@ -451,7 +451,7 @@ function eN(e) {
     strokePanelMode,
     strokePanelTerminalPointCount
   } = e;
-  let s = Um();
+  let s = useDropdownState();
   let o = getObservableValue(AppStateTsApi?.propertiesPanelState().isVertexSelectionAndHasEndpoints, !1);
   return jsxs(Fragment, {
     children: [jsx(eI, {

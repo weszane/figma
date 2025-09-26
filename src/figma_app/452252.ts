@@ -13,7 +13,7 @@ import { reportError } from "../905/11";
 import { _C } from "../figma_app/709893";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Link } from "../905/438674";
-import { F_ } from "../905/748636";
+import { ArrowPosition } from "../905/748636";
 import { b as _$$b } from "../figma_app/47801";
 import { W as _$$W } from "../905/95038";
 import { renameFileOptimistic } from "../figma_app/78808";
@@ -57,7 +57,7 @@ function S({
     title: renderI18nText("resource_connection.onboarding.the_perks_of_being_a_connected_file"),
     trackingContext: "Connected Projects File Editor Onboarding Modal",
     onboardingKey: I,
-    arrowPosition: F_.LEFT_TITLE
+    arrowPosition: ArrowPosition.LEFT_TITLE
   });
 }
 let $$H1 = "FULLSCREEN_FILENAME_CHEVRON";

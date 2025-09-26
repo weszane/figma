@@ -4,7 +4,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { z } from "../905/788559";
-import { r as _$$r } from "../905/189361";
+import { ActionButton } from "../905/189361";
 import { TT, Bw } from "../figma_app/604494";
 import { U } from "../905/172092";
 export function $$$$p0({
@@ -50,14 +50,14 @@ function m({
 }) {
   let y = U() ?? "unknownModule";
   if (!r) return null;
-  let b = e ? jsx(_$$r, {
+  let b = e ? jsx(ActionButton, {
     ...e,
     target: p,
     recordingKey: generateRecordingKey(y, "actionPanel", "primaryAction"),
     disableKeyboardShortcuts: !0,
     children: e.text
   }, "primary-action") : null;
-  let v = t ? jsx(_$$r, {
+  let v = t ? jsx(ActionButton, {
     variant: "secondary",
     ...t,
     target: p,
@@ -65,7 +65,7 @@ function m({
     disableKeyboardShortcuts: !0,
     children: t.text
   }, "secondary-action") : null;
-  let I = i ? jsx(_$$r, {
+  let I = i ? jsx(ActionButton, {
     variant: "secondary",
     ...i,
     recordingKey: generateRecordingKey(y, "actionPanel", "tertiaryAction"),
@@ -78,7 +78,7 @@ function m({
       minHeight: "28px",
       paddingLeft: `${c}px`,
       paddingRight: `${c}px`
-    }).$$if(m, {
+    }).if(m, {
       height: `${m}px`
     }).$,
     children: [h && g && jsx("div", {

@@ -41,7 +41,7 @@ import { an, y$ } from "../905/81009";
 import { trackFolderEvent } from "../figma_app/314264";
 import { eU } from "../figma_app/863319";
 import { Tf, fA } from "../figma_app/543100";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { x as _$$x2 } from "../905/98916";
 import { selectPermissionsState } from "../figma_app/212807";
 import { getSelectedView } from "../figma_app/386952";
@@ -100,7 +100,7 @@ function em(e) {
   let g = getUserId();
   let f = "recentsAndSharing" === o.view && "shared-projects" === o.tab ? e.folder.parent_org?.id ?? null : d;
   let y = "recentsAndSharing" === o.view && "shared-projects" === o.tab ? e.folder.parent_team?.id ?? null : u;
-  let b = Um();
+  let b = useDropdownState();
   let v = useSubscription(FavoritesByResourceId, {
     resourceId: e.folder.id,
     resourceType: FEntityType.FOLDER,

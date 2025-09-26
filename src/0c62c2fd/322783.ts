@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { truncate } from "../figma_app/930338";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
-import { Dd } from "../905/519092";
+import { ConfirmationModal } from "../905/519092";
 export function $$l0(e) {
   let {
     team,
@@ -26,7 +26,7 @@ export function $$l0(e) {
       editorIds: c,
       teamId: id
     },
-    children: jsx(Dd, {
+    children: jsx(ConfirmationModal, {
       title: d > 1 ? m : u,
       confirmText: getI18nString("team_view.downgrade_editor_modal.downgrade"),
       onConfirm: e.onConfirm,

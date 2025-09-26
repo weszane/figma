@@ -23,9 +23,9 @@ import { CurrencyFormatter } from "../figma_app/514043";
 import { ProductTierEnum } from "../905/712921";
 import { BillingCycle } from "../figma_app/831101";
 import { e0 } from "../905/696396";
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
 export function $$E0({
   countByBillableProductKey: e,
   billingInterval: t,
@@ -106,10 +106,10 @@ export function $$E0({
         className: cssBuilderInstance.flex.justifyBetween.py4.$,
         "data-testid": "purchase-summary-subtotal",
         children: [jsx("h3", {
-          className: cssBuilderInstance.fontMedium.$$if(r, cssBuilderInstance.font13.lh24).$,
+          className: cssBuilderInstance.fontMedium.if(r, cssBuilderInstance.font13.lh24).$,
           children: renderI18nText("checkout.subtotal")
         }), jsx("p", {
-          className: cssBuilderInstance.$$if(r, cssBuilderInstance.font13.lh24).$,
+          className: cssBuilderInstance.if(r, cssBuilderInstance.font13.lh24).$,
           children: k({
             price: V,
             isCartReviewSummary: r,
@@ -210,23 +210,23 @@ function A({
   });
   return jsxs("div", {
     "data-testid": `purchase-summary-${e}-row`,
-    className: cssBuilderInstance.flex.justifyBetween.py8.bb1.bSolid.colorBorder.$$if(n, cssBuilderInstance.itemsCenter, cssBuilderInstance.itemsStart).$,
+    className: cssBuilderInstance.flex.justifyBetween.py8.bb1.bSolid.colorBorder.if(n, cssBuilderInstance.itemsCenter, cssBuilderInstance.itemsStart).$,
     children: [jsxs("div", {
       children: [jsx("h3", {
-        className: cssBuilderInstance.$$if(n, v).$,
+        className: cssBuilderInstance.if(n, v).$,
         children: renderI18nText("checkout.purchase_summary.cart_line_item", {
           quantity: t,
           productLabel: tI(e)
         })
       }), jsx("p", {
-        className: cssBuilderInstance.colorTextSecondary.$$if(n, v).$,
+        className: cssBuilderInstance.colorTextSecondary.if(n, v).$,
         children: renderI18nText(r ? "checkout.product_cost_breakdown_annually" : "checkout.product_cost_breakdown_monthly", {
           price: y,
           quantity: t
         })
       })]
     }), jsx("p", {
-      className: cssBuilderInstance.$$if(n, v).$,
+      className: cssBuilderInstance.if(n, v).$,
       children: k({
         price: f,
         isCartReviewSummary: n,

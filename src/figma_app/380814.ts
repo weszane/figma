@@ -24,7 +24,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { Oe } from "../figma_app/933328";
 import { BQ, yp, rW } from "../figma_app/852050";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { getLocalVariableInfo } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
 import { JU } from "../figma_app/626177";
@@ -350,7 +350,7 @@ function ee({
   ariaLabelledBy: s
 }) {
   let o = useDispatch();
-  let l = Um();
+  let l = useDropdownState();
   let d = useMemo(() => b()(t, e => e.node_id), [t]);
   return jsx(l6, {
     ariaLabelledBy: s,

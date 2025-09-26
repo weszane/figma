@@ -4,14 +4,14 @@ import { trackEventAnalytics } from "../905/449184";
 import { logger } from "../905/651849";
 import { getInitialOptions, buildStaticUrl } from "../figma_app/169182";
 import { reportError, normalizeError } from "../905/11";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { createEmptyAddress, isAddressEmpty } from "../figma_app/831101";
 import { lX, dT } from "../9420/394825";
 import { getUserCurrency, isCurrencyAllowedForCountry, getUserIsoCodeIfNonUsd, getAllowedCartCurrencies } from "../figma_app/514043";
 import { eV, pV, lB } from "../905/148137";
-import { V as _$$V } from "../905/57562";
+import { validateVatGstId } from "../905/57562";
 import { teamAPIClient } from "../905/834575";
 import { D as _$$D } from "../905/347702";
 import { useThemeContext, getVisibleTheme } from "../905/640017";
@@ -26,7 +26,7 @@ function m({
   });
   let o = async () => {
     try {
-      await XHR.post("/api/validate_address", {
+      await sendWithRetry.post("/api/validate_address", {
         address: t
       });
     } catch (e) {
@@ -347,12 +347,12 @@ let $$P3 = _$$D(e => {
         return !0;
       }
     }
-    if (M && !(await _$$V(M, address.country, () => {}, e => {
+    if (M && !(await validateVatGstId(M, address.country, () => { }, e => {
       P({
         code: "vat-gst-id-verification-error",
         message: e
       });
-    })) || k && !(await _$$V(k, address.country, () => {}, e => {
+    })) || k && !(await validateVatGstId(k, address.country, () => { }, e => {
       P({
         code: "vat-gst-id-verification-error",
         message: e
@@ -569,9 +569,9 @@ let $$P3 = _$$D(e => {
       let s = await eV();
       if (t === lB.CARD) a = await s.confirmCardSetup(B, {
         payment_method: r
-      });else if (t === lB.SEPA) a = await s.confirmSepaDebitSetup(B, {
+      }); else if (t === lB.SEPA) a = await s.confirmSepaDebitSetup(B, {
         payment_method: r
-      });else {
+      }); else {
         W({
           error: "Invalid payment method type",
           code: "confirm-setup-error",
@@ -642,7 +642,7 @@ async function O({
         payment_methods
       }
     }
-  } = await XHR.post("/api/subscriptions-2018-11-08/setup_intent", {
+  } = await sendWithRetry.post("/api/subscriptions-2018-11-08/setup_intent", {
     team_id: e,
     redirect_url: r,
     error_redirect_url: t,

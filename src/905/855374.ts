@@ -11,7 +11,7 @@ import { generateRecordingKey, useHandleMouseEvent, useHandleGenericEvent, useHa
 import { k as _$$k2 } from "../905/582200";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { wX, lC, yp, G6, EP, pN, lO, L5, rN, U6, x9, mm } from "../figma_app/852050";
-import { BK, Um } from "../905/848862";
+import { useDropdown, useDropdownState } from "../905/848862";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { ClipboardOperation } from "../figma_app/915202";
 import { isExtension, everyLocalSubscription, isLocalSubscription, isLocalSubscriptionStatus } from "../figma_app/633080";
@@ -99,9 +99,9 @@ import { o3, nt } from "../905/226610";
 import { q as _$$q } from "../figma_app/905311";
 import { dD, IV } from "../figma_app/941824";
 import { Y9 as _$$Y2, Ad } from "../figma_app/811257";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { Flg } from "../figma_app/27776";
-import { Q as _$$Q } from "../905/717951";
+import { CuratorPortal } from "../905/717951";
 import { A as _$$A } from "../svg/182908";
 import { E as _$$E2 } from "../905/53857";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuSeparator, MenuTitleComp, MenuHiddenTitleComp, MenuItemLead, MenuGroupComp } from "../figma_app/860955";
@@ -449,7 +449,7 @@ function et({
     showing,
     hide,
     toggle
-  } = BK("code-syntax-entries-view-create-token");
+  } = useDropdown("code-syntax-entries-view-create-token");
   let [p, m] = useState(new Set());
   let [h, g] = useState(null);
   let _ = useMemo(() => {
@@ -1373,7 +1373,7 @@ function tx({
       children: jsx(_$$S2, {})
     })
   });
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     allowResizeHeight: !0,
     alwaysEnsureHeaderModalOnScreen: !0,
     alwaysEnsureModalOnScreen: !0,
@@ -1484,7 +1484,7 @@ function tT({
       onDeleteVariableSet: a,
       setRename: y,
       setReorder: _
-    }), f && jsx(_$$Q, {
+    }), f && jsx(CuratorPortal, {
       children: jsx(tx, {
         close: () => _(!1),
         initialPosition: new Point((m?.x ?? 0) + 9, (m?.y ?? 0) + 32)
@@ -1506,7 +1506,7 @@ function tk({
     showing,
     toggle,
     hide
-  } = BK("variable-modal-set-options");
+  } = useDropdown("variable-modal-set-options");
   let h = yp();
   let _ = _$$rN(useHandleMouseEvent(generateRecordingKey(d, "createVariableSet"), "click", () => {
     a && t && (o(a()), t(!0), hide());
@@ -1572,7 +1572,7 @@ function tk({
         "aria-expanded": showing,
         children: jsx(_$$J2, {})
       })
-    }), showing && x.current && jsx(_$$Q, {
+    }), showing && x.current && jsx(CuratorPortal, {
       children: jsxs(Cf, {
         targetRect: x.current.getBoundingClientRect(),
         children: [...S]
@@ -1589,7 +1589,7 @@ function tP({
   recordingKey: s
 }) {
   let o = useDispatch();
-  let l = Um();
+  let l = useDropdownState();
   let d = yp();
   let c = G6(isExtension(e) ? e.backingVariableSetId : void 0);
   let u = EP(c);
@@ -2325,7 +2325,7 @@ function ie({
     hide,
     show,
     data
-  } = BK("variables-modal-mode-menu");
+  } = useDropdown("variables-modal-mode-menu");
   let Q = _$$rN(useCallback(() => {
     v ? E && x() : _?.(i, s);
     hide();
@@ -4142,7 +4142,7 @@ export let $$i50 = registerModal(function () {
     show,
     hide,
     data
-  } = BK("variables-modal-context-menu");
+  } = useDropdown("variables-modal-context-menu");
   let B = trackFileEventWithStore();
   let V = useCallback((e, n, r, a) => {
     t && actions.toggleEditVariableModal(null);

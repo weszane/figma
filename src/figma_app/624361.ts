@@ -6,7 +6,7 @@ import { c as _$$c } from '../905/499575';
 import { getFeatureFlags } from '../905/601108';
 import { logError, logInfo, logWarning } from '../905/714362';
 import { createDeferredPromise } from '../905/874553';
-import { XHR, XHRError } from '../905/910117';
+import { sendWithRetry, XHRError } from '../905/910117';
 import { debounce } from '../905/915765';
 import { buildStaticUrl } from '../figma_app/169182';
 import { imageProcessor, MAX_CANVAS_SIZE } from '../figma_app/291892';
@@ -29,7 +29,7 @@ const KTX_HEADER = new Uint8Array([171, 75, 84, 88, 32, 50, 48, 187, 13, 10, 26,
 export async function batchDownloadImages(imageHashes, fileInfo, maxSize, needsCompressedTextures) {
   const endpoint = fileInfo.type === 'figFile' ? `/file/${fileInfo.fileKey}/image/batch` : `/community/file/${fileInfo.hubFileId}/image/batch`;
   try {
-    const response = await XHR.post(endpoint, {
+    const response = await sendWithRetry.post(endpoint, {
       sha1s: imageHashes,
       max_size: maxSize,
       needs_compressed_textures: needsCompressedTextures
@@ -111,7 +111,7 @@ class ImageDownloadItem {
   s3Path?: string;
   retryTime?: number;
   private _downloadPromise: Promise<Uint8Array<any>> | null = null;
-  private _imageIsReady: () => void = () => {};
+  private _imageIsReady: () => void = () => { };
   private _readyPromise: Promise<void>;
   constructor(hash: string, priority: number) {
     this.hash = hash;
@@ -155,7 +155,7 @@ class ImageDownloadItem {
       throw new Error('Called downloadFromS3 without compressedTextureS3Path when downloading compressed texture');
     }
     const url = this.shouldDownloadCompressedTexture ? this.compressedTextureS3Path : this.s3Path;
-    return XHR.crossOriginGetAny(url, null, {
+    return sendWithRetry.crossOriginGetAny(url, null, {
       responseType: 'arraybuffer'
     }).then(response => response.data).catch(error => {
       if (this.isExpired()) {
@@ -177,7 +177,7 @@ class ImageDownloadItem {
       const downloadPromise = this.downloadFromS3();
       downloadPromise.finally(() => {
         this._downloadPromise = null;
-      }).catch(() => {});
+      }).catch(() => { });
       this._downloadPromise = downloadPromise;
     }
     return this._downloadPromise;
@@ -378,9 +378,9 @@ class ImageManager {
       }
       let backoff = 1;
       const imageHashes = item.type === 'fileKey' ? pendingByFileKey[item.fileKey] : pendingByLibraryKey[item.libraryKey];
-      for (;;) {
+      for (; ;) {
         try {
-          const response = await XHR.put(`/api/files/${editingFileKey}`, {
+          const response = await sendWithRetry.put(`/api/files/${editingFileKey}`, {
             image_sha1s: [...new Set(imageHashes)],
             image_origin_file_key: item.type === 'fileKey' ? item.fileKey : undefined,
             image_origin_library_key: item.type === 'libraryKey' ? item.libraryKey : undefined,
@@ -452,7 +452,7 @@ class ImageManager {
           failed: Array.from(missingShas)
         };
       }
-    } catch {}
+    } catch { }
     return {
       success: imageHashes,
       failed: []
@@ -590,7 +590,7 @@ class ImageManager {
       return;
     }
     batchHashes.forEach(h => this.markImageLookingUpCompressedTextureAvailability(h));
-    XHR.post(`/file/${fileKey}/compressed_texture_available/batch`, {
+    sendWithRetry.post(`/file/${fileKey}/compressed_texture_available/batch`, {
       sha1s: batchHashes
     }).then(response => {
       if (!response) return;
@@ -1270,10 +1270,10 @@ class ImageManager {
     this.allImages.set(hash, imageItem);
     const uploadUrl = `/api/upnode/image?purpose=canvas&sha1=${hash}&fileKey=${fileKey}`;
     let retryCount = 0;
-    XHR.post(uploadUrl, imageData, {
+    sendWithRetry.post(uploadUrl, imageData, {
       retryCount: Infinity,
       headers: {
-        ...XHR.defaults.headers,
+        ...sendWithRetry.defaults.headers,
         'Content-Type': contentType
       },
       rawBody: true,
@@ -1493,7 +1493,7 @@ class ImageService {
     this.imageManager.clearImageDecodePending(hash, success);
   }
   async downloadEmoji(url: string) {
-    return (await XHR.crossOriginGetAny(url, null, {
+    return (await sendWithRetry.crossOriginGetAny(url, null, {
       responseType: 'arraybuffer'
     })).data;
   }

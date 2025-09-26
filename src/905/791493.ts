@@ -1,56 +1,72 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { SvgComponent } from "../905/714743";
-import { cssBuilderInstance } from "../cssbuilder/589278";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { TextWithTruncation } from "../905/984674";
-import { Ct, MA } from "../905/478473";
-import { FFileType } from "../figma_app/191312";
-import { K1, sw } from "../905/427932";
-import { A } from "../6828/718668";
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { getI18nString, renderI18nText } from '../905/303541';
+import { K1, sw } from '../905/427932';
+import { DisabledText, SelectableWorkspaceRow } from '../905/478473';
+import { SvgComponent } from '../905/714743';
+import { TextWithTruncation } from '../905/984674';
+import { A } from '../6828/718668';
+import { cssBuilderInstance } from '../cssbuilder/589278';
+import { FFileType } from '../figma_app/191312';
 function p(e) {
   let {
     workspace,
     editorType
   } = e;
-  if (workspace.isDisabledDueToECC) return jsx(Ct, {
-    tooltipText: getI18nString("community.try.externally_restricted")
-  });
-  if (workspace.isPlanLocked) return jsx(Ct, {
-    tooltipText: getI18nString("plan_picker.locked_plan_tooltip")
-  });
-  if (!workspace.draftFolderId) return jsx(Ct, {
-    tooltipText: getI18nString("plan_picker.limited_access_tooltip")
-  });
+  if (workspace.isDisabledDueToECC) {
+    return jsx(DisabledText, {
+      tooltipText: getI18nString('community.try.externally_restricted')
+    });
+  }
+  if (workspace.isPlanLocked) {
+    return jsx(DisabledText, {
+      tooltipText: getI18nString('plan_picker.locked_plan_tooltip')
+    });
+  }
+  if (!workspace.draftFolderId) {
+    return jsx(DisabledText, {
+      tooltipText: getI18nString('plan_picker.limited_access_tooltip')
+    });
+  }
   switch (editorType) {
     case FFileType.WHITEBOARD:
-      if (workspace.isFigJamDisabled || workspace.isPlanLocked) return jsx(Ct, {
-        tooltipText: getI18nString("plan_picker.figjam_not_available_for_this_plan")
-      });
+      if (workspace.isFigJamDisabled || workspace.isPlanLocked) {
+        return jsx(DisabledText, {
+          tooltipText: getI18nString('plan_picker.figjam_not_available_for_this_plan')
+        });
+      }
       break;
     case FFileType.SLIDES:
-      if (workspace.isSlidesDisabled || workspace.isPlanLocked) return jsx(Ct, {
-        tooltipText: getI18nString("plan_picker.slides_not_available_for_this_plan")
-      });
+      if (workspace.isSlidesDisabled || workspace.isPlanLocked) {
+        return jsx(DisabledText, {
+          tooltipText: getI18nString('plan_picker.slides_not_available_for_this_plan')
+        });
+      }
       break;
     case FFileType.SITES:
-      if (workspace.isSitesDisabled || workspace.isPlanLocked) return jsx(Ct, {
-        tooltipText: getI18nString("plan_picker.sites_not_available_for_this_plan")
-      });
+      if (workspace.isSitesDisabled || workspace.isPlanLocked) {
+        return jsx(DisabledText, {
+          tooltipText: getI18nString('plan_picker.sites_not_available_for_this_plan')
+        });
+      }
       break;
     case FFileType.COOPER:
-      if (workspace.isCooperDisabled || workspace.isPlanLocked) return jsx(Ct, {
-        tooltipText: getI18nString("plan_picker.buzz_not_available_for_this_plan")
-      });
+      if (workspace.isCooperDisabled || workspace.isPlanLocked) {
+        return jsx(DisabledText, {
+          tooltipText: getI18nString('plan_picker.buzz_not_available_for_this_plan')
+        });
+      }
       break;
     case FFileType.FIGMAKE:
-      if (workspace.isFigmakeDisabled || workspace.isPlanLocked) return jsx(Ct, {
-        tooltipText: getI18nString("plan_picker.make_not_available_for_this_plan")
-      });
+      if (workspace.isFigmakeDisabled || workspace.isPlanLocked) {
+        return jsx(DisabledText, {
+          tooltipText: getI18nString('plan_picker.make_not_available_for_this_plan')
+        });
+      }
   }
   return jsx(SvgComponent, {
     className: cssBuilderInstance.pl16.pr16.mlAuto.colorIcon.$,
     svg: A,
-    dataTestId: "chevron-right"
+    dataTestId: 'chevron-right'
   });
 }
 export function $$m0(e) {
@@ -61,31 +77,31 @@ export function $$m0(e) {
     onClick
   } = e;
   return jsxs(Fragment, {
-    children: [jsx("div", {
+    children: [jsx('div', {
       className: K1,
-      children: "figjamTry" === useCase ? jsx(TextWithTruncation, {
-        fontWeight: "medium",
+      children: useCase === 'figjamTry' ? jsx(TextWithTruncation, {
+        fontWeight: 'medium',
         fontSize: 20,
-        color: "default",
-        children: renderI18nText("plan_picker.figjam_try.title")
+        color: 'default',
+        children: renderI18nText('plan_picker.figjam_try.title')
       }) : jsx(TextWithTruncation, {
-        fontWeight: "medium",
+        fontWeight: 'medium',
         fontSize: 20,
-        color: "default",
-        children: renderI18nText("plan_picker.pick_plan.title")
+        color: 'default',
+        children: renderI18nText('plan_picker.pick_plan.title')
       })
-    }), jsx("div", {
+    }), jsx('div', {
       className: cssBuilderInstance.alignCenter.pt6.$,
-      children: "figjamTry" === useCase ? jsx(TextWithTruncation, {
+      children: useCase === 'figjamTry' ? jsx(TextWithTruncation, {
         fontSize: 13,
-        color: "default",
-        children: renderI18nText("plan_picker.figjam_try.description")
+        color: 'default',
+        children: renderI18nText('plan_picker.figjam_try.description')
       }) : jsx(TextWithTruncation, {
         fontSize: 13,
-        color: "default",
-        children: renderI18nText("plan_picker.pick_plan.description")
+        color: 'default',
+        children: renderI18nText('plan_picker.pick_plan.description')
       })
-    }), jsx("div", {
+    }), jsx('div', {
       className: sw,
       children: workspaces.map(t => {
         let r = jsx(p, {
@@ -111,13 +127,13 @@ export function $$m0(e) {
               return !0;
           }
         }(t, e.editorType);
-        return jsx(MA, {
+        return jsx(SelectableWorkspaceRow, {
           workspace: t,
           onClick,
           Avatar: avatar,
           disabled: a,
           rowIcon: r
-        }, t.orgId ?? t.teamId ?? "");
+        }, t.orgId ?? t.teamId ?? '');
       })
     })]
   });

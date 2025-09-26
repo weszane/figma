@@ -8,7 +8,7 @@ import { e6 } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Z6 } from "../figma_app/451499";
 import { av } from "../figma_app/316316";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { w as _$$w } from "../figma_app/883622";
 import { j } from "../905/834956";
 import { useIsFullscreenSitesView } from "../905/561485";
@@ -22,7 +22,7 @@ export function $$v1(e) {
     showing,
     toggle,
     hide
-  } = BK(t);
+  } = useDropdown(t);
   let I = useRef(null);
   let {
     recordingKey,

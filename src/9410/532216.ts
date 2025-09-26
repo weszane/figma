@@ -12,7 +12,7 @@ import { WN } from "../figma_app/638601";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { isZoomIntegration } from "../figma_app/469876";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { c as _$$c } from "../figma_app/740884";
 import { eg as _$$eg, O0 } from "../figma_app/452252";
 import { i as _$$i } from "../figma_app/825649";
@@ -867,7 +867,7 @@ let ti = memo(function ({
 });
 export function $$tr0(e) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let c = i?.type === _$$eg;
   let v = useSelector(e => e.isRenaming);
   let E = isUserNotLoggedInAndEditorSupported();

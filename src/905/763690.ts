@@ -9,9 +9,9 @@ import { e as _$$e } from "../905/621515";
 import { Fy } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
-import { w } from "../905/129046";
-import { rq } from "../905/425180";
-import { F_ } from "../905/858282";
+import { VideoOverlayComponent } from "../905/129046";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/858282";
 import { b0J } from "../figma_app/6204";
 let A = "seen_file_preview_overlay";
 let y = userFlagExistsAtomFamily(A);
@@ -33,12 +33,12 @@ export function $$b0() {
       canShow: (e, t) => e && !t
     });
   }, [i, e, show]);
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: renderI18nText("file_preview_onboarding.move_your_cursor"),
     disableHighlight: !0,
     isShowing,
-    media: jsx(w, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl("31df1314d5fec4580db0bc6ceda8fcca7a600e30"),
       aspectRatio: 16 / 9
     }),

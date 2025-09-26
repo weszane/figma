@@ -13,7 +13,7 @@ import { withTrackedClick, TrackingProvider, useTracking } from "../figma_app/83
 import { e as _$$e } from "../905/621515";
 import { N as _$$N, D as _$$D } from "../figma_app/268271";
 import { e0 as _$$e2 } from "../905/696396";
-import { M as _$$M } from "../905/152487";
+import { OnboardingSequence } from "../905/152487";
 import { RSb, B14, y4J, t_E, qnr, kmj, hsL, JGK, XAb, Ttn, Nwg, BrS, v75, Smd, H2x, DKg, wRI, Kze, MJs, zoI, lLk, kp0, Njd, jRE, Byv, Y2_, KTt, HU3, g4U, uPw, Fq3, a9B, ENg, CVA, IQ, K_h, Fff, uTW, sJD, _5$ } from "../figma_app/6204";
 import { IconButton } from "../905/443068";
 import { Link } from "../905/438674";
@@ -67,22 +67,22 @@ import { userFlagExistsAtomFamily, userFlagAtomFamily } from "../figma_app/54587
 import { UpsellModalType } from "../905/165519";
 import { reorderFeatureKeysByPlanTier, StarterChartFeatureKeys, ChartFeatureKey } from "../905/472146";
 import { IR } from "../figma_app/625596";
-import { w as _$$w, y as _$$y } from "../905/129046";
+import { VideoOverlayComponent, ImageOverlayComponent } from "../905/129046";
 import { X as _$$X } from "../905/482718";
 import { Ui3PositionType, NotModalType } from "../905/11928";
 import { OS } from "../9410/635666";
-import { rq as _$$rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { A as _$$A4 } from "../905/956262";
 import { jK, C$ } from "../figma_app/829197";
 import { M as _$$M2 } from "../905/366117";
 import { U as _$$U } from "../905/455766";
-import { h as _$$h } from "../905/284399";
+import { OnboardingRenderFrame } from "../905/284399";
 import { O0, nu as _$$nu, eg as _$$eg } from "../figma_app/452252";
 import { kF, kL } from "../figma_app/121043";
 import { n$ as _$$n$, E1 } from "../figma_app/192664";
 import { tO as _$$tO, v4, ao as _$$ao, Qr, P7, J_ } from "../figma_app/598952";
-import { q3 } from "../figma_app/450829";
+import { OverlayType } from "../figma_app/450829";
 import { jJ } from "../figma_app/828908";
 import { s as _$$s2 } from "../905/445054";
 import { useInstalledPluginVersions } from "../figma_app/844435";
@@ -90,7 +90,7 @@ import { getColorSpaceSupportStatus, isColorSpaceStatusSupported } from "../figm
 import { JU, J3, Gi } from "../figma_app/622574";
 import { zC } from "../figma_app/186343";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { i as _$$i } from "../905/559280";
+import { RcsFrame } from "../905/559280";
 import { ZH } from "../figma_app/957169";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -112,7 +112,7 @@ import { s as _$$s3 } from "../figma_app/354567";
 import { QL, EM } from "../905/609392";
 import { APILoadingStatus } from "../905/520829";
 import { CustomSpacer } from "../905/585996";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { lR, $z, Me, c as _$$c2 } from "../figma_app/617427";
 import { Q as _$$Q2 } from "../5132/668270";
 import { D as _$$D2 } from "../figma_app/908415";
@@ -133,7 +133,7 @@ import { P as _$$P } from "../1250/232298";
 import { A as _$$A7 } from "../1250/545022";
 import { selectExperimentConfigHook, useUserFlagExperimentConfig } from "../figma_app/594947";
 import { setLeftPanelTab } from "../figma_app/91703";
-import { F_, EL } from "../905/858282";
+import { ArrowPosition, PositioningStrategy } from "../905/858282";
 import { S as _$$S2 } from "../figma_app/420927";
 import { styleBuilderInstance } from "../905/941192";
 import { browserCapabilities } from "../905/409121";
@@ -141,7 +141,7 @@ import ix from "classnames";
 import { CloseButton } from "../905/17223";
 import { Hz, Un, jg, Am } from "../figma_app/591738";
 import { Rf } from "../905/856036";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { w as _$$w3 } from "../3276/279527";
 import { A as _$$A8 } from "../figma_app/108485";
 import { F as _$$F2 } from "../figma_app/751989";
@@ -184,7 +184,6 @@ import { CommunityPageType } from "../figma_app/45218";
 import { mI, vX, wV, mN, rL as _$$rL, CM } from "../9410/983167";
 import { PH } from "../figma_app/701580";
 import { G as _$$G } from "../9410/656872";
-import { F_ as _$$F_, EL as _$$EL } from "../905/748636";
 import { n as _$$n2, D as _$$D3 } from "../905/347702";
 import { Qs } from "../905/992395";
 import { debounce } from "../905/915765";
@@ -269,7 +268,7 @@ import { W as _$$W } from "../figma_app/605682";
 import { B as _$$B4 } from "../figma_app/846647";
 import { XC as _$$XC } from "../figma_app/186402";
 import { E1 as _$$E4 } from "../905/696065";
-import { Q as _$$Q4 } from "../905/717951";
+import { CuratorPortal } from "../905/717951";
 import oR from "../vendor/128080";
 import { B as _$$B5 } from "../figma_app/380543";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
@@ -621,7 +620,7 @@ function et() {
       complete: _complete
     };
   }();
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     isShowing,
     children: isShowing && jsx(TrackingProvider, {
       name: _$$e2.AI_SUMMARY_TOPBAR_NUDGE,
@@ -718,7 +717,7 @@ function eD() {
   return jsx(_$$X, {
     description: renderI18nText("upsell.advanced_prototyping.description"),
     isShowing,
-    media: jsx(_$$w, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl("30507591ad5cd385aaf75d4a16ef140b74ec821b"),
       aspectRatio: 1.75
     }),
@@ -769,7 +768,7 @@ function eU() {
   _$$E2(t.uniqueId, "Lost DOM Target", () => {
     t.isShowing && t.complete();
   });
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     isShowing: t.isShowing,
     userFlagOnShow: eF,
     emphasized: !0,
@@ -851,11 +850,11 @@ function tr() {
   return jsxs(_$$U, {
     currentStep,
     isShowing: e.isShowing,
-    children: [jsx(_$$h, {
+    children: [jsx(OnboardingModal, {
       ctaText: renderI18nText("general.next"),
       element: tn,
       isShowing: e.isShowing,
-      modalType: q3.ANNOUNCEMENT_POINTER,
+      modalType: OverlayType.ANNOUNCEMENT_POINTER,
       onClickPrimaryCta: next,
       onClose: e.complete,
       onManualDismiss: () => {
@@ -873,11 +872,11 @@ function tr() {
       trackingContextName: ti,
       userFlagOnShow: e9,
       width: 300
-    }), jsx(_$$h, {
+    }), jsx(OnboardingModal, {
       ctaText: renderI18nText("general.got_it"),
       element: ta,
       isShowing: e.isShowing,
-      modalType: q3.ANNOUNCEMENT_POINTER,
+      modalType: OverlayType.ANNOUNCEMENT_POINTER,
       onClickPrimaryCta: () => {
         e.complete();
         _(!0);
@@ -1013,9 +1012,9 @@ function th() {
         seen_custom_template_publish_nudge: !0
       }));
     }, 1e3);
-  }, [t, e, m]), e.isShowing) ? jsx(_$$i, {
+  }, [t, e, m]), e.isShowing) ? jsx(RcsFrame, {
     step: {
-      modalType: q3.DRAGGABLE,
+      modalType: OverlayType.DRAGGABLE,
       element: ZH,
       trackingContextName: "custom_template_publish_nudge",
       onboardingKey: v4,
@@ -1065,7 +1064,7 @@ function tC() {
   return jsx(_$$X, {
     description: renderI18nText("desktop_download_modal_prompt.level_up_your_workflow_with_tabs"),
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       aspectRatio: 1.75,
       alt: "A graphic showing the desktop app with tabs",
       src: buildUploadUrl("cedfb41ea4da3cb80d5d062e5b648aa1d6a5cf1b")
@@ -1138,9 +1137,9 @@ function tD() {
     x();
     _.complete();
   };
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     isShowing: _.isShowing,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: "FigJam Templates",
     element: () => jsx(tR, {
       viewedSidebar: h,
@@ -1207,7 +1206,7 @@ function tV({
         trackingProperties: {
           buttonContext: "Let\u2019s jam"
         },
-        children: jsx(_$$x, {
+        children: jsx(LoadingRenderer, {
           isLoading: d,
           children: () => renderI18nText("figjam_try.save_modal.cta")
         })
@@ -1232,10 +1231,10 @@ function tW() {
     let r = "loaded" === a.status && !!getResourceDataOrFallback(a.data?.deviceTryFile);
     t && r && !o ? (e.show(), l(!0)) : t && i && !r && e.show();
   }, [e, i, a, o]);
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     isShowing: e.isShowing,
     trackingContextName: "Figjam Try Confirm Save Modal",
-    modalType: q3.WELCOME,
+    modalType: OverlayType.WELCOME,
     element: ({
       dismissModal: e
     }) => jsx(tV, {
@@ -1265,7 +1264,7 @@ function tQ() {
   useEffect(() => {
     !e && u && !d && "loaded" === c.status && getResourceDataOrFallback(c.data?.deviceTryFile)?.claimedAt && getResourceDataOrFallback(c.data?.deviceTryFile)?.claimedByUserId !== p.data && show();
   }, [e, d, u, c, show, p]);
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     isShowing,
     children: jsx(t$, {
       onClose: () => {
@@ -1482,8 +1481,8 @@ function ic() {
     isShowing && complete();
   }, [isShowing, complete]);
   _$$E2(uniqueId, "component_instance_inserted", x);
-  return jsx(_$$rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: renderI18nText("rcs.upsell_libraries.quickly_access_components"),
     emphasized: !0,
     isShowing,
@@ -1622,7 +1621,7 @@ function iw() {
   }, [e, complete, isShowing]);
   _$$E2(uniqueId, "action_create_symbol", C);
   _$$E2(uniqueId, "component_instance_inserted", v);
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     isShowing,
     targetKey: Qr,
     description: jsxs(Fragment, {
@@ -1644,7 +1643,7 @@ function iw() {
     },
     onClose: v,
     trackingContextName: "Local Component Asset Panel Pointer",
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     emphasized: !0,
     hideCloseButton: !0
   });
@@ -1671,7 +1670,7 @@ function ik() {
     });
   }, [show, i, l])), !isShowing) return null;
   let m = () => {
-    XHR.post("/api/send_mobile_download_email", {
+    sendWithRetry.post("/api/send_mobile_download_email", {
       type: "comment"
     });
     trackEventAnalytics("post_comment_mobile_app_download_prompt_email_me_cta_clicked");
@@ -1683,7 +1682,7 @@ function ik() {
   return jsx(_$$X, {
     description: renderI18nText("mobile_download_prompts.scan_the_qr_code"),
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       aspectRatio: 1.75,
       alt: "A graphic show mobile comments with a qr code",
       src: buildUploadUrl("6c270bb31fb5af03393425b7f0a6462ec59d04ab")
@@ -1873,9 +1872,9 @@ function i2(e) {
   });
 }
 function i3(e) {
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId ? e.testId : "ZoomConnectorOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: "FigJam Editor Onboarding - Zoom",
     element: i2,
     isShowing: e.isShowing,
@@ -1886,9 +1885,9 @@ function i3(e) {
 }
 function i5(e) {
   let t = Un();
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId ? e.testId : "HandToolConnectorOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: "FigJam Editor Onboarding - Hand Tool",
     userFlagOnShow: t ? "figjam_editor_onboarded" : void 0,
     element: i$,
@@ -1900,9 +1899,9 @@ function i5(e) {
 }
 let i4 = buildUploadUrl("8f3066fc3906f11f2601a390725f2b7af58e01a1");
 let i6 = [i3, i5, function (e) {
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId ? e.testId : "ShareConnectorOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: "FigJam Editor Onboarding - Share",
     userFlagOnShow: "figjam_editor_onboarded",
     element: e => jsx(iF, {
@@ -1956,7 +1955,7 @@ function ro({
   onPrimaryCtaClick: t,
   onClose: i
 }) {
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     isShowing: e,
     children: jsx(TrackingProvider, {
       name: "Share to Google Classroom New User Onboarding",
@@ -1984,8 +1983,8 @@ function rl({
   isShowing: e,
   onClose: t
 }) {
-  return jsx(_$$rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     clickOutsideToHide: !0,
     description: jsx("div", {
       children: renderI18nText("whiteboard.google_classroom.pointer.body")
@@ -4270,7 +4269,7 @@ let ni = e => {
         }) => e === o) && y(o);
         return;
       }
-      if ("Home" === e.key) t = 0;else if ("End" === e.key) t = C.length - 1;else if (["ArrowUp", "ArrowLeft"].includes(e.key)) t = v(o, -1);else {
+      if ("Home" === e.key) t = 0; else if ("End" === e.key) t = C.length - 1; else if (["ArrowUp", "ArrowLeft"].includes(e.key)) t = v(o, -1); else {
         if (!["ArrowDown", "ArrowRight"].includes(e.key)) return;
         t = v(o, 1);
       }
@@ -4728,7 +4727,7 @@ function nl() {
   return null;
 }
 Og;
-q3.SELF_CONTAINED;
+OverlayType.SELF_CONTAINED;
 e => jsx(na, {
   hideModal: e.dismissModal
 });
@@ -4741,7 +4740,7 @@ function nu(e) {
     topPadding: -6,
     autoWidth: !0,
     isBold: !0,
-    arrowPosition: _$$F_.BOTTOM,
+    arrowPosition: ArrowPosition.BOTTOM,
     children: jsx(mI, {
       bodyText: jsx("span", {
         className: RL,
@@ -4763,7 +4762,7 @@ function np(e) {
     topPadding: -6,
     autoWidth: !0,
     isBold: !0,
-    arrowPosition: _$$F_.BOTTOM,
+    arrowPosition: ArrowPosition.BOTTOM,
     children: jsx(mI, {
       titleText: jsx("span", {
         className: "browse_templates_make_something_onboarding--tooltipTitle--EmYZQ",
@@ -4787,9 +4786,9 @@ function nh(e) {
   _$$h2(() => {
     t(_$$tX2.MODAL_SHOWING);
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId ? e.testId : "MakeSomethingOnboardingOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: "Make Something Modal Onboarding",
     element: useCallback(e => jsx(na, {
       hideModal: e.dismissModal
@@ -4800,8 +4799,8 @@ function nh(e) {
     onManualDismiss: e.onManualDismiss
   });
 }
-q3.SELF_CONTAINED;
-q3.SELF_CONTAINED;
+OverlayType.SELF_CONTAINED;
+OverlayType.SELF_CONTAINED;
 let nm = "figjam_unified_onboarding_product";
 let nf = "figjam_unified_onboarding_pz";
 function ng(e) {
@@ -4939,7 +4938,7 @@ async function nD(e) {
     let e = getStorage();
     try {
       return !!e.get(SEEN_TRY_ONBOARDING_KEY);
-    } catch (e) {}
+    } catch (e) { }
     return !1;
   })();
 }
@@ -4973,9 +4972,9 @@ function nF(e) {
     }, 5e3);
     return () => clearTimeout(e);
   }, [a.status]);
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId ? e.testId : "OpenFigJamTutorialOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: "FigJam Editor Onboarding - Open Tutorial",
     userFlagOnShow: "figjam_editor_onboarded",
     element: e => jsx(nR, {
@@ -5071,7 +5070,7 @@ let nK = _$$D3(() => {
   let e = getStorage();
   try {
     return !!e.get(SEEN_TRY_ONBOARDING_KEY);
-  } catch (e) {}
+  } catch (e) { }
   return !1;
 });
 function nH({
@@ -5263,9 +5262,9 @@ let nq = atom(async () => {
 });
 let nX = Rq(nq);
 function nZ(e) {
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: nd,
     userFlagOnShow: "figjam_browse_templates_modal_onboarded",
     element: nu,
@@ -5276,9 +5275,9 @@ function nZ(e) {
   });
 }
 function nQ(e) {
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: nc,
     userFlagOnShow: "figjam_browse_templates_modal_onboarded",
     element: np,
@@ -5405,7 +5404,7 @@ function n9(e) {
       topPadding: -4,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.LEFT_TITLE,
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -5484,7 +5483,7 @@ function at(e) {
       topPadding: -4,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.TOP,
+      arrowPosition: ArrowPosition.TOP,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -5579,9 +5578,9 @@ function an(e) {
     stepName: "Intro",
     stepNum: 1
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Brainstorm - Intro`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: n7,
@@ -5597,9 +5596,9 @@ function aa(e) {
     stepName: "Sticky Prompt",
     stepNum: 2
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Brainstorm - Sticky Prompt`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: n8,
@@ -5615,9 +5614,9 @@ function as(e) {
     stepName: "Sticky Reaction",
     stepNum: 3
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Brainstorm - Sticky Reaction`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: n9,
@@ -5633,9 +5632,9 @@ function ao(e) {
     stepName: "Stamp Prompt",
     stepNum: 4
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Brainstorm - Stamp Prompt`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: ae,
@@ -5651,9 +5650,9 @@ function al(e) {
     stepName: "Stamp Reaction",
     stepNum: 5
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Brainstorm - Stamp Reaction`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: at,
@@ -5669,9 +5668,9 @@ function ad(e) {
     stepName: "Timer",
     stepNum: 6
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Brainstorm - Timer`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: ai,
@@ -5688,9 +5687,9 @@ function ac(e) {
     stepName: "Share",
     stepNum: 7
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Brainstorm - Share`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: ar,
@@ -5765,7 +5764,7 @@ function ap(e) {
       topPadding: -7,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.BOTTOM,
+      arrowPosition: ArrowPosition.BOTTOM,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -5807,7 +5806,7 @@ function ah(e) {
       topPadding: 2,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.LEFT_TITLE,
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -5851,7 +5850,7 @@ function am(e) {
       topPadding: -6,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.BOTTOM,
+      arrowPosition: ArrowPosition.BOTTOM,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -5882,7 +5881,7 @@ function af(e) {
       topPadding: -4,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.LEFT_TITLE,
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: renderI18nText("figjam_onboarding_make_something.planning_ahead.you_can_resize_blocks_by_dragging_their_ends"),
@@ -5949,9 +5948,9 @@ function ax(e) {
     stepName: "Intro",
     stepNum: 1
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Planning Ahead - Intro`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: au,
@@ -5967,9 +5966,9 @@ function ay(e) {
     stepName: "Section",
     stepNum: 2
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Planning Ahead - Section`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: ap,
@@ -5985,9 +5984,9 @@ function ab(e) {
     stepName: "Person",
     stepNum: 3
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Planning Ahead - Person`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: ah,
@@ -6003,9 +6002,9 @@ function aC(e) {
     stepName: "Project Name",
     stepNum: 4
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Planning Ahead - Project Name`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: am,
@@ -6021,9 +6020,9 @@ function av(e) {
     stepName: "Project Block",
     stepNum: 5
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Planning Ahead - Project Block`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: af,
@@ -6039,9 +6038,9 @@ function aE(e) {
     stepName: "Shape",
     stepNum: 6
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Planning Ahead - Shape`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: ag,
@@ -6058,9 +6057,9 @@ function aT(e) {
     stepName: "Share",
     stepNum: 7
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Planning Ahead - Share`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: a_,
@@ -6147,7 +6146,7 @@ function aS(e) {
       topPadding: -6,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.BOTTOM,
+      arrowPosition: ArrowPosition.BOTTOM,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -6178,7 +6177,7 @@ function aj(e) {
       topPadding: -4,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.LEFT_TITLE,
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -6220,7 +6219,7 @@ function aI(e) {
       topPadding: -4,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.RIGHT_TITLE,
+      arrowPosition: ArrowPosition.RIGHT_TITLE,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -6323,9 +6322,9 @@ function aO(e) {
     stepName: "Intro",
     stepNum: 1
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Chart - Intro`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aw,
@@ -6341,9 +6340,9 @@ function aL(e) {
     stepName: "Name",
     stepNum: 2
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Chart - Name`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aS,
@@ -6359,9 +6358,9 @@ function aR(e) {
     stepName: "Image",
     stepNum: 3
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Chart - Image`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aj,
@@ -6377,9 +6376,9 @@ function aD(e) {
     stepName: "Quick Create",
     stepNum: 4
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Chart - Quick Create`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aI,
@@ -6395,9 +6394,9 @@ function aM(e) {
     stepName: "Shape",
     stepNum: 5
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Chart - Shape`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: ak,
@@ -6413,9 +6412,9 @@ function aP(e) {
     stepName: "Connector",
     stepNum: 6
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Chart - Connector`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aN,
@@ -6432,9 +6431,9 @@ function aF(e) {
     stepName: "Share",
     stepNum: 7
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Chart - Share`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aA,
@@ -6521,7 +6520,7 @@ function aU(e) {
       topPadding: -6,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.BOTTOM,
+      arrowPosition: ArrowPosition.BOTTOM,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -6550,7 +6549,7 @@ function aG(e) {
       topPadding: -6,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.BOTTOM,
+      arrowPosition: ArrowPosition.BOTTOM,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -6583,7 +6582,7 @@ function aK(e) {
       topPadding: -5,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.BOTTOM,
+      arrowPosition: ArrowPosition.BOTTOM,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -6612,7 +6611,7 @@ function aH(e) {
       topPadding: -5,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.BOTTOM,
+      arrowPosition: ArrowPosition.BOTTOM,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -6654,7 +6653,7 @@ function az(e) {
       topPadding: -16,
       isBold: !0,
       autoWidth: !0,
-      arrowPosition: _$$F_.TOP,
+      arrowPosition: ArrowPosition.TOP,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
@@ -6699,9 +6698,9 @@ function aW(e) {
     stepName: "Intro",
     stepNum: 1
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Updates - Intro`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aB,
@@ -6717,9 +6716,9 @@ function aY(e) {
     stepName: "Section",
     stepNum: 2
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Updates - Section`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aU,
@@ -6735,9 +6734,9 @@ function aJ(e) {
     stepName: "Photo Booth",
     stepNum: 3
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Updates - Photo Booth`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aG,
@@ -6753,9 +6752,9 @@ function aq(e) {
     stepName: "Updates",
     stepNum: 4
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Updates - Updates`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aK,
@@ -6771,9 +6770,9 @@ function aX(e) {
     stepName: "Important Dates",
     stepNum: 5
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Updates - Important Dates`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aH,
@@ -6789,9 +6788,9 @@ function aZ(e) {
     stepName: "Sticky",
     stepNum: 6
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Updates - Sticky`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: az,
@@ -6808,9 +6807,9 @@ function aQ(e) {
     stepName: "Share",
     stepNum: 7
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     testId: e.testId,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${CM} - Team Updates - Share`,
     userFlagOnShow: "figjam_editor_onboarded",
     element: aV,
@@ -7140,9 +7139,9 @@ function sa({
   useEffect(() => {
     l.isShowing && markOssSalesExperimentChecked();
   }, [u, l.isShowing]);
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     isShowing: l.isShowing,
-    modalType: q3.FEATURE_UPDATE,
+    modalType: OverlayType.FEATURE_UPDATE,
     element: function (e) {
       _$$h2(() => {
         i(showModalHandler({
@@ -7186,9 +7185,9 @@ function s_({
     top: o.y + n.y + l + 2,
     left: o.x + n.x - 150,
     pointerOffset: 150 - l,
-    pointerPosition: F_.TOP
+    pointerPosition: ArrowPosition.TOP
   };
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     clickOutsideToHide: !0,
     description: renderI18nText("whiteboard.section_presets_onboarding.picker_callout.description"),
     fixedPosition: !0,
@@ -7251,14 +7250,14 @@ function sb({
   onPrimaryCtaClick: t,
   onClose: i
 }) {
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     testId: "share-to-google-classroom-onboarding",
     isShowing: e,
     trackingContextName: "Share to Google Classroom Onboarding",
     targetKey: "share",
     title: renderI18nText("whiteboard.google_classroom.onboarding.header"),
     description: renderI18nText("whiteboard.google_classroom.onboarding.body"),
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: sy,
       alt: getI18nString("whiteboard.google_classroom.onboarding.image_alt"),
       aspectRatio: 300 / 169
@@ -7373,8 +7372,8 @@ function sM({
   let n = useDispatch();
   sR(n, jx);
   sR(n, sN);
-  return jsx(_$$rq, {
-    arrowPosition: F_.BOTTOM,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.BOTTOM,
     description: renderI18nText("ui3_and_ai_tour.ai_callout.description"),
     highlightBlue: !0,
     isShowing: t,
@@ -7412,8 +7411,8 @@ function sF({
   onTargetLost: i
 }) {
   sR(useDispatch(), _$$af);
-  return jsx(_$$rq, {
-    arrowPosition: F_.BOTTOM,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.BOTTOM,
     description: getFeatureFlags().hub_file_fragments ? renderI18nText("ui3_and_ai_callouts.community_fragment_search.description") : renderI18nText("ui3_and_ai_callouts.fragment_search.description"),
     highlightBlue: !0,
     isShowing: t,
@@ -7563,12 +7562,12 @@ function sK() {
   return jsxs(_$$U, {
     currentStep,
     isShowing,
-    children: [jsx(_$$rq, {
-      arrowPosition: F_.RIGHT_BODY,
+    children: [jsx(OnboardingModal, {
+      arrowPosition: ArrowPosition.RIGHT_BODY,
       description: renderI18nText("ui3_reactivation_overlay.ui2_description"),
       disableHighlight: !0,
       isShowing,
-      media: jsx(_$$w, {
+      media: jsx(VideoOverlayComponent, {
         src: buildUploadUrl("c24e9a3e1bb4e0babe4ebc86f9d58b79e44a1992"),
         aspectRatio: 16 / 9
       }),
@@ -7596,12 +7595,12 @@ function sK() {
       targetKey: J_,
       title: renderI18nText("ui3_reactivation_overlay.ui2_title"),
       trackingContextName: `${sG} Step 1`
-    }), jsx(_$$rq, {
-      arrowPosition: F_.RIGHT_BODY,
+    }), jsx(OnboardingModal, {
+      arrowPosition: ArrowPosition.RIGHT_BODY,
       description: renderI18nText("ui3_reactivation_overlay.ui3_description"),
       disableHighlight: !0,
       isShowing,
-      media: jsx(_$$y, {
+      media: jsx(ImageOverlayComponent, {
         src: buildUploadUrl("94d7810cc12859da29e6f4e32a5ffe858ce5445e"),
         alt: getI18nString("ui3_reactivation_overlay.ui3_media_alt"),
         aspectRatio: 16 / 9
@@ -7640,11 +7639,11 @@ function sJ({
   width: n = 268
 }) {
   return {
-    modalType: q3.POINTER,
+    modalType: OverlayType.POINTER,
     trackingContextName: e,
     width: n,
     onboardingKey: yl,
-    shouldCenterArrow: _$$EL.FALLBACK,
+    shouldCenterArrow: PositioningStrategy.FALLBACK,
     element: () => jsxs(Fragment, {
       children: [jsx(_$$x2, {
         target: yl
@@ -7682,7 +7681,7 @@ function sq(e) {
       width: 244,
       targetKey: "create-symbol",
       shouldNotWrapInParagraphTag: !0,
-      shouldCenterArrow: _$$EL.FALLBACK,
+      shouldCenterArrow: PositioningStrategy.FALLBACK,
       children: [jsx("p", {
         children: renderI18nText("rcs.upsell_libraries.click_here_to_turn_into_component")
       }), jsx(Spacing, {
@@ -7698,7 +7697,7 @@ function sq(e) {
     })]
   });
 }
-q3.SELF_CONTAINED;
+OverlayType.SELF_CONTAINED;
 sJ({
   trackingContextName: "FigJam Widget Nudge Generic",
   getTitle: () => getI18nString("rcs.figjam_widget_nudge.generic_title"),
@@ -7786,9 +7785,9 @@ function s4() {
   return jsx(s6, {
     isShowing: c.isShowing,
     onAbort: c.complete,
-    children: jsx(_$$h, {
+    children: jsx(OnboardingModal, {
       isShowing: c.isShowing,
-      modalType: q3.SELF_CONTAINED,
+      modalType: OverlayType.SELF_CONTAINED,
       trackingContextName: "Consecutive Paste Create Component Pointer",
       element: sq,
       onClickPrimaryCta: c.complete,
@@ -7874,8 +7873,8 @@ function oo() {
     return useMemo(() => [{
       title: renderI18nText("rcs.figjam_diagram_onboarding.connectors_title"),
       trackingContextName: or.connectors,
-      arrowPosition: F_.BOTTOM,
-      media: jsx(_$$y, {
+      arrowPosition: ArrowPosition.BOTTOM,
+      media: jsx(ImageOverlayComponent, {
         src: on,
         aspectRatio: 900 / 508,
         alt: getI18nString("rcs.figjam_diagram_onboarding.connectors_title")
@@ -7886,8 +7885,8 @@ function oo() {
     }, {
       title: renderI18nText("rcs.figjam_diagram_onboarding.shapes_title"),
       trackingContextName: or.shapes,
-      arrowPosition: F_.BOTTOM,
-      media: jsx(_$$y, {
+      arrowPosition: ArrowPosition.BOTTOM,
+      media: jsx(ImageOverlayComponent, {
         aspectRatio: 900 / 507,
         src: oa,
         alt: getI18nString("rcs.figjam_diagram_onboarding.shapes_title")
@@ -7898,8 +7897,8 @@ function oo() {
     }, {
       title: renderI18nText("rcs.figjam_diagram_onboarding.templates_title"),
       trackingContextName: or.templates,
-      arrowPosition: F_.BOTTOM,
-      media: jsx(_$$y, {
+      arrowPosition: ArrowPosition.BOTTOM,
+      media: jsx(ImageOverlayComponent, {
         aspectRatio: 900 / 505,
         src: os,
         alt: getI18nString("rcs.figjam_diagram_onboarding.templates_title")
@@ -7950,12 +7949,12 @@ function ou(e) {
       canShow: (e, t, i, r) => e && !t && i && !r
     });
   });
-  return jsx(_$$h, {
+  return jsx(OnboardingModal, {
     currentStepIndex: 0,
     disableFooter: !0,
     element: op,
     isShowing: o.isShowing,
-    modalType: q3.DRAGGABLE,
+    modalType: OverlayType.DRAGGABLE,
     onClickPrimaryCta: o.complete,
     onClose: o.complete,
     onManualDismiss: o.complete,
@@ -8098,8 +8097,8 @@ function ok() {
       design_panel_step_shown: !0
     }));
   };
-  return jsx(_$$rq, {
-    arrowPosition: F_.RIGHT_BODY,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: renderI18nText("tooltips_plus_onboarding.design_panel.description"),
     disableHighlight: !0,
     emphasized: !0,
@@ -8130,8 +8129,8 @@ function oN() {
       format_text_step_shown: !0
     }));
   };
-  return jsx(_$$rq, {
-    arrowPosition: F_.RIGHT_BODY,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: renderI18nText("tooltips_plus_onboarding.text_formatting.description"),
     disableHighlight: !0,
     emphasized: !0,
@@ -8174,7 +8173,7 @@ function oG(e) {
     formattedTimestamp: m,
     audience: h
   });
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     isShowing: overlay.isShowing,
     trackingContextName: "Link Expired Overlay",
     title: f,
@@ -8295,9 +8294,9 @@ function o2({
       }
     }));
   }, [t, d, isShowing]);
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     arrowPadding: 4,
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     clickOutsideToHide: !0,
     description: renderI18nText("slides.templates.pro_templates_announcement.description"),
     disableHighlight: !0,
@@ -8338,14 +8337,14 @@ function o7() {
       canShow: e => e && l && d && c && !isToolbeltDisabled
     });
   }, [show, l, d, c, isToolbeltDisabled]);
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     arrowPadding: 8,
-    arrowPosition: F_.BOTTOM,
+    arrowPosition: ArrowPosition.BOTTOM,
     description: renderI18nText("whiteboard.toolbelt.onboarding_feature_callout.description"),
     disableHighlight: !0,
     forceUI3Theme: !0,
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("6462781efe9eeb4aa90be0eed2316ae8fedb7980"),
       alt: getI18nString("whiteboard.toolbelt.onboarding_feature_callout.imageAltText"),
       aspectRatio: 16 / 9
@@ -8357,7 +8356,7 @@ function o7() {
       onClick: complete,
       ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     shouldDisableAnimation: !0,
     targetKey: yl,
     title: renderI18nText("whiteboard.toolbelt.onboarding_feature_callout.title"),
@@ -8509,7 +8508,7 @@ function li({
   }) : jsxs(Fragment, {
     children: [isDesignEditor && !isInteractionPathCheck() && jsx(_$$p3, {
       children: jsx(to, {})
-    }), isFigjamEditor && !isDesignEditor && jsx(_$$Q4, {
+    }), isFigjamEditor && !isDesignEditor && jsx(CuratorPortal, {
       children: jsx(_$$p3, {
         children: jsx(th, {})
       })

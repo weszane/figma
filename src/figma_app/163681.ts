@@ -28,7 +28,7 @@ import { P as _$$P, B as _$$B } from "../figma_app/846647";
 import { Fullscreen, UserInterfaceElements } from "../figma_app/763686";
 import { setLeftPanelTab } from "../figma_app/91703";
 import { clearSelection } from "../figma_app/741237";
-import { F_, EL } from "../905/858282";
+import { ArrowPosition, PositioningStrategy } from "../905/858282";
 import { NavigationDirection, findProductFrame, findProductTitleText, findFirstNodeOfType, navigateAndSelect, findHeroImageFrame, findLandingPageTitle, expTootipsSymbol } from "../figma_app/202626";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Vr } from "../figma_app/151869";
@@ -37,7 +37,7 @@ import { iF } from "../figma_app/511910";
 import { alwaysFalseCallback2 } from "../figma_app/275462";
 import { useSingleEffect } from "../905/791079";
 import { Z as _$$Z2 } from "../905/104740";
-import { F_ as _$$F_ } from "../905/748636";
+
 import { e as _$$e3 } from "../5132/291975";
 import { aE } from "../figma_app/433401";
 function R(e) {
@@ -92,7 +92,7 @@ function k(e) {
     }));
   }, [t]);
   return jsx(VF, {
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     disableHighlight: !0,
     dismissModal: e.onClose,
     lowerLeftText: jsx(uY, {
@@ -255,7 +255,7 @@ function z(e) {
       }));
       e.onNext();
     },
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     pointsTo: "leftPanel",
     children: s
   });
@@ -402,7 +402,7 @@ function X(e) {
     });
   });
   return jsx(TG, {
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     disableHighlight: !0,
     dismissModal: e.onClose,
     lowerLeftText: jsx(uY, {
@@ -421,7 +421,7 @@ function X(e) {
 function q(e) {
   let t = generateSlug(PanelIdentifiers.PAINT_PANEL_ROW, "paint-1-0");
   return jsx(VF, {
-    arrowPosition: F_.RIGHT_BODY,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     disableHighlight: !0,
     dismissModal: e.onClose,
     lowerLeftText: jsx(uY, {
@@ -451,7 +451,7 @@ function Z(e) {
       }), r(!0)) : e.flowDirection === NavigationDirection.FORWARD ? e.onNext() : e.onPrevious();
     });
   }), t) ? jsx(VF, {
-    arrowPosition: _$$F_.RIGHT_BODY,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     disableHighlight: !0,
     dismissModal: e.onClose,
     lowerLeftText: jsx(uY, {
@@ -478,7 +478,7 @@ function et(e) {
     onPrimaryCtaClick: e.onNext,
     onSecondaryCtaClick: e.onPrevious,
     pointsTo: "toolbar",
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     targetKey: aE,
     title: renderI18nText("starting_points_onboarding.toolbar_step.title"),
     trackingContextName: "Tooltips+ Text Step",

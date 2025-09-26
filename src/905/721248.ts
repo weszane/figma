@@ -17,7 +17,7 @@ import { zW } from '../905/162414';
 import { setupToggleButton } from '../905/167712';
 import { CustomCauseError } from '../905/194389';
 import { useSingleEffect } from '../905/791079';
-import { x as _$$x } from '../905/211326';
+import { LoadingRenderer } from '../905/211326';
 import { J as _$$J2 } from '../905/225412';
 import { waitForAnimationFrame } from '../905/236856';
 import { HiddenLabel, Label } from '../905/270045';
@@ -52,7 +52,7 @@ import { r as _$$r } from '../905/571562';
 import { VisualBellIcon } from '../905/576487';
 import { n6 as _$$n, _l, b_, ds, gf, Ur, YH } from '../905/585030';
 import { getFeatureFlags } from '../905/601108';
-import { o as _$$o } from '../905/605383';
+import { RenderListByChunks } from '../905/605383';
 import { X as _$$X } from '../905/606795';
 import { customHistory } from '../905/612521';
 import { currentSelectionAtom, isActiveAtom } from '../905/617744';
@@ -85,7 +85,7 @@ import { ud } from '../905/862913';
 import { ProjectDevelopmentPhases } from '../905/869235';
 import { m as _$$m } from '../905/871166';
 import { areSessionLocalIDsEqual, sessionLocalIDToString } from '../905/871411';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { dayjs } from '../905/920142';
 import { selectViewAction } from '../905/929976';
 import { $n as _$$$n } from '../905/930279';
@@ -160,7 +160,7 @@ import Q from '../vendor/961736';
 let J = Q;
 createOptimistThunk(async (e, t) => {
   try {
-    let e = XHR.put(`/api/merge_requests/${t.mergeRequestKey}`, {
+    let e = sendWithRetry.put(`/api/merge_requests/${t.mergeRequestKey}`, {
       closed: t.closed
     });
     await WB()?.optimisticallyUpdate({
@@ -186,7 +186,7 @@ let ed = createOptimistThunk(async (e, t) => {
     type: i
   }));
   try {
-    let n = XHR.put(`/api/merge_requests/${t.mergeRequestKey}/reviewers`, {
+    let n = sendWithRetry.put(`/api/merge_requests/${t.mergeRequestKey}/reviewers`, {
       ...(t.changesRequested != null && {
         changes_requested: t.changesRequested
       }),
@@ -228,7 +228,7 @@ let ed = createOptimistThunk(async (e, t) => {
 });
 let ec = createOptimistThunk(async (e, t) => {
   try {
-    let e = XHR.put(`/api/merge_requests/${t.mergeRequestKey}/reviewers`, {
+    let e = sendWithRetry.put(`/api/merge_requests/${t.mergeRequestKey}/reviewers`, {
       notes: t.notes
     });
     await WB()?.optimisticallyUpdate({
@@ -248,7 +248,7 @@ let ec = createOptimistThunk(async (e, t) => {
 });
 let eu = createOptimistThunk(async (e, t) => {
   try {
-    let e = XHR.post(`/api/merge_requests/${t.mergeRequestKey}/${t.isApprove ? 'approve' : 'unapprove'}`);
+    let e = sendWithRetry.post(`/api/merge_requests/${t.mergeRequestKey}/${t.isApprove ? 'approve' : 'unapprove'}`);
     await WB()?.optimisticallyUpdate({
       MergeRequestReviewer: {
         [t.mergeRequestReviewerId]: {
@@ -266,7 +266,7 @@ let eu = createOptimistThunk(async (e, t) => {
 });
 let ep = createOptimistThunk(async (e, t) => {
   try {
-    let i = XHR.put(`/api/merge_requests/${t.mergeRequestKey}`, {
+    let i = sendWithRetry.put(`/api/merge_requests/${t.mergeRequestKey}`, {
       rerequest: !0,
       description: t.description,
       include_invited: 'true'
@@ -294,7 +294,7 @@ let ep = createOptimistThunk(async (e, t) => {
 });
 let em = createOptimistThunk(async (e, t) => {
   try {
-    let e = XHR.put(`/api/merge_requests/${t.mergeRequestKey}`, {
+    let e = sendWithRetry.put(`/api/merge_requests/${t.mergeRequestKey}`, {
       ...t.mergeRequestPayload,
       include_invited: 'true'
     });
@@ -339,7 +339,7 @@ let eh = createOptimistThunk(async (e, t) => {
   }
 });
 let eg = async (e, t) => {
-  let i = await XHR.post('/api/merge_requests', {
+  let i = await sendWithRetry.post('/api/merge_requests', {
     ...e,
     branch_key: t,
     include_invited: 'true'
@@ -421,7 +421,7 @@ function eD({
   }) : jsx('div', {
     style: a,
     className: g,
-    children: jsx(_$$x, {
+    children: jsx(LoadingRenderer, {
       isLoading: u,
       children: () => jsx(eO, {
         isDarkBackground: A,
@@ -1214,7 +1214,7 @@ let tx = memo(e => {
             'autosize': !0,
             'width': '11px'
           })]
-        }), e.displayGroups.length > 0 && jsx(_$$o, {
+        }), e.displayGroups.length > 0 && jsx(RenderListByChunks, {
           chunkSize: 5,
           className: displayType === 1 ? 'chunk_section--chunkList--SBKZz' : 'chunk_section--tilesGrid--K5qck',
           listKey: m,

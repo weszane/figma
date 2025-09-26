@@ -11,7 +11,7 @@ import { VF, uY } from "../figma_app/989514";
 import { b as _$$b2 } from "../figma_app/5657";
 import { Vr } from "../figma_app/151869";
 import { findFirstNodeOfType, navigateAndSelect } from "../figma_app/202626";
-import { F_, EL } from "../905/858282";
+import { ArrowPosition, PositioningStrategy } from "../905/858282";
 import { W } from "../figma_app/605682";
 export function $$E0({
   onPrimaryCtaClick: e,
@@ -68,8 +68,8 @@ export function $$E0({
     onPrimaryCtaClick: e,
     primaryCtaProps: r,
     secondaryCtaProps: E,
-    arrowPosition: F_.RIGHT_BODY,
-    shouldCenterArrow: EL.FALLBACK,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
+    shouldCenterArrow: PositioningStrategy.FALLBACK,
     pointsTo: "designPanel"
   };
   let j = {

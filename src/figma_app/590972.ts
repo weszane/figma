@@ -19,7 +19,7 @@ import { h as _$$h } from "../905/706336";
 import { I as _$$I } from "../905/293573";
 import { r as _$$r } from "../905/334940";
 import { o as _$$o } from "../905/785255";
-import { r as _$$r2 } from "../905/290294";
+import { setupDraftSubmissionHandler } from "../905/290294";
 import { D as _$$D } from "../905/572843";
 import { isFieldValidated, isFormValidatedOrError, getFieldValueOrDefault } from "../905/497882";
 import { a as _$$a } from "../905/94741";
@@ -240,7 +240,7 @@ function eO({
     draftSubmissionResult,
     clearDraftSubmissionResult,
     submit
-  } = _$$r2(e, useCallback(() => {
+  } = setupDraftSubmissionHandler(e, useCallback(() => {
     X.current($$in, {
       step: PublishModalState.PUBLISH
     });

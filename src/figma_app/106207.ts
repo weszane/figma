@@ -8,7 +8,7 @@ import { customHistory } from "../905/612521";
 import { J as _$$J } from "../905/931050";
 import { APILoadingStatus } from "../905/520829";
 import { PerfTimer } from "../905/609396";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
@@ -17,7 +17,7 @@ import { D as _$$D } from "../905/775228";
 import { addTemplateToRecentsThunkAction } from "../figma_app/147952";
 import { postUserFlag } from "../905/985254";
 import { B } from "../figma_app/750676";
-import { T as _$$T, _ as _$$_ } from "../905/793009";
+import { AITemplateType, trackTemplateEvent } from "../905/793009";
 import { gY } from "../figma_app/973927";
 import { loadCanvasData } from "../905/815475";
 import { sf } from "../figma_app/12535";
@@ -115,8 +115,8 @@ export async function $$U2({
   };
   let _ = F(n);
   try {
-    await B(() => _, r, _$$T.STANDARD, async () => {
-      (await e()) && (i && i(), u("template_insert_success"), _$$_(o ? "resource_previewed" : "resource_inserted", {
+    await B(() => _, r, AITemplateType.STANDARD, async () => {
+      (await e()) && (i && i(), u("template_insert_success"), trackTemplateEvent(o ? "resource_previewed" : "resource_inserted", {
         fileKey: r,
         resourceType: "template",
         resourceName: gY(n),
@@ -154,14 +154,14 @@ export async function $$B1({
   let a = e.type === _$$n2.HubFile ? {
     fv: `${r}`
   } : void 0;
-  let s = loadCanvasData(i, (e, t) => XHR.post(e, {
+  let s = loadCanvasData(i, (e, t) => sendWithRetry.post(e, {
     fv: `${t}`
   }, {
     responseType: "arraybuffer"
   }).then(({
     data: e
   }) => e));
-  let [[o]] = await Promise.all([s, XHR.post(n, a)]);
+  let [[o]] = await Promise.all([s, sendWithRetry.post(n, a)]);
   return o;
 }
 async function G(e) {
@@ -259,7 +259,7 @@ async function W({
   openInNewTab: a,
   folderId: s
 }) {
-  await XHR.post(`/api/templates/${t.file_key}/duplicate`, {
+  await sendWithRetry.post(`/api/templates/${t.file_key}/duplicate`, {
     folder_id: s
   }).then(({
     data: n

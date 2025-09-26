@@ -13,14 +13,14 @@ import { cF, fF, BZ } from "../figma_app/425283";
 import { UpgradeAction } from "../905/370443";
 import { e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
-import { rq } from "../905/425180";
-import { EL } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { PositioningStrategy } from "../905/858282";
 import { hoH } from "../figma_app/6204";
 import { selectViewAction } from "../905/929976";
 import { b as _$$b } from "../905/388233";
 import { FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPublicPlan } from "../figma_app/465071";
-import { O } from "../figma_app/809387";
+import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, FigResourceType, WorkspaceTab, BillingSectionEnum, MemberView } from "../figma_app/650409";
 import { p as _$$p } from "../figma_app/353099";
 import { Q } from "../figma_app/527200";
@@ -39,7 +39,7 @@ function I() {
   useSingleEffect(() => {
     show();
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     clickOutsideToHide: !0,
     description: renderI18nText("org_admin_onboarding.billing_tab.tooltip.billing_groups_secondary_tab.description"),
     emphasized: !0,
@@ -52,7 +52,7 @@ function I() {
       onClick: complete,
       ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     targetKey: cF,
     title: renderI18nText("org_admin_onboarding.billing_tab.tooltip.billing_groups_secondary_tab.title"),
     trackingContextName: `${fF} - billing groups tab`
@@ -121,7 +121,7 @@ export function $$O0({
             tab: t,
             isSelected: i,
             onClick: y,
-            tabName: O(e, t),
+            tabName: getOrgAdminTabMessage(e, t),
             dataOnboardingKey: BZ[t],
             "data-testid": i ? "org-admin-settings-secondary-tab-selected" : "org-admin-settings-secondary-tab"
           }, t), h && jsx(Q, {})]
@@ -171,7 +171,7 @@ function D({
             ...a,
             "data-onboarding-key": BZ[t],
             "data-testid": t === i ? "org-admin-settings-secondary-tab-selected" : "org-admin-settings-secondary-tab",
-            children: O(e, t)
+            children: getOrgAdminTabMessage(e, t)
           })]
         }, t) : null;
       })

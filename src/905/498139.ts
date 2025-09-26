@@ -10,7 +10,7 @@ import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { useSelectionPropertyValue } from "../905/275640";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { DD } from "../905/211095";
@@ -18,7 +18,7 @@ import { vS } from "../figma_app/323320";
 import { l6, c$ } from "../905/794875";
 import { useHandleVariableSelected, useDetachedVariableValue, VariableFormRow, useVariableCreateModalActions, useHideContextMenu, CreateVariableFormInput } from "../figma_app/380814";
 import { NF, oz } from "../figma_app/406976";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { i as _$$i } from "../905/649519";
 import { WB } from "../figma_app/394327";
 import { IconButton } from "../905/443068";
@@ -224,7 +224,7 @@ function U({
       varSetID: W.varSetID ?? null
     });
   });
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     title: jsx("h1", {
       className: h$,
       children: T ? renderI18nText("design_systems.component_properties.create_property") : renderI18nText("variables.create_modal.component_property_or_variable_title")
@@ -295,7 +295,7 @@ function B({
   ariaLabelledBy: i
 }) {
   let r = useDispatch();
-  let s = Um();
+  let s = useDropdownState();
   return jsxs(l6, {
     ariaLabelledBy: i,
     id: "variable-and-component-prop-create-modal-select",

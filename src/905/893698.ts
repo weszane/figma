@@ -18,10 +18,10 @@ import { styleBuilderInstance } from "../905/941192";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { setInstanceSwapPickerListLayout } from "../figma_app/91703";
 import { Dm } from "../figma_app/8833";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { R2 } from "../figma_app/188908";
 import { MB } from "../figma_app/525558";
-import { S as _$$S } from "../905/459477";
+import { fileLaunchHelper as _$$S } from "../905/459477";
 let $$C1 = "instance_swap_settings_dropdown-";
 let T = e => `${$$C1}${e}`;
 let $$k2 = forwardRef(function ({
@@ -35,7 +35,7 @@ let $$k2 = forwardRef(function ({
     u.current?.focus();
   }, []);
   let h = T(e);
-  let g = Um();
+  let g = useDropdownState();
   let _ = g?.type === h;
   let y = useDispatch();
   let v = useCallback(() => {

@@ -95,7 +95,7 @@ function M(e) {
         let e = data.url.pathname.split(/\//)[3];
         if (e) try {
           i = decodeURI(e).replace(/-/g, " ");
-        } catch (e) {}
+        } catch (e) { }
       }
       t = i ? jsx("div", {
         className: Qq,
@@ -212,7 +212,7 @@ function M(e) {
     recordingKey: e.recordingKey,
     children: [t && jsx(SvgComponent, {
       className: Kk,
-      style: styleBuilderInstance.$$if(r === _$$A, styleBuilderInstance.add({
+      style: styleBuilderInstance.if(r === _$$A, styleBuilderInstance.add({
         transform: "rotate(90deg)"
       })).$,
       svg: r

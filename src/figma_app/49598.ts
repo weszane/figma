@@ -16,7 +16,7 @@ import { createAtomSetter } from "../figma_app/566371";
 import { isMobileUA } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { AUTH_INIT } from "../905/194276";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -24,7 +24,7 @@ import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { getCurrentSearchSessionId } from "../figma_app/387599";
 import { processHubFilesThunk } from "../905/359847";
-import { m as _$$m } from "../905/909123";
+import { resourceVersionsQuery } from "../905/909123";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { createPublishActionCreators } from "../figma_app/530167";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
@@ -95,11 +95,11 @@ let $$eb16 = createOptimistThunk((e, t, {
   }
   let i = {
     headers: {
-      ...XHR.defaults.headers,
+      ...sendWithRetry.defaults.headers,
       "X-Figma-User-ID": t.workspace.userId
     }
   };
-  let a = XHR.post(`/api/hub_files/v2/${t.hubFileId}/copy`, {
+  let a = sendWithRetry.post(`/api/hub_files/v2/${t.hubFileId}/copy`, {
     org_id: t.workspace.orgId
   }, i);
   setupLoadingStateHandler(a, e, r);
@@ -169,7 +169,7 @@ let $$eT18 = createOptimistThunk((e, t) => {
       return;
     }
   }
-  return XHR.post(`/api/hub_files/template/${t.hubFileId}/copy`, {
+  return sendWithRetry.post(`/api/hub_files/template/${t.hubFileId}/copy`, {
     folder_id: t.folderId,
     org_id: i,
     team_id: a || void 0
@@ -577,7 +577,7 @@ let $$eP10 = createOptimistThunk((e, {
   onSuccess: i,
   onError: a
 }) => {
-  XHR.del(`/api/hub_files/${t}`).then(({
+  sendWithRetry.del(`/api/hub_files/${t}`).then(({
     data: t
   }) => {
     let r = t.meta;
@@ -601,7 +601,7 @@ let $$eD23 = createOptimistAction("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
 }, {
   optimistId: n
 }) => {
-  XHR.post(`/api/hub_files/v2/${t}/copy`).then(({
+  sendWithRetry.post(`/api/hub_files/v2/${t}/copy`).then(({
     data: i
   }) => {
     e.dispatch(createOptimistCommitAction(n));
@@ -632,7 +632,7 @@ let ek = liveStoreInstance.Mutation(({
   id: e
 }, {
   query: t
-}) => (t.mutate(_$$m({
+}) => (t.mutate(resourceVersionsQuery({
   apiResourceType: "file",
   id: e
 }), e => {
@@ -679,7 +679,7 @@ let eF = liveStoreInstance.Mutation(({
   id: e
 }, {
   query: t
-}) => (t.mutate(_$$m({
+}) => (t.mutate(resourceVersionsQuery({
   apiResourceType: "file",
   id: e
 }), e => {
@@ -714,7 +714,7 @@ let $$ej6 = createOptimistThunk((e, {
 }, e => `UNLIKE_HUB_FILE_${e}`);
 let $$eU21 = createOptimistThunk((e, {
   hubFileId: t
-}) => XHR.post(`/api/hub_files/${t}/view`, {
+}) => sendWithRetry.post(`/api/hub_files/${t}/view`, {
   hubFileId: t
 }));
 let eB = {};

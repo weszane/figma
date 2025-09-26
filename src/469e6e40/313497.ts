@@ -16,7 +16,7 @@ import { Ay } from "@stylexjs/stylex";
 import { logger } from "../905/651849";
 import { dayjs } from "../905/920142";
 import { rb, $z, c as _$$c } from "../figma_app/617427";
-import { Ph, o as _$$o } from "../905/160095";
+import { TrackedLink, TrackedLinkPrimitive } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -416,7 +416,7 @@ function B(e) {
             ...Ay.props($.contactSupportBanner),
             children: [jsx(_$$B, {}), jsx("span", {
               children: renderI18nText("org_admin_settings.schedule_cancellation_modal.if_you_cancel.try_another_plan", {
-                contactingSupport: jsx(Ph, {
+                contactingSupport: jsx(TrackedLink, {
                   href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
                   trusted: !0,
                   newTab: !0,
@@ -500,7 +500,7 @@ function G(e) {
               href: n,
               trackingDescriptor: s
             }) => jsx("li", {
-              children: jsxs(_$$o, {
+              children: jsxs(TrackedLinkPrimitive, {
                 ...Ay.props($.ifYouCancelMoreItem),
                 newTab: !0,
                 trusted: !0,
@@ -594,7 +594,7 @@ function z(e) {
           })
         }), jsx("br", {}), jsx("p", {
           children: renderI18nText("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.body2", {
-            contactSupport: jsx(Ph, {
+            contactSupport: jsx(TrackedLink, {
               href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
               trusted: !0,
               newTab: !0,

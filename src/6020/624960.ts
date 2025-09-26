@@ -28,7 +28,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { X } from "../figma_app/313269";
 import { Point } from "../905/736624";
 import { P as _$$P } from "../905/347284";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { M0y } from "../figma_app/27776";
 import { JU, Zk, fI, nV } from "../figma_app/626177";
 import { DE } from "../figma_app/811257";
@@ -77,7 +77,7 @@ let B = function ({
     window.removeEventListener("blur", u);
     window.removeEventListener("focus", u);
   }), [u]);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     title: getI18nString("proto.starting_point_modal.description"),
     initialPosition: new Point(o.x - parsePxInt(M0y), o.y),
     headerSize: "small",

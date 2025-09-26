@@ -204,7 +204,7 @@ function j({
     disabled: i
   });
   return jsxs("div", {
-    className: d()("empty_states--ui3EmptyState--8bWkh", cssBuilderInstance.$$if(r, cssBuilderInstance.bgTransparent, cssBuilderInstance.colorBgSecondary).$),
+    className: d()("empty_states--ui3EmptyState--8bWkh", cssBuilderInstance.if(r, cssBuilderInstance.bgTransparent, cssBuilderInstance.colorBgSecondary).$),
     style: {
       width: t
     },

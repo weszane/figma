@@ -1,8 +1,8 @@
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { QL } from "../905/609392";
 import { getPermissionLevelRoleName } from "../figma_app/12796";
 export function $$s4(e, t) {
-  return XHR.put("/api/team_join_link", {
+  return sendWithRetry.put("/api/team_join_link", {
     team_id: e,
     level: t
   }).then(({

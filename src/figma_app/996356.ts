@@ -1,5 +1,5 @@
 import { createActionCreator } from "../905/73481";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -17,7 +17,7 @@ let $$c1 = createOptimistThunk((e, t) => {
   e.dispatch($$p3({
     creating: !0
   }));
-  XHR.post("/api/org_invites", {
+  sendWithRetry.post("/api/org_invites", {
     org_id: r.currentUserOrgId,
     emails,
     billable_product_key: billableProductKey,
@@ -65,7 +65,7 @@ let $$u0 = createOptimistThunk((e, t) => {
     idpUser
   } = t;
   let n = e.getState();
-  XHR.del(`/api/org_invites/${idpUser.id}`, {
+  sendWithRetry.del(`/api/org_invites/${idpUser.id}`, {
     org_id: n.currentUserOrgId
   }).then(t => {
     e.dispatch($$_4({

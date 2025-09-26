@@ -3,7 +3,7 @@ import { useCallback, useRef, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import o from "classnames";
 import { Oy, EF, t9, FJ } from "../905/504768";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { selectCurrentUser } from "../905/372672";
 import { _ as _$$_ } from "../figma_app/433187";
 import { Kb, ny } from "../905/552753";
@@ -178,10 +178,10 @@ let y = (e, t) => {
 };
 let v = (e, t) => `FEED_TILE_EMOJI_PICKER-${e}${t ? `-${t}` : null}`;
 export function $$w2(e, t) {
-  return BK(v(t, e?.id)).showing;
+  return useDropdown(v(t, e?.id)).showing;
 }
 let T = (e, t, n, i) => {
-  let o = BK(v(t, e?.id));
+  let o = useDropdown(v(t, e?.id));
   let s = useCallback(e => {
     i(e.shortcodes);
     o.hide();

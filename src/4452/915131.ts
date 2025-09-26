@@ -36,7 +36,7 @@ import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { e as _$$e } from "../905/393279";
 import { z6 } from "../figma_app/805373";
 import { j as _$$j, F as _$$F } from "../4452/869669";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { _9, J4, YU, Kd, Iz } from "../figma_app/907616";
 import { o6, gy } from "../905/986349";
 import { confirmOrgGuestInviteModal } from "../905/154112";
@@ -279,7 +279,7 @@ export let $$K0 = registerModal(function (e) {
   }
   return jsx(TrackingProvider, {
     name: "Team Creation",
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: 1 === er ? getI18nString("team_creation.add_people_to_team_name", {
         teamName: eT
       }) : getI18nString("team_creation.org_modal_title_sc"),

@@ -76,14 +76,14 @@ import { qf } from "../4452/780544";
 import { g as _$$g } from "../4452/983384";
 import { e as _$$e2 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { Clh } from "../figma_app/6204";
 import { k as _$$k3 } from "../905/443820";
 import { U as _$$U } from "../905/275247";
 import { n as _$$n } from "../4452/550447";
 import { a as _$$a } from "../905/964520";
 import { V as _$$V2 } from "../figma_app/312987";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { x1, U0, cp, Mc, eF as _$$eF, jR, P_, M2, $h, KY, h4 } from "../4452/710166";
 import { oi } from "../figma_app/527041";
 var u = c;
@@ -161,7 +161,7 @@ function eR(e) {
       canShow: e => !e
     });
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     clickOutsideToHide: !0,
     description: renderI18nText("admin_dashboard.seat_requests.seat_approval_settings_onboarding_overlay.description"),
     emphasized: !0,
@@ -244,7 +244,7 @@ function eL({
 }
 function eB(e) {
   let t = useDispatch();
-  let a = Um();
+  let a = useDropdownState();
   let n = a?.type === e.type;
   return jsxs(_$$V2, {
     showingDropdown: n,
@@ -811,7 +811,7 @@ export function $$e$0({
     return jsxs("div", {
       role: "button",
       tabIndex: 0,
-      className: cssBuilderInstance.flex.gap8.itemsCenter.font11.fontMedium.lh16.mr8.py4.px8.$$if(ti === a, cssBuilderInstance.colorText.bRadius5.colorBgPressed, cssBuilderInstance.colorTextSecondary).$,
+      className: cssBuilderInstance.flex.gap8.itemsCenter.font11.fontMedium.lh16.mr8.py4.px8.if(ti === a, cssBuilderInstance.colorText.bRadius5.colorBgPressed, cssBuilderInstance.colorTextSecondary).$,
       onClick: () => {
         tl(a);
         td(a);
@@ -1005,7 +1005,7 @@ export function $$e$0({
       title: getI18nString("admin_dashboard.requests.seat_title"),
       rightActions: !tR || tm.length < 1 ? ae : void 0
     }), jsx("div", {
-      className: u()(M2, cssBuilderInstance.$$if(!tR || 0 === tm.length, cssBuilderInstance.pt4, cssBuilderInstance.pt12).$),
+      className: u()(M2, cssBuilderInstance.if(!tR || 0 === tm.length, cssBuilderInstance.pt4, cssBuilderInstance.pt12).$),
       children: jsx(Cj, {
         actionBar: "approving_all" === e$ ? void 0 : t => tG ? jsx("div", {
           className: cssBuilderInstance.w150.$,

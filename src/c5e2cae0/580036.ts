@@ -13,7 +13,7 @@ import { A as _$$A } from "../5885/54359";
 import { CurrencySwitcherDropdown } from "../905/251759";
 import { UpgradeAction } from "../905/370443";
 import { withTrackedClick } from "../figma_app/831799";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { isNonUsdUserCurrency, getAllowedCartCurrencies } from "../figma_app/514043";
 import { BillingCycle } from "../figma_app/831101";
 import { x as _$$x } from "../c5e2cae0/907085";
@@ -42,7 +42,7 @@ export function $$b0({
 }) {
   let R = !!t;
   let O = isNonUsdUserCurrency();
-  let D = Um();
+  let D = useDropdownState();
   let [B, L] = function (e, t, a, s) {
     let [i, l] = useState(!1);
     let n = useCallback((e, t) => !!(s && e && !_$$A(e, t)), [s]);

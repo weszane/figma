@@ -56,7 +56,7 @@ export function getFullscreenFile(state: AppState): any | null {
   }
   return null;
 }
-export function getSelectedFile(state: AppState): any | null {
+export function getSelectedFile(state: {selectedView: any; fileByKey: any}): any | null {
   const fileKey = getFileKeyFromSelectedView(state.selectedView);
   return fileKey ? state.fileByKey[fileKey] ?? null : null;
 }

@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { reportError } from "../905/11";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getFileKey } from "../905/412913";
 import { hubFilePutAll } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
@@ -209,7 +209,7 @@ async function j(e, t) {
     return;
   }
   try {
-    r = await XHR.post("/api/design_systems/components_state_groups", {
+    r = await sendWithRetry.post("/api/design_systems/components_state_groups", {
       component_keys: Array.from(i),
       state_group_keys: Array.from(a),
       org_id: n.openFile?.parentOrgId

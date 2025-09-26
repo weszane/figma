@@ -47,7 +47,7 @@ export function $$_0({
       },
       children: jsx(C, {})
     }), jsxs("div", {
-      className: cssBuilderInstance.textBodyMedium.minW0.flexGrow1.$$if(!u, cssBuilderInstance.ml10).$,
+      className: cssBuilderInstance.textBodyMedium.minW0.flexGrow1.if(!u, cssBuilderInstance.ml10).$,
       children: ["string" == typeof e ? jsx(_$$h, {
         as: "h2",
         text: e

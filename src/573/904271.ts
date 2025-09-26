@@ -66,7 +66,7 @@ import { Cn } from "../905/225265";
 import { TeamCanEdit } from "../figma_app/43951";
 import { isOnboardingComplete } from "../figma_app/242339";
 import { hasTeamPaidAccess } from "../figma_app/345997";
-import { h as _$$h2 } from "../figma_app/198885";
+import { getSelectedView } from "../figma_app/198885";
 import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655";
 import { selectTeams } from "../905/338617";
 import { sp as _$$sp } from "../figma_app/678300";
@@ -106,7 +106,7 @@ import { D as _$$D } from "../905/367723";
 import { pR, xO } from "../figma_app/585235";
 import { throwTypeError } from "../figma_app/465776";
 import { oz, zq, l$ } from "../figma_app/782261";
-import { V as _$$V } from "../figma_app/473391";
+import { getAssetKeyForSubscription } from "../figma_app/473391";
 import { useLatestRef } from "../figma_app/922077";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { NG } from "../figma_app/709893";
@@ -117,11 +117,11 @@ import { hasResourcePresetKey, hasResourcePresetKeyStatic, isKeyInQNOrR9 } from 
 import { getBasename } from "../905/309735";
 import { $z } from "../figma_app/297733";
 import { T as _$$T2 } from "../905/714785";
-import { n as _$$n2 } from "../905/186638";
+import { useIsComponentFlyoutModalShownForAsset } from "../905/186638";
 import { F as _$$F2 } from "../905/84606";
 import { Y as _$$Y2 } from "../905/411989";
 import { MT, lX } from "../figma_app/588397";
-import { K as _$$K, h as _$$h3 } from "../905/275787";
+import { LibraryItemTileContextMenuType, LibraryItemTileContextMenu } from "../905/275787";
 import { eT as _$$eT } from "../figma_app/116234";
 import { rp, PI, A5, rj } from "../figma_app/703988";
 import { AD, iE, QX, Gr, HR, Bm, UU, OW, Md, Rm, Ki } from "../figma_app/645801";
@@ -140,7 +140,7 @@ import { V as _$$V2 } from "../642/624414";
 import { gNA } from "../figma_app/27776";
 import { M as _$$M } from "../905/540025";
 import { g as _$$g } from "../642/216228";
-import { C as _$$C } from "../905/108595";
+import { useCounter } from "../905/108595";
 import { createConditionalObservableAtom } from "../905/508457";
 import { y0 } from "../figma_app/718307";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -482,13 +482,13 @@ function tS({
     text: t ?? "",
     textRef: A
   });
-  let P = b?.type === _$$K.ASSETS_PANEL ? b?.data?.component : void 0;
+  let P = b?.type === LibraryItemTileContextMenuType.ASSETS_PANEL ? b?.data?.component : void 0;
   let O = P?.node_id === e.node_id;
   let F = c === Bk.List;
   let R = F ? "list-no-padding" : "grid";
   let K = !!query;
-  let H = _$$F2(e, _$$K.ASSETS_PANEL, h, u);
-  let U = _$$n2(e);
+  let H = _$$F2(e, LibraryItemTileContextMenuType.ASSETS_PANEL, h, u);
+  let U = useIsComponentFlyoutModalShownForAsset(e);
   let z = useLatestRef(U);
   let D = !p;
   useEffect(() => {
@@ -734,7 +734,7 @@ function tB({
   for (let [i, c] of r.entries()) {
     let r = o.isList ? v + x * f : v + Math.floor(x / u) * f;
     let g = o.isList ? 0 : 3 + x % u * b;
-    let y = _$$V(c);
+    let y = getAssetKeyForSubscription(c);
     let m = c.library_key ? s?.[c.library_key] : void 0;
     t.push({
       parent: e,
@@ -1108,7 +1108,7 @@ function t9({
   let c = useDispatch();
   let u = useSelector(e => e.dropdownShown);
   let p = useSelector(_$$e_);
-  let y = useSelector(_$$h2);
+  let y = useSelector(getSelectedView);
   let m = useSelector(selectSceneGraph);
   let f = useSelector(selectSceneGraphSelection);
   let b = useSelector(selectTeams);
@@ -1466,7 +1466,7 @@ function t9({
   let $ = s === Bk.List;
   let B = _$$I(Cn.AssetsPanel);
   let V = 0 === scrollContent.length;
-  let W = u?.type === _$$K.ASSETS_PANEL;
+  let W = u?.type === LibraryItemTileContextMenuType.ASSETS_PANEL;
   let G = W && u?.data?.component || null;
   let Y = _$$K3(!0);
   let X = useCallback(() => {
@@ -1534,7 +1534,7 @@ function t9({
         teamId: k?.teamId ?? void 0,
         topOffset: t8,
         width: l.containerWidth
-      }), !!G && jsx(_$$h3, {
+      }), !!G && jsx(LibraryItemTileContextMenu, {
         selectedView: y,
         dropdownShown: u,
         onJumpToLocalComponent: Y,
@@ -1795,7 +1795,7 @@ function sw({
       topLevelParents: n,
       didTopLevelParentsChange: h
     });
-    let g = _$$C();
+    let g = useCounter();
     let y = useCallback(() => {
       c.current = sc;
       g();

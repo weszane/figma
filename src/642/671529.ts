@@ -62,12 +62,12 @@ import { sO } from "../figma_app/21029";
 import { s1 } from "../figma_app/226737";
 import { Rc } from "../figma_app/634146";
 import { tA, rp } from "../figma_app/229710";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { FY, lf, Lp, Ph, ux, KE, eu as _$$eu, eh as _$$eh, By, w1, gq, jG, Mf, yR, iV, A7, tq, wR, qq, R as _$$R, dn, Fo, Ar, K8, ew as _$$ew, Jq, IV } from "../figma_app/386160";
 import { sanitizeAndExtractText } from "../905/973142";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Link } from "../905/438674";
-import { b as _$$b2 } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { Zk, fI } from "../figma_app/626177";
 import { logError } from "../905/714362";
 import { S as _$$S } from "../figma_app/552746";
@@ -76,7 +76,7 @@ import { shouldHandleMultiTouchOrPressure } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { se } from "../642/171234";
 import { j as _$$j } from "../642/638075";
@@ -228,7 +228,7 @@ function ef({
     })
   }) : jsx(zK.Provider, {
     value: zM.CREATE_STYLE,
-    children: jsx(Ao, {
+    children: jsx(DraggableModalManager, {
       title: N(p.styleType),
       headerSize: "small",
       initialWidth: tA,
@@ -282,7 +282,7 @@ function ev({
   stylePreviewShown: e
 }) {
   let t = getShownNonLocalStyle(e);
-  let s = _$$b2({
+  let s = useLibraryFileLink({
     libraryKey: t?.library_key,
     nodeId: t?.node_id
   });
@@ -342,7 +342,7 @@ function eS({
   let _ = f || !y || l === ViewType.BRANCHING;
   return jsx(zK.Provider, {
     value: zM.EDIT_STYLE,
-    children: jsx(Ao, {
+    children: jsx(DraggableModalManager, {
       title: function (e, t) {
         if (t) switch (e) {
           case "FILL":
@@ -438,7 +438,7 @@ function eK({
   let c = useDispatch();
   let u = useAppModelProperty("isReadOnly");
   let h = useAppModelProperty("topLevelMode");
-  let m = Um();
+  let m = useDropdownState();
   let f = Xo();
   let [x, y] = useAtomValueAndSetter(_$$j);
   let _ = useIsFullscreenSitesView();

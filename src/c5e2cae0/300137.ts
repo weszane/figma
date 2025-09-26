@@ -23,9 +23,9 @@ export function $$v0(e) {
     isCampfireCart
   } = e;
   return jsx("div", {
-    style: styleBuilderInstance.$$if(isProCart, styleBuilderInstance.add({
+    style: styleBuilderInstance.if(isProCart, styleBuilderInstance.add({
       marginTop: "-16px"
-    }).mb32, styleBuilderInstance.mt16).$$if(isCampfireCart, styleBuilderInstance.mt16.add({
+    }).mb32, styleBuilderInstance.mt16).if(isCampfireCart, styleBuilderInstance.mt16.add({
       marginBottom: "40px"
     }), styleBuilderInstance.flex.justifyCenter.px16).$,
     children: jsx(y, {
@@ -66,7 +66,7 @@ function y({
       className: cssBuilderInstance.flex.justifyBetween.itemsCenter.minH40.px8.flexGrow1.colorBgWarningTertiary.$,
       style: styleBuilderInstance.add({
         borderRadius: "13px"
-      }).$$if(a, styleBuilderInstance.add({
+      }).if(a, styleBuilderInstance.add({
         maxWidth: t ? "693px" : "758px"
       })).$,
       "data-testid": "campfire-cart-banner",

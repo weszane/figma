@@ -5,7 +5,7 @@ import { createActionCreator } from "../905/73481";
 import { debugState } from "../905/407919";
 import { userColorProfileAtomFamily } from "../905/888985";
 import { WB } from "../905/761735";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { trackUserEvent } from "../figma_app/314264";
 import { FColorSpaceType } from "../figma_app/191312";
 import { M } from "../905/366117";
@@ -75,7 +75,7 @@ export function $$b4({
     eventName: r,
     additionalDataToLog: n
   });
-  let i = XHR.put("/api/user", {
+  let i = sendWithRetry.put("/api/user", {
     color_profile: e
   });
   if (t) WB()?.optimisticallyUpdate({
@@ -84,7 +84,7 @@ export function $$b4({
         colorProfilePreference: e
       }
     }
-  }, i);else {
+  }, i); else {
     let t = debugState.getState().user?.id;
     if (!t) return;
     WB()?.optimisticallyCreate({

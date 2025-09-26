@@ -2,11 +2,11 @@ import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { trackEventAnalytics } from "../905/449184";
 import { WAFImage } from "../905/675859";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 async function l(e) {
   try {
-    await XHR.post("/api/images/retry_resize", e);
-  } catch (e) {}
+    await sendWithRetry.post("/api/images/retry_resize", e);
+  } catch (e) { }
 }
 export function $$d0(e) {
   let [t, i] = useState(!0);

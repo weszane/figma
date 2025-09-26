@@ -1,10 +1,10 @@
 import { BuildStatus } from "../figma_app/763686";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FEventType, FBuildStatusType } from "../figma_app/191312";
 export let $$s0 = new class {
   async recordStatusChange(e) {
     let t = new Date().toISOString();
-    return await XHR.post(`/api/files/${e.fileKey}/dev_mode_activity`, {
+    return await sendWithRetry.post(`/api/files/${e.fileKey}/dev_mode_activity`, {
       nodes: e.nodes,
       activity_data: {
         type: FEventType.STATUS_CHANGE,

@@ -3,7 +3,7 @@ import { initializeTsApiBindings } from "../figma_app/762706";
 import { createDeferredPromise } from "../905/874553";
 import { getFeatureFlags } from "../905/601108";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { yF, LQ } from "../905/777093";
+import { fetchFontList, updateFontList } from "../905/777093";
 import { m as _$$m } from "../905/575846";
 import { gx } from "../905/319279";
 import { vw, f_ } from "../905/189279";
@@ -52,9 +52,9 @@ export async function $$v0(e, t) {
     }), await A(), !prototypeInternal) throw Error("PrototypeLib: error during initialization");
     let e = Q.getLoadTimeTracker();
     let t = [FontSourceType.LOCAL, FontSourceType.GOOGLE];
-    let i = yF(t).then(t => {
+    let i = fetchFontList(t).then(t => {
       e && e.handleFontListLoaded((t.indexFontsList?.length || 0) + (t.localFontsList?.length || 0));
-      LQ(t);
+      updateFontList(t);
     });
     y = getFeatureFlags().prototype_async_font_loading ? Promise.resolve() : i;
     _$$r.end("initializePrototypeLib");

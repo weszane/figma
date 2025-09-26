@@ -17,10 +17,10 @@ import { MoveDraftsTeamData } from "../figma_app/43951";
 import { isOnboardingComplete } from "../figma_app/242339";
 import { N } from "../figma_app/268271";
 import { qo } from "../905/696396";
-import { h as _$$h } from "../905/284399";
+import { OnboardingRenderFrame } from "../905/284399";
 import { $ } from "../figma_app/108485";
 import { hA } from "../figma_app/551322";
-import { q3 } from "../figma_app/450829";
+import { OverlayType } from "../figma_app/450829";
 import { r4m } from "../figma_app/6204";
 export let $$N1 = "Node Count Reached for Draft";
 export function $$C0() {
@@ -75,9 +75,9 @@ export function $$C0() {
     onClickPrimaryCta: t
   }), []);
   _$$E(j.uniqueId, $$N1, U);
-  return jsx(_$$h, {
+  return jsx(OnboardingRenderFrame, {
     isShowing: j.isShowing,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: "Move Drafts Nudge - Team nudge",
     element: B,
     onClickPrimaryCta: () => {

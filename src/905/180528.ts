@@ -15,7 +15,7 @@ import { AutoLayout } from "../905/470281";
 import { getSelectedFile } from "../905/766303";
 import { fV } from "../figma_app/236178";
 import { L1, KP } from "../figma_app/12491";
-import { b as _$$b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { E as _$$E } from "../905/511388";
 import { hasResourcePresetKey } from "../figma_app/255679";
 import { useCurrentUserOrgId } from "../905/845253";
@@ -75,7 +75,7 @@ export function $$O1({
   let j = t?.library_file_name ?? N?.data ?? "";
   let U = fV(i, g);
   let B = hasResourcePresetKey(i);
-  let V = _$$b({
+  let V = useLibraryFileLink({
     libraryKey: i
   });
   let G = useHandleMouseEvent("subscriptionFileViewHeader.backCaret", "mousedown", d);

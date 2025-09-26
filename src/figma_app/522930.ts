@@ -3,7 +3,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { localStorageRef } from "../905/657224";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { pW } from "../905/160095";
+import { TrackedLinkButton } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { V } from "../905/965990";
 import { postUserFlag } from "../905/985254";
@@ -36,7 +36,7 @@ export function $$E0({
       children: renderI18nText("whiteboard.inserts.custom_templates_header")
     }), jsx("div", {
       children: renderI18nText("whiteboard.inserts.custom_templates_description")
-    }), jsx(pW, {
+    }), jsx(TrackedLinkButton, {
       newTab: !0,
       href: A,
       children: renderI18nText("whiteboard.inserts.learn_more")
@@ -74,7 +74,7 @@ function b({
     f();
   }, []);
   return jsxs("div", {
-    className: cssBuilderInstance.bRadius5.flex.flexRow.itemsStart.gap12.itemsCenter.p18.colorBgSecondary.mb20.$$if(e, cssBuilderInstance.m24).$$if(t, cssBuilderInstance.m12.p12.pt16.mb12).$,
+    className: cssBuilderInstance.bRadius5.flex.flexRow.itemsStart.gap12.itemsCenter.p18.colorBgSecondary.mb20.if(e, cssBuilderInstance.m24).if(t, cssBuilderInstance.m12.p12.pt16.mb12).$,
     "data-testid": "teamplates-announcement-card",
     children: [jsx("div", {
       children: jsx($z, {
@@ -90,7 +90,7 @@ function b({
         children: renderI18nText("whiteboard.inserts.custom_templates_description")
       }), jsxs("div", {
         className: cssBuilderInstance.flex.gap8.pt16.$,
-        children: [jsx(pW, {
+        children: [jsx(TrackedLinkButton, {
           newTab: !0,
           href: A,
           children: renderI18nText("whiteboard.inserts.learn_more")

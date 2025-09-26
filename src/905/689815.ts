@@ -2,7 +2,7 @@ import { appendSearchParams } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { isAnyMobile } from "../figma_app/778880";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FEditorType } from "../figma_app/53721";
 async function d(e) {
   let t = {
@@ -11,7 +11,7 @@ async function d(e) {
     team_id: e.teamId
   };
   try {
-    let i = await XHR.post(`/api/${e.isWidget ? "widgets" : "plugins"}/${e.pluginId}/${e.pluginVersionId}/copy_playground_file`, t);
+    let i = await sendWithRetry.post(`/api/${e.isWidget ? "widgets" : "plugins"}/${e.pluginId}/${e.pluginVersionId}/copy_playground_file`, t);
     return i?.data.meta.url;
   } catch (e) {
     return null;

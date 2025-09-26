@@ -6,9 +6,9 @@ import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { QzE } from "../figma_app/6204";
 let m = userFlagExistsAtomFamily("seen_connected_projects_admin_settings_content_tab_overlay");
 let $$g1 = "org_admin_connected_projects_tab_onboarding_key";
@@ -27,8 +27,8 @@ export function $$f0() {
       canShow: e => !e
     });
   });
-  return jsx(rq, {
-    arrowPosition: F_.TOP,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.TOP,
     description: jsx("p", {
       children: renderI18nText("resource_connection.onboarding.connect_an_external_team_to_a_project_to_share_designs_and_resources")
     }),

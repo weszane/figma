@@ -6,12 +6,12 @@ import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { KeyCodes } from "../905/63728";
 import { z3 } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { H } from "../905/286442";
+import { usKeyboardFocusHandler } from "../905/286442";
 import { m as _$$m } from "../figma_app/175364";
 import { c as _$$c2 } from "../905/566438";
 import { TH } from "../figma_app/171177";
-import { B } from "../905/222272";
-import { R$ } from "../905/479155";
+import { FlexBox } from "../905/222272";
+import { useLayoutRerender } from "../905/479155";
 import { k } from "../905/341245";
 import { U } from "../905/172092";
 import { e as _$$e, g as _$$g } from "../905/466584";
@@ -32,7 +32,7 @@ export function $$b2({
   let {
     active,
     target
-  } = H({
+  } = usKeyboardFocusHandler({
     ref: b,
     focusOptions: {
       autoFocusOverride: activeTabId === e,
@@ -85,7 +85,7 @@ export function $$T1({
   onChange: t,
   value: r
 }) {
-  return jsx(B, {
+  return jsx(FlexBox, {
     primary: !1,
     gap: 8,
     fullWidth: !0,
@@ -109,10 +109,10 @@ export function $$I0(e) {
   let {
     active,
     focus
-  } = H({
+  } = usKeyboardFocusHandler({
     ref: t
   });
-  let o = R$();
+  let o = useLayoutRerender();
   return jsx(_$$m, {
     ...e,
     buttonRef: t,

@@ -6,11 +6,11 @@ import o from "classnames";
 import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { M3 } from "../figma_app/119475";
-import { V } from "../figma_app/473391";
+import { getAssetKeyForSubscription } from "../figma_app/473391";
 import { isEligibleElement } from "../figma_app/915774";
 import { getPartnerType } from "../905/853613";
 import { Ew } from "../figma_app/361662";
-import { u as _$$u } from "../905/290607";
+import { setupSwapOrInsertHandler } from "../905/290607";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { isPrimaryWorkflowType } from "../figma_app/646357";
 import { u2 } from "../figma_app/807786";
@@ -19,7 +19,7 @@ import { T as _$$T } from "../905/714785";
 import { useComponentFlyoutModal } from "../figma_app/608944";
 import { J } from "../figma_app/636279";
 import { mZ } from "../figma_app/76115";
-import { n as _$$n } from "../905/186638";
+import { useIsComponentFlyoutModalShownForAsset } from "../905/186638";
 import { ZV } from "../figma_app/188908";
 import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { QT } from "../figma_app/645801";
@@ -59,11 +59,11 @@ function R({
   let d = useContext(U);
   let _ = useSelector(selectOpenFileKey);
   let h = J(o.item, o.sectionPosition, o.sectionNameForTracking);
-  let m = _$$n(o.item);
+  let m = useIsComponentFlyoutModalShownForAsset(o.item);
   let {
     isFlyoutOpen
   } = useComponentFlyoutModal();
-  let y = _$$u({
+  let y = setupSwapOrInsertHandler({
     canSwap: !0,
     openFileKey: _ ?? "",
     sourceForTracking: "Asset Panel",
@@ -81,7 +81,7 @@ function R({
   } = M3({
     path: [1, t],
     column: r ? null : e,
-    id: V(o.item),
+    id: getAssetKeyForSubscription(o.item),
     onFocus: T
   });
   let C = $$P0({

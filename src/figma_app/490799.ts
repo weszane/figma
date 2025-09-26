@@ -22,9 +22,9 @@ export function $$m1({
 }) {
   return jsxs("div", {
     "data-testid": m,
-    style: styleBuilderInstance.$$if(!o, {
+    style: styleBuilderInstance.if(!o, {
       borderRadius: "0px"
-    }).$$if(void 0 !== g, {
+    }).if(void 0 !== g, {
       padding: g + "px"
     }).$,
     className: l()({

@@ -22,9 +22,9 @@ export class PerformanceMetricsTracker {
   i18nLocale: string = 'en'
 
   /**
-   * Logs user state info from an XHR response.
+   * Logs user state info from an sendWithRetry response.
    * Original method name: logUserStateInfo
-   * @param e - The XHR response object
+   * @param e - The sendWithRetry response object
    */
   logUserStateInfo(e: { responseURL: string, status: number }) {
     // Early return if performance API is not available

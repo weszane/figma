@@ -11,8 +11,8 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { getUserCreatedAt } from "../905/372672";
 import { MULTIPLAYER_USER_STATE_CHANGE } from "../figma_app/915202";
 import { N } from "../figma_app/268271";
-import { h as _$$h2 } from "../905/284399";
-import { q3 } from "../figma_app/450829";
+import { OnboardingRenderFrame } from "../905/284399";
+import { OverlayType } from "../figma_app/450829";
 import { aI5, ar0 } from "../figma_app/6204";
 import { trackEventAnalytics } from "../905/449184";
 import { openWindow } from "../905/508367";
@@ -111,14 +111,14 @@ export function $$M0() {
   useSingleEffect(w);
   E(y.uniqueId, MULTIPLAYER_USER_STATE_CHANGE, w);
   return jsxs(Fragment, {
-    children: [jsx(_$$h2, {
+    children: [jsx(OnboardingRenderFrame, {
       element: ({
         onClickPrimaryCta: e
       }) => jsx(k, {
         onDismissModal: e
       }),
       isShowing: y.isShowing,
-      modalType: q3.WALK_THROUGH,
+      modalType: OverlayType.WALK_THROUGH,
       onClickPrimaryCta: M,
       onClose: y.complete,
       onManualDismiss: y.complete,
@@ -127,14 +127,14 @@ export function $$M0() {
       trackingContextName: "multiplayer_onboarding",
       userFlagOnShow: I,
       width: 268
-    }), jsx(_$$h2, {
+    }), jsx(OnboardingRenderFrame, {
       element: ({
         dismissModal: e
       }) => jsx(P, {
         onDismissModal: e
       }),
       isShowing: C.isShowing,
-      modalType: q3.WALK_THROUGH,
+      modalType: OverlayType.WALK_THROUGH,
       onClickPrimaryCta: C.complete,
       onClose: C.complete,
       onManualDismiss: C.complete,

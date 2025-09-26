@@ -4,10 +4,10 @@ import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { M3 } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
-import { a as _$$a, i as _$$i } from "../905/44915";
+import { setupAutoFocusHandler, setupKeyboardNavigationFocus } from "../905/44915";
 import { A } from "../905/780920";
 import { c as _$$c } from "../905/566438";
-import { L0, AM, AD, zp } from "../905/479155";
+import { useLayoutRegistration, GridLayoutContext, LayoutProvider, useGridItemRegistration } from "../905/479155";
 import { k } from "../905/341245";
 import { U as _$$U } from "../905/172092";
 export function $$g0({
@@ -25,14 +25,14 @@ export function $$g0({
     tracker,
     index,
     isPrimaryLayout
-  } = L0(m, l);
+  } = useLayoutRegistration(m, l);
   let _ = useMemo(() => ({
     trackerRef: tracker,
     layoutIndex: index,
     columns: t,
     primary: isPrimaryLayout
   }), [t, isPrimaryLayout, index, tracker]);
-  return jsx(AM.Provider, {
+  return jsx(GridLayoutContext.Provider, {
     value: _,
     children: jsx("div", {
       ref: m,
@@ -43,7 +43,7 @@ export function $$g0({
         gap: `${i}px`
       },
       "data-testid": u,
-      children: jsx(AD, {
+      children: jsx(LayoutProvider, {
         children: jsx(A.Provider, {
           value: d,
           children: e
@@ -78,7 +78,7 @@ export function $$g0({
       layoutIndex,
       columnIndex,
       inPrimaryLayout
-    } = zp(x, f);
+    } = useGridItemRegistration(x, f);
     let {
       isFocused,
       isFauxFocused,
@@ -96,7 +96,7 @@ export function $$g0({
       defaultFocusOptions: E
     });
     let D = I ? isFauxFocused : isFocused;
-    let L = _$$a({
+    let L = setupAutoFocusHandler({
       isPrimaryLayout: inPrimaryLayout,
       itemIndex,
       layoutIndex,
@@ -104,7 +104,7 @@ export function $$g0({
     });
     let {
       focus
-    } = _$$i({
+    } = setupKeyboardNavigationFocus({
       keyboardNavigationItem,
       shouldAutoFocus: L,
       enableFauxFocus: I
@@ -141,7 +141,7 @@ export function $$g0({
     }), [D]);
     return jsx("button", {
       className: cssBuilderInstance.flex.flexColumn.$,
-      style: styleBuilderInstance.$$if(f, {
+      style: styleBuilderInstance.if(f, {
         gridColumn: "1 / -1"
       }).$,
       onClick: V,

@@ -14,8 +14,8 @@ import { e as _$$e2 } from "../905/621515";
 import { d as _$$d } from "../figma_app/603561";
 import { selectUserFlag } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
-import { rq } from "../905/425180";
-import { F_ } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/858282";
 import { d8X } from "../figma_app/6204";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -52,8 +52,8 @@ function k({
     isShowing && N();
   });
   let I = e ? renderI18nText("billing_modals.seat_approval_overlay.description") : renderI18nText("billing_modals.seat_approval_overlay.org_description");
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: I,
     disableHighlight: !0,
     emphasized: !0,

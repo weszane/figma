@@ -8,7 +8,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { rY, XA } from "../905/985490";
 import { handleModalError, handleError, getDiffVersion } from "../905/760074";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
@@ -171,7 +171,7 @@ let D = async (e, t, i, n, r) => {
         checkpoint_diff
       }
     }
-  } = await XHR.post(`/api/file_diff/checkpoint_diff/${d}/${t}?${p.toString()}`);
+  } = await sendWithRetry.post(`/api/file_diff/checkpoint_diff/${d}/${t}?${p.toString()}`);
   getFeatureFlags().run_fig_diff_job && S.enqueueFigDiffAnalysis(e, t, checkpoint_diff.from_checkpoint_key, checkpoint_diff.to_checkpoint_key, d).catch(e => {
     reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e);
   });
@@ -186,7 +186,7 @@ let D = async (e, t, i, n, r) => {
 let L = async e => {
   let {
     data
-  } = await XHR.crossOriginGetAny(e, null, {
+  } = await sendWithRetry.crossOriginGetAny(e, null, {
     responseType: "arraybuffer"
   });
   return data;
@@ -433,7 +433,7 @@ let H = async (e, t, i, n, r, a, s) => {
   try {
     let o = s;
     o || (o = (await D(e, t, i, n, r)).key);
-    return XHR.post(`/api/file_merge/${a}/${t}?include_reason=true`, {
+    return sendWithRetry.post(`/api/file_merge/${a}/${t}?include_reason=true`, {
       checkpoint_diff_key: o
     }).then(e => e, e => e);
   } catch (e) {

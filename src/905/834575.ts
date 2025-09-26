@@ -1,5 +1,5 @@
 import { AccessLevelEnum } from '../905/557142'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { createNoOpValidator } from '../figma_app/181241'
 import { isAddressEmpty } from '../figma_app/831101'
 
@@ -192,7 +192,7 @@ export class TeamAPIClient {
    * Updates AI data sharing.
    */
   updateAiDataSharing = (e: any) => {
-    return XHR.put(`/api/teams/${e.teamId}/ai_data_sharing`, { enabled: e.enabled })
+    return sendWithRetry.put(`/api/teams/${e.teamId}/ai_data_sharing`, { enabled: e.enabled })
   }
 
   // Validation methods

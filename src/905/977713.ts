@@ -12,7 +12,7 @@ import { W as _$$W } from '../905/592530';
 import { getVisibleTheme } from '../905/640017';
 import { L as _$$L } from '../905/704296';
 import { j as jaa } from '../905/834956';
-import { BK } from '../905/848862';
+import { useDropdown } from '../905/848862';
 import { k as _$$k } from '../905/888808';
 import { A as _$$A } from '../905/891805';
 import { a as _$$a } from '../905/964520';
@@ -55,7 +55,7 @@ function R({
   let [N, P] = useAtomValueAndSetter(k);
   let O = useRef(null);
   let D = useDispatch();
-  let L = BK('search-options-dropdown');
+  let L = useDropdown('search-options-dropdown');
   let [F, M] = useState(0);
   let [j, U] = useState(0);
   let B = useRef(new Map());

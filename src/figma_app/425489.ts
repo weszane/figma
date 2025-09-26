@@ -7,7 +7,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { replaceSelection } from "../figma_app/741237";
 import { interactionTestAtom } from "../figma_app/617727";
 import { Zh } from "../figma_app/2590";
-import { s as _$$s } from "../905/291518";
+import { getValidPrototypeNodeId } from "../905/291518";
 import { Ew } from "../figma_app/170018";
 import { hF, l5, HS } from "../figma_app/354027";
 import { A as _$$A } from "../905/991888";
@@ -420,7 +420,7 @@ let A = (e, t) => {
     currentPresentedNode
   } = e;
   if (currentPresentedNode && null == t.get(currentPresentedNode)) {
-    let t = _$$s();
+    let t = getValidPrototypeNodeId();
     return t ? (_$$A.navigateTo(t), {
       ...e,
       requestedNodeId: t,

@@ -17,7 +17,7 @@ import { en, GT } from '../905/759470';
 import { uploadMultiple, uploadRequest } from '../905/827765';
 import { v as _$$v } from '../905/871922';
 import { getValueOrFallback } from '../905/872825';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { IMAGE_TYPES, VIDEO_TYPE_VALUES } from '../905/966582';
 import { isSameWorkspaceIdentity } from '../905/967587';
 import { i as _$$i } from '../905/970229';
@@ -484,7 +484,7 @@ export function $$eI20(e, t) {
     try {
       if (i && getFeatureFlags().ext_s3_url_use_figma_domains) {
         let e = await readImageBytes(u);
-        await XHR.crossOriginPut(i, e, {
+        await sendWithRetry.crossOriginPut(i, e, {
           raw: !0,
           headers: {
             'Content-Type': u.type,
@@ -600,7 +600,7 @@ export function $$eL2(e, t, r) {
       signedCloudfrontUrl
     } = e;
     if (signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains) {
-      return XHR.crossOriginPut(signedCloudfrontUrl, r, {
+      return sendWithRetry.crossOriginPut(signedCloudfrontUrl, r, {
         raw: !0,
         headers: {
           'Content-Type': t.type,
@@ -612,17 +612,17 @@ export function $$eL2(e, t, r) {
     Object.entries(fields).forEach(([e, t]) => s.append(e, t));
     s.set('Content-Type', t.type);
     s.append('file', t);
-    return XHR.crossOriginPost(imagePath, s, {
+    return sendWithRetry.crossOriginPost(imagePath, s, {
       raw: !0,
       headers: {
         'Content-Type': t.type
       }
     });
   }
-  return typeof e == 'string' ? XHR.crossOriginPut(e, r, {
+  return typeof e == 'string' ? sendWithRetry.crossOriginPut(e, r, {
     raw: !0,
     headers: {
-      ...XHR.defaults.headers,
+      ...sendWithRetry.defaults.headers,
       'Content-Type': t.type
     }
   }) : Promise.reject(new Error('Invalid presigned_url'));
@@ -636,7 +636,7 @@ export function $$eP12(e, t) {
       signedCloudfrontUrl
     } = e;
     if (signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains) {
-      return XHR.crossOriginPut(signedCloudfrontUrl, t, {
+      return sendWithRetry.crossOriginPut(signedCloudfrontUrl, t, {
         raw: !0,
         headers: {
           'Content-Type': r,
@@ -648,17 +648,17 @@ export function $$eP12(e, t) {
     Object.entries(fields).forEach(([e, t]) => s.append(e, t));
     s.set('Content-Type', r);
     s.append('file', new Blob([t]));
-    return XHR.crossOriginPost(imagePath, s, {
+    return sendWithRetry.crossOriginPost(imagePath, s, {
       raw: !0,
       headers: {
         'Content-Type': r
       }
     });
   }
-  return typeof e == 'string' ? XHR.crossOriginPut(e, t, {
+  return typeof e == 'string' ? sendWithRetry.crossOriginPut(e, t, {
     raw: !0,
     headers: {
-      ...XHR.defaults.headers,
+      ...sendWithRetry.defaults.headers,
       'Content-Type': r
     }
   }) : Promise.reject(new Error('Invalid presigned_url'));
@@ -682,7 +682,7 @@ export async function $$eD7(e, t, r, n, s) {
     } = video;
     if (signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains && getFeatureFlags().ext_s3_url_videos_use_figma_domains) {
       let e = encodeBase64(sha1BytesFromHex(r.sha1));
-      c = XHR.crossOriginPut(signedCloudfrontUrl, r.bytes, {
+      c = sendWithRetry.crossOriginPut(signedCloudfrontUrl, r.bytes, {
         raw: !0,
         headers: {
           'Content-Type': 'video/mp4',
@@ -717,7 +717,7 @@ async function ek(e, t, r, n, i, a) {
   s.append('resourceType', r);
   s.append('blobUploadCommitKey', a);
   return {
-    videoFileUuid: (await XHR.post(`/api/upnode/video?${s.toString()}`)).data.meta.video_file_uuid,
+    videoFileUuid: (await sendWithRetry.post(`/api/upnode/video?${s.toString()}`)).data.meta.video_file_uuid,
     sha1: e,
     videoThumbnailSha1: i
   };

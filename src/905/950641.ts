@@ -67,11 +67,11 @@ function N({
   return jsxs("div", {
     className: cssBuilderInstance.colorBgSecondary.bRadius7.bSolid.b1.colorBorder.inlineBlock.p2.$,
     children: [jsx("button", {
-      className: cssBuilderInstance.font11.lh16.py4.px8.bRadius5.$$if(e !== SubscriptionType.MONTHLY, cssBuilderInstance.colorBgSecondary.colorTextSecondary).$,
+      className: cssBuilderInstance.font11.lh16.py4.px8.bRadius5.if(e !== SubscriptionType.MONTHLY, cssBuilderInstance.colorBgSecondary.colorTextSecondary).$,
       onClick: () => t(SubscriptionType.MONTHLY),
       children: renderI18nText("plan_comparison.campfire.monthly")
     }), jsx("button", {
-      className: cssBuilderInstance.font11.lh16.py4.px8.bRadius5.$$if(e !== SubscriptionType.ANNUAL, cssBuilderInstance.colorBgSecondary.colorTextSecondary).$,
+      className: cssBuilderInstance.font11.lh16.py4.px8.bRadius5.if(e !== SubscriptionType.ANNUAL, cssBuilderInstance.colorBgSecondary.colorTextSecondary).$,
       onClick: () => t(SubscriptionType.ANNUAL),
       children: renderI18nText("plan_comparison.campfire.annual")
     })]

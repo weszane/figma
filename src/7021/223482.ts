@@ -18,7 +18,7 @@ import { isBigmaEnabledSimple } from "../figma_app/336853";
 import { ProductTierEnum, RenewalTermEnum } from "../905/712921";
 import { N as _$$N } from "../figma_app/268271";
 import { w as _$$w } from "../7021/108292";
-import { M } from "../905/152487";
+import { OnboardingSequence } from "../905/152487";
 import { kSi } from "../figma_app/6204";
 let $$C1 = liveStoreInstance.Mutation(({
   planParentId: e,
@@ -81,7 +81,7 @@ export function $$$$k0({
   let {
     orgTermsInfo
   } = n.data;
-  return jsx(M, {
+  return jsx(OnboardingSequence, {
     isShowing,
     children: jsx(SeatBillingTermsModal, {
       orgId: e?.id,

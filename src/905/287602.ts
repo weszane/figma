@@ -1,29 +1,61 @@
-import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { Fragment as _$$Fragment } from "react";
-import { mV } from "../905/792802";
-export function $$s0({
-  text: e,
-  query: t,
-  highlightFontWeight: i
-}) {
-  if ("" === t.trim()) return jsx(Fragment, {
-    children: e
-  });
-  let s = mV(e, t);
-  return jsx(Fragment, {
-    children: s.map(([e, t], a) => t > 0 ? jsxs(_$$Fragment, {
-      children: [jsx("span", {
-        className: "highlight--matchingText--HIp6r",
-        style: {
-          fontWeight: i ?? 600
-        },
-        children: e.substring(0, t)
-      }), t < e.length && jsx(Fragment, {
-        children: e.substring(t, e.length)
-      })]
-    }, a) : jsx(_$$Fragment, {
-      children: e
-    }, a))
-  });
+
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { highlightMatches } from '../905/792802'
+/**
+ * Props for HighlightedText component (originally $$s0).
+ */
+export interface HighlightedTextProps {
+  text: string
+  query: string
+  highlightFontWeight?: number
 }
-export const f = $$s0;
+
+/**
+ * Renders text with highlighted matches for the query.
+ * Original function: $$s0
+ */
+export const HighlightedText: React.FC<HighlightedTextProps> = ({
+  text,
+  query,
+  highlightFontWeight,
+}) => {
+  // Early return if query is empty or whitespace
+  if (query.trim() === '') {
+    return jsx(Fragment, { children: text })
+  }
+
+  // Find matches in the text
+  const matches = highlightMatches(text, query)
+
+  /**
+   * Render each match, highlighting the matching part.
+   */
+  return jsx(Fragment, {
+    children: matches.map(([segment, matchLength], idx) =>
+      matchLength > 0
+        ? (
+            jsxs(Fragment, {
+              children: [
+                jsx('span', {
+                  className: 'highlight--matchingText--HIp6r',
+                  style: { fontWeight: highlightFontWeight ?? 600 },
+                  children: segment.substring(0, matchLength),
+                }),
+                matchLength < segment.length
+                && jsx(Fragment, {
+                  children: segment.substring(matchLength),
+                }),
+              ],
+            }, idx)
+          )
+        : (
+            jsx(Fragment, { children: segment }, idx)
+          ),
+    ),
+  })
+}
+
+/**
+ * Export for legacy compatibility (originally f).
+ */
+export const f = HighlightedText

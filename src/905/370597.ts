@@ -33,7 +33,7 @@ import { z as _$$z } from "../905/654860";
 import { cq } from "../905/794154";
 import { s as _$$s3 } from "../905/169089";
 import { _M, ID } from "../905/487011";
-import { lc, dk } from "../905/278499";
+import { AIActionInstructionType, AIActionInstructionTrigger } from "../905/278499";
 import { dd } from "../figma_app/604494";
 import { o as _$$o } from "../905/223420";
 import { t as _$$t2 } from "../905/605191";
@@ -42,7 +42,7 @@ import { _ as _$$_ } from "../905/144222";
 import { f as _$$f } from "../905/54715";
 import { styleBuilderInstance } from "../905/941192";
 import { xH } from "../figma_app/249941";
-import { b as _$$b2 } from "../905/222272";
+import { LayoutContainer } from "../905/222272";
 import { n as _$$n } from "../905/895449";
 import { q as _$$q } from "../905/516087";
 import { fu, oz } from "../figma_app/538006";
@@ -238,7 +238,7 @@ export function $$ec2({
       children: [jsx(em, {}), eh() > 1 && jsx("div", {
         className: cssBuilderInstance.py4.px8.$,
         ref: v,
-        children: jsxs(_$$b2, {
+        children: jsxs(LayoutContainer, {
           primary: !1,
           gap: 8,
           align: "center",
@@ -346,8 +346,8 @@ export let $$eu0 = forwardRef(({
   let o = useCallback(t => {
     i && (ID({
       ...e,
-      interaction: lc.EXECUTE,
-      interaction_type: dk.BUTTON_CLICK
+      interaction: AIActionInstructionType.EXECUTE,
+      interaction_type: AIActionInstructionTrigger.BUTTON_CLICK
     }), $$e_4(G4.ACTIONS_VISUAL_SEARCH_PROMPT, t));
   }, [i, e]);
   let l = useCallback(() => {
@@ -412,7 +412,7 @@ function em() {
     getFeatureFlags().fragment_search_tweaks && SceneGraphHelpers?.clearSelection();
   }, [i]);
   return jsxs("div", {
-    className: cssBuilderInstance.flex.itemsCenter.justifyBetween.px8.py12.$$if(eh() > 1, cssBuilderInstance.bSolid.bb1.colorBorder).$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyBetween.px8.py12.if(eh() > 1, cssBuilderInstance.bSolid.bb1.colorBorder).$,
     ref: a,
     children: [jsxs("div", {
       className: cssBuilderInstance.flex.gap8.itemsCenter.$,

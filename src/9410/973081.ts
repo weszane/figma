@@ -14,7 +14,7 @@ import { P as _$$P2 } from '../905/36308';
 import { z4 } from '../905/37051';
 import { A as _$$A3 } from '../905/51490';
 import { A as _$$A9 } from '../905/51743';
-import { u as _$$u2 } from '../905/56919';
+import { useTabState } from '../905/56919';
 import { R as _$$R3 } from '../905/57445';
 import { KeyCodes, isExactModifier, ModifierKeyCodes } from '../905/63728';
 import { addRecentlyUsedAction } from '../905/73603';
@@ -51,7 +51,7 @@ import { parseLinkForContext, copyHyperlinkToClipboard } from '../905/250387';
 import { v as _$$v } from '../905/266815';
 import { HiddenLabel, Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
-import { Ek } from '../905/278499';
+import { AIActionProgressType } from '../905/278499';
 import { Ay as _$$Ay, Tr } from '../905/281495';
 import { G as _$$G2 } from '../905/298663';
 import { VisualBellActions } from '../905/302958';
@@ -118,7 +118,7 @@ import { l as _$$l3 } from '../905/716947';
 import { x as _$$x3 } from '../905/719609';
 import { Point } from '../905/736624';
 import { zE } from '../905/738636';
-import { Ao } from '../905/748636';
+import { DraggableModalManager } from '../905/748636';
 import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { getPermissionsAndView } from '../905/766303';
 import { isFullscreenDevHandoffView } from '../905/782918';
@@ -127,7 +127,7 @@ import { zi } from '../905/824449';
 import { KeyboardReceiver } from '../905/826900';
 import { j as _$$j2 } from '../905/834956';
 import { TabsPrimitiveTabStrip } from '../905/840133';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { isVsCodeEnvironment } from '../905/858738';
 import { VariableStyleId } from '../905/859698';
 import { ud } from '../905/862913';
@@ -135,7 +135,7 @@ import { defaultSessionLocalIDString } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
 import { useHasParentOrgId } from '../905/882262';
 import { ManuallyLabeledCheckbox } from '../905/909715';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { bL } from '../905/911410';
 import { Y as _$$Y2 } from '../905/912236';
 import { debounce } from '../905/915765';
@@ -1102,7 +1102,7 @@ function tS() {
         children: m
       })]
     })
-  }) : jsx(Ao, {
+  }) : jsx(DraggableModalManager, {
     title: getI18nString('fullscreen.properties_panel.export'),
     headerSize: 'small',
     initialPosition: h,
@@ -1295,7 +1295,7 @@ class tk extends PureComponent {
           shortcut: null,
           target: null
         }),
-        interaction: Ek.STOP
+        interaction: AIActionProgressType.STOP
       };
       cT(JT.AUTO_RENAME_LAYERS);
       _$$nP(t);
@@ -4640,7 +4640,7 @@ function nm(e, t) {
     flags: nf,
     callback: async (e, t, r) => {
       try {
-        let e = await XHR.post('/api/spell-check-words', {
+        let e = await sendWithRetry.post('/api/spell-check-words', {
           word: i
         });
         if (e.status === 200) {
@@ -4905,7 +4905,7 @@ let nN = {
   }
 };
 function nM() {
-  let e = Um();
+  let e = useDropdownState();
   let t = useDispatch();
   let i = Gt(e?.data.pluginId, e?.data.triggeredFrom);
   let n = dR(e?.data.pluginId, e?.data.triggeredFrom);
@@ -8007,7 +8007,7 @@ function sH({
   let f = Object.fromEntries(m.map(({
     id: e
   }) => [e, e !== 'spacer']));
-  let [g, x, y] = _$$u2(f, {
+  let [g, x, y] = useTabState(f, {
     defaultActive: s.initActiveTab ?? sK(c),
     recordingKey: s.recordingKey
   });

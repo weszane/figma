@@ -62,7 +62,7 @@ import { dayjs } from "../905/920142";
 import { useLatestRef } from "../figma_app/922077";
 import { isDevEnvironment } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { DeepLinkType } from "../905/15667";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { useParentOrgOfOpenFile } from "../figma_app/543529";
@@ -204,8 +204,8 @@ import { nM as _$$nM, nc as _$$nc, NJ } from "../figma_app/570630";
 import { jx, Ic } from "../figma_app/198516";
 import { u as _$$u } from "../1156/83782";
 import { UpgradeAction } from "../905/370443";
-import { rq as _$$rq } from "../905/425180";
-import { F_ } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/858282";
 import { kC, dY, x1 } from "../1156/116225";
 import { z as _$$z3 } from "../905/634240";
 import { Go } from "../figma_app/97696";
@@ -925,7 +925,7 @@ function tF({
   onClose: t
 }) {
   if (e.length <= 0 || e.length > 3) return null;
-  let n = e.map(e => jsx(Ph, {
+  let n = e.map(e => jsx(TrackedLink, {
     newTab: !0,
     href: getCommunityFileUrl(e.hubFileId),
     trusted: !0,
@@ -1008,7 +1008,7 @@ function tB({
   let n = t.unwrapOr(null)?.tier;
   let i = getI18nString("figmake.meter_limit.enjoy_more_ai_credits");
   let s = renderI18nText("figmake.meter_limit.used_all_your_credits", {
-    learnMoreLink: jsx(Ph, {
+    learnMoreLink: jsx(TrackedLink, {
       newTab: !0,
       trusted: !0,
       href: _t,
@@ -1137,7 +1137,7 @@ function tW() {
       case _$$ee.MAKE_UNAVAILABLE_ON_PLAN:
         return {
           title: renderI18nText("figmake.view_only.unavailable_on_plan", {
-            learnMoreLink: jsx(Ph, {
+            learnMoreLink: jsx(TrackedLink, {
               newTab: !0,
               trusted: !0,
               href: tL,
@@ -1149,7 +1149,7 @@ function tW() {
       case _$$ee.MAKE_UNAVAILABLE_ON_SEAT:
         return {
           title: renderI18nText("figmake.view_only.unavailable_on_seat", {
-            learnMoreLink: jsx(Ph, {
+            learnMoreLink: jsx(TrackedLink, {
               newTab: !0,
               trusted: !0,
               href: tL,
@@ -1162,7 +1162,7 @@ function tW() {
         return {
           title: renderI18nText("figmake.view_only.coming_soon_title"),
           content: () => renderI18nText("figmake.view_only.check_back_in_coming_weeks_learn_more", {
-            learnMoreLink: jsx(Ph, {
+            learnMoreLink: jsx(TrackedLink, {
               newTab: !0,
               trusted: !0,
               href: tL,
@@ -4241,8 +4241,8 @@ function im({
   isShowing: t,
   onComplete: n
 }) {
-  return jsx(_$$rq, {
-    arrowPosition: F_.BOTTOM,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.BOTTOM,
     description: renderI18nText("figmake.design_system_imports.selected_design_system_overlay.description"),
     emphasized: !0,
     isShowing: t,

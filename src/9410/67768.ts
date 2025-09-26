@@ -8,9 +8,9 @@ import { isWhiteboardFileType } from "../figma_app/976749";
 import { e as _$$e } from "../905/621515";
 import { Sb } from "../figma_app/101956";
 import { N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { hasJubileePermissionForDesign } from "../figma_app/251115";
-import { F_, EL } from "../905/858282";
+import { ArrowPosition, PositioningStrategy } from "../905/858282";
 import { sP8 } from "../figma_app/6204";
 import { _ as _$$_ } from "../figma_app/91620";
 let $$x2 = atom(!1);
@@ -41,13 +41,13 @@ export function $$C3() {
   useEffect(() => {
     isShowing && (!i || C) && complete();
   }, [complete, i, isShowing, C]);
-  return jsx(rq, {
-    arrowPosition: F_.BOTTOM,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.BOTTOM,
     description: renderI18nText("figjam_ai.ai_actions_callout.description"),
     emphasized: !0,
     isShowing,
     onClose: complete,
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     shouldDisableAnimation: !0,
     targetKey: $$b0,
     testId: "figjam-ai-actions-overlay",

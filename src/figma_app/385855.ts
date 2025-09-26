@@ -4,10 +4,10 @@ import { C } from "../905/222694";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import o from "classnames";
 import { dayjs } from "../905/920142";
-import { B } from "../905/907815";
+import { ImageLoadManager } from "../905/907815";
 import { WAFImage } from "../905/675859";
 import { A as _$$A2 } from "../905/222027";
-import { q } from "../905/600041";
+import { ThumbnailContainer } from "../905/600041";
 import { DesignsList, SizeOption } from "../905/171275";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { J } from "../905/337735";
@@ -93,7 +93,7 @@ export function $$y0({
   });
   let w = t !== DesignsList.SLIDES ? C(o) : void 0;
   let O = t === DesignsList.DEFAULT_DESIGN || t === DesignsList.DEFAULT_WHITEBOARD || t === DesignsList.COOPER;
-  return jsx(q, {
+  return jsx(ThumbnailContainer, {
     borderRadius: b,
     backgroundClassName: l()({
       [Kf]: t === DesignsList.WHITEBOARD || t === DesignsList.DEFAULT_WHITEBOARD,
@@ -102,7 +102,7 @@ export function $$y0({
     }),
     noBorder: T,
     backgroundColor: x ? smartBackgroundColor : w,
-    children: null !== latestThumbnailUrl && jsx(B, {
+    children: null !== latestThumbnailUrl && jsx(ImageLoadManager, {
       enabled: A,
       children: jsx(WAFImage, {
         src: latestThumbnailUrl,

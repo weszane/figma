@@ -1752,14 +1752,14 @@ export class CssBuilder extends CssMixins {
   /**
    * Conditionally adds rules.
    */
-  if(condition: boolean, trueRules: CssBuilder, falseRules?: CssBuilder): CssBuilder {
+  if(condition: boolean, trueRules: CssBuilder, falseRules?: CssBuilder): CssBuilder & Extended {
     return condition ? this.add(trueRules) : falseRules ? this.add(falseRules) : this
   }
 
   /**
    * Case-based rule addition.
    */
-  case(cases: [boolean, CssBuilder][], defaultRules?: CssBuilder): CssBuilder {
+  case(cases: [boolean, CssBuilder][], defaultRules?: CssBuilder): CssBuilder & Extended {
     for (const [condition, rules] of cases) {
       if (condition) {
         return this.add(rules)
@@ -1771,7 +1771,7 @@ export class CssBuilder extends CssMixins {
   /**
    * Matches a key to rules.
    */
-  match(key: string, ruleMap: Record<string, CssBuilder>): CssBuilder {
+  match(key: string, ruleMap: Record<string, CssBuilder>): CssBuilder & Extended {
     const rules = ruleMap[key]
     return rules ? this.add(rules) : this
   }
@@ -1779,7 +1779,7 @@ export class CssBuilder extends CssMixins {
   /**
    * Applies rules based on object properties.
    */
-  with(options: Record<string, boolean>): CssBuilder {
+  with(options: Record<string, boolean>): CssBuilder & Extended {
     const keys = Object.keys(options)
     if (keys.length === 0) {
       return this

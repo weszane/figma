@@ -1,4 +1,4 @@
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
 
 // Types
@@ -115,7 +115,7 @@ export class PluginAPIService {
    * @param orgId - Organization ID (optional)
    */
   async postPluginsBatch(pluginIds: string[], orgId?: string) {
-    return await XHR.post('/api/plugins/batch', {
+    return await sendWithRetry.post('/api/plugins/batch', {
       ids: pluginIds,
       org_id: orgId,
     })

@@ -13,13 +13,13 @@ import { CZ } from "../905/294085";
 import { hO, d3 } from "../figma_app/545293";
 import { l1 } from "../figma_app/502363";
 import { showDropdownThunk } from "../905/929976";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { QB } from "../905/143890";
 import { CreatorResourceType } from "../figma_app/162807";
-import { H } from "../905/286442";
+import { usKeyboardFocusHandler } from "../905/286442";
 import { dd } from "../figma_app/604494";
 import { c as _$$c } from "../905/566438";
-import { R$ } from "../905/479155";
+import { useLayoutRerender } from "../905/479155";
 import { k as _$$k } from "../905/341245";
 export function $$w0({
   entryPoint: e,
@@ -49,12 +49,12 @@ function C({
 }) {
   let s = useRef(null);
   let o = useDispatch();
-  let l = Um();
+  let l = useDropdownState();
   let d = l?.type === e;
   let {
     active,
     target
-  } = H({
+  } = usKeyboardFocusHandler({
     ref: s || createRef(),
     focusOptions: {
       enableAutoFocus: !1
@@ -114,7 +114,7 @@ function T({
     active,
     target,
     focus
-  } = H({
+  } = usKeyboardFocusHandler({
     ref: A || createRef(),
     focusOptions: {
       enableAutoFocus: !1
@@ -132,7 +132,7 @@ function T({
     actionLabel: !1,
     target
   });
-  let R = R$();
+  let R = useLayoutRerender();
   let N = useCallback(() => {
     setTimeout(() => {
       R();

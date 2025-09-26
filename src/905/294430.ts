@@ -59,7 +59,7 @@ import { HiddenLabel, Label } from "../905/270045";
 import eE from "../vendor/805353";
 import { c$ as _$$c$, l6 } from "../905/794875";
 import { g as _$$g } from "../905/412697";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { Z as _$$Z } from "../905/606826";
 import { Ay } from "@stylexjs/stylex";
 import { yb } from "../905/608681";
@@ -2032,7 +2032,7 @@ function tA(e) {
         children: tf(e, g)
       })]
     })
-  }) : jsx(Ao, {
+  }) : jsx(DraggableModalManager, {
     title: p,
     headerSize: "small",
     initialPosition: d,

@@ -1,7 +1,7 @@
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { setupHyperlinkHandler } from "../figma_app/815170";
 import { setupLoadingStateHandler } from "../905/696711";
@@ -15,7 +15,7 @@ export let $$u0 = createOptimistThunk(async (e, t, {
     entrypoint: t.selectedView.subView
   });
   try {
-    let s = XHR.post("/api/community/seller/onboard", {
+    let s = sendWithRetry.post("/api/community/seller/onboard", {
       accepted_seller_tos: !0,
       is_desktop: !!desktopAPIInstance,
       first_name: t.firstName,

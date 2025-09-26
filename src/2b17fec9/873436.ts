@@ -6,7 +6,7 @@ import { createLoadedState } from "../905/723791";
 import { renderI18nText } from "../905/303541";
 import { getObservableValue } from "../figma_app/84367";
 import { WZ } from "../905/893645";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { xT } from "../figma_app/195407";
 import { oh } from "../905/526509";
 import { c8 } from "../2b17fec9/446151";
@@ -35,7 +35,7 @@ export function $$j3({
       description: renderI18nText("whiteboard.ad_onboarding.shapes_sidebar.body"),
       targetKey: $$_2,
       trackingContextName: "AD Onboarding > Shapes Sidebar",
-      arrowPosition: F_.LEFT_TITLE,
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       whenTargetLost: "complete",
       highlightBlue: !0
     }, {
@@ -43,7 +43,7 @@ export function $$j3({
       description: renderI18nText("whiteboard.ad_onboarding.developer_shapes.body"),
       targetKey: $$x0,
       trackingContextName: "AD Onboarding > Developer Shapes",
-      arrowPosition: F_.LEFT_TITLE,
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       onStepShow: () => {
         y || v(!0);
         let e = xT($$x0);
@@ -62,7 +62,7 @@ export function $$j3({
           tool: "shape"
         }), T(!0));
       },
-      arrowPosition: F_.LEFT_TITLE,
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       whenTargetLost: "complete",
       highlightBlue: !0
     }],

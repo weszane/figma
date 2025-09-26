@@ -1,8 +1,8 @@
-import { b } from "../905/275748";
+import { LazyComponentFactory } from "../905/275748";
 function r() {
   return null;
 }
-new b({
+new LazyComponentFactory({
   name: "string_management",
   dependencies: [],
   exports: {

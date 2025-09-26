@@ -1,31 +1,63 @@
-import { useState, useCallback, useMemo, useRef, useEffect } from "react";
-export function $$$$r0(e, t) {
-  let [i, r] = useState();
-  let a = useCallback(() => {
-    r(void 0);
-  }, []);
-  let s = useMemo(() => e.submit ? async () => {
-    r({
-      result: "pending"
-    });
-    t?.();
-    r(await e.submit?.());
-  } : void 0, [e, t]);
-  let o = useRef(!1);
-  let l = useMemo(() => e.clearErrors ? () => {
-    e.clearErrors?.();
-    o.current = !0;
-  } : void 0, [e]);
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+
+/**
+ * Handles draft submission logic for a form-like object.
+ * Original function name: $$$$r0
+ * @param e - Object containing submit, clearErrors, and status properties.
+ * @param onSubmitCallback - Optional callback to execute on submit.
+ * @returns Object with draftSubmissionResult, clearDraftSubmissionResult, and submit handler.
+ */
+export function setupDraftSubmissionHandler(e: {
+  submit?: () => Promise<any>
+  clearErrors?: () => void
+  status?: string
+}, onSubmitCallback?: () => void) {
+  const [draftSubmissionResult, setDraftSubmissionResult] = useState<any>()
+  const clearDraftSubmissionResult = useCallback(() => {
+    setDraftSubmissionResult(undefined)
+  }, [])
+
+  const submit = useMemo(() => {
+    if (!e.submit)
+      return undefined
+    return async () => {
+      setDraftSubmissionResult({ result: 'pending' })
+      onSubmitCallback?.()
+      const result = await e.submit?.()
+      setDraftSubmissionResult(result)
+    }
+  }, [e, onSubmitCallback])
+
+  const shouldClear = useRef(false)
+
+  const clearErrorsAndFlag = useMemo(() => {
+    if (!e.clearErrors)
+      return undefined
+    return () => {
+      e.clearErrors?.()
+      shouldClear.current = true
+    }
+  }, [e])
+
   useEffect(() => {
-    o.current && s && (s(), o.current = !1);
-  }, [s]);
+    if (shouldClear.current && submit) {
+      submit()
+      shouldClear.current = false
+    }
+  }, [submit])
+
   useEffect(() => {
-    o.current && "error" === e.status && (o.current = !1);
-  }, [e.status]);
+    if (shouldClear.current && e.status === 'error') {
+      shouldClear.current = false
+    }
+  }, [e.status])
+
   return {
-    draftSubmissionResult: i,
-    clearDraftSubmissionResult: a,
-    submit: s ?? l
-  };
+    draftSubmissionResult,
+    clearDraftSubmissionResult,
+    submit: submit ?? clearErrorsAndFlag,
+  }
 }
-export const r = $$$$r0;
+
+// Refactored export name for clarity and maintainability
+export const r = setupDraftSubmissionHandler

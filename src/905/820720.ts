@@ -6,7 +6,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import l from "../vendor/128080";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { n as _$$n } from "../905/477505";
+import { usePluginData } from "../905/477505";
 import { defaultViewAtom, isModalOpenAtom } from "../figma_app/69680";
 import { SupportedPlatforms, WEB, IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML } from "../905/359509";
 import { findUnitSchema, getCodegenLanguagePreference } from "../905/515076";
@@ -75,7 +75,7 @@ export function $$x0({
   let x = getAllPluginVersions();
   let {
     codegenPlugins
-  } = _$$n();
+  } = usePluginData();
   let w = usePluginManifestById(g?.id || "", !!g);
   let C = useSelector(e => e.whitelistedPlugins);
   let T = useCurrentUserOrg() || null;

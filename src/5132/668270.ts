@@ -1,7 +1,7 @@
 import { subscribeAndAwaitData } from "../905/553831";
 import { getResourceDataOrFallback } from "../905/723791";
 import { logError } from "../905/714362";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -73,7 +73,7 @@ let $$g1 = createOptimistThunk(async (e, {
   loadingKey: t
 }) => {
   try {
-    await XHR.put(`/api/try/file/${i}`, {
+    await sendWithRetry.put(`/api/try/file/${i}`, {
       name: getI18nString("figjam_try.default_filename", {
         userName: l
       })

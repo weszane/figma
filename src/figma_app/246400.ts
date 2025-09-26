@@ -59,9 +59,9 @@ export function $$u0({
           letterSpacing: "0.055px",
           lineHeight: "var(--body-medium-lineHeight, 16px)",
           maxWidth: d
-        }).$$if(e, {
+        }).if(e, {
           minWidth: d
-        }).$$if(t, {
+        }).if(t, {
           padding: "var(--spacer-1, 0.3rem) var(--spacer-2, 0.5rem)"
         }, {
           padding: "var(--spacer-2, 0.5rem)"

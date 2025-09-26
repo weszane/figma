@@ -1,229 +1,362 @@
-import { useMemo } from "react";
-import { sortByWithOptions, sortByPropertyWithOptions } from "../figma_app/656233";
-import { selectWithShallowEqual } from "../905/103090";
-import { getComponentBreadcrumbs, memoizedProcessComponentsAndStateGroups, processLocalComponents, getFullComponentBreadcrumbs } from "../figma_app/80990";
-import { isExamplePreset } from "../figma_app/915774";
-import { getNonDeletedAssets, flattenAssetsByTeam } from "../figma_app/646357";
-import { useMultipleLibraryMetadata } from "../905/726668";
-import { getBasename } from "../905/309735";
-import { useSubscribedLibraryKeys } from "../figma_app/155728";
-import { $1, oV } from "../figma_app/76115";
-import { VL } from "../figma_app/112055";
-import { N } from "../905/281143";
-var $$g5 = (e => (e[e.SUBPATHS_FIRST = 0] = "SUBPATHS_FIRST", e[e.COMPONENTS_FIRST = 1] = "COMPONENTS_FIRST", e))($$g5 || {});
-let f = e => {
-  let t = [];
-  for (let i of e) "LEAF" === i.type ? t.push(i) : t.push(...f(i.children));
-  return t;
-};
-let _ = (e, t, i) => {
-  if (0 === e.length) return [];
-  let n = {
-    subpaths: Object.create(null),
-    items: []
-  };
-  for (let t of e) {
-    let i = getComponentBreadcrumbs(t, e);
-    let r = n;
-    for (let e of i) {
-      r.subpaths[e] || (r.subpaths[e] = {
-        subpaths: Object.create(null),
-        items: []
-      });
-      r = r.subpaths[e];
-    }
-    r.items.push(t);
-  }
-  let a = e => {
-    let i = [];
-    for (let t of e.items) i.push({
-      type: "LEAF",
-      displayText: getBasename(t.name),
-      item: t,
-      id: t.library_key + t.node_id
-    });
-    for (let t in e.subpaths) i.push({
-      type: "SUBPATH",
-      displayText: t,
-      children: a(e.subpaths[t]),
-      id: t
-    });
-    sortByWithOptions(i, e => `${"SUBPATH" === e.type ? t : ~t + 2}-${e.displayText}`, {
-      useExpensiveNaturalComparison: !0
-    });
-    return i;
-  };
-  let o = a(n);
-  return i ? f(o) : o;
-};
-function A(e, t, i) {
-  let n = {};
-  let a = {};
-  let s = [];
-  for (let t of e) {
-    let e = t.containing_frame?.pageId;
-    let i = t.containing_frame?.pageName?.trim() || t.containing_frame?.pageName;
-    if (!e || !i) {
-      s.push(t);
-      continue;
-    }
-    n.hasOwnProperty(i) ? n[i].push(t) : n[i] = [t];
-    a[e] = i;
-  }
-  if (s.length > 0) {
-    let e = Object.keys(n);
-    let t = null;
-    1 === e.length ? t = n[e[0]] || null : a[VL] && (t = n[a[VL]] || null);
-    null !== t && t.push(...s);
-  }
-  let o = [];
-  for (let [e, r] of Object.entries(n)) {
-    if (1 === Object.keys(n).length) return _(r, t, i);
-    let a = {
-      type: "SUBPATH",
-      displayText: e || "",
-      children: _(r, t, i),
-      id: e || ""
-    };
-    o.push(a);
-  }
-  sortByPropertyWithOptions(o, "displayText", {
-    useExpensiveNaturalComparison: !0
-  });
-  return o;
-}
-export function $$y1(e, t, i) {
-  return A(getNonDeletedAssets(memoizedProcessComponentsAndStateGroups(e)), t, i);
-}
-export function $$b6({
-  libraryKeyBackingSelectedItems: e,
-  order: t,
-  libraryMetadataMap: i,
-  flattenSubpaths: r
-}) {
-  let {
-    subscribedFileDataByLibraryKey,
-    hubFilesByLibraryKey
-  } = N();
-  let {
-    library,
-    openFile
-  } = selectWithShallowEqual(e => ({
-    library: e.library,
-    openFile: e.openFile
-  }));
-  let g = function (e, t, i, r, a) {
-    let {
-      libraryKeyToSubscribedItems
-    } = $1({
-      library: e,
-      fileDataByLibraryKey: t
-    });
-    let {
-      libraryKeyToSubscribedItems: _libraryKeyToSubscribedItems
-    } = oV({
-      library: e,
-      hubFilesByLibraryKey: i
-    });
-    return useMemo(() => {
-      let t = {
-        ...libraryKeyToSubscribedItems,
-        ..._libraryKeyToSubscribedItems
-      };
-      if (null != a && a !== r?.libraryKey && !(a in t)) {
-        let i = flattenAssetsByTeam(e.publishedByLibraryKey.components);
-        let n = flattenAssetsByTeam(e.publishedByLibraryKey.stateGroups);
-        let r = i[a] ?? {};
-        let o = n[a] ?? {};
-        t[a] = [...Object.values(processLocalComponents(r)), ...Object.values(o)];
-      }
-      return t;
-    }, [libraryKeyToSubscribedItems, _libraryKeyToSubscribedItems, a, r?.libraryKey, e.publishedByLibraryKey.components, e.publishedByLibraryKey.stateGroups]);
-  }(library, subscribedFileDataByLibraryKey, hubFilesByLibraryKey, openFile, e);
-  let f = useMemo(() => function (e, t, i, n) {
-    let r = Object.keys(e).sort((e, i) => {
-      let n = t[e]?.name ?? "";
-      let r = t[i]?.name ?? "";
-      return n.localeCompare(r);
-    });
-    let a = {};
-    for (let s of r) {
-      let r = e[s];
-      t[s]?.isHubFile && (r = r.filter(e => !isExamplePreset(e, {
-        isPreset: !0
-      })));
-      a[s] = A(r, i, n);
-    }
-    return a;
-  }(g, i, t, r), [r, i, t, g]);
-  return useMemo(() => ({
-    publishedLibraryItemsByLibraryKey: g,
-    rootDrilldownItemsByLibraryKey: f
-  }), [g, f]);
-}
-export function $$v2(e) {
-  return {
-    type: "LEAF",
-    item: e,
-    displayText: e.name,
-    id: e.library_key + e.node_id
-  };
-}
-export var $$I4 = (e => (e.SELECT = "SELECT", e.DESELECT = "DESELECT", e))($$I4 || {});
-export function $$E8(e, t) {
-  return {
-    "data-tooltip": t?.hideName ? e.description?.trim() : `${getBasename(e.name)}
+import { useMemo } from 'react'
+import { selectWithShallowEqual } from '../905/103090'
+import { N } from '../905/281143'
+import { getBasename } from '../905/309735'
+import { useMultipleLibraryMetadata } from '../905/726668'
+import { $1, oV } from '../figma_app/76115'
+import { getComponentBreadcrumbs, getFullComponentBreadcrumbs, memoizedProcessComponentsAndStateGroups, processLocalComponents } from '../figma_app/80990'
+import { VL } from '../figma_app/112055'
+import { useSubscribedLibraryKeys } from '../figma_app/155728'
+import { flattenAssetsByTeam, getNonDeletedAssets } from '../figma_app/646357'
+import { sortByPropertyWithOptions, sortByWithOptions } from '../figma_app/656233'
+import { isExamplePreset } from '../figma_app/915774'
 
-${e.description}`.trim(),
-    "data-tooltip-text-left": null != e.description,
-    "data-tooltip-max-width": 240
-  };
+/**
+ * Enum for drilldown order.
+ * @originalName $$g5
+ */
+export enum DrilldownOrder {
+  SUBPATHS_FIRST = 0,
+  COMPONENTS_FIRST = 1,
 }
-export function $$x3(e, t) {
-  let i;
-  for (let n = 0; n < e.length; n++) {
-    let r = e[n];
-    let a = getFullComponentBreadcrumbs(r, t);
-    if (!i) {
-      i = a;
-      continue;
+
+/**
+ * Flattens nested drilldown items into a single array of leaf items.
+ *
+ * @param items Drilldown items
+ * @returns Array of leaf items
+ * @originalName f
+ */
+export function flattenDrilldownItems(items: any[]): any[] {
+  const result: any[] = []
+  for (const item of items) {
+    if (item.type === 'LEAF') {
+      result.push(item)
     }
-    i.length > a.length && (i = i.slice(0, a.length));
-    for (let e = 0; e < a.length; e++) if (i[e] !== a[e]) {
-      i = i.slice(0, e);
-      break;
-    }
-    if (0 === i.length) return [];
-  }
-  return i ?? [];
-}
-export function $$S0(e) {
-  if ("LEAF" === e.type) return e.item;
-  {
-    let t = [...e.children];
-    for (; t.length > 0;) {
-      let e = t.shift();
-      if ("LEAF" === e.type) return e.item;
-      t.push(...e.children);
+    else {
+      result.push(...flattenDrilldownItems(item.children))
     }
   }
-  return null;
+  return result
 }
-export function $$w7(e) {
-  let t = useSubscribedLibraryKeys();
-  let i = useMemo(() => e ? [...t, e] : [...t], [e, t]);
-  let r = useMultipleLibraryMetadata(i);
+
+/**
+ * Builds a nested drilldown structure from component items.
+ * @param items Component items
+ * @param order Drilldown order
+ * @param flattenSubpaths Whether to flatten subpaths
+ * @returns Nested drilldown structure
+ * @originalName _
+ */
+export function buildDrilldownStructure(items: any[], order: DrilldownOrder, flattenSubpaths: boolean): any[] {
+  if (items.length === 0)
+    return []
+  const root = { subpaths: Object.create(null), items: [] }
+  for (const item of items) {
+    const breadcrumbs = getComponentBreadcrumbs(item, items)
+    let node = root
+    for (const crumb of breadcrumbs) {
+      if (!node.subpaths[crumb]) {
+        node.subpaths[crumb] = { subpaths: Object.create(null), items: [] }
+      }
+      node = node.subpaths[crumb]
+    }
+    node.items.push(item)
+  }
+  const buildTree = (node: any): any[] => {
+    const result: any[] = []
+    for (const item of node.items) {
+      result.push({
+        type: 'LEAF',
+        displayText: getBasename(item.name),
+        item,
+        id: item.library_key + item.node_id,
+      })
+    }
+    for (const subpath in node.subpaths) {
+      result.push({
+        type: 'SUBPATH',
+        displayText: subpath,
+        children: buildTree(node.subpaths[subpath]),
+        id: subpath,
+      })
+    }
+    sortByWithOptions(result, e => `${e.type === 'SUBPATH' ? order : ~order + 2}-${e.displayText}`, {
+      useExpensiveNaturalComparison: true,
+    })
+    return result
+  }
+  const tree = buildTree(root)
+  return flattenSubpaths ? flattenDrilldownItems(tree) : tree
+}
+
+/**
+ * Groups assets by their containing frame's page, then builds drilldown structure.
+ * @param items Asset items
+ * @param order Drilldown order
+ * @param flattenSubpaths Whether to flatten subpaths
+ * @returns Drilldown structure grouped by page
+ * @originalName A
+ */
+export function groupAssetsByPage(items: any[], order: DrilldownOrder, flattenSubpaths: boolean): any[] {
+  const pageGroups: Record<string, any[]> = {}
+  const pageIdToName: Record<string, string> = {}
+  const noPageItems: any[] = []
+  for (const item of items) {
+    const pageId = item.containing_frame?.pageId
+    const pageName = item.containing_frame?.pageName?.trim() || item.containing_frame?.pageName
+    if (!pageId || !pageName) {
+      noPageItems.push(item)
+      continue
+    }
+    if (Object.prototype.hasOwnProperty.call(pageGroups, pageName)) {
+      pageGroups[pageName].push(item)
+    }
+    else {
+      pageGroups[pageName] = [item]
+    }
+    pageIdToName[pageId] = pageName
+  }
+  if (noPageItems.length > 0) {
+    const keys = Object.keys(pageGroups)
+    let target: any[] | null = null
+    if (keys.length === 1) {
+      target = pageGroups[keys[0]] || null
+    }
+    else if (pageIdToName[VL]) {
+      target = pageGroups[pageIdToName[VL]] || null
+    }
+    if (target !== null) {
+      target.push(...noPageItems)
+    }
+  }
+  const result: any[] = []
+  for (const [pageName, group] of Object.entries(pageGroups)) {
+    if (Object.keys(pageGroups).length === 1) {
+      return buildDrilldownStructure(group, order, flattenSubpaths)
+    }
+    result.push({
+      type: 'SUBPATH',
+      displayText: pageName || '',
+      children: buildDrilldownStructure(group, order, flattenSubpaths),
+      id: pageName || '',
+    })
+  }
+  sortByPropertyWithOptions(result, 'displayText', {
+    useExpensiveNaturalComparison: true,
+  })
+  return result
+}
+
+/**
+ * Returns drilldown items for non-deleted assets.
+ * @param components Component assets
+ * @param order Drilldown order
+ * @param flattenSubpaths Whether to flatten subpaths
+ * @returns Drilldown items
+ * @originalName $$y1
+ */
+export function getDrilldownItems(components: any[], order: DrilldownOrder, flattenSubpaths: boolean): any[] {
+  return groupAssetsByPage(getNonDeletedAssets(memoizedProcessComponentsAndStateGroups(components)), order, flattenSubpaths)
+}
+
+/**
+ * Hook to get published library items and root drilldown items by library key.
+ * @param params Parameters
+ * @returns Published items and root drilldown items
+ * @originalName $$b6
+ */
+export function usePublishedLibraryItems({
+  libraryKeyBackingSelectedItems,
+  order,
+  libraryMetadataMap,
+  flattenSubpaths,
+}: {
+  libraryKeyBackingSelectedItems: string
+  order: DrilldownOrder
+  libraryMetadataMap: any
+  flattenSubpaths: boolean
+}) {
+  const { subscribedFileDataByLibraryKey, hubFilesByLibraryKey } = N() as { subscribedFileDataByLibraryKey: any, hubFilesByLibraryKey: any }
+  const { library, openFile } = selectWithShallowEqual(e => ({ library: (e as any).library, openFile: (e as any).openFile }))
+
+  // Helper to get all subscribed items by library key
+  const getSubscribedItemsByLibraryKey = (
+    library: any,
+    fileDataByLibraryKey: any,
+    hubFilesByLibraryKey: any,
+    openFile: any,
+    selectedLibraryKey: string,
+  ) => {
+    const { libraryKeyToSubscribedItems } = $1({ library, fileDataByLibraryKey })
+    const { libraryKeyToSubscribedItems: hubSubscribedItems } = oV({ library, hubFilesByLibraryKey })
+    return useMemo(() => {
+      const allSubscribed: Record<string, any[]> = {
+        ...libraryKeyToSubscribedItems,
+        ...hubSubscribedItems,
+      }
+      if (
+        selectedLibraryKey != null
+        && selectedLibraryKey !== openFile?.libraryKey
+        && !(selectedLibraryKey in allSubscribed)
+      ) {
+        const teamComponents = flattenAssetsByTeam(library.publishedByLibraryKey.components)
+        const teamStateGroups = flattenAssetsByTeam(library.publishedByLibraryKey.stateGroups)
+        const components = teamComponents[selectedLibraryKey] ?? {}
+        const stateGroups = teamStateGroups[selectedLibraryKey] ?? {}
+        allSubscribed[selectedLibraryKey] = [
+          ...Object.values(processLocalComponents(components)),
+          ...Object.values(stateGroups),
+        ]
+      }
+      return allSubscribed
+    }, [libraryKeyToSubscribedItems, hubSubscribedItems, selectedLibraryKey, openFile?.libraryKey, library.publishedByLibraryKey.components, library.publishedByLibraryKey.stateGroups])
+  }
+
+  const publishedLibraryItemsByLibraryKey = getSubscribedItemsByLibraryKey(
+    library,
+    subscribedFileDataByLibraryKey,
+    hubFilesByLibraryKey,
+    openFile,
+    libraryKeyBackingSelectedItems,
+  )
+
+  const rootDrilldownItemsByLibraryKey = useMemo(() => {
+    const keys = Object.keys(publishedLibraryItemsByLibraryKey).sort((a, b) => {
+      const nameA = libraryMetadataMap[a]?.name ?? ''
+      const nameB = libraryMetadataMap[b]?.name ?? ''
+      return nameA.localeCompare(nameB)
+    })
+    const result: Record<string, any[]> = {}
+    for (const key of keys) {
+      let items = publishedLibraryItemsByLibraryKey[key]
+      if (libraryMetadataMap[key]?.isHubFile) {
+        items = items.filter((item: any) => !isExamplePreset(item, { isPreset: true }))
+      }
+      result[key] = groupAssetsByPage(items, order, flattenSubpaths)
+    }
+    return result
+  }, [flattenSubpaths, libraryMetadataMap, order, publishedLibraryItemsByLibraryKey])
+
   return useMemo(() => ({
-    libraryMetadataLoading: "loading" === r.status,
-    libraryMetadataMap: r?.data ?? {}
-  }), [r?.data, r.status]);
+    publishedLibraryItemsByLibraryKey,
+    rootDrilldownItemsByLibraryKey,
+  }), [publishedLibraryItemsByLibraryKey, rootDrilldownItemsByLibraryKey])
 }
-export const Bx = $$S0;
-export const Dr = $$y1;
-export const Kk = $$v2;
-export const OK = $$x3;
-export const Wu = $$I4;
-export const Wx = $$g5;
-export const Xx = $$b6;
-export const jB = $$w7;
-export const pf = $$E8;
+
+/**
+ * Creates a leaf drilldown item from a component.
+ * @param component Component
+ * @returns Leaf drilldown item
+ * @originalName $$v2
+ */
+export function createLeafDrilldownItem(component: any) {
+  return {
+    type: 'LEAF',
+    item: component,
+    displayText: component.name,
+    id: component.library_key + component.node_id,
+  }
+}
+
+/**
+ * Enum for select/deselect actions.
+ * @originalName $$I4
+ */
+export enum SelectAction {
+  SELECT = 'SELECT',
+  DESELECT = 'DESELECT',
+}
+
+/**
+ * Returns tooltip data for a component.
+ * @param component Component
+ * @param options Options
+ * @returns Tooltip data
+ * @originalName $$E8
+ */
+export function getComponentTooltipData(component: any, options?: { hideName?: boolean }) {
+  return {
+    'data-tooltip': options?.hideName
+      ? component.description?.trim()
+      : `${getBasename(component.name)}\n\n${component.description}`.trim(),
+    'data-tooltip-text-left': component.description != null,
+    'data-tooltip-max-width': 240,
+  }
+}
+
+/**
+ * Gets the common breadcrumbs for a list of components.
+ * @param components Components
+ * @param allComponents All components
+ * @returns Array of common breadcrumbs
+ * @originalName $$x3
+ */
+export function getCommonComponentBreadcrumbs(components: any[], allComponents: any[]): string[] {
+  let common: string[] | undefined
+  for (let i = 0; i < components.length; i++) {
+    const breadcrumbs = getFullComponentBreadcrumbs(components[i], allComponents)
+    if (!common) {
+      common = breadcrumbs
+      continue
+    }
+    if (common.length > breadcrumbs.length) {
+      common = common.slice(0, breadcrumbs.length)
+    }
+    for (let j = 0; j < breadcrumbs.length; j++) {
+      if (common[j] !== breadcrumbs[j]) {
+        common = common.slice(0, j)
+        break
+      }
+    }
+    if (common.length === 0)
+      return []
+  }
+  return common ?? []
+}
+
+/**
+ * Returns the first leaf item from a drilldown structure.
+ * @param drilldown Drilldown item
+ * @returns First leaf item or null
+ * @originalName $$S0
+ */
+export function getFirstLeafItem(drilldown: any): any {
+  if (drilldown.type === 'LEAF')
+    return drilldown.item
+  const queue = [...drilldown.children]
+  while (queue.length > 0) {
+    const item = queue.shift()
+    if (item.type === 'LEAF')
+      return item.item
+    queue.push(...item.children)
+  }
+  return null
+}
+
+/**
+ * Hook to get library metadata loading state and map.
+ * @param selectedLibraryKey Selected library key
+ * @returns Loading state and metadata map
+ * @originalName $$w7
+ */
+export function useLibraryMetadata(selectedLibraryKey?: string) {
+  const subscribedKeys = useSubscribedLibraryKeys()
+  const keys = useMemo(() => selectedLibraryKey ? [...subscribedKeys, selectedLibraryKey] : [...subscribedKeys], [selectedLibraryKey, subscribedKeys])
+  const metadata = useMultipleLibraryMetadata(keys)
+  return useMemo(() => ({
+    libraryMetadataLoading: metadata.status === 'loading',
+    libraryMetadataMap: metadata?.data ?? {},
+  }), [metadata?.data, metadata.status])
+}
+
+// Export aliases for backward compatibility and refactored names
+export const Bx = getFirstLeafItem // $$S0
+export const Dr = getDrilldownItems // $$y1
+export const Kk = createLeafDrilldownItem // $$v2
+export const OK = getCommonComponentBreadcrumbs // $$x3
+export const Wu = SelectAction // $$I4
+export const Wx = DrilldownOrder // $$g5
+export const Xx = usePublishedLibraryItems // $$b6
+export const jB = useLibraryMetadata // $$w7
+export const pf = getComponentTooltipData // $$E8

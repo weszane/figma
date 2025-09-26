@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { hideSpecificModal } from '../905/156213'
 import { atom, atomStoreManager, useAtomValueAndSetter } from '../figma_app/27355'
 // Original constants: $$o2, $$l0
-const COMPONENT_FLYOUT_MODAL_TYPE = 'ComponentFlyoutModal'
-const COMPONENT_FLYOUT_MODAL_CONTENT = 'ComponentFlyoutModalContent'
+export const COMPONENT_FLYOUT_MODAL_TYPE = 'ComponentFlyoutModal'
+export const COMPONENT_FLYOUT_MODAL_CONTENT = 'ComponentFlyoutModalContent'
 
 // Original atom: d
 const flyoutPropsAtom = atom(null) as PrimitiveAtom<any | null>

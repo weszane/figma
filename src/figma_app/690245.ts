@@ -4,8 +4,8 @@ import { eJ } from "../vendor/352483";
 import { createLocalStorageAtom } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { a as _$$a } from "../905/290931";
-import { $J } from "../905/278499";
+import { setupPromptHistory } from "../905/290931";
+import { AIActionIterationResult } from "../905/278499";
 import { Oq, is } from "../905/904596";
 import { A as _$$A } from "../905/296182";
 export let $$_1 = createLocalStorageAtom("content_fill_prompt_history", []);
@@ -22,7 +22,7 @@ export function $$h0({
   let {
     promptHistory,
     addPromptToHistory
-  } = _$$a($$_1, e => e);
+  } = setupPromptHistory($$_1, e => e);
   return g ? jsx(_$$A, {
     action: e,
     aiTrackingContext: s,
@@ -52,7 +52,7 @@ export function $$h0({
     targets: h,
     aiTrackingContext: {
       ...s,
-      iteration_view_type: $J.SUCCESS_WITH_ITERATION
+      iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION
     }
   });
 }

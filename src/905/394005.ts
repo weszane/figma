@@ -354,7 +354,7 @@ export class WAFManager {
 export const wafManager = new WAFManager();
 
 /**
- * Extracts WAF challenge type from XHR response
+ * Extracts WAF challenge type from sendWithRetry response
  * @param xhr - XMLHttpRequest object
  * @returns WAF challenge type or null
  */

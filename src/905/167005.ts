@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Fragment } from "react";
 import { formatNumber } from "../figma_app/930338";
 import { Wi } from "../figma_app/162641";
-import { x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { renderI18nText } from "../905/303541";
 import { V } from "../905/697254";
 import { zi, iL } from "../905/824449";
@@ -27,7 +27,7 @@ export function $$f0({
     children: t.map(t => {
       let i = t.type === V.DESCRIPTION_AND_IMAGE ? "Description" : t.header;
       return jsx(Fragment, {
-        children: t.type === V.DESCRIPTION_AND_IMAGE ? jsx(x, {
+        children: t.type === V.DESCRIPTION_AND_IMAGE ? jsx(LoadingRenderer, {
           isLoading: e,
           className: g,
           children: () => jsx(_, {

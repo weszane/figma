@@ -10,7 +10,7 @@ import { Point } from "../905/736624";
 import { isStatus } from "../figma_app/808294";
 import { zK } from "../figma_app/913823";
 import { setShouldSearchDefaultLibraries } from "../905/879323";
-import { _ as _$$_ } from "../905/793009";
+import { trackTemplateEvent } from "../905/793009";
 import { usePluginedWidgets, usePublishedPlugins } from "../figma_app/844435";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
@@ -142,7 +142,7 @@ export function $$U6({
       let t = hubFiles[e.id];
       if (t) {
         let r = a6(t);
-        _$$_("resource_previewed", {
+        trackTemplateEvent("resource_previewed", {
           fileKey: l,
           resourceType: "template",
           resourceName: r.name,

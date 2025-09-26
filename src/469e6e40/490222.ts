@@ -17,7 +17,7 @@ import { FolderPreview } from "../905/16143";
 import { selectViewAction } from "../905/929976";
 import { TrackingProvider } from "../figma_app/831799";
 import { PaginatedAbandonedDraftsView } from "../figma_app/43951";
-import { O as _$$O } from "../figma_app/809387";
+import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { OrganizationType } from "../905/833838";
 import { e0 } from "../905/696396";
@@ -161,7 +161,7 @@ export function $$U0(e) {
     },
     children: [e.planType === OrganizationType.ORG && !getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(K, {
-        title: _$$O(DashboardSection.CONTENT)
+        title: getOrgAdminTabMessage(DashboardSection.CONTENT)
       }), jsx(_$$b, {
         tab: DashboardSection.CONTENT,
         selectedSecondaryTab: WorkspaceTab.ABANDONED_DRAFTS

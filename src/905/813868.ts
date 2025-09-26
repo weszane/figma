@@ -11,7 +11,7 @@ import { applyOffsetToViewport } from "../figma_app/62612";
 import { checkZoomWidgetAccess } from "../figma_app/12796";
 import { showVisualBell, getFullscreenViewEditorType } from "../figma_app/300692";
 import { PluginManager } from "../figma_app/612938";
-import { getSelectedView, checkCanRunExtensions, getPluginDevMode } from "../905/622391";
+import { handleSelectedView, checkCanRunExtensions, getPluginDevMode } from "../905/622391";
 import { setSyncedValues } from "../905/486749";
 import { notifyPluginStatus } from "../905/571565";
 import { k as _$$k2 } from "../figma_app/644304";
@@ -31,7 +31,7 @@ export function $$I0({
   indexInParent: k,
   isOnInternalCanvas: R
 }) {
-  if (!getSelectedView()) {
+  if (!handleSelectedView()) {
     showVisualBell(getI18nString("widgets.cannot_insert_widget_while_logged_out"));
     return {
       widgetNodeID: void 0,

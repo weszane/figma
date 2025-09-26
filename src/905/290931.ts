@@ -1,19 +1,43 @@
-import { useCallback } from "react";
-import { useAtomValueAndSetter } from "../figma_app/27355";
-export function $$$$a0(e, t) {
-  let [i, a] = useAtomValueAndSetter(e);
-  let s = useCallback(e => {
-    let n = new Set([t(e).trim()]);
-    let r = [e];
-    for (let e of i) {
-      let i = t(e).trim();
-      n.has(i) || (n.add(i), r.push(e));
-    }
-    a(r.slice(0, 5));
-  }, [i, a, t]);
+import { useCallback } from 'react'
+import { useAtomValueAndSetter } from '../figma_app/27355'
+/**
+ * Manages prompt history with deduplication and a maximum length.
+ * Original function name: $$$$a0
+ *
+ * @param atom - The atom to use for state management.
+ * @param getPrompt - Function to extract and trim the prompt string.
+ * @returns An object containing the prompt history and a function to add a prompt.
+ */
+export function setupPromptHistory(atom: any, getPrompt: (item: any) => string) {
+  const [promptHistory, setPromptHistory] = useAtomValueAndSetter(atom)
+
+  /**
+   * Adds a prompt to history, ensuring uniqueness and limiting to 5 items.
+   * Original function name: s
+   */
+  const addPromptToHistory = useCallback(
+    (item: any) => {
+      const uniquePrompts = new Set([getPrompt(item).trim()])
+      const updatedHistory = [item]
+
+      for (const historyItem of promptHistory) {
+        const prompt = getPrompt(historyItem).trim()
+        if (!uniquePrompts.has(prompt)) {
+          uniquePrompts.add(prompt)
+          updatedHistory.push(historyItem)
+        }
+      }
+
+      setPromptHistory(updatedHistory.slice(0, 5))
+    },
+    [promptHistory, setPromptHistory, getPrompt],
+  )
+
   return {
-    promptHistory: i,
-    addPromptToHistory: s
-  };
+    promptHistory,
+    addPromptToHistory,
+  }
 }
-export const a = $$$$a0;
+
+// Refactored export for consistency
+export const a = setupPromptHistory

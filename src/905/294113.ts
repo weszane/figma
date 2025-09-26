@@ -1,6 +1,6 @@
 import { awaitSync } from '../905/412815'
 import { VERSION_HISTORY_APPEND, VERSION_HISTORY_SET_DOC_HAS_CHANGED } from '../905/784363'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { PAGINATION_PREV } from '../figma_app/661371'
 
 /**
@@ -40,7 +40,7 @@ export async function createSavepoint(
 
   const {
     data: { meta },
-  } = await XHR.post(`/api/multiplayer/${docId}/create_savepoint`, {
+  } = await sendWithRetry.post(`/api/multiplayer/${docId}/create_savepoint`, {
     label,
     description,
   })

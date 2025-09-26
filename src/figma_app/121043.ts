@@ -47,7 +47,7 @@ import { getCanvasViewState } from "../905/758967";
 import { isGoogleMeetIntegration } from "../figma_app/469876";
 import { z4 } from "../905/37051";
 import { LW, bs, GG } from "../figma_app/553940";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { replaceColonWithDash } from "../905/691205";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -253,7 +253,7 @@ $$eC6.displayName = "TextButton";
 memo(function ({
   recordingKey: e
 }) {
-  let t = Um();
+  let t = useDropdownState();
   let r = selectCurrentFile();
   let i = useSelector(e => Yh(e.mirror.appModel, _$$ec.action) && !!r);
   let s = useSelector(e => e.mirror.appModel.currentTool === _$$ec.tool);

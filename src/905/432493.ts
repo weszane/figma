@@ -7,7 +7,7 @@ import c from "../vendor/626715";
 import { isColorDark } from "../figma_app/191804";
 import { parsePxInt } from "../figma_app/783094";
 import { logWarning } from "../905/714362";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getFileKey } from "../905/412913";
 import { defaultColorManipulator } from "../905/713722";
 import { A as _$$A } from "../905/639174";
@@ -30,7 +30,7 @@ let T = async (e, t, i) => {
         images
       }
     }
-  } = await XHR.post(`/api/file_diff/file_merge/${e}/${t}/generate_images`, i, {
+  } = await sendWithRetry.post(`/api/file_diff/file_merge/${e}/${t}/generate_images`, i, {
     retryCount: 2
   });
   return images;

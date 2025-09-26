@@ -44,7 +44,7 @@ import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { replaceSelection } from "../figma_app/741237";
 import { isVsCodeEnvironment } from "../905/858738";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useSceneGraphSelector, usePlaygroundSceneGraph } from "../figma_app/722362";
 import { selectCurrentFile, useCurrentFileKey, openFileLibraryKeyAtom } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -62,7 +62,7 @@ import { NONE_SYMBOL } from "../905/992467";
 import { HX, _3, zi } from "../figma_app/97042";
 import { QU, bf } from "../figma_app/856806";
 import { useModalManager } from "../905/437088";
-import { H as _$$H } from "../905/56919";
+import { useTabManager } from "../905/56919";
 import { ModalRootComponent } from "../905/38914";
 import { DialogCustomContents } from "../figma_app/272243";
 import { TabsPrimitiveTabStrip } from "../905/840133";
@@ -645,7 +645,7 @@ let eC = registerModal(function (e) {
       e.onClose();
     }
   });
-  let [c, u, _] = _$$H({
+  let [c, u, _] = useTabManager({
     React: !0,
     SwiftUI: !0,
     Compose: !0,
@@ -1243,7 +1243,7 @@ export function $$eQ0({
     isComponentBrowserMapping
   } = _3(c, o, selectedLabel, e ? _ : void 0);
   let x = useDispatch();
-  let N = Um();
+  let N = useDropdownState();
   let C = useAtomWithSubscription($$e$2);
   useEffect(() => {
     C && console.log("Code Connect Debug: Document", {

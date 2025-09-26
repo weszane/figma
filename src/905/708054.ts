@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { ButtonSecondary, ButtonBasePrimary, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { v as _$$v } from "../905/755077";
 import { renderI18nText } from "../905/303541";
@@ -1433,7 +1433,7 @@ let w = class e extends Component {
     this.sendValidateEmail = async () => {
       let {
         status
-      } = await XHR.post("/api/validation/email/send");
+      } = await sendWithRetry.post("/api/validation/email/send");
       200 === status && this.setState({
         validateEmailSent: !0,
         submitDisabled: !0

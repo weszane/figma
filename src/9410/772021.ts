@@ -10,9 +10,9 @@ import { Sb } from "../figma_app/101956";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { e0 } from "../905/696396";
-import { y as _$$y } from "../905/129046";
-import { rq } from "../905/425180";
-import { F_ } from "../905/858282";
+import { ImageOverlayComponent } from "../905/129046";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/858282";
 import { QLv, xiH } from "../figma_app/6204";
 import { W1, qe, rM, RC } from "../figma_app/318123";
 let $$b1 = "ai_generate_onboarding_key";
@@ -39,7 +39,7 @@ export function $$I3() {
     }, 1e3);
     return () => clearTimeout(e);
   }, [t, i, s]);
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     isShowing: s.isShowing,
     userFlagOnShow: E,
     targetKey: $$b1,
@@ -74,11 +74,11 @@ export function $$k2({
   _$$h(() => () => {
     E();
   });
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: renderI18nText("whiteboard.ai_onboarding.new_file_modal.footer"),
     isShowing: C.isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("b306123ab827a626d46db70bcc5a74e9e76feacf"),
       alt: "",
       aspectRatio: 301 / 154

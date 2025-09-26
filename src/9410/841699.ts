@@ -16,8 +16,8 @@ import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
 import { nT, o5 } from "../figma_app/433401";
-import { rq } from "../905/425180";
-import { F_ } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/858282";
 import { xjb } from "../figma_app/6204";
 import { showDropdownThunk } from "../905/929976";
 import { bx } from "../figma_app/8833";
@@ -60,8 +60,8 @@ function w({
     href: "https://help.figma.com/hc/articles/23918228264855",
     ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: n ? renderI18nText("dev_handoff.workflows.overview.onboarding.first_rfd.description") : e ? renderI18nText("dev_handoff.workflows.overview.onboarding.has_rfd.dev_mode.description") : renderI18nText("dev_handoff.workflows.overview.onboarding.has_rfd.design.description"),
     disableHighlight: !0,
     isShowing,

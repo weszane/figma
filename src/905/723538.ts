@@ -2,9 +2,9 @@ import { InteractionCpp, AppStateTsApi } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
-import { j } from "../905/881708";
+import { NameClass } from "../905/881708";
 import { m } from "../905/70820";
-export class $$d0 extends j {
+export class $$d0 extends NameClass {
   constructor(e) {
     super(e);
   }

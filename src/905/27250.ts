@@ -5,7 +5,7 @@ import { e as _$$e } from "../905/916195";
 import { getStorage } from "../905/657224";
 import l from "classnames";
 import { w } from "../905/835474";
-import { o as _$$o } from "../905/605383";
+import { RenderListByChunks } from "../905/605383";
 import { getI18nString } from "../905/303541";
 import { getLibraryAgeLabel } from "../figma_app/646357";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -113,7 +113,7 @@ export class $$b0 extends PureComponent {
           className: _
         })]
       }), jsx("div", {
-        children: jsx(_$$o, {
+        children: jsx(RenderListByChunks, {
           chunkSize: this.CHUNK_SIZE,
           listKey: i,
           children: t.map(e => jsx(v, {

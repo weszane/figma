@@ -25,7 +25,7 @@ import { ModalRootComponent } from '../905/38914';
 import { yz } from '../905/42209';
 import { A as _$$A8 } from '../905/47292';
 import { mJ as _$$mJ, CK, SF, TW } from '../905/55862';
-import { u as _$$u2 } from '../905/56919';
+import { useTabState } from '../905/56919';
 import { m as _$$m4 } from '../905/65216';
 import { prototypeSetPages, prototypeReset, prototypeSetProgressBarMode, prototypeResetRecents, deleteRecentPrototype, prototypeSetCurrentPage, prototypeShowComments, prototypeSetIsReconnecting, recentPrototypePost, prototypeHideComments, prototypeSetBackgroundColor, recentPrototypeUnmarkViewed, prototypeShowOnlyMyComments, prototypeShowResolvedComments, restoreRecentPrototype, prototypeSetIsFooterVisible } from '../905/70982';
 import { createActionCreator } from '../905/73481';
@@ -50,7 +50,7 @@ import { KindEnum, PopupType, PositionEnum } from '../905/129884';
 import { filterNavigationConfig, navigationConfig } from '../905/139708';
 import { A as _$$A11 } from '../905/142432';
 import { Kz as _$$Kz } from '../905/145989';
-import { CL } from '../905/148074';
+import { getCollapsedSectionIdentifiers } from '../905/148074';
 import { handleOptimistTransactionWithError } from '../905/150006';
 import { t as _$$t5 } from '../905/150656';
 import { liveStoreFileBinding } from '../905/155850';
@@ -166,13 +166,13 @@ import { TranslationErrors } from '../905/508408';
 import { createConditionalObservableAtom } from '../905/508457';
 import { RecordingProvider } from '../905/511649';
 import { resolveTeamId } from '../905/515860';
-import { OJ } from '../905/519092';
+import { HeaderModal } from '../905/519092';
 import { APILoadingStatus } from '../905/520829';
 import { J as _$$J2 } from '../905/521144';
 import { Button } from '../905/521428';
 import { registerTooltip } from '../905/524523';
 import { UN } from '../905/525678';
-import { oU as _$$oU, B3, Sr } from '../905/535224';
+import { canOpenUrlInDesktop, DesktopModalType, openUrlInDesktop } from '../905/535224';
 import { q as _$$q5 } from '../905/540614';
 import { closeFullscreenAction, closeFullscreenThunk } from '../905/541060';
 import { pluginAddFirstRanAtAction } from '../905/542113';
@@ -239,7 +239,7 @@ import { addThumbnailForDanglingStyle, replaceLocalThumbnails } from '../905/711
 import { S as _$$S5 } from '../905/711770';
 import { liveStoreInstance, setupResourceAtomHandler } from '../905/713695';
 import { logDebug, logError, logInfo, logWarning } from '../905/714362';
-import { lG as _$$lG } from '../905/714538';
+import { fontReducer } from '../905/714538';
 import { SvgComponent } from '../905/714743';
 import { H as _$$H6 } from '../905/715533';
 import { l as _$$l6 } from '../905/716947';
@@ -264,12 +264,12 @@ import { getNewFileConfig, getSelectedFile } from '../905/766303';
 import { handlePropertyState } from '../905/770460';
 import { gD } from '../905/775298';
 import { pw as _$$pw, q5 as _$$q3 } from '../905/776312';
-import { M as _$$M } from '../905/777093';
+import { preloadCommonFonts } from '../905/777093';
 import { isFullscreenDevHandoffView } from '../905/782918';
 import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_APPEND, VERSION_HISTORY_COMPARE_CHANGES, VERSION_HISTORY_LOADING, VERSION_HISTORY_PAGE_LOADING, VERSION_HISTORY_RESET, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_DOC_HAS_CHANGED, VERSION_HISTORY_SET_FILE_LAST_SEEN_AT, VERSION_HISTORY_SET_LINKED_VERSION } from '../905/784363';
-import { X as _$$X3 } from '../905/784599';
+import { sharedFontActions } from '../905/784599';
 import { FullscreenMenu, PluginMenu } from '../905/791556';
-import { L4 as _$$L2, jr } from '../905/792802';
+import { filterModelTypes, parseSearchParams } from '../905/792802';
 import { x as _$$x2 } from '../905/805083';
 import { d as _$$d5 } from '../905/811033';
 import { TeamType } from '../905/814802';
@@ -308,7 +308,7 @@ import { contextSwitchAtom, initializeAtom, prefetchAtom } from '../905/895600';
 import { p as _$$p4 } from '../905/895920';
 import { t as _$$t } from '../905/897919';
 import { Au, h8, UK } from '../905/898493';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { F as _$$F6 } from '../905/915030';
 import { dayjs } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
@@ -1317,7 +1317,7 @@ let t_ = e => t => async function (i) {
       } catch (e) {
         trackAuthEvent('arkose_token_error_signup', n.auth.origin);
       }
-      XHR.post('/api/session/google_auth/signin_or_signup', {
+      sendWithRetry.post('/api/session/google_auth/signin_or_signup', {
         name: a.name || n.auth.name,
         token: s,
         token_type: n.auth.googleTokenType,
@@ -1368,7 +1368,7 @@ let t_ = e => t => async function (i) {
         cont: n.auth.redirectUrl,
         origin: n.auth.origin
       };
-      XHR.post('/api/session/auth', t).then(async ({
+      sendWithRetry.post('/api/session/auth', t).then(async ({
         data: t
       }) => {
         if (e.getState().communityHub?.pageState?.view === 'communityHub' && getCookieOrStorage().set('community_signup_redirect', {
@@ -1417,7 +1417,7 @@ let t_ = e => t => async function (i) {
     } catch (e) {
       trackAuthEvent('arkose_token_error_signup', n.auth.origin);
     }
-    XHR.post('/api/session/google_auth/signin_or_signup', {
+    sendWithRetry.post('/api/session/google_auth/signin_or_signup', {
       name: n.auth.name || null,
       token: n.auth.googleIdToken,
       token_type: n.auth.googleTokenType,
@@ -1462,14 +1462,14 @@ let t_ = e => t => async function (i) {
     })), e.dispatch(AUTH_SHOW_ERROR({
       message: s.message,
       invalidInput: s.invalidInput
-    }))) : (a.username = a.email.trim(), XHR.post('/api/session/login', a).then(({
+    }))) : (a.username = a.email.trim(), sendWithRetry.post('/api/session/login', a).then(({
       data: t
     }) => {
       e.dispatch(_$$cT({
         data: t
       }));
     }).catch(t => {
-      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'login', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
+      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'login', a.cont = n.auth.redirectUrl, sendWithRetry.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
         trackAuthEvent('magic_link_request_success', n.auth.origin, {
@@ -1498,7 +1498,7 @@ let t_ = e => t => async function (i) {
     } catch (e) {
       trackAuthEvent('arkose_token_error_forgot', n.auth.origin);
     }
-    XHR.post('/api/password/forgot', r).then(() => {
+    sendWithRetry.post('/api/password/forgot', r).then(() => {
       trackAuthEvent('send_reset_password_email_success', n.auth.origin);
       e.dispatch(changeAuthFormState({
         formState: AuthFlowStep.SENT_PASSWORD_RESET
@@ -1525,7 +1525,7 @@ let t_ = e => t => async function (i) {
         cont: n.auth.redirectUrl
       });
     }).catch(t => {
-      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (trackAuthEvent('saml_redirect_to_magic_link', n.auth.origin), a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
+      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (trackAuthEvent('saml_redirect_to_magic_link', n.auth.origin), a.modality = 'either', a.cont = n.auth.redirectUrl, sendWithRetry.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
         trackAuthEvent('magic_link_request_success', n.auth.origin, {
@@ -1577,7 +1577,7 @@ let t_ = e => t => async function (i) {
         formState: AuthFlowStep.SSO_GATE
       }));
     }).catch(t => {
-      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
+      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'either', a.cont = n.auth.redirectUrl, sendWithRetry.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
         trackAuthEvent('magic_link_request_success', n.auth.origin, {
@@ -1604,7 +1604,7 @@ let t_ = e => t => async function (i) {
     a.password !== a.password_retype ? e.dispatch(AUTH_SHOW_ERROR({
       message: getI18nString('auth.reset-password.password-retype-error'),
       invalidInput: AuthField.PASSWORD
-    })) : XHR.post('/api/password/recover', a).then(({}) => {
+    })) : sendWithRetry.post('/api/password/recover', a).then(({}) => {
       trackAuthEvent('reset_password_success', n.auth.origin);
       e.dispatch(AUTH_COMPLETE());
     }).catch(t => e.dispatch(P8({
@@ -1852,7 +1852,7 @@ let iz = e => t => function (i) {
     if (i.payload.userInitiated) {
       let a = generateOptimistId();
       let s = Object.keys(i.payload.fileKeys);
-      let o = XHR.del('/api/files_batch', {
+      let o = sendWithRetry.del('/api/files_batch', {
         files: s.map(e => ({
           key: e
         })),
@@ -1965,7 +1965,7 @@ let iz = e => t => function (i) {
       trackFileCopyEvent(n ? 'File Trashed' : 'File Deleted', s, e.getState());
     }
   } else if (fileUpdateSavepointAction.matches(i)) {
-    let n = XHR.put(`/api/versions/${i.payload.fileKey}/${i.payload.savepointID}`, {
+    let n = sendWithRetry.put(`/api/versions/${i.payload.fileKey}/${i.payload.savepointID}`, {
       label: i.payload.label,
       description: i.payload.description
     });
@@ -2021,7 +2021,7 @@ let iz = e => t => function (i) {
       fileKey,
       versionId
     } = i.payload;
-    let a = XHR.post(`/api/multiplayer/${fileKey}/restore?version_id=${encodeURIComponent(versionId)}`).then(() => {
+    let a = sendWithRetry.post(`/api/multiplayer/${fileKey}/restore?version_id=${encodeURIComponent(versionId)}`).then(() => {
       customHistory.reload('File restored', {
         key: fileKey
       });
@@ -2133,7 +2133,7 @@ let i2 = e => t => function (i) {
       id: m
     }), e.dispatch(p), i.payload.userInitiated && i.payload.teamDelete) {
       return handleOptimistTransactionWithError({
-        requestPromise: XHR.del(`/api/teams/${o}`).then(() => {
+        requestPromise: sendWithRetry.del(`/api/teams/${o}`).then(() => {
           e.dispatch(FlashActions.flash(getI18nString('team_delete_modal.post_delete_flash', {
             teamName: i.payload.team.name
           })));
@@ -2156,7 +2156,7 @@ let i2 = e => t => function (i) {
       let r = n.roles.byTeamId[i.payload.team.id][n.user.id];
       trackRoleEvent('Role Deleted', r);
       return handleOptimistTransactionWithError({
-        requestPromise: XHR.del(`/api/roles/${r.id}`).then(() => {
+        requestPromise: sendWithRetry.del(`/api/roles/${r.id}`).then(() => {
           e.dispatch(FlashActions.flash(getI18nString('leave_team_modal.post_leave_flash', {
             teamName: i.payload.team.name
           })));
@@ -2213,7 +2213,7 @@ let i6 = e => t => function (i) {
   } else if (postUserFlag.matches(i)) {
     if (!e.getState().user) return;
     let t = e.getState().userFlags;
-    let n = XHR.post('/api/user/flags', {
+    let n = sendWithRetry.post('/api/user/flags', {
       flags: i.payload
     });
     for (let e in i.payload) {
@@ -2250,7 +2250,7 @@ let i6 = e => t => function (i) {
       logger.error('Failed to update flags', JSON.stringify(i.payload), t);
     });
   } else if (_$$bE3.matches(i)) {
-    let n = XHR.post('/api/user/user_team_flags', i.payload);
+    let n = sendWithRetry.post('/api/user/user_team_flags', i.payload);
     return handleOptimistTransactionWithError({
       requestPromise: n,
       fallbackError: getI18nString('api_user.error.an_unknown_error_occurred'),
@@ -2796,7 +2796,7 @@ function ry({
     return Gk(n, r, a);
   });
   let A = useMemo(() => i.files.find(e => e.file.key === t.key) ?? null, [i, t]);
-  let [y, b, v] = _$$u2({
+  let [y, b, v] = useTabState({
     overview: !0,
     analytics: !0
   });
@@ -3444,7 +3444,7 @@ let as = registerModal(e => {
       section: e.tab,
       orgId: r.id
     },
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       headerSize: 'large',
       disableClickOutsideToHide: !0,
       title: (() => {
@@ -4085,12 +4085,12 @@ function aZ(e, t) {
             style: {}
           }
         });
-        e.dispatch(_$$X3.put({
+        e.dispatch(sharedFontActions.put({
           font: createFontMetadata(t.font_file)
         }));
         break;
       case 'delete':
-        e.dispatch(_$$X3.del({
+        e.dispatch(sharedFontActions.del({
           font: createFontMetadata(t.font_file)
         }));
     }
@@ -6351,7 +6351,7 @@ let oo = e => t => function (i) {
         searchModelType,
         searchScope,
         fileFilter
-      } = jr(customHistory.location.search, t, i.payload);
+      } = parseSearchParams(customHistory.location.search, t, i.payload);
       fileFilter && e.dispatch(searchSetParametersAction({
         fileTypeFilter: fileFilter
       }));
@@ -6399,7 +6399,7 @@ let oo = e => t => function (i) {
       searchModelType,
       searchScope
     } = n.parameters;
-    let d = [searchModelType, ..._$$L2(searchModelType, searchScope, s)];
+    let d = [searchModelType, ...filterModelTypes(searchModelType, searchScope, s)];
     let c = d.every(e => n.completedQueries[e] === i.payload.parameters.query);
     let u = d.every(e => r.completedQueries[e] === i.payload.parameters.query);
     let p = a.view === 'desktopNewTab';
@@ -6415,7 +6415,7 @@ let od = e => e => function (t) {
     if (i === 'notification') {
       let t = e.get('utm_medium');
       let i = e.get('utm_content');
-      XHR.post('/api/user_notification/clicked', {
+      sendWithRetry.post('/api/user_notification/clicked', {
         notification_id: i,
         medium: t
       });
@@ -6423,7 +6423,7 @@ let od = e => e => function (t) {
       let i = 'file';
       t.payload.view === 'team' ? i = 'team' : t.payload.view === 'folder' && (i = 'project');
       let n = e.get('utm_content');
-      XHR.post('/slack/subscription_clicked', {
+      sendWithRetry.post('/slack/subscription_clicked', {
         subscription_id: n,
         resource_type: i
       });
@@ -6431,7 +6431,7 @@ let od = e => e => function (t) {
       let t = e.get('utm_medium');
       let i = e.get('utm_content');
       let n = e.get('utm_product_type');
-      XHR.post('/integrations/file_link_clicked', {
+      sendWithRetry.post('/integrations/file_link_clicked', {
         file_key: i,
         medium: t,
         product_type: n
@@ -7506,7 +7506,7 @@ function li(e = lt, t) {
 let ln = {
   newCustomSectionIndex: void 0,
   movingResource: void 0,
-  collapsedCustomSections: CL(),
+  collapsedCustomSections: getCollapsedSectionIdentifiers(),
   favoritesCount: 0
 };
 function lr(e = ln, t) {
@@ -11699,7 +11699,7 @@ let pg = {
     return e;
   },
   sharedFonts(e = uz, t) {
-    if (_$$X3.startUploadFonts.matches(t)) {
+    if (sharedFontActions.startUploadFonts.matches(t)) {
       let i = {
         ...e
       };
@@ -11714,7 +11714,7 @@ let pg = {
       }
       return i;
     }
-    if (_$$X3.uploadFontProgress.matches(t)) {
+    if (sharedFontActions.uploadFontProgress.matches(t)) {
       let i = {
         ...e
       };
@@ -11727,7 +11727,7 @@ let pg = {
       };
       return i;
     }
-    if (_$$X3.uploadFontSuccess.matches(t)) {
+    if (sharedFontActions.uploadFontSuccess.matches(t)) {
       let i = {
         ...e
       };
@@ -11741,7 +11741,7 @@ let pg = {
       }, delete i.uploadsRemaining[uploadId]);
       return i;
     }
-    if (_$$X3.uploadFontFailure.matches(t)) {
+    if (sharedFontActions.uploadFontFailure.matches(t)) {
       let i = {
         ...e
       };
@@ -11756,14 +11756,14 @@ let pg = {
       }, delete i.uploadsRemaining[t.payload.uploadId]));
       return i;
     }
-    if (_$$X3.uploadFontWarning.matches(t)) {
+    if (sharedFontActions.uploadFontWarning.matches(t)) {
       let i = {
         ...e
       };
       i.warnings.push(t.payload);
       return i;
     }
-    if (_$$X3.toggleFontsToDelete.matches(t)) {
+    if (sharedFontActions.toggleFontsToDelete.matches(t)) {
       let i = {
         ...e
       };
@@ -11781,13 +11781,13 @@ let pg = {
       });
       return i;
     }
-    if (_$$X3.clearDeleteResult.matches(t)) {
+    if (sharedFontActions.clearDeleteResult.matches(t)) {
       return {
         ...e,
         successfulDeletes: [],
         unsuccessfulDeletes: []
       };
-    } else if (_$$X3.deleteFontComplete.matches(t)) {
+    } else if (sharedFontActions.deleteFontComplete.matches(t)) {
       let i = {
         ...e
       };
@@ -11803,26 +11803,26 @@ let pg = {
         t.payload.errors[e] ? i.unsuccessfulDeletes.push(e) : (delete i.fontsToDelete[e], i.successfulDeletes.push(e));
       });
       return i;
-    } else if (_$$X3.clearFontsToDelete.matches(t)) {
+    } else if (sharedFontActions.clearFontsToDelete.matches(t)) {
       return {
         ...e,
         fontsToDelete: {},
         unsuccessfulDeletes: [],
         successfulDeletes: []
       };
-    } else if (_$$X3.dismissFontCollision.matches(t)) {
+    } else if (sharedFontActions.dismissFontCollision.matches(t)) {
       let t = {
         ...e
       };
       t.collisions = t.collisions.slice(1);
       return t;
-    } else if (_$$X3.dismissFontWarning.matches(t)) {
+    } else if (sharedFontActions.dismissFontWarning.matches(t)) {
       let t = {
         ...e
       };
       t.warnings = t.warnings.slice(1);
       return t;
-    } else if (_$$X3.clearFontUploadResults.matches(t)) {
+    } else if (sharedFontActions.clearFontUploadResults.matches(t)) {
       return {
         ...e,
         uploadsRemaining: {},
@@ -11832,7 +11832,7 @@ let pg = {
         collisions: [],
         warnings: []
       };
-    } else if (_$$X3.updateSharedFontList.matches(t)) {
+    } else if (sharedFontActions.updateSharedFontList.matches(t)) {
       let i = {
         ...e
       };
@@ -11844,7 +11844,7 @@ let pg = {
         i.fontsByResourceId[t][e.family][e.style] = e;
       });
       return i;
-    } else if (_$$X3.put.matches(t)) {
+    } else if (sharedFontActions.put.matches(t)) {
       let i = {
         ...e
       };
@@ -11865,7 +11865,7 @@ let pg = {
       i.fontsByResourceId[n][family][style] = t.payload.font;
       return i;
     } else {
-      if (!_$$X3.del.matches(t)) return e;
+      if (!sharedFontActions.del.matches(t)) return e;
       let i = {
         ...e
       };
@@ -12539,7 +12539,7 @@ let pg = {
             if (user) {
               let i = e.serverStoredPreference;
               t.serverStoredPreference = enabled;
-              XHR.put('/api/user', {
+              sendWithRetry.put('/api/user', {
                 enable_screenreader: enabled
               }).catch(() => {
                 debugState.dispatch(_$$X5({
@@ -12993,7 +12993,7 @@ class pS extends PureComponent {
     this.state = {
       opened: !1
     };
-    Sr(location.href, B3.DESKTOP_INTERSTITIAL).then(e => {
+    openUrlInDesktop(location.href, DesktopModalType.DESKTOP_INTERSTITIAL).then(e => {
       e ? (this.setState({
         opened: !0
       }), getFeatureFlags().desktop_auto_close_interstitial_tab && (this.tabCloseTimerID = setTimeout(() => {
@@ -14210,7 +14210,7 @@ export async function $$hz0(e, t, d = {
         stylePreviewShown: dj,
         versionHistory: dV,
         multiplayer: cH,
-        fonts: _$$lG,
+        fonts: fontReducer,
         localFontAgentVersion: uu,
         library: lU,
         mirror: cE,
@@ -14347,7 +14347,7 @@ export async function $$hz0(e, t, d = {
       let e = T;
       fullscreenPerfManager.time('initAndHydrateActionNoUserState', () => j(e));
     }
-    if (R && (R.readyState === XMLHttpRequest.DONE ? D() : (R.addEventListener(XHR.Events.ABORT, D, !1), R.addEventListener(XHR.Events.TIMEOUT, D, !1), R.addEventListener(XHR.Events.ERROR, D, !1), R.addEventListener(XHR.Events.LOAD, D, !1))), P) {
+    if (R && (R.readyState === XMLHttpRequest.DONE ? D() : (R.addEventListener(sendWithRetry.Events.ABORT, D, !1), R.addEventListener(sendWithRetry.Events.TIMEOUT, D, !1), R.addEventListener(sendWithRetry.Events.ERROR, D, !1), R.addEventListener(sendWithRetry.Events.LOAD, D, !1))), P) {
       if (P.readyState === XMLHttpRequest.DONE) {
         await M();
       } else {
@@ -14356,10 +14356,10 @@ export async function $$hz0(e, t, d = {
           await M();
           e.resolve();
         };
-        P.addEventListener(XHR.Events.ABORT, t, !1);
-        P.addEventListener(XHR.Events.TIMEOUT, t, !1);
-        P.addEventListener(XHR.Events.ERROR, t, !1);
-        P.addEventListener(XHR.Events.LOAD, t, !1);
+        P.addEventListener(sendWithRetry.Events.ABORT, t, !1);
+        P.addEventListener(sendWithRetry.Events.TIMEOUT, t, !1);
+        P.addEventListener(sendWithRetry.Events.ERROR, t, !1);
+        P.addEventListener(sendWithRetry.Events.LOAD, t, !1);
         await e.promise;
       }
     }
@@ -14367,7 +14367,7 @@ export async function $$hz0(e, t, d = {
       if (!R) throw new Error('start: expect sessionStateXHR to be defined');
       let e = null;
       let t = getWAFChallengeType(R);
-      if (t && (await wafManager.waitForWAFValidation(t)), t || XHR.retryStrategyForStatusCode(R.status) !== XHR.RetryStrategy.NO_RETRY) {
+      if (t && (await wafManager.waitForWAFValidation(t)), t || sendWithRetry.retryStrategyForStatusCode(R.status) !== sendWithRetry.RetryStrategy.NO_RETRY) {
         delete window.sessionStateXHR;
         e = (await getSessionUserState(10)).data.meta || null;
       } else {
@@ -14407,7 +14407,7 @@ export async function $$hz0(e, t, d = {
       let t = null;
       let i = getWAFChallengeType(P);
       i && (await wafManager.waitForWAFValidation(i));
-      i || XHR.retryStrategyForStatusCode(P.status) !== XHR.RetryStrategy.NO_RETRY ? (delete window.userStateXHR, t = (await getUserState('onUserStateLoaded', 10)).response) : (t = P.responseText, delete window.userStateXHR);
+      i || sendWithRetry.retryStrategyForStatusCode(P.status) !== sendWithRetry.RetryStrategy.NO_RETRY ? (delete window.userStateXHR, t = (await getUserState('onUserStateLoaded', 10)).response) : (t = P.responseText, delete window.userStateXHR);
       performanceMetricsTracker.jsonParseDurationMs = Math.round(measureSyncDuration('apiUserStateJsonParse', ServiceCategories.APPLICATION_PLATFORM, () => {
         e = JSON.parse(t);
       }));
@@ -14442,7 +14442,7 @@ export async function $$hz0(e, t, d = {
       getInitialOptions().promo && b.dispatch(_$$Ay4({
         promo: getInitialOptions().promo || null
       }));
-      _$$M().catch(e => {
+      preloadCommonFonts().catch(e => {
         logWarning('fonts', 'Unable to cache fonts', {
           error: e.message
         });
@@ -14553,7 +14553,7 @@ export async function $$hz0(e, t, d = {
           } else if (e === 'handleCaptionsInstallProgress') {
             b.dispatch(Kh(t.captionsInstallProgress));
           } else if (e === 'redeemAppAuth') {
-            XHR.post('/api/session/app_auth/redeem', {
+            sendWithRetry.post('/api/session/app_auth/redeem', {
               g_secret: t.gSecret
             }).then(e => {
               b.dispatch(switchAccountAndNavigate({
@@ -15152,7 +15152,7 @@ export async function $$hz0(e, t, d = {
             link_name: a,
             link_url: e
           };
-          let o = XHR.post(`/api/files/${t}/related_links`, s);
+          let o = sendWithRetry.post(`/api/files/${t}/related_links`, s);
           await WB()?.optimisticallyCreate({
             DeveloperRelatedLink: {
               [`optimistic-link-${generateUUIDv4()}`]: {
@@ -15180,7 +15180,7 @@ export async function $$hz0(e, t, d = {
             link_name: a,
             link_url: e
           };
-          await XHR.del(`/api/files/${t}/related_links`, s);
+          await sendWithRetry.del(`/api/files/${t}/related_links`, s);
           relatedLinkRemoved({
             ...s,
             file_key: t,
@@ -15313,7 +15313,7 @@ export async function $$hz0(e, t, d = {
   });
 }
 let hH = async () => {
-  if (_$$N9.shouldAutoOpen() && (await _$$oU(location.href))) {
+  if (_$$N9.shouldAutoOpen() && (await canOpenUrlInDesktop(location.href))) {
     return new Promise(e => {
       _$$Q2().render(jsx(pS, {
         file: getInitialOptions().editing_file,

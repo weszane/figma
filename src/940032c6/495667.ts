@@ -7,7 +7,7 @@ import { VisualBellActions } from "../905/302958";
 import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { getResourceTypeLabel, mapVtResourceType } from "../figma_app/471982";
 import { hasContent, hasHubFile, isWidgetResource, getMainContent, getResourceType } from "../figma_app/427318";
-import { Z } from "../905/909123";
+import { resourceDetailQuery } from "../905/909123";
 import { zm, Qi } from "../figma_app/49598";
 import { C, $ } from "../figma_app/382445";
 import { showModalHandler } from "../905/156213";
@@ -181,7 +181,7 @@ let $$w = liveStoreInstance.Mutation(({
   apiResourceType: i
 }, {
   query: n
-}) => (n.mutate(Z({
+}) => (n.mutate(resourceDetailQuery({
   apiResourceType: i,
   id: t
 }), e => {
@@ -195,7 +195,7 @@ let S = liveStoreInstance.Mutation(({
   apiResourceType: i
 }, {
   query: n
-}) => (n.mutate(Z({
+}) => (n.mutate(resourceDetailQuery({
   apiResourceType: i,
   id: t
 }), e => {

@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { KD } from "../figma_app/975811";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { createTrackedAtom } from "../figma_app/615482";
 import { FormattedInputVariant1 } from "../905/203369";
 import { l6, c$ } from "../905/794875";
@@ -74,7 +74,7 @@ export function $$A3() {
   let [h, g] = useAtomValueAndSetter($$v5);
   let [C, E] = useAtomValueAndSetter($$I10);
   let [A, w] = useAtomValueAndSetter(b);
-  let k = Um();
+  let k = useDropdownState();
   let P = jsx(_$$A, {
     className: "x52n8ys"
   });

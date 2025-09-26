@@ -7,11 +7,11 @@ import { EditorPreferencesApi } from "../figma_app/740163";
 import { oi } from "../figma_app/598952";
 import { debugState } from "../905/407919";
 import { IpcStorageHandler } from "../905/724705";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 var $$_4 = (e => (e.MouseScrollToZoom = "mouse-scroll-wheel-zoom", e.RightClickDragToPan = "right-click-drag-to-pan", e))($$_4 || {});
 var h = (e => (e.UserManualChange = "user_manual_change", e.Onboarding = "onboarding", e))(h || {});
 function m(e, t) {
-  debugState.getState().user?.id && XHR.put("/api/user", "mouse-scroll-wheel-zoom" === e ? {
+  debugState.getState().user?.id && sendWithRetry.put("/api/user", "mouse-scroll-wheel-zoom" === e ? {
     mouse_scroll_to_zoom: t
   } : {
     right_click_drag_to_pan: t
@@ -31,7 +31,7 @@ function g({
         enabled: e.enabled,
         eventOrigin: e.eventOrigin
       });
-    } catch (e) {}
+    } catch (e) { }
   })({
     navigationPreference: e,
     enabled: t,

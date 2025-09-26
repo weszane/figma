@@ -16,7 +16,7 @@ import { TeamById } from "../figma_app/43951";
 import { getPermissionsState } from "../figma_app/642025";
 import { registerModal } from "../905/102752";
 import { hK } from "../figma_app/211706";
-import { Dd } from "../905/519092";
+import { ConfirmationModal } from "../905/519092";
 import { ModalContainer } from "../figma_app/918700";
 import { Do, v0 } from "../figma_app/639088";
 let x = (e, t, i) => e ? t === FAccessLevelType.PUBLIC ? renderI18nText("file_browser.team.you_will_lose_access_to_open_team_warning", {
@@ -126,7 +126,7 @@ let $$S0 = registerModal(function (e) {
         userId: y,
         teamId: e.teamId
       },
-      children: jsx(Dd, {
+      children: jsx(ConfirmationModal, {
         title: getI18nString("file_browser.team.team_leave_confirmation_title", {
           teamName: w?.name ?? ""
         }),

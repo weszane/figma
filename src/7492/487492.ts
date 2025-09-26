@@ -21,9 +21,10 @@ import { SvgComponent } from '../905/714743';
 import { j as _$$j } from '../905/813868';
 import { j as _$$j2 } from '../905/834956';
 import { useCurrentUserOrg } from '../905/845253';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { hideDropdownAction, showDropdownThunk } from '../905/929976';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { styleBuilderInstance } from '../905/941192';
 import { postUserFlag } from '../905/985254';
 import { A as _$$A5 } from '../1617/579393';
@@ -346,7 +347,7 @@ let eR = memo(e => {
   let s = useRecentlyUsedPluginsMap()[e.pluginId];
   let r = usePublishedPlugins()[e.pluginId];
   let d = useMemo(() => e.type === 'recent' ? s : e.type === 'org_private' ? getPluginVersion(r) : t, [t, e.type, r, s]);
-  let a = Um();
+  let a = useDropdownState();
   let o = a?.type === _n && a.data.pluginId === e.pluginId && a.data.targetRect && a.data.viewType === e.type;
   let u = $$eG6(e.pluginId, e.type);
   return jsx(eF, {
@@ -457,7 +458,7 @@ function eN(e) {
     includePendingPublishers: !1
   }).find(e => e.id === d);
   let o = a ? getPluginVersion(a) : void 0;
-  let u = Um();
+  let u = useDropdownState();
   let {
     viewPluginDetails
   } = ew();
@@ -762,14 +763,14 @@ function eA(e) {
   let d = useInstalledPluginsAndWidgets().widgets[e.widgetId];
   let a = useRecentlyUsedWidgetsMap()[e.widgetId];
   let o = e.type === 'recent' ? a : e.type === 'org_private' ? getPluginVersion(r) : d;
-  let u = Um();
+  let u = useDropdownState();
   let g = u?.type === _n && u.data.widgetId === e.widgetId && u.data.targetRect && u.data.viewType === e.type;
   let p = findPublishedWidgetById(e.widgetId);
   let I = useRef(null);
   let m = findLocalPluginById(e.widgetId);
   let x = desktopAPIInstance && !!p && !m;
   let j = !!m || x;
-  let h = Um();
+  let h = useDropdownState();
   let w = useRef(null);
   let f = u?.type === cH && u.data.widgetId === e.widgetId;
   let {
@@ -875,7 +876,7 @@ function eS(e) {
   });
   let u = useMemo(() => Object.values(o).find(e => e.id === a), [o, a]);
   let c = useMemo(() => u && u.current_plugin_version_id ? u.versions[u.current_plugin_version_id] : void 0, [u]);
-  let g = Um();
+  let g = useDropdownState();
   let {
     viewWidgetDetails
   } = ej();
@@ -1141,7 +1142,7 @@ let eM = memo(e => {
 export function $$ez5(e) {
   let i = useDispatch();
   let t = useRef(null);
-  let r = Um();
+  let r = useDropdownState();
   let d = useCanPerformAction();
   let a = isDevHandoffEditorType();
   let o = dR(e.pluginId, 'universal-insert');
@@ -1222,7 +1223,7 @@ export function $$eU3(e) {
   });
 }
 export function $$eG6(e, i) {
-  let t = Um();
+  let t = useDropdownState();
   return t?.type === eW && t.data.pluginId === e && i === t.data.tileType;
 }
 export function $$eH1(e) {
@@ -1232,7 +1233,7 @@ export function $$eH1(e) {
   let d = findPublishedWidgetById(e.widgetId);
   let a = desktopAPIInstance && !!d && !r;
   let o = !!r || a;
-  let u = Um();
+  let u = useDropdownState();
   let g = u?.type === cH && u.data.widgetId === e.widgetId;
   let p = useRef(null);
   let I = useCallback(t => {

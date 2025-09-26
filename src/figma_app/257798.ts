@@ -31,9 +31,9 @@ import { selectUserFlag } from "../905/940356";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { N as _$$N } from "../figma_app/268271";
 import { pN } from "../figma_app/433401";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { V as _$$V2 } from "../905/460261";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { Tuf } from "../figma_app/6204";
 import { oW, Rg, gf } from "../figma_app/201694";
 import { g as _$$g } from "../figma_app/594353";
@@ -71,8 +71,8 @@ function G() {
     });
   }, [a, show]);
   let s = getObservableOrFallback(EditorPreferencesApi().showPropertyLabels);
-  return jsx(rq, {
-    arrowPosition: F_.RIGHT_BODY,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: jsx("span", {
       className: cssBuilderInstance.preWrap.$,
       children: renderI18nText("ui3_labels_curator.description", {

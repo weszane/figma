@@ -6,7 +6,7 @@ import { getI18nString } from '../905/303541';
 import { Cf, it } from '../905/504727';
 import { getSingletonSceneGraph } from '../905/700578';
 import { q } from '../905/820062';
-import { BK } from '../905/848862';
+import { useDropdown } from '../905/848862';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { addViewportOffset, getViewportInfo } from '../figma_app/62612';
@@ -106,7 +106,7 @@ function M() {
 function F({
   breakpointRanges: e
 }) {
-  let t = BK('BREAKPOINTS_HEADER_DROPDOWN');
+  let t = useDropdown('BREAKPOINTS_HEADER_DROPDOWN');
   let r = t.data?.responsiveSetId || '';
   let a = trackFileEventWithUser();
   let s = useSetAtom(_$$O);

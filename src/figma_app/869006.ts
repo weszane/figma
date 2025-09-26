@@ -38,8 +38,8 @@ import { i as _$$i } from "../905/46262";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { accountTypeRequestHandler } from "../905/281010";
-import { rq } from "../905/425180";
-import { F_, EL } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition, PositioningStrategy } from "../905/858282";
 import { qm, q0 } from "../figma_app/431689";
 function C(e) {
   return jsx("div", {
@@ -211,8 +211,8 @@ function J({
     onClick: i,
     ctaTrackingDescriptor: UpgradeAction.NUDGE_ACCOUNT_TYPE_REQUEST
   };
-  return jsx(rq, {
-    arrowPosition: F_.TOP,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.TOP,
     clickOutsideToHide: !0,
     description: jsx("div", {
       className: cssBuilderInstance.pr16.$,
@@ -224,7 +224,7 @@ function J({
     isShowing: t,
     onClose: r,
     primaryCta: a,
-    shouldCenterArrow: EL.FALLBACK,
+    shouldCenterArrow: PositioningStrategy.FALLBACK,
     shouldDisableAnimation: !0,
     targetKey: e,
     testId: "nudge-cta-callout",

@@ -1,5 +1,5 @@
 import { n as _$$n } from "../905/347702";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { loadCanvasData } from "../905/815475";
 export let $$a0 = _$$n(async ({
   fileKey: e,
@@ -16,7 +16,7 @@ export let $$a0 = _$$n(async ({
     fileKey: e,
     selectedGuids: t
   });
-  let [a] = await loadCanvasData(r, (e, t) => XHR.post(e, {
+  let [a] = await loadCanvasData(r, (e, t) => sendWithRetry.post(e, {
     fv: `${t}`
   }, {
     responseType: "arraybuffer"

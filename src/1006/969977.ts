@@ -18,7 +18,7 @@ import { defaultColorManipulator } from "../905/713722";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { x as _$$x } from "../905/239551";
 import { isValidWidgetType, getWidgetMenuI18nString } from "../figma_app/364284";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { FEditorType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
 import { l6, c$ } from "../905/794875";
@@ -168,7 +168,7 @@ function R({
 }) {
   let n = getSelectedEditorType();
   let i = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   let a = e.options.find(t => t.option === e.selectedOption);
   let c = generateRecordingKey("widgetControl", e.propertyName);
   let p = void 0 !== n && n === FEditorType.Design;

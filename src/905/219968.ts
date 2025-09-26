@@ -1,4 +1,4 @@
-export function $$n0(e) {
-  return "VARIABLE_SET" === e.type;
+export function isVariableSet(e) {
+  return e.type === 'VARIABLE_SET'
 }
-export const v = $$n0;
+export const v = isVariableSet

@@ -7,7 +7,7 @@ import { E } from "../905/235326";
 import { Fullscreen } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { b as _$$b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { isInvalidValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
 import { $ } from "../905/330495";
@@ -23,7 +23,7 @@ export function $$f0(e) {
       isBackingSymbolSoftDeleted,
       restoreType
     } = $(e);
-    let h = _$$b({
+    let h = useLibraryFileLink({
       libraryKey: singleBackingSymbol?.sourceLibraryKey,
       nodeId: singleBackingSymbol?.publishID,
       mainComponent: !0

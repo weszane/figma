@@ -1,263 +1,390 @@
-import { kiwiParserCodec } from "../905/294864";
-import { FontSourceType, Fonts } from "../figma_app/763686";
-import { getFontIndexUrl, FONT_SF_PRO_DISPLAY, FONT_SF_PRO_ROUNDED, FONT_SF_COMPACT, FONT_SF_COMPACT_ROUNDED, FONT_SF_PRO, getFontFileUrl } from "../905/946258";
-import { getFeatureFlags } from "../905/601108";
-import { localStorageRef } from "../905/657224";
-import { trackEventAnalytics } from "../905/449184";
-import { logger } from "../905/651849";
-import { xQ } from "../905/535224";
-import { desktopAPIInstance } from "../figma_app/876459";
-import { hasNonDefaultOpticalSize, createFontMetadata } from "../905/165290";
-import { debugState } from "../905/407919";
-import { BrowserInfo } from "../figma_app/778880";
-import { logWarning, logError } from "../905/714362";
-import { XHR, getRequest } from "../905/910117";
-import { getI18nString } from "../905/303541";
-import { isFullscreenOverview } from "../figma_app/88239";
-import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { isFullscreenDevHandoffView } from "../905/782918";
-import { D as _$$D } from "../905/347702";
-let n;
-let v = XHR.requiredHeaders;
-let I = new class {
+import { createFontMetadata, hasNonDefaultOpticalSize } from '../905/165290'
+import { kiwiParserCodec } from '../905/294864'
+import { getI18nString } from '../905/303541'
+import { debugState } from '../905/407919'
+import { trackEventAnalytics } from '../905/449184'
+import { getFontFiles } from '../905/535224'
+import { getFeatureFlags } from '../905/601108'
+import { logger } from '../905/651849'
+import { localStorageRef } from '../905/657224'
+import { logError, logWarning } from '../905/714362'
+import { isFullscreenDevHandoffView } from '../905/782918'
+import { getRequest, sendWithRetry } from '../905/910117'
+import { FONT_SF_COMPACT, FONT_SF_COMPACT_ROUNDED, FONT_SF_PRO, FONT_SF_PRO_DISPLAY, FONT_SF_PRO_ROUNDED, getFontFileUrl, getFontIndexUrl } from '../905/946258'
+import { isFullscreenOverview } from '../figma_app/88239'
+import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
+import { Fonts, FontSourceType } from '../figma_app/763686'
+import { BrowserInfo } from '../figma_app/778880'
+import { desktopAPIInstance } from '../figma_app/876459'
+// Required headers for API requests
+let requiredHeaders = sendWithRetry.requiredHeaders
+// Font API class to handle font-related requests
+let FontAPI = new class {
+  FontsSchemaValidator: any
+  FileSchemaValidator: any
+
   constructor() {
-    this.FontsSchemaValidator = createNoOpValidator();
-    this.FileSchemaValidator = createNoOpValidator();
+    this.FontsSchemaValidator = createNoOpValidator()
+    this.FileSchemaValidator = createNoOpValidator()
   }
-  getFonts(e) {
+
+  getFonts(params: any) {
     return this.FontsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/fonts", APIParameterUtils.toAPIParameters(e || {})));
+      xr: api,
+    }) => await api.get('/api/fonts', APIParameterUtils.toAPIParameters(params || {})))
   }
-  getFile(e) {
+
+  getFile(params: any) {
     let {
       fileKey,
       fileHasParentOrg,
-      ...n
-    } = e;
-    return fileHasParentOrg ? this.FileSchemaValidator.validate(async ({
-      xr: r
-    }) => {
-      let a = await r.get(`/api/fonts/file/${e.fileKey}`, APIParameterUtils.toAPIParameters(n), {
-        headers: {
-          ...v,
-          Accept: "text/plain"
-        }
-      });
-      a.status >= 200 && a.status < 500 && 400 === a.status === fileHasParentOrg && logWarning("api_font", "client-side and server-side parent org check mismatch", {
-        fileKey,
-        fileHasParentOrg,
-        status: a.status
-      }, {
-        reportAsSentryError: !0
-      });
-      return a;
-    }) : Promise.reject();
+      ...restParams
+    } = params
+    return fileHasParentOrg
+      ? this.FileSchemaValidator.validate(async ({
+        xr: api,
+      }) => {
+        let response = await api.get(`/api/fonts/file/${params.fileKey}`, APIParameterUtils.toAPIParameters(restParams), {
+          headers: {
+            ...requiredHeaders,
+            Accept: 'text/plain',
+          },
+        })
+        response.status >= 200 && response.status < 500 && response.status === 400 === fileHasParentOrg && logWarning('api_font', 'client-side and server-side parent org check mismatch', {
+          fileKey,
+          fileHasParentOrg,
+          status: response.status,
+        }, {
+          reportAsSentryError: true,
+        })
+        return response
+      })
+      : Promise.reject()
   }
-}();
-let S = !1;
-let w = !1;
-let C = null;
-let T = e => e && 4 === e.schemaVersion && void 0 !== e.renames && void 0 !== e.emojis;
-let k = "agent-detected";
-export function $$R10() {
-  return localStorageRef?.getItem(k) === "true";
+}()
+// Flag to track if local fonts have been fetched
+let isLocalFontsFetched = false
+
+// Flag to track if fonts are initialized (this is the S variable from original code)
+let areFontsInitialized = false
+
+// Function to validate font index data
+let isValidFontIndex = (data: any) => data && data.schemaVersion === 4 && void 0 !== data.renames && void 0 !== data.emojis
+
+// Local storage key for agent detection
+let AGENT_DETECTED_KEY = 'agent-detected'
+export function isAgentDetected() {
+  return localStorageRef?.getItem(AGENT_DETECTED_KEY) === 'true'
 }
-let N = _$$D(() => {
-  let e = performance.now();
+let N = () => {
+  let e = performance.now()
   let t = getFontIndexUrl({
-    format: "kiwi",
+    format: 'kiwi',
     shouldUseLocalFontIndex: !!getFeatureFlags().font_index_use_local,
-    shouldUse250317Index: !!getFeatureFlags().font_index_250317
-  });
-  return XHR.crossOriginGetAny(t, null, {
+    shouldUse250317Index: !!getFeatureFlags().font_index_250317,
+  })
+  return sendWithRetry.crossOriginGetAny(t, null, {
     headers: {
-      "Content-Type": "application/octet-stream"
+      'Content-Type': 'application/octet-stream',
     },
-    responseType: "arraybuffer"
+    responseType: 'arraybuffer',
   }).then(({
-    response: t
+    response: t,
   }) => {
-    let i = performance.now();
-    let n = new Uint8Array(t);
-    let l = kiwiParserCodec.decodeFontIndex(n);
-    let d = performance.now();
-    return T(l) ? (l.files = function (e) {
-      if (!e || getFeatureFlags().dse_sf_pro_font || !getFeatureFlags().font_index_250317) return e;
-      let t = new Set([FONT_SF_PRO_DISPLAY, FONT_SF_PRO_ROUNDED, FONT_SF_COMPACT, FONT_SF_COMPACT_ROUNDED]);
-      return e.filter(e => !e.family || !t.has(e.family));
-    }(l.files), {
-      list: (l.files || []).map(e => {
-        let t = e.variationAxes ? e.styles.map(e => ({
-          name: e.name,
-          postscriptName: e.postscript,
-          axes: Object.fromEntries(e.variationAxisValues.map(({
-            tag: e,
-            value: t
-          }) => [e, t]))
-        })) : void 0;
-        return (e.styles || []).map(i => {
-          let n = i.variationAxisValues && Object.fromEntries(i.variationAxisValues.map(e => [e.tag, e.value]));
-          return {
-            source: FontSourceType.GOOGLE,
-            id: `${e.filename}_${e.version}`,
-            family: e.family,
-            style: i.name,
-            postscript: i.postscript,
-            weight: i.weight,
-            italic: i.italic,
-            stretch: i.stretch,
-            variationAxes: e.variationAxes?.map(e => ({
-              tag: e.tag,
+    let i = performance.now()
+    let n = new Uint8Array(t)
+    let l = kiwiParserCodec.decodeFontIndex(n)
+    let d = performance.now()
+    return isValidFontIndex(l)
+      ? (l.files = (function (e) {
+        if (!e || getFeatureFlags().dse_sf_pro_font || !getFeatureFlags().font_index_250317)
+          return e
+        let t = new Set([FONT_SF_PRO_DISPLAY, FONT_SF_PRO_ROUNDED, FONT_SF_COMPACT, FONT_SF_COMPACT_ROUNDED])
+        return e.filter(e => !e.family || !t.has(e.family))
+      }(l.files)), {
+        list: (l.files || []).map((e) => {
+          let t = e.variationAxes
+            ? e.styles.map(e => ({
               name: e.name,
-              min: e.min,
-              max: e.max,
-              default: e.defaultValue,
-              value: n?.[e.tag]
-            })),
-            variationInstances: t,
-            useFontOpticalSize: e.useFontOpticalSize
-          };
-        });
-      }).reduce((e, t) => e.concat(t), []),
-      renames: {
-        family: Object.fromEntries((l?.renames?.family || []).map(e => [e.oldFamily, e.newFamily])),
-        style: Object.fromEntries((l?.renames?.style || []).map(e => [e.familyName, Object.fromEntries(e.styleRenames.map(e => [e.oldStyle, e.newStyle]))]))
-      },
-      emojis: {
-        revision: l?.emojis?.revision || 0,
-        sizes: l?.emojis?.sizes || [],
-        sequences: (l?.emojis?.sequences || []).map(e => e.codepoints)
-      },
-      binary: n,
-      timing: {
-        indexFonts: {
-          xhr: i - e,
-          kiwiDecode: d - i,
-          preprocess: performance.now() - d
-        }
-      }
-    }) : null;
-  }).catch(e => (logError("fetchGoogleFonts", "failed to get kiwi index", {
-    err: e
-  }), null));
-});
+              postscriptName: e.postscript,
+              axes: Object.fromEntries(e.variationAxisValues.map(({
+                tag: e,
+                value: t,
+              }) => [e, t])),
+            }))
+            : void 0
+          return (e.styles || []).map((i) => {
+            let n = i.variationAxisValues && Object.fromEntries(i.variationAxisValues.map(e => [e.tag, e.value]))
+            return {
+              source: FontSourceType.GOOGLE,
+              id: `${e.filename}_${e.version}`,
+              family: e.family,
+              style: i.name,
+              postscript: i.postscript,
+              weight: i.weight,
+              italic: i.italic,
+              stretch: i.stretch,
+              variationAxes: e.variationAxes?.map(e => ({
+                tag: e.tag,
+                name: e.name,
+                min: e.min,
+                max: e.max,
+                default: e.defaultValue,
+                value: n?.[e.tag],
+              })),
+              variationInstances: t,
+              useFontOpticalSize: e.useFontOpticalSize,
+            }
+          })
+        }).reduce((e, t) => e.concat(t), []),
+        renames: {
+          family: Object.fromEntries((l?.renames?.family || []).map(e => [e.oldFamily, e.newFamily])),
+          style: Object.fromEntries((l?.renames?.style || []).map(e => [e.familyName, Object.fromEntries(e.styleRenames.map(e => [e.oldStyle, e.newStyle]))])),
+        },
+        emojis: {
+          revision: l?.emojis?.revision || 0,
+          sizes: l?.emojis?.sizes || [],
+          sequences: (l?.emojis?.sequences || []).map(e => e.codepoints),
+        },
+        binary: n,
+        timing: {
+          indexFonts: {
+            xhr: i - e,
+            kiwiDecode: d - i,
+            preprocess: performance.now() - d,
+          },
+        },
+      })
+      : null
+  }).catch((e) => {
+    logError('fetchGoogleFonts', 'failed to get kiwi index', {
+      err: e,
+    })
+    return null
+  })
+}
 async function P() {
-  let e;
-  let t;
-  if (!desktopAPIInstance) throw Error();
-  let i = await desktopAPIInstance.getFonts(!getFeatureFlags().desktop_fonts_via_utility_process);
-  if (getFeatureFlags().desktop_font_reload_on_focus) try {
-    e = await desktopAPIInstance.getModifiedFonts();
-    t = await desktopAPIInstance.getFontsModifiedAt();
-  } catch (e) {}
+  let e
+  let t
+  if (!desktopAPIInstance)
+    throw new Error('desktopAPIInstance is not available')
+  let i = await desktopAPIInstance.getFonts(!getFeatureFlags().desktop_fonts_via_utility_process)
+  if (getFeatureFlags().desktop_font_reload_on_focus) {
+    try {
+      e = await desktopAPIInstance.getModifiedFonts()
+      t = await desktopAPIInstance.getFontsModifiedAt()
+    }
+    catch { }
+  }
   return {
     fontFiles: i,
-    source: "desktop",
+    source: 'desktop',
     version: desktopAPIInstance.getInformationalVersion(),
     modified_at: t,
-    modified_fonts: e
-  };
-}
-export function $$O11(e) {
-  for (let t of e) if ("Artifakt Element" === t.family && "Thin" === t.style ? t.weight = 100 : "Artifakt Element" === t.family && "Extra Light" === t.style && (t.weight = 200), "Avenir" === t.family && t.source === FontSourceType.LOCAL) switch (t.style) {
-    case "Book":
-    case "Book Oblique":
-      t.weight = 350;
-      break;
-    case "Heavy":
-    case "Heavy Oblique":
-      t.weight = 800;
-      break;
-    case "Black":
-    case "Black Oblique":
-      t.weight = 900;
+    modified_fonts: e,
   }
-  for (let t of e) !t.italic && function (e) {
-    let t = e.toLowerCase();
-    for (let e of ["italic", "oblique"]) if (t.includes(e)) return !0;
-    return !1;
-  }(t.style) && (t.italic = !0);
-  return e;
 }
-export async function $$D5(e = [FontSourceType.LOCAL, FontSourceType.GOOGLE]) {
-  let t = {
+/**
+ * Normalizes font metadata by fixing weight values and detecting italic styles
+ * @param fontMetadataList - Array of font metadata objects
+ * @returns Normalized font metadata array
+ */
+export function normalizeFontMetadata(fontMetadataList) {
+  for (let font of fontMetadataList) {
+    if (font.family === 'Artifakt Element' && font.style === 'Thin') {
+      font.weight = 100
+    }
+    else if (font.family === 'Artifakt Element' && font.style === 'Extra Light') {
+      font.weight = 200
+    }
+    if (font.family === 'Avenir' && font.source === FontSourceType.LOCAL) {
+      switch (font.style) {
+        case 'Book':
+        case 'Book Oblique':
+          font.weight = 350
+          break
+        case 'Heavy':
+        case 'Heavy Oblique':
+          font.weight = 800
+          break
+        case 'Black':
+        case 'Black Oblique':
+          font.weight = 900
+      }
+    }
+  }
+
+  // Detect italic styles in font names
+  for (let font of fontMetadataList) {
+    const isItalicStyle = (styleName) => {
+      const lowerCaseStyle = styleName.toLowerCase()
+      return ['italic', 'oblique'].some(italicTerm => lowerCaseStyle.includes(italicTerm))
+    }
+
+    if (!font.italic && isItalicStyle(font.style)) {
+      font.italic = true
+    }
+  }
+  return fontMetadataList
+}
+// Define the structure for font list data
+interface FontListData {
+  localizedToUnlocalized: any[]
+  sources: FontSourceType[]
+  renames: {
+    family: Record<string, string>
+    style: Record<string, Record<string, string>>
+  }
+  timing: Record<string, any>
+  list?: any[]
+  localFontAgentVersion?: number | null
+  localFontsModifiedAt?: number
+  localModifiedFonts?: Record<string, any>
+  sharedFontsList?: any[]
+  indexFontsBinary?: Uint8Array
+  indexFontsList?: any[]
+  emojis?: {
+    revision: number
+    sizes: number[]
+    sequences: any[]
+  }
+  indexFakeFontsList?: any[]
+  localFontsList?: any[]
+}
+
+interface FontMetadataExtended {
+  family: any
+  style: any
+  weight: any
+  stretch: any
+  italic: any
+  postscript: any
+  id: string
+  source: FontSourceType
+  useFontOpticalSize: boolean
+  modifiedAt: any
+  userInstalled: any
+  variationAxes?: any[]
+}
+
+// Define the structure for font source types with fileKey
+interface FontSourceTypeWithFileKey {
+  type: FontSourceType
+  fileKey: string
+}
+
+/**
+ * Fetches font list from various sources (local, Google, shared)
+ * @param e - Array of font source types to fetch from
+ * @returns Promise resolving to font list data
+ */
+export async function fetchFontList(e: (FontSourceType | FontSourceTypeWithFileKey)[] = [FontSourceType.LOCAL, FontSourceType.GOOGLE]) {
+  let t: FontListData = {
     localizedToUnlocalized: [],
     sources: [],
     renames: {
       family: {},
-      style: {}
+      style: {},
     },
-    timing: {}
-  };
-  let i = e.map(e => {
-    switch (e) {
+    timing: {},
+  }
+  let i = e.map((e) => {
+    switch (typeof e === 'object' && e !== null && 'type' in e ? e.type : e) {
       case FontSourceType.LOCAL:
-        return function () {
-          let e;
-          let t = e => (C = `${e.origin}/figma`, console.log("[Local fonts] using agent"), {
-            source: "daemon",
-            ...e.data
-          });
-          e = desktopAPIInstance ? getFeatureFlags().desktop_use_agent ? xQ(20).then(t).catch(() => (trackEventAnalytics("Desktop Use Agent Failed"), P())) : P() : xQ(20).then(t);
-          let i = Date.now();
-          return e.then(e => {
-            if (!e) return null;
-            if (!w) {
-              w = !0;
-              let t = e.source;
-              let n = `${e.version || "unknown"}`;
-              let r = BrowserInfo.osname;
-              trackEventAnalytics("Local Fonts Fetched", {
+        return (function () {
+          let e
+          let t = (e) => {
+            C = `${e.origin}/figma`
+            console.log('[Local fonts] using agent')
+            return {
+              source: 'daemon',
+              ...e.data,
+            }
+          }
+          if (desktopAPIInstance) {
+            if (getFeatureFlags().desktop_use_agent) {
+              e = getFontFiles(20).then(t).catch(() => {
+                trackEventAnalytics('Desktop Use Agent Failed')
+                return P()
+              })
+            }
+            else {
+              e = P()
+            }
+          }
+          else {
+            e = getFontFiles(20).then(t)
+          }
+          let i = Date.now()
+          return e.then((e) => {
+            if (!e)
+              return null
+            if (!isLocalFontsFetched) {
+              isLocalFontsFetched = true
+              let t = e.source
+              let n = `${e.version || 'unknown'}`
+              let r = BrowserInfo.osname
+              trackEventAnalytics('Local Fonts Fetched', {
                 source: t,
                 version: n,
                 os: r,
                 freetype: !0,
                 durationMs: Date.now() - i,
-                numFonts: Object.keys(e.fontFiles).length
-              });
+                numFonts: Object.keys(e.fontFiles).length,
+              })
             }
-            let t = [];
-            let n = [];
-            let r = e.version && !isNaN(parseInt(e.version)) ? parseInt(e.version) : null;
-            null !== r && localStorageRef?.setItem(k, "true");
-            let s = e.modified_at && "number" == typeof e.modified_at ? e.modified_at : void 0;
-            let c = e?.modified_fonts;
-            let u = (r || 0) >= 20;
-            Object.keys(e.fontFiles).forEach(i => {
-              if (getFeatureFlags().ce_skip_pingfangui_font && i.toLowerCase().includes("pingfangui.ttc") || /\.suit$/.test(i)) return;
-              let r = e.fontFiles[i];
-              let s = !1;
-              for (let e of r) if (e.variationAxes && hasNonDefaultOpticalSize(e.variationAxes)) {
-                s = !0;
-                break;
+            let t = []
+            let n = []
+            let r = e.version && !isNaN(parseInt(e.version)) ? parseInt(e.version) : null
+            r !== null && localStorageRef?.setItem(AGENT_DETECTED_KEY, 'true')
+            let s = e.modified_at && typeof e.modified_at == 'number' ? e.modified_at : void 0
+            let c = e?.modified_fonts
+            let u = (r || 0) >= 20
+            Object.keys(e.fontFiles).forEach((i) => {
+              if (getFeatureFlags().ce_skip_pingfangui_font && i.toLowerCase().includes('pingfangui.ttc') || /\.suit$/.test(i))
+                return
+              let r = e.fontFiles[i]
+              let s = !1
+              for (let e of r) {
+                if (e.variationAxes && hasNonDefaultOpticalSize(e.variationAxes)) {
+                  s = !0
+                  break
+                }
               }
               for (let e = 0; e < r.length; ++e) {
-                let l = r[e];
-                if (getFeatureFlags().font_skip_inter && "Inter" === l.family || "GB18030 Bitmap" === l.family || "Apple Color Emoji" === l.family || "Roboto" === l.family) continue;
-                if (BrowserInfo.mac && "localized" in l && l.localized && e + 1 < r.length) {
-                  let i = r[e + 1];
-                  l.postscript === i.postscript && (t.push({
+                let l = r[e]
+                if (getFeatureFlags().font_skip_inter && l.family === 'Inter' || l.family === 'GB18030 Bitmap' || l.family === 'Apple Color Emoji' || l.family === 'Roboto')
+                  continue
+                if (BrowserInfo.mac && 'localized' in l && l.localized && e + 1 < r.length) {
+                  let i = r[e + 1]
+                  if (l.postscript === i.postscript) {
+                    t.push({
+                      unlocalized: {
+                        family: i.family,
+                        style: i.style,
+                      },
+                      localized: {
+                        family: l.family,
+                        style: l.style,
+                      },
+                    })
+                    l = i
+                    ++e
+                  }
+                }
+                else {
+                  l.localizedFamily && l.localizedStyle && t.push({
                     unlocalized: {
-                      family: i.family,
-                      style: i.style
+                      family: l.family,
+                      style: l.style,
                     },
                     localized: {
-                      family: l.family,
-                      style: l.style
-                    }
-                  }), l = i, ++e);
-                } else l.localizedFamily && l.localizedStyle && t.push({
-                  unlocalized: {
-                    family: l.family,
-                    style: l.style
-                  },
-                  localized: {
-                    family: l.localizedFamily,
-                    style: l.localizedStyle
-                  }
-                });
-                let d = {
+                      family: l.localizedFamily,
+                      style: l.localizedStyle,
+                    },
+                  })
+                }
+                let d: FontMetadataExtended = {
                   family: l.family,
                   style: l.style,
                   weight: l.weight,
@@ -268,38 +395,61 @@ export async function $$D5(e = [FontSourceType.LOCAL, FontSourceType.GOOGLE]) {
                   source: FontSourceType.LOCAL,
                   useFontOpticalSize: !1,
                   modifiedAt: l.modified_at,
-                  userInstalled: l.user_installed
-                };
-                u && l.variationAxes && (d.variationAxes = l.variationAxes, d.useFontOpticalSize = s);
-                n.push(d);
+                  userInstalled: l.user_installed,
+                }
+                if (u && l.variationAxes) {
+                  d.variationAxes = l.variationAxes
+                  d.useFontOpticalSize = s
+                }
+                n.push(d)
               }
-            });
+            })
             return {
               list: n,
               localizedToUnlocalized: t,
               sources: [FontSourceType.LOCAL],
               localFontAgentVersion: r,
               localFontsModifiedAt: s,
-              localModifiedFonts: c
-            };
-          }).catch(e => null);
-        }().then(e => {
-          null !== e && (t.localizedToUnlocalized = e.localizedToUnlocalized, e.localFontAgentVersion && (t.localFontAgentVersion = e.localFontAgentVersion), e.list && (t.localFontsList = $$O11(e.list)), t.sources.push(FontSourceType.LOCAL), t.localModifiedFonts = e.localModifiedFonts, t.localFontsModifiedAt = e.localFontsModifiedAt, t.timing = {
-            ...t.timing,
-            ...e.timing
-          });
-        }).catch(e => {
-          console.error("Error fetching local fonts", e);
-        }).then(() => {});
+              localModifiedFonts: c,
+            }
+          }).catch(_e => null)
+        }()).then((e) => {
+          if (e !== null) {
+            t.localizedToUnlocalized = e.localizedToUnnormalized
+            if (e.localFontAgentVersion) {
+              t.localFontAgentVersion = e.localFontAgentVersion
+            }
+            if (e.list) {
+              t.localFontsList = normalizeFontMetadata(e.list)
+            }
+            t.sources.push(FontSourceType.LOCAL)
+            t.localModifiedFonts = e.localModifiedFonts
+            t.localFontsModifiedAt = e.localFontsModifiedAt
+            t.timing = {
+              ...t.timing,
+              ...e.timing,
+            }
+          }
+        }).catch((e) => {
+          console.error('Error fetching local fonts', e)
+        }).then(() => { })
       case FontSourceType.GOOGLE:
-        return N().then(e => {
-          if (null === e) {
-            if (!n) return [];
-            e = n;
-          } else n = e;
-          if (t.renames = e.renames, t.emojis = e.emojis, t.indexFontsBinary = e.binary, t.indexFontsList = e.list, getFeatureFlags().dse_sf_pro_font && !getFeatureFlags().font_index_250317) {
-            let i = (e.list || []).filter(e => "Inter" === e.family).map(e => {
-              let t = "Semi Bold" === e.style ? "Semibold" : e.style;
+        return N().then((e) => {
+          if (e === null) {
+            if (!n)
+              return []
+            e = n
+          }
+          else {
+            n = e
+          }
+          t.renames = e.renames
+          t.emojis = e.emojis
+          t.indexFontsBinary = e.binary
+          t.indexFontsList = e.list
+          if (getFeatureFlags().dse_sf_pro_font && !getFeatureFlags().font_index_250317) {
+            let i = (e.list || []).filter(e => e.family === 'Inter').map((e) => {
+              let t = e.style === 'Semi Bold' ? 'Semibold' : e.style
               return {
                 source: FontSourceType.GOOGLE,
                 id: FONT_SF_PRO,
@@ -311,311 +461,385 @@ export async function $$D5(e = [FontSourceType.LOCAL, FontSourceType.GOOGLE]) {
                 useFontOpticalSize: e.useFontOpticalSize,
                 weight: e.weight,
                 variationAxes: e.variationAxes,
-                variationInstances: e.variationInstances
-              };
-            });
-            t.indexFakeFontsList = i;
+                variationInstances: e.variationInstances,
+              }
+            })
+            t.indexFakeFontsList = i
           }
-          t.sources.push(FontSourceType.GOOGLE);
+          t.sources.push(FontSourceType.GOOGLE)
           t.timing = {
             ...t.timing,
-            ...e.timing
-          };
-        }).catch(e => {
-          console.error("Error fetching index fonts", e);
-        }).then(() => {});
+            ...e.timing,
+          }
+        }).catch((e) => {
+          console.error('Error fetching index fonts', e)
+        }).then(() => { })
       case FontSourceType.SHARED:
-        return $$L6().then(e => {
-          null !== e && (t.sharedFontsList = $$O11(e), t.sources.push(FontSourceType.SHARED));
-        }).catch(e => {
-          console.error("Error fetching shared fonts", e);
-        });
+        return fetchSharedFonts().then((e) => {
+          if (e !== null) {
+            t.sharedFontsList = normalizeFontMetadata(e)
+            t.sources.push(FontSourceType.SHARED)
+          }
+        }).catch((e) => {
+          console.error('Error fetching shared fonts', e)
+        })
       default:
-        return $$L6(e.fileKey).then(e => {
-          null !== e && (t.sharedFontsList = $$O11(e), t.sources.push(FontSourceType.SHARED));
-        }).catch(t => {
-          console.error("Error fetching shared fonts for filekey", t, e.fileKey);
-        });
+        // Handle FontSourceTypeWithFileKey
+        if (typeof e === 'object' && e !== null && 'fileKey' in e) {
+          return fetchSharedFonts(e.fileKey).then((e) => {
+            if (e !== null) {
+              t.sharedFontsList = normalizeFontMetadata(e)
+              t.sources.push(FontSourceType.SHARED)
+            }
+          }).catch((t) => {
+            console.error('Error fetching shared fonts for filekey', t, e.fileKey)
+          })
+        }
+        // Fallback for unknown font source types
+        return Promise.resolve()
     }
-  });
-  if (await Promise.all(i), e.includes(FontSourceType.GOOGLE) && !t.indexFontsList) throw Error("fetchFontList(): no results");
-  return t;
+  })
+  await Promise.all(i)
+  if (e.includes(FontSourceType.GOOGLE) && !t.indexFontsList)
+    throw new Error('fetchFontList(): no results')
+  return t
 }
-export function $$L6(e = null) {
-  return I.getFonts({
-    fileKey: e || void 0
+export function fetchSharedFonts(e = null) {
+  return FontAPI.getFonts({
+    fileKey: e || void 0,
   }).then(({
-    data: e
-  }) => e && e.meta ? e.meta.fonts.map(e => createFontMetadata(e)) : null).catch(() => null);
+    data: e,
+  }) => e && e.meta ? e.meta.fonts.map(e => createFontMetadata(e)) : null).catch(() => null)
 }
-let F = new Map();
-export async function $$$$M0() {
+let F = new Map()
+export async function preloadCommonFonts() {
   let e = [{
-    family: "Inter",
-    style: "Regular"
+    family: 'Inter',
+    style: 'Regular',
   }, {
-    family: "Inter",
-    style: "Medium"
+    family: 'Inter',
+    style: 'Medium',
   }, {
-    family: "Merriweather",
-    style: "Regular"
+    family: 'Merriweather',
+    style: 'Regular',
   }, {
-    family: "Figma Hand",
-    style: "Regular"
+    family: 'Figma Hand',
+    style: 'Regular',
   }, {
-    family: "Roboto Mono",
-    style: "Regular"
-  }];
-  let t = ((await $$D5([FontSourceType.GOOGLE])).indexFontsList || []).filter(t => {
-    for (let i of e) if (t.family === i.family && t.style === i.style) return !0;
-    return !1;
-  }).map(async e => {
+    family: 'Roboto Mono',
+    style: 'Regular',
+  }]
+  let t = ((await fetchFontList([FontSourceType.GOOGLE])).indexFontsList || []).filter((t) => {
+    for (let i of e) {
+      if (t.family === i.family && t.style === i.style)
+        return !0
+    }
+    return !1
+  }).map(async (e) => {
     let {
       id,
       source,
-      postscript
-    } = e;
-    if (F.has(id)) return;
-    let r = await $$j3({
+      postscript,
+    } = e
+    if (F.has(id))
+      return
+    let r = await fetchFontFile({
       id,
       postscriptName: postscript,
       source,
       fileKey: null,
       teamId: null,
-      orgId: null
-    });
-    F.set(id, r);
-  });
-  await Promise.all(t);
+      orgId: null,
+    })
+    F.set(id, r)
+  })
+  await Promise.all(t)
 }
-export async function $$j3(e) {
-  if (!e.id) throw Error("Invalid font id");
-  if (e.source === FontSourceType.LOCAL && desktopAPIInstance && !getFeatureFlags().desktop_use_agent) return desktopAPIInstance.getFontFile(e.id, e.postscriptName);
-  let t = null;
-  let i = !1;
-  switch (e.source) {
+/**
+ * Fetches a specific font file by ID and source
+ * @param fontRequest - Font file request parameters
+ * @returns Promise resolving to font file data as ArrayBuffer
+ */
+export async function fetchFontFile(fontRequest) {
+  if (!fontRequest.id)
+    throw new Error('Invalid font id')
+  if (fontRequest.source === FontSourceType.LOCAL && desktopAPIInstance && !getFeatureFlags().desktop_use_agent)
+    return desktopAPIInstance.getFontFile(fontRequest.id, fontRequest.postscriptName)
+  let url = null
+  let isCrossOrigin = !1
+  switch (fontRequest.source) {
     case FontSourceType.LOCAL:
-      C && (i = !0, t = `${C}/font-file?file=${encodeURIComponent(e.id)}&freetype_minimum_api_version=20`);
-      break;
-    case FontSourceType.GOOGLE:
-      i = !0;
-      t = getFontFileUrl(e.id, {
-        shouldUseLocalFontIndex: !!getFeatureFlags().font_index_use_local
-      });
-      break;
-    case FontSourceType.SHARED:
-      e.fileKey ? t = `/api/fonts/${e.id}/file/${e.fileKey}` : e.teamId ? t = `/api/fonts/${e.id}/team/${e.teamId}` : e.orgId && (t = `/api/fonts/${e.id}/org/${e.orgId}`);
-  }
-  if (!t) {
-    if (desktopAPIInstance && getFeatureFlags().desktop_use_agent) {
-      trackEventAnalytics("Desktop Use Agent Failed", {
-        font: !0
-      });
-      return desktopAPIInstance.getFontFile(e.id, e.postscriptName);
-    }
-    throw Error("Invalid font source");
-  }
-  if (i) {
-    if (F.has(e.id)) return F.get(e.id);
-    let {
-      data
-    } = await XHR.crossOriginGet(t, null, {
-      responseType: "arraybuffer",
-      headers: {
-        Accept: "text/plain"
+      if (C) {
+        isCrossOrigin = !0
+        url = `${C}/font-file?file=${encodeURIComponent(fontRequest.id)}&freetype_minimum_api_version=20`
       }
-    });
-    return data;
+      break
+    case FontSourceType.GOOGLE:
+      isCrossOrigin = !0
+      url = getFontFileUrl(fontRequest.id, {
+        shouldUseLocalFontIndex: !!getFeatureFlags().font_index_use_local,
+      })
+      break
+    case FontSourceType.SHARED:
+      fontRequest.fileKey ? url = `/api/fonts/${fontRequest.id}/file/${fontRequest.fileKey}` : fontRequest.teamId ? url = `/api/fonts/${fontRequest.id}/team/${fontRequest.teamId}` : fontRequest.orgId && (url = `/api/fonts/${fontRequest.id}/org/${fontRequest.orgId}`)
+  }
+  if (!url) {
+    if (desktopAPIInstance && getFeatureFlags().desktop_use_agent) {
+      trackEventAnalytics('Desktop Use Agent Failed', {
+        font: !0,
+      })
+      return desktopAPIInstance.getFontFile(fontRequest.id, fontRequest.postscriptName)
+    }
+    throw new Error('Invalid font source')
+  }
+  if (isCrossOrigin) {
+    if (F.has(fontRequest.id))
+      return F.get(fontRequest.id)
+    let {
+      data,
+    } = await sendWithRetry.crossOriginGet(url, null, {
+      responseType: 'arraybuffer',
+      headers: {
+        Accept: 'text/plain',
+      },
+    })
+    return data
   }
   {
     let {
-      data
-    } = await getRequest(t, null, {
-      responseType: "arraybuffer",
+      data,
+    } = await getRequest(url, null, {
+      responseType: 'arraybuffer',
       headers: {
-        ...XHR.requiredHeaders,
-        Accept: "text/plain"
-      }
-    });
-    return data;
+        ...sendWithRetry.requiredHeaders,
+        Accept: 'text/plain',
+      },
+    })
+    return data
   }
 }
-export function $$U4(e, t, i, n, r) {
-  return I.getFile({
-    fileKey: n,
-    fileHasParentOrg: r,
-    family: e,
-    style: t,
-    version: i
+/**
+ * Fetches a font file with specific family, style, and version
+ * @param fontFamily - Font family name
+ * @param fontStyle - Font style name
+ * @param fontVersion - Font version
+ * @param fileKey - File key
+ * @param hasParentOrg - Whether file has parent organization
+ * @returns Promise resolving to font file data
+ */
+export function fetchFontByFamilyStyleVersion(fontFamily, fontStyle, fontVersion, fileKey, hasParentOrg) {
+  return FontAPI.getFile({
+    fileKey,
+    fileHasParentOrg: hasParentOrg,
+    family: fontFamily,
+    style: fontStyle,
+    version: fontVersion,
   }).then(({
-    data: e
+    data: fontData,
   }) => {
-    if (!e || !e.meta) return Promise.reject();
+    if (!fontData || !fontData.meta)
+      return Promise.reject()
     let {
-      meta
-    } = e;
-    if (!meta.url || !meta.font_info) return Promise.reject();
-    let i = meta.font_info && meta.font_info.variation_instances;
-    let n = $$O11(i && i.length > 0 ? i.map(e => createFontMetadata(meta.font_info, e)) ?? [] : [createFontMetadata(meta.font_info)]);
-    return 0 === n.length ? Promise.reject() : XHR.crossOriginGet(meta.url, null, {
-      responseType: "arraybuffer",
-      headers: {
-        ...XHR.requiredHeaders,
-        Accept: "text/plain"
-      }
-    }).then(({
-      data: e
-    }) => (Fonts.hasInFontList({
-      list: n,
-      localizedToUnlocalized: [],
-      renames: {
-        family: {},
-        style: {}
-      }
-    }) || Fonts.addToFontList({
-      list: n,
-      localizedToUnlocalized: [],
-      renames: {
-        family: {},
-        style: {}
-      }
-    }), e));
-  });
+      meta,
+    } = fontData
+    if (!meta.url || !meta.font_info)
+      return Promise.reject()
+    let i = meta.font_info && meta.font_info.variation_instances
+    let n = normalizeFontMetadata(i && i.length > 0 ? i.map(e => createFontMetadata(meta.font_info, e)) ?? [] : [createFontMetadata(meta.font_info)])
+    return n.length === 0
+      ? Promise.reject()
+      : sendWithRetry.crossOriginGet(meta.url, null, {
+        responseType: 'arraybuffer',
+        headers: {
+          ...sendWithRetry.requiredHeaders,
+          Accept: 'text/plain',
+        },
+      }).then(({
+        data: e,
+      }) => {
+        if (!Fonts.hasInFontList({
+          list: n,
+          localizedToUnlocalized: [],
+          renames: {
+            family: {},
+            style: {},
+          },
+        })) {
+          Fonts.addToFontList({
+            list: n,
+            localizedToUnlocalized: [],
+            renames: {
+              family: {},
+              style: {},
+            },
+          })
+        }
+        return e
+      })
+  })
 }
-export function $$B9() {
-  return S;
+export function areFontsInitializedCheck() {
+  return areFontsInitialized
 }
-export function $$V13() {
-  S = !0;
+export function setFontsInitialized() {
+  areFontsInitialized = true
 }
-export function $$G7(e) {
-  return (e?.sources || []).includes(FontSourceType.LOCAL) && (e?.localFontsList?.length || 0) > 0;
+export function hasLocalFontsAvailable(fontData) {
+  return (fontData?.sources || []).includes(FontSourceType.LOCAL) && (fontData?.localFontsList?.length || 0) > 0
 }
-let $$z2 = {
+export let defaultFontList = {
   list: [],
   localizedToUnlocalized: [],
   renames: {
     family: {},
-    style: {}
+    style: {},
   },
   emojis: {
     revision: 5,
     sizes: [0],
-    sequences: []
-  }
-};
-let H = "desktop_local_fonts_modified_timestamp";
-let $$W8 = _$$D(() => {
-  let e = localStorageRef?.getItem(H);
-  return "string" != typeof e || isNaN(parseInt(e)) ? null : parseInt(e);
-});
-export function $$K14(e) {
-  localStorageRef?.setItem(H, String(e));
+    sequences: [],
+  },
 }
-export function $$Y1(e, t, i) {
-  e().then(e => {
-    let n = getFeatureFlags().ce_mfm_ingest_on_focus && !S && $$G7(e);
-    let r = !1;
-    n && (logger.info("Updated fullscreen with local fonts"), t(e), r = !0);
-    let a = "number" == typeof e.localFontsModifiedAt && e.localFontsModifiedAt > Date.now() / 1e3 - 604800;
-    let s = $$W8();
-    let l = "number" == typeof e.localFontsModifiedAt && "number" == typeof s && e.localFontsModifiedAt > s;
-    if (a && l) {
-      let n = e.localModifiedFonts || {};
-      if (0 === Object.keys(n = Object.keys(n).reduce((e, t) => {
-        let i = n[t];
-        t.startsWith("/System/Library/Fonts/") && getFeatureFlags().ce_ignore_modified_apple_fonts || (e[t] = i);
-        return e;
-      }, {})).length) {
-        logger.info("No non-system modified fonts found");
-        return;
+let H = 'desktop_local_fonts_modified_timestamp'
+let getDesktopLocalFontsTimestamp = () => {
+  let e = localStorageRef?.getItem(H)
+  return typeof e != 'string' || isNaN(parseInt(e)) ? null : parseInt(e)
+}
+export function setLocalFontsModifiedTimestamp(timestamp) {
+  localStorageRef?.setItem(H, String(timestamp))
+}
+/**
+ * Checks for newly installed local fonts and notifies the user
+ * @param fontDataFetcher - Function that returns a promise resolving to font data
+ * @param fontDataHandler - Callback function to handle font data
+ * @param notificationHandler - Callback function to show notification
+ */
+export function checkForNewlyInstalledFonts(fontDataFetcher, fontDataHandler, notificationHandler) {
+  return fontDataFetcher().then((fontData) => {
+    let shouldIngestOnFocus = getFeatureFlags().ce_mfm_ingest_on_focus && !areFontsInitialized && hasLocalFontsAvailable(fontData)
+    let hasUpdatedFullscreen = !1
+    if (shouldIngestOnFocus) {
+      logger.info('Updated fullscreen with local fonts')
+      fontDataHandler(fontData)
+      hasUpdatedFullscreen = !0
+    }
+    let isModifiedWithinWeek = typeof fontData.localFontsModifiedAt == 'number' && fontData.localFontsModifiedAt > Date.now() / 1e3 - 604800
+    let lastModifiedTimestamp = getDesktopLocalFontsTimestamp()
+    let isModifiedAfterLastCheck = typeof fontData.localFontsModifiedAt == 'number' && typeof lastModifiedTimestamp == 'number' && fontData.localFontsModifiedAt > lastModifiedTimestamp
+    if (isModifiedWithinWeek && isModifiedAfterLastCheck) {
+      let modifiedFonts = fontData.localModifiedFonts || {}
+      modifiedFonts = Object.keys(modifiedFonts).reduce((filteredFonts, filePath) => {
+        let fontList = modifiedFonts[filePath]
+        filePath.startsWith('/System/Library/Fonts/') && getFeatureFlags().ce_ignore_modified_apple_fonts || (filteredFonts[filePath] = fontList)
+        return filteredFonts
+      }, {})
+      if (Object.keys(modifiedFonts).length === 0) {
+        logger.info('No non-system modified fonts found')
+        return
       }
-      logger.info("showing visual bell for new local fonts", {
-        getLocalFontsLastModified: $$W8(),
-        desktopLocalFontsModifiedAt: e.localFontsModifiedAt
-      });
-      "number" == typeof s && "number" == typeof e.localFontsModifiedAt && e.localFontsModifiedAt < s && logError("checkForNewInstalledFonts", "localFontsModifiedAt is less than localFontsLastModifiedAt", {
-        localFontsLastModifiedAt: s,
-        desktopLocalFontsModifiedAt: e.localFontsModifiedAt
-      });
-      $$K14(e.localFontsModifiedAt);
-      let a = Array.from(Object.values(n ?? {}).reduce((e, t) => (t.map(t => e.add(t?.family)), e), new Set()));
-      if (a.length > 0) {
-        let n = a.length;
-        let s = a[0];
-        let l = getI18nString("bindings.new_local_font_visual_bell_single", {
-          firstFont: s
-        });
-        if (2 === n) {
-          let e = a[1];
-          l = getI18nString("bindings.new_local_font_visual_bell_two", {
-            firstFont: s,
-            secondFont: e
-          });
-        } else n > 2 && (l = getI18nString("bindings.new_local_font_visual_bell", {
-          numAdditionalFonts: n - 1,
-          firstFont: s
-        }));
-        r || t(e);
-        let d = debugState?.getState()?.selectedView;
-        isFullscreenDevHandoffView(d) || isFullscreenOverview(d) || !getFeatureFlags().desktop_font_reload_on_focus_ux || i({
-          type: "new_local_font",
-          message: l
-        });
+      logger.info('showing visual bell for new local fonts', {
+        getLocalFontsLastModified: getDesktopLocalFontsTimestamp(),
+        desktopLocalFontsModifiedAt: fontData.localFontsModifiedAt,
+      })
+      typeof lastModifiedTimestamp == 'number' && typeof fontData.localFontsModifiedAt == 'number' && fontData.localFontsModifiedAt < lastModifiedTimestamp && logError('checkForNewInstalledFonts', 'localFontsModifiedAt is less than localFontsLastModifiedAt', {
+        localFontsLastModifiedAt: lastModifiedTimestamp,
+        desktopLocalFontsModifiedAt: fontData.localFontsModifiedAt,
+      })
+      setLocalFontsModifiedTimestamp(fontData.localFontsModifiedAt)
+      // Extract font families from modified fonts
+      const fontFamilies = Object.values(modifiedFonts ?? {}).reduce((familySet: Set<string>, fontList: any[]) => {
+        if (Array.isArray(fontList)) {
+          fontList.forEach((font) => {
+            if (font?.family) {
+              familySet.add(font.family)
+            }
+          })
+        }
+        return familySet
+      }, new Set<string>())
+      let fontFamilyArray: string[] = Array.from(fontFamilies as Iterable<string>)
+      if (fontFamilyArray.length > 0) {
+        let fontFamilyCount = fontFamilyArray.length
+        let firstFontFamily = fontFamilyArray[0]
+        let notificationMessage = getI18nString('bindings.new_local_font_visual_bell_single', {
+          firstFont: firstFontFamily,
+        })
+        if (fontFamilyCount === 2) {
+          let secondFontFamily = fontFamilyArray[1]
+          notificationMessage = getI18nString('bindings.new_local_font_visual_bell_two', {
+            firstFont: firstFontFamily,
+            secondFont: secondFontFamily,
+          })
+        }
+        else {
+          fontFamilyCount > 2 && (notificationMessage = getI18nString('bindings.new_local_font_visual_bell', {
+            numAdditionalFonts: fontFamilyCount - 1,
+            firstFont: firstFontFamily,
+          }))
+        }
+        hasUpdatedFullscreen || fontDataHandler(fontData)
+        let selectedView = debugState?.getState()?.selectedView
+        isFullscreenDevHandoffView(selectedView) || isFullscreenOverview(selectedView) || !getFeatureFlags().desktop_font_reload_on_focus_ux || notificationHandler({
+          type: 'new_local_font',
+          message: notificationMessage,
+        })
       }
     }
-  });
+  })
 }
-export function $$q12(e) {
-  let t = {
-    ...e.timing
-  };
-  let i = (e.localFontsList || []).concat(e.sharedFontsList || []);
-  if (e.indexFontsBinary) {
-    let n = performance.now();
-    Fonts.updateFontListBuffer(e.indexFontsBinary);
-    let r = performance.now();
+export function updateFontList(fontData) {
+  let timing = {
+    ...fontData.timing,
+  }
+  let fontList = (fontData.localFontsList || []).concat(fontData.sharedFontsList || [])
+  if (fontData.indexFontsBinary) {
+    let n = performance.now()
+    Fonts.updateFontListBuffer(fontData.indexFontsBinary)
+    let r = performance.now()
     Fonts.updateFontList({
-      list: i,
-      localizedToUnlocalized: e.localizedToUnlocalized
-    });
+      list: fontList,
+      localizedToUnlocalized: fontData.localizedToUnnormalized,
+    })
     t.fullscreen = {
       kiwiBinding: r - n,
-      jsonBinding: performance.now() - r
-    };
-  } else {
-    i = i.concat(e.indexFontsList || []);
-    let n = performance.now();
-    Fonts.updateFontList({
-      list: i,
-      localizedToUnlocalized: e.localizedToUnlocalized,
-      renames: e.renames,
-      ...(e.emojis ? {
-        emojis: e.emojis
-      } : {})
-    });
-    t.fullscreen = {
-      jsonBinding: performance.now() - n
-    };
+      jsonBinding: performance.now() - r,
+    }
   }
-  e.indexFakeFontsList && e.indexFakeFontsList.length > 0 && Fonts.addToFontList({
-    list: e.indexFakeFontsList,
-    localizedToUnlocalized: []
-  });
-  return t;
+  else {
+    fontList = fontList.concat(fontData.indexFontsList || [])
+    let n = performance.now()
+    Fonts.updateFontList({
+      list: fontList,
+      localizedToUnlocalized: fontData.localizedToUnlocalized,
+      renames: fontData.renames,
+      ...(fontData.emojis
+        ? {
+          emojis: fontData.emojis,
+        }
+        : {}),
+    })
+    t.fullscreen = {
+      jsonBinding: performance.now() - n,
+    }
+  }
+  fontData.indexFakeFontsList && fontData.indexFakeFontsList.length > 0 && Fonts.addToFontList({
+    list: fontData.indexFakeFontsList,
+    localizedToUnlocalized: [],
+  })
+  return timing
 }
-export const M = $$$$M0;
-export const M9 = $$Y1;
-export const eM = $$z2;
-export const M1 = $$j3;
-export const co = $$U4;
-export const yF = $$D5;
-export const oN = $$L6;
-export const Nz = $$G7;
-export const b = $$W8;
-export const Kk = $$B9;
-export const Rt = $$R10;
-export const F8 = $$O11;
-export const LQ = $$q12;
-export const gg = $$V13;
-export const PE = $$K14;
+export const M = preloadCommonFonts
+export const M9 = checkForNewlyInstalledFonts
+export const eM = defaultFontList
+export const M1 = fetchFontFile
+export const co = fetchFontByFamilyStyleVersion
+export const yF = fetchFontList
+export const oN = fetchSharedFonts
+export const Nz = hasLocalFontsAvailable
+export const b = getDesktopLocalFontsTimestamp
+export const Kk = areFontsInitializedCheck
+export const Rt = isAgentDetected
+export const F8 = normalizeFontMetadata
+export const LQ = updateFontList
+export const gg = setFontsInitialized
+export const PE = setLocalFontsModifiedTimestamp

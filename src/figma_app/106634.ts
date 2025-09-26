@@ -1,4 +1,4 @@
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FEditorType } from "../figma_app/53721";
 export let $$n0;
 class s {
@@ -7,7 +7,7 @@ class s {
     this.commentNotificationLogTimePerFile = {};
     this.COMMENT_NOTIFICATION_LOG_INTERVAL_MS = 36e5;
   }
-  showErrorBellInLocalDev(e) {}
+  showErrorBellInLocalDev(e) { }
   onMissingEditScope() {
     this.showErrorBellInLocalDev("No edit scope is active");
   }
@@ -38,7 +38,7 @@ class s {
           return !0;
       }
     });
-    o && (XHR.post(`/api/user_notifications/catfile_signup/${r}`, {
+    o && (sendWithRetry.post(`/api/user_notifications/catfile_signup/${r}`, {
       action_type: o
     }), this.commentNotificationLogTimePerFile[r] = s);
   }

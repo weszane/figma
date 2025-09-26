@@ -33,7 +33,7 @@ import { d as _$$d } from "../905/976845";
 import { A as _$$A } from "../905/891805";
 import { AutoInteractableWrapper } from "../905/277716";
 import { useNonMixedSelectionPropertyValue } from "../905/275640";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { KindEnum } from "../905/129884";
 import { Kt } from "../figma_app/156285";
 import { _2 } from "../905/185121";
@@ -118,7 +118,7 @@ function $(e) {
   let t = V0();
   let r = Xd();
   let i = zr();
-  let a = Um();
+  let a = useDropdownState();
   let s = Xo();
   let l = Jt();
   let d = useNonMixedSelectionPropertyValue("strokeBrushGuid");

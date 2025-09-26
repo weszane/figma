@@ -9,7 +9,7 @@ import { A as _$$A } from "../905/61817";
 import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { Cf, it } from "../905/504727";
 import { A as _$$A2 } from "../905/972270";
 import { A as _$$A3 } from "../6828/814452";
@@ -26,7 +26,7 @@ function A({
   ariaLabelledBy: g
 }) {
   let f = useDispatch();
-  let A = Um();
+  let A = useDropdownState();
   let b = A?.type === o;
   let v = useCallback(() => {
     b ? f(hideDropdownAction()) : f(showDropdownThunk({

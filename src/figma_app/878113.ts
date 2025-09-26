@@ -23,7 +23,7 @@ import { Zr } from "../figma_app/462456";
 import { JT } from "../figma_app/632248";
 import { pP, z8, RL } from "../figma_app/862289";
 import { dd, Q8, F3, DZ } from "../figma_app/604494";
-import { B } from "../905/222272";
+import { FlexBox } from "../905/222272";
 import { SZ, zA, Xu, mg } from "../905/987149";
 export class $$O4 extends Error {
   constructor(e) {
@@ -428,7 +428,7 @@ export function $$j5(e, t) {
   if (0 === l.length) return o;
   let c = l.reduce((e, t) => e + t.characters.length, 0);
   if (0 === c && !allowEmptyText) return o;
-  if (c > 4e4) return jsxs(B, {
+  if (c > 4e4) return jsxs(FlexBox, {
     gap: 8,
     children: [jsx("span", {
       className: cssBuilderInstance.textBodyMediumStrong.$,

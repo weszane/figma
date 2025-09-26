@@ -2,7 +2,7 @@ import { createOptimistCommitAction, createOptimistRevertAction } from "../905/6
 import { handleOptimistTransaction } from "../905/842794";
 import { createActionCreator } from "../905/73481";
 import { customHistory } from "../905/612521";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -31,7 +31,7 @@ let $$_5 = createOptimistThunk(async (e, {
     id,
     folder_id
   } of t) _[id] = folder_id;
-  let A = XHR.put("/api/repos_batch", {
+  let A = sendWithRetry.put("/api/repos_batch", {
     repos: h,
     is_multi_move: u,
     restore_files: p
@@ -61,7 +61,7 @@ let $$_5 = createOptimistThunk(async (e, {
   });
 });
 let A = (e, t, i, r, a, s = []) => {
-  a && XHR.del("/api/repos_batch", {
+  a && sendWithRetry.del("/api/repos_batch", {
     repo_ids: t,
     trash_repos: !i
   }).then(() => {

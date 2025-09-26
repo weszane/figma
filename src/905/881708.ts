@@ -1,4 +1,5 @@
-export class $$n0 {
+export class NameClass {
+  _name: any
   constructor(e) {
     this._name = e;
   }
@@ -6,4 +7,4 @@ export class $$n0 {
     return this._name;
   }
 }
-export const j = $$n0;
+export const j = NameClass;

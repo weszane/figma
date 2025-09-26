@@ -23,7 +23,7 @@ import { KindEnum } from '../905/129884';
 import { M as _$$M } from '../905/130634';
 import { t as _$$t } from '../905/150656';
 import { hideModal, popModalStack, showModalHandler } from '../905/156213';
-import { Ph } from '../905/160095';
+import { TrackedLink } from '../905/160095';
 import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { ScreenReaderOnly } from '../905/172252';
@@ -43,7 +43,7 @@ import { HiddenLabel, Label } from '../905/270045';
 import { SubscriptionStatus } from '../905/272080';
 import { Checkbox } from '../905/274480';
 import { C as _$$C2 } from '../905/283236';
-import { A as _$$A } from '../905/289352';
+import { VatGstInput } from '../905/289352';
 import { useTheme } from '../905/289770';
 import { orgSubscriptionAtom } from '../905/296690';
 import { VisualBellActions } from '../905/302958';
@@ -78,7 +78,7 @@ import { z as _$$z } from '../905/502533';
 import { Cf } from '../905/504727';
 import { isCollaboratorType, ProductAccessTypeEnum, ProductAccessTypeMap } from '../905/513035';
 import { Button } from '../905/521428';
-import { xQ } from '../905/535224';
+import { getFontFiles } from '../905/535224';
 import { r6 } from '../905/542608';
 import { FlashActions, handlePromiseError } from '../905/573154';
 import { handleStripeManageSubscription } from '../905/581647';
@@ -106,13 +106,13 @@ import { z as _$$z2 } from '../905/825185';
 import { u as _$$u } from '../905/834238';
 import { Hl, hM } from '../905/840929';
 import { useCurrentUserOrgId } from '../905/845253';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { V as _$$V } from '../905/849455';
 import { Z as _$$Z } from '../905/854480';
 import { X as _$$X2 } from '../905/857208';
 import { BQ } from '../905/865071';
 import { iv as _$$iv, mc as _$$mc, UC, Uj } from '../905/872285';
-import { XHR, XHRError } from '../905/910117';
+import { sendWithRetry, XHRError } from '../905/910117';
 import { dayjs } from '../905/920142';
 import { removeCommunityProfileUser, changeCommunityProfilePrimaryUser } from '../905/926523';
 import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
@@ -223,7 +223,7 @@ let y = createContext({
     activeSubView: null,
     properties: {}
   },
-  setAccountModalSubViewData: () => {}
+  setAccountModalSubViewData: () => { }
 });
 let E = I;
 let z1 = registerModal(e => {
@@ -278,7 +278,7 @@ let z1 = registerModal(e => {
       children: [jsx(_$$X, {
         address: s,
         updateAddress: o
-      }), jsx(_$$A, {
+      }), jsx(VatGstInput, {
         onChange: n,
         country: c,
         vatId: i,
@@ -458,7 +458,7 @@ function eA(e) {
   let t = 'primary-email-dropdown';
   let i = useDispatch();
   let n = e.profile.associated_users || [];
-  let a = Um();
+  let a = useDropdownState();
   let s = (t, n) => {
     i(changeCommunityProfilePrimaryUser({
       email: t,
@@ -1133,7 +1133,7 @@ function eJ(e) {
       e.meta.vat_gst_id && g(e.meta.vat_gst_id);
       e.meta.shipping_address && A(e.meta.shipping_address);
       e.meta.tax_id_verification_status && E(e.meta.tax_id_verification_status);
-    }).catch(() => {});
+    }).catch(() => { });
   });
   let O = useDispatch();
   let L = e.profile?.public_at ? e.profile?.profile_handle : null;
@@ -1728,7 +1728,7 @@ function tD() {
           }), i && jsx(ty, {}), jsx(tN, {}), jsx('div', {
             className: 'notifications_settings_modal--emailDisclaimer--EJ14Q',
             children: renderI18nText('notification_settings_modal.unsubscribe_from_figma_emails_disclaimer', {
-              privacy_policy: jsx(Ph, {
+              privacy_policy: jsx(TrackedLink, {
                 href: 'https://figma.com/privacy',
                 newTab: !0,
                 trusted: !0,
@@ -2098,7 +2098,7 @@ function iw(e) {
   } = e;
   let s = useDispatch();
   let [o, l] = useState(null);
-  let d = useCallback(() => (l(token.id), XHR.del(`/api/user/dev_tokens/${token.id}`).then(e => {
+  let d = useCallback(() => (l(token.id), sendWithRetry.del(`/api/user/dev_tokens/${token.id}`).then(e => {
     l(null);
     s(yJ({
       user: {
@@ -2110,7 +2110,7 @@ function iw(e) {
   }).catch(() => {
     l(null);
     s(FlashActions.error('Could not revoke token, please try again'));
-  }), () => {}), [s, token, user.id]);
+  }), () => { }), [s, token, user.id]);
   let c = token.scopes ?? [sy.FILES_READ_DEPRECATING, sy.FILE_COMMENTS_WRITE, sy.FILE_DEV_RESOURCES_WRITE, sy.WEBHOOKS_WRITE];
   let u = Object.entries(av(c)).filter(([, e]) => e !== _$$eK.NO_ACCESS).map(([e, t]) => {
     let i = qq(e).name;
@@ -2176,7 +2176,7 @@ function iw(e) {
         }) : renderI18nText('tokens.settings.never_used')
       }), jsx('button', {
         onClick: d,
-        style: styleBuilderInstance.$$if(o !== null, styleBuilderInstance.colorTextDisabled, styleBuilderInstance.colorTextDanger).cursorPointer.mr0.p0.add({
+        style: styleBuilderInstance.if(o !== null, styleBuilderInstance.colorTextDisabled, styleBuilderInstance.colorTextDanger).cursorPointer.mr0.p0.add({
           backgroundColor: 'transparent',
           border: 'none'
         }).$,
@@ -2302,7 +2302,7 @@ function iR({
   let s = useDispatch();
   let o = useCallback(t => {
     n(!0);
-    XHR.del(`/api/oauth/token/${t.client_id}`).then(t => {
+    sendWithRetry.del(`/api/oauth/token/${t.client_id}`).then(t => {
       s(yJ({
         user: {
           id: e,
@@ -2443,7 +2443,7 @@ function iF({
         children: renderI18nText('sessions.session.current_session')
       }) : jsx(ButtonPrimitive, {
         className: 'security_view--sessionRevokeEnabled--Tm88T',
-        style: styleBuilderInstance.$$if(i, styleBuilderInstance.colorTextDisabled, styleBuilderInstance.colorTextDanger).$,
+        style: styleBuilderInstance.if(i, styleBuilderInstance.colorTextDisabled, styleBuilderInstance.colorTextDanger).$,
         onClick: () => o(e.id),
         children: renderI18nText('sessions.session.revoke_session')
       })
@@ -2709,7 +2709,7 @@ function iH({
         children: renderI18nText('sessions.session.current_session')
       }) : jsx(ButtonPrimitive, {
         className: 'sessions_view--sessionRevokeEnabled--d-6RK',
-        style: styleBuilderInstance.$$if(i, styleBuilderInstance.colorTextDisabled, styleBuilderInstance.colorTextDanger).$,
+        style: styleBuilderInstance.if(i, styleBuilderInstance.colorTextDisabled, styleBuilderInstance.colorTextDanger).$,
         onClick: () => o(e.id),
         children: renderI18nText('sessions.session.revoke_session')
       })
@@ -2719,7 +2719,7 @@ function iH({
 let nt = createOptimistThunk((e, t) => {
   let i = PG(t);
   if (i.message) return e.dispatch(FlashActions.error(i.message));
-  let n = XHR.put('/api/user', t);
+  let n = sendWithRetry.put('/api/user', t);
   n.then(() => {
     let i = e.getState();
     i.modalShown && i.modalShown.type === ni.type && e.dispatch(popModalStack());
@@ -3723,7 +3723,7 @@ function ro() {
       try {
         let {
           data
-        } = await xQ();
+        } = await getFontFiles();
         let n = 0;
         for (let e in data.fontFiles) n += data.fontFiles[e].length;
         e || i(n);
@@ -3873,7 +3873,7 @@ function r_() {
   return desktopAPIInstance ? null : jsx('div', {
     className: 'account_settings_modal--newFeaturesBlockRow--ZVrSJ account_settings_modal--newFeaturesRow--buhmC',
     children: renderI18nText('settings.account_settings.learn_more_about_captioning', {
-      learnMoreLink: jsx(Ph, {
+      learnMoreLink: jsx(TrackedLink, {
         trusted: !0,
         newTab: !0,
         href: AM.ACCESSIBILITY,

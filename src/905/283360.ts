@@ -1,89 +1,132 @@
-import { MissingRuleType } from "../905/528903";
-import { LinterCppBindings, VariableResolvedDataType } from "../figma_app/763686";
-import { atomStoreManager } from "../figma_app/27355";
-import { colorToHex } from "../905/436288";
-import { serializeJSX } from "../figma_app/964367";
-import { cortexAPI } from "../figma_app/432652";
-import { Ay as _$$Ay } from "../figma_app/948389";
-import { openFileKeyAtom } from "../figma_app/516028";
-import { D } from "../905/442915";
-import { y } from "../905/456837";
-import { Hr } from "../figma_app/394327";
-import { cQ } from "../figma_app/225126";
-export async function $$g0(e, t, i, n, s, o, l) {
-  if (0 === t.length) return [];
-  let d = LinterCppBindings?.getVariableConsumptionForDocument() ?? new Map();
-  let m = LinterCppBindings?.getVariableConsumptionForHighestNodeContainer(e.guid) ?? new Map();
-  let g = {
-    entry_point: "linter",
-    open_file_key: atomStoreManager.get(openFileKeyAtom) ?? "",
-    query_id: n,
-    session_id: s,
-    candidates: t.map(e => ({
-      name: e.variable.name,
-      key_and_version: e.variableId,
-      variable_id: e.variableId,
-      variable_set_id: e.variableSetId,
-      variable_resolved_data_type: "color",
+import { colorToHex } from '../905/436288'
+import { recommendVariablesService } from '../905/442915'
+import { getRecentTimeDifferences } from '../905/456837'
+import { MissingRuleType } from '../905/528903'
+import { atomStoreManager } from '../figma_app/27355'
+import { cQ } from '../figma_app/225126'
+import { Hr } from '../figma_app/394327'
+import { cortexAPI } from '../figma_app/432652'
+import { openFileKeyAtom } from '../figma_app/516028'
+import { LinterCppBindings, VariableResolvedDataType } from '../figma_app/763686'
+import { Ay as _$$Ay } from '../figma_app/948389'
+import { serializeJSX } from '../figma_app/964367'
+
+// Original function: $$g0
+// Refactored to recommendColorVariables for clarity
+export async function recommendColorVariables(
+  node: any, // TODO: Add proper type for node
+  candidates: any[], // TODO: Add proper type for candidates
+  currentValue: any, // TODO: Add proper type for current value
+  queryId: string,
+  sessionId: string,
+  subscribedLibraryKeys: any[], // TODO: Add proper type
+  selectionContext: any, // TODO: Add proper type
+): Promise<any[]> {
+  if (candidates.length === 0) {
+    return []
+  }
+
+  const variableConsumptionForDocument = LinterCppBindings?.getVariableConsumptionForDocument() ?? new Map()
+  const variableConsumptionForHighestNodeContainer = LinterCppBindings?.getVariableConsumptionForHighestNodeContainer(node.guid) ?? new Map()
+
+  const requestPayload = {
+    entry_point: 'linter',
+    open_file_key: atomStoreManager.get(openFileKeyAtom) ?? '',
+    query_id: queryId,
+    session_id: sessionId,
+    candidates: candidates.map(candidate => ({
+      name: candidate.variable.name,
+      key_and_version: candidate.variableId,
+      variable_id: candidate.variableId,
+      variable_set_id: candidate.variableSetId,
+      variable_resolved_data_type: 'color' as const,
       value: {
-        color_value: e.resolvedValue.value
+        color_value: candidate.resolvedValue.value,
       },
-      usage_type: e.variable.isLocal ? "LOCAL" : "LIBRARY",
-      variable_num_usages_in_file: d.get(e.variableId) ?? 0,
-      variable_num_usages_in_containing_subtree: m.get(e.variableId) ?? 0,
-      elapsed_seconds_since_last_insertions: y(e.variableId)
+      usage_type: candidate.variable.isLocal ? 'LOCAL' : 'LIBRARY',
+      variable_num_usages_in_file: variableConsumptionForDocument.get(candidate.variableId) ?? 0,
+      variable_num_usages_in_containing_subtree: variableConsumptionForHighestNodeContainer.get(candidate.variableId) ?? 0,
+      elapsed_seconds_since_last_insertions: getRecentTimeDifferences(candidate.variableId),
     })),
     current_value: {
-      color_value: i
+      color_value: currentValue,
     },
-    subscribed_library_keys: o,
-    current_value_data_type: "color",
+    subscribed_library_keys: subscribedLibraryKeys,
+    current_value_data_type: 'color' as const,
     used_product_components_on_page: [],
-    selection_context: cQ(e, l, d, m)
-  };
+    selection_context: cQ(node, selectionContext, variableConsumptionForDocument, variableConsumptionForHighestNodeContainer),
+  }
+
   try {
-    return (await D.recommendVariables(g)).data.meta.reranked_candidates.slice(0, 5);
-  } catch {
-    console.error("Error fetching reranked candidate list");
-    return [];
+    const response = await recommendVariablesService.recommendVariables(requestPayload)
+    return response.data.meta.reranked_candidates.slice(0, 5)
+  }
+  catch {
+    console.error('Error fetching reranked candidate list')
+    return []
   }
 }
-export async function $$f1(e, t, i) {
-  if (1 === t.length) return t[0]?.variable.name ?? "";
-  let a = await serializeJSX(e, {
-    includeIDs: !0,
-    filterFunction: e => e.visible,
-    onlyIncludeTopPaint: !0
-  });
-  let c = {
-    variables: t.map(({
-      variable: e,
-      resolvedValue: t
-    }) => {
-      let i = t.value;
+
+// Original function: $$f1
+// Refactored to fixColorVariable for clarity
+export async function fixColorVariable(
+  node: any, // TODO: Add proper type for node
+  candidates: any[], // TODO: Add proper type for candidates
+  prop: 'FILL' | 'stroke', // TODO: Refine type if needed
+): Promise<string> {
+  if (candidates.length === 1) {
+    return candidates[0]?.variable.name ?? ''
+  }
+
+  const serializedJSX = await serializeJSX(node, {
+    includeIDs: true,
+    filterFunction: (element: any) => element.visible,
+    onlyIncludeTopPaint: true,
+  })
+
+  const context = {
+    variables: candidates.map(({ variable, resolvedValue }) => {
+      const colorValue = resolvedValue.value
       return {
-        name: e.name,
+        name: variable.name,
         type: Hr(VariableResolvedDataType.COLOR),
-        value: colorToHex(i, i.a)
-      };
+        value: colorToHex(colorValue, colorValue.a),
+      }
     }),
-    prop: "FILL" === i ? "fill" : "stroke"
-  };
-  let u = {
-    ..._$$Ay()
-  };
-  let p = await cortexAPI.shared.getViolationFix({
-    targetNodeGuid: e.guid,
-    inputJsx: a.jsxStr,
+    prop: prop === 'FILL' ? 'fill' : 'stroke',
+  }
+
+  const options = {
+    ..._$$Ay(),
+  }
+
+  const fixResponse = await cortexAPI.shared.getViolationFix({
+    targetNodeGuid: node.guid,
+    inputJsx: serializedJSX.jsxStr,
     ruleType: MissingRuleType.MISSING_COLOR_TOKEN,
-    context: c
-  }, u);
-  if (!p.propertyUpdates) throw Error("Missing property updates for color variable fix");
-  if (p.propertyUpdates.length > 1) throw Error("Received too property updates for color variable fix");
-  if (p.propertyUpdates[0]?.id !== e.guid) throw Error("AI hallucinated incorrect fix");
-  let h = p.propertyUpdates[0]?.newValue;
-  if (!h) throw Error("Missing variable value in color variable fix");
-  return h;
+    context,
+  }, options)
+
+  if (!fixResponse.propertyUpdates) {
+    throw new Error('Missing property updates for color variable fix')
+  }
+
+  if (fixResponse.propertyUpdates.length > 1) {
+    throw new Error('Received too many property updates for color variable fix')
+  }
+
+  if (fixResponse.propertyUpdates[0]?.id !== node.guid) {
+    throw new Error('AI hallucinated incorrect fix')
+  }
+
+  const newValue = fixResponse.propertyUpdates[0]?.newValue
+  if (!newValue) {
+    throw new Error('Missing variable value in color variable fix')
+  }
+
+  return newValue
 }
-export const i = $$g0;
-export const l = $$f1;
+
+// Refactored exports to match new function names
+export const i = recommendColorVariables
+export const l = fixColorVariable

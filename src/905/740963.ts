@@ -19,7 +19,7 @@ import { ButtonPrimitive } from "../905/632989";
 import v from "classnames";
 import { M3 } from "../figma_app/119475";
 import { getI18nString } from "../905/303541";
-import { f as _$$f2 } from "../905/287602";
+import { HighlightedText } from "../905/287602";
 var I = v;
 let w = e => {
   switch (e) {
@@ -63,7 +63,7 @@ function C({
         children: getFacetPrefix(e)
       }), !!t && jsx("div", {
         className: "faceted_search_preview_suggestion_row--valueContainer--oWST3",
-        children: jsx(_$$f2, {
+        children: jsx(HighlightedText, {
           text: t,
           query: d
         })

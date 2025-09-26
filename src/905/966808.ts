@@ -6,8 +6,8 @@ import { getFeatureFlags } from "../905/601108";
 import { x7 } from "../905/435079";
 import { Ds, vo } from "../figma_app/3776";
 import { kH } from "../figma_app/552821";
-import { j } from "../905/881708";
-export class $$p0 extends j {
+import { NameClass } from "../905/881708";
+export class $$p0 extends NameClass {
   constructor(e) {
     super(e);
     this._hoveredRowIndex = -1;

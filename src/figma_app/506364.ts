@@ -4,7 +4,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
-import { UV } from "../905/283918";
+import { SpellingAgent } from "../905/283918";
 import { f } from "../905/666831";
 import { LJ, N_, oz, LE, x5, Ev } from "../905/543054";
 import { mz } from "../905/715541";
@@ -48,7 +48,7 @@ let g = new class {
         await this.setCurrentImplementation(new f(), r);
         break;
       case QC.AGENT:
-        await this.setCurrentImplementation(new UV(), r);
+        await this.setCurrentImplementation(new SpellingAgent(), r);
         break;
       case QC.HUNSPELL:
         await this.setCurrentImplementation(new mz(), r);

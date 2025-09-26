@@ -22,7 +22,7 @@ import { selectUser } from '../905/372672';
 import { k as _$$k } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { AutoLayout } from '../905/470281';
-import { OJ } from '../905/519092';
+import { HeaderModal } from '../905/519092';
 import { registerTooltip } from '../905/524523';
 import { r6 } from '../905/542608';
 import { DashboardSections, NavigationRoutes } from '../905/548208';
@@ -43,7 +43,7 @@ import { Qq } from '../905/736956';
 import { p as _$$p } from '../905/763242';
 import { teamAPIClient } from '../905/834575';
 import { P as _$$P } from '../905/842406';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { h as _$$h2 } from '../905/857431';
 import { h as _$$h } from '../905/864281';
 import { InterProfileType } from '../905/895626';
@@ -132,7 +132,7 @@ function ea(e) {
   let t = useDispatch();
   let a = selectUser();
   let i = _$$P();
-  let l = Um();
+  let l = useDropdownState();
   let o = useMemo(() => e.teamLgResult.transform(({
     team: t
   }) => ({
@@ -736,7 +736,7 @@ let tr = registerModal(() => {
       }
     })]
   });
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: jsxs(AutoLayout, {
       width: 'hug-contents',
       padding: {

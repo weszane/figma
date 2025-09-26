@@ -7,7 +7,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { l as _$$l } from "../905/192768";
 import { hideModal, showModalHandler } from "../905/156213";
 import { Wc } from "../figma_app/482142";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { Dy, v0, hF, pL } from "../905/289198";
 var o = n;
 let f = memo(function (e) {
@@ -29,7 +29,7 @@ let f = memo(function (e) {
   }) : renderI18nText("confirm_downgrade.on_your_next_billing_date_team_name_will_be_downgraded_to_our_free_starter_plan", {
     teamName: n?.name
   });
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     onClose: f,
     title: getI18nString("confirm_downgrade.cancel_professional_plan"),
     minWidth: 344,

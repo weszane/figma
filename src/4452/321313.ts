@@ -7,7 +7,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
-import { Dd } from "../905/519092";
+import { ConfirmationModal } from "../905/519092";
 let _ = registerModal(function (e) {
   return jsx(TrackingProvider, {
     name: "Enable AI Features Modal",
@@ -15,7 +15,7 @@ let _ = registerModal(function (e) {
       planId: e.planId,
       planType: e.planType
     },
-    children: jsx(Dd, {
+    children: jsx(ConfirmationModal, {
       title: getI18nString("admin_settings.ai.features_toggle.modal.header"),
       maxWidth: 440,
       minWidth: 440,

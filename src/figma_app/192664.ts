@@ -9,7 +9,7 @@ import { Label } from "../905/270045";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { handleAtomEvent } from "../905/502364";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
 import { TextWithTruncation } from "../905/984674";
@@ -155,7 +155,7 @@ let R = registerModal(function (e) {
               whiteSpace: "pre"
             },
             children: " "
-          }), jsx(Ph, {
+          }), jsx(TrackedLink, {
             newTab: !0,
             trusted: !0,
             href: _$$s3,
@@ -176,7 +176,7 @@ let R = registerModal(function (e) {
                     whiteSpace: "pre"
                   },
                   children: " "
-                }), jsx(Ph, {
+                }), jsx(TrackedLink, {
                   newTab: !0,
                   trusted: !0,
                   href: _$$s3,

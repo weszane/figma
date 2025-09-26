@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import a from "../vendor/239910";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { serializeQuery } from "../905/634134";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { canCreateFileType } from "../figma_app/687776";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -184,7 +184,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
     key: t,
     folderId: r
   }) => () => {
-    let n = XHR.post(`/api/multiplayer/${t}/copy?${serializeQuery({
+    let n = sendWithRetry.post(`/api/multiplayer/${t}/copy?${serializeQuery({
       folder_id: r
     })}`);
     n.catch(({
@@ -253,7 +253,7 @@ let $$B2 = createOptimistThunk(e => {
 let $$G0 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = r.user?.drafts_folder_id;
-  return XHR.post(`/api/multiplayer/${t.file.key}/copy?${serializeQuery({
+  return sendWithRetry.post(`/api/multiplayer/${t.file.key}/copy?${serializeQuery({
     folder_id: n
   })}`).then(() => {
     e.dispatch(FlashActions.flash(getI18nString("user_view.file_duplicated_to_your_drafts")));

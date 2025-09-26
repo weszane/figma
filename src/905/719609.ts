@@ -19,7 +19,7 @@ export function $$d0({
     "badge--menuBadge--va-CK": "on_menu" === t,
     "badge--speakerNotes--glkoC": "slides_speaker_notes" === t
   });
-  let l = styleBuilderInstance.$$if(i, styleBuilderInstance.add({
+  let l = styleBuilderInstance.if(i, styleBuilderInstance.add({
     borderColor: "var(--color-border-selected)"
   })).$;
   return jsx("div", {

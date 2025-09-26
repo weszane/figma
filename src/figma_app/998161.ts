@@ -12,7 +12,7 @@ import { i as _$$i } from "../905/22844";
 import { GradientToolApi, VariablesBindings, NodePropertyCategory, LayoutTabType, VariableResolvedDataType } from "../figma_app/763686";
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { C as _$$C } from "../905/108595";
+import { useCounter } from "../905/108595";
 import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
 import { LazyInputForwardRef } from "../905/408237";
@@ -24,7 +24,7 @@ import { getColorFormat } from "../figma_app/740163";
 import { isGradientType, validateGradientPaint, getSolidPaint, getColorAtStop, paintManager } from "../figma_app/385874";
 import { useSelectionPropertyValue } from "../905/275640";
 import { tZ } from "../figma_app/852050";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useCurrentTool, useAppModelProperty } from "../figma_app/722362";
 import { normalizePath } from "../905/309735";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -204,10 +204,10 @@ function Z({
   hideCustomColorPickerFillTypeToggle: o
 }) {
   let l = useDispatch();
-  let d = Um();
+  let d = useDropdownState();
   let c = useCurrentTool();
   let u = Ep();
-  let p = _$$C();
+  let p = useCounter();
   let _ = getColorFormat();
   let m = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let g = useRef(null);

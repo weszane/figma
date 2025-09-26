@@ -1,6 +1,6 @@
 import { createActionCreator } from "../905/73481";
 import { handleOptimistTransactionWithError } from "../905/150006";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -15,7 +15,7 @@ import { AccessLevelEnum } from "../905/557142";
 import { roleServiceAPI } from "../figma_app/66216";
 import { createOptimistThunk } from "../905/350402";
 import { bE as _$$bE } from "../905/98702";
-let $$b10 = createOptimistThunk((e, t) => XHR.put(`/api/folders/${t.folderId}/description`, {
+let $$b10 = createOptimistThunk((e, t) => sendWithRetry.put(`/api/folders/${t.folderId}/description`, {
   description: t.description
 }).then(({
   data: t
@@ -30,7 +30,7 @@ let $$b10 = createOptimistThunk((e, t) => XHR.put(`/api/folders/${t.folderId}/de
 let $$T6 = createActionCreator("FOLDER_UNPIN_FILE");
 let $$I15 = createOptimistThunk((e, t) => {
   let r = e.optimisticDispatch($$T6(t));
-  return XHR.del(`/api/folders/${t.fileKey}/pin`).then(() => {
+  return sendWithRetry.del(`/api/folders/${t.fileKey}/pin`).then(() => {
     r.commit();
   }).catch(() => {
     r.revert();
@@ -43,7 +43,7 @@ let $$v8 = createOptimistThunk(async (e, t) => {
   trackFolderEvent("file_browser_folder_pin_file", t.folderId, null, e.getState(), {
     fileKey: t.fileKey
   });
-  await XHR.post(`/api/folders/${t.fileKey}/pin`).then(() => {
+  await sendWithRetry.post(`/api/folders/${t.fileKey}/pin`).then(() => {
     r.commit();
     e.dispatch(VisualBellActions.enqueue({
       error: !1,
@@ -90,7 +90,7 @@ let $$w11 = createOptimistThunk((e, t) => {
     trashed_user_id: null,
     is_abandoned_drafts: !1
   };
-  let l = XHR.post("/api/folders", {
+  let l = sendWithRetry.post("/api/folders", {
     team_id: t.teamId,
     path: t.name,
     is_invite_only: t.isInviteOnly,
@@ -154,7 +154,7 @@ createOptimistThunk((e, {
 }) => {
   let s = n ? "Folder Subscriber Added" : "Folder Subscriber Deleted";
   trackFolderEvent(s, t, r, e.getState());
-  let l = XHR.put(`/api/folders/${t}`, {
+  let l = sendWithRetry.put(`/api/folders/${t}`, {
     is_subscribed: n
   });
   handleOptimistTransactionWithError({

@@ -4,8 +4,8 @@ import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { C } from "../905/217042";
-import { j } from "../905/881708";
-export class $$c0 extends j {
+import { NameClass } from "../905/881708";
+export class $$c0 extends NameClass {
   constructor(e) {
     super(e);
   }

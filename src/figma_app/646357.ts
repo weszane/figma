@@ -26,7 +26,7 @@ import { getOrgByCurrentUserId } from '../905/845253';
 import { notificationActions } from '../905/851662';
 import { getParentOrgId, resolveParentOrgId } from '../905/872904';
 import { componentReplaceLocal } from '../905/879323';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { debounce } from '../905/915765';
 import { createLoadedState, createLoadingState } from '../905/957591';
 import { atomStoreManager, useAtomWithSubscription } from '../figma_app/27355';
@@ -401,7 +401,7 @@ export async function loadStyleCanvases(styles: any[]): Promise<void> {
   } else {
     if (keys.length === 0) return;
     try {
-      const response = (await XHR.post('/style/canvases', {
+      const response = (await sendWithRetry.post('/style/canvases', {
         style_keys: keys
       })) as {
         data: {
@@ -411,7 +411,7 @@ export async function loadStyleCanvases(styles: any[]): Promise<void> {
         };
       };
       for (const [key, url] of Object.entries(response.data.meta.urls)) {
-        XHR.crossOriginGetAny(url, null, {
+        sendWithRetry.crossOriginGetAny(url, null, {
           responseType: 'arraybuffer'
         }).then(({
           data
@@ -949,7 +949,7 @@ function createLocalLibraryItem(meta: any, published: any, local: any, fileKey: 
   const isPublished = published && published.unpublished_at == null;
   const isPublishable = !!local.isPublishable;
   let status = StagingStatusEnum.NOT_STAGED;
-  if (isPublished && !isPublishable) status = StagingStatusEnum.DELETED;else if (!isPublished && isPublishable) status = StagingStatusEnum.NEW;else if (!isPublished && !isPublishable) status = StagingStatusEnum.NOT_STAGED;
+  if (isPublished && !isPublishable) status = StagingStatusEnum.DELETED; else if (!isPublished && isPublishable) status = StagingStatusEnum.NEW; else if (!isPublished && !isPublishable) status = StagingStatusEnum.NOT_STAGED;
   const description = local.descriptionPlain ?? '';
   const description_rt = local.description ?? '';
   return {
@@ -1378,7 +1378,7 @@ export async function batchFetchFiles(libraryKeys: string[], dispatch: Fn) {
     let promises: Promise<void>[] = [];
     async function fetchBatch(keys: string[]) {
       try {
-        let response = await XHR.post('/api/files/batch', {
+        let response = await sendWithRetry.post('/api/files/batch', {
           library_keys: keys
         });
         response.data.meta || logError('designSystems', 'Unexpected empty API response', {
@@ -1413,7 +1413,7 @@ export async function fetchStylesByKeys(dispatch: Fn, styleKeys: string[], orgId
   let {
     styles,
     files
-  } = (await XHR.post('/api/styles', {
+  } = (await sendWithRetry.post('/api/styles', {
     style_keys: styleKeys,
     org_id: orgId
   })).data.meta;
@@ -1752,15 +1752,15 @@ export function hasVariableSetError(asset: any): boolean {
 
 // Promise and callback management for async operations (original: resolveUsedComponentsStateGroups, usedComponentsStateGroupsPromise, resolveUsedComponents, usedComponentsPromise,
 // tx, tN, getUsedComponentsStateGroupsAsync, resolveUsedLibraries, usedLibrariesPromise, resolveUsedLibrariesAsync, usedLibrariesAsyncPromise)
-export let resolveUsedComponentsStateGroups: () => void = () => {};
+export let resolveUsedComponentsStateGroups: () => void = () => { };
 export let usedComponentsStateGroupsPromise = new Promise<void>(resolve => {
   resolveUsedComponentsStateGroups = resolve;
 });
-export let resolveUsedComponents: () => void = () => {};
+export let resolveUsedComponents: () => void = () => { };
 export let usedComponentsPromise = new Promise<void>(resolve => {
   resolveUsedComponents = resolve;
 });
-export let resolveAsync: () => void = () => {};
+export let resolveAsync: () => void = () => { };
 export let asyncPromise = new Promise<void>(resolve => {
   resolveAsync = resolve;
 });
@@ -1778,11 +1778,11 @@ export function getUsedComponentsStateGroupsAsync(store: any) {
     loadingKey: `GET_USED_COMPONENTS_STATE_GROUPS_FOR_${store.getState().openFile?.key}`
   };
 }
-export let resolveUsedLibraries: () => void = () => {};
+export let resolveUsedLibraries: () => void = () => { };
 export let usedLibrariesPromise = new Promise<void>(resolve => {
   resolveUsedLibraries = resolve;
 });
-export let resolveUsedLibrariesAsync: () => void = () => {};
+export let resolveUsedLibrariesAsync: () => void = () => { };
 export let usedLibrariesAsyncPromise = new Promise<void>(resolve => {
   resolveUsedLibrariesAsync = resolve;
 });

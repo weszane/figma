@@ -5,7 +5,7 @@ import { getResourceDataOrFallback } from "../905/663269";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { handlePromiseError } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -44,7 +44,7 @@ let $$S6 = createOptimistThunk(async (e, {
   e.dispatch(VisualBellActions.dequeue({
     matchType: o
   }));
-  await XHR.put(`/api/file/${fileKey}/voting_sessions/${a}`, {
+  await sendWithRetry.put(`/api/file/${fileKey}/voting_sessions/${a}`, {
     in_progress: !1
   }).then(({
     status: r
@@ -87,7 +87,7 @@ let $$A14 = createOptimistThunk((e, {
   e.dispatch(VisualBellActions.dequeue({
     matchType: "start-voting-session-failed"
   }));
-  XHR.post(`/api/file/${fileKey}/voting_sessions`, n).then(n => {
+  sendWithRetry.post(`/api/file/${fileKey}/voting_sessions`, n).then(n => {
     200 === n.status ? (e.dispatch($$I10({
       votingSessionId: n.data.meta.id
     })), "MeetingsPanel" === a && atomStoreManager.get(Qs).activeToolModal === _$$sx.VOTING && atomStoreManager.set(Qs, {
@@ -112,7 +112,7 @@ let $$N1 = createOptimistThunk((e, {
 }) => {
   let r = e.getState().selectedView;
   if (!r.fileKey) return null;
-  let n = XHR.del(`/api/file/${r.fileKey}/voting_sessions/${t}`);
+  let n = sendWithRetry.del(`/api/file/${r.fileKey}/voting_sessions/${t}`);
   e.dispatch(handlePromiseError({
     promise: n,
     fallbackError: getI18nString("voting.modal.delete_voting_session_error")

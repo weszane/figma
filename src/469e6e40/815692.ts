@@ -64,7 +64,7 @@ import { PluginImage } from '../905/480825';
 import { openWindow } from '../905/508367';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { getCodegenLanguagePreference } from '../905/515076';
-import { Dd, OJ } from '../905/519092';
+import { ConfirmationModal, HeaderModal } from '../905/519092';
 import { Button } from '../905/521428';
 import { subscribeAndAwaitData } from '../905/553831';
 import { mL, UC } from '../905/563637';
@@ -92,10 +92,10 @@ import { u as _$$u2 } from '../905/774364';
 import { N as _$$N2 } from '../905/809096';
 import { AutoLayout } from '../905/470281';
 import { useCurrentUserOrg } from '../905/845253';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { n as _$$n } from '../905/861286';
 import { FDocumentType } from '../905/862883';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { dayjs } from '../905/920142';
 import { selectViewAction } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
@@ -167,7 +167,7 @@ import { ls, V0 } from '../figma_app/755395';
 import { Rs as _$$Rs } from '../figma_app/761870';
 import { MeasurementUnit } from '../figma_app/763686';
 import { z6 } from '../figma_app/805373';
-import { O as _$$O } from '../figma_app/809387';
+import { getOrgAdminTabMessage } from '../figma_app/809387';
 // var r = require('../figma_app/822011');
 import { r as _$$r, hM, N_, qr, Rc, vS } from '../figma_app/827447';
 import { createEmptyAddress } from '../figma_app/831101';
@@ -271,7 +271,7 @@ let G = registerModal(() => {
   let a = useSelector(e => e.orgSamlConfig);
   let s = !a.config;
   let r = () => e(popModalStack());
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: getI18nString('org_settings.scim.scim_provisioning'),
     onClose: r,
     maxWidth: 492,
@@ -432,7 +432,7 @@ let eu = registerModal(() => {
   let b = Number(g.nonMfaMemberCount);
   let v = d && l === AuthTypeEnum.ANY;
   let f = () => e(popModalStack());
-  return jsxs(OJ, {
+  return jsxs(HeaderModal, {
     containerClassName: jT,
     title: getI18nString('org_settings.sign_in_method.authentication'),
     onClose: f,
@@ -506,7 +506,7 @@ let eC = registerModal(e => {
   let s = () => t(popModalStack());
   dayjs.extend(r);
   dayjs(e.subscriptionStart).format('Do');
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     onClose: s,
     title: getI18nString('billing_emails_modal.billing_emails_info.what_billing_emails'),
     minWidth: 341,
@@ -1311,7 +1311,7 @@ let tU = registerModal(() => {
   useEffect(() => {
     r.status === 'loaded' && d(tP(r.data?.org?.orgSharedSetting?.autogenPasswordControls));
   }, [r]);
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: getI18nString('org_settings.autogen_password_controls.title'),
     onClose: l,
     maxWidth: 380,
@@ -1387,7 +1387,7 @@ let tF = registerModal(() => {
   let e = useDispatch();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = () => e(popModalStack());
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: getI18nString('settings_tab.scim_metadata_modal.member_metadata'),
     onClose: a,
     maxWidth: 340,
@@ -1701,7 +1701,7 @@ function tX(e) {
 let tQ = registerModal(e => {
   let t = useDispatch();
   let a = () => t(popModalStack());
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: getI18nString('settings_tab.connected_apps.revoke_app', {
       appName: e.token.name
     }),
@@ -1731,7 +1731,7 @@ let tQ = registerModal(e => {
           className: tH,
           onClick: () => {
             t(popModalStack());
-            XHR.del(`/api/oauth/token/${e.org.id}/${e.token.client_id}`).then(a => {
+            sendWithRetry.del(`/api/oauth/token/${e.org.id}/${e.token.client_id}`).then(a => {
               t(FlashActions.flash(getI18nString('settings_tab.connected_apps.oauth_token_deleted')));
               t(popModalStack());
               e.onRevoke();
@@ -1789,7 +1789,7 @@ let tZ = registerModal(e => {
       }
     }, s.client_id))
   });
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: getI18nString('settings_tab.connected_apps'),
     onClose: () => t(popModalStack()),
     maxWidth: 462,
@@ -1805,7 +1805,7 @@ let tZ = registerModal(e => {
 }, 'ConnectedAppsModal');
 let t0 = registerModal(e => {
   let t = useDispatch();
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: e.token.name,
     onClose: () => t(popModalStack()),
     maxWidth: 462,
@@ -2088,7 +2088,7 @@ function aU({
     'children': [getFeatureFlags().dev_mode_org_pinned_plugins_ent ? jsxs('div', {
       className: cssBuilderInstance.mb8.$,
       children: [jsx('div', {
-        className: cssBuilderInstance.$$if(!isBigmaEnabledSimple(t) && !o, cssBuilderInstance.opacity0_5).$,
+        className: cssBuilderInstance.if(!isBigmaEnabledSimple(t) && !o, cssBuilderInstance.opacity0_5).$,
         children: jsx(aP, {
           label: getI18nString('settings_tab.pinned_plugins_label'),
           description: getI18nString('settings_tab.pinned_plugins_description'),
@@ -2326,7 +2326,7 @@ function az({
   }, [a]);
   let b = useSelector(e => e.whitelistedPlugins);
   return jsxs('div', {
-    'className': cssBuilderInstance.m16.$$if(!isBigmaEnabledSimple(t), cssBuilderInstance.opacity0_5).$,
+    'className': cssBuilderInstance.m16.if(!isBigmaEnabledSimple(t), cssBuilderInstance.opacity0_5).$,
     'id': 'org-admin-codegen-settings',
     'data-testid': 'org-admin-codegen-settings',
     'children': [jsx(aP, {
@@ -2437,7 +2437,7 @@ function aW() {
     t.loaded && !g && (u(t.plugin), h(!0));
   }, [t.loaded, t.plugin, u, g, h]);
   return jsxs('div', {
-    'className': cssBuilderInstance.m16.$$if(!isBigmaEnabledSimple(e), cssBuilderInstance.opacity0_5).$,
+    'className': cssBuilderInstance.m16.if(!isBigmaEnabledSimple(e), cssBuilderInstance.opacity0_5).$,
     'data-testid': 'dev-mode-settings-modal-auto-run',
     'children': [jsx(aP, {
       label: getI18nString('settings_tab.auto_run_label'),
@@ -2567,7 +2567,7 @@ let aH = registerModal(() => {
     }
     t(popModalStack());
   };
-  return jsxs(OJ, {
+  return jsxs(HeaderModal, {
     title: jsx(aD, {
       text: getI18nString('settings_tab.dev_mode_label')
     }),
@@ -2966,7 +2966,7 @@ let nr = registerModal(() => {
     properties: {
       orgId: t.id
     },
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: getI18nString('org_settings.external_collaboration_controls.header'),
       onClose: a,
       maxWidth: 376,
@@ -3171,7 +3171,7 @@ let nm = registerModal(() => {
   let m = useSelector(e => e.orgDomains.domains);
   let p = () => e(popModalStack());
   let [g, h] = useState(t.invite_whitelist_guest_invite_setting);
-  return jsxs(OJ, {
+  return jsxs(HeaderModal, {
     containerClassName: 'guest_invite_settings_modal--modalContainer--yxLS6',
     title: getI18nString('org_settings.guest_control.guest_membership'),
     onClose: p,
@@ -3343,7 +3343,7 @@ function nv(e) {
 }
 function nw(e) {
   let t = useDispatch();
-  let a = Um();
+  let a = useDropdownState();
   let s = a?.type === e.id;
   return jsxs(_$$V3, {
     chevronClassName: cssBuilderInstance.mlAuto.$,
@@ -3480,7 +3480,7 @@ let nC = registerModal(e => {
   let k = useCallback(e => {
     e !== o && (d(e), _(nx()));
   }, [o]);
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: getI18nString('settings_tab.idle_session_timeout_settings_modal.header'),
     onClose: f,
     maxWidth: 288,
@@ -3614,7 +3614,7 @@ let nT = registerModal(e => {
       ipAllowlistRanges: nI(c)
     }));
   }, [x, r, c, e.orgId, t, a, h]);
-  return jsxs(Dd, {
+  return jsxs(ConfirmationModal, {
     maxWidth: 500,
     title: getI18nString('settings_tab.ip_allowlist_label'),
     onClose: a,
@@ -4446,7 +4446,7 @@ let ss = registerModal(() => {
     properties: {
       orgId: t.id
     },
-    children: jsx(Dd, {
+    children: jsx(ConfirmationModal, {
       title: getI18nString('org_settings.team_creation.modal', {
         organization: t.name
       }),
@@ -5501,7 +5501,7 @@ export function $$sr0(e) {
   } : ts, tc, t_, isGovCluster() || Q ? null : tm, eE.settings.length ? eE : null, tp);
   return jsxs('div', {
     children: [jsx(_$$K, {
-      title: _$$O(DashboardSection.SETTINGS)
+      title: getOrgAdminTabMessage(DashboardSection.SETTINGS)
     }), jsxs('div', {
       className: xd,
       children: [th.filter(e => !!e).filter(e => !!e?.settings.length).map(e => jsx(Kz, {

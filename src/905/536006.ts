@@ -1,8 +1,8 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useEffect, useState } from "react";
 import { FontSourceType } from "../figma_app/763686";
-import { rO } from "../905/535224";
-import { XHR } from "../905/910117";
+import { makeDesktopGetRequest } from "../905/535224";
+import { sendWithRetry } from "../905/910117";
 import { SvgComponent, V } from "../905/714743";
 import { fj, Aw } from "../905/690539";
 import { q9 } from "../905/698759";
@@ -71,9 +71,9 @@ function _({
       return;
     }
     try {
-      (e.source === FontSourceType.LOCAL ? rO(e.previewPath, {
+      (e.source === FontSourceType.LOCAL ? makeDesktopGetRequest(e.previewPath, {
         raw: !0
-      }) : XHR.crossOriginGet(e.previewPath, null, {
+      }) : sendWithRetry.crossOriginGet(e.previewPath, null, {
         raw: !0
       })).then(t => {
         let i = Aw(e.family, t.data);

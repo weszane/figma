@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { hideOpenDesktopAppModal } from "../figma_app/91703";
 import { fullscreenValue } from "../figma_app/455680";
 import { N } from "../figma_app/240060";
-import { Xj } from "../905/748636";
+import { DraggableModalBgDisabled } from "../905/748636";
 import { oVP } from "../figma_app/27776";
 let g = parsePxInt(oVP);
 export class $$f0 extends PureComponent {
@@ -30,7 +30,7 @@ export class $$f0 extends PureComponent {
     return void 0 === W2() && !N.isAutoOpenEnabled();
   }
   render() {
-    return jsx(Xj, {
+    return jsx(DraggableModalBgDisabled, {
       initialPosition: this.initialPosition,
       title: getI18nString("desktop_open_views.open_in_desktop_from_now_on_modal.title"),
       headerSize: "small",

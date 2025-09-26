@@ -12,9 +12,9 @@ import { zC } from "../figma_app/186343";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { N } from "../figma_app/268271";
-import { w } from "../905/129046";
-import { rq } from "../905/425180";
-import { F_ } from "../905/858282";
+import { VideoOverlayComponent } from "../905/129046";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/858282";
 import { vlG } from "../figma_app/6204";
 let $$C1 = "ui3-layers-horizontal-scroll-onboarding-key";
 let $$j2 = "ui2-layers-horizontal-scroll-onboarding-key";
@@ -38,12 +38,12 @@ export function $$S0() {
       canShow: (t, s) => t && !e && p && !s
     });
   }, [show, e, p, t]);
-  return jsx(rq, {
-    arrowPosition: F_.RIGHT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_TITLE,
     description: renderI18nText("ui3_layers_horizontal_scroll_overlay.ui3_description"),
     disableHighlight: !0,
     isShowing,
-    media: jsx(w, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl("86193716c443398bbd6b55d19b65db2eaf0fe3c1"),
       aspectRatio: 16 / 9
     }),

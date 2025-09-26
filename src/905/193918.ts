@@ -15,20 +15,20 @@ import { x as _$$x } from '../905/233240';
 import { HiddenLabel, Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
 import { C as _$$C2 } from '../905/283236';
-import { A as _$$A2 } from '../905/289352';
+import { VatGstInput } from '../905/289352';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { b as _$$b, c as _$$c } from '../905/308099';
 import { z as _$$z } from '../905/353894';
 import { selectCurrentUser } from '../905/372672';
 import { Ay as _$$Ay2 } from '../905/506641';
-import { OJ } from '../905/519092';
+import { HeaderModal } from '../905/519092';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { logError, logWarning } from '../905/714362';
 import { SvgComponent } from '../905/714743';
 import { n as _$$n } from '../905/861286';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { selectViewAction } from '../905/929976';
 import { s as _$$s2 } from '../905/932270';
 import { _5, AA, AG, Be, C_, Cd, ck, DU, fI, h6, HC, IC, Ie, jH, JS, lA, Mt, nv, Oz, Ph, Pl, PX, r9, rb, SU, t$, TF, u7, UI, us, w1, Wz, xc, Yf, yu, yV } from '../905/941408';
@@ -79,7 +79,7 @@ function j({
       children: [jsx(_$$X, {
         address: e,
         updateAddress: t
-      }), jsx(_$$A2, {
+      }), jsx(VatGstInput, {
         onChange: a,
         country: e.country,
         vatId: i,
@@ -140,7 +140,7 @@ function Z({
         disabled: s === 'too_short',
         onClick: () => {
           o('loading');
-          XHR.post('/api/community/promo_codes/validate', {
+          sendWithRetry.post('/api/community/promo_codes/validate', {
             resource_type: getResourceType(e),
             resource_id: e.id,
             promo_code: l
@@ -917,7 +917,7 @@ export const CommunityCheckoutModal = registerModal(props => {
         subscription_interval: monetizedMeta?.is_subscription ? subscriptionInterval : null
       };
       if (userInputtedVatId !== undefined) payload.user_inputted_vat_id = userInputtedVatId;
-      await XHR.post(`/api/community/buyer/${monetizedMetaId}/buy`, payload);
+      await sendWithRetry.post(`/api/community/buyer/${monetizedMetaId}/buy`, payload);
       dispatch(VisualBellActions.clearAll());
       dispatch(hideModal());
       dispatch(VisualBellActions.enqueue({
@@ -1052,7 +1052,7 @@ export const CommunityCheckoutModal = registerModal(props => {
     onCardReady: setCardReady,
     onRemoveCard: id => {
       setIsRemovingCard(true);
-      XHR.del(`/api/community/buyer/payment_method/${id}`).then(() => {
+      sendWithRetry.del(`/api/community/buyer/payment_method/${id}`).then(() => {
         const updatedMethods = paymentMethods.filter(pm => pm.payment_method_id !== id);
         setPaymentMethods(updatedMethods);
         setSelectedPaymentMethodId(updatedMethods[0]?.payment_method_id || '');
@@ -1122,22 +1122,22 @@ export const CommunityCheckoutModal = registerModal(props => {
   // Desktop modal view
   const desktopModal = jsx(_$$z, {
     query: `(min-width: ${parsePxNumber(tgj)}px)`,
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: jsxs('div', {
         children: [
-        // Title logic
-        (() => {
-          const resourceName = resource ? getCurrentVersion(resource)?.name : localResource ? localResource.manifest.name : undefined;
-          return resourceName !== 'undefined' && resource && monetizedMeta && monetizedMeta.is_subscription ? renderI18nText('community.buyer.subscribe_to_resource_name', {
-            resourceName
-          }) : renderI18nText('community.buyer.purchase_resource_name', {
-            resourceName
-          });
-        })(), (localResource || isAdminReview) && jsx(Badge, {
-          text: localResource ? renderI18nText('community.buyer.development') : renderI18nText('community.plugins.in_review'),
-          color: BadgeColor.WARNING,
-          className: Ph
-        })]
+          // Title logic
+          (() => {
+            const resourceName = resource ? getCurrentVersion(resource)?.name : localResource ? localResource.manifest.name : undefined;
+            return resourceName !== 'undefined' && resource && monetizedMeta && monetizedMeta.is_subscription ? renderI18nText('community.buyer.subscribe_to_resource_name', {
+              resourceName
+            }) : renderI18nText('community.buyer.purchase_resource_name', {
+              resourceName
+            });
+          })(), (localResource || isAdminReview) && jsx(Badge, {
+            text: localResource ? renderI18nText('community.buyer.development') : renderI18nText('community.plugins.in_review'),
+            color: BadgeColor.WARNING,
+            className: Ph
+          })]
       }),
       headerClassName: cssBuilderInstance.font13.mx8.$,
       headerSize: 'large',

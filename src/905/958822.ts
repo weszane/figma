@@ -240,7 +240,7 @@ function ef(e) {
         maxWidth: "100%",
         height: "fit-content"
       },
-      className: cssBuilderInstance.$$if(e.hideOverflow, cssBuilderInstance.overflowHidden).$,
+      className: cssBuilderInstance.if(e.hideOverflow, cssBuilderInstance.overflowHidden).$,
       onClick: t => {
         e.propogateOnClick || t.stopPropagation();
         o();

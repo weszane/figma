@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Button } from "../905/521428";
-import { x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { X } from "../figma_app/91315";
@@ -25,7 +25,7 @@ let _ = (e, t = {}) => function (r) {
   };
   let m = r.avatarEditorState && r.avatarEditorState.status === hv.UPLOADING && r.entity === r.avatarEditorState.entity;
   let g = t.className ? t.className : n1;
-  let f = jsx(x, {
+  let f = jsx(LoadingRenderer, {
     isLoading: m,
     className: `${Lq} ${g}`,
     children: () => jsx(e, {

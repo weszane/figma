@@ -34,7 +34,7 @@ import { LibraryModalVariablesData, CommunityLibraryModalVariablesData, LibraryM
 import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { Ef } from "../905/81982";
 import { isTeamLibrary, isCommunityLibrary } from "../figma_app/633080";
-import { O as _$$O } from "../figma_app/809387";
+import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, FigResourceType } from "../figma_app/650409";
 import { SectionType } from "../figma_app/858344";
 import { hubFileAndPresetKeysSetAtom, resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
@@ -58,7 +58,7 @@ import { isValidLibraryKey } from "../figma_app/630951";
 import { selectCurrentUser } from "../905/372672";
 import { Y as _$$Y2 } from "../905/465068";
 import { registerModal } from "../905/102752";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { X as _$$X, U as _$$U } from "../905/77000";
 import { EntityType } from "../905/806400";
 import { l as _$$l2 } from "../905/716947";
@@ -73,7 +73,7 @@ import ek from "classnames";
 import { ResourceStatus } from "../905/663269";
 import { IntersectionSentinel } from "../905/925868";
 import { z as _$$z, Z as _$$Z } from "../905/306088";
-import { X as _$$X2 } from "../905/376628";
+import { renderDesignSymstemLibraryModal } from "../905/376628";
 import { handleWorkspaceLibrarySubscription, handleOrgLibrarySubscription, handleDeleteWorkspaceLibrarySubscription } from "../figma_app/430563";
 import { Ho } from "../figma_app/236178";
 import { hasActiveSubscriptionNotSubscribed } from "../figma_app/646357";
@@ -86,7 +86,7 @@ import { XF, wZ, CA } from "../figma_app/777207";
 import { liveStoreInstance, getAtomMutate } from "../905/713695";
 import { WB } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { tgj } from "../figma_app/27776";
 import { A as _$$A3 } from "../b2835def/491732";
 function X(e) {
@@ -413,7 +413,7 @@ let eV = new class {
       onfulfilled: n,
       onrejected: s
     }) => eG({
-      request: XHR.post(`/api/workspace_approved_library/${t}`, {
+      request: sendWithRetry.post(`/api/workspace_approved_library/${t}`, {
         workspace_id: e
       }).then(n, s),
       fileKey: t,
@@ -428,7 +428,7 @@ let eV = new class {
       onfulfilled: n,
       onrejected: s
     }) => ez({
-      request: XHR.del(`/api/workspace_approved_library/${a}`, {
+      request: sendWithRetry.del(`/api/workspace_approved_library/${a}`, {
         workspace_id: t
       }).then(n, s),
       approvedLibraryId: e
@@ -440,7 +440,7 @@ let eV = new class {
       onfulfilled: n,
       onrejected: s
     }) => eG({
-      request: XHR.post(`/api/org_approved_library/${t}`, {
+      request: sendWithRetry.post(`/api/org_approved_library/${t}`, {
         org_id: e
       }).then(n, s),
       fileKey: t,
@@ -455,7 +455,7 @@ let eV = new class {
       onfulfilled: n,
       onrejected: s
     }) => ez({
-      request: XHR.del(`/api/org_approved_library/${a}`, {
+      request: sendWithRetry.del(`/api/org_approved_library/${a}`, {
         org_id: t
       }).then(n, s),
       approvedLibraryId: e
@@ -845,7 +845,7 @@ function e9({
           workspaceId: a,
           workspaceName: o.name
         }), jsx(te, {})]
-      }), C && a && N && "file" === e.type && jsx(_$$X2, {
+      }), C && a && N && "file" === e.type && jsx(renderDesignSymstemLibraryModal, {
         isShowing: !0,
         onCancel: () => S(!1),
         onConfirm: () => {
@@ -978,7 +978,7 @@ function e9({
         dataOnboardingKey: e4[e],
         value: e,
         disabled: F,
-        className: cssBuilderInstance.mt8.mb8.h16.$$if(F, cssBuilderInstance.opacity0_5).$,
+        className: cssBuilderInstance.mt8.mb8.h16.if(F, cssBuilderInstance.opacity0_5).$,
         labelClassName: cssBuilderInstance.font11.$,
         children: e8(e)
       }, e))
@@ -1038,7 +1038,7 @@ function ta({
         a(!e.isIntersecting);
       }
     }), jsx("div", {
-      className: tt.sticky.top0.colorBg.zIndex1.pt8.bRadius4.$$if(t, cssBuilderInstance.bb1.bSolid.colorBorder).$,
+      className: tt.sticky.top0.colorBg.zIndex1.pt8.bRadius4.if(t, cssBuilderInstance.bb1.bSolid.colorBorder).$,
       children: jsx(TextWithTruncation, {
         fontWeight: "medium",
         children: e
@@ -1197,7 +1197,7 @@ let td = registerModal(function ({
   return jsx(TrackingProvider, {
     name: "Library Management Modal",
     properties: E,
-    children: jsxs(OJ, {
+    children: jsxs(HeaderModal, {
       title: m && h ? m.name : getI18nString("resources_tab.libraries.manage_this_library"),
       maxWidth: 648,
       onClose: g,
@@ -1691,7 +1691,7 @@ export function $$tx1(e) {
       rightActions: ex
     }) : !getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K, {
-        title: _$$O(DashboardSection.RESOURCES)
+        title: getOrgAdminTabMessage(DashboardSection.RESOURCES)
       }), jsx(_$$b, {
         tab: DashboardSection.RESOURCES,
         selectedSecondaryTab: FigResourceType.LIBRARIES,

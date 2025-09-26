@@ -10,7 +10,7 @@ import { sZ } from "../figma_app/948389";
 import { BaseCustomError } from "../905/843553";
 import { JT } from "../figma_app/632248";
 import { Dl, as, Uu } from "../905/487011";
-import { dM, F9 } from "../905/278499";
+import { AIActionStatus, AIActionResult } from "../905/278499";
 import { k } from "../905/167644";
 import { k as _$$k } from "../905/788559";
 var $$E6 = (e => (e.INITIAL = "initial", e.RUNNING = "running", e.CANCELLED = "cancelled", e.ERROR = "error", e.DONE = "done", e))($$E6 || {});
@@ -88,8 +88,8 @@ export async function $$v0(e, t, r, n?: any) {
       as({
         ...aiTrackingContext,
         ...n,
-        status: dM.COMPLETED,
-        reason: F9.SUCCESS
+        status: AIActionStatus.COMPLETED,
+        reason: AIActionResult.SUCCESS
       });
       return o;
     }
@@ -101,8 +101,8 @@ export async function $$v0(e, t, r, n?: any) {
     as({
       ...aiTrackingContext,
       ...n,
-      status: dM.FAILED,
-      reason: F9.STOPPED
+      status: AIActionStatus.FAILED,
+      reason: AIActionResult.STOPPED
     });
     return;
   } catch (t) {
@@ -121,8 +121,8 @@ export async function $$v0(e, t, r, n?: any) {
     as({
       ...aiTrackingContext,
       ...n,
-      status: dM.FAILED,
-      reason: F9.ERROR,
+      status: AIActionStatus.FAILED,
+      reason: AIActionResult.ERROR,
       errorReason: sZ(t),
       errorMessage: sZ(t) === ErrorType.GENERIC ? t.message ?? t.toString?.() : void 0
     });
@@ -163,26 +163,26 @@ export function $$N7(e) {
           case "cancelled":
             return {
               ended: !0,
-              status: dM.FAILED,
-              reason: F9.STOPPED
+              status: AIActionStatus.FAILED,
+              reason: AIActionResult.STOPPED
             };
           case "error":
             return {
               ended: !0,
-              status: dM.FAILED,
-              reason: F9.ERROR
+              status: AIActionStatus.FAILED,
+              reason: AIActionResult.ERROR
             };
           case "done":
             return {
               ended: !0,
-              status: dM.COMPLETED,
-              reason: F9.SUCCESS
+              status: AIActionStatus.COMPLETED,
+              reason: AIActionResult.SUCCESS
             };
           default:
             return {
               ended: !1,
-              status: dM.FAILED,
-              reason: F9.ERROR
+              status: AIActionStatus.FAILED,
+              reason: AIActionResult.ERROR
             };
         }
       }(state);

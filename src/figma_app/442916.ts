@@ -30,7 +30,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { generateAnnomousPrefill } from "../905/301652";
 import { AuthModal } from "../905/749159";
-import { A as _$$A, Uw, bO, JD } from "../905/219868";
+import { readerModeTosUrl, tosUrl, readerModePrivacyUrl, privacyUrl } from "../905/219868";
 import { V as _$$V } from "../905/670859";
 import { D as _$$D2 } from "../905/347702";
 var p = u;
@@ -166,11 +166,11 @@ function H({
       className: G,
       children: renderI18nText("figjam_try.onboarding_disclaimer", {
         tos: jsx(_$$V, {
-          url: BrowserInfo.isMeetDevice ? _$$A : Uw,
+          url: BrowserInfo.isMeetDevice ? readerModeTosUrl : tosUrl,
           title: getI18nString("figjam_try.onboarding_disclaimer_tos")
         }),
         privacy_policy: jsx(_$$V, {
-          url: BrowserInfo.isMeetDevice ? bO : JD,
+          url: BrowserInfo.isMeetDevice ? readerModePrivacyUrl : privacyUrl,
           title: getI18nString("figjam_try.onboarding_disclaimer_privacy_policy")
         })
       })
@@ -253,11 +253,11 @@ function z({
           children: renderI18nText("whiteboard.open_sessions.onboarding_disclaimer", {
             button_text: l ? getI18nString("whiteboard.open_sessions.onboarding_disclaimer_access_file") : getI18nString("whiteboard.open_sessions.onboarding_disclaimer_continue"),
             tos: jsx(_$$V, {
-              url: Uw,
+              url: tosUrl,
               title: getI18nString("whiteboard.open_sessions.onboarding_disclaimer_tos")
             }),
             privacy_policy: jsx(_$$V, {
-              url: JD,
+              url: privacyUrl,
               title: getI18nString("whiteboard.open_sessions.onboarding_disclaimer_privacy_policy")
             })
           })

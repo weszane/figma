@@ -1,6 +1,6 @@
 import * as zip from '@zip.js/zip.js'
 import { z } from '../905/875422'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 
 /**
  * Enum representing the status of the import process.
@@ -24,14 +24,14 @@ interface BranchFiles {
 }
 
 /**
- * Attaches a branch by making an XHR POST request to the API.
+ * Attaches a branch by making an sendWithRetry POST request to the API.
  * @param branchTipFileKey - The file key for the branch tip.
  * @param branchPointFileKey - The file key for the branch point.
  * @param mainTipFileKey - The file key for the main tip.
- * @returns The XHR response.
+ * @returns The sendWithRetry response.
  */
 function attachBranch(branchTipFileKey: string, branchPointFileKey: string, mainTipFileKey: string) {
-  return XHR.post('/api/files/attach_branch', {
+  return sendWithRetry.post('/api/files/attach_branch', {
     branch_tip_file_key: branchTipFileKey,
     branch_point_file_key: branchPointFileKey,
     main_tip_file_key: mainTipFileKey,

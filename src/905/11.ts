@@ -11,7 +11,7 @@ import { flattenObject } from '../figma_app/493477'
 /**
  * Error patterns for filtering known issues (yO)
  */
-const errorPatterns = [/a\[b\]\.target\.className\.indexOf is not a function/, /\(event\.target\.className \|\| ""\)\.indexOf is not a function/, /XHR for ".*" failed with status/, /Endpoint requires authenticated user/]
+const errorPatterns = [/a\[b\]\.target\.className\.indexOf is not a function/, /\(event\.target\.className \|\| ""\)\.indexOf is not a function/, /sendWithRetry for ".*" failed with status/, /Endpoint requires authenticated user/]
 
 /**
  * Patterns for filtering external URLs (xg)

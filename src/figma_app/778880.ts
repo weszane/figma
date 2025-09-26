@@ -185,8 +185,8 @@ export function isMirrorOrMobileNoTripleTaps(): boolean {
  * Returns true if the device is mobile, Android, iPad, FigmaMobile, or FigmaMirror-Android.
  * Original: $$v9
  */
-const isAnyMobile: boolean
-  = isMobileUA || isAndroidUA || isIpadDevice() || isFigmaMobileApp() || isMirrorOrMobileNoTripleTaps()
+export const isAnyMobile: boolean
+  = isMobileUA || isAndroidUA || isIpadDevice || isFigmaMobileApp() || isMirrorOrMobileNoTripleTaps()
 
 /**
  * Returns true if the device is mobile and not in FigmaMobile.

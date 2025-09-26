@@ -34,7 +34,7 @@ import { useSprigWithSampling } from '../905/99656';
 import { registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
 import { K as _$$K2 } from '../905/107582';
-import { C as _$$C3 } from '../905/108595';
+import { useCounter } from '../905/108595';
 import { q as _$$q5 } from '../905/112768';
 import { IN } from '../905/116101';
 import { t as _$$t4 } from '../905/117577';
@@ -71,8 +71,8 @@ import { n as _$$n5 } from '../905/264891';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { useSelectionProperty, useSelectionPropertyValue } from '../905/275640';
 import { AutoInteractableWrapper } from '../905/277716';
-import { Cj } from '../905/291654';
-import { Wv as _$$Wv, IA } from '../905/291714';
+import { maybeShowEulaModal } from '../905/291654';
+import { usePopoverContext, PopoverProvider } from '../905/291714';
 import { y as _$$y } from '../905/292472';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -176,7 +176,7 @@ import { sortByPosition, sortByPositionWithDefault } from '../905/706046';
 import { U as _$$U2 } from '../905/708285';
 import { n8 as _$$n8, T_ } from '../905/713167';
 import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
-import { pn as _$$pn, If } from '../905/714538';
+import { getFontStyleMapping, getHighestPriorityFont } from '../905/714538';
 import { SvgComponent, V as _$$V2 } from '../905/714743';
 import { l as _$$l } from '../905/716947';
 import { S as _$$S } from '../905/720922';
@@ -196,7 +196,7 @@ import { KeyboardReceiver } from '../905/826900';
 import { Spacer, AutoLayout } from '../905/470281';
 import { q as _$$q } from '../905/838985';
 import { useCurrentUserOrgId, useCurrentUserOrg } from '../905/845253';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { isVsCodeEnvironment } from '../905/858738';
 import { FDocumentType } from '../905/862883';
 import { u as _$$u8 } from '../905/866761';
@@ -706,15 +706,15 @@ function Y({
       isInteractionOrEvalMode();
       return e;
     }, []);
-    useEffect(() => () => {}, [E]);
+    useEffect(() => () => { }, [E]);
     useEffect(() => {
       E.updateUnderlyingVideoState(s, r, y);
     }, [s, r, y, E]);
     let v = useCallback(({
       preserveEndedState: t
     } = {
-      preserveEndedState: !1
-    }) => {
+        preserveEndedState: !1
+      }) => {
       function n() {
         b.forEach(e => {
           let t = UN().get(e.nodeId);
@@ -3642,12 +3642,12 @@ function lz({
     isFetchingNextPage: R,
     fetchNextPage: L
   } : {
-    assets: T,
-    status: I,
-    hasNextPage: S,
-    isFetchingNextPage: k,
-    fetchNextPage: C
-  };
+      assets: T,
+      status: I,
+      hasNextPage: S,
+      isFetchingNextPage: k,
+      fetchNextPage: C
+    };
   let D = status === 'loading' || j && v === 'loading';
   let $ = b?.dimensions ? {
     width: b.dimensions.x,
@@ -5346,13 +5346,13 @@ let oO = memo(({
   }, [D, Y]);
   let ec = useSelector(e => e.userFlags);
   let eu = useCallback(async (t, n = !0, i = !0) => {
-    if (getFeatureFlags().dse_sf_pro_font && !(await Cj(t, ec, r, e, 'font_picker'))) return;
+    if (getFeatureFlags().dse_sf_pro_font && !(await maybeShowEulaModal(t, ec, r, e, 'font_picker'))) return;
     globalPerfTimer.start('update_text_node_font');
     R();
     z(t ?? null);
     l(t, void 0, i ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
     let o = t ? r[t] : void 0;
-    let a = If(o)?.source;
+    let a = getHighestPriorityFont(o)?.source;
     trackEventAnalytics('font picker font selected', {
       pageId: J,
       nodeIds: d,
@@ -5855,9 +5855,9 @@ function o7({
     selectStyle(e) {
       l(e, u);
     },
-    showStyleDetails(e, t, n) {},
-    showStyleContextMenu(e, t) {},
-    deleteStyle(e) {},
+    showStyleDetails(e, t, n) { },
+    showStyleContextMenu(e, t) { },
+    deleteStyle(e) { },
     stylePreviewShown
   }), [l, u, stylePreviewShown]);
   let R = _$$F5.useCombobox({
@@ -6021,10 +6021,10 @@ function al({
   }, [x, h, m]);
   let f = useSelector(e => e.fonts);
   let b = useSelector(e => e.selectedView);
-  let _ = useMemo(() => _$$pn(f), [f]);
+  let _ = useMemo(() => getFontStyleMapping(f), [f]);
   let j = useSelector(e => e.mirror.selectionProperties.fontVariations);
   let y = _$$B2();
-  let E = Um();
+  let E = useDropdownState();
   let v = Wc();
   let T = useSelector(e => e.localFontAgentVersion);
   let I = UG();
@@ -6139,7 +6139,7 @@ function ai({
   inheritTextStyleKey: e
 }) {
   let t = useSelector(e => e.fonts);
-  let n = useMemo(() => _$$pn(t), [t]);
+  let n = useMemo(() => getFontStyleMapping(t), [t]);
   let l = useSelectionPropertyValue('fontFamily');
   let r = useSelectionPropertyValue('fontStyle');
   let i = l ? LM({
@@ -6469,7 +6469,7 @@ function aE() {
 function av() {
   let e = useSelector(e => e.fonts);
   let t = useSelectionPropertyValue('fontFamily');
-  let n = iv(useMemo(() => _$$pn(e), [e]), t);
+  let n = iv(useMemo(() => getFontStyleMapping(e), [e]), t);
   return jsxs(Fragment, {
     children: [jsx(AutoInteractableWrapper, {
       name: _$$_2.ToggleBold,
@@ -6704,7 +6704,7 @@ function aN({
       let t = aI();
       let n = useSelector(e => e.fonts);
       let l = useSelectionPropertyValue('fontFamily');
-      let r = iv(useMemo(() => _$$pn(n), [n]), l);
+      let r = iv(useMemo(() => getFontStyleMapping(n), [n]), l);
       let i = [];
       e || r.bold === iy.DISABLED || i.push({
         type: 0,
@@ -7403,7 +7403,7 @@ function a4() {
     togglePopover,
     closePopover
   } = _$$j6(_$$p5.EFFECTS);
-  let l = Um();
+  let l = useDropdownState();
   let r = l != null && a2.includes(l.type);
   return jsx(_$$R4, {
     children: jsx(_$$A7, {
@@ -9835,7 +9835,7 @@ let dU = memo(() => {
     disableAnimation: p,
     zIndex: V$,
     obstacleMargin: 32,
-    children: jsxs(IA, {
+    children: jsxs(PopoverProvider, {
       children: [jsx(dK, {}), jsxs('span', {
         'data-testid': 'cooper-inline-menu',
         'children': [m && jsx(dW, {}), !m && (hasInstanceSelected ? jsx(dX, {
@@ -9860,7 +9860,7 @@ function dK() {
     closePanel
   } = ew();
   let l = activePanel && eN(activePanel.panel);
-  let r = _$$Wv();
+  let r = usePopoverContext();
   let i = _$$$(r.state.isPopoverOpen) && r.state.isPopoverOpen;
   useEffect(() => {
     i && l && closePanel();
@@ -9873,7 +9873,7 @@ function dK() {
   }, [e, l, closePanel]);
   return jsx(Fragment, {});
 }
-function dW({}) {
+function dW({ }) {
   return jsx(_$$k4, {
     name: _$$$2.TemplateSetNudgeDesignModeMenu,
     children: jsx(ro, {
@@ -10882,7 +10882,7 @@ function uu({
       onResize: e => m(b - e),
       disableResizing: !f,
       unsetSizeWhenDisabled: !0,
-      className: cssBuilderInstance.relative.flex.flexColumn.$$if(!f, cssBuilderInstance.flex1.overflowHidden).$,
+      className: cssBuilderInstance.relative.flex.flexColumn.if(!f, cssBuilderInstance.flex1.overflowHidden).$,
       children: jsx(_$$G2, {})
     }), c && u && jsx(Hg, {
       isLayersPanelExpanded: h,
@@ -11497,8 +11497,8 @@ function uK() {
     },
     setCurrentViewOrTab: setCurrentView,
     currentView: currentPluginView,
-    closeModal: () => {},
-    pinModal: () => {}
+    closeModal: () => { },
+    pinModal: () => { }
   }), [n, setCurrentView, currentPluginView]);
   return jsx(AutoLayout, {
     direction: 'vertical',
@@ -13788,7 +13788,7 @@ function pI() {
   let r = function () {
     let e = GV();
     let t = getColorFormat();
-    let n = Um();
+    let n = useDropdownState();
     let l = useSelector(e => e.library);
     let r = useSelector(e => e.mirror.sceneGraphSelection);
     let i = Xo();
@@ -14109,7 +14109,7 @@ function pH({
   let i = Ep();
   let c = useRef(null);
   let u = useDispatch();
-  let x = _$$C3();
+  let x = useCounter();
   let p = useAppModelProperty('currentSelectedGradientStop');
   let m = !t || isInvalidValue(t);
   let h = m ? null : validateGradientPaint(t);
@@ -14530,7 +14530,7 @@ let mI = memo(({
         payload: {
           sceneGraph: d,
           requestedNodeId: e,
-          onOpen: () => {}
+          onOpen: () => { }
         }
       });
     });

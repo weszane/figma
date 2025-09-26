@@ -17,7 +17,7 @@ import { jy } from "../905/116101";
 import { TrackingProvider } from "../figma_app/831799";
 import { VU } from "../905/625959";
 import { LR, zo, J$, gR } from "../figma_app/120210";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { t as _$$t2 } from "../905/192333";
 import { t as _$$t3 } from "../905/150656";
 import { Z } from "../905/189618";
@@ -28,7 +28,7 @@ import { cX } from "../figma_app/920333";
 import { DN, kD, FL, mS, HI, SK } from "../figma_app/293326";
 import { O as _$$O } from "../figma_app/71774";
 import { F as _$$F } from "../figma_app/603239";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 let I = [_$$p.ALL, _$$p.STICKERS_AND_COMPONENTS, _$$p.TEMPLATES, _$$p.WIDGETS, _$$p.PLUGINS, _$$p.MORE];
 function k() {
   let {
@@ -126,7 +126,7 @@ function O({
     e && w(zo - e.getBoundingClientRect().height - 1);
   }, []);
   let [k, L] = useState(!1);
-  let A = Um();
+  let A = useDropdownState();
   J$(C.pinned === _$$t2.NOT_PINNED, N, d ? `[data-element-target=${d}]` : void 0);
   let B = useLatestRef(p);
   useEffect(() => {
@@ -150,7 +150,7 @@ function O({
       }
     }), jsx(R.Provider, {
       value: M,
-      children: jsx(Ao, {
+      children: jsx(DraggableModalManager, {
         ref: N,
         autoflowHeight: !0,
         bounds: s,

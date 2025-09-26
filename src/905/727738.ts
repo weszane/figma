@@ -19,7 +19,7 @@ import { liveStoreInstance } from '../905/713695';
 import { getDisplayNameAlt } from '../905/760074';
 import { WB } from '../905/761735';
 import { handleOptimistTransaction } from '../905/842794';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { selectViewAction } from '../905/929976';
 import { t as _$$t2 } from '../figma_app/32680';
 import { ConfigGroups, isReduxDeprecationCutover } from '../figma_app/121751';
@@ -54,7 +54,7 @@ let y = registerModal(A, 'ConfirmRemoveSeenStateModal');
 let b = createOptimistThunk((e, {
   fileSeenState: t
 }) => {
-  let i = XHR.del(`/api/file_seen_state/${t.id}`);
+  let i = sendWithRetry.del(`/api/file_seen_state/${t.id}`);
   e.dispatch(handlePromiseError({
     promise: i,
     fallbackError: 'An error occurred while removing this user.'
@@ -161,7 +161,7 @@ let G = createOptimistThunk((e, {
   role: t
 }) => {
   trackRoleEvent('Role Deleted', t);
-  let i = XHR.del(`/api/roles/${t.id}`);
+  let i = sendWithRetry.del(`/api/roles/${t.id}`);
   e.dispatch(handlePromiseError({
     promise: i,
     fallbackError: 'An error occurred while removing this user.'
@@ -177,7 +177,7 @@ let G = createOptimistThunk((e, {
           [t.id]: null
         }
       }, i);
-    } catch (e) {}
+    } catch (e) { }
   }
 });
 let z = createOptimistThunk((e, {
@@ -189,7 +189,7 @@ let z = createOptimistThunk((e, {
   trackRoleEvent('Role Permissions Changed', t, {
     level: t.level
   });
-  let d = XHR.put(`/api/roles/${t.id}`, {
+  let d = sendWithRetry.put(`/api/roles/${t.id}`, {
     ...t,
     cascade: i,
     response_version: 2
@@ -265,7 +265,7 @@ let H = createOptimistThunk((e, {
     });
     return;
   }
-  let _ = XHR.post(`/api/role/file_seen_state/file/${t.file_key}/user/${t.user_id}`, {
+  let _ = sendWithRetry.post(`/api/role/file_seen_state/file/${t.file_key}/user/${t.user_id}`, {
     level: s
   });
   _.then(() => {

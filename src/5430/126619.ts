@@ -12,7 +12,7 @@ import { useCurrentPrivilegedPlan, useCurrentPlanUser } from "../figma_app/46507
 import { ViewMode } from "../figma_app/756995";
 import { w4, y1 } from "../905/445814";
 import { V } from "../figma_app/385855";
-import { q } from "../905/600041";
+import { ThumbnailContainer } from "../905/600041";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { i as _$$i } from "../905/977961";
 import { a as _$$a } from "../905/329735";
@@ -84,7 +84,7 @@ function E({
       })]
     })]
   });
-  let R = c === ResourceTypeEnum.COOPER_TEMPLATE_FILE ? jsx(q, {
+  let R = c === ResourceTypeEnum.COOPER_TEMPLATE_FILE ? jsx(ThumbnailContainer, {
     noBorder: !0,
     children: jsx(Q, {
       src: o ?? void 0,

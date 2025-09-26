@@ -13,13 +13,13 @@ import { setupHyperlinkHandler } from "../figma_app/815170";
 import { _t, d7 } from "../figma_app/632248";
 import { cq } from "../905/794154";
 import { hm, zQ } from "../905/487011";
-import { $J, o2, sd, Cq } from "../905/278499";
-import { r as _$$r } from "../905/189361";
+import { AIActionIterationResult, AIActionIterationStatus, AIActionIterationAction, AIActionIterationTrigger } from "../905/278499";
+import { ActionButton } from "../905/189361";
 import { C as _$$C } from "../905/504203";
 import v from "classnames";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { B as _$$B } from "../905/222272";
-import { y as _$$y } from "../905/236825";
+import { FlexBox } from "../905/222272";
+import { Panel } from "../905/236825";
 var I = v;
 function x({
   children: e,
@@ -57,28 +57,28 @@ function k({
   recordingKey: t,
   aiTrackingContext: i
 }) {
-  return jsx(_$$r, {
+  return jsx(ActionButton, {
     recordingKey: t,
     onAction: t => {
       void 0 !== i && hm({
         ...i,
         ...zQ(t),
-        iteration_view_type: $J.ERROR,
-        status: o2.FAILED,
+        iteration_view_type: AIActionIterationResult.ERROR,
+        status: AIActionIterationStatus.FAILED,
         interaction: function (e) {
           switch (e) {
             case "TRY_AGAIN":
-              return sd.RETRY;
+              return AIActionIterationAction.RETRY;
             case "GO_BACK":
-              return sd.GO_BACK;
+              return AIActionIterationAction.GO_BACK;
             case "OK":
-              return sd.ACCEPT;
+              return AIActionIterationAction.ACCEPT;
             case "LEARN_MORE":
-              return sd.LEARN_MORE;
+              return AIActionIterationAction.LEARN_MORE;
             case "BOOST_ANYWAY":
-              return sd.BOOST_ANYWAY;
+              return AIActionIterationAction.BOOST_ANYWAY;
             case "SELECT":
-              return sd.SELECT;
+              return AIActionIterationAction.SELECT;
             default:
               throwTypeError(e);
           }
@@ -165,27 +165,27 @@ export function $$R1({
   let T = useCallback(() => {
     void 0 !== s && hm({
       ...s,
-      iteration_view_type: $J.ERROR,
-      status: o2.FAILED,
-      interaction: sd.DISMISS,
-      interaction_type: Cq.BUTTON_CLICK
+      iteration_view_type: AIActionIterationResult.ERROR,
+      status: AIActionIterationStatus.FAILED,
+      interaction: AIActionIterationAction.DISMISS,
+      interaction_type: AIActionIterationTrigger.BUTTON_CLICK
     });
     d ? d() : close();
   }, [s, close, d]);
-  return jsx(_$$y, {
+  return jsx(Panel, {
     onDismiss: T,
     extra: a,
     dataTestId: "errorView",
     recordingKey: generateRecordingKey(y, "toast"),
     shouldAutoFocus: !0,
-    children: jsxs(_$$B, {
+    children: jsxs(FlexBox, {
       justify: "space-between",
       align: "center",
       fullWidth: !0,
       children: [jsx(x, {
         secondaryMessage: b,
         children: I
-      }), jsx(_$$B, {
+      }), jsx(FlexBox, {
         children: E && E.map(e => jsx(k, {
           recordingKey: generateRecordingKey(y, e.type),
           button: e,

@@ -9,7 +9,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { IpcStorageHandler } from "../905/724705";
 import { parseQuery } from "../905/634134";
 import { stringToUint8Array } from "../figma_app/930338";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { AUTH_TOGGLE_SMS, AUTH_SET_HINT, AUTH_REQUIRE_TWO_FACTOR, changeAuthFormState, AUTH_SHOW_ERROR, startSamlEmailVerification, AUTH_SET_REDIRECT_URL, AUTH_COMPLETE } from "../905/194276";
 import { _G } from "../905/164233";
 import { AuthFlowStep, AuthErrorCode, AuthField } from "../905/862321";
@@ -194,7 +194,7 @@ export let $$V6 = createOptimistThunk((e, {
     token_type: l.tokenType,
     google_fed_cm_enabled: getFeatureFlags().google_federated_cm ?? !1
   } : a;
-  XHR.post("/api/session/sms_recover", s).then(({
+  sendWithRetry.post("/api/session/sms_recover", s).then(({
     data: t
   }) => {
     trackAuthEvent("sms_recover_success", e.getState().auth.origin);

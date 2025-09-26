@@ -5,7 +5,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { CustomCauseError } from "../905/194389";
 import { customHistory } from "../905/612521";
-import { XHR, getRequest } from "../905/910117";
+import { sendWithRetry, getRequest } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -25,7 +25,7 @@ import { CPPEventType, SourceDirection } from "../905/535806";
 import { my, RK } from "../905/561832";
 async function T(e, t, i) {
   try {
-    await XHR.post(`/api/files/${e}/copy_image_usages_before_merge`);
+    await sendWithRetry.post(`/api/files/${e}/copy_image_usages_before_merge`);
   } catch (n) {
     let e = new CustomCauseError("Error creating image usages", {
       cause: n
@@ -191,7 +191,7 @@ let $$P0 = createOptimistThunk(async (e, t) => {
       } catch (e) {
         if (Multiplayer.isValidatingIncremental()) handleError(new CustomCauseError("Incremental loading validation failed", {
           cause: e
-        }), CPPEventType.ON_MERGE, t.mergeParams.direction);else throw e;
+        }), CPPEventType.ON_MERGE, t.mergeParams.direction); else throw e;
       }
       await enterMergeDetachedState();
       gf(r, PreviewStage.STAGE);

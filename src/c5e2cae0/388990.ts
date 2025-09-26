@@ -29,7 +29,7 @@ import { ProductTierEnum, RenewalTermEnum } from "../905/712921";
 import { FeatureFlag } from "../905/652992";
 import { N as _$$N } from "../905/809096";
 import { ModalView } from "../figma_app/918700";
-import { bP } from "../905/739964";
+import { ConsumptionPaywallModalComponent } from "../905/739964";
 import { oE, Vf, _R, $P, W2, E8, Ms, QB, VA, y3, Q$, gt, G8, yl, jG, o as _$$o, Dz, hx, b as _$$b, yH, Mm, Jh } from "../c5e2cae0/859355";
 import { A as _$$A } from "../6828/871993";
 var d = n;
@@ -260,7 +260,7 @@ export let $$z0 = withTracking(function (e) {
         estimatedWidth: 586,
         estimatedHeight: 586
       }),
-      children: t ? jsx(bP, {
+      children: t ? jsx(ConsumptionPaywallModalComponent, {
         team: a,
         resource: FeatureFlag.ORG,
         currentPlan: consumptionPaywallUtils.Plan.PRO,

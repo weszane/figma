@@ -15,7 +15,7 @@ import { getFeatureFlags } from "../905/601108";
 import { c$, ms, MM } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { $z } from "../figma_app/617427";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModal, popModalStack } from "../905/156213";
@@ -241,7 +241,7 @@ function O(e) {
 function F(e) {
   return jsxs("div", {
     className: N,
-    children: [renderI18nText("team_join_links.share_a_secret_link_people_can_use_to_join_your_team"), " ", jsx(Ph, {
+    children: [renderI18nText("team_join_links.share_a_secret_link_people_can_use_to_join_your_team"), " ", jsx(TrackedLink, {
       href: "#",
       onClick: e.turnOnInviteLinks,
       children: renderI18nText("team_join_links.turn_on_invite_links")

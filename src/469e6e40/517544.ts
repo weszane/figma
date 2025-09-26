@@ -1,9 +1,9 @@
-import { b } from "../905/275748";
+import { LazyComponentFactory } from "../905/275748";
 import { then } from "../ead0c34b/698412";
 import { createModalConfig, registerModal } from "../905/102752";
 let n;
 let s;
-let r = new b({
+let r = new LazyComponentFactory({
   name: "billing_purchase_ai_credits",
   description: "Code related to purchasing AI credits and managing your current AI credit subscription",
   exports: {

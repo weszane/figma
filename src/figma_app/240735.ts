@@ -9,7 +9,7 @@ import { createOptimistCommitAction, createOptimistRevertAction } from '../905/6
 import { setupLoadingStateHandler } from '../905/696711'
 import { teamAPIClient } from '../905/834575'
 import { deleteTeam, putTeam } from '../905/890368'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { createLatencyTimer } from '../figma_app/391338'
 /**
  * Optimist action for batch deleting team members.
@@ -18,7 +18,7 @@ import { createLatencyTimer } from '../figma_app/391338'
 export const batchDeleteTeamMembers = createOptimistAction(
   'BATCH_DEL_TEAM_MEMBERS',
   (dispatchContext, { teamId, userIds }, { optimistId }) => {
-    XHR.del(`/api/teams/${teamId}/users`, { user_ids: userIds })
+    sendWithRetry.del(`/api/teams/${teamId}/users`, { user_ids: userIds })
       .then(() => {
         dispatchContext.dispatch(createOptimistCommitAction(optimistId))
       })
@@ -33,7 +33,7 @@ export const batchDeleteTeamMembers = createOptimistAction(
  * Original: $$f3
  */
 export const restoreTeamThunk = createOptimistThunk(async (dispatchContext, { teamId }) => {
-  await XHR.put(`/api/teams/${teamId}/restore`)
+  await sendWithRetry.put(`/api/teams/${teamId}/restore`)
     .then(() => {
       customHistory.redirect(`/files/team/${teamId}`)
       dispatchContext.dispatch(
@@ -56,7 +56,7 @@ export const restoreTeamThunk = createOptimistThunk(async (dispatchContext, { te
  * Original: $$E17
  */
 export const updateTeamDescriptionThunk = createOptimistThunk(async (dispatchContext, payload) => {
-  await XHR.put(`/api/teams/${payload.teamId}`, { description: payload.description })
+  await sendWithRetry.put(`/api/teams/${payload.teamId}`, { description: payload.description })
     .then(() => {
       dispatchContext.dispatch(setTeamOptimistThunk({
         team: {

@@ -15,7 +15,7 @@ import { AccessLevelEnum } from '../905/557142'
 import { FlashActions, handlePromiseError } from '../905/573154'
 import { cL } from '../905/748726'
 import { WB } from '../905/761735'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { t as _$$t2 } from '../figma_app/32680'
 import { ConfigGroups, isReduxDeprecationCutover } from '../figma_app/121751'
 import { T as _$$T } from '../figma_app/257703'
@@ -333,7 +333,7 @@ export const sendRoleInvites = createOptimistThunk((
   }
 
   // Send invites
-  const invitePromise = XHR.post('/api/invites', {
+  const invitePromise = sendWithRetry.post('/api/invites', {
     emails,
     resource_type: resourceType,
     resource_id_or_key: resourceIdOrKey,
@@ -397,7 +397,7 @@ export const sendRoleInvites = createOptimistThunk((
       // Set default error message if none provided
       if (errorResponse.error && !errorResponse.message) {
         errorResponse.message = `An error occurred while sending ${emails.length === 1 ? 'this invite' : 'these invites'
-        }.`
+          }.`
       }
 
       // Handle payment-related errors
@@ -657,7 +657,7 @@ export const showInviteVisualBell = createOptimistThunk((
         const actionText = `been invited to edit '${fileName}' in ${targetFolder}`
         if (emails.length > 1) {
           return `${emails[0]} and ${emails.length > 2 ? `${emails.length - 1} others have ` : '1 other has '
-          }${actionText}`
+            }${actionText}`
         }
         return `${emails[0]} has ${actionText}`
       }
@@ -686,7 +686,7 @@ export const showInviteVisualBell = createOptimistThunk((
  * Resends an invite email
  */
 export const resendInvite = createOptimistThunk(({ dispatch }, { role }: ResendInviteParams) => {
-  const resendPromise = XHR.post('/api/invites/resend', {
+  const resendPromise = sendWithRetry.post('/api/invites/resend', {
     email: role.user.email,
     resource_type: role.resource_type,
     resource_id_or_key: role.resource_id_or_key,

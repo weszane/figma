@@ -5,7 +5,7 @@ import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { E } from "../905/453826";
@@ -14,8 +14,8 @@ import { A } from "../905/956262";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { U } from "../905/455766";
-import { h as _$$h } from "../905/284399";
-import { LN, q3 } from "../figma_app/450829";
+import { OnboardingRenderFrame } from "../905/284399";
+import { CornerPosition, OverlayType } from "../figma_app/450829";
 import { $T1 } from "../figma_app/6204";
 import { buildUploadUrl } from "../figma_app/169182";
 import { styleBuilderInstance } from "../905/941192";
@@ -71,7 +71,7 @@ export function $$N0() {
     onClickBehavior: "function",
     label: e,
     onClick: e => {
-      XHR.post("/api/send_mobile_download_email");
+      sendWithRetry.post("/api/send_mobile_download_email");
       trackEventAnalytics("post_comment_mobile_app_download_prompt_email_me_cta_clicked");
       n.complete();
       e(VisualBellActions.enqueue({
@@ -97,15 +97,15 @@ export function $$N0() {
     ctaOnClick: noop,
     onManualDismiss: noop
   }], [C]);
-  let j = useMemo(() => w.map((e, t) => jsx(_$$h, {
+  let j = useMemo(() => w.map((e, t) => jsx(OnboardingRenderFrame, {
     additionalButton: e.additionalButton,
     ctaText: e.ctaText,
     currentStepIndex: t,
-    defaultLocation: LN.BOTTOM_RIGHT,
+    defaultLocation: CornerPosition.BOTTOM_RIGHT,
     element: e.element,
     hideStepCounter: !0,
     isShowing: n.isShowing,
-    modalType: q3.DRAGGABLE,
+    modalType: OverlayType.DRAGGABLE,
     onClickPrimaryCta: () => {
       _.next();
       e.ctaOnClick();

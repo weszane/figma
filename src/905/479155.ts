@@ -1,180 +1,307 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, createRef, useContext, useEffect, useCallback, useRef, useId, useState, useLayoutEffect } from "react";
-import { noop } from 'lodash-es';
-import { generateUUIDv4 } from "../905/871474";
-import { Um } from "../905/848862";
-class l {
-  constructor() {
-    this.listLength = 0;
-    this.map = new Map();
-  }
+import type { ReactNode, RefObject } from 'react'
+import { noop } from 'lodash-es'
+import { createContext, createRef, useCallback, useContext, useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { useDropdownState } from '../905/848862'
+import { generateUUIDv4 } from '../905/871474'
+
+interface ItemRegistryEntry {
+  index: number
+  ref: RefObject<any>
+}
+
+interface LayoutItem {
+  id: string
+  ref: RefObject<any>
+  primary?: boolean
+}
+
+interface LayoutContextValue {
+  tracker: LayoutTracker
+  renderId: number
+  setRenderId: (id: number) => void
+}
+
+interface ListLayoutContextValue {
+  trackerRef: RefObject<ItemRegistry>
+  layoutIndex: number
+  primary?: boolean
+}
+
+interface GridLayoutContextValue {
+  trackerRef: RefObject<ItemRegistry>
+  layoutIndex: number
+  columns: number
+  primary?: boolean
+}
+
+interface LayoutProviderProps {
+  children: ReactNode
+}
+
+/**
+ * Registry for managing items with indices and references
+ */
+class ItemRegistry {
+  private listLength = 0
+  private map = new Map<string, ItemRegistryEntry>()
+
   reset() {
-    this.listLength = 0;
-    this.map = new Map();
+    this.listLength = 0
+    this.map = new Map()
   }
-  register(e, t, i) {
-    if (!this.map.has(e)) {
-      void 0 !== i ? this.listLength += i : this.listLength++;
-      let n = this.listLength - 1;
-      this.map.set(e, {
-        index: n,
-        ref: t
-      });
-      return n;
+
+  register(id: string, ref: RefObject<any>, increment?: number) {
+    if (!this.map.has(id)) {
+      if (increment !== undefined) {
+        this.listLength += increment
+      }
+      else {
+        this.listLength++
+      }
+      const index = this.listLength - 1
+      this.map.set(id, {
+        index,
+        ref,
+      })
+      return index
     }
-    return this.map.get(e)?.index ?? -1;
+    return this.map.get(id)?.index ?? -1
   }
-  unregister(e) {
-    this.map.$$delete(e);
-    this.listLength--;
+
+  unregister(id: string) {
+    this.map.delete(id)
+    this.listLength--
   }
-  getRef(e) {
-    for (let [t, {
-      index: i,
-      ref: n
-    }] of this.map.entries()) if (i === e) return n;
-    return null;
+
+  getRef(index: number) {
+    for (const [, { index: itemIndex, ref }] of this.map.entries()) {
+      if (itemIndex === index)
+        return ref
+    }
+    return null
   }
 }
-export class $$d6 {
-  constructor() {
-    this.items = [];
-    this.listeners = new Map();
+
+/**
+ * Tracker for managing layout items with DOM position sorting
+ */
+export class LayoutTracker {
+  private items: LayoutItem[] = []
+  private listeners = new Map<string, () => void>()
+
+  register(item: LayoutItem, onChange: () => void = noop) {
+    if (item.ref.current === null || this.items.findIndex(existingItem => existingItem.id === item.id) > -1) {
+      return
+    }
+
+    this.items = [...this.items, item]
+      .sort((itemA, itemB) => {
+        if (!itemA.ref.current || !itemB.ref.current)
+          return 0
+
+        const elementA = itemA.ref.current
+        const comparison = itemB.ref.current.compareDocumentPosition(elementA)
+        return (comparison & Node.DOCUMENT_POSITION_PRECEDING) ? -1 : 1
+      })
+      .filter(item => item.ref.current !== null)
+
+    this.listeners.set(item.id, onChange)
+    this.notifyItemsChanged()
   }
-  register(e, t = noop) {
-    null === e.ref.current || this.items.findIndex(t => t.id === e.id) > -1 || (this.items = [...this.items, e].sort((e, t) => {
-      var i;
-      return e.ref.current && t.ref.current ? (i = e.ref.current, t.ref.current.compareDocumentPosition(i) & Node.DOCUMENT_POSITION_PRECEDING) ? -1 : 1 : 0;
-    }).filter(e => null !== e.ref.current), this.listeners.set(e.id, t), this.notifyItemsChanged());
+
+  unregister(id: string) {
+    this.items = this.items.filter(item => item.id !== id)
+    this.listeners.delete(id)
+    this.notifyItemsChanged()
   }
-  unregister(e) {
-    this.items = this.items.filter(t => t.id !== e);
-    this.listeners.$$delete(e);
-    this.notifyItemsChanged();
+
+  getRef(index: number) {
+    return this.items[index]?.ref ?? null
   }
-  getRef(e) {
-    return this.items[e]?.ref ?? null;
+
+  getIndex(id: string) {
+    return this.items.findIndex(item => item.id === id)
   }
-  getIndex(e) {
-    return this.items.findIndex(t => t.id === e);
-  }
+
   reset() {
-    this.items = [];
+    this.items = []
   }
-  findFirstIndexWith(e) {
-    return this.items.findIndex(e);
+
+  findFirstIndexWith(predicate: (item: LayoutItem) => boolean) {
+    return this.items.findIndex(predicate)
   }
-  notifyItemsChanged() {
-    for (let e of this.listeners.values()) e();
+
+  private notifyItemsChanged() {
+    for (const listener of this.listeners.values()) {
+      listener()
+    }
   }
 }
-let $$c5 = createContext({
-  tracker: new $$d6(),
+
+export const LayoutContext = createContext<LayoutContextValue>({
+  tracker: new LayoutTracker(),
   renderId: 0,
-  setRenderId: noop
-});
-let $$u3 = createContext({
-  trackerRef: createRef(),
-  layoutIndex: -1
-});
-let $$p1 = createContext({
-  trackerRef: createRef(),
+  setRenderId: noop,
+})
+
+export const ListLayoutContext = createContext<ListLayoutContextValue>({
+  trackerRef: createRef<ItemRegistry>(),
   layoutIndex: -1,
-  columns: 1
-});
-export function $$m7(e) {
-  let t = useContext($$c5);
-  let i = Um();
+})
+
+export const GridLayoutContext = createContext<GridLayoutContextValue>({
+  trackerRef: createRef<ItemRegistry>(),
+  layoutIndex: -1,
+  columns: 1,
+})
+
+/**
+ * Hook to focus element when dropdown is not shown
+ */
+export function useFocusWhenDropdownClosed(elementRef: RefObject<HTMLElement>) {
+  const { renderId } = useContext(LayoutContext)
+  const dropdownState = useDropdownState()
+
   useEffect(() => {
-    i || e.current?.focus();
-  }, [t.renderId, i, e]);
+    if (!dropdownState) {
+      elementRef.current?.focus()
+    }
+  }, [renderId, dropdownState, elementRef])
 }
-export function $$h4() {
-  let {
-    renderId,
-    setRenderId
-  } = useContext($$c5);
+
+/**
+ * Hook to trigger layout re-render
+ */
+export function useLayoutRerender() {
+  const { renderId, setRenderId } = useContext(LayoutContext)
+
   return useCallback(() => {
-    setRenderId(renderId + 1);
-  }, [renderId, setRenderId]);
+    setRenderId(renderId + 1)
+  }, [renderId, setRenderId])
 }
-export function $$g2(e, t) {
-  let i = useRef(new l());
-  let {
-    tracker
-  } = useContext($$c5);
-  let a = useId();
-  let [s, o] = useState(-1);
-  useEffect(() => (tracker.register({
-    id: a,
-    ref: e,
-    primary: t
-  }, () => o(tracker.getIndex(a))), () => {
-    tracker.unregister(a);
-  }), [a, t, e, tracker]);
-  let d = tracker.findFirstIndexWith(e => !!e.primary);
+
+/**
+ * Hook for managing layout registration and primary layout detection
+ */
+export function useLayoutRegistration(elementRef: RefObject<HTMLElement>, isPrimary: boolean) {
+  const itemRegistry = useRef(new ItemRegistry())
+  const { tracker } = useContext(LayoutContext)
+  const id = useId()
+  const [index, setIndex] = useState(-1)
+
+  useEffect(() => {
+    const unregister = () => {
+      tracker.unregister(id)
+    }
+
+    tracker.register({
+      id,
+      ref: elementRef,
+      primary: isPrimary,
+    }, () => setIndex(tracker.getIndex(id)))
+
+    return unregister
+  }, [id, isPrimary, elementRef, tracker])
+
+  const primaryLayoutIndex = tracker.findFirstIndexWith(item => !!item.primary)
+
   return {
-    tracker: i,
-    index: s,
-    isPrimaryLayout: d < 0 ? void 0 : d === s
-  };
+    tracker: itemRegistry,
+    index,
+    isPrimaryLayout: primaryLayoutIndex < 0 ? undefined : primaryLayoutIndex === index,
+  }
 }
-let f = createContext({});
-export function $$_0(e) {
-  let t = useContext($$u3);
-  let i = useContext($$p1);
-  t.trackerRef.current?.reset();
-  i.trackerRef.current?.reset();
-  let a = generateUUIDv4();
-  return jsx(f.Provider, {
-    value: a,
-    children: e.children
-  });
+
+const LayoutIdContext = createContext<string>({} as string)
+
+/**
+ * Provider component for layout management with unique ID generation
+ */
+export function LayoutProvider({ children }: LayoutProviderProps) {
+  const listContext = useContext(ListLayoutContext)
+  const gridContext = useContext(GridLayoutContext)
+
+  listContext.trackerRef.current?.reset()
+  gridContext.trackerRef.current?.reset()
+
+  const layoutId = generateUUIDv4()
+
+  return jsx(LayoutIdContext.Provider, {
+    value: layoutId,
+    children,
+  })
 }
-export function $$A8(e) {
-  let t = useContext($$u3);
-  let i = useContext(f);
-  let n = useId();
-  let [a, s] = useState(-1);
-  let o = b(t.layoutIndex);
+
+/**
+ * Hook for list item registration
+ */
+export function useListItemRegistration(elementRef: RefObject<HTMLElement>) {
+  const listContext = useContext(ListLayoutContext)
+  const layoutId = useContext(LayoutIdContext)
+  const id = useId()
+  const [itemIndex, setItemIndex] = useState(-1)
+  const layoutIndex = ensureNonNegative(listContext.layoutIndex)
+
   useLayoutEffect(() => {
-    t.trackerRef?.current && s(t.trackerRef.current.register(n, e));
-  }, [t.trackerRef, n, e, i]);
+    if (listContext.trackerRef?.current) {
+      setItemIndex(listContext.trackerRef.current.register(id, elementRef))
+    }
+  }, [listContext.trackerRef, id, elementRef, layoutId])
+
   return {
-    itemIndex: b(a),
-    layoutIndex: o,
-    inPrimaryLayout: t.primary
-  };
+    itemIndex: ensureNonNegative(itemIndex),
+    layoutIndex,
+    inPrimaryLayout: listContext.primary,
+  }
 }
-export function $$y9(e, t = !1) {
-  let i = useContext($$p1);
-  let n = useContext(f);
-  let a = useId();
-  let [s, o] = useState(-1);
-  let l = b(i.layoutIndex);
-  let d = b(t ? 0 : s % i.columns);
-  let c = b(Math.floor(s / i.columns));
+
+/**
+ * Hook for grid item registration with row and column calculations
+ */
+export function useGridItemRegistration(elementRef: RefObject<HTMLElement>, isRowSpanning: boolean = false) {
+  const gridContext = useContext(GridLayoutContext)
+  const layoutId = useContext(LayoutIdContext)
+  const id = useId()
+  const [itemIndex, setItemIndex] = useState(-1)
+  const layoutIndex = ensureNonNegative(gridContext.layoutIndex)
+  const columnIndex = ensureNonNegative(isRowSpanning ? 0 : itemIndex % gridContext.columns)
+  const rowIndex = ensureNonNegative(Math.floor(itemIndex / gridContext.columns))
+
   useLayoutEffect(() => {
-    i.trackerRef?.current && o(i.trackerRef.current.register(a, e, t ? i.columns : void 0));
-  }, [i.trackerRef, a, e, n, i.columns, t]);
+    if (gridContext.trackerRef?.current) {
+      setItemIndex(gridContext.trackerRef.current.register(
+        id,
+        elementRef,
+        isRowSpanning ? gridContext.columns : undefined,
+      ))
+    }
+  }, [gridContext.trackerRef, id, elementRef, layoutId, gridContext.columns, isRowSpanning])
+
   return {
-    rowIndex: c,
-    itemIndex: b(s),
-    layoutIndex: l,
-    columnIndex: d,
-    inPrimaryLayout: i.primary
-  };
+    rowIndex,
+    itemIndex: ensureNonNegative(itemIndex),
+    layoutIndex,
+    columnIndex,
+    inPrimaryLayout: gridContext.primary,
+  }
 }
-function b(e) {
-  return e < 0 ? 0 : e;
+
+/**
+ * Ensures a number is non-negative, converting negative values to 0
+ */
+function ensureNonNegative(value: number): number {
+  return value < 0 ? 0 : value
 }
-export const AD = $$_0;
-export const AM = $$p1;
-export const L0 = $$g2;
-export const MQ = $$u3;
-export const R$ = $$h4;
-export const Uz = $$c5;
-export const Yf = $$d6;
-export const bE = $$m7;
-export const tm = $$A8;
-export const zp = $$y9;
+
+// Legacy exports for backward compatibility
+export const AD = LayoutProvider
+export const AM = GridLayoutContext
+export const L0 = useLayoutRegistration
+export const MQ = ListLayoutContext
+export const R$ = useLayoutRerender
+export const Uz = LayoutContext
+export const Yf = LayoutTracker
+export const bE = useFocusWhenDropdownClosed
+export const tm = useListItemRegistration
+export const zp = useGridItemRegistration

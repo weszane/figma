@@ -2,7 +2,7 @@ import { createOptimistAction } from "../905/350402";
 import { COMMIT, REVERT } from "redux-optimist";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 let $$l1 = createOptimistAction("TEAM_ADMIN_DEMOTE_EDITOR_ROLES", (e, {
   editor: t
@@ -13,7 +13,7 @@ let $$l1 = createOptimistAction("TEAM_ADMIN_DEMOTE_EDITOR_ROLES", (e, {
     teamId: t.team_id,
     editorId: t.id
   });
-  XHR.post(`/api/teams/${t.team_id}/users/${t.id}/revoke_editor`).then(() => {
+  sendWithRetry.post(`/api/teams/${t.team_id}/users/${t.id}/revoke_editor`).then(() => {
     e.dispatch({
       type: null,
       optimist: {

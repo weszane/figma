@@ -13,7 +13,7 @@ import { hideModal } from "../905/156213";
 import { yy } from "../figma_app/482142";
 import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { v0, hF, pL } from "../905/289198";
 var n = l;
 let j = memo(function (e) {
@@ -66,7 +66,7 @@ let j = memo(function (e) {
       C();
     });
   };
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     onClose: C,
     title: e.modalTitle,
     minWidth: 448,

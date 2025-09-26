@@ -18,7 +18,7 @@ import { v as _$$v } from "../469e6e40/843735";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxInt } from "../figma_app/783094";
 import { isMobileUA } from "../figma_app/778880";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { HL, IU, uw, Vq, bv } from "../figma_app/421401";
 import { ButtonSecondary, ButtonBasePrimaryTracked, FocusCheckbox } from "../figma_app/637027";
 import { Wi, JR } from "../figma_app/162641";
@@ -44,7 +44,7 @@ import { zl } from "../figma_app/641749";
 import { rn } from "../figma_app/903573";
 import { N as _$$N } from "../figma_app/268271";
 import { R as _$$R } from "../905/298004";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { Ql8, YHe } from "../figma_app/6204";
 import { throwTypeError } from "../figma_app/465776";
 import { useSubscription } from "../figma_app/288654";
@@ -67,7 +67,7 @@ import { m as _$$m2 } from "../figma_app/369596";
 import { O as _$$O } from "../figma_app/748328";
 import { NJ } from "../figma_app/518077";
 import { getTeamVisibilityLabels } from "../figma_app/12796";
-import { O as _$$O2 } from "../figma_app/809387";
+import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { teamVisibilityEnum } from "../figma_app/630077";
 import { KindEnum } from "../905/129884";
@@ -83,7 +83,7 @@ import { Label } from "../905/270045";
 import { $ as _$$$ } from "../905/355181";
 import { xM, c5, ZT, lH } from "../figma_app/330108";
 import { registerModal } from "../905/102752";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { Cj } from "../905/270084";
 import { Uc } from "../4452/915131";
 import { gO, YP } from "../figma_app/88768";
@@ -143,7 +143,7 @@ function ee(e) {
     });
   });
   _$$E2(uniqueId, "Reset Onboarding", () => show());
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     isShowing,
     trackingContextName: `${kd} Org Access`,
     targetKey: "teams_table_onboarding_key",
@@ -205,7 +205,7 @@ function eu(e) {
   } = e;
   switch (step) {
     case "AddTeamsToWorkspace":
-      return jsx(rq, {
+      return jsx(OnboardingModal, {
         clickOutsideToHide: !0,
         description: renderI18nText("workspace_admin.onboarding.step_one_description"),
         emphasized: !0,
@@ -227,7 +227,7 @@ function eu(e) {
         userFlagOnShow: eo
       });
     case "CheckUnassignedTeams":
-      return jsx(rq, {
+      return jsx(OnboardingModal, {
         clickOutsideToHide: !0,
         description: renderI18nText("workspace_admin.onboarding.step_two_description"),
         emphasized: !0,
@@ -456,7 +456,7 @@ let eV = registerModal(function ({
   }
   return jsx(TrackingProvider, {
     name: "Add Unassigned Teams Modal",
-    children: jsxs(OJ, {
+    children: jsxs(HeaderModal, {
       title: getI18nString("add_unassigned_teams_modal.title", {
         workspaceName: U
       }),
@@ -600,7 +600,7 @@ function e7(e, t, a, n) {
       }));
     },
     onRevokeTeamTransferRequest: e => {
-      t && t.get(e) && XHR.del(`/api/asset_transfer/${t.get(e)?.asset_transfer_request_id}`).then(() => n(e), () => {
+      t && t.get(e) && sendWithRetry.del(`/api/asset_transfer/${t.get(e)?.asset_transfer_request_id}`).then(() => n(e), () => {
         s(VisualBellActions.enqueue({
           message: getI18nString("asset_transfers.error_message.something_went_wrong_check_your_connection"),
           error: !0
@@ -1176,7 +1176,7 @@ let tN = registerModal(function (e) {
   let j = c?.name ? renderI18nText("workspace.when_people_join_workspace_name", {
     styledWorkspaceName: f
   }) : renderI18nText("workspace.when_people_join_this_workspace");
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: getI18nString("workspace.edit_default_teams"),
     onClose: v,
     minWidth: 500,
@@ -1395,7 +1395,7 @@ function tL(e) {
       icon: VisualBellIcon.SPINNER
     }));
     let t = eY ? `/api/workspace/${eY}/export_teams` : `/api/orgs/${e.org.id}/export_teams`;
-    XHR.post(t).then(() => {
+    sendWithRetry.post(t).then(() => {
       en(VisualBellActions.enqueue({
         message: getI18nString("teams_table.csv_export.generating"),
         type: "orgTeam.exportCSV",
@@ -1653,7 +1653,7 @@ function tL(e) {
   });
   return jsxs(Fragment, {
     children: [!eH && !getFeatureFlags().ff_a11y_page_tab_fix && jsx(_$$K, {
-      title: eJ ? _$$O2(DashboardSection.CONTENT) : _$$O2(DashboardSection.TEAMS),
+      title: eJ ? getOrgAdminTabMessage(DashboardSection.CONTENT) : getOrgAdminTabMessage(DashboardSection.TEAMS),
       rightActions: eJ ? void 0 : ti
     }), eJ && !getFeatureFlags().ff_a11y_page_tab_fix && jsx(_$$b, {
       tab: DashboardSection.CONTENT,

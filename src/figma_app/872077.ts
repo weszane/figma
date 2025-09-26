@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { convertSinatraModel } from '../905/412108'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { createMetaValidator } from '../figma_app/181241'
 
 /**
@@ -99,7 +99,7 @@ export class CollectionService {
   async deleteCollection(params: { collection: { databaseId: string } }) {
     // deleteCollection
     const { collection } = params
-    await XHR.del(`/api/collections/${collection.databaseId}`)
+    await sendWithRetry.del(`/api/collections/${collection.databaseId}`)
   }
 
   /**
@@ -170,7 +170,7 @@ export class CollectionService {
   }) {
     // deleteFieldSchema
     const { collection, fieldSchema } = params
-    await XHR.del(
+    await sendWithRetry.del(
       `/api/collections/${collection.databaseId}/field_schemas/${fieldSchema.databaseId}`,
     )
   }

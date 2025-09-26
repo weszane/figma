@@ -10,7 +10,7 @@ import { getResourceDataOrFallback } from "../905/663269";
 import { isValidEmail } from "../figma_app/416935";
 import { isGovCluster } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { LoadingOverlay } from "../figma_app/858013";
@@ -142,7 +142,7 @@ function B(e) {
       message: "" === W ? null : W,
       is_transfer_copy: !!e.shouldTransferCopy
     };
-    XHR.post("/api/asset_transfer/create_request", t).then(() => {
+    sendWithRetry.post("/api/asset_transfer/create_request", t).then(() => {
       e.onRequestClose && e.onRequestClose();
       eT();
       n(VisualBellActions.enqueue({

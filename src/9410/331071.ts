@@ -33,17 +33,17 @@ import { T as _$$T4 } from '../905/172092';
 import { x as _$$x } from '../905/179739';
 import { i as _$$i5 } from '../905/186077';
 import { permissionScopeHandler as _$$l2 } from '../905/189185';
-import { r as _$$r } from '../905/189361';
+import { ActionButton } from '../905/189361';
 import { a as _$$a2 } from '../905/192547';
 import { LRUCache } from '../905/196201';
 import { ES, TC } from '../905/198599';
 import { l as _$$l } from '../905/202425';
 import { h as _$$h } from '../905/791079';
-import { B as _$$B, b as _$$b2 } from '../905/222272';
+import { FlexBox, LayoutContainer } from '../905/222272';
 import { nt as _$$nt, o3 as _$$o } from '../905/226610';
 import { s as _$$s4 } from '../905/234042';
 import { Ag, H5, Hz } from '../905/235578';
-import { y as _$$y4 } from '../905/236825';
+import { Panel } from '../905/236825';
 import { PricingOptions } from '../905/237873';
 import { z as _$$z } from '../905/239603';
 import { R as _$$R6 } from '../905/240644';
@@ -53,12 +53,12 @@ import { Label } from '../905/270045';
 import { m as _$$m } from '../905/270214';
 import { J as _$$J } from '../905/273120';
 import { T as _$$T5 } from '../905/273689';
-import { $J, dM as _$$dM, o2 as _$$o3, sd as _$$sd, bp, F9, NI } from '../905/278499';
+import { AIActionIterationResult, AIActionStatus, AIActionIterationStatus, AIActionIterationAction, AIActionPromptTrigger, AIActionResult, AIActionMode } from '../905/278499';
 import { Z as _$$Z } from '../905/279476';
 import { Ay as _$$Ay2 } from '../905/281495';
-import { H as _$$H } from '../905/286442';
-import { s as _$$s6, w as _$$w2 } from '../905/286488';
-import { a as _$$a3 } from '../905/290931';
+import { usKeyboardFocusHandler } from '../905/286442';
+import { useSelectionState, SelectionState } from '../905/286488';
+import { setupPromptHistory } from '../905/290931';
 import { A as _$$A3 } from '../905/296182';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -80,7 +80,7 @@ import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { V as _$$V4 } from '../905/453354';
 import { e as _$$e4 } from '../905/462154';
-import { L0, MQ } from '../905/479155';
+import { useLayoutRegistration, ListLayoutContext } from '../905/479155';
 import { PluginImage } from '../905/480825';
 import { sendMetric } from '../905/485103';
 import { as as _$$as, _M, Dl, hm, Q0, SX, zQ } from '../905/487011';
@@ -110,7 +110,7 @@ import { t as _$$t5 } from '../905/605191';
 import { Z as _$$Z2 } from '../905/606826';
 import { _ as _$$_4 } from '../905/614936';
 import { _G, Pv } from '../905/619652';
-import { getSelectedView } from '../905/622391';
+import { handleSelectedView } from '../905/622391';
 import { VU } from '../905/625959';
 import { T as _$$T3 } from '../905/632137';
 import { ButtonPrimitive } from '../905/632989';
@@ -131,14 +131,14 @@ import { E as _$$E5, x as _$$x5 } from '../905/719609';
 import { A as _$$A2 } from '../905/721854';
 import { Point } from '../905/736624';
 import { Qx, xA } from '../905/742325';
-import { Ao } from '../905/748636';
+import { DraggableModalManager } from '../905/748636';
 import { G as _$$G } from '../905/750789';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { c as _$$c2 } from '../905/752260';
 import { pluginState, generateRandomID, handlePluginError } from '../905/753206';
 import { x as _$$x3 } from '../905/773818';
 import { A as _$$A6 } from '../905/780920';
-import { OZ as _$$OZ } from '../905/783179';
+import { formatKeyboardShortcut } from '../905/783179';
 import { k as _$$k3 } from '../905/788559';
 import { cq } from '../905/794154';
 import { K as _$$K } from '../905/799615';
@@ -147,7 +147,7 @@ import { j as _$$j2 } from '../905/813868';
 import { withAbortSignal } from '../905/829242';
 import { AutoLayout } from '../905/470281';
 import { useCurrentUserOrg, useCurrentUserOrgId } from '../905/845253';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { V as _$$V3 } from '../905/849455';
 import { E9 } from '../905/851937';
 import { _ as _$$_3 } from '../905/862468';
@@ -159,7 +159,7 @@ import { A as _$$A9 } from '../905/891805';
 import { n as _$$n } from '../905/895449';
 import { V as _$$V2 } from '../905/900932';
 import { is as _$$is, Oq } from '../905/904596';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { bL as _$$bL2 } from '../905/911410';
 import { partitionByPredicate } from '../905/918929';
 import { A as _$$A5 } from '../905/920165';
@@ -271,7 +271,7 @@ import { FFileType, FMemberRoleType, FPlanAccessType, FPlanNameType, FProductAcc
 import { parseHex, areColorsEqual, colorToHexString, whiteColor } from '../figma_app/191804';
 import { sF as _$$sF } from '../figma_app/193952';
 import { t as _$$t7 } from '../figma_app/198180';
-import { h as _$$h4 } from '../figma_app/198885';
+import { getSelectedView } from '../figma_app/198885';
 import { qO, X6 } from '../figma_app/234690';
 import { dR as _$$dR } from '../figma_app/248118';
 import { GM, PE } from '../figma_app/251115';
@@ -498,7 +498,7 @@ async function eZ(e, t, i) {
 }
 let tr = new class {
   sendFeatureRequest(e) {
-    return XHR.post('/api/ask_figma/request_feature', APIParameterUtils.toAPIParameters(e));
+    return sendWithRetry.post('/api/ask_figma/request_feature', APIParameterUtils.toAPIParameters(e));
   }
 }();
 var tn = (e => (e.Idle = 'idle', e.Loading = 'loading', e.Error = 'error', e))(tn || {});
@@ -756,7 +756,7 @@ async function tx(e) {
 }
 async function ty(e, t) {
   let i = atomStoreManager.get(openFileKeyAtom);
-  let r = getSelectedView();
+  let r = handleSelectedView();
   if (!r) throw new Error('Cannot run plugin while logged out');
   if (!i) throw new Error('No file key found');
   await handlePluginError();
@@ -830,7 +830,7 @@ async function tb(e) {
   let a = {
     type: _$$I2.ALL
   };
-  let s = isDesignOrIllustration(getEditorTypeFromView(_$$h4(t)));
+  let s = isDesignOrIllustration(getEditorTypeFromView(getSelectedView(t)));
   let o = atomStoreManager.get(filesByLibraryKeyAtom);
   t = debugState.getState();
   let l = {
@@ -839,7 +839,7 @@ async function tb(e) {
     assetTypeOption: a,
     isKnownLibrary: e => !0,
     openFile: selectOpenFile(t),
-    selectedView: _$$h4(t),
+    selectedView: getSelectedView(t),
     inDesignEditor: s,
     fileVersion: r,
     currentOrgId: resolveFileParentOrgId(t),
@@ -1085,7 +1085,7 @@ let t3 = registerModal(({
   messages: e
 }) => {
   let t = useDispatch();
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     onClose: () => {
       t(hideModalHandler());
     },
@@ -1171,7 +1171,7 @@ function t5() {
         placeholder: getI18nString('fullscreen_actions.assistant-chat'),
         searchQuery: e,
         onSearchChange: t,
-        endEnhancer: jsx(_$$r, {
+        endEnhancer: jsx(ActionButton, {
           shortcuts: [{
             key: KeyCodes.ENTER
           }],
@@ -1221,7 +1221,7 @@ function t6({
     tC(t, r.messages, s, tx);
   }, [t, r.messages, s]);
   return jsx('button', {
-    className: cssBuilderInstance.flex.flexColumn.justifyEnd.wFull.b1.colorBorder.gap8.textBodyLargeStrong.p12.$$if(i, cssBuilderInstance.colorTextSecondary).$,
+    className: cssBuilderInstance.flex.flexColumn.justifyEnd.wFull.b1.colorBorder.gap8.textBodyLargeStrong.p12.if(i, cssBuilderInstance.colorTextSecondary).$,
     style: {
       borderRadius: 13,
       minWidth: 150,
@@ -1540,7 +1540,7 @@ function rC({
   instructionLabel: a
 }) {
   let [s] = useAtomValueAndSetter(hQ);
-  let o = _$$s6(e);
+  let o = useSelectionState(e);
   let {
     close
   } = cq();
@@ -1548,7 +1548,7 @@ function rC({
     action: e,
     clientLifecycleId: void 0
   });
-  return s ? (close(), null) : e && o.state !== _$$w2.SELECTION_OK ? jsx(_$$A2, {
+  return s ? (close(), null) : e && o.state !== SelectionState.SELECTION_OK ? jsx(_$$A2, {
     action: e,
     actionIcon: i,
     actionLabel: r,
@@ -1817,12 +1817,12 @@ function nP({
   let {
     tracker,
     index
-  } = L0(t);
+  } = useLayoutRegistration(t);
   let s = useMemo(() => ({
     trackerRef: tracker,
     layoutIndex: index
   }), [index, tracker]);
-  return jsx(MQ.Provider, {
+  return jsx(ListLayoutContext.Provider, {
     value: s,
     children: e
   });
@@ -1891,7 +1891,7 @@ function nU({
   let {
     active,
     target
-  } = _$$H({
+  } = usKeyboardFocusHandler({
     ref: o,
     itemsPerRow
   });
@@ -2073,7 +2073,7 @@ function n7({
   onHide: r
 }) {
   let o = useDispatch();
-  let l = Um();
+  let l = useDropdownState();
   let c = useRef(document.getElementById(t || 'fullscreen-root'));
   kz(KeyCodes.ESCAPE, r);
   kz(KeyCodes.BACKSPACE, r, document.activeElement?.tagName.toLowerCase() !== 'input');
@@ -2237,7 +2237,7 @@ function n9(e) {
             return 3;
         }
       }(e.activeTab),
-      children: jsxs(_$$B, {
+      children: jsxs(FlexBox, {
         fullWidth: !0,
         justify: 'space-between',
         children: [jsx(n$, {
@@ -3157,7 +3157,7 @@ function af(e) {
         iterateOptions: z,
         aiTrackingContext: {
           ...t,
-          iteration_view_type: $J.SUCCESS_WITH_ITERATION
+          iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION
         },
         stayOpen: !0
       });
@@ -3390,12 +3390,12 @@ function ag({
     SX({
       ...c,
       ...Q0(e),
-      interaction: NI.GENERATE
+      interaction: AIActionMode.GENERATE
     });
     l();
   }, [c, l]);
   let [eu, ep] = useState(nq.COLOR);
-  let eh = jsx(_$$r, {
+  let eh = jsx(ActionButton, {
     shortcuts: [{
       key: KeyCodes.ENTER,
       modifier: [ModifierKeyCodes.META]
@@ -3405,7 +3405,7 @@ function ag({
     recordingKey: generateRecordingKey(d, 'submit'),
     children: renderI18nText('first_draft.make_changes')
   });
-  let em = jsx(_$$r, {
+  let em = jsx(ActionButton, {
     shortcuts: [{
       key: KeyCodes.ENTER,
       modifier: [ModifierKeyCodes.META]
@@ -3415,7 +3415,7 @@ function ag({
     children: renderI18nText('first_draft.done_theming')
   });
   return jsxs(Fragment, {
-    children: [jsx(_$$B, {
+    children: [jsx(FlexBox, {
       fullWidth: !0,
       align: 'center',
       justify: 'space-between',
@@ -3464,7 +3464,7 @@ function ag({
           labelFont: ea(M),
           recordingKey: generateRecordingKey(d, 'themeEditor')
         })
-      }), jsxs(_$$B, {
+      }), jsxs(FlexBox, {
         fullWidth: !0,
         justify: 'space-between',
         children: [jsxs(_$$t3.TabStrip, {
@@ -3507,22 +3507,22 @@ function ax(e, t) {
     case 'success':
       _$$as({
         ...e,
-        status: _$$dM.COMPLETED,
-        reason: F9.SUCCESS
+        status: AIActionStatus.COMPLETED,
+        reason: AIActionResult.SUCCESS
       });
       break;
     case 'error':
       _$$as({
         ...e,
-        status: _$$dM.FAILED,
-        reason: F9.ERROR
+        status: AIActionStatus.FAILED,
+        reason: AIActionResult.ERROR
       });
       break;
     case 'stopped':
       _$$as({
         ...e,
-        status: _$$dM.FAILED,
-        reason: F9.STOPPED
+        status: AIActionStatus.FAILED,
+        reason: AIActionResult.STOPPED
       });
   }
 }
@@ -4099,7 +4099,7 @@ function aB(e) {
         }],
         aiTrackingContext: {
           ...aiTrackingContext,
-          iteration_view_type: $J.DEFAULT_SUCCESS
+          iteration_view_type: AIActionIterationResult.DEFAULT_SUCCESS
         }
       });
     case qy.CANCELLED:
@@ -4195,7 +4195,7 @@ function aG(e) {
         }],
         aiTrackingContext: {
           ...aiTrackingContext,
-          iteration_view_type: $J.DEFAULT_SUCCESS
+          iteration_view_type: AIActionIterationResult.DEFAULT_SUCCESS
         }
       });
     case qy.CANCELLED:
@@ -4628,8 +4628,8 @@ function sc({
     setSelectedKit(i);
     SX({
       ...e,
-      interaction: NI.SELECT_KIT,
-      interaction_type: bp.BUTTON_CLICK
+      interaction: AIActionMode.SELECT_KIT,
+      interaction_type: AIActionPromptTrigger.BUTTON_CLICK
     });
     hasLastSelectedKit ? pop() : push({
       name: ExtensionFeatureKey.FIRST_DRAFT,
@@ -5165,7 +5165,7 @@ function sg({
     SX({
       ...u,
       ...Q0(e),
-      interaction: NI.GENERATE
+      interaction: AIActionMode.GENERATE
     });
     s();
   }, [u, s]);
@@ -5227,10 +5227,10 @@ function sg({
       }),
       value: e.prompt,
       ...m
-    }), jsxs(_$$B, {
+    }), jsxs(FlexBox, {
       fullWidth: !0,
       justify: 'space-between',
-      children: [b && v() || jsx('div', {}), jsxs(_$$B, {
+      children: [b && v() || jsx('div', {}), jsxs(FlexBox, {
         gap: 8,
         children: [b && jsx(_$$nj, {
           promptHistory: l,
@@ -5239,7 +5239,7 @@ function sg({
             prompt: i
           }),
           textAreaRef: C
-        }), jsx(_$$r, {
+        }), jsx(ActionButton, {
           shortcuts: [{
             key: KeyCodes.ENTER,
             modifier: [ModifierKeyCodes.META]
@@ -5440,7 +5440,7 @@ function sw({
   let {
     promptHistory,
     addPromptToHistory
-  } = _$$a3(sb, e => e);
+  } = setupPromptHistory(sb, e => e);
   let K = WX(selectedKit);
   let [H, z] = useState(!1);
   let V = useDispatch();
@@ -5502,9 +5502,9 @@ function sw({
     void 0 !== t.prevOption && e !== t.prevOption && hm({
       ...aiTrackingContext,
       ...zQ(t.ev),
-      iteration_view_type: $J.SUCCESS_WITH_ITERATION,
-      interaction: _$$sd.GALLERY_SELECT,
-      status: _$$o3.COMPLETED,
+      iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION,
+      interaction: AIActionIterationAction.GALLERY_SELECT,
+      status: AIActionIterationStatus.COMPLETED,
       value: e.modeId || 'null'
     });
     t.ev.target?.item && (I.current[t.ev.target.index] = t.ev.target.item);
@@ -5635,7 +5635,7 @@ function sw({
           recordingKey: generateRecordingKey(e, 'iterate'),
           aiTrackingContext: {
             ...aiTrackingContext,
-            iteration_view_type: $J.SUCCESS_WITH_ITERATION
+            iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION
           },
           stayOpen: !0
         });
@@ -6419,7 +6419,7 @@ function s1({
         iterateOptions: [],
         aiTrackingContext: {
           ...aiTrackingContext,
-          iteration_view_type: $J.SUCCESS_WITH_ITERATION
+          iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION
         },
         showFeedbackInline: !0
       });
@@ -6848,7 +6848,7 @@ let oi = [{
               override: '',
               enabled: !1
             };
-            return jsxs(_$$B, {
+            return jsxs(FlexBox, {
               fullWidth: !0,
               justify: 'space-between',
               children: [jsx('input', {
@@ -6943,7 +6943,7 @@ let oi = [{
                 rows: 3,
                 placeholder: 'Enter override, must contain {{jsx}} for substitution'
               })]
-            }), jsxs(_$$B, {
+            }), jsxs(FlexBox, {
               gap: 8,
               children: [jsx(Button, {
                 variant: 'secondary',
@@ -7180,7 +7180,7 @@ let oi = [{
         let {
           promptHistory,
           addPromptToHistory
-        } = _$$a3(s9, e => e);
+        } = setupPromptHistory(s9, e => e);
         let l = RL(_$$JT.MAKE_VIDEO, wx);
         let {
           start,
@@ -7237,7 +7237,7 @@ let oi = [{
           case qy.DONE:
             let x = {
               ...aiTrackingContext,
-              iteration_view_type: $J.SUCCESS_WITH_ITERATION
+              iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION
             };
             return jsx(Oq, {
               iterateOptions: [],
@@ -7439,7 +7439,7 @@ let oi = [{
             return jsx(Oq, {
               aiTrackingContext: {
                 ...aiTrackingContext,
-                iteration_view_type: $J.DEFAULT_SUCCESS
+                iteration_view_type: AIActionIterationResult.DEFAULT_SUCCESS
               },
               iterateOptions: []
             });
@@ -7889,7 +7889,7 @@ function oF({
   let y = _$$r5();
   let b = useRef(!1);
   let E = useCallback(r => {
-    let n = r ? _$$OZ(r) : '';
+    let n = r ? formatKeyboardShortcut(r) : '';
     let a = {
       ...i(),
       shortcutText: n
@@ -8991,7 +8991,7 @@ function la({
 }
 let l_ = 'EXTENSION_OPTIONS_DROPDOWN';
 function lx(e) {
-  let t = Um();
+  let t = useDropdownState();
   return hasLocalFileId(e) ? t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === e.localFileId : t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === null;
 }
 function ly(e) {
@@ -9083,7 +9083,7 @@ function lE(e) {
     publishedExtension,
     localPublishedExtension
   } = t;
-  let s = Um();
+  let s = useDropdownState();
   let l = hasLocalFileId(extension) ? extension : localPublishedExtension;
   let d = NV(l, publishedExtension);
   let c = OX(publishedExtension);
@@ -9540,7 +9540,7 @@ function l0({
   let {
     active,
     target
-  } = _$$H({
+  } = usKeyboardFocusHandler({
     ref: s,
     itemsPerRow: 2
   });
@@ -10536,7 +10536,7 @@ function dI() {
         id: eb
       }), (x || ex) && jsx('div', {
         className: cssBuilderInstance.px8.pb8.$,
-        children: jsxs(_$$b2, {
+        children: jsxs(LayoutContainer, {
           primary: !1,
           gap: 8,
           fullWidth: !0,
@@ -10779,14 +10779,14 @@ function dP() {
       children: jsx(_$$n, {
         children: jsx(dM, {
           timeoutMs: 1e4,
-          children: jsx(_$$y4, {
+          children: jsx(Panel, {
             onDismiss: O,
             recordingKey: 'SuggestionToast',
-            children: jsxs(_$$B, {
+            children: jsxs(FlexBox, {
               justify: 'space-between',
               align: 'center',
               fullWidth: !0,
-              children: [jsxs(_$$B, {
+              children: [jsxs(FlexBox, {
                 gap: 4,
                 align: 'center',
                 children: [jsx('span', {
@@ -10794,7 +10794,7 @@ function dP() {
                     '--color-icon': 'var(--color-icon-brand)'
                   },
                   children: y
-                }), jsxs(_$$B, {
+                }), jsxs(FlexBox, {
                   align: 'center',
                   children: [jsx('span', {
                     className: cssBuilderInstance.textBodyMediumStrong.$,
@@ -10806,7 +10806,7 @@ function dP() {
                     helpUrlVariant: L
                   })]
                 })]
-              }), jsx(_$$r, {
+              }), jsx(ActionButton, {
                 variant: 'secondary',
                 shortcuts: [{
                   key: KeyCodes.ENTER,
@@ -10838,17 +10838,17 @@ function dB() {
     recordingKey: 'quickActions',
     children: jsx(_$$p, {
       children: jsx(_$$n, {
-        children: jsx(_$$y4, {
+        children: jsx(Panel, {
           onDismiss: t,
           recordingKey: 'VideoToast',
           children: (() => {
             switch (e.status) {
               case 'success':
-                return jsxs(_$$B, {
+                return jsxs(FlexBox, {
                   justify: 'space-between',
                   align: 'center',
                   fullWidth: !0,
-                  children: [jsxs(_$$B, {
+                  children: [jsxs(FlexBox, {
                     gap: 4,
                     align: 'center',
                     children: [jsx('span', {
@@ -10860,7 +10860,7 @@ function dB() {
                         prompt: e.prompt
                       })
                     })]
-                  }), jsx(_$$r, {
+                  }), jsx(ActionButton, {
                     shortcuts: [{
                       key: KeyCodes.ENTER,
                       modifier: [ModifierKeyCodes.META]
@@ -10871,7 +10871,7 @@ function dB() {
                   })]
                 });
               case 'error':
-                return jsxs(_$$B, {
+                return jsxs(FlexBox, {
                   gap: 4,
                   align: 'center',
                   children: [jsx('span', {

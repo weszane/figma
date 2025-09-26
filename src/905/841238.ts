@@ -24,10 +24,10 @@ import { hideModal } from "../905/156213";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { registerModal } from "../905/102752";
-import { S as _$$S } from "../905/459477";
+import { fileLaunchHelper as _$$S } from "../905/459477";
 import { INSTANCE_SWAP_TOGGLE_ID, InstanceSwapToggle } from "../905/1253";
 import { NO } from "../905/498139";
-import { Xj } from "../905/748636";
+import { DraggableModalBgDisabled } from "../905/748636";
 import { getComponentPropDefaultValue, computeBackingGUID, VARIABLE_TYPE_CONFIG, DROPDOWN_HEIGHT, getComponentPropDisplayName, getDefaultStateForStateGroup, normalizeComponentPropValue } from "../figma_app/164212";
 import { uS, c9, DD, _I } from "../905/211095";
 import { bq, dl as _$$dl, Kn, i0 } from "../figma_app/65182";
@@ -291,7 +291,7 @@ let $$X0 = registerModal(function (e) {
     preferredProductComponents: es,
     onSetPreferredProductComponents: eo,
     onClose: () => U(hideModal())
-  }) : jsxs(Xj, {
+  }) : jsxs(DraggableModalBgDisabled, {
     initialWidth: DROPDOWN_HEIGHT,
     contentContainerClassName: "create_component_prop_modal--modal--Ln3y-",
     onClose: isInstanceSwapPickerShown ? () => {

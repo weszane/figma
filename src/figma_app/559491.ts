@@ -20,7 +20,7 @@ import { liveStoreInstance } from '../905/713695';
 import { PluginUploadApi } from '../905/771986';
 import { setupPluginCodeCache } from '../905/827944';
 import { addAuthedCommunityProfileToHub, putCommunityProfile } from '../905/890368';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { PublisherRole, UploadStatusEnum } from '../figma_app/10554';
 import { HubTypeEnum, isWidget } from '../figma_app/45218';
 import { getPublishingData, getResourceRoleInfo, loadLocalPluginSource, loadPluginManifest, validateArtworkImage, validateExtensionIconImage, validatePluginCodeSize } from '../figma_app/300692';
@@ -130,7 +130,7 @@ export async function $$z0(e, t, r) {
 export async function $$W13(e, t) {
   let r = debugState.getState();
   let n = r.openFile?.key;
-  let i = await XHR.post('/api/widgets/v2/versions', {
+  let i = await sendWithRetry.post('/api/widgets/v2/versions', {
     ids_to_versions: e,
     org_id: t,
     file_key: n
@@ -157,7 +157,7 @@ let $$K18 = createOptimistThunk(async (e, {
         src: 'fetchPublishedPlugins',
         overrideInstallStatus: !0
       }));
-    } catch {}
+    } catch { }
   }
 });
 let $$Y8 = createOptimistThunk(async (e, {
@@ -170,7 +170,7 @@ let $$Y8 = createOptimistThunk(async (e, {
   let i = t.filter(e => !publishedWidgets[e]);
   if (i.length) {
     try {
-      let e = await XHR.post('/api/widgets/batch', {
+      let e = await sendWithRetry.post('/api/widgets/batch', {
         ids: i,
         org_id: currentUserOrgId
       });
@@ -180,7 +180,7 @@ let $$Y8 = createOptimistThunk(async (e, {
         src: 'fetchPublishedWidgets',
         overrideInstallStatus: !0
       }));
-    } catch {}
+    } catch { }
   }
 });
 let $$$1 = createOptimistThunk(async (e, {
@@ -362,7 +362,7 @@ async function Z(e, t, r) {
   await Promise.all(L);
   let {
     data
-  } = await XHR.put(`/api/${getResourceTypeLabel(e, {
+  } = await sendWithRetry.put(`/api/${getResourceTypeLabel(e, {
     pluralized: !0
   })}/${e.id}/versions/${t.id}`, {
     icon_uploaded: x,
@@ -512,7 +512,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   await Promise.all(Q);
   let {
     data
-  } = await XHR.put(`/api/${getPluginWidgetLabel(!!g, {
+  } = await sendWithRetry.put(`/api/${getPluginWidgetLabel(!!g, {
     pluralized: !0
   })}/${e}/versions/${versionId}`, {
     icon_uploaded: q,
@@ -681,7 +681,7 @@ let $$eo35 = createOptimistThunk(async (e, {
     is_public: r.is_public,
     agreed_to_tos: i
   };
-  o = a ? XHR.put(`/api/widgets/${t}/roles`, l) : XHR.put(`/api/plugins/${t}/roles`, l);
+  o = a ? sendWithRetry.put(`/api/widgets/${t}/roles`, l) : sendWithRetry.put(`/api/plugins/${t}/roles`, l);
   await o.then(({
     data: r
   }) => {
@@ -735,7 +735,7 @@ let $$el10 = createOptimistThunk(async (e, t) => {
     annual_discount_percentage: t.annualDiscount,
     is_annual_discount_active: t.isAnnualDiscountActive
   };
-  r = isWidget ? XHR.put(`/api/widgets/${pluginId}`, s) : XHR.put(`/api/plugins/${pluginId}`, s);
+  r = isWidget ? sendWithRetry.put(`/api/widgets/${pluginId}`, s) : sendWithRetry.put(`/api/plugins/${pluginId}`, s);
   await r.then(({
     data: r
   }) => {
@@ -758,7 +758,7 @@ let $$el10 = createOptimistThunk(async (e, t) => {
 let $$ed17 = createOptimistThunk((e, {
   resource: t
 }) => {
-  XHR.del(`/api/${getResourceTypeLabel(t, {
+  sendWithRetry.del(`/api/${getResourceTypeLabel(t, {
     pluralized: !0
   })}/${t.id}`).then(({
     data: r
@@ -818,9 +818,9 @@ let $$eu34 = createOptimistThunk(async (e, t) => {
     resource
   } = t;
   try {
-    let t = (resource.is_widget ? await XHR.put(`/api/widgets/${resource.id}/publishers/${userId}`, {
+    let t = (resource.is_widget ? await sendWithRetry.put(`/api/widgets/${resource.id}/publishers/${userId}`, {
       role
-    }) : await XHR.put(`/api/plugins/${resource.id}/publishers/${userId}`, {
+    }) : await sendWithRetry.put(`/api/plugins/${resource.id}/publishers/${userId}`, {
       role
     })).data.meta.plugin;
     let n = e.getState().user;
@@ -878,14 +878,14 @@ export function $$ep30(e, t) {
     signedCloudfrontUrl
   } = e;
   let s = new FormData();
-  return (Object.entries(fields).forEach(([e, t]) => s.append(e, t)), s.set('Content-Type', 'text/javascript'), s.append('file', t), signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains) ? XHR.crossOriginPut(signedCloudfrontUrl, t, {
+  return (Object.entries(fields).forEach(([e, t]) => s.append(e, t)), s.set('Content-Type', 'text/javascript'), s.append('file', t), signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains) ? sendWithRetry.crossOriginPut(signedCloudfrontUrl, t, {
     raw: !0,
     headers: {
       'Content-Type': 'text/javascript',
       'Cache-Control': 'private, max-age=86400',
       'x-amz-acl': 'bucket-owner-full-control'
     }
-  }) : XHR.crossOriginPost(codePath, s, {
+  }) : sendWithRetry.crossOriginPost(codePath, s, {
     raw: !0,
     headers: {
       'Content-Type': 'multipart/form-data',

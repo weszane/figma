@@ -12,7 +12,7 @@ import { k as _$$k2 } from '../905/582200';
 import { ButtonPrimitive } from '../905/632989';
 import { defaultColorManipulator } from '../905/713722';
 import { Point } from '../905/736624';
-import { BK } from '../905/848862';
+import { useDropdown } from '../905/848862';
 import { areSessionLocalIDsEqual } from '../905/871411';
 import { k as _$$k } from '../905/888808';
 import { A as _$$A } from '../905/891805';
@@ -157,7 +157,7 @@ function K({
   closeColorPicker: s,
   recordingKey: o
 }) {
-  let l = BK(kX);
+  let l = useDropdown(kX);
   let d = s1();
   let u = UZ(d);
   let p = lK(d);
@@ -278,7 +278,7 @@ function $({
   isEditingTheme: s,
   recordingKey: o
 }) {
-  let l = BK(kX);
+  let l = useDropdown(kX);
   let [c, u] = useState(!1);
   let h = s1();
   let [m, g] = useState(nE(h));
@@ -360,7 +360,7 @@ function X({
   children: a
 }) {
   return jsxs('div', {
-    className: cssBuilderInstance.pl12.pr8.$$if(i, cssBuilderInstance.bb1.bSolid.colorBorder).$$if(!r, cssBuilderInstance.pb12).$,
+    className: cssBuilderInstance.pl12.pr8.if(i, cssBuilderInstance.bb1.bSolid.colorBorder).if(!r, cssBuilderInstance.pb12).$,
     children: [jsxs('div', {
       className: cssBuilderInstance.h40.pl4.flex.justifyBetween.itemsCenter.$,
       children: [jsx('div', {

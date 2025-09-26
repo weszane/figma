@@ -21,7 +21,7 @@ import { selectSceneGraph } from "../figma_app/889655";
 import { rp } from "../figma_app/703988";
 import { dD } from "../905/519113";
 import { RR } from "../905/514666";
-import { Wu } from "../905/221848";
+import { SelectAction } from "../905/221848";
 import { lL, Cc, T as _$$T } from "../figma_app/270091";
 import { wS, J0, fN, _A } from "../figma_app/65182";
 import { RecordableDiv } from "../905/511649";
@@ -311,7 +311,7 @@ export function $$ei0({
     }));
   }, [k]);
   let N = useCallback((e, t) => {
-    t === Wu.SELECT ? permissionScopeHandler.user("add-preferred-prop-values", () => c(e)) : permissionScopeHandler.user("remove-preferred-prop-values", () => m(e));
+    t === SelectAction.SELECT ? permissionScopeHandler.user("add-preferred-prop-values", () => c(e)) : permissionScopeHandler.user("remove-preferred-prop-values", () => m(e));
   }, [c, m]);
   let P = useCallback(e => {
     permissionScopeHandler.user("remove-preferred-prop-values", () => m(e));

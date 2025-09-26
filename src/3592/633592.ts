@@ -192,7 +192,7 @@ ${en}`;
     model: K
   })).getReader();
   let l = "";
-  for (;;) {
+  for (; ;) {
     let {
       done,
       value
@@ -317,7 +317,7 @@ export function $$el0(e) {
           role: "assistant",
           content: ""
         };
-        for (a(e => [...e, u]);;) {
+        for (a(e => [...e, u]); ;) {
           let {
             done,
             value
@@ -918,7 +918,7 @@ Once the user asks you to proceed, reply with the split components.`, {
           label: "Cancel",
           type: "cancel_add_variant"
         }]);
-      } else if ("show_canvas" === l.type) a(!0);else if ("continue_add_variant" === l.type) {
+      } else if ("show_canvas" === l.type) a(!0); else if ("continue_add_variant" === l.type) {
         if (_chat.setLastMessageActions([]), _chat.addDummyAssistantMessage("Please wait..."), !t) return;
         let {
           files
@@ -1070,7 +1070,7 @@ function eN({
   onClick: r
 }) {
   return jsx("button", {
-    className: cssBuilderInstance.flex.p8.gap10.colorBorder.bSolid.$$if(t, cssBuilderInstance.colorBg, cssBuilderInstance.colorBgSecondary).$$if(0 !== s, cssBuilderInstance.bl1).$,
+    className: cssBuilderInstance.flex.p8.gap10.colorBorder.bSolid.if(t, cssBuilderInstance.colorBg, cssBuilderInstance.colorBgSecondary).if(0 !== s, cssBuilderInstance.bl1).$,
     onClick: r,
     children: e
   });
@@ -1086,7 +1086,7 @@ function e$({
   let i = useCallback(() => e, [e]);
   let a = chat.codegen?.files[selectedFileIndex]?.name || "index.tsx";
   return jsx("div", {
-    className: cssBuilderInstance.$$if(chat.isLoading, cssBuilderInstance.opacity0_5).$,
+    className: cssBuilderInstance.if(chat.isLoading, cssBuilderInstance.opacity0_5).$,
     children: jsx(_$$d, {
       editable: !chat.isLoading,
       initialText: i,

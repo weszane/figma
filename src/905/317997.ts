@@ -11,7 +11,7 @@ import { X, U as _$$U } from "../905/77000";
 import { getSelectedFile } from "../905/766303";
 import { compareStyles } from "../figma_app/646357";
 import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
-import { ev } from "../905/909811";
+import { LibraryItemTilesByPage } from "../905/909811";
 import { C } from "../905/109977";
 import { r as _$$r } from "../905/336143";
 import { c as _$$c } from "../905/511370";
@@ -92,7 +92,7 @@ export function $$w1(e) {
       children: [jsx("h2", {
         className: FA,
         children: renderI18nText("design_systems.libraries_modal.header_components")
-      }), jsx(ev, {
+      }), jsx(LibraryItemTilesByPage, {
         width,
         items: M,
         sourceForTracking: "Library Modal",

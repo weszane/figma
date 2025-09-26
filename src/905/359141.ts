@@ -15,7 +15,7 @@ import { KindEnum } from '../905/129884';
 import { c as _$$c3 } from '../905/144429';
 import { t as _$$t2 } from '../905/150656';
 import { hideModalHandler, showModalHandler } from '../905/156213';
-import { Ph } from '../905/160095';
+import { TrackedLink } from '../905/160095';
 import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { useSingleEffect } from '../905/791079';
@@ -24,7 +24,7 @@ import { libraryKeyMapAtom } from '../905/221694';
 import { V as _$$V2 } from '../905/223767';
 import { B as _$$B } from '../905/224000';
 import { Label } from '../905/270045';
-import { K as _$$K } from '../905/275787';
+import { LibraryItemTileContextMenuType } from '../905/275787';
 import { Z as _$$Z } from '../905/279476';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -86,10 +86,10 @@ import { i as _$$i } from '../905/797975';
 import { handleLoadAllPagesWithVersionCheck } from '../905/807667';
 import { _5, eS as _$$eS2, W as _$$W, b1, mG, Pq, Px, Qj, ry } from '../905/825399';
 import { V as _$$V } from '../905/843013';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { getParentOrgId } from '../905/872904';
-import { $z } from '../905/909811';
-import { XHR } from '../905/910117';
+import { DEFAULT_ITEM_SIZE } from '../905/909811';
+import { sendWithRetry } from '../905/910117';
 import { n as _$$n } from '../905/913636';
 import { hideDropdownAction } from '../905/929976';
 import { noop } from 'lodash-es';
@@ -234,10 +234,10 @@ function ea({
     debouncedSearchQuery
   } = zm();
   let u = function () {
-    let e = Um();
+    let e = useDropdownState();
     let t = useDispatch();
     return useCallback(() => {
-      e && e.type === _$$K.LIBRARY_MODAL && t(hideDropdownAction());
+      e && e.type === LibraryItemTileContextMenuType.LIBRARY_MODAL && t(hideDropdownAction());
     }, [t, e]);
   }();
   let p = mq.useTabContentsWidth();
@@ -386,8 +386,8 @@ function el() {
       children: range(4).map(e => jsx(Qp, {
         animationType: JR.SHIMMER,
         style: styleBuilderInstance.radiusMedium.add({
-          width: `${$z}px`,
-          height: `${$z}px`
+          width: `${DEFAULT_ITEM_SIZE}px`,
+          height: `${DEFAULT_ITEM_SIZE}px`
         }).$
       }, e))
     })]
@@ -2444,7 +2444,7 @@ function ic() {
 }
 function iu() {
   return renderI18nText('design_systems.libraries_modal.sharing_assets_with_your_team', {
-    learnMoreLink: jsx(Ph, {
+    learnMoreLink: jsx(TrackedLink, {
       href: '/pricing',
       newTab: !0,
       trusted: !0,
@@ -3026,7 +3026,7 @@ function ny({
         variable_set_keys: n,
         library_asset_keys_with_library_keys: r
       }) {
-        return XHR.post('/api/publish_metadata', {
+        return sendWithRetry.post('/api/publish_metadata', {
           component_keys: e,
           state_group_keys: t,
           style_keys: i,

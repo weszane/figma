@@ -90,7 +90,7 @@ export class $$_5 extends PureComponent {
   render() {
     let e = this.props.isDescending ? "\u2193" : "\u2191";
     return jsxs("div", {
-      className: s()(LI, cssBuilderInstance.$$if(!this.props.rightAligned, cssBuilderInstance.pr6, cssBuilderInstance.pl6).$, this.props.className),
+      className: s()(LI, cssBuilderInstance.if(!this.props.rightAligned, cssBuilderInstance.pr6, cssBuilderInstance.pl6).$, this.props.className),
       style: this.props.style ? this.props.style : {},
       onClick: this.sortBy,
       children: [this.props.rightAligned && this.props.hasArrow && jsx("div", {

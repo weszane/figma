@@ -1,8 +1,8 @@
-import { b } from "../905/275748";
+import { LazyComponentFactory } from "../905/275748";
 function t() {
   return null;
 }
-new b({
+new LazyComponentFactory({
   name: "litmus",
   dependencies: [],
   exports: {

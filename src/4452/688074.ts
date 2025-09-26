@@ -125,7 +125,7 @@ export let $$I0 = {
       ...a
     } = e;
     return jsx("div", {
-      className: u()(cssBuilderInstance.overflowAuto.$$if("fill" === e.height, cssBuilderInstance.hFull).$, "flyout--body--2bx8h"),
+      className: u()(cssBuilderInstance.overflowAuto.if("fill" === e.height, cssBuilderInstance.hFull).$, "flyout--body--2bx8h"),
       "data-testid": "flyout-body",
       children: a.children
     });

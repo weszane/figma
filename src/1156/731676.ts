@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { k as _$$k } from "../642/978258";
 import { jk } from "../1006/969977";
 import { x as _$$x } from "../1006/523157";
-import { IA } from "../905/291714";
+import { PopoverProvider } from "../905/291714";
 import { W1 } from "../figma_app/439493";
 import { AppStateTsApi, SpacingConstants, StackBindingsCpp, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -126,7 +126,7 @@ export let $$z0 = memo(function () {
 function M() {
   return jsx(_$$k, {
     isShown: !0,
-    children: jsx(IA, {
+    children: jsx(PopoverProvider, {
       children: jsx(R, {
         testID: "DesignInlineMenu"
       })

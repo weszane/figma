@@ -4,7 +4,7 @@ import { I as _$$I } from "../905/494625";
 import { useFplDebugAttributes } from "../905/302698";
 import { useExposedRef } from "../905/581092";
 import { defaultComponentAttribute } from "../905/577641";
-import { au } from "../905/336566";
+import { isTabGroupActive } from "../905/336566";
 let o = Symbol();
 function u({
   children: e,
@@ -44,7 +44,7 @@ function u({
       i.current = t;
     }, [t]);
   }(() => {
-    S && au(p) && x.current?.focus();
+    S && isTabGroupActive(p) && x.current?.focus();
   }, S), u) ? jsx("button", {
     ...A,
     type: "button",

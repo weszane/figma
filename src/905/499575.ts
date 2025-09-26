@@ -3,7 +3,7 @@ import type { TSSceneGraph } from '../figma_app/518682';
 import { ResponsiveSetMixin } from '../905/26360';
 import { createAnnotationsMixin, createArcDataMixin, createBorderCornerMixin, createCanvasGridMixin, createCooperFrameMixin, createCountMixin, createDecorativeImageMixin, createDraftMixin, createEmptyMixin, createEmptyMixin2, createEmptyMixin3, createEmptyMixin4, createEmptyMixin7, createEmptyMixin9, createEmptyMixin10, createEmptyMixin14, createEmptyMixin16, createEmptyMixin17, createEmptyMixin20, createEmptyMixin22, createEmptyMixin23, createEmptyMixin24, createEmptyMixin26, createEmptyMixin27, createEmptyMixin30, createLayoutMixin, createModuleMixin, createOverlayMixin, createPageMixin, createResponsiveMixin, createStateGroupMixin, createTextMixin, createVisualStylingMixin, createWidgetMixin } from '../905/112832';
 import { ServiceCategories } from '../905/165054';
-import { v as _$$v2 } from '../905/219968';
+import { isVariableSet } from '../905/219968';
 import { Axis } from '../905/229717';
 import { isSpecialNodeType } from '../905/266460';
 import { kiwiParserCodec as _$$w } from '../905/294864';
@@ -2532,7 +2532,7 @@ export class SceneNode extends createMixinNodes() {
     this.bindings.NodeTsApi.setHubFileAttribution(e, this.sceneGraph.nodeContext);
   }
   get id() {
-    return isVariableNode(this) ? this.variableID : _$$v2(this) ? this.ownVariableCollectionId : hasStyleType(this) ? this.styleAssetId : super.id;
+    return isVariableNode(this) ? this.variableID : isVariableSet(this) ? this.ownVariableCollectionId : hasStyleType(this) ? this.styleAssetId : super.id;
   }
   get hasHiddenChildrenWhenSimplified() {
     this.setGlobalNodeID();

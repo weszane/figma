@@ -23,12 +23,12 @@ import { z } from "../905/654860";
 import { y as _$$y } from "../905/263077";
 import { cq } from "../905/794154";
 import { SX, Q0 } from "../905/487011";
-import { NI } from "../905/278499";
-import { r as _$$r } from "../905/189361";
+import { AIActionMode } from "../905/278499";
+import { ActionButton } from "../905/189361";
 import { r as _$$r2 } from "../figma_app/175364";
 import { y as _$$y2 } from "../figma_app/13082";
 import { qI, kz } from "../figma_app/171177";
-import { B } from "../905/222272";
+import { FlexBox } from "../905/222272";
 import { o as _$$o } from "../905/40561";
 import { m as _$$m } from "../905/685098";
 var m = h;
@@ -201,11 +201,11 @@ export function $$H3({
   let ec = $$z2(el, K);
   return jsxs("div", {
     className: m()(cssBuilderInstance.borderBox.p4.mb8.colorBgSecondary.wFull.flex.flexColumn.bRadius5.relative.$),
-    style: styleBuilderInstance.$$if(ed, styleBuilderInstance.add(styleBuilderInstance.$$if(M, {
+    style: styleBuilderInstance.if(ed, styleBuilderInstance.add(styleBuilderInstance.if(M, {
       minHeight: "128px"
     }, {
       height: "128px"
-    }))).add(styleBuilderInstance.$$if(M, {
+    }))).add(styleBuilderInstance.if(M, {
       width: `${H}px`
     })).$,
     onClick: () => {
@@ -213,7 +213,7 @@ export function $$H3({
       e && e.focus();
     },
     children: [jsxs("div", {
-      className: m()(cssBuilderInstance.flex.relative.overflowHidden.$$if(ed, cssBuilderInstance.flexColumn).$, Dm),
+      className: m()(cssBuilderInstance.flex.relative.overflowHidden.if(ed, cssBuilderInstance.flexColumn).$, Dm),
       style: ed && !M ? {
         height: 128
       } : {},
@@ -242,11 +242,11 @@ export function $$H3({
         className: cssBuilderInstance.flex1.relative.font13.ml8.$,
         style: styleBuilderInstance.add({
           lineHeight: `${$$j0}px`
-        }).$$if(!M, {
+        }).if(!M, {
           height: `${$$U1}px`
         }).$,
         children: [jsx("div", {
-          className: cssBuilderInstance.$$if(!M, cssBuilderInstance.absolute.top0.left0.right0).$,
+          className: cssBuilderInstance.if(!M, cssBuilderInstance.absolute.top0.left0.right0).$,
           children: jsx($$V5, {
             ref: X,
             ariaLabel: Y,
@@ -379,10 +379,10 @@ export function $$W4({
           })
         })]
       })
-    }), p && jsx(B, {
+    }), p && jsx(FlexBox, {
       fullWidth: !0,
       justify: "end",
-      children: jsx(_$$r, {
+      children: jsx(ActionButton, {
         shortcuts: [{
           key: KeyCodes.ENTER,
           modifier: [ModifierKeyCodes.META]
@@ -391,7 +391,7 @@ export function $$W4({
           o && SX({
             ...o,
             ...Q0(e),
-            interaction: NI.GENERATE
+            interaction: AIActionMode.GENERATE
           });
           l();
         },

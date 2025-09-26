@@ -9,7 +9,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { logWarning, logDebug } from "../905/714362";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { teamLibraryCache } from "../figma_app/80990";
 import { cortexAPI } from "../figma_app/432652";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
@@ -173,7 +173,7 @@ async function j({
     clientLifecycleId: o,
     containingNodeId: c,
     instrumentationRef: u
-  });else if (_?.type === "FRAME") {
+  }); else if (_?.type === "FRAME") {
     if (getFeatureFlags().first_draft_disable_images) {
       u?.current.logImageLoadBlocked();
       return;
@@ -589,7 +589,7 @@ export function $$$6({
 }
 let X = _$$n(async function (e, t) {
   let r = getFileKeyFromSelectedView(debugState?.getState().selectedView);
-  let n = await XHR.post(`/api/first_draft/kit_contents/${e.key}/detach_info`, {
+  let n = await sendWithRetry.post(`/api/first_draft/kit_contents/${e.key}/detach_info`, {
     keys: t,
     file_key: r
   });

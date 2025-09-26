@@ -13,7 +13,7 @@ import { buildFileUrlInternal } from "../905/612685";
 import { interactionTestAtom, removeRegistryEntry } from "../figma_app/617727";
 import { FFileType } from "../figma_app/191312";
 import { $z } from "../figma_app/297733";
-import { O as _$$O } from "../905/208152";
+import { ResizeDragContext } from "../905/208152";
 import { z2 } from "../figma_app/165422";
 import { Wc, VR, dS } from "../9410/855699";
 var c = d;
@@ -35,7 +35,7 @@ let v = forwardRef(function ({
   let {
     isResizing,
     isDragging
-  } = useContext(_$$O);
+  } = useContext(ResizeDragContext);
   let D = useMemo(() => isResizing || isDragging || !v, [isResizing, isDragging, v]);
   let M = useMemo(() => isResizing || isDragging, [isResizing, isDragging]);
   useEffect(() => {

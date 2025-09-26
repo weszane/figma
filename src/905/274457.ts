@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { KeyCodes } from "../905/63728";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { H } from "../905/286442";
+import { usKeyboardFocusHandler } from "../905/286442";
 import { c as _$$c } from "../905/566438";
 import { kz } from "../figma_app/171177";
 import { U } from "../905/172092";
@@ -15,7 +15,7 @@ export function $$$$p0({
   let p = useRef(null);
   let {
     active
-  } = H({
+  } = usKeyboardFocusHandler({
     ref: p,
     itemsPerRow: 1,
     navigationOptions: {

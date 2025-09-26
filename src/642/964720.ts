@@ -12,8 +12,9 @@ import { bL, c$, l9, mc } from '../905/493196';
 import { Jz } from '../905/504727';
 import { Button } from '../905/521428';
 import { getSingletonSceneGraph } from '../905/700578';
-import { BK } from '../905/848862';
-import { noop } from 'lodash-es';;
+import { useDropdown } from '../905/848862';
+import { noop } from 'lodash-es';
+;
 import { d as _$$d } from '../905/976845';
 import { defaultSerializationOptions, extractBooleanFieldDescriptions } from '../905/998509';
 import { cssBuilderInstance } from '../cssbuilder/589278';
@@ -367,7 +368,7 @@ function P({
   dropdownId: l,
   booleanLabels: a
 }) {
-  let o = BK(l);
+  let o = useDropdown(l);
   let d = useCallback(e => {
     i && i(t => ({
       ...t,

@@ -18,7 +18,7 @@ import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677';
 import { KH } from '../905/81982';
 import { F as _$$F } from '../905/84606';
 import { generateRetrievingSubscribedComponentsKey } from '../905/92359';
-import { Z as _$$Z } from '../905/116724';
+import { useDelayedCallback } from '../905/116724';
 import { KindEnum } from '../905/129884';
 import { getAutoSuggestResults } from '../905/150554';
 import { showModalHandler } from '../905/156213';
@@ -26,18 +26,18 @@ import { getThemeContextOrDefault } from '../905/158740';
 import { ServiceCategories } from '../905/165054';
 import { ScreenReaderOnly } from '../905/172252';
 import { y as _$$y2 } from '../905/175043';
-import { n as _$$n2 } from '../905/186638';
+import { useIsComponentFlyoutModalShownForAsset } from '../905/186638';
 import { permissionScopeHandler as _$$l2, scopeAwareFunction as _$$nc } from '../905/189185';
 import { AutoSuggestSessionManager } from '../905/203573';
 import { useSingleEffect } from '../905/791079';
 import { v as _$$v } from '../905/213481';
-import { b as _$$b2 } from '../905/217163';
+import { useLibraryFileLink } from '../905/217163';
 import { Cn } from '../905/225265';
 import { z as _$$z } from '../905/239603';
 import { createRecentlyUsedAtom } from '../905/262370';
-import { h as _$$h3, K as _$$K2 } from '../905/275787';
+import { LibraryItemTileContextMenu, LibraryItemTileContextMenuType } from '../905/275787';
 import { N as _$$N4 } from '../905/281143';
-import { u as _$$u } from '../905/290607';
+import { setupSwapOrInsertHandler } from '../905/290607';
 import { e as _$$e4 } from '../905/295932';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { splitPath, getBasename } from '../905/309735';
@@ -51,7 +51,7 @@ import { selectCurrentUser, getUserId } from '../905/372672';
 import { u as _$$u3 } from '../905/389684';
 import { debugState } from '../905/407919';
 import { Y as _$$Y2 } from '../905/411989';
-import { rq as _$$rq } from '../905/425180';
+import { OnboardingModal } from '../905/425180';
 import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
@@ -96,10 +96,10 @@ import { R as _$$R } from '../905/782411';
 import { EventShield } from '../905/821217';
 import { KeyboardReceiver } from '../905/826900';
 import { AutoLayout } from '../905/470281';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { t as _$$t4 } from '../905/851577';
 import { getPartnerType } from '../905/853613';
-import { F_ } from '../905/858282';
+import { ArrowPosition } from '../905/858282';
 import { FDocumentType } from '../905/862883';
 import { bL, RT } from '../905/867927';
 import { generateUUIDv4 } from '../905/871474';
@@ -156,7 +156,7 @@ import { useSiteKitAssets, useLibraryDisplayName, useSiteKitCmsConfig, siteKitSt
 import { g5 } from '../figma_app/178752';
 import { h as _$$h2, sN as _$$sN, hB, ht, LH, R2, uo, zf } from '../figma_app/188908';
 import { FFileType } from '../figma_app/191312';
-import { h as _$$h4 } from '../figma_app/198885';
+import { getSelectedView } from '../figma_app/198885';
 import { cG, hK, X3, xU } from '../figma_app/211706';
 import { q as _$$q, U as _$$U3 } from '../figma_app/213525';
 import { suggestionsSeenTrackerAtom, suggestionsManagerAtom } from '../figma_app/235371';
@@ -184,7 +184,7 @@ import { Gh } from '../figma_app/397267';
 import { shouldEnableAssetSuggestions, getAnticipationConfig } from '../figma_app/407767';
 import { NJ } from '../figma_app/419216';
 import { fullscreenValue } from '../figma_app/455680';
-import { V as _$$V3 } from '../figma_app/473391';
+import { getAssetKeyForSubscription } from '../figma_app/473391';
 import { Nz as _$$Nz, cP, FX, uY, ZI } from '../figma_app/475869';
 import { t as _$$t6 } from '../figma_app/501766';
 import { selectOpenFile, useCurrentFileKey, useOpenFileLibraryKey, useFullscreenViewFile, selectCurrentFile } from '../figma_app/516028';
@@ -278,9 +278,9 @@ function M() {
     !e && t && o() && !c && !u && currentView === S5.Libraries && show();
     isShowing && currentView !== S5.Libraries && complete();
   }, [show, complete, t, isShowing, o, c, u, currentView, e]);
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     arrowPadding: fg,
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: renderI18nText('rcs.visual_assets.explore_within_assets_tab'),
     disableHighlight: !0,
     isShowing,
@@ -492,8 +492,8 @@ function e3({
     isPreset: hasLibraryKeyInSet(e, I)
   }), [e, _, I]);
   let A = _$$J2(e, p, u);
-  let P = _$$n2(e);
-  let L = _$$u({
+  let P = useIsComponentFlyoutModalShownForAsset(e);
+  let L = setupSwapOrInsertHandler({
     canSwap: !M,
     openFileKey: N ?? '',
     sourceForTracking: 'Asset Panel',
@@ -525,7 +525,7 @@ function e3({
     keyboardNavigationItem
   } = M3({
     ...H,
-    id: _$$V3(e),
+    id: getAssetKeyForSubscription(e),
     onFocus: R,
     disabled: X
   });
@@ -544,7 +544,7 @@ function e3({
     shouldRefocusAfterKeyboardInsert: currentView === S5.Recents,
     sourceForTracking: s === AUTO_SUGGEST_EVENT_PREFIX ? s : mZ
   });
-  let et = _$$F(e, _$$K2.ASSETS_PANEL, p, u);
+  let et = _$$F(e, LibraryItemTileContextMenuType.ASSETS_PANEL, p, u);
   let es = function (e, t) {
     let s = useSelector(selectSceneGraph);
     let r = e.isLocal && isInteractionOrEvalMode() ? _$$eT(e.node_id, s).join('-') : e.node_id;
@@ -627,7 +627,7 @@ function e2({
     textRef: E
   });
   let A = !!x.query;
-  let P = _$$n2(e);
+  let P = useIsComponentFlyoutModalShownForAsset(e);
   let L = useLatestRef(P);
   useEffect(() => {
     P && !L && f(hideTooltip());
@@ -840,7 +840,7 @@ function tu(e, t, s, n, i, l, a) {
             sectionNameForTracking: i,
             sectionPosition: c + o,
             ...n
-          }, `${s}-${_$$V3(e)}`)
+          }, `${s}-${getAssetKeyForSubscription(e)}`)
         }));
       }
     });
@@ -850,7 +850,7 @@ function tu(e, t, s, n, i, l, a) {
         children: p
       }),
       key: `${s}:row-${c / t}`,
-      keys: u.map(e => _$$V3(e)),
+      keys: u.map(e => getAssetKeyForSubscription(e)),
       height: tc(n.thumbHeight, n.displayType, {
         showFileName: !!a?.getFileName,
         hasTopPadding: c !== 0,
@@ -1532,7 +1532,7 @@ function t1({
     keyboardNavigationItem
   } = M3({
     ...k,
-    id: _$$V3(e),
+    id: getAssetKeyForSubscription(e),
     disabled: w
   });
   C0(keyboardNavigationItem, d && currentView === S5.Assets && !w);
@@ -1901,7 +1901,7 @@ function sc({
       opacityOverride: 0.5
     }), jsx(_$$n3.div, {
       onPointerDown: C,
-      className: cssBuilderInstance.flex.$$if(f, cssBuilderInstance.wFull).$,
+      className: cssBuilderInstance.flex.if(f, cssBuilderInstance.wFull).$,
       children: jsxs(ButtonPrimitive, {
         className: E,
         ref: setKeyboardNavigationElement,
@@ -2143,7 +2143,7 @@ function sS(e, t, s, n, i, l, a, o, d = {}) {
         sectionPosition: u + i,
         thumbHeight: n,
         thumbWidth: s
-      }, `${l}-${_$$V3(e)}`)) : h.push(jsx(sc, {
+      }, `${l}-${getAssetKeyForSubscription(e)}`)) : h.push(jsx(sc, {
         embed: e,
         sectionNameForTracking: a,
         sectionPosition: u + i,
@@ -2161,7 +2161,7 @@ function sS(e, t, s, n, i, l, a, o, d = {}) {
         children: h
       }),
       key: `${l}:row-${u / t}`,
-      keys: p.map(e => sv(e) ? _$$V3(e) : e.name),
+      keys: p.map(e => sv(e) ? getAssetKeyForSubscription(e) : e.name),
       height: tc(n, i, {
         showFileName: !!d.libraryNameForAsset,
         hasTopPadding: u !== 0,
@@ -2675,14 +2675,14 @@ let s7 = memo(({
 });
 function s9() {
   let e = useSelector(e => e.dropdownShown);
-  let t = useSelector(_$$h4);
-  let s = e?.type === _$$K2.ASSETS_PANEL && !!e?.data?.component;
+  let t = useSelector(getSelectedView);
+  let s = e?.type === LibraryItemTileContextMenuType.ASSETS_PANEL && !!e?.data?.component;
   let i = e?.type === s4 && !!e?.data?.pageId;
   let l = e?.type === sZ && !!e?.data;
   let a = _$$K3(!0);
   let o = useContext(_$$U);
   return jsxs(Fragment, {
-    children: [s && jsx(_$$h3, {
+    children: [s && jsx(LibraryItemTileContextMenu, {
       selectedView: t,
       dropdownShown: e,
       onJumpToLocalComponent: a,
@@ -3515,7 +3515,7 @@ let ns = forwardRef(({
   getDropdownTarget: s
 }, i) => {
   let a = _$$sN();
-  let o = Um();
+  let o = useDropdownState();
   let d = o?.type === nt;
   let c = useDispatch();
   let u = useCallback(() => c(hideDropdownAction()), [c]);
@@ -3753,12 +3753,12 @@ function ni({
       textRef: s
     })), 0);
   }, [pageId, folderPath]), e) ? jsxs('div', {
-    className: cssBuilderInstance.noWrap.flex.itemsCenter.$$if(t, cssBuilderInstance.overflowHidden).$,
+    className: cssBuilderInstance.noWrap.flex.itemsCenter.if(t, cssBuilderInstance.overflowHidden).$,
     children: [jsx(nl, {}), jsx('div', {
       'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': o ? e : void 0,
       'ref': s,
-      'className': cssBuilderInstance.mx4.px2.$$if(t, cssBuilderInstance.overflowHidden.pre.ellipsis).$,
+      'className': cssBuilderInstance.mx4.px2.if(t, cssBuilderInstance.overflowHidden.pre.ellipsis).$,
       'aria-current': 'location',
       'children': e
     })]
@@ -4384,7 +4384,7 @@ function nV({
       }, [r, i, a]);
     }();
     let c = getPartnerType(e.libraryKey);
-    let u = _$$b2({
+    let u = useLibraryFileLink({
       libraryKey: e.libraryKey
     });
     let p = u.data?.link;
@@ -6103,7 +6103,7 @@ function ii({
     let r = useDispatch();
     let i = e === s?.libraryKey;
     let l = e && !!t;
-    let o = _$$b2({
+    let o = useLibraryFileLink({
       libraryKey: e,
       nodeId: t
     });
@@ -6498,7 +6498,7 @@ function iM() {
           thumbHeight: props.thumbHeight,
           thumbWidth: props.thumbWidth,
           libraryName: a(e.sourceLibraryKey)
-        }, `assetPanelRecents:siteKit:${_$$V3(e)}`))
+        }, `assetPanelRecents:siteKit:${getAssetKeyForSubscription(e)}`))
       })]
     }), m && p && jsx('div', {
       className: 'asset_panel_recents--buffer--URYGQ'
@@ -6514,7 +6514,7 @@ function iM() {
           sectionPosition: t,
           keyboardPosition: pg([CategoryType.COMPONENTS], t, numColumns),
           ...props
-        }, `assetPanelRecents:component:${_$$V3(e)}`))
+        }, `assetPanelRecents:component:${getAssetKeyForSubscription(e)}`))
       })]
     }), jsx('div', {
       className: 'asset_panel_recents--bottomPadding--9BTkl'
@@ -6871,7 +6871,7 @@ let i2 = e => {
   let {
     isActive,
     start
-  } = _$$Z(noop);
+  } = useDelayedCallback(noop);
   useEffect(() => {
     e !== t && start(1e4);
   }, [e, t, start]);
@@ -6935,7 +6935,7 @@ let i4 = ({
   let {
     start,
     cancel
-  } = _$$Z(() => v(!1));
+  } = useDelayedCallback(() => v(!1));
   let T = useCallback(() => {
     j(!0);
     d(Date.now());
@@ -7060,7 +7060,7 @@ function i7({
         thumbLayout: u,
         thumbWidth: p,
         viewMode: Bk.Grid
-      }, `$visualAssetsPanel:component:${_$$V3(e)}`)), s === 2 && jsx(i8, {
+      }, `$visualAssetsPanel:component:${getAssetKeyForSubscription(e)}`)), s === 2 && jsx(i8, {
         libraryKey: e,
         numComponents: o,
         size: p
@@ -7470,7 +7470,7 @@ function lL({
     column: ActionType.SETTINGS
   });
   let i = useCurrentFileKey();
-  let l = Um();
+  let l = useDropdownState();
   let o = l?.type === lP;
   let d = useDispatch();
   let c = useCallback(() => {
@@ -7844,7 +7844,7 @@ function lQ({
       dismissModal: e,
       width: l,
       targetKey: lZ,
-      arrowPosition: F_.TOP,
+      arrowPosition: ArrowPosition.TOP,
       backgroundColor: 'var(--color-bg, $figmaFGWhite)',
       shouldNotWrapInParagraphTag: !0,
       noAnimation: !0,

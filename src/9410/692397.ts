@@ -7,7 +7,7 @@ import { b as _$$b } from "../figma_app/556971";
 import { renderI18nText } from "../905/303541";
 import { oz, o5 } from "../905/292918";
 import { getDisplayNameAlt, isDefaultFileAlt, isBranchAlt } from "../905/760074";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { e0 } from "../905/696396";
@@ -52,7 +52,7 @@ export function $$I0({
   recordingKey: t
 }) {
   let [i, a] = useState(!1);
-  let s = Um()?.type === eg;
+  let s = useDropdownState()?.type === eg;
   let [o, l] = useState(s);
   useEffect(() => {
     if (s) l(!0);else {

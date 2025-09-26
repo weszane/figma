@@ -10,7 +10,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { yJ } from "../figma_app/24841";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { e0 } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { l6, c$ } from "../905/794875";
@@ -26,7 +26,7 @@ function v(e) {
 function I(e) {
   let t = useDispatch();
   let i = useSelector(e => e.user);
-  let _ = Um();
+  let _ = useDropdownState();
   let b = i.profile?.job_title ?? "";
   let I = "student" === b || "educator" === b ? b : normalizeJobRole(b);
   let E = "unknown" === I ? "other" : I;

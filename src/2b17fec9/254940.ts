@@ -9,7 +9,7 @@ import { getCurrentWorkspaceInfo } from "../figma_app/684168";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
-import { S } from "../905/404161";
+import { ExtensionRequestModal } from "../905/404161";
 var $$f1 = (e => (e.FigJamPluginTile = "figjam_plugin_tile", e))($$f1 || {});
 export function $$_0(e) {
   let t = useDispatch();
@@ -48,7 +48,7 @@ export function $$_0(e) {
   return jsx(ButtonSecondary, {
     onClick: () => {
       t(showModalHandler({
-        type: S,
+        type: ExtensionRequestModal,
         data: y
       }));
     },

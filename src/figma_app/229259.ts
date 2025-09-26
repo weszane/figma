@@ -1,7 +1,7 @@
 import { withParsedMeta } from "../905/405710";
 import { liveStoreInstance } from "../905/713695";
 import { COMMUNITY_LIBRARY_FILE } from "../figma_app/633080";
-import { f } from "../905/292380";
+import { communityLibrariesService } from "../905/292380";
 import { Tf } from "../905/297574";
 let $$l3 = liveStoreInstance.Query({
   fetch: async e => {
@@ -9,7 +9,7 @@ let $$l3 = liveStoreInstance.Query({
       let {
         components,
         state_groups
-      } = (await f.getPublishedComponents({
+      } = (await communityLibrariesService.getPublishedComponents({
         hubFileId: e
       })).data.meta;
       return {
@@ -30,7 +30,7 @@ let $$l3 = liveStoreInstance.Query({
 let $$d2 = liveStoreInstance.Query({
   fetch: async ({
     hubFileId: e
-  }) => (await f.getLibraryStyles({
+  }) => (await communityLibrariesService.getLibraryStyles({
     hubFileId: e
   })).data.meta.styles ?? [],
   output: ({
@@ -38,13 +38,13 @@ let $$d2 = liveStoreInstance.Query({
   }) => e.map(withParsedMeta)
 });
 let $$c1 = liveStoreInstance.Query({
-  fetch: async () => (await f.getCommunityLibraries()).data.meta,
+  fetch: async () => (await communityLibrariesService.getCommunityLibraries()).data.meta,
   output: ({
     data: e
   }) => e.map(p)
 });
 let $$u0 = liveStoreInstance.Query({
-  fetch: async () => (await f.getCommunityLibrariesVisualAssets()).data.meta,
+  fetch: async () => (await communityLibrariesService.getCommunityLibrariesVisualAssets()).data.meta,
   output: ({
     data: e
   }) => e.map(p)

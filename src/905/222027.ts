@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { SvgComponent } from "../905/714743";
-import { q } from "../905/600041";
+import { ThumbnailContainer } from "../905/600041";
 import { SizeOption } from "../905/171275";
 import { renderI18nText } from "../905/303541";
 import { A as _$$A } from "../6828/255111";
@@ -28,7 +28,7 @@ export function $$c0({
       children: renderI18nText("tile.offline_file_tile.offline_created_file")
     })]
   });
-  return jsx(q, {
+  return jsx(ThumbnailContainer, {
     borderRadius: e,
     noBorder: t,
     backgroundColor: "var(--color-bg-secondary)",

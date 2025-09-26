@@ -25,7 +25,7 @@ import { getCanvasViewState } from "../905/758967";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { RF, oQ, DH } from "../figma_app/701001";
 import { Zr } from "../figma_app/678782";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
@@ -532,7 +532,7 @@ export let $$K0 = memo(function ({
 }) {
   let t = useRef(null);
   let r = 100 * getObservableOrFallback(getCanvasViewState().activeCanvasCurrentZoom);
-  let a = BK($$H);
+  let a = useDropdown($$H);
   let [o, d] = useState(null);
   let {
     isPropertiesPanelCollapsed

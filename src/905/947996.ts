@@ -45,8 +45,8 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
     return jsxs("div", {
       className: cssBuilderInstance.flex.$,
       children: [jsx("div", {
-        className: cssBuilderInstance.relative.flex.itemsCenter.justifyCenter.$$if(n, cssBuilderInstance.mr6, cssBuilderInstance.mr4).flexShrink0.$,
-        style: styleBuilderInstance.$$if(i, {
+        className: cssBuilderInstance.relative.flex.itemsCenter.justifyCenter.if(n, cssBuilderInstance.mr6, cssBuilderInstance.mr4).flexShrink0.$,
+        style: styleBuilderInstance.if(i, {
           top: "1px",
           width: "14px",
           height: "14px"

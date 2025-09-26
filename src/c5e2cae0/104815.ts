@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { _H } from "../figma_app/598111";
 import { o as _$$o } from "../c5e2cae0/371580";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { renderI18nText } from "../905/303541";
 import { d as _$$d } from "../c5e2cae0/841217";
 import { selectViewAction } from "../905/929976";
@@ -66,7 +66,7 @@ export function $$g0(e) {
           days: promo.promo_value
         })
       }), jsx("div", {
-        children: jsx(_$$x, {
+        children: jsx(LoadingRenderer, {
           isLoading: x,
           children: () => jsx(_$$o, {
             children: jsx(_$$d, {

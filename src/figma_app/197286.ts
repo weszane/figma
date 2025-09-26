@@ -1,7 +1,7 @@
 import { useRef, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { dayjs } from "../905/920142";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { handleAtomEvent } from "../905/502364";
 import { showModalHandler } from "../905/156213";
 import { v } from "../figma_app/380543";
@@ -10,7 +10,7 @@ import { J } from "../figma_app/333189";
 import { d4 } from "../905/759412";
 export let $$_2 = "link_expired_event";
 function h(e) {
-  XHR.put(`/api/files/${e}/expire_public_link`);
+  sendWithRetry.put(`/api/files/${e}/expire_public_link`);
 }
 let m = (e, t) => {
   let r = useRef(null);

@@ -8,9 +8,9 @@ import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { OKV } from "../figma_app/6204";
 let f = userFlagExistsAtomFamily("seen_dtm_deprecation_file_overlay");
 let $$E1 = "dtm_deprecation_file_overlay_key";
@@ -63,8 +63,8 @@ export function $$y0(e) {
   });
   let S = e.isOwner ? I : renderI18nText("file_browser.drafts_to_move.this_move_might_change_your_file_permissions");
   let v = e.isOwner ? renderI18nText("file_browser.drafts_to_move.remember_to_move_this_file") : renderI18nText("file_browser.drafts_to_move.drafts_to_move_files_are_relocating_soon");
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: jsx("p", {
       children: S
     }),

@@ -6,7 +6,7 @@ import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { KI } from "../figma_app/797994";
 import { N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { V86 } from "../figma_app/6204";
 export let $$_0 = "new_text_row_location_callout";
 export function $$h1() {
@@ -23,7 +23,7 @@ export function $$h1() {
   h(() => {
     KI($$_0) && show();
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     isShowing,
     clickOutsideToHide: !0,
     trackingContextName: "New Text Location Callout",

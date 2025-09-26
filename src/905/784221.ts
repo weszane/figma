@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useSubscription } from "../figma_app/288654";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -80,7 +80,7 @@ let x = registerModal(function ({
   if (!C) return null;
   let T = async () => {
     try {
-      await XHR.del(`/api/templates/file/${C.fileKey}`);
+      await sendWithRetry.del(`/api/templates/file/${C.fileKey}`);
     } catch (t) {
       e(VisualBellActions.enqueue({
         message: getI18nString("templates.unpublishing.bell.failure"),

@@ -7,7 +7,7 @@ import { getI18nString } from '../905/303541';
 import { sD, Xn } from '../905/429125';
 import { V } from '../905/735518';
 import { n as _$$n } from '../905/841238';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { showDropdownThunk } from '../905/929976';
 import { calculatePickerPositionLeft } from '../905/959568';
 import { getSlotPropTypes, DisplayMode, trackComponentPropsModalOpen, DROPDOWN_HEIGHT, getComponentPropDisplayName } from '../figma_app/164212';
@@ -102,7 +102,7 @@ export function $$x0(e) {
   let t = selectWithShallowEqual(e => e.modalShown);
   let r = useMemo(() => getSlotPropTypes(e).defaultType, [e]);
   let n = sD.concat('-', e);
-  let a = Um();
+  let a = useDropdownState();
   let s = !!a && a.type === n && a.data.nodeField === e;
   let o = !!t && t.type === _$$n.type && t.data?.propType === r;
   return s || o;

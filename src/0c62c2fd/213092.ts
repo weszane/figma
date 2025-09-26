@@ -11,7 +11,7 @@ import { Vm } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { selectPermissionsState } from "../figma_app/212807";
 import { getEditableUnpaidTeams } from "../figma_app/345997";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 function h({
   handleClose: e
 }) {
@@ -50,7 +50,7 @@ export function $$x0() {
   }, [t, v.length, x, r]);
   return jsx(TrackingProvider, {
     name: "Edu Team Upgrade Modal",
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: getI18nString("edu.upgrade_teams.headline"),
       onClose: x,
       children: jsxs("div", {

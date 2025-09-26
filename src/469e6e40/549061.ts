@@ -24,7 +24,7 @@ import { UpgradeAction } from '../905/370443';
 import { getUserId } from '../905/372672';
 import { FRequestsStr } from '../905/384551';
 import { _ as _$$_ } from '../905/410717';
-import { rq } from '../905/425180';
+import { OnboardingModal } from '../905/425180';
 import { w as _$$w } from '../905/433065';
 import { k as _$$k } from '../905/443820';
 import { isCollaboratorType, ProductAccessTypeEnum } from '../905/513035';
@@ -111,7 +111,7 @@ function R({
     style: styleBuilderInstance.hFitContent.add({
       gridColumnStart: e,
       gridColumnEnd: t
-    }).$$if(a, styleBuilderInstance.h48.$, styleBuilderInstance.add({
+    }).if(a, styleBuilderInstance.h48.$, styleBuilderInstance.add({
       borderRadius: '13px'
     }).borderBox.b1.colorBorder.$).$,
     children: a ? jsx(Wi, {
@@ -472,7 +472,7 @@ function eO({
       canShow: (e, t) => !e && !!t.name
     });
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     clickOutsideToHide: !0,
     description: s ? renderI18nText('admin_dashboard.onboarding_overlay.description', {
       planName: getResourceDataOrFallback(t.data?.name)
@@ -1436,7 +1436,7 @@ export function $$tg0({
           style: styleBuilderInstance.mxAuto.add({
             minWidth: '476px',
             maxWidth: '1536px'
-          }).px32.pb32.$$if(!L, styleBuilderInstance.pt32).$,
+          }).px32.pb32.if(!L, styleBuilderInstance.pt32).$,
           children: [jsx(U, {
             plan: q,
             isLoading: F

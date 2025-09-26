@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
-import { oU, Sr, B3 } from "../905/535224";
+import { canOpenUrlInDesktop, openUrlInDesktop, DesktopModalType } from "../905/535224";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { ModalCloseButton } from "../905/17223";
 import { BaseLinkComponent, SecureLink } from "../figma_app/637027";
@@ -41,7 +41,7 @@ let V = rw();
 function H(e) {
   let [t, r] = useState();
   useEffect(() => {
-    oU(location.href).then(e => r(e));
+    canOpenUrlInDesktop(location.href).then(e => r(e));
   }, []);
   return jsxs("div", {
     className: bx,
@@ -53,7 +53,7 @@ function H(e) {
         trackEventAnalytics(t ? "community_publish_open_desktop_clicked" : "community_publish_get_desktop_clicked", {
           resourceType: e.tab === gr.PLUGINS ? HubTypeEnum.PLUGIN : HubTypeEnum.WIDGET
         });
-        t && Sr(location.href, B3.UNIVERSAL_POSTING_MODAL);
+        t && openUrlInDesktop(location.href, DesktopModalType.UNIVERSAL_POSTING_MODAL);
       },
       href: t ? void 0 : "https://www.figma.com/downloads/",
       className: nf,

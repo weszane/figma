@@ -43,6 +43,8 @@
     "@types/node": "^24.3.0",
     "@zip.js/zip.js": "^2.8.2",
     "a11y-dialog": "^8.1.4",
+    "acorn": "^8.15.0",
+    "astring": "^1.9.0",
     "async-mutex": "^0.5.0",
     "blakejs": "^1.2.1",
     "bowser": "^1.9.4",
@@ -82,6 +84,7 @@
     "tabbable": "^6.2.0",
     "use-debounce": "^10.0.6",
     "uuid": "^13.0.0",
+    "video.js": "^8.23.4",
     "zod": "^3.0.0"
   },
   "devDependencies": {

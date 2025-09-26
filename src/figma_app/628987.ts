@@ -12,7 +12,7 @@ import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import h from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
-import { K4, P6 } from "../905/535224";
+import { isDesktopEnvironmentAvailable, getDesktopVersion } from "../905/535224";
 import { h as _$$h } from "../905/791079";
 import { selectWithShallowEqual } from "../905/103090";
 import { buildStaticUrl } from "../figma_app/169182";
@@ -20,7 +20,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { AutoInteractableWrapper } from "../905/277716";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -29,11 +29,11 @@ import { showModalHandler } from "../905/156213";
 import { J6 } from "../figma_app/8833";
 import { getEditorTypeFromView } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
-import { O as _$$O } from "../905/291654";
-import { Kk } from "../905/777093";
+import { shouldShowEula } from "../905/291654";
+import { areFontsInitializedCheck } from "../905/777093";
 import { Cy } from "../905/571439";
 import { normalizeValue } from "../905/216495";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { selectUserFlag } from "../905/940356";
 import { getObservableValue } from "../figma_app/84367";
@@ -73,7 +73,7 @@ export function $$e_0() {
     r();
   });
   let r = useCallback(() => {
-    !e && q9() && XHR.crossOriginGet(`${eo}`, null, {
+    !e && q9() && sendWithRetry.crossOriginGet(`${eo}`, null, {
       headers: {
         "Content-Type": "text/plain"
       }
@@ -118,7 +118,7 @@ export function $$em2({
 }) {
   let eg = useDispatch();
   let ef = Xo();
-  let eE = Um();
+  let eE = useDropdownState();
   let ey = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let eb = sO() && ey === SelfDesignType.SELF;
   let eT = useIsSelectedViewFullscreenCooper();
@@ -159,7 +159,7 @@ export function $$em2({
     isEqual: (e, t) => e === t
   };
   let eM = useCallback(() => {
-    !K4() || Kk() || eA || el || (el = !0, P6().catch(() => {
+    !isDesktopEnvironmentAvailable() || areFontsInitializedCheck() || eA || el || (el = !0, getDesktopVersion().catch(() => {
       eg(showModalHandler({
         type: _$$x
       }));
@@ -190,7 +190,7 @@ export function $$em2({
   }, [K, ea, e, eD]);
   let eB = [];
   let eG = normalizeValue(e);
-  let eV = fullscreenValue?.isFontListLoaded() && isNotNullish(eG) && (_$$O(eG, K, ev, eS) || !K[eG] || 0 === Object.keys(K[eG] ?? {}).length);
+  let eV = fullscreenValue?.isFontListLoaded() && isNotNullish(eG) && (shouldShowEula(eG, K, ev, eS) || !K[eG] || 0 === Object.keys(K[eG] ?? {}).length);
   for (let e of (!eG || eG in ea || (eB.push(jsx(ec, {
     value: eG,
     disabled: !0,

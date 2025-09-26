@@ -8,7 +8,7 @@ import { getTrackingSessionId } from "../905/471229";
 import { isEditDisabled } from "../figma_app/459490";
 import { postUserFlag } from "../905/985254";
 import { B as _$$B } from "../figma_app/750676";
-import { T as _$$T } from "../905/793009";
+import { AITemplateType } from "../905/793009";
 import { _s } from "../figma_app/33126";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { J } from "../905/915227";
@@ -155,7 +155,7 @@ let ea = atom(null, async (e, t, {
   t($$q6, "");
   h5(r, 0, 1, i, F, s, T, c, y, b, U);
   try {
-    v = await _$$B(() => e(LX) || "null", r, _$$T.AI, async () => {
+    v = await _$$B(() => e(LX) || "null", r, AITemplateType.AI, async () => {
       let t;
       if ("board" === F) {
         let n = e(_s);

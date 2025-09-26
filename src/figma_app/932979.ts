@@ -10,7 +10,7 @@ import { Z } from "../905/279476";
 import { createLocalStorageAtom, useAtomWithSubscription } from "../figma_app/27355";
 import _ from "classnames";
 import { hasDesktopAPI } from "../figma_app/876459";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { postUserFlag } from "../905/985254";
 import { selectUserFlag } from "../905/940356";
@@ -86,7 +86,7 @@ function C() {
             children: "http://127.0.0.1:3845/mcp"
           }), jsx("div", {
             className: "mcp_sse_deprecation_banner--deprecationModalReadMore--Zydmi",
-            children: jsx(Ph, {
+            children: jsx(TrackedLink, {
               href: "https://help.figma.com/hc/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server#h_01JVAXY5BNTZX9WZ3BERXWDDRQ",
               trusted: !0,
               newTab: !0,

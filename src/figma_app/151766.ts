@@ -9,7 +9,7 @@ import { isSupportShareEmail, isFigmaEmail } from "../figma_app/416935";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { v as _$$v } from "../905/479136";
 import { n as _$$n } from "../figma_app/339971";
 import { getI18nString } from "../905/303541";
@@ -42,7 +42,7 @@ export let $$O1 = {
     if (0 === t.length && 0 === r.size) return;
     async function d(t) {
       let r = 2e3;
-      for (;;) try {
+      for (; ;) try {
         return await t();
       } catch (t) {
         if (e()) return;
@@ -51,7 +51,7 @@ export let $$O1 = {
       }
     }
     for (let r = 0; r < t.length && !e(); r += 100) await d(async () => {
-      let e = await XHR.post(`/file/${n}/image/batch`, {
+      let e = await sendWithRetry.post(`/file/${n}/image/batch`, {
         sha1s: t.slice(r, r + 100)
       });
       a = a.concat(Object.keys(e.data.meta.s3_urls));
@@ -76,7 +76,7 @@ export let $$O1 = {
         let r = t.queue[t.nextIdx];
         t.nextIdx++;
         await d(async () => {
-          let n = (await XHR.crossOriginGetAny(t.urls[r], null, {
+          let n = (await sendWithRetry.crossOriginGetAny(t.urls[r], null, {
             responseType: "blob"
           })).response;
           if (R(--c, u), e()) return;
@@ -140,9 +140,9 @@ async function P(e, t, r) {
   let h = debugState.dispatch;
   let m = debugState.getState();
   let f = !1;
-  let T = () => {};
+  let T = () => { };
   let I = !1;
-  let S = () => {};
+  let S = () => { };
   let A = new Promise(e => {
     S = e;
   });
@@ -312,7 +312,7 @@ export async function $$k0(e, t, r, n, o, l, u) {
   let f = g.saveAsState.attemptId;
   if (getFeatureFlags().antiabuse_file_download_check) try {
     let e = g.openFile?.key || "";
-    let t = await XHR.post(`/api/file_download_log/${e}`, {
+    let t = await sendWithRetry.post(`/api/file_download_log/${e}`, {
       is_desktop: !!desktopAPIInstance
     });
     t.data?.meta?.download_err && (await fileApiHandler.getWAFValidator());

@@ -59,11 +59,11 @@ function E({
               })
             })
           }), jsxs("div", {
-            className: cssBuilderInstance.flex.flex1.flexColumn.justifyCenter.gap24.borderBox.b1.colorBorder.bRadius4.$$if(a, cssBuilderInstance.b2.colorBgSelected.colorBorderSelectedStrong).$,
+            className: cssBuilderInstance.flex.flex1.flexColumn.justifyCenter.gap24.borderBox.b1.colorBorder.bRadius4.if(a, cssBuilderInstance.b2.colorBgSelected.colorBorderSelectedStrong).$,
             style: styleBuilderInstance.add({
               minHeight: "316px",
               borderStyle: "dashed"
-            }).$$if(a, {
+            }).if(a, {
               borderStyle: "solid"
             }).$,
             children: [jsxs("div", {

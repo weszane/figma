@@ -12,7 +12,7 @@ import { _r } from "../figma_app/451499";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, isMixedArray, isInvalidValue, isValidValue, MIXED_MARKER } from "../905/216495";
 import { M6 } from "../figma_app/852050";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { a2 } from "../figma_app/762558";
 import { l6, c$, sK } from "../905/794875";
@@ -32,7 +32,7 @@ export function $$N4(e) {
   let [v, N] = useState({});
   let [P, D] = useState({});
   let L = useDispatch();
-  let F = Um();
+  let F = useDropdownState();
   let M = M6();
   let j = !!e.fontVariationAxes;
   let U = !e.hideTypographyVariableOptions && M;

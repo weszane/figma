@@ -25,10 +25,10 @@ import { useIsCanvasEditDisabled } from "../905/595131";
 import { selectWithShallowEqual } from "../905/103090";
 import { hideDropdownAction, updateDropdownSelectionAction, showDropdownThunk } from "../905/929976";
 import { useFullscreenReady } from "../905/924253";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { TY, pi } from "../figma_app/357047";
-import { rq } from "../905/425180";
-import { F_ } from "../905/748636";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/748636";
 import { oi } from "../figma_app/598952";
 import { eD$ } from "../figma_app/6204";
 import { p as _$$p } from "../9410/505291";
@@ -43,7 +43,7 @@ function M({
       appModel: e
     }
   }) => e.showUi);
-  let l = Um();
+  let l = useDropdownState();
   let d = useRef(!1);
   let c = useFullscreenReady();
   let u = useCallback(() => {
@@ -81,7 +81,7 @@ function M({
       d.current = !0;
     }
   }, [i, l, c, s]);
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     isShowing: !0,
     trackingContextName: "new_user_pan_zoom_pref_tooltip",
     onClose: u,
@@ -89,7 +89,7 @@ function M({
     emphasized: !0,
     title: renderI18nText("mouse_controls_modal.new_user.title"),
     description: renderI18nText("mouse_controls_modal.new_user.description"),
-    arrowPosition: F_.LEFT_TITLE
+    arrowPosition: ArrowPosition.LEFT_TITLE
   });
 }
 function B() {

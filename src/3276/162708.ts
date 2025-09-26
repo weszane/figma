@@ -15,7 +15,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { liveStoreInstance } from "../905/713695";
 import { registerModal } from "../905/102752";
 import { AuthModal } from "../905/749159";
-import { EL } from "../905/748636";
+import { PositioningStrategy } from "../905/748636";
 import { CR, uv } from "../figma_app/419216";
 import { ao, v4 } from "../figma_app/598952";
 import { A } from "../5724/75936";
@@ -120,7 +120,7 @@ export let $$T0 = registerModal(function ({
   return jsx(CR, {
     targetKey: v4,
     width: 300 - 2 * uv,
-    shouldCenterArrow: EL.FALLBACK,
+    shouldCenterArrow: PositioningStrategy.FALLBACK,
     topPadding: 4,
     dismissModal: a,
     hideCloseButton: !0,

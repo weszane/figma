@@ -2,7 +2,7 @@ import { Multiplayer } from "../figma_app/763686";
 import { createActionCreator } from "../905/73481";
 import { Q } from "../figma_app/550678";
 import { Point } from "../905/736624";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -83,7 +83,7 @@ export async function $$T2(e, t, r) {
 }
 let $$I1 = createActionCreator("AVATAR_EDITOR_RESET");
 let S = createOptimistThunk((e, t) => {
-  if (t.entityType === ck.CURRENT_USER) XHR.put("/api/user", {
+  if (t.entityType === ck.CURRENT_USER) sendWithRetry.put("/api/user", {
     img_url: t.smallUrl,
     img_url_500_500: t.largeUrl
   }).then(function ({
@@ -100,9 +100,9 @@ let S = createOptimistThunk((e, t) => {
     e.dispatch(FlashActions.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo")));
     console.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"), t);
     e.dispatch($$I1());
-  });else if (t.entityType === ck.TEAM) {
+  }); else if (t.entityType === ck.TEAM) {
     let r = t.entity.id;
-    XHR.put(`/api/teams/${r}`, {
+    sendWithRetry.put(`/api/teams/${r}`, {
       img_url: t.smallUrl,
       img_url_500_500: t.largeUrl
     }).then(function ({
@@ -124,7 +124,7 @@ let S = createOptimistThunk((e, t) => {
     });
   } else if (t.entityType === ck.ORG) {
     let r = t.entity.id;
-    XHR.put(`/api/orgs/${r}`, {
+    sendWithRetry.put(`/api/orgs/${r}`, {
       img_url: t.smallUrl,
       img_url_500_500: t.largeUrl
     }).then(function ({

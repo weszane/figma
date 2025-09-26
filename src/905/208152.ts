@@ -1,6 +1,14 @@
-import { createContext } from "react";
-export let $$n0 = createContext({
-  isResizing: !1,
-  isDragging: !1
-});
-export const O = $$n0;
+import { createContext } from 'react'
+
+interface ResizeDragContextType {
+  isResizing: boolean
+  isDragging: boolean
+}
+
+const defaultResizeDragContext: ResizeDragContextType = {
+  isResizing: false,
+  isDragging: false,
+}
+
+export const ResizeDragContext = createContext(defaultResizeDragContext)
+export const O = ResizeDragContext

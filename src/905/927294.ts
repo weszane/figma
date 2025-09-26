@@ -42,13 +42,13 @@ export function $$f0(e) {
       [aj]: !e.title
     }),
     children: [e.title ? jsx("div", {
-      className: l()(cssBuilderInstance.font13.fontMedium.flexGrow1.$$if(!e.hideCloseButton, cssBuilderInstance.pr32).$, AH),
+      className: l()(cssBuilderInstance.font13.fontMedium.flexGrow1.if(!e.hideCloseButton, cssBuilderInstance.pr32).$, AH),
       style: styleBuilderInstance.add({
         letterSpacing: "-0.032px"
       }).$,
       children: e.title
     }) : jsx("div", {
-      className: l()(cssBuilderInstance.font11.fontNormal.lh16.wFull.$$if(!e.hideCloseButton, cssBuilderInstance.pr32).$, Vs),
+      className: l()(cssBuilderInstance.font11.fontNormal.lh16.wFull.if(!e.hideCloseButton, cssBuilderInstance.pr32).$, Vs),
       style: styleBuilderInstance.add({
         letterSpacing: "0.055px"
       }).$,
@@ -73,7 +73,7 @@ export function $$_1(e) {
       [Lb]: e.emphasized
     }),
     children: [jsx("div", {
-      className: cssBuilderInstance.$$if(e.emphasized, cssBuilderInstance.colorTextOnbrandSecondary, cssBuilderInstance.colorTextSecondary).$,
+      className: cssBuilderInstance.if(e.emphasized, cssBuilderInstance.colorTextOnbrandSecondary, cssBuilderInstance.colorTextSecondary).$,
       style: styleBuilderInstance.add({
         letterSpacing: "0.055px"
       }).$,

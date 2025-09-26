@@ -56,7 +56,7 @@ import { getColorFormat } from "../figma_app/740163";
 import { isValidValue, getCommonFromArray, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
 import { blackColor, defaultGrayColor } from "../figma_app/385874";
 import { useNonMixedSelectionPropertyValue, useUpdateSelectionProperty, useSelectionPropertyValue, useNonMixedSelectionPropertyValues, useSelectedStyleOrSelectionPropertyValues, useNonMixedSelectedStyleOrSelectionPropertyValues } from "../905/275640";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { selectCurrentUser } from "../905/372672";
 import { useCachedSubtree } from "../figma_app/679183";
@@ -82,9 +82,9 @@ import { x as _$$x } from "../573/916234";
 import { buildUploadUrl } from "../figma_app/169182";
 import { e as _$$e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
-import { y as _$$y } from "../905/129046";
+import { ImageOverlayComponent } from "../905/129046";
 import { WZ } from "../905/893645";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { xT } from "../figma_app/195407";
 import { v58 } from "../figma_app/6204";
 import { dP, m9 } from "../figma_app/947348";
@@ -159,7 +159,7 @@ function eN(e) {
   }, [panelsShown, show]);
   let o = {
     arrowPadding: 4,
-    arrowPosition: F_.RIGHT_BODY,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     clickOutsideToHide: !1,
     pointToLeftEdge: !0
   };
@@ -168,7 +168,7 @@ function eN(e) {
     title: renderI18nText("draw.onboarding.properties_panel.effects.title"),
     description: renderI18nText("draw.onboarding.properties_panel.effects.description"),
     disableHighlight: !0,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("6bebcf1164457af7594e55da15532cbfaddb693b"),
       alt: "",
       aspectRatio: 1920 / 1080
@@ -541,7 +541,7 @@ function tM(e) {
   let a = _$$W2();
   let d = useDispatch();
   let u = getColorFormat();
-  let h = Um();
+  let h = useDropdownState();
   let f = Xo();
   let {
     currentSelectedGradientStop,
@@ -645,7 +645,7 @@ function tP({
   let o = _$$qh();
   let d = SQ();
   let u = getColorFormat();
-  let h = Um();
+  let h = useDropdownState();
   let f = Xo();
   let p = GV();
   let g = useSelector(e => e.mirror.sceneGraphSelection);

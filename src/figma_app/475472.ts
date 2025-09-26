@@ -1,7 +1,7 @@
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { handleOptimistTransactionWithError } from "../905/150006";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -48,7 +48,7 @@ export let $$N1 = createOptimistThunk((e, t) => {
   e.dispatch(setTeamCreationLoadingAction({
     loading: !0
   }));
-  XHR.post("/api/teams/create", f).then(({
+  sendWithRetry.post("/api/teams/create", f).then(({
     data: r
   }) => {
     let n = "team" in r.meta ? r.meta.team : r.meta;
@@ -155,7 +155,7 @@ let $$w0 = createOptimistThunk((e, t) => {
   let o = r.name;
   let d = t.name;
   trackTeamEvent("Team Renamed", n, e.getState());
-  let u = XHR.put(`/api/teams/${n}`, {
+  let u = sendWithRetry.put(`/api/teams/${n}`, {
     name: t.name
   }).then(({
     data: r
@@ -204,7 +204,7 @@ let $$O6 = createOptimistThunk((e, t) => {
     newHidden: t.hidden
   });
   return handleOptimistTransactionWithError({
-    requestPromise: XHR.put(`/api/teams/${r}`, {
+    requestPromise: sendWithRetry.put(`/api/teams/${r}`, {
       sharing_audience_control: t.sharingAudienceControl,
       org_browsable: t.orgBrowsable,
       hidden: t.hidden

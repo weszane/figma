@@ -1,34 +1,82 @@
-import { jsx } from "react/jsx-runtime";
-import { APILoadingStatus } from "../905/520829";
-import { LoadingSpinner } from "../figma_app/858013";
-function s(e) {
-  return e.isLoading ? jsx("div", {
-    className: e.className,
-    children: jsx(LoadingSpinner, {})
-  }) : e.children();
+import { jsx } from 'react/jsx-runtime'
+import { APILoadingStatus } from '../905/520829'
+import { LoadingSpinner } from '../figma_app/858013'
+/**
+ * Props for simple loading state rendering.
+ */
+interface SimpleLoadingProps {
+  isLoading: boolean
+  className?: string
+  children: () => JSX.Element
 }
-function o(e) {
-  switch (e.state.status) {
+
+/**
+ * Props for API loading state rendering.
+ */
+interface ApiLoadingProps {
+  state: { status: APILoadingStatus, value?: any }
+  className?: string
+  children: (value: any) => JSX.Element
+  failure?: React.ComponentType
+}
+
+/**
+ * Renders a loading spinner if isLoading is true, otherwise renders children.
+ * Original function: s
+ */
+function SimpleLoadingRenderer({ isLoading, className, children }: SimpleLoadingProps): JSX.Element {
+  if (isLoading) {
+    return jsx('div', {
+      className,
+      children: jsx(LoadingSpinner, {}),
+    })
+  }
+  return children()
+}
+
+/**
+ * Renders based on API loading status: failure, loading, or success.
+ * Original function: o
+ */
+function ApiLoadingRenderer({ state, className, children, failure }: ApiLoadingProps): JSX.Element {
+  switch (state.status) {
     case APILoadingStatus.FAILURE:
-      if (e.failure) return jsx(e.failure, {});
-      return jsx("div", {
-        className: e.className,
-        children: jsx(LoadingSpinner, {})
-      });
+      if (failure) {
+        return jsx(failure, {})
+      }
+      return jsx('div', {
+        className,
+        children: jsx(LoadingSpinner, {}),
+      })
     case APILoadingStatus.LOADING:
-      return jsx("div", {
-        className: e.className,
-        children: jsx(LoadingSpinner, {})
-      });
+      return jsx('div', {
+        className,
+        children: jsx(LoadingSpinner, {}),
+      })
     case APILoadingStatus.SUCCESS:
-      return e.children(e.state.value);
+      return children(state.value)
+    default:
+      // Fallback for unexpected status
+      return jsx('div', {
+        className,
+        children: jsx(LoadingSpinner, {}),
+      })
   }
 }
-export function $$l0(e) {
-  return "isLoading" in e ? jsx(s, {
-    ...e
-  }) : jsx(o, {
-    ...e
-  });
+
+/**
+ * Main loading renderer that delegates to simple or API loading based on props.
+ * Original function: $$l0
+ */
+export function LoadingRenderer(props: SimpleLoadingProps | ApiLoadingProps): JSX.Element {
+  if ('isLoading' in props) {
+    return jsx(SimpleLoadingRenderer, props)
+  }
+  return jsx(ApiLoadingRenderer, props)
 }
-export const x = $$l0;
+
+/**
+ * Alias for LoadingRenderer.
+ * Original export: x = $$l0
+ */
+export const x = LoadingRenderer

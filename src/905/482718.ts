@@ -6,7 +6,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { TrackingProvider } from "../figma_app/831799";
-import { M } from "../905/152487";
+import { OnboardingSequence } from "../905/152487";
 import { b as _$$b } from "../figma_app/199304";
 import { j } from "../figma_app/928756";
 import { l as _$$l } from "../figma_app/826369";
@@ -51,7 +51,7 @@ function v(e) {
   let s = e.clickOutsideToHide ?? (void 0 === e.primaryCta && void 0 === e.secondaryCta);
   let l = useCallback(() => onClose("clicked_outside"), [onClose]);
   _$$l(s, i, l);
-  let p = cssBuilderInstance.fixed.borderBox.bRadius2.pb16.pl16.pr16.zIndexSecondaryModal.fontInter.flex.flexColumn.$$if(e.emphasized, cssBuilderInstance.colorBgBrand.colorTextOnbrand, cssBuilderInstance.colorBg.colorText).$$if(!!e.media, cssBuilderInstance.pt12, cssBuilderInstance.pt16).$;
+  let p = cssBuilderInstance.fixed.borderBox.bRadius2.pb16.pl16.pr16.zIndexSecondaryModal.fontInter.flex.flexColumn.if(e.emphasized, cssBuilderInstance.colorBgBrand.colorTextOnbrand, cssBuilderInstance.colorBg.colorText).if(!!e.media, cssBuilderInstance.pt12, cssBuilderInstance.pt16).$;
   let A = styleBuilderInstance.add({
     width: `${e.width ?? 300}px`,
     boxShadow: "var(--elevation-400-menu-panel)",
@@ -72,7 +72,7 @@ function v(e) {
   });
 }
 export function $$I0(e) {
-  return jsx(M, {
+  return jsx(OnboardingSequence, {
     isShowing: e.isShowing,
     userFlagOnShow: e.userFlagOnShow,
     testId: e.testId,

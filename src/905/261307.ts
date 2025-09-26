@@ -9,7 +9,7 @@ import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { $z } from "../figma_app/617427";
-import { o as _$$o } from "../905/160095";
+import { TrackedLinkPrimitive } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
@@ -72,7 +72,7 @@ export let $$O0 = registerModal(function ({
   let Y = useMemo(() => F ? null : G ? renderI18nText("admin_auto_upgrade_confirmation_modal.body.proration_mechanics") : renderI18nText("admin_auto_upgrade_confirmation_modal.body.legacy_mechanics"), [F, G]);
   if (!V) return null;
   let q = k0(e);
-  let $ = jsx(_$$o, {
+  let $ = jsx(TrackedLinkPrimitive, {
     href: "https://www.figma.com/pricing/",
     trusted: !0,
     newTab: !0,

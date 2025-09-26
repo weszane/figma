@@ -10,10 +10,10 @@ import { e as _$$e } from "../905/621515";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
 import { N as _$$N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { RM } from "../figma_app/322845";
 import { sY } from "../figma_app/29089";
-import { EL } from "../905/748636";
+import { PositioningStrategy } from "../905/748636";
 import { oR } from "../figma_app/598952";
 import { _v_ } from "../figma_app/6204";
 import { Vc } from "../figma_app/658673";
@@ -70,13 +70,13 @@ function w(e) {
       r = S;
       i = x;
   }
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     description: i(),
     disableHighlight: !0,
     emphasized: !0,
     isShowing: e.isShowing,
     onClose: e.onClose,
-    shouldCenterArrow: EL.FALLBACK,
+    shouldCenterArrow: PositioningStrategy.FALLBACK,
     targetKey: r,
     testId: "OpenPlaygroundFileOverlay",
     title: a,

@@ -34,7 +34,7 @@ import { b as _$$b, O as _$$O2 } from "../905/916974";
 import { Id, Zk, $4 } from "../figma_app/626177";
 import { l6, c$ } from "../905/794875";
 import { Point } from "../905/736624";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { bL, l9, mc, c$ as _$$c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { EventShield } from "../905/821217";
@@ -329,7 +329,7 @@ function er(e) {
     }
   }(e.transformModifier.type);
   let i = new Point(e.initialX, e.initialY);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     title: t ? jsx("div", {
       className: "ui3_transform_modifiers_settings_picker--modalTitle--DbZBD",
       children: t

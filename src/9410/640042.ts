@@ -3,7 +3,7 @@ import { retryAsync } from "../figma_app/562352";
 import { logger } from "../905/651849";
 import { m as _$$m, y as _$$y } from "../9410/643761";
 import { PN } from "../figma_app/897289";
-import { Fe, uz } from "../905/284552";
+import { loadVideoJs, loadVideoSource } from "../905/284552";
 import { fullscreenValue } from "../figma_app/455680";
 import { getVisibleArea, getViewportInfo } from "../figma_app/62612";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
@@ -77,7 +77,7 @@ export async function $$E3(e, t, i) {
   t.style.justifyContent = "center";
   t.style.alignItems = "center";
   let r = void 0 !== t.volume ? t.volume : 1;
-  let n = await Fe();
+  let n = await loadVideoJs();
   return new Promise(e => {
     let a = n.videoJs(t, {
       muted: t.muted ?? !1,
@@ -105,13 +105,13 @@ export async function $$E3(e, t, i) {
         let t = await fullscreenValue.openFilePromise();
         if ("figFile" !== t.type) throw Error("Unsupported file");
         let n = `/api/files/${t.fileKey}/videos/${i}/manifest`;
-        await uz(n, !0, a);
+        await loadVideoSource(n, !0, a);
         e(a);
       } catch {
         try {
           let t = await _(i);
           logger.warn("Reverting to fallback video source");
-          await uz(t, !1, a);
+          await loadVideoSource(t, !1, a);
           e(a);
         } catch {
           e(null);

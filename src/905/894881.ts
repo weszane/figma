@@ -1,4 +1,4 @@
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
 import { bellFeedAPIInstance } from '../figma_app/876459'
 
@@ -179,7 +179,7 @@ export class NotificationAPI {
    * @param params - NotificationClickedParams
    */
   recordNotificationClicked = (params: NotificationClickedParams) => {
-    return XHR.post('/api/user_notification/clicked', {
+    return sendWithRetry.post('/api/user_notification/clicked', {
       id: params.id,
       currentView: params.currentView,
       medium: params.medium,
@@ -191,7 +191,7 @@ export class NotificationAPI {
    * @param params - StatusChangeParams
    */
   enrollUserInStatusChange = (params: StatusChangeParams) => {
-    return XHR.post(`/api/user_notifications/status_change_signup/${params.fileKey}`)
+    return sendWithRetry.post(`/api/user_notifications/status_change_signup/${params.fileKey}`)
   }
 
   /**
@@ -199,7 +199,7 @@ export class NotificationAPI {
    * @param params - StatusChangeOptInParams
    */
   updateStatusChangePreferences = (params: StatusChangeOptInParams) => {
-    return XHR.post(`/api/user_notifications/status_change_optin/${params.fileKey}`, {
+    return sendWithRetry.post(`/api/user_notifications/status_change_optin/${params.fileKey}`, {
       opt_in: params.optIn,
     })
   }

@@ -2,7 +2,7 @@ import { reportError, setTagGlobal } from '../905/11';
 import { ServiceCategories } from '../905/165054';
 import { Tj } from '../905/266529';
 import { debugState } from '../905/407919';
-import { getOpenFileKey, getSelectedView } from '../905/622391';
+import { getOpenFileKey, handleSelectedView } from '../905/622391';
 import { atomStoreManager } from '../figma_app/27355';
 import { runModeAtom, d4, pluginIdAtom, pluginTriggeredFromAtom } from '../figma_app/474636';
 import { desktopAPIInstance } from '../figma_app/876459';
@@ -198,7 +198,7 @@ export function resetPluginState(): void {
     pluginState.allowedPluginOrigin = undefined;
   }
   if (debugState) {
-    const selectedView = getSelectedView();
+    const selectedView = handleSelectedView();
     const openFileKey = getOpenFileKey();
     if (selectedView && openFileKey) {
       pluginState.resetGlobalPluginAPI?.({

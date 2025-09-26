@@ -13,7 +13,7 @@ import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { selectedViewToPath } from "../figma_app/193867";
 import { DashboardSections } from "../905/548208";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { S } from "../9420/724099";
 import { $J, Un, KJ, UD, u1 } from "../4452/559083";
 var o = n;
@@ -77,7 +77,7 @@ function w({
     }
     M(!1);
   };
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: j ? getI18nString("change_payment.update_payment_details") : getI18nString("change_payment.enter_payment_method"),
     onClose: G,
     maxWidth: 465,

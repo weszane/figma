@@ -45,7 +45,7 @@ import { showModalHandler } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
 import { kA, IO } from "../905/962318";
 import { Point } from "../905/736624";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { ButtonPrimitive } from "../905/632989";
 import { C as _$$C } from "../905/520159";
 import { useModalManager } from "../905/437088";
@@ -480,7 +480,7 @@ function eu({
   useEffect(() => {
     l();
   }, [e, l]);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     initialWidth: yx,
     initialHeight: .8 * window.innerHeight,
     initialPosition: new Point(s.x, s.y),

@@ -14,7 +14,7 @@ import { IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML, WEB, CSSBUILDER } from ".
 import { V0, ls } from "../figma_app/755395";
 import { resolveLanguageUnit, getPluginInfo, getCodeExtensionPreferences, useUpdateCodeExtensionPreferences } from "../figma_app/120227";
 import { KD } from "../figma_app/975811";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { registerModal } from "../905/102752";
 import { FormattedInputVariant1 } from "../905/203369";
 import { l6, c$ } from "../905/794875";
@@ -40,7 +40,7 @@ export function $$N1({
   autoFocus: o
 }) {
   let l = useDispatch();
-  let d = Um();
+  let d = useDropdownState();
   return jsx(l6, {
     ariaLabel: getI18nString("dev_handoff.alternative_units.scale_factor.select_label"),
     autoFocus: o,

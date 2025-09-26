@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Z } from '../905/116724';
+import { useDelayedCallback } from '../905/116724';
 import { s as _$$s } from '../905/139639';
 import { permissionScopeHandler } from '../905/189185';
 import { VisualBellActions } from '../905/302958';
@@ -58,7 +58,7 @@ export function $$B11({
     let r = useLatestRef(t);
     let i = useAppModelProperty('showUi');
     let a = useLatestRef(i);
-    let s = Z(() => {
+    let s = useDelayedCallback(() => {
       e(t);
     });
     useEffect(() => {

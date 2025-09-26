@@ -2,7 +2,7 @@ import { InvalidSessionError } from '../905/203573'
 import { getSingletonSceneGraph } from '../905/700578'
 import { logError, logInfo } from '../905/714362'
 import { generateUUIDv4 } from '../905/871474'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { ResultSourceType, SearchEventType, TimerType } from '../figma_app/257779'
 import { aggregateComponentUsage, analyzeComponentUsage, calculateNodePositionInfo, countVisibleNonInstanceNodes, extractComponentInfo, filterComponentUsageByContext, generateThumbnailWithDuration, processAssetUsage, processComponentAssets, rankComponentsByUsage } from '../figma_app/407767'
 import { getUUID } from '../figma_app/517115'
@@ -81,7 +81,7 @@ async function fetchAssetSuggestions(
   }
 
   try {
-    const response = await XHR.post('/api/auto_suggest/asset_suggestions', {
+    const response = await sendWithRetry.post('/api/auto_suggest/asset_suggestions', {
       input: {
         type: 'image',
         value: thumbnailData,

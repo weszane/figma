@@ -41,16 +41,16 @@ export function $$d0({
   }) {
     let r = t && t.length > 40;
     return jsxs("div", {
-      className: a()(r ? "artwork_with_text_below--textPretty--xEO0y" : "artwork_with_text_below--textBalance--yjPSu", cssBuilderInstance.$$if(r, cssBuilderInstance.gap4).$, cssBuilderInstance.flex.flexColumn.itemsCenter.alignCenter.$),
+      className: a()(r ? "artwork_with_text_below--textPretty--xEO0y" : "artwork_with_text_below--textBalance--yjPSu", cssBuilderInstance.if(r, cssBuilderInstance.gap4).$, cssBuilderInstance.flex.flexColumn.itemsCenter.alignCenter.$),
       style: styleBuilderInstance.add({
         maxWidth: "30em"
       }).$,
       "data-testid": i,
       children: [jsx("span", {
-        className: cssBuilderInstance.textBodyLarge.$$if(t, cssBuilderInstance.fontMedium.colorText, cssBuilderInstance.colorTextSecondary).$,
+        className: cssBuilderInstance.textBodyLarge.if(t, cssBuilderInstance.fontMedium.colorText, cssBuilderInstance.colorTextSecondary).$,
         children: e
       }), t && jsx("span", {
-        className: cssBuilderInstance.$$if(r, cssBuilderInstance.textBodyMedium, cssBuilderInstance.textBodyLarge).colorTextSecondary.$,
+        className: cssBuilderInstance.if(r, cssBuilderInstance.textBodyMedium, cssBuilderInstance.textBodyLarge).colorTextSecondary.$,
         children: t
       })]
     });

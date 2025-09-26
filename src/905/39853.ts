@@ -8,10 +8,10 @@ import { getInitialOptions } from "../figma_app/169182";
 import { UploadError } from "../905/623179";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { trackFileEvent } from "../figma_app/314264";
-import { yF, M1 } from "../905/777093";
+import { fetchFontList, fetchFontFile } from "../905/777093";
 import { GK } from "../905/37051";
 import { C as _$$C } from "../905/991119";
 import { Ec, bT } from "../905/163189";
@@ -1567,7 +1567,7 @@ async function eV(e, t, i, n, a, s, o, l, d) {
         }));
         return s;
       }(t, i, n, a, s, o);
-      return XHR.post("/api/upnode/checkpoint?st=import", d, {
+      return sendWithRetry.post("/api/upnode/checkpoint?st=import", d, {
         raw: !0,
         retryCount: 3
       }).catch(e => {
@@ -1589,7 +1589,7 @@ async function eV(e, t, i, n, a, s, o, l, d) {
       return new lZ.ServiceUnavailable();
     }
     if (f.meta.file.file_repo_id) {
-      let t = await XHR.put(`/api/repo/${f.meta.file.file_repo_id}`, {
+      let t = await sendWithRetry.put(`/api/repo/${f.meta.file.file_repo_id}`, {
         name: i
       });
       e.dispatch(bE({
@@ -1602,7 +1602,7 @@ async function eV(e, t, i, n, a, s, o, l, d) {
         }
       };
     } else {
-      await XHR.put(`/api/files/${c}`, {
+      await sendWithRetry.put(`/api/files/${c}`, {
         name: i
       });
       g = {
@@ -1621,7 +1621,7 @@ async function eV(e, t, i, n, a, s, o, l, d) {
       fileKey: c
     };
   } catch (e) {
-    c && XHR.del("/api/files_batch", {
+    c && sendWithRetry.del("/api/files_batch", {
       files: [{
         key: c
       }]
@@ -1690,7 +1690,7 @@ async function eG(e, t, i) {
       await Promise.all(c);
     }
   } catch (e) {
-    XHR.del("/api/files_batch", {
+    sendWithRetry.del("/api/files_batch", {
       files: [{
         key: i.fileKey
       }]
@@ -1711,7 +1711,7 @@ async function eG(e, t, i) {
   return c;
 }
 function ez(e) {
-  let t = yF([FontSourceType.LOCAL, FontSourceType.GOOGLE, FontSourceType.SHARED]);
+  let t = fetchFontList([FontSourceType.LOCAL, FontSourceType.GOOGLE, FontSourceType.SHARED]);
   return {
     getFont: async function (i) {
       let n = await t;
@@ -1733,7 +1733,7 @@ function ez(e) {
             let e = r.folders[r.selectedView.folderId];
             a = e?.team_id ?? null;
           }
-          let s = await M1({
+          let s = await fetchFontFile({
             source: n.source,
             id: n.id,
             postscriptName: n.postscript,

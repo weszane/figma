@@ -15,14 +15,14 @@ import { V } from "../905/260951";
 import { H } from "../905/422489";
 import { Ro } from "../905/962457";
 import { Z } from "../905/512040";
-import { s as _$$s } from "../905/905728";
+import { VideoInteractionHandler } from "../905/905728";
 export let $$n0;
 let I = {
   ArrangeAsListBehavior: _$$b,
   ConnectorToolBehavior: _$$a,
   TableBehavior: H,
   TemplatePreviewBehavior: Z,
-  VideoBehavior: _$$s,
+  VideoBehavior: VideoInteractionHandler,
   SectionPresetBehavior: V,
   DevHandoffAnnotationsMouseBehavior: _$$l,
   WebpageBehavior: O,

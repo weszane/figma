@@ -9,7 +9,7 @@ import { customHistory } from "../905/612521";
 import { F } from "../905/680873";
 import { SvgComponent } from "../905/714743";
 import { Ih } from "../figma_app/617427";
-import { o as _$$o } from "../905/160095";
+import { TrackedLinkPrimitive } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { selectViewAction } from "../905/929976";
 import { getSelectedEditorType } from "../figma_app/976749";
@@ -72,7 +72,7 @@ function O(e) {
           className: "memory_warning--memoryWarningContentHeader--b9El-",
           children: o
         }), jsxs("p", {
-          children: [f, " ", (m === Wy.ERROR || m === Wy.WARNING) && jsx(_$$o, {
+          children: [f, " ", (m === Wy.ERROR || m === Wy.WARNING) && jsx(TrackedLinkPrimitive, {
             newTab: !0,
             className: m === Wy.ERROR ? "memory_warning--learnMoreLinkError--JsmPQ" : "memory_warning--learnMoreLinkWarning--AHB-S",
             href: "https://help.figma.com/hc/articles/360040528173-Reduce-memory-usage-in-files",

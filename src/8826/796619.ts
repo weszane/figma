@@ -13,7 +13,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
 import { isInvalidValue } from "../905/216495";
 import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { L as _$$L } from "../905/158054";
@@ -437,7 +437,7 @@ function J({
   recordingKey: t
 }) {
   let n = useDispatch();
-  let o = Um();
+  let o = useDropdownState();
   let [c, k] = useSelectionProperty("stackReverseZIndex");
   let y = trackFileEventWithUser();
   let S = useSelector(selectSceneGraphSelectionKeys);
@@ -567,7 +567,7 @@ function et({
   recordingKey: t
 }) {
   let n = useDispatch();
-  let a = Um();
+  let a = useDropdownState();
   let [o, c] = useSelectionProperty("bordersTakeSpace");
   let m = trackFileEventWithUser();
   let k = useSelector(selectSceneGraphSelectionKeys);

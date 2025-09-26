@@ -21,7 +21,7 @@ import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { GQ } from "../figma_app/32128";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 function C(e) {
   let t = useDispatch();
   let i = GQ();
@@ -34,7 +34,7 @@ function C(e) {
     let e = setInterval(() => l(Zz()), 5e3);
     return () => clearInterval(e);
   }, []);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     initialPosition: new Point(i + 2, 88),
     initialConstraints: {
       x: "left",

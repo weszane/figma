@@ -2,9 +2,9 @@ import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { BrowserInfo } from "../figma_app/778880";
 import { $z } from "../figma_app/617427";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { showModalHandler } from "../905/156213";
-import { kn } from "../905/219868";
+import { googleDeviceIframeModal } from "../905/219868";
 export function $$c0({
   url: e,
   title: t
@@ -13,14 +13,14 @@ export function $$c0({
   return BrowserInfo.isMeetDevice ? jsx($z, {
     variant: "link",
     onClick: () => i(showModalHandler({
-      type: kn,
+      type: googleDeviceIframeModal,
       data: {
         url: e,
         title: t
       }
     })),
     children: t
-  }) : jsx(Ph, {
+  }) : jsx(TrackedLink, {
     href: e,
     newTab: !0,
     trusted: !0,

@@ -1,27 +1,74 @@
-import { loadFeatureFlags } from "../905/586361";
-import { defaultInputState } from "../905/768014";
-import { getObjectEntries } from "../905/36803";
-export function $$s2(e) {
-  return !!document.activeElement?.closest(`[data-tab-group="${CSS.escape(e.tabGroupId)}"]`);
+import { getObjectEntries } from '../905/36803'
+import { loadFeatureFlags } from '../905/586361'
+import { defaultInputState } from '../905/768014'
+/**
+ * Checks if the currently active element is within the tab group specified by the tabGroupId.
+ * @param e - Object containing the tabGroupId to check against.
+ * @returns True if the active element is within the specified tab group, false otherwise.
+ */
+export function isTabGroupActive(e: { tabGroupId: string }): boolean {
+  return !!document.activeElement?.closest(`[data-tab-group="${CSS.escape(e.tabGroupId)}"]`)
 }
-export function $$o4(e) {
-  return getObjectEntries(e).reduce((e, [t, i]) => (i && e.push(t), e), []);
+
+/**
+ * Filters and returns an array of keys from the input object where the corresponding values are truthy.
+ * @param e - Object to filter keys from.
+ * @returns Array of keys with truthy values.
+ */
+export function getTruthyKeys<T>(e: Record<string, T>): string[] {
+  return getObjectEntries(e).reduce((result: string[], [key, value]) => {
+    if (value) {
+      result.push(key)
+    }
+    return result
+  }, [])
 }
-export function $$l0(e, t) {
-  let i = document.getElementById($$d1(e, t));
-  i?.focus();
-  loadFeatureFlags().fpl_tabs_focus && ("ArrowLeft" === defaultInputState.key || "ArrowRight" === defaultInputState.key) && Promise.resolve().then(() => {
-    i?.focus();
-  });
+
+/**
+ * Focuses on an element identified by the generated tab trigger ID.
+ * If the fpl_tabs_focus feature flag is enabled and the last key pressed was an arrow key,
+ * it ensures the focus is applied after the current execution cycle.
+ * @param e - Tab group identifier.
+ * @param t - Tab index within the group.
+ */
+export function focusTabElement(e: string, t: string): void {
+  const elementId = generateTabTriggerId(e, t)
+  const element = document.getElementById(elementId)
+
+  element?.focus()
+
+  const featureFlags = loadFeatureFlags()
+  if (featureFlags.fpl_tabs_focus
+    && (defaultInputState.key === 'ArrowLeft' || defaultInputState.key === 'ArrowRight')) {
+    Promise.resolve().then(() => {
+      element?.focus()
+    })
+  }
 }
-export function $$d1(e, t) {
-  return `tab${e}-${t}-trigger`;
+
+/**
+ * Generates a standardized ID for a tab trigger element.
+ * @param e - Tab group identifier.
+ * @param t - Tab index within the group.
+ * @returns Generated ID string for the tab trigger.
+ */
+export function generateTabTriggerId(e: string, t: string): string {
+  return `tab${e}-${t}-trigger`
 }
-export function $$c3(e, t) {
-  return `tab${e}-${t}-panel`;
+
+/**
+ * Generates a standardized ID for a tab panel element.
+ * @param e - Tab group identifier.
+ * @param t - Tab index within the group.
+ * @returns Generated ID string for the tab panel.
+ */
+export function generateTabPanelId(e: string, t: string): string {
+  return `tab${e}-${t}-panel`
 }
-export const Kq = $$l0;
-export const aM = $$d1;
-export const au = $$s2;
-export const eR = $$c3;
-export const nD = $$o4;
+
+// Export aliases for backward compatibility
+export const Kq = focusTabElement
+export const aM = generateTabTriggerId
+export const au = isTabGroupActive
+export const eR = generateTabPanelId
+export const nD = getTruthyKeys

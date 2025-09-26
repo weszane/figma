@@ -8,7 +8,7 @@ import { customHistory } from "../905/612521";
 import { IpcStorageHandler } from "../905/724705";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { putUser } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
@@ -24,7 +24,7 @@ import { sessionApiInstance } from "../905/202181";
 import { createOptimistThunk } from "../905/350402";
 let $$A1 = createOptimistThunk(async () => {
   try {
-    await XHR.post("/api/user/migrate_personal_drafts");
+    await sendWithRetry.post("/api/user/migrate_personal_drafts");
   } catch (e) {
     logInfo("planSpaces", "Personal drafts not auto-migrated for user", e);
   }
@@ -96,7 +96,7 @@ let w = () => {
       forwardToDatadog: !0,
       batchRequest: !0
     });
-  } catch (e) {}
+  } catch (e) { }
 };
 let O = createOptimistThunk((e, t) => {
   sessionApiInstance.logoutOneUser(t.user.id).then(r => {

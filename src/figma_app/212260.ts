@@ -17,7 +17,7 @@ import { useLocalPluginsExcludingWidgets, useUserPublishedWidgets } from "../fig
 import { isResourcePaymentFailed } from "../figma_app/86989";
 import { j as _$$j } from "../905/813868";
 import { gR } from "../figma_app/120210";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { Kx } from "../figma_app/546509";
 import { useIsLoading } from "../905/18797";
 import { getPluginVersion } from "../figma_app/300692";
@@ -45,7 +45,7 @@ export function $$G2(e) {
   let j = Object.values(useLocalPluginsExcludingWidgets()).find(t => t.plugin_id === e.id);
   let G = !!useUserPublishedWidgets().find(t => t.id === e.id) && !j;
   let z = useSelector(e => e.dropdownShown?.data?.targetRect);
-  let W = Um();
+  let W = useDropdownState();
   let K = W?.type === $$H1 && W.data.widgetId === r;
   let Y = cX().tabManager;
   let $ = Vq(Y.activeTab);

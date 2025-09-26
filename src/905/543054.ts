@@ -6,7 +6,7 @@ import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { createNoOpValidator } from "../figma_app/181241";
-import { Rq, wp } from "../905/283918";
+import { getLanguages, isHaveSpellingLanguages } from "../905/283918";
 import { V } from "../905/666831";
 import { l9 } from "../905/145989";
 import { B } from "../905/627729";
@@ -93,7 +93,7 @@ let v = new class {
           break;
         }
       case QC.AGENT:
-        t = [...i, ...(await Rq())];
+        t = [...i, ...(await getLanguages())];
         break;
       default:
         t = Object.keys(fi);
@@ -117,7 +117,7 @@ export function $$x3(e) {
   return i && v.supportsLanguage(i) ? i : v.getSupportedLanguages()[0] ?? "en-US";
 }
 export async function $$S4() {
-  n || (n = (await V()) ? QC.DESKTOP : !isInteractionPathCheck() && (await wp()) ? QC.AGENT : QC.HUNSPELL);
+  n || (n = (await V()) ? QC.DESKTOP : !isInteractionPathCheck() && (await isHaveSpellingLanguages()) ? QC.AGENT : QC.HUNSPELL);
   return n;
 }
 export function $$w5() {

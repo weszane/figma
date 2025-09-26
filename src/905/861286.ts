@@ -10,7 +10,7 @@ import { E } from "../905/712094";
 import { zY } from "../905/148137";
 import { isAddressEmpty, createEmptyAddress } from "../figma_app/831101";
 import { X } from "../905/33014";
-import { A as _$$A } from "../905/289352";
+import { VatGstInput } from "../905/289352";
 import { sq } from "../905/613896";
 var s = a;
 function A(e) {
@@ -76,13 +76,13 @@ function A(e) {
       updateAddress: e.onBillingAddressChange,
       canSeeBillingAddressExp: e.canSeeBillingAddressExp,
       isBillingAddress: !0
-    }), !!e.onVatIdChange && jsx(_$$A, {
+    }), !!e.onVatIdChange && jsx(VatGstInput, {
       onChange: e.onVatIdChange,
       country: e.billingAddress.country,
       setIsVatIdValid: e.setIsVatIdValid,
       isCommunityCheckout: e.isCommunityCheckout,
       vatId: e.vatId || ""
-    }), !!e.onRegionalVatIdChange && jsx(_$$A, {
+    }), !!e.onRegionalVatIdChange && jsx(VatGstInput, {
       variant: "regional",
       onChange: e.onRegionalVatIdChange,
       country: e.billingAddress.country,

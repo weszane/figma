@@ -38,10 +38,10 @@ import { m as _$$m } from '../905/99004';
 import { selectWithShallowEqual } from '../905/103090';
 import { Z as _$$Z2 } from '../905/104740';
 import { Ef } from '../905/107436';
-import { y as _$$y2 } from '../905/129046';
+import { ImageOverlayComponent } from '../905/129046';
 import { KindEnum } from '../905/129884';
 import { ScrollContainer } from '../905/143421';
-import { M as _$$M } from '../905/152487';
+import { OnboardingSequence } from '../905/152487';
 import { ox as _$$ox } from '../905/163832';
 import { ServiceCategories } from '../905/165054';
 import { D as _$$D } from '../905/169680';
@@ -51,7 +51,7 @@ import { permissionScopeHandler as _$$l6 } from '../905/189185';
 import { W as _$$W } from '../905/200727';
 import { P as _$$P } from '../905/201667';
 import { useSingleEffect } from '../905/791079';
-import { x as _$$x } from '../905/211326';
+import { LoadingRenderer } from '../905/211326';
 import { B as _$$B } from '../905/224000';
 import { J as _$$J5 } from '../905/225412';
 import { Rectangle } from '../905/249071';
@@ -60,7 +60,7 @@ import { Label } from '../905/270045';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { O as _$$O5 } from '../905/273186';
 import { useSelectedStyleOrSelectionPropertyValue, useNonMixedSelectionPropertyValue, useSelectedStyleOrSelectionPropertyValues } from '../905/275640';
-import { h as _$$h2 } from '../905/284399';
+import { OnboardingRenderFrame } from '../905/284399';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { v as _$$v } from '../905/318279';
@@ -75,7 +75,7 @@ import { u as _$$u } from '../905/389684';
 import { mapAndAggregateResources } from '../905/401885';
 import { _ as _$$_3 } from '../905/410717';
 import { F as _$$F2 } from '../905/422355';
-import { rq as _$$rq } from '../905/425180';
+import { OnboardingModal } from '../905/425180';
 import { useModalManager } from '../905/437088';
 import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
@@ -116,12 +116,11 @@ import { eA as _$$eA } from '../905/695660';
 import { qo, UN } from '../905/700578';
 import { defaultColorManipulator } from '../905/713722';
 import { l as _$$l3 } from '../905/716947';
-import { Q as _$$Q } from '../905/717951';
+import { CuratorPortal } from '../905/717951';
 import { E as _$$E3 } from '../905/719609';
 import { qW } from '../905/720292';
 import { Point } from '../905/736624';
 import { l as _$$l5 } from '../905/745972';
-import { F_ as _$$F_ } from '../905/748636';
 import { G as _$$G } from '../905/750789';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { DialogLabel } from '../905/799737';
@@ -130,14 +129,14 @@ import { Ih } from '../905/820169';
 import { EventShield } from '../905/821217';
 import { useCurrentUserOrg } from '../905/845253';
 import { e as _$$e4 } from '../905/845623';
-import { F_ } from '../905/858282';
+import { ArrowPosition } from '../905/858282';
 import { isVsCodeEnvironment } from '../905/858738';
 import { bL as _$$bL3 } from '../905/867927';
 import { ProjectDevelopmentPhases } from '../905/869235';
 import { generateUUIDv4 } from '../905/871474';
 import { C as _$$C3 } from '../905/887158';
 import { ManuallyLabeledCheckbox } from '../905/909715';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { bL as _$$bL, _L } from '../905/911410';
 import { e as _$$e5 } from '../905/916195';
 import { dayjs } from '../905/920142';
@@ -286,7 +285,7 @@ import { NJ } from '../figma_app/419216';
 import { OM, YU } from '../figma_app/422471';
 import { o5 as _$$o2 } from '../figma_app/433401';
 import { UN as _$$UN, Nf } from '../figma_app/449837';
-import { M_, q3 } from '../figma_app/450829';
+import { OnTheme, OverlayType } from '../figma_app/450829';
 import { fullscreenValue } from '../figma_app/455680';
 import { useTeamPlanPublicInfo, useTeamPlanUser } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
@@ -808,7 +807,7 @@ function ey({
   let f = useCallback(() => {
     u.current?.focus();
   }, [u]);
-  return jsx(_$$Q, {
+  return jsx(CuratorPortal, {
     dataFullscreenIntercept: !1,
     children: jsx(_$$p, {
       forceNoScroll: !0,
@@ -1028,7 +1027,7 @@ function eU({
     SceneGraphHelpers?.replaceSelection([e], !0);
   });
   return jsxs(NJ, {
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     backgroundColor: 'var(--color-bg)',
     className: R3,
     closeButtonClassName: _$$b,
@@ -1263,7 +1262,7 @@ function e7() {
     description: f,
     forceEditorTheme: 'dev-handoff',
     isShowing: !!showing,
-    media: jsx(_$$y2, {
+    media: jsx(ImageOverlayComponent, {
       src: showing === 'export' ? buildUploadUrl('2ec45ec3c5b501ef6e755fde6a2edfb39d2218cb') : buildUploadUrl('dc592aac8a3238672f1f3eb8711f656496538b15'),
       alt: '',
       aspectRatio: 480 / 270
@@ -1364,7 +1363,7 @@ function th() {
     preventUserClose: !0,
     recordingKey: 'dev-mode-paywall-modal'
   });
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     testId: 'rfd-upsell-upsell',
     isShowing,
     children: jsxs(setupThemeContext, {
@@ -1443,17 +1442,17 @@ function tk() {
   });
   let d = e ? {
     targetKey: _$$o2,
-    arrowPosition: _$$F_.LEFT_TITLE
+    arrowPosition: ArrowPosition.LEFT_TITLE
   } : {
     targetKey: _$$oR,
-    arrowPosition: _$$F_.BOTTOM
+    arrowPosition: ArrowPosition.BOTTOM
   };
-  return jsx(_$$rq, {
+  return jsx(OnboardingRenderFrame, {
     ...d,
     description: renderI18nText('upsell.view_only_developer_notifications.tooltip_description'),
     forceEditorTheme: 'dev-handoff',
     isShowing,
-    media: jsx(_$$y2, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl('dc592aac8a3238672f1f3eb8711f656496538b15'),
       alt: '',
       aspectRatio: 480 / 270
@@ -1540,7 +1539,7 @@ function tW() {
     show({
       canShow: () => !!(!a.loading && !a.hasPendingRequest && r && !l && o && s === 'developer' && !t && d)
     });
-  }, [l, r, d, a, isShowing, s, o, t, show]), isShowing) ? jsx(_$$M, {
+  }, [l, r, d, a, isShowing, s, o, t, show]), isShowing) ? jsx(OnboardingSequence, {
     isShowing,
     children: jsx(TrackingProvider, {
       name: 'DevModeDemoFileEntryPoint',
@@ -1673,7 +1672,7 @@ function t4() {
     newFileFrom: FileBrowserLocation.FIGMAKE_POPOUT_UPSELL_IN_DESIGN_EDITOR,
     contextClicked: 'figmake_popout_upsell_in_design_editor_created'
   });
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     isShowing,
     children: jsx(TrackingProvider, {
       name: 'FigmaMakeUpsellInDesignEditor',
@@ -1934,7 +1933,7 @@ function lw({
       style: {
         marginRight: `${I}px`
       },
-      children: jsx(_$$x, {
+      children: jsx(LoadingRenderer, {
         isLoading: s,
         className: 'starting_points_templates_modal--loadingSpinner--UOrjg',
         children: () => jsxs('div', {
@@ -3230,7 +3229,7 @@ function nR(e) {
 function nL(e) {
   return useMemo(() => {
     if (e.status === 'loaded') return e.data.length === 0 ? _$$oV.EMPTY : _$$oV.CONTENT;
-    if (e.status === 'errors' || e.status === 'disabled') ;else if (e.status === 'loading') return _$$oV.LOADING;
+    if (e.status === 'errors' || e.status === 'disabled'); else if (e.status === 'loading') return _$$oV.LOADING;
     return _$$oV.ERROR;
   }, [e]);
 }
@@ -6632,7 +6631,7 @@ function sf({
         let n = l;
         for (; n + 1 < e.length;) {
           let l = e[n + 1];
-          if (l && t.has(l)) n++;else break;
+          if (l && t.has(l)) n++; else break;
         }
         return n;
       }(e, t, r);
@@ -10310,13 +10309,13 @@ function aO() {
   });
   let t = useCallback(async () => {
     trackEventAnalytics('sidebar_announcement_mobile_app_download_prompt_email_me_cta_clicked');
-    await XHR.post('/api/send_mobile_download_email');
+    await sendWithRetry.post('/api/send_mobile_download_email');
     e.complete();
   }, [e]);
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     isShowing: e.isShowing,
-    modalType: q3.FEATURE_UPDATE,
-    closeButtonStyle: M_.ON_DARK,
+    modalType: OverlayType.FEATURE_UPDATE,
+    closeButtonStyle: OnTheme.ON_DARK,
     element: () => jsx(az, {
       onEmailClick: t
     }),
@@ -10404,7 +10403,7 @@ function dc({
     let a = AppStateTsApi?.codeSelection();
     let d = getObservableValue(a?.selectedPromptFrames, []);
     let u = useCallback(() => {
-      d && d.length > 0 && t === df.EMPTY && (_$$E0(d[0] || null, l, setAttachments, () => {}, claimAPendingAttachmentOrMakeOne), MakeBindings?.clearSelectedPromptFrames());
+      d && d.length > 0 && t === df.EMPTY && (_$$E0(d[0] || null, l, setAttachments, () => { }, claimAPendingAttachmentOrMakeOne), MakeBindings?.clearSelectedPromptFrames());
     }, [l, setAttachments, claimAPendingAttachmentOrMakeOne, t, d]);
     useEffect(() => {
       attachments.length === 0 && u();

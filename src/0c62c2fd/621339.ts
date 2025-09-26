@@ -8,7 +8,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { FocusCheckbox, BigTextInputForwardRef, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { hideModal } from "../905/156213";
 import { getSelectedView } from "../figma_app/386952";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { shuffle } from "../figma_app/656233";
 import g from "classnames";
 import { c$, wv, Ve } from "../figma_app/236327";
@@ -255,7 +255,7 @@ function O({
   };
   let o = useDispatch();
   let f = getSelectedView().teamId;
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: getI18nString("downgrade_survey.header"),
     fixedTop: !0,
     minWidth: 370,

@@ -11,8 +11,8 @@ import { getVisibleTheme } from "../905/640017";
 import { e as _$$e } from "../905/621515";
 import { FFileType } from "../figma_app/191312";
 import { N as _$$N } from "../figma_app/268271";
-import { w as _$$w } from "../905/129046";
-import { rq } from "../905/425180";
+import { VideoOverlayComponent } from "../905/129046";
+import { OnboardingModal } from "../905/425180";
 import { CBZ, qiY, TUm } from "../figma_app/6204";
 import { O } from "../0c62c2fd/621155";
 import { getFeatureFlags } from "../905/601108";
@@ -71,13 +71,13 @@ export function $$C0({
   useEffect(() => {
     A && complete();
   }, [A, complete]);
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     clickOutsideToHide: !0,
     description: renderI18nText("file_browser.make_file_creation_promos.description"),
     disableHighlight: !1,
     forceEditorTheme: "seascape",
     isShowing,
-    media: jsx(_$$w, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl(T ? "1a369818117cc7e77826ee246da5938968f29e43" : "fcba05f6d2193657ef692fedecfcdf36b4eae871"),
       aspectRatio: 726 / 540
     }),

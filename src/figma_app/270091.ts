@@ -47,7 +47,7 @@ import { NX, k9 as _$$k3, sF } from "../figma_app/777207";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { t as _$$t3 } from "../905/511388";
 import { P as _$$P } from "../figma_app/582341";
-import { u as _$$u } from "../905/290607";
+import { setupSwapOrInsertHandler } from "../905/290607";
 import { g5 } from "../figma_app/178752";
 import { useOpenFileLibraryKey, selectOpenFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
@@ -78,10 +78,10 @@ import { sK } from "../905/794875";
 import { Nv } from "../figma_app/318590";
 import { b as _$$b2 } from "../905/635568";
 import { Kr } from "../figma_app/201703";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { x as _$$x } from "../905/580889";
-import { Dr, Wx, jB, Xx, Kk, OK, Wu, pf } from "../905/221848";
-import { S as _$$S } from "../905/459477";
+import { getDrilldownItems, DrilldownOrder, useLibraryMetadata, usePublishedLibraryItems, createLeafDrilldownItem, getCommonComponentBreadcrumbs, SelectAction, getComponentTooltipData } from "../905/221848";
+import { fileLaunchHelper as _$$S } from "../905/459477";
 import { Pk, sX, fn } from "../905/893698";
 import { p as _$$p, c as _$$c } from "../905/875042";
 import { generateSwappingInstanceKey } from "../905/92359";
@@ -195,22 +195,22 @@ function eW(e) {
   let e6 = multiselect ? null : selectedItems[0] ?? null;
   let e7 = useMemo(() => overrideDefaultItem ? overrideDefaultItem.library_key : null, [overrideDefaultItem]);
   let e9 = useMemo(() => e7 ?? getCommonLibraryKey(selectedItems) ?? selectedLibraryKey, [e7, selectedItems, selectedLibraryKey]);
-  let te = useMemo(() => Dr(library, Wx.COMPONENTS_FIRST, eq), [eq, library]);
+  let te = useMemo(() => getDrilldownItems(library, DrilldownOrder.COMPONENTS_FIRST, eq), [eq, library]);
   let {
     libraryMetadataMap,
     libraryMetadataLoading
-  } = jB(e9);
+  } = useLibraryMetadata(e9);
   let {
     publishedLibraryItemsByLibraryKey,
     rootDrilldownItemsByLibraryKey
-  } = Xx({
+  } = usePublishedLibraryItems({
     libraryKeyBackingSelectedItems: e9,
-    order: Wx.COMPONENTS_FIRST,
+    order: DrilldownOrder.COMPONENTS_FIRST,
     libraryMetadataMap,
     flattenSubpaths: eq
   });
-  let ta = g5(FDocumentType.Design).productComponents.map(Kk);
-  let ts = useMemo(() => preferredItems ? preferredItems.map(Kk) : [], [preferredItems]);
+  let ta = g5(FDocumentType.Design).productComponents.map(createLeafDrilldownItem);
+  let ts = useMemo(() => preferredItems ? preferredItems.map(createLeafDrilldownItem) : [], [preferredItems]);
   let [to, tl, td] = useMemo(() => {
     if (e9 && (rootDrilldownItemsByLibraryKey[e9]?.length ?? 0) > 0) return [e9, rootDrilldownItemsByLibraryKey[e9], publishedLibraryItemsByLibraryKey[e9]];
     if (te.length > 0) return [_$$l2(openFile.libraryKey), te, getNonDeletedAssets(memoizedProcessComponentsAndStateGroups(library))];
@@ -372,7 +372,7 @@ function eW(e) {
       if (e9 && td) return overrideDefaultItem ? {
         [overrideDefaultItem.library_key]: getFullComponentBreadcrumbs(overrideDefaultItem, td)
       } : {
-        [e9]: OK(selectedItems, td)
+        [e9]: getCommonComponentBreadcrumbs(selectedItems, td)
       };
     } else {
       let e = overrideDefaultItem || e6;
@@ -493,13 +493,13 @@ function eW(e) {
     let i = Math.max(Math.min(tC.index, index), 0);
     let a = Math.min(Math.max(tC.index, index), currentDrilldownItems.length - 1);
     let s = currentDrilldownItems.slice(i, a + 1).filter(e => "LEAF" === e.type);
-    onMultiselectCallback?.(s.map(e => e.item), tz(currentDrilldownItems[index]) ? Wu.DESELECT : Wu.SELECT);
+    onMultiselectCallback?.(s.map(e => e.item), tz(currentDrilldownItems[index]) ? SelectAction.DESELECT : SelectAction.SELECT);
     tw({
       index,
       parentId
     });
   }, [tz, onMultiselectCallback, tC.index]);
-  let tK = _$$u({
+  let tK = setupSwapOrInsertHandler({
     alwaysSwap: eY,
     canSwap: shouldPerformSwapOnClick,
     itemsToSwap,
@@ -764,7 +764,7 @@ function eW(e) {
       className: eY ? qv : void 0,
       children: renderI18nText("design_systems.instance_swap_picker.no_components")
     }), jsx("div", {
-      className: cssBuilderInstance.mt8.$$if(!eY, cssBuilderInstance.flex.itemsCenter.justifyCenter.mt12).$,
+      className: cssBuilderInstance.mt8.if(!eY, cssBuilderInstance.flex.itemsCenter.justifyCenter.mt12).$,
       children: jsx(Button, {
         onClick: tH,
         variant: "secondary",
@@ -810,7 +810,7 @@ function eW(e) {
     getBackgroundColorForLeafItemThumbnail: getAssetBackgroundColor,
     getLeafItemRecordingKey: eH,
     getLeafItemThumbnail: eY || isListView ? $$eV3 : eG,
-    getLeafItemTooltip: eY ? pf : void 0,
+    getLeafItemTooltip: eY ? getComponentTooltipData : void 0,
     getThumbnailGridLayoutForItems: tM,
     initialPath: tL,
     isLoading: t7,
@@ -1006,7 +1006,7 @@ export function $$eY2(e) {
   let W = useCallback(() => {
     dropdownShown?.type.includes(fn) && _(hideDropdownAction());
   }, [_, dropdownShown?.type]);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     ref: A,
     autoflowHeight: !0,
     disableHeaderBottomBorder: !0,

@@ -60,7 +60,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { resolveMessage } from "../905/231762";
 import { I as _$$I } from "../905/293573";
 import { o as _$$o2 } from "../905/785255";
-import { r as _$$r2 } from "../905/290294";
+import { setupDraftSubmissionHandler } from "../905/290294";
 import { D as _$$D } from "../905/572843";
 import { getFieldValueOrDefault, canSetFieldValue, isFieldValidated, assertFieldReady } from "../905/497882";
 import { __, tZ, Mm } from "../905/271611";
@@ -72,7 +72,6 @@ import { A as _$$A7 } from "../905/144978";
 import { noop } from "lodash-es";
 import { RadioPrimitiveRoot } from "../905/22449";
 import { RadioPrimitiveOption } from "../905/34525";
-import { TeamAvatar } from "../905/590952";
 import { FieldContainer } from "../905/567946";
 import { iy, uK, O0, Ee, I1 } from "../905/916525";
 import { X as _$$X2, S as _$$S } from "../905/109653";
@@ -103,7 +102,7 @@ import { c$ as _$$c$ } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TeamAvatar } from "../figma_app/537817";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { A as _$$A9 } from "../905/794518";
 import { Cf, it } from "../905/504727";
 import { A as _$$A0 } from "../6828/814452";
@@ -617,7 +616,7 @@ function ta({
     draftSubmissionResult,
     clearDraftSubmissionResult,
     submit
-  } = _$$r2(_, useCallback(() => {
+  } = setupDraftSubmissionHandler(_, useCallback(() => {
     g.current(INTERNAL_PUBLISH_MODAL, {
       step: PublishModalState.PUBLISH
     });
@@ -898,7 +897,7 @@ function tI({
   };
   let s = t.find(t => t.scope === e);
   let o = useRef(null);
-  let l = Um()?.type === tA;
+  let l = useDropdownState()?.type === tA;
   let u = useDispatch();
   return getFeatureFlags().figjam_fpl_template_publish_scope ? jsxs(_$$bL, {
     value: e,

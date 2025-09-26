@@ -6,7 +6,7 @@ import { Spacing } from "../figma_app/637027";
 import { X } from "../9420/381913";
 import { O } from "../9420/998877";
 import { o as _$$o } from "../c5e2cae0/371580";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { JR } from "../9420/975542";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -93,7 +93,7 @@ export function $$b0({
             children: renderI18nText("edu.almost_done_everything_look_good")
           }), jsx(Spacing, {
             multiple: 4
-          }), jsx(_$$x, {
+          }), jsx(LoadingRenderer, {
             isLoading: a,
             children: () => jsx(_$$o, {
               children: jsx(_$$d, {

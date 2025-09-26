@@ -5,7 +5,7 @@ import { getPaymentFlowData } from "../figma_app/169182";
 import { _H } from "../figma_app/598111";
 import { reportError } from "../905/11";
 import { isStudentValidated } from "../figma_app/141320";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -46,7 +46,7 @@ let $$N0 = createOptimistThunk((e, t) => {
     onSuccess,
     onError
   } = t;
-  XHR.post("/api/teams/redeem_promo", {
+  sendWithRetry.post("/api/teams/redeem_promo", {
     promo_code: promoCode,
     team_id: teamId
   }).then(() => {
@@ -66,7 +66,7 @@ let $$k1 = createOptimistThunk((e, t) => {
   } = t;
   let r = e.getState();
   let n = r.user?.id;
-  XHR.post(`/api/teams/${teamId}/pro_trial`).then(() => {
+  sendWithRetry.post(`/api/teams/${teamId}/pro_trial`).then(() => {
     n ? e.dispatch(switchAccountAndNavigate({
       workspace: {
         userId: n,
@@ -175,12 +175,12 @@ let $$D3 = createOptimistThunk((e, {
       team_name: t,
       invite_emails: i,
       promo_code: e.code
-    };else if (a && R) L = {
+    }; else if (a && R) L = {
       ...V,
       team_name: t,
       invite_emails: i,
       student_team: !0
-    };else {
+    }; else {
       let e = getPaymentFlowData();
       L = {
         ...V,
@@ -199,7 +199,7 @@ let $$D3 = createOptimistThunk((e, {
   let $ = h ? `/api/subscriptions-2018-11-08/team/${h}` : "/api/teams/create";
   let X = F.selectedView;
   let H = F.payment.upgradingNewTeam;
-  XHR.post($, L).then(({
+  sendWithRetry.post($, L).then(({
     data: t
   }) => {
     let a = "team" in t.meta ? t.meta.team : t.meta;

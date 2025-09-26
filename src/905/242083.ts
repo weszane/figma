@@ -1,6 +1,7 @@
 import { Ay as _$$Ay7 } from '@stylexjs/stylex';
 import rh from 'classnames';
 import { produce } from 'immer';
+import { noop } from 'lodash-es';
 import { createElement, PureComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { H as _$$H2, unmountComponentAtNode } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +11,7 @@ import { reportError, reportNullOrUndefined, setTagGlobal } from '../905/11';
 import { isWidgetRendering } from '../905/2122';
 import { PluginAction } from '../905/15667';
 import { ACTIVITY_LOG_STORE, createSessionGreaterEqualKeyRange, createSessionNodeKeyRange, EDITOR_SESSIONS_STORE, executeDatabaseTransaction, getAutosaveDatabaseWithErrorHandling, NEW_FILES_STORE, NODE_CHANGES_STORE, SESSION_INDEX } from '../905/25189';
-import { setKeyboardShortcutPanelTab, handleKeyboardShortcutUsage } from '../905/26824';
+import { handleKeyboardShortcutUsage, setKeyboardShortcutPanelTab } from '../905/26824';
 import { P as _$$P } from '../905/35881';
 import { z4 as _$$z, Ln } from '../905/37051';
 import { ModalFormContents, ModalRootComponent } from '../905/38914';
@@ -38,7 +39,7 @@ import { g as _$$g2 } from '../905/142432';
 import { hO } from '../905/145989';
 import { n as _$$n4 } from '../905/155450';
 import { hideModal, hideModalHandler, hideSpecificModal, showModal, showModalConditional, showModalHandler } from '../905/156213';
-import { Ph } from '../905/160095';
+import { TrackedLink } from '../905/160095';
 import { F as _$$F3 } from '../905/162860';
 import { ServiceCategories } from '../905/165054';
 import { NotificationCategory } from '../905/170564';
@@ -50,7 +51,7 @@ import { isStackOverflowError } from '../905/194389';
 import { Cg } from '../905/195479';
 import { g as _$$g3 } from '../905/211118';
 import { normalizeValue } from '../905/216495';
-import { c as _$$c2 } from '../905/217163';
+import { transformLibraryFileData } from '../905/217163';
 import { widgetInteractionTracker } from '../905/223332';
 import { Xo } from '../905/226610';
 import { Ag as _$$Ag } from '../905/235578';
@@ -60,10 +61,10 @@ import { copyHyperlinkToClipboard, parseLinkForContext } from '../905/250387';
 import { R as _$$R2 } from '../905/256203';
 import { HiddenLabel, Label } from '../905/270045';
 import { getPlanUserTeamAtomFamily } from '../905/276025';
-import { dM, F9 } from '../905/278499';
+import { AIActionStatus, AIActionResult } from '../905/278499';
 import { Z as _$$Z4 } from '../905/279476';
 import { Ay as _$$Ay8, Tr } from '../905/281495';
-import { i6 as _$$i2, Ie } from '../905/291654';
+import { handleMissingFontsEula, splitFontsByEula } from '../905/291654';
 import { createSavepoint } from '../905/294113';
 import { w as _$$w } from '../905/294864';
 import { _N, Vg } from '../905/300621';
@@ -113,7 +114,7 @@ import { RR } from '../905/514666';
 import { v as _$$v3 } from '../905/516963';
 import { dD } from '../905/519113';
 import { Button } from '../905/521428';
-import { oU as _$$oU, B3, dm, Sr } from '../905/535224';
+import { canOpenUrlInDesktop, DesktopModalType, openUrlInDesktop, redirectToFontSettings } from '../905/535224';
 import { h as _$$h4 } from '../905/537858';
 import { P as _$$P2 } from '../905/540614';
 import { reactTimerGroup } from '../905/542194';
@@ -146,7 +147,7 @@ import { Timer } from '../905/609396';
 import { customHistory, isMainAppRoute } from '../905/612521';
 import { buildFileUrl } from '../905/612685';
 import { isActiveAtom } from '../905/617744';
-import { checkCanRunExtensions, getSelectedView } from '../905/622391';
+import { checkCanRunExtensions, handleSelectedView } from '../905/622391';
 import { x as _$$x2 } from '../905/628884';
 import { ButtonPrimitive } from '../905/632989';
 import { parseQuery } from '../905/634134';
@@ -175,7 +176,7 @@ import { Point } from '../905/736624';
 import { qG, Qx } from '../905/742325';
 import { c as _$$c3, s as _$$s7 } from '../905/744710';
 import { l as _$$l4 } from '../905/745972';
-import { Ao } from '../905/748636';
+import { DraggableModalManager } from '../905/748636';
 import { AuthModal } from '../905/749159';
 import { y as _$$y5 } from '../905/749689';
 import { generateRandomID, handlePluginError, pluginState } from '../905/753206';
@@ -186,7 +187,7 @@ import { isBranchAlt } from '../905/760074';
 import { getValueAtIndex, hasKey } from '../905/764747';
 import { getSelectedFile } from '../905/766303';
 import { M as _$$M2 } from '../905/771870';
-import { b as _$$b2, eM as _$$eM, gg, LQ, M9, Nz, PE, yF } from '../905/777093';
+import { $$W8, $$z2, checkForNewlyInstalledFonts, fetchFontList, hasLocalFontsAvailable, setFontsInitialized, setLocalFontsModifiedTimestamp, updateFontList } from '../905/777093';
 import { O4 } from '../905/777187';
 import { s as _$$s5 } from '../905/780421';
 import { isFullscreenDevHandoffView } from '../905/782918';
@@ -199,7 +200,7 @@ import { setupPluginCodeCache } from '../905/827944';
 import { getSceneGraphInstance } from '../905/830071';
 import { parseInteger } from '../905/833686';
 import { getOrgByCurrentUserId } from '../905/845253';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { f8 } from '../905/850476';
 import { s2 as _$$s3, A9, bT, E9, mK } from '../905/851937';
 import { savepointOptimistThunk } from '../905/852057';
@@ -216,7 +217,7 @@ import { bS, bX, fs, pi, vU } from '../905/889931';
 import { WAFValidationHandlerInstance } from '../905/898440';
 import { G_ } from '../905/901759';
 import { autosaveErrorModal } from '../905/906499';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { bL } from '../905/911410';
 import { fullscreenCrashHandler } from '../905/913008';
 import { debounce } from '../905/915765';
@@ -226,8 +227,6 @@ import { hD } from '../905/921139';
 import { hideDropdownAction, selectViewAction, showDropdownThunk, updateDropdownSelectionAction } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
 import { c as _$$c5 } from '../905/932790';
-import { noop } from 'lodash-es';
-;
 import { parse, unparse } from '../905/945633';
 import { AssetTabType, ExtensionFeatureKey } from '../905/946805';
 import { $3 } from '../905/946937';
@@ -264,7 +263,7 @@ import { createObjectUrlFromBuffer, fetchAndProcessComponentPublishingBuffers, f
 import { getObservableOrFallback } from '../figma_app/84367';
 import { checkResourceEligibilityDebug } from '../figma_app/86989';
 import { getDevModeFocusId, isFullscreenOverview } from '../figma_app/88239';
-import { handleAutosaveAndNavigationThunk, hideDowntimeBanner, hidePickerThunk, setCanvasMentionPopup, setFileVersion, setHyperlinkPopup, setLeftPanelTab, showDowntimeBanner, showOpenDesktopAppModal, showPickerThunk, updateCanvasMentionPopupPosition, updateFontList, updateHyperlinkPopupPosition, updateLocalFontAgentVersion, updateSelectedStyleProperties, updateSelectedStyleThumbnailUrl } from '../figma_app/91703';
+import { handleAutosaveAndNavigationThunk, hideDowntimeBanner, hidePickerThunk, setCanvasMentionPopup, setFileVersion, setHyperlinkPopup, setLeftPanelTab, showDowntimeBanner, showOpenDesktopAppModal, showPickerThunk, updateCanvasMentionPopupPosition, updateFontListAction, updateHyperlinkPopupPosition, updateLocalFontAgentVersion, updateSelectedStyleProperties, updateSelectedStyleThumbnailUrl } from '../figma_app/91703';
 import { tO as _$$tO } from '../figma_app/98072';
 import { zs } from '../figma_app/106634';
 import { Nl, sitesViewSetterAtomFamily } from '../figma_app/115923';
@@ -1729,7 +1728,7 @@ function nW() {
   let [d, c] = useState(0);
   let [p, m] = useState(0);
   nH(e, i, r, o, d, p);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     title: 'Fake Multiplayer activity',
     initialPosition: new Point(0.7 * window.innerWidth, 0.5 * window.innerHeight),
     onClose: nK,
@@ -2021,7 +2020,7 @@ let rx = registerModal(() => {
       })]
     });
   })();
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     initialConstraints: t?.initialConstraints,
     initialHeight: t?.initialHeight,
     initialPosition: t?.initialPosition,
@@ -2238,7 +2237,7 @@ let r7 = registerModal(({
           children: jsxs(Fragment, {
             children: [r3(e), e === ColorProfileEnum.SRGB && o === 'convert' && jsxs('div', {
               className: 'document_color_profile_modal--migratedWarning--4bN32',
-              children: [jsx(_$$Z4, {}), renderI18nText('fullscreen.color_management.document_modal.warning.clamp.convert'), jsx(Ph, {
+              children: [jsx(_$$Z4, {}), renderI18nText('fullscreen.color_management.document_modal.warning.clamp.convert'), jsx(TrackedLink, {
                 newTab: !0,
                 trusted: !0,
                 href: _$$s8,
@@ -2769,7 +2768,7 @@ let aO = registerModal(e => {
   let [p, m] = useState(l ? 'pptx' : 'pdf');
   let h = c.length;
   let [g, f] = useState('all');
-  let _ = Um();
+  let _ = useDropdownState();
   let A = useDispatch();
   let [y, b] = useState(JI);
   let [v, I] = useState('DOCUMENT');
@@ -3945,7 +3944,7 @@ let ov = (e, t, i, n, r) => {
         selection_ordinal: r,
         isOnLG: !0
       });
-      XHR.post(`/api/mobile_app_push/${encodeURIComponent(e)}`, {
+      sendWithRetry.post(`/api/mobile_app_push/${encodeURIComponent(e)}`, {
         frame_name: toWellFormed(n?.substring(0, 200)),
         frame_id: i,
         selection_id: s,
@@ -4466,7 +4465,7 @@ async function lO({
   let {
     openFile
   } = debugState.getState();
-  let s = getSelectedView();
+  let s = handleSelectedView();
   if (!s) throw new Error('Cannot run widget while logged out');
   let o = generateRandomID();
   pluginState.currentPluginRunID = o;
@@ -4547,7 +4546,7 @@ async function lF(e, {
     let {
       openFile
     } = debugState.getState();
-    let o = getSelectedView();
+    let o = handleSelectedView();
     if (!o) throw new Error('Cannot run widget while logged out');
     await E9({
       allowedDomains: manifest.networkAccess?.allowedDomains ?? gH,
@@ -4991,7 +4990,7 @@ class lV {
         storeInRecentsKey: n,
         id: t,
         version: e || '',
-        currentUserId: getSelectedView()
+        currentUserId: handleSelectedView()
       }));
     }
   }
@@ -5304,7 +5303,7 @@ let lX = class e extends sP(sN(sR)) {
     this.fileArrayToString = null;
     this.loadAndStartFullscreenIfNecessary = singletonAsync(async () => {
       let t = isInteractionPathCheck();
-      if (this._readyStartTime = window.performance.now(), fullscreenPerfManager.start('loadAndStartFullscreen'), e.startFetchingFontList(), e.startFetchingInterfaceFont(), _$$oU(location.href).then(e => {
+      if (this._readyStartTime = window.performance.now(), fullscreenPerfManager.start('loadAndStartFullscreen'), e.startFetchingFontList(), e.startFetchingInterfaceFont(), canOpenUrlInDesktop(location.href).then(e => {
         this._isDesktopAppRunning = e;
         e && _$$N3.shouldShowOnce() && this._store.dispatch(showOpenDesktopAppModal(PluginRunForContext.FOR_OPEN));
       }), e.prepareSpellCheck(), t && console.log('isMacDebugApp', _$$m), _$$m) {
@@ -5589,7 +5588,7 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   static startFetchingFontList() {
-    this.fontListPromise == null && (this.fontListPromise = fullscreenPerfManager.timeAsync('fetchFontList', yF));
+    this.fontListPromise == null && (this.fontListPromise = fullscreenPerfManager.timeAsync('fetchFontList', fetchFontList));
   }
   static prepareSpellCheck() {
     BrowserInfo.isIpad || (hO(), (async () => {
@@ -5692,7 +5691,7 @@ let lX = class e extends sP(sN(sR)) {
           e();
         });
       });
-      Sr(location.href, B3.FULLSCREEN_MENU).then(t => {
+      openUrlInDesktop(location.href, DesktopModalType.FULLSCREEN_MENU).then(t => {
         t && _$$s5.shouldShowOnce() && Promise.race([e, delay(3e3)]).then(() => {
           _$$N3.disableAutoOpenIfUnset();
           this._store.dispatch(showOpenDesktopAppModal(PluginRunForContext.FOR_MENU));
@@ -6104,7 +6103,7 @@ let lX = class e extends sP(sN(sR)) {
     u.append('file', r);
     o('clipboard_data_upload_start');
     try {
-      let e = await XHR.crossOriginPost(upload_url, u, {
+      let e = await sendWithRetry.crossOriginPost(upload_url, u, {
         raw: !0,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -6576,7 +6575,7 @@ let lX = class e extends sP(sN(sR)) {
     let s = Object.keys(a).length;
     !(!(s || Object.keys(i).length || Object.keys(n).length) || !t || isBranchAlt(t)) && (s || hasTeamPaidAccess(t.teamId ? this._state.teams[t.teamId] : void 0)) && (this.dispatch(notificationActions.dequeue({
       type: NotificationCategory.MOVE_COMPONENTS_PROMPT
-    })), XHR.post('/api/design_systems/move_validity', {
+    })), sendWithRetry.post('/api/design_systems/move_validity', {
       style_moves: a,
       component_moves: i,
       state_group_moves: n,
@@ -6881,7 +6880,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   openFontSettings() {
-    return dm();
+    return redirectToFontSettings();
   }
   setMissingFont(e, t) {
     Fullscreen?.setMissingFontOnSelectedText(e, t);
@@ -7004,10 +7003,10 @@ let lX = class e extends sP(sN(sR)) {
     _$$m && e.startFetchingFontList();
     debug(e.fontListPromise != null, 'should have loaded font list by the time fullscreen is ready');
     let i = (e, t) => {
-      Nz(t) && gg();
-      let i = LQ(t);
+      hasLocalFontsAvailable(t) && setFontsInitialized();
+      let i = updateFontList(t);
       let n = performance.now();
-      e(updateFontList(t));
+      e(updateFontListAction(t));
       i.redux = performance.now() - n;
       t.localFontAgentVersion && this._store.dispatch(updateLocalFontAgentVersion(t.localFontAgentVersion));
       return i;
@@ -7028,9 +7027,9 @@ let lX = class e extends sP(sN(sR)) {
         });
       });
       this._fontListLoaded = !0;
-      getFeatureFlags().desktop_font_reload_on_focus && (_$$b2() || PE(Date.now() / 1e3), window.addEventListener('focus', () => {
+      getFeatureFlags().desktop_font_reload_on_focus && ($$W8() || setLocalFontsModifiedTimestamp(Date.now() / 1e3), window.addEventListener('focus', () => {
         let e = this._store.getState().selectedView;
-        e.view === 'fullscreen' && isDesignOrIllustration(e.editorType) && M9(() => yF([FontSourceType.LOCAL]), e => {
+        e.view === 'fullscreen' && isDesignOrIllustration(e.editorType) && checkForNewlyInstalledFonts(() => fetchFontList([FontSourceType.LOCAL]), e => {
           getFeatureFlags().desktop_font_reload_on_focus_ux && FontHelpers?.resetNeedsMissingFontsCheck();
           i(this._store.dispatch, e);
         }, e => this.dispatch(VisualBellActions.enqueue(e)));
@@ -7045,7 +7044,7 @@ let lX = class e extends sP(sN(sR)) {
     });
     window.addEventListener('online', () => AppStateTsApi?.uiState().isOffline.set(!1));
     window.addEventListener('offline', () => AppStateTsApi?.uiState().isOffline.set(!0));
-    Fonts?.updateFontList(_$$eM);
+    Fonts?.updateFontList($$z2);
     this.resolveReadyPromise();
     Fullscreen?.showingProgressBar(this._state.progressBarState.mode);
   }
@@ -7206,7 +7205,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   startMovePagesJob(e, t, i, n) {
     logDebug('startMovePagesJob', 'Send request to start move pages job.');
-    XHR.post(`/api/files/${e}/move_pages`, {
+    sendWithRetry.post(`/api/files/${e}/move_pages`, {
       folder_id: t,
       page_ids: i,
       file_name: n
@@ -7450,11 +7449,11 @@ let lX = class e extends sP(sN(sR)) {
         let {
           eulaFonts,
           nonEulaFonts
-        } = Ie(t, i.fonts, i.selectedView.editorType);
+        } = splitFontsByEula(t, i.fonts, i.selectedView.editorType);
         if (eulaFonts.length > 0 && nonEulaFonts.length === 0) {
           let {
             stillMissingFonts
-          } = await _$$i2(eulaFonts, i.fonts, i.userFlags, this.dispatch, 'edit');
+          } = await handleMissingFontsEula(eulaFonts, i.fonts, i.userFlags, this.dispatch, 'edit');
           if (stillMissingFonts.length === 0) return;
           e = e.filter(e => !eulaFonts.some(t => t.family === e.family && t.style === e.style) || stillMissingFonts.some(t => t.family === e.family && t.style === e.style));
         }
@@ -8051,7 +8050,7 @@ let lX = class e extends sP(sN(sR)) {
     let r = await subscribeAndAwaitData(LibraryKeyToFileLink, {
       libraryKey: _$$l(e)
     });
-    let a = _$$c2({
+    let a = transformLibraryFileData({
       data: r,
       nodeId: t,
       stateGroupId: i,
@@ -8261,19 +8260,19 @@ let lX = class e extends sP(sN(sR)) {
       console.error(e);
       _$$as({
         ...i,
-        status: dM.FAILED,
-        reason: F9.ERROR
+        status: AIActionStatus.FAILED,
+        reason: AIActionResult.ERROR
       });
       return;
     }
     n.signal.aborted ? _$$as({
       ...i,
-      status: dM.FAILED,
-      reason: F9.STOPPED
+      status: AIActionStatus.FAILED,
+      reason: AIActionResult.STOPPED
     }) : _$$as({
       ...i,
-      status: dM.COMPLETED,
-      reason: F9.SUCCESS
+      status: AIActionStatus.COMPLETED,
+      reason: AIActionResult.SUCCESS
     });
   }
   hasAiRenameLayersPermission(e) {

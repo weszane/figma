@@ -13,7 +13,7 @@ import { popModalStack } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { FPlanFeatureType } from "../figma_app/191312";
 import { S as _$$S } from "../4452/747039";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { A as _$$A } from "../svg/619883";
 let v = "handle_asset_transfer_request_modal--bodyAlreadyComplete--7hIMm";
 let f = "handle_asset_transfer_request_modal--list--DiKuV";
@@ -230,7 +230,7 @@ export function $$I0(e) {
       assetTransferRequestId: e.selectedAssetTransferRequest,
       isTransferCopy: T?.is_transfer_copy
     },
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: K,
       onClose: H,
       minWidth: 380,

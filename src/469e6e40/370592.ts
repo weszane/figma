@@ -13,7 +13,7 @@ import { c as _$$c } from "../469e6e40/927162";
 import { NH } from "../figma_app/755395";
 import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { useApplyCodeExtensionPreferences, isCodegenSupportedForLanguage, useUpdateCodeExtensionPreferences, getMeasurementUnit, getLanguageUnitLabel, useCodegenPreferencesSettings } from "../figma_app/120227";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { selectIsCopyExportAllowed } from "../figma_app/212807";
 import { KindEnum } from "../905/129884";
 import { u as _$$u } from "../figma_app/152461";
@@ -191,7 +191,7 @@ export function $$M1({
     showing,
     data,
     toggle
-  } = BK("CODEGEN_PLUGIN_SETTINGS_DROPDOWN");
+  } = useDropdown("CODEGEN_PLUGIN_SETTINGS_DROPDOWN");
   let o = useDispatch();
   let d = useRef(null);
   let _ = e.name === data?.name && showing;

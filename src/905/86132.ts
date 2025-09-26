@@ -1,8 +1,8 @@
-import { b } from "../905/275748";
+import { LazyComponentFactory } from "../905/275748";
 import _require from "../1e926454/954729";
 import { registerModal, createModalConfig } from "../905/102752";
 let n;
-let r = new b({
+let r = new LazyComponentFactory({
   name: "Browse Shared",
   description: "Shared components/utils used in 'browse' experiences like search and file_browser",
   dependencies: [],

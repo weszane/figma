@@ -38,6 +38,7 @@ interface Format<T> {
   meta: T
   error: null | string
   status: number
+  i18n: any
 }
 export interface AjaxResponse<T = any> {
   cause?: Error
@@ -68,7 +69,7 @@ function logRequestData(res: AjaxResponse, method: XHRMethod, pathname: string) 
 }
 
 /**
- * Formats the XHR response.
+ * Formats the sendWithRetry response.
  * @param url - URL.
  * @param xhr - XMLHttpRequest.
  * @param data - Parsed data.
@@ -164,7 +165,7 @@ class MockRequest {
 }
 
 /**
- * MockServer for handling XHR requests in tests.
+ * MockServer for handling sendWithRetry requests in tests.
  */
 class MockServer {
   static SEND_REAL_REQUEST = 'SEND_REAL_REQUEST'
@@ -217,173 +218,173 @@ class MockServer {
   }
 }
 type XHRMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'HEAD'
-export const XHR = {
-  Methods: {
-    GET: 'GET' as XHRMethod,
-    POST: 'POST' as XHRMethod,
-    PUT: 'PUT' as XHRMethod,
-    DELETE: 'DELETE' as XHRMethod,
-    PATCH: 'PATCH' as XHRMethod,
-    OPTIONS: 'OPTIONS' as XHRMethod,
-    HEAD: 'HEAD' as XHRMethod,
-  },
-  Events: {
-    READY_STATE_CHANGE: 'readystatechange',
-    LOAD_START: 'loadstart',
-    PROGRESS: 'progress',
-    ABORT: 'abort',
-    ERROR: 'error',
-    LOAD: 'load',
-    TIMEOUT: 'timeout',
-    LOAD_END: 'loadend',
-  },
-  requiredHeaders: {
-    'X-Figma-User-ID': getInitialOptions().user_data?.id ?? '',
-  },
-  defaults: {
-    method: 'GET' as XHRMethod,
-    data: undefined,
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'X-Csrf-Bypass': 'yes',
-      'tsid': getTrackingSessionId(),
-      'X-Figma-User-Plan-Max': getUserPlan() ?? '',
-      ...(getInitialOptions().user_data?.id && {
-        'X-Figma-User-ID': getInitialOptions().user_data.id,
-      } || {}),
-    },
-    responseType: '',
-    dump: JSON.stringify,
-    load: JSON.parse,
-    withCredentials: false,
-    timeout: 0,
-  } as unknown as XhrRequestSettings,
-  getDefaults: {} as XhrRequestSettings,
-  crossOriginDefaults: {} as XhrRequestSettings,
-  crossOriginGetDefaults: {} as XhrRequestSettings,
-  assertSameOrigin: (_url?: string) => { },
-  put: async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
-    const method = XHR.Methods.PUT
-    const response = await sendWithRetry({
-      url,
-      method,
-      data,
-      ...options,
-    })
-    logRequestData(response, method, url)
-    return response
-  },
-  post: async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
-    const method = XHR.Methods.POST
-    const response = await sendWithRetry({
-      url,
-      method,
-      data,
-      ...options,
-    })
-    logRequestData(response, method, url)
-    return response
-  },
-  patch: async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
-    const method = XHR.Methods.PATCH
-    const response = await sendWithRetry({
-      url,
-      method,
-      data,
-      ...options,
-    })
-    logRequestData(response, method, url)
-    return response
-  },
-  del: async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
-    const method = XHR.Methods.DELETE
-    const response = await sendWithRetry({
-      url,
-      method,
-      data,
-      ...options,
-    })
-    logRequestData(response, method, url)
-    return response
-  },
-  options: async (url: string, options?: Partial<XhrRequestSettings>) => {
-    return await sendWithRetry({
-      url,
-      method: XHR.Methods.OPTIONS,
-      ...options,
-    })
-  },
-  crossOriginGet: async (url: string, params?: Record<string, any>, options?: Partial<XhrRequestSettings>) => {
-    return await sendWithRetry({
-      url,
-      method: XHR.Methods.GET,
-      params,
-      ...options,
-    }, XHR.crossOriginGetDefaults)
-  },
-  crossOriginGetAny: async (url: string, params?: Record<string, any>, options?: Partial<XhrRequestSettings>) => {
-    return await XHR.crossOriginGet(url, params, options)
-  },
-  crossOriginHead: async (url: string, params?: Record<string, any>, options?: Partial<XhrRequestSettings>) => {
-    return await sendWithRetry({
-      url,
-      method: XHR.Methods.HEAD,
-      params,
-      ...options,
-    }, XHR.crossOriginDefaults)
-  },
-  crossOriginPut: async (url: string, data: any, options?: Partial<XhrRequestSettings>) => {
-    return await sendWithRetry({
-      url,
-      method: XHR.Methods.PUT,
-      data,
-      ...options,
-    }, XHR.crossOriginDefaults)
-  },
-  crossOriginPost: async (url: string, data: any, options?: Partial<XhrRequestSettings>) => {
-    return await sendWithRetry({
-      url,
-      method: XHR.Methods.POST,
-      data,
-      ...options,
-    }, XHR.crossOriginDefaults)
-  },
-  shouldTreatStatusCodeAsFailure: (status: number) => {
-    return status === 202 || !(status >= 200 && status < 300)
-  },
-  retryStrategyForStatusCode: (status: number, override?: Record<number, number>) => {
-    if (override && override[status] !== null && override[status] !== undefined)
-      return override[status]
-    if (status === 0)
-      return 2
-    if (status > 0 && status < 200 || status >= 200 && status < 400 || status >= 400 && status < 500 && status !== 429)
-      return 0
-    if (status === 429 || status >= 500 && status <= 504)
-      return 1
-    return 0
-  },
-  RetryStrategy: {
-    NO_RETRY: 0,
-    JITTERED_EXPONENTIAL_BACKOFF: 1,
-    LINEAR_BACKOFF: 2,
-  },
+
+sendWithRetry.Methods = {
+  GET: 'GET' as XHRMethod,
+  POST: 'POST' as XHRMethod,
+  PUT: 'PUT' as XHRMethod,
+  DELETE: 'DELETE' as XHRMethod,
+  PATCH: 'PATCH' as XHRMethod,
+  OPTIONS: 'OPTIONS' as XHRMethod,
+  HEAD: 'HEAD' as XHRMethod,
 }
-XHR.getDefaults = {
-  ...XHR.defaults,
+sendWithRetry.Events = {
+  READY_STATE_CHANGE: 'readystatechange',
+  LOAD_START: 'loadstart',
+  PROGRESS: 'progress',
+  ABORT: 'abort',
+  ERROR: 'error',
+  LOAD: 'load',
+  TIMEOUT: 'timeout',
+  LOAD_END: 'loadend',
+}
+sendWithRetry.requiredHeaders = {
+  'X-Figma-User-ID': getInitialOptions().user_data?.id ?? '',
+}
+sendWithRetry.defaults = {
+  method: 'GET' as XHRMethod,
+  data: undefined,
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'X-Csrf-Bypass': 'yes',
+    'tsid': getTrackingSessionId(),
+    'X-Figma-User-Plan-Max': getUserPlan() ?? '',
+    ...(getInitialOptions().user_data?.id && {
+      'X-Figma-User-ID': getInitialOptions().user_data.id,
+    } || {}),
+  },
+  responseType: '',
+  dump: JSON.stringify,
+  load: JSON.parse,
+  withCredentials: false,
+  timeout: 0,
+} as unknown as XhrRequestSettings
+sendWithRetry.getDefaults = {} as XhrRequestSettings
+sendWithRetry.crossOriginDefaults = {} as XhrRequestSettings
+sendWithRetry.crossOriginGetDefaults = {} as XhrRequestSettings
+sendWithRetry.assertSameOrigin = (_url?: string) => { }
+sendWithRetry.put = async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
+  const method = sendWithRetry.Methods.PUT
+  const response = await sendWithRetry({
+    url,
+    method,
+    data,
+    ...options,
+  })
+  logRequestData(response, method, url)
+  return response
+}
+sendWithRetry.post = async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
+  const method = sendWithRetry.Methods.POST
+  const response = await sendWithRetry({
+    url,
+    method,
+    data,
+    ...options,
+  })
+  logRequestData(response, method, url)
+  return response
+}
+sendWithRetry.patch = async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
+  const method = sendWithRetry.Methods.PATCH
+  const response = await sendWithRetry({
+    url,
+    method,
+    data,
+    ...options,
+  })
+  logRequestData(response, method, url)
+  return response
+}
+sendWithRetry.del = async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
+  const method = sendWithRetry.Methods.DELETE
+  const response = await sendWithRetry({
+    url,
+    method,
+    data,
+    ...options,
+  })
+  logRequestData(response, method, url)
+  return response
+}
+sendWithRetry.options = async (url: string, options?: Partial<XhrRequestSettings>) => {
+  return await sendWithRetry({
+    url,
+    method: sendWithRetry.Methods.OPTIONS,
+    ...options,
+  })
+}
+sendWithRetry.crossOriginGet = async (url: string, params?: Record<string, any>, options?: Partial<XhrRequestSettings>) => {
+  return await sendWithRetry({
+    url,
+    method: sendWithRetry.Methods.GET,
+    params,
+    ...options,
+  }, sendWithRetry.crossOriginGetDefaults)
+}
+sendWithRetry.crossOriginGetAny = async (url: string, params?: Record<string, any>, options?: Partial<XhrRequestSettings>) => {
+  return await sendWithRetry.crossOriginGet(url, params, options)
+}
+sendWithRetry.crossOriginHead = async (url: string, params?: Record<string, any>, options?: Partial<XhrRequestSettings>) => {
+  return await sendWithRetry({
+    url,
+    method: sendWithRetry.Methods.HEAD,
+    params,
+    ...options,
+  }, sendWithRetry.crossOriginDefaults)
+}
+sendWithRetry.crossOriginPut = async (url: string, data: any, options?: Partial<XhrRequestSettings>) => {
+  return await sendWithRetry({
+    url,
+    method: sendWithRetry.Methods.PUT,
+    data,
+    ...options,
+  }, sendWithRetry.crossOriginDefaults)
+}
+sendWithRetry.crossOriginPost = async (url: string, data: any, options?: Partial<XhrRequestSettings>) => {
+  return await sendWithRetry({
+    url,
+    method: sendWithRetry.Methods.POST,
+    data,
+    ...options,
+  }, sendWithRetry.crossOriginDefaults)
+}
+sendWithRetry.shouldTreatStatusCodeAsFailure = (status: number) => {
+  return status === 202 || !(status >= 200 && status < 300)
+}
+sendWithRetry.retryStrategyForStatusCode = (status: number, override?: Record<number, number>) => {
+  if (override && override[status] !== null && override[status] !== undefined)
+    return override[status]
+  if (status === 0)
+    return 2
+  if (status > 0 && status < 200 || status >= 200 && status < 400 || status >= 400 && status < 500 && status !== 429)
+    return 0
+  if (status === 429 || status >= 500 && status <= 504)
+    return 1
+  return 0
+}
+sendWithRetry.RetryStrategy = {
+  NO_RETRY: 0,
+  JITTERED_EXPONENTIAL_BACKOFF: 1,
+  LINEAR_BACKOFF: 2,
+}
+sendWithRetry.getDefaults = {
+  ...sendWithRetry.defaults,
   waitForTabRecentlyVisible: true,
   retryCount: 3,
 }
-XHR.crossOriginDefaults = {
-  ...XHR.defaults,
+sendWithRetry.crossOriginDefaults = {
+  ...sendWithRetry.defaults,
 }
-delete XHR.crossOriginDefaults.headers
-XHR.crossOriginGetDefaults = {
-  ...XHR.crossOriginDefaults,
+delete sendWithRetry.crossOriginDefaults.headers
+sendWithRetry.crossOriginGetDefaults = {
+  ...sendWithRetry.crossOriginDefaults,
   retryCount: 3,
 }
+
 /**
- * Custom error for XHR failures.
+ * Custom error for sendWithRetry failures.
  */
 export class XHRError extends Error {
   status: number
@@ -392,7 +393,7 @@ export class XHRError extends Error {
   contentType: string | null
   wafChallenge: any
   constructor(response: AjaxResponse) {
-    super(Object.prototype.hasOwnProperty.call(response, 'toString') ? response.toString() : 'Unknown XHR error')
+    super(Object.prototype.hasOwnProperty.call(response, 'toString') ? response.toString() : 'Unknown sendWithRetry error')
     this.status = response.status
     this.response = response.response
     this.data = response.data
@@ -475,7 +476,7 @@ function logAsyncRequest(url: string, method: XHRMethod, xhr: XMLHttpRequest, ti
 }
 
 /**
- * Sends an XHR request.
+ * Sends an sendWithRetry request.
  * @param attempt - Attempt number.
  * @param t - Request settings.
  * @param i - Defaults.
@@ -483,7 +484,7 @@ function logAsyncRequest(url: string, method: XHRMethod, xhr: XMLHttpRequest, ti
  */
 async function sendXhrRequest<T>(requestId: number, settings: XhrRequestSettings, overrideSettings?: Partial<XhrRequestSettings>): Promise<AjaxResponse<T>> {
   const mergedSettings: XhrRequestSettings = {
-    ...(overrideSettings ?? XHR.defaults),
+    ...(overrideSettings ?? sendWithRetry.defaults),
     ...settings,
   }
   if (mergedSettings.waitForTabRecentlyVisible) {
@@ -515,18 +516,18 @@ async function sendXhrRequest<T>(requestId: number, settings: XhrRequestSettings
       reject(err)
     }
     const handleFailure = (resp: AjaxResponse) => {
-      if (!XHR.shouldTreatStatusCodeAsFailure(resp.status)) {
+      if (!sendWithRetry.shouldTreatStatusCodeAsFailure(resp.status)) {
         console.warn('sendXr: overriding failed result status from', resp.status, 'to 0')
         resp.status = 0
       }
       resp.toString = () => {
         if (resp.status === 400 || resp.status === 402) {
           if (typeof resp.data === 'object' && 'error' in resp.data && resp.data?.error)
-            return resp.data.message
+            return (resp.data as any).message
           if (typeof resp.data === 'string')
             return resp.data
         }
-        return `XHR for "${sanitizedUrl}" failed with status ${resp.status}`
+        return `sendWithRetry for "${sanitizedUrl}" failed with status ${resp.status}`
       }
       resp.cause = errorStack
       resolve(resp)
@@ -560,10 +561,10 @@ async function sendXhrRequest<T>(requestId: number, settings: XhrRequestSettings
       }
     }
 
-    // XHR event listeners
-    xhr.addEventListener(XHR.Events.LOAD, () => {
+    // sendWithRetry event listeners
+    xhr.addEventListener(sendWithRetry.Events.LOAD, () => {
       try {
-        logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, XHR.Events.LOAD)
+        logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, sendWithRetry.Events.LOAD)
         let data: any = null
         if (xhr.responseType === 'arraybuffer') {
           data = new Uint8Array(xhr.response as ArrayBuffer)
@@ -603,7 +604,7 @@ async function sendXhrRequest<T>(requestId: number, settings: XhrRequestSettings
             },
           })
         }
-        if (XHR.shouldTreatStatusCodeAsFailure(xhr.status)) {
+        if (sendWithRetry.shouldTreatStatusCodeAsFailure(xhr.status)) {
           handleFailure(formatResponse(sanitizedUrl, xhr, data))
         }
         else {
@@ -614,16 +615,16 @@ async function sendXhrRequest<T>(requestId: number, settings: XhrRequestSettings
         handleError(err)
       }
     })
-    xhr.addEventListener(XHR.Events.ABORT, () => {
-      logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, XHR.Events.ABORT)
+    xhr.addEventListener(sendWithRetry.Events.ABORT, () => {
+      logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, sendWithRetry.Events.ABORT)
       handleFailure(formatResponse(sanitizedUrl, xhr, undefined))
     })
-    xhr.addEventListener(XHR.Events.ERROR, () => {
-      logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, XHR.Events.ERROR)
+    xhr.addEventListener(sendWithRetry.Events.ERROR, () => {
+      logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, sendWithRetry.Events.ERROR)
       handleFailure(formatResponse(sanitizedUrl, xhr, undefined))
     })
-    xhr.addEventListener(XHR.Events.TIMEOUT, () => {
-      logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, XHR.Events.TIMEOUT)
+    xhr.addEventListener(sendWithRetry.Events.TIMEOUT, () => {
+      logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, sendWithRetry.Events.TIMEOUT)
       handleFailure(formatResponse(sanitizedUrl, xhr, undefined))
     })
 
@@ -639,37 +640,37 @@ async function sendXhrRequest<T>(requestId: number, settings: XhrRequestSettings
 }
 
 /**
- * Handles retries and error logic for XHR requests.
+ * Handles retries and error logic for sendWithRetry requests.
  * @param e - Request settings.
  * @param t - Defaults.
  * @returns Promise resolving to response.
  */
 
-async function sendWithRetry(settings: XhrRequestSettings, overrideSettings?: Partial<XhrRequestSettings>): Promise<AjaxResponse> {
+export async function sendWithRetry(settings: XhrRequestSettings, overrideSettings?: Partial<XhrRequestSettings>): Promise<AjaxResponse> {
   let response: AjaxResponse
   let attempt = 0
   let handledWafChallenge = false
   const maxRetries = settings.retryCount ?? overrideSettings?.retryCount ?? 0
   do {
     response = await sendXhrRequest(attempt, settings, overrideSettings)
-    let retryStrategy = XHR.retryStrategyForStatusCode(response.status, settings.retryStrategyOverride)
+    let retryStrategy = sendWithRetry.retryStrategyForStatusCode(response.status, settings.retryStrategyOverride)
     if (response.wafChallenge) {
       if (!handledWafChallenge) {
         attempt = -1
         handledWafChallenge = true
       }
-      retryStrategy = XHR.RetryStrategy.LINEAR_BACKOFF
+      retryStrategy = sendWithRetry.RetryStrategy.LINEAR_BACKOFF
       await wafManager.waitForWAFValidation(response.wafChallenge === 'challenge' ? 'challenge' : 'captcha')
     }
-    if (retryStrategy === XHR.RetryStrategy.NO_RETRY) {
-      if (XHR.shouldTreatStatusCodeAsFailure(response.status))
+    if (retryStrategy === sendWithRetry.RetryStrategy.NO_RETRY) {
+      if (sendWithRetry.shouldTreatStatusCodeAsFailure(response.status))
         throw new XHRError(response)
       return response
     }
-    if (retryStrategy === XHR.RetryStrategy.LINEAR_BACKOFF) {
+    if (retryStrategy === sendWithRetry.RetryStrategy.LINEAR_BACKOFF) {
       await delay(500 * attempt)
     }
-    else if (retryStrategy === XHR.RetryStrategy.JITTERED_EXPONENTIAL_BACKOFF) {
+    else if (retryStrategy === sendWithRetry.RetryStrategy.JITTERED_EXPONENTIAL_BACKOFF) {
       const base = Math.min(500 * 2 ** attempt, 300000)
       const jitter = 0.25 * Math.random() * base
       await delay(base + jitter)
@@ -679,7 +680,7 @@ async function sendWithRetry(settings: XhrRequestSettings, overrideSettings?: Pa
     }
     attempt++
   } while (attempt < 1 + maxRetries)
-  if (!XHR.shouldTreatStatusCodeAsFailure(response.status))
+  if (!sendWithRetry.shouldTreatStatusCodeAsFailure(response.status))
     return response
   throw new XHRError(response)
 }
@@ -692,14 +693,14 @@ async function sendWithRetry(settings: XhrRequestSettings, overrideSettings?: Pa
  * @returns Promise resolving to response.
  */
 export async function getRequest<T>(url: string, params: Record<string, any> = {}, options: Partial<XhrRequestSettings> = {}): Promise<AjaxResponse<T>> {
-  XHR.assertSameOrigin(url)
-  const method = XHR.Methods.GET
+  sendWithRetry.assertSameOrigin(url)
+  const method = sendWithRetry.Methods.GET
   const response = await sendWithRetry({
     url,
     method,
     params,
     ...options,
-  }, XHR.getDefaults)
+  }, sendWithRetry.getDefaults)
   logRequestData(response, method, url)
   return response
 }
@@ -731,13 +732,13 @@ async function getPaginated<T = any>(url: string, options: Record<string, any> =
       ...res.data,
       pagination: res.data!.pagination
         ? {
-            nextPage: res.data.pagination?.next_page ?? null,
-            prevPage: res.data.pagination?.prev_page ?? null,
-          }
+          nextPage: res.data.pagination?.next_page ?? null,
+          prevPage: res.data.pagination?.prev_page ?? null,
+        }
         : {
-            nextPage: null,
-            prevPage: null,
-          },
+          nextPage: null,
+          prevPage: null,
+        },
     },
   }
 }
@@ -798,15 +799,15 @@ class Timer {
 export const API = {
   get: getRequest,
   getPaginated,
-  put: XHR.put,
-  post: XHR.post,
-  del: XHR.del,
-  patch: XHR.patch,
-  crossOriginGet: XHR.crossOriginGet,
+  put: sendWithRetry.put,
+  post: sendWithRetry.post,
+  del: sendWithRetry.del,
+  patch: sendWithRetry.patch,
+  crossOriginGet: sendWithRetry.crossOriginGet,
 }
 // Exported API
-export let $$O0 = XHR
-export const Ay = XHR
+export let $$O0 = sendWithRetry
+export const Ay = sendWithRetry
 export const Dr = XHRError
 export const Fs = shouldSampleRequest
 export const GD = getRequest

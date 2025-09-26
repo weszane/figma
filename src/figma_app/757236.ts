@@ -17,10 +17,10 @@ import { c as _$$c2 } from "../905/932790";
 import { getSelectedNodesWithinBreakpointFrame } from "../905/913055";
 import { useSceneGraphSelection } from "../figma_app/722362";
 import { JT, KL } from "../figma_app/632248";
-import { s as _$$s, w as _$$w } from "../905/286488";
+import { useSelectionState, SelectionState } from "../905/286488";
 import { RL, qy, B3, pP, z8 } from "../figma_app/862289";
 import { cq } from "../905/794154";
-import { a as _$$a } from "../905/290931";
+import { setupPromptHistory } from "../905/290931";
 import { n as _$$n } from "../905/353086";
 import { E as _$$E, f as _$$f } from "../905/690713";
 import { A as _$$A } from "../905/721854";
@@ -31,7 +31,7 @@ import { bu, Hd, Vz, Jd } from "../figma_app/878113";
 import { zA } from "../905/987149";
 export function $$D0() {
   let [e, t] = useState(!1);
-  let r = _$$s(JT.CONTENT_FILL);
+  let r = useSelectionState(JT.CONTENT_FILL);
   let a = RL(JT.CONTENT_FILL, _$$c2);
   let s = useSceneGraphSelection();
   let {
@@ -40,8 +40,8 @@ export function $$D0() {
   } = a;
   let [u, _] = useState("");
   return (useEffect(() => {
-    r.state === _$$w.SELECTION_OK && state === qy.INITIAL ? t(!!(ComponentPropsAiCPPBindings && ComponentPropsAiCPPBindings.repeatedContentFillAvailableBindings())) : r.state !== _$$w.SELECTION_OK && t(!1);
-  }, [r.state, state, s]), r.state === _$$w.SELECTION_OK || state !== qy.INITIAL) ? e ? jsx($$F, {
+    r.state === SelectionState.SELECTION_OK && state === qy.INITIAL ? t(!!(ComponentPropsAiCPPBindings && ComponentPropsAiCPPBindings.repeatedContentFillAvailableBindings())) : r.state !== SelectionState.SELECTION_OK && t(!1);
+  }, [r.state, state, s]), r.state === SelectionState.SELECTION_OK || state !== qy.INITIAL) ? e ? jsx($$F, {
     prompt: u,
     onChangePrompt: _
   }) : jsx(M, {
@@ -84,7 +84,7 @@ function k({
   let {
     promptHistory,
     addPromptToHistory
-  } = _$$a(_$$i, e => e);
+  } = setupPromptHistory(_$$i, e => e);
   let I = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
   let [N, C] = useState(ImageSourceType.UNSPLASH);
   let L = RL(JT.IMAGE_FILL, F1);
@@ -329,7 +329,7 @@ function j(e) {
 }
 export function $$U1() {
   let e = RL(JT.CONTENT_FILL, _$$c2);
-  let t = _$$s(JT.CONTENT_FILL);
+  let t = useSelectionState(JT.CONTENT_FILL);
   let {
     start,
     stop,
@@ -340,7 +340,7 @@ export function $$U1() {
     close
   } = cq();
   switch (useEffect(() => {
-    t.state === _$$w.SELECTION_OK && state === qy.INITIAL && start({
+    t.state === SelectionState.SELECTION_OK && state === qy.INITIAL && start({
       guids: [],
       numExampleRows: 1,
       source: "ACTIONS_MENU"

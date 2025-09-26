@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMemoStable } from '../905/19536';
 import { aR } from '../905/128313';
 import { KindEnum } from '../905/129884';
-import { pf } from '../905/221848';
+import { getComponentTooltipData } from '../905/221848';
 import { n as _$$n } from '../905/347702';
 import { createOptimistThunk } from '../905/350402';
 import { getFeatureFlags } from '../905/601108';
@@ -23,7 +23,7 @@ let $$I6 = e => ['preferredValuesInstancePicker', ...e];
 let $$S0 = e => ({
   'data-tooltip-type': KindEnum.TEXT,
   'data-tooltip-show-left': !0,
-  ...pf(e)
+  ...getComponentTooltipData(e)
 });
 let v = () => {};
 let A = new Promise(e => {

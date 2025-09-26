@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, forwardRef, useState, useCallback } from "react";
 import a from "classnames";
-import { Q } from "../905/911623";
+import { useClickHandler } from "../905/911623";
 import { RecordableButton } from "../905/511649";
 import { getBasename } from "../905/309735";
 import { KindEnum } from "../905/129884";
@@ -34,7 +34,7 @@ let $$$$h0 = memo(forwardRef(function ({
     onClick,
     onMouseUp,
     onMouseLeave
-  } = Q({
+  } = useClickHandler({
     onClick: d,
     onMouseLeave: useCallback(e => {
       b(!1);
@@ -93,7 +93,7 @@ let $$g1 = forwardRef(function ({
     onClick,
     onMouseUp,
     onMouseLeave
-  } = Q({
+  } = useClickHandler({
     onClick: h,
     onMouseLeave: y
   });

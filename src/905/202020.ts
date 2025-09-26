@@ -12,7 +12,7 @@ import { h1 } from "../905/986103";
 import { p as _$$p } from "../905/991924";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { WB } from "../905/761735";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { VisualBellActions } from "../905/302958";
 import { trackFileBrowserFileClick, trackFileArrayEvent } from "../figma_app/314264";
@@ -47,7 +47,7 @@ let x = createOptimistThunk(async (e, t) => {
     name: t.name,
     updated_at: new Date().toISOString()
   };
-  let n = XHR.put(`/api/files/${t.branch.key}`, i);
+  let n = sendWithRetry.put(`/api/files/${t.branch.key}`, i);
   await WB().optimisticallyUpdate({
     File: {
       [t.branch.key]: {
@@ -74,7 +74,7 @@ let S = createOptimistThunk(async (e, t) => {
   trackFileArrayEvent("File Restored", t.branches);
 });
 let w = createOptimistThunk(async (e, t) => {
-  let i = XHR.del("/api/files_batch", {
+  let i = sendWithRetry.del("/api/files_batch", {
     files: t.branches.map(e => ({
       key: e.key
     })),
@@ -217,7 +217,7 @@ export function $$V0(e) {
   return jsxs("li", {
     className: `branch_row--container--MD7zC ${e.isSelected ? "branch_row--selected--qBm47" : ""}`,
     onContextMenu: e => {
-      if (e.preventDefault(), e.stopPropagation(), m) t(hideDropdownAction());else {
+      if (e.preventDefault(), e.stopPropagation(), m) t(hideDropdownAction()); else {
         let n = {
           top: e.clientY,
           right: e.clientX,
@@ -313,7 +313,7 @@ export function $$V0(e) {
       className: "branch_row--menuColumn--XSWVZ",
       children: jsx(_$$d, {
         onClick: e => {
-          if (e.stopPropagation(), e.preventDefault(), m) t(hideDropdownAction());else {
+          if (e.stopPropagation(), e.preventDefault(), m) t(hideDropdownAction()); else {
             let e = A.current;
             t(showDropdownThunk({
               type: i,

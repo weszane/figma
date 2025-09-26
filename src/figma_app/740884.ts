@@ -7,7 +7,7 @@ import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
 import { handleAtomEvent } from "../905/502364";
 import { hx } from "../figma_app/290668";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { KindEnum } from "../905/129884";
 import { FH, u as _$$u } from "../905/38438";
 var d = l;
@@ -25,7 +25,7 @@ export function $$g0({
   recordingKey: I,
   canOpenDropdown: S
 }) {
-  let v = BK(r);
+  let v = useDropdown(r);
   let A = E || createRef();
   return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseDown"],

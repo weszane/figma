@@ -7,7 +7,7 @@ import { DialogContents, DialogHiddenTitle, DialogBody } from "../figma_app/2722
 import { A as _$$A } from "../905/920165";
 import { trackEventAnalytics } from "../905/449184";
 import { ButtonBasePrimaryTracked } from "../figma_app/637027";
-import { x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -24,7 +24,7 @@ let $$x0 = registerModal(function (e) {
   let i = useContext(ThemeContext);
   let o = useSelector(e => e.avatarEditorState);
   let l = useModalManager(e);
-  return jsx(x, {
+  return jsx(LoadingRenderer, {
     isLoading: o.status !== hv.POSITIONING,
     children: () => jsx(w, {
       ...e,
@@ -214,7 +214,7 @@ class w extends Component {
         children: [jsx(DialogHiddenTitle, {
           children: renderI18nText("avatar_editor.modal_title")
         }), jsx(DialogBody, {
-          children: jsx(x, {
+          children: jsx(LoadingRenderer, {
             isLoading: this.props.avatarEditorState.status !== hv.POSITIONING,
             children: () => jsxs("div", {
               className: cssBuilderInstance.flex.flexColumn.gap24.itemsCenter.$,

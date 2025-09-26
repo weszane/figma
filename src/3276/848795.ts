@@ -1,7 +1,7 @@
-import { b } from "../905/275748";
+import { LazyComponentFactory } from "../905/275748";
 import _require from "../048e062c/42307";
 import { NONE_SYMBOL } from "../905/992467";
-export let $$a0 = new b({
+export let $$a0 = new LazyComponentFactory({
   name: "react_scenegraph",
   dependencies: [],
   exports: {

@@ -14,7 +14,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { ModelTypeConfigs, getModelTypeHeaderI18n, FolderType, FileBrowserAction, TeamSortField, PublicModelType, CreatorResourceType, convertModelTypeToSearchModelType, SearchModelType } from "../figma_app/162807";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { clearWorkspaceFilterThunk, trackLicenseGroupFilterDropdownClickThunk, sortStateThunk, selectPlanFilterThunk, clearPlanFilterThunk, selectWorkspaceFilterThunk } from "../905/977218";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { SortOrder } from "../figma_app/756995";
 import { y2 } from "../905/776312";
 import { P_, J as _$$J, l4 } from "../905/124270";
@@ -37,7 +37,7 @@ import { e as _$$e } from "../905/621515";
 import { UC } from "../figma_app/33126";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { tBR } from "../figma_app/6204";
 import { A as _$$A2 } from "../6828/154709";
 import { xH as _$$xH, zQ as _$$zQ } from "../905/378567";
@@ -157,7 +157,7 @@ function et() {
       canShow: (e, t, i) => e && t && !i
     });
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     isShowing: o.isShowing,
     trackingContextName: "Search Workspace Onboarding",
     userFlagOnShow: X,
@@ -676,7 +676,7 @@ export function $$eD0(e) {
 function eL(e) {
   let t = useDispatch();
   let i = useRef(null);
-  let n = Um();
+  let n = useDropdownState();
   let o = n?.type === e.dropdownId;
   let c = n => {
     n.stopPropagation();

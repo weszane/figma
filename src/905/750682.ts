@@ -3,7 +3,7 @@ import { AppStateTsApi, DuplicateType, InteractionCpp, DesignGraphElements, Full
 import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { GJ, kP, Bm, ZR } from "../905/430950";
-import { j } from "../905/881708";
+import { NameClass } from "../905/881708";
 let d = "-1:-1";
 var c = (e => (e.INACTIVE = "inactive", e.FRAME_ALREADY_SELECTED = "frameAlreadySelected", e.HOVERED_INSIDE = "hoveredInside", e.HOVERED_OUTSIDE = "hoveredOutside", e.HOVERED_OVER_BUTTON_LEFT = "hoveredOverButtonLeft", e.HOVERED_OVER_BUTTON_RIGHT = "hoveredOverButtonRight", e))(c || {});
 let u = ["hoveredOverButtonLeft", "hoveredOverButtonRight"];
@@ -72,7 +72,7 @@ function f(e, t, i) {
   let a = packRgb(1, 1, 1);
   kP(e, t, i, AppStateTsApi.getCanvasButton(), a);
 }
-export class $$$$_0 extends j {
+export class $$$$_0 extends NameClass {
   constructor(e) {
     super(e);
     this._state = "inactive";

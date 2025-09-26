@@ -5,7 +5,7 @@ import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { j } from "../905/881708";
+import { NameClass } from "../905/881708";
 import { aK, t6 } from "../figma_app/647246";
 import { Nl } from "../figma_app/115923";
 import { $e } from "../905/554703";
@@ -25,7 +25,7 @@ class _ {
     this.bounds = t;
   }
 }
-export class $$A0 extends j {
+export class $$A0 extends NameClass {
   constructor(e) {
     super(e);
     this.addButtonUiState = new _(!1, new Rectangle());

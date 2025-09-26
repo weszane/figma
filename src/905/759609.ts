@@ -20,7 +20,7 @@ import { Point } from "../905/736624";
 import { or, Ss, BL, xY, qW, u as _$$u } from "../905/720292";
 import { ec } from "../figma_app/449837";
 import { ImageBackedLoading } from "../figma_app/858013";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { hideModal } from "../905/156213";
@@ -32,7 +32,7 @@ import { d as _$$d } from "../figma_app/550089";
 import { KeyboardReceiver } from "../905/826900";
 import { AX, UX } from "../905/542608";
 import { se, TM, Mz, a7, RL } from "../figma_app/435826";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { tA, f2, xq, fe, B5, gU, q0, uj, jX } from "../905/255446";
 let U = "review_updates_modal--comparableUpdate--7MC8a";
 let B = "review_updates_modal--overlayImage--wx-oF";
@@ -48,7 +48,7 @@ function H({
     t.event.keyCode === KeyCodes.TAB && null != e.current && (e.current.focus(), t.accept());
   }, [e]);
   let o = new Point((window.innerWidth - tA) / 2, defaultPx + 12);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     dragHeaderOnly: !0,
     onClose: () => {
       i(hideModal());
@@ -235,7 +235,7 @@ function Y({
     style: {
       backgroundColor: s ? l : void 0
     },
-    children: jsx(_$$x, {
+    children: jsx(LoadingRenderer, {
       isLoading: !0,
       children: () => renderI18nText("design_systems.updates.preview_unavailable")
     })

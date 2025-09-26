@@ -40,18 +40,18 @@ import { TrackingProvider } from "../figma_app/831799";
 import { getEditorTypeFromView } from "../figma_app/976749";
 import { J as _$$J2 } from "../905/445197";
 import { fullscreenValue } from "../figma_app/455680";
-import { h_, Ie, qG, jb, _D, Cj } from "../905/291654";
-import { Kk, Rt } from "../905/777093";
+import { getEulaConfigIfGoogleFont, splitFontsByEula, hasAcceptedEula, requiresEula, isEditorTypeExcluded, maybeShowEulaModal } from "../905/291654";
+import { areFontsInitializedCheck, isAgentDetected } from "../905/777093";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { fontLoadingAtom } from "../figma_app/623300";
 import { KindEnum } from "../905/129884";
-import { pn } from "../905/714538";
+import { getFontStyleMapping } from "../905/714538";
 import { e0 as _$$e2 } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ay } from "../figma_app/628987";
 import { zz } from "../905/32188";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { sO } from "../figma_app/21029";
 import { R as _$$R } from "../905/256203";
@@ -125,10 +125,10 @@ let ex = _$$D(() => {
 });
 function eS(e) {
   return (useSingleEffect(() => {
-    Kk() || trackEventAnalytics("Missing Fonts Modal No Agent Banner Shown", {}, {
+    areFontsInitializedCheck() || trackEventAnalytics("Missing Fonts Modal No Agent Banner Shown", {}, {
       forwardToDatadog: !0
     });
-  }), Kk()) ? jsx(Fragment, {}) : jsx(ev, {
+  }), areFontsInitializedCheck()) ? jsx(Fragment, {}) : jsx(ev, {
     icon: jsx(SvgComponent, {
       svg: _$$A2,
       className: "missing_fonts_modal_no_agent_banner--warningIcon--AfKIM"
@@ -227,7 +227,7 @@ export let $$eZ0 = registerModal(function (e) {
   } = e;
   let h = "missingFontsModal";
   let g = useDispatch();
-  let f = Um();
+  let f = useDropdownState();
   let v = useSelector(e => e.fonts);
   let E = trackFileEventWithStore();
   let [S, C] = useState();
@@ -305,7 +305,7 @@ export let $$eZ0 = registerModal(function (e) {
       counts: i
     };
     useEffect(() => {
-      c(pn(e));
+      c(getFontStyleMapping(e));
     }, [c, e]);
     let w = useCallback((e, t) => {
       let i = {
@@ -392,7 +392,7 @@ export let $$eZ0 = registerModal(function (e) {
     let o = null;
     let l = i ? [a] : missingFontsInfoForCurrentScope.missingFonts.filter(e => e.family === a.family).filter(e => !eE || e.inSelection);
     let d = !1;
-    for (let e of l) if (null == t) delete r[eY(e)];else {
+    for (let e of l) if (null == t) delete r[eY(e)]; else {
       let i = versionsForStyles[t];
       o = function (e, t) {
         let i = ["ITALIC", "OBLIQUE"];
@@ -431,7 +431,7 @@ export let $$eZ0 = registerModal(function (e) {
     for (let n = 0; n < missingFontsInfoForCurrentScope.missingFonts.length; n++) {
       let r = missingFontsInfoForCurrentScope.missingFonts[n];
       if (!r) continue;
-      let a = h_(r?.family, v);
+      let a = getEulaConfigIfGoogleFont(r?.family, v);
       if (!a) continue;
       let s = !!replacements[eY(r)];
       a.eula === e && !s && (t[eY(r)] = {
@@ -497,8 +497,8 @@ export let $$eZ0 = registerModal(function (e) {
       let s = t ? a.filter(e => e.inSelection) : a;
       let {
         eulaFonts
-      } = Ie(s, i, r);
-      return eulaFonts.length === s.length && eulaFonts.every(e => qG(e.family, i, n));
+      } = splitFontsByEula(s, i, r);
+      return eulaFonts.length === s.length && eulaFonts.every(e => hasAcceptedEula(e.family, i, n));
     })(missingFontsInfoForCurrentScope, eE, v, Z, en) && (ez(), onClose());
   }, [ez, v, eE, missingFontsInfoForCurrentScope, onClose, Z, en]);
   let e0 = !T && eU.length > 1;
@@ -506,7 +506,7 @@ export let $$eZ0 = registerModal(function (e) {
   let e1 = Object.keys(replacements).filter(e => eK(replacements[e].newName)).length > 0;
   return jsx(TrackingProvider, {
     name: _$$e2.MISSING_FONTS_MODAL,
-    children: jsxs(Ao, {
+    children: jsxs(DraggableModalManager, {
       initialPosition: S,
       container: eQ,
       containerProps: {
@@ -574,7 +574,7 @@ export let $$eZ0 = registerModal(function (e) {
           children: jsx(ec, {})
         })]
       }), jsxs("div", {
-        className: cssBuilderInstance.p12.flex.bt1.bSolid.colorBorder.$$if(e0 || eE, cssBuilderInstance.justifyBetween, cssBuilderInstance.justifyEnd).$,
+        className: cssBuilderInstance.p12.flex.bt1.bSolid.colorBorder.if(e0 || eE, cssBuilderInstance.justifyBetween, cssBuilderInstance.justifyEnd).$,
         children: [eE && jsx(Checkbox, {
           checked: scope === PageSelectionType.CURRENT_PAGE,
           onChange: () => setScope(scope === PageSelectionType.CURRENT_PAGE ? PageSelectionType.CURRENT_SELECTION : PageSelectionType.CURRENT_PAGE),
@@ -615,7 +615,7 @@ export let $$eZ0 = registerModal(function (e) {
             disabled: !e1 || isReplacing || isLoadingMissingFonts,
             onClick: onApply,
             children: [jsx("span", {
-              style: styleBuilderInstance.$$if(isReplacing, styleBuilderInstance.invisible).$,
+              style: styleBuilderInstance.if(isReplacing, styleBuilderInstance.invisible).$,
               children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.replace_fonts")
             }), isReplacing && jsx("span", {
               className: cssBuilderInstance.absolute.leftHalf.topHalf.$,
@@ -652,7 +652,7 @@ function eX({
   let w = useSelector(e => e.userFlags);
   let C = useSelector(e => e.selectedView);
   let k = getEditorTypeFromView(C);
-  let R = jb(x.family, d, w) && !_D(x.family, k);
+  let R = requiresEula(x.family, d, w) && !isEditorTypeExcluded(x.family, k);
   let N = getI18nString("fullscreen.toolbar.missing_fonts_modal.select_items_count_using_this_font", {
     numItems: T()(m.missingFonts.map((e, t) => e.family === x.family ? m.counts?.[t] : 0))
   });
@@ -673,11 +673,11 @@ function eX({
     })
   }), [N, x?.family, m.missingFonts, b, t]);
   let D = useCallback(async () => {
-    let e = h_(x.family, d)?.eula;
-    (await Cj(x.family, w, d, u, "missing_fonts_modal")) && e && v(e);
+    let e = getEulaConfigIfGoogleFont(x.family, d)?.eula;
+    (await maybeShowEulaModal(x.family, w, d, u, "missing_fonts_modal")) && e && v(e);
   }, [u, x.family, d, v, w]);
   return jsxs("div", {
-    className: I()(cssBuilderInstance.flex.itemsStretch.flexNone.$$if(s, cssBuilderInstance.flexColumn, cssBuilderInstance.itemsCenter).py4.px12.$, s ? "" : eb),
+    className: I()(cssBuilderInstance.flex.itemsStretch.flexNone.if(s, cssBuilderInstance.flexColumn, cssBuilderInstance.itemsCenter).py4.px12.$, s ? "" : eb),
     children: [jsxs("div", {
       className: I()(cssBuilderInstance.flex.flexGrow1.itemsCenter.textBodyMedium.minH32.$, eb),
       children: [jsxs(ButtonPrimitive, {
@@ -821,7 +821,7 @@ function eX({
 function eQ(e) {
   let t = "number" == typeof ex() && ex() > Date.now() / 1e3 - 604800;
   let [i, a] = useState(!1);
-  let s = getFeatureFlags().ce_mfm_no_agent_banner && Rt() && !i && !t && !Kk();
+  let s = getFeatureFlags().ce_mfm_no_agent_banner && isAgentDetected() && !i && !t && !areFontsInitializedCheck();
   return jsxs(Fragment, {
     children: [e.children, s && jsx(eS, {
       onDismiss: () => {

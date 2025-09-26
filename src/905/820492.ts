@@ -24,7 +24,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { R as _$$R } from "../905/792510";
+import { SocialLinks } from "../905/792510";
 import { getCommunityHubLikeStatus } from "../905/841666";
 import { Lj } from "../figma_app/835219";
 import { buildFullCommunityUrl, getCurrentVersion } from "../figma_app/471982";
@@ -64,7 +64,7 @@ import { e0 as _$$e3 } from "../905/696396";
 import { profileServiceAPI } from "../905/608932";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { pz } from "../figma_app/825489";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { $ as _$$$ } from "../905/241406";
 import { F4, _g } from "../figma_app/60023";
 import { A as _$$A2 } from "../905/172237";
@@ -1258,7 +1258,7 @@ class ts extends Component {
         isEditHubFilePageMode: this.props.isEditHubFilePageMode,
         userId: this.props.user.id
       },
-      children: jsx(OJ, {
+      children: jsx(HeaderModal, {
         title: this.props.isEditHubFilePageMode ? getI18nString("community.publishing.edit_file_page") : i ? getI18nString("community.publishing.publish_slide_deck_template") : getI18nString("community.publishing.publish_file"),
         minWidth: tn,
         maxWidth: tn,
@@ -1499,7 +1499,7 @@ let $$tl0 = registerModal(function (e) {
         }), jsx("p", {
           className: h_,
           children: s ? renderI18nText("community.publishing.feel_free_to_edit_your_page.file") : a ? renderI18nText("community.publishing.help_people_discover_your_template") : renderI18nText("community.publishing.help_people_discover_your_file")
-        }), e.hubFile && !e.isPaid ? jsx(_$$R, {
+        }), e.hubFile && !e.isPaid ? jsx(SocialLinks, {
           author: Lj(e.hubFile),
           resourceType: ResourceTypeNoComment.HUB_FILE,
           resourceURL: buildFullCommunityUrl(e.hubFile),

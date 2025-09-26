@@ -4,7 +4,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
-import { b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { H } from "../905/184637";
 let u = ms;
 let p = c$;
@@ -21,7 +21,7 @@ let $$h0 = memo(function () {
   }));
   let i = dropdownShown?.data?.component;
   let o = i?.file_key === openFileKey;
-  let h = b({
+  let h = useLibraryFileLink({
     libraryKey: i?.library_key,
     nodeId: i?.node_id
   });

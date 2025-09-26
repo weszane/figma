@@ -9,7 +9,7 @@ import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { c$ } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { rW } from "../figma_app/852050";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { Cf } from "../905/504727";
 import { i as _$$i } from "../905/415810";
 import { F } from "../905/604606";
@@ -30,7 +30,7 @@ export function $$E0(e) {
     showing,
     toggle,
     hide
-  } = BK(e.id);
+  } = useDropdown(e.id);
   let s = useRef(null);
   let o = useCallback(() => {
     toggle();

@@ -41,7 +41,7 @@ import { d as _$$d } from '../905/720066';
 import { b0 } from '../905/763690';
 import { $b, h2 } from '../905/820960';
 import { useCurrentUserOrgId } from '../905/845253';
-import { BK } from '../905/848862';
+import { useDropdown } from '../905/848862';
 import { InterProfileType } from '../905/895626';
 import { selectViewAction } from '../905/929976';
 import { v as _$$v } from '../905/939922';
@@ -777,7 +777,7 @@ function e7(e) {
     data
   } = function () {
     let e = useId();
-    return BK(`USER_DROPDOWN_${e}`);
+    return useDropdown(`USER_DROPDOWN_${e}`);
   }();
   let p = useCallback((e, t, i) => {
     e.length === 1 && show({

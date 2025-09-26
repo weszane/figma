@@ -7,7 +7,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_
 import { Button } from "../905/521428";
 import { openWindow } from "../905/508367";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { TextWithTruncation } from "../905/984674";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
@@ -47,7 +47,7 @@ let $$S0 = registerModal(function (e) {
     try {
       W(!0);
       S(null);
-      await XHR.del(`/api/integrations/supabase/${r}/authorization`);
+      await sendWithRetry.del(`/api/integrations/supabase/${r}/authorization`);
       F.refetch();
     } catch (e) {
       S(`Failed to revoke authorization: ${e}`);
@@ -85,9 +85,9 @@ let $$S0 = registerModal(function (e) {
       } catch (e) {
         S(`Failed to fetch projects: ${e}`);
       } finally {
-        W(!1);
-        R("");
-      }
+          W(!1);
+          R("");
+        }
     })();
   }, [B, G, V, H, r]);
   let q = async () => {
@@ -103,7 +103,7 @@ let $$S0 = registerModal(function (e) {
         S("Selected project not found");
         return;
       }
-      await XHR.post(`/api/integrations/supabase/${r}/connect`, APIParameterUtils.toAPIParameters({
+      await sendWithRetry.post(`/api/integrations/supabase/${r}/connect`, APIParameterUtils.toAPIParameters({
         supabase_project_id: e.id,
         supabase_org_id: e.organization_id
       }));
@@ -143,7 +143,7 @@ let $$S0 = registerModal(function (e) {
         S("/supabase/functions/server/index.tsx not found");
         return;
       }
-      await XHR.post(`/api/integrations/supabase/${r}/edge_functions/make-server/deploy`, {
+      await sendWithRetry.post(`/api/integrations/supabase/${r}/edge_functions/make-server/deploy`, {
         files: t
       });
       A("Deployed function - it may take a few seconds to spin up");
@@ -158,7 +158,7 @@ let $$S0 = registerModal(function (e) {
       W(!0);
       S(null);
       A(null);
-      await XHR.post(`/api/integrations/supabase/${r}/project/pause`);
+      await sendWithRetry.post(`/api/integrations/supabase/${r}/project/pause`);
       A("Paused project - you may need to refresh status to see updates");
     } catch (e) {
       S(`Failed to pause project: ${e}`);
@@ -171,7 +171,7 @@ let $$S0 = registerModal(function (e) {
       W(!0);
       S(null);
       A(null);
-      await XHR.post(`/api/integrations/supabase/${r}/project/restore`);
+      await sendWithRetry.post(`/api/integrations/supabase/${r}/project/restore`);
       A("Restored project - you may need to refresh status to see updates");
     } catch (e) {
       S(`Failed to restore project: ${e}`);
@@ -189,7 +189,7 @@ let $$S0 = registerModal(function (e) {
         S("Secret value cannot be empty");
         return;
       }
-      await XHR.post(`/api/integrations/supabase/${r}/secrets`, APIParameterUtils.toAPIParameters({
+      await sendWithRetry.post(`/api/integrations/supabase/${r}/secrets`, APIParameterUtils.toAPIParameters({
         secret_name: L,
         secret_value: D
       }));

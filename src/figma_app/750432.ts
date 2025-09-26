@@ -11,13 +11,13 @@ export let $$d0 = forwardRef(function (e, t) {
     className: `${z} ${e.className || ""}`,
     "data-tooltip-type": e.hoverText ? KindEnum.TEXT : void 0,
     "data-tooltip": e.hoverText,
-    style: styleBuilderInstance.$$if(e.size, {
+    style: styleBuilderInstance.if(e.size, {
       width: `${r}px`,
       height: `${r}px`,
       lineHeight: `${r}px`
-    }).$$if(e.textColor, {
+    }).if(e.textColor, {
       color: getTextColor(e.textColor)
-    }).$$if(e.backgroundColor, {
+    }).if(e.backgroundColor, {
       backgroundColor: getBackgroundColor(e.backgroundColor)
     }).$,
     children: e.text

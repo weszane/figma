@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import a from "../vendor/879378";
 import { A } from "../vendor/21595";
 import { createActionCreator } from "../905/73481";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -19,7 +19,7 @@ var s = a;
 createOptimistThunk(async (e, t) => {
   let r = t.team.id;
   try {
-    let n = (await XHR.put(`/api/teams/${r}`, {
+    let n = (await sendWithRetry.put(`/api/teams/${r}`, {
       org_access: t.orgAccess
     })).data.meta;
     e.dispatch($$O8({
@@ -37,7 +37,7 @@ let $$T7 = createOptimistThunk(async (e, t) => {
   }), Object.keys(r).length) try {
     let t = Object.keys(r).map(e => {
       let t = r[e];
-      return XHR.del(`/api/workspace/${e}/teams`, {
+      return sendWithRetry.del(`/api/workspace/${e}/teams`, {
         team_ids: t
       });
     });
@@ -57,7 +57,7 @@ let $$I10 = createOptimistThunk(async (e, t) => {
   let r = t.teams.map(e => e.id);
   let n = t.workspaceId;
   try {
-    let i = (await XHR.post(`/api/workspace/${n}/teams`, {
+    let i = (await sendWithRetry.post(`/api/workspace/${n}/teams`, {
       team_ids: r
     })).data.meta;
     e.dispatch($$O8({
@@ -99,7 +99,7 @@ let $$S6 = createOptimistThunk((e, t) => {
   e.dispatch(loadingStatePutLoading({
     key: a
   }));
-  XHR.post(`/api/orgs/${r}/teams/join`, i).then(() => {
+  sendWithRetry.post(`/api/orgs/${r}/teams/join`, i).then(() => {
     e.dispatch(UM({
       teamIds: n,
       level: t.level
@@ -122,7 +122,7 @@ let v = createOptimistThunk((e, t) => {
   e.dispatch(loadingStatePutLoading({
     key: a
   }));
-  XHR.post(`/api/orgs/${r}/teams/join`, i).then(() => {
+  sendWithRetry.post(`/api/orgs/${r}/teams/join`, i).then(() => {
     e.dispatch(vr({
       teamId: n,
       level: t.level

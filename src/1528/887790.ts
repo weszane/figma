@@ -11,7 +11,7 @@ import { PanelWidth, DefinitionAssignment } from "../figma_app/164212";
 import { useSingleNodePropDefinitions } from "../figma_app/626952";
 import { qC, tO } from "../figma_app/545190";
 import { iN, NA } from "../figma_app/760428";
-import { S as _$$S } from "../905/459477";
+import { fileLaunchHelper as _$$S } from "../905/459477";
 import { DK, q9 } from "../1528/85853";
 import { A as _$$A2 } from "../1617/230645";
 var i = r;

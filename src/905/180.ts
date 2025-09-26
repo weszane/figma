@@ -1,4 +1,4 @@
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
 
 /**
@@ -159,7 +159,7 @@ export const BuyerAPIHandler = new class {
    * Update Billing Details (original: updateBillingDetails)
    */
   updateBillingDetails = (params: any): Promise<any> =>
-    XHR.post('/api/community/monetization/update_user_tax_info', params)
+    sendWithRetry.post('/api/community/monetization/update_user_tax_info', params)
 
   /**
    * Get Community Creator Payout Statements (original: getCmtyCreatorPayoutStatements)
@@ -173,7 +173,7 @@ export const BuyerAPIHandler = new class {
    * Update Slide Template Community Usage Count (original: updateSlideTemplateCommunityUsageCount)
    */
   updateSlideTemplateCommunityUsageCount = (params: SlideTemplateCommunityUsageParams): Promise<any> =>
-    XHR.post(`/api/hub_files/${params.hubFileId}/use_hub_file`)
+    sendWithRetry.post(`/api/hub_files/${params.hubFileId}/use_hub_file`)
 }()
 
 export const C = BuyerAPIHandler

@@ -10,12 +10,12 @@ import { cortexAPI } from "../figma_app/432652";
 import { ErrorType } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { JT, pY } from "../figma_app/632248";
-import { s as _$$s, w as _$$w } from "../905/286488";
+import { useSelectionState, SelectionState } from "../905/286488";
 import { z8, qy, B3 } from "../figma_app/862289";
 import { cq } from "../905/794154";
-import { a as _$$a } from "../905/290931";
+import { setupPromptHistory } from "../905/290931";
 import { U } from "../figma_app/441035";
-import { $J } from "../905/278499";
+import { AIActionIterationResult } from "../905/278499";
 import { f as _$$f, E as _$$E } from "../905/690713";
 import { A as _$$A } from "../905/721854";
 import { Oq, is } from "../905/904596";
@@ -78,7 +78,7 @@ export function $$M0() {
   let {
     promptHistory,
     addPromptToHistory
-  } = _$$a(k, e => e);
+  } = setupPromptHistory(k, e => e);
   let {
     shiftAllNodesOutOfSlideMargins,
     resetShiftedNodes,
@@ -140,7 +140,7 @@ export function $$M0() {
     tasks
   } = K;
   let et = Ne();
-  let er = _$$s(JT.REWRITE_TEXT);
+  let er = useSelectionState(JT.REWRITE_TEXT);
   let en = tasks.length;
   let ei = tasks.filter(e => e.state === z8.FAILED).length;
   switch (state) {
@@ -155,8 +155,8 @@ export function $$M0() {
       });
     case qy.INITIAL:
       switch (er.state) {
-        case _$$w.NEEDS_INITIAL_SELECTION:
-        case _$$w.SELECTION_LOST:
+        case SelectionState.NEEDS_INITIAL_SELECTION:
+        case SelectionState.SELECTION_LOST:
           return jsx(_$$A, {
             action: JT.REWRITE_TEXT,
             actionLabel: renderI18nText("fullscreen_actions.quick_actions.rewrite-this"),
@@ -172,7 +172,7 @@ export function $$M0() {
             },
             children: renderI18nText("ai_text_tools.selection_instruction")
           });
-        case _$$w.SELECTION_OK:
+        case SelectionState.SELECTION_OK:
           return jsx(_$$A2, {
             action: JT.REWRITE_TEXT,
             aiTrackingContext,
@@ -259,7 +259,7 @@ export function $$M0() {
         }],
         aiTrackingContext: {
           ...aiTrackingContext,
-          iteration_view_type: $J.SUCCESS_WITH_ITERATION
+          iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION
         },
         recordingKey: "rewriteText",
         targets: lastRun ? lastRun.targets.map(e => e.node.guid) : void 0

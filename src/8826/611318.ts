@@ -78,9 +78,9 @@ import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Fy, mp } from "../figma_app/579169";
 import { N as _$$N2 } from "../figma_app/268271";
-import { y as _$$y } from "../905/129046";
-import { rq } from "../905/425180";
-import { F_ } from "../905/858282";
+import { ImageOverlayComponent } from "../905/129046";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/858282";
 import { c$$ } from "../figma_app/6204";
 import { e as _$$e2 } from "../905/810361";
 import { Yh } from "../figma_app/357047";
@@ -1106,12 +1106,12 @@ function tl() {
   let a = () => {
     complete();
   };
-  return jsx(rq, {
-    arrowPosition: F_.RIGHT_BODY,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: renderI18nText("fullscreen.grid_onboarding.body"),
     disableHighlight: !0,
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("2e525d09f6957555822a1b327dea20c644cea10d"),
       alt: "A GIF demonstrating a frame with grid layout applied.",
       aspectRatio: 16 / 9

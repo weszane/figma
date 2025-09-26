@@ -6,7 +6,7 @@ import { KeyCodes } from '../905/63728';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
 import { hideModal } from '../905/156213';
-import { h as _$$h } from '../905/284399';
+import { OnboardingRenderFrame } from '../905/284399';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { P as _$$P } from '../905/347284';
 import { selectCurrentUser } from '../905/372672';
@@ -26,7 +26,7 @@ import { SvgComponent } from '../905/714743';
 import { M8 } from '../905/772425';
 import { useCurrentUserOrgId } from '../905/845253';
 import { E as _$$E } from '../905/881732';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { selectViewAction } from '../905/929976';
 import { selectUserFlag } from '../905/940356';
 import { NONE_SYMBOL } from '../905/992467';
@@ -47,7 +47,7 @@ import { useSubscription } from '../figma_app/288654';
 import { p as _$$p } from '../figma_app/353099';
 import { getSelectedView } from '../figma_app/386952';
 import { S as _$$S } from '../figma_app/420927';
-import { LN, q3 } from '../figma_app/450829';
+import { CornerPosition, OverlayType } from '../figma_app/450829';
 import { throwTypeError } from '../figma_app/465776';
 import { ButtonBasePrimaryTracked } from '../figma_app/637027';
 import { zl } from '../figma_app/641749';
@@ -119,22 +119,22 @@ function ee(e) {
   let u = function (e, t, n, o, i) {
     let s = i ?? 0;
     switch (o) {
-      case LN.BOTTOM_LEFT:
+      case CornerPosition.BOTTOM_LEFT:
         return {
           top: e.bottom - (n + s),
           left: e.left + s
         };
-      case LN.BOTTOM_RIGHT:
+      case CornerPosition.BOTTOM_RIGHT:
         return {
           top: e.bottom - (n + s),
           left: e.right - (t + s)
         };
-      case LN.TOP_RIGHT:
+      case CornerPosition.TOP_RIGHT:
         return {
           top: e.top + s,
           left: e.right - (t + s)
         };
-      case LN.CENTER:
+      case CornerPosition.CENTER:
         return {
           top: e.top + (e.height - n) / 2,
           left: e.left + (e.width - t) / 2
@@ -183,8 +183,8 @@ function eo() {
   let d = useMemo(() => jsx(_$$S, {
     shortcut: 'Ctrl\xB1'
   }), []);
-  return jsx(_$$h, {
-    modalType: q3.SELF_CONTAINED,
+  return jsx(OnboardingRenderFrame, {
+    modalType: OverlayType.SELF_CONTAINED,
     element: useCallback(e => jsx(ee, {
       targetKey: en,
       dismissModal: e.dismissModal,
@@ -192,7 +192,7 @@ function eo() {
       ctaText: getI18nString('rcs.got_it'),
       onClickPrimaryCta: e.onClickPrimaryCta,
       width: 268,
-      modalLocation: LN.BOTTOM_LEFT,
+      modalLocation: CornerPosition.BOTTOM_LEFT,
       positionOffset: 16,
       children: jsx('p', {
         children: renderI18nText('rcs.feed_onboarding.zoom_pan.content', {
@@ -263,7 +263,7 @@ export let $$eb0 = registerModal(e => {
     });
   }), [e.postUuid]);
   useEffect(() => {
-    XHR.post(`/api/feed_posts/${e.postUuid}/mark_viewed`);
+    sendWithRetry.post(`/api/feed_posts/${e.postUuid}/mark_viewed`);
   }, [e.postUuid]);
   let [w, P] = useState(0);
   useEffect(() => {

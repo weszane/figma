@@ -1,5 +1,6 @@
 import { Ay as _$$Ay3, xk } from '@stylexjs/stylex';
 import F from 'classnames';
+import { noop } from 'lodash-es';
 import { Fragment as _$$Fragment, Children, cloneElement, createContext, createElement, forwardRef, isValidElement, memo, PureComponent, Suspense, useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { H as _$$H3, flushSync } from 'react-dom';
 import { connect, useDispatch, useSelector, useStore } from 'react-redux';
@@ -33,12 +34,12 @@ import { x as _$$x6 } from '../905/106997';
 import { g as _$$g4 } from '../905/125190';
 import { fullscreenPerfManager } from '../905/125218';
 import { GI, Vi } from '../905/125333';
-import { y as _$$y3 } from '../905/129046';
+import { ImageOverlayComponent } from '../905/129046';
 import { KindEnum } from '../905/129884';
 import { a as _$$a4, J as _$$J } from '../905/142348';
 import { E as _$$E2 } from '../905/142894';
 import { t as _$$t2 } from '../905/150656';
-import { M as _$$M2 } from '../905/152487';
+import { OnboardingSequence } from '../905/152487';
 import { showModalHandler } from '../905/156213';
 import { ox as _$$ox } from '../905/163832';
 import { ServiceCategories } from '../905/165054';
@@ -70,10 +71,10 @@ import { PluginUIManager } from '../905/261467';
 import { F as _$$F } from '../905/268366';
 import { Label } from '../905/270045';
 import { memoizeWithDeepEquality } from '../905/270781';
-import { b as _$$b } from '../905/275748';
+import { LazyComponentFactory } from '../905/275748';
 import { AutoInteractableWrapper } from '../905/277716';
 import { handleUrlAction } from '../905/280005';
-import { h as _$$h5 } from '../905/284399';
+import { OnboardingRenderFrame } from '../905/284399';
 import { ConnectedAppModal } from '../905/292707';
 import { e as _$$e1 } from '../905/295932';
 import { VisualBellActions } from '../905/302958';
@@ -100,7 +101,7 @@ import { debugState } from '../905/407919';
 import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A8 } from '../905/408320';
 import { browserCapabilities } from '../905/409121';
-import { rq as _$$rq } from '../905/425180';
+import { OnboardingModal } from '../905/425180';
 import { useModalManager } from '../905/437088';
 import { Link } from '../905/438674';
 import { W as _$$W2 } from '../905/442612';
@@ -113,7 +114,7 @@ import { e as _$$e0 } from '../905/457828';
 import { useMenu } from '../905/465888';
 import { Q as _$$Q4 } from '../905/467310';
 import { AutoLayout } from '../905/470281';
-import { A as _$$A7 } from '../905/475480';
+import { orgTrailHelper as _$$A7 } from '../905/475480';
 import { sendHistogram } from '../905/485103';
 import { handleAtomEvent } from '../905/502364';
 import { Y as _$$Y } from '../905/506207';
@@ -129,7 +130,7 @@ import { Button, ButtonLarge } from '../905/521428';
 import { registerTooltip } from '../905/524523';
 import { d as _$$d2 } from '../905/531325';
 import { _T as _$$_T, E5, jv, k4, Yi } from '../905/531551';
-import { B3, Sr } from '../905/535224';
+import { DesktopModalType, openUrlInDesktop } from '../905/535224';
 import { globalPerfTimer } from '../905/542194';
 import { N as _$$N3 } from '../905/544669';
 import { lu as _$$lu } from '../905/545842';
@@ -143,13 +144,13 @@ import { uo as _$$uo } from '../905/581543';
 import { k as _$$k6 } from '../905/582200';
 import { loadFeatureFlags } from '../905/586361';
 import { c1 as _$$c2, SW } from '../905/589717';
-import { TeamAvatar, UserAvatar, AvatarSize } from '../905/590952';
+import { AvatarSize, TeamAvatar, UserAvatar } from '../905/590952';
 import { K as _$$K } from '../905/591700';
 import { h as _$$h4 } from '../905/593407';
 import { useIsCanvasEditDisabled } from '../905/595131';
 import { bL as _$$bL3, gZ, HG } from '../905/598775';
 import { c as _$$c8 } from '../905/598842';
-import { $z as _$$$z } from '../905/599896';
+import { TrackedButton } from '../905/599896';
 import { getFeatureFlags } from '../905/601108';
 import { K as _$$K3 } from '../905/604638';
 import { QL } from '../905/609392';
@@ -157,7 +158,7 @@ import { i as _$$i3 } from '../905/610691';
 import { customHistory } from '../905/612521';
 import { getDesignFileUrl } from '../905/612685';
 import { setupThemeContext } from '../905/614223';
-import { ManuallyLabeledRadioRoot, ManuallyLabeledRadioOption } from '../905/618904';
+import { ManuallyLabeledRadioOption, ManuallyLabeledRadioRoot } from '../905/618904';
 import { e as _$$e8 } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { parseAndNormalizeQuery, parseQuery, parseQuerySimple } from '../905/634134';
@@ -176,7 +177,7 @@ import { isFigmascopeView } from '../905/694285';
 import { e0 as _$$e9, qo } from '../905/696396';
 import { getSingletonSceneGraph } from '../905/700578';
 import { liveStoreInstance } from '../905/713695';
-import { defaultColorManipulator, alphaColorManipulator } from '../905/713722';
+import { alphaColorManipulator, defaultColorManipulator } from '../905/713722';
 import { XA } from '../905/714160';
 import { SvgComponent } from '../905/714743';
 import { l as _$$l } from '../905/716947';
@@ -193,7 +194,7 @@ import { R as _$$R2 } from '../905/741991';
 import { c as _$$c0, s as _$$s7 } from '../905/744710';
 import { T as _$$T3 } from '../905/745591';
 import { u as _$$u5 } from '../905/747030';
-import { EL } from '../905/748636';
+import { PositioningStrategy } from '../905/748636';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes, RootErrorBoundaryFallback, useErrorBoundaryContext } from '../905/751457';
 import { Bm } from '../905/755627';
 import { isDefaultFile } from '../905/760074';
@@ -229,8 +230,8 @@ import { replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset, replaceUsed
 import { Db } from '../905/881862';
 import { NP } from '../905/889931';
 import { IY } from '../905/901759';
-import { le as _$$le } from '../905/904854';
-import { getRequest, XHR } from '../905/910117';
+import { DragDataHandler } from '../905/904854';
+import { getRequest, sendWithRetry } from '../905/910117';
 import { _L as _$$_L } from '../905/911410';
 import { fullscreenCrashHandler } from '../905/913008';
 import { F as _$$F6 } from '../905/915030';
@@ -241,7 +242,6 @@ import { selectViewAction } from '../905/929976';
 import { J as _$$J2 } from '../905/931050';
 import { q as _$$q2, s as _$$s6 } from '../905/932270';
 import { I as _$$I2 } from '../905/932503';
-import { noop } from 'lodash-es';
 import { v as _$$v4 } from '../905/939922';
 import { selectUserFlag } from '../905/940356';
 import { styleBuilderInstance } from '../905/941192';
@@ -405,7 +405,7 @@ import { M as _$$M6 } from '../figma_app/427802';
 import { qm } from '../figma_app/431689';
 import { aE as _$$aE } from '../figma_app/433401';
 import { CB } from '../figma_app/442259';
-import { q3 } from '../figma_app/450829';
+import { OverlayType } from '../figma_app/450829';
 import { additionalValue, flagValue, fullscreenValue, inputValue, modalValue, sessionValue, userValue } from '../figma_app/455680';
 import { Ws } from '../figma_app/459125';
 import { wV } from '../figma_app/462456';
@@ -516,7 +516,7 @@ import { I as _$$I3 } from '../figma_app/827540';
 import { TrackingProvider } from '../figma_app/831799';
 import { V1, XU } from '../figma_app/834392';
 import { autosaveFilesQuery } from '../figma_app/840917';
-import { isServerSideRedactionEnabled, isServerSideJournalRedactionEnabled } from '../figma_app/841197';
+import { isServerSideJournalRedactionEnabled, isServerSideRedactionEnabled } from '../figma_app/841197';
 import { A as _$$A2 } from '../figma_app/849799';
 import { a as _$$a5 } from '../figma_app/850056';
 import { uW as _$$uW2, ux as _$$ux, NY } from '../figma_app/851625';
@@ -1906,7 +1906,7 @@ let nV = memo(() => {
     })
   }) : null;
 });
-let nY = new _$$b({
+let nY = new LazyComponentFactory({
   name: 'community',
   description: 'The figma community product surface',
   exports: {
@@ -1941,7 +1941,7 @@ let nQ = nY.createLazyComponent(async () => {
   error: NONE_SYMBOL.NONE,
   componentName: 'CommunityView'
 });
-let n0 = new _$$b({
+let n0 = new LazyComponentFactory({
   name: 'fullscreen_cooper',
   dependencies: [],
   exports: {
@@ -2197,7 +2197,7 @@ function iW() {
       secondaryText: t,
       children: jsx(BigButtonPrimaryTracked, {
         onClick: () => {
-          Sr(redirectUrl, B3.COMMUNITY_INTERSTITIAL);
+          openUrlInDesktop(redirectUrl, DesktopModalType.COMMUNITY_INTERSTITIAL);
         },
         className: 'community_monetization_desktop_interstitial--button--Eq1kl',
         children: renderI18nText('community.buyer.return_to_desktop_app')
@@ -2212,7 +2212,7 @@ function iq() {
   let n = QL('hub_file_id');
   let i = QL('name');
   useEffect(() => {
-    XHR.post('/api/try/figjam', {
+    sendWithRetry.post('/api/try/figjam', {
       hub_file_id: n,
       locale: r,
       name: i
@@ -2399,7 +2399,7 @@ class au extends ad {
     }
   }
 }
-class ap extends _$$E2 {}
+class ap extends _$$E2 { }
 class af extends _$$R3 {
   constructor({
     migrationVersion: e,
@@ -2918,7 +2918,7 @@ class ak extends ad {
     return t ? this.editScopePropertyGenerator.generateEditScopeSnapshotsItem(t) : null;
   }
 }
-class aM extends _$$E2 {}
+class aM extends _$$E2 { }
 async function aF(e) {
   for (let t of [250, 250, 250, 500, 1e3, 1e3, ...Array.from({
     length: 24
@@ -3530,7 +3530,7 @@ function so({
   }), []);
   sl(t);
   let i = t.status === APILoadingStatus.INIT || t.status === APILoadingStatus.FAILURE;
-  let a = useCallback(e => !!i && new _$$le(e).isFile(), [i]);
+  let a = useCallback(e => !!i && new DragDataHandler(e).isFile(), [i]);
   let s = useCallback(async e => {
     if (i) {
       r(_$$ux());
@@ -3618,7 +3618,7 @@ function sl(e) {
     t(e);
   }, [e, t]);
 }
-let sf = new _$$b({
+let sf = new LazyComponentFactory({
   name: 'fullscreen_sites',
   dependencies: [],
   exports: {
@@ -3684,7 +3684,7 @@ let sf = new _$$b({
   componentName: 'LazySitesView',
   error: NONE_SYMBOL.NONE
 });
-let sE = new _$$b({
+let sE = new LazyComponentFactory({
   name: 'fullscreen_slides',
   dependencies: [],
   exports: {
@@ -4416,7 +4416,7 @@ function od() {
       canShow: ol
     }));
   }, [i, e]);
-  return jsx(_$$M2, {
+  return jsx(OnboardingSequence, {
     isShowing: i.isShowing,
     userFlagOnShow: oa,
     children: jsx(TrackingProvider, {
@@ -4550,10 +4550,10 @@ function oT() {
   }) => {
     e === 'complete' && (o(), a.reset());
   });
-  return jsx(_$$h5, {
+  return jsx(OnboardingRenderFrame, {
     element: o_,
     isShowing: s.isShowing,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     onClickPrimaryCta: s.complete,
     onClose: s.complete,
     onManualDismiss: s.complete,
@@ -4620,12 +4620,12 @@ function oL({
       canShow: e => !!e && e.status === _$$Q4.EXPIRED
     });
   }, [show, complete, isShowing, t]);
-  return jsx(_$$h5, {
+  return jsx(OnboardingRenderFrame, {
     isShowing,
     element: () => jsx(oO, {
       orgTrial: t.data
     }),
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: 'org_trial_expired_modal',
     onClose: complete,
     onClickPrimaryCta: complete,
@@ -4732,7 +4732,7 @@ function oj(e) {
       children: [jsx(_$$h6, {
         text: renderI18nText('payments_modal.org_trial.switch_my_workspace'),
         dataTestId: 'workspace-switcher-link'
-      }), d && jsx(_$$$z, {
+      }), d && jsx(TrackedButton, {
         disabled: r,
         variant: 'primary',
         onClick: () => {
@@ -4793,12 +4793,12 @@ function oG({
       canShow: e => !!e && e.status === _$$Q4.PENDING
     });
   }, [show, complete, isShowing, t]);
-  return jsx(_$$h5, {
+  return jsx(OnboardingRenderFrame, {
     isShowing,
     element: () => t.data ? jsx(oj, {
       orgTrial: t.data
     }) : null,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: 'org_trial_pending_modal',
     onClose: complete,
     onClickPrimaryCta: complete,
@@ -4824,7 +4824,7 @@ function oZ({
   let a = useModalManager({
     preventUserClose: !0,
     open: !0,
-    onClose: () => {}
+    onClose: () => { }
   });
   let s = useCallback(async () => {
     if (!t) {
@@ -4976,7 +4976,7 @@ function o1({
     isShowing && t.data?.status !== _$$Q4.PENDING ? complete() : show({
       canShow: e => e?.status === _$$Q4.PENDING
     });
-  }, [show, complete, isShowing, t]), getFeatureFlags().product_trials_lg) ? jsx(_$$M2, {
+  }, [show, complete, isShowing, t]), getFeatureFlags().product_trials_lg) ? jsx(OnboardingSequence, {
     isShowing,
     testId: 'product_trial_pending_overlay',
     children: t.data ? jsx(TrackingProvider, {
@@ -6287,7 +6287,7 @@ function d1({
     })
   });
 }
-let d9 = new _$$b({
+let d9 = new LazyComponentFactory({
   name: 'File Browser UI',
   dependencies: [],
   exports: {
@@ -7087,7 +7087,7 @@ function uy(e) {
     href: 'https://help.figma.com/hc/articles/31440394517143',
     ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     description: jsx('span', {
       children: renderI18nText('draw.onboarding.first_time.description', {
         icon: jsx('span', {
@@ -7102,7 +7102,7 @@ function uy(e) {
     }),
     disableHighlight: !0,
     isShowing,
-    media: jsx(_$$y3, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl('bb4a56b5776b80f89d3b94fe4d3066c3470213fe'),
       alt: '',
       aspectRatio: 1920 / 1080
@@ -7146,7 +7146,7 @@ function uT(e) {
     onClick: complete,
     ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     description: jsx('span', {
       children: renderI18nText('draw.onboarding.post_config_nudge.description', {
         icon: jsx('span', {
@@ -7207,7 +7207,7 @@ function uv(e) {
     onClick: complete,
     ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     description: renderI18nText('draw.onboarding.back_to_design.description'),
     disableHighlight: !0,
     isShowing,
@@ -7294,7 +7294,7 @@ function uO() {
     } = qm(i);
     t(showNudgeEligibility);
   }, [i]);
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     clickOutsideToHide: !0,
     description: jsx(Fragment, {
       children: renderI18nText('fullscreen.dev_mode_nudge_tooltip.description')
@@ -7304,7 +7304,7 @@ function uO() {
     hideCloseButton: !0,
     isShowing: e,
     onClose: () => t(!1),
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     targetKey: r,
     title: renderI18nText('fullscreen.dev_mode_nudge_tooltip.title'),
     trackingContextName: 'Dev Mode Nudge'
@@ -7336,14 +7336,14 @@ function uF() {
     });
   });
   useEffect(() => s, [s]);
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     description: renderI18nText('dev_handoff.paywall.approved.description'),
     disableHighlight: !1,
     emphasized: !0,
     forceEditorTheme: 'dev-handoff',
     isShowing,
     onClose: s,
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     targetKey: _$$oR,
     title: renderI18nText('dev_handoff.paywall.approved.title'),
     trackingContextName: 'Dev Mode Approved Access Hint',

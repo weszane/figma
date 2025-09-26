@@ -1,6 +1,6 @@
 import { noop } from 'lodash-es';
 import { getI18nString } from "../905/303541";
-import { z } from "../905/905430";
+import { createMenuItems } from "../905/905430";
 import { IK } from "../figma_app/248118";
 import { manifestContainsWidget } from "../figma_app/155287";
 import { getPluginParameterEntry } from "../905/12045";
@@ -18,7 +18,7 @@ export function $$p0(e) {
     type: "submenu",
     subtype: "manifest",
     name: extension.name,
-    submenu: z(extension.manifest.menu, extension)
+    submenu: createMenuItems(extension.manifest.menu, extension)
   } : {
     type: "run-menu-action",
     name: {

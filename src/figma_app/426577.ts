@@ -29,11 +29,11 @@ import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { selectUserFlag } from "../905/940356";
 import { N as _$$N3 } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { yc_, PXv } from "../figma_app/6204";
 import { buildUploadUrl } from "../figma_app/169182";
 import { E as _$$E } from "../905/453826";
-import { y as _$$y } from "../905/129046";
+import { ImageOverlayComponent } from "../905/129046";
 let a = memo(function (e) {
   return jsx("svg", {
     width: "24",
@@ -95,11 +95,11 @@ function V(e) {
     href: "https://help.figma.com/hc/articles/360039957634",
     ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     description: renderI18nText("draw.onboarding.variable_width_stroke.description"),
     disableHighlight: !0,
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("c6374c499cbe210652f58bcebbbdf3b61a64d8bc"),
       alt: "",
       aspectRatio: 1920 / 1080
@@ -141,7 +141,7 @@ function H() {
     onClick: a,
     ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     description: renderI18nText("draw.onboarding.secondary_toolbelt.description"),
     disableHighlight: !0,
     isShowing,

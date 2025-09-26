@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, PureComponent } from "react";
 import { Button } from "../905/521428";
 import { parsePxInt } from "../figma_app/783094";
-import { Sr, B3 } from "../905/535224";
+import { openUrlInDesktop, DesktopModalType } from "../905/535224";
 import { hW, vn, _p } from "../figma_app/814196";
 import { Point } from "../905/736624";
 import { FocusCheckbox, createLabel } from "../figma_app/637027";
@@ -10,7 +10,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { hideOpenDesktopAppModal } from "../figma_app/91703";
 import { Yk } from "../figma_app/644079";
 import { VisibilityOption } from "../figma_app/175992";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { oVP } from "../figma_app/27776";
 import { k, K } from "../905/542574";
 let E = parsePxInt(oVP);
@@ -32,7 +32,7 @@ export class $$b0 extends PureComponent {
     this.onClickOpenInApp = () => {
       this.props.dispatch(hideOpenDesktopAppModal());
       hW(this.state.alwaysChecked ? VisibilityOption.ALWAYS : VisibilityOption.NEVER);
-      Sr(location.href, B3.OPEN_IN_DESKTOP_MODAL);
+      openUrlInDesktop(location.href, DesktopModalType.OPEN_IN_DESKTOP_MODAL);
     };
     this.onClickAlwaysOpenDesktopApp = () => {
       this.setState({
@@ -63,7 +63,7 @@ export class $$b0 extends PureComponent {
     void 0 === vn() && hW(VisibilityOption.NEVER);
   }
   render() {
-    return jsx(Ao, {
+    return jsx(DraggableModalManager, {
       initialPosition: this.props.initialPosition,
       title: getI18nString("desktop_open_views.open_in_desktop_modal.title"),
       headerSize: "small",

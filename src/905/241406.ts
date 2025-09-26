@@ -11,7 +11,7 @@ import { popModalStack } from "../905/156213";
 import { useAuthedActiveCommunityProfile, findPublishedProfileForUser } from "../figma_app/740025";
 import { registerModal } from "../905/102752";
 import { Ro } from "../figma_app/805373";
-import { EL } from "../905/748636";
+import { PositioningStrategy } from "../905/748636";
 import { ModalContainer } from "../figma_app/918700";
 import { NJ } from "../figma_app/419216";
 import { pL } from "../figma_app/639088";
@@ -78,7 +78,7 @@ function P(e) {
       }), i && jsx(NJ, {
         targetKey: s,
         className: "merge_profiles--notAllowedTextTooltip--OtwkV pointer_modal--pointerModal--wrpFz text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L",
-        shouldCenterArrow: EL.FALLBACK,
+        shouldCenterArrow: PositioningStrategy.FALLBACK,
         backgroundColor: "var(--color-bg-tooltip)",
         children: jsx("div", {
           children: renderI18nText("community.merge_profile_modal.cannot_connect_approved_sellers")

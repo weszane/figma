@@ -2,7 +2,7 @@ import { createOptimistCommitAction, createOptimistRevertAction } from "../905/6
 import { createActionCreator } from "../905/73481";
 import { isDevEnvironment } from "../figma_app/169182";
 import { WB } from "../905/761735";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -28,7 +28,7 @@ let $$g10 = createOptimistThunk((e, {
   linkExpirationConfigId: r,
   currentUser: d
 }) => {
-  let u = XHR.put(`/api/repo/${t.id}`, t).then(() => {
+  let u = sendWithRetry.put(`/api/repo/${t.id}`, t).then(() => {
     n?.();
   }).catch(t => {
     if (i?.(), e.dispatch(VisualBellActions.enqueue({
@@ -51,7 +51,7 @@ let $$_12 = createOptimistAction("REPO_PUT", async (e, {
 }, {
   optimistId: r
 }) => {
-  i && (await XHR.put(`/api/repo/${t.id}`, t).then(t => {
+  i && (await sendWithRetry.put(`/api/repo/${t.id}`, t).then(t => {
     e.dispatch(createOptimistCommitAction(r));
   }).catch(t => {
     e.dispatch(createOptimistRevertAction(r));

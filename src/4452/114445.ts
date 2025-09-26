@@ -100,7 +100,7 @@ function G({
   let _ = useSelector(e => e.teamBilling);
   let p = l?.key.type === FOrganizationLevelType.TEAM ? _.summary.currency : m.data?.currency;
   return jsxs("div", {
-    style: styleBuilderInstance.flex.itemsCenter.justifyBetween.flexRow.p8.pr16.gap4.wAuto.bRadius5.textBodyMediumStrong.$$if(o, styleBuilderInstance.colorBgSelected, styleBuilderInstance.colorBgSecondary).$,
+    style: styleBuilderInstance.flex.itemsCenter.justifyBetween.flexRow.p8.pr16.gap4.wAuto.bRadius5.textBodyMediumStrong.if(o, styleBuilderInstance.colorBgSelected, styleBuilderInstance.colorBgSecondary).$,
     "data-testid": "seat-cost-info",
     children: [jsxs("div", {
       style: styleBuilderInstance.flex.flexRow.itemsCenter.justifyBetween.gap4.$,

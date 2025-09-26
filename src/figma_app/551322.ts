@@ -26,7 +26,7 @@ import { showModalHandler, hideModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { getCurrentFileType } from "../figma_app/976749";
 import { consumptionPaywallUtils } from "../905/224";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType, FPlanLimitationType } from "../figma_app/191312";
 import { MoveDraftsTeamData, MoveDraftsNudgeV2OverlayRecentFilesView, MoveDraftsNudgeV2OverlayRecentFilesLegacyView } from "../figma_app/43951";
@@ -38,7 +38,7 @@ import { registerModal } from "../905/102752";
 import { eg, O0, Lh } from "../figma_app/452252";
 import { s as _$$s2 } from "../figma_app/825649";
 import { RG } from "../figma_app/146384";
-import { EL } from "../905/748636";
+import { PositioningStrategy } from "../905/748636";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { OA, CR } from "../figma_app/419216";
 import { v4 } from "../figma_app/598952";
@@ -49,7 +49,7 @@ let $ = "move_drafts_nudge_rcs_steps--bodyWithoutTitle--H7oik";
 let X = "move_drafts_nudge_rcs_steps--infoText--dIEdg";
 export function $$Z1(e) {
   let t = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   let s = selectCurrentFile();
   let o = useSelector(e => e.repos);
   let l = useSelector(e => e.userFlags.seen_move_drafts_nudge);
@@ -94,7 +94,7 @@ export function $$Z1(e) {
 }
 export function $$Q0(e) {
   let t = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   let {
     dismissModal
   } = e;
@@ -129,7 +129,7 @@ export function $$Q0(e) {
     children: jsx(OA, {
       targetKey: _$$s2,
       title: "",
-      shouldCenterArrow: EL.FALLBACK,
+      shouldCenterArrow: PositioningStrategy.FALLBACK,
       dismissModal,
       ctaText: getI18nString("rcs.move_drafts_nudge.got_it"),
       onClickPrimaryCta: e.onClickPrimaryCta,
@@ -147,7 +147,7 @@ export function $$ee2({
 }) {
   var r;
   let d = useDispatch();
-  let u = Um();
+  let u = useDropdownState();
   let p = getCurrentFileType();
   let h = selectCurrentFile();
   let x = et();

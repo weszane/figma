@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { customHistory } from "../905/612521";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { fullscreenValue } from "../figma_app/455680";
@@ -15,7 +15,7 @@ class h {
     for (let t = 0; t < e.size; t += 25) {
       let r = Array.from(e.entries()).slice(t, t + 25).map(([e, t]) => `${e}|${t}`).join(",");
       let i = `/api/variables/publish_state?keysAndLibrary=${r}`;
-      n.push(XHR.post(i));
+      n.push(sendWithRetry.post(i));
     }
     let h = {};
     (await Promise.all(n)).forEach(e => {

@@ -182,7 +182,7 @@ function et(e, t) {
     if (null == e && null == t) return 0;
     if (null == t) return 1;
     if (null == e) return -1;
-    if (e < t) return -1;else if (e > t) return 1;
+    if (e < t) return -1; else if (e > t) return 1;
   }
   return ee(e, t);
 }
@@ -639,7 +639,7 @@ function eP({
       scheduler.postTask(() => n(!0), {
         signal: a.signal,
         delay: 300
-      }).catch(() => {});
+      }).catch(() => { });
       let o = e.getObject(s);
       o && t({
         status: "searching",
@@ -1133,7 +1133,7 @@ function e9({
     setAppSelection: r,
     children: jsxs("div", {
       className: zr,
-      style: styleBuilderInstance.$$if(v || N, {
+      style: styleBuilderInstance.if(v || N, {
         cursor: "ew-resize"
       }).$,
       onKeyDown: D,

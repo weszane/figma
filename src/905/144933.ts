@@ -3,7 +3,7 @@ import { getTrackingSessionId } from '../905/471229'
 import { EditorTargetMode } from '../905/632544'
 import { isVsCodeEnvironment } from '../905/858738'
 import { generateUUIDv4 } from '../905/871474'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { SortingCriteria } from '../figma_app/162807'
 import { APIParameterUtils, createMetaValidator, createNoOpValidator } from '../figma_app/181241'
 import { SortOptions } from '../figma_app/324237'
@@ -12,11 +12,11 @@ import { SearchResultsSchema } from '../figma_app/701107'
 import { PropertyScope, VariableResolvedDataType } from '../figma_app/763686'
 
 /**
- * Retry strategy mapping for XHR requests.
+ * Retry strategy mapping for sendWithRetry requests.
  * (Original: $$f1)
  */
 export const XhrRetryPolicy = {
-  504: XHR.RetryStrategy.NO_RETRY,
+  504: sendWithRetry.RetryStrategy.NO_RETRY,
 }
 
 /**
@@ -427,12 +427,12 @@ class SearchAPIHandler {
   ) {
     const extraParams = isInspect
       ? {
-          is_inspect: `${isInspect}`,
-          capability_type: isVsCodeEnvironment() ? EditorTargetMode.VSCODE : null,
-        }
+        is_inspect: `${isInspect}`,
+        capability_type: isVsCodeEnvironment() ? EditorTargetMode.VSCODE : null,
+      }
       : {
-          editor_type: editorType,
-        }
+        editor_type: editorType,
+      }
     const publicPluginsPromise = this.PluginsSearchSchemaValidator.validate(async ({ xr }) =>
       await xr.get('/api/search/community_resources', APIParameterUtils.toAPIParameters({
         query: truncateTo50(query),

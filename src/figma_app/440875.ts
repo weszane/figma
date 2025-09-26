@@ -20,7 +20,7 @@ import { clearSelection } from "../figma_app/741237";
 import { XM, e2 } from "../905/486443";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { getSelectedViewType } from "../figma_app/386952";
-import { Z } from "../905/116724";
+import { useDelayedCallback } from "../905/116724";
 var $$x2 = (e => (e.INITIAL = "initial", e.NEXT = "next", e))($$x2 || {});
 let $$N10 = createOptimistThunk((e, t) => {
   let r = e.getState().multiplayer.allUsers.find(e => e.sessionID === t.presenterSessionID);
@@ -100,7 +100,7 @@ export function $$R12(e) {
     start,
     cancel,
     complete
-  } = Z(k);
+  } = useDelayedCallback(k);
   let B = useCallback(() => {
     cancel();
     L(null);

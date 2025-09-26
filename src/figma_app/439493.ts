@@ -6,7 +6,7 @@ import { RecordableButton } from "../905/511649";
 import { SvgComponent } from "../905/714743";
 import { KindEnum } from "../905/129884";
 import { En } from "../figma_app/613182";
-import { _r } from "../905/291714";
+import { useIsPopoverClosed } from "../905/291714";
 import { bH, zr, EX, $9, x6, BB, _T, Hh, cN, Ec, Pq, k1, F$, zt, gK, bI, LJ, Qq, me, OW, Ln, y9 } from "../905/260831";
 import { A } from "../6828/154709";
 import { A as _$$A } from "../6828/343650";
@@ -176,7 +176,7 @@ let $$E0 = forwardRef((e, t) => {
     ariaControls,
     ariaActiveDescendant
   } = e;
-  let W = _r();
+  let W = useIsPopoverClosed();
   let K = Children.toArray(children);
   let Y = 1 === K.length && "string" == typeof K[0].props.children;
   let $ = function ({

@@ -15,7 +15,7 @@ import { UpsellModalType } from '../905/165519';
 import { J as _$$J } from '../905/202542';
 import { C8 } from '../905/223565';
 import { o as _$$o } from '../905/268099';
-import { f as _$$f } from '../905/287602';
+import { HighlightedText } from '../905/287602';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { P as _$$P } from '../905/347284';
@@ -24,12 +24,12 @@ import { getMinimumBundle } from '../905/389382';
 import { z as _$$z } from '../905/404751';
 import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A3 } from '../905/408320';
-import { S as _$$S2 } from '../905/433182';
+import { FileMoveButton } from '../905/433182';
 import { IconButton } from '../905/443068';
 import { trackEventAnalytics } from '../905/449184';
 import { useWebLoggerTimerEffect } from '../905/485103';
 import { x as _$$x } from '../905/505155';
-import { OJ } from '../905/519092';
+import { HeaderModal } from '../905/519092';
 import { APILoadingStatus } from '../905/520829';
 import { v as _$$v } from '../905/556792';
 import { requestUpgrade } from '../905/584989';
@@ -45,7 +45,8 @@ import { s as _$$s2 } from '../905/761565';
 import { h as _$$h } from '../905/864281';
 import { K as _$$K2 } from '../905/899124';
 import { selectViewAction } from '../905/929976';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { fileEntityDataMapper } from '../905/943101';
 import { TextWithTruncation } from '../905/984674';
 import { A as _$$A2 } from '../5724/142155';
@@ -205,7 +206,7 @@ function eA(e) {
       height: 300,
       children: jsxs('div', {
         className: Er,
-        children: [jsx(_$$S2, {
+        children: [jsx(FileMoveButton, {
           team: g.data?.team,
           setSelectedFolder: (e, t) => {
             setSelectedFolder({
@@ -405,7 +406,7 @@ let eT = registerModal(e => {
     }));
     t(popModalStack());
   }, [t, i, d]);
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: jsx('div', {
       className: cssBuilderInstance.alignCenter.flex.ml8.$,
       children: renderI18nText('file_browser.file_move.create_team')
@@ -776,7 +777,7 @@ let eR = registerModal(e => {
     name: _$$e.FILE_MOVE_MODAL,
     properties: eq,
     children: jsx(TabLoop, {
-      children: jsxs(OJ, {
+      children: jsxs(HeaderModal, {
         title: jsxs('div', {
           className: cssBuilderInstance.alignCenter.flex.ml8.maxW350.$,
           children: [jsx('span', {
@@ -943,7 +944,7 @@ let eR = registerModal(e => {
                   checked: !!eS && eS.id === e.model.id,
                   fileCount: e.file_count,
                   folderId: e.model.id || '',
-                  folderName: jsx(_$$f, {
+                  folderName: jsx(HighlightedText, {
                     text: e.model.name,
                     query: eG ?? '',
                     highlightFontWeight: 550
@@ -958,7 +959,7 @@ let eR = registerModal(e => {
                       isConnectedProject: !!e.model.is_connected_project
                     });
                   },
-                  teamName: e.model.team_name ? jsx(_$$f, {
+                  teamName: e.model.team_name ? jsx(HighlightedText, {
                     text: e.model.team_name,
                     query: eG ?? '',
                     highlightFontWeight: 550
@@ -1128,7 +1129,7 @@ let eU = registerModal(e => {
     className: cssBuilderInstance.fontMedium.flex.columnGap2.$,
     children: [e.inDrafts ? jsx(_$$A3, {}) : jsx(_$$x, {}), l]
   });
-  return jsxs(OJ, {
+  return jsxs(HeaderModal, {
     title: getI18nString('file_browser.file_move.modal_header_move_file', {
       fileName: e.fileName
     }),

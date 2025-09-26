@@ -20,7 +20,7 @@ import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_APPEND, VERSION_HISTORY_COMPAR
 import { loadCanvasData } from '../905/815475';
 import { zeroSessionLocalIDString } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { selectViewAction } from '../905/929976';
 import { versionHandlerInstance } from '../905/985740';
 import { atom, atomStoreManager } from '../figma_app/27355';
@@ -96,7 +96,7 @@ export function loadCanvasForVersion(version: any, pageId: string) {
   const key = generateCanvasKey(fileKey, pageId, version, getValidNumber(state.fileVersion));
   if (canvasCache.has(key)) return canvasCache.get(key);
   const promise = new Promise((resolve, reject) => {
-    loadCanvasData(`${version.canvas_url}&nodes_to_extract=${nodesToExtract.join(',')}`).then(([canvas,, fileVersion]) => {
+    loadCanvasData(`${version.canvas_url}&nodes_to_extract=${nodesToExtract.join(',')}`).then(([canvas, , fileVersion]) => {
       const newKey = generateCanvasKey(fileKey, pageId, version, fileVersion);
       const result = Promise.resolve({
         canvas,
@@ -144,7 +144,7 @@ async function fetchCheckpointDiff(fileKey: string, fromVersionId: string, migra
         checkpoint_diff
       }
     }
-  } = await XHR.post(`/api/file_diff/v2/checkpoint_diff/${fileKey}?${params.toString()}`);
+  } = await sendWithRetry.post(`/api/file_diff/v2/checkpoint_diff/${fileKey}?${params.toString()}`);
   return checkpoint_diff; // Original: Y
 }
 
@@ -157,7 +157,7 @@ async function downloadDiffData(url: string): Promise<any> {
   const startTime = new Date().getTime();
   const {
     data
-  } = await XHR.crossOriginGetAny(url, null, {
+  } = await sendWithRetry.crossOriginGetAny(url, null, {
     responseType: 'arraybuffer'
   });
   const endTime = new Date().getTime();

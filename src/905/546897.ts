@@ -6,7 +6,7 @@ import { WAFImage } from "../905/675859";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { getVisibleTheme } from "../905/640017";
 import { getAssetBackgroundColor } from "../figma_app/80990";
-import { V as _$$V } from "../figma_app/473391";
+import { getAssetKeyForSubscription } from "../figma_app/473391";
 import { ThemeContext, getThemeBorderStyle } from "../905/187165";
 import { KindEnum } from "../905/129884";
 import { M } from "../905/771870";
@@ -39,7 +39,7 @@ export function $$y0({
     item: s,
     shouldGenerateLocalThumbnail: !0,
     draggable: !1
-  }, `${i}:${_$$V(s)}`);
+  }, `${i}:${getAssetKeyForSubscription(s)}`);
   return jsx("div", {
     className: "asset_panel_preview--previewThumbnailWrapper--g6zU5",
     "data-tooltip-type": KindEnum.TEXT,

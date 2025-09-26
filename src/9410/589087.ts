@@ -13,7 +13,7 @@ import { getSelectedNodesWithinBreakpointFrame } from "../905/913055";
 import { JT, pY } from "../figma_app/632248";
 import { B3, z8, qy } from "../figma_app/862289";
 import { cq } from "../905/794154";
-import { $J } from "../905/278499";
+import { AIActionIterationResult } from "../905/278499";
 import { DZ, F3, Q8 } from "../figma_app/604494";
 import { f as _$$f, E as _$$E } from "../905/690713";
 import { A } from "../905/721854";
@@ -162,7 +162,7 @@ export function $$j1() {
         }],
         aiTrackingContext: {
           ...aiTrackingContext,
-          iteration_view_type: $J.SUCCESS_WITH_ITERATION
+          iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION
         },
         targets: lastRun ? lastRun.targets.map(e => e.node.guid) : void 0
       });

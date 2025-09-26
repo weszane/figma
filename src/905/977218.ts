@@ -8,7 +8,7 @@ import { SearchAnalytics } from '../905/574958'
 import { getFeatureFlags } from '../905/601108'
 import { PerfTimer } from '../905/609396'
 import { setupLoadingStateHandler } from '../905/696711'
-import { XHR, XHRError } from '../905/910117'
+import { sendWithRetry, XHRError } from '../905/910117'
 import { debounce } from '../905/915765'
 import { convertFilterKeysToApiParams, DEFAULT_PAGE_SIZE, PublicModelType, SearchTypeMode, SortingCriteria, SpaceAccessType, TeamSortField } from '../figma_app/162807'
 import { trackFileBrowserPlanFilterSelected } from '../figma_app/314264'
@@ -39,7 +39,7 @@ export let updateRecentSearchesThunk = createOptimistThunk(async (context, paylo
   const filteredSearches = previousSearches.filter(search => search.query !== searchQuery)
 
   try {
-    await XHR.put('/api/recent_search', {
+    await sendWithRetry.put('/api/recent_search', {
       org_id: orgId,
       searches: filteredSearches,
     })
@@ -85,7 +85,7 @@ export let updateRecentSearchesWithSortThunk = createOptimistThunk(async (contex
   updatedSearches = updatedSearches.slice(0, DEFAULT_PAGE_SIZE)
 
   try {
-    await XHR.put('/api/recent_search', {
+    await sendWithRetry.put('/api/recent_search', {
       org_id: orgId,
       searches: updatedSearches,
     })

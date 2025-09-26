@@ -14,10 +14,10 @@ import { useFullscreenReady } from "../905/924253";
 import { zC, re } from "../figma_app/186343";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { N as _$$N } from "../figma_app/268271";
-import { w as _$$w } from "../905/129046";
-import { rq } from "../905/425180";
+import { VideoOverlayComponent } from "../905/129046";
+import { OnboardingModal } from "../905/425180";
 import { useIsCanvasEditDisabled } from "../905/595131";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { pjo } from "../figma_app/6204";
 import { rM, dO } from "../figma_app/318123";
 import { c as _$$c2 } from "../905/850166";
@@ -80,11 +80,11 @@ export function $$R2() {
       }
     });
   }, [show, i, m, M, P, H, K, B, F]);
-  return jsx(rq, {
-    arrowPosition: F_.BOTTOM,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.BOTTOM,
     description: renderI18nText("whiteboard.section_presets_onboarding.feature_announcement.description"),
     isShowing,
-    media: jsx(_$$w, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl("0ccb9b0b677f719939bd9bacd937201dfea4e8c9"),
       aspectRatio: 4 / 3
     }),

@@ -5,11 +5,11 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { P } from "../905/994270";
 import { nP, LU } from "../905/487011";
-import { Ek } from "../905/278499";
-import { r as _$$r } from "../905/189361";
-import { B } from "../905/222272";
+import { AIActionProgressType } from "../905/278499";
+import { ActionButton } from "../905/189361";
+import { FlexBox } from "../905/222272";
 import { R } from "../905/240644";
-import { y as _$$y } from "../905/236825";
+import { Panel } from "../905/236825";
 export function $$g0({
   children: e,
   secondaryMessage: t,
@@ -26,7 +26,7 @@ export function $$g0({
   let b = () => {
     g && g();
   };
-  let v = g ? jsx(_$$r, {
+  let v = g ? jsx(ActionButton, {
     variant: "secondary",
     shortcuts: [{
       key: KeyCodes.ESCAPE
@@ -36,12 +36,12 @@ export function $$g0({
       _ && nP({
         ..._,
         ...LU(e),
-        interaction: Ek.STOP
+        interaction: AIActionProgressType.STOP
       });
       b();
     },
     children: renderI18nText("ai.cancel")
-  }) : i ? jsx(_$$r, {
+  }) : i ? jsx(ActionButton, {
     variant: "secondary",
     shortcuts: [{
       key: KeyCodes.ESCAPE
@@ -51,26 +51,26 @@ export function $$g0({
       _ && nP({
         ..._,
         ...LU(e),
-        interaction: Ek.STOP
+        interaction: AIActionProgressType.STOP
       });
       y();
     },
     children: renderI18nText("ai.stop")
   }) : void 0;
-  return jsx(_$$y, {
+  return jsx(Panel, {
     content: f,
-    extra: !!f && jsx(B, {
+    extra: !!f && jsx(FlexBox, {
       justify: "end",
       fullWidth: !0,
       children: v
     }),
     dataTestId: "runningView",
-    children: jsxs(B, {
+    children: jsxs(FlexBox, {
       justify: "space-between",
       align: "center",
       fullWidth: !0,
       children: [jsx(R, {
-        children: jsxs(B, {
+        children: jsxs(FlexBox, {
           gap: 8,
           children: [jsx("span", {
             className: cssBuilderInstance.textBodyMediumStrong.$,

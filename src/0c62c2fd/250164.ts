@@ -9,8 +9,8 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { FDomainVerificationStatusType } from "../figma_app/191312";
 import { OrgTaxIdView, TeamTaxIdView } from "../figma_app/43951";
-import { OJ } from "../905/519092";
-import { A as _$$A } from "../905/289352";
+import { HeaderModal } from "../905/519092";
+import { VatGstInput } from "../905/289352";
 import { Dy, v0, hF, pL } from "../905/289198";
 var o = n;
 function x(e, t) {
@@ -62,7 +62,7 @@ export let $$b0 = memo(function (e) {
   let L = () => {
     t(hideModal());
   };
-  return jsxs(OJ, {
+  return jsxs(HeaderModal, {
     onClose: L,
     title: getI18nString("change_vat_gst_id.input_id"),
     minWidth: 344,
@@ -103,12 +103,12 @@ export let $$b0 = memo(function (e) {
           });
         },
         "data-testid": "change-vat-form",
-        children: [F && jsx(_$$A, {
+        children: [F && jsx(VatGstInput, {
           onChange: N,
           country: A.country,
           vatId: I,
           isCommunityCheckout: !1
-        }), k && jsx(_$$A, {
+        }), k && jsx(VatGstInput, {
           onChange: S,
           country: A.country,
           region: A.state,

@@ -13,7 +13,7 @@ import { A as _$$A } from "../905/484713";
 import { G } from "../figma_app/119843";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { an } from "../905/81009";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { CreatorResourceType, InputType } from "../figma_app/162807";
 import { A as _$$A2 } from "../6828/154709";
 let T = e => {
@@ -42,7 +42,7 @@ export function $$I0({
   let v = useDispatch();
   let A = useRef(null);
   let x = S || A;
-  let N = Um();
+  let N = useDropdownState();
   let C = N?.type === e;
   let w = useAtomWithSubscription(l4(t ?? null));
   let O = _$$f();

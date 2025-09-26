@@ -2,7 +2,7 @@ import { t_, atom, atomStoreManager, Xr, useAtomWithSubscription, useAtomValueAn
 import { debugState } from "../905/407919";
 import { handleAtomEvent } from "../905/502364";
 import { overlayIdsAtom, overlayStateAtom } from "../905/12032";
-import { Z3, FQ, Oi, oE } from "../905/953718";
+import { OverlayManager, ChannelID, ExperienceManager, BlockReasonType } from "../905/953718";
 import { getLaunchDarklyFlagsExport, getInitialOptions, isDevEnvironment } from "../figma_app/169182";
 import { y as _$$y, t as _$$t } from "../905/958284";
 import { selectedViewAtom, modalTypeAtom, notificationTypeAtom } from "../figma_app/386952";
@@ -36,7 +36,7 @@ import { eC, $1, _Z, Gx } from "../905/539601";
 import { C5 } from "../905/147383";
 import { R as _$$R } from "../905/994802";
 import { E as _$$E } from "../905/453826";
-let l = t_(() => new Z3());
+let l = t_(() => new OverlayManager());
 let _ = new _$$m("PreventModalCollisions", "A rule that prevents overlays from being shown while a modal is displayed", (e, t) => !e.uiState.modalShownType || (t.attributes.allowShowingIfModalPresent ? (trackEventAnalytics("curator_collision", {
   blocked_overlay_id: _$$y(t.id),
   blocking_modal_type: e.uiState.modalShownType,
@@ -102,7 +102,7 @@ let O = atom(e => {
 });
 class D {
   constructor() {
-    this.id = FQ.Overlay;
+    this.id = ChannelID.Overlay;
     this.currentExperience = void 0;
     this.queuedExperiences = [];
   }
@@ -113,8 +113,8 @@ class D {
     return [R, k, _$$h, E, b, RI, T, _, A];
   }
 }
-let L = atom(() => new Oi({
-  [FQ.Overlay]: new D()
+let L = atom(() => new ExperienceManager({
+  [ChannelID.Overlay]: new D()
 }));
 window.Curator = {
   enableTraceLogging: () => _$$L("trace"),
@@ -280,7 +280,7 @@ export function $$es0({
       }
     }, "debug");
     return {
-      reasonType: oE.ExperimentCheckFail
+      reasonType: BlockReasonType.ExperimentCheckFail
     };
   }, () => {
     if (null != e.lifecycle) {
@@ -385,7 +385,7 @@ export function $$es0({
     let i = {
       id: a,
       priority: u,
-      channelID: FQ.Overlay,
+      channelID: ChannelID.Overlay,
       onShow: i => {
         I(!0);
         e.lifecycle && _Z(e.lifecycle);
@@ -417,8 +417,8 @@ export function $$es0({
       },
       onBlocked: i => {
         switch (i.reasonType) {
-          case oE.ExistingExperience:
-          case oE.HigherPriExperience:
+          case BlockReasonType.ExistingExperience:
+          case BlockReasonType.HigherPriExperience:
             let n = {
               overlayId: a,
               blockingOverlayId: i.blocker.id
@@ -446,9 +446,9 @@ export function $$es0({
             });
             globalPerfTimer.$$delete(er, a);
             break;
-          case oE.ExperimentCheckFail:
+          case BlockReasonType.ExperimentCheckFail:
             break;
-          case oE.RuleFail:
+          case BlockReasonType.RuleFail:
             _$$R({
               type: "failed",
               name: "rule_check_failed",
@@ -459,7 +459,7 @@ export function $$es0({
               }
             }, "debug");
             break;
-          case oE.LifecycleCheckFail:
+          case BlockReasonType.LifecycleCheckFail:
             _$$R({
               type: "failed",
               name: "lifecycle_check_failed",

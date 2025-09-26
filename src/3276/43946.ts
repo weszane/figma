@@ -10,7 +10,7 @@ import { useAtomWithSubscription, atom } from "../figma_app/27355";
 import { dayjs } from "../905/920142";
 import { customHistory } from "../905/612521";
 import { buildUploadUrl, getInitialOptions } from "../figma_app/169182";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { WN } from "../figma_app/638601";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useProjectFileCreationPermissions, canCreateFileType } from "../figma_app/687776";
@@ -47,8 +47,8 @@ import { resourceUtils } from "../905/989992";
 import Q from "classnames";
 import { k as _$$k3 } from "../905/582200";
 import { WAFImage } from "../905/675859";
-import { x as _$$x } from "../905/211326";
-import { Ph } from "../905/160095";
+import { LoadingRenderer } from "../905/211326";
+import { TrackedLink } from "../905/160095";
 import { TrackingProvider } from "../figma_app/831799";
 import { Q as _$$Q } from "../905/346809";
 import { Zk } from "../figma_app/626177";
@@ -59,7 +59,7 @@ let es = "announcement--announcementBrandImg--H6L6b";
 let er = "announcement--imageNoPaddingTop--YSxed";
 function el(e) {
   return e.link ? jsx("div", {
-    children: jsx(Ph, {
+    children: jsx(TrackedLink, {
       trackingProperties: {
         text: e.mainButtonTitle
       },
@@ -151,7 +151,7 @@ function ed(e) {
           onClick: e.onCtaClick,
           disabled: e.isLoading,
           mainButtonTitle: e.mainButtonTitle,
-          children: jsx(_$$x, {
+          children: jsx(LoadingRenderer, {
             isLoading: e.isLoading,
             className: "announcement--loading--KRjaH",
             children: () => jsx(Fragment, {
@@ -261,7 +261,7 @@ let eg = [{
       layoutStyle: "app",
       mainButtonTitle: getI18nString("mobile_download_prompts.email_me"),
       onCtaClick: () => {
-        XHR.post("/api/send_mobile_download_email", {
+        sendWithRetry.post("/api/send_mobile_download_email", {
           type: "prototype"
         });
         e(VisualBellActions.enqueue({
@@ -298,7 +298,7 @@ let eg = [{
       layoutStyle: "app",
       mainButtonTitle: getI18nString("mobile_download_prompts.email_me"),
       onCtaClick: () => {
-        XHR.post("/api/send_mobile_download_email", {
+        sendWithRetry.post("/api/send_mobile_download_email", {
           type: "comment"
         });
         e(VisualBellActions.enqueue({

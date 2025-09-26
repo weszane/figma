@@ -24,7 +24,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { replaceSelection } from "../figma_app/741237";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Jz } from "../905/504727";
@@ -94,7 +94,7 @@ function z({
     showing,
     hide,
     show
-  } = BK(r);
+  } = useDropdown(r);
   let d = useRef(null);
   if (0 === t.recommendations.length) return null;
   if (1 === t.recommendations.length) {

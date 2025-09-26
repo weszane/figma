@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { Link } from "../905/438674";
 import { renderI18nText } from "../905/303541";
-import { b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { E4, m3, bj } from "../905/66449";
 export function $$l0({
   libraryKey: e
@@ -13,7 +13,7 @@ export function $$l0({
     path: [m3.TabBodySection.Footer],
     column: 1
   });
-  let l = b({
+  let l = useLibraryFileLink({
     libraryKey: e
   });
   let d = l?.data?.link;

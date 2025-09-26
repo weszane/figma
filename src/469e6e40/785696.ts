@@ -1,6 +1,6 @@
 import { trackEventAnalytics } from "../905/449184";
 import { APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 function r(e, t, a, s) {
   let i = {
     pluginId: t,
@@ -29,7 +29,7 @@ let $$d0 = new class {
     workspaceIds: n
   }) {
     r(e, t, a, n);
-    return XHR.post(`/api/${o[a]}/org/${e}/allowlist/${t}`, APIParameterUtils.toAPIParameters({
+    return sendWithRetry.post(`/api/${o[a]}/org/${e}/allowlist/${t}`, APIParameterUtils.toAPIParameters({
       workspaceIds: n
     }));
   }
@@ -40,7 +40,7 @@ let $$d0 = new class {
     workspaceIds: n
   }) {
     l(e, t, a, n);
-    return XHR.del(`/api/${o[a]}/org/${e}/allowlist/${t}`, APIParameterUtils.toAPIParameters({
+    return sendWithRetry.del(`/api/${o[a]}/org/${e}/allowlist/${t}`, APIParameterUtils.toAPIParameters({
       workspaceIds: n
     }));
   }
@@ -50,7 +50,7 @@ let $$d0 = new class {
     extensionType: a
   }) {
     r(e, t, a);
-    return XHR.post(`/api/${o[a]}/org/${e}/allowlist/${t}`);
+    return sendWithRetry.post(`/api/${o[a]}/org/${e}/allowlist/${t}`);
   }
   disableExtensionForOrg({
     orgId: e,
@@ -58,7 +58,7 @@ let $$d0 = new class {
     extensionType: a
   }) {
     l(e, t, a);
-    return XHR.del(`/api/${o[a]}/org/${e}/allowlist/${t}`);
+    return sendWithRetry.del(`/api/${o[a]}/org/${e}/allowlist/${t}`);
   }
 }();
 export const X = $$d0;

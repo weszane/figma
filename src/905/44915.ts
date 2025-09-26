@@ -1,41 +1,118 @@
-import { useContext, useCallback, useEffect } from "react";
-import { A } from "../905/780920";
-export function $$$$a0({
-  isPrimaryLayout: e,
-  itemIndex: t,
-  layoutIndex: i,
-  autoFocusOverride: a,
-  enableAutoFocus: s = !0
-}) {
-  let o = useContext(A);
-  return s && (void 0 !== e ? e : 0 === i) && (void 0 !== a ? a : t === o);
+import { useCallback, useContext, useEffect } from 'react'
+import { A } from '../905/780920'
+
+/**
+ * Determines if an item should auto-focus based on layout and context.
+ * Original name: $$$$a0
+ */
+export interface AutoFocusParams {
+  isPrimaryLayout?: boolean
+  itemIndex: number
+  layoutIndex: number
+  autoFocusOverride?: boolean
+  enableAutoFocus?: boolean
 }
-export function $$s1({
-  keyboardNavigationItem: e,
-  shouldAutoFocus: t,
-  enableFauxFocus: i
-}) {
-  let r = useCallback(t => {
-    e && (i ? e.fauxFocus(t) : e.focus());
-  }, [e, i]);
-  let a = useCallback(() => {
-    e && (i ? e.fauxBlur() : e.blur());
-  }, [e, i]);
-  useEffect(() => {
-    if (e && t) {
-      if ("visible" === document.visibilityState) r();else {
-        let e = () => {
-          "visible" === document.visibilityState && (requestAnimationFrame(() => r()), document.removeEventListener("visibilitychange", e));
-        };
-        document.addEventListener("visibilitychange", e);
-        return () => document.removeEventListener("visibilitychange", e);
-      }
+
+/**
+ * Returns whether auto-focus should be enabled for the given item.
+ * @param params - AutoFocusParams
+ */
+export function setupAutoFocusHandler({
+  isPrimaryLayout,
+  itemIndex,
+  layoutIndex,
+  autoFocusOverride,
+  enableAutoFocus = true,
+}: AutoFocusParams): boolean {
+  const contextItemIndex = useContext(A)
+  // Enable auto-focus if allowed and either primary layout or first layout index,
+  // with possible override from autoFocusOverride or context.
+  if (!enableAutoFocus)
+    return false
+  const isLayoutPrimary = isPrimaryLayout !== undefined ? isPrimaryLayout : layoutIndex === 0
+  const shouldOverride = autoFocusOverride !== undefined ? autoFocusOverride : itemIndex === contextItemIndex
+  return isLayoutPrimary && shouldOverride
+}
+
+/**
+ * Parameters for keyboard navigation focus management.
+ * Original name: $$s1
+ */
+export interface KeyboardNavigationFocusParams {
+  keyboardNavigationItem?: {
+    focus: () => void
+    blur: () => void
+    fauxFocus: (event?: any) => void
+    fauxBlur: () => void
+  }
+  shouldAutoFocus: boolean
+  enableFauxFocus: boolean
+}
+
+/**
+ * Provides focus and blur handlers for keyboard navigation items.
+ * @param params - KeyboardNavigationFocusParams
+ */
+export function setupKeyboardNavigationFocus({
+  keyboardNavigationItem,
+  shouldAutoFocus,
+  enableFauxFocus,
+}: KeyboardNavigationFocusParams) {
+  /**
+   * Focus handler for keyboard navigation item.
+   * Original variable: r
+   */
+  const focus = useCallback((event?: any) => {
+    if (!keyboardNavigationItem)
+      return
+    if (enableFauxFocus) {
+      keyboardNavigationItem.fauxFocus(event)
     }
-  }, [e, t, r]);
+    else {
+      keyboardNavigationItem.focus()
+    }
+  }, [keyboardNavigationItem, enableFauxFocus])
+
+  /**
+   * Blur handler for keyboard navigation item.
+   * Original variable: a
+   */
+  const blur = useCallback(() => {
+    if (!keyboardNavigationItem)
+      return
+    if (enableFauxFocus) {
+      keyboardNavigationItem.fauxBlur()
+    }
+    else {
+      keyboardNavigationItem.blur()
+    }
+  }, [keyboardNavigationItem, enableFauxFocus])
+
+  useEffect(() => {
+    if (!keyboardNavigationItem || !shouldAutoFocus)
+      return
+
+    if (document.visibilityState === 'visible') {
+      focus()
+    }
+    else {
+      const onVisibilityChange = () => {
+        if (document.visibilityState === 'visible') {
+          requestAnimationFrame(() => focus())
+          document.removeEventListener('visibilitychange', onVisibilityChange)
+        }
+      }
+      document.addEventListener('visibilitychange', onVisibilityChange)
+      return () => document.removeEventListener('visibilitychange', onVisibilityChange)
+    }
+  }, [keyboardNavigationItem, shouldAutoFocus, focus])
+
   return {
-    focus: r,
-    blur: a
-  };
+    focus,
+    blur,
+  }
 }
-export const a = $$$$a0;
-export const i = $$s1;
+
+// Export refactored names for clarity and maintainability
+export const a = setupAutoFocusHandler
+export const i = setupKeyboardNavigationFocus

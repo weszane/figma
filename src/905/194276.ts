@@ -9,7 +9,7 @@ import { FlashActions } from '../905/573154'
 import { customHistory } from '../905/612521'
 import { setupLoadingStateHandler } from '../905/696711'
 import { AuthFlowStep } from '../905/862321'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 /**
  * Auth Action Creators and Thunks
  * Refactored for clarity and maintainability.
@@ -76,8 +76,8 @@ export const changeAuthFormState = createOptimistThunk((e, t) => {
  */
 export const startSamlEmailVerification = createOptimistThunk((e, { userId }) => {
   // $$$$E6
-  XHR.defaults.headers = {
-    ...XHR.defaults.headers,
+  sendWithRetry.defaults.headers = {
+    ...sendWithRetry.defaults.headers,
     'X-Figma-User-ID': userId,
   }
   customHistory.replace(`/verify?fuid=${userId}`, null)
@@ -96,14 +96,14 @@ export const startSamlEmailVerification = createOptimistThunk((e, { userId }) =>
  */
 export const redeemTeamJoinLink = createOptimistThunk((e, { token, userId }, { loadingKey }) => {
   // $$W34
-  let headers = XHR.defaults.headers
+  let headers = sendWithRetry.defaults.headers
   if (userId) {
     headers = {
-      ...XHR.defaults.headers,
+      ...sendWithRetry.defaults.headers,
       'X-Figma-User-ID': userId,
     }
   }
-  const request = XHR.post('/api/team_join_link/redeem', { token }, { headers })
+  const request = sendWithRetry.post('/api/team_join_link/redeem', { token }, { headers })
   setupLoadingStateHandler(request, e, loadingKey)
   request.then(({ data }) => {
     if (data && data.meta)
@@ -122,7 +122,7 @@ export const redeemTeamJoinLink = createOptimistThunk((e, { token, userId }, { l
  */
 export async function redirectAfterRedeem(url: string, isTeams?: boolean) {
   // $$$25
-  await XHR.post('/api/session/clear_cont').catch(() => {})
+  await sendWithRetry.post('/api/session/clear_cont').catch(() => { })
   if (isTeams) {
     customHistory.unsafeRedirectMsTeams(url)
   }

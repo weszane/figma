@@ -30,7 +30,7 @@ import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { ServiceCategories } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { z as _$$z } from "../905/239603";
 import { registerLegacyModal, registerModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
@@ -73,7 +73,7 @@ async function j(e, t) {
   let r = !0;
   try {
     let i = M.attemptToParseFrom(e);
-    let r = await XHR.crossOriginGet(i.url, null, {
+    let r = await sendWithRetry.crossOriginGet(i.url, null, {
       responseType: "arraybuffer"
     }).then(({
       data: e
@@ -243,7 +243,7 @@ export class $$eu0 {
   constructor(e) {
     this.store = e;
     this.hasShownMultiplayerDecodeError = !1;
-    this.dispatch = () => {};
+    this.dispatch = () => { };
     this.hasUnsavedChanges = () => {
       let e = this.store.getState();
       return !!(e.saveStatus && e.saveStatus.hasUnsavedChanges);
@@ -301,7 +301,7 @@ export class $$eu0 {
     setupConnectionStateHandler();
   }
   handleMultiplayerSignal(e, t, i) {
-    if ("force-refresh" === e) customHistory.reload("Multiplayer got force-refresh signal");else if ("too-many-connections" === e) {
+    if ("force-refresh" === e) customHistory.reload("Multiplayer got force-refresh signal"); else if ("too-many-connections" === e) {
       if (this.hasUnsavedChanges()) {
         let e = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved");
         let t = getI18nString("unsaved_changes.syncing.too_many_people_in_file");
@@ -321,7 +321,7 @@ export class $$eu0 {
       }));
     } else if ("message-decode-failure" === e) this.hasShownMultiplayerDecodeError || (this.hasShownMultiplayerDecodeError = !0, this.dispatch(VisualBellActions.enqueue({
       message: getI18nString("unsaved_changes.syncing.experiencing_server_issues")
-    })));else if ("invalid-permissions" === e) {
+    }))); else if ("invalid-permissions" === e) {
       let e;
       let t;
       this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_revoked_access")) : (t = getI18nString("unsaved_changes.syncing.access_revoked"), e = getI18nString("unsaved_changes.syncing.someone_revoked_access_to_the_file_you_had_open_ask_the_owner_for_access_to_open_it_again"), this.dispatch(handleAutosaveAndNavigationThunk({
@@ -439,7 +439,7 @@ export class $$eu0 {
           }));
         }
       },
-      onDismiss: () => {}
+      onDismiss: () => { }
     }));
   }
   isWindowActive() {
@@ -466,7 +466,7 @@ export class $$eu0 {
           }));
         }
       },
-      onDismiss: () => {}
+      onDismiss: () => { }
     }));
   }
   prettyPrintMessage(e) {

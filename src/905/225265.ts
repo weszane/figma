@@ -15,7 +15,7 @@ import { getExperimentConfigAsync } from "../figma_app/594947";
 import { getEditorTypeFromView } from "../figma_app/976749";
 import { mapFileToProductType } from "../figma_app/314264";
 import { compareLibraryKeyWithString } from "../905/709171";
-import { V as _$$V } from "../figma_app/473391";
+import { getAssetKeyForSubscription } from "../figma_app/473391";
 import { filesByLibraryKeyAtom, assetKeysSetAtom } from "../905/977779";
 import { resolveTeamId } from "../905/515860";
 import { openFileAtom, openFileLibraryKeyAtom } from "../figma_app/516028";
@@ -159,7 +159,7 @@ let ef = atom(e => {
   let s = new Set();
   let o = e => {
     for (let t of e) {
-      let e = _$$V(t);
+      let e = getAssetKeyForSubscription(t);
       e && s.has(e) || (e && s.add(e), a.push({
         ...t
       }));
@@ -175,8 +175,8 @@ let ef = atom(e => {
   return a;
 });
 let e_ = selectAtom(ef, e => e, (e, t) => {
-  let i = new Set(e.map(e => _$$V(e)));
-  let n = new Set(t.map(e => _$$V(e)));
+  let i = new Set(e.map(e => getAssetKeyForSubscription(e)));
+  let n = new Set(t.map(e => getAssetKeyForSubscription(e)));
   return i.size === n.size && [...i].every(e => n.has(e));
 });
 let eA = atom(e => {

@@ -7,7 +7,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { H } from "../figma_app/147959";
 import { logError } from "../905/714362";
 import { fullscreenValue } from "../figma_app/455680";
-import { j } from "../905/881708";
+import { NameClass } from "../905/881708";
 import { recordConnectDiagramShapeActive } from "../figma_app/682945";
 import { isConnector } from "../905/739338";
 import { AffineTransform } from "../905/583953";
@@ -300,7 +300,7 @@ class f {
     return e;
   }
 }
-export class $$_0 extends j {
+export class $$_0 extends NameClass {
   constructor(e) {
     super(e);
     this._toolLineStyle = void 0;

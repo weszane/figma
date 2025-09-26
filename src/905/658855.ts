@@ -18,7 +18,7 @@ import { DM, en } from "../905/759470";
 import { PublishModalState } from "../figma_app/350203";
 import { N8, Gp, CW, nK } from "../figma_app/599979";
 import { VIDEO_TYPE_VALUES } from "../905/966582";
-import { EL } from "../905/748636";
+import { PositioningStrategy } from "../905/748636";
 import { NJ } from "../figma_app/419216";
 import { A as _$$A } from "../5724/882384";
 var u = c;
@@ -308,7 +308,7 @@ function F({
       className: "publish_resource_card_preview--pointerModal--cMOsB pointer_modal--pointerModalBlue--9Jjg8 pointer_modal--pointerModal--wrpFz",
       targetKey: a,
       width: 135,
-      shouldCenterArrow: EL.FALLBACK,
+      shouldCenterArrow: PositioningStrategy.FALLBACK,
       children: jsx("button", {
         onClick: t,
         className: "publish_resource_card_preview--tooltipText---3xSN",

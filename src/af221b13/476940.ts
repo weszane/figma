@@ -7,10 +7,10 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { N } from "../figma_app/268271";
-import { y as _$$y } from "../905/129046";
-import { rq } from "../905/425180";
+import { ImageOverlayComponent } from "../905/129046";
+import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
-import { F_ } from "../905/748636";
+import { ArrowPosition } from "../905/748636";
 import { d as _$$d } from "../905/811033";
 import { iX } from "../905/415545";
 import { ueY } from "../figma_app/6204";
@@ -61,19 +61,19 @@ export function $$E0({
         t = renderI18nText("browser_notifications.onboarding_overlay.title.replies");
         i = qH;
         n = UU;
-        a = F_.BOTTOM;
+        a = ArrowPosition.BOTTOM;
         break;
       case iX.COMMENT_REPLY:
         t = renderI18nText("browser_notifications.onboarding_overlay.title.replies");
         i = qH;
         n = ym;
-        a = F_.TOP_RIGHT;
+        a = ArrowPosition.TOP_RIGHT;
         break;
       default:
         t = renderI18nText("browser_notifications.onboarding_overlay.title.activity");
         i = vH;
         n = fD;
-        a = F_.TOP_RIGHT;
+        a = ArrowPosition.TOP_RIGHT;
     }
     return {
       calloutTitle: t,
@@ -88,7 +88,7 @@ export function $$E0({
     disableHighlight: !0,
     forceUI3Theme: !0,
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       alt: getI18nString("browser_notifications.onboarding_overlay.media.alt"),
       aspectRatio: mk,
       src: buildUploadUrl(mediaPath)
@@ -117,12 +117,12 @@ export function $$E0({
   };
   return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseDown"],
-    children: t?.targetLocation ? jsx(rq, {
+    children: t?.targetLocation ? jsx(OnboardingModal, {
       ...k,
       fixedPosition: !0,
       location: t.targetLocation,
       innerRef: t.innerRef
-    }) : jsx(rq, {
+    }) : jsx(OnboardingModal, {
       ...k,
       arrowPosition,
       targetKey,

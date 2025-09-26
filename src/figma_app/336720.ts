@@ -5,7 +5,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { K } from "../905/851274";
 import { LayoutTabType } from "../figma_app/763686";
 import d from "classnames";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { KindEnum } from "../905/129884";
 import { J5, FM } from "../figma_app/835688";
 import { useDispatch } from "react-redux";
@@ -78,7 +78,7 @@ export function $$x2({
   let {
     toggle,
     showing
-  } = BK(r);
+  } = useDropdown(r);
   let f = useRef(null);
   let E = h ? void 0 : () => {
     let e = f.current;

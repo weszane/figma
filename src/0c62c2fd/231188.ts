@@ -5,8 +5,8 @@ import { _ as _$$_ } from "../905/465535";
 import { Tj } from "../figma_app/342207";
 import { Ay } from "@stylexjs/stylex";
 import { _ as _$$_2 } from "../905/613863";
-import { Y } from "../905/347011";
-import { t as _$$t } from "../905/433510";
+import { useFavoriteResource } from "../905/347011";
+import { FavoriteResourceDropdown } from "../905/433510";
 import { KindEnum } from "../905/129884";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -22,7 +22,7 @@ export function $$_0({
   size: h = "md",
   dataTestId: x = "favorite-star-button"
 }) {
-  let b = Y(r, e, t, g);
+  let b = useFavoriteResource(r, e, t, g);
   let v = _$$_2({
     subscription: b,
     orgId: t,
@@ -68,7 +68,7 @@ export function $$_0({
       }) : jsx(_$$c, {
         "data-testid": `${x}-unfavorited-icon`
       })
-    }), !!t && v.isDropdownShown && jsx(_$$t, {
+    }), !!t && v.isDropdownShown && jsx(FavoriteResourceDropdown, {
       currentSectionId: b.favorite?.resource.sidebarSectionId ?? void 0,
       customSectionOrdering: b.orderedSidebarSections ?? [],
       "data-testid": "organize-favorite-menu",

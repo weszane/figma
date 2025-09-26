@@ -8,7 +8,7 @@ import { fileRestoreAction } from "../figma_app/78808";
 import { hideModal, popModalStack } from "../905/156213";
 import { Ro } from "../figma_app/805373";
 import { Cr } from "../figma_app/221114";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 let p = "file_restore_from_version_modal--fileRestoreText--my8Lq";
 function f(e) {
   let t = e.version;
@@ -77,7 +77,7 @@ export function $$g0(e) {
     }));
   };
   let n = e.versions.filter(e => !e.disabled);
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: getI18nString("file_restore_from_version_modal.restore_from_version_history"),
     maxWidth: 396,
     onClose: () => {

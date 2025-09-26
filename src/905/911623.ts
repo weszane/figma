@@ -1,36 +1,71 @@
-import { useRef, useCallback } from "react";
-import { isAnyMobile } from "../figma_app/778880";
-export function $$a0({
-  onClick: e,
-  onMouseDown: t,
-  onMouseUp: i,
-  onMouseLeave: a,
-  isDisabled: s = !1
-}) {
-  let o = useRef(!1);
-  let l = isAnyMobile;
-  let d = useCallback(t => {
-    o.current = !0;
-    l || e?.(t);
-  }, [l, e]);
-  let c = useCallback(t => {
-    (l || !o.current) && e?.(t);
-  }, [l, e]);
-  let u = useCallback(e => {
-    o.current = !1;
-    i?.(e);
-  }, [i]);
-  let p = useCallback(e => {
-    o.current = !1;
-    a?.(e);
-  }, [a]);
-  return s ? {
-    onMouseLeave: p
-  } : {
-    onMouseDown: d,
-    onClick: c,
-    onMouseUp: u,
-    onMouseLeave: p
-  };
+import { useCallback, useRef } from 'react'
+import { isAnyMobile } from '../figma_app/778880'
+
+export interface ClickHandlerProps {
+  onClick?: (event: React.MouseEvent) => void
+  onMouseDown?: (event: React.MouseEvent) => void
+  onMouseUp?: (event: React.MouseEvent) => void
+  onMouseLeave?: (event: React.MouseEvent) => void
+  isDisabled?: boolean
 }
-export const Q = $$a0;
+
+export interface ClickHandlerResult {
+  onMouseDown?: (event: React.MouseEvent) => void
+  onClick?: (event: React.MouseEvent) => void
+  onMouseUp?: (event: React.MouseEvent) => void
+  onMouseLeave?: (event: React.MouseEvent) => void
+}
+
+/**
+ * Custom hook for handling click events with mobile support
+ * Refactored from $$a0 function
+ */
+export function useClickHandler({
+  onClick,
+  onMouseDown,
+  onMouseUp,
+  onMouseLeave,
+  isDisabled = false,
+}: ClickHandlerProps): ClickHandlerResult {
+  const isMouseDownRef = useRef(false)
+  const isMobileDevice = isAnyMobile
+
+  const handleMouseDown = useCallback((event: React.MouseEvent) => {
+    isMouseDownRef.current = true
+    if (!isMobileDevice) {
+      onClick?.(event)
+    }
+    onMouseDown?.(event)
+  }, [isMobileDevice, onClick, onMouseDown])
+
+  const handleClick = useCallback((event: React.MouseEvent) => {
+    if (isMobileDevice || !isMouseDownRef.current) {
+      onClick?.(event)
+    }
+  }, [isMobileDevice, onClick])
+
+  const handleMouseUp = useCallback((event: React.MouseEvent) => {
+    isMouseDownRef.current = false
+    onMouseUp?.(event)
+  }, [onMouseUp])
+
+  const handleMouseLeave = useCallback((event: React.MouseEvent) => {
+    isMouseDownRef.current = false
+    onMouseLeave?.(event)
+  }, [onMouseLeave])
+
+  if (isDisabled) {
+    return {
+      onMouseLeave: handleMouseLeave,
+    }
+  }
+
+  return {
+    onMouseDown: handleMouseDown,
+    onClick: handleClick,
+    onMouseUp: handleMouseUp,
+    onMouseLeave: handleMouseLeave,
+  }
+}
+
+export const Q = useClickHandler

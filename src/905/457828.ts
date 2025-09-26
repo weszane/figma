@@ -11,7 +11,7 @@ import { A as _$$A } from "../905/615098";
 import { _ as _$$_ } from "../905/264868";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { N } from "../905/794224";
-import { q } from "../905/600041";
+import { ThumbnailContainer } from "../905/600041";
 import { Tf, nb, hi } from "../figma_app/543100";
 import { FilePermissionsLgShadowView } from "../figma_app/43951";
 function g({
@@ -144,7 +144,7 @@ export function $$I0({
     fileKey: p,
     linkAccessOverrideKey: null
   } : null)), Tf.getIsPasswordProtected(e)) {
-    if ("loading" === o.status) return jsx(q, {
+    if ("loading" === o.status) return jsx(ThumbnailContainer, {
       ...i
     });
     if (!o.unwrapOr(!1)) return jsx(N, {

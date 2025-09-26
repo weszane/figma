@@ -8,7 +8,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { ww } from "../figma_app/194956";
-import { pW } from "../905/160095";
+import { TrackedLinkButton } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { TrackedButton, withTrackedClick } from "../figma_app/831799";
@@ -17,7 +17,7 @@ import { getVisibleTheme } from "../905/640017";
 import { EE, lB } from "../figma_app/731583";
 import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { Jn } from "../905/927294";
-import { F_ } from "../905/748636";
+import { ArrowPosition } from "../905/748636";
 import { P7, gm as _$$gm, my } from "../905/383548";
 import { pc, eP } from "../figma_app/195407";
 import { W8e } from "../figma_app/27776";
@@ -99,43 +99,43 @@ export function $$w0(e) {
 }
 function O(e, t) {
   switch (e) {
-    case F_.TOP:
-    case F_.BOTTOM:
+    case ArrowPosition.TOP:
+    case ArrowPosition.BOTTOM:
       return {
         left: t
       };
-    case F_.LEFT_TITLE:
-    case F_.RIGHT_BODY:
-    case F_.RIGHT_TITLE:
+    case ArrowPosition.LEFT_TITLE:
+    case ArrowPosition.RIGHT_BODY:
+    case ArrowPosition.RIGHT_TITLE:
       return {
         top: t
       };
-    case F_.TOP_RIGHT:
+    case ArrowPosition.TOP_RIGHT:
       return {};
   }
 }
 let R = {
-  [F_.TOP]: {
+  [ArrowPosition.TOP]: {
     foregroundStyle: FQ,
     backgroundStyle: oX
   },
-  [F_.BOTTOM]: {
+  [ArrowPosition.BOTTOM]: {
     foregroundStyle: nW,
     backgroundStyle: a5
   },
-  [F_.LEFT_TITLE]: {
+  [ArrowPosition.LEFT_TITLE]: {
     foregroundStyle: Hn,
     backgroundStyle: gF
   },
-  [F_.RIGHT_TITLE]: {
+  [ArrowPosition.RIGHT_TITLE]: {
     foregroundStyle: Ar,
     backgroundStyle: Ny
   },
-  [F_.RIGHT_BODY]: {
+  [ArrowPosition.RIGHT_BODY]: {
     foregroundStyle: Ar,
     backgroundStyle: Ny
   },
-  [F_.TOP_RIGHT]: {
+  [ArrowPosition.TOP_RIGHT]: {
     foregroundStyle: Ar,
     backgroundStyle: Ny
   }
@@ -286,7 +286,7 @@ export function $$D5(e) {
         className: OQ,
         children: [e.secondaryCtaText && e.secondaryCtaHref && jsx("span", {
           className: P1,
-          children: jsx(pW, {
+          children: jsx(TrackedLinkButton, {
             newTab: !0,
             href: e.secondaryCtaHref,
             variant: "secondary",
@@ -559,7 +559,7 @@ function U(e) {
     })]
   });
   return jsxs(Fragment, {
-    children: [e.connectorPosition === F_.TOP && t, e.connectorPosition === F_.BOTTOM && r, e.connectorPosition === F_.LEFT_TITLE && i, e.connectorPosition === F_.RIGHT_TITLE && a, e.connectorPosition === F_.RIGHT_BODY && a]
+    children: [e.connectorPosition === ArrowPosition.TOP && t, e.connectorPosition === ArrowPosition.BOTTOM && r, e.connectorPosition === ArrowPosition.LEFT_TITLE && i, e.connectorPosition === ArrowPosition.RIGHT_TITLE && a, e.connectorPosition === ArrowPosition.RIGHT_BODY && a]
   });
 }
 let B = withTrackedClick(function (e) {

@@ -1,65 +1,144 @@
-import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { permissionScopeHandler } from "../905/189185";
-import { Point } from "../905/736624";
-import { FU, b$, Bs } from "../figma_app/933328";
-import { fullscreenValue } from "../figma_app/455680";
-import { v9 } from "../figma_app/383828";
-import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { FDocumentType } from "../905/862883";
-import { r as _$$r } from "../905/632622";
-import { S } from "../905/459477";
-import { A as _$$A } from "../905/456912";
-export function $$g0({
-  alwaysSwap: e,
-  canSwap: t,
-  insertAsChildOfCanvas: i,
-  itemsToSwap: g,
-  openFileKey: f,
-  onSwap: _,
-  sourceForTracking: A,
-  insertLogArgsOverride: y,
-  insertionCallback: b
+import { useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { permissionScopeHandler } from '../905/189185'
+import { areAllSelectedInstances } from '../905/456912'
+import { fileLaunchHelper } from '../905/459477'
+import { updateSelectedNodeGuid } from '../905/632622'
+import { Point } from '../905/736624'
+import { FDocumentType } from '../905/862883'
+import { v9 } from '../figma_app/383828'
+import { fullscreenValue } from '../figma_app/455680'
+import { PrimaryWorkflowEnum } from '../figma_app/633080'
+import { b$, Bs, FU } from '../figma_app/933328'
+
+/**
+ * Handles swapping or inserting items based on user interaction and workflow type.
+ * Original function name: $$g0
+ *
+ * @param params - Configuration for swap/insert logic
+ * @returns Callback function for handling swap/insert actions
+ */
+export function setupSwapOrInsertHandler({
+  alwaysSwap,
+  canSwap,
+  insertAsChildOfCanvas,
+  itemsToSwap,
+  openFileKey,
+  onSwap,
+  sourceForTracking,
+  insertLogArgsOverride,
+  insertionCallback,
+}: {
+  alwaysSwap: boolean
+  canSwap: boolean
+  insertAsChildOfCanvas?: boolean
+  itemsToSwap?: string[]
+  openFileKey: string
+  onSwap?: (item: any) => void
+  sourceForTracking: any
+  insertLogArgsOverride?: any
+  insertionCallback?: (item: any) => void
 }) {
-  let v = useDispatch();
-  let I = useSelector(e => e.mirror.sceneGraphSelection);
-  let E = _$$A();
-  let x = S.useOpenFileProperties();
-  return useCallback((n, r, m) => {
-    let h = n.altKey;
-    if ((e || h && E) && r.type !== PrimaryWorkflowEnum.MODULE) {
-      t && permissionScopeHandler.user("swap-instance", () => v9(r, v, f, g || Object.keys(I), A, !e && h, x, m));
-      _?.(r);
-    } else {
-      _$$r();
-      let e = fullscreenValue.getViewportInfo();
-      let t = {
+  const dispatch = useDispatch<AppDispatch>()
+  const sceneGraphSelection = useSelector((state: AppState) => state.mirror.sceneGraphSelection)
+  const allSelectedInstances = areAllSelectedInstances()
+  const openFileProperties = fileLaunchHelper.useOpenFileProperties()
+
+  /**
+   * Callback to handle swap or insert logic.
+   * Original callback inside $$g0
+   */
+  const handleSwapOrInsert = useCallback(
+    (event: React.KeyboardEvent, item: any, meta?: any) => {
+      const isAltPressed = event.altKey
+
+      // Swap logic
+      if (
+        alwaysSwap
+        || (isAltPressed && allSelectedInstances)
+      ) {
+        if (item.type !== PrimaryWorkflowEnum.MODULE) {
+          canSwap
+          && permissionScopeHandler.user('swap-instance', () =>
+            v9(
+              item,
+              dispatch,
+              openFileKey,
+              itemsToSwap || Object.keys(sceneGraphSelection),
+              sourceForTracking,
+              !alwaysSwap && isAltPressed,
+              openFileProperties,
+              meta,
+            ))
+          onSwap?.(item)
+          return
+        }
+      }
+
+      // Insert logic
+      updateSelectedNodeGuid()
+      const viewportInfo = fullscreenValue.getViewportInfo()
+      const insertParams = {
         canvasPosition: {
-          x: e.offsetX,
-          y: e.offsetY
+          x: viewportInfo.offsetX,
+          y: viewportInfo.offsetY,
         },
-        insertAsChildOfCanvas: i ?? !1,
-        percentageOffset: new Point(.5, .5),
+        insertAsChildOfCanvas: insertAsChildOfCanvas ?? false,
+        percentageOffset: new Point(0.5, 0.5),
         storeInRecentsKey: FDocumentType.Design,
-        useSmartPositioning: !0
-      };
-      r.type === PrimaryWorkflowEnum.COMPONENT ? v(FU({
-        item: r,
-        ...t,
-        insertionCallback: b,
-        insertLogArgsOverride: y
-      })) : r.type === PrimaryWorkflowEnum.STATE_GROUP ? v(b$({
-        item: r,
-        ...t,
-        insertionCallback: b,
-        insertLogArgsOverride: y
-      })) : r.type === PrimaryWorkflowEnum.MODULE && v(Bs({
-        item: r,
-        ...t,
-        insertLogArgsOverride: y,
-        insertionCallback: () => fullscreenValue.triggerAction("commit")
-      }));
-    }
-  }, [e, t, v, i, y, b, g, _, x, f, I, E, A]);
+        useSmartPositioning: true,
+      }
+
+      if (item.type === PrimaryWorkflowEnum.COMPONENT) {
+        dispatch(
+          FU({
+            item,
+            ...insertParams,
+            insertionCallback,
+            insertLogArgsOverride,
+          }),
+        )
+      }
+      else if (item.type === PrimaryWorkflowEnum.STATE_GROUP) {
+        dispatch(
+          b$({
+            item,
+            ...insertParams,
+            insertionCallback,
+            insertLogArgsOverride,
+          }),
+        )
+      }
+      else if (item.type === PrimaryWorkflowEnum.MODULE) {
+        dispatch(
+          Bs({
+            item,
+            ...insertParams,
+            insertLogArgsOverride,
+            insertionCallback: () => fullscreenValue.triggerAction('commit'),
+          }),
+        )
+      }
+    },
+    [
+      alwaysSwap,
+      canSwap,
+      dispatch,
+      insertAsChildOfCanvas,
+      insertLogArgsOverride,
+      insertionCallback,
+      itemsToSwap,
+      onSwap,
+      openFileProperties,
+      openFileKey,
+      sceneGraphSelection,
+      allSelectedInstances,
+      sourceForTracking,
+    ],
+  )
+
+  return handleSwapOrInsert
 }
-export const u = $$g0;
+
+// Export with original variable name for traceability
+export const u = setupSwapOrInsertHandler

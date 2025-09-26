@@ -57,11 +57,11 @@ import { isValidEmail } from "../figma_app/416935";
 import { APILoadingStatus } from "../905/520829";
 import { CustomSpacer } from "../905/585996";
 import { BigTextInput } from "../figma_app/637027";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { registerModal } from "../905/102752";
-import { A as _$$A2, Uw, bO, JD } from "../905/219868";
+import { readerModeTosUrl, tosUrl, readerModePrivacyUrl, privacyUrl } from "../905/219868";
 import { V as _$$V } from "../905/670859";
 import { FS, DX, Kc, _2, cC, mV, NJ, ZQ, Fx } from "../905/989426";
 import { buildUploadUrl, isGovCluster } from "../figma_app/169182";
@@ -230,7 +230,7 @@ let eE = registerModal(function (e) {
                 emailAddress: r
               });
             },
-            children: jsx(_$$x, {
+            children: jsx(LoadingRenderer, {
               isLoading: !!u,
               className: cssBuilderInstance.flex.justifyCenter.$,
               children: () => renderI18nText("google_device_try_file_modal.enter_email.button")
@@ -241,11 +241,11 @@ let eE = registerModal(function (e) {
             className: NJ,
             children: renderI18nText("google_device_try_file_modal.disclaimer", {
               tos: jsx(_$$V, {
-                url: BrowserInfo.isMeetDevice ? _$$A2 : Uw,
+                url: BrowserInfo.isMeetDevice ? readerModeTosUrl : tosUrl,
                 title: getI18nString("google_device_try_file_modal.onboarding_disclaimer_tos")
               }),
               privacy_policy: jsx(_$$V, {
-                url: BrowserInfo.isMeetDevice ? bO : JD,
+                url: BrowserInfo.isMeetDevice ? readerModePrivacyUrl : privacyUrl,
                 title: getI18nString("google_device_try_file_modal.onboarding_disclaimer_privacy_policy")
               })
             })

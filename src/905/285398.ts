@@ -211,11 +211,11 @@ function resolveFontStyle({
   fontWeight: number
   italic: boolean
 }) {
-  const fonts = (debugState.getState().fonts || {})[fontFamily] || []
-  for (const font of fonts) {
-    const styles = font.styles
+  const fonts = (debugState.getState().fonts || {})[fontFamily]
+  for (const font in fonts) {
+    const styles = fonts[font].styles
     if (
-      font.source === FontSourceType.GOOGLE
+      fonts[font].source === FontSourceType.GOOGLE
       || getFalseValue()
       || console.warn(
         `Font '${fontFamily}' is not loaded from Google fonts. The font may be a shared font or installed locally.`,

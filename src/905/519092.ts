@@ -1,242 +1,418 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { Component } from "react";
-import { useDispatch } from "react-redux";
-import { generateRecordingKey } from "../figma_app/878298";
-import o from "classnames";
-import { KeyCodes } from "../905/63728";
-import { CloseButton } from "../905/17223";
-import { ButtonNegativeTracked, ButtonBasePrimaryTracked, ButtonSecondaryTracked } from "../figma_app/637027";
-import { SvgComponent } from "../905/714743";
-import { cssBuilderInstance } from "../cssbuilder/589278";
-import { getI18nString } from "../905/303541";
-import { popModalStack } from "../905/156213";
-import { Dm } from "../figma_app/8833";
-import { shouldHandleMultiTouchOrPressure } from "../figma_app/753501";
-import { K1, CY, Y5, zB, Vw, jT, yl, P9, nd, SM, x7, EJ, EO, UR, xR, qG, JF, Wc, Rh, Jg, eo, fp, hS, TX, R2 } from "../905/634218";
-var l = o;
-let y = "header-modal-title";
-export class $$b1 extends Component {
-  constructor() {
-    super(...arguments);
-    this.onBackgroundMouseDown = e => {
-      !this.props.disableClickOutsideToHide && this.props.onClose && this.props.onClose(e);
-      this.props.onBackgroundMouseDown && this.props.onBackgroundMouseDown(e);
-    };
-    this.onModalMouseDown = e => {
-      e.stopPropagation();
-    };
-    this.onKeyDown = e => {
-      e.stopPropagation();
-      e.keyCode === KeyCodes.ESCAPE && (!this.props.disableClickOutsideToHide || this.props.closeOnEsc) && this.props.onClose && this.props.onClose(e);
-      e.keyCode === KeyCodes.ENTER && this.props.closeOnEnter && this.props.onClose && this.props.onClose(e);
-    };
-    this.bgRef = e => {
-      e && !e.contains(document.activeElement) && (this.props.closeOnEsc || this.props.focus) && e.focus();
-    };
+import classNames from 'classnames'
+import React, { Component } from 'react'
+import { useDispatch } from 'react-redux'
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { CloseButton } from '../905/17223'
+import { KeyCodes } from '../905/63728'
+import { popModalStack } from '../905/156213'
+import { getI18nString } from '../905/303541'
+import { CY, EJ, EO, eo, fp, hS, JF, Jg, jT, K1, nd, P9, qG, R2, Rh, SM, TX, UR, Vw, Wc, x7, xR, Y5, yl, zB } from '../905/634218'
+import { SvgComponent } from '../905/714743'
+import { cssBuilderInstance } from '../cssbuilder/589278'
+import { Dm } from '../figma_app/8833'
+import { ButtonBasePrimaryTracked, ButtonNegativeTracked, ButtonSecondaryTracked } from '../figma_app/637027'
+import { shouldHandleMultiTouchOrPressure } from '../figma_app/753501'
+import { generateRecordingKey } from '../figma_app/878298'
+
+
+export interface HeaderModalProps {
+  disableClickOutsideToHide?: boolean
+  onClose?: (event: React.MouseEvent | React.KeyboardEvent) => void
+  onBackgroundMouseDown?: (event: React.MouseEvent) => void
+  closeOnEsc?: boolean
+  closeOnEnter?: boolean
+  focus?: boolean
+  fixedTop?: boolean
+  fixedCenter?: boolean
+  fixedTopDynamic?: boolean
+  transparentBackground?: boolean
+  maxWidth?: number
+  minWidth?: number
+  paddingLeft?: number
+  paddingRight?: number
+  bottomSection?: React.ReactNode
+  containerClassName?: string
+  allowScroll?: boolean
+  innerContainerClassName?: string
+  closeTrackingText?: string
+  containerRef?: React.Ref<HTMLDivElement>
+  customButton?: React.ReactNode
+  disableHeaderBottomBorder?: boolean
+  headerClassName?: string
+  headerSize?: 'large' | 'hidden' | 'default'
+  isCloseHidden?: boolean
+  onMouseDown?: (event: React.MouseEvent) => void
+  title?: string | React.ReactNode | ((closeButton: React.ReactNode, props: { titleId: string }) => React.ReactNode)
+  titleIconSvgSrc?: string
+  titleIconURL?: string
+  titleId: string
+  truncateTitleText?: boolean
+  children?: React.ReactNode
+  onClick?: (event: React.MouseEvent) => void
+  dataTestId?: string
+}
+
+export class HeaderModal extends Component<HeaderModalProps> {
+  static displayName = 'HeaderModal'
+  private backgroundRef: React.RefObject<HTMLDivElement>
+
+  constructor(props: HeaderModalProps) {
+    super(props)
+    this.backgroundRef = React.createRef()
   }
+
+  componentDidMount(): void {
+    // Focus the background element if needed
+    if (this.backgroundRef.current
+      && !this.backgroundRef.current.contains(document.activeElement)
+      && (this.props.closeOnEsc || this.props.focus)) {
+      this.backgroundRef.current.focus()
+    }
+  }
+
+  private handleBackgroundMouseDown = (event: React.MouseEvent): void => {
+    if (!this.props.disableClickOutsideToHide && this.props.onClose) {
+      this.props.onClose(event)
+    }
+    if (this.props.onBackgroundMouseDown) {
+      this.props.onBackgroundMouseDown(event)
+    }
+  }
+
+  private handleModalMouseDown = (event: React.MouseEvent): void => {
+    event.stopPropagation()
+  }
+
+  private handleKeyDown = (event: React.KeyboardEvent): void => {
+    event.stopPropagation()
+
+    if (event.keyCode === KeyCodes.ESCAPE
+      && (!this.props.disableClickOutsideToHide || this.props.closeOnEsc)
+      && this.props.onClose) {
+      this.props.onClose(event)
+    }
+
+    if (event.keyCode === KeyCodes.ENTER
+      && this.props.closeOnEnter
+      && this.props.onClose) {
+      this.props.onClose(event)
+    }
+  }
+
   render() {
-    let e = l()(K1, Dm, {
+    const modalClasses = classNames(K1, Dm, {
       [CY]: this.props.fixedTop,
       [Y5]: this.props.fixedCenter,
       [zB]: this.props.fixedTopDynamic,
-      [Vw]: this.props.transparentBackground
-    });
-    let t = this.props.maxWidth || 492;
-    let i = this.props.minWidth || 348;
-    t < i && (t = 492, i = 348);
-    let r = this.props.paddingLeft || 0;
-    let a = this.props.paddingRight || 0;
-    let s = this.props.bottomSection;
-    return jsx("div", {
+      [Vw]: this.props.transparentBackground,
+    })
+
+    let maxWidth = this.props.maxWidth || 492
+    let minWidth = this.props.minWidth || 348
+
+    // Ensure maxWidth is not less than minWidth
+    if (maxWidth < minWidth) {
+      maxWidth = 492
+      minWidth = 348
+    }
+
+    const paddingLeft = this.props.paddingLeft || 0
+    const paddingRight = this.props.paddingRight || 0
+    const hasBottomSection = !!this.props.bottomSection
+
+    return jsx('div', {
       tabIndex: 0,
-      className: e,
-      onPointerDown: this.onBackgroundMouseDown,
-      onKeyDown: this.onKeyDown,
+      className: modalClasses,
+      onPointerDown: this.handleBackgroundMouseDown,
+      onKeyDown: this.handleKeyDown,
       onClick: this.props.onClick,
-      ref: this.bgRef,
-      children: jsx("div", {
-        className: l()(s ? jT : yl, this.props.containerClassName, {
-          [P9]: this.props.allowScroll
+      ref: this.backgroundRef,
+      children: jsx('div', {
+        'className': classNames(hasBottomSection ? jT : yl, this.props.containerClassName, {
+          [P9]: this.props.allowScroll,
         }),
-        style: {
-          maxWidth: t,
-          minWidth: i,
-          paddingLeft: r,
-          paddingRight: a
+        'style': {
+          maxWidth,
+          minWidth,
+          paddingLeft,
+          paddingRight,
         },
-        onPointerDown: this.onModalMouseDown,
-        role: "dialog",
-        "data-testid": this.props.dataTestId,
-        "aria-labelledby": y,
-        "aria-modal": !0,
-        children: (() => {
-          let e = jsx($$I2, {
+        'onPointerDown': this.handleModalMouseDown,
+        'role': 'dialog',
+        'data-testid': this.props.dataTestId,
+        'aria-labelledby': this.props.titleId,
+        'aria-modal': true,
+        'children': (() => {
+          const headerModalContainer = jsx(HeaderModalContainer, {
             className: this.props.innerContainerClassName,
             closeTrackingText: this.props.closeTrackingText,
             containerRef: this.props.containerRef,
             customButton: this.props.customButton,
             disableHeaderBottomBorder: this.props.disableHeaderBottomBorder,
-            headerClassname: this.props.headerClassName || "",
+            headerClassname: this.props.headerClassName || '',
             headerSize: this.props.headerSize,
             isCloseHidden: this.props.isCloseHidden,
             onClose: this.props.onClose,
-            onMouseDown: this.onModalMouseDown,
+            onMouseDown: this.handleModalMouseDown,
             title: this.props.title,
             titleIconSvgSrc: this.props.titleIconSvgSrc,
             titleIconURL: this.props.titleIconURL,
-            titleId: y,
+            titleId: this.props.titleId,
             truncateTitleText: this.props.truncateTitleText,
-            children: this.props.children
-          });
-          let t = !!this.props.bottomSection && jsx("div", {
+            children: this.props.children,
+          })
+
+          const bottomSection = hasBottomSection && jsx('div', {
             className: nd,
-            onPointerDown: this.onModalMouseDown,
-            children: this.props.bottomSection
-          });
-          return s ? jsxs(Fragment, {
-            children: [jsx("div", {
-              className: SM,
-              children: e
-            }), t]
-          }) : jsx(Fragment, {
-            children: e
-          });
-        })()
-      })
-    });
+            onPointerDown: this.handleModalMouseDown,
+            children: this.props.bottomSection,
+          })
+
+          return hasBottomSection
+            ? jsxs(Fragment, {
+                children: [
+                  jsx('div', {
+                    className: SM,
+                    children: headerModalContainer,
+                  }),
+                  bottomSection,
+                ],
+              })
+            : jsx(Fragment, {
+                children: headerModalContainer,
+              })
+        })(),
+      }),
+    })
   }
 }
-export function $$v0(e) {
-  let t = useDispatch();
-  let i = e.destructive ? ButtonNegativeTracked : ButtonBasePrimaryTracked;
-  let r = () => {
-    if (e.onCancel) {
-      e.onCancel();
-      return;
-    }
-    t(popModalStack());
-  };
-  let s = jsxs(Fragment, {
-    children: [e.hideCancel || jsx(ButtonSecondaryTracked, {
-      innerText: getI18nString("general.cancel"),
-      onClick: r,
-      className: x7,
-      children: e.cancelText || getI18nString("general.cancel")
-    }), jsx(i, {
-      innerText: e.confirmText || getI18nString("general.okay"),
-      onClick: i => {
-        if (i.preventDefault(), e.onSubmit) {
-          e.onSubmit();
-          return;
-        }
-        t(popModalStack());
-        e.onConfirm && e.onConfirm();
-      },
-      className: EJ,
-      trackingProperties: e.trackedConfirmationProperties || {},
-      disabled: e.disabled,
-      children: e.confirmText || getI18nString("general.okay")
-    })]
-  });
-  return jsx($$b1, {
-    maxWidth: e.maxWidth || 344,
-    minWidth: 344,
-    fixedTop: !0,
-    onClose: r,
-    ...e,
-    containerClassName: e.useRedesign ? l()(e.containerClassName, EO) : void 0,
-    headerClassName: e.useRedesign ? l()(cssBuilderInstance.textBodyLargeStrong.pb4.pt4.$, e.headerClassName) : void 0,
-    children: e.useRedesign ? jsxs("div", {
-      className: cssBuilderInstance.flex.flexColumn.$,
-      children: [jsx("div", {
-        className: cssBuilderInstance.$$if(!e.fullWidthContent, cssBuilderInstance.p16).flex.flexColumn.$,
-        children: e.children
-      }), jsx("div", {
-        className: cssBuilderInstance.flex.justifyEnd.p16.bt1.colorBorder.bSolid.$,
-        children: s
-      })]
-    }) : jsxs("div", {
-      className: UR,
-      children: [jsx("div", {
-        className: xR,
-        children: e.children
-      }), jsx("div", {
-        className: qG,
-        children: s
-      })]
-    })
-  });
+
+export interface ConfirmationModalProps {
+  destructive?: boolean
+  onCancel?: () => void
+  hideCancel?: boolean
+  cancelText?: string
+  confirmText?: string
+  onSubmit?: () => void
+  onConfirm?: () => void
+  maxWidth?: number
+  useRedesign?: boolean
+  containerClassName?: string
+  headerClassName?: string
+  fullWidthContent?: boolean
+  trackedConfirmationProperties?: Record<string, any>
+  disabled?: boolean
+  children?: React.ReactNode
+  onClose?: () => void
 }
-$$b1.displayName = "HeaderModal";
-export class $$I2 extends Component {
+
+export function ConfirmationModal(props: ConfirmationModalProps) {
+  const dispatch = useDispatch()
+
+  const ButtonComponent = props.destructive ? ButtonNegativeTracked : ButtonBasePrimaryTracked
+
+  const handleCancel = () => {
+    if (props.onCancel) {
+      props.onCancel()
+      return
+    }
+    dispatch(popModalStack())
+  }
+
+  const buttons = jsxs(Fragment, {
+    children: [
+      !props.hideCancel && jsx(ButtonSecondaryTracked, {
+        innerText: props.cancelText || getI18nString('general.cancel'),
+        onClick: handleCancel,
+        className: x7,
+        children: props.cancelText || getI18nString('general.cancel'),
+      }),
+      jsx(ButtonComponent, {
+        innerText: props.confirmText || getI18nString('general.okay'),
+        onClick: (event: React.MouseEvent) => {
+          event.preventDefault()
+          if (props.onSubmit) {
+            props.onSubmit()
+            return
+          }
+          dispatch(popModalStack())
+          if (props.onConfirm) {
+            props.onConfirm()
+          }
+        },
+        className: EJ,
+        trackingProperties: props.trackedConfirmationProperties || {},
+        disabled: props.disabled,
+        children: props.confirmText || getI18nString('general.okay'),
+      }),
+    ],
+  })
+
+  return jsx(HeaderModal, {
+    maxWidth: props.maxWidth || 344,
+    minWidth: 344,
+    fixedTop: true,
+    onClose: handleCancel,
+    ...props,
+    containerClassName: props.useRedesign ? classNames(props.containerClassName, EO) : undefined,
+    headerClassName: props.useRedesign ? classNames(cssBuilderInstance.textBodyLargeStrong.pb4.pt4.$, props.headerClassName) : undefined,
+    children: props.useRedesign
+      ? jsxs('div', {
+          className: cssBuilderInstance.flex.flexColumn.$,
+          children: [
+            jsx('div', {
+              className: cssBuilderInstance.if(!props.fullWidthContent, cssBuilderInstance.p16).flex.flexColumn.$,
+              children: props.children,
+            }),
+            jsx('div', {
+              className: cssBuilderInstance.flex.justifyEnd.p16.bt1.colorBorder.bSolid.$,
+              children: buttons,
+            }),
+          ],
+        })
+      : jsxs('div', {
+          className: UR,
+          children: [
+            jsx('div', {
+              className: xR,
+              children: props.children,
+            }),
+            jsx('div', {
+              className: qG,
+              children: buttons,
+            }),
+          ],
+        }),
+  })
+}
+
+HeaderModal.displayName = 'HeaderModal'
+
+export interface HeaderModalContainerProps {
+  'headerSize'?: 'large' | 'hidden' | 'default'
+  'headerClassname'?: string
+  'stickyHeader'?: boolean
+  'disableHeaderBottomBorder'?: boolean
+  'className'?: string
+  'containerRef'?: React.Ref<HTMLDivElement>
+  'aria-modal'?: boolean
+  'onClose'?: () => void
+  'onMouseDown'?: (event: React.MouseEvent) => void
+  'closeTrackingText'?: string
+  'closeButtonClassName'?: string
+  'title'?: string | React.ReactNode | ((closeButton: React.ReactNode, props: { titleId: string }) => React.ReactNode)
+  'titleIconSvgSrc'?: string
+  'titleIconURL'?: string
+  'titleIconSvgClassName'?: string
+  'titleId': string
+  'truncateTitleText'?: boolean
+  'children'?: React.ReactNode
+  'customButton'?: React.ReactNode
+  'isCloseHidden'?: boolean
+  'onMouseMove'?: (event: React.MouseEvent) => void
+}
+
+export class HeaderModalContainer extends Component<HeaderModalContainerProps> {
+  static displayName = 'HeaderModalContainer'
   render() {
-    let e = (() => {
+    const headerClass = (() => {
       switch (this.props.headerSize) {
-        case "large":
-          return JF;
-        case "hidden":
-          return Wc;
+        case 'large':
+          return JF
+        case 'hidden':
+          return Wc
         default:
-          return Rh;
+          return Rh
       }
-    })();
-    let t = l()(e, this.props.headerClassname, {
+    })()
+
+    const headerContainerClasses = classNames(headerClass, this.props.headerClassname, {
       [cssBuilderInstance.sticky.top0.left0.zIndex1.colorBg.$]: this.props.stickyHeader,
-      [Jg]: !this.props.disableHeaderBottomBorder
-    });
-    let i = jsx(CloseButton, {
+      [Jg]: !this.props.disableHeaderBottomBorder,
+    })
+
+    const closeButton = jsx(CloseButton, {
       onClick: this.props.onClose,
       onMouseDown: this.props.onMouseDown,
-      innerText: this.props.closeTrackingText || "Close",
+      innerText: this.props.closeTrackingText || 'Close',
       className: this.props.closeButtonClassName,
-      recordingKey: generateRecordingKey(this.props, "headerModalContainer"),
-      dataTestId: generateRecordingKey(this.props, "headerModalContainer") + ".close-button"
-    });
-    let r = shouldHandleMultiTouchOrPressure();
-    return jsxs("div", {
-      className: `${this.props.className || ""}`,
-      ref: this.props.containerRef,
-      "aria-modal": this.props["aria-modal"],
-      children: [jsxs("div", {
-        className: t,
-        onPointerMove: r ? this.props.onMouseMove : void 0,
-        onMouseMove: r ? void 0 : this.props.onMouseMove,
-        children: [this.props.titleIconURL && jsx("div", {
-          className: eo,
-          children: jsx("img", {
-            src: this.props.titleIconURL,
-            alt: ""
-          })
-        }), this.props.titleIconSvgSrc && jsx("div", {
-          className: fp,
-          children: jsx(SvgComponent, {
-            svg: this.props.titleIconSvgSrc,
-            className: this.props.titleIconSvgClassName
-          })
-        }), "function" == typeof this.props.title ? this.props.title(i, {
-          titleId: this.props.titleId
-        }) : jsxs(Fragment, {
-          children: ["string" == typeof this.props.title ? jsx(E, {
-            title: this.props.title,
-            titleId: this.props.titleId,
-            truncateTitleText: this.props.truncateTitleText
-          }) : this.props.title, jsxs("div", {
-            className: hS,
-            children: [this.props.customButton, !this.props.isCloseHidden && i]
-          })]
-        })]
-      }), this.props.children]
-    });
+      recordingKey: generateRecordingKey(this.props, 'headerModalContainer'),
+      dataTestId: `${generateRecordingKey(this.props, 'headerModalContainer')}.close-button`,
+    })
+
+    const shouldHandlePressure = shouldHandleMultiTouchOrPressure()
+
+    return jsxs('div', {
+      'className': `${this.props.className || ''}`,
+      'ref': this.props.containerRef,
+      'aria-modal': this.props['aria-modal'],
+      'children': [
+        jsxs('div', {
+          className: headerContainerClasses,
+          onPointerMove: shouldHandlePressure ? this.props.onMouseMove : undefined,
+          onMouseMove: shouldHandlePressure ? undefined : this.props.onMouseMove,
+          children: [
+            this.props.titleIconURL && jsx('div', {
+              className: eo,
+              children: jsx('img', {
+                src: this.props.titleIconURL,
+                alt: '',
+              }),
+            }),
+            this.props.titleIconSvgSrc && jsx('div', {
+              className: fp,
+              children: jsx(SvgComponent, {
+                svg: this.props.titleIconSvgSrc,
+                className: this.props.titleIconSvgClassName,
+              }),
+            }),
+            typeof this.props.title === 'function'
+              ? this.props.title(closeButton, {
+                  titleId: this.props.titleId,
+                })
+              : jsxs(Fragment, {
+                  children: [
+                    typeof this.props.title === 'string'
+                      ? jsx(TitleElement, {
+                          title: this.props.title,
+                          titleId: this.props.titleId,
+                          truncateTitleText: this.props.truncateTitleText,
+                        })
+                      : this.props.title,
+                    jsxs('div', {
+                      className: hS,
+                      children: [
+                        this.props.customButton,
+                        !this.props.isCloseHidden && closeButton,
+                      ],
+                    }),
+                  ],
+                }),
+          ],
+        }),
+        this.props.children,
+      ],
+    })
   }
 }
-function E(e) {
-  return jsx("h1", {
-    id: e.titleId,
-    className: e.truncateTitleText ? TX : R2,
-    children: e.title
-  });
+
+interface TitleElementProps {
+  title: string
+  titleId: string
+  truncateTitleText?: boolean
 }
-$$I2.displayName = "HeaderModalContainer";
-export const Dd = $$v0;
-export const OJ = $$b1;
-export const ZD = $$I2;
+
+function TitleElement(props: TitleElementProps) {
+  return jsx('h1', {
+    id: props.titleId,
+    className: props.truncateTitleText ? TX : R2,
+    children: props.title,
+  })
+}
+
+HeaderModalContainer.displayName = 'HeaderModalContainer'
+
+// Export aliases for backward compatibility
+export const Dd = ConfirmationModal
+export const OJ = HeaderModal
+export const ZD = HeaderModalContainer

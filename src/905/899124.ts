@@ -29,7 +29,7 @@ import { AccessLevelEnum } from "../905/557142";
 import { UserAPIHandlers } from "../905/93362";
 import { registerModal } from "../905/102752";
 import { fZ } from "../figma_app/805373";
-import { Dd, OJ } from "../905/519092";
+import { ConfirmationModal, HeaderModal } from "../905/519092";
 import { hK } from "../figma_app/211706";
 import { bUL } from "../figma_app/822011";
 import { FlashActions } from "../905/573154";
@@ -52,7 +52,7 @@ let M = registerModal(function (e) {
   let c = () => userHasAdminLevelPermissions ? renderI18nText("file_browser.draft_move_confirmation_modal.move_drafts_team_owner_substring") : renderI18nText("file_browser.draft_move_confirmation_modal.move_drafts_team_member_substring");
   return jsx(TrackingProvider, {
     name: "Plan Spaces Pro Draft Move Confirmation Modal",
-    children: jsx(Dd, {
+    children: jsx(ConfirmationModal, {
       title: getI18nString("file_browser.draft_move_modal.confirmation_modal_header", {
         fileCount: l,
         teamName
@@ -117,7 +117,7 @@ let Q = registerModal(function (e) {
   let c = !o.trim().length;
   return jsx(TrackingProvider, {
     name: "Plan Spaces Pro Draft Move Confirmation Modal",
-    children: jsx(Dd, {
+    children: jsx(ConfirmationModal, {
       cancelText: getI18nString("file_browser.draft_move_modal.back"),
       confirmText: getI18nString("file_browser.draft_move_modal.create_and_move_drafts"),
       disabled: c,
@@ -327,7 +327,7 @@ export let $$en0 = registerModal(function (e) {
     } = ex(t.team?.currentTeamUser);
     return hasDesignFiles && hasFigjamFiles && !isFullSeatForDesign && !isFullSeatForFigjam ? j.DESIGN_AND_FIGJAM : hasDesignFiles && !isFullSeatForDesign ? j.DESIGN : hasFigjamFiles && !isFullSeatForFigjam ? j.FIGJAM : j.NONE;
   };
-  return "loading" === ep.status || el ? jsx(OJ, {
+  return "loading" === ep.status || el ? jsx(HeaderModal, {
     title: eA,
     fixedCenter: !0,
     minWidth: 480,
@@ -347,7 +347,7 @@ export let $$en0 = registerModal(function (e) {
       IsMoveAsync: !!moveAllDraftsAsync,
       isMoveAll: !!isMoveAll
     },
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: eA,
       fixedCenter: !0,
       minWidth: 480,
@@ -586,7 +586,7 @@ function ea(e) {
       text: i,
       dataTestId: `${e.name}-badge`,
       color: e.checked ? BadgeColor.TOOLBAR_SELECTED : BadgeColor.DEFAULT,
-      className: l()("draft_move_modal--teamBadge--ODLch", cssBuilderInstance.mr8.$$if(!e.checked, cssBuilderInstance.colorBgBrandTertiary.colorText).$)
+      className: l()("draft_move_modal--teamBadge--ODLch", cssBuilderInstance.mr8.if(!e.checked, cssBuilderInstance.colorBgBrandTertiary.colorText).$)
     })]
   });
 }

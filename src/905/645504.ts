@@ -7,8 +7,8 @@ import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { N } from "../figma_app/268271";
-import { rq } from "../905/425180";
-import { EL } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { PositioningStrategy } from "../905/858282";
 import { s3e } from "../figma_app/6204";
 export function $$g0({
   planType: e
@@ -41,7 +41,7 @@ export function $$g0({
     }
   })();
   return jsx(Fragment, {
-    children: f && jsx(rq, {
+    children: f && jsx(OnboardingModal, {
       clickOutsideToHide: !0,
       description: renderI18nText("admin_settings.billing.onboarding.tooltip.overview_secondary_tab.description"),
       emphasized: !0,
@@ -54,7 +54,7 @@ export function $$g0({
         onClick: complete,
         ctaTrackingDescriptor: UpgradeAction.GOT_IT
       },
-      shouldCenterArrow: EL.BEST_EFFORT,
+      shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
       targetKey: f.targetKey,
       title: renderI18nText("admin_settings.billing.onboarding.tooltip.overview_secondary_tab.title"),
       trackingContextName: f.trackingContextName

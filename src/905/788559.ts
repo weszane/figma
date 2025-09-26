@@ -13,14 +13,14 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler, hideModal } from "../905/156213";
 import { JT } from "../figma_app/632248";
 import { uZ, i9 } from "../905/487011";
-import { EM, s7, Cb } from "../905/278499";
-import { B as _$$B } from "../905/222272";
+import { AIActionFeedbackType, AIActionSentimentType, AIActionSentimentValue } from "../905/278499";
+import { FlexBox } from "../905/222272";
 import { Label } from "../905/270045";
 import { isCommandEvent } from "../905/63728";
 import { Point } from "../905/736624";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { registerModal } from "../905/102752";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 let d = memo(function (e) {
   return jsx("svg", {
     width: "24",
@@ -47,9 +47,9 @@ let T = registerModal(function (e) {
   let u = useCallback(() => {
     l.length && (uZ({
       ...aiTrackingContext,
-      additional_feedback_view_type: EM.FREE_TEXT,
+      additional_feedback_view_type: AIActionFeedbackType.FREE_TEXT,
       feedback: l
-    }), additionalFeedbackCallback && additionalFeedbackCallback(EM.FREE_TEXT, l), onClose(), onSubmitted());
+    }), additionalFeedbackCallback && additionalFeedbackCallback(AIActionFeedbackType.FREE_TEXT, l), onClose(), onSubmitted());
   }, [aiTrackingContext, additionalFeedbackCallback, onClose, onSubmitted, l]);
   let p = useHandleFocusEvent(e.recordingKey, "submit", e => {
     e.preventDefault();
@@ -58,7 +58,7 @@ let T = registerModal(function (e) {
   let h = useCallback(e => {
     "Enter" === e.key && isCommandEvent(e) && !e.altKey && !e.shiftKey && (e.preventDefault(), e.stopPropagation(), u());
   }, [u]);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     title: getI18nString("qa.additional_feedback"),
     initialWidth: 320,
     dragHeaderOnly: !0,
@@ -86,7 +86,7 @@ let T = registerModal(function (e) {
       }), jsx(Label, {
         className: [C, "feedback_modal--secondary--llXoR"].join(" "),
         children: renderI18nText("qa.we_use_this_to_improve")
-      }), jsx(_$$B, {
+      }), jsx(FlexBox, {
         justify: "end",
         children: jsx(Button, {
           type: "submit",
@@ -134,11 +134,11 @@ export function $$L0({
     M && M.current?.focus();
     i9({
       ...e,
-      sentiment_feedback_view_type: s7.THUMB_RATING,
+      sentiment_feedback_view_type: AIActionSentimentType.THUMB_RATING,
       positive_feedback: "positive" === t,
-      feedback: "positive" === t ? Cb.POSITIVE : Cb.NEGATIVE
+      feedback: "positive" === t ? AIActionSentimentValue.POSITIVE : AIActionSentimentValue.NEGATIVE
     });
-    i && i(s7.THUMB_RATING, t);
+    i && i(AIActionSentimentType.THUMB_RATING, t);
     N.includes(e.action) && trackEventAnalytics("First Draft: Feedback", {
       clientLifecycleId: e.clientLifecycleId,
       file_key: e.file_key,
@@ -159,10 +159,10 @@ export function $$L0({
     className: cssBuilderInstance.pl4.flex.$,
     ref: M,
     tabIndex: -1,
-    children: jsxs(_$$B, {
+    children: jsxs(FlexBox, {
       fullWidth: !0,
       align: "center",
-      children: [V && jsx(_$$B, {
+      children: [V && jsx(FlexBox, {
         fullWidth: !0,
         justify: "space-between",
         children: D.selectedFeedback && D.shouldShowAdditionalFeedback && getFeatureFlags().qa_user_additional_feedback ? jsx("div", {
@@ -199,7 +199,7 @@ export function $$L0({
         })
       }), jsx("div", {
         className: cssBuilderInstance.minH24.$,
-        children: !D.selectedFeedback && jsxs(_$$B, {
+        children: !D.selectedFeedback && jsxs(FlexBox, {
           gap: 4,
           children: [jsx("div", {
             className: R,

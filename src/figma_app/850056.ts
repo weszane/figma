@@ -1,7 +1,7 @@
-import { b } from "../905/275748";
+import { LazyComponentFactory } from "../905/275748";
 import _require from "../a88a4c5a/123304";
 import { NONE_SYMBOL } from "../905/992467";
-export let $$i0 = new b({
+export let $$i0 = new LazyComponentFactory({
   name: "fullscreen_design",
   dependencies: [],
   exports: {

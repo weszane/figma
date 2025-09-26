@@ -54,7 +54,7 @@ import { SK } from "../905/619652";
 import { b as _$$b } from "../figma_app/755529";
 import { useSelectionPropertyValue, useHasSelectedStyle } from "../905/275640";
 import { Rb, Pt as _$$Pt } from "../figma_app/852050";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useAppModelProperty } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { Xo } from "../figma_app/482495";
@@ -105,7 +105,7 @@ import { sO } from "../figma_app/21029";
 import { isSlidesFile } from "../figma_app/252485";
 import { Sw, rM, UM } from "../905/95091";
 import { s as _$$s2 } from "../figma_app/268276";
-import { P as _$$P } from "../905/907246";
+import { renderEventShield } from "../905/907246";
 import { t as _$$t3 } from "../905/859481";
 import { V0, zr, w8, Fc } from "../figma_app/359164";
 import { v9, N4, LO } from "../figma_app/433906";
@@ -461,7 +461,7 @@ let $$tc5 = memo(function ({
 }) {
   let k = useDispatch();
   let M = Xo();
-  let F = Um();
+  let F = useDropdownState();
   let j = !!useContext(zK);
   let U = j ? `style-modal-${qj(m)}` : qj(m);
   let B = WH(h, g, _);
@@ -1224,7 +1224,7 @@ export function $$th8(e) {
     useGrid
   } = useContext(dD);
   return jsxs(Fragment, {
-    children: [jsx(_$$P, {
+    children: [jsx(renderEventShield, {
       children: jsx(_$$D2, {
         ...d,
         onMouseDown: t,
@@ -1273,7 +1273,7 @@ export function $$th8(e) {
   });
 }
 function tm(e) {
-  return e.opensPicker ? jsx(_$$P, {
+  return e.opensPicker ? jsx(renderEventShield, {
     children: e.children
   }, e.componentKey) : jsx(_$$Fragment, {
     children: e.children
@@ -1330,7 +1330,7 @@ function tf({
   openPickerOnInitialRender: u
 }) {
   let _ = useCurrentFileKey();
-  let h = Um();
+  let h = useDropdownState();
   let m = Xo();
   let {
     stateStylePickerShown,

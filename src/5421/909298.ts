@@ -13,7 +13,7 @@ import { logInfo } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
 import { h6 } from "../figma_app/852050";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { getLibraryNames } from "../905/506188";
 import { Zh } from "../figma_app/2590";
 import { zt } from "../figma_app/84580";
@@ -210,7 +210,7 @@ function U({
   ariaLabelledBy: i
 }) {
   let a = useDispatch();
-  let l = Um();
+  let l = useDropdownState();
   let s = "set-variable-mode--select-variable-set-" + n;
   let {
     localVariableSets,
@@ -250,7 +250,7 @@ function $({
   ariaLabelledBy: l
 }) {
   let s = useDispatch();
-  let d = Um();
+  let d = useDropdownState();
   let c = "set-variable-mode--select-variable-mode-" + a;
   let {
     allVariableSets

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppStateTsApi } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -66,7 +66,7 @@ export function $$I2() {
     unpublishTemplate: useCallback(t => {
       E && (i({
         state: F4.UNPUBLISH_TEMPLATE_INITIATED
-      }), XHR.del(`/api/templates/file/${t}`).then(() => {
+      }), sendWithRetry.del(`/api/templates/file/${t}`).then(() => {
         $$b1(e);
         AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(""));
         e(ZS({

@@ -3,16 +3,16 @@ import { HubFileSchema } from '../905/71785'
 import { Ip } from '../905/239603'
 import { FileKeySourceEnum } from '../905/412913'
 import { fileEntityModel } from '../905/806985'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { APIParameterUtils, createMetaValidator, createNoOpValidator } from '../figma_app/181241'
 import { stringSchema } from '../figma_app/198712'
 import { cI, ComponentSchema, createFileKeySchema, StateGroupDetailSchema, StyleSchema } from '../figma_app/633080'
 
 /**
- * Required headers for XHR requests.
+ * Required headers for sendWithRetry requests.
  * @original u
  */
-const requiredHeaders = XHR.requiredHeaders
+const requiredHeaders = sendWithRetry.requiredHeaders
 
 /**
  * Types for API parameter objects.

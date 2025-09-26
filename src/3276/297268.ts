@@ -34,7 +34,7 @@ import { v as _$$v } from "../905/99004";
 import { s as _$$s } from "../905/518538";
 import { R as _$$R } from "../905/780757";
 import { H as _$$H, g as _$$g } from "../3276/441754";
-import { F_ } from "../905/748636";
+import { ArrowPosition } from "../905/748636";
 import { iX } from "../905/415545";
 import { UU, V_ } from "../905/807385";
 import { ue } from "../af221b13/476940";
@@ -434,7 +434,7 @@ let er = memo(function (e) {
       top: e,
       left: i.left - V_ - 10,
       pointerOffset: s,
-      pointerPosition: F_.RIGHT_BODY
+      pointerPosition: ArrowPosition.RIGHT_BODY
     });
   };
   useEffect(() => {

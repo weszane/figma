@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
-import { bE } from "../905/479155";
+import { useFocusWhenDropdownClosed } from "../905/479155";
 export function $$a0(e) {
-  bE(e);
+  useFocusWhenDropdownClosed(e);
   let t = useCallback(() => {
     e.current && e.current.focus();
   }, [e]);

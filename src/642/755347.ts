@@ -45,7 +45,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { SU } from "../figma_app/451499";
 import { stopPropagation } from "../figma_app/753501";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { J as _$$J } from "../642/436925";
 import { Z as _$$Z, m as _$$m2 } from "../905/423399";
 import { sL, qg, j4, GZ } from "../figma_app/436286";
@@ -132,7 +132,7 @@ function ec({
 }) {
   let [n, l] = sL();
   let a = useDispatch();
-  let o = Um();
+  let o = useDropdownState();
   let d = useIsFullscreenSitesView();
   let p = !qg(n, "PASS_THROUGH");
   let h = j4.map((e, t) => {

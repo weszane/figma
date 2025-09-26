@@ -21,7 +21,7 @@ export function $$u0({
   } : {};
   let h = _$$a() ? getI18nString("whiteboard.ai_modal.beta_badge") : getI18nString("qa.ai");
   return "" === t ? null : jsx(Badge, {
-    className: a()(cssBuilderInstance.font11.fontNormal.h16.px4.b1.bRadius5.mr0.hFitContent.$$if(p, cssBuilderInstance.cursorPointer).$$if("MODAL" === e || "FILE_BROWSER_BAR" === e || "SLIDES_REWRITE_MODAL" === e, cssBuilderInstance.colorTextSecondary.colorBorder).$$if("SUMMARIZE_NUDGE" === e, cssBuilderInstance.colorTextOnbrand.colorBorderBrand).$$if("SUMMARIZE_NUDGE_DISABLED" === e, cssBuilderInstance.colorTextOnbrand.colorBorderDisabled).$$if("INLINE_TOOLBAR" === e, cssBuilderInstance.colorTextMenuSecondary.colorBorderMenu).$$if("SLIDES_REWRITE_MODAL" === e, cssBuilderInstance.textBodySmall).$, r),
+    className: a()(cssBuilderInstance.font11.fontNormal.h16.px4.b1.bRadius5.mr0.hFitContent.if(p, cssBuilderInstance.cursorPointer).if("MODAL" === e || "FILE_BROWSER_BAR" === e || "SLIDES_REWRITE_MODAL" === e, cssBuilderInstance.colorTextSecondary.colorBorder).if("SUMMARIZE_NUDGE" === e, cssBuilderInstance.colorTextOnbrand.colorBorderBrand).if("SUMMARIZE_NUDGE_DISABLED" === e, cssBuilderInstance.colorTextOnbrand.colorBorderDisabled).if("INLINE_TOOLBAR" === e, cssBuilderInstance.colorTextMenuSecondary.colorBorderMenu).if("SLIDES_REWRITE_MODAL" === e, cssBuilderInstance.textBodySmall).$, r),
     color: BadgeColor.INVERT,
     subtle: !0,
     text: t ?? h,

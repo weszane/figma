@@ -257,7 +257,7 @@ function ea(e) {
   let B = D.data;
   let L = jsx("div", {
     className: "org_upgrade_multi_team_modal--teamIllustrationLeftSection--MLN4f",
-    style: styleBuilderInstance.$$if(l, styleBuilderInstance.add({
+    style: styleBuilderInstance.if(l, styleBuilderInstance.add({
       width: "200px"
     })).$,
     children: jsxs("div", {

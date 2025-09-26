@@ -3,14 +3,14 @@ import { ComponentPropsAiCPPBindings } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { getMatchingNodesToUpdateForQuery } from "../905/913055";
 import { hm } from "../905/487011";
-import { $J, o2, sd, Cq } from "../905/278499";
+import { AIActionIterationResult, AIActionIterationStatus, AIActionIterationAction, AIActionIterationTrigger } from "../905/278499";
 export function $$d2(e) {
   e && hm({
     ...e,
-    iteration_view_type: $J.DEFAULT_SUCCESS,
-    status: o2.COMPLETED,
-    interaction: sd.UNDO,
-    interaction_type: Cq.FULLSCREEN_UNDO
+    iteration_view_type: AIActionIterationResult.DEFAULT_SUCCESS,
+    status: AIActionIterationStatus.COMPLETED,
+    interaction: AIActionIterationAction.UNDO,
+    interaction_type: AIActionIterationTrigger.FULLSCREEN_UNDO
   });
 }
 export function $$c1(e) {

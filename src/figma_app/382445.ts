@@ -1,5 +1,5 @@
 import { WB } from "../905/761735";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -13,7 +13,7 @@ let $$p1 = createOptimistThunk((e, {
 }, {
   loadingKey: l
 }) => {
-  let p = XHR.post(`/api/${getHubTypeString(r)}/${t}/like`, {
+  let p = sendWithRetry.post(`/api/${getHubTypeString(r)}/${t}/like`, {
     orgId: e.getState().currentUserOrgId
   });
   setupLoadingStateHandler(p, e, l);
@@ -54,7 +54,7 @@ let $$_0 = createOptimistThunk((e, {
 }, {
   loadingKey: l
 }) => {
-  let p = XHR.del(`/api/${getHubTypeString(r)}/${t}/like`, {
+  let p = sendWithRetry.del(`/api/${getHubTypeString(r)}/${t}/like`, {
     orgId: e.getState().currentUserOrgId
   });
   setupLoadingStateHandler(p, e, l);

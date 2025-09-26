@@ -10,7 +10,7 @@ import { setupThemeContext } from "../905/614223";
 import _ from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
-import { _ as _$$_ } from "../905/793009";
+import { trackTemplateEvent } from "../905/793009";
 import { Gi, tS, wv } from "../figma_app/622574";
 import { Ou, Fz, b4, WS } from "../figma_app/106207";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -541,7 +541,7 @@ function em(e) {
   }, [categoryIds, categoryTitles, e.initiallySelectedCategoryTitle]);
   useEffect(() => {
     u.current?.scrollTo(0, 0);
-    M && $ && _$$_("resource_previewed", {
+    M && $ && trackTemplateEvent("resource_previewed", {
       fileKey,
       resourceType: "template",
       resourceName: a6($).name,

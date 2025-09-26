@@ -1,7 +1,7 @@
 import { assert, throwTypeError } from "../figma_app/465776";
 import { createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
-import { oE } from "../905/953718";
+import { BlockReasonType } from "../905/953718";
 import { dayjs } from "../905/920142";
 import { C5 } from "../905/147383";
 import { FC } from "../figma_app/502422";
@@ -47,7 +47,7 @@ export function $$_0({
   lifecycleConfig: t
 }) {
   return t && e ? t.maxTimes && (e.count ?? 1) >= t.maxTimes ? {
-    reasonType: oE.LifecycleCheckFail,
+    reasonType: BlockReasonType.LifecycleCheckFail,
     cause: "MAX_TIMES"
   } : "cooldown" in t && function (e, t) {
     let i = function (e) {
@@ -68,7 +68,7 @@ export function $$_0({
     }(e);
     return dayjs(t).isAfter(dayjs().subtract(i, "day"));
   }(t.cooldown, e.updatedAt) ? {
-    reasonType: oE.LifecycleCheckFail,
+    reasonType: BlockReasonType.LifecycleCheckFail,
     cause: "COOLDOWN"
   } : void 0 : void 0;
 }

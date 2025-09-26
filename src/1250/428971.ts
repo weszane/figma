@@ -10,7 +10,7 @@ import { A } from "../905/956262";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { U } from "../905/455766";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { Hx5 } from "../figma_app/6204";
 if (443 == require.j) {}
 let h = userFlagExistsAtomFamily("dev_mode_has_seen_component_browser_onboarding");
@@ -30,7 +30,7 @@ function v(e) {
   } = e;
   switch (step) {
     case "ManualStep1":
-      return jsx(rq, {
+      return jsx(OnboardingModal, {
         description: renderI18nText("dev_handoff.component_browser_onboarding_callout.manual_step_1_description"),
         isShowing: isOverlayShowing,
         onClose: complete,
@@ -48,7 +48,7 @@ function v(e) {
         trackingContextName: "dev_mode_component_browser_step_1 - identify the code file"
       });
     case "ManualStep2":
-      return jsx(rq, {
+      return jsx(OnboardingModal, {
         description: renderI18nText("dev_handoff.component_browser_onboarding_callout.manual_step_2_description"),
         isShowing: isOverlayShowing,
         onClose: complete,
@@ -67,7 +67,7 @@ function v(e) {
         trackingContextName: "dev_mode_component_browser_step_2 - identify the component"
       });
     case "ManualStep3":
-      return jsx(rq, {
+      return jsx(OnboardingModal, {
         description: renderI18nText("dev_handoff.component_browser_onboarding_callout.manual_step_3_description"),
         isShowing: isOverlayShowing,
         onClose: complete,

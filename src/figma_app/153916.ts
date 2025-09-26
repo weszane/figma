@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useEffect } from "react";
 import { useLatestRef } from "../figma_app/922077";
 import { getAtomMutate, setupResourceAtomHandler } from "../figma_app/566371";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -24,7 +24,7 @@ let $$m0 = liveStoreInstance.Mutation(async (e, {
     billingContacts,
     onRejected
   } = e;
-  let s = await XHR.put(`/api/orgs/${orgId}/billing_data`, {
+  let s = await sendWithRetry.put(`/api/orgs/${orgId}/billing_data`, {
     admin_email: billingContacts
   }).catch(e => {
     onRejected(e);
@@ -37,7 +37,7 @@ let $$m0 = liveStoreInstance.Mutation(async (e, {
 let $$g1 = liveStoreInstance.Mutation(async (e, {
   query: t
 }) => {
-  let r = await XHR.put(`/api/orgs/${e.orgId}/lock_invoice`, {
+  let r = await sendWithRetry.put(`/api/orgs/${e.orgId}/lock_invoice`, {
     license_quantities: e.licenseQuantities
   }).catch(t => {
     e.onRejected(t);

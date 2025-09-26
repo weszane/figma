@@ -11,13 +11,13 @@ import { fr, S0 } from '../905/52565';
 import { registerModal } from '../905/102752';
 import { J as _$$J2 } from '../905/125993';
 import { KindEnum } from '../905/129884';
-import { M as _$$M } from '../905/152487';
+import { OnboardingSequence } from '../905/152487';
 import { l as _$$l } from '../905/152724';
 import { hideModal, showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { ResourceTypes } from '../905/178090';
 import { useSingleEffect } from '../905/791079';
-import { x as _$$x } from '../905/211326';
+import { LoadingRenderer } from '../905/211326';
 import { w as _$$w } from '../905/230422';
 import { PricingOptions } from '../905/237873';
 import { VisualBellActions } from '../905/302958';
@@ -46,15 +46,15 @@ import { e0 as _$$e } from '../905/696396';
 import { setupLoadingStateHandler } from '../905/696711';
 import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { SvgComponent } from '../905/714743';
-import { EL } from '../905/748636';
+import { PositioningStrategy } from '../905/748636';
 import { G as _$$G } from '../905/750789';
 import { A as _$$A3 } from '../905/776343';
 import { j as _$$j } from '../905/834956';
 import { Hl } from '../905/840929';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { generateUUIDv4 } from '../905/871474';
 import { getValueOrFallback } from '../905/872825';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
 import { getProfileRouteHref, ProfileRouteState, ResourceHubProfileRouteState } from '../905/934145';
@@ -713,7 +713,7 @@ function to({
   _$$E(r.uniqueId, 'profile-metrics-tab-clicked', () => {
     r.isShowing && r.complete();
   });
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     isShowing: r.isShowing,
     userFlagOnShow: _$$e3,
     children: jsx(TrackingProvider, {
@@ -722,7 +722,7 @@ function to({
         targetKey: e,
         width: 300,
         topPadding: 16,
-        shouldCenterArrow: EL.FALLBACK,
+        shouldCenterArrow: PositioningStrategy.FALLBACK,
         dismissModal: r.complete,
         children: jsx(eY, {})
       })
@@ -733,7 +733,7 @@ let tg = createOptimistThunk(async (e, t, {
   loadingKey: r
 }) => {
   try {
-    let s = XHR.post('/api/community/seller/stripe_dashboard');
+    let s = sendWithRetry.post('/api/community/seller/stripe_dashboard');
     setupLoadingStateHandler(s, e, r);
     let i = await s;
     if (!i?.data?.meta) {
@@ -1497,7 +1497,7 @@ function rA() {
   }) : null;
 }
 function rP(e) {
-  let t = Um();
+  let t = useDropdownState();
   let r = useRef(null);
   let s = !!(t && t.type === DROPDOWN_TYPE_COMMUNITY_PROFILE_MORE_ACTIONS_MENU);
   let a = useDispatch();
@@ -2018,7 +2018,7 @@ function se({
       };
     }
   }, [r, a, s, t, e?.community_profile_id, o]);
-  return jsx(_$$x, {
+  return jsx(LoadingRenderer, {
     className: 'community_hub_public_profile--loadingContainer--GUi6s',
     isLoading: !s,
     children: () => jsx(TrackingProvider, {

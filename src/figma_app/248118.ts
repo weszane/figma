@@ -8,7 +8,7 @@ import { gB } from "../905/294543";
 import { getCodegenLanguagePreference } from "../905/515076";
 import { handleEnterMode } from "../figma_app/806075";
 import { selectViewAction } from "../905/929976";
-import { c as _$$c } from "../905/882587";
+import { createParameterEntry } from "../905/882587";
 import { Im } from "../905/608145";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { getCurrentOrgAdminInfo } from "../figma_app/740025";
@@ -70,7 +70,7 @@ export function $$x4(e) {
     pluginId: e.plugin_id,
     command: void 0,
     parameterOnly: e.manifest.parameters && !1 !== e.manifest.parameterOnly,
-    parameterEntry: _$$c(e.manifest.parameters, e.name)
+    parameterEntry: createParameterEntry(e.manifest.parameters, e.name)
   };
 }
 export function $$N1(e, t) {
@@ -124,7 +124,7 @@ export function $$R7(e) {
     localFileId: e.localFileId,
     command: void 0,
     parameterOnly: e.manifest.parameters && !1 !== e.manifest.parameterOnly,
-    parameterEntry: _$$c(e.manifest.parameters, e.name)
+    parameterEntry: createParameterEntry(e.manifest.parameters, e.name)
   };
 }
 export function $$L5(e, t) {

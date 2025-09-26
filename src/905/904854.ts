@@ -1,82 +1,218 @@
-var n = "application/x-fig-file";
-var r = "application/json";
-var a = "Files";
-let s = "application/x-fig-file-repo";
-let o = "application/x-fig-file-tile";
-let l = "application/x-fig-file-proto";
-export class $$d0 {
-  constructor(e) {
-    for (let t of (this._dataTransfer = e, this._containsType(a) && (this._type = a, this._data = this._dataTransfer.getData(a)), [r, n, s, l, o])) if (this._containsType(t) && (this._type = t, this._dataTransfer.getData(t))) try {
-      this._data = JSON.parse(this._dataTransfer.getData(t));
-    } catch (e) {}
+const MIME_TYPE_FIG_FILE = 'application/x-fig-file'
+const MIME_TYPE_JSON = 'application/json'
+const MIME_TYPE_FILES = 'Files'
+const MIME_TYPE_FIG_REPO = 'application/x-fig-file-repo'
+const MIME_TYPE_FIG_TILE = 'application/x-fig-file-tile'
+const MIME_TYPE_FIG_PROTO = 'application/x-fig-file-proto'
+
+interface TilesData {
+  files: any[]
+  repos: any[]
+  prototypes: any[]
+}
+
+interface ReposData {
+  repos: any[]
+  files: any[]
+}
+
+export class DragDataHandler {
+  private _dataTransfer: DataTransfer
+  private _type: string
+  private _data: any
+
+  constructor(dataTransfer: DataTransfer) {
+    this._dataTransfer = dataTransfer
+
+    // Check for file type first
+    if (this._containsType(MIME_TYPE_FILES)) {
+      this._type = MIME_TYPE_FILES
+      this._data = this._dataTransfer.getData(MIME_TYPE_FILES)
+    }
+
+    // Check for other types
+    const mimeTypes = [
+      MIME_TYPE_JSON,
+      MIME_TYPE_FIG_FILE,
+      MIME_TYPE_FIG_REPO,
+      MIME_TYPE_FIG_PROTO,
+      MIME_TYPE_FIG_TILE,
+    ]
+
+    for (const mimeType of mimeTypes) {
+      if (this._containsType(mimeType) && this._dataTransfer.getData(mimeType)) {
+        try {
+          this._type = mimeType
+          this._data = JSON.parse(this._dataTransfer.getData(mimeType))
+          break
+        }
+        catch {
+          // Ignore parsing errors
+        }
+      }
+    }
   }
-  _containsType(e) {
-    return !!this._dataTransfer.types && -1 !== Array.from(this._dataTransfer.types).indexOf(e);
+
+  /**
+   * Checks if the data transfer contains a specific MIME type
+   * @param mimeType - The MIME type to check for
+   * @returns boolean indicating if the type is present
+   */
+  private _containsType(mimeType: string): boolean {
+    return !!this._dataTransfer.types
+      && Array.from(this._dataTransfer.types).includes(mimeType)
   }
-  _setDataAsText() {
-    this._dataTransfer.setData(this._type, JSON.stringify(this._data));
+
+  /**
+   * Sets the data transfer data as JSON string
+   */
+  private _setDataAsText(): void {
+    this._dataTransfer.setData(this._type, JSON.stringify(this._data))
   }
-  setArbitraryData(e) {
-    this._type = r;
-    this._data = e;
-    this._setDataAsText();
+
+  /**
+   * Sets arbitrary data with JSON MIME type
+   * @param data - The data to set
+   */
+  setArbitraryData(data: any): void {
+    this._type = MIME_TYPE_JSON
+    this._data = data
+    this._setDataAsText()
   }
-  setFigFilesData(e) {
-    this._type = n;
-    this._data = e;
-    this._setDataAsText();
+
+  /**
+   * Sets fig files data
+   * @param data - The fig files data to set
+   */
+  setFigFilesData(data: any): void {
+    this._type = MIME_TYPE_FIG_FILE
+    this._data = data
+    this._setDataAsText()
   }
-  setReposData(e, t) {
-    this._type = s;
+
+  /**
+   * Sets repositories data
+   * @param repos - Array of repositories
+   * @param files - Array of files
+   */
+  setReposData(repos: any[], files: any[]): void {
+    this._type = MIME_TYPE_FIG_REPO
     this._data = {
-      repos: e,
-      files: t
-    };
-    this._setDataAsText();
+      repos,
+      files,
+    }
+    this._setDataAsText()
   }
-  setPrototypesData(e) {
-    this._type = l;
-    this._data = e;
-    this._setDataAsText();
+
+  /**
+   * Sets prototypes data
+   * @param data - The prototypes data to set
+   */
+  setPrototypesData(data: any): void {
+    this._type = MIME_TYPE_FIG_PROTO
+    this._data = data
+    this._setDataAsText()
   }
-  setTilesData(e, t, i) {
-    this._type = o;
+
+  /**
+   * Sets tiles data
+   * @param files - Array of files
+   * @param repos - Array of repositories
+   * @param prototypes - Array of prototypes
+   */
+  setTilesData(files: any[], repos: any[], prototypes: any[]): void {
+    this._type = MIME_TYPE_FIG_TILE
     this._data = {
-      files: e,
-      repos: t,
-      prototypes: i
-    };
-    this._setDataAsText();
+      files,
+      repos,
+      prototypes,
+    }
+    this._setDataAsText()
   }
-  setDragImage(e, t, i) {
-    this._dataTransfer.setDragImage && this._dataTransfer.setDragImage(e, t, i);
+
+  /**
+   * Sets the drag image if supported
+   * @param img - The image element
+   * @param xOffset - X offset
+   * @param yOffset - Y offset
+   */
+  setDragImage(img: Element, xOffset: number, yOffset: number): void {
+    if (this._dataTransfer.setDragImage) {
+      this._dataTransfer.setDragImage(img, xOffset, yOffset)
+    }
   }
-  isArbitraryData() {
-    return this._type === r;
+
+  /**
+   * Checks if the current data is arbitrary JSON data
+   * @returns boolean
+   */
+  isArbitraryData(): boolean {
+    return this._type === MIME_TYPE_JSON
   }
-  isFigFiles() {
-    return this._type === n;
+
+  /**
+   * Checks if the current data is fig files
+   * @returns boolean
+   */
+  isFigFiles(): boolean {
+    return this._type === MIME_TYPE_FIG_FILE
   }
-  isFile() {
-    return this._type === a;
+
+  /**
+   * Checks if the current data is file
+   * @returns boolean
+   */
+  isFile(): boolean {
+    return this._type === MIME_TYPE_FILES
   }
-  isRepos() {
-    return this._type === s;
+
+  /**
+   * Checks if the current data is repositories
+   * @returns boolean
+   */
+  isRepos(): boolean {
+    return this._type === MIME_TYPE_FIG_REPO
   }
-  isPrototypes() {
-    return this._type === l;
+
+  /**
+   * Checks if the current data is prototypes
+   * @returns boolean
+   */
+  isPrototypes(): boolean {
+    return this._type === MIME_TYPE_FIG_PROTO
   }
-  isTiles() {
-    return this._type === o;
+
+  /**
+   * Checks if the current data is tiles
+   * @returns boolean
+   */
+  isTiles(): boolean {
+    return this._type === MIME_TYPE_FIG_TILE
   }
-  getData() {
-    return this._data;
+
+  /**
+   * Gets the current data
+   * @returns The stored data
+   */
+  getData(): any {
+    return this._data
   }
-  getReposData() {
-    return this.isRepos() ? this.getData() : null;
+
+  /**
+   * Gets repositories data if current type is repos
+   * @returns ReposData or null
+   */
+  getReposData(): ReposData | null {
+    return this.isRepos() ? this.getData() : null
   }
-  getTilesData() {
-    return this.isTiles() ? this.getData() : null;
+
+  /**
+   * Gets tiles data if current type is tiles
+   * @returns TilesData or null
+   */
+  getTilesData(): TilesData | null {
+    return this.isTiles() ? this.getData() : null
   }
 }
-export const le = $$d0;
+
+export const le = DragDataHandler

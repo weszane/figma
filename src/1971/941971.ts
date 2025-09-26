@@ -17,7 +17,7 @@ import { qV, nY, oT, xF } from "../figma_app/566517";
 import { tV, au } from "../figma_app/445976";
 import { TM, WX } from "../9410/423538";
 import { I9 } from "../figma_app/151869";
-import { B as _$$B } from "../905/222272";
+import { FlexBox } from "../905/222272";
 import { Y4 } from "../9410/40486";
 import { eb, Kf, BW, JF } from "../figma_app/257655";
 import { Z as _$$Z } from "../905/279476";
@@ -1072,7 +1072,7 @@ export function $$eb0() {
       clientLifecycleId: s
     }), jsx(ei, {}), r && jsx(eS, {
       selectedKit: selectedKitOption.kit
-    }), jsx(_$$B, {
+    }), jsx(FlexBox, {
       fullWidth: !0,
       justify: "space-between",
       children: jsx(YG, {

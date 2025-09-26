@@ -14,7 +14,7 @@ import { Pe } from "../4452/207203";
 import { W } from "../4452/143028";
 import { EditAccessModalView } from "../figma_app/43951";
 import { AccessLevelEnum } from "../905/557142";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 let v = "edit_access_modal--column--MYvAz";
 let y = "edit_access_modal--resource--qhm-x";
 let w = "edit_access_modal--resourceTitle--79DdK edit_access_modal--resource--qhm-x";
@@ -128,7 +128,7 @@ export function $$N0(e) {
       folderCount: A,
       fileCount: O
     },
-    children: jsxs(OJ, {
+    children: jsxs(HeaderModal, {
       title: getI18nString("team_view.member_edit_access_modal.title", {
         memberName: N.name ?? ""
       }),

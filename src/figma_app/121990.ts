@@ -4,7 +4,7 @@ import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { O } from "../905/969533";
 import { e6 } from "../figma_app/617427";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { JT } from "../figma_app/847597";
 import { Z } from "../figma_app/903114";
@@ -20,7 +20,7 @@ export function $$h0({
     children: getI18nString("file_permissions_modal.update_seat_tab.this_may_impact_your_costs")
   });
   let f = () => m(!h);
-  let E = jsx(Ph, {
+  let E = jsx(TrackedLink, {
     href: Z,
     trusted: !0,
     newTab: !0,

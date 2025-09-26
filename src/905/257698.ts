@@ -3,7 +3,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Nv } from "../figma_app/318590";
 import { JT } from "../figma_app/632248";
 import { y } from "../figma_app/13082";
-import { b } from "../905/222272";
+import { LayoutContainer } from "../905/222272";
 export function $$d0({
   px: e,
   children: t
@@ -16,7 +16,7 @@ export function $$d0({
         paddingLeft: e,
         paddingRight: e
       },
-      children: jsx(b, {
+      children: jsx(LayoutContainer, {
         fullWidth: !0,
         align: "center",
         gap: 4,
@@ -48,7 +48,7 @@ export function $$d0({
       children: [jsxs("div", {
         className: cssBuilderInstance.flex.itemsCenter.gap8.$,
         children: [jsx("span", {
-          className: cssBuilderInstance.textBodyMedium.colorTextSecondary.lh24.$$if(i, cssBuilderInstance.colorText).$,
+          className: cssBuilderInstance.textBodyMedium.colorTextSecondary.lh24.if(i, cssBuilderInstance.colorText).$,
           children: e
         }), l && jsx(y, {
           helpUrlVariant: JT.FIND_INSPIRATION

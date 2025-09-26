@@ -13,7 +13,7 @@ import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { hasMorePages } from "../figma_app/661371";
 import { LoadingSpinner } from "../figma_app/858013";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { IntersectionSentinel } from "../905/925868";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getSearchSessionIdFromSelector } from "../figma_app/387599";
@@ -26,7 +26,7 @@ import { CommentTabType, ResourceTypeNoComment } from "../figma_app/45218";
 import { E as _$$E, d as _$$d } from "../5430/165157";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { setShowResolved, removeCommentsByAuthor, reportComment, deleteComment } from "../figma_app/703138";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { p as _$$p } from "../905/927118";
 import { j as _$$j } from "../905/834956";
 import { T as _$$T } from "../5132/203178";
@@ -96,7 +96,7 @@ let M = function ({
   isLoggedIn: r
 }) {
   let n = useDispatch();
-  let o = Um();
+  let o = useDropdownState();
   let a = useSelector(e => e.communityHub.comments.activeFeedType);
   let l = useSelector(e => e.communityHub.comments.showResolved);
   let d = useRef(null);
@@ -999,7 +999,7 @@ function eA(e) {
           }));
         }
       }), jsx(hJ, {
-        children: jsx(_$$x, {
+        children: jsx(LoadingRenderer, {
           isLoading: void 0 === pagination,
           className: k,
           children: () => jsx(h, {
@@ -1017,7 +1017,7 @@ function eA(e) {
           })
         })
       }), jsx(XY, {
-        children: jsx(_$$x, {
+        children: jsx(LoadingRenderer, {
           isLoading: void 0 === pagination,
           className: k,
           children: () => jsxs(Fragment, {

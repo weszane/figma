@@ -8,7 +8,7 @@ import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { useSelectionPropertyValue } from "../905/275640";
 import { SG } from "../figma_app/852050";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { ScrubbableDropdownInput } from "../figma_app/178475";
@@ -92,7 +92,7 @@ export function $$C0({
   dropdownAlignment: el,
   shiftVariableOptionToAlign: ed
 }) {
-  let ec = Um();
+  let ec = useDropdownState();
   let {
     smallNudgeAmount,
     bigNudgeAmount

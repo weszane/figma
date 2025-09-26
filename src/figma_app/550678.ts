@@ -1,15 +1,15 @@
 import { sha1Hex } from "../905/125019";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 export function $$a0(e, t, r) {
   null == r && (r = "image/png");
-  return XHR.post("/api/upnode/image", t, {
+  return sendWithRetry.post("/api/upnode/image", t, {
     rawBody: !0,
     params: {
       purpose: e,
       sha1: sha1Hex(t)
     },
     headers: {
-      ...XHR.requiredHeaders,
+      ...sendWithRetry.requiredHeaders,
       "Content-Type": r
     }
   });
@@ -20,7 +20,7 @@ export function $$s1({
   contentType: r,
   collection: n
 }) {
-  return XHR.post("/api/upnode/image", e, {
+  return sendWithRetry.post("/api/upnode/image", e, {
     rawBody: !0,
     params: {
       purpose: "canvas",
@@ -28,7 +28,7 @@ export function $$s1({
       using_cms_collection: n.databaseId
     },
     headers: {
-      ...XHR.requiredHeaders,
+      ...sendWithRetry.requiredHeaders,
       "Content-Type": r
     }
   });

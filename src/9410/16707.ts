@@ -22,10 +22,10 @@ import { currentTeamAtom } from "../figma_app/598018";
 import { N as _$$N } from "../figma_app/268271";
 import { qo } from "../905/696396";
 import { U as _$$U } from "../905/455766";
-import { y as _$$y } from "../905/129046";
+import { ImageOverlayComponent } from "../905/129046";
 import { _l } from "../figma_app/995208";
-import { rq } from "../905/425180";
-import { F_, EL } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition, PositioningStrategy } from "../905/858282";
 import { canEnterDesignMode } from "../figma_app/357367";
 import { Yqi } from "../figma_app/6204";
 import { jY } from "../figma_app/21029";
@@ -209,11 +209,11 @@ function z({
   totalSteps: n
 }) {
   let a = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
-  return jsx(rq, {
-    arrowPosition: F_.BOTTOM,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.BOTTOM,
     description: renderI18nText("slides.onboarding.new_slide.description"),
     isShowing: i,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("2811dcf7f07f10fbc8543106336765058bc83266"),
       alt: "slides template picker",
       aspectRatio: 240 / 135
@@ -250,10 +250,10 @@ function V({
   isShowing: i,
   totalSteps: n
 }) {
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     description: renderI18nText("slides.onboarding.views.description"),
     isShowing: i,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("8ad8b13cac28f9fb6eaaed9cad7c621684fadd6b"),
       alt: "Grid view in Slides",
       aspectRatio: 240 / 135
@@ -292,10 +292,10 @@ function W({
 }) {
   let a = canEnterDesignMode();
   let o = _$$E();
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     description: renderI18nText("slides.onboarding.nondesigner.tools.description"),
     isShowing: i,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("aca6af2d36ffc1a4f65a12247f598a7598a530b7"),
       alt: "Apps in Slides",
       aspectRatio: 240 / 135
@@ -318,7 +318,7 @@ function W({
       },
       ctaTrackingDescriptor: UpgradeAction.CLOSE
     },
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     shouldDisableAnimation: !0,
     shouldHideArrow: !0,
     stepCounter: {
@@ -337,10 +337,10 @@ function Y({
   totalSteps: n
 }) {
   let a = _$$E();
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     description: renderI18nText("slides.onboarding.designer.tools.description"),
     isShowing: i,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("5064800f3f60febf8b2ad2ad8ba4efdd6167eeaa"),
       alt: "Design tool toggle",
       aspectRatio: 240 / 135
@@ -363,7 +363,7 @@ function Y({
       },
       ctaTrackingDescriptor: UpgradeAction.CLOSE
     },
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     shouldDisableAnimation: !0,
     shouldHideArrow: !0,
     stepCounter: {
@@ -380,10 +380,10 @@ function J({
   isShowing: t,
   totalSteps: i
 }) {
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     description: renderI18nText("slides.onboarding.share.description"),
     isShowing: t,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("a3ed241305c3e13d9ec5cab6e9a88db7572695c5"),
       alt: "presenter mode in Slides",
       aspectRatio: 240 / 135

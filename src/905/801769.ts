@@ -1,5 +1,5 @@
-import { b } from "../905/275748";
-export let $$n0 = new b({
+import { LazyComponentFactory } from "../905/275748";
+export let $$n0 = new LazyComponentFactory({
   name: "code-connect",
   dependencies: [],
   routeHints: [],

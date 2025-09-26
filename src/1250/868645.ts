@@ -5,7 +5,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { WAFImage } from "../905/675859";
 import { a as _$$a } from "../905/29104";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { selectViewAction } from "../905/929976";
@@ -115,19 +115,19 @@ function S() {
 }
 export function $$N0() {
   if (!_$$a()) return null;
-  let e = jsx(Ph, {
+  let e = jsx(TrackedLink, {
     newTab: !0,
     trusted: !0,
     href: "/sub-processors/",
     children: renderI18nText("figmake.legal_onboarding_modal.disclaimer_figmas_ai_subprocessor_link")
   });
-  let t = jsx(Ph, {
+  let t = jsx(TrackedLink, {
     newTab: !0,
     trusted: !0,
     href: "/product-specific-terms/",
     children: renderI18nText("figmake.legal_onboarding_modal.disclaimer_figmas_beta_terms")
   });
-  let n = jsx(Ph, {
+  let n = jsx(TrackedLink, {
     newTab: !0,
     trusted: !0,
     href: "/legal/acceptable-publication-policy/",

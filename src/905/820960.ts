@@ -8,7 +8,7 @@ import { In } from "../905/672640";
 import { trackNavTreeClicked } from "../figma_app/976345";
 import { W as _$$W } from "../905/307631";
 import { a as _$$a } from "../905/332662";
-import { Y as _$$Y } from "../905/347011";
+import { useFavoriteResource } from "../905/347011";
 import { H as _$$H } from "../905/474029";
 import { DN, ox } from "../figma_app/909778";
 import { selectViewAction } from "../905/929976";
@@ -40,7 +40,7 @@ export function $$O2(e) {
   }) => e);
   let j = useSelector(e => e.loadingState);
   let U = e.team.member_count ?? 0;
-  let B = _$$Y(e.team.id, FEntityType.TEAM, O);
+  let B = useFavoriteResource(e.team.id, FEntityType.TEAM, O);
   let V = useMemo(() => "loaded" === B.status && void 0 !== B.favorite, [B]);
   let G = useShadowRead({
     label: adminPermissionConfig.TeamTile.isCurrentUserInTeam,

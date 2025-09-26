@@ -1,47 +1,47 @@
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 export let $$r0 = new class {
   requestPlugin(e, t, i, r) {
-    return XHR.post(`/api/plugins/${t}/org/${e}/request`, {
+    return sendWithRetry.post(`/api/plugins/${t}/org/${e}/request`, {
       requester_note: i,
       workspace_id: r
     });
   }
   requestWidget(e, t, i, r) {
-    return XHR.post(`/api/widgets/${t}/org/${e}/request`, {
+    return sendWithRetry.post(`/api/widgets/${t}/org/${e}/request`, {
       requester_note: i,
       workspace_id: r
     });
   }
   rejectPluginRequestForOrg(e, t, i) {
-    return XHR.put(`/api/plugins/${t}/org/${e}/request`, {
+    return sendWithRetry.put(`/api/plugins/${t}/org/${e}/request`, {
       status: "rejected",
       decline_note: i
     });
   }
   rejectWidgetRequestForOrg(e, t, i) {
-    return XHR.put(`/api/widgets/${t}/org/${e}/request`, {
+    return sendWithRetry.put(`/api/widgets/${t}/org/${e}/request`, {
       status: "rejected",
       decline_note: i
     });
   }
   approvePluginRequestForOrg(e, t) {
-    return XHR.put(`/api/plugins/${t}/org/${e}/request`, {
+    return sendWithRetry.put(`/api/plugins/${t}/org/${e}/request`, {
       status: "approved"
     });
   }
   approveWidgetRequestForOrg(e, t) {
-    return XHR.put(`/api/widgets/${t}/org/${e}/request`, {
+    return sendWithRetry.put(`/api/widgets/${t}/org/${e}/request`, {
       status: "approved"
     });
   }
   updatePluginRequestForWorkspaces(e, t, i, r) {
-    return XHR.put(`/api/plugins/${t}/org/${e}/request`, {
+    return sendWithRetry.put(`/api/plugins/${t}/org/${e}/request`, {
       approved_workspace_ids: i,
       decline_note: r
     });
   }
   updateWidgetRequestForWorkspaces(e, t, i, r) {
-    return XHR.put(`/api/widgets/${t}/org/${e}/request`, {
+    return sendWithRetry.put(`/api/widgets/${t}/org/${e}/request`, {
       approved_workspace_ids: i,
       decline_note: r
     });

@@ -14,7 +14,7 @@ import { Z as _$$Z } from "../4452/80578";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { ResourceConnectionByPlan } from "../figma_app/43951";
 import { useTeamPlanFeatures } from "../figma_app/465071";
-import { O as _$$O } from "../figma_app/809387";
+import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { e0 } from "../905/696396";
 import { K as _$$K2 } from "../4452/401058";
@@ -1055,7 +1055,7 @@ export function $$eq0(e) {
     },
     children: [k === FOrganizationLevelType.ORG && !getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K, {
-        title: _$$O(DashboardSection.CONTENT)
+        title: getOrgAdminTabMessage(DashboardSection.CONTENT)
       }), jsx(_$$b, {
         tab: DashboardSection.CONTENT,
         selectedSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS

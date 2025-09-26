@@ -1,37 +1,64 @@
-import { jsx } from "react/jsx-runtime";
-import { useRef, useMemo, forwardRef } from "react";
-import { cssBuilderInstance } from "../cssbuilder/589278";
-import { L0, MQ, AD } from "../905/479155";
-export function $$o1(e) {
-  let t = useRef(null);
-  let {
+import type { ReactNode, Ref } from 'react'
+import { forwardRef, useMemo, useRef } from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { LayoutProvider, ListLayoutContext, useLayoutRegistration } from '../905/479155'
+import { cssBuilderInstance } from '../cssbuilder/589278'
+
+interface FlexBoxProps {
+  justify?: 'space-between' | 'end' | 'center'
+  align?: 'center' | 'end'
+  fullWidth?: boolean
+  fullHeight?: boolean
+  gap?: number
+  children?: ReactNode
+}
+
+interface LayoutContainerProps extends FlexBoxProps {
+  primary?: boolean
+}
+
+export function LayoutContainer(props: LayoutContainerProps) {
+  const layoutRef = useRef(null)
+  const {
     tracker,
     index,
-    isPrimaryLayout
-  } = L0(t, e.primary);
-  let d = useMemo(() => ({
+    isPrimaryLayout,
+  } = useLayoutRegistration(layoutRef, props.primary)
+
+  const contextValue = useMemo(() => ({
     trackerRef: tracker,
     layoutIndex: index,
-    primary: isPrimaryLayout
-  }), [isPrimaryLayout, index, tracker]);
-  return jsx(MQ.Provider, {
-    value: d,
-    children: jsx(AD, {
-      children: jsx($$l0, {
-        ...e,
-        ref: t,
-        children: e.children
-      })
-    })
-  });
+    primary: isPrimaryLayout,
+  }), [isPrimaryLayout, index, tracker])
+
+  return jsx(ListLayoutContext.Provider, {
+    value: contextValue,
+    children: jsx(LayoutProvider, {
+      children: jsx(FlexBox, {
+        ...props,
+        ref: layoutRef,
+        children: props.children,
+      }),
+    }),
+  })
 }
-export let $$l0 = forwardRef((e, t) => jsx("div", {
-  ref: t,
-  className: cssBuilderInstance.flex.$$if("space-between" === e.justify, cssBuilderInstance.justifyBetween).$$if("end" === e.justify, cssBuilderInstance.justifyEnd).$$if("center" === e.justify, cssBuilderInstance.justifyCenter).$$if("center" === e.align, cssBuilderInstance.itemsCenter).$$if("end" === e.align, cssBuilderInstance.itemsEnd).$$if(e.fullWidth, cssBuilderInstance.wFull).$$if(e.fullHeight, cssBuilderInstance.hFull).$,
+
+export const FlexBox = forwardRef<HTMLDivElement, FlexBoxProps>((props, ref: Ref<HTMLDivElement>) => jsx('div', {
+  ref,
+  className: cssBuilderInstance.flex
+    .if(props.justify === 'space-between', cssBuilderInstance.justifyBetween)
+    .if(props.justify === 'end', cssBuilderInstance.justifyEnd)
+    .if(props.justify === 'center', cssBuilderInstance.justifyCenter)
+    .if(props.align === 'center', cssBuilderInstance.itemsCenter)
+    .if(props.align === 'end', cssBuilderInstance.itemsEnd)
+    .if(props.fullWidth, cssBuilderInstance.wFull)
+    .if(props.fullHeight, cssBuilderInstance.hFull)
+    .$,
   style: {
-    gap: e.gap ?? 8
+    gap: props.gap ?? 8,
   },
-  children: e.children
-}));
-export const B = $$l0;
-export const b = $$o1;
+  children: props.children,
+}))
+
+export const B = FlexBox
+export const b = LayoutContainer

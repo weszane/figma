@@ -9,7 +9,7 @@ import { M } from "../figma_app/170366";
 import { loadPluginManifest, getFullscreenViewEditorType, mapToFileType, resolveFrameworkType, loadLocalPluginManifest } from "../figma_app/300692";
 import { HubTypeEnum } from "../figma_app/45218";
 import { manifestErrorMessage, ManifestErrorType } from "../figma_app/155287";
-import { getSelectedView } from "../905/622391";
+import { handleSelectedView } from "../905/622391";
 import { p as _$$p } from "../905/42189";
 import { s as _$$s2 } from "../figma_app/504088";
 import { Po, Zy } from "../figma_app/378195";
@@ -77,13 +77,13 @@ let $$y0 = createOptimistThunk(async (e, {
         id: s.id || "",
         version: "",
         isDevelopment: !0,
-        currentUserId: getSelectedView()
+        currentUserId: handleSelectedView()
       })) : t === HubTypeEnum.WIDGET && e.dispatch(addWidgetToRecentsThunk({
         storeInRecentsKey: n,
         id: s.id || "",
         version: "",
         isDevelopment: !0,
-        currentUserId: getSelectedView()
+        currentUserId: handleSelectedView()
       }));
     });
   } catch (t) {

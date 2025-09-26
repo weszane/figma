@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { defaultPx } from "../905/149328";
 import { Point } from "../905/736624";
 import { H } from "../905/216861";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { b } from "../905/522530";
 export function $$d0({
   title: e,
@@ -12,7 +12,7 @@ export function $$d0({
 }) {
   let c = H();
   let u = new Point((window.innerWidth - t) / 2, defaultPx + 12);
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     ref: d,
     autoflowHeight: !0,
     closeButtonClassName: b,

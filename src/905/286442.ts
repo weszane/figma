@@ -1,63 +1,97 @@
-import { useMemo, useEffect } from "react";
-import { M3 } from "../figma_app/119475";
-import { tm } from "../905/479155";
-import { a as _$$a, i as _$$i } from "../905/44915";
-export function $$o0({
-  ref: e,
-  navigationOptions: t,
-  itemsPerRow: i,
-  debug: o,
-  focusOptions: l,
-  itemOverrides: d
+import { useEffect, useMemo } from 'react';
+import { setupAutoFocusHandler, setupKeyboardNavigationFocus } from '../905/44915';
+import { useListItemRegistration } from '../905/479155';
+import { M3 } from '../figma_app/119475';
+
+/**
+ * Handles keyboard navigation and focus logic for a grid/list item.
+ * Original function name: $$o0
+ *
+ * @param params - Configuration options for focus and navigation.
+ * @returns Object containing focus/blur handlers, active state, and target info.
+ */
+export function usKeyboardFocusHandler({
+  ref,
+  navigationOptions,
+  itemsPerRow,
+  debug,
+  focusOptions,
+  itemOverrides
+}: {
+  ref: React.RefObject<HTMLElement>;
+  navigationOptions: any;
+  itemsPerRow?: number;
+  debug?: boolean;
+  focusOptions?: any;
+  itemOverrides?: {
+    column?: number;
+  };
 }) {
-  let {
+  // Extract item and layout indices, and layout state
+  const {
     itemIndex,
     layoutIndex,
     inPrimaryLayout
-  } = tm(e);
-  let m = [layoutIndex, null != i ? Math.floor(itemIndex / i) : 0];
-  let h = d?.column || (null != i ? itemIndex % i : itemIndex);
-  let {
+  } = useListItemRegistration(ref);
+
+  // Compute navigation path and column
+  const path = [layoutIndex, itemsPerRow != null ? Math.floor(itemIndex / itemsPerRow) : 0];
+  const column = itemOverrides?.column ?? (itemsPerRow != null ? itemIndex % itemsPerRow : itemIndex);
+
+  // Setup keyboard navigation item
+  const {
     isFauxFocused,
     setKeyboardNavigationElement,
     keyboardNavigationItem
   } = M3({
-    path: m,
-    column: h,
-    navigationOptions: "function" == typeof t ? t({
+    path,
+    column,
+    navigationOptions: typeof navigationOptions === 'function' ? navigationOptions({
       itemIndex,
       layoutIndex,
       inPrimaryLayout
-    }) : t
-  });
-  let A = _$$a({
+    }) : navigationOptions
+  } as any);
+
+  // Setup auto focus handler
+  const shouldAutoFocus = setupAutoFocusHandler({
     isPrimaryLayout: inPrimaryLayout,
     layoutIndex,
     itemIndex,
-    debug: o,
-    ...l
+    debug,
+    ...focusOptions
   });
-  let {
+
+  // Setup focus/blur handlers
+  const {
     focus,
     blur
-  } = _$$i({
+  } = setupKeyboardNavigationFocus({
     keyboardNavigationItem,
-    shouldAutoFocus: A,
-    enableFauxFocus: !0
+    shouldAutoFocus,
+    enableFauxFocus: true
   });
-  let v = useMemo(() => keyboardNavigationItem ? {
+
+  // Memoized target info
+  const target = useMemo(() => keyboardNavigationItem ? {
     item: keyboardNavigationItem,
     index: itemIndex,
-    element: e.current
-  } : null, [itemIndex, keyboardNavigationItem, e]);
+    element: ref.current
+  } : null, [itemIndex, keyboardNavigationItem, ref]);
+
+  // Effect to set keyboard navigation element if not present
   useEffect(() => {
-    e.current && !keyboardNavigationItem && setKeyboardNavigationElement(e.current);
-  }, [keyboardNavigationItem, e, setKeyboardNavigationElement]);
+    if (ref.current && !keyboardNavigationItem) {
+      setKeyboardNavigationElement(ref.current);
+    }
+  }, [keyboardNavigationItem, ref, setKeyboardNavigationElement]);
   return {
     focus,
     active: isFauxFocused,
-    target: v,
+    target,
     blur
   };
 }
-export const H = $$o0;
+
+/** Exported as H (original: $$o0) */
+export const H = usKeyboardFocusHandler;

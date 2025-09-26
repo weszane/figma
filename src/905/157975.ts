@@ -11,7 +11,7 @@ import { Tn, fv } from "../figma_app/933328";
 import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { MH, cM, tK } from "../figma_app/803787";
 import { registerModal } from "../905/102752";
-import { u as _$$u } from "../905/56919";
+import { useTabState } from "../905/56919";
 import { t as _$$t } from "../905/150656";
 import { getFeatureFlags } from "../905/601108";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -82,7 +82,7 @@ function D({
     currentOrgId: q
   });
   let X = Z.data || initialLibraryStats;
-  let [Q, J, ee] = _$$u({
+  let [Q, J, ee] = useTabState({
     overview: !0,
     analytics: !0
   });

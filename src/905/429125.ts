@@ -8,7 +8,7 @@ import { getI18nString } from '../905/303541';
 import { Cf } from '../905/504727';
 import { getFeatureFlags } from '../905/601108';
 import { n as _$$n } from '../905/841238';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { a1 } from '../figma_app/23780';
 import { getSlotPropTypes, trackComponentPropsModalOpen, DROPDOWN_HEIGHT, getComponentPropDisplayName } from '../figma_app/164212';
 import { wv } from '../figma_app/236327';
@@ -48,7 +48,7 @@ export function $$I0({
     };
   });
   let T = useDispatch();
-  let k = Um();
+  let k = useDropdownState();
   let R = $$v1.concat('-', t);
   let N = k && k.type === R && k.data.nodeField === t;
   let P = k?.data?.targetRect;

@@ -4,7 +4,7 @@ import a from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderAvatar } from "../figma_app/3731";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { pW } from "../905/160095";
+import { TrackedLinkButton } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { UserAvatar, AvatarSize } from "../905/590952";
 import { A } from "../905/563377";
@@ -103,7 +103,7 @@ export function $$S0() {
       children: renderI18nText("whiteboard.inserts.custom_templates_description")
     }), jsx("div", {
       className: cssBuilderInstance.flex.justifyEnd.mx16.mb16.$,
-      children: jsx(pW, {
+      children: jsx(TrackedLinkButton, {
         newTab: !0,
         href: A,
         children: renderI18nText("whiteboard.inserts.learn_more")

@@ -33,8 +33,8 @@ import { hideVariablePicker } from "../905/330741";
 import { TrackingProvider } from "../figma_app/831799";
 import { consumptionPaywallUtils } from "../905/224";
 import { convertTeamToRaw } from "../905/628874";
-import { Cj } from "../905/291654";
-import { Kk, Rt } from "../905/777093";
+import { maybeShowEulaModal } from "../905/291654";
+import { areFontsInitializedCheck, isAgentDetected } from "../905/777093";
 import { G8, Qr, kF, Km, e2, HP, sp } from "../905/690539";
 import { jB, Uh } from "../905/465941";
 import { isInvalidValue } from "../905/216495";
@@ -51,14 +51,14 @@ import { UpsellModalType } from "../905/165519";
 import { FeatureFlag } from "../905/652992";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { If } from "../905/714538";
+import { getHighestPriorityFont } from "../905/714538";
 import { calculatePickerPositionLeft } from "../905/959568";
 import { e0 } from "../905/696396";
 import { fI } from "../figma_app/626177";
 import { We } from "../905/805224";
 import { FormattedInputContext } from "../905/427409";
 import { d9 } from "../905/579068";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { O as _$$O, A as _$$A } from "../905/536006";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -125,7 +125,7 @@ export function $$eD0({
     C.isShown && i(hideVariablePicker());
   };
   let P = SG(["FONT_FAMILY"]).data ?? [];
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     ref: b,
     alwaysEnsureModalOnScreen: !0,
     dataTestId: generateRecordingKey(s, "draggableModal"),
@@ -371,13 +371,13 @@ function eL({
   }, [eD, eq]);
   let ti = useSelector(e => e.userFlags);
   let tn = useCallback(async (e, i = !0, n = !0) => {
-    if (getFeatureFlags().dse_sf_pro_font && !(await Cj(e, ti, h, t, "font_picker"))) return;
+    if (getFeatureFlags().dse_sf_pro_font && !(await maybeShowEulaModal(e, ti, h, t, "font_picker"))) return;
     globalPerfTimer.start("update_text_node_font");
     clearPreview();
     setSelectedFontBeforePreviews(e ?? null);
     d(e, void 0, n ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
     let r = e ? h[e] : void 0;
-    let a = If(r)?.source;
+    let a = getHighestPriorityFont(r)?.source;
     trackEventAnalytics("font picker font selected", {
       pageId: eZ,
       nodeIds: E,
@@ -801,10 +801,10 @@ function eB({
 }) {
   let s = t === Qr.SHARED_FONTS;
   let o = t === Qr.USER_INSTALLED_FONTS;
-  return getFeatureFlags().ce_fp_no_agent_message && o && !Kk() ? jsx("div", {
+  return getFeatureFlags().ce_fp_no_agent_message && o && !areFontsInitializedCheck() ? jsx("div", {
     "data-testid": "no-fonts-item-row",
     className: "font_picker--fontPickerNoAgentConnectionMessage--UekJN text--fontPos11--2LvXf text--_fontBase--QdLsd",
-    children: Rt() ? jsx(K1, {}) : jsx(YQ, {})
+    children: isAgentDetected() ? jsx(K1, {}) : jsx(YQ, {})
   }) : e || !s ? jsx(eV, {
     searchQuery: e
   }) : jsx(eG, {

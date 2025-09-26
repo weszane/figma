@@ -15,7 +15,7 @@ import { getSelectedView } from "../figma_app/386952";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { FRequestsStr } from "../905/384551";
 import { UserGroupRole } from "../905/441038";
-import { O as _$$O } from "../figma_app/809387";
+import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { OrganizationType } from "../905/833838";
 import { DashboardSections } from "../905/548208";
@@ -35,7 +35,7 @@ function C(e) {
   let t = useTeamPlanUser();
   return useIsOrgAdminUser(t).unwrapOr(!1) ? jsxs(A5, {
     children: [jsx(J5, {
-      text: _$$O(DashboardSection.CONTENT),
+      text: getOrgAdminTabMessage(DashboardSection.CONTENT),
       onClick: () => {
         e.dispatch(selectViewAction({
           view: "orgAdminSettings",
@@ -44,7 +44,7 @@ function C(e) {
       },
       hasTrailingDivider: !0
     }), jsx(J5, {
-      text: _$$O(DashboardSection.CONTENT, WorkspaceTab.WORKSPACES),
+      text: getOrgAdminTabMessage(DashboardSection.CONTENT, WorkspaceTab.WORKSPACES),
       onClick: () => {
         e.dispatch(selectViewAction({
           view: "orgAdminSettings",
@@ -60,7 +60,7 @@ function w(e) {
   let t = useTeamPlanUser();
   return useIsOrgAdminUser(t).unwrapOr(!1) ? jsx(A5, {
     children: jsx(J5, {
-      text: _$$O(DashboardSection.BILLING),
+      text: getOrgAdminTabMessage(DashboardSection.BILLING),
       onClick: () => {
         e.dispatch(selectViewAction({
           view: "orgAdminSettings",
@@ -74,7 +74,7 @@ function w(e) {
 function O(e) {
   return jsx(A5, {
     children: jsx(J5, {
-      text: _$$O(DashboardSection.SETTINGS),
+      text: getOrgAdminTabMessage(DashboardSection.SETTINGS),
       onClick: () => {
         e.dispatch(selectViewAction({
           view: "orgAdminSettings",
@@ -88,7 +88,7 @@ function O(e) {
 function R(e) {
   return jsx(A5, {
     children: jsx(J5, {
-      text: _$$O(DashboardSection.SETTINGS),
+      text: getOrgAdminTabMessage(DashboardSection.SETTINGS),
       onClick: () => {
         e.dispatch(selectViewAction({
           view: "orgAdminSettings",
@@ -102,7 +102,7 @@ function R(e) {
 function L(e) {
   return e.selectedView.adminPlanType === OrganizationType.ORG ? jsxs(A5, {
     children: [jsx(J5, {
-      text: _$$O(DashboardSection.CONTENT),
+      text: getOrgAdminTabMessage(DashboardSection.CONTENT),
       onClick: () => {
         e.dispatch(selectViewAction({
           view: "orgAdminSettings",

@@ -20,7 +20,7 @@ import { UpgradeSteps } from "../figma_app/831101";
 import { CreateUpgradeAction, TeamType } from "../figma_app/707808";
 import { ModalView } from "../figma_app/918700";
 import { debounce } from "../905/915765";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { I as _$$I } from "../c5e2cae0/393403";
 import { LazyInputForwardRef } from "../905/408237";
 import { LoadingSpinner } from "../figma_app/858013";
@@ -44,7 +44,7 @@ let L = createOptimistThunk((e, {
   onBillingCompleteRedirectInfo: l
 }) => {
   let n;
-  XHR.post("/api/teams/create", {
+  sendWithRetry.post("/api/teams/create", {
     team_name: t
   }).then(({
     data: t

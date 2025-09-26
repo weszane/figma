@@ -20,7 +20,7 @@ import { C as _$$C } from '../905/807275';
 import { PriorityLevels as _$$aG, createAliasedFieldRef, createParentRef, createSessionRef, createViewRef, makeFieldRefOptional, mergeFieldRefs, NULL_FIELD_REF } from '../905/871467';
 import { generateUUIDv4 } from '../905/871474';
 import { getEnvironmentInfo } from '../905/883621';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { ConnectionAttemptTypes, FileOperationTypes, PriorityLevels } from '../905/957591';
 import { getInitialDynamicConfig } from '../3973/389215';
 import { FileBrowserRecentFilesView, FileBrowserSearchBarData, FileBrowserSidebarData, getAllResourceViews, GraftingUpdateSloData, OpenEditorFileData, OrgAdminUserView, SubscriptionUpdateSloData } from '../figma_app/43951';
@@ -11254,37 +11254,37 @@ let nz = [iP, iO, nw, tT, tk, tj, tU, iF, iM, iD, iL, ib, iv, tB, tV, iQ, iJ, nC
   permissionName: 'FILE::CAN_PUBLISH_SITE',
   dependencies: Mx['FILE::CAN_PUBLISH_SITE']
 }, ts, to, tG, tz, tZ, tX, tq, t$, nj, nU, nc, nu, {
-  name: 'canTestPlanRecordPermission',
-  type: {
-    kind: 'bool'
-  },
-  args: [{
-    name: 'userId',
+    name: 'canTestPlanRecordPermission',
     type: {
-      kind: 'bigint'
+      kind: 'bool'
     },
-    nullable: !0
-  }],
-  computed: !0,
-  permissionName: 'FILE::CAN_TEST_PLAN_RECORD_PERMISSION',
-  dependencies: Mx['FILE::CAN_TEST_PLAN_RECORD_PERMISSION']
-}, {
-  name: 'canTestPlanRecordPermissionWithReasons',
-  type: {
-    kind: 'object',
-    name: EntityType.PermissionEvaluationResult
-  },
-  args: [{
-    name: 'userId',
+    args: [{
+      name: 'userId',
+      type: {
+        kind: 'bigint'
+      },
+      nullable: !0
+    }],
+    computed: !0,
+    permissionName: 'FILE::CAN_TEST_PLAN_RECORD_PERMISSION',
+    dependencies: Mx['FILE::CAN_TEST_PLAN_RECORD_PERMISSION']
+  }, {
+    name: 'canTestPlanRecordPermissionWithReasons',
     type: {
-      kind: 'bigint'
+      kind: 'object',
+      name: EntityType.PermissionEvaluationResult
     },
-    nullable: !0
-  }],
-  computed: !0,
-  permissionName: 'FILE::CAN_TEST_PLAN_RECORD_PERMISSION',
-  dependencies: Mx['FILE::CAN_TEST_PLAN_RECORD_PERMISSION']
-}, tK, tY, ij, iU, i6, i7, i2, i5, i0, i4, i3, i1, ni, nn, ne, nt, nr, na, i8, i9, ns, no, t4, t3, iK, iq, i$, iY, iB, iV, ii, ir, tP, im, ih, tO, ig, i_, e8, e9, te, tt, nf, n_, nl, nd, iR, iN, iT, ik, iw, iC, tb, tv, iI, iE, ix, iS, tp, tm, np, nm, nI, nE, nx, nS, nF, nM, nb, nv, nA, ny, nD, nL, nP, nO];
+    args: [{
+      name: 'userId',
+      type: {
+        kind: 'bigint'
+      },
+      nullable: !0
+    }],
+    computed: !0,
+    permissionName: 'FILE::CAN_TEST_PLAN_RECORD_PERMISSION',
+    dependencies: Mx['FILE::CAN_TEST_PLAN_RECORD_PERMISSION']
+  }, tK, tY, ij, iU, i6, i7, i2, i5, i0, i4, i3, i1, ni, nn, ne, nt, nr, na, i8, i9, ns, no, t4, t3, iK, iq, i$, iY, iB, iV, ii, ir, tP, im, ih, tO, ig, i_, e8, e9, te, tt, nf, n_, nl, nd, iR, iN, iT, ik, iw, iC, tb, tv, iI, iE, ix, iS, tp, tm, np, nm, nI, nE, nx, nS, nF, nM, nb, nv, nA, ny, nD, nL, nP, nO];
 let nH = {
   name: 'canViewPrototype',
   type: {
@@ -92098,7 +92098,7 @@ class Nm {
       this.batchedNumericEvents = [];
       try {
         await Promise.all([sendBatchedMetrics(e), sendBatchedHistograms(t)]);
-      } catch (e) {}
+      } catch (e) { }
       this._currentlySendingBatchedEvents = !1;
     };
     this.reportCustomEvent = (e, t = {}) => {
@@ -92991,7 +92991,7 @@ class Nm {
 let Ng = ['repoId', 'userId', 'targetUserId', 'currentOrgId', 'teamId', 'orgId', 'targetOrgId', 'orgIds', 'workspaceId', 'planType', 'hubFileId', 'projectId', 'planId', 'libraryKey', 'editorType', 'planParentId', 'planParentType'];
 let Nf = new class {
   submitResponseSample(e, t, i, n, r) {
-    return XHR.post('/api/response_sampler', {
+    return sendWithRetry.post('/api/response_sampler', {
       service_name: 'livegraph',
       user_id: e,
       source_context: {
@@ -93084,7 +93084,7 @@ class NE {
     this.nextMeasurementTimeoutId = null;
     this.sloEntryId = null;
     this.unsubscribeCallback = null;
-    this.subscriptionObserver = () => {};
+    this.subscriptionObserver = () => { };
     this.serverVersion = 'unknown';
     this.onEvent = e => {
       e.type === 'CONNECTION_STATE' && e.state.type === 'connected' && e.state.authenticated && (this.serverVersion = e.state.serverVersion ?? 'unknown');
@@ -93103,7 +93103,7 @@ class NE {
     this.isSloLoopEnabled = !1;
     try {
       this.sloEntryId && (await NI.deleteLGUpdateSloData(this.sloEntryId));
-    } catch (e) {}
+    } catch (e) { }
     this.sloEntryId = null;
   }
   async measureLoop() {
@@ -93179,7 +93179,7 @@ class NE {
         used_100x: String(this.use100x),
         server_version: this.serverVersion
       });
-    } catch (e) {}
+    } catch (e) { }
   }
 }
 let Nx = new class {
@@ -93277,7 +93277,7 @@ export function $$NT0(e) {
               let n = new URL(e);
               i = n.protocol;
               t = n.host;
-            } catch (e) {}
+            } catch (e) { }
           }
           (void 0 === t || void 0 === i) && ((t = window.location.host) === 'admin.staging.figma.com' || t === 'embed.staging.figma.com' ? t = 'staging.figma.com' : (t === 'admin.figma.com' || t === 'embed.figma.com') && (t = 'www.figma.com'), i = window.location.protocol);
           return `${i === 'https:' ? 'wss' : 'ws'}://${t}`;

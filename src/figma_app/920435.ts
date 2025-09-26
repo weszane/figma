@@ -1,5 +1,5 @@
 import { createActionCreator } from "../905/73481";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -19,7 +19,7 @@ export function $$E0(e) {
     dispatch,
     email
   } = e;
-  return XHR.put(`/api/subscriptions/team/${teamId}/billing_contact`, {
+  return sendWithRetry.put(`/api/subscriptions/team/${teamId}/billing_contact`, {
     email
   }).then(e => {
     dispatch($$T5({
@@ -90,7 +90,7 @@ export function $$S3(e) {
     onSuccess,
     onFailure
   } = e;
-  return XHR.post(`/api/subscriptions/team/${teamId}/annual_subscription`, {
+  return sendWithRetry.post(`/api/subscriptions/team/${teamId}/annual_subscription`, {
     count_by_billable_product: annualSeatCounts
   }).then(async () => {
     dispatch(_$$Be({
@@ -119,7 +119,7 @@ export function $$v7(e) {
     onSuccess,
     onFailure
   } = e;
-  return XHR.put(`/api/subscriptions/team/${teamId}/coterm_annual_seats`, {
+  return sendWithRetry.put(`/api/subscriptions/team/${teamId}/coterm_annual_seats`, {
     count_by_billable_product: annualSeatCounts
   }).then(async () => {
     dispatch(_$$Be({
@@ -147,7 +147,7 @@ export function $$A4(e) {
   } = e;
   let n = async (e, r, n) => {
     let a = !1;
-    await XHR.put(`/api/subscriptions/team/${team.id}/vat_gst`, {
+    await sendWithRetry.put(`/api/subscriptions/team/${team.id}/vat_gst`, {
       vat_gst_id: e,
       regional_vat_gst_id: n
     }).then(() => {

@@ -63,14 +63,14 @@ import { L as _$$L } from '../905/704296';
 import { $y, Jy, Zu } from '../905/708651';
 import { SvgComponent, V as _$$V } from '../905/714743';
 import { Point } from '../905/736624';
-import { od } from '../905/748636';
+import { DraggableModal } from '../905/748636';
 import { G as _$$G2 } from '../905/750789';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { getSelectedFile } from '../905/766303';
 import { nm } from '../905/782020';
 import { q as _$$q2 } from '../905/820062';
 import { j as _$$j } from '../905/834956';
-import { BK, Um } from '../905/848862';
+import { useDropdown, useDropdownState } from '../905/848862';
 import { isVsCodeEnvironment } from '../905/858738';
 import { e as _$$e4, y as _$$y } from '../905/871724';
 import { useHasParentOrgId } from '../905/882262';
@@ -1277,7 +1277,7 @@ function th({
   title: e
 }) {
   let t = Ww();
-  let i = Um();
+  let i = useDropdownState();
   let s = useSelector(e => e.multiplayer);
   let o = selectCurrentFile();
   let l = selectCurrentUser();
@@ -1642,7 +1642,7 @@ function iY() {
   let e = selectCurrentFile();
   let t = useDispatch();
   let i = selectCurrentUser();
-  let s = Um();
+  let s = useDropdownState();
   let o = useSelector(e => e.multiplayer);
   let l = useMemo(() => o.allUsers.find(e => e.sessionID === o.sessionID) || null, [o.allUsers, o.sessionID]);
   let d = dR();
@@ -2707,7 +2707,7 @@ let r0 = memo(({
   let R = C && L && f;
   let {
     showing
-  } = BK(t.overflowDropdownType);
+  } = useDropdown(t.overflowDropdownType);
   let M = _$$Z();
   let F = getObservableOrFallback(AppStateTsApi.singleSlideView().isInFocusedNodeView);
   let [B, U] = useState(!1);
@@ -2911,7 +2911,7 @@ let r0 = memo(({
     y: _y
   } = _$$ut(getSingletonSceneGraph(), !0);
   let ec = !C || !m?.initialViewerSize;
-  return jsx(od, {
+  return jsx(DraggableModal, {
     ResizeTargetComponent: et,
     allowPartialHeaderOnScreen: !0,
     allowResizeHeight: B && !K,
@@ -3062,7 +3062,7 @@ function r1({
   let {
     showing,
     toggle
-  } = BK(T.overflowDropdownType);
+  } = useDropdown(T.overflowDropdownType);
   let L = useCallback(() => {
     if (!o) throw new Error('Expected openFileKey to exist');
     if (!j) throw new Error('openPrototypeInNewTab called without currentPresentedNode');

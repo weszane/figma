@@ -17,7 +17,7 @@ import { createEmptyAddress } from "../figma_app/831101";
 import { registerModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
 import { X } from "../905/33014";
-import { A as _$$A } from "../905/289352";
+import { VatGstInput } from "../905/289352";
 export let $$w0 = registerModal(function (e) {
   let t = useDispatch();
   let r = selectCurrentUser();
@@ -105,7 +105,7 @@ export let $$w0 = registerModal(function (e) {
         address: N,
         countryCodesOverride: qE,
         dontSeeYourCountryLink: "https://help.figma.com/hc/articles/12067637274519-About-selling-Community-resources#What_countries_are_supported?"
-      }), jsx(_$$A, {
+      }), jsx(VatGstInput, {
         onChange: R,
         country: N.country,
         setIsVatIdValid: A,

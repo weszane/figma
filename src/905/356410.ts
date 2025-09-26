@@ -435,7 +435,7 @@ function G({
   return jsxs("div", {
     className: d()(cssBuilderInstance.flex.gap8.p16.justifyBetween.alignCenter.absolute.bottom0.left0.right0.bSolid.bt1.colorBorder.colorBg.$, "extension_security_form--bottomBarUI3--cXlx-"),
     children: [!x && jsx("button", {
-      className: cssBuilderInstance.bgTransparent.noWrap.$$if(optedOutOfSecurityForm, cssBuilderInstance.colorTextSecondary, cssBuilderInstance.colorTextBrand.cursorPointer).$,
+      className: cssBuilderInstance.bgTransparent.noWrap.if(optedOutOfSecurityForm, cssBuilderInstance.colorTextSecondary, cssBuilderInstance.colorTextBrand.cursorPointer).$,
       onClick: () => {
         w(showModalHandler({
           type: _$$i,

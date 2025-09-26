@@ -6,7 +6,7 @@ import { createOptimistCommitAction, createOptimistRevertAction } from "../905/6
 import { z as _$$z } from "../905/239603";
 import { WB } from "../905/761735";
 import { createAtomSetter } from "../figma_app/566371";
-import { getRequest, XHR } from "../905/910117";
+import { getRequest, sendWithRetry } from "../905/910117";
 import { handlePromiseError, FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -156,7 +156,7 @@ let $$J0 = liveStoreInstance.PaginatedQuery({
     reduxStore: r
   }) => {
     let n;
-    if (t) n = t;else {
+    if (t) n = t; else {
       let {
         folderId,
         shouldShowOnlyTrashedFiles = !1,
@@ -412,7 +412,7 @@ let $$ei12 = liveStoreInstance.Mutation(({
   trackFolderEvent("Folder Renamed", e, null, n.getState(), {
     folderName: t
   });
-  let a = XHR.put("/api/folders/rename", {
+  let a = sendWithRetry.put("/api/folders/rename", {
     folder_id: e,
     name: t
   });
@@ -433,7 +433,7 @@ let $$ei12 = liveStoreInstance.Mutation(({
 let $$ea9 = createOptimistAction("FOLDER_UPDATE_FOLDER_ACCESS", (e, t, {
   optimistId: r
 }) => {
-  let n = XHR.put(`/api/folders/${t.folderId}`, {
+  let n = sendWithRetry.put(`/api/folders/${t.folderId}`, {
     is_invite_only: t.isInviteOnly,
     is_view_only: t.isViewOnly
   }).then(() => {
@@ -555,7 +555,7 @@ let ed = liveStoreInstance.Mutation((e, {
   trackFolderEvent("Folder Moved", folder.id, null, n.getState(), {
     destTeamId: team.id
   });
-  let s = XHR.put("/api/folders/move", {
+  let s = sendWithRetry.put("/api/folders/move", {
     folder_id: folder.id,
     team_id: team.id
   }).then(() => {
@@ -616,7 +616,7 @@ let $$ec6 = createOptimistThunk((e, t) => {
         upsellPlan: consumptionPaywallUtils.Plan.PRO,
         editorType: null
       }
-    }));else {
+    })); else {
       let t = s ? getI18nString("file_browser.api_folder.no_create_permissions_team_name", {
         teamName: s.name
       }) : getI18nString("file_browser.api_folder.no_create_permissions_this_team");

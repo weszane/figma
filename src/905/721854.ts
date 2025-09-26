@@ -14,10 +14,10 @@ import { Yh } from "../figma_app/357047";
 import { Bf } from "../figma_app/249941";
 import { cq } from "../905/794154";
 import { ID, aK } from "../905/487011";
-import { lc, dk } from "../905/278499";
-import { r as _$$r } from "../905/189361";
-import { B } from "../905/222272";
-import { y as _$$y2 } from "../905/236825";
+import { AIActionInstructionType, AIActionInstructionTrigger } from "../905/278499";
+import { ActionButton } from "../905/189361";
+import { FlexBox } from "../905/222272";
+import { Panel } from "../905/236825";
 function E({
   aiTrackingContext: e,
   children: t,
@@ -32,7 +32,7 @@ function E({
     e && ID({
       ...e,
       ...aK(t),
-      interaction: lc.DISMISS
+      interaction: AIActionInstructionType.DISMISS
     });
     close();
   }, [e, close]);
@@ -41,16 +41,16 @@ function E({
       rawInput: e
     }));
   }, [h]);
-  let E = i ? jsx(_$$r, {
+  let E = i ? jsx(ActionButton, {
     onAction: "custom" === i.type ? i.onPerform : () => f(i.url),
     iconPrefix: "custom" === i.type ? i.iconPrefix : void 0,
     variant: "secondary",
     children: "custom" === i.type ? i.label : renderI18nText("ai.learn_more")
   }) : null;
-  return jsx(_$$y2, {
+  return jsx(Panel, {
     dataTestId: "instruction",
     shouldAutoFocus: o,
-    children: jsxs(B, {
+    children: jsxs(FlexBox, {
       justify: "space-between",
       align: "center",
       fullWidth: !0,
@@ -60,9 +60,9 @@ function E({
           className: cssBuilderInstance.colorText.textBodyMediumStrong.$,
           children: t
         })]
-      }), jsxs(B, {
+      }), jsxs(FlexBox, {
         gap: 8,
-        children: [E, jsx(_$$r, {
+        children: [E, jsx(ActionButton, {
           onAction: g,
           variant: "secondary",
           shortcuts: [{
@@ -97,8 +97,8 @@ export function $$x0({
   let D = useCallback(() => {
     m && ID({
       ...m,
-      interaction: lc.DISMISS,
-      interaction_type: dk.BUTTON_CLICK
+      interaction: AIActionInstructionType.DISMISS,
+      interaction_type: AIActionInstructionTrigger.BUTTON_CLICK
     });
     close();
   }, [m, close]);
@@ -106,21 +106,21 @@ export function $$x0({
     m && ID({
       ...m,
       ...aK(e),
-      interaction: lc.EXECUTE
+      interaction: AIActionInstructionType.EXECUTE
     });
     l();
   }, [m, l]);
   return (useSingleEffect(() => {
     m && ID({
       ...m,
-      interaction: lc.VIEW,
-      interaction_type: dk.VIEW
+      interaction: AIActionInstructionType.VIEW,
+      interaction_type: AIActionInstructionTrigger.VIEW
     });
-  }), P) ? jsx(_$$y2, {
+  }), P) ? jsx(Panel, {
     onDismiss: D,
     dataTestId: "instructionView",
     shouldAutoFocus: k,
-    children: jsxs(B, {
+    children: jsxs(FlexBox, {
       justify: "space-between",
       align: "center",
       fullWidth: !0,
@@ -157,10 +157,10 @@ export function $$x0({
             });
           }(N, w)
         })]
-      }), jsxs(B, {
+      }), jsxs(FlexBox, {
         gap: 8,
         align: "center",
-        children: [R, jsx(_$$r, {
+        children: [R, jsx(ActionButton, {
           onAction: L,
           variant: "secondary",
           iconPrefix: t,

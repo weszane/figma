@@ -49,10 +49,10 @@ import { INSPECT_PANEL } from "../figma_app/80938";
 import { _o } from "../figma_app/701001";
 import { GQ } from "../figma_app/32128";
 import { findNodeByCriteria, findFirstNodeOfType, navigateAndSelect } from "../figma_app/202626";
-import { w as _$$w2 } from "../905/129046";
-import { rq } from "../905/425180";
+import { VideoOverlayComponent } from "../905/129046";
+import { OnboardingModal } from "../905/425180";
 import { NotModalType, Ui3PositionType } from "../905/11928";
-import { F_ } from "../905/748636";
+import { ArrowPosition } from "../905/748636";
 import { fullscreenValue } from "../figma_app/455680";
 import { xT } from "../figma_app/195407";
 import { uI, Ov, gh } from "../figma_app/598952";
@@ -376,7 +376,7 @@ function ef(e) {
     top,
     left,
     pointerOffset: 20,
-    pointerPosition: F_.TOP
+    pointerPosition: ArrowPosition.TOP
   };
   return (useSingleEffect(() => {
     queueMicrotask(async function () {
@@ -386,13 +386,13 @@ function ef(e) {
         scale: 1
       }), a(!0));
     });
-  }), s) ? jsx(rq, {
+  }), s) ? jsx(OnboardingModal, {
     description: renderI18nText("dev_mode_demo_file.tour.annotations_description"),
     emphasized: !0,
     fixedPosition: !0,
     isShowing: n,
     location: p,
-    media: jsx(_$$w2, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl("7e8f6ecac4e446628808f8f6476d3b921ea86e41"),
       aspectRatio: 16 / 9,
       hideBorder: !0
@@ -454,13 +454,13 @@ function e_(e) {
     });
     setSelectedDevModePropertiesPanelTab(IAssertResource.PRIMARY);
   });
-  return jsx(rq, {
-    arrowPosition: F_.RIGHT_BODY,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: renderI18nText("dev_mode_demo_file.tour.code_connect_description"),
     disableHighlight: !0,
     emphasized: !0,
     isShowing: n,
-    media: jsx(_$$w2, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl("5134c24863057101ffd588119e4c85aeeee60126"),
       aspectRatio: 16 / 9,
       hideBorder: !0
@@ -517,13 +517,13 @@ function eC(e) {
     });
     setSelectedDevModePropertiesPanelTab(IAssertResource.PRIMARY);
   });
-  return jsx(rq, {
-    arrowPosition: F_.RIGHT_BODY,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: renderI18nText("dev_mode_demo_file.tour.compare_changes_description"),
     disableHighlight: d,
     emphasized: !0,
     isShowing: n,
-    media: jsx(_$$w2, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl("a0d110312d2748672be288f2474344563c4dc5be"),
       aspectRatio: 16 / 9,
       hideBorder: !0
@@ -563,7 +563,7 @@ function eT(e) {
     emphasized: !0,
     hideCloseButton: !0,
     isShowing: !0,
-    media: jsx(_$$w2, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl("eb0bb37be7039cb1cf12baebc9f72f8cd74d6092"),
       aspectRatio: 16 / 9,
       hideBorder: !0
@@ -594,7 +594,7 @@ function eT(e) {
   });
 }
 function ek(e) {
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     description: renderI18nText("dev_mode_demo_file.tour.outro_description"),
     emphasized: !0,
     targetKey: gh,
@@ -633,7 +633,7 @@ function ej(e) {
     top,
     left,
     pointerOffset: 110,
-    pointerPosition: F_.TOP
+    pointerPosition: ArrowPosition.TOP
   };
   return (useSingleEffect(() => {
     queueMicrotask(async function () {
@@ -643,13 +643,13 @@ function ej(e) {
         scale: .3
       }), a(!0));
     });
-  }), s) ? jsx(rq, {
+  }), s) ? jsx(OnboardingModal, {
     description: renderI18nText("dev_mode_demo_file.tour.statuses_description"),
     emphasized: !0,
     fixedPosition: !0,
     isShowing: n,
     location: p,
-    media: jsx(_$$w2, {
+    media: jsx(VideoOverlayComponent, {
       src: buildUploadUrl("6655cdd596a72f3028467f88af0c3ff46c22727c"),
       aspectRatio: 16 / 9,
       hideBorder: !0

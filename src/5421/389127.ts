@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { FontSourceType, FontHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { a as _$$a } from "../905/714538";
+import { getHighestPriorityFontKey } from "../905/714538";
 export function $$s3() {
   let e = useSelector(e => e.fonts);
   return useMemo(() => {
@@ -36,7 +36,7 @@ export function $$d1(e, t) {
 export function $$c0(e, t) {
   let n = t[e];
   if (!n) return;
-  let o = _$$a(n);
+  let o = getHighestPriorityFontKey(n);
   if (void 0 === o) return;
   let i = n[o];
   if (!i) return;

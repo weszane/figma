@@ -4,7 +4,7 @@ import { Q } from "../905/467310";
 import { D } from "../905/347702";
 import { FOrganizationType } from "../figma_app/191312";
 import { BillingTrialForResource } from "../figma_app/43951";
-import { A as _$$A } from "../905/475480";
+import { orgTrailHelper as _$$A } from "../905/475480";
 import { transformAtom } from "../905/401885";
 var n;
 (e => {

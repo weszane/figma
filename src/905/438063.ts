@@ -24,7 +24,7 @@ import { rg } from "../figma_app/401069";
 import { hideModalHandler } from "../905/156213";
 import { ZH } from "../figma_app/504823";
 import { replaceSelection } from "../figma_app/741237";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { registerModal } from "../905/102752";
 import { JI, Yj } from "../905/416496";
@@ -43,7 +43,7 @@ export let $$M0 = registerModal(function (e) {
   let [N, M] = useState(g);
   let U = getFocusedNodeId();
   let B = isFullscreenAndInFocusedNodeView();
-  let V = Um();
+  let V = useDropdownState();
   let [G, z] = useState(JI);
   let [H, W] = useState("DOCUMENT");
   let [K, Y] = useState(!1);

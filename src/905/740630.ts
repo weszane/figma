@@ -15,9 +15,9 @@ import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { Sh } from "../figma_app/803787";
 import { I as _$$I } from "../figma_app/130633";
 import { g as _$$g } from "../905/505662";
-import { H } from "../905/286442";
+import { usKeyboardFocusHandler } from "../905/286442";
 import { c as _$$c } from "../905/566438";
-import { R$ } from "../905/479155";
+import { useLayoutRerender } from "../905/479155";
 import { k as _$$k } from "../905/341245";
 export function $$x0({
   showTooltipOnEllipsis: e,
@@ -57,7 +57,7 @@ export function $$x0({
     active,
     target,
     focus
-  } = H({
+  } = usKeyboardFocusHandler({
     ref: L,
     focusOptions: {
       enableAutoFocus: !1
@@ -74,7 +74,7 @@ export function $$x0({
     actionLabel: !1,
     target
   });
-  let B = R$();
+  let B = useLayoutRerender();
   let V = useCallback(() => {
     setTimeout(() => {
       B();

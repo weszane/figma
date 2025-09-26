@@ -8,7 +8,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { useCurrentUserOrgId } from "../905/845253";
 import { getCurrentTeamId } from "../figma_app/598018";
 import { registerModal } from "../905/102752";
-import { Dd } from "../905/519092";
+import { ConfirmationModal } from "../905/519092";
 import { n as _$$n } from "../905/316557";
 import { s1 } from "../figma_app/226737";
 export function $$f1(e) {
@@ -55,7 +55,7 @@ let A = registerModal(function ({
       teamId: l,
       orgId: p
     },
-    children: jsx(Dd, {
+    children: jsx(ConfirmationModal, {
       title: getI18nString("slides.templates.modal.theme_picker.header"),
       minWidth: 320,
       maxWidth: 320,

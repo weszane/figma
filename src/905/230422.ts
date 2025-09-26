@@ -10,7 +10,7 @@ import { selectViewAction } from "../905/929976";
 import { TrackingProvider } from "../figma_app/831799";
 import { UserProfileTab } from "../figma_app/707808";
 import { registerModal } from "../905/102752";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { o as _$$o } from "../905/451156";
 import { W } from "../905/316655";
 import { y as _$$y } from "../905/617004";
@@ -322,7 +322,7 @@ class S extends Component {
     }
   }
   render() {
-    return jsx(OJ, {
+    return jsx(HeaderModal, {
       title: this.renderTabs(),
       onClose: this.hideModal,
       headerClassName: "follows_list_modal--header--9WiIT",

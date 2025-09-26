@@ -1,272 +1,359 @@
-import { ServiceCategories } from "../905/165054";
-import { reportError } from "../905/11";
-import { R } from "../905/994802";
-var $$n0 = (e => (e.ExistingExperience = "ExistingExperience", e.HigherPriExperience = "HigherPriExperience", e.ExperimentCheckFail = "ExperimentCheckFail", e.RuleFail = "RuleFail", e.LifecycleCheckFail = "LifecycleCheckFail", e))($$n0 || {});
-var $$r1 = (e => (e.Overlay = "Overlay", e))($$r1 || {});
-export class $$a4 {
-  constructor(e, t, i) {
-    this.name = e;
-    this.description = t;
-    this.ruleFn = i;
-  }
-  execute(e, t) {
-    return this.ruleFn(e, t);
+import { reportError } from '../905/11'
+import { ServiceCategories } from '../905/165054'
+import { R } from '../905/994802'
+
+export enum BlockReasonType {
+  ExistingExperience = 'ExistingExperience',
+  HigherPriExperience = 'HigherPriExperience',
+  ExperimentCheckFail = 'ExperimentCheckFail',
+  RuleFail = 'RuleFail',
+  LifecycleCheckFail = 'LifecycleCheckFail',
+}
+
+export enum ChannelID {
+  Overlay = 'Overlay',
+}
+
+export class Rule {
+  constructor(public name: string, public description: string, private ruleFn: (context: any, experience: any) => boolean) {}
+
+  execute(context: any, experience: any): boolean {
+    return this.ruleFn(context, experience)
   }
 }
-function l(e) {
-  let t = [];
-  return (...i) => {
-    t.length || setTimeout(() => {
-      let i = t;
-      t = [];
-      i.forEach(t => {
-        e(...t);
-      });
-    }, 0);
-    t.push(i);
-  };
+
+function batchExecution(fn: (...args: any[]) => void) {
+  let batch: any[][] = []
+  return (...args: any[]) => {
+    if (batch.length === 0) {
+      setTimeout(() => {
+        const currentBatch = batch
+        batch = []
+        currentBatch.forEach((batchArgs) => {
+          fn(...batchArgs)
+        })
+      }, 0)
+    }
+    batch.push(args)
+  }
 }
-export class $$c3 {
-  constructor(e) {
-    this.channels = e;
-    this.batchNumber = 0;
-    this.experienceMap = new Map();
-    this.runExperiencesForChannel = l(e => {
+
+export class ExperienceManager {
+  private channels: any
+  private batchNumber = 0
+  private experienceMap = new Map<string, any>()
+
+  public runExperiencesForChannel: (channelId: string) => void
+
+  constructor(channels: any) {
+    this.channels = channels
+    this.runExperiencesForChannel = batchExecution((channelId) => {
       R({
-        type: "internal",
-        name: "run_experiences_for_channel",
-        properties: {
-          channelId: e
+        type: 'internal',
+        name: 'run_experiences_for_channel',
+        properties: { channelId },
+      }, 'trace')
+
+      const channel = this.channels[channelId]
+      this.batchNumber += 1
+      if (channel?.currentExperience == null) {
+        const experience = this.getExperienceForChannel(channelId)
+        if (experience != null && channel != null) {
+          channel.currentExperience = experience
+          experience.onShow(this.batchNumber)
+          this.removeBlockedExperiencesForChannel(channel, BlockReasonType.HigherPriExperience)
         }
-      }, "trace");
-      let t = this.channels[e];
-      if (this.batchNumber += 1, t?.currentExperience == null) {
-        let i = this.getExperienceForChannel(e);
-        null != i && null != t && (t.currentExperience = i, i.onShow(this.batchNumber), this.removeBlockedExperiencesForChannel(t, $$n0.HigherPriExperience));
-      } else this.removeBlockedExperiencesForChannel(t, $$n0.ExistingExperience);
-    });
+      }
+      else {
+        this.removeBlockedExperiencesForChannel(channel, BlockReasonType.ExistingExperience)
+      }
+    })
   }
-  queueExperience(e) {
-    let {
-      channelID
-    } = e;
-    let i = this.channels[channelID];
-    let n = !!i?.queuedExperiences.some(t => t.id === e.id) || i?.currentExperience?.id === e.id;
+
+  queueExperience(experience: any) {
+    const { channelID } = experience
+    const channel = this.channels[channelID]
+    const isAlreadyQueued = !!channel?.queuedExperiences.some(exp => exp.id === experience.id) || channel?.currentExperience?.id === experience.id
+
     R({
-      type: "internal",
-      name: "queue_experience",
+      type: 'internal',
+      name: 'queue_experience',
       properties: {
-        experienceId: e.id,
-        isAlreadyQueued: n
-      }
-    }, "trace");
-    n || (this.experienceMap.set(e.id, e), i?.queuedExperiences.push(e), this.runExperiencesForChannel(channelID));
-  }
-  completeExperience(e) {
-    let t = this.experienceMap.get(e);
-    if (null == t) return;
-    R({
-      type: "internal",
-      name: "complete_experience",
-      properties: {
-        experienceId: e
-      }
-    }, "trace");
-    let i = this.channels[t.channelID];
-    i?.currentExperience?.id === e ? (i.currentExperience = void 0, this.experienceMap.$$delete(e), this.runExperiencesForChannel(i.id)) : reportError(ServiceCategories.GROWTH_PLATFORM, Error(`completeExperience called when experience is not current: ${e}`));
-  }
-  dequeueExperience(e) {
-    let t = this.experienceMap.get(e);
-    if (null == t) return;
-    R({
-      type: "internal",
-      name: "dequeue_experience",
-      properties: {
-        experienceId: e
-      }
-    }, "trace");
-    let i = this.channels[t.channelID];
-    i && (i.queuedExperiences.some(t => t.id === e) && this.experienceMap.$$delete(e), i.queuedExperiences = i.queuedExperiences.filter(t => t.id !== e));
-  }
-  getExperienceForChannel(e) {
-    R({
-      type: "internal",
-      name: "get_experience_for_channel",
-      properties: {
-        channelId: e
-      }
-    }, "trace");
-    let t = this.channels[e];
-    if (null != t) {
-      t.queuedExperiences.sort((e, t) => t.priority - e.priority);
-      let e = t.queuedExperiences.shift();
-      for (; null != e;) {
-        let i = function (e) {
-          return (t, i) => {
-            for (let n of e) if (!n.execute(t, i)) return {
-              pass: !1,
-              rule: n
-            };
-            return {
-              pass: !0
-            };
-          };
-        }(t.getRules())(t.getContext(), e);
-        if (!i.pass) {
-          e.onBlocked({
-            reasonType: $$n0.RuleFail,
-            rule: i.rule
-          });
-          e = t.queuedExperiences.shift();
-          continue;
-        }
-        let r = null;
-        for (let t of e.postChecks) if (r = t()) break;
-        if (null == r) break;
-        e.onBlocked(r);
-        e = t.queuedExperiences.shift();
-      }
-      return e;
+        experienceId: experience.id,
+        isAlreadyQueued,
+      },
+    }, 'trace')
+
+    if (!isAlreadyQueued) {
+      this.experienceMap.set(experience.id, experience)
+      channel?.queuedExperiences.push(experience)
+      this.runExperiencesForChannel(channelID)
     }
   }
-  removeBlockedExperiencesForChannel(e, t) {
+
+  completeExperience(experienceId: string) {
+    const experience = this.experienceMap.get(experienceId)
+    if (experience == null)
+      return
+
     R({
-      type: "internal",
-      name: "remove_blocked_experiences",
-      properties: {
-        channelId: e.id
-      }
-    }, "trace");
-    let {
-      currentExperience
-    } = e;
-    if (currentExperience) {
-      let n = [];
-      e.queuedExperiences.forEach(e => {
-        e.onBlocked({
-          reasonType: t,
-          blocker: currentExperience
-        });
-        e.queueOnBlock ? n.push(e) : this.experienceMap.$$delete(e.id);
-      });
-      e.queuedExperiences = n;
+      type: 'internal',
+      name: 'complete_experience',
+      properties: { experienceId },
+    }, 'trace')
+
+    const channel = this.channels[experience.channelID]
+    if (channel?.currentExperience?.id === experienceId) {
+      channel.currentExperience = undefined
+      this.experienceMap.delete(experienceId)
+      this.runExperiencesForChannel(channel.id)
+    }
+    else {
+      reportError(ServiceCategories.GROWTH_PLATFORM, new Error(`completeExperience called when experience is not current: ${experienceId}`))
     }
   }
-  getImmutableChannels() {
-    return JSON.parse(JSON.stringify(this.channels));
+
+  dequeueExperience(experienceId: string) {
+    const experience = this.experienceMap.get(experienceId)
+    if (experience == null)
+      return
+
+    R({
+      type: 'internal',
+      name: 'dequeue_experience',
+      properties: { experienceId },
+    }, 'trace')
+
+    const channel = this.channels[experience.channelID]
+    if (channel) {
+      if (channel.queuedExperiences.some(exp => exp.id === experienceId)) {
+        this.experienceMap.delete(experienceId)
+      }
+      channel.queuedExperiences = channel.queuedExperiences.filter(exp => exp.id !== experienceId)
+    }
   }
-}
-export class $$u2 {
-  constructor() {
-    this.overlayMap = new Map();
-    this.loadMap = new p();
-    this.showQueue = [];
-    this.showOverlay = l((e, t) => {
-      let i = this.overlayMap.get(e);
-      if (i && "loading" !== i.queryResult.status) {
-        let n = i => {
-          this.debugLog("Showing overlay: ", e);
-          t(i);
-          this.removeOverlay(e, !1);
-        };
-        let r = this.loadMap.getMax();
-        r && i.priority < r.priority ? (this.showQueue.push({
-          overlay: i,
-          show: n,
-          startTime: performance.now()
-        }), R({
-          type: "paused",
-          name: "higher_priority_overlay_loading",
-          properties: {
-            overlayId: e,
-            higherPriorityOverlayId: r.id
+
+  getExperienceForChannel(channelId: string): any | undefined {
+    R({
+      type: 'internal',
+      name: 'get_experience_for_channel',
+      properties: { channelId },
+    }, 'trace')
+
+    const channel = this.channels[channelId]
+    if (channel != null) {
+      channel.queuedExperiences.sort((a: any, b: any) => b.priority - a.priority)
+
+      let experience = channel.queuedExperiences.shift()
+      while (experience != null) {
+        const validateRules = (rules: Rule[]) => (context: any, exp: any) => {
+          for (const rule of rules) {
+            if (!rule.execute(context, exp)) {
+              return { pass: false, rule }
+            }
           }
-        }, "debug")) : (n({
-          didNotQueue: !0
-        }), this.drainQueue());
+          return { pass: true, rule: undefined }
+        }
+
+        const ruleResult = validateRules(channel.getRules())(channel.getContext(), experience)
+
+        if (!ruleResult.pass) {
+          experience.onBlocked({
+            reasonType: BlockReasonType.RuleFail,
+            rule: ruleResult.rule,
+          })
+          experience = channel.queuedExperiences.shift()
+          continue
+        }
+
+        let postCheckResult = null
+        for (const check of experience.postChecks) {
+          postCheckResult = check()
+          if (postCheckResult)
+            break
+        }
+
+        if (postCheckResult == null) {
+          break // found a valid experience
+        }
+
+        experience.onBlocked(postCheckResult)
+        experience = channel.queuedExperiences.shift()
       }
-    });
+      return experience
+    }
+    return undefined
   }
-  updateOverlay(e) {
-    this.debugLog("Updating overlay: ", e.id, e.queryResult);
-    let {
-      id,
-      queryResult
-    } = e;
-    switch (this.overlayMap.set(id, e), queryResult.status) {
-      case "loading":
-        this.loadMap.set(e.id, e);
-        break;
-      case "loaded":
-        this.loadMap.$$delete(id);
-        break;
-      case "errors":
-      case "disabled":
-        this.removeOverlay(id);
+
+  removeBlockedExperiencesForChannel(channel: any, reasonType: BlockReasonType) {
+    R({
+      type: 'internal',
+      name: 'remove_blocked_experiences',
+      properties: { channelId: channel.id },
+    }, 'trace')
+
+    const { currentExperience } = channel
+    if (currentExperience) {
+      const remainingQueue: any[] = []
+      channel.queuedExperiences.forEach((exp: any) => {
+        exp.onBlocked({
+          reasonType,
+          blocker: currentExperience,
+        })
+        if (exp.queueOnBlock) {
+          remainingQueue.push(exp)
+        }
+        else {
+          this.experienceMap.delete(exp.id)
+        }
+      })
+      channel.queuedExperiences = remainingQueue
     }
   }
-  removeOverlay(e, t = !0) {
-    this.debugLog("Removing overlay: ", e);
-    this.overlayMap.$$delete(e);
-    this.loadMap.$$delete(e);
-    t && this.drainQueue();
-  }
-  drainQueue() {
-    this.debugLog("Draining the queued show calls");
-    let e = this.loadMap.getMax();
-    let t = this.showQueue.filter(t => !e || t.overlay.priority >= e.priority);
-    this.showQueue = this.showQueue.filter(t => e && t.overlay.priority < e.priority);
-    t.forEach(e => {
-      let t = performance.now() - e.startTime;
-      e.show({
-        queueDuration: t
-      });
-      R({
-        type: "resumed",
-        name: "higher_priority_overlay_loaded",
-        properties: {
-          overlayId: e.overlay.id,
-          queueDurationMs: t
-        }
-      }, "debug");
-    });
-  }
-  debugLog(...e) {}
-  getImmutableLoadingOverlays() {
-    return JSON.parse(JSON.stringify(Array.from(this.loadMap.items.values())));
-  }
-  getImmutableQueuedOverlays() {
-    return JSON.parse(JSON.stringify(this.showQueue.map(e => e.overlay)));
+
+  getImmutableChannels() {
+    return JSON.parse(JSON.stringify(this.channels))
   }
 }
-class p {
+
+export class OverlayManager {
+  private overlayMap = new Map<string, any>()
+  private loadMap = new PriorityMap()
+  private showQueue: any[] = []
+
+  public showOverlay: (overlayId: string, showFn: (result: any) => void) => void
+
   constructor() {
-    this.maxPriItem = null;
-    this.items = new Map();
+    this.showOverlay = batchExecution((overlayId, showFn) => {
+      const overlay = this.overlayMap.get(overlayId)
+      if (overlay && overlay.queryResult.status !== 'loading') {
+        const show = (showResult: any) => {
+          this.debugLog('Showing overlay: ', overlayId)
+          showFn(showResult)
+          this.removeOverlay(overlayId, false)
+        }
+
+        const maxPriorityLoading = this.loadMap.getMax()
+        if (maxPriorityLoading && overlay.priority < maxPriorityLoading.priority) {
+          this.showQueue.push({
+            overlay,
+            show,
+            startTime: performance.now(),
+          })
+          R({
+            type: 'paused',
+            name: 'higher_priority_overlay_loading',
+            properties: {
+              overlayId,
+              higherPriorityOverlayId: maxPriorityLoading.id,
+            },
+          }, 'debug')
+        }
+        else {
+          show({ didNotQueue: true })
+          this.drainQueue()
+        }
+      }
+    })
   }
-  set(e, t) {
-    this.items.set(e, t);
-    (null == this.maxPriItem || t.priority > this.maxPriItem.priority) && (this.maxPriItem = t);
+
+  updateOverlay(overlay: any) {
+    this.debugLog('Updating overlay: ', overlay.id, overlay.queryResult)
+    const { id, queryResult } = overlay
+    this.overlayMap.set(id, overlay)
+    switch (queryResult.status) {
+      case 'loading':
+        this.loadMap.set(overlay.id, overlay)
+        break
+      case 'loaded':
+        this.loadMap.delete(id)
+        break
+      case 'errors':
+      case 'disabled':
+        this.removeOverlay(id)
+    }
   }
-  has(e) {
-    return this.items.has(e);
+
+  removeOverlay(overlayId: string, drain = true) {
+    this.debugLog('Removing overlay: ', overlayId)
+    this.overlayMap.delete(overlayId)
+    this.loadMap.delete(overlayId)
+    if (drain) {
+      this.drainQueue()
+    }
   }
-  delete(e) {
-    let t = this.items.$$delete(e);
-    t && this.maxPriItem?.id === e && this.updateMaxPriItem();
-    return t;
+
+  drainQueue() {
+    this.debugLog('Draining the queued show calls')
+    const maxPriorityLoading = this.loadMap.getMax()
+    const toShow = this.showQueue.filter(item => !maxPriorityLoading || item.overlay.priority >= maxPriorityLoading.priority)
+    this.showQueue = this.showQueue.filter(item => maxPriorityLoading && item.overlay.priority < maxPriorityLoading.priority)
+
+    toShow.forEach((item) => {
+      const queueDuration = performance.now() - item.startTime
+      item.show({ queueDuration })
+      R({
+        type: 'resumed',
+        name: 'higher_priority_overlay_loaded',
+        properties: {
+          overlayId: item.overlay.id,
+          queueDurationMs: queueDuration,
+        },
+      }, 'debug')
+    })
   }
-  getMax() {
-    return this.maxPriItem;
+
+  debugLog(..._args: any[]) {}
+
+  getImmutableLoadingOverlays() {
+    return JSON.parse(JSON.stringify(Array.from(this.loadMap.items.values())))
   }
-  updateMaxPriItem() {
-    let e = null;
-    for (let t of this.items.values()) (null == e || t.priority > e.priority) && (e = t);
-    this.maxPriItem = e;
+
+  getImmutableQueuedOverlays() {
+    return JSON.parse(JSON.stringify(this.showQueue.map(item => item.overlay)))
   }
 }
-export const oE = $$n0;
-export const FQ = $$r1;
-export const Z3 = $$u2;
-export const Oi = $$c3;
-export const jO = $$a4;
+
+class PriorityMap {
+  private maxPriItem: any = null
+  public items = new Map<string, any>()
+
+  set(key: string, item: any) {
+    this.items.set(key, item)
+    if (this.maxPriItem == null || item.priority > this.maxPriItem.priority) {
+      this.maxPriItem = item
+    }
+  }
+
+  has(key: string): boolean {
+    return this.items.has(key)
+  }
+
+  delete(key: string): boolean {
+    const deleted = this.items.delete(key)
+    if (deleted && this.maxPriItem?.id === key) {
+      this.updateMaxPriItem()
+    }
+    return deleted
+  }
+
+  getMax(): any {
+    return this.maxPriItem
+  }
+
+  private updateMaxPriItem() {
+    let maxItem: any = null
+    for (const item of this.items.values()) {
+      if (maxItem == null || item.priority > maxItem.priority) {
+        maxItem = item
+      }
+    }
+    this.maxPriItem = maxItem
+  }
+}
+
+export const oE = BlockReasonType
+export const FQ = ChannelID
+export const Z3 = OverlayManager
+export const Oi = ExperienceManager
+export const jO = Rule

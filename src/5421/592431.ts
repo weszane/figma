@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { DefinitionAssignment, PanelWidth } from "../figma_app/164212";
 import { useComponentPropDefinitions } from "../figma_app/626952";
 import { c as _$$c } from "../figma_app/528598";
-import { S } from "../905/459477";
+import { fileLaunchHelper } from "../905/459477";
 import { _H } from "../figma_app/408883";
 export function $$x0({
   guids: e,
@@ -30,7 +30,7 @@ export function $$x0({
     children: jsx(_$$c, {
       assignmentValues: assignmentValuesByDefId,
       containerWidth: PanelWidth.RESIZABLE_SIDEBAR,
-      entrypointForInstanceSwapPicker: S.InstancePickerEntrypoint.INSTANCE_SWAP_PROP_INSTANCE_PANEL,
+      entrypointForInstanceSwapPicker: fileLaunchHelper.InstancePickerEntrypoint.INSTANCE_SWAP_PROP_INSTANCE_PANEL,
       forBubbledProps: !1,
       getInstanceSwapPickerPosition: (e, t, n, o) => {
         let i = x?.current?.getBoundingClientRect();

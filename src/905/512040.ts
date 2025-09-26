@@ -1,8 +1,8 @@
 import { WhiteboardTemplatePreviewCppBindings, SourceType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { bj } from "../figma_app/880974";
-import { j } from "../905/881708";
-export class $$o0 extends j {
+import { NameClass } from "../905/881708";
+export class $$o0 extends NameClass {
   constructor(e) {
     super(e);
   }

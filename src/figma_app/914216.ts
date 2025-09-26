@@ -13,7 +13,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { formatI18nMessage } from "../905/482208";
 import { isUIHiddenOrLocked } from "../905/868547";
 import { z4 } from "../905/37051";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
 import { KindEnum } from "../905/129884";
@@ -104,7 +104,7 @@ let k = memo(function ({
   canEdit: i
 }) {
   let s = useSelector(t => Yh(t.mirror.appModel, e.action));
-  let o = Um();
+  let o = useDropdownState();
   let l = useSelector(t => e.tool !== DesignGraphElements.NONE && e.tool === t.mirror.appModel.currentTool && !TY(o));
   let d = useSelector(e => e.mirror.appModel.topLevelMode);
   return e.featureFlags && !e.featureFlags.every(e => getFeatureFlags()[e]) ? null : jsx(T0, {

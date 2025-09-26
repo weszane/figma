@@ -9,8 +9,8 @@ import u from "classnames";
 import { w as _$$w } from "../905/835474";
 import { WAFImage } from "../905/675859";
 import { h1 } from "../905/986103";
-import { o as _$$o } from "../905/605383";
-import { Ph } from "../905/160095";
+import { RenderListByChunks } from "../905/605383";
+import { TrackedLink } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { buildFileUrl } from "../905/612685";
 import { getLibraryAgeLabel } from "../figma_app/646357";
@@ -252,7 +252,7 @@ function F({
       children: 0 === v.length && e ? jsx("div", {
         className: "stats_table--emptyStateText--bymBw text--fontPos11--2LvXf text--_fontBase--QdLsd",
         children: e
-      }) : jsx(_$$o, {
+      }) : jsx(RenderListByChunks, {
         chunkSize: 50,
         listKey: x,
         children: v.map(e => jsx(U, {
@@ -586,7 +586,7 @@ export function $$H1({
     valueClassName: P,
     valueRenderFn: ({
       stat: e
-    }) => jsx(Ph, {
+    }) => jsx(TrackedLink, {
       newTab: !0,
       href: buildFileUrl({
         file: {

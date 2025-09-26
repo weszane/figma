@@ -1,5 +1,5 @@
 import { createActionCreator } from "../905/73481";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -14,7 +14,7 @@ let $$g0 = createActionCreator("TEAM_JOIN_LINKS_SET_REQUEST_STATE");
 let $$f5 = createOptimistThunk(async (e, t, {
   loadingKey: i
 }) => {
-  let n = XHR.put("/api/team_join_link/disable", {
+  let n = sendWithRetry.put("/api/team_join_link/disable", {
     team_id: t.teamId
   });
   setupLoadingStateHandler(n, e, i);
@@ -28,7 +28,7 @@ let $$f5 = createOptimistThunk(async (e, t, {
   });
 });
 let $$_3 = createOptimistThunk(async (e, t) => {
-  let i = XHR.post("/api/team_join_link/reset", {
+  let i = sendWithRetry.post("/api/team_join_link/reset", {
     team_id: t.teamId,
     level: t.level
   });
@@ -56,7 +56,7 @@ let $$A4 = createOptimistThunk((e, t) => {
     if (t.disabled) e.dispatch($$g0({
       disabled: !0,
       url: void 0
-    }));else if (t.link) {
+    })); else if (t.link) {
       let i = jx(t.link);
       e.dispatch($$g0({
         disabled: !1,

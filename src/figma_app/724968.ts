@@ -29,15 +29,15 @@ import { getMatchingNodesToUpdateForQuery } from "../905/913055";
 import { useCurrentUserOrg } from "../905/845253";
 import { findImageFillByHash, getImagePaintSignedUrl, getImageProcessingStatus, setupPlaybackHandler } from "../905/23253";
 import { JT, LC } from "../figma_app/632248";
-import { s as _$$s2, w as _$$w } from "../905/286488";
+import { useSelectionState, SelectionState } from "../905/286488";
 import { RL, B3, qy } from "../figma_app/862289";
 import { cq } from "../905/794154";
-import { a as _$$a2 } from "../905/290931";
+import { setupPromptHistory } from "../905/290931";
 import { hm } from "../905/487011";
-import { Cq, $J, o2, sd } from "../905/278499";
+import { AIActionIterationTrigger, AIActionIterationResult, AIActionIterationStatus, AIActionIterationAction } from "../905/278499";
 import { c as _$$c } from "../905/566438";
 import { F1 } from "../figma_app/171177";
-import { B as _$$B } from "../905/222272";
+import { FlexBox } from "../905/222272";
 import { _ as _$$_ } from "../905/614936";
 import { aU } from "../figma_app/360824";
 import { I as _$$I } from "../905/537408";
@@ -230,10 +230,10 @@ function ep(e) {
 function e_(e, t) {
   hm({
     ...t,
-    interaction_type: Cq.BUTTON_CLICK,
-    iteration_view_type: $J.SUCCESS_WITH_ITERATION,
-    status: o2.COMPLETED,
-    interaction: sd.GALLERY_SELECT,
+    interaction_type: AIActionIterationTrigger.BUTTON_CLICK,
+    iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION,
+    status: AIActionIterationStatus.COMPLETED,
+    interaction: AIActionIterationAction.GALLERY_SELECT,
     value: ed(e)
   });
 }
@@ -245,16 +245,16 @@ function eh(e, t, {
   hm({
     ...t,
     ...(r ? {
-      interaction_type: Cq.KEYBOARD_SHORTCUT,
+      interaction_type: AIActionIterationTrigger.KEYBOARD_SHORTCUT,
       keyboard_shortcut: F1({
         key: KeyCodes.ENTER
       })
     } : {
-      interaction_type: Cq.BUTTON_CLICK
+      interaction_type: AIActionIterationTrigger.BUTTON_CLICK
     }),
-    iteration_view_type: $J.SUCCESS_WITH_ITERATION,
-    status: o2.COMPLETED,
-    interaction: sd.GALLERY_ACCEPT,
+    iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION,
+    status: AIActionIterationStatus.COMPLETED,
+    interaction: AIActionIterationAction.GALLERY_ACCEPT,
     value: ed(e)
   });
 }
@@ -326,7 +326,7 @@ function eg({
   let {
     promptHistory,
     addPromptToHistory
-  } = _$$a2(er, e => e);
+  } = setupPromptHistory(er, e => e);
   let [Y] = useState(_$$V(4));
   let J = atomStoreManager.get(canvasGridAtom);
   let [en, ea] = useState(eQ());
@@ -465,7 +465,7 @@ function eg({
         aiTrackingContext,
         ariaLabel: getI18nString("cooper.inline_menu.make_an_image"),
         disableSubmit: enableReferenceImage && isSubmitDisabled,
-        extraFooter: jsxs(_$$B, {
+        extraFooter: jsxs(FlexBox, {
           gap: 8,
           align: "center",
           children: [jsx(_$$n, {
@@ -503,7 +503,7 @@ function eg({
     case qy.DONE:
       let eN = {
         ...aiTrackingContext,
-        iteration_view_type: $J.SUCCESS_WITH_ITERATION
+        iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION
       };
       return jsx(Oq, {
         iterateOptions: ex,
@@ -560,7 +560,7 @@ function ef({
   let {
     promptHistory,
     addPromptToHistory
-  } = _$$a2(en, e => e);
+  } = setupPromptHistory(en, e => e);
   let [ei] = useState(_$$z2(4));
   let [es, eo] = useState(a);
   let [ed, eu] = useState();
@@ -679,7 +679,7 @@ function ef({
     stop();
     B3(JT.EDIT_IMAGE);
   }, [stop]);
-  let ew = _$$s2(JT.EDIT_IMAGE);
+  let ew = useSelectionState(JT.EDIT_IMAGE);
   let eO = useCallback(() => (ImageToolsBindings?.getNodeImagePairsForEdit().length ?? 0) > 1 ? renderI18nText("image_ai.background_remove.only_one_image") : renderI18nText("image_ai.background_remove.instruction"), []);
   let eR = useMemo(() => {
     if (state !== qy.INITIAL) return ed ? {
@@ -700,7 +700,7 @@ function ef({
   let eP = (() => {
     let e = {
       ...aiTrackingContext,
-      iteration_view_type: $J.SUCCESS_WITH_ITERATION
+      iteration_view_type: AIActionIterationResult.SUCCESS_WITH_ITERATION
     };
     return jsx(_$$R, {
       iterateOptions: [{
@@ -725,7 +725,7 @@ function ef({
   })();
   switch (state) {
     case qy.INITIAL:
-      if (ew.state !== _$$w.SELECTION_OK) return jsx(_$$A, {
+      if (ew.state !== SelectionState.SELECTION_OK) return jsx(_$$A, {
         action: JT.EDIT_IMAGE,
         actionIcon: jsx(_$$T, {}),
         actionLabel: renderI18nText("fullscreen_actions.edit_image"),
@@ -746,7 +746,7 @@ function ef({
         aiTrackingContext,
         ariaLabel: getI18nString("fullscreen_actions.edit_image"),
         disableSubmit: enableReferenceImage && isSubmitDisabled,
-        extraFooter: jsxs(_$$B, {
+        extraFooter: jsxs(FlexBox, {
           gap: 8,
           align: "center",
           children: [jsx(_$$n, {

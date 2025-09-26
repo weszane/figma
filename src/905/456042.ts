@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import s, { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
-import { oT } from "../905/478473";
+import { WorkspaceList } from "../905/478473";
 import { hideModal } from "../905/156213";
 import { isWidget } from "../figma_app/45218";
 import { registerModal } from "../905/102752";
@@ -42,7 +42,7 @@ export let $$$$_1 = registerModal(function (e) {
     onCloseModal: i,
     children: jsxs("div", {
       className: workspaceSelectorModalInner,
-      children: [jsx(oT, {
+      children: [jsx(WorkspaceList, {
         isWidget: _,
         workspaces,
         onClick: e => {

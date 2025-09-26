@@ -6,7 +6,7 @@ import { calculateColorDifference } from "../figma_app/191804";
 import { fetchDynamicConfig } from "../figma_app/594947";
 import { fetchVariableSetThumbnails } from "../905/711212";
 import { n as _$$n } from "../905/347702";
-import { y as _$$y } from "../905/456837";
+import { getRecentTimeDifferences } from "../905/456837";
 import { Cg, wp, dg, qg, A7 } from "../905/491994";
 import { Z } from "../905/442873";
 let m = 1 / 0;
@@ -152,7 +152,7 @@ let $$x1 = _$$n(async (e, t, r, n, a, c, u, g, f) => {
       value: _,
       variable_num_usages_in_file: n?.get(r.node_id) ?? 0,
       variable_num_usages_in_containing_subtree: a?.get(r.node_id) ?? 0,
-      elapsed_seconds_since_last_insertions: _$$y(r.node_id)
+      elapsed_seconds_since_last_insertions: getRecentTimeDifferences(r.node_id)
     };
     let y = !1;
     if ("LIBRARY" === o.subscriptionStatus) {

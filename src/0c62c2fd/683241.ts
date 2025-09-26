@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { getCookieOrStorage } from "../905/414007";
 import { buildUploadUrl } from "../figma_app/169182";
 import { isIOSUA } from "../figma_app/778880";
-import { pW } from "../905/160095";
+import { TrackedLinkButton } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
@@ -80,7 +80,7 @@ export function $$v0(e) {
               className: "mobile_download_prompt--mobilePromptOptionDescription--APlZp text--fontPos11--2LvXf text--_fontBase--QdLsd",
               children: g ? renderI18nText("file_browser.mobile_prompt.app_description_new") : renderI18nText("file_browser.mobile_prompt.app_description")
             })]
-          }), jsx(pW, {
+          }), jsx(TrackedLinkButton, {
             size: "lg",
             trackingProperties: {
               userId: e.userIdForTracking,

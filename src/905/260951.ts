@@ -4,10 +4,10 @@ import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { UpgradeAction } from "../905/370443";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { j } from "../905/881708";
+import { NameClass } from "../905/881708";
 import { w } from "../figma_app/106955";
 import { BQ } from "../figma_app/500946";
-export class $$p0 extends j {
+export class $$p0 extends NameClass {
   constructor(e) {
     super(e);
     this.sectionId = null;

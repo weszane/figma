@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { uint8ArrayToBase64 } from "../figma_app/930338";
-import { M1 } from "../905/777093";
+import { fetchFontFile } from "../905/777093";
 import { processImageWithThumbnail } from "../figma_app/624361";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { Ct } from "../figma_app/205280";
@@ -278,7 +278,7 @@ export async function $$N0() {
       let i = r[t];
       if (!i) {
         let n = debugState.getState();
-        let a = await M1({
+        let a = await fetchFontFile({
           source: e.source,
           id: e.id,
           postscriptName: e.postscript,

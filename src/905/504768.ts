@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { trimLastMessageMeta, flattenMessageMeta, Rc, getMessageType, MessageType } from "../figma_app/819288";
 import { WB } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { setupLoadingStateHandler } from "../905/696711";
 import { getAttachmentChanges } from "../905/380385";
@@ -39,7 +39,7 @@ let $$y3 = createOptimistThunk((e, t) => {
   let n = WB();
   let r = t.uuid;
   if (!i || !n || !r || t.commentId.startsWith($$R0)) return;
-  let a = n.getIdFromUuid("FeedComment", r).then(e => XHR.del(`/api/feed_posts/comments/${e}`));
+  let a = n.getIdFromUuid("FeedComment", r).then(e => sendWithRetry.del(`/api/feed_posts/comments/${e}`));
   n.optimisticallyDeleteWithUUID({
     FeedComment: {
       [r]: null
@@ -52,7 +52,7 @@ let $$b4 = createOptimistThunk((e, t) => {
   let n = WB();
   let r = t.uuid;
   if (!i || !n || !r) return;
-  let l = n.getIdFromUuid("FeedComment", r).then(e => XHR.put(`/api/feed_posts/comments/${e}`, {
+  let l = n.getIdFromUuid("FeedComment", r).then(e => sendWithRetry.put(`/api/feed_posts/comments/${e}`, {
     message_meta: t.messageMeta,
     attachment_updates: getAttachmentChanges(t.attachmentUpdates)
   }));
@@ -74,7 +74,7 @@ let $$v6 = createOptimistThunk((e, t) => {
   let n = WB();
   if (!i || !n) return;
   let r = generateUUIDv4();
-  let c = XHR.post(`/api/feed_posts/${t.postUuid}/comments`, {
+  let c = sendWithRetry.post(`/api/feed_posts/${t.postUuid}/comments`, {
     message_meta: t.messageMeta,
     uuid: r,
     attachment_ids: t.attachmentIds
@@ -119,7 +119,7 @@ let $$I8 = createOptimistThunk((e, t) => {
     }
   }, a);
 });
-let E = (e, t) => WB().getIdFromUuid("FeedComment", e).then(e => XHR.del(`/api/feed_posts/comments/${e}/reactions`, {
+let E = (e, t) => WB().getIdFromUuid("FeedComment", e).then(e => sendWithRetry.del(`/api/feed_posts/comments/${e}/reactions`, {
   emoji: t
 }));
 let $$x1 = createOptimistThunk((e, t) => {
@@ -148,7 +148,7 @@ let $$x1 = createOptimistThunk((e, t) => {
     }
   }, l);
 });
-let S = (e, t) => WB().getIdFromUuid("FeedComment", e).then(e => XHR.post(`/api/feed_posts/comments/${e}/reactions`, {
+let S = (e, t) => WB().getIdFromUuid("FeedComment", e).then(e => sendWithRetry.post(`/api/feed_posts/comments/${e}/reactions`, {
   emoji: t
 }));
 let $$w9 = createOptimistThunk((e, t) => {
@@ -164,7 +164,7 @@ let $$w9 = createOptimistThunk((e, t) => {
     }
   }, a);
 });
-let C = (e, t) => XHR.del(`/api/feed_posts/${e}/reactions`, {
+let C = (e, t) => sendWithRetry.del(`/api/feed_posts/${e}/reactions`, {
   emoji: t
 });
 let $$T2 = createOptimistThunk((e, t) => {
@@ -198,7 +198,7 @@ let $$T2 = createOptimistThunk((e, t) => {
     }
   }, l);
 });
-let k = (e, t) => XHR.post(`/api/feed_posts/${e}/reactions`, {
+let k = (e, t) => sendWithRetry.post(`/api/feed_posts/${e}/reactions`, {
   emoji: t
 });
 let $$R0 = "pending-feed-comment";

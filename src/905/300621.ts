@@ -14,7 +14,7 @@ import { a as _$$a } from '../905/426262';
 import { useModalManager } from '../905/437088';
 import { IconButton } from '../905/443068';
 import { C as _$$C } from '../905/520159';
-import { HK, PG, Q_ } from '../905/570707';
+import { librarySearchByFileAtomFamily, useLibrarySearchQuery, librarySearchByLibraryKeyAtomFamily } from '../905/570707';
 import { getFeatureFlags } from '../905/601108';
 import { createFileLibraryKeys } from '../905/651613';
 import { FO } from '../905/682977';
@@ -28,8 +28,9 @@ import { m as _$$m } from '../905/760316';
 import { u as _$$u2 } from '../905/831362';
 import { useCurrentUserOrgId } from '../905/845253';
 import { ud } from '../905/862913';
-import { ev } from '../905/909811';
-import { noop } from 'lodash-es';;
+import { LibraryItemTilesByPage } from '../905/909811';
+import { noop } from 'lodash-es';
+;
 import { b as _$$b } from '../905/937225';
 import { librariesAPI } from '../905/939602';
 import { filesByLibraryKeyAtom } from '../905/977779';
@@ -195,7 +196,7 @@ function K(e) {
             thumbnailUrl: R,
             viewFile: noop
           }, i)]
-        }), jsx(ev, {
+        }), jsx(LibraryItemTilesByPage, {
           width: e.width,
           items: f,
           sourceForTracking: 'Library Modal',
@@ -219,9 +220,9 @@ function es(e) {
     searchQuery,
     debouncedSearchQuery,
     setSearchQuery
-  } = PG();
-  let [h] = setupResourceAtomHandler(HK(debouncedSearchQuery));
-  let [f] = setupResourceAtomHandler(Q_(debouncedSearchQuery));
+  } = useLibrarySearchQuery();
+  let [h] = setupResourceAtomHandler(librarySearchByFileAtomFamily(debouncedSearchQuery));
+  let [f] = setupResourceAtomHandler(librarySearchByLibraryKeyAtomFamily(debouncedSearchQuery));
   let [_] = z();
   let A = H();
   let b = useMemo(() => {

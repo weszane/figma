@@ -6,7 +6,7 @@ import { AtomProvider } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { LivegraphProvider } from "../905/436043";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { le } from "../905/904854";
+import { DragDataHandler } from "../905/904854";
 import { ViewMode } from "../figma_app/756995";
 import { g as _$$g } from "../905/607862";
 import h from "classnames";
@@ -59,9 +59,9 @@ function C(e) {
   return jsx("th", {
     className: g()(e.containerClassName, cssBuilderInstance.alignMiddle.$),
     children: jsx("div", {
-      className: cssBuilderInstance.mt8.mb8.$$if(e.hasLeftBorder, cssBuilderInstance.colorBorder.bSolid.pl8.pr4, cssBuilderInstance.$$if(!e.noPadding, cssBuilderInstance.pl4.pr4)).$,
+      className: cssBuilderInstance.mt8.mb8.if(e.hasLeftBorder, cssBuilderInstance.colorBorder.bSolid.pl8.pr4, cssBuilderInstance.if(!e.noPadding, cssBuilderInstance.pl4.pr4)).$,
       children: e.sortOptions ? jsx(tD, {
-        className: cssBuilderInstance.$$if(!e.sortOptions.hasArrow, cssBuilderInstance.colorTextSecondary).font11.$,
+        className: cssBuilderInstance.if(!e.sortOptions.hasArrow, cssBuilderInstance.colorTextSecondary).font11.$,
         isDescending: e.sortOptions.isDescending,
         hasArrow: e.sortOptions.hasArrow,
         field: e.sortOptions.field,
@@ -97,7 +97,7 @@ function k(e) {
   let i = e.isSelected && !e.isBelowSelected;
   let r = e.isSelected && e.isFirstSelectableCell;
   let a = e.isSelected && e.isLastSelectableCell;
-  let s = cssBuilderInstance.borderBox.alignMiddle.hFull.$$if(t, cssBuilderInstance.pt4).$$if(i, cssBuilderInstance.pb4).$;
+  let s = cssBuilderInstance.borderBox.alignMiddle.hFull.if(t, cssBuilderInstance.pt4).if(i, cssBuilderInstance.pb4).$;
   return jsx("td", {
     draggable: e.isDraggable,
     onClick: e.onClick,
@@ -106,7 +106,7 @@ function k(e) {
     onContextMenu: e.onContextMenu,
     className: s,
     children: jsx("div", {
-      className: g()(cssBuilderInstance.flex.flexRow.itemsCenter.overflowHidden.borderBox.ellipsis.bSolid.colorBorderSelected.hFull.wFull.$$if(t, cssBuilderInstance.bt2.pt2, cssBuilderInstance.pt8).$$if(i, cssBuilderInstance.bb2.pb2, cssBuilderInstance.pb8).$$if(a, cssBuilderInstance.br2, cssBuilderInstance.pr2).$$if(r, cssBuilderInstance.bl2.$$if(e.hasLeftPadding, cssBuilderInstance.pl6, cssBuilderInstance.pl2), cssBuilderInstance.$$if(e.hasLeftPadding, cssBuilderInstance.pl8, cssBuilderInstance.pl4)).$, {
+      className: g()(cssBuilderInstance.flex.flexRow.itemsCenter.overflowHidden.borderBox.ellipsis.bSolid.colorBorderSelected.hFull.wFull.if(t, cssBuilderInstance.bt2.pt2, cssBuilderInstance.pt8).if(i, cssBuilderInstance.bb2.pb2, cssBuilderInstance.pb8).if(a, cssBuilderInstance.br2, cssBuilderInstance.pr2).if(r, cssBuilderInstance.bl2.if(e.hasLeftPadding, cssBuilderInstance.pl6, cssBuilderInstance.pl2), cssBuilderInstance.if(e.hasLeftPadding, cssBuilderInstance.pl8, cssBuilderInstance.pl4)).$, {
         "list_view_cell--topRightBorderRadius--qPV-m": e.isLastSelectableCell && !e.isAboveSelected,
         "list_view_cell--bottomRightBorderRadius--tuU0n": e.isLastSelectableCell && !e.isBelowSelected,
         "list_view_cell--topLeftBorderRadius--zeTRC": e.isFirstSelectableCell && !e.isAboveSelected,
@@ -294,7 +294,7 @@ function N(e) {
         if (n || i.ctrlKey) return g;
         a = e.multiselectDisabled ? new Set() : new Set([...g].filter(e => e !== t));
       } else a = new Set(e.multiselectDisabled ? [t] : [...g, t]);
-    } else if (i.shiftKey) a = new Set(void 0 === m || void 0 === u || e.multiselectDisabled ? [t] : m > t ? [...[...g].filter(e => e > Math.max(u, m) || e < Math.min(u, m)), ...[...Array(m - t + 1)].map((e, i) => i + t)] : [...[...g].filter(e => e > Math.max(u, m) || e < Math.min(u, m)), ...[...Array(t - m + 1)].map((e, t) => t + m)]);else {
+    } else if (i.shiftKey) a = new Set(void 0 === m || void 0 === u || e.multiselectDisabled ? [t] : m > t ? [...[...g].filter(e => e > Math.max(u, m) || e < Math.min(u, m)), ...[...Array(m - t + 1)].map((e, i) => i + t)] : [...[...g].filter(e => e > Math.max(u, m) || e < Math.min(u, m)), ...[...Array(t - m + 1)].map((e, t) => t + m)]); else {
       if (n && g.has(t)) return g;
       a = new Set([t]);
     }
@@ -302,7 +302,7 @@ function N(e) {
     return a = O(a);
   };
   let U = t => i => {
-    if (i.stopPropagation(), (2 === i.detail || BrowserInfo.mobile || BrowserInfo.tablet) && handleOpenItem) handleOpenItem(e.items[t], i, t);else {
+    if (i.stopPropagation(), (2 === i.detail || BrowserInfo.mobile || BrowserInfo.tablet) && handleOpenItem) handleOpenItem(e.items[t], i, t); else {
       let n = j(t, i);
       if (n.size && !n.has(t)) {
         let i = t + 1;
@@ -358,7 +358,7 @@ function N(e) {
         t.preventDefault();
         break;
       case "ArrowUp":
-        if (void 0 === u || void 0 === m) j(e.items.length - 1, t, !1, !0);else if (t.altKey) j(0, t, !1, !0);else {
+        if (void 0 === u || void 0 === m) j(e.items.length - 1, t, !1, !0); else if (t.altKey) j(0, t, !1, !0); else {
           let e = u;
           if (t.shiftKey && u < m) for (; e > 0 && g.has(e - 1);) e--;
           e > 0 && j(e - 1, t, !1, !0);
@@ -367,7 +367,7 @@ function N(e) {
         t.stopPropagation();
         break;
       case "ArrowDown":
-        if (void 0 === u || void 0 === m) j(0, t, !1, !0);else if (t.altKey) j(e.items.length - 1, t, !1, !0);else {
+        if (void 0 === u || void 0 === m) j(0, t, !1, !0); else if (t.altKey) j(e.items.length - 1, t, !1, !0); else {
           let i = u;
           if (t.shiftKey && u > m) for (; i < e.items.length - 1 && g.has(i + 1);) i++;
           i < e.items.length - 1 && j(i + 1, t, !1, !0);
@@ -484,7 +484,7 @@ export function $$O0(e) {
         })
       })
     }));
-    let f = new le(m.dataTransfer);
+    let f = new DragDataHandler(m.dataTransfer);
     f.setDragImage(g, 64, 32);
     e.handleDragDataTransfer && e.handleDragDataTransfer(p, f);
     t && t.remove();
@@ -506,7 +506,7 @@ export function $$O0(e) {
         handleContextMenu: e.handleContextMenu,
         handleDeleteKey: e.handleDeleteKey,
         handleDragEnd: f,
-        handleDragImage: e.listViewProps.renderItemDragImage ? g(e.listViewProps.renderItemDragImage) : () => {},
+        handleDragImage: e.listViewProps.renderItemDragImage ? g(e.listViewProps.renderItemDragImage) : () => { },
         handleOpenItem: e.handleOpenItem,
         handleSortBy: e.listViewProps.handleSortBy,
         isDraggable: e.isDraggable && !!e.listViewProps.renderItemDragImage,
@@ -529,7 +529,7 @@ export function $$O0(e) {
         handleContextMenu: e.handleContextMenu,
         handleDeleteKey: e.handleDeleteKey,
         handleDragEnd: f,
-        handleDragImage: e.gridViewProps.renderTileDragImage ? g(e.gridViewProps.renderTileDragImage) : () => {},
+        handleDragImage: e.gridViewProps.renderTileDragImage ? g(e.gridViewProps.renderTileDragImage) : () => { },
         handleOpenItem: e.handleOpenItem,
         isDraggable: e.isDraggable && !!e.gridViewProps.renderTileDragImage,
         items: e.items,

@@ -3,7 +3,7 @@ import { PureComponent, useState, Fragment as _$$Fragment } from "react";
 import { BannerInsetModal } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { KeyCodes } from "../905/63728";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
 import { z, Z } from "../905/306088";
 import { LoadingSpinner } from "../figma_app/858013";
@@ -14,7 +14,7 @@ import { hZ } from "../figma_app/342125";
 import { a as _$$a } from "../469e6e40/234755";
 import { registerModal, registerLegacyModal } from "../905/102752";
 import { d as _$$d } from "../figma_app/121794";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 let f = "configure_saml--section--UuOAE";
 let j = "configure_saml--lastSection--VU5e3";
 let y = "configure_saml--h2--52Mn9";
@@ -138,7 +138,7 @@ class S extends PureComponent {
     let t = (E().find(e => e.value === this.state.idp_name) || E()[0]).placeholder;
     let a = "google" === this.state.idp_name ? "https://accounts.google.com/o/saml2/idp?idpid=123abc" : "https://idp.com/saml/metadata/abc123";
     let s = "google" === this.state.idp_name ? "https://accounts.google.com/o/saml2?idpid=123abc" : "https://sso.idp.com/abc123/saml2";
-    return jsx(OJ, {
+    return jsx(HeaderModal, {
       title: getI18nString("org_settings.sso.configure_saml_sso"),
       maxWidth: 459,
       onClose: this.onCancel,
@@ -302,7 +302,7 @@ function A(e) {
           }
         }
       }));
-    }) : XHR.post("/api/org_saml_config", {
+    }) : sendWithRetry.post("/api/org_saml_config", {
       certificate: t,
       idp_entity_id: e.idp_entity_id,
       idp_name: e.idp_name,
@@ -357,7 +357,7 @@ function A(e) {
       numOthers: t.length - 2
     });
   };
-  return jsxs(OJ, {
+  return jsxs(HeaderModal, {
     title: getI18nString("org_settings.sso.configure_saml_sso"),
     maxWidth: 459,
     onClose: w,

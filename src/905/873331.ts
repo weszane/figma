@@ -12,7 +12,7 @@ import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { useSelectionPropertyValue } from "../905/275640";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useOnSelectionChange } from "../figma_app/722362";
 import { KindEnum } from "../905/129884";
 import { conditionalWrapper } from "../905/579635";
@@ -34,7 +34,7 @@ export function $$N0({
 }) {
   let l = useDispatch();
   let c = trackFileEventWithStore();
-  let u = Um();
+  let u = useDropdownState();
   let p = useRef(null);
   let h = lF();
   useEffect(() => {

@@ -17,7 +17,7 @@ import { getI18nString } from "../905/303541";
 import { formatI18nMessage } from "../905/482208";
 import { VU } from "../905/625959";
 import { LW, bs } from "../figma_app/553940";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { selectAppModel } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { Yh, TY, c1 } from "../figma_app/357047";
@@ -85,7 +85,7 @@ export function $$B1(e) {
     recordingKey
   } = e;
   let [c, u] = useState(null);
-  let _ = Um();
+  let _ = useDropdownState();
   let {
     getTriggerProps,
     manager
@@ -205,7 +205,7 @@ function V(e) {
     recordingKey
   } = e;
   let h = item.children.length > 1;
-  let f = Um();
+  let f = useDropdownState();
   let E = f?.type === M(item.name);
   let y = useId();
   let b = !!activeItem && !TY(f) && !disabled && styleActiveItem;

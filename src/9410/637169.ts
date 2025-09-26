@@ -17,7 +17,7 @@ import { Z } from "../905/104740";
 import { EE, lB } from "../figma_app/731583";
 import { getViewportInfo, computeFullscreenViewportForNode } from "../figma_app/62612";
 import { N as _$$N } from "../figma_app/268271";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { NJ } from "../figma_app/419216";
 import { GV } from "../figma_app/532170";
 import { ZNl } from "../figma_app/6204";
@@ -54,7 +54,7 @@ function N({
     };
   }, [e, d]);
   return jsxs(NJ, {
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     backgroundColor: "var(--color-bg)",
     className: R3,
     closeButtonClassName: _$$b,
@@ -180,7 +180,7 @@ export function $$O1() {
       onShow: () => L(!0)
     });
   }), isShowing) ? "show_page_tooltip" === e ? jsxs(NJ, {
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     backgroundColor: "var(--color-bg)",
     className: R3,
     closeButtonClassName: _$$b,

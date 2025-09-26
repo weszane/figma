@@ -53,7 +53,7 @@ import { s as _$$s2, c as _$$c } from "../905/744710";
 import { G$, FF } from "../figma_app/588092";
 import { ButtonBasePrimary } from "../figma_app/637027";
 import { registerModal } from "../905/102752";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { kL, v0 } from "../figma_app/639088";
 import { nT } from "../1556/690522";
 import { ScreenReaderOnly } from "../905/172252";
@@ -113,7 +113,7 @@ let ed = registerModal(function () {
   let t = () => {
     e(popModalStack());
   };
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     onClose: t,
     minWidth: 400,
     maxWidth: 400,

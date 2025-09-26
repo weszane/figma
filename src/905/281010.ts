@@ -1,4 +1,4 @@
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { createNoOpValidator } from '../figma_app/181241'
 
 /**
@@ -38,9 +38,9 @@ export class AccountTypeRequestHandler {
    * @returns Promise resolving to the nudge result.
    * (Original: nudgeRequest)
    */
-  async nudgeRequest(e: { request_id: string; [key: string]: any }): Promise<any> {
+  async nudgeRequest(e: { request_id: string;[key: string]: any }): Promise<any> {
     const { request_id } = e;
-    return XHR.post(`/api/account_type_requests/${request_id}/nudge`, e);
+    return sendWithRetry.post(`/api/account_type_requests/${request_id}/nudge`, e);
   }
 
   /**
@@ -49,9 +49,9 @@ export class AccountTypeRequestHandler {
    * @returns Promise resolving to the dismiss result.
    * (Original: dismissNudgeRequestBadge)
    */
-  async dismissNudgeRequestBadge(e: { request_id: string; [key: string]: any }): Promise<any> {
+  async dismissNudgeRequestBadge(e: { request_id: string;[key: string]: any }): Promise<any> {
     const { request_id } = e;
-    return XHR.post(`/api/account_type_requests/${request_id}/nudge/dismiss_badge`, e);
+    return sendWithRetry.post(`/api/account_type_requests/${request_id}/nudge/dismiss_badge`, e);
   }
 
   /**
@@ -60,9 +60,9 @@ export class AccountTypeRequestHandler {
    * @returns Promise resolving to the update result.
    * (Original: updateRequestMessage)
    */
-  async updateRequestMessage(e: { request_id: string; [key: string]: any }): Promise<any> {
+  async updateRequestMessage(e: { request_id: string;[key: string]: any }): Promise<any> {
     const { request_id } = e;
-    return XHR.post(`/api/account_type_requests/${request_id}/update_message`, e);
+    return sendWithRetry.post(`/api/account_type_requests/${request_id}/update_message`, e);
   }
 }
 

@@ -1,4 +1,4 @@
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 export let $$s0 = new class {
   async pinFile({
     resourceType: e,
@@ -7,7 +7,7 @@ export let $$s0 = new class {
     description: s,
     shouldUpdatePermissions: i
   }) {
-    await XHR.post(`/api/pinned_files/${e}/${t}`, {
+    await sendWithRetry.post(`/api/pinned_files/${e}/${t}`, {
       file_key: r,
       description: s,
       should_update_permissions: i
@@ -17,14 +17,14 @@ export let $$s0 = new class {
     pinnedFileId: e,
     description: t
   }) {
-    await XHR.put(`/api/pinned_files/${e}`, {
+    await sendWithRetry.put(`/api/pinned_files/${e}`, {
       description: t
     });
   }
   async deletePin({
     pinnedFileId: e
   }) {
-    await XHR.del(`/api/pinned_files/${e}`);
+    await sendWithRetry.del(`/api/pinned_files/${e}`);
   }
 }();
 export const p = $$s0;

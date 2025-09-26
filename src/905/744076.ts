@@ -1,6 +1,6 @@
 import { z } from "../905/239603";
 import { createSimpleMetaValidator, createMetaValidator } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { createOptimistThunk } from "../905/350402";
 import { FRequestStatusType } from "../figma_app/191312";
@@ -106,7 +106,7 @@ export let $$I1 = new class {
         formVersion,
         removeFromPendingForms
       } = t;
-      XHR.put("/api/admin/plugin_security_form_response/status", {
+      sendWithRetry.put("/api/admin/plugin_security_form_response/status", {
         plugin_id: pluginId,
         form_version: formVersion,
         status: FRequestStatusType.APPROVED
@@ -124,7 +124,7 @@ export let $$I1 = new class {
         formVersion,
         removeFromPendingForms
       } = t;
-      XHR.put("/api/admin/plugin_security_form_response/status", {
+      sendWithRetry.put("/api/admin/plugin_security_form_response/status", {
         plugin_id: pluginId,
         form_version: formVersion,
         status: FRequestStatusType.REJECTED

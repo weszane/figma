@@ -4,7 +4,7 @@ import { getI18nString } from '../905/303541'
 import { createOptimistThunk } from '../905/350402'
 import { setupLoadingStateHandler } from '../905/696711'
 import { addAuthedCommunityProfileToHub, clearCommunityProfile, putCommunityProfile } from '../905/890368'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { refreshSessionState } from '../figma_app/976345'
 
 /**
@@ -41,7 +41,7 @@ export const changeCommunityProfilePrimaryUser = createOptimistThunk(
     { email, profileId, userId }: ChangePrimaryUserParams,
     { loadingKey }: OptimistThunkMeta,
   ) => {
-    const request = XHR.post(`/api/profile/${profileId}/primary_user`, {
+    const request = sendWithRetry.post(`/api/profile/${profileId}/primary_user`, {
       new_primary_user_id: userId,
     })
     setupLoadingStateHandler(request, dispatchContext, loadingKey)
@@ -87,7 +87,7 @@ export const removeCommunityProfileUser = createOptimistThunk(
     { email, profileId, userId }: RemoveUserParams,
     { loadingKey }: OptimistThunkMeta,
   ) => {
-    const request = XHR.del(`/api/profile/${profileId}/user`, {
+    const request = sendWithRetry.del(`/api/profile/${profileId}/user`, {
       secondary_user_id: userId,
     })
     setupLoadingStateHandler(request, dispatchContext, loadingKey)
@@ -134,7 +134,7 @@ export const mergeCommunityProfiles = createOptimistThunk(
     { primaryUserId, secondaryUserId }: MergeProfileParams,
     { loadingKey }: OptimistThunkMeta,
   ) => {
-    const request = XHR.post('/api/profile/merge', {
+    const request = sendWithRetry.post('/api/profile/merge', {
       primary_user_id: primaryUserId,
       secondary_user_id: secondaryUserId,
     })

@@ -9,7 +9,7 @@ import { r as _$$r } from "../figma_app/896657";
 import { le } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { isAcceptedPublisher } from "../figma_app/564095";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { FMemberRoleType } from "../figma_app/191312";
@@ -28,7 +28,7 @@ export function $$S2() {
 }
 export function $$w0() {
   let e = useId();
-  return BK(`ORG_ADMIN_RESOURCE_DROPDOWN_${e}`);
+  return useDropdown(`ORG_ADMIN_RESOURCE_DROPDOWN_${e}`);
 }
 export function $$C1(e) {
   let {

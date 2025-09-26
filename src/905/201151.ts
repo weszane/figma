@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { getLivegraphClient } from "../figma_app/288654";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { GH, H5 } from "../905/234821";
 import { selectCurrentUser } from "../905/372672";
 let l = new Date();
@@ -160,12 +160,12 @@ class u {
   }
   removeMentionsFromUnread(e) {
     let t = this.client.subscription.data?.file?.currentUserFileCanvasMentionReadStatus;
-    return e ? XHR.del(`/api/file/${this.client.fileKey}/canvas_mentions/unread`, {
+    return e ? sendWithRetry.del(`/api/file/${this.client.fileKey}/canvas_mentions/unread`, {
       canvas_mention_ids: e,
       ...(!t && {
         all_read_at: $$d1.allReadAt
       })
-    }) : XHR.del(`/api/file/${this.client.fileKey}/canvas_mentions/unread`, {
+    }) : sendWithRetry.del(`/api/file/${this.client.fileKey}/canvas_mentions/unread`, {
       ...(!t && {
         all_read_at: $$d1.allReadAt
       })
@@ -173,7 +173,7 @@ class u {
   }
   addMentionToUnread(e) {
     let t = this.client.subscription.data?.file?.currentUserFileCanvasMentionReadStatus;
-    return XHR.post(`/api/file/${this.client.fileKey}/canvas_mentions/unread`, {
+    return sendWithRetry.post(`/api/file/${this.client.fileKey}/canvas_mentions/unread`, {
       canvas_mention_ids: [e],
       ...(!t && {
         all_read_at: $$d1.allReadAt

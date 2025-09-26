@@ -23,7 +23,7 @@ import { P as _$$P } from "../905/347284";
 import { In } from "../905/672640";
 import { Ki } from "../figma_app/328188";
 import { o as _$$o } from "../905/268099";
-import { f as _$$f } from "../905/287602";
+import { HighlightedText } from "../905/287602";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useTeamPlanFeatures } from "../figma_app/465071";
 import { TeamPropertyKey } from "../figma_app/713624";
@@ -32,7 +32,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { TextWithTruncation } from "../905/984674";
-import { S as _$$S2 } from "../905/433182";
+import { FileMoveButton } from "../905/433182";
 import { P as _$$P2 } from "../905/688136";
 import { B as _$$B } from "../905/55104";
 import { DestinationProjectsForTeam } from "../figma_app/43951";
@@ -131,7 +131,7 @@ function G({
           className: cssBuilderInstance.h350.$,
           children: jsx(LoadingOverlay, {})
         }) : jsxs(Fragment, {
-          children: [jsx(_$$S2, {
+          children: [jsx(FileMoveButton, {
             team: c.data?.team,
             setSelectedFolder: (e, t) => {
               i({
@@ -283,7 +283,7 @@ let z = registerModal(function (e) {
           checked: !!c && c.id === e.model.id,
           fileCount: e.file_count,
           folderId: e.model.id || "",
-          folderName: jsx(_$$f, {
+          folderName: jsx(HighlightedText, {
             text: e.model.name,
             query: F ?? "",
             highlightFontWeight: 550
@@ -298,7 +298,7 @@ let z = registerModal(function (e) {
               teamId: e.model.team_id || ""
             });
           },
-          teamName: e.model.team_name ? jsx(_$$f, {
+          teamName: e.model.team_name ? jsx(HighlightedText, {
             text: e.model.team_name,
             query: F ?? "",
             highlightFontWeight: 550

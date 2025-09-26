@@ -11,12 +11,12 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { registerModal } from "../905/102752";
 import { Lg, Lq } from "../figma_app/392626";
 let _ = new class {
   disconnect(e) {
-    return XHR.put(`/api/resource_connection/${e}/disconnect`);
+    return sendWithRetry.put(`/api/resource_connection/${e}/disconnect`);
   }
 }();
 let b = registerModal(function (e) {

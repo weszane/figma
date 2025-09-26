@@ -45,7 +45,7 @@ import { K4, Z3 } from "../figma_app/461594";
 import { uQ } from "../figma_app/151869";
 import { Point } from "../905/736624";
 import { BUBBLED_PROPS_PICKER, DROPDOWN_HEIGHT, ADD_COMPONENT_PROP_DROPDOWN, trackComponentPropsModalOpen, DisplayMode, getComponentPropDisplayName, renderComponentPropIcon, PanelWidth, DefinitionAssignment } from "../figma_app/164212";
-import { Ao } from "../905/748636";
+import { DraggableModalManager } from "../905/748636";
 import { n as _$$n2 } from "../905/841238";
 import { Jp } from "../figma_app/95266";
 import { selectNodeFromCombinedId } from "../figma_app/505098";
@@ -262,7 +262,7 @@ function eo() {
   let t = useSelector(e => e.pickerShown);
   let s = useDispatch();
   let n = new Point(t?.initialX, t?.initialY);
-  return t?.id !== BUBBLED_PROPS_PICKER ? null : jsx(Ao, {
+  return t?.id !== BUBBLED_PROPS_PICKER ? null : jsx(DraggableModalManager, {
     title: getI18nString("design_systems.component_properties.expose_nested_instances"),
     initialPosition: n,
     initialWidth: DROPDOWN_HEIGHT,

@@ -4,7 +4,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { openUrlInContext } from "../figma_app/976345";
 import { K } from "../905/621769";
 import { selectViewAction } from "../905/929976";
-import { b as _$$b } from "../905/217163";
+import { useLibraryFileLink } from "../905/217163";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { getSelectedView } from "../figma_app/386952";
@@ -36,7 +36,7 @@ export function $$f1({
   let A = S !== b;
   let x = e && backingStateGroup ? backingStateGroup : backingSymbol;
   let N = I ? I.nodeId : A ? x?.publishID : x?.guid;
-  let C = _$$b({
+  let C = useLibraryFileLink({
     libraryKey: S,
     nodeId: N ?? void 0,
     mainComponent: !0
@@ -75,7 +75,7 @@ export function $$y0() {
   } = K(a || "", r, _);
   let f = backingLibraryKey !== _;
   let y = n(a || "");
-  let b = _$$b({
+  let b = useLibraryFileLink({
     libraryKey: backingLibraryKey,
     nodeId: backingNodeId ?? void 0,
     isDevHandoff: !0,

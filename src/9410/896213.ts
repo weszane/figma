@@ -40,7 +40,7 @@ import { Zr } from "../figma_app/678782";
 import { AD, wF, Wq, uC, A8 } from "../figma_app/578768";
 import { selectCurrentFile } from "../figma_app/516028";
 import { dR } from "../figma_app/440875";
-import { Z as _$$Z } from "../905/116724";
+import { useDelayedCallback } from "../905/116724";
 import { _P } from "../figma_app/2590";
 import { q as _$$q } from "../905/495564";
 import { YL, gW } from "../figma_app/122682";
@@ -273,7 +273,7 @@ function eI({
   let {
     start,
     cancel
-  } = _$$Z(K);
+  } = useDelayedCallback(K);
   let Y = useCallback(() => {
     cancel();
     C(!1);
@@ -446,7 +446,7 @@ function ek({
   let {
     start,
     cancel
-  } = _$$Z(Z);
+  } = useDelayedCallback(Z);
   let et = useCallback(() => {
     cancel();
     M(!1);

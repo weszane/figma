@@ -16,7 +16,7 @@ import { p as _$$p } from "../figma_app/378458";
 import { useDispatch } from "react-redux";
 import { r as _$$r } from "../figma_app/67145";
 import { Dm } from "../figma_app/8833";
-import { Um, BK } from "../905/848862";
+import { useDropdownState, useDropdown } from "../905/848862";
 import { KindEnum } from "../905/129884";
 import { l6, c$, uQ } from "../905/794875";
 import { ZE } from "../figma_app/932285";
@@ -98,7 +98,7 @@ function j(e) {
   let [t, i] = useState(void 0);
   let [a, s] = useState(void 0);
   let o = useDispatch();
-  let l = Um();
+  let l = useDropdownState();
   let d = useMemo(() => ({
     inputClassName: "edit_preview_toolbar--input--FPZy0 text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L",
     formatter: L
@@ -232,7 +232,7 @@ function J({
   ...a
 }) {
   let s = useRef(null);
-  let o = BK(a.dropdownId);
+  let o = useDropdown(a.dropdownId);
   let [d, c] = useState(null);
   let u = useCallback(() => {
     c(s?.current?.getBoundingClientRect() || null);

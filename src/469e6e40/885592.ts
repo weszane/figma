@@ -9,7 +9,7 @@ import { V as _$$V, Z as _$$Z } from '../469e6e40/658906';
 import { A as _$$A2 } from '../469e6e40/916829';
 import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
-import { o as _$$o, Ph, pW } from '../905/160095';
+import { TrackedLinkPrimitive, TrackedLink, TrackedLinkButton } from '../905/160095';
 import { ScreenReaderOnly } from '../905/172252';
 import { useSingleEffect } from '../905/791079';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -244,7 +244,7 @@ function z(e) {
       content: jsx(B, {
         getHeading: () => getFeatureFlags().billing_page_updates_jul_2025_content_updates ? getI18nString('plan_invoices.cost_breakdown.new_seat_costs_heading_new') : getI18nString('plan_invoices.cost_breakdown.new_seat_costs_heading'),
         subheading: e.invoice.billing_mechanics === fA.PRORATED && e.invoice.plan_parent_type === FOrganizationLevelType.TEAM ? renderI18nText('plan_invoices.cost_breakdown.new_seat_costs_learn_more_subheading', {
-          learnMore: jsx(_$$o, {
+          learnMore: jsx(TrackedLinkPrimitive, {
             className: 'x1quhyk7 x1ypdohk xuxw1ft x5hs570',
             href: 'https://help.figma.com/hc/articles/360041061034',
             trusted: !0,
@@ -379,7 +379,7 @@ function W(e) {
     }, t && {
       key: 'invoice-number',
       label: getI18nString('plan_invoices.invoice_number_label'),
-      value: e.invoice.hosted_invoice_url ? jsx(Ph, {
+      value: e.invoice.hosted_invoice_url ? jsx(TrackedLink, {
         href: e.invoice.hosted_invoice_url,
         trusted: !0,
         newTab: !0,
@@ -446,7 +446,7 @@ function el(e) {
   let m = Dc(e.invoice);
   let p = [{
     key: 'download-pdf',
-    content: !c && e.invoice.invoice_pdf_url && jsx(pW, {
+    content: !c && e.invoice.invoice_pdf_url && jsx(TrackedLinkButton, {
       href: e.invoice.invoice_pdf_url,
       size: 'lg',
       width: 'fill',
@@ -734,7 +734,7 @@ function ef(e) {
       children: [jsx(BannerMessage, {
         title: t ? getI18nString('plan_invoices.invoice_flyout.overdue_invoice_notice') : getI18nString('plan_invoices.invoice_flyout.open_invoice_notice'),
         children: null
-      }), e.invoice.hosted_invoice_url && jsx(pW, {
+      }), e.invoice.hosted_invoice_url && jsx(TrackedLinkButton, {
         htmlAttributes: a,
         variant: 'secondary',
         newTab: !0,

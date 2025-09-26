@@ -6,7 +6,7 @@ import { VisualBellActions } from "../905/302958";
 import { L_ } from "../figma_app/349969";
 import { fullscreenValue } from "../figma_app/455680";
 import { FEditorType } from "../figma_app/53721";
-import { uF } from "../905/748636";
+import { HEADER_HEIGHT } from "../905/748636";
 import { $W, is, BX } from "../figma_app/170018";
 let $$_11 = 16;
 let $$h0 = 216;
@@ -67,7 +67,7 @@ export function $$S9(e, t) {
 export function $$v10(e, t) {
   return (e.getCurrentPage()?.prototypeDevice?.rotation ?? RotationType.NONE) === RotationType.NONE ? {
     x: $$g1,
-    y: $$f3 + (t ? uF : 0)
+    y: $$f3 + (t ? HEADER_HEIGHT : 0)
   } : {
     x: $$g1,
     y: $$g1
@@ -155,7 +155,7 @@ export function $$N5(e, t, r, a, s) {
   let c = $$I2(s, o);
   if (e && shallowEqual(e.breakpoint, c) && !t) return e;
   let h = fullscreenValue.getViewportInfo();
-  let m = h.height - uF - 2 * $$_11;
+  let m = h.height - HEADER_HEIGHT - 2 * $$_11;
   let f = Math.max(.5 * h.width, $$g1);
   let E = $W(s);
   let y = !!E && L_(E);

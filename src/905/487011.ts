@@ -10,7 +10,7 @@ import { getProductType } from "../figma_app/314264";
 import { dd } from "../figma_app/604494";
 import { F1 } from "../figma_app/171177";
 import { n as _$$n } from "../905/347702";
-import { j4, G5, Bq, Lv, m0, Ec, hA, f0, Cq, eb, bp, dk } from "../905/278499";
+import { AI_ACTION_STARTED, AI_ACTION_ENDED, AI_ACTION_PROMPT_INTERACTION, AI_ACTION_INSTRUCTION_INTERACTION, AI_ACTION_PROGRESS_INTERACTION, AI_ACTION_ITERATION_INTERACTION, AI_ACTION_SENTIMENT_FEEDBACK, AI_ACTION_ADDITIONAL_FEEDBACK, AIActionIterationTrigger, AIActionProgressTrigger, AIActionPromptTrigger, AIActionInstructionTrigger } from "../905/278499";
 import { zF } from "../figma_app/297822";
 let _ = _$$n((e, t, i) => {
   trackEventAnalytics(e, t, i);
@@ -30,38 +30,38 @@ let y = e => ["action", "clientLifecycleId", "file_key", "product_type", "quick_
   return "invalid" === i || null == i;
 });
 export function $$b0(e) {
-  y(e) && A("Invalid tracking context", j4, e);
-  _(j4, e, {
+  y(e) && A("Invalid tracking context", AI_ACTION_STARTED, e);
+  _(AI_ACTION_STARTED, e, {
     mlEvent: !0
   });
 }
 export function $$v8(e) {
-  y(e) && A("Invalid tracking context", G5, e);
-  _(G5, e, {
+  y(e) && A("Invalid tracking context", AI_ACTION_ENDED, e);
+  _(AI_ACTION_ENDED, e, {
     mlEvent: !0
   });
 }
 export function $$I4(e) {
-  _(Bq, e);
+  _(AI_ACTION_PROMPT_INTERACTION, e);
 }
 export function $$E1(e) {
-  trackEventAnalytics(Lv, e);
+  trackEventAnalytics(AI_ACTION_INSTRUCTION_INTERACTION, e);
 }
 export function $$x11(e) {
-  _(m0, e);
+  _(AI_ACTION_PROGRESS_INTERACTION, e);
 }
 export function $$S9(e) {
-  _(Ec, e, {
+  _(AI_ACTION_ITERATION_INTERACTION, e, {
     mlEvent: !0
   });
 }
 export function $$w10(e) {
-  _(hA, e, {
+  _(AI_ACTION_SENTIMENT_FEEDBACK, e, {
     mlEvent: !0
   });
 }
 export function $$C12(e) {
-  _(f0, e, {
+  _(AI_ACTION_ADDITIONAL_FEEDBACK, e, {
     mlEvent: !0
   });
 }
@@ -108,34 +108,34 @@ export function $$R6({
 }
 export function $$N13(e) {
   return e.shortcut ? {
-    interaction_type: Cq.KEYBOARD_SHORTCUT,
+    interaction_type: AIActionIterationTrigger.KEYBOARD_SHORTCUT,
     keyboard_shortcut: F1(e.shortcut)
   } : {
-    interaction_type: Cq.BUTTON_CLICK
+    interaction_type: AIActionIterationTrigger.BUTTON_CLICK
   };
 }
 export function $$P2(e) {
   return e.shortcut ? {
-    interaction_type: eb.KEYBOARD_SHORTCUT,
+    interaction_type: AIActionProgressTrigger.KEYBOARD_SHORTCUT,
     keyboard_shortcut: F1(e.shortcut)
   } : {
-    interaction_type: eb.BUTTON_CLICK
+    interaction_type: AIActionProgressTrigger.BUTTON_CLICK
   };
 }
 export function $$O3(e) {
   return e.shortcut ? {
-    interaction_type: bp.KEYBOARD_SHORTCUT,
+    interaction_type: AIActionPromptTrigger.KEYBOARD_SHORTCUT,
     keyboard_shortcut: F1(e.shortcut)
   } : {
-    interaction_type: bp.BUTTON_CLICK
+    interaction_type: AIActionPromptTrigger.BUTTON_CLICK
   };
 }
 export function $$D7(e) {
   return e.shortcut ? {
-    interaction_type: dk.KEYBOARD_SHORTCUT,
+    interaction_type: AIActionInstructionTrigger.KEYBOARD_SHORTCUT,
     keyboard_shortcut: F1(e.shortcut)
   } : {
-    interaction_type: dk.BUTTON_CLICK
+    interaction_type: AIActionInstructionTrigger.BUTTON_CLICK
   };
 }
 export const Dl = $$b0;

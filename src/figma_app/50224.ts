@@ -8,7 +8,7 @@ import { LW } from "../figma_app/846140";
 import { vR, So, Kp, PJ, Au, uN, g5 } from "../figma_app/193952";
 import { CT, uG, BH, C5, S3 } from "../905/375497";
 import { d as _$$d } from "../905/680937";
-import { f as _$$f } from "../905/911785";
+import { MarkdownBuilder } from "../905/911785";
 function m(e) {
   return e.classPropName ?? "className";
 }
@@ -206,7 +206,7 @@ export function $$I3(e, t) {
       componentUsageOrDefinition: "DEFINITION",
       componentDefinitionTypeInfo: s
     };
-    let _ = new _$$f();
+    let _ = new MarkdownBuilder();
     let m = s.parsedDefs.map(e => "DERIVED_BOOLEAN" === e.devFriendlyProp.type ? "" : "SIMPLE_CHOICE" === e.devFriendlyProp.type ? "VARIANT" === e.def.type && "defaultValue" in e.def ? `${e.devFriendlyProp.key} = ${JSON.stringify(e.def.defaultValue)}` : e.devFriendlyProp.key : "GROUPED_INSTANCE_SWAP" === e.devFriendlyProp.type || "IMAGE" === e.devFriendlyProp.type ? e.devFriendlyProp.key : "SIMPLE" === e.devFriendlyProp.type ? "defaultValue" in e.def ? `${e.devFriendlyProp.key} = ${JSON.stringify(e.def.defaultValue)}` : e.devFriendlyProp.key : "ARRAY" === e.devFriendlyProp.type ? getFeatureFlags().first_draft_ts_arrays ? 0 !== e.devFriendlyProp.index ? "" : e.devFriendlyProp.key : e.devFriendlyProp.nonArrayKey : void throwTypeError(e.devFriendlyProp)).filter(Boolean);
     if (r.includePropsType ? (m.length > 0 && s.propsTypeRepr.typeDefBody && (_.append(`type ${s.jsxName}Props = `), _.append(CT(s.propsTypeRepr.typeDefBody)), _.newline()), _.append(`function ${s.jsxName}(`), m.length > 0 && (_.append(`{ ${m.join(", ")} }`), _.append(`: ${s.jsxName}Props`)), _.append(") {")) : (_.append(`const ${s.jsxName}: React.FC<${s.propsTypeRepr.typeDefBody ?? "{}"}> = (`), m.length > 0 && _.append(`{${m.join(", ")}}`), _.append(") => {")), _.newline(), "SYMBOL" === e.type) {
       _.append(c.formatJSX ? uG(S(e, c)) : `  return ${S(e, c)}`);

@@ -63,11 +63,11 @@ import { ButtonPrimitive } from '../905/632989';
 import { localStorageRef } from '../905/657224';
 import { _D } from '../905/657318';
 import { p as _$$p } from '../905/682418';
-import { pn } from '../905/714538';
+import { getFontStyleMapping } from '../905/714538';
 import { SvgComponent } from '../905/714743';
 import { Point } from '../905/736624';
-import { Ao } from '../905/748636';
-import { Kk } from '../905/777093';
+import { DraggableModalManager } from '../905/748636';
+import { areFontsInitializedCheck } from '../905/777093';
 import { O4 } from '../905/777187';
 import { Ig, wJ, XA } from '../905/805224';
 import { D as _$$D } from '../905/829855';
@@ -78,7 +78,8 @@ import { A as _$$A } from '../905/891805';
 import { bL as _$$bL } from '../905/911410';
 import { A as _$$A3 } from '../905/920165';
 import { q as _$$q } from '../905/932270';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { FONT_SF_PRO_DISPLAY } from '../905/946258';
 import { L as _$$L } from '../905/954291';
 import { calculatePickerPositionLeft } from '../905/959568';
@@ -2754,7 +2755,7 @@ function t6(e) {
         })
       })]
     })
-  }) : jsxs(Ao, {
+  }) : jsxs(DraggableModalManager, {
     closeButtonClassName: 'type_settings--closeButton--pwMCE',
     dataTestId: 'type-settings-modal',
     dragHeaderOnly: !0,
@@ -2916,7 +2917,7 @@ class iS extends PureComponent {
     super(e);
     this.context = null;
     this.versionsForStyles = {};
-    this.showFontAgentCTA = Kk() && !desktopAPIInstance && (BrowserInfo.mac || BrowserInfo.windows) && !BrowserInfo.isMobileBrowser;
+    this.showFontAgentCTA = areFontsInitializedCheck() && !desktopAPIInstance && (BrowserInfo.mac || BrowserInfo.windows) && !BrowserInfo.isMobileBrowser;
     this.getTickAxisValues = memoizeByArgs(e => isInvalidValue(e) ? {} : MK(e, this.props.fonts[e], this.versionsForStyles[e]));
     this.stopPropagation = e => e.stopPropagation();
     this.onMouseDown = e => {
@@ -3268,7 +3269,7 @@ class iS extends PureComponent {
     this.updateVersionsForStyles(this.props);
   }
   updateVersionsForStyles(e) {
-    this.versionsForStyles = pn(e.fonts);
+    this.versionsForStyles = getFontStyleMapping(e.fonts);
   }
   UNSAFE_componentWillReceiveProps(e) {
     e.fonts !== this.props.fonts && this.updateVersionsForStyles(e);

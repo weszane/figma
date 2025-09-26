@@ -12,7 +12,7 @@ import { profileServiceAPI } from '../905/608932'
 import { setupLoadingStateHandler } from '../905/696711'
 import { uploadRequest } from '../905/827765'
 import { addAuthedCommunityProfileToHub, clearCommunityProfile, patchOrgs, putCommunityProfile, setCommunityAuthedActiveProfile } from '../905/890368'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { selectViewAction } from '../905/929976'
 import { mapUserRoleToOrgUserRoleAlias } from '../figma_app/12796'
 import { OrgUserRoleEnum } from '../figma_app/35887'
@@ -195,7 +195,7 @@ export const restrictProfile = createActionCreator('COMMUNITY_HUB_RESTRICT_PROFI
  */
 export const restrictProfileThunk = createOptimistThunk(({ dispatch }, params) => { // original $$X10
   const { profileId, blockedProfileId, onSuccess } = params
-  XHR.post(`/api/profile/${blockedProfileId}/block`, {
+  sendWithRetry.post(`/api/profile/${blockedProfileId}/block`, {
     block_type: 'restrict',
     profile_id: profileId,
   }).then(() => {
@@ -220,7 +220,7 @@ export const unrestrictProfile = createActionCreator('COMMUNITY_HUB_UNRESTRICT_P
  */
 export const unrestrictProfileThunk = createOptimistThunk(({ dispatch }, params) => { // original $$J16
   const { profileId, blockedProfileId, onSuccess } = params
-  XHR.del(`/api/profile/${blockedProfileId}/block`, {
+  sendWithRetry.del(`/api/profile/${blockedProfileId}/block`, {
     block_type: 'restrict',
     profile_id: profileId,
   }).then(() => {
@@ -299,7 +299,7 @@ createOptimistThunk((context, params, { loadingKey }) => { // no original name, 
 export const createProfileThunk = createOptimistThunk((context, params, { loadingKey }) => { // original $$ee28
   const { dispatch, getState } = context
   const { website, description, location, profileHandle, onSuccess, userId, teamId, orgId } = params
-  const request = XHR.post('/api/profile', {
+  const request = sendWithRetry.post('/api/profile', {
     website,
     description,
     location,
@@ -347,7 +347,7 @@ export const createProfileThunk = createOptimistThunk((context, params, { loadin
  * @param {object} params - Parameters including onSuccess.
  */
 export const generateProfileHandleThunk = createOptimistThunk(({ dispatch }, params) => { // original $$et21
-  XHR.post('/api/profile/generate_handle').then(({ data }) => {
+  sendWithRetry.post('/api/profile/generate_handle').then(({ data }) => {
     dispatch(addAuthedCommunityProfileToHub(data.meta))
     dispatch(putCommunityProfile(data.meta))
     params.onSuccess && params.onSuccess(dispatch)
@@ -383,7 +383,7 @@ export const updateProfileThunk = createOptimistThunk((context, params, { loadin
     }))
     return
   }
-  const request = XHR.put(`/api/profile/${profileId}`, {
+  const request = sendWithRetry.put(`/api/profile/${profileId}`, {
     website,
     twitter: trimmedTwitter,
     instagram: trimmedInstagram,
@@ -464,7 +464,7 @@ export const updateProfileThunk = createOptimistThunk((context, params, { loadin
 export const deleteProfileThunk = createOptimistThunk((context, params) => { // original $$en23
   const { dispatch, getState } = context
   const { profileId, handle } = params
-  XHR.del(`/api/profile/${profileId}`).then(() => {
+  sendWithRetry.del(`/api/profile/${profileId}`).then(() => {
     dispatch(clearCommunityProfile(handle))
     const { currentUserOrgId, orgById } = getState()
     const org = currentUserOrgId && orgById[currentUserOrgId]
@@ -492,7 +492,7 @@ export const uploadProfileCoverImageThunk = createOptimistThunk(async (context, 
   const { file, profileId, onSuccessCallback } = params
   const uploadPromise = readImageBytes(file).then(bytes => uploadCoverImage(`/api/profile/${profileId}/upload`, bytes, file))
   setupLoadingStateHandler(uploadPromise, context, loadingKey)
-  await uploadPromise.then(({ signature }) => XHR.put(`/api/profile/${profileId}`, { signature })).then(({ data }) => {
+  await uploadPromise.then(({ signature }) => sendWithRetry.put(`/api/profile/${profileId}`, { signature })).then(({ data }) => {
     dispatch(putCommunityProfile(data.meta))
     onSuccessCallback()
   }).catch((error) => {
@@ -511,7 +511,7 @@ export async function uploadCoverImage(url: string, bytes: ArrayBuffer, file: Fi
   if (!bytes) {
     return { cover_image_path: '', signature: '' }
   }
-  const { cover_image_path, signature, fields } = (await XHR.post(url)).data.meta
+  const { cover_image_path, signature, fields } = (await sendWithRetry.post(url)).data.meta
   const formData = new FormData()
   if (fields)
     Object.entries(fields).forEach(([key, value]) => formData.append(key, value as string))
@@ -530,7 +530,7 @@ export const followEntity = createActionCreator('COMMUNTY_HUB_FOLLOW_ENTITY') //
  */
 export const followEntityThunk = createOptimistThunk(async (context, followedProfileId, { loadingKey }) => { // original $$eo18
   const { dispatch, getState } = context
-  const request = XHR.put('/api/follows', { followed_profile_id: followedProfileId })
+  const request = sendWithRetry.put('/api/follows', { followed_profile_id: followedProfileId })
   setupLoadingStateHandler(request, context, loadingKey)
   await request.then(({ data }) => {
     if (getState().user?.community_profile_id) {
@@ -564,7 +564,7 @@ export const unfollowEntity = createActionCreator('COMMUNTY_HUB_UNFOLLOW_ENTITY'
  */
 export const unfollowEntityThunk = createOptimistThunk((context, followedProfileId, { loadingKey }) => { // original $$ed8
   const { dispatch, getState } = context
-  const request = XHR.del('/api/follows', { followed_profile_id: followedProfileId })
+  const request = sendWithRetry.del('/api/follows', { followed_profile_id: followedProfileId })
   setupLoadingStateHandler(request, context, loadingKey)
   request.then(() => {
     if (getState().user?.community_profile_id) {
@@ -611,7 +611,7 @@ createOptimistThunk(async ({ dispatch, getState }, params) => { // no original n
   if (resolved && state.comments.activeThread?.id === thread.id && !state.comments.showResolved) {
     dispatch(UU())
   }
-  const request = resolved ? XHR.put(`/api/community_comments/${thread.id}/resolve`) : XHR.put(`/api/community_comments/${thread.id}/unresolve`)
+  const request = resolved ? sendWithRetry.put(`/api/community_comments/${thread.id}/resolve`) : sendWithRetry.put(`/api/community_comments/${thread.id}/unresolve`)
   await request.then(({ data }) => {
     dispatch(commitEditedComment({
       comment: {

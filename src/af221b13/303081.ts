@@ -36,7 +36,7 @@ import { hasAnyOnboardingFlag } from "../figma_app/242339";
 import { FileTypeEnum } from "../905/71785";
 import { registerModal } from "../905/102752";
 import { F as _$$F } from "../5430/926195";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { useParams, Redirect, Switch, Route } from "../vendor/130505";
 import { trackEventAnalytics } from "../905/449184";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
@@ -190,7 +190,7 @@ import { IntersectionSentinel } from "../905/925868";
 import { mergePublishedPluginThunk } from "../905/172918";
 import { getResourceName } from "../figma_app/777551";
 import { ResourceTypeMap, ViewSectionMap } from "../figma_app/701107";
-import { Z as _$$Z2 } from "../905/909123";
+import { resourceDetailQuery } from "../905/909123";
 import { Ay as _$$Ay7 } from "../5430/231178";
 import { $ as _$$$3 } from "../5430/953899";
 import { S as _$$S5 } from "../5430/743953";
@@ -422,7 +422,7 @@ function F() {
 function M(e) {
   return jsx(TrackingProvider, {
     name: "Continue Duplication after Verification Modal",
-    children: jsxs(OJ, {
+    children: jsxs(HeaderModal, {
       headerSize: "hidden",
       maxWidth: 348,
       containerClassName: "continue_after_verification--modalContainer--L-0LF",
@@ -6119,7 +6119,7 @@ function so() {
     };
   }, []);
   let c = isRelatedContentExperimentEnabled();
-  let [d] = setupResourceAtomHandler(_$$Z2({
+  let [d] = setupResourceAtomHandler(resourceDetailQuery({
     apiResourceType: e,
     id: t,
     skipRelatedContent: c(),

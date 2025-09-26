@@ -1,6 +1,6 @@
 import { createOptimistAction } from "../905/350402";
 import { createOptimistRevertAction, createOptimistCommitAction } from "../905/676456";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -10,7 +10,7 @@ export let $$l0 = createOptimistAction("REPO_RESTORE", (e, {
 }, {
   optimistId: d
 }) => {
-  i && XHR.post("/api/repos_batch/restore", {
+  i && sendWithRetry.post("/api/repos_batch/restore", {
     repo_ids: Object.keys(t)
   }).then(i => {
     if (207 === i.status) {

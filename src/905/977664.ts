@@ -3,9 +3,9 @@ import { packRgb } from "../figma_app/273493";
 import { Rectangle } from "../905/249071";
 import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
-import { j } from "../905/881708";
+import { NameClass } from "../905/881708";
 import { Dv, Ro, fl, dw } from "../905/962457";
-export class $$c0 extends j {
+export class $$c0 extends NameClass {
   constructor(e) {
     super(e);
     this.state = {

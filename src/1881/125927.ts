@@ -21,7 +21,7 @@ import { ApprovalStatusEnum } from "../figma_app/736948";
 import { um } from "../figma_app/761870";
 import { registerModal } from "../905/102752";
 import { e as _$$e } from "../905/393279";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { jE } from "../figma_app/639088";
 var l = o;
@@ -203,7 +203,7 @@ let $$y1 = registerModal(function ({
   let d = L(t, l);
   return jsx(TrackingProvider, {
     name: "Org Invite Modal",
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: d,
       onClose: () => {
         a(popModalStack());

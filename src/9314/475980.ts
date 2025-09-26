@@ -29,7 +29,7 @@ import { updateAllStyleThumbnailsOptimist } from '../905/711212';
 import { areSetsEqual } from '../905/760682';
 import { zi } from '../905/824449';
 import { KeyboardReceiver } from '../905/826900';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { n3, VariableStyleId } from '../905/859698';
 import { setIsRenamingSelectedStyle, setLocalStyleSelection } from '../905/879323';
 import { A as _$$A } from '../905/891805';
@@ -573,7 +573,7 @@ function ek({
   onPasteItems: u,
   styleType: y
 }) {
-  let m = Um();
+  let m = useDropdownState();
   let p = useSelector(e => e.library.localStyleSelection);
   let x = useMemo(() => p && p.type === y && m?.type === eS ? getSelectedItems(p, m.data.uiList) : [], [p, m, y]);
   let f = useMemo(() => flattenToStyles(x).map(e => e.node_id), [x]);
@@ -712,7 +712,7 @@ function eP({
   let a = useRef(null);
   let i = useRef(null);
   let d = a.current;
-  let c = Um();
+  let c = useDropdownState();
   let u = c?.type === eA;
   let y = c?.data?.targetRect;
   let m = 'localStyleHeader';

@@ -1,18 +1,59 @@
-export async function $$n0() {
+/**
+ * Loads the video.js library asynchronously.
+ * @returns An object containing the videoJs module.
+ * @originalName $$n0
+ */
+export async function loadVideoJs() {
   return {
-    videoJs: (await require.t.bind(require, 697442, 23)).$$default
-  };
+    videoJs: await import('video.js').then(module => module.default || module),
+  }
 }
-export class $$r1 extends Error {}
-export function $$a2(e, t, i) {
-  return new Promise((n, a) => e ? i ? (i.one("loadedmetadata", n), i.one("error", () => {
-    let e = i.error();
-    a(new $$r1(e ? `(${e.code}) ${e.message}` : void 0));
-  }), void i.src({
-    type: t ? "application/x-mpegURL" : "video/mp4",
-    src: e
-  })) : a(new $$r1("Invalid video player")) : a(new $$r1("Missing video src")));
+
+/**
+ * Custom error class for video player errors.
+ * @originalName $$r1
+ */
+export class VideoPlayerError extends Error {}
+
+/**
+ * Loads a video source into the player and handles metadata/error events.
+ * @param src - The video source URL.
+ * @param isHls - Whether the source is HLS (true) or MP4 (false).
+ * @param player - The video.js player instance.
+ * @returns Promise that resolves when metadata is loaded or rejects on error.
+ * @originalName $$a2
+ */
+export function loadVideoSource(
+  src: string | undefined,
+  isHls: boolean,
+  player: any,
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (!src) {
+      reject(new VideoPlayerError('Missing video src'))
+      return
+    }
+    if (!player) {
+      reject(new VideoPlayerError('Invalid video player'))
+      return
+    }
+    player.one('loadedmetadata', resolve)
+    player.one('error', () => {
+      const err = player.error()
+      reject(
+        new VideoPlayerError(
+          err ? `(${err.code}) ${err.message}` : undefined,
+        ),
+      )
+    })
+    player.src({
+      type: isHls ? 'application/x-mpegURL' : 'video/mp4',
+      src,
+    })
+  })
 }
-export const Fe = $$n0;
-export const aB = $$r1;
-export const uz = $$a2;
+
+// Refactored exports for clarity and traceability
+export const Fe = loadVideoJs // $$n0
+export const aB = VideoPlayerError // $$r1
+export const uz = loadVideoSource // $$a2

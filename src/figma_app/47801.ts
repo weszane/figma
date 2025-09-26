@@ -1,9 +1,9 @@
 import { jsx } from 'react/jsx-runtime';
-import { y as _$$y } from '../905/129046';
+import { ImageOverlayComponent } from '../905/129046';
 import { h as _$$h } from '../905/791079';
 import { renderI18nText } from '../905/303541';
 import { UpgradeAction } from '../905/370443';
-import { rq } from '../905/425180';
+import { OnboardingModal } from '../905/425180';
 import { e as _$$e } from '../905/621515';
 import { LQ8 } from '../figma_app/6204';
 import { useAtomWithSubscription } from '../figma_app/27355';
@@ -34,12 +34,12 @@ export function $$f0({
       canShow: e => !e
     });
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     arrowPosition: E,
     clickOutsideToHide: !0,
     description: r,
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl('8f292b8398eee392b11219a292629559fbba77a6'),
       alt: 'Connected projects logo',
       aspectRatio: 376 / 122

@@ -1,12 +1,86 @@
-var $$n0 = (e => (e.TOP_RIGHT = "top-right", e.CENTER = "center", e.BOTTOM_LEFT = "bottom-left", e.BOTTOM_RIGHT = "bottom-right", e))($$n0 || {});
-var $$i3 = (e => (e.LEFT_TITLE = "left_title", e.RIGHT_TITLE = "right_title", e))($$i3 || {});
-var a = (e => (e[e.TOP = 0] = "TOP", e[e.BOTTOM = 1] = "BOTTOM", e[e.RIGHT_TITLE = 2] = "RIGHT_TITLE", e[e.RIGHT_BODY = 3] = "RIGHT_BODY", e[e.LEFT_TITLE = 4] = "LEFT_TITLE", e[e.TOP_RIGHT = 5] = "TOP_RIGHT", e))(a || {});
-var s = (e => (e.FALLBACK = "fallback", e.BEST_EFFORT = "best_effort", e))(s || {});
-var $$o4 = (e => (e.DRAGGABLE = "draggable", e.FEATURE_UPDATE = "feature_update", e.WELCOME = "welcome", e.SELF_CONTAINED = "self_contained", e.WALK_THROUGH = "walk_through", e.ANNOUNCEMENT_POINTER = "announcement_pointer", e.POINTER = "pointer", e))($$o4 || {});
-export let $$l2 = 740;
-export var $$d1 = (e => (e.ON_DARK = "on_dark", e.ON_LIGHT = "on_light", e.HIGH_CONTRAST = "high_contrast", e.HIDDEN = "hidden", e))($$d1 || {});
-export const LN = $$n0;
-export const M_ = $$d1;
-export const No = $$l2;
-export const _L = $$i3;
-export const q3 = $$o4;
+// Original code from /Users/allen/sigma-main/src/figma_app/450829.ts
+// Refactored to use TypeScript enums for better type safety and readability.
+// Grouped related enums together.
+// Added JSDoc comments for documentation.
+// Ensured same functionality and values as original.
+
+/**
+ * Enum for corner positions.
+ * Original: $$n0
+ */
+export enum CornerPosition {
+  TOP_RIGHT = "top-right",
+  CENTER = "center",
+  BOTTOM_LEFT = "bottom-left",
+  BOTTOM_RIGHT = "bottom-right",
+}
+
+/**
+ * Enum for title positions.
+ * Original: $$i3
+ */
+export enum TitlePosition {
+  LEFT_TITLE = "left_title",
+  RIGHT_TITLE = "right_title",
+}
+
+/**
+ * Enum for alignments with numeric values.
+ * Original: a
+ */
+export enum Alignment {
+  TOP = 0,
+  BOTTOM = 1,
+  RIGHT_TITLE = 2,
+  RIGHT_BODY = 3,
+  LEFT_TITLE = 4,
+  TOP_RIGHT = 5,
+}
+
+/**
+ * Enum for modes.
+ * Original: s
+ */
+export enum Mode {
+  FALLBACK = "fallback",
+  BEST_EFFORT = "best_effort",
+}
+
+/**
+ * Enum for overlay types.
+ * Original: $$o4
+ */
+export enum OverlayType {
+  DRAGGABLE = "draggable",
+  FEATURE_UPDATE = "feature_update",
+  WELCOME = "welcome",
+  SELF_CONTAINED = "self_contained",
+  WALK_THROUGH = "walk_through",
+  ANNOUNCEMENT_POINTER = "announcement_pointer",
+  POINTER = "pointer",
+}
+
+/**
+ * Constant for maximum width.
+ * Original: $$l2
+ */
+export const MAX_WIDTH = 740;
+
+/**
+ * Enum for themes.
+ * Original: $$d1
+ */
+export enum OnTheme {
+  ON_DARK = "on_dark",
+  ON_LIGHT = "on_light",
+  HIGH_CONTRAST = "high_contrast",
+  HIDDEN = "hidden",
+}
+
+// Refactored exports with meaningful names.
+// Original exports: LN = $$n0, _L = $$i3, q3 = $$o4, M_ = $$d1, No = $$l2
+export const LN = CornerPosition;
+export const _L = TitlePosition;
+export const q3 = OverlayType;
+export const M_ = OnTheme;
+export const No = MAX_WIDTH;

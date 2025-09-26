@@ -42,7 +42,7 @@ import { isBranchAlt } from '../905/760074'
 import { getSelectedFile } from '../905/766303'
 import { teamAPIClient } from '../905/834575'
 import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { selectViewAction } from '../905/929976'
 import { nk } from '../figma_app/2023'
 import { Dm } from '../figma_app/8833'
@@ -238,36 +238,36 @@ class ek extends PureComponent {
     let e = getSelectedFile(this.props)
     return e?.license?.toLowerCase() === 'apple'
       ? jsxs(ModalContainer, {
-          size: 560,
-          className: `${Dm} license_agreement--modal--EN2ao`,
-          disableClickOutsideToHide: !0,
-          ...this.props,
-          children: [jsx(_$$P, {
-            width: 560,
-            className: 'license_agreement--scrollContainer--JFn-R',
-            children: jsx('div', {
-              className: 'license_agreement--content--ASLpS',
-              children: jsx(eR, {}),
-            }),
-          }), jsxs('div', {
-            className: 'license_agreement--footer--dZJPI',
-            children: [jsx(FocusCheckbox, {
-              id: 'check-license-agreement',
-              checked: this.state.checked,
-              onChange: this.onChange,
-            }), jsx(createLabel, {
-              htmlFor: 'check-license-agreement',
-              children: 'I have read, understood, and agree to the License Agreement.',
-            }), jsx(ButtonSecondary, {
-              onClick: this.decline,
-              children: 'Disagree and Cancel',
-            }), jsx(ButtonBasePrimary, {
-              disabled: !this.state.checked,
-              onClick: this.accept,
-              children: 'Agree and Open',
-            })],
+        size: 560,
+        className: `${Dm} license_agreement--modal--EN2ao`,
+        disableClickOutsideToHide: !0,
+        ...this.props,
+        children: [jsx(_$$P, {
+          width: 560,
+          className: 'license_agreement--scrollContainer--JFn-R',
+          children: jsx('div', {
+            className: 'license_agreement--content--ASLpS',
+            children: jsx(eR, {}),
+          }),
+        }), jsxs('div', {
+          className: 'license_agreement--footer--dZJPI',
+          children: [jsx(FocusCheckbox, {
+            id: 'check-license-agreement',
+            checked: this.state.checked,
+            onChange: this.onChange,
+          }), jsx(createLabel, {
+            htmlFor: 'check-license-agreement',
+            children: 'I have read, understood, and agree to the License Agreement.',
+          }), jsx(ButtonSecondary, {
+            onClick: this.decline,
+            children: 'Disagree and Cancel',
+          }), jsx(ButtonBasePrimary, {
+            disabled: !this.state.checked,
+            onClick: this.accept,
+            children: 'Agree and Open',
           })],
-        })
+        })],
+      })
       : jsx('div', {})
   }
 }
@@ -441,9 +441,9 @@ let $$ej0 = createOptimistThunk(async (e, {
   }
   let I = p
     ? {
-        ...FileCreationPermissionsGenerator.disabled(),
-        ...p,
-      }
+      ...FileCreationPermissionsGenerator.disabled(),
+      ...p,
+    }
     : null
   e.dispatch(eU({
     file: setupFileObject(u, {
@@ -452,10 +452,10 @@ let $$ej0 = createOptimistThunk(async (e, {
       repo: g,
       sourceFile: y
         ? {
-            ...y,
-            can_manage: !0,
-            can_view: !0,
-          }
+          ...y,
+          can_manage: !0,
+          can_view: !0,
+        }
         : null,
       ...b,
     }),
@@ -574,7 +574,7 @@ let eH = createOptimistThunk(async (e, {
     i ? setupAutosaveManager(t.key, i.id) : logInfo('Autosave', 'Not creating manager for logged out user')
     let d = isValidSessionLocalID(parseSessionLocalID(o)) ? o : ''
     let v = getBackgroundColorForTheme(getMPVisibleTheme(A.theme.themePreference))
-    BrowserInfo.isIpadNative && x2() && _$$v.getFeatureGate('figjam_ipad_compressed_textures') && (getImageManager().setShouldUseCompressedTextures(!0), XHR.post(`/file/${t.key}/generate_compressed_textures`).catch((e) => {
+    BrowserInfo.isIpadNative && x2() && _$$v.getFeatureGate('figjam_ipad_compressed_textures') && (getImageManager().setShouldUseCompressedTextures(!0), sendWithRetry.post(`/file/${t.key}/generate_compressed_textures`).catch((e) => {
       logInfo('image', 'Failed to generate compressed textures', {
         fileKey: t.key,
         error: e,
@@ -620,15 +620,15 @@ let eH = createOptimistThunk(async (e, {
     let i = Number(n.cause?.status || 0)
     desktopAPIInstance
       ? desktopAPIInstance.reportFatalError(t.key, i === 0
-          ? {
-              type: 'load',
-              code: -106,
-              description: getI18nString('user_facing_error.loading_a_file'),
-            }
-          : {
-              type: 'http',
-              statusCode: i,
-            })
+        ? {
+          type: 'load',
+          code: -106,
+          description: getI18nString('user_facing_error.loading_a_file'),
+        }
+        : {
+          type: 'http',
+          statusCode: i,
+        })
       : i === 404 ? showFileBrowserOrError(getI18nString('user_facing_error.404_loading_a_file'), e.dispatch) : showFileBrowserOrError(getI18nString('user_facing_error.opening_editor'), e.dispatch)
     trackDefinedFileEvent('scenegraph_and_sync.fullscreen_open_error', t.key, A, {
       error: n instanceof Error ? void 0 !== n.cause ? `${n.message}: ${n.cause.message}` : n.message : JSON.stringify(n),

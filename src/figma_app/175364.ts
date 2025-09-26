@@ -8,7 +8,7 @@ import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { c$, wv, MM } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { Jz } from "../905/504727";
 import { Button } from "../905/521428";
 import { c as _$$c } from "../905/566438";
@@ -109,7 +109,7 @@ function v(e) {
     toggle,
     hide,
     showing
-  } = BK(s);
+  } = useDropdown(s);
   let f = useLatestRef(showing);
   let [b, T] = useState();
   let I = () => {

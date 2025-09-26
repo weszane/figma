@@ -6,9 +6,9 @@ import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { ak5 } from "../figma_app/6204";
 let g = userFlagExistsAtomFamily("seen_dtm_deprecation_post_migration_overlay");
 export function $$f0(e) {
@@ -49,8 +49,8 @@ export function $$f0(e) {
       teamName: e.planName || ""
     });
   }
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: jsx("p", {
       children: b
     }),

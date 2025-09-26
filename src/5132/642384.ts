@@ -2,7 +2,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { appendSearchParams } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { isMobileUA } from "../figma_app/778880";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { addTemplateToRecentsThunk } from "../905/321397";
 import { VisualBellActions } from "../905/302958";
@@ -59,13 +59,13 @@ let $$T1 = (e, l = {
   function h(e) {
     let d = {
       headers: {
-        ...XHR.defaults.headers
+        ...sendWithRetry.defaults.headers
       }
     };
     let _ = {};
     e && (d.headers["X-Figma-User-ID"] = e.userId, _.org_id = e.orgId, _.team_id = e.teamId);
     !0 === l.adminReviewerOverride && (_.admin_reviewer_override = !0);
-    XHR.post(`/api/hub_files/v2/${i.id}/copy`, _, d).then(({
+    sendWithRetry.post(`/api/hub_files/v2/${i.id}/copy`, _, d).then(({
       data: c
     }) => {
       let d = c.meta;

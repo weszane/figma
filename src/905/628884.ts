@@ -18,10 +18,10 @@ import { J } from "../905/980942";
 import { Ay } from "../figma_app/976110";
 import { Gh, d_, xP } from "../905/727576";
 import { cq } from "../905/794154";
-import { $J } from "../905/278499";
-import { r as _$$r } from "../905/189361";
-import { B } from "../905/222272";
-import { y as _$$y } from "../905/236825";
+import { AIActionIterationResult } from "../905/278499";
+import { ActionButton } from "../905/189361";
+import { FlexBox } from "../905/222272";
+import { Panel } from "../905/236825";
 import { Oq, is } from "../905/904596";
 import { hg } from "../figma_app/425489";
 export function $$k0({
@@ -69,7 +69,7 @@ export function $$k0({
     }],
     aiTrackingContext: {
       ...e,
-      iteration_view_type: $J.SUCCESS_WITH_REVIEW
+      iteration_view_type: AIActionIterationResult.SUCCESS_WITH_REVIEW
     },
     recordingKey: "magic-link"
   });
@@ -88,22 +88,22 @@ export function $$k0({
       let i = t ? getI18nString("proto.action_navigate_to_layer", {
         layerName: t
       }) : D.format(e);
-      return jsx(_$$y, {
-        children: jsxs(B, {
+      return jsx(Panel, {
+        children: jsxs(FlexBox, {
           gap: 4,
           justify: "space-between",
           align: "center",
           fullWidth: !0,
-          children: [jsxs(B, {
+          children: [jsxs(FlexBox, {
             gap: 4,
             align: "center",
             children: [av(e), jsx("span", {
               className: cssBuilderInstance.textBodyMediumStrong.$,
               children: i
             })]
-          }), jsx(B, {
+          }), jsx(FlexBox, {
             gap: 2,
-            children: jsx(_$$r, {
+            children: jsx(ActionButton, {
               onAction: () => {
                 let e = selectedNoodleIds[0];
                 R(Zh({

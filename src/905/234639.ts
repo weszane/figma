@@ -4,7 +4,7 @@ import { debugState } from "../905/407919";
 import { processHubFilesThunk } from "../905/359847";
 import { assertFieldReady } from "../905/497882";
 import { V } from "../905/513628";
-import { Z } from "../905/909123";
+import { resourceDetailQuery } from "../905/909123";
 import { updateProfileThunk } from "../figma_app/530167";
 import { Ri } from "../figma_app/49598";
 import { addAuthedCommunityProfileToHub, putCommunityProfile } from "../905/926523";
@@ -193,7 +193,7 @@ export async function $$w4(e) {
 }
 export function $$C8(e) {
   var t;
-  t = Z({
+  t = resourceDetailQuery({
     apiResourceType: "file",
     id: e.id
   });

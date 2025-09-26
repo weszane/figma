@@ -21,7 +21,7 @@ import { FEditorType } from "../figma_app/53721";
 import { hasLocalFileId, ManifestEditorType } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
 import { PluginImage } from "../905/480825";
-import { _r } from "../905/291714";
+import { useIsPopoverClosed } from "../905/291714";
 import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O2 } from "../905/969533";
 import { wv } from "../figma_app/439493";
@@ -103,7 +103,7 @@ function S(e) {
     recordingKey,
     plugin
   } = e;
-  let p = _r();
+  let p = useIsPopoverClosed();
   let u = hasMultipleOptions ? getI18nString("whiteboard.inline_menu.open_relaunch_menu.aria_label", {
     pluginName: plugin.name
   }) : tooltipName ?? plugin.name;

@@ -1,51 +1,72 @@
-import { jsx } from "react/jsx-runtime";
-import { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { jU } from "../figma_app/544879";
-import { x } from "../905/796251";
-import { t$ } from "../figma_app/863319";
-import { j } from "../905/834956";
-export function $$c0({
-  setFavorite: e,
-  sections: t,
-  customSectionOrdering: i,
-  resourceId: c,
-  resourceType: u,
-  favoriteId: p,
-  currentSectionId: m,
-  userHasMaxFavorites: h,
-  orgId: g
-}) {
-  let f = useDispatch();
-  let _ = useSelector(e => e.currentTeamId);
-  let A = useMemo(() => t$(t, i), [t, i]);
-  let y = x({
-    currentOrgId: g,
-    currentTeamId: _,
-    updateFavorite: (t, i) => e(t, p, i),
-    resourceId: c,
-    resourceType: u,
-    isFavorited: !!p,
-    currentSectionId: m,
-    sections: A,
-    userHasMaxFavorites: h
-  });
-  let b = function () {
-    let e = useSelector(e => e.dropdownShown);
-    return e && e?.type === jU ? e : null;
-  }();
-  return null == b ? null : jsx(j, {
-    autofocusPrevOnDismount: !0,
-    items: y,
-    parentRect: b.data.targetRect,
-    showPoint: !1,
-    lean: "right",
-    recordingKey: "organize-favorited-dropdown",
-    dispatch: f,
-    onSelectItem: (e, t) => {
-      e.callback?.("", {}, f, t);
-    },
-    shouldUsePortal: !0
-  });
+import { useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { jsx } from 'react/jsx-runtime'
+import { generateFavoriteResourceMenuItems } from '../905/796251'
+import { j } from '../905/834956'
+import { jU } from '../figma_app/544879'
+import { t$ } from '../figma_app/863319'
+
+interface FavoriteResourceDropdownProps {
+  setFavorite: (sectionId: string, favoriteId: string, orgId: string) => void
+  sections: any[]
+  customSectionOrdering: string[]
+  resourceId: string
+  resourceType: string
+  favoriteId: string | null
+  currentSectionId: string | null
+  userHasMaxFavorites: boolean
+  orgId: string
 }
-export const t = $$c0;
+
+export function FavoriteResourceDropdown({
+  setFavorite,
+  sections,
+  customSectionOrdering,
+  resourceId,
+  resourceType,
+  favoriteId,
+  currentSectionId,
+  userHasMaxFavorites,
+  orgId,
+}: FavoriteResourceDropdownProps) {
+  const dispatch = useDispatch()
+  const currentTeamId = useSelector((state: any) => state.currentTeamId)
+  const orderedSections = useMemo(() => t$(sections, customSectionOrdering), [sections, customSectionOrdering])
+
+  const menuItems = generateFavoriteResourceMenuItems({
+    currentOrgId: orgId,
+    currentTeamId,
+    updateFavorite: (sectionId: any, targetOrgId: string) => setFavorite(sectionId, favoriteId!, targetOrgId),
+    resourceId,
+    resourceType,
+    isFavorited: !!favoriteId,
+    currentSectionId,
+    sections: orderedSections,
+    userHasMaxFavorites,
+  })
+
+  const dropdownState = useSelector((state: any) => {
+    const dropdown = state.dropdownShown
+    return dropdown && dropdown?.type === jU ? dropdown : null
+  })
+
+  if (!dropdownState) {
+    return null
+  }
+
+  return jsx(j, {
+    autofocusPrevOnDismount: true,
+    items: menuItems,
+    parentRect: dropdownState.data.targetRect,
+    showPoint: false,
+    lean: 'right',
+    recordingKey: 'organize-favorited-dropdown',
+    dispatch,
+    onSelectItem: (item: any, event: any) => {
+      item.callback?.('', {}, dispatch, event)
+    },
+    shouldUsePortal: true,
+  })
+}
+
+export const t = FavoriteResourceDropdown

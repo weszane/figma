@@ -28,7 +28,7 @@ import { A7 } from "../1528/961203";
 import { gU, po, cm } from "../9410/486658";
 import { v as _$$v } from "../6388/904362";
 import { gr } from "../6388/685012";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { B as _$$B } from "../905/295520";
 import { O as _$$O } from "../905/164014";
 import { useSyncedRef } from "../905/633914";
@@ -199,7 +199,7 @@ function K(e) {
             block: "nearest",
             inline: "nearest",
             behavior: s ? "smooth" : "instant"
-          });else {
+          }); else {
             let t = n.getBoundingClientRect();
             let l = e.current.getBoundingClientRect();
             (t.top < l.top || t.bottom > l.bottom) && requestAnimationFrame(() => {
@@ -227,7 +227,7 @@ function K(e) {
     };
   }(Z);
   b = function (e) {
-    let t = BK(e);
+    let t = useDropdown(e);
     return useCallback(e => {
       let {
         clientX,
@@ -300,7 +300,7 @@ function K(e) {
       "data-testid": smallSquares ? "mini-carousel-scroll-container" : "carousel-scroll-container",
       children: jsx(_$$_.Group, {
         axis: "y",
-        className: cssBuilderInstance.flex.flexColumn.justifyStart.borderBox.wFull.absolute.top0.left0.$$if(smallSquares, cssBuilderInstance.itemsCenter.gap12.colorBgSecondary.p12).$$if(!smallSquares, cssBuilderInstance.itemsEnd).$,
+        className: cssBuilderInstance.flex.flexColumn.justifyStart.borderBox.wFull.absolute.top0.left0.if(smallSquares, cssBuilderInstance.itemsCenter.gap12.colorBgSecondary.p12).if(!smallSquares, cssBuilderInstance.itemsEnd).$,
         "data-testid": testId,
         layoutScroll: !0,
         onContextMenu: handleContextMenu,
@@ -384,7 +384,7 @@ function $$G() {
   let l = ie();
   let r = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
   let a = l5();
-  let d = AppStateTsApi?.singleSlideView().focusNodeInFocusedNodeView ?? (() => {});
+  let d = AppStateTsApi?.singleSlideView().focusNodeInFocusedNodeView ?? (() => { });
   let c = getObservableValue(AppStateTsApi?.singleSlideView().isCarouselFocused, !0);
   let u = {
     shouldIndentChildren: !0,

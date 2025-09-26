@@ -45,7 +45,7 @@ import { $L } from "../figma_app/737746";
 import { Ev } from "../figma_app/297822";
 import { AssetTabType, ExtensionFeatureKey } from "../905/946805";
 import { dd, Rt, Lk, Q8 } from "../figma_app/604494";
-import { b as _$$b2 } from "../905/222272";
+import { LayoutContainer } from "../905/222272";
 import { n as _$$n } from "../905/895449";
 import { q as _$$q2 } from "../905/516087";
 import { vj } from "../figma_app/883990";
@@ -270,7 +270,7 @@ export function $$ef1({
   let eV = e_ && ev.length > 0 && s;
   return jsx(_$$q2, {
     children: jsxs("div", {
-      className: g()(cssBuilderInstance.flex.flexColumn.gap6.$$if(eO, cssBuilderInstance.hFull).$, "assets_tab--bodyFontMedium--PGKXZ text--fontPos11--2LvXf text--_fontBase--QdLsd"),
+      className: g()(cssBuilderInstance.flex.flexColumn.gap6.if(eO, cssBuilderInstance.hFull).$, "assets_tab--bodyFontMedium--PGKXZ text--fontPos11--2LvXf text--_fontBase--QdLsd"),
       "data-testid": "assets-tab",
       children: [jsx(_$$O, {
         onLoadStateChange: ew,
@@ -606,7 +606,7 @@ export function $$eE0({
           placeholder: M
         }), (d || c || eq) && jsx("div", {
           className: cssBuilderInstance.px8.pb8.$,
-          children: jsxs(_$$b2, {
+          children: jsxs(LayoutContainer, {
             primary: !1,
             gap: 8,
             align: "center",

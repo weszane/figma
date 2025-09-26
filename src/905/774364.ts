@@ -1,6 +1,6 @@
 import { WB } from "../905/761735";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 export let $$s0 = new class {
   constructor() {
     this.TeamsSchemaValidator = createNoOpValidator();
@@ -12,7 +12,7 @@ export let $$s0 = new class {
         onfulfilled,
         onrejected
       } = e;
-      return XHR.put(`/api/workspace/${workspaceId}/update_image`, {
+      return sendWithRetry.put(`/api/workspace/${workspaceId}/update_image`, {
         img_url,
         img_url_500_500
       }).then(onfulfilled, onrejected);
@@ -23,7 +23,7 @@ export let $$s0 = new class {
       onfulfilled: i,
       onrejected: r
     }) => {
-      let s = XHR.put(`/api/workspace/${e}`, {
+      let s = sendWithRetry.put(`/api/workspace/${e}`, {
         colors: t
       }).then(i, r);
       return WB()?.optimisticallyUpdate({
@@ -40,7 +40,7 @@ export let $$s0 = new class {
       workspaceId: e,
       description: t
     }) => {
-      await XHR.put(`/api/workspace/${e}`, {
+      await sendWithRetry.put(`/api/workspace/${e}`, {
         description: t
       });
     };
@@ -49,7 +49,7 @@ export let $$s0 = new class {
         workspaceId,
         removedTeamIds
       } = e;
-      await XHR.del(`/api/workspace/${workspaceId}/default_teams`, {
+      await sendWithRetry.del(`/api/workspace/${workspaceId}/default_teams`, {
         team_ids: removedTeamIds
       });
     };
@@ -58,7 +58,7 @@ export let $$s0 = new class {
         workspaceId,
         addedTeamIds
       } = e;
-      await XHR.post(`/api/workspace/${workspaceId}/default_teams`, {
+      await sendWithRetry.post(`/api/workspace/${workspaceId}/default_teams`, {
         team_ids: addedTeamIds
       });
     };
@@ -68,7 +68,7 @@ export let $$s0 = new class {
         publicLinkControlsSetting,
         publicLinkControlsMaxExpiration
       } = e;
-      return XHR.put(`/api/workspace/${workspaceId}/settings`, {
+      return sendWithRetry.put(`/api/workspace/${workspaceId}/settings`, {
         public_link_controls_setting: publicLinkControlsSetting,
         public_link_controls_max_expiration: publicLinkControlsMaxExpiration
       });
@@ -83,7 +83,7 @@ export let $$s0 = new class {
         aiControlsSetting
       });
     };
-    this.getMemberCSVExport = e => XHR.post(`/api/workspace/${e.workspaceId}/export_members`);
+    this.getMemberCSVExport = e => sendWithRetry.post(`/api/workspace/${e.workspaceId}/export_members`);
   }
   getTeams(e) {
     return this.TeamsSchemaValidator.validate(async ({

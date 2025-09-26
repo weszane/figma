@@ -3,7 +3,7 @@ import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -51,7 +51,7 @@ let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
   A.profile_id = e.getState().authedActiveCommunityProfile?.id;
   r === ResourceTypeNoComment.WIDGET && (A.current_org_id = void 0);
   let x = `/api/${getHubTypeString(r)}/${t}/install`;
-  let N = XHR.post(x, A);
+  let N = sendWithRetry.post(x, A);
   if (v.user && I?.resource) {
     let e = `optimistic-plugin-install-${generateUUIDv4()}`;
     let t = transformPublishedPluginToInstalled(I.resource, {
@@ -137,7 +137,7 @@ let $$A3 = createOptimistAction("UNSAVE_EXTENSION", (e, {
   E.profile_id = e.getState().authedActiveCommunityProfile?.id;
   r === ResourceTypeNoComment.WIDGET && (E.current_org_id = void 0);
   let y = `/api/${getHubTypeString(r)}/${t}/install`;
-  let b = XHR.del(y, E);
+  let b = sendWithRetry.del(y, E);
   p?.pluginInstallId && WB().optimisticallyDelete({
     PluginInstall: {
       [p.pluginInstallId]: null

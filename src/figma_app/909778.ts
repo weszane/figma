@@ -5,7 +5,7 @@ import { K2, Pe, Dr, SX, gB, to as _$$to, j4 } from "../figma_app/310688";
 import { WB } from "../905/761735";
 import { XJ, f2, ad, Nc, zb, h7 } from "../figma_app/411744";
 import { APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -26,7 +26,7 @@ let $$x22 = createOptimistThunk((e, t) => {
     name,
     orderedFavoriteIds
   } = t;
-  let i = XHR.put(`/api/user_sidebar_sections/${t.sectionId}`, {
+  let i = sendWithRetry.put(`/api/user_sidebar_sections/${t.sectionId}`, {
     ordered_favorited_resource_ids: orderedFavoriteIds,
     name
   }).catch(t => {
@@ -49,7 +49,7 @@ let $$x22 = createOptimistThunk((e, t) => {
   t.name && K2(t.sectionId, t.name);
 });
 let $$N11 = createOptimistThunk((e, t) => {
-  let r = XHR.del(`/api/user_sidebar_sections/${t.sidebarSectionId}`).catch(t => {
+  let r = sendWithRetry.del(`/api/user_sidebar_sections/${t.sidebarSectionId}`).catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: `${t.msg}`
     }));
@@ -67,7 +67,7 @@ let $$C3 = createOptimistThunk((e, t) => {
     team_id: t.teamId
   };
   Dr(t.favoriteIds, t.teamId);
-  XHR.put("/api/planless_favorited_resource_plan_id", r).catch(t => {
+  sendWithRetry.put("/api/planless_favorited_resource_plan_id", r).catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: `${t.data.message}`
     }));
@@ -78,7 +78,7 @@ let $$w7 = createOptimistThunk((e, t) => {
     section_id: t.sectionId,
     ordered_favorite_ids: t.orderedFavoriteIds
   };
-  let n = XHR.put(`/api/favorited_resources/${t.favoriteId}`, r).catch(t => {
+  let n = sendWithRetry.put(`/api/favorited_resources/${t.favoriteId}`, r).catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: `${t.data.message}`
     }));
@@ -130,7 +130,7 @@ let $$O24 = createOptimistThunk((e, t) => {
     insert_at_index: t.insertAtIndex,
     ordered_sections: t.currentOrderedSections
   };
-  let i = XHR.post("/api/user_sidebar_sections", n).then(r => {
+  let i = sendWithRetry.post("/api/user_sidebar_sections", n).then(r => {
     if (!r?.data.meta) {
       e.dispatch($$v21({
         movingResource: void 0
@@ -178,7 +178,7 @@ let $$R9 = createOptimistThunk((e, t) => {
     insert_at_index: t.insertAtIndex,
     ordered_sections: t.currentOrderedSections
   };
-  let i = XHR.post("/api/user_sidebar_sections", n).then(e => {
+  let i = sendWithRetry.post("/api/user_sidebar_sections", n).then(e => {
     SX(e?.data.meta, t.name);
   }).catch(t => {
     e.dispatch(VisualBellActions.enqueue({
@@ -250,7 +250,7 @@ let $$L5 = createOptimistAction("BULK_RESOURCE_SET_FAVORITE", (e, t, {
   prototypes.forEach(e => {
     gB(e.file_key, selectedView, entrypoint, FEntityType.PROTOTYPE, "design", !0);
   });
-  let O = XHR.put("/api/bulk_favorite_resources", w).then(() => {
+  let O = sendWithRetry.put("/api/bulk_favorite_resources", w).then(() => {
     e.dispatch(createOptimistCommitAction(r));
   }).catch(t => {
     e.dispatch(createOptimistRevertAction(r));
@@ -290,7 +290,7 @@ let $$L5 = createOptimistAction("BULK_RESOURCE_SET_FAVORITE", (e, t, {
         orderedFavoritedResourceIds: k
       }
     }
-  }, O);else {
+  }, O); else {
     let e = {
       id: t.fileBrowserPrefs?.id || "optimistic-id",
       orderedFavoritedResourceIds: k,
@@ -581,7 +581,7 @@ let $$W2 = createOptimistThunk((e, t) => {
           userId: u
         }
       }
-    }, c);else if (e.getState().currentTeamId && e.getState().currentTeamId === t.file.teamId || e.getState().currentUserOrgId && t.file.parentOrgId) {
+    }, c); else if (e.getState().currentTeamId && e.getState().currentTeamId === t.file.teamId || e.getState().currentUserOrgId && t.file.parentOrgId) {
       let r = h7(fileEntityDataMapper.toSinatra(file));
       WB().optimisticallyCreate({
         FavoritedFile: {
@@ -601,7 +601,7 @@ let $$W2 = createOptimistThunk((e, t) => {
     }
   }
 });
-let K = (e, t, r, n, i) => XHR.put("/api/favorited_resources", {
+let K = (e, t, r, n, i) => sendWithRetry.put("/api/favorited_resources", {
   resource_type: t,
   is_favorited: r,
   file_key: n
@@ -621,7 +621,7 @@ let K = (e, t, r, n, i) => XHR.put("/api/favorited_resources", {
     e(FlashActions.error("An error occurred while favoriting this item"));
   }
 });
-let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
+let Y = (e, t, r, n, a, s, o, l) => sendWithRetry.put("/api/favorited_resources", {
   resource_type: t,
   is_favorited: r,
   resource_id_or_key: n,
@@ -648,7 +648,7 @@ let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
     }
   }
 });
-let $ = e => (j4(e.favorited_resource_ids), XHR.del("/api/favorited_resources", APIParameterUtils.toAPIParameters(e)));
+let $ = e => (j4(e.favorited_resource_ids), sendWithRetry.del("/api/favorited_resources", APIParameterUtils.toAPIParameters(e)));
 let $$X23 = createOptimistThunk((e, t) => {
   $({
     favorited_resource_ids: t.favoriteIds

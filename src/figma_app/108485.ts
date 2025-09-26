@@ -17,9 +17,9 @@ import { isOnboardingComplete } from "../figma_app/242339";
 import { N as _$$N2 } from "../figma_app/268271";
 import { qo } from "../905/696396";
 import { U } from "../905/455766";
-import { h as _$$h2 } from "../905/284399";
+import { OnboardingRenderFrame } from "../905/284399";
 import { yP, Iy } from "../figma_app/551322";
-import { q3 } from "../figma_app/450829";
+import { OverlayType } from "../figma_app/450829";
 import { nWd } from "../figma_app/6204";
 let $$x0 = atom(!1);
 let N = () => new Date(Date.now() - 1e4);
@@ -66,18 +66,18 @@ export function $$O1() {
   return jsxs(U, {
     currentStep,
     isShowing: j.isShowing,
-    children: [jsx(_$$h2, {
+    children: [jsx(OnboardingRenderFrame, {
       isShowing: j.isShowing,
-      modalType: q3.SELF_CONTAINED,
+      modalType: OverlayType.SELF_CONTAINED,
       trackingContextName: `${C} Main nudge`,
       element: yP,
       onClickPrimaryCta: next,
       onManualDismiss: j.complete,
       testId: "move_drafts_main_nudge",
       onClose: j.complete
-    }), jsx(_$$h2, {
+    }), jsx(OnboardingRenderFrame, {
       isShowing: j.isShowing,
-      modalType: q3.SELF_CONTAINED,
+      modalType: OverlayType.SELF_CONTAINED,
       trackingContextName: `${C} Dropdown highlight`,
       element: Iy,
       onClickPrimaryCta: next,

@@ -26,7 +26,7 @@ import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Gt } from "../figma_app/248118";
 import { useCanPerformAction } from "../figma_app/844435";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { HubTypeEnum } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
 import { be } from "../figma_app/474636";
@@ -190,7 +190,7 @@ function V({
   let x = useCanAccessFullDevMode();
   let b = isDevHandoffEditorType() && !x;
   let f = useDispatch();
-  let w = Um();
+  let w = useDropdownState();
   let C = _$$p(e.plugin_id, o);
   let I = C.length > 0;
   let R = yG(e.plugin_id, "pinned") && I;
@@ -342,7 +342,7 @@ function H({
   plugin: e,
   unpinPlugin: t
 }) {
-  let a = Um();
+  let a = useDropdownState();
   return jsx(Cf, {
     targetRect: a?.data.targetRect,
     lean: "left",

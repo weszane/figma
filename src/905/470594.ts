@@ -14,7 +14,7 @@ import { VisualBellIcon } from '../905/576487';
 import { getFeatureFlags } from '../905/601108';
 import { UploadError, uploadToPresignedPost } from '../905/623179';
 import { SvgComponent } from '../905/714743';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { styleBuilderInstance } from '../905/941192';
 import { getFontIndexUrl } from '../905/946258';
 import { A as SVG2 } from '../6828/289931';
@@ -69,7 +69,7 @@ class NetworkCompatibilityService {
    * @param url Font list URL
    */
   checkFontListNetworkCompatibility(url: string) {
-    return XHR.crossOriginHead(url, null, {
+    return sendWithRetry.crossOriginHead(url, null, {
       headers: {
         'Content-Type': 'application/octet-stream'
       },

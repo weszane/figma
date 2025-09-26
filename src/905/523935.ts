@@ -25,7 +25,7 @@ import { isSubscribedLibrary } from "../figma_app/646357";
 import { u2 } from "../figma_app/807786";
 import { hasAssetId, PrimaryWorkflowEnum, hasComponentKey } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
-import { r as _$$r } from "../905/632622";
+import { updateSelectedNodeGuid } from "../905/632622";
 import { getUUID } from "../figma_app/517115";
 import { AUTO_SUGGEST_EVENT_PREFIX, trackComponentInserted } from "../figma_app/984498";
 import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
@@ -211,7 +211,7 @@ export function $$$$j0(e) {
       return i && t[i]?.url || (e.thumbnail_url && getInitialOptions().user_data?.id ? appendSearchParam(e.thumbnail_url, "fuid", getInitialOptions().user_data.id) : e.thumbnail_url || "");
     }(e.resource, j.local.thumbnails),
     onPointerDownCallback: () => {
-      _$$r();
+      updateSelectedNodeGuid();
       G ? "LIBRARY" === V.subscriptionStatus && teamLibraryCache.getCanvas({
         canvas_url: V.canvasUrl
       }) : z || (teamLibraryCache.getCanvas(V), !isSubscribedLibrary(j.defaultPublished, V.library_key) && (V.type === PrimaryWorkflowEnum.COMPONENT && V.component_key && i(a9({

@@ -12,7 +12,7 @@ import { ViewMode, FileType } from "../figma_app/756995";
 import { o as _$$o } from "../905/668706";
 import { ButtonPrimitive } from "../905/632989";
 import { useSubscription } from "../figma_app/288654";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H as _$$H } from "../905/799228";
@@ -131,7 +131,7 @@ class U extends Component {
     } else throwTypeError(this.props.viewMode);
     e += this.props.isLoggedIn ? ` ${Vz}` : "";
     let t = this.props.didSucceed && 0 === this.props.searchResults.length;
-    return jsx(_$$x, {
+    return jsx(LoadingRenderer, {
       isLoading: this.props.isLoading,
       className: g4,
       children: () => this.props.didFail ? jsx($$G6, {

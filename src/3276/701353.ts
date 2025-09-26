@@ -1,5 +1,5 @@
-import { b } from "../905/275748";
-export let $$o0 = new b({
+import { LazyComponentFactory } from "../905/275748";
+export let $$o0 = new LazyComponentFactory({
   name: "FigmaScope",
   dependencies: [],
   exports: [],

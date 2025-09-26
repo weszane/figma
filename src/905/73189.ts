@@ -1,21 +1,23 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { cssBuilderInstance } from "../cssbuilder/589278";
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { cssBuilderInstance } from '../cssbuilder/589278'
+
 export function $$a1(e) {
-  let t = e.split(". ");
-  if (t.length < 3) return e;
-  let i = jsx("span", {
+  let t = e.split('. ')
+  if (t.length < 3)
+    return e
+  let i = jsx('span', {
     className: cssBuilderInstance.underline.$,
-    children: t[1]
-  });
+    children: t[1],
+  })
   return jsxs(Fragment, {
-    children: [t[0] + ". ", i, ". " + t.slice(2).join(". ")]
-  });
+    children: [`${t[0]}. `, i, `. ${t.slice(2).join('. ')}`],
+  })
 }
 export function $$s0() {
-  return jsxs("div", {
+  return jsxs('div', {
     style: {
-      whiteSpace: "pre-line",
-      fontWeight: 500
+      whiteSpace: 'pre-line',
+      fontWeight: 500,
     },
     children: [`APPLE INC.
         LICENSE AGREEMENT FOR APPLE DESIGN RESOURCES
@@ -25,26 +27,26 @@ export function $$s0() {
 
         IMPORTANT NOTES:
 
-        `, jsxs("ul", {
-      children: [jsx("li", {
+        `, jsxs('ul', {
+      children: [jsx('li', {
         className: cssBuilderInstance.ml12.$,
         style: {
-          listStyleType: "disc"
+          listStyleType: 'disc',
         },
         children: `THE APPLE DESIGN RESOURCES LICENSED HEREUNDER ARE TO BE USED SOLELY FOR CREATING MOCK-UPS OF USER INTERFACES DESIGNED FOR USE IN SOFTWARE PRODUCTS THAT RUN ONLY ON APPLE\u2019S macOS, iOS, watchOS, tvOS, AND/OR visionOS OPERATING SYSTEM SOFTWARE.
 
-          `
-      }, "header-bullet-one"), jsx("li", {
+          `,
+      }, 'header-bullet-one'), jsx('li', {
         className: cssBuilderInstance.ml12.$,
         style: {
-          listStyleType: "disc"
+          listStyleType: 'disc',
         },
         children: `If you are entering into this License on behalf of your company or organization, \u201Cyou\u201D or
           \u201Cyour\u201D refers to such entity as well, and you represent that you have legal authority to
           bind your company or organization to the terms of this License.
 
-          `
-      }, "header-bullet-two")]
+          `,
+      }, 'header-bullet-two')],
     }), `1. General.
         A. The Apple software, interfaces, content, templates, data, and other materials accompanying this License, whether on disk, print or electronic documentation, in read only memory, or any other media or in any other form (collectively the \u201CApple Design Resources\u201D) are licensed, not sold, to you by Apple Inc. (\u201CApple\u201D) for use only under the terms of this License. Apple and/or Apple\u2019s licensors retain ownership of the Apple Design Resources and reserve all rights not expressly granted to you. The terms of this License will govern any software upgrades provided to you by Apple that replace and/or supplement the original Apple Design Resources, unless such upgrade is accompanied by a separate license in which case the terms of that license will govern.
 
@@ -86,15 +88,15 @@ Except as otherwise expressly permitted by the terms of this License or as other
 
         7. Export Control. You may not use or otherwise export or re-export the Apple Design Resources except as authorized by United States law and the laws of the jurisdiction(s) in which the Apple Design Resources was obtained. In particular, but without limitation, the Apple Design Resources may not be exported or re-exported (a) into any U.S. embargoed countries or (b) to anyone on the U.S. Treasury Department\u2019s list of Specially Designated Nationals or the U.S. Department of Commerce Denied Person\u2019s List or Entity List or any other restricted party lists. By using the Apple Design Resources, you represent and warrant that you are not located in any such country or on any such list. You also agree that you will not use the Apple Design Resources for any purposes prohibited by United States law, including, without limitation, the development, design, manufacture or production of missiles, nuclear, chemical or biological weapons.
 
-        8. Government End Users. The Apple Design Resources and related documentation are \u201CCommercial Items\u201D, as that term is defined at 48 C.F.R. \xa72.101, consisting of \u201CCommercial Computer Software\u201D and \u201CCommercial Computer Software Documentation\u201D, as such terms are used in 48 C.F.R. \xa712.212 or 48 C.F.R. \xa7227.7202, as applicable. Consistent with 48 C.F.R. \xa712.212 or 48 C.F.R. \xa7227.7202-1 through 227.7202-4, as applicable, the Commercial Computer Software and Commercial Computer Software Documentation are being licensed to U.S. Government end users (a) only as Commercial Items and (b) with only those rights as are granted to all other end users pursuant to the terms and conditions herein. Unpublished-rights reserved under the copyright laws of the United States.
+        8. Government End Users. The Apple Design Resources and related documentation are \u201CCommercial Items\u201D, as that term is defined at 48 C.F.R. \xA72.101, consisting of \u201CCommercial Computer Software\u201D and \u201CCommercial Computer Software Documentation\u201D, as such terms are used in 48 C.F.R. \xA712.212 or 48 C.F.R. \xA7227.7202, as applicable. Consistent with 48 C.F.R. \xA712.212 or 48 C.F.R. \xA7227.7202-1 through 227.7202-4, as applicable, the Commercial Computer Software and Commercial Computer Software Documentation are being licensed to U.S. Government end users (a) only as Commercial Items and (b) with only those rights as are granted to all other end users pursuant to the terms and conditions herein. Unpublished-rights reserved under the copyright laws of the United States.
 
         9. Controlling Law and Severability. This License will be governed by and construed in accordance with the laws of the State of California, excluding its conflict of law principles. This License shall not be governed by the United Nations Convention on Contracts for the International Sale of Goods, the application of which is expressly excluded. If for any reason a court of competent jurisdiction finds any provision, or portion thereof, to be unenforceable, the remainder of this License shall continue in full force and effect.
 
-        10. Complete Agreement; Governing Language. This License constitutes the entire agreement between you and Apple relating to the use of the Apple Design Resources licensed hereunder and supersedes all prior or contemporaneous understandings regarding such subject matter. No amendment to or modification of this License will be binding unless in writing and signed by Apple. The parties hereto confirm that they have requested that this License and all related documents be drafted in English. Les parties ont exig\xe9 que le pr\xe9sent contrat et tous les documents connexes soient r\xe9dig\xe9s en anglais.
+        10. Complete Agreement; Governing Language. This License constitutes the entire agreement between you and Apple relating to the use of the Apple Design Resources licensed hereunder and supersedes all prior or contemporaneous understandings regarding such subject matter. No amendment to or modification of this License will be binding unless in writing and signed by Apple. The parties hereto confirm that they have requested that this License and all related documents be drafted in English. Les parties ont exig\xE9 que le pr\xE9sent contrat et tous les documents connexes soient r\xE9dig\xE9s en anglais.
 
         LYL142
-        06/21/2023`]
-  });
+        06/21/2023`],
+  })
 }
-export const N = $$s0;
-export const c = $$a1;
+export const N = $$s0
+export const c = $$a1

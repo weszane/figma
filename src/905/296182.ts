@@ -2,9 +2,9 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { generateRecordingKey } from "../figma_app/878298";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { SX, Q0 } from "../905/487011";
-import { NI } from "../905/278499";
-import { r as _$$r } from "../905/189361";
-import { B } from "../905/222272";
+import { AIActionMode } from "../905/278499";
+import { ActionButton } from "../905/189361";
+import { FlexBox } from "../905/222272";
 import { XG } from "../figma_app/360824";
 export function $$u0({
   action: e,
@@ -30,12 +30,12 @@ export function $$u0({
       recordingKey: h,
       minLength: f,
       ...y
-    }), jsxs(B, {
+    }), jsxs(FlexBox, {
       fullWidth: !0,
       justify: "space-between",
       children: [jsx("div", {
         children: m
-      }), jsx(_$$r, {
+      }), jsx(ActionButton, {
         shortcuts: [{
           key: KeyCodes.ENTER,
           modifier: [ModifierKeyCodes.META]
@@ -44,7 +44,7 @@ export function $$u0({
           g && SX({
             ...g,
             ...Q0(e),
-            interaction: NI.GENERATE
+            interaction: AIActionMode.GENERATE
           });
           u();
         },

@@ -1,7 +1,7 @@
 import { InteractionCpp, Fullscreen, Axis } from "../figma_app/763686";
 import { Rectangle } from "../905/249071";
 import { Vector2D } from "../905/512402";
-import { j } from "../905/881708";
+import { NameClass } from "../905/881708";
 import { packNormalizedRgb, blendColors, unpackToNormalizedRgb } from "../figma_app/273493";
 let l = class e {
   getPrimaryColor() {
@@ -92,7 +92,7 @@ let l = class e {
 l.viewportSpaceButtonSize = new Vector2D(24, 24);
 l.viewportSpaceButtonMargin = new Vector2D(4, 4);
 l.selectionActionDefaultViewportSpaceButtonSize = new Vector2D(16, 16);
-export class $$d0 extends j {
+export class $$d0 extends NameClass {
   constructor(e) {
     super(e);
     this._button = new l(this);

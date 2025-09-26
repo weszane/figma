@@ -48,7 +48,7 @@ import { setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955"
 import { EventShield } from "../905/821217";
 import { H_ } from "../905/963340";
 import { O as _$$O } from "../905/969533";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { Vz, v9, ei as _$$ei, G$, PP, Wv, Fn, Z9, S as _$$S, dz, sb, Jo, bB, T as _$$T2, fz, Nf, HR, fp, AX, du, _M, qp, hY, kQ, eO as _$$eO, rB, hs, V3, wH, r9, Xt, rX, Dw, _P, D6, c1, QF, VQ, Gu, of } from "../9410/733790";
 import { mapFilter } from "../figma_app/656233";
 import { v as _$$v } from "../905/213481";
@@ -127,7 +127,7 @@ function ei({
   activeOption: t,
   onClickCallback: n
 }) {
-  let l = BK("CANVAS_SEARCH_PAGE_SCOPE_DROPDOWN");
+  let l = useDropdown("CANVAS_SEARCH_PAGE_SCOPE_DROPDOWN");
   return jsx(H_, {
     recordingKey: `figma_design_search_page_scope.${e}`,
     checked: e === t,

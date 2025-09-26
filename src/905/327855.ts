@@ -11,7 +11,7 @@ import { getPreviousSelectedView } from "../905/612521";
 import { w5 } from "../figma_app/749805";
 import { isLocalDevOnCluster } from "../figma_app/169182";
 import { delay } from "../905/236856";
-import { XHRError, XHR } from "../905/910117";
+import { XHRError, sendWithRetry } from "../905/910117";
 import { serializeQuery } from "../905/634134";
 import { setTagGlobal } from "../905/11";
 import { logError, logInfo, logWarning } from "../905/714362";
@@ -81,7 +81,7 @@ function y(e) {
 }
 class b {
   constructor(e) {
-    this._resolveCancelPromise = () => {};
+    this._resolveCancelPromise = () => { };
     this._cancelPromise = new Promise(e => {
       this._resolveCancelPromise = e;
     });
@@ -95,7 +95,7 @@ class b {
   }
   async startRequest(e) {
     let t = 0;
-    for (;;) {
+    for (; ;) {
       let i = A;
       try {
         return await Promise.race([e(), this._cancelPromise]);
@@ -128,7 +128,7 @@ export function $$eI10(e, t, i) {
   "fullscreen" === t.selectedView.view && (t.selectedView.editorType === FEditorType.Design || t.selectedView.editorType === FEditorType.DevHandoff || t.selectedView.editorType === FEditorType.Illustration) && handleEnterMode(t, t.selectedView.editorType, i ? "stored" : "init");
 }
 export async function $$eE1(e, t, i) {
-  let n = await XHR.post("/api/files/create", t, {
+  let n = await sendWithRetry.post("/api/files/create", t, {
     retryCount: 2
   });
   return ex(e.dispatch, n.data, i, e.getState());
@@ -419,7 +419,7 @@ async function ek(e, t, i, r, p) {
     let a = new b(async () => {
       e++;
       let t = $$eT2(f());
-      return (await XHR.post("/api/files/create", t)).data;
+      return (await sendWithRetry.post("/api/files/create", t)).data;
     });
     i.setOnCanceled(() => a.cancelRequest());
     let s = await a.getResult();
@@ -436,7 +436,7 @@ async function ek(e, t, i, r, p) {
       autosaveState: p?.managerState
     });
     let e = $$eT2(t);
-    m = (await XHR.post("/api/files/create", e, {
+    m = (await sendWithRetry.post("/api/files/create", e, {
       retryCount: eR
     })).data;
   }
@@ -532,7 +532,7 @@ async function ek(e, t, i, r, p) {
       }, {
         forwardToDatadog: !0
       });
-    })().catch(() => {});
+    })().catch(() => { });
   };
   e.fileCreationFailed = function (e, t, i, n, r) {
     let a = t instanceof XHRError ? t.status : void 0;
@@ -573,7 +573,7 @@ export function $$eN8(e, t, i) {
     status: "error",
     error: e
   })).then(async i => {
-    if ("canceled" === i.status) await destroyAutosaveManager();else if ("error" === i.status) {
+    if ("canceled" === i.status) await destroyAutosaveManager(); else if ("error" === i.status) {
       let {
         error
       } = i;

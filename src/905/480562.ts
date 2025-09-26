@@ -24,7 +24,7 @@ import { k as _$$k2 } from "../905/443820";
 import { dayjs } from "../905/920142";
 import { G5, S6 } from "../figma_app/795674";
 import { SvgComponent } from "../905/714743";
-import { Ph } from "../905/160095";
+import { TrackedLink } from "../905/160095";
 import { KindEnum } from "../905/129884";
 import { DSAApiServiceInstance } from "../905/669853";
 import { A as _$$A2 } from "../1617/380980";
@@ -583,7 +583,7 @@ function eA({
   let r = "data:text/plain;charset=utf-8," + encodeURIComponent(i.join("\r\n"));
   return jsx("span", {
     className: cssBuilderInstance.ml12.$,
-    children: jsx(Ph, {
+    children: jsx(TrackedLink, {
       href: r,
       download: getI18nString("design_systems.libraries_modal.dsa_csv_file_name", {
         libraryName: e
@@ -1118,7 +1118,7 @@ function eM({
   let a = "data:text/plain;charset=utf-8," + encodeURIComponent(r.join("\r\n"));
   return jsx("span", {
     className: cssBuilderInstance.ml12.$,
-    children: jsx(Ph, {
+    children: jsx(TrackedLink, {
       href: a,
       download: getI18nString("design_systems.libraries_modal.dsa_csv_team_file_name", {
         libraryName: t,

@@ -1,6 +1,28 @@
-import { useState, useCallback } from "react";
-export function $$r0() {
-  let [e, t] = useState(0);
-  return useCallback(() => t(e => e + 1), []);
+import { useCallback, useState } from 'react'
+
+/**
+ * Custom hook that provides a counter with increment functionality
+ * Original name: $$r0
+ */
+export function useCounter() {
+  const [count, setCount] = useState<number>(0)
+
+  /**
+   * Increments the counter by 1
+   * Original implementation: useCallback(() => t(e => e + 1), [])
+   */
+  const increment = useCallback(() => {
+    setCount(prevCount => prevCount + 1)
+  }, [])
+
+  return {
+    count,
+    increment,
+  }
 }
-export const C = $$r0;
+
+/**
+ * Alias for useCounter hook
+ * Original name: C
+ */
+export const C = useCounter

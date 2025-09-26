@@ -24,7 +24,7 @@ import { logError } from '../905/714362'
 import { createTeamManager } from '../905/844455'
 import { generateUUIDv4 } from '../905/871474'
 import { denormalizeRoot, normalizeRoot, SchemaLibrary } from '../905/893701'
-import { shouldSampleRequest, XHR } from '../905/910117'
+import { shouldSampleRequest, sendWithRetry } from '../905/910117'
 import { getUserPlan } from '../905/912096'
 import { resourceUtils } from '../905/989992'
 import { atomStoreManager, createCustomAtom, createRemovableAtomFamily, setupAtomWithMount, useAtomWithSubscription } from '../figma_app/27355'
@@ -116,7 +116,7 @@ async function fetchQuery(
   let resultPromise: Promise<any>
 
   if ('write' in queryAtom) {
-    const unsubscribe = atomStore.sub(queryAtom, () => {})
+    const unsubscribe = atomStore.sub(queryAtom, () => { })
     const policy = options.policy || 'cacheFirst'
     const isGremlinEnabled = !!gremlinConfig?.enabled
 
@@ -378,7 +378,7 @@ class ObjectStoreManager {
  * Original: class C
  */
 class StoreProxy {
-  constructor(private store: any, private batch: BatchProcessor) {}
+  constructor(private store: any, private batch: BatchProcessor) { }
 
   update(id: any, updater: any): void {
     this.batch.enqueue({
@@ -886,7 +886,7 @@ class LiveStore {
         const context = extrasProvider()
         const queryKey = [++queryKeyCounter]
         const enabled = !queryConfig.enabled || queryConfig.enabled(args)
-        const promiseManager = new RetainedPromiseManager(() => atomStoreManager.sub(queryAtom, () => {}))
+        const promiseManager = new RetainedPromiseManager(() => atomStoreManager.sub(queryAtom, () => { }))
         const fetchFn = async () => {
           if (!getFalseValue()) {
             await waitForVisibility()
@@ -1041,9 +1041,9 @@ class LiveStore {
               return observer.refetch({ refetchPage: (page: any, index: number) => index === 0 }).then((result: any) => {
                 getQueryContext().queryClient.setQueryData(observer.options.queryKey, (data: any) => data
                   ? {
-                      pages: data.pages.slice(0, 1),
-                      pageParams: data.pageParams.slice(0, 1),
-                    }
+                    pages: data.pages.slice(0, 1),
+                    pageParams: data.pageParams.slice(0, 1),
+                  }
                   : data)
                 return result
               })
@@ -1070,7 +1070,7 @@ class LiveStore {
             const pages = get(mountedAtom).data?.pages || []
             const atoms = pages.map((page: any, index: number) => {
               if (!pageAtoms[index]) {
-                pageAtoms[index] = atom((get: any) => get(mountedAtom).data?.pages[index]?.data, () => {})
+                pageAtoms[index] = atom((get: any) => get(mountedAtom).data?.pages[index]?.data, () => { })
               }
               return pageAtoms[index]
             })
@@ -1146,12 +1146,12 @@ class LiveStore {
           return queryConfig.joinPages
             ? queryConfig.joinPages(joinedPages)
             : joinedPages.reduce((acc: any[], page: any) => {
-                if (!Array.isArray(page.data)) {
-                  throw new TypeError('Expected array data in page')
-                }
-                acc.push(...page.data)
-                return acc
-              }, [])
+              if (!Array.isArray(page.data)) {
+                throw new TypeError('Expected array data in page')
+              }
+              acc.push(...page.data)
+              return acc
+            }, [])
         })
         const outputAtom = createCustomAtom(joinedDataAtom, (get: any) => {
           const { output } = queryConfig
@@ -1237,7 +1237,7 @@ class LiveStore {
     const getQueryContext = this.getQueryContext.bind(this)
     return (store: any) => createRemovableAtomFamily((id: any) => {
       if (!id) {
-        return atom(resourceUtils.disabled(), () => {})
+        return atom(resourceUtils.disabled(), () => { })
       }
       const storeAtom = setupAtomWithMount(store.atom(id), () => {
         const context = getQueryContext()
@@ -1662,13 +1662,13 @@ function createLiveStore(atomStoreManager: any, extrasProvider: () => any = () =
 }
 
 /**
- * Provides extras context for the LiveStore, including atom store, XHR, realtime client, etc.
- * Original: () => { return { atomStore: atomStoreManager, xr: XHR, ... } }
+ * Provides extras context for the LiveStore, including atom store, sendWithRetry, realtime client, etc.
+ * Original: () => { return { atomStore: atomStoreManager, xr: sendWithRetry, ... } }
  */
 function extrasProvider() {
   return {
     atomStore: atomStoreManager,
-    xr: XHR,
+    xr: sendWithRetry,
     realtimeClient: realtimeV2,
     livegraphClient: observableState.get(),
     reduxStore: debugState,

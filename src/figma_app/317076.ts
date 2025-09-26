@@ -7,7 +7,7 @@ import { WB } from "../905/761735";
 import { reportError } from "../905/11";
 import { capitalize } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { trackFileEvent } from "../figma_app/314264";
 import { librariesQueryNamespace } from "../905/420347";
 import { liveStoreInstance } from "../905/713695";
@@ -136,7 +136,7 @@ export async function $$v6(e) {
       s(e, n, t);
     }
   }
-  let d = await XHR.post("/api/files/related_links", {
+  let d = await sendWithRetry.post("/api/files/related_links", {
     file_keys: Array.from(t.values())
   });
   let c = [];
@@ -194,7 +194,7 @@ export async function $$x11(e) {
     });
     let n = r?.data?.meta;
     n?.title && (t = decodeURIComponent(n?.title));
-  } catch (e) {} finally {
+  } catch (e) { } finally {
     if (!t) {
       let r = Gw(e);
       t = r ? capitalize(r) : "N/A";
@@ -221,9 +221,9 @@ export async function $$C2({
   source: c
 }) {
   let h = "";
-  if (n) h = n;else {
+  if (n) h = n; else {
     let t = FB(e);
-    if (t?.toLowerCase() === "github.com") h = "Github";else if (t?.toLowerCase() === "jira.com" || t?.toLowerCase() === "atlassian.net") {
+    if (t?.toLowerCase() === "github.com") h = "Github"; else if (t?.toLowerCase() === "jira.com" || t?.toLowerCase() === "atlassian.net") {
       h = "Jira";
       let t = function (e) {
         for (let t of M) {
@@ -240,7 +240,7 @@ export async function $$C2({
     link_name: h,
     link_url: e
   };
-  let g = XHR.post(`/api/files/${r}/related_links`, m);
+  let g = sendWithRetry.post(`/api/files/${r}/related_links`, m);
   i && i();
   WB()?.optimisticallyCreate({
     DeveloperRelatedLink: {
@@ -311,7 +311,7 @@ export function $$O1({
   };
   void 0 !== a && (h.is_user_override = a);
   s && (h.link_preview_json = null);
-  let m = XHR.put(`/api/files/${e}/related_links`, h);
+  let m = sendWithRetry.put(`/api/files/${e}/related_links`, h);
   WB()?.optimisticallyUpdate({
     DeveloperRelatedLink: {
       [r]: {
@@ -362,7 +362,7 @@ export function $$L8({
   pluginId: i,
   source: a
 }) {
-  let s = XHR.del(`/api/files/${e}/related_links`, {
+  let s = sendWithRetry.del(`/api/files/${e}/related_links`, {
     node_id: t,
     link_id: r
   });
@@ -402,7 +402,7 @@ export async function $$D10({
   linkPreviewJson: t
 }) {
   try {
-    let r = XHR.put(`/api/files/${e.fileKey}/related_links/link_preview`, {
+    let r = sendWithRetry.put(`/api/files/${e.fileKey}/related_links/link_preview`, {
       node_id: e.nodeId,
       link_id: e.id,
       link_preview_json: t

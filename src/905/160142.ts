@@ -4,7 +4,7 @@ import { PrototypingTsApi } from "../figma_app/763686";
 import { openWindow } from "../905/508367";
 import { BrowserInfo } from "../figma_app/778880";
 import { reportNullOrUndefined } from "../905/11";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
 import { markPrototypeViewed } from "../905/70982";
@@ -65,7 +65,7 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
   let F = "";
   let M = () => `proto-${fileKey}-${T}-${b}`;
   {
-    R && !isSlides && XHR.post(`/api/files/${t.fileKey}/prototype`, {
+    R && !isSlides && sendWithRetry.post(`/api/files/${t.fileKey}/prototype`, {
       page_id: T,
       name: R.name
     }).then(({
@@ -75,7 +75,7 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
         fileKey: t.meta.file_key,
         pageId: t.meta.page_id
       }));
-    }).catch(e => {});
+    }).catch(e => { });
     let n = await i.fetchFile(fileKey);
     if (_$$m) {
       e.dispatch(selectViewAction({

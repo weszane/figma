@@ -7,11 +7,11 @@ import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { canvasGridAtom } from "../905/618447";
 import { Mu } from "../905/435079";
 import { Ds, iZ } from "../figma_app/3776";
-import { j } from "../905/881708";
+import { NameClass } from "../905/881708";
 import { JT } from "../figma_app/632248";
 import { pP, qy } from "../figma_app/862289";
 import { yh, X1, oq, qu, $r, KV, PF, v2, QQ, zw, M as _$$M } from "../905/877407";
-export class $$f0 extends j {
+export class $$f0 extends NameClass {
   constructor(e) {
     super(e);
     this._state = {

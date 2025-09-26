@@ -6,7 +6,7 @@ import { x } from "../905/587214";
 import { w } from "../905/955293";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { hO } from "../905/616572";
 import { Z_ } from "../905/831801";
 import { oU, mw } from "../905/530789";
@@ -47,7 +47,7 @@ function E({
     showing,
     toggle,
     hide
-  } = BK(oU);
+  } = useDropdown(oU);
   return jsxs(Fragment, {
     children: [e && jsx(Button, {
       iconPrefix: jsx(x, {}),

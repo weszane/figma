@@ -3,23 +3,23 @@ import { createContext, memo, useCallback, useContext, useEffect, useMemo } from
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { u as _$$u } from '../905/65923';
 import { bm, mb, Zf } from '../905/107436';
-import { y as _$$y } from '../905/129046';
+import { ImageOverlayComponent } from '../905/129046';
 import { KindEnum } from '../905/129884';
-import { Ph } from '../905/160095';
+import { TrackedLink } from '../905/160095';
 import { bL } from '../905/163832';
 import { useSingleEffect } from '../905/791079';
 import { J as _$$J } from '../905/225412';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { X } from '../905/319582';
 import { UpgradeAction } from '../905/370443';
-import { rq } from '../905/425180';
+import { OnboardingModal } from '../905/425180';
 import { k as _$$k } from '../905/443820';
 import { l as _$$l } from '../905/479687';
 import { ButtonWide } from '../905/521428';
 import { e } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { formattedColorManipulator, defaultColorManipulator } from '../905/713722';
-import { F_ } from '../905/748636';
+import { ArrowPosition } from '../905/748636';
 import { useCurrentUserOrgId } from '../905/845253';
 import { A as _$$A } from '../905/891805';
 import { noop } from 'lodash-es';
@@ -624,11 +624,11 @@ function et() {
   useEffect(() => {
     settings.contrastInfoShown && complete();
   }, [complete, settings.contrastInfoShown]);
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: renderI18nText('fullscreen.properties_panel.color_contrast.onboarding.description'),
     isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl('5a75f85e8b6179df3a9d0500370b3bc92976d209'),
       alt: 'An image with a preview of the new color contrast feature',
       aspectRatio: 1.84
@@ -636,7 +636,7 @@ function et() {
     onClose: complete,
     overrideFooter: jsx('div', {
       className: 'color_contrast_info--learnMoreFooter--H-w6u',
-      children: jsx(Ph, {
+      children: jsx(TrackedLink, {
         href: 'https://help.figma.com/hc/articles/360041003774-Apply-paints-with-the-color-picker',
         trackingProperties: {
           trackingDescriptor: UpgradeAction.LEARN_MORE

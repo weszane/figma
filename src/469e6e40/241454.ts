@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { P as _$$P } from "../905/697522";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { SvgComponent } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { SizeOption } from "../905/171275";
@@ -653,7 +653,7 @@ let $$Y0 = registerModal(function (e) {
         }),
         confirmText: y ? getI18nString("org_join_request.deprovisioned_confirmation_button_text") : getI18nString("org_join_request.add_to_org_confirmation_button_text"),
         onConfirm: y ? k : () => {
-          let e = XHR.put(`/api/org_join_request/${t}/approve`, {
+          let e = sendWithRetry.put(`/api/org_join_request/${t}/approve`, {
             source: "email"
           });
           setupLoadingStateHandler(e, {

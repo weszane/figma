@@ -17,7 +17,7 @@ import { Button } from "../905/521428";
 import { KeyCodes } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
 import { PerfTimer } from "../905/609396";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { selectViewAction } from "../905/929976";
@@ -53,7 +53,7 @@ function N(e) {
     o(!0);
     let d = new PerfTimer("branch_created", {});
     d.start();
-    XHR.post(`/api/multiplayer/${e.sourceFileKey}/branch_create?name=${encodeURIComponent(i)}`).then(e => {
+    sendWithRetry.post(`/api/multiplayer/${e.sourceFileKey}/branch_create?name=${encodeURIComponent(i)}`).then(e => {
       let {
         file,
         source_file,

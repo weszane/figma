@@ -4,7 +4,7 @@ import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { Cf } from "../905/504727";
 import { U, i as _$$i } from "../905/649519";
 import { i as _$$i2 } from "../905/415810";
@@ -19,7 +19,7 @@ export function $$g0({
     showing,
     toggle,
     hide
-  } = BK("expression-builder-create-variable");
+  } = useDropdown("expression-builder-create-variable");
   let h = useRef(null);
   let g = useHandleMouseEvent(generateRecordingKey(t, "createVariableDropdown"), "click", useCallback(() => {
     1 === e.length ? v(e[0]) : toggle();

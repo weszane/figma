@@ -75,7 +75,7 @@ function l(e) {
       let d = l && r.aggregateColumnSpan ? `span ${r.aggregateColumnSpan}` : void 0;
       return l && 0 === r.aggregateColumnSpan ? null : jsx("div", {
         "data-testid": `aggregated-table-cell-${o}-${r.id}`,
-        className: cssBuilderInstance.contentCenter.add(i(r)).$$if("aggregate" !== e.type, cssBuilderInstance.textBodyMedium.bb1.bSolid.colorBorder, cssBuilderInstance.textBodyMediumStrong).$,
+        className: cssBuilderInstance.contentCenter.add(i(r)).if("aggregate" !== e.type, cssBuilderInstance.textBodyMedium.bb1.bSolid.colorBorder, cssBuilderInstance.textBodyMediumStrong).$,
         style: {
           paddingLeft: 0,
           paddingRight: e.getColumnGap(s),

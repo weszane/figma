@@ -13,7 +13,7 @@ import { browserFeatures } from "../905/508367";
 import { logger } from "../905/651849";
 import { BrowserInfo } from "../figma_app/778880";
 import { _d } from "../figma_app/795674";
-import { Fe, uz } from "../905/284552";
+import { loadVideoJs, loadVideoSource } from "../905/284552";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { KindEnum } from "../905/129884";
@@ -52,7 +52,7 @@ export let $$N0 = memo(({
   useEffect(() => {
     (async () => {
       window.VIDEOJS_NO_DYNAMIC_STYLE = !0;
-      _(await Fe());
+      _(await loadVideoJs());
     })();
   }, []);
   let E = useRef(null);
@@ -109,10 +109,10 @@ export let $$N0 = memo(({
   }, [a, o, p]);
   let k = useCallback(async (e, n) => {
     try {
-      await uz(e, r, n);
+      await loadVideoSource(e, r, n);
     } catch {
       logger.warn("Reverting to fallback video source");
-      await uz(t ?? null, !1, n);
+      await loadVideoSource(t ?? null, !1, n);
     }
     l && D();
   }, [t, D, l, r]);

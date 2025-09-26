@@ -4,10 +4,10 @@ import { setupThemeContext } from "../905/614223";
 import { textDisplayConfig } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { logger } from "../905/651849";
-import { x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6, c as _$$c, $z, lR } from "../figma_app/617427";
-import { pW } from "../905/160095";
+import { TrackedLinkButton } from "../905/160095";
 let m = {
   white: {
     alignItems: "x6s0dn4",
@@ -45,7 +45,7 @@ export function $$h0(e) {
     ctaButtonMeta,
     large
   } = e;
-  let g = jsx(x, {
+  let g = jsx(LoadingRenderer, {
     isLoading: !!ctaButtonMeta.isLoading,
     className: cssBuilderInstance.flex.alignCenter.$,
     children: () => ctaButtonMeta.label
@@ -117,7 +117,7 @@ export function $$h0(e) {
             children: g
           });
         case "link":
-          return jsx(pW, {
+          return jsx(TrackedLinkButton, {
             href: ctaButtonMeta.href,
             newTab: !0,
             variant: e.emphasized ? "secondary" : "primary",
@@ -171,7 +171,7 @@ export function $$h0(e) {
             children: g
           });
         case "link":
-          return jsx(pW, {
+          return jsx(TrackedLinkButton, {
             variant: e.emphasized ? "ghost" : "secondary",
             href: ctaButtonMeta.href,
             newTab: !0,

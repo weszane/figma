@@ -48,7 +48,7 @@ import { SvgComponent } from '../905/714743';
 import { isFullscreenDevHandoffView } from '../905/782918';
 import { c$, l6, sK } from '../905/794875';
 import { useCurrentUserOrg } from '../905/845253';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { getVsCodeLinkProps } from '../905/850671';
 import { isVsCodeEnvironment } from '../905/858738';
 import { W as _$$W } from '../905/865092';
@@ -405,7 +405,7 @@ function eG(e) {
   let o = isDevHandoffEditorType();
   let d = useIsSelectedViewFullscreenCooper();
   let c = useCanPerformAction();
-  let u = Um();
+  let u = useDropdownState();
   let m = NF(isVsCodeEnvironment() ? gC + 64 : gC);
   let x = useSelector(e => e.authedUsers);
   let p = checkResourceEligibility(resource);
@@ -490,7 +490,7 @@ function eG(e) {
           children: [jsxs('div', {
             className: isVsCodeEnvironment() ? 'detail_view--coverImageContainerVsCode--4UADZ detail_view--coverImageContainer--2AZZG detail_view--coverImageContainer--2AZZG' : 'detail_view--coverImageContainer--2AZZG',
             children: [jsx('img', {
-              className: _()(isVsCodeEnvironment() ? 'detail_view--coverImageVsCode--ZtGDB' : r ? 'detail_view--coverImageNotDraggable--5PzSB detail_view--coverImage---G-H1' : 'detail_view--coverImage---G-H1', cssBuilderInstance.$$if(isVsCodeEnvironment(), cssBuilderInstance.bRadius5).$),
+              className: _()(isVsCodeEnvironment() ? 'detail_view--coverImageVsCode--ZtGDB' : r ? 'detail_view--coverImageNotDraggable--5PzSB detail_view--coverImage---G-H1' : 'detail_view--coverImage---G-H1', cssBuilderInstance.if(isVsCodeEnvironment(), cssBuilderInstance.bRadius5).$),
               src: W.redirect_cover_image_url || '',
               alt: `${W.name}`,
               onPointerDown: e => !r && onInsertableResourcePointerDown(e)
@@ -584,7 +584,7 @@ function eG(e) {
               children: canRate && isResourceApprovedPublic(resource) && jsx('div', {
                 className: eU,
                 children: jsx(eC, {
-                  openRatingModal: e => {},
+                  openRatingModal: e => { },
                   isInsertsModal: !0
                 })
               })
@@ -691,7 +691,7 @@ function e5({
 }
 function e8() {
   let e = useDispatch();
-  let t = Um();
+  let t = useDropdownState();
   let s = t?.type === _$$kt;
   let r = useCallback(t => {
     s ? e(hideDropdownAction()) : e(showDropdownThunk({
@@ -1422,10 +1422,10 @@ function st(e) {
     isLoading: pluginSearchIsLoading,
     hasResolved: pluginSearchHasResolved
   } : {
-    serverSideSearch: widgetServerSideSearch,
-    isLoading: widgetSearchIsLoading,
-    hasResolved: widgetSearchHasResolved
-  };
+      serverSideSearch: widgetServerSideSearch,
+      isLoading: widgetSearchIsLoading,
+      hasResolved: widgetSearchHasResolved
+    };
   useEffect(() => {
     o !== '' && (_hasQueryResultsCached2(o) && _hasQueryResultsCached(o) && hasQueryResultsCached(o) || serverSideSearch(o, e => _setResultsForQuery5(o, e), e => _setResultsForQuery3(o, e), e => _setResultsForQuery2(o, e)), setResultsForQuery(o, t6.search(o).map(e => e.plugin_id)), _setResultsForQuery(o, t7.search(o).map(e => e.localFileId.toString())), _setResultsForQuery4(o, se.search(o).map(e => e.plugin_id)));
   }, [o, _hasQueryResultsCached2, hasQueryResultsCached, _hasQueryResultsCached, serverSideSearch, _setResultsForQuery4, _setResultsForQuery5, _setResultsForQuery2, _setResultsForQuery, _setResultsForQuery3, setResultsForQuery]);
@@ -1700,7 +1700,7 @@ function sd({
     id: 'search',
     path: [np, 0]
   });
-  let x = Um();
+  let x = useDropdownState();
   let h = x?.type === sl;
   let f = useRef(null);
   let [N, T] = useAtomValueAndSetter(isModalOpenAtom);
@@ -1872,7 +1872,7 @@ function su({
 }
 function s_(e) {
   let t = useDispatch();
-  let s = Um();
+  let s = useDropdownState();
   let r = useCurrentUserOrg();
   let l = _$$M();
   let o = useCallback(e => function (e, t) {

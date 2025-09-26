@@ -2,7 +2,7 @@ import { createActionCreator } from "../905/73481";
 import { dayjs } from "../905/920142";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { _H } from "../figma_app/598111";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { switchAccountAndNavigate, openUrlInContext } from "../figma_app/976345";
@@ -47,7 +47,7 @@ let $$R12 = createActionCreator("PAYMENT_MAKE_STUDENT_TEAM");
 let $$L11 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = r.user?.id;
-  XHR.put(`/api/teams/${t.teamId}/student_team`, {
+  sendWithRetry.put(`/api/teams/${t.teamId}/student_team`, {
     student_team: !0
   }).then(() => {
     n ? e.dispatch(switchAccountAndNavigate({
@@ -80,14 +80,14 @@ let $$P18 = createOptimistThunk((e, {
   teamId: t
 }) => {
   let r = e.getState().teams[t];
-  r.student_team ? XHR.put(`/api/teams/${t}/student_team`, {
+  r.student_team ? sendWithRetry.put(`/api/teams/${t}/student_team`, {
     student_team: !1
   }).then(() => {
     e.dispatch(Be({
       teamId: t
     }));
     e.dispatch(FlashActions.flash(getI18nString("flash.successfully_downgraded_to_a_starter_team")));
-  }).catch(t => handleErrorWithToast(t, e.dispatch)) : XHR.del(`/api/subscriptions-2018-11-08/team/${t}`).then(({
+  }).catch(t => handleErrorWithToast(t, e.dispatch)) : sendWithRetry.del(`/api/subscriptions-2018-11-08/team/${t}`).then(({
     data: n
   }) => {
     let a = n.meta && n.meta.team;

@@ -9,7 +9,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { e as _$$e } from '../905/579755';
 import { L } from '../905/606555';
 import { M } from '../905/722875';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { getSearchSessionIdFromSelector } from '../figma_app/387599';
 import { isUserOrIdMatch } from '../figma_app/471982';
@@ -25,7 +25,7 @@ export function $$y2({
       n.preventDefault();
       n.stopPropagation();
       r(!t);
-      (t ? XHR.del : XHR.put)('/api/follows', {
+      (t ? sendWithRetry.del : sendWithRetry.put)('/api/follows', {
         followed_profile_id: e
       }).then(() => {
         t || trackEventAnalytics('community_hub_profile_follow', {

@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { useLatestRef } from "../figma_app/922077";
 import { popModalStack, showModal } from "../905/156213";
-import { M as _$$M } from "../905/152487";
+import { OnboardingSequence } from "../905/152487";
 function v(e) {
   let t = useDispatch();
   let {
@@ -39,7 +39,7 @@ function v(e) {
     }));
   }, [t, s, isShowing, o, modalType]);
   return jsx(UI3ConditionalWrapper, {
-    children: jsx(_$$M, {
+    children: jsx(OnboardingSequence, {
       isShowing: isShowing && o,
       testId: e.testId,
       userFlagOnShow: e.userFlagOnShow,
@@ -284,7 +284,7 @@ function F(e) {
   return jsx("div", {
     className: cssBuilderInstance.flex.gap8.h32.justifyCenter.itemsCenter.absolute.left0.right0.mxAuto.$,
     children: Array(e.totalNumSteps).fill(0).map((e, r) => jsx("div", {
-      className: cssBuilderInstance.w8.h8.bRadius8.b1.colorBorder.$$if(t(r), cssBuilderInstance.colorBgInverse, cssBuilderInstance.colorBg).$
+      className: cssBuilderInstance.w8.h8.bRadius8.b1.colorBorder.if(t(r), cssBuilderInstance.colorBgInverse, cssBuilderInstance.colorBg).$
     }, r))
   });
 }

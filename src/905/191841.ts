@@ -17,7 +17,7 @@ import { selectViewAction, hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { GR } from "../figma_app/330108";
 import { trackTeamEvent } from "../figma_app/314264";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { useCurrentUserOrgId } from "../905/845253";
 import { getSelectedView } from "../figma_app/386952";
 import { ViewTypeEnum } from "../figma_app/471068";
@@ -37,7 +37,7 @@ export function $$P0(e) {
     showing,
     show,
     data
-  } = BK(RQ);
+  } = useDropdown(RQ);
   let j = useCallback((e, t) => {
     show({
       data: {

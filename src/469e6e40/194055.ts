@@ -20,7 +20,7 @@ import { useTeamPlanPublicInfo, useCurrentPrivilegedPlan, useTeamPlanUser } from
 import { X as _$$X } from "../5430/785696";
 import { J as _$$J } from "../905/403084";
 import { ox, ab } from "../figma_app/870683";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { useLatestRef } from "../figma_app/922077";
 import { u as _$$u } from "../4452/434813";
 import { z as _$$z } from "../905/284530";
@@ -60,7 +60,7 @@ import { mapToEditorType } from "../figma_app/300692";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
 import { ManifestEditorType } from "../figma_app/155287";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { UK } from "../figma_app/764679";
 import { Cf, it } from "../905/504727";
 import { qN } from "../905/884637";
@@ -280,7 +280,7 @@ function q({
     }), jsx(_$$P, {
       className: cssBuilderInstance.flexGrow1.$,
       children: jsx("div", {
-        className: cssBuilderInstance.py8.$$if(j, cssBuilderInstance.opacity0_5.eventsNone).$,
+        className: cssBuilderInstance.py8.if(j, cssBuilderInstance.opacity0_5.eventsNone).$,
         children: G.map(e => jsxs("div", {
           className: cssBuilderInstance.px16.h48.flex.itemsCenter.gap8.$,
           children: [jsx("div", {
@@ -725,7 +725,7 @@ function ed({
       o(VisualBellActions.enqueue({
         message: `Copied ${t}`
       }));
-    }).catch(() => {});
+    }).catch(() => { });
   }, [o]);
   try {
     r = JSON.parse(e.metadata);
@@ -1159,7 +1159,7 @@ function eq(e) {
     ExtensionAllowlistTryEditorDropdown
   } = function (e, t, a, s, l) {
     let o = useDispatch();
-    let d = Um();
+    let d = useDropdownState();
     let c = d?.type === eU;
     let _ = getPluginOrWidget(e) || s;
     return {
@@ -1462,7 +1462,7 @@ export function $$eV0({
   let D = N.data.org.isPluginAllowlisted;
   m = m ?? (D ? "manage" : "review");
   x = void 0 === x ? D : x;
-  return jsx(OJ, {
+  return jsx(HeaderModal, {
     title: function (e, t, a) {
       switch (e) {
         case "review":

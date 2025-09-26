@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { parsePxInt } from "../figma_app/783094";
 import { wY, cU } from "../figma_app/708845";
 import { A as _$$A } from "../905/638715";
-import { Wv, IA } from "../905/291714";
+import { usePopoverContext, PopoverProvider } from "../905/291714";
 import { T1, DH, Gu, nm, Al, Mj } from "../figma_app/90441";
 import { tui, xEX } from "../figma_app/27776";
 let m = parsePxInt(tui);
@@ -25,7 +25,7 @@ export function $$g0({
 }) {
   let {
     dispatch
-  } = Wv();
+  } = usePopoverContext();
   let I = useRef(null);
   let E = useRef(null);
   let x = useRef(null);
@@ -115,7 +115,7 @@ export function $$g0({
     },
     closeOnEsc: y,
     useDropdownZIndex: b,
-    children: jsx(IA, {
+    children: jsx(PopoverProvider, {
       children: t(T)
     })
   });

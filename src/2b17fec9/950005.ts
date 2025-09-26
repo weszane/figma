@@ -7,7 +7,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { getVsCodeLinkProps } from "../905/850671";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { kt } from "../3591/828414";
 import { A } from "../6828/154709";
 import { A as _$$A } from "../1617/954184";
@@ -66,7 +66,7 @@ export function $$g0({
   isWidget: e
 }) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let g = i?.type === kt;
   let j = useRef(null);
   let b = useCallback(e => {

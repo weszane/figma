@@ -1,6 +1,6 @@
 import { z } from "../905/239603";
 import { createActionCreator } from "../905/73481";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { processHubFilesThunk } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
 import { liveStoreInstance } from "../905/713695";
@@ -24,7 +24,7 @@ createOptimistThunk(e => {
     e.dispatch($$p2(r));
   });
 });
-createOptimistThunk((e, t) => XHR.post("/api/files/first_template_type", {
+createOptimistThunk((e, t) => sendWithRetry.post("/api/files/first_template_type", {
   template_type: t.type
 }));
 export let $$_1 = liveStoreInstance.Query({

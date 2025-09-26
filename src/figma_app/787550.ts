@@ -1,5 +1,5 @@
 import { fileEntityModel } from '../905/806985'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { APIParameterUtils, createMetaValidator, createNoOpValidator } from '../figma_app/181241'
 
 /**
@@ -81,11 +81,11 @@ export class FileApiHandler {
     const { fileKey, args, ...rest } = params
     return params.includePerms
       ? this.FilesSchemaValidatorWithPerms.validate(async ({ xr }) =>
-          await xr.get(`/api/files/${fileKey}`, APIParameterUtils.toAPIParameters(rest), args),
-        )
+        await xr.get(`/api/files/${fileKey}`, APIParameterUtils.toAPIParameters(rest), args),
+      )
       : this.FilesSchemaValidator.validate(async ({ xr }) =>
-          await xr.get(`/api/files/${fileKey}`, APIParameterUtils.toAPIParameters(rest), args),
-        )
+        await xr.get(`/api/files/${fileKey}`, APIParameterUtils.toAPIParameters(rest), args),
+      )
   }
 
   /**
@@ -188,7 +188,7 @@ export class FileApiHandler {
    * Original: putFile
    */
   putFile(params: FileApiParams): Promise<any> {
-    return XHR.put(`/api/files/${params.file?.key}`, params.file)
+    return sendWithRetry.put(`/api/files/${params.file?.key}`, params.file)
   }
 
   /**

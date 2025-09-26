@@ -1,5 +1,5 @@
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 export let $$a0 = new class {
   constructor() {
     this.CommentsSchemaValidator = createNoOpValidator();
@@ -23,27 +23,27 @@ export let $$a0 = new class {
     }) => t.get(`/api/files/${e.fileKey}/can_request_edit`));
   }
   acceptFileRoleRequest(e) {
-    return XHR.post(`/api/files/role_request/${e.roleRequestId}/accept`, {
+    return sendWithRetry.post(`/api/files/role_request/${e.roleRequestId}/accept`, {
       source: e.source
     });
   }
   denyFileRoleRequest(e) {
-    return XHR.post(`/api/files/role_request/${e.roleRequestId}/deny`, {
+    return sendWithRetry.post(`/api/files/role_request/${e.roleRequestId}/deny`, {
       source: e.source
     });
   }
   createStarterTeamFileRole(e) {
-    return XHR.put("/api/files/create_starter_team_file_role", {
+    return sendWithRetry.put("/api/files/create_starter_team_file_role", {
       key: e.key
     });
   }
   updateFolderAccessEnabled(e) {
-    return XHR.put(`/api/files/${e.fileKey}`, {
+    return sendWithRetry.put(`/api/files/${e.fileKey}`, {
       folder_access_enabled: e.folderAccessEnabled
     });
   }
   postRecentActivity(e) {
-    return XHR.post(`/api/files/${e.fileKey}/recent_activity`, {
+    return sendWithRetry.post(`/api/files/${e.fileKey}/recent_activity`, {
       activity_type: e.activityType
     });
   }

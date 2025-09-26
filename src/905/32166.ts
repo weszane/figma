@@ -1,5 +1,5 @@
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FAccessRequestStatusType } from "../figma_app/191312";
 import { SortingCriteria } from "../figma_app/162807";
 import { XhrRetryPolicy } from "../905/144933";
@@ -28,25 +28,25 @@ export let $$l0 = new class {
     };
   }
   createResourceConnectionInvite(e) {
-    return XHR.post("/api/resource_connection_invite", e);
+    return sendWithRetry.post("/api/resource_connection_invite", e);
   }
   approveResourceConnectionInvite(e) {
-    return XHR.put(`/api/resource_connection_invite/${e}`, {
+    return sendWithRetry.put(`/api/resource_connection_invite/${e}`, {
       status: FAccessRequestStatusType.APPROVED
     });
   }
   denyResourceConnectionInvite(e) {
-    return XHR.put(`/api/resource_connection_invite/${e}`, {
+    return sendWithRetry.put(`/api/resource_connection_invite/${e}`, {
       status: FAccessRequestStatusType.DENIED
     });
   }
   revokeResourceConnectionInvite(e) {
-    return XHR.put(`/api/resource_connection_invite/${e}`, {
+    return sendWithRetry.put(`/api/resource_connection_invite/${e}`, {
       status: FAccessRequestStatusType.REVOKED
     });
   }
   sendCreateTeamEmail(e) {
-    return XHR.post("/api/resource_connection_invite/send_create_team_email", e);
+    return sendWithRetry.post("/api/resource_connection_invite/send_create_team_email", e);
   }
 }();
 export const c = $$l0;

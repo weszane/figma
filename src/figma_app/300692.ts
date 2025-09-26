@@ -20,7 +20,7 @@ import { validateWithNoOpVm } from '../905/816730';
 import { isVsCodeEnvironment } from '../905/858738';
 import { FDocumentType } from '../905/862883';
 import { J as _$$J } from '../905/896954';
-import { XHR } from '../905/910117';
+import { sendWithRetry } from '../905/910117';
 import { TeamOrgType, UploadStatusEnum } from '../figma_app/10554';
 import { Eh } from '../figma_app/12796';
 import { FEditorType } from '../figma_app/53721';
@@ -665,7 +665,7 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
     } else if ('manifest' in manifestSource) {
       try {
         isWidget = !!/containsWidget/.test(manifestSource.manifest!);
-      } catch {}
+      } catch { }
     }
   }
 
@@ -674,11 +674,11 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
     try {
       validateWithNoOpVm(manifest.editorType, editorTypePropType, 'manifest.editorType');
       editorType = manifest.editorType;
-    } catch {}
+    } catch { }
     try {
       validateWithNoOpVm(manifest.capabilities, capabilitiesPropType, 'manifest.capabilities');
       capabilities = manifest.capabilities;
-    } catch {}
+    } catch { }
   }
 
   // Update cached widget status
@@ -1304,14 +1304,14 @@ function isImageSizeValid(image: any, dimensions: {
 }
 
 /**
- * Generates plugin ID via XHR.
+ * Generates plugin ID via sendWithRetry.
  * Original name: $$eY68
  * @param value - Value.
  * @returns Plugin meta.
  * @throws Error if cannot generate ID.
  */
 export async function generatePluginId(value: any): Promise<any> {
-  const meta = (await XHR.post(`/api/${getHubTypeString(value)}`)).data.meta;
+  const meta = (await sendWithRetry.post(`/api/${getHubTypeString(value)}`)).data.meta;
   if (!meta.id) throw new Error('cannot generate plugin ID');
   return meta;
 }
@@ -1574,7 +1574,7 @@ export function validatePublishingDataLengths(data: any): Record<string, any> {
   if (!data) return {};
   const errors: Record<string, any> = {};
   const nameLen = trimOrEmpty(data.name).length;
-  if (nameLen < 4) errors.name = getI18nString('community.publishing.name_must_be_4_characters_long');else if (nameLen > 100) errors.name = getI18nString('community.publishing.name_must_be_at_most_100_characters_long');
+  if (nameLen < 4) errors.name = getI18nString('community.publishing.name_must_be_4_characters_long'); else if (nameLen > 100) errors.name = getI18nString('community.publishing.name_must_be_at_most_100_characters_long');
   if (trimOrEmpty(data.description).length > 1e4) errors.description = getI18nString('community.publishing.description_must_be_at_most_10000_characters_long');
   if (trimOrEmpty(data.newVersionReleaseNotes).length > 1e4) errors.newVersionReleaseNotes = getI18nString('community.publishing.release_notes_must_be_at_most_10000_characters_long');
   if (trimOrEmpty(data.creatorPolicy).length > 1e4) errors.creatorPolicy = getI18nString('community.publishing.creator_policy_must_be_at_most_10000_characters_long');

@@ -49,7 +49,7 @@ import { UpgradeAction } from '../905/370443';
 import { Ck } from '../905/372455';
 import { getUserId } from '../905/372672';
 import { FRequestsStr } from '../905/384551';
-import { rq } from '../905/425180';
+import { OnboardingModal } from '../905/425180';
 import { useModalManager } from '../905/437088';
 import { GroupType } from '../905/441038';
 import { k as _$$k3 } from '../905/443820';
@@ -60,7 +60,7 @@ import { AutoLayout, Spacer } from '../905/470281';
 import { b as _$$b } from '../905/484176';
 import { H as _$$H2 } from '../905/507464';
 import { ProductAccessTypeEnum, ViewAccessTypeEnum } from '../905/513035';
-import { Dd, OJ } from '../905/519092';
+import { ConfirmationModal, HeaderModal } from '../905/519092';
 import { APILoadingStatus } from '../905/520829';
 import { Button } from '../905/521428';
 import { VisualBellIcon } from '../905/576487';
@@ -81,9 +81,9 @@ import { OrganizationType } from '../905/833838';
 import { TextWithTruncation } from '../905/838445';
 import { useCurrentUserOrg } from '../905/845253';
 import { tb as _$$tb } from '../905/848667';
-import { Um } from '../905/848862';
-import { EL, F_ } from '../905/858282';
-import { XHR } from '../905/910117';
+import { useDropdownState } from '../905/848862';
+import { PositioningStrategy, ArrowPosition } from '../905/858282';
+import { sendWithRetry } from '../905/910117';
 import { debounce } from '../905/915765';
 import { dayjs } from '../905/920142';
 import { hideDropdownAction, selectViewAction } from '../905/929976';
@@ -179,10 +179,10 @@ let eg = new class {
     })));
   }
   submitReview(e) {
-    return XHR.post(`/api/license_group/${e.licenseGroupId}/review`);
+    return sendWithRetry.post(`/api/license_group/${e.licenseGroupId}/review`);
   }
   getMemberCSVExport(e) {
-    return XHR.post(`/api/billing_group/${e.billingGroupId}/export_members`);
+    return sendWithRetry.post(`/api/billing_group/${e.billingGroupId}/export_members`);
   }
 }();
 let eb = registerModal(({
@@ -191,7 +191,7 @@ let eb = registerModal(({
   orgId: a
 }) => {
   let s = useDispatch();
-  return jsx(Dd, {
+  return jsx(ConfirmationModal, {
     headerClassName: 'complete_license_group_review_modal--header--ee93k',
     maxWidth: 360,
     minWidth: 360,
@@ -907,7 +907,7 @@ let tf = registerModal(({
   e ? x.licenseGroupFilter = _$$s2 : t && (x.workspaceFilter = UNASSIGNED);
   return jsx(TrackingProvider, {
     name: 'Add Unassigned Members Modal',
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: e => {
         let t = [eI(eN.ADD_MEMBERS), eI(eN.INVITE_USERS)];
         let a = e => {
@@ -956,7 +956,7 @@ let tf = registerModal(({
 function tj(e) {
   let t = _$$R();
   return jsx('div', {
-    className: cssBuilderInstance.px32.$$if(t, cssBuilderInstance.py16, cssBuilderInstance.pb24).flex.$,
+    className: cssBuilderInstance.px32.if(t, cssBuilderInstance.py16, cssBuilderInstance.pb24).flex.$,
     style: styleBuilderInstance.add({
       minWidth: e.minWidth ?? 0
     }).$,
@@ -1170,7 +1170,7 @@ function tD({
     idpGroupsById
   } = tL();
   let l = useDispatch();
-  let o = Um();
+  let o = useDropdownState();
   return idpGroupIds.length ? jsx(bv, {
     'data-testid': 'idp-group-menubar-filter',
     'dispatch': l,
@@ -1211,7 +1211,7 @@ function tP({
   getCount: a
 }) {
   let s = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   let l = useSelector(({
     licenseGroups: e
   }) => e);
@@ -1292,7 +1292,7 @@ function tK(e) {
   };
   switch (step) {
     case 'AddMembersToBillingGroup':
-      return jsx(rq, {
+      return jsx(OnboardingModal, {
         clickOutsideToHide: !0,
         description: renderI18nText('billing_group_admin_onboarding.step_one_description'),
         emphasized: !0,
@@ -1306,7 +1306,7 @@ function tK(e) {
         userFlagOnShow: tH
       });
     case 'UpdateRolesInBillingGroups':
-      return jsx(rq, {
+      return jsx(OnboardingModal, {
         clickOutsideToHide: !0,
         description: renderI18nText('billing_group_admin_onboarding.step_two_description.seat_rename'),
         emphasized: !0,
@@ -1337,7 +1337,7 @@ function tQ(e) {
       canShow: () => e.isOrgAdminTable && !isMobileUA
     });
   });
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     clickOutsideToHide: !0,
     description: renderI18nText('org_admin_onboarding.people_tab.tooltip.filter_people.description'),
     emphasized: !0,
@@ -1350,7 +1350,7 @@ function tQ(e) {
       onClick: complete,
       ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     targetKey: RF,
     title: renderI18nText('org_admin_onboarding.people_tab.tooltip.filter_people.title'),
     trackingContextName: `${pv} - filter`
@@ -1368,8 +1368,8 @@ function tZ(e) {
   useSingleEffect(() => {
     show();
   });
-  return jsx(rq, {
-    arrowPosition: F_.BOTTOM,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.BOTTOM,
     description: renderI18nText('admin_settings.people.onboarding.click_on_a_person'),
     emphasized: !0,
     isShowing,
@@ -1381,7 +1381,7 @@ function tZ(e) {
       onClick: complete,
       ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     targetKey: `${_$$Z}-${e.targetOrgUserId}`,
     title: renderI18nText('admin_settings.people.onboarding.easily_manage_people'),
     trackingContextName: JB
@@ -2442,7 +2442,7 @@ function a5(e) {
 }
 var a7 = (e => (e[e.SEARCH = 0] = 'SEARCH', e[e.FILTER = 1] = 'FILTER', e))(a7 || {});
 function a9(e, t, a) {
-  XHR.post(`/api/orgs/${t}/resend_email_verifications`, {
+  sendWithRetry.post(`/api/orgs/${t}/resend_email_verifications`, {
     org_user_ids: e
   }).then(() => {
     a(VisualBellActions.enqueue({
@@ -2600,7 +2600,7 @@ function nn(e) {
   };
   let ex = () => jsx(Fragment, {
     children: e.selectedView.view === 'licenseGroup' && jsx('div', {
-      className: cssBuilderInstance.pb12.$$if(ef, cssBuilderInstance.pl32).$,
+      className: cssBuilderInstance.pb12.if(ef, cssBuilderInstance.pl32).$,
       children: jsx(TextWithTruncation, {
         fontWeight: 'medium',
         fontSize: 13,

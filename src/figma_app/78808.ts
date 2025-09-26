@@ -17,7 +17,7 @@ import { getResourceDataOrFallback } from '../905/723791'
 import { isBranch } from '../905/760074'
 import { WB } from '../905/761735'
 import { VERSION_HISTORY_SET_FILE_LAST_SEEN_AT } from '../905/784363'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { debounce } from '../905/915765'
 import { FileCreationPermissionsView } from '../figma_app/43951'
 import { isDevEnvironment } from '../figma_app/169182'
@@ -60,7 +60,7 @@ export function hasFileRepo(file: any): boolean {
  * @returns {Promise<void>}
  */
 export function updateFileThumbnail(fileKey: string, thumbnailGuid: string): Promise<void> {
-  return XHR.put(`/api/files/${fileKey}/thumbnail_guid`, {
+  return sendWithRetry.put(`/api/files/${fileKey}/thumbnail_guid`, {
     thumbnail_guid: thumbnailGuid,
   }).then(() => {
     AppStateTsApi?.canvasViewState().thumbnailNodeId.set(thumbnailGuid)
@@ -121,7 +121,7 @@ export const duplicateFileOptimistic = createOptimistThunk(async (dispatchApi, p
     type: 'file_duplicating',
     message: getI18nString('visual_bell.duplicating'),
   }))
-  XHR.post(`/api/multiplayer/${file.key}/copy?${serializeQuery(params)}`).then((response) => {
+  sendWithRetry.post(`/api/multiplayer/${file.key}/copy?${serializeQuery(params)}`).then((response) => {
     dispatchApi.dispatch(VisualBellActions.dequeue({}))
     const hasOpenFile = !!state.openFile
     if (!response.data.error && response.data.meta && hasOpenFile) {
@@ -179,9 +179,9 @@ export const fetchFileByKeyOptimistic = createOptimistThunk((dispatchApi, payloa
  */
 export const deleteWorkshopOptimistic = createOptimistThunk(async (_dispatchApi, payload) => {
   try {
-    await XHR.del(`/api/files/${payload.file_key}/workshop`)
+    await sendWithRetry.del(`/api/files/${payload.file_key}/workshop`)
   }
-  catch {}
+  catch { }
 })
 
 /**
@@ -191,7 +191,7 @@ export const startWorkshopSessionOptimistic = createOptimistThunk(async (dispatc
   liveStore,
 }) => {
   const fileMeta = await liveStore.fetchFile(payload.fileKey)
-  const startPromise = XHR.post(`/api/files/${payload.fileKey}/workshop`).then(() => {
+  const startPromise = sendWithRetry.post(`/api/files/${payload.fileKey}/workshop`).then(() => {
     dispatchApi.dispatch(VisualBellActions.enqueue({
       message: getI18nString('whiteboard.open_sessions.open_session_started_notification'),
       button: {
@@ -231,7 +231,7 @@ export const startWorkshopSessionOptimistic = createOptimistThunk(async (dispatc
  * Marks file as viewed (original: $$K2)
  */
 export const markFileViewedOptimistic = createOptimistThunk(async (dispatchApi, payload) => {
-  await XHR.post(`/api/files/${payload.fileKey}/view`).then(({
+  await sendWithRetry.post(`/api/files/${payload.fileKey}/view`).then(({
     data,
   }) => {
     const {
@@ -325,17 +325,17 @@ function showLinkCopiedVisualBell(dispatchApi: any, options: any) {
   const extras = options.visualBellExtras ?? {}
   const notification = options.visualBellMessageComponentKeyOverride
     ? {
-        type,
-        messageComponentKey: options.visualBellMessageComponentKeyOverride,
-        button: options.visualBellButton,
-        ...extras,
-      }
+      type,
+      messageComponentKey: options.visualBellMessageComponentKeyOverride,
+      button: options.visualBellButton,
+      ...extras,
+    }
     : {
-        type,
-        message: options.visualBellMessageOverride ?? getI18nString('copy_to_clipboard.link_copied_to_clipboard'),
-        button: options.visualBellButton,
-        ...extras,
-      }
+      type,
+      message: options.visualBellMessageOverride ?? getI18nString('copy_to_clipboard.link_copied_to_clipboard'),
+      button: options.visualBellButton,
+      ...extras,
+    }
   dispatchApi.dispatch(VisualBellActions.enqueue(notification))
 }
 
@@ -415,7 +415,7 @@ const updateActiveFileUsersDebounced = debounce((fileKeys, dispatchApi) => {
     fileKeys = fileKeys.filter(key => !(key in state.activeFileUsers))
   }
   if (fileKeys.length) {
-    XHR.post('/api/active_file_users', {
+    sendWithRetry.post('/api/active_file_users', {
       keys: fileKeys,
     }).then(({
       data,
@@ -434,7 +434,7 @@ const updateActiveFileUsersDebounced = debounce((fileKeys, dispatchApi) => {
           users,
         }))
       })
-    }).catch(() => {})
+    }).catch(() => { })
   }
 }, 1000)
 

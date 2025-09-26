@@ -5,14 +5,13 @@ import { getFeatureFlags } from "../905/601108";
 import s from "classnames";
 import { ButtonBasePrimaryTracked, BigButtonPrimaryTracked, BigButtonSecondaryTracked, trackedButtonClickHandler, Spacing } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F_ } from "../905/748636";
 import { CR, NJ } from "../figma_app/419216";
 import { TrackingProvider, TrackedDiv } from "../figma_app/831799";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily, fileBrowserOnboardedAtom, userFlagsAtom, userFlagAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
-import { M as _$$M } from "../905/152487";
+import { OnboardingSequence } from "../905/152487";
 import { LB2, I3H, Ob5, X5_, USq, sqw, yjU, MwQ, NdL, bGx, Qlc, I$z, Kgs, BTz, dYj, Ult, kmq, Sgd, Wb3 } from "../figma_app/6204";
 import { useSingleEffect } from "../905/791079";
 import { tH as _$$tH, mp, Ot, d2, Vm, Fy, Qm, zN } from "../figma_app/579169";
@@ -33,9 +32,9 @@ import { of, mW } from "../figma_app/797994";
 import { hasAnyOnboardingFlag } from "../figma_app/242339";
 import { qo } from "../905/696396";
 import { U as _$$U } from "../905/455766";
-import { h as _$$h2 } from "../905/284399";
+import { OnboardingRenderFrame } from "../905/284399";
 import { Rx, IY, q9 } from "../1556/690522";
-import { q3, M_ } from "../figma_app/450829";
+import { OverlayType, OnTheme } from "../figma_app/450829";
 import { S as _$$S } from "../1556/805548";
 import { UpgradeAction } from "../905/370443";
 import { X as _$$X } from "../905/482718";
@@ -55,7 +54,7 @@ import { c4, Au } from "../figma_app/518077";
 import { K as _$$K } from "../1250/166809";
 import { OC } from "../1250/791136";
 import { $z } from "../figma_app/617427";
-import { y as _$$y } from "../905/129046";
+import { ImageOverlayComponent } from "../905/129046";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { D6 } from "../figma_app/863319";
 import { orgSubscriptionAtom } from "../905/296690";
@@ -84,10 +83,10 @@ import { getVisibleTheme } from "../905/640017";
 import { d as _$$d } from "../905/647058";
 import { OrganizationType } from "../905/833838";
 import { WZ } from "../905/893645";
-import { EL, F_ as _$$F_ } from "../905/858282";
+import { PositioningStrategy, ArrowPosition } from "../905/858282";
 import { customHistory } from "../905/612521";
 import { TextWithTruncation } from "../905/984674";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { xX, j9 } from "../figma_app/211146";
 import { getSelectedView } from "../figma_app/386952";
 import { selectUserFlag } from "../905/940356";
@@ -159,7 +158,7 @@ function m(e) {
       dismissModal: e.onClickPrimaryCta,
       targetKey: "custom-sections-nudge-modal",
       topPadding: 4,
-      arrowPosition: F_.LEFT_TITLE,
+      arrowPosition: ArrowPosition.LEFT_TITLE,
       pointerBackgroundColor: "var(--color-bg, $figmaBGWhite)",
       children: [jsx("h1", {
         className: "custom_sections_onboarding_modal--header--Z4mnG",
@@ -197,7 +196,7 @@ function j() {
       canShow: e => !e
     });
   });
-  return jsx(_$$M, {
+  return jsx(OnboardingSequence, {
     isShowing: t.isShowing,
     userFlagOnShow: v,
     children: jsx(TrackingProvider, {
@@ -273,9 +272,9 @@ function ea(e) {
     close();
     e.onClickPrimaryCta();
   };
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     testId: "AccountSettingsOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${et} Account settings`,
     element: e => jsx(Rx, {
       dismissModal: e.dismissModal,
@@ -311,9 +310,9 @@ function es(e) {
   });
 }
 function el(e) {
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     testId: "CreateFilesOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${et} Create files`,
     element: es,
     isShowing: e.isShowing,
@@ -337,9 +336,9 @@ function ec(e) {
   });
 }
 function e_(e) {
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     testId: "DraftsOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${et} Drafts`,
     element: ec,
     isShowing: e.isShowing,
@@ -369,9 +368,9 @@ function em(e) {
   });
 }
 function ep(e) {
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     testId: "ExploreCommunityOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${et} Community Hub`,
     element: em,
     isShowing: e.isShowing,
@@ -401,9 +400,9 @@ function ef(e) {
   });
 }
 function eh(e) {
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     testId: "ExploreResourceHubOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${et} Resource Hub`,
     element: ef,
     isShowing: e.isShowing,
@@ -422,11 +421,11 @@ function ex() {
   });
 }
 function ey(e) {
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     currentStepIndex: e.currentStepIndex,
     element: ex,
     isShowing: e.isShowing,
-    modalType: q3.DRAGGABLE,
+    modalType: OverlayType.DRAGGABLE,
     onClickPrimaryCta: e.onClickPrimaryCta,
     onClose: e.onClose,
     onManualDismiss: e.onManualDismiss,
@@ -439,9 +438,9 @@ function ey(e) {
   });
 }
 function ev(e) {
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     testId: "NotificationsOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${et} Notifications`,
     element: e => jsx(q9, {
       dismissModal: e.dismissModal,
@@ -457,14 +456,14 @@ function ev(e) {
   });
 }
 function eE(e) {
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     ctaText: renderI18nText("rcs.open_file.create_file"),
     currentStepIndex: e.currentStepIndex,
     element: () => jsx(ak, {
       children: renderI18nText("rcs.open_file.open_a_file_to_learn_more_about_figma_s_powerful_editing_features")
     }),
     isShowing: e.isShowing,
-    modalType: q3.DRAGGABLE,
+    modalType: OverlayType.DRAGGABLE,
     onClickPrimaryCta: () => {
       e.onClickPrimaryCta();
       (function () {
@@ -501,12 +500,12 @@ function eI() {
   });
 }
 function eA(e) {
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     currentStepIndex: e.currentStepIndex,
     element: eI,
     highlightOnlyKey: "new-team-icon",
     isShowing: e.isShowing,
-    modalType: q3.DRAGGABLE,
+    modalType: OverlayType.DRAGGABLE,
     onClickPrimaryCta: e.onClickPrimaryCta,
     onClose: e.onClose,
     onManualDismiss: e.onManualDismiss,
@@ -544,9 +543,9 @@ function eO(e) {
   });
 }
 function eR(e) {
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     testId: "PlanSpacesOverlay",
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     trackingContextName: `${et} Plan Spaces`,
     element: eO,
     isShowing: e.isShowing,
@@ -573,12 +572,12 @@ function eD(e) {
   let n = t ? getI18nString("rcs.welcome_step.welcome_user_name", {
     userFirstName: t
   }) : getI18nString("rcs.welcome_step.welcome");
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     currentStepIndex: e.currentStepIndex,
     disableFooter: !0,
     element: eP,
     isShowing: e.isShowing,
-    modalType: q3.DRAGGABLE,
+    modalType: OverlayType.DRAGGABLE,
     onClickPrimaryCta: e.onClickPrimaryCta,
     onClose: e.onClose,
     onManualDismiss: e.onManualDismiss,
@@ -596,7 +595,7 @@ let eU = () => {
   let e = getStorage();
   try {
     return !!e.get(SIGNED_UP_FROM_OPEN_SESSIONS);
-  } catch (e) {}
+  } catch (e) { }
   return !1;
 };
 function eG() {
@@ -719,7 +718,7 @@ function eZ() {
   return jsx(_$$X, {
     description: jsx(eK, {}),
     isShowing: n.isShowing,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl("87621fc5a99a1d24beb515288cf764febb8f01e9.png"),
       alt: "A screenshot of the teams list with cursor hovering over the 'Request to Join' link",
       aspectRatio: 1.75
@@ -907,7 +906,7 @@ function tc() {
         });
       }
     });
-  }), isShowing && "loaded" === d.status) ? d.data ? jsx(_$$M, {
+  }), isShowing && "loaded" === d.status) ? d.data ? jsx(OnboardingSequence, {
     isShowing: !0,
     testId: "org-select-workspace-overlay",
     children: jsx(ti, {
@@ -1070,7 +1069,7 @@ function tS() {
     trackingContextName: "Plan spaces onboarding - A new way to access teams",
     targetKey: _$$U3,
     emphasized: !0,
-    shouldCenterArrow: EL.BEST_EFFORT,
+    shouldCenterArrow: PositioningStrategy.BEST_EFFORT,
     disableHighlight: !0
   }];
   x && T.push({
@@ -1108,12 +1107,12 @@ function tS() {
   return e.length ? jsxs(_$$U, {
     currentStep,
     isShowing,
-    children: [jsx(_$$h2, {
-      closeButtonStyle: M_.ON_LIGHT,
+    children: [jsx(OnboardingRenderFrame, {
+      closeButtonStyle: OnTheme.ON_LIGHT,
       disableClickOutsideToHide: !0,
       element: A,
       isShowing,
-      modalType: q3.FEATURE_UPDATE,
+      modalType: OverlayType.FEATURE_UPDATE,
       onClickPrimaryCta: _ ? complete : next,
       onClose: noop,
       onManualDismiss: complete,
@@ -1146,8 +1145,8 @@ function tP() {
       canShow: (e, t) => !e && t
     });
   });
-  return jsx(rq, {
-    arrowPosition: _$$F_.LEFT_TITLE,
+  return jsx(OnboardingRenderFrame, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: jsx("p", {
       children: renderI18nText("rcs.plan_spaces_new_starter_team.text")
     }),
@@ -1914,15 +1913,15 @@ function n_() {
   useSingleEffect(() => {
     e.show();
   });
-  return jsx(_$$h2, {
-    closeButtonStyle: M_.ON_DARK,
+  return jsx(OnboardingRenderFrame, {
+    closeButtonStyle: OnTheme.ON_DARK,
     disableClickOutsideToHide: !0,
     element: () => jsx(no, {
       hideModal: e.complete
     }),
     height: 404,
     isShowing: e.isShowing,
-    modalType: q3.FEATURE_UPDATE,
+    modalType: OverlayType.FEATURE_UPDATE,
     onClickPrimaryCta: e.complete,
     onClose: () => {
       t(postUserFlag({
@@ -1957,8 +1956,8 @@ function nu(e) {
       }
     }]
   })), [i, r]);
-  return jsx(_$$h2, {
-    closeButtonStyle: M_.ON_LIGHT,
+  return jsx(OnboardingRenderFrame, {
+    closeButtonStyle: OnTheme.ON_LIGHT,
     disableClickOutsideToHide: !0,
     element: () => jsx(nl, {
       teamId: r,
@@ -1966,7 +1965,7 @@ function nu(e) {
     }),
     height: 404,
     isShowing: t.isShowing,
-    modalType: q3.FEATURE_UPDATE,
+    modalType: OverlayType.FEATURE_UPDATE,
     onClickPrimaryCta: t.complete,
     onClose: () => {
       o();
@@ -1999,8 +1998,8 @@ function nm(e) {
       }
     }]
   })), [i, r]);
-  return jsx(_$$h2, {
-    closeButtonStyle: M_.ON_DARK,
+  return jsx(OnboardingRenderFrame, {
+    closeButtonStyle: OnTheme.ON_DARK,
     disableClickOutsideToHide: !0,
     element: () => jsx(ns, {
       teamId: r,
@@ -2008,7 +2007,7 @@ function nm(e) {
     }),
     height: 404,
     isShowing: t.isShowing,
-    modalType: q3.FEATURE_UPDATE,
+    modalType: OverlayType.FEATURE_UPDATE,
     onClickPrimaryCta: t.complete,
     onClose: () => {
       o();
@@ -2104,10 +2103,10 @@ function nT() {
   useSingleEffect(() => {
     o();
   });
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     element: nw,
     isShowing: r.isShowing,
-    modalType: q3.SELF_CONTAINED,
+    modalType: OverlayType.SELF_CONTAINED,
     onClickPrimaryCta: r.complete,
     onClose: r.complete,
     onManualDismiss: r.complete,
@@ -2208,10 +2207,10 @@ function nS() {
   useSingleEffect(() => {
     o();
   });
-  return jsx(_$$h2, {
+  return jsx(OnboardingRenderFrame, {
     element: nA,
     isShowing: r.isShowing,
-    modalType: q3.WELCOME,
+    modalType: OverlayType.WELCOME,
     onClickPrimaryCta: r.complete,
     onClose: r.complete,
     onManualDismiss: r.complete,
@@ -2239,8 +2238,8 @@ function nL() {
   let l = useResourceRouteParams();
   let d = useResourceFuid();
   let _ = _$$P4();
-  return jsx(rq, {
-    arrowPosition: _$$F_.LEFT_TITLE,
+  return jsx(OnboardingRenderFrame, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: renderI18nText("community.resource_hub.promotion"),
     emphasized: !0,
     isShowing,
@@ -2294,8 +2293,8 @@ function n$() {
       canShow: e => !e
     });
   });
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingRenderFrame, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: renderI18nText("team_project_link.overlay.description"),
     emphasized: !0,
     isShowing,
@@ -2451,8 +2450,8 @@ function ao() {
     l && show({
       canShow: (e, t, n) => !!t && !n && e.getTime() <= ai
     });
-  }, [l, show]), e.length) ? jsx(rq, {
-    arrowPosition: _$$F_.RIGHT_TITLE,
+  }, [l, show]), e.length) ? jsx(OnboardingRenderFrame, {
+    arrowPosition: ArrowPosition.RIGHT_TITLE,
     description: renderI18nText("rcs.limited_spaces.external_projects"),
     disableHighlight: !0,
     emphasized: !0,

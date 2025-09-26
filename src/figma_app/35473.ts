@@ -7,7 +7,7 @@ import { S } from "../figma_app/109947";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { I } from "../figma_app/827540";
 import { b, zr, w, LQ, jD, kL, hu, rb, MP } from "../figma_app/60171";
 var o = s;
@@ -16,7 +16,7 @@ export function $$g0({
   bannerType: t,
   ...r
 }) {
-  let s = Um();
+  let s = useDropdownState();
   let g = I();
   h8({
     isFigjamDLTBanner: e,

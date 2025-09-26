@@ -23,7 +23,7 @@ import { I as _$$I } from "../figma_app/130633";
 import { F as _$$F } from "../905/84606";
 import { Y } from "../905/411989";
 import { lX } from "../figma_app/588397";
-import { K as _$$K } from "../905/275787";
+import { LibraryItemTileContextMenuType } from "../905/275787";
 import { shouldHideRecents } from "../figma_app/144974";
 import { WP } from "../905/198599";
 import { s as _$$s2 } from "../905/169089";
@@ -103,7 +103,7 @@ export function $$W0({
   });
   if (!currentSearch || "disabled" === currentSearch.result.status) {
     if (0 === V.length || shouldHideRecents()) return jsx("div", {
-      className: cssBuilderInstance.$$if(r, cssBuilderInstance.hFull).$,
+      className: cssBuilderInstance.if(r, cssBuilderInstance.hFull).$,
       children: jsx(_$$S, {
         fillHeight: r,
         children: jsxs(_$$N, {
@@ -144,7 +144,7 @@ export function $$W0({
     });
   }
   if ("errors" === currentSearch.result.status) return jsxs("div", {
-    className: cssBuilderInstance.$$if(r, cssBuilderInstance.hFull).$,
+    className: cssBuilderInstance.if(r, cssBuilderInstance.hFull).$,
     children: [c && jsx(K, {
       title: c.title,
       icon: c.icon,
@@ -163,7 +163,7 @@ export function $$W0({
     })]
   });
   if (x) return jsxs("div", {
-    className: cssBuilderInstance.$$if(r, cssBuilderInstance.hFull).$,
+    className: cssBuilderInstance.if(r, cssBuilderInstance.hFull).$,
     children: [c && jsx(K, {
       title: c.title,
       icon: c.icon,
@@ -179,7 +179,7 @@ export function $$W0({
   });
   let er = currentSearch.result.data;
   if (!er || 0 === er.length) return jsxs("div", {
-    className: cssBuilderInstance.$$if(r, cssBuilderInstance.hFull).$,
+    className: cssBuilderInstance.if(r, cssBuilderInstance.hFull).$,
     children: [c && jsx(K, {
       title: c.title,
       icon: c.icon
@@ -345,7 +345,7 @@ function $({
       height: d.current?.clientHeight ?? 0
     });
   });
-  let _ = _$$F(e, _$$K.ACTIONS_ASSETS, t, "Actions Component Search");
+  let _ = _$$F(e, LibraryItemTileContextMenuType.ACTIONS_ASSETS, t, "Actions Component Search");
   return jsx("div", {
     className: cssBuilderInstance.wFull.$,
     style: styleBuilderInstance.add({

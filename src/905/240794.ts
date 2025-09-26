@@ -23,7 +23,7 @@ export function $$s0({
 }) {
   return jsx("div", {
     className: cssBuilderInstance.flex.flexColumn.$,
-    style: styleBuilderInstance.$$if(t, {
+    style: styleBuilderInstance.if(t, {
       gridColumn: "1 / -1"
     }).$,
     children: e

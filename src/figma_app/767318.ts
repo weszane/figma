@@ -19,7 +19,7 @@ import { Wo } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { ol } from "../figma_app/852050";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { getLibraryNames } from "../905/506188";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -238,7 +238,7 @@ export function $$G0(e) {
       return e;
     }, [O, r, N, z, H, G, M, o, g, d, T, W]);
   }(showLibrarySets, consumptionTarget, recordingKey);
-  let M = Um();
+  let M = useDropdownState();
   let G = trackDefinedFileEventWithStore();
   let H = useDevModeFocusId();
   let z = useDeepEqualSceneValue((e, t) => {

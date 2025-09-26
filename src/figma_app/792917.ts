@@ -8,7 +8,7 @@ import { Label } from "../905/270045";
 import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { ModalCloseButton } from "../905/17223";
 import { z, Z } from "../905/306088";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -118,7 +118,7 @@ let $$N0 = registerModal(function (e) {
         refundOtherReasonText: S,
         monetizedResourceMetadataId: monetizedResource.id
       });
-      XHR.post(`/api/community/buyer/${monetizedResource.id}/refund`, {
+      sendWithRetry.post(`/api/community/buyer/${monetizedResource.id}/refund`, {
         refund_reason: f,
         refund_other_reason_text: S
       }).then(() => {

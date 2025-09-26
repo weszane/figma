@@ -65,8 +65,8 @@ import { FileBrowserLocation } from "../figma_app/915202";
 import { JT as _$$JT } from "../figma_app/632248";
 import { RL, qy, B3, Ag } from "../figma_app/862289";
 import { cq } from "../905/794154";
-import { B as _$$B2 } from "../905/222272";
-import { y as _$$y } from "../905/236825";
+import { FlexBox } from "../905/222272";
+import { Panel } from "../905/236825";
 import { z as _$$z } from "../905/491916";
 import { cw, BT } from "../905/514666";
 import { ExtensionFeatureKey } from "../905/946805";
@@ -111,7 +111,7 @@ import td from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { setNodeSymbolPublishable, setNodePublishable, clearSelection, addToSelection } from "../figma_app/741237";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { M as _$$M2 } from "../905/771870";
 import { L as _$$L } from "../905/332753";
 import { getAndResetThumbnailAtom, toPngDataUrl } from "../905/405710";
@@ -173,7 +173,7 @@ function ey() {
     contextClicked: "library_extract_toast",
     forceOpenNewTab: !0
   });
-  state === qy.RUNNING ? e = jsxs(_$$B2, {
+  state === qy.RUNNING ? e = jsxs(FlexBox, {
     fullWidth: !0,
     children: [jsx(_$$k, {}), jsx("span", {
       className: "xiqqdae xkezfkh",
@@ -182,10 +182,10 @@ function ey() {
       className: "xet2fuk x1n0bwc9 x17akokd",
       children: getI18nString("figmake.ds_imports.extract_library_subheader")
     })]
-  }) : state === qy.DONE ? e = jsxs(_$$B2, {
+  }) : state === qy.DONE ? e = jsxs(FlexBox, {
     justify: "space-between",
     fullWidth: !0,
-    children: [jsxs(_$$B2, {
+    children: [jsxs(FlexBox, {
       children: [jsx(_$$U, {
         className: "xj1m54o"
       }), jsx("span", {
@@ -206,10 +206,10 @@ function ey() {
       },
       children: getI18nString("figmake.ds_imports.extract_library_go_to_figma_make")
     })]
-  }) : state === qy.ERROR && (e = jsxs(_$$B2, {
+  }) : state === qy.ERROR && (e = jsxs(FlexBox, {
     justify: "space-between",
     fullWidth: !0,
-    children: [jsxs(_$$B2, {
+    children: [jsxs(FlexBox, {
       children: [jsx(_$$r2, {
         className: "x1taaqhk"
       }), jsx("span", {
@@ -226,14 +226,14 @@ function ey() {
       children: getI18nString("figmake.ds_imports.extract_library_error_button")
     })]
   }));
-  return jsx(_$$y, {
+  return jsx(Panel, {
     onDismiss: () => {
       i && analyticsEventManager.trackDefinedEvent("ds_import.publish_toast_closed", {
         library_key: i
       });
       close();
     },
-    children: jsx(_$$B2, {
+    children: jsx(FlexBox, {
       children: e
     })
   });
@@ -706,7 +706,7 @@ function tF({
   invalidReason: g
 }) {
   let _;
-  let A = Um();
+  let A = useDropdownState();
   let b = useSelector(e => e.library);
   let v = useSelector(e => e.fileByKey);
   let I = useAtomWithSubscription(filesByLibraryKeyAtom);
@@ -1164,7 +1164,7 @@ function tZ({
   let {
     IconUI3
   } = _$$F(e.resolvedType);
-  let s = Um();
+  let s = useDropdownState();
   let o = `variable-library-item-row-${e.node_id}`;
   let l = useCallback(() => {
     permissionScopeHandler.user("set-is-publishable", () => {

@@ -14,7 +14,7 @@ import { J } from "../905/494216";
 import { JT, LC } from "../figma_app/632248";
 import { Ag, RL, qy } from "../figma_app/862289";
 import { cq } from "../905/794154";
-import { $J } from "../905/278499";
+import { AIActionIterationResult } from "../905/278499";
 import { f as _$$f, E as _$$E } from "../905/690713";
 import { A as _$$A } from "../905/721854";
 import { Oq, is } from "../905/904596";
@@ -158,7 +158,7 @@ function k({
       }],
       aiTrackingContext: {
         ...aiTrackingContext,
-        iteration_view_type: $J.DEFAULT_SUCCESS
+        iteration_view_type: AIActionIterationResult.DEFAULT_SUCCESS
       },
       targets: e.map(e => e.guid)
     });

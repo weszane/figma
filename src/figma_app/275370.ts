@@ -2,7 +2,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { generateUUIDv4 } from "../905/871474";
 import { createNoOpValidator } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { openFileKeyAtom, openFileLibraryKeyAtom } from "../figma_app/516028";
 var $$d3 = (e => (e[e.RAW_VARIABLES = 0] = "RAW_VARIABLES", e[e.RAW_TEXT_STYLES = 1] = "RAW_TEXT_STYLES", e[e.COMPONENT = 2] = "COMPONENT", e[e.FRAGMENT = 3] = "FRAGMENT", e[e.GENERATED_VARIABLES = 4] = "GENERATED_VARIABLES", e[e.GENERATED_TYPOGRAPHY = 5] = "GENERATED_TYPOGRAPHY", e[e.GUIDELINES_MD = 6] = "GUIDELINES_MD", e[e.GLOBAL_CSS = 7] = "GLOBAL_CSS", e[e.COMPONENTS_LIST_VARIABLES = 8] = "COMPONENTS_LIST_VARIABLES", e[e.COMPONENTS_LIST_TYPOGRAPHY = 9] = "COMPONENTS_LIST_TYPOGRAPHY", e))($$d3 || {});
 export async function $$c0({
@@ -15,7 +15,7 @@ export async function $$c0({
   let s = atomStoreManager.get(openFileLibraryKeyAtom) ?? void 0;
   if (!a || !s) throw Error("Missing file_key or library_key");
   if (!t && !r) throw Error("Need atleast a blob or component_list to be uploaded");
-  await XHR.post("/api/make/create_ds_import", {
+  await sendWithRetry.post("/api/make/create_ds_import", {
     artifact_type: e,
     artifact_blob: t,
     components_list: r,
@@ -28,7 +28,7 @@ export async function $$u1() {
   let e = atomStoreManager.get(openFileKeyAtom) ?? void 0;
   let t = atomStoreManager.get(openFileLibraryKeyAtom) ?? void 0;
   if (!e || !t) throw Error("Missing file_key or library_key");
-  return (await XHR.post("/api/recommend/components", {
+  return (await sendWithRetry.post("/api/recommend/components", {
     subscribed_library_keys: [t],
     source: "figma_make",
     open_file_key: e,

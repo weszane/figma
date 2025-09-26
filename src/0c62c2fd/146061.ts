@@ -22,7 +22,7 @@ import { UpsellModalType } from "../905/165519";
 import { getTeamUrl } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
 import { e0 } from "../905/696396";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { Uc } from "../4452/915131";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { s as _$$s } from "../905/761565";
@@ -117,7 +117,7 @@ export function $$M0(e) {
   return jsx(TrackingProvider, {
     name: e0.FILE_MOVE_MODAL,
     properties: z,
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       title: getI18nString("file_browser.folder_move.modal_header", {
         folderName: D.name
       }),

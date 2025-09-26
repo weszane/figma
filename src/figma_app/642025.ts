@@ -13,7 +13,7 @@ import { memoizeByArgs } from '../figma_app/815945'
 /**
  * PermissionsState type for grouping related permission data.
  */
-export interface PermissionsState extends Record<string, any> {
+export interface IPermissionsState extends Record<string, any> {
   currentUserOrgId: string | null
   user: any
   fileByKey: Record<string, any>
@@ -67,7 +67,7 @@ function createPermissionsState(
   orgTeams: any,
   openFile: any,
   currentTeamId: string | null,
-): PermissionsState {
+): IPermissionsState {
   return {
     currentUserOrgId,
     user,
@@ -95,7 +95,7 @@ const memoizedCreatePermissionsState = memoizeByArgs(createPermissionsState)
  * @returns PermissionsState
  */
 // getPermissionsState
-export function getPermissionsState(state: any): PermissionsState {
+export function getPermissionsState(state: any): IPermissionsState {
   return createPermissionsState(
     state.currentUserOrgId,
     state.user,
@@ -121,7 +121,7 @@ export function getPermissionsState(state: any): PermissionsState {
  * @returns PermissionsState
  */
 // getPermissionsStateMemoized
-export function getPermissionsStateMemoized(state: any): PermissionsState {
+export function getPermissionsStateMemoized(state: any): IPermissionsState {
   return memoizedCreatePermissionsState(
     state.currentUserOrgId,
     state.user,
@@ -148,7 +148,7 @@ export function getPermissionsStateMemoized(state: any): PermissionsState {
  * @returns teamId or null
  */
 // getResourceTeamId
-export function getResourceTeamId(resource: { resource_type: FResourceCategoryType, resource_id_or_key: string }, state: PermissionsState): string | null {
+export function getResourceTeamId(resource: { resource_type: FResourceCategoryType, resource_id_or_key: string }, state: IPermissionsState): string | null {
   switch (resource.resource_type) {
     case FResourceCategoryType.FILE: {
       const file = state.fileByKey[resource.resource_id_or_key]
@@ -188,7 +188,7 @@ export function hasMinRole(roles: any[], minLevel: number): boolean {
  * @returns array of roles
  */
 // getRolesForUserAndTeam
-export function getRolesForUserAndTeam(teamId: string, state: PermissionsState): any[] {
+export function getRolesForUserAndTeam(teamId: string, state: IPermissionsState): any[] {
   const userId = state.user?.id
   const roles = state.roles
   return teamId in roles.byTeamId && userId && userId in roles.byTeamId[teamId]
@@ -203,7 +203,7 @@ export function getRolesForUserAndTeam(teamId: string, state: PermissionsState):
  * @returns array of roles
  */
 // T
-function getRolesForUserAndFolder(folderId: string, state: PermissionsState): any[] {
+function getRolesForUserAndFolder(folderId: string, state: IPermissionsState): any[] {
   const userId = state.user?.id
   const roles = state.roles
   let result: any[] = []
@@ -224,7 +224,7 @@ function getRolesForUserAndFolder(folderId: string, state: PermissionsState): an
  * @returns array of roles
  */
 // I
-function getRolesForUserAndRepo(repoId: string, state: PermissionsState): any[] {
+function getRolesForUserAndRepo(repoId: string, state: IPermissionsState): any[] {
   const userId = state.user?.id
   const roles = state.roles
   let result: any[] = []
@@ -245,7 +245,7 @@ function getRolesForUserAndRepo(repoId: string, state: PermissionsState): any[] 
  * @returns role or null
  */
 // getExplicitRoleForUserAndFile
-export function getExplicitRoleForUserAndFile(fileKey: string, state: PermissionsState): any | null {
+export function getExplicitRoleForUserAndFile(fileKey: string, state: IPermissionsState): any | null {
   const userId = state.user?.id
   const roles = state.roles
   return fileKey in roles.byFileKey && userId && userId in roles.byFileKey[fileKey]
@@ -261,7 +261,7 @@ export function getExplicitRoleForUserAndFile(fileKey: string, state: Permission
  * @returns array of roles
  */
 // getRolesForResource
-export function getRolesForResource(resourceType: FResourceCategoryType, resourceIdOrKey: string, state: PermissionsState): any[] {
+export function getRolesForResource(resourceType: FResourceCategoryType, resourceIdOrKey: string, state: IPermissionsState): any[] {
   switch (resourceType) {
     case FResourceCategoryType.FILE: {
       const roles: any[] = []
@@ -294,7 +294,7 @@ export function getRolesForResource(resourceType: FResourceCategoryType, resourc
  * @returns boolean
  */
 // A
-function isEduTeamAccessRestricted(teamId: string, minLevel: number, state: PermissionsState): boolean {
+function isEduTeamAccessRestricted(teamId: string, minLevel: number, state: IPermissionsState): boolean {
   if (state.user && !isStudentValidated(state.user))
     return false
   const team = findTeamById(teamId, state)
@@ -318,7 +318,7 @@ function isEduTeamAccessRestricted(teamId: string, minLevel: number, state: Perm
  * @returns boolean
  */
 // N
-function hasTeamRoleAccess(teamId: string, minLevel: number, state: PermissionsState): boolean {
+function hasTeamRoleAccess(teamId: string, minLevel: number, state: IPermissionsState): boolean {
   return hasMinRole(getRolesForUserAndTeam(teamId, state), minLevel)
     && !isEduTeamAccessRestricted(teamId, minLevel, state)
 }
@@ -331,7 +331,7 @@ function hasTeamRoleAccess(teamId: string, minLevel: number, state: PermissionsS
  * @returns boolean
  */
 // x
-function canAccessTeam(teamId: string, minLevel: number, state: PermissionsState): boolean {
+function canAccessTeam(teamId: string, minLevel: number, state: IPermissionsState): boolean {
   const team = findTeamById(teamId, state)
   if (!team)
     return false
@@ -378,7 +378,7 @@ function canAccessTeam(teamId: string, minLevel: number, state: PermissionsState
  * @returns boolean
  */
 // canViewFolder_DEPRECATED
-export function canViewFolder_DEPRECATED(folderId: string, state: PermissionsState): boolean {
+export function canViewFolder_DEPRECATED(folderId: string, state: IPermissionsState): boolean {
   const userId = state.user?.id
   const folder = state.folders[folderId]
   if (!userId || !folder)
@@ -425,7 +425,7 @@ export function canViewFolder_DEPRECATED(folderId: string, state: PermissionsSta
  * @returns boolean
  */
 // canViewTeam
-export function canViewTeam(teamId: string, state: PermissionsState): boolean {
+export function canViewTeam(teamId: string, state: IPermissionsState): boolean {
   return canAccessTeam(teamId, AccessLevelEnum.VIEWER, state)
 }
 
@@ -436,7 +436,7 @@ export function canViewTeam(teamId: string, state: PermissionsState): boolean {
  * @returns boolean
  */
 // canEditTeam
-export function canEditTeam(teamId: string, state: PermissionsState): boolean {
+export function canEditTeam(teamId: string, state: IPermissionsState): boolean {
   return canAccessTeam(teamId, AccessLevelEnum.EDITOR, state)
 }
 
@@ -447,7 +447,7 @@ export function canEditTeam(teamId: string, state: PermissionsState): boolean {
  * @returns boolean
  */
 // canAdminTeam
-export function canAdminTeam(teamId: string, state: PermissionsState): boolean {
+export function canAdminTeam(teamId: string, state: IPermissionsState): boolean {
   return canAccessTeam(teamId, AccessLevelEnum.ADMIN, state)
 }
 
@@ -458,7 +458,7 @@ export function canAdminTeam(teamId: string, state: PermissionsState): boolean {
  * @returns boolean
  */
 // canOwnTeam
-export function canOwnTeam(teamId: string, state: PermissionsState): boolean {
+export function canOwnTeam(teamId: string, state: IPermissionsState): boolean {
   return canAccessTeam(teamId, AccessLevelEnum.OWNER, state)
 }
 
@@ -469,7 +469,7 @@ export function canOwnTeam(teamId: string, state: PermissionsState): boolean {
  * @returns boolean
  */
 // hasViewerRoleAccessOnTeam
-export function hasViewerRoleAccessOnTeam(teamId: string, state: PermissionsState): boolean {
+export function hasViewerRoleAccessOnTeam(teamId: string, state: IPermissionsState): boolean {
   return hasTeamRoleAccess(teamId, AccessLevelEnum.VIEWER, state)
 }
 
@@ -480,7 +480,7 @@ export function hasViewerRoleAccessOnTeam(teamId: string, state: PermissionsStat
  * @returns boolean
  */
 // hasEditorRoleAccessOnTeam
-export function hasEditorRoleAccessOnTeam(teamId: string, state: PermissionsState): boolean {
+export function hasEditorRoleAccessOnTeam(teamId: string, state: IPermissionsState): boolean {
   return hasTeamRoleAccess(teamId, AccessLevelEnum.EDITOR, state)
 }
 
@@ -492,7 +492,7 @@ export function hasEditorRoleAccessOnTeam(teamId: string, state: PermissionsStat
  * @returns boolean
  */
 // hasAdminRoleAccessOnTeam__DEPRECATED
-export function hasAdminRoleAccessOnTeam__DEPRECATED(teamId: string, state: PermissionsState, userId: string): boolean {
+export function hasAdminRoleAccessOnTeam__DEPRECATED(teamId: string, state: IPermissionsState, userId: string): boolean {
   const roles = (() => {
     const r = state.roles
     return teamId in r.byTeamId && userId && userId in r.byTeamId[teamId]
@@ -509,7 +509,7 @@ export function hasAdminRoleAccessOnTeam__DEPRECATED(teamId: string, state: Perm
  * @returns boolean
  */
 // hasAdminRoleAccessOnTeam
-export function hasAdminRoleAccessOnTeam(teamId: string, state: PermissionsState): boolean {
+export function hasAdminRoleAccessOnTeam(teamId: string, state: IPermissionsState): boolean {
   return hasTeamRoleAccess(teamId, AccessLevelEnum.ADMIN, state)
 }
 
@@ -521,7 +521,7 @@ export function hasAdminRoleAccessOnTeam(teamId: string, state: PermissionsState
  * @returns org user object or null
  */
 // F
-function getOrgUser(state: PermissionsState, orgId: string, userId: string): any | null {
+function getOrgUser(state: IPermissionsState, orgId: string, userId: string): any | null {
   return userId
     ? state.orgUsersByOrgId[orgId]?.[userId] ?? getUserOrTeamById(state, 'org_user', orgId)
     : null
@@ -534,7 +534,7 @@ function getOrgUser(state: PermissionsState, orgId: string, userId: string): any
  * @returns boolean
  */
 // canGuestOrg
-export function canGuestOrg(orgId: string, state: PermissionsState): boolean {
+export function canGuestOrg(orgId: string, state: IPermissionsState): boolean {
   const user = state.user
   if (!orgId || !user)
     return false
@@ -550,7 +550,7 @@ export function canGuestOrg(orgId: string, state: PermissionsState): boolean {
  * @returns boolean
  */
 // canMemberOrg
-export function canMemberOrg(orgId: string, state: PermissionsState, userId?: string): boolean {
+export function canMemberOrg(orgId: string, state: IPermissionsState, userId?: string): boolean {
   if (!orgId)
     return false
   userId = userId || state.user?.id
@@ -566,7 +566,7 @@ export function canMemberOrg(orgId: string, state: PermissionsState, userId?: st
  * @returns boolean
  */
 // canAdminOrg
-export function canAdminOrg(orgId: string, state: PermissionsState, userId?: string): boolean {
+export function canAdminOrg(orgId: string, state: IPermissionsState, userId?: string): boolean {
   if (!orgId)
     return false
   const org = state.orgById[orgId] ?? getUserOrTeamById(state, 'org', orgId)
@@ -594,7 +594,7 @@ export function hasOrgAccess(orgUser: any, org: any, minRole: number): boolean {
  * @returns boolean
  */
 // canManageNonSecretOrgTeam
-export function canManageNonSecretOrgTeam(team: any, state: PermissionsState, userId?: string): boolean {
+export function canManageNonSecretOrgTeam(team: any, state: IPermissionsState, userId?: string): boolean {
   return team.org_access !== FAccessLevelType.SECRET
     && (() => {
       userId = userId || state.user?.id
@@ -644,7 +644,7 @@ export function canManageNonSecretOrgTeam(team: any, state: PermissionsState, us
  * @returns boolean
  */
 // isOrgUserExternallyRestrictedFromState
-export function isOrgUserExternallyRestrictedFromState(state: PermissionsState): boolean {
+export function isOrgUserExternallyRestrictedFromState(state: IPermissionsState): boolean {
   return isExternalRestricted(state.user, state.currentUserOrgId)
 }
 
@@ -655,7 +655,7 @@ export function isOrgUserExternallyRestrictedFromState(state: PermissionsState):
  * @returns boolean
  */
 // hasActiveEduTeam
-export function hasActiveEduTeam(state: PermissionsState, userId: string): boolean {
+export function hasActiveEduTeam(state: IPermissionsState, userId: string): boolean {
   return !!userId
     && Object.entries(state.teamUserByTeamId ?? {}).some(([teamId, teamUsers]) => {
       const team = state.teams[teamId]
@@ -670,7 +670,7 @@ export function hasActiveEduTeam(state: PermissionsState, userId: string): boole
  * @returns string | null
  */
 // getReadOnlyOverrideMessageForFolder
-export function getReadOnlyOverrideMessageForFolder(role: any, state: PermissionsState): string | null {
+export function getReadOnlyOverrideMessageForFolder(role: any, state: IPermissionsState): string | null {
   if (
     role.level !== AccessLevelEnum.VIEWER
     && role.level !== AccessLevelEnum.VIEW_PROTOTYPES

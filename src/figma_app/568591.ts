@@ -14,7 +14,7 @@ import { setTagGlobal } from "../905/11";
 import { diffSets } from "../905/760682";
 import { logError, logInfo } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { pI } from "../figma_app/770088";
 import { pf } from "../905/201151";
 import { getSelectedEditorType } from "../figma_app/976749";
@@ -40,7 +40,7 @@ class M {
     return this.getReactions(e).find(r => r.emoji === t && r.fileCommentId === e && r.userId === this.client.user.id) ? this.removeReaction(e, t) : this.addReaction(e, t, r);
   }
   async addReaction(e, t, r) {
-    let n = XHR.post(`/api/file/${this.client.fileKey}/comments/${e}/reactions`, {
+    let n = sendWithRetry.post(`/api/file/${this.client.fileKey}/comments/${e}/reactions`, {
       emoji: t,
       prototype_mode: r?.prototype_mode || !1,
       selected_view: r?.selectedView || "",
@@ -70,7 +70,7 @@ class M {
     return await n;
   }
   async removeReaction(e, t) {
-    let r = XHR.del(`/api/file/${this.client.fileKey}/comments/${e}/reactions`, {
+    let r = sendWithRetry.del(`/api/file/${this.client.fileKey}/comments/${e}/reactions`, {
       emoji: t
     });
     this.client.optimistically(async (n, i, a) => {
@@ -125,7 +125,7 @@ class j {
           let r = null;
           let i = null;
           let a = null;
-          for (let n of e) if ("VIEW_QUERY_NODE.REMOVE_RESULT" === n.type || "STORE.ADD_INSTANCE" === n.type || "STORE.REMOVE_INSTANCE" === n.type || "SESSION.APPLY_MUTATIONS" === n.type || "SESSION.APPLY_SHADOW_MUTATIONS" === n.type || "SESSION.REMOVE_SHADOW_MUTATIONS" === n.type || "REQUEST_MESSAGE" === n.type && "sync" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "synced" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "pendingMutations" === n.message.messageType) logInfo(t, JSON.stringify(n));else if ("VIEW_QUERY_NODE.ADD_RESULT" === n.type || "VIEW_QUERY_NODE.UPDATE_RESULT" === n.type) {
+          for (let n of e) if ("VIEW_QUERY_NODE.REMOVE_RESULT" === n.type || "STORE.ADD_INSTANCE" === n.type || "STORE.REMOVE_INSTANCE" === n.type || "SESSION.APPLY_MUTATIONS" === n.type || "SESSION.APPLY_SHADOW_MUTATIONS" === n.type || "SESSION.REMOVE_SHADOW_MUTATIONS" === n.type || "REQUEST_MESSAGE" === n.type && "sync" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "synced" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "pendingMutations" === n.message.messageType) logInfo(t, JSON.stringify(n)); else if ("VIEW_QUERY_NODE.ADD_RESULT" === n.type || "VIEW_QUERY_NODE.UPDATE_RESULT" === n.type) {
             if (n.type === r && n.queryId === i && n.instance === a) continue;
             logInfo(t, JSON.stringify(n));
             r = n.type;
@@ -167,7 +167,7 @@ class j {
       let c = await t.onValidationError(F(o.users_without_view), F(o.ext_users_without_view), F(o.uninvitable_users));
       return c ? (trackEventAnalytics("New comment API handling validation", {
         uuid
-      }), XHR.post(`/api/file/${fileKey}/comments`, {
+      }), sendWithRetry.post(`/api/file/${fileKey}/comments`, {
         file_key: fileKey,
         message_meta: messageMeta,
         attachments: attachments.map(e => e.id),
@@ -182,7 +182,7 @@ class j {
     };
     let m = _$$e(this.client.subscription);
     let g = this.client.subscription.data?.file?.currentUserCommentReadStatus;
-    let f = XHR.post(`/api/file/${fileKey}/comments`, {
+    let f = sendWithRetry.post(`/api/file/${fileKey}/comments`, {
       file_key: fileKey,
       message_meta: messageMeta,
       attachments: attachments.map(e => e.id),
@@ -263,7 +263,7 @@ class j {
         this.trackMissingCommentData("New Comment", uuid, n, r, {
           isLoadedComments: m
         }, t);
-      } catch {}
+      } catch { }
       return e;
     }), uuid];
   }
@@ -280,7 +280,7 @@ class j {
       fileKey
     } = this.client;
     let u = extractInviteTokens(messageMeta);
-    let _ = XHR.post(`/api/file/${fileKey}/comments/${e.threadId}`, {
+    let _ = sendWithRetry.post(`/api/file/${fileKey}/comments/${e.threadId}`, {
       file_key: fileKey,
       uuid,
       message_meta: messageMeta,
@@ -367,7 +367,7 @@ class U {
   }
   async markAsUnread(e) {
     let t = this.client.subscription.data?.file?.currentUserCommentReadStatus;
-    let r = XHR.post(`/api/file/${this.client.fileKey}/unread_comments`, {
+    let r = sendWithRetry.post(`/api/file/${this.client.fileKey}/unread_comments`, {
       comment_ids: [e],
       ...(!t && {
         all_read_at: gj.allReadAt
@@ -413,7 +413,7 @@ class U {
   }
   async markAllAsRead() {
     let e = this.client.subscription.data?.file?.currentUserCommentReadStatus;
-    let t = XHR.del(`/api/file/${this.client.fileKey}/unread_comments`, {
+    let t = sendWithRetry.del(`/api/file/${this.client.fileKey}/unread_comments`, {
       ...(!e && {
         all_read_at: gj.allReadAt
       })
@@ -447,7 +447,7 @@ class U {
   }
   async markAsRead(e) {
     let t = this.client.subscription.data?.file?.currentUserCommentReadStatus;
-    let r = XHR.del(`/api/file/${this.client.fileKey}/unread_comments`, {
+    let r = sendWithRetry.del(`/api/file/${this.client.fileKey}/unread_comments`, {
       comment_ids: e,
       ...(!t && {
         all_read_at: gj.allReadAt

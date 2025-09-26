@@ -5,7 +5,7 @@ import { renderI18nText } from "../905/303541";
 import { Z } from "../905/104740";
 import { VF, uY } from "../figma_app/989514";
 import { navigateAndSelect, NavigationDirection } from "../figma_app/202626";
-import { F_, EL } from "../905/748636";
+import { ArrowPosition, PositioningStrategy } from "../905/748636";
 export let $$u1 = "design-panel-container";
 export function $$p0(e) {
   let [t, r] = useState(!1);
@@ -21,7 +21,7 @@ export function $$p0(e) {
       }), r(!0)) : e.flowDirection === NavigationDirection.FORWARD ? e.onNext() : e.onPrevious();
     });
   }), t) ? jsx(VF, {
-    arrowPosition: F_.RIGHT_BODY,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     disableHighlight: !0,
     dismissModal: e.onClose,
     lowerLeftText: jsx(uY, {
@@ -31,7 +31,7 @@ export function $$p0(e) {
     onPrimaryCtaClick: e.onNext,
     onSecondaryCtaClick: e.onPrevious,
     pointsTo: "designPanel",
-    shouldCenterArrow: EL.FALLBACK,
+    shouldCenterArrow: PositioningStrategy.FALLBACK,
     targetKey: $$u1,
     title: renderI18nText("tooltips_plus_onboarding.design_panel.title"),
     trackingContextName: "Tooltips+ Design Panel Step",

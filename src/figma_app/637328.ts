@@ -1,5 +1,5 @@
 import { WB } from "../905/761735";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 export function $$s1(e, t, r, i, a) {
   e.id && "optimistic-id" !== e.id ? WB()?.optimisticallyUpdate({
@@ -35,7 +35,7 @@ let $$o2 = createOptimistThunk((e, t) => {
   let r = e.getState().user?.id;
   let n = e.getState().currentUserOrgId;
   let a = e.getState().currentTeamId;
-  let o = XHR.put("/api/file_browser_preferences", {
+  let o = sendWithRetry.put("/api/file_browser_preferences", {
     ordered_team_ids: t.prefs.orderedTeamIds,
     ordered_favorites: t.prefs.orderedFavoritedResourceIds,
     org_id: n,
@@ -54,7 +54,7 @@ let $$l0 = createOptimistThunk((e, t) => {
   if (o) for (var d of o) (a.favoritedFiles?.some(e => e.id === d) || a.favoritedPrototypes?.some(e => e.id === d)) && l.push(d);
   let c = a.favoritedProjects?.filter(e => t.orderedFolderSubscriptions.includes(e.resourceId)).map(e => e.id) ?? [];
   l.push(...c);
-  let u = XHR.put("/api/file_browser_preferences", {
+  let u = sendWithRetry.put("/api/file_browser_preferences", {
     ordered_favorites: l,
     team_id: n
   });

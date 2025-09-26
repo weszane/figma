@@ -25,7 +25,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { I as _$$I } from "../905/932503";
 import { buildUploadUrl } from "../figma_app/169182";
 import { JL, We } from "../figma_app/165623";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { trackFileEvent } from "../figma_app/314264";
@@ -37,7 +37,7 @@ import { L as _$$L } from "../905/671373";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { SvgComponent } from "../905/714743";
 import { toggleDropdown } from "../figma_app/976345";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { j as _$$j } from "../905/834956";
 import { K0 } from "../figma_app/778125";
 import { A as _$$A2 } from "../svg/789982";
@@ -181,7 +181,7 @@ function es({
   let g = useSelector(e => e.voice.activeCall[N.key]);
   let f = useDispatch();
   let [O, w] = useState(null);
-  let x = Um();
+  let x = useDropdownState();
   let b = useRef(null);
   let T = !!(x && x.type === ee);
   let D = a.reduce((e, t) => e.add(t.userId), new Set());
@@ -1181,7 +1181,7 @@ function tr(e) {
     try {
       let {
         data
-      } = await XHR.post(`/api/voice/${fileKey}/auth`);
+      } = await sendWithRetry.post(`/api/voice/${fileKey}/auth`);
       let o = await JL(data.meta.user_encryption_key);
       let s = await We(o, data.meta.call_user_id);
       if (s != s) throw Error(`User ID does not match local user ID.
@@ -1216,7 +1216,7 @@ remote: ${s}`);
   let eI = async e => {
     let {
       data
-    } = await XHR.post(`/api/voice/${fileKey}/auth`, {
+    } = await sendWithRetry.post(`/api/voice/${fileKey}/auth`, {
       call_user_id: call.uid
     });
     await call.renewToken(data.meta.auth_token);

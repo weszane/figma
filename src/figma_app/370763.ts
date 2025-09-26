@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { DesignGraphElements } from "../figma_app/763686";
 import { atom } from "jotai";
 import { VU } from "../905/625959";
-import { xc } from "../905/848862";
+import { dropdownStateAtom } from "../905/848862";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { c1 } from "../figma_app/357047";
 export function $$u3(e) {
@@ -201,7 +201,7 @@ let $$E6 = atom(e => e($$f2), (e, t, r) => {
   $$h0($$u3(r));
 });
 let $$y5 = {
-  readOnlyOverlayInfoAtom: xc,
+  readOnlyOverlayInfoAtom: dropdownStateAtom,
   activeToolIdAtom: $$E6,
   readOnlyTopLevelModeAtom: $$m4,
   readOnlyEditModeTypeAtom: g

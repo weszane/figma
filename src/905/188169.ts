@@ -3,9 +3,9 @@ import { FontSourceType, FontHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { logError } from "../905/714362";
-import { _D } from "../905/291654";
+import { isEditorTypeExcluded } from "../905/291654";
 import { RE, Wp, x6, Aw, qV, uv, Qr } from "../905/690539";
-import { a as _$$a } from "../905/714538";
+import { getHighestPriorityFontKey } from "../905/714538";
 export function $$u0(e) {
   return useMemo(() => {
     let t = e && e >= 22 || !1;
@@ -26,7 +26,7 @@ export function $$p5(e, t, i, s, u) {
         continue;
       }
       if (0 === Object.keys(t[u] || {}).length) continue;
-      let g = _$$a(e[u]);
+      let g = getHighestPriorityFontKey(e[u]);
       let f = e[u][g].source;
       if (RE(u) && f === FontSourceType.GOOGLE) continue;
       let _ = u.toLowerCase().endsWith("charted") && f === FontSourceType.GOOGLE;
@@ -34,7 +34,7 @@ export function $$p5(e, t, i, s, u) {
       let y = u.toLowerCase().startsWith("playwrite") && f === FontSourceType.GOOGLE && !["Playwrite US Modern", "Playwrite US Trad"].includes(u);
       let b = getFeatureFlags().ce_skip_misnamed_font && "?????" === u && f === FontSourceType.GOOGLE;
       let v = !1;
-      if (getFeatureFlags().dse_sf_pro_font && p && (v = _D(u, p)), y || _ || A || b || v) continue;
+      if (getFeatureFlags().dse_sf_pro_font && p && (v = isEditorTypeExcluded(u, p)), y || _ || A || b || v) continue;
       let I = f === FontSourceType.LOCAL && Object.values(e[u][g].styles).some(e => e.userInstalled);
       let E = f === FontSourceType.LOCAL && Wp(e[u][g]);
       let x = Object.keys(e[u]).every(t => Object.values(e[u][t].styles).some(e => !!e.variationAxes));

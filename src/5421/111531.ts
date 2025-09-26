@@ -80,7 +80,7 @@ import { useSingleEffect } from "../905/791079";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { Qr } from "../905/690539";
 import { Xo } from "../figma_app/482495";
-import { pn as _$$pn } from "../905/714538";
+import { getFontStyleMapping } from "../905/714538";
 import { calculatePickerPositionBelow } from "../905/959568";
 import { Cn } from "../905/882267";
 import { UG } from "../figma_app/628987";
@@ -819,7 +819,7 @@ function e9() {
   let [l, s] = XH(directManipulationEditor);
   let d = createRef();
   let c = xF();
-  let p = useMemo(() => _$$pn(c), [c]);
+  let p = useMemo(() => getFontStyleMapping(c), [c]);
   let u = useDispatch();
   let h = Xo();
   let m = "sans-serif";

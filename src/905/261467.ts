@@ -12,7 +12,7 @@ import { VisualBellIcon } from '../905/576487';
 import { getLocalStorage } from '../905/657224';
 import { PluginInstanceManager } from '../905/696438';
 import { Point } from '../905/736624';
-import { uF } from '../905/748636';
+import { HEADER_HEIGHT } from '../905/748636';
 import { D as _$$D } from '../905/771179';
 import { isFullscreenDevHandoffView } from '../905/782918';
 import { PLUGIN_TIMEOUT_MS, PluginIframeMode, PLUGIN_RETRY_DELAY_MS } from '../905/968269';
@@ -42,7 +42,7 @@ export function clamp(value: number, min: number, max: number): number {
 const PLUGIN_POSITIONS_KEY = 'plugin-positions';
 const MIN_WIDTH = 70;
 const WIDTH_PADDING = 50;
-const HEIGHT_PADDING = uF;
+const HEIGHT_PADDING = HEADER_HEIGHT;
 const DEFAULT_IFRAME_WIDTH = PLUGIN_TIMEOUT_MS;
 const DEFAULT_IFRAME_HEIGHT = PLUGIN_RETRY_DELAY_MS;
 const INSPECT_PANEL_ID = PluginIframeMode.INSPECT;
@@ -302,7 +302,7 @@ export class PluginUIManager {
     if (rect) {
       if (z4.getIsExtension()) {
         const paddingTop = panel?.parentElement?.parentElement ? parseFloat(window.getComputedStyle(panel.parentElement.parentElement).paddingTop) : 0;
-        return new Point(rect.x + rect.width - this.iframeWidth, rect.y - this.iframeHeight - uF - paddingTop);
+        return new Point(rect.x + rect.width - this.iframeWidth, rect.y - this.iframeHeight - HEADER_HEIGHT - paddingTop);
       }
       return new Point(left, rect.y);
     }

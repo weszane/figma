@@ -63,8 +63,8 @@ import { perfTimerFrameManagerBindings } from "../figma_app/763686";
 import { kiwiCodec } from "../905/5147";
 import { getInitialOptions } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
-import { Fe } from "../905/284552";
-import { XHR } from "../905/910117";
+import { loadVideoJs } from "../905/284552";
+import { sendWithRetry } from "../905/910117";
 import { xy, hJ } from "../figma_app/102712";
 import { LoadTimeTracker } from "../figma_app/781115";
 import { colorCSSManipulatorInstance } from "../905/989956";
@@ -1059,7 +1059,7 @@ class eK extends PureComponent {
       e.on("canvasResize", this.updateViewportInfoIfNecessary);
       e.on("urlClicked", handleExternalRedirect);
       e.on("loadVideoJsLib", async () => {
-        await Fe().then(t => {
+        await loadVideoJs().then(t => {
           e && e.injectVideoJsLib(t);
         });
       });
@@ -1133,7 +1133,7 @@ class eK extends PureComponent {
     if (this.props.viewer && !e.viewer) {
       let e = this.props.viewer;
       try {
-        XHR.crossOriginGetAny(this.props.hubFile.redirect_canvas_url, null, {
+        sendWithRetry.crossOriginGetAny(this.props.hubFile.redirect_canvas_url, null, {
           responseType: "arraybuffer"
         }).then(({
           data: t

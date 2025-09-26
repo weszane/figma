@@ -1,7 +1,7 @@
 import { DesignGraphElements } from "../figma_app/763686";
 import { createActionCreator } from "../905/73481";
 import { analyticsEventManager } from "../905/449184";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { NotificationCategory } from "../905/170564";
 import { notificationActions } from "../905/463586";
@@ -44,7 +44,7 @@ let $$E0 = createOptimistThunk((e, t) => {
       message: n,
       type: "comments-opted-in",
       button: r,
-      onDismiss: () => {},
+      onDismiss: () => { },
       timeoutOverride: 15e3
     }));
   }
@@ -53,7 +53,7 @@ let y = (e, t) => {
   let r;
   "exp_notification_catfile" === t ? r = `/api/user_notifications/catfile_optin/${e}` : "exp_notification_catfic" === t && (r = `/api/user_notifications/catfic_optin/${e}`);
   return e => {
-    XHR.post(r, {
+    sendWithRetry.post(r, {
       opted_in: e
     });
   };
@@ -112,7 +112,7 @@ let $$I4 = createOptimistThunk((e, t) => {
       message: r,
       type: "dev-mode-opted-in",
       button: t,
-      onDismiss: () => {},
+      onDismiss: () => { },
       timeoutOverride: 15e3
     }));
   }

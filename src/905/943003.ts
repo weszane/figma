@@ -1,5 +1,5 @@
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 export let $$a0 = new class {
   constructor() {
     this.GetExistingProjectsValidator = createNoOpValidator();
@@ -45,18 +45,18 @@ export let $$a0 = new class {
     }) => await t.get(`/api/integrations/supabase/${e.fileKey}/edge_functions/${e.functionName}/logs`));
   }
   pauseProject(e) {
-    return XHR.post(`/api/integrations/supabase/${e.fileKey}/project/pause`, {
+    return sendWithRetry.post(`/api/integrations/supabase/${e.fileKey}/project/pause`, {
       project_id: e.projectId
     });
   }
   connectFile(e) {
-    return XHR.post(`/api/integrations/supabase/${e.fileKey}/connect`, {
+    return sendWithRetry.post(`/api/integrations/supabase/${e.fileKey}/connect`, {
       supabase_project_id: e.supabaseProjectId,
       supabase_org_id: e.supabaseOrgId
     });
   }
   disconnectFile(e) {
-    return XHR.post(`/api/integrations/supabase/${e.fileKey}/disconnect`);
+    return sendWithRetry.post(`/api/integrations/supabase/${e.fileKey}/disconnect`);
   }
   deployEdgeFunction(e) {
     return this.DeployEdgeFunctionValidator.validate(async ({
@@ -66,16 +66,16 @@ export let $$a0 = new class {
     }));
   }
   createSecret(e) {
-    return XHR.post(`/api/integrations/supabase/${e.fileKey}/secrets`, APIParameterUtils.toAPIParameters({
+    return sendWithRetry.post(`/api/integrations/supabase/${e.fileKey}/secrets`, APIParameterUtils.toAPIParameters({
       secret_name: e.secretName,
       secret_value: e.secretValue
     }));
   }
   deauthorizeFile(e) {
-    return XHR.del(`/api/integrations/supabase/${e.fileKey}/authorization`);
+    return sendWithRetry.del(`/api/integrations/supabase/${e.fileKey}/authorization`);
   }
   restoreFile(e) {
-    return XHR.post(`/api/integrations/supabase/${e.fileKey}/project/restore`);
+    return sendWithRetry.post(`/api/integrations/supabase/${e.fileKey}/project/restore`);
   }
 }();
 export const R = $$a0;

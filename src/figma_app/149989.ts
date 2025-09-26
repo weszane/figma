@@ -20,7 +20,7 @@ import { Fl } from "../figma_app/236178";
 import { NX, k9 } from "../figma_app/777207";
 import { useHasResourcePresetKey } from "../figma_app/255679";
 import { kf, u5, Rb, yp, pN } from "../figma_app/852050";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { useCurrentTool } from "../figma_app/722362";
 import { useOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
@@ -531,7 +531,7 @@ export function $$el3({
     eventName: "variables.variable_picker_load_time"
   });
   let ea = useOpenFileLibraryKey();
-  let es = Um();
+  let es = useDropdownState();
   let el = l ? tx(l) : null;
   let [ec, eu] = useState(null);
   useRef(null).current = ec;

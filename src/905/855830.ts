@@ -24,7 +24,7 @@ import { Link } from '../905/438674';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { AutoLayout } from '../905/470281';
 import { ProductAccessTypeEnum } from '../905/513035';
-import { OJ } from '../905/519092';
+import { HeaderModal } from '../905/519092';
 import { e as _$$e2 } from '../905/579755';
 import { requestUpgrade } from '../905/584989';
 import { getFeatureFlags } from '../905/601108';
@@ -189,7 +189,7 @@ function eh(e) {
       children: renderI18nText('request_upgrade.provisional_access.curf.try_it_now')
     })]
   });
-  return jsxs(OJ, {
+  return jsxs(HeaderModal, {
     title: entryPoint === DeepLinkType.USER_SETTINGS ? L(licenseType, v ?? void 0, entryPoint) : t[licenseType],
     maxWidth: 360,
     minWidth: 360,
@@ -477,7 +477,7 @@ export function $$eb0(e) {
   let eD = planUserPermission === FMemberRoleType.GUEST;
   let eL = P && eP && (eO === UpgradeRequestSetting.ALL_USERS || eO === UpgradeRequestSetting.MEMBERS && !eD);
   if (eN.status === 'loading' && !eP) {
-    return jsx(OJ, {
+    return jsx(HeaderModal, {
       title: jsx(Wi, {}),
       maxWidth: 360,
       minWidth: 360,
@@ -537,7 +537,7 @@ export function $$eb0(e) {
           orgName: eP.name,
           permission: planUserPermission,
           setting: eO
-        }) : jsxs(OJ, {
+        }) : jsxs(HeaderModal, {
           title: es,
           maxWidth: 360,
           minWidth: 360,

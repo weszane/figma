@@ -4,8 +4,8 @@ import { throwTypeError } from "../figma_app/465776";
 import { renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { A as _$$A } from "../905/956262";
-import { M } from "../905/152487";
-import { on } from "../905/425180";
+import { OnboardingSequence } from "../905/152487";
+import { ModalRenderer } from "../905/425180";
 export function $$u0(e) {
   let {
     steps,
@@ -59,11 +59,11 @@ export function $$u0(e) {
     onClick: next,
     ctaTrackingDescriptor: UpgradeAction.NEXT
   };
-  return jsx(M, {
+  return jsx(OnboardingSequence, {
     isShowing: e.isShowing,
     testId: e.testId,
     userFlagOnShow: e.userFlagOnShow,
-    children: jsx(on, {
+    children: jsx(ModalRenderer, {
       ...g,
       onClose: () => h("close_button_clicked"),
       primaryCta: v,

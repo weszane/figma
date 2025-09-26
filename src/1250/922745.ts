@@ -1,8 +1,8 @@
-import { b } from "../905/275748";
+import { LazyComponentFactory } from "../905/275748";
 import _require from "../7021/149615";
 import { registerModal, createModalConfig } from "../905/102752";
 let a;
-let r = new b({
+let r = new LazyComponentFactory({
   name: "billing_remodel_terms",
   description: "Code related to informing customers about the billing remodel and new terms that they may need to accept",
   dependencies: [],

@@ -5,7 +5,7 @@ import { extractIccProfileFromJpeg, extractIccProfileFromPng, isAnimatedGif } fr
 import { decodeBase64 } from '../905/561685'
 import { ImageOrientationUtils, OrientationEnum } from '../905/580661'
 import { logError } from '../905/714362'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { getWasmModule } from '../figma_app/762706'
 import { ColorSpaceEnum, YesNoEnum } from '../figma_app/763686'
 import { BrowserInfo } from '../figma_app/778880'
@@ -178,7 +178,7 @@ async function fallbackDecode(
       try {
         colorProfile = detectColorSpace(result.iccProfileRawData)
       }
-      catch {}
+      catch { }
     }
   }
   let orientation: OrientationEnum | null = null
@@ -188,7 +188,7 @@ async function fallbackDecode(
       if (icc)
         colorProfile = detectColorSpace(icc) ?? ColorSpaceEnum.SRGB
     }
-    catch {}
+    catch { }
     orientation = ImageOrientationUtils.getOrientation(data)
     // Note: 'w' variable not defined in original, assuming it's a global flag
   }
@@ -292,7 +292,7 @@ async function checkWebGLSupport(gl: WebGLRenderingContext, blob: Blob): Promise
           supports = true
       }
     }
-    catch {}
+    catch { }
     gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer)
     gl.bindTexture(gl.TEXTURE_2D, texture)
     if (tex)
@@ -595,9 +595,9 @@ export const imageProcessor = { // Original: $$P3
 async function processWithWorker(mimeType: string, data: Uint8Array) {
   if (mimeType === 'image/heic') {
     try {
-      const response = await XHR.post('/api/upnode/heic_convert', data, {
+      const response = await sendWithRetry.post('/api/upnode/heic_convert', data, {
         retryCount: 3,
-        headers: { ...XHR.requiredHeaders, 'Content-Type': 'image/heic' },
+        headers: { ...sendWithRetry.requiredHeaders, 'Content-Type': 'image/heic' },
         rawBody: true,
         responseType: 'arraybuffer',
       })
@@ -631,7 +631,7 @@ async function processWithWorker(mimeType: string, data: Uint8Array) {
  * Fetches image data from URL. Original: $$M4
  */
 export async function fetchImageData(url: string): Promise<Uint8Array> {
-  return new Uint8Array((await XHR.crossOriginGet(url, undefined, { responseType: 'arraybuffer', retryCount: 3 })).data)
+  return new Uint8Array((await sendWithRetry.crossOriginGet(url, undefined, { responseType: 'arraybuffer', retryCount: 3 })).data)
 }
 
 // Main API object

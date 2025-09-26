@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { TabsPrimitiveTabStrip } from "../905/840133";
 import { r as _$$r2 } from "../905/216849";
-import { H as _$$H } from "../905/56919";
+import { useTabManager } from "../905/56919";
 import { TabLoop } from "../905/718764";
 import { N as _$$N } from "../905/130112";
 import { ButtonPrimitive } from "../905/632989";
@@ -403,7 +403,7 @@ function eg({
     d.current?.focus();
   }, [d]);
   let $ = "VOTE_STAMP" === r;
-  let [X, q, J] = _$$H({
+  let [X, q, J] = useTabManager({
     REACTION: !$,
     STAMP: !$,
     VOTE_STAMP: $

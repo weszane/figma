@@ -6,7 +6,7 @@ import { openWindow } from "../905/508367";
 import { debugState } from "../905/407919";
 import { customHistory } from "../905/612521";
 import { logWarning } from "../905/714362";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { AUTH_SET_REDIRECT_URL, AUTH_INIT, AUTH_SET_GOOGLE_ID_TOKEN, AUTH_SET_GOOGLE_TOKEN_TYPE, AUTH_CHANGE_NAME, AUTH_SET_ORIGIN, changeAuthFormState, AUTH_GOOGLE_SIGNUP, AUTH_SHOW_ERROR } from "../905/194276";
 import { _G } from "../905/164233";
 import { MZ, P8 } from "../905/997533";
@@ -91,7 +91,7 @@ export function $$k0(e, t, r) {
   t && (a += "&from_ms_teams=1");
   i(a);
 }
-class M extends Error {}
+class M extends Error { }
 export async function $$F3(e, {
   dispatch: t,
   apiUrl: r,
@@ -119,7 +119,7 @@ export async function $$F3(e, {
         google_fed_cm_enabled: getFeatureFlags().google_federated_cm ?? !1,
         totp_key: r
       };
-      return XHR.post(e, i);
+      return sendWithRetry.post(e, i);
     }(r, e, C?.totp_key);
     t(FlashActions.flash(getI18nString("auth.sign-in-success", {
       email: data.meta.email

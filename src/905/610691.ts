@@ -8,7 +8,7 @@ import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { pH } from "../figma_app/147337";
 import { $ } from "../905/293658";
 import { w } from "../905/13390";
-import { Y } from "../905/347011";
+import { useFavoriteResource } from "../905/347011";
 import { d as _$$d } from "../figma_app/307143";
 import { ac } from "../905/930279";
 import { t$ } from "../figma_app/863319";
@@ -53,7 +53,7 @@ export function $$I0({
     let a = t ? Tf.getOrgId(t) : null;
     let s = t ? Tf.getFavoriteResourceTeamId(t) : null;
     let o = userHasPlan(a, s);
-    let l = Y(n ?? "", FEntityType.FILE, a, s);
+    let l = useFavoriteResource(n ?? "", FEntityType.FILE, a, s);
     let d = pH(e?.key ?? "", {
       enabled: !!e && i.pinToWorkspace
     });

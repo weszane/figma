@@ -4,7 +4,7 @@ import { debounce } from "../905/915765";
 import { IntersectionSentinel } from "../905/925868";
 import { renderI18nText } from "../905/303541";
 import { NJ } from "../figma_app/419216";
-import { q3 } from "../figma_app/450829";
+import { OverlayType } from "../figma_app/450829";
 import { pO, Hj } from "../figma_app/336229";
 let $$u6 = "community-tab";
 let $$p1 = "community-comments-on-focus";
@@ -52,7 +52,7 @@ function T({
 e => jsx(T, {
   ...e
 });
-q3.SELF_CONTAINED;
+OverlayType.SELF_CONTAINED;
 export const J5 = $$E0;
 export const LU = $$p1;
 export const Pn = $$_2;

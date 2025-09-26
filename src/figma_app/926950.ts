@@ -25,10 +25,10 @@ import { J as _$$J2 } from '../905/639674';
 import { SvgComponent } from '../905/714743';
 import { Point } from '../905/736624';
 import { l as _$$l } from '../905/745972';
-import { Ao, uF } from '../905/748636';
+import { DraggableModalManager, HEADER_HEIGHT } from '../905/748636';
 import { c$, l6, sK } from '../905/794875';
-import { Um } from '../905/848862';
-import { XHR, XHRError } from '../905/910117';
+import { useDropdownState } from '../905/848862';
+import { sendWithRetry, XHRError } from '../905/910117';
 import { selectUserFlag } from '../905/940356';
 import { postUserFlag } from '../905/985254';
 import { A as _$$A4 } from '../1617/230645';
@@ -315,7 +315,7 @@ function eu({
     (m.errorMessages.length || g.errorMessages.length) && (eI.current = [...m.errorMessages, ...g.errorMessages]);
     try {
       let e;
-      if (!o || Z ? (e = await XHR.post(t, p), eE.current = e.data.meta.task_url, ef.current = e.data.meta.task_gid) : e = await XHR.put(`${t}/update_task`, {
+      if (!o || Z ? (e = await sendWithRetry.post(t, p), eE.current = e.data.meta.task_url, ef.current = e.data.meta.task_gid) : e = await sendWithRetry.put(`${t}/update_task`, {
         ...p,
         task_gid: Q(H)
       }), e.status >= 200 && e.status < 300) {
@@ -354,13 +354,13 @@ function eu({
     let t = await eC();
     t && (K(l ? t.meta.title : ''), Y(t.meta.description), $(t.meta.severity ?? er), X(t.meta.product_area ?? er));
   };
-  return jsx(Ao, {
+  return jsx(DraggableModalManager, {
     ref: eS,
     title: _,
     initialPosition: (() => {
       let e = G ? _$$l3 : _$$U;
       let t = _$$l3;
-      eu && (t = windowInnerHeight - (ev.current + uF) - _$$l3);
+      eu && (t = windowInnerHeight - (ev.current + HEADER_HEIGHT) - _$$l3);
       return new Point(e, t);
     })(),
     initialConstraints: {
@@ -413,7 +413,7 @@ function eu({
 function ep(e) {
   let t = e.recordingKey;
   let r = e.isPerformanceIssue ?? !1;
-  let s = Um();
+  let s = useDropdownState();
   let p = useDispatch();
   let h = getFileTypePx();
   let {
@@ -432,7 +432,7 @@ function ep(e) {
   let [et, en] = useState(void 0);
   let ec = useId();
   let eu = useId();
-  let ep = windowInnerHeight - (h + uF + _$$U) - _$$l3;
+  let ep = windowInnerHeight - (h + HEADER_HEIGHT + _$$U) - _$$l3;
   useSingleEffect(() => {
     !0 === j && (eh(), U(!1));
   });

@@ -7,10 +7,10 @@ import { reportError } from "../905/11";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { z } from "../905/905430";
+import { createMenuItems } from "../905/905430";
 import { aS, Im } from "../905/608145";
 import { c4 } from "../figma_app/805925";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { hasLocalFileId } from "../figma_app/155287";
 import { cq } from "../905/794154";
 import { w0 } from "../figma_app/189990";
@@ -25,7 +25,7 @@ export function $$I2({
   let {
     extension
   } = e;
-  let r = Um();
+  let r = useDropdownState();
   let i = $$S1(extension);
   let a = c4();
   let {
@@ -33,7 +33,7 @@ export function $$I2({
   } = cq();
   let d = w0();
   if (!i || !extension || !extension.manifest || !extension.manifest.menu) return null;
-  let c = z(extension.manifest.menu, extension).map(e => aS(e, e => () => {
+  let c = createMenuItems(extension.manifest.menu, extension).map(e => aS(e, e => () => {
     var t;
     Im(a, "quick-actions", e.menuAction);
     d(e, !0);
@@ -48,7 +48,7 @@ export function $$I2({
   });
 }
 export function $$S1(e) {
-  let t = Um();
+  let t = useDropdownState();
   return hasLocalFileId(e) ? t?.type === b && t?.data.extensionId === e.plugin_id && t?.data.localFileId === e.localFileId : t?.type === b && t?.data.extensionId === e.plugin_id && t?.data.localFileId === null;
 }
 export function $$v0({
@@ -58,7 +58,7 @@ export function $$v0({
 }) {
   let n = useDispatch();
   return useCallback(i => {
-    if (e) n(hideDropdownAction());else if (i) {
+    if (e) n(hideDropdownAction()); else if (i) {
       let e = i.getBoundingClientRect();
       n(showDropdownThunk({
         type: b,

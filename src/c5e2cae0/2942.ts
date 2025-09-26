@@ -4,7 +4,7 @@ import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { isFigmaEmailSuffix } from "../figma_app/416935";
 import { useLatestRef } from "../figma_app/922077";
 import { getPaymentFlowData } from "../figma_app/169182";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { sx as _$$sx } from "../figma_app/307841";
@@ -55,7 +55,7 @@ let $$b2 = D(({
   useEffect(() => {
     async function s(t) {
       try {
-        let s = await XHR.post("/api/subscriptions/teams/calculate_estimate", {
+        let s = await sendWithRetry.post("/api/subscriptions/teams/calculate_estimate", {
           ...t,
           team_id: e
         });

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { Cf, it } from "../905/504727";
 import { A as _$$A } from "../6828/814452";
 let $$p0 = "scale-down";
@@ -17,7 +17,7 @@ export function $$h2({
   ariaLabelledBy: c
 }) {
   let m = useDispatch();
-  let h = Um();
+  let h = useDropdownState();
   let f = h?.type === e;
   let _ = useCallback(() => {
     f ? m(hideDropdownAction()) : m(showDropdownThunk({

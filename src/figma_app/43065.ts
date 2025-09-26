@@ -8,7 +8,7 @@ import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { buildUploadUrl } from "../figma_app/169182";
 import { e6 } from "../figma_app/617427";
-import { Ph, o as _$$o } from "../905/160095";
+import { TrackedLink, TrackedLinkPrimitive } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { B } from "../905/261906";
 import { WX } from "../figma_app/482142";
@@ -32,7 +32,7 @@ export function $$A0(e) {
   let x = A ? renderI18nText("figmake.paywall.title_rollout") : renderI18nText("figmake.paywall.title");
   let N = A ? renderI18nText("figmake.paywall.subtitle_rollout") : renderI18nText("figmake.paywall.feature.available_on_full_seats");
   let C = A ? renderI18nText("figmake.paywall.footer_credits_rollout_learn_more", {
-    learnMoreLink: jsx(Ph, {
+    learnMoreLink: jsx(TrackedLink, {
       href: v,
       newTab: !0,
       children: renderI18nText("figmake.paywall.learn_more")
@@ -95,7 +95,7 @@ export function $$A0(e) {
               },
               className: "x78zum5 xl56j7k x6s0dn4 x1vqgdyp x19y5rnk x4z9k3i x1o2sk6j xu5wzci x1tk3asg xk50ysn",
               children: renderI18nText("figmake.paywall.upgrade_button")
-            }), jsx(_$$o, {
+            }), jsx(TrackedLinkPrimitive, {
               href: v,
               newTab: !0,
               className: "x78zum5 xl56j7k x6s0dn4 x1vqgdyp x19y5rnk x4z9k3i x1o2sk6j xv2f06h xt0e3qv x1akne3o x1oo3vh0",

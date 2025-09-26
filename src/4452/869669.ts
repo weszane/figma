@@ -5,9 +5,9 @@ import { renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
-import { F_ } from "../905/858282";
+import { ArrowPosition } from "../905/858282";
 import { jkr } from "../figma_app/6204";
 let $$p0 = "sc_team_creation_modal_onboarding_key";
 let g = "seen_sharing_clarity_team_creation_modal_overlay";
@@ -27,8 +27,8 @@ export function $$x1() {
       canShow: e => !e
     });
   });
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: jsx("p", {
       children: renderI18nText("rcs.sharing_clarity.team_creation_modal_description")
     }),

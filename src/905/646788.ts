@@ -22,7 +22,7 @@ import { i as _$$i } from "../905/46262";
 import { MM, jS } from "../905/136701";
 import { TabLoop } from "../905/718764";
 import { BrowserInfo } from "../figma_app/778880";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { getFeatureFlags } from "../905/601108";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { sR as _$$sR, gq, KZ } from "../905/932881";
@@ -165,7 +165,7 @@ import { copyTextToClipboard } from "../figma_app/623293";
 import { LazyInputForwardRef } from "../905/408237";
 import { VisualBellIcon } from "../905/576487";
 import { Dp, yJ, ml, hP, U as _$$U2, W7, cH, nM as _$$nM, M3 as _$$M, Fn, $j, d4 as _$$d2, lX } from "../905/759412";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { l6, c$ as _$$c$, sK } from "../905/794875";
 import { HU } from "../figma_app/926061";
 import { h1 as _$$h4 } from "../905/986103";
@@ -251,7 +251,7 @@ import { e as _$$e6 } from "../905/295932";
 import { L as _$$L5 } from "../905/657783";
 import { Y as _$$Y3 } from "../905/26051";
 import { c as _$$c2 } from "../905/425573";
-import { rq as _$$rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { isEmptyObject } from "../figma_app/493477";
 import { P as _$$P } from "../905/842406";
 import { hw } from "../905/727738";
@@ -264,7 +264,7 @@ import { VO, o6, Vh, gy } from "../905/986349";
 import { d as _$$d3 } from "../905/44199";
 import { d as _$$d4 } from "../905/762622";
 import { $ as _$$$2, t as _$$t8 } from "../905/628632";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { cL } from "../905/748726";
 import { checkDomainExists } from "../figma_app/336853";
 import { handleInviteStatusResponses, sendRoleInvites, showInviteVisualBell } from "../905/351260";
@@ -276,7 +276,7 @@ import { confirmOrgGuestInviteModal } from "../905/154112";
 import { LoadingSpinner } from "../figma_app/858013";
 import { N as _$$N4 } from "../905/572042";
 import { BI, m0 as _$$m3 } from "../figma_app/546509";
-import { Z as _$$Z2 } from "../905/116724";
+import { useDelayedCallback } from "../905/116724";
 import { w as _$$w2 } from "../905/733703";
 import { l as _$$l2 } from "../905/572910";
 import { sendMetric, useWebLoggerTimerEffect } from "../905/485103";
@@ -286,7 +286,7 @@ import { useSprigWithSampling } from "../905/99656";
 function T(e) {
   let t = BrowserInfo.isIpadNative;
   return jsx(TabLoop, {
-    children: jsx(OJ, {
+    children: jsx(HeaderModal, {
       bottomSection: e.bottomSection,
       closeOnEsc: !0,
       containerClassName: "file_permissions_modal_base--container--33xKw",
@@ -2374,7 +2374,7 @@ let ne = (e, t) => e === FPermissionLevelType.ORG_EDIT && t ? getI18nString("per
 }) : getI18nString("permissions_modal.file_share_settings.only_invited_people");
 function nt(e) {
   let t = useDispatch();
-  let i = Um();
+  let i = useDropdownState();
   let [s, o] = useState(null);
   let l = e.orgMaxExpirationInHrs ? e.currentTimestamp.clone().add(e.orgMaxExpirationInHrs, "hours") : null;
   let d = l ? cH(l, !0) : Fn(e.currentTimestamp, $j.WEEK);
@@ -4634,7 +4634,7 @@ let r1 = registerModal(function (e) {
   let i = () => {
     t(popModalStack());
   };
-  return jsxs(OJ, {
+  return jsxs(HeaderModal, {
     title: getI18nString("file_permissions.enable_folder_access.give_access_to_the_folder", {
       folderName: e.folder.name
     }),
@@ -4687,7 +4687,7 @@ let r2 = registerModal(function (e) {
   let i = () => {
     t(popModalStack());
   };
-  return jsxs(OJ, {
+  return jsxs(HeaderModal, {
     title: getI18nString("file_permissions.disable_folder_access.remove_folder_names_access", {
       folderName: e.folder.name
     }),
@@ -4809,7 +4809,7 @@ function ae() {
       canShow: e => !e
     });
   });
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     isShowing,
     title: renderI18nText("rcs.sharing_clarity.branch_modal.title"),
     description: jsx("p", {
@@ -4841,7 +4841,7 @@ function ar() {
       canShow: e => !e
     });
   });
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     isShowing,
     title: renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_1_title"),
     description: jsx("p", {
@@ -4873,7 +4873,7 @@ function al() {
       canShow: e => !e
     });
   });
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     isShowing,
     title: renderI18nText("rcs.sharing_clarity.prototype_modal.title"),
     description: jsx("p", {
@@ -5039,7 +5039,7 @@ function au({
   });
 }
 function aA(e) {
-  let t = Um();
+  let t = useDropdownState();
   let i = _$$P();
   let r = useDispatch();
   let s = mu(e.fileRowResource.file, e.seenState.user_id);
@@ -5420,7 +5420,7 @@ function aq({
         }));
         return;
       }
-      XHR.put("/api/invites/file_link_access", {
+      sendWithRetry.put("/api/invites/file_link_access", {
         emails: l,
         resource_type: resourceType,
         resource_id_or_key: resourceIdOrKey,
@@ -5466,7 +5466,7 @@ function a$({
   fileRoles: d,
   ...c
 }) {
-  let u = Um();
+  let u = useDropdownState();
   let {
     inviteLevel,
     changeInviteLevel,
@@ -5667,7 +5667,7 @@ function aZ({
   let g = selectUser();
   let f = useSelector(e => e.autocomplete);
   let _ = useSelector(e => e.contacts);
-  let A = !Um();
+  let A = !useDropdownState();
   let y = useCallback(e => {
     let i = t?.org_domains || aP;
     return _$$t2(e, t, i);
@@ -6002,7 +6002,7 @@ function a6({
   let d = _$$m3();
   let {
     start
-  } = _$$Z2(() => o(!1));
+  } = useDelayedCallback(() => o(!1));
   let u = useCallback(() => {
     if (l?.requestToShareLink) {
       l.requestToShareLink(t);

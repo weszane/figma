@@ -35,7 +35,7 @@ import { on } from "../figma_app/292324";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { getFullscreenViewFile } from "../figma_app/516028";
 import { mapToEditorType } from "../figma_app/300692";
-import { jr } from "../905/792802";
+import { parseSearchParams } from "../905/792802";
 import { mapPathToSelectedView } from "../figma_app/193867";
 import { mapViewTypeToMainfestEditorType, parsePluginParams } from "../905/327571";
 import { setActiveVersion, enterVersionHistoryMode } from "../figma_app/841351";
@@ -237,7 +237,7 @@ let K = createOptimistThunk((e, t) => {
       query,
       searchModelType,
       searchScope
-    } = jr(t.params, i, i.selectedView);
+    } = parseSearchParams(t.params, i, i.selectedView);
     query && e.dispatch(searchThunk({
       searchModelType,
       query,

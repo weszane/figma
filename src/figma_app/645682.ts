@@ -36,7 +36,7 @@ import { stopPropagation } from "../figma_app/753501";
 import { Tg } from "../figma_app/967154";
 import { Ad } from "../figma_app/811257";
 import { NA } from "../figma_app/760428";
-import { S as _$$S } from "../905/459477";
+import { fileLaunchHelper as _$$S } from "../905/459477";
 import { Mx, Og, aE, Wf, Ki, $s, AQ, ns } from "../figma_app/882817";
 var c = d;
 let G = forwardRef(function ({

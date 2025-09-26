@@ -162,9 +162,9 @@ let $$D1 = forwardRef((e, t) => {
       onMouseUp,
       placeholder: e.placeholder || getI18nString("general.search"),
       spellCheck: !1,
-      style: styleBuilderInstance.$$if(e.hasTransparentBackground, styleBuilderInstance.add({
+      style: styleBuilderInstance.if(e.hasTransparentBackground, styleBuilderInstance.add({
         background: "transparent"
-      })).$$if(_ || e.smallFont, styleBuilderInstance.textBodyMedium).$,
+      })).if(_ || e.smallFont, styleBuilderInstance.textBodyMedium).$,
       value: e.query
     }), jsx(z, {
       query: e.query,
@@ -214,9 +214,9 @@ let $$k4 = forwardRef((e, t) => {
       onMouseUp,
       placeholder: e.placeholder || getI18nString("general.search"),
       spellCheck: !1,
-      style: styleBuilderInstance.$$if(e.hasTransparentBackground, styleBuilderInstance.add({
+      style: styleBuilderInstance.if(e.hasTransparentBackground, styleBuilderInstance.add({
         background: "transparent"
-      })).$$if(p || e.smallFont, styleBuilderInstance.textBodyMedium).$,
+      })).if(p || e.smallFont, styleBuilderInstance.textBodyMedium).$,
       value: e.query
     }), jsx(z, {
       query: e.query,

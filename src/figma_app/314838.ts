@@ -1,6 +1,6 @@
 import { z } from "../905/239603";
 import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { convertSinatraModel } from "../905/412108";
 let o = z.object({
   id: z.string(),
@@ -26,20 +26,20 @@ let $$l0 = new class {
     }) => await t.put(`/api/color_palettes/${e.uuid}`, APIParameterUtils.toAPIParameters(e)));
   }
   async deleteColorPalette(e) {
-    await XHR.del(`/api/color_palettes/${e}`);
+    await sendWithRetry.del(`/api/color_palettes/${e}`);
   }
   setUserColorPaletteOverrideForFile(e, t) {
-    return XHR.post(`/api/files/${e}/color_palette`, APIParameterUtils.toAPIParameters({
+    return sendWithRetry.post(`/api/files/${e}/color_palette`, APIParameterUtils.toAPIParameters({
       colorPaletteUuid: t
     }));
   }
   async setTeamDefaultPalette(e, t) {
-    await XHR.post(`/api/teams/${e}/default_color_palette`, APIParameterUtils.toAPIParameters({
+    await sendWithRetry.post(`/api/teams/${e}/default_color_palette`, APIParameterUtils.toAPIParameters({
       colorPaletteUuid: t
     }));
   }
   async clearTeamDefaultPalette(e) {
-    await XHR.del(`/api/teams/${e}/default_color_palette`);
+    await sendWithRetry.del(`/api/teams/${e}/default_color_palette`);
   }
 }();
 export const v = $$l0;

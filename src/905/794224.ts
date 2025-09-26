@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { q } from "../905/600041";
+import { ThumbnailContainer } from "../905/600041";
 import { DesignsList, SizeOption } from "../905/171275";
 import s from "classnames";
 import { SvgComponent } from "../905/714743";
@@ -69,7 +69,7 @@ export function $$m0({
     default:
       o = "locked_thumbnail--lockedThumbnailDefault--nQRmr";
   }
-  return jsx(q, {
+  return jsx(ThumbnailContainer, {
     borderRadius: i,
     backgroundClassName: o,
     noBorder: s,

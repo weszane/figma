@@ -1,6 +1,6 @@
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -33,7 +33,7 @@ let $$T7 = createOptimistThunk(async (e, t) => {
     folder_id: t.folderId
   };
   t.actionType === $$b15 ? trackEventAnalytics($$b15, u) : trackEventAnalytics($$y13, u);
-  await XHR.post("/api/team_role_requests", r).then(({
+  await sendWithRetry.post("/api/team_role_requests", r).then(({
     data: r
   }) => {
     let n = r.meta;
@@ -45,14 +45,14 @@ let $$T7 = createOptimistThunk(async (e, t) => {
   });
 });
 let $$I16 = createOptimistThunk((e, t) => {
-  XHR.del(`/api/team_role_requests/${t.requestId}`).then(t => {
+  sendWithRetry.del(`/api/team_role_requests/${t.requestId}`).then(t => {
     e.dispatch(FlashActions.flash(getI18nString("org_actions.request_withdrawn")));
   }).catch(t => {
     e.dispatch(FlashActions.error(resolveMessage(t.message) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$S2 = createOptimistThunk((e, t) => {
-  XHR.post(`/api/team_role_requests/${t.requestId}/approve`, {
+  sendWithRetry.post(`/api/team_role_requests/${t.requestId}/approve`, {
     level: `${t.level}`
   }).then(({
     data: t
@@ -66,7 +66,7 @@ let $$S2 = createOptimistThunk((e, t) => {
   });
 });
 let $$v10 = createOptimistThunk((e, t) => {
-  XHR.post(`/team_role_requests/${t.requestId}/deny`).then(t => {
+  sendWithRetry.post(`/team_role_requests/${t.requestId}/deny`).then(t => {
     e.dispatch(FlashActions.flash(getI18nString("org_actions.request_denied")));
   }).catch(t => {
     e.dispatch(FlashActions.error(resolveMessage(t.message) || getI18nString("org_actions.an_error_occurred")));
@@ -75,7 +75,7 @@ let $$v10 = createOptimistThunk((e, t) => {
 let $$A19 = createOptimistThunk((e, {
   orgId: t
 }) => {
-  XHR.put(`/api/orgs/${t}`, {
+  sendWithRetry.put(`/api/orgs/${t}`, {
     public_plugins_allowed: !0
   }).then(({
     data: t
@@ -90,7 +90,7 @@ let $$x22 = createOptimistThunk((e, {
   successMessage: r
 }) => {
   let n = e.getState().currentUserOrgId;
-  XHR.put(`/api/orgs/${n}`, t).then(t => {
+  sendWithRetry.put(`/api/orgs/${n}`, t).then(t => {
     e.dispatch(putOrgs({
       org: t.data.meta
     }));
@@ -108,7 +108,7 @@ let $$N11 = createOptimistThunk((e, {
   googleSsoOnly: r,
   mfaRequired: n
 }) => {
-  XHR.put(`/api/orgs/${t}`, {
+  sendWithRetry.put(`/api/orgs/${t}`, {
     google_sso_only: r,
     mfa_required: n
   }).then(({
@@ -127,7 +127,7 @@ let $$C14 = createOptimistThunk((e, {
   samlSsoOnly: r,
   mfaRequired: n
 }) => {
-  XHR.put(`/api/orgs/${t}`, {
+  sendWithRetry.put(`/api/orgs/${t}`, {
     saml_sso_only: r,
     mfa_required: n
   }).then(t => {
@@ -143,7 +143,7 @@ let $$w4 = createOptimistThunk((e, {
   orgId: t,
   attribute: r
 }) => {
-  XHR.put(`/api/orgs/${t}`, {
+  sendWithRetry.put(`/api/orgs/${t}`, {
     featured_scim_metadata: r
   }).then(t => {
     e.dispatch(putOrgs({
@@ -160,7 +160,7 @@ export function $$O1(e) {
   } = e;
   let n = async (e, n, i) => {
     let s = !1;
-    await XHR.put(`/api/orgs/${org.id}`, {
+    await sendWithRetry.put(`/api/orgs/${org.id}`, {
       vat_gst_id: e,
       regional_vat_gst_id: i
     }).then(() => {
@@ -188,7 +188,7 @@ let $$R12 = createOptimistThunk((e, {
   orgId: n,
   timeoutDurationInSecs: i
 }) => {
-  XHR.put(`/api/orgs/${n}`, {
+  sendWithRetry.put(`/api/orgs/${n}`, {
     idle_timeout_duration_in_secs: i
   }).then(t => {
     e.dispatch(FlashActions.flash(getI18nString("org_actions.updated_idle_session_timeout")));
@@ -206,7 +206,7 @@ let $$L6 = createOptimistThunk((e, {
   ipAllowlistEnabled: r,
   ipAllowlistRanges: n,
   onSuccess: i
-}) => XHR.put(`/api/orgs/${t}/ip_allowlist_ranges`, {
+}) => sendWithRetry.put(`/api/orgs/${t}/ip_allowlist_ranges`, {
   ip_ranges: r ? n : void 0,
   ip_allowlist_enabled: r
 }).then(n => {
@@ -226,7 +226,7 @@ let $$L6 = createOptimistThunk((e, {
 let $$P17 = createOptimistThunk((e, {
   orgId: t
 }) => {
-  XHR.post(`/api/org/${t}/deletion_request`).then(t => {
+  sendWithRetry.post(`/api/org/${t}/deletion_request`).then(t => {
     e.dispatch(FlashActions.flash(getI18nString("orgs_middleware.deletion_request_submitted")));
   }).catch(t => {
     e.dispatch(FlashActions.error(t.data?.message || getI18nString("orgs_middleware.an_error_occurred_while_enqueeing_deletion_request"), 5e3));
@@ -238,7 +238,7 @@ let $$D0 = createOptimistThunk((e, {
   exportControlSetting: r,
   successMessage: n
 }) => {
-  XHR.put(`/api/orgs/${t}/export_controls`, {
+  sendWithRetry.put(`/api/orgs/${t}/export_controls`, {
     export_control_setting: r
   }).then(() => {
     e.dispatch($$x22({
@@ -258,7 +258,7 @@ let $$k3 = createOptimistThunk((e, {
   successMessage: i,
   onClose: d
 }) => {
-  XHR.put(`/api/orgs/${t}/workspaces/export_controls`, {
+  sendWithRetry.put(`/api/orgs/${t}/workspaces/export_controls`, {
     export_control_setting: n,
     workspace_id: r
   }).then(() => {
@@ -280,7 +280,7 @@ let $$M18 = createOptimistThunk((e, {
   successMessage: i,
   onClose: d
 }) => {
-  XHR.put(`/api/orgs/${t}/workspaces/export_controls`, {
+  sendWithRetry.put(`/api/orgs/${t}/workspaces/export_controls`, {
     export_control_setting: null,
     workspace_id: r
   }).then(() => {
@@ -333,7 +333,7 @@ let $$F9 = createOptimistThunk((e, t) => {
   }, c);
 });
 let $$j21 = createOptimistThunk((e, t) => {
-  XHR.post(`/api/org/${t.orgId}/delete_org_users`, {
+  sendWithRetry.post(`/api/org/${t.orgId}/delete_org_users`, {
     org_user_ids: t.orgUserIds
   }).then(t => {
     e.dispatch(FlashActions.flash(getI18nString("orgs_middleware.user_data_deleted")));

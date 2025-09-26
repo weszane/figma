@@ -93,7 +93,7 @@ function ee({
           children: [jsx(_$$l, {
             style: styleBuilderInstance.add({
               '--color-icon': 'var(--color-icon-onbrand)'
-            }).$$if(a, styleBuilderInstance.visible, styleBuilderInstance.invisible).$
+            }).if(a, styleBuilderInstance.visible, styleBuilderInstance.invisible).$
           }), jsxs(AutoLayout, {
             direction: 'vertical',
             spacing: 0,
@@ -101,7 +101,7 @@ function ee({
               className: cssBuilderInstance.textBodyMedium.$,
               children: d
             }), jsx('div', {
-              className: cssBuilderInstance.textBodyMedium.preWrap.$$if(!u, cssBuilderInstance.colorTextMenuSecondary).$,
+              className: cssBuilderInstance.textBodyMedium.preWrap.if(!u, cssBuilderInstance.colorTextMenuSecondary).$,
               children: c
             })]
           })]

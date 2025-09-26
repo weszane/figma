@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { dm } from "../905/535224";
+import { redirectToFontSettings } from "../905/535224";
 import { ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
@@ -45,7 +45,7 @@ export let $$_0 = registerModal(function () {
         },
         children: renderI18nText("fullscreen.font_settings.do_this_later_in_account_settings")
       }), jsx(ButtonBasePrimary, {
-        onClick: dm,
+        onClick: redirectToFontSettings,
         className: pL,
         children: renderI18nText("fullscreen.font_settings.enable_local_fonts")
       })]

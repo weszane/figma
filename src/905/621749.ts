@@ -13,7 +13,7 @@ import { ModalUpperRightCorner } from "../905/17223";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
-import { $z } from "../905/599896";
+import { TrackedButton } from "../905/599896";
 import { I as _$$I } from "../905/343721";
 import { A as _$$A2 } from "../905/658244";
 import { createModalConfig, registerLegacyModal, registerModal } from "../905/102752";
@@ -479,7 +479,7 @@ export let $$z0 = registerModal(function ({
             className: cssBuilderInstance.mx12.my8.underline.cursorPointer.fontMedium.lh16.$,
             onClick: P,
             children: renderI18nText("churn_friction.modal.cta.keep_plan")
-          }), jsx($z, {
+          }), jsx(TrackedButton, {
             variant: "secondary",
             innerText: "Continue",
             onClick: () => {

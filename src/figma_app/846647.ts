@@ -8,7 +8,7 @@ import { Z } from "../905/104740";
 import { VF } from "../figma_app/989514";
 import { b as _$$b2 } from "../figma_app/5657";
 import { navigateAndSelect } from "../figma_app/202626";
-import { F_, EL } from "../905/748636";
+import { ArrowPosition, PositioningStrategy } from "../905/748636";
 export let $$h0 = "text-panel-container";
 export function $$m1(e) {
   let [t, r] = useState(!1);
@@ -37,8 +37,8 @@ export function $$m1(e) {
     lowerLeftText: e.lowerLeftText,
     onSecondaryCtaClick: e.onSecondaryCtaClick,
     onPrimaryCtaClick: e.onPrimaryCtaClick,
-    arrowPosition: F_.RIGHT_BODY,
-    shouldCenterArrow: EL.FALLBACK,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
+    shouldCenterArrow: PositioningStrategy.FALLBACK,
     pointsTo: "designPanel",
     primaryCtaProps: e.primaryCtaProps,
     secondaryCtaProps: e.secondaryCtaProps

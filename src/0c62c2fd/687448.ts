@@ -90,11 +90,11 @@ function B({
     className: "emoji_text_area--textAreaContainer--4FHeL",
     onClick: f,
     children: [jsxs(_$$P, {
-      className: S()(cssBuilderInstance.flexGrow1.overflowAuto.maxWFull.borderBox.$$if(u, cssBuilderInstance.bb1.bSolid.colorBorder).$, l),
+      className: S()(cssBuilderInstance.flexGrow1.overflowAuto.maxWFull.borderBox.if(u, cssBuilderInstance.bb1.bSolid.colorBorder).$, l),
       innerClassName: cssBuilderInstance.hFull.$,
       children: [jsx(iX, {
         ref: p,
-        className: cssBuilderInstance.pt16.px16.borderBox.$$if(u, cssBuilderInstance.pb4).$,
+        className: cssBuilderInstance.pt16.px16.borderBox.if(u, cssBuilderInstance.pb4).$,
         currentOrgUsers: {
           orgUsers: {}
         },
@@ -131,7 +131,7 @@ function B({
         },
         closeOnInsert: !0
       }), n && jsxs("div", {
-        className: cssBuilderInstance.$$if(g > n, cssBuilderInstance.colorTextDanger, cssBuilderInstance.colorTextSecondary).cursorDefault.$,
+        className: cssBuilderInstance.if(g > n, cssBuilderInstance.colorTextDanger, cssBuilderInstance.colorTextSecondary).cursorDefault.$,
         children: [g, "/", n]
       })]
     })]
@@ -161,8 +161,8 @@ export function $$U0({
       await r(E);
       T();
     } finally {
-      C(!1);
-    }
+        C(!1);
+      }
   }, [r, A, T, E]);
   let F = useModalManager({
     open: w,

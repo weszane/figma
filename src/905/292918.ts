@@ -46,11 +46,11 @@ import { noop } from 'lodash-es';
 import J from "../vendor/338009";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { x as _$$x } from "../905/211326";
+import { LoadingRenderer } from "../905/211326";
 import { FlashActions } from "../905/573154";
 import { getViewName, isBranchView } from "../905/218608";
 import { ur, jP, YL } from "../figma_app/221114";
-import { Dd } from "../905/519092";
+import { ConfirmationModal } from "../905/519092";
 var P = N;
 var D = O;
 let Y = {
@@ -336,7 +336,7 @@ let el = registerModal(function ({
     versionId: "current_version",
     view: "file_default"
   });
-  return jsx(Dd, {
+  return jsx(ConfirmationModal, {
     title: getI18nString("collaboration.feedback.incremental_update_modal.title"),
     maxWidth: 528,
     minWidth: 528,
@@ -352,7 +352,7 @@ let el = registerModal(function ({
     focus: !0,
     disabled: null === l,
     confirmText: getI18nString("collaboration.feedback.incremental_update_modal.confirm"),
-    children: jsx(_$$x, {
+    children: jsx(LoadingRenderer, {
       isLoading: c,
       children: () => jsxs("ol", {
         className: "incremental_update_modal--container--EpZfV",

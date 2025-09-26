@@ -5,7 +5,7 @@ import { mapFileToProductType } from "../figma_app/314264";
 import { isEligibleElement } from "../figma_app/915774";
 import { getPartnerType } from "../905/853613";
 import { Hu, GZ } from "../figma_app/361662";
-import { u as _$$u } from "../905/290607";
+import { setupSwapOrInsertHandler } from "../905/290607";
 import { selectCurrentFile } from "../figma_app/516028";
 import { u2 } from "../figma_app/807786";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -100,7 +100,7 @@ export function $$C1({
       $z();
       close();
     }, [L, B.assetKey, B.type, B.productType, B.libraryType, N, currentSearch, e.ai_score, e.lexical_score, D, M, i, U, F, close]),
-    componentInsertSwapCallback: _$$u({
+    componentInsertSwapCallback: setupSwapOrInsertHandler({
       canSwap: !0,
       openFileKey: C,
       sourceForTracking: $$w0,

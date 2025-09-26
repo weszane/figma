@@ -16,7 +16,7 @@ import { AutoLayout } from "../905/470281";
 import { cortexAPI } from "../figma_app/432652";
 import { JT } from "../figma_app/632248";
 import { RL, qy } from "../figma_app/862289";
-import { r } from "../905/189361";
+import { ActionButton } from "../905/189361";
 import { XG } from "../figma_app/360824";
 import { A } from "../9410/63984";
 import { Ik, r1 } from "../9410/40486";
@@ -162,7 +162,7 @@ export function $$y0() {
           refocusToInput: !1
         }), jsx(AutoLayout, {
           horizontalAlignItems: "end",
-          children: jsx(r, {
+          children: jsx(ActionButton, {
             shortcuts: [{
               key: KeyCodes.ENTER,
               modifier: [ModifierKeyCodes.META]

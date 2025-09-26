@@ -4,7 +4,7 @@ import { createContext, createRef, memo, useCallback, useContext, useEffect, use
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { selectWithShallowEqual } from '../905/103090';
-import { y as _$$y } from '../905/129046';
+import { ImageOverlayComponent } from '../905/129046';
 import { KindEnum } from '../905/129884';
 import { Vb } from '../905/151685';
 import { setupToggleButton } from '../905/167712';
@@ -21,10 +21,10 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { MediaQuerySvgComponent } from '../905/331623';
 import { Q as _$$Q2 } from '../905/346809';
 import { UpgradeAction } from '../905/370443';
-import { rq as _$$rq } from '../905/425180';
+import { OnboardingModal } from '../905/425180';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { P as _$$P } from '../905/460261';
-import { q as _$$q2, v as _$$v2 } from '../905/476456';
+import { removePositionChars, parseAnchorPosition } from '../905/476456';
 import { z as _$$z } from '../905/489760';
 import { bL as _$$bL, c$ as _$$c$, l9, mc } from '../905/493196';
 import { RecordableDiv } from '../905/511649';
@@ -40,12 +40,12 @@ import { getSingletonSceneGraph } from '../905/700578';
 import { logError } from '../905/714362';
 import { SvgComponent } from '../905/714743';
 import { getFilteredFeatureFlags } from '../905/717445';
-import { F_ } from '../905/748636';
+import { ArrowPosition } from '../905/748636';
 import { By } from '../905/777187';
 import { c$ as _$$c$2, tV as _$$tV, l6, sK } from '../905/794875';
 import { languageCodes } from '../905/816253';
 import { EventShield } from '../905/821217';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { bL, c$ } from '../905/867927';
 import { dayjs } from '../905/920142';
 import { q as _$$q } from '../905/932270';
@@ -1581,12 +1581,12 @@ function tc() {
     if (!e) throw new Error('Tried to use `useAspectRatioLockOverlay` outside of provider!');
     return e;
   }();
-  return jsx(_$$rq, {
+  return jsx(OnboardingModal, {
     arrowPadding: 4,
-    arrowPosition: F_.RIGHT_BODY,
+    arrowPosition: ArrowPosition.RIGHT_BODY,
     description: renderI18nText('fullscreen.aspect_ratio_lock_onboarding.body'),
     isShowing: isModalShown,
-    media: jsx(_$$y, {
+    media: jsx(ImageOverlayComponent, {
       src: buildUploadUrl('88fb870fdeb521c4f90560d92c52830f5043c807'),
       alt: 'A GIF demonstrating that something will resize proportionally with Lock aspect ratio enabled.',
       aspectRatio: 16 / 9
@@ -1702,8 +1702,8 @@ let tk = memo(e => {
 function tj(e, t) {
   return (r, n) => {
     if (r !== By.SYNTAX_UNRECOGNIZED) return;
-    let i = _$$v2(n);
-    i != null && (n = _$$q2(n), permissionScopeHandler.user(e, () => {
+    let i = parseAnchorPosition(n);
+    i != null && (n = removePositionChars(n), permissionScopeHandler.user(e, () => {
       t(n, i) !== yesNoTrackingEnum.NO && Fullscreen.triggerAction('commit', {});
     }));
   };
@@ -2435,7 +2435,7 @@ function re(e) {
 }
 function rd(e) {
   let t = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   let s = useSelector(e => e.mirror.selectionProperties.stackLayoutSizeOptions);
   let [o, l] = useState(!1);
   let d = t6(Tv(), e.axis, LayoutSizingMode.FILL_CONTAINER);
@@ -3802,7 +3802,7 @@ let na = {
 };
 export function $$ns3(e) {
   let t = useDispatch();
-  let r = Um();
+  let r = useDropdownState();
   let i = e => {
     fullscreenValue.updateSelectionProperties({
       handleMirroring: e

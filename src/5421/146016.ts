@@ -16,9 +16,10 @@ import { useIsFullscreenSitesView } from '../905/561485';
 import { getFeatureFlags } from '../905/601108';
 import { setupThemeContext } from '../905/614223';
 import { ButtonPrimitive } from '../905/632989';
-import { Um } from '../905/848862';
+import { useDropdownState } from '../905/848862';
 import { areSessionLocalIDsEqual, defaultSessionLocalID, sessionLocalIDToString } from '../905/871411';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { x as _$$x } from '../5421/193325';
 import { t as _$$t2 } from '../5421/711842';
 import { b as _$$b } from '../5421/909298';
@@ -484,7 +485,7 @@ export function $$en0({
     showAdvancedPrototypingVariablesModal,
     showAdvancedPrototypingConditionalActionsModal
   } = zt();
-  let T = Um();
+  let T = useDropdownState();
   let S = hP();
   let {
     firstVariableSetMode,

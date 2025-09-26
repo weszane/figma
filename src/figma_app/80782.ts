@@ -17,7 +17,7 @@ import { hideDropdownAction } from "../905/929976";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
 import { Cn } from "../905/862913";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { Ve } from "../figma_app/198840";
 import { FileCanView } from "../figma_app/43951";
 import { n as _$$n } from "../905/79930";
@@ -37,7 +37,7 @@ export function $$P5(e) {
 export function $$D6({
   template: e
 }) {
-  let t = Um();
+  let t = useDropdownState();
   let {
     primaryKey
   } = fG()(e);
@@ -89,7 +89,7 @@ function k({
         children: [jsx("span", {
           children: renderI18nText("browse_templates_modal.context_menu.view_original_file")
         }), jsx("span", {
-          className: cssBuilderInstance.$$if("loading" !== c.status, cssBuilderInstance.invisible).$,
+          className: cssBuilderInstance.if("loading" !== c.status, cssBuilderInstance.invisible).$,
           children: jsx(_$$k, {})
         })]
       })

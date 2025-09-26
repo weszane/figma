@@ -19,7 +19,7 @@ import { setupLoadingStateHandler } from '../905/696711'
 import { liveStoreInstance } from '../905/713695'
 import { IpcStorageHandler } from '../905/724705'
 import { isVsCodeEnvironment } from '../905/858738'
-import { XHR } from '../905/910117'
+import { sendWithRetry } from '../905/910117'
 import { hideDropdownAction, selectViewAction, setSessionStateAction, showDropdownThunk } from '../905/929976'
 import { getSelectedViewUrl, selectedViewToPath } from '../figma_app/193867'
 import { hasStarterTeamLoopholeAccess, isEligibleForStarterLoopholeTeamOne } from '../figma_app/297957'
@@ -203,7 +203,7 @@ export const switchAccountAndNavigate = createOptimistThunk((dispatchApi, payloa
  * Original: $$G26
  */
 export const startDesktopAppAuth = createOptimistThunk((dispatchApi) => {
-  XHR.post('/api/session/app_auth', { app_type: 'desktop' })
+  sendWithRetry.post('/api/session/app_auth', { app_type: 'desktop' })
     .then(({ data }: any) => {
       const authId = data.meta.id
       let path = `/app_auth/${authId}/grant`

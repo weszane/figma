@@ -22,7 +22,7 @@ import { o0 } from "../469e6e40/616503";
 import { FProductAccessType } from "../figma_app/191312";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { registerModal } from "../905/102752";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 function N(e) {
   let t = useDispatch();
   let [a, r] = useState(!1);
@@ -34,7 +34,7 @@ function N(e) {
     properties: {
       orgId: e.orgId
     },
-    children: jsxs(OJ, {
+    children: jsxs(HeaderModal, {
       title: jsx(T, {
         invoiceType: e.invoiceType
       }),

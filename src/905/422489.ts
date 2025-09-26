@@ -4,11 +4,11 @@ import { Rectangle } from "../905/249071";
 import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { BrowserInfo } from "../figma_app/778880";
-import { j } from "../905/881708";
+import { NameClass } from "../905/881708";
 import { recordReorderTableSpanActive } from "../figma_app/682945";
 import { Ro, xT, Dv } from "../905/962457";
 var p = (e => (e[e.LEFT = 0] = "LEFT", e[e.RIGHT = 1] = "RIGHT", e[e.UP = 2] = "UP", e[e.DOWN = 3] = "DOWN", e))(p || {});
-let m = class e extends j {
+let m = class e extends NameClass {
   constructor(e) {
     super(e);
     this._snapper = null;

@@ -123,7 +123,7 @@ import { J as _$$J3 } from "../905/526136";
 import { useDebounce } from "use-debounce";
 import { wY } from "../figma_app/708845";
 import { clearSelection, addToSelection, getSelectedDevModePropertiesPanelTab, setSelectedDevModePropertiesPanelTab, updateHoveredNode } from "../figma_app/741237";
-import { BK } from "../905/848862";
+import { useDropdown } from "../905/848862";
 import { s as _$$s } from "../905/172385";
 import { S as _$$S3 } from "../figma_app/106763";
 import { O as _$$O2 } from "../3591/240710";
@@ -2808,7 +2808,7 @@ function n$({
   let M = O === e;
   let {
     data
-  } = BK(tM);
+  } = useDropdown(tM);
   let F = data?.annotationId === t;
   let [z] = useDebounce(P, 60);
   let V = M || F || (w ? P && (z || j) : P);

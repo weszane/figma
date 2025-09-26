@@ -6,7 +6,7 @@ import { trackUserEvent } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { debugState } from "../905/407919";
 import { IpcStorageHandler } from "../905/724705";
-import { XHR } from "../905/910117";
+import { sendWithRetry } from "../905/910117";
 let p = "keyboardLayoutPreference";
 let $$_4 = "keyboardLayoutPreference";
 export function $$h0(e) {
@@ -69,7 +69,7 @@ export function $$E1(e) {
       detectedLayout: e.detectedLayout,
       detectedLayoutStr: e.detectedLayoutStr
     });
-  } catch (e) {}
+  } catch (e) { }
 }
 export function $$y6({
   layout: e
@@ -83,7 +83,7 @@ export function $$y6({
     eventName: "user_manual_change"
   });
   Fullscreen.reloadShortcuts(e);
-  XHR.put("/api/user", {
+  sendWithRetry.put("/api/user", {
     keyboard_preference: KeyboardLayout[e],
     keyboard_preference_method: "manual"
   });

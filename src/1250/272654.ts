@@ -17,7 +17,7 @@ import { selectUserFlag } from "../905/940356";
 import { FStudentTeamStatusType } from "../figma_app/191312";
 import { EduOffboardingData, EduOffboardingTeam } from "../figma_app/43951";
 import { registerModal } from "../905/102752";
-import { OJ } from "../905/519092";
+import { HeaderModal } from "../905/519092";
 import { A as _$$A } from "../svg/619883";
 var o = i;
 export let $$k0 = registerModal(function (e) {
@@ -72,12 +72,12 @@ export let $$k0 = registerModal(function (e) {
   };
   return jsx(TrackingProvider, {
     name: "Edu Offboarding Modal",
-    children: jsxs(OJ, {
+    children: jsxs(HeaderModal, {
       title: getI18nString("edu.offboarding_modal.your_education_status"),
       maxWidth: 381,
       onClose: S,
       children: [jsxs("div", {
-        className: o()(cssBuilderInstance.flex.itemsCenter.p8.$, cssBuilderInstance.$$if(C > 0, cssBuilderInstance.colorBgWarningTertiary, cssBuilderInstance.colorBgDangerTertiary).$),
+        className: o()(cssBuilderInstance.flex.itemsCenter.p8.$, cssBuilderInstance.if(C > 0, cssBuilderInstance.colorBgWarningTertiary, cssBuilderInstance.colorBgDangerTertiary).$),
         children: [jsx(SvgComponent, {
           className: cssBuilderInstance.p8.colorIcon.$,
           svg: _$$A

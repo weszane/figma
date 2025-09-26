@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { updateAllStyleThumbnailsOptimist } from "../905/711212";
 import { compareLibraryItemsAlias } from "../905/709171";
-import { Um } from "../905/848862";
+import { useDropdownState } from "../905/848862";
 import { vG } from "../905/213527";
 export function $$c3(e, t) {
   let r = useDispatch();
@@ -24,7 +24,7 @@ export function $$u1(e) {
   }, [r, e]);
 }
 export function $$p0(e) {
-  let t = Um();
+  let t = useDropdownState();
   return useMemo(() => t && t.type === vG && t.data.style.style_type === e ? t : null, [t, e]);
 }
 export function $$_2(e) {

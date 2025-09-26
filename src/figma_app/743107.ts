@@ -9,7 +9,7 @@ import { fetchDynamicConfig } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
 import { qd } from "../figma_app/852050";
 import { isLocalOrSubscribed } from "../figma_app/633080";
-import { D } from "../905/442915";
+import { recommendVariablesService } from "../905/442915";
 import { uQ } from "../figma_app/151869";
 import { kA } from "../figma_app/726579";
 import { Px } from "../figma_app/152690";
@@ -249,7 +249,7 @@ export function $$A1({
       };
       e.queryId = c;
       try {
-        D.recommendVariables(p);
+        recommendVariablesService.recommendVariables(p);
       } catch {}
     }, [t, o, a, e, r, l, d]);
   })({

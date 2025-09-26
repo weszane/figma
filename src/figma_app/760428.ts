@@ -35,7 +35,7 @@ import { $ as _$$$ } from "../905/330495";
 import { p as _$$p } from "../figma_app/295764";
 import { h_ } from "../figma_app/151083";
 import { T as _$$T } from "../figma_app/270091";
-import { S as _$$S } from "../905/459477";
+import { fileLaunchHelper as _$$S } from "../905/459477";
 import { F as _$$F } from "../905/280165";
 import { MC, LO, Z0, YF, sK, qw, vS, EA, me, t4, Bt, Qp, iB, u$, vF, I0, $C, We, N1 } from "../figma_app/882817";
 import { A as _$$A } from "../3850/839808";

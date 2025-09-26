@@ -15,7 +15,7 @@ import { mapFileToProductType } from "../figma_app/314264";
 import { getSelectedFile } from "../905/766303";
 import { compareWithGeneratedKey } from "../905/709171";
 import { memoizedProcessLocalComponents, processLocalComponents } from "../figma_app/80990";
-import { V as _$$V } from "../figma_app/473391";
+import { getAssetKeyForSubscription } from "../figma_app/473391";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { getNonDeletedAssets, getPublishedAssetsForDefaultPublished, filterAssetsWithContainingStateGroup, addStateNamesToAssets, getSubscribedAssetKeys } from "../figma_app/646357";
 import { isLoaded } from "../905/18797";
@@ -107,7 +107,7 @@ let $$G0 = new class extends M {
         let a = new Set();
         let s = e => {
           for (let t of e) {
-            let e = _$$V(t);
+            let e = getAssetKeyForSubscription(t);
             e && a.has(e) || (e && a.add(e), r.push({
               ...t
             }));

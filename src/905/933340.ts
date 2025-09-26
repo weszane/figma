@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { forwardRef, useRef } from "react";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
-import { H } from "../905/286442";
-import { b } from "../905/222272";
+import { usKeyboardFocusHandler } from "../905/286442";
+import { LayoutContainer } from "../905/222272";
 let d = "assets-tab-empty-state";
 let c = forwardRef(({
   children: e,
@@ -29,7 +29,7 @@ function u({
   fillHeight: t = !1
 }) {
   let i = useRef(null);
-  H({
+  usKeyboardFocusHandler({
     ref: i,
     navigationOptions: {
       skipOnDownNavigation: !0,
@@ -46,7 +46,7 @@ export function $$p0({
   children: e,
   fillHeight: t = !1
 }) {
-  return t ? jsx(b, {
+  return t ? jsx(LayoutContainer, {
     fullHeight: !0,
     fullWidth: !0,
     primary: !0,

@@ -29,9 +29,9 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { KindEnum } from "../905/129884";
 import { xH as _$$xH } from "../figma_app/249941";
 import { cq } from "../905/794154";
-import { r as _$$r } from "../905/189361";
+import { ActionButton } from "../905/189361";
 import { m as _$$m } from "../figma_app/175364";
-import { B } from "../905/222272";
+import { FlexBox } from "../905/222272";
 import { n as _$$n } from "../905/895449";
 import { S as _$$S } from "../905/933340";
 export function $$U0() {
@@ -58,7 +58,7 @@ export function $$U0() {
     },
     width: 400,
     direction: "vertical",
-    children: [jsxs(B, {
+    children: [jsxs(FlexBox, {
       fullWidth: !0,
       justify: "space-between",
       children: [jsx(_$$m, {
@@ -70,7 +70,7 @@ export function $$U0() {
         lean: "right",
         items: d,
         disabled: 0 === d.length
-      }), jsxs(B, {
+      }), jsxs(FlexBox, {
         children: [jsxs(_$$t.TabStrip, {
           manager: _,
           children: [jsx(_$$t.Tab, {
@@ -172,7 +172,7 @@ function G(e) {
     children: jsxs("div", {
       className: cssBuilderInstance.wFull.p8.$,
       children: [jsx(_$$n.Header, {
-        children: jsx(B, {
+        children: jsx(FlexBox, {
           fullWidth: !0,
           justify: "space-between",
           children: jsxs("div", {
@@ -216,10 +216,10 @@ function G(e) {
           })
         })
       }), jsx(_$$n.Footer, {
-        children: jsx(B, {
+        children: jsx(FlexBox, {
           fullWidth: !0,
           justify: "end",
-          children: jsx(_$$r, {
+          children: jsx(ActionButton, {
             shortcuts: [{
               key: KeyCodes.ENTER,
               modifier: [ModifierKeyCodes.META]
@@ -316,7 +316,7 @@ function W({
   return (useSingleEffect(() => {
     s && b();
   }), 0 === t.length) ? null : jsxs(Fragment, {
-    children: [jsxs(B, {
+    children: [jsxs(FlexBox, {
       fullWidth: !0,
       justify: "space-between",
       align: "center",

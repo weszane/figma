@@ -11,9 +11,9 @@ import { useFullscreenViewFile, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
-import { rq } from "../905/425180";
+import { OnboardingModal } from "../905/425180";
 import { wV, S5 } from "../figma_app/647246";
-import { F_ } from "../905/748636";
+import { ArrowPosition } from "../905/748636";
 import { TrJ } from "../figma_app/6204";
 import { a5, fc, bo, io, ko } from "../figma_app/73698";
 export let $$C1 = {
@@ -49,8 +49,8 @@ export function $$j0() {
     I && T() && !N && visualAssetsType && currentView === S5.VisualAssets && show();
     isShowing && currentView !== S5.VisualAssets && complete();
   }, [show, complete, isShowing, I, T, N, visualAssetsType, currentView]);
-  return jsx(rq, {
-    arrowPosition: F_.LEFT_TITLE,
+  return jsx(OnboardingModal, {
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     clickOutsideToHide: !0,
     description: renderI18nText("rcs.visual_assets.drag_visual_assets_description"),
     disableHighlight: !0,

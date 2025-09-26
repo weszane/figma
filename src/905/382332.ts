@@ -19,8 +19,8 @@ import { useSingleEffect } from "../905/791079";
 import { UpgradeAction } from "../905/370443";
 import { e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
-import { rq } from "../905/425180";
-import { F_ } from "../905/858282";
+import { OnboardingModal } from "../905/425180";
+import { ArrowPosition } from "../905/858282";
 import { SAW } from "../figma_app/6204";
 import { yl } from "../figma_app/947348";
 import { bL } from "../905/911410";
@@ -70,9 +70,9 @@ function R() {
     href: "https://help.figma.com/hc/articles/31440438150935",
     ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
-  return jsx(rq, {
+  return jsx(OnboardingModal, {
     arrowPadding: 8,
-    arrowPosition: F_.LEFT_TITLE,
+    arrowPosition: ArrowPosition.LEFT_TITLE,
     description: renderI18nText("draw.onboarding.scatter_brushes.description"),
     disableHighlight: !0,
     isShowing,
