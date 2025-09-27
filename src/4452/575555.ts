@@ -77,7 +77,7 @@ import { Lg, Lq } from '../figma_app/392626';
 import { checkOrgUserPermission, isOrgOrEnterprisePlan } from '../figma_app/465071';
 import { debug } from '../figma_app/465776';
 import { T as _$$T, lN } from '../figma_app/472024';
-import { Bq } from '../figma_app/482142';
+import { startOrgUpgradeFlowThunk } from '../figma_app/482142';
 import { Jd, UF } from '../figma_app/494261';
 import { kb } from '../figma_app/502247';
 import { handleSuspenseRetainRelease } from '../figma_app/566371';
@@ -909,7 +909,7 @@ function tf(e) {
       }));
       return;
     }
-    t(Bq({
+    t(startOrgUpgradeFlowThunk({
       openInNewTab: !0,
       upsellSource: UpsellModalType.TEAM_SETTINGS_VIEW
     }));

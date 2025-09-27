@@ -12,11 +12,10 @@ import { confirmOrgGuestInviteModal } from '../905/154112';
 import { hideModal, showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
-import { useSingleEffect } from '../905/791079';
-import { Dp, Ni } from '../905/249410';
-import { R as _$$R2 } from '../905/298004';
+import { UPSELL_INVITE_ONLY_MODAL, UPSELL_VIEW_ONLY_MODAL } from '../905/249410';
+import { createOnboardingStateMachine } from '../905/298004';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { z as _$$z, Z as _$$Z2 } from '../905/306088';
+import { RadioGroup, RadioOption } from '../905/306088';
 import { r as _$$r2, X as _$$X } from '../905/308709';
 import { sendRoleInvites } from '../905/351260';
 import { BannerMessage } from '../905/363675';
@@ -39,6 +38,7 @@ import { ButtonPrimitive } from '../905/632989';
 import { liveStoreInstance } from '../905/713695';
 import { SvgComponent } from '../905/714743';
 import { cL } from '../905/748726';
+import { useSingleEffect } from '../905/791079';
 import { useCurrentUserOrg } from '../905/845253';
 import { r as _$$r } from '../905/857502';
 import { L as _$$L } from '../905/857916';
@@ -82,6 +82,7 @@ import { LoadingOverlay } from '../figma_app/858013';
 import { rn } from '../figma_app/903573';
 import { _9, ET, Iz, J4, mi, YU } from '../figma_app/907616';
 import { truncate } from '../figma_app/930338';
+
 function SharingClarityProjectModalOverlay() {
   const userFlag = useAtomWithSubscription(projectModalOverlayFlagAtom);
   const {
@@ -117,7 +118,7 @@ const seenSharingClarityProjectModalOverlayFlag = 'seen_sharing_clarity_project_
 const projectModalOnboardingKey = 'sc_project_modal_onboarding_key';
 const projectModalTeamAccessOnboardingKey = 'sc_project_modal_team_access_onboarding_key';
 const projectModalOverlayFlagAtom = userFlagExistsAtomFamily(seenSharingClarityProjectModalOverlayFlag);
-const projectModalOnboardingAtom = rn('sc_project_modal_onboarding', _$$R2(BWk));
+const projectModalOnboardingAtom = rn('sc_project_modal_onboarding', createOnboardingStateMachine(BWk));
 function SharingClarityProjectModalOnboarding() {
   const userFlag = useAtomWithSubscription(projectModalOverlayFlagAtom);
   const {
@@ -397,11 +398,11 @@ function eH({
       children: getI18nString('folder_permissions_modal.what_team_members_can_do_project', {
         teamName
       })
-    }), jsxs(_$$z, {
+    }), jsxs(RadioGroup, {
       value: selectedTeamAccess,
       onChange: setSelectedTeamAccess,
       dataTestId: 'permissions-team-access-level-radio-group',
-      children: [jsx(_$$Z2, {
+      children: [jsx(RadioOption, {
         value: FTeamAccessPermissionType.TEAM_ACCESS_EDIT,
         className: hO,
         children: jsx('p', {
@@ -411,7 +412,7 @@ function eH({
       }, 'edit'), jsx('p', {
         className: w3,
         children: renderI18nText('file_browser.folder_settings.team_access_same_as_team_subtitle')
-      }), jsx(_$$Z2, {
+      }), jsx(RadioOption, {
         value: FTeamAccessPermissionType.TEAM_ACCESS_VIEW,
         className: hO,
         children: jsx('p', {
@@ -421,7 +422,7 @@ function eH({
       }, 'view-only'), jsx('p', {
         className: w3,
         children: renderI18nText('file_browser.folder_settings.team_access_view_only_subtitle')
-      }), jsx(_$$Z2, {
+      }), jsx(RadioOption, {
         value: FTeamAccessPermissionType.TEAM_ACCESS_DISABLED,
         className: hO,
         children: jsx('p', {
@@ -707,14 +708,14 @@ export let FolderPermissionsModal = registerModal(modalProps => {
           return;
         }
         teamAccessState === FTeamAccessPermissionType.TEAM_ACCESS_VIEW ? hideModalDispatch(showModalHandler({
-          type: Ni,
+          type: UPSELL_VIEW_ONLY_MODAL,
           data: {
             team,
             editorType: null,
             upsellSource: UpsellModalType.FOLDER_PERMISSION_MODAL
           }
         })) : teamAccessState === FTeamAccessPermissionType.TEAM_ACCESS_DISABLED && hideModalDispatch(showModalHandler({
-          type: Dp,
+          type: UPSELL_INVITE_ONLY_MODAL,
           data: {
             team,
             editorType: null,

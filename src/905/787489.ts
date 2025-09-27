@@ -1,17 +1,47 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useLatestRef } from "../figma_app/922077";
-import { FlashActions } from "../905/573154";
-export function $$o0(e, t, i = 5e3) {
-  let l = useDispatch();
-  let d = useLatestRef(e.status);
-  let {
-    status,
-    errors
-  } = e;
-  useEffect(() => {
-    let e;
-    "errors" === status && "errors" !== d && ("object" == typeof errors && errors && "data" in errors && errors.data && "object" == typeof errors.data && "message" in errors.data && "string" == typeof errors.data.message && (e = errors.data?.message ?? void 0), l(FlashActions.error(e || t, i)), console.error(errors));
-  }, [status, d, errors, l, t, i]);
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { FlashActions } from '../905/573154'
+import { useLatestRef } from '../figma_app/922077'
+
+/**
+ * Interface for the error state object passed to useErrorFlash.
+ */
+interface ErrorState {
+  status: string
+  errors: any
 }
-export const i = $$o0;
+
+/**
+ * Custom hook to flash error messages when the status changes to 'errors'.
+ * It extracts a message from errors.data.message if available, otherwise uses a default message.
+ * Dispatches a flash error action and logs the error to console.
+ * @param state - The error state object containing status and errors.
+ * @param defaultMessage - The default error message to use if no specific message is found.
+ * @param timeout - The timeout for the flash error in milliseconds (default: 5000).
+ */
+export function useErrorFlash(state: ErrorState, defaultMessage: string, timeout: number = 5000) {
+  const dispatch = useDispatch<AppDispatch>()
+  const previousStatus = useLatestRef(state.status)
+  const { status, errors } = state
+
+  useEffect(() => {
+    // Early return if status is not 'errors' or if it was already 'errors' previously
+    if (status !== 'errors' || previousStatus === 'errors') {
+      return
+    }
+
+    // Extract message from errors.data.message if it's a string, otherwise undefined
+    const message = (typeof errors?.data?.message === 'string') ? errors.data.message : undefined
+
+    // Dispatch flash error with extracted message or default
+    dispatch(FlashActions.error(message || defaultMessage, timeout))
+
+    // Log the errors to console for debugging
+    console.error(errors)
+  }, [status, previousStatus, errors, dispatch, defaultMessage, timeout])
+}
+
+/**
+ * Exported alias for useErrorFlash (original export const i = $$o0).
+ */
+export const i = useErrorFlash

@@ -46,7 +46,7 @@ import { orgSubscriptionAtom } from '../905/296690';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R } from '../905/304671';
-import { z as _$$z, Z as _$$Z } from '../905/306088';
+import { RadioGroup, RadioOption } from '../905/306088';
 import { b as _$$b, c as _$$c2 } from '../905/308099';
 import { v as _$$v2 } from '../905/318279';
 import { collaboratorSet, designSet } from '../905/332483';
@@ -303,13 +303,13 @@ function ed(e) {
     children: [desktopAPIInstance && jsx('div', {
       className: wz,
       children: renderI18nText('org_settings.sso.you_must_use_a_web_browser')
-    }), jsxs(_$$z, {
+    }), jsxs(RadioGroup, {
       value: e.signInMethod,
       onChange: t => {
         e.setSignInMethod(t);
       },
       className: cssBuilderInstance.pl10.pt16.$,
-      children: [jsx(_$$Z, {
+      children: [jsx(RadioOption, {
         value: AuthTypeEnum.ANY,
         disabled: !!desktopAPIInstance,
         children: renderI18nText('org_settings.sign_in_method.any', {
@@ -318,12 +318,12 @@ function ed(e) {
             children: renderI18nText('org_settings.sign_in_method.default')
           })
         })
-      }), jsx(_$$Z, {
+      }), jsx(RadioOption, {
         value: AuthTypeEnum.GOOGLE,
         disabled: !!desktopAPIInstance || a,
         tooltipText: a ? getI18nString('org_settings.sign_in_method.unavailable_when_2fa_for_members_is_enabled') : void 0,
         children: renderI18nText('org_settings.sign_in_method.members_must_log_in_with_a_google_account')
-      }), jsx(_$$Z, {
+      }), jsx(RadioOption, {
         tooltipText: a ? getI18nString('org_settings.sign_in_method.unavailable_when_2fa_for_members_is_enabled') : t ? void 0 : getI18nString('org_settings.sign_in_method.you_need_to_configure_saml_sso_first'),
         value: AuthTypeEnum.SAML,
         disabled: !!desktopAPIInstance || !t || a,
@@ -1319,13 +1319,13 @@ let tU = registerModal(() => {
     fixedTop: !0,
     children: jsxs('div', {
       className: 'autogen_password_controls_modal--modalContent--qogS8',
-      children: [renderI18nText('org_settings.autogen_password_controls.description'), jsxs(_$$z, {
+      children: [renderI18nText('org_settings.autogen_password_controls.description'), jsxs(RadioGroup, {
         value: o,
         onChange: e => {
           d(e);
         },
         className: 'autogen_password_controls_modal--radioGroup---6hFh',
-        children: [jsxs(_$$Z, {
+        children: [jsxs(RadioOption, {
           value: 'custom',
           labelClassName: tD,
           disabled: r.status === 'loading',
@@ -1340,7 +1340,7 @@ let tU = registerModal(() => {
             color: 'secondary',
             children: renderI18nText('org_settings.autogen_password_controls.custom_passwords_description')
           })]
-        }), jsxs(_$$Z, {
+        }), jsxs(RadioOption, {
           value: 'autogen',
           labelClassName: tD,
           disabled: r.status === 'loading',
@@ -1397,13 +1397,13 @@ let tF = registerModal(() => {
       children: [jsx('p', {
         className: wz,
         children: renderI18nText('settings_tab.scim_metadata_modal.change_which_scim_metadata_shows_on_the_members_tab')
-      }), jsx(_$$z, {
+      }), jsx(RadioGroup, {
         value: t.featured_scim_metadata,
         onChange: a => e(Kc({
           orgId: t.id,
           attribute: a
         })),
-        children: Object.values(FCostCenterType).map(e => jsx(_$$Z, {
+        children: Object.values(FCostCenterType).map(e => jsx(RadioOption, {
           value: e,
           children: getCostCenterTypeString(e)
         }, e))
@@ -3024,14 +3024,14 @@ let nr = registerModal(() => {
           children: renderI18nText('org_settings.external_collaboration_controls.setting_header', {
             orgName: t.name
           })
-        }), jsxs(_$$z, {
+        }), jsxs(RadioGroup, {
           value: r ? 'true' : 'false',
           onChange: e => e === 'true' ? l(!0) : l(!1),
-          children: [jsx(_$$Z, {
+          children: [jsx(RadioOption, {
             value: 'false',
             labelClassName: nt,
             children: renderI18nText('org_settings.external_collaboration_controls.enable')
-          }), jsx(_$$Z, {
+          }), jsx(RadioOption, {
             value: 'true',
             labelClassName: nt,
             children: renderI18nText('org_settings.external_collaboration_controls.disable')
@@ -3196,25 +3196,25 @@ let nm = registerModal(() => {
           fontWeight: 500
         },
         children: renderI18nText('org_settings.guest_control.guest_question')
-      }), jsxs(_$$z, {
+      }), jsxs(RadioGroup, {
         className: cssBuilderInstance.pl10.$,
         value: g ?? 'none',
         onChange: e => {
           let t = e === 'none' ? null : e;
           g !== t && h(t);
         },
-        children: [jsxs(_$$Z, {
+        children: [jsxs(RadioOption, {
           value: 'none',
           labelClassName: nc,
           children: [getGuestControlApprovalStatus(null), jsx('span', {
             className: 'guest_invite_settings_modal--secondary--qBSkc',
             children: renderI18nText('org_settings.guest_control.default')
           })]
-        }), jsx(_$$Z, {
+        }), jsx(RadioOption, {
           value: ApprovalStatusEnum.REQUIRE_APPROVAL,
           labelClassName: nc,
           children: getGuestControlApprovalStatus(ApprovalStatusEnum.REQUIRE_APPROVAL)
-        }), jsx(_$$Z, {
+        }), jsx(RadioOption, {
           value: ApprovalStatusEnum.BANNED,
           labelClassName: nc,
           children: getGuestControlApprovalStatus(ApprovalStatusEnum.BANNED)
@@ -3491,11 +3491,11 @@ let nC = registerModal(e => {
       horizontalAlignItems: 'center',
       padding: 16,
       spacing: 16,
-      children: [renderI18nText('settings_tab.idle_session_timeout_settings_modal.description'), jsxs(_$$z, {
+      children: [renderI18nText('settings_tab.idle_session_timeout_settings_modal.description'), jsxs(RadioGroup, {
         className: cssBuilderInstance.wFull.mt16.$,
         value: o,
         onChange: k,
-        children: [jsx(_$$Z, {
+        children: [jsx(RadioOption, {
           value: ng.DEFAULT,
           children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.default_choice_description')
         }), jsx(nk, {
@@ -3511,7 +3511,7 @@ let nC = registerModal(e => {
               })
             })]
           })
-        }), jsx(_$$Z, {
+        }), jsx(RadioOption, {
           value: ng.CONFIGURED,
           children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.configured_choice_description')
         }), jsx(nk, {
@@ -4468,14 +4468,14 @@ let ss = registerModal(() => {
       },
       confirmText: getI18nString('org_settings.team_creation.save_button'),
       children: jsx('div', {
-        children: jsxs(_$$z, {
+        children: jsxs(RadioGroup, {
           value: l ?? TeamCreationControls.TEAM_CREATION_CONTROLS_ANYONE,
           onChange: e => {
             let t = null;
             e !== 'none' && (t = e);
             o(t);
           },
-          children: [jsx(_$$Z, {
+          children: [jsx(RadioOption, {
             value: TeamCreationControls.TEAM_CREATION_CONTROLS_ANYONE,
             labelClassName: sn,
             className: 'team_creation_controls_modal--option--gaACu',
@@ -4488,7 +4488,7 @@ let ss = registerModal(() => {
                 children: getI18nString('org_settings.team_creation.any.description')
               })]
             })
-          }, TeamCreationControls.TEAM_CREATION_CONTROLS_ANYONE), jsx(_$$Z, {
+          }, TeamCreationControls.TEAM_CREATION_CONTROLS_ANYONE), jsx(RadioOption, {
             value: TeamCreationControls.TEAM_CREATION_CONTROLS_ADMIN_ONLY,
             labelClassName: sn,
             children: jsxs('div', {

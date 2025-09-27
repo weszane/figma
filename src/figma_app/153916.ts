@@ -3,11 +3,11 @@ import { useLatestRef } from "../figma_app/922077";
 import { getAtomMutate, setupResourceAtomHandler } from "../figma_app/566371";
 import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { jL } from "../figma_app/658324";
+import { fetchAndUpdateUpcomingInvoices } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { liveStoreInstance } from "../905/713695";
 import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
-import { i as _$$i } from "../905/787489";
+import { useErrorFlash } from "../905/787489";
 import { Eh } from "../figma_app/617654";
 var n;
 (n || (n = {})).orgBillingDataQuery = liveStoreInstance.Query({
@@ -47,7 +47,7 @@ let $$g1 = liveStoreInstance.Mutation(async (e, {
   t.mutate(i, e => {
     e && (e.invoices = r.data.meta.invoices);
   });
-  e.planInvoiceId ? (t.refetch(i), await jL({
+  e.planInvoiceId ? (t.refetch(i), await fetchAndUpdateUpcomingInvoices({
     planType: FOrganizationLevelType.ORG,
     planId: e.orgId
   })) : await t.refetch(i);
@@ -75,7 +75,7 @@ export function $$b4(e, t = !0) {
   let [d, c] = setupResourceAtomHandler(n.orgBillingDataQuery(e), {
     enabled: t
   });
-  _$$i(d, getI18nString("org_billing_error_default"));
+  useErrorFlash(d, getI18nString("org_billing_error_default"));
   let u = useLatestRef(e);
   let h = useMemo(() => u !== e && !!u, [e, u]);
   let m = useLatestRef(o);

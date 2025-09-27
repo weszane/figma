@@ -9,7 +9,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { openCreateTeamFlow } from "../figma_app/976345";
 import { hideModal } from "../905/156213";
-import { WX } from "../figma_app/482142";
+import { startProUpgradeFlowThunk } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
@@ -144,7 +144,7 @@ export let $$k0 = registerModal(function (e) {
           children: I ? jsx(ButtonBasePrimaryTracked, {
             onClick: () => {
               S();
-              n(WX({
+              n(startProUpgradeFlowThunk({
                 teamId: e.teamId || null,
                 selectedView: i
               }));

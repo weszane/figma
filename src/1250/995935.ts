@@ -108,7 +108,7 @@ import { isOrgGuestUser, useCurrentPlanUser, useCurrentPublicPlan } from '../fig
 import { MA, om, x1 } from '../figma_app/465413';
 import { throwTypeError } from '../figma_app/465776';
 import { useCanUseDevModeDemoFile } from '../figma_app/473493';
-import { WX } from '../figma_app/482142';
+import { startProUpgradeFlowThunk } from '../figma_app/482142';
 import { getUserPlan } from '../figma_app/502247';
 import { selectCurrentFile, useCurrentFileKey } from '../figma_app/516028';
 import { R as _$$R2 } from '../figma_app/522082';
@@ -122,7 +122,7 @@ import { tS as _$$tS2, ac, J3, kD, kN } from '../figma_app/622574';
 import { BaseLinkComponent, ButtonSecondaryTracked, SecureLink } from '../figma_app/637027';
 import { canAdminTeam, canEditTeam } from '../figma_app/642025';
 import { filterNotNullish } from '../figma_app/656233';
-import { Ti } from '../figma_app/658324';
+import { useOpenPlanInvoices } from '../figma_app/658324';
 import { useAppModelProperty, useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { a9 } from '../figma_app/741211';
 import { Hk } from '../figma_app/755939';
@@ -179,7 +179,7 @@ function ek({
 }
 function eE(e) {
   let t = e.team?.restrictions_list?.includes(FPlanLimitationType.LOCKED);
-  let n = Ti({
+  let n = useOpenPlanInvoices({
     planId: e.team.id,
     planType: FOrganizationLevelType.TEAM
   });
@@ -718,7 +718,7 @@ let tH = {
           onClick: e => {
             e.preventDefault();
             let n = d.getState();
-            t(WX({
+            t(startProUpgradeFlowThunk({
               teamId: i.id,
               selectedView: n.selectedView
             }));
@@ -743,7 +743,7 @@ let tH = {
         buttonText: getI18nString('banner.pro_trial_upgrade_cta.upgrade_to_professional'),
         onClick: () => {
           let e = d.getState();
-          t(WX({
+          t(startProUpgradeFlowThunk({
             teamId: i.id,
             selectedView: e.selectedView
           }));
@@ -828,7 +828,7 @@ let tK = {
             buttonText: s,
             onClick: () => {
               let e = _.getState();
-              t(WX({
+              t(startProUpgradeFlowThunk({
                 teamId: n,
                 selectedView: e.selectedView
               }));
@@ -884,7 +884,7 @@ let tK = {
             buttonText: getI18nString('banner.free_limit_locked.upgrade_now'),
             onClick: () => {
               let e = _.getState();
-              t(WX({
+              t(startProUpgradeFlowThunk({
                 teamId: n,
                 selectedView: e.selectedView
               }));

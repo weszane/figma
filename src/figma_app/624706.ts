@@ -83,7 +83,7 @@ import { V as _$$V } from "../905/355181";
 import { V as _$$V2 } from "../905/223767";
 import { dR } from "../figma_app/109538";
 import { I as _$$I } from "../905/641938";
-import { WX } from "../figma_app/482142";
+import { startProUpgradeFlowThunk } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { getUserCurrency } from "../figma_app/514043";
 import { UpsellModalType } from "../905/165519";
@@ -186,7 +186,7 @@ function q({
       try {
         let e = await UserAPIHandlers.getChatbotMeta();
         c(e.data.meta);
-      } catch (e) { }
+      } catch (e) {}
     })();
   });
   useEffect(() => {
@@ -571,7 +571,7 @@ let e4 = registerModal(function ({
       },
       secondaryBtn: c,
       clickPrimaryBtn: () => {
-        e ? o(WX({
+        e ? o(startProUpgradeFlowThunk({
           teamId: e,
           openInNewTab: !0,
           currency: getUserCurrency(),
@@ -776,7 +776,7 @@ function tc({
   }, [l, _, flagNumberVal]);
   if (useEffect(() => {
     e && h(!1);
-  }, [e, h]), c !== iH.FALSE); else if (t && !_.isShowing && !e) return jsx(_$$P.div, {
+  }, [e, h]), c !== iH.FALSE) ;else if (t && !_.isShowing && !e) return jsx(_$$P.div, {
     initial: {
       opacity: 1
     },
@@ -792,7 +792,7 @@ function tc({
       dismissModal: () => r(!1),
       targetKey: "help-widget-zendesk"
     })
-  }); else if (_.isShowing) return jsx(tr, {
+  });else if (_.isShowing) return jsx(tr, {
     shouldHide: e,
     dismissModal: h,
     maxSeenCount: 3,

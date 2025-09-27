@@ -7,7 +7,7 @@ import { h as _$$h } from '../905/142086';
 import { hideModalHandler, showModalHandler } from '../905/156213';
 import { UpsellModalType } from '../905/165519';
 import { p as _$$p } from '../905/195198';
-import { oE } from '../905/249410';
+import { UPSELL_ADD_EDITOR_MODAL } from '../905/249410';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { createOptimistThunk } from '../905/350402';
@@ -177,7 +177,7 @@ let G = createOptimistThunk((e, {
           [t.id]: null
         }
       }, i);
-    } catch (e) { }
+    } catch (e) {}
   }
 });
 let z = createOptimistThunk((e, {
@@ -338,7 +338,7 @@ function W(e, t, i) {
         canAdmin: hasAdminRoleAccessOnTeam(i, n)
       };
       e.dispatch(showModalHandler({
-        type: oE,
+        type: UPSELL_ADD_EDITOR_MODAL,
         data: {
           team: t,
           editorType: null,

@@ -10,7 +10,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { sendWithRetry } from "../905/910117";
 import { ModalCloseButton } from "../905/17223";
-import { z, Z } from "../905/306088";
+import { RadioGroup, RadioOption } from "../905/306088";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -87,12 +87,12 @@ let $$N0 = registerModal(function (e) {
         }) : null]
       }) : jsxs("div", {
         className: cssBuilderInstance.my16.$,
-        children: [jsx(z, {
+        children: [jsx(RadioGroup, {
           value: f,
           onChange: e => {
             b(e);
           },
-          children: Object.values(CancellationReason).map(e => jsx(Z, {
+          children: Object.values(CancellationReason).map(e => jsx(RadioOption, {
             className: cssBuilderInstance.font11.selectNone.$,
             value: e,
             children: getRefundReasonString(e)

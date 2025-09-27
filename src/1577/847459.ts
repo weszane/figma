@@ -23,7 +23,7 @@ import { dr } from "../figma_app/568591";
 import { G9, gj } from "../figma_app/12220";
 import { selectCurrentUser } from "../905/372672";
 import { QuickReply_CommentThreadByRootComment } from "../figma_app/43951";
-import { mp } from "../905/772425";
+import { createMentionLibrary } from "../905/772425";
 import { ThreadType, ComposerType } from "../905/380385";
 import { rf } from "../figma_app/585209";
 import { _B } from "../905/852370";
@@ -130,7 +130,7 @@ function z(e) {
   let {
     file
   } = result.data;
-  let b = useMemo(() => mp({
+  let b = useMemo(() => createMentionLibrary({
     currentOrgId: file.parentOrgId,
     teamId: file.teamId,
     fileKey,

@@ -57,7 +57,7 @@ import { debounce } from "../905/915765";
 import { getFileCreationPermissions, canCreateFileType } from "../figma_app/687776";
 import { createOptimistThunk } from "../905/350402";
 import { hasProjectRestrictions, hasTeamStatePaidAccess } from "../figma_app/345997";
-import { KH } from "../905/81982";
+import { WorkerFuseSearch } from "../905/81982";
 import { NU } from "../905/163189";
 import { getDraftsSidebarString } from "../figma_app/633080";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -186,7 +186,7 @@ function el({
 let eh = "32px";
 let ex = parsePxInt(eh);
 let eb = e => e?.id || iK;
-let ev = new KH({
+let ev = new WorkerFuseSearch({
   keys: ["folder.path", "team.name"],
   threshold: .3,
   tokenize: !0

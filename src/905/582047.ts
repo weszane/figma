@@ -5,7 +5,7 @@ import { ModalCloseButton } from "../905/17223";
 import { linkWithTracking, ButtonWhiteTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
-import { WX } from "../figma_app/482142";
+import { startProUpgradeFlowThunk } from "../figma_app/482142";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { mapFileToProductType } from "../figma_app/314264";
@@ -90,7 +90,7 @@ let $$A0 = registerModal(function (e) {
             className: "file_limit_paywall_modal--upgradeButton--GJckO",
             onClick: () => {
               t();
-              e.dispatch(WX({
+              e.dispatch(startProUpgradeFlowThunk({
                 teamId: e.teamId,
                 openInNewTab: !desktopAPIInstance,
                 selectedView: {

@@ -14,7 +14,7 @@ import { renderI18nText } from "../905/303541";
 import { d as _$$d } from "../c5e2cae0/841217";
 import { J } from "../9420/278106";
 import { selectViewAction } from "../905/929976";
-import { Az, js, Nj } from "../figma_app/482142";
+import { setNumWhiteboardEditorsAction, setNumEditorsAction, makeStudentTeamThunk } from "../figma_app/482142";
 import { fetchTeamUsers } from "../905/584989";
 import { TrackingProvider } from "../figma_app/831799";
 import { getUserCurrency } from "../figma_app/514043";
@@ -37,10 +37,10 @@ let N = e => {
   useEffect(() => {
     if (!n) {
       let e = Object.keys(a).length;
-      s(Az({
+      s(setNumWhiteboardEditorsAction({
         numWhiteboardEditors: e
       }));
-      s(js({
+      s(setNumEditorsAction({
         numDesignEditors: e
       }));
     }
@@ -56,7 +56,7 @@ export function $$b0({
   let a = N(teamId);
   let r = useDispatch();
   let l = () => {
-    r(Nj({
+    r(makeStudentTeamThunk({
       teamId,
       onCloseOrComplete: e.onCloseOrComplete
     }));

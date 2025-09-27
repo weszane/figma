@@ -214,7 +214,7 @@ import { H as _$$H5 } from '../905/762413';
 import { Fj } from '../905/763714';
 import { getSelectedFile } from '../905/766303';
 import { C as _$$C2 } from '../905/771975';
-import { fG as _$$fG } from '../905/772425';
+import { getMentionsResult } from '../905/772425';
 import { L as _$$L4 } from '../905/782297';
 import { z as _$$z4 } from '../905/788559';
 import { trackTemplateEvent } from '../905/793009';
@@ -500,7 +500,7 @@ import { throwTypeError } from '../figma_app/465776';
 import { IntegrationUtils, isGoogleMeetIntegration } from '../figma_app/469876';
 import { buildCommunityPath } from '../figma_app/471982';
 import { equals } from '../figma_app/476572';
-import { m as _$$m } from '../figma_app/477548';
+import { ContactViewMode } from '../figma_app/477548';
 import { R1 } from '../figma_app/479760';
 import { P as _$$P5 } from '../figma_app/483257';
 import { $3, op as _$$op, QP } from '../figma_app/487970';
@@ -824,7 +824,7 @@ function X() {
     let [r, a] = useAtomValueAndSetter(_$$h);
     let [s, o] = useAtomValueAndSetter(wm);
     let u = zW({
-      checkPermissions: _$$m.VIEW_OR_PENDING
+      checkPermissions: ContactViewMode.VIEW_OR_PENDING
     });
     let h = useCurrentFileKey();
     let m = trackFileEventWithStore();
@@ -842,7 +842,7 @@ function X() {
         return;
       }
       let t = setTimeout(async () => {
-        let t = await _$$fG(r, u, !1);
+        let t = await getMentionsResult(r, u, !1);
         let i = !!t?.mentions;
         e || (f && !i && (m('canvas_mention_search_no_results', {
           ..._$$x(g, x)

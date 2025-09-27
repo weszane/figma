@@ -11,14 +11,14 @@ import { unsetSymbol } from "../905/17894";
 import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { MAX_PUBLISHERS_PER_RESOURCE } from "../figma_app/740025";
 import { jr } from "../figma_app/599979";
-import { MH } from "../905/772425";
-import { Ef } from "../905/81982";
+import { CommunityMentionsLibrary } from "../905/772425";
+import { SimpleFuseSearch } from "../905/81982";
 import { d as _$$d } from "../905/44199";
 import { P as _$$P } from "../905/392438";
 import { FieldContainer } from "../905/567946";
 let v = "cocreators_input--profilePrimaryText--AdeJZ autocomplete_permissions--name--62sCS ellipsis--ellipsis--Tjyfa";
 let I = "cocreators_input--profileSecondaryText--lnXEv text--fontPos11--2LvXf text--_fontBase--QdLsd";
-let E = new MH();
+let E = new CommunityMentionsLibrary();
 let x = e => {
   if (e && "validation" === e.type) switch (e.key) {
     case "COCREATORS_NOT_ALLOWED_FOR_PAID_RESOURCE":
@@ -59,7 +59,7 @@ export function $$S0({
     })),
     errorMessage: ""
   });
-  let P = useRef(new Ef([], {
+  let P = useRef(new SimpleFuseSearch([], {
     keys: ["profile_handle", "name"],
     threshold: 0,
     tokenize: !0,

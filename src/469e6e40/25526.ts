@@ -109,7 +109,7 @@ import { postUserFlag } from "../905/985254";
 import { E as _$$E2 } from "../905/453826";
 import { zl } from "../figma_app/641749";
 import { rn } from "../figma_app/903573";
-import { R as _$$R } from "../905/298004";
+import { createOnboardingStateMachine } from "../905/298004";
 import { WZ } from "../905/893645";
 import { f as _$$f, jD, Vl as _$$Vl, OK } from "../figma_app/481749";
 import { KJ, H3 as _$$H, Bd } from "../figma_app/994725";
@@ -122,7 +122,7 @@ import { Hj, A3, tD as _$$tD } from "../905/682977";
 import { p3 } from "../figma_app/588582";
 import { zR } from "../469e6e40/825613";
 import { jG, NM, ln, oi } from "../figma_app/527041";
-import { bQ } from "../figma_app/658324";
+import { usePlanInvoices } from "../figma_app/658324";
 import { Q as _$$Q3 } from "../469e6e40/825225";
 import { y2 } from "../figma_app/563413";
 import { S as _$$S } from "../905/339549";
@@ -131,7 +131,7 @@ import { p as _$$p2 } from "../905/597320";
 import { z as _$$z } from "../figma_app/369596";
 import { useThemeContext } from "../905/640017";
 import { compareProductAccessTypes } from "../figma_app/217457";
-import { Ef } from "../905/81982";
+import { SimpleFuseSearch } from "../905/81982";
 import { e as _$$e4 } from "../figma_app/119601";
 import { s as _$$s2 } from "../905/82276";
 import { az as _$$az, pw, z6 } from "../figma_app/805373";
@@ -171,7 +171,7 @@ import { openWindow } from "../905/508367";
 import { reportError } from "../905/11";
 import { aD as _$$aD, Sn } from "../469e6e40/875985";
 import { CurrencyFormatter } from "../figma_app/514043";
-import { Jv, YO, qH } from "../figma_app/934005";
+import { isOverdue, getLatestPayableInvoice, InvoiceState } from "../figma_app/934005";
 import { G as _$$G } from "../469e6e40/623116";
 import { Y as _$$Y3 } from "../7021/427161";
 import { ConfirmationModal2 } from "../figma_app/918700";
@@ -589,7 +589,7 @@ function eK() {
 var e4 = e2;
 var e3 = e5;
 let th = "seen_org_admin_activity_onboarding";
-let tx = rn("org_admin_activity_onboarding", _$$R(Ql8));
+let tx = rn("org_admin_activity_onboarding", createOnboardingStateMachine(Ql8));
 let tb = userFlagExistsAtomFamily(th);
 function tv() {
   let e = useAtomWithSubscription(tb);
@@ -902,335 +902,335 @@ let tK = (e, t, a) => [tD, {
   value: tL,
   description: renderI18nText("activity_log.filter.files")
 }, {
-    value: ["fig_file_create"],
-    description: renderI18nText("activity_log.filter.created_a_file")
-  }, {
-    value: ["fig_file_duplicate"],
-    description: renderI18nText("activity_log.filter.duplicated_a_file")
-  }, {
-    value: ["fig_file_export"],
-    description: renderI18nText("activity_log.filter.exported_a_file")
-  }, {
-    value: ["fig_file_image_download"],
-    description: renderI18nText("activity_log.filter.downloaded_an_image")
-  }, {
-    value: ["fig_file_link_access_change"],
-    description: renderI18nText("activity_log.filter.file_link_access_changed")
-  }, {
-    value: ["fig_file_link_expiration_change"],
-    description: renderI18nText("activity_log.filter.file_link_expiration_changed")
-  }, {
-    value: ["fig_file_viewer_access_change"],
-    description: renderI18nText("activity_log.filter.viewer_permissions_changed")
-  }, {
-    value: ["fig_file_member_add", "fig_file_member_permission_change", "fig_file_member_remove"],
-    description: renderI18nText("activity_log.filter.file_membership_changed")
-  }, {
-    value: ["fig_file_move"],
-    description: renderI18nText("activity_log.filter.moved_a_file")
-  }, {
-    value: ["fig_file_permanent_delete"],
-    description: renderI18nText("activity_log.filter.permanently_deleted_a_file")
-  }, {
-    value: ["fig_file_permanent_undelete", "fig_file_restore"],
-    description: renderI18nText("activity_log.filter.restored_a_file")
-  }, {
-    value: ["fig_file_set_password"],
-    description: renderI18nText("activity_log.filter.fig_file_set_password")
-  }, {
-    value: ["fig_file_unset_password"],
-    description: renderI18nText("activity_log.filter.fig_file_unset_password")
-  }, {
-    value: ["fig_file_rename"],
-    description: renderI18nText("activity_log.filter.renamed_a_file")
-  }, {
-    value: ["fig_file_save_as"],
-    description: renderI18nText("activity_log.filter.saved_a_file")
-  }, {
-    value: ["fig_file_trash"],
-    description: renderI18nText("activity_log.filter.trashed_a_file")
-  }, {
-    value: ["fig_file_view"],
-    description: renderI18nText("activity_log.filter.viewed_a_file")
-  }, {
-    value: ["fig_file_view_prototype"],
-    description: renderI18nText("activity_log.filter.viewed_a_prototype")
-  }, {
-    value: ["open_sessions_start"],
-    description: renderI18nText("activity_log.filter.open_sessions_start")
-  }, {
-    value: ["open_sessions_end"],
-    description: renderI18nText("activity_log.filter.open_sessions_end")
-  }, ...tM, ...tJ, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.projects")
-  }, {
-    value: ["folder_create"],
-    description: renderI18nText("activity_log.filter.created_a_project")
-  }, {
-    value: ["folder_delete", "folder_trash", "folder_export", "folder_restore"],
-    description: renderI18nText("activity_log.filter.deleted_a_project")
-  }, {
-    value: ["folder_member_add", "folder_member_permission_change", "folder_member_remove"],
-    description: renderI18nText("activity_log.filter.project_membership_changed")
-  }, {
-    value: ["folder_move"],
-    description: renderI18nText("activity_log.filter.moved_a_project")
-  }, {
-    value: ["folder_rename"],
-    description: renderI18nText("activity_log.filter.renamed_a_project")
-  }, {
-    value: ["folder_team_access_change"],
-    description: renderI18nText("activity_log.filter.changed_the_team_access_of_a_project")
-  }, {
-    value: ["folder_transfer_sent", "folder_transfer_copy_sent", "folder_export"],
-    description: renderI18nText("activity_log.filter.outgoing_transfers")
-  }, {
-    value: ["folder_transfer_received", "folder_transfer_copy_received", "folder_transfer_approved", "folder_transfer_copy_approved", "folder_import"],
-    description: renderI18nText("activity_log.filter.incoming_transfers")
-  }, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.teams")
-  }, {
-    value: ["team_create", "team_import"],
-    description: renderI18nText("activity_log.filter.created_a_team")
-  }, {
-    value: ["team_delete", "team_export"],
-    description: renderI18nText("activity_log.filter.deleted_a_team")
-  }, {
-    value: ["team_transfer_sent", "team_export"],
-    description: renderI18nText("activity_log.filter.outgoing_transfers")
-  }, {
-    value: ["team_transfer_received", "team_transfer_approved", "team_import"],
-    description: renderI18nText("activity_log.filter.incoming_transfers")
-  }, {
-    value: ["team_restore"],
-    description: renderI18nText("activity_log.filter.restored_a_team")
-  }, {
-    value: ["team_member_add", "team_member_permission_change", "team_member_remove"],
-    description: renderI18nText("activity_log.filter.team_membership_changed")
-  }, {
-    value: ["team_rename"],
-    description: renderI18nText("activity_log.filter.renamed_a_team")
-  }, {
-    value: ["team_org_access_change"],
-    description: renderI18nText("activity_log.filter.changed_the_org_access_of_a_team")
-  }, {
-    value: ["team_license_group_change", "team_workspace_change"],
-    description: renderI18nText("activity_log.filter.changed_the_workspace_of_a_team")
-  }, {
-    value: ["org_team_creation_controls"],
-    description: renderI18nText("activity_log.filter.changed_team_creation_controls")
-  }, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.organizations")
-  }, {
-    value: ["org_merge"],
-    description: renderI18nText("activity_log.filter.org_merged")
-  }, {
-    value: ["org_user_create", "org_user_permission_change", "org_user_delete"],
-    description: renderI18nText("activity_log.filter.org_membership_changed")
-  }, {
-    value: ["roster_exported"],
-    description: renderI18nText("activity_log.filter.exported_the_members_list")
-  }, {
-    value: ["org_team_csv_exported"],
-    description: renderI18nText("activity_log.filter.exported_the_org_team_list")
-  }, {
-    value: ["workspace_team_csv_exported"],
-    description: renderI18nText("activity_log.filter.exported_the_workspace_team_list")
-  }, ...(e ? tV : []), {
-    value: ["org_invite_create"],
-    description: renderI18nText("activity_log.filter.org_invite_created")
-  }, {
-    value: ["org_auto_approval_setting_update"],
-    description: jsx(Fragment, {
-      children: renderI18nText("activity_log.filter.auto_approval_settings_updated")
-    })
-  }, {
-    value: ["cursor_chat_setting_change"],
-    description: renderI18nText("activity_log.filter.cursor_chat_setting_change")
-  }, ...(e ? [{
-    value: ["idle_timeout_setting_change"],
-    description: renderI18nText("activity_log.filter.idle_timeout_setting_change")
-  }] : []), ...(e && t.shared_container_setting?.configured_upgrade_request_setting ? [{
-    value: ["configurable_upgrade_request_setting_change", "configurable_upgrade_request_message_change"],
-    description: renderI18nText("activity_log.filter.configurable_upgrade_request_flow_changed")
-  }] : []), {
-    value: ["scim_token_generate", "scim_token_revoke"],
-    description: renderI18nText("activity_log.filter.scim_token_generated_revoked")
-  }, {
-    value: ["ai_features_enable", "ai_features_disable"],
-    description: renderI18nText("activity_log.filter.ai_features_setting_change")
-  }, {
-    value: ["ai_content_training_enable", "ai_content_training_disable"],
-    description: renderI18nText("activity_log.filter.ai_content_training_setting_change")
-  }, {
-    value: ["seats_renew"],
-    description: renderI18nText("activity_log.filter.seats_renew")
-  }, ...(e && a ? [{
-    value: ["mfa_required_setting_change"],
-    description: renderI18nText("activity_log.filter.mfa_required_setting_change")
-  }] : []), {
-    value: tL,
-    description: renderI18nText("activity_log.filter.seat_changes")
-  }, {
-    value: ["org_default_license_type_change"],
-    description: renderI18nText("activity_log.filter.changed_default_role.seat_rename")
-  }, {
-    value: ["org_user_account_type_upgrade_requested", "org_user_account_type_upgrade_approved", "org_user_account_type_upgrade_denied", "provisional_access_start", "provisional_access_end_request_approved", "provisional_access_end_request_denied", "provisional_access_end_new_request"],
-    description: renderI18nText("activity_log.filter.upgrade_requests_and_activity")
-  }, {
-    value: ["org_user_account_type_change", "org_user_account_type_change_to_full"],
-    description: renderI18nText("activity_log.filter.org_role_changed.seat_rename")
-  }, ...(e ? tq.concat([{
-    value: ["workspace_public_link_setting_change"],
-    description: renderI18nText("activity_log.filter.changed_workspace_public_link_setting")
-  }, {
-    value: ["external_collaboration_controls_setting_change"],
-    description: renderI18nText("activity_log.filter.external_collaboration_controls_setting_change")
-  }]) : tq), ...(e ? tB : []), ...(e ? tG : []), ...(t.can_use_multi_idp ? tY : []), ...(e ? tz : []), ...(e ? tF : []), {
-    value: tL,
-    description: renderI18nText("activity_log.filter.libraries")
-  }, {
-    value: ["org_library_setting_change"],
-    description: renderI18nText("activity_log.filter.org_library_setting_changed")
-  }, ...(e ? t$ : []), ...(e && isBigmaEnabledAlias3(t) ? [{
-    value: ["workspace_library_approve", "workspace_library_unapprove"],
-    description: renderI18nText("activity_log.filter.workspace_library_approval_changed")
-  }] : []), ...(e && isBigmaEnabledAlias3(t) ? [{
-    value: ["org_library_approve", "org_library_unapprove"],
-    description: renderI18nText("activity_log.filter.org_library_approval_changed")
-  }] : []), {
-    value: tL,
-    description: renderI18nText("activity_log.filter.users")
-  }, ...(e ? [{
-    value: ["user_idle_session_timeout"],
-    description: renderI18nText("activity_log.filter.user_session_timed_out")
-  }] : []), {
-    value: ["user_sign_in", "user_sign_out"],
-    description: renderI18nText("activity_log.filter.user_signed_in_signed_out")
-  }, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.community")
-  }, {
-    value: ["community_hub_file_publish", "community_hub_file_update", "community_hub_file_delete"],
-    description: renderI18nText("activity_log.filter.file_published_updated_deleted")
-  }, {
-    value: ["community_plugin_publish", "community_plugin_update", "community_plugin_delete"],
-    description: renderI18nText("activity_log.filter.plugin_published_updated_deleted")
-  }, {
-    value: ["community_widget_publish", "community_widget_update", "community_widget_delete"],
-    description: renderI18nText("activity_log.filter.widget_published_updated_deleted")
-  }, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.private_plugins")
-  }, {
-    value: ["private_plugin_publish"],
-    description: renderI18nText("activity_log.filter.plugin_published")
-  }, {
-    value: ["private_plugin_update"],
-    description: renderI18nText("activity_log.filter.plugin_updated")
-  }, {
-    value: ["private_plugin_delete"],
-    description: renderI18nText("activity_log.filter.plugin_deleted")
-  }, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.plugin_management")
-  }, {
-    value: ["plugin_approvelist_enable", "plugin_approvelist_disable"],
-    description: renderI18nText("activity_log.filter.plugin_approve_list_setting_changed")
-  }, {
-    value: ["plugin_approvelist_request_org"],
-    description: renderI18nText("activity_log.filter.plugin_approve_list_requested")
-  }, {
-    value: ["plugin_approvelist_request_approve_org", "plugin_approvelist_request_reject_org", "plugin_approvelist_request_approve_workspace", "plugin_approvelist_request_reject_workspace", "plugin_approvelist_add", "plugin_approvelist_add_workspace", "plugin_approvelist_remove", "plugin_approvelist_remove_workspace"],
-    description: renderI18nText("activity_log.filter.approve_list_plugins_reviewed")
-  }, {
-    value: ["plugin_install", "plugin_uninstall"],
-    description: renderI18nText("activity_log.filter.install_plugins_org_wide")
-  }, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.plugin_publishers")
-  }, {
-    value: ["plugin_publisher_accept_invite", "plugin_publisher_remove_invite"],
-    description: renderI18nText("activity_log.filter.plugin_publisher_accept_remove_invite")
-  }, {
-    value: ["plugin_publisher_invite"],
-    description: renderI18nText("activity_log.filter.plugin_publisher_invite")
-  }, {
-    value: ["plugin_publisher_remove"],
-    description: renderI18nText("activity_log.filter.plugin_publisher_remove")
-  }, {
-    value: ["plugin_ownership_transfer"],
-    description: renderI18nText("activity_log.filter.plugin_ownership_transfer")
-  }, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.private_widgets")
-  }, {
-    value: ["private_widget_publish"],
-    description: renderI18nText("activity_log.filter.widget_published")
-  }, {
-    value: ["private_widget_update"],
-    description: renderI18nText("activity_log.filter.widget_updated")
-  }, {
-    value: ["private_widget_delete"],
-    description: renderI18nText("activity_log.filter.widget_deleted")
-  }, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.widget_management")
-  }, {
-    value: ["widgets_enabled", "widgets_disable"],
-    description: renderI18nText("activity_log.filter.widget_approve_list_setting_changed")
-  }, {
-    value: ["widget_approvelist_request_org"],
-    description: renderI18nText("activity_log.filter.widget_approve_list_requested")
-  }, {
-    value: ["widget_approvelist_request_approve_org", "widget_approvelist_request_reject_org", "widget_approvelist_request_approve_workspace", "widget_approvelist_request_reject_workspace", "widget_approvelist_add", "widget_approvelist_add_workspace", "widget_approvelist_remove", "widget_approvelist_remove_workspace"],
-    description: renderI18nText("activity_log.filter.approve_list_widgets_reviewed")
-  }, {
-    value: ["widget_install", "widget_uninstall"],
-    description: renderI18nText("activity_log.filter.install_widgets_org_wide")
-  }, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.widget_publishers")
-  }, {
-    value: ["widget_publisher_accept_invite", "widget_publisher_remove_invite"],
-    description: renderI18nText("activity_log.filter.widget_publisher_accept_remove_invite")
-  }, {
-    value: ["widget_publisher_invite"],
-    description: renderI18nText("activity_log.filter.widget_publisher_invite")
-  }, {
-    value: ["widget_publisher_remove"],
-    description: renderI18nText("activity_log.filter.widget_publisher_remove")
-  }, {
-    value: ["widget_ownership_transfer"],
-    description: renderI18nText("activity_log.filter.widget_ownership_transfer")
-  }, ...tU, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.audio")
-  }, {
-    value: ["voice_call_join_req"],
-    description: renderI18nText("activity_log.filter.user_joined_audio_call")
-  }, {
-    value: tL,
-    description: renderI18nText("activity_log.filter.integrations")
-  }, {
-    value: ["personal_access_token_create", "personal_access_token_delete"],
-    description: renderI18nText("activity_log.filter.personal_access_token_create_delete")
-  }, {
-    value: ["oauth_token_grant", "oauth_token_revoke"],
-    description: renderI18nText("activity_log.filter.oauth_token_grant_revoke")
-  }, ...(p3() ? [{
-    value: ["supabase_setting_change"],
-    description: renderI18nText("activity_log.filter.supabase_setting_change")
-  }, {
-    value: ["supabase_project_connected"],
-    description: renderI18nText("activity_log.filter.supabase_project_connected")
-  }, {
-    value: ["supabase_project_disconnected"],
-    description: renderI18nText("activity_log.filter.supabase_project_disconnected")
-  }] : []), ...tW, ...tH, ...tP];
+  value: ["fig_file_create"],
+  description: renderI18nText("activity_log.filter.created_a_file")
+}, {
+  value: ["fig_file_duplicate"],
+  description: renderI18nText("activity_log.filter.duplicated_a_file")
+}, {
+  value: ["fig_file_export"],
+  description: renderI18nText("activity_log.filter.exported_a_file")
+}, {
+  value: ["fig_file_image_download"],
+  description: renderI18nText("activity_log.filter.downloaded_an_image")
+}, {
+  value: ["fig_file_link_access_change"],
+  description: renderI18nText("activity_log.filter.file_link_access_changed")
+}, {
+  value: ["fig_file_link_expiration_change"],
+  description: renderI18nText("activity_log.filter.file_link_expiration_changed")
+}, {
+  value: ["fig_file_viewer_access_change"],
+  description: renderI18nText("activity_log.filter.viewer_permissions_changed")
+}, {
+  value: ["fig_file_member_add", "fig_file_member_permission_change", "fig_file_member_remove"],
+  description: renderI18nText("activity_log.filter.file_membership_changed")
+}, {
+  value: ["fig_file_move"],
+  description: renderI18nText("activity_log.filter.moved_a_file")
+}, {
+  value: ["fig_file_permanent_delete"],
+  description: renderI18nText("activity_log.filter.permanently_deleted_a_file")
+}, {
+  value: ["fig_file_permanent_undelete", "fig_file_restore"],
+  description: renderI18nText("activity_log.filter.restored_a_file")
+}, {
+  value: ["fig_file_set_password"],
+  description: renderI18nText("activity_log.filter.fig_file_set_password")
+}, {
+  value: ["fig_file_unset_password"],
+  description: renderI18nText("activity_log.filter.fig_file_unset_password")
+}, {
+  value: ["fig_file_rename"],
+  description: renderI18nText("activity_log.filter.renamed_a_file")
+}, {
+  value: ["fig_file_save_as"],
+  description: renderI18nText("activity_log.filter.saved_a_file")
+}, {
+  value: ["fig_file_trash"],
+  description: renderI18nText("activity_log.filter.trashed_a_file")
+}, {
+  value: ["fig_file_view"],
+  description: renderI18nText("activity_log.filter.viewed_a_file")
+}, {
+  value: ["fig_file_view_prototype"],
+  description: renderI18nText("activity_log.filter.viewed_a_prototype")
+}, {
+  value: ["open_sessions_start"],
+  description: renderI18nText("activity_log.filter.open_sessions_start")
+}, {
+  value: ["open_sessions_end"],
+  description: renderI18nText("activity_log.filter.open_sessions_end")
+}, ...tM, ...tJ, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.projects")
+}, {
+  value: ["folder_create"],
+  description: renderI18nText("activity_log.filter.created_a_project")
+}, {
+  value: ["folder_delete", "folder_trash", "folder_export", "folder_restore"],
+  description: renderI18nText("activity_log.filter.deleted_a_project")
+}, {
+  value: ["folder_member_add", "folder_member_permission_change", "folder_member_remove"],
+  description: renderI18nText("activity_log.filter.project_membership_changed")
+}, {
+  value: ["folder_move"],
+  description: renderI18nText("activity_log.filter.moved_a_project")
+}, {
+  value: ["folder_rename"],
+  description: renderI18nText("activity_log.filter.renamed_a_project")
+}, {
+  value: ["folder_team_access_change"],
+  description: renderI18nText("activity_log.filter.changed_the_team_access_of_a_project")
+}, {
+  value: ["folder_transfer_sent", "folder_transfer_copy_sent", "folder_export"],
+  description: renderI18nText("activity_log.filter.outgoing_transfers")
+}, {
+  value: ["folder_transfer_received", "folder_transfer_copy_received", "folder_transfer_approved", "folder_transfer_copy_approved", "folder_import"],
+  description: renderI18nText("activity_log.filter.incoming_transfers")
+}, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.teams")
+}, {
+  value: ["team_create", "team_import"],
+  description: renderI18nText("activity_log.filter.created_a_team")
+}, {
+  value: ["team_delete", "team_export"],
+  description: renderI18nText("activity_log.filter.deleted_a_team")
+}, {
+  value: ["team_transfer_sent", "team_export"],
+  description: renderI18nText("activity_log.filter.outgoing_transfers")
+}, {
+  value: ["team_transfer_received", "team_transfer_approved", "team_import"],
+  description: renderI18nText("activity_log.filter.incoming_transfers")
+}, {
+  value: ["team_restore"],
+  description: renderI18nText("activity_log.filter.restored_a_team")
+}, {
+  value: ["team_member_add", "team_member_permission_change", "team_member_remove"],
+  description: renderI18nText("activity_log.filter.team_membership_changed")
+}, {
+  value: ["team_rename"],
+  description: renderI18nText("activity_log.filter.renamed_a_team")
+}, {
+  value: ["team_org_access_change"],
+  description: renderI18nText("activity_log.filter.changed_the_org_access_of_a_team")
+}, {
+  value: ["team_license_group_change", "team_workspace_change"],
+  description: renderI18nText("activity_log.filter.changed_the_workspace_of_a_team")
+}, {
+  value: ["org_team_creation_controls"],
+  description: renderI18nText("activity_log.filter.changed_team_creation_controls")
+}, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.organizations")
+}, {
+  value: ["org_merge"],
+  description: renderI18nText("activity_log.filter.org_merged")
+}, {
+  value: ["org_user_create", "org_user_permission_change", "org_user_delete"],
+  description: renderI18nText("activity_log.filter.org_membership_changed")
+}, {
+  value: ["roster_exported"],
+  description: renderI18nText("activity_log.filter.exported_the_members_list")
+}, {
+  value: ["org_team_csv_exported"],
+  description: renderI18nText("activity_log.filter.exported_the_org_team_list")
+}, {
+  value: ["workspace_team_csv_exported"],
+  description: renderI18nText("activity_log.filter.exported_the_workspace_team_list")
+}, ...(e ? tV : []), {
+  value: ["org_invite_create"],
+  description: renderI18nText("activity_log.filter.org_invite_created")
+}, {
+  value: ["org_auto_approval_setting_update"],
+  description: jsx(Fragment, {
+    children: renderI18nText("activity_log.filter.auto_approval_settings_updated")
+  })
+}, {
+  value: ["cursor_chat_setting_change"],
+  description: renderI18nText("activity_log.filter.cursor_chat_setting_change")
+}, ...(e ? [{
+  value: ["idle_timeout_setting_change"],
+  description: renderI18nText("activity_log.filter.idle_timeout_setting_change")
+}] : []), ...(e && t.shared_container_setting?.configured_upgrade_request_setting ? [{
+  value: ["configurable_upgrade_request_setting_change", "configurable_upgrade_request_message_change"],
+  description: renderI18nText("activity_log.filter.configurable_upgrade_request_flow_changed")
+}] : []), {
+  value: ["scim_token_generate", "scim_token_revoke"],
+  description: renderI18nText("activity_log.filter.scim_token_generated_revoked")
+}, {
+  value: ["ai_features_enable", "ai_features_disable"],
+  description: renderI18nText("activity_log.filter.ai_features_setting_change")
+}, {
+  value: ["ai_content_training_enable", "ai_content_training_disable"],
+  description: renderI18nText("activity_log.filter.ai_content_training_setting_change")
+}, {
+  value: ["seats_renew"],
+  description: renderI18nText("activity_log.filter.seats_renew")
+}, ...(e && a ? [{
+  value: ["mfa_required_setting_change"],
+  description: renderI18nText("activity_log.filter.mfa_required_setting_change")
+}] : []), {
+  value: tL,
+  description: renderI18nText("activity_log.filter.seat_changes")
+}, {
+  value: ["org_default_license_type_change"],
+  description: renderI18nText("activity_log.filter.changed_default_role.seat_rename")
+}, {
+  value: ["org_user_account_type_upgrade_requested", "org_user_account_type_upgrade_approved", "org_user_account_type_upgrade_denied", "provisional_access_start", "provisional_access_end_request_approved", "provisional_access_end_request_denied", "provisional_access_end_new_request"],
+  description: renderI18nText("activity_log.filter.upgrade_requests_and_activity")
+}, {
+  value: ["org_user_account_type_change", "org_user_account_type_change_to_full"],
+  description: renderI18nText("activity_log.filter.org_role_changed.seat_rename")
+}, ...(e ? tq.concat([{
+  value: ["workspace_public_link_setting_change"],
+  description: renderI18nText("activity_log.filter.changed_workspace_public_link_setting")
+}, {
+  value: ["external_collaboration_controls_setting_change"],
+  description: renderI18nText("activity_log.filter.external_collaboration_controls_setting_change")
+}]) : tq), ...(e ? tB : []), ...(e ? tG : []), ...(t.can_use_multi_idp ? tY : []), ...(e ? tz : []), ...(e ? tF : []), {
+  value: tL,
+  description: renderI18nText("activity_log.filter.libraries")
+}, {
+  value: ["org_library_setting_change"],
+  description: renderI18nText("activity_log.filter.org_library_setting_changed")
+}, ...(e ? t$ : []), ...(e && isBigmaEnabledAlias3(t) ? [{
+  value: ["workspace_library_approve", "workspace_library_unapprove"],
+  description: renderI18nText("activity_log.filter.workspace_library_approval_changed")
+}] : []), ...(e && isBigmaEnabledAlias3(t) ? [{
+  value: ["org_library_approve", "org_library_unapprove"],
+  description: renderI18nText("activity_log.filter.org_library_approval_changed")
+}] : []), {
+  value: tL,
+  description: renderI18nText("activity_log.filter.users")
+}, ...(e ? [{
+  value: ["user_idle_session_timeout"],
+  description: renderI18nText("activity_log.filter.user_session_timed_out")
+}] : []), {
+  value: ["user_sign_in", "user_sign_out"],
+  description: renderI18nText("activity_log.filter.user_signed_in_signed_out")
+}, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.community")
+}, {
+  value: ["community_hub_file_publish", "community_hub_file_update", "community_hub_file_delete"],
+  description: renderI18nText("activity_log.filter.file_published_updated_deleted")
+}, {
+  value: ["community_plugin_publish", "community_plugin_update", "community_plugin_delete"],
+  description: renderI18nText("activity_log.filter.plugin_published_updated_deleted")
+}, {
+  value: ["community_widget_publish", "community_widget_update", "community_widget_delete"],
+  description: renderI18nText("activity_log.filter.widget_published_updated_deleted")
+}, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.private_plugins")
+}, {
+  value: ["private_plugin_publish"],
+  description: renderI18nText("activity_log.filter.plugin_published")
+}, {
+  value: ["private_plugin_update"],
+  description: renderI18nText("activity_log.filter.plugin_updated")
+}, {
+  value: ["private_plugin_delete"],
+  description: renderI18nText("activity_log.filter.plugin_deleted")
+}, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.plugin_management")
+}, {
+  value: ["plugin_approvelist_enable", "plugin_approvelist_disable"],
+  description: renderI18nText("activity_log.filter.plugin_approve_list_setting_changed")
+}, {
+  value: ["plugin_approvelist_request_org"],
+  description: renderI18nText("activity_log.filter.plugin_approve_list_requested")
+}, {
+  value: ["plugin_approvelist_request_approve_org", "plugin_approvelist_request_reject_org", "plugin_approvelist_request_approve_workspace", "plugin_approvelist_request_reject_workspace", "plugin_approvelist_add", "plugin_approvelist_add_workspace", "plugin_approvelist_remove", "plugin_approvelist_remove_workspace"],
+  description: renderI18nText("activity_log.filter.approve_list_plugins_reviewed")
+}, {
+  value: ["plugin_install", "plugin_uninstall"],
+  description: renderI18nText("activity_log.filter.install_plugins_org_wide")
+}, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.plugin_publishers")
+}, {
+  value: ["plugin_publisher_accept_invite", "plugin_publisher_remove_invite"],
+  description: renderI18nText("activity_log.filter.plugin_publisher_accept_remove_invite")
+}, {
+  value: ["plugin_publisher_invite"],
+  description: renderI18nText("activity_log.filter.plugin_publisher_invite")
+}, {
+  value: ["plugin_publisher_remove"],
+  description: renderI18nText("activity_log.filter.plugin_publisher_remove")
+}, {
+  value: ["plugin_ownership_transfer"],
+  description: renderI18nText("activity_log.filter.plugin_ownership_transfer")
+}, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.private_widgets")
+}, {
+  value: ["private_widget_publish"],
+  description: renderI18nText("activity_log.filter.widget_published")
+}, {
+  value: ["private_widget_update"],
+  description: renderI18nText("activity_log.filter.widget_updated")
+}, {
+  value: ["private_widget_delete"],
+  description: renderI18nText("activity_log.filter.widget_deleted")
+}, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.widget_management")
+}, {
+  value: ["widgets_enabled", "widgets_disable"],
+  description: renderI18nText("activity_log.filter.widget_approve_list_setting_changed")
+}, {
+  value: ["widget_approvelist_request_org"],
+  description: renderI18nText("activity_log.filter.widget_approve_list_requested")
+}, {
+  value: ["widget_approvelist_request_approve_org", "widget_approvelist_request_reject_org", "widget_approvelist_request_approve_workspace", "widget_approvelist_request_reject_workspace", "widget_approvelist_add", "widget_approvelist_add_workspace", "widget_approvelist_remove", "widget_approvelist_remove_workspace"],
+  description: renderI18nText("activity_log.filter.approve_list_widgets_reviewed")
+}, {
+  value: ["widget_install", "widget_uninstall"],
+  description: renderI18nText("activity_log.filter.install_widgets_org_wide")
+}, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.widget_publishers")
+}, {
+  value: ["widget_publisher_accept_invite", "widget_publisher_remove_invite"],
+  description: renderI18nText("activity_log.filter.widget_publisher_accept_remove_invite")
+}, {
+  value: ["widget_publisher_invite"],
+  description: renderI18nText("activity_log.filter.widget_publisher_invite")
+}, {
+  value: ["widget_publisher_remove"],
+  description: renderI18nText("activity_log.filter.widget_publisher_remove")
+}, {
+  value: ["widget_ownership_transfer"],
+  description: renderI18nText("activity_log.filter.widget_ownership_transfer")
+}, ...tU, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.audio")
+}, {
+  value: ["voice_call_join_req"],
+  description: renderI18nText("activity_log.filter.user_joined_audio_call")
+}, {
+  value: tL,
+  description: renderI18nText("activity_log.filter.integrations")
+}, {
+  value: ["personal_access_token_create", "personal_access_token_delete"],
+  description: renderI18nText("activity_log.filter.personal_access_token_create_delete")
+}, {
+  value: ["oauth_token_grant", "oauth_token_revoke"],
+  description: renderI18nText("activity_log.filter.oauth_token_grant_revoke")
+}, ...(p3() ? [{
+  value: ["supabase_setting_change"],
+  description: renderI18nText("activity_log.filter.supabase_setting_change")
+}, {
+  value: ["supabase_project_connected"],
+  description: renderI18nText("activity_log.filter.supabase_project_connected")
+}, {
+  value: ["supabase_project_disconnected"],
+  description: renderI18nText("activity_log.filter.supabase_project_disconnected")
+}] : []), ...tW, ...tH, ...tP];
 let tX = [{
   value: {
     start: dayjs().format("YYYY-MM-DD"),
@@ -1751,7 +1751,7 @@ function t1() {
 tZ.displayName = "ActivityLogsPage";
 let t7 = atom(!1);
 let t9 = "seen_org_admin_billing_groups_onboarding";
-let ae = rn("org_admin_license_groups_onboarding", _$$R(O5v));
+let ae = rn("org_admin_license_groups_onboarding", createOnboardingStateMachine(O5v));
 let at = userFlagExistsAtomFamily(t9);
 function aa() {
   let e = useAtomWithSubscription(at);
@@ -2179,7 +2179,7 @@ function aR({
     }, "license-group-delete-action")]
   }) : null;
 }
-let aO = new Ef([], {
+let aO = new SimpleFuseSearch([], {
   threshold: .1,
   matchAllTokens: !0,
   tokenize: !1,
@@ -2491,7 +2491,7 @@ function az(e) {
   });
 }
 function aH(e) {
-  let t = bQ({
+  let t = usePlanInvoices({
     planType: FOrganizationLevelType.ORG,
     planId: e.org.id
   });
@@ -2541,7 +2541,7 @@ function a3(e) {
   let t = useDispatch();
   let a = RR();
   let n = Xf(e.org.id);
-  let l = bQ({
+  let l = usePlanInvoices({
     planType: FOrganizationLevelType.ORG,
     planId: e.org.id
   });
@@ -2559,7 +2559,7 @@ function a3(e) {
       total: 0
     }))
   }, [], {
-    release: () => { }
+    release: () => {}
   }), [a, o]);
   let c = useMemo(() => o.transform(e => {
     let t = {
@@ -2752,9 +2752,9 @@ function nr(e) {
 function no(e) {
   let t = _$$R2();
   let [a, n] = useMemo(() => {
-    let a = e.openInvoices.filter(e => Jv(e, t));
-    let n = YO(a);
-    return n ? [n, !0] : [YO(e.openInvoices), !1];
+    let a = e.openInvoices.filter(e => isOverdue(e, t));
+    let n = getLatestPayableInvoice(a);
+    return n ? [n, !0] : [getLatestPayableInvoice(e.openInvoices), !1];
   }, [t, e.openInvoices]);
   return a ? n ? jsx(nr, {
     orgId: e.orgId,
@@ -2773,14 +2773,14 @@ function no(e) {
   }) : null;
 }
 function nd(e) {
-  let t = useMemo(() => e.invoices.filter(e => e.state === qH.OPEN), [e.invoices]);
+  let t = useMemo(() => e.invoices.filter(e => e.state === InvoiceState.OPEN), [e.invoices]);
   return 0 === t.length ? null : jsx(no, {
     orgId: e.orgId,
     openInvoices: t
   });
 }
 function nc(e) {
-  let t = bQ({
+  let t = usePlanInvoices({
     planType: FOrganizationLevelType.ORG,
     planId: e.orgId
   });
@@ -2810,7 +2810,7 @@ function n_(e) {
 }
 function nu(e) {
   let t = Xf(e.org.id);
-  bQ({
+  usePlanInvoices({
     planType: FOrganizationLevelType.ORG,
     planId: e.org.id
   }, {
@@ -3476,7 +3476,7 @@ function n$() {
   });
 }
 let nB = e => e.id ?? UNASSIGNED;
-let nG = new Ef([], {
+let nG = new SimpleFuseSearch([], {
   threshold: .1,
   matchAllTokens: !0,
   tokenize: !1,
@@ -3855,7 +3855,7 @@ function n4(e) {
     children: renderI18nText("members_table.invite_users_button")
   }) : jsx(Button, {
     variant: "primary",
-    onClick: () => { },
+    onClick: () => {},
     "aria-label": getI18nString("members_table.create_user_group_button"),
     iconPrefix: jsx(_$$x, {}),
     children: renderI18nText("members_table.create_user_group_button")

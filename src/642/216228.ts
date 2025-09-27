@@ -15,7 +15,7 @@ import { f as _$$f2 } from '../905/54715';
 import { KeyCodes } from '../905/63728';
 import { getCurrentHubFileVersionName } from '../905/71785';
 import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677';
-import { KH } from '../905/81982';
+import { WorkerFuseSearch } from '../905/81982';
 import { F as _$$F } from '../905/84606';
 import { generateRetrievingSubscribedComponentsKey } from '../905/92359';
 import { useDelayedCallback } from '../905/116724';
@@ -6532,7 +6532,7 @@ let iH = function ({
     children: t
   });
 };
-let iz = new KH({
+let iz = new WorkerFuseSearch({
   keys: [{
     name: 'name',
     weight: 0.6

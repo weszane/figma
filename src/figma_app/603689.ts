@@ -81,7 +81,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R5 } from '../905/304671';
 import { b as _$$b3, c as _$$c3 } from '../905/308099';
-import { nr as _$$nr, Op } from '../905/337355';
+import { createUserEventTransition, buildStateMachine } from '../905/337355';
 import { L as _$$L2 } from '../905/348758';
 import { X as _$$X4 } from '../905/350405';
 import { V as _$$V4 } from '../905/355181';
@@ -2399,7 +2399,7 @@ class au extends ad {
     }
   }
 }
-class ap extends _$$E2 { }
+class ap extends _$$E2 {}
 class af extends _$$R3 {
   constructor({
     migrationVersion: e,
@@ -2918,7 +2918,7 @@ class ak extends ad {
     return t ? this.editScopePropertyGenerator.generateEditScopeSnapshotsItem(t) : null;
   }
 }
-class aM extends _$$E2 { }
+class aM extends _$$E2 {}
 async function aF(e) {
   for (let t of [250, 250, 250, 500, 1e3, 1e3, ...Array.from({
     length: 24
@@ -4369,18 +4369,18 @@ function s7({
   });
 }
 var or = (e => (e.AWAIT_ADMIN_PANEL = 'await_admin_panel', e.AWAIT_LEAVE_SETTINGS = 'await_leave_settings', e.COMPLETED = 'completed', e))(or || {});
-let on = Op({
+let on = buildStateMachine({
   initial: 'await_admin_panel',
   states: [{
     id: 'await_admin_panel',
-    transitions: [_$$nr('Context Viewed', 'await_leave_settings', {
+    transitions: [createUserEventTransition('Context Viewed', 'await_leave_settings', {
       condition: ({
         event: e
       }) => e.properties.name === _$$e9.ORG_ADMIN_SETTINGS_PAGE
     })]
   }, {
     id: 'await_leave_settings',
-    transitions: [_$$nr('Context Viewed', 'completed', {
+    transitions: [createUserEventTransition('Context Viewed', 'completed', {
       condition: ({
         event: e
       }) => e.properties.name !== _$$e9.ORG_ADMIN_SETTINGS_PAGE
@@ -4494,18 +4494,18 @@ function o_({
     width
   });
 }
-let om = Op({
+let om = buildStateMachine({
   initial: 'await_cart',
   states: [{
     id: 'await_cart',
-    transitions: [_$$nr('Context Viewed', 'await_abandon_cart', {
+    transitions: [createUserEventTransition('Context Viewed', 'await_abandon_cart', {
       condition: ({
         event: e
       }) => e.properties.name === _$$e9.ORG_CHECKOUT_FLOW
     })]
   }, {
     id: 'await_abandon_cart',
-    transitions: [_$$nr('Context Viewed', 'complete', {
+    transitions: [createUserEventTransition('Context Viewed', 'complete', {
       condition: ({
         event: {
           properties: {
@@ -4824,7 +4824,7 @@ function oZ({
   let a = useModalManager({
     preventUserClose: !0,
     open: !0,
-    onClose: () => { }
+    onClose: () => {}
   });
   let s = useCallback(async () => {
     if (!t) {

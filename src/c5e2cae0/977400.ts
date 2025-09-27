@@ -10,7 +10,7 @@ import { kR } from "../c5e2cae0/894125";
 import { openCreateTeamFlow } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
 import { hideModal, popModalStack } from "../905/156213";
-import { WX } from "../figma_app/482142";
+import { startProUpgradeFlowThunk } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { selectPermissionsState } from "../figma_app/212807";
 import { getSelectedView } from "../figma_app/386952";
@@ -59,7 +59,7 @@ let L = createOptimistThunk((e, {
       role: a
     }));
     r();
-    e.dispatch(WX({
+    e.dispatch(startProUpgradeFlowThunk({
       teamId: n.id,
       selectedView: a,
       newTeam: !0,
@@ -164,7 +164,7 @@ export function $$z0(e) {
       paymentStep: kR(b.paymentStep, CreateUpgradeAction.UPGRADE_EXISTING_TEAM, b.billingPeriod || null, w, b.planType || TeamType.UNDETERMINED, w ? UpgradeSteps.CONFIRM_PAY : UpgradeSteps.CHOOSE_PLAN),
       billingPeriod: e.billingPeriod || E,
       entryPoint: e.entryPoint
-    })) : N(WX({
+    })) : N(startProUpgradeFlowThunk({
       teamId: t.id,
       selectedView: b,
       newTeam: !1,

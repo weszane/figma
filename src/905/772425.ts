@@ -1,260 +1,458 @@
-import { dN } from "../vendor/291472";
-import { KH } from "../905/81982";
-import { U } from "../figma_app/477548";
-import { searchAPIHandler } from "../905/144933";
-class o {
-  constructor(e, t, i, n, r, s, o = {
-    list: U.getAtMentions,
-    search: U.searchAtMentions
-  }) {
-    this.api = o;
-    this.orgId = e;
-    this.teamId = t;
-    this.fileKey = i;
-    this.maxResultsCount = void 0 !== n ? n : 5;
-    this.includeHiResAvatars = r;
-    this.checkPermissions = s;
+import { SearchIndex } from 'emoji-mart'
+import { WorkerFuseSearch } from '../905/81982'
+import { searchAPIHandler } from '../905/144933'
+import { contactsAPIService } from '../figma_app/477548'
+
+// Original class 'o' - Refactored to AtMentionsLibrary
+interface AtMentionsAPI {
+  list: (params: any) => Promise<any>
+  search: (params: any) => Promise<any>
+}
+
+class AtMentionsLibrary {
+  private api: AtMentionsAPI
+  private orgId: string
+  private teamId: string
+  private fileKey: string
+  private maxResultsCount: number
+  private includeHiResAvatars: boolean
+  private checkPermissions: boolean
+
+  /**
+   * Constructor for AtMentionsLibrary.
+   * @param orgId - Organization ID.
+   * @param teamId - Team ID.
+   * @param fileKey - File key.
+   * @param maxResultsCount - Maximum results count (default 5).
+   * @param includeHiResAvatars - Whether to include high-res avatars.
+   * @param checkPermissions - Whether to check permissions.
+   * @param api - API service (default uses contactsAPIService).
+   */
+  constructor(
+    orgId: string,
+    teamId: string,
+    fileKey: string,
+    maxResultsCount: number = 5,
+    includeHiResAvatars: boolean,
+    checkPermissions: boolean,
+    api: AtMentionsAPI = {
+      list: contactsAPIService.getAtMentions,
+      search: contactsAPIService.searchAtMentions,
+    },
+  ) {
+    this.api = api
+    this.orgId = orgId
+    this.teamId = teamId
+    this.fileKey = fileKey
+    this.maxResultsCount = maxResultsCount
+    this.includeHiResAvatars = includeHiResAvatars
+    this.checkPermissions = checkPermissions
   }
-  async list(e) {
+
+  /**
+   * Lists at-mentions.
+   * @param inFigmaDesignEditor - Whether in Figma design editor.
+   * @returns Array of mentions.
+   */
+  async list(inFigmaDesignEditor: boolean): Promise<any[]> {
     try {
-      let {
-        data: {
-          meta
-        }
-      } = await this.api.list({
+      const response = await this.api.list({
         fileKey: this.fileKey,
         teamId: this.teamId,
         orgId: this.orgId,
         includeHiResAvatars: this.includeHiResAvatars,
         checkPermissions: this.checkPermissions,
         limit: this.maxResultsCount,
-        inFigmaDesignEditor: e
-      });
-      return meta;
-    } catch (e) {
-      console.error("An error ocurred while trying to fetch contacts.", e);
+        inFigmaDesignEditor,
+      })
+      return response.data.meta
     }
-    return [];
+    catch (error) {
+      console.error('An error occurred while trying to fetch contacts.', error)
+    }
+    return []
   }
-  async search(e, t) {
+
+  /**
+   * Searches at-mentions.
+   * @param query - Search query.
+   * @param inFigmaDesignEditor - Whether in Figma design editor.
+   * @returns Array of mentions.
+   */
+  async search(query: string, inFigmaDesignEditor: boolean): Promise<any[]> {
     try {
-      let {
-        data: {
-          meta
-        }
-      } = await this.api.search({
-        query: e,
+      const response = await this.api.search({
+        query,
         fileKey: this.fileKey,
         teamId: this.teamId,
         orgId: this.orgId,
         includeHiResAvatars: this.includeHiResAvatars,
         checkPermissions: this.checkPermissions,
         limit: this.maxResultsCount,
-        inFigmaDesignEditor: t
-      });
-      return meta;
-    } catch (e) {
-      console.error("An error ocurred while searching for contacts.", e);
+        inFigmaDesignEditor,
+      })
+      return response.data.meta
     }
-    return [];
+    catch (error) {
+      console.error('An error occurred while searching for contacts.', error)
+    }
+    return []
   }
-  maxResultsLength() {
-    return this.maxResultsCount;
+
+  /**
+   * Gets maximum results length.
+   * @returns Maximum results count.
+   */
+  maxResultsLength(): number {
+    return this.maxResultsCount
   }
 }
-class l {
-  constructor(e, t, i, n = {
-    list: U.getShareModalContacts,
-    search: U.searchShareModalContacts
-  }) {
-    this.api = n;
-    this.orgId = e;
-    this.teamId = t;
-    this.maxResultsCount = void 0 !== i ? i : 5;
+
+// Original class 'l' - Refactored to ShareModalContactsLibrary
+interface ShareModalAPI {
+  list: (params: any) => Promise<any>
+  search: (params: any) => Promise<any>
+}
+
+class ShareModalContactsLibrary {
+  private api: ShareModalAPI
+  private orgId: string
+  private teamId: string
+  private maxResultsCount: number
+
+  /**
+   * Constructor for ShareModalContactsLibrary.
+   * @param orgId - Organization ID.
+   * @param teamId - Team ID.
+   * @param maxResultsCount - Maximum results count (default 5).
+   * @param api - API service (default uses contactsAPIService).
+   */
+  constructor(
+    orgId: string,
+    teamId: string,
+    maxResultsCount: number = 5,
+    api: ShareModalAPI = {
+      list: contactsAPIService.getShareModalContacts,
+      search: contactsAPIService.searchShareModalContacts,
+    },
+  ) {
+    this.api = api
+    this.orgId = orgId
+    this.teamId = teamId
+    this.maxResultsCount = maxResultsCount
   }
-  async list() {
+
+  /**
+   * Lists share modal contacts.
+   * @returns Array of contacts.
+   */
+  async list(): Promise<any[]> {
     try {
-      let {
-        data: {
-          meta
-        }
-      } = await this.api.list({
+      const response = await this.api.list({
         teamId: this.teamId,
         orgId: this.orgId,
-        limit: this.maxResultsCount
-      });
-      return meta;
-    } catch (e) {
-      console.error("An error ocurred while trying to fetch contacts for share modal.", e);
+        limit: this.maxResultsCount,
+      })
+      return response.data.meta
     }
-    return [];
+    catch (error) {
+      console.error('An error occurred while trying to fetch contacts for share modal.', error)
+    }
+    return []
   }
-  async search(e) {
+
+  /**
+   * Searches share modal contacts.
+   * @param query - Search query.
+   * @returns Array of contacts.
+   */
+  async search(query: string): Promise<any[]> {
     try {
-      let {
-        data: {
-          meta
-        }
-      } = await this.api.search({
-        query: e,
+      const response = await this.api.search({
+        query,
         teamId: this.teamId,
         orgId: this.orgId,
-        limit: this.maxResultsCount
-      });
-      return meta;
-    } catch (e) {
-      console.error("An error ocurred while searching for contacts for share modal.", e);
+        limit: this.maxResultsCount,
+      })
+      return response.data.meta
     }
-    return [];
+    catch (error) {
+      console.error('An error occurred while searching for contacts for share modal.', error)
+    }
+    return []
   }
-  maxResultsLength() {
-    return this.maxResultsCount;
+
+  /**
+   * Gets maximum results length.
+   * @returns Maximum results count.
+   */
+  maxResultsLength(): number {
+    return this.maxResultsCount
   }
 }
-export class $$d1 {
-  async list() {
-    return await Promise.resolve([]);
+
+// Original class '$$d1' - Refactored to CommunityMentionsLibrary
+export class CommunityMentionsLibrary {
+  /**
+   * Lists community mentions (always returns empty array).
+   * @returns Empty array.
+   */
+  async list(): Promise<any[]> {
+    return await Promise.resolve([])
   }
-  async search(e) {
+
+  /**
+   * Searches community mentions.
+   * @param query - Search query.
+   * @returns Array of mentions.
+   */
+  async search(query: string): Promise<any[]> {
     try {
-      let {
-        data: {
-          meta
-        }
-      } = await searchAPIHandler.getCommunityMentions({
-        query: e
-      });
-      return meta.results.map(e => e.model);
-    } catch {
-      console.error("An error ocurred while searching for mentions.");
+      const response = await searchAPIHandler.getCommunityMentions({
+        query,
+      })
+      return response.data.meta.results.map((result: any) => result.model)
     }
-    return [];
+    catch {
+      console.error('An error occurred while searching for mentions.')
+    }
+    return []
   }
-  maxResultsLength() {
-    return 10;
+
+  /**
+   * Gets maximum results length.
+   * @returns 10.
+   */
+  maxResultsLength(): number {
+    return 10
   }
 }
-export class $$c0 {
-  constructor(e, t, i = {
-    list: U.getFeedAtMentions,
-    search: U.searchFeedAtMentions
-  }) {
-    this.api = i;
-    this.orgId = e;
-    this.feedPostPublicUuid = t;
+
+// Original class '$$c0' - Refactored to FeedAtMentionsLibrary
+interface FeedAtMentionsAPI {
+  list: (params: any) => Promise<any>
+  search: (params: any) => Promise<any>
+}
+
+export class FeedAtMentionsLibrary {
+  private api: FeedAtMentionsAPI
+  private orgId: string
+  private feedPostPublicUuid: string
+
+  /**
+   * Constructor for FeedAtMentionsLibrary.
+   * @param orgId - Organization ID.
+   * @param feedPostPublicUuid - Feed post public UUID.
+   * @param api - API service (default uses contactsAPIService).
+   */
+  constructor(
+    orgId: string,
+    feedPostPublicUuid: string,
+    api: FeedAtMentionsAPI = {
+      list: contactsAPIService.getFeedAtMentions,
+      search: contactsAPIService.searchFeedAtMentions,
+    },
+  ) {
+    this.api = api
+    this.orgId = orgId
+    this.feedPostPublicUuid = feedPostPublicUuid
   }
-  async list() {
+
+  /**
+   * Lists feed at-mentions.
+   * @returns Array of mentions.
+   */
+  async list(): Promise<any[]> {
     try {
-      let {
-        data: {
-          meta
-        }
-      } = await this.api.list({
+      const response = await this.api.list({
         orgId: this.orgId,
-        feedPostPublicUuid: this.feedPostPublicUuid
-      });
-      return meta;
-    } catch (e) {
-      console.error("An error ocurred while trying to fetch contacts.", e);
+        feedPostPublicUuid: this.feedPostPublicUuid,
+      })
+      return response.data.meta
     }
-    return [];
+    catch (error) {
+      console.error('An error occurred while trying to fetch contacts.', error)
+    }
+    return []
   }
-  async search(e) {
+
+  /**
+   * Searches feed at-mentions.
+   * @param query - Search query.
+   * @returns Array of mentions.
+   */
+  async search(query: string): Promise<any[]> {
     try {
-      let {
-        data: {
-          meta
-        }
-      } = await this.api.search({
-        query: e,
+      const response = await this.api.search({
+        query,
         orgId: this.orgId,
-        feedPostPublicUuid: this.feedPostPublicUuid
-      });
-      return meta;
-    } catch (e) {
-      console.error("An error ocurred while searching for contacts.", e);
+        feedPostPublicUuid: this.feedPostPublicUuid,
+      })
+      return response.data.meta
     }
-    return [];
+    catch (error) {
+      console.error('An error occurred while searching for contacts.', error)
+    }
+    return []
   }
-  maxResultsLength() {
-    return 5;
+
+  /**
+   * Gets maximum results length.
+   * @returns 5.
+   */
+  maxResultsLength(): number {
+    return 5
   }
 }
-let u = new class {
-  constructor(e) {
-    this.searchLibrary = e;
+
+// Original 'u' - Refactored to UserSearchLibrary
+const userSearchLibrary = new (class {
+  private searchLibrary: WorkerFuseSearch
+
+  constructor(searchLibrary: WorkerFuseSearch) {
+    this.searchLibrary = searchLibrary
   }
-  set(e) {
-    this.searchLibrary.set(e);
+
+  /**
+   * Sets the users data.
+   * @param users - Array of users.
+   */
+  set(users: any[]): void {
+    this.searchLibrary.set(users)
   }
-  list() {
-    return Promise.resolve(this.searchLibrary.list().sort((e, t) => e.handle < t.handle ? -1 : 1));
+
+  /**
+   * Lists users sorted by handle.
+   * @returns Sorted array of users.
+   */
+  list(): Promise<any[]> {
+    return Promise.resolve(this.searchLibrary.list().sort((a, b) => (a.handle < b.handle ? -1 : 1)))
   }
-  async search(e) {
-    return (await this.searchLibrary.search(e)).map(e => e.item);
+
+  /**
+   * Searches users.
+   * @param query - Search query.
+   * @returns Array of user items.
+   */
+  async search(query: string): Promise<any[]> {
+    return (await this.searchLibrary.search(query)).map((result: any) => result.item)
   }
-  maxResultsLength() {
-    return 5;
+
+  /**
+   * Gets maximum results length.
+   * @returns 5.
+   */
+  maxResultsLength(): number {
+    return 5
   }
-}(new KH({
-  keys: [{
-    name: "handle",
-    weight: .9
-  }, {
-    name: "email",
-    weight: .1
-  }],
-  threshold: .2,
-  tokenize: !0,
-  shouldSort: !0
-}));
-export function $$p3({
-  currentOrgId: e,
-  teamId: t,
-  users: i,
-  fileKey: n,
-  maxResultsCount: r,
-  api: a,
-  includeHiResAvatars: s = !1,
-  checkPermissions: d,
-  isShareModal: p = !1,
-  feedPostUuid: m
-}) {
-  return p ? {
-    library: new l(e, t, r)
-  } : m && e ? {
-    library: new $$c0(e, m)
-  } : n ? {
-    library: new o(e, t, n, r, s, d, a)
-  } : (i.length && u.set(i), {
-    library: u
-  });
+})(new WorkerFuseSearch({
+  keys: [
+    { name: 'handle', weight: 0.9 },
+    { name: 'email', weight: 0.1 },
+  ],
+  threshold: 0.2,
+  tokenize: true,
+  shouldSort: true,
+}))
+
+// Original function '$$p3' - Refactored to createMentionLibrary
+interface CreateMentionLibraryParams {
+  currentOrgId: string
+  teamId: string
+  users: any[]
+  fileKey?: string
+  maxResultsCount: number
+  api?: AtMentionsAPI
+  includeHiResAvatars?: boolean
+  checkPermissions?: boolean
+  isShareModal?: boolean
+  feedPostUuid?: string
 }
-export async function $$m2(e, t, i) {
-  let n;
-  return (n = "" === e ? (await t.library.list(i)).slice(0, t.library.maxResultsLength()) : (await t.library.search(e, i)).slice(0, t.library.maxResultsLength())).length ? {
-    type: "mentions",
-    mentions: n,
-    index: 0,
-    maxMentions: t.library.maxResultsLength()
-  } : null;
+
+/**
+ * Creates a mention library based on parameters.
+ * @param params - Parameters for creating the library.
+ * @returns Object with library.
+ */
+export function createMentionLibrary(params: CreateMentionLibraryParams): { library: any } {
+  const {
+    currentOrgId,
+    teamId,
+    users,
+    fileKey,
+    maxResultsCount,
+    api,
+    includeHiResAvatars = false,
+    checkPermissions,
+    isShareModal = false,
+    feedPostUuid,
+  } = params
+
+  if (isShareModal) {
+    return { library: new ShareModalContactsLibrary(currentOrgId, teamId, maxResultsCount) }
+  }
+  if (feedPostUuid && currentOrgId) {
+    return { library: new FeedAtMentionsLibrary(currentOrgId, feedPostUuid) }
+  }
+  if (fileKey) {
+    return { library: new AtMentionsLibrary(currentOrgId, teamId, fileKey, maxResultsCount, includeHiResAvatars, checkPermissions, api) }
+  }
+  if (users.length) {
+    userSearchLibrary.set(users)
+  }
+  return { library: userSearchLibrary }
 }
-let h = /_/g;
-export function $$g4(e) {
-  let t = e.replace(h, "-");
-  let i = dN.searchSynchronized(t, {
-    maxResults: 10
-  }) || [];
-  return i.length ? {
-    type: "emojis",
-    emojis: i,
-    index: 0,
-    maxEmojis: 10,
-    query: e
-  } : null;
+
+// Original function '$$m2' - Refactored to getMentionsResult
+/**
+ * Gets mentions result.
+ * @param query - Search query.
+ * @param libraryWrapper - Object with library.
+ * @param inFigmaDesignEditor - Whether in Figma design editor.
+ * @returns Mentions result or null.
+ */
+export async function getMentionsResult(query: string, libraryWrapper: { library: any }, inFigmaDesignEditor: boolean): Promise<any> {
+  const mentions = query === ''
+    ? (await libraryWrapper.library.list(inFigmaDesignEditor)).slice(0, libraryWrapper.library.maxResultsLength())
+    : (await libraryWrapper.library.search(query, inFigmaDesignEditor)).slice(0, libraryWrapper.library.maxResultsLength())
+
+  if (mentions.length) {
+    return {
+      type: 'mentions',
+      mentions,
+      index: 0,
+      maxMentions: libraryWrapper.library.maxResultsLength(),
+    }
+  }
+  return null
 }
-export const M8 = $$c0;
-export const MH = $$d1;
-export const fG = $$m2;
-export const mp = $$p3;
-export const oQ = $$g4;
+
+// Original 'h' and '$$g4' - Refactored to getEmojisResult
+const underscoreRegex = /_/g
+
+/**
+ * Gets emojis result.
+ * @param query - Search query.
+ * @returns Emojis result or null.
+ */
+export function getEmojisResult(query: string): any {
+  const transformedQuery = query.replace(underscoreRegex, '-')
+  const emojis = SearchIndex.searchSynchronized(transformedQuery, { maxResults: 10 }) || []
+  if (emojis.length) {
+    return {
+      type: 'emojis',
+      emojis,
+      index: 0,
+      maxEmojis: 10,
+      query,
+    }
+  }
+  return null
+}
+
+// Refactored exports to match new names
+export const M8 = FeedAtMentionsLibrary
+export const MH = CommunityMentionsLibrary
+export const fG = getMentionsResult
+export const mp = createMentionLibrary
+export const oQ = getEmojisResult

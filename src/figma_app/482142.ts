@@ -1,235 +1,274 @@
-import { createActionCreator } from "../905/73481";
-import { dayjs } from "../905/920142";
-import { hasDesktopAPI } from "../figma_app/876459";
-import { _H } from "../figma_app/598111";
-import { sendWithRetry } from "../905/910117";
-import { FlashActions } from "../905/573154";
-import { getI18nString } from "../905/303541";
-import { switchAccountAndNavigate, openUrlInContext } from "../figma_app/976345";
-import { selectViewAction } from "../905/929976";
-import { jL } from "../figma_app/658324";
-import { FOrganizationLevelType } from "../figma_app/191312";
-import { handleErrorWithToast } from "../figma_app/345997";
-import { selectedViewToPath } from "../figma_app/193867";
-import { SubscriptionType, mapUpsellModalTypeToSource, UpgradeSteps } from "../figma_app/831101";
-import { CreateUpgradeAction, TeamType } from "../figma_app/707808";
-import { createOptimistThunk } from "../905/350402";
-import { hideModal } from "../905/156213";
-import { setTeamOptimistThunk } from "../figma_app/240735";
-import { Be } from "../figma_app/920435";
-let $$I15 = createOptimistThunk((e, {
-  teamId: t,
-  showBreadcrumbs: r,
-  onCloseOrComplete: n
-}) => {
-  e.dispatch(selectViewAction({
-    view: "eduReview",
-    teamId: t,
-    showBreadcrumbs: r,
-    onCloseOrComplete: n
-  }));
-  e.dispatch($$G7({
-    billingPeriod: SubscriptionType.STUDENT
-  }));
-});
-let $$S20 = createActionCreator("PAYMENT_RESTORE_SAVED_CART");
-let $$v9 = createActionCreator("PAYMENT_SET_CURRENCY");
-let $$A16 = createActionCreator("PAYMENT_SET_TOKEN");
-let $$x21 = createActionCreator("PAYMENT_SET_TAXES");
-let $$N19 = createActionCreator("PAYMENT_SET_PROMO");
-let $$C1 = createOptimistThunk((e, t) => {
-  t.promo || _H();
-  e.dispatch($$N19(t));
-});
-let $$w0 = createActionCreator("PAYMENT_SET_VAT_GST_ID");
-let $$O4 = createActionCreator("PAYMENT_SET_REGIONAL_VAT_GST_ID");
-let $$R12 = createActionCreator("PAYMENT_MAKE_STUDENT_TEAM");
-let $$L11 = createOptimistThunk((e, t) => {
-  let r = e.getState();
-  let n = r.user?.id;
-  sendWithRetry.put(`/api/teams/${t.teamId}/student_team`, {
-    student_team: !0
+import { createActionCreator } from '../905/73481'
+import { hideModal } from '../905/156213'
+import { getI18nString } from '../905/303541'
+import { createOptimistThunk } from '../905/350402'
+import { FlashActions } from '../905/573154'
+import { sendWithRetry } from '../905/910117'
+import { dayjs } from '../905/920142'
+import { selectViewAction } from '../905/929976'
+import { FOrganizationLevelType } from '../figma_app/191312'
+import { selectedViewToPath } from '../figma_app/193867'
+import { setTeamOptimistThunk } from '../figma_app/240735'
+import { handleErrorWithToast } from '../figma_app/345997'
+import { clearFigmaPcCookie } from '../figma_app/598111'
+import { fetchAndUpdateUpcomingInvoices } from '../figma_app/658324'
+import { CreateUpgradeAction, TeamType } from '../figma_app/707808'
+import { mapUpsellModalTypeToSource, SubscriptionType, UpgradeSteps } from '../figma_app/831101'
+import { hasDesktopAPI } from '../figma_app/876459'
+import { Be } from '../figma_app/920435'
+import { openUrlInContext, switchAccountAndNavigate } from '../figma_app/976345'
+
+// Action creators for payment-related state management
+const restoreSavedCartAction = createActionCreator('PAYMENT_RESTORE_SAVED_CART')
+const setCurrencyAction = createActionCreator('PAYMENT_SET_CURRENCY')
+const setTokenAction = createActionCreator('PAYMENT_SET_TOKEN')
+const setTaxesAction = createActionCreator('PAYMENT_SET_TAXES')
+const setPromoAction = createActionCreator('PAYMENT_SET_PROMO')
+const setVatGstIdAction = createActionCreator('PAYMENT_SET_VAT_GST_ID')
+const setRegionalVatGstIdAction = createActionCreator('PAYMENT_SET_REGIONAL_VAT_GST_ID')
+const makeStudentTeamAction = createActionCreator('PAYMENT_MAKE_STUDENT_TEAM')
+const showErrorAction = createActionCreator('PAYMENT_SHOW_ERROR')
+const setCompanyDetailsAction = createActionCreator('PAYMENT_SET_COMPANY_DETAILS')
+const setSubmitPendingAction = createActionCreator('PAYMENT_SET_SUBMIT_PENDING')
+const setEditorStatusChangesAction = createActionCreator('PAYMENT_SET_EDITOR_STATUS_CHANGES')
+const setNumFigmaEmailTeamUsersAction = createActionCreator('PAYMENT_SET_NUM_FIGMA_EMAIL_TEAM_USERS')
+export const setNumWhiteboardEditorsAction = createActionCreator('PAYMENT_SET_NUM_WHITEBOARD_EDITORS')
+export const setNumEditorsAction = createActionCreator('PAYMENT_SET_NUM_EDITORS')
+export const setBillingPeriodAction = createActionCreator('PAYMENT_SET_BILLING_PERIOD')
+export const setCampfireSeatsAction = createActionCreator('PAYMENT_SET_CAMPFIRE_SEATS')
+export const initPaymentAction = createActionCreator('PAYMENT_INIT')
+export const startOrgUpgradeFlowAction = createActionCreator('PAYMENT_START_ORG_UPGRADE_FLOW')
+export const startProUpgradeFlowAction = createActionCreator('PAYMENT_START_PRO_UPGRADE_FLOW')
+
+// Thunks for handling complex payment flows and API interactions
+
+/**
+ * Thunk to start the student review process by selecting the eduReview view and setting billing period to student.
+ * @param dispatch - Redux dispatch function
+ * @param payload - Contains teamId, showBreadcrumbs, and onCloseOrComplete callback
+ */
+export const startStudentReviewThunk = createOptimistThunk(({dispatch}, { teamId, showBreadcrumbs, onCloseOrComplete }) => {
+  dispatch(selectViewAction({
+    view: 'eduReview',
+    teamId,
+    showBreadcrumbs,
+    onCloseOrComplete,
+  }))
+  dispatch(setBillingPeriodAction({
+    billingPeriod: SubscriptionType.STUDENT,
+  }))
+})
+
+/**
+ * Thunk to set promo code and clear cookie if no promo.
+ * @param dispatch - Redux dispatch function
+ * @param payload - Contains promo information
+ */
+export const setPromoThunk = createOptimistThunk(({dispatch}, payload) => {
+  if (!payload.promo) {
+    clearFigmaPcCookie()
+  }
+  dispatch(setPromoAction(payload))
+})
+
+/**
+ * Thunk to make a team a student team via API and handle navigation/success.
+ * @param dispatch - Redux dispatch function
+ * @param payload - Contains teamId and onCloseOrComplete callback
+ */
+export const makeStudentTeamThunk = createOptimistThunk(({dispatch, getState}, payload) => {
+  const state = getState()
+  const userId = state.user?.id
+
+  sendWithRetry.put(`/api/teams/${payload.teamId}/student_team`, {
+    student_team: true,
   }).then(() => {
-    n ? e.dispatch(switchAccountAndNavigate({
-      workspace: {
-        userId: n,
-        teamId: t.teamId,
-        orgId: null
-      },
-      view: {
-        view: "allProjects"
-      }
-    })) : e.dispatch(selectViewAction({
-      view: "team",
-      teamId: t.teamId
-    }));
-    e.dispatch(FlashActions.flash(getI18nString("flash.successfully_upgraded_to_an_education_team")));
-    e.dispatch($$M5({
-      submitPending: !1
-    }));
-    t.onCloseOrComplete?.();
-  }).catch(t => {
-    handleErrorWithToast(t, e.dispatch);
-    e.dispatch($$M5({
-      submitPending: !1
-    }));
-  });
-  e.dispatch($$R12());
-});
-let $$P18 = createOptimistThunk((e, {
-  teamId: t
-}) => {
-  let r = e.getState().teams[t];
-  r.student_team ? sendWithRetry.put(`/api/teams/${t}/student_team`, {
-    student_team: !1
-  }).then(() => {
-    e.dispatch(Be({
-      teamId: t
-    }));
-    e.dispatch(FlashActions.flash(getI18nString("flash.successfully_downgraded_to_a_starter_team")));
-  }).catch(t => handleErrorWithToast(t, e.dispatch)) : sendWithRetry.del(`/api/subscriptions-2018-11-08/team/${t}`).then(({
-    data: n
-  }) => {
-    let a = n.meta && n.meta.team;
-    a && e.dispatch(setTeamOptimistThunk({
-      team: a,
-      userInitiated: !1
-    }));
-    e.dispatch(Be({
-      teamId: t
-    }));
-    jL({
-      planType: FOrganizationLevelType.TEAM,
-      planId: t
-    });
-    let {
-      annual_subscription,
-      monthly_subscription
-    } = e.getState().teamBilling.summary;
-    let c = annual_subscription?.quantity ? annual_subscription.current_period_end : null;
-    let u = monthly_subscription?.quantity ? monthly_subscription.current_period_end : null;
-    let h = c && u ? dayjs(c).isAfter(dayjs(u)) ? c : u : c || u;
-    e.dispatch(FlashActions.flash(h ? getI18nString("flash.team_will_become_free_starter_team_on_date", {
-      teamName: r.name,
-      cancelDate: dayjs(h).toDate()
-    }) : getI18nString("flash.team_will_be_downgraded_at_the_end_of_the_current_subscription_period", {
-      teamName: r.name
-    }), 8e3));
-  }).catch(t => handleErrorWithToast(t, e.dispatch));
-});
-let $$D13 = createActionCreator("PAYMENT_SHOW_ERROR");
-let $$k25 = createActionCreator("PAYMENT_SET_COMPANY_DETAILS");
-let $$M5 = createActionCreator("PAYMENT_SET_SUBMIT_PENDING");
-let $$F6 = createActionCreator("PAYMENT_SET_EDITOR_STATUS_CHANGES");
-let $$j8 = createActionCreator("PAYMENT_SET_NUM_FIGMA_EMAIL_TEAM_USERS");
-let $$U2 = createActionCreator("PAYMENT_SET_NUM_WHITEBOARD_EDITORS");
-let $$B22 = createActionCreator("PAYMENT_SET_NUM_EDITORS");
-let $$G7 = createActionCreator("PAYMENT_SET_BILLING_PERIOD");
-let $$V24 = createActionCreator("PAYMENT_SET_CAMPFIRE_SEATS");
-let $$H14 = createActionCreator("PAYMENT_INIT");
-let $$z10 = createActionCreator("PAYMENT_START_ORG_UPGRADE_FLOW");
-let $$W3 = createOptimistThunk((e, t) => {
-  let {
-    openInNewTab,
-    newTeamProps,
-    entryPoint,
-    upsellSource
-  } = t;
-  let o = mapUpsellModalTypeToSource({
-    upsellSource,
-    fallbackEntryPoint: entryPoint
-  });
-  if (openInNewTab && !hasDesktopAPI()) {
-    let t = e.getState();
-    let r = new URL(selectedViewToPath(t, {
-      view: "orgSelfServe",
-      upsellSource,
-      entryPoint: o
-    }), document.baseURI).href;
-    e.dispatch(openUrlInContext({
-      url: r
-    }));
+    if (userId) {
+      dispatch(switchAccountAndNavigate({
+        workspace: {
+          userId,
+          teamId: payload.teamId,
+          orgId: null,
+        },
+        view: {
+          view: 'allProjects',
+        },
+      }))
+    } else {
+      dispatch(selectViewAction({
+        view: 'team',
+        teamId: payload.teamId,
+      }))
+    }
+    dispatch(FlashActions.flash(getI18nString('flash.successfully_upgraded_to_an_education_team')))
+    dispatch(setSubmitPendingAction({
+      submitPending: false,
+    }))
+    payload.onCloseOrComplete?.()
+  }).catch((error) => {
+    handleErrorWithToast(error, dispatch)
+    dispatch(setSubmitPendingAction({
+      submitPending: false,
+    }))
+  })
+  dispatch(makeStudentTeamAction())
+})
+
+/**
+ * Thunk to cancel or downgrade a team subscription.
+ * @param dispatch - Redux dispatch function
+ * @param payload - Contains teamId
+ */
+export const cancelOrDowngradeTeamThunk = createOptimistThunk(({ dispatch, getState }, { teamId }) => {
+  const team = getState().teams[teamId]
+
+  if (team.student_team) {
+    sendWithRetry.put(`/api/teams/${teamId}/student_team`, {
+      student_team: false,
+    }).then(() => {
+      dispatch(Be({
+        teamId,
+      }))
+      dispatch(FlashActions.flash(getI18nString('flash.successfully_downgraded_to_a_starter_team')))
+    }).catch(error => handleErrorWithToast(error, dispatch))
   } else {
-    e.dispatch(hideModal());
-    e.dispatch(selectViewAction({
-      view: "orgSelfServe",
+    sendWithRetry.del(`/api/subscriptions-2018-11-08/team/${teamId}`).then(({ data }) => {
+      const updatedTeam = data.meta && data.meta.team
+      if (updatedTeam) {
+        dispatch(setTeamOptimistThunk({
+          team: updatedTeam,
+          userInitiated: false,
+        }))
+      }
+      dispatch(Be({
+        teamId,
+      }))
+      fetchAndUpdateUpcomingInvoices({
+        planType: FOrganizationLevelType.TEAM,
+        planId: teamId,
+      })
+      const { annual_subscription, monthly_subscription } = getState().teamBilling.summary
+      const annualEnd = annual_subscription?.quantity ? annual_subscription.current_period_end : null
+      const monthlyEnd = monthly_subscription?.quantity ? monthly_subscription.current_period_end : null
+      const cancelDate = annualEnd && monthlyEnd ? (dayjs(annualEnd).isAfter(dayjs(monthlyEnd)) ? annualEnd : monthlyEnd) : (annualEnd || monthlyEnd)
+      dispatch(FlashActions.flash(cancelDate
+        ? getI18nString('flash.team_will_become_free_starter_team_on_date', {
+            teamName: team.name,
+            cancelDate: dayjs(cancelDate).toDate(),
+          })
+        : getI18nString('flash.team_will_be_downgraded_at_the_end_of_the_current_subscription_period', {
+            teamName: team.name,
+          }), 8000))
+    }).catch(error => handleErrorWithToast(error, dispatch))
+  }
+})
+
+/**
+ * Thunk to start the organization upgrade flow, handling navigation and modal hiding.
+ * @param dispatch - Redux dispatch function
+ * @param payload - Contains openInNewTab, newTeamProps, entryPoint, upsellSource, currency
+ */
+export const startOrgUpgradeFlowThunk = createOptimistThunk(({ dispatch, getState }, payload) => {
+  const { openInNewTab, newTeamProps, entryPoint, upsellSource, currency } = payload
+  const mappedEntryPoint = mapUpsellModalTypeToSource({
+    upsellSource,
+    fallbackEntryPoint: entryPoint,
+  })
+
+  if (openInNewTab && !hasDesktopAPI()) {
+    const state = getState()
+    const url = new URL(selectedViewToPath(state, {
+      view: 'orgSelfServe',
+      upsellSource,
+      entryPoint: mappedEntryPoint,
+    }), document.baseURI).href
+    dispatch(openUrlInContext({
+      url,
+    }))
+  } else {
+    dispatch(hideModal())
+    dispatch(selectViewAction({
+      view: 'orgSelfServe',
       newTeamProps,
       upsellSource,
-      entryPoint: o
-    }));
+      entryPoint: mappedEntryPoint,
+    }))
   }
-  e.dispatch($$z10({
-    currency: t.currency
-  }));
-});
-let $$K23 = createActionCreator("PAYMENT_START_PRO_UPGRADE_FLOW");
-let $$Y17 = createOptimistThunk((e, t) => {
-  let {
-    teamId,
-    billingPeriod,
-    entryPoint,
-    onBillingCompleteRedirectInfo,
-    upsellSource
-  } = t;
-  let l = mapUpsellModalTypeToSource({
+  dispatch(startOrgUpgradeFlowAction({
+    currency,
+  }))
+})
+
+/**
+ * Thunk to start the pro upgrade flow for a team, handling navigation and view selection.
+ * @param dispatch - Redux dispatch function
+ * @param payload - Contains teamId, billingPeriod, entryPoint, onBillingCompleteRedirectInfo, upsellSource, openInNewTab, selectedView, newTeam, currency
+ */
+export const startProUpgradeFlowThunk = createOptimistThunk(({dispatch, getState}, payload) => {
+  const { teamId, billingPeriod, entryPoint, onBillingCompleteRedirectInfo, upsellSource, openInNewTab, selectedView, newTeam, currency } = payload
+  const mappedEntryPoint = mapUpsellModalTypeToSource({
     upsellSource,
-    fallbackEntryPoint: entryPoint
-  });
-  let d = {
-    view: "teamUpgrade",
+    fallbackEntryPoint: entryPoint,
+  })
+  const viewData = {
+    view: 'teamUpgrade',
     teamFlowType: CreateUpgradeAction.UPGRADE_EXISTING_TEAM,
     teamId,
     paymentStep: UpgradeSteps.CHOOSE_PLAN,
     billingPeriod,
     planType: TeamType.TEAM,
-    entryPoint: l,
+    entryPoint: mappedEntryPoint,
     ...(onBillingCompleteRedirectInfo ? {
       searchParams: {
         onCompleteRedirectFileKey: onBillingCompleteRedirectInfo.fileKey,
-        onCompleteRedirectNodeId: onBillingCompleteRedirectInfo.nodeId
-      }
-    } : {})
-  };
-  if (t.openInNewTab && !hasDesktopAPI()) {
-    let t = e.getState();
-    let r = new URL(selectedViewToPath(t, d), document.baseURI).href;
-    e.dispatch(openUrlInContext({
-      url: r
-    }));
-  } else {
-    let r = t.openInNewTab ? void 0 : t.selectedView;
-    e.dispatch(hideModal());
-    d.previousView = r;
-    e.dispatch(selectViewAction(d));
+        onCompleteRedirectNodeId: onBillingCompleteRedirectInfo.nodeId,
+      },
+    } : {}),
+    previousView: undefined
   }
-  e.dispatch($$K23({
-    newTeam: t.newTeam,
-    currency: t.currency
-  }));
-});
-export const $h = $$w0;
-export const Ay = $$C1;
-export const Az = $$U2;
-export const Bq = $$W3;
-export const Ef = $$O4;
-export const I2 = $$M5;
-export const Je = $$F6;
-export const Lo = $$G7;
-export const M2 = $$j8;
-export const MN = $$v9;
-export const Mv = $$z10;
-export const Nj = $$L11;
-export const Qe = $$R12;
-export const Qg = $$D13;
-export const Ts = $$H14;
-export const Vm = $$I15;
-export const WG = $$A16;
-export const WX = $$Y17;
-export const Wc = $$P18;
-export const XS = $$N19;
-export const eK = $$S20;
-export const i = $$x21;
-export const js = $$B22;
-export const pv = $$K23;
-export const qU = $$V24;
-export const yy = $$k25;
+
+  if (openInNewTab && !hasDesktopAPI()) {
+    const state = getState()
+    const url = new URL(selectedViewToPath(state, viewData), document.baseURI).href
+    dispatch(openUrlInContext({
+      url,
+    }))
+  } else {
+    const previousView = openInNewTab ? undefined : selectedView
+    dispatch(hideModal())
+    viewData.previousView = previousView
+    dispatch(selectViewAction(viewData))
+  }
+  dispatch(startProUpgradeFlowAction({
+    newTeam,
+    currency,
+  }))
+})
+
+// Exports with original names maintained
+export const $h = setVatGstIdAction
+export const Ay = setPromoThunk
+export const Az = setNumWhiteboardEditorsAction
+export const Bq = startOrgUpgradeFlowThunk
+export const Ef = setRegionalVatGstIdAction
+export const I2 = setSubmitPendingAction
+export const Je = setEditorStatusChangesAction
+export const Lo = setBillingPeriodAction
+export const M2 = setNumFigmaEmailTeamUsersAction
+export const MN = setCurrencyAction
+export const Mv = startOrgUpgradeFlowAction
+export const Nj = makeStudentTeamThunk
+export const Qe = makeStudentTeamAction
+export const Qg = showErrorAction
+export const Ts = initPaymentAction
+export const Vm = startStudentReviewThunk
+export const WG = setTokenAction
+export const WX = startProUpgradeFlowThunk
+export const Wc = cancelOrDowngradeTeamThunk
+export const XS = setPromoAction
+export const eK = restoreSavedCartAction
+export const i = setTaxesAction
+export const js = setNumEditorsAction
+export const pv = startProUpgradeFlowAction
+export const qU = setCampfireSeatsAction
+export const yy = setCompanyDetailsAction

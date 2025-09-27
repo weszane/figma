@@ -1,23 +1,34 @@
-import { CollaboratorTypeSchema } from "../905/513035";
-import { TeamUserSchema } from "../905/814802";
-import { TeamSchema } from "../figma_app/630077";
-import { UserOrgSchema } from "../figma_app/175992";
-let $$o1 = TeamSchema.pick({
-  id: !0,
-  name: !0,
-  img_url: !0
-});
-let $$l0 = TeamUserSchema.pick({
-  id: !0,
-  team_id: !0
+import { CollaboratorTypeSchema } from '../905/513035'
+import { TeamUserSchema } from '../905/814802'
+import { UserOrgSchema } from '../figma_app/175992'
+import { TeamSchema } from '../figma_app/630077'
+
+// Original variable: $$o1
+/**
+ * Schema for basic team information, including id, name, and image URL.
+ */
+export const TeamBasicSchema = TeamSchema.pick({
+  id: true,
+  name: true,
+  img_url: true,
+})
+
+// Original variable: $$l0
+/**
+ * Schema for team user with details, including user information and recommended seat type.
+ */
+export const TeamUserWithDetailsSchema = TeamUserSchema.pick({
+  id: true,
+  team_id: true,
 }).extend({
   user: UserOrgSchema.pick({
-    id: !0,
-    img_url: !0,
-    handle: !0,
-    email: !0
+    id: true,
+    img_url: true,
+    handle: true,
+    email: true,
   }),
-  recommended_seat_type: CollaboratorTypeSchema.nullable()
-});
-export const P = $$l0;
-export const _ = $$o1;
+  recommended_seat_type: CollaboratorTypeSchema.nullable(),
+})
+
+export const P = TeamUserWithDetailsSchema
+export const _ = TeamBasicSchema

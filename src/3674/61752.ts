@@ -13,7 +13,7 @@ import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { useDevModeFocusId } from "../figma_app/88239";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { WX } from "../figma_app/482142";
+import { startProUpgradeFlowThunk } from "../figma_app/482142";
 import { DevModeUI } from "../905/15667";
 import { UpgradeAction } from "../905/370443";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -90,7 +90,7 @@ export function $$z0({
             forwardToDatadog: !0
           });
           let e = g?.id;
-          n !== DevModeUI.DowngradeEmail && e ? C(WX({
+          n !== DevModeUI.DowngradeEmail && e ? C(startProUpgradeFlowThunk({
             teamId: e,
             openInNewTab: !0,
             entryPoint: UpsellSourceType.DEV_MODE_MODAL

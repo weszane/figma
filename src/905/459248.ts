@@ -63,7 +63,7 @@ import { L as _$$L } from "../905/704296";
 import { A as _$$A2 } from "../svg/619883";
 import { useSubscription } from "../figma_app/288654";
 import { linkWithTracking } from "../figma_app/637027";
-import { Bq } from "../figma_app/482142";
+import { startOrgUpgradeFlowThunk } from "../figma_app/482142";
 import { postUserFlag } from "../905/985254";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
@@ -142,7 +142,7 @@ function ej(e) {
   let i = e.canAdminCurrentTeam ? renderI18nText("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.admin.text", {
     upgradeLink: jsx(linkWithTracking, {
       onClick: () => {
-        t(Bq({
+        t(startOrgUpgradeFlowThunk({
           openInNewTab: !0,
           upsellSource: UpsellModalType.MISSING_FONTS_UPSELL
         }));
@@ -392,7 +392,7 @@ export let $$eZ0 = registerModal(function (e) {
     let o = null;
     let l = i ? [a] : missingFontsInfoForCurrentScope.missingFonts.filter(e => e.family === a.family).filter(e => !eE || e.inSelection);
     let d = !1;
-    for (let e of l) if (null == t) delete r[eY(e)]; else {
+    for (let e of l) if (null == t) delete r[eY(e)];else {
       let i = versionsForStyles[t];
       o = function (e, t) {
         let i = ["ITALIC", "OBLIQUE"];

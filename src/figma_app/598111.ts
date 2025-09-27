@@ -1,12 +1,25 @@
-export let $$n0 = "figma.pc_modal";
-export function $$i1() {
-  let e = `figma.pc=; domain=${window.location.hostname}; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
-  document.cookie = e;
+// Original variable: $$n0
+export const COOKIE_NAME = 'figma.pc_modal'
+
+/**
+ * Clears the 'figma.pc' cookie by setting it to expire immediately.
+ * Original function: $$i1
+ */
+export function clearFigmaPcCookie(): void {
+  const cookieValue = `figma.pc=; domain=${window.location.hostname}; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC;`
+  document.cookie = cookieValue
 }
-export function $$a2() {
-  let e = `${$$n0}=; domain=${window.location.hostname}; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
-  document.cookie = e;
+
+/**
+ * Clears the 'figma.pc_modal' cookie by setting it to expire immediately.
+ * Original function: $$a2
+ */
+export function clearFigmaPcModalCookie(): void {
+  const cookieValue = `${COOKIE_NAME}=; domain=${window.location.hostname}; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC;`
+  document.cookie = cookieValue
 }
-export const Bq = $$n0;
-export const _H = $$i1;
-export const lc = $$a2;
+
+// Original exports: Bq = $$n0, _H = $$i1, lc = $$a2
+export const Bq = COOKIE_NAME
+export const _H = clearFigmaPcCookie
+export const lc = clearFigmaPcModalCookie

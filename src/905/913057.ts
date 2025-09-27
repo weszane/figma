@@ -1,180 +1,248 @@
-import { trackEventAnalytics } from "../905/449184";
-import { p as _$$p } from "../905/762622";
-import { o7 } from "../905/331019";
-import { U } from "../figma_app/477548";
-import { mp } from "../905/772425";
-class o {
-  constructor(e, t, i, n = {
-    list: U.getShareModalContactsWithUserGroups,
-    search: U.searchShareModalContactsWithUserGroups
-  }) {
-    this.api = n;
-    this.planId = e;
-    this.userLimit = void 0 !== t ? t : 5;
-    this.userGroupLimit = void 0 !== i ? i : 3;
+import { getUserEmail } from '../905/331019'
+import { trackEventAnalytics } from '../905/449184'
+import { p as _$$p } from '../905/762622'
+import { createMentionLibrary } from '../905/772425'
+import { contactsAPIService } from '../figma_app/477548'
+
+// Original class name: o
+/**
+ * Represents a contacts library for the share modal, handling listing and searching of users and user groups.
+ */
+class ShareModalContactsLibrary {
+  private api: {
+    list: (params: any) => Promise<any>
+    search: (params: any) => Promise<any>
   }
-  async list() {
+
+  private planId: any
+  private userLimit: number
+  private userGroupLimit: number
+  constructor(planId: any, userLimit?: number, userGroupLimit?: number, api = {
+    list: contactsAPIService.getShareModalContactsWithUserGroups,
+    search: contactsAPIService.searchShareModalContactsWithUserGroups,
+  }) {
+    this.api = api
+    this.planId = planId
+    this.userLimit = userLimit ?? 5
+    this.userGroupLimit = userGroupLimit ?? 3
+  }
+
+  /**
+   * Lists users and user groups for the share modal.
+   */
+  async list(): Promise<{
+    users: any[]
+    userGroups: any[]
+  }> {
     try {
-      let {
+      const {
         data: {
-          meta
-        }
+          meta,
+        },
       } = await this.api.list({
         planId: this.planId,
         userLimit: this.userLimit,
-        userGroupLimit: this.userGroupLimit
-      });
+        userGroupLimit: this.userGroupLimit,
+      })
       return {
         users: meta.users,
-        userGroups: meta.user_groups
-      };
-    } catch (e) {
-      console.error("An error occurred while trying to fetch contacts for share modal.", e);
+        userGroups: meta.user_groups,
+      }
+    }
+    catch (error) {
+      console.error('An error occurred while trying to fetch contacts for share modal.', error)
       return {
         users: [],
-        userGroups: []
-      };
+        userGroups: [],
+      }
     }
   }
-  async search(e) {
+
+  /**
+   * Searches for users and user groups in the share modal.
+   */
+  async search(query: string): Promise<{
+    users: any[]
+    userGroups: any[]
+  }> {
     try {
-      let {
+      const {
         data: {
-          meta
-        }
+          meta,
+        },
       } = await this.api.search({
-        query: e,
+        query,
         planId: this.planId,
         userLimit: this.userLimit,
-        userGroupLimit: this.userGroupLimit
-      });
+        userGroupLimit: this.userGroupLimit,
+      })
       return {
         users: meta.users,
-        userGroups: meta.user_groups
-      };
-    } catch (e) {
-      console.error("An error occurred while searching for contacts in share modal.", e);
+        userGroups: meta.user_groups,
+      }
+    }
+    catch (error) {
+      console.error('An error occurred while searching for contacts in share modal.', error)
       return {
         users: [],
-        userGroups: []
-      };
+        userGroups: [],
+      }
     }
   }
 }
-var l = (e => (e.ShareModal = "SHARE_MODAL", e))(l || {});
-var c = (e => (e.PENDING = "pending", e.CONFIRMED = "confirmed", e))(c || {});
-function u(e, t, i) {
-  let n = {};
-  for (let t in e) n[e[t].id] = t;
-  let r = {};
-  for (let e of (r[t.id] = "confirmed", i)) {
-    let t = e.user.id ?? e.user.email;
-    t && (r[t] = e.pending ? "pending" : "confirmed");
+
+// Original function name: u
+/**
+ * Creates a map of user statuses based on existing and pending invitations.
+ */
+function createUserStatusMap(usersById: Record<string, any>, team: any, pendingInvites: any[]): Record<string, string> {
+  const idToEmail: Record<string, string> = {}
+  for (const key in usersById) {
+    idToEmail[usersById[key].id] = key
   }
-  return r;
-}
-export function $$p2(e, t, i) {
-  let n = {};
-  for (let t in e) n[e[t].id] = t;
-  let r = new Set();
-  for (let e of (r.add(t.email), i)) {
-    let t = e.user.email ?? (e.user.id && n[e.user.id]);
-    t && r.add(t);
+  const statusMap: Record<string, string> = {}
+  statusMap[team.id] = 'confirmed'
+  for (const invite of pendingInvites) {
+    const identifier = invite.user.id ?? invite.user.email
+    if (identifier) {
+      statusMap[identifier] = invite.pending ? 'pending' : 'confirmed'
+    }
   }
-  return r;
+  return statusMap
 }
-export async function $$m0(e, t, i, r, a, s, o, l, c) {
-  let p = mp({
-    currentOrgId: a,
-    teamId: s,
+
+// Original function name: $$p2
+/**
+ * Returns a set of invited users based on team and pending invites.
+ */
+export function getInvitedUsersSet(usersById: Record<string, any>, team: any, pendingInvites: any[]): Set<string> {
+  const idToEmail: Record<string, string> = {}
+  for (const key in usersById) {
+    idToEmail[usersById[key].id] = key
+  }
+  const invitedUsers = new Set<string>()
+  invitedUsers.add(team.email)
+  for (const invite of pendingInvites) {
+    const identifier = invite.user.email ?? (invite.user.id && idToEmail[invite.user.id])
+    if (identifier) {
+      invitedUsers.add(identifier)
+    }
+  }
+  return invitedUsers
+}
+
+// Original function name: $$m0
+/**
+ * Searches for contacts in the library and marks existing or pending roles.
+ */
+export async function searchLibraryContacts(input: any, usersById: Record<string, any>, team: any, pendingInvites: any[], currentOrgId: any, teamId: any, fileKey: any, analytics: any, maxResults?: number): Promise<any[]> {
+  const library = createMentionLibrary({
+    currentOrgId,
+    teamId,
     users: [],
-    fileKey: o,
+    fileKey,
     maxResultsCount: 10,
-    isShareModal: !0
-  });
-  let m = await p.library.search(e.inputValue);
-  if (null == m) {
-    trackEventAnalytics("contacts_search.invite_search_error", {
-      invite_level: l.inviteLevel,
-      source: l.source,
-      input_value_is_empty: !e.inputValue,
-      autocomplete_error: e.errorMessage
-    });
-    return Promise.resolve([]);
+    isShareModal: true,
+  })
+  const results = await library.library.search(input.inputValue)
+  if (!results) {
+    trackEventAnalytics('contacts_search.invite_search_error', {
+      invite_level: analytics.inviteLevel,
+      source: analytics.source,
+      input_value_is_empty: !input.inputValue,
+      autocomplete_error: input.errorMessage,
+    })
+    return []
   }
-  let h = m.map(e => e);
-  let g = u(t, i, r);
-  let f = h.map(e => {
-    if (e.id in g || e.email in g) {
-      let t = e.id in g ? e.id : e.email;
-      "pending" === g[t] ? e.pendingRole = !0 : e.existingRole = !0;
-      e.disabled = !0;
+  const statusMap = createUserStatusMap(usersById, team, pendingInvites)
+  const processedResults = results.map((contact: any) => {
+    const identifier = contact.id in statusMap ? contact.id : contact.email
+    if (identifier in statusMap) {
+      if (statusMap[identifier] === 'pending') {
+        contact.pendingRole = true
+      }
+      else {
+        contact.existingRole = true
+      }
+      contact.disabled = true
     }
-    return e;
-  });
-  return c ? f.slice(0, c) : f;
+    return contact
+  })
+  return maxResults ? processedResults.slice(0, maxResults) : processedResults
 }
-export async function $$h1(e, t, i, a, s, d, c, p) {
-  let m = function ({
-    planRecordId: e,
-    userLimit: t,
-    userGroupLimit: i,
-    type: n
-  }) {
-    if ("SHARE_MODAL" === n) return new o(e, t, i);
-    throw Error("Unsupported contacts library type");
-  }({
-    planRecordId: s,
-    userLimit: c,
-    userGroupLimit: p,
-    type: l.ShareModal
-  });
-  let h = await m.search(e.inputValue);
-  if (null == h) {
-    trackEventAnalytics("contacts_search.invite_search_error", {
-      invite_level: d.inviteLevel,
-      source: d.source,
-      input_value_is_empty: !e.inputValue,
-      autocomplete_error: e.errorMessage
-    });
-    return Promise.resolve([]);
+
+// Original function name: $$h1
+/**
+ * Searches for contacts in the share modal and marks existing or pending roles.
+ */
+export async function searchShareModalContacts(input: any, usersById: Record<string, any>, team: any, pendingInvites: any[], planRecordId: any, analytics: any, userLimit?: number, userGroupLimit?: number): Promise<any[]> {
+  const contactsLibrary = new ShareModalContactsLibrary(planRecordId, userLimit, userGroupLimit)
+  const results = await contactsLibrary.search(input.inputValue)
+  if (!results) {
+    trackEventAnalytics('contacts_search.invite_search_error', {
+      invite_level: analytics.inviteLevel,
+      source: analytics.source,
+      input_value_is_empty: !input.inputValue,
+      autocomplete_error: input.errorMessage,
+    })
+    return []
   }
-  let g = h.userGroups?.map(e => ({
-    ...e,
-    type: _$$p
-  }));
-  let f = h.users?.map(e => e) ?? [];
-  let _ = u(t, i, a);
-  let A = f.map(e => {
-    if (e.id in _ || e.email in _) {
-      let t = e.id in _ ? e.id : e.email;
-      "pending" === _[t] ? e.pendingRole = !0 : e.existingRole = !0;
-      e.disabled = !0;
+  const userGroups = results.userGroups?.map((group: any) => ({
+    ...group,
+    type: _$$p,
+  })) ?? []
+  let users = results.users?.map((user: any) => user) ?? []
+  const statusMap = createUserStatusMap(usersById, team, pendingInvites)
+  users = users.map((user: any) => {
+    const identifier = user.id in statusMap ? user.id : user.email
+    if (identifier in statusMap) {
+      if (statusMap[identifier] === 'pending') {
+        user.pendingRole = true
+      }
+      else {
+        user.existingRole = true
+      }
+      user.disabled = true
     }
-    return e;
-  });
-  A = c ? A.slice(0, c) : A;
-  return [...(g = p ? g.slice(0, p) : g), ...A];
+    return user
+  })
+  users = userLimit ? users.slice(0, userLimit) : users
+  const limitedUserGroups = userGroupLimit ? userGroups.slice(0, userGroupLimit) : userGroups
+  return [...limitedUserGroups, ...users]
 }
-export async function $$g4(e, t) {
-  let i = mp({
-    currentOrgId: e,
-    teamId: t,
+
+// Original function name: $$g4
+/**
+ * Retrieves library contacts with ranking.
+ */
+export async function getLibraryContacts(currentOrgId: any, teamId: any): Promise<any[]> {
+  const library = createMentionLibrary({
+    currentOrgId,
+    teamId,
     users: [],
     maxResultsCount: 10,
-    isShareModal: !0
-  });
-  let n = await i.library.search("");
-  return n ? n.map((e, t) => ({
-    ...e,
-    rank: t + 1
-  })) : [];
+    isShareModal: true,
+  })
+  const results = await library.library.search('')
+  return results
+    ? results.map((contact: any, index: number) => ({
+        ...contact,
+        rank: index + 1,
+      }))
+    : []
 }
-export function $$f3(e, t, i) {
-  return e.user?.email ? e.user.email : e.user_id ? o7(e.user_id, t, i) : void 0;
+
+// Original function name: $$f3
+/**
+ * Extracts user email from a record.
+ */
+export function getUserEmailFromRecord(record: any, usersById: Record<string, any>, team: any): string | undefined {
+  return record.user?.email ?? (record.user_id ? getUserEmail(record.user_id, usersById, team) : undefined)
 }
-export const Wj = $$m0;
-export const _N = $$h1;
-export const bp = $$p2;
-export const Zm = $$f3;
-export const hp = $$g4;
+
+// Refactored export names
+export const Wj = searchLibraryContacts
+export const _N = searchShareModalContacts
+export const bp = getInvitedUsersSet
+export const Zm = getUserEmailFromRecord
+export const hp = getLibraryContacts

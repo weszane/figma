@@ -2,7 +2,7 @@ import { ServiceCategories } from "../905/165054";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { getPaymentFlowData } from "../figma_app/169182";
-import { _H } from "../figma_app/598111";
+import { clearFigmaPcCookie } from "../figma_app/598111";
 import { reportError } from "../905/11";
 import { isStudentValidated } from "../figma_app/141320";
 import { sendWithRetry } from "../905/910117";
@@ -23,7 +23,7 @@ import { FEditorType } from "../figma_app/53721";
 import { SubscriptionType, UpgradeSteps } from "../figma_app/831101";
 import { CreateUpgradeAction, TeamType } from "../figma_app/707808";
 import { C as _$$C } from "../5885/53111";
-import { I2, Je, Lo, Ay as _$$Ay2, Qg, WG } from "../figma_app/482142";
+import { setSubmitPendingAction, setEditorStatusChangesAction, setBillingPeriodAction, setPromoThunk, showErrorAction, setTokenAction } from "../figma_app/482142";
 import { setTeamOptimistThunk } from "../figma_app/240735";
 import { Be } from "../figma_app/920435";
 let $$R2 = createOptimistThunk((e, {
@@ -141,7 +141,7 @@ let $$D3 = createOptimistThunk((e, {
           selectedUserSeatTypes: t
         }
       });
-      e.dispatch(I2({
+      e.dispatch(setSubmitPendingAction({
         submitPending: !1
       }));
       return;
@@ -175,12 +175,12 @@ let $$D3 = createOptimistThunk((e, {
       team_name: t,
       invite_emails: i,
       promo_code: e.code
-    }; else if (a && R) L = {
+    };else if (a && R) L = {
       ...V,
       team_name: t,
       invite_emails: i,
       student_team: !0
-    }; else {
+    };else {
       let e = getPaymentFlowData();
       L = {
         ...V,
@@ -235,10 +235,10 @@ let $$D3 = createOptimistThunk((e, {
       inviteEmails: i,
       teamFlowType: k
     });
-    e.dispatch(I2({
+    e.dispatch(setSubmitPendingAction({
       submitPending: !1
     }));
-    e.dispatch(Je({
+    e.dispatch(setEditorStatusChangesAction({
       editorStatusChanges: {
         upgrade: {
           whiteboard: [],
@@ -262,10 +262,10 @@ let $$D3 = createOptimistThunk((e, {
       team: a,
       userInitiated: !1
     }));
-    a.student_team && e.dispatch(Lo({
+    a.student_team && e.dispatch(setBillingPeriodAction({
       billingPeriod: SubscriptionType.UNSPECIFIED
     }));
-    F.payment.promo && (_H(), e.dispatch(_$$Ay2({
+    F.payment.promo && (clearFigmaPcCookie(), e.dispatch(setPromoThunk({
       promo: null
     })));
     let l = new URLSearchParams(customHistory.location.search);
@@ -327,7 +327,7 @@ let $$D3 = createOptimistThunk((e, {
         } : {})
       }));
     };
-    e.dispatch(I2({
+    e.dispatch(setSubmitPendingAction({
       submitPending: !1
     }));
     let o = t.data?.message || t.message;
@@ -347,13 +347,13 @@ let $$D3 = createOptimistThunk((e, {
     });
     ((t, a) => {
       let r = resolveMessage(t);
-      r && ("PROMO_CODE" === t.data.reason ? (e.dispatch(_$$Ay2({
+      r && ("PROMO_CODE" === t.data.reason ? (e.dispatch(setPromoThunk({
         promo: null
-      })), i(a, {}), e.dispatch(Qg({
+      })), i(a, {}), e.dispatch(showErrorAction({
         error: r
-      }))) : "CARD_ERROR" === t.data.reason ? (e.dispatch(WG({
+      }))) : "CARD_ERROR" === t.data.reason ? (e.dispatch(setTokenAction({
         token: null
-      })), i(a, {}), e.dispatch(Qg({
+      })), i(a, {}), e.dispatch(showErrorAction({
         error: r
       }))) : e.dispatch(FlashActions.error(r)));
     })(t, h);

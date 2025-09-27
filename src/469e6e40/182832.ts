@@ -5,7 +5,7 @@ import { BannerMessage } from "../905/363675";
 import { KeyCodes } from "../905/63728";
 import { sendWithRetry } from "../905/910117";
 import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
-import { z, Z } from "../905/306088";
+import { RadioGroup, RadioOption } from "../905/306088";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { i as _$$i } from "../469e6e40/651707";
@@ -159,11 +159,11 @@ class S extends PureComponent {
           children: [jsx("div", {
             className: y,
             children: renderI18nText("org_settings.sso.identity_provider_id_p")
-          }), jsx(z, {
+          }), jsx(RadioGroup, {
             className: "configure_saml--radioGroup--GhzVi",
             value: this.state.idp_name,
             onChange: this.onIdpNameChange,
-            children: E().map(e => jsx(Z, {
+            children: E().map(e => jsx(RadioOption, {
               value: e.value,
               children: e.text
             }, e.value))

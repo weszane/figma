@@ -24,7 +24,7 @@ import { EditorFilePickerRecentFilesByEditorTypeView } from "../figma_app/43951"
 import { mapRecentFilesAndRepos } from "../figma_app/349248";
 import { setupResourceAtomHandler } from "../905/713695";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { CN } from "../905/81982";
+import { AdvancedWorkerFuseSearch } from "../905/81982";
 import { n as _$$n } from "../905/79930";
 import { mapFileTypeToNumericString } from "../figma_app/53721";
 import { TeamSortField, PublicModelType } from "../figma_app/162807";
@@ -223,7 +223,7 @@ export function $$et12() {
     onShowSeparatorScroll: r
   };
 }
-let er = new CN({
+let er = new AdvancedWorkerFuseSearch({
   keys: ["name"],
   ignoreLocation: !0
 });

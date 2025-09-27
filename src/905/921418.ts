@@ -19,7 +19,7 @@ import { getAssetKeyForSubscription } from "../figma_app/473391";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { getNonDeletedAssets, getPublishedAssetsForDefaultPublished, filterAssetsWithContainingStateGroup, addStateNamesToAssets, getSubscribedAssetKeys } from "../figma_app/646357";
 import { isLoaded } from "../905/18797";
-import { KH } from "../905/81982";
+import { WorkerFuseSearch } from "../905/81982";
 import { FEditorType } from "../figma_app/53721";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { generateSessionId } from "../905/574958";
@@ -90,7 +90,7 @@ let $$B2 = {
   tokenize: !0,
   shouldSort: !0
 };
-let V = new KH({
+let V = new WorkerFuseSearch({
   keys: $$U4,
   ...$$B2
 });

@@ -219,7 +219,7 @@ import { isOssSalesExperimentValueMatch, markOssSalesExperimentChecked } from ".
 import { AutoLayout } from "../905/470281";
 import { lk } from "../figma_app/109538";
 import { SalesUpsellModalType } from "../905/380801";
-import { Bq } from "../figma_app/482142";
+import { startOrgUpgradeFlowThunk } from "../figma_app/482142";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { Wk } from "../figma_app/397269";
@@ -246,7 +246,7 @@ import { zb } from "../figma_app/612001";
 import { Spacing } from "../figma_app/637027";
 import { x as _$$x2 } from "../figma_app/849451";
 import { Hj } from "../figma_app/336229";
-import { Op, nr as _$$nr } from "../905/337355";
+import { buildStateMachine, createUserEventTransition } from "../905/337355";
 import { rn as _$$rn } from "../905/988099";
 import { R as _$$R2 } from "../figma_app/738753";
 import { ts as _$$ts } from "../figma_app/49598";
@@ -4269,7 +4269,7 @@ let ni = e => {
         }) => e === o) && y(o);
         return;
       }
-      if ("Home" === e.key) t = 0; else if ("End" === e.key) t = C.length - 1; else if (["ArrowUp", "ArrowLeft"].includes(e.key)) t = v(o, -1); else {
+      if ("Home" === e.key) t = 0;else if ("End" === e.key) t = C.length - 1;else if (["ArrowUp", "ArrowLeft"].includes(e.key)) t = v(o, -1);else {
         if (!["ArrowDown", "ArrowRight"].includes(e.key)) return;
         t = v(o, 1);
       }
@@ -4938,7 +4938,7 @@ async function nD(e) {
     let e = getStorage();
     try {
       return !!e.get(SEEN_TRY_ONBOARDING_KEY);
-    } catch (e) { }
+    } catch (e) {}
     return !1;
   })();
 }
@@ -5070,7 +5070,7 @@ let nK = _$$D3(() => {
   let e = getStorage();
   try {
     return !!e.get(SEEN_TRY_ONBOARDING_KEY);
-  } catch (e) { }
+  } catch (e) {}
   return !1;
 });
 function nH({
@@ -7058,7 +7058,7 @@ let sr = registerModal(function ({
     },
     onCloseButtonClick: e,
     onConfirm: () => {
-      t?.teamId && i(Bq({
+      t?.teamId && i(startOrgUpgradeFlowThunk({
         openInNewTab: !0,
         upsellSource: UpsellModalType.OSS_SALES_UPSELL_MODAL
       }));
@@ -7722,21 +7722,21 @@ sJ({
 var s$ = (e => (e.AwaitIsShowing = "AwaitIsShowing", e.AwaitPastedElementsSelected = "AwaitPastedElementsSelected", e.AwaitOtherElementsSelected = "AwaitOtherElementsSelected", e.Completed = "Completed", e))(s$ || {});
 var s0 = (e => (e.OnShow = "OnShowUpsellLibariesConsecutivePaste", e.SelectionChanged = "Selection Changed", e))(s0 || {});
 _$$R2;
-let s1 = Op({
+let s1 = buildStateMachine({
   initial: "AwaitIsShowing",
   states: [{
     id: "AwaitIsShowing",
-    transitions: [_$$nr("OnShowUpsellLibariesConsecutivePaste", "AwaitPastedElementsSelected")]
+    transitions: [createUserEventTransition("OnShowUpsellLibariesConsecutivePaste", "AwaitPastedElementsSelected")]
   }, {
     id: "AwaitPastedElementsSelected",
-    transitions: [_$$nr("Selection Changed", "AwaitOtherElementsSelected", {
+    transitions: [createUserEventTransition("Selection Changed", "AwaitOtherElementsSelected", {
       condition: ({
         event: e
       }) => !!e.properties.didSelectedNodeIdsChange
     })]
   }, {
     id: "AwaitOtherElementsSelected",
-    transitions: [_$$nr("Selection Changed", "Completed", {
+    transitions: [createUserEventTransition("Selection Changed", "Completed", {
       condition: ({
         event: e
       }) => !!e.properties.didSelectedNodeIdsChange

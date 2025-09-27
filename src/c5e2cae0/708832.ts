@@ -44,7 +44,7 @@ import { UR } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { MN } from "../figma_app/482142";
+import { setCurrencyAction } from "../figma_app/482142";
 import { postUserFlag } from "../905/985254";
 import { useSeparateBillingShippingExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
@@ -85,7 +85,7 @@ function C({
   t.forEach(t => {
     e[t].eligibleUsers.forEach(e => {
       if (!r[e]) {
-        if (s[e]) r[e] = s[e]; else {
+        if (s[e]) r[e] = s[e];else {
           let s = a[e];
           i[e] || (i[e] = []);
           i[e].push(s.recommendedSeatTypeByTeamId[t]);
@@ -313,7 +313,7 @@ let eI = ({
             throw Error("sent error");
         }
       }(t, e));
-    } catch (e) { }
+    } catch (e) {}
   }, []);
   return {
     changeUserSeatType: useCallback((e, t) => {
@@ -620,7 +620,7 @@ export class $$eM2 extends Component {
         isLoading: this.getIsNextButtonLoading(),
         onClickNext: this.onSubmit,
         onSwitchCurrency: e => {
-          this.props.dispatch(MN({
+          this.props.dispatch(setCurrencyAction({
             currency: e
           }));
           this.setState({
@@ -783,7 +783,7 @@ export class $$eM2 extends Component {
     }
     if (this.setState({
       apiPending: !0
-    }), a && !(await validateVatGstId(a, e.country, () => { }, this.onVatValidationFail))) return;
+    }), a && !(await validateVatGstId(a, e.country, () => {}, this.onVatValidationFail))) return;
     if (this.props.canSeeBillingAddressExp && !this.state.nameOnPaymentMethod) {
       let e = getI18nString("org_self_serve.payment_step.name_on_payment_method_is_required");
       this.trackError(e);
@@ -793,7 +793,7 @@ export class $$eM2 extends Component {
       });
       return;
     }
-    if (s && !(await validateVatGstId(s, e.country, () => { }, this.onVatValidationFail, e.region))) return;
+    if (s && !(await validateVatGstId(s, e.country, () => {}, this.onVatValidationFail, e.region))) return;
     let r = this.props.canSeeBillingAddressExp ? {
       name: this.state.nameOnPaymentMethod,
       address_line1: e.line1,

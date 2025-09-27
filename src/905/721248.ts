@@ -77,7 +77,7 @@ import { G as _$$G2 } from '../905/750789';
 import { ErrorBoundaryCrash, useErrorBoundaryContext } from '../905/751457';
 import { handleModalError } from '../905/760074';
 import { WB } from '../905/761735';
-import { fG } from '../905/772425';
+import { getMentionsResult } from '../905/772425';
 import { convertKiwiToVariableIdString } from '../905/805904';
 import { w as _$$w2 } from '../905/835474';
 import { yG } from '../905/859698';
@@ -2725,7 +2725,7 @@ function nA(e) {
     let e = !1;
     (async function () {
       h(!0);
-      return await fG(t, s, !1);
+      return await getMentionsResult(t, s, !1);
     })().then(t => {
       e || (h(!1), t ? l(t.mentions) : l([]));
     }).catch(() => {

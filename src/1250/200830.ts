@@ -107,10 +107,10 @@ import { selectViewAction } from "../905/929976";
 import { cw, g_ } from "../5885/925885";
 import { TeamAvatar } from "../905/590952";
 import { AvatarSize } from "../905/566881";
-import { WX } from "../figma_app/482142";
+import { startProUpgradeFlowThunk } from "../figma_app/482142";
 import { X as _$$X2 } from "../5885/331878";
 import { getCookieOrStorage } from "../905/414007";
-import { Bq, lc } from "../figma_app/598111";
+import { COOKIE_NAME, clearFigmaPcModalCookie } from "../figma_app/598111";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Hj } from "../figma_app/336229";
 import { useMultiSubscription } from "../figma_app/288654";
@@ -595,7 +595,7 @@ let eU = () => {
   let e = getStorage();
   try {
     return !!e.get(SIGNED_UP_FROM_OPEN_SESSIONS);
-  } catch (e) { }
+  } catch (e) {}
   return !1;
 };
 function eG() {
@@ -1825,7 +1825,7 @@ function nl(e) {
   let o = jsx(BigButtonPrimaryTracked, {
     onClick: () => {
       hideModal();
-      r(WX({
+      r(startProUpgradeFlowThunk({
         teamId,
         selectedView: i
       }));
@@ -2052,7 +2052,7 @@ function np() {
 let nb = atom(() => {
   let e = getCookieOrStorage();
   try {
-    return e.get(Bq);
+    return e.get(COOKIE_NAME);
   } catch (e) {
     console.error("Failed to get show modal cookie", e);
   }
@@ -2071,7 +2071,7 @@ function nw({
     payment: e
   }) => e.promo);
   return (useSingleEffect(() => {
-    lc();
+    clearFigmaPcModalCookie();
   }), useEffect(() => {
     null == t && e();
   }, [e, t]), null == t) ? null : jsxs(NJ, {
@@ -2180,7 +2180,7 @@ function nA({
   return (useMultiSubscription(TeamFileCountsByTeamId, l).forEach(e => {
     s.push(e.result.data?.team?.teamFileCounts?.designFileCount ?? 0);
   }), useSingleEffect(() => {
-    lc();
+    clearFigmaPcModalCookie();
   }), useEffect(() => {
     (null == t || 0 === o.length) && e();
   }, [e, t, o]), null == t || 0 === o.length) ? null : jsx(nI, {

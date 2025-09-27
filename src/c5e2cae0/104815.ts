@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { _H } from "../figma_app/598111";
+import { clearFigmaPcCookie } from "../figma_app/598111";
 import { o as _$$o } from "../c5e2cae0/371580";
 import { LoadingRenderer } from "../905/211326";
 import { renderI18nText } from "../905/303541";
 import { d as _$$d } from "../c5e2cae0/841217";
 import { selectViewAction } from "../905/929976";
-import { Ay } from "../figma_app/482142";
+import { setPromoThunk } from "../figma_app/482142";
 import { S_ } from "../5885/925885";
 import { TrackingProvider } from "../figma_app/831799";
 import { getUserCurrency } from "../figma_app/514043";
@@ -21,8 +21,8 @@ export function $$g0(e) {
     teamId: selectedView.teamId
   });
   let f = () => {
-    _H();
-    g(Ay({
+    clearFigmaPcCookie();
+    g(setPromoThunk({
       promo: null
     }));
     g(selectViewAction(e.selectedView.previousView || {

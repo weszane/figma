@@ -17,7 +17,7 @@ import { Z } from "../469e6e40/184197";
 import { TrackingProvider } from "../figma_app/831799";
 import { designSet } from "../905/332483";
 import { compareProductAccessTypes, getFProductAccessTypeByKey } from "../figma_app/217457";
-import { _k } from "../figma_app/934005";
+import { isOrgTrueUpOrCatchUp } from "../figma_app/934005";
 import { o0 } from "../469e6e40/616503";
 import { FProductAccessType } from "../figma_app/191312";
 import { CurrencyFormatter } from "../figma_app/514043";
@@ -102,7 +102,7 @@ export let $$A0 = registerModal(function (e) {
   let t = useDispatch();
   let a = o0(e.invoice);
   let s = new CurrencyFormatter(e.invoice.currency);
-  let _ = _k(e.invoice);
+  let _ = isOrgTrueUpOrCatchUp(e.invoice);
   let u = a.dict(t => e.invoice.seats_breakdown[t]?.net_quantity ?? 0);
   return jsx(N, {
     orgId: e.orgId,

@@ -14,7 +14,7 @@ import { sx } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
 import { hideDropdownAction } from "../905/929976";
 import { popModalStack, hideModal, showModalHandler } from "../905/156213";
-import { Bq, WX } from "../figma_app/482142";
+import { startOrgUpgradeFlowThunk, startProUpgradeFlowThunk } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { renderRequestErrorInterstitial } from "../905/3140";
@@ -87,7 +87,7 @@ function O(e) {
             children: jsx(PlanComparisonChart, {
               chooseOrgPlan: () => {
                 t(hideModal());
-                t(Bq({
+                t(startOrgUpgradeFlowThunk({
                   currency: n,
                   upsellSource: e.upsellSource,
                   openInNewTab: e.openCheckoutInNewTab
@@ -97,7 +97,7 @@ function O(e) {
               chooseProPlan: i => {
                 let r = 1 === D.length ? D[0] : null;
                 let a = e.teamId || g?.teamId || r?.id;
-                a ? (t(hideModal()), t(WX({
+                a ? (t(hideModal()), t(startProUpgradeFlowThunk({
                   teamId: a,
                   billingPeriod: i,
                   currency: n,

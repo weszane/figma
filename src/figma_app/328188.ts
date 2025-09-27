@@ -9,14 +9,14 @@ import { K } from "../figma_app/748328";
 import { useCurrentUserOrgId } from "../905/845253";
 import { FStudentTeamStatusType } from "../figma_app/191312";
 import { OrgTeamsInAdminView, OrgTeamView } from "../figma_app/43951";
-import { Ef } from "../905/81982";
+import { SimpleFuseSearch } from "../905/81982";
 import { SortDirection } from "../figma_app/967319";
 import { TeamMembershipStatus } from "../figma_app/713624";
 import { teamVisibilityEnum } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
 import { S } from "../905/335273";
 import { R } from "../905/192963";
-let T = new Ef([], {
+let T = new SimpleFuseSearch([], {
   threshold: .1,
   matchAllTokens: !0,
   tokenize: !1,

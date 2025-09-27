@@ -12,7 +12,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { Eh } from "../figma_app/617654";
-import { V } from "../905/223084";
+import { PlanInvoiceService } from "../905/223084";
 import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
 import { az } from "../figma_app/805373";
@@ -24,7 +24,7 @@ function I(e) {
   let s = lM(e.entryPoint);
   let [b, I] = useState();
   useEffect(() => {
-    if (getFeatureFlags().can_transfer_admin_list) V.getTransferAdmins(e.planType, e.planId, e.resourceType, e.resourceIdOrKey).then(({
+    if (getFeatureFlags().can_transfer_admin_list) PlanInvoiceService.getTransferAdmins(e.planType, e.planId, e.resourceType, e.resourceIdOrKey).then(({
       data: e
     }) => {
       I(e.meta.map(e => ({

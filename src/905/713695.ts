@@ -847,7 +847,10 @@ class LiveStore {
     this.queryProviderContext = new QueryProviderContext(atomStoreManager, managers)
     atomStoreManager.set(queryClientAtom, this.queryProviderContext.queryClient)
     this._attachAPIs(this.queryProviderContext.objectStores)
-    this.initializeQueryMethods()
+    this.Query = this.createQueryMethod()
+    this.PaginatedQuery = this.createPaginatedQueryMethod()
+    this.Mutation = this.createMutationMethod()
+    this.ObjectQuery = this.createObjectQueryMethod()
   }
 
   /**
@@ -858,21 +861,12 @@ class LiveStore {
     return this.queryProviderContext
   }
 
-  /**
-   * Initializes query-related methods.
-   */
-  private initializeQueryMethods(): void {
-    this.Query = this.createQueryMethod()
-    this.PaginatedQuery = this.createPaginatedQueryMethod()
-    this.Mutation = this.createMutationMethod()
-    this.ObjectQuery = this.createObjectQueryMethod()
-  }
 
   /**
    * Creates the Query method.
    * @returns The Query function.
    */
-  private createQueryMethod(): any {
+  private createQueryMethod() {
     const extrasProvider = this.extrasProvider
     const getQueryContext = this.getQueryContext.bind(this)
     return (queryConfig: any) => {
@@ -1011,7 +1005,7 @@ class LiveStore {
    * Creates the PaginatedQuery method.
    * @returns The PaginatedQuery function.
    */
-  private createPaginatedQueryMethod(): any {
+  private createPaginatedQueryMethod() {
     const extrasProvider = this.extrasProvider
     const getQueryContext = this.getQueryContext.bind(this)
     return (queryConfig: any) => {
@@ -1197,7 +1191,7 @@ class LiveStore {
    * Creates the Mutation method.
    * @returns The Mutation function.
    */
-  private createMutationMethod(): any {
+  private createMutationMethod() {
     const extrasProvider = this.extrasProvider
     const getQueryContext = this.getQueryContext.bind(this)
     return (mutationConfig: any) => {
@@ -1233,7 +1227,7 @@ class LiveStore {
    * Creates the ObjectQuery method.
    * @returns The ObjectQuery function.
    */
-  private createObjectQueryMethod(): any {
+  private createObjectQueryMethod() {
     const getQueryContext = this.getQueryContext.bind(this)
     return (store: any) => createRemovableAtomFamily((id: any) => {
       if (!id) {
@@ -1422,10 +1416,10 @@ class LiveStore {
   }
 
   // Properties for query methods
-  Query: any
-  PaginatedQuery: any
-  Mutation: any
-  ObjectQuery: any
+  Query: ReturnType<LiveStore['createQueryMethod']>
+  PaginatedQuery: ReturnType<LiveStore['createPaginatedQueryMethod']>
+  Mutation: ReturnType<LiveStore['createMutationMethod']>
+  ObjectQuery: ReturnType<LiveStore['createObjectQueryMethod']>
 }
 let X = {
   QUERY_FINISHED: 'web.livestore.query.finished',

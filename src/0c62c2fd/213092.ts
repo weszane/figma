@@ -7,7 +7,7 @@ import { I } from "../c5e2cae0/718426";
 import { sx } from "../figma_app/307841";
 import { openCreateTeamFlow } from "../figma_app/976345";
 import { hideModal } from "../905/156213";
-import { Vm } from "../figma_app/482142";
+import { startStudentReviewThunk } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { selectPermissionsState } from "../figma_app/212807";
 import { getEditableUnpaidTeams } from "../figma_app/345997";
@@ -38,7 +38,7 @@ export function $$x0() {
   }, [t]);
   let b = useCallback(e => {
     x();
-    t(Vm({
+    t(startStudentReviewThunk({
       teamId: e.id
     }));
   }, [t, x]);

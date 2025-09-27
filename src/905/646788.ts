@@ -110,7 +110,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { zl as _$$zl } from "../figma_app/641749";
 import { rn as _$$rn } from "../figma_app/903573";
 import { N as _$$N } from "../figma_app/268271";
-import { R as _$$R2 } from "../905/298004";
+import { createOnboardingStateMachine } from "../905/298004";
 import { WZ } from "../905/893645";
 import { NotModalType } from "../905/11928";
 import { GCV, KdZ, tzJ, ePo } from "../figma_app/6204";
@@ -1111,7 +1111,7 @@ let tF = "sc_file_modal_step_1_onboarding_key";
 let tM = "sc_file_modal_step_2_onboarding_key";
 let tj = "sc_file_modal_step_3_onboarding_key";
 let tU = userFlagExistsAtomFamily(tL);
-let tB = _$$rn("sc_file_modal_onboarding", _$$R2(GCV));
+let tB = _$$rn("sc_file_modal_onboarding", createOnboardingStateMachine(GCV));
 function tV(e) {
   let t = useAtomWithSubscription(tU);
   let {

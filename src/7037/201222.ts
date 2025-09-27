@@ -23,7 +23,7 @@ import { customHistory } from '../905/612521';
 import { e as _$$e } from '../905/621515';
 import { setEditorDocumentTitle } from '../905/697795';
 import { SvgComponent } from '../905/714743';
-import { M8 } from '../905/772425';
+import { FeedAtMentionsLibrary } from '../905/772425';
 import { useCurrentUserOrgId } from '../905/845253';
 import { E as _$$E } from '../905/881732';
 import { sendWithRetry } from '../905/910117';
@@ -496,7 +496,7 @@ function eI(e) {
     }));
   }, [t, e.postUuid, g, T]);
   let j = useMemo(() => ({
-    library: new M8(e.currentOrgId, e.postUuid)
+    library: new FeedAtMentionsLibrary(e.currentOrgId, e.postUuid)
   }), [e.currentOrgId, e.postUuid]);
   let O = useCallback(e => {
     t(nb({

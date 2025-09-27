@@ -9,7 +9,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { lo, wn, dl } from "../9420/795870";
-import { jL } from "../figma_app/658324";
+import { fetchAndUpdateUpcomingInvoices } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { selectedViewToPath } from "../figma_app/193867";
 import { DashboardSections } from "../905/548208";
@@ -68,7 +68,7 @@ function w({
   });
   let V = async e => {
     if (e && e.preventDefault(), M(!0), await savePayment(), w && t.teamId) try {
-      await jL({
+      await fetchAndUpdateUpcomingInvoices({
         planType: FOrganizationLevelType.TEAM,
         planId: t.teamId
       });

@@ -23,7 +23,7 @@ import { J as _$$J4 } from '../469e6e40/855786';
 import { Y as _$$Y2 } from '../469e6e40/924996';
 import { getRumLoggingConfig } from '../905/16237';
 import { ModalRootComponent } from '../905/38914';
-import { Ef } from '../905/81982';
+import { SimpleFuseSearch } from '../905/81982';
 import { s as _$$s2 } from '../905/82276';
 import { e as _$$e5 } from '../905/86132';
 import { registerModal } from '../905/102752';
@@ -148,7 +148,7 @@ import { C5, hX } from '../figma_app/614170';
 import { $z, Me } from '../figma_app/617427';
 import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
-import { jL } from '../figma_app/658324';
+import { fetchAndUpdateUpcomingInvoices } from '../figma_app/658324';
 import { EQ, mm, MX, NV, RG } from '../figma_app/684446';
 import { a9 as _$$a, Ew, oo, vu } from '../figma_app/741211';
 import { K as _$$K, O as _$$O } from '../figma_app/748328';
@@ -1978,7 +1978,7 @@ let a$ = registerModal(e => {
       lastUpdateTimestampOverride: lastFetchTimestamp,
       successCallback: () => {
         queueFilterCountsRefetch();
-        jL({
+        fetchAndUpdateUpcomingInvoices({
           planType: FOrganizationLevelType.ORG,
           planId: orgId
         });
@@ -3088,7 +3088,7 @@ let ni = /\s+|,\s*|;\s*/;
 export function $$nr1(e) {
   return e ? e.length <= 75 || e.split(ni).every(isValidEmail) ? e : e.substring(0, 75) : '';
 }
-let nl = new Ef([], {
+let nl = new SimpleFuseSearch([], {
   threshold: 0.1,
   matchAllTokens: !0,
   tokenize: !1,

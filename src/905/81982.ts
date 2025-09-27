@@ -1,230 +1,373 @@
+import Fuse from 'fuse.js'
 import { getFalseValue, isEvalViewPathCheck } from '../figma_app/897289'
-import { A } from '../vendor/292399'
-import r from '../vendor/377996'
 
-let n
-let a = r
-let l = 0
-export class $$d2 {
-  constructor(e, t = {}) {
-    this.options = {
-      ...t,
-      includeScore: !1,
+// Original global counter for library IDs
+let libraryIdCounter = 0
+
+// Original worker and message handling
+let worker: Worker | null = null
+let messageIdCounter = 0
+let messageCallbacks: { [key: number]: (results: any) => void } = {}
+
+/**
+ * Creates a unique message ID and stores the callback for worker responses.
+ * Original: f
+ * @param callback - The callback to invoke with search results.
+ * @returns The unique message ID.
+ */
+function createMessageId(callback: (results: any) => void): number {
+  const id = messageIdCounter++
+  messageCallbacks[id] = callback
+  return id
+}
+
+/**
+ * Gets the worker instance if conditions allow, initializing it if necessary.
+ * Original: m
+ * @returns The worker instance or null.
+ */
+function getWorker(): Worker | null {
+  if (!(getFalseValue() || isEvalViewPathCheck())) {
+    if (!worker) {
+      worker = new Worker((globalThis as any).Fig.librarySearchWorkerURL)
+      worker.onmessage = (event: MessageEvent) => {
+        if (event.data.type === 'SEARCH_RESULTS') {
+          const messageId = event.data.messageId
+          const callback = messageCallbacks[messageId]
+          if (callback) {
+            callback(event.data.results)
+            delete messageCallbacks[messageId]
+          }
+        }
+      }
     }
-    this.sourceList = e
-    this.fuse = new (a())(e, this.options)
+    return worker
+  }
+  return null
+}
+
+/**
+ * A simple Fuse.js search wrapper without including scores.
+ * Original: $$d2
+ */
+export const SimpleFuseSearch = class {
+  options: any
+  sourceList: any[]
+  fuse: Fuse<any>
+
+  /**
+   * Constructs a SimpleFuseSearch instance.
+   * @param sourceList - The list of items to search.
+   * @param options - Fuse options, with includeScore forced to false.
+   */
+  constructor(sourceList: any[], options: any = {}) {
+    this.options = { ...options, includeScore: false }
+    this.sourceList = sourceList
+    this.fuse = new Fuse(sourceList, this.options)
   }
 
-  set(e) {
-    this.fuse = new (a())(e, this.options)
-    this.sourceList = e
+  /**
+   * Updates the source list and reinitializes Fuse.
+   * @param sourceList - The new list of items.
+   */
+  set(sourceList: any[]) {
+    this.fuse = new Fuse(sourceList, this.options)
+    this.sourceList = sourceList
   }
 
-  list() {
+  /**
+   * Returns a copy of the source list.
+   * @returns A copy of the source list.
+   */
+  list(): any[] {
     return [...this.sourceList]
   }
 
-  search(e) {
-    return this.fuse.search(e.trim())
+  /**
+   * Searches the list using the query.
+   * @param query - The search query.
+   * @returns The search results.
+   */
+  search(query: string): any[] {
+    return this.fuse.search(query.trim())
   }
 }
-export class $$c0 {
-  constructor(e, t = {}) {
-    this.options = t
-    this.sourceList = e
-    this.fuse = new A(e, t)
+
+/**
+ * A basic Fuse.js search wrapper.
+ * Original: $$c0
+ */
+export const BasicFuseSearch = class {
+  options: any
+  sourceList: any[]
+  fuse: Fuse<any>
+
+  /**
+   * Constructs a BasicFuseSearch instance.
+   * @param sourceList - The list of items to search.
+   * @param options - Fuse options.
+   */
+  constructor(sourceList: any[], options: any = {}) {
+    this.options = options
+    this.sourceList = sourceList
+    this.fuse = new Fuse(sourceList, options)
   }
 
-  set(e) {
-    this.fuse = new A(e, this.options)
-    this.sourceList = e
+  /**
+   * Updates the source list and reinitializes Fuse.
+   * @param sourceList - The new list of items.
+   */
+  set(sourceList: any[]) {
+    this.fuse = new Fuse(sourceList, this.options)
+    this.sourceList = sourceList
   }
 
-  list() {
+  /**
+   * Returns a copy of the source list.
+   * @returns A copy of the source list.
+   */
+  list(): any[] {
     return [...this.sourceList]
   }
 
-  search(e) {
-    return this.fuse.search(e.trim())
+  /**
+   * Searches the list using the query.
+   * @param query - The search query.
+   * @returns The search results.
+   */
+  search(query: string): any[] {
+    return this.fuse.search(query.trim())
   }
 }
-export class $$u3 {
-  constructor(e = {}) {
-    this.fuse = null
-    this.libraryId = l++
-    this.options = {
-      ...e,
-      includeScore: !0,
-    }
-    this.sourceList = []
+
+/**
+ * A Fuse.js search wrapper that uses a web worker for operations.
+ * Original: $$u3
+ */
+export const WorkerFuseSearch = class {
+  fuse: Fuse<any> | null = null
+  libraryId: number
+  options: any
+  sourceList: any[] = []
+
+  /**
+   * Constructs a WorkerFuseSearch instance.
+   * @param options - Fuse options, with includeScore forced to true.
+   */
+  constructor(options: any = {}) {
+    this.libraryId = libraryIdCounter++
+    this.options = { ...options, includeScore: true }
   }
 
-  set(e) {
-    let t = m()
-    if (t) {
-      let i = {
+  /**
+   * Updates the source list, initializing Fuse or posting to worker.
+   * @param sourceList - The new list of items.
+   */
+  set(sourceList: any[]) {
+    const workerInstance = getWorker()
+    if (workerInstance) {
+      const message = {
         type: 'INIT',
-        list: e,
+        list: sourceList,
         libraryId: this.libraryId,
         options: this.options,
       }
-      t.postMessage(i)
+      workerInstance.postMessage(message)
     }
     else {
-      this.fuse = new (a())(e, this.options)
+      this.fuse = new Fuse(sourceList, this.options)
     }
-    this.sourceList = e
+    this.sourceList = sourceList
   }
 
-  list() {
+  /**
+   * Returns a copy of the source list.
+   * @returns A copy of the source list.
+   */
+  list(): any[] {
     return [...this.sourceList]
   }
 
-  search(e) {
-    let t = m()
-    return (e = e.trim(), t)
-      ? new Promise((i) => {
-        let n = f(i)
-        let r = {
+  /**
+   * Searches the list using the query, using worker if available.
+   * @param query - The search query.
+   * @returns A promise resolving to the search results.
+   */
+  search(query: string): Promise<any[]> {
+    const workerInstance = getWorker()
+    const trimmedQuery = query.trim()
+    if (workerInstance) {
+      return new Promise((resolve) => {
+        const messageId = createMessageId(resolve)
+        const message = {
           type: 'SEARCH',
           libraryId: this.libraryId,
-          pattern: e,
-          messageId: n,
+          pattern: trimmedQuery,
+          messageId,
         }
-        t.postMessage(r)
+        workerInstance.postMessage(message)
       })
-      : this.fuse ? Promise.resolve(this.fuse.search(e)) : Promise.resolve([])
-  }
-}
-export class $$p1 {
-  constructor({
-    exactMatch: e,
-    ...t
-  } = {}) {
-    this.fuse = null
-    this.libraryId = l++
-    this.exactMatch = e ?? !1
-    this.options = {
-      ...t,
-      useExtendedSearch: this.exactMatch,
-    }
-  }
-
-  set(e) {
-    let t = m()
-    if (t) {
-      let i = {
-        type: 'INIT',
-        list: e,
-        libraryId: this.libraryId,
-        options: this.options,
-        newFuse: !0,
-      }
-      t.postMessage(i)
     }
     else {
-      this.fuse = new A(e, this.options)
+      return this.fuse ? Promise.resolve(this.fuse.search(trimmedQuery)) : Promise.resolve([])
+    }
+  }
+}
+
+/**
+ * An advanced Fuse.js search wrapper with exact match, add, remove, and update operations, using a web worker.
+ * Original: $$p1
+ */
+export const AdvancedWorkerFuseSearch = class {
+  fuse: Fuse<any> | null = null
+  libraryId: number
+  exactMatch: boolean
+  options: any
+
+  /**
+   * Constructs an AdvancedWorkerFuseSearch instance.
+   * @param config - Configuration object with exactMatch and other options.
+   */
+  constructor({ exactMatch, ...options }: { exactMatch?: boolean } & any = {}) {
+    this.libraryId = libraryIdCounter++
+    this.exactMatch = exactMatch ?? false
+    this.options = { ...options, useExtendedSearch: this.exactMatch }
+  }
+
+  /**
+   * Updates the source list, initializing Fuse or posting to worker.
+   * @param sourceList - The new list of items.
+   */
+  set(sourceList: any[]) {
+    const workerInstance = getWorker()
+    if (workerInstance) {
+      const message = {
+        type: 'INIT',
+        list: sourceList,
+        libraryId: this.libraryId,
+        options: this.options,
+        newFuse: true,
+      }
+      workerInstance.postMessage(message)
+    }
+    else {
+      this.fuse = new Fuse(sourceList, this.options)
     }
   }
 
-  search(e) {
-    let t = m()
-    return (typeof e == 'string' && (e = this.exactMatch ? `'"${e.trim()}"` : e.trim()), t)
-      ? new Promise((i) => {
-        let n = f(i)
-        let r = {
+  /**
+   * Searches the list using the query, with exact match handling if enabled.
+   * @param query - The search query.
+   * @returns A promise resolving to the search results.
+   */
+  search(query: string): Promise<any[]> {
+    const workerInstance = getWorker()
+    let processedQuery = query
+    if (typeof query === 'string') {
+      processedQuery = this.exactMatch ? `"${query.trim()}"` : query.trim()
+    }
+    if (workerInstance) {
+      return new Promise((resolve) => {
+        const messageId = createMessageId(resolve)
+        const message = {
           type: 'SEARCH',
           libraryId: this.libraryId,
-          pattern: e,
-          messageId: n,
-          newFuse: !0,
+          pattern: processedQuery,
+          messageId,
+          newFuse: true,
         }
-        t.postMessage(r)
+        workerInstance.postMessage(message)
       })
-      : this.fuse ? Promise.resolve(this.fuse.search(e)) : Promise.resolve([])
+    }
+    else {
+      return this.fuse ? Promise.resolve(this.fuse.search(processedQuery)) : Promise.resolve([])
+    }
   }
 
-  add(e) {
-    let t = m()
-    if (t) {
-      let i = {
+  /**
+   * Adds an item to the search index.
+   * @param item - The item to add.
+   */
+  add(item: any) {
+    const workerInstance = getWorker()
+    if (workerInstance) {
+      const message = {
         type: 'ADD',
-        doc: e,
+        doc: item,
         libraryId: this.libraryId,
       }
-      t.postMessage(i)
+      workerInstance.postMessage(message)
     }
     else {
-      this.fuse?.add(e)
+      this.fuse?.add(item)
     }
   }
 
-  remove(e, t) {
-    let i = m()
-    if (i) {
-      let n = t[e]
-      let r = {
+  /**
+   * Removes items from the search index based on a key and value.
+   * @param key - The key to match.
+   * @param value - The value object to match against.
+   */
+  remove(key: string, value: any) {
+    const workerInstance = getWorker()
+    if (workerInstance) {
+      const id = value[key]
+      const message = {
         type: 'REMOVE',
-        key: e,
-        id: n,
+        key,
+        id,
         libraryId: this.libraryId,
       }
-      i.postMessage(r)
+      workerInstance.postMessage(message)
     }
     else {
-      this.fuse?.remove(i => i[e] === t[e])
+      this.fuse?.remove(item => item[key] === value[key])
     }
   }
 
-  updateEntries(e, t, i) {
-    let n = m()
-    if (n) {
-      let r = {
+  /**
+   * Updates the search index by removing and adding items.
+   * @param key - The key for removal.
+   * @param removeList - List of values to remove.
+   * @param addList - List of items to add.
+   */
+  updateEntries(key: string, removeList: any[], addList: any[]) {
+    const workerInstance = getWorker()
+    if (workerInstance) {
+      const message = {
         type: 'UPDATE',
-        removeKey: e,
-        removeList: t,
-        addList: i,
+        removeKey: key,
+        removeList,
+        addList,
         libraryId: this.libraryId,
       }
-      n.postMessage(r)
+      workerInstance.postMessage(message)
     }
     else {
-      for (let i of t) this.fuse?.remove(t => t[e] === i)
-      for (let e of i) this.fuse?.add(e)
+      for (const item of removeList) {
+        this.fuse?.remove(searchItem => searchItem[key] === item)
+      }
+      for (const item of addList) {
+        this.fuse?.add(item)
+      }
     }
   }
 
+  /**
+   * Logs the index via the worker.
+   */
   logIndex() {
-    let e = m()
-    if (e) {
-      let t = {
+    const workerInstance = getWorker()
+    if (workerInstance) {
+      const message = {
         type: 'LOG',
         libraryId: this.libraryId,
       }
-      e.postMessage(t)
+      workerInstance.postMessage(message)
     }
   }
 }
-function m() {
-  if (!(getFalseValue() || isEvalViewPathCheck())) {
-    n || ((n = new Worker(Fig.librarySearchWorkerURL)).onmessage = (e) => {
-      if (e.data.type === 'SEARCH_RESULTS') {
-        let t = e.data.messageId
-        let i = g[t]
-        i && (i(e.data.results), delete g[t])
-      }
-    })
-    return n
-  }
-}
-let h = 0
-let g = {}
-function f(e) {
-  let t = h++
-  g[t] = e
-  return t
-}
-export const Bg = $$c0
-export const CN = $$p1
-export const Ef = $$d2
-export const KH = $$u3
+export const Bg = BasicFuseSearch
+export const CN = AdvancedWorkerFuseSearch
+export const Ef = SimpleFuseSearch
+export const KH = WorkerFuseSearch

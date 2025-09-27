@@ -2,7 +2,7 @@ import { MatchCriteria, CanvasSearchHelpers, NodeType } from "../figma_app/76368
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { trackFileEvent } from "../figma_app/314264";
-import { CN } from "../905/81982";
+import { AdvancedWorkerFuseSearch } from "../905/81982";
 export let $$l3 = {
   includeMatches: !0,
   shouldSort: !1,
@@ -35,7 +35,7 @@ function p(e) {
 }
 export let $$_0 = new class {
   constructor() {
-    this.searchLibrary = new CN({
+    this.searchLibrary = new AdvancedWorkerFuseSearch({
       keys: ["textContent", "name", "type", "annotationTextContent"],
       exactMatch: !0,
       ...$$l3

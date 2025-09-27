@@ -1,6 +1,6 @@
 import { um, atom, atomStoreManager } from "../figma_app/27355";
 import { eventEmitterAtom } from "../905/502364";
-import { gV } from "../905/337355";
+import { getUserEvents } from "../905/337355";
 import { b } from "../905/965432";
 function o(e, t, i) {
   for (let n of t) e.addEventListener(n, i);
@@ -12,7 +12,7 @@ let d = new Map();
 export function $$c0(e, t) {
   let i = function (e, t) {
     if (d.has(e)) return null;
-    let i = gV(t);
+    let i = getUserEvents(t);
     let c = function (e) {
       let t = {
         currentState: e.start(),

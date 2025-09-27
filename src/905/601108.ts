@@ -1,4 +1,4 @@
-import type { InitialOptions } from '../../../types/global'
+import type { InitialOptions } from '../../types/global'
 import { getGlobalThis } from '../905/841449'
 
 /**

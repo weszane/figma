@@ -11,7 +11,7 @@ import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { AutoLayout } from "../905/470281";
 import { popModalStack } from "../905/156213";
-import { WX } from "../figma_app/482142";
+import { startProUpgradeFlowThunk } from "../figma_app/482142";
 import { useStarterGlobalFileLimitsExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
@@ -132,7 +132,7 @@ function x(e) {
         })]
       }, e.limitExceededType))
     }), !!F && jsx(Ih, {
-      onClick: () => t(WX({
+      onClick: () => t(startProUpgradeFlowThunk({
         teamId: e.teamId
       })),
       variant: "primary",

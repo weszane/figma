@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { KH } from "../905/81982";
+import { WorkerFuseSearch } from "../905/81982";
 let a = [{
   name: "message",
   weight: .9
@@ -14,7 +14,7 @@ let s = {
   shouldSort: !0
 };
 export function $$o0(e) {
-  let [t] = useState(() => new KH({
+  let [t] = useState(() => new WorkerFuseSearch({
     keys: a,
     ...s
   }));

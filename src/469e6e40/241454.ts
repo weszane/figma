@@ -20,7 +20,7 @@ import { hideModal, popModalStack } from "../905/156213";
 import { IJ, uo } from "../figma_app/990058";
 import { TrackingProvider } from "../figma_app/831799";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { jL } from "../figma_app/658324";
+import { fetchAndUpdateUpcomingInvoices } from "../figma_app/658324";
 import { FPlanFeatureType, FOrganizationLevelType } from "../figma_app/191312";
 import { isLoading } from "../905/18797";
 import { hasScimToken } from "../figma_app/336853";
@@ -490,7 +490,7 @@ function V(e) {
                 }),
                 type: "paid-status-changed"
               }));
-              jL({
+              fetchAndUpdateUpcomingInvoices({
                 planType: FOrganizationLevelType.ORG,
                 planId: e.org.id
               });

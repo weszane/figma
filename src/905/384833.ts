@@ -40,7 +40,7 @@ import { YL, Zz } from "../figma_app/84966";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
 import { compareProductAccessTypes } from "../figma_app/217457";
-import { jL } from "../figma_app/658324";
+import { fetchAndUpdateUpcomingInvoices } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { DashboardSection } from "../figma_app/650409";
@@ -100,7 +100,7 @@ function ea(e) {
         orgId: e,
         unassignedSeatCounts: r
       }).then(async () => {
-        await jL({
+        await fetchAndUpdateUpcomingInvoices({
           planType: FOrganizationLevelType.ORG,
           planId: e
         });

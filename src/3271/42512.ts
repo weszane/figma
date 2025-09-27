@@ -16,7 +16,7 @@ import { editorUtilities as _$$k3 } from '../905/22009';
 import { z4 } from '../905/37051';
 import { KeyCodes } from '../905/63728';
 import { getPublishedComponentsForLibraryThunk } from '../905/64411';
-import { Ef } from '../905/81982';
+import { SimpleFuseSearch } from '../905/81982';
 import { selectWithShallowEqual } from '../905/103090';
 import { J as _$$J } from '../905/125993';
 import { KindEnum } from '../905/129884';
@@ -584,7 +584,7 @@ function eG(e) {
               children: canRate && isResourceApprovedPublic(resource) && jsx('div', {
                 className: eU,
                 children: jsx(eC, {
-                  openRatingModal: e => { },
+                  openRatingModal: e => {},
                   isInsertsModal: !0
                 })
               })
@@ -1311,18 +1311,18 @@ function t8() {
     resetCache: a
   }), [t, s, r, a]);
 }
-let t6 = new Ef([], {
+let t6 = new SimpleFuseSearch([], {
   ...FUSE_CONFIG_DEFAULT,
   keys: FUSE_KEYS_PROFILE
 });
-let t7 = new Ef([], {
+let t7 = new SimpleFuseSearch([], {
   ...FUSE_CONFIG_DEFAULT,
   keys: [{
     name: 'name',
     weight: 1
   }]
 });
-let se = new Ef([], {
+let se = new SimpleFuseSearch([], {
   ...FUSE_CONFIG_DEFAULT,
   keys: FUSE_KEYS_PROFILE
 });
@@ -1422,10 +1422,10 @@ function st(e) {
     isLoading: pluginSearchIsLoading,
     hasResolved: pluginSearchHasResolved
   } : {
-      serverSideSearch: widgetServerSideSearch,
-      isLoading: widgetSearchIsLoading,
-      hasResolved: widgetSearchHasResolved
-    };
+    serverSideSearch: widgetServerSideSearch,
+    isLoading: widgetSearchIsLoading,
+    hasResolved: widgetSearchHasResolved
+  };
   useEffect(() => {
     o !== '' && (_hasQueryResultsCached2(o) && _hasQueryResultsCached(o) && hasQueryResultsCached(o) || serverSideSearch(o, e => _setResultsForQuery5(o, e), e => _setResultsForQuery3(o, e), e => _setResultsForQuery2(o, e)), setResultsForQuery(o, t6.search(o).map(e => e.plugin_id)), _setResultsForQuery(o, t7.search(o).map(e => e.localFileId.toString())), _setResultsForQuery4(o, se.search(o).map(e => e.plugin_id)));
   }, [o, _hasQueryResultsCached2, hasQueryResultsCached, _hasQueryResultsCached, serverSideSearch, _setResultsForQuery4, _setResultsForQuery5, _setResultsForQuery2, _setResultsForQuery, _setResultsForQuery3, setResultsForQuery]);

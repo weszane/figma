@@ -142,7 +142,7 @@ import { bv, IU } from '../figma_app/421401';
 import { isSelectedTeamAdminConsoleMissingResources } from '../figma_app/422062';
 import { useIsStudentPlan, useIsTeamAdminUser, useTeamPlanFeatures, useTeamPlanPublicInfo, useTeamPlanUser } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
-import { Bq, WX } from '../figma_app/482142';
+import { startOrgUpgradeFlowThunk, startProUpgradeFlowThunk } from '../figma_app/482142';
 import { R as _$$R2 } from '../figma_app/522082';
 import { cE, oi } from '../figma_app/527041';
 import { k as _$$k6, Q as _$$Q3 } from '../figma_app/527200';
@@ -152,7 +152,7 @@ import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { isTeamEligibleForUpgrade } from '../figma_app/630077';
 import { SecureLink } from '../figma_app/637027';
 import { g as _$$g } from '../figma_app/638694';
-import { bQ, Ti } from '../figma_app/658324';
+import { usePlanInvoices, useOpenPlanInvoices } from '../figma_app/658324';
 import { EntityType } from '../figma_app/707808';
 import { ProductAccessMap } from '../figma_app/765689';
 import { parsePxInt } from '../figma_app/783094';
@@ -168,7 +168,7 @@ import { v as _$$v2 } from '../figma_app/899624';
 import { getMemberSection, getBillingSection } from '../figma_app/915977';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { Be, BO, C8, Hq } from '../figma_app/920435';
-import { qH } from '../figma_app/934005';
+import { InvoiceState } from '../figma_app/934005';
 import { fB, l4, Of } from '../figma_app/982327';
 import ar from '../vendor/635';
 import z from '../vendor/529640';
@@ -1361,7 +1361,7 @@ let tz = ({
   let c = a.id;
   let _ = [];
   let u = isTeamInGracePeriod(a);
-  let m = Ti({
+  let m = useOpenPlanInvoices({
     planId: c,
     planType: FOrganizationLevelType.TEAM
   });
@@ -1410,7 +1410,7 @@ let tz = ({
       })
     }),
     onClick: () => {
-      t(Bq({
+      t(startOrgUpgradeFlowThunk({
         openInNewTab: !0,
         upsellSource: UpsellModalType.TEAM_SETTINGS_VIEW
       }));
@@ -1711,7 +1711,7 @@ let tY = (e, t, a) => {
   }));
 };
 let tJ = (e, t) => {
-  e(WX({
+  e(startProUpgradeFlowThunk({
     teamId: t,
     openInNewTab: !1,
     selectedView: {
@@ -1828,7 +1828,7 @@ function ay(e) {
   });
 }
 function aw(e) {
-  let t = bQ({
+  let t = usePlanInvoices({
     planType: FOrganizationLevelType.TEAM,
     planId: e.teamId
   });
@@ -1855,7 +1855,7 @@ function ak(e) {
 }
 function aA(e) {
   let t = useDispatch();
-  let a = bQ({
+  let a = usePlanInvoices({
     planType: FOrganizationLevelType.TEAM,
     planId: e.team.id
   });
@@ -2015,7 +2015,7 @@ function aO(e) {
     overview: !0,
     invoices: !0
   }, e.activeTab, n);
-  let c = bQ({
+  let c = usePlanInvoices({
     planType: FOrganizationLevelType.TEAM,
     planId: e.team.id
   }, {
@@ -2033,7 +2033,7 @@ function aO(e) {
   }(e.billingSummary, a), [e.billingSummary, a]);
   let u = useMemo(() => e.isBillingSummaryLoading || c.status !== 'loaded' ? null : _$$l({
     teamBillingSummary: e.billingSummary,
-    hasOpenInvoice: !!c.data.find(e => e.state === qH.OPEN),
+    hasOpenInvoice: !!c.data.find(e => e.state === InvoiceState.OPEN),
     currentDate: a
   }), [a, c.data, c.status, e.billingSummary, e.isBillingSummaryLoading]);
   return jsxs(Fragment, {
@@ -2264,7 +2264,7 @@ export function $$aG0(e) {
   let G = _$$R2(e.teamId);
   let z = y3(s?.created_at, s?.last_upgraded_at);
   let V = s && (G || e.selectedTab === DashboardSections.SETTINGS && s.pro_team);
-  let W = Ti(V ? {
+  let W = useOpenPlanInvoices(V ? {
     planId: s.id,
     planType: FOrganizationLevelType.TEAM
   } : null);

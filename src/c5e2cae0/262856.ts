@@ -10,7 +10,7 @@ import { R } from "../c5e2cae0/276031";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { hideModal } from "../905/156213";
-import { yy } from "../figma_app/482142";
+import { setCompanyDetailsAction } from "../figma_app/482142";
 import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
 import { HeaderModal } from "../905/519092";
@@ -59,7 +59,7 @@ let j = memo(function (e) {
         let a = e.canSeeBillingAddressExp ? getI18nString("update_company_details_modal.update_display_name.error") : getI18nString("update_company_details_modal.update_team_name.error");
         t(FlashActions.error(resolveMessage(s) || a));
         return s;
-      } else t(yy({
+      } else t(setCompanyDetailsAction({
         legalName: S,
         displayName: f
       }));

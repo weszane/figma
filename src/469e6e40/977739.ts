@@ -7,7 +7,7 @@ import { Label } from "../905/270045";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { getAtomMutate } from "../figma_app/566371";
-import { z as _$$z, Z } from "../905/306088";
+import { RadioGroup, RadioOption } from "../905/306088";
 import { LoadingSpinner } from "../figma_app/858013";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
@@ -28,7 +28,7 @@ import { Wi } from "../figma_app/162641";
 import { UserAvatar, AvatarSize } from "../905/590952";
 import { Pg } from "../figma_app/990058";
 import { fetchTeamUsers } from "../905/584989";
-import { Ef } from "../905/81982";
+import { SimpleFuseSearch } from "../905/81982";
 import { d as _$$d } from "../905/44199";
 import { Eh } from "../figma_app/617654";
 import { teamAPIClient } from "../905/834575";
@@ -106,7 +106,7 @@ function $$q(e) {
       onChange: setAutocomplete,
       validateToken: noop,
       getSearchResults: e => {
-        let t = new Ef([], {
+        let t = new SimpleFuseSearch([], {
           keys: ["name", "email"],
           threshold: 0,
           tokenize: !0,
@@ -268,7 +268,7 @@ let $$z0 = registerModal(function ({
           fontSize: 11,
           children: renderI18nText("new_editor_notifications_modal.we_recommend_only_adding")
         })]
-      }), jsx(_$$z, {
+      }), jsx(RadioGroup, {
         value: P,
         onChange: e => {
           D(e);
@@ -284,7 +284,7 @@ let $$z0 = registerModal(function ({
               left: 8
             },
             width: "100%",
-            children: jsx(Z, {
+            children: jsx(RadioOption, {
               value: a,
               _isChecked: a === P,
               _onChange: e => {

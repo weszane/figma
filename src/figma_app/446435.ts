@@ -14,7 +14,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { a6 } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { useIsLoading, useIsLoaded } from "../905/18797";
-import { Ef } from "../905/81982";
+import { SimpleFuseSearch } from "../905/81982";
 import { n as _$$n } from "../905/79930";
 import { CommunityPageType } from "../figma_app/45218";
 import { hubFileAPI } from "../905/473998";
@@ -26,7 +26,7 @@ export function $$A3(e) {
     source
   } = e;
   let o = useDispatch();
-  let [u] = useState(() => new Ef([], {
+  let [u] = useState(() => new SimpleFuseSearch([], {
     keys: ["name"]
   }));
   let p = templatesShelfType || CommunityPageType.FIGJAM_TEMPLATES_PICKER;

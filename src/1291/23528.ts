@@ -1,13 +1,13 @@
 import { useState, useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { o2 } from "../figma_app/968813";
-import { fG } from "../905/772425";
+import { getMentionsResult } from "../905/772425";
 import { zW } from "../905/162414";
-import { U } from "../figma_app/477548";
+import { contactsAPIService } from "../figma_app/477548";
 import { d0 } from "../9410/353422";
 let c = {
-  list: U.getRecentFaceStamps,
-  search: U.searchFaceStamps
+  list: contactsAPIService.getRecentFaceStamps,
+  search: contactsAPIService.searchFaceStamps
 };
 export function $$u0({
   maxResults: e
@@ -31,7 +31,7 @@ export function $$u0({
     }
     u(!0);
     _(!1);
-    fG(e, s, !1).then(s => {
+    getMentionsResult(e, s, !1).then(s => {
       _(!0);
       let i = s?.mentions || [];
       p(e);

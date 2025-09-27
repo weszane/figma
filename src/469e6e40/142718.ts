@@ -1,6 +1,6 @@
-import { Ef } from "../905/81982";
+import { SimpleFuseSearch } from "../905/81982";
 var $$s2 = (e => (e[e.SEARCH = 0] = "SEARCH", e[e.FILTER = 1] = "FILTER", e))($$s2 || {});
-export let $$i3 = new Ef([], {
+export let $$i3 = new SimpleFuseSearch([], {
   threshold: .1,
   matchAllTokens: !0,
   tokenize: !1,

@@ -23,7 +23,7 @@ import { selectedViewAtom } from "../figma_app/386952";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { getNonDeletedAssets, filterAssetsWithContainingStateGroup, addStateNamesToAssets } from "../figma_app/646357";
 import { getPlanPublicInfoAtomFamily } from "../905/276025";
-import { KH } from "../905/81982";
+import { WorkerFuseSearch } from "../905/81982";
 import { fileVersionSelector } from "../905/91038";
 import { FEditorType } from "../figma_app/53721";
 import { generateSessionId } from "../905/574958";
@@ -180,7 +180,7 @@ let e_ = selectAtom(ef, e => e, (e, t) => {
   return i.size === n.size && [...i].every(e => n.has(e));
 });
 let eA = atom(e => {
-  let t = new KH({
+  let t = new WorkerFuseSearch({
     keys: vz,
     ...dO
   });

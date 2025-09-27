@@ -1,67 +1,109 @@
-import { b } from "../905/965432";
-export function $$r0(e) {
-  let t = new Map();
-  let i = new Map();
-  for (let {
-    id,
-    ...r
-  } of e.states) {
-    if (t.has(id)) throw Error(`Duplicate state ID ${id.toString()} found when building state machine`);
-    if (t.set(id, r), null == r.transitions) continue;
-    let e = new Map();
-    for (let {
-      event,
-      ...a
-    } of (i.set(id, e), r.transitions)) {
-      let i = e.get(event);
-      null == i && (i = [], e.set(event, i));
-      i?.push(a);
+// Original code from /Users/allen/github/fig/src/905/337355.ts
+
+const USER_EVENT = '@@userEvent'
+
+/**
+ * Builds a state machine from the provided configuration.
+ * @param config - The state machine configuration object.
+ * @returns An object representing the state machine with methods to check states and transitions.
+ */
+export function buildStateMachine(config: any) {
+  const states = new Map()
+  const transitions = new Map()
+
+  for (const { id, ...state } of config.states) {
+    if (states.has(id)) {
+      throw new Error(`Duplicate state ID ${id.toString()} found when building state machine`)
+    }
+    states.set(id, state)
+
+    if (state.transitions == null) {
+      continue
+    }
+
+    const eventMap = new Map()
+    transitions.set(id, eventMap)
+
+    for (const { event, ...transition } of state.transitions) {
+      let eventTransitions = eventMap.get(event)
+      if (eventTransitions == null) {
+        eventTransitions = []
+        eventMap.set(event, eventTransitions)
+      }
+      eventTransitions.push(transition)
     }
   }
+
   return {
-    config: e,
-    isComplete(e) {
-      let i = t.get(e);
-      return i?.terminal ?? !1;
+    config,
+    isComplete(stateId: any) {
+      const state = states.get(stateId)
+      return state?.terminal ?? false
     },
-    isInitial: t => t === e.initial,
-    start: () => e.initial,
-    transition(e, t) {
-      let n = i.get(e)?.get(t.id);
-      if (null == n) return null;
-      for (let i of n) if (null == i.condition || i.condition({
-        from: e,
-        to: i.target,
-        event: t
-      })) return i.target;
-      return null;
+    isInitial: (stateId: any) => stateId === config.initial,
+    start: () => config.initial,
+    transition(currentState: any, event: any) {
+      const eventTransitions = transitions.get(currentState)?.get(event.id)
+      if (eventTransitions == null) {
+        return null
+      }
+      for (const transition of eventTransitions) {
+        if (transition.condition == null || transition.condition({
+          from: currentState,
+          to: transition.target,
+          event,
+        })) {
+          return transition.target
+        }
+      }
+      return null
+    },
+  }
+}
+
+/**
+ * Extracts user events from the state machine configuration.
+ * @param stateMachine - The state machine object returned by buildStateMachine.
+ * @returns A set of user event types.
+ */
+export function getUserEvents(stateMachine: any) {
+  const userEvents = new Set()
+  for (const state of stateMachine.config.states) {
+    if (state.transitions != null) {
+      for (const transition of state.transitions) {
+        if (transition.event === USER_EVENT && transition.meta?.userEvents != null) {
+          transition.meta.userEvents.forEach((event: any) => userEvents.add(event))
+        }
+      }
     }
-  };
+  }
+  return userEvents
 }
-export function $$a1(e) {
-  let t = new Set();
-  for (let i of e.config.states) if (null != i.transitions) for (let e of i.transitions) e.event === b && e.meta?.userEvents != null && e.meta.userEvents.forEach(e => t.add(e));
-  return t;
-}
-export function $$s2(e, t, i) {
-  var r;
-  var a;
-  let s = new Set("string" == typeof e ? [e] : e);
-  let o = {
-    userEvents: [...s]
-  };
-  r = b;
-  a = {
-    condition: e => s.has(e.event.type) && (i?.condition?.(e) ?? !0),
-    meta: o
-  };
+
+/**
+ * Creates a transition object for user events.
+ * @param events - A string or array of event types.
+ * @param target - The target state ID.
+ * @param options - Optional configuration for the transition.
+ * @returns A transition object.
+ */
+export function createUserEventTransition(events: string | string[], target: any, options?: any) {
+  const eventSet = new Set(typeof events === 'string' ? [events] : events)
+  const meta = {
+    userEvents: [...eventSet],
+  }
+  const event = USER_EVENT
+  const condition = (context: any) => eventSet.has(context.event.type) && (options?.condition?.(context) ?? true)
+
   return {
-    event: r,
-    target: t,
-    condition: a?.condition,
-    meta: a?.meta
-  };
+    event,
+    target,
+    condition,
+    meta,
+  }
 }
-export const Op = $$r0;
-export const gV = $$a1;
-export const nr = $$s2;
+
+// Aliases for backward compatibility (original exports: Op, gV, nr)
+export const Op = buildStateMachine
+export const gV = getUserEvents
+export const nr = createUserEventTransition

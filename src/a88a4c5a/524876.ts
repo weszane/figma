@@ -27,7 +27,7 @@ import { K as _$$K2 } from '../905/659729';
 import { H as _$$H } from '../905/674803';
 import { Point } from '../905/736624';
 import { A as _$$A } from '../905/744692';
-import { fG } from '../905/772425';
+import { getMentionsResult } from '../905/772425';
 import { JZ, xS } from '../905/901964';
 import { selectUserFlag } from '../905/940356';
 import { kG } from '../905/958668';
@@ -250,7 +250,7 @@ export function $$ed1(e) {
     }
   });
   let eH = async () => {
-    e.dispatch(We(await fG('', e.mentionables, eS === FFileType.DESIGN)));
+    e.dispatch(We(await getMentionsResult('', e.mentionables, eS === FFileType.DESIGN)));
     trackEventAnalytics('Comment Composer At Mention Clicked', {
       userId: e.user.id,
       fileKey: e.fileKey,

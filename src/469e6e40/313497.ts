@@ -29,7 +29,7 @@ import { registerModal } from "../905/102752";
 import { I as _$$I } from "../905/597430";
 import { L as _$$L } from "../905/479295";
 import { T1 } from "../figma_app/153916";
-import { jL } from "../figma_app/658324";
+import { fetchAndUpdateUpcomingInvoices } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 let n;
 let s;
@@ -160,7 +160,7 @@ function L() {
   });
 }
 async function q(e) {
-  (await Promise.allSettled([T1(e), jL({
+  (await Promise.allSettled([T1(e), fetchAndUpdateUpcomingInvoices({
     planType: FOrganizationLevelType.ORG,
     planId: e
   })])).forEach(e => {

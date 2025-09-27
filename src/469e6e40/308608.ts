@@ -41,7 +41,7 @@ import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { rn, zl } from "../figma_app/903573";
 import { N as _$$N } from "../figma_app/268271";
-import { R as _$$R2 } from "../905/298004";
+import { createOnboardingStateMachine } from "../905/298004";
 import { OnboardingModal } from "../905/425180";
 import { WZ } from "../905/893645";
 import { ONe } from "../figma_app/6204";
@@ -74,7 +74,7 @@ import { B6G, XMZ } from "../figma_app/27776";
 import { A as _$$A2 } from "../5724/663128";
 var c = d;
 let X = "seen_org_admin_request_dashboard_onboarding";
-let Q = rn("org_admin_request_dashboard_onboarding", _$$R2(ONe));
+let Q = rn("org_admin_request_dashboard_onboarding", createOnboardingStateMachine(ONe));
 function Z(e) {
   let t = userFlagExistsAtomFamily(X);
   let a = useAtomWithSubscription(t);

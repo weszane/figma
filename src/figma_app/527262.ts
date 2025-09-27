@@ -16,7 +16,7 @@ import { getRumLoggingConfig } from "../905/16237";
 import { q } from "../figma_app/712384";
 import { hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { WX, Bq, Vm } from "../figma_app/482142";
+import { startProUpgradeFlowThunk, startOrgUpgradeFlowThunk, startStudentReviewThunk } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { setupWorkspaceIdentity } from "../905/967587";
 import { FPlanNameType } from "../figma_app/191312";
@@ -96,7 +96,7 @@ export function $$D0({
         chooseProPlan: x ?? (t => {
           let n = o || z?.teamId;
           r?.();
-          n ? (G(WX({
+          n ? (G(startProUpgradeFlowThunk({
             teamId: n,
             billingPeriod: t,
             currency: M ?? V,
@@ -116,7 +116,7 @@ export function $$D0({
         }),
         chooseOrgPlan: P ?? (() => {
           r?.();
-          G(Bq({
+          G(startOrgUpgradeFlowThunk({
             currency: M ?? V,
             upsellSource: e,
             openInNewTab: l,
@@ -127,7 +127,7 @@ export function $$D0({
         chooseEduPlan: D ?? (() => {
           r?.();
           let e = o || z?.teamId;
-          e ? (G(Vm({
+          e ? (G(startStudentReviewThunk({
             teamId: e
           })), s?.()) : G(showModalHandler({
             type: q

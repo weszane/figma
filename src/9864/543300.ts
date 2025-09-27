@@ -58,7 +58,7 @@ import { DeepLinkType } from "../905/15667";
 import { yJ } from "../figma_app/24841";
 import { UpgradeAction } from "../905/370443";
 import { selectViewAction } from "../905/929976";
-import { WX, Bq, Vm } from "../figma_app/482142";
+import { startProUpgradeFlowThunk, startOrgUpgradeFlowThunk, startStudentReviewThunk } from "../figma_app/482142";
 import { UpsellModalType } from "../905/165519";
 import { UpgradeSteps, UpsellSourceType } from "../figma_app/831101";
 import { CreateUpgradeAction, TeamType } from "../figma_app/707808";
@@ -395,7 +395,7 @@ function ey() {
       previousView: r,
       planType: TeamType.TEAM,
       entryPoint: UpsellSourceType.NUX
-    })) : e(WX({
+    })) : e(startProUpgradeFlowThunk({
       teamId: t.id,
       openInNewTab: !0,
       entryPoint: UpsellSourceType.NUX
@@ -406,16 +406,16 @@ function ey() {
       view: "orgSelfServe",
       upsellSource: UpsellModalType.TEAM_WELCOME,
       entryPoint: UpsellSourceType.NUX
-    })) : e(Bq({
+    })) : e(startOrgUpgradeFlowThunk({
       openInNewTab: !0,
       upsellSource: UpsellModalType.TEAM_WELCOME,
       entryPoint: UpsellSourceType.NUX
     }));
   };
   let o = r => {
-    if (desktopAPIInstance) e(Vm({
+    if (desktopAPIInstance) e(startStudentReviewThunk({
       teamId: r.id
-    })); else {
+    }));else {
       let e = `/files/team/${r.id}/edu-review/${r.id}`;
       customHistory.redirect(e, "_blank");
     }
@@ -972,7 +972,7 @@ function eJ(e) {
     } else if (G) {
       let [e] = h;
       ee(e);
-    } else if (e.currentQuestion === pu.INVITE_COLLABORATORS) et(); else if (ev()) e.formatAndSubmitSignalCollectionResponses(); else if (e.currentQuestion === pu.CHOOSE_PLAN && (u === VN.PROFESSIONAL || u === VN.ORG)) {
+    } else if (e.currentQuestion === pu.INVITE_COLLABORATORS) et();else if (ev()) e.formatAndSubmitSignalCollectionResponses();else if (e.currentQuestion === pu.CHOOSE_PLAN && (u === VN.PROFESSIONAL || u === VN.ORG)) {
       let r = u === VN.ORG;
       trackEventAnalytics("NUX Last Step", {
         departedNuxFlow: !0,

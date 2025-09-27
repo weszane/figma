@@ -29,7 +29,7 @@ import { AvatarSize, UserAvatar } from "../905/590952";
 import { q as _$$q } from "../905/749058";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
-import { Ef } from "../905/81982";
+import { SimpleFuseSearch } from "../905/81982";
 import { l as _$$l } from "../469e6e40/774192";
 import { A as _$$A3 } from "../5724/663128";
 import { SvgComponent } from "../905/714743";
@@ -90,7 +90,7 @@ let L = registerModal(function ({
     })
   });
 }, "ExtensionAllowlistRevokeConfirmationModal");
-let U = new Ef([], {
+let U = new SimpleFuseSearch([], {
   keys: ["name"],
   threshold: 0,
   tokenize: !0,
@@ -725,7 +725,7 @@ function ed({
       o(VisualBellActions.enqueue({
         message: `Copied ${t}`
       }));
-    }).catch(() => { });
+    }).catch(() => {});
   }, [o]);
   try {
     r = JSON.parse(e.metadata);

@@ -10,7 +10,7 @@ import { useSingleEffect } from "../905/791079";
 import { useLatestRef } from "../figma_app/922077";
 import { getPaymentFlowData, clearPaymentFlowData } from "../figma_app/169182";
 import { handleSuspenseRetainRelease, setupResourceAtomHandler } from "../figma_app/566371";
-import { _H } from "../figma_app/598111";
+import { clearFigmaPcCookie } from "../figma_app/598111";
 import { isStudentValidated } from "../figma_app/141320";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
@@ -43,7 +43,7 @@ import { switchAccountAndNavigate } from "../figma_app/976345";
 import { q as _$$q } from "../figma_app/712384";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { MN, Lo, Je, I2, Vm, Bq, Nj, Ay as _$$Ay, qU } from "../figma_app/482142";
+import { setCurrencyAction, setBillingPeriodAction, setEditorStatusChangesAction, setSubmitPendingAction, startStudentReviewThunk, startOrgUpgradeFlowThunk, makeStudentTeamThunk, setPromoThunk, setCampfireSeatsAction } from "../figma_app/482142";
 import { S_, gk } from "../5885/925885";
 import { postUserFlag } from "../905/985254";
 import { hasStarterTeamLoopholeAccess, useSeparateBillingShippingExperiment, useCartSeatSelectionClarityExperiment } from "../figma_app/297957";
@@ -71,7 +71,7 @@ import { ProductTierEnum } from "../905/712921";
 import { UpgradeSteps, BillingCycle, SubscriptionType } from "../figma_app/831101";
 import { CreateUpgradeAction, TeamType, isCreateOrUpgrade } from "../figma_app/707808";
 import { e0 } from "../905/696396";
-import { V as _$$V } from "../905/223084";
+import { PlanInvoiceService } from "../905/223084";
 import { Q as _$$Q } from "../figma_app/113686";
 import { Label } from "../905/270045";
 import { Checkbox } from "../905/274480";
@@ -405,7 +405,7 @@ let eX = (e, t, a, s) => {
         s(eH(a));
         return a;
       });
-    } catch (e) { }
+    } catch (e) {}
   }, [s]);
   return {
     changeUserSeatType: useCallback((e, t) => {
@@ -463,7 +463,7 @@ function eW({
   });
 }
 let eJ = liveStoreInstance.Query({
-  fetch: async e => (await _$$V.getEligibleUpgradeData(e)).data.meta,
+  fetch: async e => (await PlanInvoiceService.getEligibleUpgradeData(e)).data.meta,
   stalenessPolicy: "never"
 });
 function eY(e) {
@@ -489,7 +489,7 @@ function eY(e) {
   let [eC, ew] = useState(n?.currency || x.currency || getUserCurrency());
   let eE = e => {
     ew(e);
-    to(MN({
+    to(setCurrencyAction({
       currency: e
     }));
   };
@@ -678,9 +678,9 @@ function eY(e) {
   }, [eD, eB, tc, R, eP]);
   let tE = useSelector(e => !!e.user && isStudentValidated(e.user));
   useEffect(() => {
-    tE && e.selectedView.isEduTeam ? to(Lo({
+    tE && e.selectedView.isEduTeam ? to(setBillingPeriodAction({
       billingPeriod: SubscriptionType.STUDENT
-    })) : e.selectedView.isEduTeam && to(Lo({
+    })) : e.selectedView.isEduTeam && to(setBillingPeriodAction({
       billingPeriod: SubscriptionType.UNSPECIFIED
     }));
   }, [to, e.selectedView.isEduTeam, tE]);
@@ -725,7 +725,7 @@ function eY(e) {
       paymentStep: i,
       billingPeriod: SubscriptionType.STUDENT,
       ignoreCurrentPlan
-    })) : (to(Je({
+    })) : (to(setEditorStatusChangesAction({
       editorStatusChanges
     })), to(selectViewAction({
       ...e.selectedView,
@@ -738,9 +738,9 @@ function eY(e) {
         }
       } : {}),
       ignoreCurrentPlan
-    }))) : R === UpgradeSteps.PAYMENT_AND_ADDRESS && (to(I2({
+    }))) : R === UpgradeSteps.PAYMENT_AND_ADDRESS && (to(setSubmitPendingAction({
       submitPending: !0
-    })), e_ && eq ? await saveWithPaymentMethod(eq) : await savePayment(), to(I2({
+    })), e_ && eq ? await saveWithPaymentMethod(eq) : await savePayment(), to(setSubmitPendingAction({
       submitPending: !1
     })));
   };
@@ -769,7 +769,7 @@ function eY(e) {
       ignoreCurrentPlan
     }));
   } : ee.length > 1 && (t = e => {
-    e && to(Lo({
+    e && to(setBillingPeriodAction({
       billingPeriod: e
     }));
     to(showModalHandler({
@@ -815,14 +815,14 @@ function eY(e) {
         }), R === UpgradeSteps.PLAN_COMPARISON && jsx(F, {
           chooseStarterPlan: t ? void 0 : tO,
           chooseEduPlan: () => {
-            eP ? to(Vm({
+            eP ? to(startStudentReviewThunk({
               teamId: eP
             })) : to(showModalHandler({
               type: _$$q
             }));
           },
           chooseProPlan: t => {
-            to(Lo({
+            to(setBillingPeriodAction({
               billingPeriod: t
             }));
             let a = isCreateOrUpgrade(e.selectedView.teamFlowType) ? e.selectedView.teamFlowType : UpgradeAction.CREATE_AND_UPGRADE;
@@ -837,7 +837,7 @@ function eY(e) {
             }));
           },
           chooseOrgPlan: () => {
-            to(Bq({
+            to(startOrgUpgradeFlowThunk({
               currency: eC,
               newTeamProps: {
                 teamFlowType: e.selectedView.teamFlowType,
@@ -912,9 +912,9 @@ function eY(e) {
                 OI(to);
                 isCreateOrUpgrade(e.selectedView.teamFlowType) && null === eP && Al(l);
               };
-              if (e.selectedView.teamId && tI) to(Nj({
+              if (e.selectedView.teamId && tI) to(makeStudentTeamThunk({
                 teamId: e.selectedView.teamId
-              })); else if (e.selectedView.teamId && x.promo) {
+              }));else if (e.selectedView.teamId && x.promo) {
                 let a = e.selectedView.teamId;
                 to(S_({
                   teamId: a,
@@ -922,8 +922,8 @@ function eY(e) {
                   promoCode: x.promo?.code || "",
                   onSuccess: () => {
                     t();
-                    _H();
-                    to(_$$Ay({
+                    clearFigmaPcCookie();
+                    to(setPromoThunk({
                       promo: null
                     }));
                     l ? e.selectedView.previousView ? selectViewAction(e.selectedView.previousView) : switchAccountAndNavigate({
@@ -941,8 +941,8 @@ function eY(e) {
                     }));
                   },
                   onError: () => {
-                    _H();
-                    to(_$$Ay({
+                    clearFigmaPcCookie();
+                    to(setPromoThunk({
                       promo: null
                     }));
                     to(selectViewAction({
@@ -970,7 +970,7 @@ function eY(e) {
                   taxTotal,
                   total
                 });
-                to(I2({
+                to(setSubmitPendingAction({
                   submitPending: !0
                 }));
                 to(gk({
@@ -1015,7 +1015,7 @@ function eY(e) {
             renewalTerm: e$,
             eligibleTeamUsers: tm.data?.eligible_team_users ?? [tu],
             initCampfireSeats: x.cartSelections,
-            onUpdateCampfireSeats: e => to(qU({
+            onUpdateCampfireSeats: e => to(setCampfireSeatsAction({
               cartSelections: e
             }))
           })), R === UpgradeSteps.PAYMENT_AND_ADDRESS && jsx(eV, {
@@ -1057,7 +1057,7 @@ function eY(e) {
                 teamId: eP ?? void 0,
                 renewalTerm: e
               });
-              to(Lo({
+              to(setBillingPeriodAction({
                 billingPeriod: getSubscriptionTypeFromBillingCycle(e)
               }));
             },

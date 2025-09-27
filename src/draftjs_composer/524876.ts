@@ -38,7 +38,7 @@ import { selectCurrentUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { K as _$$K2 } from "../905/659729";
-import { fG } from "../905/772425";
+import { getMentionsResult } from "../905/772425";
 import { UPLOAD_ERRORS, IMAGE_TYPE_VALUES } from "../905/966582";
 import { KindEnum } from "../905/129884";
 import { showModalHandler } from "../905/156213";
@@ -248,7 +248,7 @@ export function $$em1(e) {
     }
   });
   let eq = async () => {
-    e.dispatch(We(await fG("", e.mentionables, eT === FFileType.DESIGN)));
+    e.dispatch(We(await getMentionsResult("", e.mentionables, eT === FFileType.DESIGN)));
     trackEventAnalytics("Comment Composer At Mention Clicked", {
       userId: e.user.id,
       fileKey: e.fileKey,

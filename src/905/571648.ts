@@ -14,7 +14,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { bO, z5 } from "../figma_app/936646";
 import { filterStylesByType, groupStylesByPrefix } from "../figma_app/646357";
 import { isBigmaEnabledAlias3 } from "../figma_app/336853";
-import { Bg } from "../905/81982";
+import { BasicFuseSearch } from "../905/81982";
 import { b as _$$b } from "../figma_app/882253";
 import { useSubscribedLibraries, getNumStylesByType } from "../figma_app/155728";
 import { sO } from "../figma_app/21029";
@@ -43,7 +43,7 @@ function O() {
   function e(e) {
     return e.replace(/\//g, " ");
   }
-  let t = new Bg([], {
+  let t = new BasicFuseSearch([], {
     keys: ["searchName", "description"],
     threshold: .1,
     ignoreLocation: !0,

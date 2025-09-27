@@ -14,7 +14,7 @@ import { Alert } from '../905/64735';
 import { E3, Qw, v_ } from '../905/70909';
 import { A as _$$A2 } from '../905/72153';
 import { A as _$$A27 } from '../905/81613';
-import { Ef } from '../905/81982';
+import { SimpleFuseSearch } from '../905/81982';
 import { SE } from '../905/93400';
 import { useSprigWithSampling } from '../905/99656';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
@@ -83,7 +83,7 @@ import { SvgComponent } from '../905/714743';
 import { Point } from '../905/736624';
 import { is as _$$is } from '../905/744076';
 import { DraggableModalManager } from '../905/748636';
-import { MH } from '../905/772425';
+import { CommunityMentionsLibrary } from '../905/772425';
 import { A as _$$A6 } from '../905/794518';
 import { A as _$$A14 } from '../905/796878';
 import { A as _$$A24 } from '../905/826099';
@@ -972,7 +972,7 @@ function tO({
                 resource: l
               }));
             },
-            onCancel: () => { }
+            onCancel: () => {}
           },
           showModalsBeneath: !0
         })) : (c(wx({
@@ -1039,7 +1039,7 @@ function tL({
     })
   });
 }
-let tF = new Ef([], {
+let tF = new SimpleFuseSearch([], {
   keys: ['handle', 'email'],
   threshold: 0,
   tokenize: !0,
@@ -1458,7 +1458,7 @@ function t5({
     })
   });
 }
-let ir = new MH();
+let ir = new CommunityMentionsLibrary();
 function ia({
   creators: e,
   setCreators: t,
@@ -2256,7 +2256,7 @@ class iW extends Component {
           onConfirm: () => {
             this.createOrUpdatePluginVersion(i);
           },
-          onCancel: () => { }
+          onCancel: () => {}
         },
         showModalsBeneath: !0
       })) : this.createOrUpdatePluginVersion(i);
@@ -2708,7 +2708,7 @@ class iW extends Component {
       try {
         let e = await ec.getPermissions(i);
         if (e.status === 200) return e.data.meta;
-      } catch (e) { }
+      } catch (e) {}
     };
     this.getPublishFormPrimaryButtonText = () => {
       let e = this.getReviewStatus();

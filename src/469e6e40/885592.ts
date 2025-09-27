@@ -46,7 +46,7 @@ import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { DashboardSection } from '../figma_app/650409';
 import { RG } from '../figma_app/684446';
 import { BillingCycle } from '../figma_app/831101';
-import { _8, $b, _k, fA, fx, gL, gl, Jv, ly, nm, qH, TQ, Z4, z7, zz } from '../figma_app/934005';
+import { isTeamMonthlyCatchUp, getInvoiceNumber, isOrgTrueUpOrCatchUp, BillingMechanics, InvoiceReviewState, getPaymentMethod, getLatestValidPendingInvoice, isOverdue, InvoiceSubtype, getFormattedPastDueDate, InvoiceState, filterValidInvoices, getPastDueDate, isAnnualSubscription, getInvoiceDescription } from '../figma_app/934005';
 import { DefaultFilters } from '../figma_app/967319';
 import * as N from '../vendor/116389';
 import { useStore, useDispatch } from 'react-redux';
@@ -137,17 +137,17 @@ function B(e) {
 var G = (e => (e.SEATS = 'seats', e.SEAT_ADJUSTMENTS = 'seat-adjustments', e.SEAT_CHARGES = 'seat-charges', e.SEAT_CREDITS = 'seat-credits', e))(G || {});
 function z(e) {
   let t = new CurrencyFormatter(e.invoice.currency);
-  let a = _k(e.invoice);
+  let a = isOrgTrueUpOrCatchUp(e.invoice);
   let i = useMemo(() => ({
     startDate: dayjs(a ? e.invoice.issued_at : e.invoice.period_starts_at).toDate(),
     endDate: dayjs(e.invoice.period_ends_at).toDate()
   }), [e.invoice, a]);
-  let r = useCallback(() => _8(e.invoice) ? {
+  let r = useCallback(() => isTeamMonthlyCatchUp(e.invoice) ? {
     heading: getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_heading'),
     subheading: null
-  } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === BillingCycle.MONTH && e.invoice.subtype === ly.SUBSCRIPTION_RENEWED && dayjs(e.invoice.issued_at).isAfter(dayjs.utc('2018-05-01')) ? {
+  } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === BillingCycle.MONTH && e.invoice.subtype === InvoiceSubtype.SUBSCRIPTION_RENEWED && dayjs(e.invoice.issued_at).isAfter(dayjs.utc('2018-05-01')) ? {
     heading: getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_heading'),
-    subheading: e.invoice.state === qH.PENDING ? getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading.pending', i) : getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading', i)
+    subheading: e.invoice.state === InvoiceState.PENDING ? getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading.pending', i) : getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading', i)
   } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === BillingCycle.MONTH ? {
     heading: getI18nString('plan_invoices.cost_breakdown.monthly_seats_heading'),
     subheading: getI18nString('plan_invoices.cost_breakdown.monthly_seats_subheading', i)
@@ -164,7 +164,7 @@ function z(e) {
     if (a) {
       let a;
       let r;
-      e.invoice.billing_mechanics === fA.PRORATED ? (a = getI18nString('plan_invoices.cost_breakdown.seat_charges_subheading.prorated', {
+      e.invoice.billing_mechanics === BillingMechanics.PRORATED ? (a = getI18nString('plan_invoices.cost_breakdown.seat_charges_subheading.prorated', {
         endDate: i.endDate
       }), r = getI18nString('plan_invoices.cost_breakdown.seat_credits_subheading', {
         endDate: i.endDate
@@ -243,7 +243,7 @@ function z(e) {
       key: 'seat-adjustments',
       content: jsx(B, {
         getHeading: () => getFeatureFlags().billing_page_updates_jul_2025_content_updates ? getI18nString('plan_invoices.cost_breakdown.new_seat_costs_heading_new') : getI18nString('plan_invoices.cost_breakdown.new_seat_costs_heading'),
-        subheading: e.invoice.billing_mechanics === fA.PRORATED && e.invoice.plan_parent_type === FOrganizationLevelType.TEAM ? renderI18nText('plan_invoices.cost_breakdown.new_seat_costs_learn_more_subheading', {
+        subheading: e.invoice.billing_mechanics === BillingMechanics.PRORATED && e.invoice.plan_parent_type === FOrganizationLevelType.TEAM ? renderI18nText('plan_invoices.cost_breakdown.new_seat_costs_learn_more_subheading', {
           learnMore: jsx(TrackedLinkPrimitive, {
             className: 'x1quhyk7 x1ypdohk xuxw1ft x5hs570',
             href: 'https://help.figma.com/hc/articles/360041061034',
@@ -291,7 +291,7 @@ function z(e) {
     });
     let n = () => ({
       key: 'projected-subtotal',
-      label: Dc(e.invoice) === fx.LOCKED ? getI18nString('plan_invoices.locked_subtotal') : getI18nString('plan_invoices.projected_total'),
+      label: Dc(e.invoice) === InvoiceReviewState.LOCKED ? getI18nString('plan_invoices.locked_subtotal') : getI18nString('plan_invoices.projected_total'),
       value: e.invoice.subtotal
     });
     let s = () => ({
@@ -299,7 +299,7 @@ function z(e) {
       label: getI18nString('plan_invoices.total_label'),
       value: e.invoice.total
     });
-    if (!d) return e.invoice.state === qH.PENDING ? [n()] : [s()];
+    if (!d) return e.invoice.state === InvoiceState.PENDING ? [n()] : [s()];
     if (m) {
       let i = l.map(({
         key: e
@@ -307,9 +307,9 @@ function z(e) {
         ...t[e](),
         key: e
       }));
-      return e.invoice.state === qH.PENDING ? [...i, n()] : [...i, a(), s()];
+      return e.invoice.state === InvoiceState.PENDING ? [...i, n()] : [...i, a(), s()];
     }
-    return e.invoice.state === qH.PENDING ? [n()] : [{
+    return e.invoice.state === InvoiceState.PENDING ? [n()] : [{
       key: 'subtotal',
       label: getI18nString('plan_invoices.subtotal_label'),
       value: e.invoice.subtotal
@@ -367,11 +367,11 @@ let V = {
 };
 function W(e) {
   let t = useMemo(() => {
-    let t = e.invoice.state !== qH.PENDING;
+    let t = e.invoice.state !== InvoiceState.PENDING;
     return I()([{
       key: 'due-date',
       label: getI18nString('plan_invoices.due_date_column_label'),
-      value: nm(e.invoice)
+      value: getFormattedPastDueDate(e.invoice)
     }, {
       key: 'status',
       label: getI18nString('plan_invoices.status_column_label'),
@@ -383,12 +383,12 @@ function W(e) {
         href: e.invoice.hosted_invoice_url,
         trusted: !0,
         newTab: !0,
-        children: $b(e.invoice)
-      }) : $b(e.invoice)
+        children: getInvoiceNumber(e.invoice)
+      }) : getInvoiceNumber(e.invoice)
     }, t && {
       key: 'payment-method',
       label: getI18nString('plan_invoices.payment_method_label'),
-      value: gL(e.invoice) || jsxs(Fragment, {
+      value: getPaymentMethod(e.invoice) || jsxs(Fragment, {
         children: [jsx(ScreenReaderOnly, {
           children: getI18nString('plan_invoices.empty_aria_label')
         }), jsx('span', {
@@ -442,7 +442,7 @@ function el(e) {
   let l = r?.key?.type;
   let o = r?.key?.parentId;
   let d = RG();
-  let c = e.invoice.state === qH.PENDING;
+  let c = e.invoice.state === InvoiceState.PENDING;
   let m = Dc(e.invoice);
   let p = [{
     key: 'download-pdf',
@@ -501,7 +501,7 @@ function el(e) {
     })
   }, {
     key: 'org-true-up-review',
-    content: c && o && l === FOrganizationLevelType.ORG && !a && m === fx.REVIEW && jsx(lR, {
+    content: c && o && l === FOrganizationLevelType.ORG && !a && m === InvoiceReviewState.REVIEW && jsx(lR, {
       variant: 'secondary',
       onClick: () => {
         d ? t(showModalHandler({
@@ -531,7 +531,7 @@ function el(e) {
     let a = e.adjustAnnualSeatsAction;
     let s = useProAnnualImprovementsExperiment();
     let r = e.invoice.billing_interval === FBillingPeriodType.MONTH && e5(e.invoice) > 0;
-    if (!a || e.invoice.state !== qH.PENDING || !r || !s()) return null;
+    if (!a || e.invoice.state !== InvoiceState.PENDING || !r || !s()) return null;
     switch (a.id) {
       case _$$m2.ADD_ANNUAL_PLAN:
         return jsx(er, {
@@ -658,8 +658,8 @@ let ep = {
   }
 };
 function eg(e) {
-  let t = ep[e.invoice.billing_interval === FBillingPeriodType.YEAR && [ly.SUBSCRIPTION_CREATED, ly.SUBSCRIPTION_RENEWED].includes(e.invoice.subtype) ? 'calendar' : 'invoice'][e.size];
-  let a = e.size === 48 && e.invoice.state === qH.PAID ? 'success' : 'default';
+  let t = ep[e.invoice.billing_interval === FBillingPeriodType.YEAR && [InvoiceSubtype.SUBSCRIPTION_CREATED, InvoiceSubtype.SUBSCRIPTION_RENEWED].includes(e.invoice.subtype) ? 'calendar' : 'invoice'][e.size];
+  let a = e.size === 48 && e.invoice.state === InvoiceState.PAID ? 'success' : 'default';
   return jsx('div', {
     ...Ay.props(em.wrapper, em[`icon${e.size}`], a === 'success' && em.bgSuccess),
     'aria-hidden': !0,
@@ -684,7 +684,7 @@ let eb = {
   }
 };
 function ev(e) {
-  let t = e.invoice.state === qH.OPEN;
+  let t = e.invoice.state === InvoiceState.OPEN;
   return jsxs('div', {
     'className': 'x78zum5 xdt5ytf x1n5zjp5',
     'data-testid': 'invoice-flyout-header',
@@ -700,7 +700,7 @@ function ev(e) {
           children: [jsx('span', {
             ...Ay.props(eb.label),
             'aria-hidden': !0,
-            'children': zz(e.invoice)
+            'children': getInvoiceDescription(e.invoice)
           }), jsxs('span', {
             className: 'xuxw1ft xnfn54o',
             children: ['\xA0', jsx(_$$Z, {
@@ -721,7 +721,7 @@ function ev(e) {
   });
 }
 function ef(e) {
-  let t = Jv(e.invoice, e.currentDate);
+  let t = isOverdue(e.invoice, e.currentDate);
   let a = _$$R() ? {
     'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': getI18nString('billing.open_invoice_reminder.button_tooltip'),
@@ -760,7 +760,7 @@ let ej = {
     return jsxs(_$$m.Contents, {
       'data-testid': `invoice-flyout-${e.invoice.id}`,
       'children': [jsx(_$$m.HiddenTitle, {
-        children: zz(e.invoice)
+        children: getInvoiceDescription(e.invoice)
       }), jsx(ev, {
         ...e
       }), jsxs(_$$m.Body, {
@@ -829,7 +829,7 @@ let ew = [{
     localizeCurrency: t
   }) => jsx('span', {
     className: cssBuilderInstance.colorText.$,
-    children: e.state === qH.PENDING ? jsxs(Fragment, {
+    children: e.state === InvoiceState.PENDING ? jsxs(Fragment, {
       children: [jsx('span', {
         'aria-hidden': !0,
         'children': '\u2013'
@@ -910,8 +910,8 @@ function eS(e) {
     role: 'rowgroup',
     children: e.invoices.map(t => {
       let a = new CurrencyFormatter(t.currency);
-      let s = nm(t);
-      let i = zz(t);
+      let s = getFormattedPastDueDate(t);
+      let i = getInvoiceDescription(t);
       let r = getI18nString('plan_invoices.row_aria_label', {
         dueDate: s,
         description: i
@@ -949,21 +949,21 @@ export function $$eI0(e) {
   let o = useStore();
   let c = useDispatch();
   let _ = useMemo(() => function (e, t) {
-    let a = gl(e, {
+    let a = getLatestValidPendingInvoice(e, {
       allowLegacyOrgAnnual: !0,
       allowProratedOrgAnnual: t?.allowUpcomingProratedOrgAnnual
     });
-    return TQ(e).filter(e => {
-      if (e.state === qH.PENDING) {
+    return filterValidInvoices(e).filter(e => {
+      if (e.state === InvoiceState.PENDING) {
         let t = a && e.id === a.id;
         let n = e.plan_parent_type === FOrganizationLevelType.TEAM && e.billing_interval === FBillingPeriodType.MONTH;
         let s = e.plan_parent_type === FOrganizationLevelType.ORG && e.billing_interval === FBillingPeriodType.YEAR;
-        let i = s && _k(e);
-        let r = s && e.billing_mechanics === fA.LEGACY && z7(e);
+        let i = s && isOrgTrueUpOrCatchUp(e);
+        let r = s && e.billing_mechanics === BillingMechanics.LEGACY && isAnnualSubscription(e);
         return t || n || i || r;
       }
       return !0;
-    }).sort((e, t) => Z4(t).getTime() - Z4(e).getTime());
+    }).sort((e, t) => getPastDueDate(t).getTime() - getPastDueDate(e).getTime());
   }(e.invoices, {
     allowUpcomingProratedOrgAnnual: !t()
   }), [e.invoices, t]);

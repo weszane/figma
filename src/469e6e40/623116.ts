@@ -43,7 +43,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { zl } from "../figma_app/641749";
 import { rn } from "../figma_app/903573";
 import { N as _$$N } from "../figma_app/268271";
-import { R as _$$R } from "../905/298004";
+import { createOnboardingStateMachine } from "../905/298004";
 import { OnboardingModal } from "../905/425180";
 import { Ql8, YHe } from "../figma_app/6204";
 import { throwTypeError } from "../figma_app/465776";
@@ -115,7 +115,7 @@ import { LoadingOverlay } from "../figma_app/858013";
 import { TeamAvatar, AvatarSize } from "../905/590952";
 import { HAvatarType } from "../905/566881";
 import { F as _$$F2 } from "../7021/270993";
-import { Ef } from "../905/81982";
+import { SimpleFuseSearch } from "../905/81982";
 import { d as _$$d } from "../905/44199";
 import { Rs as _$$Rs } from "../figma_app/761870";
 import { P as _$$P } from "../905/392438";
@@ -124,7 +124,7 @@ import { A as _$$A4 } from "../svg/619883";
 import { R as _$$R2 } from "../905/192963";
 let X = "seen_org_admin_teams_onboarding";
 let Q = userFlagExistsAtomFamily(X);
-let Z = rn("org_admin_teams_onboarding", _$$R(Ql8));
+let Z = rn("org_admin_teams_onboarding", createOnboardingStateMachine(Ql8));
 function ee(e) {
   let t = useAtomWithSubscription(Q);
   let {
@@ -1210,7 +1210,7 @@ let tN = registerModal(function (e) {
             },
             validateToken: noop,
             getSearchResults: e => {
-              let t = new Ef([], {
+              let t = new SimpleFuseSearch([], {
                 keys: ["name"],
                 threshold: 0,
                 tokenize: !0,

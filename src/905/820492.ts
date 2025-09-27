@@ -50,7 +50,7 @@ import { bH, cp, HF, zv, yS, cU, vK, Rj, al, a6, ow } from "../figma_app/198840"
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { liveStoreInstance } from "../905/713695";
 import { getExplicitRoleForUserAndFile, getPermissionsState } from "../figma_app/642025";
-import { Ef } from "../905/81982";
+import { SimpleFuseSearch } from "../905/81982";
 import { selectedViewToPath } from "../figma_app/193867";
 import { FileInputType, ResourceTypeNoComment, HubTypeEnum } from "../figma_app/45218";
 import { CanvasSourceEnum } from "../905/71785";
@@ -616,7 +616,7 @@ class ts extends Component {
       let {
         metadata
       } = this.props.publishingState;
-      let i = new Ef([], {
+      let i = new SimpleFuseSearch([], {
         keys: ["profile_handle", "name"],
         threshold: 0,
         tokenize: !0,

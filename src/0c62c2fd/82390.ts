@@ -529,7 +529,7 @@ import { assert, returnSecond, throwTypeError } from '../figma_app/465776';
 import { sortOptions, ViewTypeEnum } from '../figma_app/471068';
 import { A as _$$A2, x as _$$x } from '../figma_app/475340';
 import { KQ as _$$KQ, Rw } from '../figma_app/475472';
-import { WX as _$$WX, Bq, Vm } from '../figma_app/482142';
+import { startProUpgradeFlowThunk, startOrgUpgradeFlowThunk, startStudentReviewThunk } from '../figma_app/482142';
 import { _ as _$$_7, S as _$$S9 } from '../figma_app/490799';
 import { clamp, range } from '../figma_app/492908';
 import { lT as _$$lT } from '../figma_app/494261';
@@ -8669,7 +8669,7 @@ function dp({
           className: 'x78zum5 xdt5ytf x6s0dn4 xou54vl xkh2ocl xh8yej3 x2lah0s',
           children: [jsx($z, {
             onClick: () => {
-              t(_$$WX({
+              t(startProUpgradeFlowThunk({
                 teamId: e,
                 entryPoint: UpsellSourceType.RESOURCE_HUB,
                 openInNewTab: !1
@@ -13311,12 +13311,12 @@ function m9(e, t, r, i, n, l) {
     let A = k && T.is_view_only;
     let O = T && isOrgFolder(T);
     let F = !O && !l && T && hasFolderRestrictions(T, s);
-    let P = () => i?.(_$$WX({
+    let P = () => i?.(startProUpgradeFlowThunk({
       teamId: l.id,
       selectedView: s.selectedView
     }));
     let L = () => customHistory.redirect('/education/apply', BrowserInfo.isIpadNative ? void 0 : '_blank');
-    let D = () => i?.(_$$WX({
+    let D = () => i?.(startProUpgradeFlowThunk({
       teamId: l.id,
       openInNewTab: !1,
       selectedView: {
@@ -21470,7 +21470,7 @@ function xT({
         view: 'team',
         teamId: n.id
       }
-    })) : e ? d(Vm({
+    })) : e ? d(startStudentReviewThunk({
       teamId: n.id,
       showBreadcrumbs: !0
     })) : d(selectViewAction({
@@ -21967,7 +21967,7 @@ function xq(e) {
   let d = _$$sx3();
   let c = (t, a) => {
     let s = e.selectedView;
-    l(_$$WX({
+    l(startProUpgradeFlowThunk({
       teamId: e.selectedView.teamId,
       selectedView: s,
       newTeam: !0,
@@ -21997,7 +21997,7 @@ function xq(e) {
     }
   };
   let m = () => {
-    l(Bq({
+    l(startOrgUpgradeFlowThunk({
       currency: r,
       upsellSource: o
     }));

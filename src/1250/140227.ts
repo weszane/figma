@@ -6,7 +6,7 @@ import { linkWithTracking, ButtonWhiteTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
-import { WX } from "../figma_app/482142";
+import { startProUpgradeFlowThunk } from "../figma_app/482142";
 import { useStarterGlobalFileLimitsExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
@@ -89,7 +89,7 @@ export let $$w0 = registerModal(function (e) {
             onClick: e => {
               e.preventDefault();
               n(popModalStack());
-              n(WX({
+              n(startProUpgradeFlowThunk({
                 teamId,
                 selectedView: b
               }));

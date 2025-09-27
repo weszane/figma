@@ -1,6 +1,6 @@
 import { atomStoreManager } from "../figma_app/27355";
 import { il, dN } from "../vendor/291472";
-import { oQ } from "../905/772425";
+import { getEmojisResult } from "../905/772425";
 import { ph, KG, kh } from "../905/50769";
 export let $$n2;
 export function $$l1(e) {
@@ -14,7 +14,7 @@ class d {
     return 0 === r.length ? "" : $$l1(r[0]);
   }
   setEmojiTypeaheadQuery(e) {
-    let t = e && e.length > 1 ? oQ(e) : null;
+    let t = e && e.length > 1 ? getEmojisResult(e) : null;
     atomStoreManager.set(ph, t);
   }
   clearEmojiTypeaheadQuery() {

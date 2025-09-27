@@ -6,7 +6,7 @@ import { uo } from "../figma_app/990058";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
 import { useGetLicenseTypesForSeatType, SeatDescriptionVisibility } from "../figma_app/217457";
-import { jL } from "../figma_app/658324";
+import { fetchAndUpdateUpcomingInvoices } from "../figma_app/658324";
 import { FPlanAccessType } from "../figma_app/191312";
 import { FOrganizationLevelType } from "../figma_app/421473";
 import { getOrgLevelData } from "../figma_app/428858";
@@ -81,7 +81,7 @@ export function $$m0(e) {
       },
       successCallback: () => {
         onSuccess?.();
-        jL({
+        fetchAndUpdateUpcomingInvoices({
           planType: FOrganizationLevelType.ORG,
           planId: e.planId
         });

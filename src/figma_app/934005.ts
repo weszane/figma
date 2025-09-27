@@ -1,44 +1,95 @@
-import { ServiceCategories } from "../905/165054";
-import { z } from "../905/239603";
-import a from "../vendor/241899";
-import { dayjs } from "../905/920142";
-import { reportError } from "../905/11";
-import { toTitleCase } from "../figma_app/930338";
-import { getI18nString } from "../905/303541";
-import { FOrganizationLevelType, FLicenseType } from "../figma_app/191312";
-import { CurrencySchema } from "../905/962956";
-import { BillingCycle } from "../figma_app/831101";
-import { createProductAccessSchema } from "../905/513035";
-var s = a;
-var m = (e => (e.ACH_DEBIT = "ach_debit", e.CARD = "card", e.SEPA_DEBIT = "sepa_debit", e.UNKNOWN = "unknown", e))(m || {});
-var g = (e => (e.AMEX = "amex", e.DINERS = "diners", e.DISCOVER = "discover", e.EFTPOS_AU = "eftpos_au", e.JCB = "jcb", e.MASTERCARD = "mastercard", e.UNIONPAY = "unionpay", e.VISA = "visa", e.UNKNOWN = "unknown", e))(g || {});
-let f = z.object({
-  type: z.literal("ach_debit"),
-  last4: z.string().nullable()
-});
-let E = z.object({
-  type: z.literal("card"),
-  brand: z.nativeEnum(g).nullable(),
-  last4: z.string().nullable()
-});
-let y = z.object({
-  type: z.literal("sepa_debit"),
-  last4: z.string().nullable()
-});
-let b = z.object({
-  type: z.literal("unknown"),
-  stripe_type: z.string()
-});
-let T = z.union([f, E, y, b]);
-var $$I2 = (e => (e.PENDING = "pending", e.OPEN = "open", e.PAID = "paid", e.UNCOLLECTIBLE = "uncollectible", e.VOID = "void", e))($$I2 || {});
-var $$S3 = (e => (e.MANUAL = "manual", e.SUBSCRIPTION_CREATED = "subscription_created", e.SUBSCRIPTION_RENEWED = "subscription_renewed", e.CATCH_UP = "catch_up", e.TRUE_UP = "true_up", e))($$S3 || {});
-var v = (e => (e.OPEN = "open", e.PAID = "paid", e.CANCELED = "canceled", e))(v || {});
-let A = z.object({
-  status: z.nativeEnum(v),
-  payment_method: T.nullable()
-});
-export var $$x0 = (e => (e.LEGACY = "legacy", e.PRORATED = "prorated", e))($$x0 || {});
-let N = createProductAccessSchema(z.object({
+import { z } from 'zod'
+import { reportError } from '../905/11'
+import { ServiceCategories } from '../905/165054'
+import { getI18nString } from '../905/303541'
+import { createProductAccessSchema } from '../905/513035'
+import { dayjs } from '../905/920142'
+import { CurrencySchema } from '../905/962956'
+import { FLicenseType, FOrganizationLevelType } from '../figma_app/191312'
+import { BillingCycle } from '../figma_app/831101'
+import { toTitleCase } from '../figma_app/930338'
+
+
+// Original: g
+export enum CardBrand {
+  AMEX = 'amex',
+  DINERS = 'diners',
+  DISCOVER = 'discover',
+  EFTPOS_AU = 'eftpos_au',
+  JCB = 'jcb',
+  MASTERCARD = 'mastercard',
+  UNIONPAY = 'unionpay',
+  VISA = 'visa',
+  UNKNOWN = 'unknown',
+}
+
+// Original: f
+export const achDebitSchema = z.object({
+  type: z.literal('ach_debit'),
+  last4: z.string().nullable(),
+})
+
+// Original: E
+export const cardSchema = z.object({
+  type: z.literal('card'),
+  brand: z.nativeEnum(CardBrand).nullable(),
+  last4: z.string().nullable(),
+})
+
+// Original: y
+export const sepaDebitSchema = z.object({
+  type: z.literal('sepa_debit'),
+  last4: z.string().nullable(),
+})
+
+// Original: b
+export const unknownPaymentSchema = z.object({
+  type: z.literal('unknown'),
+  stripe_type: z.string(),
+})
+
+// Original: T
+export const paymentMethodSchema = z.union([achDebitSchema, cardSchema, sepaDebitSchema, unknownPaymentSchema])
+
+// Original: $$I2
+export enum InvoiceState {
+  PENDING = 'pending',
+  OPEN = 'open',
+  PAID = 'paid',
+  UNCOLLECTIBLE = 'uncollectible',
+  VOID = 'void',
+}
+
+// Original: $$S3
+export enum InvoiceSubtype {
+  MANUAL = 'manual',
+  SUBSCRIPTION_CREATED = 'subscription_created',
+  SUBSCRIPTION_RENEWED = 'subscription_renewed',
+  CATCH_UP = 'catch_up',
+  TRUE_UP = 'true_up',
+}
+
+// Original: v
+export enum PaymentStatus {
+  OPEN = 'open',
+  PAID = 'paid',
+  CANCELED = 'canceled',
+}
+
+// Original: A
+export const paymentSchema = z.object({
+  status: z.nativeEnum(PaymentStatus),
+  payment_method: paymentMethodSchema.nullable(),
+})
+
+// Original: $$x0
+export enum BillingMechanics {
+  LEGACY = 'legacy',
+  PRORATED = 'prorated',
+}
+
+// Original: N
+export const seatsBreakdownSchema = createProductAccessSchema(z.object({
   net_quantity: z.number(),
   amount: z.number(),
   seats_quantity: z.number(),
@@ -48,9 +99,11 @@ let N = createProductAccessSchema(z.object({
   charges_quantity: z.number(),
   charges_amount: z.number(),
   credits_quantity: z.number(),
-  credits_amount: z.number()
-}));
-let $$C1 = z.object({
+  credits_amount: z.number(),
+}))
+
+// Original: $$C1
+export const invoiceSchema = z.object({
   id: z.string(),
   issued_at: z.string(),
   paid_at: z.string().nullable(),
@@ -60,229 +113,402 @@ let $$C1 = z.object({
   plan_parent_type: z.nativeEnum(FOrganizationLevelType),
   billing_interval: z.nativeEnum(BillingCycle),
   total: z.number(),
-  state: z.nativeEnum($$I2),
-  subtype: z.nativeEnum($$S3),
+  state: z.nativeEnum(InvoiceState),
+  subtype: z.nativeEnum(InvoiceSubtype),
   currency: CurrencySchema,
   hosted_invoice_url: z.string().nullable(),
   invoice_pdf_url: z.string().nullable(),
   number: z.string().nullable(),
   total_tax_amount: z.number(),
   subtotal: z.number(),
-  payments: A.array(),
-  billing_mechanics: z.nativeEnum($$x0),
+  payments: paymentSchema.array(),
+  billing_mechanics: z.nativeEnum(BillingMechanics),
   billable_products_kind: z.nativeEnum(FLicenseType),
   org_invoice_details: z.object({
     is_locked: z.boolean().nullable(),
     is_skipped_trueup: z.boolean().nullable(),
     multiyear_contract_id: z.string().nullish(),
-    billing_period_is_stub: z.boolean().nullish()
+    billing_period_is_stub: z.boolean().nullish(),
   }).nullish(),
   is_empty: z.boolean(),
   invalid_amounts_or_quantities: z.boolean().optional(),
-  seats_breakdown: N
-});
-var w = (e => (e.PENDING = "pending", e.OPEN = "open", e.PAID = "paid", e.UNCOLLECTIBLE = "uncollectible", e.VOID = "void", e.OVERDUE = "overdue", e))(w || {});
-let O = ["manual"];
-let R = ["uncollectible", "void"];
-let L = [...R, "pending"];
-export var $$P4 = (e => (e.REVIEW = "review", e.LOCKED = "locked", e))($$P4 || {});
-export function $$D21(e, t) {
-  return "open" === e.state && dayjs(t).isAfter($$F13(e));
+  seats_breakdown: seatsBreakdownSchema,
+})
+
+
+// Original: O
+export const manualSubtypes = ['manual']
+
+// Original: R
+export const excludedStates = ['uncollectible', 'void']
+
+// Original: L
+export const pendingExcludedStates = [...excludedStates, 'pending']
+
+// Original: $$P4
+export enum InvoiceReviewState {
+  REVIEW = 'review',
+  LOCKED = 'locked',
 }
-export function $$k10(e) {
-  return dayjs(e.issued_at).toDate();
+
+/**
+ * Checks if an invoice is overdue based on the current date.
+ * @param invoice - The invoice object.
+ * @param currentDate - The current date string.
+ * @returns True if the invoice is open and past due.
+ */
+export function isOverdue(invoice: z.infer<typeof invoiceSchema>, currentDate: string): boolean {
+  return invoice.state === 'open' && dayjs(currentDate).isAfter(getPastDueDate(invoice))
 }
-export function $$M14(e) {
-  return e.paid_at ? dayjs(e.paid_at).toDate() : null;
+
+/**
+ * Gets the issued date of an invoice as a Date object.
+ * @param invoice - The invoice object.
+ * @returns The issued date.
+ */
+export function getIssuedDate(invoice: z.infer<typeof invoiceSchema>): Date {
+  return dayjs(invoice.issued_at).toDate()
 }
-export function $$F13(e) {
-  return dayjs(e.past_due_at).toDate();
+
+/**
+ * Gets the paid date of an invoice as a Date object, or null if not paid.
+ * @param invoice - The invoice object.
+ * @returns The paid date or null.
+ */
+export function getPaidDate(invoice: z.infer<typeof invoiceSchema>): Date | null {
+  return invoice.paid_at ? dayjs(invoice.paid_at).toDate() : null
 }
-export function $$j8(e) {
-  return getI18nString("plan_invoices.date_long", {
-    date: $$F13(e)
-  });
+
+/**
+ * Gets the past due date of an invoice as a Date object.
+ * @param invoice - The invoice object.
+ * @returns The past due date.
+ */
+export function getPastDueDate(invoice: z.infer<typeof invoiceSchema>): Date {
+  return dayjs(invoice.past_due_at).toDate()
 }
-export function $$U7(e) {
-  let t = () => toTitleCase(e.subtype);
-  switch (e.plan_parent_type) {
+
+/**
+ * Gets the formatted past due date string for an invoice.
+ * @param invoice - The invoice object.
+ * @returns The formatted date string.
+ */
+export function getFormattedPastDueDate(invoice: z.infer<typeof invoiceSchema>): string {
+  return getI18nString('plan_invoices.date_long', {
+    date: getPastDueDate(invoice),
+  })
+}
+
+/**
+ * Gets the description for an invoice based on its type and subtype.
+ * @param invoice - The invoice object.
+ * @returns The description string.
+ */
+export function getInvoiceDescription(invoice: z.infer<typeof invoiceSchema>): string {
+  const defaultDescription = () => toTitleCase(invoice.subtype)
+  switch (invoice.plan_parent_type) {
     case FOrganizationLevelType.TEAM:
-      switch (e.billing_interval) {
+      switch (invoice.billing_interval) {
         case BillingCycle.YEAR:
-          return getI18nString("plan_invoices.description.plan_subscription");
+          return getI18nString('plan_invoices.description.plan_subscription')
         case BillingCycle.MONTH:
-          return getI18nString("plan_invoices.description.monthly_invoice");
+          return getI18nString('plan_invoices.description.monthly_invoice')
         default:
-          e.billing_interval;
-          return t();
+          return defaultDescription()
       }
     case FOrganizationLevelType.ORG:
-      if (e.billing_interval === BillingCycle.YEAR) switch (e.subtype) {
-        case "subscription_renewed":
-        case "subscription_created":
-          return getI18nString("plan_invoices.description.plan_subscription");
-        case "true_up":
-          return getI18nString("org_admin_settings.cost_breakdown.quarterly_true_up");
-        case "catch_up":
-          return getI18nString("plan_invoices.description.quarterly_invoice");
-        default:
-          reportError(ServiceCategories.BILLING_EXPERIENCE, Error("unexpected subtype for org year invoice"), {
-            extra: {
-              subtype: e.subtype
-            }
-          });
-          return t();
-      }
-      reportError(ServiceCategories.BILLING_EXPERIENCE, Error("unexpected billing interval for org invoice"), {
-        extra: {
-          billing_interval: e.billing_interval
+      if (invoice.billing_interval === BillingCycle.YEAR) {
+        switch (invoice.subtype) {
+          case 'subscription_renewed':
+          case 'subscription_created':
+            return getI18nString('plan_invoices.description.plan_subscription')
+          case 'true_up':
+            return getI18nString('org_admin_settings.cost_breakdown.quarterly_true_up')
+          case 'catch_up':
+            return getI18nString('plan_invoices.description.quarterly_invoice')
+          default:
+            reportError(ServiceCategories.BILLING_EXPERIENCE, new Error('unexpected subtype for org year invoice'), {
+              extra: { subtype: invoice.subtype },
+            })
+            return defaultDescription()
         }
-      });
-      return t();
+      }
+      reportError(ServiceCategories.BILLING_EXPERIENCE, new Error('unexpected billing interval for org invoice'), {
+        extra: { billing_interval: invoice.billing_interval },
+      })
+      return defaultDescription()
     default:
-      e.plan_parent_type;
-      return t();
+      return defaultDescription()
   }
 }
-export function $$B6(e) {
-  return e.number || getI18nString("plan_invoices.empty_details");
+
+/**
+ * Gets the invoice number or a default string if none.
+ * @param invoice - The invoice object.
+ * @returns The invoice number string.
+ */
+export function getInvoiceNumber(invoice: z.infer<typeof invoiceSchema>): string {
+  return invoice.number || getI18nString('plan_invoices.empty_details')
 }
-export function $$G9(e) {
-  let t = {};
-  e.payments.forEach(e => {
-    let r;
-    if ("paid" === e.status && e.payment_method) {
+
+/**
+ * Gets the payment method description for an invoice.
+ * @param invoice - The invoice object.
+ * @returns The payment method string or null.
+ */
+export function getPaymentMethod(invoice: z.infer<typeof invoiceSchema>): string | null {
+  const uniquePayments = new Map<string, any>()
+  invoice.payments.forEach((payment) => {
+    if (payment.status === 'paid' && payment.payment_method) {
       try {
-        r = JSON.stringify(s()(e.payment_method, "type", "bank", "last4", "stripe_type", "brand"));
+        const key = JSON.stringify({
+          type: payment.payment_method.type,
+          last4: payment.payment_method.last4,
+          stripe_type: payment.payment_method.stripe_type,
+          brand: payment.payment_method.brand,
+        })
+        if (key) uniquePayments.set(key, payment.payment_method)
       } catch {
-        reportError(ServiceCategories.BILLING_EXPERIENCE, Error("failed to stringify payment method"));
-        r = "";
+        reportError(ServiceCategories.BILLING_EXPERIENCE, new Error('failed to stringify payment method'))
       }
-      r && (t[r] = e.payment_method);
     }
-  });
-  let r = Object.values(t);
-  if (r.length > 1) return getI18nString("plan_invoices.payment_method.multiple");
-  let i = r[0];
-  return i ? function (e, t = {}) {
-    switch (e.type) {
-      case "card":
-        {
-          let {
-            last4,
-            brand
-          } = e;
-          if (last4 && brand) return getI18nString(`plan_invoices.payment_method.card.${brand}`) + ` ${last4}`;
-          if (last4 && !brand) {
-            if (t.inline) return getI18nString("plan_invoices.payment_method.card.unknown.inline", {
-              last4
-            });
-            return getI18nString("plan_invoices.payment_method.card.unknown", {
-              last4
-            });
-          }
-          if (!last4 && brand) return getI18nString(`plan_invoices.payment_method.card.${brand}`);
-          if (t.inline) return getI18nString("plan_invoices.payment_method.card.unknown.no_last_4.inline");
-          return getI18nString("plan_invoices.payment_method.card.unknown.no_last_4");
-        }
-      case "ach_debit":
-      case "sepa_debit":
-        {
-          let {
-            last4
-          } = e;
-          if (last4) return getI18nString(`plan_invoices.payment_method.${e.type}.unknown`) + ` ${last4}`;
-          return getI18nString(`plan_invoices.payment_method.${e.type}.unknown`);
-        }
-      case "unknown":
-        return toTitleCase(e.stripe_type);
-      default:
-        reportError(ServiceCategories.BILLING_EXPERIENCE, Error("unknown payment method"), {
-          extra: {
-            type: e?.type
-          }
-        });
-        return getI18nString("plan_invoices.payment_method.unknown");
+  })
+  const methods = Array.from(uniquePayments.values())
+  if (methods.length > 1) return getI18nString('plan_invoices.payment_method.multiple')
+  const method = methods[0]
+  if (!method) return null
+  return formatPaymentMethod(method)
+}
+
+/**
+ * Formats a payment method object into a string.
+ * @param method - The payment method object.
+ * @param options - Optional formatting options.
+ * @returns The formatted payment method string.
+ */
+function formatPaymentMethod(method: z.infer<typeof paymentMethodSchema>, options: { inline?: boolean } = {}): string {
+  switch (method.type) {
+    case 'card': {
+      const { last4, brand } = method
+      if (last4 && brand) return `${getI18nString(`plan_invoices.payment_method.card.${brand}`)} ${last4}`
+      if (last4 && !brand) {
+        return options.inline
+          ? getI18nString('plan_invoices.payment_method.card.unknown.inline', { last4 })
+          : getI18nString('plan_invoices.payment_method.card.unknown', { last4 })
+      }
+      if (!last4 && brand) return getI18nString(`plan_invoices.payment_method.card.${brand}`)
+      return options.inline
+        ? getI18nString('plan_invoices.payment_method.card.unknown.no_last_4.inline')
+        : getI18nString('plan_invoices.payment_method.card.unknown.no_last_4')
     }
-  }(i) : null;
+    case 'ach_debit':
+    case 'sepa_debit': {
+      const { last4 } = method
+      return last4
+        ? `${getI18nString(`plan_invoices.payment_method.${method.type}.unknown`)} ${last4}`
+        : getI18nString(`plan_invoices.payment_method.${method.type}.unknown`)
+    }
+    case 'unknown':
+      return toTitleCase(method.stripe_type)
+    default:
+      reportError(ServiceCategories.BILLING_EXPERIENCE, new Error('unknown payment method'), {
+        extra: { type: method?.type },
+      })
+      return getI18nString('plan_invoices.payment_method.unknown')
+  }
 }
-let V = new Set(["subscription_created", "subscription_renewed"]);
-export function $$H18(e) {
-  return e.plan_parent_type === FOrganizationLevelType.ORG && ["catch_up", "true_up"].includes(e.subtype);
+
+// Original: V
+const subscriptionSubtypes = new Set(['subscription_created', 'subscription_renewed'])
+
+/**
+ * Checks if an invoice is an org true-up or catch-up.
+ * @param invoice - The invoice object.
+ * @returns True if it's an org true-up or catch-up.
+ */
+export function isOrgTrueUpOrCatchUp(invoice: z.infer<typeof invoiceSchema>): boolean {
+  return invoice.plan_parent_type === FOrganizationLevelType.ORG && ['catch_up', 'true_up'].includes(invoice.subtype)
 }
-export function $$z22(e) {
-  return e.plan_parent_type === FOrganizationLevelType.TEAM && e.billing_interval === BillingCycle.MONTH && "catch_up" === e.subtype;
+
+/**
+ * Checks if an invoice is a team monthly catch-up.
+ * @param invoice - The invoice object.
+ * @returns True if it's a team monthly catch-up.
+ */
+export function isTeamMonthlyCatchUp(invoice: z.infer<typeof invoiceSchema>): boolean {
+  return invoice.plan_parent_type === FOrganizationLevelType.TEAM && invoice.billing_interval === BillingCycle.MONTH && invoice.subtype === 'catch_up'
 }
-export function $$W20(e) {
-  return e.billable_products_kind === FLicenseType.BUNDLE;
+
+/**
+ * Checks if an invoice is for a bundle license.
+ * @param invoice - The invoice object.
+ * @returns True if it's for a bundle.
+ */
+export function isBundleInvoice(invoice: z.infer<typeof invoiceSchema>): boolean {
+  return invoice.billable_products_kind === FLicenseType.BUNDLE
 }
-function K(e, t, r) {
-  let n = $$k10(e);
-  let i = $$k10(t);
-  let a = (dayjs(n).isAfter(i) ? -1 : 0) + (dayjs(i).isAfter(n) ? 1 : 0);
-  return r?.reverse ? -a : a;
+
+/**
+ * Compares two invoices by issued date.
+ * @param a - First invoice.
+ * @param b - Second invoice.
+ * @param options - Sort options.
+ * @returns Comparison result.
+ */
+function compareByIssuedDate(a: z.infer<typeof invoiceSchema>, b: z.infer<typeof invoiceSchema>, options?: { reverse?: boolean }): number {
+  const dateA = getIssuedDate(a)
+  const dateB = getIssuedDate(b)
+  const diff = dayjs(dateA).isAfter(dateB) ? -1 : dayjs(dateB).isAfter(dateA) ? 1 : 0
+  return options?.reverse ? -diff : diff
 }
-function Y(e, t) {
-  let r = e.billing_interval === BillingCycle.YEAR ? 1 : 0;
-  let n = (t.billing_interval === BillingCycle.YEAR ? 1 : 0) - r;
-  if (0 !== n) return n;
-  let i = $$H18(e) ? 0 : 1;
-  return ($$H18(t) ? 0 : 1) - i;
+
+/**
+ * Compares two invoices by billing type.
+ * @param a - First invoice.
+ * @param b - Second invoice.
+ * @returns Comparison result.
+ */
+function compareByBillingType(a: z.infer<typeof invoiceSchema>, b: z.infer<typeof invoiceSchema>): number {
+  const yearA = a.billing_interval === BillingCycle.YEAR ? 1 : 0
+  const yearB = b.billing_interval === BillingCycle.YEAR ? 1 : 0
+  const yearDiff = yearB - yearA
+  if (yearDiff !== 0) return yearDiff
+  const trueUpA = isOrgTrueUpOrCatchUp(a) ? 0 : 1
+  const trueUpB = isOrgTrueUpOrCatchUp(b) ? 0 : 1
+  return trueUpB - trueUpA
 }
-export function $$$5(e) {
-  return e.filter(X);
+
+/**
+ * Filters invoices to include only valid ones.
+ * @param invoices - Array of invoices.
+ * @returns Filtered array.
+ */
+export function filterValidInvoices(invoices: z.infer<typeof invoiceSchema>[]): z.infer<typeof invoiceSchema>[] {
+  return invoices.filter(isValidInvoice)
 }
-function X(e) {
-  return !(R.includes(e.state) || O.includes(e.subtype));
+
+/**
+ * Checks if an invoice is valid (not excluded).
+ * @param invoice - The invoice object.
+ * @returns True if valid.
+ */
+function isValidInvoice(invoice: z.infer<typeof invoiceSchema>): boolean {
+  return !(excludedStates.includes(invoice.state) || manualSubtypes.includes(invoice.subtype))
 }
-function q(e) {
-  return !(L.includes(e.state) || O.includes(e.subtype));
+
+/**
+ * Checks if an invoice is payable.
+ * @param invoice - The invoice object.
+ * @returns True if payable.
+ */
+function isPayableInvoice(invoice: z.infer<typeof invoiceSchema>): boolean {
+  return !(pendingExcludedStates.includes(invoice.state) || manualSubtypes.includes(invoice.subtype))
 }
-function J(e) {
-  let t = e[0];
-  return t ? e.filter(e => 1 >= Math.abs(dayjs($$k10(t)).diff($$k10(e), "days"))) : [];
+
+/**
+ * Groups invoices issued within 1 day of each other.
+ * @param invoices - Array of invoices.
+ * @returns Grouped array.
+ */
+function groupNearbyInvoices(invoices: z.infer<typeof invoiceSchema>[]): z.infer<typeof invoiceSchema>[] {
+  if (!invoices.length) return []
+  const reference = invoices[0]
+  return invoices.filter(inv => Math.abs(dayjs(getIssuedDate(reference)).diff(getIssuedDate(inv), 'days')) <= 1)
 }
-export function $$Z16(e, t) {
-  return [...J([...e.filter(e => X(e)).filter(e => !("pending" !== e.state || $$et19(e) && !(e.plan_parent_type === FOrganizationLevelType.ORG && (t?.allowLegacyOrgAnnual && "legacy" === e.billing_mechanics || t?.allowProratedOrgAnnual && "prorated" === e.billing_mechanics))))].sort((e, t) => K(t, e)))].sort((e, t) => Y(t, e))[0] ?? null;
+
+/**
+ * Gets the latest valid pending invoice, with options for legacy/prorated org annual.
+ * @param invoices - Array of invoices.
+ * @param options - Filter options.
+ * @returns The invoice or null.
+ */
+export function getLatestValidPendingInvoice(invoices: z.infer<typeof invoiceSchema>[], options?: { allowLegacyOrgAnnual?: boolean; allowProratedOrgAnnual?: boolean }): z.infer<typeof invoiceSchema> | null {
+  const valid = invoices.filter(isValidInvoice).filter(inv => !(inv.state !== 'pending' || (isAnnualSubscription(inv) && !(inv.plan_parent_type === FOrganizationLevelType.ORG && ((options?.allowLegacyOrgAnnual && inv.billing_mechanics === 'legacy') || (options?.allowProratedOrgAnnual && inv.billing_mechanics === 'prorated'))))))
+  const sortedByDate = groupNearbyInvoices(valid.sort((a, b) => compareByIssuedDate(b, a)))
+  const sortedByType = sortedByDate.sort((a, b) => compareByBillingType(b, a))
+  return sortedByType[0] ?? null
 }
-export function $$Q12(e) {
-  return [...J([...e.filter(q)].sort(K))].sort(Y)[0] ?? null;
+
+/**
+ * Gets the latest payable invoice.
+ * @param invoices - Array of invoices.
+ * @returns The invoice or null.
+ */
+export function getLatestPayableInvoice(invoices: z.infer<typeof invoiceSchema>[]): z.infer<typeof invoiceSchema> | null {
+  const payable = invoices.filter(isPayableInvoice)
+  const sortedByDate = groupNearbyInvoices(payable.sort(compareByIssuedDate))
+  const sortedByType = sortedByDate.sort(compareByBillingType)
+  return sortedByType[0] ?? null
 }
-export function $$ee17(e) {
-  return !e.billing_mechanics || "legacy" === e.billing_mechanics || "true_up" === e.subtype;
+
+/**
+ * Checks if an invoice uses legacy billing mechanics.
+ * @param invoice - The invoice object.
+ * @returns True if legacy.
+ */
+export function isLegacyBilling(invoice: z.infer<typeof invoiceSchema>): boolean {
+  return !invoice.billing_mechanics || invoice.billing_mechanics === 'legacy' || invoice.subtype === 'true_up'
 }
-export function $$et19(e) {
-  return e.billing_interval === BillingCycle.YEAR && V.has(e.subtype);
+
+/**
+ * Checks if an invoice is an annual subscription.
+ * @param invoice - The invoice object.
+ * @returns True if annual subscription.
+ */
+export function isAnnualSubscription(invoice: z.infer<typeof invoiceSchema>): boolean {
+  return invoice.billing_interval === BillingCycle.YEAR && subscriptionSubtypes.has(invoice.subtype)
 }
-export function $$er11(e) {
-  let t = null;
-  for (let r of e) q(r) && $$et19(r) && (!t || dayjs(r.issued_at).isAfter(t.issued_at)) && (t = r);
-  return t;
+
+/**
+ * Gets the latest annual subscription invoice.
+ * @param invoices - Array of invoices.
+ * @returns The invoice or null.
+ */
+export function getLatestAnnualSubscription(invoices: z.infer<typeof invoiceSchema>[]): z.infer<typeof invoiceSchema> | null {
+  let latest: z.infer<typeof invoiceSchema> | null = null
+  for (const inv of invoices) {
+    if (isPayableInvoice(inv) && isAnnualSubscription(inv) && (!latest || dayjs(inv.issued_at).isAfter(latest.issued_at))) {
+      latest = inv
+    }
+  }
+  return latest
 }
-export function $$en15(e) {
-  for (let t of e) if ("pending" === t.state && X(t) && $$et19(t)) return t;
-  return null;
+
+/**
+ * Gets the first pending annual subscription invoice.
+ * @param invoices - Array of invoices.
+ * @returns The invoice or null.
+ */
+export function getFirstPendingAnnualSubscription(invoices: z.infer<typeof invoiceSchema>[]): z.infer<typeof invoiceSchema> | null {
+  for (const inv of invoices) {
+    if (inv.state === 'pending' && isValidInvoice(inv) && isAnnualSubscription(inv)) {
+      return inv
+    }
+  }
+  return null
 }
-export const fA = $$x0;
-export const ar = $$C1;
-export const qH = $$I2;
-export const ly = $$S3;
-export const fx = $$P4;
-export const TQ = $$$5;
-export const $b = $$B6;
-export const zz = $$U7;
-export const nm = $$j8;
-export const gL = $$G9;
-export const tB = $$k10;
-export const iv = $$er11;
-export const YO = $$Q12;
-export const Z4 = $$F13;
-export const W8 = $$M14;
-export const RK = $$en15;
-export const gl = $$Z16;
-export const zU = $$ee17;
-export const _k = $$H18;
-export const z7 = $$et19;
-export const dp = $$W20;
-export const Jv = $$D21;
-export const _8 = $$z22;
+
+// Refactored exports with meaningful names
+export const fA = BillingMechanics
+export const ar = invoiceSchema
+export const qH = InvoiceState
+export const ly = InvoiceSubtype
+export const fx = InvoiceReviewState
+export const TQ = filterValidInvoices
+export const $b = getInvoiceNumber
+export const zz = getInvoiceDescription
+export const nm = getFormattedPastDueDate
+export const gL = getPaymentMethod
+export const tB = getIssuedDate
+export const iv = getLatestAnnualSubscription
+export const YO = getLatestPayableInvoice
+export const Z4 = getPastDueDate
+export const W8 = getPaidDate
+export const RK = getFirstPendingAnnualSubscription
+export const gl = getLatestValidPendingInvoice
+export const zU = isLegacyBilling
+export const _k = isOrgTrueUpOrCatchUp
+export const z7 = isAnnualSubscription
+export const dp = isBundleInvoice
+export const Jv = isOverdue
+export const _8 = isTeamMonthlyCatchUp

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonBasePrimaryTracked, ButtonSecondaryTracked } from "../figma_app/637027";
-import { z as _$$z, Z } from "../905/306088";
+import { RadioGroup, RadioOption } from "../905/306088";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -289,14 +289,14 @@ export function $$I0(e) {
               }), W()]
             });
           })() : jsx(Fragment, {
-            children: jsxs(_$$z, {
+            children: jsxs(RadioGroup, {
               value: U,
               onChange: e => {
                 F(e);
               },
               className: "handle_asset_transfer_request_modal--radioGroup--rIenE",
               dataTestId: "permissions-level-radio-group",
-              children: [jsx(Z, {
+              children: [jsx(RadioOption, {
                 value: "keep_collaborators",
                 className: k,
                 children: jsx("p", {
@@ -306,7 +306,7 @@ export function $$I0(e) {
               }, "remove-collaborators"), jsx("p", {
                 className: C,
                 children: renderI18nText("asset_transfers.handle_request_modal.no_collaborators_will_lose_access")
-              }), jsx(Z, {
+              }), jsx(RadioOption, {
                 value: "remove_collaborators",
                 className: k,
                 children: jsx("p", {

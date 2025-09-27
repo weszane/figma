@@ -8,7 +8,7 @@ import { Y } from "../figma_app/887000";
 import { createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
 import { Be as _$$Be } from "../figma_app/920435";
-import { jL } from "../figma_app/658324";
+import { fetchAndUpdateUpcomingInvoices } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { getUserIsoCodeIfNonUsd } from "../figma_app/514043";
 import { setupLoadingStateHandler } from "../905/696711";
@@ -100,7 +100,7 @@ export function $$S3(e) {
       message: getI18nString("billing_modals.renewal.toast.success"),
       type: "team-billing-renewal"
     }));
-    await jL({
+    await fetchAndUpdateUpcomingInvoices({
       planType: FOrganizationLevelType.TEAM,
       planId: teamId
     });
@@ -129,7 +129,7 @@ export function $$v7(e) {
       message: getI18nString("billing_modals.renewal.toast.success"),
       type: "team-billing-renewal"
     }));
-    await jL({
+    await fetchAndUpdateUpcomingInvoices({
       planType: FOrganizationLevelType.TEAM,
       planId: teamId
     });

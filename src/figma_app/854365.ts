@@ -9,7 +9,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { e6 } from "../figma_app/617427";
 import { TrackedLinkPrimitive } from "../905/160095";
 import { renderI18nText } from "../905/303541";
-import { WX } from "../figma_app/482142";
+import { startProUpgradeFlowThunk } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { UpsellSourceType } from "../figma_app/831101";
 import { registerModal } from "../905/102752";
@@ -62,7 +62,7 @@ export function $$T1(e) {
             className: "x78zum5 xdt5ytf x167g77z",
             children: [jsx(e6, {
               onClick: () => {
-                t(WX({
+                t(startProUpgradeFlowThunk({
                   teamId: team.id,
                   openInNewTab: !0,
                   entryPoint: UpsellSourceType.SITES_MODAL

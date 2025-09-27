@@ -12,7 +12,7 @@ import { HeaderModal } from "../905/519092";
 import { shuffle } from "../figma_app/656233";
 import g from "classnames";
 import { c$, wv, Ve } from "../figma_app/236327";
-import { z, Z } from "../905/306088";
+import { RadioGroup, RadioOption } from "../905/306088";
 import { v as _$$v } from "../905/318279";
 import { pL } from "../figma_app/639088";
 import { Q } from "../905/249555";
@@ -193,22 +193,22 @@ let C = [{
   children: jsx(function () {
     let [e, t] = useState("");
     return jsxs(Fragment, {
-      children: [jsxs(z, {
+      children: [jsxs(RadioGroup, {
         value: e,
         onChange: e => t(e),
-        children: [jsx(Z, {
+        children: [jsx(RadioOption, {
           className: E,
           value: "Starter plan",
           children: renderI18nText("downgrade_survey.survey_option.switching_plans.starter_plan")
-        }), jsx(Z, {
+        }), jsx(RadioOption, {
           className: E,
           value: "Organization plan",
           children: renderI18nText("downgrade_survey.survey_option.switching_plans.organization_plan")
-        }), jsx(Z, {
+        }), jsx(RadioOption, {
           className: E,
           value: "Enterprise plan",
           children: renderI18nText("downgrade_survey.survey_option.switching_plans.enterprise_plan")
-        }), jsx(Z, {
+        }), jsx(RadioOption, {
           className: E,
           value: "Education plan",
           children: renderI18nText("downgrade_survey.survey_option.switching_plans.education_plan")

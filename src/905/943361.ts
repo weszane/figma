@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Bg } from "../905/81982";
+import { BasicFuseSearch } from "../905/81982";
 function a(e) {
   return e.replace(/\//g, " ");
 }
@@ -12,7 +12,7 @@ function s({
       ...e,
       searchName: a(e.name ?? e.value.name)
     }));
-    return new Bg(t, {
+    return new BasicFuseSearch(t, {
       keys: ["searchName", "description"],
       threshold: .1,
       ignoreLocation: !0,

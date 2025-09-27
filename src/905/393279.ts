@@ -7,7 +7,7 @@ import { ButtonWhite, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { hZ } from "../905/748726";
 import { UpgradeAction } from "../905/370443";
-import { yO, TD } from "../905/331019";
+import { ContactsAnalyticsTracker, ENTRYPOINT_SHARE_MODAL } from "../905/331019";
 import { F5 } from "../figma_app/761870";
 import { P, D } from "../905/392438";
 import { b8 } from "../figma_app/926061";
@@ -48,7 +48,7 @@ export class $$A0 extends PureComponent {
       e?.preventDefault();
       F5(this.props.autocomplete, this.props.validateToken) && this.props.onSubmit && this.props.onSubmit(this.props.autocomplete);
     };
-    this.contactsAnalytics = new yO(TD);
+    this.contactsAnalytics = new ContactsAnalyticsTracker(ENTRYPOINT_SHARE_MODAL);
   }
   getErrorMessage(e, t) {
     return this.props.validateToken(t).errorMessage || e.find(e => e.errorMessage)?.errorMessage || "";

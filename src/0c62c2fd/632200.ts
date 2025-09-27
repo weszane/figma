@@ -6,7 +6,7 @@ import { ButtonSecondaryTracked, ButtonNegativeTracked } from "../figma_app/6370
 import { renderI18nText, getI18nString } from "../905/303541";
 import { l as _$$l } from "../905/192768";
 import { hideModal, showModalHandler } from "../905/156213";
-import { Wc } from "../figma_app/482142";
+import { cancelOrDowngradeTeamThunk } from "../figma_app/482142";
 import { HeaderModal } from "../905/519092";
 import { Dy, v0, hF, pL } from "../905/289198";
 var o = n;
@@ -48,7 +48,7 @@ let f = memo(function (e) {
         }), jsx(ButtonNegativeTracked, {
           className: pL,
           onClick: () => {
-            t(Wc({
+            t(cancelOrDowngradeTeamThunk({
               teamId
             }));
             t(showModalHandler({

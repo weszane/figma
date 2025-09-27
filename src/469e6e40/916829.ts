@@ -11,7 +11,7 @@ import { hideModal } from "../905/156213";
 import { Z } from "../469e6e40/184197";
 import { TrackingProvider } from "../figma_app/831799";
 import { compareProductAccessTypes } from "../figma_app/217457";
-import { _k, tB } from "../figma_app/934005";
+import { isOrgTrueUpOrCatchUp, getIssuedDate } from "../figma_app/934005";
 import { o0 } from "../469e6e40/616503";
 import { MX, cI } from "../figma_app/684446";
 import { CurrencyFormatter } from "../figma_app/514043";
@@ -86,9 +86,9 @@ function k(e) {
 export let $$E0 = registerModal(function (e) {
   let t = MX();
   let a = o0(e.invoice);
-  let r = _k(e.invoice);
+  let r = isOrgTrueUpOrCatchUp(e.invoice);
   let l = new CurrencyFormatter(e.invoice.currency);
-  let u = tB(e.invoice);
+  let u = getIssuedDate(e.invoice);
   let m = t.filter(e => !cI(e, u));
   let p = useSelector(e => {
     let t = {};

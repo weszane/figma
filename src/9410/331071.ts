@@ -12,7 +12,7 @@ import { C as _$$C } from '../905/47358';
 import { A as _$$A10 } from '../905/51743';
 import { E as _$$E3 } from '../905/53857';
 import { KeyCodes, ModifierKeyCodes } from '../905/63728';
-import { Ef } from '../905/81982';
+import { SimpleFuseSearch } from '../905/81982';
 import { fileByKeySelector, fileVersionSelector } from '../905/91038';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
@@ -10161,7 +10161,7 @@ function dv({
     let n = function (e) {
       let t = getLocalPlugins();
       let i = useMemo(() => Object.values(t), [t]);
-      let r = useMemo(() => new Ef(i, FUSE_CONFIG_PROFILE), [i]);
+      let r = useMemo(() => new SimpleFuseSearch(i, FUSE_CONFIG_PROFILE), [i]);
       return useMemo(() => r.search(e), [r, e]);
     }(e);
     return useMemo(() => {
@@ -10209,7 +10209,7 @@ function dv({
   }(p);
   let b = function (e, t) {
     let i = lk(t);
-    let r = useMemo(() => new Ef(i, FUSE_CONFIG_COMMENT), [i]);
+    let r = useMemo(() => new SimpleFuseSearch(i, FUSE_CONFIG_COMMENT), [i]);
     return useMemo(() => r.search(e), [r, e]);
   }(p, t);
   useEffect(() => {

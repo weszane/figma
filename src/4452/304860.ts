@@ -8,7 +8,7 @@ import { registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
-import { V as _$$V } from '../905/223084';
+import { PlanInvoiceService } from '../905/223084';
 import { B as _$$B } from '../905/261906';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -277,7 +277,7 @@ function er(e) {
   }));
   let X = useCallback(async () => {
     if (!z.key.type || !z.key.parentId) throw new Error('Missing plan key type or parentId.');
-    await _$$V.updateUpgradeApprovalSettings(z.key.type, z.key.parentId, Y);
+    await PlanInvoiceService.updateUpgradeApprovalSettings(z.key.type, z.key.parentId, Y);
     p.props?.close({
       source: 'button'
     });

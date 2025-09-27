@@ -1,75 +1,154 @@
-import { Children, cloneElement } from 'react'
+import React, { Children, cloneElement } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { KeyCodes } from '../905/63728'
 import { KindEnum } from '../905/129884'
 import { handleMouseEvent, RecordingComponent, RecordingPureComponent } from '../figma_app/878298'
 
-export class $$l0 extends RecordingComponent {
-  render() {
-    return jsx('div', {
-      'className': `${this.props.isHorizontal ? 'radio--horizontalRadioGroup--YtVoa' : 'radio--radioGroup--AnkmY'} ${this.props.className || ''}`,
-      'role': 'radiogroup',
-      'data-testid': this.props.dataTestId,
-      'children': Children.map(this.props.children, e => e?.type === $$d1
-        ? cloneElement(e, {
-            _isChecked: this.props.value === e.props.value,
-            _onChange: this.props.onChange,
-          })
-        : e),
-    })
-  }
+// Define interfaces for props to improve type safety
+interface RadioGroupProps {
+  isHorizontal?: boolean
+  className?: string
+  dataTestId?: string
+  children: React.ReactNode
+  value?: any
+  onChange?: (value: any) => void
 }
-$$l0.displayName = 'RadioGroup'
-export class $$d1 extends RecordingPureComponent {
-  constructor() {
-    super(...arguments)
-    this.documentKeyDown = (e) => {
-      this.props._onChange && (e.keyCode === KeyCodes.SPACE || e.keyCode === KeyCodes.ENTER) && this.props._onChange(this.props.value)
-    }
-    this.onClick = handleMouseEvent(this, 'click', () => {
-      this.props._onChange && !this.props.disabled && this.props._onChange(this.props.value)
+
+interface RadioOptionProps {
+  value: any
+  _isChecked?: boolean
+  _onChange?: (value: any) => void
+  disabled?: boolean
+  labelClassName?: string
+  iconClassName?: string
+  tooltipText?: string
+  className?: string
+  dataTestId?: string
+  dataOnboardingKey?: string
+  children: React.ReactNode
+  tabIndex?: number
+}
+
+/**
+ * RadioGroup component - original class: RadioGroup
+ * Renders a group of radio options with horizontal or vertical layout.
+ */
+export class RadioGroup extends RecordingComponent<RadioGroupProps> {
+  render() {
+    const { isHorizontal, className, dataTestId, children, value, onChange } = this.props
+    const baseClass = isHorizontal ? 'radio--horizontalRadioGroup--YtVoa' : 'radio--radioGroup--AnkmY'
+    const fullClass = `${baseClass} ${className || ''}`
+
+    return jsx('div', {
+      'className': fullClass,
+      'role': 'radiogroup',
+      'data-testid': dataTestId,
+      'children': Children.map(children, child =>
+        React.isValidElement(child) && child.type === RadioOption
+          ? cloneElement(child, {
+              _isChecked: value === child.props.value,
+              _onChange: onChange,
+            })
+          : child),
     })
   }
 
+  static displayName = 'RadioGroup'
+}
+
+/**
+ * RadioOption component - original class: RadioOption
+ * Renders an individual radio option with label, icon, and event handling.
+ */
+export class RadioOption extends RecordingPureComponent<RadioOptionProps> {
+  // Extract event handlers as named methods for better readability
+  handleDocumentKeyDown = (e: KeyboardEvent) => {
+    const { _onChange, value } = this.props
+    if (_onChange && (e.keyCode === KeyCodes.SPACE || e.keyCode === KeyCodes.ENTER)) {
+      _onChange(value)
+    }
+  }
+
+  handleClick = handleMouseEvent(this, 'click', () => {
+    const { _onChange, disabled, value } = this.props
+    if (_onChange && !disabled) {
+      _onChange(value)
+    }
+  })
+
+  // Helper function to build label class name - simplifies render logic
+  getLabelClassName = () => {
+    const { disabled, labelClassName } = this.props
+    let className = disabled ? 'radio--labelDisabled--lIJQQ radio--label--wzl7r' : 'radio--label--wzl7r'
+    if (labelClassName) {
+      className += ` ${labelClassName}`
+    }
+    return className
+  }
+
+  // Helper function to build icon class name - simplifies render logic
+  getIconClassName = () => {
+    const { _isChecked, iconClassName, disabled } = this.props
+    let className = _isChecked ? 'radio--iconChecked--R-eCa radio--icon---zaTQ' : 'radio--icon---zaTQ'
+    if (iconClassName) {
+      className += ` ${iconClassName}`
+    }
+    if (disabled) {
+      className += ' radio--iconDisabled--fmY5f'
+    }
+    return className
+  }
+
+  // Helper function to get tooltip props - simplifies render logic
+  getTooltipProps = () => {
+    const { tooltipText } = this.props
+    if (tooltipText) {
+      return {
+        'data-tooltip-type': KindEnum.TEXT,
+        'data-tooltip': tooltipText,
+        'data-tooltip-show-below': true,
+        'data-tooltip-timeout-delay': 50,
+        'data-tooltip-max-width': 220,
+      }
+    }
+    return {}
+  }
+
   render() {
-    let e = this.props.disabled ? 'radio--labelDisabled--lIJQQ radio--label--wzl7r' : 'radio--label--wzl7r'
-    this.props.labelClassName && (e += ` ${this.props.labelClassName}`)
-    let t = this.props._isChecked ? 'radio--iconChecked--R-eCa radio--icon---zaTQ' : 'radio--icon---zaTQ'
-    this.props.iconClassName && (t += ` ${this.props.iconClassName}`)
-    this.props.disabled && (t += ' radio--iconDisabled--fmY5f')
-    let i = this.props.tooltipText
-      ? {
-          'data-tooltip-type': KindEnum.TEXT,
-          'data-tooltip': this.props.tooltipText,
-          'data-tooltip-show-below': !0,
-          'data-tooltip-timeout-delay': 50,
-          'data-tooltip-max-width': 220,
-        }
-      : {}
+    const { disabled, className, dataTestId, dataOnboardingKey, children, tabIndex, _isChecked } = this.props
+    const labelClass = this.getLabelClassName()
+    const iconClass = this.getIconClassName()
+    const tooltipProps = this.getTooltipProps()
+
     return jsxs('div', {
-      'className': `radio--radioOption--IE2UQ ${this.props.className || ''}`,
-      'onClick': this.onClick,
+      'className': `radio--radioOption--IE2UQ ${className || ''}`,
+      'onClick': this.handleClick,
       'role': 'radio',
-      'aria-checked': this.props._isChecked,
-      'data-testid': this.props.dataTestId,
-      'data-onboarding-key': this.props.dataOnboardingKey,
-      'children': [jsx('div', {
-        className: t,
-        tabIndex: this.props.disabled ? -1 : this.props.tabIndex ?? 0,
-        onFocus: () => {
-          document.addEventListener('keydown', this.documentKeyDown)
-        },
-        onBlur: () => {
-          document.removeEventListener('keydown', this.documentKeyDown)
-        },
-      }), jsx('div', {
-        ...i,
-        className: e,
-        children: this.props.children,
-      })],
+      'aria-checked': _isChecked,
+      'data-testid': dataTestId,
+      'data-onboarding-key': dataOnboardingKey,
+      'children': [
+        jsx('div', {
+          className: iconClass,
+          tabIndex: disabled ? -1 : tabIndex ?? 0,
+          onFocus: () => {
+            document.addEventListener('keydown', this.handleDocumentKeyDown)
+          },
+          onBlur: () => {
+            document.removeEventListener('keydown', this.handleDocumentKeyDown)
+          },
+        }),
+        jsx('div', {
+          ...tooltipProps,
+          className: labelClass,
+          children,
+        }),
+      ],
     })
   }
+
+  static displayName = 'RadioOption'
 }
-$$d1.displayName = 'RadioOption'
-export const z = $$l0
-export const Z = $$d1
+
+export const z = RadioGroup
+export const Z = RadioOption

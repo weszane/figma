@@ -184,6 +184,7 @@ let P = `
 }
 `;
 let $$O1 = null;
+// todo: canvas wrapper component
 let D = class e extends HTMLElement {
   constructor() {
     super();

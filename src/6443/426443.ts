@@ -14,9 +14,9 @@ import { We, UU, Qe } from "../figma_app/770088";
 import { insertCommunityMention } from "../figma_app/530167";
 import { setTargetRef, hideTooltip } from "../905/765855";
 import { postUserFlag } from "../905/985254";
-import { Ty, pP as _$$pP, yO, I2 } from "../905/331019";
+import { isGuestUser, getUserType, ContactsAnalyticsTracker, I2 } from "../905/331019";
 import { FFileType } from "../figma_app/191312";
-import { fG, oQ } from "../905/772425";
+import { getMentionsResult, getEmojisResult } from "../905/772425";
 import { AT_MENTIONS_TYPEAHEAD } from "../905/380385";
 import { PositionEnum, KindEnum } from "../905/129884";
 import { xT } from "../figma_app/841415";
@@ -943,7 +943,7 @@ export class $$tA0 extends Component {
       this.pendingMentionsSearch = new x();
       try {
         return {
-          result: await A(fG(t, this.props.mentionables, !this.props.isProtoView && this.props.figmaEditorType === FFileType.DESIGN), this.pendingMentionsSearch),
+          result: await A(getMentionsResult(t, this.props.mentionables, !this.props.isProtoView && this.props.figmaEditorType === FFileType.DESIGN), this.pendingMentionsSearch),
           canceled: !1
         };
       } catch (t) {
@@ -970,7 +970,7 @@ export class $$tA0 extends Component {
       })), this.props.onUpdateTextArea(this.state.editorState));
     }, 300);
     this.onEmojiSearchChange = t => {
-      this.props.dispatch(We(oQ(t)));
+      this.props.dispatch(We(getEmojisResult(t)));
       this.props.onUpdateTextArea(this.state.editorState);
     };
     this.clearTypeahead = t => {
@@ -1431,15 +1431,15 @@ export class $$tA0 extends Component {
       let t = this.wrapperRef.current?.querySelector(".public-DraftEditorPlaceholder-root");
       t && t.setAttribute("aria-hidden", "true");
     };
-    let e = Ty(t.currentOrgId ?? null, t.user ?? null, t.currentOrgUsers);
-    let n = _$$pP(t.currentOrgId, t.openFileTeamId, e);
+    let e = isGuestUser(t.currentOrgId ?? null, t.user ?? null, t.currentOrgUsers);
+    let n = getUserType(t.currentOrgId, t.openFileTeamId, e);
     let i = t.openFileTeamId ?? null;
     let d = null;
     let S = tx();
     d = this.props.messageMeta ? td(this.props.messageMeta, S, this.props.editorType) : EditorState.createEmpty(S);
     this.state = {
       editorState: d,
-      contactsAnalytics: new yO(I2, t.openFileKey, n, t.currentOrgId, i),
+      contactsAnalytics: new ContactsAnalyticsTracker(I2, t.openFileKey, n, t.currentOrgId, i),
       hyperlinkState: null
     };
   }
@@ -1486,7 +1486,7 @@ export class $$tA0 extends Component {
           index: -1,
           userId: this.props?.user?.id
         })));else {
-          let t = await fG("", this.props.mentionables, !this.props.isProtoView && this.props.figmaEditorType === FFileType.DESIGN);
+          let t = await getMentionsResult("", this.props.mentionables, !this.props.isProtoView && this.props.figmaEditorType === FFileType.DESIGN);
           this.props.dispatch(We(t));
         }
       }, 180);

@@ -435,7 +435,7 @@ import { assert, debug, noop, throwTypeError } from '../figma_app/465776';
 import { isIntegrationContext, isZoomIntegration } from '../figma_app/469876';
 import { ViewTypeEnum } from '../figma_app/471068';
 import { Cg, Ug, v7 } from '../figma_app/475303';
-import { $h, Ay as _$$Ay4, eK as _$$eK, Lo as _$$Lo, pv as _$$pv, Qg as _$$Qg, Ts as _$$Ts2, Az, Ef, i, I2, Je, js, M2, MN, Mv, Qe, qU, WG, XS, yy } from '../figma_app/482142';
+import { setVatGstIdAction, setPromoThunk, restoreSavedCartAction, setBillingPeriodAction, startProUpgradeFlowAction, showErrorAction, initPaymentAction, setNumWhiteboardEditorsAction, setRegionalVatGstIdAction, setTaxesAction, setSubmitPendingAction, setEditorStatusChangesAction, setNumEditorsAction, setNumFigmaEmailTeamUsersAction, setCurrencyAction, startOrgUpgradeFlowAction, makeStudentTeamAction, setCampfireSeatsAction, setTokenAction, setPromoAction, setCompanyDetailsAction } from '../figma_app/482142';
 import { clamp, randomBetween } from '../figma_app/492908';
 import { isEmptyObject } from '../figma_app/493477';
 import { tb as _$$tb, getOrgId, getRecentUserData, getSessionUserState, getTeamId, getUserState, kb, persistCommunityProfileId, setCommunityProfileId } from '../figma_app/502247';
@@ -3537,13 +3537,13 @@ let ac = e => t => function (i) {
   if (selectViewAction.matches(i) && (i.payload.view === 'teamUpgrade' || i.payload.view === 'promoReview' || i.payload.view === 'eduReview')) {
     let r = i.payload.teamId;
     if (!r) {
-      _$$p5(n.selectedView, n.payment) ? e.dispatch(_$$Ts2({
+      _$$p5(n.selectedView, n.payment) ? e.dispatch(initPaymentAction({
         numDesignEditors: 0,
         numWhiteboardEditors: 0,
         billingPeriod: SubscriptionType.MONTHLY
-      })) : i.payload.view === 'teamUpgrade' && i.payload.billingPeriod ? e.dispatch(_$$Lo({
+      })) : i.payload.view === 'teamUpgrade' && i.payload.billingPeriod ? e.dispatch(setBillingPeriodAction({
         billingPeriod: i.payload.billingPeriod
-      })) : i.payload.view === 'eduReview' && e.dispatch(_$$Lo({
+      })) : i.payload.view === 'eduReview' && e.dispatch(setBillingPeriodAction({
         billingPeriod: SubscriptionType.STUDENT
       }));
       t(i);
@@ -3555,13 +3555,13 @@ let ac = e => t => function (i) {
       let s = Object.keys(t).filter(e => t[e]?.whiteboard_paid_status === FPlanRestrictionType.FULL).length;
       let o = SubscriptionType.ANNUAL;
       i.payload.view === 'promoReview' ? o = SubscriptionType.MONTHLY : i.payload.view === 'eduReview' ? o = SubscriptionType.STUDENT : i.payload.view === 'teamUpgrade' && i.payload.billingPeriod && (o = i.payload.billingPeriod);
-      e.dispatch(_$$Ts2({
+      e.dispatch(initPaymentAction({
         numDesignEditors: a.editors ?? 0,
         numWhiteboardEditors: s,
         billingPeriod: o
       }));
     } else {
-      i.payload.view === 'teamUpgrade' && i.payload.billingPeriod && e.dispatch(_$$Lo({
+      i.payload.view === 'teamUpgrade' && i.payload.billingPeriod && e.dispatch(setBillingPeriodAction({
         billingPeriod: i.payload.billingPeriod
       }));
     }
@@ -8379,7 +8379,7 @@ let lz = {
   displayName: ''
 };
 function lH(e = lz, t) {
-  if (_$$Ts2.matches(t)) {
+  if (initPaymentAction.matches(t)) {
     let {
       billingPeriod,
       numDesignEditors,
@@ -8393,58 +8393,58 @@ function lH(e = lz, t) {
       numWhiteboardEditors
     };
   }
-  if (_$$pv.matches(t)) {
+  if (startProUpgradeFlowAction.matches(t)) {
     return {
       ...e,
       upgradingNewTeam: t.payload.newTeam,
       currency: t.payload.currency || getUserCurrency()
     };
   }
-  if (Mv.matches(t)) {
+  if (startOrgUpgradeFlowAction.matches(t)) {
     return {
       ...e,
       currency: t.payload.currency || getUserCurrency()
     };
   }
-  if (Qe.matches(t)) {
+  if (makeStudentTeamAction.matches(t)) {
     return {
       ...e,
       submitPending: !0
     };
   }
-  if (I2.matches(t)) {
+  if (setSubmitPendingAction.matches(t)) {
     return {
       ...e,
       submitPending: t.payload.submitPending
     };
   }
-  if (_$$Lo.matches(t)) {
+  if (setBillingPeriodAction.matches(t)) {
     return {
       ...e,
       billingPeriod: t.payload.billingPeriod
     };
   }
-  if (js.matches(t)) {
+  if (setNumEditorsAction.matches(t)) {
     return {
       ...e,
       numDesignEditors: t.payload.numDesignEditors
     };
-  } else if (Az.matches(t)) {
+  } else if (setNumWhiteboardEditorsAction.matches(t)) {
     return {
       ...e,
       numWhiteboardEditors: t.payload.numWhiteboardEditors
     };
-  } else if (M2.matches(t)) {
+  } else if (setNumFigmaEmailTeamUsersAction.matches(t)) {
     return {
       ...e,
       figmaEmailTeamUsers: t.payload.figmaEmailTeamUsers
     };
-  } else if (Je.matches(t)) {
+  } else if (setEditorStatusChangesAction.matches(t)) {
     return {
       ...e,
       editorStatusChanges: t.payload.editorStatusChanges
     };
-  } else if (_$$Qg.matches(t)) {
+  } else if (showErrorAction.matches(t)) {
     return {
       ...e,
       error: t.payload.error,
@@ -8452,49 +8452,49 @@ function lH(e = lz, t) {
       currencyToSwitch: t.payload.currencyToSwitch || null,
       submitPending: !1
     };
-  } else if (XS.matches(t)) {
+  } else if (setPromoAction.matches(t)) {
     return {
       ...e,
       promo: t.payload.promo
     };
-  } else if (WG.matches(t)) {
+  } else if (setTokenAction.matches(t)) {
     let i = t.payload.token;
     return {
       ...e,
       token: i
     };
-  } else if (i.matches(t)) {
+  } else if (setTaxesAction.matches(t)) {
     return {
       ...e,
       taxes: t.payload.taxes
     };
-  } else if (MN.matches(t)) {
+  } else if (setCurrencyAction.matches(t)) {
     return {
       ...e,
       currency: t.payload.currency
     };
-  } else if (_$$eK.matches(t)) {
+  } else if (restoreSavedCartAction.matches(t)) {
     return {
       ...e,
       ...t.payload
     };
-  } else if ($h.matches(t)) {
+  } else if (setVatGstIdAction.matches(t)) {
     return {
       ...e,
       vatGstId: t.payload.vatGstId
     };
-  } else if (Ef.matches(t)) {
+  } else if (setRegionalVatGstIdAction.matches(t)) {
     return {
       ...e,
       regionalVatGstId: t.payload.regionalVatGstId
     };
-  } else if (yy.matches(t)) {
+  } else if (setCompanyDetailsAction.matches(t)) {
     return {
       ...e,
       legalName: t.payload.legalName,
       displayName: t.payload.displayName
     };
-  } else if (qU.matches(t)) {
+  } else if (setCampfireSeatsAction.matches(t)) {
     return {
       ...e,
       cartSelections: t.payload.cartSelections
@@ -14439,7 +14439,7 @@ export async function $$hz0(e, t, d = {
         view: 'recentsAndSharing'
       }));
       b.dispatch(FlashActions.init());
-      getInitialOptions().promo && b.dispatch(_$$Ay4({
+      getInitialOptions().promo && b.dispatch(setPromoThunk({
         promo: getInitialOptions().promo || null
       }));
       preloadCommonFonts().catch(e => {

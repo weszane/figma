@@ -11,7 +11,7 @@ import { c as _$$c2 } from "../905/425573";
 import { b as _$$b2 } from "../905/946806";
 import { getFeatureFlags } from "../905/601108";
 import { truncate } from "../figma_app/930338";
-import { z, Z } from "../905/306088";
+import { RadioGroup, RadioOption } from "../905/306088";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCurrentUserOrg } from "../905/845253";
 import { FPermissionLevelType, FViewPermissionType, FResourceCategoryType } from "../figma_app/191312";
@@ -231,11 +231,11 @@ export function $$F3(e) {
   });
 }
 export function $$j2(e) {
-  return useCurrentUserOrg()?.k12_google_org && getFeatureFlags().student_plan_no_hidden_teams ? jsxs(z, {
+  return useCurrentUserOrg()?.k12_google_org && getFeatureFlags().student_plan_no_hidden_teams ? jsxs(RadioGroup, {
     dataTestId: "org-browsable-team-radio-options",
     value: e.selectedDiscoverability,
     onChange: e.setSelectedDiscoverability,
-    children: [jsx(Z, {
+    children: [jsx(RadioOption, {
       value: teamVisibilityEnum.ORG_BROWSABLE,
       className: x,
       children: jsx("p", {
@@ -247,11 +247,11 @@ export function $$j2(e) {
       children: renderI18nText("team_creation.anyone_can_find_this_team")
     })]
   }) : jsx(Fragment, {
-    children: jsxs(z, {
+    children: jsxs(RadioGroup, {
       dataTestId: "org-browsable-team-radio-options",
       value: e.selectedDiscoverability,
       onChange: e.setSelectedDiscoverability,
-      children: [jsx(Z, {
+      children: [jsx(RadioOption, {
         value: teamVisibilityEnum.ORG_BROWSABLE,
         className: x,
         children: jsx("p", {
@@ -261,7 +261,7 @@ export function $$j2(e) {
       }, "org_browsable"), jsx("p", {
         className: N,
         children: renderI18nText("team_creation.anyone_can_find_this_team")
-      }), jsx(Z, {
+      }), jsx(RadioOption, {
         value: teamVisibilityEnum.HIDDEN,
         className: x,
         children: jsx("p", {

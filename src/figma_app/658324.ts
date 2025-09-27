@@ -1,100 +1,162 @@
-import { useMemo } from "react";
-import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
-import a from "../vendor/239910";
-import { logger } from "../905/651849";
-import { getI18nString } from "../905/303541";
-import { qH } from "../figma_app/934005";
-import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
-import { i as _$$i } from "../905/787489";
-import { V } from "../905/223084";
-var s = a;
-let _ = atom({});
-function h(e) {
-  let t = s()(e, e => e.id);
-  atomStoreManager.set(_, e => ({
-    ...e,
-    ...t
+import { keyBy } from 'lodash-es';
+import { useMemo } from 'react';
+import { PlanInvoiceService } from '../905/223084';
+import { getI18nString } from '../905/303541';
+import { logger } from '../905/651849';
+import { liveStoreInstance, setupResourceAtomHandler } from '../905/713695';
+import { useErrorFlash } from '../905/787489';
+import { atom, atomStoreManager, useAtomWithSubscription } from '../figma_app/27355';
+import { InvoiceState } from '../figma_app/934005';
+
+// Atom to store invoices keyed by ID
+const invoicesAtom = atom({});
+
+/**
+ * Updates the invoices atom with keyed invoices.
+ * @param invoices - Array of invoice objects
+ */
+function updateInvoicesAtom(invoices: any[]) {
+  const keyedInvoices = keyBy(invoices, invoice => invoice.id);
+  atomStoreManager.set(invoicesAtom, existing => ({
+    ...existing,
+    ...keyedInvoices
   }));
 }
-let m = liveStoreInstance.Query({
-  fetch: async e => {
-    let t = (await V.getPlanInvoices(e)).data.meta.invoices;
-    h(t);
-    return t;
-  }
-});
-function g(e, t) {
-  let r = useAtomWithSubscription(_);
-  return useMemo(() => e.transform(e => {
-    let n = e.map(e => r[e.id] ?? e);
-    t && (n = n.filter(e => e.state === t));
-    return n;
-  }), [e, t, r]);
-}
-export function $$f1({
-  planType: e,
-  planId: t
-}, r = {}) {
-  let [n] = setupResourceAtomHandler(m({
-    planType: e,
-    planId: t
-  }), r);
-  _$$i(n, getI18nString("plan_invoices.generic_load_error"));
-  return g(n);
-}
-let E = liveStoreInstance.Query({
-  fetch: async ({
-    planType: e,
-    planId: t
+
+// Query for fetching plan invoices
+const planInvoicesQuery = liveStoreInstance.Query({
+  fetch: async (params: {
+    planType: any;
+    planId: any;
   }) => {
-    let r = (await V.getUpcomingPlanInvoices({
-      planType: e,
-      planId: t
-    })).data.meta.invoices;
-    h(r);
-    return r;
+    const invoices = (await PlanInvoiceService.getPlanInvoices(params)).data.meta.invoices;
+    updateInvoicesAtom(invoices);
+    return invoices;
   }
 });
-export async function $$y2(e) {
+
+/**
+ * Hook to transform and filter invoices using the atom.
+ * @param resourceAtom - The resource atom
+ * @param filterState - Optional state to filter by
+ * @returns Memoized transformed invoices
+ */
+function useTransformedInvoices(resourceAtom: any, filterState?: any) {
+  const atomValue = useAtomWithSubscription(invoicesAtom);
+  return useMemo(() => resourceAtom.transform((invoices: any[]) => {
+    let transformed = invoices.map(invoice => atomValue[invoice.id] ?? invoice);
+    if (filterState) {
+      transformed = transformed.filter(invoice => invoice.state === filterState);
+    }
+    return transformed;
+  }), [resourceAtom, filterState, atomValue]);
+}
+
+/**
+ * Hook to fetch and return plan invoices.
+ * @param params - Parameters for the query
+ * @param options - Additional options
+ * @returns Transformed invoices
+ */
+export function usePlanInvoices({
+  planType,
+  planId
+}: {
+  planType: any;
+  planId: any;
+}, options: any = {}) {
+  const [resourceAtom] = setupResourceAtomHandler(planInvoicesQuery({
+    planType,
+    planId
+  }), options);
+  useErrorFlash(resourceAtom, getI18nString('plan_invoices.generic_load_error'));
+  return useTransformedInvoices(resourceAtom);
+}
+
+// Query for fetching upcoming plan invoices
+const upcomingPlanInvoicesQuery = liveStoreInstance.Query({
+  fetch: async ({
+    planType,
+    planId
+  }: {
+    planType: any;
+    planId: any;
+  }) => {
+    const invoices = (await PlanInvoiceService.getUpcomingPlanInvoices({
+      planType,
+      planId
+    })).data.meta.invoices as any[];
+    updateInvoicesAtom(invoices);
+    return invoices;
+  }
+});
+
+/**
+ * Fetches upcoming invoices and updates the mutation.
+ * @param params - Parameters for the query
+ */
+export async function fetchAndUpdateUpcomingInvoices(params: {
+  planType: any;
+  planId: any;
+}) {
   try {
-    let t = await liveStoreInstance.fetch(E(e), {
-      policy: "networkOnly"
+    const upcomingInvoices = await liveStoreInstance.fetch(upcomingPlanInvoicesQuery(params), {
+      policy: 'networkOnly'
     });
-    let r = liveStoreInstance.getMutation(b);
-    await r({
-      queryArgs: e,
-      upcomingPlanInvoices: t
+    const mutation = liveStoreInstance.getMutation(updatePlanInvoicesWithUpcomingMutation);
+    await mutation({
+      queryArgs: params,
+      upcomingPlanInvoices: upcomingInvoices
     });
-  } catch (e) {
-    logger.error(e);
+  } catch (error) {
+    logger.error(error);
   }
 }
-let b = liveStoreInstance.Mutation((e, {
-  query: t
-}) => {
-  t.mutate(m(e.queryArgs), t => [...e.upcomingPlanInvoices, ...t.filter(({
-    state: e
-  }) => e !== qH.PENDING)]);
+
+// Mutation to update plan invoices with upcoming ones
+const updatePlanInvoicesWithUpcomingMutation = liveStoreInstance.Mutation((_, {
+  query
+}: any) => {
+  query.mutate(planInvoicesQuery(_.queryArgs), (existingInvoices: any[]) => [..._.upcomingPlanInvoices, ...existingInvoices.filter(({
+    state
+  }) => state !== InvoiceState.PENDING)]);
 });
-let T = liveStoreInstance.Query({
+
+// Query for fetching open plan invoices
+const openPlanInvoicesQuery = liveStoreInstance.Query({
   fetch: async ({
-    planType: e,
-    planId: t
+    planType,
+    planId
+  }: {
+    planType: any;
+    planId: any;
   }) => {
-    let r = (await V.getOpenPlanInvoices({
-      planType: e,
-      planId: t
-    })).data.meta.invoices;
-    h(r);
-    return r;
+    const invoices = (await PlanInvoiceService.getOpenPlanInvoices({
+      planType,
+      planId
+    })).data.meta.invoices as any[];
+    updateInvoicesAtom(invoices);
+    return invoices;
   },
-  enabled: e => !!e
+  enabled: (params: any) => !!params
 });
-export function $$I0(e, t = {}) {
-  let [r] = setupResourceAtomHandler(T(e), t);
-  _$$i(r, getI18nString("plan_invoices.generic_load_error"));
-  return g(r, qH.OPEN);
+
+/**
+ * Hook to fetch and return open plan invoices.
+ * @param params - Parameters for the query
+ * @param options - Additional options
+ * @returns Filtered open invoices
+ */
+export function useOpenPlanInvoices(params: {
+  planType: any;
+  planId: any;
+}, options: any = {}) {
+  const [resourceAtom] = setupResourceAtomHandler(openPlanInvoicesQuery(params), options);
+  useErrorFlash(resourceAtom, getI18nString('plan_invoices.generic_load_error'));
+  return useTransformedInvoices(resourceAtom, InvoiceState.OPEN);
 }
-export const Ti = $$I0;
-export const bQ = $$f1;
-export const jL = $$y2;
+
+// Updated exports with meaningful names
+export const Ti = useOpenPlanInvoices;
+export const bQ = usePlanInvoices;
+export const jL = fetchAndUpdateUpcomingInvoices;

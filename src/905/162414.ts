@@ -4,7 +4,7 @@ import { FUserRoleType } from "../figma_app/191312";
 import { roleServiceAPI } from "../figma_app/66216";
 import { selectOpenFileKey, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { mp } from "../905/772425";
+import { createMentionLibrary } from "../905/772425";
 let c = null;
 let u = async e => {
   if (c?.fileKey === e && performance.now() - c.timeCached < 3e5) return await c.usersPromise;
@@ -70,7 +70,7 @@ export function $$h2({
     m && (g && y || !p) && (e = [...A], f && e.push(f));
     return e;
   }, [g, f, m, p, y, A]);
-  return useMemo(() => mp({
+  return useMemo(() => createMentionLibrary({
     currentOrgId: g,
     teamId: p,
     users: b,
