@@ -9,7 +9,7 @@ import { KindEnum } from '../905/129884';
 import { e as _$$e2 } from '../905/149844';
 import { lk } from '../905/182453';
 import { permissionScopeHandler } from '../905/189185';
-import { Z as _$$Z } from '../905/248978';
+import { styleInfoTooltip } from '../905/248978';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { getDirname, splitPath, getBasename } from '../905/309735';
 import { n as _$$n } from '../905/317686';
@@ -417,7 +417,7 @@ function eu({
   let G = !!X && X.offsetWidth < X.scrollWidth;
   let Z = useMemo(() => !r && E.description && G ? {
     'data-tooltip-type': KindEnum.SPECIAL,
-    'data-tooltip': _$$Z,
+    'data-tooltip': styleInfoTooltip,
     'data-tooltip-style-name': getBasename(E.name),
     'data-tooltip-style-description': E.description,
     'data-tooltip-max-width': jNX * parsePxInt(dGl)

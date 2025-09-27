@@ -7,7 +7,7 @@ import { subscribeAndAwaitData } from "../905/553831";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { ps, Xv } from "../figma_app/845611";
-import { QL, EM } from "../905/609392";
+import { getQueryParam, removeQueryParam } from "../905/609392";
 import { AccountTypeRequestByIdView } from "../figma_app/43951";
 import { accountTypeRequestHandler } from "../905/281010";
 var m = (e => (e.AdminUpgradeEmail = "admin_upgrade_email", e.UnknownDeeplink = "unknown_deeplink", e))(m || {});
@@ -48,12 +48,12 @@ export function $$f1() {
       s ? o(s) : a(!0);
     }
     if (!d) return;
-    let s = QL(h.approvalRequestId);
-    s && (EM(h.approvalRequestId), t(s));
+    let s = getQueryParam(h.approvalRequestId);
+    s && (removeQueryParam(h.approvalRequestId), t(s));
   }, [e, d]);
   useEffect(() => {
     async function s(t) {
-      let s = QL(h.entryPoint);
+      let s = getQueryParam(h.entryPoint);
       let n = findMatchingValue(m, s || "") ?? m.UnknownDeeplink;
       let i = findMatchingValue(ps, t.planType) || ps.TEAM;
       try {
@@ -72,7 +72,7 @@ export function $$f1() {
         v(e);
       } finally {
         a(!0);
-        EM(h.entryPoint);
+        removeQueryParam(h.entryPoint);
       }
     }
     d && l && !t && s(l);

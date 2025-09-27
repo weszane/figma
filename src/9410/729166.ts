@@ -145,7 +145,7 @@ import { fQ } from '../figma_app/238665';
 import { L$ } from '../figma_app/241341';
 import { f as _$$f } from '../figma_app/258006';
 import { a as _$$a } from '../figma_app/289605';
-import { y4 } from '../figma_app/298277';
+import { isUsingLocalBuild } from '../figma_app/298277';
 import { mapFileToProductType } from '../figma_app/314264';
 import { bq, Gn, hY, L_, qt } from '../figma_app/349969';
 import { ut as _$$ut, Ah, Fe, HS, hX, kl, l5, nw, Sq, UB, wR, xY } from '../figma_app/354027';
@@ -3448,7 +3448,7 @@ export function $$r40({
       sentryTags: {
         area: ServiceCategories.DEVELOPER_TOOLS
       },
-      hasCustomWASMBuild: y4,
+      hasCustomWASMBuild: isUsingLocalBuild,
       children: jsx(iQ, {})
     }), l && jsx(ErrorBoundaryCrash, {
       boundaryKey: 'ComponentBrowser',
@@ -3456,7 +3456,7 @@ export function $$r40({
       sentryTags: {
         area: ServiceCategories.DEVELOPER_TOOLS
       },
-      hasCustomWASMBuild: y4,
+      hasCustomWASMBuild: isUsingLocalBuild,
       children: jsx(ea, {})
     }), s && u && jsx(ErrorBoundaryCrash, {
       boundaryKey: 'DevModeVariablesTable',
@@ -3464,7 +3464,7 @@ export function $$r40({
       sentryTags: {
         area: ServiceCategories.DEVELOPER_TOOLS
       },
-      hasCustomWASMBuild: y4,
+      hasCustomWASMBuild: isUsingLocalBuild,
       children: jsx(tu, {})
     }), jsx(ErrorBoundaryCrash, {
       boundaryKey: 'McpUnmappedComponentsBanner',
@@ -3472,7 +3472,7 @@ export function $$r40({
       sentryTags: {
         area: ServiceCategories.DEVELOPER_TOOLS
       },
-      hasCustomWASMBuild: y4,
+      hasCustomWASMBuild: isUsingLocalBuild,
       children: (d || c) && jsx(eh, {})
     })]
   });

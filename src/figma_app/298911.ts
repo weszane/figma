@@ -66,7 +66,7 @@ class ViewportNavigator {
   static DEFAULT_NAVIGATE_BUFFER = 60
   private viewport: ViewportInterface
   private config: typeof defaultNavigationConfig
-  private delayTimeout?: NodeJS.Timeout
+  private delayTimeout?: NodeJS.Timeout | number
   constructor(viewport: ViewportInterface, config: Partial<typeof defaultNavigationConfig> = {}) {
     this.viewport = viewport
     this.config = {

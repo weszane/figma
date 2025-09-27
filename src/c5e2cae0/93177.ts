@@ -55,7 +55,7 @@ import { isCollaboratorType, ViewAccessTypeEnum, ProductAccessTypeEnum } from ".
 import { collaboratorSet } from "../905/332483";
 import { kt, pI, Al, lX, dT } from "../9420/394825";
 import { KQ } from "../figma_app/475472";
-import { y4 } from "../figma_app/298277";
+import { isUsingLocalBuild } from "../figma_app/298277";
 import { selectPermissionsState } from "../figma_app/212807";
 import { selectCurrentUser } from "../905/372672";
 import { LM, z4 } from "../figma_app/518077";
@@ -1080,7 +1080,7 @@ export function $$eK0(e) {
     team: ServiceCategories.MONETIZATION_UPGRADES,
     boundaryKey: "TeamUpgradeBillingRemodel",
     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
-    hasCustomWASMBuild: y4,
+    hasCustomWASMBuild: isUsingLocalBuild,
     children: jsx(eY, {
       ...e
     })

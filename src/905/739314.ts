@@ -5,7 +5,7 @@ import { isGovCluster, getInitialOptions } from "../figma_app/169182";
 import { isFigmaMirrorAndroid, isInFigmaMobile, isFigmaMobileApp } from "../figma_app/778880";
 import { getInitialReferrer } from "../905/747968";
 import { V } from "../905/182752";
-import { QL } from "../905/609392";
+import { getQueryParam } from "../905/609392";
 import { s3 } from "../figma_app/152745";
 import { isIntegrationContext } from "../figma_app/469876";
 let m = ["msclkid"];
@@ -35,7 +35,7 @@ let $$g0 = memo(function () {
       let t = getInitialOptions();
       t.iso_code && t.viewer_region && e.append("gpc_code", `${t.iso_code?.toLowerCase()}_${t.viewer_region?.toLowerCase()}`);
       m.forEach(t => {
-        let i = QL(t);
+        let i = getQueryParam(t);
         i && /^[a-zA-Z0-9_\-\:]*$/.test(i) && e.append(t, i);
       });
       return e;

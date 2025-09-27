@@ -9,7 +9,7 @@ import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
 import { markPrototypeViewed } from "../905/70982";
 import { z4 } from "../905/37051";
-import { m as _$$m } from "../905/575846";
+import { isFigmaNativeApp } from "../905/575846";
 import { mapFileSummary } from "../figma_app/349248";
 import { _P, Zh, qb, Rv } from "../figma_app/2590";
 import { serializeFullViewerQueryParams } from "../figma_app/831696";
@@ -75,9 +75,9 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
         fileKey: t.meta.file_key,
         pageId: t.meta.page_id
       }));
-    }).catch(e => { });
+    }).catch(e => {});
     let n = await i.fetchFile(fileKey);
-    if (_$$m) {
+    if (isFigmaNativeApp) {
       e.dispatch(selectViewAction({
         view: "prototype",
         file: mapFileSummary(n),

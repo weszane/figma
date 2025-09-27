@@ -77,8 +77,8 @@ import { F as _$$F2 } from "../905/258517";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { K0, YW } from "../figma_app/778125";
 import { iL } from "../905/824449";
-import { A as _$$A, h as _$$h2 } from "../905/226345";
-import { Z as _$$Z2 } from "../905/248978";
+import { StyleRowButton, StyleIconButton } from "../905/226345";
+import { styleInfoTooltip } from "../905/248978";
 import { zm, Se, x9, UU, XC, IZ, VK, D$, rP, C3, Wn, qV, me } from "../905/334362";
 import { A as _$$A2 } from "../2854/821561";
 import { A as _$$A3 } from "../2854/476909";
@@ -179,7 +179,7 @@ let eD = memo(function ({
           className: "x6s0dn4 x9f619 x78zum5 x10w6t97 xb3r6kr xt970qd xp48ta0 xwn43p0 xuxw1ft xh8yej3 xexmubx x18bfitd",
           ref: v,
           value: e,
-          "data-tooltip": r ? _$$Z2 : void 0,
+          "data-tooltip": r ? styleInfoTooltip : void 0,
           "data-tooltip-style-description": e.description,
           "data-tooltip-style-name": getBasename(e.name),
           "data-tooltip-type": KindEnum.SPECIAL,
@@ -212,7 +212,7 @@ let eD = memo(function ({
           })
         })]
       })
-    }) : jsxs(_$$A, {
+    }) : jsxs(StyleRowButton, {
       ref: A,
       dsStyle: e,
       isFauxFocused,
@@ -251,7 +251,7 @@ let eD = memo(function ({
       })]
     });
   }
-  return jsx(_$$h2, {
+  return jsx(StyleIconButton, {
     ref: A,
     dsStyle: e,
     isFauxFocused,

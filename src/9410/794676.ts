@@ -38,7 +38,7 @@ import { wX } from "../905/964786";
 import { useCanPerformAction, useCanRunExtensions, isEditorTypeSupported, useFilteredDedupedRecentlyUsedPlugins, useInstalledPluginsAndWidgets, useFilteredWidgets, useDedupedRecentlyUsedWidgets, usePluginedWidgets } from "../figma_app/844435";
 import { h as _$$h } from "../9410/146161";
 import { gN, SH } from "../figma_app/790714";
-import { y4 } from "../figma_app/298277";
+import { isUsingLocalBuild } from "../figma_app/298277";
 import { XS } from "../figma_app/178752";
 import { selectCurrentFile, useFullscreenViewFile } from "../figma_app/516028";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
@@ -96,7 +96,7 @@ import { S as _$$S } from "../5132/668270";
 import { showModal, showModalHandler } from "../905/156213";
 import { updateWorkshopUserName, setMultiplayerName } from "../figma_app/107215";
 import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
-import { QL } from "../905/609392";
+import { getQueryParam } from "../905/609392";
 import { isUIHiddenOrLocked } from "../905/868547";
 import { generateAnonymouseName } from "../905/301652";
 import { AuthModal } from "../905/749159";
@@ -406,7 +406,7 @@ function tm(e) {
     let l = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
     let c = useSelector(e => e.progressBarState.mode);
     let u = selectCurrentFile()?.isTryFile;
-    let p = QL("name");
+    let p = getQueryParam("name");
     useEffect(() => {
       i && u && o && p && l && e(updateWorkshopUserName({
         name: p
@@ -1292,7 +1292,7 @@ function t9({
       children: jsx(ErrorBoundaryCrash, {
         boundaryKey: "InAppPage",
         fallback: f ? jsx(MemoryWarningModal, {}) : errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
-        hasCustomWASMBuild: y4,
+        hasCustomWASMBuild: isUsingLocalBuild,
         children: jsx(t5, {
           children: e
         })

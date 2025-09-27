@@ -60,7 +60,7 @@ import { collaboratorSet } from "../905/332483";
 import { getProductAccessTypeByKey, compareProductAccessTypes } from "../figma_app/217457";
 import { d as _$$d } from "../figma_app/603561";
 import { q as _$$q } from "../4452/876838";
-import { QL, EM } from "../905/609392";
+import { getQueryParam, removeQueryParam } from "../905/609392";
 import { getUserId } from "../905/372672";
 import { MX, EQ } from "../figma_app/684446";
 import { FUserRoleType } from "../figma_app/191312";
@@ -409,7 +409,7 @@ export function $$e$0({
     tS && tt(new Date());
   }, [tS]);
   useEffect(() => {
-    let e = QL("approvalRequestId");
+    let e = getQueryParam("approvalRequestId");
     e ? tN(t => ({
       ...t,
       requestId: e
@@ -417,7 +417,7 @@ export function $$e$0({
       ...e,
       loading: !1
     }));
-    EM("approvalRequestId");
+    removeQueryParam("approvalRequestId");
   }, []);
   useEffect(() => {
     async function e(e) {
@@ -529,8 +529,8 @@ export function $$e$0({
   });
   let tQ = useMemo(() => new Set(tV?.filter(e => [ProductAccessTypeEnum.DEVELOPER, ProductAccessTypeEnum.EXPERT].includes(e.billableProductKey) && e.message?.includes("Dev Mode")).map(e => e.id)), [tV]);
   _$$R(() => {
-    let e = QL("viewRequestId");
-    e && (tV.find(t => t.id === e) ? setHighlightedItemId(e) : dispatchRequestAlreadyHandled(), EM("viewRequestId"));
+    let e = getQueryParam("viewRequestId");
+    e && (tV.find(t => t.id === e) ? setHighlightedItemId(e) : dispatchRequestAlreadyHandled(), removeQueryParam("viewRequestId"));
   }, tM, e => !e);
   let tY = useMemo(() => debounce(ek, 300), [ek]);
   let tK = e => e === r1.GUESTS ? getI18nString("admin_dashboard.requests.guests") : e === r1.MEMBERS ? getI18nString("admin_dashboard.requests.members") : getI18nString("admin_dashboard.requests.all_users");

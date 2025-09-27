@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getResourceDataOrFallback } from "../905/663269";
 import { h as _$$h } from "../905/142086";
 import { showModalHandler } from "../905/156213";
-import { QL, EM } from "../905/609392";
+import { getQueryParam, removeQueryParam } from "../905/609392";
 import { nk } from "../figma_app/2023";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { selectCurrentUser } from "../905/372672";
@@ -25,8 +25,8 @@ export function $$x0(e) {
   let j = useIsProgressBarHiddenOrLocked();
   let k = selectCurrentUser();
   useEffect(() => {
-    let o = QL(g);
-    let a = "true" === QL(v);
+    let o = getQueryParam(g);
+    let a = "true" === getQueryParam(v);
     o && !j && function (o) {
       if (b || y || C || w || !n) return;
       let i = x.find(e => e.id === o);
@@ -55,8 +55,8 @@ export function $$x0(e) {
           wR(t, IZ.Approved, j);
         }
       });
-      EM(g);
-      EM(v);
+      removeQueryParam(g);
+      removeQueryParam(v);
     }(o);
   }, [e, k, n, x, b, y, C, w, j, t]);
 }

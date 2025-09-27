@@ -1,131 +1,185 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { memo, forwardRef, useState, useCallback } from "react";
-import a from "classnames";
-import { useClickHandler } from "../905/911623";
-import { RecordableButton } from "../905/511649";
-import { getBasename } from "../905/309735";
-import { KindEnum } from "../905/129884";
-import { Z } from "../905/248978";
-import { jl, zi, iL } from "../905/824449";
-import { eg } from "../figma_app/728075";
-var s = a;
-let $$$$h0 = memo(forwardRef(function ({
-  dsStyle: e,
-  recordingKey: t,
-  isSelected: i = !1,
-  isFauxFocused: a = !1,
-  size: s,
-  onClick: d,
-  onDoubleClick: c,
-  onContextMenu: u,
-  onMouseEnter: h,
-  onMouseMove: g,
-  onMouseLeave: f,
-  onFocus: _
-}, A) {
-  let [y, b] = useState(!1);
-  let [v, I] = useState(!1);
-  let E = useCallback(e => {
-    b(!0);
-    h?.(e);
-  }, [h]);
-  let {
-    onMouseDown,
+import type { FocusEventHandler, MouseEventHandler, ReactNode } from 'react'
+import cn from 'classnames'
+import { forwardRef, memo, useCallback, useState } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { KindEnum } from '../905/129884'
+import { styleInfoTooltip } from '../905/248978'
+import { getBasename } from '../905/309735'
+import { RecordableButton } from '../905/511649'
+import { iL, jl, zi } from '../905/824449'
+import { useClickHandler } from '../905/911623'
+import { eg } from '../figma_app/728075'
+/**
+ * Props for the StyleIconButton component.
+ * Using loose types for dsStyle and size to maintain compatibility with existing code.
+ */
+interface StyleIconButtonProps {
+  dsStyle: any
+  recordingKey?: string
+  isSelected?: boolean
+  isFauxFocused?: boolean
+  size?: any
+  onClick?: MouseEventHandler<HTMLElement>
+  onDoubleClick?: MouseEventHandler<HTMLElement>
+  onContextMenu?: MouseEventHandler<HTMLElement>
+  onMouseEnter?: MouseEventHandler<HTMLElement>
+  onMouseMove?: MouseEventHandler<HTMLElement>
+  onMouseLeave?: MouseEventHandler<HTMLElement>
+  onFocus?: FocusEventHandler<HTMLElement>
+}
+
+/**
+ * Props for the StyleRowButton component.
+ */
+interface StyleRowButtonProps {
+  children?: ReactNode
+  dsStyle: { description?: string, name?: string } | any
+  recordingKey?: string
+  isSelected?: boolean
+  isFauxFocused?: boolean
+  shouldShowTooltip?: boolean
+  onClick?: MouseEventHandler<HTMLElement>
+  onDoubleClick?: MouseEventHandler<HTMLElement>
+  onContextMenu?: MouseEventHandler<HTMLElement>
+  onMouseEnter?: MouseEventHandler<HTMLElement>
+  onMouseMove?: MouseEventHandler<HTMLElement>
+  onMouseLeave?: MouseEventHandler<HTMLElement>
+  onFocus?: FocusEventHandler<HTMLElement>
+}
+
+export const StyleIconButton = memo(
+  forwardRef<HTMLDivElement, StyleIconButtonProps>(({
+    dsStyle,
+    recordingKey,
+    isSelected = false,
+    isFauxFocused = false,
+    size: sizeProp,
     onClick,
-    onMouseUp,
-    onMouseLeave
-  } = useClickHandler({
-    onClick: d,
-    onMouseLeave: useCallback(e => {
-      b(!1);
-      f?.(e);
-    }, [f])
-  });
-  let T = useCallback(e => {
-    I(!0);
-    _?.(e);
-  }, [_]);
-  return jsxs(RecordableButton, {
-    className: "style_icon_button--button--Cf7v2",
-    forwardedRef: A,
-    onBlur: () => I(!1),
-    onClick,
-    onContextMenu: u,
-    onDoubleClick: c,
-    onFocus: T,
-    onMouseDown,
-    onMouseEnter: E,
+    onDoubleClick,
+    onContextMenu,
+    onMouseEnter,
+    onMouseMove,
     onMouseLeave,
-    onMouseMove: g,
-    onMouseUp,
-    recordingKey: t,
-    children: [i && jsx(jl, {
-      color: "#0d99ff"
-    }), !i && !!onClick && jsx("div", {
-      className: a ? void 0 : "style_icon_button--focusCircle--pHmuX",
-      children: jsx(jl, {
-        color: eg
-      })
-    }), jsx(zi, {
-      dsStyle: e,
-      size: s,
-      disableOutline: i || y || v || a
-    })]
-  });
-}));
-let $$g1 = forwardRef(function ({
-  children: e,
-  dsStyle: t,
-  recordingKey: i,
-  isSelected: r = !1,
-  isFauxFocused: a = !1,
-  shouldShowTooltip: m = !1,
-  onClick: h,
-  onDoubleClick: g,
-  onContextMenu: f,
-  onMouseEnter: _,
-  onMouseMove: A,
-  onMouseLeave: y,
-  onFocus: b
-}, v) {
-  let {
+    onFocus,
+  }, ref) => {
+    const [isHovered, setIsHovered] = useState(false)
+    const [isFocused, setIsFocused] = useState(false)
+
+    const handleMouseEnter = useCallback((event: React.MouseEvent<HTMLElement>) => {
+      setIsHovered(true)
+      onMouseEnter?.(event)
+    }, [onMouseEnter])
+
+    const {
+      onMouseDown,
+      onClick: handleClick,
+      onMouseUp,
+      onMouseLeave: handleMouseLeave,
+    } = useClickHandler({
+      onClick,
+      onMouseLeave: useCallback((event: React.MouseEvent<HTMLElement>) => {
+        setIsHovered(false)
+        onMouseLeave?.(event)
+      }, [onMouseLeave]),
+    })
+
+    const handleFocus = useCallback((event: React.FocusEvent<HTMLElement>) => {
+      setIsFocused(true)
+      onFocus?.(event)
+    }, [onFocus])
+
+    return jsxs(RecordableButton, {
+      className: 'style_icon_button--button--Cf7v2',
+      forwardedRef: ref,
+      onBlur: () => setIsFocused(false),
+      onClick: handleClick,
+      onContextMenu,
+      onDoubleClick,
+      onFocus: handleFocus,
+      onMouseDown,
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      onMouseMove,
+      onMouseUp,
+      recordingKey,
+      children: [
+        isSelected && jsx(jl, {
+          color: '#0d99ff',
+        }),
+        !isSelected && !!onClick && jsx('div', {
+          className: isFauxFocused ? undefined : 'style_icon_button--focusCircle--pHmuX',
+          children: jsx(jl, {
+            color: eg,
+          }),
+        }),
+        jsx(zi, {
+          dsStyle,
+          size: sizeProp,
+          disableOutline: isSelected || isHovered || isFocused || isFauxFocused,
+        }),
+      ],
+    })
+  }),
+)
+
+export const StyleRowButton = forwardRef<HTMLDivElement, StyleRowButtonProps>(({
+  children,
+  dsStyle,
+  recordingKey,
+  isSelected = false,
+  isFauxFocused = false,
+  shouldShowTooltip = false,
+  onClick,
+  onDoubleClick,
+  onContextMenu,
+  onMouseEnter,
+  onMouseMove,
+  onMouseLeave,
+  onFocus,
+}, ref) => {
+  const {
     onMouseDown,
-    onClick,
+    onClick: handleClick,
     onMouseUp,
-    onMouseLeave
+    onMouseLeave: handleMouseLeave,
   } = useClickHandler({
-    onClick: h,
-    onMouseLeave: y
-  });
+    onClick,
+    onMouseLeave,
+  })
+
   return jsxs(RecordableButton, {
-    className: s()("style_icon_button--rowButton--dTT9X", {
-      "style_icon_button--selected--6KJiJ": r,
-      "style_icon_button--fauxFocused--LWkh-": a
+    'className': cn('style_icon_button--rowButton--dTT9X', {
+      'style_icon_button--selected--6KJiJ': isSelected,
+      'style_icon_button--fauxFocused--LWkh-': isFauxFocused,
     }),
-    "data-tooltip": m ? Z : void 0,
-    "data-tooltip-style-description": t.description,
-    "data-tooltip-style-name": getBasename(t.name || ""),
-    "data-tooltip-type": KindEnum.SPECIAL,
-    forwardedRef: v,
-    onClick,
-    onContextMenu: f,
-    onDoubleClick: g,
-    onFocus: b,
+    'data-tooltip': shouldShowTooltip ? styleInfoTooltip : undefined,
+    'data-tooltip-style-description': dsStyle.description,
+    'data-tooltip-style-name': getBasename(dsStyle.name || ''),
+    'data-tooltip-type': KindEnum.SPECIAL,
+    'forwardedRef': ref,
+    'onClick': handleClick,
+    'onContextMenu': onContextMenu,
+    'onDoubleClick': onDoubleClick,
+    'onFocus': onFocus,
     onMouseDown,
-    onMouseEnter: _,
-    onMouseLeave,
-    onMouseMove: A,
+    'onMouseEnter': onMouseEnter,
+    'onMouseLeave': handleMouseLeave,
+    'onMouseMove': onMouseMove,
     onMouseUp,
-    recordingKey: i,
-    children: [jsx("div", {
-      className: "style_icon_button--rowButtonIcon--xZQ-g",
-      children: jsx(zi, {
-        dsStyle: t,
-        size: iL.Standard,
-        disableTooltip: !0
-      })
-    }), e]
-  });
-});
-export const h = $$$$h0;
-export const A = $$g1;
+    'recordingKey': recordingKey,
+    'children': [
+      jsx('div', {
+        className: 'style_icon_button--rowButtonIcon--xZQ-g',
+        children: jsx(zi, {
+          dsStyle,
+          size: iL.Standard,
+          disableTooltip: true,
+        }),
+      }),
+      children,
+    ],
+  })
+})
+
+export const h = StyleIconButton
+export const A = StyleRowButton

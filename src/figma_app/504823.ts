@@ -7,7 +7,7 @@ import { ap, WQ } from "../figma_app/149304";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { fullscreenValue } from "../figma_app/455680";
 import { l as _$$l } from "../figma_app/773170";
-import { y4 } from "../figma_app/298277";
+import { isUsingLocalBuild } from "../figma_app/298277";
 import { getObservableValue } from "../figma_app/84367";
 import { dX } from "../figma_app/837840";
 import { H } from "../905/769882";
@@ -121,7 +121,7 @@ function C({
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "color-management",
     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
-    hasCustomWASMBuild: y4,
+    hasCustomWASMBuild: isUsingLocalBuild,
     children: jsx(AtomProvider, {
       children: jsx(y, {
         children: jsx($$x1, {

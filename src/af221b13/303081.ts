@@ -28,7 +28,7 @@ import { postUserFlag } from "../905/985254";
 import { COMMUNITY_MIN_WIDTH, FREEMIUM_PREVIEW, HubAction, COMMUNITY_HEIGHT } from "../figma_app/350203";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, TrackedLink, TrackedDiv, TrackedButton } from "../figma_app/831799";
-import { QL } from "../905/609392";
+import { getQueryParam } from "../905/609392";
 import { getSelectedView } from "../figma_app/386952";
 import { FFileType } from "../figma_app/191312";
 import { useIsLoaded } from "../905/18797";
@@ -6275,9 +6275,9 @@ export function $$sd0() {
   let i = useSelector(e => e.userFlags);
   return (useSingleEffect(() => (function (e, t) {
     let i = t.figjam_editor_onboarded || hasAnyOnboardingFlag(t) || t.editor_community_duplicate_onboarded || t.orgs_onboarded || t.welcome_onboarded;
-    let n = QL("after-auth-duplicate-file-id");
-    let a = QL("show_eula");
-    let s = QL("editor_type");
+    let n = getQueryParam("after-auth-duplicate-file-id");
+    let a = getQueryParam("show_eula");
+    let s = getQueryParam("editor_type");
     n && (a ? e(showModalHandler({
       type: _$$F,
       data: {

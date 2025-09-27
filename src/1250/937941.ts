@@ -6,7 +6,7 @@ import { R } from "../905/165069";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { DeepLinkType } from "../905/15667";
-import { QL, EM } from "../905/609392";
+import { getQueryParam, removeQueryParam } from "../905/609392";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { wH } from "../figma_app/680166";
@@ -26,8 +26,8 @@ export function $$y0() {
   let v = getFeatureFlags().deeplink_request_from_draft_copied_link_email;
   let w = useCurrentPrivilegedPlan("useUpgradeRequestModalOnPageLoad");
   let T = selectCurrentFile();
-  let j = QL("entry_point") || "";
-  let k = QL("upgrade_request_type") || "";
+  let j = getQueryParam("entry_point") || "";
+  let k = getQueryParam("upgrade_request_type") || "";
   let E = v && null !== T && "in_editor" === k;
   let C = E || isCollaboratorType(k);
   C && (e = E ? getProductAccessTypeOrDefault(T.editorType) : ProductAccessTypeMap[k]);
@@ -86,8 +86,8 @@ export function $$y0() {
       entryPoint: I,
       upgradeReason: A
     })({});
-    EM("entry_point");
-    EM("upgrade_request_type");
+    removeQueryParam("entry_point");
+    removeQueryParam("upgrade_request_type");
   }, M, e => !e);
 }
 export const i = $$y0;

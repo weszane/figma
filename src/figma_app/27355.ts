@@ -130,9 +130,9 @@ export const fp = useAtomValueAndSetter
 export const md = useAtomWithSubscription
 export const mC = useMemoizedAtomValue
 export { p6, tP } from '../905/292282'
-export { AY } from '../vendor/84183'
 export { Pj, Xr } from '../vendor/525001'
 export { mg, Rq, t_, tx, um, Ut } from '../vendor/812047'
+export { useResetAtom } from 'jotai/react/utils'
 export const An = AtomProvider
 export const xP = useUndoRedoAtom
 export const zl = atomStoreManager
@@ -146,4 +146,4 @@ export const M2 = createAtomWithEquality
 export const LJ = createCustomAtom
 export const FZ = setupCustomAtom
 export const eU = atom
-export { atom, atomStoreManager, atomWithDefault, createAtomWithEquality, createCustomAtom, createLocalStorageAtom, setupAtomWithMount, setupCustomAtom, setupSubscriptionAtom }
+export { atom, atomStoreManager, atomWithDefault, createAtomWithEquality, createCustomAtom, createLocalStorageAtom, createValidatedLocalStorageAtom, setupAtomWithMount, setupCustomAtom, setupSubscriptionAtom }

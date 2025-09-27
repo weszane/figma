@@ -7,7 +7,7 @@ import { isActiveAtom } from '../905/617744';
 import { logInfo } from '../905/714362';
 import { atomStoreManager } from '../figma_app/27355';
 import { fullscreenCrashStateAtom } from '../figma_app/276445';
-import { bY } from '../figma_app/298277';
+import { getWasmVariantInfo } from '../figma_app/298277';
 import { MEMORY_WARNING_MODAL } from '../figma_app/453508';
 import { openFileAtom } from '../figma_app/516028';
 import { GLFailureType } from '../figma_app/763686';
@@ -45,7 +45,7 @@ class FullscreenCrashHandler {
     if (crash.type === 'oom' && figmaMobile?.handleAllocationFailure) {
       figmaMobile.handleAllocationFailure(GLFailureType.WASM_FAILURE);
     }
-    const additionalData = bY();
+    const additionalData = getWasmVariantInfo();
     setTagGlobal('fullscreen_status', 'has_crashed');
     let editorType: string | undefined;
     try {

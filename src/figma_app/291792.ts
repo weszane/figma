@@ -25,7 +25,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { f as _$$f } from "../figma_app/990299";
 import { ck } from "../905/87821";
 import { isZoomIntegration } from "../figma_app/469876";
-import { m as _$$m } from "../905/575846";
+import { isFigmaNativeApp } from "../905/575846";
 import { TY } from "../figma_app/701001";
 import { Zr } from "../figma_app/678782";
 import { r as _$$r } from "../905/210851";
@@ -158,7 +158,7 @@ function Q({
       editorType: t,
       trackingEventName: n
     }) => () => {
-      let i = _$$m ? TabOpenBehavior.SAME_TAB : TabOpenBehavior.NEW_TAB;
+      let i = isFigmaNativeApp ? TabOpenBehavior.SAME_TAB : TabOpenBehavior.NEW_TAB;
       let a = zE({
         isDraftsFolder: !0,
         state: I,

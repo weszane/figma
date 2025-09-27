@@ -95,7 +95,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { CM, xL, Yv } from '../905/459248';
 import { QC } from '../905/461516';
 import { notificationActions } from '../905/463586';
-import { Sh } from '../905/470286';
+import { isSpecialRoutePath } from '../905/470286';
 import { enqueueNetworkErrorBell } from '../905/470594';
 import { createPluginInstance } from '../905/472793';
 import { formatI18nMessage } from '../905/482208';
@@ -121,7 +121,7 @@ import { reactTimerGroup } from '../905/542194';
 import { r6 as _$$r } from '../905/542608';
 import { fJ, x5 } from '../905/543054';
 import { xK } from '../905/543466';
-import { g as _$$g5 } from '../905/544669';
+import { updateAppCapabilities } from '../905/544669';
 import { PluginApiMetrics } from '../905/545265';
 import { y8 as _$$y6 } from '../905/551193';
 import { subscribeAndAwaitData } from '../905/553831';
@@ -132,7 +132,7 @@ import { decodeBase64, encodeBase64 } from '../905/561685';
 import { j as _$$j } from '../905/564614';
 import { dequeuePluginStatus } from '../905/571565';
 import { FlashActions } from '../905/573154';
-import { m as _$$m } from '../905/575846';
+import { isFigmaNativeApp } from '../905/575846';
 import { VisualBellIcon } from '../905/576487';
 import { l as _$$l2, q as _$$q } from '../905/578831';
 import { ImageOrientationUtils } from '../905/580661';
@@ -303,7 +303,7 @@ import { $W } from '../figma_app/268172';
 import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { Dl as _$$Dl, fetchImageData, MAX_CANVAS_SIZE } from '../figma_app/291892';
 import { pN } from '../figma_app/292212';
-import { e3 as _$$e4 } from '../figma_app/298277';
+import { initializeWasm } from '../figma_app/298277';
 import { PR } from '../figma_app/299859';
 import { getFullscreenViewEditorType, getWidgetVersionData, isWidgetPlugin, loadLocalPluginSource, loadPluginManifest, PluginPermissions, showVisualBell } from '../figma_app/300692';
 import { Z as _$$Z3 } from '../figma_app/301719';
@@ -5169,11 +5169,11 @@ export function $$lq1(e, t, i, n) {
     lW = !0;
     let r = getInitialOptions().frame_context;
     let a = getInitialOptions().editing_file;
-    r?.type === 'integration' && a?.editor_type !== 'whiteboard' && _$$g5(e => ({
+    r?.type === 'integration' && a?.editor_type !== 'whiteboard' && updateAppCapabilities(e => ({
       ...e,
       appIsReadOnly: !0
     }));
-    documentMode === DocumentMode.RECOVERY && a?.editor_type !== 'whiteboard' && _$$g5(e => ({
+    documentMode === DocumentMode.RECOVERY && a?.editor_type !== 'whiteboard' && updateAppCapabilities(e => ({
       ...e,
       appIsRecovery: !0
     }));
@@ -5306,7 +5306,7 @@ let lX = class e extends sP(sN(sR)) {
       if (this._readyStartTime = window.performance.now(), fullscreenPerfManager.start('loadAndStartFullscreen'), e.startFetchingFontList(), e.startFetchingInterfaceFont(), canOpenUrlInDesktop(location.href).then(e => {
         this._isDesktopAppRunning = e;
         e && _$$N3.shouldShowOnce() && this._store.dispatch(showOpenDesktopAppModal(PluginRunForContext.FOR_OPEN));
-      }), e.prepareSpellCheck(), t && console.log('isMacDebugApp', _$$m), _$$m) {
+      }), e.prepareSpellCheck(), t && console.log('isMacDebugApp', isFigmaNativeApp), isFigmaNativeApp) {
         await this.onReady();
         Fullscreen?.debugMacAppIsStartingFullscreen();
         document.body.parentElement.style.backgroundColor = 'transparent';
@@ -5315,7 +5315,7 @@ let lX = class e extends sP(sN(sR)) {
         t && console.log('About to initialize WebGPU');
         await vU();
         t && console.log('About to initialize fullscreen');
-        await _$$e4(e);
+        await initializeWasm(e);
         t && console.log('Finished initializing fullscreen');
         await this.onReady();
         t && console.log('Finished onReady');
@@ -7000,7 +7000,7 @@ let lX = class e extends sP(sN(sR)) {
     getFeatureFlags()?.fullscreen_use_metrics_event_loop && requestAnimationFrame(tV);
     getFeatureFlags()?.fullscreen_use_threaded_rendering && oN.getInstance().spawnAndStart();
     this.reparentRootElement(this.containerElement);
-    _$$m && e.startFetchingFontList();
+    isFigmaNativeApp && e.startFetchingFontList();
     debug(e.fontListPromise != null, 'should have loaded font list by the time fullscreen is ready');
     let i = (e, t) => {
       hasLocalFontsAvailable(t) && setFontsInitialized();
@@ -7633,7 +7633,7 @@ let lX = class e extends sP(sN(sR)) {
           } : e.protocol === 'tel:' ? {
             type: _$$F3.TEL,
             url: e
-          } : isFigmaDomain(e.hostname) || isFigmaDomain(e.host) ? Sh(e.pathname) ? {
+          } : isFigmaDomain(e.hostname) || isFigmaDomain(e.host) ? isSpecialRoutePath(e.pathname) ? {
             type: _$$F3.FIGMA_PROTOTYPE,
             url: e
           } : e.searchParams.has('version-id') ? {

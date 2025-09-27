@@ -22,7 +22,7 @@ interface TsApiInitParams {
     jsHelpers: unknown
     [key: string]: unknown
   }
-  registerRefreshCallback?: (t: unknown) => void
+  registerRefreshCallback?: (t: any) => void
   leakBindings?: boolean
 }
 

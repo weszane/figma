@@ -24,7 +24,7 @@ export class DesktopAPI {
    * Gets the API version.
    * @returns The version string.
    */
-  getVersion(): string {
+  getVersion(): number {
     return this.api.version
   }
 

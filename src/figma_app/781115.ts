@@ -188,7 +188,7 @@ export class LoadTimeTracker {
    * Handles font list loaded event.
    * (Original: handleFontListLoaded)
    */
-  public handleFontListLoaded = (): void => {
+  public handleFontListLoaded = (_e?: any): void => {
     const eventData = {
       ...this._connectArgs,
       domContentLoaded: this._domContentLoaded,

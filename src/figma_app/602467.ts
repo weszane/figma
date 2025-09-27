@@ -8,7 +8,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogActionStrip, DialogBod
 import { L as _$$L } from "../905/704296";
 import { T as _$$T } from "../905/2124";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomWithSubscription, AY } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription, useResetAtom } from "../figma_app/27355";
 import h from "classnames";
 import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -466,7 +466,7 @@ function eo({
   x(d, {
     numCols: 2
   });
-  let c = AY(YH);
+  let c = useResetAtom(YH);
   let h = i => {
     let {
       localizedText,

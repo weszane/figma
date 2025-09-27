@@ -1,9 +1,9 @@
 import { desktopAPIInstance } from "../figma_app/876459";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { selectViewAction } from "../905/929976";
-import { g4 } from "../figma_app/298277";
+import { getFullscreenPreloadTiming } from "../figma_app/298277";
 export function $$o0() {
-  return !(desktopAPIInstance || isInteractionOrEvalMode()) && "never" !== g4();
+  return !(desktopAPIInstance || isInteractionOrEvalMode()) && "never" !== getFullscreenPreloadTiming();
 }
 export let $$l1 = e => t => function (i) {
   let n = e.getState();

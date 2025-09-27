@@ -92,7 +92,7 @@ export function isFigmaMirrorAndroid(): boolean {
  * Checks if the device is Android.
  * Original: $$g19
  */
-const isAndroidUA: boolean = /Android/.test(navigator.userAgent)
+export const isAndroidUA: boolean = /Android/.test(navigator.userAgent)
 
 /**
  * Returns true if running inside FigmaMobile.

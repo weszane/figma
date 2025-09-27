@@ -50,7 +50,7 @@ import { P as _$$P3 } from '../905/175083';
 import { g as _$$g2 } from '../905/181093';
 import { Y as _$$Y3 } from '../905/185567';
 import { ThemeContext } from '../905/187165';
-import { LO } from '../905/189279';
+import { featureAPI } from '../905/189279';
 import { AUTH_COMPLETE } from '../905/194276';
 import { W as _$$W4 } from '../905/200727';
 import { Z as _$$Z2 } from '../905/224161';
@@ -132,7 +132,7 @@ import { d as _$$d2 } from '../905/531325';
 import { _T as _$$_T, E5, jv, k4, Yi } from '../905/531551';
 import { DesktopModalType, openUrlInDesktop } from '../905/535224';
 import { globalPerfTimer } from '../905/542194';
-import { N as _$$N3 } from '../905/544669';
+import { createCapabilityGetters } from '../905/544669';
 import { lu as _$$lu } from '../905/545842';
 import { HAvatarType } from '../905/566881';
 import { d as _$$d8, O as _$$O } from '../905/572941';
@@ -153,7 +153,7 @@ import { c as _$$c8 } from '../905/598842';
 import { TrackedButton } from '../905/599896';
 import { getFeatureFlags } from '../905/601108';
 import { K as _$$K3 } from '../905/604638';
-import { QL } from '../905/609392';
+import { getQueryParam } from '../905/609392';
 import { i as _$$i3 } from '../905/610691';
 import { customHistory } from '../905/612521';
 import { getDesignFileUrl } from '../905/612685';
@@ -367,7 +367,7 @@ import { W6 } from '../figma_app/287316';
 import { getLivegraphClient, useMultiSubscription, useSubscription } from '../figma_app/288654';
 import { imageAPI } from '../figma_app/291892';
 import { hasUserAccess, useHighPriorityNotificationsExperiment } from '../figma_app/297957';
-import { F$, LH, y4 } from '../figma_app/298277';
+import { loadWasmBinaryByType, initializeFullscreenPreloading, isUsingLocalBuild } from '../figma_app/298277';
 import { XO } from '../figma_app/299859';
 import { I as _$$I } from '../figma_app/304633';
 import { Pp } from '../figma_app/305244';
@@ -1715,8 +1715,8 @@ let na = {
 };
 let ns = {
   CommonApp: () => ({
-    ...LO,
-    ..._$$N3(),
+    ...featureAPI,
+    ...createCapabilityGetters(),
     appType: () => UserAppType.FullscreenApp
   }),
   AccessibleAreasBindings: () => _$$H2,
@@ -2208,9 +2208,9 @@ function iW() {
 function iq() {
   let e = _$$aq();
   let t = useDispatch();
-  let r = QL('locale');
-  let n = QL('hub_file_id');
-  let i = QL('name');
+  let r = getQueryParam('locale');
+  let n = getQueryParam('hub_file_id');
+  let i = getQueryParam('name');
   useEffect(() => {
     sendWithRetry.post('/api/try/figjam', {
       hub_file_id: n,
@@ -8897,7 +8897,7 @@ let _C = memo(() => {
                   children: [!1, jsx(ErrorBoundaryCrash, {
                     boundaryKey: 'InAppPage',
                     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
-                    hasCustomWASMBuild: y4,
+                    hasCustomWASMBuild: isUsingLocalBuild,
                     children: jsx(_x, {})
                   }), getFeatureFlags().fpl_flash_view_migration ? jsx(_$$J, {
                     flashes: t
@@ -9022,7 +9022,7 @@ window.addEventListener('load', () => {
     forwardToDatadog: !0
   });
 });
-LH();
+initializeFullscreenPreloading();
 let _R = !1;
 function _L() {
   let e = getSelectedViewType();
@@ -9099,7 +9099,7 @@ function _D() {
 let _k = performance.now();
 t(async () => {
   if (customHistory.location.pathname === '/preload-editor') {
-    F$('prototype-lib').then(() => {
+    loadWasmBinaryByType('prototype-lib').then(() => {
       fullscreenPerfManager.start('editorPreloaded');
       window.startPreloadedTab = function (e) {
         if (window.preloadedTabStart = performance.now(), !getInitialOptions().user_data) {
@@ -9157,8 +9157,8 @@ t(async () => {
         return {
           CommonApp: () => ({
             appType: () => UserAppType.InteractionTest,
-            ...LO,
-            ..._$$N3()
+            ...featureAPI,
+            ...createCapabilityGetters()
           }),
           AccessibleAreasBindings: () => _$$H2,
           OOMHelpers: () => userValue,

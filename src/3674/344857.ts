@@ -4,7 +4,7 @@ import { useEffect, useCallback, useRef, memo, createContext, useContext, useMem
 import { useDispatch, useSelector } from "react-redux";
 import { HandoffBindingsCpp, DesignGraphElements, ColorFormatEnum, LayoutTabType, IAssertResource, SceneGraphHelpers, Fullscreen, FileSourceType, Thumbnail, ComponentPropType, VariableDataType, OperationType, AppStateTsApi, LayoutSizingMode, BuildStatus, UIVisibilitySetting, NodePropertyCategory, Fonts, FitMode, DesignWorkspace, ViewType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomValueAndSetter, useAtomWithSubscription, atom, atomStoreManager, Xr, AY, createLocalStorageAtom } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription, atom, atomStoreManager, Xr, useResetAtom, createLocalStorageAtom } from "../figma_app/27355";
 import { useHasParentOrgId } from "../905/882262";
 import { si as _$$si, wS, g$, iX as _$$iX, Bv, x9 } from "../figma_app/221240";
 import { ServiceCategories } from "../905/165054";
@@ -3403,7 +3403,7 @@ function iO() {
     })]
   });
 }
-function iM({}) {
+function iM({ }) {
   let e = useDispatch();
   let t = "install-messaging-dropdown";
   let n = useDropdownState();
@@ -4814,7 +4814,7 @@ let oZ = class {
       if (n?.type === "PLAIN_TEXT") _$$n6({
         link: t,
         linkPreviewJson: n
-      });else if (n?.type === "AUTH_REQUIRED") {
+      }); else if (n?.type === "AUTH_REQUIRED") {
         let n = atomStoreManager.get(ok);
         let a = n[e.plugin_id]?.links ?? [];
         atomStoreManager.set(ok, n => ({
@@ -8052,7 +8052,7 @@ function rX() {
   } = function () {
     let e = Xr(initialViewAtom);
     let [t, n] = useAtomValueAndSetter(defaultViewAtom);
-    let a = AY(defaultViewAtom);
+    let a = useResetAtom(defaultViewAtom);
     let o = useCallback(() => {
       e(t);
     }, [t, e]);
@@ -8087,8 +8087,8 @@ function rX() {
     },
     setCurrentViewOrTab: setCurrentView,
     currentView: currentPluginView,
-    closeModal: () => {},
-    pinModal: () => {}
+    closeModal: () => { },
+    pinModal: () => { }
   }), [n, setCurrentView, currentPluginView]);
   return jsx(AutoLayout, {
     direction: "vertical",
@@ -11932,7 +11932,7 @@ function p4({
       className: "frame_picker--trigger--ZPMqZ",
       ref: o,
       onClick: function () {
-        if (t) n(!1);else {
+        if (t) n(!1); else {
           let e = o.current?.getBoundingClientRect();
           e && (c(e), n(!0));
         }

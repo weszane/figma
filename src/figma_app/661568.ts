@@ -1,128 +1,241 @@
-import { debounce } from "../905/915765";
-import { CorePerfInfo } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { trackEventAnalytics } from "../905/449184";
-import { BrowserInfo } from "../figma_app/778880";
-import { getViewerInstance } from "../figma_app/632319";
-import { getMemoryUsage } from "../figma_app/527873";
-var $$n1;
-var $$i0;
-class p {
-  constructor(e) {
-    for (let t of (this.reported = !1, this.initializationStart = null, this.events = {}, ["applyNodeChanges", "multiplayerMessageSize", "initializePrototypeLib", "viewerSceneDidCompleteInitialLoad", "transferSentToWorker", "transferMemory", "transferMemorySize"])) {
-      e[t] = e[t] || [];
-      e[t].push(this);
+import { trackEventAnalytics } from '../905/449184'
+import { getFeatureFlags } from '../905/601108'
+import { debounce } from '../905/915765'
+import { getMemoryUsage } from '../figma_app/527873'
+import { getViewerInstance } from '../figma_app/632319'
+import { CorePerfInfo } from '../figma_app/763686'
+import { BrowserInfo } from '../figma_app/778880'
+import type { LoadTimeTracker } from './781115'
+
+// Timer for tracking prototype library loading performance
+interface LoadTimerEvents {
+  [key: string]: number
+}
+
+class LoadTimer {
+  reported: boolean = false
+  initializationStart: number | null = null
+  events: LoadTimerEvents = {}
+
+  // Event names that this timer subscribes to
+  private static readonly SUBSCRIBED_EVENTS = [
+    'applyNodeChanges',
+    'multiplayerMessageSize',
+    'initializePrototypeLib',
+    'viewerSceneDidCompleteInitialLoad',
+    'transferSentToWorker',
+    'transferMemory',
+    'transferMemorySize',
+  ]
+
+  constructor(eventRegistry: Record<string, LoadTimer[]>) {
+    // Register this instance with the event registry for each subscribed event
+    for (const eventName of LoadTimer.SUBSCRIBED_EVENTS) {
+      if (!eventRegistry[eventName]) {
+        eventRegistry[eventName] = []
+      }
+      eventRegistry[eventName].push(this)
     }
   }
-  reset() {
-    this.events = {};
+
+  reset(): void {
+    this.events = {}
   }
-  start(e) {
-    this.logTime(e + "Start");
-    "initializePrototypeLib" === e && (this.initializationStart = performance.now());
+
+  start(eventName: string): void {
+    this.logTime(`${eventName}Start`)
+    if (eventName === 'initializePrototypeLib') {
+      this.initializationStart = performance.now()
+    }
   }
-  end(e) {
-    this.logTime(e + "End");
+
+  end(eventName: string): void {
+    this.logTime(`${eventName}End`)
   }
-  logValue(e, t) {
-    this.events[e] = t;
+
+  logValue(key: string, value: number): void {
+    this.events[key] = value
   }
-  logTime(e) {
-    this.events[e] = Math.round(performance.now());
+
+  logTime(key: string): void {
+    this.events[key] = Math.round(performance.now())
   }
-  report() {
-    this.logTime("reportedAt");
-    let e = {
+
+  report(): void {
+    this.logTime('reportedAt')
+
+    const reportData = {
       version: 2,
       firstReport: !this.reported,
       totalUsedHeapMemory: CorePerfInfo?.getTotalUsedHeapMemory(),
       maxUsedHeapMemory: CorePerfInfo?.getMaxUsedHeapMemory(),
       fileKey: getViewerInstance()?.openFileKey(),
-      ...this.events
-    };
+      ...this.events,
+    }
+
     setTimeout(() => {
-      trackEventAnalytics("Prototype Lib Loaded", e);
-      this.reported = !0;
-    });
+      trackEventAnalytics('Prototype Lib Loaded', reportData)
+      this.reported = true
+    }, 0)
   }
 }
-class _ {
-  constructor(e) {
-    for (let t of (this.startTimes = {}, this.meta = {}, this.track = debounce(e => {
-      getFeatureFlags().prototype_lib_perf_report && trackEventAnalytics("Prototype Lib Function", e);
-    }, 200), ["applyNodeChanges", "getNodeChangesForSwap", "multiplayerMessageSize"])) {
-      e[t] = e[t] || [];
-      e[t].push(this);
+
+// Timer for tracking function performance within the prototype library
+interface FunctionTimerMeta {
+  [key: string]: number
+}
+
+interface FunctionTimerStartTimes {
+  [key: string]: number
+}
+
+interface FunctionPerformanceData {
+  name: string
+  start: number
+  end: number
+  totalUsedHeapMemory?: number
+  maxUsedHeapMemory?: number
+  [key: string]: number | string | undefined
+}
+
+class FunctionTimer {
+  startTimes: FunctionTimerStartTimes = {}
+  meta: FunctionTimerMeta = {}
+
+  // Debounced tracking function to avoid excessive analytics calls
+  private track: (data: FunctionPerformanceData) => void
+
+  // Event names that this timer subscribes to
+  private static readonly SUBSCRIBED_EVENTS = [
+    'applyNodeChanges',
+    'getNodeChangesForSwap',
+    'multiplayerMessageSize',
+  ]
+
+  constructor(eventRegistry: Record<string, FunctionTimer[]>) {
+    // Create debounced tracking function
+    this.track = debounce((data: FunctionPerformanceData) => {
+      if (getFeatureFlags().prototype_lib_perf_report) {
+        trackEventAnalytics('Prototype Lib Function', data)
+      }
+    }, 200)
+
+    // Register this instance with the event registry for each subscribed event
+    for (const eventName of FunctionTimer.SUBSCRIBED_EVENTS) {
+      if (!eventRegistry[eventName]) {
+        eventRegistry[eventName] = []
+      }
+      eventRegistry[eventName].push(this)
     }
   }
-  reset() {
-    this.startTimes = {};
-    this.meta = {};
+
+  reset(): void {
+    this.startTimes = {}
+    this.meta = {}
   }
-  logValue(e, t) {
-    this.meta[e] = t;
+
+  logValue(key: string, value: number): void {
+    this.meta[key] = value
   }
-  start(e) {
-    this.startTimes[e] = performance.now();
+
+  start(eventName: string): void {
+    this.startTimes[eventName] = performance.now()
   }
-  end(e) {
-    if (void 0 !== this.startTimes[e]) {
-      let t = CorePerfInfo?.getTotalUsedHeapMemory();
-      let r = CorePerfInfo?.getMaxUsedHeapMemory();
-      let n = {
-        name: e,
-        start: this.startTimes[e],
+
+  end(eventName: string): void {
+    if (this.startTimes[eventName] !== undefined) {
+      const totalUsedHeapMemory = CorePerfInfo?.getTotalUsedHeapMemory()
+      const maxUsedHeapMemory = CorePerfInfo?.getMaxUsedHeapMemory()
+
+      const performanceData: FunctionPerformanceData = {
+        name: eventName,
+        start: this.startTimes[eventName],
         end: performance.now(),
-        totalUsedHeapMemory: t,
-        maxUsedHeapMemory: r,
-        ...this.meta
-      };
-      this.track(n);
-      this.reset();
+        totalUsedHeapMemory,
+        maxUsedHeapMemory,
+        ...this.meta,
+      }
+
+      this.track(performanceData)
+      this.reset()
     }
   }
 }
-(e => {
-  let t = {};
-  let r = new _(t);
-  e.loadTimer = new p(t);
-  let n = [r, e.loadTimer];
-  e.reset = function () {
-    for (let e of n) e.reset();
-  };
-  e.start = function (e) {
-    t[e]?.forEach(t => t.start(e));
-  };
-  e.end = function (e) {
-    t[e]?.forEach(t => t.end(e));
-  };
-  e.logValue = function (e, r) {
-    t[e]?.forEach(t => t.logValue(e, r));
-  };
-  let i = !0;
-  e.reportOOM = function (t) {
-    if (!i) return;
-    i = !1;
-    let r = e.loadTimer.initializationStart ? Math.round(performance.now() - e.loadTimer.initializationStart) : 0;
-    let n = {
-      totalMemoryInBytes: getMemoryUsage(),
-      failedSize: t,
-      currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),
-      maxAllocatedBytes: CorePerfInfo?.getMaxUsedHeapMemory(),
-      timeSinceInitialization: r,
-      is64BitBrowser: BrowserInfo.is64BitBrowser
-    };
-    trackEventAnalytics("Prototype Lib Out Of Memory", n);
-  };
-})($$n1 || ($$n1 = {}));
-(e => {
-  let t = null;
-  e.setLoadTimeTracker = function (e) {
-    t = e;
-  };
-  e.getLoadTimeTracker = function () {
-    return t;
-  };
-})($$i0 || ($$i0 = {}));
-export const Q = $$i0;
-export const r = $$n1;
+
+interface PrototypeLibPerfModule {
+  loadTimer: LoadTimer
+  reset: () => void
+  start: (eventName: string) => void
+  end: (eventName: string) => void
+  logValue: (eventName: string, value: number) => void
+  reportOOM: (failedSize: number) => void
+}
+
+
+// Initialize the prototype library performance tracking module
+
+const eventRegistry: any = {}
+const functionTimer = new FunctionTimer(eventRegistry)
+const loadTimer = new LoadTimer(eventRegistry)
+
+const timers: (FunctionTimer | LoadTimer)[] = [functionTimer, loadTimer]
+
+export let prototypeLibPerfModule: PrototypeLibPerfModule = {
+  loadTimer,
+
+  reset(): void {
+    for (const timer of timers) {
+      timer.reset()
+    }
+  },
+
+  start(eventName: string): void {
+    eventRegistry[eventName]?.forEach(timer => timer.start(eventName))
+  },
+
+  end(eventName: string): void {
+    eventRegistry[eventName]?.forEach(timer => timer.end(eventName))
+  },
+
+  logValue(eventName: string, value: number): void {
+    eventRegistry[eventName]?.forEach(timer => timer.logValue(eventName, value))
+  },
+
+  reportOOM(failedSize: number): void {
+    // Only report once
+    if (!this.loadTimer.reported) {
+      const timeSinceInitialization = this.loadTimer.initializationStart
+        ? Math.round(performance.now() - this.loadTimer.initializationStart)
+        : 0
+
+      const oomData = {
+        totalMemoryInBytes: getMemoryUsage(),
+        failedSize,
+        currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),
+        maxAllocatedBytes: CorePerfInfo?.getMaxUsedHeapMemory(),
+        timeSinceInitialization,
+        is64BitBrowser: BrowserInfo.is64BitBrowser,
+      }
+
+      trackEventAnalytics('Prototype Lib Out Of Memory', oomData)
+      this.loadTimer.reported = true
+    }
+  },
+}
+
+// Initialize the load time tracker module
+
+let loadTimeTracker: LoadTimeTracker = null
+
+export let loadTimeTrackerModule = {
+  setLoadTimeTracker(tracker: LoadTimeTracker) {
+    loadTimeTracker = tracker
+  },
+
+  getLoadTimeTracker() {
+    return loadTimeTracker
+  },
+}
+
+export const Q = loadTimeTrackerModule
+export const r = prototypeLibPerfModule

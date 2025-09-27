@@ -44,7 +44,7 @@ import { m3 } from "../figma_app/915281";
 import { Oi } from "../figma_app/394327";
 import { jx, vu, w4, Yc, tx, lC, Vc } from "../905/820169";
 import { A as _$$A } from "../905/442873";
-import { Z as _$$Z } from "../905/248978";
+import { styleInfoTooltip } from "../905/248978";
 import { XM } from "../905/609328";
 import { LO, sW, gF } from "../905/500756";
 import { ws, me, f0, uz, Ke, wR, gV, r9, Oy, Rn, ox, vm, bV, IZ, W as _$$W, Gz, e9, Md, Yp, $u, JN, Nk, q3, Em, mz, Dm, KP as _$$KP, a5, FL, J1, xH, LH, ut, X$ } from "../905/323010";
@@ -1115,7 +1115,7 @@ let eI = forwardRef(function ({
     }),
     htmlAttributes: {
       "data-tooltip-type": KindEnum.SPECIAL,
-      "data-tooltip": _$$Z,
+      "data-tooltip": styleInfoTooltip,
       "data-tooltip-style-name": getBasename(e.name || ""),
       "data-tooltip-style-description": e.description,
       onContextMenu: l,

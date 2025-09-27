@@ -21,7 +21,7 @@ import { normalizeStylePath } from "../figma_app/463500";
 import { P as _$$P } from "../905/201667";
 import { xo, zi } from "../905/824449";
 import { AH } from "../905/571648";
-import { Z as _$$Z } from "../905/248978";
+import { styleInfoTooltip } from "../905/248978";
 import { Z as _$$Z2 } from "../905/183586";
 import { p5, A as _$$A2, lG, Tu, hg, p3, Rb, gE } from "../figma_app/433906";
 var c = d;
@@ -98,7 +98,7 @@ export let $$O0 = memo(function ({
       "data-tooltip-style-name": L ? getBasename(L.name) : getI18nString("design_systems.styles.custom"),
       "data-tooltip-style-element-type": k,
       "data-tooltip-type": KindEnum.SPECIAL,
-      "data-tooltip": L && L.description || F ? _$$Z : ""
+      "data-tooltip": L && L.description || F ? styleInfoTooltip : ""
     },
     children: [L && jsx("div", {
       className: hg,

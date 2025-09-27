@@ -13,7 +13,7 @@ import { NotificationCategory } from "../905/170564";
 import { m as _$$m } from "../905/92222";
 import { E1 } from "../905/696065";
 import { isSyntheticTesterEmail } from "../figma_app/416935";
-import { QL } from "../905/609392";
+import { getQueryParam } from "../905/609392";
 import { getFeatureFlags } from "../905/601108";
 import { N as _$$N } from "../figma_app/268271";
 import { isAllowedToSeeNux } from "../905/14910";
@@ -55,7 +55,7 @@ let A = new _$$m("PreventNotificationCollisions", "A rule that prevents overlays
   return !1;
 });
 let b = new _$$m("DenyForRequestModal", "Don't show any overlays on the team page if the request to upgrade pro modal is open", e => !(e.uiState.modalShownType === E1 && "team" === e.uiState.selectedView.view));
-let E = new _$$m("DenyForSyntheticTestUser", "Don't show to synthetic test users (in E2E tests)", e => !isSyntheticTesterEmail(e.userData?.email) || !!QL("allow_synthetic_tester_overlays"));
+let E = new _$$m("DenyForSyntheticTestUser", "Don't show to synthetic test users (in E2E tests)", e => !isSyntheticTesterEmail(e.userData?.email) || !!getQueryParam("allow_synthetic_tester_overlays"));
 let T = new _$$m("DenyIfNuxHasNotShown", "Don't show any overlays if the user has not seen NUX", (e, t) => {
   let i = _$$y(t.id);
   let n = getFeatureFlags().curator_deny_if_nux_has_not_shown;

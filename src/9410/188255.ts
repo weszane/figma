@@ -109,7 +109,7 @@ import { t as _$$t3 } from "../905/192333";
 import { j as _$$j } from "../figma_app/59886";
 import { zP, Uj, SS, ZQ } from "../figma_app/330088";
 import { s as _$$s3 } from "../figma_app/354567";
-import { QL, EM } from "../905/609392";
+import { getQueryParam, removeQueryParam } from "../905/609392";
 import { APILoadingStatus } from "../905/520829";
 import { CustomSpacer } from "../905/585996";
 import { LoadingRenderer } from "../905/211326";
@@ -1227,7 +1227,7 @@ function tW() {
     e.isShowing && !i && e.complete();
   }, [i, e]);
   useEffect(() => {
-    let t = QL(_$$ao.key) === _$$ao.value;
+    let t = getQueryParam(_$$ao.key) === _$$ao.value;
     let r = "loaded" === a.status && !!getResourceDataOrFallback(a.data?.deviceTryFile);
     t && r && !o ? (e.show(), l(!0)) : t && i && !r && e.show();
   }, [e, i, a, o]);
@@ -1259,7 +1259,7 @@ function tQ() {
   let l = useAtomWithSubscription(openFileAtom);
   let d = l?.isTryFile;
   let c = _$$s3();
-  let u = QL(_$$ao.key) === _$$ao.value;
+  let u = getQueryParam(_$$ao.key) === _$$ao.value;
   let p = useAtomWithSubscription(_$$N4);
   useEffect(() => {
     !e && u && !d && "loaded" === c.status && getResourceDataOrFallback(c.data?.deviceTryFile)?.claimedAt && getResourceDataOrFallback(c.data?.deviceTryFile)?.claimedByUserId !== p.data && show();
@@ -7824,9 +7824,9 @@ function oo() {
   !function () {
     let e = useAppModelProperty("pagesList");
     useMemo(() => {
-      let t = QL("preservePageIndex");
+      let t = getQueryParam("preservePageIndex");
       if (t && e.length > 0) {
-        EM("preservePageIndex");
+        removeQueryParam("preservePageIndex");
         let i = parseInt(t);
         if (isNaN(i) || i < 0 || i >= e.length) return;
         e.forEach((e, t) => {
@@ -7846,8 +7846,8 @@ function oo() {
     } = Fz();
     let t = useDispatch();
     _$$h2(() => {
-      let i = QL("templateId");
-      null != i && (EM("templateId"), t(_$$ts({
+      let i = getQueryParam("templateId");
+      null != i && (removeQueryParam("templateId"), t(_$$ts({
         hubFileId: i,
         callback: t => {
           insertTemplate({
@@ -7921,7 +7921,7 @@ function oo() {
     }], [t, e]);
   }(t);
   _$$h2(() => {
-    QL(fileOnboardingFlag.key) === fileOnboardingFlag.value && t.show({
+    getQueryParam(fileOnboardingFlag.key) === fileOnboardingFlag.value && t.show({
       canShow: e => !e
     });
   });

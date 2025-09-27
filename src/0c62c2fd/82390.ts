@@ -208,7 +208,7 @@ import { TeamAvatar, UserAvatar, AvatarSize } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
 import { observabilityClient } from '../905/602906';
 import { g as _$$g5 } from '../905/607862';
-import { EM, QL } from '../905/609392';
+import { removeQueryParam, getQueryParam } from '../905/609392';
 import { Timer } from '../905/609396';
 import { i as _$$i4 } from '../905/610691';
 import { customHistory, getPreviousSelectedView } from '../905/612521';
@@ -486,7 +486,7 @@ import { isMakeDiscoveryEnabled, isResourceHubEnabled, isResourceHubInternalSear
 import { DesignToolType } from '../figma_app/277543';
 import { useMultiSubscription, useSubscription } from '../figma_app/288654';
 import { FBGNavigationUpdatesVariants, useDismissibleUUBExperiment, useFBGNavigationUpdatesTreatment, useOneClickResubscribeExperiment, useSeparateBillingShippingExperiment, useStarterGlobalFileLimitsExperiment } from '../figma_app/297957';
-import { y4 } from '../figma_app/298277';
+import { isUsingLocalBuild } from '../figma_app/298277';
 import { filterPublishedResources, filterResourcesByMatch, filterResourcesByOrgOrPublisher } from '../figma_app/300692';
 import { ResourceTypeEnum } from '../figma_app/306946';
 import { sx as _$$sx3 } from '../figma_app/307841';
@@ -4358,7 +4358,7 @@ function s2(e) {
       },
       boundaryKey: r,
       fallback: jsx(_$$R2, {}),
-      hasCustomWASMBuild: y4,
+      hasCustomWASMBuild: isUsingLocalBuild,
       children: r === 'FileBrowserSidebar' ? jsx(s0, {
         ...e
       }) : jsx(_$$ay, {})
@@ -4554,7 +4554,7 @@ function iN(e) {
       children: [p && jsx(ErrorBoundaryCrash, {
         boundaryKey: 'FileBrowserPageHeader',
         fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-        hasCustomWASMBuild: y4,
+        hasCustomWASMBuild: isUsingLocalBuild,
         children: jsx(iI, {
           pageHeaderContent: e.pageHeaderContent,
           pageHeaderActions: e.pageHeaderActions,
@@ -4564,7 +4564,7 @@ function iN(e) {
       }), jsx(ErrorBoundaryCrash, {
         boundaryKey: 'FileBrowserLayout-content',
         fallback: jsx(_$$R2, {}),
-        hasCustomWASMBuild: y4,
+        hasCustomWASMBuild: isUsingLocalBuild,
         children: !e.showingFileBrowserLoader && (m ? jsx(_$$H, {
           org: u,
           isInFileBrowser: !0
@@ -18061,7 +18061,7 @@ function gT() {
         type: 'react-error'
       }));
     },
-    hasCustomWASMBuild: y4,
+    hasCustomWASMBuild: isUsingLocalBuild,
     children: jsx(TrackingProvider, {
       name: _$$e7.COMMUNITY_HOME_SHELF,
       children: jsx(gy, {})
@@ -19701,13 +19701,13 @@ function hD({
     isInTeam: !!j?.isInTeam
   };
   useSingleEffect(() => {
-    let e = QL('team_role_redemption');
+    let e = getQueryParam('team_role_redemption');
     if (e && parseInt(e) in AccessLevelEnum) {
       let e = VE();
       e && _(VisualBellActions.enqueue({
         message: e
       }));
-      EM('team_role_redemption');
+      removeQueryParam('team_role_redemption');
     }
   });
   useEffect(() => {

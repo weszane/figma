@@ -31,7 +31,7 @@ import { getBasename } from "../905/309735";
 import { isStyleType, getStyleThumbnail } from "../905/405710";
 import { KindEnum } from "../905/129884";
 import { M as _$$M } from "../905/968248";
-import { Z as _$$Z3 } from "../905/248978";
+import { styleInfoTooltip } from "../905/248978";
 let s = memo(function (e) {
   return jsxs("svg", {
     width: "24",
@@ -386,7 +386,7 @@ export function $$ea1({
       "data-tooltip-type": KindEnum.TEXT
     } : o ? {} : {
       "data-tooltip-type": KindEnum.SPECIAL,
-      "data-tooltip": _$$Z3,
+      "data-tooltip": styleInfoTooltip,
       "data-tooltip-style-name": l ? void 0 : getBasename(e.name || ""),
       "data-tooltip-style-description": e.description
     }),

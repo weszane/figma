@@ -54,7 +54,7 @@ import { trackUserEvent } from "../figma_app/314264";
 import { collaboratorSet } from "../905/332483";
 import { renderRequestErrorInterstitial } from "../905/3140";
 import { Al } from "../9420/394825";
-import { y4 } from "../figma_app/298277";
+import { isUsingLocalBuild } from "../figma_app/298277";
 import { FResourceCategoryType, FUserRoleType } from "../figma_app/191312";
 import { getUserIsoCode, getUserCurrency } from "../figma_app/514043";
 import { extractOrgUsersByUserId } from "../figma_app/951233";
@@ -1131,7 +1131,7 @@ export function $$eR1(e) {
     team: ServiceCategories.MONETIZATION_UPGRADES,
     boundaryKey: "OrgSelfServeBillingRemodelPage",
     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
-    hasCustomWASMBuild: y4,
+    hasCustomWASMBuild: isUsingLocalBuild,
     children: jsx($$eM2, {
       ...e,
       dispatch: t,

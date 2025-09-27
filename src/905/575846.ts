@@ -1,2 +1,2 @@
-export let $$n0 = -1 !== navigator.userAgent.indexOf("FigmaNativeApp");
-export const m = $$n0;
+export let isFigmaNativeApp = navigator.userAgent.includes('FigmaNativeApp')
+export const m = isFigmaNativeApp

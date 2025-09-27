@@ -240,7 +240,7 @@ import { canPerformAction } from '../figma_app/12796';
 import { O as _$$O4, y as _$$y3 } from '../figma_app/13082';
 // import { ImageToolsBindings } from '../figma_app/13528'
 import { lg as _$$lg2, lH as _$$lH, Dk } from '../figma_app/18582';
-import { atom, atomStoreManager, AY, createLocalStorageAtom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, atomStoreManager, useResetAtom, createLocalStorageAtom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { Pt as _$$Pt2, NV, OX, qu, x2, xZ } from '../figma_app/33586';
 import { ms } from '../figma_app/38430';
 import { useLatestRef } from '../figma_app/922077';
@@ -900,7 +900,7 @@ async function tC(e, t, i, r) {
       o.push(t);
     }
     let l = (await eZ(s, o, r)).getReader();
-    for (;;) {
+    for (; ;) {
       let {
         done,
         value
@@ -1016,7 +1016,7 @@ function t0(e) {
             obj: e,
             depth
           });
-        } catch (e) {}
+        } catch (e) { }
       }
       return obj.startsWith('data:image') ? jsx(t$, {
         url: obj
@@ -1392,7 +1392,7 @@ function it({
   try {
     let i = new DOMParser().parseFromString(e, 'text/xml').getElementsByTagName('user_input');
     i.length > 0 && (t = i[0].textContent || '');
-  } catch {}
+  } catch { }
   return jsx('div', {
     children: t.split('\n').map((e, t) => jsxs('span', {
       children: [e, jsx('br', {})]
@@ -2032,7 +2032,7 @@ var nX = (e => (e.TITLE = 'title', e.BODY = 'body', e.LABLE = 'label', e))(nX ||
 let nZ = 'theme_editor--svgText--yyKtR';
 let nQ = createContext({
   activeTab: nq.COLOR,
-  onTabChange: () => {},
+  onTabChange: () => { },
   recordingKey: void 0
 });
 function n$({
@@ -2919,7 +2919,7 @@ function af(e) {
         if (!r) return [];
         try {
           return _$$z.array(PromptSchema).parse(JSON.parse(r));
-        } catch {}
+        } catch { }
         return [];
       }(f.guid);
       let y = function (e) {
@@ -2959,7 +2959,7 @@ function af(e) {
       })(f.guid, _);
       let v = C.getReader();
       let E = [];
-      for (;;) {
+      for (; ;) {
         let {
           done,
           value
@@ -4486,20 +4486,20 @@ let aJ = async ({
     for (let r of (i.name = 'Results', ComponentPropsAiCPPBindings.setTextContentOnTextNode(i.guid, `False Negative Count: ${l.reduce((e, t) => e + t.falseNegativeCount, 0)}
 False Positive Count: ${l.reduce((e, t) => e + t.falsePositiveCount, 0)}
 Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 10, i.size = {
-      x: 200,
-      y: 200
-    }, i.fills = i.fills.concat([{
-      type: 'SOLID',
-      color: {
-        r: 0,
-        g: 0,
-        b: 0,
-        a: 1
-      },
-      visible: !0,
-      opacity: 1,
-      blendMode: 'NORMAL'
-    }]), t.appendChild(i), e.appendChild(t), l)) {
+        x: 200,
+        y: 200
+      }, i.fills = i.fills.concat([{
+        type: 'SOLID',
+        color: {
+          r: 0,
+          g: 0,
+          b: 0,
+          a: 1
+        },
+        visible: !0,
+        opacity: 1,
+        blendMode: 'NORMAL'
+      }]), t.appendChild(i), e.appendChild(t), l)) {
       let t = r.result;
       if (!equals(t.expectedComponents, t.components)) {
         let i = FirstDraftHelpers.cloneNodeForComponentize(t.node.guid);
@@ -6033,7 +6033,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           l = updatedU;
           d = updatedV;
           let c = sink;
-          for (;;) {
+          for (; ;) {
             let e = predecessors[c];
             s[c] = e;
             let i = o[e];
@@ -7858,7 +7858,7 @@ function oO(e) {
   });
 }
 let oM = e => Zj(e) && !e.hideCheckForQuickCommand;
-let oP = () => {};
+let oP = () => { };
 function oF({
   item: e,
   searchQuery: t,
@@ -8567,7 +8567,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
+            callback: () => { },
             displayNode: m ? renderI18nText('fullscreen_actions.quick_actions.find-in-community', {
               searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -8605,7 +8605,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
+            callback: () => { },
             displayNode: m ? o ? renderI18nText('fullscreen_actions.quick_actions.find-at-plan-file', {
               searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -8661,7 +8661,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
+            callback: () => { },
             displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? 'fullscreen_actions.quick_actions.search-at-plan-file-and-community' : 'fullscreen_actions.quick_actions.find-at-plan-file-and-community', {
               searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -8711,7 +8711,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
+            callback: () => { },
             displayNode: renderI18nText('fullscreen_actions.assistant-chat-query', {
               query: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -10346,7 +10346,7 @@ function dS({
 }) {
   let r = useAtomWithSubscription(Q8);
   let a = JB();
-  let s = AY(_$$t6);
+  let s = useResetAtom(_$$t6);
   return (_$$h(() => () => {
     a();
     s();

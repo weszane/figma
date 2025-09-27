@@ -49,7 +49,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { isCoreProductAccessType, ProductAccessMap } from "../figma_app/765689";
 import { q as _$$q } from "../4452/876838";
-import { QL, EM } from "../905/609392";
+import { getQueryParam, removeQueryParam } from "../905/609392";
 import { useDropdownState } from "../905/848862";
 import { getUserId } from "../905/372672";
 import { MX, EQ } from "../figma_app/684446";
@@ -563,7 +563,7 @@ export function $$eD0({
     ti && eG(new Date());
   }, [ti]);
   useEffect(() => {
-    let e = QL("approvalRequestId");
+    let e = getQueryParam("approvalRequestId");
     e ? td(t => ({
       ...t,
       requestId: e
@@ -571,7 +571,7 @@ export function $$eD0({
       ...e,
       loading: !1
     }));
-    EM("approvalRequestId");
+    removeQueryParam("approvalRequestId");
   }, []);
   useEffect(() => {
     async function e(e) {
@@ -649,12 +649,12 @@ export function $$eD0({
   }, [ti, tt.data, Q, e, to.requestId, eU]);
   let ty = useMemo(() => new Set(tj?.filter(e => e.licenseType === ProductAccessMap.DESIGN && e.message?.includes("Dev Mode")).map(e => e.id)), [tj]);
   _$$R(() => {
-    let e = QL("viewRequestId");
-    let t = QL("dashEntryPoint");
+    let e = getQueryParam("viewRequestId");
+    let t = getQueryParam("dashEntryPoint");
     if (!e) return;
     let a = tj.find(t => t.id === e);
     a ? tB(a, Xv.DEEPLINK, t) : tM();
-    EM("viewRequestId");
+    removeQueryParam("viewRequestId");
   }, tm, e => !e);
   let tw = useMemo(() => {
     if (0 === tj.length) return null;

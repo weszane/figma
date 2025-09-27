@@ -1,33 +1,68 @@
-let n = {
-  canLoadImageResource: !0,
-  canLoadFontResource: !0,
-  isInPrototypeViewer: !1,
-  appIsReadOnly: !1,
-  appIsRecovery: !1,
-  appCanRenderMultiplayerOrSelectionUI: !0,
-  appCanRenderHyperlinkHoverUI: !0,
-  appCanInteractWithWidgetEmbedsAndLinkPreviews: !0,
-  appCanRenderScrollbars: !0,
-  appCanRenderSceneGraphUI: !0,
-  actionStateDisableUpdates: !1,
-  onlyRenderTopLevelFrameOfSelection: !1,
-  clickOnlyComments: !1,
-  allowToggleCommentsWhenLoggedOut: !1,
-  requireInteractionForFocus: !1,
-  requestVariableMirroring: !0,
-  requestAssetMirroring: !0
-};
-export function $$r1(e) {
-  if ("function" == typeof e) {
-    n = e(n);
-    return;
+interface AppCapabilities extends Record<string, any> {
+  canLoadImageResource: boolean
+  canLoadFontResource: boolean
+  isInPrototypeViewer: boolean
+  appIsReadOnly: boolean
+  appIsRecovery: boolean
+  appCanRenderMultiplayerOrSelectionUI: boolean
+  appCanRenderHyperlinkHoverUI: boolean
+  appCanInteractWithWidgetEmbedsAndLinkPreviews: boolean
+  appCanRenderScrollbars: boolean
+  appCanRenderSceneGraphUI: boolean
+  actionStateDisableUpdates: boolean
+  onlyRenderTopLevelFrameOfSelection: boolean
+  clickOnlyComments: boolean
+  allowToggleCommentsWhenLoggedOut: boolean
+  requireInteractionForFocus: boolean
+  requestVariableMirroring: boolean
+  requestAssetMirroring: boolean
+}
+
+let appCapabilities: AppCapabilities = {
+  canLoadImageResource: true,
+  canLoadFontResource: true,
+  isInPrototypeViewer: false,
+  appIsReadOnly: false,
+  appIsRecovery: false,
+  appCanRenderMultiplayerOrSelectionUI: true,
+  appCanRenderHyperlinkHoverUI: true,
+  appCanInteractWithWidgetEmbedsAndLinkPreviews: true,
+  appCanRenderScrollbars: true,
+  appCanRenderSceneGraphUI: true,
+  actionStateDisableUpdates: false,
+  onlyRenderTopLevelFrameOfSelection: false,
+  clickOnlyComments: false,
+  allowToggleCommentsWhenLoggedOut: false,
+  requireInteractionForFocus: false,
+  requestVariableMirroring: true,
+  requestAssetMirroring: true,
+}
+
+/**
+ * Updates app capabilities with either a partial object or a function that takes the current state
+ * @param updater - Partial AppCapabilities object or function that returns AppCapabilities
+ */
+export function updateAppCapabilities(updater: Partial<AppCapabilities> | ((current: AppCapabilities) => AppCapabilities)): void {
+  if (typeof updater === 'function') {
+    appCapabilities = updater(appCapabilities)
+    return
   }
-  n = e;
+  appCapabilities = { ...appCapabilities, ...updater }
 }
-export function $$a0() {
-  let e = {};
-  for (let t of Object.keys(n)) e[t] = () => n[t];
-  return e;
+
+/**
+ * Creates a proxy object with getter functions for each capability
+ * @returns Object with getter functions for each app capability
+ */
+export function createCapabilityGetters() {
+  const getters: { [K in keyof AppCapabilities]: () => AppCapabilities[K] } = {} as any
+
+  for (const key of Object.keys(appCapabilities) as (keyof AppCapabilities)[]) {
+    getters[key] = () => appCapabilities[key]
+  }
+
+  return getters
 }
-export const N = $$a0;
-export const g = $$r1;
+
+export const N = createCapabilityGetters
+export const g = updateAppCapabilities

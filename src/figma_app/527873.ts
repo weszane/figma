@@ -64,7 +64,7 @@ let prototypeCallback: (() => number) | null = null
  * @param type - The type of app
  * @returns The memory usage value
  */
-export function getMemoryUsage(type: string): number {
+export function getMemoryUsage(type?: string): number {
   if (type === 'fullscreen-app')
     return fullscreenCallback?.() ?? 0
   if (type === 'prototype-lib')

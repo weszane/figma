@@ -32,7 +32,7 @@ import { DashboardSections, MemberSections } from '../905/548208';
 import { VisualBellIcon } from '../905/576487';
 import { UserAvatar, AvatarSize } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
-import { EM, QL } from '../905/609392';
+import { removeQueryParam, getQueryParam } from '../905/609392';
 import { e as _$$e3 } from '../905/621515';
 import { ResourceStatus, getResourceDataOrFallback } from '../905/663269';
 import { BannerButton } from '../905/692618';
@@ -945,20 +945,20 @@ function tu({
   });
   let ti = useMemo(() => new Set(e9?.filter(e => [ProductAccessTypeEnum.DEVELOPER, ProductAccessTypeEnum.EXPERT].includes(e.billableProductKey) && e.message?.includes('Dev Mode')).map(e => e.id)), [e9]);
   _$$R2(() => {
-    let e = QL('viewRequestId');
-    e && (e9.find(t => t.id === e) ? setHighlightedItemId(e) : dispatchRequestAlreadyHandled(), EM('viewRequestId'));
+    let e = getQueryParam('viewRequestId');
+    e && (e9.find(t => t.id === e) ? setHighlightedItemId(e) : dispatchRequestAlreadyHandled(), removeQueryParam('viewRequestId'));
   }, e2, e => !e);
   useEffect(() => {
-    let e = QL('approvalRequestId');
-    let t = QL('costShown');
+    let e = getQueryParam('approvalRequestId');
+    let t = getQueryParam('costShown');
     c(a => ({
       ...a,
       requestId: e,
       loading: !!e,
       costShownInEmail: t === 'true' || t !== 'false' && void 0
     }));
-    EM('approvalRequestId');
-    EM('costShown');
+    removeQueryParam('approvalRequestId');
+    removeQueryParam('costShown');
   }, []);
   useEffect(() => {
     async function e(e) {
@@ -1003,7 +1003,7 @@ function tu({
     });
   }, tu, e => !e);
   _$$R2(() => {
-    QL('approveAllRequests') && (p(showModalHandler({
+    getQueryParam('approveAllRequests') && (p(showModalHandler({
       type: _$$W,
       data: {
         plan: e,
@@ -1019,7 +1019,7 @@ function tu({
         },
         entryPoint: N
       }
-    })), EM('approveAllRequests'));
+    })), removeQueryParam('approveAllRequests'));
   }, !e2 && e_ !== null && eu !== null, e => e);
   let tp = ({
     approve: e,

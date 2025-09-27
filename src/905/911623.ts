@@ -9,11 +9,11 @@ export interface ClickHandlerProps {
   isDisabled?: boolean
 }
 
-export interface ClickHandlerResult {
-  onMouseDown?: (event: React.MouseEvent) => void
-  onClick?: (event: React.MouseEvent) => void
-  onMouseUp?: (event: React.MouseEvent) => void
-  onMouseLeave?: (event: React.MouseEvent) => void
+export interface ClickHandlerResult<T = HTMLElement> {
+  onMouseDown?: (event: React.MouseEvent<T>) => void
+  onClick?: (event: React.MouseEvent<T>) => void
+  onMouseUp?: (event: React.MouseEvent<T>) => void
+  onMouseLeave?: (event: React.MouseEvent<T>) => void
 }
 
 /**

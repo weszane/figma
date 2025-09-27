@@ -14,8 +14,13 @@ declare global {
   let mpGlobal: any
   type AppState = App
   let TaskController = TaskControllerPrority
-  type Dispatch = (action: any) => any;
+  type Dispatch = (action: any) => any
   interface Window {
+    Module: {
+      wasmBinaryFile: any
+      preRun: () => void
+    }
+    FULLSCREEN_PRELOADS: ObjectOf
     INITIAL_OPTIONS: InitialOptions
     EARLY_ARGS: EarlyArgs
     Fig: FigType

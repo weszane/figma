@@ -141,7 +141,7 @@ import { getDaysUntilExpiration } from "../figma_app/141320";
 import { getCurrentTeam } from "../figma_app/598018";
 import { ZL } from "../1250/272654";
 import { openCreateTeamFlow } from "../figma_app/976345";
-import { QL, EM } from "../905/609392";
+import { getQueryParam, removeQueryParam } from "../905/609392";
 import { q as _$$q } from "../figma_app/712384";
 import { V as _$$V } from "../905/223767";
 import { I as _$$I2 } from "../905/641938";
@@ -2408,21 +2408,21 @@ function an() {
   });
   let t = useDispatch();
   useSingleEffect(() => {
-    let n = QL(n7.key);
-    let a = QL(ae.key);
+    let n = getQueryParam(n7.key);
+    let a = getQueryParam(ae.key);
     n === n7.value ? e.show({
       onShow: () => {
         t(openCreateTeamFlow({
           isEduTeam: !0
         }));
-        EM(n7.key);
+        removeQueryParam(n7.key);
       }
     }) : a === ae.value && e.show({
       onShow: () => {
         t(showModalHandler({
           type: _$$q
         }));
-        EM(ae.key);
+        removeQueryParam(ae.key);
       }
     });
   });
@@ -2477,8 +2477,8 @@ function a_() {
     priority: _$$N.URGENT_ALERT
   }, [t]);
   useSingleEffect(() => {
-    let t = QL("upgrade");
-    let a = QL("entryPoint");
+    let t = getQueryParam("upgrade");
+    let a = getQueryParam("entryPoint");
     switch (t) {
       case "pro":
         n.show({

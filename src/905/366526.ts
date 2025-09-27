@@ -196,7 +196,7 @@ import { h as _$$h3 } from '../905/594794';
 import { P as _$$P7, z as _$$z } from '../905/595507';
 import { getFeatureFlags } from '../905/601108';
 import { Im } from '../905/608145';
-import { TH } from '../905/609392';
+import { updateQueryParams } from '../905/609392';
 import { PerfTimer } from '../905/609396';
 import { customHistory, CustomRouter } from '../905/612521';
 import { uW as _$$uW, yJ as _$$yJ9, Z as _$$Z3 } from '../905/618921';
@@ -397,7 +397,7 @@ import { td as _$$td } from '../figma_app/273118';
 import { h as _$$h2 } from '../figma_app/275739';
 import { Gk } from '../figma_app/277330';
 import { useSubscription } from '../figma_app/288654';
-import { wl, y4 } from '../figma_app/298277';
+import { isCommunityOrUserPath, isUsingLocalBuild } from '../figma_app/298277';
 import { getPluginVersion } from '../figma_app/300692';
 import { g3 } from '../figma_app/304207';
 import { RR } from '../figma_app/307841';
@@ -14125,7 +14125,7 @@ export async function $$hz0(e, t, d = {
       _$$a();
       return;
     }
-    TH(customHistory.location.search);
+    updateQueryParams(customHistory.location.search);
     registerDeferredCallback(ib);
     performanceMetricsTracker.domContentLoadedMs = Math.round(window.performance.now());
     fullscreenPerfManager.start('createStoreStart');
@@ -14461,7 +14461,7 @@ export async function $$hz0(e, t, d = {
             editorType: e
           });
           b.dispatch(_$$uM(n));
-        } else if (e !== 'handleAction' || desktopAPIInstance.isFileBrowserTab() || wl()) {
+        } else if (e !== 'handleAction' || desktopAPIInstance.isFileBrowserTab() || isCommunityOrUserPath()) {
           if (e === 'handlePageCommand') {
             let {
               activeElement
@@ -14485,7 +14485,7 @@ export async function $$hz0(e, t, d = {
               document.execCommand(t.pageCommand);
             }
           } else if (e === 'handleUrl') {
-            TH(t.params);
+            updateQueryParams(t.params);
             let e = b.getState();
             let i = new URLSearchParams(t.params);
             let n = t.path.startsWith('/files/');
@@ -14573,7 +14573,7 @@ export async function $$hz0(e, t, d = {
           } else if (e === 'handleCopyLink') {
             let e = removeQueryParam(window.location.href, 'viewport');
             let t = '';
-            if (desktopAPIInstance.isFileBrowserTab() || wl()) {
+            if (desktopAPIInstance.isFileBrowserTab() || isCommunityOrUserPath()) {
               t = getI18nString('desktop_bindings.interstitial.page_link_copied');
               copyTextToClipboard(e).then(() => b.dispatch(VisualBellActions.enqueue({
                 message: t
@@ -15296,7 +15296,7 @@ export async function $$hz0(e, t, d = {
         _$$H(i).render(jsx(ErrorBoundaryCrash, {
           boundaryKey: 'root',
           fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
-          hasCustomWASMBuild: y4,
+          hasCustomWASMBuild: isUsingLocalBuild,
           children: jsx(t, {})
         }));
       }));

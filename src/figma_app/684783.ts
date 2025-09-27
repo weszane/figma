@@ -69,7 +69,7 @@ import { xy, hJ } from "../figma_app/102712";
 import { LoadTimeTracker } from "../figma_app/781115";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { fullscreenValue } from "../figma_app/455680";
-import { r as _$$r, Q as _$$Q } from "../figma_app/661568";
+import { prototypeLibPerfModule, loadTimeTrackerModule } from "../figma_app/661568";
 import { M as _$$M } from "../905/197794";
 import { o as _$$o } from "../figma_app/885533";
 import { QtA } from "../figma_app/27776";
@@ -1023,7 +1023,7 @@ class eK extends PureComponent {
     };
     this.handleSceneDidCompleteInitialLoad = () => {
       if (!this.props.viewer) return;
-      _$$r.logValue("viewerSceneDidCompleteInitialLoad", Math.round(performance.now()));
+      prototypeLibPerfModule.logValue("viewerSceneDidCompleteInitialLoad", Math.round(performance.now()));
       this.props.viewerLoadTimeTracker.handleViewerLoaded();
       let e = parseQuery(customHistory.location.search)["node-id"];
       this.props.viewer.navigateToFrameAndCloseOverlays(e);
@@ -1139,7 +1139,7 @@ class eK extends PureComponent {
           data: t
         }) => {
           this.bindEventsToViewer(e);
-          _$$Q.setLoadTimeTracker(this.props.viewerLoadTimeTracker);
+          loadTimeTrackerModule.setLoadTimeTracker(this.props.viewerLoadTimeTracker);
           e.loadFile({
             bytes: t,
             nodeId: "",

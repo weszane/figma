@@ -8,7 +8,7 @@ import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { VisualBellActions } from "../905/302958";
 import { R } from "../905/687502";
-import { y4 } from "../figma_app/298277";
+import { isUsingLocalBuild } from "../figma_app/298277";
 import { getSelectedView } from "../figma_app/386952";
 var l = o;
 function f({
@@ -59,7 +59,7 @@ export function $$_0(e) {
       team: v,
       boundaryKey: `FileBrowserPageBanner${I}`,
       fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-      hasCustomWASMBuild: y4,
+      hasCustomWASMBuild: isUsingLocalBuild,
       children: e.banner
     }), jsx(ErrorBoundaryCrash, {
       team: v,
@@ -71,7 +71,7 @@ export function $$_0(e) {
           type: "react-error"
         }));
       },
-      hasCustomWASMBuild: y4,
+      hasCustomWASMBuild: isUsingLocalBuild,
       children: e.toolbar
     }), !!e.header && e.header, jsx("div", {
       className: mobileToolBarSpacerStyle
@@ -82,7 +82,7 @@ export function $$_0(e) {
       team: v,
       boundaryKey: `FileBrowserPageBannerBelowToolbar${I}`,
       fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-      hasCustomWASMBuild: y4,
+      hasCustomWASMBuild: isUsingLocalBuild,
       children: e.belowToolbarBanner
     }), jsx("div", {
       className: l()(e.scrollableContainerClass, "file_browser_page_view--scrollableContainerClass--z7mzE"),
@@ -94,7 +94,7 @@ export function $$_0(e) {
             team: v,
             boundaryKey: `FileBrowserPageMetaContent${I}`,
             fallback: jsx(R, {}),
-            hasCustomWASMBuild: y4,
+            hasCustomWASMBuild: isUsingLocalBuild,
             children: e.metaContent
           })
         }), jsx("main", {
@@ -103,7 +103,7 @@ export function $$_0(e) {
             team: v,
             boundaryKey: `FileBrowserPageContent${I}`,
             fallback: jsx(R, {}),
-            hasCustomWASMBuild: y4,
+            hasCustomWASMBuild: isUsingLocalBuild,
             children: e.content
           })
         })]
@@ -114,7 +114,7 @@ export function $$_0(e) {
     team: v,
     boundaryKey: `FileBrowserPageHeader${I}`,
     fallback: jsx(R, {}),
-    hasCustomWASMBuild: y4,
+    hasCustomWASMBuild: isUsingLocalBuild,
     children: E
   });
 }

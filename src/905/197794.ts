@@ -1,79 +1,153 @@
-import { prototypeInternal, FontSourceType, initializeFigmaServices, bindings } from "../figma_app/763686";
-import { initializeTsApiBindings } from "../figma_app/762706";
-import { createDeferredPromise } from "../905/874553";
-import { getFeatureFlags } from "../905/601108";
-import { isInteractionPathCheck } from "../figma_app/897289";
-import { fetchFontList, updateFontList } from "../905/777093";
-import { m as _$$m } from "../905/575846";
-import { gx } from "../905/319279";
-import { vw, f_ } from "../905/189279";
-import { $$K0 } from "../905/896230";
-import { e3 } from "../figma_app/298277";
-import { g as _$$g } from "../905/544669";
-import { Q, r as _$$r } from "../figma_app/661568";
-let f = !1;
-let _ = createDeferredPromise();
-async function A() {
-  if (!_$$m && !f) {
-    let e = Q.getLoadTimeTracker();
-    e && (e.fullscreenEvents.loadAndStartFullscreenIfNecessary = Math.round(performance.now()));
-    f = !0;
-    await e3($$K0, "prototype-lib");
-    _.resolve();
+import { executeBinaryModule, registerBinaryModule } from '../905/189279'
+import { gx } from '../905/319279'
+import { updateAppCapabilities } from '../905/544669'
+import { isFigmaNativeApp } from '../905/575846'
+import { getFeatureFlags } from '../905/601108'
+import { fetchFontList, updateFontList } from '../905/777093'
+import { createDeferredPromise } from '../905/874553'
+import { $$K0 } from '../905/896230'
+import { initializeWasm } from '../figma_app/298277'
+import { loadTimeTrackerModule, prototypeLibPerfModule } from '../figma_app/661568'
+import { initializeTsApiBindings } from '../figma_app/762706'
+import { bindings, FontSourceType, initializeFigmaServices, prototypeInternal } from '../figma_app/763686'
+import { isInteractionPathCheck } from '../figma_app/897289'
+
+let isWasmInitialized = false
+let wasmInitializationPromise = createDeferredPromise()
+
+/**
+ * Initialize WASM module for prototype library
+ * @function A -> initializePrototypeWasm
+ */
+async function initializePrototypeWasm() {
+  if (!isFigmaNativeApp && !isWasmInitialized) {
+    const loadTimeTracker = loadTimeTrackerModule.getLoadTimeTracker()
+    if (loadTimeTracker) {
+      loadTimeTracker.fullscreenEvents.loadAndStartFullscreenIfNecessary = Math.round(performance.now())
+    }
+    isWasmInitialized = true
+    await initializeWasm($$K0, 'prototype-lib')
+    wasmInitializationPromise.resolve()
   }
 }
-let y = new Promise(() => {});
-let b = {
-  "fullscreen-app": null,
-  "prototype-lib": null
-};
-export async function $$v0(e, t) {
-  gx(e.prototypeApp, e.skewKiwiSerialization, e.deprecatedJsSceneHooks);
-  let i = "prototype-lib";
-  null == b[i] ? b[i] = (async () => {
-    if (_$$r.reset(), _$$r.start("initializePrototypeLib"), _$$g({
-      canLoadImageResource: !1,
-      canLoadFontResource: !0,
-      isInPrototypeViewer: !0,
-      actionStateDisableUpdates: !0,
-      appCanInteractWithWidgetEmbedsAndLinkPreviews: !1,
-      appIsReadOnly: !0,
-      appIsRecovery: !1,
-      appCanRenderHyperlinkHoverUI: !1,
-      appCanRenderMultiplayerOrSelectionUI: !1,
-      appCanRenderScrollbars: !1,
-      appCanRenderSceneGraphUI: !1,
-      onlyRenderTopLevelFrameOfSelection: !1,
-      clickOnlyComments: !1,
-      allowToggleCommentsWhenLoggedOut: !1,
-      requireInteractionForFocus: !1,
-      requestVariableMirroring: !1,
-      requestAssetMirroring: !1
-    }), await A(), !prototypeInternal) throw Error("PrototypeLib: error during initialization");
-    let e = Q.getLoadTimeTracker();
-    let t = [FontSourceType.LOCAL, FontSourceType.GOOGLE];
-    let i = fetchFontList(t).then(t => {
-      e && e.handleFontListLoaded((t.indexFontsList?.length || 0) + (t.localFontsList?.length || 0));
-      updateFontList(t);
-    });
-    y = getFeatureFlags().prototype_async_font_loading ? Promise.resolve() : i;
-    _$$r.end("initializePrototypeLib");
-    console.debug("[prototype lib] Ready for interactions", performance.now());
-    e && (e.fullscreenEvents.fullscreenIsReady = Math.round(performance.now()));
-    _$$r.loadTimer.report();
-    return initializeFigmaServices();
-  })() : bindings && !isInteractionPathCheck() ? initializeTsApiBindings({
-    callMain: () => {
-      bindings.refreshJsCppBindings();
-    },
-    tsApisForCpp: $$K0,
-    registerRefreshCallback: e => {
-      vw("prototype-lib", e);
-    }
-  }) : isInteractionPathCheck() && (f_("prototype-lib"), await A());
-  return {
-    cppModules: await b[i],
-    fontListPromise: y
-  };
+
+/**
+ * Font list loading promise
+ * @type {Promise}
+ */
+let fontListLoadingPromise = new Promise(() => { })
+
+/**
+ * Cache for initialized modules
+ * @type {Record<string, Promise<any> | null>}
+ */
+let initializedModulesCache = {
+  'fullscreen-app': null,
+  'prototype-lib': null,
 }
-export const M = $$v0;
+
+/**
+ * Initialize prototype library module
+ * @param {object} config - Configuration object
+ * @param {any} t - Additional parameter
+ * @returns {Promise<{cppModules: any, fontListPromise: Promise<any>}>}
+ * @function $$v0 -> initializePrototypeLibModule
+ */
+export async function initializePrototypeLibModule(config: any, _t: any) {
+  gx(config.prototypeApp, config.skewKiwiSerialization, config.deprecatedJsSceneHooks)
+
+  const moduleName = 'prototype-lib'
+
+  if (initializedModulesCache[moduleName] == null) {
+    initializedModulesCache[moduleName] = (async () => {
+      // Reset and start performance tracking
+      prototypeLibPerfModule.reset()
+      prototypeLibPerfModule.start('initializePrototypeLib')
+
+      // Update app capabilities for prototype viewer
+      updateAppCapabilities({
+        canLoadImageResource: false,
+        canLoadFontResource: true,
+        isInPrototypeViewer: true,
+        actionStateDisableUpdates: true,
+        appCanInteractWithWidgetEmbedsAndLinkPreviews: false,
+        appIsReadOnly: true,
+        appIsRecovery: false,
+        appCanRenderHyperlinkHoverUI: false,
+        appCanRenderMultiplayerOrSelectionUI: false,
+        appCanRenderScrollbars: false,
+        appCanRenderSceneGraphUI: false,
+        onlyRenderTopLevelFrameOfSelection: false,
+        clickOnlyComments: false,
+        allowToggleCommentsWhenLoggedOut: false,
+        requireInteractionForFocus: false,
+        requestVariableMirroring: false,
+        requestAssetMirroring: false,
+      })
+
+      // Initialize WASM
+      await initializePrototypeWasm()
+
+      if (!prototypeInternal) {
+        throw new Error('PrototypeLib: error during initialization')
+      }
+
+      const loadTimeTracker = loadTimeTrackerModule.getLoadTimeTracker()
+      const fontSourceTypes = [FontSourceType.LOCAL, FontSourceType.GOOGLE]
+
+      // Fetch and update font list
+      const fontListPromise = fetchFontList(fontSourceTypes).then((fontData) => {
+        if (loadTimeTracker) {
+          const fontCount = (fontData.indexFontsList?.length || 0) + (fontData.localFontsList?.length || 0)
+          loadTimeTracker.handleFontListLoaded(fontCount)
+        }
+        updateFontList(fontData)
+      })
+
+      // Handle async font loading based on feature flag
+      fontListLoadingPromise = getFeatureFlags().prototype_async_font_loading
+        ? Promise.resolve()
+        : fontListPromise
+
+      // End performance tracking
+      prototypeLibPerfModule.end('initializePrototypeLib')
+      console.debug('[prototype lib] Ready for interactions', performance.now())
+
+      if (loadTimeTracker) {
+        loadTimeTracker.fullscreenEvents.fullscreenIsReady = Math.round(performance.now())
+      }
+
+      prototypeLibPerfModule.loadTimer.report()
+
+      return initializeFigmaServices()
+    })()
+  }
+  else if (bindings && !isInteractionPathCheck()) {
+    // Re-initialize TS API bindings
+    initializeTsApiBindings({
+      callMain: () => {
+        bindings.refreshJsCppBindings()
+      },
+      tsApisForCpp: $$K0,
+      registerRefreshCallback: (module) => {
+        registerBinaryModule('prototype-lib', module)
+      },
+    })
+  }
+  else if (isInteractionPathCheck()) {
+    // Execute binary module and ensure WASM initialization
+    executeBinaryModule('prototype-lib')
+    await initializePrototypeWasm()
+  }
+
+  return {
+    cppModules: await initializedModulesCache[moduleName],
+    fontListPromise: fontListLoadingPromise,
+  }
+}
+
+/**
+ * Module initialization function alias
+ * @function M -> initializePrototypeLibModule
+ */
+export const M = initializePrototypeLibModule

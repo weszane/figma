@@ -145,7 +145,7 @@ import { x as _$$x2 } from '../905/587214';
 import { O as _$$O4 } from '../905/587457';
 import { D as _$$D2 } from '../905/591570';
 import { getFeatureFlags } from '../905/601108';
-import { QL } from '../905/609392';
+import { getQueryParam } from '../905/609392';
 import { customHistory } from '../905/612521';
 import { setupThemeContext } from '../905/614223';
 import { canvasGridAtom } from '../905/618447';
@@ -317,7 +317,7 @@ import { renderAvatar } from '../figma_app/3731';
 import { H as _$$H } from '../figma_app/7677';
 import { a8 as _$$a, Dm } from '../figma_app/8833';
 import { EI as _$$EI } from '../figma_app/21029';
-import { um as _$$um, atom, atomStoreManager, AY, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { um as _$$um, atom, atomStoreManager, useResetAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { CVP, Ep1, j4N, oBL } from '../figma_app/27776';
 import { GQ as _$$GQ, nJ as _$$nJ, bQ } from '../figma_app/32128';
 import { useLatestRef } from '../figma_app/922077';
@@ -706,15 +706,15 @@ function Y({
       isInteractionOrEvalMode();
       return e;
     }, []);
-    useEffect(() => () => { }, [E]);
+    useEffect(() => () => {}, [E]);
     useEffect(() => {
       E.updateUnderlyingVideoState(s, r, y);
     }, [s, r, y, E]);
     let v = useCallback(({
       preserveEndedState: t
     } = {
-        preserveEndedState: !1
-      }) => {
+      preserveEndedState: !1
+    }) => {
       function n() {
         b.forEach(e => {
           let t = UN().get(e.nodeId);
@@ -3642,12 +3642,12 @@ function lz({
     isFetchingNextPage: R,
     fetchNextPage: L
   } : {
-      assets: T,
-      status: I,
-      hasNextPage: S,
-      isFetchingNextPage: k,
-      fetchNextPage: C
-    };
+    assets: T,
+    status: I,
+    hasNextPage: S,
+    isFetchingNextPage: k,
+    fetchNextPage: C
+  };
   let D = status === 'loading' || j && v === 'loading';
   let $ = b?.dimensions ? {
     width: b.dimensions.x,
@@ -5855,9 +5855,9 @@ function o7({
     selectStyle(e) {
       l(e, u);
     },
-    showStyleDetails(e, t, n) { },
-    showStyleContextMenu(e, t) { },
-    deleteStyle(e) { },
+    showStyleDetails(e, t, n) {},
+    showStyleContextMenu(e, t) {},
+    deleteStyle(e) {},
     stylePreviewShown
   }), [l, u, stylePreviewShown]);
   let R = _$$F5.useCombobox({
@@ -9873,7 +9873,7 @@ function dK() {
   }, [e, l, closePanel]);
   return jsx(Fragment, {});
 }
-function dW({ }) {
+function dW({}) {
   return jsx(_$$k4, {
     name: _$$$2.TemplateSetNudgeDesignModeMenu,
     children: jsx(ro, {
@@ -11462,7 +11462,7 @@ function uK() {
   } = function () {
     let e = Xr(hO);
     let [t, n] = useAtomValueAndSetter(zM);
-    let l = AY(zM);
+    let l = useResetAtom(zM);
     let r = useCallback(() => {
       e(t);
     }, [t, e]);
@@ -11497,8 +11497,8 @@ function uK() {
     },
     setCurrentViewOrTab: setCurrentView,
     currentView: currentPluginView,
-    closeModal: () => { },
-    pinModal: () => { }
+    closeModal: () => {},
+    pinModal: () => {}
   }), [n, setCurrentView, currentPluginView]);
   return jsx(AutoLayout, {
     direction: 'vertical',
@@ -14530,7 +14530,7 @@ let mI = memo(({
         payload: {
           sceneGraph: d,
           requestedNodeId: e,
-          onOpen: () => { }
+          onOpen: () => {}
         }
       });
     });
@@ -14606,7 +14606,7 @@ let mw = memo(({
   let [l, r] = useState(!1);
   let i = _$$dh();
   $k();
-  let x = QL(_$$pt.KEY) === _$$pt.VALUE;
+  let x = getQueryParam(_$$pt.KEY) === _$$pt.VALUE;
   useEffect(() => {
     x && n && n.length === 1 && n[0] && !l && (CooperHelpers?.detachAndReplaceSymbolOnCommunityLoad(n[0]), r(!0));
   }, [x, n, l]);

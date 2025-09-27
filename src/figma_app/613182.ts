@@ -9,7 +9,7 @@ import { getThemePx } from '../905/149328';
 import { F as _$$F } from '../905/162860';
 import { x as _$$x } from '../905/439735';
 import { trackEventAnalytics } from '../905/449184';
-import { Sh } from '../905/470286';
+import { isSpecialRoutePath } from '../905/470286';
 import { formatI18nMessage } from '../905/482208';
 import { createRect, compareRects } from '../905/508367';
 import { isTooltipRegistered, getTooltipEntry } from '../905/524523';
@@ -101,7 +101,7 @@ function W(e) {
       try {
         let e = new URL(urlString);
         r = {
-          type: e.protocol === 'mailto:' ? _$$F.MAILTO : e.protocol === 'tel:' ? _$$F.TEL : isFigmaDomain(e.hostname) || isFigmaDomain(e.host) ? Sh(e.pathname) ? _$$F.FIGMA_PROTOTYPE : e.searchParams.has('version-id') ? _$$F.FIGMA_VERSION : _$$F.FIGMA_FILE : _$$F.GENERIC,
+          type: e.protocol === 'mailto:' ? _$$F.MAILTO : e.protocol === 'tel:' ? _$$F.TEL : isFigmaDomain(e.hostname) || isFigmaDomain(e.host) ? isSpecialRoutePath(e.pathname) ? _$$F.FIGMA_PROTOTYPE : e.searchParams.has('version-id') ? _$$F.FIGMA_VERSION : _$$F.FIGMA_FILE : _$$F.GENERIC,
           url: e
         };
       } catch (e) {
