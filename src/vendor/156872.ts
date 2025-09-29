@@ -9,11 +9,11 @@ var r = {
     return "@@redux/PROBE_UNKNOWN_ACTION" + f();
   }
 };
-export function $$a3(e, n, i) {
+export function createStore(e, n, i) {
   if ("function" == typeof n && "function" == typeof i || "function" == typeof i && "function" == typeof $$arguments[3]) throw Error("It looks like you are passing several store enhancers to createStore(). This is not supported. Instead, compose them together to a single function.");
   if ("function" == typeof n && void 0 === i && (i = n, n = void 0), void 0 !== i) {
     if ("function" != typeof i) throw Error("Expected the enhancer to be a function.");
-    return i($$a3)(e, n);
+    return i(createStore)(e, n);
   }
   if ("function" != typeof e) throw Error("Expected the reducer to be a function.");
   var f;
@@ -100,7 +100,7 @@ export function $$a3(e, n, i) {
   };
   return f;
 }
-export function $$o0(e) {
+export function combineReducers(e) {
   for (i = Object.keys(e), t = {}, f = 0, void 0; f < i.length; f++) {
     var n;
     var i;
@@ -153,7 +153,7 @@ function u(e, n) {
   }));
   return i;
 }
-export function $$l2() {
+export function compose() {
   for (e = $$arguments.length, n = Array(e), i = 0, void 0; i < e; i++) {
     var e;
     var n;
@@ -168,7 +168,7 @@ export function $$l2() {
     };
   });
 }
-export function $$d1() {
+export function applyMiddleware() {
   for (e = $$arguments.length, n = Array(e), i = 0, void 0; i < e; i++) {
     var e;
     var n;
@@ -190,7 +190,7 @@ export function $$d1() {
       var r = n.map(function (e) {
         return e(f);
       });
-      t = $$l2.apply(void 0, r)(i.dispatch);
+      t = compose.apply(void 0, r)(i.dispatch);
       return function (e) {
         for (var n = 1; n < $$arguments.length; n++) {
           var i = null != $$arguments[n] ? $$arguments[n] : {};
@@ -214,7 +214,7 @@ export function $$d1() {
     };
   };
 }
-export const HY = $$o0;
-export const Tw = $$d1;
-export const Zz = $$l2;
-export const y$ = $$a3;
+export const HY = combineReducers;
+export const Tw = applyMiddleware;
+export const Zz = compose;
+export const y$ = createStore;

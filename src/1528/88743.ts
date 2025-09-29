@@ -43,7 +43,7 @@ import { Lx, v7 } from '../9410/896213';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { getWorkshopModeStatus } from '../figma_app/789';
 import { isExportRestricted } from '../figma_app/12796';
-import { sO } from '../figma_app/21029';
+import { useIsFullscreenSlidesView } from '../figma_app/21029';
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { Ax, Fz } from '../figma_app/29089';
 import { fu, Hk, lK, pu } from '../figma_app/123994';
@@ -820,7 +820,7 @@ function eF(e) {
     isRightPanelCollapsed
   } = useContext(_$$t2);
   let n = useDispatch();
-  let f = sO();
+  let f = useIsFullscreenSlidesView();
   let v = useIsFullscreenSitesView();
   let I = useIsSelectedViewFullscreenCooper() && isCooperFeatureEnabled();
   let N = isPrototypeView();

@@ -1,6 +1,6 @@
 import { jsx } from 'react/jsx-runtime';
 import { ImageOverlayComponent } from '../905/129046';
-import { h as _$$h } from '../905/791079';
+import { useSingleEffect } from '../905/791079';
 import { renderI18nText } from '../905/303541';
 import { UpgradeAction } from '../905/370443';
 import { OnboardingModal } from '../905/425180';
@@ -29,7 +29,7 @@ export function $$f0({
     overlay: LQ8,
     priority: N.DEFAULT_MODAL
   }, [y]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });

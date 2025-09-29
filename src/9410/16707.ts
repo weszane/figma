@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
 import { Xr, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl, isGovCluster, getLocaleFallbacks } from "../figma_app/169182";
 import { isAIFeaturesDisabled } from "../figma_app/459490";
 import { SecureLink } from "../figma_app/637027";
@@ -28,7 +28,7 @@ import { OnboardingModal } from "../905/425180";
 import { ArrowPosition, PositioningStrategy } from "../905/858282";
 import { canEnterDesignMode } from "../figma_app/357367";
 import { Yqi } from "../figma_app/6204";
-import { jY } from "../figma_app/21029";
+import { useHasValidSceneSlideTheme } from "../figma_app/21029";
 import { g as _$$g } from "../9410/28058";
 import { VZ } from "../figma_app/60023";
 import { E as _$$E } from "../9410/583075";
@@ -45,7 +45,7 @@ function U() {
 }
 export function $$K0() {
   let e = Xr(VZ);
-  let t = jY();
+  let t = useHasValidSceneSlideTheme();
   let i = canEnterDesignMode();
   let {
     show,
@@ -78,7 +78,7 @@ export function $$K0() {
     t || o.splice(1, 0, jsx(_$$g, {}));
     return o;
   }, [c, t, next, e, complete, isShowing, i]);
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     show();
   }), isShowing && h) ? jsx(_$$U, {
     currentStep,

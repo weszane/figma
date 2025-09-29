@@ -35,7 +35,7 @@ import { Ur } from "../figma_app/451396";
 import { rZ, yT, zM } from "../figma_app/332598";
 import { v4 } from "../figma_app/655139";
 import { uQ } from "../figma_app/311375";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { useLatestRef } from "../figma_app/922077";
 import { getPartnerType } from "../905/853613";
 import { findComponentGuidOrPublishId } from "../figma_app/854115";
@@ -999,7 +999,7 @@ function eK({
     backingStateGroupKey: n
   }) {
     let a = getPartnerType(e ? _$$l(e) : null);
-    _$$h(() => {
+    useSingleEffect(() => {
       analyticsEventManager.trackDefinedEvent("code_connect.code_connect_rendered", {
         partnerType: a,
         componentKey: r,

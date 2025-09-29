@@ -1,61 +1,155 @@
-import { noop } from 'lodash-es';
-import { EventTypeEnum, KeyboardLayout, Fullscreen } from "../figma_app/763686";
-import { isCommandEvent, KeyCodes, isModifierMatch, ModifierKeyCodes, isArrowKey, getModifierBitmask } from "../905/63728";
-import { v7 } from "../figma_app/475303";
-import { BrowserInfo } from "../figma_app/778880";
-import { setButtonBaseKeyDownCallback } from "../figma_app/637027";
-import { n as _$$n } from "../905/91142";
-import { fullscreenValue } from "../figma_app/455680";
-var $$u3 = (e => (e[e.YES = 0] = "YES", e[e.NO = 1] = "NO", e))($$u3 || {});
-var $$p2 = (e => (e[e.YES = 0] = "YES", e[e.NO = 1] = "NO", e))($$p2 || {});
-let _ = noop;
-export function $$h6(e) {
-  _ = e;
+import { noop } from 'lodash-es'
+import { getModifierBitmask, isArrowKey, isCommandEvent, isModifierMatch, KeyCodes, ModifierKeyCodes } from '../905/63728'
+import { setSharedValue } from '../905/91142'
+import { fullscreenValue } from '../figma_app/455680'
+import { getCurrentKeyboardLayout } from '../figma_app/475303'
+import { setButtonBaseKeyDownCallback } from '../figma_app/637027'
+import { EventTypeEnum, Fullscreen, KeyboardLayout } from '../figma_app/763686'
+import { BrowserInfo } from '../figma_app/778880'
+
+enum KeyboardEventResponse {
+  YES = 0,
+  NO = 1,
 }
-export function $$m5(e, t = 0, r = 1) {
-  return !!$$g1(e, t, r) && $$E4(e);
+
+// Callback function reference for handling key events
+let keyPressCallback: () => void = noop
+
+/**
+ * Sets the callback function to be executed on key press events
+ * @param callback - Function to be called on key press
+ */
+export function setKeyPressCallback(callback: () => void): void {
+  keyPressCallback = callback
 }
-export function $$g1(e, t = 0, r = 1) {
-  return !!(fullscreenValue && fullscreenValue.isRootElementVisible()) && !$$f0(e, t, r);
+
+/**
+ * Main function to handle keyboard events based on fullscreen state
+ * @param event - Keyboard event object
+ * @param param1 - Condition parameter (default: 0)
+ * @param param2 - Condition parameter (default: 1)
+ * @returns Whether the event was handled
+ */
+export function handleKeyboardEventByState(event: KeyboardEvent, param1 = 0, param2 = 1): boolean {
+  return shouldHandleKeyEvent(event, param1, param2) && forwardKeyboardEvent(event)
 }
-export function $$f0(e, t = 1, r = 1) {
-  let n = e.keyCode;
-  let i = isCommandEvent(e);
-  if (n === KeyCodes.TAB && isModifierMatch(e, ModifierKeyCodes.SHIFT)) ;else if (isArrowKey(e.keyCode)) ;else if (BrowserInfo.mac && e.ctrlKey && (n === KeyCodes.A || n === KeyCodes.B || n === KeyCodes.D || n === KeyCodes.E || n === KeyCodes.F || n === KeyCodes.H || n === KeyCodes.K || n === KeyCodes.L || n === KeyCodes.N || n === KeyCodes.O || n === KeyCodes.P || n === KeyCodes.T || n === KeyCodes.V)) ;else if (n === KeyCodes.DELETE || n === KeyCodes.BACKSPACE || n === KeyCodes.NUMPAD_DELETE || n === KeyCodes.SPACE || n === KeyCodes.ENTER || n === KeyCodes.HOME || n === KeyCodes.END || n === KeyCodes.PAGE_UP || n === KeyCodes.PAGE_DOWN || n === KeyCodes.A && 1 === r) ;else if (i && n === KeyCodes.Z && 1 === t) ;else if (i || e.ctrlKey) return !1;else if (n === KeyCodes.F6) return !1;
-  return !0;
+
+/**
+ * Determines if a keyboard event should be handled based on fullscreen visibility
+ * @param event - Keyboard event object
+ * @param param1 - Condition parameter (default: 0)
+ * @param param2 - Condition parameter (default: 1)
+ * @returns Whether the event should be handled
+ */
+export function shouldHandleKeyEvent(event: KeyboardEvent, param1 = 0, param2 = 1): boolean {
+  return !!(fullscreenValue && fullscreenValue.isRootElementVisible()) && !shouldIgnoreKeyEvent(event, param1, param2)
 }
-export function $$E4(e) {
-  let t;
-  if ("keydown" === e.type) {
-    t = EventTypeEnum.KEY_PRESS;
-    _();
-  } else {
-    if ("keyup" !== e.type) {
-      console.error("Invalid event passed to forwardKeyboardEvent");
-      return !1;
-    }
-    t = EventTypeEnum.KEY_RELEASE;
+
+/**
+ * Determines if a keyboard event should be ignored
+ * @param event - Keyboard event object
+ * @param ignoreParam - Condition parameter (default: 1)
+ * @param checkParam - Condition parameter (default: 1)
+ * @returns Whether the event should be ignored
+ */
+export function shouldIgnoreKeyEvent(event: KeyboardEvent, ignoreParam = 1, checkParam = 1): boolean {
+  const keyCode = event.keyCode
+  const isCommand = isCommandEvent(event)
+
+  // Allow certain navigation keys through
+  if (keyCode === KeyCodes.TAB && isModifierMatch(event, ModifierKeyCodes.SHIFT)) {
+    return false
   }
-  let r = v7();
-  let n = {
-    type: t,
-    which: e.which,
-    modifierKeys: getModifierBitmask(e),
-    isRepeat: e.repeat,
-    code: e.code ?? e.nativeEvent?.code,
-    shouldUseLayoutAndCode: r !== KeyboardLayout.UNKNOWN,
-    layout: r
-  };
-  let o = !!Fullscreen && Fullscreen.handleKeyboardShortcut(n);
-  o && e.preventDefault();
-  return o;
+  else if (isArrowKey(event.keyCode)) {
+    return false
+  }
+  else if (
+    BrowserInfo.mac
+    && event.ctrlKey
+    && (keyCode === KeyCodes.A || keyCode === KeyCodes.B || keyCode === KeyCodes.D
+      || keyCode === KeyCodes.E || keyCode === KeyCodes.F || keyCode === KeyCodes.H
+      || keyCode === KeyCodes.K || keyCode === KeyCodes.L || keyCode === KeyCodes.N
+      || keyCode === KeyCodes.O || keyCode === KeyCodes.P || keyCode === KeyCodes.T
+      || keyCode === KeyCodes.V)
+  ) {
+    return false
+  }
+  else if (
+    keyCode === KeyCodes.DELETE
+    || keyCode === KeyCodes.BACKSPACE
+    || keyCode === KeyCodes.NUMPAD_DELETE
+    || keyCode === KeyCodes.SPACE
+    || keyCode === KeyCodes.ENTER
+    || keyCode === KeyCodes.HOME
+    || keyCode === KeyCodes.END
+    || keyCode === KeyCodes.PAGE_UP
+    || keyCode === KeyCodes.PAGE_DOWN
+    || (keyCode === KeyCodes.A && checkParam === 1)
+  ) {
+    return false
+  }
+  else if (isCommand && keyCode === KeyCodes.Z && ignoreParam === 1) {
+    return false
+  }
+  else if (isCommand || event.ctrlKey) {
+    return true // Ignore command/ctrl combinations
+  }
+  else if (keyCode === KeyCodes.F6) {
+    return true // Ignore F6
+  }
+
+  return false // Don't ignore by default
 }
-setButtonBaseKeyDownCallback($$m5);
-_$$n($$m5);
-export const BI = $$f0;
-export const U5 = $$g1;
-export const VA = $$p2;
-export const W0 = $$u3;
-export const f7 = $$E4;
-export const jr = $$m5;
-export const nB = $$h6;
+
+/**
+ * Forwards keyboard events to the appropriate handlers
+ * @param event - Keyboard event object
+ * @returns Whether the event was handled
+ */
+export function forwardKeyboardEvent(event: KeyboardEvent): boolean {
+  let eventType: EventTypeEnum
+
+  if (event.type === 'keydown') {
+    eventType = EventTypeEnum.KEY_PRESS
+    keyPressCallback()
+  }
+  else {
+    if (event.type !== 'keyup') {
+      console.error('Invalid event passed to forwardKeyboardEvent')
+      return false
+    }
+    eventType = EventTypeEnum.KEY_RELEASE
+  }
+
+  const keyboardLayout = getCurrentKeyboardLayout()
+  const keyboardEventData = {
+    type: eventType,
+    which: event.which,
+    modifierKeys: getModifierBitmask(event),
+    isRepeat: event.repeat,
+    code: event.code ?? (event as any).nativeEvent?.code,
+    shouldUseLayoutAndCode: keyboardLayout !== KeyboardLayout.UNKNOWN,
+    layout: keyboardLayout,
+  }
+
+  const wasHandled = !!Fullscreen && Fullscreen.handleKeyboardShortcut(keyboardEventData)
+
+  if (wasHandled) {
+    event.preventDefault()
+  }
+
+  return wasHandled
+}
+
+// Set up callbacks
+setButtonBaseKeyDownCallback(handleKeyboardEventByState)
+setSharedValue(handleKeyboardEventByState)
+
+// Exported constants for backward compatibility
+export const BI = shouldIgnoreKeyEvent
+export const U5 = shouldHandleKeyEvent
+export const VA = KeyboardEventResponse
+export const W0 = KeyboardEventResponse
+export const f7 = forwardKeyboardEvent
+export const jr = handleKeyboardEventByState
+export const nB = setKeyPressCallback

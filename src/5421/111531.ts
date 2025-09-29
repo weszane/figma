@@ -128,7 +128,7 @@ import { selectCurrentUser } from "../905/372672";
 import { e as _$$e, $v } from "../figma_app/259678";
 import { Xu } from "../figma_app/588582";
 import { $W, Z3 } from "../figma_app/325537";
-import { tk as _$$tk } from "../figma_app/883638";
+import { useChatError } from "../figma_app/883638";
 import { E as _$$E2 } from "../1156/200958";
 import { P as _$$P } from "../1156/852405";
 import { u as _$$u } from "../1156/115781";
@@ -1949,7 +1949,7 @@ function ny({
   let {
     setChatError,
     clearChatError
-  } = _$$tk(t);
+  } = useChatError(t);
   let m = selectCurrentUser();
   let g = useCurrentFileKey();
   let y = Xu();

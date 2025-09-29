@@ -86,7 +86,7 @@ import { calculatePickerPositionLeft } from '../905/959568';
 import { colorCSSManipulatorInstance } from '../905/989956';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Nlr } from '../figma_app/6204';
-import { sO } from '../figma_app/21029';
+import { useIsFullscreenSlidesView } from '../figma_app/21029';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { teamLibraryCache } from '../figma_app/80990';
 import { hidePickerThunk } from '../figma_app/91703';
@@ -1890,7 +1890,7 @@ export let $$ii1 = forwardRef(({
     ec && A === DesignGraphElements.DROPPER_COLOR && eE(!1);
   }, [A, ec]);
   let eT = new Set([PropertyScope.ALL_SCOPES]);
-  let ek = sO();
+  let ek = useIsFullscreenSlidesView();
   let eR = useAtomWithSubscription(TN).length > 0;
   let eN = es ? void 0 : jsx(it, {
     recordingKey: O,

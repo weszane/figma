@@ -107,7 +107,7 @@ import { getQueryParam } from '../905/609392';
 import { customHistory } from '../905/612521';
 import { buildFileUrl } from '../905/612685';
 import { setupThemeContext } from '../905/614223';
-import { Pv } from '../905/619652';
+import { convertImageDataToURL } from '../905/619652';
 import { e as _$$e2 } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { getVisibleTheme } from '../905/640017';
@@ -236,7 +236,7 @@ import { LZ } from '../figma_app/101956';
 import { Fz, Zg } from '../figma_app/106207';
 import { z as _$$z } from '../figma_app/106763';
 import { Jl, UM, wh, yq } from '../figma_app/114522';
-import { _9 as _$$_4 } from '../figma_app/119420';
+import { useAttachments } from '../figma_app/119420';
 import { dP } from '../figma_app/119475';
 import { Lk } from '../figma_app/122682';
 import { rh as _$$rh } from '../figma_app/139865';
@@ -275,7 +275,7 @@ import { Hu, kl } from '../figma_app/327683';
 import { isBigmaEnabledAlias3 } from '../figma_app/336853';
 import { Tj } from '../figma_app/342207';
 import { p as _$$p2 } from '../figma_app/353099';
-import { K as _$$K3 } from '../figma_app/358450';
+import { useMobileGestures } from '../figma_app/358450';
 import { nl as _$$nl } from '../figma_app/359943';
 import { p as _$$p } from '../figma_app/372802';
 import { G as _$$G5 } from '../figma_app/373780';
@@ -4946,7 +4946,7 @@ function rl(e, t, l) {
     n.cornerRadius = 0;
     n.effects = [];
     let i = L6(l, t);
-    return i ? Pv(i.image, new Point(i.width, i.height)) : null;
+    return i ? convertImageDataToURL(i.image, new Point(i.width, i.height)) : null;
   }(e, t);
   if (!a) return re();
   if (l > 0) {
@@ -10400,7 +10400,7 @@ function dc({
       attachments,
       setAttachments,
       claimAPendingAttachmentOrMakeOne
-    } = _$$_4(e.guid);
+    } = useAttachments(e.guid);
     let a = AppStateTsApi?.codeSelection();
     let d = getObservableValue(a?.selectedPromptFrames, []);
     let u = useCallback(() => {
@@ -10553,7 +10553,7 @@ function dy({
   }(a);
   let {
     setAttachments
-  } = _$$_4(a?.guid);
+  } = useAttachments(a?.guid);
   let c = useCallback(e => {
     UM();
     t?.();
@@ -10834,7 +10834,7 @@ let dN = memo(({
           ref: m
         }), !isVsCodeEnvironment() && R, !t && jsx(_$$E8, {}), jsx(_$$G3, {
           children: k ? null : jsxs(Fragment, {
-            children: [jsx(dA, {}), !!j?.shouldOptimizeForIpadApp && jsx(_$$K3, {}), !!j?.shouldOptimizeForIpadApp && jsx(_$$t5, {})]
+            children: [jsx(dA, {}), !!j?.shouldOptimizeForIpadApp && jsx(useMobileGestures, {}), !!j?.shouldOptimizeForIpadApp && jsx(_$$t5, {})]
           })
         }), getFeatureFlags().bake_canvas && jsx(dp, {}), e && jsx(X5, {}), getFeatureFlags().aip_flower_garden && jsx(oD, {})]
       }), jsx(_$$A3, {

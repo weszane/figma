@@ -1,5 +1,6 @@
-import { PluginIframeMode } from "../905/968269";
-import { PluginInstanceManager } from "../905/696438";
+import { PluginInstanceManager } from '../905/696438'
+import { PluginIframeMode } from '../905/968269'
+
 let a = `
   <body>
   <script>
@@ -26,62 +27,142 @@ let a = `
   }
   </script>
   </body>
-`;
-let s = class e {
-  constructor(e, t) {
-    this.pluginID = e;
-    this.nextMessageID = 0;
-    this.outerIframe = null;
-    this.messageCallbacks = {};
-    this.innerIframe = null;
-    this.handleMessages = e => {
-      let t = e.data;
-      t.id in this.messageCallbacks && (this.messageCallbacks[t.id](t), delete this.messageCallbacks[t.id]);
-    };
-    this.outerIframe = PluginInstanceManager.getInstance(PluginIframeMode.FETCH);
-    this.allowedDomains = t.allowedDomains;
-    this.isLocal = t.isLocal;
+`
+/**
+ * FetchPlugin - A plugin class for handling fetch requests through iframes
+ * Original class name: e
+ */
+export class FetchPlugin {
+  private pluginID: string
+  private nextMessageID: number
+  private outerIframe: any
+  private messageCallbacks: Record<number, (data: any) => void>
+  private innerIframe: any
+  private allowedDomains: string[]
+  private isLocal: boolean
+
+  // Static property to store inner iframes by plugin ID
+  static innerIframes: Record<string, any> = {}
+
+  constructor(pluginID: string, options: { allowedDomains: string[], isLocal: boolean }) {
+    this.pluginID = pluginID
+    this.nextMessageID = 0
+    this.outerIframe = null
+    this.messageCallbacks = {}
+    this.innerIframe = null
+    this.allowedDomains = options.allowedDomains
+    this.isLocal = options.isLocal
+
+    // Bind message handler
+    this.handleMessages = this.handleMessages.bind(this)
+
+    // Initialize outer iframe
+    this.outerIframe = PluginInstanceManager.getInstance(PluginIframeMode.FETCH)
   }
-  createInnerIframe() {
-    let t = this.outerIframe.createInnerIframe(a, this.handleMessages, {
+
+  /**
+   * Handle incoming messages from the iframe
+   * Original method name: handleMessages
+   * @param event - The message event
+   */
+  private handleMessages(event: MessageEvent): void {
+    const data = event.data
+    if (data.id in this.messageCallbacks) {
+      this.messageCallbacks[data.id](data)
+      delete this.messageCallbacks[data.id]
+    }
+  }
+
+  /**
+   * Create an inner iframe for the plugin
+   * Original method name: createInnerIframe
+   */
+  private createInnerIframe(): void {
+    const iframeConfig = {
       name: `${this.pluginID} fetch`,
-      isWidget: !1,
-      cameraAccess: !1,
-      microphoneAccess: !1,
-      displayCaptureAccess: !1,
-      clipboardWriteAccess: !1,
+      isWidget: false,
+      cameraAccess: false,
+      microphoneAccess: false,
+      displayCaptureAccess: false,
+      clipboardWriteAccess: false,
       allowedDomains: this.allowedDomains,
       isLocal: this.isLocal,
-      pluginId: this.pluginID
-    });
-    this.innerIframe = e.innerIframes[this.pluginID] = t;
+      pluginId: this.pluginID,
+    }
+
+    const iframe = this.outerIframe.createInnerIframe(a, this.handleMessages, iframeConfig)
+    this.innerIframe = FetchPlugin.innerIframes[this.pluginID] = iframe
   }
-  getOrCreateInnerIframe() {
-    this.innerIframe || (this.pluginID in e.innerIframes ? this.innerIframe = e.innerIframes[this.pluginID] : this.createInnerIframe());
+
+  /**
+   * Get or create an inner iframe for the plugin
+   * Original method name: getOrCreateInnerIframe
+   */
+  private getOrCreateInnerIframe(): void {
+    if (!this.innerIframe) {
+      if (this.pluginID in FetchPlugin.innerIframes) {
+        this.innerIframe = FetchPlugin.innerIframes[this.pluginID]
+      }
+      else {
+        this.createInnerIframe()
+      }
+    }
   }
-  postMessageAndWait(e) {
-    this.getOrCreateInnerIframe();
-    return new Promise((t, i) => {
-      e.id = this.nextMessageID++;
-      this.messageCallbacks[e.id] = e => {
-        e.data ? t(e.data) : e.error && i(e.error);
-      };
-      this.innerIframe?.postMessage(e, {
-        origin: "*"
-      });
-    });
+
+  /**
+   * Post a message to the iframe and wait for a response
+   * Original method name: postMessageAndWait
+   * @param message - The message to send
+   * @returns A promise that resolves with the response data
+   */
+  private postMessageAndWait(message: any): Promise<any> {
+    this.getOrCreateInnerIframe()
+
+    return new Promise((resolve, reject) => {
+      message.id = this.nextMessageID++
+
+      this.messageCallbacks[message.id] = (response: any) => {
+        if (response.data) {
+          resolve(response.data)
+        }
+        else if (response.error) {
+          reject(response.error)
+        }
+      }
+
+      this.innerIframe?.postMessage(message, {
+        origin: '*',
+      })
+    })
   }
-  fetch(e) {
+
+  /**
+   * Perform a fetch request through the iframe
+   * Original method name: fetch
+   * @param request - The fetch request options
+   * @returns A promise that resolves with the fetch response
+   */
+  public async fetch(request: RequestInit & { url: string }): Promise<any> {
     return this.postMessageAndWait({
-      data: e
-    });
+      data: request,
+    })
   }
-  destroyIframe() {
-    delete e.innerIframes[this.pluginID];
-    this.innerIframe && (this.innerIframe.destroy(), this.innerIframe = null);
-    this.outerIframe = null;
+
+  /**
+   * Destroy the iframe and clean up resources
+   * Original method name: destroyIframe
+   */
+  public destroyIframe(): void {
+    delete FetchPlugin.innerIframes[this.pluginID]
+
+    if (this.innerIframe) {
+      this.innerIframe.destroy()
+      this.innerIframe = null
+    }
+
+    this.outerIframe = null
   }
-};
-s.innerIframes = {};
-export let $$o0 = s;
-export const V = $$o0;
+}
+
+export const $$o0 = FetchPlugin
+export const V = FetchPlugin

@@ -294,10 +294,10 @@ class MessageWithResponseManager {
     }
   }
 }
-const messageWithResponseManager = new MessageWithResponseManager()
+export const messageWithResponseManager = new MessageWithResponseManager()
 
 // Message manager for callbacks (original: $$R24)
-class MessageWithCallbackManager {
+export class MessageWithCallbackManager {
   private callbacksById: Record<string, Fn> = {}
 
   /**
@@ -340,7 +340,7 @@ class MessageWithCallbackManager {
     delete this.callbacksById[callbackId]
   }
 }
-const messageWithCallbackManager = new MessageWithCallbackManager()
+export const messageWithCallbackManager = new MessageWithCallbackManager()
 
 /**
  * Extension-related message utilities.

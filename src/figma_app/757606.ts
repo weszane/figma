@@ -8,7 +8,7 @@ import { M3 } from "../figma_app/119475";
 import { IW, Lp } from "../figma_app/563413";
 import { searchEndSession, searchStartSession } from "../figma_app/925970";
 import { fullscreenValue } from "../figma_app/455680";
-import { f7 } from "../figma_app/896988";
+import { forwardKeyboardEvent } from "../figma_app/896988";
 import { selectCurrentFile } from "../figma_app/516028";
 import { k as _$$k } from "../905/540025";
 import { K } from "../905/954649";
@@ -52,7 +52,7 @@ export function $$y1(e) {
     selectOnFocus,
     ref: k
   });
-  let F = useCallback(e => !!(e.altKey && fullscreenValue.isReady()) && f7(e), []);
+  let F = useCallback(e => !!(e.altKey && fullscreenValue.isReady()) && forwardKeyboardEvent(e), []);
   useSingleEffect(() => {
     function e() {
       R(searchEndSession());

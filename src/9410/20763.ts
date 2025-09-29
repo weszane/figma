@@ -16,7 +16,7 @@ import { b as _$$b } from "../figma_app/556971";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { getCurrentFileType } from "../figma_app/976749";
-import { jr, W0 } from "../figma_app/896988";
+import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 import { Z } from "../905/104740";
 import { aq } from "../figma_app/412189";
 import { KindEnum } from "../905/129884";
@@ -113,7 +113,7 @@ export function $$I0({
         u?.(e, !A());
       },
       onKeyDown: e => {
-        e.keyCode === KeyCodes.ENTER ? (K("enter"), e.stopPropagation()) : M && isCommandEvent(e) && jr(e, W0.YES) && e.stopPropagation();
+        e.keyCode === KeyCodes.ENTER ? (K("enter"), e.stopPropagation()) : M && isCommandEvent(e) && handleKeyboardEventByState(e, KeyboardEventResponse.YES) && e.stopPropagation();
       },
       shiftEnterInsertsNewline: !0
     })]

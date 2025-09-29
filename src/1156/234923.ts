@@ -1,10 +1,10 @@
-import { H } from "../905/457575";
+import { createScopedStateWithDefault } from "../905/457575";
 import { useCallback } from "react";
 import { lV } from "../figma_app/617606";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { isWhiteboardFileType } from "../figma_app/976749";
-let o = H({});
+let o = createScopedStateWithDefault({});
 export function $$c0(e, t, n, c, d) {
   let [u, x] = useAtomValueAndSetter(o(d));
   let m = `${d || "unknown"}-${c}`;

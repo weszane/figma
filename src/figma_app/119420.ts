@@ -1,318 +1,617 @@
-import { useCallback, useState, useEffect, useMemo, useRef } from "react";
-import { throwTypeError } from "../figma_app/465776";
-import { debounce } from "../905/915765";
-import { InsertErrorType, Fullscreen, BackgroundPattern } from "../figma_app/763686";
-import { permissionScopeHandler, AIScopeHandler } from "../905/189185";
-import { getSingletonSceneGraph } from "../905/700578";
-import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
-import { analyticsEventManager } from "../905/449184";
-import { debugState } from "../905/407919";
-import { customHistory } from "../905/612521";
-import { uint8ArrayToHex } from "../figma_app/930338";
-import { generateUUIDv4 } from "../905/871474";
-import { Point } from "../905/736624";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { _G, Pv } from "../905/619652";
-import { openFileAtom, useCurrentFileKey } from "../figma_app/516028";
-import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { tk, T_ } from "../figma_app/883638";
-import { MD } from "../figma_app/176302";
-let $$S0 = setupRemovableAtomFamily(() => atom([]));
-let v = setupRemovableAtomFamily(() => atom([]));
-let $$A11 = atom(e => e($$S0).filter(e => "error" !== e.status).length >= $$C12);
-let x = atom(e => {
-  let t = e(openFileAtom);
-  return !!(t?.canEdit && t?.canEditCanvas);
-});
-let $$N2 = atom(null, (e, t) => {
-  if (e(x)) {
-    let r = e($$S0);
-    t($$S0, [...r, {
-      status: "pending",
-      uniqueId: generateUUIDv4()
-    }]);
-  }
-});
-let $$C12 = 3;
-export function $$w13(e) {
-  switch (e.type) {
-    case "image":
-      return "IMAGE";
-    case "node":
-      return "FIGMA_NODE";
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { AIScopeHandler, permissionScopeHandler } from '../905/189185'
+import { VisualBellActions } from '../905/302958'
+import { getI18nString } from '../905/303541'
+import { debugState } from '../905/407919'
+import { analyticsEventManager } from '../905/449184'
+import { customHistory } from '../905/612521'
+import { convertImageDataToURL, generateExportThumbnail } from '../905/619652'
+import { getSingletonSceneGraph } from '../905/700578'
+import { Point } from '../905/736624'
+import { generateUUIDv4 } from '../905/871474'
+import { debounce } from '../905/915765'
+import { atom, atomStoreManager, useAtomValueAndSetter } from '../figma_app/27355'
+import { SendToMakeAttachmentManager } from '../figma_app/176302'
+import { throwTypeError } from '../figma_app/465776'
+import { openFileAtom, useCurrentFileKey } from '../figma_app/516028'
+import { setupRemovableAtomFamily } from '../figma_app/615482'
+import { BackgroundPattern, Fullscreen, InsertErrorType } from '../figma_app/763686'
+import { ChatErrorType, useChatError } from '../figma_app/883638'
+import { uint8ArrayToHex } from '../figma_app/930338'
+
+// Type definitions for attachment statuses
+type AttachmentStatus = 'pending' | 'loading' | 'success' | 'error' | 'removed'
+
+interface BaseAttachment {
+  status: AttachmentStatus
+  uniqueId: string
+}
+
+interface PendingAttachment extends BaseAttachment {
+  status: 'pending'
+}
+
+interface LoadingAttachment extends BaseAttachment {
+  status: 'loading'
+  nodeGuid: string
+}
+
+interface SuccessAttachment extends BaseAttachment {
+  status: 'success'
+  nodeGuid: string
+  type: 'IMAGE' | 'FIGMA_NODE'
+  image?: string
+  codeFiles?: Array<{ codeFileGuid: string, code: string }>
+}
+
+interface ErrorAttachment extends BaseAttachment {
+  status: 'error'
+}
+
+interface RemovedAttachment extends BaseAttachment {
+  status: 'removed'
+}
+
+type Attachment
+  = | PendingAttachment
+  | LoadingAttachment
+  | SuccessAttachment
+  | ErrorAttachment
+  | RemovedAttachment
+
+// Atoms for managing attachment state
+export const attachmentsAtomFamily = setupRemovableAtomFamily(() => atom<Attachment[]>([]))
+export const stashedAttachmentsAtomFamily = setupRemovableAtomFamily(() => atom<Attachment[]>([]))
+export const MAX_ATTACHMENTS = 3
+export const hasMaxAttachmentsAtom = atom(get =>
+  (get(attachmentsAtomFamily) as Attachment[]).filter((att: Attachment) => att.status !== 'error').length >= MAX_ATTACHMENTS,
+)
+
+// Check if the current file can be edited
+export const canEditFileAtom = atom((get) => {
+  const file = get(openFileAtom)
+  return !!(file?.canEdit && file?.canEditCanvas)
+})
+
+// Atom for creating pending attachments
+export const createPendingAttachmentAtom = atom(
+  null,
+  (get, set) => {
+    if (get(canEditFileAtom)) {
+      const attachments = get(attachmentsAtomFamily) as Attachment[]
+      set(attachmentsAtomFamily, [...attachments, {
+        status: 'pending',
+        uniqueId: generateUUIDv4(),
+      }] as any)
+    }
+  },
+)
+
+/**
+ * Convert attachment type from internal representation to external
+ * @param attachment - The attachment with type to convert
+ * @returns The converted attachment type
+ */
+export function convertAttachmentType(attachment: { type: 'image' | 'node' }): 'IMAGE' | 'FIGMA_NODE' {
+  switch (attachment.type) {
+    case 'image':
+      return 'IMAGE'
+    case 'node':
+      return 'FIGMA_NODE'
     default:
-      throwTypeError(e);
+      throwTypeError(attachment)
   }
 }
-export function $$O9(e) {
-  function t(e, r = !0) {
+
+/**
+ * Show appropriate error message for attachment insertion errors
+ * @param errorType - The type of insertion error
+ */
+export function handleInsertError(errorType: InsertErrorType): void {
+  /**
+   * Helper function to show error toast
+   * @param message - Error message to display
+   * @param isError - Whether this is an error (true) or warning (false)
+   */
+  function showErrorToast(message: string, isError: boolean = true): void {
     debugState.dispatch(VisualBellActions.enqueue({
-      type: "figmake_attachment_failed_to_load",
-      message: e,
-      timeoutOverride: 5e3,
-      error: r,
+      type: 'figmake_attachment_failed_to_load',
+      message,
+      timeoutOverride: 5000,
+      error: isError,
       button: {
-        text: getI18nString("figmake.attachments.learn_more_button"),
+        text: getI18nString('figmake.attachments.learn_more_button'),
         action: () => {
-          customHistory.unsafeRedirect("https://help.figma.com/hc/articles/31722591905559", "_blank");
-        }
-      }
-    }));
+          customHistory.unsafeRedirect('https://help.figma.com/hc/articles/31722591905559', '_blank')
+        },
+      },
+    }))
   }
-  switch (e) {
+
+  switch (errorType) {
     case InsertErrorType.MORE_THAN_ONE_HIGHLEVEL_NODE_FOUND:
-      t(getI18nString("figmake.attachments.attachment_not_in_frame_toast"));
-      break;
+      showErrorToast(getI18nString('figmake.attachments.attachment_not_in_frame_toast'))
+      break
     case InsertErrorType.INSERTED_NODES_TOO_LARGE:
-      t(getI18nString("figmake.attachments.attachment_too_large_toast"), !1);
-      break;
+      showErrorToast(getI18nString('figmake.attachments.attachment_too_large_toast'), false)
+      break
     case InsertErrorType.MAXIMUM_ATTACHMENTS_EXCEEDED:
-      t(getI18nString("figmake.attachments.too_many_attachments_toast", {
-        max_num: $$C12
-      }));
-      break;
+      showErrorToast(getI18nString('figmake.attachments.too_many_attachments_toast', {
+        max_num: MAX_ATTACHMENTS,
+      }))
+      break
     case InsertErrorType.USER_PASTED_FIGMA_LINK_IN_CHAT:
-      t(getI18nString("figmake.attachments.cant_read_figma_link_toast"), !1);
-      break;
+      showErrorToast(getI18nString('figmake.attachments.cant_read_figma_link_toast'), false)
+      break
     case InsertErrorType.DESIGN_2_REACT_STATE_GROUP:
-      t(getI18nString("figmake.attachments.failure_state_group"));
-      break;
+      showErrorToast(getI18nString('figmake.attachments.failure_state_group'))
+      break
     case InsertErrorType.DESIGN_2_REACT_OTHER:
     case InsertErrorType.OTHER:
-      t(getI18nString("figmake.attachments.generic_failed_to_load_attachment_toast"));
-      break;
+      showErrorToast(getI18nString('figmake.attachments.generic_failed_to_load_attachment_toast'))
+      break
     default:
-      throwTypeError(e);
+      throwTypeError(errorType)
   }
 }
-export function $$R5(e) {
-  atomStoreManager.set($$S0, e => {
-    let t = e.find(e => "pending" === e.status);
-    return t ? e.filter(e => e.uniqueId !== t.uniqueId) : e;
-  });
-  $$O9(e);
+
+/**
+ * Remove pending attachment and show error
+ * @param errorType - The type of error to handle
+ */
+export function removePendingAttachmentAndShowError(errorType: InsertErrorType): void {
+  atomStoreManager.set(attachmentsAtomFamily, (attachments: Attachment[]) => {
+    const pendingAttachment = attachments.find((att: Attachment) => att.status === 'pending')
+    return pendingAttachment
+      ? attachments.filter((att: Attachment) => att.uniqueId !== pendingAttachment.uniqueId)
+      : attachments
+  })
+  handleInsertError(errorType)
 }
-export function $$L3() {
-  let e = atomStoreManager.get(v);
-  e.length > 0 && (atomStoreManager.set($$S0, e), atomStoreManager.set(v, []));
-}
-export function $$P7(e) {
-  return "pending" !== e.status && "error" !== e.status;
-}
-export function $$D8(e, t) {
-  return $$P7(e) && e.nodeGuid === t;
-}
-function k() {
-  return generateUUIDv4();
-}
-export function $$M10() {
-  let [e, t] = useAtomValueAndSetter($$S0);
-  return useCallback(r => {
-    t(e.filter(e => e.uniqueId !== r.uniqueId));
-    $$P7(r) && r.nodeGuid && permissionScopeHandler.ai("clean-up-attachments", () => {
-      let e = getSingletonSceneGraph().get(r.nodeGuid);
-      e && e.removeSelfAndChildren();
-      "success" === r.status && "FIGMA_NODE" === r.type && r.codeFiles?.forEach(e => {
-        Fullscreen?.deleteCodeFile(e.codeFileGuid);
-      });
-      Fullscreen?.commit();
-    });
-  }, [t, e]);
-}
-let F = [];
-let j = debounce(function (e, t, r) {
-  if (e !== t) switch (t) {
-    case "loading":
-      debugState.dispatch(VisualBellActions.enqueue({
-        message: getI18nString("figmake.chat.a11y_attachment_loading"),
-        role: "status"
-      }));
-      break;
-    case "success":
-      let n = "IMAGE" === r.type ? getI18nString("figmake.chat.a11y_image_attached_successfully") : getI18nString("figmake.chat.a11y_design_attached_successfully");
-      debugState.dispatch(VisualBellActions.enqueue({
-        message: n,
-        role: "status"
-      }));
-      break;
-    case "error":
-      debugState.dispatch(VisualBellActions.enqueue({
-        message: getI18nString("figmake.chat.a11y_attachment_failed_to_load"),
-        role: "status"
-      }));
-      break;
-    case "removed":
-      debugState.dispatch(VisualBellActions.enqueue({
-        message: getI18nString("figmake.chat.a11y_attachment_removed"),
-        role: "status"
-      }));
+
+/**
+ * Restore stashed attachments
+ */
+export function restoreStashedAttachments(): void {
+  const stashed = atomStoreManager.get(stashedAttachmentsAtomFamily) as Attachment[]
+  if (stashed.length > 0) {
+    atomStoreManager.set(attachmentsAtomFamily, stashed)
+    atomStoreManager.set(stashedAttachmentsAtomFamily, [])
   }
-}, 1e3);
-export function $$U6(e) {
-  let [t, r] = useAtomValueAndSetter($$S0);
-  let [i, a] = useAtomValueAndSetter(v);
-  let {
-    chatError,
-    setChatError
-  } = tk(e);
-  let _ = useCurrentFileKey();
-  let h = useCallback(() => {
-    atomStoreManager.set($$S0, [...atomStoreManager.get($$S0), {
-      status: "pending",
-      uniqueId: k()
-    }]);
-  }, []);
-  let m = useCallback((e, n) => {
-    r(t.map(t => t.uniqueId === e ? n : t));
-  }, [t, r]);
-  let g = useCallback(() => {
-    let e = t.find(e => "pending" === e.status);
-    return e?.uniqueId ?? null;
-  }, [t]);
-  let f = useCallback(e => {
-    let n = g();
-    if (n) {
-      m(n, {
-        status: "loading",
-        nodeGuid: e,
-        uniqueId: n
-      });
-      return n;
+}
+
+/**
+ * Check if attachment is loaded (not pending or error)
+ * @param attachment - The attachment to check
+ * @returns True if attachment is loaded
+ */
+export function isAttachmentLoaded(attachment: Attachment): boolean {
+  return attachment.status !== 'pending' && attachment.status !== 'error'
+}
+
+/**
+ * Check if attachment is loaded and matches node GUID
+ * @param attachment - The attachment to check
+ * @param nodeGuid - The node GUID to match
+ * @returns True if attachment is loaded and matches node GUID
+ */
+export function isLoadedAttachmentWithNodeGuid(attachment: Attachment, nodeGuid: string): boolean {
+  return isAttachmentLoaded(attachment) && 'nodeGuid' in attachment && attachment.nodeGuid === nodeGuid
+}
+
+/**
+ * Generate a unique ID
+ * @returns A unique ID
+ */
+function generateUniqueId(): string {
+  return generateUUIDv4()
+}
+
+/**
+ * Hook for removing attachments
+ * @returns Function to remove an attachment
+ */
+export function useRemoveAttachment() {
+  const [attachments, setAttachments] = useAtomValueAndSetter(attachmentsAtomFamily)
+
+  return useCallback((attachment: Attachment) => {
+    setAttachments(attachments.filter((att: Attachment) => att.uniqueId !== attachment.uniqueId))
+
+    if (isAttachmentLoaded(attachment) && 'nodeGuid' in attachment && attachment.nodeGuid) {
+      permissionScopeHandler.ai('clean-up-attachments', () => {
+        const node = getSingletonSceneGraph().get(attachment.nodeGuid)
+        if (node) {
+          node.removeSelfAndChildren()
+        }
+
+        if (attachment.status === 'success' && 'type' in attachment && attachment.type === 'FIGMA_NODE' && 'codeFiles' in attachment && attachment.codeFiles) {
+          attachment.codeFiles.forEach((file) => {
+            Fullscreen?.deleteCodeFile(file.codeFileGuid)
+          })
+        }
+
+        Fullscreen?.commit()
+      })
     }
-    {
-      let n = k();
-      r([...t, {
-        status: "loading",
-        nodeGuid: e,
-        uniqueId: n
-      }]);
-      return n;
+  }, [setAttachments, attachments])
+}
+
+// Track previous attachments for status change detection
+let previousAttachments: Attachment[] = []
+
+// Debounced function for announcing attachment status changes
+const announceAttachmentStatusChange = debounce((
+  previousStatus: AttachmentStatus,
+  currentStatus: AttachmentStatus,
+  attachment: Attachment,
+) => {
+  if (previousStatus !== currentStatus) {
+    switch (currentStatus) {
+      case 'loading':
+        debugState.dispatch(VisualBellActions.enqueue({
+          message: getI18nString('figmake.chat.a11y_attachment_loading'),
+          role: 'status',
+        }))
+        break
+      case 'success':
+        const successMessage = 'type' in attachment && attachment.type === 'IMAGE'
+          ? getI18nString('figmake.chat.a11y_image_attached_successfully')
+          : getI18nString('figmake.chat.a11y_design_attached_successfully')
+        debugState.dispatch(VisualBellActions.enqueue({
+          message: successMessage,
+          role: 'status',
+        }))
+        break
+      case 'error':
+        debugState.dispatch(VisualBellActions.enqueue({
+          message: getI18nString('figmake.chat.a11y_attachment_failed_to_load'),
+          role: 'status',
+        }))
+        break
+      case 'removed':
+        debugState.dispatch(VisualBellActions.enqueue({
+          message: getI18nString('figmake.chat.a11y_attachment_removed'),
+          role: 'status',
+        }))
+        break
     }
-  }, [t, r, g, m]);
-  let E = useCallback(e => {
-    t.length >= $$C12 || (r(t => [...t, {
-      status: "success",
-      ...e,
-      uniqueId: k()
-    }]), analyticsEventManager.trackDefinedEvent("ai_for_production.chat_attachment_added", {
-      attachmentType: e.type,
-      fileKey: _ ?? void 0
-    }));
-  }, [t, r, _]);
-  let b = useCallback(e => {
-    r(t.filter(t => !$$D8(t, e.nodeGuid)));
-    AIScopeHandler.system("clean-up-attachments", () => {
-      let t = getSingletonSceneGraph().get(e.nodeGuid);
-      t && t.removeSelfAndChildren();
-      "FIGMA_NODE" === e.type && e.codeFiles?.forEach(e => {
-        Fullscreen?.deleteCodeFile(e.codeFileGuid);
-      });
-      Fullscreen?.commit();
-    });
-  }, [r, t]);
-  let A = useCallback(() => {
-    a(t);
-    r([]);
-  }, [t, r, a]);
-  let [x, N] = useState([]);
-  let w = useCallback(async () => {
-    N(await Promise.all(t.map(B)));
-  }, [t]);
+  }
+}, 1000)
+
+/**
+ * Hook for managing attachments
+ * @param chatMessagesNodeGuid - The GUID of the chat messages node
+ * @returns Attachment management functions and state
+ */
+export function useAttachments(chatMessagesNodeGuid: string) {
+  const [attachments, setAttachments] = useAtomValueAndSetter(attachmentsAtomFamily)
+  const [_stashedAttachments, setStashedAttachments] = useAtomValueAndSetter(stashedAttachmentsAtomFamily)
+  const { chatError, setChatError } = useChatError(chatMessagesNodeGuid)
+  const fileKey = useCurrentFileKey()
+
+  // Create a pending attachment
+  const createPendingAttachment = useCallback(() => {
+    const currentAttachments = atomStoreManager.get(attachmentsAtomFamily) as Attachment[]
+    atomStoreManager.set(attachmentsAtomFamily, [
+      ...currentAttachments,
+      {
+        status: 'pending',
+        uniqueId: generateUniqueId(),
+      },
+    ] as any)
+  }, [])
+
+  // Update an attachment by ID
+  const setAttachmentById = useCallback((attachmentId: string, updatedAttachment: Attachment) => {
+    setAttachments(attachments.map((att: Attachment) =>
+      att.uniqueId === attachmentId ? updatedAttachment : att,
+    ))
+  }, [attachments, setAttachments])
+
+  // Get the ID of the first pending attachment
+  const getPendingAttachmentId = useCallback(() => {
+    const pendingAttachment = attachments.find((att: Attachment) => att.status === 'pending')
+    return pendingAttachment?.uniqueId ?? null
+  }, [attachments])
+
+  // Claim a pending attachment or create a new one
+  const claimAPendingAttachmentOrMakeOne = useCallback((nodeGuid: string) => {
+    const pendingId = getPendingAttachmentId()
+
+    if (pendingId) {
+      setAttachmentById(pendingId, {
+        status: 'loading',
+        nodeGuid,
+        uniqueId: pendingId,
+      })
+      return pendingId
+    }
+    else {
+      const newId = generateUniqueId()
+      setAttachments([
+        ...attachments,
+        {
+          status: 'loading',
+          nodeGuid,
+          uniqueId: newId,
+        },
+      ])
+      return newId
+    }
+  }, [attachments, setAttachments, getPendingAttachmentId, setAttachmentById])
+
+  // Create a loaded attachment
+  const createLoadedAttachment = useCallback((attachmentData: Omit<SuccessAttachment, 'status' | 'uniqueId'>) => {
+    if (attachments.length >= MAX_ATTACHMENTS)
+      return
+
+    setAttachments((prev: Attachment[]) => [
+      ...prev,
+      {
+        status: 'success',
+        ...attachmentData,
+        uniqueId: generateUniqueId(),
+      },
+    ])
+
+    analyticsEventManager.trackDefinedEvent('ai_for_production.chat_attachment_added', {
+      attachmentType: attachmentData.type,
+      fileKey: fileKey ?? undefined,
+    })
+  }, [attachments, setAttachments, fileKey])
+
+  // Remove an attachment
+  const clearAttachment = useCallback((attachment: SuccessAttachment) => {
+    setAttachments(attachments.filter((att: Attachment) => !isLoadedAttachmentWithNodeGuid(att, attachment.nodeGuid)))
+
+    AIScopeHandler.system('clean-up-attachments', () => {
+      const node = getSingletonSceneGraph().get(attachment.nodeGuid)
+      if (node) {
+        node.removeSelfAndChildren()
+      }
+
+      if (attachment.type === 'FIGMA_NODE' && attachment.codeFiles) {
+        attachment.codeFiles.forEach((file) => {
+          Fullscreen?.deleteCodeFile(file.codeFileGuid)
+        })
+      }
+
+      Fullscreen?.commit()
+    })
+  }, [setAttachments, attachments])
+
+  // Stash all attachments
+  const stashAllAttachments = useCallback(() => {
+    setStashedAttachments(attachments)
+    setAttachments([])
+  }, [attachments, setAttachments, setStashedAttachments])
+
+  // Process attachments (resize images)
+  const [processedAttachments, setProcessedAttachments] = useState<Attachment[]>([])
+
+  const processAttachments = useCallback(async () => {
+    setProcessedAttachments(await Promise.all(attachments.map(processAttachmentImage)))
+  }, [attachments])
+
   useEffect(() => {
-    w();
-  }, [t, w]);
-  let O = useMemo(() => x.reduce((e, t) => "success" !== t.status ? e : "FIGMA_NODE" === t.type ? e + t.codeFiles.reduce((e, t) => e + new Blob([t.code]).size, 0) + H(t.image) : e + H(t.image), 0), [x]);
-  let R = useRef(!1);
-  let L = useMemo(() => x.every(e => "loading" !== e.status) && O < 5242880, [x, O]);
+    processAttachments()
+  }, [attachments, processAttachments])
+
+  // Calculate total attachment size
+  const totalAttachmentBytes = useMemo(() =>
+    processedAttachments.reduce((total, attachment) => {
+      if (attachment.status !== 'success')
+        return total
+
+      if ('type' in attachment && attachment.type === 'FIGMA_NODE') {
+        const codeFileSize = 'codeFiles' in attachment && attachment.codeFiles?.reduce((sum, file) =>
+          sum + new Blob([file.code]).size, 0) || 0
+        return total + codeFileSize + calculateImageSize('image' in attachment ? attachment.image : undefined)
+      }
+
+      return total + calculateImageSize('image' in attachment ? attachment.image : undefined)
+    }, 0), [processedAttachments])
+
+  // Check if attachments are ready (under size limit)
+  const attachmentsReady = useMemo(() =>
+    processedAttachments.every((att: Attachment) => att.status !== 'loading')
+    && totalAttachmentBytes < 5242880, // 5MB limit
+    [processedAttachments, totalAttachmentBytes])
+
+  // Handle attachment size limit exceeded
+  const sizeLimitExceededRef = useRef(false)
+
   useEffect(() => {
-    let e = O > 5242880;
-    e !== R.current && (R.current = e, e ? setChatError({
-      error: Error(T_.ATTACHMENTS_TOO_LARGE)
-    }) : chatError && chatError.error.message === T_.ATTACHMENTS_TOO_LARGE && setChatError(void 0));
-  }, [O, setChatError, chatError]);
+    const isSizeLimitExceeded = totalAttachmentBytes > 5242880
+
+    if (isSizeLimitExceeded !== sizeLimitExceededRef.current) {
+      sizeLimitExceededRef.current = isSizeLimitExceeded
+
+      if (isSizeLimitExceeded) {
+        setChatError({
+          error: new Error(ChatErrorType.ATTACHMENTS_TOO_LARGE),
+        } as any)
+      }
+      else if (chatError && (chatError as any).error && (chatError as any).error.message === ChatErrorType.ATTACHMENTS_TOO_LARGE) {
+        setChatError(undefined)
+      }
+    }
+  }, [totalAttachmentBytes, setChatError, chatError])
+
+  // Announce attachment status changes
   useEffect(() => {
-    t.forEach(e => {
-      let t = F.find(t => t.uniqueId === e.uniqueId);
-      t ? t.status !== e.status && j(t.status, e.status, e) : j("", e.status, e);
-    });
-    F.forEach(e => {
-      t.find(t => t.uniqueId === e.uniqueId) || j(e.status, "removed", e);
-    });
-    F = t;
-  }, [t]);
-  MD({
-    totalAttachmentBytes: O,
-    attachmentsReady: L,
-    chatError
-  });
+    attachments.forEach((attachment: Attachment) => {
+      const previousAttachment = previousAttachments.find(prev => prev.uniqueId === attachment.uniqueId)
+
+      if (previousAttachment) {
+        if (previousAttachment.status !== attachment.status) {
+          announceAttachmentStatusChange(previousAttachment.status, attachment.status, attachment)
+        }
+      }
+      else {
+        announceAttachmentStatusChange('' as AttachmentStatus, attachment.status, attachment)
+      }
+    })
+
+    previousAttachments.forEach((prevAttachment) => {
+      const currentAttachment = attachments.find((att: Attachment) => att.uniqueId === prevAttachment.uniqueId)
+
+      if (!currentAttachment) {
+        announceAttachmentStatusChange(prevAttachment.status, 'removed', prevAttachment)
+      }
+    })
+
+    previousAttachments = attachments
+  }, [attachments])
+
+  // Manage SendToMake attachment flow
+  SendToMakeAttachmentManager({
+    totalAttachmentBytes,
+    attachmentsReady,
+    chatError: chatError as any,
+  })
+
   return {
-    attachments: x,
-    setAttachments: r,
-    createPendingAttachment: h,
-    setAttachmentById: m,
-    claimAPendingAttachmentOrMakeOne: f,
-    createLoadedAttachment: E,
-    clearAttachment: b,
-    stashAllAttachments: A,
-    totalAttachmentBytes: O,
-    attachmentsReady: L
-  };
+    attachments: processedAttachments,
+    setAttachments,
+    createPendingAttachment,
+    setAttachmentById,
+    claimAPendingAttachmentOrMakeOne,
+    createLoadedAttachment,
+    clearAttachment,
+    stashAllAttachments,
+    totalAttachmentBytes,
+    attachmentsReady,
+  }
 }
-function B(e) {
-  return "success" !== e.status ? Promise.resolve(e) : new Promise(t => {
-    if (!e.image) {
-      t(e);
-      return;
+
+/**
+ * Process attachment image (resize if needed)
+ * @param attachment - The attachment to process
+ * @returns Promise resolving to processed attachment
+ */
+function processAttachmentImage(attachment: Attachment): Promise<Attachment> {
+  // Return early if not a success attachment or no image
+  if (attachment.status !== 'success' || !('image' in attachment) || !attachment.image) {
+    return Promise.resolve(attachment)
+  }
+
+  return new Promise((resolve) => {
+    const img = new Image()
+
+    img.onload = () => {
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+
+      let width = img.width
+      let height = img.height
+
+      // Resize if larger than 1000px in either dimension
+      if (img.width > 1000 || img.height > 1000) {
+        if (img.width > img.height) {
+          width = 1000
+          height = Math.round(1000 * img.height / img.width)
+        }
+        else {
+          height = 1000
+          width = Math.round(1000 * img.width / img.height)
+        }
+      }
+
+      canvas.width = width
+      canvas.height = height
+
+      if (ctx) {
+        ctx.imageSmoothingEnabled = true
+        ctx.imageSmoothingQuality = 'high'
+        ctx.drawImage(img, 0, 0, width, height)
+      }
+
+      const resizedImage = canvas.toDataURL('image/png')
+
+      resolve({
+        ...attachment,
+        image: resizedImage,
+      } as Attachment)
     }
-    let r = new Image();
-    r.onload = () => {
-      let n = document.createElement("canvas");
-      let i = n.getContext("2d");
-      let a = r.width;
-      let s = r.height;
-      (r.width > 1e3 || r.height > 1e3) && (r.width > r.height ? (a = 1e3, s = Math.round(1e3 * r.height / r.width)) : (s = 1e3, a = Math.round(1e3 * r.width / r.height)));
-      n.width = a;
-      n.height = s;
-      i.imageSmoothingEnabled = !0;
-      i.imageSmoothingQuality = "high";
-      i.drawImage(r, 0, 0, a, s);
-      let o = n.toDataURL("image/png");
-      t({
-        ...e,
-        image: o
-      });
-    };
-    r.onerror = () => {
-      t(e);
-    };
-    r.src = e.image;
-  });
+
+    img.onerror = () => {
+      resolve(attachment)
+    }
+
+    img.src = attachment.image
+  })
 }
-export function $$G1(e) {
-  if (!e) return null;
-  let t = _G(new Point(e.size.x, e.size.y), e.guid, !0, BackgroundPattern.TRANSPARENT);
-  return t ? Pv(t.pixels, t.pixelSize) : null;
+
+/**
+ * Generate thumbnail for node
+ * @param node - The node to generate thumbnail for
+ * @returns Thumbnail URL or null
+ */
+export function generateNodeThumbnail(node: { size: { x: number, y: number }, guid: string } | null): string | null {
+  if (!node)
+    return null
+
+  const thumbnail = generateExportThumbnail(
+    new Point(node.size.x, node.size.y),
+    node.guid,
+    true,
+    BackgroundPattern.TRANSPARENT,
+  )
+
+  return thumbnail ? convertImageDataToURL(thumbnail.pixels, thumbnail.pixelSize) : null
 }
-export function $$V4(e) {
-  if (!e) return null;
-  let t = e.fills.find(e => e.image && e.visible);
-  return t?.image?.hash ? uint8ArrayToHex(t.image.hash) : null;
+
+/**
+ * Get image hash from node fills
+ * @param node - The node to get image hash from
+ * @returns Image hash or null
+ */
+export function getNodeImageHash(node: { fills: Array<{ image?: { hash?: Uint8Array }, visible?: boolean }> } | null): string | null {
+  if (!node)
+    return null
+
+  const imageFill = node.fills.find(fill => fill.image && fill.visible)
+  return imageFill?.image?.hash ? uint8ArrayToHex(imageFill.image.hash) : null
 }
-function H(e) {
-  return e ? Math.floor(3 * e.length / 4) : 0;
+
+/**
+ * Calculate image size from base64 string
+ * @param image - Base64 image string
+ * @returns Size in bytes
+ */
+function calculateImageSize(image: string | undefined): number {
+  return image ? Math.floor(3 * image.length / 4) : 0
 }
-export const Ah = $$S0;
-export const NC = $$G1;
-export const Q_ = $$N2;
-export const WH = $$L3;
-export const Zz = $$V4;
-export const _5 = $$R5;
-export const _9 = $$U6;
-export const aZ = $$P7;
-export const ak = $$D8;
-export const hH = $$O9;
-export const oz = $$M10;
-export const qG = $$A11;
-export const qQ = $$C12;
-export const yM = $$w13;
+
+// Export constants and functions with original names for backward compatibility
+export const Ah = attachmentsAtomFamily
+export const NC = generateNodeThumbnail
+export const Q_ = createPendingAttachmentAtom
+export const WH = restoreStashedAttachments
+export const Zz = getNodeImageHash
+export const _5 = removePendingAttachmentAndShowError
+export const _9 = useAttachments
+export const aZ = isAttachmentLoaded
+export const ak = isLoadedAttachmentWithNodeGuid
+export const hH = handleInsertError
+export const oz = useRemoveAttachment
+export const qG = hasMaxAttachmentsAtom
+export const qQ = MAX_ATTACHMENTS
+export const yM = convertAttachmentType
+
+// Export constants and functions with descriptive names
+// export const attachmentsAtom = attachmentsAtomFamily
+// export const generateThumbnail = generateNodeThumbnail
+// export const createPendingAttachment = createPendingAttachmentAtom
+// export const restoreStashed = restoreStashedAttachments
+// export const getImageHash = getNodeImageHash
+// export const removePendingAndShowError = removePendingAttachmentAndShowError
+// export const useAttachmentsHook = useAttachments
+// export const isLoaded = isAttachmentLoaded
+// export const isLoadedWithNodeGuid = isLoadedAttachmentWithNodeGuid
+// export const handleInsertErrorFn = handleInsertError
+// export const useRemoveAttachmentHook = useRemoveAttachment
+// export const hasMaxAttachments = hasMaxAttachmentsAtom
+// export const maxAttachmentsCount = MAX_ATTACHMENTS
+// export const convertType = convertAttachmentType

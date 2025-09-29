@@ -17,7 +17,7 @@ import { AV } from "../figma_app/933328";
 import { W3 } from "../905/232641";
 import { fullscreenValue } from "../figma_app/455680";
 import { paintManager, blackColor } from "../figma_app/385874";
-import { SK } from "../905/619652";
+import { updateGIFImageProperties } from "../905/619652";
 import { J } from "../905/225412";
 import { ku } from "../905/149223";
 import { WH } from "../figma_app/836943";
@@ -115,7 +115,7 @@ function R({
       Fullscreen.dropImageOnPaintThumbnail(e, t, i, 0, R);
     }
   }, [G, R]);
-  let $ = useCallback((e, t) => permissionScopeHandler.user("update-gif-image", () => SK(e, t, R)), [R]);
+  let $ = useCallback((e, t) => permissionScopeHandler.user("update-gif-image", () => updateGIFImageProperties(e, t, R)), [R]);
   return jsxs("div", {
     children: [jsx(_$$Y, {
       isDragTarget: () => !0,

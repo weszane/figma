@@ -71,7 +71,7 @@ import { MediaQuerySvgComponent } from "../905/331623";
 import { getI18nString } from "../905/303541";
 import { U as _$$U } from "../905/492359";
 import { s$ } from "../905/432493";
-import { NO } from "../905/619652";
+import { generateObjectsPanelIcon } from "../905/619652";
 import { KindEnum } from "../905/129884";
 import { g$ } from "../figma_app/116234";
 import { i as _$$i } from "../905/415810";
@@ -138,7 +138,7 @@ export function $$tT1(e, t) {
   let r = tb.get(e);
   r && r.thumbnailId === t || (r = {
     thumbnailId: t,
-    svg: NO(e)
+    svg: generateObjectsPanelIcon(e)
   }, tb.set(e, r));
   return r.svg;
 }

@@ -16,7 +16,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import E from "classnames";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { truncate } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -423,7 +423,7 @@ export function $$eR6({
     tY(e.toString(), t, eB.clientLifecycleId, ez, eB.file_key, eB.quick_actions_session_id);
   }, [tY, eB, ez]);
   let tq = _$$s3();
-  _$$h(() => (analyticsEventManager.trackDefinedEvent("asset_search.actions_search_panel_open", {
+  useSingleEffect(() => (analyticsEventManager.trackDefinedEvent("asset_search.actions_search_panel_open", {
     ...tb
   }), () => {
     $$eL4(atomStoreManager.get(Q8), noop, Q, !0, tq, G4.ACTIONS_ASSETS_TAB_DETAIL);

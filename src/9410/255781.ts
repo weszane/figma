@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { zE } from "../905/738636";
 import { $ } from "../905/922405";
-import { DM } from "../figma_app/223206";
+import { sendToMakeFromDesignAtom } from "../figma_app/223206";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getPermissionsAndView } from "../905/766303";
 import { FFileType } from "../figma_app/191312";
@@ -160,7 +160,7 @@ let S = (e, t) => ({
         newFileFrom: t,
         dispatch: i
       }) {
-        let r = atomStoreManager.set(DM, {
+        let r = atomStoreManager.set(sendToMakeFromDesignAtom, {
           fileKey: e.fileKey,
           fileVersion: e.fileVersion,
           pageGuid: e.pageGuid,

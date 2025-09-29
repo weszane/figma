@@ -60,12 +60,12 @@ import { VS, JE, oZ, WP, _0 } from "../9410/763216";
 import { Bf } from "../figma_app/249941";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { Nl } from "../figma_app/115923";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { II, EA, SQ, CT, A5, aH, ih, WB, L4 } from "../9410/499229";
 import { a as _$$a } from "../9410/20763";
 import { Od, I_ } from "../9410/542126";
 import { trackFileEventWithUser } from "../figma_app/901889";
-import { U5, W0, f7 } from "../figma_app/896988";
+import { shouldHandleKeyEvent, KeyboardEventResponse, forwardKeyboardEvent } from "../figma_app/896988";
 import { A as _$$A2 } from "../6828/523860";
 import { A as _$$A3 } from "../6828/85206";
 import { A as _$$A4 } from "../6828/954206";
@@ -249,8 +249,8 @@ function eg({
   });
 }
 function eL(e, t = !1) {
-  if (t || U5(e, W0.YES)) {
-    let t = f7(e);
+  if (t || shouldHandleKeyEvent(e, KeyboardEventResponse.YES)) {
+    let t = forwardKeyboardEvent(e);
     t && e.stopPropagation();
     return t;
   }
@@ -967,7 +967,7 @@ function eB({
   resultsOnOtherPages: t,
   allInstancesExpanded: n
 }) {
-  let l = sO();
+  let l = useIsFullscreenSlidesView();
   let i = useIsFullscreenSitesView();
   let s = useIsSelectedViewFullscreenCooper();
   let o = useSelector(e => e.mirror.appModel.pagesList);

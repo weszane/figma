@@ -11,7 +11,7 @@ import { openFileAtom } from "../figma_app/516028";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { A } from "../905/202425";
 import { n0 } from "../figma_app/259678";
-import { Ah, ak, hH, NC, Zz, _9 } from "../figma_app/119420";
+import { attachmentsAtomFamily, isLoadedAttachmentWithNodeGuid, handleInsertError, generateNodeThumbnail, getNodeImageHash, useAttachments } from "../figma_app/119420";
 async function f(e, t) {
   let n;
   if (permissionScopeHandler.ai("figmake", () => {
@@ -19,14 +19,14 @@ async function f(e, t) {
     if (1 !== t.length) throw Error("Expected exactly one code layer to be created");
     n = t[0];
   }), n) await getImageManager().loadAllImagesUnder(n, ImageExportType.ALL, "rev-image-paste");else {
-    let n = atomStoreManager.get(Ah).find(t => ak(t, e.guid));
-    t(t => t.filter(t => !ak(t, e.guid)));
+    let n = atomStoreManager.get(attachmentsAtomFamily).find(t => isLoadedAttachmentWithNodeGuid(t, e.guid));
+    t(t => t.filter(t => !isLoadedAttachmentWithNodeGuid(t, e.guid)));
     AIScopeHandler.system("figmake", () => {
       let t = getSingletonSceneGraph().get(e.guid);
       t && t.removeSelfAndChildren();
     });
     let r = n?.designToCodeErrors;
-    r && r[0] ? hH(r[0]) : hH(InsertErrorType.DESIGN_2_REACT_OTHER);
+    r && r[0] ? handleInsertError(r[0]) : handleInsertError(InsertErrorType.DESIGN_2_REACT_OTHER);
   }
 }
 export async function $$y0(e, t, n, r, a) {
@@ -48,8 +48,8 @@ export async function $$y0(e, t, n, r, a) {
   let u = a(e);
   try {
     "FIGMA_NODE" === d ? await f(c, n) : function (e, t, n) {
-      let r = NC(e);
-      let s = Zz(e);
+      let r = generateNodeThumbnail(e);
+      let s = getNodeImageHash(e);
       if (Fullscreen?.addImageNodeAsImageImport(e.id), r) {
         let i = {
           status: "success",
@@ -59,7 +59,7 @@ export async function $$y0(e, t, n, r, a) {
           type: "IMAGE",
           uniqueId: t
         };
-        n(t => t.map(t => ak(t, e.guid) ? i : t));
+        n(t => t.map(t => isLoadedAttachmentWithNodeGuid(t, e.guid) ? i : t));
       }
     }(c, u, n);
     analyticsEventManager.trackDefinedEvent("ai_for_production.chat_attachment_added", {
@@ -67,7 +67,7 @@ export async function $$y0(e, t, n, r, a) {
       fileKey: atomStoreManager.get(openFileAtom)?.key ?? void 0
     });
   } catch (t) {
-    n(t => t.map(t => ak(t, e) ? {
+    n(t => t.map(t => isLoadedAttachmentWithNodeGuid(t, e) ? {
       ...t,
       status: "error"
     } : t));
@@ -82,7 +82,7 @@ export function $$_1(e, t) {
     attachments,
     setAttachments,
     claimAPendingAttachmentOrMakeOne
-  } = _9(e);
+  } = useAttachments(e);
   useEffect(() => {
     a !== l && $$y0(a, n, setAttachments, t, claimAPendingAttachmentOrMakeOne);
   }, [n, setAttachments, l, attachments, a, t, claimAPendingAttachmentOrMakeOne]);

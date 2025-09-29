@@ -135,7 +135,7 @@ import { K as _$$K5 } from "../905/532723";
 import { k as _$$k3 } from "../905/988992";
 import { lF } from "../figma_app/384713";
 import { n as _$$n3 } from "../figma_app/908785";
-import { K as _$$K6 } from "../figma_app/358450";
+import { useMobileGestures } from "../figma_app/358450";
 import { t as _$$t2 } from "../2b17fec9/172012";
 import { u as _$$u } from "../441/357009";
 import { _q, PA } from "../figma_app/957070";
@@ -979,7 +979,7 @@ let tz = memo(({
           ref: U
         }), !isVsCodeEnvironment() && W, jsx(_$$G, {
           children: jsxs(Fragment, {
-            children: [jsx(tV, {}), !!Q?.shouldOptimizeForIpadApp && jsx(_$$K6, {}), !!Q?.shouldOptimizeForIpadApp && jsx(_$$t2, {})]
+            children: [jsx(tV, {}), !!Q?.shouldOptimizeForIpadApp && jsx(useMobileGestures, {}), !!Q?.shouldOptimizeForIpadApp && jsx(_$$t2, {})]
           })
         }), e && jsx(X5, {})]
       }), jsx(_$$A, {

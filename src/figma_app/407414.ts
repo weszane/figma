@@ -8,7 +8,7 @@ import { rJ, I, ZM, rT, KV, zZ, L2 } from "../figma_app/542202";
 import { eA } from "../905/695660";
 import { C } from "../905/887158";
 import { td } from "../figma_app/827216";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { useLatestRef } from "../figma_app/922077";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { aW } from "../figma_app/965653";
@@ -68,7 +68,7 @@ export function $$x19(e) {
 }
 export function $$N9(e) {
   let t = useAtomWithSubscription($$T14);
-  _$$h(() => {
+  useSingleEffect(() => {
     analyticsEventManager.trackDefinedMetric("suggested_actions.library_selector.opened", {
       sessionId: t,
       isUpdateView: e
@@ -86,7 +86,7 @@ export function $$C13(e, t, r) {
 }
 export function $$w18() {
   let e = useAtomWithSubscription($$T14);
-  _$$h(() => {
+  useSingleEffect(() => {
     analyticsEventManager.trackDefinedMetric("suggested_actions.suggestions_modal.opened", {
       sessionId: e
     });

@@ -23,7 +23,7 @@ import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { ServiceCategories } from "../905/165054";
 import R from "../vendor/128080";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { R as _$$R } from "../905/165069";
+import { useConditionalCallback } from "../905/165069";
 import { reportError } from "../905/11";
 import { useSeatChoiceInNuxExperiment } from "../figma_app/297957";
 import { eS as _$$eS } from "../figma_app/33126";
@@ -2347,7 +2347,7 @@ function te() {
     entryPoint: DeepLinkType.NUX
   });
   e9();
-  _$$R(() => {
+  useConditionalCallback(() => {
     x(collaboratorSet.reduce((e, r) => {
       let t = getUpgradeEligibility(ProductAccessTypeMap[r]);
       e[r] = t;
@@ -4501,7 +4501,7 @@ function iE({
         }
       }) : _(g[0]);
     }, [h, u, _, x, g]);
-    _$$R(() => {
+    useConditionalCallback(() => {
       trackEventAnalytics("NUX First Step", {
         nuxType: "nux_dynamic_preview",
         isGen1: !!a.data,

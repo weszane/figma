@@ -10,7 +10,7 @@ import { getCurrentTeamId } from "../figma_app/598018";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal } from "../905/519092";
 import { n as _$$n } from "../905/316557";
-import { s1 } from "../figma_app/226737";
+import { useEffectiveThemeId } from "../figma_app/226737";
 export function $$f1(e) {
   return e === _YF.SLIDES && !AppStateTsApi?.slideThemeLibBindings().doesSlideDeckUseSameTheme();
 }
@@ -40,7 +40,7 @@ let A = registerModal(function ({
   onSubmit: t,
   onCancel: i
 }) {
-  let a = s1();
+  let a = useEffectiveThemeId();
   let l = getCurrentTeamId();
   let p = useCurrentUserOrgId();
   let [f, _] = useState(a);

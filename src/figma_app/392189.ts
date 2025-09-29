@@ -18,7 +18,7 @@ import { r6 } from "../905/542608";
 import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { analyticsEventManager } from "../905/449184";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { g7 } from "../905/939482";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getCommunityFileUrl } from "../905/612685";
@@ -31,7 +31,7 @@ function R() {
   let t = g7();
   let r = selectCurrentFile();
   let i = e && t.length > 0;
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     i && analyticsEventManager.trackDefinedEvent("assets_panel.view_ui_kit_empty_state", {
       fileKey: r?.key,
       fileTeamId: r?.teamId ?? void 0,

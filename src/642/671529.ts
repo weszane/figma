@@ -58,8 +58,8 @@ import { ButtonBasePrimary } from "../figma_app/637027";
 import { hidePickerThunk, hideStylePicker } from "../figma_app/91703";
 import { u as _$$u } from "../9410/354452";
 import { O8 } from "../figma_app/393980";
-import { sO } from "../figma_app/21029";
-import { s1 } from "../figma_app/226737";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
+import { useEffectiveThemeId } from "../figma_app/226737";
 import { Rc } from "../figma_app/634146";
 import { tA, rp } from "../figma_app/229710";
 import { DraggableModalManager } from "../905/748636";
@@ -112,8 +112,8 @@ function ef({
   let g = m ? getSingletonSceneGraph().get(m)?.type === "CMS_RICH_TEXT" : null;
   let f = useRef(!g && Object.keys(h).length > 0);
   let [x, y] = useState(!f.current && void 0);
-  let _ = sO();
-  let [b, C] = useState(s1());
+  let _ = useIsFullscreenSlidesView();
+  let [b, C] = useState(useEffectiveThemeId());
   let j = _ && Rc(s);
   let {
     styleRef,
@@ -454,7 +454,7 @@ function eK({
   let j = se();
   let v = isDevHandoffEditorType();
   let S = e === DesignWorkspace.COMMENT;
-  let w = sO();
+  let w = useIsFullscreenSlidesView();
   let T = !s || !b;
   let N = !S && T;
   let I = shouldHandleMultiTouchOrPressure();
@@ -586,7 +586,7 @@ function eJ({
   let c = useAppModelProperty("isReadOnly");
   let u = isDevHandoffEditorType();
   let p = c && !u;
-  let h = sO();
+  let h = useIsFullscreenSlidesView();
   let m = useIsFullscreenSitesView();
   let g = useIsSelectedViewFullscreenCooper();
   let f = _$$U();

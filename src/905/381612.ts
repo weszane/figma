@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { localStorageRef } from "../905/657224";
 import a from "../vendor/946678";
 import o from "../vendor/626715";
-import { HY } from "../vendor/156872";
+import { combineReducers } from "../vendor/156872";
 import { createOptimistThunk } from "../905/350402";
 import { ts } from "../figma_app/49598";
 import { W9, b6 } from "../figma_app/559491";
@@ -214,7 +214,7 @@ let $$z1 = {
   fetchWidgetsMetadata: k,
   fetchTemplatesMetadata: T
 };
-let $$H0 = HY({
+let $$H0 = combineReducers({
   libraryItems: function (e = D, t) {
     if (PI.matches(t)) {
       if (!t.payload.storeInRecentsKey) return e;

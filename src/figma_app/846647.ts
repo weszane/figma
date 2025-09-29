@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { postUserFlag } from "../905/985254";
 import { Z } from "../905/104740";
@@ -14,7 +14,7 @@ export function $$m1(e) {
   let [t, r] = useState(!1);
   let m = Z();
   let g = useDispatch();
-  if (h(() => {
+  if (useSingleEffect(() => {
     queueMicrotask(async function () {
       let t = e.getNodeForViewportFocus?.();
       let n = e.getNodeToSelect();

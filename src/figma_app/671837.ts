@@ -8,7 +8,7 @@ import { Point } from "../905/736624";
 import { GI, IZ, SK } from "../905/125333";
 import { SvgComponent } from "../905/714743";
 import { colorCSSManipulatorInstance } from "../905/989956";
-import { jS, Pv } from "../905/619652";
+import { generatePaintIcon, convertImageDataToURL } from "../905/619652";
 import { R as _$$R } from "../figma_app/640506";
 import { uM, Iz } from "../905/888175";
 import { B as _$$B } from "../figma_app/371825";
@@ -1103,13 +1103,13 @@ function k({
   } = useAtomWithSubscription(SK);
   let [r, a] = useState();
   let o = useCallback(e => {
-    let t = jS(e, new Point((e.originalImageWidth || 244) / (e.originalImageHeight || 244) * 244, 244), {
+    let t = generatePaintIcon(e, new Point((e.originalImageWidth || 244) / (e.originalImageHeight || 244) * 244, 244), {
       r: 0,
       g: 0,
       b: 0,
       a: 0
     });
-    t && t.pixels && t.pixelSize && a(Pv(t.pixels, t.pixelSize));
+    t && t.pixels && t.pixelSize && a(convertImageDataToURL(t.pixels, t.pixelSize));
   }, []);
   useEffect(() => {
     washiTapePaint && o(washiTapePaint);

@@ -40,7 +40,7 @@ import { Tr, Ay } from "../905/281495";
 import { A0, Mc } from "../figma_app/454974";
 import { ImageManager } from "../figma_app/624361";
 import { isValidValue, valueOrFallback, isInvalidValue } from "../905/216495";
-import { WQ, Pv } from "../905/619652";
+import { generateExportPreview, convertImageDataToURL } from "../905/619652";
 import { o3, nt } from "../905/226610";
 import { isExportRestricted } from "../figma_app/12796";
 import { CachedSubtreeRenderer } from "../figma_app/679183";
@@ -811,10 +811,10 @@ class eG extends PureComponent {
     this.updateThumbnail = () => {
       if (!this.state.previewShown || !this.props.shouldComputeThumbnails()) return;
       let e = new Point(this.props.panelWidth - 30, this.props.panelWidth - 30);
-      let t = WQ(e, this.props.useAbsoluteBounds, !!this.props.useBicubicSampler);
+      let t = generateExportPreview(e, this.props.useAbsoluteBounds, !!this.props.useBicubicSampler);
       let r = null;
       t && t.pixels && t.pixelSize && t.displaySize && (r = {
-        src: Pv(t.pixels, t.pixelSize, this.props.colorProfile),
+        src: convertImageDataToURL(t.pixels, t.pixelSize, this.props.colorProfile),
         displaySize: t.displaySize
       });
       this.setState({

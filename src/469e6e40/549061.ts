@@ -12,7 +12,7 @@ import { B as _$$B2 } from '../905/55104';
 import { useSprigWithSampling } from '../905/99656';
 import { showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
-import { R as _$$R2 } from '../905/165069';
+import { useConditionalCallback } from '../905/165069';
 import { useSingleEffect } from '../905/791079';
 import { U as _$$U } from '../905/275247';
 import { accountTypeRequestHandler } from '../905/281010';
@@ -944,7 +944,7 @@ function tu({
     }
   });
   let ti = useMemo(() => new Set(e9?.filter(e => [ProductAccessTypeEnum.DEVELOPER, ProductAccessTypeEnum.EXPERT].includes(e.billableProductKey) && e.message?.includes('Dev Mode')).map(e => e.id)), [e9]);
-  _$$R2(() => {
+  useConditionalCallback(() => {
     let e = getQueryParam('viewRequestId');
     e && (e9.find(t => t.id === e) ? setHighlightedItemId(e) : dispatchRequestAlreadyHandled(), removeQueryParam('viewRequestId'));
   }, e2, e => !e);
@@ -972,7 +972,7 @@ function tu({
     d.requestId && e(d.requestId);
   }, [d.requestId, p, e9]);
   let tu = e2 || status === 'loading';
-  _$$R2(() => {
+  useConditionalCallback(() => {
     if (!d.requestId) return;
     let e = d.request;
     if (!e) return;
@@ -1002,7 +1002,7 @@ function tu({
       } : dispatchSuccess
     });
   }, tu, e => !e);
-  _$$R2(() => {
+  useConditionalCallback(() => {
     getQueryParam('approveAllRequests') && (p(showModalHandler({
       type: _$$W,
       data: {

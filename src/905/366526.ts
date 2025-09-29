@@ -1,8 +1,14 @@
+import { datadogRum } from '@datadog/browser-rum';
 import rN from 'classnames';
+import { diff } from 'deep-diff';
+import { initialize } from 'launchdarkly-js-client-sdk';
+import { groupBy, isEmpty, keyBy, memoize, pick } from 'lodash-es';
 import { PureComponent, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { H as _$$H, createPortal } from 'react-dom';
+import { createPortal } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import iN, { BEGIN, COMMIT, REVERT } from 'redux-optimist';
 import eW from 'statsig-js';
 import { Statsig } from 'statsig-react';
@@ -12,13 +18,13 @@ import { hideInstanceSwapPicker } from '../905/8732';
 import { resetContacts, setContacts } from '../905/14223';
 import { isNullOrFailure } from '../905/18797';
 import { getNotificationTimeout } from '../905/22352';
-import { folderChannelHandler, orgMembersChannelHandler, meChannelHandler, teamMembersChannelHandler, fileRepoChannelHandler, fileChannelHandler } from '../905/25169';
+import { fileChannelHandler, fileRepoChannelHandler, folderChannelHandler, meChannelHandler, orgMembersChannelHandler, teamMembersChannelHandler } from '../905/25169';
 import { W as _$$W } from '../905/25249';
-import { usedKeyboardShortcut, setKeyboardShortcutPanelTab } from '../905/26824';
+import { setKeyboardShortcutPanelTab, usedKeyboardShortcut } from '../905/26824';
 import { T as _$$T2 } from '../905/27228';
 import { iZ as _$$iZ } from '../905/29425';
 import { beginCreateNewFolder, hideMobileNav, searchResultClicked, setBrowserTileSortView, setDeletedFiles, setDeletedRepos, setFileBrowserLoading, showMobileNav, stopCreateNewFolder } from '../905/34809';
-import { P as _$$P3 } from '../905/35881';
+import { isFullscreenSlidesView } from '../905/35881';
 import { p as _$$p } from '../905/36308';
 import { z4 } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
@@ -27,7 +33,7 @@ import { A as _$$A8 } from '../905/47292';
 import { mJ as _$$mJ, CK, SF, TW } from '../905/55862';
 import { useTabState } from '../905/56919';
 import { m as _$$m4 } from '../905/65216';
-import { prototypeSetPages, prototypeReset, prototypeSetProgressBarMode, prototypeResetRecents, deleteRecentPrototype, prototypeSetCurrentPage, prototypeShowComments, prototypeSetIsReconnecting, recentPrototypePost, prototypeHideComments, prototypeSetBackgroundColor, recentPrototypeUnmarkViewed, prototypeShowOnlyMyComments, prototypeShowResolvedComments, restoreRecentPrototype, prototypeSetIsFooterVisible } from '../905/70982';
+import { deleteRecentPrototype, prototypeHideComments, prototypeReset, prototypeResetRecents, prototypeSetBackgroundColor, prototypeSetCurrentPage, prototypeSetIsFooterVisible, prototypeSetIsReconnecting, prototypeSetPages, prototypeSetProgressBarMode, prototypeShowComments, prototypeShowOnlyMyComments, prototypeShowResolvedComments, recentPrototypePost, recentPrototypeUnmarkViewed, restoreRecentPrototype } from '../905/70982';
 import { createActionCreator } from '../905/73481';
 import { an as _$$an2, PW as _$$PW, y$ as _$$y$, TK } from '../905/81009';
 import { cY as _$$cY, fk as _$$fk, lg as _$$lg, n$ as _$$n$2, rf as _$$rf, rj as _$$rj, Fd, Fj, GR, JK, JR, Ud } from '../905/81459';
@@ -75,7 +81,6 @@ import { AUTH_COMPLETE, AUTH_EMAIL_ONLY, AUTH_GOOGLE_SIGNUP, AUTH_INIT, AUTH_RES
 import { getSelectedId } from '../905/200237';
 import { px as _$$px2 } from '../905/201014';
 import { sessionApiInstance } from '../905/202181';
-import { useSingleEffect } from '../905/791079';
 import { x as _$$x3 } from '../905/209285';
 import { createMixedArray, MIXED_MARKER } from '../905/216495';
 import { w as _$$w } from '../905/230422';
@@ -90,7 +95,6 @@ import { trackAuthEvent } from '../905/248178';
 import { nE as _$$nE, EU } from '../905/255097';
 import { dK as _$$dK, TE, v9 } from '../905/266289';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
-import { datadogRum } from '../905/270963';
 import { parentOrgIdAtom, teamOrOrgIdAtom } from '../905/276025';
 import { ThemeProvider2 } from '../905/289770';
 import { resetTimer } from '../905/293182';
@@ -200,7 +204,7 @@ import { updateQueryParams } from '../905/609392';
 import { PerfTimer } from '../905/609396';
 import { customHistory, CustomRouter } from '../905/612521';
 import { uW as _$$uW, yJ as _$$yJ9, Z as _$$Z3 } from '../905/618921';
-import { _G, Pv } from '../905/619652';
+import { generateExportThumbnail, convertImageDataToURL } from '../905/619652';
 import { e as _$$e5 } from '../905/621515';
 import { setupFileObject } from '../905/628874';
 import { ButtonPrimitive } from '../905/632989';
@@ -268,6 +272,7 @@ import { preloadCommonFonts } from '../905/777093';
 import { isFullscreenDevHandoffView } from '../905/782918';
 import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_APPEND, VERSION_HISTORY_COMPARE_CHANGES, VERSION_HISTORY_LOADING, VERSION_HISTORY_PAGE_LOADING, VERSION_HISTORY_RESET, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_DOC_HAS_CHANGED, VERSION_HISTORY_SET_FILE_LAST_SEEN_AT, VERSION_HISTORY_SET_LINKED_VERSION } from '../905/784363';
 import { sharedFontActions } from '../905/784599';
+import { useSingleEffect } from '../905/791079';
 import { FullscreenMenu, PluginMenu } from '../905/791556';
 import { filterModelTypes, parseSearchParams } from '../905/792802';
 import { x as _$$x2 } from '../905/805083';
@@ -322,7 +327,7 @@ import { styleBuilderInstance } from '../905/941192';
 import { F1 } from '../905/941249';
 import { Gk as _$$Gk, jH } from '../905/950959';
 import { hv as _$$hv } from '../905/952832';
-import { stackAlignmentPickerReducer, variablePickerReducer, pickerVisibilityReducer, instanceSwapPickerReducer, pickerInStyleCreationReducer, stylePickerReducer } from '../905/959568';
+import { instanceSwapPickerReducer, pickerInStyleCreationReducer, pickerVisibilityReducer, stackAlignmentPickerReducer, stylePickerReducer, variablePickerReducer } from '../905/959568';
 import { Dk as _$$Dk, O9, qG, qS, W$, XG } from '../905/970170';
 import { S as _$$S6 } from '../905/970585';
 import { clearWorkspaceFilterThunk, handleSearchParameterChangeThunk, searchClearQueryAction, searchClearResponsesAction, searchEndSessionAction, searchIncrementQueryCountAction, searchResetFileTypeFilterAction, searchRestoreSessionAction, searchSelectedAction, searchSessionEnteredSearchViewAction, searchSessionEnteredSearchViewViaEnterAction, searchSessionSeeMoreClickAction, searchSetLastAckedQueryIdAction, searchSetLastLoadedQueryAction, searchSetParametersAction, searchSetQueryIdAction, searchSetScrollTopAction, searchThunk, setFocusAction, setFullResultsSearchResponseAction, setResponseAction, setResponsesAction, setResponseSortStateAction, setSearchTypeBehaviorAction, sortStateThunk, startSearchSessionAction } from '../905/977218';
@@ -434,8 +439,8 @@ import { useCurrentPlanUser, useIsOrgAdminUser, useIsOrgMemberOrAdminUser, useTe
 import { assert, debug, noop, throwTypeError } from '../figma_app/465776';
 import { isIntegrationContext, isZoomIntegration } from '../figma_app/469876';
 import { ViewTypeEnum } from '../figma_app/471068';
-import { Cg, Ug, v7 } from '../figma_app/475303';
-import { setVatGstIdAction, setPromoThunk, restoreSavedCartAction, setBillingPeriodAction, startProUpgradeFlowAction, showErrorAction, initPaymentAction, setNumWhiteboardEditorsAction, setRegionalVatGstIdAction, setTaxesAction, setSubmitPendingAction, setEditorStatusChangesAction, setNumEditorsAction, setNumFigmaEmailTeamUsersAction, setCurrencyAction, startOrgUpgradeFlowAction, makeStudentTeamAction, setCampfireSeatsAction, setTokenAction, setPromoAction, setCompanyDetailsAction } from '../figma_app/482142';
+import { handleExternalKeyboardLayoutUpdate, KEYBOARD_LAYOUT_PREFERENCE_KEY, getCurrentKeyboardLayout } from '../figma_app/475303';
+import { initPaymentAction, makeStudentTeamAction, restoreSavedCartAction, setBillingPeriodAction, setCampfireSeatsAction, setCompanyDetailsAction, setCurrencyAction, setEditorStatusChangesAction, setNumEditorsAction, setNumFigmaEmailTeamUsersAction, setNumWhiteboardEditorsAction, setPromoAction, setPromoThunk, setRegionalVatGstIdAction, setSubmitPendingAction, setTaxesAction, setTokenAction, setVatGstIdAction, showErrorAction, startOrgUpgradeFlowAction, startProUpgradeFlowAction } from '../figma_app/482142';
 import { clamp, randomBetween } from '../figma_app/492908';
 import { isEmptyObject } from '../figma_app/493477';
 import { tb as _$$tb, getOrgId, getRecentUserData, getSessionUserState, getTeamId, getUserState, kb, persistCommunityProfileId, setCommunityProfileId } from '../figma_app/502247';
@@ -530,19 +535,11 @@ import { hZ as _$$hZ3, wc as _$$wc, yH as _$$yH5 } from '../figma_app/996356';
 import { fileBrowserPageManager } from '../figma_app/997907';
 import { A as _$$A12 } from '../svg/433566';
 import { A as _$$A2 } from '../vendor/3029';
-import tC from '../vendor/3757';
 import { GS } from '../vendor/61400';
-import { diff } from '../vendor/79414';
 import rb from '../vendor/128080';
-import { HY, Tw, y$, Zz } from '../vendor/156872';
-import uW from '../vendor/223926';
-import { n_ as _$$n_ } from '../vendor/235095';
-import ag from '../vendor/239910';
-import uy from '../vendor/241899';
-import mI from '../vendor/643300';
 import { A as _$$A4 } from '../vendor/718327';
 import { Q as _$$Q } from '../vendor/912394';
-import _require from '../vscode/70443';
+import { suggestMappings } from '../vscode/70443';
 function m({
   children: e,
   initialVersion: t = 'ui2'
@@ -1638,7 +1635,7 @@ let t_ = e => t => async function (i) {
     return t(i);
   }
 };
-let tT = tC;
+let tT = isEmpty;
 let tN = atom(null);
 let t8 = {
   setLoadingBackgroundColor(e, t) {
@@ -3578,7 +3575,7 @@ let am = e => t => function (i) {
   }
   return t(i);
 };
-let af = ag;
+let af = keyBy;
 async function av(e) {
   await new Promise(t => {
     setTimeout(t, e);
@@ -4629,7 +4626,7 @@ function sl(e) {
     return t;
   };
 }
-let sd = HY({
+let sd = combineReducers({
   byFileKey: sl(FResourceCategoryType.FILE),
   byRepoId: sl(FResourceCategoryType.FILE_REPO),
   byFolderId: sl(FResourceCategoryType.FOLDER),
@@ -6582,7 +6579,7 @@ let ok = {
   byId: {},
   orderedIds: []
 };
-let oR = HY({
+let oR = combineReducers({
   byId(e = ok.byId, t) {
     if (setSessionStateAction.matches(t)) {
       let e = {};
@@ -6661,7 +6658,7 @@ let oO = {
 };
 let oj = {};
 let oV = new Set();
-let oG = HY({
+let oG = combineReducers({
   activeThread(e = null, t) {
     return _$$cL3.matches(t) || _$$js.matches(t) ? null : _$$Fm.matches(t) ? containsDash(t.payload.threadId) || t.payload.threadId.startsWith('feed_post') && !_$$y5() ? e : {
       id: t.payload.threadId,
@@ -7010,7 +7007,7 @@ let oq = {
 let o$ = (e, t) => (e?.totalNumberOfComments || 0) + t;
 let oZ = {};
 let oX = {};
-let oQ = HY({
+let oQ = combineReducers({
   activeFeedType(e = oW, t) {
     return setCommentsActiveFeedType.matches(t) ? t.payload : flushNewCommentsQueue.matches(t) ? CommentTabType.ALL : e;
   },
@@ -7363,7 +7360,7 @@ let oQ = HY({
     return e;
   }
 });
-let o0 = HY({
+let o0 = combineReducers({
   currentProfile(e = null, t) {
     if (putCommunityProfile.matches(t)) return t.payload;
     if (clearCommunityProfile.matches(t)) return null;
@@ -7447,7 +7444,7 @@ let o3 = {
   type: _$$R.None,
   data: null
 };
-let o8 = HY({
+let o8 = combineReducers({
   logs(e = [], t) {
     return hZ.matches(t) ? t.payload.logs : e;
   },
@@ -7890,7 +7887,7 @@ function lb(e = {}, t) {
   }
   return e;
 }
-let lx = HY({
+let lx = combineReducers({
   isCreatingOrgInvite(e = !1, t) {
     return _$$wc.matches(t) ? t.payload.creating : e;
   },
@@ -8030,18 +8027,18 @@ function lD(e) {
 function lL(e) {
   return (t = Object.create(null), i) => componentClearLocal.matches(i) ? Object.create(null) : componentReplaceLocal.matches(i) && i.payload.type === e ? i.payload.local : t;
 }
-let lF = HY({
+let lF = combineReducers({
   components: lD(PrimaryWorkflowEnum.COMPONENT),
   stateGroups: lD(PrimaryWorkflowEnum.STATE_GROUP)
 });
-let lM = HY({
+let lM = combineReducers({
   componentsByLibraryKey: lO(PrimaryWorkflowEnum.COMPONENT),
   stateGroupsByLibraryKey: lO(PrimaryWorkflowEnum.STATE_GROUP),
   libraryKeys(e = [], t) {
     return defaultLibraryInitializeLibraryKeys.matches(t) ? t.payload.libraryKeys : e;
   }
 });
-let lj = HY({
+let lj = combineReducers({
   components: lL(PrimaryWorkflowEnum.COMPONENT),
   styles: lL(PrimaryWorkflowEnum.STYLE),
   stateGroups: lL(PrimaryWorkflowEnum.STATE_GROUP),
@@ -8065,7 +8062,7 @@ let lj = HY({
     } : e;
   }
 });
-let lU = HY({
+let lU = combineReducers({
   publishedByLibraryKey: lF,
   used__LIVEGRAPH(e = {
     styles: {},
@@ -8235,7 +8232,7 @@ let lU = HY({
   localSymbolsThatHaveUsagesOnCurrentPage: _$$RG,
   localStylesThatHaveUsagesOnCurrentPage: Qu
 });
-let lV = HY({
+let lV = combineReducers({
   teams(e = [], t) {
     if (_$$hZ4.matches(t)) {
       let i = {};
@@ -9065,7 +9062,7 @@ function dn(e = {
     renamingTeam: !1
   } : e;
 }
-let da = HY({
+let da = combineReducers({
   communityProfileBellStates(e = {}, t) {
     return Q$.matches(t) && t.payload.profileId ? {
       ...e,
@@ -9073,7 +9070,7 @@ let da = HY({
     } : e;
   }
 });
-let dd = HY({
+let dd = combineReducers({
   config(e = null, t) {
     return _$$hZ5.matches(t) ? t.payload.orgSamlConfig : e;
   },
@@ -9171,8 +9168,8 @@ function df() {
     teamFeedRefreshNonce: dg
   };
 }
-HY(df());
-let dA = HY({
+combineReducers(df());
+let dA = combineReducers({
   folderSearchQuery(e = '', t) {
     return hq.matches(t) ? t.payload.query : attemptClose.matches(t) || hideModal.matches(t) ? '' : e;
   },
@@ -9465,7 +9462,7 @@ function dV(e = dB, t) {
   }
   return e;
 }
-let dG = HY({
+let dG = combineReducers({
   activeCall: (e = {}, t) => {
     if (Zq.matches(t)) {
       let i = {
@@ -9978,7 +9975,7 @@ function cg(e = ch, t) {
   } : e;
 }
 let cy = new _$$Y4();
-let cE = HY({
+let cE = combineReducers({
   appModel: fj,
   selectionProperties(e = {}, t) {
     if (initAction.matches(t)) return Object.create(null);
@@ -10429,7 +10426,7 @@ function up(e = null, t) {
 function um(e = !1, t) {
   return setShowingFileFooter.matches(t) ? t.payload : e;
 }
-let uA = HY({
+let uA = combineReducers({
   domains(e = [], t) {
     return Au.matches(t) ? t.payload.domains : e;
   },
@@ -10440,7 +10437,7 @@ let uA = HY({
     return Au.matches(t) ? t.payload.fetched_at : e;
   }
 });
-let ub = uy;
+let ub = pick;
 function uv(e = {}, t) {
   if (setUserInOrgs.matches(t)) {
     let i = {
@@ -10721,7 +10718,7 @@ let uj = {
     return e;
   }
 };
-let uB = HY({
+let uB = combineReducers({
   byId(e = {}, t) {
     if (setSessionStateAction.matches(t)) {
       let i = {
@@ -10781,7 +10778,7 @@ let uB = HY({
     return e;
   }
 });
-let uV = HY({
+let uV = combineReducers({
   subscriptions(e = {}, t) {
     if (initAction.matches(t)) return {};
     if (iZ.matches(t)) {
@@ -10817,7 +10814,7 @@ let uz = {
   successfulDeletes: [],
   fontsByResourceId: {}
 };
-let uK = uW;
+let uK = groupBy;
 function u$(e, t) {
   for (let i in e) {
     for (let n in e[i]) {
@@ -11113,7 +11110,7 @@ window && (window.userAnalyticsDataTools = {
   checkAllUserAnalyticsDataOverrides: ps,
   printUserAnalyticsDataKeys: () => WZ
 });
-let pd = HY({
+let pd = combineReducers({
   hidingDowntimeNotif(e = _$$y6.noneHidden, t) {
     return _$$Z4.hideOngoingNotif.matches(t) ? _$$y6.ongoingHidden : _$$Z4.hideWarningNotif.matches(t) ? _$$y6.warningHidden : e;
   },
@@ -13417,7 +13414,7 @@ async function my(e) {
   try {
     let t = await _$$dO(e);
     !function (e, t) {
-      let i = v7();
+      let i = getCurrentKeyboardLayout();
       let n = Object.entries(KeyboardLayout).find(([e, t]) => t === i)?.[0];
       let r = _$$ZN(t);
       let a = Object.entries(KeyboardLayout).find(([e, t]) => t === r)?.[0];
@@ -13440,7 +13437,6 @@ async function my(e) {
     console.error('Keyboard layout detection logging failed:', e);
   }
 }
-let mE = mI;
 function mx() {
   let e = getInitialOptions().launchdarkly_client_side_id;
   let t = getFeatureFlags().launch_darkly_client_sdk;
@@ -13452,7 +13448,7 @@ class mS {
     let e = getInitialOptions().launchdarkly_client_side_id || '';
     let t = getInitialOptions().launchdarkly_client_flags;
     let i = performance.now();
-    this.ldClient = _$$n_(e, this.getUserContext(), {
+    this.ldClient = initialize(e, this.getUserContext(), {
       bootstrap: t,
       sendEventsOnlyForVariation: !0
     });
@@ -13499,7 +13495,7 @@ class mS {
     };
   }
 }
-let mw = mE()(() => new mS());
+let mw = memoize(() => new mS());
 function mR(e) {
   let t = useSelector(e => resolveTeamId(e));
   let i = useSelector(e => e.currentUserOrgId);
@@ -14134,7 +14130,7 @@ export async function $$hz0(e, t, d = {
       liveStore: liveStoreInstance
     });
     setTagGlobal('ReduxDevtoolsInstalled', !!window.__REDUX_DEVTOOLS_EXTENSION__);
-    let p = Zz(Tw(u, ao, t_, sW, iK, iz, nS, nQ, i2, i6, ng, ns, am, oA, od, _$$Ay5, ob, ac, _$$v3, sK, sq, oo, of, hc, hd, hh), c && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__({
+    let p = compose(applyMiddleware(u, ao, t_, sW, iK, iz, nS, nQ, i2, i6, ng, ns, am, oA, od, _$$Ay5, ob, ac, _$$v3, sK, sq, oo, of, hc, hd, hh), c && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__({
       stateSanitizer: mN
     }) : e => e, function (e, t) {
       let i = null;
@@ -14187,7 +14183,7 @@ export async function $$hz0(e, t, d = {
         i = e;
       });
     }(hW, hK));
-    let b = y$(function () {
+    let b = createStore(function () {
       let e = {
         ...pg,
         ...df(),
@@ -14251,7 +14247,7 @@ export async function $$hz0(e, t, d = {
         pickerInStyleCreationShown: pickerInStyleCreationReducer,
         ...uj
       };
-      return iP()(HY(e));
+      return iP()(combineReducers(e));
     }(), p);
     throttle(b);
     let x = await measureAsyncDuration('initI18nStateWithLocale', ServiceCategories.GROWTH_PLATFORM, () => loadI18nState(!0));
@@ -14332,7 +14328,7 @@ export async function $$hz0(e, t, d = {
       b.dispatch(FY({
         enhancedContrast: e
       }));
-    }), O.register(Ug, Cg), O.register(wc.MouseScrollToZoom, Zp), O.register(wc.RightClickDragToPan, _$$tB), O.register(_$$Kz.DESKTOP, () => _$$up2(_$$Kz.DESKTOP)), O.register(_$$Kz.HUNSPELL, () => _$$up2(_$$Kz.HUNSPELL)), h0(b), k === 'fullscreen' || k === 'communityHub' || !P) {
+    }), O.register(KEYBOARD_LAYOUT_PREFERENCE_KEY, handleExternalKeyboardLayoutUpdate), O.register(wc.MouseScrollToZoom, Zp), O.register(wc.RightClickDragToPan, _$$tB), O.register(_$$Kz.DESKTOP, () => _$$up2(_$$Kz.DESKTOP)), O.register(_$$Kz.HUNSPELL, () => _$$up2(_$$Kz.HUNSPELL)), h0(b), k === 'fullscreen' || k === 'communityHub' || !P) {
       let {
         editing_file
       } = getInitialOptions();
@@ -14603,7 +14599,7 @@ export async function $$hz0(e, t, d = {
                 t = getI18nString('desktop_bindings.interstitial.section_link_copied');
               } else if (i.mirror.appModel.pagesList.length > 1) {
                 t = getI18nString('desktop_bindings.interstitial.page_link_copied');
-              } else if (_$$P3(i.selectedView)) {
+              } else if (isFullscreenSlidesView(i.selectedView)) {
                 if (o) {
                   let t = parseQuery(customHistory.location.search);
                   delete t.viewport;
@@ -14897,12 +14893,12 @@ export async function $$hz0(e, t, d = {
                   let i = m(e);
                   if (!i) return;
                   t = i.size.x < i.size.y ? new Point(248, 248 * (i.size.y / i.size.x)) : new Point(248 * (i.size.x / i.size.y), 248);
-                  let n = _G(t, e, !0, BackgroundPattern.TRANSPARENT);
+                  let n = generateExportThumbnail(t, e, !0, BackgroundPattern.TRANSPARENT);
                   if (!n) {
                     console.error(`Error getting thumbnail for node ${e}`);
                     return;
                   }
-                  sendThumbnail(e, Pv(n.pixels, n.pixelSize), {
+                  sendThumbnail(e, convertImageDataToURL(n.pixels, n.pixelSize), {
                     width: t.x,
                     height: t.y
                   });
@@ -15048,7 +15044,7 @@ export async function $$hz0(e, t, d = {
             });
             return;
           }
-          (await _require).suggestMappings({
+          await suggestMappings({
             reactComponentName: e.reactComponentName,
             reactComponentPropertyDetails: e.reactComponentPropertyDetails,
             figmaComponentUri: e.figmaComponentUri,
@@ -15293,7 +15289,7 @@ export async function $$hz0(e, t, d = {
         });
         let i = document.getElementById('react-page');
         getFeatureFlags().disable_google_translate && i.setAttribute('translate', 'no');
-        _$$H(i).render(jsx(ErrorBoundaryCrash, {
+        createRoot(i).render(jsx(ErrorBoundaryCrash, {
           boundaryKey: 'root',
           fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
           hasCustomWASMBuild: isUsingLocalBuild,

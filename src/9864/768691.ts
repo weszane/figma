@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { trackEventAnalytics } from "../905/449184";
-import { R } from "../905/165069";
+import { useConditionalCallback } from "../905/165069";
 export function $$l0(e) {
   let [r] = useState(() => Date.now());
-  R(() => {
+  useConditionalCallback(() => {
     let e = Date.now();
     trackEventAnalytics("Time to Show NUX", {
       timeToShowNuxMs: e - r

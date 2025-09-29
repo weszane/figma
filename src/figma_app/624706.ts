@@ -13,7 +13,7 @@ import { openWindow } from "../905/508367";
 import { Tf } from "../905/280919";
 import { dayjs } from "../905/920142";
 import { customHistory } from "../905/612521";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { getInitialOptions, buildUploadUrl, isDevEnvironment, isGovCluster, isLocalCluster, isStagingCluster } from "../figma_app/169182";
 import { isExactModifier, ModifierKeyCodes } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
@@ -181,7 +181,7 @@ function q({
   let p = useRef(null);
   let [_, h] = useState(!1);
   let g = getFeatureFlags().mount_decagon_iframe_selectively;
-  _$$h(() => {
+  useSingleEffect(() => {
     (async () => {
       try {
         let e = await UserAPIHandlers.getChatbotMeta();
@@ -192,7 +192,7 @@ function q({
   useEffect(() => {
     _ && (e ? X(p, "open") : (X(p, "close"), h(!1)));
   }, [e, _]);
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = e => {
       let {
         data,
@@ -546,7 +546,7 @@ let e4 = registerModal(function ({
     flagNumberVal,
     incrementFlag
   } = eH(...h4);
-  _$$h(() => {
+  useSingleEffect(() => {
     r !== 1 / 0 && flagNumberVal <= r && incrementFlag();
   });
   let c = jsx(_$$V, {
@@ -669,7 +669,7 @@ function tr({
   } = eH(...WB);
   let c = useDispatch();
   let [u, p] = useState(e || flagNumberVal > r);
-  return (_$$h(() => {
+  return (useSingleEffect(() => {
     !u && r !== 1 / 0 && flagNumberVal <= r && incrementFlag();
   }), u) ? null : jsx(TrackingProvider, {
     name: "CollectiveUpsellsWidget",
@@ -750,7 +750,7 @@ function tc({
     overlay: Yd_,
     priority: _$$N.SECONDARY_MODAL
   }, [s, o]);
-  _$$h(() => {
+  useSingleEffect(() => {
     _.show({
       canShow: (e, t) => {
         let r = Date.now() - 864e5 > t;
@@ -2221,7 +2221,7 @@ function tR({
     overlay: FR6,
     priority: _$$N.SECONDARY_MODAL
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: () => t && r
     });
@@ -2257,7 +2257,7 @@ function tM({
     overlay: nRk,
     priority: _$$N.SECONDARY_MODAL
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     !r && a !== languageCodes.EN && s && show();
   });
   return jsx(OnboardingModal, {
@@ -2718,7 +2718,7 @@ export function $$t60(e) {
       let t = "collective_upsell_first_file_created";
       let r = useRef(selectUserFlag(t));
       let n = useDispatch();
-      _$$h(() => {
+      useSingleEffect(() => {
         !r.current && e && n(postUserFlag({
           [t]: !0
         }));

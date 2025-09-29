@@ -1,6 +1,33 @@
-var $$n0 = (e => (e[e.FEATURE_DISABLED = 0] = "FEATURE_DISABLED", e[e.READ_ONLY_FILE = 1] = "READ_ONLY_FILE", e))($$n0 || {});
-var $$i1 = (e => (e[e.MOBILE_NATIVE_NAVBAR = 0] = "MOBILE_NATIVE_NAVBAR", e))($$i1 || {});
-var $$a2 = (e => (e[e.BEGAN = 0] = "BEGAN", e[e.MOVED = 1] = "MOVED", e[e.ENDED = 2] = "ENDED", e[e.CANCELLED = 3] = "CANCELLED", e[e.MOVED_COALESCED = 4] = "MOVED_COALESCED", e))($$a2 || {});
-export const lj = $$n0;
-export const wu = $$i1;
-export const xN = $$a2;
+/**
+ * Enum for feature status states
+ * Original name: $$n0
+ */
+export enum FeatureStatusEnum {
+  FEATURE_DISABLED = 0,
+  READ_ONLY_FILE = 1,
+}
+
+/**
+ * Enum for mobile UI states
+ * Original name: $$i1
+ */
+export enum MobileUIStateEnum {
+  MOBILE_NATIVE_NAVBAR = 0,
+}
+
+/**
+ * Enum for gesture event phases
+ * Original name: $$a2
+ */
+export enum GesturePhaseEnum {
+  BEGAN = 0,
+  MOVED = 1,
+  ENDED = 2,
+  CANCELLED = 3,
+  MOVED_COALESCED = 4,
+}
+
+// Export with original export names for compatibility
+export const lj = FeatureStatusEnum
+export const wu = MobileUIStateEnum
+export const xN = GesturePhaseEnum

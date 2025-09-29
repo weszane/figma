@@ -5,7 +5,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { selectCurrentUser } from '../905/372672';
 import { analyticsEventManager } from '../905/449184';
-import { q } from '../905/457575';
+import { createScopedState } from '../905/457575';
 import { getFeatureFlags } from '../905/601108';
 import { getSingletonSceneGraph } from '../905/700578';
 import { ei, Ur, zK } from '../1156/71049';
@@ -32,7 +32,7 @@ class T extends Error {
     this.name = 'RestoreVersionError';
   }
 }
-let I = q();
+let I = createScopedState();
 export function $$L0({
   codeSnapshotKey: e,
   chatMessagesNodeGuid: t,

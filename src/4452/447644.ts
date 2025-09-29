@@ -8,7 +8,7 @@ import { ServiceCategories } from "../905/165054";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
 import { ResourceStatus } from "../905/957591";
-import { R as _$$R } from "../905/165069";
+import { useConditionalCallback } from "../905/165069";
 import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
 import { BadgeColor } from "../figma_app/919079";
@@ -433,7 +433,7 @@ export function $$e$0({
     }
     tw.requestId && e(tw.requestId);
   }, [tw.requestId, eS]);
-  _$$R(() => {
+  useConditionalCallback(() => {
     if (tw.requestId && tw.request) {
       let e = tw.request.requestableOrgUser?.user?.name ?? tw.request.requestableTeamUser?.user?.name ?? "";
       t4({
@@ -528,7 +528,7 @@ export function $$e$0({
     onClear: _$$b(eV)
   });
   let tQ = useMemo(() => new Set(tV?.filter(e => [ProductAccessTypeEnum.DEVELOPER, ProductAccessTypeEnum.EXPERT].includes(e.billableProductKey) && e.message?.includes("Dev Mode")).map(e => e.id)), [tV]);
-  _$$R(() => {
+  useConditionalCallback(() => {
     let e = getQueryParam("viewRequestId");
     e && (tV.find(t => t.id === e) ? setHighlightedItemId(e) : dispatchRequestAlreadyHandled(), removeQueryParam("viewRequestId"));
   }, tM, e => !e);

@@ -26,7 +26,7 @@ import { hidePickerThunk } from '../figma_app/91703';
 import { buildUploadUrl } from '../figma_app/169182';
 import { E_ } from '../figma_app/177697';
 import { whiteColor } from '../figma_app/191804';
-import { s1 } from '../figma_app/226737';
+import { useEffectiveThemeId } from '../figma_app/226737';
 import { DialogTitle, DialogBody, DialogContents, DialogHeader } from '../figma_app/272243';
 import { adjustHue, colorsEqual } from '../figma_app/273493';
 import { k1, kO, lK, nE, UZ } from '../figma_app/687767';
@@ -49,7 +49,7 @@ export function $$W0({
 }) {
   let u = useDispatch();
   let p = 'slidesColorPicker';
-  let _ = s1();
+  let _ = useEffectiveThemeId();
   let h = UZ(_);
   let [m, f] = useState(!1);
   let [E, y] = useState(new Point(0, 0));
@@ -158,7 +158,7 @@ function K({
   recordingKey: o
 }) {
   let l = useDropdown(kX);
-  let d = s1();
+  let d = useEffectiveThemeId();
   let u = UZ(d);
   let p = lK(d);
   let [f, E] = useAtomValueAndSetter(E_);
@@ -256,7 +256,7 @@ function Y({
   onClick: e,
   recordingKey: t
 }) {
-  let r = s1();
+  let r = useEffectiveThemeId();
   let i = kO(r);
   return jsx(IconButton, {
     'aria-label': getI18nString('slides.properties_panel.color_picker.add_template_color_tooltip'),
@@ -280,7 +280,7 @@ function $({
 }) {
   let l = useDropdown(kX);
   let [c, u] = useState(!1);
-  let h = s1();
+  let h = useEffectiveThemeId();
   let [m, g] = useState(nE(h));
   let f = c ? m : m.slice(0, 17);
   let E = !c && m.length > 17;

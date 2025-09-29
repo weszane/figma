@@ -12,7 +12,7 @@ import { cq } from "../905/794154";
 import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { Ay } from "../figma_app/724968";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { sn, Xb, zr } from "../905/119782";
 var l = o;
 export function $$b0({
@@ -26,7 +26,7 @@ export function $$b0({
   let {
     close
   } = cq();
-  let E = sO();
+  let E = useIsFullscreenSlidesView();
   let x = useDispatch();
   let S = getJubileePermissionForDesign();
   return jsxs("div", {

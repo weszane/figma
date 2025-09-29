@@ -3,21 +3,21 @@ import { AppStateTsApi, Fullscreen, ThemeMode } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter, Ut } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { R } from "../905/165069";
+import { useConditionalCallback } from "../905/165069";
 import { logError } from "../905/714362";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { zE } from "../905/738636";
-import { u2, $K } from "../figma_app/223206";
+import { designCopyToSlidesAtom, sessionIdAtom } from "../figma_app/223206";
 import { getPermissionsAndView } from "../905/766303";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { currentTeamAtom } from "../figma_app/598018";
 import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
-import { R as _$$R } from "../figma_app/53049";
-import { EI } from "../figma_app/21029";
+import { loadCanvasDataAsync } from "../figma_app/53049";
+import { useIsFullscreenReady } from "../figma_app/21029";
 import { o as _$$o } from "../905/556276";
 import { Bn } from "../figma_app/835688";
 export function $$A0(e, t) {
@@ -65,7 +65,7 @@ export function $$x2(e, t, r = !1) {
       o();
       return;
     }
-    n(atomStoreManager.set(u2, {
+    n(atomStoreManager.set(designCopyToSlidesAtom, {
       fileKey: e.key,
       fileVersion: t,
       pageGuid: p,
@@ -77,18 +77,18 @@ async function N({
   fileKey: e,
   selectedNodeIds: t = []
 }) {
-  let r = await _$$R({
+  let r = await loadCanvasDataAsync({
     fileKey: e,
     selectedGuids: t
   });
   Fullscreen?.applyNodesFromBuffer(r, e, t, !1);
 }
 export function $$C1() {
-  let e = EI();
+  let e = useIsFullscreenReady();
   let t = useCurrentFileKey();
-  let r = useAtomWithSubscription(u2);
-  let [a, d] = useAtomValueAndSetter($K);
-  return R(() => {
+  let r = useAtomWithSubscription(designCopyToSlidesAtom);
+  let [a, d] = useAtomValueAndSetter(sessionIdAtom);
+  return useConditionalCallback(() => {
     debug(!!r, "slideCreationData is undefined. This should never happen");
     AppStateTsApi?.slideThemeLibBindings().insertDefaultLocalTheme(ThemeMode.LIGHT, "Template style");
     AppStateTsApi?.uiState().leftPanelCollapsedUI3.set(!0);

@@ -20,7 +20,7 @@ import { r as _$$r } from '../1156/791040';
 import { n as _$$n } from '../1156/930733';
 import { atom, atomStoreManager } from '../figma_app/27355';
 import { gG } from '../figma_app/97696';
-import { WH } from '../figma_app/119420';
+import { restoreStashedAttachments } from '../figma_app/119420';
 import { getInitialOptions, isDevEnvironment } from '../figma_app/169182';
 import { eB } from '../figma_app/178419';
 import { Nm, o0 } from '../figma_app/202307';
@@ -42,7 +42,7 @@ import { CortexError } from '../figma_app/691470';
 import { e as _$$e, SE } from '../figma_app/735943';
 import { Fullscreen, ChatMessageType, SnapshotStatus } from '../figma_app/763686';
 import { nU } from '../figma_app/779249';
-import { QK } from '../figma_app/883638';
+import { chatErrorState } from '../figma_app/883638';
 import { Ay as _$$Ay2 } from '../figma_app/948389';
 import { TT } from '../figma_app/952035';
 let W = setupRemovableAtomFamily(() => atom(''));
@@ -284,7 +284,7 @@ async function et({
       plainText
     } = H5(n.textContent);
     f(plainText);
-    WH();
+    restoreStashedAttachments();
   }
   let V = performance.now();
   let K = es();
@@ -441,10 +441,10 @@ async function et({
       if (value && (B ? B.queue(value) : u(value)), done) break;
     }
   } catch (n) {
-    n instanceof CortexError || n instanceof CortexErrorV2 ? atomStoreManager.set(QK(t?.guid || ''), {
+    n instanceof CortexError || n instanceof CortexErrorV2 ? atomStoreManager.set(chatErrorState(t?.guid || ''), {
       error: n,
       cortexClientGeneratedRequestUuid: _
-    }) : atomStoreManager.set(QK(t?.guid || ''), {
+    }) : atomStoreManager.set(chatErrorState(t?.guid || ''), {
       error: n
     });
     Ho(n, e, a5.SEND_MESSAGE);

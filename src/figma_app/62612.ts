@@ -100,7 +100,7 @@ export function viewportWithDelta(viewport: ViewportInfo, delta: Point) {
  * @returns Point
  * (Original: $$E1)
  */
-export function addViewportOffset(viewport: ViewportInfo, point: Point): Point {
+export function addViewportOffset(viewport: ViewportInfo, point: IPoint): Point {
   const base = new Point(viewport.x, viewport.y);
   const screen = viewportToScreen(viewport, point);
   return Point.add(screen, base);

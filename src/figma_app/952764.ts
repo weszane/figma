@@ -17,7 +17,7 @@ import { AH } from "../905/571648";
 import { WH } from "../figma_app/836943";
 import { E_ } from "../figma_app/177697";
 import { UZ } from "../figma_app/687767";
-import { s1 } from "../figma_app/226737";
+import { useEffectiveThemeId } from "../figma_app/226737";
 export function $$S1(e) {
   return {
     type: "SOLID",
@@ -45,7 +45,7 @@ export function $$v4(e) {
   };
 }
 export function $$A7(e) {
-  let t = s1();
+  let t = useEffectiveThemeId();
   let r = UZ(t);
   let i = useAtomWithSubscription(E_);
   let a = bL(i?.varId || "", r);

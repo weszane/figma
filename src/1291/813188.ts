@@ -19,7 +19,7 @@ import { PI, A5, rp } from "../figma_app/703988";
 import { lX } from "../figma_app/588397";
 import { cX } from "../figma_app/920333";
 import { b as _$$b } from "../905/635568";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { $ as _$$$ } from "../1291/295522";
 import { kL, xl, ts, Do, pr, R5, BF, Ox } from "../1291/62942";
 let C = {
@@ -72,7 +72,7 @@ export function $$I0(e) {
   } = r;
   let m = _$$b();
   let h = cX().tabManager;
-  let f = sO();
+  let f = useIsFullscreenSlidesView();
   let $ = isWhiteboardFileType();
   let I = useIsSelectedViewFullscreenCooper();
   let L = t === rp.THIN_2_COL || t === rp.THIN_3_COL ? 4 : 8;

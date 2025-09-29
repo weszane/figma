@@ -111,13 +111,13 @@ import { B as _$$B2 } from "../905/559262";
 import { o as _$$o } from "../figma_app/628776";
 import { e as _$$e4 } from "../figma_app/952436";
 import { u1 } from "../figma_app/337924";
-import { _9, hH, yM, qQ, NC } from "../figma_app/119420";
-import { T_, tk as _$$tk } from "../figma_app/883638";
+import { useAttachments, handleInsertError, convertAttachmentType, MAX_ATTACHMENTS, generateNodeThumbnail } from "../figma_app/119420";
+import { ChatErrorType, useChatError } from "../figma_app/883638";
 import { Tf } from "../figma_app/396432";
 import { postUserFlag } from "../905/985254";
 import { selectUserFlag } from "../905/940356";
 import { Pe } from "../1156/713925";
-import { Ng, YT, vG } from "../figma_app/176302";
+import { isSendToMakeActiveAtom, useHandleSendToMakeCompletion, SendToMakeInitiator } from "../figma_app/176302";
 import { S as _$$S } from "../1156/521776";
 import { ty as _$$ty, Rm, Y2, DT } from "../figma_app/320164";
 import { customHistory } from "../905/612521";
@@ -1300,7 +1300,7 @@ function tX({
   let o = isDevEnvironment() ? cortexClientGeneratedRequestUuid : void 0;
   let c = !1;
   let d = !1;
-  if (error.message === T_.ATTACHMENTS_TOO_LARGE || error.message === T_.MAX_CONTENT_LENGTH_EXCEEDED || error.message === T_.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK) d = !0;else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0;else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0;else {
+  if (error.message === ChatErrorType.ATTACHMENTS_TOO_LARGE || error.message === ChatErrorType.MAX_CONTENT_LENGTH_EXCEEDED || error.message === ChatErrorType.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK) d = !0;else if (error.message === ChatErrorType.PROMPT_ENHANCEMENT_FAILED) d = !0;else if (error.message === ChatErrorType.PROMPT_ENHANCEMENT_FAILED) d = !0;else {
     let e = sZ(error);
     c = [ErrorType.GENERIC, ErrorType.OFFLINE, ErrorType.NETWORK_ERROR, ErrorType.RATE_LIMIT_EXCEEDED].includes(e);
     d = [ErrorType.CONTENT_LENGTH_LIMIT, ErrorType.UNSAFE_OR_HARMFUL_CONTENT].includes(e);
@@ -1458,7 +1458,7 @@ let tQ = forwardRef((e, t) => {
   let {
     chatError,
     clearChatError
-  } = _$$tk(chatMessagesNodeGuid);
+  } = useChatError(chatMessagesNodeGuid);
   let [A, T] = jT();
   let [I] = PM();
   let L = A.filter(e => "error" === e.type || "warn" === e.type);
@@ -1522,7 +1522,7 @@ let tQ = forwardRef((e, t) => {
     J();
   }, [H, k, J, V]);
   let Z = _$$ry();
-  let Q = useAtomWithSubscription(Ng);
+  let Q = useAtomWithSubscription(isSendToMakeActiveAtom);
   let ee = isUserNotLoggedInAndEditorSupported();
   let et = useIsSelectedFigmakeFullscreen();
   let en = et ? FProductAccessType.FIGMAKE : FProductAccessType.SITES;
@@ -1687,7 +1687,7 @@ function t0({
   let {
     attachments,
     clearAttachment
-  } = _9(e);
+  } = useAttachments(e);
   let B = E ? _$$W3() : null;
   let q = F ? "var(--color-bg-secondary)" : "var(--color-bg)";
   return jsxs("div", {
@@ -1739,7 +1739,7 @@ function t0({
                 }
                 return !1;
               }(e)) > -1);
-            })(t) && hH(InsertErrorType.USER_PASTED_FIGMA_LINK_IN_CHAT);
+            })(t) && handleInsertError(InsertErrorType.USER_PASTED_FIGMA_LINK_IN_CHAT);
           } catch {}
         },
         placeholder: b,
@@ -2009,7 +2009,7 @@ function ni({
           children: s.map(e => jsx(_$$s2, {
             pastedDesignNodeId: e.guid,
             onClick: () => p(e.guid),
-            attachmentType: yM(e)
+            attachmentType: convertAttachmentType(e)
           }, e.guid))
         }) : null, jsx("div", {
           ...Ay.props(nr.messageContent, userMessageTypographyStyle),
@@ -4708,11 +4708,11 @@ function ik({
         }
       }));
     },
-    "aria-label": l.length >= qQ ? getI18nString("sites.panel.make.attach_limit_reached", {
-      limit: qQ
+    "aria-label": l.length >= MAX_ATTACHMENTS ? getI18nString("sites.panel.make.attach_limit_reached", {
+      limit: MAX_ATTACHMENTS
     }) : getI18nString("sites.panel.make.attach_design"),
     "data-tooltip-show-above": !0,
-    disabled: d || l.length >= qQ,
+    disabled: d || l.length >= MAX_ATTACHMENTS,
     htmlAttributes: {
       "data-onboarding-key": wj
     },
@@ -4726,11 +4726,11 @@ function ik({
       accept: IMAGE_TYPE_VALUES.join(","),
       onChange: D
     }), jsx(IconButton, {
-      "aria-label": l.length >= qQ ? getI18nString("sites.panel.make.attach_limit_reached", {
-        limit: qQ
+      "aria-label": l.length >= MAX_ATTACHMENTS ? getI18nString("sites.panel.make.attach_limit_reached", {
+        limit: MAX_ATTACHMENTS
       }) : getI18nString("sites.panel.make.attach_image"),
       "data-tooltip-show-above": !0,
-      disabled: d || l.length >= qQ,
+      disabled: d || l.length >= MAX_ATTACHMENTS,
       onClick: () => {
         N.current?.click();
       },
@@ -4811,11 +4811,11 @@ export function $$iC0({
   } = $W(t);
   let es = useRef(null);
   let el = useRef(null);
-  let eo = YT();
+  let eo = useHandleSendToMakeCompletion();
   useEffect(() => {
     es.current && es.current.focus();
   }, []);
-  vG();
+  SendToMakeInitiator();
   _$$p3(t, n => {
     if (!es.current) return;
     let r = es.current.selectionStart;
@@ -4829,7 +4829,7 @@ export function $$iC0({
     stashAllAttachments,
     createLoadedAttachment,
     attachmentsReady
-  } = _9(t);
+  } = useAttachments(t);
   let eh = useMemo(() => attachments.some(e => "success" === e.status && "FIGMA_NODE" === e.type && e.image), [attachments]);
   let eg = useCallback(() => {
     setAttachments(e => e.map(e => "success" === e.status && "FIGMA_NODE" === e.type ? function (e, t) {
@@ -4839,7 +4839,7 @@ export function $$iC0({
       } = t;
       let i = e.get(nodeGuid);
       if (!i) return t;
-      let s = NC(i);
+      let s = generateNodeThumbnail(i);
       return s ? {
         status: "success",
         nodeGuid: i.guid,
@@ -4858,9 +4858,9 @@ export function $$iC0({
     setChatError,
     chatError,
     clearChatError
-  } = _$$tk(t);
+  } = useChatError(t);
   let [ek, eC] = useState(!0);
-  let eE = useAtomWithSubscription(Ng);
+  let eE = useAtomWithSubscription(isSendToMakeActiveAtom);
   let eS = useRef(!1);
   useMemo(() => {
     (() => {
@@ -4917,10 +4917,10 @@ export function $$iC0({
     })();
   }, [t, attachments, selectedElement, selectedElementCodeSnippet]);
   useEffect(() => {
-    ek || chatError?.error.message === T_.MAX_CONTENT_LENGTH_EXCEEDED ? ek && chatError?.error.message === T_.MAX_CONTENT_LENGTH_EXCEEDED && clearChatError() : getFeatureFlags().bake_downgrade_figma_nodes_to_images && eh ? (setChatError({
-      error: Error(T_.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK)
+    ek || chatError?.error.message === ChatErrorType.MAX_CONTENT_LENGTH_EXCEEDED ? ek && chatError?.error.message === ChatErrorType.MAX_CONTENT_LENGTH_EXCEEDED && clearChatError() : getFeatureFlags().bake_downgrade_figma_nodes_to_images && eh ? (setChatError({
+      error: Error(ChatErrorType.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK)
     }), eg()) : setChatError({
-      error: Error(T_.MAX_CONTENT_LENGTH_EXCEEDED)
+      error: Error(ChatErrorType.MAX_CONTENT_LENGTH_EXCEEDED)
     });
   }, [ek, chatError, setChatError, clearChatError, eh, eg]);
   let {
@@ -5123,7 +5123,7 @@ export default function App() {
     let {
       setChatError: _setChatError,
       clearChatError: _clearChatError
-    } = _$$tk(e);
+    } = useChatError(e);
     return {
       enhancePrompt: useCallback(async function* (e) {
         let t;
@@ -5150,7 +5150,7 @@ export default function App() {
         } catch (t) {
           let e = t instanceof Error ? t : Error("Failed to enhance prompt");
           _setChatError({
-            error: Error(T_.PROMPT_ENHANCEMENT_FAILED)
+            error: Error(ChatErrorType.PROMPT_ENHANCEMENT_FAILED)
           });
           return e;
         } finally {
@@ -5165,7 +5165,7 @@ export default function App() {
   let e$ = B?.length ? getI18nString("living_designs.chat.placeholder.iterate") : getI18nString("living_designs.chat.placeholder.blank_slate");
   let [eP, eU] = useState(!1);
   let eG = async e => {
-    if (V || eE || !g || !v || 0 === e.files.length || e.files.length > qQ) return;
+    if (V || eE || !g || !v || 0 === e.files.length || e.files.length > MAX_ATTACHMENTS) return;
     let t = Array.from(e.files).map(async e => {
       e && IMAGE_TYPE_VALUES.some(t => e.type.startsWith(t.replace("*", ""))) && (await _$$z3(e, createLoadedAttachment));
     });

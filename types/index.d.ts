@@ -44,6 +44,7 @@ declare global {
     STATSIG_PERF: any
     scheduler: any
     createFileImporter: any
+    __FIGMA_PLUGIN_SANDBOX_PAGE_LOADED: any
   }
 
   interface globalThis {
@@ -56,6 +57,12 @@ declare global {
     scheduler: any
   }
 
+  interface HTMLElement {
+    _pointer: any
+  }
+  interface HTMLInputElement {
+    _pointer: any
+  }
 }
 
 export { }

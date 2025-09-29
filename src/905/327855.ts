@@ -33,7 +33,7 @@ import { hZ } from "../figma_app/990058";
 import { setTeamOptimistThunk } from "../figma_app/240735";
 import { putTeamUser } from "../905/584989";
 import { $W } from "../figma_app/681244";
-import { $K, bW, s5 } from "../figma_app/223206";
+import { sessionIdAtom, orgTemplatePickerViewAtom, figjamCreateSlidesOutlineAtom } from "../figma_app/223206";
 import { ky } from "../figma_app/214121";
 import { LQ } from "../figma_app/741211";
 import { trackFileEvent, trackFileObjEvent } from "../figma_app/314264";
@@ -81,7 +81,7 @@ function y(e) {
 }
 class b {
   constructor(e) {
-    this._resolveCancelPromise = () => { };
+    this._resolveCancelPromise = () => {};
     this._cancelPromise = new Promise(e => {
       this._resolveCancelPromise = e;
     });
@@ -95,7 +95,7 @@ class b {
   }
   async startRequest(e) {
     let t = 0;
-    for (; ;) {
+    for (;;) {
       let i = A;
       try {
         return await Promise.race([e(), this._cancelPromise]);
@@ -364,8 +364,8 @@ export function $$eT2(e) {
 }
 async function ek(e, t, i, r, p) {
   let m;
-  if (atomStoreManager.set(q7, !0), await $$eC4(e, mapFileTypeToEditorType(t.editorType), r), t.newFileDataLocalStorageKey && atomStoreManager.set($K, t.newFileDataLocalStorageKey), "cooper" === t.editorType && Lm && mF) {
-    let e = atomStoreManager.get(bW);
+  if (atomStoreManager.set(q7, !0), await $$eC4(e, mapFileTypeToEditorType(t.editorType), r), t.newFileDataLocalStorageKey && atomStoreManager.set(sessionIdAtom, t.newFileDataLocalStorageKey), "cooper" === t.editorType && Lm && mF) {
+    let e = atomStoreManager.get(orgTemplatePickerViewAtom);
     t.cooperTemplateLibraryKey ? atomStoreManager.set(Lm, {
       type: mF.TEMPLATES,
       libraryKey: t.cooperTemplateLibraryKey,
@@ -378,7 +378,7 @@ async function ek(e, t, i, r, p) {
   }
   if ("slides" === t.editorType) {
     if (t.slidesAiNewFileData) {
-      let e = atomStoreManager.get(s5);
+      let e = atomStoreManager.get(figjamCreateSlidesOutlineAtom);
       atomStoreManager.set(bY, {
         type: Vf.TEMPLATE_PICKER,
         figjamEntryPointData: e,
@@ -532,7 +532,7 @@ async function ek(e, t, i, r, p) {
       }, {
         forwardToDatadog: !0
       });
-    })().catch(() => { });
+    })().catch(() => {});
   };
   e.fileCreationFailed = function (e, t, i, n, r) {
     let a = t instanceof XHRError ? t.status : void 0;
@@ -573,7 +573,7 @@ export function $$eN8(e, t, i) {
     status: "error",
     error: e
   })).then(async i => {
-    if ("canceled" === i.status) await destroyAutosaveManager(); else if ("error" === i.status) {
+    if ("canceled" === i.status) await destroyAutosaveManager();else if ("error" === i.status) {
       let {
         error
       } = i;

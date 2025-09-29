@@ -75,7 +75,7 @@ import { _s } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
 import { _E } from "../905/788069";
-import { R as _$$R } from "../figma_app/53049";
+import { loadCanvasDataAsync } from "../figma_app/53049";
 import { n as _$$n2 } from "../905/347702";
 import { Y as _$$Y, Sk, D1, tO as _$$tO, D0 } from "../9410/989613";
 import { isInteractionPathCheck } from "../figma_app/897289";
@@ -635,7 +635,7 @@ async function eq({
   abortController: r
 }) {
   if (!SlidesAiBindings) return [];
-  let n = await e0(_$$R({
+  let n = await e0(loadCanvasDataAsync({
     fileKey: e,
     selectedGuids: t.slice(0, _$$S)
   }), r.signal);

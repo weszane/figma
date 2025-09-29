@@ -3,7 +3,7 @@ import { useCallback, useRef, useEffect, useState, useContext, createContext, us
 import { KeyCodes } from "../905/63728";
 import { M3, dP } from "../figma_app/119475";
 import { fullscreenValue } from "../figma_app/455680";
-import { f7 } from "../figma_app/896988";
+import { forwardKeyboardEvent } from "../figma_app/896988";
 import { SectionType, ButtonType } from "../figma_app/644808";
 import { sN, Qk, t7 } from "../figma_app/188908";
 import { wV, S5 } from "../figma_app/647246";
@@ -51,7 +51,7 @@ function f({
   } = wV();
   let E = useCallback(e => {
     if (Qk(e.target) || e.keyCode !== KeyCodes.BACKSPACE) {
-      if (e.altKey && [KeyCodes.KEY_1, KeyCodes.KEY_2, KeyCodes.KEY_3].includes(e.keyCode) && fullscreenValue.isReady() && e.target !== inputRef.current?.searchInput) return f7(e);
+      if (e.altKey && [KeyCodes.KEY_1, KeyCodes.KEY_2, KeyCodes.KEY_3].includes(e.keyCode) && fullscreenValue.isReady() && e.target !== inputRef.current?.searchInput) return forwardKeyboardEvent(e);
     } else {
       clickBackButton();
       focusBackButton();

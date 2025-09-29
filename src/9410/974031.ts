@@ -4,7 +4,7 @@ import a from "../vendor/879378";
 import { Point } from "../905/736624";
 import { fullscreenValue } from "../figma_app/455680";
 import { getImageManager } from "../figma_app/624361";
-import { _G, Pv } from "../905/619652";
+import { generateExportThumbnail, convertImageDataToURL } from "../905/619652";
 var s = a;
 export function $$u0({
   nodeId: e,
@@ -25,9 +25,9 @@ export function $$u0({
       r && (r.abort(), r = null);
     };
     let m = () => {
-      let r = _G(new Point(t, i), e, !0, u ? BackgroundPattern.TRANSPARENT : void 0);
+      let r = generateExportThumbnail(new Point(t, i), e, !0, u ? BackgroundPattern.TRANSPARENT : void 0);
       r && r.pixels && r.pixelSize && r.displaySize && h({
-        src: Pv(r.pixels, r.pixelSize),
+        src: convertImageDataToURL(r.pixels, r.pixelSize),
         displaySize: r.displaySize
       });
     };
@@ -102,11 +102,11 @@ export function $$h1({
       priority: "user-visible"
     }), scheduler.postTask(() => {
       let r = !!u && getImageManager().unresolvedImagesUnder([e], ImageExportType.LOW_RES_ONLY).length > 0;
-      let s = _G(new Point(t, i), e, !0, BackgroundPattern.TRANSPARENT, h);
+      let s = generateExportThumbnail(new Point(t, i), e, !0, BackgroundPattern.TRANSPARENT, h);
       if (s && s.pixels && s.pixelSize && s.displaySize) {
         let e = {
           thumbnail: {
-            src: Pv(s.pixels, s.pixelSize),
+            src: convertImageDataToURL(s.pixels, s.pixelSize),
             displaySize: s.displaySize
           },
           imagesLoaded: g,

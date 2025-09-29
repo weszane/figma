@@ -103,7 +103,7 @@ import { B as _$$B2 } from "../905/146468";
 import { h as _$$h2 } from "../905/594794";
 import { hubFileAndPresetKeysSetAtom } from "../905/72677";
 import { FO } from "../905/682977";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { A as _$$A2 } from "../6828/117346";
 import { f as _$$f } from "../905/405189";
 import { U as _$$U } from "../905/763676";
@@ -818,7 +818,7 @@ function tS(e) {
     planType
   } = e;
   let v = selectCurrentFile();
-  let I = sO();
+  let I = useIsFullscreenSlidesView();
   let E = !!useAtomWithSubscription(_$$t2).data;
   let x = useCurrentUserOrg();
   let {

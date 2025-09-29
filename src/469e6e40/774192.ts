@@ -3,12 +3,12 @@ import s from "classnames";
 import { KeyCodes, isModifierMatch, ModifierKeyCodes } from "../905/63728";
 import { RecordableButton } from "../905/511649";
 import { stopPropagation } from "../figma_app/753501";
-import { f7 } from "../figma_app/896988";
+import { forwardKeyboardEvent } from "../figma_app/896988";
 import { isInvalidValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
 var i = s;
 function u(e) {
-  e.keyCode === KeyCodes.TAB && isModifierMatch(e, ModifierKeyCodes.SHIFT) || e.keyCode === KeyCodes.ENTER || e.keyCode === KeyCodes.SPACE || f7(e);
+  e.keyCode === KeyCodes.TAB && isModifierMatch(e, ModifierKeyCodes.SHIFT) || e.keyCode === KeyCodes.ENTER || e.keyCode === KeyCodes.SPACE || forwardKeyboardEvent(e);
 }
 export function $$m0(e) {
   return jsx(p, {

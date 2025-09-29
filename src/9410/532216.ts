@@ -68,7 +68,7 @@ import { F as _$$F } from "../figma_app/928238";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { e as _$$e2 } from "../figma_app/831857";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { fx, PF } from "../figma_app/657972";
 import { z6 } from "../905/963340";
 import { R6 } from "../figma_app/504823";
@@ -600,7 +600,7 @@ let ti = memo(function ({
       };
     }()
   };
-  let ep = sO();
+  let ep = useIsFullscreenSlidesView();
   let ef = useIsFullscreenSitesView();
   let ew = useIsSelectedFigmakeFullscreen();
   let eS = !!(getFeatureFlags().ds_pubplat_sts || getFeatureFlags().ds_pubplat_sts_code);

@@ -8,7 +8,7 @@ import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { sz } from "../figma_app/216696";
 import { Qx, Dm } from "../figma_app/8833";
 import { TrackingProvider } from "../figma_app/831799";
-import { u2 } from "../figma_app/223206";
+import { designCopyToSlidesAtom } from "../figma_app/223206";
 import { overlayStateAtom } from "../905/12032";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { Tc } from "../905/797478";
@@ -25,7 +25,7 @@ import { Ye } from "../figma_app/32128";
 import { JT } from "../figma_app/632248";
 import { wj, qy } from "../figma_app/862289";
 import { wd } from "../9410/236102";
-import { jY, EI } from "../figma_app/21029";
+import { useHasValidSceneSlideTheme, useIsFullscreenReady } from "../figma_app/21029";
 import { G as _$$G } from "../9410/312268";
 import { Kt } from "../figma_app/835688";
 import { l as _$$l } from "../9410/430547";
@@ -105,15 +105,15 @@ export function $$V1() {
 }
 export function $$W0() {
   let e = useAppModelProperty("isReadOnly");
-  let t = jY();
+  let t = useHasValidSceneSlideTheme();
   let i = !!S7();
   let n = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []).flat().length > 0;
   let a = useAtomWithSubscription(q7);
-  let l = EI();
+  let l = useIsFullscreenReady();
   let d = useAtomWithSubscription(overlayStateAtom);
   let c = useAtomWithSubscription(userFlagExistsAtomFamily(Kt)).data;
   let u = useAtomWithSubscription(VZ);
-  let p = useAtomWithSubscription(u2);
+  let p = useAtomWithSubscription(designCopyToSlidesAtom);
   let {
     state
   } = wj(JT.BOARD_TO_DECK);

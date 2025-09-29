@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useCallback } from "react";
 import { p } from "../905/991924";
-import { jr, W0 } from "../figma_app/896988";
+import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 export let $$o0 = forwardRef(function (e, t) {
   let {
     onKeyDown
   } = e;
   let o = useCallback(e => {
     onKeyDown?.(e);
-    jr(e, W0.NO);
+    handleKeyboardEventByState(e, KeyboardEventResponse.NO);
   }, [onKeyDown]);
   return jsx(p, {
     ...e,

@@ -6,10 +6,10 @@ import { multiplayerSessionManager } from "../905/977824";
 import { KP, Ww } from "../figma_app/440875";
 import { selectCurrentUser } from "../905/372672";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { H, q } from "../905/457575";
+import { createScopedStateWithDefault, createScopedState } from "../905/457575";
 import { jx, Ic } from "../figma_app/198516";
-let $$_5 = H("");
-let $$h3 = q();
+let $$_5 = createScopedStateWithDefault("");
+let $$h3 = createScopedState();
 let m = setupRemovableAtomFamily(() => atom({}));
 export function $$g2(e) {
   if (0 === e.messages.length && !e.isTyping && 0 === e.fileUpdates.length) {

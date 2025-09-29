@@ -3,7 +3,7 @@ import { Children, isValidElement, createRef } from "react";
 import { PluginHelpers } from "../figma_app/763686";
 import s from "classnames";
 import { KeyCodes } from "../905/63728";
-import { RecordingPureComponent, handleKeyboardEvent, handlePointerEvent, RecordingComponent } from "../figma_app/878298";
+import { RecordingPureComponent, hookForKeyboard, handlePointerEvent, RecordingComponent } from "../figma_app/878298";
 var o = s;
 var $$c0 = (e => (e.UPWARDS = "upwards", e.DOWNWARDS = "downwards", e))($$c0 || {});
 export class $$u2 extends RecordingPureComponent {
@@ -48,7 +48,7 @@ export class $$u2 extends RecordingPureComponent {
         };
       }
     };
-    this.handleKeyDown = handleKeyboardEvent(this, "keydown", e => {
+    this.handleKeyDown = hookForKeyboard(this, "keydown", e => {
       if (this.props.shouldNotHandleKeyDown) return;
       let t = !0;
       let i = this.props.typeahead;

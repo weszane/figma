@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { y$ } from "../vendor/156872";
+import { createStore } from "../vendor/156872";
 import { V as _$$V } from "../vendor/806037";
 import { memo, useEffect } from "react";
 import { M as _$$M } from "../vendor/786121";
@@ -936,7 +936,7 @@ function eW(e, r, n = {}, i = !1) {
 }
 function eY(e) {
   let r = "undefined" != typeof window && window.__REDUX_DEVTOOLS_EXTENSION__;
-  return y$(eq, e && r && r({
+  return createStore(eq, e && r && r({
     name: "dnd-core",
     instanceId: "dnd-core"
   }));

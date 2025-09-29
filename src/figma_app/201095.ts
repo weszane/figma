@@ -9,10 +9,10 @@ import { getI18nString } from "../905/303541";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { ZU, Wg } from "../figma_app/986347";
 import { Xo } from "../figma_app/687767";
-import { s1 } from "../figma_app/226737";
+import { useEffectiveThemeId } from "../figma_app/226737";
 import { vK } from "../figma_app/587612";
 export function $$g1() {
-  let e = s1();
+  let e = useEffectiveThemeId();
   let t = Xo(e);
   let r = E(t);
   let n = useCallback(e => ({
@@ -35,7 +35,7 @@ export function $$g1() {
   }), [t, n]);
 }
 export function $$f0() {
-  let e = s1();
+  let e = useEffectiveThemeId();
   let t = Xo(e);
   let r = E(t);
   let u = useMemo(() => {

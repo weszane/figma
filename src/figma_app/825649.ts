@@ -72,7 +72,7 @@ import { tz as _$$tz } from "../figma_app/531331";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { e as _$$e4 } from "../figma_app/831857";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { fx, PF } from "../figma_app/657972";
 import { DF, RG } from "../figma_app/146384";
 import { F as _$$F3 } from "../figma_app/928238";
@@ -108,7 +108,7 @@ export function $$eO1({
     currentOrgId: eV,
     currentTeamId: eH
   });
-  let eY = sO();
+  let eY = useIsFullscreenSlidesView();
   let e$ = useIsFullscreenSitesView();
   let eX = useIsSelectedFigmakeFullscreen();
   let eq = !!(getFeatureFlags().ds_pubplat_sts || getFeatureFlags().ds_pubplat_sts_code);

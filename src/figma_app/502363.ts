@@ -34,7 +34,7 @@ import { A as _$$A4 } from "../6828/727585";
 import { A as _$$A5 } from "../6828/559361";
 import { Link } from "../905/438674";
 import Y from "classnames";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { h1 } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { M3, dP } from "../figma_app/119475";
@@ -493,7 +493,7 @@ function eh(e) {
       preventScroll: !0
     });
   }, [searchInputRef]);
-  _$$h(_);
+  useSingleEffect(_);
   useEffect(() => {
     let e = () => {
       "visible" === document.visibilityState && (clearSearch(), _());
@@ -862,7 +862,7 @@ export function $$e53({
       showModalsBeneath: !0
     }));
   }, [r, s, e, t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     l();
   });
   useEffect(() => {

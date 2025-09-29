@@ -6,7 +6,7 @@ import { LibraryPubSub, VariablesBindings, Fullscreen } from "../figma_app/76368
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { trackFileEventWithStore } from "../figma_app/901889";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { useLatestRef } from "../figma_app/922077";
 import { PerfTimer } from "../905/609396";
 import { reportError } from "../905/11";
@@ -388,7 +388,7 @@ export function $$z2({
     e && _(!0);
     o(!0);
   });
-  _$$h(() => {
+  useSingleEffect(() => {
     r || start(1e3);
   });
   useEffect(() => {

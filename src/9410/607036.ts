@@ -25,7 +25,7 @@ import { Tc } from "../905/797478";
 import { fullscreenValue } from "../figma_app/455680";
 import { extractProtoFileId, extractValidNodeIdFromProtoUrl, isProtoViewerUrl, getProtoViewerBaseUrl } from "../figma_app/831696";
 import { KindEnum } from "../905/129884";
-import { R } from "../figma_app/53049";
+import { loadCanvasDataAsync } from "../figma_app/53049";
 import { useClickOutside } from "../905/1768";
 var h = p;
 let k = "slides_insert_embed_modal--sectionContainer--r1D85";
@@ -36,7 +36,7 @@ async function L({
   fileKey: e,
   nodeId: t
 }) {
-  let i = await R({
+  let i = await loadCanvasDataAsync({
     fileKey: e
   });
   return i && SlidesEmbeddedPrototypeBindings?.getPrototypeFileStructureData(e, i, t) || {};

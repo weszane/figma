@@ -26,10 +26,10 @@ export function notifyPluginStatus(params: {
   vmType: string
   isBackground: boolean
   isInsert: boolean
-  shouldShowCheck: boolean
+  shouldShowCheck?: boolean
   delayOverride?: number
   cancelCallback: () => void
-}): void {
+}) {
   if (params.isBackground)
     return
 

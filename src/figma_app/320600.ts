@@ -16,7 +16,7 @@ import { n as _$$n2 } from "../figma_app/307143";
 import { TrackingProvider } from "../figma_app/831799";
 import { d$ } from "../figma_app/291792";
 import { VU } from "../905/625959";
-import { jr, W0 } from "../figma_app/896988";
+import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 import { FEditorType } from "../figma_app/53721";
 import { pi } from "../figma_app/357047";
 import { e0 } from "../905/696396";
@@ -363,7 +363,7 @@ class e_ extends RecordingPureComponent {
       this.multilevelDropdown = e;
     };
     this.onKeyDown = e => {
-      jr(e, W0.NO);
+      handleKeyboardEventByState(e, KeyboardEventResponse.NO);
     };
     this.selectPreferencesMenu = () => {
       this.multilevelDropdown && this.multilevelDropdown.setActiveItemPath(this.getPathToPreferences());

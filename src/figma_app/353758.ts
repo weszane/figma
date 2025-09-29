@@ -12,7 +12,7 @@ import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
 import { PN, isInteractionPathCheck } from "../figma_app/897289";
 import { setLeftPanelTab } from "../figma_app/91703";
-import { me } from "../figma_app/223206";
+import { copyToSitesFromDesignAtom } from "../figma_app/223206";
 import { fullscreenValue } from "../figma_app/455680";
 import { executeInIgnoreUndoRedoScope } from "../905/955316";
 import { openFileKeyAtom } from "../figma_app/516028";
@@ -26,7 +26,7 @@ import { r as _$$r2 } from "../905/571838";
 import { renderI18nText } from "../905/303541";
 import { hi } from "../figma_app/114522";
 import { f as _$$f } from "../figma_app/695131";
-import { NC, Ah, _5 } from "../figma_app/119420";
+import { generateNodeThumbnail, attachmentsAtomFamily, removePendingAttachmentAndShowError } from "../figma_app/119420";
 import { gz } from "../figma_app/302802";
 import { M5, qs, fM } from "../figma_app/346422";
 import { hB, wn } from "../figma_app/609511";
@@ -486,7 +486,7 @@ export let $$eu0 = new class {
     }, 0));
   }
   shouldHideDefaultSetOnCreation() {
-    return !!atomStoreManager.get(me);
+    return !!atomStoreManager.get(copyToSitesFromDesignAtom);
   }
   getAutomaticCodeFileNameForNodeName(e, t, r = !1) {
     let n = getSingletonSceneGraph();
@@ -571,24 +571,24 @@ export let $$eu0 = new class {
       nodeGuid: e,
       codeFiles: n,
       type: "FIGMA_NODE",
-      image: getFeatureFlags().bake_d2r_image ? NC(r.get(e)) : null
+      image: getFeatureFlags().bake_d2r_image ? generateNodeThumbnail(r.get(e)) : null
     };
-    atomStoreManager.set(Ah, t => t.map(t => es(t, e) ? {
+    atomStoreManager.set(attachmentsAtomFamily, t => t.map(t => es(t, e) ? {
       ...i,
       uniqueId: t.uniqueId
     } : t));
   }
   removeAttachment(e) {
-    atomStoreManager.set(Ah, t => t.filter(t => !es(t, e)));
+    atomStoreManager.set(attachmentsAtomFamily, t => t.filter(t => !es(t, e)));
   }
   pushAttachmentError(e, t) {
-    atomStoreManager.set(Ah, r => r.map(r => es(r, e) ? {
+    atomStoreManager.set(attachmentsAtomFamily, r => r.map(r => es(r, e) ? {
       ...r,
       designToCodeErrors: [...(r?.designToCodeErrors ?? []), t]
     } : r));
   }
   terminateOnePendingAttachment(e) {
-    _5(e);
+    removePendingAttachmentAndShowError(e);
   }
   regenerateDerivedCodeFileDebounced(e) {
     let t;

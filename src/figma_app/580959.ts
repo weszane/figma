@@ -50,7 +50,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { isValidValue, normalizeValue, MIXED_MARKER, valueOrFallback, isAutoMarker, isInvalidValue } from "../905/216495";
 import { isSolidType, paintManager, defaultGrayColor } from "../figma_app/385874";
-import { SK } from "../905/619652";
+import { updateGIFImageProperties } from "../905/619652";
 import { b as _$$b } from "../figma_app/755529";
 import { useSelectionPropertyValue, useHasSelectedStyle } from "../905/275640";
 import { Rb, Pt as _$$Pt } from "../figma_app/852050";
@@ -101,7 +101,7 @@ import { t as _$$t2 } from "../905/332351";
 import { ZQ, UX } from "../905/668609";
 import { a as _$$a } from "../905/597867";
 import { useIsFullscreenSitesView } from "../905/561485";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { isSlidesFile } from "../figma_app/252485";
 import { Sw, rM, UM } from "../905/95091";
 import { s as _$$s2 } from "../figma_app/268276";
@@ -827,7 +827,7 @@ export class $$tp1 extends PureComponent {
         Fullscreen.dropImageOnPaintThumbnail(e, t, i, this.props.index, this.props.selectedPropertyType);
       }
     };
-    this.updateStillImageAndSelectionPropertiesForGIF = (e, t) => permissionScopeHandler.user("update-gif-image", () => SK(e, t, this.props.selectedPropertyType));
+    this.updateStillImageAndSelectionPropertiesForGIF = (e, t) => permissionScopeHandler.user("update-gif-image", () => updateGIFImageProperties(e, t, this.props.selectedPropertyType));
     this.onDetachVariableClick = () => {
       executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
         let e = _$$$(this.props.paint);
@@ -1866,7 +1866,7 @@ export function $$tb4(e) {
     !1 === d && h(void 0);
   }, [d]);
   let f = Fs("MULTI", "PROPS_PANEL", VariableResolvedDataType.COLOR);
-  let E = sO();
+  let E = useIsFullscreenSlidesView();
   let y = AppStateTsApi.singleSlideView().isFocusedNodeViewEnabled();
   let T = E && y;
   let {

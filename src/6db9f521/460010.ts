@@ -190,11 +190,11 @@ import { NotModalType } from "../905/11928";
 import { O0, eg as _$$eg } from "../figma_app/452252";
 import { ArrowPosition } from "../905/858282";
 import { s1f } from "../figma_app/6204";
-import { jY, sO as _$$sO } from "../figma_app/21029";
+import { useHasValidSceneSlideTheme, useIsFullscreenSlidesView } from "../figma_app/21029";
 import { uM, Bn, R4, w1 } from "../figma_app/835688";
 import { g as _$$g2, h as _$$h3 } from "../9410/28058";
 import { Dh, TN, i1 as _$$i, q0 } from "../figma_app/177697";
-import { s1 as _$$s6, sW as _$$sW } from "../figma_app/226737";
+import { useEffectiveThemeId, useSelectedThemeId } from "../figma_app/226737";
 import { TG } from "../figma_app/657972";
 import { ServiceCategories } from "../905/165054";
 import { ScreenReaderOnly } from "../905/172252";
@@ -406,7 +406,7 @@ import { $Q, a2 as _$$a5 } from "../905/963340";
 import { loadVideoJs } from "../905/284552";
 import { Y as _$$Y6 } from "../905/506207";
 import { k as _$$k8 } from "../6020/640789";
-import { SK } from "../905/619652";
+import { updateGIFImageProperties } from "../905/619652";
 import { J as _$$J6 } from "../905/95677";
 import { X7 } from "../905/713167";
 import { Y as _$$Y7 } from "../905/513028";
@@ -2950,7 +2950,7 @@ let {
   SelectOverride
 } = n;
 let ny = new _$$ag(i5.MILLISECONDS, 10);
-class nf extends _$$c$ { }
+class nf extends _$$c$ {}
 function nj({
   recordingKey: e
 }) {
@@ -4076,7 +4076,7 @@ function rR() {
   let i = _$$JU(t);
   let n = userFlagExistsAtomFamily(uM);
   let a = useAtomWithSubscription(n);
-  let o = jY();
+  let o = useHasValidSceneSlideTheme();
   let {
     show,
     isShowing,
@@ -4204,7 +4204,7 @@ function rB() {
   let e = _$$dh();
   let t = Xr(bY);
   let i = !!S7();
-  let n = _$$s6();
+  let n = useEffectiveThemeId();
   TG();
   let [s, o] = useLocalStorageSync("last-used-variable-set-bottoms-up", null);
   useEffect(() => {
@@ -5000,7 +5000,7 @@ class sp extends ub {
   }
 }
 let sh = [0, 0.1, 0.2, 0.3];
-class sm extends _$$c$ { }
+class sm extends _$$c$ {}
 let s_ = new _$$ag(i5.MILLISECONDS, 0.001, 30);
 function sg({
   delay: e,
@@ -5043,7 +5043,7 @@ function sg({
 }
 let sy = [0.3, 0.6, 0.9];
 let sf = new _$$ag(i5.MILLISECONDS, 0.01, 10);
-class sj extends _$$c$ { }
+class sj extends _$$c$ {}
 function sb({
   duration: e,
   easingType: t,
@@ -5718,8 +5718,8 @@ function am({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let i = _$$sW();
-  let n = _$$s6();
+  let i = useSelectedThemeId();
+  let n = useEffectiveThemeId();
   let {
     Sprig
   } = useSprigWithSampling();
@@ -6318,7 +6318,7 @@ function oN({
   closePicker: e,
   recordingKey: t
 }) {
-  let i = _$$s6();
+  let i = useEffectiveThemeId();
   let n = useSelector(e => e.stylePreviewShown);
   let o = useDispatch();
   let d = useSelector(e => e.mirror.selectedStyleProperties);
@@ -6459,7 +6459,7 @@ function oU({
       children: jsx(_$$d6, {
         "aria-expanded": !!d,
         onClick: () => {
-          if (d) u(hideStylePicker()); else if (e.current) {
+          if (d) u(hideStylePicker());else if (e.current) {
             let t = e.current.getBoundingClientRect();
             u(_$$sw());
             u(showStylePicker({
@@ -6487,7 +6487,7 @@ function o$({
   recordingKey: o
 }) {
   let d = useDispatch();
-  let u = _$$s6();
+  let u = useEffectiveThemeId();
   let p = _$$Xo(u);
   let x = useMemo(() => e?.node_id && p.some(t => t.node_id === e.node_id), [e?.node_id, p]);
   let h = useSelectionPropertyValue("fontFamily");
@@ -6526,7 +6526,7 @@ function o$({
           "aria-expanded": b,
           "aria-label": getI18nString("slides.properties_panel.text_style.create_new_style"),
           onClick: () => {
-            if (b) d(_$$sw()); else if (f.current) {
+            if (b) d(_$$sw());else if (f.current) {
               _$$l3.user("slides-create-style", () => {
                 Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !0);
                 Fullscreen?.selectStyle(_$$n5.INVALID, _$$IA.INVALID);
@@ -6666,7 +6666,7 @@ function oz({
       children: jsx(_$$d6, {
         "aria-label": getI18nString("slides.properties_panel.text_style.edit_text_style"),
         onClick: t => {
-          if (b) m(_$$sw()); else if (j.current) {
+          if (b) m(_$$sw());else if (j.current) {
             Fullscreen?.selectStyleByGuid(e.node_id);
             let t = j.current.getBoundingClientRect();
             m(_$$rk({
@@ -6844,7 +6844,7 @@ function oW({
   });
 }
 function oJ(e) {
-  let t = _$$s6();
+  let t = useEffectiveThemeId();
   let i = _$$Xo(t);
   return !!e && i.some(t => t.node_id === e.node_id);
 }
@@ -6852,7 +6852,7 @@ function oQ({
   mainStyle: e,
   textPreviewColor: t
 }) {
-  let i = _$$s6();
+  let i = useEffectiveThemeId();
   let n = e.node_id;
   let s = useDeepEqualSceneValue((e, t) => e.get(t)?.name ?? "", n);
   let [a, o] = useAtomValueAndSetter(q0);
@@ -6893,7 +6893,7 @@ function oX({
   previouslyAppliedStyle: e,
   textPreviewColor: t
 }) {
-  let i = _$$s6();
+  let i = useEffectiveThemeId();
   let n = e.node_id;
   let s = e.name;
   let {
@@ -7438,7 +7438,7 @@ let dt = memo(() => {
   let d = _$$rB();
   let u = _$$lD();
   let p = function () {
-    let e = _$$sO();
+    let e = useIsFullscreenSlidesView();
     let t = useSelector(e => Yh(e.mirror.appModel, JT.REMOVE_BACKGROUND));
     let i = PE();
     if (e && t && i) return {
@@ -7477,7 +7477,7 @@ let dt = memo(() => {
     };
   }();
   let x = function () {
-    let e = _$$sO();
+    let e = useIsFullscreenSlidesView();
     let t = useSelector(e => Yh(e.mirror.appModel, JT.UPSCALE_IMAGE));
     let i = PE();
     if (e && t && i) return {
@@ -7586,7 +7586,7 @@ function dr({
     })
   });
 }
-class dm extends _$$c$ { }
+class dm extends _$$c$ {}
 let d_ = [0, 2, 4, 8, 16, 24];
 let dg = ["NONE", "SOLID", "DASHED_BIG", "DASHED_SMALL"];
 let dy = dg.filter(e => "NONE" !== e);
@@ -7827,7 +7827,7 @@ function dT({
     })
   });
 }
-class dN extends _$$c$ { }
+class dN extends _$$c$ {}
 let dk = [0, 8, 16, 24, 32, 64, 96];
 class dC extends X9 {
   format(e) {
@@ -8304,7 +8304,7 @@ function co({
         setGIFCoverFrame: t => {
           if (!C) return;
           let i = t ?? S;
-          (null != t || i !== e.animationFrame) && (fullscreenValue.triggerAction("toggle-raster-edit-mode"), _$$l3.user("update-gif-image-slides", () => SK({
+          (null != t || i !== e.animationFrame) && (fullscreenValue.triggerAction("toggle-raster-edit-mode"), _$$l3.user("update-gif-image-slides", () => updateGIFImageProperties({
             ...e,
             animationFrame: i
           }, C.data, NodePropertyCategory.FILL)), Fullscreen?.setDefaultEditMode());
@@ -8749,7 +8749,7 @@ function cC({
     isEqual: (e, t) => deepEqual(e, t)
   }), [carouselItemsById, x]);
   let m = _$$nc.user("slides-link-change", useCallback(e => {
-    if (null === e) Fullscreen?.setHyperlinkOnCurrentSelection("", null); else if ("guid" === e.type) Fullscreen?.setHyperlinkOnCurrentSelection(fullscreenValue.generateLinkToNode(sessionLocalIDToString(e.guid)), null); else if ("url" === e.type) {
+    if (null === e) Fullscreen?.setHyperlinkOnCurrentSelection("", null);else if ("guid" === e.type) Fullscreen?.setHyperlinkOnCurrentSelection(fullscreenValue.generateLinkToNode(sessionLocalIDToString(e.guid)), null);else if ("url" === e.type) {
       let t = e.url.match(ck) ? e.url : `https://${e.url}`;
       Fullscreen?.setHyperlinkOnCurrentSelection(t, null);
     }
@@ -8797,7 +8797,7 @@ function cC({
     })
   });
 }
-class cw extends _$$c$ { }
+class cw extends _$$c$ {}
 class cO extends LN {
   isEqual(e, t) {
     return 1e-5 > Math.abs(e - t);

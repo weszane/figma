@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories } from "../905/165054";
 import { resourceUtils } from "../905/989992";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { subscribeAndAwaitData } from "../905/553831";
 import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler, handleSuspenseRetainRelease } from "../figma_app/566371";
@@ -39,7 +39,7 @@ export function $$y1(e, t) {
       });
     });
   }, [e, t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     a();
   });
   return {

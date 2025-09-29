@@ -53,7 +53,7 @@ import { ay } from "../figma_app/628987";
 import { zz } from "../905/32188";
 import { DraggableModalManager } from "../905/748636";
 import { useIsFullscreenSitesView } from "../905/561485";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { R as _$$R } from "../905/256203";
 import { trackEventAnalytics } from "../905/449184";
 import { x4 } from "../figma_app/211694";
@@ -231,7 +231,7 @@ export let $$eZ0 = registerModal(function (e) {
   let v = useSelector(e => e.fonts);
   let E = trackFileEventWithStore();
   let [S, C] = useState();
-  let T = sO();
+  let T = useIsFullscreenSlidesView();
   let k = useIsFullscreenSitesView();
   let Z = useSelector(e => e.userFlags);
   let ee = useSelector(e => e.selectedView);

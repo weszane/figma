@@ -136,7 +136,7 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { showDropdownThunk } from "../905/929976";
 import { i as _$$i } from "../figma_app/85949";
-import { f7 } from "../figma_app/896988";
+import { forwardKeyboardEvent } from "../figma_app/896988";
 import { RHC } from "../figma_app/27776";
 import { Nz as _$$Nz } from "../figma_app/492929";
 import { Nz as _$$Nz2 } from "../figma_app/875495";
@@ -3640,7 +3640,7 @@ let aa = memo(function ({
     C && (AppStateTsApi?.editorState().focusedAnnotationId.set(null), j(null));
   }, [C, j]);
   let z = useHandleKeyboardEvent(`annotationDisplay-${e}`, "keydown", useCallback(e => {
-    !I && l && null === b && L === defaultSessionLocalIDString && ("Backspace" === e.key || "Delete" === e.key ? T && (k(nodeId, annotationIndex), w.current?.blur()) : "Enter" === e.key ? T && (e.preventDefault(), j(annotationIndex)) : "Escape" === e.key ? w.current?.blur() : f7(e));
+    !I && l && null === b && L === defaultSessionLocalIDString && ("Backspace" === e.key || "Delete" === e.key ? T && (k(nodeId, annotationIndex), w.current?.blur()) : "Enter" === e.key ? T && (e.preventDefault(), j(annotationIndex)) : "Escape" === e.key ? w.current?.blur() : forwardKeyboardEvent(e));
   }, [annotationIndex, k, b, l, I, nodeId, L, j, T]));
   useEffect(() => (document.addEventListener("keydown", z), () => document.removeEventListener("keydown", z)), [z]);
   let V = useCallback(() => {

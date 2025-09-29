@@ -3,18 +3,18 @@ import { PureComponent, useState, useRef, useEffect } from "react";
 import { arraysEqual } from "../figma_app/656233";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
-import { jS, Pv } from "../905/619652";
+import { generatePaintIcon, convertImageDataToURL } from "../905/619652";
 export class $$d0 extends PureComponent {
   constructor(e) {
     super(e);
     this.updateThumbnailSrc = e => {
-      let t = jS(e, new Point(this.props.width, this.props.height), {
+      let t = generatePaintIcon(e, new Point(this.props.width, this.props.height), {
         r: 0,
         g: 0,
         b: 0,
         a: 0
       });
-      let r = t && t.pixels && t.pixelSize ? Pv(t.pixels, t.pixelSize) : null;
+      let r = t && t.pixels && t.pixelSize ? convertImageDataToURL(t.pixels, t.pixelSize) : null;
       this.setState({
         src: r,
         lastPaintFilter: e.paintFilter || null
@@ -60,13 +60,13 @@ export function $$c1(e) {
   let [p, _] = useState(!1);
   let h = useRef(null);
   let m = (e, t, r) => {
-    let n = jS(e, new Point(t, r), {
+    let n = generatePaintIcon(e, new Point(t, r), {
       r: 0,
       g: 0,
       b: 0,
       a: 0
     });
-    return n && n.pixels && 0 !== n.pixels.length && n.pixelSize ? Pv(n.pixels, n.pixelSize) : null;
+    return n && n.pixels && 0 !== n.pixels.length && n.pixelSize ? convertImageDataToURL(n.pixels, n.pixelSize) : null;
   };
   useEffect(() => {
     !p && h.current && (clearInterval(h.current), h.current = null);

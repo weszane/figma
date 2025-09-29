@@ -45,7 +45,7 @@ import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { resetTrackedAtoms } from "../figma_app/615482";
 import { KeyboardLayout, SchemaJoinStatus, Multiplayer, FullscreenPerfInfo, CorePerfInfo, AppStateTsApi, Fullscreen } from "../figma_app/763686";
-import { As, CZ, rd, v7 } from "../figma_app/475303";
+import { getKeyboardLayoutName, trackKeyboardLayoutChange, updateKeyboardLayoutPreference, getCurrentKeyboardLayout } from "../figma_app/475303";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { setKeyboardShortcutPanelTab } from "../905/26824";
@@ -127,9 +127,9 @@ import { Fn, OO } from "../figma_app/913518";
 import { _ as _$$_ } from "../figma_app/91620";
 import { R as _$$R2 } from "../figma_app/400938";
 import { a as _$$a } from "../figma_app/683763";
-import { lj, wu } from "../figma_app/1722";
+import { FeatureStatusEnum, MobileUIStateEnum } from "../figma_app/1722";
 import { pK, S0, Jm, Jh } from "../figma_app/287316";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { v2 } from "../figma_app/164260";
 import { n as _$$n } from "../905/347702";
 import { P as _$$P } from "../9410/208213";
@@ -177,7 +177,7 @@ let ec = (e, t, i, r) => {
   }));
   e(VisualBellActions.enqueue({
     message: getI18nString("keyboard_settings.new_keyboard_name_keyboard_shortcuts_are_available", {
-      newKeyboardName: As(t)
+      newKeyboardName: getKeyboardLayoutName(t)
     }),
     button: {
       text: getI18nString("keyboard_settings.update_keyboard_shortcuts"),
@@ -191,7 +191,7 @@ let ec = (e, t, i, r) => {
     },
     timeoutOverride: 2e4
   }));
-  CZ({
+  trackKeyboardLayoutChange({
     layout: i,
     detectedLayout: t,
     eventName: "manual_supported_keyboard_detected"
@@ -203,13 +203,13 @@ let eu = (e, t, i) => {
   }));
   e(VisualBellActions.enqueue({
     message: getI18nString("keyboard_settings.new_keyboard_name_keyboard_shortcuts_are_now_available", {
-      newKeyboardName: As(t)
+      newKeyboardName: getKeyboardLayoutName(t)
     }),
     button: {
       text: getI18nString("keyboard_settings.enable_and_show_new_shortcuts"),
       action: () => {
         ed(e, "layout", i);
-        rd({
+        updateKeyboardLayoutPreference({
           layout: t
         });
       }
@@ -217,7 +217,7 @@ let eu = (e, t, i) => {
     type: el,
     onDismiss: () => {}
   }));
-  CZ({
+  trackKeyboardLayoutChange({
     layout: KeyboardLayout.UNKNOWN,
     detectedLayout: t,
     eventName: "first_generic_detected_supported_keyboard"
@@ -229,7 +229,7 @@ async function ep(e, t) {
   if (!i) return null;
   if (t === i) return i;
   let r = pB(i);
-  let n = v7();
+  let n = getCurrentKeyboardLayout();
   r === n || e(r, n, i, null != t);
   return i;
 }
@@ -251,7 +251,7 @@ async function eh(e, t) {
     detectedLayouts: detectedLayoutsWeb,
     desktopLayout: null
   });
-  let o = v7();
+  let o = getCurrentKeyboardLayout();
   s === o || e(s, o, JSON.stringify(layoutJSON), null != t);
   return r;
 }
@@ -660,7 +660,7 @@ export function $$t80({
   let h = useSelector(e => e.selectedView.editorType);
   let [f, g] = useState(!1);
   let x = getThemeContextOrDefault();
-  let C = sO();
+  let C = useIsFullscreenSlidesView();
   let S = useCanUseDevModeDemoFile();
   let j = useCallback(() => {
     jS();
@@ -716,18 +716,18 @@ export function $$t80({
         return null != r && new Date(r).getTime() >= e;
       }, [r]);
       return useCallback((r, n, a, o) => {
-        t.keyboard_user_first_detection || o || !s ? r !== KeyboardLayout.US_QWERTY || o || n !== KeyboardLayout.UNKNOWN ? r && n !== KeyboardLayout.UNKNOWN ? t.keyboard_manual_supported_bell || ec(e, r, n, i) : r && n === KeyboardLayout.UNKNOWN ? t.keyboard_generic_supported_first_bell || eu(e, r, i) : CZ({
+        t.keyboard_user_first_detection || o || !s ? r !== KeyboardLayout.US_QWERTY || o || n !== KeyboardLayout.UNKNOWN ? r && n !== KeyboardLayout.UNKNOWN ? t.keyboard_manual_supported_bell || ec(e, r, n, i) : r && n === KeyboardLayout.UNKNOWN ? t.keyboard_generic_supported_first_bell || eu(e, r, i) : trackKeyboardLayoutChange({
           layout: n,
           detectedLayoutStr: a ?? void 0,
           eventName: "keyboard_change_no_bell"
-        }) : CZ({
+        }) : trackKeyboardLayoutChange({
           layout: r,
           eventName: "ignore_us_qwerty"
         }) : (e(postUserFlag({
           keyboard_user_first_detection: !0
-        })), r && (rd({
+        })), r && (updateKeyboardLayoutPreference({
           layout: r
-        }), CZ({
+        }), trackKeyboardLayoutChange({
           layout: r,
           eventName: "auto_set_new_user_layout"
         })));
@@ -999,7 +999,7 @@ export function $$t80({
       f && (f._switch_to_eraser = function () {
         if (b) return {
           success: !1,
-          error: lj.READ_ONLY_FILE,
+          error: FeatureStatusEnum.READ_ONLY_FILE,
           currentTool: "NONE"
         };
         if ("ERASER" !== C) {
@@ -1022,7 +1022,7 @@ export function $$t80({
       }, f._switch_to_previous_drawing_tool = function () {
         if (b) return {
           success: !1,
-          error: lj.READ_ONLY_FILE,
+          error: FeatureStatusEnum.READ_ONLY_FILE,
           currentTool: "NONE"
         };
         let e = Jh.get(E);
@@ -1070,7 +1070,7 @@ export function $$t80({
         });
       });
       let i = fullscreenValue.fileArrayToString(t);
-      Fullscreen?.handleOpenFromJsonString(i, wu.MOBILE_NATIVE_NAVBAR);
+      Fullscreen?.handleOpenFromJsonString(i, MobileUIStateEnum.MOBILE_NATIVE_NAVBAR);
     }, u._get_zoom_scale = () => Fullscreen?.getViewportZoomScale() ?? 1);
     f && (f._open_timer = () => {
       atomStoreManager.set(Qs, {

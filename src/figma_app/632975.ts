@@ -11,7 +11,7 @@ import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { A } from "../905/749030";
 import { lC, sr, Yc, dC, HK } from "../905/820169";
 import { qF } from "../905/943361";
-import { s1 } from "../figma_app/226737";
+import { useEffectiveThemeId } from "../figma_app/226737";
 export function $$f14({
   highlightedItemID: e,
   variables: t,
@@ -161,7 +161,7 @@ export function $$z31(e, t, r, i) {
   let l = o.data?.libraryVariables;
   let d = o.data?.libraryVariableSets;
   let [c, f] = useMemo(() => "ALL_LIBRARIES" === r.type ? [[...a, ...(l ?? [])], [...s, ...(d ?? [])]] : "LOCAL_VARIABLES" === r.type ? [a, s] : [l ?? [], d ?? []], [r.type, a, l, s, d]);
-  let E = s1();
+  let E = useEffectiveThemeId();
   let y = useOpenFileLibraryKey();
   let b = A(null, null);
   let T = useMemo(() => {

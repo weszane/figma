@@ -14,7 +14,7 @@ import { cZ } from '../figma_app/272902';
 import { jT } from '../figma_app/626177';
 import { BrowserInfo } from '../figma_app/778880';
 import { SKIP_RECORDING } from '../figma_app/878298';
-import { jr, W0 } from '../figma_app/896988';
+import { handleKeyboardEventByState, KeyboardEventResponse } from '../figma_app/896988';
 import { LS } from '../figma_app/975811';
 
 // Define interfaces for props and state to improve type safety
@@ -181,7 +181,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Original: this.onKeyDown
    */
   private onKeyDown = (e: any): any => {
-    if (jr(e, this.shouldForwardUndo()) || (this.props.onKeyDown?.(e), e.defaultPrevented)) return;
+    if (handleKeyboardEventByState(e, this.shouldForwardUndo()) || (this.props.onKeyDown?.(e), e.defaultPrevented)) return;
     this.didIncrement = false;
     const input = this.inputRef.current;
     if (e.keyCode === KeyCodes.ESCAPE) {
@@ -200,7 +200,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
       let value = this.props.property;
       try {
         value = this.props.formatter.parse(input.value || (this.props.placeholder ?? ''), normalizeValue(this.props.property) ?? undefined);
-      } catch {}
+      } catch { }
       if (value == null && !this.props.allowEmpty) return;
       if (isValidValue(value)) {
         const targets = getIncrementTargets(this.props.formatter, input);
@@ -246,7 +246,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Original: this.onKeyUp
    */
   private onKeyUp = (e: any): any => {
-    if (jr(e, this.shouldForwardUndo())) return SKIP_RECORDING;
+    if (handleKeyboardEventByState(e, this.shouldForwardUndo())) return SKIP_RECORDING;
     this.props.onKeyUp?.(e);
     const input = this.inputRef.current;
     if (!this.props.formatter.autocomplete) return SKIP_RECORDING;
@@ -357,12 +357,12 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Original: this.shouldForwardUndo
    */
   private shouldForwardUndo() {
-    if (this.state.editingValue === null) return W0.YES;
+    if (this.state.editingValue === null) return KeyboardEventResponse.YES;
     if (isValidValue(this.props.property)) {
       const formatted = this.props.property == null ? '' : this.props.formatter.format(this.props.property);
-      return this.state.editingValue === formatted ? W0.YES : W0.NO;
+      return this.state.editingValue === formatted ? KeyboardEventResponse.YES : KeyboardEventResponse.NO;
     }
-    return W0.YES;
+    return KeyboardEventResponse.YES;
   }
 
   /**
@@ -450,19 +450,19 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
  * Subclass of FormattedInput.
  * Original: $$E1
  */
-export class FormattedInputVariant1 extends FormattedInput {}
+export class FormattedInputVariant1 extends FormattedInput { }
 
 /**
  * Subclass of FormattedInput.
  * Original: $$x2
  */
-export class FormattedInputVariant2 extends FormattedInput {}
+export class FormattedInputVariant2 extends FormattedInput { }
 
 /**
  * Subclass of FormattedInput.
  * Original: $$S0
  */
-export class FormattedInputVariant3 extends FormattedInput {}
+export class FormattedInputVariant3 extends FormattedInput { }
 
 // Refactored exports with new names
 export const AN = FormattedInputVariant3;

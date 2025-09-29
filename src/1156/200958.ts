@@ -9,7 +9,7 @@ import { useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { Pp } from "../vendor/330821";
 import { fullscreenValue } from "../figma_app/455680";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
-import { H } from "../905/457575";
+import { createScopedStateWithDefault } from "../905/457575";
 import { Nm } from "../figma_app/202307";
 import { nc } from "../figma_app/570630";
 import { l as _$$l } from "../1156/531541";
@@ -18,15 +18,15 @@ import { IO } from "../figma_app/302802";
 import { oA } from "../figma_app/812915";
 import j from "../vendor/128080";
 var v = j;
-let k = H([]);
-let C = H({
+let k = createScopedStateWithDefault([]);
+let C = createScopedStateWithDefault({
   codeSnapshotKey: null,
   files: {},
   isLoading: !1,
   error: !1,
   lastAttemptedKey: null
 });
-let $$E = H({
+let $$E = createScopedStateWithDefault({
   files: {}
 });
 export function $$S0(e, t, n) {

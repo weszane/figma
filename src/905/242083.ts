@@ -12,7 +12,7 @@ import { isWidgetRendering } from '../905/2122';
 import { PluginAction } from '../905/15667';
 import { ACTIVITY_LOG_STORE, createSessionGreaterEqualKeyRange, createSessionNodeKeyRange, EDITOR_SESSIONS_STORE, executeDatabaseTransaction, getAutosaveDatabaseWithErrorHandling, NEW_FILES_STORE, NODE_CHANGES_STORE, SESSION_INDEX } from '../905/25189';
 import { handleKeyboardShortcutUsage, setKeyboardShortcutPanelTab } from '../905/26824';
-import { P as _$$P } from '../905/35881';
+import { isFullscreenSlidesView } from '../905/35881';
 import { z4 as _$$z, Ln } from '../905/37051';
 import { ModalFormContents, ModalRootComponent } from '../905/38914';
 import { ae as _$$ae } from '../905/41973';
@@ -157,7 +157,7 @@ import { a6 as _$$a2, il as _$$il, pM as _$$pM, sd as _$$sd, tS as _$$tS, dE, Fo
 import { fileKeyAtom } from '../905/662353';
 import { getResourceDataOrFallback } from '../905/663269';
 import { gG } from '../905/684180';
-import { IM } from '../905/687477';
+import { windowManagerInstance } from '../905/687477';
 import { EventEmitter } from '../905/690073';
 import { isFigmaDomain, replaceColonWithDash } from '../905/691205';
 import { getSingletonSceneGraph, ReduxSceneGraph } from '../905/700578';
@@ -247,7 +247,7 @@ import { o$ as _$$o$, t4 as _$$t2, C9, K9, ku, uR, W_, wi } from '../figma_app/8
 import { parseEditorStateToPlainText } from '../figma_app/9619';
 import { canEditBasedOnPlan, checkZoomWidgetAccess, isExportRestricted } from '../figma_app/12796';
 import { bJ as _$$bJ } from '../figma_app/16595';
-import { sO as _$$sO } from '../figma_app/21029';
+import { useIsFullscreenSlidesView } from '../figma_app/21029';
 import { atomStoreManager, useAtomWithSubscription } from '../figma_app/27355';
 import { initializeAssetMirrorManager } from '../figma_app/31188';
 import { LibraryKeyToFileLink } from '../figma_app/43951';
@@ -346,7 +346,7 @@ import { isAIFeaturesDisabled, isEditDisabled, isLlamaEnabledForOrg } from '../f
 import { EA } from '../figma_app/462456';
 import { debug, throwTypeError } from '../figma_app/465776';
 import { T as _$$T2 } from '../figma_app/472024';
-import { rd as _$$rd, v7 } from '../figma_app/475303';
+import { updateKeyboardLayoutPreference, getCurrentKeyboardLayout } from '../figma_app/475303';
 import { _ as _$$_2 } from '../figma_app/485258';
 import { pP } from '../figma_app/492354';
 import { SavepointModalContainer } from '../figma_app/504415';
@@ -434,7 +434,7 @@ import { isRecordingEnabled } from '../figma_app/878298';
 import { bJ } from '../figma_app/881578';
 import { getInstanceKeys, getSingleSelectedKey, selectSceneGraph } from '../figma_app/889655';
 import { a as _$$a } from '../figma_app/894185';
-import { f7 } from '../figma_app/896988';
+import { forwardKeyboardEvent } from '../figma_app/896988';
 import { isInteractionPathCheck } from '../figma_app/897289';
 import { i as _$$i3 } from '../figma_app/904127';
 import { h as _$$h2 } from '../figma_app/907304';
@@ -2762,7 +2762,7 @@ let aO = registerModal(e => {
     ...e,
     preventUserClose: t
   });
-  let l = _$$sO();
+  let l = useIsFullscreenSlidesView();
   let d = selectCurrentFile();
   let c = Wj();
   let [p, m] = useState(l ? 'pptx' : 'pdf');
@@ -3336,7 +3336,7 @@ function sN(e) {
     constructor() {
       super(...arguments);
       this.EXIF = ImageOrientationUtils;
-      this.HTMLWindowBindings = IM;
+      this.HTMLWindowBindings = windowManagerInstance;
       this.jsValueHelp = sT.instance();
     }
   };
@@ -3364,7 +3364,7 @@ function sP(e) {
       };
       this._fileLoadTime = null;
       this.forwardKeyboardEvent = e => {
-        f7(e);
+        forwardKeyboardEvent(e);
       };
       this.onReady = () => this._readyPromise;
       this.isReady = () => this._fullscreenIsReady && fullscreenCrashHandler.getFullscreenCrashState() === 'ok' && !!Fullscreen;
@@ -6138,10 +6138,10 @@ let lX = class e extends sP(sN(sR)) {
     }
   }
   getKeyboardLayout() {
-    return v7();
+    return getCurrentKeyboardLayout();
   }
   setKeyboardLayoutPreference(e) {
-    return _$$rd({
+    return updateKeyboardLayoutPreference({
       layout: e
     });
   }
@@ -6751,7 +6751,7 @@ let lX = class e extends sP(sN(sR)) {
             isDevModeOverview: m,
             devModeFocusId: h
           });
-          d = m ? getI18nString('desktop_bindings.visual_bell.summary_link_copied') : a?.type === 'FRAME' ? getI18nString('desktop_bindings.interstitial.frame_link_copied') : a?.type === 'SECTION' ? getI18nString('desktop_bindings.interstitial.section_link_copied') : r.appModel.pagesList.length > 1 ? getI18nString('desktop_bindings.interstitial.page_link_copied') : _$$P(this._state.selectedView) ? getI18nString('desktop_bindings.visual_bell.slide_deck_link_copied') : getI18nString('desktop_bindings.visual_bell.file_link_copied');
+          d = m ? getI18nString('desktop_bindings.visual_bell.summary_link_copied') : a?.type === 'FRAME' ? getI18nString('desktop_bindings.interstitial.frame_link_copied') : a?.type === 'SECTION' ? getI18nString('desktop_bindings.interstitial.section_link_copied') : r.appModel.pagesList.length > 1 ? getI18nString('desktop_bindings.interstitial.page_link_copied') : isFullscreenSlidesView(this._state.selectedView) ? getI18nString('desktop_bindings.visual_bell.slide_deck_link_copied') : getI18nString('desktop_bindings.visual_bell.file_link_copied');
           break;
         default:
           throwTypeError(t);

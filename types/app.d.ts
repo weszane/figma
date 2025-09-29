@@ -3429,6 +3429,7 @@ export interface AllUser {
 }
 
 export interface MultiplayerEmoji {
+  imageUrl: any
   type: string
   wheelType: string
 }
@@ -4104,6 +4105,7 @@ export interface TwoFactorAuth {
 }
 
 export interface UniversalInsertModal {
+  initialFdView: any
   showing: boolean
   pinned: string
   initialX: number

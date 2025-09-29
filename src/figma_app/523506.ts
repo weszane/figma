@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, createRef, useRef, useContext } from "react";
-import { h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 let $$s = createContext(createRef());
 export function $$o1({
   children: e
@@ -13,7 +13,7 @@ export function $$o1({
 }
 export function $$l0(e) {
   let t = useContext($$s);
-  h(() => {
+  useSingleEffect(() => {
     e.current && "" !== e.current.value && !1 === t.current && e.current.select();
     t.current = !0;
   });

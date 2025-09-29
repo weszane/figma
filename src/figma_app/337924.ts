@@ -4,7 +4,7 @@ import { setTagGlobal, reportError } from "../905/11";
 import { renderI18nText } from "../905/303541";
 import { ErrorType } from "../905/969273";
 import { _0, PI, sZ, Gx } from "../figma_app/948389";
-import { T_ } from "../figma_app/883638";
+import { ChatErrorType } from "../figma_app/883638";
 let c = {
   [ErrorType.RATE_LIMIT_EXCEEDED]: renderI18nText("figmake.errors.generic"),
   [ErrorType.CONTENT_LENGTH_LIMIT]: renderI18nText("ai.error.chat_content_length_limit"),
@@ -17,10 +17,10 @@ let c = {
   [ErrorType.UNCLOSED_TAGS_BENIGN]: renderI18nText("ai.error.generic")
 };
 let u = {
-  [T_.ATTACHMENTS_TOO_LARGE]: renderI18nText("ai.error.attachments_too_large"),
-  [T_.MAX_CONTENT_LENGTH_EXCEEDED]: renderI18nText("ai.error.chat_content_length_limit"),
-  [T_.PROMPT_ENHANCEMENT_FAILED]: renderI18nText("ai.error.prompt_enhancement_failed"),
-  [T_.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK]: renderI18nText("ai.error.retry_with_image_attachments")
+  [ChatErrorType.ATTACHMENTS_TOO_LARGE]: renderI18nText("ai.error.attachments_too_large"),
+  [ChatErrorType.MAX_CONTENT_LENGTH_EXCEEDED]: renderI18nText("ai.error.chat_content_length_limit"),
+  [ChatErrorType.PROMPT_ENHANCEMENT_FAILED]: renderI18nText("ai.error.prompt_enhancement_failed"),
+  [ChatErrorType.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK]: renderI18nText("ai.error.retry_with_image_attachments")
 };
 export function $$p2({
   error: e

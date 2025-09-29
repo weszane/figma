@@ -10,7 +10,7 @@ import { WAFImage } from "../905/675859";
 import { getI18nString } from "../905/303541";
 import { mz } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
-import { _G, Pv } from "../905/619652";
+import { generateExportThumbnail, convertImageDataToURL } from "../905/619652";
 import { l6, c$ } from "../905/794875";
 import { eD, SL, cT } from "../905/257620";
 let E = {
@@ -199,10 +199,10 @@ export let $$P4 = forwardRef(function ({
   let [p, _] = useState(null);
   let g = useCallback(() => {
     let n = new Point(t, r ?? t);
-    let i = _G(n, e, !0, BackgroundPattern.CHECKERBOARD, !1, !1, !0, d);
+    let i = generateExportThumbnail(n, e, !0, BackgroundPattern.CHECKERBOARD, !1, !1, !0, d);
     let a = null;
     i && i.pixels && i.pixelSize && i.displaySize && (a = {
-      src: Pv(i.pixels, i.pixelSize, o),
+      src: convertImageDataToURL(i.pixels, i.pixelSize, o),
       displaySize: i.displaySize
     });
     _(a);

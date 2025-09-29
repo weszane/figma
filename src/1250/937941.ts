@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { findMatchingValue } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
-import { R } from "../905/165069";
+import { useConditionalCallback } from "../905/165069";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { DeepLinkType } from "../905/15667";
@@ -47,7 +47,7 @@ export function $$y0() {
   });
   let M = getIsUpgradeHandlerLoading() || "loading" === w.status;
   let P = y && C && !M;
-  R(() => {
+  useConditionalCallback(() => {
     if (!P || !e) {
       y && k && analyticsEventManager.trackDefinedEvent("monetization_expansion.deeplink_request_flow_invalid", {
         upgradeType: C ? k : "invalid",

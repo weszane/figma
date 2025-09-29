@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { customHistory } from "../905/612521";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { UpgradeAction } from "../905/370443";
@@ -24,7 +24,7 @@ export function $$y0(e) {
     overlay: OKV,
     priority: N.DEFAULT_MODAL
   }, [t]);
-  _$$h(() => {
+  useSingleEffect(() => {
     show({
       canShow: e => !e
     });

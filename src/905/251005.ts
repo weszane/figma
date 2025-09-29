@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createRef, Children, cloneElement, PureComponent } from "react";
 import a from "classnames";
 import { KeyCodes } from "../905/63728";
-import { RecordingPureComponent, handleGenericEvent, handleKeyboardEvent, generateRecordingKey } from "../figma_app/878298";
+import { RecordingPureComponent, handleGenericEvent, hookForKeyboard, generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { normalizeValue } from "../905/216495";
@@ -36,7 +36,7 @@ class g extends RecordingPureComponent {
     this.onFocus = handleGenericEvent(this, "focus", e => {
       this.props.onFocus?.(e);
     });
-    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
+    this.onKeyDown = hookForKeyboard(this, "keydown", e => {
       if (!this.props.disabled) switch (e.keyCode) {
         case KeyCodes.ENTER:
         case KeyCodes.RIGHT_ARROW:

@@ -9,7 +9,7 @@ import { getI18nString } from "../905/303541";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { s3 } from "../figma_app/171177";
 import { z6 } from "../figma_app/846841";
-import { _9 } from "../figma_app/119420";
+import { useAttachments } from "../figma_app/119420";
 import { Pe } from "../1156/713925";
 import { E } from "../1156/298326";
 export let $$f0 = registerModal(function (e) {
@@ -17,7 +17,7 @@ export let $$f0 = registerModal(function (e) {
   let {
     claimAPendingAttachmentOrMakeOne,
     setAttachments
-  } = _9(e.chatMessagesNodeGuid || "");
+  } = useAttachments(e.chatMessagesNodeGuid || "");
   let {
     addCommunityAttribution
   } = Pe();

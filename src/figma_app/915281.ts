@@ -3,7 +3,7 @@ import { createContext, useState, useCallback, useMemo, useEffect, useContext } 
 import { debounce } from "../905/915765";
 import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { M } from "../figma_app/749682";
 import { loadStyleCanvases } from "../figma_app/646357";
 let u = createContext({
@@ -68,7 +68,7 @@ function h({
       registerStyle,
       unregisterStyle
     } = useContext(u);
-    _$$h(() => (registerStyle(e), () => {
+    useSingleEffect(() => (registerStyle(e), () => {
       unregisterStyle(e);
     }));
   }({

@@ -96,7 +96,7 @@ import { e as _$$e9 } from '../905/149844';
 import { hideModal, hideModalHandler, popModalStack, showModal, showModalConditional, showModalHandler } from '../905/156213';
 import { TrackedLinkButton } from '../905/160095';
 import { ServiceCategories } from '../905/165054';
-import { R as _$$R6 } from '../905/165069';
+import { useConditionalCallback } from '../905/165069';
 import { EmbedOption, EmbedProvider, EmbedParamKey } from '../905/165465';
 import { UpsellModalType } from '../905/165519';
 import { setupToggleButton } from '../905/167712';
@@ -114,7 +114,7 @@ import { h as _$$h2 } from '../905/200386';
 import { Hz, Of, Yw } from '../905/201596';
 import { q as _$$q4 } from '../905/202542';
 import { FormattedInputVariant1 } from '../905/203369';
-import { h as _$$h3 } from '../905/791079';
+import { useSingleEffect } from '../905/791079';
 import { ResizeDragContext } from '../905/208152';
 import { N2 } from '../905/213527';
 import { isInvalidValue, isValidValue, MIXED_MARKER, toArray, valueOrFallback } from '../905/216495';
@@ -488,7 +488,7 @@ import { PageTypeEnum } from '../figma_app/10554';
 import { lW as _$$lW2 } from '../figma_app/11182';
 import { dC as _$$dC, iO as _$$iO, lf as _$$lf, lT as _$$lT, Mj as _$$Mj, ou as _$$ou, rx as _$$rx, UU } from '../figma_app/11329';
 import { hv as _$$hv, YZ as _$$YZ, BW, WD, z_ } from '../figma_app/11610';
-import { EI } from '../figma_app/21029';
+import { useIsFullscreenReady } from '../figma_app/21029';
 import { a1 as _$$a } from '../figma_app/23780';
 import { mg as _$$mg, atom, atomStoreManager, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Ut, Xr } from '../figma_app/27355';
 import { MGP } from '../figma_app/27776';
@@ -504,7 +504,7 @@ import { H as _$$H3 } from '../figma_app/47866';
 import { z as _$$z } from '../figma_app/47967';
 import { kF as _$$kF2 } from '../figma_app/48566';
 import { rH as _$$rH } from '../figma_app/49598';
-import { R as _$$R7 } from '../figma_app/53049';
+import { loadCanvasDataAsync } from '../figma_app/53049';
 import { FEditorType, mapFileTypeToEditorType } from '../figma_app/53721';
 import { BannerFullWidth, BannerInline, BannerInsetModal } from '../figma_app/59509';
 import { cF as _$$cF2, Az } from '../figma_app/61758';
@@ -527,7 +527,7 @@ import { YOUTUBE_EMBED_CONFIG_HTML, YOUTUBE_EMBED_CONFIG_URL } from '../figma_ap
 import { b5 as _$$b4, hi as _$$hi, iI as _$$iI, T_ as _$$T_, wh as _$$wh, xB as _$$xB, yq as _$$yq, zl as _$$zl, DW, Jl, LS, OY, UM, US, Wn, Xq, Y3, ZY, Zy } from '../figma_app/114522';
 import { booleanAtomFamily, Nl, sitesViewSetterAtomFamily, ViewActionType } from '../figma_app/115923';
 import { bm as _$$bm, g$ as _$$g$, Lc } from '../figma_app/116234';
-import { _9 as _$$_6, qQ } from '../figma_app/119420';
+import { useAttachments, MAX_ATTACHMENTS } from '../figma_app/119420';
 import { n8 as _$$n7, Py as _$$Py, xG as _$$xG } from '../figma_app/121043';
 import { I as _$$I } from '../figma_app/131348';
 import { cu as _$$cu, rh as _$$rh, Mg } from '../figma_app/139865';
@@ -545,7 +545,7 @@ import { _t as _$$_t, dH as _$$dH, hr as _$$hr, RT as _$$RT, S5 as _$$S4, uw as 
 import { JT as _$$JT } from '../figma_app/173838';
 import { OU as _$$OU } from '../figma_app/175258';
 import { N as _$$N3 } from '../figma_app/176280';
-import { aQ as _$$aQ } from '../figma_app/176302';
+import { isSendToMakeCompletedAtom } from '../figma_app/176302';
 import { U1 } from '../figma_app/178419';
 import { LengthInput, ExpressionInput, ScrubbableInput, OpacityInput, NumericDropdownInput, PercentageBaseInput, NumericInput, TimeMillisecondsInput, AngleInput } from '../figma_app/178475';
 import { R as _$$R2 } from '../figma_app/184628';
@@ -561,7 +561,7 @@ import { m as _$$m4 } from '../figma_app/203842';
 import { b as _$$b12 } from '../figma_app/203891';
 import { TS as _$$TS } from '../figma_app/205280';
 import { q as _$$q5 } from '../figma_app/216831';
-import { $K, me as _$$me } from '../figma_app/223206';
+import { sessionIdAtom, copyToSitesFromDesignAtom } from '../figma_app/223206';
 import { gc as _$$gc, tC as _$$tC, w5 as _$$w5, B8, F$, GR } from '../figma_app/229710';
 import { c$ as _$$c$4, gw as _$$gw, wv as _$$wv } from '../figma_app/236327';
 import { P as _$$P6 } from '../figma_app/237095';
@@ -774,7 +774,7 @@ import { y as _$$y3 } from '../figma_app/873852';
 import { wh as _$$wh2, AP, OG } from '../figma_app/876589';
 import { createRecordingCallback, generateRecordingKey, SKIP_RECORDING, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
 import { w as _$$w7 } from '../figma_app/883622';
-import { jr as _$$jr2, W0 as _$$W7 } from '../figma_app/896988';
+import { handleKeyboardEventByState, KeyboardEventResponse } from '../figma_app/896988';
 import { isInteractionPathCheck, PN } from '../figma_app/897289';
 import { i as _$$i8 } from '../figma_app/901786';
 import { trackDefinedFileEventWithStore, trackFileEventWithStore, trackFileEventWithUser } from '../figma_app/901889';
@@ -2226,7 +2226,7 @@ function iD({
   let I = useDropdown('OPEN_IN_CODE_VIEW_DROPDOWN');
   let E = useAtomWithSubscription(DW);
   let N = Xr(YD);
-  _$$h3(() => {
+  useSingleEffect(() => {
     N(!1);
   });
   let R = iM({
@@ -2677,7 +2677,7 @@ function nI() {
   let d = !s?.canEdit;
   let c = s && s.teamId && a;
   let u = !!(d && c && _$$W3());
-  return (_$$h3(() => {
+  return (useSingleEffect(() => {
     u && show();
   }), u && r) ? jsx(_$$c7, {
     open: isShowing,
@@ -10826,7 +10826,7 @@ function c8({
     attachments,
     clearAttachment,
     createLoadedAttachment
-  } = _$$_6(e);
+  } = useAttachments(e);
   let m = _$$S7({
     textareaRef: d,
     maxHeight: 200
@@ -10844,9 +10844,9 @@ function c8({
     e.preventDefault();
     f || (t(), Uy.trigger('submit'));
   };
-  let b = attachments.length < qQ;
+  let b = attachments.length < MAX_ATTACHMENTS;
   let y = async e => {
-    if (e.files.length === 0 || e.files.length + attachments.length > qQ) {
+    if (e.files.length === 0 || e.files.length + attachments.length > MAX_ATTACHMENTS) {
       r(!1);
       return;
     }
@@ -11708,7 +11708,7 @@ let u$ = {
 function uU() {
   let e = _$$ry();
   let t = selectUserFlag('seen_figmake_send_to_make_onboarding');
-  let i = useAtomWithSubscription(_$$aQ);
+  let i = useAtomWithSubscription(isSendToMakeCompletedAtom);
   let {
     isShowing,
     complete,
@@ -12199,7 +12199,7 @@ async function u5({
   selectedNodeId: t
 }) {
   let i = [t];
-  let n = await _$$R7({
+  let n = await loadCanvasDataAsync({
     fileKey: e,
     selectedGuids: i
   });
@@ -18080,7 +18080,7 @@ let gN = ({
         g(!0, p.current?.value, n);
       } else {
         if (e.keyCode !== KeyCodes.TAB) {
-          _$$jr2(e, _$$W7.NO);
+          handleKeyboardEventByState(e, KeyboardEventResponse.NO);
           return SKIP_RECORDING;
         }
         e.preventDefault();
@@ -19365,7 +19365,7 @@ function fd() {
   } = _$$V4();
   let r = useCurrentPublicPlan('SitesPaywallOverlay');
   let o = useIsStarterPlan(r).unwrapOr(!1);
-  return (_$$h3(() => {
+  return (useSingleEffect(() => {
     isEligible && o && show();
   }), isEligible && teamId && o) ? jsx(_$$W8, {
     open: isShowing,
@@ -19400,7 +19400,7 @@ function fy() {
     overlay: sfE,
     priority: _$$N5.DEFAULT_MODAL
   }, [t, i]);
-  _$$h3(() => {
+  useSingleEffect(() => {
     r || show({
       canShow: (e, t) => {
         let i = t.tier === Agb.STARTER && !getFeatureFlags().sts_starter_enabled || t.tier === Agb.STUDENT;
@@ -19741,7 +19741,7 @@ function fI({
   nextStepType: r
 }) {
   let o = useDispatch();
-  _$$h3(() => {
+  useSingleEffect(() => {
     o(postUserFlag({
       [R0]: !0
     }));
@@ -22209,7 +22209,7 @@ function bA({
   let t = trackFileEventWithStore();
   let i = Xr(P4);
   let n = useDispatch();
-  _$$h3(() => t('sites_template_picker_shown'));
+  useSingleEffect(() => t('sites_template_picker_shown'));
   return jsx(ModalContainer, {
     'className': 'sites_template_modal--templateModal--a3YSn',
     'size': 900,
@@ -22238,12 +22238,12 @@ function bA({
 }
 function bL() {
   let e = useAppModelProperty('isReadOnly');
-  let t = EI();
+  let t = useIsFullscreenReady();
   let i = useAtomWithSubscription(overlayStateAtom);
   let n = userFlagExistsAtomFamily(_$$at);
   let a = useAtomWithSubscription(n);
   let s = a.status === 'loaded' && !0 === a.data;
-  let r = useAtomWithSubscription(_$$me);
+  let r = useAtomWithSubscription(copyToSitesFromDesignAtom);
   let d = selectCurrentFile();
   let c = d?.key;
   let u = useSceneGraphSelector();
@@ -30830,15 +30830,15 @@ let T2 = memo(({
   Gb(_);
   (function () {
     let e = performance.now();
-    let t = EI();
+    let t = useIsFullscreenReady();
     let i = selectCurrentFile();
-    let n = useAtomWithSubscription(_$$me);
-    let l = Xr($K);
+    let n = useAtomWithSubscription(copyToSitesFromDesignAtom);
+    let l = Xr(sessionIdAtom);
     let a = useSceneGraphSelector();
     let d = useDispatch();
     let [c, x] = useAtomValueAndSetter(u3);
     !c && n && x(!0);
-    _$$R6(() => {
+    useConditionalCallback(() => {
       try {
         debugState.dispatch(VisualBellActions.enqueue({
           message: getI18nString('sites.metadata.copying_frames'),

@@ -91,7 +91,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { Point } from "../905/736624";
 import { o as _$$o } from "../9410/935965";
 import { fullscreenValue } from "../figma_app/455680";
-import { jS, Pv } from "../905/619652";
+import { generatePaintIcon, convertImageDataToURL } from "../905/619652";
 import { F as _$$F3 } from "../905/258517";
 import { B as _$$B } from "../figma_app/397954";
 import { uM, Iz, g5, wv } from "../905/888175";
@@ -1424,13 +1424,13 @@ function tN() {
       paintHex: n,
       imageSrc: function (e) {
         let t = (e.originalImageWidth || 244) / (e.originalImageHeight || 244);
-        let i = jS(e, new Point(244 * t, 244), {
+        let i = generatePaintIcon(e, new Point(244 * t, 244), {
           r: 0,
           g: 0,
           b: 0,
           a: 0
         });
-        return i && i.pixels && i.pixelSize ? Pv(i.pixels, i.pixelSize) : null;
+        return i && i.pixels && i.pixelSize ? convertImageDataToURL(i.pixels, i.pixelSize) : null;
       }(washiTapePaint)
     });
   }, [e, i, s, washiTapePaint, a]);

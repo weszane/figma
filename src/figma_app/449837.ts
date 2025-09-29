@@ -12,12 +12,12 @@ import { AffineTransform } from "../905/583953";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
 import { wY, cU } from "../figma_app/708845";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { KeyCodes } from "../905/63728";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { Q1 } from "../905/619652";
+import { createCanvasWithImageData } from "../905/619652";
 import { Z } from "../905/823863";
 import { A as _$$A } from "../2854/952200";
 import { A as _$$A2 } from "../1617/954184";
@@ -152,7 +152,7 @@ export function $$k3(e) {
   let U = e => {
     j(e.ctrlKey);
   };
-  _$$h(() => (document.addEventListener("keydown", U), document.addEventListener("keyup", U), () => {
+  useSingleEffect(() => (document.addEventListener("keydown", U), document.addEventListener("keyup", U), () => {
     document.removeEventListener("keyup", U);
     document.removeEventListener("keydown", U);
   }));
@@ -367,7 +367,7 @@ export function $$F1(e) {
       setContainers(e => (e.$$delete(r), e));
     };
   }, [setContainers, height, width, scale, c, e.paddingPixels]);
-  let A = useMemo(() => data instanceof Uint8Array ? Q1(data, new Point(width, height)) : null, [data, width, height]);
+  let A = useMemo(() => data instanceof Uint8Array ? createCanvasWithImageData(data, new Point(width, height)) : null, [data, width, height]);
   let x = Math.floor(width * zoomPercentage / 100);
   let N = Math.floor(height * zoomPercentage / 100);
   let C = useMemo(() => {
@@ -493,12 +493,12 @@ export function $$U2(e) {
   let v = useMemo(() => d && d.data.length > 0 ? {
     canvasSpaceBounds: d.canvasSpaceBounds,
     scale: d.scale,
-    canvas: Q1(d.data, new Point(d.width, d.height))
+    canvas: createCanvasWithImageData(d.data, new Point(d.width, d.height))
   } : null, [d]);
   let A = useMemo(() => c && c.data.length > 0 ? {
     canvasSpaceBounds: c.canvasSpaceBounds,
     scale: c.scale,
-    canvas: Q1(c.data, new Point(c.width, c.height))
+    canvas: createCanvasWithImageData(c.data, new Point(c.width, c.height))
   } : null, [c]);
   let x = useMemo(() => {
     if (!a.current || isLoading || !s) return null;

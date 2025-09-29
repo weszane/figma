@@ -27,10 +27,10 @@ import { D as _$$D } from "../figma_app/451499";
 import { stopPropagation } from "../figma_app/753501";
 import { A as _$$A2 } from "../905/639174";
 import { fullscreenValue } from "../figma_app/455680";
-import { f7 } from "../figma_app/896988";
+import { forwardKeyboardEvent } from "../figma_app/896988";
 import { getImageManager } from "../figma_app/624361";
 import { getImageOrVideoPaint, rotatePaint } from "../figma_app/385874";
-import { Sl } from "../905/619652";
+import { createNodeChangeMessage } from "../905/619652";
 import { Zr } from "../figma_app/678782";
 import { J as _$$J } from "../905/95677";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -74,7 +74,7 @@ export function $$ey2(e) {
 export async function $$eb0(e) {
   let t = Array.from(e.animatedImage.hash).map(e => e.toString(16).padStart(2, "0")).join("");
   await getImageManager().loadImageByHash(t);
-  let r = Sl(e);
+  let r = createNodeChangeMessage(e);
   return SceneNodeCpp.requestGIFData(r);
 }
 export function $$eT3(e) {
@@ -646,7 +646,7 @@ export function $$eN5({
         hints: [0],
         htmlAttributes: {
           onKeyDownCapture: e => {
-            fullscreenValue.isReady() && f7(e);
+            fullscreenValue.isReady() && forwardKeyboardEvent(e);
           }
         },
         max: t,

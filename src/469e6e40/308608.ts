@@ -9,7 +9,7 @@ import { ResourceStatus } from "../905/957591";
 import { parsePxNumber } from "../figma_app/783094";
 import { customHistory } from "../905/612521";
 import { useSingleEffect } from "../905/791079";
-import { R as _$$R } from "../905/165069";
+import { useConditionalCallback } from "../905/165069";
 import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
 import { selectExperimentConfigHook } from "../figma_app/594947";
@@ -587,7 +587,7 @@ export function $$eD0({
     }
     to.requestId && e(to.requestId);
   }, [to.requestId, z]);
-  _$$R(() => {
+  useConditionalCallback(() => {
     if (to.requestId && to.request) {
       let e = to.request.requestableOrgUser?.user?.name ?? to.request.requestableTeamUser?.user?.name ?? "";
       tP({
@@ -648,7 +648,7 @@ export function $$eD0({
     return a.sort((e, t) => Q === i5.NEWEST_FIRST ? t.updatedAt.getTime() - e.updatedAt.getTime() : e.updatedAt.getTime() - t.updatedAt.getTime());
   }, [ti, tt.data, Q, e, to.requestId, eU]);
   let ty = useMemo(() => new Set(tj?.filter(e => e.licenseType === ProductAccessMap.DESIGN && e.message?.includes("Dev Mode")).map(e => e.id)), [tj]);
-  _$$R(() => {
+  useConditionalCallback(() => {
     let e = getQueryParam("viewRequestId");
     let t = getQueryParam("dashEntryPoint");
     if (!e) return;

@@ -6,7 +6,7 @@ import { debugState } from "../905/407919";
 import { isEditDisabled } from "../figma_app/459490";
 import { u4 } from "../figma_app/991591";
 import { zE } from "../905/738636";
-import { s5 } from "../figma_app/223206";
+import { figjamCreateSlidesOutlineAtom } from "../figma_app/223206";
 import { getPermissionsAndView } from "../905/766303";
 import { dh } from "../figma_app/186343";
 import { openFileKeyAtom, openFileAtom } from "../figma_app/516028";
@@ -69,7 +69,7 @@ function I({
   if (!A({
     checkIsViewer: a
   })) return;
-  let o = atomStoreManager.set(s5, e);
+  let o = atomStoreManager.set(figjamCreateSlidesOutlineAtom, e);
   r(zE({
     state: t,
     from: i,

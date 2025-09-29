@@ -79,7 +79,7 @@ import { useCurrentFileWorkshopModeStatus } from '../figma_app/789';
 import { isCommunityResourceSubscriptionActive } from '../figma_app/4253';
 import { C9 } from '../figma_app/8833';
 import { isExternalRestricted } from '../figma_app/12796';
-import { sO } from '../figma_app/21029';
+import { useIsFullscreenSlidesView } from '../figma_app/21029';
 import { f as _$$f2 } from '../figma_app/24747';
 import { atomStoreManager, useAtomWithSubscription } from '../figma_app/27355';
 import { t as _$$t3 } from '../figma_app/32680';
@@ -1462,7 +1462,7 @@ let nt = {
     let _ = ac();
     let u = useIsCanvasEditDisabled();
     let m = getCurrentFileType();
-    let g = sO();
+    let g = useIsFullscreenSlidesView();
     let f = useIsSelectedViewFullscreenCooper();
     let h = selectCurrentUser();
     let b = h?.id && r && r.publishedByUserId === h.id;

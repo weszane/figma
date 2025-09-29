@@ -58,7 +58,7 @@ import { B as _$$B } from "../905/229357";
 import { RC } from "../905/579068";
 import { isSitesFeatureEnabled } from "../905/561485";
 import { c as _$$c } from "../figma_app/73139";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { Rc } from "../figma_app/634146";
 import { zK, lk } from "../905/182453";
 import { g as _$$g } from "../figma_app/638268";
@@ -522,7 +522,7 @@ export let $$ey0 = memo(e => {
   let s = useDispatch();
   let o = normalizeValue(_$$b("guid"));
   let l = WH(e.inheritStyleKey, e.inheritStyleID, e.styleType);
-  let d = sO();
+  let d = useIsFullscreenSlidesView();
   return jsx(eA, {
     ...r,
     ...e,

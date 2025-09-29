@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { ColorSpaceEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { RecordingPureComponent, handlePointerEvent, SKIP_RECORDING, handleWheelEvent, handleKeyboardEvent } from "../figma_app/878298";
+import { RecordingPureComponent, handlePointerEvent, SKIP_RECORDING, handleWheelEvent, hookForKeyboard } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { n as _$$n } from "../905/734251";
 import { colorCSSManipulatorInstance } from "../905/989956";
@@ -155,7 +155,7 @@ class f extends RecordingPureComponent {
         ctrlKey: e.ctrlKey
       })
     });
-    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
+    this.onKeyDown = hookForKeyboard(this, "keydown", e => {
       e.stopPropagation();
       this.props.keyDownCallback(e);
     });

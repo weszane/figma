@@ -158,7 +158,8 @@ import { b as _$$b2 } from '../905/874849';
 import { $ as _$$$2 } from '../905/922405';
 import { hideDropdownAction } from '../905/929976';
 import { I as _$$I } from '../905/932503';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { O as _$$O4 } from '../905/936515';
 import { U as _$$U2 } from '../905/944163';
 import { dL, qz } from '../905/944871';
@@ -197,7 +198,7 @@ import { getAnticipationConfig } from '../figma_app/407767';
 import { cortexAPI } from '../figma_app/432652';
 import { fullscreenValue } from '../figma_app/455680';
 import { isZoomIntegration, IntegrationUtils } from '../figma_app/469876';
-import { xt } from '../figma_app/475303';
+import { createKeyboardLayoutMenuOptions } from '../figma_app/475303';
 import { useCurrentFileKey } from '../figma_app/516028';
 import { hasKey } from '../figma_app/528509';
 import { sendBackToFilesAction } from '../figma_app/564528';
@@ -6100,7 +6101,7 @@ export function $$nN0(e) {
         name: 'labs',
         children: n
       }];
-    }()), ...nT([WB()]), ...nT(xt()), {
+    }()), ...nT([WB()]), ...nT(createKeyboardLayoutMenuOptions()), {
       name: 'accessibility-settings',
       flags: ['whiteboard', ...conditionalFeatureFlag('a11y_design_dom_mirror', ['design', 'dev_handoff'], []), ...conditionalFeatureFlag('slides_editor_a11y', ['slides'], []), ...conditionalFeatureFlag('fpl_enhanced_contrast_toggle', ['edit', 'sites', 'slides', 'cooper', 'design', 'dev_handoff', 'figmake'], [])].filter(isNotNullish),
       callback: (e, t, i) => {

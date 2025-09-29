@@ -12,7 +12,7 @@ import { wS } from "../figma_app/221240";
 import { teamLibraryCache } from "../figma_app/80990";
 import { getImageManager } from "../figma_app/624361";
 import { k } from "../figma_app/449815";
-import { Pv } from "../905/619652";
+import { convertImageDataToURL } from "../905/619652";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { u2 } from "../figma_app/807786";
 import { selectSingleSelectedNode } from "../figma_app/889655";
@@ -50,7 +50,7 @@ function S(e) {
     let t = Fullscreen.generatePlaygroundThumbnail(e ?? null);
     let a = Fullscreen.getPlaygroundNodeData();
     t.pixels?.length > 0 ? (n({
-      src: Pv(t.pixels, new Point(t.width, t.height)),
+      src: convertImageDataToURL(t.pixels, new Point(t.width, t.height)),
       width: t.width / t.scale,
       height: t.height / t.scale
     }), r(a), p(!1), g(!0)) : p(!0);

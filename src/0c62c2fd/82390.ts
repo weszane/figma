@@ -473,7 +473,7 @@ import { lg as _$$lg, ng as _$$ng2 } from '../figma_app/205827';
 import { selectPermissionsState } from '../figma_app/212807';
 import { DropdownThemeProvider } from '../figma_app/215667';
 import { Dw as _$$Dw, sz as _$$sz } from '../figma_app/216696';
-import { bW } from '../figma_app/223206';
+import { orgTemplatePickerViewAtom } from '../figma_app/223206';
 import { vt } from '../figma_app/231614';
 import { c$ as _$$c$, ms as _$$ms, MM, Ve } from '../figma_app/236327';
 import { fetchTeamMembersThunk, getTeamAction, postTeamAction, restoreTeamThunk, setTeamCreationLoadingAction } from '../figma_app/240735';
@@ -8458,7 +8458,7 @@ function dn({
         return !0;
     }
   });
-  let [c, u] = useAtomValueAndSetter(bW);
+  let [c, u] = useAtomValueAndSetter(orgTemplatePickerViewAtom);
   let m = u({
     showOrgTemplateView: !0
   });

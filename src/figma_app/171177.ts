@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { useHandleKeyboardEvent, useHandleInputEvent, generateRecordingKey } from "../figma_app/878298";
 import { ModifierKeyCodes } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
-import { jr } from "../figma_app/896988";
+import { handleKeyboardEventByState } from "../figma_app/896988";
 import { KeyboardReceiver } from "../905/826900";
 import { x } from "../905/179739";
 import { AssetTabType, ExtensionFeatureKey } from "../905/946805";
@@ -27,9 +27,9 @@ export function $$_4() {
   return e;
 }
 let h = createContext({
-  registerKeyDownHandler: (e, t, r, n) => {},
-  removeKeyDownHandler: (e, t, r) => {},
-  setAllowDefaultTabOverride: e => {}
+  registerKeyDownHandler: (e, t, r, n) => { },
+  removeKeyDownHandler: (e, t, r) => { },
+  setAllowDefaultTabOverride: e => { }
 });
 export function $$m1(e) {
   let {
@@ -106,7 +106,7 @@ export function $$f5({
     });
     let r = !1;
     for (let [n, i] of l.current) n.endsWith(t) && (i(e), r = !0);
-    !r && a && (r = jr(e));
+    !r && a && (r = handleKeyboardEventByState(e));
     return r;
   }, [f, _, a]);
   let y = useHandleKeyboardEvent(t, "keydown", e => {
@@ -194,12 +194,12 @@ function b(e, t, r, n) {
           throwTypeError(e);
       }
     }(t, e)))) {
-      r(e, {
-        key,
-        modifier
-      });
-      return;
-    }
+        r(e, {
+          key,
+          modifier
+        });
+        return;
+      }
   }, [r, s]);
   useEffect(() => (n ? s.forEach(({
     key: e,

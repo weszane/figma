@@ -14,7 +14,7 @@ import { yt, WS, S7, NG } from "../7222/396421";
 import g from "classnames";
 import { getVisibleTheme } from "../905/640017";
 import { $K } from "../9410/989613";
-import { R } from "../figma_app/53049";
+import { loadCanvasDataAsync } from "../figma_app/53049";
 var _ = g;
 function y() {
   let e = "dark" === getVisibleTheme();
@@ -41,7 +41,7 @@ export function $$E2(e) {
   let i = t?.figjamFileKey || e;
   let r = t?.selectedGuids;
   return useCallback(() => {
-    if (i) return R({
+    if (i) return loadCanvasDataAsync({
       fileKey: i,
       selectedGuids: r
     });

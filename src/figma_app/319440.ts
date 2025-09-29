@@ -30,12 +30,13 @@ import { tV } from '../905/794875';
 import { K as _$$K2 } from '../905/799615';
 import { Ig } from '../905/805224';
 import { Y as _$$Y } from '../905/912236';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { styleBuilderInstance } from '../905/941192';
 import { d as _$$d } from '../905/976845';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { ay, RW } from '../figma_app/17220';
-import { sO } from '../figma_app/21029';
+import { useIsFullscreenSlidesView } from '../figma_app/21029';
 import { JQ, LB } from '../figma_app/29089';
 import { getObservableValue } from '../figma_app/84367';
 import { Jp } from '../figma_app/95266';
@@ -332,7 +333,7 @@ let ez = memo(({
   shouldShowSlotPanel: o,
   panelTitleRef: c
 }) => {
-  let u = sO();
+  let u = useIsFullscreenSlidesView();
   let p = useIsSelectedViewFullscreenCooper();
   let _ = F();
   let h = j();
@@ -496,7 +497,7 @@ function eK({
   let [o] = useSelectionProperty('rightEndCap');
   let l = isValidValue(s) ? s : void 0;
   let d = isValidValue(o) ? o : void 0;
-  let c = sO();
+  let c = useIsFullscreenSlidesView();
   let u = t || function (e, t, r, n) {
     if (function (e, t) {
       switch (e) {
@@ -700,7 +701,7 @@ function tr({
   let ea = useIsProgressBarHiddenOrLocked();
   let es = isIntegrationContext();
   let eo = isDesignFileType();
-  let el = sO();
+  let el = useIsFullscreenSlidesView();
   let ed = useIsFullscreenSitesView();
   let ep = editMode === LayoutTabType.COMMENTS || editMode === LayoutTabType.PREVIEW || editMode === LayoutTabType.BRANCHING || topLevelMode === ViewType.HISTORY || topLevelMode === ViewType.PREVIEW || topLevelMode === ViewType.DEV_HANDOFF || topLevelMode === ViewType.BRANCHING;
   let em = isWhiteboardFileType();

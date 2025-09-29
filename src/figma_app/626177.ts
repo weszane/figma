@@ -4,7 +4,7 @@ import a from "classnames";
 import { RecordableDiv, RecordableInput } from "../905/511649";
 import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
-import { jr, W0 } from "../figma_app/896988";
+import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 import { KindEnum } from "../905/129884";
 import { v } from "../905/694527";
 import { a2, kR, CZ, X0, ht, LE, l$, Zz, co, n1, zU, DS, Z4, O1, PQ, LJ, EA, _Z, fR, Pf, wh, PB } from "../figma_app/973219";
@@ -125,7 +125,7 @@ export class $$C12 extends PureComponent {
   constructor() {
     super(...arguments);
     this.onKeyDown = e => {
-      !jr(e, W0.NO) && this.props.onKeyDown && this.props.onKeyDown(e);
+      !handleKeyboardEventByState(e, KeyboardEventResponse.NO) && this.props.onKeyDown && this.props.onKeyDown(e);
     };
   }
   render() {

@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { bytesToHex } from "../905/125019";
 import { ButtonPrimitive } from "../905/632989";
 import s from "classnames";
-import { RecordingPureComponent, handleKeyboardEvent, handleMouseEvent } from "../figma_app/878298";
+import { RecordingPureComponent, hookForKeyboard, handleMouseEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -10,7 +10,7 @@ import { getI18nString } from "../905/303541";
 import { getFillColor } from "../figma_app/80990";
 import { getImageManager } from "../figma_app/624361";
 import { normalizeValue } from "../905/216495";
-import { HT, jS, Pv } from "../905/619652";
+import { generatePatternThumbnail, generatePaintIcon, convertImageDataToURL } from "../905/619652";
 import { getStyleThumbnail } from "../905/405710";
 import { M as _$$M } from "../905/771870";
 import { forwardRef } from "react";
@@ -123,7 +123,7 @@ class L extends RecordingPureComponent {
     this.getColor = () => "color" in this.props ? normalizeValue(this.props.color) : null;
     this.getOpacity = () => "color" in this.props ? normalizeValue(this.props.opacity) : null;
     this.getStyle = () => "fillStyle" in this.props ? this.props.fillStyle : null;
-    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
+    this.onKeyDown = hookForKeyboard(this, "keydown", e => {
       13 === e.keyCode && (this.props.onMouseDown && this.props.onMouseDown(e), this.props.onClick && this.props.onClick(e));
       27 === e.keyCode && (this.props.isInFPLGrid || e.currentTarget.blur());
     });
@@ -278,9 +278,9 @@ class F extends RecordingPureComponent {
 }
 function M(e) {
   if (!e || "SOLID" === e.type || "GRADIENT_LINEAR" === e.type || "GRADIENT_RADIAL" === e.type) return null;
-  if ("PATTERN" === e.type) return HT(e, P);
-  let t = jS(e, P);
-  return t && 0 !== t.pixels.length && t.pixelSize ? Pv(t.pixels, t.pixelSize) : null;
+  if ("PATTERN" === e.type) return generatePatternThumbnail(e, P);
+  let t = generatePaintIcon(e, P);
+  return t && 0 !== t.pixels.length && t.pixelSize ? convertImageDataToURL(t.pixels, t.pixelSize) : null;
 }
 function j(e) {
   if (e) switch (e.type) {

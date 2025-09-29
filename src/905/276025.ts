@@ -1,5 +1,6 @@
 import { shallowEqual } from 'react-redux'
 import { createReduxSubscriptionAtomWithState } from '../905/270322'
+import { getResourceDataOrFallback } from '../905/419236'
 import { analyticsEventManager } from '../905/449184'
 import { resolveTeamId } from '../905/515860'
 import { resourceUtils } from '../905/989992'
@@ -8,20 +9,19 @@ import { OrgByIdForPlanUserView, OrgByIdForPlanView, TeamByIdForPlanUserView, Te
 import { FOrganizationLevelType } from '../figma_app/191312'
 import { getPlanFeatures } from '../figma_app/428858'
 import { isIncludedView, isOrgView } from '../figma_app/707808'
-import { getResourceDataOrFallback } from '../905/419236'
 /**
  * Atoms and resource utilities for plan, plan public info, and plan user data.
  * Original variable names: h, g, f, _, A, y, b, v, I, E, x, S, $$w7, $$C3, $$T1, $$k5, $$R0, $$N2, $$P6, $$O4
  */
 
 /** Atom for current team id (original: h) */
-const teamIdAtom = createReduxSubscriptionAtomWithState(e => resolveTeamId(e))
+export const teamIdAtom = createReduxSubscriptionAtomWithState(e => resolveTeamId(e))
 
 /** Atom for current user org id (original: g) */
-const userOrgIdAtom = createReduxSubscriptionAtomWithState(e => e.currentUserOrgId)
+export const userOrgIdAtom = createReduxSubscriptionAtomWithState(e => e.currentUserOrgId)
 
 /** Atom for parent org id or fallback logic (original: f) */
-const parentOrgIdAtom = createReduxSubscriptionAtomWithState(e =>
+export const parentOrgIdAtom = createReduxSubscriptionAtomWithState(e =>
   e.openFile
     ? e.openFile.parentOrgId
     : e.selectedView?.view && (isIncludedView(e.selectedView) || isOrgView(e.selectedView))
@@ -30,7 +30,7 @@ const parentOrgIdAtom = createReduxSubscriptionAtomWithState(e =>
 )
 
 /** Atom for team id or fallback logic (original: _) */
-const teamOrOrgIdAtom = createReduxSubscriptionAtomWithState(e =>
+export const teamOrOrgIdAtom = createReduxSubscriptionAtomWithState(e =>
   e.openFile
     ? e.openFile.parentOrgId
       ? null

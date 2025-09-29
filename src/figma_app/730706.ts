@@ -9,11 +9,11 @@ import { getI18nString } from "../905/303541";
 import { isDesignFileType, isWhiteboardFileType } from "../figma_app/976749";
 import { YH } from "../figma_app/604494";
 import { ZU, Wg } from "../figma_app/986347";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { _B } from "../figma_app/602467";
 import { Ne, o$, mD, Tm } from "../figma_app/955528";
 export function $$f3() {
-  let e = sO();
+  let e = useIsFullscreenSlidesView();
   let t = b();
   if (e) return t;
 }

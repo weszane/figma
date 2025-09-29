@@ -1,94 +1,203 @@
-import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
-import { debugState } from "../905/407919";
-import { isFullscreenPreventEventCapture } from "../figma_app/753501";
-import { fullscreenValue } from "../figma_app/455680";
-import { BI, m0, pI } from "../figma_app/546509";
-import { xN } from "../figma_app/1722";
-let $$u0 = [DesignGraphElements.VECTOR_PENCIL, DesignGraphElements.HIGHLIGHTER, DesignGraphElements.WASHI_TAPE, DesignGraphElements.ERASER, DesignGraphElements.LASSO];
-let p = new Map([[DesignGraphElements.VECTOR_PENCIL, "set-tool-pencil"], [DesignGraphElements.HIGHLIGHTER, "set-tool-highlighter"], [DesignGraphElements.WASHI_TAPE, "set-tool-washi-tape"]]);
-export function $$_1() {
-  let e = BI();
-  let t = m0();
-  let r = pI();
-  let _ = useSelector(e => e.mirror.appModel.currentTool);
-  useEffect(() => {
-    e?.shouldAllowNativeGestures && t && (t._allow_native_gestures_on_points = e => e.every(e => !isFullscreenPreventEventCapture(document.elementFromPoint(e.x, e.y))), t._allow_web_gestures = e => {
-      fullscreenValue.allowWebGestures && fullscreenValue.allowWebGestures(e ? 1 : 0);
-    });
-  }, [e, t]);
-  useEffect(() => {
-    t && (t._toggle_auto_draw_with_pencil = e => {
-      t._auto_draw_with_pencil = e;
-    });
-  }, [t]);
-  let h = useRef(DesignGraphElements.VECTOR_PENCIL);
-  useEffect(() => {
-    t?._auto_draw_with_pencil && _ && p.get(_) && (h.current = _);
-  }, [_, t]);
-  let m = useSelector(e => e.mirror?.appModel.isReadOnly);
-  useEffect(() => {
-    if (e?.suppliesPencilSamples && t) {
-      var r = !1;
-      t._take_pencil_samples = (e, n) => {
-        if (fullscreenValue.takePencilSample && n.length > 0) {
-          let d = (e, t) => {
-            fullscreenValue.takePencilSample?.(e, t.x, t.y, t.modifierKeys ?? 0);
-          };
-          switch (e) {
-            case xN.BEGAN:
-              let _ = debugState.getState().mirror.appModel.currentTool;
-              let g = n[0];
-              if (r = !isFullscreenPreventEventCapture(document.elementFromPoint(g.x, g.y)), t._auto_draw_with_pencil) {
-                let e = $$u0.includes(_);
-                let {
-                  multiplayerEmoji
-                } = debugState.getState();
-                let n = "REACTING_OR_CHATTING" === multiplayerEmoji.type && !!multiplayerEmoji.imageUrl;
-                let i = _ === DesignGraphElements.MULTISELECT;
-                let o = p.get(h.current);
-                !o || e || n || !r || i || m || (Fullscreen?.triggerActionInUserEditScope(o, {
-                  source: "figma_mobile"
-                }), _ = DesignGraphElements.VECTOR_PENCIL);
-              }
-              if (r && (r = $$u0.includes(_)), r) {
-                d(xN.BEGAN, g);
-                for (var i = 1; i < n.length; i++) d(xN.MOVED_COALESCED, n[i]);
-              }
-              break;
-            case xN.MOVED:
-              if (r) {
-                d(xN.MOVED, n[0]);
-                for (var i = 1; i < n.length; i++) d(xN.MOVED_COALESCED, n[i]);
-              }
-              break;
-            case xN.ENDED:
-              if (r) {
-                let e = n.length - 1;
-                for (var i = 0; i < e; i++) d(xN.MOVED_COALESCED, n[i]);
-                d(xN.ENDED, n[e]);
-              }
-              r = !1;
-              break;
-            case xN.CANCELLED:
-              if (r) {
-                let e = n.length - 1;
-                for (var i = 0; i < e; i++) d(xN.MOVED_COALESCED, n[i]);
-                d(xN.CANCELLED, n[e]);
-              }
-              r = !1;
-          }
-        }
-      };
-    }
-  }, [m, e, t]);
-  useEffect(() => {
-    r && (r._take_indirect_pinch_gesture = (e, t, r, n) => {
-      fullscreenValue.takeIndirectPinchGesture && !isFullscreenPreventEventCapture(document.elementFromPoint(r.x, r.y)) && fullscreenValue.takeIndirectPinchGesture(e, t, r.x, r.y, n);
-    });
-  }, [r]);
-  return null;
+import { useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
+import { debugState } from '../905/407919'
+import { GesturePhaseEnum } from '../figma_app/1722'
+import { fullscreenValue } from '../figma_app/455680'
+import { getFigmaMobile } from '../figma_app/546509'
+import { isFullscreenPreventEventCapture } from '../figma_app/753501'
+import { DesignGraphElements, Fullscreen } from '../figma_app/763686'
+
+export const SUPPORTED_DRAWING_TOOLS = [
+  DesignGraphElements.VECTOR_PENCIL,
+  DesignGraphElements.HIGHLIGHTER,
+  DesignGraphElements.WASHI_TAPE,
+  DesignGraphElements.ERASER,
+  DesignGraphElements.LASSO,
+]
+
+const TOOL_ACTION_MAP = new Map<DesignGraphElements, string>([
+  [DesignGraphElements.VECTOR_PENCIL, 'set-tool-pencil'],
+  [DesignGraphElements.HIGHLIGHTER, 'set-tool-highlighter'],
+  [DesignGraphElements.WASHI_TAPE, 'set-tool-washi-tape'],
+])
+
+interface PencilSample {
+  x: number
+  y: number
+  modifierKeys?: number
 }
-export const H = $$u0;
-export const K = $$_1;
+
+/**
+ * Hook for handling mobile gesture interactions with drawing tools
+ * Manages pencil samples, gesture phases, and tool switching
+ */
+export function useMobileGestures() {
+  const figmaMobileInstance = getFigmaMobile()
+  const figmaMobileInstance2 = getFigmaMobile() // Second instance for specific functionality
+  const figmaMobileInstance3 = getFigmaMobile() // Third instance for pinch gestures
+  const currentTool = useSelector((state: any) => state.mirror.appModel.currentTool)
+
+  // Setup gesture allowance functions
+  useEffect(() => {
+    if (figmaMobileInstance?.shouldAllowNativeGestures && figmaMobileInstance2) {
+      figmaMobileInstance2._allow_native_gestures_on_points = (points: { x: number, y: number }[]) =>
+        points.every(point => !isFullscreenPreventEventCapture(document.elementFromPoint(point.x, point.y) as any))
+
+      figmaMobileInstance2._allow_web_gestures = (enabled: boolean) => {
+        if (fullscreenValue.allowWebGestures) {
+          fullscreenValue.allowWebGestures(enabled ? 1 : 0)
+        }
+      }
+    }
+  }, [figmaMobileInstance, figmaMobileInstance2])
+
+  // Setup auto-draw toggle function
+  useEffect(() => {
+    if (figmaMobileInstance2) {
+      figmaMobileInstance2._toggle_auto_draw_with_pencil = (enabled: boolean) => {
+        figmaMobileInstance2._auto_draw_with_pencil = enabled
+      }
+    }
+  }, [figmaMobileInstance2])
+
+  const lastValidToolRef = useRef<DesignGraphElements>(DesignGraphElements.VECTOR_PENCIL)
+
+  // Track last valid tool when auto-draw is enabled
+  useEffect(() => {
+    if (figmaMobileInstance2?._auto_draw_with_pencil && currentTool && TOOL_ACTION_MAP.get(currentTool)) {
+      lastValidToolRef.current = currentTool
+    }
+  }, [currentTool, figmaMobileInstance2])
+
+  const isReadOnly = useSelector((state: any) => state.mirror?.appModel.isReadOnly)
+
+  // Handle pencil sample collection and processing
+  useEffect(() => {
+    if (figmaMobileInstance?.suppliesPencilSamples && figmaMobileInstance2) {
+      let shouldProcessSamples = false
+
+      const sendPencilSample = (phase: GesturePhaseEnum, sample: PencilSample) => {
+        fullscreenValue.takePencilSample?.(phase, sample.x, sample.y, sample.modifierKeys ?? 0)
+      }
+
+      figmaMobileInstance2._take_pencil_samples = (phase: GesturePhaseEnum, samples: PencilSample[]) => {
+        if (!fullscreenValue.takePencilSample || samples.length === 0) {
+          return
+        }
+
+        switch (phase) {
+          case GesturePhaseEnum.BEGAN:
+            handleGestureBegan(samples, sendPencilSample, shouldProcessSamples, figmaMobileInstance2, isReadOnly, lastValidToolRef)
+            break
+
+          case GesturePhaseEnum.MOVED:
+            if (shouldProcessSamples) {
+              sendPencilSample(GesturePhaseEnum.MOVED, samples[0])
+              for (let i = 1; i < samples.length; i++) {
+                sendPencilSample(GesturePhaseEnum.MOVED_COALESCED, samples[i])
+              }
+            }
+            break
+
+          case GesturePhaseEnum.ENDED:
+            if (shouldProcessSamples) {
+              const lastIndex = samples.length - 1
+              for (let i = 0; i < lastIndex; i++) {
+                sendPencilSample(GesturePhaseEnum.MOVED_COALESCED, samples[i])
+              }
+              sendPencilSample(GesturePhaseEnum.ENDED, samples[lastIndex])
+            }
+            shouldProcessSamples = false
+            break
+
+          case GesturePhaseEnum.CANCELLED:
+            if (shouldProcessSamples) {
+              const lastIndex = samples.length - 1
+              for (let i = 0; i < lastIndex; i++) {
+                sendPencilSample(GesturePhaseEnum.MOVED_COALESCED, samples[i])
+              }
+              sendPencilSample(GesturePhaseEnum.CANCELLED, samples[lastIndex])
+            }
+            shouldProcessSamples = false
+            break
+        }
+      }
+    }
+  }, [isReadOnly, figmaMobileInstance, figmaMobileInstance2])
+
+  // Handle pinch gesture processing
+  useEffect(() => {
+    if (figmaMobileInstance3) {
+      figmaMobileInstance3._take_indirect_pinch_gesture = (
+        scale: number,
+        velocity: number,
+        point: { x: number, y: number },
+        rotation: number,
+      ) => {
+        if (fullscreenValue.takeIndirectPinchGesture
+          && !isFullscreenPreventEventCapture(document.elementFromPoint(point.x, point.y) as any)) {
+          fullscreenValue.takeIndirectPinchGesture(scale, velocity, point.x, point.y, rotation)
+        }
+      }
+    }
+  }, [figmaMobileInstance3])
+
+  return null
+}
+
+/**
+ * Handle the beginning of a gesture - determines if processing should continue
+ * and handles auto-draw tool switching logic
+ */
+function handleGestureBegan(
+  samples: PencilSample[],
+  sendPencilSample: (phase: GesturePhaseEnum, sample: PencilSample) => void,
+  shouldProcessSamples: boolean,
+  figmaMobileInstance: any,
+  isReadOnly: boolean,
+  lastValidToolRef: React.RefObject<DesignGraphElements>,
+) {
+  const firstSample = samples[0]
+  shouldProcessSamples = !isFullscreenPreventEventCapture(document.elementFromPoint(firstSample.x, firstSample.y) as any as HTMLElement)
+
+  const currentState = debugState.getState()
+  let currentTool = currentState.mirror.appModel.currentTool
+
+  // Handle auto-draw tool switching
+  if (figmaMobileInstance._auto_draw_with_pencil) {
+    const isCurrentToolSupported = SUPPORTED_DRAWING_TOOLS.includes(currentTool)
+    const { multiplayerEmoji } = currentState
+    const isUserReacting = multiplayerEmoji.type === 'REACTING_OR_CHATTING' && !!multiplayerEmoji.imageUrl
+    const isMultiselectTool = currentTool === DesignGraphElements.MULTISELECT
+    const lastValidToolAction = TOOL_ACTION_MAP.get(lastValidToolRef.current)
+
+    // Switch to appropriate drawing tool if conditions are met
+    if (lastValidToolAction
+      && !isCurrentToolSupported
+      && !isUserReacting
+      && shouldProcessSamples
+      && !isMultiselectTool
+      && !isReadOnly) {
+      Fullscreen?.triggerActionInUserEditScope(lastValidToolAction, {
+        source: 'figma_mobile',
+      })
+      currentTool = DesignGraphElements.VECTOR_PENCIL
+    }
+  }
+
+  // Check if we should process samples for the current tool
+  if (shouldProcessSamples) {
+    shouldProcessSamples = SUPPORTED_DRAWING_TOOLS.includes(currentTool)
+  }
+
+  // Send initial sample and coalesced samples if processing
+  if (shouldProcessSamples) {
+    sendPencilSample(GesturePhaseEnum.BEGAN, firstSample)
+    for (let i = 1; i < samples.length; i++) {
+      sendPencilSample(GesturePhaseEnum.MOVED_COALESCED, samples[i])
+    }
+  }
+}
+
+export const H = SUPPORTED_DRAWING_TOOLS
+export const K = useMobileGestures

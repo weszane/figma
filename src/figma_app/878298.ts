@@ -1,6 +1,6 @@
 // /Users/allen/sigma-main/src/figma_app/878298.ts
 
-import type { Fn } from '../../../types/global'
+import type { Fn } from '../../types/global'
 import { Component, PureComponent, useCallback, useLayoutEffect, useMemo } from 'react'
 import { decodeBase64, encodeBase64 } from '../905/561685'
 import { getFeatureFlags } from '../905/601108'
@@ -537,7 +537,7 @@ export function handleWheelEvent(recorder: any, eventType: string, handler: Fn, 
  * @param options - Additional options.
  * @returns The wrapped handler.
  */
-export function handleKeyboardEvent(recorder: any, eventType: string, handler: Fn, options: ObjectOf = {}) {
+export function hookForKeyboard(recorder: any, eventType: string, handler: Fn, options: ObjectOf = {}) {
   return setupPlayback(recorder, eventType, handler, {
     record(event: any) {
       return {
@@ -576,7 +576,7 @@ export function handleKeyboardEvent(recorder: any, eventType: string, handler: F
  */
 export function useHandleKeyboardEvent(key: any, eventType: string, handler: Fn, options: any) {
   const recorder = useRecordingKey(key)
-  return useMemo(() => handleKeyboardEvent(recorder, eventType, handler, options), [recorder, eventType, handler, options])
+  return useMemo(() => hookForKeyboard(recorder, eventType, handler, options), [recorder, eventType, handler, options])
 }
 
 /**
@@ -838,7 +838,7 @@ function findElementByTestId(testId: string): Element | null {
 export const AF = useHandleChangeEvent
 export const Am = handlePointerEvent
 export const BV = useHandlePointerEvent
-export const C0 = handleKeyboardEvent
+export const C0 = hookForKeyboard
 export const Fk = isRecordingEnabled
 export const Ht = handleGenericEvent
 export const M5 = handleWheelEvent

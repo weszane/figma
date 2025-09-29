@@ -38,7 +38,7 @@ import { A as _$$A2 } from '../b2835def/566447';
 import { A as _$$A6 } from '../b2835def/597304';
 import { A as _$$A7 } from '../b2835def/864187';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { sO } from '../figma_app/21029';
+import { useIsFullscreenSlidesView } from '../figma_app/21029';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { gdM, yj4 } from '../figma_app/27776';
 import { computeFullscreenViewportForNode } from '../figma_app/62612';
@@ -61,7 +61,7 @@ import { parsePxNumber } from '../figma_app/783094';
 import { indentWidthWithMargin, rowActionsWidth, scrollBarYWidth, trackPadding } from '../figma_app/786175';
 import { o3 } from '../figma_app/852050';
 import { generateRecordingKey, SKIP_RECORDING, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
-import { jr, W0 } from '../figma_app/896988';
+import { handleKeyboardEventByState, KeyboardEventResponse } from '../figma_app/896988';
 import { formatList } from '../figma_app/930338';
 import { Rt, Zy } from '../figma_app/945858';
 import { pr } from '../figma_app/952446';
@@ -331,7 +331,7 @@ eS.displayName = 'VisibilityToggle';
 export let $$eN0 = 'layer-panel-onboarding-key';
 export function $$eI2(e) {
   let t = useIsFullscreenSitesView();
-  let s = sO();
+  let s = useIsFullscreenSlidesView();
   let r = (e.abbreviatedStateName || e.name).replace(/\n/, ' ');
   if (t && e.isWebpage && e.isDefaultResponsiveSet ? r = getI18nString('sites.panel.home') : s && e.nodeType === 'SLIDE' && (r = getI18nString('slides.layers_panel.slide_number', {
     orderNum: e.name
@@ -393,7 +393,7 @@ function eM(e) {
         e.stopRenaming(!0, h.current?.value, c);
       } else {
         if (t.keyCode !== KeyCodes.TAB) {
-          jr(t, W0.NO);
+          handleKeyboardEventByState(t, KeyboardEventResponse.NO);
           return SKIP_RECORDING;
         }
         t.preventDefault();

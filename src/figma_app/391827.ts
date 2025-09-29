@@ -7,11 +7,11 @@ import { getThemeBackgroundColor } from "../figma_app/191804";
 import { selectWithShallowEqual } from "../905/103090";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { isWhiteboardFileType } from "../figma_app/976749";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { getVisibleTheme } from "../905/640017";
 export function $$h0() {
   let e = isWhiteboardFileType();
-  let t = sO();
+  let t = useIsFullscreenSlidesView();
   let r = useSelector(e => e.mirror.appModel.currentPage);
   let a = selectWithShallowEqual(e => e.mirror.sceneGraph?.get(r)?.backgroundColor);
   let h = getVisibleTheme();

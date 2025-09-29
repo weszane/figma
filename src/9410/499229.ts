@@ -17,7 +17,7 @@ import { getI18nString } from "../905/303541";
 import { NY } from "../figma_app/712525";
 import { getCurrentFileType } from "../figma_app/976749";
 import { r as _$$r } from "../figma_app/860474";
-import { jr, W0, VA } from "../figma_app/896988";
+import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 import { Z } from "../905/104740";
 import { updateHoveredNode } from "../figma_app/741237";
@@ -56,7 +56,7 @@ export function $$F12({
         i.current = !1;
       },
       onKeyDown: e => {
-        e.keyCode === KeyCodes.F ? isCommandModifier(e) ? (e.currentTarget.select(), e.preventDefault()) : jr(e, W0.NO, VA.NO) && e.stopPropagation() : a(e);
+        e.keyCode === KeyCodes.F ? isCommandModifier(e) ? (e.currentTarget.select(), e.preventDefault()) : handleKeyboardEventByState(e, KeyboardEventResponse.NO, KeyboardEventResponse.NO) && e.stopPropagation() : a(e);
       },
       onKeyUp: s,
       onPasteCapture: o,

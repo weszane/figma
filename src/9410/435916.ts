@@ -6,7 +6,7 @@ import { SettingsAction, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { isAnyMobile, isIOSUA } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
 import { postUserFlag } from "../905/985254";
@@ -526,7 +526,7 @@ function J(e) {
   } = e;
   let [i, s] = useState(!1);
   let l = useDispatch();
-  _$$h(() => {
+  useSingleEffect(() => {
     setTimeout(() => {
       s(!0);
     }, 1e3);

@@ -14,7 +14,7 @@ import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { dM, Eh } from "../figma_app/837840";
 import { getColorSpaceString } from "../figma_app/622881";
-import { f7 } from "../figma_app/896988";
+import { forwardKeyboardEvent } from "../figma_app/896988";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { DEFAULT_PICKER_WIDTH, calculatePickerPositionLeft } from "../905/959568";
 import { J } from "../905/225412";
@@ -198,7 +198,7 @@ class k extends RecordingPureComponent {
           i = this.props.paint.stops.length > 1;
           break;
         default:
-          f7(e);
+          forwardKeyboardEvent(e);
           return;
       }
       e.preventDefault();

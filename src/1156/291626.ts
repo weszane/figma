@@ -4,7 +4,7 @@ import { w4, y1 } from "../905/445814";
 import { yh } from "../9410/974031";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { v, M } from "../905/981847";
-import { oz, aZ } from "../figma_app/119420";
+import { useRemoveAttachment, isAttachmentLoaded } from "../figma_app/119420";
 import { N } from "../1156/229926";
 let u = {
   attachmentWrapper: {
@@ -31,9 +31,9 @@ export function $$x0({
   clearAttachment: t
 }) {
   let n = N();
-  let i = oz();
+  let i = useRemoveAttachment();
   if ("error" === e.status) return null;
-  if (!aZ(e)) return jsx(m, {
+  if (!isAttachmentLoaded(e)) return jsx(m, {
     onClear: () => i(e)
   });
   let s = "success" === e.status ? e.type : null;

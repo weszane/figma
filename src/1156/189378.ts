@@ -10,7 +10,7 @@ import { showModalHandler } from "../905/156213";
 import { IMAGE_TYPE_VALUES } from "../905/966582";
 import { wj } from "../1156/721826";
 import { H } from "../1156/461363";
-import { qQ } from "../figma_app/119420";
+import { MAX_ATTACHMENTS } from "../figma_app/119420";
 import { z } from "../905/634240";
 let o = memo(function (e) {
   return jsx("svg", {
@@ -53,19 +53,19 @@ export function $$y0({
         }
       }));
     },
-    disabled: y || n.length >= qQ,
+    disabled: y || n.length >= MAX_ATTACHMENTS,
     children: [jsx(MenuItemLead, {
       children: jsx(o, {})
     }), jsx("div", {
       className: "xifkd7f",
-      children: n.length >= qQ ? getI18nString("sites.panel.make.attach_limit_reached", {
-        limit: qQ
+      children: n.length >= MAX_ATTACHMENTS ? getI18nString("sites.panel.make.attach_limit_reached", {
+        limit: MAX_ATTACHMENTS
       }) : getI18nString("figmake.attachments.import_from_figma")
     })]
   }) : null;
   let w = t ? jsx(Fragment, {
     children: jsxs(MenuItemComp, {
-      disabled: y || n.length >= qQ,
+      disabled: y || n.length >= MAX_ATTACHMENTS,
       onClick: () => {
         k.current?.click();
       },
@@ -73,8 +73,8 @@ export function $$y0({
         children: jsx(_$$s, {})
       }), jsx("div", {
         className: "xifkd7f",
-        children: n.length >= qQ ? getI18nString("sites.panel.make.attach_limit_reached", {
-          limit: qQ
+        children: n.length >= MAX_ATTACHMENTS ? getI18nString("sites.panel.make.attach_limit_reached", {
+          limit: MAX_ATTACHMENTS
         }) : getI18nString("figmake.attachments.upload_image")
       })]
     })
@@ -88,7 +88,7 @@ export function $$y0({
       "aria-label": getI18nString("sites.panel.make.attach_design"),
       "data-tooltip-show-above": !0,
       "data-onboarding-key": wj,
-      disabled: y || n.length >= qQ,
+      disabled: y || n.length >= MAX_ATTACHMENTS,
       children: jsx(_$$e, {})
     }), t && jsx("input", {
       type: "file",

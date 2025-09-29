@@ -5,7 +5,7 @@
 export class PluginInstanceManager {
   /** Stores plugin instances by key */
   static instance: Record<string, ObjectOf> = {}
-
+  static instanceLoading: Record<string,any> = {}
   /** Stores loading promises and their resolvers by key */
   static loadingStates: Record<
     string,

@@ -53,7 +53,7 @@ import { T as _$$T } from "../figma_app/472024";
 import { bf, GC, hg } from "../figma_app/635062";
 import { m3, mY } from "../figma_app/915281";
 import { DraggableModalManager } from "../905/748636";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { TN } from "../figma_app/177697";
 import { kj } from "../905/883812";
 import { b as _$$b2 } from "../905/857767";
@@ -716,7 +716,7 @@ function eG({
       modal: !1
     }));
   }, [Y, t, stylePickerShown]);
-  let eb = sO();
+  let eb = useIsFullscreenSlidesView();
   let eT = useAtomWithSubscription(TN).length > 0;
   return jsx(dP, {
     recordingKey: e,

@@ -9,7 +9,7 @@ import { useNonMixedSelectionPropertyValue, useSelectionPropertyValue, useHasSel
 import { useHasSceneGraphSelection, useAppModelProperty } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
 import { isExportRestricted } from "../figma_app/12796";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { GV } from "../figma_app/159296";
 import { uj0 } from "../figma_app/27776";
 export let $$f16 = parsePxNumber(uj0);
@@ -26,7 +26,7 @@ export function $$y12(e, t, r) {
 export function $$b13() {
   let e = useNonMixedSelectionPropertyValue("numSelectedByType");
   let t = useHasSceneGraphSelection();
-  let r = sO();
+  let r = useIsFullscreenSlidesView();
   let n = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   if (!e || !t || r && n !== SelfDesignType.DESIGN) return !1;
   let s = ["FRAME", "SYMBOL"];

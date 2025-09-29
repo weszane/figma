@@ -149,7 +149,7 @@ import { getQueryParam } from '../905/609392';
 import { customHistory } from '../905/612521';
 import { setupThemeContext } from '../905/614223';
 import { canvasGridAtom } from '../905/618447';
-import { jS, Q1 } from '../905/619652';
+import { generatePaintIcon, createCanvasWithImageData } from '../905/619652';
 import { R as _$$R3 } from '../905/621802';
 import { convertTeamToRaw } from '../905/628874';
 import { T as _$$T3 } from '../905/632137';
@@ -316,7 +316,7 @@ import { cssBuilderInstance } from '../cssbuilder/589278';
 import { renderAvatar } from '../figma_app/3731';
 import { H as _$$H } from '../figma_app/7677';
 import { a8 as _$$a, Dm } from '../figma_app/8833';
-import { EI as _$$EI } from '../figma_app/21029';
+import { useIsFullscreenReady } from '../figma_app/21029';
 import { um as _$$um, atom, atomStoreManager, useResetAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { CVP, Ep1, j4N, oBL } from '../figma_app/27776';
 import { GQ as _$$GQ, nJ as _$$nJ, bQ } from '../figma_app/32128';
@@ -352,7 +352,7 @@ import { yesNoTrackingEnum } from '../figma_app/198712';
 import { pt as _$$pt } from '../figma_app/198840';
 import { ih as _$$ih } from '../figma_app/200284';
 import { B0 } from '../figma_app/201703';
-import { Uf } from '../figma_app/223206';
+import { sendToBuzzFromDesignAtom } from '../figma_app/223206';
 import { rM as _$$rM } from '../figma_app/241541';
 import { p as _$$p7, vo as _$$vo, xn as _$$xn2, MM } from '../figma_app/246831';
 import { hasJubileePermissionForDesign } from '../figma_app/251115';
@@ -4418,9 +4418,9 @@ function l2() {
   let e = useAppModelProperty('isReadOnly');
   let t = useAtomWithSubscription(Tw);
   let n = _$$pK();
-  let l = _$$EI();
+  let l = useIsFullscreenReady();
   let r = XF();
-  let i = !!useAtomWithSubscription(Uf);
+  let i = !!useAtomWithSubscription(sendToBuzzFromDesignAtom);
   return !(!l || e || !n || i || !t || isInteractionPathCheck()) && !!r;
 }
 function l4() {
@@ -8559,7 +8559,7 @@ function sQ({
       ...i,
       imageScaleMode: 'FILL'
     };
-    let t = jS(e, new Point(96, 96), {
+    let t = generatePaintIcon(e, new Point(96, 96), {
       r: 0,
       g: 0,
       b: 0,
@@ -8569,7 +8569,7 @@ function sQ({
       p('');
       return;
     }
-    let n = Q1(t.pixels, t.pixelSize);
+    let n = createCanvasWithImageData(t.pixels, t.pixelSize);
     let l = n.getContext('2d');
     if (!l) {
       p('');
@@ -14625,7 +14625,7 @@ let mw = memo(({
       Sprig
     } = useSprigWithSampling();
     let t = XF();
-    let n = _$$EI();
+    let n = useIsFullscreenReady();
     let l = l2();
     useEffect(() => {
       t && !l && n && Sprig('track', 'buzz_visited_file');

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useAtomWithSubscription, Rq, Xr } from "../figma_app/27355";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
@@ -62,7 +62,7 @@ export function $$k2({
     overlay: xiH,
     priority: N.HIGH_PRIORITY_MODAL
   }, [i, n, t, p]);
-  _$$h(() => {
+  useSingleEffect(() => {
     C.show({
       canShow: (e, t, i, r) => !e && !t && !i && r
     });
@@ -71,7 +71,7 @@ export function $$k2({
     C.complete();
     b(!0);
   };
-  _$$h(() => () => {
+  useSingleEffect(() => () => {
     E();
   });
   return jsx(OnboardingModal, {

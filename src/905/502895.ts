@@ -8,18 +8,18 @@ import { useLatestRef } from "../figma_app/922077";
 import { Point } from "../905/736624";
 import { VideoPlayerError, loadVideoSource } from "../905/284552";
 import { LargeLoadingSpinner } from "../figma_app/858013";
-import { jS, Pv } from "../905/619652";
+import { generatePaintIcon, convertImageDataToURL } from "../905/619652";
 import { _P } from "../figma_app/2590";
 import { fileApiHandler } from "../figma_app/787550";
 let f = window.performance.now();
 let _ = (e, t, i) => {
-  let n = jS(e, new Point(t, i), {
+  let n = generatePaintIcon(e, new Point(t, i), {
     r: 0,
     g: 0,
     b: 0,
     a: 0
   });
-  return n && n.pixels && n.pixelSize ? Pv(n.pixels, n.pixelSize) : null;
+  return n && n.pixels && n.pixelSize ? convertImageDataToURL(n.pixels, n.pixelSize) : null;
 };
 export function $$$$A0(e) {
   let {

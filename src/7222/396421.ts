@@ -31,7 +31,7 @@ import { TeamSortField, PublicModelType } from "../figma_app/162807";
 import { searchAPIHandler } from "../905/144933";
 import { useLibraryModules } from "../figma_app/409131";
 import { E as _$$E } from "../figma_app/999099";
-import { jY } from "../figma_app/21029";
+import { useHasValidSceneSlideTheme } from "../figma_app/21029";
 import { D as _$$D } from "../7222/938408";
 import { bY, Vf, VZ, Ei, Mt, ke, OR, M0 } from "../figma_app/60023";
 import { l as _$$l2, x as _$$x } from "../7222/542428";
@@ -71,7 +71,7 @@ export function $$F16() {
   let u = useMemo(() => e.data || [], [e]);
   let c = u[0];
   let i = "loaded" === e.status && u.length > 0;
-  let a = jY();
+  let a = useHasValidSceneSlideTheme();
   let o = (i || a || isLocalCluster()) && !t;
   let d = "dismiss-slides-template-overlay";
   let E = $$W17(u[0]);

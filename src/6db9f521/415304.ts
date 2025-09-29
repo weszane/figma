@@ -18,7 +18,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { tG } from "../figma_app/723183";
 import { useSyncedRef } from "../905/633914";
 import { oe, H as _$$H } from "../figma_app/376315";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 function T(e) {
   return e ? e.richMediaInfo?.richMediaType === "VIDEO" ? e.childrenGuids[0] ?? null : e.hasEnabledVideoPaint ? e.guid : null : null;
 }
@@ -70,7 +70,7 @@ function k({
   viewportInfo: i
 }) {
   let [u, T] = useState(!1);
-  let S = sO();
+  let S = useIsFullscreenSlidesView();
   let I = useSceneGraphSelection();
   let N = useMemo(() => Object.keys(I), [I]);
   let k = useSelector(e => e.mirror.sceneGraph);

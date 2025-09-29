@@ -11,7 +11,7 @@ import { orgSubscriptionAtom } from "../905/296690";
 import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseFragmentSearchAi } from "../figma_app/43951";
 import { FEditorType } from "../figma_app/53721";
 import { isFigmakeFullscreenView } from "../figma_app/552876";
-import { P } from "../905/35881";
+import { isFullscreenSlidesView } from "../905/35881";
 import { n as _$$n } from "../905/347702";
 import { hasJubileePermissionForDesign, hasJubileePermissionForWhiteboard } from "../figma_app/251115";
 import { isAssetSuggestionsEnabled } from "../figma_app/144974";
@@ -73,7 +73,7 @@ export function $$O6() {
 }
 export function $$R3() {
   let e = debugState.getState().selectedView;
-  let t = P(e);
+  let t = isFullscreenSlidesView(e);
   let r = isFigmakeFullscreenView(e);
   return getEditorTypeIfFullscreen(e) === FEditorType.Design || t || r;
 }

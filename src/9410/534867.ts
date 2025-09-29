@@ -9,7 +9,7 @@ import c from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { isExactModifier, ModifierKeyCodes, KeyCodes } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
-import { RecordingPureComponent, generateRecordingKey, handleKeyboardEvent, handleChangeEvent, handleMouseEvent, SKIP_RECORDING } from "../figma_app/878298";
+import { RecordingPureComponent, generateRecordingKey, hookForKeyboard, handleChangeEvent, handleMouseEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { SvgComponent } from "../905/714743";
@@ -78,7 +78,7 @@ class K extends RecordingPureComponent {
         return;
       }
       t = this.firstOptionalIndex - 1;
-    } else if ("final" === e) t = this.props.parameters.length - 1;else {
+    } else if ("final" === e) t = this.props.parameters.length - 1; else {
       if (0 === e) {
         this.props.onExitParameterEntry();
         return;
@@ -201,7 +201,7 @@ class K extends RecordingPureComponent {
     this.pendingLoadingMessage = null;
     this.firstOptionalIndex = null;
     this.eventID = 0;
-    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
+    this.onKeyDown = hookForKeyboard(this, "keydown", e => {
       let t = e => {
         let t = this.state.activeItemIndex + e;
         return t < 0 ? this.state.items.length - 1 : t % this.state.items.length;
@@ -710,7 +710,7 @@ class W extends RecordingPureComponent {
 }
 function Y(e, t) {
   let i = "";
-  if (e.iconUrl) i = e.iconUrl;else if (e.icon && "string" == typeof e.icon) i = "data:image/svg+xml;base64," + encodeStringToBase64(e.icon);else {
+  if (e.iconUrl) i = e.iconUrl; else if (e.icon && "string" == typeof e.icon) i = "data:image/svg+xml;base64," + encodeStringToBase64(e.icon); else {
     if (!e.icon || "string" == typeof e.icon) return;
     i = "data:application/octet-stream;base64," + encodeBase64(e.icon);
   }

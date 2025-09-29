@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { y1, w4 } from "../905/445814";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -251,7 +251,7 @@ export function $$H1(e, t, r) {
     let b = a?.type === FOrganizationLevelType.ORG ? a?.key.parentId : void 0;
     let A = getSearchSessionIdFromSelector();
     let [R, L] = useState();
-    _$$h(() => {
+    useSingleEffect(() => {
       !async function () {
         let t = await BuyerAPIHandler.getRecentFiles({
           extensionId: e.id,

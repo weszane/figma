@@ -42,7 +42,7 @@ import { isWhiteboardFileType } from "../figma_app/976749";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { lX } from "../figma_app/588397";
 import { b as _$$b } from "../905/635568";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { $ as _$$$ } from "../1291/295522";
 import { W as _$$W } from "../905/78565";
 import { lU } from "../1291/813188";
@@ -76,7 +76,7 @@ function Z(e) {
   } = u;
   let p = d === rp.WIDE ? 2 : 8;
   let x = _$$b();
-  let h = sO();
+  let h = useIsFullscreenSlidesView();
   let f = useIsSelectedViewFullscreenCooper();
   let y = isWhiteboardFileType();
   let [j, S] = useState(!1);

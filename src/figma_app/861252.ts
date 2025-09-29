@@ -50,7 +50,7 @@ import { gh } from "../figma_app/598952";
 import { Px, Bl, go, HO, aN } from "../figma_app/57551";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { useIsFigmakeFullscreenPreview } from "../figma_app/552876";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { TH } from "../figma_app/751648";
 import { v as _$$v } from "../905/596134";
 import { if6 } from "../figma_app/27776";
@@ -201,7 +201,7 @@ let $$eh0 = memo(function () {
   let v = isHelpWidgetHidden();
   let A = isDesignFileType();
   let x = _$$U();
-  let N = sO();
+  let N = useIsFullscreenSlidesView();
   let C = useIsSelectedViewFullscreenCooper();
   let w = !useSelector(e => e.mirror.appModel.showUi) || v;
   let R = "dark" === getVisibleTheme();

@@ -26,7 +26,7 @@ import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { l as _$$l2 } from "../0c62c2fd/624465";
 import { KeyCodes } from "../905/63728";
-import { jr, W0 } from "../figma_app/896988";
+import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 import { ks } from "../figma_app/626177";
 import { n6, vu, mB, oG, sl, sR, Pl, Dq, As, wH, iB, Nr, VQ, Sp, jE, Nz, YW, KE, q8, hi, VC } from "../0c62c2fd/214758";
 import { A as _$$A2 } from "../6828/255111";
@@ -52,7 +52,7 @@ function R({
       s(!0);
     } else {
       if (e.keyCode !== KeyCodes.TAB) {
-        jr(e, W0.NO);
+        handleKeyboardEventByState(e, KeyboardEventResponse.NO);
         return SKIP_RECORDING;
       }
       e.preventDefault();

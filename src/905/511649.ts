@@ -7,7 +7,7 @@ import {
   handleChangeEvent,
   handleEvent,
   handleGenericEvent,
-  handleKeyboardEvent,
+  hookForKeyboard,
   handleMouseEvent,
   handlePointerEvent,
   isRecordingEnabled,
@@ -88,10 +88,10 @@ abstract class BaseRecordableComponent extends RecordingPureComponent<BaseRecord
     this.props.onPointerMove ? this.props.onPointerMove(e) : SKIP_RECORDING)
 
   // Keyboard event handlers
-  protected onKeyUp = handleKeyboardEvent(this, 'keyup', (e: KeyboardEvent) =>
+  protected onKeyUp = hookForKeyboard(this, 'keyup', (e: KeyboardEvent) =>
     this.props.onKeyUp ? this.props.onKeyUp(e) : SKIP_RECORDING)
 
-  protected onKeyDown = handleKeyboardEvent(this, 'keydown', (e: KeyboardEvent) =>
+  protected onKeyDown = hookForKeyboard(this, 'keydown', (e: KeyboardEvent) =>
     this.props.onKeyDown ? this.props.onKeyDown(e) : SKIP_RECORDING)
 
   // Generic event handlers

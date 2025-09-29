@@ -1,5 +1,5 @@
 import { createContext, Component, createElement } from "react";
-import { n_ } from "../vendor/235095";
+import { initialize } from "../vendor/235095";
 import o from "../vendor/208296";
 import h from "../vendor/833871";
 var a = o;
@@ -65,7 +65,7 @@ let C = (e, ...r) => {
     anonymous: !0,
     kind: "user"
   }, n, i) {
-    let o = n_(e, r, E(E({}, A), n));
+    let o = initialize(e, r, E(E({}, A), n));
     return new Promise(e => {
       function r() {
         o.off("ready", s);

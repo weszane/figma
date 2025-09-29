@@ -7,11 +7,11 @@ import { clearSelection } from "../figma_app/741237";
 import { useIsProgressBarHiddenOrLocked, useHasSceneGraphSelection, useCurrentTool } from "../figma_app/722362";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { Ye } from "../figma_app/32128";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { isWhiteboardFileType } from "../figma_app/976749";
 export function $$h1() {
   !function (e) {
-    let t = sO();
+    let t = useIsFullscreenSlidesView();
     let r = getObservableOrFallback(AppStateTsApi.singleSlideView().isInFocusedNodeView);
     let {
       isPropertiesPanelCollapsed,

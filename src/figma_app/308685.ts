@@ -14,19 +14,19 @@ import { DesignGraphElements, Fullscreen } from '../figma_app/763686'
  * Creates an action to update the emoji wheel position.
  * @see $$d6
  */
-const updateEmojiWheelPosition = createActionCreator('MULTIPLAYER_EMOJI_UPDATE_EMOJI_WHEEL_POSITION')
+export const updateEmojiWheelPosition = createActionCreator('MULTIPLAYER_EMOJI_UPDATE_EMOJI_WHEEL_POSITION')
 
 /**
  * Creates an action to clear the emoji state.
  * @see $$c2
  */
-const clearEmojiState = createActionCreator('MULTIPLAYER_EMOJI_CLEAR_STATE')
+export const clearEmojiState = createActionCreator('MULTIPLAYER_EMOJI_CLEAR_STATE')
 
 /**
  * Optimist thunk to stop chatting and clear emoji state.
  * @see $$u1
  */
-const stopChattingThunk = createOptimistThunk(({ dispatch }) => {
+export const stopChattingThunk = createOptimistThunk(({ dispatch }) => {
   Fullscreen?.setIsInCursorChat(false)
   dispatch(clearEmojiState())
 })
@@ -35,13 +35,13 @@ const stopChattingThunk = createOptimistThunk(({ dispatch }) => {
  * Creates an action to start chatting.
  * @see $$p9
  */
-const startChattingAction = createActionCreator('MULTIPLAYER_EMOJI_START_CHATTING')
+export const startChattingAction = createActionCreator('MULTIPLAYER_EMOJI_START_CHATTING')
 
 /**
  * Optimist thunk to start chatting, set tool if needed, and track event.
  * @see $$_0
  */
-const startChattingThunk = createOptimistThunk(async ({ dispatch }, payload: { source?: string }) => {
+export const startChattingThunk = createOptimistThunk(async ({ dispatch }, payload: { source?: string }) => {
   const state = multiplayerSessionManager.mirror?.appModel // Assumed context for currentTool
   const currentTool = state?.currentTool
   const isDefaultTool = ![DesignGraphElements.HAND, DesignGraphElements.SELECT, DesignGraphElements.HAND_SELECT].includes(currentTool)
@@ -62,19 +62,19 @@ const startChattingThunk = createOptimistThunk(async ({ dispatch }, payload: { s
  * Creates an action to stop reacting.
  * @see $$h5
  */
-const stopReactingAction = createActionCreator('MULTIPLAYER_EMOJI_STOP_REACTING')
+export const stopReactingAction = createActionCreator('MULTIPLAYER_EMOJI_STOP_REACTING')
 
 /**
  * Creates an action to start reacting.
  * @see $$m3
  */
-const startReactingAction = createActionCreator('MULTIPLAYER_EMOJI_START_REACTING')
+export const startReactingAction = createActionCreator('MULTIPLAYER_EMOJI_START_REACTING')
 
 /**
  * Optimist thunk to reset reactions and start reacting.
  * @see $$g8
  */
-const startReactingThunk = createOptimistThunk(({ dispatch }, payload) => {
+export const startReactingThunk = createOptimistThunk(({ dispatch }, payload) => {
   multiplayerSessionManager.resetReactions()
   dispatch(startReactingAction(payload))
 })
@@ -83,13 +83,13 @@ const startReactingThunk = createOptimistThunk(({ dispatch }, payload) => {
  * Creates an action to toggle the emoji wheel.
  * @see $$f4
  */
-const toggleEmojiWheelAction = createActionCreator('MULTIPLAYER_EMOJI_TOGGLE_EMOJI_WHEEL')
+export const toggleEmojiWheelAction = createActionCreator('MULTIPLAYER_EMOJI_TOGGLE_EMOJI_WHEEL')
 
 /**
  * Optimist thunk to track toggling emoji wheel and dispatch action.
  * @see $$E7
  */
-const toggleEmojiWheelThunk = createOptimistThunk(({ dispatch }, payload: { wheelType: string, source?: string }) => {
+export const toggleEmojiWheelThunk = createOptimistThunk(({ dispatch }, payload: { wheelType: string, source?: string }) => {
   const state = multiplayerSessionManager.mirror?.appModel // Assumed context for openFile
   trackFileEvent('Toggled emoji wheel', state?.openFile?.key, state, {
     wheelType: payload.wheelType,

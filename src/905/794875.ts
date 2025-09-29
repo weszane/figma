@@ -13,7 +13,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { KeyCodes } from "../905/63728";
 import { V as _$$V } from "../905/418494";
 import { BrowserInfo } from "../figma_app/778880";
-import { RecordingPureComponent, handleMouseEvent, handleKeyboardEvent, SKIP_RECORDING, handleGenericEvent, generateRecordingKey } from "../figma_app/878298";
+import { RecordingPureComponent, handleMouseEvent, hookForKeyboard, SKIP_RECORDING, handleGenericEvent, generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { getThemePx } from "../905/149328";
@@ -27,7 +27,7 @@ import { getI18nString } from "../905/303541";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
-import { jr } from "../figma_app/896988";
+import { handleKeyboardEventByState } from "../figma_app/896988";
 import { isValidValue, MIXED_MARKER, normalizeValue, isAutoMarker } from "../905/216495";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -443,8 +443,8 @@ class et extends RecordingPureComponent {
       }
       this.ignoreMouseMove = !0;
     };
-    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
-      if (jr(e)) return SKIP_RECORDING;
+    this.onKeyDown = hookForKeyboard(this, "keydown", e => {
+      if (hookForKeyboard(e)) return SKIP_RECORDING;
       if (this.dropdownShown()) {
         let t = null == this.state.focusedOptionValue ? "" : this.props.formatter.format(this.state.focusedOptionValue);
         let i = this.optionIndexByFormattedValue[t];
@@ -480,7 +480,7 @@ class et extends RecordingPureComponent {
           default:
             this.addInputChar(e.keyCode);
         }
-      } else if (e.keyCode === KeyCodes.ESCAPE) !this.props.isInFPLGridCell && this.hiddenInput && this.hiddenInput.blur();else {
+      } else if (e.keyCode === KeyCodes.ESCAPE) !this.props.isInFPLGridCell && this.hiddenInput && this.hiddenInput.blur(); else {
         if (this.props.isInFPLGridCell && "Space" === e.code && e.shiftKey) return;
         (this.props.openOnKeyPressed ? this.props.openOnKeyPressed.includes(e.keyCode) : J.includes(e.keyCode)) ? (e.preventDefault(), e.stopPropagation(), this.showDropdown(), this.setState({
           allowSelection: !0
@@ -605,7 +605,7 @@ class et extends RecordingPureComponent {
       if (this.state.currentDropdownAccepted ? this.setState({
         currentDropdownAccepted: !1
       }) : this.props.onCancel?.(), this.props.onOptionFocus) {
-        if (document.activeElement !== this.hiddenInput) this.props.onOptionFocus(void 0, "input");else {
+        if (document.activeElement !== this.hiddenInput) this.props.onOptionFocus(void 0, "input"); else {
           let e = normalizeValue(this.props.property);
           null != e && this.props.onOptionFocus(e, "input");
         }
@@ -943,7 +943,7 @@ export class $$en1 extends RecordingPureComponent {
 $$en1.displayName = "Option";
 $$en1.__IS_VALID_SELECT_CHILD__ = !0;
 $$en1.__CLASS_NAME__ = "Option";
-export class $$er0 extends $$en1 {}
+export class $$er0 extends $$en1 { }
 export class $$ea3 extends PureComponent {
   render() {
     return jsx(q, {

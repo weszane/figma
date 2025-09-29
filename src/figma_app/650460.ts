@@ -9,7 +9,7 @@ import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { getI18nString } from "../905/303541";
-import { jS, Pv } from "../905/619652";
+import { generatePaintIcon, convertImageDataToURL } from "../905/619652";
 import { KindEnum } from "../905/129884";
 import { Cz } from "../figma_app/153399";
 import { A as _$$A } from "../1617/954184";
@@ -255,13 +255,13 @@ let $$F3 = forwardRef(({
 }, f) => {
   let [E, y] = useState("");
   let b = useCallback(e => {
-    let t = jS(e, new Point((e.originalImageWidth || 244) / (e.originalImageHeight || 244) * 244, 244), {
+    let t = generatePaintIcon(e, new Point((e.originalImageWidth || 244) / (e.originalImageHeight || 244) * 244, 244), {
       r: 0,
       g: 0,
       b: 0,
       a: 0
     });
-    t && t.pixels && t.pixelSize && y(Pv(t.pixels, t.pixelSize));
+    t && t.pixels && t.pixelSize && y(convertImageDataToURL(t.pixels, t.pixelSize));
   }, []);
   useEffect(() => {
     e && b(e);

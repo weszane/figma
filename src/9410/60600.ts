@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "../905/438674";
 import { E as _$$E } from "../905/53857";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { WAFImage } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -23,7 +23,7 @@ import { _l } from "../figma_app/995208";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
 import { SAR, jk, ODB, QKV } from "../figma_app/6204";
-import { EI } from "../figma_app/21029";
+import { useIsFullscreenReady } from "../figma_app/21029";
 import { XF, WW, qA, Mt, D9 } from "../1250/182479";
 export function $$N2() {
   let e = XF();
@@ -37,7 +37,7 @@ export function $$N2() {
   });
   let m = Xr(Tw);
   let y = useDispatch();
-  let E = EI();
+  let E = useIsFullscreenReady();
   let w = useAtomWithSubscription(LZ);
   let S = () => {
     y?.(selectViewAction({
@@ -125,7 +125,7 @@ export function $$A0({
   });
   let s = useSelectedAndFocusedNodeIds();
   let o = s.length ? s[0] : null;
-  _$$h(() => {
+  useSingleEffect(() => {
     show();
   });
   useEffect(() => {

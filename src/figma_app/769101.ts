@@ -5,7 +5,7 @@ import { KeyCodes, isModifierMatch, isCommandModifier } from "../905/63728";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { generateUUIDv4 } from "../905/871474";
 import { fullscreenValue } from "../figma_app/455680";
-import { f7 } from "../figma_app/896988";
+import { forwardKeyboardEvent } from "../figma_app/896988";
 import { W1 } from "../figma_app/439493";
 import { A as _$$A } from "../905/139173";
 import { Wh, ec } from "../figma_app/599095";
@@ -109,7 +109,7 @@ export function $$E1({
           case KeyCodes.UP_ARROW:
           case KeyCodes.DOWN_ARROW:
             if (!isModifierMatch(e, 0)) {
-              f7(e);
+              forwardKeyboardEvent(e);
               break;
             }
             if ($(!0), U && X) {
@@ -129,7 +129,7 @@ export function $$E1({
             isCommandModifier(e) && (fullscreenValue.triggerAction(e.keyCode === KeyCodes.C ? "copy" : e.keyCode === KeyCodes.X ? "cut" : "paste"), e.stopPropagation(), e.preventDefault());
             break;
           default:
-            f7(e);
+            forwardKeyboardEvent(e);
         }
       },
       onClick: () => {

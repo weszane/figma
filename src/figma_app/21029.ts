@@ -1,24 +1,42 @@
-import { useSelector } from "react-redux";
-import { isInteractionPathCheck } from "../figma_app/897289";
-import { useFullscreenReady } from "../905/924253";
-import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { el } from "../figma_app/226737";
-import { P } from "../905/35881";
-export function $$d2() {
-  return useSelector(e => P(e.selectedView));
+import { useSelector } from 'react-redux'
+import { isFullscreenSlidesView } from '../905/35881'
+import { useFullscreenReady } from '../905/924253'
+import { useDeepEqualSceneValue } from '../figma_app/167249'
+import { useSceneSlideThemeId } from '../figma_app/226737'
+import { isInteractionPathCheck } from '../figma_app/897289'
+/**
+ * Hook to check if the current view is fullscreen slides view
+ * Original name: $$d2
+ */
+export function useIsFullscreenSlidesView(): boolean {
+  return useSelector<AppState, boolean>(state => isFullscreenSlidesView(state.selectedView))
 }
-export function $$c1() {
-  let e = $$d2();
-  let t = el();
-  let r = t && !t.endsWith("-1:-1");
-  return !isInteractionPathCheck() && (!e || !!r);
+
+/**
+ * Hook to determine if the current scene slide has a valid theme
+ * Original name: $$c1
+ */
+export function useHasValidSceneSlideTheme(): boolean {
+  const isFullscreenSlides = useIsFullscreenSlidesView()
+  const sceneSlideThemeId = useSceneSlideThemeId()
+  const hasValidTheme = sceneSlideThemeId && !sceneSlideThemeId.endsWith('-1:-1')
+
+  return !isInteractionPathCheck() && (!isFullscreenSlides || !!hasValidTheme)
 }
-export function $$u0() {
-  let e = useSelector(e => e.isFullscreenDocumentLoaded);
-  let t = useFullscreenReady();
-  let r = useDeepEqualSceneValue(e => null !== e.get("0:0"));
-  return e && t && r;
+
+/**
+ * Hook to check if the fullscreen document is fully loaded and ready
+ * Original name: $$u0
+ */
+export function useIsFullscreenReady(): boolean {
+  const isDocumentLoaded = useSelector<AppState, boolean>(state => state.isFullscreenDocumentLoaded)
+  const isFullscreenReady = useFullscreenReady()
+  const hasSceneValue = useDeepEqualSceneValue(state => state.get('0:0') !== null)
+
+  return isDocumentLoaded && isFullscreenReady && hasSceneValue as boolean
 }
-export const EI = $$u0;
-export const jY = $$c1;
-export const sO = $$d2;
+
+// Exported constants with meaningful names
+export const EI = useIsFullscreenReady
+export const jY = useHasValidSceneSlideTheme
+export const sO = useIsFullscreenSlidesView

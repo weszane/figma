@@ -1,7 +1,7 @@
 import { LayoutTabType, NoneColor } from "../figma_app/763686";
 import { KeyCodes } from "../905/63728";
 import { fullscreenValue } from "../figma_app/455680";
-import { f7 } from "../figma_app/896988";
+import { forwardKeyboardEvent } from "../figma_app/896988";
 import { validateGradientPaint } from "../figma_app/385874";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { $ } from "../figma_app/297778";
@@ -47,7 +47,7 @@ export function $$u2(e, t, i, n, r) {
 export function $$p0(e, t, i, o, d) {
   let c = e.event.keyCode;
   if (c === KeyCodes.BACKSPACE || c === KeyCodes.DELETE) {
-    if (i === LayoutTabType.GRADIENT) f7(e.event);else {
+    if (i === LayoutTabType.GRADIENT) forwardKeyboardEvent(e.event);else {
       let e = t.stops.slice();
       o && o.index >= 0 && e.length > 1 && ((e = e.slice()).splice(o.index, 1), fullscreenValue.updateAppModel({
         currentSelectedGradientStop: {

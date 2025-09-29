@@ -55,7 +55,7 @@ import { customHistory } from "../905/612521";
 import { ignoreCommandOrShift, KeyCodes, isCommandEvent } from "../905/63728";
 import { registerTooltip } from "../905/524523";
 import { clamp } from "../figma_app/492908";
-import { jr, W0, VA } from "../figma_app/896988";
+import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 import { getSelectedView } from "../figma_app/386952";
 import { isFullscreenSitesView, useIsFullscreenSitesView } from "../905/561485";
 import eC from "classnames";
@@ -500,7 +500,7 @@ function es(e) {
     clearVariableConsumption
   } = _$$O2(C, VariableResolvedDataType.FLOAT);
   let N = useCallback((e, t = yesNoTrackingEnum.YES) => {
-    if (clearVariableConsumption(yesNoTrackingEnum.NO), e === vC) "number" == typeof s && minMaxApi.set(s || null, yesNoTrackingEnum.NO);else if (e === Bn) {
+    if (clearVariableConsumption(yesNoTrackingEnum.NO), e === vC) "number" == typeof s && minMaxApi.set(s || null, yesNoTrackingEnum.NO); else if (e === Bn) {
       minMaxApi.set(null, yesNoTrackingEnum.NO);
       let e = {
         [minMaxApi.widthOrHeight]: {
@@ -1043,7 +1043,7 @@ function ez({
         t("CENTER");
         break;
       default:
-        jr(e, W0.YES, VA.YES);
+        handleKeyboardEventByState(e, KeyboardEventResponse.YES, KeyboardEventResponse.YES);
         return;
     }
     e.preventDefault();

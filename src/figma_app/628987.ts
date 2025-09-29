@@ -13,7 +13,7 @@ import h from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { isDesktopEnvironmentAvailable, getDesktopVersion } from "../905/535224";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { selectWithShallowEqual } from "../905/103090";
 import { buildStaticUrl } from "../figma_app/169182";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -49,7 +49,7 @@ import { We } from "../905/805224";
 import { JD } from "../905/468313";
 import { DE, Ad } from "../figma_app/811257";
 import { x as _$$x } from "../905/961957";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { Z9, Ds, DK, nO, wH, uG, q_, ac, OW, UU, A5, YV } from "../905/71683";
 import { kaq } from "../figma_app/27776";
 import { A as _$$A } from "../3850/217317";
@@ -69,7 +69,7 @@ export function $$eu1() {
 let ep = atom(void 0);
 export function $$e_0() {
   let [e, t] = useAtomValueAndSetter(ep);
-  _$$h(() => {
+  useSingleEffect(() => {
     r();
   });
   let r = useCallback(() => {
@@ -120,7 +120,7 @@ export function $$em2({
   let ef = Xo();
   let eE = useDropdownState();
   let ey = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
-  let eb = sO() && ey === SelfDesignType.SELF;
+  let eb = useIsFullscreenSlidesView() && ey === SelfDesignType.SELF;
   let eT = useIsSelectedViewFullscreenCooper();
   let eI = useSelector(e => e.selectedView);
   let eS = getEditorTypeFromView(eI);

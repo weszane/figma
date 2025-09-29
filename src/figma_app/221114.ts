@@ -27,7 +27,7 @@ import { KeyCodes } from "../905/63728";
 import { PAGINATION_NEXT, hasMorePages } from "../figma_app/661371";
 import { BrowserInfo } from "../figma_app/778880";
 import { stripHtmlTags } from "../905/491152";
-import { RecordingComponent, handleMouseEvent, generateRecordingKey, handleKeyboardEvent } from "../figma_app/878298";
+import { RecordingComponent, handleMouseEvent, generateRecordingKey, hookForKeyboard } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { clickableBaseLinkTracked } from "../figma_app/637027";
@@ -718,7 +718,7 @@ class eM extends RecordingComponent {
           let e;
           if (null != t.label && t.label.length > 0) e = getI18nString("collaboration.feedback.viewing_version", {
             label: t.label
-          });else {
+          }); else {
             let r = xX(t.touched_at);
             e = getI18nString("collaboration.feedback.viewing_version", {
               label: r
@@ -756,9 +756,9 @@ class eM extends RecordingComponent {
       }));
     };
     this.isAllowedToChangeVersion = () => null === this.props.modalShown && !hM();
-    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
+    this.onKeyDown = hookForKeyboard(this, "keydown", e => {
       if (!this.props.dropdownShown && !this.props.modalShown && !this.props.versionHistory.compareId) {
-        if (e.keyCode === KeyCodes.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(exitVersionHistoryMode());else if (e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.DOWN_ARROW) {
+        if (e.keyCode === KeyCodes.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(exitVersionHistoryMode()); else if (e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.DOWN_ARROW) {
           if (!this.isAllowedToChangeVersion()) return;
           let t = this.props.versionHistory.versions.length;
           this.setState({
@@ -766,7 +766,7 @@ class eM extends RecordingComponent {
           });
           this.autoExpandGroupId = "";
           let r = -1;
-          if (this.props.versionHistory.activeId === CURRENT_VERSION_ID) e.keyCode === KeyCodes.DOWN_ARROW && (r = 0);else {
+          if (this.props.versionHistory.activeId === CURRENT_VERSION_ID) e.keyCode === KeyCodes.DOWN_ARROW && (r = 0); else {
             let t = this.props.versionHistory.versions.findIndex(e => e.id === this.props.versionHistory.activeId);
             -1 !== t && (r = e.keyCode === KeyCodes.UP_ARROW ? t - 1 : t + 1);
           }

@@ -128,3 +128,4 @@ export const fU = isUnsupportedMacVersion
 export const hX = popoutAPIInstance
 export const hl = isDesktopVersionDisabled
 export const y3 = hasDesktopAPI
+export {OpenTarget}

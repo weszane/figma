@@ -95,7 +95,7 @@ import { ZH } from "../figma_app/957169";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
-import { h as _$$h2 } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { A as _$$A5 } from "../1250/487166";
 import { Ay as _$$Ay3 } from "../1250/615231";
 import { sR as _$$sR } from "../9410/67768";
@@ -278,7 +278,7 @@ import { M3 } from "../905/759412";
 import { C5 } from "../7021/95197";
 import { $ as _$$$2 } from "../1250/770005";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
-import { sO as _$$sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { i as _$$i3 } from "../9410/16707";
 import { Kt, wl, uM, w1 } from "../figma_app/835688";
 import { showDropdownThunk } from "../905/929976";
@@ -1050,7 +1050,7 @@ function tC() {
     overlay: kmj,
     priority: _$$N.DEFAULT_MODAL
   }, [t, e, i]);
-  if (_$$h2(() => {
+  if (useSingleEffect(() => {
     desktopAPIInstance || n || !l || show({
       canShow: (e, t, i) => function (e) {
         let t = Date.now();
@@ -1127,7 +1127,7 @@ function tD() {
     overlay: hsL,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [c]);
-  _$$h2(() => {
+  useSingleEffect(() => {
     _.show({
       canShow: e => SS(e) && u && ZQ(t) && a && !o && l
     });
@@ -1334,7 +1334,7 @@ function t7() {
     overlay: Ttn,
     priority: _$$N.DEFAULT_MODAL
   }, [e, i, a, o]);
-  _$$h2(() => {
+  useSingleEffect(() => {
     d.show({
       canShow: (e, i, r, a) => {
         if (e || a) return !1;
@@ -1363,7 +1363,7 @@ function ir() {
     overlay: Nwg,
     priority: _$$N.SECONDARY_MODAL
   });
-  _$$h2(() => {
+  useSingleEffect(() => {
     show();
   });
   let a = _$$S({
@@ -4783,7 +4783,7 @@ function np(e) {
 }
 function nh(e) {
   let t = Xr(_$$w5);
-  _$$h2(() => {
+  useSingleEffect(() => {
     t(_$$tX2.MODAL_SHOWING);
   });
   return jsx(OnboardingModal, {
@@ -7131,7 +7131,7 @@ function sa({
   let d = getInitialOptions().user_data;
   let c = d?.email;
   let u = isNotAllowedEmail(c);
-  _$$h2(() => {
+  useSingleEffect(() => {
     l.show({
       canShow: (e, i) => !!(u && isOssSalesExperimentValueMatch(t) && !e && i.team?.hasPermission)
     });
@@ -7143,7 +7143,7 @@ function sa({
     isShowing: l.isShowing,
     modalType: OverlayType.FEATURE_UPDATE,
     element: function (e) {
-      _$$h2(() => {
+      useSingleEffect(() => {
         i(showModalHandler({
           type: sr,
           data: {
@@ -7353,7 +7353,7 @@ let sN = "has_onboarded_ai";
 let sA = atom(!1);
 let sL = _$$N.HIGH_PRIORITY_MODAL + 3;
 function sR(e, t) {
-  _$$h2(() => {
+  useSingleEffect(() => {
     e(postUserFlag({
       [t]: !0
     }));
@@ -7845,7 +7845,7 @@ function oo() {
       insertTemplate
     } = Fz();
     let t = useDispatch();
-    _$$h2(() => {
+    useSingleEffect(() => {
       let i = getQueryParam("templateId");
       null != i && (removeQueryParam("templateId"), t(_$$ts({
         hubFileId: i,
@@ -7920,7 +7920,7 @@ function oo() {
       onClose: noop
     }], [t, e]);
   }(t);
-  _$$h2(() => {
+  useSingleEffect(() => {
     getQueryParam(fileOnboardingFlag.key) === fileOnboardingFlag.value && t.show({
       canShow: e => !e
     });
@@ -7944,7 +7944,7 @@ function ou(e) {
     overlay: Fq3,
     priority: _$$N.SECONDARY_MODAL
   }, [t, i, n, a]);
-  _$$h2(() => {
+  useSingleEffect(() => {
     o.show({
       canShow: (e, t, i, r) => e && !t && i && !r
     });
@@ -8212,7 +8212,7 @@ function oX() {
   let r = useAtomWithSubscription(i);
   let a = userFlagExistsAtomFamily(wl);
   let o = useAtomWithSubscription(a);
-  let l = _$$sO();
+  let l = useIsFullscreenSlidesView();
   let d = useIsProgressBarHiddenOrLocked();
   let {
     show,

@@ -624,7 +624,7 @@ function registerFullscreenEventHandlers(eventTypes: Set<number> = fullscreenEve
  * Returns and resets the fullscreen event state.
  * (was $$en12)
  */
-function consumeFullscreenEventState() {
+export function consumeFullscreenEventState() {
   const state = fullscreenEventState
   fullscreenEventState = Object.create(null)
   return state
@@ -634,7 +634,7 @@ function consumeFullscreenEventState() {
  * Handles scene graph mirror update events.
  * (was ei)
  */
-function handleSceneGraphMirrorUpdate(event: { rebuildRows?: boolean }) {
+export function handleSceneGraphMirrorUpdate(event: { rebuildRows?: boolean }) {
   debug(!fullscreenEventState.invalidateSceneGraph, 'We should get at most one sceneGraphMirrorUpdate per frame. We got two.')
   fullscreenEventState.invalidateSceneGraph = {
     rebuildRows: !event || event.rebuildRows,
@@ -645,7 +645,7 @@ function handleSceneGraphMirrorUpdate(event: { rebuildRows?: boolean }) {
  * Reads a 32-bit integer from a buffer.
  * (was ea)
  */
-function readInt32(buffer: Uint8Array, offset: number): number {
+export function readInt32(buffer: Uint8Array, offset: number): number {
   return buffer[offset] | buffer[offset + 1] << 8 | buffer[offset + 2] << 16 | buffer[offset + 3] << 24
 }
 
@@ -653,7 +653,7 @@ function readInt32(buffer: Uint8Array, offset: number): number {
  * Handles add selectors event.
  * (was es)
  */
-function handleAddSelectors(event: { buffer?: Uint8Array, userTriggered?: boolean }) {
+export function handleAddSelectors(event: { buffer?: Uint8Array, userTriggered?: boolean }) {
   debug(!fullscreenEventState.selection?.replace, 'addSelectors and replaceSelectors called on the same frame')
   fullscreenEventState.selection ||= Object.create(null)
   fullscreenEventState.selection.add ||= Object.create(null)
@@ -673,7 +673,7 @@ function handleAddSelectors(event: { buffer?: Uint8Array, userTriggered?: boolea
  * Handles remove selectors event.
  * (was eo)
  */
-function handleRemoveSelectors(event: { buffer?: Uint8Array, userTriggered?: boolean }) {
+export function handleRemoveSelectors(event: { buffer?: Uint8Array, userTriggered?: boolean }) {
   debug(!fullscreenEventState.selection?.replace, 'removeSelectors and replaceSelectors called on the same frame')
   fullscreenEventState.selection ||= Object.create(null)
   fullscreenEventState.selection.remove ||= Object.create(null)

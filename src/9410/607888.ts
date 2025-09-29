@@ -5,13 +5,13 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, useAtomWithSubscription, Xr, Ut } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { H } from "../905/620380";
-import { R } from "../905/165069";
+import { useConditionalCallback } from "../905/165069";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { zE } from "../905/738636";
-import { Uf, $K } from "../figma_app/223206";
+import { sendToBuzzFromDesignAtom, sessionIdAtom } from "../figma_app/223206";
 import { J3, JU } from "../figma_app/622574";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getPermissionsAndView } from "../905/766303";
@@ -20,8 +20,8 @@ import { FFileType } from "../figma_app/191312";
 import { currentTeamAtom } from "../figma_app/598018";
 import { TabOpenBehavior } from "../figma_app/915202";
 import { t as _$$t2 } from "../905/825647";
-import { R as _$$R } from "../figma_app/53049";
-import { EI } from "../figma_app/21029";
+import { loadCanvasDataAsync } from "../figma_app/53049";
+import { useIsFullscreenReady } from "../figma_app/21029";
 export function $$j2(e, t, i) {
   let r = atomStoreManager.get(currentTeamAtom);
   let n = debugState.getState();
@@ -57,7 +57,7 @@ export function $$I1({
     });
     return Error(e);
   }
-  return atomStoreManager.set(Uf, {
+  return atomStoreManager.set(sendToBuzzFromDesignAtom, {
     fileKey: e.key,
     fileVersion: t,
     sourceNodeIds: i
@@ -65,18 +65,18 @@ export function $$I1({
 }
 export function $$k0() {
   let e = useDispatch();
-  let t = useAtomWithSubscription(Uf);
+  let t = useAtomWithSubscription(sendToBuzzFromDesignAtom);
   let i = useCurrentFileKey();
-  let s = EI();
+  let s = useIsFullscreenReady();
   let l = !!t;
   let u = l && !!i && s;
-  let f = Xr($K);
+  let f = Xr(sessionIdAtom);
   let y = J3();
   let C = JU(y);
   let {
     openCooperPublishFlow
   } = _$$t2();
-  R(() => {
+  useConditionalCallback(() => {
     e(VisualBellActions.enqueue({
       message: getI18nString("buzz.send_from_design.copying"),
       type: "send-to-buzz-from-design-loading",
@@ -108,9 +108,9 @@ export function $$k0() {
       timeoutOverride: 3e3
     }));
   }, [e, C, openCooperPublishFlow, t]));
-  R(() => {
+  useConditionalCallback(() => {
     (async () => {
-      Fullscreen?.applyNodesFromBuffer(await _$$R({
+      Fullscreen?.applyNodesFromBuffer(await loadCanvasDataAsync({
         fileKey: t.fileKey,
         selectedGuids: t.sourceNodeIds
       }), t.fileKey, t.sourceNodeIds, !1);

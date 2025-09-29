@@ -35,7 +35,7 @@ import { JT } from "../figma_app/632248";
 import { pP, cT, qy } from "../figma_app/862289";
 import { zF } from "../figma_app/297822";
 import { Hd, n4, y_ } from "../figma_app/878113";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { o2 } from "../figma_app/667212";
 import { u as _$$u } from "../figma_app/913494";
 import { G as _$$G } from "../figma_app/682672";
@@ -46,7 +46,7 @@ let $$Y4 = TJ(vu);
 export function $$$12() {
   let e = BE();
   let t = useSelector(e => Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
-  let r = sO();
+  let r = useIsFullscreenSlidesView();
   let n = isDesignFileType();
   let a = isWhiteboardFileType();
   let s = r || !!getFeatureFlags().aip_tone_dial_fd && n || a;

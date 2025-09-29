@@ -28,7 +28,7 @@ import { getBasename, getDirname } from "../905/309735";
 import { KindEnum } from "../905/129884";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { v as _$$v } from "../figma_app/398917";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { TN, Dq, Dh } from "../figma_app/177697";
 import { v as _$$v2 } from "../905/318279";
 import { t as _$$t2 } from "../figma_app/440177";
@@ -330,7 +330,7 @@ function Z({
   viewOnly: r,
   recordingKey: a
 }) {
-  let o = sO();
+  let o = useIsFullscreenSlidesView();
   let l = useDispatch();
   let d = useDropdownState();
   let c = useAtomWithSubscription(TN);

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, memo, useCallback } from "react";
 import { LC } from "../vendor/291472";
 import { trackEventAnalytics } from "../905/449184";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { getInitialOptions } from "../figma_app/169182";
 import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { getI18nString } from "../905/303541";
@@ -13,7 +13,7 @@ import { Xr, qN, Fb } from "../905/235109";
 export let $$m0 = "customElements" in window;
 function g(e) {
   let t = useRef(null);
-  _$$h(() => {
+  useSingleEffect(() => {
     new LC({
       ...e,
       ref: t,

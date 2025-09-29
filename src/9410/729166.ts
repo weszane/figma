@@ -15,7 +15,7 @@ import { F as _$$F2 } from '../905/160142';
 import { ox } from '../905/163832';
 import { ServiceCategories } from '../905/165054';
 import { getEditorViewType } from '../905/187165';
-import { h as _$$h3 } from '../905/791079';
+import { useSingleEffect } from '../905/791079';
 import { nt, o3 } from '../905/226610';
 import { o as _$$o2 } from '../905/237202';
 import { z as _$$z } from '../905/239603';
@@ -114,7 +114,7 @@ import { yh } from '../9410/974031';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Zh } from '../figma_app/2590';
 import { ei as _$$ei } from '../figma_app/9054';
-import { jY, sO } from '../figma_app/21029';
+import { useHasValidSceneSlideTheme, useIsFullscreenSlidesView } from '../figma_app/21029';
 import { atom, createValidatedLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { a_Q, bTb, Evg, Gyo, m8f, RtY, Wsk, wxr } from '../figma_app/27776';
 import { gs, ON, oy } from '../figma_app/31103';
@@ -1917,7 +1917,7 @@ function iQ() {
     _(f.current?.scrollTop);
   }, [_]);
   let [Y] = useAtomValueAndSetter(atomH1);
-  _$$h3(() => {
+  useSingleEffect(() => {
     let t = Y || 'init';
     s('Dev Mode Overview Shown', {
       type: e ? 'full' : 'lite',
@@ -2717,7 +2717,7 @@ let r0 = memo(({
       isFocused: !0
     });
   }, [U]);
-  let K = sO();
+  let K = useIsFullscreenSlidesView();
   let H = B || showing ? cD : Xt;
   let z = useCallback(e => {
     x(Zh({
@@ -3293,7 +3293,7 @@ function r5() {
   }));
   let o = i !== UIVisibilitySetting.HIDE_UI && i !== UIVisibilitySetting.ON_AND_LOCKED;
   let p = selectCurrentFile();
-  let m = jY();
+  let m = useHasValidSceneSlideTheme();
   let f = BI();
   let g = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   useEffect(() => (document.body.setAttribute('data-editor-theme', getEditorViewType(e, g)), () => {

@@ -22,7 +22,7 @@ import { R as _$$R } from "../905/550439";
 import { P } from "../905/498777";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { zL, pL } from "../figma_app/369750";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { HS, Ay } from "../figma_app/976110";
 let $$w10 = "prototypeInteractionEditModal";
 let $$O7 = "interactionPanel";
@@ -273,7 +273,7 @@ export function $$es23() {
   let a = selectCurrentFile();
   let s = useSelector(e => a && a.teamId ? e.teams[a.teamId] : null);
   let d = useAtomWithSubscription(openFileTeamAtom);
-  let c = sO();
+  let c = useIsFullscreenSlidesView();
   let p = isWhiteboardFileType();
   let h = useIsSelectedViewFullscreenCooper();
   let m = ea(FeatureFlag.PROTOTYPING_MULTIPLE_ACTIONS, s);

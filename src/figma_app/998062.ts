@@ -13,7 +13,7 @@ import { useSelectionPropertyValue, useNonMixedSelectionPropertyValue } from "..
 import { getObservableValue } from "../figma_app/84367";
 import { ZU, Wg } from "../figma_app/986347";
 import { v as _$$v } from "../figma_app/339170";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { useRef, useMemo } from "react";
 import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
@@ -62,7 +62,7 @@ function N({
   });
 }
 export function $$w2(e, t) {
-  let r = sO();
+  let r = useIsFullscreenSlidesView();
   let i = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let a = r && i === SelfDesignType.SELF;
   let s = sd();
@@ -88,7 +88,7 @@ export function $$O0({
 }
 export function $$R1() {
   let e = useDispatch();
-  let t = sO();
+  let t = useIsFullscreenSlidesView();
   let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let a = t && r === SelfDesignType.SELF;
   let s = useSelectionPropertyValue("propertiesPanelShouldShowRemoveAutoLayout");
@@ -115,7 +115,7 @@ export function $$R1() {
 export function $$L3() {
   let e = _x();
   let t = _$$v();
-  let r = sO();
+  let r = useIsFullscreenSlidesView();
   let n = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let i = r && n === SelfDesignType.SELF;
   return r && (i || e) ? t : null;

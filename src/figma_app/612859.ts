@@ -11,7 +11,7 @@ import { i2 } from "../905/296461";
 import { oT } from "../figma_app/566517";
 import { Gy } from "../figma_app/193952";
 import { fullscreenValue } from "../figma_app/455680";
-import { Pv } from "../905/619652";
+import { convertImageDataToURL } from "../905/619652";
 import { re } from "../figma_app/234690";
 import { bq, BY } from "../figma_app/541950";
 export let $$y4 = 6;
@@ -227,7 +227,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
           type: "UNCOMPRESSED",
           scale: 184 / e.size.x
         });
-        return t && t[0] ? Pv(t[1], new Point(t[0].width, t[0].height)) : null;
+        return t && t[0] ? convertImageDataToURL(t[1], new Point(t[0].width, t[0].height)) : null;
       }(i);
       s && f.push({
         attachedNodeId: r.guid,

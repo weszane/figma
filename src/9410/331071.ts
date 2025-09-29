@@ -38,7 +38,7 @@ import { a as _$$a2 } from '../905/192547';
 import { LRUCache } from '../905/196201';
 import { ES, TC } from '../905/198599';
 import { l as _$$l } from '../905/202425';
-import { h as _$$h } from '../905/791079';
+import { useSingleEffect } from '../905/791079';
 import { FlexBox, LayoutContainer } from '../905/222272';
 import { nt as _$$nt, o3 as _$$o } from '../905/226610';
 import { s as _$$s4 } from '../905/234042';
@@ -109,7 +109,7 @@ import { getFeatureFlags } from '../905/601108';
 import { t as _$$t5 } from '../905/605191';
 import { Z as _$$Z2 } from '../905/606826';
 import { _ as _$$_4 } from '../905/614936';
-import { _G, Pv } from '../905/619652';
+import { generateExportThumbnail, convertImageDataToURL } from '../905/619652';
 import { handleSelectedView } from '../905/622391';
 import { VU } from '../905/625959';
 import { T as _$$T3 } from '../905/632137';
@@ -900,7 +900,7 @@ async function tC(e, t, i, r) {
       o.push(t);
     }
     let l = (await eZ(s, o, r)).getReader();
-    for (; ;) {
+    for (;;) {
       let {
         done,
         value
@@ -1016,7 +1016,7 @@ function t0(e) {
             obj: e,
             depth
           });
-        } catch (e) { }
+        } catch (e) {}
       }
       return obj.startsWith('data:image') ? jsx(t$, {
         url: obj
@@ -1392,7 +1392,7 @@ function it({
   try {
     let i = new DOMParser().parseFromString(e, 'text/xml').getElementsByTagName('user_input');
     i.length > 0 && (t = i[0].textContent || '');
-  } catch { }
+  } catch {}
   return jsx('div', {
     children: t.split('\n').map((e, t) => jsxs('span', {
       children: [e, jsx('br', {})]
@@ -2032,7 +2032,7 @@ var nX = (e => (e.TITLE = 'title', e.BODY = 'body', e.LABLE = 'label', e))(nX ||
 let nZ = 'theme_editor--svgText--yyKtR';
 let nQ = createContext({
   activeTab: nq.COLOR,
-  onTabChange: () => { },
+  onTabChange: () => {},
   recordingKey: void 0
 });
 function n$({
@@ -2919,7 +2919,7 @@ function af(e) {
         if (!r) return [];
         try {
           return _$$z.array(PromptSchema).parse(JSON.parse(r));
-        } catch { }
+        } catch {}
         return [];
       }(f.guid);
       let y = function (e) {
@@ -2959,7 +2959,7 @@ function af(e) {
       })(f.guid, _);
       let v = C.getReader();
       let E = [];
-      for (; ;) {
+      for (;;) {
         let {
           done,
           value
@@ -4486,20 +4486,20 @@ let aJ = async ({
     for (let r of (i.name = 'Results', ComponentPropsAiCPPBindings.setTextContentOnTextNode(i.guid, `False Negative Count: ${l.reduce((e, t) => e + t.falseNegativeCount, 0)}
 False Positive Count: ${l.reduce((e, t) => e + t.falsePositiveCount, 0)}
 Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 10, i.size = {
-        x: 200,
-        y: 200
-      }, i.fills = i.fills.concat([{
-        type: 'SOLID',
-        color: {
-          r: 0,
-          g: 0,
-          b: 0,
-          a: 1
-        },
-        visible: !0,
-        opacity: 1,
-        blendMode: 'NORMAL'
-      }]), t.appendChild(i), e.appendChild(t), l)) {
+      x: 200,
+      y: 200
+    }, i.fills = i.fills.concat([{
+      type: 'SOLID',
+      color: {
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 1
+      },
+      visible: !0,
+      opacity: 1,
+      blendMode: 'NORMAL'
+    }]), t.appendChild(i), e.appendChild(t), l)) {
       let t = r.result;
       if (!equals(t.expectedComponents, t.components)) {
         let i = FirstDraftHelpers.cloneNodeForComponentize(t.node.guid);
@@ -5727,12 +5727,12 @@ function sU(e) {
 }
 function sG(e) {
   let t = e.size;
-  let i = _G(new Point(t.x, t.y), e.guid, !0, void 0, !1, !0);
+  let i = generateExportThumbnail(new Point(t.x, t.y), e.guid, !0, void 0, !1, !0);
   if (!i || !i.pixels || !i.pixelSize || !i.displaySize) return null;
   let {
     base64,
     mimeType
-  } = sU(Pv(i.pixels, i.pixelSize));
+  } = sU(convertImageDataToURL(i.pixels, i.pixelSize));
   return {
     base64,
     mimeType,
@@ -6033,7 +6033,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           l = updatedU;
           d = updatedV;
           let c = sink;
-          for (; ;) {
+          for (;;) {
             let e = predecessors[c];
             s[c] = e;
             let i = o[e];
@@ -7858,7 +7858,7 @@ function oO(e) {
   });
 }
 let oM = e => Zj(e) && !e.hideCheckForQuickCommand;
-let oP = () => { };
+let oP = () => {};
 function oF({
   item: e,
   searchQuery: t,
@@ -8567,7 +8567,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: m ? renderI18nText('fullscreen_actions.quick_actions.find-in-community', {
               searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -8605,7 +8605,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: m ? o ? renderI18nText('fullscreen_actions.quick_actions.find-at-plan-file', {
               searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -8661,7 +8661,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? 'fullscreen_actions.quick_actions.search-at-plan-file-and-community' : 'fullscreen_actions.quick_actions.find-at-plan-file-and-community', {
               searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -8711,7 +8711,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: renderI18nText('fullscreen_actions.assistant-chat-query', {
               query: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -10347,7 +10347,7 @@ function dS({
   let r = useAtomWithSubscription(Q8);
   let a = JB();
   let s = useResetAtom(_$$t6);
-  return (_$$h(() => () => {
+  return (useSingleEffect(() => () => {
     a();
     s();
   }), e) ? r.trim() ? jsx(dv, {
@@ -10578,7 +10578,7 @@ function dk() {
     current
   } = cq();
   let t = jh();
-  return (_$$h(() => () => {
+  return (useSingleEffect(() => () => {
     t();
   }), current) ? jsx(Fragment, {
     children: current.module
@@ -10663,7 +10663,7 @@ function dA() {
   let e = Xr(Bu);
   let t = useAtomWithSubscription(_$$rE);
   let i = useAtomWithSubscription(_$$dd);
-  _$$h(() => (e(!0), i && dN(i, t || void 0), () => {
+  useSingleEffect(() => (e(!0), i && dN(i, t || void 0), () => {
     e(!1);
   }));
   let r = useAtomWithSubscription(Kh);

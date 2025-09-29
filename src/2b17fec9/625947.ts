@@ -467,7 +467,7 @@ import { ek as _$$ek, fT as _$$fT, pf as _$$pf, vD as _$$vD, vo as _$$vo, yw as 
 import { p as _$$p3 } from '../figma_app/353099';
 import { ResourceType } from '../figma_app/354658';
 import { c1 as _$$c5, Yh as _$$Yh } from '../figma_app/357047';
-import { K as _$$K3 } from '../figma_app/358450';
+import { useMobileGestures } from '../figma_app/358450';
 import { fc as _$$fc2, Z0 as _$$Z3, DL } from '../figma_app/359152';
 import { $g, gr as _$$gr, nj as _$$nj, OL as _$$OL, qy as _$$qy, Sg, XG } from '../figma_app/360824';
 import { isPrimaryLocaleEnglish } from '../figma_app/363242';
@@ -600,7 +600,7 @@ import { desktopAPIInstance } from '../figma_app/876459';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
 import { Ho } from '../figma_app/878651';
 import { Bj, QK } from '../figma_app/882116';
-import { f7 as _$$f6, jr as _$$jr, VA as _$$VA, W0 } from '../figma_app/896988';
+import { forwardKeyboardEvent, handleKeyboardEventByState, KeyboardEventResponse } from '../figma_app/896988';
 import { isInteractionPathCheck } from '../figma_app/897289';
 import { trackFileEventWithStore, trackFileEventWithUser } from '../figma_app/901889';
 import { M as _$$M } from '../figma_app/904127';
@@ -14240,7 +14240,7 @@ function xn({
           case KeyCodes.UP_ARROW:
           case KeyCodes.DOWN_ARROW:
             if (!isModifierMatch(e, 0)) {
-              _$$f6(e);
+              forwardKeyboardEvent(e);
               break;
             }
             if (B(!0), O && V) {
@@ -14262,7 +14262,7 @@ function xn({
             isCommandModifier(e) && (fullscreenValue.triggerAction(e.keyCode === KeyCodes.C ? 'copy' : e.keyCode === KeyCodes.X ? 'cut' : 'paste'), e.stopPropagation(), e.preventDefault());
             break;
           default:
-            _$$f6(e);
+            forwardKeyboardEvent(e);
         }
       },
       onClick: () => {
@@ -17416,7 +17416,7 @@ function gP() {
   _$$A74(inputRef, next, focusedByButtons);
   let [g, j] = useState('');
   let y = useCallback(e => {
-    e.keyCode === KeyCodes.ESCAPE ? (e.target?.blur?.(), setHidden(!0)) : e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && _$$jr(e, W0.YES, _$$VA.NO) && e.stopPropagation();
+    e.keyCode === KeyCodes.ESCAPE ? (e.target?.blur?.(), setHidden(!0)) : e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && handleKeyboardEventByState(e, KeyboardEventResponse.YES, KeyboardEventResponse.NO) && e.stopPropagation();
   }, [setHidden]);
   let v = useCallback(e => {
     switch (e.keyCode) {
@@ -20242,7 +20242,7 @@ function j9({
         c.current?.select();
         e.preventDefault();
       } else {
-        _$$jr(e);
+        handleKeyboardEventByState(e);
       }
     }, [addMinutes, u, startTimer]);
     let m = useCallback(() => {
@@ -20291,7 +20291,7 @@ function j9({
           e.preventDefault();
           return;
         }
-        if (_$$jr(e) || e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+        if (handleKeyboardEventByState(e) || e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
         let l = parseInt(t.seconds);
         if (!isNaN(l)) {
           if (e.key === 'ArrowUp') {
@@ -24403,7 +24403,7 @@ let vW = memo(({
         }), jsx(vK, {}), jsx('div', {
           ref: s
         }), !isVsCodeEnvironment() && jsx(nc, {}), jsxs(_$$G, {
-          children: [jsx(vs, {}), !!L?.shouldOptimizeForIpadApp && jsx(_$$K3, {}), !!L?.shouldOptimizeForIpadApp && jsx(_$$t5, {})]
+          children: [jsx(vs, {}), !!L?.shouldOptimizeForIpadApp && jsx(useMobileGestures, {}), !!L?.shouldOptimizeForIpadApp && jsx(_$$t5, {})]
         }), e && jsx(X5, {})]
       }), jsx(_$$A, {
         editorType: FEditorType.Whiteboard,

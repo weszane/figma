@@ -17,9 +17,9 @@ import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { BasicFuseSearch } from "../905/81982";
 import { b as _$$b } from "../figma_app/882253";
 import { useSubscribedLibraries, getNumStylesByType } from "../figma_app/155728";
-import { sO } from "../figma_app/21029";
+import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { Dq } from "../figma_app/177697";
-import { s1 } from "../figma_app/226737";
+import { useEffectiveThemeId } from "../figma_app/226737";
 import { LB, kj } from "../905/883812";
 import { V as _$$V } from "../905/693394";
 import { b as _$$b2 } from "../905/857767";
@@ -148,8 +148,8 @@ export function $$B3(e, t, i, d, c, u) {
   let m = p?.key ?? "__OPEN_FILE_KEY__";
   let g = p ? _$$l(p.libraryKey) : void 0;
   let f = $$R1(e);
-  let A = sO();
-  let y = s1();
+  let A = useIsFullscreenSlidesView();
+  let y = useEffectiveThemeId();
   let b = useAtomWithSubscription(Dq);
   let v = u || f;
   let {

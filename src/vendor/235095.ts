@@ -2410,7 +2410,7 @@ var tx = {
     default: !1
   }
 };
-export function $$tw0(e, r) {
+export function initialize(e, r) {
   var n = $$arguments.length > 2 && void 0 !== $$arguments[2] ? $$arguments[2] : {};
   var i = function(e) {
     var r;
@@ -2519,4 +2519,4 @@ export function $$tw0(e, r) {
   window.addEventListener("pagehide", p);
   return o;
 }
-export const n_ = $$tw0; 
+export const n_ = initialize; 

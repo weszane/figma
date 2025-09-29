@@ -7,7 +7,7 @@ import { StyleType } from "../figma_app/276332";
 import { getFeatureFlags } from "../905/601108";
 import { Ay } from "../figma_app/272902";
 import u from "classnames";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { useLatestRef } from "../figma_app/922077";
 import { KeyCodes } from "../905/63728";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
@@ -37,7 +37,7 @@ import { Ih, LV, tx, dC, kE, w$, HK, dh, Yc, oM } from "../905/820169";
 import { qF, bT, tZ, Ui } from "../905/943361";
 import { XM, A7, ip } from "../905/609328";
 import { D as _$$D } from "../figma_app/406976";
-import { s1 } from "../figma_app/226737";
+import { useEffectiveThemeId } from "../figma_app/226737";
 import { Px } from "../figma_app/152690";
 import { Z as _$$Z, t as _$$t3 } from "../905/230174";
 import { AQ } from "../figma_app/481279";
@@ -537,7 +537,7 @@ export function $$el3({
   useRef(null).current = ec;
   let e_ = eo(t);
   let eh = F.length > 0 || e_ ? "list" : a.layout;
-  let em = s1();
+  let em = useEffectiveThemeId();
   let eg = useMemo(() => J({
     requestedTypes: k,
     resolvedType: u ?? null
@@ -890,7 +890,7 @@ function ep({
   recordingKey: s
 }) {
   let o = useRef(null);
-  _$$h(() => {
+  useSingleEffect(() => {
     o.current && o.current.focus();
   });
   return jsxs("div", {

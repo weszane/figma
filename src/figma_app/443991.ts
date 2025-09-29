@@ -10,7 +10,7 @@ import { createOptimistThunk } from "../905/350402";
 import { putOrgs } from "../905/395917";
 import { setTeamOptimistThunk } from "../figma_app/240735";
 import { yJ as _$$yJ2 } from "../figma_app/24841";
-import { jS, Pv } from "../905/619652";
+import { generatePaintIcon, convertImageDataToURL } from "../905/619652";
 import { Pf, ck } from "../905/952832";
 import { u as _$$u } from "../905/774364";
 let E = (e, t) => {
@@ -43,13 +43,13 @@ export function $$b4(e) {
 export async function $$T2(e, t, r) {
   let n = function () {
     let t = e.originalImageWidth && e.originalImageHeight ? e.originalImageWidth / e.originalImageHeight : 1;
-    let r = jS(e, new Point(Math.max(Pf.LARGE, Pf.LARGE * t), Math.max(Pf.LARGE, Pf.LARGE / t)), {
+    let r = generatePaintIcon(e, new Point(Math.max(Pf.LARGE, Pf.LARGE * t), Math.max(Pf.LARGE, Pf.LARGE / t)), {
       r: 0,
       g: 0,
       b: 0,
       a: 0
     });
-    return r && r.pixels && r.pixelSize ? Pv(r.pixels, r.pixelSize) : "";
+    return r && r.pixels && r.pixelSize ? convertImageDataToURL(r.pixels, r.pixelSize) : "";
   }();
   if (n) try {
     let e = await function (e) {
@@ -100,7 +100,7 @@ let S = createOptimistThunk((e, t) => {
     e.dispatch(FlashActions.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo")));
     console.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"), t);
     e.dispatch($$I1());
-  }); else if (t.entityType === ck.TEAM) {
+  });else if (t.entityType === ck.TEAM) {
     let r = t.entity.id;
     sendWithRetry.put(`/api/teams/${r}`, {
       img_url: t.smallUrl,

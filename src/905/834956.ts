@@ -29,7 +29,7 @@ import { S as _$$S } from '../figma_app/420927'
 import { parsePxInt } from '../figma_app/783094'
 import { memoizeByArgs } from '../figma_app/815945'
 import { LoadingSpinner } from '../figma_app/858013'
-import { handleGenericEvent, handleKeyboardEvent, handleMouseEvent, RecordingPureComponent } from '../figma_app/878298'
+import { handleGenericEvent, hookForKeyboard, handleMouseEvent, RecordingPureComponent } from '../figma_app/878298'
 import { isInteractionOrEvalMode } from '../figma_app/897289'
 import { KD } from '../figma_app/975811'
 
@@ -46,7 +46,7 @@ class z extends RecordingPureComponent {
     super(...arguments)
     this.justClickedToOpen = !1
     this.delayedMount = new _$$W()
-    this.onKeyDown = handleKeyboardEvent(this, 'keydown', (e) => {
+    this.onKeyDown = hookForKeyboard(this, 'keydown', (e) => {
       (e.key === 'Enter' || e.key === ' ') && (e.stopPropagation(), e.preventDefault(), e.nativeEvent.stopImmediatePropagation(), this.props.onSelect(e, !0))
     })
     this.onFocus = handleGenericEvent(this, 'focus', (e) => {
@@ -150,13 +150,13 @@ class MultilevelDropdownOption extends z {
             }),
           })
           : !this.props.showCheckmarkOnRight && l && (e = jsxs('div', {
-              className: U,
-              children: [t.isChecked && jsx(_$$l, {
-                className: B,
-              }), t.isChildChecked && jsx('div', {
-                className: 'multilevel_dropdown--childCheckedIndicator--Ij9Jl',
-              })],
-            })))
+            className: U,
+            children: [t.isChecked && jsx(_$$l, {
+              className: B,
+            }), t.isChildChecked && jsx('div', {
+              className: 'multilevel_dropdown--childCheckedIndicator--Ij9Jl',
+            })],
+          })))
     let c = 'sideText' in t && t.sideText && t.rightJustifySideText
     let u = t.disableMouseEnter || a
     let p = header || a && !this.props.isActive
@@ -188,50 +188,50 @@ class MultilevelDropdownOption extends z {
       'children': ['render' in t
         ? t.render()
         : jsxs(Fragment, {
-            children: [e, o && jsx('div', {
-              className: U,
-              children: jsx(_$$s, {
-                className: B,
-              }),
-            }), t.icon, t.subText
+          children: [e, o && jsx('div', {
+            className: U,
+            children: jsx(_$$s, {
+              className: B,
+            }),
+          }), t.icon, t.subText
               ? jsxs('div', {
-                  className: d()({
-                    'multilevel_dropdown--subTextContainer--Yx6bF': !0,
-                    [t.subTextContainerStyleOverride]: !!t.subTextContainerStyleOverride,
-                  }),
-                  children: [jsx('div', {
-                    className: `${F} ${t.displayTextClassName}`,
-                    children: t.displayText,
-                  }), t.displayTextBadge, jsx('div', {
-                    className: `multilevel_dropdown--subText--Czx4F multilevel_dropdown--name--G0H87 ellipsis--ellipsis--Tjyfa text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L ${t.subTextClassname || ''}`,
-                    children: t.subText,
-                  })],
-                })
+                className: d()({
+                  'multilevel_dropdown--subTextContainer--Yx6bF': !0,
+                  [t.subTextContainerStyleOverride]: !!t.subTextContainerStyleOverride,
+                }),
+                children: [jsx('div', {
+                  className: `${F} ${t.displayTextClassName}`,
+                  children: t.displayText,
+                }), t.displayTextBadge, jsx('div', {
+                  className: `multilevel_dropdown--subText--Czx4F multilevel_dropdown--name--G0H87 ellipsis--ellipsis--Tjyfa text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L ${t.subTextClassname || ''}`,
+                  children: t.subText,
+                })],
+              })
               : jsxs(Fragment, {
-                  children: [t.displayTextIcon, jsx('div', {
-                    className: c ? '' : `${F} ${t.displayTextClassName}`,
-                    children: t.displayText,
-                  }), t.displayTextBadge],
-                }), t.sideText && jsx('div', {
-              className: d()(c ? 'multilevel_dropdown--sideTextFixedRight--pXQKr multilevel_dropdown--sideText--AxsT3 multilevel_dropdown--name--G0H87 ellipsis--ellipsis--Tjyfa text--fontNeg12--2PWcg text--_fontBase--QdLsd text--_negText--j9g-L' : 'multilevel_dropdown--sideText--AxsT3 multilevel_dropdown--name--G0H87 ellipsis--ellipsis--Tjyfa text--fontNeg12--2PWcg text--_fontBase--QdLsd text--_negText--j9g-L', t.sideTextClassname),
-              children: t.sideText,
-            }), t.itemBadge, !o && !t.isChecked && !!t.itemBadgeV2 && jsx('div', {
-              className: 'multilevel_dropdown--rightColumnBadge--IdQu7 multilevel_dropdown--rightColumn--NfYz8',
-              children: t.itemBadgeV2,
-            }), !o && this.props.showCheckmarkOnRight && t.isChecked && jsx('div', {
-              className: c ? $$j : 'multilevel_dropdown--rightColumnCheckmark--fNU4f multilevel_dropdown--rightColumn--NfYz8',
-              children: jsx(_$$l, {
-                className: B,
-              }),
-            }), !o && !t.children && this.props.showCheckmarkOnRight && !t.isChecked && !t.shortcut && t.alternativeRightIconIfNotChecked && jsx('div', {
-              className: c ? $$j : M,
-              children: t.alternativeRightIconIfNotChecked,
-            }), !o && !t.children && !this.props.showCheckmarkOnRight && !t.shortcut && t.rightIcon && jsx('div', {
-              className: c ? $$j : M,
-              children: t.rightIcon,
-            })],
-          }), !!t.children && !('render' in t) && (a
-        ? jsx(RecordableDiv, {
+                children: [t.displayTextIcon, jsx('div', {
+                  className: c ? '' : `${F} ${t.displayTextClassName}`,
+                  children: t.displayText,
+                }), t.displayTextBadge],
+              }), t.sideText && jsx('div', {
+                className: d()(c ? 'multilevel_dropdown--sideTextFixedRight--pXQKr multilevel_dropdown--sideText--AxsT3 multilevel_dropdown--name--G0H87 ellipsis--ellipsis--Tjyfa text--fontNeg12--2PWcg text--_fontBase--QdLsd text--_negText--j9g-L' : 'multilevel_dropdown--sideText--AxsT3 multilevel_dropdown--name--G0H87 ellipsis--ellipsis--Tjyfa text--fontNeg12--2PWcg text--_fontBase--QdLsd text--_negText--j9g-L', t.sideTextClassname),
+                children: t.sideText,
+              }), t.itemBadge, !o && !t.isChecked && !!t.itemBadgeV2 && jsx('div', {
+                className: 'multilevel_dropdown--rightColumnBadge--IdQu7 multilevel_dropdown--rightColumn--NfYz8',
+                children: t.itemBadgeV2,
+              }), !o && this.props.showCheckmarkOnRight && t.isChecked && jsx('div', {
+                className: c ? $$j : 'multilevel_dropdown--rightColumnCheckmark--fNU4f multilevel_dropdown--rightColumn--NfYz8',
+                children: jsx(_$$l, {
+                  className: B,
+                }),
+              }), !o && !t.children && this.props.showCheckmarkOnRight && !t.isChecked && !t.shortcut && t.alternativeRightIconIfNotChecked && jsx('div', {
+                className: c ? $$j : M,
+                children: t.alternativeRightIconIfNotChecked,
+              }), !o && !t.children && !this.props.showCheckmarkOnRight && !t.shortcut && t.rightIcon && jsx('div', {
+                className: c ? $$j : M,
+                children: t.rightIcon,
+              })],
+        }), !!t.children && !('render' in t) && (a
+          ? jsx(RecordableDiv, {
             'className': d()('multilevel_dropdown--hasDotDotDotButton--ifOsI', {
               'multilevel_dropdown--hasDotDotDotButtonActive--XRU9C': this.props.isActive,
             }),
@@ -244,38 +244,38 @@ class MultilevelDropdownOption extends z {
               className: B,
             }),
           })
-        : jsx('div', {
+          : jsx('div', {
             className: d()(c ? $$j : M, 'multilevel_dropdown--hasSubmenuIcon--PWJDs'),
             children: jsx(_$$k, {
               className: B,
             }),
           })), t.shortcut && jsx(_$$S, {
-        shortcut: t.shortcut,
-        className: 'multilevel_dropdown--rightColumnShortcut---2GmL multilevel_dropdown--rightColumn--NfYz8 text--fontNeg12--2PWcg text--_fontBase--QdLsd text--_negText--j9g-L',
-      }), t.rightText && jsx('div', {
-        className: M,
-        children: t.rightText,
-      }), t.input && jsx('div', {
-        className: 'multilevel_dropdown--inputContainer--50x82',
-        onPointerEnter: (e) => {
-          e.stopPropagation()
-        },
-        onPointerUp: (e) => {
-          e.stopPropagation()
-        },
-        children: jsx(FormattedInputVariant1, {
-          property: t.input.value,
-          style: {
-            width: t.input.width ?? 50,
-          },
-          className: 'multilevel_dropdown--input--ZHn1-',
-          onChange: t.input.onChange,
-          onKeyDown: (e) => {
-            e.key === 'Enter' && e.stopPropagation()
-          },
-          formatter: G,
-        }),
-      })],
+            shortcut: t.shortcut,
+            className: 'multilevel_dropdown--rightColumnShortcut---2GmL multilevel_dropdown--rightColumn--NfYz8 text--fontNeg12--2PWcg text--_fontBase--QdLsd text--_negText--j9g-L',
+          }), t.rightText && jsx('div', {
+            className: M,
+            children: t.rightText,
+          }), t.input && jsx('div', {
+            className: 'multilevel_dropdown--inputContainer--50x82',
+            onPointerEnter: (e) => {
+              e.stopPropagation()
+            },
+            onPointerUp: (e) => {
+              e.stopPropagation()
+            },
+            children: jsx(FormattedInputVariant1, {
+              property: t.input.value,
+              style: {
+                width: t.input.width ?? 50,
+              },
+              className: 'multilevel_dropdown--input--ZHn1-',
+              onChange: t.input.onChange,
+              onKeyDown: (e) => {
+                e.key === 'Enter' && e.stopPropagation()
+              },
+              formatter: G,
+            }),
+          })],
     })
   }
 }
@@ -400,7 +400,7 @@ let MultilevelDropdown = class e extends RecordingPureComponent {
       e.stopPropagation()
       this.onKeyDown(e)
     }
-    this.onKeyDown = handleKeyboardEvent(this, 'keydown', (e) => {
+    this.onKeyDown = hookForKeyboard(this, 'keydown', (e) => {
       if (!this.state.activeItemSubmenuShown) {
         this.props.onKeyDown && this.props.onKeyDown(e)
         let t = this.currentVisibleItems()
@@ -412,9 +412,9 @@ let MultilevelDropdown = class e extends RecordingPureComponent {
             e.preventDefault();
             (n = this.state.activeItem != null ? t[this.state.activeItem.index] : null) && (n.children
               ? this.setState({
-                  activeItemSubmenuShown: !0,
-                  activeItemSubmenuShouldAutofocus: !0,
-                })
+                activeItemSubmenuShown: !0,
+                activeItemSubmenuShouldAutofocus: !0,
+              })
               : (this.props.dispatch(hideDropdownAction()), this.props.onSelectItem(n, e)))
             break
           case KeyCodes.TAB:
@@ -486,14 +486,14 @@ let MultilevelDropdown = class e extends RecordingPureComponent {
       }
       !isInteractionOrEvalMode() && Q
         ? setTimeout(() => {
-            let i = this.options[t]
-            let n = findDOMNode(i)
-            if (n && J.length > 0) {
-              let i = n.getBoundingClientRect()
-              let r = J.slice(-1)[0]
-              r.x >= i.left && r.x <= i.right && r.y >= i.top && r.y <= i.bottom && this.setActiveOption(e, t, !0)
-            }
-          }, 200)
+          let i = this.options[t]
+          let n = findDOMNode(i)
+          if (n && J.length > 0) {
+            let i = n.getBoundingClientRect()
+            let r = J.slice(-1)[0]
+            r.x >= i.left && r.x <= i.right && r.y >= i.top && r.y <= i.bottom && this.setActiveOption(e, t, !0)
+          }
+        }, 200)
         : this.setActiveOption(e, t, !0)
       e.onMouseEnter && e.onMouseEnter()
     }
@@ -534,20 +534,20 @@ let MultilevelDropdown = class e extends RecordingPureComponent {
       i.stopPropagation()
       e.disabled || e.children && !e.callbackOnClickWithChildren || e.visuallyDisabledWithSelection
         ? !e.disabled && !e.visuallyDisabledWithSelection && e.children?.length != null && e.children?.length > 0 && (e.showDotDotDotButton && this.isActiveItem(e, t) && this.state.activeItemSubmenuShown
-            ? this.setState({
-                activeItem: null,
-                activeItemSubmenuShown: !1,
-              })
-            : this.setState({
-                activeItemSubmenuShown: !0,
-                activeItemSubmenuShouldAutofocus: !!n,
-              }))
+          ? this.setState({
+            activeItem: null,
+            activeItemSubmenuShown: !1,
+          })
+          : this.setState({
+            activeItemSubmenuShown: !0,
+            activeItemSubmenuShouldAutofocus: !!n,
+          }))
         : (e.preventDismissOnSelected
-            ? e.allowClickThrough && this.state.activeItemSubmenuShown && this.setState({
-              activeItem: null,
-              activeItemSubmenuShown: !1,
-            })
-            : this.props.dispatch(hideDropdownAction()), this.props.onSelectItem(e, i), !e.preventDismissOnSelected && this.props.onDropdownHidden && this.props.onDropdownHidden())
+          ? e.allowClickThrough && this.state.activeItemSubmenuShown && this.setState({
+            activeItem: null,
+            activeItemSubmenuShown: !1,
+          })
+          : this.props.dispatch(hideDropdownAction()), this.props.onSelectItem(e, i), !e.preventDismissOnSelected && this.props.onDropdownHidden && this.props.onDropdownHidden())
       e.disabled || e.visuallyDisabledWithSelection?.()
     }
     this.onClickMenu = (e) => {
@@ -815,8 +815,8 @@ let MultilevelDropdown = class e extends RecordingPureComponent {
     }
     return this.props.shouldUsePortal
       ? (e = jsx(UI3ConditionalWrapper, {
-          children: e,
-        }), createPortal(e, document.body))
+        children: e,
+      }), createPortal(e, document.body))
       : e
   }
 }
@@ -826,10 +826,10 @@ export let $$ea0 = forwardRef((e, t) => {
   return e.items.length === 0 || e.items.every(e => e.separator)
     ? null
     : jsx(MultilevelDropdown, {
-        ...e,
-        toolbarHeightAndMargin: i,
-        depth: e.depth ?? 0,
-        ref: t,
-      })
+      ...e,
+      toolbarHeightAndMargin: i,
+      depth: e.depth ?? 0,
+      ref: t,
+    })
 })
 export const j = $$ea0
