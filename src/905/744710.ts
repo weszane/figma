@@ -1,4 +1,4 @@
-import { Ay as _$$Ay } from '@stylexjs/stylex';
+import { stylex } from '@stylexjs/stylex';
 import I from 'classnames';
 import { Fragment as _$$Fragment, createContext, createElement, forwardRef, memo, PureComponent, Suspense, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -183,7 +183,7 @@ import { ModalContainer, ConfirmationModal2 } from '../figma_app/918700';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { b8 } from '../figma_app/926061';
 import { trackFontInstallerDownloaded, trackFontUninstallerDownloaded } from '../figma_app/976345';
-import { AW } from '../figma_app/990058';
+import { leaveOrganizationAction } from '../figma_app/990058';
 import { a$H, EJS, qgA } from '../vendor/285761';
 import { A as _$$A7 } from '../vendor/723372';
 import { as, Gb, hZ, Jt, mN, Op } from '../vendor/739257';
@@ -223,7 +223,7 @@ let y = createContext({
     activeSubView: null,
     properties: {}
   },
-  setAccountModalSubViewData: () => { }
+  setAccountModalSubViewData: () => {}
 });
 let E = I;
 let z1 = registerModal(e => {
@@ -1133,7 +1133,7 @@ function eJ(e) {
       e.meta.vat_gst_id && g(e.meta.vat_gst_id);
       e.meta.shipping_address && A(e.meta.shipping_address);
       e.meta.tax_id_verification_status && E(e.meta.tax_id_verification_status);
-    }).catch(() => { });
+    }).catch(() => {});
   });
   let O = useDispatch();
   let L = e.profile?.public_at ? e.profile?.profile_handle : null;
@@ -1582,7 +1582,7 @@ function tk(e) {
       className: th,
       children: e.headerText
     }), jsxs('div', {
-      ..._$$Ay.props(tR.optionsContainer, e.infoText ? tR.optionsContainerWithInfoText : null),
+      ...stylex.props(tR.optionsContainer, e.infoText ? tR.optionsContainerWithInfoText : null),
       children: [jsx(Checkbox, {
         checked: i.data.sendMeNotifications,
         onChange: p,
@@ -2110,7 +2110,7 @@ function iw(e) {
   }).catch(() => {
     l(null);
     s(FlashActions.error('Could not revoke token, please try again'));
-  }), () => { }), [s, token, user.id]);
+  }), () => {}), [s, token, user.id]);
   let c = token.scopes ?? [sy.FILES_READ_DEPRECATING, sy.FILE_COMMENTS_WRITE, sy.FILE_DEV_RESOURCES_WRITE, sy.WEBHOOKS_WRITE];
   let u = Object.entries(av(c)).filter(([, e]) => e !== _$$eK.NO_ACCESS).map(([e, t]) => {
     let i = qq(e).name;
@@ -3904,7 +3904,7 @@ function rP(e) {
       orgName: e.orgName
     }),
     onConfirm: () => {
-      t(AW({
+      t(leaveOrganizationAction({
         orgId: e.orgId,
         orgName: e.orgName
       }));

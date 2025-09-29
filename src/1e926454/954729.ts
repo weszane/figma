@@ -13,7 +13,7 @@ import { useTeamPlanFeatures } from "../figma_app/465071";
 import { N as _$$N } from "../905/809096";
 import { useDispatch, useSelector } from "react-redux";
 import { textDisplayConfig } from "../905/687265";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { ViewAccessTypeEnum } from "../905/513035";
@@ -70,7 +70,7 @@ function T({
     children: [jsx("div", {
       className: "x78zum5 x1qughib",
       children: jsx(Ay, {
-        ...xk(textDisplayConfig.textBodyMediumStrong),
+        ...props(textDisplayConfig.textBodyMediumStrong),
         htmlFor: e,
         children: t
       })
@@ -190,7 +190,7 @@ function U({
         direction: "horizontal",
         spacing: 8,
         children: [jsx("div", {
-          ...xk(Z.optionSeatName),
+          ...props(Z.optionSeatName),
           children: JT(e)
         }), !!r && jsx(_$$E, {
           variant: "defaultFilled",
@@ -198,13 +198,13 @@ function U({
             count: r
           })
         }), jsx(Spacer, {}), t && jsx("div", {
-          ...xk(Z.optionSeatSecondaryText),
+          ...props(Z.optionSeatSecondaryText),
           children: s && getI18nString("general.price_per_month", {
             priceString: s
           })
         })]
       }), jsx("div", {
-        ...xk(Z.optionSeatSecondaryText),
+        ...props(Z.optionSeatSecondaryText),
         children: l(e)
       })]
     })
@@ -367,7 +367,7 @@ function er({
     workspaceId: r,
     seatType: d,
     configs: {
-      groupNameClassName: xk(textDisplayConfig.textBodyMediumStrong).className
+      groupNameClassName: props(textDisplayConfig.textBodyMediumStrong).className
     }
   });
   let S = useId();
@@ -384,7 +384,7 @@ function er({
       })
     }), jsx(DialogBody, {
       children: jsxs("div", {
-        ...xk(ea.container),
+        ...props(ea.container),
         children: [jsx("div", {
           children: infoText
         }), jsx(T, {
@@ -489,7 +489,7 @@ function eb({
     let n = ((e = [...new Set(z)]).length <= 3 ? e : [...e.slice(0, 2), getI18nString("plan_invite_modal.team.seat_already_assigned.n_others", {
       n: e.length - 2
     })]).map(e => jsx("span", {
-      ...xk(textDisplayConfig.textBodyMediumStrong),
+      ...props(textDisplayConfig.textBodyMediumStrong),
       children: e
     }, e));
     return renderI18nText("plan_invite_modal.team.seat_already_assigned", {
@@ -555,7 +555,7 @@ function eb({
         children: _$$r(p) ? jsx(_$$X, {
           resourceType: "team"
         }) : jsxs("div", {
-          ...xk(ea.container),
+          ...props(ea.container),
           children: [jsx(T, {
             id: X,
             label: getI18nString("plan_invite_modal.email"),

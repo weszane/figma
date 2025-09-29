@@ -11,7 +11,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { PlanInvoiceService } from "../905/223084";
 import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
@@ -34,7 +34,7 @@ function I(e) {
         imgUrl: e.img_url
       })));
     });else if (e.planType === FOrganizationLevelType.ORG) {
-      Eh.getOrgAdmins({
+      organizationAPIService.getOrgAdmins({
         orgId: e.planId
       }).then(({
         data: e

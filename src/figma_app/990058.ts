@@ -1,239 +1,285 @@
-import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { createActionCreator } from "../905/73481";
-import { customHistory } from "../905/612521";
-import { sendWithRetry } from "../905/910117";
-import { AUTH_INIT } from "../905/194276";
-import { AuthFlowStep } from "../905/862321";
-import { FlashActions } from "../905/573154";
-import { getI18nString } from "../905/303541";
-import { setUserInOrgs } from "../905/890368";
-import { VisualBellActions } from "../905/302958";
-import { createOptimistAction, createOptimistThunk } from "../905/350402";
-import { showModalHandler } from "../905/156213";
-import { DeepLinkType, UISection } from "../905/15667";
-import { isNullOrFailure } from "../905/18797";
-import { setupLoadingStateHandler } from "../905/696711";
-import { G } from "../figma_app/124713";
-import { Eh } from "../figma_app/617654";
-import { AuthModal } from "../905/749159";
-let $$T6 = setUserInOrgs;
-let $$I8 = createOptimistAction("ORG_USER_PUT", async (e, t, {
-  optimistId: r
-}) => {
-  if (t.userInitiated) try {
-    let i = await G.updateOrgUser({
-      id: t.orgUser.id,
-      changes: {
-        description: t.orgUser.description
-      }
-    });
-    e.dispatch(createOptimistCommitAction(r));
-    e.dispatch($$I8({
-      orgUser: i.data.meta,
-      userInitiated: !1
-    }));
-  } catch (t) {
-    e.dispatch(createOptimistRevertAction(r));
-    e.dispatch(FlashActions.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred")));
-  }
-});
-createOptimistThunk(async (e, t) => {
-  try {
-    let r = {
-      ...(!1 === t.showUserOnboarding && {
-        show_figjam_user_onboarding: !1
-      }),
-      ...(t.shownPreLaunchAdminOnboarding && {
-        has_shown_figjam_admin_onboarding: !0
-      }),
-      ...(t.shownPostLaunchAdminOnboarding && {
-        has_shown_figjam_admin_launch_onboarding: !0
+import { DeepLinkType, UISection } from '../905/15667'
+import { isNullOrFailure } from '../905/18797'
+import { createActionCreator } from '../905/73481'
+import { showModalHandler } from '../905/156213'
+import { AUTH_INIT } from '../905/194276'
+import { VisualBellActions } from '../905/302958'
+import { getI18nString } from '../905/303541'
+import { createOptimistAction, createOptimistThunk } from '../905/350402'
+import { FlashActions } from '../905/573154'
+import { customHistory } from '../905/612521'
+import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456'
+import { setupLoadingStateHandler } from '../905/696711'
+import { AuthModal } from '../905/749159'
+import { AuthFlowStep } from '../905/862321'
+import { setUserInOrgs } from '../905/890368'
+import { sendWithRetry } from '../905/910117'
+import { orgUserService } from '../figma_app/124713'
+import { organizationAPIService } from '../figma_app/617654'
+
+// Org User Update Operations
+
+/**
+ * Updates the description of an org user with optimistic updates.
+ * Original: $$I8
+ */
+export const updateOrgUserDescriptionAction = createOptimistAction('ORG_USER_PUT', async ({dispatch}, payload, { optimistId }) => {
+  if (payload.userInitiated) {
+    try {
+      const response = await orgUserService.updateOrgUser({
+        id: payload.orgUser.id,
+        changes: {
+          description: payload.orgUser.description,
+        },
       })
-    };
-    let n = await G.updateOrgUser({
-      id: t.orgUserId,
-      changes: r
-    });
-    e.dispatch($$I8({
-      orgUser: n.data.meta,
-      userInitiated: !1
-    }));
-  } catch (t) {
-    e.dispatch(FlashActions.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred_closing_onboarding")));
+      dispatch(createOptimistCommitAction(optimistId))
+      dispatch(updateOrgUserDescriptionAction({
+        orgUser: response.data.meta,
+        userInitiated: false,
+      }))
+    }
+    catch (error) {
+      dispatch(createOptimistRevertAction(optimistId))
+      dispatch(FlashActions.error(error.data?.message || getI18nString('org_user_actions.an_error_occurred')))
+    }
   }
-});
-let $$S0 = createOptimistThunk(async (e, t) => {
+})
+
+
+
+/**
+ * Requests org account type with different success messages based on entry point.
+ * Original: $$S0
+ */
+export const requestOrgAccountTypeAction = createOptimistThunk(async ({dispatch}, payload) => {
   try {
-    let r;
-    switch (await G.requestOrgAccountTypeRequest({
-      org_id: t.orgId,
-      entry_point: t.entryPoint,
-      message: t.message,
-      admin_ids: t.adminIds,
-      editor_type: t.licenseType,
-      billable_product_key: t.seatTypeKey,
-      file_key: t.fileKey,
-      folder_id: t.folderId
-    }).then(e => {
-      200 === e.status && t.onSuccess?.(e.data.meta?.id);
-    }), t.entryPoint) {
+    await orgUserService.requestOrgAccountTypeRequest({
+      org_id: payload.orgId,
+      entry_point: payload.entryPoint,
+      message: payload.message,
+      admin_ids: payload.adminIds,
+      editor_type: payload.licenseType,
+      billable_product_key: payload.seatTypeKey,
+      file_key: payload.fileKey,
+      folder_id: payload.folderId,
+    }).then((response) => {
+      if (response.status === 200 && payload.onSuccess) {
+        payload.onSuccess(response.data.meta?.id)
+      }
+    })
+
+    let successMessage: string
+    switch (payload.entryPoint) {
       case DeepLinkType.IN_EDITOR_RESTRICTED_DRAFT:
       case DeepLinkType.RESTRICTED_DRAFT_SHARED_EMAIL:
-        r = getI18nString("org_user_actions.request_sent_well_let_you_know");
-        break;
+        successMessage = getI18nString('org_user_actions.request_sent_well_let_you_know')
+        break
       case DeepLinkType.ASK_TO_EDIT_ONE_CLICK:
-        r = getI18nString("1_click_expansion.request_sent_well_let_you");
-        break;
+        successMessage = getI18nString('1_click_expansion.request_sent_well_let_you')
+        break
       case UISection.CreateFileProjectView:
       case DeepLinkType.USER_SETTINGS:
-        r = getI18nString("upgrades.request_sent_toast");
-        break;
+        successMessage = getI18nString('upgrades.request_sent_toast')
+        break
       default:
-        r = getI18nString("org_user_actions.upgrade_request_sent");
+        successMessage = getI18nString('org_user_actions.upgrade_request_sent')
     }
-    t.suppressVisualBell || e.dispatch(VisualBellActions.enqueue({
-      message: r,
-      type: "upgrade-request-sent"
-    }));
-  } catch (r) {
-    console.error(r);
-    r.message.includes("Org access needed") ? (e.dispatch(AUTH_INIT({
-      origin: "edit_button_click",
-      formState: AuthFlowStep.JOIN_ORG,
-      redirectUrl: customHistory.location.pathname
-    })), e.dispatch(showModalHandler({
-      type: AuthModal,
-      data: {}
-    }))) : e.dispatch(FlashActions.error(r.data?.message || getI18nString("org_user_actions.an_error_occurred_requesting_account_type")));
-    t.onError?.();
+
+    if (!payload.suppressVisualBell) {
+      dispatch(VisualBellActions.enqueue({
+        message: successMessage,
+        type: 'upgrade-request-sent',
+      }))
+    }
   }
-});
-let $$v1 = createOptimistThunk(async (e, t) => {
+  catch (error) {
+    console.error(error)
+    if (error.message.includes('Org access needed')) {
+      dispatch(AUTH_INIT({
+        origin: 'edit_button_click',
+        formState: AuthFlowStep.JOIN_ORG,
+        redirectUrl: customHistory.location.pathname,
+      }))
+      dispatch(showModalHandler({
+        type: AuthModal,
+        data: {},
+      }))
+    }
+    else {
+      dispatch(FlashActions.error(error.data?.message || getI18nString('org_user_actions.an_error_occurred_requesting_account_type')))
+    }
+    payload.onError?.()
+  }
+})
+
+/**
+ * Leaves the organization as a guest.
+ * Original: $$v1
+ */
+export const leaveOrganizationAction = createOptimistThunk(async ({ dispatch }, payload) => {
   try {
-    await sendWithRetry.del(`/api/org_user/${t.orgId}`);
-    e.dispatch(VisualBellActions.enqueue({
-      type: "org_guest_leave",
-      message: getI18nString("org_user_actions.you_successfully_left_organization", {
-        orgName: t.orgName
+    await sendWithRetry.del(`/api/org_user/${payload.orgId}`)
+    dispatch(VisualBellActions.enqueue({
+      type: 'org_guest_leave',
+      message: getI18nString('org_user_actions.you_successfully_left_organization', {
+        orgName: payload.orgName,
+      }),
+    }))
+  }
+  catch (error) {
+    console.error(error)
+    dispatch(FlashActions.error(error.data?.message || getI18nString('org_user_actions.an_error_occurred_leaving_organization', {
+      orgName: payload.orgName,
+    })))
+  }
+})
+
+// Org User Batch Operations
+
+/**
+ * Batch updates org users with optimistic updates.
+ * Original: $$A7
+ */
+export const batchUpdateOrgUsersAction = createOptimistAction('ORG_USER_BATCH_UPDATE_ORG_USERS', async (context, payload, { optimistId }) => {
+  const state = context.getState() as AppState // Note: Assuming dispatch has getState, but typically it's from thunk middleware
+  let latestOrgUserUpdate: string | undefined
+  let latestLicenseGroupUpdate: string | null = null
+
+  if (payload.lastUpdateTimestampOverride) {
+    latestOrgUserUpdate = payload.lastUpdateTimestampOverride
+    latestLicenseGroupUpdate = payload.lastUpdateTimestampOverride
+  }
+  else {
+    const relevantUsers = Object.values(state.orgUsersByOrgId[payload.orgId]).filter(user => payload.params.org_user_ids.includes(user.id))
+    if (relevantUsers.length === 0)
+      return
+
+    latestOrgUserUpdate = new Date(Math.max(...relevantUsers.map(user => +new Date(user.updated_at)))).toISOString()
+
+    if (payload.params.license_group_id !== undefined) {
+      const licenseUpdates = relevantUsers.map(user => user.license_group_member?.updated_at).filter(Boolean)
+      latestLicenseGroupUpdate = licenseUpdates.length > 0 ? new Date(Math.max(...licenseUpdates.map(date => +new Date(date)))).toISOString() : null
+    }
+  }
+
+  try {
+    const response = await orgUserService.updateOrgUsers({
+      orgId: payload.orgId,
+      ...payload.params,
+      latest_ou_update: latestOrgUserUpdate,
+      latest_lg_member_update: latestLicenseGroupUpdate,
+      showing_billing_groups: true,
+    })
+    context.dispatch(createOptimistCommitAction(optimistId))
+    context.dispatch(setUserInOrgs({
+      orgUsers: response.data.meta,
+      orgId: payload.orgId,
+    }))
+    payload.successCallback?.()
+  }
+  catch (error) {
+    console.error('Batch Update Failed', error)
+    payload.errorCallback?.()
+    context.dispatch(createOptimistRevertAction(optimistId))
+    const errorMessage = (() => {
+      const { reason, message } = error.data
+      return reason === 'seat_increase_unauthorized' ? getI18nString('modify_plan_user_seat_modal.error.seat_increase_unauthorized') : message ?? getI18nString('org_user_actions.an_error_occurred_updating_org_users')
+    })()
+    context.dispatch(FlashActions.error(errorMessage))
+  }
+})
+
+/**
+ * Action creator for batch deleting org users.
+ * Original: $$x5
+ */
+export const batchDeleteOrgUsersAction = createActionCreator('ORG_USER_BATCH_DELETE_ORG_USERS')
+
+/**
+ * Batch deletes org users.
+ * Original: $$N3
+ */
+export const batchDeleteOrgUsersThunk = createOptimistThunk(async (context, payload) => {
+  context.dispatch(batchDeleteOrgUsersAction(payload))
+  if (payload.userInitiated) {
+    try {
+      await sendWithRetry.del(`/api/orgs/${payload.orgId}/org_users`, payload.params)
+      const deletedCount = payload.params.org_user_ids.length
+      const successMessage = getI18nString('org_user_actions.user_has_been_removed_from_organization', {
+        deletedOrgUserCount: deletedCount,
       })
-    }));
-  } catch (r) {
-    console.error(r);
-    e.dispatch(FlashActions.error(r.data?.message || getI18nString("org_user_actions.an_error_occurred_leaving_organization", {
-      orgName: t.orgName
-    })));
-  }
-});
-let $$A7 = createOptimistAction("ORG_USER_BATCH_UPDATE_ORG_USERS", async (e, t, {
-  optimistId: r
-}) => {
-  let i;
-  let a;
-  let s = e.getState();
-  if (t.lastUpdateTimestampOverride) {
-    i = t.lastUpdateTimestampOverride;
-    a = t.lastUpdateTimestampOverride;
-  } else {
-    let e = Object.values(s.orgUsersByOrgId[t.orgId]).filter(e => t.params.org_user_ids.includes(e.id));
-    if (0 === e.length) return;
-    if (a = new Date(Math.max(...e.map(e => +new Date(e.updated_at)))).toISOString(), void 0 !== t.params.license_group_id) {
-      let t = e.map(e => e.license_group_member?.updated_at).filter(Boolean);
-      i = t.length > 0 ? new Date(Math.max(...t.map(e => +new Date(e)))).toISOString() : null;
+      context.dispatch(FlashActions.flash(successMessage))
+    }
+    catch (error) {
+      context.dispatch(FlashActions.error(error.data?.message || getI18nString('org_user_actions.an_error_occurred')))
     }
   }
+})
+
+// Org User Fetch Operations
+
+/**
+ * Fetches org admins.
+ * Original: $$C4
+ */
+export const getOrgAdminsAction = createOptimistThunk(async (context, payload, { loadingKey }) => {
+  const state = context.getState()
+  if (!isNullOrFailure(state.loadingState, loadingKey))
+    return
+
+  const request = organizationAPIService.getAdmins({
+    includeLicenseAdmins: true,
+    orgId: payload.orgId,
+  })
+  setupLoadingStateHandler(request, context, loadingKey)
+
   try {
-    let s = (await G.updateOrgUsers({
-      orgId: t.orgId,
-      ...t.params,
-      latest_ou_update: a,
-      latest_lg_member_update: i,
-      showing_billing_groups: !0
-    })).data.meta;
-    e.dispatch(createOptimistCommitAction(r));
-    e.dispatch($$T6({
-      orgUsers: s,
-      orgId: t.orgId
-    }));
-    t.successCallback && t.successCallback();
-  } catch (a) {
-    console.error("Batch Update Failed", a);
-    t.errorCallback?.();
-    e.dispatch(createOptimistRevertAction(r));
-    let i = function (e) {
-      let {
-        reason,
-        message
-      } = e;
-      return "seat_increase_unauthorized" === reason ? getI18nString("modify_plan_user_seat_modal.error.seat_increase_unauthorized") : message ?? getI18nString("org_user_actions.an_error_occurred_updating_org_users");
-    }(a.data);
-    e.dispatch(FlashActions.error(i));
+    const response = await request
+    context.dispatch(setUserInOrgs({
+      orgUsers: response.data.meta,
+      orgId: payload.orgId,
+    }))
   }
-});
-let $$x5 = createActionCreator("ORG_USER_BATCH_DELETE_ORG_USERS");
-let $$N3 = createOptimistThunk(async (e, t) => {
-  if (e.dispatch($$x5(t)), t.userInitiated) try {
-    await sendWithRetry.del(`/api/orgs/${t.orgId}/org_users`, t.params);
-    let r = t.params.org_user_ids.length;
-    let n = getI18nString("org_user_actions.user_has_been_removed_from_organization", {
-      deletedOrgUserCount: r
-    });
-    e.dispatch(FlashActions.flash(n));
-  } catch (t) {
-    e.dispatch(FlashActions.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred")));
-    return;
+  catch (error) {
+    context.dispatch(FlashActions.error(error.message || getI18nString('org_user_actions.an_error_occurred_fetching_org_admins')))
   }
-});
-let $$C4 = createOptimistThunk(async (e, {
-  orgId: t
-}, {
-  loadingKey: r
-}) => {
-  let n = e.getState();
-  if (!isNullOrFailure(n.loadingState, r)) return;
-  let i = Eh.getAdmins({
-    includeLicenseAdmins: !0,
-    orgId: t
-  });
-  setupLoadingStateHandler(i, e, r);
+}, payload => `ORG_USER_GET_ADMINS_${payload.orgId}`)
+
+/**
+ * Fetches an org user by user ID.
+ * Original: $$w2
+ */
+export const getOrgUserByUserIdAction = createOptimistThunk(async (context, payload, { loadingKey }) => {
+  const request = organizationAPIService.getUser({
+    orgId: payload.orgId,
+    userId: payload.userId,
+  })
+  setupLoadingStateHandler(request, context, loadingKey)
+
   try {
-    let r = await i;
-    e.dispatch($$T6({
-      orgUsers: r.data.meta,
-      orgId: t
-    }));
-  } catch (t) {
-    e.dispatch(FlashActions.error(t.message || getI18nString("org_user_actions.an_error_occurred_fetching_org_admins")));
+    const response = await request
+    const users = [response.data.meta]
+    context.dispatch(setUserInOrgs({
+      orgUsers: users,
+      orgId: payload.orgId,
+    }))
+    return users.find(user => user.user_id === payload.userId) || null
   }
-}, ({
-  orgId: e
-}) => `ORG_USER_GET_ADMINS_${e}`);
-let $$w2 = createOptimistThunk(async (e, t, {
-  loadingKey: r
-}) => {
-  let n = Eh.getUser({
-    orgId: t.orgId,
-    userId: t.userId
-  });
-  setupLoadingStateHandler(n, e, r);
-  try {
-    let r = [(await n).data.meta];
-    e.dispatch($$T6({
-      orgUsers: r,
-      orgId: t.orgId
-    }));
-    return r.find(e => e.user_id === t.userId) || null;
-  } catch (r) {
-    if (404 === r.status && t.allowNoOrgUser) return null;
-    e.dispatch(FlashActions.error(r.message || getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
-    return null;
+  catch (error) {
+    if (error.status === 404 && payload.allowNoOrgUser)
+      return null
+    context.dispatch(FlashActions.error(error.message || getI18nString('org_user_actions.an_error_occurred_fetching_org_users')))
+    return null
   }
-}, e => `ORG_USER_GET_BY_USER_ID_${e.orgId}_${e.userId}`);
-export const $V = $$S0;
-export const AW = $$v1;
-export const I1 = $$w2;
-export const IJ = $$N3;
-export const Pg = $$C4;
-export const bu = $$x5;
-export const hZ = $$T6;
-export const uo = $$A7;
-export const yJ = $$I8;
+}, payload => `ORG_USER_GET_BY_USER_ID_${payload.orgId}_${payload.userId}`)
+
+// Exports with $V names
+export const $V = requestOrgAccountTypeAction
+export const AW = leaveOrganizationAction
+export const I1 = getOrgUserByUserIdAction
+export const IJ = batchDeleteOrgUsersThunk
+export const Pg = getOrgAdminsAction
+export const bu = batchDeleteOrgUsersAction
+export const hZ = setUserInOrgs
+export const uo = batchUpdateOrgUsersAction
+export const yJ = updateOrgUserDescriptionAction

@@ -2,6 +2,7 @@ import type { ActionCreator, Dispatch } from 'redux'
 import { BEGIN } from 'redux-optimist'
 import { generateOptimistId } from '../905/842794'
 import { isDebugMode } from '../figma_app/897289'
+import { ThunkDispatch } from 'redux-thunk'
 
 /**
  * Internal registry for unique action types.
@@ -50,7 +51,7 @@ export function createActionCreator(baseType: string) {
  * @original $$d0
  */
 type ThunkHandler<TState = any, TPayload = any, TExtra = Record<string, unknown>> = (
-  context: { dispatch: Dispatch, getState: () => TState },
+  context: { dispatch: ThunkDispatch<TState, unknown, any>, getState: () => TState },
   payload: TPayload,
   extra: TExtra
 ) => any

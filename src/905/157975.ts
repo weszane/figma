@@ -29,7 +29,7 @@ import { R as _$$R } from "../905/697254";
 import { t as _$$t2 } from "../905/414363";
 import { Gk } from "../figma_app/277330";
 import { l as _$$l2 } from "../905/579959";
-import { T as _$$T } from "../905/27228";
+import { useInitializeUniqueId } from "../905/27228";
 import { YQL } from "../figma_app/27776";
 let P = "dsa_file_view_v2--slidingPane--DMaAh sliding_pane--slidingPane--6OmDU";
 let O = "dsa_file_view_v2--slidingPaneLeft--j57zz sliding_pane--slidingPaneLeft--Wrfdy sliding_pane--slidingPane--6OmDU";
@@ -199,7 +199,7 @@ let $$B0 = registerModal(function (e) {
     entrypoint
   } = e;
   let c = useModalManager(e);
-  _$$T();
+  useInitializeUniqueId();
   let g = useSelector(e => e.currentUserOrgId);
   let f = useSelector(e => g ? e.orgById[g] : void 0);
   let _ = liveStoreInstance.useFile(fileKey).data;

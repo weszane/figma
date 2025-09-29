@@ -3,7 +3,7 @@ import { useEffect, Fragment, Children, isValidElement, cloneElement } from "rea
 import { U1 } from "../figma_app/343967";
 import { ButtonPrimitive } from "../905/632989";
 import { m as _$$m } from "../905/270214";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { M } from "../figma_app/749682";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { KindEnum } from "../905/129884";
@@ -24,7 +24,7 @@ export function $$x0({
       e.removeProperty("--left-rail-width");
     };
   }, []), r) return jsx("div", {
-    ...Ay.props(f.sideRail, f.sideRailWidth(_), f.animateLeft),
+    ...stylex.props(f.sideRail, f.sideRailWidth(_), f.animateLeft),
     ref: d,
     children: jsxs("div", {
       className: "x78zum5 xdt5ytf x6s0dn4 xh8yej3",
@@ -49,7 +49,7 @@ export function $$x0({
     isValidElement(e) && (e.type === $$x0.Footer ? u.push(e) : g.push(e));
   });
   return jsxs("div", {
-    ...Ay.props(f.sideRail, f.sideRailWidth(_)),
+    ...stylex.props(f.sideRail, f.sideRailWidth(_)),
     ref: d,
     "data-testid": "left-rail-container",
     children: [jsxs("div", {
@@ -124,7 +124,7 @@ $$x0.IconButton = function ({
     recordingKey: y,
     ref: w,
     children: jsx("div", {
-      ...Ay.props(f.iconButton, o && f.disabledIcon, !o && f.enabledIcon, !o && S && f.hoveredIcon, e && f.activeIcon, m && f.firstSectionItem, p && f.lastSectionItem),
+      ...stylex.props(f.iconButton, o && f.disabledIcon, !o && f.enabledIcon, !o && S && f.hoveredIcon, e && f.activeIcon, m && f.firstSectionItem, p && f.lastSectionItem),
       children: a ? jsxs("div", {
         className: "x78zum5 x1n2onr6",
         children: [l, jsx("div", {

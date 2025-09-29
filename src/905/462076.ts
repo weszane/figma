@@ -2,7 +2,7 @@ import { useEffect, useMemo, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import a from "../vendor/128080";
 import { trackEventAnalytics } from "../905/449184";
-import { gB } from "../905/723791";
+import { createLoadedState } from "../905/723791";
 import { $E, y1 } from "../905/445814";
 import { openUrlInContext } from "../figma_app/976345";
 import { le } from "../figma_app/11182";
@@ -142,7 +142,7 @@ export function $$O5(e, t, i, r) {
   }, [e, p, i, r, v, y, a, c]);
   return useMemo(() => y ? function (e, t, i, n, r, a) {
     if ("loaded" !== e.status) return e;
-    if (!e.data.file) return gB([]);
+    if (!e.data.file) return createLoadedState([]);
     let s = {};
     let o = (e.data.file?.feedPosts || []).sort((e, t) => t.createdAt.getTime() - e.createdAt.getTime()).filter(e => !!e.org && C(r, a, e.org.id)).map(e => {
       let r = e.comments.map(e => ({
@@ -229,8 +229,8 @@ export function $$O5(e, t, i, r) {
         pinVerticalStagger: s[a]
       };
     });
-    return gB(o);
-  }(e, t, a, c, y, v) : gB([]), [e, t, a, c, y, v]);
+    return createLoadedState(o);
+  }(e, t, a, c, y, v) : createLoadedState([]), [e, t, a, c, y, v]);
 }
 export const DG = $$P0;
 export const Kc = $$T1;

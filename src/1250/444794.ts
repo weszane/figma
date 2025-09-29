@@ -9,7 +9,7 @@ import { q } from "../905/838985";
 import { _ as _$$_ } from "../905/563242";
 import { e as _$$e } from "../905/149844";
 import { textDisplayConfig } from "../905/687265";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import f from "classnames";
 import { openWindow } from "../905/508367";
@@ -195,7 +195,7 @@ export function $$H7({
         })
       })
     }), s && jsx("span", {
-      ...xk(K.assetTypeName),
+      ...props(K.assetTypeName),
       children: s
     })]
   });

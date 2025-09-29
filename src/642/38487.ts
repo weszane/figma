@@ -1,4 +1,4 @@
-import { xk } from '@stylexjs/stylex';
+import { props } from '@stylexjs/stylex';
 import m from 'classnames';
 import { memo, PureComponent, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
@@ -267,7 +267,7 @@ function eb({
   if (!(s && getFeatureFlags().sts_a11y_layers_semantic_tags && n)) return null;
   let l = !i.htmlTag || i.isWebpage ? null : i.htmlTag === 'AUTO' ? i.isLink ? 'a' : i.isButton ? 'button' : i.isVectorLike ? 'svg' : i.nodeType === 'FRAME' && i.hasImageFill ? 'img' : i.nodeType === 'TEXT' ? 'p' : 'div' : i.htmlTag.toLowerCase();
   return l ? jsx('span', {
-    ...xk(eC.semanticTagLabel),
+    ...props(eC.semanticTagLabel),
     children: l
   }) : null;
 }

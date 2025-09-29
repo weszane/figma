@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useCallback, useEffect } from "react";
 import { MenuItemComp, MenuRootComp, MenuContainerComp, setupMenu } from "../figma_app/860955";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -228,7 +228,7 @@ function O({
     disabled: d,
     ...getContextMenuTriggerProps(),
     children: [jsxs("div", {
-      ...Ay.props(P.fileItemLabel, e?.guid !== t.guid || v ? void 0 : P.fileItemLabelActive, d ? P.disabled : void 0, v ? P.fileItemLabelRenaming : void 0),
+      ...stylex.props(P.fileItemLabel, e?.guid !== t.guid || v ? void 0 : P.fileItemLabelActive, d ? P.disabled : void 0, v ? P.fileItemLabelRenaming : void 0),
       style: {
         paddingLeft: 8 + 16 * n
       },
@@ -323,7 +323,7 @@ function H({
         }),
         "aria-expanded": u,
         onClick: () => c(t.path),
-        ...Ay.props(B.folderItemLabel, a ? B.disabled : void 0),
+        ...stylex.props(B.folderItemLabel, a ? B.disabled : void 0),
         disabled: a,
         children: [jsxs("div", {
           style: {

@@ -10,7 +10,7 @@ import { _ as _$$_ } from "../905/144222";
 import { l as _$$l } from "../905/479687";
 import { textDisplayConfig } from "../905/687265";
 import { Fullscreen, PageSelectionType } from "../figma_app/763686";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { useSelectedCooperFrameIds } from "../figma_app/396464";
 import { TextImageEnum, useSelectedImageNodeGuids } from "../figma_app/334505";
@@ -26,7 +26,7 @@ function E({
   return jsx("div", {
     className: "x78zum5 x1q0g3np",
     children: jsx("span", {
-      ...Ay.props(S.base, l > 0 && S.mapped, t && S.enabled),
+      ...stylex.props(S.base, l > 0 && S.mapped, t && S.enabled),
       children: e.join(", ")
     })
   });
@@ -66,7 +66,7 @@ function I({
       alt: getI18nString("buzz.bulk_create.image_preview_alt", {
         count: s + 1
       }),
-      ...Ay.props(T.base, (t || l > 0) && T.enabled)
+      ...stylex.props(T.base, (t || l > 0) && T.enabled)
     })))
   });
 }
@@ -112,7 +112,7 @@ function C({
 }
 export function $$N1() {
   return jsx("div", {
-    ...Ay.props(w.instructionText),
+    ...stylex.props(w.instructionText),
     children: jsx("span", {
       children: getI18nString("buzz.bulk_create.select_nodes_instruction")
     })
@@ -187,7 +187,7 @@ export function $$R0({
     onMouseEnter: () => x(!0),
     onMouseLeave: () => x(!1),
     children: [jsxs(ButtonPrimitive, {
-      ...Ay.props(A.containerBase, h && A.containerEnabled, N && A.containerMapped, u && N && A.containerMappedHovered),
+      ...stylex.props(A.containerBase, h && A.containerEnabled, N && A.containerMapped, u && N && A.containerMappedHovered),
       "data-tooltip": h || 0 !== a ? "" : getI18nString("buzz.bulk_create.disabled_field_tooltip"),
       "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-right": !0,
@@ -199,9 +199,9 @@ export function $$R0({
         blockHovered: u,
         blockEnabled: h
       }), jsxs("div", {
-        ...Ay.props(A.content, u && d.size > 0 && T !== TextImageEnum.IMAGE && A.contentWithUnbind),
+        ...stylex.props(A.content, u && d.size > 0 && T !== TextImageEnum.IMAGE && A.contentWithUnbind),
         children: [jsx("span", {
-          ...Ay.props(A.titleBase, (h || N) && A.titleEnabled),
+          ...stylex.props(A.titleBase, (h || N) && A.titleEnabled),
           children: e
         }), jsx(C, {
           blockEnabled: h,
@@ -387,7 +387,7 @@ function B({
     children: t > 10 ? "9+" : t
   });
   return jsx("div", {
-    ...Ay.props(M.container, n && M.containerEnabled, (n && l || r) && M.containerActive),
+    ...stylex.props(M.container, n && M.containerEnabled, (n && l || r) && M.containerActive),
     children: s
   });
 }

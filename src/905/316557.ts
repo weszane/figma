@@ -5,7 +5,7 @@ import { gZ, hE, HG, bL } from "../905/598775";
 import { ButtonWide } from "../905/521428";
 import { AppStateTsApi, Fullscreen, VariableDataType } from "../figma_app/763686";
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { createAtomWithEquality, atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
@@ -337,7 +337,7 @@ function ey({
     (void 0 === k || k && !C) && N.flush();
   }, [k, C, N]);
   let P = useCallback(() => {
-    if (E) b(sw()); else if (R) Fullscreen?.findMissingFontsAndShowPopover(); else if (I.current) {
+    if (E) b(sw());else if (R) Fullscreen?.findMissingFontsAndShowPopover();else if (I.current) {
       Fullscreen?.selectStyleByGuid(t.node_id);
       let e = I.current.getBoundingClientRect();
       b(rk({
@@ -707,7 +707,7 @@ function eM({
               backgroundVars: o
             })
           }), jsxs("div", {
-            ...Ay.props(eK.textDescription, x && eK.textDescriptionWithEditButton),
+            ...stylex.props(eK.textDescription, x && eK.textDescriptionWithEditButton),
             children: [jsx(eV, {
               themeId: a,
               name: l,
@@ -728,7 +728,7 @@ function eM({
         themeId: a
       })
     }), g && jsx(HG, {
-      ...Ay.props(eK.chitFloatingRegion, eK.shuffleIconContainer, S && eK.shuffleIconContainerHover),
+      ...stylex.props(eK.chitFloatingRegion, eK.shuffleIconContainer, S && eK.shuffleIconContainerHover),
       children: jsx(ButtonPrimitive, {
         htmlAttributes: {
           "data-tooltip-type": KindEnum.TEXT,
@@ -955,7 +955,7 @@ let eW = memo(function ({
     if ((n = i.length + e.length) <= 3) return [...e, ...i].map(e => colorCSSManipulatorInstance.format(e));
     let s = [];
     let l = 3 - e.length;
-    if (1 === l) s.push(i[i.length - 1]); else for (let e = 0; e < l; e++) {
+    if (1 === l) s.push(i[i.length - 1]);else for (let e = 0; e < l; e++) {
       let t = Math.floor(e / (l - 1) * (i.length - 1));
       s.push(i[t]);
     }
@@ -1123,7 +1123,7 @@ export function $$eX0({
   }, [O, D, z, G]);
   useEffect(() => (window.addEventListener("mousedown", H), () => window.removeEventListener("mousedown", H)), [H]);
   let W = useCallback(() => {
-    if (_) z(); else if (O.current) {
+    if (_) z();else if (O.current) {
       let {
         x,
         y
@@ -1273,7 +1273,7 @@ let eQ = forwardRef((e, t) => {
     return isInvalidValue(e) ? getI18nString("slides.properties_panel.theme.mixed") : t[e] || getI18nString("slides.properties_panel.theme.generic_theme_name");
   }(themeId);
   return getFeatureFlags().slides_a11y_template_styles ? jsx(bL, {
-    ...Ay.props(e1.selectedRoot, isActive ? e1.active : e1.inactive),
+    ...stylex.props(e1.selectedRoot, isActive ? e1.active : e1.inactive),
     ref: t,
     "data-testid": "theme-picker-button",
     children: isInvalidValue(themeId) ? jsx(eU, {

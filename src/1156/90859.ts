@@ -5,7 +5,7 @@ import { assert } from "../figma_app/465776";
 import { textDisplayConfig } from "../905/687265";
 import { ChatMessageType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -67,7 +67,7 @@ function C({
   if (1 === e.length) {
     let t = e[0];
     return t ? jsx("div", {
-      ...Ay.props(k.container, defaultTypographyStyle),
+      ...stylex.props(k.container, defaultTypographyStyle),
       style: n ? {
         maxHeight: n,
         overflowY: "auto"
@@ -79,7 +79,7 @@ function C({
     }) : null;
   }
   return jsxs("div", {
-    ...Ay.props(k.container, defaultTypographyStyle),
+    ...stylex.props(k.container, defaultTypographyStyle),
     style: n ? {
       maxHeight: n,
       overflowY: "auto"
@@ -92,7 +92,7 @@ function C({
           fileCount: e.length
         })
       }), jsx("span", {
-        ...Ay.props(k.caret, o && k.caretExpanded),
+        ...stylex.props(k.caret, o && k.caretExpanded),
         children: jsx(_$$a, {})
       })]
     }), o && jsx("div", {
@@ -185,7 +185,7 @@ export function $$T5({
   return jsxs("div", {
     className: "x78zum5 xdt5ytf xou54vl",
     children: [jsx("div", {
-      ...Ay.props(defaultTypographyStyle),
+      ...stylex.props(defaultTypographyStyle),
       children: getI18nString("figmake.chat.restoring_a_previous_version")
     }), _]
   });
@@ -235,7 +235,7 @@ export function $$I4({
   return jsxs("div", {
     className: "x78zum5 xdt5ytf xou54vl",
     children: [jsx("div", {
-      ...Ay.props(defaultTypographyStyle),
+      ...stylex.props(defaultTypographyStyle),
       children: getI18nString("figmake.edits.manual_edit_message")
     }), jsx(C, {
       changes: changedFiles,
@@ -281,7 +281,7 @@ export function $$z3({
   return jsxs("div", {
     className: "x78zum5 xdt5ytf xou54vl",
     children: [jsx("div", {
-      ...Ay.props(defaultTypographyStyle),
+      ...stylex.props(defaultTypographyStyle),
       children: getI18nString("figmake.edits.manual_edit_message")
     }), jsx(C, {
       changes: changedFiles,
@@ -296,7 +296,7 @@ export function $$M1() {
   return jsxs("div", {
     className: "x78zum5 xdt5ytf xou54vl",
     children: [jsx("p", {
-      ...Ay.props(A.textBodyLarge),
+      ...stylex.props(A.textBodyLarge),
       children: getI18nString("figmake.duplicated_file_system_message")
     }), jsx(F, {})]
   });
@@ -348,7 +348,7 @@ function F() {
           svgHeight: "14px"
         })
       }), jsx("p", {
-        ...Ay.props(A.textBodyLargeStrong),
+        ...stylex.props(A.textBodyLargeStrong),
         children: getI18nString("figmake.supabase.duplicated_file.cta")
       })]
     })

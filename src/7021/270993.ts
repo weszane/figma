@@ -1,15 +1,15 @@
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { u } from "../905/774364";
 import { createOptimistThunk } from "../905/350402";
-import { yJ } from "../figma_app/990058";
+import { updateOrgUserDescriptionAction } from "../figma_app/990058";
 let $$d1 = createOptimistThunk(async (e, t) => {
   let {
     currentUserOrgId
   } = e.getState();
   if (!currentUserOrgId) throw Error("currentOrgId not set while attempting to self-assign workspace");
-  await Eh.selfAssignWorkspace({
+  await organizationAPIService.selfAssignWorkspace({
     orgId: currentUserOrgId,
     workspaceId: t.workspace.id
   }).then(a => {
@@ -21,7 +21,7 @@ let $$d1 = createOptimistThunk(async (e, t) => {
       type: "self-assign-workspace",
       message: n
     })));
-    e.dispatch(yJ({
+    e.dispatch(updateOrgUserDescriptionAction({
       orgUser: a.data.meta,
       userInitiated: !1
     }));

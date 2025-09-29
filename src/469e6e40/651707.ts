@@ -9,7 +9,7 @@ import { Button } from "../905/521428";
 import { x as _$$x } from "../905/811596";
 import { a as _$$a } from "../905/462280";
 import { C } from "../905/520159";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -80,7 +80,7 @@ let $$j0 = registerModal(function (e) {
                   }
                 });
                 return jsxs("div", {
-                  className: xk(y.domainSearchResult, a && y.domainSearchResultSelected).className,
+                  className: props(y.domainSearchResult, a && y.domainSearchResultSelected).className,
                   children: [jsx("span", {
                     className: "x78zum5 x6s0dn4 x2lah0s",
                     children: r

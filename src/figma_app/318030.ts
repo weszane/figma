@@ -6,7 +6,7 @@ import { P as _$$P } from "../vendor/348225";
 import { M as _$$M } from "../figma_app/548779";
 import { useHandlePointerEvent } from "../figma_app/878298";
 import { useStorageEventSync } from "../905/657224";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 let p = {
   handle: {
     position: "x10l6tqk",
@@ -155,7 +155,7 @@ function g({
     onDragEnd: i
   });
   let c = l({
-    className: xk(p.handle, "left" === e || "right" === e ? p.horizontalHandle : p.verticalHandle, p[e]).className,
+    className: props(p.handle, "left" === e || "right" === e ? p.horizontalHandle : p.verticalHandle, p[e]).className,
     onDoubleClick: t
   });
   let _ = {

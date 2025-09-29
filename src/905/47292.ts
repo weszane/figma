@@ -9,7 +9,7 @@ import { bL, gZ } from "../905/598775";
 import { ButtonPrimitive } from "../905/632989";
 import { e as _$$e } from "../905/916195";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -91,9 +91,9 @@ function x({
     i(e);
   }, [o, e, i, m]);
   return getFeatureFlags().dse_fpl_wave_2 ? jsxs(bL, {
-    className: Ay.props(E.row, E.rowUi3, r && E.rowBorder).className,
+    className: stylex.props(E.row, E.rowUi3, r && E.rowBorder).className,
     children: [jsx("div", {
-      className: Ay.props(E.leftSide, E.leftSideUi3).className,
+      className: stylex.props(E.leftSide, E.leftSideUi3).className,
       children: x
     }), jsx("div", {
       className: "x78zum5 x1iyjqo2 x1akne3o",

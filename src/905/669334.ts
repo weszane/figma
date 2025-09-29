@@ -14,7 +14,7 @@ import { LibraryAgeEnum } from "../figma_app/633080";
 import { n as _$$n } from "../905/402643";
 import { R as _$$R } from "../905/697254";
 import { h as _$$h } from "../905/589458";
-import { X } from "../905/27228";
+import { useUniqueId } from "../905/27228";
 let b = "dsa_file_view_tabs--dropdownIcon--NdB8e";
 let v = "duration-dropdown";
 let I = "dsa-asset-type-dropdown";
@@ -50,7 +50,7 @@ let $$k0 = memo(({
   let O = useDispatch();
   let D = useSelector(e => e.dropdownShown);
   let L = selectCurrentUser();
-  let F = X();
+  let F = useUniqueId();
   let M = D?.type === v;
   let j = D?.type === I;
   let U = useCallback(e => {

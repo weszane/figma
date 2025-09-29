@@ -2,7 +2,7 @@ import { noop } from 'lodash-es';
 import { l as _$$l } from "../905/716947";
 import { atom, createRemovableAtomFamily, mg, createAtomWithEquality, setupCustomAtom } from "../figma_app/27355";
 import s from "../vendor/239910";
-import { Xm } from "../905/723791";
+import { createLoadingState } from "../905/723791";
 import { equals } from "../figma_app/476572";
 import { canAdminPublish } from "../figma_app/275462";
 import { figmaLibrariesEnabledAtom } from "../figma_app/657017";
@@ -23,7 +23,7 @@ import { LibrarySourceEnum } from "../figma_app/633080";
 var o = s;
 let $$x0 = atom(e => {
   let t = e(openFileAtom);
-  if (!t) return Xm();
+  if (!t) return createLoadingState();
   let r = t.parentOrgId;
   let n = !!t.teamId;
   let i = hasRootPath(t?.project);

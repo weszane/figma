@@ -1,118 +1,196 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { useMemo } from "react";
-import { H } from "../905/507464";
-import { j } from "../905/206476";
-import { P } from "../905/697522";
-import { useSubscription } from "../figma_app/288654";
-import { tT } from "../905/723791";
-import { selectExperimentConfigHook } from "../figma_app/594947";
-import { LoadingSpinner } from "../figma_app/858013";
-import { cssBuilderInstance } from "../cssbuilder/589278";
-import { getI18nString } from "../905/303541";
-import { AutoLayout } from "../905/470281";
-import { ProductAccessMap } from "../figma_app/765689";
-import { AdminRequestDashboardRowIds } from "../figma_app/43951";
-let $$f7 = "UPGRADE_REQUESTS_PRODUCT_DROPDOWN";
-let $$E4 = "UPGRADE_REQUESTS_BILLING_GROUP_DROPDOWN";
-let $$y10 = "UPGRADE_REQUESTS_SORT_DROPDOWN";
-let $$b1 = "UPGRADE_REQUESTS_USER_TYPE_DROPDOWN";
-let $$T12 = "request";
-let $$I2 = "\u2013";
-let $$S3 = 50;
-var $$v15 = (e => (e.TEAM = "Team", e.ORG = "Org", e))($$v15 || {});
-var $$A5 = (e => (e.ALL_UNASSIGNED_REQUESTS = "all_unassigned_requests", e.ALL_MANAGED_REQUESTS = "all_managed_requests", e.ALL_ORG_REQUESTS = "all_org_requests", e.INDIVIDUAL_BILLING_GROUP_REQUESTS = "individual_billing_group_requests", e))($$A5 || {});
-var $$x16 = (e => (e.MEMBERS = "members", e.GUESTS = "guests", e))($$x16 || {});
-var $$N6 = (e => (e.APPROVE_ALL = "APPROVE_ALL", e.BULK_SELECT = "BULK_SELECT", e.SINGLE = "SINGLE", e.EMAIL = "EMAIL", e.DEEPLINK = "DEEPLINK", e))($$N6 || {});
-let $$C17 = "admin_requests_dashboard";
-let $$w14 = "billing_group_admin_requests_dashboard";
-export var $$O11 = (e => (e.NEWEST_FIRST = "NEWEST_FIRST", e.OLDEST_FIRST = "OLDEST_FIRST", e))($$O11 || {});
-let $$R13 = {
-  NEWEST_FIRST: () => getI18nString("admin_dashboard.requests.sort.newest_first"),
-  OLDEST_FIRST: () => getI18nString("admin_dashboard.requests.sort.oldest_first")
-};
-let L = {
+import { useMemo } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { j } from '../905/206476'
+import { getI18nString } from '../905/303541'
+import { AutoLayout } from '../905/470281'
+import { H } from '../905/507464'
+import { P } from '../905/697522'
+import { ResourceStatus } from '../905/723791'
+import { cssBuilderInstance } from '../cssbuilder/589278'
+import { AdminRequestDashboardRowIds } from '../figma_app/43951'
+import { useSubscription } from '../figma_app/288654'
+import { selectExperimentConfigHook } from '../figma_app/594947'
+import { ProductAccessMap } from '../figma_app/765689'
+import { LoadingSpinner } from '../figma_app/858013'
+
+// Constants
+export const productDropdownId = 'UPGRADE_REQUESTS_PRODUCT_DROPDOWN'
+export const billingGroupDropdownId = 'UPGRADE_REQUESTS_BILLING_GROUP_DROPDOWN'
+export const sortDropdownId = 'UPGRADE_REQUESTS_SORT_DROPDOWN'
+export const userTypeDropdownId = 'UPGRADE_REQUESTS_USER_TYPE_DROPDOWN'
+export const requestString = 'request'
+export const emDash = '\u2013'
+export const maxTextLength = 50
+export const adminRequestsDashboard = 'admin_requests_dashboard'
+export const billingGroupAdminRequestsDashboard = 'billing_group_admin_requests_dashboard'
+
+// Enums
+export enum TeamOrg {
+  TEAM = 'Team',
+  ORG = 'Org',
+}
+
+export enum RequestFilterType {
+  ALL_UNASSIGNED_REQUESTS = 'all_unassigned_requests',
+  ALL_MANAGED_REQUESTS = 'all_managed_requests',
+  ALL_ORG_REQUESTS = 'all_org_requests',
+  INDIVIDUAL_BILLING_GROUP_REQUESTS = 'individual_billing_group_requests',
+}
+
+export enum MemberGuest {
+  MEMBERS = 'members',
+  GUESTS = 'guests',
+}
+
+export enum InvitedByType {
+  APPROVE_ALL = 'APPROVE_ALL',
+  BULK_SELECT = 'BULK_SELECT',
+  SINGLE = 'SINGLE',
+  EMAIL = 'EMAIL',
+  DEEPLINK = 'DEEPLINK',
+}
+
+export enum FirstSortOrder {
+  NEWEST_FIRST = 'NEWEST_FIRST',
+  OLDEST_FIRST = 'OLDEST_FIRST',
+}
+
+// Objects
+export const sortLabels = {
+  NEWEST_FIRST: () => getI18nString('admin_dashboard.requests.sort.newest_first'),
+  OLDEST_FIRST: () => getI18nString('admin_dashboard.requests.sort.oldest_first'),
+}
+
+export const productInfo = {
   [ProductAccessMap.DESIGN]: {
-    name: () => getI18nString("admin_dashboard.requests.design_seat"),
-    icon: jsx(H, {})
+    name: () => getI18nString('admin_dashboard.requests.design_seat'),
+    icon: jsx(H, {}),
   },
   [ProductAccessMap.WHITEBOARD]: {
-    name: () => getI18nString("admin_dashboard.requests.figjam_seat"),
-    icon: jsx(j, {})
+    name: () => getI18nString('admin_dashboard.requests.figjam_seat'),
+    icon: jsx(j, {}),
   },
   [ProductAccessMap.DEV_MODE]: {
-    name: () => getI18nString("admin_dashboard.requests.devmode_seat"),
-    icon: jsx(P, {})
-  }
-};
-export function $$P18({
-  licenseType: e
+    name: () => getI18nString('admin_dashboard.requests.devmode_seat'),
+    icon: jsx(P, {}),
+  },
+}
+
+// Functions
+/**
+ * Renders an icon and name for a given license type.
+ * @param licenseType - The type of product license.
+ * @returns JSX element displaying the product icon and name.
+ */
+export function renderProductIcon({
+  licenseType,
+}: {
+  licenseType: keyof typeof productInfo
 }) {
-  let t = L[e];
+  const info = productInfo[licenseType]
   return jsxs(AutoLayout, {
     spacing: 8,
-    children: [t.icon, jsx("div", {
-      children: t.name()
-    })]
-  });
+    children: [info.icon, jsx('div', {
+      children: info.name(),
+    })],
+  })
 }
-export function $$D0(e) {
-  return e.trim().slice(0, $$S3);
+
+/**
+ * Truncates text to a maximum length and trims whitespace.
+ * @param text - The input text to truncate.
+ * @returns The truncated and trimmed text.
+ */
+export function truncateText(text: string): string {
+  return text.trim().slice(0, maxTextLength)
 }
-export function $$k9({
-  text: e,
-  showSpinner: t
+
+/**
+ * Displays text with an optional loading spinner.
+ * @param text - The text to display.
+ * @param showSpinner - Whether to show the loading spinner.
+ * @returns JSX element with text and spinner.
+ */
+export function TextWithSpinner({
+  text,
+  showSpinner,
+}: {
+  text: string
+  showSpinner: boolean
 }) {
-  return jsxs("div", {
+  return jsxs('div', {
     className: cssBuilderInstance.flex.itemsCenter.justifyCenter.$,
-    children: [jsx("span", {
-      className: t ? cssBuilderInstance.invisible.$ : "",
-      children: e
-    }), t && jsx(LoadingSpinner, {
+    children: [jsx('span', {
+      className: showSpinner ? cssBuilderInstance.invisible.$ : '',
+      children: text,
+    }), showSpinner && jsx(LoadingSpinner, {
       className: cssBuilderInstance.absolute.$,
-      shouldMatchTextColor: !0,
-      size: "small"
-    })]
-  });
+      shouldMatchTextColor: true,
+      size: 'small',
+    })],
+  })
 }
-export function $$M19({
-  planType: e,
-  planId: t,
-  filterParams: r,
-  processedRequestIds: n
+
+/**
+ * Hook to get filtered request IDs based on subscription data.
+ * @param planType - The type of plan.
+ * @param planId - The plan ID.
+ * @param filterParams - Parameters for filtering.
+ * @param processedRequestIds - Set of already processed request IDs.
+ * @returns Array of filtered request IDs or null if not loaded.
+ */
+export function useFilteredRequestIds({
+  planType,
+  planId,
+  filterParams,
+  processedRequestIds,
+}: {
+  planType: TeamOrg
+  planId: string
+  filterParams: any
+  processedRequestIds: Set<string>
 }) {
-  let a = useSubscription(AdminRequestDashboardRowIds, {
-    planType: e,
-    planId: t,
-    filterParams: r
-  });
+  const subscription = useSubscription(AdminRequestDashboardRowIds, {
+    planType,
+    planId,
+    filterParams,
+  })
   return useMemo(() => {
-    let e = "loaded" === a.status && a.data?.adminDashboardRequestIds?.status === tT.Loaded ? a.data?.adminDashboardRequestIds?.data?.map(e => e.id) ?? [] : null;
-    return null !== e ? e.filter(e => !n.has(e)) : null;
-  }, [a, n]);
+    const ids = subscription.status === 'loaded' && subscription.data?.adminDashboardRequestIds?.status === ResourceStatus.Loaded
+      ? subscription.data?.adminDashboardRequestIds?.data?.map(item => item.id) ?? []
+      : null
+    return ids !== null ? ids.filter(id => !processedRequestIds.has(id)) : null
+  }, [subscription, processedRequestIds])
 }
-export function $$F8({
-  isIntendedAudience: e
-}) {
-  let t = selectExperimentConfigHook("exp_billing_group_admin_request_dash");
-  return void 0 !== e && e && t.getConfig().get("enabled", !1);
+
+/**
+ * Checks if the billing group admin request dashboard is enabled for the intended audience.
+ * @param isIntendedAudience - Whether the user is in the intended audience.
+ * @returns True if enabled, false otherwise.
+ */
+export function isBillingGroupAdminEnabled(isIntendedAudience?: boolean): boolean {
+  const experiment = selectExperimentConfigHook('exp_billing_group_admin_request_dash')
+  return isIntendedAudience !== undefined && isIntendedAudience && experiment.getConfig().get('enabled', false)
 }
-export const Bk = $$D0;
-export const L8 = $$b1;
-export const Lv = $$I2;
-export const MI = $$S3;
-export const OL = $$E4;
-export const V7 = $$A5;
-export const Xv = $$N6;
-export const YC = $$f7;
-export const ZY = $$F8;
-export const Zm = $$k9;
-export const dC = $$y10;
-export const i5 = $$O11;
-export const k_ = $$T12;
-export const lJ = $$R13;
-export const oc = $$w14;
-export const ps = $$v15;
-export const r1 = $$x16;
-export const uH = $$C17;
-export const yz = $$P18;
-export const z7 = $$M19;
+
+// Exports (refactored to use new names)
+export const Bk = truncateText
+export const L8 = userTypeDropdownId
+export const Lv = emDash
+export const MI = maxTextLength
+export const OL = billingGroupDropdownId
+export const V7 = RequestFilterType
+export const Xv = InvitedByType
+export const YC = productDropdownId
+export const ZY = isBillingGroupAdminEnabled
+export const Zm = TextWithSpinner
+export const dC = sortDropdownId
+export const i5 = FirstSortOrder
+export const k_ = requestString
+export const lJ = sortLabels
+export const oc = billingGroupAdminRequestsDashboard
+export const ps = TeamOrg
+export const r1 = MemberGuest
+export const uH = adminRequestsDashboard
+export const yz = renderProductIcon
+export const z7 = useFilteredRequestIds

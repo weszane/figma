@@ -5,7 +5,7 @@ import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { BannerButton } from "../905/692618";
 import { jH } from "../figma_app/342207";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { isDevEnvironment } from "../figma_app/169182";
 import { Q as _$$Q2 } from "../469e6e40/825225";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -336,7 +336,7 @@ function e_(e) {
     children: [jsxs("div", {
       className: "x78zum5 x1qughib x6s0dn4 xkh2ocl",
       children: [jsx("span", {
-        ...Ay.props(ed.heading),
+        ...stylex.props(ed.heading),
         children: e.heading
       }), jsx(setupToggleButton, {
         checked: t,
@@ -348,7 +348,7 @@ function e_(e) {
         }
       })]
     }), t && jsx("div", {
-      ...Ay.props(ed.content),
+      ...stylex.props(ed.content),
       children: e.content
     })]
   });
@@ -366,7 +366,7 @@ function eu(e) {
             "aria-hidden": !0
           })
         }), jsx("h2", {
-          ...Ay.props(ec.heading),
+          ...stylex.props(ec.heading),
           children: e.heading
         })]
       }), e.headerRight && jsx("div", {
@@ -520,7 +520,7 @@ let ef = {
 };
 function ej(e) {
   return "string" == typeof e.children ? jsx("p", {
-    ...Ay.props(ef.headerRightP),
+    ...stylex.props(ef.headerRightP),
     children: e.children
   }) : e.children ? jsx("div", {
     className: "x78zum5 x1nfngrj x13a6bvl",
@@ -537,7 +537,7 @@ function ey(e) {
         "aria-hidden": !0,
         children: e.icon
       }), jsx("div", {
-        ...Ay.props(ef.lineText),
+        ...stylex.props(ef.lineText),
         children: e.text
       })]
     }), jsxs("div", {
@@ -564,10 +564,10 @@ function ew(e) {
       children: [jsxs("div", {
         className: "x78zum5 xdt5ytf x1enigpx",
         children: [jsx("h2", {
-          ...Ay.props(ef.heading),
+          ...stylex.props(ef.heading),
           children: e.heading
         }), jsx("p", {
-          ...Ay.props(ef.subheading),
+          ...stylex.props(ef.subheading),
           children: e.subheading
         })]
       }), jsx(ej, {
@@ -894,7 +894,7 @@ function eU(e) {
         className: "xxymvpz",
         "data-testid": "invoice-preview-title",
         children: [jsx("h2", {
-          ...Ay.props(eP.title),
+          ...stylex.props(eP.title),
           children: e.title
         }), e.badge && jsxs("span", {
           className: "xuxw1ft xnfn54o",
@@ -916,7 +916,7 @@ function eU(e) {
         "aria-hidden": !0,
         children: t
       }), jsx("span", {
-        ...Ay.props(eP.lineCopy),
+        ...stylex.props(eP.lineCopy),
         children: a
       })))
     })]

@@ -8,7 +8,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { Button } from "../905/521428";
 import { l as _$$l } from "../905/509505";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useSingleEffect } from "../905/791079";
@@ -152,10 +152,10 @@ function G({
       children: jsxs("div", {
         className: "x78zum5 xdt5ytf x1cy8zhl x1jnr06f xc7ga6q x1seouad x1qh3cfz x1b06okx xcr9a89",
         children: [jsx("div", {
-          ...Ay.props(textDisplayConfig.textBodyMediumStrong),
+          ...stylex.props(textDisplayConfig.textBodyMediumStrong),
           children: getI18nString("sites.modal.select_library_banner_title")
         }), jsxs("div", {
-          ...Ay.props(textDisplayConfig.textBodyMedium, P.textSecondary),
+          ...stylex.props(textDisplayConfig.textBodyMedium, P.textSecondary),
           children: [getI18nString("sites.modal.select_library_banner_subtitle"), "\xa0", jsx(TrackedLink, {
             href: kC,
             newTab: !0,
@@ -207,10 +207,10 @@ function H() {
     children: jsxs("div", {
       className: "xhwf2h4 x167g77z x78zum5 xdt5ytf x6s0dn4 xl56j7k x2b8uid",
       children: [jsx(_$$l, {}), jsx("div", {
-        ...Ay.props(textDisplayConfig.textBodyMediumStrong),
+        ...stylex.props(textDisplayConfig.textBodyMediumStrong),
         children: getI18nString("sites.modal.no_libraries_found")
       }), jsxs("div", {
-        ...Ay.props(textDisplayConfig.textBodyMedium, P.textSecondary),
+        ...stylex.props(textDisplayConfig.textBodyMedium, P.textSecondary),
         children: [getI18nString("sites.modal.select_library_banner_subtitle"), "\xa0", jsx(TrackedLink, {
           href: kC,
           newTab: !0,
@@ -222,13 +222,13 @@ function H() {
           children: [jsx("div", {
             className: "x1dmp6jm xqtp20y x1bamp8i"
           }), "\xa0", jsx("div", {
-            ...Ay.props(textDisplayConfig.textBodyMedium, P.textSecondary),
+            ...stylex.props(textDisplayConfig.textBodyMedium, P.textSecondary),
             children: getI18nString("sites.modal.or")
           }), "\xa0", jsx("div", {
             className: "x1dmp6jm xqtp20y x1bamp8i"
           })]
         }), jsx("div", {
-          ...Ay.props(textDisplayConfig.textBodyMedium, P.textSecondary),
+          ...stylex.props(textDisplayConfig.textBodyMedium, P.textSecondary),
           children: getI18nString("sites.modal.add_guidelines_text")
         }), jsx(Button, {
           variant: "primary",

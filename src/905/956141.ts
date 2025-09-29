@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Y } from "../905/185567";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import s from "classnames";
 import { getI18nString } from "../905/303541";
 import { LikeCountDisplay, UsageCountDisplay } from "../905/14017";
@@ -38,7 +38,7 @@ export function $$g0({
         draggable: !1,
         crossOrigin: "use-credentials"
       }) : jsx("img", {
-        ...xk(f.thumbnailImage, y),
+        ...props(f.thumbnailImage, y),
         src: b.url,
         loading: "lazy",
         alt: getI18nString("community.publishing.thumbnail_image"),

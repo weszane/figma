@@ -9,7 +9,7 @@ import { T as _$$T } from "../figma_app/257703";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { cL } from "../905/748726";
 import { showModalHandler, popModalStack } from "../905/156213";
-import { MB } from "../figma_app/996356";
+import { createOrgInvitesThunk } from "../figma_app/996356";
 import { TrackingProvider } from "../figma_app/831799";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { useCurrentUserOrg } from "../905/845253";
@@ -65,7 +65,7 @@ export function $$U3({
     workspaceName: M(A.name)
   }) : null, [R, A, M]);
   let D = n => {
-    p(MB({
+    p(createOrgInvitesThunk({
       emails: um(n),
       licenseGroupId: e,
       workspaceId: i,

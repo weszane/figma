@@ -1,4 +1,4 @@
-import { xk } from '@stylexjs/stylex';
+import { props } from '@stylexjs/stylex';
 import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
@@ -271,7 +271,7 @@ function el(e) {
   return jsxs('div', {
     className: 'x78zum5 xdt5ytf xh8yej3 x98rzlu x2lwn1j xysyzu8',
     children: [jsxs('section', {
-      ...xk(l ? e_.section : e_.sectionOld),
+      ...props(l ? e_.section : e_.sectionOld),
       children: [!l && jsxs('h3', {
         className: 'x15cjxed x1xevgq6 x1lh6uom x45is6j x1bp5d4j x1akne3o x12sbs06 x78zum5 x1q0g3np x1nfngrj x1pha0wt',
         children: [jsx('span', {
@@ -327,9 +327,9 @@ function el(e) {
         })]
       })]
     }), jsx('div', {
-      ...xk(l ? e_.dividerNickname : e_.divider)
+      ...props(l ? e_.dividerNickname : e_.divider)
     }), jsxs('section', {
-      ...xk(l ? e_.section : e_.sectionOld),
+      ...props(l ? e_.section : e_.sectionOld),
       children: [!l && jsx('h3', {
         className: 'x15cjxed x1xevgq6 x1lh6uom x45is6j x1bp5d4j x1akne3o x12sbs06 x78zum5 x1q0g3np x1nfngrj x1pha0wt',
         children: getI18nString('idp_management.flyout.service_provider')
@@ -372,9 +372,9 @@ function el(e) {
       })]
     }), (m || k12GoogleOrg) && canOrgUseMultiIdpScim && jsxs(Fragment, {
       children: [jsx('div', {
-        ...xk(l ? e_.dividerNickname : e_.divider)
+        ...props(l ? e_.dividerNickname : e_.divider)
       }), jsxs('section', {
-        ...xk(l ? e_.section : e_.sectionOld),
+        ...props(l ? e_.section : e_.sectionOld),
         children: [(m || k12GoogleOrg) && u && jsx(Link, {
           onClick: c,
           href: '#',
@@ -703,7 +703,7 @@ let em = {
             })
           }), jsx(_$$m.Header, {
             children: jsx('div', {
-              ...xk(l ? e_.tabStrip : e_.tabStripPreNickname),
+              ...props(l ? e_.tabStrip : e_.tabStripPreNickname),
               children: jsxs(_$$t2.TabStrip, {
                 manager: r,
                 children: [jsx(_$$t2.Tab, {
@@ -736,7 +736,7 @@ let em = {
           children: [l && jsx('div', {
             className: 'xjm9jq1 xbpqucl x14atkfc xnajj62 xvqcqsr'
           }), jsxs('div', {
-            ...xk(l ? e_.footerLeftAligned : e_.footer),
+            ...props(l ? e_.footerLeftAligned : e_.footer),
             children: [jsx(Button, {
               variant: 'secondary',
               onClick: o,
@@ -802,14 +802,14 @@ function eh(e) {
   let i = item.id;
   let r = ev();
   return jsxs(iA, {
-    className: xk(ef.row, isHighlighted && ef.highlightedRow).className,
+    className: props(ef.row, isHighlighted && ef.highlightedRow).className,
     onClick: () => {
       isHighlighted ? onHighlight?.(null) : onHighlight?.(i);
     },
     useAdminTableStyles: !0,
     dataTestId: 'simple-table-row',
     children: [jsx('div', {
-      className: xk(r ? ef.nicknameColumn : ef.tenantIdColumn).className,
+      className: props(r ? ef.nicknameColumn : ef.tenantIdColumn).className,
       style: {
         marginRight: '0px'
       },
@@ -868,7 +868,7 @@ function ex(e) {
         useAdminTableStyles: !0,
         dataTestId: 'simple-table-loading-row',
         children: [jsx('div', {
-          className: xk(t ? ef.nicknameColumn : ef.tenantIdColumn).className,
+          className: props(t ? ef.nicknameColumn : ef.tenantIdColumn).className,
           children: jsx(Wi, {
             className: 'x1kpxq89',
             animationType: JR.SHIMMER
@@ -908,7 +908,7 @@ function ex(e) {
         className: 'xf7z5ut xxk0z11 x78zum5 x1i71x30 x6s0dn4 x1akne3o x1g2dr8m xiqqdae xkezfkh x14kxzw3 x1giz659',
         dataTestId: 'simple-table-header-row',
         children: [jsx('div', {
-          className: xk(t ? ef.nicknameColumn : ef.tenantIdColumn).className,
+          className: props(t ? ef.nicknameColumn : ef.tenantIdColumn).className,
           style: {
             marginRight: '0px'
           },

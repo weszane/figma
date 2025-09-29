@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { O } from "../905/969533";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { e6, wt } from "../figma_app/617427";
 export function $$o0(e) {
   switch (e.variant) {
     case "toggle":
       return jsx(e6, {
-        ...xk(l.baseButton, e.checked && l.toggleChecked, e.disabled && l.disabled),
+        ...props(l.baseButton, e.checked && l.toggleChecked, e.disabled && l.disabled),
         "aria-label": e.ariaLabel,
         "aria-pressed": e.checked,
         "data-testid": e.dataTestId,
@@ -25,7 +25,7 @@ export function $$o0(e) {
     case "menu":
       return jsxs(wt, {
         ...(e.getTriggerProps ? e.getTriggerProps() : e.getPopoverTriggerProps()),
-        ...xk(l.baseButton, e.disabled && l.disabled),
+        ...props(l.baseButton, e.disabled && l.disabled),
         "aria-label": e.ariaLabel,
         "data-testid": e.dataTestId,
         "data-tooltip": e.tooltip,
@@ -39,7 +39,7 @@ export function $$o0(e) {
       });
     case "button":
       return jsx(e6, {
-        ...xk(l.baseButton, e.disabled && l.disabled),
+        ...props(l.baseButton, e.disabled && l.disabled),
         "aria-label": e.ariaLabel,
         "data-testid": e.dataTestId,
         "data-tooltip": e.tooltip,

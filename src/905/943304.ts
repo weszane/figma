@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { isNotNullish } from "../figma_app/95419";
 import { Y } from "../905/185567";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import o from "classnames";
 import { getI18nString } from "../905/303541";
 import { LikeCountDisplay, UsageCountDisplay } from "../905/14017";
@@ -32,7 +32,7 @@ export function $$g0({
     children: [jsx("div", {
       className: "preview_row--thumbnailContainer--IVn4Y",
       children: y ? jsx("img", {
-        ...xk(f.thumbnailImage, _),
+        ...props(f.thumbnailImage, _),
         src: y,
         loading: "lazy",
         alt: getI18nString("community.publishing.thumbnail_image"),

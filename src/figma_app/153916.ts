@@ -8,10 +8,10 @@ import { FOrganizationLevelType } from "../figma_app/191312";
 import { liveStoreInstance } from "../905/713695";
 import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { useErrorFlash } from "../905/787489";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 var n;
 (n || (n = {})).orgBillingDataQuery = liveStoreInstance.Query({
-  fetch: async e => (await Eh.getBillingData({
+  fetch: async e => (await organizationAPIService.getBillingData({
     orgId: e
   })).data.meta,
   enabled: e => !!e

@@ -1,6 +1,6 @@
 import { n3 } from "../905/859698";
 import { memoizeWeak } from "../figma_app/815945";
-import { e1, getResourceDataOrFallback, gB } from "../905/723791";
+import { createErrorState, getResourceDataOrFallback, createLoadedState } from "../905/723791";
 import { mapHubOrTeamFile, mapStyleProperties, mapMovedFileProperties } from "../figma_app/349248";
 export let $$o0 = memoizeWeak(e => {
   if ("loaded" !== e.status) return {
@@ -8,7 +8,7 @@ export let $$o0 = memoizeWeak(e => {
   };
   let t = e.data.styleWithDestinationAssetV2;
   if (!t) return {
-    result: e1([])
+    result: createErrorState([])
   };
   let {
     file,
@@ -18,7 +18,7 @@ export let $$o0 = memoizeWeak(e => {
   let l = getResourceDataOrFallback(hubFile);
   let d = mapHubOrTeamFile(file, l);
   return d ? {
-    result: gB({
+    result: createLoadedState({
       ...mapStyleProperties(o, d),
       fileName: ("team" === d.type ? d.file?.name : d.file?.currentHubFileVersion?.name) ?? ""
     }),
@@ -30,7 +30,7 @@ export let $$o0 = memoizeWeak(e => {
     } : void 0,
     legacySourceStyle: mapMovedFileProperties(t)
   } : {
-    result: e1([])
+    result: createErrorState([])
   };
 });
 export const L = $$o0;

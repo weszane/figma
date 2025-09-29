@@ -1,4 +1,4 @@
-import { Ay } from '@stylexjs/stylex';
+import { stylex } from '@stylexjs/stylex';
 import U from 'lodash-es/mapValues';
 import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
@@ -246,7 +246,7 @@ function J({
             e ? i.current.set(t, e) : i.current.$$delete(t);
           },
           onClick: n => e(t, n),
-          ...Ay.props(ee.exportCarouselItem, l === n ? ee.exportCarouselItemSelected : void 0),
+          ...stylex.props(ee.exportCarouselItem, l === n ? ee.exportCarouselItemSelected : void 0),
           children: jsx(_$$eI, {
             guid: t,
             thumbnailBorder: void 0,
@@ -265,7 +265,7 @@ function Q({
   return jsx('div', {
     className: 'x13vifvy x78zum5 x6s0dn4 xl56j7k x1n5zjp5 xf7z5ut',
     children: jsx('h3', {
-      ...Ay.props(ee.exportCarouselHeader),
+      ...stylex.props(ee.exportCarouselHeader),
       children: getI18nString('buzz.toolbar.export_modal.frame_number', {
         current: e + 1,
         total: t

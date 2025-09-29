@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useLayoutEffect, memo } from "react";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { R } from "../figma_app/636548";
 import { W } from "../figma_app/896386";
@@ -42,7 +42,7 @@ export let $$h0 = memo(e => {
   let u = g();
   return nodeType ? jsx("div", {
     ref: u,
-    ...xk(_$$R.selectionName),
+    ...props(_$$R.selectionName),
     children: (() => {
       switch (nodeType) {
         case "MIXED":

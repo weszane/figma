@@ -12,7 +12,7 @@ import { setTeamOptimistThunk } from "../figma_app/240735";
 import { UM, vr } from "../figma_app/475472";
 import { n1, p9 } from "../figma_app/88768";
 import { setupLoadingStateHandler } from "../905/696711";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { u as _$$u } from "../905/774364";
 import { loadingStatePutLoading, loadingStatePutFailure } from "../figma_app/714946";
 var s = a;
@@ -142,7 +142,7 @@ let $$A2 = createOptimistThunk((e, t, {
     teamId,
     disableFlashError
   } = t;
-  let s = Eh.getTeam({
+  let s = organizationAPIService.getTeam({
     orgId: n,
     teamId
   });
@@ -168,7 +168,7 @@ let $$N3 = createOptimistThunk((e, t) => {
     includeTopMembers,
     includeSecretTeams
   } = t || {};
-  Eh.getTeams({
+  organizationAPIService.getTeams({
     orgId: r,
     includeMemberCount,
     includeProjectCount,

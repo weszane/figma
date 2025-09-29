@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { MenuItemComp } from "../figma_app/860955";
 import { useTheme } from "../905/289770";
 import { setupThemeContext } from "../905/614223";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { Badge, BadgeColor } from "../figma_app/919079";
 function c({
@@ -21,7 +21,7 @@ export function $$p1(e) {
   return jsx(setupThemeContext, {
     brand: e.brand,
     children: jsx(MenuItemComp, {
-      ...xk(h.item, "dark" === t.color && h.itemDark, !!e.brand && h.itemBrand),
+      ...props(h.item, "dark" === t.color && h.itemDark, !!e.brand && h.itemBrand),
       onClick: e.onClick,
       "data-testid": e.isLoading ? void 0 : e.dataTestId,
       disabled: r,
@@ -31,10 +31,10 @@ export function $$p1(e) {
         children: [jsxs("div", {
           className: "x78zum5 x167g77z x6s0dn4 x1iyjqo2",
           children: [jsx("div", {
-            ...xk(!!e.brand && h.iconBrand, !!e.isDisabled && h.iconDisabled),
+            ...props(!!e.brand && h.iconBrand, !!e.isDisabled && h.iconDisabled),
             children: e.icon
           }), jsx("span", {
-            ...xk(h.text, !!e.isDisabled && h.textDisabled),
+            ...props(h.text, !!e.isDisabled && h.textDisabled),
             children: e.title
           })]
         }), e.badges ? jsx("div", {

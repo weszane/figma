@@ -83,7 +83,7 @@ import { e0 as _$$e4 } from '../905/696396';
 import { RenewalTermEnum } from '../905/712921';
 import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
-import { gB, getResourceDataOrFallback, Xm } from '../905/723791';
+import { createLoadedState, getResourceDataOrFallback, createLoadingState } from '../905/723791';
 import { yN } from '../905/727738';
 import { OrganizationType } from '../905/833838';
 import { teamAPIClient } from '../905/834575';
@@ -160,7 +160,7 @@ import { i9 } from '../figma_app/805373';
 import { Agb, zRx } from '../figma_app/822011';
 import { createEmptyAddress } from '../figma_app/831101';
 import { TrackingProvider, TrackedDiv, withTracking } from '../figma_app/831799';
-import { ps } from '../figma_app/845611';
+import { TeamOrg } from '../figma_app/845611';
 import { vS } from '../figma_app/846003';
 import { LoadingSpinner } from '../figma_app/858013';
 import { MenuSeparator } from '../figma_app/860955';
@@ -180,7 +180,7 @@ function $({
 }) {
   return jsx(_$$F, {
     supportedLicenses: [ProductAccessMap.DESIGN, ProductAccessMap.WHITEBOARD],
-    planType: ps.TEAM,
+    planType: TeamOrg.TEAM,
     planId: e.id,
     isOrgAdmin: !1
   });
@@ -297,7 +297,7 @@ let eq = registerModal(e => {
 }, 'ConfirmMembersRemoveModal');
 function eJ() {
   let e = getCurrentTeam();
-  let t = e?.pro_team === void 0 ? Xm() : gB(e.pro_team);
+  let t = e?.pro_team === void 0 ? createLoadingState() : createLoadedState(e.pro_team);
   let {
     show,
     isShowing,

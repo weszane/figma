@@ -21,7 +21,7 @@ import { V as _$$V2 } from "../905/751103";
 import { P as _$$P } from "../905/175083";
 import { setupThemeContext } from "../905/614223";
 import { scopeAwareFunction } from "../905/189185";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
@@ -55,7 +55,7 @@ function j({
   hidden: r
 }) {
   return jsx("span", {
-    ...Ay.props(r ? M.offscreen : M.displayContents),
+    ...stylex.props(r ? M.offscreen : M.displayContents),
     children: jsx(QB, {
       htmlAttributes: {
         "data-testid": t
@@ -72,7 +72,7 @@ function U({
   return t ? jsx(ScreenReaderOnly, {
     children: r
   }) : jsx("span", {
-    ...Ay.props(e && M.offscreen),
+    ...stylex.props(e && M.offscreen),
     children: r
   });
 }

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { isValidValue } from "../905/216495";
 import { useSelectionProperty } from "../905/275640";
 import { J } from "../905/225412";
@@ -43,7 +43,7 @@ export function $$p1({
   forceNonInteractive: n = !1
 }) {
   if (!(e.length > 1)) return jsx(J, {
-    ...Ay.props(d.chit, s ? d.transparentBorder : null),
+    ...stylex.props(d.chit, s ? d.transparentBorder : null),
     hideBorderShadow: s,
     paint: t ?? c,
     allowMouseDownPropagation: !0,

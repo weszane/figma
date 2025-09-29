@@ -5,7 +5,7 @@ import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { S as _$$S } from "../905/711470";
 import { L as _$$L } from "../905/704296";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { analyticsEventManager } from "../905/449184";
 import { Wi, JR } from "../figma_app/162641";
 import { e6, hH } from "../figma_app/617427";
@@ -247,7 +247,7 @@ function L({
   hasFixedWidth: i = !1
 }) {
   return jsx("div", {
-    ...xk(i ? M.fixedWidthTrigger : M.limitedWidthTrigger),
+    ...props(i ? M.fixedWidthTrigger : M.limitedWidthTrigger),
     children: jsx(DZ, {
       width: "fill",
       id: s || t,
@@ -625,13 +625,13 @@ function G({
     dataTestId: "table-filter-popover",
     direction: "vertical",
     children: [jsxs("div", {
-      ...xk(F.popoverHeader),
+      ...props(F.popoverHeader),
       children: [jsx(TextWithTruncation, {
         fontWeight: "medium",
         fontSize: 11,
         children: getI18nString("people_table_filters.popover_header")
       }), jsx("span", {
-        ...xk(F.headerSpacing),
+        ...props(F.headerSpacing),
         children: jsx(IconButton, {
           "aria-label": getI18nString("people_table_filters.close_button_aria_label"),
           onClick: u,
@@ -639,7 +639,7 @@ function G({
         })
       })]
     }), jsx("div", {
-      ...xk(F.popoverContent),
+      ...props(F.popoverContent),
       children: i.map(e => jsx(P, {
         title: e.title,
         filters: e.filters,
@@ -648,13 +648,13 @@ function G({
         filterCounts: a
       }, e.title))
     }), jsxs("div", {
-      ...xk(F.popoverFooter),
+      ...props(F.popoverFooter),
       children: [!E && jsx(Button, {
         variant: "link",
         onClick: resetFilters,
         children: getI18nString("people_table_filters.button_text.clear_all")
       }), jsx("span", {
-        ...xk(F.footerSpacing),
+        ...props(F.footerSpacing),
         children: jsx(Button, {
           variant: "primary",
           onClick: k,

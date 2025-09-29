@@ -11,7 +11,7 @@ import { e as _$$e } from "../905/693478";
 import { E as _$$E } from "../905/500201";
 import { s as _$$s } from "../905/539471";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { registerModal } from "../905/102752";
 import { memo, useState, useEffect, useMemo } from "react";
@@ -90,10 +90,10 @@ function P({
         }), jsxs("div", {
           className: "x78zum5 xdt5ytf x167g77z x1cy8zhl xkh2ocl",
           children: [jsx("span", {
-            ...Ay.props(O.title),
+            ...stylex.props(O.title),
             children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.intro.title")
           }), jsx("span", {
-            ...Ay.props(O.subtitle),
+            ...stylex.props(O.subtitle),
             children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.intro.description")
           })]
         }), jsxs("div", {
@@ -154,10 +154,10 @@ function L({
         }
       })
     }), jsx("h3", {
-      ...Ay.props(F.title),
+      ...stylex.props(F.title),
       children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.title.failed")
     }), jsx("span", {
-      ...Ay.props(F.errorSubtitle),
+      ...stylex.props(F.errorSubtitle),
       children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.subtitle.failed")
     }), e && jsx(Button, {
       variant: "primary",
@@ -189,7 +189,7 @@ function W({
   return jsxs("div", {
     className: "x78zum5 x193iq5w xdt5ytf x1cy8zhl x167g77z x1vcdrz3 xkh2ocl",
     children: [jsx("span", {
-      ...Ay.props(q.optionalText),
+      ...stylex.props(q.optionalText),
       children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.found.subtitle")
     }), jsx("div", {
       className: "x78zum5 x1cy8zhl x167g77z x1a02dak",
@@ -211,7 +211,7 @@ function K({
   return jsxs("div", {
     className: "x78zum5 x193iq5w xdt5ytf x1cy8zhl x167g77z x1vcdrz3 xkh2ocl",
     children: [jsx("span", {
-      ...Ay.props(q.optionalText),
+      ...stylex.props(q.optionalText),
       children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.error_description")
     }), jsxs("div", {
       className: "x78zum5 x1cy8zhl x167g77z",
@@ -220,7 +220,7 @@ function K({
         size: "md",
         children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_1_number")
       }), jsx("span", {
-        ...Ay.props(q.optionalText),
+        ...stylex.props(q.optionalText),
         children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_1")
       })]
     }), jsxs("div", {
@@ -230,7 +230,7 @@ function K({
         size: "md",
         children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_2_number")
       }), jsx("span", {
-        ...Ay.props(q.optionalText),
+        ...stylex.props(q.optionalText),
         children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_2")
       })]
     }), jsxs("div", {
@@ -240,7 +240,7 @@ function K({
         size: "md",
         children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_3_number")
       }), jsx("span", {
-        ...Ay.props(q.optionalText),
+        ...stylex.props(q.optionalText),
         children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_3")
       })]
     }), jsxs("div", {
@@ -343,10 +343,10 @@ function Y({
       className: "x78zum5 xdt5ytf x6s0dn4 xg7h5cd xdzyupr",
       children: jsxs(fh, {
         children: [jsx("h3", {
-          ...Ay.props(q.title),
+          ...stylex.props(q.title),
           children: g ? getI18nString("figmake.design_system_imports.library_extraction_theming_progress.title.completed") : b ? getI18nString("figmake.design_system_imports.library_extraction_theming_progress.title.error") : getI18nString("figmake.design_system_imports.library_extraction_theming_progress.title.in_progress")
         }), jsx("span", {
-          ...Ay.props(q.subtitle),
+          ...stylex.props(q.subtitle),
           children: g ? getI18nString("figmake.design_system_imports.library_extraction_theming_progress.description.completed") : b ? getI18nString("figmake.design_system_imports.library_extraction_theming_progress.description.error") : getI18nString("figmake.design_system_imports.library_extraction_theming_progress.description.in_progress")
         })]
       })
@@ -359,17 +359,17 @@ function Y({
           children: [jsxs("div", {
             className: "x78zum5 x6s0dn4 xkh2ocl x1q0g3np x167g77z xh8yej3",
             children: [jsx("div", {
-              ...Ay.props(q.stateHeader),
+              ...stylex.props(q.stateHeader),
               children: jsxs("span", {
                 children: [" ", T(t)]
               })
             }), jsx("span", {
               children: x(t)
             }), t.taskId === mp.EXAMPLES && !a && jsx("span", {
-              ...Ay.props(q.optionalText),
+              ...stylex.props(q.optionalText),
               children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.optional")
             }), t.taskId === mp.EXAMPLES && o && a && jsx("span", {
-              ...Ay.props(q.optionalText),
+              ...stylex.props(q.optionalText),
               children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.skipped")
             }), t.taskId === mp.CSS && g && jsx("div", {
               className: "x78zum5 x6s0dn4 xpvyfi4 xeq5yr9 x8x9d4c",
@@ -440,7 +440,7 @@ function et({
   return jsxs("div", {
     className: "x78zum5 x6s0dn4 xkh2ocl x1q0g3np xh8yej3 x5yr21d x1qughib xj5tbmc",
     children: [jsxs("div", {
-      ...Ay.props(en.rightPanelHeaderText),
+      ...stylex.props(en.rightPanelHeaderText),
       children: [jsx("span", {
         children: e
       }), jsx(_$$B, {})]
@@ -474,10 +474,10 @@ function ei({
         children: jsxs("div", {
           className: "x78zum5 xdt5ytf x1usb9k9 xw5ewwj x1m7nem5",
           children: [jsx("span", {
-            ...Ay.props(en.updateStylesWindowText),
+            ...stylex.props(en.updateStylesWindowText),
             children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.re_extract.description_top")
           }), jsx("span", {
-            ...Ay.props(en.updateStylesWindowText),
+            ...stylex.props(en.updateStylesWindowText),
             children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.re_extract.description_bottom")
           }), jsx("div", {
             className: "x14atkfc",
@@ -642,7 +642,7 @@ function ed() {
     _$$W(e, NJ, R6) || Fullscreen?.createNewCodeFile(R6, es["1"] || "", null, !1);
   });
   let [e, t] = useState(jsx("span", {
-    ...Ay.props(ec.rightPanelHeaderText),
+    ...stylex.props(ec.rightPanelHeaderText),
     children: R6
   }));
   return jsx(er, {
@@ -759,10 +759,10 @@ let $$ep0 = registerModal(function (e) {
               children: [jsxs(fI, {
                 className: "x78zum5 xdt5ytf x1tamke2 x167g77z x1cy8zhl xkh2ocl x1kgkb76",
                 children: [jsx(_$$e, {}), jsx("span", {
-                  ...Ay.props(eu.leftPanelHeaderTitle),
+                  ...stylex.props(eu.leftPanelHeaderTitle),
                   children: getI18nString("figmake.design_system_imports.library_extraction_modal.sidebar_title")
                 }), jsx("span", {
-                  ...Ay.props(eu.leftPanelHeaderSubtitle),
+                  ...stylex.props(eu.leftPanelHeaderSubtitle),
                   children: getI18nString("figmake.design_system_imports.library_extraction_modal.sidebar_subtitle")
                 })]
               }), jsx(fI, {
@@ -770,27 +770,27 @@ let $$ep0 = registerModal(function (e) {
                   manager: A,
                   children: [jsxs(_$$r, {
                     ...i.theming,
-                    ...Ay.props(eu.leftPanelTab, "theming" === A.activeTab && eu.leftPanelTabActive),
+                    ...stylex.props(eu.leftPanelTab, "theming" === A.activeTab && eu.leftPanelTabActive),
                     children: [jsx(_$$E, {}), jsxs("div", {
                       className: "x78zum5 xdt5ytf xl56j7k x1cy8zhl x5mp9sv",
                       children: [jsx("span", {
-                        ...Ay.props(eu.leftPanelTabTextTitle),
+                        ...stylex.props(eu.leftPanelTabTextTitle),
                         children: getI18nString("figmake.design_system_imports.library_extraction_modal.tabs.styles.title")
                       }), jsx("span", {
-                        ...Ay.props(eu.leftPanelTabTextSubtitle),
+                        ...stylex.props(eu.leftPanelTabTextSubtitle),
                         children: getI18nString("figmake.design_system_imports.library_extraction_modal.tabs.styles.subtitle")
                       })]
                     })]
                   }), jsxs(_$$r, {
                     ...i.guidelines,
-                    ...Ay.props(eu.leftPanelTab, "guidelines" === A.activeTab && eu.leftPanelTabActive),
+                    ...stylex.props(eu.leftPanelTab, "guidelines" === A.activeTab && eu.leftPanelTabActive),
                     children: [jsx(_$$s, {}), jsxs("div", {
                       className: "x78zum5 xdt5ytf xl56j7k x1cy8zhl x5mp9sv",
                       children: [jsx("span", {
-                        ...Ay.props(eu.leftPanelTabTextTitle),
+                        ...stylex.props(eu.leftPanelTabTextTitle),
                         children: getI18nString("figmake.design_system_imports.library_extraction_modal.tabs.guidelines.title")
                       }), jsx("span", {
-                        ...Ay.props(eu.leftPanelTabTextSubtitle),
+                        ...stylex.props(eu.leftPanelTabTextSubtitle),
                         children: getI18nString("figmake.design_system_imports.library_extraction_modal.tabs.guidelines.subtitle")
                       })]
                     })]

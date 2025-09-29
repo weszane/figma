@@ -25,7 +25,7 @@ import { getViewState } from "../905/612521";
 import { openUrlInContext, trackFileClicked } from "../figma_app/976345";
 import { trackFileBrowserFileClicked } from "../figma_app/314264";
 import { getSelectedViewUrl } from "../figma_app/193867";
-import { W as _$$W } from "../905/25249";
+import { FolderPermissionsModal } from "../905/25249";
 import { VisualBellActions } from "../905/302958";
 import { p7 } from "../figma_app/49598";
 import { selectCurrentUser } from "../905/372672";
@@ -325,7 +325,7 @@ let z = e => function (t) {
       text: "Share",
       onClick: () => {
         t(showModalHandler({
-          type: _$$W,
+          type: FolderPermissionsModal,
           data: {
             folderId: e.id
           }

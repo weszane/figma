@@ -1,4 +1,4 @@
-import { Ay, xk } from '@stylexjs/stylex';
+import { stylex, props } from '@stylexjs/stylex';
 import Y from 'classnames';
 import { createElement, Suspense, useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
@@ -122,7 +122,7 @@ import { BannerInsetModal } from '../figma_app/59509';
 import { $$ as _$$$$, nR as _$$nR2 } from '../figma_app/60079';
 import { aY as _$$aY, JA } from '../figma_app/78725';
 import { getCodegenPreferencesSettings, isCodegenSupportedForLanguage } from '../figma_app/120227';
-import { G as _$$G } from '../figma_app/124713';
+import { orgUserService } from '../figma_app/124713';
 import { addPluginToRecentsThunk, syncRecentPluginsThunk } from '../figma_app/147952';
 import { I2, Xf } from '../figma_app/153916';
 import { isGovCluster } from '../figma_app/169182';
@@ -155,7 +155,7 @@ import { p3 } from '../figma_app/588582';
 import { selectExperimentConfigHook } from '../figma_app/594947';
 import { getCurrentTeam } from '../figma_app/598018';
 import { $z } from '../figma_app/617427';
-import { Eh } from '../figma_app/617654';
+import { organizationAPIService } from '../figma_app/617654';
 import { ButtonBasePrimary, BaseLinkComponent, ButtonSecondary, ButtonWhite, SecureLink, BigTextInputForwardRef, ButtonNegative, ButtonBasePrimaryTracked } from '../figma_app/637027';
 import { pL, v0 } from '../figma_app/639088';
 import { DashboardSection } from '../figma_app/650409';
@@ -383,7 +383,7 @@ function e_(e) {
                 message: getI18nString('members_table.csv_export.preparing_request'),
                 type: 'orgRoster.exportCSV',
                 icon: VisualBellIcon.SPINNER
-              })), _$$G.getMemberCSVExport({
+              })), orgUserService.getMemberCSVExport({
                 orgId: e.org.id
               }).then(() => {
                 t(VisualBellActions.enqueue({
@@ -872,7 +872,7 @@ function ty({
         displaySettings: s,
         hasCustomSettings: l
       }), jsx('div', {
-        ...xk(tE.customWorkspaceContainer, t === 'loaded' && tE.loaded),
+        ...props(tE.customWorkspaceContainer, t === 'loaded' && tE.loaded),
         children: o.map(e => jsx('div', {
           children: jsx(AutoLayout, {
             direction: 'horizontal',
@@ -969,7 +969,7 @@ function tk(e) {
           children: c.map(t => {
             let a = e.hasCustomSettings(t);
             return createElement(_$$F2.Option, {
-              ...xk(i === t.id && !a && tE.activeComboboxOption),
+              ...props(i === t.id && !a && tE.activeComboboxOption),
               disabled: a,
               key: t.id,
               value: t.id
@@ -979,7 +979,7 @@ function tk(e) {
                 size: 24,
                 entity: t
               }), jsx('span', {
-                ...xk(tE.workspaceNameContainer, a && tE.disabled),
+                ...props(tE.workspaceNameContainer, a && tE.disabled),
                 children: t.name
               }), a && jsx('span', {
                 className: 'xge78cn x8x9d4c x2lah0s',
@@ -1079,7 +1079,7 @@ let tS = registerModal(e => {
     let a = t.status === 'loaded' && t.data === 'enabled';
     return jsx('div', {
       children: jsx('p', {
-        ...Ay.props(a ? tC.successText : tC.secondaryText),
+        ...stylex.props(a ? tC.successText : tC.secondaryText),
         children: a ? renderI18nText('org_settings.general.on') : renderI18nText('org_settings.general.off')
       })
     });
@@ -1160,7 +1160,7 @@ let tN = registerModal(({
         children: jsx(DialogTitle, {
           children: jsxs(ButtonPrimitive, {
             onClick: t,
-            ...Ay.props(tg.goBackButton),
+            ...stylex.props(tg.goBackButton),
             children: [jsx(_$$t3, {}), a.name]
           })
         })
@@ -1173,7 +1173,7 @@ let tN = registerModal(({
       }), jsxs(DialogFooter, {
         children: [tR(a) && jsx(ButtonPrimitive, {
           onClick: c,
-          ...Ay.props(tg.removeCustomSettingsButton),
+          ...stylex.props(tg.removeCustomSettingsButton),
           children: renderI18nText('org_settings.workspace_controls.remove_custom_settings')
         }), jsxs(DialogActionStrip, {
           children: [jsx(Button, {
@@ -1278,11 +1278,11 @@ function tA({
         'htmlFor': i,
         'aria-describedby': 'ai-features-note',
         'children': jsx('span', {
-          ...Ay.props(tC.labelText),
+          ...stylex.props(tC.labelText),
           children: renderI18nText('org_settings.ai_controls.allow_ai_features')
         })
       }), jsx('span', {
-        ...Ay.props(tC.noteText),
+        ...stylex.props(tC.noteText),
         id: 'ai-features-note',
         children: r
       })]
@@ -1751,7 +1751,7 @@ let tZ = registerModal(e => {
   let [a, r] = useState([]);
   let [l, o] = useState(!0);
   useEffect(() => {
-    Eh.getOauthConnections({
+    organizationAPIService.getOauthConnections({
       orgId: e.org.id
     }).then(({
       data: e
@@ -2827,7 +2827,7 @@ let a8 = registerModal(({
         children: jsx(DialogTitle, {
           children: jsxs(ButtonPrimitive, {
             onClick: t,
-            ...Ay.props(tg.goBackButton),
+            ...stylex.props(tg.goBackButton),
             children: [jsx(_$$t3, {}), jsx(TextWithTruncation, {
               truncate: !0,
               color: 'default',
@@ -2852,7 +2852,7 @@ let a8 = registerModal(({
           children: [jsx('div', {
             children: a.workspaceSharedSetting?.fileExportSetting && jsx(ButtonPrimitive, {
               onClick: _,
-              ...Ay.props(tg.removeCustomSettingsButton),
+              ...stylex.props(tg.removeCustomSettingsButton),
               children: renderI18nText('org_settings.export_controls_modal.remove_custom_settings')
             })
           }), jsxs('div', {
@@ -3111,7 +3111,7 @@ function n_(e) {
                 message: getI18nString('members_table.csv_export.preparing_request'),
                 type: 'orgRoster.exportCSV',
                 icon: VisualBellIcon.SPINNER
-              })), _$$G.getMemberCSVExport({
+              })), orgUserService.getMemberCSVExport({
                 orgId: e.org.id
               }).then(() => {
                 t(VisualBellActions.enqueue({
@@ -3675,7 +3675,7 @@ let nT = registerModal(e => {
 function nO(e) {
   return jsxs(ButtonPrimitive, {
     onClick: e.goBack,
-    ...xk(tg.goBackButton),
+    ...props(tg.goBackButton),
     children: [jsx(_$$t3, {}), jsx(TextWithTruncation, {
       truncate: !0,
       color: 'default',
@@ -3747,7 +3747,7 @@ let nL = registerModal(({
       }), jsxs(DialogFooter, {
         children: [a.workspaceSharedSetting !== null && a.workspaceSharedSetting?.publicLinkControlsSetting !== null && jsx(ButtonPrimitive, {
           onClick: _,
-          ...xk(tg.removeCustomSettingsButton),
+          ...props(tg.removeCustomSettingsButton),
           children: renderI18nText('org_settings.workspace_controls.remove_custom_settings')
         }), jsx(DialogActionStrip, {
           children: jsx(Ym, {
@@ -4226,7 +4226,7 @@ function n6({
       billing_address: a ? n : void 0
     };
     try {
-      await Eh.updateOrgPaymentMethod({
+      await organizationAPIService.updateOrgPaymentMethod({
         orgId: e.id,
         paymentMethod: i
       });
@@ -4583,7 +4583,7 @@ export function $$sr0(e) {
   let eb = getResourceDataOrFallback(e_.data?.org) ?? null;
   let ev = getFeatureFlags().ai_ga;
   useEffect(() => {
-    Eh.getShowVatGst({
+    organizationAPIService.getShowVatGst({
       orgId: org.id
     }).then(({
       data: e
@@ -5245,7 +5245,7 @@ export function $$sr0(e) {
   };
   let tu = async e => {
     try {
-      await Eh.updateAiDataSharing({
+      await organizationAPIService.updateAiDataSharing({
         orgId: org.id,
         enabled: e
       });

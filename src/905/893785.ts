@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import r from "../vendor/336892";
-import { J } from "../905/931050";
+import { useAsyncWithReset } from "../905/931050";
 import { APILoadingStatus } from "../905/520829";
 import { p } from "../905/896627";
 var a = r;
@@ -40,7 +40,7 @@ function d({
 }
 export function $$c0(e) {
   p(e, d);
-  let t = J(async () => await e.deps.allowedCocreatorsPromise, [e.deps.allowedCocreatorsPromise]);
+  let t = useAsyncWithReset(async () => await e.deps.allowedCocreatorsPromise, [e.deps.allowedCocreatorsPromise]);
   let i = useMemo(() => t.status === APILoadingStatus.SUCCESS ? t.value : [], [t]);
   return {
     ...e,

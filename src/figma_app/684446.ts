@@ -5,7 +5,7 @@ import { dayjs } from "../905/920142";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { LicenseGroupUpdateReasonEnum } from "../figma_app/35887";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { useCurrentUserOrgId } from "../905/845253";
 import { C5, D1, hX } from "../figma_app/614170";
 export let $$_1 = e => `LICENSE_GROUP_GET_${e}`;
@@ -31,7 +31,7 @@ export function $$m8(e, t = !0) {
       if (!r && !s && !u && t) {
         a(!0);
         try {
-          let t = await Eh.getLicenseGroupsMembersCounts({
+          let t = await organizationAPIService.getLicenseGroupsMembersCounts({
             orgId: e
           });
           h(t.data.meta);

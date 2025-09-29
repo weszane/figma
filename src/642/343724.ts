@@ -8,7 +8,7 @@ import { _ as _$$_ } from "../905/821768";
 import { _ as _$$_2 } from "../905/862468";
 import { textDisplayConfig } from "../905/687265";
 import { Fullscreen, Command, ActionType } from "../figma_app/763686";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
@@ -97,7 +97,7 @@ export function $$M0({
       className: "x78zum5 xl56j7k x10l6tqk x1ey2m1c xu96u03 x3m8u43 xsdox4t x1yjdb4r xoegz02",
       children: jsxs(ButtonPrimitive, {
         onClick: n.showAllLayers,
-        ...Ay.props(E.showAllLayersButton),
+        ...stylex.props(E.showAllLayersButton),
         children: [jsx(_$$f, {}), renderI18nText("sites.layer_view.show_all_layers")]
       })
     })]

@@ -7,7 +7,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { Button } from "../905/521428";
 import { R as _$$R } from "../905/256203";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { countGraphemes } from "../figma_app/819288";
 import { w4 } from "../905/445814";
 import { LoadingSpinner } from "../figma_app/858013";
@@ -161,8 +161,8 @@ export function $$U0({
       await r(E);
       T();
     } finally {
-        C(!1);
-      }
+      C(!1);
+    }
   }, [r, A, T, E]);
   let F = useModalManager({
     open: w,
@@ -187,10 +187,10 @@ export function $$U0({
           }), jsxs("div", {
             className: cssBuilderInstance.flex.flexColumn.gap2.flexGrow1.justifyCenter.overflowHidden.cursorDefault.$,
             children: [jsx("div", {
-              ...Ay.props($.title),
+              ...stylex.props($.title),
               children: i.name
             }), "loaded" === k.status && k.data ? jsx("div", {
-              ...Ay.props($.subtitle),
+              ...stylex.props($.subtitle),
               children: k.data
             }) : null]
           })]

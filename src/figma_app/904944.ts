@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import s from "classnames";
 var o = s;
 var $$l0 = (e => (e.DIVIDER = "divider", e.TEXT = "text", e.SECTION_HEADER = "section-header", e))($$l0 || {});
@@ -34,7 +34,7 @@ export function $$d1({
             onClick: () => i(e),
             disabled: e.loading,
             children: e.loading ? jsx(c, {}) : jsx("div", {
-              ...Ay.props(l ? u.selectedItemText : u.itemText),
+              ...stylex.props(l ? u.selectedItemText : u.itemText),
               role: "option",
               "aria-selected": l,
               children: e.text

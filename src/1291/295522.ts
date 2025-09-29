@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { renderI18nText } from "../905/303541";
 import { lW } from "../figma_app/850075";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -28,7 +28,7 @@ export function $$u0({
       showTooltip: !0,
       isNewIcon: !0
     }), s && t && jsx("span", {
-      ...Ay.props(c.communitySourceText),
+      ...stylex.props(c.communitySourceText),
       children: renderI18nText("whiteboard.inserts.by_publisher_name", {
         publisherName: t
       })

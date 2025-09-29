@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/419236";
 import { useSubscription } from "../figma_app/288654";
-import { tT } from "../905/723791";
+import { ResourceStatus } from "../905/723791";
 import { P as _$$P } from "../905/347284";
 import { y2 } from "../figma_app/563413";
 import { V as _$$V } from "../figma_app/385855";
@@ -691,9 +691,9 @@ let e6 = e => {
 };
 let e7 = e => {
   if (!e) return getI18nString("resources_tab.libraries.subscription.off");
-  let t = e.slidesSubscribed.status === tT.Loaded && !!e.slidesSubscribed.data;
+  let t = e.slidesSubscribed.status === ResourceStatus.Loaded && !!e.slidesSubscribed.data;
   let a = getFeatureFlags().buzz_library_subscriptions;
-  let n = e.buzzSubscribed.status === tT.Loaded && !!e.buzzSubscribed.data;
+  let n = e.buzzSubscribed.status === ResourceStatus.Loaded && !!e.buzzSubscribed.data;
   return e.isSubscribed && e.figJamSubscribed && t && (!a || n) ? getI18nString("resources_tab.libraries.subscription.all_files") : e.isSubscribed || e.figJamSubscribed || t || a && n ? !e.isSubscribed || e.figJamSubscribed || t || a && n ? e.isSubscribed || !e.figJamSubscribed || t || a && n ? e.isSubscribed || e.figJamSubscribed || !t || a && n ? e.isSubscribed || e.figJamSubscribed || t || !a || !n ? getI18nString("resources_tab.libraries.subscription.custom") : getI18nString("resources_tab.libraries.subscription.buzz_files") : getI18nString("resources_tab.libraries.subscription.slides_files") : getI18nString("resources_tab.libraries.subscription.figjam_files") : getI18nString("resources_tab.libraries.subscription.design_files") : getI18nString("resources_tab.libraries.subscription.off");
 };
 function e9({
@@ -746,8 +746,8 @@ function e9({
       let i = {
         design: s.isSubscribed,
         figjam: s.figJamSubscribed,
-        slides: s.slidesSubscribed.status === tT.Loaded ? s.slidesSubscribed.data : null,
-        buzz: s.buzzSubscribed.status === tT.Loaded ? s.buzzSubscribed.data : null,
+        slides: s.slidesSubscribed.status === ResourceStatus.Loaded ? s.slidesSubscribed.data : null,
+        buzz: s.buzzSubscribed.status === ResourceStatus.Loaded ? s.buzzSubscribed.data : null,
         subscriptionType: LibrarySubscriptionType.TEAM
       };
       let d = {
@@ -782,14 +782,14 @@ function e9({
       case "FIGJAM_FILES":
         return !!q?.figJamSubscribed;
       case "SLIDES_FILES":
-        return q?.slidesSubscribed?.status === tT.Loaded && !!q?.slidesSubscribed?.data;
+        return q?.slidesSubscribed?.status === ResourceStatus.Loaded && !!q?.slidesSubscribed?.data;
       case "BUZZ_FILES":
-        return q?.buzzSubscribed?.status === tT.Loaded && !!q?.buzzSubscribed?.data;
+        return q?.buzzSubscribed?.status === ResourceStatus.Loaded && !!q?.buzzSubscribed?.data;
     }
   };
   let G = n => {
-    let s = q?.slidesSubscribed.status === tT.Loaded && !!q?.slidesSubscribed.data;
-    let i = q?.buzzSubscribed.status === tT.Loaded && !!q?.buzzSubscribed.data;
+    let s = q?.slidesSubscribed.status === ResourceStatus.Loaded && !!q?.slidesSubscribed.data;
+    let i = q?.buzzSubscribed.status === ResourceStatus.Loaded && !!q?.buzzSubscribed.data;
     let l = {
       design: "DESIGN_FILES" === n ? !q?.isSubscribed : !!q?.isSubscribed,
       figjam: "FIGJAM_FILES" === n ? !q?.figJamSubscribed : !!q?.figJamSubscribed,
@@ -818,8 +818,8 @@ function e9({
       currentSubscription: {
         design: !!o.librarySubscription?.isSubscribed,
         figjam: !!o.librarySubscription?.figJamSubscribed,
-        slides: !!(o.librarySubscription?.slidesSubscribed?.status === tT.Loaded && o.librarySubscription?.slidesSubscribed?.data),
-        buzz: !!(o.librarySubscription?.buzzSubscribed?.status === tT.Loaded && o.librarySubscription?.buzzSubscribed?.data)
+        slides: !!(o.librarySubscription?.slidesSubscribed?.status === ResourceStatus.Loaded && o.librarySubscription?.slidesSubscribed?.data),
+        buzz: !!(o.librarySubscription?.buzzSubscribed?.status === ResourceStatus.Loaded && o.librarySubscription?.buzzSubscribed?.data)
       }
     }));
   };
@@ -969,8 +969,8 @@ function e9({
           currentSubscription: {
             design: !!o.librarySubscription?.isSubscribed,
             figjam: !!o.librarySubscription?.figJamSubscribed,
-            slides: !!(o.librarySubscription?.slidesSubscribed.status === tT.Loaded ? o.librarySubscription?.slidesSubscribed.data : void 0),
-            buzz: !!(o.librarySubscription?.buzzSubscribed.status === tT.Loaded ? o.librarySubscription?.buzzSubscribed.data : void 0)
+            slides: !!(o.librarySubscription?.slidesSubscribed.status === ResourceStatus.Loaded ? o.librarySubscription?.slidesSubscribed.data : void 0),
+            buzz: !!(o.librarySubscription?.buzzSubscribed.status === ResourceStatus.Loaded ? o.librarySubscription?.buzzSubscribed.data : void 0)
           }
         }));
       },
@@ -1369,7 +1369,7 @@ export function $$tx1(e) {
     enabled: !!workspaceId && en
   });
   let er = new Set();
-  ei.data?.workspace.status === tT.Loaded && (t = ei.data.workspace.data?.name, er = new Set((ei.data.workspace.data?.approvedLibraries ?? []).map(e => e.fileKey)));
+  ei.data?.workspace.status === ResourceStatus.Loaded && (t = ei.data.workspace.data?.name, er = new Set((ei.data.workspace.data?.approvedLibraries ?? []).map(e => e.fileKey)));
   useEffect(() => {
     J(new Set(workspaceId ? [workspaceId] : []));
     Q("");
@@ -1386,7 +1386,7 @@ export function $$tx1(e) {
     let e = {};
     let t = new Set();
     el?.forEach(n => {
-      let s = n.slidesSubscribed?.status === tT.Loaded && n.slidesSubscribed?.data;
+      let s = n.slidesSubscribed?.status === ResourceStatus.Loaded && n.slidesSubscribed?.data;
       if (!n.isSubscribed && !n.figJamSubscribed && !s) return;
       let i = tb(n);
       i && (t.add(i), i in e || (e[i] = []), e[i].push({
@@ -1405,7 +1405,7 @@ export function $$tx1(e) {
         let s = tb(n);
         if (!s) return;
         s in e || (e[s] = []);
-        let i = n.slidesSubscribed?.status === tT.Loaded && n.slidesSubscribed?.data;
+        let i = n.slidesSubscribed?.status === ResourceStatus.Loaded && n.slidesSubscribed?.data;
         let r = t.has(s);
         let l = n.isSubscribed || n.figJamSubscribed || i;
         l && !r && e[s].push({

@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { useSubscription } from "../figma_app/288654";
-import { tT } from "../905/723791";
+import { ResourceStatus } from "../905/723791";
 import { getExperimentConfigWithInit, selectExperimentConfigHook } from "../figma_app/594947";
 import { isLlamaEnabledForOrg } from "../figma_app/459490";
 import { getEditorTypeIfFullscreen } from "../figma_app/976749";
@@ -32,7 +32,7 @@ export function $$v8(e) {
     let {
       file
     } = n.data;
-    return !!(file?.status === tT.Loaded && file?.data) && file.data.hasPermission;
+    return !!(file?.status === ResourceStatus.Loaded && file?.data) && file.data.hasPermission;
   }(e);
   let [r, s] = useAtomValueAndSetter(T);
   useEffect(() => {

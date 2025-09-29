@@ -4,7 +4,7 @@ import { resourceUtils } from "../905/989992";
 import { Xf } from "../figma_app/153916";
 import { dayjs } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
-import { getResourceDataOrFallback, Xm, gB } from "../905/723791";
+import { getResourceDataOrFallback, createLoadingState, createLoadedState } from "../905/723791";
 import { useSeatBillingTermsExperiment } from "../figma_app/297957";
 import { n as _$$n } from "../1577/959155";
 import { FBillingModelType } from "../figma_app/191312";
@@ -32,7 +32,7 @@ export function $$h0(e, t) {
   let C = getResourceDataOrFallback(m);
   let N = getFeatureFlags().terms_of_service_may_2025_update;
   let A = !!(e?.id && (b || t) && y && v && i && C && (_ || N && g));
-  return "loading" === o.status || "loading" === m.status || C?.status === "loading" ? Xm() : gB({
+  return "loading" === o.status || "loading" === m.status || C?.status === "loading" ? createLoadingState() : createLoadedState({
     isEligible: A,
     orgTermsInfo: {
       organizationName: e?.name ?? "organization",

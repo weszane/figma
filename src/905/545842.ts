@@ -1,7 +1,7 @@
 import { atom, mg } from "../figma_app/27355";
-import { Ok } from "../figma_app/851625";
+import { createInitState } from "../figma_app/851625";
 import { APILoadingStatus } from "../905/520829";
-let $$s2 = atom(Ok());
+let $$s2 = atom(createInitState());
 let o = atom(e => {
   let t = e($$s2);
   if (t.status !== APILoadingStatus.SUCCESS) throw Error("FigmaScope internal code is running but no FigmaScope resources are set. This is a bug - please report in #figmascope.");

@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { setupMenu, MenuRootComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { createEventEmitter, useEventSubscription } from "../figma_app/516794";
 import { getI18nString } from "../905/303541";
@@ -41,7 +41,7 @@ export function $$y0({
     contextClicked: "file_browser_sidebar_drafts_new_file_created"
   });
   return jsx("div", {
-    ...xk(!t && v.hidden),
+    ...props(!t && v.hidden),
     children: jsxs(MenuRootComp, {
       manager,
       children: [jsx(IconButton, {

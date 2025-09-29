@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { assert } from "../figma_app/465776";
 import { P } from "../figma_app/529847";
-import { uo } from "../figma_app/990058";
+import { batchUpdateOrgUsersAction } from "../figma_app/990058";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
 import { useGetLicenseTypesForSeatType, SeatDescriptionVisibility } from "../figma_app/217457";
@@ -64,7 +64,7 @@ export function $$m0(e) {
     seatSwapIntended: c
   }) => {
     assert(e.planType === FOrganizationLevelType.ORG);
-    t(uo({
+    t(batchUpdateOrgUsersAction({
       orgId: e.planId,
       lastUpdateTimestampOverride: i,
       seatTypeProducts: {},

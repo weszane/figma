@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { ButtonPrimitive } from "../905/632989";
 import { C } from "../905/520159";
 import { e as _$$e } from "../905/916195";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { generateRecordingKey } from "../figma_app/878298";
 import { a as _$$a } from "../905/847494";
 import { X } from "../905/350405";
@@ -53,7 +53,7 @@ function h(e) {
       "data-tooltip": e.tooltipText
     },
     recordingKey: e.recordingKey,
-    ...Ay.props(m.button, e.disabled && m.buttonDisabled),
+    ...stylex.props(m.button, e.disabled && m.buttonDisabled),
     children: e.icon
   });
 }

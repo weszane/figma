@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { textDisplayConfig } from "../905/687265";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 export function $$l0({
@@ -10,7 +10,7 @@ export function $$l0({
 }) {
   let n = 2 === e.length ? c.twoColumnGrid : c.threeColumnGrid;
   return jsx("div", {
-    ...xk(c.startFromRowWrapper, n, i),
+    ...props(c.startFromRowWrapper, n, i),
     children: e.map(e => jsx(TrackingProvider, {
       name: `${t}_template_start_from_button.${e.id}`,
       children: jsx(d, {
@@ -54,7 +54,7 @@ function d({
     }
   })(l);
   return jsxs("button", {
-    ...xk(c.startFromRowButton, h && h),
+    ...props(c.startFromRowButton, h && h),
     onClick: () => {
       logAndTrackCTA({
         name: `${u}.templates.${p}`,
@@ -64,15 +64,15 @@ function d({
     },
     "data-testid": d,
     children: [jsx("span", {
-      ...xk(m && m),
+      ...props(m && m),
       children: n
     }), jsxs("div", {
       className: "x78zum5 xdt5ytf x1cy8zhl",
       children: [jsx("p", {
-        ...xk(c.titleText),
+        ...props(c.titleText),
         children: t
       }), jsx("p", {
-        ...xk(c.subtitleText),
+        ...props(c.subtitleText),
         children: i
       })]
     })]

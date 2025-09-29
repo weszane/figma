@@ -22,7 +22,7 @@ import { getProjectUrl } from "../905/316062";
 import { fileActionEnum } from "../figma_app/630077";
 import { j } from "../905/834956";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
-import { W } from "../905/25249";
+import { FolderPermissionsModal } from "../905/25249";
 import { tgj } from "../figma_app/27776";
 export function $$w1(e) {
   let t = useSelector(e => e.currentUserOrgId);
@@ -112,7 +112,7 @@ export function $$w1(e) {
           loadedFolders: n
         }));
         w(showModalHandler({
-          type: W,
+          type: FolderPermissionsModal,
           data: {
             folderId: e.id
           }

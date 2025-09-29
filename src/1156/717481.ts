@@ -11,7 +11,7 @@ import { _ as _$$_ } from "../905/263184";
 import { _ as _$$_2 } from "../905/410717";
 import { j as _$$j } from "../905/519202";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { b as _$$b } from "../905/966382";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -40,7 +40,7 @@ function L({
       className: "x78zum5 x1q0g3np x1qughib",
       children: jsx("label", {
         htmlFor: i,
-        ...Ay.props(F.textBodyMediumStrong),
+        ...stylex.props(F.textBodyMediumStrong),
         children: i
       })
     }), jsx("div", {
@@ -73,7 +73,7 @@ function z({
       className: "x78zum5 x1q0g3np x1qughib",
       children: [jsx("label", {
         htmlFor: a,
-        ...Ay.props(F.textBodyMediumStrong),
+        ...stylex.props(F.textBodyMediumStrong),
         children: a
       }), jsxs("button", {
         onClick: e => {
@@ -87,7 +87,7 @@ function z({
         },
         className: "x1lcq9ky x1n0bwc9 x78zum5 x1q0g3np",
         children: [jsx(_$$_, {
-          ...Ay.props(o ? F.rotatePasswordGenerateIcon : F.passwordGenerateIcon)
+          ...stylex.props(o ? F.rotatePasswordGenerateIcon : F.passwordGenerateIcon)
         }), jsx("span", {
           children: getI18nString("figmake.settings.create_project_modal.password.generate")
         })]
@@ -117,7 +117,7 @@ function z({
         })
       })]
     }), n && jsx("div", {
-      ...Ay.props(F.textBodyMediumSecondary),
+      ...stylex.props(F.textBodyMediumSecondary),
       children: n
     })]
   });
@@ -171,7 +171,7 @@ function R({
     className: "x78zum5 xdt5ytf x1v2ro7d",
     children: [jsx("label", {
       id: "supabase-project-database-region-select",
-      ...Ay.props(F.textBodyMediumStrong),
+      ...stylex.props(F.textBodyMediumStrong),
       children: getI18nString("figmake.settings.create_project_modal.region.label")
     }), jsx(l6, {
       ariaLabelledBy: "supabase-project-database-region-select",
@@ -350,7 +350,7 @@ let $$O0 = registerModal(function (e) {
         children: jsxs(DialogActionStrip, {
           className: "x78zum5 x1q0g3np x13a6bvl x167g77z xhxeiv9 xh8yej3 x9f619",
           children: [C && jsx("p", {
-            ...Ay.props(F.textBodyMediumSecondary),
+            ...stylex.props(F.textBodyMediumSecondary),
             children: getI18nString("figmake.supabase.creating_project.subtitle")
           }), jsx(Button, {
             variant: "secondary",

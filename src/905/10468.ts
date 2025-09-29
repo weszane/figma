@@ -1,4 +1,4 @@
-import { xk } from '@stylexjs/stylex';
+import { props } from '@stylexjs/stylex';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { AUTH_SET_ORIGIN, changeAuthFormState } from '../905/194276';
 import { renderI18nText } from '../905/303541';
@@ -147,9 +147,9 @@ export function UserAuthList(props: UserListProps) {
     }));
   };
   return jsxs('div', {
-    ...xk(hasHints ? m.hintsWrapper : m.wrapper),
+    ...props(hasHints ? m.hintsWrapper : m.wrapper),
     children: [jsx('div', {
-      ...xk(m.header, hasHints && m.hintsHeader),
+      ...props(m.header, hasHints && m.hintsHeader),
       children: header
     }), jsx('div', {
       className: 'x1xk1jr8 x1xmf6yo',

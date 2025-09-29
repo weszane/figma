@@ -71,7 +71,7 @@ import { m as _$$m } from '../905/701558';
 import { compareLibraryKeyWithString } from '../905/709171';
 import { Yt } from '../905/712714';
 import { TabLoop } from '../905/718764';
-import { gB, Xm } from '../905/723791';
+import { createLoadedState, createLoadingState } from '../905/723791';
 import { W as _$$W2 } from '../905/729905';
 import { G as _$$G } from '../905/750789';
 import { ErrorBoundaryCrash } from '../905/751457';
@@ -1800,7 +1800,7 @@ function tS() {
     let s = ry();
     let o = _$$z();
     let l = useMemo(() => a.status !== 'loaded' ? [] : a.result, [a]);
-    let d = useMemo(() => a.status !== 'loaded' || s.status !== 'loaded' && s.status !== 'disabled' ? Xm() : gB([...a.result, ...s.result]), [a, s]);
+    let d = useMemo(() => a.status !== 'loaded' || s.status !== 'loaded' && s.status !== 'disabled' ? createLoadingState() : createLoadedState([...a.result, ...s.result]), [a, s]);
     let c = _5(orgApprovedLibraryKeys, a);
     let u = _5(workspaceApprovedLibraryKeys, a);
     let p = _$$W(i.data?.file?.libraryOrgSubscriptions ?? [], d);
@@ -1808,7 +1808,7 @@ function tS() {
     let h = _$$W(i.data?.file?.libraryTeamSubscriptions ?? [], d);
     let g = _$$eS2(l);
     return useMemo(() => {
-      if (i.status !== 'loaded' || c.status !== 'loaded' || u.status !== 'loaded' || p.status !== 'loaded' || m.status !== 'loaded' || h.status !== 'loaded' || g.status !== 'loaded') return Xm();
+      if (i.status !== 'loaded' || c.status !== 'loaded' || u.status !== 'loaded' || p.status !== 'loaded' || m.status !== 'loaded' || h.status !== 'loaded' || g.status !== 'loaded') return createLoadingState();
       let e = {
         orgLibraries: [],
         workspaceLibraries: [],
@@ -1834,7 +1834,7 @@ function tS() {
       e.n_approved_libraries = t_()([...u.data, ...c.data], 'library_key').length;
       e.n_default_libraries = t_()([...p.data, ...m.data, ...h.data], 'library_key').length;
       e.n_added_libraries = e.orgLibraries.concat(e.workspaceLibraries).concat(e.teamLibraries).concat(e.connectedProjectLibraries).filter(e => n.data?.find(t => t.libraryKey === e.library_key)).length;
-      return gB(e);
+      return createLoadedState(e);
     }, [i.status, c, p, u, m, h, o, n.data, g]);
   }();
   let t = e.status === 'loading';
@@ -2569,7 +2569,7 @@ function ib() {
     usedInThisFile,
     missingLibraryKeys
   } = _$$i2();
-  let c = useMemo(() => missingLibraryKeys.status === 'loading' || usedInThisFile.status === 'loading' ? Xm() : missingLibraryKeys.status !== 'loaded' ? missingLibraryKeys : gB(missingLibraryKeys.data.length > 0), [missingLibraryKeys, usedInThisFile]);
+  let c = useMemo(() => missingLibraryKeys.status === 'loading' || usedInThisFile.status === 'loading' ? createLoadingState() : missingLibraryKeys.status !== 'loaded' ? missingLibraryKeys : createLoadedState(missingLibraryKeys.data.length > 0), [missingLibraryKeys, usedInThisFile]);
   !function ({
     subscribedLibraries: e,
     usedInThisFile: t

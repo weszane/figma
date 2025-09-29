@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { trackEventAnalytics } from "../905/449184";
 import { usePrefersMediaQuery } from "../figma_app/469468";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -75,7 +75,7 @@ export function $$I0({
     children: [jsxs("div", {
       className: R6,
       children: [[gM.CATEGORY, gM.PLUGINS, gM.RESOURCE_LANDING_PAGE, gM.PROFILE].includes(x) && jsx("div", {
-        ...xk("md" === w ? N.flex_itemsCenter_font13_fontMedium : N.flex_itemsCenter_font11_fontMedium),
+        ...props("md" === w ? N.flex_itemsCenter_font13_fontMedium : N.flex_itemsCenter_font11_fontMedium),
         children: renderI18nText("categories.filter_by")
       }), jsx(Ay, {
         mediaQuery: `(min-width: ${glm})`,

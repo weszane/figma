@@ -1,7 +1,7 @@
 import { ListItemNode, ListNode } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $isAtNodeEnd } from '@lexical/selection';
-import { Ay as _$$Ay, xk as _$$xk } from '@stylexjs/stylex';
+import { stylex, props } from '@stylexjs/stylex';
 import e_ from 'classnames';
 import { $$if, $createParagraphNode, $getRoot, $getSelection, $isRangeSelection, COMMAND_PRIORITY_NORMAL, KEY_DOWN_COMMAND, KEY_TAB_COMMAND } from 'lexical';
 import { Fragment as _$$Fragment, createRef, forwardRef, memo, useCallback, useContext, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -1151,7 +1151,7 @@ function tc({
 }) {
   return jsxs(Fragment, {
     children: [jsx('div', {
-      ..._$$xk(i ? textDisplayConfig.textBodyMediumStrong : textDisplayConfig.textBodyMedium),
+      ...props(i ? textDisplayConfig.textBodyMediumStrong : textDisplayConfig.textBodyMedium),
       children: e
     }), jsx('div', {
       className: 'xm2njfp x8x9d4c',
@@ -1177,7 +1177,7 @@ function tu({
     }), jsx(ButtonLargeWide, {
       onClick: t,
       children: jsx('span', {
-        ..._$$xk(textDisplayConfig.textBodyMediumStrong),
+        ...props(textDisplayConfig.textBodyMediumStrong),
         children: getI18nString('whiteboard.shapes_sidebar.view_plans')
       })
     })]
@@ -1927,7 +1927,7 @@ function tz({
   }, []);
   return jsxs(Fragment, {
     children: [jsx('div', {
-      ..._$$xk(textDisplayConfig.textBodyMediumStrong, tW.otherLibrariesHeaderRow, a && tW.withBottomBorder),
+      ...props(textDisplayConfig.textBodyMediumStrong, tW.otherLibrariesHeaderRow, a && tW.withBottomBorder),
       'style': {
         height: GN
       },
@@ -8721,7 +8721,7 @@ function cW({
         fullWidth: !0,
         justify: 'space-between',
         children: [S && jsx('div', {
-          ..._$$xk(y && cZ.visibilityHidden),
+          ...props(y && cZ.visibilityHidden),
           children: jsx(_$$z4, {
             aiTrackingContext: r
           }, 'feedbackButtons')
@@ -9361,7 +9361,7 @@ function uD({
               verticalPromptLayout: !0
             })
           }), _ && jsxs('div', {
-            ..._$$xk(uU.suggestionText, _ ? uU.promptBoxTextShimmer : null),
+            ...props(uU.suggestionText, _ ? uU.promptBoxTextShimmer : null),
             style: T,
             children: [jsx('span', {
               className: cssBuilderInstance.invisible.$,
@@ -9482,11 +9482,11 @@ function uF({
   return jsxs('div', {
     className: 'x78zum5 x1q0g3np x167g77z x1e56ztr',
     children: [jsxs('button', {
-      ..._$$xk(uV.tab(e === 'stickies')),
+      ...props(uV.tab(e === 'stickies')),
       onClick: () => t('stickies'),
       children: [jsx(_$$i6, {}), getI18nString('figjam_ai.canvas.prompt_box.tab_stickies')]
     }), jsxs('button', {
-      ..._$$xk(uV.tab(e === 'image')),
+      ...props(uV.tab(e === 'image')),
       onClick: () => t('image'),
       children: [jsx(_$$s7, {}), getI18nString('figjam_ai.canvas.prompt_box.tab_image')]
     })]
@@ -10041,7 +10041,7 @@ function uW({
       'aria-label': getI18nString('figjam_ai.canvas.overlay_label'),
       'data-fullscreen-intercept': !0,
       'children': jsx('div', {
-        ..._$$Ay.props(uq.buttonBackgroundCircle(e))
+        ...stylex.props(uq.buttonBackgroundCircle(e))
       })
     }), jsx(uG, {
       isHovered: e
@@ -10198,7 +10198,7 @@ function uX() {
         recordingKey: 'figjamAICanvas',
         forwardUnhandledEventsToFullscreen: !0,
         children: jsx('div', {
-          ..._$$Ay.props(uq.promptView, u === qy.INITIAL && uq.withMarginLeft),
+          ...stylex.props(uq.promptView, u === qy.INITIAL && uq.withMarginLeft),
           children: jsx(uB, {})
         })
       })
@@ -10518,7 +10518,7 @@ function p0({
               'value': e.value,
               'aria-label': e.label,
               'readonly': e.disabled || a || void 0,
-              ..._$$xk(p1.option, e.isSelected && p1.optionSelected, (e.disabled || a) && p1.optionDisabled),
+              ...props(p1.option, e.isSelected && p1.optionSelected, (e.disabled || a) && p1.optionDisabled),
               'htmlAttributes': {
                 'data-tooltip': e.disabled ? void 0 : e.label,
                 'data-tooltip-show-above': 'true',

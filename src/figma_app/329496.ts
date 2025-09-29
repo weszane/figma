@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect } from "react";
-import { xj, ok } from "../figma_app/851625";
-import { J } from "../905/931050";
-import { Xm, gB, e1 } from "../905/723791";
+import { isSuccess, isFailure } from "../figma_app/851625";
+import { useAsyncWithReset } from "../905/931050";
+import { createLoadingState, createLoadedState, createErrorState } from "../905/723791";
 import { getI18nString } from "../905/303541";
 import { UNASSIGNED } from "../905/247093";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { FTeamAssignmentMethodType } from "../figma_app/191312";
 export function $$u1(e) {
   let t = {};
@@ -15,14 +15,14 @@ export function $$u1(e) {
   return t;
 }
 export function $$p2(e, t = !0) {
-  let [r, o] = useState(Xm());
-  let l = useCallback(async () => await Eh.getWorkspaceTeamsCounts({
+  let [r, o] = useState(createLoadingState());
+  let l = useCallback(async () => await organizationAPIService.getWorkspaceTeamsCounts({
     orgId: e
   }), [e]);
-  let c = J(() => l(), [l]);
+  let c = useAsyncWithReset(() => l(), [l]);
   return (useEffect(() => {
-    xj(c) ? o(gB(c.value.data.meta)) : ok(c) ? o(e1([])) : o(Xm());
-  }, [c]), t) ? r : Xm();
+    isSuccess(c) ? o(createLoadedState(c.value.data.meta)) : isFailure(c) ? o(createErrorState([])) : o(createLoadingState());
+  }, [c]), t) ? r : createLoadingState();
 }
 export function $$_3(e, t) {
   return `${location.origin}/files/${t ? t + "/" : ""}workspace/${e}/directory/teams`;

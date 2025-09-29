@@ -23,7 +23,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType, FResourceCategoryType } from "../figma_app/191312";
 import { isFigmaFileUrl, extractFigmaFileId } from "../figma_app/336853";
 import { isTeamUrl, extractTeamIdFromUrl } from "../figma_app/598018";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { c as _$$c } from "../905/32166";
 import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
@@ -105,7 +105,7 @@ let $$F0 = registerModal(function (e) {
         X("url_same_plan");
         return;
       }
-      Eh.getOrgName({
+      organizationAPIService.getOrgName({
         orgId: n
       }).then(({
         data: e

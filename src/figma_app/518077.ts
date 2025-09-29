@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
-import { gB } from "../905/723791";
+import { createLoadedState } from "../905/723791";
 import { FUserRoleType } from "../figma_app/191312";
 import { WorkspacesCanAdminView, CurrentUserAssignedWorkspaceView, WorkspacePageView, OrgHasWorkspacesView, CanCreateTeamView } from "../figma_app/43951";
 import { TeamCreationControls } from "../figma_app/482728";
@@ -15,7 +15,7 @@ export function $$p2(e) {
     if ("loaded" === t.status) {
       let e = (t.data?.org?.workspaces ?? []).filter(e => e.canAdmin);
       sortByPropertyWithOptions(e, "name");
-      return gB(e);
+      return createLoadedState(e);
     }
     return t;
   }, [t]);
@@ -38,7 +38,7 @@ export function $$m3(e, t) {
   }, {
     enabled: !!e && !!t
   });
-  return null === t ? gB(UNASSIGNED) : r.transform(e => e.workspace);
+  return null === t ? createLoadedState(UNASSIGNED) : r.transform(e => e.workspace);
 }
 export function $$g4(e) {
   return (e?.workspaces?.length || 0) > 0 && !!e?.bigmaEnabledAt;

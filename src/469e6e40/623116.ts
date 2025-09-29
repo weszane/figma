@@ -3,10 +3,10 @@ import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSingleEffect } from "../905/791079";
 import { APILoadingStatus } from "../905/520829";
-import { xj, ok } from "../figma_app/851625";
-import { J as _$$J } from "../905/931050";
-import { getResourceDataOrFallback, Xm, gB, e1 as _$$e } from "../905/723791";
-import { Eh } from "../figma_app/617654";
+import { isSuccess, isFailure } from "../figma_app/851625";
+import { useAsyncWithReset } from "../905/931050";
+import { getResourceDataOrFallback, createLoadingState, createLoadedState, createErrorState } from "../905/723791";
+import { organizationAPIService } from "../figma_app/617654";
 import { Rw } from "../figma_app/475472";
 import { TeamPropertyKey, TeamMembershipStatus, getInitialTeamStats } from "../figma_app/713624";
 import { Ki, _q } from "../figma_app/328188";
@@ -1951,12 +1951,12 @@ export function $$tP0(e) {
   let {
     orgTeamCountsViewResult
   } = function (e, t, a, n, i, r, l, u) {
-    let [m, p] = useState(Xm());
+    let [m, p] = useState(createLoadingState());
     let g = useRef(null);
     let h = () => {
       g.current && (clearTimeout(g.current), g.current = null);
     };
-    let x = useCallback(async () => await Eh.getOrgTeamsFilterCounts({
+    let x = useCallback(async () => await organizationAPIService.getOrgTeamsFilterCounts({
       orgId: e,
       searchQuery: t,
       orgAccess: a || void 0,
@@ -1966,9 +1966,9 @@ export function $$tP0(e) {
       sortBy: void 0,
       sortOrder: void 0
     }), [e, t, a, n, i, r, void 0, void 0]);
-    let b = _$$J(() => (h(), x()), [x]);
+    let b = useAsyncWithReset(() => (h(), x()), [x]);
     useEffect(() => {
-      xj(b) ? p(gB(b.value.data.meta)) : ok(b) ? p(_$$e([])) : p(Xm());
+      isSuccess(b) ? p(createLoadedState(b.value.data.meta)) : isFailure(b) ? p(createErrorState([])) : p(createLoadingState());
     }, [b]);
     return {
       orgTeamCountsViewResult: m

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { RT } from "../905/867927";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 export function $$a0({
   selectedValue: e,
   value: t,
@@ -10,7 +10,7 @@ export function $$a0({
   let s = jsxs("div", {
     className: "x78zum5 x6s0dn4 xl56j7k x1cmmqis",
     children: [jsx(n, {
-      ...xk(e === t ? l.iconSelected : l.icon),
+      ...props(e === t ? l.iconSelected : l.icon),
       style: e === t ? {} : {
         "--color-icon": "var(--color-icon-secondary)"
       }

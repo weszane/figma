@@ -39,7 +39,7 @@ import { cF } from "../figma_app/761984";
 import { b7 } from "../figma_app/101849";
 import { useDebouncedCallback } from "use-debounce";
 import { EH, ji, xo as _$$xo, MC, l0, zp } from "../figma_app/847014";
-import { gB, getResourceDataOrFallback } from "../905/723791";
+import { createLoadedState, getResourceDataOrFallback } from "../905/723791";
 import { Bl } from "../figma_app/967857";
 import { IntegrationUtils } from "../figma_app/469876";
 import { z4 } from "../905/37051";
@@ -584,19 +584,19 @@ function et() {
         let r = useAtomWithSubscription(ji);
         let a = useAtomWithSubscription(EH);
         return useMemo(() => {
-          if ("loaded" !== t.status || "loaded" !== i.status || "loaded" !== e.status || e.data) return gB({
+          if ("loaded" !== t.status || "loaded" !== i.status || "loaded" !== e.status || e.data) return createLoadedState({
             isEligibleToShowUser: !1
           });
           let n = new Date(r).getTime() > Date.now() - 864e5;
-          return a >= 3 || t.data || i.data || n ? gB({
+          return a >= 3 || t.data || i.data || n ? createLoadedState({
             isEligibleToShowUser: !1
-          }) : gB({
+          }) : createLoadedState({
             isEligibleToShowUser: !0
           });
         }, [e, t, i, a, r]);
       }();
       let t = Q();
-      return gB({
+      return createLoadedState({
         shouldShowNudge: !!(e.data.isEligibleToShowUser && t)
       });
     }();

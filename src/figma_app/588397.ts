@@ -5,7 +5,7 @@ import { EventShield } from "../905/821217";
 import { ButtonPrimitive } from "../905/632989";
 import { ScreenReaderOnly } from "../905/172252";
 import { Fullscreen } from "../figma_app/763686";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import u from "classnames";
 import _ from "../vendor/961736";
 import { getSecondaryTextColorForBackground } from "../figma_app/191804";
@@ -499,7 +499,7 @@ function el({
   collectionName: t
 }) {
   return jsx("div", {
-    ...Ay.props(eu.cmsThumbWrapper, eu.thumbWrapperWidth(e)),
+    ...stylex.props(eu.cmsThumbWrapper, eu.thumbWrapperWidth(e)),
     "data-testid": `library-item-tile-thumb-${t}`,
     children: jsx(_$$e, {
       collectionName: t
@@ -512,10 +512,10 @@ function ed({
 }) {
   let r = jl();
   return jsx("div", {
-    ...Ay.props(eu.thumbWrapper, r === W7.Block && eu.thumbClampHeight, eu.thumbWrapperWidth(t)),
+    ...stylex.props(eu.thumbWrapper, r === W7.Block && eu.thumbClampHeight, eu.thumbWrapperWidth(t)),
     "data-testid": `library-item-tile-thumb-${e.name}`,
     children: jsx(_$$M, {
-      ...Ay.props(eu.thumb, r === W7.Block && eu.thumbClampHeight),
+      ...stylex.props(eu.thumb, r === W7.Block && eu.thumbClampHeight),
       item: e,
       shouldGenerateLocalThumbnail: !0,
       draggable: !1,

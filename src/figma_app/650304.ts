@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { getCurrentPath } from "../905/508367";
 import { V } from "../905/749397";
 import { W8, _B } from "../figma_app/320164";
-import { J } from "../905/931050";
+import { useAsyncWithReset } from "../905/931050";
 import { getInitialOptions, isGovCluster } from "../figma_app/169182";
 import { APILoadingStatus } from "../905/520829";
 import { getIsMobile } from "../figma_app/778880";
@@ -25,7 +25,7 @@ function T({
   try {
     window.origin === window.parent.origin && (n = window.parent || window);
   } catch {}
-  let o = J(() => _$$o(n), [n]);
+  let o = useAsyncWithReset(() => _$$o(n), [n]);
   let h = useDispatch();
   let y = !!S$();
   let T = r ?? y;

@@ -9,7 +9,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import iN, { BEGIN, COMMIT, REVERT } from 'redux-optimist';
+import optimist, { BEGIN, COMMIT, REVERT } from 'redux-optimist';
 import eW from 'statsig-js';
 import { Statsig } from 'statsig-react';
 import { reportError, setContextGlobal, setTagGlobal, SeverityLevel } from '../905/11';
@@ -19,9 +19,9 @@ import { resetContacts, setContacts } from '../905/14223';
 import { isNullOrFailure } from '../905/18797';
 import { getNotificationTimeout } from '../905/22352';
 import { fileChannelHandler, fileRepoChannelHandler, folderChannelHandler, meChannelHandler, orgMembersChannelHandler, teamMembersChannelHandler } from '../905/25169';
-import { W as _$$W } from '../905/25249';
+import { FolderPermissionsModal } from '../905/25249';
 import { setKeyboardShortcutPanelTab, usedKeyboardShortcut } from '../905/26824';
-import { T as _$$T2 } from '../905/27228';
+import { useInitializeUniqueId } from '../905/27228';
 import { iZ as _$$iZ } from '../905/29425';
 import { beginCreateNewFolder, hideMobileNav, searchResultClicked, setBrowserTileSortView, setDeletedFiles, setDeletedRepos, setFileBrowserLoading, showMobileNav, stopCreateNewFolder } from '../905/34809';
 import { isFullscreenSlidesView } from '../905/35881';
@@ -89,7 +89,7 @@ import { y as _$$y } from '../905/235145';
 import { delay } from '../905/236856';
 import { liveStoreRepoBinding } from '../905/239398';
 import { z as _$$z3 } from '../905/239603';
-import { $ as _$$$4 } from '../905/240853';
+import { idpUserBatchPostAction } from '../905/240853';
 import { a as _$$a5 } from '../905/242083';
 import { trackAuthEvent } from '../905/248178';
 import { nE as _$$nE, EU } from '../905/255097';
@@ -204,7 +204,7 @@ import { updateQueryParams } from '../905/609392';
 import { PerfTimer } from '../905/609396';
 import { customHistory, CustomRouter } from '../905/612521';
 import { uW as _$$uW, yJ as _$$yJ9, Z as _$$Z3 } from '../905/618921';
-import { generateExportThumbnail, convertImageDataToURL } from '../905/619652';
+import { convertImageDataToURL, generateExportThumbnail } from '../905/619652';
 import { e as _$$e5 } from '../905/621515';
 import { setupFileObject } from '../905/628874';
 import { ButtonPrimitive } from '../905/632989';
@@ -439,7 +439,7 @@ import { useCurrentPlanUser, useIsOrgAdminUser, useIsOrgMemberOrAdminUser, useTe
 import { assert, debug, noop, throwTypeError } from '../figma_app/465776';
 import { isIntegrationContext, isZoomIntegration } from '../figma_app/469876';
 import { ViewTypeEnum } from '../figma_app/471068';
-import { handleExternalKeyboardLayoutUpdate, KEYBOARD_LAYOUT_PREFERENCE_KEY, getCurrentKeyboardLayout } from '../figma_app/475303';
+import { getCurrentKeyboardLayout, handleExternalKeyboardLayoutUpdate, KEYBOARD_LAYOUT_PREFERENCE_KEY } from '../figma_app/475303';
 import { initPaymentAction, makeStudentTeamAction, restoreSavedCartAction, setBillingPeriodAction, setCampfireSeatsAction, setCompanyDetailsAction, setCurrencyAction, setEditorStatusChangesAction, setNumEditorsAction, setNumFigmaEmailTeamUsersAction, setNumWhiteboardEditorsAction, setPromoAction, setPromoThunk, setRegionalVatGstIdAction, setSubmitPendingAction, setTaxesAction, setTokenAction, setVatGstIdAction, showErrorAction, startOrgUpgradeFlowAction, startProUpgradeFlowAction } from '../figma_app/482142';
 import { clamp, randomBetween } from '../figma_app/492908';
 import { isEmptyObject } from '../figma_app/493477';
@@ -483,7 +483,7 @@ import { LP } from '../figma_app/728005';
 import { BillingStatusEnum } from '../figma_app/736948';
 import { F as _$$F9 } from '../figma_app/738753';
 import { findProfile, getSelectedViewPluginVersions, getStatusOrDefault, isCommunityHubView, isUserAssociatedWithProfile, mapCommentsAndAuthors, mergeVersions } from '../figma_app/740025';
-import { LQ } from '../figma_app/741211';
+import { canUseCustomTemplates } from '../figma_app/741211';
 import { consumeFullscreenEventState, setPropertiesPanelTab } from '../figma_app/741237';
 import { WJ as _$$WJ } from '../figma_app/745458';
 import { R_ } from '../figma_app/749805';
@@ -529,9 +529,9 @@ import { A as _$$A7 } from '../figma_app/965813';
 import { o2 as _$$o7, s7 as _$$s3 } from '../figma_app/968813';
 import { lr as _$$lr, EG, Ji, qC } from '../figma_app/972736';
 import { clearPendingReload, hasPendingReload, isViewReloadSensitive, reloadIfPending, ReloadReasonEnum, scheduleReload, sendIpcRefreshSession, setFileBrowserLoadingHandler, switchAccountAndNavigate } from '../figma_app/976345';
-import { hZ as _$$hZ, uo as _$$uo4, yJ as _$$yJ4, bu, IJ, Pg } from '../figma_app/990058';
+import { batchDeleteOrgUsersAction, batchDeleteOrgUsersThunk, batchUpdateOrgUsersAction, getOrgAdminsAction, updateOrgUserDescriptionAction } from '../figma_app/990058';
 import { IK } from '../figma_app/991245';
-import { hZ as _$$hZ3, wc as _$$wc, yH as _$$yH5 } from '../figma_app/996356';
+import { setOrgInvites, setIsCreatingOrgInvites, deleteOrgInviteAction } from '../figma_app/996356';
 import { fileBrowserPageManager } from '../figma_app/997907';
 import { A as _$$A12 } from '../svg/433566';
 import { A as _$$A2 } from '../vendor/3029';
@@ -1841,7 +1841,7 @@ function iv() {
   iA = perfTimerFrameManagerBindings?.startRootProfile('no-frame', 100);
 }
 let iC = new Set();
-let iP = iN;
+let iP = optimist;
 let iz = e => t => function (i) {
   if (P6.matches(i) || YK.matches(i)) {
     let n = P6.matches(i);
@@ -2431,7 +2431,7 @@ let nS = e => t => function (i) {
         if (r.view === 'fullscreen') {
           let o = r.fileKey ? n.fileByKey[r.fileKey] : void 0;
           e = r.editorType ? mapEditorTypeToStringWithObfuscated(r.editorType) : void 0;
-          o && (t = o.name, i = isBranch(o), a = !!o.last_published_at, s = !!(o.is_team_template && LQ(n)));
+          o && (t = o.name, i = isBranch(o), a = !!o.last_published_at, s = !!(o.is_team_template && canUseCustomTemplates(n)));
         } else {
           r.view === 'prototype' && (t = getSelectedViewName(n, r));
         }
@@ -3254,7 +3254,7 @@ function r7({
   width: t
 }) {
   let i = useDispatch();
-  _$$T2();
+  useInitializeUniqueId();
   let r = useSelector(e => e.currentUserOrgId);
   let a = useSelector(fileVersionSelector);
   let o = useSelector(e => e.modalShown);
@@ -3506,7 +3506,7 @@ let ao = e => t => function (i) {
     let n = e.getState();
     let r = n.orgById[n.currentUserOrgId];
     let a = n.user && n.orgUsersByOrgId[n.currentUserOrgId] && n.orgUsersByOrgId[n.currentUserOrgId][n.user.id];
-    r && a && r.standing !== BillingStatusEnum.GOOD && a.permission !== FUserRoleType.GUEST && e.dispatch(Pg({
+    r && a && r.standing !== BillingStatusEnum.GOOD && a.permission !== FUserRoleType.GUEST && e.dispatch(getOrgAdminsAction({
       orgId: n.currentUserOrgId
     }));
     return;
@@ -5515,13 +5515,13 @@ sj.registerShim(a2, (e, t) => {
       view: void 0
     }));
   } else {
-    t.method === 'delete' ? e.dispatch(IJ({
+    t.method === 'delete' ? e.dispatch(batchDeleteOrgUsersThunk({
       params: {
         org_user_ids: [r.id]
       },
       orgId: r.org_id,
       userInitiated: !1
-    })) : t.method === 'put' || t.method === 'post' ? e.dispatch(_$$yJ4({
+    })) : t.method === 'put' || t.method === 'post' ? e.dispatch(updateOrgUserDescriptionAction({
       orgUser: r,
       userInitiated: !1
     })) : e.dispatch(switchAccountAndNavigate({
@@ -5920,7 +5920,7 @@ let sq = e => t => function (i) {
   }
   if (showModal.matches(i)) {
     let t = e.getState();
-    if (i.payload.type === _$$W.type) {
+    if (i.payload.type === FolderPermissionsModal.type) {
       let n = t.folders[i.payload.data.folderId];
       if (n && fetchFolderRoles(n.id, e), n && n.team_id && n.team_id in t.roles.byTeamId) {
         let i = t.teams[n.team_id];
@@ -7889,10 +7889,10 @@ function lb(e = {}, t) {
 }
 let lx = combineReducers({
   isCreatingOrgInvite(e = !1, t) {
-    return _$$wc.matches(t) ? t.payload.creating : e;
+    return setIsCreatingOrgInvites.matches(t) ? t.payload.creating : e;
   },
   idpUsers(e = {}, t) {
-    if (_$$$4.matches(t)) {
+    if (idpUserBatchPostAction.matches(t)) {
       let i = {
         ...e
       };
@@ -7904,7 +7904,7 @@ let lx = combineReducers({
       });
       return i;
     }
-    if (_$$hZ3.matches(t)) {
+    if (setOrgInvites.matches(t)) {
       let i = {
         ...e
       };
@@ -7921,7 +7921,7 @@ let lx = combineReducers({
       });
       return i;
     }
-    if (!_$$yH5.matches(t)) return e;
+    if (!deleteOrgInviteAction.matches(t)) return e;
     {
       let i = {
         ...e
@@ -10499,15 +10499,15 @@ function uI(e) {
 }
 uI(uv);
 let ux = _$$oB2((e, t) => {
-  return _$$yJ4.matches(t) && e && t.payload && t.payload.orgUser && e.id === t.payload.orgUser.id ? {
+  return updateOrgUserDescriptionAction.matches(t) && e && t.payload && t.payload.orgUser && e.id === t.payload.orgUser.id ? {
     ...e,
     description: t.payload.orgUser.description || e.description
   } : e;
 }, {
-  shouldIgnoreAction: e => !_$$yJ4.matches(e)
+  shouldIgnoreAction: e => !updateOrgUserDescriptionAction.matches(e)
 });
 let uS = uI((e = {}, t) => {
-  if (_$$uo4.matches(t)) {
+  if (batchUpdateOrgUsersAction.matches(t)) {
     let i = {
       ...e
     };
@@ -10525,7 +10525,7 @@ let uS = uI((e = {}, t) => {
     }
     return i;
   }
-  if (_$$yJ4.matches(t)) {
+  if (updateOrgUserDescriptionAction.matches(t)) {
     let i = {
       ...e
     };
@@ -10538,8 +10538,8 @@ let uS = uI((e = {}, t) => {
     }
     return i;
   }
-  if (_$$hZ.matches(t)) return uv(e, t);
-  if (bu.matches(t)) {
+  if (setUserInOrgs.matches(t)) return uv(e, t);
+  if (batchDeleteOrgUsersAction.matches(t)) {
     let i = {
       ...e
     };

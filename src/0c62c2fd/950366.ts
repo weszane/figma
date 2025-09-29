@@ -8,7 +8,7 @@ import { forwardRef } from "react";
 import { ButtonPrimitive } from "../905/632989";
 import { e as _$$e } from "../905/149844";
 import { k } from "../905/888808";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../0c62c2fd/596856";
 import { k as _$$k } from "../0c62c2fd/421640";
@@ -16,7 +16,7 @@ let f = forwardRef(function (e, t) {
   let r = e["aria-expanded"];
   return jsxs(ButtonPrimitive, {
     ref: t,
-    ...xk(g.button, r && "false" !== r && g.buttonActive),
+    ...props(g.button, r && "false" !== r && g.buttonActive),
     ...e,
     children: [jsx(_$$e, {
       "aria-hidden": !0

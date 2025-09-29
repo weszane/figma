@@ -3,7 +3,7 @@ import { IconButton } from "../905/443068";
 import { c as _$$c } from "../905/640510";
 import { _ as _$$_ } from "../905/465535";
 import { Tj } from "../figma_app/342207";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { _ as _$$_2 } from "../905/613863";
 import { useFavoriteResource } from "../905/347011";
 import { FavoriteResourceDropdown } from "../905/433510";
@@ -30,7 +30,7 @@ export function $$_0({
     setFavorite: _
   });
   return "loaded" !== b.status ? jsx("div", {
-    ...Ay.props(f && p.monochromePlaceholder),
+    ...stylex.props(f && p.monochromePlaceholder),
     children: jsx(IconButton, {
       variant: "secondary",
       disabled: !0,

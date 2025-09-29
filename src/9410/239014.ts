@@ -8,7 +8,7 @@ import { z } from "../905/239603";
 import c from "classnames";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { useSubscription } from "../figma_app/288654";
-import { tT } from "../905/723791";
+import { ResourceStatus } from "../905/723791";
 import { APILoadingStatus } from "../905/520829";
 import { reportError } from "../905/11";
 import { LoadingSpinner } from "../figma_app/858013";
@@ -109,7 +109,7 @@ export function $$j1(e) {
     enabled: !!(t?.key && e)
   });
   return resourceUtils.useTransform(i, e => {
-    if (e?.file?.pagesSignedThumbnailData.status !== tT.Loaded) return null;
+    if (e?.file?.pagesSignedThumbnailData.status !== ResourceStatus.Loaded) return null;
     try {
       if (!e?.file?.pagesSignedThumbnailData.data) return null;
       let t = JSON.parse(e.file.pagesSignedThumbnailData.data);

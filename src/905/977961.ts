@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { textDisplayConfig } from "../905/687265";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { TextWithTruncation } from "../905/984674";
 export function $$o0({
   thumbnail: e,
@@ -31,21 +31,21 @@ export function $$o0({
         }) : null]
       })]
     }), jsxs("div", {
-      ...xk(l.bottomContainer, u && l.bottomContainerHover),
+      ...props(l.bottomContainer, u && l.bottomContainerHover),
       children: [r, jsxs("div", {
         className: "x1iyjqo2 x1r8uery x78zum5 xdt5ytf x195vfkc xb3r6kr",
         children: [jsx(TextWithTruncation, {
           truncate: !0,
           color: "default",
           children: jsx("span", {
-            ...xk(l.title),
+            ...props(l.title),
             children: t
           })
         }), jsx(TextWithTruncation, {
           truncate: !0,
           color: "secondary",
           children: jsx("span", {
-            ...xk(l.subtitle),
+            ...props(l.subtitle),
             children: i
           })
         })]

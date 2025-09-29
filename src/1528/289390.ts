@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 export function $$r0({
   height: e
 }) {
-  let t = void 0 !== e ? Ay.props(i.height(e)) : {
+  let t = void 0 !== e ? stylex.props(i.height(e)) : {
     className: "left_panel_island_spacer--islandSpacer--5ynLJ"
   };
   return jsx("div", {

@@ -61,7 +61,7 @@ import { c$ as _$$c$, l6 } from "../905/794875";
 import { g as _$$g } from "../905/412697";
 import { DraggableModalManager } from "../905/748636";
 import { Z as _$$Z } from "../905/606826";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { yb } from "../905/608681";
 import { clamp, roundToMultiple, nearlyEqual } from "../figma_app/492908";
 import { R as _$$R } from "../905/987929";
@@ -653,7 +653,7 @@ function eq({
     "data-dragging": c,
     "data-testid": "light-angle-control",
     children: [jsxs("div", {
-      ...Ay.props(eY.dial(e)),
+      ...stylex.props(eY.dial(e)),
       "data-testid": "light-angle-dial",
       children: [jsx("div", {
         className: "x1sy10c2",

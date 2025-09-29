@@ -73,7 +73,7 @@ var o = function () {
 }();
 let a = e => Error(`'stylex.${e}' should never be called at runtime. It should be compiled away by '@stylexjs/babel-plugin'`);
 let h = e => a(`types.${e}`);
-export function $$d1() {
+export function props() {
   for (e = $$arguments.length, r = Array(e), n = 0, void 0; n < e; n++) {
     var e;
     var r;
@@ -90,7 +90,7 @@ function p() {
   let {
     className,
     style
-  } = $$d1(...arguments);
+  } = props(...arguments);
   let n = {};
   null != className && "" !== className && (n.$$class = className);
   null != style && Object.keys(style).length > 0 && (n.style = Object.keys(style).map(e => `${e}:${style[e]};`).join(""));
@@ -155,7 +155,7 @@ let O = e => {
 let x = function () {
   throw a("firstThatWorks");
 };
-export function $$w0() {
+export function stylex() {
   for (e = $$arguments.length, r = Array(e), n = 0, void 0; n < e; n++) {
     var e;
     var r;
@@ -165,14 +165,14 @@ export function $$w0() {
   let [i] = o.styleq(r);
   return i;
 }
-$$w0.props = $$d1;
-$$w0.attrs = p;
-$$w0.create = g;
-$$w0.defineVars = m;
-$$w0.createTheme = v;
-$$w0.include = y;
-$$w0.keyframes = O;
-$$w0.firstThatWorks = x;
-$$w0.types = b;
-export const Ay = $$w0;
-export const xk = $$d1;
+stylex.props = props;
+stylex.attrs = p;
+stylex.create = g;
+stylex.defineVars = m;
+stylex.createTheme = v;
+stylex.include = y;
+stylex.keyframes = O;
+stylex.firstThatWorks = x;
+stylex.types = b;
+export const Ay = stylex;
+export const xk = props;

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, createContext, useContext, cloneElement, useMemo, useCallback, useState, useRef, forwardRef, createRef, useEffect, useLayoutEffect } from "react";
 import { k as _$$k } from "../905/443820";
-import { Ay, xk } from "@stylexjs/stylex";
+import { stylex, props } from "@stylexjs/stylex";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { d as _$$d, k as _$$k2 } from "../5421/548912";
 import { Y_, p_, l6, Xs, xJ, UL, iK, ZY, qQ, Wn } from "../figma_app/114522";
@@ -380,9 +380,9 @@ function eT() {
 }
 function eS() {
   let e = getFeatureFlags().click_to_inspect_reset_styles;
-  let t = Ay.props(ej.dimensionContainer, e ? ej.dimensionContainerExpandedWithReset : ej.dimensionContainerExpanded);
-  let n = Ay.props(ej.dimensionContainer, e ? ej.dimensionContainerCollapsedWithReset : ej.dimensionContainerCollapsed);
-  let r = Ay.props(ej.container, e && ej.containerWithReset);
+  let t = stylex.props(ej.dimensionContainer, e ? ej.dimensionContainerExpandedWithReset : ej.dimensionContainerExpanded);
+  let n = stylex.props(ej.dimensionContainer, e ? ej.dimensionContainerCollapsedWithReset : ej.dimensionContainerCollapsed);
+  let r = stylex.props(ej.container, e && ej.containerWithReset);
   let {
     classNameEditingController,
     directManipulationEditor
@@ -413,7 +413,7 @@ function eS() {
     isActive: v,
     onClick: () => I(e => !e),
     children: jsx(_$$Q, {
-      ...Ay.props(eE.scrubbableInputIconWrapper)
+      ...stylex.props(eE.scrubbableInputIconWrapper)
     })
   }), [v]);
   let T = useCallback((e, t) => {
@@ -519,7 +519,7 @@ function eS() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.corner_radius.top_left"),
             children: jsx(_$$a2, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), jsx(ExpressionInput, {
             value: g["top-right"],
@@ -534,7 +534,7 @@ function eS() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.corner_radius.top_right"),
             children: jsx(_$$$, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), N, A, jsx(ExpressionInput, {
             value: g["bottom-left"],
@@ -549,7 +549,7 @@ function eS() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.corner_radius.bottom_left"),
             children: jsx(_$$w, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), jsx(ExpressionInput, {
             value: g["bottom-right"],
@@ -564,7 +564,7 @@ function eS() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.corner_radius.bottom_right"),
             children: jsx(_$$t2, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           })]
         }) : jsxs("div", {
@@ -585,7 +585,7 @@ function eS() {
             smallNudgeAmount: 1,
             value: b,
             children: jsx(_$$Q, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), N, A]
         })
@@ -800,7 +800,7 @@ let e3 = forwardRef(function ({
   return jsx(ButtonPrimitive, {
     ref: i,
     ...n,
-    ...Ay.props(e2.buttonContainer, n["aria-expanded"] ? e2.buttonContainer_active : null, e2.buttonContainer_noBorder, e2.buttonContainerLeftPaddingWithoutIconPrefix, t ? null : e2.buttonContainerRightPaddingWithoutIconSuffix),
+    ...stylex.props(e2.buttonContainer, n["aria-expanded"] ? e2.buttonContainer_active : null, e2.buttonContainer_noBorder, e2.buttonContainerLeftPaddingWithoutIconPrefix, t ? null : e2.buttonContainerRightPaddingWithoutIconSuffix),
     children: jsxs("div", {
       className: "xz16r55 x78zum5 x6s0dn4",
       children: [e, t]
@@ -942,7 +942,7 @@ function ti() {
   let [r] = XH(directManipulationEditor);
   let [l, s] = useState();
   let d = l ?? n?.thumbnailSrc ?? n?.imgSrc;
-  let c = Ay.props(to.image, !imageSwapEnabled && to.disabledImage);
+  let c = stylex.props(to.image, !imageSwapEnabled && to.disabledImage);
   let p = imageSwapEnabled ? {} : {
     "--color-icon": Tj.iconDisabled
   };
@@ -1198,7 +1198,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.left"),
             children: jsx(_$$R4, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), jsx(ExpressionInput, {
             value: f.top,
@@ -1213,7 +1213,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.top"),
             children: jsx(_$$z2, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), B, jsx(ExpressionInput, {
             value: f.right,
@@ -1228,7 +1228,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.right"),
             children: jsx(_$$M, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), jsx(ExpressionInput, {
             value: f.bottom,
@@ -1243,7 +1243,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.bottom"),
             children: jsx(_$$v, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           })]
         }) : jsxs("div", {
@@ -1262,7 +1262,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.horizontal"),
             children: jsx(_$$y2, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), jsx(ExpressionInput, {
             value: N,
@@ -1278,7 +1278,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.vertical"),
             children: jsx(_$$K2, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), B]
         })]
@@ -1307,7 +1307,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.left"),
             children: jsx(_$$R4, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), jsx(ExpressionInput, {
             value: _.top,
@@ -1322,7 +1322,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.top"),
             children: jsx(_$$z2, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), H, jsx(ExpressionInput, {
             value: _.right,
@@ -1337,7 +1337,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.right"),
             children: jsx(_$$M, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), jsx(ExpressionInput, {
             value: _.bottom,
@@ -1352,7 +1352,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.bottom"),
             children: jsx(_$$v, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           })]
         }) : jsxs("div", {
@@ -1371,7 +1371,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.horizontal"),
             children: jsx(_$$y2, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), jsx(ExpressionInput, {
             value: w,
@@ -1387,7 +1387,7 @@ function ty() {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.vertical"),
             children: jsx(_$$K2, {
-              ...Ay.props(eE.scrubbableInputIconWrapper)
+              ...stylex.props(eE.scrubbableInputIconWrapper)
             })
           }), H]
         })]
@@ -1874,11 +1874,11 @@ function t6({
   disabled: n
 }) {
   let i = jsx("div", {
-    ...Ay.props(n ? t5.disabledIcon : "style" === e ? t5.selectedIcon : t5.disabledIcon),
+    ...stylex.props(n ? t5.disabledIcon : "style" === e ? t5.selectedIcon : t5.disabledIcon),
     children: jsx(_$$G, {})
   });
   let r = jsx("div", {
-    ...Ay.props(n ? t5.disabledIcon : "prompt" === e ? t5.selectedIcon : t5.disabledIcon),
+    ...stylex.props(n ? t5.disabledIcon : "prompt" === e ? t5.selectedIcon : t5.disabledIcon),
     children: jsx(_$$T, {})
   });
   return jsx(_$$R, {
@@ -2045,7 +2045,7 @@ function ny({
     errors: t
   });
   let F = O ? jsx("div", {
-    ...Ay.props(ng.buttonContainer, M ? ng.buttonBrand : ng.buttonDisabled),
+    ...stylex.props(ng.buttonContainer, M ? ng.buttonBrand : ng.buttonDisabled),
     children: jsx(IconButton, {
       "aria-label": getI18nString("living_designs.chat.stop_button.alt_text"),
       onClick: () => {
@@ -2057,7 +2057,7 @@ function ny({
       })
     })
   }) : jsx("div", {
-    ...Ay.props(ng.buttonContainer, M ? ng.buttonBrand : ng.buttonDisabled),
+    ...stylex.props(ng.buttonContainer, M ? ng.buttonBrand : ng.buttonDisabled),
     children: jsx(IconButton, {
       type: "submit",
       "aria-label": getI18nString("living_designs.chat.send_button.alt_text"),
@@ -2858,7 +2858,7 @@ function nk({
   tagName: n
 }) {
   return !e || 0 === e.width || 0 === e.height || isNaN(e.width) || isNaN(e.height) || isNaN(e.left) || isNaN(e.top) ? null : jsx("div", {
-    ...xk(nS.boundingBox, nA[t]),
+    ...props(nS.boundingBox, nA[t]),
     style: {
       left: e.left,
       top: e.top,
@@ -2866,7 +2866,7 @@ function nk({
       height: e.height
     },
     children: !!n && ["selected", "hovered"].includes(t) && jsx("div", {
-      ...xk(nS.tagNameLabel, nw[t]),
+      ...props(nS.tagNameLabel, nw[t]),
       children: n
     })
   });
@@ -3315,7 +3315,7 @@ function nH({
           title: getI18nString("sites.code_component.preview_title"),
           src: M,
           ref: eg,
-          ...xk(nB.iframe, t && nB.iframeDisabled, e === _$$d.ERROR && nB.iframeHidden)
+          ...props(nB.iframe, t && nB.iframeDisabled, e === _$$d.ERROR && nB.iframeHidden)
         }, er)]
       })
     })]

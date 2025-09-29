@@ -25,7 +25,7 @@ import { N as _$$N } from "../905/98916";
 import { TeamHasPublishedSite } from "../figma_app/43951";
 import { isFigmaFileUrl, extractFigmaFileId } from "../figma_app/336853";
 import { isTeamFileUrl, isTeamUrl, extractTeamIdFromUrl } from "../figma_app/598018";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
@@ -301,7 +301,7 @@ function B(e) {
                   }
                   if (ep ? t && n || r : n) {
                     let e = extractFigmaFileId(Y);
-                    if (e && Eh.getOrgName({
+                    if (e && organizationAPIService.getOrgName({
                       orgId: e
                     }).then(({
                       data: t

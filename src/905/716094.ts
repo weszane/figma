@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { jsxs, jsx } from "react/jsx-runtime";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { renderI18nText } from "../905/303541";
 import { A } from "../905/925160";
 let o = memo(function () {
@@ -137,11 +137,11 @@ export function $$l0({
   collectionName: e
 }) {
   return jsxs("div", {
-    ...Ay.props(A.flex, A.flexRow, A.gap8, A.itemsCenter, A.wFull, A.minW0),
+    ...stylex.props(A.flex, A.flexRow, A.gap8, A.itemsCenter, A.wFull, A.minW0),
     children: [jsx("div", {
       children: jsx(o, {})
     }), jsx("div", {
-      ...Ay.props(A.textBodyMedium, A.colorText, A.lineClamp3),
+      ...stylex.props(A.textBodyMedium, A.colorText, A.lineClamp3),
       children: renderI18nText("dakota.site_blocks.collection_list_block", {
         collection_name: e
       })

@@ -26,11 +26,11 @@ import { hK } from "../figma_app/211706";
 import { noop } from 'lodash-es';
 import { Wi } from "../figma_app/162641";
 import { UserAvatar, AvatarSize } from "../905/590952";
-import { Pg } from "../figma_app/990058";
+import { getOrgAdminsAction } from "../figma_app/990058";
 import { fetchTeamUsers } from "../905/584989";
 import { SimpleFuseSearch } from "../905/81982";
 import { d as _$$d } from "../905/44199";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { teamAPIClient } from "../905/834575";
 import { P as _$$P } from "../905/392438";
 function U(e) {
@@ -74,7 +74,7 @@ function $$q(e) {
   useEffect(() => {
     planType === fm.TEAM ? t(fetchTeamUsers({
       teamId: planId
-    })) : t(Pg({
+    })) : t(getOrgAdminsAction({
       orgId: planId
     }));
   }, [t, planId, planType]);
@@ -93,7 +93,7 @@ function $$q(e) {
     }), setInitialEmailsLoaded(!0));
   }, [initialEmails, initialEmailsLoaded, setAutocomplete, setInitialEmailsLoaded]);
   return (useEffect(() => {
-    planType === fm.ORGANIZATION ? Eh.getOrgAdmins({
+    planType === fm.ORGANIZATION ? organizationAPIService.getOrgAdmins({
       orgId: planId
     }).then(g) : teamAPIClient.getTeamAdmins({
       teamId: planId

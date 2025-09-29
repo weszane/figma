@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { buildUploadUrl } from "../figma_app/169182";
 import { WAFImage } from "../905/675859";
 import { SvgComponent } from "../905/714743";
@@ -113,18 +113,18 @@ function C(e) {
     r(!0);
   }, []);
   return jsxs("div", {
-    ...xk(Z.container),
+    ...props(Z.container),
     children: [jsx("div", {
-      ...xk(Z.assetContainer),
+      ...props(Z.assetContainer),
       children: jsx(WAFImage, {
-        ...xk(Z.asset),
+        ...props(Z.asset),
         src: buildUploadUrl(v[e.resourceType]),
         loading: "lazy",
         onLoad: l
       })
     }), t && jsxs(Fragment, {
       children: [jsx("div", {
-        ...xk(Z.description),
+        ...props(Z.description),
         children: jsx(b, {
           ...e
         })

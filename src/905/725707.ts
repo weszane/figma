@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { N } from "../905/720559";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { Q } from "../figma_app/104130";
 import { KindEnum } from "../905/129884";
@@ -25,7 +25,7 @@ export function $$h0(e) {
           className: "x1xdureb x1447hjg",
           children: getI18nString("fullscreen.scrubbable.opacity")
         }), jsx(PercentageBaseInput, {
-          ...xk(m.input, e.positionOverride),
+          ...props(m.input, e.positionOverride),
           inputClassName: WC,
           "data-tooltip": getI18nString("fullscreen.scrubbable.opacity"),
           "data-tooltip-type": KindEnum.TEXT,

@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { Xf } from "../figma_app/153916";
 import { LoadingSpinner } from "../figma_app/858013";
 import { $z } from "../figma_app/617427";
@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { qf } from "../4452/780544";
 import { getRumLoggingConfig } from "../905/16237";
 import { S as _$$S, d as _$$d } from "../4452/304860";
-import { ps } from "../figma_app/845611";
+import { TeamOrg } from "../figma_app/845611";
 import { selectViewAction } from "../905/929976";
 import { UpgradeAction } from "../905/370443";
 import { getSelectedViewType } from "../figma_app/386952";
@@ -43,7 +43,7 @@ export function $$y0({
   planType: t,
   configuredUpgradeRequestSetting: a
 }) {
-  return t === ps.TEAM ? jsx(j, {}) : jsx(I, {
+  return t === TeamOrg.TEAM ? jsx(j, {}) : jsx(I, {
     orgId: e,
     configuredUpgradeRequestSetting: a
   });
@@ -109,7 +109,7 @@ export function $$E1({
   return jsxs("div", {
     className: "x78zum5 x6s0dn4 xl56j7k",
     children: [jsx("div", {
-      ...xk(S.text, t && S.invisibleText),
+      ...props(S.text, t && S.invisibleText),
       children: e
     }), t && jsx(LoadingSpinner, {
       shouldMatchTextColor: !0,

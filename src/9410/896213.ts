@@ -7,7 +7,7 @@ import { D as _$$D } from "../905/555681";
 import { O as _$$O } from "../905/969533";
 import { setupThemeContext } from "../905/614223";
 import { Multiplayer, Command } from "../figma_app/763686";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import f from "classnames";
@@ -598,7 +598,7 @@ function ek({
     })]
   });
   return jsx(PopoverPrimitiveContainer, {
-    ...h(Ay.props(eN.popoverContainer(q, eT))),
+    ...h(stylex.props(eN.popoverContainer(q, eT))),
     children: jsx(TabLoop, {
       children: eb
     })

@@ -1,4 +1,4 @@
-import { xk } from '@stylexjs/stylex';
+import { props } from '@stylexjs/stylex';
 import { memo, useMemo } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { AutoInteractableWrapper } from '../905/277716';
@@ -74,7 +74,7 @@ export let $$b0 = memo(e => {
   let h = yG(l, x);
   let p = h.reduce((e, t) => e + t.length, 0) > 0;
   return jsxs('div', {
-    ...xk(R.selectionActionsButtons),
+    ...props(R.selectionActionsButtons),
     children: [x.map(e => {
       let t = e.type === ZU.FLYOUT ? e.flyoutRecordingKey : 'reactKey' in e ? e.reactKey : e.recordingKey;
       return jsx(m, {

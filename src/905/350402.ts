@@ -1,7 +1,7 @@
 import type { Action, Dispatch } from 'redux'
 import type { ThunkAction, ThunkActionDispatch, ThunkDispatch } from 'redux-thunk'
 import { BEGIN } from 'redux-optimist'
-import { createActionCreator, createOptimistAction as createOptimistActionUtil, generateUniqueType } from '../905/73481'
+import { createActionCreator, createOptimistAction, generateUniqueType } from '../905/73481'
 import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456'
 import { generateOptimistId } from '../905/842794'
 import { getFalseValue } from '../figma_app/897289'
@@ -109,19 +109,7 @@ export function createOptimistThunk<S = any, P = any, Extra extends ExtraArg = a
   return optimistThunkAction
 }
 
-/**
- * Creates an optimist action.
- *
- * @param type - The action type.
- * @param payload - The action payload.
- * @param meta - Optional meta information.
- * @returns An optimist action object.
- * @originalName $$c0
- */
-export function createOptimistAction(type: string, payload: any, meta?: any) {
-  return createOptimistActionUtil(type, payload, meta)
-}
-
 // Exported aliases for compatibility
 export const MM = createOptimistAction
 export const nF = createOptimistThunk
+export { createOptimistAction }

@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { ButtonPrimitive } from "../905/632989";
 import { O } from "../905/969533";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import s from "classnames";
 var d = s;
 let $$c2 = forwardRef(function ({
@@ -53,7 +53,7 @@ let u = forwardRef(function ({
   return jsx(ButtonPrimitive, {
     ref: s,
     ...c,
-    ...Ay.props(m.container, r, o["aria-expanded"] ? m.container_active : null, o.noBorder ? m.container_noBorder : null, t ? null : m.containerLeftPaddingWithoutIconPrefix, n ? null : m.containerRightPaddingWithoutIconSuffix),
+    ...stylex.props(m.container, r, o["aria-expanded"] ? m.container_active : null, o.noBorder ? m.container_noBorder : null, t ? null : m.containerLeftPaddingWithoutIconPrefix, n ? null : m.containerRightPaddingWithoutIconSuffix),
     children: jsxs("div", {
       className: "xz16r55 x78zum5 x6s0dn4",
       children: [t, e, n]

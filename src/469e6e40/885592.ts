@@ -1,4 +1,4 @@
-import { Ay, xk } from '@stylexjs/stylex';
+import { stylex, props } from '@stylexjs/stylex';
 import { createElement, forwardRef, memo, useCallback, useMemo, useRef } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { m as _$$m2 } from '../469e6e40/61410';
@@ -89,12 +89,12 @@ function $(e, t) {
 function B(e) {
   let t = A()(e.lines, e => e.quantity);
   let a = jsx('div', {
-    ...xk(q.genericBreakdownHeading),
+    ...props(q.genericBreakdownHeading),
     'data-testid': e.testIdPrefix && `${e.testIdPrefix}-heading`,
     'children': e.getHeading(t)
   });
   let s = e.subheading && jsx('span', {
-    ...xk(q.genericBreakdownSubheading),
+    ...props(q.genericBreakdownSubheading),
     'data-testid': e.testIdPrefix && `${e.testIdPrefix}-subheading`,
     'children': e.subheading
   });
@@ -336,7 +336,7 @@ function z(e) {
           label: a,
           value: i
         }, r) => createElement('li', {
-          ...xk(q.totalLine, r === p.length - 1 ? q.totalLineFinal : q.totalLineDefault),
+          ...props(q.totalLine, r === p.length - 1 ? q.totalLineFinal : q.totalLineDefault),
           'key': e,
           'data-testid': `invoice-sum-${e}`
         }, jsx('div', {
@@ -408,10 +408,10 @@ function W(e) {
     }) => jsxs('li', {
       className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsx('span', {
-        ...xk(V.label),
+        ...props(V.label),
         children: t
       }), jsx('span', {
-        ...xk(V.value),
+        ...props(V.value),
         children: a
       })]
     }, e))
@@ -661,7 +661,7 @@ function eg(e) {
   let t = ep[e.invoice.billing_interval === FBillingPeriodType.YEAR && [InvoiceSubtype.SUBSCRIPTION_CREATED, InvoiceSubtype.SUBSCRIPTION_RENEWED].includes(e.invoice.subtype) ? 'calendar' : 'invoice'][e.size];
   let a = e.size === 48 && e.invoice.state === InvoiceState.PAID ? 'success' : 'default';
   return jsx('div', {
-    ...Ay.props(em.wrapper, em[`icon${e.size}`], a === 'success' && em.bgSuccess),
+    ...stylex.props(em.wrapper, em[`icon${e.size}`], a === 'success' && em.bgSuccess),
     'aria-hidden': !0,
     'children': jsx(t, {
       ...(a === 'success' ? {
@@ -698,7 +698,7 @@ function ev(e) {
         children: [jsxs('div', {
           className: 'xxymvpz',
           children: [jsx('span', {
-            ...Ay.props(eb.label),
+            ...stylex.props(eb.label),
             'aria-hidden': !0,
             'children': getInvoiceDescription(e.invoice)
           }), jsxs('span', {
@@ -709,7 +709,7 @@ function ev(e) {
             })]
           })]
         }), jsx('div', {
-          ...Ay.props(eb.dateRange),
+          ...stylex.props(eb.dateRange),
           children: getI18nString('plan_invoices.invoice_date_with_value', {
             date: dayjs(e.invoice.issued_at).toDate()
           })

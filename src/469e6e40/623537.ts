@@ -110,10 +110,10 @@ import { getPaidStatus } from '../figma_app/35887';
 import { AdminRequestDashOrgInfo, OrgIdpGroupsView, OrgInviteModalView, OrgUsersByIdView, WorkspacesCanAdminView } from '../figma_app/43951';
 import { mapFileTypeToEditorType } from '../figma_app/53721';
 import { BannerInset } from '../figma_app/59509';
-import { G as _$$G, h as _$$h2 } from '../figma_app/124713';
+import { orgUserService, devModalTypes } from '../figma_app/124713';
 import { IM } from '../figma_app/149367';
 import { Xf } from '../figma_app/153916';
-import { f as _$$f } from '../figma_app/157238';
+import { transformOrgUser } from '../figma_app/157238';
 import { JR, Wi } from '../figma_app/162641';
 import { getGroupTypeLabel } from '../figma_app/173467';
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
@@ -150,21 +150,21 @@ import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { fetchAndUpdateUpcomingInvoices } from '../figma_app/658324';
 import { EQ, mm, MX, NV, RG } from '../figma_app/684446';
-import { a9 as _$$a, Ew, oo, vu } from '../figma_app/741211';
+import { useCurrentUserOrgUser, useSelectableUsers, useOrgUsers, useOrgUsersFilterCounts } from '../figma_app/741211';
 import { K as _$$K, O as _$$O } from '../figma_app/748328';
 import { isCoreProductAccessType, ProductAccessMap } from '../figma_app/765689';
 import { isMobileUA } from '../figma_app/778880';
 import { parsePxInt } from '../figma_app/783094';
 import { TrackedDiv, TrackingProvider, useTracking, withTracking, wrapWithTracking } from '../figma_app/831799';
-import { ps, ZY } from '../figma_app/845611';
+import { TeamOrg, isBillingGroupAdminEnabled } from '../figma_app/845611';
 import { SectionType } from '../figma_app/858344';
 import { MenuSeparator } from '../figma_app/860955';
 import { BadgeColor } from '../figma_app/919079';
 import { truncate } from '../figma_app/930338';
 import { findMainWorkspaceUser, getUserBadge, hasScimMetadata } from '../figma_app/951233';
 import { ColumnName, DefaultFilters, DefaultSortConfig, FilterKeys, getDefaultCounts, isUserObject, LastEditPeriod, SpecialUserTypes } from '../figma_app/967319';
-import { uo } from '../figma_app/990058';
-import { Fb, MB } from '../figma_app/996356';
+import { batchUpdateOrgUsersAction } from '../figma_app/990058';
+import { deleteOrgInviteThunk, createOrgInvitesThunk } from '../figma_app/996356';
 import eT from '../vendor/128080';
 let F = U;
 let eg = new class {
@@ -661,7 +661,7 @@ function tv({
     sortedUsers,
     status,
     fetchMore
-  } = oo({
+  } = useOrgUsers({
     searchQuery: j !== '' ? j : void 0,
     sort: h,
     filter: C
@@ -670,13 +670,13 @@ function tv({
     status: _status,
     users,
     totalSelectable
-  } = Ew({
+  } = useSelectableUsers({
     searchQuery: j !== '' ? j : void 0,
     filter: C,
     selectedAll: m
   });
   let q = status !== 'loaded' || !!fetchMore;
-  let B = _$$a();
+  let B = useCurrentUserOrgUser();
   let G = useDispatch();
   let z = _$$R();
   let V = useMemo(() => sortedUsers.map(t => ({
@@ -788,7 +788,7 @@ function tv({
       footer: a => {
         let s = a.map(e => e.orgUser.id);
         let i = () => {
-          l && G(uo({
+          l && G(batchUpdateOrgUsersAction({
             orgId: e.id,
             lastUpdateTimestampOverride: T,
             successCallback: () => {
@@ -809,7 +809,7 @@ function tv({
         };
         let r = () => {
           let a = t?.id;
-          a && G(uo({
+          a && G(batchUpdateOrgUsersAction({
             orgId: e.id,
             lastUpdateTimestampOverride: T,
             params: {
@@ -1076,7 +1076,7 @@ function tE(e) {
 }
 function tT(e) {
   let t = useDispatch();
-  let a = [ps.ORG, e.org.id].toString();
+  let a = [TeamOrg.ORG, e.org.id].toString();
   let [s] = useAtomValueAndSetter(_$$Y3);
   let r = s[a] ?? 0;
   return r === 0 ? null : jsx(TrackedDiv, {
@@ -1965,7 +1965,7 @@ let a$ = registerModal(e => {
   let [p, g] = useState(!1);
   let h = useCallback(() => {
     g(!0);
-    m(uo({
+    m(batchUpdateOrgUsersAction({
       orgId,
       seatTypeProducts: {},
       params: {
@@ -1973,7 +1973,7 @@ let a$ = registerModal(e => {
         paid_statuses: seatType === ViewAccessTypeEnum.VIEW ? collaboratorSet.dict(() => FPlanAccessType.STARTER) : {
           [seatType]: FPlanAccessType.FULL
         },
-        entry_point: _$$h2.MEMBERS_TAB
+        entry_point: devModalTypes.MEMBERS_TAB
       },
       lastUpdateTimestampOverride: lastFetchTimestamp,
       successCallback: () => {
@@ -2287,7 +2287,7 @@ let a1 = registerModal(e => {
   let t = useModalManager(e);
   let [a, r] = useState(null);
   useEffect(() => {
-    _$$G.getGuestResources({
+    orgUserService.getGuestResources({
       orgUserId: e.orgUser.id
     }).then(e => {
       r(e.data.meta);
@@ -2362,7 +2362,7 @@ function a2({
   }) : e.idpUser.isOrgInvite ? jsxs(zx, {
     children: [jsx(_$$p3, {
       onClick: () => {
-        s(MB({
+        s(createOrgInvitesThunk({
           emails: [e.idpUser.email],
           isResentInvite: !0
         }));
@@ -2373,7 +2373,7 @@ function a2({
       children: getI18nString('members_table.org_invite_menu.copy_email')
     }, 'copy'), jsx(_$$p3, {
       onClick: () => {
-        s(Fb({
+        s(deleteOrgInviteThunk({
           idpUser: e.idpUser
         }));
       },
@@ -2517,7 +2517,7 @@ function nn(e) {
   }, {
     enabled: e.selectedView.view === 'licenseGroup'
   });
-  let G = ZY({
+  let G = isBillingGroupAdminEnabled({
     isIntendedAudience: U.status === 'loaded' && !!U.data?.org?.bigmaEnabledAt && !g
   });
   let ei = e.filters.permissionFilter === 'provisional';
@@ -2538,7 +2538,7 @@ function nn(e) {
     status,
     users,
     totalSelectable
-  } = Ew({
+  } = useSelectableUsers({
     searchQuery: $$nr1(e.searchQuery),
     filter: e.filters,
     selectedAll: j
@@ -2786,7 +2786,7 @@ function nn(e) {
         billingGroupId: e.filters.licenseGroupFilter
       }) : _$$u.getMemberCSVExport({
         workspaceId: e.filters.workspaceFilter
-      }) : _$$G.getMemberCSVExport({
+      }) : orgUserService.getMemberCSVExport({
         orgId: e.org.id
       })).then(() => {
         e.dispatch(VisualBellActions.enqueue({
@@ -3162,7 +3162,7 @@ export function $$nc0(e) {
     status,
     fetchMore,
     queueRefetch
-  } = oo({
+  } = useOrgUsers({
     searchQuery: $$nr1(searchQuery),
     sort,
     filter: filters
@@ -3177,7 +3177,7 @@ export function $$nc0(e) {
   }, {
     enabled: optimisticIds.length > 0
   });
-  let W = useMemo(() => (V.status === 'loaded' ? getResourceDataOrFallback(V.data?.org)?.baseOrgUserMembersById ?? [] : []).map(e => _$$f(e)), [V.status, V.data?.org]);
+  let W = useMemo(() => (V.status === 'loaded' ? getResourceDataOrFallback(V.data?.org)?.baseOrgUserMembersById ?? [] : []).map(e => transformOrgUser(e)), [V.status, V.data?.org]);
   let H = useMemo(() => searchQuery && W.length !== 0 ? (nl.set(W), nl.search(searchQuery)) : W, [searchQuery, W]);
   let Y = useCallback(e => function (e, t) {
     let a = t[FilterKeys.licenseGroupFilter];
@@ -3208,7 +3208,7 @@ export function $$nc0(e) {
   let J = useMemo(() => H.filter(Y), [H, Y]);
   let K = useMemo(() => sortedUsers.filter(Y), [sortedUsers]);
   let [X, Q] = useState(a7.FILTER);
-  let Z = _$$a();
+  let Z = useCurrentUserOrgUser();
   let ee = !!(Z && Z.permission === FUserRoleType.ADMIN);
   let et = useSelector(e => e.licenseGroups);
   let ea = _$$d({
@@ -3218,7 +3218,7 @@ export function $$nc0(e) {
   let {
     filterCountsViewResult,
     queueFilterCountsRefetch
-  } = vu(org.id, $$nr1(searchQuery), filters);
+  } = useOrgUsersFilterCounts(org.id, $$nr1(searchQuery), filters);
   let {
     groupsUserIsAdminOf,
     otherLicenseGroups,

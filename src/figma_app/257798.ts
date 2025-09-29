@@ -40,7 +40,7 @@ import { g as _$$g } from "../figma_app/594353";
 import { fn } from "../figma_app/811257";
 import { t as _$$t } from "../figma_app/480016";
 import { bL, c$ } from "../905/575478";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 let B = () => {
   let e = _$$V2();
   let t = isDesignFileType();
@@ -128,7 +128,7 @@ function $(e) {
         } = e;
         return jsx(c$, {
           ...s,
-          ...Ay.props(X.option, s.readonly && X.disabled, value === s.value && X.selectedOption, 0 === i && X.firstChild, i === controls.length - 1 && X.lastChild),
+          ...stylex.props(X.option, s.readonly && X.disabled, value === s.value && X.selectedOption, 0 === i && X.firstChild, i === controls.length - 1 && X.lastChild),
           children: jsx("span", {
             children
           })

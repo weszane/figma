@@ -3,7 +3,7 @@ import { useRef, useState, useCallback, useEffect, useLayoutEffect } from "react
 import { shallowEqual } from "react-redux";
 import { clamp } from "../figma_app/492908";
 import { noop } from 'lodash-es';
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { Te } from "../vendor/813803";
 import { BrowserInfo } from "../figma_app/778880";
 import { Yh, TN, Kr, ud } from "../905/334566";
@@ -307,7 +307,7 @@ export function $$I0(e) {
         if (i || t.ctrlKey) return C;
         r = multiselectDisabled ? new Set() : new Set([...C].filter(t => t !== e));
       } else r = new Set(multiselectDisabled ? [e] : [...C, e]);
-    } else if (t.shiftKey) r = new Set(void 0 === I || void 0 === y || multiselectDisabled ? [e] : n ? [...C, e] : I > e ? [...[...C].filter(e => e > Math.max(y, I) || e < Math.min(y, I)), ...[...Array(I - e + 1)].map((t, i) => i + e)] : [...[...C].filter(e => e > Math.max(y, I) || e < Math.min(y, I)), ...[...Array(e - I + 1)].map((e, t) => t + I)]); else {
+    } else if (t.shiftKey) r = new Set(void 0 === I || void 0 === y || multiselectDisabled ? [e] : n ? [...C, e] : I > e ? [...[...C].filter(e => e > Math.max(y, I) || e < Math.min(y, I)), ...[...Array(I - e + 1)].map((t, i) => i + e)] : [...[...C].filter(e => e > Math.max(y, I) || e < Math.min(y, I)), ...[...Array(e - I + 1)].map((e, t) => t + I)]);else {
       if (i && C.has(e)) return C;
       r = new Set([e]);
     }
@@ -346,7 +346,7 @@ export function $$I0(e) {
         t.stopPropagation();
         break;
       case "ArrowLeft":
-        if (void 0 === y || void 0 === I) Y(items.length - 1, t, !1, !0); else if (t.altKey) Y(0, t, !1, !0); else {
+        if (void 0 === y || void 0 === I) Y(items.length - 1, t, !1, !0);else if (t.altKey) Y(0, t, !1, !0);else {
           let e = y;
           if (t.shiftKey && y < I) for (; e > 0 && C.has(e - 1);) e--;
           e > 0 && Y(e - 1, t, !1, !0);
@@ -355,7 +355,7 @@ export function $$I0(e) {
         t.stopPropagation();
         break;
       case "ArrowRight":
-        if (void 0 === y || void 0 === I) Y(0, t, !1, !0); else if (t.altKey) Y(items.length - 1, t, !1, !0); else {
+        if (void 0 === y || void 0 === I) Y(0, t, !1, !0);else if (t.altKey) Y(items.length - 1, t, !1, !0);else {
           let e = y;
           if (t.shiftKey && y > I) for (; e < items.length - 1 && C.has(e + 1);) e++;
           e < items.length - 1 && Y(e + 1, t, !1, !0);
@@ -383,7 +383,7 @@ export function $$I0(e) {
     }
   };
   let J = useCallback(t => i => {
-    if (i.stopPropagation(), (2 === i.detail || BrowserInfo.mobile || BrowserInfo.tablet || e.forceSingleClick) && handleOpenItem) handleOpenItem(items[t], i, t); else {
+    if (i.stopPropagation(), (2 === i.detail || BrowserInfo.mobile || BrowserInfo.tablet || e.forceSingleClick) && handleOpenItem) handleOpenItem(items[t], i, t);else {
       let e = Y(t, i);
       if (e.size && !e.has(t)) {
         let i = t + 1;
@@ -472,7 +472,7 @@ export function $$I0(e) {
       role: "grid",
       tabIndex: -1,
       "aria-multiselectable": !e.multiselectDisabled,
-      ...xk(E.grid, e.containerStyle),
+      ...props(E.grid, e.containerStyle),
       ref: gridRef,
       onKeyDown: e => {
         Q(e);

@@ -38,7 +38,7 @@ import { s as _$$s3 } from "../3682/764731";
 import { JT } from "../figma_app/632248";
 import { cT as _$$cT, wj, qy, RL, B3, Ag } from "../figma_app/862289";
 import { EG, JY, sH as _$$sH, mG, wd } from "../9410/236102";
-import { xk, Ay } from "@stylexjs/stylex";
+import { props, stylex } from "@stylexjs/stylex";
 import { k as _$$k2 } from "../905/443820";
 import { l as _$$l2 } from "../905/479687";
 import { textDisplayConfig } from "../905/687265";
@@ -752,7 +752,7 @@ function en({
   let s = useCallback((e, t) => {
     let i = Z[e.type];
     return jsx("div", {
-      ...xk(i, t ? Z.textSpotlighted : Z.text),
+      ...props(i, t ? Z.textSpotlighted : Z.text),
       children: e.content
     });
   }, []);
@@ -786,7 +786,7 @@ function er({
   let a = useCallback((e, t) => jsxs("div", {
     className: "x78zum5 xl56j7k x6s0dn4 xi4r6k5 x10gahu4 x1n2onr6",
     children: [jsx(WAFImage, {
-      ...xk(ee.thumbnail, t && ee.thumbnailSpotlighted),
+      ...props(ee.thumbnail, t && ee.thumbnailSpotlighted),
       src: e.thumbnailUrl,
       alt: `Slide ${e.slideIndex}`,
       loading: "lazy"
@@ -844,7 +844,7 @@ function el({
       return jsxs("div", {
         className: "x78zum5 x6s0dn4 x1i71x30 x10gahu4",
         children: [n(e.key), jsx("span", {
-          ...xk(et.stepText, "active" === t && et.stepActive, "completed" === t && et.stepCompleted, "inactive" === t && et.stepInactive),
+          ...props(et.stepText, "active" === t && et.stepActive, "completed" === t && et.stepCompleted, "inactive" === t && et.stepInactive),
           children: e.text
         })]
       }, e.key);
@@ -882,7 +882,7 @@ function ej() {
 function eb() {
   let e = selectCurrentFile();
   return jsx("div", {
-    ...xk(ef.leftHeaderPositioner),
+    ...props(ef.leftHeaderPositioner),
     children: jsxs(_$$_2, {
       isCollapsed: !0,
       minWidth: 200,
@@ -907,7 +907,7 @@ function eE() {
   let x = isUserNotLoggedInAndEditorSupported();
   let h = WN();
   return jsx("div", {
-    ...xk(ef.rightHeaderPositioner),
+    ...props(ef.rightHeaderPositioner),
     children: jsxs("div", {
       className: "x78zum5 xsdox4t x1rjybxy x6s0dn4 x16v0e3u x1akne3o x1mxnbhz xf18ygs x1vqtdw0",
       children: [t && o && jsx(v7, {
@@ -1385,7 +1385,7 @@ function tb({
   onChange: l
 }) {
   return jsx("div", {
-    ...Ay.props(tf.createDeckOptionContainer),
+    ...stylex.props(tf.createDeckOptionContainer),
     children: jsxs(_$$bL, {
       value: n,
       onChange: l,
@@ -1582,7 +1582,7 @@ function tP({
   }, []);
   let c = "short" === n;
   return jsx("div", {
-    ...xk(tL.divider, i ? null : tL.hiddenDivider, c ? tL.shortDivider : null),
+    ...props(tL.divider, i ? null : tL.hiddenDivider, c ? tL.shortDivider : null),
     children: jsxs("div", {
       className: "x10l6tqk xwa60dl xu96u03 x1cb1t30 xh8yej3 x78zum5 x6s0dn4 xl56j7k xg01cxk xzdg38j",
       style: {
@@ -1591,7 +1591,7 @@ function tP({
       onMouseEnter: o,
       onMouseLeave: d,
       children: [jsx("div", {
-        ...xk(tL.hoverLine, c ? tL.shortHoverLine : null),
+        ...props(tL.hoverLine, c ? tL.shortHoverLine : null),
         style: {
           height: s ? "2px" : "0"
         }
@@ -1878,7 +1878,7 @@ let tG = forwardRef(function ({
   }, [n, a]);
   return jsx("textarea", {
     ref: d,
-    ...xk(tz.textarea, textDisplayConfig[i]),
+    ...props(tz.textarea, textDisplayConfig[i]),
     value: e,
     onChange: p,
     placeholder: t,
@@ -2069,7 +2069,7 @@ function tQ({
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x1rjybxy xqb5aye",
     children: [jsx("h3", {
-      ...xk(tH.slideNumberDisplay),
+      ...props(tH.slideNumberDisplay),
       children: `Slide ${t}`
     }), jsx(tG, {
       textStyle: "textBodyMedium",
@@ -2203,7 +2203,7 @@ function ie({
   return jsxs("div", {
     className: "x78zum5 x1rjybxy x1ger3g x1phlbz0 x1odjw0f xnuq7ks",
     children: [jsx(ButtonPrimitive, {
-      ...xk(t6.minimizedPromptDisplay),
+      ...props(t6.minimizedPromptDisplay),
       onClick: t,
       children: e
     }), i && jsx(ButtonPrimitive, {
@@ -2240,7 +2240,7 @@ function ir({
   onClick: e
 }) {
   return jsx(ButtonPrimitive, {
-    ...xk(t3.attachmentPlusButton),
+    ...props(t3.attachmentPlusButton),
     onClick: e,
     htmlAttributes: {
       "data-tooltip-type": KindEnum.TEXT,
@@ -2254,7 +2254,7 @@ function il({
   onClick: t
 }) {
   return jsx(ButtonPrimitive, {
-    ...xk(e ? t3.disabledButton : t3.submitButton),
+    ...props(e ? t3.disabledButton : t3.submitButton),
     onClick: t,
     disabled: e,
     children: jsx(_$$N, {})
@@ -2287,7 +2287,7 @@ function ia() {
     t(e => !e);
   }, [t]);
   return jsx(ButtonPrimitive, {
-    ...Ay.props(is.templateSelect, e ? is.templateSelectActive : null),
+    ...stylex.props(is.templateSelect, e ? is.templateSelectActive : null),
     onClick: a,
     htmlAttributes: {
       "data-tooltip-type": KindEnum.TEXT,
@@ -2379,7 +2379,7 @@ function ic({
   hidden: e
 }) {
   return jsxs("div", {
-    ...xk(io.footer, e ? io.footerHidden : null),
+    ...props(io.footer, e ? io.footerHidden : null),
     children: [jsx("div", {
       className: "x1eochie xr6hmy7 xjm9jq1 x2lah0s"
     }), jsx(iu, {})]
@@ -2632,7 +2632,7 @@ function ih({
   children: t
 }) {
   return jsx("div", {
-    ...xk(io.mainContainer, e ? io.mainContainerExpanded : io.mainContainerCollapsed),
+    ...props(io.mainContainer, e ? io.mainContainerExpanded : io.mainContainerCollapsed),
     children: jsx(ScrollContainer, {
       fill: !0,
       children: t

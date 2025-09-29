@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { Zk } from "../figma_app/626177";
 import { dP } from "../figma_app/947348";
 import { w } from "../figma_app/78608";
@@ -13,10 +13,10 @@ export function $$d0(e) {
     ref: t,
     "data-onboarding-key": dP,
     children: [jsxs("div", {
-      ...xk(R.nameAndActionsContainer),
+      ...props(R.nameAndActionsContainer),
       children: [e.selectionName, e.selectionActionsButtons]
     }), jsx("div", {
-      ...xk(R.selectionActionsChildren),
+      ...props(R.selectionActionsChildren),
       children: e.children
     })]
   });

@@ -4,7 +4,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { Button } from "../905/521428";
 import { e } from "../905/149844";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { h1 } from "../905/986103";
@@ -44,7 +44,7 @@ function q({
   let i = useAtomWithSubscription(kz);
   return jsx(_$$b, {
     legend: jsx("p", {
-      ...Ay.props(U.textBodyMediumStrong),
+      ...stylex.props(U.textBodyMediumStrong),
       children: getI18nString("figmake.settings.pause_project.radio.label")
     }),
     value: t,
@@ -65,10 +65,10 @@ function $({
 }) {
   return jsxs("div", {
     children: [jsx("p", {
-      ...Ay.props(U.textBodyMediumStrong),
+      ...stylex.props(U.textBodyMediumStrong),
       children: e.name
     }), jsx("p", {
-      ...Ay.props(U.textBodyMediumSecondary),
+      ...stylex.props(U.textBodyMediumSecondary),
       children: renderI18nText("figmake.settings.pause_project.created", {
         timestamp: jsx(h1, {
           date: e.created_at
@@ -120,7 +120,7 @@ function P({
   };
   return i ? jsxs(Fragment, {
     children: [jsx("p", {
-      ...Ay.props(U.textBodyMediumSecondary),
+      ...stylex.props(U.textBodyMediumSecondary),
       children: getI18nString("figmake.supabase.pausing_project.subtitle")
     }), jsx(Button, {
       variant: "secondary",
@@ -267,7 +267,7 @@ let V = registerModal(function (e) {
       }), jsx(DialogBody, {
         children: jsx("div", {
           children: jsxs("p", {
-            ...Ay.props(W.textBodyMedium),
+            ...stylex.props(W.textBodyMedium),
             children: [getI18nString("figmake.supabase_cost_warning_modal.body"), " ", jsx(Link, {
               href: Sy,
               newTab: !0,
@@ -384,7 +384,7 @@ export function $$X0({
       children: jsxs("div", {
         className: "x78zum5 x1q0g3np x6s0dn4 x1v2ro7d",
         children: [jsx(Z, {}), jsx("p", {
-          ...Ay.props(Q.textBodyMediumStrong),
+          ...stylex.props(Q.textBodyMediumStrong),
           children: getI18nString("figmake.settings.connect_existing_project.create_project.button")
         })]
       })
@@ -523,7 +523,7 @@ function Y({
       children: [jsxs("div", {
         className: "x78zum5 xdt5ytf x1cy8zhl",
         children: [jsx("p", {
-          ...Ay.props(Q.textBodyMediumStrong),
+          ...stylex.props(Q.textBodyMediumStrong),
           children: e.name
         }), jsxs("div", {
           className: "x78zum5 x1q0g3np x1cy8zhl x1jnr06f",
@@ -532,7 +532,7 @@ function Y({
           }), jsx("span", {
             children: "\xb7"
           }), jsx("span", {
-            ...Ay.props(Q.textBodyMediumSecondary),
+            ...stylex.props(Q.textBodyMediumSecondary),
             children: renderI18nText("figmake.settings.pause_project.created", {
               timestamp: jsx(h1, {
                 date: e.created_at
@@ -552,10 +552,10 @@ function J({
   isPaused: e
 }) {
   return e ? jsx("span", {
-    ...Ay.props(Q.textBodyMediumSecondaryStrong),
+    ...stylex.props(Q.textBodyMediumSecondaryStrong),
     children: getI18nString("figmake.settings.connect_existing_project.status.project.paused")
   }) : jsx("span", {
-    ...Ay.props(Q.textBodyMediumSuccessStrong),
+    ...stylex.props(Q.textBodyMediumSuccessStrong),
     children: getI18nString("figmake.settings.connect_existing_project.status.project.active")
   });
 }

@@ -1,4 +1,4 @@
-import { xk } from '@stylexjs/stylex';
+import { props } from '@stylexjs/stylex';
 import eO from 'classnames';
 import { Component, createRef, PureComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
@@ -419,15 +419,15 @@ function ex({
   return jsxs('div', {
     className: 'x78zum5 xdt5ytf x1nfngrj',
     children: [jsx('div', {
-      ...xk(ef.profileName),
+      ...props(ef.profileName),
       children: e.name
     }), jsx('div', {
-      ...xk(ef.profileDescription),
+      ...props(ef.profileDescription),
       children: s
     }), jsxs('div', {
       className: 'x78zum5 x6s0dn4 x1nfngrj',
       children: [jsx('span', {
-        ...xk(ef.profileStat),
+        ...props(ef.profileStat),
         children: renderI18nText('community.profiles.follower_count', {
           followerCount: t,
           formattedFollowerCount: t
@@ -435,7 +435,7 @@ function ex({
       }), jsx('div', {
         className: 'x1i1rx1s x170jfvy xbpqucl'
       }), jsx('span', {
-        ...xk(ef.profileStat),
+        ...props(ef.profileStat),
         children: renderI18nText('community.profiles.following_count', {
           followingCount: r
         })
@@ -478,20 +478,20 @@ function eI({
     }, r) : new _$$_(r);
   }();
   return jsxs('div', {
-    ...xk(_$$Z.container),
+    ...props(_$$Z.container),
     children: [jsx('div', {
-      ...xk(_$$Z.assetContainer),
+      ...props(_$$Z.assetContainer),
       children: jsx(WAFImage, {
-        ...xk(_$$Z.asset),
+        ...props(_$$Z.asset),
         src: t,
         alt: getI18nString('community.profiles.you_don_t_have_any_resources_yet'),
         loading: 'lazy'
       })
     }), jsx('div', {
-      ...xk(_$$Z.title),
+      ...props(_$$Z.title),
       children: e ? getI18nString('community.profiles.you_don_t_have_any_resources_yet') : getI18nString('community.profiles.nothing_published_yet')
     }), jsx('div', {
-      ...xk(_$$Z.description, e && eN.secondaryTextColor),
+      ...props(_$$Z.description, e && eN.secondaryTextColor),
       children: e ? renderI18nText('community.profiles.getting_started_easy', {
         learnLink: jsx(Link, {
           href: 'https://help.figma.com/hc/articles/360040035974-Publish-files-to-the-Figma-Community',
@@ -571,7 +571,7 @@ function eR({
   return jsxs('div', {
     className: 'x78zum5 x1q0g3np x1qughib x6s0dn4',
     children: [jsx('div', {
-      ...xk(ek.resourcesHeaderTitle),
+      ...props(ek.resourcesHeaderTitle),
       children: r ? getI18nString('community.profiles.contributions') : getI18nString('community.profiles.resources')
     }), s && jsx(_$$W2, {
       context: gM.PROFILE,

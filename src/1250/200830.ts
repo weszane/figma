@@ -67,7 +67,7 @@ import { g as _$$g } from "../1250/695038";
 import { useCurrentUserOrg, useCurrentUserOrgId } from "../905/845253";
 import { WorkspaceSelectorView, TeamFileCountsByTeamId } from "../figma_app/43951";
 import { useCurrentPlanUser, useTeamPlanFeatures } from "../figma_app/465071";
-import { G as _$$G } from "../figma_app/124713";
+import { orgUserService } from "../figma_app/124713";
 import { trackEventAnalytics } from "../905/449184";
 import { tM as _$$tM, vd as _$$vd } from "../figma_app/60079";
 import { CloseButton } from "../905/17223";
@@ -898,7 +898,7 @@ function tc() {
     show({
       canShow: (e, t, n, a, r, i) => e === qo.ORG && !!t && !n && !!a && 0 !== a.length && !r && !!i,
       onShow: () => {
-        _$$G.postOrgUserFlags({
+        orgUserService.postOrgUserFlags({
           orgUserId: r.current,
           flags: {
             [ts]: !0

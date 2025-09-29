@@ -64,7 +64,7 @@ import { UF } from '../figma_app/622574';
 import { Z as _$$Z } from '../figma_app/640519';
 import { wH } from '../figma_app/680166';
 import { Cp, jB, Px, zS } from '../figma_app/722141';
-import { a9 } from '../figma_app/741211';
+import { useCurrentUserOrgUser } from '../figma_app/741211';
 import { getProductAccessTypeOrDefault } from '../figma_app/765689';
 import { e as _$$e4 } from '../figma_app/831857';
 import { V1 } from '../figma_app/834392';
@@ -624,7 +624,7 @@ export function $$ek0(e) {
   let tq = tY ? fileEntityDataMapper.toLiveGraph(tY) : null;
   let t$ = e.tile.type === nb.OFFLINE_FILE ? e.tile.file : null;
   let tZ = mu(e.tile.type === nb.FILE ? fileEntityDataMapper.toSinatra(e.tile.file) : null, eB);
-  let tX = a9();
+  let tX = useCurrentUserOrgUser();
   let tQ = eU.type === nb.REPO ? tq : tG;
   let tJ = $S({
     fileKey: tQ?.key ?? '',

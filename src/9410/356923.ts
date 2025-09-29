@@ -6,7 +6,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
 import { l as _$$l } from "../905/716947";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { Xr, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import h from "classnames";
 import { Point } from "../905/736624";
@@ -120,7 +120,7 @@ export function $$F1({
       "data-testid": "insertableSlideTile"
     },
     children: [jsxs("div", {
-      ...Ay.props(H.tile, !d && H.tileBorder),
+      ...stylex.props(H.tile, !d && H.tileBorder),
       style: {
         width: i ?? "100%",
         height: n ?? "100%"

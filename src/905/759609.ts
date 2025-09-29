@@ -11,7 +11,7 @@ import { j as _$$j } from "../905/519202";
 import { e as _$$e2 } from "../905/916195";
 import { A as _$$A } from "../905/24328";
 import { Multiplayer } from "../figma_app/763686";
-import { xj, Mx, yx } from "../figma_app/851625";
+import { isSuccess, isLoading, isInit } from "../figma_app/851625";
 import { useSingleEffect } from "../905/791079";
 import { KeyCodes } from "../905/63728";
 import { reportError } from "../905/11";
@@ -208,7 +208,7 @@ function Y({
   let {
     image,
     isLoading
-  } = useMemo(() => xj(e) ? {
+  } = useMemo(() => isSuccess(e) ? {
     isLoading: !1,
     image: {
       data: e.value.image,
@@ -216,7 +216,7 @@ function Y({
       height: e.value.height,
       scale: 2
     }
-  } : Mx(e) || yx(e) ? {
+  } : isLoading(e) || isInit(e) ? {
     isLoading: !0,
     image: null
   } : {
@@ -247,7 +247,7 @@ function Y({
     children: renderI18nText("design_systems.updates.preview_unavailable")
   });
   return jsx(or, {
-    title: xj(e) ? t : "",
+    title: isSuccess(e) ? t : "",
     containerStyle: a,
     isDarkBackground: !1,
     children: o

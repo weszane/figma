@@ -13,7 +13,7 @@ import { T as _$$T } from "../905/632137";
 import { a as _$$a } from "../905/964520";
 import { ImageToolsBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { createLocalStorageAtom, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { KeyCodes } from "../905/63728";
@@ -823,7 +823,7 @@ function eb({
       value: s,
       onChange: e => i(e),
       children: jsxs("div", {
-        ...xk(eI.grid({
+        ...props(eI.grid({
           numGenerations: t.length,
           hasOriginal: !!e
         })),
@@ -920,7 +920,7 @@ function eT({
       });
     case "PENDING":
       return jsx("div", {
-        ...xk(eI.gridItem, eI.pulse(o))
+        ...props(eI.gridItem, eI.pulse(o))
       });
     case "FAILURE":
       return jsxs("div", {

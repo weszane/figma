@@ -12,7 +12,7 @@ import { Button } from "../905/521428";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { S as _$$S } from "../905/794163";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import b from "../vendor/523035";
@@ -242,7 +242,7 @@ function X(e) {
             className: cssBuilderInstance.textHeadingMedium.$,
             children: ei
           }), jsx("div", {
-            ...Ay.props(W ? Y.modalDescriptionWithProjectedCost : Y.modalDescriptionLegacy),
+            ...stylex.props(W ? Y.modalDescriptionWithProjectedCost : Y.modalDescriptionLegacy),
             children: es ? renderI18nText("billing_modals.add_seats.description_convert_monthly_seats") : jsxs(Fragment, {
               children: [renderI18nText("billing_modals.add_seats.description"), " ", jsx($, {})]
             })

@@ -66,7 +66,7 @@ import { Cn } from "../905/225265";
 import { TeamCanEdit } from "../figma_app/43951";
 import { isOnboardingComplete } from "../figma_app/242339";
 import { hasTeamPaidAccess } from "../figma_app/345997";
-import { getSelectedView } from "../figma_app/198885";
+import { getSelectedViewSelector } from "../figma_app/198885";
 import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655";
 import { selectTeams } from "../905/338617";
 import { sp as _$$sp } from "../figma_app/678300";
@@ -1108,7 +1108,7 @@ function t9({
   let c = useDispatch();
   let u = useSelector(e => e.dropdownShown);
   let p = useSelector(_$$e_);
-  let y = useSelector(getSelectedView);
+  let y = useSelector(getSelectedViewSelector);
   let m = useSelector(selectSceneGraph);
   let f = useSelector(selectSceneGraphSelection);
   let b = useSelector(selectTeams);

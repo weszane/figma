@@ -146,4 +146,4 @@ export const M2 = createAtomWithEquality
 export const LJ = createCustomAtom
 export const FZ = setupCustomAtom
 export const eU = atom
-export { atom, atomStoreManager, atomWithDefault, createAtomWithEquality, createCustomAtom, createLocalStorageAtom, createValidatedLocalStorageAtom, setupAtomWithMount, setupCustomAtom, setupSubscriptionAtom }
+export { atom, AtomProvider, atomStoreManager, atomWithDefault, createAtomWithEquality, createCustomAtom, createLocalStorageAtom, createValidatedLocalStorageAtom, setupAtomWithMount, setupCustomAtom, setupSubscriptionAtom }

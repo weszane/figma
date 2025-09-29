@@ -10,7 +10,7 @@ import u from "../vendor/983401";
 import _ from "../vendor/239910";
 import m from "../vendor/626715";
 import { useSubscriptionAnalytics, useSubscription } from "../figma_app/288654";
-import { Xm, e1, gB } from "../905/723791";
+import { createLoadingState, createErrorState, createLoadedState } from "../905/723791";
 import { componentReplaceOpenFilePublishedLivegraph } from "../905/879323";
 import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
@@ -40,7 +40,7 @@ export function $$L0(e) {
       return () => releaseLibraryItems(a);
     }
   }, [requestLibraryItems, releaseLibraryItems, a]);
-  return a && subscriptions[a] || Xm();
+  return a && subscriptions[a] || createLoadingState();
 }
 export function $$P3() {
   let {
@@ -253,7 +253,7 @@ let U = memoizeWeak(function (e) {
   let t = e.data;
   if ("communityLibraryByHubFileId" in t) {
     let e = t.communityLibraryByHubFileId;
-    if (!e) return e1([]);
+    if (!e) return createErrorState([]);
     let r = e.libraryHierarchyPaths.map(t => {
       let r = t.styles.map(t => mapStyleProperties(t, {
         type: "hubFile",
@@ -271,7 +271,7 @@ let U = memoizeWeak(function (e) {
         styles: r
       };
     });
-    return gB({
+    return createLoadedState({
       fileKey: e.hubFileId,
       libraryKey: _$$l(e.libraryKey),
       name: e.name,
@@ -282,7 +282,7 @@ let U = memoizeWeak(function (e) {
     });
   }
   let r = "libraryKeyToFile" in t ? t.libraryKeyToFile?.file : t.file;
-  if (!r) return e1([]);
+  if (!r) return createErrorState([]);
   let n = r.libraryHierarchyPaths.map(e => ({
     components: "components" in e ? e.components.map(e => mapComponentProperties(e, {
       type: "team",
@@ -297,7 +297,7 @@ let U = memoizeWeak(function (e) {
       file: r
     }))
   }));
-  return gB({
+  return createLoadedState({
     fileKey: r.key,
     libraryKey: _$$l(r.libraryKey),
     name: r.name,

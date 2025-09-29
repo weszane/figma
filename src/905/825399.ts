@@ -5,7 +5,7 @@ import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { Xr } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
-import { gB, Xm, e1 } from "../905/723791";
+import { createLoadedState, createLoadingState, createErrorState } from "../905/723791";
 import { setupResourceAtomHandler, handleStatusChangeEffect } from "../figma_app/566371";
 import { fI } from "../figma_app/229259";
 import { batchPutFileAction } from "../figma_app/78808";
@@ -123,7 +123,7 @@ export function $$F12(e = 0) {
 export function $$M7(e, t) {
   let i = useMemo(() => Array.from(e), [e]);
   let r = useLibraries(i);
-  return useMemo(() => getFeatureFlags().dse_library_modal_recommended_perf ? "loaded" === r.status ? gB(r.data.filter(isPublishedLibraryWithAssets)) : Xm() : "loading" === t.status ? Xm() : "loaded" !== t.status ? e1([]) : gB($$j2(e, t.result)), [r, e, t]);
+  return useMemo(() => getFeatureFlags().dse_library_modal_recommended_perf ? "loaded" === r.status ? createLoadedState(r.data.filter(isPublishedLibraryWithAssets)) : createLoadingState() : "loading" === t.status ? createLoadingState() : "loaded" !== t.status ? createErrorState([]) : createLoadedState($$j2(e, t.result)), [r, e, t]);
 }
 export function $$j2(e, t) {
   return Array.from(e).map(e => t.find(t => t.library_key === e)).filter(isNotNullish);
@@ -137,7 +137,7 @@ export function $$U6(e, t) {
     return n ? _$$l(n) : void 0;
   }).filter(isNotNullish), [e, i]);
   let l = useLibraries(r);
-  return useMemo(() => getFeatureFlags().dse_library_modal_recommended_perf ? "loaded" === l.status ? gB(l.data.filter(isPublishedLibraryWithAssets)) : Xm() : "loaded" !== t.status ? t : gB($$B1(e, t.data, i)), [l, e, t, i]);
+  return useMemo(() => getFeatureFlags().dse_library_modal_recommended_perf ? "loaded" === l.status ? createLoadedState(l.data.filter(isPublishedLibraryWithAssets)) : createLoadingState() : "loaded" !== t.status ? t : createLoadedState($$B1(e, t.data, i)), [l, e, t, i]);
 }
 export function $$B1(e, t, i) {
   return e.filter(e => !1 !== e.isSubscribed).map(e => {
@@ -157,9 +157,9 @@ let $$V9 = _$$n(e => {
   let r = useMemo(() => (i.data?.resourceConnectionSharingGroups ?? []).map(e => e.libraryKey ? _$$l(e.libraryKey) : null).filter(isNotNullish), [i]);
   let l = useLibraries(r);
   return useMemo(() => {
-    if (getFeatureFlags().dse_library_modal_recommended_perf) return "loaded" === l.status ? gB(l.data.filter(isPublishedLibraryWithAssets)) : Xm();
+    if (getFeatureFlags().dse_library_modal_recommended_perf) return "loaded" === l.status ? createLoadedState(l.data.filter(isPublishedLibraryWithAssets)) : createLoadingState();
     let t = i.data?.resourceConnectionSharingGroups;
-    return gB(e.filter(e => t?.some(t => t.libraryKey === e.library_key)));
+    return createLoadedState(e.filter(e => t?.some(t => t.libraryKey === e.library_key)));
   }, [e, i, l]);
 });
 let $$G0 = _$$n(e => {

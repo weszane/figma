@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { gB, Xm } from "../905/723791";
+import { createLoadedState, createLoadingState } from "../905/723791";
 import { Fl } from "../figma_app/236178";
 import { useHasResourcePresetKey } from "../figma_app/255679";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
@@ -31,7 +31,7 @@ export function $$$$g0({
   let y = Fl();
   let b = useSiteKitAssets();
   let v = b.data?.libraries ?? null;
-  let I = useMemo(() => "loaded" === b.status ? gB(b.data?.libraries) : "loading" === b.status ? Xm() : {
+  let I = useMemo(() => "loaded" === b.status ? createLoadedState(b.data?.libraries) : "loading" === b.status ? createLoadingState() : {
     status: "disabled",
     errors: null,
     data: null

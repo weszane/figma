@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { ButtonPrimitive } from "../905/632989";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 let l = {
   suggestion: {
     ...textDisplayConfig.textBodyMedium,
@@ -78,7 +78,7 @@ export function $$o0({
   disabled: n
 }) {
   return jsx(ButtonPrimitive, {
-    ...Ay.props(l.suggestion, n ? l.disabled : l.enabled),
+    ...stylex.props(l.suggestion, n ? l.disabled : l.enabled),
     onClick: t,
     disabled: n,
     children: e

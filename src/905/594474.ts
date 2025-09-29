@@ -138,7 +138,7 @@ import { n as _$$n } from "../905/341791";
 import { t as _$$t4 } from "../905/431558";
 import { w as _$$w3 } from "../905/893785";
 import { deepClone } from "../905/284190";
-import { J as _$$J6 } from "../905/931050";
+import { useAsyncWithReset } from "../905/931050";
 import { APILoadingStatus } from "../905/520829";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { i as _$$i2 } from "../905/810360";
@@ -2633,7 +2633,7 @@ function iM({
   }(e.fieldStates.icon);
   let O = _$$n(e.fieldStates.carouselMedia);
   let L = function (e, t) {
-    let i = _$$J6(async () => t ? await t : Promise.resolve(void 0), [t]);
+    let i = useAsyncWithReset(async () => t ? await t : Promise.resolve(void 0), [t]);
     let n = useRef(void 0);
     useEffect(() => {
       let {
@@ -2702,7 +2702,7 @@ function iM({
       trackEvent: _trackEvent2
     } = useTracking();
     let o = _$$H(_trackEvent2);
-    let l = _$$J6(async () => await e.deps.dataSecurityPromise, [e.deps.dataSecurityPromise]);
+    let l = useAsyncWithReset(async () => await e.deps.dataSecurityPromise, [e.deps.dataSecurityPromise]);
     let d = l.status === APILoadingStatus.SUCCESS ? l.value.existingStatus : null;
     let c = l.status === APILoadingStatus.SUCCESS ? l.value.securityForm : void 0;
     let u = useCallback(() => {

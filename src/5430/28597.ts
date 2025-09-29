@@ -46,7 +46,7 @@ import { nh } from "../figma_app/707943";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { zi, iL } from "../905/824449";
 import ed from "../svg/56418";
-import { Ay as _$$Ay, xk } from "@stylexjs/stylex";
+import { stylex, props } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { isValidEmail } from "../figma_app/416935";
 import { h1 } from "../905/986103";
@@ -602,7 +602,7 @@ function ey({
   spacing: e = "tall"
 }) {
   return jsx("hr", {
-    ..._$$Ay.props(ef.sectionBreak, ef[e])
+    ...stylex.props(ef.sectionBreak, ef[e])
   });
 }
 let eI = _$$G;
@@ -1177,7 +1177,7 @@ function tb({
     }) : jsxs("div", {
       className: "xh8yej3 x5yr21d",
       children: [createElement("iframe", {
-        ...xk(tv.iframe, !a && !c && tv.iframeLoaded),
+        ...props(tv.iframe, !a && !c && tv.iframeLoaded),
         key: m,
         ref: p,
         allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",

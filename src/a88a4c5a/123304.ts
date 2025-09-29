@@ -1,4 +1,4 @@
-import { Ay, xk } from '@stylexjs/stylex';
+import { stylex, props } from '@stylexjs/stylex';
 import lr from 'classnames';
 import { noop } from 'lodash-es';
 import { Fragment as _$$Fragment, createContext, createElement, forwardRef, memo, Suspense, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -632,7 +632,7 @@ function W({
   }, [isOpen]);
   return jsx(Fragment, {
     children: jsxs('button', {
-      ...Ay.props(G.entrypointButton),
+      ...stylex.props(G.entrypointButton),
       'onMouseOver': () => {
         t(!0);
       },
@@ -656,12 +656,12 @@ function W({
       'data-fullscreen-intercept': !0,
       'data-testid': 'ai-assistant-canvas-entrypoint-button',
       'children': [jsx('div', {
-        ...Ay.props(G.sparkleWrapper),
+        ...stylex.props(G.sparkleWrapper),
         children: jsx(q, {
           isHovered: e || isOpen
         })
       }), jsx('div', {
-        ...Ay.props(G.buttonBackgroundCircle(e, isOpen))
+        ...stylex.props(G.buttonBackgroundCircle(e, isOpen))
       })]
     })
   });
@@ -669,7 +669,7 @@ function W({
 function K() {
   let [e, t] = useState(!1);
   return jsx('div', {
-    ...Ay.props(G.entrypointContainer),
+    ...stylex.props(G.entrypointContainer),
     children: jsx(W, {
       isHovered: e,
       setIsHovered: t
@@ -1694,7 +1694,7 @@ function t4() {
           }), jsxs('div', {
             className: 'x78zum5 xdt5ytf xg2d0mh',
             children: [jsx('div', {
-              ...xk(t1.title),
+              ...props(t1.title),
               children: renderI18nText('upsell.figma_make_upsell_in_design_editor.title')
             }), jsx('div', {
               children: renderI18nText('upsell.figma_make_upsell_in_design_editor.description')
@@ -1705,7 +1705,7 @@ function t4() {
               trackingDescriptor: UpgradeAction.FIGMA_MAKE_UPSELL_ASSET
             },
             'onClick': y,
-            ...xk(t1.assetContainer, d ? t1.assetBackgroundDark : t1.assetBackgroundLight),
+            ...props(t1.assetContainer, d ? t1.assetBackgroundDark : t1.assetBackgroundLight),
             'children': jsx('video', {
               'className': 'x5yr21d xl1xv1r',
               'src': u,
@@ -1723,7 +1723,7 @@ function t4() {
                 trackingDescriptor: UpgradeAction.TRY_IT_NOW
               },
               'onClick': y,
-              ...xk(t1.button),
+              ...props(t1.button),
               'children': renderI18nText('upsell.figma_make_upsell_in_design_editor.button_title')
             })
           })]
@@ -2972,10 +2972,10 @@ function nt() {
     'children': [jsxs('div', {
       className: 'x78zum5 xdt5ytf x6s0dn4 x2b8uid',
       children: [jsx('span', {
-        ...Ay.props(na.landingPageHeader),
+        ...stylex.props(na.landingPageHeader),
         children: renderI18nText('design_linter.landing_page.title')
       }), jsx('span', {
-        ...Ay.props(na.landingPageSubheader),
+        ...stylex.props(na.landingPageSubheader),
         children: renderI18nText('design_linter.landing_page.subheader')
       })]
     }), jsxs('div', {
@@ -3059,7 +3059,7 @@ function ni() {
         style: nu
       })
     }), jsx('div', {
-      ...Ay.props(na.layerCountText),
+      ...stylex.props(na.layerCountText),
       children: d
     })]
   });
@@ -3071,10 +3071,10 @@ function nr() {
     'children': [jsxs('div', {
       className: 'x78zum5 xdt5ytf x6s0dn4 x2b8uid x1ib1h6n',
       children: [jsx('span', {
-        ...Ay.props(na.landingPageHeader),
+        ...stylex.props(na.landingPageHeader),
         children: renderI18nText('design_linter.landing_page.no_nodes_selected.title')
       }), jsx('span', {
-        ...Ay.props(na.landingPageSubheader),
+        ...stylex.props(na.landingPageSubheader),
         children: renderI18nText('design_linter.landing_page.no_nodes_selected.subheader')
       })]
     }), jsx('div', {
@@ -3090,10 +3090,10 @@ function ns() {
     'children': [jsxs('div', {
       className: 'x78zum5 xdt5ytf x6s0dn4 x2b8uid x1ib1h6n',
       children: [jsx('span', {
-        ...Ay.props(na.landingPageHeader),
+        ...stylex.props(na.landingPageHeader),
         children: renderI18nText('design_linter.landing_page.layer_limit_exceeded.title')
       }), jsx('span', {
-        ...Ay.props(na.landingPageSubheader),
+        ...stylex.props(na.landingPageSubheader),
         children: renderI18nText('design_linter.landing_page.layer_limit_exceeded.subheader')
       })]
     }), jsx('div', {
@@ -3112,10 +3112,10 @@ function no({
     children: [e, jsxs('div', {
       className: 'x78zum5 xdt5ytf xl56j7k x1cy8zhl x5mp9sv',
       children: [jsx('div', {
-        ...Ay.props(na.featureHeader),
+        ...stylex.props(na.featureHeader),
         children: t
       }), jsx('div', {
-        ...Ay.props(na.featureSubheader),
+        ...stylex.props(na.featureSubheader),
         children: l
       })]
     })]
@@ -3172,7 +3172,7 @@ function nb() {
     isLibraryModalShown || onToggleLibraryModal();
   }, [isLibraryModalShown, onToggleLibraryModal]);
   return jsxs('div', {
-    ...Ay.props(nj.box),
+    ...stylex.props(nj.box),
     children: [renderI18nText('design_linter.library_selector.no_libraries'), jsx(Button, {
       onClick: l,
       children: renderI18nText('design_linter.library_selector.manage_libraries')
@@ -3387,7 +3387,7 @@ function nG({
         thumbnailUrl: url,
         name: l.name,
         headerComponent: jsx('span', {
-          ...Ay.props(nX.listItemHeader),
+          ...stylex.props(nX.listItemHeader),
           children: l.name
         }),
         subheader: l.team?.name ?? getI18nString('fullscreen.filename_view.drafts'),
@@ -3434,10 +3434,10 @@ function nq({
     }), jsxs('div', {
       className: 'x98rzlu x78zum5 xdt5ytf',
       children: [jsx('span', {
-        ...Ay.props(nX.listItemHeader),
+        ...stylex.props(nX.listItemHeader),
         children: i
       }), l && jsx(_$$G, {
-        ...Ay.props(nX.listItemSubheader),
+        ...stylex.props(nX.listItemSubheader),
         text: l
       })]
     })]
@@ -3469,7 +3469,7 @@ function nK({
   setLibrarySubscribeCallback: o
 }) {
   return jsxs('div', {
-    ...Ay.props(nX.listItem, l && nX.selectedListItem),
+    ...stylex.props(nX.listItem, l && nX.selectedListItem),
     children: [jsx(Label, {
       className: 'xgqk73l',
       htmlFor: e,
@@ -3703,7 +3703,7 @@ function nJ({
 }) {
   if (l === _$$oV.ERROR || i === _$$oV.ERROR) {
     return jsx('div', {
-      ...Ay.props(n1.errorState),
+      ...stylex.props(n1.errorState),
       children: renderI18nText('design_linter.library_selector.error')
     });
   }
@@ -3727,10 +3727,10 @@ function n0() {
     children: jsxs('div', {
       className: 'x7hzu26 x1ef8nbk x1nfngrj x78zum5 xdt5ytf',
       children: [jsx('div', {
-        ...Ay.props(n1.instructions),
+        ...stylex.props(n1.instructions),
         children: renderI18nText('design_linter.library_selector.instructions')
       }), jsx('div', {
-        ...Ay.props(n1.headerText),
+        ...stylex.props(n1.headerText),
         children: renderI18nText('design_linter.library_selector.header')
       })]
     })
@@ -4762,7 +4762,7 @@ function i0({
       children: [jsxs('div', {
         className: 'x87ps6o',
         children: [jsx('div', {
-          ...Ay.props(i5.header),
+          ...stylex.props(i5.header),
           children: getI18nString('design_linter.library_confirmation_view.header')
         }), jsx('div', {
           children: getI18nString('design_linter.library_confirmation_view.instructions')
@@ -4807,7 +4807,7 @@ function i1({
   return jsxs('div', {
     className: 'xdyg6lv xiqviz9 x78zum5 x6s0dn4 x1qughib',
     children: [jsx('div', {
-      ...Ay.props(i5.numLibraries),
+      ...stylex.props(i5.numLibraries),
       children: t ? getI18nString('design_linter.library_confirmation_view.num_libraries', {
         numLibraries: e.length
       }) : jsx(_$$N2, {
@@ -4989,7 +4989,7 @@ let ri = memo(() => {
   return jsxs('div', {
     className: 'x78zum5 xdt5ytf x6s0dn4 xl56j7k x1nfngrj x98rzlu',
     children: [jsx(_$$k2, {}), jsx('span', {
-      ...Ay.props(ra.loadingText),
+      ...stylex.props(ra.loadingText),
       children: renderI18nText('design_linter.modal.loading')
     }), getFeatureFlags().aip_flower_garden_debug && jsx(iX, {})]
   });
@@ -5005,7 +5005,7 @@ let rr = forwardRef((e, t) => {
   return jsxs('div', {
     'data-testid': 'design-linter-groups-list',
     'children': [jsx('div', {
-      ...Ay.props(ra.description),
+      ...stylex.props(ra.description),
       children: getI18nString('design_linter.modal.description')
     }), jsx('div', {
       className: 'x1n2onr6',
@@ -5050,7 +5050,7 @@ let rs = memo(({
     'onClick': u,
     'key': c,
     'data-index': t.index,
-    ...Ay.props(ra.groupRow, d && ra.groupRowHover),
+    ...stylex.props(ra.groupRow, d && ra.groupRowHover),
     'style': {
       height: `${t.size}px`,
       transform: `translateY(${t.start}px)`
@@ -5063,14 +5063,14 @@ let rs = memo(({
     }), jsx('div', {
       className: 'xrybvsa x78zum5 xdt5ytf',
       children: jsx('div', {
-        ...Ay.props(ra.groupTitle),
+        ...stylex.props(ra.groupTitle),
         children: getI18nString('design_linter.visual_group_row.title', {
           count: e?.rootNodeIdToViolatingNodeIdSet.size
         })
       })
     })]
   }), jsx('div', {
-    ...Ay.props(ra.chevron, d && ra.showChevron),
+    ...stylex.props(ra.chevron, d && ra.showChevron),
     children: jsx(_$$e5, {})
   })) : null;
 });
@@ -5097,7 +5097,7 @@ let ro = memo(({
   let o = type === i9.COLOR;
   let a = type === i9.IMAGE;
   return i ? jsx('div', {
-    ...Ay.props(ra.thumbnailContainer, a && ra.backgroundImageContainer),
+    ...stylex.props(ra.thumbnailContainer, a && ra.backgroundImageContainer),
     style: {
       ...(o && {
         backgroundColor: bg
@@ -5699,7 +5699,7 @@ function rB({
     [`border${_ ? 'Bottom' : 'Top'}${y ? 'Right' : 'Left'}Radius`]: i
   };
   return jsx('div', {
-    ...Ay.props(rz.blueBorderHover),
+    ...stylex.props(rz.blueBorderHover),
     style: L
   });
 }
@@ -5742,7 +5742,7 @@ function rF({
       let o = p.x - r;
       let a = isFlipped ? p.y + p.height - s : p.y - s;
       C.push(createElement('div', {
-        ...Ay.props(rz.pinkBgHover),
+        ...stylex.props(rz.pinkBgHover),
         key: `hover-grid-${t}`,
         style: {
           transformOrigin: `${o}px ${a}px`,
@@ -5760,7 +5760,7 @@ function rF({
       let a = p.x - s;
       let d = isFlipped ? p.y + p.height - o : p.y - o;
       C.push(createElement('div', {
-        ...Ay.props(rz.pinkBgHover),
+        ...stylex.props(rz.pinkBgHover),
         key: `hover-grid-${t}`,
         style: {
           transformOrigin: `${a}px ${d}px`,
@@ -5851,7 +5851,7 @@ function rP({
   let C = g.y - translateY;
   let k = `translate(${translateX}px, ${translateY}px) rotate(${normalizedRotation}deg)${isFlipped ? ' scaleY(-1)' : ''}`;
   return jsx('div', {
-    ...Ay.props(rz.pinkBgHover),
+    ...stylex.props(rz.pinkBgHover),
     style: {
       transformOrigin: `${v}px ${C}px`,
       transform: k,
@@ -5903,7 +5903,7 @@ function rV({
       let r = c.x - e;
       let s = isFlipped ? c.y + c.height - n : c.y - n;
       C.push(createElement('div', {
-        ...Ay.props(rz.pinkBgHover),
+        ...stylex.props(rz.pinkBgHover),
         key: l,
         style: {
           transformOrigin: `${r}px ${s}px`,
@@ -5918,7 +5918,7 @@ function rV({
       let r = c.x - n;
       let s = isFlipped ? c.y + c.height - e : c.y - e;
       C.push(createElement('div', {
-        ...Ay.props(rz.pinkBgHover),
+        ...stylex.props(rz.pinkBgHover),
         key: l,
         style: {
           transformOrigin: `${r}px ${s}px`,
@@ -6062,7 +6062,7 @@ function rW({
   let p = transformedPoints.topLeft.y - c;
   let g = `translate(${u}px, ${c}px) rotate(${normalizedRotation}deg)${isFlipped ? ' scaleY(-1)' : ''}`;
   return jsx('div', {
-    ...Ay.props(rz.blueBorderHover),
+    ...stylex.props(rz.blueBorderHover),
     style: {
       transformOrigin: `${x}px ${p}px`,
       transform: g,
@@ -6217,7 +6217,7 @@ function r0({
   return jsx(EventShield, {
     eventListeners: ['onPointerDown'],
     children: jsxs('div', {
-      ...xk(r8.previewContainer(i?.x, i?.y)),
+      ...props(r8.previewContainer(i?.x, i?.y)),
       children: [jsx(r7, {}), jsxs(qW, {
         zoomPercentageOptions: rY,
         zoomOnMousePointer: !0,
@@ -6388,7 +6388,7 @@ function r4({
   let o = type === i9.COLOR;
   let a = type === i9.IMAGE;
   return jsxs('div', {
-    ...xk(r8.comparableContainer, t === 'current' && r8.currentContainer, t === 'suggested' && r8.suggestedContainer, a && r8.backgroundImageContainer),
+    ...props(r8.comparableContainer, t === 'current' && r8.currentContainer, t === 'suggested' && r8.suggestedContainer, a && r8.backgroundImageContainer),
     style: {
       ...(o && {
         backgroundColor: bg
@@ -6400,7 +6400,7 @@ function r4({
     children: [jsx('div', {
       className: 'xuuh30 x10l6tqk x1ey2m1c x1vjfegm x87ps6o x1y1aw1k xwib8y2 x1nrll8i',
       children: jsx('span', {
-        ...xk(r8.comparableTitle),
+        ...props(r8.comparableTitle),
         children: e
       })
     }), l]
@@ -6412,7 +6412,7 @@ let r7 = memo(() => {
   return jsx('div', {
     className: 'x78zum5 xdt5ytf x1yjdb4r xso031l x1y0btm7 x7z60cl x1vp34bk xl56j7k xb3r6kr',
     children: jsx('div', {
-      ...xk(r8.previewContent),
+      ...props(r8.previewContent),
       children: t ? null : jsx('span', {
         children: renderI18nText('design_linter.preview_header.title', {
           count: e
@@ -6874,9 +6874,9 @@ function sL({
   let x = c || i && r === 'ignore' && t;
   let p = (c || i && r === 'apply' && t) && !u;
   return jsx('div', {
-    ...Ay.props(sD.violationRowContainer, d),
+    ...stylex.props(sD.violationRowContainer, d),
     children: jsxs('div', {
-      ...Ay.props(sD.violationRowContent, (() => {
+      ...stylex.props(sD.violationRowContent, (() => {
         if (!t) return null;
         switch (l) {
           case 'first':
@@ -6921,9 +6921,9 @@ function sT({
     applyFixToRow: e,
     hasFix: l === 'loaded',
     children: [jsxs('div', {
-      ...Ay.props(sD.currentValueContainer),
+      ...stylex.props(sD.currentValueContainer),
       children: [jsx('div', {
-        ...Ay.props(sD.currentValueContent, i && sD.colorTextTertiary),
+        ...stylex.props(sD.currentValueContent, i && sD.colorTextTertiary),
         children: t.currentValue
       }), jsx('div', {
         className: 'x78zum5 x6s0dn4 xl56j7k xvy4d1p xxk0z11',
@@ -6935,7 +6935,7 @@ function sT({
       fixStatus: l,
       children: jsx(Fragment, {
         children: jsx('div', {
-          ...Ay.props(sD.suggestedValueSizer, r && !a && sD.hoveredSuggestedValueSizer, r && a && sD.blockActionButtonHoveredSuggestedValueSizer),
+          ...stylex.props(sD.suggestedValueSizer, r && !a && sD.hoveredSuggestedValueSizer, r && a && sD.blockActionButtonHoveredSuggestedValueSizer),
           children: t.suggestedValue
         })
       })
@@ -7062,7 +7062,7 @@ let sA = forwardRef(({
     ref: l,
     onClick: e,
     children: e => jsx('div', {
-      ...Ay.props(sD.noSuggestionFound(e)),
+      ...stylex.props(sD.noSuggestionFound(e)),
       children: jsx(sM, {
         type: t
       })
@@ -7089,14 +7089,14 @@ function sO({
 }) {
   let i = void 0 !== t;
   return jsxs('span', {
-    ...Ay.props(sD.selectedSuggestion, i && sD.selectedSuggestionWithValue),
+    ...stylex.props(sD.selectedSuggestion, i && sD.selectedSuggestionWithValue),
     'data-tooltip': e,
     'data-tooltip-type': KindEnum.TEXT,
     'children': [jsx('div', {
-      ...Ay.props(sD.labelText, l && sD.colorTextTertiary),
+      ...stylex.props(sD.labelText, l && sD.colorTextTertiary),
       children: e
     }), i && jsx('div', {
-      ...Ay.props(sD.valueText, l && sD.colorTextTertiary),
+      ...stylex.props(sD.valueText, l && sD.colorTextTertiary),
       children: t
     })]
   });
@@ -7113,7 +7113,7 @@ let sz = forwardRef(({
       s(e);
       r && (typeof r == 'function' ? r(e) : r.current = e);
     },
-    ...Ay.props(sD.suggestedValueContent, o && sD.hoveredSuggestedValueContent),
+    ...stylex.props(sD.suggestedValueContent, o && sD.hoveredSuggestedValueContent),
     children: jsx(ButtonPrimitive, {
       'onClick': t,
       'className': 'x78zum5 x6s0dn4 xjbqb8w xh8yej3 x1l2q4c8 x98rzlu',
@@ -7139,7 +7139,7 @@ function sB({
     'children': [jsxs('div', {
       className: 'x78zum5 x6s0dn4 x10w6t97 x1qughib xnm25rq xnuq7ks',
       children: [jsx('div', {
-        ...Ay.props(sD.titleContent),
+        ...stylex.props(sD.titleContent),
         children: t
       }), jsx('div', {
         onMouseLeave: () => {
@@ -7212,7 +7212,7 @@ function sF({
       }) : jsx(sx, {})
     })
   }) : jsxs('div', {
-    ...Ay.props(sD.blockActionButton, sD.blockActionButtonText, sD.blockActionButtonLoading, sD.blockActionButtonDisabled),
+    ...stylex.props(sD.blockActionButton, sD.blockActionButtonText, sD.blockActionButtonLoading, sD.blockActionButtonDisabled),
     'data-testid': 'design-linter-loading-action-button',
     'children': [jsx(_$$k2, {
       size: 'sm'
@@ -7224,7 +7224,7 @@ function s$({
   isDisabled: t
 }) {
   return jsx('div', {
-    ...Ay.props(sD.suggestedValueIconContainer, t && sD.suggestedValueIconDisabled),
+    ...stylex.props(sD.suggestedValueIconContainer, t && sD.suggestedValueIconDisabled),
     children: e
   });
 }
@@ -7241,7 +7241,7 @@ function sP({
     onMouseLeave: () => a(!1),
     children: [t && jsxs(ButtonPrimitive, {
       'onClick': () => s(e => !e),
-      ...Ay.props(sD.rowListHeader),
+      ...stylex.props(sD.rowListHeader),
       'aria-label': r ? getI18nString('design_linter.suggestion_block.expand_list_aria') : getI18nString('design_linter.suggestion_block.collapse_list_aria'),
       'children': [jsx('div', {
         className: 'xmauxvm x15kz4h8 x1hshjfz x78zum5 x6s0dn4 xl56j7k',
@@ -7771,10 +7771,10 @@ function sQ({
       header: jsxs('div', {
         className: 'x87ps6o',
         children: [jsx('div', {
-          ...Ay.props(s9.header),
+          ...stylex.props(s9.header),
           children: getI18nString('design_linter.suggestion_block_headers.unexpected_assets')
         }), jsx('div', {
-          ...Ay.props(s9.fromLibrarySubheader),
+          ...stylex.props(s9.fromLibrarySubheader),
           children: renderI18nText('design_linter.suggestion_block.assets_outside_selected_libraries', {
             name: jsx(sJ, {
               libraryKey: e
@@ -8690,15 +8690,15 @@ function oa({
     children: jsxs('div', {
       className: 'x78zum5 xdt5ytf x1nfngrj x12sbs06 xf18ygs',
       children: [jsx('div', {
-        ...Ay.props(od.subtypeLabel),
+        ...stylex.props(od.subtypeLabel),
         children: l
       }), jsx('div', {
-        ...Ay.props(od.explanationText),
+        ...stylex.props(od.explanationText),
         children: d.explanation
       }), jsxs('div', {
         className: 'x78zum5 x1nfngrj x6s0dn4',
         children: [jsx(ButtonPrimitive, {
-          ...Ay.props(od.fixButton),
+          ...stylex.props(od.fixButton),
           'onClick': applyFixToBlock,
           'disabled': m,
           'data-tooltip': getI18nString('design_linter.suggestion_block.apply_tooltip', {
@@ -8707,7 +8707,7 @@ function oa({
           'data-tooltip-type': KindEnum.TEXT,
           'children': isApplying ? 'Applying...' : 'Apply Fix'
         }), jsx(ButtonPrimitive, {
-          ...Ay.props(od.ignoreButton),
+          ...stylex.props(od.ignoreButton),
           'onClick': p,
           'disabled': m,
           'data-tooltip': getI18nString('design_linter.suggestion_block.ignore_tooltip', {
@@ -9252,7 +9252,7 @@ function oj({
     return !!aaPass;
   }, [e, t, l]);
   return jsxs('div', {
-    ...Ay.props(ov.contrastCheck, r ? ov.passing : ov.failing),
+    ...stylex.props(ov.contrastCheck, r ? ov.passing : ov.failing),
     children: [r ? jsx(_$$l7, {}) : jsx(_$$X2, {}), getI18nString('design_linter.suggestion_block.text_background_contrast_aa.aaStandard')]
   });
 }
@@ -9573,7 +9573,7 @@ let oR = memo(() => {
     t(!1);
   }, []));
   return (fR(), r || e) ? jsxs('div', {
-    ...xk(oA.noViolations),
+    ...props(oA.noViolations),
     children: [renderI18nText('design_linter.modal.group_suggestions_completed'), hasNextGroup ? jsx(Button, {
       'variant': 'primary',
       'data-testid': ow,
@@ -9740,7 +9740,7 @@ let oM = memo(() => {
     }, [l, t, e]);
   }(e), _9(), p6(), l === FR.SELECTED_VISUAL_GROUP_VIEW) ? jsx(oN, {}) : t ? jsx('div', {
     'data-testid': 'design-linter-container-no-violations',
-    ...xk(oO.noViolationsContainer),
+    ...props(oO.noViolationsContainer),
     'children': jsxs('div', {
       className: 'x78zum5 xl56j7k x87ps6o xdt5ytf x6s0dn4',
       children: [jsx('span', {
@@ -10484,7 +10484,7 @@ function dh({
   return jsxs('div', {
     className: 'x1kzcg16 xlup9mm x1yjdb4r x1n5zjp5 x78zum5 x1nfngrj xkh2ocl',
     children: [jsx(DialogLabel, {
-      ...Ay.props(dx.nameInfoText),
+      ...stylex.props(dx.nameInfoText),
       htmlAttributes: {
         'data-tooltip': e,
         'data-tooltip-type': 'text'
@@ -10733,7 +10733,7 @@ function d_({
   let C = useMemo(() => {
     let e = o === 2;
     return jsx('div', {
-      ...Ay.props(dx.previewWrapper, !e && dx.previewWrapperHidden),
+      ...stylex.props(dx.previewWrapper, !e && dx.previewWrapperHidden),
       children: jsx(_$$m4, {
         chatNodeId: p ?? null,
         codeSelectionToRender: v,

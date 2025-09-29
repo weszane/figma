@@ -3,7 +3,7 @@ import s from "classnames";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { RadioPrimitiveRoot } from "../905/22449";
 import { RadioPrimitiveOption } from "../905/34525";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { YX } from "../905/98947";
 import { h6, P2, F5, eP, wO, iy } from "../7021/762792";
@@ -62,9 +62,9 @@ function _(e) {
       t.has(r) ? t.$$delete(r) : (e.isSingleSelect && t.clear(), t.add(r));
       e.onItemsChange(t);
     },
-    ...xk(!r && x.container),
+    ...props(!r && x.container),
     className: r ? void 0 : e.containerClassName,
-    ...xk(r && h.optionsContainer),
+    ...props(r && h.optionsContainer),
     value: Array.from(e.selectedOptions)?.[0],
     children: [Array.from(e.options).map(s => {
       let l = e.selectedOptions?.has(s);
@@ -75,7 +75,7 @@ function _(e) {
       });
       return jsxs("label", {
         className: r ? void 0 : c,
-        ...xk(r && h.optionsAnswerButton, r && l && h.optionsAnswerButtonSelected, r && n && h.optionsAnswerButtonDimmed),
+        ...props(r && h.optionsAnswerButton, r && l && h.optionsAnswerButtonSelected, r && n && h.optionsAnswerButtonDimmed),
         "data-testid": `signal-option-${s}`,
         htmlFor: s,
         children: [jsx(RadioPrimitiveOption, {

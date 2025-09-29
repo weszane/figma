@@ -29,13 +29,13 @@ import { filePutAction } from "../figma_app/78808";
 import { setNeedsUpgrade, newFileLoaded, setProgressBarState, setLeftPanelTab, showFileCreationFailureBanner } from "../figma_app/91703";
 import { handleFileLibrarySubscription } from "../figma_app/430563";
 import { showModalHandler } from "../905/156213";
-import { hZ } from "../figma_app/990058";
+import { setUserInOrgs } from "../figma_app/990058";
 import { setTeamOptimistThunk } from "../figma_app/240735";
 import { putTeamUser } from "../905/584989";
 import { $W } from "../figma_app/681244";
 import { sessionIdAtom, orgTemplatePickerViewAtom, figjamCreateSlidesOutlineAtom } from "../figma_app/223206";
 import { ky } from "../figma_app/214121";
-import { LQ } from "../figma_app/741211";
+import { canUseCustomTemplates } from "../figma_app/741211";
 import { trackFileEvent, trackFileObjEvent } from "../figma_app/314264";
 import { getAutosaveManagerInstance, getAutosaveFileInfo, setupAutosaveManager, destroyAutosaveManager, checkFileHasUnsyncedAutosave } from "../figma_app/840917";
 import { fullscreenValue } from "../figma_app/455680";
@@ -140,7 +140,7 @@ function ex(e, t, i, n) {
   e(filePutAction({
     file: r
   }));
-  s && e(hZ({
+  s && e(setUserInOrgs({
     orgUsers: [s],
     orgId: s.org_id
   }));
@@ -325,7 +325,7 @@ export async function $$ew5(e, t, i, n) {
     teamUsers: [P],
     teamId: f.team_id
   }));
-  let O = !!(c.is_team_template && LQ(r));
+  let O = !!(c.is_team_template && canUseCustomTemplates(r));
   desktopAPIInstance?.setIsLibrary(!!c.last_published_at);
   desktopAPIInstance?.setIsTeamTemplate(!!O);
 }

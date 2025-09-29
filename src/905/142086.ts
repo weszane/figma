@@ -75,7 +75,7 @@ import { TrackingProvider } from '../figma_app/831799';
 import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
 import { ds, sb, t$, TF } from '../figma_app/863319';
 import { Badge, BadgeColor } from '../figma_app/919079';
-import { $V } from '../figma_app/990058';
+import { requestOrgAccountTypeAction } from '../figma_app/990058';
 import { useDebounce } from 'use-debounce';
 var X = (e => (e.BASE_TAB = 'base_tab', e.ALL_TEAM = 'all_team', e.STARRED_TEAM = 'starred_team', e))(X || {});
 var Q = (e => (e.SUGGESTED = 'Suggested', e.STARRED = 'Starred', e.ALL = 'All', e))(Q || {});
@@ -1034,7 +1034,7 @@ let eR = registerModal(e => {
                   folderId: eS?.id ?? null,
                   onRequestWithProvisionalAccess: () => {},
                   getIsEligibleForProvisionalAccess
-                })({}) : t($V({
+                })({}) : t(requestOrgAccountTypeAction({
                   orgId: e,
                   entryPoint: UISection.FileMoveUpsell,
                   licenseType,

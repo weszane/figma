@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { ButtonPrimitive } from "../905/632989";
 import { IconButton } from "../905/443068";
 import { A } from "../905/251970";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import d from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { SvgComponent } from "../905/714743";
@@ -516,7 +516,7 @@ export function $$S0({
       }), jsx("div", {
         className: "browse_explore_category_top_bar--categoryNameContainer--b--X4",
         children: jsx("div", {
-          ...Ay.props(j.categoryName, o ?? j.defaultTitleFontSize),
+          ...stylex.props(j.categoryName, o ?? j.defaultTitleFontSize),
           children: t
         })
       })]

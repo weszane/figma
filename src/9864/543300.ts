@@ -84,7 +84,7 @@ import { B as _$$B } from "../905/524020";
 import { i as _$$i2 } from "../905/46262";
 import { k as _$$k3 } from "../905/443820";
 import { setupThemeContext } from "../905/614223";
-import { xk, Ay as _$$Ay2 } from "@stylexjs/stylex";
+import { props, stylex } from "@stylexjs/stylex";
 import { SvgComponent } from "../905/714743";
 import { A as _$$A } from "../svg/546647";
 import { A as _$$A2 } from "../svg/831814";
@@ -120,7 +120,7 @@ import { useTheme } from "../905/289770";
 import { ArrowPosition } from "../905/748636";
 import { NJ } from "../figma_app/419216";
 import { L as _$$L } from "../9864/861465";
-import { f as _$$f4 } from "../905/931050";
+import { useAsyncEffect } from "../905/931050";
 import { F0 } from "../905/178707";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { jx, wZ } from "../figma_app/869776";
@@ -596,7 +596,7 @@ function eX({
     brand: i,
     children: jsx(_$$e2, {
       ...a,
-      ...xk(eQ.button, eQ[d], n && eQ.mobile, "primary" === e && (r || t) && eQ.disabled),
+      ...props(eQ.button, eQ[d], n && eQ.mobile, "primary" === e && (r || t) && eQ.disabled),
       disabled: r || t,
       RUMEnabled: !0,
       children: t ? jsx("div", {
@@ -1744,7 +1744,7 @@ function rM({
   highlighted: e
 }) {
   return jsx("div", {
-    ...xk(e ? rR.verticalDividerSelected : rR.verticalDivider)
+    ...props(e ? rR.verticalDividerSelected : rR.verticalDivider)
   });
 }
 function rP({
@@ -1778,7 +1778,7 @@ function rP({
       className: "x78zum5",
       children: [jsx(rT, {
         PlanCardPrices: () => jsx("p", {
-          ...xk(rR.textBodyMedium),
+          ...props(rR.textBodyMedium),
           children: renderI18nText("nux.campfire.starter.free_price")
         }),
         PlanFeatures: () => jsx(rb, {
@@ -1839,7 +1839,7 @@ function rA() {
     children: [jsx(Spacing, {
       multiple: 2
     }), jsx("p", {
-      ...xk(rR.textBodySmall),
+      ...props(rR.textBodySmall),
       children: renderI18nText("nux.edu.free_for_verified", {
         verifiedLink: jsx(TrackedLink, {
           href: "/education/apply",
@@ -2395,7 +2395,7 @@ function te() {
     }), jsx("div", {
       className: "x78zum5 xl56j7k",
       children: jsxs("div", {
-        ..._$$Ay2.props(tr.cardGrid, L && tr.cardGridRecommended),
+        ...stylex.props(tr.cardGrid, L && tr.cardGridRecommended),
         children: [jsx(r4, {
           title: getI18nString("seat_selection_in_nux.view"),
           seatTestId: r8.VIEW_OPTION,
@@ -2776,7 +2776,7 @@ function tE(e) {
   let [i, l] = useAtomValueAndSetter($l);
   let a = getIsAndroidOrIphoneNotFigmaMobile();
   let c = hasTeamPaidAccess(e.team) ? AccessLevelEnum.VIEWER : AccessLevelEnum.EDITOR;
-  let x = _$$f4(() => e.team ? wZ(e.team.id, c) : Promise.resolve(null), [e.team, c]);
+  let x = useAsyncEffect(() => e.team ? wZ(e.team.id, c) : Promise.resolve(null), [e.team, c]);
   let h = (e, t) => {
     let s = [...i];
     let o = [...i];
@@ -3036,25 +3036,25 @@ function tR(e) {
       multiple: 3
     }), jsx("div", {
       children: t ? jsx("div", {
-        ..._$$Ay2.props(tT.modalOptInDesccription),
+        ...stylex.props(tT.modalOptInDesccription),
         children: u
       }) : jsxs(Fragment, {
         children: [jsx(Checkbox, {
           checked: i,
           onChange: e => l(e),
           label: jsx(Label, {
-            ..._$$Ay2.props(tT.modalCheckboxText),
+            ...stylex.props(tT.modalCheckboxText),
             children: x
           })
         }), jsx("div", {
-          ..._$$Ay2.props(tT.modalOptInDesccription),
+          ...stylex.props(tT.modalOptInDesccription),
           children: h
         })]
       })
     })]
   });
   let _ = jsx("span", {
-    ..._$$Ay2.props(tT.standardDisclaimer),
+    ...stylex.props(tT.standardDisclaimer),
     children: renderI18nText("new_user_experience.what_is_your_name.tos_agreement", {
       tos_link: jsx(LinkPrimitive, {
         href: "/legal/tos",
@@ -3069,7 +3069,7 @@ function tR(e) {
       multiple: e.isModalNux ? 3 : e.isMobileViewport ? t ? 2 : 3 : 6
     }), jsx("div", {
       children: t ? jsxs("div", {
-        ..._$$Ay2.props(tT.standardDisclaimer, e.isMobileViewport && tT.textCenter),
+        ...stylex.props(tT.standardDisclaimer, e.isMobileViewport && tT.textCenter),
         children: [c && _, jsx(Spacing, {
           multiple: 1
         }), u]
@@ -3079,13 +3079,13 @@ function tR(e) {
           defaultChecked: i,
           onChange: e => l(e),
           label: jsx("span", {
-            ..._$$Ay2.props(tT.checkboxText),
+            ...stylex.props(tT.checkboxText),
             children: x
           })
         }), jsx(Spacing, {
           multiple: 1
         }), jsx("div", {
-          ..._$$Ay2.props(tT.standardDisclaimer, tT.maxWidth400),
+          ...stylex.props(tT.standardDisclaimer, tT.maxWidth400),
           children: h
         }), c && jsxs(Fragment, {
           children: [jsx("hr", {
@@ -3235,7 +3235,7 @@ function tA() {
         getOptionDisplay
       }), e ? jsx("div", {
         className: a ? void 0 : cssBuilderInstance.font12.bRadius5.colorBgSecondary.p12.mt20.if(x, cssBuilderInstance.alignCenter).$,
-        ..._$$Ay2.props(a && tP.disclaimerContainer),
+        ...stylex.props(a && tP.disclaimerContainer),
         children: renderI18nText("new_user_experience.user_onboarding_signals.disclaimer.old_enough_to_consent.v2", {
           tos: jsx(Link, {
             href: getLocalizedPath("/legal/tos/"),
@@ -3818,28 +3818,28 @@ function t7({
       children: jsxs("div", {
         className: "LanguagePickerNew",
         "data-testid": "language-picker",
-        ...xk(t8.languagePicker),
+        ...props(t8.languagePicker),
         children: [jsxs("button", {
-          ...xk(t8.languageButton),
+          ...props(t8.languageButton),
           ...f,
           children: [jsx("div", {
             "data-layer": "Language Icon",
             className: "LanguageIcon",
-            ...xk(t8.languageIcon),
+            ...props(t8.languageIcon),
             children: jsx(t9, {})
           }), jsxs("div", {
             "data-layer": "Language Text Container",
             className: "LanguageTextContainer",
-            ...xk(t8.languageTextContainer),
+            ...props(t8.languageTextContainer),
             children: [jsx("div", {
               "data-layer": "Language Text",
               className: "LanguageText",
-              ...xk(t8.languageText),
+              ...props(t8.languageText),
               children: getI18nResourceKey(t)
             }), jsx("div", {
               "data-layer": "icon.24.chevron.down",
               className: "Icon24ChevronDown",
-              ...xk(t8.icon24ChevronDown),
+              ...props(t8.icon24ChevronDown),
               children: jsx(_$$r3, {})
             })]
           })]
@@ -3847,9 +3847,9 @@ function t7({
           children: _.map(e => jsx(MenuItemComp, {
             onClick: () => g(e),
             children: jsxs("div", {
-              ...xk(t8.menuItem),
+              ...props(t8.menuItem),
               children: [jsx("div", {
-                ...xk(t8.menuItemCheckIcon),
+                ...props(t8.menuItemCheckIcon),
                 children: e === t && jsx(_$$l, {})
               }), getI18nResourceKey(e)]
             })
@@ -4081,7 +4081,7 @@ function ir({
   style: e
 }) {
   return jsx(Qp, {
-    ...xk(e),
+    ...props(e),
     animationType: JR.LIGHT_SHIMMER,
     opacity: 50
   });
@@ -4090,7 +4090,7 @@ function it({
   style: e
 }) {
   return jsx(Wi, {
-    ...xk(e),
+    ...props(e),
     animationType: JR.LIGHT_SHIMMER,
     opacity: 50
   });
@@ -4098,34 +4098,34 @@ function it({
 function ii() {
   return jsx(UI3ConditionalWrapper, {
     children: jsxs("div", {
-      ...xk(ie.parentContainer),
+      ...props(ie.parentContainer),
       children: [jsx("div", {
-        ...xk(ie.leftScrollContainer),
+        ...props(ie.leftScrollContainer),
         children: jsxs("div", {
-          ...xk(ie.skeletonLeftLayout),
+          ...props(ie.skeletonLeftLayout),
           children: [jsxs("div", {
-            ...xk(ie.logoContainer),
+            ...props(ie.logoContainer),
             children: [jsx("div", {
-              ...xk(ie.iconFigmaLogo),
+              ...props(ie.iconFigmaLogo),
               children: jsx(ir, {
                 style: ie.skeletonLogo
               })
             }), jsx("div", {
-              ...xk(ie.skeletonLanguagePickerWrapper),
+              ...props(ie.skeletonLanguagePickerWrapper),
               children: jsx(it, {
                 style: ie.skeletonLanguagePicker
               })
             })]
           }), jsxs("div", {
-            ...xk(ie.skeletonStepContainer),
+            ...props(ie.skeletonStepContainer),
             children: [jsx(ir, {
               style: ie.skeletonQuestionArea
             }), jsxs("div", {
-              ...xk(ie.skeletonBottomBar),
+              ...props(ie.skeletonBottomBar),
               children: [jsx(it, {
                 style: ie.skeletonProgressIndicator
               }), jsx("div", {
-                ...xk(ie.skeletonButtonContainer),
+                ...props(ie.skeletonButtonContainer),
                 children: jsx(it, {
                   style: ie.skeletonButton
                 })
@@ -4134,7 +4134,7 @@ function ii() {
           })]
         })
       }), jsx("div", {
-        ...xk(ie.rightContainer),
+        ...props(ie.rightContainer),
         children: jsx(ir, {
           style: ie.skeletonRightPanel
         })
@@ -4162,7 +4162,7 @@ function il(e) {
   let d = useAtomWithSubscription(bk) === pu.WHICH_SEAT_WOULD_YOU_LIKE;
   return jsxs("div", {
     className: a ? void 0 : pR,
-    ..._$$Ay2.props(a && io.bottomBar),
+    ...stylex.props(a && io.bottomBar),
     children: [jsx(tU, {
       hasFigJamIntent: "whiteboard" === e.signupSource
     }), jsxs("div", {
@@ -4232,7 +4232,7 @@ function ic(e) {
     },
     trackingOptions: l,
     children: jsxs("div", {
-      ..._$$Ay2.props(o ? ia.questionContainer : id.questionContainer),
+      ...stylex.props(o ? ia.questionContainer : id.questionContainer),
       style: o ? void 0 : {
         "--width": i ? "912px" : "512px"
       },
@@ -4319,7 +4319,7 @@ function ip(e) {
       "data-testid": Io,
       "data-question-id": e.question.index,
       children: [jsx("div", {
-        ..._$$Ay2.props(l ? ih.leftScrollContainerFullscreen : ih.leftScrollContainer),
+        ...stylex.props(l ? ih.leftScrollContainerFullscreen : ih.leftScrollContainer),
         tabIndex: -1,
         ref: a,
         children: jsxs(_$$eI, {

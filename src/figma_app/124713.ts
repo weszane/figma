@@ -1,64 +1,107 @@
-import { z } from "../905/239603";
-import { createNoOpValidator, createMetaValidator, APIParameterUtils, defaultValidator } from "../figma_app/181241";
-import { OrganizationUserSchemaAlias } from "../figma_app/35887";
-var $$s1 = (e => (e.DEV_MODE_BETA_SUGGESTED_UPGRADES = "dev_mode_beta_suggested_upgrades", e.MEMBERS_TAB = "members_tab", e.FILE_PERMISSIONS_MODAL = "file_permissions_modal", e))($$s1 || {});
-export let $$o0 = new class {
+import { z } from 'zod'
+import { OrganizationUserSchemaAlias } from '../figma_app/35887'
+import { APIParameterUtils, createMetaValidator, createNoOpValidator, defaultValidator } from '../figma_app/181241'
+
+// Enum for modal types related to organization user operations
+export enum devModalTypes {
+  DEV_MODE_BETA_SUGGESTED_UPGRADES = 'dev_mode_beta_suggested_upgrades',
+  MEMBERS_TAB = 'members_tab',
+  FILE_PERMISSIONS_MODAL = 'file_permissions_modal',
+}
+
+// Class for handling organization user API operations
+class OrgUserService {
+  GuestResourcesSchemaValidator = createNoOpValidator()
+  OrgUserSchemaValidator = createMetaValidator('OrgUserSchemaValidator', OrganizationUserSchemaAlias, null, false)
+  UpdateOrgUsersSchemaValidator = createMetaValidator('UpdateOrgUsersSchemaValidator', z.array(OrganizationUserSchemaAlias), null, false)
+  CreateStarterTeamSchemaValidator = createNoOpValidator()
+  requestUpgradeSchemaValidator = createNoOpValidator()
   constructor() {
-    this.GuestResourcesSchemaValidator = createNoOpValidator();
-    this.OrgUserSchemaValidator = createMetaValidator("OrgUserSchemaValidator", OrganizationUserSchemaAlias, null, !1);
-    this.UpdateOrgUsersSchemaValidator = createMetaValidator("UpdateOrgUsersSchemaValidator", z.array(OrganizationUserSchemaAlias), null, !1);
-    this.CreateStarterTeamSchemaValidator = createNoOpValidator();
-    this.requestUpgradeSchemaValidator = createNoOpValidator();
   }
-  getGuestResources(e) {
-    return this.GuestResourcesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/org_user/${e.orgUserId}/guest_resources`));
+
+  /**
+   * Retrieves guest resources for a given organization user.
+   * @param params - Parameters including orgUserId.
+   * @returns Validated API response.
+   */
+  getGuestResources(params: { orgUserId: string }) {
+    return this.GuestResourcesSchemaValidator.validate(async ({ xr }: { xr: any }) =>
+      await xr.get(`/api/org_user/${params.orgUserId}/guest_resources`),
+    )
   }
-  updateOrgUser(e) {
-    let {
-      id,
-      changes
-    } = e;
-    return this.OrgUserSchemaValidator.validate(({
-      xr: e
-    }) => e.put(`/api/org_users/${id}`, APIParameterUtils.toAPIParameters(changes)));
+
+  /**
+   * Updates an organization user with specified changes.
+   * @param params - Parameters including id and changes.
+   * @returns Validated API response.
+   */
+  updateOrgUser(params: { id: string, changes: any }) {
+    const { id, changes } = params
+    return this.OrgUserSchemaValidator.validate(({ xr }: { xr: any }) =>
+      xr.put(`/api/org_users/${id}`, APIParameterUtils.toAPIParameters(changes)),
+    )
   }
-  updateOrgUsers(e) {
-    let {
-      orgId,
-      ...r
-    } = e;
-    return this.UpdateOrgUsersSchemaValidator.validate(({
-      xr: t
-    }) => t.put(`/api/orgs/${e.orgId}/org_users`, APIParameterUtils.toAPIParameters(r)));
+
+  /**
+   * Updates multiple organization users for an organization.
+   * @param params - Parameters including orgId and other updates.
+   * @returns Validated API response.
+   */
+  updateOrgUsers(params: { orgId: string, [key: string]: any }) {
+    const { orgId, ...rest } = params
+    return this.UpdateOrgUsersSchemaValidator.validate(({ xr }: { xr: any }) =>
+      xr.put(`/api/orgs/${orgId}/org_users`, APIParameterUtils.toAPIParameters(rest)),
+    )
   }
+
+  /**
+   * Creates a starter team for the organization user.
+   * @returns Validated API response.
+   */
   createStarterTeam() {
-    return this.CreateStarterTeamSchemaValidator.validate(({
-      xr: e
-    }) => e.post("/api/org_user/create_starter_team"));
+    return this.CreateStarterTeamSchemaValidator.validate(({ xr }: { xr: any }) =>
+      xr.post('/api/org_user/create_starter_team'),
+    )
   }
-  postOrgUserFlags(e) {
-    let {
-      orgUserId,
-      flags
-    } = e;
-    return defaultValidator.validate(({
-      xr: e
-    }) => e.post(`/api/org_users/${orgUserId}/flags`, {
-      flags
-    }));
+
+  /**
+   * Posts flags for an organization user.
+   * @param params - Parameters including orgUserId and flags.
+   * @returns Validated API response.
+   */
+  postOrgUserFlags(params: { orgUserId: string, flags: any }) {
+    const { orgUserId, flags } = params
+    return defaultValidator.validate(({ xr }: { xr: any }) =>
+      xr.post(`/api/org_users/${orgUserId}/flags`, { flags }),
+    )
   }
-  requestOrgAccountTypeRequest(e) {
-    return this.requestUpgradeSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.post(`/api/orgs/${e.org_id}/org_users/request_upgrade`, e));
+
+  /**
+   * Requests an upgrade for the organization account type.
+   * @param params - Parameters for the request.
+   * @returns Validated API response.
+   */
+  requestOrgAccountTypeRequest(params: any) {
+    return this.requestUpgradeSchemaValidator.validate(async ({ xr }: { xr: any }) =>
+      await xr.post(`/api/orgs/${params.org_id}/org_users/request_upgrade`, params),
+    )
   }
-  getMemberCSVExport(e) {
-    return defaultValidator.validate(({
-      xr: t
-    }) => t.post(`/api/orgs/${e.orgId}/export_members`));
+
+  /**
+   * Exports members as CSV for an organization.
+   * @param params - Parameters including orgId.
+   * @returns Validated API response.
+   */
+  getMemberCSVExport(params: { orgId: string }) {
+    return defaultValidator.validate(({ xr }: { xr: any }) =>
+      xr.post(`/api/orgs/${params.orgId}/export_members`),
+    )
   }
-}();
-export const G = $$o0;
-export const h = $$s1;
+}
+
+// Instantiate the service class
+export const orgUserService = new OrgUserService()
+
+// Export the service instance and modal types with meaningful names
+export const G = orgUserService
+export const h = devModalTypes

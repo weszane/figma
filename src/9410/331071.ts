@@ -1,4 +1,4 @@
-import { xk } from '@stylexjs/stylex';
+import { props } from '@stylexjs/stylex';
 import rF from 'classnames';
 import { createContext, createRef, forwardRef, lazy, memo, Suspense, useCallback, useContext, useDeferredValue, useEffect, useId, useLayoutEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
@@ -271,7 +271,7 @@ import { FFileType, FMemberRoleType, FPlanAccessType, FPlanNameType, FProductAcc
 import { parseHex, areColorsEqual, colorToHexString, whiteColor } from '../figma_app/191804';
 import { sF as _$$sF } from '../figma_app/193952';
 import { t as _$$t7 } from '../figma_app/198180';
-import { getSelectedView } from '../figma_app/198885';
+import { getSelectedViewSelector } from '../figma_app/198885';
 import { qO, X6 } from '../figma_app/234690';
 import { dR as _$$dR } from '../figma_app/248118';
 import { GM, PE } from '../figma_app/251115';
@@ -830,7 +830,7 @@ async function tb(e) {
   let a = {
     type: _$$I2.ALL
   };
-  let s = isDesignOrIllustration(getEditorTypeFromView(getSelectedView(t)));
+  let s = isDesignOrIllustration(getEditorTypeFromView(getSelectedViewSelector(t)));
   let o = atomStoreManager.get(filesByLibraryKeyAtom);
   t = debugState.getState();
   let l = {
@@ -839,7 +839,7 @@ async function tb(e) {
     assetTypeOption: a,
     isKnownLibrary: e => !0,
     openFile: selectOpenFile(t),
-    selectedView: getSelectedView(t),
+    selectedView: getSelectedViewSelector(t),
     inDesignEditor: s,
     fileVersion: r,
     currentOrgId: resolveFileParentOrgId(t),
@@ -10855,7 +10855,7 @@ function dB() {
                       className: 'x2lah0s',
                       children: jsx(_$$V2, {})
                     }), jsx('span', {
-                      ...xk(dU.text),
+                      ...props(dU.text),
                       children: renderI18nText('video_ai.make_video.success', {
                         prompt: e.prompt
                       })
@@ -10882,7 +10882,7 @@ function dB() {
                       }
                     })
                   }), jsx('span', {
-                    ...xk(dU.text),
+                    ...props(dU.text),
                     children: renderI18nText('video_ai.make_video.error', {
                       prompt: e.prompt
                     })

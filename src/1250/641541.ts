@@ -6,7 +6,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { z6, CU } from "../905/963340";
 import { r as _$$r } from "../905/571562";
 import { x as _$$x } from "../905/587214";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { getResourceDataOrFallback } from "../905/663269";
 import p from "../vendor/116389";
@@ -129,7 +129,7 @@ function W({
     manager: T,
     children: [jsxs($, {
       children: [jsxs(ButtonPrimitive, {
-        ...xk(V.menuTrigger, manager.isOpen && V.menuTriggerActive),
+        ...props(V.menuTrigger, manager.isOpen && V.menuTriggerActive),
         ...getTriggerProps(),
         children: [e, jsx(_$$r, {
           className: "x2lah0s"
@@ -262,7 +262,7 @@ function $({
   children: e
 }) {
   return jsx("div", {
-    ...xk(getFeatureFlags().file_browser_sidebar_row_ui ? V.planSwitcherRedesign : V.planSwitcher),
+    ...props(getFeatureFlags().file_browser_sidebar_row_ui ? V.planSwitcherRedesign : V.planSwitcher),
     "data-onboarding-key": $$$$U0,
     children: e
   });

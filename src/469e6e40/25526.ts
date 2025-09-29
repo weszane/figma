@@ -12,7 +12,7 @@ import { k as _$$k2 } from "../7021/223482";
 import { d as _$$d } from "../469e6e40/744116";
 import { RR, y3 } from "../figma_app/307841";
 import { i as _$$i } from "../469e6e40/549061";
-import { ZY } from "../figma_app/845611";
+import { isBillingGroupAdminEnabled } from "../figma_app/845611";
 import { throwTypeError } from "../figma_app/465776";
 import { useAtomWithSubscription, atom, Xr } from "../figma_app/27355";
 import { useSingleEffect } from "../905/791079";
@@ -63,7 +63,7 @@ import { Jt as _$$Jt2 } from "../figma_app/342125";
 import { Jt as _$$Jt3 } from "../figma_app/330108";
 import { usePlanInviteWithSeatExperiment, useSeatBillingTermsExperiment } from "../figma_app/297957";
 import { g7 } from "../905/939482";
-import { vu, YM } from "../figma_app/741211";
+import { useOrgUsersFilterCounts, useOrgAdmins } from "../figma_app/741211";
 import { collaboratorSet, viewCollaboratorSet, designSet } from "../905/332483";
 import { useDropdownState } from "../905/848862";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
@@ -180,7 +180,7 @@ import { Wi, JR } from "../figma_app/162641";
 import { In } from "../905/672640";
 import { KindEnum } from "../905/129884";
 import { UNASSIGNED } from "../905/247093";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { Vq, v0, pL } from "../figma_app/639088";
 import { e as _$$e5 } from "../905/149844";
 import { A as _$$A4 } from "../svg/83231";
@@ -3165,7 +3165,7 @@ let nL = registerModal(function (e) {
         }), jsxs("form", {
           onSubmit: s => {
             s.preventDefault();
-            Eh.delWorkspaces({
+            organizationAPIService.delWorkspaces({
               orgId: a,
               workspaceIds: l
             }).then(() => {
@@ -3495,7 +3495,7 @@ function nz(e) {
   let o = "loaded" !== l.status;
   let {
     filterCountsViewResult
-  } = vu(e.org.id, "", DefaultFilters);
+  } = useOrgUsersFilterCounts(e.org.id, "", DefaultFilters);
   let _ = useMemo(() => l.data?.org?.workspaces ?? [], [l.data]);
   let m = o ? [] : [{
     id: null
@@ -5029,7 +5029,7 @@ function sB(e) {
   let {
     isFetched,
     orgAdmins
-  } = YM({
+  } = useOrgAdmins({
     orgId: n.id,
     includeLicenseAdmins: !1
   });
@@ -5038,7 +5038,7 @@ function sB(e) {
     memberCounts
   } = cZ(n.id, R && L);
   let z = _W(n.id, R && L);
-  let V = ZY({
+  let V = isBillingGroupAdminEnabled({
     isIntendedAudience: R && !L
   });
   useEffect(() => {

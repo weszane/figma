@@ -4,7 +4,7 @@ import { bL, l9, mc, c$, wv } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { r as _$$r } from "../905/571562";
 import { textDisplayConfig } from "../905/687265";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { wv as _$$wv, rr, gw } from "../figma_app/236327";
@@ -220,10 +220,10 @@ export function $$L2({
 }) {
   let p = useCallback(e => l ? jsxs(Fragment, {
     children: [jsx("div", {
-      ...xk(P.selectPrimaryText),
+      ...props(P.selectPrimaryText),
       children: o(e)
     }), jsx("div", {
-      ...xk(P.selectSecondaryText),
+      ...props(P.selectSecondaryText),
       children: l(e)
     })]
   }) : o(e), [o, l]);

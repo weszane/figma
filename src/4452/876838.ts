@@ -1,99 +1,158 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { findMatchingValue } from "../905/807535";
-import { getFeatureFlags } from "../905/601108";
-import { getResourceDataOrFallback } from "../905/663269";
-import { subscribeAndAwaitData } from "../905/553831";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { ps, Xv } from "../figma_app/845611";
-import { getQueryParam, removeQueryParam } from "../905/609392";
-import { AccountTypeRequestByIdView } from "../figma_app/43951";
-import { accountTypeRequestHandler } from "../905/281010";
-var m = (e => (e.AdminUpgradeEmail = "admin_upgrade_email", e.UnknownDeeplink = "unknown_deeplink", e))(m || {});
-let h = {
-  approvalRequestId: "approvalRequestId",
-  entryPoint: "entryPoint"
-};
-export async function $$x0(e, t) {
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { accountTypeRequestHandler } from '../905/281010'
+import { VisualBellActions } from '../905/302958'
+import { getI18nString } from '../905/303541'
+import { subscribeAndAwaitData } from '../905/553831'
+import { getFeatureFlags } from '../905/601108'
+import { getQueryParam, removeQueryParam } from '../905/609392'
+import { getResourceDataOrFallback } from '../905/663269'
+import { findMatchingValue } from '../905/807535'
+import { AccountTypeRequestByIdView } from '../figma_app/43951'
+import { InvitedByType, TeamOrg } from '../figma_app/845611'
+// Enum for deeplink types
+const DeeplinkType = {
+  AdminUpgradeEmail: 'admin_upgrade_email',
+  UnknownDeeplink: 'unknown_deeplink',
+} as const
+
+// Object for query parameter keys
+const QueryParamKeys = {
+  approvalRequestId: 'approvalRequestId',
+  entryPoint: 'entryPoint',
+} as const
+
+/**
+ * Fetches and validates a pending account type request by ID.
+ * @param requestId - The ID of the account type request.
+ * @param dispatch - The Redux dispatch function.
+ * @returns The pending account type request if valid, otherwise undefined.
+ */
+export async function fetchPendingAccountTypeRequest(
+  requestId: string,
+  dispatch: ReturnType<typeof useDispatch>,
+): Promise<any | undefined> {
   try {
-    let a = await subscribeAndAwaitData(AccountTypeRequestByIdView, {
-      requestId: e
-    });
-    let s = getResourceDataOrFallback(a.accountTypeRequest);
-    if (!s) {
-      v(t, getI18nString("admin_dashboard.requests.not_found"));
-      return;
+    const data = await subscribeAndAwaitData(AccountTypeRequestByIdView, {
+      requestId,
+    })
+    const request = getResourceDataOrFallback(data.accountTypeRequest)
+    if (!request) {
+      showError(dispatch, getI18nString('admin_dashboard.requests.not_found'))
+      return
     }
-    if ("pending" !== s.status) {
-      t(VisualBellActions.enqueue({
-        message: getI18nString("admin_dashboard.requests.this_request_has_already_been_handled"),
-        type: s?.status === "approved" ? "requests-approved" : "requests-denied"
-      }));
-      return;
+    if (request.status !== 'pending') {
+      dispatch(VisualBellActions.enqueue({
+        message: getI18nString('admin_dashboard.requests.this_request_has_already_been_handled'),
+        type: request?.status === 'approved' ? 'requests-approved' : 'requests-denied',
+      }))
+      return
     }
-    return s;
-  } catch (e) {
-    v(t);
+    return request
+  }
+  catch  {
+    showError(dispatch)
   }
 }
-export function $$f1() {
-  let e = useDispatch();
-  let [t, a] = useState(!1);
-  let [l, o] = useState();
-  let d = getFeatureFlags().one_click_approve_on_recents;
+
+/**
+ * Custom hook for handling one-click approval of account type requests via query parameters.
+ */
+export function useOneClickApproval() {
+  const dispatch = useDispatch()
+  const [isCompleted, setIsCompleted] = useState(false)
+  const [pendingRequest, setPendingRequest] = useState<any>()
+  const isOneClickApproveEnabled = getFeatureFlags().one_click_approve_on_recents
+
   useEffect(() => {
-    async function t(t) {
-      let s = await $$x0(t, e);
-      s ? o(s) : a(!0);
-    }
-    if (!d) return;
-    let s = getQueryParam(h.approvalRequestId);
-    s && (removeQueryParam(h.approvalRequestId), t(s));
-  }, [e, d]);
-  useEffect(() => {
-    async function s(t) {
-      let s = getQueryParam(h.entryPoint);
-      let n = findMatchingValue(m, s || "") ?? m.UnknownDeeplink;
-      let i = findMatchingValue(ps, t.planType) || ps.TEAM;
-      try {
-        let a = await accountTypeRequestHandler.approveRequests({
-          plan_id: t.planId,
-          plan_type: i,
-          selection_method: Xv.DEEPLINK,
-          included_request_ids: [t.id],
-          entry_point: n
-        });
-        if (200 === a.status) {
-          let a = t.requestableOrgUser?.user?.name ?? t.requestableTeamUser?.user?.name ?? "";
-          b(e, a);
-        } else v(e);
-      } catch (t) {
-        v(e);
-      } finally {
-        a(!0);
-        removeQueryParam(h.entryPoint);
+    async function handleApprovalRequest(requestId: string) {
+      const request = await fetchPendingAccountTypeRequest(requestId, dispatch)
+      if (request) {
+        setPendingRequest(request)
+      }
+      else {
+        setIsCompleted(true)
       }
     }
-    d && l && !t && s(l);
-  }, [l, e, t, d]);
+
+    if (!isOneClickApproveEnabled)
+      return
+
+    const requestId = getQueryParam(QueryParamKeys.approvalRequestId)
+    if (requestId) {
+      removeQueryParam(QueryParamKeys.approvalRequestId)
+      handleApprovalRequest(requestId)
+    }
+  }, [dispatch, isOneClickApproveEnabled])
+
+  useEffect(() => {
+    async function approveRequest(request: any) {
+      const entryPointParam = getQueryParam(QueryParamKeys.entryPoint)
+      const entryPoint = findMatchingValue(DeeplinkType, entryPointParam || '') ?? DeeplinkType.UnknownDeeplink
+      const planType = findMatchingValue(TeamOrg, request.planType) || TeamOrg.TEAM
+
+      try {
+        const response = await accountTypeRequestHandler.approveRequests({
+          plan_id: request.planId,
+          plan_type: planType,
+          selection_method: InvitedByType.DEEPLINK,
+          included_request_ids: [request.id],
+          entry_point: entryPoint,
+        })
+        if (response.status === 200) {
+          const requesterName = request.requestableOrgUser?.user?.name ?? request.requestableTeamUser?.user?.name ?? ''
+          showApprovalSuccess(dispatch, requesterName)
+        }
+        else {
+          showError(dispatch)
+        }
+      }
+      catch  {
+        showError(dispatch)
+      }
+      finally {
+        setIsCompleted(true)
+        removeQueryParam(QueryParamKeys.entryPoint)
+      }
+    }
+
+    if (isOneClickApproveEnabled && pendingRequest && !isCompleted) {
+      approveRequest(pendingRequest)
+    }
+  }, [pendingRequest, dispatch, isCompleted, isOneClickApproveEnabled])
 }
-let v = (e, t) => {
-  e(VisualBellActions.enqueue({
-    message: t || getI18nString("admin_dashboard.requests.error_generic"),
-    error: !0
-  }));
-};
-let b = (e, t) => {
-  let a = t ? getI18nString("admin_dashboard.requests.success_approve_with_name", {
-    requesterName: t
-  }) : getI18nString("admin_dashboard.requests.success_approve_multiple", {
-    numRequests: 1
-  });
-  e(VisualBellActions.enqueue({
-    message: a,
-    type: "requests-approved"
-  }));
-};
-export const q = $$x0;
-export const V = $$f1;
+
+/**
+ * Shows an error message via VisualBell.
+ * @param dispatch - The Redux dispatch function.
+ * @param message - Optional custom error message.
+ */
+function showError(dispatch: ReturnType<typeof useDispatch>, message?: string) {
+  dispatch(VisualBellActions.enqueue({
+    message: message || getI18nString('admin_dashboard.requests.error_generic'),
+    error: true,
+  }))
+}
+
+/**
+ * Shows a success message for approval via VisualBell.
+ * @param dispatch - The Redux dispatch function.
+ * @param requesterName - The name of the requester.
+ */
+function showApprovalSuccess(dispatch: ReturnType<typeof useDispatch>, requesterName: string) {
+  const message = requesterName
+    ? getI18nString('admin_dashboard.requests.success_approve_with_name', {
+        requesterName,
+      })
+    : getI18nString('admin_dashboard.requests.success_approve_multiple', {
+        numRequests: 1,
+      })
+  dispatch(VisualBellActions.enqueue({
+    message,
+    type: 'requests-approved',
+  }))
+}
+
+// Refactored exports with proper names
+export const q = fetchPendingAccountTypeRequest
+export const V = useOneClickApproval

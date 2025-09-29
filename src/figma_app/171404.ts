@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { k } from "../905/443820";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useWebLoggerTimer } from "../905/485103";
@@ -202,7 +202,7 @@ function A(e) {
     });
   }), "loading" === c.status) return jsx("div", {
     "data-testid": "social-proof",
-    ...xk(I.container, S[g](t)),
+    ...props(I.container, S[g](t)),
     children: jsx(k, {})
   });
   if ("loaded" !== c.status || 0 === c.data.length) return null;
@@ -223,7 +223,7 @@ function A(e) {
     properties: A,
     children: jsxs("div", {
       "data-testid": "social-proof",
-      ...xk(I.container, S[g](t), g === FProductAccessType.WHITEBOARD && r && S.whiteboard("light")),
+      ...props(I.container, S[g](t), g === FProductAccessType.WHITEBOARD && r && S.whiteboard("light")),
       children: [jsx(Y, {
         users: v,
         maxShow: e.numAvatarsRequested,

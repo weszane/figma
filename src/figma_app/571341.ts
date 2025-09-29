@@ -15,7 +15,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { useSingleEffect } from "../905/791079";
 import { l as _$$l } from "../905/745972";
 import { useSubscription } from "../figma_app/288654";
-import { tT } from "../905/723791";
+import { ResourceStatus } from "../905/723791";
 import { reportError } from "../905/11";
 import { Ss } from "../905/720292";
 import { Nf, ec } from "../figma_app/449837";
@@ -94,7 +94,7 @@ export function $$K1(e) {
   return useMemo(() => {
     if ("loaded" === n.status) {
       let t = n.data.file;
-      if (t.status === tT.Error) {
+      if (t.status === ResourceStatus.Error) {
         reportError(ServiceCategories.DEVELOPER_TOOLS, Error("[Dev mode activity] Error fetching activity log: File error = " + t.error));
         return null;
       }

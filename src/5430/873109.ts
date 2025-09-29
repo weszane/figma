@@ -28,7 +28,7 @@ import { ServiceCategories } from "../905/165054";
 import { customHistory } from "../905/612521";
 import { WB } from "../905/761735";
 import { useSubscription } from "../figma_app/288654";
-import { getResourceDataOrFallback, tT } from "../905/723791";
+import { getResourceDataOrFallback, ResourceStatus } from "../905/723791";
 import { reportError } from "../905/11";
 import { generateUUIDv4 } from "../905/871474";
 import { sendWithRetry } from "../905/910117";
@@ -457,10 +457,10 @@ function el(e, t, r) {
   let d = useMemo(() => {
     let t;
     if (!isPluginOrWidget(e)) return {};
-    t = hasContent(e) ? getResourceDataOrFallback(l.data?.orgResourceSaves) || [] : a.data?.orgPluginInstalls.status !== tT.Loaded ? [] : a.data?.orgPluginInstalls.data || [];
+    t = hasContent(e) ? getResourceDataOrFallback(l.data?.orgResourceSaves) || [] : a.data?.orgPluginInstalls.status !== ResourceStatus.Loaded ? [] : a.data?.orgPluginInstalls.data || [];
     let r = {};
     Object.values(o).forEach(s => {
-      (!(isPluginResource(e) && s.plugins_whitelist_enforced || isWidgetResource(e) && s.widgets_whitelist_enforced) || (c.data?.orgAllowlistedPlugins.status !== tT.Loaded ? [] : c.data?.orgAllowlistedPlugins.data || []).some(e => e.orgId === s.id)) && (r[s.id] = t.some(e => e.orgId === s.id));
+      (!(isPluginResource(e) && s.plugins_whitelist_enforced || isWidgetResource(e) && s.widgets_whitelist_enforced) || (c.data?.orgAllowlistedPlugins.status !== ResourceStatus.Loaded ? [] : c.data?.orgAllowlistedPlugins.data || []).some(e => e.orgId === s.id)) && (r[s.id] = t.some(e => e.orgId === s.id));
     });
     return r;
   }, [o, c, e, a.data?.orgPluginInstalls, l.data]);

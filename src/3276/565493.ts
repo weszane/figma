@@ -7,7 +7,7 @@ import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { getUserId } from "../905/372672";
 import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
-import { ps } from "../figma_app/845611";
+import { TeamOrg } from "../figma_app/845611";
 import { useApproveInFileExperiment } from "../figma_app/297957";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -65,7 +65,7 @@ export function $$k3() {
     } = t?.key ?? {};
     let a = useApproveInFileExperiment();
     let i = useSubscription(AccountTypeRequestsInPlan({
-      planType: type === FOrganizationLevelType.TEAM ? ps.TEAM : ps.ORG,
+      planType: type === FOrganizationLevelType.TEAM ? TeamOrg.TEAM : TeamOrg.ORG,
       planId: parentId ?? "",
       sortOrder: "desc",
       filterParams: JSON.stringify({

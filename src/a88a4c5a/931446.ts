@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { AutoInteractableWrapper } from "../905/277716";
 import { If, XS, fJ, b_, yG } from "../figma_app/319440";
 import { S } from "../figma_app/924300";
@@ -74,7 +74,7 @@ export let $$_0 = memo(e => {
   let p = yG(l, x);
   let h = p.reduce((e, t) => e + t.length, 0) > 0;
   return jsxs("div", {
-    ...xk(R.selectionActionsButtons),
+    ...props(R.selectionActionsButtons),
     children: [x.map(e => {
       let t = e.type === ZU.FLYOUT ? e.flyoutRecordingKey : "reactKey" in e ? e.reactKey : e.recordingKey;
       return jsx(f, {

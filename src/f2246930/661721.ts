@@ -7,7 +7,7 @@ import { SceneGraphHelpers, PluginHelpers, figmaScopeBindings } from "../figma_a
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { useDebounce } from 'use-debounce';
-import { NY, ux } from "../figma_app/851625";
+import { createSuccessState, createLoadingState } from "../figma_app/851625";
 import { parsePxInt } from "../figma_app/783094";
 import { l as _$$l } from "../905/745972";
 import { createDeepEqualSelector } from "../905/270781";
@@ -120,10 +120,10 @@ function I({
         pagesList: O
       });
       e.setNodeWarnings(L);
-      b(NY({
+      b(createSuccessState({
         primaryResource: e
       }));
-    } else b(ux());
+    } else b(createLoadingState());
   }, [w, b, S, E, m, O, L]);
   let M = useCurrentTheme();
   let F = useRef(null);

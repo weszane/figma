@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
 import { getI18nString } from "../905/303541";
@@ -996,7 +996,7 @@ export function $$ed0({
     children: jsxs("div", {
       className: "whiteboard--whiteboardScaleAnimationContainer--NbHD-",
       children: [jsxs("div", {
-        ...Ay.props(en.illustrationContainer, !L && en.illustrationBackground),
+        ...stylex.props(en.illustrationContainer, !L && en.illustrationBackground),
         children: [jsx(ea, {
           currentQuestion: l,
           selectedProduct: _,

@@ -6,7 +6,7 @@ import { k as _$$k } from "../905/443820";
 import { _ as _$$_ } from "../905/410717";
 import { A as _$$A } from "../905/126947";
 import { H } from "../905/999677";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { N as _$$N } from "../vendor/930821";
@@ -105,7 +105,7 @@ function N({
   } = L();
   return jsx("div", {
     "aria-current": n ? "true" : void 0,
-    ...Ay.props(C.artifactContainer, n ? artifactActiveTypographyStyle : artifactTypographyStyle, t ? C.inProgress : void 0),
+    ...stylex.props(C.artifactContainer, n ? artifactActiveTypographyStyle : artifactTypographyStyle, t ? C.inProgress : void 0),
     children: e
   });
 }

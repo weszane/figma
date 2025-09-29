@@ -3,7 +3,7 @@ import { noop } from 'lodash-es';
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogBody } from "../figma_app/272243";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { capitalize } from "../figma_app/930338";
 import { getThemeContextOrDefault } from "../905/158740";
@@ -290,9 +290,9 @@ function C({
     horizontalAlignItems: "start",
     width: "hug-contents",
     children: l.map((e, n) => jsx("div", {
-      ...xk($$E.avatarZIndex(i ? -n : n), !i && n === l.length - 1 && $$E.marginRight),
+      ...props($$E.avatarZIndex(i ? -n : n), !i && n === l.length - 1 && $$E.marginRight),
       children: jsx("div", {
-        ...xk($$E.avatar, $$E[s]),
+        ...props($$E.avatar, $$E[s]),
         children: jsx(UserAvatar, {
           user: e,
           size: t
@@ -484,7 +484,7 @@ function W({
     };
   }(t);
   if (isLoading) return jsxs("div", {
-    ...xk(V.container, "dark" === n ? V.backgroundDark : V.backgroundLight),
+    ...props(V.container, "dark" === n ? V.backgroundDark : V.backgroundLight),
     children: [jsx(P, {}), jsx(L, {})]
   });
   if (isError) return null;
@@ -498,7 +498,7 @@ function W({
       devModeSocialProofTotalActiveDevModeUsers: e
     },
     children: jsxs("div", {
-      ...xk(V.container, "dark" === n ? V.backgroundDark : V.backgroundLight),
+      ...props(V.container, "dark" === n ? V.backgroundDark : V.backgroundLight),
       children: [jsx(C, {
         users,
         maxShow: 3

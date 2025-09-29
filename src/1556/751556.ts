@@ -8,7 +8,7 @@ import { MenuItemComp, MenuItemLead, MenuSubText, MenuSubMenu, MenuSubContainerC
 import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import { UI3ConditionalWrapper } from "../905/341359";
-import { Ay as _$$Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import x from "classnames";
 import { usePrefersMediaQuery } from "../figma_app/469468";
 import { Badge, BadgeColor } from "../figma_app/919079";
@@ -83,7 +83,7 @@ import { Ro } from "../figma_app/598952";
 import { iX } from "../905/415545";
 import { ue } from "../af221b13/476940";
 import { useSubscription } from "../figma_app/288654";
-import { tT, getResourceDataOrFallback } from "../905/723791";
+import { ResourceStatus, getResourceDataOrFallback } from "../905/723791";
 import { CommunityNotificationBellView, PersistentUserNotificationBellData } from "../figma_app/43951";
 import { M as _$$M } from "../1556/569109";
 import { h as _$$h } from "../1556/255035";
@@ -263,7 +263,7 @@ function eT({
       user: t
     }), jsx("button", {
       onClick: M,
-      ..._$$Ay.props(eE.userName, g?.type === "view-profile" && g.showOutline && eE.underline),
+      ...stylex.props(eE.userName, g?.type === "view-profile" && g.showOutline && eE.underline),
       onMouseOver: () => k(!1),
       onMouseLeave: I,
       tabIndex: -1,
@@ -278,7 +278,7 @@ function eT({
   return n ? E : jsxs(Fragment, {
     children: [jsx("div", {
       "aria-hidden": !0,
-      ..._$$Ay.props(eE.container),
+      ...stylex.props(eE.container),
       children: E
     }), T ? null : jsx(ScreenReaderOnly, {
       as: MenuItemPrimitive,
@@ -935,7 +935,7 @@ function eK({
     children: jsxs(MenuRootComp, {
       manager: s,
       children: [jsxs(ButtonPrimitive, {
-        ..._$$Ay.props(eG.button, manager.isOpen && eG.buttonActive),
+        ...stylex.props(eG.button, manager.isOpen && eG.buttonActive),
         ...getTriggerProps(),
         "aria-label": e,
         children: [t, jsx(_$$O, {
@@ -1052,7 +1052,7 @@ function tr(e) {
   let t = useDispatch();
   let n = useSubscription(CommunityNotificationBellView, {});
   useEffect(() => {
-    if ("loaded" === n.status && n.data.currentUser.communityProfileNotificationBell.status === tT.Loaded) {
+    if ("loaded" === n.status && n.data.currentUser.communityProfileNotificationBell.status === ResourceStatus.Loaded) {
       let e = getResourceDataOrFallback(n.data.currentUser.communityProfileNotificationBell);
       if (e) {
         let n = {
@@ -1089,7 +1089,7 @@ export function $$th1() {
   let h = useAuthedActiveCommunityProfile();
   let m = function () {
     let e = useSubscription(PersistentUserNotificationBellData, {});
-    if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== tT.Loaded) return {};
+    if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== ResourceStatus.Loaded) return {};
     let t = getResourceDataOrFallback(e.data.persistentUserNotificationBells);
     let n = {};
     Object.values(t || []).forEach(e => {
@@ -1107,7 +1107,7 @@ export function $$th1() {
   }();
   let x = function () {
     let e = useSubscription(PersistentUserNotificationBellData, {});
-    if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== tT.Loaded) return td;
+    if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== ResourceStatus.Loaded) return td;
     let t = getResourceDataOrFallback(e.data.persistentUserNotificationBells);
     let n = t?.find(e => e.notificationSpaceId === _$$td);
     return n ? {

@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { n as _$$n, G4 } from "../905/864644";
 import { zj, Sk } from "../figma_app/448654";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
-import { tT } from "../905/723791";
+import { ResourceStatus } from "../905/723791";
 import { reportError } from "../905/11";
 import { hideModal, showModalHandler } from "../905/156213";
 import { hT, YM } from "../905/561087";
@@ -270,7 +270,7 @@ async function L(e) {
     result
   } of await subscribeMultipleAndAwaitAll(SiteMount, e.map(e => ({
     fileKey: e
-  })))) if (result.transform(e => e.siteMount.status === tT.Loaded && e.siteMount.data && "published" === e.siteMount.data.status).unwrapOr(!1)) return !0;
+  })))) if (result.transform(e => e.siteMount.status === ResourceStatus.Loaded && e.siteMount.data && "published" === e.siteMount.data.status).unwrapOr(!1)) return !0;
   return !1;
 }
 export function $$F0(e, t, i) {

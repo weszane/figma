@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { w4, y1 } from "../905/445814";
 import { yh } from "../9410/974031";
 import { useSceneGraphSelector } from "../figma_app/722362";
@@ -107,7 +107,7 @@ export function $$h1({
       width: 64,
       height: h
     },
-    ...Ay.props(u.attachmentWrapper, n && u.hideChildFileIconOnHover),
+    ...stylex.props(u.attachmentWrapper, n && u.hideChildFileIconOnHover),
     children: [n ? jsx(v, {
       ...p,
       onDelete: n,
@@ -120,7 +120,7 @@ export function $$h1({
 }
 function g() {
   return jsx("div", {
-    ...Ay.props(u.attachmentFileTypeIconWrapper),
+    ...stylex.props(u.attachmentFileTypeIconWrapper),
     children: jsx(w4, {
       size: 16,
       type: y1.DESIGN

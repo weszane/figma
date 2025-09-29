@@ -25,7 +25,7 @@ import { A as _$$A } from "../905/251970";
 import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
 import { permissionScopeHandler } from "../905/189185";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import v from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useUpdateSelectionProperty, useNonMixedSelectionPropertyValues, useSelectionPropertyValue, useSelectedStyleOrSelectionPropertyValues, useNonMixedSelectedStyleOrSelectionPropertyValues } from "../905/275640";
@@ -652,7 +652,7 @@ function tS() {
             });
           case "SLOT":
             return jsx("div", {
-              ...Ay.props(_$$R.selectionName),
+              ...stylex.props(_$$R.selectionName),
               children: jsx(_$$s, {
                 unfocusedInputOverridesClassName: XS,
                 focusedInputOverridesClassName: sE

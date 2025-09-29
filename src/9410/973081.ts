@@ -1,4 +1,4 @@
-import { Ay as _$$Ay3 } from '@stylexjs/stylex';
+import { stylex } from '@stylexjs/stylex';
 import eo from 'classnames';
 import { noop } from 'lodash-es';
 import { Children, Component, createElement, createRef, memo, PureComponent, useCallback, useContext, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -4831,11 +4831,11 @@ function nk({
   let p = useMemo(() => [{
     name: getI18nString('dev_handoff.linter.menu_title_header'),
     header: !0,
-    displayTextClassName: _$$Ay3.props(nN.title, nN.header).className
+    displayTextClassName: stylex.props(nN.title, nN.header).className
   }, {
     name: getI18nString('dev_handoff.linter.menu_title_subheader'),
     header: !0,
-    displayTextClassName: _$$Ay3.props(nN.title, nN.subheader).className
+    displayTextClassName: stylex.props(nN.title, nN.subheader).className
   }, {
     render: () => jsx(nj, {
       name: getI18nString('fullscreen_actions.quick_actions.detect-violations'),

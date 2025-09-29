@@ -9,7 +9,7 @@ import { un } from '../figma_app/457899';
 import { CurrencyFormatter } from '../figma_app/514043';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
-import { I1 } from '../figma_app/990058';
+import { getOrgUserByUserIdAction } from '../figma_app/990058';
 import { useSelector, useDispatch } from 'react-redux';
 export function $$h0(e, t) {
   let a = useDispatch();
@@ -27,7 +27,7 @@ export function $$h0(e, t) {
   let E = y ? j.data?.currency : I.summary.currency;
   useEffect(() => {
     async function s() {
-      b(await a(I1({
+      b(await a(getOrgUserByUserIdAction({
         orgId: e?.key.parentId ?? '',
         userId: t?.userId ?? ''
       })));

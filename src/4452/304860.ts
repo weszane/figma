@@ -1,4 +1,4 @@
-import { xk } from '@stylexjs/stylex';
+import { props } from '@stylexjs/stylex';
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
@@ -404,7 +404,7 @@ function el() {
         direction: 'vertical',
         spacing: 4,
         children: [jsx('p', {
-          ...xk(textDisplayConfig.textBodyMediumStrong),
+          ...props(textDisplayConfig.textBodyMediumStrong),
           children: renderI18nText('plan_settings.auto_approval_settings.scim_badge.title')
         }), jsx('p', {
           children: renderI18nText('plan_settings.auto_approval_settings.scim_badge.subtitle')

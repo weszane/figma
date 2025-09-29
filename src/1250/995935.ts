@@ -1,4 +1,4 @@
-import { Ay as _$$Ay2 } from '@stylexjs/stylex';
+import { stylex } from '@stylexjs/stylex';
 import { createRef, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
@@ -87,7 +87,7 @@ import { BannerFullWidth } from '../figma_app/59509';
 import { useDevModeFocusId } from '../figma_app/88239';
 import { showPickerThunk } from '../figma_app/91703';
 import { b4, WS } from '../figma_app/106207';
-import { G as _$$G } from '../figma_app/124713';
+import { orgUserService } from '../figma_app/124713';
 import { getGracePeriodAccessForKey, getGracePeriodExpirationDate, isStudentValidated } from '../figma_app/141320';
 import { getSupportEmail, isDevEnvironment, isProdCluster } from '../figma_app/169182';
 import { FFileType, FOrganizationLevelType, FPaymentHealthStatusType, FPlanLimitationType, FStudentTeamStatusType, FUserRoleType } from '../figma_app/191312';
@@ -124,7 +124,7 @@ import { canAdminTeam, canEditTeam } from '../figma_app/642025';
 import { filterNotNullish } from '../figma_app/656233';
 import { useOpenPlanInvoices } from '../figma_app/658324';
 import { useAppModelProperty, useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
-import { a9 } from '../figma_app/741211';
+import { useCurrentUserOrgUser } from '../figma_app/741211';
 import { Hk } from '../figma_app/755939';
 import { CooperHelpers, Multiplayer, SchemaJoinStatus } from '../figma_app/763686';
 import { BrowserInfo } from '../figma_app/778880';
@@ -144,7 +144,7 @@ let ef = liveStoreInstance.Query({
   fetch: async e => (await _$$w2.getNonAdminBillingTermsBanner(e)).data.meta
 });
 let eh = liveStoreInstance.Mutation(async e => {
-  await _$$G.postOrgUserFlags({
+  await orgUserService.postOrgUserFlags({
     orgUserId: e.orgUserId,
     flags: {
       [ep]: !0
@@ -1562,7 +1562,7 @@ let nt = {
         dismissible: !1,
         bannerType: x1.INFO,
         icon: jsx(_$$Q2, {
-          ..._$$Ay2.props(g ? t_.slidesIcon : t_.cooperIcon)
+          ...stylex.props(g ? t_.slidesIcon : t_.cooperIcon)
         }),
         iconSize: 'medium',
         mainText: E,
@@ -1612,7 +1612,7 @@ let nn = {
         dismissible: !1,
         bannerType: x1.INFO,
         icon: jsx(_$$Q2, {
-          ..._$$Ay2.props(u ? tx.slidesTemplateIcon : tx.cooperTemplateIcon)
+          ...stylex.props(u ? tx.slidesTemplateIcon : tx.cooperTemplateIcon)
         }),
         iconSize: 'medium',
         mainText: getI18nString('slides.templates.banner.making_a_template'),
@@ -1626,7 +1626,7 @@ let nn = {
 let na = {
   bannerId: om.OrgDowngradeBanner,
   Banner(e) {
-    let t = a9();
+    let t = useCurrentUserOrgUser();
     let n = useCurrentUserOrg();
     if (!getFeatureFlags().org_downgrade_banner || t?.permission !== FUserRoleType.ADMIN || n?.org_downgrade?.operation_state !== 'scheduled') return null;
     let a = n?.org_downgrade?.scheduled_run_at;

@@ -160,7 +160,7 @@ import { A as _$$A27 } from "../svg/478386";
 import { A as _$$A28 } from "../svg/442990";
 import { A as _$$A29 } from "../svg/484954";
 import { textDisplayConfig } from "../905/687265";
-import { xk, Ay as _$$Ay5 } from "@stylexjs/stylex";
+import { props, stylex } from "@stylexjs/stylex";
 import { logAndTrackCTA, trackContextViewed } from "../figma_app/314264";
 import { e0 as _$$e4 } from "../905/696396";
 import { GS } from "../5430/342380";
@@ -4332,7 +4332,7 @@ function nX() {
   return jsx("div", {
     className: "x1n2onr6 x78zum5 xl56j7k xh8yej3 xpxwu9m",
     children: jsx("div", {
-      ...xk(nV.bannerWrapper, i && nV.bannerWrapperFullWidth),
+      ...props(nV.bannerWrapper, i && nV.bannerWrapperFullWidth),
       children: jsx(Link, {
         to: new tQ({
           landingPageType: tH.MAKE
@@ -4359,22 +4359,22 @@ function nX() {
           }), jsx("div", {
             className: "x10l6tqk x13vifvy x3m8u43 xh8yej3 x5yr21d x1uew1ux xnvw0yq x197sbye x47corl"
           }), jsxs("div", {
-            ...xk(nV.textContent, (i || n) && nV.textContentFullWidth),
+            ...props(nV.textContent, (i || n) && nV.textContentFullWidth),
             children: [jsxs("div", {
               className: "x78zum5 xdt5ytf",
               children: [jsx("div", {
-                ...xk(nV.newDropLabel),
+                ...props(nV.newDropLabel),
                 children: getI18nString("community.homepage.make_banner.new_drop")
               }), jsx("div", {
-                ...xk(nV.title),
+                ...props(nV.title),
                 children: getI18nString("community.homepage.make_banner.make_playground")
               })]
             }), jsx("p", {
-              ...xk(nV.description),
+              ...props(nV.description),
               children: getI18nString("community.homepage.make_banner.description")
             })]
           }), !n && jsx("div", {
-            ...xk(nV.imgFrame, i && !s && nV.imgFrameMiddle, i && s && nV.imgFrameSmall),
+            ...props(nV.imgFrame, i && !s && nV.imgFrameMiddle, i && s && nV.imgFrameSmall),
             children: jsx(WAFImage, {
               src: buildUploadUrl("9d79a1d2b292d8aadc4345be9b76cf9f94bfe56d"),
               alt: "img",
@@ -4996,7 +4996,7 @@ function au() {
       children: [jsx("div", {
         className: "x78zum5 xdt5ytf x6s0dn4 x1nejdyq",
         children: jsxs("h1", {
-          ...xk(am.headline),
+          ...props(am.headline),
           children: [renderI18nText("community.resource_landing_page.make_header.headline_1"), n ? " " : jsx("br", {}), renderI18nText("community.resource_landing_page.make_header.headline_2", {
             ideaText: jsx("span", {
               className: "xh8qa02",
@@ -5180,11 +5180,11 @@ function ab(e) {
     };
   }(filterState, e.resourceType);
   return jsx("div", {
-    ..._$$Ay5.props(af.container),
+    ...stylex.props(af.container),
     children: jsxs("div", {
       className: "x78zum5 xdt5ytf x167g77z",
       children: [jsx("h3", {
-        ..._$$Ay5.props(af.heading),
+        ...stylex.props(af.heading),
         children: ap()[e.resourceType].allResourcesFeed.heading
       }), jsx(_$$T, {
         containerRef: n,
@@ -5474,26 +5474,26 @@ function aE({
     to: r,
     className: "x1hl2dhg x1heor9g",
     children: jsxs("div", {
-      ..._$$Ay5.props(aw.container, c ? aw.hoverContainerDark : aw.hoverContainerLight),
+      ...stylex.props(aw.container, c ? aw.hoverContainerDark : aw.hoverContainerLight),
       onMouseEnter: () => l(!0),
       onMouseLeave: () => l(!1),
       children: [jsxs("div", {
         className: "x78zum5 xdt5ytf x1jnr06f",
         children: [jsx("div", {
-          ..._$$Ay5.props(aw.title),
+          ...stylex.props(aw.title),
           children: e
         }), jsx("div", {
-          ..._$$Ay5.props(aw.subtitle),
+          ...stylex.props(aw.subtitle),
           children: t
         })]
       }), jsxs("div", {
         className: "x1n2onr6 x78zum5 x1d7z9mz x10wjd1d",
         children: [jsx(WAFImage, {
           src: i,
-          ..._$$Ay5.props(aw.imgBase, aw.imgLeft, o && aw.cardFanLeft)
+          ...stylex.props(aw.imgBase, aw.imgLeft, o && aw.cardFanLeft)
         }), jsx(WAFImage, {
           src: n,
-          ..._$$Ay5.props(aw.imgBase, aw.imgRight, o && aw.cardFanRight)
+          ...stylex.props(aw.imgBase, aw.imgRight, o && aw.cardFanRight)
         })]
       })]
     })
@@ -5506,9 +5506,9 @@ function aL({
     if (e === ResourceTypeEnum.PLUGIN) return aj();
   }(e);
   return t ? jsxs("div", {
-    ..._$$Ay5.props(af.container),
+    ...stylex.props(af.container),
     children: [jsx("h3", {
-      ..._$$Ay5.props(af.heading),
+      ...stylex.props(af.heading),
       children: ap()[e].exploreResources.heading
     }), jsx("div", {
       className: "xrvj5dj x15a14ow x1si66sm xjbmbcv x1doagpj xi32cqo x1n6y4br",
@@ -5669,15 +5669,15 @@ function aA(e) {
     return [...e, ...(resources ?? []).filter(e => !t.has(e.rdp_url.split("/").pop() ?? ""))];
   }, [v, resources, tabManager.activeTab]);
   return jsxs("div", {
-    ..._$$Ay5.props(af.container),
+    ...stylex.props(af.container),
     children: [jsxs("div", {
       className: "x78zum5 xdt5ytf xou54vl",
       children: [jsxs("div", {
         children: [jsx("h3", {
-          ..._$$Ay5.props(af.heading),
+          ...stylex.props(af.heading),
           children: f.featuredResources.heading
         }), f.featuredResources.subheading && jsx("div", {
-          ..._$$Ay5.props(af.subheading),
+          ...stylex.props(af.subheading),
           children: f.featuredResources.subheading
         })]
       }), jsx(UI3ConditionalWrapper, {
@@ -5751,9 +5751,9 @@ function aP() {
   }) : jsxs(TrackingProvider, {
     name: _$$e4.COMMUNITY_RESOURCE_LANDING_PAGE,
     children: [jsx(n, {}), jsx("div", {
-      ..._$$Ay5.props(aR.feedContainer),
+      ...stylex.props(aR.feedContainer),
       children: jsxs("div", {
-        ..._$$Ay5.props(aR.feed),
+        ...stylex.props(aR.feed),
         children: [jsxs("div", {
           className: "x78zum5 xdt5ytf x1cy8zhl x1ns3s31 x8xy4a3",
           children: [t.featuredResources.enabled && jsx(aA, {

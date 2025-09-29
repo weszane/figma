@@ -187,7 +187,7 @@ import { isResourcePendingPublishing, isResourceDelisted } from "../figma_app/77
 import { M as _$$M2 } from "../905/759470";
 import { Pn, PP } from "../905/230175";
 import { AvatarSize } from "../905/590952";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { Ro } from "../figma_app/805373";
 import { ax as _$$ax, ts as _$$ts2 } from "../figma_app/49598";
 import { selectViewAction } from "../905/929976";
@@ -3108,7 +3108,7 @@ let nR = registerModal(function () {
   let e = useDispatch();
   let t = useCallback(() => e(hideModal()), [e]);
   let i = useSelector(e => e.currentUserOrgId);
-  let [s] = setupResourceAtomHandler(Eh.OrgAdminsQuery({
+  let [s] = setupResourceAtomHandler(organizationAPIService.OrgAdminsQuery({
     orgId: i
   }), {
     enabled: !!i

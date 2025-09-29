@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { memoizeWeak } from "../figma_app/815945";
 import { containsDash } from "../figma_app/819288";
 import { parsePxNumber } from "../figma_app/783094";
-import { gB, getResourceDataOrFallback } from "../905/723791";
+import { createLoadedState, getResourceDataOrFallback } from "../905/723791";
 import { isPointInRect, Point } from "../905/736624";
 import { ih } from "../905/201151";
 import { viewportToScreen } from "../figma_app/62612";
@@ -154,7 +154,7 @@ let $$R8 = {
 export function $$L14(e, t, r, n, a, o, d, c) {
   if ("loaded" !== t.status) return t;
   let u = t.data.file;
-  if (!u) return gB([]);
+  if (!u) return createLoadedState([]);
   let _ = u?.comments.filter(e => !e.parentId);
   let h = u.comments.filter(e => e.parentId).reduce((e, t) => {
     let r = e[t.parentId] || [];
@@ -214,7 +214,7 @@ export function $$L14(e, t, r, n, a, o, d, c) {
       commentPin: t.commentPin
     };
   });
-  return gB(f);
+  return createLoadedState(f);
 }
 export function $$P17(e, t, r, i) {
   let {
@@ -261,7 +261,7 @@ let D = (e, t, r) => {
 export function $$k10(e, t, r) {
   if ("loaded" !== t.status) return t;
   let n = t.data.file;
-  if (!n) return gB([]);
+  if (!n) return createLoadedState([]);
   let i = n.fileCanvasMentions;
   let a = n.currentUserFileCanvasMentionReadStatus || ih;
   let s = i.map(t => function (e, t, r, n) {
@@ -303,7 +303,7 @@ export function $$k10(e, t, r) {
       nodeId: t.nodeIdPath[0]
     };
   }(e, t, a, r));
-  return gB(s);
+  return createLoadedState(s);
 }
 export function $$M16() {
   return {

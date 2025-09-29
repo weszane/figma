@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { getFileKey } from "../905/412913";
@@ -139,13 +139,13 @@ export function $$I0(e) {
         children: I ? jsxs("div", {
           className: "x78zum5 xdt5ytf x10185g9",
           children: [n, e.showAttribution ? jsx("div", {
-            ...Ay.props(C.attributionContainer),
+            ...stylex.props(C.attributionContainer),
             children: jsx(_$$$, {
               libraryKey: t.library_key,
               attribution: s[t.library_key]?.attribution
             })
           }) : null, e.showName ? jsx("div", {
-            ...Ay.props(C.nameContainer),
+            ...stylex.props(C.nameContainer),
             children: t.name
           }) : null]
         }, a) : n

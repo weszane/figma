@@ -3,7 +3,7 @@ import { Button } from "../905/521428";
 import { k } from "../905/443820";
 import { S } from "../5132/724052";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { SvgComponent } from "../905/714743";
 import { G } from "../905/750789";
 import { getI18nString } from "../905/303541";
@@ -51,10 +51,10 @@ export function $$f7() {
       children: [jsxs("div", {
         className: "x78zum5 xdt5ytf x1nhvcw1 xdpxx8g",
         children: [organization && jsx(G, {
-          ...Ay.props(E.orgName),
+          ...stylex.props(E.orgName),
           text: organization?.name
         }), jsx("p", {
-          ...Ay.props(E.textBodyMediumSecondary),
+          ...stylex.props(E.textBodyMediumSecondary),
           children: getI18nString("figmake.settings.project.org_info.title")
         })]
       }), organization && jsx($$j2, {
@@ -71,10 +71,10 @@ export function $$y0({
     children: [jsxs("div", {
       className: "x78zum5 xdt5ytf x1qughib x1cy8zhl x1tny46i x1kgkb76 x1y8v6su x1tamke2 xh8yej3 x9f619",
       children: [jsx("p", {
-        ...Ay.props(E.textBodyLargeStrong),
+        ...stylex.props(E.textBodyLargeStrong),
         children: getI18nString("figmake.settings.project.header.title")
       }), jsx("p", {
-        ...Ay.props(E.textBodyMediumSecondary),
+        ...stylex.props(E.textBodyMediumSecondary),
         children: getI18nString("figmake.settings.project.header.subtitle")
       })]
     }), e]
@@ -100,7 +100,7 @@ export function $$_6({
           children: [jsxs("div", {
             className: "x78zum5 x1q0g3np x6s0dn4 x167g77z",
             children: [jsx(G, {
-              ...Ay.props(E.textBodyLargeStrong),
+              ...stylex.props(E.textBodyLargeStrong),
               text: i
             }), e]
           }), s || jsx(b, {})]
@@ -117,7 +117,7 @@ function b() {
     organization
   } = mS();
   return jsx(G, {
-    ...Ay.props(E.orgText),
+    ...stylex.props(E.orgText),
     text: organization ? organization.name : getI18nString("figmake.settings.project.org_info.title")
   });
 }
@@ -130,7 +130,7 @@ export function $$j2({
     target: "_blank",
     href: e,
     children: [jsx(S, {}), jsx("p", {
-      ...Ay.props(E.textBodyMedium),
+      ...stylex.props(E.textBodyMedium),
       children: t
     })]
   });
@@ -145,7 +145,7 @@ export function $$v3({
     children: jsxs("div", {
       className: "x78zum5 x1q0g3np x6s0dn4",
       children: [jsx(k, {}), jsx("p", {
-        ...Ay.props(E.textBodyMedium),
+        ...stylex.props(E.textBodyMedium),
         children: t
       })]
     })

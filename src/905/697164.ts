@@ -1,9 +1,10 @@
-import { z } from "../905/239603";
-import { CollaboratorTypesSchema } from "../905/513035";
-import { FPlanFeatureType } from "../figma_app/191312";
-import { AccessLevelSchema } from "../figma_app/576636";
-import { AccountTypeEnum } from "../figma_app/35887";
-export let $$l0 = z.object({
+import { z } from 'zod'
+import { CollaboratorTypesSchema } from '../905/513035'
+import { AccountTypeEnum } from '../figma_app/35887'
+import { FPlanFeatureType } from '../figma_app/191312'
+import { AccessLevelSchema } from '../figma_app/576636'
+
+export let idpUserSchema = z.object({
   id: z.string(),
   email: z.string(),
   name: z.string().nullable(),
@@ -13,7 +14,7 @@ export let $$l0 = z.object({
   isOrgInvite: z.boolean().optional(),
   scim_metadata: z.record(z.string(), z.string().nullable()).nullable(),
   scim_seat_type: AccessLevelSchema.nullish(),
-  type: z.literal(AccountTypeEnum.IDP_USER).$$default(AccountTypeEnum.IDP_USER),
-  seat_type_key: CollaboratorTypesSchema.nullish()
-});
-export const S = $$l0;
+  type: z.literal(AccountTypeEnum.IDP_USER).default(AccountTypeEnum.IDP_USER),
+  seat_type_key: CollaboratorTypesSchema.nullish(),
+})
+export const S = idpUserSchema

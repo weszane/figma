@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { ButtonPrimitive } from "../905/632989";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { Spacing } from "../figma_app/637027";
@@ -166,7 +166,7 @@ export function $$$$E1() {
       children: [jsx(Spacing, {
         multiple: 6
       }), jsx("div", {
-        ...Ay.props(g.selectedProductDescriptionText),
+        ...stylex.props(g.selectedProductDescriptionText),
         children: t
       })]
     })]
@@ -182,7 +182,7 @@ function b(e) {
   } = e;
   return jsx(ButtonPrimitive, {
     onClick,
-    ...Ay.props(g.answerButton, selected && g.selectedAnswerButton, selected && selectedProduct === FFileType.FIGMAKE && g.selectedAnswerButtonMake),
+    ...stylex.props(g.answerButton, selected && g.selectedAnswerButton, selected && selectedProduct === FFileType.FIGMAKE && g.selectedAnswerButtonMake),
     ...a,
     children
   });

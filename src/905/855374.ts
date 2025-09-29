@@ -105,7 +105,7 @@ import { CuratorPortal } from "../905/717951";
 import { A as _$$A } from "../svg/182908";
 import { E as _$$E2 } from "../905/53857";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuSeparator, MenuTitleComp, MenuHiddenTitleComp, MenuItemLead, MenuGroupComp } from "../figma_app/860955";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { P as _$$P4 } from "../905/537307";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { Ay as _$$Ay } from "../figma_app/272902";
@@ -1716,7 +1716,7 @@ function tj({
         className: "x78zum5 x6s0dn4 x1tzdv60 x10w6t97 x87ps6o xk50ysn",
         children: renderI18nText("variables.authoring_modal.sidebar.local_collections")
       }), o.map(i => jsx("div", {
-        ...Ay.props(tU.row, e.node_id === i.node_id && tU.selected),
+        ...stylex.props(tU.row, e.node_id === i.node_id && tU.selected),
         onClick: () => t(i.node_id),
         children: i.name
       }, i.id))]
@@ -2962,7 +2962,7 @@ function iE({
   triggerProps: t
 }) {
   return jsx("div", {
-    ...Ay.props(iT.filterButtonWrapper, e && iT.filterButtonWrapper_Active),
+    ...stylex.props(iT.filterButtonWrapper, e && iT.filterButtonWrapper_Active),
     children: jsx(_$$d, {
       "aria-label": getI18nString("variables.authoring_modal.search.filters"),
       ...t,
@@ -3100,10 +3100,10 @@ let iD = forwardRef((e, t) => {
   let y = e.placeholder ?? getI18nString("general.search");
   return jsxs(Fragment, {
     children: [jsxs("div", {
-      ...Ay.props(iF.inputWrapper, isFocused && iF.inputWrapperFocused),
+      ...stylex.props(iF.inputWrapper, isFocused && iF.inputWrapperFocused),
       style: A,
       children: [jsx(_$$h2, {
-        ...Ay.props(iF.searchIcon, e.query || isFocused ? iF.searchIconPrimary : iF.searchIconSecondary)
+        ...stylex.props(iF.searchIcon, e.query || isFocused ? iF.searchIconPrimary : iF.searchIconSecondary)
       }), jsx(LazyInputForwardRef, {
         ref: searchInputRef,
         "aria-label": y,
@@ -3119,14 +3119,14 @@ let iD = forwardRef((e, t) => {
         placeholder: y,
         spellCheck: !1,
         value: e.query,
-        ...Ay.props(iF.inputTypography, iF.input)
+        ...stylex.props(iF.inputTypography, iF.input)
       }), !!e.query && jsx(iL, {
         onClick: e.clearSearch
       })]
     }), jsx("span", {
       ref: _,
       "aria-hidden": "true",
-      ...Ay.props(iF.inputTypography, iF.hiddenInputTextSizer),
+      ...stylex.props(iF.inputTypography, iF.hiddenInputTextSizer),
       children: e.query
     })]
   });

@@ -1,7 +1,7 @@
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { showModalHandler } from "../905/156213";
-import { uo } from "../figma_app/990058";
+import { batchUpdateOrgUsersAction } from "../figma_app/990058";
 import { FUserRoleType } from "../figma_app/191312";
 import { IY, PT, FW } from "../469e6e40/241454";
 export function $$d1(e, t, a, n = {}) {
@@ -52,7 +52,7 @@ export function $$u3(e, t, a, i, l, o) {
     org_user_ids: e,
     workspace_id: null
   };
-  i(uo({
+  i(batchUpdateOrgUsersAction({
     orgId: a.id,
     lastUpdateTimestampOverride: o,
     params: d,
@@ -68,7 +68,7 @@ export function $$u3(e, t, a, i, l, o) {
   }));
 }
 export function $$m2(e, t, a) {
-  t(uo({
+  t(batchUpdateOrgUsersAction({
     orgId: e.org_id,
     params: {
       org_user_ids: [e.id],

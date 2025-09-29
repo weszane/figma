@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError, debug } from "../figma_app/465776";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { m8 } from "../905/864644";
 import { gX } from "../figma_app/448654";
@@ -478,7 +478,7 @@ function ex({
   if (!Xg(e)) return null;
   let r = Tf.getIsFavorited(e);
   return jsx("div", {
-    ...xk(i || t || r ? eS.topRightContentShown : eS.topRightContentHidden),
+    ...props(i || t || r ? eS.topRightContentShown : eS.topRightContentHidden),
     children: jsx(_$$e2, {
       tile: e,
       entrypoint: "file_tile",

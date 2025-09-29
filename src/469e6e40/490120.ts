@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { FEventSourceType } from "../figma_app/191312";
 let l = {
@@ -11,11 +11,11 @@ let l = {
 export function $$o0(e, t, a, o) {
   let d = {
     userName: jsx("span", {
-      ...xk(!!o && l.boldText),
+      ...props(!!o && l.boldText),
       children: e
     }),
     planName: jsx("span", {
-      ...xk(!!o && l.boldText),
+      ...props(!!o && l.boldText),
       children: t
     }),
     ...(o && {
@@ -31,15 +31,15 @@ export function $$o0(e, t, a, o) {
   let u = a.resourceType;
   let m = ("loaded" === a.metadata.status && a.metadata.data?.previous_team_name) ?? "";
   let p = jsx("span", {
-    ...xk(!!o && l.boldText),
+    ...props(!!o && l.boldText),
     children: c
   });
   let g = jsx("span", {
-    ...xk(!!o && l.boldText),
+    ...props(!!o && l.boldText),
     children: _
   });
   let h = jsx("span", {
-    ...xk(!!o && l.boldText),
+    ...props(!!o && l.boldText),
     children: m
   });
   switch (a.source) {

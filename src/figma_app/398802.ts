@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { R } from "../figma_app/360122";
 export function $$s0({
   children: e
 }) {
   return jsx("div", {
-    ...xk(R.attributionChildren),
+    ...props(R.attributionChildren),
     children: e
   });
 }

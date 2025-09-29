@@ -1,4 +1,4 @@
-import { Ay, xk } from '@stylexjs/stylex';
+import { stylex, props } from '@stylexjs/stylex';
 import i from 'classnames';
 import { createContext, forwardRef, memo, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
@@ -156,7 +156,7 @@ import { useSiteKitAssets, useLibraryDisplayName, useSiteKitCmsConfig, siteKitSt
 import { g5 } from '../figma_app/178752';
 import { h as _$$h2, sN as _$$sN, hB, ht, LH, R2, uo, zf } from '../figma_app/188908';
 import { FFileType } from '../figma_app/191312';
-import { getSelectedView } from '../figma_app/198885';
+import { getSelectedViewSelector } from '../figma_app/198885';
 import { cG, hK, X3, xU } from '../figma_app/211706';
 import { q as _$$q, U as _$$U3 } from '../figma_app/213525';
 import { suggestionsSeenTrackerAtom, suggestionsManagerAtom } from '../figma_app/235371';
@@ -2675,7 +2675,7 @@ let s7 = memo(({
 });
 function s9() {
   let e = useSelector(e => e.dropdownShown);
-  let t = useSelector(getSelectedView);
+  let t = useSelector(getSelectedViewSelector);
   let s = e?.type === LibraryItemTileContextMenuType.ASSETS_PANEL && !!e?.data?.component;
   let i = e?.type === s4 && !!e?.data?.pageId;
   let l = e?.type === sZ && !!e?.data;
@@ -3085,7 +3085,7 @@ function rB() {
   i || (!isInitialized || C && isLoading || C && l.status === 'loading' ? e = jsx(_$$k2, {
     size: 'md'
   }) : C || (e = jsx('div', {
-    ...xk(rD.statusIndicator, k ? rD.statusIndicatorSeen : rD.statusIndicatorUnseen),
+    ...props(rD.statusIndicator, k ? rD.statusIndicatorSeen : rD.statusIndicatorUnseen),
     children: suggestions.length
   })));
   return jsxs('div', {
@@ -3861,16 +3861,16 @@ function n_() {
     closeOverlay();
   }, [s, closeOverlay]);
   return jsx('div', {
-    ...Ay.props(_$$A3.p16),
+    ...stylex.props(_$$A3.p16),
     children: jsxs('div', {
-      ...Ay.props(_$$A3.flex, _$$A3.flexColumn, _$$A3.itemsCenter, _$$A3.textCenter, _$$A3.gap8),
+      ...stylex.props(_$$A3.flex, _$$A3.flexColumn, _$$A3.itemsCenter, _$$A3.textCenter, _$$A3.gap8),
       children: [jsx(_$$T3, {
         className: 'x1aue78i'
       }), jsx('div', {
-        ...Ay.props(_$$A3.textBodyMediumStrong, _$$A3.colorText),
+        ...stylex.props(_$$A3.textBodyMediumStrong, _$$A3.colorText),
         children: renderI18nText('dakota.site_blocks.create_cms_collection')
       }), jsx('div', {
-        ...Ay.props(_$$A3.textBodyMedium, _$$A3.colorTextSecondary),
+        ...stylex.props(_$$A3.textBodyMedium, _$$A3.colorTextSecondary),
         children: renderI18nText('dakota.site_blocks.dynamically_connect_and_update')
       }), jsx(ButtonWide, {
         onClick: i,
@@ -3961,7 +3961,7 @@ function nv({
 }
 function nS() {
   return jsx('div', {
-    ...Ay.props(_$$A3.p16),
+    ...stylex.props(_$$A3.p16),
     children: jsx(_$$k2, {})
   });
 }
@@ -4020,7 +4020,7 @@ let nE = forwardRef(({
   let h = Cg(p);
   return h && h.type === ModeType.SITE ? createPortal(jsx('div', {
     'ref': a,
-    ...Ay.props(nO.flyout, nO.flyoutPosition(c), e && nO.hidden),
+    ...stylex.props(nO.flyout, nO.flyoutPosition(c), e && nO.hidden),
     'onMouseEnter': s,
     'onMouseLeave': i,
     'data-fullscreen-prevent-event-capture': !0,
@@ -4158,7 +4158,7 @@ function nR({
     thumbWidth
   } = nN();
   return jsx('div', {
-    ...Ay.props(e, nO.flyoutWrapper, nO.flyoutWrapperWidth(thumbWidth)),
+    ...stylex.props(e, nO.flyoutWrapper, nO.flyoutWrapperWidth(thumbWidth)),
     children: t
   });
 }
@@ -8036,9 +8036,9 @@ function l4({
   } = _$$h5();
   let o = !useIsFullscreenSitesView() && n && getConfig().get('variant', 'control') !== 'control';
   return jsxs('div', {
-    ...Ay.props(l6.searchAndFilter, l && l6.leftRailSearchAndFilter),
+    ...stylex.props(l6.searchAndFilter, l && l6.leftRailSearchAndFilter),
     children: [jsx('div', {
-      ...Ay.props(l6.search, l && l6.leftRailSearch),
+      ...stylex.props(l6.search, l && l6.leftRailSearch),
       children: jsx(lb, {
         libraryName: e?.name
       })
@@ -8046,7 +8046,7 @@ function l4({
       className: 'x1ms6mhf x1npkx4u',
       children: jsx(l0, {})
     }), jsx('div', {
-      ...Ay.props(l6.settings, o && l6.settingsWithVisualSearchButton),
+      ...stylex.props(l6.settings, o && l6.settingsWithVisualSearchButton),
       children: jsx(lL, {
         includeFolderSetting: [S5.Libraries, S5.Pages, S5.Assets].includes(currentView)
       })

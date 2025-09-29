@@ -22,10 +22,10 @@ import { P as _$$P2 } from "../905/347284";
 import { TextWithTruncation } from "../905/984674";
 import { SidebarRow } from "../451de8f0/94979";
 import { selectViewAction } from "../905/929976";
-import { a9 } from "../figma_app/741211";
+import { useCurrentUserOrgUser } from "../figma_app/741211";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { useSubscription } from "../figma_app/288654";
-import { Xm, gB } from "../905/723791";
+import { createLoadingState, createLoadedState } from "../905/723791";
 import { MX, RG, EQ, EO } from "../figma_app/684446";
 import { FMemberRoleType, FOrganizationRoleType, FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { AdminSettingsSelectorView } from "../figma_app/43951";
@@ -55,7 +55,7 @@ import { UpgradeAction } from "../905/370443";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { OnboardingModal } from "../905/425180";
 import { Rb, qW, ZW, eC as _$$eC } from "../figma_app/982327";
-import { ps } from "../figma_app/845611";
+import { TeamOrg } from "../figma_app/845611";
 import { trackSidebarClick } from "../905/34809";
 import { Mn, e9 } from "../4452/961065";
 import { fetchTeamMembersThunk } from "../figma_app/240735";
@@ -498,7 +498,7 @@ let eO = memo(() => jsx(Fragment, {
 }));
 function eL() {
   let e = useCurrentUserOrg();
-  let t = a9();
+  let t = useCurrentUserOrgUser();
   let a = getSelectedView();
   let s = useRef(!1);
   let {
@@ -529,7 +529,7 @@ function eL() {
     return {
       isOrgAdmin: !!n,
       licenseGroups: o,
-      workspaces: "loading" === d.status || "disabled" === d.status ? Xm() : gB(c)
+      workspaces: "loading" === d.status || "disabled" === d.status ? createLoadingState() : createLoadedState(c)
     };
   }();
   let d = useIsLoading(EO(e?.id ?? "")) && !s.current;
@@ -597,7 +597,7 @@ function eD(e) {
         teamAdminConsoleViewTab: DashboardSections.DASHBOARD
       },
       badge: t ? jsx(e9, {
-        planType: ps.TEAM,
+        planType: TeamOrg.TEAM,
         planId: e,
         isOrgAdmin: !1,
         isDataLoaded: !0

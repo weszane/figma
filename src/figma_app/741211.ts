@@ -1,360 +1,559 @@
-import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { resourceUtils } from "../905/989992";
-import s from "../vendor/128080";
-import { trackEventAnalytics } from "../905/449184";
-import { xj, ok } from "../figma_app/851625";
-import { logger } from "../905/651849";
-import { useLatestRef } from "../figma_app/922077";
-import { J } from "../905/931050";
-import { subscribeAndAwaitData } from "../905/553831";
-import { useSubscription } from "../figma_app/288654";
-import { Xm, gB, e1, tT } from "../905/723791";
-import { APILoadingStatus } from "../905/520829";
-import { serializeQuery } from "../905/634134";
-import { generateUUIDv4 } from "../905/871474";
-import { FlashActions } from "../905/573154";
-import { getI18nString } from "../905/303541";
-import { $ } from "../905/240853";
-import { hZ } from "../figma_app/996356";
-import { hZ as _$$hZ } from "../figma_app/990058";
-import { OrgAdminUserView, OrgAdminUserMinimalFieldsView } from "../figma_app/43951";
-import { serializeFiltersForApi } from "../figma_app/585126";
-import { sortConfigToQuery } from "../905/902560";
-import { getCurrentUserOrgUser } from "../figma_app/951233";
-import { useCurrentPrivilegedPlan } from "../figma_app/465071";
-import { DefaultFilters } from "../figma_app/967319";
-import { Eh, Wd } from "../figma_app/617654";
-import { t as _$$t2 } from "../figma_app/157238";
-var o = s;
-let L = 1e4;
-export function $$P3() {
-  return useSelector(e => getCurrentUserOrgUser(e));
+import { isEqual } from 'lodash-es'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { idpUserBatchPostAction } from '../905/240853'
+import { getI18nString } from '../905/303541'
+import { trackEventAnalytics } from '../905/449184'
+import { APILoadingStatus } from '../905/520829'
+import { subscribeAndAwaitData } from '../905/553831'
+import { FlashActions } from '../905/573154'
+import { serializeQuery } from '../905/634134'
+import { logger } from '../905/651849'
+import { createErrorState, createLoadedState, createLoadingState, ResourceStatus } from '../905/723791'
+import { generateUUIDv4 } from '../905/871474'
+import { setUserInOrgs } from '../905/890368'
+import { sortConfigToQuery } from '../905/902560'
+import { useAsyncWithReset } from '../905/931050'
+import { resourceUtils } from '../905/989992'
+import { OrgAdminUserMinimalFieldsView, OrgAdminUserView } from '../figma_app/43951'
+import { getOrgUsersList } from '../figma_app/157238'
+import { useSubscription } from '../figma_app/288654'
+import { useCurrentPrivilegedPlan } from '../figma_app/465071'
+import { serializeFiltersForApi } from '../figma_app/585126'
+import { organizationAPIService, Wd } from '../figma_app/617654'
+import { isFailure, isSuccess } from '../figma_app/851625'
+import { useLatestRef } from '../figma_app/922077'
+import { getCurrentUserOrgUser } from '../figma_app/951233'
+import { DefaultFilters } from '../figma_app/967319'
+import { setOrgInvites } from '../figma_app/996356'
+// Refactored constants and utilities
+const DEBOUNCE_DELAY = 10000
+
+/**
+ * Custom error class for aborted operations.
+ * Original: class M extends Error {}
+ */
+class AbortError extends Error {}
+
+/**
+ * Utility function to check if both values are truthy.
+ * Original: export function $$V4(e, t)
+ * @param value1 - First value to check.
+ * @param value2 - Second value to check.
+ * @returns True if both values are truthy.
+ */
+export function hasTwoValue(value1: any, value2: any): boolean {
+  return !!(value1 && value2)
 }
-export function $$D7(e, t, r) {
-  let [i, a] = useState(Xm());
-  let s = useRef(null);
-  let o = () => {
-    s.current && (clearTimeout(s.current), s.current = null);
-  };
-  let l = useCallback(async () => await Eh.getOrgUsersFilterCounts({
-    searchQuery: t,
-    licenseGroupId: r.licenseGroupFilter || void 0,
-    workspaceId: r.workspaceFilter || void 0,
-    permission: r.permissionFilter || void 0,
-    orgId: e,
-    seatType: r.seatTypeFilter || void 0
-  }), [r.licenseGroupFilter, r.workspaceFilter, r.permissionFilter, r.seatTypeFilter, e, t]);
-  let c = J(() => (o(), l()), [l]);
-  useEffect(() => {
-    xj(c) ? a(gB(c.value.data.meta)) : ok(c) ? a(e1([])) : a(Xm());
-  }, [c]);
+
+/**
+ * Utility function to check if custom templates are allowed.
+ * Original: export function $$H1(e)
+ * @param state - Redux state.
+ * @returns True if custom templates are allowed.
+ */
+export function canUseCustomTemplates(state: any): boolean {
+  const currentOrg = state.currentUserOrgId ? state.orgById[state.currentUserOrgId] : null
+  const currentUserOrgUser = getCurrentUserOrgUser(state)
+  return !!(currentOrg && currentOrg.are_custom_templates_allowed && currentUserOrgUser)
+}
+
+/**
+ * Creates query parameters for org users.
+ * Original: function z(e, { searchQuery: t, sort: r, filter: n, firstPageSize: i }, a)
+ * @param orgId - Organization ID.
+ * @param options - Query options.
+ * @param refetchToken - Optional refetch token.
+ * @returns Query object.
+ */
+function createOrgUsersQuery(
+  orgId: string,
+  { searchQuery, sort, filter, firstPageSize }: { searchQuery?: string, sort?: any, filter?: any, firstPageSize?: number },
+  refetchToken?: string | null,
+) {
   return {
-    filterCountsViewResult: i,
-    queueFilterCountsRefetch: useCallback(() => {
-      o();
-      s.current = setTimeout(async () => {
-        a(Xm());
-        try {
-          let e = await l();
-          a(gB(e.data.meta));
-        } catch (e) {
-          a(e1([]));
-        }
-      }, L);
-    }, [l])
-  };
+    orgId,
+    firstPageSize: firstPageSize || 25,
+    refetchToken: refetchToken || null,
+    queryParams: `${serializeQuery({
+      ...(searchQuery && { search_query: searchQuery }),
+      ...(sort && sortConfigToQuery(sort)),
+      ...(filter && serializeFiltersForApi(filter)),
+    })}`,
+  }
 }
-export function $$k2({
-  orgId: e,
-  includeLicenseAdmins: t = !0
-}) {
-  let [r, a] = useState(!1);
-  let [s, o] = useState(!1);
-  let [l, d] = useState(!1);
-  let [c, u] = useState([]);
-  let p = useDispatch();
-  useEffect(() => {
-    (async () => {
-      if (!r && !s && !l) {
-        a(!0);
-        try {
-          let r = await Eh.getAdmins({
-            includeLicenseAdmins: !!t,
-            orgId: e
-          });
-          u(r.data.meta);
-          o(!0);
-          a(!1);
-        } catch (e) {
-          p(FlashActions.error(getI18nString("org_user_actions.an_error_occurred_fetching_org_admins")));
-          a(!1);
-          o(!1);
-          d(!0);
+
+/**
+ * Dispatches org users data to Redux.
+ * Original: let U = (e, t, r) => { ... }
+ * @param orgId - Organization ID.
+ * @param dispatch - Redux dispatch function.
+ * @param users - Array of users.
+ */
+function dispatchOrgUsersData(orgId: string, dispatch: any, users: any[]) {
+  const orgUsers: any[] = []
+  const idpUsers: any[] = []
+  const orgInvites: any[] = []
+
+  users.forEach((user) => {
+    switch (user.type) {
+      case Wd.ORG_USER:
+        if ('org_id' in user) {
+          orgUsers.push(user)
         }
-      }
-    })();
-  }, [e, t, s, r, l, p]);
-  return {
-    isFetched: s,
-    orgAdmins: c
-  };
+        break
+      case Wd.IDP_USER:
+        idpUsers.push(user)
+        break
+      case Wd.ORG_INVITE:
+        orgInvites.push(user)
+        break
+    }
+  })
+
+  dispatch(setUserInOrgs({ orgUsers, orgId }))
+  if (idpUsers.length) {
+    dispatch(idpUserBatchPostAction({ idpUsers }))
+  }
+  if (orgInvites.length) {
+    dispatch(setOrgInvites(orgInvites))
+  }
 }
-class M extends Error {}
-let F = async (e, t, r) => {
-  let {
+
+/**
+ * Fetches paginated org users from API.
+ * Original: let F = async (e, t, r) => { ... }
+ * @param dispatch - Redux dispatch function.
+ * @param orgId - Organization ID.
+ * @param options - Fetch options.
+ * @returns Promise resolving to users data or error.
+ */
+async function fetchOrgUsersPaginated(
+  dispatch: any,
+  orgId: string,
+  {
     cursor,
     searchQuery,
     sort,
     filter,
     firstPageSize,
     signal,
-    minimalFields
-  } = r;
-  let u = null === cursor ? (firstPageSize || 25).toString() : null;
+    minimalFields,
+    extraLoggingData = {},
+  }: {
+    cursor: string | null
+    searchQuery?: string
+    sort?: any
+    filter?: any
+    firstPageSize?: number
+    signal?: AbortSignal
+    minimalFields?: boolean
+    extraLoggingData?: any
+  },
+) {
+  const pageSize = cursor === null ? (firstPageSize || 25) : null
+
   try {
-    let e = Date.now();
-    trackEventAnalytics("Org Admin Members V2 Fetch Initiated", {
-      orgId: t,
-      ...r.extraLoggingData,
-      isInitialLoad: null === cursor,
-      minimalFields
-    });
-    let o = Eh.getOrgUsersPaginatedV2({
-      orgId: t,
-      pageSize: u,
+    const startTime = Date.now()
+    trackEventAnalytics('Org Admin Members V2 Fetch Initiated', {
+      orgId,
+      ...extraLoggingData,
+      isInitialLoad: cursor === null,
+      minimalFields,
+    })
+
+    const response = await organizationAPIService.getOrgUsersPaginatedV2({
+      orgId,
+      pageSize,
       after: cursor,
       searchQuery,
-      sort: sort ? sortConfigToQuery(sort) : void 0,
-      filter: filter ? serializeFiltersForApi(filter) : void 0,
-      minimalFields
-    });
-    let p = await o;
-    trackEventAnalytics("Org Admin Members V2 Fetch Succeeded", {
-      orgId: t,
-      durationMs: Date.now() - e,
-      ...r.extraLoggingData,
-      isInitialLoad: null === cursor,
-      minimalFields
-    });
-    let _ = [...(p.data.meta.users || [])];
-    let h = p.data.meta.cursor;
-    let m = p.data.meta.totalUserCount;
-    if (signal?.aborted) throw new M();
-    return {
-      users: _,
-      newCursor: h,
-      totalUserCount: m
-    };
-  } catch (t) {
-    if (!(t instanceof M)) {
-      let r = t.data?.status === 422 ? t.data?.message : t.message;
-      e(FlashActions.error(r || getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
+      sort: sort ? sortConfigToQuery(sort) : undefined,
+      filter: filter ? serializeFiltersForApi(filter) : undefined,
+      minimalFields,
+    }) as any
+
+    trackEventAnalytics('Org Admin Members V2 Fetch Succeeded', {
+      orgId,
+      durationMs: Date.now() - startTime,
+      ...extraLoggingData,
+      isInitialLoad: cursor === null,
+      minimalFields,
+    })
+
+    const users = [...(response.data.meta.users || [])]
+    const newCursor = response.data.meta.cursor
+    const totalUserCount = response.data.meta.totalUserCount
+
+    if (signal?.aborted) {
+      throw new AbortError()
     }
-    return t;
+
+    return { users, newCursor, totalUserCount }
   }
-};
-export async function $$j5(e, t, r) {
-  let {
-    users,
-    newCursor,
-    totalUserCount
-  } = await F(e, t, r);
-  U(t, e, users);
-  return {
-    users,
-    newCursor,
-    totalUserCount
-  };
-}
-let U = (e, t, r) => {
-  let n = [];
-  let i = [];
-  let a = [];
-  r.forEach(e => {
-    switch (e.type) {
-      case Wd.ORG_USER:
-        if (!("org_id" in e)) break;
-        n.push(e);
-        break;
-      case Wd.IDP_USER:
-        i.push(e);
-        break;
-      case Wd.ORG_INVITE:
-        a.push(e);
+  catch (error: any) {
+    if (!(error instanceof AbortError)) {
+      const errorMessage = error.data?.status === 422 ? error.data?.message : error.message
+      dispatch(FlashActions.error(errorMessage || getI18nString('org_user_actions.an_error_occurred_fetching_org_users')))
     }
-  });
-  t(_$$hZ({
-    orgUsers: n,
-    orgId: e
-  }));
-  i && t($({
-    idpUsers: i
-  }));
-  a && t(hZ(a));
-};
-export function $$B6(e) {
-  let t = useDispatch();
-  let r = useSelector(({
-    currentUserOrgId: e
-  }) => e);
-  let s = useCurrentPrivilegedPlan("useGetOrgUsers").unwrapOr(null);
-  let o = null;
-  s && (o = s.campfireModelEnabledAt);
-  let l = useMemo(() => z(r, e), [r, e]);
-  let d = useSubscription(OrgAdminUserView, l);
-  let [u, p] = useState(null);
-  let m = useCallback(() => {
+    throw error
+  }
+}
+
+/**
+ * Fetches and dispatches org users.
+ * Original: export async function $$j5(e, t, r)
+ * @param dispatch - Redux dispatch function.
+ * @param orgId - Organization ID.
+ * @param options - Fetch options.
+ * @returns Promise resolving to users data.
+ */
+export async function fetchAndDispatchOrgUsers(
+  dispatch: any,
+  orgId: string,
+  options: Parameters<typeof fetchOrgUsersPaginated>[2],
+) {
+  const { users, newCursor, totalUserCount } = await fetchOrgUsersPaginated(dispatch, orgId, options)
+  dispatchOrgUsersData(orgId, dispatch, users)
+  return { users, newCursor, totalUserCount }
+}
+
+// Hooks section
+
+/**
+ * Hook to get current user org user.
+ * Original: export function $$P3()
+ * @returns Current user org user.
+ */
+export function useCurrentUserOrgUser() {
+  return useSelector((state: any) => getCurrentUserOrgUser(state))
+}
+
+/**
+ * Hook for org users filter counts.
+ * Original: export function $$D7(e, t, r)
+ * @param orgId - Organization ID.
+ * @param searchQuery - Search query.
+ * @param filters - Filter options.
+ * @returns Filter counts and refetch function.
+ */
+export function useOrgUsersFilterCounts(
+  orgId: string,
+  searchQuery: string,
+  filters: { licenseGroupFilter?: string, workspaceFilter?: string, permissionFilter?: string, seatTypeFilter?: string },
+) {
+  const [filterCountsViewResult, setFilterCountsViewResult] = useState(createLoadingState())
+  const timeoutRef = useRef<NodeJS.Timeout | number | null>(null)
+
+  const clearTimeoutRef = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+  }
+
+  const fetchFilterCounts = useCallback(async () =>
+    organizationAPIService.getOrgUsersFilterCounts({
+      searchQuery,
+      licenseGroupId: filters.licenseGroupFilter || undefined,
+      workspaceId: filters.workspaceFilter || undefined,
+      permission: filters.permissionFilter || undefined,
+      orgId,
+      seatType: filters.seatTypeFilter || undefined,
+    }), [filters.licenseGroupFilter, filters.workspaceFilter, filters.permissionFilter, filters.seatTypeFilter, orgId, searchQuery])
+
+  const asyncResult = useAsyncWithReset(() => {
+    clearTimeoutRef()
+    return fetchFilterCounts()
+  }, [fetchFilterCounts])
+
+  useEffect(() => {
+    if (isSuccess(asyncResult)) {
+      setFilterCountsViewResult(createLoadedState(asyncResult.value.data.meta))
+    }
+    else if (isFailure(asyncResult)) {
+      setFilterCountsViewResult(createErrorState([]))
+    }
+    else {
+      setFilterCountsViewResult(createLoadingState())
+    }
+  }, [asyncResult])
+
+  const queueFilterCountsRefetch = useCallback(() => {
+    clearTimeoutRef()
+    timeoutRef.current = setTimeout(async () => {
+      setFilterCountsViewResult(createLoadingState())
+      try {
+        const result = await fetchFilterCounts()
+        setFilterCountsViewResult(createLoadedState(result.data.meta))
+      }
+      catch {
+        setFilterCountsViewResult(createErrorState([]))
+      }
+    }, DEBOUNCE_DELAY)
+  }, [fetchFilterCounts])
+
+  return { filterCountsViewResult, queueFilterCountsRefetch }
+}
+
+/**
+ * Hook for fetching org admins.
+ * Original: export function $$k2({ orgId: e, includeLicenseAdmins: t = !0 })
+ * @param options - Options for fetching admins.
+ * @returns Fetch status and org admins.
+ */
+export function useOrgAdmins({ orgId, includeLicenseAdmins = true }: { orgId: string, includeLicenseAdmins?: boolean }) {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isFetched, setIsFetched] = useState(false)
+  const [hasError, setHasError] = useState(false)
+  const [orgAdmins, setOrgAdmins] = useState<any[]>([])
+  const dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+    if (isFetched || isLoading || hasError)
+      return
+
+    const fetchAdmins = async () => {
+      setIsLoading(true)
+      try {
+        const response = await organizationAPIService.getAdmins({
+          includeLicenseAdmins: !!includeLicenseAdmins,
+          orgId,
+        })
+        setOrgAdmins(response.data.meta as any)
+        setIsFetched(true)
+      }
+      catch {
+        dispatch(FlashActions.error(getI18nString('org_user_actions.an_error_occurred_fetching_org_admins')))
+        setHasError(true)
+      }
+      finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchAdmins()
+  }, [orgId, includeLicenseAdmins, isFetched, isLoading, hasError, dispatch])
+
+  return { isFetched, orgAdmins }
+}
+
+/**
+ * Hook for getting org users.
+ * Original: export function $$B6(e)
+ * @param options - Options for fetching users.
+ * @returns Status, users, and fetch functions.
+ */
+export function useOrgUsers(options: { searchQuery?: string, sort?: any, filter?: any, firstPageSize?: number }) {
+  const dispatch = useDispatch<AppDispatch>()
+  const currentOrgId = useSelector((state: any) => state.currentUserOrgId)
+  const privilegedPlan = useCurrentPrivilegedPlan('useGetOrgUsers').unwrapOr(null)
+  const campfireModelEnabledAt = privilegedPlan ? privilegedPlan.campfireModelEnabledAt : null
+
+  const query = useMemo(() => createOrgUsersQuery(currentOrgId, options), [currentOrgId, options])
+  const subscription = useSubscription(OrgAdminUserView, query)
+  const [manualRefetchResult, setManualRefetchResult] = useState<any>(null)
+
+  const refetch = useCallback(() => {
     subscribeAndAwaitData(OrgAdminUserView, {
-      ...l,
-      refetchToken: generateUUIDv4()
-    }).then(e => {
-      p(resourceUtils.loaded(e));
-    }, e => {
-      throw e;
-    });
-  }, [l]);
-  let g = u ?? d;
-  let f = useMemo(() => g.data ? _$$t2(g.data, o) : [], [g.data, o]);
+      ...query,
+      refetchToken: generateUUIDv4(),
+    }).then((data) => {
+      setManualRefetchResult(resourceUtils.loaded(data))
+    }).catch((error) => {
+      throw error
+    })
+  }, [query])
+
+  const data = manualRefetchResult ?? subscription
+  const usersList = useMemo(() => (data.data ? getOrgUsersList(data.data, campfireModelEnabledAt) : []), [data.data, campfireModelEnabledAt])
+
   useEffect(() => {
-    "errors" === g.status && t(FlashActions.error(getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
-  }, [t, g.status]);
+    if (data.status === 'errors') {
+      dispatch(FlashActions.error(getI18nString('org_user_actions.an_error_occurred_fetching_org_users')))
+    }
+  }, [dispatch, data.status])
+
   useEffect(() => {
-    "loaded" === g.status && U(r, t, f);
-  }, [t, f, g.status, r]);
-  let T = useSelector(e => {
-    let t = e.currentUserOrgId;
-    return e.orgUsersByOrgId[t];
-  });
-  let I = useSelector(e => e.idpUserById);
-  let S = useMemo(() => function (e, t, r) {
-    let n = [];
-    let i = new Set();
-    let a = [];
-    e.forEach(e => {
-      if (e.type === Wd.ORG_USER) {
-        let r = t[e.user_id];
-        r ? i.has(e.user_id) ? a.push(e.user_id) : (n.push(r), i.add(e.user_id)) : logger.warn(`sortedUsers returned a user (${e.type}-${e.id}) that is not in redux`);
-      } else {
-        let t = r.idpUsers[e.id];
-        t && (e.type === Wd.ORG_INVITE && t.isOrgInvite || e.type === Wd.IDP_USER && !t.isOrgInvite) ? i.has(e.id) ? a.push(e.id) : (n.push(t), i.add(e.id)) : logger.warn(`sortedUsers returned a user (${e.type}-${e.id}) that is not in redux`);
-      }
-    });
-    a.length && logger.error(`ERROR: Duplicate user result in sortedUsers: ${a}.`);
-    return n;
-  }(f, T, I), [I, T, f]);
-  let A = useCallback(() => {
-    g.data?.orgAdminUsers?.loadNext(100);
-  }, [g.data?.orgAdminUsers]);
-  let x = g.data?.orgAdminUsers?.hasNextPage() && !g.data.orgAdminUsers.isLoadingNextPage ? A : void 0;
-  let N = useCallback((e = L) => setTimeout(m, e), [m]);
-  return {
-    status: g.status,
-    sortedUsers: S,
-    fetchMore: x,
-    queueRefetch: N
-  };
-}
-export function $$G0({
-  searchQuery: e,
-  filter: t,
-  selectedAll: r
-}) {
-  let a = useSelector(({
-    currentUserOrgId: e
-  }) => e);
-  let [s, l] = useState({});
-  let d = useLatestRef(e);
-  let c = useLatestRef(t);
-  let p = useLatestRef(r);
-  let _ = d !== e || !o()(c, t) || !p && r;
-  let f = {
-    ...DefaultFilters,
-    ...t
-  };
-  let E = !r || "provisional" === f.permissionFilter;
-  useEffect(() => {
-    _ && l({});
-  }, [_]);
-  let y = useMemo(() => z(a, {
-    searchQuery: e,
-    filter: t
-  }), [t, a, e]);
-  let b = useSubscription(OrgAdminUserMinimalFieldsView, y);
-  let T = APILoadingStatus.LOADING;
-  if ("loaded" === b.status && b.data?.orgAdminUsersMinimalFields?.status === tT.Loaded ? T = APILoadingStatus.SUCCESS : ("errors" === b.status || b.data?.orgAdminUsersMinimalFields?.status === tT.Error) && (T = APILoadingStatus.FAILURE), useEffect(() => {
-    if (T !== APILoadingStatus.SUCCESS) return;
-    let e = b.data?.orgAdminUsersMinimalFields?.status === tT.Loaded ? function (e) {
-      let t = [];
-      for (let r of e) {
-        let e = r.orgUser;
-        e && t.push({
-          id: e.id,
-          type: Wd.ORG_USER,
-          user: {
-            id: e.user.id,
-            handle: e.user.handle,
-            img_url: e.user.imgUrl,
-            email: e.user.email
+    if (data.status === 'loaded') {
+      dispatchOrgUsersData(currentOrgId, dispatch, usersList)
+    }
+  }, [dispatch, usersList, data.status, currentOrgId])
+
+  const orgUsersByOrgId = useSelector((state: any) => state.orgUsersByOrgId[currentOrgId])
+  const idpUserById = useSelector((state: any) => state.idpUserById)
+
+  const sortedUsers = useMemo(() => {
+    const result: any[] = []
+    const seenIds = new Set()
+    const duplicateIds: string[] = []
+
+    usersList.forEach((user: any) => {
+      if (user.type === Wd.ORG_USER) {
+        const orgUser = orgUsersByOrgId?.[user.user_id]
+        if (orgUser) {
+          if (seenIds.has(user.user_id)) {
+            duplicateIds.push(user.user_id)
           }
-        });
+          else {
+            result.push(orgUser)
+            seenIds.add(user.user_id)
+          }
+        }
+        else {
+          logger.warn(`sortedUsers returned a user (${user.type}-${user.id}) that is not in redux`)
+        }
       }
-      return t;
-    }(b.data.orgAdminUsersMinimalFields.data) : [];
-    l(t => {
-      let r = _ ? {} : {
-        ...t
-      };
-      e.forEach(e => r[e.id] = e);
-      return r;
-    });
-    b.data?.orgAdminUsersMinimalFields?.status === tT.Loaded && b.data.orgAdminUsersMinimalFields.data.hasNextPage() && b.data.orgAdminUsersMinimalFields.data.loadNext(400);
-  }, [T, b.data, _]), E) return {
-    status: APILoadingStatus.INIT,
-    users: [],
-    totalSelectable: null
-  };
-  let I = T === APILoadingStatus.SUCCESS && b.data && b.data.orgAdminUsersMinimalFields && b.data.orgAdminUsersMinimalFields.status === tT.Loaded && b.data.orgAdminUsersMinimalFields.data && !b.data.orgAdminUsersMinimalFields.data.hasNextPage();
-  let S = null;
-  I && (S = Object.keys(s).length);
+      else {
+        const idpUser = idpUserById?.[user.id]
+        if (idpUser && ((user.type === Wd.ORG_INVITE && idpUser.isOrgInvite) || (user.type === Wd.IDP_USER && !idpUser.isOrgInvite))) {
+          if (seenIds.has(user.id)) {
+            duplicateIds.push(user.id)
+          }
+          else {
+            result.push(idpUser)
+            seenIds.add(user.id)
+          }
+        }
+        else {
+          logger.warn(`sortedUsers returned a user (${user.type}-${user.id}) that is not in redux`)
+        }
+      }
+    })
+
+    if (duplicateIds.length) {
+      logger.error(`ERROR: Duplicate user result in sortedUsers: ${duplicateIds}.`)
+    }
+
+    return result
+  }, [idpUserById, orgUsersByOrgId, usersList])
+
+  const fetchMore = useCallback(() => {
+    data.data?.orgAdminUsers?.loadNext(100)
+  }, [data.data?.orgAdminUsers])
+
+  const hasNextPage = data.data?.orgAdminUsers?.hasNextPage() && !data.data.orgAdminUsers.isLoadingNextPage
+  const fetchMoreFn = hasNextPage ? fetchMore : undefined
+
+  const queueRefetch = useCallback((delay = DEBOUNCE_DELAY) => setTimeout(refetch, delay), [refetch])
+
   return {
-    status: I ? APILoadingStatus.SUCCESS : T === APILoadingStatus.SUCCESS ? APILoadingStatus.LOADING : T,
-    users: Object.values(s),
-    totalSelectable: S
-  };
+    status: data.status,
+    sortedUsers,
+    fetchMore: fetchMoreFn,
+    queueRefetch,
+  }
 }
-export function $$V4(e, t) {
-  return !!(e && t);
-}
-export function $$H1(e) {
-  var t;
-  let r = getCurrentUserOrgUser(e);
-  return !!((t = e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null) && t.are_custom_templates_allowed && r);
-}
-function z(e, {
-  searchQuery: t,
-  sort: r,
-  filter: n,
-  firstPageSize: i
-}, a) {
+
+/**
+ * Hook for selectable users.
+ * Original: export function $$G0({ searchQuery: e, filter: t, selectedAll: r })
+ * @param options - Options for selectable users.
+ * @returns Status, users, and total selectable.
+ */
+export function useSelectableUsers({
+  searchQuery,
+  filter,
+  selectedAll,
+}: {
+  searchQuery: string
+  filter: any
+  selectedAll: boolean
+}) {
+  const currentOrgId = useSelector((state: any) => state.currentUserOrgId)
+  const [usersMap, setUsersMap] = useState<Record<string, any>>({})
+  const searchQueryRef = useLatestRef(searchQuery)
+  const filterRef = useLatestRef(filter)
+  const selectedAllRef = useLatestRef(selectedAll)
+
+  // Note: isEqual is assumed to be imported or available; if not, implement or import a deep equal function.
+  const hasChanged = searchQueryRef !== searchQuery || !isEqual(filterRef, filter) || (!selectedAllRef && selectedAll)
+
+  const combinedFilters = { ...DefaultFilters, ...filter }
+  const isProvisional = !selectedAll || combinedFilters.permissionFilter === 'provisional'
+
+  useEffect(() => {
+    if (hasChanged) {
+      setUsersMap({})
+    }
+  }, [hasChanged])
+
+  const query = useMemo(() => createOrgUsersQuery(currentOrgId, { searchQuery, filter }), [filter, currentOrgId, searchQuery])
+  const subscription = useSubscription(OrgAdminUserMinimalFieldsView, query)
+
+  let status = APILoadingStatus.LOADING
+  if (subscription.status === 'loaded' && subscription.data?.orgAdminUsersMinimalFields?.status === ResourceStatus.Loaded) {
+    status = APILoadingStatus.SUCCESS
+  }
+  else if (subscription.status === 'errors' || subscription.data?.orgAdminUsersMinimalFields?.status === ResourceStatus.Error) {
+    status = APILoadingStatus.FAILURE
+  }
+
+  useEffect(() => {
+    if (status !== APILoadingStatus.SUCCESS)
+      return
+
+    const users = subscription.data?.orgAdminUsersMinimalFields?.status === ResourceStatus.Loaded
+      ? subscription.data.orgAdminUsersMinimalFields.data.map((item: any) => {
+          const orgUser = item.orgUser
+          return orgUser
+            ? {
+                id: orgUser.id,
+                type: Wd.ORG_USER,
+                user: {
+                  id: orgUser.user.id,
+                  handle: orgUser.user.handle,
+                  img_url: orgUser.user.imgUrl,
+                  email: orgUser.user.email,
+                },
+              }
+            : null
+        }).filter(Boolean)
+      : []
+
+    setUsersMap((prev) => {
+      const newMap = hasChanged ? {} : { ...prev }
+      users.forEach((user: any) => {
+        newMap[user.id] = user
+      })
+      return newMap
+    })
+
+    if (subscription.data?.orgAdminUsersMinimalFields?.status === ResourceStatus.Loaded
+      && subscription.data.orgAdminUsersMinimalFields.data.hasNextPage()) {
+      subscription.data.orgAdminUsersMinimalFields.data.loadNext(400)
+    }
+  }, [status, subscription.data, hasChanged])
+
+  if (isProvisional) {
+    return {
+      status: APILoadingStatus.INIT,
+      users: [],
+      totalSelectable: null,
+    }
+  }
+
+  const isFullyLoaded = status === APILoadingStatus.SUCCESS
+    && subscription.data
+    && subscription.data.orgAdminUsersMinimalFields
+    && subscription.data.orgAdminUsersMinimalFields.status === ResourceStatus.Loaded
+    && subscription.data.orgAdminUsersMinimalFields.data
+    && !subscription.data.orgAdminUsersMinimalFields.data.hasNextPage()
+
+  const totalSelectable = isFullyLoaded ? Object.keys(usersMap).length : null
+
   return {
-    orgId: e,
-    firstPageSize: i || 25,
-    refetchToken: a || null,
-    queryParams: `${serializeQuery({
-      ...(t && {
-        search_query: t
-      }),
-      ...(r && sortConfigToQuery(r)),
-      ...(n && serializeFiltersForApi(n))
-    })}`
-  };
+    status: isFullyLoaded ? APILoadingStatus.SUCCESS : status === APILoadingStatus.SUCCESS ? APILoadingStatus.LOADING : status,
+    users: Object.values(usersMap),
+    totalSelectable,
+  }
 }
-export const Ew = $$G0;
-export const LQ = $$H1;
-export const YM = $$k2;
-export const a9 = $$P3;
-export const ar = $$V4;
-export const n = $$j5;
-export const oo = $$B6;
-export const vu = $$D7;
+
+// Updated exports with refactored names
+export const Ew = useSelectableUsers
+export const LQ = canUseCustomTemplates
+export const YM = useOrgAdmins
+export const a9 = useCurrentUserOrgUser
+export const ar = hasTwoValue
+export const n = fetchAndDispatchOrgUsers
+export const oo = useOrgUsers
+export const vu = useOrgUsersFilterCounts

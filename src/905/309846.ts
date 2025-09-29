@@ -71,7 +71,7 @@ import { getImageManager } from '../figma_app/624361';
 import { ButtonBasePrimary, ButtonSecondary, createLabel, FocusCheckbox } from '../figma_app/637027';
 import { jW } from '../figma_app/640683';
 import { FileCreationPermissionsGenerator } from '../figma_app/687776';
-import { LQ } from '../figma_app/741211';
+import { canUseCustomTemplates } from '../figma_app/741211';
 import { setPropertiesPanelTab } from '../figma_app/741237';
 import { AppStateTsApi, ColorStateTsApi, DesignWorkspace, FontSourceType, Fullscreen, UIVisibilitySetting } from '../figma_app/763686';
 import { BrowserInfo } from '../figma_app/778880';
@@ -178,7 +178,7 @@ async function ea(e, t, i) {
     teamUsers: [E],
     teamId: h.team_id
   }));
-  let x = !!(s.is_team_template && LQ(n));
+  let x = !!(s.is_team_template && canUseCustomTemplates(n));
   desktopAPIInstance?.setIsLibrary(!!s.last_published_at);
   desktopAPIInstance?.setIsTeamTemplate(!!x);
   Fullscreen.setEditorTheme(n.theme.visibleTheme || '');

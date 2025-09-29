@@ -5,7 +5,7 @@ import { sortByPropertyWithOptions, MAX_LENGTH } from "../figma_app/656233";
 import { ButtonPrimitive } from "../905/632989";
 import { textDisplayConfig } from "../905/687265";
 import { l as _$$l } from "../905/716947";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { useMemoStable } from "../905/19536";
 import m from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
@@ -134,7 +134,7 @@ function Z(e) {
       }))
     }), f ? jsxs("button", {
       onClick: l,
-      ...Ay.props(J.standardizedLibraryTitleStyle),
+      ...stylex.props(J.standardizedLibraryTitleStyle),
       children: [e.libraryKey ? r.replace(RegExp(" by " + n[e.libraryKey]?.attribution, "g"), "").trim() : r, e.libraryKey && jsx(_$$$, {
         libraryKey: e.libraryKey,
         attribution: n[e.libraryKey]?.attribution
@@ -350,7 +350,7 @@ export function $$eo1({
       })
     }), W, (e_ || eo) && jsx(ZA, {}), ed && jsxs(Fragment, {
       children: [jsx("h2", {
-        ...Ay.props(er.sectionTitle, Y ? er.bodyMediumSectionTitleText : er.bodyLargeSectionTitleText, Y && er.cooperRecentsHeader),
+        ...stylex.props(er.sectionTitle, Y ? er.bodyMediumSectionTitleText : er.bodyLargeSectionTitleText, Y && er.cooperRecentsHeader),
         children: renderI18nText("whiteboard.inserts.recents")
       }), jsx(lU, {
         items: {
@@ -361,9 +361,9 @@ export function $$eo1({
         positionerRef: K
       })]
     }), "small" === l && ec && jsxs("div", {
-      ...Ay.props(er.libraryHeader, er.libraryHeaderButton, Y && er.cooperLibraryHeader, Y && ed && er.cooperLibraryHeaderLessPadding),
+      ...stylex.props(er.libraryHeader, er.libraryHeaderButton, Y && er.cooperLibraryHeader, Y && ed && er.cooperLibraryHeaderLessPadding),
       children: [jsx("h2", {
-        ...Ay.props(er.bodyMediumSectionTitleText),
+        ...stylex.props(er.bodyMediumSectionTitleText),
         children: renderI18nText("whiteboard.inserts.libraries")
       }), jsx("button", {
         onClick: onToggleLibraryModal,
@@ -374,7 +374,7 @@ export function $$eo1({
         })
       })]
     }), "large" === l && jsx("h2", {
-      ...Ay.props(er.sectionTitle, Y ? er.bodyMediumSectionTitleText : er.bodyLargeSectionTitleText),
+      ...stylex.props(er.sectionTitle, Y ? er.bodyMediumSectionTitleText : er.bodyLargeSectionTitleText),
       children: renderI18nText("whiteboard.inserts.libraries")
     }), jsxs("div", {
       className: "libraries_tab--librariesTwoColumns--dSOU-",

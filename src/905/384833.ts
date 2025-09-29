@@ -44,7 +44,7 @@ import { fetchAndUpdateUpcomingInvoices } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { DashboardSection } from "../figma_app/650409";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N } from "../905/809096";
 import { h7 } from "../905/172516";
@@ -96,7 +96,7 @@ function ea(e) {
   let Q = function (e, t, i) {
     let n = useDispatch();
     return r => {
-      Eh.updateOrgRenewalCounts({
+      organizationAPIService.updateOrgRenewalCounts({
         orgId: e,
         unassignedSeatCounts: r
       }).then(async () => {

@@ -5,7 +5,7 @@ import { O } from "../905/969533";
 import { e as _$$e } from "../905/149844";
 import { scopeAwareFunction } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -34,7 +34,7 @@ let $$C1 = forwardRef(function ({
     className: "xh8yej3 xxk0z11 x78zum5 xl56j7k",
     children: [jsxs(ButtonPrimitive, {
       ref: t,
-      ...Ay.props(v.addSlideButton, v.newSlideButton, C && v.buttonOpen),
+      ...stylex.props(v.addSlideButton, v.newSlideButton, C && v.buttonOpen),
       onClick: toggleTemplatePicker,
       htmlAttributes: {
         "data-fullscreen-intercept": !0,

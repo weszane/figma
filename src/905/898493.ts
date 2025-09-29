@@ -5,7 +5,7 @@ import { Q } from "../905/618914";
 import { FMemberRoleType } from "../figma_app/191312";
 import { getPlanUserAtomFamily } from "../905/276025";
 import { checkOrgUserPermission } from "../figma_app/465071";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 let $$u1 = createOptimistThunk(async (e, t) => {
   let i = e.getState();
   let n = i.orgDomains;
@@ -22,7 +22,7 @@ let $$u1 = createOptimistThunk(async (e, t) => {
   let h = !n.fetchedAt || n.fetchedAt + 72e5 < u;
   (t.force || h) && (e.dispatch($$p2({
     fetching: !0
-  })), Eh.getDomains({
+  })), organizationAPIService.getDomains({
     currentOrgId: i.currentUserOrgId
   }).then(t => {
     e.dispatch($$m0({

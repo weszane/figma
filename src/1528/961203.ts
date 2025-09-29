@@ -1,4 +1,4 @@
-import { Ay, xk } from '@stylexjs/stylex';
+import { stylex, props } from '@stylexjs/stylex';
 import g from 'classnames';
 import { forwardRef, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -271,9 +271,9 @@ function et({
       style: e ? {} : {
         paddingLeft: '28px'
       },
-      ...xk(ee.rowTitleContentWrapper, u && ee.stateGroupTitleContentWrapper, m && ee.rowTitleContentWrapperEditing),
+      ...props(ee.rowTitleContentWrapper, u && ee.stateGroupTitleContentWrapper, m && ee.rowTitleContentWrapperEditing),
       children: [u && jsx(V, {
-        ...xk(j ? ee.stateGroupIconDarkMode : ee.stateGroupIcon)
+        ...props(j ? ee.stateGroupIconDarkMode : ee.stateGroupIcon)
       }), m ? jsx(setupThemeContext, {
         brand: 'design',
         children: jsx('input', {
@@ -298,7 +298,7 @@ function et({
           value: x
         })
       }) : jsx('div', {
-        ...xk(ee.rowTitleContent, u && (j ? ee.stateGroupTitleContentDarkMode : ee.stateGroupTitleContent), u && textDisplayConfig.textBodyMedium, !C && ee.rowTitleContentGrey),
+        ...props(ee.rowTitleContent, u && (j ? ee.stateGroupTitleContentDarkMode : ee.stateGroupTitleContent), u && textDisplayConfig.textBodyMedium, !C && ee.rowTitleContentGrey),
         'data-tooltip': i,
         'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip-show-above': !0,
@@ -643,14 +643,14 @@ function ei({
   return jsxs('div', {
     className: cssBuilderInstance.relative.h16.wFull.$,
     children: [jsx('div', {
-      ...Ay.props(t ? er.rowDividerWithCaret : er.rowDividerWithoutCaret)
+      ...stylex.props(t ? er.rowDividerWithCaret : er.rowDividerWithoutCaret)
     }), t && !n && jsx(ButtonPrimitive, {
       onClick: t => {
         t.preventDefault();
         t.stopPropagation();
         e(t);
       },
-      ...Ay.props(er.caretButton, t === 'EXPANDED' ? er.caretButtonExpanded : er.caretButtonCollapsed),
+      ...stylex.props(er.caretButton, t === 'EXPANDED' ? er.caretButtonExpanded : er.caretButtonCollapsed),
       children: jsx(_$$O2, {
         style: {
           '--color-icon': 'var(--color-icon-secondary)'
@@ -711,7 +711,7 @@ export function $$ed1({
       'className': 'xh8yej3 x5yr21d x78zum5 x19y5rnk xl56j7k x6s0dn4 x10l6tqk x1vjfegm xjbqb8w',
       'data-testid': 'carousel-item-video-icon',
       'children': jsx('div', {
-        ...Ay.props(es.buzzVideoIcon, n && es.buzzVideoIconSmallSquares),
+        ...stylex.props(es.buzzVideoIcon, n && es.buzzVideoIconSmallSquares),
         children: jsx(_$$_, {})
       })
     }), jsx(WAFImage, {

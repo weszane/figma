@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { noop } from 'lodash-es';
 import { q as _$$q } from "../905/932270";
 import { Fullscreen } from "../figma_app/763686";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { colorToHexString } from "../figma_app/191804";
@@ -327,7 +327,7 @@ function $({
     s = a.length;
   }
   return jsxs("div", {
-    ...xk(Y.container(s), r && Y.withMarginTop),
+    ...props(Y.container(s), r && Y.withMarginTop),
     children: [a.map((r, i) => jsx(cd, {
       value: r,
       paletteType: i < o ? "base" : "baseLight",

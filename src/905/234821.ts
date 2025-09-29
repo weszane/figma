@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { splitEmojiAndSkinTone } from "../905/403166";
-import { Xm } from "../905/723791";
+import { createLoadingState } from "../905/723791";
 import { reportError } from "../905/11";
 import { FileWithCommentsAndReactions } from "../figma_app/43951";
 let $$c3 = "You are trying to use comments functionality but didn't wire a provider for comments";
@@ -23,7 +23,7 @@ export function $$g7() {
     let i = useMemo(() => e?.status !== "loaded" ? h : t(e.data), [e, t]);
     let r = e?.status || "loading";
     let a = e?.errors || [];
-    return useMemo(() => i === h || "loading" === r ? Xm() : "errors" === r ? {
+    return useMemo(() => i === h || "loading" === r ? createLoadingState() : "errors" === r ? {
       status: r,
       data: null,
       errors: a
@@ -44,7 +44,7 @@ export function $$_5() {
 }
 export function $$A11() {
   let e = $$m2();
-  return e ? e.threads : Xm();
+  return e ? e.threads : createLoadingState();
 }
 export function $$y1(e) {
   let t = $$m2();
@@ -103,7 +103,7 @@ export function $$b6(e, t) {
         });
       }(t, i.api.reactionsApi?.getReactions(e)),
       errors: i.errors
-    } : Xm();
+    } : createLoadingState();
   }, [e, t, i]);
 }
 export function $$v4() {

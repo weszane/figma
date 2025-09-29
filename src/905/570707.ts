@@ -8,7 +8,7 @@ import { trackEventAnalytics } from '../905/449184'
 import { handleAtomEvent } from '../905/502364'
 import { liveStoreInstance } from '../905/713695'
 import { atom, createRemovableAtomFamily } from '../figma_app/27355'
-import { getSelectedView } from '../figma_app/198885'
+import { getSelectedViewSelector } from '../figma_app/198885'
 import { kb } from '../figma_app/502247'
 import { openFileAtom } from '../figma_app/516028'
 import { LIBRARY_PREFERENCES_MODAL, NO_TEAM } from '../figma_app/633080'
@@ -259,7 +259,7 @@ const LibrarySearchQueries = {
 
 // Atoms for library search state
 const orgIdAtom = createReduxSubscriptionAtomWithState(resolveFileParentOrgId)
-const selectedViewAtom = createReduxSubscriptionAtomWithState(getSelectedView)
+const selectedViewAtom = createReduxSubscriptionAtomWithState(getSelectedViewSelector)
 const modalShownAtom = createReduxSubscriptionAtomWithState((state: any) => state.modalShown)
 
 const teamIdAtom = atom((get) => {

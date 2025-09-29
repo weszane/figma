@@ -12,7 +12,7 @@ import { putOrgs, patchOrgs } from "../905/395917";
 import { vr } from "../figma_app/475472";
 import { AccessLevelEnum } from "../905/557142";
 import { c as _$$c } from "../figma_app/52714";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { bE } from "../905/98702";
 let $$y13 = "team_join_request_submitted";
 let $$b15 = "permission_request_submitted";
@@ -299,7 +299,7 @@ let $$F9 = createOptimistThunk((e, t) => {
   let r = t.successMessage;
   let n = t.autogenPasswordControl;
   let a = t.settingsId;
-  let c = Eh.apiAutogenControls({
+  let c = organizationAPIService.apiAutogenControls({
     orgId: t.orgId,
     autogen_password_controls: n
   });
@@ -347,7 +347,7 @@ let $$U20 = createOptimistThunk((e, {
   slidesDisabled: r,
   successMessage: n
 }) => {
-  Eh.putToggleSlidesDisabled({
+  organizationAPIService.putToggleSlidesDisabled({
     orgId: t,
     slidesDisabled: r
   }).catch(t => {
@@ -365,7 +365,7 @@ let $$B8 = createOptimistThunk((e, {
   sitesPublishingDisabled: r,
   successMessage: n
 }) => {
-  Eh.putToggleSitesPublishingDisabled({
+  organizationAPIService.putToggleSitesPublishingDisabled({
     orgId: t,
     sitesPublishingDisabled: r
   }).catch(t => {
@@ -379,7 +379,7 @@ let $$G5 = createOptimistThunk((e, {
   supabaseDisabled: r,
   successMessage: n
 }) => {
-  Eh.putToggleSupabaseDisabled({
+  organizationAPIService.putToggleSupabaseDisabled({
     orgId: t,
     supabaseDisabled: r
   }).catch(t => {

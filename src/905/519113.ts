@@ -12,7 +12,7 @@ import { Button } from "../905/521428";
 import { Link } from "../905/438674";
 import { e as _$$e } from "../905/693478";
 import { VariablesBindings, Fullscreen, StateGroupErrorType, VariableSetErrorType, VariableErrorType } from "../figma_app/763686";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -418,11 +418,11 @@ let eK = forwardRef(({
   } = useSelectPrimitiveState();
   let o = selectedItem ? selectedItem.label : e ?? "";
   return jsxs(SelectPrimitiveTrigger, {
-    ...Ay.props(eH.trigger),
+    ...stylex.props(eH.trigger),
     ...r,
     ref: a,
     children: [i, jsxs("div", {
-      ...Ay.props(eH.triggerContainer, r.disabled && eH.triggerContainerDisabled),
+      ...stylex.props(eH.triggerContainer, r.disabled && eH.triggerContainerDisabled),
       children: [jsx("span", {
         className: "xdpxx8g xebhuq6 xlyipyv xb3r6kr",
         children: t ?? o

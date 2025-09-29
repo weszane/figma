@@ -2,7 +2,7 @@ import { useRef, useEffect, useMemo } from "react";
 import r from "../vendor/116389";
 import s from "../vendor/336892";
 import { debugState } from "../905/407919";
-import { J } from "../905/931050";
+import { useAsyncWithReset } from "../905/931050";
 import { APILoadingStatus } from "../905/520829";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -84,7 +84,7 @@ function y(e, t, i) {
 }
 export function $$b0(e, t) {
   _$$p(e, A);
-  let i = J(async () => t && (await t.promise), [t]);
+  let i = useAsyncWithReset(async () => t && (await t.promise), [t]);
   let r = useRef([]);
   useEffect(() => {
     let {

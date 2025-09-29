@@ -1,7 +1,7 @@
 import { fM } from "../905/312028";
 import { generateUniqueKey } from "../905/383708";
 import { FEntityType } from "../figma_app/191312";
-import { tT } from "../905/723791";
+import { ResourceStatus } from "../905/723791";
 export function $$o1(e) {
   return e.file && e.file.repo ? {
     id: e.file.fileRepoId ?? "",
@@ -121,7 +121,7 @@ export function $$c2(e, t, r, n) {
         createdAt: new Date(e.fig_file.created_at),
         trashedAt: e.fig_file.trashed_at ? new Date(e.fig_file.trashed_at) : null,
         prototypeUrl: {
-          status: tT.Loaded,
+          status: ResourceStatus.Loaded,
           data: e.fig_file.prototype_url
         }
       }

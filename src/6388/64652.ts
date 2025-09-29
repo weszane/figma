@@ -7,7 +7,7 @@ import { k as _$$k } from "../905/44647";
 import { AppStateTsApi, UserInterfaceElements, SelfDesignType, SlideConstantsCppBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import h from "classnames";
 import { l } from "../6388/697965";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -95,7 +95,7 @@ function Z() {
     });
     setIsOpen(e);
   }, [x, m, setIsOpen]);
-  let [b, , j] = BN(a, e);
+  let [b,, j] = BN(a, e);
   return jsxs(_$$A, {
     isFullHeight: !r,
     children: [jsx(_$$$2, {}), !t && jsx(_$$I, {
@@ -285,7 +285,7 @@ export let $$eI2 = memo(function () {
       maxWidth: 306,
       children: [jsxs("div", {
         ref: l,
-        ...xk(ek.leftPanelHeaderContainer, g && ek.leftPanelHeaderContainerSearchActive),
+        ...props(ek.leftPanelHeaderContainer, g && ek.leftPanelHeaderContainerSearchActive),
         children: [jsx(ej, {}), jsx(_$$n, {}), !O && jsx(_$$d, {}), g && jsx("div", {
           className: "x1iyjqo2 xysyzu8",
           children: jsx(EA.Provider, {
@@ -411,7 +411,7 @@ export function $$eN1({
       children: jsxs("div", {
         className: cssBuilderInstance.flex.itemsCenter.$,
         children: [null != t && (e ? jsx(_$$O, {}) : jsx(_$$k, {})), jsx("span", {
-          ...xk(null == t && ew.indentedHeader),
+          ...props(null == t && ew.indentedHeader),
           children: renderI18nText("fullscreen.pages_panel.layers_tab")
         })]
       })

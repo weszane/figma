@@ -1,4 +1,4 @@
-import { xk as _$$xk, Ay } from '@stylexjs/stylex';
+import { props, stylex } from '@stylexjs/stylex';
 import ep from 'classnames';
 import j from 'lodash-es/mapValues';
 import { createContext, createElement, createRef, forwardRef, memo, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from 'react';
@@ -1675,11 +1675,11 @@ function tQ({
     'data-tooltip-type': KindEnum.TEXT
   } : void 0;
   return jsxs('div', {
-    ...Ay.props(i.container, !l && i.extraPaddingBottom),
+    ...stylex.props(i.container, !l && i.extraPaddingBottom),
     children: [jsxs('div', {
-      ...Ay.props(i.content),
+      ...stylex.props(i.content),
       children: [jsxs('div', {
-        ...Ay.props(i.header),
+        ...stylex.props(i.header),
         children: [t && jsx(Me, {
           'aria-label': getI18nString('cooper.templates.header.back'),
           'onClick': t,
@@ -1690,7 +1690,7 @@ function tQ({
           'children': jsx(_$$t4, {})
         }), jsx('div', {
           ref: s,
-          ...Ay.props(i.title),
+          ...stylex.props(i.title),
           ...u,
           children: e
         })]
@@ -1831,31 +1831,31 @@ function t8({
   let s = VU();
   let d = s ? nt : ne;
   return t ? jsxs('div', {
-    ...Ay.props(d.container),
+    ...stylex.props(d.container),
     children: [jsxs(_$$e3, {
       'aria-label': a || getI18nString('cooper.templates.template_picker.org_view.see_more'),
       'onClick': t,
       'recordingKey': n,
-      ...Ay.props(d.button),
+      ...stylex.props(d.button),
       'trackingProperties': {
         trackingDescriptor: UpgradeAction.NEW_TEMPLATE_DROPDOWN_OPENED,
         ...i
       },
       'children': [jsx('h3', {
-        ...Ay.props(d.title),
+        ...stylex.props(d.title),
         children: e
       }), s ? jsx(_$$R3, {
-        ...Ay.props(d.icon)
+        ...stylex.props(d.icon)
       }) : jsx(_$$a4, {
-        ...Ay.props(d.icon)
+        ...stylex.props(d.icon)
       })]
     }), l]
   }) : jsx('div', {
-    ...Ay.props(d.container),
+    ...stylex.props(d.container),
     children: jsxs('div', {
-      ...Ay.props(d.header),
+      ...stylex.props(d.header),
       children: [r && jsx(t9, {}), jsx('h3', {
-        ...Ay.props(d.title),
+        ...stylex.props(d.title),
         children: e
       })]
     })
@@ -1865,9 +1865,9 @@ function t3() {
   let e = VU();
   let t = e ? nt : ne;
   return jsx('div', {
-    ...Ay.props(t.container),
+    ...stylex.props(t.container),
     children: jsx('div', {
-      ...Ay.props(t.header),
+      ...stylex.props(t.header),
       children: jsx(Wi, {
         animationType: JR.LIGHT_SHIMMER,
         style: e ? nl : nn
@@ -2412,12 +2412,12 @@ function nT({
     return t;
   }, [r, e, n]);
   return jsx('div', {
-    ...Ay.props(nS.masonryGridBase, l && nS.masonryGridLeftRail, nS.defaultPadding, i),
+    ...stylex.props(nS.masonryGridBase, l && nS.masonryGridLeftRail, nS.defaultPadding, i),
     style: {
       gridTemplateColumns: `repeat(${n}, minmax(0, 1fr))`
     },
     children: d.map((e, n) => jsx('div', {
-      ...Ay.props(nS.masonryColumn, s),
+      ...stylex.props(nS.masonryColumn, s),
       children: e.map((e, n) => t(e, n))
     }, n))
   });
@@ -2468,17 +2468,17 @@ function nB() {
   let t = VU();
   let n = useAtomWithSubscription(nF);
   return n?.status !== 'loaded' || n?.status === 'loaded' && n?.data ? null : jsx('div', {
-    ...Ay.props(t ? nD.container : n$.container),
+    ...stylex.props(t ? nD.container : n$.container),
     children: jsx('div', {
       className: 'x78zum5 xe8ttls x1cy8zhl x883omv x5mp9sv x7xtdkp x1sjmt1f',
       children: jsxs('div', {
-        ...Ay.props(t ? nD.content : n$.content),
+        ...stylex.props(t ? nD.content : n$.content),
         children: [jsxs('div', {
-          ...Ay.props(t ? nD.iconAndText : n$.iconAndText),
+          ...stylex.props(t ? nD.iconAndText : n$.iconAndText),
           children: [jsx(_$$c3, {
             className: 'xbzrb6o xjwf9q1 xnei2rj'
           }), jsx('div', {
-            ...Ay.props(n$.text),
+            ...stylex.props(n$.text),
             children: t ? renderI18nText('cooper.templates.internal.banner_left_rail') : renderI18nText('cooper.templates.internal.banner')
           })]
         }), jsx(IconButton, {
@@ -2615,11 +2615,11 @@ function nH({
         setIsHeaderStickied(!e);
       }
     }), jsx('div', {
-      ..._$$xk(nZ.headerContainer, isHeaderStickied && isExpanded && nZ.headerStickied),
+      ...props(nZ.headerContainer, isHeaderStickied && isExpanded && nZ.headerStickied),
       children: jsxs(ButtonPrimitive, {
         ref: headerRef,
         onClick: () => setIsExpanded(!isExpanded),
-        ..._$$xk(nZ.collapsibleHeader, d ? nZ.leftRailHeight : nZ.defaultHeight),
+        ...props(nZ.collapsibleHeader, d ? nZ.leftRailHeight : nZ.defaultHeight),
         children: [isExpanded ? jsx(_$$O, {
           className: 'xe5c7bq'
         }) : jsx(_$$k3, {
@@ -2685,7 +2685,7 @@ function nX({
         })]
       }) : void 0,
       description: f && jsx('div', {
-        ..._$$xk(nZ.templateDescription, l ? textDisplayConfig.textBodyMedium : textDisplayConfig.textBodyLarge),
+        ...props(nZ.templateDescription, l ? textDisplayConfig.textBodyMedium : textDisplayConfig.textBodyLarge),
         dangerouslySetInnerHTML: {
           __html: sanitizeHtml(f)
         }
@@ -2742,7 +2742,7 @@ function nq({
       template: e,
       dimensions: nJ(e)
     }, e.node_id), jsx('div', {
-      ..._$$xk(nZ.templateName),
+      ...props(nZ.templateName),
       children: e.name
     })),
     numColumns: n ? 2 : 3,
@@ -3053,12 +3053,12 @@ function n8({
         children: [jsxs('div', {
           className: 'x78zum5 xdt5ytf x1cy8zhl x1nfngrj xkh2ocl',
           children: [jsx('div', {
-            ...Ay.props(n3.header),
+            ...stylex.props(n3.header),
             children: renderI18nText('cooper.templates.internal.creation_banner_header', {
               orgName: e
             })
           }), jsx('div', {
-            ...Ay.props(n3.subheader),
+            ...stylex.props(n3.subheader),
             children: renderI18nText('cooper.templates.internal.creation_banner_subheader')
           })]
         }), jsxs('div', {
@@ -3324,7 +3324,7 @@ function lj({
       useOriginalSrcFills_DEPRECATED: !0,
       svgHeight: '120px'
     }), jsx('div', {
-      ..._$$xk(ly.emptyStateText),
+      ...props(ly.emptyStateText),
       children: t
     })]
   });
@@ -3730,12 +3730,12 @@ function lR() {
           className: 'x1ihwiht x78zum5 xl56j7k x6s0dn4',
           children: jsx(lN, {})
         }), jsx('div', {
-          ..._$$xk(lL.bodyMediumStrong),
+          ...props(lL.bodyMediumStrong),
           children: renderI18nText('cooper.templates.empty_team_templates.header', {
             planName: t
           })
         }), jsx('div', {
-          ..._$$xk(lL.bodyMedium),
+          ...props(lL.bodyMedium),
           children: renderI18nText('cooper.templates.empty_team_templates.description')
         })]
       }), jsx('div', {
@@ -3850,12 +3850,12 @@ function lM({
       children: [jsx(lN, {
         size: 32
       }), jsx('div', {
-        ...Ay.props(lF.header),
+        ...stylex.props(lF.header),
         children: renderI18nText('cooper.templates.internal.creation_banner_header', {
           orgName: e
         })
       }), jsx('div', {
-        ...Ay.props(lF.subheader),
+        ...stylex.props(lF.subheader),
         children: renderI18nText('cooper.templates.internal.creation_banner_subheader')
       })]
     }), jsx(WAFImage, {
@@ -4529,7 +4529,7 @@ let rv = forwardRef(({
 }, t) => {
   return jsx('div', {
     ref: t,
-    ..._$$xk(rE.sliderAndInputRow),
+    ...props(rE.sliderAndInputRow),
     children: e
   });
 });
@@ -4538,7 +4538,7 @@ let rT = forwardRef(({
 }, t) => {
   return jsx('div', {
     ref: t,
-    ..._$$xk(rE.sliderInputAndIconRow),
+    ...props(rE.sliderInputAndIconRow),
     children: e
   });
 });
@@ -4828,7 +4828,7 @@ function r7({
   let c = _$$c5(d, n ?? '');
   return jsxs(ButtonPrimitive, {
     onClick: l,
-    ..._$$xk(r6.container, i && r6.containerDisabled),
+    ...props(r6.container, i && r6.containerDisabled),
     recordingKey: r,
     disabled: i,
     htmlAttributes: {
@@ -4836,15 +4836,15 @@ function r7({
       'data-tooltip-type': KindEnum.TEXT
     },
     children: [jsx('span', {
-      ..._$$xk(i && r6.iconContainerDisabled),
+      ...props(i && r6.iconContainerDisabled),
       children: e
     }), jsx('div', {
-      ..._$$xk(r6.label, i && r6.labelDisabled),
+      ...props(r6.label, i && r6.labelDisabled),
       children: t
     }), jsx('span', {
       className: 'x2wgani x1iyjqo2'
     }), c.length > 0 ? jsx('p', {
-      ..._$$xk(r6.shortcutText),
+      ...props(r6.shortcutText),
       children: c
     }) : jsx('span', {
       className: 'x1849jeq'
@@ -6130,7 +6130,7 @@ function ar({
     'iconSuffix': jsx(_$$O, {}),
     'recordingKey': 'cooperInlineFontFamilyControl',
     'children': jsx('span', {
-      ..._$$xk(at.fontFamilyButtonDisplay),
+      ...props(at.fontFamilyButtonDisplay),
       children: e
     })
   });
@@ -7671,7 +7671,7 @@ function sl({
     'aria-label': _$$E4(e),
     'aria-pressed': l,
     'onClick': n,
-    'className': Ay.props(st.colorChitContainer, l && st.selected).className,
+    'className': stylex.props(st.colorChitContainer, l && st.selected).className,
     'recordingKey': r,
     'children': [jsx('div', {
       className: 'x10lmdbm x4ayska x192jxwq xehbxol x18ya6xy x9f619',
@@ -10313,7 +10313,7 @@ function cB({
   return jsx('div', {
     className: 'x1v8gsql x19y5rnk',
     children: jsx('div', {
-      ..._$$xk(cF.itemContainer, i ? cF.invertedItemContainer : {}),
+      ...props(cF.itemContainer, i ? cF.invertedItemContainer : {}),
       children: jsx(_$$lX, {
         buttonProps: {
           clickToInsert: !0
@@ -10383,7 +10383,7 @@ function c$({
   }, []);
   let s = t ? (n - 48) / 3 : 64;
   return e.length === 0 ? null : jsx('div', {
-    ...Ay.props(cD.shapesContainer, n === 0 && cD.shapesHidden),
+    ...stylex.props(cD.shapesContainer, n === 0 && cD.shapesHidden),
     children: e.map((e, t) => jsx(cB, {
       item: e,
       sourceForTracking: 'cooper_shapes_panel',
@@ -10484,7 +10484,7 @@ function cU({
   paddingStyle: t
 }) {
   return jsx('div', {
-    ...Ay.props(cV.sectionHeader, t),
+    ...stylex.props(cV.sectionHeader, t),
     children: e
   });
 }
@@ -10678,7 +10678,7 @@ function cJ({
   let d = e ? (n - 48) / 3 : 64;
   return jsx(_$$P, {
     children: jsx('div', {
-      ...Ay.props(cq.container, n === 0 && cq.hidden),
+      ...stylex.props(cq.container, n === 0 && cq.hidden),
       children: s.map((e, t) => jsx(cB, {
         item: e,
         sourceForTracking: 'cooper_shapes_panel',
@@ -10776,7 +10776,7 @@ function c1({
             }, e.key);
           })
         }), jsx('div', {
-          ...Ay.props(cZ.fontCombinationsHeader),
+          ...stylex.props(cZ.fontCombinationsHeader),
           children: getI18nString('cooper.inserts.font_combinations')
         }), jsx('div', {
           className: 'xrvj5dj x9f619 x1p9eum2 x1nfngrj x7oc15f',
@@ -11177,10 +11177,10 @@ function uS({
     }), jsx('div', {
       className: 'x1w7y96w'
     }), jsx('div', {
-      ...Ay.props(uk.addDataTitle),
+      ...stylex.props(uk.addDataTitle),
       children: getI18nString('buzz.bulk_create.add_data_header')
     }), jsx('div', {
-      ...Ay.props(uk.addDataInstructions),
+      ...stylex.props(uk.addDataInstructions),
       children: getI18nString('buzz.bulk_create.add_data_instructions')
     }), jsx('div', {
       className: 'x1w7y96w'
@@ -11188,7 +11188,7 @@ function uS({
       onImportSuccess: e,
       onImportFailure: n
     }), jsx('div', {
-      ...Ay.props(uk.addDataDescription),
+      ...stylex.props(uk.addDataDescription),
       children: getI18nString('buzz.bulk_create.import.supported_file_types')
     })]
   });
@@ -11282,7 +11282,7 @@ function uR({
             className: 'xwa2v1s',
             children: r
           }), jsx('span', {
-            ..._$$xk(uw.pillText),
+            ...props(uw.pillText),
             children: t
           })]
         }), i && n && l && jsxs('div', {
@@ -11531,7 +11531,7 @@ function uH({
   return jsxs('div', {
     className: 'x78zum5 xdt5ytf x5yr21d xh8yej3',
     children: [t && jsx(uX, {}), jsx('div', {
-      ..._$$xk(uY.iframeContainer, n && uY.iframeContainerVisible),
+      ...props(uY.iframeContainer, n && uY.iframeContainerVisible),
       'data-testid': 'cooperPluginPanelContainer',
       'children': jsx(useCachedSubtree, {
         isVisible: !0,
@@ -11660,7 +11660,7 @@ function u4({
       library_key: h
     });
   };
-  let N = Ay.props(u2.dragTarget, r && u2.dragTargetDragged, s && u2.dragTargetActive);
+  let N = stylex.props(u2.dragTarget, r && u2.dragTargetDragged, s && u2.dragTargetActive);
   return jsx(Ad, {
     label: null,
     appendedClassName: 'x1db2dqx x12nagc',
@@ -11873,7 +11873,7 @@ function xn({
   text: e
 }) {
   return jsx('div', {
-    ..._$$xk(xt.emptyOrErrorState),
+    ...props(xt.emptyOrErrorState),
     children: e
   });
 }
@@ -11930,7 +11930,7 @@ function xl() {
         children: [jsxs('div', {
           className: 'xh8yej3 x78zum5 x1qughib x6s0dn4',
           children: [jsx('span', {
-            ..._$$xk(xt.editRestrictionBannerTitle),
+            ...props(xt.editRestrictionBannerTitle),
             children: getI18nString('cooper.properties_panel.fields.detach_title')
           }), jsx('span', {
             className: 'x1aue78i xcr9a89 x19y5rnk',
@@ -11947,7 +11947,7 @@ function xl() {
             })
           })]
         }), jsx('div', {
-          ..._$$xk(xt.editRestrictionBannerMessage),
+          ...props(xt.editRestrictionBannerMessage),
           children: getI18nString('cooper.properties_panel.fields.detach_description')
         })]
       })
@@ -12016,7 +12016,7 @@ function xr({
 }) {
   return jsxs('button', {
     onClick: () => t(!e),
-    ..._$$xk(xt.showAllFieldsButton),
+    ...props(xt.showAllFieldsButton),
     children: [e ? jsx(_$$a9, {}) : jsx(_$$A18, {}), jsx('span', {
       children: n
     })]
@@ -12301,7 +12301,7 @@ function xk({
   providerName: n
 }) {
   return jsxs('div', {
-    ...Ay.props(xC.attribution),
+    ...stylex.props(xC.attribution),
     children: [jsx('p', {
       children: renderI18nText('buzz.stock_photos.photo_by', {
         photographer: jsx(Link, {
@@ -12378,7 +12378,7 @@ let xN = memo(({
         className: 'x1lliihq xh8yej3 xt7dq6l'
       })
     }), jsx('div', {
-      ...Ay.props(xw.iconContainer, (r || s) && xw.iconContainerVisible),
+      ...stylex.props(xw.iconContainer, (r || s) && xw.iconContainerVisible),
       children: jsx(IconButton, {
         'onClick': l,
         'aria-label': getI18nString('buzz.stock_photos.more_details'),
@@ -12557,7 +12557,7 @@ function xM({
   return jsx('div', {
     className: 'x78zum5 x1q0g3np x1cy8zhl x1ihwiht x19y5rnk',
     children: jsx('h2', {
-      ...Ay.props(xF.headerTitle),
+      ...stylex.props(xF.headerTitle),
       children: e
     })
   });
@@ -12621,10 +12621,10 @@ function xV({
     children: [e, jsxs('div', {
       className: 'x78zum5 xdt5ytf x6s0dn4 xl56j7k x1n0bwc9',
       children: [jsx('p', {
-        ...Ay.props(xG.title),
+        ...stylex.props(xG.title),
         children: t
       }), jsx('p', {
-        ...Ay.props(xG.subtitle),
+        ...stylex.props(xG.subtitle),
         children: n
       })]
     })]
@@ -12864,10 +12864,10 @@ function xY({
         }), jsxs('div', {
           className: 'x78zum5 xdt5ytf x6s0dn4 xg2d0mh',
           children: [jsx('span', {
-            ...Ay.props(xQ.buttonTitle),
+            ...stylex.props(xQ.buttonTitle),
             children: getI18nString('buzz.media_panel.make_image')
           }), jsx('span', {
-            ...Ay.props(xQ.buttonSecondary),
+            ...stylex.props(xQ.buttonSecondary),
             children: getI18nString('buzz.media_panel.generate_button_secondary')
           })]
         })]
@@ -12932,10 +12932,10 @@ function xJ({
         children: [jsx(_$$A15, {}), jsxs('div', {
           className: 'x78zum5 xdt5ytf x1cy8zhl',
           children: [jsx('span', {
-            ...Ay.props(xQ.buttonTitle),
+            ...stylex.props(xQ.buttonTitle),
             children: n ? getI18nString('buzz.media_panel.upload_image_or_video') : getI18nString('cooper.images.upload_image')
           }), jsx('span', {
-            ...Ay.props(xQ.buttonSecondary, xQ.uploadSecondary),
+            ...stylex.props(xQ.buttonSecondary, xQ.uploadSecondary),
             children: n ? getI18nString('buzz.media_panel.upload_button_secondary') : getI18nString('cooper.images.upload_button_secondary')
           })]
         })]
@@ -13297,7 +13297,7 @@ function x4() {
           children: [!n && jsx('div', {
             className: 'xs83m0k xg2d0mh',
             children: jsxs('div', {
-              ..._$$xk(x9.closeableHeaderContainer, (l === AssetCategoryEnum.FIELDS || l === AssetCategoryEnum.BULK_CREATE) && x9.closeableHeaderContainerWithBorder),
+              ...props(x9.closeableHeaderContainer, (l === AssetCategoryEnum.FIELDS || l === AssetCategoryEnum.BULK_CREATE) && x9.closeableHeaderContainerWithBorder),
               'data-testid': 'buzz-closeable-header',
               'children': [jsxs('h2', {
                 className: 'x78zum5 x6s0dn4 xg2d0mh xeuugli',
@@ -14303,10 +14303,10 @@ function p2({
   children: n
 }) {
   return jsx(ButtonPrimitive, {
-    ..._$$xk(rL.effectToggleButtonContainer, e ? rL.effectToggleButtonContainer_active : null),
+    ...props(rL.effectToggleButtonContainer, e ? rL.effectToggleButtonContainer_active : null),
     onClick: t,
     children: jsx('div', {
-      ..._$$xk(rL.effectToggleButtonContent),
+      ...props(rL.effectToggleButtonContent),
       children: n
     })
   });
@@ -14422,7 +14422,7 @@ let p7 = {
         children: jsx(aD, {
           children: jsx(ScrollContainer, {
             children: jsx('div', {
-              ..._$$xk(rL.effectsContainer),
+              ...props(rL.effectsContainer),
               children: jsx(p5, {})
             })
           })

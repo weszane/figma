@@ -4,7 +4,7 @@ import { createRemovableAtomFamily, atom, useAtomWithSubscription } from "../fig
 import { resourceUtils } from "../905/989992";
 import { Xf } from "../figma_app/153916";
 import { dayjs } from "../905/920142";
-import { getResourceDataOrFallback, Xm, gB } from "../905/723791";
+import { getResourceDataOrFallback, createLoadingState, createLoadedState } from "../905/723791";
 import { dl } from "../figma_app/307841";
 import { useSeatBillingTermsExperiment } from "../figma_app/297957";
 import { n as _$$n } from "../1577/959155";
@@ -79,7 +79,7 @@ export function $$f0(e) {
     }(renewalDate)
   });
   let y = useMemo(() => "loaded" === v.status && !!x, [v.status, x]);
-  return "loading" === v.status || "loading" === warningStatus ? Xm() : gB({
+  return "loading" === v.status || "loading" === warningStatus ? createLoadingState() : createLoadedState({
     isEligible: f && y,
     renewalDate,
     warningType

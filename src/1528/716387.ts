@@ -52,7 +52,7 @@ import { useDropdown } from "../905/848862";
 import { Vz, v9, ei as _$$ei, G$, PP, Wv, Fn, Z9, S as _$$S, dz, sb, Jo, bB, T as _$$T2, fz, Nf, HR, fp, AX, du, _M, qp, hY, kQ, eO as _$$eO, rB, hs, V3, wH, r9, Xt, rX, Dw, _P, D6, c1, QF, VQ, Gu, of } from "../9410/733790";
 import { mapFilter } from "../figma_app/656233";
 import { v as _$$v } from "../905/213481";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { kM } from "../figma_app/421886";
 import { p9, D4, IM, OP } from "../figma_app/463678";
 import { f as _$$f } from "../905/54715";
@@ -168,7 +168,7 @@ function eh({
   }, `filter-chip-${e}`) : null), [s, d, t, n]);
   return c.length ? jsx("div", {
     "data-testid": "search-filter-chip-container",
-    ...xk(em.filterChips, o && em.filterChipsLeftRail, e && em.filterChipsShort),
+    ...props(em.filterChips, o && em.filterChipsLeftRail, e && em.filterChipsShort),
     children: c
   }) : null;
 }

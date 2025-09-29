@@ -9,7 +9,7 @@ import { extractInviteTokens, Rc } from "../figma_app/819288";
 import { useLatestRef } from "../figma_app/922077";
 import { S6 } from "../905/761735";
 import { getLivegraphClient, useSubscription } from "../figma_app/288654";
-import { gB, Xm } from "../905/723791";
+import { createLoadedState, createLoadingState } from "../905/723791";
 import { setTagGlobal } from "../905/11";
 import { diffSets } from "../905/760682";
 import { logError, logInfo } from "../905/714362";
@@ -125,7 +125,7 @@ class j {
           let r = null;
           let i = null;
           let a = null;
-          for (let n of e) if ("VIEW_QUERY_NODE.REMOVE_RESULT" === n.type || "STORE.ADD_INSTANCE" === n.type || "STORE.REMOVE_INSTANCE" === n.type || "SESSION.APPLY_MUTATIONS" === n.type || "SESSION.APPLY_SHADOW_MUTATIONS" === n.type || "SESSION.REMOVE_SHADOW_MUTATIONS" === n.type || "REQUEST_MESSAGE" === n.type && "sync" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "synced" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "pendingMutations" === n.message.messageType) logInfo(t, JSON.stringify(n)); else if ("VIEW_QUERY_NODE.ADD_RESULT" === n.type || "VIEW_QUERY_NODE.UPDATE_RESULT" === n.type) {
+          for (let n of e) if ("VIEW_QUERY_NODE.REMOVE_RESULT" === n.type || "STORE.ADD_INSTANCE" === n.type || "STORE.REMOVE_INSTANCE" === n.type || "SESSION.APPLY_MUTATIONS" === n.type || "SESSION.APPLY_SHADOW_MUTATIONS" === n.type || "SESSION.REMOVE_SHADOW_MUTATIONS" === n.type || "REQUEST_MESSAGE" === n.type && "sync" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "synced" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "pendingMutations" === n.message.messageType) logInfo(t, JSON.stringify(n));else if ("VIEW_QUERY_NODE.ADD_RESULT" === n.type || "VIEW_QUERY_NODE.UPDATE_RESULT" === n.type) {
             if (n.type === r && n.queryId === i && n.instance === a) continue;
             logInfo(t, JSON.stringify(n));
             r = n.type;
@@ -263,7 +263,7 @@ class j {
         this.trackMissingCommentData("New Comment", uuid, n, r, {
           isLoadedComments: m
         }, t);
-      } catch { }
+      } catch {}
       return e;
     }), uuid];
   }
@@ -649,12 +649,12 @@ export function $$H0(e) {
   let Z = gu(userId, j, e.activeId);
   let Q = _$$i(F, e.activeId, getPageIdsForNodes, boundingBoxPositions);
   let ee = useMemo(() => {
-    if ("loaded" !== z.status || y && "loaded" !== F.status || f && "loaded" !== j.status) return gB([]);
+    if ("loaded" !== z.status || y && "loaded" !== F.status || f && "loaded" !== j.status) return createLoadedState([]);
     let e = [];
     J.data && (e = e.concat(J.data));
     Z.data && (e = e.concat(Z.data));
     Q.data && (e = e.concat(Q.data));
-    return gB(e);
+    return createLoadedState(e);
   }, [z.status, y, F.status, f, j.status, J.data, Z.data, Q.data]);
   let et = $$V1({
     args: N,
@@ -688,7 +688,7 @@ export function $$H0(e) {
     status: "loading",
     data: null,
     errors: null,
-    threads: Xm(),
+    threads: createLoadingState(),
     api: {},
     isUnresolvedLoaded: !1,
     isResolvedLoaded: !1

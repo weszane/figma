@@ -53,7 +53,7 @@ import { IU } from '../figma_app/421401';
 import { getParentOrgIdIfOrgLevel, useCurrentPrivilegedPlan, useIsOrgAdminUser, useTeamPlanFeatures, useTeamPlanUser } from '../figma_app/465071';
 import { oi } from '../figma_app/527041';
 import { y2 } from '../figma_app/563413';
-import { Eh } from '../figma_app/617654';
+import { organizationAPIService } from '../figma_app/617654';
 import { copyTextToClipboard } from '../figma_app/623293';
 import { clickableBaseLinkTracked } from '../figma_app/637027';
 import { g as _$$g } from '../figma_app/638694';
@@ -61,7 +61,7 @@ import { UserTypeEnum } from '../figma_app/736948';
 import { az } from '../figma_app/805373';
 import { ny } from '../figma_app/819458';
 import { TrackingProvider } from '../figma_app/831799';
-import { Bk, MI } from '../figma_app/845611';
+import { truncateText, maxTextLength } from '../figma_app/845611';
 import { LoadingOverlay } from '../figma_app/858013';
 import { MenuSeparator } from '../figma_app/860955';
 import { BadgeColor } from '../figma_app/919079';
@@ -86,7 +86,7 @@ let F = registerModal(e => {
   let m = async () => {
     d(!0);
     try {
-      await Eh.setDomainCapture({
+      await organizationAPIService.setDomainCapture({
         org_id: e.orgId
       });
       a(VisualBellActions.enqueue({
@@ -733,11 +733,11 @@ function ek({
       marginTop: '0px',
       marginBottom: '8px'
     },
-    onChange: e => j(Bk(e)),
+    onChange: e => j(truncateText(e)),
     query: r,
     clearSearch: () => l(''),
     placeholder: getI18nString('domain_insights.unclaimed_users.search.placeholder'),
-    maxInputLength: MI
+    maxInputLength: maxTextLength
   });
   return jsxs(Fragment, {
     children: [jsx('div', {
@@ -761,7 +761,7 @@ function ek({
               count: e.length
             }),
             onClick: () => {
-              Eh.addDomainUsers({
+              organizationAPIService.addDomainUsers({
                 currentOrgId: t,
                 userIds: a
               }).then(() => {

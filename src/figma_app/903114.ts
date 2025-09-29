@@ -40,7 +40,7 @@ import { FOrganizationLevelType, FBillingPeriodType, FSeatAssignmentReasonType, 
 import { CurrencyFormatter } from "../figma_app/514043";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { getPlanData } from "../figma_app/428858";
-import { h as _$$h } from "../figma_app/124713";
+import { devModalTypes } from "../figma_app/124713";
 import { B as _$$B } from "../figma_app/395012";
 import { registerModal } from "../905/102752";
 import { N as _$$N2 } from "../905/809096";
@@ -281,7 +281,7 @@ function ee({
         entryPoint: _$$B.MEMBERS_TAB
       },
       org: {
-        entryPoint: _$$h.MEMBERS_TAB
+        entryPoint: devModalTypes.MEMBERS_TAB
       }
     }),
     queueFilterCountsRefetch: h,

@@ -60,7 +60,7 @@ import { TrackingProvider } from '../figma_app/831799';
 import { LoadingSpinner } from '../figma_app/858013';
 import { isStarterUserAtom } from '../figma_app/864723';
 import { isFullscreenView } from '../figma_app/976749';
-import { $V } from '../figma_app/990058';
+import { requestOrgAccountTypeAction } from '../figma_app/990058';
 import { A as _$$A } from '../vendor/737188';
 let u = c;
 function L(e, t, i, n) {
@@ -365,7 +365,7 @@ export function $$eb0(e) {
   let ev = e.onRequestAccess;
   let eI = i => {
     en || (onSuccess?.(), ev?.());
-    t(P ? $V({
+    t(P ? requestOrgAccountTypeAction({
       orgId: planParentId,
       entryPoint: e.entryPoint,
       adminIds: void 0,

@@ -12,7 +12,7 @@ import { J } from "../469e6e40/577626";
 import { a as _$$a } from "../905/676930";
 import { B as _$$B } from "../905/950875";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { logger } from "../905/651849";
 import { dayjs } from "../905/920142";
 import { rb, $z, c as _$$c } from "../figma_app/617427";
@@ -24,7 +24,7 @@ import { VisualBellIcon } from "../905/576487";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { registerModal } from "../905/102752";
 import { I as _$$I } from "../905/597430";
 import { L as _$$L } from "../905/479295";
@@ -378,12 +378,12 @@ function B(e) {
         children: jsxs("div", {
           className: "x1apfuft x78zum5 xdt5ytf",
           children: [jsx("p", {
-            ...Ay.props($.pseudoTitle),
+            ...stylex.props($.pseudoTitle),
             children: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.no_longer_able_to_manage", {
               scheduledCancellationDate: e.scheduledCancellationDate
             })
           }), jsx("ul", {
-            ...Ay.props($.ifYouCancelList),
+            ...stylex.props($.ifYouCancelList),
             children: a.map(({
               id: e,
               label: t,
@@ -393,10 +393,10 @@ function B(e) {
               children: [a, t]
             }, e))
           }), jsx("p", {
-            ...Ay.props($.wontBeAbleToUse),
+            ...stylex.props($.wontBeAbleToUse),
             children: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.wont_be_able_to_use")
           }), jsxs("div", {
-            ...Ay.props($.wontBeAbleToUseItem),
+            ...stylex.props($.wontBeAbleToUseItem),
             children: [jsx(_$$L, {}), jsxs("div", {
               className: "x78zum5 xdt5ytf xl56j7k x1k6glv7",
               children: [jsx("span", {
@@ -413,7 +413,7 @@ function B(e) {
               })]
             })]
           }), jsxs("div", {
-            ...Ay.props($.contactSupportBanner),
+            ...stylex.props($.contactSupportBanner),
             children: [jsx(_$$B, {}), jsx("span", {
               children: renderI18nText("org_admin_settings.schedule_cancellation_modal.if_you_cancel.try_another_plan", {
                 contactingSupport: jsx(TrackedLink, {
@@ -489,10 +489,10 @@ function G(e) {
         children: jsxs("div", {
           className: "x1apfuft x78zum5 xdt5ytf",
           children: [jsx("p", {
-            ...Ay.props($.pseudoTitle),
+            ...stylex.props($.pseudoTitle),
             children: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.will_lose_access")
           }), jsx("ul", {
-            ...Ay.props($.ifYouCancelMoreList),
+            ...stylex.props($.ifYouCancelMoreList),
             children: a.map(({
               id: e,
               graphic: t,
@@ -501,7 +501,7 @@ function G(e) {
               trackingDescriptor: s
             }) => jsx("li", {
               children: jsxs(TrackedLinkPrimitive, {
-                ...Ay.props($.ifYouCancelMoreItem),
+                ...stylex.props($.ifYouCancelMoreItem),
                 newTab: !0,
                 trusted: !0,
                 href: n,
@@ -550,7 +550,7 @@ function z(e) {
     (async () => {
       let t = e.onClose;
       try {
-        await Eh.scheduleCancellation({
+        await organizationAPIService.scheduleCancellation({
           orgId: e.orgId
         });
       } catch (e) {
@@ -672,7 +672,7 @@ function W(e) {
     s(!0);
     (async () => {
       try {
-        await Eh.unscheduleCancellation({
+        await organizationAPIService.unscheduleCancellation({
           orgId: e.orgId
         });
       } catch (e) {

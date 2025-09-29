@@ -6,9 +6,9 @@ import { v as _$$v } from "../905/439972";
 import { getSingletonSceneGraph } from "../905/700578";
 import { LRUCache } from "../905/196201";
 import { useHandleInputEvent } from "../figma_app/878298";
-import { Ok, ux, NY, uW, xj } from "../figma_app/851625";
+import { createInitState, createLoadingState, createSuccessState, createFailureState, isSuccess } from "../figma_app/851625";
 import { getThemeBackgroundColor } from "../figma_app/191804";
-import { f as _$$f } from "../905/931050";
+import { useAsyncEffect } from "../905/931050";
 import { selectWithShallowEqual } from "../905/103090";
 import { KeyCodes } from "../905/63728";
 import { APILoadingStatus } from "../905/520829";
@@ -159,17 +159,17 @@ export function $$M8(e, t, i, a, o) {
   let m = useRef(new LRUCache(100));
   let h = function (e) {
     let t = useDispatch();
-    let [i, a] = useState(Ok());
+    let [i, a] = useState(createInitState());
     let s = useRef(null);
     let o = `${getAssetKey(e)}/${getAssetVersion(e)}`;
     useEffect(() => {
-      s.current !== o && (s.current = o, a(ux()), t(uP({
+      s.current !== o && (s.current = o, a(createLoadingState()), t(uP({
         item: e,
         bufferCallback: e => {
-          s.current === o && a(NY(e));
+          s.current === o && a(createSuccessState(e));
         },
         errorCallback: () => {
-          s.current === o && a(uW());
+          s.current === o && a(createFailureState());
         },
         alwaysFetch: !0
       })));
@@ -221,19 +221,19 @@ export function $$j2(e) {
     let g = selectWithShallowEqual(e => selectOpenFileKey(e) || "");
     let y = compareWithGeneratedKey(e, g);
     let b = useMemo(() => {
-      if (null == t || "" === t) return Ok();
+      if (null == t || "" === t) return createInitState();
       let [e, i] = Thumbnail.generateThumbnailForNode(t, 0, 0, 2, {
         scale: 2,
         type: "UNCOMPRESSED",
         clearColor: c
       });
-      return i.length > 0 ? NY({
+      return i.length > 0 ? createSuccessState({
         width: e.width,
         height: e.height,
         image: i
-      }) : uW();
+      }) : createFailureState();
     }, [t, c, i, o]);
-    let v = _$$f(() => new Promise((i, n) => {
+    let v = useAsyncEffect(() => new Promise((i, n) => {
       if (t) {
         if (y) {
           i(new Uint8Array());
@@ -259,11 +259,11 @@ export function $$j2(e) {
           clearColor: c,
           scale: 2
         });
-        return n.length > 0 ? NY({
+        return n.length > 0 ? createSuccessState({
           width: i.width,
           height: i.height,
           image: n
-        }) : uW();
+        }) : createFailureState();
       }, [i, o, v, y, e, c])
     };
   }(updateStyle, E, D, F);
@@ -287,11 +287,11 @@ export function $$j2(e) {
 function U(e, t, i, a) {
   let o = useSelector(e => e.theme.visibleTheme);
   let l = getThemeBackgroundColor(o);
-  let [d, c] = useState([Ok(), Ok()]);
+  let [d, c] = useState([createInitState(), createInitState()]);
   let m = useRef(null);
   useEffect(() => {
     if (!t) return;
-    if (!xj(i)) {
+    if (!isSuccess(i)) {
       c([i, i]);
       return;
     }
@@ -300,10 +300,10 @@ function U(e, t, i, a) {
     m.current = n;
     let r = a.get(n);
     if (r) {
-      c([NY(r[0]), NY(r[1])]);
+      c([createSuccessState(r[0]), createSuccessState(r[1])]);
       return;
     }
-    c([ux(), ux()]);
+    c([createLoadingState(), createLoadingState()]);
     scheduler.postTask(() => {
       if (m.current !== n) return;
       let {
@@ -313,7 +313,7 @@ function U(e, t, i, a) {
         beforeThumbnail: void 0,
         afterThumbnail: void 0
       };
-      beforeThumbnail?.image.length && afterThumbnail?.image.length ? (a.set(n, [beforeThumbnail, afterThumbnail]), c([NY(beforeThumbnail), NY(afterThumbnail)])) : c([uW(), uW()]);
+      beforeThumbnail?.image.length && afterThumbnail?.image.length ? (a.set(n, [beforeThumbnail, afterThumbnail]), c([createSuccessState(beforeThumbnail), createSuccessState(afterThumbnail)])) : c([createFailureState(), createFailureState()]);
     }, {
       priority: "background"
     });

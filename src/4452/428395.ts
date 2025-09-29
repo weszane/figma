@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect } from "react";
 import { E as _$$E } from "../905/53857";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { Y } from "../figma_app/515088";
-import { z7, V7 } from "../figma_app/845611";
+import { useFilteredRequestIds, RequestFilterType } from "../figma_app/845611";
 if (443 == require.j) {}
 export function $$d0({
   refreshNonce: e,
@@ -29,7 +29,7 @@ export function $$d0({
     refreshNonce: e,
     billing_group_ids: h ? [null] : []
   }), [e, t, u, a, v, h]);
-  let j = z7({
+  let j = useFilteredRequestIds({
     planType: d,
     planId: c,
     filterParams: y,
@@ -46,7 +46,7 @@ export function $$d0({
     }
   }, [j, b]);
   return null !== I && (j?.length !== 0 || m) && jsx(_$$E, {
-    variant: u && _ === V7.ALL_MANAGED_REQUESTS || !u && _ === V7.ALL_ORG_REQUESTS ? "brandOutline" : "defaultFilled",
+    variant: u && _ === RequestFilterType.ALL_MANAGED_REQUESTS || !u && _ === RequestFilterType.ALL_ORG_REQUESTS ? "brandOutline" : "defaultFilled",
     "data-testid": "table-row-count-badge",
     children: I.toString()
   }) || jsx("div", {});

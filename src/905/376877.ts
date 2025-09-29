@@ -1,4 +1,4 @@
-import { $V } from "../figma_app/990058";
+import { requestOrgAccountTypeAction } from "../figma_app/990058";
 import { DeepLinkType } from "../905/15667";
 import { requestUpgrade } from "../905/584989";
 import { ProductAccessTypeMap } from "../905/513035";
@@ -13,7 +13,7 @@ export async function $$l0({
   return await new Promise((c, u) => {
     if (l.key.type === FOrganizationLevelType.ORG) {
       let a = l.key.parentId;
-      e($V({
+      e(requestOrgAccountTypeAction({
         orgId: a,
         entryPoint: DeepLinkType.NUX,
         licenseType: ProductAccessTypeMap[d],

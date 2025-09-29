@@ -1,6 +1,6 @@
 import { l as _$$l } from "../905/716947";
 import { atom, createRemovableAtomFamily } from "../figma_app/27355";
-import { Xm, gB, e1 } from "../905/723791";
+import { createLoadingState, createLoadedState, createErrorState } from "../905/723791";
 import { FileKeySourceEnum } from "../905/412913";
 import { AssetAtomMap } from "../figma_app/31188";
 import { openFileLibraryKeyAtom, openFileKeyAtom } from "../figma_app/516028";
@@ -42,7 +42,7 @@ function b(e) {
     return i ? t(_({
       libraryKey: i,
       assetType: e
-    })) : Xm();
+    })) : createLoadingState();
   });
 }
 function v(e) {
@@ -51,7 +51,7 @@ function v(e) {
     return i ? t(_({
       libraryKey: i,
       assetType: e
-    })) : Xm();
+    })) : createLoadingState();
   });
 }
 let I = createRemovableAtomFamily(({
@@ -59,7 +59,7 @@ let I = createRemovableAtomFamily(({
   assetType: t,
   livegraphAssetToLibraryAsset: i
 }) => atom(n => {
-  if (!n(openFileLibraryKeyAtom)) return Xm();
+  if (!n(openFileLibraryKeyAtom)) return createLoadingState();
   let r = function (e) {
     switch (function (e) {
       switch (e) {
@@ -100,14 +100,14 @@ let I = createRemovableAtomFamily(({
     }, {
       reportAsSentryError: !0
     });
-    return gB({});
+    return createLoadedState({});
   }
   let s = n(r(e));
   switch (s.status) {
     case "loading":
-      return Xm();
+      return createLoadingState();
     case "errors":
-      return e1(s.errors);
+      return createErrorState(s.errors);
   }
   let o = s.data.libraryKeyToFile?.file;
   let d = s.data.libraryKeyToFile?.hubFile ?? o;
@@ -115,14 +115,14 @@ let I = createRemovableAtomFamily(({
     logError("design-systems", "unexpected null file data", {
       libraryKey: e
     });
-    return gB({});
+    return createLoadedState({});
   }
   let c = {};
   for (let t of d.libraryAssets) {
     let n = i(e, t);
     n && (c[n.key] = n);
   }
-  return gB(c);
+  return createLoadedState(c);
 }), deepEqual);
 var S = x;
 let k = {
@@ -162,7 +162,7 @@ function N(e, t, i = O, n = null) {
       error: null,
       libraryAsset: o.data[t] ?? null
     };
-    return gB(u);
+    return createLoadedState(u);
   });
 }
 function P(e, t) {
@@ -197,19 +197,19 @@ let $$L0 = atom(e => {
     let h = e(publishStatusAtoms[l]);
     switch (h.status) {
       case "loading":
-        return Xm();
+        return createLoadingState();
       case "errors":
-        return e1(h.errors);
+        return createErrorState(h.errors);
       case "disabled":
-        return gB({});
+        return createLoadedState({});
     }
     switch (m.status) {
       case "loading":
-        return Xm();
+        return createLoadingState();
       case "errors":
-        return e1(m.errors);
+        return createErrorState(m.errors);
       case "disabled":
-        return gB({});
+        return createLoadedState({});
     }
     for (let [e, i] of Object.entries(h.data)) {
       if (!i) continue;
@@ -239,6 +239,6 @@ let $$L0 = atom(e => {
       };
     }
   }
-  return gB(t);
+  return createLoadedState(t);
 });
 export const t = $$L0;

@@ -1,4 +1,4 @@
-import { Ay } from '@stylexjs/stylex';
+import { stylex } from '@stylexjs/stylex';
 import g from 'classnames';
 import { createContext, createRef, memo, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -786,14 +786,14 @@ function eg(e) {
     let o = [s, 'STRETCH'].includes(i);
     let c = i === 'SCALE';
     return jsx(RecordableDiv, {
-      ...Ay.props(eE.baseConstraintButton, eE[t]),
+      ...stylex.props(eE.baseConstraintButton, eE[t]),
       recordingKey: generateRecordingKey(e, 'constraint', t),
       onMouseDown: u(r, s),
       children: c ? jsx('div', {
-        ...Ay.props(eT[t]),
+        ...stylex.props(eT[t]),
         children: jsx(ef, {})
       }) : jsx('div', {
-        ...Ay.props(eb.baseHandle, r === 'HORIZONTAL' && eb.horizontalHandle, o && (r === 'HORIZONTAL' ? eb.horizontalHandleSelected : eb.verticalHandleSelected), a && eb.handleDisabled)
+        ...stylex.props(eb.baseHandle, r === 'HORIZONTAL' && eb.horizontalHandle, o && (r === 'HORIZONTAL' ? eb.horizontalHandleSelected : eb.verticalHandleSelected), a && eb.handleDisabled)
       })
     });
   };
@@ -801,13 +801,13 @@ function eg(e) {
     let i = r === 'centerX' ? 'HORIZONTAL' : 'VERTICAL';
     let a = d(i) === 'CENTER';
     return jsx(RecordableDiv, {
-      ...Ay.props(ey.baseInnerTarget, i === 'HORIZONTAL' ? ey.horizontalInnerTarget : ey.verticalInnerTarget, !a && t === i && ey.innerTargetHover),
+      ...stylex.props(ey.baseInnerTarget, i === 'HORIZONTAL' ? ey.horizontalInnerTarget : ey.verticalInnerTarget, !a && t === i && ey.innerTargetHover),
       recordingKey: generateRecordingKey(e, 'constraint', r),
       onMouseDown: _,
       onMouseMove: h,
       onMouseLeave: m,
       children: jsx('div', {
-        ...Ay.props(ey.baseInnerTarget, i === 'HORIZONTAL' ? ey.horizontalInnerConstraintHandle : ey.verticalInnerConstraintHandle, a && (i === 'HORIZONTAL' ? eb.horizontalHandleSelected : eb.verticalHandleSelected))
+        ...stylex.props(ey.baseInnerTarget, i === 'HORIZONTAL' ? ey.horizontalInnerConstraintHandle : ey.verticalInnerConstraintHandle, a && (i === 'HORIZONTAL' ? eb.horizontalHandleSelected : eb.verticalHandleSelected))
       })
     });
   };

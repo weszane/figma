@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
@@ -92,14 +92,14 @@ function E(e) {
     }), jsx(TextWithTruncation, {
       truncate: !0,
       children: jsx("span", {
-        ...Ay.props(textDisplayConfig.textBodyMedium),
+        ...stylex.props(textDisplayConfig.textBodyMedium),
         children: t
       })
     })]
   }) : jsx(TextWithTruncation, {
     truncate: !0,
     children: jsx("span", {
-      ...Ay.props(textDisplayConfig.textBodyMedium),
+      ...stylex.props(textDisplayConfig.textBodyMedium),
       children: "--"
     })
   });
@@ -166,7 +166,7 @@ export function $$D1({
   return jsx(TextWithTruncation, {
     truncate: e,
     children: jsx("span", {
-      ...Ay.props(textDisplayConfig.textBodyMedium),
+      ...stylex.props(textDisplayConfig.textBodyMedium),
       children: t
     })
   });

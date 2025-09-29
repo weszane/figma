@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuLinkComp, MenuItemComp, MenuSeparator } from "../figma_app/860955";
 import { ButtonPrimitive } from "../905/632989";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, Xr, atomStoreManager } from "../figma_app/27355";
 import _ from "classnames";
@@ -301,13 +301,13 @@ function eM({
   return jsxs("div", {
     className: "xrvj5dj x16pxjgp x1excjyp x6s0dn4 xf7z5ut x12oqio5 xv2f06h",
     children: [jsx("span", {
-      ...Ay.props(eF.flagName),
+      ...stylex.props(eF.flagName),
       children: e
     }), jsx("span", {
-      ...Ay.props(eF.timestamp),
+      ...stylex.props(eF.timestamp),
       children: dayjs(t.updatedAt).format("MMM D, YYYY h:mm A")
     }), jsx("span", {
-      ...Ay.props(eF.action),
+      ...stylex.props(eF.action),
       children: jsx(Button, {
         variant: "secondary",
         onClick: () => i(e),
@@ -356,7 +356,7 @@ function ej({
         value: r,
         onChange: e => a(e.target.value),
         placeholder: "Search flags...",
-        ...Ay.props(eU.searchInput)
+        ...stylex.props(eU.searchInput)
       })
     }), jsx("div", {
       children: renderI18nText("reset_user_flags_modal.user_flag_level", {
@@ -364,15 +364,15 @@ function ej({
         userFlagLevel: l
       })
     }), jsxs("div", {
-      ...Ay.props(eU.header),
+      ...stylex.props(eU.header),
       children: [jsx("span", {
-        ...Ay.props(eU.flagName),
+        ...stylex.props(eU.flagName),
         children: renderI18nText("reset_user_flags_modal.flag_name")
       }), jsx("span", {
-        ...Ay.props(eU.timestamp),
+        ...stylex.props(eU.timestamp),
         children: renderI18nText("reset_user_flags_modal.last_updated")
       }), jsx("span", {
-        ...Ay.props(eU.action),
+        ...stylex.props(eU.action),
         children: renderI18nText("reset_user_flags_modal.action")
       })]
     }), jsx("div", {
@@ -3429,7 +3429,7 @@ function rr({
       manager,
       children: [jsx(ButtonPrimitive, {
         ...getTriggerProps(),
-        ...Ay.props(rt.buttonStyle, manager.isOpen && rt.buttonStyleActive),
+        ...stylex.props(rt.buttonStyle, manager.isOpen && rt.buttonStyleActive),
         "aria-label": getI18nString("fullscreen.menu.help_menu"),
         "aria-expanded": manager.isOpen,
         htmlAttributes: {

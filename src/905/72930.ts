@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { O } from "../905/969533";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { useSelectedCooperFrameIds, useSelectedSlideRowGuids, useCooperFrameGuids } from "../figma_app/396464";
@@ -76,7 +76,7 @@ export function $$v0({
     renderInput: ({
       onMouseDown: e
     }) => jsxs("button", {
-      ...Ay.props(E.selectInputContainer, (0 === S.length || void 0 === S[0]) && E.selectInputContainerError),
+      ...stylex.props(E.selectInputContainer, (0 === S.length || void 0 === S[0]) && E.selectInputContainerError),
       onClick: e,
       children: [jsxs("div", {
         className: "x78zum5 x6s0dn4 x1i71x30",

@@ -6,7 +6,7 @@ import { Button } from "../905/521428";
 import { A as _$$A } from "../905/593436";
 import { C as _$$C } from "../905/520159";
 import { A as _$$A2 } from "../905/251970";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import h from "classnames";
 import { useSingleEffect } from "../905/791079";
@@ -355,7 +355,7 @@ export function $$W4({
     children: [jsx("div", {
       className: Dm,
       children: jsxs("div", {
-        ...Ay.props(K.prompt(g - 16)),
+        ...stylex.props(K.prompt(g - 16)),
         children: [d.length > 0 && 0 === e.length && jsx("div", {
           className: "x1kpt5kx",
           children: jsx($$G6, {

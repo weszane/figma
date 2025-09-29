@@ -7,7 +7,7 @@ import { FMemberRoleType } from "../figma_app/191312";
 import { isNullOrFailure, isLoading } from "../905/18797";
 import { getPlanUserAtomFamily } from "../905/276025";
 import { checkOrgUserPermission } from "../figma_app/465071";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { createOptimistThunk } from "../905/350402";
 import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 let $$m2 = createActionCreator("LICENSE_GROUP_DELETE");
@@ -38,7 +38,7 @@ let y = async (e, t, r) => {
       key: EO(r)
     }));
     try {
-      let t = (await Eh.getLicenseGroups({
+      let t = (await organizationAPIService.getLicenseGroups({
         currentOrgId: r
       })).data.meta;
       e.dispatch($$f1(t));

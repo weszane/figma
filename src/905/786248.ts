@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useState, useRef, useEffect, useCallback, useImperativeHandle } from "react";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { s as _$$s } from "../905/139639";
 import { tu } from "../figma_app/779249";
 let l = {
@@ -59,7 +59,7 @@ let $$d0 = forwardRef(function ({
     },
     type: "text",
     value: g,
-    ...Ay.props(l.input, m && l.focused),
+    ...stylex.props(l.input, m && l.focused),
     ref: _,
     disabled: i,
     readOnly: !m

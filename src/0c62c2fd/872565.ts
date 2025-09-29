@@ -8,7 +8,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { KeyCodes } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
-import { getResourceDataOrFallback, Xm, gB } from "../905/723791";
+import { getResourceDataOrFallback, createLoadingState, createLoadedState } from "../905/723791";
 import { getAtomMutate } from "../figma_app/566371";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { ms, c$, wv } from "../figma_app/236327";
@@ -697,20 +697,20 @@ export function $$e83(e) {
     "ok" !== t.subscription && T.push(t.id);
   }
   let E = function (e) {
-    let [t, r] = useState(Xm());
+    let [t, r] = useState(createLoadingState());
     let a = e.join(",");
     useEffect(() => {
       if (0 === a.length) {
-        r(gB({}));
+        r(createLoadedState({}));
         return;
       }
-      r(Xm());
+      r(createLoadingState());
       let e = !1;
       (async () => {
         let t = await Z.getTeamRestrictionsLists({
           teamIds: a
         });
-        e || r(gB(t.data.meta));
+        e || r(createLoadedState(t.data.meta));
       })();
       return () => {
         e = !0;

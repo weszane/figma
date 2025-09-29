@@ -5,7 +5,7 @@ import { ListItemNode, ListNode } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $createHeadingNode, $isHeadingNode, HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { $setBlocksType } from '@lexical/selection';
-import { Ay as _$$Ay, xk as _$$xk } from '@stylexjs/stylex';
+import { stylex, props } from '@stylexjs/stylex';
 import y from 'classnames';
 import { $createParagraphNode, $getRoot, $getSelection, $insertNodes, $isRangeSelection, $isRootOrShadowRoot, $nodesOfType, BLUR_COMMAND, COMMAND_PRIORITY_EDITOR, createCommand, FORMAT_ELEMENT_COMMAND, FORMAT_TEXT_COMMAND, SELECTION_CHANGE_COMMAND } from 'lexical';
 import { Fragment as _$$Fragment, Children, createContext, createElement, forwardRef, lazy, memo, Suspense, useCallback, useContext, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -1796,7 +1796,7 @@ function iv({
 * When the newest cells reach other cells, those cells should match the newest cells' color.
 * The cells should be relatively small so that the component works even at small sizes.`];
   return jsxs('div', {
-    ..._$$xk(iy.emptyStateContainer),
+    ...props(iy.emptyStateContainer),
     children: [jsx('div', {
       className: 'x16rqkct x1v8gsql xe8ttls',
       children: jsx(_$$C, {})
@@ -2251,7 +2251,7 @@ function iD({
       children: [jsxs(DialogHeader, {
         children: [jsx(DialogLabel, {
           ref: A,
-          ..._$$Ay.props(iA.windowTitle),
+          ...stylex.props(iA.windowTitle),
           htmlAttributes: {
             'data-tooltip': L ? E : void 0,
             'data-tooltip-type': 'text'
@@ -2369,46 +2369,46 @@ function nr() {
     children: [jsxs('div', {
       className: 'x78zum5 x1q0g3np x1qughib',
       children: [jsx('div', {
-        ..._$$Ay.props(na.skeletonItem(68, 16, 50))
+        ...stylex.props(na.skeletonItem(68, 16, 50))
       }), jsx('div', {
-        ..._$$Ay.props(na.skeletonItem(200, 16, 50))
+        ...stylex.props(na.skeletonItem(200, 16, 50))
       }), jsxs('div', {
         className: 'x78zum5 x1jnr06f',
         children: [jsx('div', {
-          ..._$$Ay.props(na.skeletonItem(123, 16, 50))
+          ...stylex.props(na.skeletonItem(123, 16, 50))
         }), jsx('div', {
-          ..._$$Ay.props(na.skeletonItem(16, 16, 50))
+          ...stylex.props(na.skeletonItem(16, 16, 50))
         })]
       })]
     }), jsx('div', {
       className: 'x1miatn0',
       children: jsx('div', {
-        ..._$$Ay.props(na.skeletonItem(172, 20, 50))
+        ...stylex.props(na.skeletonItem(172, 20, 50))
       })
     }), jsxs('div', {
       className: 'x78zum5 x1qughib',
       children: [jsx('div', {
-        ..._$$Ay.props(na.skeletonItem(234, 16, 50))
+        ...stylex.props(na.skeletonItem(234, 16, 50))
       }), jsx('div', {
-        ..._$$Ay.props(na.skeletonItem(41, 16, 50))
+        ...stylex.props(na.skeletonItem(41, 16, 50))
       })]
     }), jsxs('div', {
       className: 'x1miatn0 xrvj5dj x1o61qjw xou54vl xh8yej3 x127qqk8',
       children: [jsx('div', {
         className: 'x78zum5 x6s0dn4 x5yr21d',
         children: jsx('div', {
-          ..._$$Ay.props(na.skeletonItem('100%', '100%', 0))
+          ...stylex.props(na.skeletonItem('100%', '100%', 0))
         })
       }), jsxs('div', {
         className: 'xrvj5dj x1o61qjw x6ec99f xou54vl x5yr21d',
         children: [jsx('div', {
-          ..._$$Ay.props(na.skeletonItem('100%', '100%', 0))
+          ...stylex.props(na.skeletonItem('100%', '100%', 0))
         }), jsx('div', {
-          ..._$$Ay.props(na.skeletonItem('100%', '100%', 0))
+          ...stylex.props(na.skeletonItem('100%', '100%', 0))
         }), jsx('div', {
-          ..._$$Ay.props(na.skeletonItem('100%', '100%', 0))
+          ...stylex.props(na.skeletonItem('100%', '100%', 0))
         }), jsx('div', {
-          ..._$$Ay.props(na.skeletonItem('100%', '100%', 0))
+          ...stylex.props(na.skeletonItem('100%', '100%', 0))
         })]
       })]
     }), jsx('div', {
@@ -2433,7 +2433,7 @@ function no({
       width: e
     }
   }) : jsx('div', {
-    ..._$$Ay.props(na.skeletonItem(e, 16, 50))
+    ...stylex.props(na.skeletonItem(e, 16, 50))
   });
 }
 let nh = 'sites_full_page_preview--bottomResizeHandle--4AoWF sites_full_page_preview--resizeHandle--plr3i';
@@ -2550,7 +2550,7 @@ function nb({
     (e[OP.LEFT] || e[OP.RIGHT]) && n(Math.min(Math.max(t.right - t.left, Yh), _$$g_2));
     e[OP.BOTTOM] && r(Math.min(Math.max(t.bottom, _$$fw), L9));
   };
-  let y = e => _$$Ay.props(g ? e : n_.noop);
+  let y = e => stylex.props(g ? e : n_.noop);
   useEffect(() => {
     getFeatureFlags().bake_mobile_preview_autoscaling && x && c(Math.min(Math.max(0.5, (x - 40) / nf), 1));
   }, [x, c, d]);
@@ -2761,7 +2761,7 @@ function nz() {
               src: buildUploadUrl('c5b8c66d1796d0246ed3ef72acd4fd12075444af'),
               alt: getI18nString('figmake.toolbar.upload_alt')
             }), jsx('p', {
-              ..._$$xk(nM.mobilePopupPromptBody),
+              ...props(nM.mobilePopupPromptBody),
               children: renderI18nText('figmake.mobile_blocking_banner.example_prompt')
             }), jsxs('div', {
               className: 'x78zum5 x1q0g3np x6s0dn4 xpvyfi4 x1qughib xh8yej3 x7hzu26',
@@ -2773,7 +2773,7 @@ function nz() {
               }), jsxs('div', {
                 className: 'x78zum5 x1q0g3np x6s0dn4 x13a6bvl x98rzlu',
                 children: [jsx('div', {
-                  ..._$$xk(nM.mobilePopupPromptModel),
+                  ...props(nM.mobilePopupPromptModel),
                   children: renderI18nText('figmake.mobile_blocking_banner.model_version')
                 }), jsx(_$$d4, {
                   className: 'xorixrz x1hhpjz6 x1awj2ng x9a15t0 x1qx5ct2 xw4jnvo x1i3ajwb',
@@ -2790,13 +2790,13 @@ function nz() {
             }), jsxs('div', {
               className: 'x78zum5 xdt5ytf xl56j7k x1dc814f x1nfngrj x1mqxbix',
               children: [jsx('h2', {
-                ..._$$xk(nM.mobilePopupCardTitle),
+                ...props(nM.mobilePopupCardTitle),
                 children: renderI18nText('figmake.mobile_blocking_banner.header')
               }), jsx('p', {
-                ..._$$xk(nM.mobilePopupCardBody),
+                ...props(nM.mobilePopupCardBody),
                 children: renderI18nText('figmake.mobile_blocking_banner.body')
               }), jsx('div', {
-                ..._$$xk(nM.mobilePopupCardButton),
+                ...props(nM.mobilePopupCardButton),
                 children: jsx(TrackedLinkButton, {
                   size: 'lg',
                   trackingProperties: {
@@ -2822,7 +2822,7 @@ function nH({
     fileLoading
   } = getLoadingAndReadOnlyState();
   return fileLoading || !e ? null : jsx('div', {
-    ..._$$Ay.props(nX.fullscreenPanel, nX.leftOffset(!t)),
+    ...stylex.props(nX.fullscreenPanel, nX.leftOffset(!t)),
     children: e
   });
 }
@@ -2855,12 +2855,12 @@ nH.Header = function ({
 }) {
   let n = useIsSelectedFigmakeFullscreen();
   return jsxs('div', {
-    ..._$$Ay.props(nX.header(!!n)),
+    ...stylex.props(nX.header(!!n)),
     'data-testid': i,
     'children': [jsxs('div', {
       className: 'x78zum5 xl56j7k xc26acl x1jnr06f',
       children: [jsx(nq, {}), jsx('span', {
-        ..._$$Ay.props(nX.headerTitle),
+        ...stylex.props(nX.headerTitle),
         children: e
       })]
     }), t]
@@ -3332,7 +3332,7 @@ function am({
   return jsxs('div', {
     className: 'x1n2onr6',
     children: [jsx('div', {
-      ..._$$xk(r)
+      ...props(r)
     }), jsxs('div', {
       'className': 'x78zum5 x1nhvcw1 x1qjc9v5 x1jnr06f x1n2onr6 x12nagc',
       'data-testid': 'publish-event-row',
@@ -3568,7 +3568,7 @@ function aE({
   return (e ? i = jsx(aN, {}) : t || (i = jsxs('div', {
     children: [jsx(aA, {}), jsx(aR, {})]
   })), i) ? jsx('div', {
-    ..._$$Ay.props(aL.publishingSubtext),
+    ...stylex.props(aL.publishingSubtext),
     'data-testid': 'publishing-subtext',
     'children': i
   }) : null;
@@ -3632,7 +3632,7 @@ function aA() {
         '--color-icon': 'var(--color-icon-secondary)'
       }
     }), jsx('div', {
-      ..._$$Ay.props(aL.publishingSubtext),
+      ...stylex.props(aL.publishingSubtext),
       children: renderI18nText('sites.toolbar.publish_modal.make_fonts_warning')
     })]
   }) : null;
@@ -3855,10 +3855,10 @@ function a3({
     }), jsxs('div', {
       className: 'x78zum5 xdt5ytf x195vfkc xe0p6wg x15hkz2h',
       children: [t && jsx('div', {
-        ..._$$xk(a4.title),
+        ...props(a4.title),
         children: t
       }), i && jsx('div', {
-        ..._$$xk(a4.author),
+        ...props(a4.author),
         children: getI18nString('community.publishing.by_author', {
           authorName: i
         })
@@ -3899,7 +3899,7 @@ function a8({
   }, [data, i]), i && data) ? jsxs('div', {
     className: 'x1v8gsql x19y5rnk xi4r6k5 x18d9i69 xkh2ocl x78zum5 xdt5ytf x7hzu26',
     children: [jsx('div', {
-      ..._$$xk(a4.collectionLabel),
+      ...props(a4.collectionLabel),
       children: getI18nString('sites.toolbar.publish_modal.make_collection_label')
     }), jsxs('div', {
       className: 'xrvj5dj x1p9eum2 x1nfngrj xzp6m1v xb3r6kr',
@@ -4010,14 +4010,14 @@ function se() {
     children: [jsxs('div', {
       className: 'x78zum5 x1q0g3np x1qughib x6s0dn4 x98rzlu x1nfngrj xkh2ocl',
       children: [jsx('div', {
-        ..._$$xk(si.strongLabel),
+        ...props(si.strongLabel),
         children: getI18nString('sites.toolbar.publish_modal.allow_others_to_remix_on_community')
       }), jsx(_$$v7, {
         id: i,
         checked: e ?? !1
       })]
     }), !(s && !e) && jsx('div', {
-      ..._$$xk(si.subtitle),
+      ...props(si.subtitle),
       children: getI18nString('sites.toolbar.publish_modal.feature_on_community_subtitle')
     })]
   });
@@ -5368,10 +5368,10 @@ function rx() {
       children: [jsxs('div', {
         className: 'x78zum5 xdt5ytf x1cy8zhl',
         children: [jsx('p', {
-          ..._$$Ay.props(textDisplayConfig.textBodyLargeStrong),
+          ...stylex.props(textDisplayConfig.textBodyLargeStrong),
           children: getI18nString('figmake.settings.connect_existing_project.status.title')
         }), jsx('p', {
-          ..._$$Ay.props(rm.textBodyMediumSecondary),
+          ...stylex.props(rm.textBodyMediumSecondary),
           children: getI18nString('figmake.settings.connect_existing_project.status.subtitle')
         })]
       }), jsx(_$$K4, {
@@ -5578,7 +5578,7 @@ function rI() {
         children: [jsx(_$$ls, {
           size: AvatarSize.SMALL
         }), jsx('p', {
-          ..._$$Ay.props(rA.textBodyMediumSecondary),
+          ...stylex.props(rA.textBodyMediumSecondary),
           children: getI18nString('figmake.settings.connected_project.multiplayer.org', {
             name: t
           })
@@ -5697,10 +5697,10 @@ function rP() {
         children: [jsx(rF, {}), jsxs('div', {
           className: 'x78zum5 xdt5ytf xl56j7k x6s0dn4 x2b8uid xfp4ol3',
           children: [jsx('p', {
-            ..._$$Ay.props(rO.textBodyLargeStrong),
+            ...stylex.props(rO.textBodyLargeStrong),
             children: getI18nString('figmake.settings.create_project.title')
           }), jsx('p', {
-            ..._$$Ay.props(rO.textBodyMediumSecondary),
+            ...stylex.props(rO.textBodyMediumSecondary),
             children: getI18nString('figmake.settings.create_project.subtitle')
           })]
         }), jsx(Button, {
@@ -5848,7 +5848,7 @@ function rM() {
               user: ownerAvatar,
               size: AvatarSize.SMALL
             }), jsx('p', {
-              ..._$$Ay.props(rz.textBodyMediumSecondary),
+              ...stylex.props(rz.textBodyMediumSecondary),
               children: orgName
             })]
           }),
@@ -5988,10 +5988,10 @@ function rH() {
     }), jsxs('div', {
       className: 'x78zum5 xdt5ytf xl56j7k x6s0dn4 x2b8uid xvfrdwh',
       children: [jsx('p', {
-        ..._$$Ay.props(rX.textBodyLargeStrong),
+        ...stylex.props(rX.textBodyLargeStrong),
         children: getI18nString('figmake.settings.auth.title')
       }), jsxs('p', {
-        ..._$$Ay.props(rX.textBodyLargeSecondary),
+        ...stylex.props(rX.textBodyLargeSecondary),
         children: [getI18nString('figmake.settings.auth.subtitle'), ' ', jsx('a', {
           target: '_blank',
           href: _$$kS,
@@ -6080,7 +6080,7 @@ let rQ = registerModal(({
         })
       }), jsx(DialogBody, {
         children: jsx('div', {
-          ..._$$xk(r0.bodyText),
+          ...props(r0.bodyText),
           children: renderI18nText('sites.metadata.fonts.text_set_in_font_name_will_revert_to_a_default_sans_serif_font_when_this_site_is_published_you_ll_need_to_upload_the_file_again_to_use_it_later', {
             fontName: t
           })
@@ -6153,10 +6153,10 @@ function r2({
   return jsxs('div', {
     className: 'x98rzlu xeuugli',
     children: [jsx('div', {
-      ..._$$xk(r8.name),
+      ...props(r8.name),
       children: t
     }), n && jsx('div', {
-      ..._$$xk(r8.summary),
+      ...props(r8.summary),
       children: renderI18nText('sites.metadata.fonts.styles_count', {
         numStyles: e.length,
         styles: formatList(e)
@@ -6205,7 +6205,7 @@ function r9({
   return jsxs('div', {
     className: 'x78zum5 x1q0g3np x1qughib x6s0dn4 x1ba4aug x1duevw5 x1jwbysl xv2f06h',
     children: [jsx('div', {
-      ..._$$xk(ol.styleName),
+      ...props(ol.styleName),
       children: e
     }), n({
       family: t,
@@ -6247,11 +6247,11 @@ function ot({
     isOpen: i,
     toggle: n,
     children: [jsxs(_$$Y2, {
-      ..._$$xk(os.header, i ? os.expandedHeight : os.collapsedHeight),
+      ...props(os.header, i ? os.expandedHeight : os.collapsedHeight),
       children: [jsxs(JU, {
-        ..._$$xk(os.label, i ? os.expandedHeight : os.collapsedHeight),
+        ...props(os.label, i ? os.expandedHeight : os.collapsedHeight),
         children: [jsx(_$$O4, {
-          ..._$$xk(oa.icon, i && oa.expanded)
+          ...props(oa.icon, i && oa.expanded)
         }), jsx(r2, {
           styles: r,
           displayName: e,
@@ -6404,10 +6404,10 @@ function oc({
       children: [n, jsxs('div', {
         className: 'x98rzlu xeuugli',
         children: [jsx('div', {
-          ..._$$xk(ou.title),
+          ...props(ou.title),
           children: e
         }), jsx('div', {
-          ..._$$xk(ou.subtext),
+          ...props(ou.subtext),
           children: t
         })]
       })]
@@ -6850,7 +6850,7 @@ function ob() {
         }), i < n.length - 1 && jsx(r3, {})]
       }, e))]
     }), f && jsxs('div', {
-      ..._$$xk(oy.section, g && oy.uploadedSection),
+      ...props(oy.section, g && oy.uploadedSection),
       children: [jsx(oc, {
         type: od.UPLOADED,
         title: renderI18nText('sites.metadata.fonts.uploaded_for_publishing'),
@@ -7124,7 +7124,7 @@ function oL({
     isFigmake: m
   });
   return jsxs('button', {
-    ..._$$Ay.props(oP.webpageItem, p && oP.webpageItemActive, !g && oP.webpageItemNoIcon, !x && oP.webpageItemNonFullPage),
+    ...stylex.props(oP.webpageItem, p && oP.webpageItemActive, !g && oP.webpageItemNoIcon, !x && oP.webpageItemNonFullPage),
     'onMouseDown': h,
     'onClick': h,
     'data-testid': `site-pages-list-item-${e}`,
@@ -7520,11 +7520,11 @@ function oY({
       children: [jsx('div', {
         className: 'x98rzlu',
         children: jsxs(InputPrimitive.Root, {
-          ..._$$xk(oW.inputRoot, m?.type === 'warning' && oW.inputRootWarning, m?.type === 'error' && oW.inputRootError),
+          ...props(oW.inputRoot, m?.type === 'warning' && oW.inputRootWarning, m?.type === 'error' && oW.inputRootError),
           children: [jsx(InputPrimitive, {
             id: 'subdomain-input',
             value: c,
-            ..._$$xk(oW.inputField),
+            ...props(oW.inputField),
             onChange: e => {
               x(e);
               y(e);
@@ -7534,7 +7534,7 @@ function oY({
             },
             placeholder: getI18nString('sites.metadata.domains.subdomain_input_placeholder')
           }), jsx('span', {
-            ..._$$xk(oW.domain),
+            ...props(oW.domain),
             children: o
           })]
         })
@@ -7553,10 +7553,10 @@ function oY({
     }), jsx('div', {
       className: 'x78zum5 x1q0g3np x6s0dn4 xxk0z11 xztvwtv x1nfngrj',
       children: m ? jsx('span', {
-        ..._$$xk(m.type === 'warning' ? oW.warningMessage : oW.errorMessage),
+        ...props(m.type === 'warning' ? oW.warningMessage : oW.errorMessage),
         children: m.message
       }) : jsx('span', {
-        ..._$$xk(oW.description),
+        ...props(oW.description),
         children: renderI18nText('sites.metadata.domains.sub_domain_restrictions')
       })
     }), jsx('div', {
@@ -7632,10 +7632,10 @@ function oZ({
     children: [jsxs('div', {
       className: 'x78zum5 xdt5ytf xg2d0mh xod5an3',
       children: [jsx('div', {
-        ..._$$xk(textDisplayConfig.textBodyLargeStrong),
+        ...props(textDisplayConfig.textBodyLargeStrong),
         children: renderI18nText('sites.metadata.domains.base_domain')
       }), jsx('div', {
-        ..._$$xk(oJ.description),
+        ...props(oJ.description),
         children: e ? jsx(Fragment, {
           children: i ? renderI18nText('figmake.metadata.domains.your_make_is_always_available_at_this_domain') : renderI18nText('sites.metadata.domains.your_site_is_always_available_at_this_domain')
         }) : renderI18nText('sites.metadata.domains.unpublished_site_description')
@@ -7679,7 +7679,7 @@ function oQ({
       'data-testid': 'baseDomainDomainRow',
       'children': r ? jsxs(Fragment, {
         children: [jsx(Wi, {
-          ..._$$xk(oJ.loadingText)
+          ...props(oJ.loadingText)
         }), jsx(LoadingSpinner, {
           'data-testid': 'loading-spinner'
         })]
@@ -7689,21 +7689,21 @@ function oQ({
         htmlAttributes: {
           rel: 'noreferrer'
         },
-        ..._$$xk(oJ.customDomain),
+        ...props(oJ.customDomain),
         children: e.domain
       })
     }) : jsxs('div', {
-      ..._$$xk(oJ.publishStatusRow, oJ.row),
+      ...props(oJ.publishStatusRow, oJ.row),
       'data-testid': 'baseDomainExampleInfo',
       'children': [jsx('div', {
         className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
         children: renderI18nText('sites.metadata.domains.site_url')
       }), jsx('div', {
-        ..._$$xk(oJ.secondaryText),
+        ...props(oJ.secondaryText),
         children: renderI18nText('sites.metadata.domains.example_figma_site')
       })]
     }), jsxs('div', {
-      ..._$$xk(oJ.publishStatusRow, oJ.row),
+      ...props(oJ.publishStatusRow, oJ.row),
       children: [jsx('div', {
         className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
         children: d ? renderI18nText('figmake.metadata.domains.make_status') : renderI18nText('sites.metadata.domains.site_status')
@@ -7712,7 +7712,7 @@ function oQ({
         dataTestId: 'sitesPublishStatusBadge'
       })]
     }), lastPublishedAt && jsxs('div', {
-      ..._$$xk(oJ.publishStatusRow, oJ.row),
+      ...props(oJ.publishStatusRow, oJ.row),
       children: [jsx('div', {
         className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
         children: renderI18nText('sites.toolbar.publish_modal.last_published_header')
@@ -7818,10 +7818,10 @@ function dt({
       children: [jsxs('div', {
         className: 'x98rzlu',
         children: [jsx('div', {
-          ..._$$xk(textDisplayConfig.textBodyMediumStrong),
+          ...props(textDisplayConfig.textBodyMediumStrong),
           children: getI18nString('sites.metadata.domains.add_subdomain_redirect')
         }), jsx('div', {
-          ..._$$xk(o9.redirectDescription),
+          ...props(o9.redirectDescription),
           children: getI18nString('sites.metadata.domains.subdomain_redirect_description')
         })]
       }), jsx(_$$d5, {
@@ -7955,7 +7955,7 @@ function dn({
           'data-testid': 'warning-icon'
         })]
       }), d ? jsx('div', {
-        ..._$$xk(textDisplayConfig.textBodyMedium, di.warning),
+        ...props(textDisplayConfig.textBodyMedium, di.warning),
         children: d
       }) : null]
     }), g && f && jsx(dt, {
@@ -8275,7 +8275,7 @@ function df({
     verifiedAt
   } = t;
   return jsxs('div', {
-    ..._$$xk(dg.row),
+    ...props(dg.row),
     children: [jsx('div', {
       className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
       children: renderI18nText('sites.metadata.domain.redirect')
@@ -8429,20 +8429,20 @@ function dk({
     children: [jsx('thead', {
       children: jsxs('tr', {
         children: [jsx('th', {
-          ..._$$xk(dj.cellBase, dj.tableHeader, dj.recordTypeColumn),
+          ...props(dj.cellBase, dj.tableHeader, dj.recordTypeColumn),
           children: renderI18nText('sites.metadata.domains.dns_record_type')
         }), jsx('th', {
-          ..._$$xk(dj.cellBase, dj.tableHeader),
+          ...props(dj.cellBase, dj.tableHeader),
           children: renderI18nText('sites.metadata.domains.dns_record_host')
         }), jsx('th', {
-          ..._$$xk(dj.cellBase, dj.tableHeader),
+          ...props(dj.cellBase, dj.tableHeader),
           children: renderI18nText('sites.metadata.domains.dns_record_value')
         })]
       })
     }), jsx('tbody', {
       children: dnsRecords.map((e, t) => jsxs('tr', {
         children: [jsx('td', {
-          ..._$$xk(dj.cellBase, dj.tableCell, dj.recordTypeColumn),
+          ...props(dj.cellBase, dj.tableCell, dj.recordTypeColumn),
           children: jsxs('div', {
             className: 'x78zum5 x1q0g3np x1jnr06f x6s0dn4 x1rfj78v',
             children: [jsx('span', {
@@ -8464,7 +8464,7 @@ function dw({
 }) {
   let t = useDispatch();
   return jsx('td', {
-    ..._$$xk(dj.cellBase, dj.tableCell, dj.copyableCell),
+    ...props(dj.cellBase, dj.tableCell, dj.copyableCell),
     onClick: () => t(_$$lW2({
       stringToCopy: e
     })),
@@ -8585,10 +8585,10 @@ function dI({
   return i ? jsxs(TrackingProvider, {
     name: 'Sites Domain Settings',
     children: [jsx('h2', {
-      ..._$$xk(dT.header),
+      ...props(dT.header),
       children: renderI18nText('sites.metadata.domains.connected_domains')
     }), jsx('div', {
-      ..._$$xk(dT.text),
+      ...props(dT.text),
       children: renderI18nText(e === null ? 'sites.metadata.domain.publish_site_to_connect_a_domain_with_learn_more_link' : 'sites.metadata.domain.connect_a_domain_with_learn_more_link', {
         learnMoreLink: jsx(Link, {
           href: 'https://help.figma.com/hc/articles/31414274019863',
@@ -8627,7 +8627,7 @@ function dE({
         htmlAttributes: {
           rel: 'noreferrer'
         },
-        ..._$$xk(dT.customDomain),
+        ...props(dT.customDomain),
         children: e.customDomain
       }), jsx(dc, {
         fileKey: t,
@@ -8661,7 +8661,7 @@ function dN({
     children: [combinedActivationStatus && jsx(o2, {
       activationStatus: combinedActivationStatus
     }), n && jsx('div', {
-      ..._$$xk(dT.secondaryText),
+      ...props(dT.secondaryText),
       children: renderI18nText('sites.metadata.domain.add_the_following_records_to_the_dns_host_for_your_domain')
     }), jsx(dk, {
       fileKey: e,
@@ -8749,7 +8749,7 @@ let dR = {
 };
 function dA(e) {
   return jsx('div', {
-    ..._$$Ay.props(dR.section(640)),
+    ...stylex.props(dR.section(640)),
     children: e
   });
 }
@@ -8758,7 +8758,7 @@ function dL({
   domainInfo: t
 }) {
   let i = _$$b2();
-  let n = _$$Ay.props(i ? dR.fullPageViewContainer : dR.container);
+  let n = stylex.props(i ? dR.fullPageViewContainer : dR.container);
   return jsxs('div', {
     className: v()(n.className, {
       [Qx]: i
@@ -8958,11 +8958,11 @@ function dz({
         children: [jsx(Label, {
           htmlFor: 'password-protection',
           children: jsx('strong', {
-            ..._$$xk(dB.labelText),
+            ...props(dB.labelText),
             children: getI18nString('sites.settings.password_protection.require_password')
           })
         }), jsx('span', {
-          ..._$$xk(dB.descriptionText),
+          ...props(dB.descriptionText),
           children: x ? getI18nString('figmake.settings.password_protection.description') : getI18nString('sites.settings.password_protection.description')
         })]
       }), jsx(_$$v7, {
@@ -8981,7 +8981,7 @@ function dz({
           children: [jsx(Label, {
             htmlFor: 'password-input',
             children: jsx('span', {
-              ..._$$xk(dB.labelText),
+              ...props(dB.labelText),
               children: getI18nString('sites.settings.password_protection.password_label')
             })
           }), jsx(Button, {
@@ -9001,7 +9001,7 @@ function dz({
               'placeholder': getI18nString('sites.settings.password_protection.set_password_placeholder'),
               'onChange': C,
               'aria-invalid': L,
-              ..._$$xk(dB.passwordInput, L && dB.passwordInputError, c && dB.passwordInputDisabled),
+              ...props(dB.passwordInput, L && dB.passwordInputError, c && dB.passwordInputDisabled),
               'value': y,
               'readOnly': c,
               'recordingKey': generateRecordingKey(e, 'password')
@@ -9022,7 +9022,7 @@ function dz({
               })
             })
           }), L && jsx('div', {
-            ..._$$xk(dB.errorMessage),
+            ...props(dB.errorMessage),
             'data-testid': 'password-error-message',
             'children': dD(j)
           })]
@@ -9035,7 +9035,7 @@ function dz({
             value: '**************',
             recordingKey: generateRecordingKey(e, 'password')
           }), L && j === 'API_UNSET_FAILED' && jsx('div', {
-            ..._$$xk(dB.errorMessage),
+            ...props(dB.errorMessage),
             'data-testid': 'password-error-message',
             'children': dD(j)
           })]
@@ -9354,7 +9354,7 @@ function d8({
         }),
         placeholder: b ? getI18nString('sites.metadata.image_selector.nothing_to_select') : getI18nString('sites.metadata.image_selector.placeholder')
       }), p && jsx('p', {
-        ..._$$Ay.props(d3.description),
+        ...stylex.props(d3.description),
         children: p
       })]
     }), jsx(EventShield, {
@@ -9422,11 +9422,11 @@ let d6 = forwardRef(({
   } = useSelectPrimitiveState();
   let r = selectedItem && void 0 !== selectedItem.value ? selectedItem.label : e ?? '';
   return jsxs(SelectPrimitiveTrigger, {
-    ..._$$Ay.props(d3.trigger),
+    ...stylex.props(d3.trigger),
     ...n,
     ref: a,
     children: [i, jsxs('div', {
-      ..._$$Ay.props(d3.triggerContainer, n.disabled && d3.triggerContainerDisabled),
+      ...stylex.props(d3.triggerContainer, n.disabled && d3.triggerContainerDisabled),
       children: [jsx('span', {
         className: 'xdpxx8g xebhuq6 xlyipyv xb3r6kr',
         children: t ?? r
@@ -10183,7 +10183,7 @@ function cv({
   children: e
 }) {
   return _$$b2() ? jsx('div', {
-    ..._$$Ay.props(cw.section(640)),
+    ...stylex.props(cw.section(640)),
     children: e
   }) : jsx('div', {
     children: e
@@ -10471,7 +10471,7 @@ function cI() {
     children: [jsxs('div', {
       className: 'x78zum5 xdt5ytf',
       children: [jsx('span', {
-        ..._$$Ay.props(cN.navSectionTitle),
+        ...stylex.props(cN.navSectionTitle),
         children: getI18nString('sites.settings.site_heading')
       }), jsx('nav', {
         className: 'x78zum5 xdt5ytf x1jl38hy x5jayri xsgzr2y x1n5zjp5',
@@ -10480,7 +10480,7 @@ function cI() {
     }), jsxs('div', {
       className: 'x78zum5 xdt5ytf',
       children: [jsx('span', {
-        ..._$$Ay.props(cN.navSectionTitle),
+        ...stylex.props(cN.navSectionTitle),
         children: getI18nString('sites.panel.link_panel.webpages_header')
       }), jsx('nav', {
         className: 'x78zum5 xdt5ytf x1jl38hy x5jayri',
@@ -10495,16 +10495,16 @@ function cE() {
     children: [jsxs('div', {
       className: 'x78zum5 xdt5ytf',
       children: [jsx('span', {
-        ..._$$Ay.props(cN.navSectionTitle),
+        ...stylex.props(cN.navSectionTitle),
         children: getI18nString('sites.settings.site_heading')
       }), jsx('nav', {
-        ..._$$Ay.props(cN.nav, e ? cN.withBottomBorder : {}),
+        ...stylex.props(cN.nav, e ? cN.withBottomBorder : {}),
         children: jsx(oE, {})
       })]
     }), e && jsxs('div', {
       className: 'x78zum5 xdt5ytf',
       children: [jsx('span', {
-        ..._$$Ay.props(cN.navSectionTitle),
+        ...stylex.props(cN.navSectionTitle),
         children: getI18nString('sites.settings.integrations_heading')
       }), jsx('nav', {
         className: 'x78zum5 xdt5ytf x1jl38hy x5jayri',
@@ -10738,7 +10738,7 @@ let cJ = forwardRef(({
     className: 'x1kky2od xlup9mm x1d3vzwk',
     children: e
   }), jsx('span', {
-    ..._$$xk(cZ.text),
+    ...props(cZ.text),
     children: t
   })]
 }));
@@ -10868,7 +10868,7 @@ function c8({
     onTargetDrop: y,
     className: 'xjp7ctv',
     children: jsxs('form', {
-      ..._$$Ay.props(c6.container, s && c6.dragBorder),
+      ...stylex.props(c6.container, s && c6.dragBorder),
       onSubmit: e => e.preventDefault(),
       children: [jsxs('div', {
         className: 'xh8yej3 x78zum5 xdt5ytf x1nfngrj x1qjc9v5',
@@ -10904,7 +10904,7 @@ function c8({
               createLoadedAttachment
             }), jsx(c5, {})]
           }), jsx(ButtonPrimitive, {
-            ..._$$Ay.props(c6.sendIcon, f && c6.sendIconDisabled),
+            ...stylex.props(c6.sendIcon, f && c6.sendIconDisabled),
             type: 'submit',
             disabled: f,
             onClick: _,
@@ -11006,10 +11006,10 @@ function c7({
     }), jsxs('div', {
       className: 'x78zum5 xdt5ytf x1cy8zhl x1717udv xwekt4t',
       children: [jsx('span', {
-        ..._$$xk(c9.cardTitle),
+        ...props(c9.cardTitle),
         children: t
       }), jsx('span', {
-        ..._$$xk(c9.cardSubtitle),
+        ...props(c9.cardSubtitle),
         children: getI18nString('figmake.empty_state.by_figma')
       })]
     })]
@@ -11147,7 +11147,7 @@ function ur({
     }), jsxs('div', {
       className: 'xdai5fg xh8yej3 x78zum5 xdt5ytf x6s0dn4 x1vjfegm xv2w18j x1xjkx7e',
       children: [jsx('h1', {
-        ..._$$xk(uc.title),
+        ...props(uc.title),
         children: getI18nString('figmake.empty_state.prompt_title')
       }), jsx(c8, {
         chatMessagesNodeGuid: t?.guid ?? '',
@@ -11178,14 +11178,14 @@ function ur({
 function uo() {
   return jsxs('div', {
     children: [jsx('div', {
-      ..._$$xk(uu.skeletonItem(215, 120, 8))
+      ...props(uu.skeletonItem(215, 120, 8))
     }), jsx('div', {
       className: 'x1w4f5ud xp6roeo',
       children: jsx('div', {
-        ..._$$xk(uu.skeletonItem(137, 16, 8))
+        ...props(uu.skeletonItem(137, 16, 8))
       })
     }), jsx('div', {
-      ..._$$xk(uu.skeletonItem(47, 16, 8))
+      ...props(uu.skeletonItem(47, 16, 8))
     })]
   });
 }
@@ -11205,23 +11205,23 @@ function ud() {
     }), jsxs('div', {
       className: 'xdai5fg xh8yej3 x78zum5 xdt5ytf x6s0dn4 x1vjfegm xv2w18j x1xjkx7e',
       children: [jsx('h1', {
-        ..._$$xk(uc.title),
+        ...props(uc.title),
         children: getI18nString('figmake.empty_state.prompt_title')
       }), jsxs('div', {
         className: 'x11i3ho8 xhjk10j x78zum5 xdt5ytf x1qughib x1qrh7qg x9h44rk x1bamp8i x1yjdb4r x9f619',
         children: [jsx('div', {
-          ..._$$xk(uu.skeletonItem('60%', 16, 8))
+          ...props(uu.skeletonItem('60%', 16, 8))
         }), jsxs('div', {
           className: 'xgo1hui x78zum5 x1qughib x6s0dn4',
           children: [jsxs('div', {
             className: 'x78zum5 x1nfngrj',
             children: [jsx('div', {
-              ..._$$xk(uu.skeletonItem(125, 32, 16))
+              ...props(uu.skeletonItem(125, 32, 16))
             }), jsx('div', {
-              ..._$$xk(uu.skeletonItem(121, 32, 16))
+              ...props(uu.skeletonItem(121, 32, 16))
             })]
           }), jsx('div', {
-            ..._$$xk(uu.skeletonItem(26, 26, 13))
+            ...props(uu.skeletonItem(26, 26, 13))
           })]
         })]
       }), jsxs('div', {
@@ -11903,7 +11903,7 @@ function uX() {
           defaultSize: 60,
           minSize: 30,
           children: [jsxs('div', {
-            ..._$$Ay.props(N === 'preview' ? uH.previewTabContentVisible : uH.previewTabContentHidden),
+            ...stylex.props(N === 'preview' ? uH.previewTabContentVisible : uH.previewTabContentHidden),
             children: [I ? jsx('div', {
               className: 'x78zum5 x6s0dn4 xl56j7k x5yr21d xh8yej3',
               children: jsx(_$$Ay6, {
@@ -13750,11 +13750,11 @@ function x4({
   let x = t.compare(p) === 0;
   return jsx('td', {
     ...cellProps,
-    ..._$$xk(x6.calendarCell),
+    ...props(x6.calendarCell),
     children: !isOutsideVisibleRange && jsxs('div', {
       ...buttonProps,
       ref: i,
-      ..._$$xk(x6.calendarCellButton, isDisabled && !isInvalid && x6.disabledText, isSelected && !isDisabled && (isInvalid ? x6.selectedInvalid : x6.selected), !isSelected && !isDisabled && x6.hoverable, x && !isSelected && x6.todayIndicator),
+      ...props(x6.calendarCellButton, isDisabled && !isInvalid && x6.disabledText, isSelected && !isDisabled && (isInvalid ? x6.selectedInvalid : x6.selected), !isSelected && !isDisabled && x6.hoverable, x && !isSelected && x6.todayIndicator),
       children: [formattedDate, x && !isSelected && jsx('div', {
         className: 'x10l6tqk xbfrwjf x1nrll8i xuuh30 x1g8rjiy xuoj239 x16rqkct xu5wzci'
       })]
@@ -13780,7 +13780,7 @@ function x3({
         className: 'x1n5zjp5',
         children: jsx('tr', {
           children: xZ.map(e => jsx('th', {
-            ..._$$xk(x8.calendarWeekDay),
+            ...props(x8.calendarWeekDay),
             children: e
           }, e))
         })
@@ -14030,7 +14030,7 @@ function x9({
     'style': {
       ...segmentProps.style
     },
-    ..._$$xk(mi.dateSegment, !e.isEditable && mi.nonEditable),
+    ...props(mi.dateSegment, !e.isEditable && mi.nonEditable),
     'children': e.text
   });
 }
@@ -14302,7 +14302,7 @@ function mu({
         }
       },
       recordingKey: generateRecordingKey(c, 'dropTarget'),
-      ..._$$xk(md.dropArea, t === 1 && md.loadingState, g ? md.dropAreaHover : md.dropAreaDefault, e && md.dropAreaWithImageDefault, e && p && md.dropAreaWithImageDrag),
+      ...props(md.dropArea, t === 1 && md.loadingState, g ? md.dropAreaHover : md.dropAreaDefault, e && md.dropAreaWithImageDefault, e && p && md.dropAreaWithImageDrag),
       style: {
         backgroundImage: e && t === 2 ? m ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${e.url})` : `url(${e.url})` : void 0
       },
@@ -14319,7 +14319,7 @@ function mu({
           className: 'x1i3ajwb'
         }), t === 1 && renderI18nText('dakota.side_panel.uploading')]
       }), t === 2 && !e && jsxs('div', {
-        ..._$$xk(md.emptyState, g && md.emptyStateHovered),
+        ...props(md.emptyState, g && md.emptyStateHovered),
         children: [jsx(_$$T2, {}), renderI18nText('dakota.side_panel.add_image')]
       }), m && t === 2 && e && r && jsx(ButtonPrimitive, {
         onClick: e => {
@@ -15097,16 +15097,16 @@ function mz(e) {
   });
   let _ = jsxs(Fragment, {
     children: [f, jsx('div', {
-      ..._$$Ay.props(mB.content, mB.ellipsis, !e.meta && mB.fullSpan),
+      ...stylex.props(mB.content, mB.ellipsis, !e.meta && mB.fullSpan),
       children: !e.isRenaming && e.value
     })]
   });
   return jsxs(Fragment, {
     children: [g && jsx('div', {
-      ..._$$Ay.props(mB.divider(g)),
+      ...stylex.props(mB.divider(g)),
       'aria-hidden': !0
     }), jsx(_$$b9, {
-      ..._$$Ay.props(mB.row, (e.selected || dragItem?.id === e.id) && mB.active, !e.selected && !dragItem && mB.hover, e.disabled && mB.disabled),
+      ...stylex.props(mB.row, (e.selected || dragItem?.id === e.id) && mB.active, !e.selected && !dragItem && mB.hover, e.disabled && mB.disabled),
       onClick: t => {
         e.disabled || (t.stopPropagation(), o.current && o.current.contains(t.target) || e.onClick());
       },
@@ -15823,9 +15823,9 @@ function ht({
   updateHeaderFieldMeta: n
 }) {
   return jsxs('div', {
-    ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.flex1, _$$A16.gap24, _$$A16.p24),
+    ...props(_$$A16.flex, _$$A16.flexColumn, _$$A16.flex1, _$$A16.gap24, _$$A16.p24),
     children: [jsxs('div', {
-      ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.gap4),
+      ...props(_$$A16.flex, _$$A16.flexColumn, _$$A16.gap4),
       children: [jsx(Label, {
         htmlFor: 'collectionName',
         children: renderI18nText('dakota.new_collection_modal.name')
@@ -15836,7 +15836,7 @@ function ht({
         onChange: e => i(e.target.value)
       })]
     }), jsxs('div', {
-      ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.gap8),
+      ...props(_$$A16.flex, _$$A16.flexColumn, _$$A16.gap8),
       children: [jsx(Label, {
         htmlFor: 'collectionFields',
         children: renderI18nText('dakota.import_csv_modal.labels.fields')
@@ -15850,10 +15850,10 @@ function ht({
             })
           })
         }), jsx('span', {
-          ..._$$xk(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
+          ...props(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
           children: renderI18nText('dakota.import_csv_modal.labels.type')
         }), jsx('span', {
-          ..._$$xk(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
+          ...props(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
           children: renderI18nText('dakota.import_csv_modal.labels.name')
         }), Object.entries(t).sort(m0).map(([e, t]) => jsx(hi, {
           meta: t,
@@ -15878,7 +15878,7 @@ function hi({
         included: e
       })
     }), e.required ? jsx('div', {
-      ..._$$xk(_$$A16.textBodyMedium, _$$A16.colorText, _$$A16.px8),
+      ...props(_$$A16.textBodyMedium, _$$A16.colorText, _$$A16.px8),
       children: m1(e.fieldType)
     }) : jsx(hn, {
       value: e.fieldType,
@@ -16030,13 +16030,13 @@ function ho({
 }) {
   let [i, n] = useState(null);
   return jsx('div', {
-    ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.itemsCenter, _$$A16.justifyCenter, _$$A16.flex1, _$$A16.p24),
+    ...props(_$$A16.flex, _$$A16.flexColumn, _$$A16.itemsCenter, _$$A16.justifyCenter, _$$A16.flex1, _$$A16.p24),
     children: jsxs('div', {
       children: [jsx('h1', {
-        ..._$$xk(_$$A16.textBodyMediumStrong, _$$A16.colorText),
+        ...props(_$$A16.textBodyMediumStrong, _$$A16.colorText),
         children: renderI18nText('dakota.import_csv_modal.import_panel.title')
       }), jsx('p', {
-        ..._$$xk(_$$A16.textBodyMedium, _$$A16.colorTextSecondary, _$$A16.mt4),
+        ...props(_$$A16.textBodyMedium, _$$A16.colorTextSecondary, _$$A16.mt4),
         children: renderI18nText('dakota.import_csv_modal.import_panel.description')
       }), jsxs('div', {
         className: 'xbsl7fq xmkeg23 x7z60cl x19y5rnk x1v8gsql x1dipnxa xehsoiq x1buy44e x78zum5 xdt5ytf x1i71x30 x6s0dn4 xl56j7k x2b8uid',
@@ -16047,16 +16047,16 @@ function ho({
             }
           }), jsxs('div', {
             children: [jsx('p', {
-              ..._$$xk(_$$A16.textBodyMediumStrong, _$$A16.colorText),
+              ...props(_$$A16.textBodyMediumStrong, _$$A16.colorText),
               children: i.title
             }), jsx('p', {
-              ..._$$xk(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
+              ...props(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
               children: i.description
             })]
           })]
         }) : jsxs(Fragment, {
           children: [jsx(_$$A15, {}), jsx('p', {
-            ..._$$xk(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
+            ...props(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
             children: renderI18nText('dakota.import_csv_modal.import_panel.instructions')
           })]
         }), jsx(hr, {
@@ -16149,11 +16149,11 @@ let hd = registerModal(e => {
         }), jsx(DialogBody, {
           padding: 0,
           children: jsxs('div', {
-            ..._$$xk(_$$A16.flex, _$$A16.flexRow),
+            ...props(_$$A16.flex, _$$A16.flexRow),
             children: [jsx('div', {
-              ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.br1),
+              ...props(_$$A16.flex, _$$A16.flexColumn, _$$A16.br1),
               children: jsxs('div', {
-                ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.p8, _$$A16.gap4),
+                ...props(_$$A16.flex, _$$A16.flexColumn, _$$A16.p8, _$$A16.gap4),
                 children: [jsx(hc, {
                   step: 1,
                   label: renderI18nText('dakota.import_csv_modal.steps.add_file'),
@@ -16277,12 +16277,12 @@ function hc({
   isSelected: i
 }) {
   return jsxs('div', {
-    ..._$$xk(hu.importStepContainer, i ? hu.importStepContainerActive : null),
+    ...props(hu.importStepContainer, i ? hu.importStepContainerActive : null),
     children: [jsx('span', {
-      ..._$$xk(hu.importStepNumber, i ? hu.importStepNumberActive : hu.importStepNumberInactive),
+      ...props(hu.importStepNumber, i ? hu.importStepNumberActive : hu.importStepNumberInactive),
       children: e
     }), jsx('span', {
-      ..._$$xk(_$$A16.colorText, _$$A16.textBodyMedium),
+      ...props(_$$A16.colorText, _$$A16.textBodyMedium),
       children: t
     })]
   });
@@ -16754,7 +16754,7 @@ function hb() {
         children: S
       })]
     }), jsxs('div', {
-      ..._$$Ay.props(hv.footer, _ && hv.hidden),
+      ...stylex.props(hv.footer, _ && hv.hidden),
       children: [jsx(h_, {
         suggestion: getI18nString('dakota.ai.suggestion.blog_suggestion'),
         setPlaceholder: x,
@@ -16775,7 +16775,7 @@ function hb() {
         prompt: getI18nString('dakota.ai.suggestion.product_listing_prompt')
       })]
     }), jsx('div', {
-      ..._$$Ay.props(hv.submitButton, y && hv.submitButtonEnabled, !y && hv.submitButtonDisabled),
+      ...stylex.props(hv.submitButton, y && hv.submitButtonEnabled, !y && hv.submitButtonDisabled),
       children: jsx(IconButton, {
         'aria-label': getI18nString('dakota.ai.generate_collection'),
         'disabled': !y,
@@ -18211,10 +18211,10 @@ function gR({
   let X = h ? gA.webpageRowBgSelected : K && !e ? gA.webpageRowBgHover : null;
   return jsxs(Fragment, {
     children: [e === t && jsx('div', {
-      ..._$$Ay.props(gA.dropTarget, gA.dropTargetTransform(q - 2)),
+      ...stylex.props(gA.dropTarget, gA.dropTargetTransform(q - 2)),
       'aria-hidden': !0
     }), jsxs(_$$b9, {
-      ..._$$Ay.props(gA.webpageRow, X),
+      ...stylex.props(gA.webpageRow, X),
       onClick: L,
       onDoubleClick,
       onContextMenu: P,
@@ -18223,7 +18223,7 @@ function gR({
       children: [I && A ? jsx('div', {
         className: 'x2lah0s x15yg21f x1vqgdyp x1cum3z5 x1kylzug x7z60cl x1n2onr6 xb3r6kr',
         children: jsx(WAFImage, {
-          ..._$$Ay.props(gA.thumbnail, h ? gA.thumbnailBorderSelected : gA.thumbnailBorder),
+          ...stylex.props(gA.thumbnail, h ? gA.thumbnailBorderSelected : gA.thumbnailBorder),
           src: A.src,
           alt: v
         })
@@ -18246,7 +18246,7 @@ function gR({
           children: T
         })
       }), jsx('div', {
-        ..._$$Ay.props(gA.webpageSettingsIcon, K && !n && gA.webpageSettingsIconHover),
+        ...stylex.props(gA.webpageSettingsIcon, K && !n && gA.webpageSettingsIconHover),
         children: jsx(_$$el, {
           page: t,
           recordingKey: 'webpagesListSettingsButton'
@@ -19174,7 +19174,7 @@ let g9 = memo(() => {
     children: [jsx(g$, {}), jsx(gO, {})]
   });
   let b = !c && !x && jsx('div', {
-    ..._$$Ay.props(fe.overlay, m && !i ? fe.overlayVisible : fe.overlayHidden),
+    ...stylex.props(fe.overlay, m && !i ? fe.overlayVisible : fe.overlayHidden),
     children: f
   });
   let y = jsx(_$$Q6, {
@@ -19195,7 +19195,7 @@ let g9 = memo(() => {
       }));
     },
     children: [jsxs('div', {
-      ..._$$Ay.props(fe.leftPanel, !!h && fe.fullPagePanel),
+      ...stylex.props(fe.leftPanel, !!h && fe.fullPagePanel),
       children: [jsx(g7, {}), y]
     }), h]
   });

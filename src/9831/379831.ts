@@ -9,7 +9,7 @@ import { APILoadingStatus } from "../905/520829";
 import { styleBuilderInstance } from "../905/941192";
 import { Oz, Lp, sg, wc, tH } from "../905/251509";
 import { Cc, lX, lu } from "../905/545842";
-import { Ok, ux, uW, NY } from "../figma_app/851625";
+import { createInitState, createLoadingState, createFailureState, createSuccessState } from "../figma_app/851625";
 import { getRequest } from "../905/910117";
 import { selectedViewAtom } from "../figma_app/386952";
 import { isFigmascopeView } from "../905/694285";
@@ -60,20 +60,20 @@ let y = atom(e => {
 });
 let v = atom(e => null != e(y));
 let C = (() => {
-  let e = atom(Ok());
+  let e = atom(createInitState());
   return atom(t => t(e), async (t, r) => {
     let n;
     if (t(e).status === APILoadingStatus.LOADING) return;
     let s = t(y);
     if (s) {
-      r(e, ux());
+      r(e, createLoadingState());
       try {
         n = await w(s);
       } catch (t) {
-        r(e, uW(t));
+        r(e, createFailureState(t));
         return;
       }
-      r(e, NY(n));
+      r(e, createSuccessState(n));
     }
   });
 })();
@@ -182,7 +182,7 @@ function et(e, t) {
     if (null == e && null == t) return 0;
     if (null == t) return 1;
     if (null == e) return -1;
-    if (e < t) return -1; else if (e > t) return 1;
+    if (e < t) return -1;else if (e > t) return 1;
   }
   return ee(e, t);
 }
@@ -639,7 +639,7 @@ function eP({
       scheduler.postTask(() => n(!0), {
         signal: a.signal,
         delay: 300
-      }).catch(() => { });
+      }).catch(() => {});
       let o = e.getObject(s);
       o && t({
         status: "searching",

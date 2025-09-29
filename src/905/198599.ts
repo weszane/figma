@@ -24,7 +24,7 @@ import { Wg, YG, Ow } from "../905/921418";
 import { B0, eB } from "../figma_app/807786";
 import { UR, cu, Al } from "../figma_app/707943";
 import { getPlanPublicInfoAtomFamily } from "../905/276025";
-import { getSelectedView } from "../figma_app/198885";
+import { getSelectedViewSelector } from "../figma_app/198885";
 import { fileVersionSelector, fileByKeySelector } from "../905/91038";
 import { FEditorType } from "../figma_app/53721";
 import { searchAPIHandler } from "../905/144933";
@@ -100,8 +100,8 @@ export async function $$H1(e, t) {
     let h = {
       ...e,
       openFile: selectOpenFile(i),
-      selectedView: getSelectedView(i),
-      inDesignEditor: getEditorTypeFromView(getSelectedView(i)) === FEditorType.Design,
+      selectedView: getSelectedViewSelector(i),
+      inDesignEditor: getEditorTypeFromView(getSelectedViewSelector(i)) === FEditorType.Design,
       fileVersion: d,
       currentOrgId: resolveFileParentOrgId(i),
       fileByKey: fileByKeySelector(i),

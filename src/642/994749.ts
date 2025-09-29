@@ -7,7 +7,7 @@ import { h as _$$h } from "../905/510194";
 import { i as _$$i } from "../642/423085";
 import { y as _$$y } from "../905/757816";
 import { setupThemeContext } from "../905/614223";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { WAFImage } from "../905/675859";
 import { Qp, JR } from "../figma_app/162641";
 import { getI18nString } from "../905/303541";
@@ -93,7 +93,7 @@ export function $$C1(e) {
     },
     className: "x11g6tue",
     children: jsx("span", {
-      ...Ay.props(j.iconHeight(e.size), j.iconWidth(e.size), j.iconContainer, "light" === v ? j.lightBackground : j.darkBackground, e.rowSelected && j.selected),
+      ...stylex.props(j.iconHeight(e.size), j.iconWidth(e.size), j.iconContainer, "light" === v ? j.lightBackground : j.darkBackground, e.rowSelected && j.selected),
       children: jsx(setupThemeContext, {
         mode: "light",
         children: t

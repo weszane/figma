@@ -23,7 +23,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogCustomContents, DialogTitle } from "../figma_app/272243";
 import { LinkPrimitive } from "../figma_app/496441";
 import { textDisplayConfig } from "../905/687265";
-import { Ay as _$$Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { V } from "../905/355181";
@@ -77,7 +77,7 @@ function L({
           })
         })
       }), jsx("div", {
-        ..._$$Ay.props(D.body),
+        ...stylex.props(D.body),
         children: renderI18nText("tos_agreement.modal_description", {
           terms_of_service_link: jsx(LinkPrimitive, {
             href: "/legal/tos",

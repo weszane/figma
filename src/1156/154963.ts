@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { e as _$$e } from "../905/693478";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { Xr } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { ry } from "../figma_app/408883";
@@ -54,7 +54,7 @@ export function $$p1({
     n(e);
   };
   return jsxs("div", {
-    ...Ay.props(h.emptyStateContainer),
+    ...stylex.props(h.emptyStateContainer),
     children: [jsx("div", {
       className: "x16rqkct x1v8gsql xe8ttls",
       "aria-hidden": !0,

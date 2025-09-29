@@ -34,7 +34,7 @@ import { getPlanData } from "../figma_app/428858";
 import { E as _$$E } from "../figma_app/126651";
 import { e0 } from "../905/696396";
 import { j as _$$j } from "../figma_app/617663";
-import { h as _$$h2 } from "../figma_app/124713";
+import { devModalTypes } from "../figma_app/124713";
 import { B as _$$B2 } from "../figma_app/395012";
 import { L as _$$L } from "../figma_app/288254";
 import { k as _$$k3 } from "../figma_app/121990";
@@ -165,7 +165,7 @@ function q(e) {
         entryPoint: _$$B2.FILE_PERMISSIONS_MODAL
       },
       org: {
-        entryPoint: _$$h2.FILE_PERMISSIONS_MODAL
+        entryPoint: devModalTypes.FILE_PERMISSIONS_MODAL
       }
     }),
     onSuccess: () => X(I, neededSeatType),

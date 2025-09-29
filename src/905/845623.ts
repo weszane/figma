@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { gB, Xm, e1 } from "../905/723791";
+import { createLoadedState, createLoadingState, createErrorState } from "../905/723791";
 import { D, n as _$$n } from "../905/347702";
 import { useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
@@ -64,12 +64,12 @@ let $$x0 = _$$n(() => {
       return e;
     }, [i]);
     let A = useMemo(() => e.filter(e => s.has(e) && !_.has(e)), [e, s, _]);
-    let y = useMemo(() => gB({
+    let y = useMemo(() => createLoadedState({
       publishedLibraries: m,
       unpublishedLibraries: h,
       missingLibraries: A
     }), [m, h, A]);
-    return "loading" === a.status || "loading" === t.status ? Xm() : y;
+    return "loading" === a.status || "loading" === t.status ? createLoadingState() : y;
   }();
   let t = function () {
     let e = getParentOrgId();
@@ -124,23 +124,23 @@ let $$x0 = _$$n(() => {
       } = partitionByPredicate(C.data, isPublishedLibraryWithAssets);
       return [pass, fail];
     }, [C]);
-    let P = useMemo(() => gB({
+    let P = useMemo(() => createLoadedState({
       publishedLibraries: R,
       unpublishedLibraries: N,
       missingLibraries: k
     }), [R, N, k]);
-    return m.some(e => "loading" === e.result.status) || "loading" === g.status || "loading" === S.status || "loading" === C.status ? Xm() : P;
+    return m.some(e => "loading" === e.result.status) || "loading" === g.status || "loading" === S.status || "loading" === C.status ? createLoadingState() : P;
   }();
   return useMemo(() => S(e, t), [e, t]);
 });
 let S = (e, t) => {
-  if ("errors" === e.status || "errors" === t.status) return e1([...(e.errors ?? []), ...(t.errors ?? [])]);
+  if ("errors" === e.status || "errors" === t.status) return createErrorState([...(e.errors ?? []), ...(t.errors ?? [])]);
   if ("disabled" === e.status || "disabled" === t.status) return {
     status: "disabled",
     data: null,
     errors: null
   };
-  if ("loading" === e.status || "loading" === t.status) return Xm();
+  if ("loading" === e.status || "loading" === t.status) return createLoadingState();
   let i = new Set();
   let n = [];
   let a = [];
@@ -151,7 +151,7 @@ let S = (e, t) => {
   for (let e of t.data.unpublishedLibraries) i.has(e.library_key) || (i.add(e.library_key), a.push(e));
   for (let t of e.data.missingLibraries) i.has(t) || (i.add(t), s.push(t));
   for (let e of t.data.missingLibraries) i.has(e) || (i.add(e), s.push(e));
-  return gB({
+  return createLoadedState({
     publishedLibraries: n,
     unpublishedLibraries: a,
     missingLibraries: s

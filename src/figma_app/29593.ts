@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { MenuContainerComp, MenuGroupComp, MenuItemComp } from "../figma_app/860955";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { TrackingProvider } from "../figma_app/831799";
 import { w } from "../figma_app/883622";
 export function $$l0(e) {
@@ -29,7 +29,7 @@ export function $$d1({
             e.trackingProperties && o(e);
           },
           children: jsx("span", {
-            ...Ay.props(c.menuItemContent(t)),
+            ...stylex.props(c.menuItemContent(t)),
             children: e.displayText
           })
         }, e.displayText))

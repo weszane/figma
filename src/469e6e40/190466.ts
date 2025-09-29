@@ -12,7 +12,7 @@ import { s as _$$s } from "../905/403855";
 import { B as _$$B } from "../905/950875";
 import { setupThemeContext } from "../905/614223";
 import { textDisplayConfig } from "../905/687265";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import b from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { dayjs } from "../905/920142";
@@ -444,7 +444,7 @@ function eF(e) {
   return jsxs("div", {
     className: "xuzqwsy xpezlj7 xnajj62 xvqcqsr xv42yna",
     children: [jsx("h3", {
-      ...xk(eB.sectionHeader),
+      ...props(eB.sectionHeader),
       children: renderI18nText("member_flyout_modal.joined_header")
     }), jsxs("div", {
       className: "x78zum5 x1q0g3np x6s0dn4",
@@ -467,7 +467,7 @@ function eF(e) {
         }), jsx(setupThemeContext, {
           mode: "dark",
           children: jsx("div", {
-            ...xk(eB.longText),
+            ...props(eB.longText),
             children: longText
           })
         })]
@@ -477,7 +477,7 @@ function eF(e) {
           className: "x2lah0s xuxw1ft",
           children: "\xb7"
         }), jsx("div", {
-          ...xk(eB.date),
+          ...props(eB.date),
           children: renderI18nText("members_table.user_upgrade_date", {
             upgradeDate: f
           })
@@ -662,7 +662,7 @@ function eG(e) {
         "aria-hidden": "true",
         children: a.length > 0 && "\xb7"
       }), jsx("div", {
-        ...xk(eB.date),
+        ...props(eB.date),
         children: jsx(TextWithTruncation, {
           color: "secondary",
           children: e

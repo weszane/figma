@@ -12,7 +12,7 @@ import { T as _$$T } from "../905/2124";
 import { D as _$$D } from "../1156/759811";
 import { T as _$$T2 } from "../905/256551";
 import { permissionScopeHandler } from "../905/189185";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { N as _$$N } from "../vendor/930821";
@@ -278,7 +278,7 @@ function eB({
   onClose: n
 }) {
   return jsxs("div", {
-    ...Ay.props(eD.chatBoxMessageRow, "primary" === t && eD.chatBoxMessageRowPrimary, "error" === t && eD.chatBoxMessageRowError, "warning" === t && eD.chatBoxMessageRowWarning, "community" === t && eD.chatBoxMessageRowCommunity, "info" === t && eD.chatBoxMessageRowInfo, n && eD.chatBoxMessageRowWithClose),
+    ...stylex.props(eD.chatBoxMessageRow, "primary" === t && eD.chatBoxMessageRowPrimary, "error" === t && eD.chatBoxMessageRowError, "warning" === t && eD.chatBoxMessageRowWarning, "community" === t && eD.chatBoxMessageRowCommunity, "info" === t && eD.chatBoxMessageRowInfo, n && eD.chatBoxMessageRowWithClose),
     children: [e, n && jsx("div", {
       className: "x10l6tqk xclnmbr",
       children: jsx(IconButton, {
@@ -329,10 +329,10 @@ function eU() {
         }), jsxs("div", {
           className: "x78zum5 xdt5ytf",
           children: [jsx("p", {
-            ...Ay.props(eG.textBodyMediumStrong),
+            ...stylex.props(eG.textBodyMediumStrong),
             children: getI18nString("figmake.deploy_nudge.init.title")
           }), jsx("p", {
-            ...Ay.props(eG.textBodyMedium),
+            ...stylex.props(eG.textBodyMedium),
             children: getI18nString("figmake.deploy_nudge.init.subtitle")
           })]
         })]
@@ -351,7 +351,7 @@ function eU() {
         }), jsx("div", {
           className: "x78zum5 xkh2ocl xz9dl7a xsag5q8 xnm25rq",
           children: jsx("p", {
-            ...Ay.props(eG.textBodyMediumStrong),
+            ...stylex.props(eG.textBodyMediumStrong),
             children: getI18nString("figmake.deploy_nudge.popover.title")
           })
         }), jsx("div", {
@@ -359,7 +359,7 @@ function eU() {
         }), jsxs("div", {
           className: "x78zum5 xdt5ytf xkh2ocl x1bptt5e x1v2ro7d x1cy8zhl",
           children: [jsx("p", {
-            ...Ay.props(eG.textBodyMedium),
+            ...stylex.props(eG.textBodyMedium),
             children: getI18nString("figmake.deploy_nudge.popover.subtitle")
           }), jsxs("div", {
             className: "x78zum5 x1q0g3np x167g77z",
@@ -368,10 +368,10 @@ function eU() {
             }), jsxs("div", {
               className: "x78zum5 xdt5ytf xkvmg5q",
               children: [jsx("p", {
-                ...Ay.props(eG.textBodyMediumStrong),
+                ...stylex.props(eG.textBodyMediumStrong),
                 children: t
               }), jsx("p", {
-                ...Ay.props(eG.textBodyMediumSecondary),
+                ...stylex.props(eG.textBodyMediumSecondary),
                 children: getI18nString("figmake.deploy_nudge.popover.user_avatar.subtitle")
               })]
             }), jsx("div", {})]
@@ -481,7 +481,7 @@ function tr({
   onRemove: i
 }) {
   return jsxs("div", {
-    ...Ay.props(tn.elementAttachment, "prompt" === n ? tn.elementPrompt : tn.elementChat),
+    ...stylex.props(tn.elementAttachment, "prompt" === n ? tn.elementPrompt : tn.elementChat),
     children: [jsx("div", {
       children: e
     }), jsx("div", {
@@ -514,7 +514,7 @@ function ti({
   });
 }
 let ts = (e, t) => {
-  let n = Ay.props("prompt" === t ? tn.elementPromptIcon : tn.elementChatIcon);
+  let n = stylex.props("prompt" === t ? tn.elementPromptIcon : tn.elementChatIcon);
   switch (e.toLocaleLowerCase()) {
     case "p":
     case "span":
@@ -572,7 +572,7 @@ function ta({
   });
 }
 let tl = (e, t) => {
-  let n = Ay.props("prompt" === t ? tn.elementPromptIcon : tn.elementChatIcon);
+  let n = stylex.props("prompt" === t ? tn.elementPromptIcon : tn.elementChatIcon);
   switch (e) {
     case "FRAME":
     default:
@@ -1369,7 +1369,7 @@ function tY({
         l(!0);
         o("console");
       },
-      ...Ay.props(tz.codeDrawerButton, "error" === a && tz.colorTextDanger, "info" === a && tz.colorText),
+      ...stylex.props(tz.codeDrawerButton, "error" === a && tz.colorTextDanger, "info" === a && tz.colorText),
       children: jsxs("div", {
         className: "x78zum5 x1q0g3np x6s0dn4 x1jnr06f",
         children: [jsx(_$$Z, {
@@ -1691,7 +1691,7 @@ function t0({
   let B = E ? _$$W3() : null;
   let q = F ? "var(--color-bg-secondary)" : "var(--color-bg)";
   return jsxs("div", {
-    ...Ay.props(tz.chatbox, x && tz.chatboxDraggingAttachment, k === lV.CODE_IN_SITES && tz.chatboxNoShadow),
+    ...stylex.props(tz.chatbox, x && tz.chatboxDraggingAttachment, k === lV.CODE_IN_SITES && tz.chatboxNoShadow),
     style: {
       backgroundColor: q
     },
@@ -1711,7 +1711,7 @@ function t0({
         variant: "prompt"
       }) : null, jsx("textarea", {
         ref: h,
-        ...Ay.props(tz.chatboxTextarea, E && tz.chatboxFigmakeTextarea),
+        ...stylex.props(tz.chatboxTextarea, E && tz.chatboxFigmakeTextarea),
         "data-testid": "code-chat-chat-box",
         disabled: F,
         maxLength: 5e5,
@@ -1785,7 +1785,7 @@ function t0({
                   }));
                 },
                 disabled: t ? !s : !n,
-                ...Ay.props(t ? tz.stopButton : tz.sendButton, !t && n && tz.sendButtonEnabled, !t && !n && tz.sendButtonDisabled),
+                ...stylex.props(t ? tz.stopButton : tz.sendButton, !t && n && tz.sendButtonEnabled, !t && !n && tz.sendButtonDisabled),
                 variants: {
                   play: {
                     width: "25px",
@@ -1879,7 +1879,7 @@ function t0({
                   })
                 }), jsx(_$$N, {
                   children: t && jsx(_$$P.span, {
-                    ...Ay.props(tz.stopButtonText),
+                    ...stylex.props(tz.stopButtonText),
                     initial: {
                       opacity: 0,
                       width: 0
@@ -2012,7 +2012,7 @@ function ni({
             attachmentType: convertAttachmentType(e)
           }, e.guid))
         }) : null, jsx("div", {
-          ...Ay.props(nr.messageContent, userMessageTypographyStyle),
+          ...stylex.props(nr.messageContent, userMessageTypographyStyle),
           children: d
         })]
       }), jsx("div", {
@@ -2053,7 +2053,7 @@ function nb({
       className: "xvvfnsg",
       children: jsx(_$$r2, {})
     }), jsx("div", {
-      ...Ay.props(nE.textBodyLargeStrong),
+      ...stylex.props(nE.textBodyLargeStrong),
       children: e
     })]
   });
@@ -2115,10 +2115,10 @@ function nC({
       children: [jsxs("div", {
         className: "x78zum5 xdt5ytf x1cy8zhl xdpxx8g",
         children: [jsx("div", {
-          ...Ay.props(nE.textBodyLargeStrong),
+          ...stylex.props(nE.textBodyLargeStrong),
           children: t
         }), jsx("div", {
-          ...Ay.props(nE.textBodyLargeSecondary),
+          ...stylex.props(nE.textBodyLargeSecondary),
           children: n
         })]
       }), i]
@@ -2434,7 +2434,7 @@ function nD({
         svgHeight: "14px"
       })
     }), jsx("p", {
-      ...Ay.props(nq.textBodyLargeStrong),
+      ...stylex.props(nq.textBodyLargeStrong),
       children: t
     })]
   });
@@ -2453,7 +2453,7 @@ function nB() {
           svgHeight: "14px"
         })
       }), jsx("p", {
-        ...Ay.props(nq.textBodyLargeStrong),
+        ...stylex.props(nq.textBodyLargeStrong),
         children: getI18nString("figmake.supabase.cta.title")
       })]
     }), jsx(jc, {
@@ -2512,7 +2512,7 @@ function nV({
   return jsxs("div", {
     className: "x78zum5 x1q0g3np x6s0dn4 x167g77z",
     children: [jsx(_$$m, {}), jsx("p", {
-      ...Ay.props(nZ.textBodyLargeStrong),
+      ...stylex.props(nZ.textBodyLargeStrong),
       children: n
     })]
   });
@@ -2526,7 +2526,7 @@ function nK() {
     children: [jsxs("div", {
       className: "x78zum5 x1q0g3np x6s0dn4 x167g77z",
       children: [jsx(_$$m, {}), jsx("p", {
-        ...Ay.props(nZ.textBodyLargeStrong),
+        ...stylex.props(nZ.textBodyLargeStrong),
         children: getI18nString("figmake.supabase.create_secret_cta.header")
       })]
     }), jsx(jc, {
@@ -2927,12 +2927,12 @@ function rp({
   return jsxs("div", {
     className: "x78zum5 xdt5ytf",
     children: [t ? jsxs(ButtonPrimitive, {
-      ...Ay.props(rg.reasoningTitle, o && rg.reasoningTitleExpanded),
+      ...stylex.props(rg.reasoningTitle, o && rg.reasoningTitleExpanded),
       onClick: () => c(!o),
       "aria-expanded": o,
       "aria-label": o ? getI18nString("figmake.chat.hide_reasoning") : getI18nString("figmake.chat.show_reasoning"),
       children: [getI18nString("figmake.chat.reasoning"), jsx(_$$a2, {
-        ...Ay.props(rg.chevronIcon, o && rg.chevronIconExpanded)
+        ...stylex.props(rg.chevronIcon, o && rg.chevronIconExpanded)
       })]
     }) : jsx(_$$N4, {
       children: getI18nString("figmake.chat.reasoning")
@@ -3135,7 +3135,7 @@ function ry({
       title: u || ""
     }),
     children: jsxs("div", {
-      ...Ay.props(rf.container, defaultTypographyStyle),
+      ...stylex.props(rf.container, defaultTypographyStyle),
       "data-testid": "assistant-chat-messages-v2",
       children: [A, I, T]
     })
@@ -4511,7 +4511,7 @@ function iy({
   let D = jsxs(MenuRootComp, {
     manager,
     children: [createElement(ButtonPrimitive, {
-      ...Ay.props(ih.editButton, !a && A && ih.editButtonFrozen),
+      ...stylex.props(ih.editButton, !a && A && ih.editButtonFrozen),
       disabled: a,
       key: "editButton",
       ...F,
@@ -4553,7 +4553,7 @@ function iy({
   });
   return A ? jsxs("div", {
     ref: k,
-    ...Ay.props(ih.libraryImportContainer, ih.libraryImportButtonTextDisabledContainer),
+    ...stylex.props(ih.libraryImportContainer, ih.libraryImportButtonTextDisabledContainer),
     children: [createElement(ButtonPrimitive, {
       className: "xuk1p4z xv2f06h xmdyj57 x1lqa7cf x1ug7bdz xxhr3t",
       disabled: !0,
@@ -4565,13 +4565,13 @@ function iy({
     })), D]
   }) : libraryImport ? jsxs("div", {
     ref: k,
-    ...Ay.props(ih.libraryImportContainer, a && ih.libraryImportButtonTextDisabledContainer),
+    ...stylex.props(ih.libraryImportContainer, a && ih.libraryImportButtonTextDisabledContainer),
     children: [jsx(im, {
       targetKey: oD,
       isShowing,
       onComplete: complete
     }), createElement(ButtonPrimitive, {
-      ...Ay.props(ih.libraryImportButtonText, a && ih.libraryImportButtonTextDisabled),
+      ...stylex.props(ih.libraryImportButtonText, a && ih.libraryImportButtonTextDisabled),
       disabled: a,
       key: "libraryImportButton",
       onClick: M

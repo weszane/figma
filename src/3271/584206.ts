@@ -3,7 +3,7 @@ import { useState } from "react";
 import { IconButton } from "../905/443068";
 import { C } from "../905/504203";
 import { L } from "../905/704296";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import d from "classnames";
 import { IW } from "../figma_app/563413";
 import { getI18nString } from "../905/303541";
@@ -85,7 +85,7 @@ export function $$g0({
         }
       }),
       focusOnMount: !0,
-      iconClassName: xk(!d && h.searchIconUnFocused).className,
+      iconClassName: props(!d && h.searchIconUnFocused).className,
       onBlur: () => _(!1),
       onChange: s,
       onFocus: () => {

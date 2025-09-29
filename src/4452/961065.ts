@@ -12,7 +12,7 @@ import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { R as _$$R } from "../905/304671";
-import { ps, ZY } from "../figma_app/845611";
+import { TeamOrg, isBillingGroupAdminEnabled } from "../figma_app/845611";
 import { Y } from "../figma_app/515088";
 import { ur, uE } from "../figma_app/451028";
 import { Y as _$$Y } from "../7021/427161";
@@ -34,11 +34,11 @@ export function $$k0(e) {
   let a = useSubscription(AdminRequestDashOrgInfo, {
     orgId: e.planId
   }, {
-    enabled: e.planType === ps.ORG
+    enabled: e.planType === TeamOrg.ORG
   });
   let r = !!("loaded" === a.status && a.data?.org?.bigmaEnabledAt) && getConfig().get("enabled", !1) && !!e.isOrgAdmin;
-  let o = ZY({
-    isIntendedAudience: !!(e.planType === ps.ORG && "loaded" === a.status && a.data?.org?.bigmaEnabledAt) && !1 === e.isOrgAdmin
+  let o = isBillingGroupAdminEnabled({
+    isIntendedAudience: !!(e.planType === TeamOrg.ORG && "loaded" === a.status && a.data?.org?.bigmaEnabledAt) && !1 === e.isOrgAdmin
   });
   let m = e.isOrgAdmin ? [null, ...(e.managedBillingGroups ?? [])] : e.managedBillingGroups;
   let _ = useSubscription(AdminNotificationsCountView, {
@@ -52,7 +52,7 @@ export function $$k0(e) {
       billing_group_ids: []
     })
   });
-  let g = "loaded" === _.status && _.data.adminDashboardRequestsTotalCount.status === ResourceStatus.Loaded && ("loaded" === a.status || e.planType === ps.TEAM) ? _.data.adminDashboardRequestsTotalCount.data?.rowCount : void 0;
+  let g = "loaded" === _.status && _.data.adminDashboardRequestsTotalCount.status === ResourceStatus.Loaded && ("loaded" === a.status || e.planType === TeamOrg.TEAM) ? _.data.adminDashboardRequestsTotalCount.data?.rowCount : void 0;
   let h = g ?? 0;
   let [v, b] = useAtomValueAndSetter(Y);
   let y = r ? [e.planType, e.planId, !0].toString() : [e.planType, e.planId].toString();
@@ -259,7 +259,7 @@ function B(e) {
   let g = NJ(e.org.id).data ?? [];
   let h = e.org.bigma_enabled && g.length > 0;
   let f = a || p || h;
-  let v = ZY({
+  let v = isBillingGroupAdminEnabled({
     isIntendedAudience: e.org.bigma_enabled && !a
   });
   let b = useSubscription(OrgTaxIdView, {
@@ -269,7 +269,7 @@ function B(e) {
   });
   let j = "loaded" === b.status ? b.data.org?.taxIdVerificationStatus : void 0;
   return f ? a ? jsx(M, {
-    planType: ps.ORG,
+    planType: TeamOrg.ORG,
     planId: e.org.id,
     orgUser: e.orgUser,
     licenseGroups: l,
@@ -282,7 +282,7 @@ function B(e) {
     groupsUserIsAdminOf,
     isSelected: e.isSelected,
     planId: e.org.id,
-    planType: ps.ORG,
+    planType: TeamOrg.ORG,
     orgUser: e.orgUser,
     org: e.org
   }) : jsx(F, {

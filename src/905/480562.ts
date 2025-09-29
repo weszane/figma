@@ -40,7 +40,7 @@ import { Label } from "../905/270045";
 import { bL, DZ, mc, zW, c$ } from "../905/493196";
 import { analyticsEventManager } from "../905/449184";
 import { selectCurrentUser } from "../905/372672";
-import { X as _$$X } from "../905/27228";
+import { useUniqueId } from "../905/27228";
 import { Dd, $G, Yu, Gy, vA } from "../905/193404";
 import { FO } from "../905/682977";
 import { ue, nZ } from "../figma_app/277330";
@@ -1201,7 +1201,7 @@ function e$({
   libraryFile: l
 }) {
   let d = selectCurrentUser();
-  let c = _$$X();
+  let c = useUniqueId();
   let m = i.length > 1;
   let [h, g] = useState();
   let _ = useMemo(() => {

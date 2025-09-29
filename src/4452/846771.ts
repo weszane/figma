@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { tI } from "../figma_app/847597";
-import { i5 } from "../figma_app/845611";
+import { FirstSortOrder } from "../figma_app/845611";
 import { KindEnum } from "../905/129884";
 if (443 == require.j) {}
 var $$c2 = (e => (e.AVAILABLE_SEAT = "available_seat", e.PRORATION_NOT_ENABLED = "proration_not_enabled", e.MISSING_CURRENCY = "missing_currency", e.MISSING_PRICE = "missing_price", e.COST_MESSAGING_DISABLED = "cost_messaging_disabled", e))($$c2 || {});
@@ -28,7 +28,7 @@ export var $$v1 = (e => (e.REQUESTED = "request", e))($$v1 || {});
 export function $$b5(e) {
   return e ? {
     columnName: "request",
-    isReversed: e === i5.OLDEST_FIRST
+    isReversed: e === FirstSortOrder.OLDEST_FIRST
   } : {
     columnName: "",
     isReversed: !1

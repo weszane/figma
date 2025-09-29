@@ -1,4 +1,4 @@
-import { xk } from '@stylexjs/stylex';
+import { props } from '@stylexjs/stylex';
 import { memo, useCallback, useEffect, useMemo, useReducer } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { H } from '../905/203408';
@@ -280,7 +280,7 @@ let $$C2 = memo(({
       size: 'lg'
     })
   }) : n ? null : k ? jsxs('div', {
-    ...xk(N.container, !u && N.extendedContainer, j && N.containerWithTimeDisplay),
+    ...props(N.container, !u && N.extendedContainer, j && N.containerWithTimeDisplay),
     children: [j && jsx(S, {
       currentTime: L ?? 0,
       totalTime: totalTime ?? 0
@@ -298,7 +298,7 @@ let S = memo(({
 }) => {
   let n = useMemo(() => `${Az(e)} / ${Az(t)}`, [e, t]);
   return jsx('div', {
-    ...xk(N.timeDisplay),
+    ...props(N.timeDisplay),
     children: jsx('div', {
       children: n
     })

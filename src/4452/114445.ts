@@ -10,7 +10,7 @@ import { aN, V4, D3 } from "../4452/846771";
 import { n as _$$n } from "../4452/550447";
 import { I as _$$I } from "../4452/82228";
 import { m as _$$m } from "../4452/688074";
-import { I1 } from "../figma_app/990058";
+import { getOrgUserByUserIdAction } from "../figma_app/990058";
 import { fetchTeamMembersThunk } from "../figma_app/240735";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { d as _$$d } from "../figma_app/603561";
@@ -424,7 +424,7 @@ let er = {
         }));
       }
       async function a() {
-        P(await T(I1({
+        P(await T(getOrgUserByUserIdAction({
           orgId: A?.key.parentId ?? "",
           userId: e?.userId ?? ""
         })));

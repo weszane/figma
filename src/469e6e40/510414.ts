@@ -14,7 +14,7 @@ import { resolveMessage } from "../905/231762";
 import { Be } from "../figma_app/920435";
 import { E as _$$E } from "../905/712094";
 import { createEmptyAddress, isAddressEmpty } from "../figma_app/831101";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
 let y = memo(function ({
@@ -56,7 +56,7 @@ let y = memo(function ({
           }));
         } else if (y) {
           if (!I || isAddressEmpty(I)) throw Error(getI18nString("org_admin_settings.settings_tab.billing.update_invoice_details.shipping_address_required_error"));
-          await Eh.changeShippingAddress({
+          await organizationAPIService.changeShippingAddress({
             orgId: y,
             shippingAddress: I
           });

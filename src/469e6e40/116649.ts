@@ -7,7 +7,7 @@ import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { R as _$$R } from "../905/304671";
 import { i as _$$i } from "../469e6e40/549061";
-import { ps, oc, ZY } from "../figma_app/845611";
+import { TeamOrg, billingGroupAdminRequestsDashboard, isBillingGroupAdminEnabled } from "../figma_app/845611";
 import { l as _$$l } from "../4452/447644";
 import { g as _$$g } from "../figma_app/638694";
 import { r as _$$r } from "../905/398386";
@@ -23,7 +23,7 @@ import { DashboardSection } from "../figma_app/650409";
 import { o0 } from "../905/844131";
 import { ER } from "../figma_app/102449";
 import { useSubscription } from "../figma_app/288654";
-import { tT } from "../905/723791";
+import { ResourceStatus } from "../905/723791";
 import { F } from "../469e6e40/308608";
 import { Jt } from "../figma_app/28323";
 import { ProductAccessMap } from "../figma_app/765689";
@@ -44,11 +44,11 @@ function O({
   }, [r, e.id]);
   return jsx(F, {
     supportedLicenses: [ProductAccessMap.DESIGN, ...(e.figjam_disabled_at ? [] : [ProductAccessMap.WHITEBOARD]), ProductAccessMap.DEV_MODE],
-    configuredUpgradeRequestSetting: "loaded" === a.status && a.data.org?.orgSharedSetting?.configuredUpgradeRequestSetting.status === tT.Loaded ? a?.data?.org?.orgSharedSetting?.configuredUpgradeRequestSetting.data ?? null : null,
-    planType: ps.ORG,
+    configuredUpgradeRequestSetting: "loaded" === a.status && a.data.org?.orgSharedSetting?.configuredUpgradeRequestSetting.status === ResourceStatus.Loaded ? a?.data?.org?.orgSharedSetting?.configuredUpgradeRequestSetting.data ?? null : null,
+    planType: TeamOrg.ORG,
     planId: e.id,
     isOrgAdmin: t,
-    defaultAdminEntryPoint: oc
+    defaultAdminEntryPoint: billingGroupAdminRequestsDashboard
   });
 }
 export function $$D0({
@@ -67,7 +67,7 @@ export function $$D0({
   let R = I.unwrapOr(null);
   let D = !!(a?.bigma_enabled && A?.fromOrgUser?.isLicenseGroupAdmin);
   let M = A?.userId;
-  let P = ZY({
+  let P = isBillingGroupAdminEnabled({
     isIntendedAudience: a?.bigma_enabled && !T
   });
   let U = _$$R();

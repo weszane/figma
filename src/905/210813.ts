@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { parsePxNumber } from "../figma_app/783094";
 import { z } from "../905/353894";
 import { tgj } from "../figma_app/27776";
@@ -20,7 +20,7 @@ export function $$l0(e) {
     }), jsx(z, {
       query: `(max-width: ${parsePxNumber(tgj)}px)`,
       children: jsxs("div", {
-        ...Ay.props(d.mobileContainer, e.shouldStackRightSideMobile && d.mobileContainerStacked),
+        ...stylex.props(d.mobileContainer, e.shouldStackRightSideMobile && d.mobileContainerStacked),
         children: [jsx("div", {
           className: "x78zum5 x2lah0s x67bb7w x167g77z",
           children: e.leftSide

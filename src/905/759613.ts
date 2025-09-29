@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { setupThemeContext } from "../905/614223";
 import { textDisplayConfig } from "../905/687265";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { logger } from "../905/651849";
 import { LoadingRenderer } from "../905/211326";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -56,7 +56,7 @@ export function $$h0(e) {
     t = function (e) {
       return jsx(e6, {
         ...e,
-        ...Ay.props(i),
+        ...stylex.props(i),
         children: e.children
       });
     };
@@ -65,7 +65,7 @@ export function $$h0(e) {
       mode: "light",
       children: jsx(e6, {
         ...e,
-        ...Ay.props(m.white),
+        ...stylex.props(m.white),
         children: e.children
       })
     });

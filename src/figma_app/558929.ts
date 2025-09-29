@@ -26,7 +26,7 @@ import { isWidget, hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { OrganizationType } from "../905/833838";
 import { ManifestEditorType } from "../figma_app/155287";
-import { G as _$$G } from "../figma_app/124713";
+import { orgUserService } from "../figma_app/124713";
 import { registerModal } from "../905/102752";
 import { l as _$$l } from "../905/690005";
 import { ConfirmationModal2 } from "../figma_app/918700";
@@ -41,7 +41,7 @@ let j = () => async e => {
     icon: VisualBellIcon.SPINNER
   }));
   try {
-    let r = (await _$$G.createStarterTeam()).data.meta;
+    let r = (await orgUserService.createStarterTeam()).data.meta;
     e(VisualBellActions.dequeue({
       matchType: t
     }));

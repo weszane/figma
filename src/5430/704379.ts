@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { range } from "../figma_app/492908";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { usePrefersMediaQuery } from "../figma_app/469468";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -58,7 +58,7 @@ export function $$p0({
     className: cssBuilderInstance.wFull.$,
     "data-testid": "plugin-list",
     children: jsx("div", {
-      ...xk("twoColumn" === y ? _.twoColumn : x ? _.oneColumn : void 0),
+      ...props("twoColumn" === y ? _.twoColumn : x ? _.oneColumn : void 0),
       children: d ? range(p).map(e => jsx(u, {}, e)) : e.map((e, i) => jsx(_$$m, {
         resource: e,
         onIntersectionChange: r => t(e, r.isIntersecting),

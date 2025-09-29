@@ -1,49 +1,104 @@
 import { APILoadingStatus } from "../905/520829";
-let i = {
-  status: APILoadingStatus.INIT
-};
-let a = {
-  status: APILoadingStatus.LOADING
-};
-export function $$s3() {
-  return i;
+
+/**
+ * Represents the state of an API loading operation.
+ */
+interface ApiLoadingState<T = any> {
+  status: APILoadingStatus;
+  value?: T;
+  error?: any;
 }
-export function $$o6() {
-  return a;
+
+/**
+ * Creates an initial API loading state.
+ * Original: $$s3
+ */
+export function createInitState(): ApiLoadingState {
+  return {
+    status: APILoadingStatus.INIT
+  };
 }
-export function $$l2(e) {
+
+/**
+ * Creates a loading API loading state.
+ * Original: $$o6
+ */
+export function createLoadingState(): ApiLoadingState {
+  return {
+    status: APILoadingStatus.LOADING
+  };
+}
+
+/**
+ * Creates a success API loading state with a value.
+ * Original: $$l2
+ */
+export function createSuccessState<T>(value: T): ApiLoadingState<T> {
   return {
     status: APILoadingStatus.SUCCESS,
-    value: e
+    value
   };
 }
-export function $$d5(e) {
+
+/**
+ * Creates a failure API loading state with an error.
+ * Original: $$d5
+ */
+export function createFailureState(error: any): ApiLoadingState {
   return {
     status: APILoadingStatus.FAILURE,
-    error: e
+    error
   };
 }
-export function $$c8(e) {
-  return e.status === APILoadingStatus.INIT;
+
+/**
+ * Checks if the state is initial.
+ * Original: $$c8
+ */
+export function isInit(state: ApiLoadingState): boolean {
+  return state.status === APILoadingStatus.INIT;
 }
-export function $$u1(e) {
-  return e.status === APILoadingStatus.LOADING;
+
+/**
+ * Checks if the state is loading.
+ * Original: $$u1
+ */
+export function isLoading(state: ApiLoadingState): boolean {
+  return state.status === APILoadingStatus.LOADING;
 }
-export function $$p7(e) {
-  return e.status === APILoadingStatus.SUCCESS;
+
+/**
+ * Checks if the state is success.
+ * Original: $$p7
+ */
+export function isSuccess(state: ApiLoadingState): boolean {
+  return state.status === APILoadingStatus.SUCCESS;
 }
-export function $$_4(e) {
-  return e.status === APILoadingStatus.FAILURE;
+
+/**
+ * Checks if the state is failure.
+ * Original: $$_4
+ */
+export function isFailure(state: ApiLoadingState): boolean {
+  return state.status === APILoadingStatus.FAILURE;
 }
-export function $$h0(e) {
-  return $$p7(e) ? e.value : void 0;
+
+/**
+ * Gets the value from a success state, or undefined otherwise.
+ * Original: $$h0
+ */
+export function getValue<T>(state: ApiLoadingState<T>): T | undefined {
+  return isSuccess(state) ? state.value : undefined;
 }
-export const Cz = $$h0;
-export const Mx = $$u1;
-export const NY = $$l2;
-export const Ok = $$s3;
-export const ok = $$_4;
-export const uW = $$d5;
-export const ux = $$o6;
-export const xj = $$p7;
-export const yx = $$c8;
+
+// Aliases for backward compatibility or external usage
+// Original exports: Cz = $$h0, Mx = $$u1, NY = $$l2, Ok = $$s3, ok = $$_4, uW = $$d5, ux = $$o6, xj = $$p7, yx = $$c8
+export const Cz = getValue;
+export const Mx = isLoading;
+export const NY = createSuccessState;
+export const Ok = createInitState;
+export const ok = isFailure;
+export const uW = createFailureState;
+export const ux = createLoadingState;
+export const xj = isSuccess;
+export const yx = isInit;

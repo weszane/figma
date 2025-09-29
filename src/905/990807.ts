@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { xk } from "@stylexjs/stylex";
+import { props } from "@stylexjs/stylex";
 import { AutoLayout } from "../905/470281";
 import { AvatarSize, UserAvatar } from "../905/590952";
 import { getVisibleTheme } from "../905/640017";
@@ -273,9 +273,9 @@ export function $$u0({
     horizontalAlignItems: "start",
     width: "hug-contents",
     children: g.map((e, a) => jsx("div", {
-      ...xk(d.avatarZIndex(m ? -a : a), !m && a === g.length - 1 && d.marginRight),
+      ...props(d.avatarZIndex(m ? -a : a), !m && a === g.length - 1 && d.marginRight),
       children: jsx("div", {
-        ...xk(d.avatar, c[t](h), t === FProductAccessType.WHITEBOARD && i && c.whiteboard("light")),
+        ...props(d.avatar, c[t](h), t === FProductAccessType.WHITEBOARD && i && c.whiteboard("light")),
         children: jsx(UserAvatar, {
           user: {
             id: e.id,

@@ -1,4 +1,4 @@
-import { Ay as _$$Ay7 } from '@stylexjs/stylex';
+import { stylex } from '@stylexjs/stylex';
 import rh from 'classnames';
 import { produce } from 'immer';
 import { noop } from 'lodash-es';
@@ -1071,7 +1071,7 @@ function ik(e) {
         },
         'data-testid': 'slot-preferred-content-picker',
         'children': jsx('div', {
-          ..._$$Ay7.props(iT.container),
+          ...stylex.props(iT.container),
           children: preferredValues.map(e => jsx(iR, {
             component: e,
             onClick: o
@@ -1090,17 +1090,17 @@ function iR({
   }, [e, t]);
   return jsxs(ButtonPrimitive, {
     onClick: i,
-    ..._$$Ay7.props(iT.thumbnailButton),
+    ...stylex.props(iT.thumbnailButton),
     children: [jsx('div', {
-      ..._$$Ay7.props(iT.thumbnailImageBorder),
+      ...stylex.props(iT.thumbnailImageBorder),
       children: jsx(_$$M2, {
         item: e,
         shouldGenerateLocalThumbnail: !0,
         draggable: !1,
-        ..._$$Ay7.props(iT.thumbnailImage)
+        ...stylex.props(iT.thumbnailImage)
       })
     }), jsx('div', {
-      ..._$$Ay7.props(iT.preferredContentName),
+      ...stylex.props(iT.preferredContentName),
       children: jsx(ph, {
         text: e.name
       })

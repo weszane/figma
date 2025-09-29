@@ -17,7 +17,7 @@ import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { q as _$$q } from "../905/749058";
 import { Wq } from "../figma_app/481749";
 import { hideModal, popModalStack } from "../905/156213";
-import { IJ, uo } from "../figma_app/990058";
+import { batchDeleteOrgUsersThunk, batchUpdateOrgUsersAction } from "../figma_app/990058";
 import { TrackingProvider } from "../figma_app/831799";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { fetchAndUpdateUpcomingInvoices } from "../figma_app/658324";
@@ -28,7 +28,7 @@ import { setupLoadingStateHandler } from "../905/696711";
 import { e as _$$e } from "../figma_app/119601";
 import { AccessLevelEnum } from "../905/557142";
 import { createNoOpValidator } from "../figma_app/181241";
-import { h as _$$h } from "../figma_app/124713";
+import { devModalTypes } from "../figma_app/124713";
 import { registerModal } from "../905/102752";
 import { l as _$$l } from "../figma_app/121794";
 import { ConfirmationModal2 } from "../figma_app/918700";
@@ -79,7 +79,7 @@ export let $$z2 = registerModal(function (e) {
     children: jsx(_$$l, {
       dispatch: t,
       onConfirm: () => {
-        t(IJ({
+        t(batchDeleteOrgUsersThunk({
           orgId: e.org.id,
           params: {
             org_user_ids: e.orgUserIds
@@ -477,9 +477,9 @@ function V(e) {
             paid_statuses: {
               [e.licenseType]: e.accountType
             },
-            entry_point: _$$h.MEMBERS_TAB
+            entry_point: devModalTypes.MEMBERS_TAB
           };
-          t(uo({
+          t(batchUpdateOrgUsersAction({
             orgId: e.org.id,
             lastUpdateTimestampOverride: e.lastUpdateTimestampIfUsingUnloadedOrgUsers,
             params: a,
@@ -528,7 +528,7 @@ let $$H3 = registerModal(function (e) {
         org_user_ids: e.orgUserIds,
         license_group_id: null
       };
-      t(uo({
+      t(batchUpdateOrgUsersAction({
         orgId: e.org.id,
         lastUpdateTimestampOverride: e.lastUpdateTimestampIfUsingUnloadedOrgUsers,
         params: a,

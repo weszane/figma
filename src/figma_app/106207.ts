@@ -5,7 +5,7 @@ import { CustomPosition, SourceType, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
-import { J as _$$J } from "../905/931050";
+import { useAsyncWithReset } from "../905/931050";
 import { APILoadingStatus } from "../905/520829";
 import { PerfTimer } from "../905/609396";
 import { sendWithRetry } from "../905/910117";
@@ -386,7 +386,7 @@ let J = {
 };
 export function $$Z8(e) {
   let t = selectCurrentUser();
-  let r = _$$J(() => t ? sf(e, t) : Promise.reject(Error("User not logged in")), [e, t]);
+  let r = useAsyncWithReset(() => t ? sf(e, t) : Promise.reject(Error("User not logged in")), [e, t]);
   let [i, a] = useState(J);
   useEffect(() => {
     r.status === APILoadingStatus.SUCCESS && a(r.value);

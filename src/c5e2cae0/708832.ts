@@ -62,7 +62,7 @@ import { sendRoleInvites } from "../905/351260";
 import { lB, Ey, To } from "../905/148137";
 import { AccessLevelEnum } from "../905/557142";
 import { e0 } from "../905/696396";
-import { Eh } from "../figma_app/617654";
+import { organizationAPIService } from "../figma_app/617654";
 import { validateVatGstId } from "../905/57562";
 import { n as _$$n } from "../905/861286";
 import { CheckboxPrimitive } from "../905/549791";
@@ -675,7 +675,7 @@ export class $$eM2 extends Component {
     this.fetchTeamEligibleUpgrades();
   }
   fetchTeamEligibleUpgrades() {
-    return Eh.getEligibleUpgrades().catch(e => {
+    return organizationAPIService.getEligibleUpgrades().catch(e => {
       let t = e.data.message;
       this.props.dispatch(selectViewAction({
         view: "recentsAndSharing"

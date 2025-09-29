@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { N } from "../905/57692";
 import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/976845";
-import { Ay } from "@stylexjs/stylex";
+import { stylex } from "@stylexjs/stylex";
 import { noop } from 'lodash-es';
 import { _ as _$$_ } from "../figma_app/658134";
 import { A } from "../9314/687951";
@@ -31,7 +31,7 @@ function g({
   return jsx(N, {
     "aria-label": "Navigation Bar",
     orientation: "vertical",
-    ...Ay.props(v.base, v.baseWidth(t)),
+    ...stylex.props(v.base, v.baseWidth(t)),
     children: e
   });
 }
