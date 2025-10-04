@@ -3,7 +3,7 @@ import { useStore } from "react-redux";
 import { microtaskThrottle } from "../905/915765";
 import { UserActionState, SchemaJoinStatus, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { tg } from "../figma_app/933328";
+import { fetchAndUpdateStateGroupsThunk } from "../figma_app/933328";
 import { createActionAndReducerWrapper } from "../905/270322";
 import { updateLocalLibraryItems } from "../figma_app/646357";
 import { subscribeObservable } from "../figma_app/84367";
@@ -131,7 +131,7 @@ export function $$V11() {
     }, {
       observable: subscribedStateGroups,
       action: _action6
-    }], () => e.dispatch(tg()));
+    }], () => e.dispatch(fetchAndUpdateStateGroupsThunk()));
   }(t), [t]);
   useEffect(() => function (e) {
     let {

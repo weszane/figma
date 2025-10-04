@@ -6,19 +6,19 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { generateUUIDv4 } from "../905/871474";
-import { WJ } from "../figma_app/379850";
+import { isNodeDescendantOf } from "../figma_app/379850";
 import { useDevModeFocusId } from "../figma_app/88239";
 import { UU, At, _B as _$$_B } from "../figma_app/770088";
 import { I_ } from "../905/234821";
-import { U6 } from "../figma_app/591738";
+import { isPinnedCommentsEnabled } from "../figma_app/591738";
 import { JG } from "../figma_app/12220";
 import { Z } from "../905/104740";
 import { viewportToScreen } from "../figma_app/62612";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
 import { NEW_COMMENT_ID } from "../905/380385";
-import { XC } from "../905/512783";
-import { c4 } from "../figma_app/70421";
+import { CommentPinElement } from "../905/512783";
+import { aggregateUserComments } from "../figma_app/70421";
 import { s as _$$s } from "../905/518538";
 import { hh } from "../figma_app/42945";
 function w(e) {
@@ -104,7 +104,7 @@ export function $$R1(e, t, i, l, d) {
             if (!t) return !0;
             let i = e.comments[0].client_meta.node_id;
             let n = i ? getSingletonSceneGraph().get(i) : null;
-            return WJ(t, n);
+            return isNodeDescendantOf(t, n);
           }
           return !0;
         });
@@ -127,7 +127,7 @@ export function $$N6(e, t) {
     let n = viewportToScreen(i, e).y;
     let r = e => Math.floor((viewportToScreen(i, e.canvasPosition).y - n) / 50);
     return t.sort((e, t) => {
-      if (U6()) {
+      if (isPinnedCommentsEnabled()) {
         if (w(e) && !w(t)) return -1;
         if (!w(e) && w(t)) return 1;
       }
@@ -159,8 +159,8 @@ export function $$O4(e, t, i, a, s, o) {
         if (o) {
           if (!t.isPendingFromSinatra && t.canvasPosition) {
             let e = viewportToScreen(s.getViewportInfo(), t.canvasPosition);
-            let i = c4(t.comments).length;
-            let n = XC.getPinSize(i);
+            let i = aggregateUserComments(t.comments).length;
+            let n = CommentPinElement.getPinSize(i);
             o(t.id, {
               x: e.x,
               y: e.y,

@@ -34,7 +34,7 @@ import { gI } from '../905/277373';
 import { Z as _$$Z2 } from '../905/279476';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { b as _$$b2, c as _$$c } from '../905/308099';
+import { RadioInputRoot, RadioInputOption } from '../905/308099';
 import { v as _$$v2 } from '../905/318279';
 import { MediaQuerySvgComponent } from '../905/331623';
 import { P as _$$P } from '../905/347284';
@@ -98,7 +98,7 @@ import { J as _$$J2 } from '../905/896954';
 import { debounce } from '../905/915765';
 import { Ay as _$$Ay, iu as _$$iu, Ql } from '../905/918143';
 import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
-import { q as _$$q } from '../905/932270';
+import { Legend } from '../905/932270';
 import { noop } from 'lodash-es';
 ;
 import { styleBuilderInstance } from '../905/941192';
@@ -1308,21 +1308,21 @@ function tK({
   disabled: n
 }) {
   return i ? jsxs('form', {
-    children: [jsx(_$$b2, {
+    children: [jsx(RadioInputRoot, {
       value: e,
       onChange: t,
-      legend: jsx(_$$q, {
+      legend: jsx(Legend, {
         children: renderI18nText('community.publishing.publish_to')
       }),
       children: jsxs('div', {
         className: 'plugin_publish_role_to_publish_as--roleToPublishAsRadioOptions--seiRG',
-        children: [jsx(_$$c, {
+        children: [jsx(RadioInputOption, {
           readonly: n || void 0,
           value: PublisherType.ORG,
           label: jsx(Label, {
             children: i.name
           })
-        }), jsx(_$$c, {
+        }), jsx(RadioInputOption, {
           readonly: n || void 0,
           value: PublisherType.PUBLIC,
           label: jsx(Label, {
@@ -3024,13 +3024,13 @@ class iW extends Component {
             'aria-labelledby': 'plugin-publish-modal-payment-type-label',
             'children': jsxs('div', {
               className: 'plugin_publish_modal--paymentTypeRadioOptions--gguqu',
-              children: [jsx(_$$c, {
+              children: [jsx(RadioInputOption, {
                 value: PaymentType.ONE_TIME,
                 readonly: !!i || !n || void 0,
                 label: jsx(Label, {
                   children: renderI18nText('community.seller.one_time_payment')
                 })
-              }), jsx(_$$c, {
+              }), jsx(RadioInputOption, {
                 value: PaymentType.SUBSCRIPTION,
                 readonly: !!i || !n || void 0,
                 label: jsx(Label, {

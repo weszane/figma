@@ -98,7 +98,7 @@ import { Xm as _$$Xm } from '../905/935570';
 import { styleBuilderInstance } from '../905/941192';
 import { $3 } from '../905/946937';
 import { filesByLibraryKeyAtom } from '../905/977779';
-import { h1 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { LOADING_STATUS } from '../905/989992';
 import { h as _$$h3 } from '../905/994594';
 import { cssBuilderInstance } from '../cssbuilder/589278';
@@ -2936,11 +2936,11 @@ function nh({
           className: cssBuilderInstance.h16.w150.$
         }) : (c = e.publishDate, g && c ? renderI18nText('design_systems.updates.publishedByHandle', {
           publishUserHandle: g,
-          relativeTimeStr: jsx(h1, {
+          relativeTimeStr: jsx(RelativeTimeDisplay, {
             date: c
           })
         }) : c ? renderI18nText('design_systems.updates.published', {
-          relativeTimeStr: jsx(h1, {
+          relativeTimeStr: jsx(RelativeTimeDisplay, {
             date: c
           })
         }) : g ? renderI18nText('design_systems.updates.publishedByHandleNoTimestamp', {

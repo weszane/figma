@@ -3,7 +3,7 @@ import { useProjectFileCreationPermissions } from "../figma_app/687776";
 import { h } from "../figma_app/334471";
 import { FFileType } from "../figma_app/191312";
 import { useTeamPlanPublicInfo, useIsStarterPlan } from "../figma_app/465071";
-import { W } from "../905/442612";
+import { isBakeStarterPaywallEnabledWithoutLimit } from "../905/442612";
 if (443 == require.j) {}
 export function $$d0() {
   let e = useSelector(e => e.user?.drafts_folder_id);
@@ -15,7 +15,7 @@ export function $$d0() {
     let t = r.find(({
       editorType: e
     }) => e === FFileType.FIGMAKE);
-    let a = c && W();
+    let a = c && isBakeStarterPaywallEnabledWithoutLimit();
     return !!t?.canCreate && !a;
   });
 }

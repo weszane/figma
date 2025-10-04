@@ -23,16 +23,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -48,58 +48,58 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
       linkAccess: null,
-      protoLinkAccess: null
+      protoLinkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
       hasProtoLinkPassword: null,
-      id: null
+      id: null,
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       email: null,
       emailDomain: null,
@@ -108,8 +108,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -117,45 +117,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -163,161 +163,161 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevPrivateLinkAccess: null,
-      prevPrivateProtoLinkAccess: null
+      prevPrivateProtoLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevPrivateLinkAccess: null,
-      prevPrivateProtoLinkAccess: null
-    }
+      prevPrivateProtoLinkAccess: null,
+    },
   },
   "FILE::CAN_VIEW": {
     deletedAt: null,
@@ -338,16 +338,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -363,56 +363,56 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -420,8 +420,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -429,45 +429,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -475,159 +475,159 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_EDIT": {
     deletedAt: null,
@@ -654,16 +654,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -679,98 +679,98 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -779,13 +779,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -793,8 +793,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -802,50 +802,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -853,7 +853,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -862,83 +862,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -946,10 +946,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -957,41 +957,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_EDIT_CANVAS": {
     deletedAt: null,
@@ -1019,16 +1019,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -1044,98 +1044,98 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -1144,13 +1144,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -1158,8 +1158,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -1167,50 +1167,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -1218,7 +1218,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -1227,83 +1227,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -1311,10 +1311,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -1322,41 +1322,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_PUBLISH_TEMPLATE": {
     deletedAt: null,
@@ -1384,16 +1384,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -1409,98 +1409,98 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -1509,13 +1509,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -1523,8 +1523,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -1532,50 +1532,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -1583,7 +1583,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -1592,83 +1592,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -1676,10 +1676,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -1687,41 +1687,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_INSERT_TEMPLATE": {
     deletedAt: null,
@@ -1743,16 +1743,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -1768,56 +1768,56 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -1825,8 +1825,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -1834,45 +1834,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -1880,178 +1880,178 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     template: {
-      id: null
+      id: null,
     },
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tier: null
+      tier: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tier: null
+      tier: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_ADMIN": {
     deletedAt: null,
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "FILE::IS_OWNER": {
     deletedAt: null,
@@ -2064,7 +2064,7 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _project_permsV2: {
       deletedAt: null,
@@ -2079,83 +2079,83 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -2163,21 +2163,21 @@ let $$n2 = {
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -2185,33 +2185,33 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -2219,7 +2219,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -2228,72 +2228,72 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -2301,10 +2301,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -2312,11 +2312,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
-    }
+      tierLevel: null,
+    },
   },
   "FILE::CAN_BECOME_EDITOR": {
     deletedAt: null,
@@ -2343,16 +2343,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -2368,53 +2368,53 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -2422,13 +2422,13 @@ let $$n2 = {
       licenseTypes: null,
       permission: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -2436,8 +2436,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -2445,50 +2445,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -2496,7 +2496,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -2505,102 +2505,102 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_CLICK_BUTTON_TO_UPGRADE_AND_EDIT": {
     deletedAt: null,
@@ -2627,16 +2627,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -2652,53 +2652,53 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -2706,13 +2706,13 @@ let $$n2 = {
       licenseTypes: null,
       permission: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -2720,8 +2720,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -2729,50 +2729,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -2780,7 +2780,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -2789,126 +2789,126 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_MANAGE": {
     deletedAt: null,
@@ -2934,16 +2934,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -2959,98 +2959,98 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -3059,13 +3059,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -3073,8 +3073,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -3082,50 +3082,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -3133,7 +3133,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -3142,83 +3142,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -3226,10 +3226,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -3237,41 +3237,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::HAS_ROLE_ACCESS": {
     deletedAt: null,
@@ -3286,16 +3286,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -3311,49 +3311,49 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -3361,8 +3361,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -3370,36 +3370,36 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -3407,107 +3407,107 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
-    }
+      id: null,
+    },
   },
   "FILE::CAN_BE_MENTIONED_IN_COMMENT": {
     deletedAt: null,
@@ -3522,16 +3522,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -3547,49 +3547,49 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -3597,8 +3597,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -3606,36 +3606,36 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -3643,107 +3643,107 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
-    }
+      id: null,
+    },
   },
   "FILE::CAN_DOWNLOAD_FILE": {
     deletedAt: null,
@@ -3757,16 +3757,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -3782,49 +3782,49 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -3832,8 +3832,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -3841,36 +3841,36 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -3878,107 +3878,107 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
-    }
+      id: null,
+    },
   },
   "FILE::CAN_EXPORT": {
     deletedAt: null,
@@ -4006,16 +4006,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -4031,26 +4031,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
@@ -4058,38 +4058,38 @@ let $$n2 = {
       workspaceSharedSetting: {
         fileExportSetting: null,
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -4097,8 +4097,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -4106,55 +4106,55 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -4162,28 +4162,28 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       fileExportSetting: null,
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -4191,126 +4191,126 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_ACCESS_FILE_THROUGH_API": {
     deletedAt: null,
@@ -4324,16 +4324,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -4349,49 +4349,49 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -4399,8 +4399,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -4408,36 +4408,36 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -4445,107 +4445,107 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
-    }
+      id: null,
+    },
   },
   "FILE::CAN_MODIFY_ROLES": {
     deletedAt: null,
@@ -4569,16 +4569,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -4594,87 +4594,87 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _team_permsV2: {
       hasLockedRestriction: null,
-      permissionTeamFeatureFlags: null
+      permissionTeamFeatureFlags: null,
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -4683,13 +4683,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -4697,8 +4697,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -4706,46 +4706,46 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -4753,7 +4753,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -4762,74 +4762,74 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -4837,10 +4837,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -4848,11 +4848,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
-    }
+      tierLevel: null,
+    },
   },
   "FILE::CAN_VIEW_METADATA": {
     deletedAt: null,
@@ -4872,16 +4872,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -4897,55 +4897,55 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -4953,8 +4953,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -4962,33 +4962,33 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -4996,150 +4996,150 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_GAIN_VIEW": {
     deletedAt: null,
@@ -5152,35 +5152,35 @@ let $$n2 = {
       domainCapture: null,
       domainCaptureDomains: null,
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       email: null,
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_GAIN_VIEW_PROTOTYPE": {
     deletedAt: null,
@@ -5192,20 +5192,20 @@ let $$n2 = {
       domainCapture: null,
       domainCaptureDomains: null,
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       email: null,
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "FILE::CAN_ACCESS_FRAGMENTS": {
     deletedAt: null,
@@ -5226,11 +5226,11 @@ let $$n2 = {
     UserFileRecentAny: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       fileKey: null,
-      userId: null
+      userId: null,
     }],
     _org_permsV2: {
       bigmaEnabledAt: null,
@@ -5243,16 +5243,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -5269,73 +5269,73 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
       linkAccess: null,
-      orgBrowsable: null
+      orgBrowsable: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     atMention: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      id: null
+      id: null,
     }],
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -5343,8 +5343,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -5352,55 +5352,55 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     fileCanvasMentionAny: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       deletedAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -5408,152 +5408,152 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_ACCESS_LIBRARY": {
     deletedAt: null,
@@ -5572,16 +5572,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -5597,23 +5597,23 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
       linkAccess: null,
-      orgBrowsable: null
+      orgBrowsable: null,
     },
     _team_permsV2: {
       permissionTeamFeatureFlags: null,
@@ -5621,46 +5621,46 @@ let $$n2 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           isMainWorkspace: null,
           workspaceId: null,
-          orgUserId: null
-        }
-      }]
+          orgUserId: null,
+        },
+      }],
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -5668,8 +5668,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -5677,42 +5677,42 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -5720,130 +5720,130 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     id: null,
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     libraryKeyToFile: {
       libraryPublishScope: {
-        publishScopeType: null
-      }
+        publishScopeType: null,
+      },
     },
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_RENAME": {
     deletedAt: null,
@@ -5870,16 +5870,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -5895,98 +5895,98 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -5995,13 +5995,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -6009,8 +6009,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -6018,50 +6018,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -6069,7 +6069,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -6078,83 +6078,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -6162,10 +6162,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -6173,41 +6173,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_DELETE": {
     deletedAt: null,
@@ -6231,16 +6231,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -6256,87 +6256,87 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _team_permsV2: {
       hasLockedRestriction: null,
-      permissionTeamFeatureFlags: null
+      permissionTeamFeatureFlags: null,
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -6345,13 +6345,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -6359,8 +6359,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -6368,46 +6368,46 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -6415,7 +6415,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -6424,74 +6424,74 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -6499,10 +6499,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -6510,11 +6510,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
-    }
+      tierLevel: null,
+    },
   },
   "FILE::CAN_TRASH": {
     deletedAt: null,
@@ -6541,16 +6541,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -6568,54 +6568,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
@@ -6623,58 +6623,58 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
+        publicLinkControlsSetting: null,
       },
       workspaceId: null,
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
-      }]
+          orgUserId: null,
+        },
+      }],
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -6683,13 +6683,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -6697,8 +6697,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -6706,50 +6706,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -6757,7 +6757,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -6767,83 +6767,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -6851,10 +6851,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -6862,41 +6862,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_RESTORE": {
     deletedAt: null,
@@ -6923,16 +6923,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -6950,54 +6950,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
@@ -7005,58 +7005,58 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
+        publicLinkControlsSetting: null,
       },
       workspaceId: null,
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
-      }]
+          orgUserId: null,
+        },
+      }],
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -7065,13 +7065,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -7079,8 +7079,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -7088,50 +7088,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -7139,7 +7139,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -7149,83 +7149,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -7233,10 +7233,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -7244,41 +7244,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_RESTORE_TO_OTHER_FOLDERS": {
     deletedAt: null,
@@ -7305,16 +7305,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -7331,54 +7331,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
@@ -7386,44 +7386,44 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -7432,13 +7432,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -7446,8 +7446,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -7455,50 +7455,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -7506,7 +7506,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -7515,83 +7515,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -7599,10 +7599,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -7610,41 +7610,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_PERMANENTLY_DELETE": {
     deletedAt: null,
@@ -7671,16 +7671,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -7698,54 +7698,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
@@ -7753,58 +7753,58 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
+        publicLinkControlsSetting: null,
       },
       workspaceId: null,
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
-      }]
+          orgUserId: null,
+        },
+      }],
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -7813,13 +7813,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -7827,8 +7827,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -7836,50 +7836,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -7887,7 +7887,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -7897,83 +7897,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -7981,10 +7981,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -7992,41 +7992,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_MOVE": {
     deletedAt: null,
@@ -8052,16 +8052,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -8080,54 +8080,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
@@ -8135,58 +8135,58 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
+        publicLinkControlsSetting: null,
       },
       workspaceId: null,
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
-      }]
+          orgUserId: null,
+        },
+      }],
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -8195,13 +8195,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -8209,8 +8209,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -8218,50 +8218,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -8269,7 +8269,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -8279,83 +8279,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -8363,10 +8363,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -8374,41 +8374,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_FAVORITE": {
     deletedAt: null,
@@ -8434,16 +8434,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -8459,58 +8459,58 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
       linkAccess: null,
-      protoLinkAccess: null
+      protoLinkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
       hasProtoLinkPassword: null,
-      id: null
+      id: null,
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       email: null,
       emailDomain: null,
@@ -8519,8 +8519,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -8528,45 +8528,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -8574,161 +8574,161 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevPrivateLinkAccess: null,
-      prevPrivateProtoLinkAccess: null
+      prevPrivateProtoLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevPrivateLinkAccess: null,
-      prevPrivateProtoLinkAccess: null
-    }
+      prevPrivateProtoLinkAccess: null,
+    },
   },
   "FILE::CAN_VIEW_AND_CREATE_COMMENTS": {
     deletedAt: null,
@@ -8755,16 +8755,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -8780,58 +8780,58 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
       linkAccess: null,
-      protoLinkAccess: null
+      protoLinkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
       hasProtoLinkPassword: null,
-      id: null
+      id: null,
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       email: null,
       emailDomain: null,
@@ -8840,8 +8840,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -8849,45 +8849,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -8895,161 +8895,161 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevPrivateLinkAccess: null,
-      prevPrivateProtoLinkAccess: null
+      prevPrivateProtoLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevPrivateLinkAccess: null,
-      prevPrivateProtoLinkAccess: null
-    }
+      prevPrivateProtoLinkAccess: null,
+    },
   },
   "FILE::CAN_MOVE_COMMENTS": {
     deletedAt: null,
@@ -9076,16 +9076,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -9101,98 +9101,98 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -9201,13 +9201,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -9215,8 +9215,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -9224,50 +9224,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -9275,7 +9275,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -9284,83 +9284,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -9368,10 +9368,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -9379,41 +9379,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_EDIT_IGNORE_PAID_STATUS": {
     deletedAt: null,
@@ -9440,16 +9440,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -9465,64 +9465,64 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -9530,8 +9530,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -9539,183 +9539,183 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_EDIT_IGNORE_EDU_GRACE_PERIOD": {
     deletedAt: null,
@@ -9742,16 +9742,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -9767,98 +9767,98 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -9867,13 +9867,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -9881,8 +9881,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -9890,40 +9890,40 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -9931,7 +9931,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -9940,83 +9940,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -10024,10 +10024,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -10035,41 +10035,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_VIEW_LINK_ACCESS": {
     deletedAt: null,
@@ -10082,68 +10082,68 @@ let $$n2 = {
     sourceFileKey: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
+      expiresAt: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
-    }
+      expiresAt: null,
+    },
   },
   "FILE::CAN_ORG_VIEW_LINK_ACCESS": {
     deletedAt: null,
@@ -10153,42 +10153,42 @@ let $$n2 = {
     parentOrgId: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_EDIT_LINK_ACCESS": {
     deletedAt: null,
@@ -10201,68 +10201,68 @@ let $$n2 = {
     sourceFileKey: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
+      expiresAt: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
-    }
+      expiresAt: null,
+    },
   },
   "FILE::CAN_EDIT_LINK_ACCESS_IGNORE_PASSWORDS": {
     deletedAt: null,
@@ -10275,44 +10275,44 @@ let $$n2 = {
     sourceFileKey: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     fileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
+      expiresAt: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
-    }
+      expiresAt: null,
+    },
   },
   "FILE::CAN_ORG_EDIT_LINK_ACCESS": {
     deletedAt: null,
@@ -10322,42 +10322,42 @@ let $$n2 = {
     parentOrgId: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_VIEW_METADATA_LINK_ACCESS": {
     deletedAt: null,
@@ -10367,40 +10367,40 @@ let $$n2 = {
     parentOrgId: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     fileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
+      expiresAt: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
-    }
+      expiresAt: null,
+    },
   },
   "FILE::CAN_VIEW_PROTOTYPE_LINK_ACCESS": {
     deletedAt: null,
@@ -10414,68 +10414,68 @@ let $$n2 = {
     trashedAt: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _repo_permsV2: {
-      protoLinkAccess: null
+      protoLinkAccess: null,
     },
     _sourceFile_permsV2: {
       hasProtoLinkPassword: null,
-      id: null
+      id: null,
     },
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
+      expiresAt: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
-    }
+      expiresAt: null,
+    },
   },
   "FILE::CAN_ORG_VIEW_PROTOTYPE_LINK_ACCESS": {
     deletedAt: null,
@@ -10490,43 +10490,43 @@ let $$n2 = {
       domainCapture: null,
       domainCaptureDomains: null,
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _repo_permsV2: {
-      protoLinkAccess: null
+      protoLinkAccess: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       email: null,
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateProtoLinkAccess: null
+      prevPrivateProtoLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateProtoLinkAccess: null
-    }
+      prevPrivateProtoLinkAccess: null,
+    },
   },
   "FILE::CAN_ACCESS_FULL_DEV_MODE": {
     deletedAt: null,
@@ -10548,16 +10548,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -10573,26 +10573,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -10603,42 +10603,42 @@ let $$n2 = {
       subscription: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -10648,20 +10648,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -10671,13 +10671,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -10686,20 +10686,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -10707,8 +10707,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -10716,45 +10716,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -10762,27 +10762,27 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -10790,126 +10790,126 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::IS_ELIGIBLE_FOR_DEV_MODE_TRIAL": {
     deletedAt: null,
@@ -10917,81 +10917,81 @@ let $$n2 = {
     parentOrgId: null,
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
       id: null,
       permission: null,
       devModeAccountTypeRequest: {
-        id: null
-      }
+        id: null,
+      },
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
       id: null,
       devModeAccountTypeRequest: {
-        id: null
-      }
+        id: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
+      tier: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     _orgPlanRecord: {
       id: null,
-      tier: null
+      tier: null,
     },
     _teamPlanRecord: {
       id: null,
-      tier: null
-    }
+      tier: null,
+    },
   },
   "FILE::IS_IN_DEV_MODE_TRIAL": {
     deletedAt: null,
@@ -10999,7 +10999,7 @@ let $$n2 = {
     parentOrgId: null,
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -11007,13 +11007,13 @@ let $$n2 = {
       orgId: null,
       permissionTeamFeatureFlags: null,
       studentTeamAt: null,
-      subscription: null
+      subscription: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -11023,20 +11023,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -11045,44 +11045,44 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
+      tier: null,
     }],
     _orgPlanRecord: {
       id: null,
-      tier: null
+      tier: null,
     },
     _teamPlanRecord: {
       id: null,
-      tier: null
-    }
+      tier: null,
+    },
   },
   "FILE::DEV_MODE_TRIAL_REQUEST_PENDING": {
     deletedAt: null,
@@ -11090,17 +11090,17 @@ let $$n2 = {
     parentOrgId: null,
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _team_permsV2: {
       id: null,
-      permissionTeamFeatureFlags: null
+      permissionTeamFeatureFlags: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -11109,19 +11109,19 @@ let $$n2 = {
       devModeAccountTypeRequest: {
         createdAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -11129,34 +11129,34 @@ let $$n2 = {
       devModeAccountTypeRequest: {
         createdAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       campfireModelEnabledAt: null,
-      id: null
-    }]
+      id: null,
+    }],
   },
   "FILE::DEV_MODE_REQUEST_PENDING": {
     deletedAt: null,
@@ -11164,58 +11164,58 @@ let $$n2 = {
     parentOrgId: null,
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _team_permsV2: {
       id: null,
-      permissionTeamFeatureFlags: null
+      permissionTeamFeatureFlags: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
       id: null,
       devModeAccountTypeRequest: {
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       devModeAccountTypeRequest: {
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "FILE::DEV_MODE_REQUEST_DENIED": {
     deletedAt: null,
@@ -11223,58 +11223,58 @@ let $$n2 = {
     parentOrgId: null,
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _team_permsV2: {
       id: null,
-      permissionTeamFeatureFlags: null
+      permissionTeamFeatureFlags: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
       id: null,
       devModeAccountTypeRequest: {
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       devModeAccountTypeRequest: {
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "FILE::CAN_ACCESS_DEV_MODE_ENTRY_POINT": {
     deletedAt: null,
@@ -11296,16 +11296,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -11321,80 +11321,80 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       id: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      id: null
+      id: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -11402,8 +11402,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -11411,45 +11411,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -11457,153 +11457,153 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_ACCESS_FULL_DEV_MODE_ORG_PLUS": {
     deletedAt: null,
@@ -11625,16 +11625,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -11650,26 +11650,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -11680,42 +11680,42 @@ let $$n2 = {
       subscription: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -11725,20 +11725,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -11748,13 +11748,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -11763,20 +11763,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -11784,8 +11784,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -11793,45 +11793,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -11839,27 +11839,27 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -11867,126 +11867,126 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_ACCESS_FULL_CODE_CONNECT": {
     deletedAt: null,
@@ -12008,16 +12008,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -12033,26 +12033,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -12063,42 +12063,42 @@ let $$n2 = {
       subscription: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -12108,20 +12108,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -12131,13 +12131,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -12146,20 +12146,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -12167,8 +12167,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -12176,45 +12176,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -12222,27 +12222,27 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -12250,126 +12250,126 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_USE_DEV_MODE_DEMO_FILE": {
     deletedAt: null,
@@ -12378,31 +12378,31 @@ let $$n2 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
-    }]
+      level: null,
+    }],
   },
   "FILE::CAN_VIEW_COMPONENT_BROWSER": {
     deletedAt: null,
@@ -12424,16 +12424,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -12449,26 +12449,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -12479,42 +12479,42 @@ let $$n2 = {
       subscription: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -12524,20 +12524,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -12547,13 +12547,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -12562,20 +12562,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -12583,8 +12583,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -12592,45 +12592,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -12638,27 +12638,27 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -12666,126 +12666,126 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_CREATE_CODE_CONNECT": {
     deletedAt: null,
@@ -12807,16 +12807,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -12832,26 +12832,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -12862,42 +12862,42 @@ let $$n2 = {
       subscription: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -12907,20 +12907,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -12930,13 +12930,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -12945,20 +12945,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -12966,8 +12966,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -12975,45 +12975,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -13021,27 +13021,27 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -13049,126 +13049,126 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_CONSUME_CODE_CONNECT": {
     deletedAt: null,
@@ -13190,16 +13190,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -13215,26 +13215,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -13245,42 +13245,42 @@ let $$n2 = {
       subscription: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -13290,20 +13290,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -13313,13 +13313,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -13328,20 +13328,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -13349,8 +13349,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -13358,45 +13358,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -13404,27 +13404,27 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -13432,126 +13432,126 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_VIEW_ANNOTATIONS": {
     deletedAt: null,
@@ -13573,16 +13573,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -13598,26 +13598,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -13628,42 +13628,42 @@ let $$n2 = {
       subscription: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -13673,20 +13673,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -13696,13 +13696,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -13711,20 +13711,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -13732,8 +13732,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -13741,45 +13741,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -13787,27 +13787,27 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -13815,126 +13815,126 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_VIEW_ANNOTATIONS_MEGADOT": {
     deletedAt: null,
@@ -13956,16 +13956,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -13981,26 +13981,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -14011,42 +14011,42 @@ let $$n2 = {
       subscription: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -14056,20 +14056,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -14079,13 +14079,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -14094,20 +14094,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -14115,8 +14115,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -14124,45 +14124,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -14170,27 +14170,27 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -14198,128 +14198,128 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tier: null
+      tier: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tier: null
+      tier: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_EDIT_ANNOTATIONS": {
     deletedAt: null,
@@ -14347,16 +14347,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -14372,54 +14372,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -14431,31 +14431,31 @@ let $$n2 = {
       subscription: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -14463,13 +14463,13 @@ let $$n2 = {
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -14479,20 +14479,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -14502,13 +14502,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -14517,20 +14517,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -14538,8 +14538,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -14547,55 +14547,55 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -14603,20 +14603,20 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -14624,7 +14624,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -14633,83 +14633,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -14717,10 +14717,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -14728,41 +14728,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_ACCESS_TEXTURE_MODE": {
     deletedAt: null,
@@ -14770,67 +14770,67 @@ let $$n2 = {
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -14838,33 +14838,33 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -14872,11 +14872,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -14884,11 +14884,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _project_permsV2: {
       _mostRecentActiveResourceConnection: {
@@ -14897,52 +14897,52 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             designPaidStatus: null,
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
           tier: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             designPaidStatus: null,
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
           tier: null,
-          tierLevel: null
-        }
-      }
-    }
+          tierLevel: null,
+        },
+      },
+    },
   },
   "FILE::CAN_USE_FIGMA_AI": {
     deletedAt: null,
@@ -14970,16 +14970,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -14995,54 +14995,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       aiFeaturesDisabledAt: null,
@@ -15051,45 +15051,45 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       tierLevel: null,
-      type: null
+      type: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -15098,13 +15098,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -15112,8 +15112,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -15121,57 +15121,57 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -15180,83 +15180,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -15264,10 +15264,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -15275,41 +15275,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_USE_FIGMA_AI_BASE": {
     deletedAt: null,
@@ -15336,16 +15336,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -15361,64 +15361,64 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -15426,8 +15426,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -15435,183 +15435,183 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_USE_FIGMA_AI_IGNORE_AI_TOGGLE": {
     deletedAt: null,
@@ -15638,16 +15638,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -15663,54 +15663,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
@@ -15718,45 +15718,45 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       tierLevel: null,
-      type: null
+      type: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -15765,13 +15765,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -15779,8 +15779,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -15788,57 +15788,57 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -15847,83 +15847,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -15931,10 +15931,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -15942,41 +15942,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_USE_FIGJAM_AI": {
     deletedAt: null,
@@ -16005,16 +16005,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -16030,26 +16030,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       aiFeaturesDisabledAt: null,
@@ -16058,38 +16058,38 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -16097,8 +16097,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -16106,183 +16106,183 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_USE_SLIDES_AI": {
     deletedAt: null,
@@ -16310,16 +16310,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -16335,26 +16335,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       aiFeaturesDisabledAt: null,
@@ -16363,38 +16363,38 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -16402,8 +16402,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -16411,183 +16411,183 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_USE_FIGMAKE_AI": {
     deletedAt: null,
@@ -16615,16 +16615,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -16640,26 +16640,26 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       aiFeaturesDisabledAt: null,
@@ -16668,38 +16668,38 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -16707,8 +16707,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -16716,188 +16716,188 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagBakePlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_USE_FIGMAKE_AI_BASE": {
     deletedAt: null,
@@ -16924,16 +16924,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -16949,64 +16949,64 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -17014,8 +17014,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -17023,188 +17023,188 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagBakePlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_USE_FRAGMENT_SEARCH_AI": {
     deletedAt: null,
@@ -17232,16 +17232,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -17257,54 +17257,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       aiFeaturesDisabledAt: null,
@@ -17313,45 +17313,45 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       tierLevel: null,
-      type: null
+      type: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -17360,13 +17360,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -17374,8 +17374,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -17383,57 +17383,57 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -17442,83 +17442,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -17526,10 +17526,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -17537,41 +17537,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_USE_SLIDES_DESIGN_TOGGLE": {
     deletedAt: null,
@@ -17585,113 +17585,113 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             designPaidStatus: null,
             id: null,
             licenseTypes: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
           tier: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             designPaidStatus: null,
             id: null,
             licenseTypes: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
           tier: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -17699,33 +17699,33 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -17733,11 +17733,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -17745,12 +17745,12 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
-    }
+      tierLevel: null,
+    },
   },
   "FILE::CANNOT_PUBLISH_TO_COMMUNITY": {
     deletedAt: null,
@@ -17758,14 +17758,14 @@ let $$n2 = {
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "FILE::CAN_SEND_WEBHOOK": {
     deletedAt: null,
@@ -17785,11 +17785,11 @@ let $$n2 = {
     UserFileRecentAny: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       fileKey: null,
-      userId: null
+      userId: null,
     }],
     _org_permsV2: {
       bigmaEnabledAt: null,
@@ -17797,16 +17797,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -17823,65 +17823,65 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
       linkAccess: null,
-      orgBrowsable: null
+      orgBrowsable: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     atMention: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      id: null
+      id: null,
     }],
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -17889,8 +17889,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -17898,45 +17898,45 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCanvasMentionAny: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       deletedAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -17944,158 +17944,158 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::IS_WORKSPACE_VISIBLE": {
     deletedAt: null,
@@ -18112,19 +18112,19 @@ let $$n2 = {
     trashedAt: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _project_permsV2: {
       id: null,
-      sharingAudienceControl: null
+      sharingAudienceControl: null,
     },
     _repo_permsV2: {
       linkAccess: null,
-      orgBrowsable: null
+      orgBrowsable: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       id: null,
@@ -18132,86 +18132,86 @@ let $$n2 = {
       workspaceId: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_PIN_TO_WORKSPACE": {
     deletedAt: null,
@@ -18228,19 +18228,19 @@ let $$n2 = {
     trashedAt: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _project_permsV2: {
       id: null,
-      sharingAudienceControl: null
+      sharingAudienceControl: null,
     },
     _repo_permsV2: {
       linkAccess: null,
-      orgBrowsable: null
+      orgBrowsable: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       id: null,
@@ -18248,100 +18248,100 @@ let $$n2 = {
       workspaceId: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
+        publicLinkControlsSetting: null,
       },
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
-      }]
+          orgUserId: null,
+        },
+      }],
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_VIEW_WORKSPACE_PIN": {
     deletedAt: null,
@@ -18358,19 +18358,19 @@ let $$n2 = {
     trashedAt: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _project_permsV2: {
       id: null,
-      sharingAudienceControl: null
+      sharingAudienceControl: null,
     },
     _repo_permsV2: {
       linkAccess: null,
-      orgBrowsable: null
+      orgBrowsable: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       id: null,
@@ -18378,86 +18378,86 @@ let $$n2 = {
       workspaceId: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::SEAT_TYPE_PAID_STATUS_TEST_PERMISSION": {
     deletedAt: null,
@@ -18465,30 +18465,30 @@ let $$n2 = {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       campfireModelEnabledAt: null,
       id: null,
@@ -18496,79 +18496,79 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanRecord: {
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
+      tier: null,
     },
     _teamPlanRecord: {
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
-    }
+      tier: null,
+    },
   },
   "FILE::MUST_UPGRADE_TO_SHARE_DRAFT": {
     deletedAt: null,
     editorType: null,
     folderId: null,
     _project_permsV2: {
-      path: null
+      path: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -18577,48 +18577,48 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
+      tier: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
-    }
+      tier: null,
+    },
   },
   "FILE::MUST_REQUEST_ACCOUNT_UPGRADE_TO_EDIT": {
     deletedAt: null,
@@ -18647,16 +18647,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -18674,54 +18674,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
@@ -18729,58 +18729,58 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
+        publicLinkControlsSetting: null,
       },
       workspaceId: null,
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
-      }]
+          orgUserId: null,
+        },
+      }],
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -18789,13 +18789,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -18803,8 +18803,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -18812,50 +18812,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -18863,7 +18863,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -18873,95 +18873,95 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       whiteboardAccountTypeRequest: {
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       whiteboardAccountTypeRequest: {
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
@@ -18969,13 +18969,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
@@ -18983,7 +18983,7 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -18992,12 +18992,12 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       tierLevel: null,
-      whiteboardDefaultPaidStatus: null
+      whiteboardDefaultPaidStatus: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -19006,43 +19006,43 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       tierLevel: null,
-      whiteboardDefaultPaidStatus: null
+      whiteboardDefaultPaidStatus: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::MUST_REQUEST_EDITOR_ROLE_TO_EDIT": {
     deletedAt: null,
@@ -19071,16 +19071,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -19098,54 +19098,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
@@ -19153,58 +19153,58 @@ let $$n2 = {
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
+        publicLinkControlsSetting: null,
       },
       workspaceId: null,
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
-      }]
+          orgUserId: null,
+        },
+      }],
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -19213,13 +19213,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -19227,8 +19227,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -19236,66 +19236,66 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     pendingUserFileRoleRequest: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      id: null
+      id: null,
     }],
     pendingUserOrgJoinRequest: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      id: null
+      id: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -19303,7 +19303,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -19313,95 +19313,95 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       whiteboardAccountTypeRequest: {
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       whiteboardAccountTypeRequest: {
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
@@ -19409,13 +19409,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
@@ -19423,7 +19423,7 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -19432,12 +19432,12 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       tierLevel: null,
-      whiteboardDefaultPaidStatus: null
+      whiteboardDefaultPaidStatus: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -19446,43 +19446,43 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       tierLevel: null,
-      whiteboardDefaultPaidStatus: null
+      whiteboardDefaultPaidStatus: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_ACCESS": {
     deletedAt: null,
@@ -19502,11 +19502,11 @@ let $$n2 = {
     UserFileRecentAny: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       fileKey: null,
-      userId: null
+      userId: null,
     }],
     _org_permsV2: {
       bigmaEnabledAt: null,
@@ -19514,16 +19514,16 @@ let $$n2 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -19540,65 +19540,65 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
       linkAccess: null,
-      orgBrowsable: null
+      orgBrowsable: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     atMention: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      id: null
+      id: null,
     }],
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -19606,8 +19606,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -19615,54 +19615,54 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     fileCanvasMentionAny: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       deletedAt: null,
-      id: null
+      id: null,
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -19670,161 +19670,161 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevOrgBrowsable: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_CREATE_BRANCH": {
     deletedAt: null,
@@ -19852,16 +19852,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -19877,101 +19877,101 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             designPaidStatus: null,
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
           tier: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             designPaidStatus: null,
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
           tier: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -19979,13 +19979,13 @@ let $$n2 = {
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -19993,8 +19993,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -20002,57 +20002,57 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -20060,85 +20060,85 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -20146,11 +20146,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -20158,42 +20158,42 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_EDIT_OR_ACCESS_FULL_DEV_MODE": {
     deletedAt: null,
@@ -20221,16 +20221,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -20246,54 +20246,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       gracePeriodEnd: null,
@@ -20305,31 +20305,31 @@ let $$n2 = {
       subscription: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -20337,13 +20337,13 @@ let $$n2 = {
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       accountType: null,
       devModePaidStatus: null,
@@ -20353,20 +20353,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModePaidStatus: null,
@@ -20376,13 +20376,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentTeamUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       devModeTrialStartAt: null,
@@ -20391,20 +20391,20 @@ let $$n2 = {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
+        status: null,
       },
       designAccountTypeRequest: {
         createdAt: null,
         gracePeriodExpireAt: null,
         id: null,
-        status: null
-      }
+        status: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -20412,8 +20412,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -20421,55 +20421,55 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     fileCompositeSharingGroup: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      maxLevel: null
+      maxLevel: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     invite: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       inviteeUserId: null,
@@ -20477,20 +20477,20 @@ let $$n2 = {
       redeemedBy: null,
       resourceType: null,
       revokedAt: null,
-      updatedAt: null
+      updatedAt: null,
     }],
     library: {
-      hasAssets: null
+      hasAssets: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -20498,7 +20498,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -20507,83 +20507,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -20591,10 +20591,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -20602,41 +20602,41 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::SHOULD_USE_CONNECTED_PLAN_USER": {
     deletedAt: null,
@@ -20644,95 +20644,95 @@ let $$n2 = {
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tierLevel: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -20740,10 +20740,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -20751,10 +20751,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _project_permsV2: {
       _mostRecentActiveResourceConnection: {
@@ -20763,48 +20763,48 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
-    }
+          tierLevel: null,
+        },
+      },
+    },
   },
   "FILE::SHOULD_USE_CONNECTED_PLAN_USER_DEV_MODE": {
     deletedAt: null,
@@ -20812,89 +20812,89 @@ let $$n2 = {
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -20902,10 +20902,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -20913,10 +20913,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _project_permsV2: {
       _mostRecentActiveResourceConnection: {
@@ -20925,48 +20925,48 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
-    }
+          tierLevel: null,
+        },
+      },
+    },
   },
   "FILE::MUST_REQUEST_UPGRADE_TO_EDIT_DEVELOPER_LINKS": {
     deletedAt: null,
@@ -20974,67 +20974,67 @@ let $$n2 = {
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -21042,33 +21042,33 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -21076,11 +21076,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -21088,11 +21088,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _project_permsV2: {
       _mostRecentActiveResourceConnection: {
@@ -21101,52 +21101,52 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             designPaidStatus: null,
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
           tier: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             designPaidStatus: null,
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
           tier: null,
-          tierLevel: null
-        }
-      }
-    }
+          tierLevel: null,
+        },
+      },
+    },
   },
   "FILE::CAN_RUN_EXTENSIONS": {
     deletedAt: null,
@@ -21154,69 +21154,69 @@ let $$n2 = {
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -21224,35 +21224,35 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -21260,11 +21260,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -21272,11 +21272,11 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _project_permsV2: {
       _mostRecentActiveResourceConnection: {
@@ -21285,54 +21285,54 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             designPaidStatus: null,
             id: null,
             licenseTypes: null,
             permission: null,
             provisionalLicenseTypes: null,
-            whiteboardPaidStatus: null
+            whiteboardPaidStatus: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
           tier: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             designPaidStatus: null,
             id: null,
             licenseTypes: null,
             permission: null,
             provisionalLicenseTypes: null,
-            whiteboardPaidStatus: null
+            whiteboardPaidStatus: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
           tier: null,
-          tierLevel: null
-        }
-      }
-    }
+          tierLevel: null,
+        },
+      },
+    },
   },
   "FILE::CAN_EDIT_CMS_STRUCTURE": {
     deletedAt: null,
@@ -21359,16 +21359,16 @@ let $$n2 = {
       isSlidesDisabled: null,
       k12GoogleOrg: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -21384,53 +21384,53 @@ let $$n2 = {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
+          id: null,
         },
         _connectedTeamPlanRecord: {
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
-          id: null
-        }
-      }
+          id: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       draftsFolderId: null,
@@ -21438,13 +21438,13 @@ let $$n2 = {
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -21452,8 +21452,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -21461,50 +21461,50 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -21512,7 +21512,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -21520,126 +21520,126 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       permission: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     _teamPlanRecord: {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_PUBLISH_SITE": {
     deletedAt: null,
@@ -21667,16 +21667,16 @@ let $$n2 = {
       k12GoogleOrg: null,
       mfaRequired: null,
       permissionOrgFeatureFlags: null,
-      sitesPublishingDisabled: null
+      sitesPublishingDisabled: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -21692,98 +21692,98 @@ let $$n2 = {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
+          tierLevel: null,
         },
         _connectedTeamPlanRecord: {
           _currentPlanUserRecord: [{
             userId: {
               type: "view",
-              ref: "userId"
-            }
+              ref: "userId",
+            },
           }, {
             id: null,
             licenseTypes: null,
             permission: null,
-            provisionalLicenseTypes: null
+            provisionalLicenseTypes: null,
           }],
           activeTrialLicenseTypes: null,
           campfireModelEnabledAt: null,
           featureFlagFcPlanEnabled: {
             id: null,
             name: null,
-            value: null
+            value: null,
           },
           id: null,
-          tierLevel: null
-        }
-      }
+          tierLevel: null,
+        },
+      },
     },
     _repo_permsV2: {
-      linkAccess: null
+      linkAccess: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
-      id: null
+      id: null,
     },
     _team_permsV2: {
       hasLockedRestriction: null,
       permissionTeamFeatureFlags: null,
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
+        publicLinkControlsSetting: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
@@ -21792,13 +21792,13 @@ let $$n2 = {
       permission: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       communityBlockedAt: null,
       emailDomain: null,
@@ -21807,8 +21807,8 @@ let $$n2 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -21816,51 +21816,51 @@ let $$n2 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       sharingRestricted: null,
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
-      studentValidatedAt: null
+      studentValidatedAt: null,
     }],
     eduGracePeriod: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       createdAt: null,
-      id: null
+      id: null,
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -21868,7 +21868,7 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -21877,83 +21877,83 @@ let $$n2 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workshopMode: {
-      expiresAt: null
+      expiresAt: null,
     },
     pwdConfigV2: {
-      version: null
+      version: null,
     },
     sourceFilePwdConfig: {
-      version: null
+      version: null,
     },
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -21961,10 +21961,10 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
@@ -21972,60 +21972,60 @@ let $$n2 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     sourceFilePasswordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     fileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     sourceFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "FILE::CAN_TEST_PLAN_RECORD_PERMISSION": {
     deletedAt: null,
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       billableProductKeys: null,
       designPaidStatus: null,
@@ -22041,13 +22041,13 @@ let $$n2 = {
       showFigjamUserOnboarding: null,
       type: null,
       userId: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       billableProductKeys: null,
       designPaidStatus: null,
@@ -22063,7 +22063,7 @@ let $$n2 = {
       showFigjamUserOnboarding: null,
       type: null,
       userId: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanRecord: {
       aiFeaturesEnabled: null,
@@ -22088,7 +22088,7 @@ let $$n2 = {
       voiceEnabled: null,
       widgetRequestsAllowed: null,
       widgetsWhitelistEnforced: null,
-      workshopEnabled: null
+      workshopEnabled: null,
     },
     _teamPlanRecord: {
       aiFeaturesEnabled: null,
@@ -22113,10 +22113,10 @@ let $$n2 = {
       voiceEnabled: null,
       widgetRequestsAllowed: null,
       widgetsWhitelistEnforced: null,
-      workshopEnabled: null
-    }
-  }
-};
+      workshopEnabled: null,
+    },
+  },
+}
 let $$r8 = {
   "REPO::CAN_VIEW_PROTOTYPE": {
     deletedAt: null,
@@ -22130,7 +22130,7 @@ let $$r8 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _project_permsV2: {
       deletedAt: null,
@@ -22139,44 +22139,44 @@ let $$r8 = {
       isAbandonedDrafts: null,
       path: null,
       teamId: null,
-      viewOnlyAt: null
+      viewOnlyAt: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
       hasProtoLinkPassword: null,
       id: null,
-      key: null
+      key: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -22184,86 +22184,86 @@ let $$r8 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      type: null
+      type: null,
     }],
     pwdConfig: {
-      version: null
+      version: null,
     },
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     mainFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
       prevPrivateLinkAccess: null,
-      prevPrivateProtoLinkAccess: null
+      prevPrivateProtoLinkAccess: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
-    }
+        publicLinkControlsSetting: null,
+      },
+    },
   },
   "REPO::CAN_VIEW": {
     deletedAt: null,
@@ -22277,7 +22277,7 @@ let $$r8 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _project_permsV2: {
       deletedAt: null,
@@ -22286,44 +22286,44 @@ let $$r8 = {
       isAbandonedDrafts: null,
       path: null,
       teamId: null,
-      viewOnlyAt: null
+      viewOnlyAt: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
       id: null,
-      key: null
+      key: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -22331,45 +22331,45 @@ let $$r8 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -22379,58 +22379,58 @@ let $$r8 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     pwdConfig: {
-      version: null
+      version: null,
     },
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     mainFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
-    }
+        publicLinkControlsSetting: null,
+      },
+    },
   },
   "REPO::CAN_EDIT": {
     deletedAt: null,
@@ -22444,7 +22444,7 @@ let $$r8 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _project_permsV2: {
       deletedAt: null,
@@ -22453,69 +22453,69 @@ let $$r8 = {
       isAbandonedDrafts: null,
       path: null,
       teamId: null,
-      viewOnlyAt: null
+      viewOnlyAt: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
       id: null,
-      key: null
+      key: null,
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       draftsFolderId: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -22523,8 +22523,8 @@ let $$r8 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -22532,45 +22532,45 @@ let $$r8 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -22578,7 +22578,7 @@ let $$r8 = {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -22587,58 +22587,58 @@ let $$r8 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     pwdConfig: {
-      version: null
+      version: null,
     },
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     mainFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
-    }
+        publicLinkControlsSetting: null,
+      },
+    },
   },
   "REPO::CAN_ADMIN": {
     parentOrgId: null,
@@ -22647,37 +22647,37 @@ let $$r8 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _project_permsV2: {
       id: null,
       inviteOnlyAt: null,
       path: null,
       teamId: null,
-      viewOnlyAt: null
+      viewOnlyAt: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -22685,41 +22685,41 @@ let $$r8 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
-    }]
+      totpSecretExists: null,
+    }],
   },
   "REPO::IS_OWNER": {
     parentOrgId: null,
@@ -22728,33 +22728,33 @@ let $$r8 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _project_permsV2: {
-      path: null
+      path: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -22762,33 +22762,33 @@ let $$r8 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
-    }]
+      totpSecretExists: null,
+    }],
   },
   "REPO::CAN_MANAGE": {
     parentOrgId: null,
@@ -22797,16 +22797,16 @@ let $$r8 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -22817,8 +22817,8 @@ let $$r8 = {
       sharingAudienceControl: null,
       viewOnlyAt: null,
       folderOwnerRole: {
-        id: null
-      }
+        id: null,
+      },
     },
     _team_permsV2: {
       id: null,
@@ -22827,53 +22827,53 @@ let $$r8 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
-      }]
+          orgUserId: null,
+        },
+      }],
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -22881,8 +22881,8 @@ let $$r8 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -22890,64 +22890,64 @@ let $$r8 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
-    id: null
+    id: null,
   },
   "REPO::CAN_MOVE": {
     parentOrgId: null,
@@ -22956,16 +22956,16 @@ let $$r8 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _project_permsV2: {
       deletedAt: null,
@@ -22977,8 +22977,8 @@ let $$r8 = {
       sharingAudienceControl: null,
       viewOnlyAt: null,
       folderOwnerRole: {
-        id: null
-      }
+        id: null,
+      },
     },
     _team_permsV2: {
       id: null,
@@ -22987,66 +22987,66 @@ let $$r8 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
-      }]
+          orgUserId: null,
+        },
+      }],
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -23054,8 +23054,8 @@ let $$r8 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -23063,28 +23063,28 @@ let $$r8 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -23092,44 +23092,44 @@ let $$r8 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
-    id: null
+    id: null,
   },
   "REPO::CAN_VIEW_LINK_ACCESS": {
     id: null,
@@ -23137,50 +23137,50 @@ let $$r8 = {
     parentOrgId: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
       id: null,
-      key: null
+      key: null,
     },
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     pwdConfig: {
-      version: null
+      version: null,
     },
     mainFileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
-    }
+        publicLinkControlsSetting: null,
+      },
+    },
   },
   "REPO::CAN_EDIT_LINK_ACCESS": {
     id: null,
@@ -23188,50 +23188,50 @@ let $$r8 = {
     parentOrgId: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
       id: null,
-      key: null
+      key: null,
     },
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     pwdConfig: {
-      version: null
+      version: null,
     },
     mainFileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
-    }
+        publicLinkControlsSetting: null,
+      },
+    },
   },
   "REPO::CAN_VIEW_PROTOTYPE_LINK_ACCESS": {
     id: null,
@@ -23239,147 +23239,147 @@ let $$r8 = {
     protoLinkAccess: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _sourceFile_permsV2: {
       hasProtoLinkPassword: null,
-      id: null
+      id: null,
     },
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     pwdConfig: {
-      version: null
+      version: null,
     },
     mainFileLinkExpirationConfig: {
       accessReverted: null,
-      expiresAt: null
+      expiresAt: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
-    }
+        publicLinkControlsSetting: null,
+      },
+    },
   },
   "REPO::CAN_ORG_VIEW_LINK_ACCESS": {
     linkAccess: null,
     parentOrgId: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     mainFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "REPO::CAN_ORG_EDIT_LINK_ACCESS": {
     linkAccess: null,
     parentOrgId: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     mainFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
-    }
+      prevPrivateLinkAccess: null,
+    },
   },
   "REPO::CAN_ORG_VIEW_PROTOTYPE_LINK_ACCESS": {
     parentOrgId: null,
     _org_permsV2: {
       bigmaEnabledAt: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     mainFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateProtoLinkAccess: null
-    }
+      prevPrivateProtoLinkAccess: null,
+    },
   },
   "REPO::CAN_DISCOVER": {
     deletedAt: null,
@@ -23393,7 +23393,7 @@ let $$r8 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     _project_permsV2: {
       deletedAt: null,
@@ -23402,44 +23402,44 @@ let $$r8 = {
       isAbandonedDrafts: null,
       path: null,
       teamId: null,
-      viewOnlyAt: null
+      viewOnlyAt: null,
     },
     _sourceFile_permsV2: {
       hasFileLinkPassword: null,
       id: null,
-      key: null
+      key: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       draftsFolderId: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -23447,45 +23447,45 @@ let $$r8 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     orgSharedSetting: {
       id: null,
-      publicLinkControlsSetting: null
+      publicLinkControlsSetting: null,
     },
     passwordAuthentication: [{
       anonymousUserId: {
         type: "view",
-        ref: "anonymousUserId"
-      }
+        ref: "anonymousUserId",
+      },
     }, {
       createdAt: null,
-      passwordVersion: null
+      passwordVersion: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -23495,133 +23495,133 @@ let $$r8 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     pwdConfig: {
-      version: null
+      version: null,
     },
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectRepoForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     mainFileLinkExpirationConfig: {
       accessReverted: null,
       expiresAt: null,
       id: null,
-      prevPrivateLinkAccess: null
+      prevPrivateLinkAccess: null,
     },
     _team_permsV2: {
       workspaceSharedSetting: {
         id: null,
-        publicLinkControlsSetting: null
-      }
-    }
+        publicLinkControlsSetting: null,
+      },
+    },
   },
   "REPO::SHOULD_USE_CONNECTED_PLAN_USER": {
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tierLevel: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
-    }]
-  }
-};
+          toValue: null,
+        },
+      },
+    }],
+  },
+}
 let $$a3 = {
   "FOLDER::CAN_VIEW": {
     deletedAt: null,
@@ -23634,11 +23634,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -23647,57 +23647,57 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -23705,63 +23705,63 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_EDIT": {
     deletedAt: null,
@@ -23774,11 +23774,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -23787,50 +23787,50 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -23838,8 +23838,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -23847,64 +23847,64 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::IS_OWNER": {
     deletedAt: null,
@@ -23916,11 +23916,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -23928,31 +23928,31 @@ let $$a3 = {
       _org_permsV2: {
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -23960,46 +23960,46 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_DISCOVER": {
     deletedAt: null,
@@ -24012,11 +24012,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -24025,57 +24025,57 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -24083,63 +24083,63 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_CREATE_COOPER_FILE": {
     deletedAt: null,
@@ -24152,11 +24152,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -24165,51 +24165,51 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isCooperDisabled: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -24217,8 +24217,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -24226,65 +24226,65 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isCooperDisabled: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_CREATE_FIGJAM_FILE": {
     deletedAt: null,
@@ -24298,11 +24298,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -24311,70 +24311,70 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         figjamDisabledAt: null,
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -24382,8 +24382,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -24391,31 +24391,31 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -24424,42 +24424,42 @@ let $$a3 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       figjamDisabledAt: null,
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_CREATE_DESIGN_FILE": {
     deletedAt: null,
@@ -24473,11 +24473,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -24486,69 +24486,69 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -24556,8 +24556,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -24565,31 +24565,31 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -24598,41 +24598,41 @@ let $$a3 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_CREATE_SITES_FILE": {
     deletedAt: null,
@@ -24645,11 +24645,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -24658,15 +24658,15 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
@@ -24674,52 +24674,52 @@ let $$a3 = {
         isOrgGuestMfaForSamlSsoEnabled: null,
         isSitesDisabled: null,
         k12GoogleOrg: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -24727,8 +24727,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -24736,31 +24736,31 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -24769,34 +24769,34 @@ let $$a3 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
@@ -24804,8 +24804,8 @@ let $$a3 = {
       isOrgGuestMfaForSamlSsoEnabled: null,
       isSitesDisabled: null,
       k12GoogleOrg: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_CREATE_SLIDES_FILE": {
     deletedAt: null,
@@ -24819,11 +24819,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -24832,68 +24832,68 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
         isSlidesDisabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -24901,8 +24901,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -24910,31 +24910,31 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -24943,42 +24943,42 @@ let $$a3 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       isSlidesDisabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_CREATE_FIGMAKE_FILE": {
     deletedAt: null,
@@ -24991,11 +24991,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       aiFeaturesDisabledAt: null,
@@ -25005,15 +25005,15 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         aiFeaturesDisabledAt: null,
@@ -25022,52 +25022,52 @@ let $$a3 = {
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
         k12GoogleOrg: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -25075,8 +25075,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -25084,41 +25084,41 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagBakeMonetizationPlan: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       featureFlagBakePlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tier: null,
@@ -25127,34 +25127,34 @@ let $$a3 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       aiFeaturesDisabledAt: null,
@@ -25163,8 +25163,8 @@ let $$a3 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       k12GoogleOrg: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_MODIFY_ROLES": {
     deletedAt: null,
@@ -25177,11 +25177,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -25190,50 +25190,50 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -25241,8 +25241,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -25250,64 +25250,64 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_MOVE": {
     deletedAt: null,
@@ -25320,11 +25320,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -25333,50 +25333,50 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -25384,8 +25384,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -25393,64 +25393,64 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_TRANSFER_EXTERNALLY": {
     deletedAt: null,
@@ -25463,11 +25463,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -25476,50 +25476,50 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -25527,8 +25527,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -25536,64 +25536,64 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_TRANSFER_COPY": {
     deletedAt: null,
@@ -25604,16 +25604,16 @@ let $$a3 = {
     sharingAudienceControl: null,
     viewOnlyAt: null,
     _mostRecentResourceConnection: {
-      id: null
+      id: null,
     },
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -25622,50 +25622,50 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -25673,8 +25673,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -25682,64 +25682,64 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_TRASH": {
     deletedAt: null,
@@ -25753,11 +25753,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -25766,50 +25766,50 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -25817,8 +25817,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -25826,64 +25826,64 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_RESTORE": {
     deletedAt: null,
@@ -25897,11 +25897,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -25910,50 +25910,50 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -25961,8 +25961,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -25970,64 +25970,64 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::CAN_PERMANENTLY_DELETE": {
     deletedAt: null,
@@ -26041,11 +26041,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -26054,50 +26054,50 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         id: null,
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
@@ -26105,8 +26105,8 @@ let $$a3 = {
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -26114,616 +26114,616 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       id: null,
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
+      mfaRequired: null,
+    },
   },
   "FOLDER::SHOULD_USE_CONNECTED_PLAN_USER_DESIGN": {
     deletedAt: null,
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tierLevel: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
-    }]
+          toValue: null,
+        },
+      },
+    }],
   },
   "FOLDER::SHOULD_USE_CONNECTED_PLAN_USER_FIGJAM": {
     deletedAt: null,
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tierLevel: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
-    }]
+          toValue: null,
+        },
+      },
+    }],
   },
   "FOLDER::SHOULD_USE_CONNECTED_PLAN_USER_SLIDES": {
     deletedAt: null,
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tierLevel: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
-    }]
+          toValue: null,
+        },
+      },
+    }],
   },
   "FOLDER::SHOULD_USE_CONNECTED_PLAN_USER_DEV_MODE": {
     deletedAt: null,
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
-    }]
+      tierLevel: null,
+    }],
   },
   "FOLDER::SHOULD_USE_CONNECTED_PLAN_USER_SITES": {
     deletedAt: null,
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tierLevel: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
-    }]
+          toValue: null,
+        },
+      },
+    }],
   },
   "FOLDER::SHOULD_USE_CONNECTED_PLAN_USER_FIGMAKE": {
     deletedAt: null,
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       tierLevel: null,
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
-    }]
+          toValue: null,
+        },
+      },
+    }],
   },
   "FOLDER::SHOULD_USE_CONNECTED_PLAN_USER": {
     deletedAt: null,
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
+      tierLevel: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      tierLevel: null
-    }]
+      tierLevel: null,
+    }],
   },
   "FOLDER::CAN_CONNECT": {
     deletedAt: null,
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
       testingOnlyUnlimitedConnectionsEnabled: null,
@@ -26732,9 +26732,9 @@ let $$a3 = {
       unlimitedConnectionsEnabled: null,
       planConnectionCount: {
         connectionCount: null,
-        id: null
-      }
-    }]
+        id: null,
+      },
+    }],
   },
   "FOLDER::CAN_VIEW_LIMITED_INFO": {
     deletedAt: null,
@@ -26747,11 +26747,11 @@ let $$a3 = {
     _permissionsFromUserGroups: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permissions: null
+      permissions: null,
     }],
     _team_permsV2: {
       id: null,
@@ -26760,66 +26760,66 @@ let $$a3 = {
       currentBaseOrgUser: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, {
         workspaceUsers: {
           id: null,
           permission: null,
           workspaceId: null,
-          orgUserId: null
-        }
+          orgUserId: null,
+        },
       }],
       _org_permsV2: {
         isOrgGuestMfaForGoogleSsoEnabled: null,
         isOrgGuestMfaForSamlSsoEnabled: null,
-        mfaRequired: null
-      }
+        mfaRequired: null,
+      },
     },
     connectedPlan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
-      id: null
+      id: null,
     }],
     connectedPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -26827,65 +26827,65 @@ let $$a3 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     folderOwnerRole: {
-      id: null
+      id: null,
     },
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       featureFlagFcPlanEnabled: {
         id: null,
         name: null,
-        value: null
+        value: null,
       },
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectProjectForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     _draftFolderOrg_permsV2: {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
-      mfaRequired: null
-    }
-  }
-};
+      mfaRequired: null,
+    },
+  },
+}
 let $$s10 = {
   "TEAM::CAN_VIEW": {
     defaultPermission: null,
@@ -26899,30 +26899,30 @@ let $$s10 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -26930,64 +26930,64 @@ let $$s10 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       workspaceUsers: {
         id: null,
         permission: null,
         workspaceId: null,
-        orgUserId: null
-      }
+        orgUserId: null,
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
-    }]
+      permission: null,
+    }],
   },
   "TEAM::CAN_EDIT": {
     defaultPermission: null,
@@ -27001,30 +27001,30 @@ let $$s10 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -27032,64 +27032,64 @@ let $$s10 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       workspaceUsers: {
         id: null,
         permission: null,
         workspaceId: null,
-        orgUserId: null
-      }
+        orgUserId: null,
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
-    }]
+      permission: null,
+    }],
   },
   "TEAM::CAN_ADMIN": {
     deletedAt: null,
@@ -27100,30 +27100,30 @@ let $$s10 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -27131,91 +27131,91 @@ let $$s10 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       workspaceUsers: {
         permission: null,
         workspaceId: null,
-        orgUserId: null
-      }
+        orgUserId: null,
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
-    }]
+      permission: null,
+    }],
   },
   "TEAM::IS_OWNER": {
     _org_permsV2: {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -27223,33 +27223,33 @@ let $$s10 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
-    }]
+      totpSecretExists: null,
+    }],
   },
   "TEAM::EDIT_ROLE_ACCESS": {
     defaultPermission: null,
@@ -27261,30 +27261,30 @@ let $$s10 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -27292,95 +27292,95 @@ let $$s10 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workspaceId: null,
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       workspaceUsers: {
         id: null,
         permission: null,
         workspaceId: null,
-        orgUserId: null
-      }
+        orgUserId: null,
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
-    }]
+      permission: null,
+    }],
   },
   "TEAM::ADMIN_ROLE_ACCESS": {
     _org_permsV2: {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -27388,33 +27388,33 @@ let $$s10 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
-    }]
+      totpSecretExists: null,
+    }],
   },
   "TEAM::CAN_DISCOVER": {
     defaultPermission: null,
@@ -27428,30 +27428,30 @@ let $$s10 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -27459,67 +27459,67 @@ let $$s10 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workspace: {
-      orgAccess: null
+      orgAccess: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       workspaceUsers: {
         id: null,
         permission: null,
         workspaceId: null,
-        orgUserId: null
-      }
+        orgUserId: null,
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
-    }]
+      permission: null,
+    }],
   },
   "TEAM::CAN_DELETE": {
     deletedAt: null,
@@ -27528,30 +27528,30 @@ let $$s10 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -27559,33 +27559,33 @@ let $$s10 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
-    }]
+      totpSecretExists: null,
+    }],
   },
   "TEAM::CAN_VIEW_IN_ADMIN": {
     id: null,
@@ -27593,50 +27593,50 @@ let $$s10 = {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       workspaceUsers: {
         permission: null,
         workspaceId: null,
-        orgUserId: null
-      }
+        orgUserId: null,
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
-    }]
+      permission: null,
+    }],
   },
   "TEAM::CAN_VIEW_LIMITED_INFO": {
     defaultPermission: null,
@@ -27650,30 +27650,30 @@ let $$s10 = {
       isOrgGuestMfaForGoogleSsoEnabled: null,
       isOrgGuestMfaForSamlSsoEnabled: null,
       mfaRequired: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       googleSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       id: null,
       permissionFeatureFlagsV2: null,
@@ -27681,84 +27681,84 @@ let $$s10 = {
       samlSsoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
+          ref: "userId",
+        },
       }, null],
       ssoOnly: [{
         userId: {
           type: "view",
-          ref: "userId"
-        }
-      }, null]
+          ref: "userId",
+        },
+      }, null],
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      type: null
+      type: null,
     }],
     roleOnObjectTeamForUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      level: null
+      level: null,
     }],
     userAuthn: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      totpSecretExists: null
+      totpSecretExists: null,
     }],
     workspace: {
-      orgAccess: null
+      orgAccess: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       workspaceUsers: {
         id: null,
         permission: null,
         workspaceId: null,
-        orgUserId: null
-      }
+        orgUserId: null,
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     _orgPlanRecord: {
       id: null,
-      type: null
+      type: null,
     },
     _teamPlanRecord: {
       id: null,
-      type: null
-    }
+      type: null,
+    },
   },
   "TEAM::CAN_USE_FIGMA_AI": {
     aiFeaturesDisabledAt: null,
@@ -27766,30 +27766,30 @@ let $$s10 = {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -27798,74 +27798,74 @@ let $$s10 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
+      tier: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
-    }
+      tier: null,
+    },
   },
   "TEAM::CAN_USE_FIGMA_AI_IGNORE_AI_TOGGLE": {
     orgId: null,
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -27874,44 +27874,44 @@ let $$s10 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
+      tier: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
-    }
+      tier: null,
+    },
   },
   "TEAM::CAN_USE_FIGMA_COLLAB_AI": {
     aiFeaturesDisabledAt: null,
@@ -27919,30 +27919,30 @@ let $$s10 = {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -27951,74 +27951,74 @@ let $$s10 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
+      tier: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
-    }
+      tier: null,
+    },
   },
   "TEAM::CAN_USE_FIGMA_COLLAB_AI_IGNORE_AI_TOGGLE": {
     orgId: null,
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -28027,44 +28027,44 @@ let $$s10 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _teamPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _orgPlanRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
+      tier: null,
     },
     _teamPlanRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
-      tier: null
-    }
+      tier: null,
+    },
   },
   "TEAM::HOST_PLAN_HAS_FIGMA_AI_ENABLED": {
     aiFeaturesDisabledAt: null,
@@ -28072,163 +28072,163 @@ let $$s10 = {
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
-  }
-};
+      permissionFeatureFlagsV2: null,
+    }],
+  },
+}
 let $$o5 = {
   "ORG::IS_GUEST": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     _planUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      type: null
-    }]
+      type: null,
+    }],
   },
   "ORG::IS_MEMBER": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     _planUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
-    }]
+      permission: null,
+    }],
   },
   "ORG::IS_ADMIN": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     _planUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
-    }]
+      permission: null,
+    }],
   },
   "ORG::CANNOT_JOIN_ORG_USER_EXTERNAL_CONTENT_RESTRICTED": {
     id: null,
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       externalRestrictedOrgId: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "ORG::CANNOT_JOIN_ORG_GUESTS_BANNED": {
     guestInviteSetting: null,
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      id: null
+      id: null,
     }],
     _planUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      type: null
+      type: null,
     }],
     _planRecord: {
-      id: null
-    }
+      id: null,
+    },
   },
   "ORG::CAN_USE_FIGMA_AI": {
     aiFeaturesDisabledAt: null,
@@ -28236,31 +28236,31 @@ let $$o5 = {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -28270,60 +28270,60 @@ let $$o5 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _planUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _planRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
       tier: null,
-      type: null
-    }
+      type: null,
+    },
   },
   "ORG::CAN_USE_FIGMA_AI_IGNORE_AI_TOGGLE": {
     k12GoogleOrg: null,
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -28333,29 +28333,29 @@ let $$o5 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _planUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       designPaidStatus: null,
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
-      type: null
+      type: null,
     }],
     _planRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
       tier: null,
-      type: null
-    }
+      type: null,
+    },
   },
   "ORG::CAN_USE_FIGMA_COLLAB_AI": {
     aiFeaturesDisabledAt: null,
@@ -28363,31 +28363,31 @@ let $$o5 = {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -28397,60 +28397,60 @@ let $$o5 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _planUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _planRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
       tier: null,
-      type: null
-    }
+      type: null,
+    },
   },
   "ORG::CAN_USE_FIGMA_COLLAB_AI_IGNORE_AI_TOGGLE": {
     k12GoogleOrg: null,
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     plan: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
@@ -28460,29 +28460,29 @@ let $$o5 = {
       monetizationConfig: {
         editorTypeToLicenseTypeMap: {
           fromValue: null,
-          toValue: null
-        }
-      }
+          toValue: null,
+        },
+      },
     }],
     _planUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       licenseTypes: null,
       provisionalLicenseTypes: null,
       type: null,
-      whiteboardPaidStatus: null
+      whiteboardPaidStatus: null,
     }],
     _planRecord: {
       activeTrialLicenseTypes: null,
       campfireModelEnabledAt: null,
       id: null,
       tier: null,
-      type: null
-    }
+      type: null,
+    },
   },
   "ORG::HOST_PLAN_HAS_FIGMA_AI_ENABLED": {
     aiFeaturesDisabledAt: null,
@@ -28490,34 +28490,34 @@ let $$o5 = {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      type: null
+      type: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     _planUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      type: null
-    }]
-  }
-};
+      type: null,
+    }],
+  },
+}
 let $$l0 = {
   "HUB_FILE::CAN_VIEW": {
     contentVerifiedAt: null,
@@ -28528,14 +28528,14 @@ let $$l0 = {
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       id: null,
       permissionFeatureFlagsV2: null,
-      profileId: null
-    }]
+      profileId: null,
+    }],
   },
   "HUB_FILE::CAN_DUPLICATE": {
     contentVerifiedAt: null,
@@ -28547,65 +28547,65 @@ let $$l0 = {
     communityResourcePayment: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       isActive: null,
       monetizedResourceMetadataId: null,
-      userId: null
+      userId: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       id: null,
       permissionFeatureFlagsV2: null,
-      profileId: null
-    }]
+      profileId: null,
+    }],
   },
   "HUB_FILE::CAN_ADMIN_COMMENTS": {
     publisherProfileIds: null,
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       id: null,
       permissionFeatureFlagsV2: null,
-      profileId: null
-    }]
-  }
-};
+      profileId: null,
+    }],
+  },
+}
 let $$d1 = {
   "LITMUS_PROJECT::CAN_VIEW": {
     id: null,
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
-  }
-};
+      permissionFeatureFlagsV2: null,
+    }],
+  },
+}
 let $$c7 = {
   "WORKSPACE::CAN_VIEW": {
     id: null,
@@ -28613,84 +28613,84 @@ let $$c7 = {
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       permission: null,
       workspaceUsers: {
         permission: null,
-        workspaceId: null
-      }
+        workspaceId: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "WORKSPACE::CAN_ADMIN": {
     id: null,
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       permission: null,
       workspaceUsers: {
         permission: null,
-        workspaceId: null
-      }
+        workspaceId: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "WORKSPACE::CAN_CREATE_TEAM": {
     id: null,
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       permission: null,
       workspaceUsers: {
         permission: null,
-        workspaceId: null
-      }
+        workspaceId: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     orgSharedSetting: {
       id: null,
-      teamCreationControls: null
-    }
-  }
-};
+      teamCreationControls: null,
+    },
+  },
+}
 let $$u9 = {
   "PLUGIN::CAN_VIEW": {
     blockedAt: null,
@@ -28702,36 +28702,36 @@ let $$u9 = {
     userId: null,
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentBaseOrgUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       id: null,
       permissionFeatureFlagsV2: null,
-      profileId: null
+      profileId: null,
     }],
     pluginCommunityPublisher: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       pluginId: null,
-      userId: null
-    }]
+      userId: null,
+    }],
   },
   "PLUGIN::CAN_ADMIN_COMMENTS": {
     publisherProfileIds: null,
@@ -28739,733 +28739,733 @@ let $$u9 = {
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       id: null,
       permissionFeatureFlagsV2: null,
-      profileId: null
-    }]
-  }
-};
+      profileId: null,
+    }],
+  },
+}
 let $$p4 = {
   "PLAN::IS_GUEST": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::IS_MEMBER": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::IS_ADMIN": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::CAN_UPGRADE_AUTO_PATHWAY_DEVELOPER": {
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       externalRestrictedOrgId: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     emptyDeveloperSeat: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       configuredUpgradeRequestSetting: null,
-      id: null
+      id: null,
     },
     currentIDPUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       idpUser: {
         id: null,
-        seatType: null
-      }
-    }]
+        seatType: null,
+      },
+    }],
   },
   "PLAN::CAN_UPGRADE_AUTO_PATHWAY_COLLABORATOR": {
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       externalRestrictedOrgId: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     emptyCollaboratorSeat: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       configuredUpgradeRequestSetting: null,
-      id: null
+      id: null,
     },
     currentIDPUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       idpUser: {
         id: null,
-        seatType: null
-      }
-    }]
+        seatType: null,
+      },
+    }],
   },
   "PLAN::CAN_UPGRADE_AUTO_PATHWAY_EXPERT": {
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       externalRestrictedOrgId: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     emptyExpertSeat: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       configuredUpgradeRequestSetting: null,
-      id: null
+      id: null,
     },
     currentIDPUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       idpUser: {
         id: null,
-        seatType: null
-      }
-    }]
+        seatType: null,
+      },
+    }],
   },
   "PLAN::CAN_UPGRADE_AUTO_PATHWAY_CONTENT": {
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       externalRestrictedOrgId: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     emptyContentSeat: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       configuredUpgradeRequestSetting: null,
-      id: null
+      id: null,
     },
     currentIDPUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       idpUser: {
         id: null,
-        seatType: null
-      }
-    }]
+        seatType: null,
+      },
+    }],
   },
   "PLAN::CAN_UPGRADE_COLLABORATOR": {
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       billableProductKeys: null,
       id: null,
       pendingAccountTypeRequestBillableProductKeys: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       externalRestrictedOrgId: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     emptyCollaboratorSeat: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       configuredUpgradeRequestSetting: null,
-      id: null
+      id: null,
     },
     currentIDPUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       idpUser: {
         id: null,
-        seatType: null
-      }
-    }]
+        seatType: null,
+      },
+    }],
   },
   "PLAN::CAN_UPGRADE_DEVELOPER": {
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       billableProductKeys: null,
       id: null,
       pendingAccountTypeRequestBillableProductKeys: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       externalRestrictedOrgId: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     emptyDeveloperSeat: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       configuredUpgradeRequestSetting: null,
-      id: null
+      id: null,
     },
     currentIDPUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       idpUser: {
         id: null,
-        seatType: null
-      }
-    }]
+        seatType: null,
+      },
+    }],
   },
   "PLAN::CAN_UPGRADE_EXPERT": {
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       billableProductKeys: null,
       id: null,
       pendingAccountTypeRequestBillableProductKeys: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       externalRestrictedOrgId: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     emptyExpertSeat: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       configuredUpgradeRequestSetting: null,
-      id: null
+      id: null,
     },
     currentIDPUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       idpUser: {
         id: null,
-        seatType: null
-      }
-    }]
+        seatType: null,
+      },
+    }],
   },
   "PLAN::CAN_UPGRADE_CONTENT": {
     _org_permsV2: {
       id: null,
-      permissionOrgFeatureFlags: null
+      permissionOrgFeatureFlags: null,
     },
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       billableProductKeys: null,
       id: null,
       pendingAccountTypeRequestBillableProductKeys: null,
-      permission: null
+      permission: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       externalRestrictedOrgId: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     emptyContentSeat: {
-      id: null
+      id: null,
     },
     orgSharedSetting: {
       configuredUpgradeRequestSetting: null,
-      id: null
+      id: null,
     },
     currentIDPUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       idpUser: {
         id: null,
-        seatType: null
-      }
-    }]
+        seatType: null,
+      },
+    }],
   },
   "PLAN::CAN_USE_FILE_VIEW_HISTORY": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      id: null
+      id: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       fileViewHistoryDisabled: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::NEED_UPGRADE_COLLABORATOR": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      billableProductKeys: null
+      billableProductKeys: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::NEED_UPGRADE_DEVELOPER": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      billableProductKeys: null
+      billableProductKeys: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::NEED_UPGRADE_EXPERT": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      billableProductKeys: null
+      billableProductKeys: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::NEED_UPGRADE_CONTENT": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      billableProductKeys: null
+      billableProductKeys: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::CAN_CONNECT": {
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     planConnectionCount: {
       connectionCount: null,
-      id: null
-    }
+      id: null,
+    },
   },
   "PLAN::CAN_VIEW_INVOICES": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       permission: null,
       licenseGroupAdmins: {
-        id: null
-      }
+        id: null,
+      },
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::IS_ELIGIBLE_PROVISIONAL_ACCESS_COLLABORATOR": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       planUserDowngradesNonCheckoutBillableProductKeys: null,
-      provisionalAccessesBillableProductKeys: null
+      provisionalAccessesBillableProductKeys: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::IS_ELIGIBLE_PROVISIONAL_ACCESS_DEVELOPER": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       planUserDowngradesNonCheckoutBillableProductKeys: null,
-      provisionalAccessesBillableProductKeys: null
+      provisionalAccessesBillableProductKeys: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::IS_ELIGIBLE_PROVISIONAL_ACCESS_EXPERT": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       planUserDowngradesNonCheckoutBillableProductKeys: null,
-      provisionalAccessesBillableProductKeys: null
+      provisionalAccessesBillableProductKeys: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::IS_ELIGIBLE_PROVISIONAL_ACCESS_CONTENT": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       id: null,
       planUserDowngradesNonCheckoutBillableProductKeys: null,
-      provisionalAccessesBillableProductKeys: null
+      provisionalAccessesBillableProductKeys: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::CAN_SETUP_GITHUB_APP": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       id: null,
       licenseTypes: null,
       permission: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
+      permissionFeatureFlagsV2: null,
+    }],
   },
   "PLAN::CAN_CONSUME_GITHUB_APP": {
     currentPlanUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       devModePaidStatus: null,
       id: null,
       licenseTypes: null,
-      provisionalLicenseTypes: null
+      provisionalLicenseTypes: null,
     }],
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       emailValidatedAt: null,
       id: null,
-      permissionFeatureFlagsV2: null
-    }]
-  }
-};
+      permissionFeatureFlagsV2: null,
+    }],
+  },
+}
 let $$m6 = {
   "USER_GROUP::CAN_VIEW": {
     deletedAt: null,
@@ -29473,31 +29473,31 @@ let $$m6 = {
     currentUser: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
       emailDomain: null,
       id: null,
-      permissionFeatureFlagsV2: null
+      permissionFeatureFlagsV2: null,
     }],
     _currentPlanUserRecord: [{
       userId: {
         type: "view",
-        ref: "userId"
-      }
+        ref: "userId",
+      },
     }, {
-      id: null
-    }]
-  }
-};
-export const $W = $$l0;
-export const H = $$d1;
-export const Mx = $$n2;
-export const cy = $$a3;
-export const h5 = $$p4;
-export const mJ = $$o5;
-export const mv = $$m6;
-export const pJ = $$c7;
-export const sG = $$r8;
-export const tt = $$u9;
-export const zD = $$s10;
+      id: null,
+    }],
+  },
+}
+export const $W = $$l0
+export const H = $$d1
+export const Mx = $$n2
+export const cy = $$a3
+export const h5 = $$p4
+export const mJ = $$o5
+export const mv = $$m6
+export const pJ = $$c7
+export const sG = $$r8
+export const tt = $$u9
+export const zD = $$s10

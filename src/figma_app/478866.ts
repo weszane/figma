@@ -9,8 +9,8 @@ import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../905/104740";
 import { applyOffsetToViewport, viewportToScreen } from "../figma_app/62612";
 import { NEW_COMMENT_ID } from "../905/380385";
-import { XC } from "../905/512783";
-import { c4 } from "../figma_app/70421";
+import { CommentPinElement } from "../905/512783";
+import { aggregateUserComments } from "../figma_app/70421";
 import { s as _$$s } from "../905/518538";
 import { h4, sc } from "../figma_app/546509";
 export function $$E1(e, t, r, a, o) {
@@ -99,8 +99,8 @@ export function $$y0(e, t, r, s, l) {
     let n = t.find(t => t.id === e);
     if (!n || !n.canvasPosition) return null;
     let i = viewportToScreen(r.getViewportInfo(), n.canvasPosition);
-    let a = c4(n.comments).length;
-    let s = XC.getPinSize(a);
+    let a = aggregateUserComments(n.comments).length;
+    let s = CommentPinElement.getPinSize(a);
     return {
       x: i.x,
       y: i.y,

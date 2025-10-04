@@ -8,7 +8,7 @@ import { Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import { getI18nString } from "../905/303541";
-import { Oe } from "../figma_app/933328";
+import { loadSharedVariableThunk } from "../figma_app/933328";
 import { h7 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
@@ -66,7 +66,7 @@ export function $$N0({
   let V = useCallback(async e => {
     if (void 0 !== T) {
       if (e) {
-        let t = await N(Oe(e));
+        let t = await N(loadSharedVariableThunk(e));
         permissionScopeHandler.user("editVariantVCMForTextStyleNode", () => {
           Fullscreen.editVariantVCMForTextStyleNode(sessionLocalIDToString(s), T, "LINE_HEIGHT", t);
         });

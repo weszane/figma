@@ -5,7 +5,7 @@ import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { isEditDisabled } from "../figma_app/459490";
 import { u4 } from "../figma_app/991591";
-import { zE } from "../905/738636";
+import { createNewFileWithRestrictions } from "../905/738636";
 import { figjamCreateSlidesOutlineAtom } from "../figma_app/223206";
 import { getPermissionsAndView } from "../905/766303";
 import { dh } from "../figma_app/186343";
@@ -70,7 +70,7 @@ function I({
     checkIsViewer: a
   })) return;
   let o = atomStoreManager.set(figjamCreateSlidesOutlineAtom, e);
-  r(zE({
+  r(createNewFileWithRestrictions({
     state: t,
     from: i,
     editorType: FFileType.SLIDES,

@@ -26,7 +26,7 @@ import { I as _$$I } from "../5430/750114";
 import { J as _$$J } from "../905/125993";
 import { ServiceCategories } from "../905/165054";
 import { customHistory } from "../905/612521";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback, ResourceStatus } from "../905/723791";
 import { reportError } from "../905/11";
@@ -116,7 +116,7 @@ function et(e, t, r, s) {
       let t = () => {
         let t = sendWithRetry.post(`/api/hub_file/${e.id}/save`);
         let s = `optimistic-resource-save-${generateUUIDv4()}`;
-        WB().optimisticallyCreate({
+        getCurrentLiveGraphClient().optimisticallyCreate({
           ResourceSave: {
             [s]: {
               userId: n.user.id,
@@ -244,7 +244,7 @@ function es({
     orgId: i
   });
   let l = i ? `optimistic-resource-save-${r.id}-${i}` : `optimistic-resource-save-${r.id}-${e.user.id}`;
-  WB().optimisticallyCreate({
+  getCurrentLiveGraphClient().optimisticallyCreate({
     ResourceSave: {
       [l]: {
         userId: e.user.id,
@@ -349,7 +349,7 @@ function en(e, t, r, s) {
         orgId: r
       });
       let n = r ? `optimistic-resource-save-${e.id}-${r}` : `optimistic-resource-save-${e.id}-${o.user.id}`;
-      WB().optimisticallyDelete({
+      getCurrentLiveGraphClient().optimisticallyDelete({
         ResourceSave: {
           [n]: null
         }

@@ -13,7 +13,7 @@ import { generateSlug, PanelIdentifiers, validateUserFileAccess } from "../figma
 import { N as _$$N } from "../figma_app/268271";
 import { WD4 } from "../figma_app/6204";
 import { renderI18nText } from "../905/303541";
-import { uM } from "../905/738636";
+import { createAndOpenFile } from "../905/738636";
 import { UpgradeAction } from "../905/370443";
 import { getNewFileConfig } from "../905/766303";
 import { useHasSubscribedLibrariesOrLocalComponents, uiKitsTooltipSymbol, useHasAnyUiKit } from "../figma_app/630951";
@@ -37,7 +37,6 @@ import { iF } from "../figma_app/511910";
 import { alwaysFalseCallback2 } from "../figma_app/275462";
 import { useSingleEffect } from "../905/791079";
 import { Z as _$$Z2 } from "../905/104740";
-
 import { e as _$$e3 } from "../5132/291975";
 import { aE } from "../figma_app/433401";
 function R(e) {
@@ -188,7 +187,7 @@ function j({
         },
         editorType: FFileType.DESIGN
       });
-      t(uM(e));
+      t(createAndOpenFile(e));
       G();
     },
     onSecondaryCtaClick: G,

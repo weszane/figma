@@ -3,7 +3,7 @@ import { useState, useContext, useRef, memo, useCallback, useEffect, useMemo } f
 import i, { setupDragHandler } from "../905/97346";
 import { atom, setupCustomAtom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { KeyCodes } from "../905/63728";
 import { APILoadingStatus } from "../905/520829";
 import { styleBuilderInstance } from "../905/941192";
@@ -1086,7 +1086,7 @@ function e9({
   let x = useRef(null);
   let {
     windowInnerWidth
-  } = _$$l();
+  } = useWindowDimensions();
   let [m, j] = useAtomValueAndSetter(e7);
   let [b, y] = useAtomValueAndSetter(te);
   let [v, w] = setupDragHandler({

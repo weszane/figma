@@ -27,7 +27,7 @@ import { cr, yY, CO } from "../905/703676";
 import { a as _$$a } from "../905/682573";
 import { A as _$$A } from "../1617/110063";
 import { TeamAvatar, AvatarSize, UserAvatar } from "../905/590952";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { H as _$$H } from "../905/209153";
 import { In } from "../905/672640";
 import { A as _$$A2 } from "../svg/635182";
@@ -203,7 +203,7 @@ function $$j({
   });
   return jsx(cr, {
     breadcrumbElement: a.last_active_at ? renderI18nText("search.preview_item.active_from_now", {
-      relativeTimeString: jsx(h1, {
+      relativeTimeString: jsx(RelativeTimeDisplay, {
         date: a.last_active_at,
         style: "narrow"
       })

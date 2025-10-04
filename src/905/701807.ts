@@ -12,7 +12,7 @@ import { Ad } from "../905/300250";
 import { setProgressBarState } from "../figma_app/91703";
 import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
 import { isBranchAlt } from "../905/760074";
-import { rJ } from "../905/327855";
+import { createNewFramePreset } from "../905/327855";
 import { setFileInfo } from "../figma_app/682945";
 import { enterVersionHistoryMode, loadVersionIncrementally, startCompareChanges } from "../figma_app/841351";
 import { SourceDirection } from "../905/535806";
@@ -59,7 +59,7 @@ let $$S0 = createOptimistThunk(e => {
       ...i,
       framePresetName: void 0
     }));
-    rJ(t);
+    createNewFramePreset(t);
   }
   if (t.user && a && isBranchAlt(a) && (e.dispatch(Z({
     branchFileKey: a.key

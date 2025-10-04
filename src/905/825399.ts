@@ -9,7 +9,7 @@ import { createLoadedState, createLoadingState, createErrorState } from "../905/
 import { setupResourceAtomHandler, handleStatusChangeEffect } from "../figma_app/566371";
 import { fI } from "../figma_app/229259";
 import { batchPutFileAction } from "../figma_app/78808";
-import { Yb, wV } from "../figma_app/933328";
+import { getLibraryInfo, getLibraryInfoV2 } from "../figma_app/933328";
 import { useParentOrgOfOpenFile } from "../figma_app/543529";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -34,7 +34,7 @@ export function $$k10() {
   };
 }
 let R = liveStoreInstance.Query({
-  fetch: e => liveStoreInstance.fetch(Yb(e)),
+  fetch: e => liveStoreInstance.fetch(getLibraryInfo(e)),
   output: e => ({
     libraryStats: e.data,
     publishedLibraries: e.data.files.map(e => mapLibraryAttributes(e)) ?? []
@@ -54,7 +54,7 @@ let $$N5 = _$$n(({
   }), {
     enabled: t && !getFeatureFlags().dse_lk_libraries_endpoint_v2
   });
-  let [c] = setupResourceAtomHandler(wV({
+  let [c] = setupResourceAtomHandler(getLibraryInfoV2({
     orgId: i,
     subscriptionFileKey: a?.key
   }), {

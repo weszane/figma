@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { noop } from 'lodash-es';
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { fG } from "../figma_app/973927";
-import { Cn } from "../905/862913";
+import { convertToRgba } from "../905/862913";
 import { S as _$$S } from "../3276/591174";
 import { B } from "../3276/578394";
 import { Ve } from "../figma_app/198840";
@@ -43,7 +43,7 @@ export function $$y1(e) {
         onPointerDown: onInsertableResourcePointerDown,
         className: dragState ? J : void 0,
         children: jsxs(WM, {
-          backgroundColor: Cn(clientMeta),
+          backgroundColor: convertToRgba(clientMeta),
           children: [jsx(Wh.Cover, {
             children: jsx("div", {
               className: n_

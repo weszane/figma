@@ -42,9 +42,9 @@ import { incrementReconnectCounter } from "../figma_app/314264";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { J as _$$J } from "../905/915227";
 import { Yq } from "../figma_app/305244";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { handleSyncEvent } from "../905/412815";
-import { DH } from "../905/327855";
+import { mapEditorTypeToLoggingTag } from "../905/327855";
 import { fullscreenPerfManager } from "../905/125218";
 import { getAutosaveState, FileProcessingStatus, finishAutosaveWait } from "../figma_app/139113";
 import { getFullscreenViewFile } from "../figma_app/516028";
@@ -243,7 +243,7 @@ export class $$eu0 {
   constructor(e) {
     this.store = e;
     this.hasShownMultiplayerDecodeError = !1;
-    this.dispatch = () => { };
+    this.dispatch = () => {};
     this.hasUnsavedChanges = () => {
       let e = this.store.getState();
       return !!(e.saveStatus && e.saveStatus.hasUnsavedChanges);
@@ -301,7 +301,7 @@ export class $$eu0 {
     setupConnectionStateHandler();
   }
   handleMultiplayerSignal(e, t, i) {
-    if ("force-refresh" === e) customHistory.reload("Multiplayer got force-refresh signal"); else if ("too-many-connections" === e) {
+    if ("force-refresh" === e) customHistory.reload("Multiplayer got force-refresh signal");else if ("too-many-connections" === e) {
       if (this.hasUnsavedChanges()) {
         let e = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved");
         let t = getI18nString("unsaved_changes.syncing.too_many_people_in_file");
@@ -321,7 +321,7 @@ export class $$eu0 {
       }));
     } else if ("message-decode-failure" === e) this.hasShownMultiplayerDecodeError || (this.hasShownMultiplayerDecodeError = !0, this.dispatch(VisualBellActions.enqueue({
       message: getI18nString("unsaved_changes.syncing.experiencing_server_issues")
-    }))); else if ("invalid-permissions" === e) {
+    })));else if ("invalid-permissions" === e) {
       let e;
       let t;
       this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_revoked_access")) : (t = getI18nString("unsaved_changes.syncing.access_revoked"), e = getI18nString("unsaved_changes.syncing.someone_revoked_access_to_the_file_you_had_open_ask_the_owner_for_access_to_open_it_again"), this.dispatch(handleAutosaveAndNavigationThunk({
@@ -408,7 +408,7 @@ export class $$eu0 {
   buildMultiplayerUrl(e, t, i, r, a, s, o, l, c, u, p) {
     if (!e) throw Error("buildMultiplayerUrl: fileKey must be defined");
     let m = this.store.getState().selectedView;
-    let h = "fullscreen" === m.view ? DH(m.editorType) : void 0;
+    let h = "fullscreen" === m.view ? mapEditorTypeToLoggingTag(m.editorType) : void 0;
     l === FileLoadEvent.RECONNECT && incrementReconnectCounter();
     let g = new URL(mpGlobal.url({
       fileKey: e,
@@ -417,7 +417,7 @@ export class $$eu0 {
       initialBgColor: o,
       suppressDecodeErrors: isLocalDevOnCluster(),
       tagForLogging: h,
-      forceViewOnly: z4.getIsExtension()
+      forceViewOnly: fullscreenAlias.getIsExtension()
     }));
     t && g.searchParams.append("reconnect-key", t);
     null !== i && g.searchParams.append("reconnect-sequence-number", String(i));
@@ -439,7 +439,7 @@ export class $$eu0 {
           }));
         }
       },
-      onDismiss: () => { }
+      onDismiss: () => {}
     }));
   }
   isWindowActive() {
@@ -466,7 +466,7 @@ export class $$eu0 {
           }));
         }
       },
-      onDismiss: () => { }
+      onDismiss: () => {}
     }));
   }
   prettyPrintMessage(e) {

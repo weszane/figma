@@ -26,7 +26,7 @@ export interface ThemeContextValue {
   color: string
   brand: string
   enhancedContrast: boolean
-  addThemeListener: () => typeof noop
+  addThemeListener: (...args: any[]) => typeof noop
 }
 
 /**

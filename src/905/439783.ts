@@ -8,7 +8,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import u from "classnames";
 import { getI18nString } from "../905/303541";
-import { Oe } from "../figma_app/933328";
+import { loadSharedVariableThunk } from "../figma_app/933328";
 import { DEFAULT_FINE_NUDGE, DEFAULT_COARSE_NUDGE } from "../905/668764";
 import { h7 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
@@ -46,7 +46,7 @@ export function $$N0({
   let j = useCallback(async e => {
     if (void 0 !== D) {
       if (e) {
-        let t = await L(Oe(e));
+        let t = await L(loadSharedVariableThunk(e));
         permissionScopeHandler.user("editVariantVCMForTextStyleNode", () => {
           Fullscreen.editVariantVCMForTextStyleNode(sessionLocalIDToString(i), D, "LETTER_SPACING", t);
         });

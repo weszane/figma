@@ -1,8 +1,8 @@
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { dV } from "../figma_app/728075";
+import { blueSecondaryColor } from "../figma_app/728075";
 let s = e => e.toUpperCase().substring(1);
-let o = s(dV);
+let o = s(blueSecondaryColor);
 let l = createReduxSubscriptionAtomWithState(e => e.multiplayer.allUsers);
 export function $$d0() {
   let e = useAtomWithSubscription(l);

@@ -28,7 +28,7 @@ interface NewFileConfigParams {
   trackingInfo?: any
   editorType?: FFileType
   fileName?: string
-  callback?: () => void
+  callback?: (value?: any) => void
   figjamAiNewFileData?: any
   slidesAiNewFileData?: any
   figjamMakeSomethingUseCase?: string
@@ -36,6 +36,7 @@ interface NewFileConfigParams {
   figmakeInitialMessage?: string
 }
 interface NewFileConfig {
+  framePresetName: string
   folder_id: string | null
   org_id: string | null
   openNewFileIn: string

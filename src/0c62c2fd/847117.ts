@@ -29,7 +29,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { consumptionPaywallUtils } from "../905/224";
 import { isRootPath } from "../figma_app/528509";
-import { cY, yD, _9, AU } from "../905/81459";
+import { clearFileImports, cancelAllFileImports, processConfirmedPdfImport, processPdfImportCancellation } from "../905/81459";
 import { buildFileUrl } from "../905/612685";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { FileByKey } from "../figma_app/43951";
@@ -37,7 +37,7 @@ import { useCurrentPublicPlan } from "../figma_app/465071";
 import { isRecentsAndSharingView } from "../figma_app/193867";
 import { UpsellModalType } from "../905/165519";
 import { FeatureFlag, PageFolderFile } from "../905/652992";
-import { Y5, mO, kI, NU } from "../905/163189";
+import { ImportEventType, ImportExportStatus, isPdfFile, determineFileType } from "../905/163189";
 import { fileActionEnum } from "../figma_app/630077";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { ServiceCategories } from "../905/165054";
@@ -132,7 +132,7 @@ function q(e) {
     dispatch: _,
     stats: p,
     shouldShowMoveToProjectButton: !1,
-    onMoveToProject: () => { },
+    onMoveToProject: () => {},
     filesToMove: [],
     onCancel
   });
@@ -199,30 +199,30 @@ export function $$Z0() {
   }));
   let r = () => {
     e(hideModal());
-    e(cY());
+    e(clearFileImports());
   };
   let s = () => {
-    e(yD());
+    e(cancelAllFileImports());
   };
   let o = () => {
-    e(cY());
+    e(clearFileImports());
   };
   let l = (() => {
     switch (fileImport.step) {
-      case Y5.CONFIRM_PDF_IMPORT:
+      case ImportEventType.CONFIRM_PDF_IMPORT:
         return jsx(PdfConfirmationModal, {
           fileImportDescription: renderI18nText("file_browser.file_import_view.select_pdf_source_description", {
             pdfCount: $$es3(fileImport).pdfCount
           }),
           onConfirm: t => {
-            e(_9(t));
+            e(processConfirmedPdfImport(t));
           },
           onCancel: () => {
-            e(AU());
+            e(processPdfImportCancellation());
             s();
           }
         });
-      case Y5.IMPORT_REPO:
+      case ImportEventType.IMPORT_REPO:
         return jsx(q, {
           fileImport,
           onDone: r,
@@ -231,9 +231,9 @@ export function $$Z0() {
           onClose: () => e(hideModal()),
           open: !0
         });
-      case Y5.START:
-      case Y5.FILE_IMPORT_WITH_CANCELED_PDF:
-      case Y5.FILE_IMPORT_WITH_CONFIRMED_PDF:
+      case ImportEventType.START:
+      case ImportEventType.FILE_IMPORT_WITH_CANCELED_PDF:
+      case ImportEventType.FILE_IMPORT_WITH_CONFIRMED_PDF:
         return jsx($$ee2, {
           fileImport,
           onDone: r,
@@ -507,25 +507,25 @@ export function $$es3(e) {
     let r = e.files[t];
     if (r) {
       switch (r.status) {
-        case mO.SUCCESS:
-        case mO.WARNING:
+        case ImportExportStatus.SUCCESS:
+        case ImportExportStatus.WARNING:
           a++;
           break;
-        case mO.CANCELED:
+        case ImportExportStatus.CANCELED:
           s++;
           break;
-        case mO.FAILURE:
+        case ImportExportStatus.FAILURE:
           i++;
           break;
-        case mO.WAITING:
-        case mO.BUSY:
+        case ImportExportStatus.WAITING:
+        case ImportExportStatus.BUSY:
           o++;
           break;
         default:
           throwTypeError(r.status);
       }
-      kI(r.name) && l++;
-      d.add(NU(r));
+      isPdfFile(r.name) && l++;
+      d.add(determineFileType(r));
     }
   }
   return {
@@ -546,7 +546,7 @@ export function $$ei1(e) {
     file
   } = e;
   let r = null;
-  file.status === mO.CANCELED ? r = renderI18nText("file_browser.file_import_view.file_row_import_cancel") : file.message && (r = Array.isArray(file.message) ? file.message.map((e, t) => jsx("div", {
+  file.status === ImportExportStatus.CANCELED ? r = renderI18nText("file_browser.file_import_view.file_row_import_cancel") : file.message && (r = Array.isArray(file.message) ? file.message.map((e, t) => jsx("div", {
     children: e
   }, t)) : file.message);
   return jsx(eo, {
@@ -591,21 +591,21 @@ function en({
   file: e
 }) {
   switch (e.status) {
-    case mO.BUSY:
-    case mO.WAITING:
+    case ImportExportStatus.BUSY:
+    case ImportExportStatus.WAITING:
       return jsx(LoadingSpinner, {
         imageBacked: !0,
         testId: "fileRowLoadingSpinner"
       });
-    case mO.FAILURE:
-    case mO.CANCELED:
+    case ImportExportStatus.FAILURE:
+    case ImportExportStatus.CANCELED:
       return jsx(_$$A, {
         "data-testid": "failIcon",
         className: cssBuilderInstance.colorIconDanger.$
       });
-    case mO.SUCCESS:
-    case mO.WARNING:
-      let t = NU(e);
+    case ImportExportStatus.SUCCESS:
+    case ImportExportStatus.WARNING:
+      let t = determineFileType(e);
       return jsx(w4, {
         size: 16,
         type: Y8(t)
@@ -620,7 +620,7 @@ function eo(e) {
     status,
     children
   } = e;
-  if (status !== mO.SUCCESS && status !== mO.WARNING) return children;
+  if (status !== ImportExportStatus.SUCCESS && status !== ImportExportStatus.WARNING) return children;
   let i = fileKey ? buildFileUrl({
     file: {
       key: fileKey

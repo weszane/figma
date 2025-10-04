@@ -1,5 +1,5 @@
-import { WB } from '../905/761735'
-import { LibrarySubscriptionType } from '../figma_app/155728'
+import { getCurrentLiveGraphClient } from '../905/761735';
+import { LibrarySubscriptionType } from '../figma_app/155728';
 
 /**
  * Updates or creates a library subscription optimistically based on the provided parameters.
@@ -13,48 +13,38 @@ import { LibrarySubscriptionType } from '../figma_app/155728'
  * @param additionalData - Additional data for creation.
  * @param documentId - The document ID for the operation.
  */
-export function updateSubscriptionOptimistically(
-  currentSubscription: any,
-  subscriptionType: LibrarySubscriptionType,
-  isSubscribed: boolean,
-  figJamSubscribed: boolean,
-  slidesSubscribed: boolean,
-  buzzSubscribed: boolean,
-  additionalData: any,
-  documentId: any
-): void {
+export function updateSubscriptionOptimistically(currentSubscription: any, subscriptionType: LibrarySubscriptionType, isSubscribed: boolean, figJamSubscribed: boolean, slidesSubscribed: boolean, buzzSubscribed: boolean, additionalData: any, documentId: any): void {
   // Helper function to get the subscription key based on type.
   // Original: inline IIFE with switch
   const getSubscriptionKey = (type: LibrarySubscriptionType): string => {
     switch (type) {
       case LibrarySubscriptionType.USER:
-        return 'LibraryUserSubscription'
+        return 'LibraryUserSubscription';
       case LibrarySubscriptionType.TEAM:
-        return 'LibraryTeamSubscription'
+        return 'LibraryTeamSubscription';
       default:
-        throw new Error('Invalid subscription type')
+        throw new Error('Invalid subscription type');
     }
-  }
-
-  const subscriptionKey = getSubscriptionKey(subscriptionType)
+  };
+  const subscriptionKey = getSubscriptionKey(subscriptionType);
 
   // Early return for update case
   if (currentSubscription?.subscriptionType === subscriptionType && currentSubscription.subscriptionId) {
-    WB()?.optimisticallyUpdate({
+    getCurrentLiveGraphClient()?.optimisticallyUpdate({
       [subscriptionKey]: {
         [currentSubscription.subscriptionId]: {
           isSubscribed,
           figJamSubscribed,
           slidesSubscribed,
-          buzzSubscribed,
-        },
-      },
-    }, documentId)
-    return
+          buzzSubscribed
+        }
+      }
+    }, documentId);
+    return;
   }
 
   // Create case
-  WB().optimisticallyCreate({
+  getCurrentLiveGraphClient().optimisticallyCreate({
     [subscriptionKey]: {
       [`${subscriptionKey}-${performance.now()}`]: {
         ...additionalData,
@@ -62,11 +52,11 @@ export function updateSubscriptionOptimistically(
         figJamSubscribed,
         slidesSubscribed,
         buzzSubscribed,
-        canRead: true,
-      },
-    },
-  }, documentId)
+        canRead: true
+      }
+    }
+  }, documentId);
 }
 
 // Original export name: J
-export const J = updateSubscriptionOptimistically
+export const J = updateSubscriptionOptimistically;

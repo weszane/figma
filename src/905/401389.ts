@@ -20,7 +20,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey, useHandleMouseEvent, RecordingComponent, handleInputEvent } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hidePickerThunk, hideStylePicker, showStylePicker } from "../figma_app/91703";
-import { AV } from "../figma_app/933328";
+import { applySharedStyle } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { fG, C4, yH, l7 as _$$l2 } from "../figma_app/540726";
 import { valueOrFallback, isValidValue, isInvalidValue, normalizeValue, MIXED_MARKER } from "../905/216495";
@@ -533,7 +533,7 @@ export class $$es2 extends RecordingComponent {
     };
     this.context = null;
     this.onApplyStyle = (e, t) => {
-      this.props.dispatch(AV({
+      this.props.dispatch(applySharedStyle({
         style: e,
         inheritStyleKeyField: this.props.inheritStyleKeyField,
         fromSearch: t

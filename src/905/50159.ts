@@ -6,7 +6,7 @@ import o from "classnames";
 import { appendUserIdToUrl, appendNavigationContext, compareValues, navigateToFile } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { isCommandOrShift } from "../905/63728";
-import { h1, Ak } from "../905/986103";
+import { RelativeTimeDisplay, useRelativeTime } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { NU } from "../figma_app/204891";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -18,7 +18,7 @@ import { A as _$$A } from "../905/100919";
 import { K } from "../905/226178";
 import { setLastVisitedPlan } from "../905/93909";
 import { useHasUnclaimedAutosaveChanges } from "../figma_app/840917";
-import { i4 } from "../905/862913";
+import { hasPasswordProtectedPublicAccessFromEntity } from "../905/862913";
 import { fA } from "../figma_app/543100";
 import { OrganizationType } from "../905/833838";
 import { KindEnum } from "../905/129884";
@@ -28,7 +28,7 @@ var l = o;
 export function $$R1(e) {
   let t = _$$l(e.file.folder_id);
   let i = t.data;
-  return i4(e.file) ? jsx("span", {
+  return hasPasswordProtectedPublicAccessFromEntity(e.file) ? jsx("span", {
     className: gO,
     children: renderI18nText("tile.file_tile.password_protected")
   }) : "loaded" !== t.status ? null : jsxs("div", {
@@ -41,14 +41,14 @@ export function $$R1(e) {
       children: [e.file.touched_at && !i && jsx("span", {
         className: gO,
         children: renderI18nText("tile.file_tile.edited_time", {
-          time: jsx(h1, {
+          time: jsx(RelativeTimeDisplay, {
             date: e.file.touched_at
           })
         })
       }), e.file.touched_at && i && jsx("span", {
         className: Vj,
         children: renderI18nText("tile.file_tile.edited_time_with_separator", {
-          time: jsx(h1, {
+          time: jsx(RelativeTimeDisplay, {
             date: e.file.touched_at
           })
         })
@@ -63,7 +63,7 @@ export function $$R1(e) {
 function N(e) {
   let t = e.file.last_published_at;
   let i = $E();
-  let a = Ak(t);
+  let a = useRelativeTime(t);
   getFeatureFlags().statsig_aa_flag_web_file_tile;
   let {
     file

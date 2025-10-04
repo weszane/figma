@@ -9,7 +9,7 @@ import { logInfo, logWarning } from "../905/714362";
 import { T } from "../figma_app/409248";
 import { createImageFromUrl, Dl } from "../figma_app/291892";
 import { A } from "../905/426471";
-import { $C, PN } from "../figma_app/728075";
+import { yellowSunflowerColor, overlayColor } from "../figma_app/728075";
 let m = Object.create(null);
 function g(e) {
   return createImageFromUrl(e).catch(() => null);
@@ -59,7 +59,7 @@ export async function $$y6({
     d.textAlign = "center";
     let e = 187.5 * window.devicePixelRatio;
     d.font = `${e}px Inter`;
-    d.fillStyle === $C ? d.fillStyle = PN : d.fillStyle = "white";
+    d.fillStyle === yellowSunflowerColor ? d.fillStyle = overlayColor : d.fillStyle = "white";
     d.fillText(t.substring(0, 1).toUpperCase(), i / 2, i / 2 + 10 * window.devicePixelRatio);
   }
   d.scale(window.devicePixelRatio, window.devicePixelRatio);

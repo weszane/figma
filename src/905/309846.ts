@@ -1,8 +1,8 @@
 import { PureComponent } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { clearReportedErrors, reportError, setFileBranchingTags, SeverityLevel } from '../905/11';
-import { z4 } from '../905/37051';
-import { m as _$$m } from '../905/84999';
+import { fullscreenAlias } from '../905/37051';
+import { fileMetadataService } from '../905/84999';
 import { showFileBrowserOrError } from '../905/87821';
 import { registerLegacyModal } from '../905/102752';
 import { fullscreenPerfManager } from '../905/125218';
@@ -15,14 +15,14 @@ import { getLastUsedEditorType, isEditorTypeEnabled, setLastUsedEditorType } fro
 import { R as _$$R2 } from '../905/300969';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
-import { BL, DH, zR } from '../905/327855';
+import { trackFileOpenedAndHandleMode, mapEditorTypeToLoggingTag, trackFullscreenFileOpened } from '../905/327855';
 import { P as _$$P } from '../905/347284';
 import { createOptimistThunk } from '../905/350402';
 import { UpgradeAction } from '../905/370443';
 import { z as _$$z } from '../905/404751';
 import { bE } from '../905/466026';
 import { waitForVisibility } from '../905/508367';
-import { ag, Jt, p9, u6, yf } from '../905/509613';
+import { jubileeTentativePlanEligibilityAtom, jubileeEligibilitySAtom, jubileeBAtom, jubileeTentativeUserEligibilityAtom, setListAtom } from '../905/509613';
 import { v as _$$v } from '../905/516963';
 import { r6 } from '../905/542608';
 import { subscribeAndAwaitData } from '../905/553831';
@@ -31,11 +31,11 @@ import { putTeamUser } from '../905/584989';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { buildFileUrl } from '../905/612685';
-import { b as _$$b } from '../905/620668';
+import { saveLastUsedEditorType } from '../905/620668';
 import { setupFileObject } from '../905/628874';
 import { parseQuery } from '../905/634134';
 import { g_ } from '../905/646788';
-import { n as _$$n } from '../905/646812';
+import { updateFontListFileMetadata } from '../905/646812';
 import { fetchTeamRoles } from '../905/672897';
 import { logInfo } from '../905/714362';
 import { isBranchAlt } from '../905/760074';
@@ -57,7 +57,7 @@ import { getGracePeriodStatus } from '../figma_app/141320';
 import { dK, x2, xt } from '../figma_app/149304';
 import { getInitialOptions, isLocalDevOnCluster } from '../figma_app/169182';
 import { Xg } from '../figma_app/199513';
-import { ky } from '../figma_app/214121';
+import { ColorTokenManager } from '../figma_app/214121';
 import { setTeamOptimistThunk } from '../figma_app/240735';
 import { shouldUseFullscreen } from '../figma_app/298277';
 import { mapToEditorType } from '../figma_app/300692';
@@ -66,7 +66,7 @@ import { hasProjectRestrictions } from '../figma_app/345997';
 import { fullscreenValue } from '../figma_app/455680';
 import { T as _$$T } from '../figma_app/472024';
 import { canAccessFullDevMode } from '../figma_app/473493';
-import { e8 } from '../figma_app/557318';
+import { resetMissingFontTracking } from '../figma_app/557318';
 import { getImageManager } from '../figma_app/624361';
 import { ButtonBasePrimary, ButtonSecondary, createLabel, FocusCheckbox } from '../figma_app/637027';
 import { jW } from '../figma_app/640683';
@@ -96,11 +96,11 @@ async function ea(e, t, i) {
     }));
     return;
   }
-  atomStoreManager.set(ag, s.jubilee_tentative_plan_eligibility);
-  atomStoreManager.set(u6, s.jubilee_tentative_user_eligibility);
-  atomStoreManager.set(p9, s.jubilee_b);
-  atomStoreManager.set(Jt, s.jubilee_eligibility_s);
-  atomStoreManager.set(yf, new Set());
+  atomStoreManager.set(jubileeTentativePlanEligibilityAtom, s.jubilee_tentative_plan_eligibility);
+  atomStoreManager.set(jubileeTentativeUserEligibilityAtom, s.jubilee_tentative_user_eligibility);
+  atomStoreManager.set(jubileeBAtom, s.jubilee_b);
+  atomStoreManager.set(jubileeEligibilitySAtom, s.jubilee_eligibility_s);
+  atomStoreManager.set(setListAtom, new Set());
   let l = getFeatureFlags();
   let c = s.feature_flags;
   if (t.dispatch(setNeedsUpgrade({
@@ -158,8 +158,8 @@ async function ea(e, t, i) {
     },
     sources: [FontSourceType.SHARED]
   };
-  getFeatureFlags().ce_new_missing_fonts_logging && e8();
-  _$$n(t, I);
+  getFeatureFlags().ce_new_missing_fonts_logging && resetMissingFontTracking();
+  updateFontListFileMetadata(t, I);
   (selectedView.versionId || selectedView.compareVersionId || selectedView.compareLatest) && t.dispatch(setProgressBarState({
     mode: UIVisibilitySetting.ON_AND_LOCKED
   }));
@@ -182,7 +182,7 @@ async function ea(e, t, i) {
   desktopAPIInstance?.setIsLibrary(!!s.last_published_at);
   desktopAPIInstance?.setIsTeamTemplate(!!x);
   Fullscreen.setEditorTheme(n.theme.visibleTheme || '');
-  ColorStateTsApi && ky.updateColorsInFullscreen(ColorStateTsApi.colorTokensState());
+  ColorStateTsApi && ColorTokenManager.updateColorsInFullscreen(ColorStateTsApi.colorTokensState());
   fullscreenPerfManager.time('openFileWithMetadata', () => Fullscreen.openFileWithServerMetadata({
     metadata: {
       file_key: s.file_key,
@@ -523,7 +523,7 @@ let eU = createOptimistThunk((e, t) => {
   return null;
 });
 function eB(e) {
-  let t = _$$m.getFileMetadata({
+  let t = fileMetadataService.getFileMetadata({
     fileKey: e
   });
   return fullscreenPerfManager.timeAsync('fileMetadataRequest', () => t);
@@ -543,7 +543,7 @@ let eH = createOptimistThunk(async (e, {
   try {
     let r;
     setFileBranchingTags(t);
-    zR({
+    trackFullscreenFileOpened({
       fileKey: t.key,
       folderId: t.folderId,
       teamId: t.teamId,
@@ -566,8 +566,8 @@ let eH = createOptimistThunk(async (e, {
       nodeIds: d,
       initialBgColor: v,
       suppressDecodeErrors: isLocalDevOnCluster(),
-      tagForLogging: DH(c),
-      forceViewOnly: z4.getIsExtension()
+      tagForLogging: mapEditorTypeToLoggingTag(c),
+      forceViewOnly: fullscreenAlias.getIsExtension()
     }));
     _$$W.startFetchingFontList();
     try {
@@ -582,8 +582,8 @@ let eH = createOptimistThunk(async (e, {
     await ea(r, e, c);
     let I = A.theme.visibleTheme;
     Fullscreen?.setEditorTheme(I || '');
-    BL(t, A, m);
-    _$$b(mapEditorTypeToFileType(c));
+    trackFileOpenedAndHandleMode(t, A, m);
+    saveLastUsedEditorType(mapEditorTypeToFileType(c));
     setLastUsedEditorType(c);
     t && i && void 0 === parseQuery(customHistory.location.search).embed_host && waitForVisibility().then(() => {
       setTimeout(() => {

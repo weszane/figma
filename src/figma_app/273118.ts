@@ -1,4 +1,4 @@
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { handleOptimistTransactionWithError } from "../905/150006";
 import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
@@ -12,7 +12,7 @@ export function $$u2(e, t) {
 export function $$p1(e, t, r) {
   let i = t == J ? null : t;
   let s = `${r}:${t}`;
-  return WB().optimisticallyUpdate({
+  return getCurrentLiveGraphClient().optimisticallyUpdate({
     UserNotificationBell2: {
       [s]: {
         bell: e

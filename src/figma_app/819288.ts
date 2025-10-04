@@ -388,3 +388,5 @@ export function renderMessageMeta(meta: MessageMeta[] = []): string {
   }, '')
   return sanitizeInput(html) || ''
 }
+
+export const sP =  renderMessageMeta

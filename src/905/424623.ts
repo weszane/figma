@@ -5,7 +5,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { compareIgnoringSpaces } from "../figma_app/930338";
-import { Kk, n8, EY, x as _$$x } from "../figma_app/933328";
+import { updateLibraryRemappingProgress, startLibraryRemappingProgress, completeLibraryRemapping, failLibraryRemapping } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { LibraryDataByLibraryKey } from "../figma_app/43951";
@@ -105,7 +105,7 @@ export function $$S0(e) {
         let i = Fullscreen.getNumUsagesOfStyle(e.key, r);
         if (0 === i) continue;
         _ += i;
-        p.push($l(e, t, r, o).then(() => o(Kk({
+        p.push($l(e, t, r, o).then(() => o(updateLibraryRemappingProgress({
           done: i
         }))));
         continue;
@@ -118,7 +118,7 @@ export function $$S0(e) {
       let u = e.type === PrimaryWorkflowEnum.COMPONENT ? e.content_hash : e.version;
       if (!l || !u) continue;
       let b = Fullscreen.getNumInstancesReferencingProductComponent(l);
-      0 !== b && (A += b, p.push(RJ(l, s).then(() => o(Kk({
+      0 !== b && (A += b, p.push(RJ(l, s).then(() => o(updateLibraryRemappingProgress({
         done: b
       })))));
     }
@@ -132,7 +132,7 @@ export function $$S0(e) {
         numStyles: _
       });
       let i = window.performance.now();
-      o(n8({
+      o(startLibraryRemappingProgress({
         total: v
       }));
       Promise.all(p).then(() => {
@@ -143,9 +143,9 @@ export function $$S0(e) {
           durationMs: window.performance.now() - i
         });
         fullscreenValue.triggerAction("commit");
-        o(EY());
+        o(completeLibraryRemapping());
       }).catch(() => {
-        o(_$$x());
+        o(failLibraryRemapping());
       });
     }
   }, [l, e, i, components, stateGroups, styles, o, t]);

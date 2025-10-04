@@ -78,7 +78,7 @@ import { v as _$$v3 } from '../905/621749';
 import { K as _$$K } from '../905/628118';
 import { s as _$$s4 } from '../905/645504';
 import { adminPermissionConfig } from '../905/654645';
-import { A as _$$A3 } from '../905/658244';
+import { FileBrowser } from '../905/658244';
 import { e0 as _$$e4 } from '../905/696396';
 import { RenewalTermEnum } from '../905/712921';
 import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
@@ -97,7 +97,7 @@ import { B as _$$B2 } from '../905/950875';
 import { ck } from '../905/952832';
 import { V as _$$V2 } from '../905/965990';
 import { TextWithTruncation } from '../905/984674';
-import { h1 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { resourceUtils } from '../905/989992';
 import { BP, k_, TG } from '../1881/866163';
 import { S as _$$S2 } from '../4452/304860';
@@ -337,7 +337,7 @@ let e0 = createOptimistThunk((e, {
     id
   } = s;
   e.dispatch(showModalHandler({
-    type: n ??= registerModal(_$$A3.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeEditorsModal), createModalConfig('ConfirmDowngradeEditorsModal')), 'ConfirmDowngradeEditorsModal'),
+    type: n ??= registerModal(FileBrowser.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeEditorsModal), createModalConfig('ConfirmDowngradeEditorsModal')), 'ConfirmDowngradeEditorsModal'),
     data: {
       editors: [t],
       team: s,
@@ -552,7 +552,7 @@ let e5 = withTracking(e => {
   let R = useCallback(e => !(e.member.team_role?.pending && !e.member.team_user), []);
   let O = useCallback(e => {
     dispatch(showModalHandler({
-      type: s ??= registerModal(_$$A3.createLazyComponent(() => Promise.all([]).then(_require2).then(e => e.MemberEditAccessModal), createModalConfig('MemberEditAccessModal')), 'MemberEditAccessModal'),
+      type: s ??= registerModal(FileBrowser.createLazyComponent(() => Promise.all([]).then(_require2).then(e => e.MemberEditAccessModal), createModalConfig('MemberEditAccessModal')), 'MemberEditAccessModal'),
       data: {
         memberEmail: e.email,
         teamId: team.id,
@@ -678,7 +678,7 @@ let e5 = withTracking(e => {
           }
         }));
       },
-      children: jsx(h1, {
+      children: jsx(RelativeTimeDisplay, {
         capitalize: !0,
         date: new Date(1e3 * member.last_active)
       })

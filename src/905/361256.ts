@@ -77,7 +77,7 @@ import { sessionLocalIDToString } from '../905/871411';
 import { A as _$$A } from '../905/891805';
 import { bL as _$$bL } from '../905/911410';
 import { A as _$$A3 } from '../905/920165';
-import { q as _$$q } from '../905/932270';
+import { Legend } from '../905/932270';
 import { noop } from 'lodash-es';
 ;
 import { FONT_SF_PRO_DISPLAY } from '../905/946258';
@@ -316,7 +316,7 @@ class eY extends PureComponent {
         value: isValidValue(this.props.textLineType) ? this.props.textLineType : void 0,
         onChange: this.onListStyleChange,
         readonly: this.props.disabled,
-        legend: jsx(_$$q, {
+        legend: jsx(Legend, {
           children: getI18nString('type_settings.list_style')
         }),
         recordingKey: this.props.recordingKey,
@@ -489,7 +489,7 @@ function tA(e) {
         value: isValidValue(e.textDecorationStyle) && !e.disabled ? e.textDecorationStyle : void 0,
         onChange: t_,
         readonly: e.disabled,
-        legend: jsx(_$$q, {
+        legend: jsx(Legend, {
           children: renderI18nText('type_settings.decoration.decoration_style')
         }),
         recordingKey: generateRecordingKey(e, 'textDecorationStyle'),
@@ -544,7 +544,7 @@ function tb(e) {
         ty(e);
       },
       value: isValidValue(e.skipInk) && !e.disabled ? e.skipInk ? 'TRUE' : 'FALSE' : void 0,
-      legend: jsx(_$$q, {
+      legend: jsx(Legend, {
         children: getI18nString('type_settings.decoration.skip_ink')
       }),
       readonly: e.disabled,
@@ -587,7 +587,7 @@ let tE = function (e) {
       value: isValidValue(e.textDecoration) ? e.textDecoration : void 0,
       onChange: tI,
       readonly: e.disabled,
-      legend: jsx(_$$q, {
+      legend: jsx(Legend, {
         children: renderI18nText('type_settings.decoration')
       }),
       recordingKey: generateRecordingKey(e, 'textDecoration'),
@@ -1261,7 +1261,7 @@ function t3(e) {
             fullscreenValue.updateSelectionProperties(t);
           },
           readonly: e.disabled,
-          legend: jsx(_$$q, {
+          legend: jsx(Legend, {
             children: getI18nString('type_settings.truncate_text')
           }),
           recordingKey: generateRecordingKey(e, 'textTruncation'),
@@ -1640,7 +1640,7 @@ function t6(e) {
             value: isValidValue(e.textAlignHorizontal) ? e.textAlignHorizontal : void 0,
             onChange: eU,
             recordingKey: e.recordingKey,
-            legend: jsx(_$$q, {
+            legend: jsx(Legend, {
               children: renderI18nText('type_settings.alignment')
             }),
             readonly: k,
@@ -1855,7 +1855,7 @@ function t6(e) {
             value: isValidValue(e.leadingTrim) && !e.leadingTrimDisabled ? e.leadingTrim : void 0,
             onChange: et,
             readonly: k || e.leadingTrimDisabled,
-            legend: jsx(_$$q, {
+            legend: jsx(Legend, {
               children: renderI18nText('type_settings.leading_trim')
             }),
             recordingKey: generateRecordingKey(e, 'leadingTrim'),
@@ -2200,7 +2200,7 @@ function t6(e) {
             value: isValidValue(t) ? t : void 0,
             onChange: e => i4(e, i ? 'settings-details' : 'settings-basic'),
             readonly: k,
-            legend: jsx(_$$q, {
+            legend: jsx(Legend, {
               children: renderI18nText('type_settings.case')
             }),
             recordingKey: generateRecordingKey(e, 'textCase'),
@@ -2381,7 +2381,7 @@ function t6(e) {
             }
           },
           readonly: k,
-          legend: jsx(_$$q, {
+          legend: jsx(Legend, {
             children: o
           }),
           recordingKey: generateRecordingKey(e, l),
@@ -2423,7 +2423,7 @@ function t6(e) {
           value: isValidValue(e.fontVariantPosition) ? e.fontVariantPosition : void 0,
           onChange: eH,
           readonly: k,
-          legend: jsx(_$$q, {
+          legend: jsx(Legend, {
             children: renderI18nText('type_settings.position')
           }),
           recordingKey: generateRecordingKey(e, 'numericPosition'),
@@ -2602,7 +2602,7 @@ function t6(e) {
               fullscreenValue.updateSelectionProperties(l(e));
             },
             readonly: k,
-            legend: jsx(_$$q, {
+            legend: jsx(Legend, {
               children: renderI18nText('type_settings.numeric.style')
             }),
             recordingKey: generateRecordingKey(e, 'numericStyle'),

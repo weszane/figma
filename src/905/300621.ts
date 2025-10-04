@@ -27,7 +27,7 @@ import { I as _$$I } from '../905/717213';
 import { m as _$$m } from '../905/760316';
 import { u as _$$u2 } from '../905/831362';
 import { useCurrentUserOrgId } from '../905/845253';
-import { ud } from '../905/862913';
+import { useFileByKey } from '../905/862913';
 import { LibraryItemTilesByPage } from '../905/909811';
 import { noop } from 'lodash-es';
 ;
@@ -48,7 +48,7 @@ import { aU } from '../figma_app/757606';
 import { parsePxInt } from '../figma_app/783094';
 import { TrackingProvider } from '../figma_app/831799';
 import { generateRecordingKey } from '../figma_app/878298';
-import { Tn } from '../figma_app/933328';
+import { useLibraryInfo } from '../figma_app/933328';
 import { A as _$$A } from '../svg/562176';
 let F = 'figjam_file_row--fileThumbnail--9IG5C';
 function j({
@@ -119,7 +119,7 @@ function j({
 }
 function z() {
   let e = useCurrentUserOrgId();
-  return Tn({
+  return useLibraryInfo({
     currentOrgId: e
   });
 }
@@ -210,7 +210,7 @@ function K(e) {
 }
 let ea = 'figjam_subscriptions_list_view--teamSectionHeaderSticky--6-qao figjam_subscriptions_list_view--sectionHeader--0sArV';
 function es(e) {
-  let t = ud();
+  let t = useFileByKey();
   let i = useAtomWithSubscription(filesByLibraryKeyAtom);
   let s = useSelector(e => e.openFile);
   let o = useSelector(e => e.folders);

@@ -6,7 +6,7 @@ import { ScreenReaderOnly } from "../905/172252";
 import l from "../vendor/524488";
 import { getI18nString } from "../905/303541";
 import { isEditorTypeSupported } from "../figma_app/844435";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { AssetTabType } from "../905/946805";
 var d = l;
 let h = createContext({
@@ -59,7 +59,7 @@ export function $$f1({
   query: n,
   resultsCount: a
 }) {
-  let o = o3(nt.quickActionsA11y);
+  let o = useLabConfiguration(labConfigurations.quickActionsA11y);
   let l = isEditorTypeSupported();
   let {
     setState

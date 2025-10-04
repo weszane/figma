@@ -12,7 +12,7 @@ import { APILoadingStatus } from "../905/520829";
 import { getIsMobile } from "../figma_app/778880";
 import { AUTH_SET_REDIRECT_URL, AUTH_COMPLETE, AUTH_SHOW_ERROR } from "../905/194276";
 import { trackAuthEvent } from "../905/248178";
-import { S$ } from "../figma_app/591738";
+import { isGoogleFederatedCMEnabled } from "../figma_app/591738";
 import { o as _$$o } from "../905/621736";
 import { d as _$$d } from "../905/241150";
 import { z } from "../905/819918";
@@ -27,7 +27,7 @@ function T({
   } catch {}
   let o = useAsyncWithReset(() => _$$o(n), [n]);
   let h = useDispatch();
-  let y = !!S$();
+  let y = !!isGoogleFederatedCMEnabled();
   let T = r ?? y;
   let I = useRef(!1);
   let S = useCallback(async ({

@@ -13,7 +13,7 @@ import { RecordingPureComponent, setupPlayback } from "../figma_app/878298";
 import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { hidePickerThunk } from "../figma_app/91703";
-import { Yi } from "../figma_app/933328";
+import { loadSharedVariable } from "../figma_app/933328";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
@@ -109,7 +109,7 @@ class M extends RecordingPureComponent {
         });
         return;
       }
-      this.props.dispatch(Yi({
+      this.props.dispatch(loadSharedVariable({
         item: e,
         callback: e => {
           let t = convertVariableIdToKiwi(e);

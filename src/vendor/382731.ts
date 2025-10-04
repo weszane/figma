@@ -1,8 +1,7 @@
-import { j } from '../vendor/171112'
-import { x as _$$x } from '../vendor/298225'
-import { xW } from '../vendor/776654'
-import { bu, c, gH, ZL } from '../vendor/850605'
-
+import { j } from '../vendor/171112';
+import { x as _$$x } from '../vendor/298225';
+import { Tok } from '../vendor/776654';
+import { bu, c, gH, ZL } from '../vendor/850605';
 let i = (e, r) => {
   if (typeof e == 'number') {
     if (r === 3) {
@@ -10,8 +9,8 @@ let i = (e, r) => {
         mode: 'rgb',
         r: (e >> 8 & 15 | e >> 4 & 240) / 255,
         g: (e >> 4 & 15 | 240 & e) / 255,
-        b: (15 & e | e << 4 & 240) / 255,
-      }
+        b: (15 & e | e << 4 & 240) / 255
+      };
     }
     if (r === 4) {
       return {
@@ -19,16 +18,16 @@ let i = (e, r) => {
         r: (e >> 12 & 15 | e >> 8 & 240) / 255,
         g: (e >> 8 & 15 | e >> 4 & 240) / 255,
         b: (e >> 4 & 15 | 240 & e) / 255,
-        alpha: (15 & e | e << 4 & 240) / 255,
-      }
+        alpha: (15 & e | e << 4 & 240) / 255
+      };
     }
     if (r === 6) {
       return {
         mode: 'rgb',
         r: (e >> 16 & 255) / 255,
         g: (e >> 8 & 255) / 255,
-        b: (255 & e) / 255,
-      }
+        b: (255 & e) / 255
+      };
     }
     if (r === 8) {
       return {
@@ -36,11 +35,11 @@ let i = (e, r) => {
         r: (e >> 24 & 255) / 255,
         g: (e >> 16 & 255) / 255,
         b: (e >> 8 & 255) / 255,
-        alpha: (255 & e) / 255,
-      }
+        alpha: (255 & e) / 255
+      };
     }
   }
-}
+};
 let s = {
   aliceblue: 0xF0F8FF,
   antiquewhite: 0xFAEBD7,
@@ -189,60 +188,55 @@ let s = {
   white: 0xFFFFFF,
   whitesmoke: 0xF5F5F5,
   yellow: 0xFFFF00,
-  yellowgreen: 0x9ACD32,
-}
-let o = e => i(s[e.toLowerCase()], 6)
-let a = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i
-let h = (e) => {
-  let r
-  return (r = e.match(a)) ? i(parseInt(r[1], 16), r[1].length) : void 0
-}
-let p = new RegExp(`^rgba?\\(\\s*${bu}${c}${bu}${c}${bu}\\s*(?:,\\s*${ZL}\\s*)?\\)$`)
-let g = new RegExp(`^rgba?\\(\\s*${gH}${c}${gH}${c}${gH}\\s*(?:,\\s*${ZL}\\s*)?\\)$`)
-let m = (e) => {
-  let r
+  yellowgreen: 0x9ACD32
+};
+let o = e => i(s[e.toLowerCase()], 6);
+let a = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i;
+let h = e => {
+  let r;
+  return (r = e.match(a)) ? i(parseInt(r[1], 16), r[1].length) : void 0;
+};
+let p = new RegExp(`^rgba?\\(\\s*${bu}${c}${bu}${c}${bu}\\s*(?:,\\s*${ZL}\\s*)?\\)$`);
+let g = new RegExp(`^rgba?\\(\\s*${gH}${c}${gH}${c}${gH}\\s*(?:,\\s*${ZL}\\s*)?\\)$`);
+let m = e => {
+  let r;
   let n = {
-    mode: 'rgb',
-  }
+    mode: 'rgb'
+  };
   if (r = e.match(p)) {
-    void 0 !== r[1] && (n.r = r[1] / 255)
-    void 0 !== r[2] && (n.g = r[2] / 255)
-    void 0 !== r[3] && (n.b = r[3] / 255)
+    void 0 !== r[1] && (n.r = r[1] / 255);
+    void 0 !== r[2] && (n.g = r[2] / 255);
+    void 0 !== r[3] && (n.b = r[3] / 255);
+  } else {
+    if (!(r = e.match(g))) return;
+    void 0 !== r[1] && (n.r = r[1] / 100);
+    void 0 !== r[2] && (n.g = r[2] / 100);
+    void 0 !== r[3] && (n.b = r[3] / 100);
   }
-  else {
-    if (!(r = e.match(g)))
-      return
-    void 0 !== r[1] && (n.r = r[1] / 100)
-    void 0 !== r[2] && (n.g = r[2] / 100)
-    void 0 !== r[3] && (n.b = r[3] / 100)
-  }
-  void 0 !== r[4] ? n.alpha = Math.max(0, Math.min(1, r[4] / 100)) : void 0 !== r[5] && (n.alpha = Math.max(0, Math.min(1, +r[5])))
-  return n
-}
+  void 0 !== r[4] ? n.alpha = Math.max(0, Math.min(1, r[4] / 100)) : void 0 !== r[5] && (n.alpha = Math.max(0, Math.min(1, +r[5])));
+  return n;
+};
 let y = function (e, r) {
-  if (!r || r[0] !== 'rgb' && r[0] !== 'rgba')
-    return
+  if (!r || r[0] !== 'rgb' && r[0] !== 'rgba') return;
   let n = {
-    mode: 'rgb',
+    mode: 'rgb'
+  };
+  let [, i, s, o, a] = r;
+  if (i.type !== Tok.Hue && s.type !== Tok.Hue && o.type !== Tok.Hue) {
+    i.type !== Tok.None && (n.r = i.type === Tok.Number ? i.value / 255 : i.value / 100);
+    s.type !== Tok.None && (n.g = s.type === Tok.Number ? s.value / 255 : s.value / 100);
+    o.type !== Tok.None && (n.b = o.type === Tok.Number ? o.value / 255 : o.value / 100);
+    a.type !== Tok.None && (n.alpha = Math.min(1, Math.max(0, a.type === Tok.Number ? a.value : a.value / 100)));
+    return n;
   }
-  let [, i, s, o, a] = r
-  if (i.type !== xW.Hue && s.type !== xW.Hue && o.type !== xW.Hue) {
-    i.type !== xW.None && (n.r = i.type === xW.Number ? i.value / 255 : i.value / 100)
-    s.type !== xW.None && (n.g = s.type === xW.Number ? s.value / 255 : s.value / 100)
-    o.type !== xW.None && (n.b = o.type === xW.Number ? o.value / 255 : o.value / 100)
-    a.type !== xW.None && (n.alpha = Math.min(1, Math.max(0, a.type === xW.Number ? a.value : a.value / 100)))
-    return n
-  }
-}
-let b = e => e === 'transparent'
-  ? {
-      mode: 'rgb',
-      r: 0,
-      g: 0,
-      b: 0,
-      alpha: 0,
-    }
-  : void 0
+};
+let b = e => e === 'transparent' ? {
+  mode: 'rgb',
+  r: 0,
+  g: 0,
+  b: 0,
+  alpha: 0
+} : void 0;
 export let $$w0 = {
   mode: 'rgb',
   channels: ['r', 'g', 'b', 'alpha'],
@@ -254,19 +248,19 @@ export let $$w0 = {
     b: _$$x,
     alpha: {
       use: _$$x,
-      fixup: j,
-    },
+      fixup: j
+    }
   },
   gamut: !0,
   white: {
     r: 1,
     g: 1,
-    b: 1,
+    b: 1
   },
   black: {
     r: 0,
     g: 0,
-    b: 0,
-  },
-}
-export const A = $$w0
+    b: 0
+  }
+};
+export const A = $$w0;

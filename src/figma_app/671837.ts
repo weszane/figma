@@ -13,7 +13,7 @@ import { R as _$$R } from "../figma_app/640506";
 import { uM, Iz } from "../905/888175";
 import { B as _$$B } from "../figma_app/371825";
 import { bY, cf, jU, cq, Kb, Zu, yk, v5, kV, iI } from "../figma_app/731560";
-import { jR, wO } from "../figma_app/728075";
+import { neutralDarkColor3, yellowCreamColor } from "../figma_app/728075";
 import { A as _$$A } from "../svg/70771";
 var l = o;
 function y({
@@ -167,7 +167,7 @@ export function $$N2({
   }
 }
 function C({
-  color: e = jR
+  color: e = neutralDarkColor3
 }) {
   return jsxs("svg", {
     className: l()(jU, cq),
@@ -308,7 +308,7 @@ function C({
   });
 }
 function w({
-  color: e = jR
+  color: e = neutralDarkColor3
 }) {
   return jsxs("svg", {
     className: Kb,
@@ -439,7 +439,7 @@ function w({
   });
 }
 function O({
-  color: e = wO
+  color: e = yellowCreamColor
 }) {
   return jsxs("svg", {
     width: $$I0,
@@ -749,7 +749,7 @@ function O({
   });
 }
 function R({
-  color: e = wO
+  color: e = yellowCreamColor
 }) {
   return jsxs("svg", {
     width: "64",

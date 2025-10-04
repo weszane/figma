@@ -13,7 +13,7 @@ import { d as _$$d } from "../figma_app/307143";
 import { ac } from "../905/930279";
 import { t$ } from "../figma_app/863319";
 import { userHasPlan } from "../905/697795";
-import { ud } from "../905/862913";
+import { useFileByKey } from "../905/862913";
 import { nb, Tf } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
 import { FEntityType } from "../figma_app/191312";
@@ -30,7 +30,7 @@ export function $$I0({
     repoPermissions,
     protoPermissions
   } = xD();
-  let T = ud();
+  let T = useFileByKey();
   let k = useMemo(() => {
     if (!i) return null;
     let e = null;

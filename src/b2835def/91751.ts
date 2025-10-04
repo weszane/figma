@@ -12,7 +12,7 @@ import { stylex } from "@stylexjs/stylex";
 import { noop } from 'lodash-es';
 import { _ as _$$_ } from "../figma_app/658134";
 import { A } from "../9314/687951";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { Ye } from "../figma_app/32128";
 import { xG } from "../figma_app/121043";
 import { G, N as _$$N } from "../b2835def/560769";
@@ -140,7 +140,7 @@ export function $$C0() {
     },
     type: r.ICON
   }];
-  return o3(nt.designNavBar) ? jsx(m, {
+  return useLabConfiguration(labConfigurations.designNavBar) ? jsx(m, {
     menuButton: jsx(xG, {
       hideChevron: !0
     }),
@@ -167,7 +167,7 @@ export function $$C0() {
   });
 }
 export function $$A1() {
-  let e = o3(nt.designLeftRailPrototype);
+  let e = useLabConfiguration(labConfigurations.designLeftRailPrototype);
   let t = Ye();
   let i = e && !t;
   let r = {

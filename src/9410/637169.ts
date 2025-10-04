@@ -12,7 +12,7 @@ import { useRfdSignalsUpsellExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { Z } from "../905/104740";
 import { EE, lB } from "../figma_app/731583";
 import { getViewportInfo, computeFullscreenViewportForNode } from "../figma_app/62612";
@@ -87,7 +87,7 @@ function N({
           },
           variant: "primary",
           onClick: function () {
-            e && (t(), z4.setNodesReady(!0, [e], "dev-node-change-upsell", null));
+            e && (t(), fullscreenAlias.setNodesReady(!0, [e], "dev-node-change-upsell", null));
           },
           children: getI18nString("dev_handoff.rfd_signals_upsell.mark_ready_for_dev")
         })

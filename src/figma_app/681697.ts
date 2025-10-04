@@ -6,15 +6,15 @@ import { useProjectFileCreationPermissions, canCreateFileType } from "../figma_a
 import { createOptimistThunk } from "../905/350402";
 import { DragDataHandler } from "../905/904854";
 import { fileImporter } from "../905/642505";
-import { GR } from "../905/81459";
+import { showImportFigmaDesignRepo } from "../905/81459";
 import { selectPermissionsState } from "../figma_app/212807";
 import { hasFolderRestrictions } from "../figma_app/345997";
-import { Mk } from "../905/163189";
+import { SUPPORTED_FILE_TYPES } from "../905/163189";
 import { z } from "../905/875422";
-import { MS } from "../905/615657";
+import { resetImportErrorTracker } from "../905/615657";
 import { extractBranchFiles, dispatchBranchFiles } from "../905/769";
 export let $$E2 = createOptimistThunk((e, t) => {
-  fileImporter && (MS(), fileImporter.extractFilesFromDropEvent(t, (t, r) => {
+  fileImporter && (resetImportErrorTracker(), fileImporter.extractFilesFromDropEvent(t, (t, r) => {
     getFeatureFlags().internal_only_debug_tools && t.endsWith(".repo") ? $$T3(e, t, r) : e.dispatch(z({
       name: t,
       blob: r
@@ -33,7 +33,7 @@ export function $$b0() {
   return useMemo(() => "recentsAndSharing" === a ? resourceUtils.loaded(!0) : "folder" === a ? !e || hasFolderRestrictions(e, l) ? resourceUtils.loaded(!1) : r.transform(e => !!e && $$I4(e)) : resourceUtils.loaded(!1), [r, l, e, a]);
 }
 export function $$T3(e, t, r) {
-  e.dispatch(GR());
+  e.dispatch(showImportFigmaDesignRepo());
   extractBranchFiles(r).then(n => {
     n ? dispatchBranchFiles(e, n) : t = e.dispatch(z({
       name: t,
@@ -42,7 +42,7 @@ export function $$T3(e, t, r) {
   });
 }
 export function $$I4(e) {
-  return Mk.some(t => canCreateFileType(e, t));
+  return SUPPORTED_FILE_TYPES.some(t => canCreateFileType(e, t));
 }
 export const B2 = $$b0;
 export const al = $$y1;

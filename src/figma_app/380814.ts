@@ -22,7 +22,7 @@ import { logError } from "../905/714362";
 import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { Oe } from "../figma_app/933328";
+import { loadSharedVariableThunk } from "../figma_app/933328";
 import { BQ, yp, rW } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { getLocalVariableInfo } from "../figma_app/633080";
@@ -164,7 +164,7 @@ export function $$q5(e, t, r) {
   let n = useDispatch();
   return useCallback(async i => {
     if (i) {
-      let e = await n(Oe(i));
+      let e = await n(loadSharedVariableThunk(i));
       r(y$(t, e));
     } else e.type === VariableDataType.ALIAS && r(resolveVariableValue(t));
   }, [n, e, t, r]);

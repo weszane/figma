@@ -13,7 +13,7 @@ import h from "../vendor/656470";
 import g from "../vendor/990460";
 import { logError } from "../905/714362";
 import { isValidLibraryKey, useValidLibraryKey } from "../figma_app/630951";
-import { iw, cM, kX, C$, q0 } from "../905/261982";
+import { sortVariableCollections, mapVariablePropertiesFromResource, mapAndSortVariableSets, mapVariableSetsFromLibrary, mapVariablesFromLibraryCollections } from "../905/261982";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getLibraryNames } from "../905/506188";
 import { useSubscribedLibraries } from "../figma_app/155728";
@@ -61,7 +61,7 @@ export function $$U40() {
   var e;
   e = eE(useAtomWithSubscription(TD));
   let t = useMemo(() => Ot() ? e : e.filter(e => !isExtension(e)), [e]);
-  return iw(t);
+  return sortVariableCollections(t);
 }
 export function $$B9() {
   return eE(useAtomWithSubscription(uk));
@@ -170,7 +170,7 @@ export function $$ei1() {
   let r = useAtomWithSubscription(t);
   return useMemo(() => {
     let e = r && resourceUtils.from(r);
-    return cM({
+    return mapVariablePropertiesFromResource({
       type: "team",
       value: e
     }, !0);
@@ -204,7 +204,7 @@ export function $$es21(e) {
       type: "community",
       value: s
     };
-    return resourceUtils.loaded(cM(t, !1));
+    return resourceUtils.loaded(mapVariablePropertiesFromResource(t, !1));
   }, [l, a, s]);
 }
 export function $$eo17() {
@@ -213,7 +213,7 @@ export function $$eo17() {
   let r = useAtomWithSubscription(t);
   return useMemo(() => {
     let e = r && resourceUtils.from(r);
-    return kX({
+    return mapAndSortVariableSets({
       type: "team",
       value: e
     }, !0);
@@ -238,7 +238,7 @@ export function $$el36(e) {
       type: "community",
       value: s
     };
-    return resourceUtils.loaded(kX(t, !1));
+    return resourceUtils.loaded(mapAndSortVariableSets(t, !1));
   }, [l, a, s]);
 }
 export function $$ed20(e = {}) {
@@ -261,7 +261,7 @@ let ec = _$$n((e = {}) => {
   return useMemoShallow(() => {
     let e = resourceUtils.all(Object.values(s));
     return "loaded" !== e.status ? e : resourceUtils.loaded({
-      items: m()(Object.values(s).map(e => kX({
+      items: m()(Object.values(s).map(e => mapAndSortVariableSets({
         type: "team",
         value: e
       }, !1)))
@@ -277,7 +277,7 @@ let eu = _$$n((e = {}) => {
   return useMemoShallow(() => {
     let e = resourceUtils.all(Object.values(s));
     return "loaded" !== e.status ? e : resourceUtils.loaded({
-      items: Object.values(s).flatMap(e => C$(e, !1))
+      items: Object.values(s).flatMap(e => mapVariableSetsFromLibrary(e, !1))
     });
   }, [s]);
 });
@@ -341,17 +341,17 @@ let em = _$$n(e => {
       libraryVariableSets: [],
       libraryVariables: []
     })) : resourceUtils.loaded({
-      libraryVariableSets: [...m()(Object.values(o).map(e => kX({
+      libraryVariableSets: [...m()(Object.values(o).map(e => mapAndSortVariableSets({
         type: "team",
         value: e
-      }, !1))), ...m()(Object.values(d).map(e => kX({
+      }, !1))), ...m()(Object.values(d).map(e => mapAndSortVariableSets({
         type: "community",
         value: e
       }, !1)))],
-      libraryVariables: [...m()(Object.values(o).map(e => cM({
+      libraryVariables: [...m()(Object.values(o).map(e => mapVariablePropertiesFromResource({
         type: "team",
         value: e
-      }, !1))), ...m()(Object.values(d).map(e => cM({
+      }, !1))), ...m()(Object.values(d).map(e => mapVariablePropertiesFromResource({
         type: "community",
         value: e
       }, !1)))]
@@ -370,8 +370,8 @@ let eg = _$$n(e => {
       libraryVariableSets: [],
       libraryVariables: []
     })) : resourceUtils.loaded({
-      libraryVariableSets: Object.values(s).flatMap(e => C$(e, !1)),
-      libraryVariables: Object.values(s).flatMap(e => q0(e, !1))
+      libraryVariableSets: Object.values(s).flatMap(e => mapVariableSetsFromLibrary(e, !1)),
+      libraryVariables: Object.values(s).flatMap(e => mapVariablesFromLibraryCollections(e, !1))
     });
   }, [s]);
 });

@@ -92,7 +92,7 @@ import { noop } from 'lodash-es';
 import { styleBuilderInstance } from '../905/941192';
 import { b as _$$b2 } from '../905/946806';
 import { A as _$$A4 } from '../905/956262';
-import { h1 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { F4, v$ } from '../1881/125927';
 import { A as _$$A3 } from '../3850/566892';
 import { b as _$$b3 } from '../4452/320061';
@@ -380,7 +380,7 @@ function to({
           }
         }));
       },
-      children: jsx(h1, {
+      children: jsx(RelativeTimeDisplay, {
         capitalize: !0,
         date: t
       })
@@ -392,7 +392,7 @@ function td({
 }) {
   if (!e9(e)) return jsx(te, {});
   let t = tt(e.orgUser);
-  return t ? jsx(h1, {
+  return t ? jsx(RelativeTimeDisplay, {
     capitalize: !0,
     date: t
   }) : jsx(te, {});

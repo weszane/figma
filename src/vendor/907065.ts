@@ -10,4 +10,5 @@ function d(e, r, n) {
   void 0 !== n && (p = o(n), p = n < 0 ? a(d + p, 0) : h(p, d - 1));
   return i(e, s(r, 3), p, !0);
 }
+// findLastIndex lodash
 module.exports = d;

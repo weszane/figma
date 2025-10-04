@@ -6,7 +6,7 @@ import { combineReducers } from "../vendor/156872";
 import { createOptimistThunk } from "../905/350402";
 import { ts } from "../figma_app/49598";
 import { W9, b6 } from "../figma_app/559491";
-import { PI } from "../figma_app/933328";
+import { ADD_ASSET_TO_RECENTS } from "../figma_app/933328";
 import { loadingStatePutLoading, loadingStatePutSuccess } from "../figma_app/714946";
 import { D as _$$D } from "../905/775228";
 import { setRecentTemplatesAction, addWidgetsToRecentsAction, setRecentWidgetsAction, removeRecentlyUsedWidgetAction, syncRecentWidgetsAction, addFetchedWidgetVersionAction, addPluginToRecentsAction, setRecentPluginsAction, removeRecentlyUsedPluginAction, syncRecentPluginsAction, addFetchedPluginVersionAction, addTemplateToRecentsWithUserIdThunk, addFaceStampToRecentsAction, setRecentFaceStampsAction, addWhiteboardToolToRecentsAction, setRecentWhiteboardToolsAction } from "../figma_app/147952";
@@ -216,7 +216,7 @@ let $$z1 = {
 };
 let $$H0 = combineReducers({
   libraryItems: function (e = D, t) {
-    if (PI.matches(t)) {
+    if (ADD_ASSET_TO_RECENTS.matches(t)) {
       if (!t.payload.storeInRecentsKey) return e;
       let i = getAssetKeyVersion(t.payload.item);
       if (!i.key) return e;

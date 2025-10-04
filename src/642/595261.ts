@@ -3,7 +3,7 @@ import { useMemo, useRef, useState, useCallback, forwardRef, useId } from "react
 import { useDispatch } from "react-redux";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
-import { Yi } from "../figma_app/933328";
+import { loadSharedVariable } from "../figma_app/933328";
 import { valueOrFallback, isInvalidValue } from "../905/216495";
 import { SG, u as _$$u } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
@@ -259,7 +259,7 @@ function I({
     clearVariableConsumption
   } = u3(a);
   let h = useCallback(e => {
-    e ? c(Yi({
+    e ? c(loadSharedVariable({
       item: e,
       callback: e => {
         updateVariableConsumption(y$(VariableResolvedDataType.FLOAT, e));

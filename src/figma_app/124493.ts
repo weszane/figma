@@ -4,7 +4,7 @@ import { handleOptimistTransaction } from "../905/842794";
 import { getResourceDataOrFallback } from "../905/663269";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { sendWithRetry } from "../905/910117";
 import { handlePromiseError } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -123,7 +123,7 @@ let $$N1 = createOptimistThunk((e, {
   handleOptimistTransaction(n, e.dispatch, L({
     votingSessionId: t
   }));
-  WB().optimisticallyDelete({
+  getCurrentLiveGraphClient().optimisticallyDelete({
     VotingSession: {
       [t]: null
     }

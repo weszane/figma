@@ -26,9 +26,9 @@ import { UpsellModalType } from "../905/165519";
 import { FeatureFlag, PageFolderFile } from "../905/652992";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { fileActionEnum } from "../figma_app/630077";
-import { F as _$$F3 } from "../905/915030";
+import { ComFileType } from "../905/915030";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
-import { W } from "../905/442612";
+import { isBakeStarterPaywallEnabledWithoutLimit } from "../905/442612";
 import { i as _$$i2 } from "../figma_app/43065";
 import { M as _$$M } from "../figma_app/854365";
 var s = a;
@@ -49,7 +49,7 @@ export let $$F1 = createOptimistThunk(async (e, t) => {
         data: {
           team: s
         }
-      })) : o.has(FFileType.FIGMAKE) && W() ? e.dispatch(showModalHandler({
+      })) : o.has(FFileType.FIGMAKE) && isBakeStarterPaywallEnabledWithoutLimit() ? e.dispatch(showModalHandler({
         type: _$$i2,
         data: {
           team: s
@@ -135,8 +135,8 @@ let $$U3 = createOptimistThunk(async (e, t) => {
   let o = r.user?.drafts_folder_id;
   let c = [s];
   a && (c.push(...extractValuesByKey(r.orgUsersByOrgId, a).map(e => e.drafts_folder_id)), c.push(..._$$_(r.teamUserByTeamId, a).map(e => e.drafts_folder_id || void 0)));
-  let h = Object.keys(r.tileSelect && r.tileSelect[_$$F3.FILES] || {}).concat(Object.keys(r.tileSelect && r.tileSelect[_$$F3.PINNED_FILES] || {}));
-  let g = Object.keys(r.tileSelect && r.tileSelect[_$$F3.REPOS] || {});
+  let h = Object.keys(r.tileSelect && r.tileSelect[ComFileType.FILES] || {}).concat(Object.keys(r.tileSelect && r.tileSelect[ComFileType.PINNED_FILES] || {}));
+  let g = Object.keys(r.tileSelect && r.tileSelect[ComFileType.REPOS] || {});
   (await Promise.all(g.map(e => liveStoreInstance.fetchRepo(e)))).forEach(e => {
     let t = e.default_file_key;
     t && h.push(t);
@@ -160,7 +160,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
       data: {
         team: t
       }
-    })) : editorTypes.has(FFileType.FIGMAKE) && W() ? e.dispatch(showModalHandler({
+    })) : editorTypes.has(FFileType.FIGMAKE) && isBakeStarterPaywallEnabledWithoutLimit() ? e.dispatch(showModalHandler({
       type: _$$i2,
       data: {
         team: t

@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { bL, c$ } from "../905/867927";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { H } from "../905/740869";
 import { m } from "../905/822676";
 import { getI18nString } from "../905/303541";
@@ -30,7 +30,7 @@ export function $$u0(e) {
   return jsxs(bL, {
     value: e.disabled && !e.showValueinDisabledStrokeJoin || isInvalidValue(e.value) ? void 0 : e.value,
     onChange: e.onChange,
-    legend: jsx(q, {
+    legend: jsx(Legend, {
       children: getI18nString("fullscreen.properties_panel.stroke_settings.join")
     }),
     readonly: e.disabled,

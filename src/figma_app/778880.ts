@@ -126,19 +126,19 @@ export function getIsIOS(): boolean {
  * Checks if the device is Android or iOS.
  * Original: $$T2
  */
-const isMobilePlatform: boolean = isAndroidUA || isIOSUA
+export const isMobilePlatform: boolean = isAndroidUA || isIOSUA
 
 /**
  * Checks if the device is mobile platform and not FigmaMobile.
  * Original: $$I25
  */
-const isMobilePlatformNotFigmaMobile: boolean = isMobilePlatform && !isFigmaMobileApp()
+export const isMobilePlatformNotFigmaMobile: boolean = isMobilePlatform && !isFigmaMobileApp()
 
 /**
  * Checks if the device is Android or iPhone/iPod and not FigmaMobile.
  * Original: $$S21
  */
-const isAndroidOrIphoneNotFigmaMobile: boolean
+export const isAndroidOrIphoneNotFigmaMobile: boolean
   = (isAndroidUA || isIphoneOrIpodUA) && !isFigmaMobileApp()
 
 /**

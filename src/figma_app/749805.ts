@@ -8,7 +8,7 @@ import { sendWithRetry } from "../905/910117";
 import { U2 } from "../figma_app/545293";
 import { hideSpecificModal, showModalHandler } from "../905/156213";
 import { clearAnalytics } from "../figma_app/314264";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { idleLogout } from "../figma_app/415217";
 import { N as _$$N } from "../905/517193";
 import { xn, eN } from "../905/498952";
@@ -37,7 +37,7 @@ function A(e, t, r, i, l, A) {
   D(r);
   let k = () => {
     document.hasFocus() && sendWithRetry.post(`/api/user/${e.id}/idle_timeout_last_active_at`, {
-      is_embed: C.toString() && !z4.getIsExtension()
+      is_embed: C.toString() && !fullscreenAlias.getIsExtension()
     }).then(e => {
       let t = e.data.meta.idle_timeout_last_active_at;
       t && D(t);
@@ -47,14 +47,14 @@ function A(e, t, r, i, l, A) {
   };
   let M = () => !!A && A.getState().modalShown?.type === xn;
   let F = () => {
-    if (A && A?.getState().authedUsers.orderedIds.length === 1 && (clearAnalytics(), U2.clear()), w) customHistory.reload("idleSessionTimeout-embed"); else if (O) {
+    if (A && A?.getState().authedUsers.orderedIds.length === 1 && (clearAnalytics(), U2.clear()), w) customHistory.reload("idleSessionTimeout-embed");else if (O) {
       let {
         pathname,
         search
       } = customHistory.location;
       let r = `${pathname}${search}&integration_host=msft`;
       window.location.replace(r);
-    } else z4.getIsExtension() && getFeatureFlags().dt_dev_mode_vscode_idle_timeout ? idleLogout() : customHistory.redirect(`/idle_timeout?fuid=${e.id}&redirect_uri=${encodeURIComponent(window.location.href)}`);
+    } else fullscreenAlias.getIsExtension() && getFeatureFlags().dt_dev_mode_vscode_idle_timeout ? idleLogout() : customHistory.redirect(`/idle_timeout?fuid=${e.id}&redirect_uri=${encodeURIComponent(window.location.href)}`);
   };
   let j = () => Math.floor(Date.now() / 1e3);
   S && v.forEach(e => {

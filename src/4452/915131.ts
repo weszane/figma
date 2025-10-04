@@ -5,7 +5,7 @@ import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { Textarea } from "../905/909590";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { Ay } from "../905/865071";
+import { LabelPrimitive } from "../905/865071";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { isValidEmail } from "../figma_app/416935";
@@ -288,11 +288,11 @@ export let $$K0 = registerModal(function (e) {
       children: jsxs("div", {
         className: cssBuilderInstance.m16.$,
         children: [0 === er ? jsxs(Fragment, {
-          children: [jsx(Ay, {
+          children: [jsx(LabelPrimitive, {
             className: W,
             htmlFor: eO,
             children: getI18nString("team_creation.name")
-          }), eL, jsx(Ay, {
+          }), eL, jsx(LabelPrimitive, {
             className: W,
             htmlFor: eC,
             children: getI18nString("team_creation.team_description")

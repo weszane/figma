@@ -22,8 +22,8 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findMatchingValue } from "../905/807535";
-import { b as _$$b, c as _$$c } from "../905/308099";
-import { s as _$$s } from "../905/932270";
+import { RadioInputRoot, RadioInputOption } from "../905/308099";
+import { HiddenLegend } from "../905/932270";
 import { Label } from "../905/270045";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import N from "../vendor/73823";
@@ -228,23 +228,23 @@ let $ = registerModal(function (e) {
     children: [jsx("div", {
       className: "branch_force_merge_modal--conflictChoiceRadioGroupHeader--Zhm5w",
       children: renderI18nText("collaboration.branching_force.merge_from_source_description")
-    }), jsxs(_$$b, {
+    }), jsxs(RadioInputRoot, {
       value: a,
       onChange: e => l(findMatchingValue(BranchType, e) ?? BranchType.MAIN),
-      legend: jsx(_$$s, {
+      legend: jsx(HiddenLegend, {
         children: jsx("span", {
           className: "branch_force_merge_modal--conflictChoiceRadioLegend--onrEN",
           children: renderI18nText("collaboration.branching_force.merge_from_source_merge_conflict_label")
         })
       }),
-      children: [jsx(_$$c, {
+      children: [jsx(RadioInputOption, {
         value: BranchType.MAIN,
         label: jsx(Label, {
           children: jsx(q, {
             value: BranchType.MAIN
           })
         })
-      }), jsx(_$$c, {
+      }), jsx(RadioInputOption, {
         value: BranchType.BRANCH,
         label: jsx(Label, {
           children: jsx(q, {

@@ -25,7 +25,7 @@ import { setEditorDocumentTitle } from "../905/697795";
 import { hx } from "../figma_app/290668";
 import { selectCurrentFile, selectOpenFile, useCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { o3 as _$$o, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
 import { l as _$$l, O as _$$O } from "../figma_app/471586";
@@ -205,7 +205,7 @@ export function $$q4({
       if (e && e.folderId && n) return getProjectUrl(e.folderId, e.parentOrgId, e.teamId, t, !!e.project?.team?.canView, "toolbar_workspace_button.useProjectUrl", r);
     }, [e, t, r]);
   }();
-  let l = _$$o(nt.interopFiles);
+  let l = useLabConfiguration(labConfigurations.interopFiles);
   let p = Xr(V1);
   let _ = e?.project?.activeProjectResourceConnections?.[0];
   let h = useCurrentFile();

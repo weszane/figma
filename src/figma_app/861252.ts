@@ -35,7 +35,7 @@ import { Yk } from "../figma_app/644079";
 import { getVisibleTheme } from "../905/640017";
 import { getSelectedFile } from "../905/766303";
 import { isHelpWidgetHidden } from "../figma_app/740163";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { getSelectedView } from "../figma_app/386952";
 import { getObservableValue } from "../figma_app/84367";
 import { hasOrgUsersForUser } from "../figma_app/951233";
@@ -207,7 +207,7 @@ let $$eh0 = memo(function () {
   let R = "dark" === getVisibleTheme();
   let L = getSelectedView();
   let F = useIsFigmakeFullscreenPreview(L);
-  let j = !!g?.shouldOptimizeForIpadApp || z4.getIsExtension() && isDevHandoff || F || w;
+  let j = !!g?.shouldOptimizeForIpadApp || fullscreenAlias.getIsExtension() && isDevHandoff || F || w;
   let U = $$eg1();
   let H = useAtomWithSubscription(consentCounterAtom);
   let W = getObservableValue(AppStateTsApi?.uiState().inProductHelpSidePanelWidth, 0);

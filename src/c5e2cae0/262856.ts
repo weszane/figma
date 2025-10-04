@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import l from "classnames";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { BigTextInputForwardRef, ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
@@ -35,7 +35,7 @@ let j = memo(function (e) {
     a.preventDefault();
     await withLoading(async () => {
       if (e.updateNameImmediately && e.team) try {
-        e.canSeeBillingAddressExp ? await WB().optimisticallyUpdate({
+        e.canSeeBillingAddressExp ? await getCurrentLiveGraphClient().optimisticallyUpdate({
           Plan: {
             [`team::${e.team.id}`]: {
               name: f
@@ -44,7 +44,7 @@ let j = memo(function (e) {
         }, teamAPIClient.updateDisplayName({
           teamId: e.team.id,
           updatedDisplayName: f
-        })) : await WB().optimisticallyUpdate({
+        })) : await getCurrentLiveGraphClient().optimisticallyUpdate({
           Plan: {
             [`team::${e.team.id}`]: {
               name: f

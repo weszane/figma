@@ -9,13 +9,13 @@ import { sQ } from "../905/191741";
 import { j6 } from "../figma_app/243025";
 import { useCodegenPreferencesSettings, getLanguageUnitLabel, isCodegenSupportedForLanguage, getCodeExtensionPreferences, useUpdateCodeExtensionPreferences } from "../figma_app/120227";
 import { showModalHandler } from "../905/156213";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { Q } from "../figma_app/152461";
 import { v as _$$v } from "../905/50227";
 export function $$f0(e) {
   let t = useCodegenPreferencesSettings();
   let r = sQ();
-  let f = z4.getIsExtension();
+  let f = fullscreenAlias.getIsExtension();
   let E = function (e) {
     let t = v4();
     let r = e ?? t;

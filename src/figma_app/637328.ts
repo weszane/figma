@@ -1,8 +1,8 @@
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { sendWithRetry } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 export function $$s1(e, t, r, i, a) {
-  e.id && "optimistic-id" !== e.id ? WB()?.optimisticallyUpdate({
+  e.id && "optimistic-id" !== e.id ? getCurrentLiveGraphClient()?.optimisticallyUpdate({
     FileBrowserPreferences: {
       [e.id]: {
         orderedTeamIds: e.orderedTeamIds,
@@ -13,7 +13,7 @@ export function $$s1(e, t, r, i, a) {
         orderedLicenseGroupIds: e.orderedLicenseGroupIds
       }
     }
-  }, a) : null != t && WB()?.optimisticallyCreate({
+  }, a) : null != t && getCurrentLiveGraphClient()?.optimisticallyCreate({
     FileBrowserPreferences: {
       "optimistic-id": {
         userId: t,

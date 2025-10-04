@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { bL, c$ } from "../905/867927";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { A as _$$A } from "../figma_app/121266";
 import { v as _$$v } from "../905/439487";
 import { o as _$$o } from "../905/89370";
@@ -608,7 +608,7 @@ export class $$eo3 extends PureComponent {
       onChange: this.props.onChange,
       recordingKey: this.props.recordingKey,
       value: isValidValue(this.props.property) ? this.props.property ?? "LEFT" : void 0,
-      legend: jsx(q, {
+      legend: jsx(Legend, {
         children: getI18nString("proto.animation_panel.transition_direction")
       }),
       children: [jsx(c$, {

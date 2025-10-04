@@ -1,13 +1,15 @@
-import type { ResourceView } from '../figma_app/43951';
-import { serializeJSON } from '../905/251556';
-import { deepEqual } from '../905/382883';
-import { observableState } from '../905/441145';
-import { RetainedPromiseManager } from '../905/491061';
-import { getFeatureFlags } from '../905/601108';
-import { noop } from 'lodash-es';;
-import { createLoadingState } from '../905/957591';
-import { resourceUtils } from '../905/989992';
-import { atom, atomStoreManager, atomWithDefault, createRemovableAtomFamily, setupAtomWithMount } from '../figma_app/27355';
+import type { Atom } from 'jotai'
+import type { AtomFamily } from 'jotai/vanilla/utils/atomFamily'
+import type { ResourceView } from '../figma_app/43951'
+import { noop } from 'lodash-es'
+import { serializeJSON } from '../905/251556'
+import { deepEqual } from '../905/382883'
+import { observableState } from '../905/441145'
+import { RetainedPromiseManager } from '../905/491061'
+import { getFeatureFlags } from '../905/601108'
+import { createLoadingState } from '../905/957591'
+import { resourceUtils } from '../905/989992'
+import { atom, atomStoreManager, atomWithDefault, createRemovableAtomFamily, setupAtomWithMount } from '../figma_app/27355'
 
 /**
  * Type for cache values stored in ExpiringCache (class u)
@@ -20,17 +22,17 @@ import { atom, atomStoreManager, atomWithDefault, createRemovableAtomFamily, set
  * Type for cache values stored in ExpiringCache (class ExpiringCache)
  */
 interface ExpiringCacheEntry<T> {
-  value: T;
-  expiresAt: number;
+  value: T
+  expiresAt: number
 }
 
 /**
  * Scheduler interface for cache expiration (original: defaultCacheScheduler)
  */
 export interface CacheScheduler {
-  expireIn: (fn: () => void, ms: number) => any;
-  now: () => number;
-  clearExpireIn: (id: any) => void;
+  expireIn: (fn: () => void, ms: number) => any
+  now: () => number
+  clearExpireIn: (id: any) => void
 }
 
 /**
@@ -38,11 +40,11 @@ export interface CacheScheduler {
  * Stores key-value pairs with expiration logic.
  */
 export class ExpiringCache<T = any> {
-  private cacheScheduler: CacheScheduler;
-  private cacheTTL: number;
-  private values: Map<string, ExpiringCacheEntry<T>>;
-  private nextCheckAt: number | null;
-  private pendingCleanUp: any | null;
+  private cacheScheduler: CacheScheduler
+  private cacheTTL: number
+  private values: Map<string, ExpiringCacheEntry<T>>
+  private nextCheckAt: number | null
+  private pendingCleanUp: any | null
 
   /**
    * Create a new ExpiringCache.
@@ -50,11 +52,11 @@ export class ExpiringCache<T = any> {
    * @param cacheTTL Default time-to-live in ms.
    */
   constructor(cacheScheduler: CacheScheduler, cacheTTL: number = 5000) {
-    this.cacheScheduler = cacheScheduler;
-    this.cacheTTL = cacheTTL;
-    this.values = new Map();
-    this.nextCheckAt = null;
-    this.pendingCleanUp = null;
+    this.cacheScheduler = cacheScheduler
+    this.cacheTTL = cacheTTL
+    this.values = new Map()
+    this.nextCheckAt = null
+    this.pendingCleanUp = null
   }
 
   /**
@@ -62,25 +64,25 @@ export class ExpiringCache<T = any> {
    * @param key Cache key
    */
   get(key: string): T | undefined {
-    return this.values.get(key)?.value;
+    return this.values.get(key)?.value
   }
 
   /**
    * Clean up expired entries (original: cleanUp)
    */
   cleanUp(): void {
-    this.pendingCleanUp = null;
-    let earliestExpiry: number | null = null;
-    const now = this.cacheScheduler.now();
+    this.pendingCleanUp = null
+    let earliestExpiry: number | null = null
+    const now = this.cacheScheduler.now()
     for (const [key, entry] of this.values) {
       if (entry.expiresAt > now) {
-        earliestExpiry = earliestExpiry === null || earliestExpiry > entry.expiresAt ? entry.expiresAt : earliestExpiry;
-        continue;
+        earliestExpiry = earliestExpiry === null || earliestExpiry > entry.expiresAt ? entry.expiresAt : earliestExpiry
+        continue
       }
-      this.values.delete(key);
+      this.values.delete(key)
     }
     if (earliestExpiry !== null) {
-      this.pendingCleanUp = this.cacheScheduler.expireIn(() => this.cleanUp(), Math.max(earliestExpiry - this.cacheScheduler.now(), 0));
+      this.pendingCleanUp = this.cacheScheduler.expireIn(() => this.cleanUp(), Math.max(earliestExpiry - this.cacheScheduler.now(), 0))
     }
   }
 
@@ -91,15 +93,16 @@ export class ExpiringCache<T = any> {
    * @param ttl Time-to-live in ms
    */
   set(key: string, value: T, ttl: number = this.cacheTTL): void {
-    const expiresAt = this.cacheScheduler.now() + ttl;
+    const expiresAt = this.cacheScheduler.now() + ttl
     this.values.set(key, {
       value,
-      expiresAt
-    });
+      expiresAt,
+    })
     if (this.nextCheckAt === null || this.nextCheckAt > expiresAt) {
-      if (this.pendingCleanUp) this.cacheScheduler.clearExpireIn(this.pendingCleanUp);
-      this.nextCheckAt = expiresAt;
-      this.pendingCleanUp = this.cacheScheduler.expireIn(() => this.cleanUp(), ttl);
+      if (this.pendingCleanUp)
+        this.cacheScheduler.clearExpireIn(this.pendingCleanUp)
+      this.nextCheckAt = expiresAt
+      this.pendingCleanUp = this.cacheScheduler.expireIn(() => this.cleanUp(), ttl)
     }
   }
 
@@ -107,10 +110,11 @@ export class ExpiringCache<T = any> {
    * Clear all cache entries (original: clear)
    */
   clear(): void {
-    this.values = new Map();
-    if (this.pendingCleanUp) this.cacheScheduler.clearExpireIn(this.pendingCleanUp);
-    this.nextCheckAt = null;
-    this.pendingCleanUp = null;
+    this.values = new Map()
+    if (this.pendingCleanUp)
+      this.cacheScheduler.clearExpireIn(this.pendingCleanUp)
+    this.nextCheckAt = null
+    this.pendingCleanUp = null
   }
 }
 
@@ -120,31 +124,31 @@ export class ExpiringCache<T = any> {
 export const defaultCacheScheduler: CacheScheduler = {
   expireIn: (fn, ms) => setTimeout(fn, ms),
   now: Date.now,
-  clearExpireIn: id => clearTimeout(id)
-};
+  clearExpireIn: id => clearTimeout(id),
+}
 function sanitizeCacheData(data: any): any {
   if (typeof data !== 'object' || data === null || data instanceof Date) {
-    return data;
+    return data
   }
   if (Array.isArray(data) && 'hasNextPage' in data) {
-    const result: any = [];
+    const result: any = []
     for (const key in data) {
-      const value = typeof data[key] === 'function' ? noop : data[key];
-      result[key] = value;
+      const value = typeof data[key] === 'function' ? noop : data[key]
+      result[key] = value
     }
-    return result;
+    return result
   }
-  const result = Array.isArray(data) ? [] : {};
-  let isUnchanged = true;
+  const result = Array.isArray(data) ? [] : {}
+  let isUnchanged = true
   for (const key in data) {
-    const originalValue = data[key];
-    const sanitizedValue = sanitizeCacheData(originalValue);
-    result[key] = sanitizedValue;
+    const originalValue = data[key]
+    const sanitizedValue = sanitizeCacheData(originalValue)
+    result[key] = sanitizedValue
     if (originalValue !== sanitizedValue) {
-      isUnchanged = false;
+      isUnchanged = false
     }
   }
-  return isUnchanged ? data : result;
+  return isUnchanged ? data : result
 }
 
 /**
@@ -159,15 +163,25 @@ function createSubscriptionPromise(store: any, atom: any, key: any): Promise<voi
   return new Promise((resolve, reject) => {
     const subscription = store.subscribe(atom, key, (update: any) => {
       if (update.status === 'loaded') {
-        resolve();
-        setTimeout(() => subscription?.(), 0);
-      } else if (update.errors) {
-        reject(update.errors);
-        setTimeout(() => subscription?.(), 0);
+        resolve()
+        setTimeout(() => subscription?.(), 0)
       }
-    });
-  });
+      else if (update.errors) {
+        reject(update.errors)
+        setTimeout(() => subscription?.(), 0)
+      }
+    })
+  })
 }
+
+/**
+ * Type definition for suspendable resources
+ */
+export type SuspendableResource
+  = | ReturnType<typeof resourceUtils.disabledSuspendable>
+    | ReturnType<typeof resourceUtils.loadingSuspendable>
+    | ReturnType<typeof resourceUtils.errorSuspendable>
+    | ReturnType<typeof resourceUtils.loadedSuspendable>
 
 /**
  * Main function to create an atom family with caching and subscription logic.
@@ -195,81 +209,82 @@ export function createAtomFamilyAlias(getStore: () => any, cacheTTL: number, cac
      * Atom family for resource keys.
      * Refactored from: atomFamily
      */
-    const atomFamily = createRemovableAtomFamily((key: any) => {
+    const atomFamily = createRemovableAtomFamily<any, Atom<SuspendableResource>>((key: any) => {
       // Suspense handler for promise management (original: suspenseHandler)
-      const suspenseHandler = new RetainedPromiseManager(() => atomStoreManager.sub(atomFamily, () => {}));
+      const suspenseHandler = new RetainedPromiseManager(() => atomStoreManager.sub(atomFamily as any, () => { }))
       // Handle null key case
       if (key === null) {
-        return atom(resourceUtils.disabledSuspendable(suspenseHandler));
+        return atom(resourceUtils.disabledSuspendable(suspenseHandler))
       }
 
       // Serialize key for cache
-      const serializedKey = serializeJSON(key);
-      const cacheKey = `${storeFactory._name}:${serializedKey}`;
-      let lastUpdate: any = null;
+      const serializedKey = serializeJSON(key)
+      const cacheKey = `${storeFactory._name}:${serializedKey}`
+      let lastUpdate: any = null
 
       /**
        * Atom selector for resource state (original: atomSelector)
        */
       const atomSelector = setupAtomWithMount(atomWithDefault(() => cache.get(cacheKey) || createLoadingState()), ({
-        setSelf
+        setSelf,
       }) => {
         // Subscribe to store updates
         const subscription = getStore().subscribe(storeFactory, key, (update: any) => {
-          setSelf((prev: any) => prev.status !== 'loading' && update.status === 'loading' ? prev : (lastUpdate = update, update));
-        });
+          setSelf((prev: any) => prev.status !== 'loading' && update.status === 'loading' ? prev : (lastUpdate = update, update))
+        })
 
         // Cleanup logic on unmount
         return () => {
-          atomFamily.setShouldRemove((_: any, k: any) => k === key);
-          atomFamily.setShouldRemove(null);
+          atomFamily.setShouldRemove((_: any, k: any) => k === key)
+          atomFamily.setShouldRemove(null)
           if (lastUpdate) {
             if (getFeatureFlags().livestore_sanitize_cache) {
               cache.set(cacheKey, {
                 ...lastUpdate,
-                data: sanitizeCacheData(lastUpdate.data)
-              });
-            } else {
-              cache.set(cacheKey, lastUpdate);
+                data: sanitizeCacheData(lastUpdate.data),
+              })
+            }
+            else {
+              cache.set(cacheKey, lastUpdate)
             }
           }
-          subscription();
-        };
-      });
+          subscription()
+        }
+      })
 
       /**
        * Atom for suspendable resource (original: suspendableAtom)
        */
-      const suspendableAtom = atom((get: any) => resourceUtils.suspendableFrom(get(atomSelector), () => createSubscriptionPromise(getStore(), storeFactory, key), suspenseHandler));
-      suspendableAtom.debugLabel = performance.now().toString();
-      return suspendableAtom;
-    }, deepEqual);
+      const suspendableAtom = atom<SuspendableResource>(get => resourceUtils.suspendableFrom(get(atomSelector), () => createSubscriptionPromise(getStore(), storeFactory, key), suspenseHandler))
+      suspendableAtom.debugLabel = performance.now().toString()
+      return suspendableAtom
+    }, deepEqual) as AtomFamily<any, Atom<SuspendableResource>>
 
     /**
      * Expose atom family and getter (original: Object.assign)
      */
-    const getResource = (key: any) => atomFamily(key);
+    const getResource = (key: any) => atomFamily(key)
     Object.assign(getResource, {
-      _atomFamily: atomFamily
-    });
-    return getResource;
+      _atomFamily: atomFamily,
+    })
+    return getResource
   }
-  return atomFamilyFactory;
+  return atomFamilyFactory
 }
-export const createAtomFamily = createAtomFamilyAlias(() => observableState.get(), 300000);
+export const createAtomFamily = createAtomFamilyAlias(() => observableState.get(), 300000)
 
 /**
  * Atom family for resource state (original: resourceAtomFamily)
  */
-export const resourceAtomFamily = createRemovableAtomFamily((resourceKey: any) => atom(() => createAtomFamily(resourceKey)));
+export const resourceAtomFamily = createRemovableAtomFamily((resourceKey: any) => atom(() => createAtomFamily(resourceKey)))
 
 /**
  * Get atom store for resource (original: getResourceAtomStore)
  * @param key Resource key
  */
-export function getResourceAtomStore<T = any>(key: any): T {
-  const atomInstance = resourceAtomFamily(key);
-  return atomStoreManager.get(atomInstance) as T;
+export function getResourceAtomStore(key: any) {
+  const atomInstance = resourceAtomFamily(key)
+  return atomStoreManager.get(atomInstance)
 }
 
 /**
@@ -277,28 +292,30 @@ export function getResourceAtomStore<T = any>(key: any): T {
  * @param data Resource data
  */
 export function sanitizeResourceData(data: any): any {
-  if (typeof data !== 'object' || data === null || data instanceof Date) return data;
+  if (typeof data !== 'object' || data === null || data instanceof Date)
+    return data
   if (Array.isArray(data) && 'hasNextPage' in data) {
-    const sanitized: any[] = [];
+    const sanitized: any[] = []
     for (const i in data) {
-      const value = typeof data[i] === 'function' ? noop : data[i];
+      const value = typeof data[i] === 'function' ? noop : data[i]
       Object.assign(sanitized, {
-        [i]: value
-      });
+        [i]: value,
+      })
     }
-    return sanitized;
+    return sanitized
   }
-  const result: any = Array.isArray(data) ? [] : {};
-  let unchanged = true;
+  const result: any = Array.isArray(data) ? [] : {}
+  let unchanged = true
   for (const key in data) {
-    const value = data[key];
-    const sanitizedValue = sanitizeResourceData(value);
-    result[key] = sanitizedValue;
-    if (value !== sanitizedValue) unchanged = false;
+    const value = data[key]
+    const sanitizedValue = sanitizeResourceData(value)
+    result[key] = sanitizedValue
+    if (value !== sanitizedValue)
+      unchanged = false
   }
-  return unchanged ? data : result;
+  return unchanged ? data : result
 }
 
 // Exported names refactored for clarity
-export const he = createAtomFamily;
-export const gc = getResourceAtomStore;
+export const he = createAtomFamily
+export const gc = getResourceAtomStore

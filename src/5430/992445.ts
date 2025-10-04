@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { r } from "../905/620668";
+import { getLastUsedEditorType } from "../905/620668";
 import { FFileType, FProductAccessType } from "../figma_app/191312";
 import { convertEditorTypeToFileType } from "../figma_app/300692";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { isDevOrInspect, ManifestEditorType } from "../figma_app/155287";
-let u = r();
+let u = getLastUsedEditorType();
 export function $$m0(e, t, r, s) {
   if (!getFeatureFlags().ext_fix_try_editor_types) return function (e, t, r) {
     let s = e.manifest.editorType;

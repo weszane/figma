@@ -45,7 +45,7 @@ import { selectViewAction } from "../905/929976";
 import { Link } from "../905/438674";
 import { _ as _$$_ } from "../7021/243271";
 import { dayjs } from "../905/920142";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { SvgComponent } from "../905/714743";
 import { TeamAvatar, AvatarSize } from "../905/590952";
 import { Lg, Lq } from "../figma_app/392626";
@@ -265,7 +265,7 @@ function ey(e) {
         className: cssBuilderInstance.colorTextSecondary.$,
         children: renderI18nText("resource_connection.last_activity")
       }), jsx("div", {
-        children: jsx(h1, {
+        children: jsx(RelativeTimeDisplay, {
           date: projectLastModifiedAt
         })
       })]

@@ -184,8 +184,8 @@ export const loadSharedSymbolOrStateGroup = createOptimistThunk((store, payload)
 // Export refactored names for imports/exports
 // export const jD = upsertSharedSymbolOrStateGroup
 // export const uP = loadSharedSymbolOrStateGroup
-let SWAP_TO_SHARED_COMPONENT = createActionCreator('SWAP_TO_SHARED_COMPONENT_OR_STATE_GROUP')
-let swapToSharedComponent = createOptimistThunk((e, t) => {
+export let SWAP_TO_SHARED_COMPONENT = createActionCreator('SWAP_TO_SHARED_COMPONENT_OR_STATE_GROUP')
+export let swapToSharedComponent = createOptimistThunk((e, t) => {
   let {
     item,
     instanceGUIDs,
@@ -264,7 +264,7 @@ function showComponentInsertionBell(e) {
     }))
   }
 }
-let INSERT_SHARED_COMPONENT = createActionCreator('INSERT_SHARED_COMPONENT')
+export let INSERT_SHARED_COMPONENT = createActionCreator('INSERT_SHARED_COMPONENT')
 /**
  * Optimist thunk to insert a shared component into the canvas.
  * Handles both local and shared components, including upserting shared ones.
@@ -272,7 +272,7 @@ let INSERT_SHARED_COMPONENT = createActionCreator('INSERT_SHARED_COMPONENT')
  * @param store - The Redux store instance.
  * @param payload - Payload containing item and insertion options.
  */
-let insertSharedComponent = createOptimistThunk((store, payload) => {
+export let insertSharedComponent = createOptimistThunk((store, payload) => {
   // Dispatch the action immediately
   store.dispatch(INSERT_SHARED_COMPONENT(payload))
 
@@ -495,7 +495,7 @@ let INSERT_SHARED_STATE_GROUP = createActionCreator('INSERT_SHARED_STATE_GROUP')
  * @param store - The Redux store instance.
  * @param payload - Payload containing item and insertion options.
  */
-let insertSharedStateGroup = createOptimistThunk(async (store, payload) => {
+export let insertSharedStateGroup = createOptimistThunk(async (store, payload) => {
   let {
     item,
   } = payload
@@ -664,7 +664,7 @@ let insertSharedStateGroup = createOptimistThunk(async (store, payload) => {
   }))
   store.dispatch(INSERT_SHARED_STATE_GROUP(payload))
 })
-let insertSharedModule = createOptimistThunk(async (e, t) => {
+export let insertSharedModule = createOptimistThunk(async (e, t) => {
   let {
     item,
   } = t
@@ -743,7 +743,7 @@ let insertSharedModule = createOptimistThunk(async (e, t) => {
     }
   }
 })
-let insertMultipleSlideModules = createOptimistThunk(async (e, t) => {
+export let insertMultipleSlideModules = createOptimistThunk(async (e, t) => {
   let {
     modules,
     canvasPosition,
@@ -782,7 +782,7 @@ let insertMultipleSlideModules = createOptimistThunk(async (e, t) => {
     errorCallback ? errorCallback(e) : reportError(ServiceCategories.SLIDES, e)
   }
 })
-let insertResponsiveSet = createOptimistThunk(async (e, t) => {
+export let insertResponsiveSet = createOptimistThunk(async (e, t) => {
   let {
     item,
   } = t
@@ -851,7 +851,7 @@ function e1(e, t, r) {
  * @param store - The Redux store instance.
  * @param payload - Payload containing stateGroups, usedItemsByKey, instanceIdsToUpdate, updateStartTime, subscribedLibraryKeys, fileSubscribedLibraryKeys.
  */
-const updateSharedStateGroups = createOptimistThunk(async (store, payload) => {
+export const updateSharedStateGroups = createOptimistThunk(async (store, payload) => {
   const {
     stateGroups,
     usedItemsByKey,
@@ -908,7 +908,7 @@ const updateSharedStateGroups = createOptimistThunk(async (store, payload) => {
  * @param store - The Redux store instance.
  * @param payload - Payload containing components, usedItemsByKey, instanceIdsToUpdate, updateStartTime, subscribedLibraryKeys, fileSubscribedLibraryKeys.
  */
-const updateSharedComponents = createOptimistThunk(async (store, payload) => {
+export const updateSharedComponents = createOptimistThunk(async (store, payload) => {
   const {
     components,
     usedItemsByKey,
@@ -970,7 +970,7 @@ export function showMissingFontNotification(e) {
  * @param store - The Redux store instance.
  * @param payload - Payload containing style application options.
  */
-const applySharedStyle = createOptimistThunk((store, payload) => {
+export const applySharedStyle = createOptimistThunk((store, payload) => {
   const {
     style,
     inheritStyleKeyField,
@@ -1071,7 +1071,7 @@ const applySharedStyle = createOptimistThunk((store, payload) => {
  * @param store - The Redux store instance.
  * @param payload - Payload containing style, callback, bufferCallback, errorCallback, targetUpsertScene, omitFullscreenCommit.
  */
-const loadSharedStyle = createOptimistThunk((store, payload) => {
+export const loadSharedStyle = createOptimistThunk((store, payload) => {
   const state = store.getState()
   const {
     style,
@@ -1138,7 +1138,7 @@ const loadSharedStyle = createOptimistThunk((store, payload) => {
  * @param store - The Redux store instance.
  * @param payload - Payload containing styles, updateStartTime, subscribedLibraryKeys, fileSubscribedLibraryKeys.
  */
-const updateSharedStyle = createOptimistThunk(async (store, payload) => {
+export const updateSharedStyle = createOptimistThunk(async (store, payload) => {
   const {
     styles,
     updateStartTime,
@@ -1182,7 +1182,7 @@ const updateSharedStyle = createOptimistThunk(async (store, payload) => {
  * @param store - The Redux store instance.
  * @param payload - Payload containing styleUpdateInfo, oldStyleGUID, consumerGUIDsToUpdate.
  */
-const updateSelectedSharedStyleConsumers = createOptimistThunk((store, payload) => {
+export const updateSelectedSharedStyleConsumers = createOptimistThunk((store, payload) => {
   const updateStartTime = LibraryPubSub.getTimestampForLibraryUpdateStart()
   const {
     styleUpdateInfo,
@@ -1224,7 +1224,7 @@ const updateSelectedSharedStyleConsumers = createOptimistThunk((store, payload) 
  * @param store - The Redux store instance.
  * @param payload - Payload containing variableSets and updateStartTime.
  */
-const updateSharedVariantSet = createOptimistThunk(async (store, payload) => {
+export const updateSharedVariantSet = createOptimistThunk(async (store, payload) => {
   const {
     variableSets,
     updateStartTime,
@@ -1253,7 +1253,7 @@ const updateSharedVariantSet = createOptimistThunk(async (store, payload) => {
  * @param store - The Redux store instance.
  * @param payload - Payload containing assets and updateStartTime.
  */
-const updateSharedLibraryAsset = createOptimistThunk(async (store, payload) => {
+export const updateSharedLibraryAsset = createOptimistThunk(async (store, payload) => {
   const {
     assets,
     updateStartTime,
@@ -1283,7 +1283,7 @@ const updateSharedLibraryAsset = createOptimistThunk(async (store, payload) => {
  * @param store - The Redux store instance.
  * @param payload - Payload containing assets and updateStartTime.
  */
-const autoUpdateSharedLibraryAsset = createOptimistThunk(async (store, payload) => {
+export const autoUpdateSharedLibraryAsset = createOptimistThunk(async (store, payload) => {
   const {
     assets,
     updateStartTime,
@@ -1333,7 +1333,7 @@ export async function upsertSharedVariable(variable: any): Promise<{
  * @param store - The Redux store instance.
  * @param payload - Payload containing item, callback, bufferCallback, errorCallback.
  */
-const loadSharedVariable = createOptimistThunk((store, payload) => {
+export const loadSharedVariable = createOptimistThunk((store, payload) => {
   const {
     item,
     callback,
@@ -1383,7 +1383,7 @@ const loadSharedVariable = createOptimistThunk((store, payload) => {
  * Optimist thunk to load a shared variable.
  * (Original function: loadSharedVariableThunk)
  */
-const loadSharedVariableThunk = createOptimistThunk((store, payload) => new Promise((resolve, reject) => {
+export const loadSharedVariableThunk = createOptimistThunk((store, payload) => new Promise((resolve, reject) => {
   store.dispatch(loadSharedVariable({
     item: payload,
     callback: resolve,
@@ -1445,7 +1445,7 @@ async function upsertSharedVariableSet(variableSet: any): Promise<{
  * Optimist thunk to retrieve a variable collection.
  * (Original function: retrieveVariableCollection)
  */
-const retrieveVariableCollection = createOptimistThunk((store, payload) => {
+export const retrieveVariableCollection = createOptimistThunk((store, payload) => {
   const {
     item,
     callback,
@@ -1485,7 +1485,7 @@ const retrieveVariableCollection = createOptimistThunk((store, payload) => {
 // export const Yf = upsertEntireVariableSet
 // export const Wo = retrieveVariableCollectionThunk
 
-const deleteLoadingStatesForFile = createOptimistThunk((store, payload) => {
+export const deleteLoadingStatesForFile = createOptimistThunk((store, payload) => {
   store.dispatch(loadingStateDelete({
     key: generateRetrievingSubscribedComponentsKey(payload.openFileKey),
   }))
@@ -1514,7 +1514,7 @@ export function resetProcessedKeys(): void {
  * Optimist thunk to fetch and update state groups and symbols.
  * (Original function: fetchAndUpdateStateGroupsThunk)
  */
-const fetchAndUpdateStateGroupsThunk = createOptimistThunk(async (store) => {
+export const fetchAndUpdateStateGroupsThunk = createOptimistThunk(async (store) => {
   const state = store.getState()
   if (state.user) {
     await externalPromise
@@ -1687,7 +1687,7 @@ export async function loadComponentV2ByKey(store: any, componentKey: string, sou
  * Optimist thunk to cache component key and promise for loading component.
  * (Original function: cacheComponentKeyThunk)
  */
-const cacheComponentKeyThunk = createOptimistThunk((store, payload) => {
+export const cacheComponentKeyThunk = createOptimistThunk((store, payload) => {
   cachedComponentKey = payload.componentKey
   cachedComponentPromise = loadComponentV2ByKey(store, payload.componentKey, payload.callsite)
 })
@@ -2270,7 +2270,7 @@ let remappingProgressState: {
   done: number
   total: number
 } | null = null
-let startLibraryRemappingProgress = createOptimistThunk((e, t) => {
+export let startLibraryRemappingProgress = createOptimistThunk((e, t) => {
   remappingProgressState = {
     done: 0,
     total: t.total,
@@ -2285,7 +2285,7 @@ let startLibraryRemappingProgress = createOptimistThunk((e, t) => {
     timeoutOverride: 1 / 0,
   }))
 })
-let updateLibraryRemappingProgress = createOptimistThunk((e, t) => {
+export let updateLibraryRemappingProgress = createOptimistThunk((e, t) => {
   if (remappingProgressState) {
     remappingProgressState.done += t.done
     e.dispatch(VisualBellActions.enqueue({
@@ -2299,7 +2299,7 @@ let updateLibraryRemappingProgress = createOptimistThunk((e, t) => {
     }))
   }
 })
-let completeLibraryRemapping = createOptimistThunk((e) => {
+export let completeLibraryRemapping = createOptimistThunk((e) => {
   remappingProgressState = null
   e.dispatch(VisualBellActions.dequeue({
     matchType: visual_bell,
@@ -2310,7 +2310,7 @@ let completeLibraryRemapping = createOptimistThunk((e) => {
     icon: VisualBellIcon.CHECK,
   }))
 })
-let failLibraryRemapping = createOptimistThunk((e) => {
+export let failLibraryRemapping = createOptimistThunk((e) => {
   remappingProgressState = null
   e.dispatch(VisualBellActions.enqueue({
     message: getI18nString('design_systems.subscriptions.remap_connection_failed'),
@@ -2318,12 +2318,12 @@ let failLibraryRemapping = createOptimistThunk((e) => {
     error: !0,
   }))
 })
-let markComponentInsertionFlag = createOptimistThunk((e) => {
+export let markComponentInsertionFlag = createOptimistThunk((e) => {
   e.getState().userFlags.has_inserted_component || e.dispatch(postUserFlag({
     has_inserted_component: !0,
   }))
 })
-let markLibrariesModalOpenedFlag = createOptimistThunk((e) => {
+export let markLibrariesModalOpenedFlag = createOptimistThunk((e) => {
   e.getState().userFlags.has_opened_libraries_modal || e.dispatch(postUserFlag({
     has_opened_libraries_modal: !0,
   }))

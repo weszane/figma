@@ -11,7 +11,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { logError } from "../905/714362";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { Wo } from "../figma_app/933328";
+import { retrieveVariableCollection } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { ol } from "../figma_app/852050";
@@ -156,7 +156,7 @@ export function $$$0({
         modeOptions: r.modeOptions,
         onChange: (e, t) => {
           let n = "object" == typeof e && !!e.extendedCollectionId;
-          (c[l] || n) && d[l] ? s(Wo({
+          (c[l] || n) && d[l] ? s(retrieveVariableCollection({
             item: d[n ? e.collectionKey : l],
             callback: t => {
               _(l, e);

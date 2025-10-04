@@ -1,85 +1,174 @@
-import { trackEventAnalytics } from "../905/449184";
-export let $$i10 = "sidebar favorited row";
-export function $$a9(e, t, r, i, a, s) {
+import { trackEventAnalytics } from "../905/449184"
+
+// Constants
+export const FAVORITES_SIDEBAR_ROW = "sidebar favorited row"
+
+// Analytics event tracking functions
+/**
+ * Tracks when a resource is removed from favorites
+ * (Original name: $$a9)
+ */
+export function trackResourceRemovedFromFavorites(
+  resourceId: string,
+  selectedView: string,
+  entrypoint: string,
+  resourceType: string,
+  editorType: string,
+  fileBrowserUnfavorite: boolean,
+): void {
   trackEventAnalytics("resource_removed_from_favorites", {
-    resource_id: e,
-    selectedView: t,
-    entrypoint: r,
-    resource_type: i,
-    editor_type: a,
-    fileBrowserUnfavorite: s
-  });
+    resource_id: resourceId,
+    selectedView,
+    entrypoint,
+    resource_type: resourceType,
+    editor_type: editorType,
+    fileBrowserUnfavorite,
+  })
 }
-export function $$s6(e, t, r, i, a, s) {
+
+/**
+ * Tracks when a resource is added to favorites
+ * (Original name: $$s6)
+ */
+export function trackResourceAddedToFavorites(
+  resourceId: string,
+  selectedView: string,
+  entrypoint: string,
+  resourceType: string,
+  editorType: string,
+  fileBrowserFavorite: boolean,
+): void {
   trackEventAnalytics("resource_added_to_favorites", {
-    resourceId: e,
-    editor_type: a,
-    selectedView: t,
-    resource_type: i,
-    entrypoint: r,
-    fileBrowserFavorite: s
-  });
+    resourceId,
+    editor_type: editorType,
+    selectedView,
+    resource_type: resourceType,
+    entrypoint,
+    fileBrowserFavorite,
+  })
 }
-export function $$o3(e, t, r, i, a) {
+
+/**
+ * Tracks when a favorited resource is clicked
+ * (Original name: $$o3)
+ */
+export function trackFavoritedResourceClicked(
+  resourceId: string,
+  resourceType: string,
+  sectionId: string,
+  entrypoint: string,
+  editorType: string,
+): void {
   trackEventAnalytics("favorited_resource_clicked", {
-    resource_id: e,
-    resource_type: t,
-    editor_type: a,
-    section_id: r,
-    entrypoint: i
-  });
+    resource_id: resourceId,
+    resource_type: resourceType,
+    editor_type: editorType,
+    section_id: sectionId,
+    entrypoint,
+  })
 }
-export function $$l1(e, t) {
+
+/**
+ * Tracks when "add to sidebar" is clicked in favorites move flow
+ * (Original name: $$l1)
+ */
+export function trackFavoritesToAddToSidebarClick(
+  favoritedResourceId: string,
+  destTeamId: string,
+): void {
   trackEventAnalytics("favorites_to_move_add_to_sidebar_click", {
-    favorited_resource_id: e,
-    dest_team_id: t
-  });
+    favorited_resource_id: favoritedResourceId,
+    dest_team_id: destTeamId,
+  })
 }
-export function $$d8(e) {
+
+/**
+ * Tracks when "unstar all" is clicked in favorites move flow
+ * (Original name: $$d8)
+ */
+export function trackFavoritesToMoveUnstarAllClick(favoritedResourceId: string): void {
   trackEventAnalytics("favorites_to_move_unstar_all_click", {
-    favorited_resource_id: e
-  });
+    favorited_resource_id: favoritedResourceId,
+  })
 }
-export function $$c11(e) {
+
+/**
+ * Tracks when the favorites sidebar section is collapsed/expanded
+ * (Original name: $$c11)
+ */
+export function trackSidebarSectionCollapsed(isCollapse: boolean): void {
   trackEventAnalytics("sidebar_section_collapsed", {
-    is_collapse: e,
-    section: "favorites"
-  });
+    is_collapse: isCollapse,
+    section: "favorites",
+  })
 }
-export function $$u7() {
-  trackEventAnalytics("favorites_reordered", {});
+
+/**
+ * Tracks when favorites are reordered
+ * (Original name: $$u7)
+ */
+export function trackFavoritesReordered(): void {
+  trackEventAnalytics("favorites_reordered", {})
 }
-export function $$p0(e) {
+
+/**
+ * Tracks when a context menu action is clicked in favorites
+ * (Original name: $$p0)
+ */
+export function trackFavoritesContextMenuActionClicked(action: string): void {
   trackEventAnalytics("favorites_context_menu_action_clicked", {
-    action: e
-  });
+    action,
+  })
 }
-export function $$_5(e, t) {
+
+/**
+ * Tracks when a custom section is created in the file browser sidebar
+ * (Original name: $$_5)
+ */
+export function trackFileBrowserSidebarCustomSectionCreated(
+  newCustomSectionId: string,
+  newCustomSectionName: string,
+): void {
   trackEventAnalytics("File Browser Sidebar Custom Section Created", {
-    new_custom_section_name: t,
-    new_custom_section_id: e
-  });
+    new_custom_section_name: newCustomSectionName,
+    new_custom_section_id: newCustomSectionId,
+  })
 }
-export function $$h4(e) {
+
+/**
+ * Tracks when a custom section is deleted in the file browser sidebar
+ * (Original name: $$h4)
+ */
+export function trackFileBrowserSidebarCustomSectionDeleted(newCustomSectionId: string): void {
   trackEventAnalytics("File Browser Sidebar Custom Section Deleted", {
-    new_custom_section_id: e
-  });
+    new_custom_section_id: newCustomSectionId,
+  })
 }
-export function $$m2(e, t) {
+
+/**
+ * Tracks when a custom section is renamed in the file browser sidebar
+ * (Original name: $$m2)
+ */
+export function trackFileBrowserSidebarCustomSectionRenamed(
+  newCustomSectionId: string,
+  newCustomSectionNewName: string,
+): void {
   trackEventAnalytics("File Browser Sidebar Custom Section Renamed", {
-    new_custom_section_new_name: t,
-    new_custom_section_id: e
-  });
+    new_custom_section_new_name: newCustomSectionNewName,
+    new_custom_section_id: newCustomSectionId,
+  })
 }
-export const DF = $$p0;
-export const Dr = $$l1;
-export const K2 = $$m2;
-export const LP = $$o3;
-export const Pe = $$h4;
-export const SX = $$_5;
-export const gB = $$s6;
-export const hp = $$u7;
-export const j4 = $$d8;
-export const to = $$a9;
-export const vg = $$i10;
-export const xs = $$c11;
+
+// Export aliases for backward compatibility
+export const DF = trackFavoritesContextMenuActionClicked
+export const Dr = trackFavoritesToAddToSidebarClick
+export const K2 = trackFileBrowserSidebarCustomSectionRenamed
+export const LP = trackFavoritedResourceClicked
+export const Pe = trackFileBrowserSidebarCustomSectionDeleted
+export const SX = trackFileBrowserSidebarCustomSectionCreated
+export const gB = trackResourceAddedToFavorites
+export const hp = trackFavoritesReordered
+export const j4 = trackFavoritesToMoveUnstarAllClick
+export const to = trackResourceRemovedFromFavorites
+export const vg = FAVORITES_SIDEBAR_ROW
+export const xs = trackSidebarSectionCollapsed

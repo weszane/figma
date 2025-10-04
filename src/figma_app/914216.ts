@@ -12,7 +12,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
 import { formatI18nMessage } from "../905/482208";
 import { isUIHiddenOrLocked } from "../905/868547";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { useDropdownState } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
@@ -222,7 +222,7 @@ export function $$U3() {
   let o = useSelector(e => s ? !r?.canEdit : e.mirror.appModel.isReadOnly);
   let l = useSelector(e => e.mirror.appModel.isSceneReadOnly);
   let d = useSelector(e => !!e.user);
-  return useCallback(i => !(!i || l && !i.nonEditorsAllowed || i.onlyShowInReadOnly && !(o && n !== UIVisibilitySetting.HIDE_UI) || i.hideInExtension && z4.getIsExtension()) && (!!r || !i.newFileDisabled) && (!!d || !!i.loggedOutAllowed) && (!i.editModes || -1 !== i.editModes.indexOf(e)) && (!i.showForTools || -1 !== i.showForTools.indexOf(t)), [l, o, n, r, d, e, t]);
+  return useCallback(i => !(!i || l && !i.nonEditorsAllowed || i.onlyShowInReadOnly && !(o && n !== UIVisibilitySetting.HIDE_UI) || i.hideInExtension && fullscreenAlias.getIsExtension()) && (!!r || !i.newFileDisabled) && (!!d || !!i.loggedOutAllowed) && (!i.editModes || -1 !== i.editModes.indexOf(e)) && (!i.showForTools || -1 !== i.showForTools.indexOf(t)), [l, o, n, r, d, e, t]);
 }
 export function $$B2() {
   return selectWithShallowEqual(e => {

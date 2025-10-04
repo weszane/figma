@@ -55,7 +55,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { k8 } from "../figma_app/49598";
 import { renameFileOptimistic } from "../figma_app/78808";
-import { yy } from "../figma_app/933328";
+import { insertMultipleSlideModules } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { D as _$$D } from "../7222/938408";
 import { fL } from "../figma_app/784857";
@@ -1187,7 +1187,7 @@ function tl({
       col: 0
     } : n;
     g();
-    h(yy({
+    h(insertMultipleSlideModules({
       modules: t,
       canvasPosition: new Point(),
       percentageOffset: new Point(),

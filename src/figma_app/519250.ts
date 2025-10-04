@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { debug } from "../figma_app/465776";
 import { bL, c$ } from "../905/867927";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { h as _$$h } from "../905/513745";
 import { N as _$$N } from "../905/568293";
 import { K } from "../905/459096";
@@ -81,7 +81,7 @@ export function $$O3({
   let _ = vK();
   debug(!!(r || p), "TypePanel missing textAlignHorizontal");
   return jsxs(bL, {
-    legend: jsx(q, {
+    legend: jsx(Legend, {
       children: getI18nString("fullscreen.type_panel.align_horizontal")
     }),
     value: r,
@@ -126,7 +126,7 @@ export function $$R1(e) {
     })),
     readonly: t || r,
     recordingKey: e.recordingKey,
-    legend: jsx(q, {
+    legend: jsx(Legend, {
       children: getI18nString("fullscreen.type_panel.align_vertical")
     }),
     children: [jsx(c$, {

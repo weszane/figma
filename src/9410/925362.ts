@@ -19,7 +19,7 @@ import { m as _$$m } from "../9410/298357";
 import { R } from "../9410/515820";
 import { K as _$$K } from "../9410/153133";
 import { d as _$$d2 } from "../9410/162990";
-import { _$ } from "../figma_app/379850";
+import { handleFullscreenViewTransition } from "../figma_app/379850";
 import { useIsFullscreenOverview } from "../figma_app/88239";
 import { $ } from "../9410/841699";
 export function $$j0() {
@@ -97,7 +97,7 @@ export function $$j0() {
   let K = _4();
   let H = useDispatch();
   let z = useCallback(() => {
-    _$(H, debugState.getState().selectedView, "overview_search_clicked");
+    handleFullscreenViewTransition(H, debugState.getState().selectedView, "overview_search_clicked");
     K();
   }, [H, K]);
   return jsxs(A, {

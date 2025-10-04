@@ -1,5 +1,5 @@
 import { trackEventAnalytics } from "../905/449184";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -312,13 +312,13 @@ let $$F9 = createOptimistThunk((e, t) => {
   }).catch(t => {
     e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
-  a ? WB().optimisticallyUpdate({
+  a ? getCurrentLiveGraphClient().optimisticallyUpdate({
     SharedOrgLicenseGroupSetting: {
       [a]: {
         autogenPasswordControls: n
       }
     }
-  }, c) : WB().optimisticallyCreate({
+  }, c) : getCurrentLiveGraphClient().optimisticallyCreate({
     SharedOrgLicenseGroupSetting: {
       [`optimistic-id-${t.orgId}`]: {
         autogenPasswordControls: n,

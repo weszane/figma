@@ -87,7 +87,7 @@ import { cleanAssetName } from '../905/722604';
 import { n as _$$n3 } from '../905/734251';
 import { Point } from '../905/736624';
 import { qG } from '../905/742325';
-import { l as _$$l3 } from '../905/745972';
+import { useWindowDimensions } from '../905/745972';
 import { G as _$$G2 } from '../905/750789';
 import { ErrorBoundaryCrash } from '../905/751457';
 import { hideTooltip } from '../905/765855';
@@ -108,7 +108,7 @@ import { n as _$$n } from '../905/913636';
 import { e as _$$e2 } from '../905/916195';
 import { A as _$$A3 } from '../905/925160';
 import { showDropdownThunk, hideDropdownAction } from '../905/929976';
-import { q as _$$q2 } from '../905/932270';
+import { Legend } from '../905/932270';
 import { noop } from 'lodash-es';
 import { logCmsError } from '../905/937198';
 import { lY as _$$lY } from '../905/939482';
@@ -198,7 +198,7 @@ import { b as _$$b } from '../figma_app/556971';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { J as _$$J, P as _$$P } from '../figma_app/582341';
 import { $A, lX as _$$lX, MT } from '../figma_app/588397';
-import { Hz } from '../figma_app/591738';
+import { isTruthy } from '../figma_app/591738';
 import { selectExperimentConfigHook } from '../figma_app/594947';
 import { y as _$$y } from '../figma_app/598297';
 import { COMPONENT_FLYOUT_MODAL_CONTENT, useComponentFlyoutModal } from '../figma_app/608944';
@@ -231,7 +231,7 @@ import { parsePxNumber } from '../figma_app/783094';
 import { e_ as _$$e_, dM, F9, fA, MH } from '../figma_app/803787';
 import { BrowseCategoryRoute } from '../figma_app/805898';
 import { _2, hw, u2 } from '../figma_app/807786';
-import { dL } from '../figma_app/825489';
+import { defaultLibraryKeyAtom } from '../figma_app/825489';
 import { TrackedLink } from '../figma_app/831799';
 import { z6 } from '../figma_app/846841';
 import { filterEnabledFeatures, getSiteEmbedConfig } from '../figma_app/862515';
@@ -243,7 +243,7 @@ import { _o, GT, YS } from '../figma_app/914674';
 import { isExamplesPreset, sortWithPriority, isExamplePreset } from '../figma_app/915774';
 import { useAssetPanelContext, AssetPanelProvider } from '../figma_app/923271';
 import { TemplateCategory } from '../figma_app/930386';
-import { jR } from '../figma_app/933328';
+import { insertResponsiveSet } from '../figma_app/933328';
 import { h as _$$h5 } from '../figma_app/935454';
 import { r6 as _$$r3, P3, ZX } from '../figma_app/950074';
 import { T as _$$T3 } from '../figma_app/962636';
@@ -1576,7 +1576,7 @@ function t1({
       isList: l
     });
     let c = useCallback(() => {
-      a(jR({
+      a(insertResponsiveSet({
         item: e,
         cmsCollectionMappings: t,
         insertAsChildOfCanvas: !1,
@@ -3981,7 +3981,7 @@ function nI({
   let a = function () {
     let {
       windowInnerWidth
-    } = _$$l3();
+    } = useWindowDimensions();
     return useMemo(() => Math.min(Math.max(Math.floor(15 * windowInnerWidth / 64), 144), 220), [windowInnerWidth]);
   }();
   let o = useMemo(() => a - 8, [a]);
@@ -8079,7 +8079,7 @@ function l5({
   return jsx('div', {
     className: 'x1swld1g x1xmf6yo xv42yna',
     children: jsx(bL, {
-      legend: jsx(_$$q2, {
+      legend: jsx(Legend, {
         children: e
       }),
       value: t,
@@ -8182,7 +8182,7 @@ function an({
     let c = s?.canEdit ?? !1;
     let u = d.data?.team?.hasPermission ?? !1;
     let p = e.numComponents > 0 || e.numTemplates > 0;
-    return useMemo(() => !i && l && (!o || !hasTeamPaidAccess(o) && u) && c && r && p && Hz(t?.id), [i, l, o, u, c, r, p, t]);
+    return useMemo(() => !i && l && (!o || !hasTeamPaidAccess(o) && u) && c && r && p && isTruthy(t?.id), [i, l, o, u, c, r, p, t]);
   }(t.localAssets);
   let i = useSubscribedLibraries().status === 'loading';
   let l = useRef(null);
@@ -8291,7 +8291,7 @@ function al({
     } = ZX();
     let g = l7(navigateToTop);
     let f = _$$g3().allLibrariesByLibraryKey;
-    let [x, y] = useAtomValueAndSetter(dL);
+    let [x, y] = useAtomValueAndSetter(defaultLibraryKeyAtom);
     useEffect(() => {
       x && f.size > 0 && (hB(() => navigateToLibrary(x)), y(null));
     }, [navigateToLibrary, f.size, x, y]);

@@ -1,42 +1,105 @@
-export class $$n0 {
-  constructor(e, t) {
-    this.maxElements = e;
-    this.callback = t;
-    this.size = 0;
-    this.start = 0;
-    this.end = 0;
-    this.buffer = Array(e);
+/**
+ * A circular buffer implementation that maintains a fixed-size buffer
+ * and optionally calls a callback when elements are evicted.
+ *
+ * Original class name: $$n0
+ */
+export class CircularBuffer<T> {
+  private maxElements: number
+  private callback: ((evictedElement: T) => void) | undefined
+  private size: number
+  private start: number
+  private end: number
+  private buffer: (T | undefined)[]
+
+  /**
+   * Creates a new circular buffer.
+   * @param maxElements - The maximum number of elements the buffer can hold
+   * @param callback - Optional callback function called when an element is evicted
+   */
+  constructor(maxElements: number, callback?: (evictedElement: T) => void) {
+    this.maxElements = maxElements
+    this.callback = callback
+    this.size = 0
+    this.start = 0
+    this.end = 0
+    this.buffer = Array.from({ length: maxElements })
   }
-  get length() {
-    return this.size;
+
+  /**
+   * Gets the current number of elements in the buffer.
+   */
+  get length(): number {
+    return this.size
   }
-  get capacity() {
-    return this.maxElements;
+
+  /**
+   * Gets the maximum capacity of the buffer.
+   */
+  get capacity(): number {
+    return this.maxElements
   }
-  push(e) {
-    if (0 === this.maxElements) return;
-    let t = this.buffer[this.end];
-    this.buffer[this.end++] = e;
-    this.end %= this.maxElements;
-    this.size === this.maxElements ? (this.callback && this.callback(t), this.start++, this.start %= this.maxElements) : this.size++;
-  }
-  toArray() {
-    let e = Array(this.size);
-    let t = this.start;
-    for (let i = 0; i < this.size; i++) {
-      e[i] = this.buffer[t];
-      t++;
-      t %= this.maxElements;
+
+  /**
+   * Adds an element to the buffer. If the buffer is full,
+   * the oldest element is evicted and the callback is called (if provided).
+   * @param element - The element to add to the buffer
+   */
+  push(element: T): void {
+    if (this.maxElements === 0) {
+      return
     }
-    return e;
+
+    const evictedElement = this.buffer[this.end]
+    this.buffer[this.end] = element
+    this.end = (this.end + 1) % this.maxElements
+
+    if (this.size === this.maxElements) {
+      // Buffer is full, evict the oldest element
+      if (this.callback && evictedElement !== undefined) {
+        this.callback(evictedElement)
+      }
+      this.start = (this.start + 1) % this.maxElements
+    }
+    else {
+      // Buffer is not full, increment size
+      this.size++
+    }
   }
-  clear() {
-    this.start = 0;
-    this.end = 0;
-    this.size = 0;
+
+  /**
+   * Converts the buffer to an array in order from oldest to newest elements.
+   * @returns A new array containing all elements in the buffer
+   */
+  toArray(): T[] {
+    const result: T[] = Array.from({ length: this.size })
+    let index = this.start
+
+    for (let i = 0; i < this.size; i++) {
+      result[i] = this.buffer[index] as T
+      index = (index + 1) % this.maxElements
+    }
+
+    return result
   }
-  getBuffer() {
-    return this.buffer;
+
+  /**
+   * Clears all elements from the buffer.
+   */
+  clear(): void {
+    this.start = 0
+    this.end = 0
+    this.size = 0
+    this.buffer = Array.from({ length: this.maxElements })
+  }
+
+  /**
+   * Gets the internal buffer array.
+   * @returns The internal buffer array
+   */
+  getBuffer(): (T | undefined)[] {
+    return this.buffer
   }
 }
-export const C = $$n0;
+
+export const C = CircularBuffer

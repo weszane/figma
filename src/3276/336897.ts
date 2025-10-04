@@ -10,7 +10,7 @@ import m from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { getFileTypePx } from "../905/149328";
 import { c$ } from "../figma_app/236327";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UserAvatar } from "../905/590952";
 import { hideDropdownAction } from "../905/929976";
@@ -116,7 +116,7 @@ function V(e) {
   };
   let J = () => G ? jsx("span", {
     className: FH,
-    children: jsx(h1, {
+    children: jsx(RelativeTimeDisplay, {
       date: user.viewedAt
     })
   }) : null;

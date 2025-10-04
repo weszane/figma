@@ -3,7 +3,7 @@ import { useEffect, memo, useRef, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { VariableResolvedDataType, DistributionType, VisibilityCondition, NodePropertyCategory, ItemType, DesignWorkspace, ViewType, AppStateTsApi, DesignGraphElements, UIVisibilitySetting } from "../figma_app/763686";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { AV, Gb } from "../figma_app/933328";
+import { applySharedStyle, useFileLibrarySubscriptions } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
 import { isVsCodeEnvironment } from "../905/858738";
 import { useAppModelPropsShallow, useSceneGraphSelection, useAppModelProperty } from "../figma_app/722362";
@@ -114,7 +114,7 @@ import { Vi, GI } from "../905/125333";
 import { fullscreenValue } from "../figma_app/455680";
 import { b as _$$b4 } from "../figma_app/755529";
 import { selectCurrentFile } from "../figma_app/516028";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { Xd, W as _$$W2, zr } from "../figma_app/359164";
 import { hl, Vb, i as _$$i2, xI, CL } from "../figma_app/722913";
 import { yT } from "../figma_app/836943";
@@ -536,7 +536,7 @@ function tR(e) {
   });
 }
 function tM(e) {
-  let t = o3(nt.useGrid);
+  let t = useLabConfiguration(labConfigurations.useGrid);
   let i = useRef(null);
   let a = _$$W2();
   let d = useDispatch();
@@ -593,7 +593,7 @@ function tM(e) {
           onApplyStyle: (e, {
             fromSearch: t
           } = {}) => {
-            d(AV({
+            d(applySharedStyle({
               style: e,
               inheritStyleKeyField: "inheritFillStyleKeyForStroke",
               fromSearch: t
@@ -905,7 +905,7 @@ let tz = memo(({
   let U = useRef(null);
   let q = useSelector(e => e.openFile);
   let G = q ? q.key : "";
-  Gb(G);
+  useFileLibrarySubscriptions(G);
   _$$W();
   _$$K2();
   useAutosuggestShadowRead();

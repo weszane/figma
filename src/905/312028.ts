@@ -1,121 +1,176 @@
-import { pJ } from "../905/787926";
-import { EntityType } from "../905/806400";
-let a = {
+import { pJ } from "../905/787926"
+import { EntityType } from "../905/806400"
+
+interface PermissionFieldConfig {
+  name: string
+  type: {
+    kind: string
+    name?: string
+  }
+  args: Array<{
+    name: string
+    type: {
+      kind: string
+    }
+    nullable: boolean
+  }>
+  computed: boolean
+  permissionName: string
+  dependencies: unknown
+}
+
+interface PermissionDefaults {
+  canView: boolean
+  canViewWithReasons: {
+    result: boolean
+    publicDenyReasons: never[]
+  }
+  canAdmin: boolean
+  canAdminWithReasons: {
+    result: boolean
+    publicDenyReasons: never[]
+  }
+  canCreateTeam: boolean
+  canCreateTeamWithReasons: {
+    result: boolean
+    publicDenyReasons: never[]
+  }
+}
+
+// Permission field configurations
+const canViewField: PermissionFieldConfig = {
   name: "canView",
   type: {
-    kind: "bool"
+    kind: "bool",
   },
   args: [{
     name: "userId",
     type: {
-      kind: "bigint"
+      kind: "bigint",
     },
-    nullable: !0
+    nullable: true,
   }],
-  computed: !0,
+  computed: true,
   permissionName: "WORKSPACE::CAN_VIEW",
-  dependencies: pJ["WORKSPACE::CAN_VIEW"]
-};
-let s = {
+  dependencies: pJ["WORKSPACE::CAN_VIEW"],
+}
+
+const canViewWithReasonsField: PermissionFieldConfig = {
   name: "canViewWithReasons",
   type: {
     kind: "object",
-    name: EntityType.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult,
   },
   args: [{
     name: "userId",
     type: {
-      kind: "bigint"
+      kind: "bigint",
     },
-    nullable: !0
+    nullable: true,
   }],
-  computed: !0,
+  computed: true,
   permissionName: "WORKSPACE::CAN_VIEW",
-  dependencies: pJ["WORKSPACE::CAN_VIEW"]
-};
-let o = {
+  dependencies: pJ["WORKSPACE::CAN_VIEW"],
+}
+
+const canAdminField: PermissionFieldConfig = {
   name: "canAdmin",
   type: {
-    kind: "bool"
+    kind: "bool",
   },
   args: [{
     name: "userId",
     type: {
-      kind: "bigint"
+      kind: "bigint",
     },
-    nullable: !0
+    nullable: true,
   }],
-  computed: !0,
+  computed: true,
   permissionName: "WORKSPACE::CAN_ADMIN",
-  dependencies: pJ["WORKSPACE::CAN_ADMIN"]
-};
-let l = {
+  dependencies: pJ["WORKSPACE::CAN_ADMIN"],
+}
+
+const canAdminWithReasonsField: PermissionFieldConfig = {
   name: "canAdminWithReasons",
   type: {
     kind: "object",
-    name: EntityType.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult,
   },
   args: [{
     name: "userId",
     type: {
-      kind: "bigint"
+      kind: "bigint",
     },
-    nullable: !0
+    nullable: true,
   }],
-  computed: !0,
+  computed: true,
   permissionName: "WORKSPACE::CAN_ADMIN",
-  dependencies: pJ["WORKSPACE::CAN_ADMIN"]
-};
-let d = {
+  dependencies: pJ["WORKSPACE::CAN_ADMIN"],
+}
+
+const canCreateTeamField: PermissionFieldConfig = {
   name: "canCreateTeam",
   type: {
-    kind: "bool"
+    kind: "bool",
   },
   args: [{
     name: "userId",
     type: {
-      kind: "bigint"
+      kind: "bigint",
     },
-    nullable: !0
+    nullable: true,
   }],
-  computed: !0,
+  computed: true,
   permissionName: "WORKSPACE::CAN_CREATE_TEAM",
-  dependencies: pJ["WORKSPACE::CAN_CREATE_TEAM"]
-};
-let c = {
+  dependencies: pJ["WORKSPACE::CAN_CREATE_TEAM"],
+}
+
+const canCreateTeamWithReasonsField: PermissionFieldConfig = {
   name: "canCreateTeamWithReasons",
   type: {
     kind: "object",
-    name: EntityType.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult,
   },
   args: [{
     name: "userId",
     type: {
-      kind: "bigint"
+      kind: "bigint",
     },
-    nullable: !0
+    nullable: true,
   }],
-  computed: !0,
+  computed: true,
   permissionName: "WORKSPACE::CAN_CREATE_TEAM",
-  dependencies: pJ["WORKSPACE::CAN_CREATE_TEAM"]
-};
-let $$u0 = {
-  canView: !1,
+  dependencies: pJ["WORKSPACE::CAN_CREATE_TEAM"],
+}
+
+// Default permission values
+export const defaultPermissions: PermissionDefaults = {
+  canView: false,
   canViewWithReasons: {
-    result: !1,
-    publicDenyReasons: []
+    result: false,
+    publicDenyReasons: [],
   },
-  canAdmin: !1,
+  canAdmin: false,
   canAdminWithReasons: {
-    result: !1,
-    publicDenyReasons: []
+    result: false,
+    publicDenyReasons: [],
   },
-  canCreateTeam: !1,
+  canCreateTeam: false,
   canCreateTeamWithReasons: {
-    result: !1,
-    publicDenyReasons: []
-  }
-};
-let $$p1 = [o, l, d, c, a, s];
-export const fM = $$u0;
-export const oJ = $$p1;
+    result: false,
+    publicDenyReasons: [],
+  },
+}
+
+// Ordered list of permission field configurations
+export const permissionFields: PermissionFieldConfig[] = [
+  canAdminField,
+  canAdminWithReasonsField,
+  canCreateTeamField,
+  canCreateTeamWithReasonsField,
+  canViewField,
+  canViewWithReasonsField,
+]
+
+export const fM = defaultPermissions
+export const oJ = permissionFields

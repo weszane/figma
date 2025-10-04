@@ -210,7 +210,7 @@ import { bL as _$$bL } from '../905/911410';
 import { e as _$$e7 } from '../905/916195';
 import { A as _$$A6 } from '../905/920165';
 import { IntersectionSentinel } from '../905/925868';
-import { q as _$$q7 } from '../905/932270';
+import { Legend } from '../905/932270';
 import { W as _$$W6 } from '../905/933320';
 import { noop } from 'lodash-es';
 import { ExtensionFeatureKey } from '../905/946805';
@@ -474,7 +474,7 @@ import { ModalContainer } from '../figma_app/918700';
 import { kx } from '../figma_app/920333';
 import { searchStartSession, searchEndSession } from '../figma_app/925970';
 import { capitalize } from '../figma_app/930338';
-import { AV, Gb, Oe } from '../figma_app/933328';
+import { applySharedStyle, useFileLibrarySubscriptions, loadSharedVariableThunk } from '../figma_app/933328';
 import { _Y as _$$_Y } from '../figma_app/936646';
 import { EditorUIState } from '../figma_app/941983';
 import { Vi } from '../figma_app/955650';
@@ -6034,7 +6034,7 @@ function al({
     t();
   }, [h, t, r]);
   let k = useCallback((e, t) => {
-    u(AV({
+    u(applySharedStyle({
       style: e,
       inheritStyleKeyField: i,
       fromSearch: t
@@ -13086,7 +13086,7 @@ function x2() {
         }), trimmedSearchQuery.length === 0 && i && jsx('div', {
           className: 'x1lliihq xh8yej3',
           children: jsxs(_$$bL4, {
-            legend: jsx(_$$q7, {
+            legend: jsx(Legend, {
               children: renderI18nText('cooper.templates.template_picker.left_rail_tab.hidden_legend')
             }),
             value: e,
@@ -13931,7 +13931,7 @@ function pB({
   let c = function (e) {
     let t = useDispatch();
     return useCallback(async n => {
-      let l = await t(Oe(n));
+      let l = await t(loadSharedVariableThunk(n));
       let r = VariableIdHandler.fromString(l);
       if (r) {
         e({
@@ -13953,7 +13953,7 @@ function pB({
   let u = function (e) {
     let t = useDispatch();
     return useCallback((n, l) => {
-      t(AV({
+      t(applySharedStyle({
         style: n,
         inheritStyleKeyField: e,
         fromSearch: l?.fromSearch
@@ -14619,7 +14619,7 @@ let mw = memo(({
   let j = useAppModelProperty('showUi');
   let y = useSelector(e => e.universalInsertModal);
   let E = useDispatch();
-  Gb(_);
+  useFileLibrarySubscriptions(_);
   !function () {
     let {
       Sprig

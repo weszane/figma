@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { debug } from "../figma_app/465776";
 import { bL, c$ } from "../905/867927";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { $ } from "../905/137257";
 import { m as _$$m } from "../905/375522";
 import { V } from "../905/921027";
@@ -58,7 +58,7 @@ export function $$I0(e) {
     onChange: t => e.setTextResizing(t, "panel"),
     readonly: e.disabled,
     recordingKey: generateRecordingKey(e, "autoResize"),
-    legend: jsx(q, {
+    legend: jsx(Legend, {
       children: getI18nString("fullscreeen.type_panel.resizing")
     }),
     children: [jsx(c$, {

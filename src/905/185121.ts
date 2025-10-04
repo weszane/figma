@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useContext, useCallback, useId, useState, useEffect, useRef, createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bL, c$, RT } from "../905/867927";
-import { q as _$$q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { bL as _$$bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { t as _$$t } from "../905/398894";
@@ -411,7 +411,7 @@ function ew(e) {
   let r = jsxs(bL, {
     value: isInvalidValue(orientation) ? void 0 : orientation,
     onChange: setOrientation,
-    legend: jsx(_$$q, {
+    legend: jsx(Legend, {
       children: getI18nString("fullscreen.properties_panel.direction")
     }),
     children: [jsx(c$, {
@@ -574,7 +574,7 @@ function eV(e) {
         connectorLineStyle: t
       });
     },
-    legend: jsx(_$$q, {
+    legend: jsx(Legend, {
       children: getI18nString("fullscreen.properties_panel.stroke_settings.path_style")
     }),
     recordingKey: generateRecordingKey(e, "pathStyle"),
@@ -937,7 +937,7 @@ export function $$ez0(e) {
       className: "stroke_settings--segmentedControl--U-Xpx",
       children: jsxs(bL, {
         value: e.strokeType,
-        legend: jsx(_$$q, {
+        legend: jsx(Legend, {
           children: getI18nString("fullscreen.properties_panel.stroke_settings.stroke_type")
         }),
         recordingKey: generateRecordingKey(e, "strokeTypeControl"),

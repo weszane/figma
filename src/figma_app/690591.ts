@@ -21,7 +21,7 @@ import { searchClearQueryAction, searchEndSessionAction } from "../905/977218";
 import { PublishModalState } from "../figma_app/350203";
 import { useGroupedUserWidgets, useGroupedUserPlugins, useLocalPluginsByPluginId, getTotalUserWidgetsCount, getTotalUserWidgetsWithDevelopmentCount } from "../figma_app/844435";
 import { Sz } from "../figma_app/12535";
-import { ud } from "../905/862913";
+import { useFileByKey } from "../905/862913";
 import { selectUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { CommunityUniversalPostingModalRecentFileKeysView } from "../figma_app/43951";
@@ -269,7 +269,7 @@ let $$Q0 = registerModal(function (e) {
   let [C, R] = useState(2);
   let [k, F] = useState({});
   let U = useLocalPluginsByPluginId();
-  let V = ud();
+  let V = useFileByKey();
   let H = getTotalUserWidgetsCount();
   let W = getTotalUserWidgetsWithDevelopmentCount();
   let K = Object.keys(V).length;

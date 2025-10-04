@@ -8,7 +8,7 @@ import { DialogContents, DialogBody } from "../figma_app/272243";
 import { LinkPrimitive } from "../figma_app/496441";
 import { ButtonPrimitive } from "../905/632989";
 import { UI3ConditionalWrapper } from "../905/341359";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
@@ -38,7 +38,7 @@ let v = registerModal(function (e) {
     ...e,
     onClose: n
   });
-  let x = _$$l();
+  let x = useWindowDimensions();
   let j = x.windowInnerWidth && x.windowInnerWidth < 550 ? "md" : 440;
   return jsx(UI3ConditionalWrapper, {
     children: jsx(TrackingProvider, {

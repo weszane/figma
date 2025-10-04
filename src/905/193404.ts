@@ -8,7 +8,7 @@ import { useAtomValueAndSetter, createLocalStorageAtom } from "../figma_app/2735
 import u from "classnames";
 import { w as _$$w } from "../905/835474";
 import { WAFImage } from "../905/675859";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { RenderListByChunks } from "../905/605383";
 import { TrackedLink } from "../905/160095";
 import { getI18nString } from "../905/303541";
@@ -625,7 +625,7 @@ export function $$H1({
     valueClassName: L,
     valueRenderFn: ({
       stat: e
-    }) => jsx(h1, {
+    }) => jsx(RelativeTimeDisplay, {
       date: e.lastModified
     })
   }], []);

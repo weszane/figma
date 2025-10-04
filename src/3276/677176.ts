@@ -16,8 +16,8 @@ import { viewportNavigatorContext } from "../figma_app/298911";
 import { isCommentStateModeratable } from "../905/380385";
 import { s as _$$s } from "../905/518538";
 import { fG, pC, gu } from "../905/301347";
-import { XC } from "../905/512783";
-import { c4 } from "../figma_app/70421";
+import { CommentPinElement } from "../905/512783";
+import { aggregateUserComments } from "../figma_app/70421";
 export function $$w2(e) {
   let t = getUserId();
   let n = selectCurrentFile()?.canEdit;
@@ -85,8 +85,8 @@ export function $$P0(e, t, n, s, m, u) {
         if (t) {
           if (!a.isPendingFromSinatra && a.canvasPosition) {
             let e = viewportToScreen(s.getViewportInfo(), a.canvasPosition);
-            let n = c4(a.comments).length;
-            let o = XC.getPinSize(n);
+            let n = aggregateUserComments(a.comments).length;
+            let o = CommentPinElement.getPinSize(n);
             t(a.id, {
               x: e.x,
               y: e.y,

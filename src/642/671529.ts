@@ -28,7 +28,7 @@ import { normalizeValue, valueOrFallback } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
 import { useAppModelProperty, useCurrentTool, useSceneGraphSelection, useSceneGraphSelector, useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import R, { isLoading } from "../905/18797";
 import { getObservableValue } from "../figma_app/84367";
 import { t as _$$t } from "../figma_app/501766";
@@ -810,7 +810,7 @@ function e4({
   let W = useAppModelProperty("showUi");
   let $ = useCurrentFileKey();
   let Y = hasCmsCollection($);
-  let X = o3(nt.newResizablePanel);
+  let X = useLabConfiguration(labConfigurations.newResizablePanel);
   let q = getObservableValue(EditorPreferencesApi().renderRulers, !1);
   let J = _$$T();
   let Z = getFeatureFlags().properties_panel_resize_lag_fix;

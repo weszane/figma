@@ -1,20 +1,19 @@
-import { getI18nString } from '../905/303541'
-import { getResourceDataOrFallback } from '../905/663269'
-import { zb } from '../905/862913'
-import { dayjs } from '../905/920142'
-import { fileEntityDataMapper } from '../905/943101'
-import { mapFileTypeToEditorType } from '../figma_app/53721'
-import { FPermissionLevelType, FPlanFeatureType, FTeamAccessPermissionType } from '../figma_app/191312'
-import { getProductAccessTypeByKey } from '../figma_app/217457'
-import { mapFileExportAndLinkControls, mapFileLinkExpirationConfigWithPrevious, mapFileView, mapOrgDomainProperties, mapRepoSummary, mapResourceAccess, mapUserProperties } from '../figma_app/349248'
-import { throwTypeError } from '../figma_app/465776'
-import { hasRootPathOptional } from '../figma_app/528509'
-import { encodeUri } from '../figma_app/930338'
-import { v } from '../figma_app/995722'
-import a from '../vendor/961736'
-
-let s = a
-var $$E6 = (e => (e.fileBrowserContextMenu = 'file_browser_context_menu', e.fileBrowserFavoritedContextMenu = 'file_browser_favorited_context_menu', e.fileBrowserTileActionMenu = 'file_browser_tile_action_menu', e.prototypeHeader = 'prototype_header', e.fullscreenToolbar = 'fullscreen_toolbar', e.expFigJamOnboardingShareVariant = 'exp_figjam_onboarding_share_variant', e.fullscreenCopyLinkButtonVisualBell = 'fullscreen_copy_link_button_visual_bell', e.prototypeCopyLinkButtonVisualBell = 'prototype_copy_link_button_visual_bell', e.customTemplatePublishNudge = 'custom_template_publish_nudge', e.editRequestTooltip = 'edit_request_tooltip', e.editRequestExternal = 'edit_request_external', e.shareToGoogleClassroomOnboarding = 'share_to_google_classroom_onboarding', e.googleClassroomIntegration = 'google_classroom_integration', e))($$E6 || {})
+import { getI18nString } from '../905/303541';
+import { getResourceDataOrFallback } from '../905/663269';
+import { hasPublicLinkAccess } from '../905/862913';
+import { dayjs } from '../905/920142';
+import { fileEntityDataMapper } from '../905/943101';
+import { mapFileTypeToEditorType } from '../figma_app/53721';
+import { FPermissionLevelType, FPlanFeatureType, FTeamAccessPermissionType } from '../figma_app/191312';
+import { getProductAccessTypeByKey } from '../figma_app/217457';
+import { mapFileExportAndLinkControls, mapFileLinkExpirationConfigWithPrevious, mapFileView, mapOrgDomainProperties, mapRepoSummary, mapResourceAccess, mapUserProperties } from '../figma_app/349248';
+import { throwTypeError } from '../figma_app/465776';
+import { hasRootPathOptional } from '../figma_app/528509';
+import { encodeUri } from '../figma_app/930338';
+import { v } from '../figma_app/995722';
+import a from '../vendor/961736';
+let s = a;
+var $$E6 = (e => (e.fileBrowserContextMenu = 'file_browser_context_menu', e.fileBrowserFavoritedContextMenu = 'file_browser_favorited_context_menu', e.fileBrowserTileActionMenu = 'file_browser_tile_action_menu', e.prototypeHeader = 'prototype_header', e.fullscreenToolbar = 'fullscreen_toolbar', e.expFigJamOnboardingShareVariant = 'exp_figjam_onboarding_share_variant', e.fullscreenCopyLinkButtonVisualBell = 'fullscreen_copy_link_button_visual_bell', e.prototypeCopyLinkButtonVisualBell = 'prototype_copy_link_button_visual_bell', e.customTemplatePublishNudge = 'custom_template_publish_nudge', e.editRequestTooltip = 'edit_request_tooltip', e.editRequestExternal = 'edit_request_external', e.shareToGoogleClassroomOnboarding = 'share_to_google_classroom_onboarding', e.googleClassroomIntegration = 'google_classroom_integration', e))($$E6 || {});
 export function $$y4(e) {
   return {
     ...e,
@@ -34,8 +33,8 @@ export function $$y4(e) {
     folderAccessEnabled: !0,
     isDraftFileLG: !1,
     isAbandonedDraftFile: !1,
-    mustUpgradeToShareDraft: !1,
-  }
+    mustUpgradeToShareDraft: !1
+  };
 }
 function b(e) {
   return {
@@ -60,20 +59,20 @@ function b(e) {
     editorType: mapFileTypeToEditorType(e.editor_type),
     numProjectTeamMembersWithAccess: 0,
     planTier: null,
-    planRecordId: null,
-  }
+    planRecordId: null
+  };
 }
 function T(e) {
-  return e.fileLinkExpirationConfig || e.sourceFileLinkExpirationConfig
+  return e.fileLinkExpirationConfig || e.sourceFileLinkExpirationConfig;
 }
 function I(e) {
-  return e.repo?.defaultFileKey === e.key
+  return e.repo?.defaultFileKey === e.key;
 }
 export function $$S3(e) {
-  let t = T(e)
-  let r = I(e)
-  let n = e.pwdConfig?.updatedAt || null
-  let a = e.pwdConfig?.setByUser ? mapUserProperties(e.pwdConfig.setByUser) : null
+  let t = T(e);
+  let r = I(e);
+  let n = e.pwdConfig?.updatedAt || null;
+  let a = e.pwdConfig?.setByUser ? mapUserProperties(e.pwdConfig.setByUser) : null;
   let s = {
     ...fileEntityDataMapper.toSinatra(e),
     client_meta: e.clientMeta || '',
@@ -93,8 +92,8 @@ export function $$S3(e) {
     edit_url: '',
     prototype_url: `${window.location.origin}/proto/${e.key}/${encodeUri(e.name || '')}`,
     track_tags: '',
-    url: `${window.location.origin}/file/${e.key}/${encodeUri(e.name || '')}`,
-  }
+    url: `${window.location.origin}/file/${e.key}/${encodeUri(e.name || '')}`
+  };
   return {
     canEdit: e.canEdit,
     canEditCanvas: e.canEditCanvas,
@@ -113,124 +112,113 @@ export function $$S3(e) {
     isDraftFileLG: e.isDraftFile && getResourceDataOrFallback(e.isDraftFile) || !1,
     isAbandonedDraftFile: e.isAbandonedDraftFile || !1,
     mustUpgradeToShareDraft: getResourceDataOrFallback(e.mustUpgradeToShareDraft) || !1,
-    ...s,
-  }
+    ...s
+  };
 }
 export function $$v5(e, t) {
-  if (e.status !== 'loaded')
-    return b(t)
-  let r = e.data.file
-  if (!r)
-    return b(t)
-  let n = T(r)
-  let a = I(r)
-  let s = e.status === 'loaded' && e.data.file ? $$S3(e.data.file) : $$y4(t)
-  let o = {}
-  r.repo && r.repo.roles.forEach((e) => {
-    e.userId && (o[e.userId] = e)
-  })
-  let l = r.project
-  let d = null
-  l && (d = l.teamAccess)
-  let c = new Set()
-  let u = {}
-  r.project && r.project.roles.forEach((e) => {
-    e.userId && (u[e.userId] = e, c.add(e.userId))
-  })
-  let m = {}
-  r.team && r.team.roles.forEach((e) => {
-    e.userId && (m[e.userId] = e, d && d !== FTeamAccessPermissionType.TEAM_ACCESS_DISABLED && c.add(e.userId))
-  })
+  if (e.status !== 'loaded') return b(t);
+  let r = e.data.file;
+  if (!r) return b(t);
+  let n = T(r);
+  let a = I(r);
+  let s = e.status === 'loaded' && e.data.file ? $$S3(e.data.file) : $$y4(t);
+  let o = {};
+  r.repo && r.repo.roles.forEach(e => {
+    e.userId && (o[e.userId] = e);
+  });
+  let l = r.project;
+  let d = null;
+  l && (d = l.teamAccess);
+  let c = new Set();
+  let u = {};
+  r.project && r.project.roles.forEach(e => {
+    e.userId && (u[e.userId] = e, c.add(e.userId));
+  });
+  let m = {};
+  r.team && r.team.roles.forEach(e => {
+    e.userId && (m[e.userId] = e, d && d !== FTeamAccessPermissionType.TEAM_ACCESS_DISABLED && c.add(e.userId));
+  });
   let E = {};
-  (a ? r.repo.roles : r.roles).forEach((e) => {
-    let t = e.user ? mapUserProperties(e.user) : null
+  (a ? r.repo.roles : r.roles).forEach(e => {
+    let t = e.user ? mapUserProperties(e.user) : null;
     if (t) {
-      let r = e.user?.orgUser || e.user?.guestOrgUser
-      let n = o[t.id]
-      let i = m[t.id]
-      let a = u[t.id]
-      let s = e.user?.teamUser
-        ? {
-            ...e.user.teamUser,
-            designPaidStatus: e.user.teamUser.designPaidStatus,
-            whiteboardPaidStatus: e.user.teamUser.whiteboardPaidStatus,
-          }
-        : null
-      let l = mapResourceAccess(e, t, r || null, s || null)
-      E[t.id] = l.pending
-        ? {
-            ...l,
-            invite: w(e.invite),
-          }
-        : {
-            ...l,
-            folderLevel: a?.level || null,
-            teamLevel: i?.level || null,
-            repoLevel: n?.level || null,
-          }
-    }
-    else if (e.pending) {
-      let t = mapResourceAccess(e, null, null, null)
+      let r = e.user?.orgUser || e.user?.guestOrgUser;
+      let n = o[t.id];
+      let i = m[t.id];
+      let a = u[t.id];
+      let s = e.user?.teamUser ? {
+        ...e.user.teamUser,
+        designPaidStatus: e.user.teamUser.designPaidStatus,
+        whiteboardPaidStatus: e.user.teamUser.whiteboardPaidStatus
+      } : null;
+      let l = mapResourceAccess(e, t, r || null, s || null);
+      E[t.id] = l.pending ? {
+        ...l,
+        invite: w(e.invite)
+      } : {
+        ...l,
+        folderLevel: a?.level || null,
+        teamLevel: i?.level || null,
+        repoLevel: n?.level || null
+      };
+    } else if (e.pending) {
+      let t = mapResourceAccess(e, null, null, null);
       E[`pending-${e.id}`] = {
         ...t,
-        invite: w(e.invite),
-      }
+        invite: w(e.invite)
+      };
     }
-  })
-  let v = {}
-  zb(t) && r.fileSeenStates.forEach((e) => {
-    let t = e.user ? mapUserProperties(e.user) : null
+  });
+  let v = {};
+  hasPublicLinkAccess(t) && r.fileSeenStates.forEach(e => {
+    let t = e.user ? mapUserProperties(e.user) : null;
     if (t) {
-      let r = o[t.id]
-      let n = m[t.id]
-      let i = u[t.id]
-      let a = mapFileView(e, t)
+      let r = o[t.id];
+      let n = m[t.id];
+      let i = u[t.id];
+      let a = mapFileView(e, t);
       v[a.user_id] = {
         ...a,
         folderLevel: i?.level || null,
         teamLevel: n?.level || null,
-        repoLevel: r?.level || null,
-      }
+        repoLevel: r?.level || null
+      };
     }
-  })
-  let A = {}
-  e.data.currentUser?.allBaseOrgUsers && e.data.currentUser.allBaseOrgUsers.forEach((e) => {
-    e.org && (A[e.org.id] = {})
-  })
-  let N = r.repo
-    ? {
-        ...mapRepoSummary(r.repo),
-        canEdit: r.repo.canEdit,
-        mainFileLinkExpirationConfig: mapFileLinkExpirationConfigWithPrevious(n),
-      }
-    : null
+  });
+  let A = {};
+  e.data.currentUser?.allBaseOrgUsers && e.data.currentUser.allBaseOrgUsers.forEach(e => {
+    e.org && (A[e.org.id] = {});
+  });
+  let N = r.repo ? {
+    ...mapRepoSummary(r.repo),
+    canEdit: r.repo.canEdit,
+    mainFileLinkExpirationConfig: mapFileLinkExpirationConfigWithPrevious(n)
+  } : null;
   if (x(n)) {
     let e = {
       link_access: n.prevPrivateLinkAccess,
       proto_link_access: n.prevPrivateProtoLinkAccess,
-      org_browsable: n.prevOrgBrowsable,
-    }
+      org_browsable: n.prevOrgBrowsable
+    };
     s = {
       ...s,
-      ...e,
-    }
+      ...e
+    };
     N && (N = {
       ...N,
-      ...e,
-    })
+      ...e
+    });
   }
-  let C = r.project?.orgDraftsFolderOwnerBaseOrgUser
-    ? {
-        id: r.project.orgDraftsFolderOwnerBaseOrgUser.id,
-        design_paid_status: r.project.orgDraftsFolderOwnerBaseOrgUser.accountType,
-        whiteboard_paid_status: r.project.orgDraftsFolderOwnerBaseOrgUser.whiteboardPaidStatus || FPlanFeatureType.STARTER,
-        user_id: r.project.orgDraftsFolderOwnerBaseOrgUser.userId,
-        user: mapUserProperties(r.project.orgDraftsFolderOwnerBaseOrgUser.user),
-      }
-    : null
-  let O = void 0
-  r.org && r.org.imgUrl !== null && (O = r.org.imgUrl)
-  let R = r.org && r.org.k12GoogleOrg && getResourceDataOrFallback(r.org.k12GoogleOrg)
+  let C = r.project?.orgDraftsFolderOwnerBaseOrgUser ? {
+    id: r.project.orgDraftsFolderOwnerBaseOrgUser.id,
+    design_paid_status: r.project.orgDraftsFolderOwnerBaseOrgUser.accountType,
+    whiteboard_paid_status: r.project.orgDraftsFolderOwnerBaseOrgUser.whiteboardPaidStatus || FPlanFeatureType.STARTER,
+    user_id: r.project.orgDraftsFolderOwnerBaseOrgUser.userId,
+    user: mapUserProperties(r.project.orgDraftsFolderOwnerBaseOrgUser.user)
+  } : null;
+  let O = void 0;
+  r.org && r.org.imgUrl !== null && (O = r.org.imgUrl);
+  let R = r.org && r.org.k12GoogleOrg && getResourceDataOrFallback(r.org.k12GoogleOrg);
   return {
     file: s,
     repo: N,
@@ -243,160 +231,144 @@ export function $$v5(e, t) {
       is_invite_only: !!l.inviteOnlyAt,
       team_id: l.teamId,
       team_access: d,
-      canRead: l.canRead && getResourceDataOrFallback(l.canRead) || !1,
+      canRead: l.canRead && getResourceDataOrFallback(l.canRead) || !1
     },
     folderRoles: l && l.roles || [],
     isInDraftsFolder: hasRootPathOptional(l),
     orgDraftsOwner: C,
-    org: r.org
-      ? {
-          id: r.org.id,
-          name: r.org.name,
-          img_url: O,
-          domain_capture: !!r.org.domainCapture,
-          workshop_enabled: !r.org.workshopDisabledAt,
-          invite_whitelist_guest_invite_setting: r.org.inviteWhitelist?.guestInviteSetting,
-          figjam_disabled_at: r.org.figjamDisabledAt,
-          org_domains: mapOrgDomainProperties(r.org.orgDomains),
-          bigma_enabled: !!r.org.bigmaEnabledAt,
-          k12_google_org: !!R,
-        }
-      : null,
-    orgUser: r.org?.currentBaseOrgUser
-      ? {
-          id: r.org.currentBaseOrgUser.id,
-          org_id: r.org.id,
-          user_id: e.data.currentUser?.id,
-          permission: r.org.currentBaseOrgUser.permission,
-          license_group_member: r.org.currentBaseOrgUser.licenseGroupMember
-            ? {
-                license_group_id: r.org.currentBaseOrgUser.licenseGroupMember.licenseGroupId,
-              }
-            : void 0,
-          design_paid_status: r.org.currentBaseOrgUser.designPaidStatus,
-          whiteboard_paid_status: r.org.currentBaseOrgUser.whiteboardPaidStatus,
-        }
-      : null,
-    currentOrg: e.data.org
-      ? {
-          domain_capture: !!e.data.org.domainCapture,
-          id: e.data.org.id,
-          invite_whitelist_guest_invite_setting: e.data.org.inviteWhitelist?.guestInviteSetting || null,
-          figjam_disabled_at: e.data.org.figjamDisabledAt,
-        }
-      : null,
-    team: r.team
-      ? {
-          id: r.team.id,
-          name: r.team.name,
-          img_url: r.team.imgUrl ?? void 0,
-          subscription: r.team.subscription,
-          student_team: !!r.team.studentTeamAt,
-          grace_period_end: r.team.gracePeriodEnd ? r.team.gracePeriodEnd.toISOString() : null,
-          canRead: r.team.canRead,
-          org_access: r.team.orgAccess,
-        }
-      : null,
+    org: r.org ? {
+      id: r.org.id,
+      name: r.org.name,
+      img_url: O,
+      domain_capture: !!r.org.domainCapture,
+      workshop_enabled: !r.org.workshopDisabledAt,
+      invite_whitelist_guest_invite_setting: r.org.inviteWhitelist?.guestInviteSetting,
+      figjam_disabled_at: r.org.figjamDisabledAt,
+      org_domains: mapOrgDomainProperties(r.org.orgDomains),
+      bigma_enabled: !!r.org.bigmaEnabledAt,
+      k12_google_org: !!R
+    } : null,
+    orgUser: r.org?.currentBaseOrgUser ? {
+      id: r.org.currentBaseOrgUser.id,
+      org_id: r.org.id,
+      user_id: e.data.currentUser?.id,
+      permission: r.org.currentBaseOrgUser.permission,
+      license_group_member: r.org.currentBaseOrgUser.licenseGroupMember ? {
+        license_group_id: r.org.currentBaseOrgUser.licenseGroupMember.licenseGroupId
+      } : void 0,
+      design_paid_status: r.org.currentBaseOrgUser.designPaidStatus,
+      whiteboard_paid_status: r.org.currentBaseOrgUser.whiteboardPaidStatus
+    } : null,
+    currentOrg: e.data.org ? {
+      domain_capture: !!e.data.org.domainCapture,
+      id: e.data.org.id,
+      invite_whitelist_guest_invite_setting: e.data.org.inviteWhitelist?.guestInviteSetting || null,
+      figjam_disabled_at: e.data.org.figjamDisabledAt
+    } : null,
+    team: r.team ? {
+      id: r.team.id,
+      name: r.team.name,
+      img_url: r.team.imgUrl ?? void 0,
+      subscription: r.team.subscription,
+      student_team: !!r.team.studentTeamAt,
+      grace_period_end: r.team.gracePeriodEnd ? r.team.gracePeriodEnd.toISOString() : null,
+      canRead: r.team.canRead,
+      org_access: r.team.orgAccess
+    } : null,
     workspace: r.team?.workspace ?? null,
     orgs: A,
     dataLoaded: !0,
     currentUser: e.data.currentUser,
-    sharedContainerSetting: mapFileExportAndLinkControls(r.org
-      ? {
-          id: r.org.id,
-          bigma_enabled: !!r.org?.bigmaEnabledAt,
-        }
-      : null, r.org?.orgSharedSetting ?? e.data.org?.orgSharedSetting, r.team?.workspaceSharedSetting),
+    sharedContainerSetting: mapFileExportAndLinkControls(r.org ? {
+      id: r.org.id,
+      bigma_enabled: !!r.org?.bigmaEnabledAt
+    } : null, r.org?.orgSharedSetting ?? e.data.org?.orgSharedSetting, r.team?.workspaceSharedSetting),
     editorType: mapFileTypeToEditorType(s.editor_type),
     numProjectTeamMembersWithAccess: c.size,
     activeProjectConnection: r.activeProjectResourceConnections?.[0],
     planTier: r.planPublicInfo?.tier || null,
-    planRecordId: getResourceDataOrFallback(r.planRecordId) || null,
-  }
+    planRecordId: getResourceDataOrFallback(r.planRecordId) || null
+  };
 }
 export function $$A0(e, t) {
-  let r
-  let n = null
-  let i = null
-  e.status === 'loaded' && t.status === 'loaded' ? (r = 'loaded', n = s()(e.data, t.data)) : e.status === 'errors' || t.status === 'errors' ? (r = 'errors', i = s()(e.errors || [], t.errors || [])) : r = 'loading'
+  let r;
+  let n = null;
+  let i = null;
+  e.status === 'loaded' && t.status === 'loaded' ? (r = 'loaded', n = s()(e.data, t.data)) : e.status === 'errors' || t.status === 'errors' ? (r = 'errors', i = s()(e.errors || [], t.errors || [])) : r = 'loading';
   return {
     status: r,
     data: n,
-    errors: i,
-  }
+    errors: i
+  };
 }
-let x = (e) => {
-  if (!e)
-    return !1
+let x = e => {
+  if (!e) return !1;
   let {
     accessReverted,
-    expiresAt,
-  } = e
-  return !accessReverted && !!expiresAt && dayjs().isAfter(expiresAt)
-}
+    expiresAt
+  } = e;
+  return !accessReverted && !!expiresAt && dayjs().isAfter(expiresAt);
+};
 export function $$N2(e) {
-  return !!(!e.canEdit && e.viewer_export_restricted && e.link_access === FPermissionLevelType.INHERIT)
+  return !!(!e.canEdit && e.viewer_export_restricted && e.link_access === FPermissionLevelType.INHERIT);
 }
 export function $$C1(e, t) {
-  let r = (function (e, t) {
+  let r = function (e, t) {
     let {
-      audience,
-    } = v(e)
+      audience
+    } = v(e);
     switch (audience) {
       case 'inherit':
         return getI18nString('file_access_row.only_people_invited_to_this_noun', {
-          noun: getI18nString('file_info_row.file'),
-        })
+          noun: getI18nString('file_info_row.file')
+        });
       case 'public':
-        return getI18nString('file_access_row.anyone_with_the_link')
+        return getI18nString('file_access_row.anyone_with_the_link');
       case 'public-password':
-        return getI18nString('file_access_row.anyone_with_the_link_and_password')
+        return getI18nString('file_access_row.anyone_with_the_link_and_password');
       case 'org':
         return getI18nString('file_access_row.anyone_at_org_name_with_the_link', {
-          orgName: t.name,
-        })
+          orgName: t.name
+        });
       case 'org-browsable':
         return getI18nString('file_access_row.anyone_at_org_name', {
-          orgName: t.name,
-        })
+          orgName: t.name
+        });
       default:
-        throwTypeError(audience)
+        throwTypeError(audience);
     }
-  }(e, t))
-  let i = (function (e) {
+  }(e, t);
+  let i = function (e) {
     let {
       audience,
-      level,
-    } = v(e)
-    if (audience === 'inherit')
-      return getI18nString('file_access_row.can_access')
+      level
+    } = v(e);
+    if (audience === 'inherit') return getI18nString('file_access_row.can_access');
     switch (level) {
       case 'view':
-        return getI18nString('file_access_row.can_view')
+        return getI18nString('file_access_row.can_view');
       case 'edit':
-        return getI18nString('file_access_row.can_edit')
+        return getI18nString('file_access_row.can_edit');
       case 'proto-view-only':
-        return getI18nString('file_access_row.can_view_prototypes')
+        return getI18nString('file_access_row.can_view_prototypes');
       default:
-        throwTypeError(level)
+        throwTypeError(level);
     }
-  }(e))
-  return `${r} ${i}`
+  }(e);
+  return `${r} ${i}`;
 }
 function w(e) {
-  return e
-    ? {
-        id: e.id,
-        redeemedBy: e.redeemedBy,
-        billableProductKey: e.billableProductKey ? getProductAccessTypeByKey(e.billableProductKey) : null,
-        inviteeUserId: e.inviteeUserId,
-      }
-    : null
+  return e ? {
+    id: e.id,
+    redeemedBy: e.redeemedBy,
+    billableProductKey: e.billableProductKey ? getProductAccessTypeByKey(e.billableProductKey) : null,
+    inviteeUserId: e.inviteeUserId
+  } : null;
 }
-export const Ad = $$A0
-export const Ch = $$C1
-export const Ir = $$N2
-export const Jj = $$S3
-export const bY = $$y4
-export const m1 = $$v5
-export const nk = $$E6
+export const Ad = $$A0;
+export const Ch = $$C1;
+export const Ir = $$N2;
+export const Jj = $$S3;
+export const bY = $$y4;
+export const m1 = $$v5;
+export const nk = $$E6;

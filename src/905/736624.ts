@@ -104,7 +104,7 @@ export class Point implements IPoint {
    * @param b - The point to subtract.
    * @returns A new Point with the difference.
    */
-  static subtract(a: Point, b: IPoint): Point {
+  static subtract(a: IPoint, b: IPoint): Point {
     return new Point(a.x - b.x, a.y - b.y)
   }
 
@@ -186,13 +186,13 @@ export class Point implements IPoint {
    * @param bounds - The bounding rectangle.
    * @returns A new bounded Point or the original if no bounds.
    */
-  static bound(point: Point, bounds?: { min: Point, max: Point }): Point {
+  static bound(point: IPoint, bounds?: { min: IPoint, max: IPoint }): IPoint {
     if (!bounds)
-      return point.clone()
-    return new Point(
-      Math.max(Math.min(point.x, bounds.max.x), bounds.min.x),
-      Math.max(Math.min(point.y, bounds.max.y), bounds.min.y),
-    )
+      return point
+    return {
+      x: Math.max(Math.min(point.x, bounds.max.x), bounds.min.x),
+      y: Math.max(Math.min(point.y, bounds.max.y), bounds.min.y),
+    }
   }
 
   /**

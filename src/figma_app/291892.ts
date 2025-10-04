@@ -472,6 +472,7 @@ export const imageProcessor = { // Original: $$P3
         isRotated,
         bitmap,
         colorProfile,
+        rgba: null,
       }
     }
     else {

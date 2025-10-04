@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
 import { c$, bL } from "../905/575478";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { AnchorPosition } from "../figma_app/763686";
 import l from "classnames";
 import { renderI18nText } from "../905/303541";
@@ -78,7 +78,7 @@ export function $$_0(e) {
     e && f(e) && restoreFocusElements?.includes(e) ? t.current = e : t.current = null;
   }, [restoreFocusElements]);
   return jsx(bL, {
-    legend: jsx(q, {
+    legend: jsx(Legend, {
       children: renderI18nText("fullscreen.scale_panel.anchor_point")
     }),
     value: anchorPoint.toString(),

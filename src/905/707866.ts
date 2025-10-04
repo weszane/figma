@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { useLatestRef } from "../figma_app/922077";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { dayjs } from "../905/920142";
 import { getI18nState } from "../figma_app/363242";
 import { KindEnum } from "../905/129884";
@@ -107,7 +107,7 @@ function D(e) {
           className: YD,
           children: jsx(f, {
             date: i.created_at,
-            children: jsx(h1, {
+            children: jsx(RelativeTimeDisplay, {
               capitalize: !0,
               date: i.created_at
             })

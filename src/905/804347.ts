@@ -49,7 +49,7 @@ import { fileEntityDataMapper } from '../905/943101';
 import { d as _$$d2 } from '../905/958822';
 import { h as _$$h } from '../905/971482';
 import { sortStateThunk } from '../905/977218';
-import { h1 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { resourceUtils } from '../905/989992';
 import { kq, ro } from '../905/994947';
 import { cssBuilderInstance } from '../cssbuilder/589278';
@@ -233,12 +233,12 @@ class W extends Component {
           })]
         }), jsx('div', {
           className: 'files--touchedAt--PnuDP',
-          children: jsx(h1, {
+          children: jsx(RelativeTimeDisplay, {
             date: searchResult.model.touched_at
           })
         }), jsx('div', {
           className: 'files--createdAt--srXc5',
-          children: jsx(h1, {
+          children: jsx(RelativeTimeDisplay, {
             date: searchResult.model.created_at
           })
         }), searchResult.model.owner && jsx(Link, {
@@ -337,12 +337,12 @@ let ep = memo(e => {
         }, r.id)
       }), jsx('div', {
         className: 'teams--touchedAt--nRyn6',
-        children: i ? jsx(h1, {
+        children: i ? jsx(RelativeTimeDisplay, {
           date: i
         }) : '\u2013'
       }), jsx('div', {
         className: 'teams--createdAt--3hbJC',
-        children: jsx(h1, {
+        children: jsx(RelativeTimeDisplay, {
           date: a
         })
       }), jsx('div', {
@@ -826,7 +826,7 @@ function e7(e) {
               hideTooltip: !0
             }), t.name]
           }), e.last_active_at ? renderI18nText('search.user_view.last_active', {
-            relativeTimeString: jsx(h1, {
+            relativeTimeString: jsx(RelativeTimeDisplay, {
               date: e.last_active_at
             })
           }) : renderI18nText('search.user_view.not_active_yet')]

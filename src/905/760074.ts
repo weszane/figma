@@ -6,7 +6,7 @@ import { AccessLevelEnum } from '../905/557142';
 import { getFeatureFlags } from '../905/601108';
 import { currentSelectionAtom } from '../905/617744';
 import { logError } from '../905/714362';
-import { WB as getObservableState } from '../905/761735';
+import { getCurrentLiveGraphClient } from '../905/761735';
 import { sendWithRetry } from '../905/910117';
 import { atomStoreManager } from '../figma_app/27355';
 import { FFileType } from '../figma_app/191312';
@@ -185,8 +185,8 @@ function getEditorType(e: string, t: any): string {
 function optimizeUrl(e: URL): URL {
   try {
     const t = e.pathname.split('/')[1];
-    if (t === 'file') e.searchParams.append('type', FFileType.DESIGN); else if (t === 'design') e.searchParams.append('m', 'auto');
-  } catch { }
+    if (t === 'file') e.searchParams.append('type', FFileType.DESIGN);else if (t === 'design') e.searchParams.append('m', 'auto');
+  } catch {}
   return e;
 }
 
@@ -275,7 +275,7 @@ export function findBestBranch(e: FileEntity, t: BranchEntity[], i: string): Bra
  * @param t - The user entity.
  * @returns The display name.
  */
-export const getDisplayNameAlt = (e: FileEntity, t: UserEntity): string => (e?.name ?? t?.name) || 'Untitled';
+export const getDisplayNameAlt = (e: FileEntity, t?: UserEntity): string => (e?.name ?? t?.name) || 'Untitled';
 
 /**
  * Gets repo by ID (original: $$T7).
@@ -327,7 +327,7 @@ export async function restoreFiles(e: string[]): Promise<{
     };
   });
   try {
-    const n = await getObservableState().optimisticallyUpdate(i, t);
+    const n = await getCurrentLiveGraphClient().optimisticallyUpdate(i, t);
     if (n.status === 207) {
       try {
         const data = n.data;

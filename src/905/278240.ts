@@ -10,7 +10,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { Oe } from "../figma_app/933328";
+import { loadSharedVariableThunk } from "../figma_app/933328";
 import { Lk } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
@@ -52,7 +52,7 @@ export function $$M0({
   } = u3(["FONT_SIZE"], p, g);
   let b = MH(consumedVariable) ?? void 0;
   let v = useCallback(async (e, t, i) => {
-    i ? e(await f(Oe(i))) : t();
+    i ? e(await f(loadSharedVariableThunk(i))) : t();
   }, [f]);
   let I = useCallback(async e => {
     void 0 !== g ? await v(e => {

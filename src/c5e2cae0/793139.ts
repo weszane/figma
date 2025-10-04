@@ -21,7 +21,7 @@ import { TextWithTruncation } from '../905/984674';
 import { s as _$$s } from '../c5e2cae0/341232';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { nR } from '../figma_app/60079';
-import { $L, us } from '../figma_app/136698';
+import { getColorForMultiplayer, multiplayerColors } from '../figma_app/136698';
 import { compareProductAccessTypes, getProductAccessTypeByKey } from '../figma_app/217457';
 import { logAndTrackCTA } from '../figma_app/314264';
 import { renderCheckoutDevModeText } from '../figma_app/361869';
@@ -39,7 +39,7 @@ let O = registerTooltip('org_upgrade_user_info_extended', ({
 }) => {
   return jsx('div', {
     children: e.map((e, a) => {
-      let r = $L(e, us);
+      let r = getColorForMultiplayer(e, multiplayerColors);
       return jsxs('div', {
         className: 'org_self_serve_modal_tooltip_content--tooltipRow--CyDdQ',
         children: [jsx('div', {
@@ -422,7 +422,7 @@ function K({
   return jsx('div', {
     className: cssBuilderInstance.w8.h8.bRadius2.minW8.$,
     style: styleBuilderInstance.add({
-      backgroundColor: $L(e, us)
+      backgroundColor: getColorForMultiplayer(e, multiplayerColors)
     }).$
   });
 }

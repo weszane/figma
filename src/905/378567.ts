@@ -7,12 +7,12 @@ import { LinkPrimitive } from "../figma_app/496441";
 import { ignoreCommandOrShift } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 import { stripHtmlTags } from "../905/491152";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { f as _$$f } from "../905/671470";
 import { C as _$$C } from "../905/196436";
 import { renderI18nText } from "../905/303541";
 import { selectViewAction } from "../905/929976";
-import { r } from "../905/620668";
+import { getLastUsedEditorType } from "../905/620668";
 import { FFileType } from "../figma_app/191312";
 import { HubResourceCategory } from "../figma_app/350203";
 import { getPluginVersion } from "../figma_app/300692";
@@ -141,7 +141,7 @@ export function $$F1(e, t) {
           className: this.props.usesTabletOptimizedSidebar ? lG : kw
         }), jsx("div", {
           className: this.props.usesTabletOptimizedSidebar ? qV : zB,
-          children: jsx(h1, {
+          children: jsx(RelativeTimeDisplay, {
             date: t.created_at
           })
         }), jsx("div", {
@@ -164,7 +164,7 @@ export function $$F1(e, t) {
                 case HubResourceCategory.PLUGINS:
                 case HubResourceCategory.WIDGETS:
                 default:
-                  return r() || FFileType.DESIGN;
+                  return getLastUsedEditorType() || FFileType.DESIGN;
               }
             }(this.props.tab) : void 0,
             context: ShelfViewType.SEARCH

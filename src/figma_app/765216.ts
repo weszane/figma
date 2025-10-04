@@ -13,7 +13,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { Point } from "../905/736624";
 import { Y as _$$Y } from "../905/506207";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
-import { AV } from "../figma_app/933328";
+import { applySharedStyle } from "../figma_app/933328";
 import { W3 } from "../905/232641";
 import { fullscreenValue } from "../figma_app/455680";
 import { paintManager, blackColor } from "../figma_app/385874";
@@ -152,7 +152,7 @@ function R({
       onApplyStyle: (e, {
         fromSearch: t
       } = {}) => {
-        L(AV({
+        L(applySharedStyle({
           style: e,
           inheritStyleKeyField: "inheritFillStyleKeyForStroke",
           fromSearch: t

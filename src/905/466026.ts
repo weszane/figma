@@ -1,7 +1,7 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { createActionCreator } from "../905/73481";
 import { isDevEnvironment } from "../figma_app/169182";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -41,8 +41,8 @@ let $$g10 = createOptimistThunk((e, {
     ...mapFileLinkExpirationConfig(t, r, d)
   };
   let h = mapFileLinkExpirationConfigOptimistic(t, r, d);
-  Object.keys(m).length > 0 && WB().optimisticallyUpdate(m, u);
-  h && WB().optimisticallyCreate(h, u);
+  Object.keys(m).length > 0 && getCurrentLiveGraphClient().optimisticallyUpdate(m, u);
+  h && getCurrentLiveGraphClient().optimisticallyCreate(h, u);
 });
 let $$f0 = createActionCreator("REPO_PERMISSIONS_PUT");
 let $$_12 = createOptimistAction("REPO_PUT", async (e, {

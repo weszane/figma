@@ -10,7 +10,7 @@ import { hubFilePutAll } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
 import { batchPutFileAction, filePutAction } from "../figma_app/78808";
 import { componentBatchUpdate, defaultLibraryInitializeLibraryKeys, defaultLibraryInitialize, putMoveLibraryItemKeyMappings } from "../905/879323";
-import { tg, xZ, VF } from "../figma_app/933328";
+import { fetchAndUpdateStateGroupsThunk, loadPublishedComponents, processAndDispatchLibraryItems } from "../figma_app/933328";
 import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { resolveUsedComponentsStateGroups, addTrackedState, generateDefaultLibrariesCacheKey, resolveUsedLibraries } from "../figma_app/646357";
@@ -177,7 +177,7 @@ let $$M3 = createOptimistThunk(e => {
   if (!t.openFile?.key) return;
   let n = e.getState().selectedView;
   n && "fullscreen" === n.view && (n.editorType === FEditorType.Whiteboard || n.editorType === FEditorType.Slides || n.editorType === FEditorType.Cooper ? L(e) : resolveUsedLibraries(), r && j(e, n.editorType === FEditorType.Whiteboard ? FDocumentType.FigJam : FDocumentType.Design));
-  r && (e.dispatch(tg()), xZ(e));
+  r && (e.dispatch(fetchAndUpdateStateGroupsThunk()), loadPublishedComponents(e));
 });
 let $$F1 = "FETCH_RECENTLY_USED_LIBRARY_ITEMS";
 async function j(e, t) {
@@ -234,8 +234,8 @@ async function j(e, t) {
     localOldGuidToNewKey: {}
   }));
   let o = atomStoreManager.get(filesByLibraryKeyAtom);
-  VF(r.data.meta.components, PrimaryWorkflowEnum.COMPONENT, o, e.dispatch);
-  VF(r.data.meta.state_groups, PrimaryWorkflowEnum.STATE_GROUP, o, e.dispatch);
+  processAndDispatchLibraryItems(r.data.meta.components, PrimaryWorkflowEnum.COMPONENT, o, e.dispatch);
+  processAndDispatchLibraryItems(r.data.meta.state_groups, PrimaryWorkflowEnum.STATE_GROUP, o, e.dispatch);
 }
 export let $$U4 = createOptimistThunk(e => {
   let t = e.getState().openFile;

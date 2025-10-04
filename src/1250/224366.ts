@@ -7,7 +7,7 @@ import { getSelectedView } from "../figma_app/386952";
 import { FEditorType } from "../figma_app/53721";
 import { n0 } from "../figma_app/32128";
 import { VS } from "../1250/506456";
-import { _$, Ep } from "../figma_app/379850";
+import { handleFullscreenViewTransition, closeDevModeComponentBrowser } from "../figma_app/379850";
 export function $$m0(e, t) {
   let n = getSelectedView();
   return "fullscreen" === n.view ? {
@@ -42,14 +42,14 @@ export function $$g3() {
   let e = useDispatch();
   let t = getSelectedView();
   return useCallback(n => {
-    _$(e, t, n);
+    handleFullscreenViewTransition(e, t, n);
   }, [e, t]);
 }
 export function $$f4() {
   let e = useDispatch();
   let t = getSelectedView();
   return useCallback(() => {
-    Ep(e, t);
+    closeDevModeComponentBrowser(e, t);
   }, [e, t]);
 }
 export function $$h1(e) {

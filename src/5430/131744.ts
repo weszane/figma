@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
 import { Button } from "../905/521428";
 import o from "classnames";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { getTranslatedDynamicContent, getI18nString } from "../905/303541";
 import { isValueInObject, getValueOrFallback } from "../905/872825";
 import { useSafeRouteStateInstance } from "../figma_app/321395";
@@ -42,7 +42,7 @@ export function $$x0({
   let x = useRef(null);
   let [f, y] = useState(!1);
   let [g, v] = useState(!1);
-  let b = _$$l();
+  let b = useWindowDimensions();
   return (useEffect(() => {
     if (f || !x.current) return;
     let e = x.current.scrollWidth > x.current.clientWidth;

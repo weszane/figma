@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { compareNumbers, nextAsciiString, separatorChar } from "../figma_app/766708";
 import { generateUUIDv4 } from "../905/871474";
 import { J } from "../905/539754";
@@ -61,7 +61,7 @@ export async function $$f10(e) {
 }
 export function $$E4(e, t, r, n) {
   t ??= generateUUIDv4();
-  WB().optimisticallyCreate({
+  getCurrentLiveGraphClient().optimisticallyCreate({
     CollectionItemV2: {
       [t]: {
         stableId: t,
@@ -86,7 +86,7 @@ export function $$y6({
   item: t,
   updatedItemAttributes: r
 }) {
-  WB().optimisticallyUpdate({
+  getCurrentLiveGraphClient().optimisticallyUpdate({
     CollectionItemV2: {
       [t.databaseId]: {
         collectionId: e.databaseId,
@@ -108,7 +108,7 @@ export async function $$b7({
   assetsForPublish: a
 }) {
   var o;
-  return e ? await WB().optimisticallyUpdate({
+  return e ? await getCurrentLiveGraphClient().optimisticallyUpdate({
     CollectionItemField: {
       [e]: {
         value: n
@@ -120,7 +120,7 @@ export async function $$b7({
     fieldSchema: t,
     newValue: n,
     assetsForPublish: a
-  })).then(e => e.data.meta) : (e = generateUUIDv4(), await WB().optimisticallyCreate({
+  })).then(e => e.data.meta) : (e = generateUUIDv4(), await getCurrentLiveGraphClient().optimisticallyCreate({
     CollectionItemField: {
       [e]: (o = r.databaseId, {
         itemId: o,
@@ -144,7 +144,7 @@ export function $$T2({
   collection: e,
   item: t
 }) {
-  WB().optimisticallyDelete({
+  getCurrentLiveGraphClient().optimisticallyDelete({
     CollectionItemV2: {
       [t.databaseId]: null
     }

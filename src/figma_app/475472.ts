@@ -1,5 +1,5 @@
 import { trackEventAnalytics } from "../905/449184";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { handleOptimistTransactionWithError } from "../905/150006";
 import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
@@ -177,7 +177,7 @@ let $$w0 = createOptimistThunk((e, t) => {
       }
     }));
   });
-  WB()?.optimisticallyUpdate({
+  getCurrentLiveGraphClient()?.optimisticallyUpdate({
     Team: {
       [n]: {
         name: d

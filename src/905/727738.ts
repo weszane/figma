@@ -17,7 +17,7 @@ import { FlashActions, handlePromiseError } from '../905/573154';
 import { P as _$$P } from '../905/595507';
 import { liveStoreInstance } from '../905/713695';
 import { getDisplayNameAlt } from '../905/760074';
-import { WB } from '../905/761735';
+import { getCurrentLiveGraphClient } from '../905/761735';
 import { handleOptimistTransaction } from '../905/842794';
 import { sendWithRetry } from '../905/910117';
 import { selectViewAction } from '../905/929976';
@@ -62,7 +62,7 @@ let b = createOptimistThunk((e, {
   handleOptimistTransaction(i, e.dispatch, I({
     fileSeenState: t
   }));
-  WB().optimisticallyDelete({
+  getCurrentLiveGraphClient().optimisticallyDelete({
     FileSeenState: {
       [t.id]: null
     }
@@ -172,7 +172,7 @@ let G = createOptimistThunk((e, {
   let o = mapResourceCategoryToRole(t.resource_type);
   if (o) {
     try {
-      WB().optimisticallyDelete({
+      getCurrentLiveGraphClient().optimisticallyDelete({
         [o]: {
           [t.id]: null
         }
@@ -230,7 +230,7 @@ let z = createOptimistThunk((e, {
     cascade: i
   }));
   let h = mapResourceCategoryToRole(t.resource_type);
-  h && WB()?.optimisticallyUpdate({
+  h && getCurrentLiveGraphClient()?.optimisticallyUpdate({
     [h]: {
       [t.id]: {
         level: t.level
@@ -297,7 +297,7 @@ let H = createOptimistThunk((e, {
   handleOptimistTransaction(_, e.dispatch, rolePostAction({
     role: A
   }));
-  mapResourceCategoryToRole(FResourceCategoryType.FILE) && (WB().optimisticallyCreate({
+  mapResourceCategoryToRole(FResourceCategoryType.FILE) && (getCurrentLiveGraphClient().optimisticallyCreate({
     FileRole: {
       [A.id]: {
         createdAt: new Date(),
@@ -313,7 +313,7 @@ let H = createOptimistThunk((e, {
         canRead: !0
       }
     }
-  }, _), WB().optimisticallyDelete({
+  }, _), getCurrentLiveGraphClient().optimisticallyDelete({
     FileSeenState: {
       [t.id]: null
     }

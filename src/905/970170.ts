@@ -6,7 +6,7 @@ import { componentDeleteForFile } from "../905/879323";
 import { ER } from "../905/466026";
 import { VK, YK } from "../905/880488";
 import { FilesForTeam, FilesForProject, FileByKeyForRealtimeShim, FilesForRepo } from "../figma_app/43951";
-import { H } from "../905/715533";
+import { RealtimeSubscriptionManager } from "../905/715533";
 import { teamMembersChannelHandler, folderChannelHandler, fileChannelHandler, fileRepoChannelHandler } from "../905/25169";
 function m(e) {
   let t = isIOSUA && e.getState().selectedView?.view === "prototype";
@@ -59,7 +59,7 @@ export function $$h0(e, t) {
 function g(e, t) {
   return e.updated_at < t.updatedAt?.toISOString() || e.touched_at < t.touchedAt.replace(/\.\d+Z/, "Z") || !!e.is_try_file != !!t.isTryFile || !!e.is_published_site != !!t.isPublishedSite || (e.last_published_at || "") !== t.lastPublishedAt || (e.thumbnail_url || "") !== t.thumbnailUrl;
 }
-let $$f3 = new H({
+let $$f3 = new RealtimeSubscriptionManager({
   name: "TeamChannelFilesShim",
   ...teamMembersChannelHandler,
   livegraphView: FilesForTeam,
@@ -93,7 +93,7 @@ let $$f3 = new H({
     store: e
   }) => !m(e)
 });
-let $$_1 = new H({
+let $$_1 = new RealtimeSubscriptionManager({
   name: "FolderChannelFilesShim",
   ...folderChannelHandler,
   livegraphView: FilesForProject,
@@ -127,7 +127,7 @@ let $$_1 = new H({
     store: e
   }) => !m(e)
 });
-let $$A4 = new H({
+let $$A4 = new RealtimeSubscriptionManager({
   name: "FileChannelFilesShim",
   ...fileChannelHandler,
   livegraphView: FileByKeyForRealtimeShim,
@@ -164,7 +164,7 @@ let $$A4 = new H({
     store: e
   }) => !m(e)
 });
-let $$y5 = new H({
+let $$y5 = new RealtimeSubscriptionManager({
   name: "FileRepoChannelFilesShim",
   ...fileRepoChannelHandler,
   livegraphView: FilesForRepo,

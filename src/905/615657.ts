@@ -1,99 +1,246 @@
-import { WhiteboardIntegrationType } from "../figma_app/763686";
-import { getI18nString } from "../905/303541";
-import { P } from "../905/813637";
-var $$n1;
-var $$r4;
-export function $$l3(e) {
-  return e ? getI18nString("fullscreen.file_import.you_don_t_have_permissions_to_import_in_folder_name", {
-    folderName: e
-  }) : getI18nString("fullscreen.file_import.you_don_t_have_permissions_to_import");
+import { getI18nString } from "../905/303541"
+import { getWhiteboardImportErrorMessage } from "../905/813637"
+import { WhiteboardIntegrationType } from "../figma_app/763686"
+
+// Error handling utilities and custom error classes for file import operations
+
+interface ErrorConstructorParams {
+  message: string
+  logString: string
+  imageUploadError?: boolean
 }
-export class $$d2 extends Error {
-  constructor(e, t, i = !1) {
-    super(e);
-    this.logString = t;
-    this.imageUploadError = i;
+
+/**
+ * Get localized error message for permission-related import errors
+ * Original function: $$l3
+ * @param folderName - Name of the folder where import permission is denied
+ * @returns Localized error message string
+ */
+export function getImportPermissionErrorMessage(folderName?: string): string {
+  return folderName
+    ? getI18nString("fullscreen.file_import.you_don_t_have_permissions_to_import_in_folder_name", {
+      folderName,
+    })
+    : getI18nString("fullscreen.file_import.you_don_t_have_permissions_to_import")
+}
+
+/**
+ * Base error class for import-related errors
+ * Original class: $$d2
+ */
+export class ImportBaseError extends Error {
+  logString: string
+  imageUploadError: boolean
+
+  constructor(params: ErrorConstructorParams) {
+    super(params.message)
+    this.logString = params.logString
+    this.imageUploadError = params.imageUploadError ?? false
   }
 }
-export class $$c6 extends $$d2 {}
-class u extends $$d2 {}
-(e => {
-  e.Canceled = class extends $$c6 {
+
+/**
+ * Extended error class for specific import errors
+ * Original class: $$c6
+ */
+export class ImportSpecificError extends ImportBaseError { }
+
+/**
+ * Error class for service-related issues
+ * Original class: u
+ */
+class ServiceError extends ImportBaseError { }
+
+/**
+ * Namespace for import-specific error types
+ * Original namespace: $$n1
+ */
+export namespace ImportErrors {
+  /**
+   * Error for canceled import operations
+   */
+  export class Canceled extends ImportSpecificError {
     constructor() {
-      super(getI18nString("file_browser.file_import_view.file_row_import_cancel"), "canceled");
+      super({
+        message: getI18nString("file_browser.file_import_view.file_row_import_cancel"),
+        logString: "canceled",
+      })
     }
-  };
-  e.IncompatibleFontSizes = class extends $$c6 {
+  }
+
+  /**
+   * Error for incompatible font sizes in imported files
+   */
+  export class IncompatibleFontSizes extends ImportSpecificError {
     constructor() {
-      super(getI18nString("fullscreen.file_import.file_contains_text_either_too_big_or_too_small"), "incompatible_font_sizes");
+      super({
+        message: getI18nString("fullscreen.file_import.file_contains_text_either_too_big_or_too_small"),
+        logString: "incompatible_font_sizes",
+      })
     }
-  };
-  e.Timeout = class extends $$c6 {
+  }
+
+  /**
+   * Error for timed out import operations
+   */
+  export class Timeout extends ImportSpecificError {
     constructor() {
-      super(getI18nString("fullscreen.file_import.file_timed_out"), "timeout");
+      super({
+        message: getI18nString("fullscreen.file_import.file_timed_out"),
+        logString: "timeout",
+      })
     }
-  };
-  e.GenericPdfError = class extends $$c6 {
-    constructor(e) {
-      super(P(e), "generic_pdf_error");
+  }
+
+  /**
+   * Generic PDF import error
+   */
+  export class GenericPdfError extends ImportSpecificError {
+    constructor(errorType: WhiteboardIntegrationType) {
+      super({
+        message: getWhiteboardImportErrorMessage(errorType),
+        logString: "generic_pdf_error",
+      })
     }
-  };
-  e.PdfImportBlocked = class extends $$c6 {
+  }
+
+  /**
+   * Error for blocked PDF imports
+   */
+  export class PdfImportBlocked extends ImportSpecificError {
     constructor() {
-      super(P(WhiteboardIntegrationType.UNKNOWN), "pdf_import_blocked");
+      super({
+        message: getWhiteboardImportErrorMessage(WhiteboardIntegrationType.UNKNOWN),
+        logString: "pdf_import_blocked",
+      })
     }
-  };
-  e.InvalidPermissions = class extends $$c6 {
-    constructor(e) {
-      super($$l3(e), "invalid_permissions");
+  }
+
+  /**
+   * Error for invalid permissions during import
+   */
+  export class InvalidPermissions extends ImportSpecificError {
+    constructor(folderName?: string) {
+      super({
+        message: getImportPermissionErrorMessage(folderName),
+        logString: "invalid_permissions",
+      })
     }
-  };
-  e.PdfTooLarge = class extends $$c6 {
+  }
+
+  /**
+   * Error for PDF files that are too large
+   */
+  export class PdfTooLarge extends ImportSpecificError {
     constructor() {
-      super(getI18nString("fullscreen.file_import.your_pdf_is_larger_than_50mb"), "pdf_too_large");
+      super({
+        message: getI18nString("fullscreen.file_import.your_pdf_is_larger_than_50mb"),
+        logString: "pdf_too_large",
+      })
     }
-  };
-  e.SvgFromFileBrowser = class extends $$c6 {
+  }
+
+  /**
+   * Error for SVG files imported from file browser
+   */
+  export class SvgFromFileBrowser extends ImportSpecificError {
     constructor() {
-      super(getI18nString("fullscreen.file_import.to_import_an_svg_drag_it_directly_into_an_open_figma_file"), "svg_from_file_browser");
+      super({
+        message: getI18nString("fullscreen.file_import.to_import_an_svg_drag_it_directly_into_an_open_figma_file"),
+        logString: "svg_from_file_browser",
+      })
     }
-  };
-  e.GenericPptxError = class extends $$c6 {
+  }
+
+  /**
+   * Generic PPTX import error
+   */
+  export class GenericPptxError extends ImportSpecificError {
     constructor() {
-      super(getI18nString("fullscreen.file_import.could_not_convert_file"), "generic_pptx_error");
+      super({
+        message: getI18nString("fullscreen.file_import.could_not_convert_file"),
+        logString: "generic_pptx_error",
+      })
     }
-  };
-})($$n1 || ($$n1 = {}));
-(e => {
-  e.ServiceUnavailable = class extends u {
-    constructor() {
-      super(getI18nString("fullscreen.file_import.oops_this_service_is_temporarily_unavailable"), "service_unavailable");
-    }
-  };
-  e.ImageUploadFailed = class extends u {
-    constructor() {
-      super(getI18nString("fullscreen.file_import.unable_to_import"), "image_upload_failed", !0);
-    }
-  };
-  e.NoBlob = class extends u {
-    constructor() {
-      super(getI18nString("fullscreen.file_import.could_not_convert_file"), "no_blob");
-    }
-  };
-  e.UnknownConversionError = class extends u {
-    constructor() {
-      super(getI18nString("fullscreen.file_import.could_not_convert_file"), "unknown_conversion_error");
-    }
-  };
-})($$r4 || ($$r4 = {}));
-export let $$p5 = [];
-export function $$m0() {
-  $$p5 = [];
+  }
 }
-export const MS = $$m0;
-export const OL = $$n1;
-export const Yw = $$d2;
-export const cu = $$l3;
-export const lZ = $$r4;
-export const pl = $$p5;
-export const zX = $$c6;
+
+/**
+ * Namespace for service-related errors
+ * Original namespace: $$r4
+ */
+export namespace ServiceErrors {
+  /**
+   * Error for temporarily unavailable services
+   */
+  export class ServiceUnavailable extends ServiceError {
+    constructor() {
+      super({
+        message: getI18nString("fullscreen.file_import.oops_this_service_is_temporarily_unavailable"),
+        logString: "service_unavailable",
+      })
+    }
+  }
+
+  /**
+   * Error for failed image uploads
+   */
+  export class ImageUploadFailed extends ServiceError {
+    constructor() {
+      super({
+        message: getI18nString("fullscreen.file_import.unable_to_import"),
+        logString: "image_upload_failed",
+        imageUploadError: true,
+      })
+    }
+  }
+
+  /**
+   * Error when no blob is available
+   */
+  export class NoBlob extends ServiceError {
+    constructor() {
+      super({
+        message: getI18nString("fullscreen.file_import.could_not_convert_file"),
+        logString: "no_blob",
+      })
+    }
+  }
+
+  /**
+   * Error for unknown conversion issues
+   */
+  export class UnknownConversionError extends ServiceError {
+    constructor() {
+      super({
+        message: getI18nString("fullscreen.file_import.could_not_convert_file"),
+        logString: "unknown_conversion_error",
+      })
+    }
+  }
+}
+
+// Error tracking array and utilities
+/**
+ * Array to track import errors
+ * Original variable: $$p5
+ */
+export let importErrorTracker: ImportBaseError[] = []
+
+/**
+ * Reset the import error tracker
+ * Original function: $$m0
+ */
+export function resetImportErrorTracker(): void {
+  importErrorTracker = []
+}
+
+// Export aliases for backward compatibility
+export const MS = resetImportErrorTracker
+
+export const OL = ImportErrors
+export const Yw = ImportBaseError
+export const cu = getImportPermissionErrorMessage
+export const lZ = ServiceErrors
+export const pl = importErrorTracker
+export const zX = ImportSpecificError

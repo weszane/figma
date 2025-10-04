@@ -1,19 +1,41 @@
-import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { sendWithRetry } from "../905/910117";
-export let $$a0 = new class {
-  constructor() {
-    this.VariableSetDefaultModeSettingSchemaValidator = createNoOpValidator();
+import { sendWithRetry } from "../905/910117"
+import { APIParameterUtils, createNoOpValidator } from "../figma_app/181241"
+
+export class VariableSetDefaultModeService {
+  private validator = createNoOpValidator()
+
+  /**
+   * Get default modes for variable sets
+   * @param params - Parameters containing either folderId or API parameters
+   * @returns Promise with the API response
+   */
+  getDefaultModes(params: { folderId?: string, [key: string]: any }) {
+    return this.validator.validate(({ xr }: { xr: any }) => {
+      if ("folderId" in params) {
+        return xr.get(`/api/variable_set_default_modes/${params.folderId}`)
+      }
+      return xr.get("/api/variable_set_default_modes", APIParameterUtils.toAPIParameters(params))
+    })
   }
-  getDefaultModes(e) {
-    return this.VariableSetDefaultModeSettingSchemaValidator.validate(({
-      xr: t
-    }) => "folderId" in e ? t.get("/api/variable_set_default_modes/" + e.folderId) : t.get("/api/variable_set_default_modes", APIParameterUtils.toAPIParameters(e)));
+
+  /**
+   * Set default mode for variable sets
+   * @param params - Parameters for setting default mode
+   * @returns Promise with the API response
+   */
+  setDefaultMode(params: Record<string, any>) {
+    return sendWithRetry.post("/api/variable_set_default_modes", APIParameterUtils.toAPIParameters(params))
   }
-  setDefaultMode(e) {
-    return sendWithRetry.post("/api/variable_set_default_modes", APIParameterUtils.toAPIParameters(e));
+
+  /**
+   * Delete default mode for variable sets
+   * @param params - Parameters for deleting default mode
+   * @returns Promise with the API response
+   */
+  deleteDefaultMode(params: Record<string, any>) {
+    return sendWithRetry.del("/api/variable_set_default_modes", APIParameterUtils.toAPIParameters(params))
   }
-  deleteDefaultMode(e) {
-    return sendWithRetry.del("/api/variable_set_default_modes", APIParameterUtils.toAPIParameters(e));
-  }
-}();
-export const j = $$a0;
+}
+
+export const variableSetDefaultModeService = new VariableSetDefaultModeService()
+export const j = variableSetDefaultModeService

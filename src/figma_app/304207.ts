@@ -1,7 +1,7 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
 import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
@@ -58,7 +58,7 @@ let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
       userId: p ? null : v.user.id,
       orgId: p ?? null
     });
-    t && WB().optimisticallyCreate({
+    t && getCurrentLiveGraphClient().optimisticallyCreate({
       PluginInstall: {
         [e]: t
       }
@@ -138,7 +138,7 @@ let $$A3 = createOptimistAction("UNSAVE_EXTENSION", (e, {
   r === ResourceTypeNoComment.WIDGET && (E.current_org_id = void 0);
   let y = `/api/${getHubTypeString(r)}/${t}/install`;
   let b = sendWithRetry.del(y, E);
-  p?.pluginInstallId && WB().optimisticallyDelete({
+  p?.pluginInstallId && getCurrentLiveGraphClient().optimisticallyDelete({
     PluginInstall: {
       [p.pluginInstallId]: null
     }

@@ -5,7 +5,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { isSubscriptionActive } from "../figma_app/808294";
 import { sW } from "../figma_app/49598";
 import { TrackingProvider, TrackedButton } from "../figma_app/831799";
-import { Cn } from "../905/862913";
+import { convertToRgba } from "../905/862913";
 import { t0 } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
@@ -1394,13 +1394,13 @@ export class $$eJ0 extends Component {
           }), jsx("div", {
             className: this.state.embedLoaded ? "hub_file_detail_view--coverImageContainerHidden--hCY-H hub_file_detail_view--coverImageContainerShowing--ZnsLn" : "hub_file_detail_view--coverImageContainerShowing--ZnsLn",
             style: {
-              backgroundColor: Cn(this.props.hubFile.client_meta)
+              backgroundColor: convertToRgba(this.props.hubFile.client_meta)
             },
             children: jsx(Ho, {
               image: this.props.hubFile.thumbnail_url,
               isSet: e,
               isWhiteboard: r,
-              backgroundColor: Cn(this.props.hubFile.client_meta),
+              backgroundColor: convertToRgba(this.props.hubFile.client_meta),
               hubFileId: this.props.hubFile.id,
               alt: this.props.hubFile.versions[this.props.hubFile.current_hub_file_version_id].name,
               resizedThumbnailUrls: this.props.hubFile.resized_thumbnail_urls

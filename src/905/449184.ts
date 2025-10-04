@@ -1988,7 +1988,7 @@ export const getAnonymousId = () => b();
  */
 class AnalyticsEventManager {
   sentEventDetails: Record<string, any> = {};
-  sentDocumentEvents = new Set();
+  sentDocumentEvents = new Set<any>();
 
   /**
    * Tracks a defined event if allowed by throttling and feature flags.

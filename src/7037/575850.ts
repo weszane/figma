@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import a from "classnames";
 import { BaseLinkComponent } from "../905/551536";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { UserAvatar, AvatarSize } from "../905/590952";
 import { selectViewAction } from "../905/929976";
 import { stopPropagation } from "../figma_app/753501";
@@ -11,7 +11,7 @@ import { InterProfileType } from "../905/895626";
 var d = a;
 let f = "feed_profile_header--profile--BBFn9";
 export function $$_1(e) {
-  let t = e.date && jsx(h1, {
+  let t = e.date && jsx(RelativeTimeDisplay, {
     date: e.date,
     style: e.shortDate ? "short" : void 0,
     capitalize: !0

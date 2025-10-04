@@ -8,7 +8,7 @@ import { WAFImage } from "../905/675859";
 import { O7 } from "../figma_app/578832";
 import { addWhiteboardToolToRecentsAction } from "../figma_app/147952";
 import { fG } from "../figma_app/973927";
-import { Cn } from "../905/862913";
+import { convertToRgba } from "../905/862913";
 import { M as _$$M } from "../9410/228122";
 import { z } from "../3276/638169";
 import { S as _$$S } from "../3276/591174";
@@ -249,7 +249,7 @@ function W({
         height: .6 * n
       },
       children: jsx(WM, {
-        backgroundColor: Cn(clientMeta),
+        backgroundColor: convertToRgba(clientMeta),
         removeBorder: !0,
         className: r()("dlt_universal_insert_item--recentTemplateCommunityCard--0w4xu", {
           "dlt_universal_insert_item--recentTemplateCommunityCardInnerImage--nDAlH": !thumbnailIsSet

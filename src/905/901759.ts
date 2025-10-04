@@ -1,77 +1,131 @@
-import _require from "../0c62c2fd/653470";
-import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories } from "../905/165054";
-import { LogToConsoleMode, WhiteboardIntegrationType, Fullscreen, PerfResult } from "../figma_app/763686";
-import { atomStoreManager } from "../figma_app/27355";
-import d from "../vendor/197638";
-import { trackEventAnalytics } from "../905/449184";
-import { debugState } from "../905/407919";
-import { Timer } from "../905/609396";
+import dompurify from "dompurify";
 import { reportError } from "../905/11";
-import { getI18nString } from "../905/303541";
+import { createModalConfig, registerModal } from "../905/102752";
+import { sha1BytesFromHex, sha1Hex } from "../905/125019";
+import { hideModalHandler, showModalHandler } from "../905/156213";
+import { ServiceCategories } from "../905/165054";
 import { VisualBellActions } from "../905/302958";
+import { getI18nString } from "../905/303541";
+import { debugState } from "../905/407919";
+import { trackEventAnalytics } from "../905/449184";
 import { VisualBellIcon } from "../905/576487";
-import { A as _$$A } from "../905/658244";
-import { registerModal, createModalConfig } from "../905/102752";
-import { showModalHandler, hideModalHandler } from "../905/156213";
-import { D as _$$D2 } from "../905/758526";
-import { P as _$$P } from "../905/813637";
-import { eg as _$$eg, a4 } from "../figma_app/576669";
-import { sha1Hex, sha1BytesFromHex } from "../905/125019";
+import { Timer } from "../905/609396";
+import { FileBrowser } from "../905/658244";
 import { logError, logInfo } from "../905/714362";
+import { isAllowedOrgAtom } from "../905/758526";
+import { getWhiteboardImportErrorMessage } from "../905/813637";
+import { atomStoreManager } from "../figma_app/27355";
 import { imageProcessor } from "../figma_app/291892";
-let n;
-let $$r1;
-var c = d;
+import { throwTypeError } from "../figma_app/465776";
+import { eg as _$$eg, a4 } from "../figma_app/576669";
+import { Fullscreen, LogToConsoleMode, PerfResult, WhiteboardIntegrationType } from "../figma_app/763686";
+let modalType: any | null = null;
+export let pdfImportManagerInstance: PdfImportManager | null = null;
 let C = "image/png";
-async function T(e) {
-  return new Uint8Array(await e.arrayBuffer());
+// Original function name: T
+/**
+ * Converts a blob to a Uint8Array by reading its array buffer.
+ * @param blob - The blob to convert.
+ * @returns A promise that resolves to a Uint8Array.
+ */
+async function convertBlobToUint8Array(blob: Blob): Promise<Uint8Array> {
+  return new Uint8Array(await blob.arrayBuffer());
 }
-async function k(e) {
-  if (!e.startsWith("blob:")) return null;
-  let t = await fetch(e);
-  return t.ok ? t.blob() : null;
-}
-async function R(e, t, i) {
-  let n = await T(e);
-  if (e.type !== C) {
-    logError("pdf", "PDF image type was: '" + e.type + "', expected " + C);
+
+// Original function name: k
+/**
+ * Fetches a blob from a URL if it starts with "blob:".
+ * @param url - The URL to fetch from.
+ * @returns A promise that resolves to the blob or null if not a blob URL or fetch fails.
+ */
+async function fetchBlobFromUrl(url: string): Promise<Blob | null> {
+  if (!url.startsWith("blob:")) {
     return null;
   }
-  let r = (await imageProcessor.decodeAsync(n, e.type, t, i, !1)).rgba;
-  return r ? imageProcessor.encodeInPlace(t, i, r, !1, 1, !1) : (logError("pdf", "Decoded PDF image returned no rgba data."), null);
+  const response = await fetch(url);
+  return response.ok ? response.blob() : null;
 }
-async function N(e) {
-  let t = e.href.baseVal;
-  let i = await k(t);
-  if (!i) return null;
-  let n = e.width.baseVal.value;
-  let r = e.height.baseVal.value;
-  let a = await R(i, n, r);
-  if (!a) throw Error("Couldn't compress!!");
-  let s = sha1Hex(a);
-  e.removeAttribute("href");
-  e.removeAttribute("xlink:href");
-  e.setAttribute("imageHash", s);
-  let o = sha1BytesFromHex(s);
+
+// Original function name: R
+/**
+ * Processes and compresses a PDF image blob.
+ * @param blob - The image blob.
+ * @param width - The width of the image.
+ * @param height - The height of the image.
+ * @returns A promise that resolves to the compressed image bytes or null on error.
+ */
+async function processAndCompressImage(blob: Blob, width: number, height: number): Promise<Uint8Array | null> {
+  const bytes = await convertBlobToUint8Array(blob);
+  if (blob.type !== C) {
+    logError("pdf", `PDF image type was: '${blob.type}', expected ${C}`);
+    return null;
+  }
+  const rgba = (await imageProcessor.decodeAsync(bytes, blob.type, width, height, false)).rgba;
+  if (!rgba) {
+    logError("pdf", "Decoded PDF image returned no rgba data.");
+    return null;
+  }
+  return imageProcessor.encodeInPlace(width, height, rgba, false, 1, false);
+}
+
+// Original function name: N
+/**
+ * Processes an SVG image element by fetching its blob, compressing it, and preparing image data.
+ * @param imageElement - The SVG image element to process.
+ * @returns A promise that resolves to the processed image data or null on error.
+ */
+async function processSvgImageElement(imageElement: SVGImageElement): Promise<any> {
+  const href = imageElement.href.baseVal;
+  const blob = await fetchBlobFromUrl(href);
+  if (!blob) {
+    return null;
+  }
+  const width = imageElement.width.baseVal.value;
+  const height = imageElement.height.baseVal.value;
+  const compressedBytes = await processAndCompressImage(blob, width, height);
+  if (!compressedBytes) {
+    throw new Error("Couldn't compress!!");
+  }
+  const sha1Hash = sha1Hex(compressedBytes);
+  imageElement.removeAttribute("href");
+  imageElement.removeAttribute("xlink:href");
+  imageElement.setAttribute("imageHash", sha1Hash);
+  const sha1Bytes = sha1BytesFromHex(sha1Hash);
   return {
     name: "Image",
-    bytes: a,
-    sha1Hash: s,
-    sha1Bytes: o
+    bytes: compressedBytes,
+    sha1Hash,
+    sha1Bytes
   };
 }
-async function P(e) {
-  let t = Array.from(e.querySelectorAll("image"));
-  return (await Promise.all(t.map(N))).reduce((e, t) => null !== t ? {
-    ...e,
-    images: [...e.images, t]
-  } : {
-    ...e,
-    hadImageError: !0
+
+// Original function name: P
+/**
+ * Extracts and processes all image elements from an SVG element.
+ * @param svgElement - The SVG element containing images.
+ * @returns A promise that resolves to an object with images array and error flag.
+ */
+async function extractImagesFromSvg(svgElement: SVGElement): Promise<{
+  images: any[];
+  hadImageError: boolean;
+}> {
+  const imageElements = Array.from(svgElement.querySelectorAll("image"));
+  const results = await Promise.all(imageElements.map(processSvgImageElement));
+  return results.reduce((acc, result) => {
+    if (result !== null) {
+      return {
+        ...acc,
+        images: [...acc.images, result]
+      };
+    } else {
+      return {
+        ...acc,
+        hadImageError: true
+      };
+    }
   }, {
     images: [],
-    hadImageError: !1
+    hadImageError: false
   });
 }
 let O = {
@@ -103,8 +157,8 @@ let D = {
   423: "4",
   425: "1/2",
   426: "1/4",
-  446: "\xb7",
-  447: "\xb7",
+  446: "\xB7",
+  447: "\xB7",
   550: "\u0308",
   551: "\u0307",
   552: "\u012C",
@@ -331,9 +385,9 @@ let j = {
   657: "8",
   658: "9",
   659: "\u2070",
-  660: "\xb9",
-  661: "\xb2",
-  662: "\xb3",
+  660: "\xB9",
+  661: "\xB2",
+  662: "\xB3",
   663: "\u2074",
   664: "\u2075",
   665: "\u2076",
@@ -387,9 +441,9 @@ let U = {
   657: "8",
   658: "9",
   659: "\u2070",
-  660: "\xb9",
-  661: "\xb2",
-  662: "\xb3",
+  660: "\xB9",
+  661: "\xB2",
+  662: "\xB3",
   663: "\u2074",
   664: "\u2075",
   665: "\u2076",
@@ -820,8 +874,8 @@ let G = {
   44: "I",
   142: "\u0300",
   143: "\u0301",
-  144: "\xce",
-  145: "\xee",
+  144: "\xCE",
+  145: "\xEE",
   234: "\u0303",
   236: "\u0304",
   238: "\u0306",
@@ -1586,14 +1640,14 @@ let Z = {
   31: "<",
   32: "=",
   33: ">",
-  101: "\xa3",
-  103: "\xa5",
-  113: "\xb1",
+  101: "\xA3",
+  103: "\xA5",
+  113: "\xB1",
   124: "/4",
   125: "/2",
   126: "/4",
-  151: "\xd7",
-  183: "\xf7",
+  151: "\xD7",
+  183: "\xF7",
   325: "\u015E",
   326: "\u015F",
   357: "\u2030",
@@ -1705,18 +1759,18 @@ let Z = {
   528: "k",
   529: "fk",
   530: "&",
-  544: "\xa1",
-  545: "\xbf",
+  544: "\xA1",
+  545: "\xBF",
   546: "!",
-  547: "\xa1",
+  547: "\xA1",
   548: "?",
-  549: "\xbf",
+  549: "\xBF",
   554: "/",
   555: "\\",
   558: "/",
   559: "\\",
-  562: "\xb7",
-  563: "\xb7",
+  562: "\xB7",
+  563: "\xB7",
   564: "-",
   565: "-",
   566: "-",
@@ -1735,17 +1789,17 @@ let Z = {
   579: "@",
   581: "\u20AC",
   582: "$",
-  583: "\xa3",
-  584: "\xa5",
+  583: "\xA3",
+  584: "\xA5",
   586: "\u20AC",
   587: "$",
-  588: "\xa2",
-  589: "\xa3",
-  590: "\xa5",
+  588: "\xA2",
+  589: "\xA3",
+  590: "\xA5",
   592: "\u20AC",
   593: "$",
-  594: "\xa3",
-  595: "\xa5",
+  594: "\xA3",
+  595: "\xA5",
   596: "0",
   597: "1",
   598: "2",
@@ -1784,36 +1838,36 @@ let Z = {
   631: "\u2030",
   632: "+",
   633: "-",
-  634: "\xd7",
-  635: "\xf7",
+  634: "\xD7",
+  635: "\xF7",
   636: "=",
   637: "<",
   638: ">",
-  639: "\xb1",
+  639: "\xB1",
   640: "\u2264",
   641: "\u2265",
   642: "\u2260",
   643: "\u2245",
   644: "+",
   645: "-",
-  646: "\xd7",
-  647: "\xf7",
+  646: "\xD7",
+  647: "\xF7",
   648: "=",
   649: "<",
   650: ">",
-  651: "\xb1",
+  651: "\xB1",
   652: "\u2264",
   653: "\u2265",
   654: "\u2260",
   655: "\u2245",
   656: "+",
   657: "-",
-  658: "\xd7",
-  659: "\xf7",
+  658: "\xD7",
+  659: "\xF7",
   660: "=",
   661: "<",
   662: ">",
-  663: "\xb1",
+  663: "\xB1",
   664: "\u2264",
   665: "\u2265",
   666: "\u2260",
@@ -1824,408 +1878,639 @@ let Z = {
   671: ";",
   672: " "
 };
-let X = "#000000";
-async function Q(e, t, i) {
-  let n;
+// Q function (original name: Q)
+async function convertPdfPageToSvg(e: any, t: any, i: any) {
+  let fontMap: any;
   let r = await _$$eg();
-  let a = new r.SVGGraphics(e.commonObjs, e.objs);
-  !function (e) {
-    function t(e) {
-      let t = e.message;
-      return t.startsWith("Unknown RadialAxial type") || t.startsWith("Unknown IR type") || "Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'." === t;
+  let svgGraphics = new r.SVGGraphics(e.commonObjs, e.objs);
+
+  // Wrap SVG graphics methods to handle errors gracefully
+  function isKnownError(error: Error): boolean {
+    let message = error.message;
+    return message.startsWith("Unknown RadialAxial type") || message.startsWith("Unknown IR type") || message === "Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'.";
+  }
+  const errorHandlers = [{
+    functionName: svgGraphics.setStrokeColorN.name,
+    isErrorOfInterest: isKnownError,
+    callOnFailure: () => {
+      svgGraphics.current.setStrokeColorN = "#000000";
+      logInfo("pdf", `Unsupported stroke, using: #000000`, void 0, {
+        logToConsole: LogToConsoleMode.ALWAYS
+      });
     }
-    [{
-      functionName: e.setStrokeColorN.name,
-      isErrorOfInterest: t,
-      callOnFailure: () => {
-        e.current.setStrokeColorN = X;
-        logInfo("pdf", `Unsupported stroke, using: ${X}`, void 0, {
-          logToConsole: LogToConsoleMode.ALWAYS
-        });
+  }, {
+    functionName: svgGraphics.setFillColorN.name,
+    isErrorOfInterest: isKnownError,
+    callOnFailure: () => {
+      svgGraphics.current.setFillColorN = "#000000";
+      logInfo("pdf", `Unsupported fill, using: #000000`, void 0, {
+        logToConsole: LogToConsoleMode.ALWAYS
+      });
+    }
+  }, {
+    functionName: svgGraphics.paintInlineImageXObject.name,
+    isErrorOfInterest: (e: Error) => e.message === "invalid format",
+    callOnFailure: () => {
+      logInfo("pdf", "Unsupported image", void 0, {
+        logToConsole: LogToConsoleMode.ALWAYS
+      });
+    }
+  }, {
+    functionName: svgGraphics.addFontStyle.name,
+    isErrorOfInterest: (e: Error) => e.message.startsWith("addFontStyle: No font data available"),
+    callOnFailure: () => {
+      logInfo("pdf", "Unsupported font", void 0, {
+        logToConsole: LogToConsoleMode.ALWAYS
+      });
+    }
+  }];
+
+  // Apply error handling to each method
+  errorHandlers.forEach(handler => {
+    wrapMethodWithErrorHandler(svgGraphics, handler);
+  });
+  function wrapMethodWithErrorHandler(target: any, handler: any) {
+    const {
+      functionName,
+      isErrorOfInterest,
+      callOnFailure
+    } = handler;
+    const originalMethod = target[functionName].bind(target);
+    target[functionName] = (...args: any[]) => {
+      try {
+        originalMethod(...args);
+      } catch (error) {
+        if (isErrorOfInterest(error)) {
+          callOnFailure();
+        } else {
+          throw error;
+        }
       }
-    }, {
-      functionName: e.setFillColorN.name,
-      isErrorOfInterest: t,
-      callOnFailure: () => {
-        e.current.setFillColorN = X;
-        logInfo("pdf", `Unsupported fill, using: ${X}`, void 0, {
-          logToConsole: LogToConsoleMode.ALWAYS
-        });
+    };
+  }
+  let operatorList = await e.getOperatorList();
+  let fontIdsToBold = new Set<string>();
+
+  // Process operator list
+  operatorList.fnArray.forEach((op: any, index: number) => {
+    if (op === r.OPS.setFont) {
+      let fontId = operatorList.argsArray[index][0];
+      let font = svgGraphics.commonObjs.get(fontId);
+      if (!font?.name) {
+        return;
       }
-    }, {
-      functionName: e.paintInlineImageXObject.name,
-      isErrorOfInterest: e => "invalid format" === e.message,
-      callOnFailure: () => {
-        logInfo("pdf", "Unsupported image", void 0, {
-          logToConsole: LogToConsoleMode.ALWAYS
-        });
+
+      // Map font to character set
+      fontMap = getFontCharacterMap(font.name);
+
+      // Track bold fonts
+      if (i.findFontIdsToBold) {
+        let fontName = font.name;
+        if (/(bold|700)/i.test(fontName)) {
+          fontIdsToBold.add(font.loadedName);
+        }
       }
-    }, {
-      functionName: e.addFontStyle.name,
-      isErrorOfInterest: e => e.message.startsWith("addFontStyle: No font data available"),
-      callOnFailure: () => {
-        logInfo("pdf", "Unsupported font", void 0, {
-          logToConsole: LogToConsoleMode.ALWAYS
-        });
-      }
-    }].forEach(t => {
-      !function (e, t) {
-        let {
-          functionName,
-          isErrorOfInterest,
-          callOnFailure
-        } = t;
-        let a = e[functionName].bind(e);
-        e[functionName] = (...e) => {
-          try {
-            a(...e);
-          } catch (e) {
-            if (isErrorOfInterest(e)) callOnFailure();else throw e;
+    }
+
+    // Process text
+    if (op === r.OPS.showText) {
+      operatorList.argsArray[index][0].forEach((char: any) => {
+        if (typeof char === "object") {
+          if (char.unicode !== "\0") {
+            char.fontChar = char.unicode;
+          } else if (fontMap?.[char.originalCharCode]) {
+            char.fontChar = fontMap[char.originalCharCode];
+          } else {
+            char.fontChar = "\u25A1"; // Empty box character
           }
-        };
-      }(e, t);
-    });
-  }(a);
-  let s = await e.getOperatorList();
-  let l = new Set();
-  if (s.fnArray.forEach((e, t) => {
-    if (e === r.OPS.setFont) {
-      let e = s.argsArray[t][0];
-      let r = a.commonObjs.get(e);
-      if (!r?.name) return;
-      if (n = function (e) {
-        let t = e.toLowerCase();
-        return t.includes("abril") ? O : t.includes("bangers") ? D : t.includes("caveat") ? L : t.includes("fredoka") ? F : t.includes("ibm-plex-mono") ? M : t.includes("ibm-plex-sans") ? j : t.includes("ibm-plex-serif") ? U : t.includes("lemon-tuesday") ? B : t.includes("noto-sans") ? V : t.includes("open-sans") ? G : t.includes("ptsans") || t.includes("pt-sans") ? z : t.includes("ptserif") || t.includes("pt-serif") ? H : t.includes("rammetto") ? W : t.includes("roboto-mono") ? Y : t.includes("roboto-slab") ? q : t.includes("roboto") ? K : t.includes("spoof") ? $ : t.includes("tiempos") ? Z : void 0;
-      }(r.name), i.findFontIdsToBold) {
-        var o;
-        o = r.name;
-        /(bold|700)/i.test(o) && l.add(r.loadedName);
-      }
+
+          // Mark spaces as in-font
+          if (char.fontChar === " ") {
+            char.isInFont = true;
+          }
+        }
+      });
     }
-    e === r.OPS.showText && s.argsArray[t][0].forEach(e => {
-      "object" == typeof e && ("\0" !== e.unicode ? e.fontChar = e.unicode : n?.[e.originalCharCode] ? e.fontChar = n[e.originalCharCode] : e.fontChar = "\u25A1", " " === e.fontChar && (e.isInFont = !0));
-    });
-  }), !i.preserveClipPaths) {
-    let e = e => e !== r.OPS.clip && e !== r.OPS.eoClip;
-    s.argsArray = s.argsArray.filter((t, i) => e(s.fnArray[i]));
-    s.fnArray = s.fnArray.filter(t => e(t));
+  });
+
+  // Remove clip paths if not preserving them
+  if (!i.preserveClipPaths) {
+    const isNotClipOp = (op: any) => op !== r.OPS.clip && op !== r.OPS.eoClip;
+    operatorList.argsArray = operatorList.argsArray.filter((arg: any, i: number) => isNotClipOp(operatorList.fnArray[i]));
+    operatorList.fnArray = operatorList.fnArray.filter(isNotClipOp);
   }
   return {
-    svgElement: await a.getSVG(s, t),
+    svgElement: await svgGraphics.getSVG(operatorList, t),
     additionalData: {
-      fontIdsToBold: l
+      fontIdsToBold
     }
   };
 }
-function J(e, t) {
-  t.pendingRemovals ??= new Set();
-  t.pendingRemovals.add(e);
+
+// Helper function to get font character map
+function getFontCharacterMap(fontName: string): any {
+  let lowerName = fontName.toLowerCase();
+  if (lowerName.includes("abril")) return O;
+  if (lowerName.includes("bangers")) return D;
+  if (lowerName.includes("caveat")) return L;
+  if (lowerName.includes("fredoka")) return F;
+  if (lowerName.includes("ibm-plex-mono")) return M;
+  if (lowerName.includes("ibm-plex-sans")) return j;
+  if (lowerName.includes("ibm-plex-serif")) return U;
+  if (lowerName.includes("lemon-tuesday")) return B;
+  if (lowerName.includes("noto-sans")) return V;
+  if (lowerName.includes("open-sans")) return G;
+  if (lowerName.includes("ptsans") || lowerName.includes("pt-sans")) return z;
+  if (lowerName.includes("ptserif") || lowerName.includes("pt-serif")) return H;
+  if (lowerName.includes("rammetto")) return W;
+  if (lowerName.includes("roboto-mono")) return Y;
+  if (lowerName.includes("roboto-slab")) return q;
+  if (lowerName.includes("roboto")) return K;
+  if (lowerName.includes("spoof")) return $;
+  if (lowerName.includes("tiempos")) return Z;
+  return undefined;
 }
-function ee(e) {
-  let t = e.pendingRemovals;
-  t && (e.children = e.children.filter(e => !t.has(e)), e.pendingRemovals = void 0);
+
+// J function (original name: J)
+function markForRemoval(element: any, context: any) {
+  context.pendingRemovals ??= new Set();
+  context.pendingRemovals.add(element);
 }
-function et(e, t) {
-  return [e[0] * t[0] + e[2] * t[1], e[1] * t[0] + e[3] * t[1], e[0] * t[2] + e[2] * t[3], e[1] * t[2] + e[3] * t[3], e[0] * t[4] + e[2] * t[5] + e[4], e[1] * t[4] + e[3] * t[5] + e[5]];
+
+// ee function (original name: ee)
+function removeMarkedElements(context: any) {
+  let pendingRemovals = context.pendingRemovals;
+  if (pendingRemovals) {
+    context.children = context.children.filter((child: any) => !pendingRemovals.has(child));
+    context.pendingRemovals = void 0;
+  }
 }
-function ei(e, t) {
+
+// et function (original name: et)
+function multiplyMatrices(a: number[], b: number[]): number[] {
+  return [a[0] * b[0] + a[2] * b[1], a[1] * b[0] + a[3] * b[1], a[0] * b[2] + a[2] * b[3], a[1] * b[2] + a[3] * b[3], a[0] * b[4] + a[2] * b[5] + a[4], a[1] * b[4] + a[3] * b[5] + a[5]];
+}
+
+// ei function (original name: ei)
+function transformPoint(matrix: number[], point: {
+  x: number;
+  y: number;
+}): {
+  x: number;
+  y: number;
+} {
   return {
-    x: e[0] * t.x + e[2] * t.y + e[4],
-    y: e[1] * t.x + e[3] * t.y + e[5]
+    x: matrix[0] * point.x + matrix[2] * point.y + matrix[4],
+    y: matrix[1] * point.x + matrix[3] * point.y + matrix[5]
   };
 }
-let en = {
+// en function (original name: removeInvisibleElements)
+const removeInvisibleElements = {
   name: "removeInvisibleElements",
   fn: () => ({
     element: {
-      exit: (e, t) => {
-        ee(e);
-        "path" !== e.name || e.attributes.fill && "none" !== e.attributes.fill || e.attributes.stroke && "none" !== e.attributes.stroke || J(e, t);
+      exit: (element: any, context: any) => {
+        removeMarkedElements(element);
+        const isPath = element.name === "path";
+        const hasFill = element.attributes.fill && element.attributes.fill !== "none";
+        const hasStroke = element.attributes.stroke && element.attributes.stroke !== "none";
+        if (isPath && !hasFill && !hasStroke) {
+          markForRemoval(element, context);
+        }
       }
     }
   })
 };
-let er = {
+
+// er function (original name: removeTSpanGlyphPositions)
+const removeTSpanGlyphPositions = {
   name: "removeTSpanGlyphPositions",
   fn: () => ({
     element: {
-      enter: (e, t) => {
-        "tspan" === e.name && e.attributes.x && e.attributes.x.startsWith("0 ") && delete e.attributes.x;
+      enter: (element: any) => {
+        const isTSpan = element.name === "tspan";
+        const hasXAttribute = element.attributes.x;
+        if (isTSpan && hasXAttribute && element.attributes.x.startsWith("0 ")) {
+          delete element.attributes.x;
+        }
       }
     }
   })
 };
-let ea = {
+
+// ea function (original name: combineOutlineAndFill)
+const combineOutlineAndFill = {
   name: "combineOutlineAndFill",
   fn: () => ({
     element: {
-      enter: e => {
-        let t = e.children.reduce((e, t) => {
-          if ("element" === t.type && "path" === t.name) {
-            let i = t.attributes.d || "";
-            e[i] ??= [];
-            e[i].push(t);
+      enter: (element: any) => {
+        // Group paths by their 'd' attribute
+        const pathGroups: Record<string, any[]> = element.children.reduce((acc: Record<string, any[]>, child: any) => {
+          if (child.type === "element" && child.name === "path") {
+            const pathData = child.attributes.d || "";
+            if (!acc[pathData]) {
+              acc[pathData] = [];
+            }
+            acc[pathData].push(child);
           }
-          return e;
+          return acc;
         }, {});
-        let i = new Set();
-        Object.values(t).forEach(e => {
-          if (e.length > 1) {
-            let t = {};
-            e.forEach((e, n) => {
-              Object.entries(e.attributes).forEach(([e, i]) => {
-                i && "none" !== i && (t[e] = i);
+
+        // Track elements to remove
+        const elementsToRemove = new Set<any>();
+
+        // Process each group
+        Object.values(pathGroups).forEach((group: any[]) => {
+          if (group.length > 1) {
+            // Merge attributes from all paths in the group
+            const mergedAttributes: Record<string, string> = {};
+            group.forEach((pathElement, index) => {
+              Object.entries(pathElement.attributes).forEach(([attrName, attrValue]) => {
+                if (attrValue && attrValue !== "none") {
+                  mergedAttributes[attrName] = attrValue as string;
+                }
               });
-              n > 0 && i.add(e);
+              // Mark duplicate paths for removal (skip the first one)
+              if (index > 0) {
+                elementsToRemove.add(pathElement);
+              }
             });
-            e[0].attributes = t;
+            // Apply merged attributes to the first path
+            group[0].attributes = mergedAttributes;
           }
         });
-        i.size > 0 && (e.children = e.children.filter(e => !i.has(e)));
+
+        // Remove duplicate paths
+        if (elementsToRemove.size > 0) {
+          element.children = element.children.filter((child: any) => !elementsToRemove.has(child));
+        }
       }
     }
   })
 };
-let es = {
+
+// es function (original name: combineLucidGroupedOutlineAndFill)
+const combineLucidGroupedOutlineAndFill = {
   name: "combineLucidGroupedOutlineAndFill",
   fn: () => ({
     element: {
-      enter: e => {
-        if ("element" !== e.type || "g" !== e.name) return;
-        let t = e.children.reduce((e, t) => {
-          if ("element" === t.type && "g" === t.name) {
-            let i = t.children[0];
-            if (i && "element" === i.type && "path" === i.name) {
-              let n = JSON.stringify([t.attributes.transform, i.attributes.d]);
-              e[n] ??= [];
-              e[n].push(t);
+      enter: (element: any) => {
+        // Only process 'g' elements
+        if (element.type !== "element" || element.name !== "g") {
+          return;
+        }
+
+        // Group nested 'g' elements by their transform and path 'd' attributes
+        const groupMap: Record<string, any[]> = element.children.reduce((acc: Record<string, any[]>, child: any) => {
+          if (child.type === "element" && child.name === "g") {
+            const pathElement = child.children[0];
+            if (pathElement && pathElement.type === "element" && pathElement.name === "path") {
+              const key = JSON.stringify([child.attributes.transform, pathElement.attributes.d]);
+              if (!acc[key]) {
+                acc[key] = [];
+              }
+              acc[key].push(child);
             }
           }
-          return e;
+          return acc;
         }, {});
-        let i = new Set();
-        Object.values(t).forEach(e => {
-          if (e.length > 1) {
-            let t = {};
-            e.forEach((e, n) => {
-              Object.entries(e.children[0].attributes).forEach(([e, i]) => {
-                i && "none" !== i && (t[e] = i);
+
+        // Track elements to remove
+        const elementsToRemove = new Set<any>();
+
+        // Process each group
+        Object.values(groupMap).forEach((group: any[]) => {
+          if (group.length > 1) {
+            // Merge attributes from all paths in the group
+            const mergedAttributes: Record<string, string> = {};
+            group.forEach((groupElement, index) => {
+              Object.entries(groupElement.children[0].attributes).forEach(([attrName, attrValue]) => {
+                if (attrValue && attrValue !== "none") {
+                  mergedAttributes[attrName] = attrValue as string;
+                }
               });
-              n > 0 && i.add(e);
+              // Mark duplicate groups for removal (skip the first one)
+              if (index > 0) {
+                elementsToRemove.add(groupElement);
+              }
             });
-            e[0].children[0].attributes = t;
+            // Apply merged attributes to the first path
+            group[0].children[0].attributes = mergedAttributes;
           }
         });
-        i.size > 0 && (e.children = e.children.filter(e => !i.has(e)));
+
+        // Remove duplicate groups
+        if (elementsToRemove.size > 0) {
+          element.children = element.children.filter((child: any) => !elementsToRemove.has(child));
+        }
       }
     }
   })
 };
-let eo = e => {
-  let t = /url\((.+)\)/.exec(e);
-  if (!t) return;
-  let i = t[1];
-  return "'\"".includes(i[0]) ? i.slice(1, -1) : i;
-};
-let el = {
+
+// eo function (original name: eo)
+function extractGradientId(fillAttribute: string): string | undefined {
+  const match = /url\((.+)\)/.exec(fillAttribute);
+  if (!match) {
+    return undefined;
+  }
+  const id = match[1];
+  // Remove quotes if present
+  return "'\"".includes(id[0]) ? id.slice(1, -1) : id;
+}
+
+// el function (original name: replaceRectGradientFillsWithLastStopColor)
+const replaceRectGradientFillsWithLastStopColor = {
   name: "replaceRectGradientFillsWithLastStopColor",
   fn: () => {
-    let e = {};
+    // Store gradient ID to color mapping
+    const gradientMap: Record<string, string> = {};
     return {
       element: {
-        enter: t => {
-          if ("linearGradient" === t.name) {
-            let i = t.children[t.children.length - 1];
-            if (i && "element" === i.type && "stop" === i.name) {
-              let n = i.attributes["stop-color"];
-              n && (e["#" + t.attributes.id] = n);
+        enter: (element: any) => {
+          // Process linearGradient elements
+          if (element.name === "linearGradient") {
+            const lastStop = element.children[element.children.length - 1];
+            if (lastStop && lastStop.type === "element" && lastStop.name === "stop") {
+              const stopColor = lastStop.attributes["stop-color"];
+              if (stopColor) {
+                gradientMap[`#${element.attributes.id}`] = stopColor;
+              }
             }
-          } else if ("rect" === t.name && t.attributes.fill) {
-            let i = eo(t.attributes.fill);
-            i && e.hasOwnProperty(i) && (t.attributes.fill = e[i]);
+          }
+          // Process rect elements with fill attributes
+          else if (element.name === "rect" && element.attributes.fill) {
+            const gradientId = extractGradientId(element.attributes.fill);
+            if (gradientId && Object.prototype.hasOwnProperty.call(gradientMap, gradientId)) {
+              element.attributes.fill = gradientMap[gradientId];
+            }
           }
         }
       }
     };
   }
 };
-let ed = {
+
+// ed function (original name: addWhitespaceToTspans)
+const addWhitespaceToTspans = {
   name: "addWhitespaceToTspans",
   fn: () => ({
     element: {
-      enter: e => {
-        "tspan" === e.name && (e.attributes["white-space"] = "pre");
+      enter: (element: any) => {
+        if (element.name === "tspan") {
+          element.attributes["white-space"] = "pre";
+        }
       }
     }
   })
 };
-let ec = {
+
+// ec function (original name: removeWhiteMiroBackground)
+
+const removeWhiteMiroBackground = {
   name: "removeWhiteMiroBackground",
   fn: () => {
-    let e = 0;
-    let t = 0;
-    let i = [];
+    let svgHeight = 0;
+    let svgWidth = 0;
+    let transformStack: number[][] = [];
     return {
       element: {
-        enter: (n, r) => {
-          if ("svg" === n.name) {
-            e = parseFloat(n.attributes.height || "0");
-            t = parseFloat(n.attributes.width || "0");
-          } else {
-            if (n.attributes.transform) {
-              let e = function (e) {
-                let t = [1, 0, 0, 1, 0, 0];
-                if (!e || "" === e.trim()) return t;
-                let i = e.match(/(matrix|translate|scale|rotate|skewX|skewY)\s*\(([-\d\s.,e]+)\)/g);
-                i && i.forEach(e => {
-                  let [i, n] = e.split(/\s*\(\s*|\s*\)\s*/);
-                  if (void 0 === n) return;
-                  let r = n.split(/[\s,]+/).map(Number);
-                  switch (i) {
-                    case "matrix":
-                      6 === r.length && (t = et(t, r));
-                      break;
-                    case "translate":
-                      let a = r[0] || 0;
-                      let s = r[1] || 0;
-                      t = et(t, [1, 0, 0, 1, a, s]);
-                      break;
-                    case "scale":
-                      let o = r[0] || 1;
-                      let l = r.length > 1 ? r[1] : o;
-                      t = et(t, [o, 0, 0, l, 0, 0]);
-                      break;
-                    case "rotate":
-                      let d = (r[0] || 0) * Math.PI / 180;
-                      let c = Math.cos(d);
-                      let u = Math.sin(d);
-                      let p = r[1] || 0;
-                      let m = r[2] || 0;
-                      0 === p && 0 === m ? t = et(t, [c, u, -u, c, 0, 0]) : (t = et(t, [1, 0, 0, 1, p, m]), t = et(t, [c, u, -u, c, 0, 0]), t = et(t, [1, 0, 0, 1, -p, -m]));
-                      break;
-                    case "skewX":
-                      let h = (r[0] || 0) * Math.PI / 180;
-                      t = et(t, [1, 0, Math.tan(h), 1, 0, 0]);
-                      break;
-                    case "skewY":
-                      let g = (r[0] || 0) * Math.PI / 180;
-                      t = et(t, [1, Math.tan(g), 0, 1, 0, 0]);
-                  }
-                });
-                return t;
-              }(n.attributes.transform);
-              i.push(e);
-            }
-            (function (e, t, i, n, r) {
-              if (i && n && "element" === t.type && "path" === e.name && ("#fff" === e.attributes.fill || "#f2f2f2" === e.attributes.fill)) {
-                let t = parseFloat(/v(\d+)/.exec(e.attributes.d || "")?.[1] || "0");
-                let {
-                  height,
-                  width
-                } = function (e, t, i) {
-                  let n = e.reduce((e, t) => et(e, t), [1, 0, 0, 1, 0, 0]);
-                  let {
-                    x,
-                    y
-                  } = ei(n, {
-                    x: 0,
-                    y: 0
-                  });
-                  let {
-                    x: _x,
-                    y: _y
-                  } = ei(n, {
-                    x: t,
-                    y: 0
-                  });
-                  let {
-                    x: _x2,
-                    y: _y2
-                  } = ei(n, {
-                    x: t,
-                    y: i
-                  });
-                  let {
-                    x: _x3,
-                    y: _y3
-                  } = ei(n, {
-                    x: 0,
-                    y: i
-                  });
-                  return {
-                    height: Math.max(y, _y, _y2, _y3) - Math.min(y, _y, _y2, _y3),
-                    width: Math.max(x, _x, _x2, _x3) - Math.min(x, _x, _x2, _x3)
-                  };
-                }(r, parseFloat(/h(\d+)/.exec(e.attributes.d || "")?.[1] || "0"), t);
-                if (height > .9 * i && width > .9 * n) return !0;
-              }
-              return !1;
-            })(n, r, e, t, i) && J(n, r);
+        enter: (element: any, parent: any) => {
+          // Capture SVG dimensions
+          if (element.name === "svg") {
+            svgHeight = parseFloat(element.attributes.height || "0");
+            svgWidth = parseFloat(element.attributes.width || "0");
+            return;
+          }
+
+          // Process transform attributes
+          if (element.attributes.transform) {
+            const matrix = parseTransform(element.attributes.transform);
+            transformStack.push(matrix);
+          }
+
+          // Check if element is a background path and mark for removal
+          if (isBackgroundPath(element, parent, svgHeight, svgWidth, transformStack)) {
+            markForRemoval(element, parent);
           }
         },
-        exit: (e, t) => {
-          ee(e);
-          e.attributes.transform && i.pop();
+        exit: (element: any, _context: any) => {
+          removeMarkedElements(element);
+          if (element.attributes.transform) {
+            transformStack.pop();
+          }
         }
       }
     };
   }
 };
-let eu = {
+
+// Helper function to parse transform strings into matrices
+function parseTransform(transformString: string): number[] {
+  let matrix = [1, 0, 0, 1, 0, 0];
+  if (!transformString || transformString.trim() === "") {
+    return matrix;
+  }
+  const transforms = transformString.match(/(matrix|translate|scale|rotate|skewX|skewY)\s*\(([-\d\s.,e]+)\)/g);
+  if (!transforms) {
+    return matrix;
+  }
+  transforms.forEach(transform => {
+    const parts = transform.split(/\s*\(\s*|\s*\)\s*/);
+    const type = parts[0];
+    const params = parts[1];
+    if (!params) {
+      return;
+    }
+    const values = params.split(/[\s,]+/).map(Number);
+    switch (type) {
+      case "matrix":
+        if (values.length === 6) {
+          matrix = multiplyMatrices(matrix, values);
+        }
+        break;
+      case "translate":
+        const tx = values[0] || 0;
+        const ty = values[1] || 0;
+        matrix = multiplyMatrices(matrix, [1, 0, 0, 1, tx, ty]);
+        break;
+      case "scale":
+        const sx = values[0] || 1;
+        const sy = values.length > 1 ? values[1] : sx;
+        matrix = multiplyMatrices(matrix, [sx, 0, 0, sy, 0, 0]);
+        break;
+      case "rotate":
+        const angle = (values[0] || 0) * Math.PI / 180;
+        const cos = Math.cos(angle);
+        const sin = Math.sin(angle);
+        const cx = values[1] || 0;
+        const cy = values[2] || 0;
+        if (cx === 0 && cy === 0) {
+          matrix = multiplyMatrices(matrix, [cos, sin, -sin, cos, 0, 0]);
+        } else {
+          matrix = multiplyMatrices(matrix, [1, 0, 0, 1, cx, cy]);
+          matrix = multiplyMatrices(matrix, [cos, sin, -sin, cos, 0, 0]);
+          matrix = multiplyMatrices(matrix, [1, 0, 0, 1, -cx, -cy]);
+        }
+        break;
+      case "skewX":
+        const skewXAngle = (values[0] || 0) * Math.PI / 180;
+        matrix = multiplyMatrices(matrix, [1, 0, Math.tan(skewXAngle), 1, 0, 0]);
+        break;
+      case "skewY":
+        const skewYAngle = (values[0] || 0) * Math.PI / 180;
+        matrix = multiplyMatrices(matrix, [1, Math.tan(skewYAngle), 0, 1, 0, 0]);
+        break;
+    }
+  });
+  return matrix;
+}
+
+// Helper function to determine if an element is a background path
+function isBackgroundPath(element: any, parent: any, svgHeight: number, svgWidth: number, transformStack: number[][]): boolean {
+  if (!svgHeight || !svgWidth || parent.type !== "element" || element.name !== "path") {
+    return false;
+  }
+  const fill = element.attributes.fill;
+  if (fill !== "#fff" && fill !== "#f2f2f2") {
+    return false;
+  }
+  const dAttribute = element.attributes.d || "";
+  const vMatch = /v(\d+)/.exec(dAttribute);
+  const hMatch = /h(\d+)/.exec(dAttribute);
+  const vValue = vMatch ? parseFloat(vMatch[1]) : 0;
+  const hValue = hMatch ? parseFloat(hMatch[1]) : 0;
+  const {
+    height,
+    width
+  } = calculateTransformedDimensions(transformStack, hValue, vValue);
+  return height > 0.9 * svgHeight && width > 0.9 * svgWidth;
+}
+
+// Helper function to calculate transformed dimensions
+function calculateTransformedDimensions(transforms: number[][], hValue: number, vValue: number): {
+  height: number;
+  width: number;
+} {
+  const combinedMatrix = transforms.reduce((acc, matrix) => multiplyMatrices(acc, matrix), [1, 0, 0, 1, 0, 0]);
+  const {
+    x,
+    y
+  } = transformPoint(combinedMatrix, {
+    x: 0,
+    y: 0
+  });
+  const {
+    x: x1,
+    y: y1
+  } = transformPoint(combinedMatrix, {
+    x: hValue,
+    y: 0
+  });
+  const {
+    x: x2,
+    y: y2
+  } = transformPoint(combinedMatrix, {
+    x: hValue,
+    y: vValue
+  });
+  const {
+    x: x3,
+    y: y3
+  } = transformPoint(combinedMatrix, {
+    x: 0,
+    y: vValue
+  });
+  return {
+    height: Math.max(y, y1, y2, y3) - Math.min(y, y1, y2, y3),
+    width: Math.max(x, x1, x2, x3) - Math.min(x, x1, x2, x3)
+  };
+}
+
+// eu function (original name: removeWhiteMuralBackground)
+const removeWhiteMuralBackground = {
   name: "removeWhiteMuralBackground",
   fn: () => {
-    let e = 0;
-    let t = 0;
+    let svgHeight = 0;
+    let svgWidth = 0;
     return {
       element: {
-        enter: (i, n) => {
-          "svg" === i.name ? (e = parseFloat(i.attributes.height || "0"), t = parseFloat(i.attributes.width || "0")) : function (e, t, i, n) {
-            if (i && n && "element" === t.type && "path" === e.name && "#fafafa" === e.attributes.fill) {
-              let t = parseFloat(/v(\d+)/.exec(e.attributes.d || "")?.[1] || "0");
-              let r = Math.abs(n - parseFloat(/h(\d+)/.exec(e.attributes.d || "")?.[1] || "0") / .75);
-              if (10 > Math.abs(i - t / .75) && r < 10) return !0;
-            }
-            return !1;
-          }(i, n, e, t) && J(i, n);
+        enter: (element: any, parent: any) => {
+          if (element.name === "svg") {
+            svgHeight = parseFloat(element.attributes.height || "0");
+            svgWidth = parseFloat(element.attributes.width || "0");
+          } else {
+            (function isMuralBackgroundPath(element: any, parent: any, svgHeight: number, svgWidth: number): boolean {
+              if (svgHeight && svgWidth && parent.type === "element" && element.name === "path" && element.attributes.fill === "#fafafa") {
+                const vValue = parseFloat(/v(\d+)/.exec(element.attributes.d || "")?.[1] || "0");
+                const hValue = parseFloat(/h(\d+)/.exec(element.attributes.d || "")?.[1] || "0");
+                const widthDiff = Math.abs(svgWidth - hValue / 0.75);
+                if (Math.abs(svgHeight - vValue / 0.75) < 10 && widthDiff < 10) {
+                  return true;
+                }
+              }
+              return false;
+            })(element, parent, svgHeight, svgWidth) && markForRemoval(element, parent);
+          }
         },
-        exit: (e, t) => {
-          ee(e);
+        exit: (element: any, _context: any) => {
+          removeMarkedElements(element);
         }
       }
     };
   }
 };
-let ep = {
+
+// ep function (original name: repairAndBoldVectorizedTextFromMiro)
+const repairAndBoldVectorizedTextFromMiro = {
   name: "repairAndBoldVectorizedTextFromMiro",
   fn: () => ({
     element: {
-      enter: (e, t) => {
-        if ("path" !== e.name || "element" !== t.type || "g" !== t.name) return;
-        let i = t.children[1];
-        if (!i || "element" !== i.type || "text" !== i.name) return;
-        let n = i.children[0];
-        if (n && "element" === n.type && "tspan" === n.name && "0" === n.attributes["fill-opacity"]) for (let n of (J(e, t), i.children)) "element" === n.type && "tspan" === n.name && (n.attributes["fill-opacity"] = "1", n.attributes["font-weight"] = "bold");
+      enter: (element: any, parent: any) => {
+        // Check if element is a path within a group that contains specific text structure
+        if (element.name !== "path" || parent.type !== "element" || parent.name !== "g") {
+          return;
+        }
+        const textElement = parent.children[1];
+        if (!textElement || textElement.type !== "element" || textElement.name !== "text") {
+          return;
+        }
+        const firstTspan = textElement.children[0];
+        if (firstTspan && firstTspan.type === "element" && firstTspan.name === "tspan" && firstTspan.attributes["fill-opacity"] === "0") {
+          // Mark the path for removal
+          markForRemoval(element, parent);
+
+          // Update all tspan elements
+          for (const tspan of textElement.children) {
+            if (tspan.type === "element" && tspan.name === "tspan") {
+              tspan.attributes["fill-opacity"] = "1";
+              tspan.attributes["font-weight"] = "bold";
+            }
+          }
+        }
       },
-      exit: (e, t) => {
-        ee(e);
+      exit: (element: any, _context: any) => {
+        removeMarkedElements(element);
       }
     }
   })
 };
-let em = e => {
-  let t = {
-    makeArcs: !1,
-    curveSmoothShorthands: !1
+
+// em function (original name: em)
+function getSVGOConfig(whiteboardType: WhiteboardIntegrationType) {
+  const pathDataOptions = {
+    makeArcs: false,
+    curveSmoothShorthands: false
   };
-  switch (e) {
+  switch (whiteboardType) {
     case WhiteboardIntegrationType.LUCID:
       return {
         name: "preset-default",
         params: {
           overrides: {
-            removeUnknownsAndDefaults: !1,
-            mergePaths: !1,
-            convertPathData: t
+            removeUnknownsAndDefaults: false,
+            mergePaths: false,
+            convertPathData: pathDataOptions
           }
         }
       };
@@ -2238,517 +2523,859 @@ let em = e => {
         name: "preset-default",
         params: {
           overrides: {
-            removeUnknownsAndDefaults: !1,
-            moveGroupAttrsToElems: !1,
-            collapseGroups: !1,
-            convertPathData: t
+            removeUnknownsAndDefaults: false,
+            moveGroupAttrsToElems: false,
+            collapseGroups: false,
+            convertPathData: pathDataOptions
           }
         }
       };
   }
-};
-let eh = "PDF import progress";
-let eg = "PDF import failure";
-async function ef(e) {
-  let t = await _$$eg();
-  let i = t.getDocument({
-    data: e,
-    verbosity: t.VerbosityLevel.ERRORS,
-    isEvalSupported: !1
+}
+// PDF import messages
+const PDF_IMPORT_PROGRESS_TYPE = "PDF import progress"; // eh
+const PDF_IMPORT_FAILURE_TYPE = "PDF import failure"; // eg
+
+/**
+ * Loads a PDF document from byte array
+ * @param pdfBytes - The PDF file as byte array
+ * @returns Promise resolving to PDF document or null if invalid
+ */
+async function loadPdfDocument(pdfBytes: Uint8Array) {
+  // ef
+  const pdfLibrary = await _$$eg();
+  const documentLoadingTask = pdfLibrary.getDocument({
+    data: pdfBytes,
+    verbosity: pdfLibrary.VerbosityLevel.ERRORS,
+    isEvalSupported: false
   });
-  let n = null;
+  let pdfDocument = null;
   try {
-    n = await i.promise;
-  } catch (e) {
-    if (e instanceof t.InvalidPDFException) ;else throw e;
+    pdfDocument = await documentLoadingTask.promise;
+  } catch (error) {
+    if (error instanceof pdfLibrary.InvalidPDFException) {
+      // Silently handle invalid PDF exception
+    } else {
+      throw error;
+    }
   }
-  return n;
+  return pdfDocument;
 }
-function e_(e, t, i = 1e-4) {
-  return Math.abs(e.top - t.top) < i && Math.abs(e.left - t.left) < i && Math.abs(e.bottom - t.bottom) < i && Math.abs(e.right - t.right) < i;
+
+/**
+ * Checks if two rectangles are approximately equal within a tolerance
+ * @param rect1 - First rectangle
+ * @param rect2 - Second rectangle
+ * @param tolerance - Tolerance for comparison (default: 1e-4)
+ * @returns True if rectangles are approximately equal
+ */
+function areRectsEqual(rect1: any, rect2: any, tolerance = 1e-4): boolean {
+  // e_
+  return Math.abs(rect1.top - rect2.top) < tolerance && Math.abs(rect1.left - rect2.left) < tolerance && Math.abs(rect1.bottom - rect2.bottom) < tolerance && Math.abs(rect1.right - rect2.right) < tolerance;
 }
-function eA(e, t, i) {
-  let n = i * Math.abs(e.right - e.left);
-  let r = i * Math.abs(e.bottom - e.top);
-  return e.top - r < t.top && e.left - n < t.left && e.right + n > t.right && e.bottom + r > t.bottom;
+
+/**
+ * Checks if the first rectangle contains the second rectangle within a tolerance
+ * @param outerRect - The containing rectangle
+ * @param innerRect - The rectangle to check if contained
+ * @param tolerance - Tolerance factor for expansion
+ * @returns True if outerRect contains innerRect
+ */
+function doesRectContainRect(outerRect: any, innerRect: any, tolerance: number): boolean {
+  // eA
+  const horizontalExpansion = tolerance * Math.abs(outerRect.right - outerRect.left);
+  const verticalExpansion = tolerance * Math.abs(outerRect.bottom - outerRect.top);
+  return outerRect.top - verticalExpansion < innerRect.top && outerRect.left - horizontalExpansion < innerRect.left && outerRect.right + horizontalExpansion > innerRect.right && outerRect.bottom + verticalExpansion > innerRect.bottom;
 }
-let ey = e => {
-  let t = (e, t, i = 1) => Math.abs(e - t) < i;
-  let i = e.element.parentElement;
-  let n = i?.parentElement;
-  if (!n) return;
-  let r = Array.from(n.children).indexOf(i);
-  if (r <= 1) return;
-  let a = n.children[r - 1];
-  if (2 !== a.children.length) return;
-  let s = a.children[0].getBoundingClientRect().width;
-  let o = a.children[0].getBoundingClientRect().width;
-  let l = e.rect.width;
-  if (t(l, s) && t(l, o)) return a;
-};
-async function eb(e, t) {
-  let [i, n] = await Promise.all([_$$eg(), a4()]);
-  let r = await ef(e);
-  if (!r) return {
-    svgStrings: [],
-    extractedImages: {
-      images: [],
-      hadImageError: !1
-    }
-  };
-  let a = r.numPages;
-  if (a < 1) return {
-    svgStrings: [],
-    extractedImages: {
-      images: [],
-      hadImageError: !1
-    }
-  };
-  async function s(e, t) {
-    let a = await r.getPage(e + 1);
-    let s = i.PixelsPerInch.PDF_TO_CSS_UNITS;
-    let l = a.getViewport({
-      scale: s
+
+/**
+ * Finds a matching element for text positioning based on width comparison
+ * @param elementData - Element data containing element and rect
+ * @returns Matching element or undefined
+ */
+function findMatchingElement(elementData: any) {
+  // ey
+  const isApproximatelyEqual = (value1: number, value2: number, tolerance = 1) => Math.abs(value1 - value2) < tolerance;
+  const parentElement = elementData.element.parentElement;
+  const grandParentElement = parentElement?.parentElement;
+  if (!grandParentElement) {
+    return undefined;
+  }
+  const parentIndex = Array.from(grandParentElement.children).indexOf(parentElement);
+  if (parentIndex <= 1) {
+    return undefined;
+  }
+  const previousSibling = grandParentElement.children[parentIndex - 1];
+  if (previousSibling.children.length !== 2) {
+    return undefined;
+  }
+  const firstChildWidth = previousSibling.children[0].getBoundingClientRect().width;
+  const secondChildWidth = previousSibling.children[1].getBoundingClientRect().width;
+  const currentElementWidth = elementData.rect.width;
+  if (isApproximatelyEqual(currentElementWidth, firstChildWidth) && isApproximatelyEqual(currentElementWidth, secondChildWidth)) {
+    return previousSibling;
+  }
+  return undefined;
+}
+
+/**
+ * Main function to convert PDF to SVG strings with extracted images
+ * @param pdfBytes - The PDF file as byte array
+ * @param whiteboardType - Type of whiteboard integration
+ * @returns Object containing SVG strings and extracted images
+ */
+async function convertPdfToSvgStrings(pdfBytes: Uint8Array, whiteboardType: WhiteboardIntegrationType) {
+  // eb
+  const [pdfLibrary, svgoLibrary] = await Promise.all([_$$eg(), a4()]);
+  const pdfDocument = await loadPdfDocument(pdfBytes);
+  if (!pdfDocument) {
+    return {
+      svgStrings: [],
+      extractedImages: {
+        images: [],
+        hadImageError: false
+      }
+    };
+  }
+  const pageCount = pdfDocument.numPages;
+  if (pageCount < 1) {
+    return {
+      svgStrings: [],
+      extractedImages: {
+        images: [],
+        hadImageError: false
+      }
+    };
+  }
+
+  /**
+   * Processes a single PDF page and converts it to SVG
+   * @param pageIndex - Zero-based page index
+   * @param whiteboardType - Type of whiteboard integration
+   * @returns Processed page data with SVG and images
+   */
+  async function processPdfPage(pageIndex: number, whiteboardType: WhiteboardIntegrationType) {
+    // s
+    const page = await pdfDocument.getPage(pageIndex + 1);
+    const scale = pdfLibrary.PixelsPerInch.PDF_TO_CSS_UNITS;
+    const viewport = page.getViewport({
+      scale
     });
-    let d = t === WhiteboardIntegrationType.LUCID;
-    let {
+    const isLucidIntegration = whiteboardType === WhiteboardIntegrationType.LUCID;
+    const {
       svgElement,
       additionalData: {
         fontIdsToBold
       }
-    } = await Q(a, l, {
-      preserveClipPaths: d,
-      findFontIdsToBold: !d
+    } = await convertPdfPageToSvg(page, viewport, {
+      preserveClipPaths: isLucidIntegration,
+      findFontIdsToBold: !isLucidIntegration
     });
-    d ? function (e) {
-      e.querySelectorAll("image").forEach(e => {
-        if ("154px" === e.getAttribute("width") && "142px" === e.getAttribute("height") && "0" === e.getAttribute("x") && "-142" === e.getAttribute("y") && "scale(0.0064935065 -0.0070422535)" === e.getAttribute("transform")) {
-          let t = document.createElement("rect");
-          t.setAttribute("fill", "#fff");
-          e.replaceWith(t);
-        }
-      });
-    }(svgElement) : t === WhiteboardIntegrationType.MIRO && function (e) {
-      e.querySelectorAll("image").forEach(e => {
-        let t = e.parentElement;
-        let i = t?.nextElementSibling;
-        let n = i?.children ? i.children[0] : null;
-        t?.nodeName === "svg:g" && i?.nodeName === "svg:g" && n && n.getAttribute("fill") && n.getAttribute("fill-rule") && n.getAttribute("fill-opacity") && (e.remove(), t?.remove(), n.setAttribute("nodeType", "sticky"));
-      });
-    }(svgElement);
-    let m = await P(svgElement);
+
+    // Apply whiteboard-specific fixes
+    if (isLucidIntegration) {
+      fixLucidSpecificImages(svgElement);
+    } else if (whiteboardType === WhiteboardIntegrationType.MIRO) {
+      fixMiroSpecificImages(svgElement);
+    }
+    const extractedImages = await extractImagesFromSvg(svgElement);
+
+    // Analyze text elements for positioning
     document.body.prepend(svgElement);
-    let h = Array.from(svgElement.querySelectorAll("text")).map(e => ({
-      element: e,
-      rect: e.getBoundingClientRect(),
-      matched: !1
+    const textElements = Array.from(svgElement.querySelectorAll("text")).map((element: SVGTextElement) => ({
+      element,
+      rect: element.getBoundingClientRect(),
+      matched: false
     }));
     document.body.removeChild(svgElement);
-    d && function (e) {
-      Array.from(e.querySelectorAll("text")).forEach(e => {
-        let t = Array.from(e.querySelectorAll("tspan"));
-        if (t.length > 0) {
-          let i = t[t.length - 1];
-          e.setAttribute("font-size", i.getAttribute("font-size") || "");
-          e.setAttribute("fill", "none");
-          "bold" === i.getAttribute("font-weight") && e.setAttribute("font-style", "italic");
-          "italic" === i.getAttribute("font-style") && e.setAttribute("font-weight", "bold");
-          let n = t.reduce((e, t) => e + (t.textContent || ""), "");
-          e.textContent = n;
-        }
-      });
-    }(svgElement);
-    let g = function (e, t, i, n) {
-      if (!t.length) return [];
-      document.body.prepend(e);
-      let r = [];
-      let a = Array.from(e.querySelectorAll("path"));
-      let s = Array.from(e.querySelectorAll("image")).concat(a).map(e => ({
-        element: e,
-        rect: e.getBoundingClientRect()
-      }));
-      t.forEach(({
-        url: e,
-        rect: t
-      }) => {
-        let a = n.find(e => {
-          let n = i ? Math.min(Math.max(e.rect.height, e.rect.width) / 3, 15) : 15;
-          return function (e, t, i = 15) {
-            return e.top - i < t.top && e.left - i < t.left && e.right + i > t.right && e.bottom + i > t.bottom;
-          }(e.rect, t, n);
-        });
-        if (a) {
-          let t = document.createElementNS("http://www.w3.org/2000/svg", "a");
-          for (t.setAttribute("href", e); a.element.childNodes.length > 0;) t.appendChild(a.element.childNodes[0]);
-          a.element.appendChild(t);
-          return;
-        }
-        let o = s.find(e => e_(t, e.rect, 5));
-        if (o) {
-          let t = ey(o);
-          if (t) {
-            let i = document.createElement("a");
-            i.setAttribute("href", e);
-            i.innerText = e;
-            let n = document.createElement("text");
-            n.appendChild(i);
-            t.appendChild(n);
-            return;
-          }
-        }
-        r.push({
-          url: e,
-          rect: t
-        });
-      });
-      document.body.removeChild(e);
-      return r;
-    }(svgElement, function (e, t, i) {
-      let n = [];
-      e.filter(e => 2 === e.annotationType).map(e => ({
-        url: e.url,
-        rect: function (e, t, i) {
-          let n = [e[0], t[3] - e[1] + t[1], e[2], t[3] - e[3] + t[1]].map(e => e * i);
-          return {
-            top: Math.min(n[1], n[3]),
-            left: Math.min(n[0], n[2]),
-            right: Math.max(n[0], n[2]),
-            bottom: Math.max(n[1], n[3])
-          };
-        }(e.rect, t, i)
-      })).forEach(e => {
-        n.some(t => e.url === t.url && e_(e.rect, t.rect)) || n.push(e);
-      });
-      return n;
-    }(await a.getAnnotations(), l.viewBox, s), d, h);
-    d && (!function (e, t) {
-      document.body.prepend(e);
-      let i = Array.from(e.querySelectorAll("path")).map(e => ({
-        element: e,
-        rect: e.getBoundingClientRect()
-      }));
-      document.body.removeChild(e);
-      let n = 0;
-      for (; n < i.length;) {
-        let e = i[n];
-        let r = t.find(({
-          rect: t,
-          matched: i
-        }) => !i && eA(t, e.rect, .2));
-        if (r) {
-          let t = 1;
-          let a = r?.element.textContent?.replace(" ", "")?.length || 0;
-          for (let e = 1; e < a && n + e < i.length && eA(r.rect, i[n + e].rect, .2); e++) t++;
-          if (t !== a) {
-            n++;
-            continue;
-          }
-          r.matched = !0;
-          let s = e => {
-            let t = document.createElement("tspan");
-            t.textContent = " ";
-            e.appendChild(t);
-          };
-          let o = r.element.parentElement?.getAttribute("transform") || "";
-          if (r.element.children[0]?.nodeName === "a" && r.element.textContent?.endsWith(" ") && s(r.element), r.element.nextSibling?.textContent === " " && (s(r.element), r.element.nextSibling?.remove()), r.element.childElementCount) {
-            let t = document.createElement("g");
-            t.appendChild(r.element);
-            t.setAttribute("transform", o);
-            let i = document.createElement("a");
-            i.setAttribute("href", "#");
-            t.appendChild(i);
-            e.element.parentElement?.insertAdjacentElement("beforebegin", t);
-          } else {
-            r.element.setAttribute("transform", `${o} ${r.element.getAttribute("transform") || ""}`);
-            e.element.parentElement?.insertAdjacentElement("beforebegin", r.element);
-          }
-          let l = e.element.getAttribute("fill");
-          r.element.setAttribute("fill", l && "none" !== l ? l : "#000000");
-          for (let e = 0; e < a; e++) {
-            let {
-              element
-            } = i[n + e];
-            let r = element.parentElement;
-            r && r.parentElement?.removeChild(r);
-          }
-          n += a;
-        } else n++;
-      }
-    }(svgElement, h), function (e) {
-      document.body.prepend(e);
-      let t = Array.from(e.querySelectorAll("path")).map(e => ({
-        element: e,
-        rect: e.getBoundingClientRect()
-      }));
-      let i = e.getBoundingClientRect();
-      document.body.removeChild(e);
-      t.forEach(({
-        element: e,
-        rect: t
-      }) => {
-        "none" !== e.getAttribute("fill") && !e.hasAttribute("stroke") && eA(t, i, .01) && eA(i, t, .01) && e.parentElement?.removeChild(e);
-      });
-    }(svgElement));
-    let {
-      data
-    } = n(ev(svgElement.outerHTML), {
-      plugins: function (e, t) {
-        let i = e === WhiteboardIntegrationType.LUCID;
-        let n = e === WhiteboardIntegrationType.MIRO;
-        let r = e === WhiteboardIntegrationType.MURAL;
-        let a = e === WhiteboardIntegrationType.JAMBOARD;
-        let s = !i && !n && !r && !a;
-        let l = (n || a || s ? [ec] : []).concat(r || s ? [eu] : []);
-        let d = i ? [] : [{
-          name: "repairBoldText",
-          fn: () => ({
-            element: {
-              enter: e => {
-                if ("tspan" !== e.name) return;
-                let i = e.attributes["font-family"];
-                i && t.has(i) && (e.attributes["font-weight"] = "bold");
-              }
-            }
-          })
-        }];
-        return [...(i ? [] : [en]), er, i ? es : ea, ...(i ? [el] : []), em(e), ed, ...l, ...d, ...(n || a || s ? [ep] : [])];
-      }(t, fontIdsToBold)
+
+    // Apply Lucid-specific text processing
+    if (isLucidIntegration) {
+      processLucidTextElements(svgElement);
+    }
+
+    // Get annotations and process links
+    const annotations = await page.getAnnotations();
+    const linkAnnotations = extractLinkAnnotations(annotations, viewport, scale);
+    const unprocessedLinks = processLinkAnnotations(svgElement, linkAnnotations, isLucidIntegration, textElements);
+
+    // Apply additional Lucid-specific processing
+    if (isLucidIntegration) {
+      matchTextWithPaths(svgElement, textElements);
+      removeFullPageBackgrounds(svgElement);
+    }
+
+    // Optimize SVG using SVGO
+    const svgoPlugins = createSvgoPlugins(whiteboardType, fontIdsToBold);
+    const {
+      data: optimizedSvg
+    } = svgoLibrary(normalizeSvgNamespaces(svgElement.outerHTML), {
+      plugins: svgoPlugins
     });
-    if (t === WhiteboardIntegrationType.MURAL && g.length > 0) {
-      var _;
-      let e = document.createElement("div");
-      _ = data;
-      e.innerHTML = c().sanitize(_, {
-        ADD_ATTR: ["imageHash"]
-      });
-      e.querySelectorAll("image").forEach(e => {
-        let t = e.getAttribute("imagehash");
-        t && (e.setAttribute("imageHash", t), e.removeAttribute("imagehash"));
-      });
-      let t = e.firstChild;
-      !function (e, t) {
-        let i = e.querySelector("g");
-        if (!i) return;
-        let n = i.transform.baseVal.consolidate()?.matrix;
-        let r = n ? n.a : 1;
-        let a = n ? n.d : 1;
-        let s = n ? n.f : 0;
-        for (let e of t) {
-          let t = document.createElement("a");
-          t.setAttribute("href", e.url);
-          t.innerText = e.url;
-          let n = document.createElement("text");
-          n.setAttribute("fill", "#0d99ff");
-          n.appendChild(t);
-          a < 0 && n.setAttribute("transform", "scale(1 -1)");
-          let o = document.createElement("g");
-          let l = "translate(" + e.rect.left / r + ", " + (s / Math.abs(a) + e.rect.top / a) + ")";
-          o.setAttribute("transform", l);
-          o.appendChild(n);
-          i.appendChild(o);
-        }
-      }(t, g);
-      f = ev(t.outerHTML);
+
+    // Handle Mural-specific link processing
+    let finalSvg = optimizedSvg;
+    if (whiteboardType === WhiteboardIntegrationType.MURAL && unprocessedLinks.length > 0) {
+      finalSvg = processMuralLinks(optimizedSvg, unprocessedLinks);
     }
     return {
-      optimizedSVG: data,
-      extractedImages: m
+      optimizedSVG: finalSvg,
+      extractedImages
     };
   }
-  return function (e) {
-    let t = [];
-    let i = new Map();
-    let n = !1;
-    e.forEach(({
-      optimizedSVG: e,
+
+  /**
+   * Fixes Lucid-specific image issues
+   * @param svgElement - The SVG element to process
+   */
+  function fixLucidSpecificImages(svgElement: SVGElement) {
+    svgElement.querySelectorAll("image").forEach(imageElement => {
+      if (imageElement.getAttribute("width") === "154px" && imageElement.getAttribute("height") === "142px" && imageElement.getAttribute("x") === "0" && imageElement.getAttribute("y") === "-142" && imageElement.getAttribute("transform") === "scale(0.0064935065 -0.0070422535)") {
+        const rectElement = document.createElement("rect");
+        rectElement.setAttribute("fill", "#fff");
+        imageElement.replaceWith(rectElement);
+      }
+    });
+  }
+
+  /**
+   * Fixes Miro-specific image issues
+   * @param svgElement - The SVG element to process
+   */
+  function fixMiroSpecificImages(svgElement: SVGElement) {
+    svgElement.querySelectorAll("image").forEach(imageElement => {
+      const parentGroup = imageElement.parentElement;
+      const nextSiblingGroup = parentGroup?.nextElementSibling;
+      const pathElement = nextSiblingGroup?.children ? nextSiblingGroup.children[0] : null;
+      if (parentGroup?.nodeName === "svg:g" && nextSiblingGroup?.nodeName === "svg:g" && pathElement && pathElement.getAttribute("fill") && pathElement.getAttribute("fill-rule") && pathElement.getAttribute("fill-opacity")) {
+        imageElement.remove();
+        parentGroup?.remove();
+        pathElement.setAttribute("nodeType", "sticky");
+      }
+    });
+  }
+
+  /**
+   * Processes Lucid-specific text elements
+   * @param svgElement - The SVG element to process
+   */
+  function processLucidTextElements(svgElement: SVGElement) {
+    Array.from(svgElement.querySelectorAll("text")).forEach(textElement => {
+      const tspanElements = Array.from(textElement.querySelectorAll("tspan"));
+      if (tspanElements.length > 0) {
+        const lastTspan = tspanElements[tspanElements.length - 1];
+        textElement.setAttribute("font-size", lastTspan.getAttribute("font-size") || "");
+        textElement.setAttribute("fill", "none");
+        if (lastTspan.getAttribute("font-weight") === "bold") {
+          textElement.setAttribute("font-style", "italic");
+        }
+        if (lastTspan.getAttribute("font-style") === "italic") {
+          textElement.setAttribute("font-weight", "bold");
+        }
+        const combinedText = tspanElements.reduce((text, tspan) => text + (tspan.textContent || ""), "");
+        textElement.textContent = combinedText;
+      }
+    });
+  }
+
+  /**
+   * Extracts link annotations from PDF page
+   * @param annotations - PDF annotations
+   * @param viewport - PDF viewport
+   * @param scale - Scale factor
+   * @returns Array of link annotations with positions
+   */
+  function extractLinkAnnotations(annotations: any[], viewport: any, scale: number) {
+    const linkAnnotations: any[] = [];
+    annotations.filter(annotation => annotation.annotationType === 2).map(annotation => ({
+      url: annotation.url,
+      rect: convertPdfRectToScreenRect(annotation.rect, viewport.viewBox, scale)
+    })).forEach(linkData => {
+      const isDuplicate = linkAnnotations.some(existing => linkData.url === existing.url && areRectsEqual(linkData.rect, existing.rect));
+      if (!isDuplicate) {
+        linkAnnotations.push(linkData);
+      }
+    });
+    return linkAnnotations;
+  }
+
+  /**
+   * Converts PDF rectangle coordinates to screen coordinates
+   * @param pdfRect - Rectangle in PDF coordinates
+   * @param viewBox - PDF viewport box
+   * @param scale - Scale factor
+   * @returns Rectangle in screen coordinates
+   */
+  function convertPdfRectToScreenRect(pdfRect: number[], viewBox: number[], scale: number) {
+    const screenCoords = [pdfRect[0], viewBox[3] - pdfRect[1] + viewBox[1], pdfRect[2], viewBox[3] - pdfRect[3] + viewBox[1]].map(coord => coord * scale);
+    return {
+      top: Math.min(screenCoords[1], screenCoords[3]),
+      left: Math.min(screenCoords[0], screenCoords[2]),
+      right: Math.max(screenCoords[0], screenCoords[2]),
+      bottom: Math.max(screenCoords[1], screenCoords[3])
+    };
+  }
+
+  /**
+   * Processes link annotations and embeds them in SVG
+   * @param svgElement - The SVG element
+   * @param linkAnnotations - Array of link annotations
+   * @param isLucidIntegration - Whether this is Lucid integration
+   * @param textElements - Array of text elements with positioning
+   * @returns Array of unprocessed links
+   */
+  function processLinkAnnotations(svgElement: SVGElement, linkAnnotations: any[], isLucidIntegration: boolean, textElements: any[]) {
+    if (!linkAnnotations.length) {
+      return [];
+    }
+    document.body.prepend(svgElement);
+    const unprocessedLinks: any[] = [];
+    const pathElements = Array.from(svgElement.querySelectorAll("path")) as any[];
+    const interactiveElements = Array.from(svgElement.querySelectorAll("image")).concat(pathElements).map(element => ({
+      element,
+      rect: element.getBoundingClientRect()
+    }));
+    linkAnnotations.forEach(({
+      url,
+      rect: linkRect
+    }) => {
+      // Try to match with text elements first
+      const matchingTextElement = textElements.find(textData => {
+        const tolerance = isLucidIntegration ? Math.min(Math.max(textData.rect.height, textData.rect.width) / 3, 15) : 15;
+        return doesRectContainTextElement(textData.rect, linkRect, tolerance);
+      });
+      if (matchingTextElement) {
+        const linkElement = document.createElementNS("http://www.w3.org/2000/svg", "a");
+        linkElement.setAttribute("href", url);
+        while (matchingTextElement.element.childNodes.length > 0) {
+          linkElement.appendChild(matchingTextElement.element.childNodes[0]);
+        }
+        matchingTextElement.element.appendChild(linkElement);
+        return;
+      }
+
+      // Try to match with interactive elements
+      const matchingInteractiveElement = interactiveElements.find(elementData => areRectsEqual(linkRect, elementData.rect, 5));
+      if (matchingInteractiveElement) {
+        const correspondingElement = findMatchingElement(matchingInteractiveElement);
+        if (correspondingElement) {
+          const linkElement = document.createElement("a");
+          linkElement.setAttribute("href", url);
+          linkElement.innerText = url;
+          const textElement = document.createElement("text");
+          textElement.appendChild(linkElement);
+          correspondingElement.appendChild(textElement);
+          return;
+        }
+      }
+      unprocessedLinks.push({
+        url,
+        rect: linkRect
+      });
+    });
+    document.body.removeChild(svgElement);
+    return unprocessedLinks;
+  }
+
+  /**
+   * Checks if a rectangle contains a text element within tolerance
+   * @param textRect - Text element rectangle
+   * @param targetRect - Target rectangle
+   * @param tolerance - Tolerance for containment
+   * @returns True if text is contained within target
+   */
+  function doesRectContainTextElement(textRect: any, targetRect: any, tolerance = 15): boolean {
+    return textRect.top - tolerance < targetRect.top && textRect.left - tolerance < targetRect.left && textRect.right + tolerance > targetRect.right && textRect.bottom + tolerance > targetRect.bottom;
+  }
+
+  /**
+   * Matches text elements with corresponding path elements for Lucid integration
+   * @param svgElement - The SVG element
+   * @param textElements - Array of text elements with positioning
+   */
+  function matchTextWithPaths(svgElement: SVGElement, textElements: any[]) {
+    document.body.prepend(svgElement);
+    const pathElements = Array.from(svgElement.querySelectorAll("path")).map(element => ({
+      element,
+      rect: element.getBoundingClientRect()
+    }));
+    document.body.removeChild(svgElement);
+    let pathIndex = 0;
+    while (pathIndex < pathElements.length) {
+      const pathData = pathElements[pathIndex];
+      const matchingText = textElements.find(({
+        rect,
+        matched
+      }) => !matched && doesRectContainRect(rect, pathData.rect, 0.2));
+      if (matchingText) {
+        const textLength = matchingText.element.textContent?.replace(" ", "")?.length || 0;
+        let consecutivePathCount = 1;
+
+        // Count consecutive paths that match the text area
+        for (let i = 1; i < textLength && pathIndex + i < pathElements.length; i++) {
+          if (doesRectContainRect(matchingText.rect, pathElements[pathIndex + i].rect, 0.2)) {
+            consecutivePathCount++;
+          } else {
+            break;
+          }
+        }
+        if (consecutivePathCount !== textLength) {
+          pathIndex++;
+          continue;
+        }
+        matchingText.matched = true;
+        processMatchedTextAndPaths(matchingText, pathData, pathElements, pathIndex, textLength);
+        pathIndex += textLength;
+      } else {
+        pathIndex++;
+      }
+    }
+  }
+
+  /**
+   * Processes matched text and path elements
+   * @param matchingText - The matching text element
+   * @param pathData - The path element data
+   * @param pathElements - Array of all path elements
+   * @param pathIndex - Current path index
+   * @param textLength - Length of text
+   */
+  function processMatchedTextAndPaths(matchingText: any, pathData: any, pathElements: any[], pathIndex: number, textLength: number) {
+    const addSpaceTspan = (textElement: any) => {
+      const spaceTspan = document.createElement("tspan");
+      spaceTspan.textContent = " ";
+      textElement.appendChild(spaceTspan);
+    };
+    const parentTransform = matchingText.element.parentElement?.getAttribute("transform") || "";
+
+    // Handle special text formatting
+    if (matchingText.element.children[0]?.nodeName === "a" && matchingText.element.textContent?.endsWith(" ")) {
+      addSpaceTspan(matchingText.element);
+    }
+    if (matchingText.element.nextSibling?.textContent === " ") {
+      addSpaceTspan(matchingText.element);
+      matchingText.element.nextSibling?.remove();
+    }
+
+    // Handle text with child elements
+    if (matchingText.element.childElementCount) {
+      const groupElement = document.createElement("g");
+      groupElement.appendChild(matchingText.element);
+      groupElement.setAttribute("transform", parentTransform);
+      const linkElement = document.createElement("a");
+      linkElement.setAttribute("href", "#");
+      groupElement.appendChild(linkElement);
+      pathData.element.parentElement?.insertAdjacentElement("beforebegin", groupElement);
+    } else {
+      matchingText.element.setAttribute("transform", `${parentTransform} ${matchingText.element.getAttribute("transform") || ""}`);
+      pathData.element.parentElement?.insertAdjacentElement("beforebegin", matchingText.element);
+    }
+
+    // Apply fill color from path to text
+    const pathFill = pathData.element.getAttribute("fill");
+    matchingText.element.setAttribute("fill", pathFill && pathFill !== "none" ? pathFill : "#000000");
+
+    // Remove processed path elements
+    for (let i = 0; i < textLength; i++) {
+      const {
+        element
+      } = pathElements[pathIndex + i];
+      const parentElement = element.parentElement;
+      if (parentElement && parentElement.parentElement) {
+        parentElement.parentElement.removeChild(parentElement);
+      }
+    }
+  }
+
+  /**
+   * Removes full-page background elements
+   * @param svgElement - The SVG element
+   */
+  function removeFullPageBackgrounds(svgElement: SVGElement) {
+    document.body.prepend(svgElement);
+    const pathElements = Array.from(svgElement.querySelectorAll("path")).map(element => ({
+      element,
+      rect: element.getBoundingClientRect()
+    }));
+    const svgRect = svgElement.getBoundingClientRect();
+    document.body.removeChild(svgElement);
+    pathElements.forEach(({
+      element,
+      rect
+    }) => {
+      if (element.getAttribute("fill") !== "none" && !element.hasAttribute("stroke") && doesRectContainRect(rect, svgRect, 0.01) && doesRectContainRect(svgRect, rect, 0.01)) {
+        element.parentElement?.removeChild(element);
+      }
+    });
+  }
+
+  /**
+   * Creates SVGO plugins configuration based on whiteboard type
+   * @param whiteboardType - Type of whiteboard integration
+   * @param fontIdsToBold - Set of font IDs that should be bold
+   * @returns Array of SVGO plugins
+   */
+  function createSvgoPlugins(whiteboardType: WhiteboardIntegrationType, fontIdsToBold: Set<string>) {
+    const isLucidIntegration = whiteboardType === WhiteboardIntegrationType.LUCID;
+    const isMiroIntegration = whiteboardType === WhiteboardIntegrationType.MIRO;
+    const isMuralIntegration = whiteboardType === WhiteboardIntegrationType.MURAL;
+    const isJamboardIntegration = whiteboardType === WhiteboardIntegrationType.JAMBOARD;
+    const isUnknownIntegration = !isLucidIntegration && !isMiroIntegration && !isMuralIntegration && !isJamboardIntegration;
+    const backgroundRemovalPlugins = (isMiroIntegration || isJamboardIntegration || isUnknownIntegration ? [removeWhiteMiroBackground] : []).concat(isMuralIntegration || isUnknownIntegration ? [removeWhiteMuralBackground] : []);
+    const boldTextPlugins = isLucidIntegration ? [] : [{
+      name: "repairBoldText",
+      fn: () => ({
+        element: {
+          enter: (element: any) => {
+            if (element.name !== "tspan") return;
+            const fontFamily = element.attributes["font-family"];
+            if (fontFamily && fontIdsToBold.has(fontFamily)) {
+              element.attributes["font-weight"] = "bold";
+            }
+          }
+        }
+      })
+    }];
+    return [...(isLucidIntegration ? [] : [removeInvisibleElements]), removeTSpanGlyphPositions, isLucidIntegration ? combineLucidGroupedOutlineAndFill : combineOutlineAndFill, ...(isLucidIntegration ? [replaceRectGradientFillsWithLastStopColor] : []), getSVGOConfig(whiteboardType), addWhitespaceToTspans, ...backgroundRemovalPlugins, ...boldTextPlugins, ...(isMiroIntegration || isJamboardIntegration || isUnknownIntegration ? [repairAndBoldVectorizedTextFromMiro] : [])];
+  }
+
+  /**
+   * Processes Mural-specific links by embedding them in SVG
+   * @param svgData - The SVG data string
+   * @param unprocessedLinks - Array of unprocessed links
+   * @returns Updated SVG data with embedded links
+   */
+  function processMuralLinks(svgData: string, unprocessedLinks: any[]): string {
+    const tempContainer = document.createElement("div");
+    tempContainer.innerHTML = dompurify().sanitize(svgData, {
+      ADD_ATTR: ["imageHash"]
+    });
+
+    // Fix image hash attributes
+    tempContainer.querySelectorAll("image").forEach(imageElement => {
+      const imageHash = imageElement.getAttribute("imagehash");
+      if (imageHash) {
+        imageElement.setAttribute("imageHash", imageHash);
+        imageElement.removeAttribute("imagehash");
+      }
+    });
+    const svgElement = tempContainer.firstChild as SVGElement;
+    embedLinksInMuralSvg(svgElement, unprocessedLinks);
+    return normalizeSvgNamespaces(svgElement.outerHTML);
+  }
+
+  /**
+   * Embeds links in Mural SVG
+   * @param svgElement - The SVG element
+   * @param links - Array of links to embed
+   */
+  function embedLinksInMuralSvg(svgElement: any, links: any[]) {
+    const groupElement = svgElement.querySelector("g");
+    if (!groupElement) return;
+    const transform = groupElement.transform.baseVal.consolidate()?.matrix;
+    const scaleX = transform ? transform.a : 1;
+    const scaleY = transform ? transform.d : 1;
+    const translateY = transform ? transform.f : 0;
+    for (const linkData of links) {
+      const linkElement = document.createElement("a");
+      linkElement.setAttribute("href", linkData.url);
+      linkElement.innerText = linkData.url;
+      const textElement = document.createElement("text");
+      textElement.setAttribute("fill", "#0d99ff");
+      textElement.appendChild(linkElement);
+      if (scaleY < 0) {
+        textElement.setAttribute("transform", "scale(1 -1)");
+      }
+      const containerGroup = document.createElement("g");
+      const transformValue = `translate(${linkData.rect.left / scaleX}, ${translateY / Math.abs(scaleY) + linkData.rect.top / scaleY})`;
+      containerGroup.setAttribute("transform", transformValue);
+      containerGroup.appendChild(textElement);
+      groupElement.appendChild(containerGroup);
+    }
+  }
+
+  /**
+   * Consolidates results from all processed pages
+   * @param pageResults - Array of page processing results
+   * @returns Consolidated results with SVG strings and images
+   */
+  function consolidatePageResults(pageResults: any[]) {
+    const svgStrings: string[] = [];
+    const imageMap = new Map();
+    let hadImageError = false;
+    pageResults.forEach(({
+      optimizedSVG,
       extractedImages: {
-        images: r,
-        hadImageError: a
+        images,
+        hadImageError: pageHadError
       }
     }) => {
-      t.push(e);
-      n = n || a;
-      r.forEach(e => {
-        i.has(e.sha1Hash) || i.set(e.sha1Hash, e);
+      svgStrings.push(optimizedSVG);
+      hadImageError = hadImageError || pageHadError;
+      images.forEach((image: any) => {
+        if (!imageMap.has(image.sha1Hash)) {
+          imageMap.set(image.sha1Hash, image);
+        }
       });
     });
     return {
-      svgStrings: t,
+      svgStrings,
       extractedImages: {
-        images: [...i.values()],
-        hadImageError: n
+        images: [...imageMap.values()],
+        hadImageError
       }
     };
-  }(await Promise.all(Array.from(Array(a)).map((e, i) => s(i, t))));
-}
-function ev(e) {
-  return e.replace(/<svg:/g, "<").replace(/<\/svg:/g, "</").replace(/xlink:/g, "");
-}
-class eI {
-  constructor() {
-    this.getPdfSourcePromise = null;
   }
-  shouldBlockPdfImports() {
-    return atomStoreManager.get(_$$D2);
+
+  // Process all pages and consolidate results
+  const pageResults = await Promise.all(Array.from(Array.from({
+    length: pageCount
+  })).map((_, index) => processPdfPage(index, whiteboardType)));
+  return consolidatePageResults(pageResults);
+}
+
+/**
+ * Normalizes SVG namespace prefixes
+ * @param svgString - SVG string with namespaced elements
+ * @returns SVG string with normalized namespaces
+ */
+function normalizeSvgNamespaces(svgString: string): string {
+  // ev
+  return svgString.replace(/<svg:/g, "<").replace(/<\/svg:/g, "</").replace(/xlink:/g, "");
+}
+// Original class name: eI
+/**
+ * Manages PDF import operations, including source selection, conversion, and error handling.
+ */
+class PdfImportManager {
+  private getPdfSourcePromise: Promise<any> | null = null;
+
+  /**
+   * Checks if PDF imports should be blocked based on application state.
+   * @returns True if PDF imports are blocked.
+   */
+  shouldBlockPdfImports(): boolean {
+    return atomStoreManager.get(isAllowedOrgAtom);
   }
-  getPdfSource(e) {
-    this.getPdfSourcePromise || (this.getPdfSourcePromise = new Promise(t => {
-      debugState.dispatch(showModalHandler({
-        type: n ??= registerModal(_$$A.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.PdfConfirmationModal), createModalConfig("PdfConfirmationModal"))),
-        data: {
-          fileImportDescription: getI18nString("file_browser.file_import_view.select_pdf_source_description_within_figjam", {
-            pdfCount: e
-          }),
-          onConfirm: e => {
-            debugState.dispatch(hideModalHandler());
-            t({
-              pdfType: e
-            });
-          },
-          onCancel: () => {
-            debugState.dispatch(hideModalHandler());
-            t({
-              pdfType: WhiteboardIntegrationType.UNKNOWN,
-              isCanceled: !0
-            });
+
+  /**
+   * Retrieves the PDF source type via a modal dialog.
+   * @param pdfCount - Number of PDFs to import.
+   * @returns Promise resolving to PDF source data.
+   */
+  getPdfSource(pdfCount: number): Promise<any> {
+    if (!this.getPdfSourcePromise) {
+      this.getPdfSourcePromise = new Promise(resolve => {
+        debugState.dispatch(showModalHandler({
+          type: modalType ??= registerModal(FileBrowser.createLazyComponent(() => import('../0c62c2fd/653470').then(e => e.PdfConfirmationModal), createModalConfig("PdfConfirmationModal"))),
+          data: {
+            fileImportDescription: getI18nString("file_browser.file_import_view.select_pdf_source_description_within_figjam", {
+              pdfCount
+            }),
+            onConfirm: (pdfType: any) => {
+              debugState.dispatch(hideModalHandler());
+              resolve({
+                pdfType
+              });
+            },
+            onCancel: () => {
+              debugState.dispatch(hideModalHandler());
+              resolve({
+                pdfType: WhiteboardIntegrationType.UNKNOWN,
+                isCanceled: true
+              });
+            }
           }
-        }
-      }));
-    }));
+        }));
+      });
+    }
     return this.getPdfSourcePromise;
   }
-  resetPdfSource() {
+
+  /**
+   * Resets the PDF source promise to allow re-selection.
+   */
+  resetPdfSource(): void {
     this.getPdfSourcePromise = null;
   }
-  populatePdfImagesWithImageBytes(e) {
-    let t = e.map(e => e.nodeIds.map(t => ({
-      nodeId: t,
-      bytes: e.bytes
-    }))).reduce((e, t) => e.concat(t), []);
-    Fullscreen.populatePdfImagesWithImageBytes(t);
+
+  /**
+   * Populates PDF images with byte data in the fullscreen context.
+   * @param images - Array of image data with node IDs.
+   */
+  populatePdfImagesWithImageBytes(images: any[]): void {
+    const nodeImageData = images.flatMap(image => image.nodeIds.map((nodeId: any) => ({
+      nodeId,
+      bytes: image.bytes
+    })));
+    Fullscreen.populatePdfImagesWithImageBytes(nodeImageData);
   }
-  async convertPdfToScene(e, t, i, n) {
-    let r;
+
+  /**
+   * Converts PDF bytes to a scene, handling UI feedback and errors.
+   * @param pdfBytes - PDF file as byte array.
+   * @param pdfType - Type of PDF integration.
+   * @param cursorX - Cursor X position.
+   * @param cursorY - Cursor Y position.
+   * @returns Conversion status.
+   */
+  async convertPdfToScene(pdfBytes: Uint8Array, pdfType: WhiteboardIntegrationType, cursorX?: number, cursorY?: number): Promise<any> {
     debugState.dispatch(VisualBellActions.enqueue({
-      type: eh,
+      type: PDF_IMPORT_PROGRESS_TYPE,
       message: getI18nString("visual_bell.import_pdf"),
       icon: VisualBellIcon.IMAGE_BACKED_SPINNER
     }));
-    let l = await this.convertPdf({
-      pdfBytes: e,
-      pdfType: t,
-      cursorX: i,
-      cursorY: n
-    });
-    let d = l.status;
-    if (debugState.dispatch(VisualBellActions.dequeue({
-      matchType: eh
-    })), d === PerfResult.SUCCESS) {
-      let {
-        images,
-        hadImageExtractError
-      } = l;
-      let i = !1;
-      try {
-        this.populatePdfImagesWithImageBytes(images);
-      } catch (e) {
-        i = !0;
-        reportError(ServiceCategories.FIGJAM, e);
-      }
-      (hadImageExtractError || i) && debugState.dispatch(VisualBellActions.enqueue({
-        type: eg,
-        message: getI18nString("fullscreen.file_import.import_pdf_images_not_imported")
-      }));
-      return d;
-    }
-    switch (d) {
-      case PerfResult.ERROR_TEXT_SIZE:
-        r = getI18nString("fullscreen.file_import.file_contains_text_either_too_big_or_too_small");
-        break;
-      case PerfResult.TIMEOUT:
-        r = getI18nString("fullscreen.file_import.file_timed_out");
-        break;
-      case PerfResult.ERROR_OTHER:
-        r = _$$P(t);
-        break;
-      default:
-        throwTypeError(d);
-    }
-    debugState.dispatch(VisualBellActions.enqueue({
-      type: eg,
-      message: r
-    }));
-    return d;
-  }
-  async convertPdf(e) {
-    let {
+    const result = await this.convertPdf({
       pdfBytes,
       pdfType,
       cursorX,
       cursorY
-    } = e;
-    let a = new Timer();
-    a.start();
+    });
+    debugState.dispatch(VisualBellActions.dequeue({
+      matchType: PDF_IMPORT_PROGRESS_TYPE
+    }));
+    const status = result.status;
+    if (status === PerfResult.SUCCESS) {
+      const {
+        images,
+        hadImageExtractError
+      } = result;
+      let hadPopulationError = false;
+      try {
+        this.populatePdfImagesWithImageBytes(images);
+      } catch (error) {
+        hadPopulationError = true;
+        reportError(ServiceCategories.FIGJAM, error);
+      }
+      if (hadImageExtractError || hadPopulationError) {
+        debugState.dispatch(VisualBellActions.enqueue({
+          type: PDF_IMPORT_FAILURE_TYPE,
+          message: getI18nString("fullscreen.file_import.import_pdf_images_not_imported")
+        }));
+      }
+      return status;
+    }
+    let errorMessage: string;
+    switch (status) {
+      case PerfResult.ERROR_TEXT_SIZE:
+        errorMessage = getI18nString("fullscreen.file_import.file_contains_text_either_too_big_or_too_small");
+        break;
+      case PerfResult.TIMEOUT:
+        errorMessage = getI18nString("fullscreen.file_import.file_timed_out");
+        break;
+      case PerfResult.ERROR_OTHER:
+        errorMessage = getWhiteboardImportErrorMessage(pdfType);
+        break;
+      default:
+        throwTypeError(status);
+    }
+    debugState.dispatch(VisualBellActions.enqueue({
+      type: PDF_IMPORT_FAILURE_TYPE,
+      message: errorMessage
+    }));
+    return status;
+  }
+
+  /**
+   * Performs the core PDF conversion logic.
+   * @param params - Conversion parameters.
+   * @returns Conversion result with status and images.
+   */
+  async convertPdf(params: {
+    pdfBytes: Uint8Array;
+    pdfType: WhiteboardIntegrationType;
+    cursorX?: number;
+    cursorY?: number;
+  }): Promise<any> {
+    const {
+      pdfBytes,
+      pdfType,
+      cursorX = 0,
+      cursorY = 0
+    } = params;
+    const timer = new Timer();
+    timer.start();
     try {
-      let {
+      const {
         svgStrings,
         extractedImages: {
           images,
           hadImageError
         }
-      } = await eb(pdfBytes, pdfType);
+      } = await convertPdfToSvgStrings(pdfBytes, pdfType);
       if (svgStrings) {
-        let {
+        const {
           status,
           imagesToImport
-        } = Fullscreen.createSceneFromSVG(svgStrings, pdfType, cursorX ?? 0, cursorY ?? 0);
-        if (status !== PerfResult.SUCCESS) return {
-          status
-        };
-        let c = images && imagesToImport ? function (e, t) {
-          let i = new Map();
-          t.forEach(({
-            nodeId: e,
-            imageHash: t
-          }) => {
-            i.has(t) || i.set(t, []);
-            i.get(t)?.push(e);
-          });
-          return e.map(e => ({
-            ...e,
-            nodeIds: i.get(e.sha1Hash) ?? []
-          }));
-        }(images, imagesToImport) : [];
-        let p = a.getElapsedTime();
+        } = Fullscreen.createSceneFromSVG(svgStrings, pdfType, cursorX, cursorY);
+        if (status !== PerfResult.SUCCESS) {
+          return {
+            status
+          };
+        }
+        const mappedImages = images && imagesToImport ? this.mapImagesToNodes(images, imagesToImport) : [];
+        const elapsedTime = timer.getElapsedTime();
         trackEventAnalytics("PDF Import Elapsed Time", {
-          elapsedTimeMs: p
+          elapsedTimeMs: elapsedTime
         }, {
-          forwardToDatadog: !0
+          forwardToDatadog: true
         });
         return {
           status,
-          images: c,
+          images: mappedImages,
           hadImageExtractError: hadImageError
         };
       }
-    } catch (t) {
-      let e = `PDF Import Error: ${t.message}`;
+    } catch (error) {
+      const errorMessage = `PDF Import Error: ${error.message}`;
       try {
-        t.message = e;
-        reportError(ServiceCategories.FIGJAM, t);
+        error.message = errorMessage;
+        reportError(ServiceCategories.FIGJAM, error);
       } catch {
-        reportError(ServiceCategories.FIGJAM, Error(e));
+        reportError(ServiceCategories.FIGJAM, new Error(errorMessage));
       }
     }
-    let l = Error("PDF Import Error: unknown issue inside convertPDFToScene");
-    reportError(ServiceCategories.FIGJAM, l);
+    const unknownError = new Error("PDF Import Error: unknown issue inside convertPDFToScene");
+    reportError(ServiceCategories.FIGJAM, unknownError);
     return {
       status: PerfResult.ERROR_OTHER
     };
   }
+
+  /**
+   * Maps images to their corresponding node IDs.
+   * @param images - Array of image data.
+   * @param imagesToImport - Array of images to import with hashes.
+   * @returns Mapped image data with node IDs.
+   */
+  private mapImagesToNodes(images: any[], imagesToImport: any[]): any[] {
+    const hashToNodes = new Map<string, any[]>();
+    imagesToImport.forEach(({
+      nodeId,
+      imageHash
+    }) => {
+      if (!hashToNodes.has(imageHash)) {
+        hashToNodes.set(imageHash, []);
+      }
+      hashToNodes.get(imageHash)?.push(nodeId);
+    });
+    return images.map(image => ({
+      ...image,
+      nodeIds: hashToNodes.get(image.sha1Hash) ?? []
+    }));
+  }
 }
-export function $$eE0() {
-  $$r1 = new eI();
+
+// Original function name: $$eE0
+/**
+ * Initializes the PDF import manager singleton.
+ */
+export function initializePdfImportManager(): void {
+  pdfImportManagerInstance = new PdfImportManager();
 }
-export const G_ = $$eE0;
-export const IY = $$r1;
+
+// Original export name: G_
+export const G_ = initializePdfImportManager;
+
+// Original export name: IY
+export const IY = pdfImportManagerInstance;

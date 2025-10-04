@@ -9,7 +9,7 @@ import { getI18nString } from "../905/303541";
 import { filePutAction } from "../figma_app/78808";
 import { popModalStack } from "../905/156213";
 import { searchClearQueryAction, searchEndSessionAction } from "../905/977218";
-import { ud } from "../905/862913";
+import { useFileByKey } from "../905/862913";
 import { fileEntityDataMapper } from "../905/943101";
 import { mapToFileType } from "../figma_app/300692";
 import { registerModal } from "../905/102752";
@@ -40,7 +40,7 @@ function I(e) {
 export let $$E0 = registerModal(function (e) {
   let t = useDispatch();
   let i = "loaded" === ql().status;
-  let o = ud();
+  let o = useFileByKey();
   useSingleEffect(() => {
     t(searchClearQueryAction({}));
     let e = document.body.style.overflowY;

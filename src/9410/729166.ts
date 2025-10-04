@@ -16,7 +16,7 @@ import { ox } from '../905/163832';
 import { ServiceCategories } from '../905/165054';
 import { getEditorViewType } from '../905/187165';
 import { useSingleEffect } from '../905/791079';
-import { nt, o3 } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { o as _$$o2 } from '../905/237202';
 import { z as _$$z } from '../905/239603';
 import { A as _$$A } from '../905/251970';
@@ -81,7 +81,7 @@ import { noop } from 'lodash-es';
 ;
 import { selectUserFlag } from '../905/940356';
 import { postUserFlag } from '../905/985254';
-import { Ak } from '../905/986103';
+import { useRelativeTime } from '../905/986103';
 import { h as _$$h2 } from '../905/994594';
 import { H as _$$H2 } from '../905/999677';
 import { A as _$$A3 } from '../1250/29260';
@@ -123,7 +123,7 @@ import { J2 as _$$J3 } from '../figma_app/34798';
 import { useLatestRef } from '../figma_app/922077';
 import { DevModeActivity } from '../figma_app/43951';
 import { H as _$$H } from '../figma_app/47866';
-import { y as _$$y2 } from '../figma_app/53571';
+import { isNodeUpdatedSinceActivity } from '../figma_app/53571';
 import { FEditorType } from '../figma_app/53721';
 import { BannerInset } from '../figma_app/59509';
 import { getViewportX, computeFullscreenViewportForNode, getViewportY } from '../figma_app/62612';
@@ -140,7 +140,7 @@ import { is as _$$is, BX, Ho } from '../figma_app/170018';
 import { FEventType } from '../figma_app/191312';
 import { selectedViewToPath, getSelectedViewUrl } from '../figma_app/193867';
 import { Vc } from '../figma_app/211694';
-import { _ as _$$_3 } from '../figma_app/214121';
+import { useFullscreenColorSync } from '../figma_app/214121';
 import { fQ } from '../figma_app/238665';
 import { L$ } from '../figma_app/241341';
 import { f as _$$f } from '../figma_app/258006';
@@ -149,7 +149,7 @@ import { isUsingLocalBuild } from '../figma_app/298277';
 import { mapFileToProductType } from '../figma_app/314264';
 import { bq, Gn, hY, L_, qt } from '../figma_app/349969';
 import { ut as _$$ut, Ah, Fe, HS, hX, kl, l5, nw, Sq, UB, wR, xY } from '../figma_app/354027';
-import { _$, S7 } from '../figma_app/379850';
+import { handleFullscreenViewTransition, getBackgroundColorWithOverride } from '../figma_app/379850';
 import { B4 } from '../figma_app/385215';
 import { getSelectedView } from '../figma_app/386952';
 import { c as _$$c2 } from '../figma_app/391827';
@@ -1451,7 +1451,7 @@ function iw({
 }) {
   let s = useDeepEqualSceneValue(t => t.get(e)?.getStatusInfo(), e);
   let o = _$$ei(e);
-  let l = Ak(o?.lastEditedAt);
+  let l = useRelativeTime(o?.lastEditedAt);
   let d = selectCurrentFile();
   let c = useCanAccessFullDevMode();
   if (!t) {
@@ -1460,7 +1460,7 @@ function iw({
       onClick: a
     });
   }
-  let u = s && d && _$$y2(s, d);
+  let u = s && d && isNodeUpdatedSinceActivity(s, d);
   return jsxs('div', {
     className: ig,
     children: [jsx(LinkPrimitive, {
@@ -1494,7 +1494,7 @@ function iS({
 }) {
   let o = useDeepEqualSceneValue(t => t.get(e)?.getStatusInfo(), e);
   let d = o?.lastUpdateUnixTimestamp ? 1e3 * o.lastUpdateUnixTimestamp : null;
-  let c = Ak(d);
+  let c = useRelativeTime(d);
   let u = selectCurrentFile();
   if (!d) {
     return jsx(iw, {
@@ -1523,7 +1523,7 @@ function iS({
     });
   }
   let m = o.status === BuildStatus.BUILD && (o.status === o.prevStatus || !!o.description);
-  let f = u && _$$y2(o, u);
+  let f = u && isNodeUpdatedSinceActivity(o, u);
   let g = m ? renderI18nText('dev_handoff.workflows.edit_info.updated_design', {
     user: t.handle,
     dateFromNow: jsx('span', {
@@ -1939,7 +1939,7 @@ function iQ() {
     w(e);
   }, [w, s]);
   if (useEffect(() => {
-    c.view === 'fullscreen' && c.commentThreadId && _$(u, c, 'overview_open_notification');
+    c.view === 'fullscreen' && c.commentThreadId && handleFullscreenViewTransition(u, c, 'overview_open_notification');
   }, [u, c]), !H || z) {
     return jsx('div', {
       className: iu,
@@ -2180,7 +2180,7 @@ function i2({
     let r = i?.lastUpdateUnixTimestamp ? 1e3 * i.lastUpdateUnixTimestamp : null;
     let n = _$$ei(e);
     let a = t ? n?.lastEditedAt : r;
-    let s = Ak(a);
+    let s = useRelativeTime(a);
     return a ? s : null;
   }(nodeId, e.hasBeenEditedSinceLastStatusChange);
   let v = useMemo(() => e.hasBeenEditedSinceLastStatusChange ? renderI18nText('dev_handoff.workflows.edit_info.changed') : e.status === BuildStatus.COMPLETED ? renderI18nText('dev_handoff.status.completed') : e.status === BuildStatus.BUILD ? e.description ? renderI18nText('dev_handoff.workflows.edit_info.new version') : renderI18nText('dev_handoff.status.ready_for_dev') : renderI18nText('dev_handoff.workflows.edit_info.changed'), [e.description, e.hasBeenEditedSinceLastStatusChange, e.status]);
@@ -2346,7 +2346,7 @@ function i4({
   onClick: s,
   nodeCount: o
 }) {
-  let d = useDeepEqualSceneValue((e, t, i) => S7(e, t, i) || 'var(--color-bg)', e, t);
+  let d = useDeepEqualSceneValue((e, t, i) => getBackgroundColorWithOverride(e, t, i) || 'var(--color-bg)', e, t);
   let c = useDeepEqualSceneValue(t => t.get(e)?.size);
   let u = 1 + (5 - 5 * Math.min(1, Math.max(0, Math.max(c ? 1 - (iH - c.x) / iH : 1, c ? 1 - (iz - c.y) / iz : 1))) ** 0.5);
   let p = c ? {
@@ -3301,7 +3301,7 @@ function r5() {
   }), [e, g]);
   Ou();
   fq();
-  _$$_3();
+  useFullscreenColorSync();
   _$$c2();
   useEffect(() => {
     o && t && m && fullscreenValue.onReady().then(() => {
@@ -3380,7 +3380,7 @@ function r5() {
   useEffect(() => {
     f?.updateWebOverlaysShown && f.updateWebOverlaysShown(I);
   }, [f, I]);
-  let k = o3(nt.customKeyboardShortcuts);
+  let k = useLabConfiguration(labConfigurations.customKeyboardShortcuts);
   useEffect(() => {
     getFeatureFlags().ce_custom_keyboard_shortcuts && Fullscreen?.reloadKeyboardShortcuts();
   }, [k]);

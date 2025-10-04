@@ -20,7 +20,7 @@ import { ViewAccessTypeEnum } from "../905/513035";
 import { F5, Z as _$$Z } from "../figma_app/761870";
 import { e as _$$e2 } from "../905/393279";
 import { _u, rG } from "../1881/125927";
-import { Ay } from "../905/865071";
+import { LabelPrimitive } from "../905/865071";
 import { BannerInsetModal } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { N as _$$N2 } from "../905/572042";
@@ -69,7 +69,7 @@ function T({
     className: "x78zum5 xdt5ytf x167g77z",
     children: [jsx("div", {
       className: "x78zum5 x1qughib",
-      children: jsx(Ay, {
+      children: jsx(LabelPrimitive, {
         ...props(textDisplayConfig.textBodyMediumStrong),
         htmlFor: e,
         children: t

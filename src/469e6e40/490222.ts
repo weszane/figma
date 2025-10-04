@@ -6,7 +6,7 @@ import { BannerMessage } from "../905/363675";
 import { N as _$$N } from "../905/572042";
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { y2 } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -190,7 +190,7 @@ export function $$U0(e) {
       }, {
         name: getI18nString("abandoned_drafts_table.removed_at"),
         className: "abandoned_drafts_table--removeAtColumn--2yIZc abandoned_drafts_table--column--ZtlI6 table--column--974RA",
-        cellComponent: e => e.abandonedDraftUserRemovedAt ? jsx(h1, {
+        cellComponent: e => e.abandonedDraftUserRemovedAt ? jsx(RelativeTimeDisplay, {
           date: e.abandonedDraftUserRemovedAt
         }) : jsx(Fragment, {
           children: "\u2013"

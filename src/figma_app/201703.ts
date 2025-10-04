@@ -11,7 +11,7 @@ import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { g as _$$g } from "../figma_app/777171";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { getBasicViewportRect } from "../figma_app/62612";
 import { t as _$$t2 } from "../905/192333";
 import { O } from "../figma_app/71774";
@@ -39,7 +39,7 @@ export function $$M8(e) {
   let r = isDevHandoffEditorType();
   let n = useSelector(e => e.universalInsertModal.pinned);
   let s = useAtomWithSubscription(_$$g);
-  if (z4.getIsExtension()) return s - C - e;
+  if (fullscreenAlias.getIsExtension()) return s - C - e;
   if (r) return window.innerHeight - C - e;
   let o = window.innerHeight - t.y - C - e;
   return n === _$$t2.PINNED_AND_DOCKED_LEFT ? o : Math.min(v - e, o);

@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useId } from "react";
 import { useDispatch } from "react-redux";
 import { bL, c$ } from "../905/867927";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { Q } from "../905/730680";
 import { J } from "../905/525097";
 import { E } from "../905/267344";
@@ -22,7 +22,7 @@ export function $$E0(e) {
   return jsxs(bL, {
     value: isInvalidValue(e.value) ? void 0 : e.value,
     onChange: e.onChange,
-    legend: jsx(q, {
+    legend: jsx(Legend, {
       children: e.label
     }),
     readonly: e.disabled,

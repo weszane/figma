@@ -40,7 +40,7 @@ import { ES, TC } from '../905/198599';
 import { l as _$$l } from '../905/202425';
 import { useSingleEffect } from '../905/791079';
 import { FlexBox, LayoutContainer } from '../905/222272';
-import { nt as _$$nt, o3 as _$$o } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { s as _$$s4 } from '../905/234042';
 import { Ag, H5, Hz } from '../905/235578';
 import { Panel } from '../905/236825';
@@ -88,7 +88,7 @@ import { stripHtmlTags } from '../905/491152';
 import { J as _$$J2 } from '../905/494216';
 import { C as _$$C5 } from '../905/504203';
 import { r6 as _$$r3 } from '../905/507950';
-import { $7 } from '../905/509613';
+import { checkEligibilityStatus } from '../905/509613';
 import { RecordableDiv } from '../905/511649';
 import { q as _$$q } from '../905/516087';
 import { C as _$$C3 } from '../905/520159';
@@ -168,7 +168,7 @@ import { $ as _$$$ } from '../905/922405';
 import { setupPluginCommandHandler } from '../905/924231';
 import { generateShimmerOverlay } from '../905/929620';
 import { hideDropdownAction, showDropdownThunk } from '../905/929976';
-import { q as _$$q3 } from '../905/932270';
+import { Legend } from '../905/932270';
 import { noop } from 'lodash-es';
 import { selectUserFlag } from '../905/940356';
 import { styleBuilderInstance } from '../905/941192';
@@ -353,7 +353,7 @@ import { MobileDesignComponentSchema, PromptSchema } from '../figma_app/705029';
 import { wY as _$$wY } from '../figma_app/708845';
 import { useSceneGraphSelector, useOnSelectionChange, useSceneGraphSelection, useAppModelProperty } from '../figma_app/722362';
 import { Ay as _$$Ay4, DI, Ti, Tu } from '../figma_app/724968';
-import { jR as _$$jR, k0 as _$$k5, N0, RO, Sb } from '../figma_app/728075';
+import { neutralDarkColor3, blueTintColor, redSecondaryColor, greenMintColor, redApricotColor2 } from '../figma_app/728075';
 import { $L, mP, Sq } from '../figma_app/737746';
 import { FUSE_CONFIG_PROFILE, FUSE_CONFIG_COMMENT } from '../figma_app/740025';
 import { EditorPreferencesApi } from '../figma_app/740163';
@@ -372,7 +372,7 @@ import { ks, Vm } from '../figma_app/838407';
 import { getLocalPlugins, useAllowlistedPlugins, useRecentlyUsedWidgets, usePublishedPlugins, getPendingPublisherWidgets, useRecentlyUsedPlugins, useFilteredInstalledPluginsAndWidgets, isEditorTypeSupported, useAllowlistedWidgets, useCanRunExtensions, getPendingPublisherWidgetsForCurrentUser, usePluginedWidgets } from '../figma_app/844435';
 import { lu as _$$lu } from '../figma_app/846140';
 import { hc, jk, mX, z6 } from '../figma_app/846841';
-import { Dz, WJ, Zj } from '../figma_app/847915';
+import { getActionOrName, isMenuItemChecked, isCheckedOrHasPropertyValue } from '../figma_app/847915';
 import { $L as _$$$L, nd as _$$nd, oP as _$$oP, HS, uq, YB } from '../figma_app/857146';
 import { Ag as _$$Ag, lc as _$$lc2, wj as _$$wj, B3, qy, RL, zM } from '../figma_app/862289';
 import { b as _$$b4 } from '../figma_app/873852';
@@ -1921,7 +1921,7 @@ function nU({
     children: e
   });
 }
-let nz = [_$$jR, N0, _$$k5, RO, Sb].map(e => ({
+let nz = [neutralDarkColor3, redSecondaryColor, blueTintColor, greenMintColor, redApricotColor2].map(e => ({
   string: e,
   color: colorCSSManipulatorInstance.parse(e)
 }));
@@ -2303,7 +2303,7 @@ let ae = {
           onChange: e.onChangeColorMode,
           value: e.colorMode,
           recordingKey: generateRecordingKey(e, 'colorModePicker'),
-          legend: jsx(_$$q3, {
+          legend: jsx(Legend, {
             children: renderI18nText('first_draft.theme_tool.color.mode_picker')
           }),
           children: [jsx(c$, {
@@ -7678,7 +7678,7 @@ function ov() {
       let f = m && !!i;
       let g = getSelectedEditorType();
       if (s || g !== FEditorType.Design) return e;
-      if (!$7('useDisabledReasons')) return ['ROLLING_OUT'];
+      if (!checkEligibilityStatus('useDisabledReasons')) return ['ROLLING_OUT'];
       let _ = [];
       !o || o.parentOrgId || o.teamId || _.push('PERSONAL_DRAFT');
       d && _.push('TEAM_OR_ORG_DISABLED');
@@ -7857,7 +7857,7 @@ function oO(e) {
     'children': o
   });
 }
-let oM = e => Zj(e) && !e.hideCheckForQuickCommand;
+let oM = e => isCheckedOrHasPropertyValue(e) && !e.hideCheckForQuickCommand;
 let oP = () => {};
 function oF({
   item: e,
@@ -7870,7 +7870,7 @@ function oF({
   let {
     addFrecencyUsage
   } = fJ();
-  let d = Dz(e);
+  let d = getActionOrName(e);
   let c = useSelector(e => e.mirror.appModel);
   let u = useDispatch();
   let {
@@ -7997,7 +7997,7 @@ function oF({
       return;
     }
     e.callback && !d ? d = async () => {
-      e.callback && (await e.callback(Dz(e), e.args, u));
+      e.callback && (await e.callback(getActionOrName(e), e.args, u));
     } : e.action && (d = async () => {
       if (!e.action) return;
       let t = oP();
@@ -8043,7 +8043,7 @@ function oF({
     });
   })();
   let R = oM(e);
-  let M = R ? WJ(c, e) : void 0;
+  let M = R ? isMenuItemChecked(c, e) : void 0;
   let B = _$$h2('plugin');
   let U = _$$h2('widget');
   let G = useCurrentUserOrg();
@@ -8051,7 +8051,7 @@ function oF({
   useEffect(() => {
     e.onRender && e.onRender(!!t);
   }, [e, t]);
-  let z = _$$o(_$$nt.quickActionsA11y);
+  let z = useLabConfiguration(labConfigurations.quickActionsA11y);
   return jsx(_$$B6.Item, {
     primaryAction: {
       text: 'Perform',
@@ -9286,7 +9286,7 @@ function lj({
   let g = lb(o);
   let _ = lC(extension);
   let x = g ? _ : f;
-  let y = _$$o(_$$nt.quickActionsA11y);
+  let y = useLabConfiguration(labConfigurations.quickActionsA11y);
   let b = jsxs(Fragment, {
     children: [!c && jsx(lS, {
       extension
@@ -9368,7 +9368,7 @@ function lI({
   let g = lb(d);
   let _ = lC(extension);
   let x = g ? _ : f;
-  let y = _$$o(_$$nt.quickActionsA11y);
+  let y = useLabConfiguration(labConfigurations.quickActionsA11y);
   if (!canRun && !canRequest) return null;
   let b = jsxs(Fragment, {
     children: [jsx(Xq, {
@@ -10518,7 +10518,7 @@ function dI() {
   let ex = u === AssetTabType.EXTENSIONS;
   let ey = Xr(FX);
   let eb = useId();
-  let eC = _$$o(_$$nt.quickActionsA11y);
+  let eC = useLabConfiguration(labConfigurations.quickActionsA11y);
   return jsx(_$$n, {
     height: wC,
     recordingKey: 'defaultView',

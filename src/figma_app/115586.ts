@@ -1,26 +1,50 @@
-import { useState, useEffect } from "react";
-import { t_, useAtomWithSubscription } from "../figma_app/27355";
-import { fullscreenValue } from "../figma_app/455680";
-let s = t_(() => fullscreenValue.isReady() || fullscreenValue.onReady());
-export function $$o0() {
-  useAtomWithSubscription(s);
+import { useEffect, useState } from "react"
+import { atomWithDefault, useAtomWithSubscription } from "../figma_app/27355"
+import { fullscreenValue } from "../figma_app/455680"
+
+const fullscreenReadyAtom = atomWithDefault<boolean>(() =>
+  fullscreenValue.isReady() || fullscreenValue.onReady(),
+)
+
+/**
+ * Custom hook that subscribes to fullscreen ready state changes
+ * Original name: $$o0
+ */
+export function useFullscreenReadySubscription(): void {
+  useAtomWithSubscription(fullscreenReadyAtom)
 }
-export function $$l1() {
-  let [e, t] = useState(!1);
+
+/**
+ * Custom hook that returns whether fullscreen is ready
+ * Original name: $$l1
+ */
+export function useIsFullscreenReady(): boolean {
+  const [isReady, setIsReady] = useState<boolean>(false)
+
   useEffect(() => {
+    // Check if already ready
     if (fullscreenValue.isReady()) {
-      t(!0);
-      return;
+      setIsReady(true)
+      return
     }
-    let e = !1;
+
+    // Setup async ready listener
+    let isUnmounted = false
+
     fullscreenValue.onReady().then(() => {
-      e || t(!0);
-    });
+      if (!isUnmounted) {
+        setIsReady(true)
+      }
+    })
+
+    // Cleanup function to prevent state updates after unmount
     return () => {
-      e = !0;
-    };
-  }, [t]);
-  return e;
+      isUnmounted = true
+    }
+  }, [])
+
+  return isReady
 }
-export const N = $$o0;
-export const g = $$l1;
+
+export const N = useFullscreenReadySubscription
+export const g = useIsFullscreenReady

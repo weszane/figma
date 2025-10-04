@@ -5,15 +5,15 @@ export interface AppState {
   optimist: any[]
   autocomplete: Autocomplete
   contacts: Contacts
-  dropdownShown: null
+  dropdownShown: any
   flashes: ActiveFileUsers
-  modalShown: null | { type: string, props: any }
+  modalShown: any | { type: string, props: any }
   progress: ActiveFileUsers
   visualBell: any[]
   savedPublishDescription: string
   notifications: any[]
   downtime: Downtime
-  blockedUILoadingIndicator: null
+  blockedUILoadingIndicator: any
   teams: AuthedTeamsByID
   authedUsers: AuthedUsers
   publicUsers: PublicUsers
@@ -42,7 +42,7 @@ export interface AppState {
   comments: WelcomeComments
   appWindow: AppWindow
   orgById: ActiveFileUsers
-  currentUserOrgId: null
+  currentUserOrgId: any
   lockedOrgIds: ActiveFileUsers
   isAccountLockedDuringOrgOperation: boolean
   hasPersonalSpace: boolean
@@ -79,16 +79,16 @@ export interface AppState {
   repos: ActiveFileUsers
   fileKeysByRepoId: ActiveFileUsers
   mergingStatus: number
-  openFileMerge: null
+  openFileMerge: any
   templateFiles: TemplateFiles
-  teamJoinLinks: null
+  teamJoinLinks: any
   theme: Theme
   desktopNewTab: DesktopNewTab
   sharingAttributionContextKey: string
   screenreader: Screenreader
   search: Search
-  lastVisitedPlanId: null
-  lastVisitedPlan: null
+  lastVisitedPlanId: any
+  lastVisitedPlan: any
   plans: WelcomePlan[]
   currentTeamId: string
   favorites: Favorites
@@ -100,7 +100,7 @@ export interface AppState {
   fileImport: FileImport
   avatarEditorState: AvatarEditorState
   mobileNavShown: boolean
-  creatingNewFolder: null
+  creatingNewFolder: any
   tileSelect: TileSelect
   teamCreation: TeamCreation
   activeFileUsers: ActiveFileUsers
@@ -133,7 +133,7 @@ export interface AppState {
   showingOpenDesktopAppModal: number
   saveStatus: SaveStatus
   isRenaming: boolean
-  pickerShown: null
+  pickerShown: any
   instanceSwapPickerShown: Shown
   stylePickerShown: Shown
   voting: Voting
@@ -142,7 +142,7 @@ export interface AppState {
   versionHistory: VersionHistory
   multiplayer: Multiplayer
   fonts: { [key: string]: Font }
-  localFontAgentVersion: null
+  localFontAgentVersion: any
   mirror: Mirror
   styleSets: ActiveFileUsers
   colorPicker: ColorPicker
@@ -159,9 +159,9 @@ export interface AppState {
   usedKeyboardShortcuts: UsedKeyboardShortcuts
   keyboardShortcutPanel: KeyboardShortcutPanel
   multiplayerEmoji: MultiplayerEmoji
-  eyedropper: null
-  hyperlinkPopup: null
-  canvasMentionPopup: null
+  eyedropper: any
+  hyperlinkPopup: any
+  canvasMentionPopup: any
   recentlyUsedQuickCommands: any[]
   saveAsState: SaveAsState
   timer: Timer
@@ -172,13 +172,13 @@ export interface AppState {
   instanceSwapPickerListLayout: boolean
   preferredValuesPickerListLayout: boolean
   voice: Voice
-  selectedComponentPropDefId: null
+  selectedComponentPropDefId: any
   showingFileFooter: boolean
   canvasSearch: CanvasSearch
   variablePickerShown: Shown
   quickStart: QuickStart
   recentCustomTemplates: ActiveFileUsers
-  pickerInStyleCreationShown: null
+  pickerInStyleCreationShown: any
   prototype: Prototype
 }
 
@@ -199,25 +199,25 @@ interface HubFile {
   resized_thumbnail_urls: Resizedthumbnailurls
   community_publishers: Communitypublishers
   current_hub_file_version_id: string
-  unpublished_at: null
+  unpublished_at: any
   duplicate_count: number
   like_count: number
   comments_setting: string
   comment_count: number
   publishing_status: string
-  category_id: null
+  category_id: any
   is_chat_history_removed: boolean
   publisher: Publisher
   versions: Versions
   client_meta: string
   thumbnail_is_set: boolean
-  current_user_liked: null
+  current_user_liked: any
   is_pinned: boolean
   redirect_canvas_url: string
-  monetization_status: null
-  support_contact: null
+  monetization_status: any
+  support_contact: any
   badges: any[]
-  third_party_m10n_status: null
+  third_party_m10n_status: any
 }
 
 interface Versions {
@@ -230,12 +230,12 @@ interface HubFileVersion {
   name: string
   description: string
   version: string
-  release_notes: null
+  release_notes: any
   created_at: string
   valid_prototype: boolean
   client_meta: string
-  thumbnail_guid: null
-  creator_policy: null
+  thumbnail_guid: any
+  creator_policy: any
 }
 
 interface Publisher {
@@ -249,9 +249,9 @@ interface Publisher {
   name: string
   img_url: string
   img_urls: Imgurls
-  current_user_is_following: null
-  current_user_is_followed: null
-  is_restricted_by_current_user: null
+  current_user_is_following: any
+  current_user_is_followed: any
+  is_restricted_by_current_user: any
   realtime_token: string
   entity_type: string
   badges: any[]
@@ -272,9 +272,9 @@ interface Accepted {
   name: string
   img_url: string
   img_urls: Imgurls
-  current_user_is_following: null
-  current_user_is_followed: null
-  is_restricted_by_current_user: null
+  current_user_is_following: any
+  current_user_is_followed: any
+  is_restricted_by_current_user: any
   realtime_token: string
   entity_type: string
   associated_users: Associateduser[]
@@ -315,8 +315,8 @@ export interface LastQuery {
 }
 
 export interface DateClass {
-  start: null
-  end: null
+  start: any
+  end: any
 }
 
 export interface AppWindow {
@@ -324,7 +324,7 @@ export interface AppWindow {
 }
 
 export interface Auth {
-  accountPicker: null
+  accountPicker: any
   email: string
   name: string
   jobTitle: string
@@ -332,18 +332,18 @@ export interface Auth {
   optInEmail: boolean
   redirectUrl: string
   loading: boolean
-  error: null
-  appAuthId: null
-  appAuthAppType: null
-  appAuthGSecret: null
-  appAuthDesktopProtocol: null
-  appAuthUsers: null
-  googleIdToken: null
+  error: any
+  appAuthId: any
+  appAuthAppType: any
+  appAuthGSecret: any
+  appAuthDesktopProtocol: any
+  appAuthUsers: any
+  googleIdToken: any
   googleTokenType: string
-  postVerificationAction: null
-  arkoseAction: null
-  ssoMethod: null
-  orgName: null
+  postVerificationAction: any
+  arkoseAction: any
+  ssoMethod: any
+  orgName: any
   existingSession: boolean
   clickedSAMLSignIn: boolean
   shouldUseRedirectInstead: boolean
@@ -352,25 +352,25 @@ export interface Auth {
 
 export interface AuthedActiveCommunityProfile {
   id: string
-  location: null
+  location: any
   profile_handle: string
-  public_at: null
+  public_at: any
   follower_count: number
   following_count: number
   primary_user_id: string
   name: string
   img_url: string
   img_urls: ImgUrls
-  current_user_is_following: null
-  current_user_is_followed: null
-  is_restricted_by_current_user: null
+  current_user_is_following: any
+  current_user_is_followed: any
+  is_restricted_by_current_user: any
   realtime_token: string
   entity_type: string
   associated_users: AssociatedUser[]
   badges: any[]
   has_published: boolean
-  org_id: null
-  team_id: null
+  org_id: any
+  team_id: any
 }
 
 export interface AssociatedUser {
@@ -396,66 +396,66 @@ export interface AuthedTeamsByID1352471829114242693 {
   id: string
   name: string
   created_at: Date
-  synced_at: null
-  providers: null
-  stripe_customer_id: null
-  subscription: null
+  synced_at: any
+  providers: any
+  stripe_customer_id: any
+  subscription: any
   editors: number
   projects: number
-  student_team_at: null
-  student_autoverifying_team_at: null
-  grace_period_end: null
-  org_id: null
-  img_urls: null
-  org_access: null
-  deleted_at: null
-  blocked_at: null
-  trial_period_end: null
-  description: null | string
-  deleted_by: null
+  student_team_at: any
+  student_autoverifying_team_at: any
+  grace_period_end: any
+  org_id: any
+  img_urls: any
+  org_access: any
+  deleted_at: any
+  blocked_at: any
+  trial_period_end: any
+  description: any | string
+  deleted_by: any
   experiment_seed: number
-  license_group_id: null
-  migrated_stripe_customer_id: null
-  community_blocked_at: null
-  default_permission: null
-  grace_period_type: null
-  workspace_id: null
-  default_color_palette_uuid: null
-  tax_id_verified_at: null
-  legal_name: null
+  license_group_id: any
+  migrated_stripe_customer_id: any
+  community_blocked_at: any
+  default_permission: any
+  grace_period_type: any
+  workspace_id: any
+  default_color_palette_uuid: any
+  tax_id_verified_at: any
+  legal_name: any
   student_team_state: string
-  ai_features_disabled_at: null
+  ai_features_disabled_at: any
   editors_whiteboard: number
   editors_total_unique: number
   sharing_audience_control: string
   _internal_only_written_by_backfill: number
-  figma_provided_libraries_disabled_at: null
+  figma_provided_libraries_disabled_at: any
   upgrade_approval_settings: UpgradeApprovalSettings
-  sanctioned_at: null
-  stripe_billing_address_country: null
+  sanctioned_at: any
+  stripe_billing_address_country: any
   restrictions_list: string[]
   student_team: boolean
   starter_team: boolean
   pro_team: boolean
   DEPRECATED_pro_team: boolean
   org_team: boolean
-  subscription_raw: null
-  community_profile_id: null
-  community_profile_handle: null
+  subscription_raw: any
+  community_profile_id: any
+  community_profile_handle: any
   is_paid: boolean
   ai_features_disabled: boolean
   ai_data_sharing_enabled: boolean
   org_browsable: boolean
   hidden: boolean
-  last_upgraded_at: null
+  last_upgraded_at: any
   figma_provided_libraries_disabled: boolean
   experiment_assignments: any[]
   updated_at: Date
   design_default_paid_status: string
   whiteboard_default_paid_status: string
-  img_url?: null
+  img_url?: any
   vat_gst_id?: string
-  tax_id_verification_status?: null
+  tax_id_verification_status?: any
   is_favorited?: boolean
   realtime_token?: string
 }
@@ -483,16 +483,16 @@ export interface ByID1352471826795235809 {
   img_url: string
   created_at: Date
   email_validated_at: Date
-  utc_offset: null
+  utc_offset: any
   profile: Profile
-  phone_number: null
-  student_validated_at: null
-  description: null
-  plugin_publishing_blocked_at: null
-  community_commenting_blocked_at: null
-  community_blocked_at: null
-  external_restricted_org_id: null
-  external_restricted_at: null
+  phone_number: any
+  student_validated_at: any
+  description: any
+  plugin_publishing_blocked_at: any
+  community_commenting_blocked_at: any
+  community_blocked_at: any
+  external_restricted_org_id: any
+  external_restricted_at: any
   dev_tokens: any[]
   oauth_tokens: any[]
   realtime_token: string
@@ -502,29 +502,29 @@ export interface ByID1352471826795235809 {
   google_sso_only: boolean
   saml_sso_only: boolean
   experiment_seed: number
-  community_profile_id: null
-  community_profile_handle: null
-  community_beta_at: null
+  community_profile_id: any
+  community_profile_handle: any
+  community_beta_at: any
   locale: string
-  signup_locale: null
+  signup_locale: any
   keyboard_layout: string
   mouse_scroll_to_zoom: boolean
   right_click_drag_to_pan: boolean
-  auto_open_in_desktop: null
+  auto_open_in_desktop: any
   color_profile: string
   sharing_restricted: boolean
-  cmty_buyer_tos_accepted_at: null
+  cmty_buyer_tos_accepted_at: any
   stripe_account_status: string
   cmty_seller_capabilities: string[]
   is_community_seller: boolean
   has_passed_visual_compliance: boolean
-  stripe_connected_account_id: null
+  stripe_connected_account_id: any
   screenreader_enabled: boolean
-  community_purchasing_blocked_at: null
+  community_purchasing_blocked_at: any
   experiment_assignments: any[]
   plans: WelcomePlan[]
   has_content_from_other_plans: boolean
-  can_sell_on_community: null
+  can_sell_on_community: any
 }
 
 export interface The1352471826795235809_Plan {
@@ -532,7 +532,7 @@ export interface The1352471826795235809_Plan {
   is_guest: boolean
   is_org: boolean
   name: string
-  img_url: null
+  img_url: any
 }
 
 export interface Profile {
@@ -553,13 +553,13 @@ export interface Autocomplete {
 export interface Autosave {
   unclaimedFilesWithChangesInIDB: any[]
   unclaimedFilesCreatedOffline: any[]
-  lastSnoozeTime: null
+  lastSnoozeTime: any
   nextGarbageCollectionTimestamp: number
 }
 
 export interface AvatarEditorState {
   status: number
-  entity: null
+  entity: any
 }
 
 export interface CanvasSearch {
@@ -576,18 +576,18 @@ export interface ColorPicker {
 }
 
 export interface WelcomeComments {
-  activeThread: null
+  activeThread: any
   threads: ActiveFileUsers
   newComment: NewComment
-  editingComment: null
+  editingComment: any
   showOnlyParticipating: boolean
   showResolved: boolean
-  emojiPicker: null
-  typeahead: null
+  emojiPicker: any
+  typeahead: any
   typeaheadPositionOffset: TypeaheadPositionOffset
   emphasizedPinIds: any[]
   hoveredPinIds: any[]
-  activeDragTarget: null
+  activeDragTarget: any
   savingCommentUuids: ActiveFileUsers
   lgPendingUuidToServerIdMap: ActiveFileUsers
 }
@@ -596,8 +596,8 @@ export interface NewComment {
   messageMeta: any[]
   attachments: ActiveFileUsers
   state: number
-  anchorPosition: null
-  selectionBoxAnchor: null
+  anchorPosition: any
+  selectionBoxAnchor: any
   discardAttempt: number
 }
 
@@ -611,8 +611,8 @@ export interface TypeaheadPositionOffset {
 }
 
 export interface CommunityHub {
-  currentProfile: null
-  pageState: null
+  currentProfile: any
+  pageState: any
   comments: CommunityHubComments
   shelves: ActiveFileUsers
   showingCommunityAdminBanner: boolean
@@ -623,10 +623,10 @@ export interface CommunityHubComments {
   authorsById: ActiveFileUsers
   commentsById: ActiveFileUsers
   feeds: Feeds
-  id: null
+  id: any
   replyInfoByParentId: ActiveFileUsers
-  selectedCommentId: null
-  type: null
+  selectedCommentId: any
+  type: any
   showResolved: boolean
   mentionedProfiles: ActiveFileUsers
 }
@@ -653,19 +653,19 @@ export interface DesktopNewTab {
   isCreatingFile: boolean
   searchQuery: string
   isSearchBarFocused: boolean
-  loadingBackgroundColor: null
+  loadingBackgroundColor: any
 }
 
 export interface Downtime {
   hidingDowntimeNotif: string
-  notifMinutesRemaining: null
-  payload: null
+  notifMinutesRemaining: any
+  payload: any
   status: string
 }
 
 export interface DragState {
   type: number
-  data: null
+  data: any
 }
 
 export interface Favorites {
@@ -690,44 +690,44 @@ export interface The6_YUoSy9FJxvOixYBkcsdGu {
   updated_at: Date
   key: ID
   name: string
-  description: null
+  description: any
   folder_id: string
-  scheme: null
+  scheme: any
   team_id: TeamID
   link_access: LinkAccess
-  trashed_user_id: null
+  trashed_user_id: any
   client_meta: string
-  license: null
-  parent_org_id: null
-  org_browsable: boolean | null
-  thumbnail_url_override: null
-  thumbnail_guid: null
-  proto_link_access: null
+  license: any
+  parent_org_id: any
+  org_browsable: boolean | any
+  thumbnail_url_override: any
+  thumbnail_guid: any
+  proto_link_access: any
   org_audience: boolean
-  file_repo_id: null
-  source_file_key: null
-  source_checkpoint_id: null
+  file_repo_id: any
+  source_file_key: any
+  source_checkpoint_id: any
   editor_type: LandProduct
-  branch_checkpoint_id: null
+  branch_checkpoint_id: any
   has_file_link_password: boolean
   has_proto_link_password: boolean
   folder_access_enabled: boolean
   _internal_only_written_by_backfill: number
   is_trashed_with_project: boolean
-  trashed_with_parent: null
+  trashed_with_parent: any
   url: string
   edit_url: string
   prototype_url: string
   handoff_url: string
   slides_url: string
-  track_tags: TrackTags | null
+  track_tags: TrackTags | any
   viewer_export_restricted: boolean
   thumbnail_url: string
   is_try_file: boolean
   library_key: string
   created_at: Date
-  deleted_at: null
-  trashed_at: null
+  deleted_at: any
+  trashed_at: any
 }
 
 export enum LandProduct {
@@ -755,52 +755,52 @@ export interface The9SAh5ErOA2TGF2IvXRIYGN {
   updated_at: Date
   key: ID
   name: string
-  description: null
+  description: any
   folder_id: string
-  scheme: null
+  scheme: any
   team_id: string
   link_access: LinkAccess
-  trashed_user_id: null
+  trashed_user_id: any
   client_meta: string
-  license: null
-  parent_org_id: null
-  org_browsable: null
-  thumbnail_url_override: null
-  thumbnail_guid: null
-  proto_link_access: null
+  license: any
+  parent_org_id: any
+  org_browsable: any
+  thumbnail_url_override: any
+  thumbnail_guid: any
+  proto_link_access: any
   org_audience: boolean
-  file_repo_id: null
-  source_file_key: null
-  source_checkpoint_id: null
+  file_repo_id: any
+  source_file_key: any
+  source_checkpoint_id: any
   editor_type: string
-  branch_checkpoint_id: null
+  branch_checkpoint_id: any
   has_file_link_password: boolean
   has_proto_link_password: boolean
   folder_access_enabled: boolean
   _internal_only_written_by_backfill: number
   is_trashed_with_project: boolean
-  trashed_with_parent: null
+  trashed_with_parent: any
   url: string
   edit_url: string
   prototype_url: string
   handoff_url: string
   slides_url: string
-  track_tags: null
+  track_tags: any
   viewer_export_restricted: boolean
   thumbnail_url: string
   is_try_file: boolean
   library_key: string
   created_at: Date
-  deleted_at: null
-  trashed_at: null
+  deleted_at: any
+  trashed_at: any
   folder: Folder
   team: The9SAh5ErOA2TGF2IvXRIYGNTeam
   team_user: TeamUser
-  org: null
-  org_user: null
-  edu_grace_period: null
-  file_repo: null
-  source_file: null
+  org: any
+  org_user: any
+  edu_grace_period: any
+  file_repo: any
+  source_file: any
   can_edit: boolean
   can_export: boolean
   can_edit_canvas: boolean
@@ -816,23 +816,23 @@ export interface Folder {
   id: string
   created_at: Date
   updated_at: Date
-  scheme: null
+  scheme: any
   path: string
-  settings: null
+  settings: any
   team_id: string
-  view_only_at: null
-  org_id: null
-  deleted_at: null
-  description: null
+  view_only_at: any
+  org_id: any
+  deleted_at: any
+  description: any
   sharing_audience_control: string
   _internal_only_written_by_backfill: number
   is_abandoned_drafts: boolean
-  trashed_at: null
-  trashed_by: null
-  abandoned_draft_user_name: null
-  abandoned_draft_user_email: null
-  abandoned_draft_user_removed_at: null
-  trashed_user_id: null
+  trashed_at: any
+  trashed_by: any
+  abandoned_draft_user_name: any
+  abandoned_draft_user_email: any
+  abandoned_draft_user_removed_at: any
+  trashed_user_id: any
   name: string
   is_invite_only: boolean
   is_view_only: boolean
@@ -843,37 +843,37 @@ export interface The9SAh5ErOA2TGF2IvXRIYGNTeam {
   id: string
   name: string
   created_at: Date
-  img_url: null
-  synced_at: null
-  providers: null
-  subscription: null
+  img_url: any
+  synced_at: any
+  providers: any
+  subscription: any
   editors: number
-  student_team_at: null
-  student_autoverifying_team_at: null
-  org_id: null
-  org_access: null
-  deleted_at: null
-  blocked_at: null
-  trial_period_end: null
-  description: null
-  deleted_by: null
+  student_team_at: any
+  student_autoverifying_team_at: any
+  org_id: any
+  org_access: any
+  deleted_at: any
+  blocked_at: any
+  trial_period_end: any
+  description: any
+  deleted_by: any
   experiment_seed: number
-  license_group_id: null
-  migrated_stripe_customer_id: null
-  community_blocked_at: null
-  default_permission: null
+  license_group_id: any
+  migrated_stripe_customer_id: any
+  community_blocked_at: any
+  default_permission: any
   vat_gst_id: string
-  workspace_id: null
-  default_color_palette_uuid: null
-  tax_id_verification_status: null
-  tax_id_verified_at: null
-  legal_name: null
-  ai_features_disabled_at: null
+  workspace_id: any
+  default_color_palette_uuid: any
+  tax_id_verification_status: any
+  tax_id_verified_at: any
+  legal_name: any
+  ai_features_disabled_at: any
   editors_whiteboard: number
   editors_total_unique: number
   sharing_audience_control: string
   _internal_only_written_by_backfill: number
-  figma_provided_libraries_disabled_at: null
+  figma_provided_libraries_disabled_at: any
   upgrade_approval_settings: UpgradeApprovalSettings
   student_team: boolean
   restrictions_list: string[]
@@ -894,8 +894,8 @@ export interface TeamUser {
   whiteboard_paid_status: string
   created_at: Date
   updated_at: Date
-  show_figjam_user_onboarding: null
-  has_shown_figjam_admin_onboarding: null
+  show_figjam_user_onboarding: any
+  has_shown_figjam_admin_onboarding: any
   drafts_folder_id: string
   _internal_only_written_by_backfill: number
   active_seat_type: ActiveSeatType
@@ -926,9 +926,9 @@ export interface FileImport {
 
 export interface FileMove {
   folderSearchQuery: string
-  folderRenaming: null
+  folderRenaming: any
   focusedIndex: number
-  indexCount: null
+  indexCount: any
   indexOffsets: ActiveFileUsers
   folderRows: any[]
   teamOrder: any[]
@@ -937,7 +937,7 @@ export interface FileMove {
   isSearchFocused: boolean
   upDownKeyPressed: boolean
   canMouseFocus: boolean
-  userTeamCount: null
+  userTeamCount: any
 }
 
 export interface WelcomeFolders {
@@ -947,20 +947,20 @@ export interface WelcomeFolders {
 export interface The216605957 {
   id: string
   name: string
-  description: null
+  description: any
   path: string
   team_id: string
-  org_id: null
+  org_id: any
   is_subscribed: boolean
   is_favorited: boolean
   updated_at: Date
   created_at: Date
   is_invite_only: boolean
   is_view_only: boolean
-  settings: null
-  deleted_at: null
-  trashed_at: null
-  trashed_user_id: null
+  settings: any
+  deleted_at: any
+  trashed_at: any
+  trashed_user_id: any
   is_abandoned_drafts: boolean
   sharing_audience_control: string
   team_access: string
@@ -1061,7 +1061,7 @@ export interface Shown {
 }
 
 export interface KeyboardShortcutPanel {
-  tab: null
+  tab: any
 }
 
 export interface LeftPanel {
@@ -1078,7 +1078,7 @@ export interface Library {
   assetsPanelSearch: AssetsPanelSearch
   publishProgress: PublishProgress
   isRenamingSelectedStyle: boolean
-  localStyleSelection: null
+  localStyleSelection: any
   defaultPublished: DefaultPublished
   libraryUpdatesBannerDismissed: boolean
   movedLibraryItems: MovedLibraryItems
@@ -1124,7 +1124,7 @@ interface Nown0 {
 }
 
 interface Data {
-  variable: null
+  variable: any
 }
 
 interface SubscribedVariableSetsByIdFromLoadedPages {
@@ -1144,7 +1144,7 @@ interface VariableExample {
   library_key: string
   pageIds: any[]
   isExtendable: boolean
-  sortPosition: null
+  sortPosition: any
   publishID: string
   isExtension: boolean
 }
@@ -1153,8 +1153,8 @@ interface Mode {
   id: string
   name: string
   sortPosition: string
-  parentModeId: null
-  parentVariableSetId: null
+  parentModeId: any
+  parentVariableSetId: any
 }
 
 interface SubscribedVariablesByIdFromLoadedPages {
@@ -1226,11 +1226,11 @@ interface _7427 {
   node_id: string
   containing_frame: Containingframe3
   updated_at: string
-  fill_color: null
+  fill_color: any
   default_state_key: string
   min_node_width: number
   min_node_height: number
-  is_template: null
+  is_template: any
   library_key: string
 }
 
@@ -1297,7 +1297,7 @@ interface Styles {
 
 interface StyleItemValue {
   status: string
-  data: null
+  data: any
   errors: any[]
 }
 
@@ -1333,11 +1333,11 @@ interface StateGroupItemValueInner {
   node_id: string
   containing_frame: Containingframe2
   updated_at: string
-  fill_color: null
+  fill_color: any
   default_state_key: string
   min_node_width: number
   min_node_height: number
-  is_template: null
+  is_template: any
   library_key: string
 }
 
@@ -1379,9 +1379,9 @@ export interface NoTeamItemValueDetail {
   updated_at: string
   min_node_width: number
   min_node_height: number
-  sort_position: null
-  has_video: null
-  is_template: null
+  sort_position: any
+  has_video: any
+  is_template: any
   library_key: string
 }
 
@@ -1430,20 +1430,20 @@ export interface DesignComponentInnerLibraryKey {
   userFacingVersion: string
   id: string
   description: string
-  description_rt: null | string
+  description_rt: any | string
   node_id: string
   containing_frame: FContainingFrame
   is_unflattened?: boolean
   updated_at: Date
   min_node_width: number
   min_node_height: number
-  sort_position?: null
-  has_video?: null
-  is_template: null
+  sort_position?: any
+  has_video?: any
+  is_template: any
   library_key: string
   key?: string
   version?: string
-  fill_color?: BackgroundColorEnum | null
+  fill_color?: BackgroundColorEnum | any
   default_state_key?: string
 }
 
@@ -1511,16 +1511,16 @@ export interface FLINK123 {
   userFacingVersion: string
   id: string
   description: Description
-  description_rt: DescriptionRt | null
+  description_rt: DescriptionRt | any
   node_id: string
   containing_frame: FContainingFrame
   is_unflattened: boolean
   updated_at: Date
   min_node_width: number
   min_node_height: number
-  sort_position: null
-  has_video: null
-  is_template: null
+  sort_position: any
+  has_video: any
+  is_template: any
   library_key: string
 }
 
@@ -1556,13 +1556,13 @@ export interface The116139 {
   updated_at: Date
   min_node_width: number
   min_node_height: number
-  sort_position?: null
-  has_video?: null
-  is_template: null
+  sort_position?: any
+  has_video?: any
+  is_template: any
   library_key: string
   key?: string
   version?: string
-  fill_color?: null
+  fill_color?: any
   default_state_key?: string
 }
 
@@ -1630,7 +1630,7 @@ export interface Mirror {
   selectionPaints: SelectionPaints
 }
 
-export type AppModelValue = AppModelElement[] | boolean | PurpleAppModel | number | null | string
+export type AppModelValue = AppModelElement[] | boolean | PurpleAppModel | number | any | string
 
 export interface AppModelElement {
   nodeId: EID
@@ -2784,7 +2784,7 @@ export interface AppModel extends ActionEnabledProperties {
   multiplayerSessionState: number
   isReadOnly: boolean
   isSceneReadOnly: boolean
-  hyperlinkLocation: null
+  hyperlinkLocation: any
   onCanvasNameEditorInfo: OnCanvasNameEditorInfo
   votingSessionInfo: VotingSessionInfo
   loadingEmbeds: any[]
@@ -2800,9 +2800,9 @@ export interface AppModel extends ActionEnabledProperties {
   lastBranchingStagingAction: number
   themePreference: string
   sceneGeneration: number
-  spellCheckSuggestions: null
+  spellCheckSuggestions: any
   onCanvasPillInfo: any[]
-  activeTextReviewPlugin: null
+  activeTextReviewPlugin: any
   hotReloadPluginDev: boolean
   useLocalRelatedLinkPlugin: boolean
 }
@@ -3397,9 +3397,9 @@ export interface VariableConsumptionInfo {
   variableSetKeyToModeIncludingSubtree: ActiveFileUsers
   variableSetToInheritMode: ActiveFileUsers
   variableConsumptionMap: ActiveFileUsers
-  variableSetKeyToModeData: null
+  variableSetKeyToModeData: any
   variableNotMatchingSetValue: ActiveFileUsers
-  variableSetKeyToPageLevelPresetMode: null
+  variableSetKeyToPageLevelPresetMode: any
   bubbledVariableConsumptionMaps: ActiveFileUsers
 }
 
@@ -3408,8 +3408,8 @@ export interface Multiplayer {
   deviceNameFilter: string
   observingSessionID: number
   followerCount: number
-  presenterSessionID: null
-  sessionNominatedByCurrentUser: null
+  presenterSessionID: any
+  sessionNominatedByCurrentUser: any
   sessionsNominatingCurrentUser: any[]
   allUsers: AllUser[]
 }
@@ -3459,14 +3459,14 @@ export interface WelcomeMusic {
   isMuted: boolean
   activeSongs: Meta[]
   allSongs: Meta[]
-  playerInstance: HTMLAudioElement | null
+  playerInstance: HTMLAudioElement | any
 }
 
 export interface SongData {
   error: boolean
   status: number
   meta: Meta[]
-  i18n: null
+  i18n: any
 }
 
 export interface Meta {
@@ -3510,38 +3510,38 @@ export interface OpenFile {
   key: string
   _name: string
   teamId: string
-  clientMeta: null
+  clientMeta: any
   folderId: string
-  license: null
-  orgBrowsable: null
-  parentOrgId: null
-  fileRepoId: null
-  sourceFileKey: null
+  license: any
+  orgBrowsable: any
+  parentOrgId: any
+  fileRepoId: any
+  sourceFileKey: any
   linkAccess: LinkAccess
   hasFileLinkPassword: boolean
   hasProtoLinkPassword: boolean
   updatedAt: Date
-  trashedAt: null
-  deletedAt: null
+  trashedAt: any
+  deletedAt: any
   creatorId: string
   createdAt: Date
-  sourceCheckpointId: null
-  thumbnailGuid: null
-  org: null
-  currentOrgUser: null
-  currentPartialOrgUser: null
+  sourceCheckpointId: any
+  thumbnailGuid: any
+  org: any
+  currentOrgUser: any
+  currentPartialOrgUser: any
   currentTeamUser: CurrentTeamUser
   ownerRole: OwnerRole
   teamLimitedInfo: TeamLimitedInfo
   team: OpenFileTeam
   project: Project
-  repo: null
-  sourceFile: null
-  publishedHubFile: null
-  trackTags: null
+  repo: any
+  sourceFile: any
+  publishedHubFile: any
+  trackTags: any
   votingSessions: any[]
-  template: null
-  siteMount: null
+  template: any
+  siteMount: any
   name: string
   isAbandonedDraftFile: boolean
   plan: OpenFilePlan
@@ -3565,7 +3565,7 @@ export interface OpenFile {
   canPublishTemplate: boolean
   viewerExportRestricted: boolean
   libraryKey: string
-  hasEditRole: boolean
+  hasEditRole: any
   isFavorited: boolean
   sharedContainerSetting: SharedContainerSetting
 }
@@ -3575,16 +3575,16 @@ export interface CurrentPlanUser {
   designPaidStatus: string
   whiteboardPaidStatus: string
   seatTypeLicenseTypes: string[]
-  designAccountTypeRequest: null
-  whiteboardAccountTypeRequest: null
-  devModeAccountTypeRequest: null
+  designAccountTypeRequest: any
+  whiteboardAccountTypeRequest: any
+  devModeAccountTypeRequest: any
 }
 
 export interface CurrentTeamUser {
   designPaidStatus: string
   whiteboardPaidStatus: string
-  designAccountTypeRequest: null
-  whiteboardAccountTypeRequest: null
+  designAccountTypeRequest: any
+  whiteboardAccountTypeRequest: any
 }
 
 export interface OwnerRole {
@@ -3609,13 +3609,13 @@ export interface Key {
 
 export interface Project {
   id: string
-  orgId: null
+  orgId: any
   teamId: string
   path: string
-  viewOnlyAt: null
-  inviteOnlyAt: null
-  trashedAt: null
-  subscription: null
+  viewOnlyAt: any
+  inviteOnlyAt: any
+  trashedAt: any
+  subscription: any
   team: ProjectTeam
   activeProjectResourceConnections: any[]
   canEdit: boolean
@@ -3652,19 +3652,19 @@ export interface Data {
 
 export interface OpenFileTeam {
   id: string
-  orgId: null
-  deletedAt: null
-  gracePeriodEnd: null
-  trialPeriodEnd: null
+  orgId: any
+  deletedAt: any
+  gracePeriodEnd: any
+  trialPeriodEnd: any
   createdAt: Date
-  studentTeamAt: null
-  licenseGroupId: null
-  workspaceId: null
-  orgAccess: null
+  studentTeamAt: any
+  licenseGroupId: any
+  workspaceId: any
+  orgAccess: any
   studentTeamState: string
-  licenseGroup: null
-  eduGracePeriod: null | Record<string, any>
-  subscription: null
+  licenseGroup: any
+  eduGracePeriod: any | Record<string, any>
+  subscription: any
   restrictionsList: string[]
   canEdit: boolean
   canView: boolean
@@ -3672,42 +3672,42 @@ export interface OpenFileTeam {
 
 export interface TeamLimitedInfo {
   name: string
-  imgUrl: null
+  imgUrl: any
 }
 
 export interface OrgDomains {
   domains: any[]
   isFetching: boolean
-  fetchedAt: null
+  fetchedAt: any
 }
 
 export interface OrgSamlConfig {
-  config: null
+  config: any
   isFetching: boolean
 }
 
 export interface OrgTeams {
   teams: any[]
-  status: null
+  status: any
 }
 
 export interface Payment {
-  error: null
-  errorCode: null
-  currencyToSwitch: null
+  error: any
+  errorCode: any
+  currencyToSwitch: any
   billingPeriod: number
   numDesignEditors: number
   submitPending: boolean
   upgradingNewTeam: boolean
-  promo: null
-  token: null
-  taxes: null
+  promo: any
+  token: any
+  taxes: any
   editorStatusChanges: EditorStatusChanges
   numWhiteboardEditors: number
   figmaEmailTeamUsers: any[]
-  currency: null
-  vatGstId: null
-  regionalVatGstId: null
+  currency: any
+  vatGstId: any
+  regionalVatGstId: any
   legalName: string
   displayName: string
 }
@@ -3752,7 +3752,7 @@ export interface Prototype {
   showOnlyParticipatingComments: boolean
   showResolvedComments: boolean
   pages: any[]
-  currentPageId: null
+  currentPageId: any
   backgroundColor: Color
   isReconnecting: boolean
   isFooterVisible: boolean
@@ -3763,7 +3763,7 @@ export interface PublicUsers {
 }
 
 export interface QuickStart {
-  insertedTextNodeId: null
+  insertedTextNodeId: any
 }
 
 export interface Realtime {
@@ -3822,10 +3822,10 @@ export interface The1352471826795235809_Element {
   resource_id_or_key: string
   user_id: string
   team_id: string
-  pending_email: null
-  is_shared?: boolean | null
+  pending_email: any
+  is_shared?: boolean | any
   _internal_only_written_by_backfill?: number
-  source?: null
+  source?: any
   user?: TeamUserUser
   pending: boolean
   folder_id?: string
@@ -3842,7 +3842,7 @@ export interface ByTeamID {
 
 export interface SaveAsState {
   count: number
-  startTime: null
+  startTime: any
   waitTime: number
   totalImagesToDownload: number
   remainingImagesToDownload: number
@@ -3866,55 +3866,55 @@ export interface Unsaved {
 
 export interface Screenreader {
   enabled: boolean
-  errorType: null
+  errorType: any
   serverStoredPreference: boolean
 }
 
 export interface Search {
   parameters: Parameters
-  responseSortState: null
+  responseSortState: any
   responses: CompletedQueries
   responseCounts: CompletedQueries
   completedQueries: CompletedQueries
   lastLoadedQuery: LastLoadedQuery
-  sessionId: null
+  sessionId: any
   queryCount: number
-  queryId: null
+  queryId: any
   isFocused: boolean
   searchScrollTop: number
   searchTypeBehavior: string
-  lastAckedQueryId: null
+  lastAckedQueryId: any
   searchPreviewOrder: any[]
 }
 
 export interface CompletedQueries {
-  public_plugins: null | string
-  private_plugins: null | string
-  files: null | string
-  projects: null | string
-  teams: null | string
-  users: null | string
-  public_profiles: null | string
-  hub_files: null | string
-  public_widgets: null | string
-  private_widgets: null | string
+  public_plugins: any | string
+  private_plugins: any | string
+  files: any | string
+  projects: any | string
+  teams: any | string
+  users: any | string
+  public_profiles: any | string
+  hub_files: any | string
+  public_widgets: any | string
+  private_widgets: any | string
 }
 
 export interface LastLoadedQuery {
-  sessionId: null
+  sessionId: any
   query: string
-  queryId: null
+  queryId: any
 }
 
 export interface Parameters {
   query: string
   searchModelType: string
   searchScope: string
-  workspaceFilter: null
-  idpGroupFilter: null
-  planFilter: null
+  workspaceFilter: any
+  idpGroupFilter: any
+  planFilter: any
   fileTypeFilter: number
-  facetFilters: null
+  facetFilters: any
   sortState: SortState
 }
 
@@ -3937,6 +3937,7 @@ export interface Files {
 }
 
 export interface SelectedView {
+  showOverview: boolean
   view: string
   editorType: number
   fileKey: ID
@@ -3972,15 +3973,15 @@ export interface TeamBilling {
 
 export interface Summary {
   currency: string
-  annual_subscription: null
-  monthly_subscription: null
-  last_monthly_invoice: null
-  last_annual_invoice: null
-  billing_contact: null
-  whiteboard_quantity: null
+  annual_subscription: any
+  monthly_subscription: any
+  last_monthly_invoice: any
+  last_annual_invoice: any
+  billing_contact: any
+  whiteboard_quantity: any
   show_vat_gst: boolean
-  shipping_address: null
-  legal_name: null
+  shipping_address: any
+  legal_name: any
   has_billing_address: boolean
 }
 
@@ -4069,28 +4070,28 @@ export interface RecentsAndSharing {
 export interface Timer {
   modalState: string
   audioEnabled: boolean
-  time: null | {
+  time: any | {
     isPaused: boolean
     timeRemainingMs: number
     timeOrigin: number
     totalTimeMs: number
   }
-  notification: null
+  notification: any
   setBy: string
   selectedSongID: string
   activeSongs: any[]
   volume: number
   musicStartTimeMs: number
   isMuted: boolean
-  musicPlayer: null
-  startChimePlayed: null
+  musicPlayer: any
+  startChimePlayed: any
 }
 
 export interface Tooltip {
-  target: null
+  target: any
   state: number
   position: number
-  timeoutID: null
+  timeoutID: any
   interactive: boolean
   tipAlign: number
   maxWidth: number
@@ -4119,6 +4120,7 @@ export interface UsedKeyboardShortcuts {
 }
 
 export interface WelcomeUser {
+  org_id: any
   byId: Record<string, { id: string, created_at: string }>
   id: string
   name: string
@@ -4127,16 +4129,16 @@ export interface WelcomeUser {
   img_url: string
   created_at: Date
   email_validated_at: Date
-  utc_offset: null
+  utc_offset: any
   profile: Profile
-  phone_number: null
-  student_validated_at: null
-  description: null
-  plugin_publishing_blocked_at: null
-  community_commenting_blocked_at: null
-  community_blocked_at: null
-  external_restricted_org_id: null
-  external_restricted_at: null
+  phone_number: any
+  student_validated_at: any
+  description: any
+  plugin_publishing_blocked_at: any
+  community_commenting_blocked_at: any
+  community_blocked_at: any
+  external_restricted_org_id: any
+  external_restricted_at: any
   dev_tokens: any[]
   oauth_tokens: any[]
   realtime_token: string
@@ -4146,42 +4148,42 @@ export interface WelcomeUser {
   google_sso_only: boolean
   saml_sso_only: boolean
   experiment_seed: string
-  community_profile_id: null
-  community_profile_handle: null
-  community_beta_at: null
+  community_profile_id: any
+  community_profile_handle: any
+  community_beta_at: any
   locale: string
-  signup_locale: null
+  signup_locale: any
   keyboard_layout: string
   mouse_scroll_to_zoom: boolean
   right_click_drag_to_pan: boolean
-  auto_open_in_desktop: null
+  auto_open_in_desktop: any
   color_profile: string
   sharing_restricted: boolean
-  cmty_buyer_tos_accepted_at: null
+  cmty_buyer_tos_accepted_at: any
   stripe_account_status: string
   cmty_seller_capabilities: string[]
   is_community_seller: boolean
   has_passed_visual_compliance: boolean
-  stripe_connected_account_id: null
+  stripe_connected_account_id: any
   screenreader_enabled: boolean
-  community_purchasing_blocked_at: null
+  community_purchasing_blocked_at: any
   experiment_assignments: any[]
   drafts_folder_id: string
   personal_drafts_folder_id: string
-  can_sell_on_community: null
+  can_sell_on_community: any
 }
 
 export interface UserAnalyticsData {
-  admin_user_metrics: null
+  admin_user_metrics: any
   design_activation_date: Date
   design_max_paid_role: string
-  domain_editors: null
+  domain_editors: any
   edited_figma_design: boolean
   education_user: boolean
   eligible_for_dev_mode_toolbelt_banner: boolean
   email_type: string
   first_collab_on: Date
-  first_component_created_date: null
+  first_component_created_date: any
   first_design_at: Date
   first_figjam_at: Date
   generation: number
@@ -4210,12 +4212,12 @@ export interface UserAnalyticsData {
   job_title: string
   land_product: LandProduct
   last_active_on: Date
-  last_comment_created_at: null
+  last_comment_created_at: any
   last_figjam_at: Date
   max_plan_tier: string
-  max_plan_tier_seat_type: null
-  num_admin_orgs: null
-  num_admin_pro_teams: null
+  max_plan_tier_seat_type: any
+  num_admin_orgs: any
+  num_admin_pro_teams: any
   num_edits_30_day: number
   num_edits_60_day: number
   num_edits_90_day: number
@@ -4226,8 +4228,8 @@ export interface UserAnalyticsData {
   org_admin_notification_email_enabled: boolean
   paid_status: string
   pro_admin_notification_email_enabled: boolean
-  pro_team_at_least_one_billing_cycle: null
-  rollout_jubilee: null
+  pro_team_at_least_one_billing_cycle: any
+  rollout_jubilee: any
   shared_design: boolean
   shared_figjam: boolean
   show_styles_deprecate_banner: boolean
@@ -4266,7 +4268,7 @@ export interface VersionHistory {
   docHasChanged: boolean
   loading: boolean
   isLoadingPage: boolean
-  lastEdited: null
+  lastEdited: any
   lastViewed: Date
 }
 
@@ -4283,10 +4285,10 @@ export interface Voice {
 
 export interface Voting {
   votingParams: VotingParams
-  lastInitiatedVotingSessionId: null
+  lastInitiatedVotingSessionId: any
   hasDismissedJoinConfirmation: boolean
-  selectedVotePinId: null
-  hoveredInModalVotePinId: null
+  selectedVotePinId: any
+  hoveredInModalVotePinId: any
 }
 
 export interface VotingParams {

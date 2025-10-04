@@ -21,8 +21,8 @@ import { Label } from "../905/270045";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
 import U from "classnames";
 import { A as _$$A } from "../905/639174";
-import { b as _$$b2, c as _$$c } from "../905/308099";
-import { q as _$$q } from "../905/932270";
+import { RadioInputRoot, RadioInputOption } from "../905/308099";
+import { Legend } from "../905/932270";
 import { KindEnum } from "../905/129884";
 import { SD, ZF } from "../905/920793";
 let I = {
@@ -273,8 +273,8 @@ function $(e) {
     children: [jsx(Label, {
       className: D,
       children: renderI18nText("whiteboard.figjam_export.file_type")
-    }), jsx(_$$b2, {
-      legend: jsx(_$$q, {
+    }), jsx(RadioInputRoot, {
+      legend: jsx(Legend, {
         children: renderI18nText("whiteboard.figjam_export.file_type")
       }),
       value: s,
@@ -289,7 +289,7 @@ function $(e) {
             "data-tooltip": getI18nString("whiteboard.figjam_export.csv_disabled")
           }
         } : {};
-        return jsx(_$$c, {
+        return jsx(RadioInputOption, {
           value: t,
           label: jsx(Label, {
             children: t

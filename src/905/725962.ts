@@ -1,6 +1,14 @@
-var i;
-(function (e) {
-  e[e.NOT_MERGING = 0] = "NOT_MERGING";
-  e[e.MERGING = 1] = "MERGING";
-  e[e.MERGING_ERROR = 2] = "MERGING_ERROR";
-})(i || (i = {}));
+/**
+ * Enumeration representing the state of a merge operation.
+ * @enum {number}
+ */
+export enum MergeState {
+  /** No merge operation is currently in progress */
+  NOT_MERGING = 0,
+  /** A merge operation is currently in progress */
+  MERGING = 1,
+  /** An error occurred during the merge operation */
+  MERGING_ERROR = 2,
+}
+
+export const y = MergeState

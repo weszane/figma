@@ -1,193 +1,465 @@
-import n from "../vendor/197638";
-import { $L, us, Xx } from "../figma_app/136698";
-import { Pp } from "../905/428481";
-import { K_, my, H, Nz, e7, dQ, q_, Ws, OF, c_, mp, u_ } from "../905/540111";
-var r = n;
-function l(e) {
-  let t = document.createElement("template");
-  t.innerHTML = r().sanitize(e);
-  return t;
+/* eslint-disable accessor-pairs */
+import dompurify from "dompurify"
+import { Pp } from "../905/428481"
+import { c_, dQ, e7, H, K_, mp, my, Nz, OF, q_, u_, Ws } from "../905/540111"
+import { getColorForMultiplayer, getMultiplayerTextColor, multiplayerColors } from "../figma_app/136698"
+
+/**
+ * Sanitizes and creates a template element from HTML string
+ * @param html - HTML string to sanitize and create template from
+ * @returns Template element with sanitized content
+ */
+function createSanitizedTemplate(html: string): HTMLTemplateElement {
+  const template = document.createElement("template")
+  template.innerHTML = dompurify().sanitize(html)
+  return template
 }
-let d = class e extends HTMLElement {
+
+/**
+ * Figma Avatar Web Component
+ * Displays a user avatar with image fallback to initials
+ */
+export class FigmaAvatarElement extends HTMLElement {
+  private _lastClassName: string | undefined = undefined
+
+  // CSS class names mapped from external constants
+  private readonly SPAN_CLASS = `${e7} ${Pp}`
+  private readonly IMG_CLASS = `${my} ${Pp}`
+
   constructor() {
-    super(...arguments);
-    this._lastClassName = void 0;
+    super()
   }
-  static createAvatarElement(e, t, i) {
-    let n = t || document.createElement("figma-avatar");
-    n.initial = e.initial;
-    n.id = e.user_id;
-    n.src = e.url || "";
-    i?.isInCluster && n.classList.add(K_);
-    return n;
+
+  /**
+   * Creates a figma-avatar element with specified properties
+   * @param avatarData - Avatar configuration data
+   * @param existingElement - Optional existing element to reuse
+   * @param options - Additional options for avatar creation
+   * @returns Configured figma-avatar element
+   */
+  static createAvatarElement(
+    avatarData: { initial: string, user_id: string, url?: string },
+    existingElement?: FigmaAvatarElement | null,
+    options?: { isInCluster?: boolean },
+  ): FigmaAvatarElement {
+    const avatarElement: any = existingElement || document.createElement("figma-avatar")
+    avatarElement.initial = avatarData.initial
+    avatarElement.id = avatarData.user_id
+    avatarElement.src = avatarData.url || ""
+
+    if (options?.isInCluster) {
+      avatarElement.classList.add(K_)
+    }
+
+    return avatarElement
   }
-  createErrorAvatar() {
-    let e = document.createElement("div");
-    e.classList.add(my);
-    return e;
+
+  /**
+   * Creates an error avatar element when image loading fails
+   * @returns Div element styled as error avatar
+   */
+  private createErrorAvatar(): HTMLDivElement {
+    const errorElement = document.createElement("div")
+    errorElement.classList.add(my)
+    return errorElement
   }
-  get avatarImg() {
-    return this.getElementsByTagName("img")[0];
+
+  /**
+   * Gets the avatar image element
+   */
+  private get avatarImg(): HTMLImageElement {
+    return this.getElementsByTagName("img")[0] as HTMLImageElement
   }
-  get fallbackSpan() {
-    return this.getElementsByTagName("span")[0];
+
+  /**
+   * Gets the fallback span element for initials
+   */
+  private get fallbackSpan(): HTMLSpanElement {
+    return this.getElementsByTagName("span")[0] as HTMLSpanElement
   }
-  set src(e) {
-    e ? this.setAttribute("src", e) : this.removeAttribute("src");
+
+  /**
+   * Sets the source URL for the avatar image
+   */
+  set src(value: string) {
+    if (value) {
+      this.setAttribute("src", value)
+    }
+    else {
+      this.removeAttribute("src")
+    }
   }
-  set initial(e) {
-    e ? this.setAttribute("initial", e) : this.removeAttribute("initial");
+
+  /**
+   * Sets the initial text for the avatar
+   */
+  set initial(value: string) {
+    if (value) {
+      this.setAttribute("initial", value)
+    }
+    else {
+      this.removeAttribute("initial")
+    }
   }
-  set className(e) {
-    e ? this.setAttribute("className", e) : this.removeAttribute("className");
+
+  /**
+   * Sets additional CSS class names for the avatar
+   */
+  set className(value: string) {
+    if (value) {
+      this.setAttribute("className", value)
+    }
+    else {
+      this.removeAttribute("className")
+    }
   }
-  connectedCallback() {
-    this.classList.add(H);
-    let t = e.template.content.cloneNode(!0);
-    this.append(t);
-    e.observedAttributes.forEach(e => {
-      this.attributeChangedCallback(e, "", this.getAttribute(e) || "");
-    });
+
+  /**
+   * Called when the element is added to the document
+   */
+  connectedCallback(): void {
+    this.classList.add(H)
+    const templateContent = FigmaAvatarElement.template.content.cloneNode(true)
+    this.append(templateContent)
+
+    // Initialize attributes
+    FigmaAvatarElement.observedAttributes.forEach((attr) => {
+      this.attributeChangedCallback(attr, "", this.getAttribute(attr) || "")
+    })
   }
-  static get observedAttributes() {
-    return ["src", "initial", "id", "className"];
+
+  /**
+   * List of attributes to observe for changes
+   */
+  static get observedAttributes(): string[] {
+    return ["src", "initial", "id", "className"]
   }
-  attributeChangedCallback(e, t, i) {
-    if (t === i || !this.isConnected) return;
-    let n = {
+
+  /**
+   * Called when an observed attribute changes
+   * @param name - Name of the attribute that changed
+   * @param oldValue - Previous value of the attribute
+   * @param newValue - New value of the attribute
+   */
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+    if (oldValue === newValue || !this.isConnected) {
+      return
+    }
+
+    const attributes = {
       src: this.getAttribute("src"),
       initial: this.getAttribute("initial"),
-      user_id: this.getAttribute("id") || void 0,
-      className: this.getAttribute("className") || void 0,
-      [e]: i
-    };
-    let r = this.avatarImg;
-    let s = this.fallbackSpan;
-    if (n.src) {
-      s.style.display = "none";
-      r.style.display = "flex";
-      r.src = n.src;
-      r.onerror = () => this.replaceChild(this.createErrorAvatar(), this.avatarImg);
-    } else {
-      s.innerText = n.initial || "?";
-      s.style.display = "flex";
-      let e = n.backgroundColor || $L(n.user_id, us);
-      s.style.backgroundColor = e;
-      s.style.color = Xx(e);
-      r.style.display = "none";
-      r.src = "";
+      user_id: this.getAttribute("id") || undefined,
+      className: this.getAttribute("className") || undefined,
+      [name]: newValue,
     }
-    n.className !== this._lastClassName && (this._lastClassName && (r.classList.remove(this._lastClassName), s.classList.remove(this._lastClassName)), n.className && (r.classList.add(n.className), s.classList.add(n.className)), this._lastClassName = n.className);
+
+    const imgElement = this.avatarImg
+    const spanElement = this.fallbackSpan
+
+    // Handle image vs initials display
+    if (attributes.src) {
+      spanElement.style.display = "none"
+      imgElement.style.display = "flex"
+      imgElement.src = attributes.src
+      imgElement.onerror = () => this.replaceChild(this.createErrorAvatar(), this.avatarImg)
+    }
+    else {
+      spanElement.innerText = attributes.initial || "?"
+      spanElement.style.display = "flex"
+
+      const backgroundColor = attributes.backgroundColor || getColorForMultiplayer(attributes.user_id, multiplayerColors)
+      spanElement.style.backgroundColor = backgroundColor
+      spanElement.style.color = getMultiplayerTextColor(backgroundColor)
+
+      imgElement.style.display = "none"
+      imgElement.src = ""
+    }
+
+    // Handle class name updates
+    if (attributes.className !== this._lastClassName) {
+      if (this._lastClassName) {
+        imgElement.classList.remove(this._lastClassName)
+        spanElement.classList.remove(this._lastClassName)
+      }
+
+      if (attributes.className) {
+        imgElement.classList.add(attributes.className)
+        spanElement.classList.add(attributes.className)
+      }
+
+      this._lastClassName = attributes.className
+    }
   }
-};
-d.desiredElementName = "figma-avatar";
-d.styles = Nz;
-d.template = l(`
+
+  static desiredElementName = "figma-avatar"
+  static styles = Nz
+  static template = createSanitizedTemplate(`
     <span class="${e7} ${Pp}"></span>
     <img
       class="${my} ${Pp}"
       draggable=false
     ></img>
-    `);
-let $$c0 = d;
-let u = class e extends HTMLElement {
+`)
+}
+
+// Define static properties
+
+/**
+ * Figma Avatars Container Web Component
+ * Manages a collection of avatars with overflow handling
+ */
+export class FigmaAvatarsElement extends HTMLElement {
+  private lastAvatars: Array<{ initial: string, user_id: string, url?: string }> = []
+
+  // CSS class names mapped from external constants
+  private readonly PRIMARY_CONTAINER_CLASS = q_
+  private readonly SECONDARY_CONTAINER_CLASS = Ws
+  private readonly OVERFLOW_CONTAINER_CLASS = OF
+  private readonly OVERFLOW_COUNT_CLASS = c_
+  private readonly AVATAR_OVERFLOW_CLASS = mp
+  private readonly CONTAINER_CLASS = u_
+
   constructor() {
-    super(...arguments);
-    this.lastAvatars = [];
+    super()
   }
-  connectedCallback() {
-    this.classList.add(dQ);
-    let t = e.template.content.cloneNode(!0);
-    this.append(t);
-    this.renderAvatars(this.lastAvatars);
+
+  /**
+   * Called when the element is added to the document
+   */
+  connectedCallback(): void {
+    this.classList.add(dQ)
+    const templateContent = FigmaAvatarsElement.template.content.cloneNode(true)
+    this.append(templateContent)
+    this.renderAvatars(this.lastAvatars)
   }
-  get avatarsPrimaryContainer() {
-    return this.getElementsByClassName(q_)[0];
+
+  /**
+   * Gets the primary avatars container
+   */
+  private get avatarsPrimaryContainer(): HTMLDivElement {
+    return this.getElementsByClassName(this.PRIMARY_CONTAINER_CLASS)[0] as HTMLDivElement
   }
-  get avatarsSecondaryContainer() {
-    return this.getElementsByClassName(Ws)[0];
+
+  /**
+   * Gets the secondary avatars container
+   */
+  private get avatarsSecondaryContainer(): HTMLDivElement {
+    return this.getElementsByClassName(this.SECONDARY_CONTAINER_CLASS)[0] as HTMLDivElement
   }
-  get avatarsOverflowContainer() {
-    return this.getElementsByClassName(OF)[0];
+
+  /**
+   * Gets the overflow avatars container
+   */
+  private get avatarsOverflowContainer(): HTMLDivElement {
+    return this.getElementsByClassName(this.OVERFLOW_CONTAINER_CLASS)[0] as HTMLDivElement
   }
-  get overflowAvatar() {
-    return this.avatarsOverflowContainer?.getElementsByTagName("figma-avatar")[0];
+
+  /**
+   * Gets the overflow avatar element
+   */
+  private get overflowAvatar(): FigmaAvatarElement | null {
+    const container = this.avatarsOverflowContainer
+    return container?.getElementsByTagName("figma-avatar")[0] as FigmaAvatarElement || null
   }
-  get overflowCount() {
-    return this.avatarsOverflowContainer?.getElementsByClassName(c_)[0];
+
+  /**
+   * Gets the overflow count element
+   */
+  private get overflowCount(): HTMLSpanElement | null {
+    const container = this.avatarsOverflowContainer
+    return container?.getElementsByClassName(this.OVERFLOW_COUNT_CLASS)[0] as HTMLSpanElement || null
   }
-  get clamp() {
-    let e = this.getAttribute("clamp");
-    if (e) return parseInt(e) || void 0;
+
+  /**
+   * Gets the clamp value for limiting displayed avatars
+   */
+  get clamp(): number | undefined {
+    const clampAttr = this.getAttribute("clamp")
+    if (clampAttr) {
+      return parseInt(clampAttr) || undefined
+    }
+    return undefined
   }
-  set clamp(e) {
-    e ? this.setAttribute("clamp", `${e}`) : this.removeAttribute("clamp");
-  }
-  static get observedAttributes() {
-    return ["clamp"];
-  }
-  attributeChangedCallback(e, t, i) {
-    this.isConnected && t !== i && this.renderAvatars(this.lastAvatars);
-  }
-  get avatarElements() {
-    return Array.from(this.getElementsByTagName("figma-avatar")).map(e => e).reduce((e, t) => (e[t.id] = t, e), {});
-  }
-  render(e, t, i) {
-    let n = t.map(e => $$c0.createAvatarElement(e, i[e.user_id]));
-    let r = new Set(t.map(e => e.user_id));
-    let a = e.children;
-    Array.from(a).forEach(t => {
-      r.has(t.id) || e.removeChild(t);
-    });
-    n.reverse().forEach((t, i) => {
-      let n = a[i];
-      n?.id !== t.id && (n ? e.insertBefore(t, n) : e.appendChild(t));
-    });
-    n.length > 0 ? e.style.display = "flex" : e.style.display = "none";
-  }
-  renderAvatars(e) {
-    if (!this.isConnected || !this.avatarsPrimaryContainer || !this.avatarsSecondaryContainer || !this.avatarsOverflowContainer) return;
-    let t = new Set();
-    let i = e.filter(e => {
-      let i = t.has(e.user_id);
-      t.add(e.user_id);
-      return !i;
-    });
-    let n = this.clamp || i.length + 1;
-    let r = this.avatarElements;
-    let a = i.slice(0, n);
-    this.render(this.avatarsPrimaryContainer, a, r);
-    let s = n ? i[n] : void 0;
-    let l = this.overflowAvatar;
-    if (s && !l) {
-      this.avatarsOverflowContainer.style.display = "flex";
-      let e = $$c0.createAvatarElement(s, r[s.user_id]);
-      e.initial = s.initial;
-      e.id = s.user_id;
-      e.src = s.url || "";
-      e.classList.add(mp);
-      this.avatarsOverflowContainer.prepend(e);
-    } else s && l ? (l.initial = s.initial, l.id = s.user_id, l.src = s.url || "") : (l && this.avatarsOverflowContainer.removeChild(l), this.avatarsOverflowContainer.style.display = "none");
-    let d = n ? i.slice(n + 1) : [];
-    this.render(this.avatarsSecondaryContainer, d.slice(0, 2), r);
-    let u = this.overflowCount;
-    if (d.length > 0) {
-      let e = `${d.length + 1}`;
-      u.style.visibility = "visible";
-      this.avatarsOverflowContainer.style.setProperty("--overflowCount", `${e}`);
-    } else {
-      u.style.visibility = "hidden";
-      this.avatarsOverflowContainer.style.removeProperty("--overflowCount");
+
+  /**
+   * Sets the clamp value
+   */
+  set clamp(value: number | undefined) {
+    if (value) {
+      this.setAttribute("clamp", `${value}`)
+    }
+    else {
+      this.removeAttribute("clamp")
     }
   }
-  set avatars(e) {
-    this.renderAvatars(e);
-    this.lastAvatars = e;
+
+  /**
+   * List of attributes to observe for changes
+   */
+  static get observedAttributes(): string[] {
+    return ["clamp"]
   }
-};
-u.desiredElementName = "figma-avatars";
-u.style = Nz;
-u.template = l(`
+
+  /**
+   * Called when an observed attribute changes
+   * @param name - Name of the attribute that changed
+   * @param oldValue - Previous value of the attribute
+   * @param newValue - New value of the attribute
+   */
+  attributeChangedCallback(_name: string, oldValue: string, newValue: string): void {
+    if (this.isConnected && oldValue !== newValue) {
+      this.renderAvatars(this.lastAvatars)
+    }
+  }
+
+  /**
+   * Gets all avatar elements indexed by user ID
+   */
+  private get avatarElements(): Record<string, FigmaAvatarElement> {
+    return Array.from(this.getElementsByTagName("figma-avatar"))
+      .reduce((acc, element) => {
+        acc[element.id] = element as FigmaAvatarElement
+        return acc
+      }, {} as Record<string, FigmaAvatarElement>)
+  }
+
+  /**
+   * Renders avatars in a container
+   * @param container - Container element to render avatars in
+   * @param avatars - Array of avatar data to render
+   * @param existingElements - Map of existing avatar elements
+   */
+  private render(
+    container: Element,
+    avatars: Array<{ initial: string, user_id: string, url?: string }>,
+    existingElements: Record<string, FigmaAvatarElement>,
+  ): void {
+    const avatarElements = avatars.map(avatar =>
+      FigmaAvatarElement.createAvatarElement(avatar, existingElements[avatar.user_id]),
+    )
+
+    const userIds = new Set(avatars.map(avatar => avatar.user_id))
+    const containerChildren = container.children
+
+    // Remove obsolete avatars
+    Array.from(containerChildren).forEach((child) => {
+      if (!userIds.has(child.id)) {
+        container.removeChild(child)
+      }
+    })
+
+    // Insert/update avatars in correct order
+    avatarElements.reverse().forEach((avatarElement, index) => {
+      const existingElement = containerChildren[index] as FigmaAvatarElement
+      if (existingElement?.id !== avatarElement.id) {
+        if (existingElement) {
+          container.insertBefore(avatarElement, existingElement)
+        }
+        else {
+          container.appendChild(avatarElement)
+        }
+      }
+    })
+
+    // Show/hide container based on avatar count
+    container.setAttribute("style", `display: ${avatarElements.length > 0 ? "flex" : "none"}`)
+  }
+
+  /**
+   * Renders all avatars with overflow handling
+   * @param avatars - Array of avatar data to render
+   */
+  private renderAvatars(
+    avatars: Array<{ initial: string, user_id: string, url?: string }>,
+  ): void {
+    if (!this.isConnected
+      || !this.avatarsPrimaryContainer
+      || !this.avatarsSecondaryContainer
+      || !this.avatarsOverflowContainer) {
+      return
+    }
+
+    // Deduplicate avatars by user ID
+    const uniqueUserIds = new Set<string>()
+    const uniqueAvatars = avatars.filter((avatar) => {
+      const isDuplicate = uniqueUserIds.has(avatar.user_id)
+      uniqueUserIds.add(avatar.user_id)
+      return !isDuplicate
+    })
+
+    const clampValue = this.clamp || uniqueAvatars.length + 1
+    const existingAvatarElements = this.avatarElements
+
+    // Render primary avatars
+    const primaryAvatars = uniqueAvatars.slice(0, clampValue)
+    this.render(this.avatarsPrimaryContainer, primaryAvatars, existingAvatarElements)
+
+    // Handle overflow avatar
+    const overflowAvatarData = clampValue < uniqueAvatars.length ? uniqueAvatars[clampValue] : undefined
+    const currentOverflowAvatar = this.overflowAvatar
+
+    if (overflowAvatarData && !currentOverflowAvatar) {
+      this.avatarsOverflowContainer.style.display = "flex"
+      const overflowElement = FigmaAvatarElement.createAvatarElement(
+        overflowAvatarData,
+        existingAvatarElements[overflowAvatarData.user_id],
+      )
+      overflowElement.initial = overflowAvatarData.initial
+      overflowElement.id = overflowAvatarData.user_id
+      overflowElement.src = overflowAvatarData.url || ""
+      overflowElement.classList.add(this.AVATAR_OVERFLOW_CLASS)
+      this.avatarsOverflowContainer.prepend(overflowElement)
+    }
+    else if (overflowAvatarData && currentOverflowAvatar) {
+      currentOverflowAvatar.initial = overflowAvatarData.initial
+      currentOverflowAvatar.id = overflowAvatarData.user_id
+      currentOverflowAvatar.src = overflowAvatarData.url || ""
+    }
+    else if (currentOverflowAvatar) {
+      this.avatarsOverflowContainer.removeChild(currentOverflowAvatar)
+      this.avatarsOverflowContainer.style.display = "none"
+    }
+
+    // Render secondary avatars
+    const secondaryStartIndex = clampValue + 1
+    const secondaryAvatars = secondaryStartIndex < uniqueAvatars.length
+      ? uniqueAvatars.slice(secondaryStartIndex)
+      : []
+    this.render(this.avatarsSecondaryContainer, secondaryAvatars.slice(0, 2), existingAvatarElements)
+
+    // Update overflow count
+    const overflowCountElement = this.overflowCount
+    if (secondaryAvatars.length > 0 && overflowCountElement) {
+      const overflowCount = `${secondaryAvatars.length + 1}`
+      overflowCountElement.style.visibility = "visible"
+      this.avatarsOverflowContainer.style.setProperty("--overflowCount", overflowCount)
+    }
+    else if (overflowCountElement) {
+      overflowCountElement.style.visibility = "hidden"
+      this.avatarsOverflowContainer.style.removeProperty("--overflowCount")
+    }
+  }
+
+  /**
+   * Sets the avatars to display
+   */
+  set avatars(
+    value: Array<{ initial: string, user_id: string, url?: string }>,
+  ) {
+    this.renderAvatars(value)
+    this.lastAvatars = value
+  }
+
+  static desiredElementName: string
+  static style: string
+  static template: HTMLTemplateElement
+}
+
+// Define static properties
+FigmaAvatarsElement.desiredElementName = "figma-avatars"
+FigmaAvatarsElement.style = Nz
+FigmaAvatarsElement.template = createSanitizedTemplate(`
     <div class="${u_}">
       <div class="${Ws}">
       </div>
@@ -197,8 +469,15 @@ u.template = l(`
       <div class="${q_}">
       </div>
     <div>
-    `);
-export let $$p1 = u;
-"customElements" in window && !customElements.get($$c0.desiredElementName) && (customElements.define($$p1.desiredElementName, $$p1), customElements.define($$c0.desiredElementName, $$c0));
-export const M = $$c0;
-export const V = $$p1;
+`)
+
+
+// Register custom elements
+if ("customElements" in window && !customElements.get(FigmaAvatarElement.desiredElementName)) {
+  customElements.define(FigmaAvatarsElement.desiredElementName, FigmaAvatarsElement)
+  customElements.define(FigmaAvatarElement.desiredElementName, FigmaAvatarElement)
+}
+
+
+export const M = FigmaAvatarElement
+export const V = FigmaAvatarsElement

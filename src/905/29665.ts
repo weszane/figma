@@ -6,7 +6,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { LibrarySourceEnum } from "../figma_app/633080";
-import { pz } from "../figma_app/825489";
+import { libraryPublishingModeAtom } from "../figma_app/825489";
 export function $$p1() {
   return getFeatureFlags().cmty_lib_admin_publish ? jsx(AutoLayout, {
     horizontalAlignItems: "start",
@@ -29,7 +29,7 @@ export function $$p1() {
 export function $$m0({
   label: e
 }) {
-  let [t, i] = useAtomValueAndSetter(pz);
+  let [t, i] = useAtomValueAndSetter(libraryPublishingModeAtom);
   return getFeatureFlags().cmty_lib_admin_publish ? jsx(Checkbox, {
     label: e,
     checked: t === LibrarySourceEnum.HUBFILE,

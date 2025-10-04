@@ -6,7 +6,7 @@ import { logError } from "../905/714362";
 import { Point } from "../905/736624";
 import { getFileKey } from "../905/412913";
 import { k8 } from "../figma_app/49598";
-import { Bs } from "../figma_app/933328";
+import { insertSharedModule } from "../figma_app/933328";
 import { addTemplateToRecentsThunkAction } from "../figma_app/147952";
 import { fullscreenValue } from "../figma_app/455680";
 import { FDocumentType, ITemplateType } from "../905/862883";
@@ -137,7 +137,7 @@ export function $$x5({
     e?.(r);
     fullscreenValue.triggerAction("commit");
   });
-  t(Bs({
+  t(insertSharedModule({
     item: s,
     canvasPosition: new Point(),
     percentageOffset: new Point(),

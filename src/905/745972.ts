@@ -1,20 +1,36 @@
-import { useState, useEffect } from "react";
-export function $$r0() {
-  let [e, t] = useState(window.innerWidth);
-  let [i, r] = useState(window.innerHeight);
+import { useEffect, useState } from "react"
+/**
+ * Custom hook to track window dimensions
+ * Original name: $$r0
+ */
+export function useWindowDimensions() {
+  const [windowInnerWidth, setWindowInnerWidth] = useState<number>(window.innerWidth)
+  const [windowInnerHeight, setWindowInnerHeight] = useState<number>(window.innerHeight)
+
   useEffect(() => {
-    let e = () => {
-      t(window.innerWidth);
-      r(window.innerHeight);
-    };
-    window.addEventListener("resize", e);
+    /**
+     * Handler to update window dimensions
+     * Original variable name: e
+     */
+    const handleResize = (): void => {
+      setWindowInnerWidth(window.innerWidth)
+      setWindowInnerHeight(window.innerHeight)
+    }
+
+    window.addEventListener("resize", handleResize)
+
+    // Cleanup event listener on unmount
     return () => {
-      window.removeEventListener("resize", e);
-    };
-  }, []);
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+
   return {
-    windowInnerWidth: e,
-    windowInnerHeight: i
-  };
+    windowInnerWidth,
+    windowInnerHeight,
+  }
 }
-export const l = $$r0;
+
+// Export alias for backward compatibility
+// Original name: l
+export const l = useWindowDimensions

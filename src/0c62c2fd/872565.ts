@@ -58,7 +58,7 @@ import { getFileCreationPermissions, canCreateFileType } from "../figma_app/6877
 import { createOptimistThunk } from "../905/350402";
 import { hasProjectRestrictions, hasTeamStatePaidAccess } from "../figma_app/345997";
 import { WorkerFuseSearch } from "../905/81982";
-import { NU } from "../905/163189";
+import { determineFileType } from "../905/163189";
 import { getDraftsSidebarString } from "../figma_app/633080";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { FlashActions } from "../905/573154";
@@ -358,7 +358,7 @@ let eS = async (e, t, r, a, s = !1, i = !1, o, l, d, c) => {
       case _$$A.REPO:
         return [FFileType.DESIGN];
       case _$$A.FILE_IMPORT:
-        return t.files.map(e => NU(e));
+        return t.files.map(e => determineFileType(e));
       default:
         throwTypeError(t);
     }

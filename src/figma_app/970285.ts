@@ -41,7 +41,7 @@ import { A0, Mc } from "../figma_app/454974";
 import { ImageManager } from "../figma_app/624361";
 import { isValidValue, valueOrFallback, isInvalidValue } from "../905/216495";
 import { generateExportPreview, convertImageDataToURL } from "../905/619652";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { isExportRestricted } from "../figma_app/12796";
 import { CachedSubtreeRenderer } from "../figma_app/679183";
 import { Dc, hV } from "../figma_app/151766";
@@ -387,7 +387,7 @@ export function $$ew3(e) {
   } = e;
   let c = createRecordingCallback(e);
   let u = valueOrFallback(e.propertyList, []).length <= 1;
-  let p = o3(nt.useGridPart2) && !0;
+  let p = useLabConfiguration(labConfigurations.useGridPart2) && !0;
   let _ = useCallback(e => {
     t(hidePickerThunk());
     onChange(valueOrFallback(propertyList, []).filter((t, r) => r !== e));

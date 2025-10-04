@@ -46,7 +46,7 @@ import { editorUtilities as _$$k4 } from '../905/22009';
 import { FolderPermissionsModal } from '../905/25249';
 import { a as _$$a13 } from '../905/29104';
 import { setBrowserTileSortView, setBrowserViewBarModeOptions, setBrowserViewBarSortOptions, trackSidebarClick } from '../905/34809';
-import { z4 as _$$z0 } from '../905/37051';
+import { fullscreenAlias } from '../905/37051';
 import { l as _$$l8 } from '../905/37596';
 import { ModalRootComponent } from '../905/38914';
 import { i as _$$i5 } from '../905/46262';
@@ -77,7 +77,7 @@ import { t as _$$t5 } from '../905/150656';
 import { hideModal, hideModalHandler, hideSpecificModal, popModalStack, popPrevModal, showModalHandler, updateModal } from '../905/156213';
 import { i as _$$i } from '../905/159448';
 import { TrackedLinkButton } from '../905/160095';
-import { Y5 } from '../905/163189';
+import { ImportEventType } from '../905/163189';
 import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { NotificationCategory } from '../905/170564';
@@ -161,7 +161,7 @@ import { useModalManager } from '../905/437088';
 import { Link } from '../905/438674';
 import { DefaultGroups, GroupType, UserGroupRole } from '../905/441038';
 import { $ as _$$$7 } from '../905/442144';
-import { W as _$$W6 } from '../905/442612';
+import { isBakeStarterPaywallEnabledWithoutLimit } from '../905/442612';
 import { IconButton } from '../905/443068';
 import { k as _$$k3 } from '../905/443820';
 import { H as _$$H } from '../905/444904';
@@ -242,10 +242,10 @@ import { getAtomMutate, setupResourceAtomHandler, liveStoreInstance } from '../9
 import { SvgComponent } from '../905/714743';
 import { X as _$$X6 } from '../905/718513';
 import { restoredAutosaveKey, ipcStorageHandler } from '../905/725909';
-import { NA } from '../905/738636';
+import { handleAutosaveFileCreation } from '../905/738636';
 import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { c as _$$c9, s as _$$s7 } from '../905/744710';
-import { l as _$$l4 } from '../905/745972';
+import { useWindowDimensions } from '../905/745972';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { findBranchById, isBranch, isBranchAlt } from '../905/760074';
 import { l as _$$l2 } from '../905/767868';
@@ -266,7 +266,7 @@ import { useCurrentUserOrg, useCurrentUserOrgId } from '../905/845253';
 import { useDropdown, useDropdownState } from '../905/848862';
 import { h as _$$h0 } from '../905/857431';
 import { PositioningStrategy, ArrowPosition } from '../905/858282';
-import { Cn } from '../905/862913';
+import { convertToRgba } from '../905/862913';
 import { TeamExtendedDataMapper } from '../905/863010';
 import { h as _$$h3 } from '../905/864281';
 import { u as _$$u5 } from '../905/866761';
@@ -280,7 +280,7 @@ import { K as _$$K6 } from '../905/899124';
 import { DragDataHandler } from '../905/904854';
 import { resourceDetailQuery } from '../905/909123';
 import { sendWithRetry } from '../905/910117';
-import { F as _$$F2 } from '../905/915030';
+import { ComFileType } from '../905/915030';
 import { dayjs } from '../905/920142';
 import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
@@ -305,7 +305,7 @@ import { searchEndSessionAction, searchSetParametersAction, startSearchSessionAc
 import { i as _$$i3 } from '../905/977961';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
-import { h1 as _$$h6 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { resourceUtils } from '../905/989992';
 import { p as _$$p3 } from '../905/991924';
 import { h as _$$h8 } from '../905/994594';
@@ -489,7 +489,7 @@ import { isUsingLocalBuild } from '../figma_app/298277';
 import { filterPublishedResources, filterResourcesByMatch, filterResourcesByOrgOrPublisher } from '../figma_app/300692';
 import { ResourceTypeEnum } from '../figma_app/306946';
 import { sx as _$$sx3 } from '../figma_app/307841';
-import { hp as _$$hp, vg as _$$vg, xs as _$$xs, DF, LP } from '../figma_app/310688';
+import { trackFavoritesReordered, FAVORITES_SIDEBAR_ROW, trackSidebarSectionCollapsed, trackFavoritesContextMenuActionClicked, trackFavoritedResourceClicked } from '../figma_app/310688';
 import { DISABLED_TEAM_CREATION_BUTTON_HOVERED, FILE_BROWSER_FILE_CLICKED, logAndTrackCTA, TEAM_CREATION_BUTTON_HOVERED_TIMEOUT, trackFileBrowserFileClick, trackFileBrowserFileClicked, trackFileBrowserLoaded, trackFileBrowserPageVisit, trackUserEvent } from '../figma_app/314264';
 import { useRouteMatchExists, useRouteParams, useRouteQuery, useRouteStateInstance, useSafeRouteParams, useSafeRouteStateInstance } from '../figma_app/321395';
 import { getAllTimeSortOption, SortOptions } from '../figma_app/324237';
@@ -513,7 +513,7 @@ import { getSelectedView, getSelectedViewType } from '../figma_app/386952';
 import { getCurrentQueryId, getSearchSessionIdFromSelector } from '../figma_app/387599';
 import { adminPermissionConfig, createComparator, defaultComparator, setupShadowRead, useShadowRead, useShadowReadLoaded } from '../figma_app/391338';
 import { xF as _$$xF, WG } from '../figma_app/405906';
-import { QJ } from '../figma_app/411744';
+import { transformFileRepoData } from '../figma_app/411744';
 import { aq as _$$aq } from '../figma_app/412189';
 import { o8 as _$$o2, sm as _$$sm } from '../figma_app/425283';
 import { getMainContent, hasContent, hasLibraryKey, hasResourceType, isFigmakeTemplate, mapVtToFileType } from '../figma_app/427318';
@@ -554,7 +554,7 @@ import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { hK as _$$hK } from '../figma_app/570310';
 import { Lm as _$$Lm } from '../figma_app/579169';
 import { oN as _$$oN } from '../figma_app/583114';
-import { aH as _$$aH } from '../figma_app/591738';
+import { useIsCommunityHomeShelfExperimentEnabled } from '../figma_app/591738';
 import { getExperimentConfigAsync, selectExperimentConfigHook } from '../figma_app/594947';
 import { getCurrentTeam, getCurrentTeamId, hasLegacyFilesLimitation, hasWhiteboardFilesBetaLimitation } from '../figma_app/598018';
 import { getCurrentLocale } from '../figma_app/598412';
@@ -610,7 +610,7 @@ import { gY as _$$gY2 } from '../figma_app/797994';
 import { az as _$$az, md as _$$md2, rE as _$$rE, Ro, z6 } from '../figma_app/805373';
 import { ResourceHubCategoryRoute, useCategoryResourceHandler } from '../figma_app/805898';
 import { memoizeByArgs } from '../figma_app/815945';
-import { sP as _$$sP, flattenMessageMeta } from '../figma_app/819288';
+import { renderMessageMeta, flattenMessageMeta } from '../figma_app/819288';
 import { Agb } from '../figma_app/822011';
 import { BillingCycle, UpgradeSteps, UpsellSourceType } from '../figma_app/831101';
 import { TrackedAnchor, TrackedButton, TrackedLink, TrackingProvider, useTracking, withTrackedClick, wrapWithTracking } from '../figma_app/831799';
@@ -1249,7 +1249,7 @@ function rp(e, t, r, a) {
         folder_id: t.folderId
       }
     }));
-    let a = QJ(e);
+    let a = transformFileRepoData(e);
     a && r(bE({
       repo: a
     }));
@@ -1293,16 +1293,16 @@ function rh(e) {
   let _ = n.editorType === FFileType.FIGMAKE && !m;
   let p = u.type === 'favorited-file-context-menu';
   let f = [...rf(!0, () => getI18nString('tile.dropdown.open'), () => {
-    DF('open');
-    LP(n.key, FEntityType.FILE, e.favoritedFile?.sidebarSectionId ?? void 0, r_, n.editorType ?? void 0);
+    trackFavoritesContextMenuActionClicked('open');
+    trackFavoritedResourceClicked(n.key, FEntityType.FILE, e.favoritedFile?.sidebarSectionId ?? void 0, r_, n.editorType ?? void 0);
     openFileInFullscreen(t, n);
   }), ...rf(!desktopAPIInstance && !isChromebookTabbed(), () => getI18nString('tile.dropdown.open_new_tab'), () => {
     openFileInNewTab(buildFileUrl({
       file: n,
       allowDefaulting: !0
     }), n.key, r, t);
-    LP(n.key, FEntityType.FILE, e.favoritedFile?.sidebarSectionId ?? void 0, r_, n.editorType);
-    DF('open_in_new_tab');
+    trackFavoritedResourceClicked(n.key, FEntityType.FILE, e.favoritedFile?.sidebarSectionId ?? void 0, r_, n.editorType);
+    trackFavoritesContextMenuActionClicked('open_in_new_tab');
   }), ...rg, ...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link'), () => {
     t(copyShareLinkOptimistic({
       fileKey: n.key,
@@ -1315,7 +1315,7 @@ function rh(e) {
     }));
     t(hideDropdownAction());
   }), ...rf(!_, () => getI18nString('sidebar.share'), () => {
-    DF('share');
+    trackFavoritesContextMenuActionClicked('share');
     t(showModalHandler({
       type: _$$g_,
       data: {
@@ -1324,13 +1324,13 @@ function rh(e) {
       }
     }));
   }), ...rf(!0, () => getI18nString('tile.dropdown.show_in_project'), () => {
-    if (DF('show_in_project'), t(selectViewAction({
+    if (trackFavoritesContextMenuActionClicked('show_in_project'), t(selectViewAction({
       view: 'folder',
       folderId: e.folderId
     })), t(_$$an()), n.fileRepoId) {
-      let r = QJ(e.favoritedFile);
+      let r = transformFileRepoData(e.favoritedFile);
       r != null && t(_$$y$({
-        type: _$$F2.REPOS,
+        type: ComFileType.REPOS,
         tiles: [{
           type: _$$nb.REPO,
           repo: r,
@@ -1341,7 +1341,7 @@ function rh(e) {
     } else {
       if (!o) return;
       t(_$$y$({
-        type: _$$F2.FILES,
+        type: ComFileType.FILES,
         tiles: [_$$fA(o)]
       }));
     }
@@ -1462,7 +1462,7 @@ function rj(e) {
   let l = useSelector(e => e.dropdownShown);
   let d = useMemo(() => l && l.type === rm.FAVORITED_TEAM_CONTEXT_MENU && l.data.teamId === o.id, [l, o.id]);
   let c = useCallback((e, r) => {
-    LP(r.team?.id, FEntityType.TEAM, r.sidebarSectionId ?? void 0, _$$vg);
+    trackFavoritedResourceClicked(r.team?.id, FEntityType.TEAM, r.sidebarSectionId ?? void 0, FAVORITES_SIDEBAR_ROW);
     let a = getTeamUrl(r.resourceId, r.orgId);
     isCommandOrShift(e) ? (customHistory.redirect(a, '_blank'), e.stopPropagation()) : (t(selectTeamView(r.resourceId)), e.preventDefault());
   }, [t]);
@@ -1598,14 +1598,14 @@ function rR(e) {
     allowDefaulting: !0
   });
   let b = (e, r) => {
-    LP(r.file?.key, FEntityType.FILE, r.sidebarSectionId ?? void 0, _$$vg, r.file?.editorType ?? void 0);
+    trackFavoritedResourceClicked(r.file?.key, FEntityType.FILE, r.sidebarSectionId ?? void 0, FAVORITES_SIDEBAR_ROW, r.file?.editorType ?? void 0);
     isCommandOrShift(e) ? (t(trackFileClicked({
       fileKey: r.file?.key ?? '',
-      entrypoint: _$$vg
+      entrypoint: FAVORITES_SIDEBAR_ROW
     })), e.stopPropagation()) : e.preventDefault();
     r.file && (customHistory.redirect(x, '_blank'), t(trackFileClicked({
       fileKey: r.file.key,
-      entrypoint: _$$vg
+      entrypoint: FAVORITES_SIDEBAR_ROW
     })));
   };
   let v = () => {
@@ -1752,7 +1752,7 @@ function rL(e) {
   }, [t, r.id]);
   let u = _$$E3();
   let m = useCallback((e, t) => {
-    LP(t.project?.id, FEntityType.FOLDER, t.sidebarSectionId ?? void 0, _$$vg);
+    trackFavoritedResourceClicked(t.project?.id, FEntityType.FOLDER, t.sidebarSectionId ?? void 0, FAVORITES_SIDEBAR_ROW);
     u(t.resourceId, e);
   }, [u]);
   let _ = generateFavoriteResourceMenuItems({
@@ -1834,7 +1834,7 @@ function r$(e) {
   let c = useMemo(() => l && l.type === tk, [l]);
   let m = generateProtoLinkUrl(e.favorite.prototype.fileKey, e.favorite.prototype.file?.name, e.favorite.prototype.pageId);
   let _ = (e, t) => {
-    if (LP(t.prototype?.fileKey, FEntityType.PROTOTYPE, t.sidebarSectionId ?? void 0, _$$vg), isCommandOrShift(e)) {
+    if (trackFavoritedResourceClicked(t.prototype?.fileKey, FEntityType.PROTOTYPE, t.sidebarSectionId ?? void 0, FAVORITES_SIDEBAR_ROW), isCommandOrShift(e)) {
       e.stopPropagation();
       return;
     }
@@ -1941,7 +1941,7 @@ function rV(e) {
   let d = useMemo(() => o && o.type === rm.FAVORITED_WORKSPACE_CONTEXT_MENU && o.data.workspaceId === l.id, [o, l.id]);
   let c = useCallback((e, r) => {
     let a = r.workspace;
-    LP(a?.id, FEntityType.WORKSPACE, r.sidebarSectionId ?? void 0, _$$vg);
+    trackFavoritedResourceClicked(a?.id, FEntityType.WORKSPACE, r.sidebarSectionId ?? void 0, FAVORITES_SIDEBAR_ROW);
     a && t(selectViewAction({
       view: 'workspace',
       subView: DUserRole.DIRECTORY,
@@ -2315,7 +2315,7 @@ function rq(e) {
     })));
   }, [t, e.section]);
   let A = useCallback(() => {
-    _$$xs(!p);
+    trackSidebarSectionCollapsed(!p);
     let r = new Set(m);
     e.section ? (toggleSidebarSectionCollapsedState({
       type: 'topLevel',
@@ -2343,7 +2343,7 @@ function rq(e) {
       b.dropBefore || (e += 1);
       s = [...i.slice(0, e), r, ...i.slice(e)];
     }
-    if (_$$hp(), x(r), e.section?.id) {
+    if (trackFavoritesReordered(), x(r), e.section?.id) {
       n ? t(vg({
         sectionId: e.section.id,
         orderedFavoriteIds: s
@@ -6022,7 +6022,7 @@ function os({
       onSelection: e => {
         n(_$$an());
         n(PW({
-          type: _$$F2.FILES,
+          type: ComFileType.FILES,
           keys: e.map(e => e.key)
         }));
       },
@@ -6179,7 +6179,7 @@ function ob({
             className: cssBuilderInstance.flexBasisAuto.flexGrow1.flexShrink0.$,
             children: jsx(TextWithTruncation, {
               color: 'secondary',
-              children: jsx(_$$h6, {
+              children: jsx(RelativeTimeDisplay, {
                 date: e.createdAt
               })
             })
@@ -6187,7 +6187,7 @@ function ob({
         }), jsx('div', {
           className: cssBuilderInstance.textBodyLarge.overflowBreakWord.$,
           dangerouslySetInnerHTML: {
-            __html: sanitizeHtml(_$$sP(e.description))
+            __html: sanitizeHtml(renderMessageMeta(e.description))
           }
         })]
       })]
@@ -6403,7 +6403,7 @@ function oE({
         t(_$$an());
         let s = e.map(e => e.file).filter(e => e !== null);
         t(PW({
-          type: _$$F2.FILES,
+          type: ComFileType.FILES,
           keys: s.map(e => e.key)
         }));
         let i = s[0];
@@ -9390,7 +9390,7 @@ function dJ({
   let i = useRef(null);
   let [n, o] = useState(!1);
   let [l, d] = useState(!1);
-  let c = _$$l4();
+  let c = useWindowDimensions();
   let [m, _] = useState(0);
   let [p, f] = useState(0);
   useLayoutEffect(() => {
@@ -11982,7 +11982,7 @@ function me({
             });
             break;
           case _$$nb.OFFLINE_FILE:
-            r(NA({
+            r(handleAutosaveFileCreation({
               file: e.file,
               openNewFileIn: TabOpenBehavior.NEW_TAB,
               source: NotificationType.OFFLINE_FILE_TILE
@@ -11995,7 +11995,7 @@ function me({
       }
       if (l != null) {
         if (r(hideDropdownAction()), e.type === _$$nb.OFFLINE_FILE) {
-          r(NA({
+          r(handleAutosaveFileCreation({
             file: e.file,
             openNewFileIn: TabOpenBehavior.NEW_TAB,
             source: NotificationType.OFFLINE_FILE_TILE
@@ -12037,7 +12037,7 @@ function me({
           }, f) : r(selectViewAction({
             view: 'fullscreen',
             fileKey: e.file.key,
-            editorType: _$$z0.getIsExtension() ? FEditorType.DevHandoff : e.file.editorType ? mapFileTypeToEditorType(e.file.editorType) : FEditorType.Design,
+            editorType: fullscreenAlias.getIsExtension() ? FEditorType.DevHandoff : e.file.editorType ? mapFileTypeToEditorType(e.file.editorType) : FEditorType.Design,
             prevSelectedView: p
           }));
           break;
@@ -12088,7 +12088,7 @@ function me({
             break;
           }
         case _$$nb.OFFLINE_FILE:
-          r(NA({
+          r(handleAutosaveFileCreation({
             file: e.file,
             openNewFileIn: TabOpenBehavior.SAME_TAB,
             source: NotificationType.OFFLINE_FILE_TILE
@@ -13627,7 +13627,7 @@ function m9(e, t, r, i, n, l) {
     } else if (U) {
       let e = dayjs(l.grace_period_end).toDate();
       let t = renderI18nText('payments.pro_plan_ends_relative_time_string', {
-        relative_time_string: jsx(_$$h6, {
+        relative_time_string: jsx(RelativeTimeDisplay, {
           date: e
         })
       });
@@ -14370,14 +14370,14 @@ function _L(e) {
         children: [jsx('span', {
           className: _I,
           children: renderI18nText('file_browser.drafts_to_move.file_created_at_label', {
-            timeDifference: jsx(_$$h6, {
+            timeDifference: jsx(RelativeTimeDisplay, {
               date: _$$Tf.getCreatedAt(item)
             })
           })
         }), jsx('span', {
           className: _I,
           children: renderI18nText('file_browser.drafts_to_move.file_last_modified_at_label', {
-            timeDifference: jsx(_$$h6, {
+            timeDifference: jsx(RelativeTimeDisplay, {
               date: _$$Tf.getTouchedAt(item) ?? ''
             })
           })
@@ -14457,7 +14457,7 @@ function _M() {
   let w = useSelector(e => e.deletedReposById);
   let {
     windowInnerWidth
-  } = _$$l4();
+  } = useWindowDimensions();
   let E = useSubscription(DraftsToMoveFoldersByUserId({}));
   let C = useSubscription(FilesInProjectHighLimit({
     projectId: t ?? ''
@@ -14622,7 +14622,7 @@ function _M() {
       getSortValue: e => _$$Tf.getTouchedAt(e) ?? '',
       cellComponent: e => {
         let t = _$$Tf.getTouchedAt(e);
-        return t ? jsx(_$$h6, {
+        return t ? jsx(RelativeTimeDisplay, {
           date: t
         }) : '';
       }
@@ -14630,7 +14630,7 @@ function _M() {
       name: getI18nString('file_browser.drafts_to_move.table_header_created'),
       className: _N,
       getSortValue: e => _$$Tf.getCreatedAt(e),
-      cellComponent: e => jsx(_$$h6, {
+      cellComponent: e => jsx(RelativeTimeDisplay, {
         date: _$$Tf.getCreatedAt(e)
       })
     });
@@ -15107,7 +15107,7 @@ function _Z({
   let f = useCallback((e, t, r) => {
     n(_$$an());
     n(PW({
-      type: _$$F2.PINNED_FILES,
+      type: ComFileType.PINNED_FILES,
       keys: e.map(e => e.file.key)
     }));
     show({
@@ -15456,7 +15456,7 @@ function pp(e) {
     containerStyle: 'templates_bar--templatesTileContainer--yy7Q2',
     onClick: n ? void 0 : d,
     image: jsxs(FK, {
-      backgroundColor: Cn(r.client_meta),
+      backgroundColor: convertToRgba(r.client_meta),
       removeBorder: !0,
       className: 'templates_bar--templatesTileImage--y0sA9',
       customRatioClassName: 'templates_bar--imageRatio--enx9l',
@@ -17458,7 +17458,7 @@ function fZ({
     isDisabled: e,
     isLoading: t,
     onClick: s,
-    showComingSoon: _$$W6()
+    showComingSoon: isBakeStarterPaywallEnabledWithoutLimit()
   });
 }
 function f1(e) {
@@ -18246,7 +18246,7 @@ function gN() {
     let t = useSelector(({
       currentUserOrgId: e
     }) => e);
-    let r = _$$aH();
+    let r = useIsCommunityHomeShelfExperimentEnabled();
     let a = useSelector(({
       orgById: e
     }) => e);
@@ -21628,7 +21628,7 @@ function xP(e) {
         onClick: () => {
           c ? t(showModalHandler({
             type: EO
-          })) : isAutosaveFile(m) ? customHistory.redirect(getDesignFileUrlConditional(fileEntityDataMapper.toLiveGraph(m.file), !0), '_blank') : t(NA({
+          })) : isAutosaveFile(m) ? customHistory.redirect(getDesignFileUrlConditional(fileEntityDataMapper.toLiveGraph(m.file), !0), '_blank') : t(handleAutosaveFileCreation({
             file: m,
             openNewFileIn: TabOpenBehavior.NEW_TAB,
             source: NotificationType.AUTOSAVE_NOTIFICATION
@@ -22261,12 +22261,12 @@ function br({
   dragging: t
 }) {
   switch (e) {
-    case Y5.CONFIRM_PDF_IMPORT:
-    case Y5.IMPORT_REPO:
+    case ImportEventType.CONFIRM_PDF_IMPORT:
+    case ImportEventType.IMPORT_REPO:
       return null;
-    case Y5.START:
-    case Y5.FILE_IMPORT_WITH_CANCELED_PDF:
-    case Y5.FILE_IMPORT_WITH_CONFIRMED_PDF:
+    case ImportEventType.START:
+    case ImportEventType.FILE_IMPORT_WITH_CANCELED_PDF:
+    case ImportEventType.FILE_IMPORT_WITH_CONFIRMED_PDF:
       return jsx('div', {
         className: t ? 'file_browser_drop_zone--dragTargetDragging--giyPY file_browser_drop_zone--dragTargetNormal--TOR0f' : 'file_browser_drop_zone--dragTargetNormal--TOR0f'
       });

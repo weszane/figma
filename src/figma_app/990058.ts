@@ -23,7 +23,7 @@ import { organizationAPIService } from '../figma_app/617654'
  * Updates the description of an org user with optimistic updates.
  * Original: $$I8
  */
-export const updateOrgUserDescriptionAction = createOptimistAction('ORG_USER_PUT', async ({dispatch}, payload, { optimistId }) => {
+export const updateOrgUserDescriptionAction = createOptimistAction('ORG_USER_PUT', async ({ dispatch }, payload, { optimistId }) => {
   if (payload.userInitiated) {
     try {
       const response = await orgUserService.updateOrgUser({
@@ -45,13 +45,11 @@ export const updateOrgUserDescriptionAction = createOptimistAction('ORG_USER_PUT
   }
 })
 
-
-
 /**
  * Requests org account type with different success messages based on entry point.
  * Original: $$S0
  */
-export const requestOrgAccountTypeAction = createOptimistThunk(async ({dispatch}, payload) => {
+export const requestOrgAccountTypeAction = createOptimistThunk(async ({ dispatch }, payload) => {
   try {
     await orgUserService.requestOrgAccountTypeRequest({
       org_id: payload.orgId,
@@ -283,3 +281,4 @@ export const bu = batchDeleteOrgUsersAction
 export const hZ = setUserInOrgs
 export const uo = batchUpdateOrgUsersAction
 export const yJ = updateOrgUserDescriptionAction
+export { setUserInOrgs }

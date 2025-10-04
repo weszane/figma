@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { sortByDateProperty } from "../figma_app/656233";
 import { Link } from "../905/438674";
-import { Ak } from "../905/986103";
+import { useRelativeTime } from "../905/986103";
 import { renderI18nText, getI18nString } from "../905/303541";
 export function $$d0({
   fileStats: e
@@ -12,7 +12,7 @@ export function $$d0({
     sortByDateProperty(t, "lastModified");
     return t;
   }, [e]);
-  let i = Ak(t[0]?.lastModified);
+  let i = useRelativeTime(t[0]?.lastModified);
   return e ? jsxs("div", {
     className: "library_item_footer--footer--CO3WJ file_view_styles--componentViewFooter--JQ0-4 file_view_styles--fileViewFooter--y5O8t",
     children: [jsxs("div", {

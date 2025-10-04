@@ -1,4 +1,4 @@
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { sendWithRetry } from "../905/910117";
 export let $$s0 = new class {
@@ -26,7 +26,7 @@ export let $$s0 = new class {
       let s = sendWithRetry.put(`/api/workspace/${e}`, {
         colors: t
       }).then(i, r);
-      return WB()?.optimisticallyUpdate({
+      return getCurrentLiveGraphClient()?.optimisticallyUpdate({
         Workspace: {
           [e]: {
             colorConfig: {

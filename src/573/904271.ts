@@ -27,7 +27,7 @@ import { $ as _$$$3 } from "../9410/841699";
 import { trackUserEvent, trackFileEvent } from "../figma_app/314264";
 import { dh, nn } from "../figma_app/186343";
 import { isVsCodeEnvironment } from "../905/858738";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { p as _$$p } from "../figma_app/353099";
 import { Ay } from "../642/998522";
 import { QU } from "../1250/559338";
@@ -54,7 +54,7 @@ import { dP, q_, M3 } from "../figma_app/119475";
 import { LoadingSpinner } from "../figma_app/858013";
 import { setShouldSearchDefaultLibraries, setAssetsSearchOptions } from "../905/879323";
 import { showModalHandler } from "../905/156213";
-import { Hz } from "../figma_app/591738";
+import { isTruthy } from "../figma_app/591738";
 import { S as _$$S } from "../642/159607";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { Gq } from "../figma_app/361662";
@@ -71,7 +71,7 @@ import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655
 import { selectTeams } from "../905/338617";
 import { sp as _$$sp } from "../figma_app/678300";
 import { getUUID } from "../figma_app/517115";
-import { dL } from "../figma_app/825489";
+import { defaultLibraryKeyAtom } from "../figma_app/825489";
 import { Wq, od } from "../figma_app/392189";
 import { r6 as _$$r } from "../905/542608";
 import ew from "classnames";
@@ -1428,7 +1428,7 @@ function t9({
     viewMode: s,
     containerSizingOptions: l
   });
-  let [O, R] = useAtomValueAndSetter(dL);
+  let [O, R] = useAtomValueAndSetter(defaultLibraryKeyAtom);
   useEffect(() => {
     O && (onSetAssetType({
       type: _$$I2.FILE,
@@ -1495,7 +1495,7 @@ function t9({
     enabled: !!k?.teamId
   });
   let eL = eM.data?.team?.hasPermission;
-  let eP = !x && v && (!eC || !hasTeamPaidAccess(eC) && eL) && k?.canEdit && eI && Object.keys(p.local.components).length > 0 && Hz(_?.id);
+  let eP = !x && v && (!eC || !hasTeamPaidAccess(eC) && eL) && k?.canEdit && eI && Object.keys(p.local.components).length > 0 && isTruthy(_?.id);
   return jsxs(_$$U.Provider, {
     value: D,
     children: [jsx(se, {
@@ -1811,7 +1811,7 @@ function sw({
   }();
   let er = useAtomWithSubscription(wt);
   let ea = useAtomWithSubscription(R4);
-  let ei = o3(nt.newResizablePanel);
+  let ei = useLabConfiguration(labConfigurations.newResizablePanel);
   let [eo, el, ed] = BN(m, p);
   let ec = jsxs(Fragment, {
     children: [jsx(_$$R, {

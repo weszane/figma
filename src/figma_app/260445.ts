@@ -15,7 +15,7 @@ import { eF, MH } from '../figma_app/394327';
 import { fullscreenValue } from '../figma_app/455680';
 import { OperationType, VariableDataType, VariableResolvedDataType, VariablesBindings } from '../figma_app/763686';
 import { u as _$$u, bL, BQ, mm } from '../figma_app/852050';
-import { Yi } from '../figma_app/933328';
+import { loadSharedVariable } from '../figma_app/933328';
 import { ND, Ti } from '../figma_app/960196';
 
 /**
@@ -77,7 +77,7 @@ export function useVariablePickerForFields(e: any, t: VariableResolvedDataType, 
     if (r) {
       r(e);
     } else if (e) {
-      h(Yi({
+      h(loadSharedVariable({
         item: e,
         callback: (r: string) => {
           if (mapVariableIdToTypedValue) {
@@ -133,7 +133,7 @@ export function useVariablePickerForAlias(e: string, t: string, r: string, n: Va
   const g = useSelector((e: any) => e.variablePickerShown);
   const f = useCallback((i: any) => {
     if (i) {
-      m(Yi({
+      m(loadSharedVariable({
         item: i,
         callback: (i: string) => {
           setVariableValueOrOverrideForMode(e, t, r, y$(n, i), yesNoTrackingEnum.YES, 'alias-variable');

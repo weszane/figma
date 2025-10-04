@@ -36,7 +36,7 @@ import { ce, EC, Fs, Hk, L1, mF, Tw, xB } from '../figma_app/755939';
 import { SceneGraphHelpers, AppStateTsApi, CooperTemplateTypesTsBindings, Fullscreen, CooperHelpers, SocialMediaFormats } from '../figma_app/763686';
 import { trackFileEventWithStore } from '../figma_app/901889';
 import { searchEndSession } from '../figma_app/925970';
-import { FU } from '../figma_app/933328';
+import { insertSharedComponent } from '../figma_app/933328';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDebounce } from 'use-debounce';
 function $(e) {
@@ -264,7 +264,7 @@ export function $$en6({
         detatchInstances: !1,
         selectAfterInsert: n === 0
       });
-      i(FU({
+      i(insertSharedComponent({
         item: t,
         canvasPosition: new Vector2D(),
         percentageOffset: new Vector2D(),

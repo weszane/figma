@@ -26,7 +26,7 @@ import { OrganizationType } from "../905/833838";
 import { fileActionEnum } from "../figma_app/630077";
 import { h as _$$h } from "../figma_app/270558";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
-import { W as _$$W } from "../905/442612";
+import { isBakeStarterPaywallEnabledWithoutLimit } from "../905/442612";
 import { i as _$$i } from "../figma_app/43065";
 import { M as _$$M } from "../figma_app/854365";
 export function $$D0() {
@@ -125,7 +125,7 @@ export function $$k1() {
           data: {
             team: n
           }
-        })) : e?.editorType === FFileType.FIGMAKE && _$$W() ? t(showModalHandler({
+        })) : e?.editorType === FFileType.FIGMAKE && isBakeStarterPaywallEnabledWithoutLimit() ? t(showModalHandler({
           type: _$$i,
           data: {
             team: n

@@ -5,7 +5,7 @@ import { VariableDataType, VariablesBindings, VariableResolvedDataType, AppState
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { blackColor, blendGradientColors } from "../figma_app/191804";
-import { Oe, nh, AV } from "../figma_app/933328";
+import { loadSharedVariableThunk, loadSharedStyle, applySharedStyle } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, normalizeValue, isInvalidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
 import { paintManager, isGradientType } from "../figma_app/385874";
@@ -84,7 +84,7 @@ export function $$w5(e) {
   let t = useDispatch();
   let r = useAtomWithSubscription(E_);
   return useCallback(async n => {
-    let i = await t(Oe(n));
+    let i = await t(loadSharedVariableThunk(n));
     let l = VariableIdHandler.fromString(i);
     l && (r ? permissionScopeHandler.user("slides-edit-theme-color", () => {
       AppStateTsApi?.slideThemeLibBindings().setThemeColorVariableFromSubscribedVariableColorValue(r?.varId || "", r?.modeId || "", i);
@@ -101,14 +101,14 @@ export function $$R9(e, t) {
   let a = useAtomWithSubscription(E_);
   let s = useSceneGraphSelector();
   return useCallback((n, i) => {
-    a ? r(nh({
+    a ? r(loadSharedStyle({
       style: n,
       callback: e => {
         let r = s.get(e);
         let n = blendGradientColors(r?.fills);
         n && t && permissionScopeHandler.user("slides-edit-theme-color", () => t(a.varId || "", a.modeId || "", $$v4(n)));
       }
-    })) : r(AV({
+    })) : r(applySharedStyle({
       style: n,
       inheritStyleKeyField: e,
       fromSearch: i?.fromSearch

@@ -2,7 +2,7 @@ import { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { generateUUIDv4 } from "../905/871474";
-import { Zn } from "../figma_app/933328";
+import { markLibrariesModalOpenedFlag } from "../figma_app/933328";
 import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { isBranchAlt } from "../905/760074";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -44,7 +44,7 @@ export function $$_0({
         initialTab: i ?? LibraryTabEnum.LIBRARIES,
         sessionId: n
       }
-    })), _(Zn())) : _(showModalHandler({
+    })), _(markLibrariesModalOpenedFlag())) : _(showModalHandler({
       type: Vg,
       data: {
         tab: LibraryTabEnum.LIBRARIES

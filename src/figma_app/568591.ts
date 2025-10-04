@@ -7,7 +7,7 @@ import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
 import { extractInviteTokens, Rc } from "../figma_app/819288";
 import { useLatestRef } from "../figma_app/922077";
-import { S6 } from "../905/761735";
+import { beginEventRecording } from "../905/761735";
 import { getLivegraphClient, useSubscription } from "../figma_app/288654";
 import { createLoadedState, createLoadingState } from "../905/723791";
 import { setTagGlobal } from "../905/11";
@@ -147,7 +147,7 @@ class j {
     }, 1e4);
   }
   create(e, t) {
-    let r = S6();
+    let r = beginEventRecording();
     let {
       fileKey,
       messageMeta,
@@ -268,7 +268,7 @@ class j {
     }), uuid];
   }
   reply(e, t) {
-    let r = S6();
+    let r = beginEventRecording();
     let {
       threadId,
       threadUuid,

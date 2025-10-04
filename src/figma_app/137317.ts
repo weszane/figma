@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { noop } from 'lodash-es';
 import { t as _$$t } from "../905/150656";
 import { bL, RT } from "../905/867927";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
@@ -13,7 +13,7 @@ import { a9 } from "../905/191741";
 import { isCodegenSupportedForLanguage, getUnitForLanguage } from "../figma_app/120227";
 import { v as _$$v } from "../905/50227";
 import { yt } from "../figma_app/451499";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { useDropdownState } from "../905/848862";
 import { selectIsCopyExportAllowed } from "../figma_app/212807";
 import { PluginIconDisplay } from "../905/480825";
@@ -47,7 +47,7 @@ export function $$N0({
     value: e,
     recordingKey: e
   }, e)), [inspectionModes]);
-  let b = z4.getIsExtension();
+  let b = fullscreenAlias.getIsExtension();
   let T = inspectionModes.map(e => ({
     key: e,
     label: a9.format(e)
@@ -100,7 +100,7 @@ function C({
   hidePreferencesForList: r
 }) {
   let i = selectIsCopyExportAllowed();
-  let a = z4.getIsExtension();
+  let a = fullscreenAlias.getIsExtension();
   let {
     preferenceOptions,
     inspectionMode,
@@ -210,7 +210,7 @@ function P({
     children: jsx(bL, {
       value: t,
       onChange: r,
-      legend: jsx(q, {
+      legend: jsx(Legend, {
         children: renderI18nText("dev_handoff.layer_properties_view")
       }),
       children: e.map(({

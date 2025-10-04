@@ -4,7 +4,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { z as _$$z } from "../905/239603";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { createAtomSetter } from "../figma_app/566371";
 import { getRequest, sendWithRetry } from "../905/910117";
 import { handlePromiseError, FlashActions } from "../905/573154";
@@ -156,7 +156,7 @@ let $$J0 = liveStoreInstance.PaginatedQuery({
     reduxStore: r
   }) => {
     let n;
-    if (t) n = t; else {
+    if (t) n = t;else {
       let {
         folderId,
         shouldShowOnlyTrashedFiles = !1,
@@ -340,7 +340,7 @@ let $$et1 = liveStoreInstance.Mutation(({
     promise: n,
     fallbackError: getI18nString("file_browser.api_folder.error_when_moving_to_trash")
   }));
-  WB().optimisticallyUpdate({
+  getCurrentLiveGraphClient().optimisticallyUpdate({
     Project: {
       [e]: {
         trashedAt: new Date()
@@ -382,7 +382,7 @@ let $$er11 = liveStoreInstance.Mutation(({
     promise: i,
     fallbackError: getI18nString("file_browser.api_folder.error_when_restoring")
   }));
-  WB().optimisticallyUpdate({
+  getCurrentLiveGraphClient().optimisticallyUpdate({
     Project: {
       [e]: {
         trashedAt: null
@@ -420,7 +420,7 @@ let $$ei12 = liveStoreInstance.Mutation(({
     promise: a,
     fallbackError: getI18nString("file_browser.api_folder.an_error_occurred_while_renaming_this_project")
   }));
-  WB().optimisticallyUpdate({
+  getCurrentLiveGraphClient().optimisticallyUpdate({
     Project: {
       [e]: {
         name: t,
@@ -570,7 +570,7 @@ let ed = liveStoreInstance.Mutation((e, {
     promise: s,
     fallbackError: getI18nString("file_browser.api_folder.an_error_occurred_while_moving_this_project")
   }));
-  WB()?.optimisticallyUpdate({
+  getCurrentLiveGraphClient()?.optimisticallyUpdate({
     Project: {
       [folder.id]: {
         teamId: team.id
@@ -616,7 +616,7 @@ let $$ec6 = createOptimistThunk((e, t) => {
         upsellPlan: consumptionPaywallUtils.Plan.PRO,
         editorType: null
       }
-    })); else {
+    }));else {
       let t = s ? getI18nString("file_browser.api_folder.no_create_permissions_team_name", {
         teamName: s.name
       }) : getI18nString("file_browser.api_folder.no_create_permissions_this_team");

@@ -34,7 +34,7 @@ import { Link } from "react-router-dom";
 import { IconButton } from "../905/443068";
 import { J as _$$J } from "../905/125993";
 import H from "classnames";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { SvgComponent } from "../905/714743";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { AG } from "../figma_app/999312";
@@ -623,7 +623,7 @@ function eI(e) {
             }), isAuthorAcceptedPublisher && jsx($, {}), jsx("span", {
               className: "comment_tile--commentMetaDivider--pzekb text--fontPos13--xW8hS text--_fontBase--QdLsd",
               children: "\xb7"
-            }), jsx(h1, {
+            }), jsx(RelativeTimeDisplay, {
               className: "comment_tile--commentTime--Zz1IX text--fontPos11--2LvXf text--_fontBase--QdLsd",
               date: comment.created_at
             })]

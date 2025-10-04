@@ -11,7 +11,7 @@ import { g as _$$g } from "../figma_app/638694";
 import { K } from "../905/628118";
 import { r as _$$r } from "../905/398386";
 import { selectViewAction } from "../905/929976";
-import { Tn } from "../figma_app/933328";
+import { useLibraryInfo } from "../figma_app/933328";
 import { NJ } from "../figma_app/518077";
 import { WorkspaceAdminSettingsView, WorkspaceInfoView } from "../figma_app/43951";
 import { isBigmaEnabledAlias2 } from "../figma_app/336853";
@@ -144,7 +144,7 @@ function G({
   });
   let S = "loaded" !== C.status;
   let N = C.data?.workspace;
-  let [I] = Tn({
+  let [I] = useLibraryInfo({
     currentOrgId: a.id,
     excludeDrafts: !0
   });

@@ -1,7 +1,7 @@
 import { permissionScopeHandler } from "../905/189185";
 import { C } from "../905/887158";
 import { debugState } from "../905/407919";
-import { Oe } from "../figma_app/933328";
+import { loadSharedVariableThunk } from "../figma_app/933328";
 import { Hf } from "../figma_app/407414";
 let $$l1 = {
   [C.REQUIRE_BOTTOM_LEFT_CORNER_RADIUS_VARIABLES]: "bottomLeftRadius",
@@ -33,7 +33,7 @@ export async function $$c0(e, t, r, i, d, c) {
   let f = r.availableVariables[variableId];
   if (!f?.node_id) return !1;
   let E = debugState.dispatch;
-  let y = await E(Oe(f));
+  let y = await E(loadSharedVariableThunk(f));
   if (!y) return Promise.resolve(!1);
   if (d) {
     switch (e.rectangleCornerRadiiIndependent = !0, u) {

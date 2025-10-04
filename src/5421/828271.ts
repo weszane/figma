@@ -34,7 +34,7 @@ import { isInvalidValue } from "../905/216495";
 import { e7, av } from "../figma_app/316316";
 import { NE } from "../3276/373312";
 import { selectCurrentFile } from "../figma_app/516028";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { J as _$$J2 } from "../905/980942";
@@ -301,7 +301,7 @@ function eS(e) {
       children: renderI18nText("proto.interaction_list.variant_interactions")
     })
   });
-  let p = o3(nt.useGrid);
+  let p = useLabConfiguration(labConfigurations.useGrid);
   return jsxs(Fragment, {
     children: [r && jsx(dD.Provider, {
       value: {

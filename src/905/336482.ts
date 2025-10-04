@@ -79,7 +79,7 @@ import { getCurrentUserOrgUser } from "../figma_app/951233";
 import { ResourceTypeNoComment, hasClientMeta } from "../figma_app/45218";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { e0 as _$$e3 } from "../905/696396";
-import { pz } from "../figma_app/825489";
+import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { KT, Cd, DK, $o, ME, jc } from "../905/54042";
 import { r as _$$r3 } from "../905/490676";
 import { PrototypingTsApi } from "../figma_app/763686";
@@ -822,7 +822,7 @@ function ej(e) {
   useSingleEffect(() => {
     f.fieldStates.carouselMedia.currentValue !== unsetSymbol && f.fieldStates.carouselMedia.resetValue();
   });
-  let [_, A] = useAtomValueAndSetter(pz);
+  let [_, A] = useAtomValueAndSetter(libraryPublishingModeAtom);
   useLayoutEffect(() => {
     if (_ !== LibrarySourceEnum.HUBFILE) {
       A(LibrarySourceEnum.HUBFILE);

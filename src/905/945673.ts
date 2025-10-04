@@ -1,43 +1,52 @@
-import { k } from "../figma_app/261445";
-var $$n0;
-class a {
+import { IncrementalLoadTimer } from "../figma_app/261445"
+
+interface EventLogger {
+  isStringEvent: (event: string) => boolean
+  isNumberEvent: (event: string) => boolean
+  loadTimer: LoadTimer
+}
+
+interface LoadTimer {
+  logOpenFileAction: (fileKey: string) => void
+  logEvent: (event: LogEvent) => void
+}
+
+type LogEvent
+  = | { type: "receiveNodeChanges", size: number }
+    | { type: "sendSceneGraphQuery" | "receiveSceneGraphReply", queries: string[] }
+    | { type: "finishIncrementalLoading", fileKey: string }
+
+class IncrementalLoadTimerReporter implements LoadTimer {
+  private reporter: IncrementalLoadTimer | null = null
+
   constructor() {
-    this.reporter = null;
+    this.reporter = null
   }
-  logOpenFileAction(e) {
-    this.reporter = new k("Fullscreen Page Query");
-    this.reporter.setFileKey(e);
+
+  logOpenFileAction(fileKey: string): void {
+    this.reporter = new IncrementalLoadTimer("Fullscreen Page Query")
+    this.reporter.setFileKey(fileKey)
   }
-  logEvent(e, t) {
-    if (this.reporter) switch (e) {
-      case "receiveNodeChanges":
-        this.reporter.logEvent({
-          type: e,
-          size: t
-        });
-        break;
-      case "sendSceneGraphQuery":
-      case "receiveSceneGraphReply":
-        this.reporter.logEvent({
-          type: e,
-          queries: t.split(",")
-        });
-        break;
-      case "finishIncrementalLoading":
-        this.reporter.logEvent({
-          type: e,
-          fileKey: t
-        });
+
+  logEvent(event: LogEvent): void {
+    if (this.reporter) {
+      this.reporter.logEvent(event)
     }
   }
 }
-(e => {
-  e.isStringEvent = function (e) {
-    return "sendSceneGraphQuery" === e || "receiveSceneGraphReply" === e || "finishIncrementalLoading" === e;
-  };
-  e.isNumberEvent = function (e) {
-    return "receiveNodeChanges" === e;
-  };
-  e.loadTimer = new a();
-})($$n0 || ($$n0 = {}));
-export const N = $$n0;
+
+function isStringEvent(event: string): boolean {
+  return event === "sendSceneGraphQuery" || event === "receiveSceneGraphReply" || event === "finishIncrementalLoading"
+}
+
+function isNumberEvent(event: string): boolean {
+  return event === "receiveNodeChanges"
+}
+
+export const eventLogger: EventLogger = {
+  isStringEvent,
+  isNumberEvent,
+  loadTimer: new IncrementalLoadTimerReporter(),
+}
+
+export const N = eventLogger

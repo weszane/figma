@@ -1,7 +1,7 @@
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { j } from "../figma_app/172303";
+import { dispatchShowVisualBell } from "../figma_app/172303";
 import { VisualBellIcon, BellId } from "../905/576487";
 import { lW } from "../figma_app/11182";
 import { RT, uw } from "../figma_app/171413";
@@ -13,7 +13,7 @@ export function $$u3({
   debugState.dispatch(VisualBellActions.dequeue({
     matchType: "sites.PublishingInProgress"
   }));
-  j("sites.PublishingFailed", !0, {
+  dispatchShowVisualBell("sites.PublishingFailed", !0, {
     message: t ? getI18nString("figmake.publish.unsuccessful_publish_bell") : getI18nString("sites.toolbar.publish_modal.unsuccessful_publish_bell")
   }, void 0, VisualBellIcon.EXCLAMATION, void 0, e);
 }
@@ -27,7 +27,7 @@ export function $$p1({
   debugState.dispatch(VisualBellActions.dequeue({
     matchType: "sites.PublishingInProgress"
   }));
-  j("sites.PublishingSuccess", !1, {
+  dispatchShowVisualBell("sites.PublishingSuccess", !1, {
     i18n: {
       id: r ? BellId.FIGMAKE_PUBLISH_SUCCESS_BELL_ID : BellId.SITES_PUBLISH_SUCCESS_BELL_ID,
       params: {

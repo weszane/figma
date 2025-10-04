@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { bL, c$ } from "../905/575478";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { useLatestRef } from "../figma_app/922077";
@@ -31,7 +31,7 @@ export function $$g0(e) {
       "data-active-mode": activeMode,
       value: activeMode,
       onChange: onModeSwitch,
-      legend: jsx(q, {
+      legend: jsx(Legend, {
         children: getI18nString("fullscreen.toolbar.toolbelt_mode_segmented_control.toolbelt_mode")
       }),
       htmlAttributes: {

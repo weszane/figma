@@ -8,7 +8,7 @@ import { setStarterKitHasBeenHidden } from "../figma_app/107215";
 import { N } from "../figma_app/659940";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { $K } from "../figma_app/247611";
-import { g as _$$g } from "../figma_app/115586";
+import { useIsFullscreenReady } from "../figma_app/115586";
 import { getViewportInfo, getVisibleArea } from "../figma_app/62612";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectUserFlag } from "../905/940356";
@@ -34,7 +34,7 @@ function _() {
 }
 var $$T1 = (e => (e[e.TRUE = 0] = "TRUE", e[e.FALSE = 1] = "FALSE", e[e.LOADING = 2] = "LOADING", e))($$T1 || {});
 export function $$I5() {
-  let e = _$$g();
+  let e = useIsFullscreenReady();
   let t = useSelector(e => e.mirror.appModel.showUi);
   let r = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.LAYOUT);
   let o = useSelector(e => isTryPluginModalShown(e.selectedView));

@@ -15,7 +15,7 @@ import { e as _$$e } from "../905/383776";
 import { useDevModeFocusId, useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { createOptimistThunk } from "../905/350402";
 import { updateMultiplayerStateThunk } from "../figma_app/91703";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { clearSelection } from "../figma_app/741237";
 import { XM, e2 } from "../905/486443";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
@@ -202,7 +202,7 @@ export function $$j6({
 }
 export function $$U3() {
   let e = useIsSelectedFigmakeFullscreen();
-  return !(getIsMobile() && isInFigmaMobile() && !isIpadDevice() || z4?.getIsExtension()) && !e;
+  return !(getIsMobile() && isInFigmaMobile() && !isIpadDevice() || fullscreenAlias?.getIsExtension()) && !e;
 }
 export function $$B1() {
   let e = useIsSelectedFigmakeFullscreen();

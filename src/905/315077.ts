@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { renderI18nText } from "../905/303541";
 import { G } from "../905/720066";
@@ -85,7 +85,7 @@ function I({
   });
   let i = data?.project?.path || "";
   let r = e.touched_at ? renderI18nText("search.preview_item.edited_from_now", {
-    relativeTimeString: jsx(h1, {
+    relativeTimeString: jsx(RelativeTimeDisplay, {
       date: e.touched_at,
       style: "narrow"
     })

@@ -13,7 +13,7 @@ import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { yA, rX, As, t5, _K, f$, Qn } from "../figma_app/933328";
+import { autoUpdateSharedLibraryAsset, updateSharedComponents, updateSharedStateGroups, updateSharedStyle, updateSharedVariantSet, updateSharedLibraryAsset, updateSelectedSharedStyleConsumers } from "../figma_app/933328";
 import { startLibraryUpdate, completeLibraryUpdate, failLibraryUpdate } from "../905/63598";
 import { hideModal } from "../905/156213";
 import { getNextSessionId, createSessionPromise, isIncrementalSessionOrValidating } from "../figma_app/582924";
@@ -113,7 +113,7 @@ async function U(e) {
 export async function $$B0(e, t) {
   let r = LibraryPubSub.getTimestampForLibraryUpdateStart();
   isIncrementalSessionOrValidating() && (await U(t));
-  await e.dispatch(yA({
+  await e.dispatch(autoUpdateSharedLibraryAsset({
     assets: t,
     updateStartTime: r
   }));
@@ -150,7 +150,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
   let J = useCallback(async (t, r) => {
     let n = LibraryPubSub.getTimestampForLibraryUpdateStart();
     isIncrementalSessionOrValidating() && (await $$M1(t));
-    await a(rX({
+    await a(updateSharedComponents({
       components: t,
       usedItemsByKey: e,
       instanceIdsToUpdate: r ?? [],
@@ -162,7 +162,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
   let Z = useCallback(async (t, r) => {
     let n = LibraryPubSub.getTimestampForLibraryUpdateStart();
     isIncrementalSessionOrValidating() && (await $$F5(t));
-    await a(As({
+    await a(updateSharedStateGroups({
       stateGroups: t,
       usedItemsByKey: e,
       instanceIdsToUpdate: r ?? [],
@@ -174,7 +174,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
   let Q = useCallback(async e => {
     let t = LibraryPubSub.getTimestampForLibraryUpdateStart();
     isIncrementalSessionOrValidating() && (await $$j3(e));
-    await a(t5({
+    await a(updateSharedStyle({
       styles: e,
       updateStartTime: t,
       subscribedLibraryKeys: X,
@@ -205,7 +205,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
     }
     let r = VariablesBindings?.getSubscribedVariableSetsInfo();
     let n = new Map(r?.map(e => [e.id.toString().split("/")[0], e.defaultModeID]));
-    await a(_K({
+    await a(updateSharedVariantSet({
       variableSets: e,
       updateStartTime: t
     }));
@@ -221,7 +221,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
   let et = useCallback(async e => {
     let t = LibraryPubSub.getTimestampForLibraryUpdateStart();
     isIncrementalSessionOrValidating() && (await U(e));
-    await a(f$({
+    await a(updateSharedLibraryAsset({
       assets: e,
       updateStartTime: t
     }));
@@ -348,7 +348,7 @@ export function $$V4(e, t) {
   let s = useDispatch();
   let l = useCallback((e, t) => {
     let r = Fullscreen.getOutdatedStyleConsumers(t);
-    s(Qn({
+    s(updateSelectedSharedStyleConsumers({
       styleUpdateInfo: e,
       oldStyleGUID: t,
       consumerGUIDsToUpdate: r

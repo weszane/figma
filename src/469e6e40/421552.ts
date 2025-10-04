@@ -7,7 +7,6 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/419236";
 import { useSubscription } from "../figma_app/288654";
-import { ResourceStatus } from "../905/723791";
 import { P as _$$P } from "../905/347284";
 import { y2 } from "../figma_app/563413";
 import { V as _$$V } from "../figma_app/385855";
@@ -47,7 +46,7 @@ import { S as _$$S2 } from "../905/711470";
 import { A as _$$A } from "../905/251970";
 import { $z } from "../figma_app/617427";
 import { parsePxInt } from "../figma_app/783094";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { SecureLink } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S3 } from "../figma_app/490799";
 import { LoadingOverlay } from "../figma_app/858013";
@@ -62,7 +61,7 @@ import { HeaderModal } from "../905/519092";
 import { X as _$$X, U as _$$U } from "../905/77000";
 import { EntityType } from "../905/806400";
 import { l as _$$l2 } from "../905/716947";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { buildFileUrl } from "../905/612685";
 import { FPlanNameType, FMemberRoleType } from "../figma_app/191312";
 import { useTeamPlanPublicInfo, getParentOrgIdIfOrgLevel, useCurrentPrivilegedPlan, useTeamPlanUser, useIsOrgAdminUser, checkOrgUserPermission } from "../figma_app/465071";
@@ -78,13 +77,13 @@ import { handleWorkspaceLibrarySubscription, handleOrgLibrarySubscription, handl
 import { Ho } from "../figma_app/236178";
 import { hasActiveSubscriptionNotSubscribed } from "../figma_app/646357";
 import { LibrarySubscriptionType } from "../figma_app/155728";
-import { j as _$$j } from "../905/694231";
+import { variableSetDefaultModeService } from "../905/694231";
 import { fM } from "../figma_app/214643";
 import { l as _$$l3 } from "../469e6e40/774192";
 import { FlashActions } from "../905/573154";
 import { XF, wZ, CA } from "../figma_app/777207";
 import { liveStoreInstance, getAtomMutate } from "../905/713695";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
 import { sendWithRetry } from "../905/910117";
 import { tgj } from "../figma_app/27776";
@@ -325,7 +324,7 @@ let ey = function ({
       })
     }), r && jsx(ej, {
       label: getI18nString("resources_tab.libraries.last_published"),
-      children: jsx(h1, {
+      children: jsx(RelativeTimeDisplay, {
         date: r
       })
     }), jsx(ej, {
@@ -383,7 +382,7 @@ function eG({
   resourceType: s
 }) {
   let i = `optimistic-approved-library-create-${generateUUIDv4()}`;
-  return WB()?.optimisticallyCreate({
+  return getCurrentLiveGraphClient()?.optimisticallyCreate({
     ApprovedLibrary: {
       [i]: {
         fileKey: t,
@@ -398,7 +397,7 @@ function ez({
   request: e,
   approvedLibraryId: t
 }) {
-  return WB()?.optimisticallyDelete({
+  return getCurrentLiveGraphClient()?.optimisticallyDelete({
     ApprovedLibrary: {
       [t]: null
     }
@@ -761,7 +760,7 @@ function e9({
     }, [l, r, o, n, a, e]);
   }(o, g, t, e);
   if (useEffect(() => {
-    k !== a && (y(!1), E(a), a && _$$j.getDefaultModes({
+    k !== a && (y(!1), E(a), a && variableSetDefaultModeService.getDefaultModes({
       libraryKey: e.libraryKey,
       entityType: "workspace",
       entityId: a
@@ -1158,7 +1157,7 @@ let td = registerModal(function ({
   let t = useDispatch();
   let a = selectCurrentUser();
   let r = useSelector(e => e.currentUserOrgId);
-  let l = _$$l();
+  let l = useWindowDimensions();
   let o = isValidLibraryKey(e);
   let d = useSubscription(LibraryManagementData, {
     fileKey: e,

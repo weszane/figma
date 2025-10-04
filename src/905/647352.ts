@@ -24,7 +24,7 @@ import { JT } from "../figma_app/173838";
 import { selectCurrentFile } from "../figma_app/516028";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { registerModal } from "../905/102752";
-import { pz } from "../figma_app/825489";
+import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { U as _$$U } from "../905/29665";
 import { T as _$$T } from "../905/485734";
 import { t as _$$t2 } from "../905/340158";
@@ -47,7 +47,7 @@ let M = registerModal(function ({
 }) {
   let t = useDispatch();
   let i = selectCurrentFile();
-  let r = useAtomWithSubscription(pz);
+  let r = useAtomWithSubscription(libraryPublishingModeAtom);
   let s = useAtomWithSubscription(_$$t2);
   let o = JT();
   useSingleEffect(() => {

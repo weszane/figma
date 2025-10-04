@@ -1,6 +1,6 @@
 import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { _ as _$$_ } from "../figma_app/658134";
 import { S } from "../figma_app/109947";
 import { isNotInFocusedNodeView } from "../figma_app/327588";
@@ -11,7 +11,7 @@ import { C as _$$C } from "../figma_app/859828";
 export function $$$$h0() {
   let {
     windowInnerWidth
-  } = _$$l();
+  } = useWindowDimensions();
   let t = _$$C()?.bottomRightToolsNode;
   let i = useAtomWithSubscription(S);
   let h = getSidebarSplitPosition();

@@ -9,7 +9,7 @@ import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { zE } from "../905/738636";
+import { createNewFileWithRestrictions } from "../905/738636";
 import { designCopyToSlidesAtom, sessionIdAtom } from "../figma_app/223206";
 import { getPermissionsAndView } from "../905/766303";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -25,7 +25,7 @@ export function $$A0(e, t) {
     let r = atomStoreManager.get(currentTeamAtom);
     let n = debugState.getState();
     let i = getPermissionsAndView(n);
-    e(zE({
+    e(createNewFileWithRestrictions({
       state: i,
       from: FileBrowserLocation.DESIGN_TO_SLIDES_ENTRYPOINT,
       editorType: FFileType.SLIDES,

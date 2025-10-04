@@ -17,7 +17,7 @@ import { A as _$$A2 } from "../905/639174";
 import { ThemeContext } from "../905/187165";
 import { hv, Pf, ck } from "../905/952832";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { Rv } from "../figma_app/728075";
+import { neutralOffWhiteColor } from "../figma_app/728075";
 import { pL } from "../figma_app/639088";
 let $$x0 = registerModal(function (e) {
   let t = useDispatch();
@@ -50,7 +50,7 @@ let S = {
     e.restore();
   },
   SQUARE: e => {
-    e.fillStyle = Rv;
+    e.fillStyle = neutralOffWhiteColor;
     let t = Math.floor(20);
     let i = new Path2D();
     i.moveTo(10 + t, 10);

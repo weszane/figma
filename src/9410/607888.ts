@@ -10,7 +10,7 @@ import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { zE } from "../905/738636";
+import { createNewFileWithRestrictions } from "../905/738636";
 import { sendToBuzzFromDesignAtom, sessionIdAtom } from "../figma_app/223206";
 import { J3, JU } from "../figma_app/622574";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -26,7 +26,7 @@ export function $$j2(e, t, i) {
   let r = atomStoreManager.get(currentTeamAtom);
   let n = debugState.getState();
   let a = getPermissionsAndView(n);
-  e(zE({
+  e(createNewFileWithRestrictions({
     state: a,
     from: i,
     editorType: FFileType.COOPER,

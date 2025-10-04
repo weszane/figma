@@ -25,7 +25,7 @@ import { S as _$$S } from "../figma_app/552746";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { hideInstanceSwapPicker } from "../905/8732";
-import { uP, Oe } from "../figma_app/933328";
+import { loadSharedSymbolOrStateGroup, loadSharedVariableThunk } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection, renameNode } from "../figma_app/741237";
 import { u as _$$u, BQ } from "../figma_app/852050";
@@ -33,7 +33,7 @@ import { useDropdownState } from "../905/848862";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { Xo } from "../figma_app/482495";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
 import { conditionalWrapper } from "../905/579635";
@@ -205,7 +205,7 @@ function ey({
   let [u, p] = useState(null);
   let [_, g] = useState(null);
   let f = useRef(null);
-  let y = o3(nt.useGrid);
+  let y = useLabConfiguration(labConfigurations.useGrid);
   useLayoutEffect(() => {
     null != f.current && (g(f.current), f.current = null);
   }, [f, e.values]);
@@ -578,7 +578,7 @@ function eA({
       entrypointForLogging: _$$S2.InstancePickerEntrypoint.EDIT_COMPONENT_PROP_PICKER,
       instanceSwapNode: r,
       onSwapCallback: t => {
-        l(uP({
+        l(loadSharedSymbolOrStateGroup({
           item: t,
           callback: r => {
             let n = t.type === PrimaryWorkflowEnum.STATE_GROUP ? getDefaultStateForStateGroup(t, r, s) : r;
@@ -658,7 +658,7 @@ function eC({
   let u = useCallback(async n => {
     if (void 0 === n) return;
     assertNotNullish(variableType);
-    let i = await t(Oe(n));
+    let i = await t(loadSharedVariableThunk(n));
     i && (permissionScopeHandler.user("component-prop-def", () => Fullscreen.setComponentPropDefVariableData(e.explicitDefID, y$(variableType, i))), oz("component_prop_def", {
       type: VariableDataType.ALIAS,
       resolvedType: n.resolvedType,

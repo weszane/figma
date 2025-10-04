@@ -32,7 +32,7 @@ import { x as _$$x } from '../905/811596';
 import { useCurrentUserOrg } from '../905/845253';
 import { a as _$$a2 } from '../905/964520';
 import { TextWithTruncation } from '../905/984674';
-import { h1 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { h as _$$h } from '../905/994594';
 import { O as _$$O } from '../3591/240710';
 import { b as _$$b } from '../4452/320061';
@@ -384,7 +384,7 @@ function el(e) {
           className: 'x78zum5 x6s0dn4 xclx6tv x17akokd x1qxcl5b xno9bf3 x1betce5 x1n0bwc9 x15r87gk',
           children: jsx('span', {
             children: renderI18nText('org_settings.scim.api_token_generated_at', {
-              timestamp: jsx(h1, {
+              timestamp: jsx(RelativeTimeDisplay, {
                 date: _
               })
             })

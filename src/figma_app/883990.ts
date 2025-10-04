@@ -5,7 +5,7 @@ import { KindEnum } from '../905/129884';
 import { Y } from '../905/193977';
 import { LayoutContainer } from '../905/222272';
 import { o as _$$o } from '../905/223420';
-import { nt, o3 } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { A as _$$A } from '../905/251970';
 import { y as _$$y } from '../905/263077';
 import { getI18nString } from '../905/303541';
@@ -112,7 +112,7 @@ let $$P2 = forwardRef(({
   _$$C2(searchInputRef);
   z(o);
   _$$y(e, searchInputRef);
-  let O = o3(nt.quickActionsA11y);
+  let O = useLabConfiguration(labConfigurations.quickActionsA11y);
   let P = isRoot || o ? jsx(SvgComponent, {
     ariaHidden: O,
     svg: _$$A3,

@@ -12,7 +12,7 @@ import { normalizeJobRole, getJobRoleDisplay } from "../3973/538504";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -414,7 +414,7 @@ function er({
     }), d && jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("modify_plan_user_seat_modal.last_active", {
-        lastActiveAt: jsx(h1, {
+        lastActiveAt: jsx(RelativeTimeDisplay, {
           date: t
         })
       })

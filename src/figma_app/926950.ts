@@ -24,7 +24,7 @@ import { getFeatureFlags } from '../905/601108';
 import { J as _$$J2 } from '../905/639674';
 import { SvgComponent } from '../905/714743';
 import { Point } from '../905/736624';
-import { l as _$$l } from '../905/745972';
+import { useWindowDimensions } from '../905/745972';
 import { DraggableModalManager, HEADER_HEIGHT } from '../905/748636';
 import { c$, l6, sK } from '../905/794875';
 import { useDropdownState } from '../905/848862';
@@ -156,7 +156,7 @@ function eu({
   let D = useDispatch();
   let {
     windowInnerHeight
-  } = _$$l();
+  } = useWindowDimensions();
   let G = _$$v();
   let [H, W] = useAtomValueAndSetter(ei);
   let K = Xr(ea);
@@ -418,7 +418,7 @@ function ep(e) {
   let h = getFileTypePx();
   let {
     windowInnerHeight
-  } = _$$l();
+  } = useWindowDimensions();
   let [E, T] = useAtomValueAndSetter(ei);
   let [I, O] = useAtomValueAndSetter(ea);
   let [R, L] = useAtomValueAndSetter(es);

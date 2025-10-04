@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useMemo, Fragment } from "react";
 import { useSelector } from "react-redux";
 import { noop } from 'lodash-es';
-import { q as _$$q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { Fullscreen } from "../figma_app/763686";
 import { props } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -154,7 +154,7 @@ export function $$W3() {
         children: jsx(_$$b, {
           value: w,
           onChange: D,
-          legend: jsx(_$$q, {
+          legend: jsx(Legend, {
             children: ei
           }),
           recordingKey: "whiteboardStrokeControlStrokeStyle",

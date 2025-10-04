@@ -1,6 +1,6 @@
 import { getFontIndexHash } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { maybeCreateSavepoint } from "../905/294113";
 import { z } from "../905/931953";
 export async function $$l0(e, {
@@ -9,7 +9,7 @@ export async function $$l0(e, {
   responsiveSetGuids: n
 }) {
   let r = c(e, t, n);
-  WB().optimisticallyCreate({
+  getCurrentLiveGraphClient().optimisticallyCreate({
     SiteBundle: {
       [`optimistic-id-${t}`]: {
         fileKey: t,

@@ -49,7 +49,7 @@ import ed from "../svg/56418";
 import { stylex, props } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { isValidEmail } from "../figma_app/416935";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { getSubscriptionPriceString } from "../figma_app/808294";
 import { hasClientMeta, hasMonetizedResourceMetadata, hasFreemiumCode, isThirdPartyMonetized, isPlugin } from "../figma_app/45218";
 import { dx } from "../5430/309696";
@@ -70,7 +70,7 @@ import { z as _$$z } from "../5430/158228";
 import { UH, G as _$$G2, Ev, tx as _$$tx2, Rc, D9, OC, $h, tJ, hV } from "../5430/920085";
 import { A as _$$A5 } from "../5724/663128";
 import { useDispatch } from "react-redux";
-import { C as _$$C } from "../905/222694";
+import { convertToRgba } from "../905/222694";
 import { trackEventAnalytics } from "../905/449184";
 import { ContentFilterType } from "../figma_app/70618";
 import { PluginImage } from "../905/480825";
@@ -746,7 +746,7 @@ function eq(e) {
   return jsxs(_$$z, {
     children: [jsx("div", {
       children: renderI18nText("community.detail_view.last_updated_at_time_stamp", {
-        timeStamp: jsx(h1, {
+        timeStamp: jsx(RelativeTimeDisplay, {
           date: updatedAt
         })
       })
@@ -864,7 +864,7 @@ function e6({
     children: [jsx("div", {
       className: l ? "related_content--relatedContentTileImageThumbnailIsSet--ceK9X related_content--relatedContentTileImage--0IZ1a" : "related_content--relatedContentTileImage--0IZ1a",
       style: {
-        backgroundColor: _$$C(e.client_meta)
+        backgroundColor: convertToRgba(e.client_meta)
       },
       children: jsx(Ho, {
         hubFileId: e.id,

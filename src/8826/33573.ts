@@ -11,7 +11,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { GI } from "../905/125333";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hidePickerThunk, showPickerThunk, stylePickerViewChangedThunk } from "../figma_app/91703";
-import { AV } from "../figma_app/933328";
+import { applySharedStyle } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { getColorFormat } from "../figma_app/740163";
 import { normalizeValue, getCommonFromArray } from "../905/216495";
@@ -94,7 +94,7 @@ function B(e) {
   let D = (e, {
     fromSearch: t
   } = {}) => {
-    w(AV({
+    w(applySharedStyle({
       style: e,
       inheritStyleKeyField: "inheritFillStyleKeyForStroke",
       fromSearch: t

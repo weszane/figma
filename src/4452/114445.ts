@@ -25,7 +25,7 @@ import { getRumLoggingConfig } from "../905/16237";
 import { UpgradeAction } from "../905/370443";
 import { trackEventAnalytics } from "../905/449184";
 import { capitalize, toTitleCase } from "../figma_app/930338";
-import { Ak } from "../905/986103";
+import { useRelativeTime } from "../905/986103";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { G as _$$G } from "../905/750789";
 import { styleBuilderInstance } from "../905/941192";
@@ -165,7 +165,7 @@ function $({
 }) {
   let i;
   let l = useDispatch();
-  let o = capitalize(Ak(e.createdAt));
+  let o = capitalize(useRelativeTime(e.createdAt));
   let d = jsx(V, {
     label: getI18nString("admin_dashboard.request_flyout.body.email"),
     value: e.email,
@@ -188,7 +188,7 @@ function $({
     label: getI18nString("admin_dashboard.request_flyout.body.current_seat"),
     value: n ? JT(n) : "-"
   });
-  let _ = capitalize(Ak(t));
+  let _ = capitalize(useRelativeTime(t));
   let p = jsx(V, {
     label: getI18nString("admin_dashboard.request_flyout.body.last_active"),
     value: t ? _ : "-"
@@ -264,7 +264,7 @@ function Z({
   request: e
 }) {
   let t = e.name || e.email || getI18nString("admin_dashboard.requests.no_name");
-  let a = Ak(e.updatedAt);
+  let a = useRelativeTime(e.updatedAt);
   let n = {
     id: e.userId,
     name: t,

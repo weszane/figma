@@ -694,7 +694,7 @@ export class DesktopAPI {
    * Shows file browser.
    * @param flashErrorMessage - Whether to flash error.
    */
-  showFileBrowser(flashErrorMessage?: boolean): void {
+  showFileBrowser(flashErrorMessage?: any): void {
     this.api.postMessage('showFileBrowser', { flashErrorMessage })
   }
 

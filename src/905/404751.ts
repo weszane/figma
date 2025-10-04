@@ -27,7 +27,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { ConfirmationModal } from "../905/441305";
 import { registerModal } from "../905/102752";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
-import { W as _$$W2 } from "../905/442612";
+import { isBakeStarterPaywallEnabledWithoutLimit } from "../905/442612";
 import { i } from "../figma_app/43065";
 import { M as _$$M } from "../figma_app/854365";
 import { i as _$$i } from "../905/46262";
@@ -328,7 +328,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
             data: {
               team
             }
-          })) : u > 0 && _$$W2() ? e.dispatch(showModalHandler({
+          })) : u > 0 && isBakeStarterPaywallEnabledWithoutLimit() ? e.dispatch(showModalHandler({
             type: i,
             data: {
               team

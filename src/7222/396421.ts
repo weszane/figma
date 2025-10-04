@@ -13,7 +13,7 @@ import { useDebounce } from 'use-debounce';
 import { Wn, ql } from "../figma_app/88484";
 import { isLocalCluster, getSlidesDefaultBlankTemplate } from "../figma_app/169182";
 import { Point } from "../905/736624";
-import { Bs } from "../figma_app/933328";
+import { insertSharedModule } from "../figma_app/933328";
 import { qY } from "../figma_app/622574";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
@@ -120,7 +120,7 @@ export function $$W17(e) {
   let [c, i] = useState(!1);
   let a = _$$D(e?.library_key);
   return (e, _, u, s, o) => {
-    c || (i(!0), t(Bs({
+    c || (i(!0), t(insertSharedModule({
       item: e,
       canvasPosition: new Point(),
       percentageOffset: new Point(),

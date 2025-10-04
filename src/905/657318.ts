@@ -26,7 +26,7 @@ import { c$ } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { hideStylePicker, hidePickerThunk, showStylePicker } from "../figma_app/91703";
-import { AV, Qn } from "../figma_app/933328";
+import { applySharedStyle, updateSelectedSharedStyleConsumers } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { sw } from "../figma_app/914957";
 import { hideTooltip } from "../905/765855";
@@ -144,7 +144,7 @@ class eA extends RecordingPureComponent {
       }
     };
     this.onApplyStyle = (e, t) => {
-      this.props.dispatch(AV({
+      this.props.dispatch(applySharedStyle({
         style: e,
         inheritStyleKeyField: this.props.inheritStyleKeyField,
         fromSearch: t
@@ -251,7 +251,7 @@ class eA extends RecordingPureComponent {
       value: "update-selected-style",
       displayText: getI18nString("design_systems.styles.update_selected_style"),
       callback: () => {
-        i && this.props.versionedStyleInfo && this.props.dispatch(Qn({
+        i && this.props.versionedStyleInfo && this.props.dispatch(updateSelectedSharedStyleConsumers({
           styleUpdateInfo: i,
           oldStyleGUID: this.props.versionedStyleInfo.GUID,
           consumerGUIDsToUpdate: r

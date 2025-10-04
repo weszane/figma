@@ -45,7 +45,7 @@ import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
 import { getCanvasViewState } from "../905/758967";
 import { isGoogleMeetIntegration } from "../figma_app/469876";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { LW, bs, GG } from "../figma_app/553940";
 import { useDropdownState } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -362,7 +362,7 @@ export function $$ej5(e) {
   let d = useRef(null);
   let c = eN(item)?.svg || null;
   let u = item.type === ZU.ACTION ? GG(item.action) : null;
-  let p = z4.getIsExtension();
+  let p = fullscreenAlias.getIsExtension();
   let _ = useRef(null);
   if (!isActive && _.current && _.current === document.activeElement && KeyboardFocusManager.focusCustomCanvasFocusElement(), !c) return null;
   function h(e) {

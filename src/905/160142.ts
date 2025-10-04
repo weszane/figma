@@ -8,7 +8,7 @@ import { sendWithRetry } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
 import { markPrototypeViewed } from "../905/70982";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { isFigmaNativeApp } from "../905/575846";
 import { mapFileSummary } from "../figma_app/349248";
 import { _P, Zh, qb, Rv } from "../figma_app/2590";
@@ -86,7 +86,7 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
       }));
       return;
     }
-    if (F = `${n.prototype_url}${L}`.replace(/proto/, isPresenterViewWithPopoutAudienceView ? "presenter" : isSlides ? "deck" : "proto"), z4.getIsExtension()) {
+    if (F = `${n.prototype_url}${L}`.replace(/proto/, isPresenterViewWithPopoutAudienceView ? "presenter" : isSlides ? "deck" : "proto"), fullscreenAlias.getIsExtension()) {
       openInBrowser(F);
       return;
     }

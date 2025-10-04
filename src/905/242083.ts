@@ -13,7 +13,7 @@ import { PluginAction } from '../905/15667';
 import { ACTIVITY_LOG_STORE, createSessionGreaterEqualKeyRange, createSessionNodeKeyRange, EDITOR_SESSIONS_STORE, executeDatabaseTransaction, getAutosaveDatabaseWithErrorHandling, NEW_FILES_STORE, NODE_CHANGES_STORE, SESSION_INDEX } from '../905/25189';
 import { handleKeyboardShortcutUsage, setKeyboardShortcutPanelTab } from '../905/26824';
 import { isFullscreenSlidesView } from '../905/35881';
-import { z4 as _$$z, Ln } from '../905/37051';
+import { fullscreenAlias, initializeFullscreenAPI } from '../905/37051';
 import { ModalFormContents, ModalRootComponent } from '../905/38914';
 import { ae as _$$ae } from '../905/41973';
 import { p as _$$p } from '../905/42189';
@@ -53,7 +53,7 @@ import { g as _$$g3 } from '../905/211118';
 import { normalizeValue } from '../905/216495';
 import { transformLibraryFileData } from '../905/217163';
 import { widgetInteractionTracker } from '../905/223332';
-import { Xo } from '../905/226610';
+import { shouldEnableFeedbackCategory } from '../905/226610';
 import { Ag as _$$Ag } from '../905/235578';
 import { delay } from '../905/236856';
 import { T as _$$T4 } from '../905/239551';
@@ -71,7 +71,7 @@ import { _N, Vg } from '../905/300621';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, getI18nStringAlias, renderI18nText } from '../905/303541';
 import { R as _$$R3 } from '../905/307199';
-import { b as _$$b3, c as _$$c4 } from '../905/308099';
+import { RadioInputRoot, RadioInputOption } from '../905/308099';
 import { logAutosaveError, logAutosaveErrorWithOriginalMessage } from '../905/327522';
 import { B as _$$B } from '../905/352524';
 import { LogLevelStr } from '../905/361972';
@@ -108,7 +108,7 @@ import { k as _$$k3 } from '../905/498777';
 import { handleAtomEvent } from '../905/502364';
 import { r6 as _$$r2 } from '../905/507950';
 import { createFileBehaviorAtom, FileChangeBehaviorEnum } from '../905/508457';
-import { $7 } from '../905/509613';
+import { checkEligibilityStatus } from '../905/509613';
 import { Vector2D } from '../905/512402';
 import { RR } from '../905/514666';
 import { v as _$$v3 } from '../905/516963';
@@ -175,7 +175,7 @@ import { xP as _$$xP, d_, Gh } from '../905/727576';
 import { Point } from '../905/736624';
 import { qG, Qx } from '../905/742325';
 import { c as _$$c3, s as _$$s7 } from '../905/744710';
-import { l as _$$l4 } from '../905/745972';
+import { useWindowDimensions } from '../905/745972';
 import { DraggableModalManager } from '../905/748636';
 import { AuthModal } from '../905/749159';
 import { y as _$$y5 } from '../905/749689';
@@ -215,7 +215,7 @@ import { Db } from '../905/881862';
 import { g5, Iz, uM, wv } from '../905/888175';
 import { bS, bX, fs, pi, vU } from '../905/889931';
 import { WAFValidationHandlerInstance } from '../905/898440';
-import { G_ } from '../905/901759';
+import { initializePdfImportManager } from '../905/901759';
 import { autosaveErrorModal } from '../905/906499';
 import { sendWithRetry } from '../905/910117';
 import { bL } from '../905/911410';
@@ -225,7 +225,7 @@ import { a7 as _$$a4 } from '../905/917898';
 import { sZ as _$$sZ, J5, jd, K8, O8, Vq } from '../905/920793';
 import { hD } from '../905/921139';
 import { hideDropdownAction, selectViewAction, showDropdownThunk, updateDropdownSelectionAction } from '../905/929976';
-import { q as _$$q3 } from '../905/932270';
+import { Legend } from '../905/932270';
 import { c as _$$c5 } from '../905/932790';
 import { parse, unparse } from '../905/945633';
 import { AssetTabType, ExtensionFeatureKey } from '../905/946805';
@@ -278,7 +278,7 @@ import { hasLocalFileId, ManifestEditorType, PluginInstallStatus } from '../figm
 import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildStaticUrl, buildUploadUrl, getInitialOptions, getSupportEmail, isDevEnvironment } from '../figma_app/169182';
 import { jx } from '../figma_app/171569';
-import { j as _$$j2 } from '../figma_app/172303';
+import { dispatchShowVisualBell } from '../figma_app/172303';
 import { v as _$$v } from '../figma_app/176476';
 import { XT as _$$XT, _I } from '../figma_app/176634';
 import { NumericInput, ScrubbableInput } from '../figma_app/178475';
@@ -363,7 +363,7 @@ import { eY as _$$eY, cB, cu, D2, Er, fb, FJ, FM, gU, H3, wh, xY } from '../figm
 import { ni as _$$ni, G4, LK } from '../figma_app/545293';
 import { _o as _$$_o } from '../figma_app/552821';
 import { c3 as _$$c7, ZI } from '../figma_app/553940';
-import { Ds, vS } from '../figma_app/557318';
+import { initializeMissingFontTracker, trackShowMissingFontsPopover } from '../figma_app/557318';
 import { $Z, Cf } from '../figma_app/559491';
 import { B as _$$B4 } from '../figma_app/560453';
 import { singletonAsync } from '../figma_app/562352';
@@ -443,7 +443,7 @@ import { PluginRunForContext } from '../figma_app/915202';
 import { handleEmbedPaste } from '../figma_app/916560';
 import { base64ToUint8Array, escapeHtml, toWellFormed, truncate, uint8ArrayToBase64 } from '../figma_app/930338';
 import { l7 as _$$l3 } from '../figma_app/932601';
-import { FU as _$$FU, b$ } from '../figma_app/933328';
+import { insertSharedComponent, insertSharedStateGroup } from '../figma_app/933328';
 import { hR as _$$hR } from '../figma_app/945605';
 import { Ay as _$$Ay6 } from '../figma_app/948389';
 import { rq as _$$rq } from '../figma_app/952446';
@@ -1045,10 +1045,10 @@ function ik(e) {
       useSmartPositioning: !1,
       selectAfterInsert: !0
     };
-    i.type === PrimaryWorkflowEnum.COMPONENT ? t(_$$FU({
+    i.type === PrimaryWorkflowEnum.COMPONENT ? t(insertSharedComponent({
       item: i,
       ...n
-    })) : i.type === PrimaryWorkflowEnum.STATE_GROUP && t(b$({
+    })) : i.type === PrimaryWorkflowEnum.STATE_GROUP && t(insertSharedStateGroup({
       item: i,
       ...n
     }));
@@ -1961,7 +1961,7 @@ let rx = registerModal(() => {
     let [{
       windowInnerWidth: e,
       windowInnerHeight: t
-    }] = useDebounce(_$$l4(), 300);
+    }] = useDebounce(useWindowDimensions(), 300);
     let i = getSessionStorage();
     let n = window.innerWidth - 2 * rv;
     let r = window.innerHeight - parsePxNumber('20px') - rI - parsePxNumber('60px') - 2 * rv;
@@ -2221,15 +2221,15 @@ let r7 = registerModal(({
       cancelText: r1(u),
       confirmText: r0(e, o),
       onConfirm: () => r6(n, u, e, o, r?.key),
-      children: [jsxs(_$$b3, {
-        legend: jsx(_$$q3, {
+      children: [jsxs(RadioInputRoot, {
+        legend: jsx(Legend, {
           children: renderI18nText('fullscreen.color_management.document_modal.legend')
         }),
         value: o,
         onChange: e => {
           l(e);
         },
-        children: [jsx(_$$c4, {
+        children: [jsx(RadioInputOption, {
           value: 'convert',
           label: jsx(Label, {
             children: getI18nString('fullscreen.color_management.document_modal.options.convert.title')
@@ -2245,7 +2245,7 @@ let r7 = registerModal(({
               })]
             })]
           })
-        }), jsx(_$$c4, {
+        }), jsx(RadioInputOption, {
           value: 'assign',
           label: jsx(Label, {
             children: getI18nString('fullscreen.color_management.document_modal.options.assign.title')
@@ -5197,7 +5197,7 @@ export function $$lq1(e, t, i, n) {
     _$$G2();
     _$$a();
     setModalValue(new t4(t));
-    G_();
+    initializePdfImportManager();
     z4();
     fG();
     LC();
@@ -5206,7 +5206,7 @@ export function $$lq1(e, t, i, n) {
     xQ();
     initializeAssetMirrorManager();
     _$$tO();
-    Ln();
+    initializeFullscreenAPI();
     XR();
     qZ();
     OX();
@@ -5220,7 +5220,7 @@ export function $$lq1(e, t, i, n) {
     jx(t);
     _$$y5(i);
     _$$no();
-    Ds();
+    initializeMissingFontTracker();
     kJ();
     _$$fT();
     h$();
@@ -5764,7 +5764,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   getLabValue(e) {
-    return Xo(e);
+    return shouldEnableFeedbackCategory(e);
   }
   openPdfExportSettingsModal() {
     this.dispatch(showModalHandler({
@@ -6258,7 +6258,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showVisualBellWithCloseButtonLocalized(e, t, i, n, r, a, s) {
     let o = getI18nStringAlias(t, i);
-    _$$j2(e, n, {
+    dispatchShowVisualBell(e, n, {
       message: o
     }, r, a, s);
   }
@@ -6855,7 +6855,7 @@ let lX = class e extends sP(sN(sR)) {
       });
     }
     this.dispatch(_$$X());
-    _$$z.getIsExtension() && figmaReady();
+    fullscreenAlias.getIsExtension() && figmaReady();
     e.maybeEnterRecoveryMode(this._store);
     this._figFileLoadPromise.then(e => {
       let t = this._store.getState().user;
@@ -7431,7 +7431,7 @@ let lX = class e extends sP(sN(sR)) {
   async showMissingFontDialog(e, t, i, n) {
     let r = this.isFontListLoaded();
     if (getFeatureFlags().ce_new_missing_fonts_logging) {
-      vS(r, t);
+      trackShowMissingFontsPopover(r, t);
     } else {
       let e = this.openFileKey();
       e && !this.missingFontPopoverReported && (trackFileEvent('Show Missing Fonts Popover', e, this._state, {
@@ -8185,7 +8185,7 @@ let lX = class e extends sP(sN(sR)) {
     return isLlamaEnabledForOrg(getOrgByCurrentUserId(currentUserOrgId, orgById));
   }
   isInAiExperimentOrGrantlist() {
-    return $7('bindings');
+    return checkEligibilityStatus('bindings');
   }
   removeImageBackground() {
     $I({

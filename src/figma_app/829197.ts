@@ -4,7 +4,7 @@ import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27
 import { createActionCreator } from "../905/73481";
 import { debugState } from "../905/407919";
 import { userColorProfileAtomFamily } from "../905/888985";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { sendWithRetry } from "../905/910117";
 import { trackUserEvent } from "../figma_app/314264";
 import { FColorSpaceType } from "../figma_app/191312";
@@ -78,16 +78,16 @@ export function $$b4({
   let i = sendWithRetry.put("/api/user", {
     color_profile: e
   });
-  if (t) WB()?.optimisticallyUpdate({
+  if (t) getCurrentLiveGraphClient()?.optimisticallyUpdate({
     UserColorProfilePreference: {
       [t]: {
         colorProfilePreference: e
       }
     }
-  }, i); else {
+  }, i);else {
     let t = debugState.getState().user?.id;
     if (!t) return;
-    WB()?.optimisticallyCreate({
+    getCurrentLiveGraphClient()?.optimisticallyCreate({
       UserColorProfilePreference: {
         "optimistic-id": {
           colorProfilePreference: e,

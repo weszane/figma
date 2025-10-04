@@ -10,7 +10,7 @@ import { logError } from "../905/714362";
 import { FComponentType } from "../figma_app/191312";
 import { CodeComponentsInLibrary, LibraryAssetDataOfType } from "../figma_app/43951";
 import { PrimaryWorkflowEnum as _$$PW } from "../905/497152";
-import { RG, pz, yP } from "../figma_app/825489";
+import { publishedHubFileLibraryKeyAtom, libraryPublishingModeAtom, publishedHubFileIdAtom } from "../figma_app/825489";
 import { propertyMappers } from "../905/395857";
 import { isNotNullish } from "../figma_app/95419";
 import x from "../vendor/239910";
@@ -47,7 +47,7 @@ function b(e) {
 }
 function v(e) {
   return atom(t => {
-    let i = t(RG);
+    let i = t(publishedHubFileLibraryKeyAtom);
     return i ? t(_({
       libraryKey: i,
       assetType: e
@@ -179,11 +179,11 @@ let $$L0 = atom(e => {
     publishStatusAtoms,
     libraryKey,
     fileKey
-  } = e(pz) === LibrarySourceEnum.HUBFILE ? {
+  } = e(libraryPublishingModeAtom) === LibrarySourceEnum.HUBFILE ? {
     libraryAssetAtoms: y,
     publishStatusAtoms: R,
-    libraryKey: e(RG),
-    fileKey: e(yP)
+    libraryKey: e(publishedHubFileLibraryKeyAtom),
+    fileKey: e(publishedHubFileIdAtom)
   } : {
     libraryAssetAtoms: A,
     publishStatusAtoms: k,

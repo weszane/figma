@@ -19,7 +19,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { hidePickerThunk } from "../figma_app/91703";
 import { hideInstanceSwapPicker } from "../905/8732";
-import { uP } from "../figma_app/933328";
+import { loadSharedSymbolOrStateGroup } from "../figma_app/933328";
 import { hideModal } from "../905/156213";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -351,7 +351,7 @@ let $$X0 = registerModal(function (e) {
             preferredItems: es,
             sceneGraph: H,
             onSwapCallback: e => {
-              U(uP({
+              U(loadSharedSymbolOrStateGroup({
                 item: e,
                 callback: t => {
                   em(e.type === PrimaryWorkflowEnum.STATE_GROUP ? getDefaultStateForStateGroup(e, t, openFileKey) : t);

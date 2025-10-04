@@ -24,7 +24,7 @@ import { O as _$$O, w as _$$w } from "../3674/344857";
 import { useCanAccessFullDevMode, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { e as _$$e } from "../905/383776";
 import { useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
-import { Gb } from "../figma_app/933328";
+import { useFileLibrarySubscriptions } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
 import { isVsCodeEnvironment } from "../905/858738";
 import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
@@ -803,7 +803,7 @@ let eX = memo(({
   let v = useSelector(e => e.openFile);
   let _ = v ? v.key : "";
   SI();
-  Gb(_);
+  useFileLibrarySubscriptions(_);
   _$$W();
   let C = getObservableValue(EditorPreferencesApi().enableCodegenMcpServer, !1);
   return jsxs(eG, {

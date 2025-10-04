@@ -11,7 +11,7 @@ import { currentSelectionAtom } from '../905/617744';
 import { EventEmitter } from '../905/690073';
 import { logCustom, setModeEventHandler } from '../905/714362';
 import { debounce } from '../905/915765';
-import { N } from '../905/945673';
+import { eventLogger } from '../905/945673';
 import { atomStoreManager } from '../figma_app/27355';
 import { isDevEnvironment } from '../figma_app/169182';
 import { Rf } from '../figma_app/546509';
@@ -272,11 +272,11 @@ export let $$w0 = new class {
         break;
       }
     }
-    N.isNumberEvent(e) && N.loadTimer.logEvent(e, t);
+    eventLogger.isNumberEvent(e) && eventLogger.loadTimer.logEvent(e, t);
     e === 'receiveNodeChanges' && fullscreenPerfManager.logNodeChangeMsg(t);
   }
   logStringMetric(e, t) {
-    N.isStringEvent(e) && N.loadTimer.logEvent(e, t);
+    eventLogger.isStringEvent(e) && eventLogger.loadTimer.logEvent(e, t);
     gpuFullscreenEventNames.has(e) && fullscreenPerfManager.startFs(e);
   }
   handleAllocationFailureWithNative(e) {

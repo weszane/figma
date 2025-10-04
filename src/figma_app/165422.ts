@@ -11,7 +11,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { isMobileUA, BrowserInfo, isFigmaMobileApp } from "../figma_app/778880";
 import { LargeLoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { getSelectedView } from "../figma_app/386952";
 import { aq } from "../figma_app/412189";
 import { FFileType } from "../figma_app/191312";
@@ -164,7 +164,7 @@ function F(e) {
   let a = aq();
   return ((desktopAPIInstance ? desktopAPIInstance.getZoomFactor() : BrowserInfo.chrome || BrowserInfo.safari ? Promise.resolve(window.outerWidth / window.innerWidth) : Promise.resolve(void 0)).then(e => {
     e && (e < .95 || e > 1.05) && a() && !t && r(!0);
-  }), t || isFigmaMobileApp() || z4.getIsExtension()) ? jsx(j, {
+  }), t || isFigmaMobileApp() || fullscreenAlias.getIsExtension()) ? jsx(j, {
     type: e.type,
     progressPaused: e.progressPaused
   }) : jsx(U, {

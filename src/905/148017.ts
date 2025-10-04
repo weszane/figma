@@ -22,7 +22,7 @@ import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { c6 } from "../905/950959";
 import { valueOrFallback } from "../905/216495";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { Q as _$$Q } from "../figma_app/104130";
 import { KindEnum } from "../905/129884";
 import { calculatePickerPositionLeft } from "../905/959568";
@@ -147,7 +147,7 @@ let ee = (e, t) => {
 };
 let et = _$$b();
 export function $$ei0(e) {
-  let t = o3(nt.useGrid);
+  let t = useLabConfiguration(labConfigurations.useGrid);
   return jsx(dD.Provider, {
     value: {
       useGrid: t

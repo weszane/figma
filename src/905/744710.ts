@@ -48,7 +48,7 @@ import { useTheme } from '../905/289770';
 import { orgSubscriptionAtom } from '../905/296690';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { b as _$$b2, c as _$$c } from '../905/308099';
+import { RadioInputRoot, RadioInputOption } from '../905/308099';
 import { a as _$$a } from '../905/329735';
 import { collaboratorSet } from '../905/332483';
 import { UI3ConditionalWrapper } from '../905/341359';
@@ -110,13 +110,13 @@ import { useDropdownState } from '../905/848862';
 import { V as _$$V } from '../905/849455';
 import { Z as _$$Z } from '../905/854480';
 import { X as _$$X2 } from '../905/857208';
-import { BQ } from '../905/865071';
+import { LegendPrimitive } from '../905/865071';
 import { iv as _$$iv, mc as _$$mc, UC, Uj } from '../905/872285';
 import { sendWithRetry, XHRError } from '../905/910117';
 import { dayjs } from '../905/920142';
 import { removeCommunityProfileUser, changeCommunityProfilePrimaryUser } from '../905/926523';
 import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
-import { q as _$$q } from '../905/932270';
+import { Legend } from '../905/932270';
 import { selectUserFlag } from '../905/940356';
 import { styleBuilderInstance } from '../905/941192';
 import { B as _$$B2 } from '../905/950875';
@@ -125,7 +125,7 @@ import { useRecording } from '../905/959312';
 import { kA as _$$kA, rP as _$$rP, IO } from '../905/962318';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
-import { h1 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { PG } from '../905/997533';
 import { getJobRoleDisplay } from '../3973/538504';
 import { A as _$$A5 } from '../5724/501642';
@@ -1373,17 +1373,17 @@ function ty() {
   });
 }
 function tE(e) {
-  return jsx(_$$b2, {
+  return jsx(RadioInputRoot, {
     readonly: e.disabled,
     onChange: t => {
       e.toggle(e.radioGroupSettings.policyType, t);
     },
     value: e.disabled ? void 0 : e.radioGroupSettings.stateValue,
-    legend: jsx(BQ, {
+    legend: jsx(LegendPrimitive, {
       className: tg,
       children: e.radioGroupSettings.titleText
     }),
-    children: Object.entries(e.radioGroupSettings.options).map(([e, t]) => jsx(_$$c, {
+    children: Object.entries(e.radioGroupSettings.options).map(([e, t]) => jsx(RadioInputOption, {
       value: e,
       label: jsx(Label, {
         children: t
@@ -1597,7 +1597,7 @@ function tk(e) {
           toggle: c,
           disabled: !i.data.sendMeNotifications
         }, e.policyType)), Object.entries(l).map(([e, t]) => jsxs('fieldset', {
-          children: [jsx(BQ, {
+          children: [jsx(LegendPrimitive, {
             className: tg,
             children: e
           }), t.map(e => jsx(tx, {
@@ -2119,7 +2119,7 @@ function iw(e) {
   }).join('\n');
   if (token.expires_at && dayjs.utc(token.expires_at).isBefore(dayjs.utc())) return null;
   let p = token.expires_at ? renderI18nText('tokens.settings.expires', {
-    relativeTimeString: jsx(h1, {
+    relativeTimeString: jsx(RelativeTimeDisplay, {
       date: token.expires_at
     })
   }) : nonExpPatRevocationStage === 'revoked' ? jsxs(Fragment, {
@@ -2338,7 +2338,7 @@ function iR({
       children: [jsx('div', {
         className: 'tokens--devTokenLastUsed--hKrY3',
         children: renderI18nText('tokens.settings.connected_time_ago', {
-          timeAgo: jsx(h1, {
+          timeAgo: jsx(RelativeTimeDisplay, {
             date: t.granted_at
           })
         })
@@ -2427,12 +2427,12 @@ function iF({
       })
     }), jsxs('div', {
       className: iN,
-      children: [e.last_accessed ? jsx(h1, {
+      children: [e.last_accessed ? jsx(RelativeTimeDisplay, {
         date: e.last_accessed,
         capitalize: !0
       }) : '-', jsx('br', {}), jsxs('div', {
         className: iP,
-        children: [renderI18nText('sessions.row.created'), ' ', jsx(h1, {
+        children: [renderI18nText('sessions.row.created'), ' ', jsx(RelativeTimeDisplay, {
           date: e.created_at
         })]
       })]
@@ -2693,12 +2693,12 @@ function iH({
       })
     }), jsxs('div', {
       className: iU,
-      children: [e.last_accessed ? jsx(h1, {
+      children: [e.last_accessed ? jsx(RelativeTimeDisplay, {
         date: e.last_accessed,
         capitalize: !0
       }) : '-', jsx('br', {}), jsxs('div', {
         className: iB,
-        children: [renderI18nText('sessions.row.created'), ' ', jsx(h1, {
+        children: [renderI18nText('sessions.row.created'), ' ', jsx(RelativeTimeDisplay, {
           date: e.created_at
         })]
       })]
@@ -3626,22 +3626,22 @@ let rt = registerModal(e => {
             children: renderI18nText('settings.account_settings.file_view_history_modal.title')
           })
         }), jsxs(DialogBody, {
-          children: [jsxs(_$$b2, {
+          children: [jsxs(RadioInputRoot, {
             autofocus: !0,
-            legend: jsx(_$$q, {
+            legend: jsx(Legend, {
               children: renderI18nText('settings.account_settings.file_view_history_modal.title')
             }),
             value: n,
             onChange: e => {
               o(e);
             },
-            children: [jsx(_$$c, {
+            children: [jsx(RadioInputOption, {
               label: jsx(Label, {
                 children: renderI18nText('settings.account_settings.file_view_history_modal.enabled_label')
               }),
               value: (!1).toString(),
               children: renderI18nText('settings.account_settings.file_view_history_modal.turn_on_description')
-            }, (!1).toString()), jsx(_$$c, {
+            }, (!1).toString()), jsx(RadioInputOption, {
               label: jsx(Label, {
                 children: renderI18nText('settings.account_settings.file_view_history_modal.disabled_label')
               }),

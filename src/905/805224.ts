@@ -16,7 +16,7 @@ import { assertNotNullish } from '../figma_app/465776';
 import { Fullscreen, OperationType, PropertyScope, VariableDataType, VariableResolvedDataType } from '../figma_app/763686';
 import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
 import { Yc } from '../figma_app/930914';
-import { Oe, Yi } from '../figma_app/933328';
+import { loadSharedVariableThunk, loadSharedVariable } from '../figma_app/933328';
 export function $$I3({
   children: e
 }) {
@@ -36,7 +36,7 @@ export function $$I3({
         clearVariableConsumption();
         return;
       }
-      e(Yi({
+      e(loadSharedVariable({
         item: t,
         callback: e => {
           t.resolvedType === VariableResolvedDataType.STRING ? (permissionScopeHandler.user('delete-prop-ref', () => Fullscreen.deleteComponentPropRef(SlotSymbolType.TEXT)), updateVariableConsumption(y$(VariableResolvedDataType.STRING, e))) : t.resolvedType === VariableResolvedDataType.FLOAT && (permissionScopeHandler.user('delete-prop-ref', () => Fullscreen.deleteComponentPropRef(SlotSymbolType.TEXT)), updateVariableConsumption({
@@ -98,7 +98,7 @@ export function $$E0({
   } = u3(g, e);
   async function A(e) {
     if (e) {
-      let i = await u(Oe(e));
+      let i = await u(loadSharedVariableThunk(e));
       assertNotNullish(convertVariableIdToKiwi(i));
       updateVariableConsumption(y$(VariableResolvedDataType.STRING, i));
       t?.();
@@ -131,7 +131,7 @@ function x() {
         clearVariableConsumption(yesNoTrackingEnum.YES);
         return;
       }
-      let i = await e(Oe(t));
+      let i = await e(loadSharedVariableThunk(t));
       assertNotNullish(convertVariableIdToKiwi(i));
       t.resolvedType === VariableResolvedDataType.STRING ? updateVariableConsumption({
         type: VariableDataType.FONT_STYLE,

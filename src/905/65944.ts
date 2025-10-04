@@ -80,7 +80,7 @@ import { bL as _$$bL2, c$ as _$$c$3 } from '../905/867927';
 import { isValidSessionLocalID, sessionLocalIDToString } from '../905/871411';
 import { rW, T7 } from '../905/899866';
 import { bL } from '../905/911410';
-import { q as _$$q } from '../905/932270';
+import { Legend } from '../905/932270';
 import { b as _$$b2 } from '../905/946806';
 import { calculatePickerPositionLeft } from '../905/959568';
 import { colorCSSManipulatorInstance } from '../905/989956';
@@ -130,7 +130,7 @@ import { u as _$$u } from '../figma_app/852050';
 import { generateRecordingKey, useHandleMouseEvent, useSetupPlayback } from '../figma_app/878298';
 import { trackDefinedFileEventWithStore } from '../figma_app/901889';
 import { useLatestRef } from '../figma_app/922077';
-import { Oe } from '../figma_app/933328';
+import { loadSharedVariableThunk } from '../figma_app/933328';
 import { WC } from '../figma_app/973219';
 import { EV } from '../figma_app/975811';
 import { isSitesFileType } from '../figma_app/976749';
@@ -1111,7 +1111,7 @@ function tN({
     }, t);
   }, [S, k, R]);
   let B = async e => {
-    let t = await A(Oe(e));
+    let t = await A(loadSharedVariableThunk(e));
     let i = convertVariableIdToKiwi(t);
     if (!i) return;
     let n = {
@@ -1295,7 +1295,7 @@ function tz(e) {
       children: [jsx(cS, {
         label: renderI18nText('properties_panel.noise.noise_type'),
         input: jsxs(_$$bL2, {
-          legend: jsx(_$$q, {
+          legend: jsx(Legend, {
             children: renderI18nText('properties_panel.noise.noise_type')
           }),
           value: e.paint.noiseType,
@@ -1567,7 +1567,7 @@ function t9(e) {
     }), jsx(cS, {
       label: renderI18nText('properties_panel.pattern.tile_type'),
       input: jsxs(_$$bL2, {
-        legend: jsx(_$$q, {
+        legend: jsx(Legend, {
           children: renderI18nText('properties_panel.pattern.tile_type')
         }),
         value: e.paint.patternTileType === 'RECTANGULAR' ? 'RECTANGULAR' : 'HEXAGONAL',
@@ -1590,7 +1590,7 @@ function t9(e) {
     }), e.paint.patternTileType !== 'RECTANGULAR' && jsx(cS, {
       label: renderI18nText('properties_panel.pattern.direction'),
       input: jsxs(_$$bL2, {
-        legend: jsx(_$$q, {
+        legend: jsx(Legend, {
           children: renderI18nText('properties_panel.pattern.tile_type')
         }),
         value: e.paint.patternTileType === 'VERTICAL_HEXAGONAL' ? 'VERTICAL' : 'HORIZONTAL',

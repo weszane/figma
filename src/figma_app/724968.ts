@@ -7,7 +7,7 @@ import { setupMenu, MenuRootComp, MenuContainerComp, MenuTitleComp, MenuItemComp
 import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/976845";
 import { bL as _$$bL, c$ } from "../905/575478";
-import { q as _$$q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { s as _$$s } from "../905/551945";
 import { T as _$$T } from "../905/632137";
 import { a as _$$a } from "../905/964520";
@@ -817,7 +817,7 @@ function eb({
   return jsx(_$$_, {
     fillWidth: !0,
     children: jsx(_$$bL, {
-      legend: jsx(_$$q, {
+      legend: jsx(Legend, {
         children: renderI18nText("image_ai.grid_legend")
       }),
       value: s,

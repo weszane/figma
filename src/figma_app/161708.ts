@@ -8,7 +8,7 @@ import d from "classnames";
 import { Q } from "../figma_app/67145";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { Oe } from "../figma_app/933328";
+import { loadSharedVariableThunk } from "../figma_app/933328";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { getCommonValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { SG } from "../figma_app/852050";
@@ -210,7 +210,7 @@ function M({
   let y = MH(consumedVariable) ?? MH(_consumedVariable) ?? void 0;
   let T = useCallback(async e => {
     if (e) {
-      let t = await c(Oe(e));
+      let t = await c(loadSharedVariableThunk(e));
       updateVariableConsumption(y$(VariableResolvedDataType.FLOAT, t));
     } else {
       clearVariableConsumption();

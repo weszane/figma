@@ -1,589 +1,946 @@
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { throwTypeError, debug } from "../figma_app/465776";
-import { atom, useAtomWithSubscription, createRemovableAtomFamily } from "../figma_app/27355";
-import { resourceUtils } from "../905/989992";
-import { getResourceDataOrFallback } from "../905/723791";
-import { findBestBranch, getDisplayNameAlt, findBranchById, generateUrl, hasPassword } from "../905/760074";
-import { fileEntityDataMapper } from "../905/943101";
-import { TrackTagsMapper } from "../905/190310";
-import { FEntityType, FFileType } from "../figma_app/191312";
-import { FileCanView, RepoCanView, PrototypeCanView } from "../figma_app/43951";
-import { F as _$$F } from "../905/915030";
-import { useHasUnclaimedAutosaveChanges } from "../figma_app/840917";
-import { Ph, Uj, i4 } from "../905/862913";
-import { getDesignFileUrlWithOptions, buildFileUrl, getDesignFileUrl } from "../905/612685";
-var $$E8 = (e => (e.FILE = "FILE", e.PROTOTYPE = "PROTOTYPE", e.REPO = "REPO", e.PINNED_FILE = "PINNED_FILE", e.OFFLINE_FILE = "OFFLINE_FILE", e))($$E8 || {});
-export function $$y5(e, t) {
+import { useMemo } from "react"
+import { useSelector } from "react-redux"
+import { TrackTagsMapper } from "../905/190310"
+import { buildFileUrl, getDesignFileUrl, getDesignFileUrlWithOptions } from "../905/612685"
+import { getResourceDataOrFallback } from "../905/723791"
+import { findBestBranch, findBranchById, generateUrl, getDisplayNameAlt, hasPassword } from "../905/760074"
+import { hasPasswordProtectedProtoViewAccess, hasPasswordProtectedPublicAccess, hasPasswordProtectedPublicAccessFromEntity } from "../905/862913"
+import { ComFileType } from "../905/915030"
+import { fileEntityDataMapper } from "../905/943101"
+import { resourceUtils } from "../905/989992"
+import { atom, createRemovableAtomFamily, useAtomWithSubscription } from "../figma_app/27355"
+import { FileCanView, PrototypeCanView, RepoCanView } from "../figma_app/43951"
+import { FEntityType, FFileType } from "../figma_app/191312"
+import { debug, throwTypeError } from "../figma_app/465776"
+import { useHasUnclaimedAutosaveChanges } from "../figma_app/840917"
+
+// Tile type enumeration
+enum TileType {
+  FILE = "FILE",
+  PROTOTYPE = "PROTOTYPE",
+  REPO = "REPO",
+  PINNED_FILE = "PINNED_FILE",
+  OFFLINE_FILE = "OFFLINE_FILE",
+}
+
+// Tile data interfaces
+interface FileTile {
+  type: TileType.FILE
+  file: any // TODO: Add proper type
+  sharedWithYouFields: any | null // TODO: Add proper type
+}
+
+interface PinnedFileTile {
+  type: TileType.PINNED_FILE
+  file: any // TODO: Add proper type
+}
+
+interface PrototypeTile {
+  type: TileType.PROTOTYPE
+  prototype: any // TODO: Add proper type
+}
+
+interface RepoTile {
+  type: TileType.REPO
+  repo: any // TODO: Add proper type
+  branches: any[] // TODO: Add proper type
+  selectedBranchKey: string | undefined
+  accessed_at: string
+}
+
+interface OfflineFileTile {
+  type: TileType.OFFLINE_FILE
+  file: any // TODO: Add proper type
+}
+
+type Tile = FileTile | PinnedFileTile | PrototypeTile | RepoTile | OfflineFileTile
+
+/**
+ * Creates a file tile from file entity data
+ * @param fileEntity - The file entity data
+ * @param sharedWithYouFields - Shared information (optional)
+ * @returns FileTile object
+ */
+export function createFileTile(fileEntity: any, sharedWithYouFields?: any): FileTile {
   return {
-    type: "FILE",
+    type: TileType.FILE,
     file: {
-      ...fileEntityDataMapper.toLiveGraph(e),
-      owner: e.owner,
-      trackTags: e.track_tags ? TrackTagsMapper.toLiveGraph(e.track_tags) : null,
-      UserFileRecentAny: e.accessed_at ? {
-        actionAt: new Date(e.accessed_at)
-      } : void 0
+      ...fileEntityDataMapper.toLiveGraph(fileEntity),
+      owner: fileEntity.owner,
+      trackTags: fileEntity.track_tags ? TrackTagsMapper.toLiveGraph(fileEntity.track_tags) : null,
+      UserFileRecentAny: fileEntity.accessed_at
+        ? {
+            actionAt: new Date(fileEntity.accessed_at),
+          }
+        : undefined,
     },
-    sharedWithYouFields: t ?? null
-  };
+    sharedWithYouFields: sharedWithYouFields ?? null,
+  }
 }
-export function $$b0(e) {
+
+/**
+ * Creates a prototype tile
+ * @param prototype - The prototype data
+ * @returns PrototypeTile object
+ */
+export function createPrototypeTile(prototype: any): PrototypeTile {
   return {
-    type: "PROTOTYPE",
-    prototype: e
-  };
+    type: TileType.PROTOTYPE,
+    prototype,
+  }
 }
-export function $$T10(e, t) {
+
+/**
+ * Creates a repository tile
+ * @param repoData - Repository data containing repo and files
+ * @param selectedBranchKeys - Map of selected branch keys by repo ID
+ * @returns RepoTile object
+ */
+export function createRepoTile(repoData: { repo: any, files: any[], timestamp: string }, selectedBranchKeys: Record<string, string | undefined>): RepoTile {
   return {
-    type: "REPO",
-    repo: e.repo,
-    branches: e.files,
-    selectedBranchKey: t[e.repo.id],
-    accessed_at: e.timestamp
-  };
+    type: TileType.REPO,
+    repo: repoData.repo,
+    branches: repoData.files,
+    selectedBranchKey: selectedBranchKeys[repoData.repo.id],
+    accessed_at: repoData.timestamp,
+  }
 }
-export function $$I6(e) {
+
+/**
+ * Creates an offline file tile
+ * @param file - The offline file data
+ * @returns OfflineFileTile object
+ */
+export function createOfflineFileTile(file: any): OfflineFileTile {
   return {
-    type: "OFFLINE_FILE",
-    file: e
-  };
+    type: TileType.OFFLINE_FILE,
+    file,
+  }
 }
-export function $$S11(e) {
-  let t = findBestBranch(e.repo, e.branches, e.selectedBranchKey);
-  return t ? t : (e.repo.default_file_key ? findBestBranch(e.repo, e.branches, e.repo.default_file_key) : null) || e.branches[0];
+
+/**
+ * Finds the best branch for a repository tile
+ * @param repoTile - The repository tile
+ * @returns The best matching branch or the first branch if none found
+ */
+export function findBestBranchForRepoTile(repoTile: RepoTile): any | null {
+  let bestBranch = findBestBranch(repoTile.repo, repoTile.branches, repoTile.selectedBranchKey)
+
+  if (!bestBranch && repoTile.repo.default_file_key) {
+    bestBranch = findBestBranch(repoTile.repo, repoTile.branches, repoTile.repo.default_file_key)
+  }
+
+  return bestBranch || repoTile.branches[0] || null
 }
-export let $$v2 = atom(null);
-export function $$A9(e) {
-  let t = useSelector(e => e.tileSelect);
-  return useMemo(() => e.filter(e => {
-    let r = $$x1.getId(e);
-    switch (e.type) {
-      case "FILE":
-        return t[_$$F.FILES][r];
-      case "PINNED_FILE":
-        return t[_$$F.PINNED_FILES][r];
-      case "PROTOTYPE":
-        return t[_$$F.PROTOTYPES][r];
-      case "REPO":
-        return t[_$$F.REPOS][r];
-      case "OFFLINE_FILE":
-        return t[_$$F.OFFLINE_FILES][r];
-      default:
-        throwTypeError(e);
-    }
-  }), [e, t]);
+
+// Atom for tracking renaming state
+export const renamingStateAtom = atom<{ type: string, id: string } | null>(null)
+
+/**
+ * Filters tiles based on selection state
+ * @param tiles - Array of tiles to filter
+ * @returns Filtered array of selected tiles
+ */
+export function useSelectedTilesFilter(tiles: Tile[]): Tile[] {
+  const tileSelection = useSelector<AppState>(state => state.tileSelect)
+
+  return useMemo(() =>
+    tiles.filter((tile) => {
+      const tileId = TileUtils.getId(tile)
+
+      switch (tile.type) {
+        case TileType.FILE:
+          return tileSelection[ComFileType.FILES][tileId]
+        case TileType.PINNED_FILE:
+          return tileSelection[ComFileType.PINNED_FILES][tileId]
+        case TileType.PROTOTYPE:
+          return tileSelection[ComFileType.PROTOTYPES][tileId]
+        case TileType.REPO:
+          return tileSelection[ComFileType.REPOS][tileId]
+        case TileType.OFFLINE_FILE:
+          return tileSelection[ComFileType.OFFLINE_FILES][tileId]
+        default:
+          throwTypeError(tile)
+      }
+      return false
+    }), [tiles, tileSelection])
 }
-export class $$x1 {
-  static getId(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.key;
-      case "PROTOTYPE":
-        return e.prototype.file_key + "," + e.prototype.page_id + "," + e.prototype.id;
-      case "REPO":
-        return e.repo.id;
-      case "OFFLINE_FILE":
-        return e.file.fileKey;
+
+/**
+ * Utility class for working with tiles
+ */
+export class TileUtils {
+  /**
+   * Gets the unique identifier for a tile
+   * @param tile - The tile
+   * @returns Unique identifier string
+   */
+  static getId(tile: Tile): string {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.key
+      case TileType.PROTOTYPE:
+        return `${tile.prototype.file_key},${tile.prototype.page_id},${tile.prototype.id}`
+      case TileType.REPO:
+        return tile.repo.id
+      case TileType.OFFLINE_FILE:
+        return tile.file.fileKey
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static sameObject(e, t) {
-    if (e.type !== t.type) return !1;
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.key === t.file.key;
-      case "PROTOTYPE":
-        return e.prototype.id === t.prototype.id;
-      case "REPO":
-        return e.repo.id === t.repo.id;
-      case "OFFLINE_FILE":
-        return e.file.fileKey === t.file.fileKey;
+
+  /**
+   * Checks if two tiles represent the same object
+   * @param tile1 - First tile
+   * @param tile2 - Second tile
+   * @returns True if tiles represent the same object
+   */
+  static sameObject(tile1: Tile, tile2: any): boolean {
+    if (tile1.type !== tile2.type)
+      return false
+
+    switch (tile1.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile1.file.key === tile2.file.key
+      case TileType.PROTOTYPE:
+        return tile1.prototype.id === tile2.prototype.id
+      case TileType.REPO:
+        return tile1.repo.id === tile2.repo.id
+      case TileType.OFFLINE_FILE:
+        return tile1.file.fileKey === tile2.file.fileKey
       default:
-        throwTypeError(e);
+        throwTypeError(tile1)
     }
   }
-  static getName(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-      case "OFFLINE_FILE":
-        return e.file.name;
-      case "PROTOTYPE":
-        return e.prototype.fig_file.name + " - " + e.prototype.name;
-      case "REPO":
-        return getDisplayNameAlt(e.repo);
+
+  /**
+   * Gets the display name for a tile
+   * @param tile - The tile
+   * @returns Display name string
+   */
+  static getName(tile: Tile): string {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+      case TileType.OFFLINE_FILE:
+        return tile.file.name
+      case TileType.PROTOTYPE:
+        return `${tile.prototype.fig_file.name} - ${tile.prototype.name}`
+      case TileType.REPO:
+        return getDisplayNameAlt(tile.repo)
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getAccessedAt(e) {
-    switch (e.type) {
-      case "FILE":
-        return e.file.UserFileRecentAny?.actionAt.toISOString();
-      case "PROTOTYPE":
-        return e.prototype.accessed_at;
-      case "REPO":
-        return e.accessed_at;
-      case "PINNED_FILE":
-        return null;
-      case "OFFLINE_FILE":
-        return new Date(e.file.lastUpdatedAt).toISOString();
+
+  /**
+   * Gets the accessed timestamp for a tile
+   * @param tile - The tile
+   * @returns ISO timestamp string or null
+   */
+  static getAccessedAt(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+        return tile.file.UserFileRecentAny?.actionAt.toISOString() || null
+      case TileType.PROTOTYPE:
+        return tile.prototype.accessed_at || null
+      case TileType.REPO:
+        return tile.accessed_at || null
+      case TileType.PINNED_FILE:
+        return null
+      case TileType.OFFLINE_FILE:
+        return new Date(tile.file.lastUpdatedAt).toISOString()
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getSharedAt(e) {
-    switch (e.type) {
-      case "FILE":
-        return e.sharedWithYouFields?.sharedAt?.toISOString() ?? null;
-      case "PROTOTYPE":
-        return e.prototype.shared_at;
-      case "REPO":
-        return e.repo.shared_at;
-      case "PINNED_FILE":
-      case "OFFLINE_FILE":
-        return null;
+
+  /**
+   * Gets the shared timestamp for a tile
+   * @param tile - The tile
+   * @returns ISO timestamp string or null
+   */
+  static getSharedAt(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+        return tile.sharedWithYouFields?.sharedAt?.toISOString() ?? null
+      case TileType.PROTOTYPE:
+        return tile.prototype.shared_at || null
+      case TileType.REPO:
+        return tile.repo.shared_at || null
+      case TileType.PINNED_FILE:
+      case TileType.OFFLINE_FILE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getCreatedAt(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.createdAt.toISOString();
-      case "PROTOTYPE":
-        return e.prototype.fig_file.created_at;
-      case "REPO":
-        return e.branches.reduce((e, t) => e < t.created_at ? e : t.created_at, e.repo.created_at);
-      case "OFFLINE_FILE":
-        return new Date(e.file.createdAt).toISOString();
+
+  /**
+   * Gets the creation timestamp for a tile
+   * @param tile - The tile
+   * @returns ISO timestamp string
+   */
+  static getCreatedAt(tile: Tile): string {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.createdAt.toISOString()
+      case TileType.PROTOTYPE:
+        return tile.prototype.fig_file.created_at
+      case TileType.REPO:
+        return tile.branches.reduce(
+          (earliest, branch) => earliest < branch.created_at ? earliest : branch.created_at,
+          tile.repo.created_at,
+        )
+      case TileType.OFFLINE_FILE:
+        return new Date(tile.file.createdAt).toISOString()
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getTouchedAt(e) {
-    switch (e.type) {
-      case "FILE":
-        return e.file.touchedAt ?? e.file.updatedAt;
-      case "REPO":
-        return e.branches.reduce((e, t) => null !== e && e > t.touched_at ? e : t.touched_at, null);
-      case "PROTOTYPE":
-        return e.prototype.accessed_at;
-      case "PINNED_FILE":
-        return null;
-      case "OFFLINE_FILE":
-        return new Date(e.file.lastUpdatedAt).toISOString();
+
+  /**
+   * Gets the touched timestamp for a tile
+   * @param tile - The tile
+   * @returns Timestamp string or null
+   */
+  static getTouchedAt(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+        return tile.file.touchedAt ?? tile.file.updatedAt ?? null
+      case TileType.REPO:
+        return tile.branches.reduce(
+          (latest, branch) => latest !== null && latest > branch.touched_at ? latest : branch.touched_at,
+          null,
+        )
+      case TileType.PROTOTYPE:
+        return tile.prototype.accessed_at || null
+      case TileType.PINNED_FILE:
+        return null
+      case TileType.OFFLINE_FILE:
+        return new Date(tile.file.lastUpdatedAt).toISOString()
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getTrashedAt(e) {
-    switch (e.type) {
-      case "FILE":
-        return e.file.trashedAt ? e.file.trashedAt.toISOString() : null;
-      case "PROTOTYPE":
-        return e.prototype.fig_file.trashed_at;
-      case "REPO":
-        return e.repo.trashed_at;
-      case "PINNED_FILE":
-      case "OFFLINE_FILE":
-        return null;
+
+  /**
+   * Gets the trashed timestamp for a tile
+   * @param tile - The tile
+   * @returns ISO timestamp string or null
+   */
+  static getTrashedAt(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+        return tile.file.trashedAt ? tile.file.trashedAt.toISOString() : null
+      case TileType.PROTOTYPE:
+        return tile.prototype.fig_file.trashed_at || null
+      case TileType.REPO:
+        return tile.repo.trashed_at || null
+      case TileType.PINNED_FILE:
+      case TileType.OFFLINE_FILE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getTrashedUserId(e) {
-    switch (e.type) {
-      case "FILE":
-        return e.file.trashedUserId;
-      case "PROTOTYPE":
-      case "REPO":
-      case "PINNED_FILE":
-      case "OFFLINE_FILE":
-        return null;
+
+  /**
+   * Gets the user ID who trashed the tile
+   * @param tile - The tile
+   * @returns User ID or null
+   */
+  static getTrashedUserId(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+        return tile.file.trashedUserId || null
+      case TileType.PROTOTYPE:
+      case TileType.REPO:
+      case TileType.PINNED_FILE:
+      case TileType.OFFLINE_FILE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getIsFavorited(e) {
-    switch (e.type) {
-      case "FILE":
-        return !!e.file.isFavorited;
-      case "PROTOTYPE":
-        return !!e.prototype.is_favorited;
-      case "REPO":
-        return !!e.repo.is_favorited;
-      case "PINNED_FILE":
-      case "OFFLINE_FILE":
-        return !1;
+
+  /**
+   * Checks if a tile is favorited
+   * @param tile - The tile
+   * @returns True if favorited
+   */
+  static getIsFavorited(tile: Tile): boolean {
+    switch (tile.type) {
+      case TileType.FILE:
+        return !!tile.file.isFavorited
+      case TileType.PROTOTYPE:
+        return !!tile.prototype.is_favorited
+      case TileType.REPO:
+        return !!tile.repo.is_favorited
+      case TileType.PINNED_FILE:
+      case TileType.OFFLINE_FILE:
+        return false
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getFavoritedResourceType(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-      case "REPO":
-      case "OFFLINE_FILE":
-        return FEntityType.FILE;
-      case "PROTOTYPE":
-        return FEntityType.PROTOTYPE;
+
+  /**
+   * Gets the favorite resource type for a tile
+   * @param tile - The tile
+   * @returns Favorite resource type
+   */
+  static getFavoritedResourceType(tile: Tile): FEntityType {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+      case TileType.REPO:
+      case TileType.OFFLINE_FILE:
+        return FEntityType.FILE
+      case TileType.PROTOTYPE:
+        return FEntityType.PROTOTYPE
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getFileOrMainBranchKey(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.key;
-      case "PROTOTYPE":
-        return e.prototype.file_key;
-      case "REPO":
-        return e.repo.default_file_key ?? void 0;
-      case "OFFLINE_FILE":
-        return;
+
+  /**
+   * Gets the file or main branch key for a tile
+   * @param tile - The tile
+   * @returns File/branch key or undefined
+   */
+  static getFileOrMainBranchKey(tile: Tile): string | undefined {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.key
+      case TileType.PROTOTYPE:
+        return tile.prototype.file_key
+      case TileType.REPO:
+        return tile.repo.default_file_key ?? undefined
+      case TileType.OFFLINE_FILE:
+        return undefined
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getFileOrSelectedBranchKey(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.key;
-      case "PROTOTYPE":
-        return e.prototype.file_key;
-      case "REPO":
-        return $$S11(e).key;
-      case "OFFLINE_FILE":
-        return;
+
+  /**
+   * Gets the file or selected branch key for a tile
+   * @param tile - The tile
+   * @returns File/branch key or undefined
+   */
+  static getFileOrSelectedBranchKey(tile: Tile): string | undefined {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.key
+      case TileType.PROTOTYPE:
+        return tile.prototype.file_key
+      case TileType.REPO:
+        const bestBranch = findBestBranchForRepoTile(tile)
+        return bestBranch?.key
+      case TileType.OFFLINE_FILE:
+        return undefined
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getUrl(e, t) {
-    switch (e.type) {
-      case "FILE":
-        return getDesignFileUrlWithOptions(e.file);
-      case "PINNED_FILE":
-        return buildFileUrl(e);
-      case "PROTOTYPE":
-        return e.prototype.url;
-      case "REPO":
-        let r = findBranchById(e.repo, e.branches, t);
-        return r ? generateUrl(r, e.repo, "file") : "";
-      case "OFFLINE_FILE":
-        return "";
+
+  /**
+   * Gets the URL for a tile
+   * @param tile - The tile
+   * @param branchId - Branch ID for repo tiles
+   * @returns URL string
+   */
+  static getUrl(tile: Tile, branchId?: any): string {
+    switch (tile.type) {
+      case TileType.FILE:
+        return getDesignFileUrlWithOptions(tile.file)
+      case TileType.PINNED_FILE:
+        return buildFileUrl(tile)
+      case TileType.PROTOTYPE:
+        return tile.prototype.url
+      case TileType.REPO: {
+        const branch = findBranchById(tile.repo, tile.branches, branchId)
+        return branch ? generateUrl(branch, tile.repo, "file") : ""
+      }
+      case TileType.OFFLINE_FILE:
+        return ""
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getEditUrl(e, t) {
-    switch (e.type) {
-      case "FILE":
-        return getDesignFileUrl(e.file);
-      case "PINNED_FILE":
+
+  /**
+   * Gets the edit URL for a tile
+   * @param tile - The tile
+   * @param branchId - Branch ID for repo tiles
+   * @returns Edit URL string
+   */
+  static getEditUrl(tile: Tile, branchId?: any): string {
+    switch (tile.type) {
+      case TileType.FILE:
+        return getDesignFileUrl(tile.file)
+      case TileType.PINNED_FILE:
         return buildFileUrl({
-          ...e,
-          allowDefaulting: !0
-        });
-      case "PROTOTYPE":
-        return e.prototype.url;
-      case "REPO":
-        let r = findBranchById(e.repo, e.branches, t);
-        return r ? getDesignFileUrl(r) : "";
-      case "OFFLINE_FILE":
-        return "";
+          ...tile,
+          allowDefaulting: true,
+        })
+      case TileType.PROTOTYPE:
+        return tile.prototype.url
+      case TileType.REPO: {
+        const branch = findBranchById(tile.repo, tile.branches, branchId)
+        return branch ? getDesignFileUrl(branch) : ""
+      }
+      case TileType.OFFLINE_FILE:
+        return ""
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getFavoriteResourceId(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.key;
-      case "PROTOTYPE":
-        return e.prototype.id;
-      case "REPO":
-        return e.repo.default_file_key;
-      case "OFFLINE_FILE":
-        return e.file.fileKey;
+
+  /**
+   * Gets the favorite resource ID for a tile
+   * @param tile - The tile
+   * @returns Resource ID
+   */
+  static getFavoriteResourceId(tile: Tile): string {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.key
+      case TileType.PROTOTYPE:
+        return tile.prototype.id
+      case TileType.REPO:
+        return tile.repo.default_file_key || ""
+      case TileType.OFFLINE_FILE:
+        return tile.file.fileKey
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getIsTeamTemplate(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.isTeamTemplate;
-      case "PROTOTYPE":
-      case "REPO":
-      case "OFFLINE_FILE":
-        return !1;
+
+  /**
+   * Checks if a tile is a team template
+   * @param tile - The tile
+   * @returns True if team template
+   */
+  static getIsTeamTemplate(tile: Tile): boolean {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return !!tile.file.isTeamTemplate
+      case TileType.PROTOTYPE:
+      case TileType.REPO:
+      case TileType.OFFLINE_FILE:
+        return false
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getOrgId(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.parentOrgId;
-      case "PROTOTYPE":
-        return e.prototype.fig_file.parent_org_id ?? e.prototype.fig_file.parent_org_id;
-      case "REPO":
-        return e.repo.parent_org?.id ?? e.repo.parent_org_id;
-      case "OFFLINE_FILE":
-        return e.file.orgId;
+
+  /**
+   * Gets the organization ID for a tile
+   * @param tile - The tile
+   * @returns Organization ID or null
+   */
+  static getOrgId(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.parentOrgId || null
+      case TileType.PROTOTYPE:
+        return tile.prototype.fig_file.parent_org_id ?? tile.prototype.fig_file.parent_org_id 
+      case TileType.REPO:
+        return tile.repo.parent_org?.id ?? tile.repo.parent_org_id 
+      case TileType.OFFLINE_FILE:
+        return tile.file.orgId || null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getFavoriteResourceTeamId(e) {
-    switch (e.type) {
-      case "FILE":
-        return e.file.teamId;
-      case "PINNED_FILE":
+
+  /**
+   * Gets the favorite resource team ID for a tile
+   * @param tile - The tile
+   * @returns Team ID or null
+   */
+  static getFavoriteResourceTeamId(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+        return tile.file.teamId || null
+      case TileType.PINNED_FILE:
+        return null
+      case TileType.PROTOTYPE:
+        return tile.prototype.parent_team?.id ?? tile.prototype.fig_file?.team_id 
+      case TileType.REPO:
+        return tile.repo.parent_team?.id ?? tile.repo.team_id 
       default:
-        return null;
-      case "PROTOTYPE":
-        return e.prototype.parent_team?.id ?? e.prototype.fig_file?.team_id;
-      case "REPO":
-        return e.repo.parent_team?.id ?? e.repo.team_id;
+        throwTypeError(tile)
     }
   }
-  static getSharedBy(e) {
-    switch (e.type) {
-      case "FILE":
-        return e.sharedWithYouFields?.sharedByUser?.id;
-      case "PROTOTYPE":
-        return e.prototype.shared_by_user?.id ?? e.prototype.shared_by;
-      case "REPO":
-        return e.repo.shared_by_user?.id ?? e.repo.shared_by;
-      case "PINNED_FILE":
-      case "OFFLINE_FILE":
-        return null;
+
+  /**
+   * Gets the user ID who shared the tile
+   * @param tile - The tile
+   * @returns User ID or null
+   */
+  static getSharedBy(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+        return tile.sharedWithYouFields?.sharedByUser?.id || null
+      case TileType.PROTOTYPE:
+        return tile.prototype.shared_by_user?.id ?? tile.prototype.shared_by 
+      case TileType.REPO:
+        return tile.repo.shared_by_user?.id ?? tile.repo.shared_by 
+      case TileType.PINNED_FILE:
+      case TileType.OFFLINE_FILE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getSharedByName(e) {
-    switch (e.type) {
-      case "FILE":
-        return e.sharedWithYouFields?.sharedByUser?.name;
-      case "PROTOTYPE":
-        return e.prototype.shared_by_user?.name;
-      case "REPO":
-        return e.repo.shared_by_user?.name;
-      case "PINNED_FILE":
-        debug(!0, "Cannot get shared by name from a pinned file");
-        return null;
-      case "OFFLINE_FILE":
-        debug(!0, "Cannot get shared by name from an offline file");
-        return null;
+
+  /**
+   * Gets the name of the user who shared the tile
+   * @param tile - The tile
+   * @returns User name or null
+   */
+  static getSharedByName(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+        return tile.sharedWithYouFields?.sharedByUser?.name || null
+      case TileType.PROTOTYPE:
+        return tile.prototype.shared_by_user?.name || null
+      case TileType.REPO:
+        return tile.repo.shared_by_user?.name || null
+      case TileType.PINNED_FILE:
+        debug(true, "Cannot get shared by name from a pinned file")
+        return null
+      case TileType.OFFLINE_FILE:
+        debug(true, "Cannot get shared by name from an offline file")
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getOwner(e) {
-    switch (e.type) {
-      case "FILE":
-        return e.file.owner;
-      case "PINNED_FILE":
-      case "PROTOTYPE":
-      case "REPO":
-      case "OFFLINE_FILE":
-        debug(!0, "Did not expect to render owner for non-file tiles");
-        return;
+
+  /**
+   * Gets the owner of a tile
+   * @param tile - The tile
+   * @returns Owner information or undefined
+   */
+  static getOwner(tile: Tile): any | undefined {
+    switch (tile.type) {
+      case TileType.FILE:
+        return tile.file.owner
+      case TileType.PINNED_FILE:
+      case TileType.PROTOTYPE:
+      case TileType.REPO:
+      case TileType.OFFLINE_FILE:
+        debug(true, "Did not expect to render owner for non-file tiles")
+        return undefined
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static useIsRenaming(e) {
-    let t = useAtomWithSubscription($$v2);
-    return $$x1.isRenaming(e, t);
+
+  /**
+   * Hook to check if a tile is currently being renamed
+   * @param tile - The tile
+   * @returns True if renaming
+   */
+  static useIsRenaming(tile: Tile): boolean {
+    const renamingState = useAtomWithSubscription(renamingStateAtom)
+    return TileUtils.isRenaming(tile, renamingState)
   }
-  static isRenaming(e, t) {
-    if (!t) return !1;
-    switch (e.type) {
-      case "FILE":
-        return "FILE" === t.type && t.id === e.file.key;
-      case "OFFLINE_FILE":
-        return "FILE" === t.type && t.id === e.file.fileKey;
-      case "REPO":
-        return "REPO" === t.type && t.id === e.repo.id;
-      case "PINNED_FILE":
-      case "PROTOTYPE":
-        return !1;
+
+  /**
+   * Checks if a tile is currently being renamed
+   * @param tile - The tile
+   * @param renamingState - Current renaming state
+   * @returns True if renaming
+   */
+  static isRenaming(tile: Tile, renamingState: { type: string, id: string } | null): boolean {
+    if (!renamingState)
+      return false
+
+    switch (tile.type) {
+      case TileType.FILE:
+        return renamingState.type === "FILE" && renamingState.id === tile.file.key
+      case TileType.OFFLINE_FILE:
+        return renamingState.type === "FILE" && renamingState.id === tile.file.fileKey
+      case TileType.REPO:
+        return renamingState.type === "REPO" && renamingState.id === tile.repo.id
+      case TileType.PINNED_FILE:
+      case TileType.PROTOTYPE:
+        return false
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getIsPasswordProtected(e) {
-    switch (e.type) {
-      case "FILE":
-        return Ph(e.file);
-      case "REPO":
-        return hasPassword(e.repo);
-      case "PROTOTYPE":
-        return Uj(e.prototype.fig_file) || i4(e.prototype.fig_file);
-      case "PINNED_FILE":
-        return i4({
-          has_file_link_password: e.file.hasFileLinkPassword,
-          link_access: e.file.linkAccess
-        });
-      case "OFFLINE_FILE":
-        return !1;
+
+  /**
+   * Checks if a tile is password protected
+   * @param tile - The tile
+   * @returns True if password protected
+   */
+  static getIsPasswordProtected(tile: Tile): boolean {
+    switch (tile.type) {
+      case TileType.FILE:
+        return hasPasswordProtectedPublicAccess(tile.file)
+      case TileType.REPO:
+        return hasPassword(tile.repo)
+      case TileType.PROTOTYPE:
+        return hasPasswordProtectedProtoViewAccess(tile.prototype.fig_file)
+          || hasPasswordProtectedPublicAccessFromEntity(tile.prototype.fig_file)
+      case TileType.PINNED_FILE:
+        return hasPasswordProtectedPublicAccessFromEntity({
+          has_file_link_password: tile.file.hasFileLinkPassword,
+          link_access: tile.file.linkAccess,
+        })
+      case TileType.OFFLINE_FILE:
+        return false
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getFolderId(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.folderId;
-      case "REPO":
-        return e.repo.folder_id;
-      case "PROTOTYPE":
-        return e.prototype.fig_file.folder_id;
-      case "OFFLINE_FILE":
-        return null;
+
+  /**
+   * Gets the folder ID for a tile
+   * @param tile - The tile
+   * @returns Folder ID or null
+   */
+  static getFolderId(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.folderId || null
+      case TileType.REPO:
+        return tile.repo.folder_id || null
+      case TileType.PROTOTYPE:
+        return tile.prototype.fig_file.folder_id || null
+      case TileType.OFFLINE_FILE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getTeamId(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.teamId;
-      case "PROTOTYPE":
-        return e.prototype.parent_team?.id ?? null;
-      case "REPO":
-        return e.repo.team_id;
-      case "OFFLINE_FILE":
-        return null;
+
+  /**
+   * Gets the team ID for a tile
+   * @param tile - The tile
+   * @returns Team ID or null
+   */
+  static getTeamId(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.teamId || null
+      case TileType.PROTOTYPE:
+        return tile.prototype.parent_team?.id ?? null
+      case TileType.REPO:
+        return tile.repo.team_id || null
+      case TileType.OFFLINE_FILE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getThumbnailUrl(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.thumbnailUrlOverride ?? e.file.thumbnailUrl;
-      case "REPO":
-        let t = $$S11(e);
-        return t ? t.thumbnail_url_override ?? t.thumbnail_url : null;
-      case "PROTOTYPE":
-        return e.prototype.thumbnail_url;
-      case "OFFLINE_FILE":
-        return null;
+
+  /**
+   * Gets the thumbnail URL for a tile
+   * @param tile - The tile
+   * @returns Thumbnail URL or null
+   */
+  static getThumbnailUrl(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.thumbnailUrlOverride ?? tile.file.thumbnailUrl ?? null
+      case TileType.REPO: {
+        const bestBranch = findBestBranchForRepoTile(tile)
+        return bestBranch ? (bestBranch.thumbnail_url_override ?? bestBranch.thumbnail_url) : null
+      }
+      case TileType.PROTOTYPE:
+        return tile.prototype.thumbnail_url || null
+      case TileType.OFFLINE_FILE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getIsThumbnailFullWidth(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return !!e.file.thumbnailGuid;
-      case "REPO":
-        let t = $$S11(e);
-        return t ? t.thumbnail_guid : null;
-      case "PROTOTYPE":
-        return !0;
-      case "OFFLINE_FILE":
-        return null;
+
+  /**
+   * Checks if the thumbnail should be full width for a tile
+   * @param tile - The tile
+   * @returns True if full width, null for unknown
+   */
+  static getIsThumbnailFullWidth(tile: Tile): boolean | null {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return !!tile.file.thumbnailGuid
+      case TileType.REPO: {
+        const bestBranch = findBestBranchForRepoTile(tile)
+        return bestBranch ? !!bestBranch.thumbnail_guid : null
+      }
+      case TileType.PROTOTYPE:
+        return true
+      case TileType.OFFLINE_FILE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getEditorType(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-      case "OFFLINE_FILE":
-        return e.file.editorType;
-      case "REPO":
-        return FFileType.DESIGN;
-      case "PROTOTYPE":
-        return null;
+
+  /**
+   * Gets the editor type for a tile
+   * @param tile - The tile
+   * @returns Editor type or null
+   */
+  static getEditorType(tile: Tile): FFileType | null {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+      case TileType.OFFLINE_FILE:
+        return tile.file.editorType
+      case TileType.REPO:
+        return FFileType.DESIGN
+      case TileType.PROTOTYPE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getClientMeta(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.clientMeta;
-      case "REPO":
-        let t = $$S11(e);
-        return t ? t.client_meta : null;
-      case "PROTOTYPE":
-      case "OFFLINE_FILE":
-        return null;
+
+  /**
+   * Gets client metadata for a tile
+   * @param tile - The tile
+   * @returns Client metadata or null
+   */
+  static getClientMeta(tile: Tile): any | null {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.clientMeta || null
+      case TileType.REPO: {
+        const bestBranch = findBestBranchForRepoTile(tile)
+        return bestBranch ? bestBranch.client_meta : null
+      }
+      case TileType.PROTOTYPE:
+      case TileType.OFFLINE_FILE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
-  static getPreviewThumbnailUrls(e) {
-    return "FILE" === e.type ? e.file.signedPreviewThumbnailUrls : "REPO" === e.type ? $$S11(e)?.preview_thumbnail_urls : void 0;
+
+  /**
+   * Gets preview thumbnail URLs for a tile
+   * @param tile - The tile
+   * @returns Preview thumbnail URLs or undefined
+   */
+  static getPreviewThumbnailUrls(tile: Tile): string[] | undefined {
+    if (tile.type === TileType.FILE) {
+      return tile.file.signedPreviewThumbnailUrls
+    }
+
+    if (tile.type === TileType.REPO) {
+      const bestBranch = findBestBranchForRepoTile(tile)
+      return bestBranch?.preview_thumbnail_urls
+    }
+
+    return undefined
   }
-  static getFileKeyForAutosaveChanges(e) {
-    switch (e.type) {
-      case "FILE":
-      case "PINNED_FILE":
-        return e.file.key;
-      case "PROTOTYPE":
-        return e.prototype.file_key;
-      case "REPO":
-        return $$S11(e)?.key;
-      case "OFFLINE_FILE":
-        return null;
+
+  /**
+   * Gets the file key for autosave changes
+   * @param tile - The tile
+   * @returns File key or null
+   */
+  static getFileKeyForAutosaveChanges(tile: Tile): string | null {
+    switch (tile.type) {
+      case TileType.FILE:
+      case TileType.PINNED_FILE:
+        return tile.file.key
+      case TileType.PROTOTYPE:
+        return tile.prototype.file_key
+      case TileType.REPO: {
+        const bestBranch = findBestBranchForRepoTile(tile)
+        return bestBranch?.key || null
+      }
+      case TileType.OFFLINE_FILE:
+        return null
       default:
-        throwTypeError(e);
+        throwTypeError(tile)
     }
   }
 }
-export function $$N4(e) {
-  let t = $$x1.getFileKeyForAutosaveChanges(e);
-  return useHasUnclaimedAutosaveChanges(t || "");
+
+/**
+ * Hook to check for unclaimed autosave changes
+ * @param tile - The tile
+ * @returns Result from useHasUnclaimedAutosaveChanges hook
+ */
+export function useTileAutosaveChanges(tile: Tile): any {
+  const fileKey = TileUtils.getFileKeyForAutosaveChanges(tile)
+  return useHasUnclaimedAutosaveChanges(fileKey || "")
 }
-let $$C7 = createRemovableAtomFamily(e => atom(t => "FILE" === e.type || "PINNED_FILE" === e.type ? t(FileCanView.Query({
-  key: e.file.key
-})).transform(e => !!e.file?.hasPermission) : "REPO" === e.type ? t(RepoCanView.Query({
-  repoId: e.repo.id
-})).transform(e => !!getResourceDataOrFallback(e.repo)?.canView) : "PROTOTYPE" === e.type ? t(PrototypeCanView.Query({
-  prototypeId: e.prototype.id
-})).transform(e => !!getResourceDataOrFallback(e.prototype)?.canRead) : "OFFLINE_FILE" === e.type ? resourceUtils.loaded(!0) : void throwTypeError(e)), $$x1.sameObject);
-let $$w3 = {
-  FILE: _$$F.FILES,
-  PROTOTYPE: _$$F.PROTOTYPES,
-  REPO: _$$F.REPOS,
-  PINNED_FILE: _$$F.PINNED_FILES,
-  OFFLINE_FILE: _$$F.OFFLINE_FILES
-};
-export const Nu = $$b0;
-export const Tf = $$x1;
-export const Y6 = $$v2;
-export const YC = $$w3;
-export const c_ = $$N4;
-export const fA = $$y5;
-export const gB = $$I6;
-export const hi = $$C7;
-export const nb = $$E8;
-export const nw = $$A9;
-export const uy = $$T10;
-export const yF = $$S11;
+
+// Permission checking atom family
+const tilePermissionAtomFamily = createRemovableAtomFamily(
+  (tile: Tile) => atom((query) => {
+    if (tile.type === TileType.FILE || tile.type === TileType.PINNED_FILE) {
+      return query(FileCanView.Query({
+        key: tile.file.key,
+      })).transform(result => !!result.file?.hasPermission)
+    }
+
+    if (tile.type === TileType.REPO) {
+      return query(RepoCanView.Query({
+        repoId: tile.repo.id,
+      })).transform(result => !!getResourceDataOrFallback(result.repo)?.canView)
+    }
+
+    if (tile.type === TileType.PROTOTYPE) {
+      return query(PrototypeCanView.Query({
+        prototypeId: tile.prototype.id,
+      })).transform(result => !!getResourceDataOrFallback(result.prototype)?.canRead)
+    }
+
+    if (tile.type === TileType.OFFLINE_FILE) {
+      return resourceUtils.loaded(true)
+    }
+
+    throwTypeError(tile)
+  }),
+  TileUtils.sameObject,
+)
+
+// Mapping of tile types to component file types
+const tileTypeToComponentFileTypeMap: Record<TileType, string> = {
+  [TileType.FILE]: ComFileType.FILES,
+  [TileType.PROTOTYPE]: ComFileType.PROTOTYPES,
+  [TileType.REPO]: ComFileType.REPOS,
+  [TileType.PINNED_FILE]: ComFileType.PINNED_FILES,
+  [TileType.OFFLINE_FILE]: ComFileType.OFFLINE_FILES,
+}
+
+// Export aliases for backward compatibility
+export const createPrototypeTileAlias = createPrototypeTile
+export const TileUtilsAlias = TileUtils
+export const renamingStateAtomAlias = renamingStateAtom
+export const tileTypeToComponentFileTypeMapAlias = tileTypeToComponentFileTypeMap
+export const useTileAutosaveChangesAlias = useTileAutosaveChanges
+export const createFileTileAlias = createFileTile
+export const createOfflineFileTileAlias = createOfflineFileTile
+export const tilePermissionAtomFamilyAlias = tilePermissionAtomFamily
+export const TileTypeEnum = TileType
+export const useSelectedTilesFilterAlias = useSelectedTilesFilter
+export const createRepoTileAlias = findBestBranchForRepoTile

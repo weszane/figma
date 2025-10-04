@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import a from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
-import { Un } from "../figma_app/591738";
+import { isCommunityHomeShelfEnabled } from "../figma_app/591738";
 import { isInvalidValue } from "../905/216495";
 import { wv, uM, g5, Iz } from "../905/888175";
 import { yF, r6 } from "../figma_app/731560";
@@ -43,7 +43,7 @@ export function $$E7({
 }
 export function $$y6() {
   let e = useSelector(e => e.isMakeSomethingV2Active);
-  let t = Un();
+  let t = isCommunityHomeShelfEnabled();
   return e && !t;
 }
 export const ME = $$m0;

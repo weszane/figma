@@ -1,50 +1,144 @@
-import n from "../vendor/128080";
-var i = n;
-var $$a2 = (e => (e[e.NORMAL = 0] = "NORMAL", e[e.ACTIVE = 1] = "ACTIVE", e[e.DIMMED = 2] = "DIMMED", e))($$a2 || {});
-export function $$s0(e, t) {
-  return `${100 * Math.round(e.x / 100)},${100 * Math.round(e.y / 100)},${t}`;
+import { isEqual } from "lodash-es";
+
+
+
+// Pin visibility states
+export enum PinVisibilityState {
+  NORMAL = 0,
+  ACTIVE = 1,
+  DIMMED = 2
 }
-export function $$o4(e, t) {
-  if (e.isSinglePin && t.isSinglePin) {
-    var r;
-    var n;
-    r = e.pins[0];
-    n = t.pins[0];
-    return r.x !== n.x || r.y !== n.y || !i()(r.avatars, n.avatars) || !i()(r.previewMessageMeta, n.previewMessageMeta) || r.isUnread !== n.isUnread || r.numUnreadReplies !== n.numUnreadReplies || r.isResolved !== n.isResolved || !i()(r.selectionBoxAnchor, n.selectionBoxAnchor) || !i()(r.otherBoundingBoxes, n.otherBoundingBoxes) || !i()(r.isPinnedToFile, n.isPinnedToFile);
+
+// Format pin coordinates to a standardized string representation
+export function formatPinCoordinates(point: { x: number; y: number }, zoomLevel: number): string {
+  const roundedX = 100 * Math.round(point.x / 100)
+  const roundedY = 100 * Math.round(point.y / 100)
+  return `${roundedX},${roundedY},${zoomLevel}`
+}
+
+// Compare two pin collections for equality
+export function arePinCollectionsEqual(
+  firstCollection: {
+    isSinglePin: boolean
+    pins: Array<{
+      x: number
+      y: number
+      avatars: any
+      previewMessageMeta: any
+      isUnread: boolean
+      numUnreadReplies: number
+      isResolved: boolean
+      selectionBoxAnchor: any
+      otherBoundingBoxes: any
+      isPinnedToFile: any
+    }>
+    isUnread: boolean
+    isPinnedToFile: any
+  },
+  secondCollection: {
+    isSinglePin: boolean
+    pins: Array<{
+      x: number
+      y: number
+      avatars: any
+      previewMessageMeta: any
+      isUnread: boolean
+      numUnreadReplies: number
+      isResolved: boolean
+      selectionBoxAnchor: any
+      otherBoundingBoxes: any
+      isPinnedToFile: any
+    }>
+    isUnread: boolean
+    isPinnedToFile: any
   }
-  return e.pins.length !== t.pins.length || e.isUnread !== t.isUnread || e.isPinnedToFile !== t.isPinnedToFile;
+): boolean {
+  // Compare single pin collections
+  if (firstCollection.isSinglePin && secondCollection.isSinglePin) {
+    const firstPin = firstCollection.pins[0]
+    const secondPin = secondCollection.pins[0]
+
+    return !(
+      firstPin.x !== secondPin.x ||
+      firstPin.y !== secondPin.y ||
+      !isEqual(firstPin.avatars, secondPin.avatars) ||
+      !isEqual(firstPin.previewMessageMeta, secondPin.previewMessageMeta) ||
+      firstPin.isUnread !== secondPin.isUnread ||
+      firstPin.numUnreadReplies !== secondPin.numUnreadReplies ||
+      firstPin.isResolved !== secondPin.isResolved ||
+      !isEqual(firstPin.selectionBoxAnchor, secondPin.selectionBoxAnchor) ||
+      !isEqual(firstPin.otherBoundingBoxes, secondPin.otherBoundingBoxes) ||
+      !isEqual(firstPin.isPinnedToFile, secondPin.isPinnedToFile)
+    )
+  }
+
+  // Compare multi-pin collections
+  return !(
+    firstCollection.pins.length !== secondCollection.pins.length ||
+    firstCollection.isUnread !== secondCollection.isUnread ||
+    firstCollection.isPinnedToFile !== secondCollection.isPinnedToFile
+  )
 }
-export let $$l1 = {
+
+// Default empty pin collection
+export const emptyPinCollection = {
   length: 0,
   leafNodes: new Set([]),
   all: () => [],
   getById: () => null,
   getParentOf: () => null,
-  zoomScale: -1
-};
-export function $$d3(e) {
-  let t = new Map();
-  let r = [];
-  e.forEach(e => {
-    if (t.has(e.user.id)) {
-      let n = t.get(e.user.id);
-      r[n].num_unread_comments += e.isUnread ? 1 : 0;
-      r[n].num_comments += 1;
-    } else {
-      r.push({
-        avatar_url: e.user.img_url,
-        avatar_user_id: e.user.id,
-        avatar_user_handle: e.user.handle,
-        num_unread_comments: e.isUnread ? 1 : 0,
-        num_comments: 1
-      });
-      t.set(e.user.id, r.length - 1);
-    }
-  });
-  return r;
+  zoomScale: -1,
 }
-export const Ao = $$s0;
-export const Ko = $$l1;
-export const LX = $$a2;
-export const c4 = $$d3;
-export const xN = $$o4;
+
+// Aggregate user comment statistics from pin data
+export function aggregateUserComments(
+  pins: Array<{
+    user: {
+      id: string
+      img_url: string
+      handle: string
+    }
+    isUnread: boolean
+  }>
+): Array<{
+  avatar_url: string
+  avatar_user_id: string
+  avatar_user_handle: string
+  num_unread_comments: number
+  num_comments: number
+}> {
+  const userIndexMap = new Map<string, number>()
+  const userStats: Array<{
+    avatar_url: string
+    avatar_user_id: string
+    avatar_user_handle: string
+    num_unread_comments: number
+    num_comments: number
+  }> = []
+
+  pins.forEach((pin) => {
+    if (userIndexMap.has(pin.user.id)) {
+      const index = userIndexMap.get(pin.user.id)!
+      userStats[index].num_unread_comments += pin.isUnread ? 1 : 0
+      userStats[index].num_comments += 1
+    } else {
+      userStats.push({
+        avatar_url: pin.user.img_url,
+        avatar_user_id: pin.user.id,
+        avatar_user_handle: pin.user.handle,
+        num_unread_comments: pin.isUnread ? 1 : 0,
+        num_comments: 1,
+      })
+      userIndexMap.set(pin.user.id, userStats.length - 1)
+    }
+  })
+
+  return userStats
+}
+
+// Export aliases for backward compatibility
+export const Ao = formatPinCoordinates
+export const Ko = emptyPinCollection
+export const LX = PinVisibilityState
+export const c4 = aggregateUserComments
+export const xN = arePinCollectionsEqual

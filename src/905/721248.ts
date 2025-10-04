@@ -25,7 +25,7 @@ import { ov, S2 } from '../905/300250';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R } from '../905/307199';
-import { b as _$$b, c as _$$c } from '../905/308099';
+import { RadioInputRoot, RadioInputOption } from '../905/308099';
 import { v as _$$v } from '../905/318279';
 import { wG } from '../905/331989';
 import { enterPreviewDetachedState } from '../905/346794';
@@ -76,12 +76,12 @@ import { nS as _$$nS, tW as _$$tW, ak, FA, qj, ss, wy } from '../905/746499';
 import { G as _$$G2 } from '../905/750789';
 import { ErrorBoundaryCrash, useErrorBoundaryContext } from '../905/751457';
 import { handleModalError } from '../905/760074';
-import { WB } from '../905/761735';
+import { getCurrentLiveGraphClient } from '../905/761735';
 import { getMentionsResult } from '../905/772425';
 import { convertKiwiToVariableIdString } from '../905/805904';
 import { w as _$$w2 } from '../905/835474';
 import { yG } from '../905/859698';
-import { ud } from '../905/862913';
+import { useFileByKey } from '../905/862913';
 import { ProjectDevelopmentPhases } from '../905/869235';
 import { m as _$$m } from '../905/871166';
 import { areSessionLocalIDsEqual, sessionLocalIDToString } from '../905/871411';
@@ -89,7 +89,7 @@ import { sendWithRetry } from '../905/910117';
 import { dayjs } from '../905/920142';
 import { selectViewAction } from '../905/929976';
 import { $n as _$$$n } from '../905/930279';
-import { q as _$$q } from '../905/932270';
+import { Legend } from '../905/932270';
 import o, { noop } from 'lodash-es';
 ;
 import { fileEntityDataMapper } from '../905/943101';
@@ -97,7 +97,7 @@ import { a as _$$a } from '../905/964520';
 import { filesByLibraryKeyAtom } from '../905/977779';
 import { Ar, GC, SS } from '../905/984793';
 import { rY } from '../905/985490';
-import { h1 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { B8 } from '../905/993733';
 import { A as _$$A6 } from '../1617/380980';
 import { A as _$$A4 } from '../1617/466789';
@@ -163,7 +163,7 @@ createOptimistThunk(async (e, t) => {
     let e = sendWithRetry.put(`/api/merge_requests/${t.mergeRequestKey}`, {
       closed: t.closed
     });
-    await WB()?.optimisticallyUpdate({
+    await getCurrentLiveGraphClient()?.optimisticallyUpdate({
       MergeRequest: {
         [t.mergeRequestId]: {
           closedAt: t.closed ? new Date() : null
@@ -197,7 +197,7 @@ let ed = createOptimistThunk(async (e, t) => {
         notes: t.notes
       })
     });
-    await WB()?.optimisticallyUpdate({
+    await getCurrentLiveGraphClient()?.optimisticallyUpdate({
       MergeRequestReviewer: {
         [t.mergeRequestReviewerId]: {
           ...(!t.approved && t.changesRequested && {
@@ -231,7 +231,7 @@ let ec = createOptimistThunk(async (e, t) => {
     let e = sendWithRetry.put(`/api/merge_requests/${t.mergeRequestKey}/reviewers`, {
       notes: t.notes
     });
-    await WB()?.optimisticallyUpdate({
+    await getCurrentLiveGraphClient()?.optimisticallyUpdate({
       MergeRequestReviewer: {
         [t.mergeRequestReviewerId]: {
           notes: t.notes
@@ -249,7 +249,7 @@ let ec = createOptimistThunk(async (e, t) => {
 let eu = createOptimistThunk(async (e, t) => {
   try {
     let e = sendWithRetry.post(`/api/merge_requests/${t.mergeRequestKey}/${t.isApprove ? 'approve' : 'unapprove'}`);
-    await WB()?.optimisticallyUpdate({
+    await getCurrentLiveGraphClient()?.optimisticallyUpdate({
       MergeRequestReviewer: {
         [t.mergeRequestReviewerId]: {
           approvedAt: t.isApprove ? new Date() : null
@@ -271,7 +271,7 @@ let ep = createOptimistThunk(async (e, t) => {
       description: t.description,
       include_invited: 'true'
     });
-    await WB()?.optimisticallyUpdate({
+    await getCurrentLiveGraphClient()?.optimisticallyUpdate({
       MergeRequest: {
         [t.mergeRequestId]: {
           description: t.description,
@@ -298,7 +298,7 @@ let em = createOptimistThunk(async (e, t) => {
       ...t.mergeRequestPayload,
       include_invited: 'true'
     });
-    await WB()?.optimisticallyUpdate({
+    await getCurrentLiveGraphClient()?.optimisticallyUpdate({
       MergeRequest: {
         [t.mergeRequestId]: {
           title: t.mergeRequestPayload.title,
@@ -2314,8 +2314,8 @@ let iW = registerModal(e => {
       }), jsxs(DialogBody, {
         children: [jsx('form', {
           className: 'branching_reviews_modals--radioGroup--eWuSc',
-          children: jsxs(_$$b, {
-            legend: jsx(_$$q, {
+          children: jsxs(RadioInputRoot, {
+            legend: jsx(Legend, {
               children: getI18nString('collaboration.branching_reviews.finish_your_review')
             }),
             value: p,
@@ -2323,12 +2323,12 @@ let iW = registerModal(e => {
               m(e);
               inputRef.current?.focus();
             },
-            children: [jsx(_$$c, {
+            children: [jsx(RadioInputOption, {
               label: jsx(Label, {
                 children: renderI18nText('collaboration.branching_reviews.approve')
               }),
               value: 'approve'
-            }), jsx(_$$c, {
+            }), jsx(RadioInputOption, {
               label: jsx(Label, {
                 children: renderI18nText('collaboration.branching_reviews.suggest_changes')
               }),
@@ -3071,14 +3071,14 @@ function nS(e) {
   }) : e.fileMerge && e.fileMerge.mergeResultCheckpointId ? jsx('span', {
     children: renderI18nText('collaboration.branching_to_source.this_branch_was_merged_into', {
       sourceFileName: i,
-      relativeTimestamp: jsx(h1, {
+      relativeTimestamp: jsx(RelativeTimeDisplay, {
         date: e.fileMerge.updatedAt
       })
     })
   }) : e.isBranchArchived ? jsx('span', {
     children: renderI18nText('collaboration.branching_to_source.branch_was_archived', {
       branchFileName: r,
-      relativeTimestamp: e.branchFile.trashed_at ? jsx(h1, {
+      relativeTimestamp: e.branchFile.trashed_at ? jsx(RelativeTimeDisplay, {
         date: e.branchFile.trashed_at
       }) : null
     })
@@ -5068,7 +5068,7 @@ let rR = memo(e => {
   let {
     conflictGroups
   } = t;
-  let y = ud();
+  let y = useFileByKey();
   let b = useAtomWithSubscription(filesByLibraryKeyAtom);
   let I = useSelector(e => e.mirror.appModel.pagesList);
   let x = useMemo(() => function (e, t, i, n, r, a) {

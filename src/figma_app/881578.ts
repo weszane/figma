@@ -1,5 +1,5 @@
 import { atomStoreManager } from "../figma_app/27355";
-import { GK } from "../905/37051";
+import { RelatedLinksManager } from "../905/37051";
 import { Q } from "../905/917104";
 import { e3 } from "../figma_app/852050";
 export let $$n1;
@@ -8,7 +8,7 @@ export function $$l0() {
 }
 class d {
   constructor() {
-    this.developerRelatedLinksManager = new GK();
+    this.developerRelatedLinksManager = new RelatedLinksManager();
   }
   submitDeveloperRelatedLinks(e) {
     this.developerRelatedLinksManager.addLinks(e);

@@ -1,34 +1,35 @@
-import _require from "../vendor/170991";
+import _require from "../vendor/170991"
+
 async function n() {
-  let e;
+  let e
   {
-    e = await Promise.all([]).then(require.t.bind(require, 177177, 23));
-    let t = await require.t.bind(require, 468243, 23);
-    e.GlobalWorkerOptions.workerSrc = t;
+    e = await Promise.all([]).then(require.t.bind(require, 177177, 23))
+    let t = await require.t.bind(require, 468243, 23)
+    e.GlobalWorkerOptions.workerSrc = t
   }
-  return e;
+  return e
 }
-let i = null;
+let i = null
 export function $$a1() {
-  i || (i = n());
-  return i;
+  i || (i = n())
+  return i
 }
 async function s() {
-  return (await _require).optimize;
+  return (await _require).optimize
 }
-let o = null;
+let o = null
 export function $$l0() {
-  o || (o = s());
-  return o;
+  o || (o = s())
+  return o
 }
 async function d() {
-  return await require.t.bind(require, 122866, 23);
+  return await require.t.bind(require, 122866, 23)
 }
-let c = null;
+let c = null
 export function $$u2() {
-  c || (c = d());
-  return c;
+  c || (c = d())
+  return c
 }
-export const a4 = $$l0;
-export const eg = $$a1;
-export const jL = $$u2;
+export const a4 = $$l0
+export const eg = $$a1
+export const jL = $$u2

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bL, c$ } from "../905/867927";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { t as _$$t } from "../905/947268";
 import { Z } from "../905/498136";
 import { trackEventAnalytics } from "../905/449184";
@@ -29,7 +29,7 @@ function h({
   return jsx("form", {
     children: jsxs(bL, {
       value: e?.toString(),
-      legend: jsx(q, {
+      legend: jsx(Legend, {
         children: getI18nString("fullscreen.view_mode.view_mode")
       }),
       readonly: r,

@@ -1,8 +1,8 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { b as _$$b, c as _$$c } from "../905/308099";
-import { s as _$$s } from "../905/932270";
+import { RadioInputRoot, RadioInputOption } from "../905/308099";
+import { HiddenLegend } from "../905/932270";
 import { Label } from "../905/270045";
 import { Checkbox } from "../905/274480";
 import { IconButton } from "../905/443068";
@@ -75,19 +75,19 @@ function S(e) {
     setExtensionRequestsAllowed
   } = e;
   return jsxs(Fragment, {
-    children: [jsxs(_$$b, {
+    children: [jsxs(RadioInputRoot, {
       value: extensionsAllowed,
       onChange: setExtensionsAllowed,
-      legend: jsx(_$$s, {
+      legend: jsx(HiddenLegend, {
         children: modalCopy.permissionsText
       }),
-      children: [jsx(_$$c, {
+      children: [jsx(RadioInputOption, {
         value: "public",
         "data-test-id": "all-radio-option",
         label: jsx(Label, {
           children: modalCopy.allRadioText
         })
-      }), jsx(_$$c, {
+      }), jsx(RadioInputOption, {
         value: "allowlist",
         "data-test-id": "allowlist-radio-option",
         label: jsx(Label, {

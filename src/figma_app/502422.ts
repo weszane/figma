@@ -1,7 +1,7 @@
 import { ServiceCategories } from "../905/165054";
 import { createRemovableAtomFamily, atom, atomStoreManager } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { subscribeAndAwaitData } from "../905/553831";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
@@ -34,14 +34,14 @@ class p {
       this.pendingIncrementCount = 0;
       let l = this.makeDebouncedUpsertRequest(i);
       let u = new Date();
-      return r ? WB().optimisticallyUpdate({
+      return r ? getCurrentLiveGraphClient().optimisticallyUpdate({
         UserFlag: {
           [r.id]: {
             count: i,
             updatedAt: u
           }
         }
-      }, l) : WB().optimisticallyCreate({
+      }, l) : getCurrentLiveGraphClient().optimisticallyCreate({
         UserFlag: {
           [`optimistic-id-${this.userFlagName}`]: {
             userId: t,
@@ -64,7 +64,7 @@ class p {
       let t = e.currentUser?.userFlagByName;
       if (!t) return;
       let r = this.makeDebouncedResetRequest();
-      return WB().optimisticallyDelete({
+      return getCurrentLiveGraphClient().optimisticallyDelete({
         UserFlag: {
           [t.id]: null
         }

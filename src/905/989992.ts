@@ -303,7 +303,7 @@ class LoadedSuspendableResource {
     return this.data
   }
 
-  transform(transformFn) {
+  transform(transformFn: Fn) {
     return resourceUtils.loadedSuspendable(transformFn(this.data), this.errors, this.suspense)
   }
 }

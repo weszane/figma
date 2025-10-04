@@ -1,40 +1,31 @@
-let $$n1 = "fig-kiwi";
-let $$r3 = "fig-jam.";
-let $$a0 = "fig-diff";
-let $$s5 = "f" + function (...e) {
-  let t = e.shift();
-  return e.reverse().map(function (e, i) {
-    return String.fromCharCode(e - t - 39 - i);
-  }).join("");
-}(19, 162, 163) + "t".split("").map(function (e) {
-  return String.fromCharCode(e.charCodeAt(0) + -71);
-}).join("") + "sit" + function (...e) {
-  var t = e.shift();
-  return e.reverse().map(function (e, i) {
-    return String.fromCharCode(e - t - 1 - i);
-  }).join("");
-}(18, 120);
-let $$o2 = function (...e) {
-  var t = Array.prototype.slice.call(e);
-  var i = t.shift();
-  return t.reverse().map(function (e, t) {
-    return String.fromCharCode(e - i - 58 - t);
-  }).join("");
-}(2, 165, 166, 162) + "t".split("").map(function (e) {
-  return String.fromCharCode(e.charCodeAt(0) + -71);
-}).join("") + "d" + function (...e) {
-  var t = Array.prototype.slice.call(e);
-  var i = t.shift();
-  return t.reverse().map(function (e, t) {
-    return String.fromCharCode(e - i - 41 - t);
-  }).join("");
-}(11, 161, 152, 153);
-export function $$l4(e) {
-  return e.byteLength >= 2 && 80 === e[0] && 75 === e[1];
+// Original: $$n1
+export const FIG_KIWI = "fig-kiwi";
+
+// Original: $$r3
+export const FIG_JAM = "fig-jam.";
+
+// Original: $$a0
+export const FIG_DIFF = "fig-diff";
+
+// Original: $$s5
+export const FIG_SITE = "fig-site";
+
+// Original: $$o2
+export const FIG_DECA = "fig-deca";
+
+/**
+ * Checks if the provided buffer represents a ZIP file by verifying the presence of the PK header.
+ * @param buffer - The buffer to inspect, expected to be a Uint8Array or similar with byteLength and index access.
+ * @returns True if the buffer has at least 2 bytes and starts with 80 (P) and 75 (K), indicating a ZIP file; otherwise, false.
+ */
+export function isZipFile(buffer: { byteLength: number; [index: number]: number }): boolean {
+  return buffer.byteLength >= 2 && buffer[0] === 80 && buffer[1] === 75;
 }
-export const Eo = $$a0;
-export const Q_ = $$n1;
-export const SR = $$o2;
-export const cq = $$r3;
-export const f6 = $$l4;
-export const ut = $$s5;
+
+// Original exports refactored to use new constant and function names
+export const Eo = FIG_DIFF;
+export const Q_ = FIG_KIWI;
+export const SR = FIG_DECA;
+export const cq = FIG_JAM;
+export const f6 = isZipFile;
+export const ut = FIG_SITE;

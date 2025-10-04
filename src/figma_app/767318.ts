@@ -15,7 +15,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { useDevModeFocusId } from "../figma_app/88239";
 import { N as _$$N } from "../figma_app/673778";
-import { Wo } from "../figma_app/933328";
+import { retrieveVariableCollection } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { ol } from "../figma_app/852050";
@@ -114,7 +114,7 @@ export function $$G0(e) {
               callback: () => {
                 let n = "object" == typeof e.modeId && "extendedCollectionId" in e.modeId;
                 let i = c ? c[n ? e.modeId.collectionKey : d] : null;
-                i ? t(Wo({
+                i ? t(retrieveVariableCollection({
                   item: i,
                   callback: t => {
                     r(d, e.modeId, e.name);
@@ -298,7 +298,7 @@ function V(e, t, r, i, a, s, o, l, d, c) {
     displayText: o ? `${t.name} (${t.modeId.guid})` : t.name,
     isChecked: t.isCurrentlyActive,
     callback: () => {
-      c ? a(Wo({
+      c ? a(retrieveVariableCollection({
         item: c,
         callback: r => {
           s(e, t.modeId, t.name);

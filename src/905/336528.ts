@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { bL, c$ } from "../905/867927";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { f as _$$f } from "../905/335032";
 import { r as _$$r } from "../905/11924";
 import { getI18nString } from "../905/303541";
@@ -45,7 +45,7 @@ export function $$p0({
         readonly: i,
         onChange: v,
         recordingKey: g,
-        legend: jsx(q, {
+        legend: jsx(Legend, {
           children: e
         }),
         htmlAttributes: {

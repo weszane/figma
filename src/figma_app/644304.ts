@@ -3,7 +3,7 @@ import { useSetAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { jsx } from 'react/jsx-runtime';
-import { nt, o3 } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { Dm } from '../figma_app/8833';
 import { M$q } from '../figma_app/27776';
 import { dc, g_, GQ, qm, xT, Ye, Yh } from '../figma_app/32128';
@@ -52,7 +52,7 @@ function O({
   let R = useRef(null);
   let L = U1(R);
   let P = GQ(p, u);
-  let D = o3(nt.newResizablePanel);
+  let D = useLabConfiguration(labConfigurations.newResizablePanel);
   let k = useSetAtom(R4);
   let {
     setRulerVisibilityOnInitialSizeChange,
@@ -202,7 +202,7 @@ export function $$L1({
   let I = t ?? T;
   let S = Ye();
   let v = dc();
-  let A = o3(nt.newResizablePanel);
+  let A = useLabConfiguration(labConfigurations.newResizablePanel);
   return jsx('div', {
     children: jsx(R, {
       width: I,

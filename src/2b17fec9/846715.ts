@@ -8,7 +8,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { wY } from "../figma_app/708845";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { BrowserInfo } from "../figma_app/778880";
 import { X as _$$X } from "../figma_app/776368";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
@@ -102,7 +102,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { TS, AF, V_, zS, MV } from "../figma_app/153399";
 import { k as _$$k } from "../905/545760";
 import { bL } from "../905/575478";
-import { q as _$$q2 } from "../905/932270";
+import { Legend } from "../905/932270";
 import { getFeatureFlags } from "../905/601108";
 import { parseColor } from "../figma_app/191804";
 import { Yv } from "../figma_app/616107";
@@ -660,7 +660,7 @@ function tu({
           let t = parseColor(e);
           t && (h(t), tp());
         },
-        legend: jsx(_$$q2, {
+        legend: jsx(Legend, {
           children: renderI18nText("whiteboard.stickies.color_selector.legend")
         }),
         children: jsx("div", {
@@ -995,7 +995,7 @@ let tw = memo(function () {
     let e = function () {
       let {
         windowInnerHeight
-      } = _$$l();
+      } = useWindowDimensions();
       let t = Ao();
       if (!t) return;
       let i = t ? t.height + 16 : 0;

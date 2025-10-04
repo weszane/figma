@@ -21,7 +21,7 @@ import { Mw, ON } from "../3276/43946";
 import { u as _$$u } from "../figma_app/365543";
 import { YR } from "../figma_app/365713";
 import { bL, c$ } from "../905/867927";
-import { q as _$$q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { c$ as _$$c$, bL as _$$bL, l9, mc, wv, DZ } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import { atomStoreManager } from "../figma_app/27355";
@@ -302,7 +302,7 @@ class J extends PureComponent {
       onChange: this.onChangeOrientation,
       recordingKey: generateRecordingKey(this.props, "orientationControl"),
       value: this.currentDeviceOrientation(),
-      legend: jsx(_$$q, {
+      legend: jsx(Legend, {
         children: getI18nString("presets.device_panel.rotation")
       }),
       children: [jsx(c$, {

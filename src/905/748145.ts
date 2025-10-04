@@ -20,7 +20,7 @@ import { rO } from '../figma_app/409807';
 import { Nd } from '../figma_app/512532';
 import { jq } from '../figma_app/761118';
 import { LinterCppBindings, SceneGraphHelpers, SceneIdentifier, VariableDataType, VariableResolvedDataType } from '../figma_app/763686';
-import { AV, Oe } from '../figma_app/933328';
+import { applySharedStyle, loadSharedVariableThunk } from '../figma_app/933328';
 function m(e) {
   let t;
   if (e.fontNameOrMixed !== 'mixed') return e.fontNameOrMixed.family;
@@ -74,7 +74,7 @@ function $$g({
         node_id: e
       };
     }
-    o(AV({
+    o(applySharedStyle({
       targetGuids: [e],
       style: t,
       inheritStyleKeyField: 'inheritTextStyleKey',
@@ -89,7 +89,7 @@ function $$g({
       omitFullscreenCommit: !0
     }));
   } : (n, a) => {
-    o(AV({
+    o(applySharedStyle({
       targetGuids: [e],
       style: t,
       inheritStyleKeyField: 'inheritTextStyleKey',
@@ -216,7 +216,7 @@ async function T(e, t, i, n, r, a) {
   let h = i.availableVariables[variableId];
   if (!h?.node_id) return !1;
   let g = debugState.dispatch;
-  let f = await g(Oe(h));
+  let f = await g(loadSharedVariableThunk(h));
   if (!f) return Promise.resolve(!1);
   if (r) {
     e.stackSpacing = resolvedValue.value;
@@ -266,7 +266,7 @@ async function k({
   let g = n.availableVariables[variableId];
   if (!g?.node_id) return !1;
   let f = debugState.dispatch;
-  let _ = await f(Oe(g));
+  let _ = await f(loadSharedVariableThunk(g));
   if (!_) return Promise.resolve(!1);
   if (a) {
     t === 'ROW' ? e.gridRowGap = resolvedValue.value : e.gridColumnGap = resolvedValue.value;

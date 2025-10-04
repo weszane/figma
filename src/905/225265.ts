@@ -28,7 +28,7 @@ import { fileVersionSelector } from "../905/91038";
 import { FEditorType } from "../figma_app/53721";
 import { generateSessionId } from "../905/574958";
 import { getUUID } from "../figma_app/517115";
-import { cY, I1 } from "../figma_app/825489";
+import { getLibrarySubscriptionAtom, subscribedLibrariesAtom } from "../figma_app/825489";
 import { I as _$$I } from "../figma_app/130633";
 import { lj } from "../905/991973";
 import { Ci } from "../figma_app/318590";
@@ -122,7 +122,7 @@ let ep = createRemovableAtomFamily(e => atom(t => {
   let {
     libraryKeyBackingSelectedItems
   } = t(et(e));
-  let n = t(cY("libraryKey"));
+  let n = t(getLibrarySubscriptionAtom("libraryKey"));
   return libraryKeyBackingSelectedItems ? new Set([...n, libraryKeyBackingSelectedItems]) : n;
 }));
 let em = selectAtom(filesByLibraryKeyAtom, e => new Set(Object.keys(e)), equals);
@@ -206,7 +206,7 @@ let ey = createRemovableAtomFamily(e => atom(async t => {
     let h = c?.parentOrgId;
     let g = e(ee(t));
     let f = atomStoreManager.get(eP);
-    let A = e(cY("libraryKey"));
+    let A = e(getLibrarySubscriptionAtom("libraryKey"));
     let b = e(eu(t));
     let v = q(t, e);
     return async (i, I, E) => {
@@ -434,8 +434,8 @@ let ew = createRemovableAtomFamily(e => atom(async t => {
 }));
 async function eC(e, t) {
   let i = new WebLoggerTimer();
-  1 === (await t(eg(e))) && (await asyncExecutorSubscription(I1, e => {
-    let t = atomStoreManager.get(I1);
+  1 === (await t(eg(e))) && (await asyncExecutorSubscription(subscribedLibrariesAtom, e => {
+    let t = atomStoreManager.get(subscribedLibrariesAtom);
     "loaded" === t.status && e(t);
   }));
   eO("asset_search.latency_segment.wait_for_dependencies", i, e, t);

@@ -11,7 +11,7 @@ import { appendSearchParams } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { x as _$$x } from "../figma_app/256637";
 import { getInitialOptions } from "../figma_app/169182";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { createAtomSetter } from "../figma_app/566371";
 import { isMobileUA } from "../figma_app/778880";
 import { reportError } from "../905/11";
@@ -38,7 +38,7 @@ import { N as _$$N } from "../figma_app/23271";
 import { trackFileObjEvent } from "../figma_app/314264";
 import { findPublishedProfileForUser } from "../figma_app/740025";
 import { R1, Z2 } from "../figma_app/599979";
-import { DI } from "../figma_app/557318";
+import { triggerMissingFontPopover } from "../figma_app/557318";
 import { pt } from "../figma_app/198840";
 import { getDesignFileUrlWithOptions } from "../905/612685";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
@@ -295,7 +295,7 @@ let $$eS17 = createOptimistThunk(async (e, {
       src: "getHubFileMetadata"
     }));
   }).then(() => {
-    getFeatureFlags().ce_new_missing_fonts_logging && DI();
+    getFeatureFlags().ce_new_missing_fonts_logging && triggerMissingFontPopover();
   }).catch(e => {
     console.error(e);
   }).finally(() => {
@@ -660,7 +660,7 @@ let $$eM24 = createOptimistThunk((e, {
   });
   let i = e.getState().user;
   let a = i && findPublishedProfileForUser(i, e.getState().authedProfilesById);
-  i?.id && a && WB().optimisticallyCreate({
+  i?.id && a && getCurrentLiveGraphClient().optimisticallyCreate({
     CommunityHubLike: {
       [`optimistic-${t}-${a.id}`]: {
         pluginId: null,
@@ -706,7 +706,7 @@ let $$ej6 = createOptimistThunk((e, {
       error: !0
     }));
   });
-  e.getState().user?.id && r && WB().optimisticallyDelete({
+  e.getState().user?.id && r && getCurrentLiveGraphClient().optimisticallyDelete({
     CommunityHubLike: {
       [r]: null
     }

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ComponentPropType, Fullscreen, ComponentType, DesignSystemsTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { selectWithShallowEqual } from "../905/103090";
 import { Point } from "../905/736624";
 import { hideInstanceSwapPicker } from "../905/8732";
@@ -49,7 +49,7 @@ export function $$w1({
   let {
     windowInnerHeight,
     windowInnerWidth
-  } = _$$l();
+  } = useWindowDimensions();
   return useMemo(() => "create" === e ? new Point(windowInnerWidth / 2 - DROPDOWN_HEIGHT / 2, windowInnerHeight / 3) : new Point(t?.initialX, t?.initialY), [windowInnerHeight, windowInnerWidth, e, t]);
 }
 export function $$C0({

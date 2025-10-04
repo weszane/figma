@@ -17,7 +17,7 @@ import { y$ } from "../905/81009";
 import { nk } from "../figma_app/2023";
 import { fA } from "../figma_app/543100";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
-import { F as _$$F2 } from "../905/915030";
+import { ComFileType } from "../905/915030";
 import { SelectedViewPathManager } from "../905/870666";
 import { g_ } from "../905/646788";
 import { trackEventAnalytics } from "../905/449184";
@@ -263,7 +263,7 @@ let V = e => ({
           folderId: e.folderId
         }));
         i(y$({
-          type: _$$F2.FILES,
+          type: ComFileType.FILES,
           tiles: [fA(fileEntityDataMapper.toSinatra(e))]
         }));
       }

@@ -42,7 +42,7 @@ import { FeatureFlag } from "../905/652992";
 import { Ro } from "../figma_app/805373";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { A as _$$A4 } from "../6828/154709";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { getUserId, selectCurrentUser } from "../905/372672";
 import { KindEnum } from "../905/129884";
 import { A as _$$A5 } from "../5724/933949";
@@ -788,7 +788,7 @@ function ed({
         children: jsx(TextWithTruncation, {
           fontSize: 11,
           color: "secondary",
-          children: jsx(h1, {
+          children: jsx(RelativeTimeDisplay, {
             date: e.createdAt
           })
         })

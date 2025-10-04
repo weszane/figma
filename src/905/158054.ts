@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Label } from "../905/270045";
-import { Ay } from "../905/865071";
+import { LabelPrimitive } from "../905/865071";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { RecordableDiv } from "../905/511649";
@@ -31,7 +31,7 @@ export function $$m0({
       className: s,
       "aria-hidden": !0,
       children: e
-    }) : (m || o) && (c = jsx(Ay, {
+    }) : (m || o) && (c = jsx(LabelPrimitive, {
       htmlFor: t,
       className: s,
       children: e

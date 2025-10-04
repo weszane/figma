@@ -12,7 +12,7 @@ import { isLoading } from '../905/18797';
 import { setKeyboardShortcutPanelTab } from '../905/26824';
 import { isFullscreenSlidesView } from '../905/35881';
 import { P as _$$P2 } from '../905/36308';
-import { z4 } from '../905/37051';
+import { fullscreenAlias } from '../905/37051';
 import { A as _$$A3 } from '../905/51490';
 import { A as _$$A9 } from '../905/51743';
 import { useTabState } from '../905/56919';
@@ -45,7 +45,7 @@ import { l as _$$l4 } from '../905/202425';
 import { isInvalidValue, isValidValue, normalizeValue } from '../905/216495';
 import { r as _$$r5 } from '../905/216849';
 import { J as _$$J3 } from '../905/225412';
-import { nt as _$$nt, o3 as _$$o2 } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { I_, wq } from '../905/234821';
 import { t as _$$t4 } from '../905/241707';
 import { copyHyperlinkToClipboard, parseLinkForContext } from '../905/250387';
@@ -118,7 +118,7 @@ import { SvgComponent } from '../905/714743';
 import { l as _$$l3 } from '../905/716947';
 import { x as _$$x3 } from '../905/719609';
 import { Point } from '../905/736624';
-import { zE } from '../905/738636';
+import { createNewFileWithRestrictions } from '../905/738636';
 import { DraggableModalManager } from '../905/748636';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { getPermissionsAndView } from '../905/766303';
@@ -131,7 +131,7 @@ import { TabsPrimitiveTabStrip } from '../905/840133';
 import { useDropdownState } from '../905/848862';
 import { isVsCodeEnvironment } from '../905/858738';
 import { VariableStyleId } from '../905/859698';
-import { ud } from '../905/862913';
+import { useFileByKey } from '../905/862913';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
 import { useHasParentOrgId } from '../905/882262';
@@ -334,7 +334,7 @@ import { dX } from '../figma_app/837840';
 import { xT } from '../figma_app/841415';
 import { getLocalPlugins, isEditorTypeSupported, isEditorTypeSupportedFor, useCanPerformAction, useCanRunExtensions, useDedupedRecentlyUsedPlugins, useDedupedRecentlyUsedWidgets, useFilteredDedupedRecentlyUsedPlugins, useFilteredWidgets, useInstalledPluginsAndWidgets, usePluginedWidgets, usePublishedPlugins } from '../figma_app/844435';
 import { ty as _$$ty } from '../figma_app/844818';
-import { _o as _$$_o, WJ as _$$WJ, Dz, TV, Zj } from '../figma_app/847915';
+import { hasActionOrCallback, isMenuItemChecked, getActionOrName, hasChildrenOrDropdown, isCheckedOrHasPropertyValue } from '../figma_app/847915';
 import { y as _$$y } from '../figma_app/849666';
 import { CssBackedLoading, ImageBackedLoading } from '../figma_app/858013';
 import { we } from '../figma_app/861982';
@@ -2840,7 +2840,7 @@ let ne = {
     });
     let u = getPermissionsAndView(r);
     r9(l, a);
-    i(zE({
+    i(createNewFileWithRestrictions({
       state: u,
       from: FileBrowserLocation.DESIGN_COPY_TO_SITES_ENTRYPOINT,
       editorType: FFileType.SITES,
@@ -4241,7 +4241,7 @@ function nl(e) {
   let n = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
-  let s = ud();
+  let s = useFileByKey();
   let o = useCanAccessFullDevMode();
   let l = useCanAccessDevModeEntryPoint();
   let d = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
@@ -4335,7 +4335,7 @@ function nc(e) {
   let n = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
-  let s = ud();
+  let s = useFileByKey();
   let o = useCanAccessFullDevMode();
   let l = useCanAccessDevModeEntryPoint();
   let d = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
@@ -4670,7 +4670,7 @@ function ng() {
 }
 function n_(e, t) {
   t && e.forEach(e => {
-    e && (_$$_o(e) && (e.source = t, 'submenu' in e && e.submenu && n_(e.submenu, t)), TV(e) && e.children && n_(e.children, t));
+    e && (hasActionOrCallback(e) && (e.source = t, 'submenu' in e && e.submenu && n_(e.submenu, t)), hasChildrenOrDropdown(e) && e.children && n_(e.children, t));
   });
 }
 function ny({
@@ -5033,7 +5033,7 @@ function nY({
     let e = k ? {
       name: 'status-mark-as-ready',
       callback: () => {
-        z4.setNodesReady(!0, [t], 'canvas', null);
+        fullscreenAlias.setNodesReady(!0, [t], 'canvas', null);
         D && R4([t]);
       },
       flags: ['dev_handoff', 'design'],
@@ -5042,7 +5042,7 @@ function nY({
     let n = I ? {
       name: 'status-mark-as-completed',
       callback: () => {
-        z4.setNodesCompleted([t], 'canvas');
+        fullscreenAlias.setNodesCompleted([t], 'canvas');
       },
       flags: ['dev_handoff', 'design'],
       disabled: !!M
@@ -5111,7 +5111,7 @@ function nY({
       alwaysShowCheckMarkOffset: !1
     };
     let w = getFeatureFlags().dt_interactive_inspection_m2 && !y && B;
-    let S = j && !z4.getIsExtension() ? w ? [E] : [{
+    let S = j && !fullscreenAlias.getIsExtension() ? w ? [E] : [{
       name: 'enter-dev-mode-focus-view',
       callback: () => {
         A('Dev Mode Canvas Focus Entry Clicked', {
@@ -5127,7 +5127,7 @@ function nY({
     let P = [...S, ...(c.length > 0 ? [h, ...c] : []), h, {
       name: 'status-remove',
       callback: () => {
-        z4.setNodesReady(!1, [t], 'canvas', null);
+        fullscreenAlias.setNodesReady(!1, [t], 'canvas', null);
       },
       flags: ['dev_handoff', 'design'],
       alwaysShowCheckMarkOffset: !1,
@@ -5142,7 +5142,7 @@ function nY({
     }, {
       render: () => jsx(nV, {
         onResult: e => {
-          z4.setNodesReady(!0, [t], 'canvas', e ?? null);
+          fullscreenAlias.setNodesReady(!0, [t], 'canvas', e ?? null);
           D && R4([t]);
           s(hideDropdownAction());
         }
@@ -5159,7 +5159,7 @@ function nY({
     }, {
       render: () => jsx(nV, {
         onResult: e => {
-          z4.setNodesReady(!0, [t], 'canvas', e ?? null);
+          fullscreenAlias.setNodesReady(!0, [t], 'canvas', e ?? null);
           D && R4([t]);
           s(hideDropdownAction());
         }
@@ -6258,7 +6258,7 @@ function aC(e) {
 }
 function aX(e) {
   return jsx('div', {
-    children: Dz(e.token.content)
+    children: getActionOrName(e.token.content)
   });
 }
 function aZ(e) {
@@ -6270,7 +6270,7 @@ function aZ(e) {
       children: [jsx(TextWithTruncation, {
         children: EG(e.searchResult)
       }), jsx(Spacer, {}), jsx(TextWithTruncation, {
-        children: e.searchResult.shortcutText ?? c1(t, Dz(e.searchResult))
+        children: e.searchResult.shortcutText ?? c1(t, getActionOrName(e.searchResult))
       })]
     })
   });
@@ -6304,7 +6304,7 @@ function aQ({
     },
     validateToken: noop,
     getSearchResults: e => u.searchIncludeKey(o, e.inputValue).filter(([e, t]) => !t.parametersRequired).map(([e, t]) => ({
-      id: `${Dz(t)}-${t.pluginId}-${EG(t)}`,
+      id: `${getActionOrName(t)}-${t.pluginId}-${EG(t)}`,
       searchKey: e,
       ...t,
       disabled: !1
@@ -8002,7 +8002,7 @@ function sH({
       className: el()(a0, a)
     });
     return n;
-  }(_$$o2(_$$nt.customKeyboardShortcuts), s.hasSubscribedLibraries, c);
+  }(useLabConfiguration(labConfigurations.customKeyboardShortcuts), s.hasSubscribedLibraries, c);
   let f = Object.fromEntries(m.map(({
     id: e
   }) => [e, e !== 'spacer']));
@@ -8175,7 +8175,7 @@ function sV({
     tabCompletedFirstTimeAnimation,
     activeTab
   } = i;
-  let o = _$$o2(_$$nt.customKeyboardShortcuts);
+  let o = useLabConfiguration(labConfigurations.customKeyboardShortcuts);
   n = tabCompletedFirstTimeAnimation ? 'keyboard_shortcut_panel--tabContentsCompletedFirstTime--5s31O keyboard_shortcut_panel--tabContents--UBIdJ' : e[activeTab] ? 'keyboard_shortcut_panel--tabContentsCompleted--YcQRt keyboard_shortcut_panel--tabContents--UBIdJ' : a2;
   activeTab === 'layout' && (n = a2);
   let l = activeTab === 'essential' ? jsxs(Fragment, {
@@ -8399,7 +8399,7 @@ function s8({
     showSpinner: !isLoadingMissingFonts
   })) : null;
 }
-let oT = e => Zj(e) && !e.hideCheckForQuickCommand;
+let oT = e => isCheckedOrHasPropertyValue(e) && !e.hideCheckForQuickCommand;
 class ow extends RecordingPureComponent {
   constructor(e) {
     super(e);
@@ -8542,7 +8542,7 @@ class ow extends RecordingPureComponent {
             return;
           }
         }
-        if (e.callback && !i && (e.callback(Dz(e), e.args, this.props.dispatch), i = !0), e.action && (VU.get(e.action, 'quick-actions', e.args)(t), i = !0), i && this.addToRecentlyUsedCommands(e, e.runPluginArgs), this.logActionSelectedEvent(e), e.action === 'toggle-publish' && handleAtomEvent({
+        if (e.callback && !i && (e.callback(getActionOrName(e), e.args, this.props.dispatch), i = !0), e.action && (VU.get(e.action, 'quick-actions', e.args)(t), i = !0), i && this.addToRecentlyUsedCommands(e, e.runPluginArgs), this.logActionSelectedEvent(e), e.action === 'toggle-publish' && handleAtomEvent({
           id: 'insert-component-onboarding-event'
         }), oT(e) && !isInteractionOrEvalMode()) {
           this.cancelDelayedClose();
@@ -8822,19 +8822,19 @@ class ok extends RecordingPureComponent {
       });
     };
     oT(this.props.item) ? this.state = {
-      itemIsChecked: _$$WJ(this.props.appModel, this.props.item)
+      itemIsChecked: isMenuItemChecked(this.props.appModel, this.props.item)
     } : this.state = {};
   }
   componentDidUpdate(e, t) {
     super.componentDidUpdate(e, t);
     this.state.itemIsChecked != null && this.setState({
-      itemIsChecked: _$$WJ(this.props.appModel, this.props.item)
+      itemIsChecked: isMenuItemChecked(this.props.appModel, this.props.item)
     });
   }
   render() {
     let e = this.props.item;
     let t = this.getDisplayText();
-    let i = Dz(e);
+    let i = getActionOrName(e);
     let n = e.shortcutText || c1(this.props.appModel.keyboardShortcuts, i);
     let a = void 0 !== this.props.item.runPluginArgs;
     let s = e.menuActionType && e.menuActionType === 'run-local-plugin' && (!e.runPluginArgs || this.props.searchQuery);

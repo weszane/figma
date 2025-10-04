@@ -84,7 +84,7 @@ import { v as _$$v } from "../figma_app/99807";
 import { Yv } from "../figma_app/616107";
 import { vm, Vz, gy } from "../figma_app/431620";
 import { bL, c$ } from "../905/575478";
-import { q as _$$q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { XS as _$$XS, BB, nU } from "../9410/999133";
 import { sha1HexFromBytes, bytesToHex } from "../905/125019";
 import { trackEventAnalytics } from "../905/449184";
@@ -1125,7 +1125,7 @@ function ti({
   let l = s.disabled || o;
   return jsx(bL, {
     onChange: i,
-    legend: jsx(_$$q, {
+    legend: jsx(Legend, {
       children: e
     }),
     recordingKey: a,

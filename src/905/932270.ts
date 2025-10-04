@@ -1,17 +1,43 @@
-import { jsx } from "react/jsx-runtime";
-import { forwardRef } from "react";
-import { BQ, TD } from "../905/865071";
-import { legend } from "../905/620622";
-export let $$o1 = forwardRef((e, t) => jsx(BQ, {
-  className: legend,
-  ref: t,
-  ...e
-}));
-$$o1.displayName = "Legend";
-export let $$l0 = forwardRef((e, t) => jsx(TD, {
-  ref: t,
-  ...e
-}));
-$$l0.displayName = "HiddenLegend";
-export const q = $$l0;
-export const s = $$o1;
+import type { ForwardRefRenderFunction } from "react"
+import { forwardRef } from "react"
+import { jsx } from "react/jsx-runtime"
+import { legend } from "../905/620622"
+import { HiddenLegendPrimitive, LegendPrimitive } from "../905/865071"
+
+interface LegendProps extends React.HTMLAttributes<HTMLLegendElement> {
+  children?: React.ReactNode
+}
+
+interface HiddenLegendProps extends React.HTMLAttributes<HTMLLegendElement> {
+  children?: React.ReactNode
+}
+
+const LegendComponent: ForwardRefRenderFunction<HTMLLegendElement, LegendProps> = (
+  props,
+  ref,
+) => {
+  return jsx(LegendPrimitive, {
+    className: legend,
+    ref,
+    ...props,
+  })
+}
+
+LegendComponent.displayName = "Legend"
+
+const HiddenLegendComponent: ForwardRefRenderFunction<HTMLLegendElement, HiddenLegendProps> = (
+  props,
+  ref,
+) => {
+  return jsx(HiddenLegendPrimitive, {
+    ref,
+    ...props,
+  })
+}
+
+HiddenLegendComponent.displayName = "HiddenLegend"
+
+export const HiddenLegend = forwardRef(HiddenLegendComponent)
+export const Legend = forwardRef(LegendComponent)
+export const q = Legend
+export const s = HiddenLegend

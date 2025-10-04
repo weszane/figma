@@ -12,7 +12,7 @@ import { useAsyncEffect } from "../905/931050";
 import { selectWithShallowEqual } from "../905/103090";
 import { KeyCodes } from "../905/63728";
 import { APILoadingStatus } from "../905/520829";
-import { uP, nh } from "../figma_app/933328";
+import { loadSharedSymbolOrStateGroup, loadSharedStyle } from "../figma_app/933328";
 import { compareWithGeneratedKey } from "../905/709171";
 import { Z } from "../905/104740";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
@@ -163,7 +163,7 @@ export function $$M8(e, t, i, a, o) {
     let s = useRef(null);
     let o = `${getAssetKey(e)}/${getAssetVersion(e)}`;
     useEffect(() => {
-      s.current !== o && (s.current = o, a(createLoadingState()), t(uP({
+      s.current !== o && (s.current = o, a(createLoadingState()), t(loadSharedSymbolOrStateGroup({
         item: e,
         bufferCallback: e => {
           s.current === o && a(createSuccessState(e));
@@ -243,7 +243,7 @@ export function $$j2(e) {
         i(void 0);
         return;
       }
-      l(nh({
+      l(loadSharedStyle({
         style: e,
         bufferCallback: i,
         errorCallback: n

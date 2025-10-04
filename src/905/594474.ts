@@ -62,7 +62,7 @@ import { getPluginWidgetLabel, mapFileTypeToEnum } from "../figma_app/471982";
 import { LG, WN, wC, bx } from "../905/448440";
 import { A as _$$A9 } from "../905/562488";
 import { EventShield } from "../905/821217";
-import { b as _$$b2, c as _$$c2 } from "../905/308099";
+import { RadioInputRoot, RadioInputOption } from "../905/308099";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { TextWithTruncation } from "../905/984674";
 import { FRequestStatusType } from "../figma_app/191312";
@@ -652,7 +652,7 @@ function eU({
   let d = options.findIndex(e => e.isSelected);
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z",
-    children: [jsx(_$$b2, {
+    children: [jsx(RadioInputRoot, {
       legend: jsx(TextWithTruncation, {
         fontWeight: "semi-bold",
         children: prompt
@@ -662,7 +662,7 @@ function eU({
         dataSecurityFieldManager?.updateSingleSelectQuestion(t[0], Number(e));
       },
       children: options.map((e, i) => jsxs(_$$Fragment, {
-        children: [jsx(_$$c2, {
+        children: [jsx(RadioInputOption, {
           value: String(i),
           label: jsx(Label, {
             children: e.label

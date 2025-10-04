@@ -18,7 +18,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { hideInstanceSwapPicker } from "../905/8732";
-import { FU, b$, Bs } from "../figma_app/933328";
+import { insertSharedComponent, insertSharedStateGroup, insertSharedModule } from "../figma_app/933328";
 import { replaceThumbnailsOptimist } from "../905/711212";
 import { mapFileToProductType } from "../figma_app/314264";
 import { getAssetBackgroundColor, generateNodeThumbnail } from "../figma_app/80990";
@@ -86,7 +86,7 @@ import { PanelWidth } from "../figma_app/164212";
 import { Y as _$$Y2 } from "../905/411989";
 import { K0 } from "../figma_app/778125";
 import { getResourceDataOrFallback } from "../905/663269";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { AvatarSize, UserAvatar } from "../905/590952";
 import { e as _$$e } from "../905/579755";
 import { R8, M as _$$M, G5 } from "../figma_app/933221";
@@ -300,14 +300,14 @@ function ez({
       children: [jsx("span", {
         className: "asset_updated_details--dot--SoliI",
         children: "\xb7"
-      }), jsx(h1, {
+      }), jsx(RelativeTimeDisplay, {
         date: s
       })]
     }) : null]
   }) : s ? jsx("div", {
     className: "asset_updated_details--updatedAt--eam-d",
     children: renderI18nText("design_systems.assets_panel.updated_at", {
-      updatedAt: jsx(h1, {
+      updatedAt: jsx(RelativeTimeDisplay, {
         date: s
       })
     })
@@ -742,13 +742,13 @@ export function $$tu1({
       useSmartPositioning: !0,
       fromPlayground: K.data
     };
-    e.type === PrimaryWorkflowEnum.COMPONENT ? (ep(FU({
+    e.type === PrimaryWorkflowEnum.COMPONENT ? (ep(insertSharedComponent({
       item: e,
       ...n
-    })), ea && eo(!0)) : e.type === PrimaryWorkflowEnum.STATE_GROUP ? ep(b$({
+    })), ea && eo(!0)) : e.type === PrimaryWorkflowEnum.STATE_GROUP ? ep(insertSharedStateGroup({
       item: e,
       ...n
-    })) : e.type === PrimaryWorkflowEnum.MODULE && ep(Bs({
+    })) : e.type === PrimaryWorkflowEnum.MODULE && ep(insertSharedModule({
       item: e,
       ...n,
       insertionCallback: () => fullscreenValue.triggerAction("commit")

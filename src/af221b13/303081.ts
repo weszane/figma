@@ -67,7 +67,7 @@ import { _C6, U1R, qvA, ngI, OX3, g8m, ikM, Ero, eZi } from "../figma_app/27776"
 import { A as _$$A4 } from "../5430/1650";
 import { A as _$$A5 } from "../5430/204784";
 import { qE, S0 } from "../905/52565";
-import { wR, Ks, Dm, FX, zo, A8, L2 } from "../figma_app/728075";
+import { bluePrimaryColor, yellowPrimaryColor, cyanPrimaryColor, pinkPrimaryColor, greenPrimaryColor, indigoPrimaryColor, purplePrimaryColor2 } from "../figma_app/728075";
 import { A as _$$A6 } from "../svg/831814";
 import e8 from "classnames";
 import { L as _$$L, I as _$$I } from "../1577/16430";
@@ -901,15 +901,15 @@ let eY = jsx("svg", {
   })
 });
 let eX = {
-  Blue: wR,
-  "Multiplayer Yellow": Ks,
-  Teal: Dm,
-  "Hot Pink": FX,
+  Blue: bluePrimaryColor,
+  "Multiplayer Yellow": yellowPrimaryColor,
+  Teal: cyanPrimaryColor,
+  "Hot Pink": pinkPrimaryColor,
   Redish: qE,
-  Green: zo,
-  Purple: A8,
+  Green: greenPrimaryColor,
+  Purple: indigoPrimaryColor,
   "Dark Blue": S0,
-  "FigJam Primary": L2
+  "FigJam Primary": purplePrimaryColor2
 };
 let eV = Object.keys(eX)[0];
 function eK() {

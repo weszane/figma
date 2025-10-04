@@ -13,7 +13,7 @@ import { ei, E1 } from "../figma_app/9054";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { useSingleEffect } from "../905/791079";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { useSubscription } from "../figma_app/288654";
 import { ResourceStatus } from "../905/723791";
 import { reportError } from "../905/11";
@@ -167,7 +167,7 @@ export function $$$2({
   });
   let {
     windowInnerWidth
-  } = _$$l();
+  } = useWindowDimensions();
   let c = parsePxNumber(compareChangesModalPadding);
   return jsx(ModalRootComponent, {
     manager: a,

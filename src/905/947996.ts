@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { A as _$$A } from "../905/408320";
 import { q } from "../905/820062";
 import o from "classnames";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -65,7 +65,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
           children: jsx("span", {
             className: cssBuilderInstance.pre.$,
             children: renderI18nText(n ? "fragment_search.last.edited_time_without_separator" : "fragment_search.last.edited_time_with_separator", {
-              time: jsx(h1, {
+              time: jsx(RelativeTimeDisplay, {
                 date: t
               })
             })

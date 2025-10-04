@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { Hm, Bs, AV, Gb } from "../figma_app/933328";
+import { upsertSharedModule, insertSharedModule, applySharedStyle, useFileLibrarySubscriptions } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
 import { isVsCodeEnvironment } from "../905/858738";
 import { useSceneGraphSelector, useAppModelProperty, useIsProgressBarHiddenOrLocked, useAppModelPropsShallow, useOnSelectionChange } from "../figma_app/722362";
@@ -149,7 +149,7 @@ import { c$ as _$$c$, tV as _$$tV, l6 as _$$l6, sK as _$$sK } from "../905/79487
 import { gm, pW } from "../figma_app/335781";
 import { ChevronContainer } from "../905/1946";
 import { bL as _$$bL3, RT, c$ as _$$c$2 } from "../905/867927";
-import { q as _$$q3 } from "../905/932270";
+import { Legend } from "../905/932270";
 import { Tj } from "../figma_app/342207";
 import { selectSingleSelectedNode, selectSceneGraphSelectionKeys, selectInstanceKeys } from "../figma_app/889655";
 import { N as _$$N2 } from "../905/720559";
@@ -998,7 +998,7 @@ async function e7(e, t) {
   if (!e.id || !t) return null;
   try {
     let i;
-    let n = (await Hm(e)).localGUID;
+    let n = (await upsertSharedModule(e)).localGUID;
     let r = getSingletonSceneGraph();
     if (!r) return null;
     let l = r.get(n);
@@ -1134,7 +1134,7 @@ let tt = async ({
             onFailure: n,
             subscribeToLibrary: r
           }) {
-            e(Bs({
+            e(insertSharedModule({
               item: t.module,
               canvasPosition: new Point(),
               percentageOffset: new Point(),
@@ -3041,7 +3041,7 @@ function nS({
         i(e);
       },
       recordingKey: e,
-      legend: jsx(_$$q3, {
+      legend: jsx(Legend, {
         children: renderI18nText("slides.properties_panel.object_animations.animation_phase")
       }),
       children: ["IN", "OUT"].map(e => jsx(RT, {
@@ -6442,7 +6442,7 @@ function oU({
       inheritStyleKey: t,
       minBottomMargin: 4,
       onApplyStyle: (e, t) => {
-        u(AV({
+        u(applySharedStyle({
           style: e,
           inheritStyleKeyField: a,
           fromSearch: t
@@ -6634,7 +6634,7 @@ function oz({
       e.target === e.currentTarget && x(e);
     },
     onClick: () => {
-      f ? Fullscreen?.findMissingFontsAndShowPopover() : m(AV({
+      f ? Fullscreen?.findMissingFontsAndShowPopover() : m(applySharedStyle({
         style: e,
         inheritStyleKeyField: "inheritTextStyleKey"
       }));
@@ -6988,7 +6988,7 @@ function o0({
   let x = _$$B5();
   let h = async t => {
     t.stopPropagation();
-    e.isLocal && fontFamily && fontStyle && fontSize && lineHeight && letterSpacing && (i(AV({
+    e.isLocal && fontFamily && fontStyle && fontSize && lineHeight && letterSpacing && (i(applySharedStyle({
       style: e,
       inheritStyleKeyField: "inheritTextStyleKey"
     })), Fullscreen?.selectStyleByGuid(e.node_id), await waitForAnimationFrame(), fullscreenValue.updateSelectionProperties({
@@ -9084,7 +9084,7 @@ let cK = memo(({
   let H = useSelector(e => e.universalInsertModal);
   let Y = useDispatch();
   let q = wd();
-  Gb(L);
+  useFileLibrarySubscriptions(L);
   _$$W();
   g2();
   useEffect(() => () => {

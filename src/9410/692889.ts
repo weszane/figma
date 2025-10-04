@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { useCanAccessFullDevMode, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useHasParentOrgId } from "../905/882262";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 export function $$g0({
@@ -42,10 +42,10 @@ export function $$g0({
     (e || t) && S(!0);
   }, [hasCompletedStatus, hasReadyStatus]);
   let j = useCallback(() => {
-    b && e && z4.setNodesCompleted([e], `${t}-complete-button`);
+    b && e && fullscreenAlias.setNodesCompleted([e], `${t}-complete-button`);
   }, [b, e, t]);
   let I = useCallback(() => {
-    b && e && z4.setNodesReady(!0, [e], `${t}-complete-button`, null);
+    b && e && fullscreenAlias.setNodesReady(!0, [e], `${t}-complete-button`, null);
   }, [b, e, t]);
   let k = getFeatureFlags().dt_interactive_inspection_m2 && !hasCompletedStatus && !hasReadyStatus && !w;
   let N = useMemo(() => hasReadyStatus ? j : hasCompletedStatus || k ? I : void 0, [hasCompletedStatus, hasReadyStatus, j, I, k]);

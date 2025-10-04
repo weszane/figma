@@ -31,11 +31,11 @@ import { g_ } from '../905/646788';
 import { e0 as _$$e2 } from '../905/696396';
 import { openFileInNewTab, openPrototypeInNewTab } from '../905/697795';
 import { l as _$$l } from '../905/714607';
-import { NA } from '../905/738636';
+import { handleAutosaveFileCreation } from '../905/738636';
 import { findBranchById, generateUrl, isDefaultFile } from '../905/760074';
 import { useDropdown } from '../905/848862';
 import { n as _$$n, g4, m8, SW, Ul, v_ } from '../905/864644';
-import { F as _$$F3 } from '../905/915030';
+import { ComFileType } from '../905/915030';
 import { $S, mu } from '../905/918620';
 import { selectViewAction } from '../905/929976';
 import { fileEntityDataMapper } from '../905/943101';
@@ -179,7 +179,7 @@ export function $$ek0(e) {
           folderId: e.file.folderId
         }));
         i(y$({
-          type: _$$F3.FILES,
+          type: ComFileType.FILES,
           tiles: [e]
         }));
       } else {
@@ -195,7 +195,7 @@ export function $$ek0(e) {
       folderId: e.repo.folder_id
     }));
     i(y$({
-      type: _$$F3.REPOS,
+      type: ComFileType.REPOS,
       tiles: [e]
     }));
   };
@@ -218,7 +218,7 @@ export function $$ek0(e) {
         customHistory.redirect(generateUrl(r, t.repo, 'file'), '_blank');
         break;
       case nb.OFFLINE_FILE:
-        i(NA({
+        i(handleAutosaveFileCreation({
           file: t.file,
           openNewFileIn: TabOpenBehavior.NEW_TAB,
           source: NotificationType.OFFLINE_FILE_TILE
@@ -451,13 +451,13 @@ export function $$ek0(e) {
     i(an());
   };
   let tp = () => {
-    let e = Object.keys(tileSelect[_$$F3.REPOS]);
+    let e = Object.keys(tileSelect[ComFileType.REPOS]);
     e.length > 0 && i(iC({
       recent_repo_ids: e
     }));
     let t = [];
     for (let i of e) t = t.concat(fileKeysByRepoId[i]);
-    let n = Object.keys(tileSelect[_$$F3.FILES]).concat(t);
+    let n = Object.keys(tileSelect[ComFileType.FILES]).concat(t);
     let r = n.map(e => ({
       key: e
     }));
@@ -466,7 +466,7 @@ export function $$ek0(e) {
         numFiles: n.length
       })));
       return e;
-    }), Object.keys(tileSelect[_$$F3.PROTOTYPES]))) {
+    }), Object.keys(tileSelect[ComFileType.PROTOTYPES]))) {
       let [t, n, r] = e.split(',');
       i(removeRecentPrototypeViewed({
         fileKey: t,
@@ -578,9 +578,9 @@ export function $$ek0(e) {
       _$$O(t, n, i);
     }
   };
-  let ty = useMemo(() => Object.keys(tileSelect[_$$F3.FILES]), [tileSelect]);
-  let tb = useMemo(() => Object.keys(tileSelect[_$$F3.PINNED_FILES]), [tileSelect]);
-  let tv = useMemo(() => Object.keys(tileSelect[_$$F3.REPOS]), [tileSelect]);
+  let ty = useMemo(() => Object.keys(tileSelect[ComFileType.FILES]), [tileSelect]);
+  let tb = useMemo(() => Object.keys(tileSelect[ComFileType.PINNED_FILES]), [tileSelect]);
+  let tv = useMemo(() => Object.keys(tileSelect[ComFileType.REPOS]), [tileSelect]);
   let tI = useMemo(() => Ul(ty, e.permsByFileKey) || [], [e.permsByFileKey, ty]);
   let tE = useMemo(() => _$$n(ty, e.permsByFileKey) || [], [e.permsByFileKey, ty]);
   let tx = useMemo(() => g4(ty, e.permsByFileKey) || [], [e.permsByFileKey, ty]);
@@ -588,17 +588,17 @@ export function $$ek0(e) {
   let tw = useMemo(() => v_(ty, e.permsByFileKey).length, [e.permsByFileKey, ty]);
   let tC = useMemo(() => v_(tb, e.permsByFileKey).length, [e.permsByFileKey, tb]);
   let tT = useMemo(() => m8(ty, e.permsByFileKey) || [], [e.permsByFileKey, ty]);
-  let tk = useMemo(() => isOnDeleted ? Object.keys(tileSelect[_$$F3.REPOS]).length : (nL(tv, selectedBranchKeyByRepoId, e.permsByRepoId) || []).length, [isOnDeleted, e.permsByRepoId, tileSelect, tv, selectedBranchKeyByRepoId]);
+  let tk = useMemo(() => isOnDeleted ? Object.keys(tileSelect[ComFileType.REPOS]).length : (nL(tv, selectedBranchKeyByRepoId, e.permsByRepoId) || []).length, [isOnDeleted, e.permsByRepoId, tileSelect, tv, selectedBranchKeyByRepoId]);
   let tR = useMemo(() => zj(tv, e.permsByRepoId) || [], [e.permsByRepoId, tv]);
   let tN = useMemo(() => _H(tv, e.permsByRepoId) || [], [e.permsByRepoId, tv]);
   let tP = useMemo(() => CS(tv, e.permsByRepoId) || [], [e.permsByRepoId, tv]);
   let tO = useMemo(() => gX(tv, e.permsByRepoId) || [], [e.permsByRepoId, tv]);
-  let tD = useMemo(() => Object.keys(mapOfflineFiles(tileSelect[_$$F3.OFFLINE_FILES], {
+  let tD = useMemo(() => Object.keys(mapOfflineFiles(tileSelect[ComFileType.OFFLINE_FILES], {
     offlineFiles: eG
   })), [eG, tileSelect]);
   let tL = useMemo(() => ae(tv, e.permsByRepoId) || [], [e.permsByRepoId, tv]);
-  let tF = useMemo(() => Object.keys(tileSelect[_$$F3.FILES]).length + Object.keys(tileSelect[_$$F3.REPOS]).length + Object.keys(tileSelect[_$$F3.PROTOTYPES]).length, [tileSelect]);
-  let tM = useMemo(() => Object.keys(tileSelect[_$$F3.FILES]).length + Object.keys(tileSelect[_$$F3.REPOS]).length, [tileSelect]);
+  let tF = useMemo(() => Object.keys(tileSelect[ComFileType.FILES]).length + Object.keys(tileSelect[ComFileType.REPOS]).length + Object.keys(tileSelect[ComFileType.PROTOTYPES]).length, [tileSelect]);
+  let tM = useMemo(() => Object.keys(tileSelect[ComFileType.FILES]).length + Object.keys(tileSelect[ComFileType.REPOS]).length, [tileSelect]);
   let tj = useMemo(() => {
     let t = new Set();
     let i = new Set();
@@ -646,11 +646,11 @@ export function $$ek0(e) {
       teamUser: tZ
     }));
   }, [eU, tQ, user, tZ, getUpgradeEligibility, tX, tJ.data?.file?.mustUpgradeToShareDraft]);
-  let t1 = Object.keys(tileSelect[_$$F3.FILES]).length;
-  let t2 = Object.keys(tileSelect[_$$F3.PINNED_FILES]).length;
-  let t5 = Object.keys(tileSelect[_$$F3.PROTOTYPES]).length;
-  let t4 = Object.keys(tileSelect[_$$F3.REPOS]).length;
-  let t3 = Object.keys(tileSelect[_$$F3.OFFLINE_FILES]).length;
+  let t1 = Object.keys(tileSelect[ComFileType.FILES]).length;
+  let t2 = Object.keys(tileSelect[ComFileType.PINNED_FILES]).length;
+  let t5 = Object.keys(tileSelect[ComFileType.PROTOTYPES]).length;
+  let t4 = Object.keys(tileSelect[ComFileType.REPOS]).length;
+  let t3 = Object.keys(tileSelect[ComFileType.OFFLINE_FILES]).length;
   let t6 = jB({
     files: tB ? [fileEntityDataMapper.toSinatra(tB)] : [],
     repos: tz ? [tz] : [],
@@ -988,7 +988,7 @@ export function $$ek0(e) {
     let s = tB && a.includes(tB.key);
     let o = tV && a.includes(tV.key);
     let l = tz && tz.default_file_key && a.includes(tz.default_file_key);
-    let d = s || o || l || Object.keys(tileSelect[_$$F3.PINNED_FILES]).length > 0;
+    let d = s || o || l || Object.keys(tileSelect[ComFileType.PINNED_FILES]).length > 0;
     let u = t1 + t2 + t5 + t4 + t3 === 1;
     let p = !tB?.teamId && !tB?.parentOrgId && tB?.folderId === user?.personal_drafts_folder_id;
     let m = tG?.editorType === FFileType.FIGMAKE && !tU;

@@ -1,194 +1,269 @@
-import { debounce } from "../905/915765";
-import { BuildStatus, SourceType, PluginSource } from "../figma_app/763686";
-import { defaultSessionLocalIDString } from "../905/871411";
-import { atomStoreManager } from "../figma_app/27355";
-import { trackEventAnalytics } from "../905/449184";
-import { debugState } from "../905/407919";
-import { sendWithRetry } from "../905/910117";
-import { eN } from "../figma_app/401061";
-import { getUnitForEntry } from "../905/762943";
-import { isInteractiveInspectionAndRollbackEnabled } from "../figma_app/544649";
-import { L } from "../figma_app/53571";
-import { atomM4 } from "../figma_app/879363";
-import { showDropdownThunk, selectViewAction } from "../905/929976";
-import { WJ, AM, XX } from "../figma_app/8833";
-import { sendAsset } from "../figma_app/415217";
-import { FEditorType } from "../figma_app/53721";
-import { isVsCodeEnvironment } from "../905/858738";
-export let $$b2 = {
+import { debugState } from "../905/407919"
+import { trackEventAnalytics } from "../905/449184"
+import { getUnitForEntry } from "../905/762943"
+import { isVsCodeEnvironment } from "../905/858738"
+import { defaultSessionLocalIDString } from "../905/871411"
+import { sendWithRetry } from "../905/910117"
+import { debounce } from "../905/915765"
+import { selectViewAction, showDropdownThunk } from "../905/929976"
+import { AM, WJ, XX } from "../figma_app/8833"
+import { atomStoreManager } from "../figma_app/27355"
+import { setNodeStatus } from "../figma_app/53571"
+import { FEditorType } from "../figma_app/53721"
+import { eN } from "../figma_app/401061"
+import { sendAsset } from "../figma_app/415217"
+import { isInteractiveInspectionAndRollbackEnabled } from "../figma_app/544649"
+import { BuildStatus, PluginSource, SourceType } from "../figma_app/763686"
+import { atomM4 } from "../figma_app/879363"
+
+// Refactored interface for fullscreen operations
+export interface FullscreenAPI {
+  getIsExtension: () => boolean
+  setNodesReady: (isBuilding: boolean, nodeIds: string[], source: string, description?: string) => void
+  setNodesCompleted: (nodeIds: string[], source: string) => void
+  forwardExportsToExtension: (assetName: string, buffer: ArrayBuffer) => void
+  showAnnotationsButtonContextMenu: (target: HTMLElement, count: number) => void
+  showStatusContextMenu: (target: HTMLElement, nodeId: string) => void
+  showLinterContextMenu: (target: HTMLElement) => void
+  isStatusContextMenuShowing: () => boolean
+  isLinterContextMenuShowing: () => boolean
+  isDevModeOverview: () => boolean
+  enterDevModeFocusView: (nodeId: string, backButtonTargetId?: string) => void
+  exitDevModeFocusOrOverview: () => void
+  isInteractiveInspectionEnabled: () => boolean
+  isChangingInspectionValues: () => boolean
+  onUnexpectedEditInFocusView: () => void
+  getUnitName: (source: {type: PluginSource; id: string}, unitId: string) => string
+}
+
+// Initial implementation that throws errors until initialized
+export let fullscreenAlias: FullscreenAPI = {
   getIsExtension: () => isVsCodeEnvironment(),
-  setNodesReady(e, t, i) {
-    throw Error("Fullscreen not initialized");
+  setNodesReady(_isBuilding, _nodeIds, _source, _description) {
+    throw new Error("Fullscreen not initialized")
   },
-  setNodesCompleted(e, t) {
-    throw Error("Fullscreen not initialized");
+  setNodesCompleted(_nodeIds, _source) {
+    throw new Error("Fullscreen not initialized")
   },
-  forwardExportsToExtension(e, t) {
-    throw Error("Fullscreen not initialized");
+  forwardExportsToExtension(_assetName, _buffer) {
+    throw new Error("Fullscreen not initialized")
   },
-  showAnnotationsButtonContextMenu() {
-    throw Error("Fullscreen not initialized");
+  showAnnotationsButtonContextMenu(_target, _count) {
+    throw new Error("Fullscreen not initialized")
   },
-  showStatusContextMenu(e, t) {
-    throw Error("Fullscreen not initialized");
+  showStatusContextMenu(_target, _nodeId) {
+    throw new Error("Fullscreen not initialized")
   },
-  showLinterContextMenu() {
-    throw Error("Fullscreen not initialized");
+  showLinterContextMenu(_target) {
+    throw new Error("Fullscreen not initialized")
   },
   isStatusContextMenuShowing() {
-    throw Error("Fullscreen not initialized");
+    throw new Error("Fullscreen not initialized")
   },
   isLinterContextMenuShowing() {
-    throw Error("Fullscreen not initialized");
+    throw new Error("Fullscreen not initialized")
   },
-  isDevModeOverview: () => !1,
-  enterDevModeFocusView(e) {
-    throw Error("Fullscreen not initialized");
+  isDevModeOverview: () => false,
+  enterDevModeFocusView(_nodeId) {
+    throw new Error("Fullscreen not initialized")
   },
   exitDevModeFocusOrOverview() {
-    throw Error("Fullscreen not initialized");
+    throw new Error("Fullscreen not initialized")
   },
-  isInteractiveInspectionEnabled: () => !1,
-  isChangingInspectionValues: () => !1,
+  isInteractiveInspectionEnabled: () => false,
+  isChangingInspectionValues: () => false,
   onUnexpectedEditInFocusView() {
-    throw Error("Fullscreen not initialized");
+    throw new Error("Fullscreen not initialized")
   },
-  getUnitName(e, t) {
-    throw Error("Fullscreen not initialized");
-  }
-};
-export class $$v0 {
+  getUnitName(_source, _unitId) {
+    throw new Error("Fullscreen not initialized")
+  },
+}
+
+// Type for related links data
+interface RelatedLink {
+  nodeId: string
+  fileKey: string
+  linkName: string
+  linkUrl: string
+}
+
+// Refactored class for managing related links with better naming and structure
+export class RelatedLinksManager {
+  private pendingRelatedLinks: RelatedLink[] = []
+  private flushLinks: (resolve: (value: unknown) => void, reject: (reason?: unknown) => void) => void
+
   constructor() {
-    this.pendingRelatedLinks = [];
-    this.flushLinks = debounce(async (e, t) => {
-      let i = this.pendingRelatedLinks;
-      this.pendingRelatedLinks = [];
-      let n = 1;
+    // Refactored flushLinks with clearer variable names and structure
+    this.flushLinks = debounce(async (resolve, reject) => {
+      const linksToProcess = this.pendingRelatedLinks
+      this.pendingRelatedLinks = []
+
+      let retryMultiplier = 1
+
       for (; ;) {
         try {
-          let t = {
-            link_batch: i.map(e => ({
-              node_id: e.nodeId,
-              file_key: e.fileKey,
-              link_name: e.linkName,
-              link_url: e.linkUrl
-            }))
-          };
-          e(sendWithRetry.post("/api/files/related_links_batch", t));
-          return;
-        } catch (e) {
-          if (e.status >= 400 && e.status < 500) {
-            t(e);
-            return;
+          const requestData = {
+            link_batch: linksToProcess.map(link => ({
+              node_id: link.nodeId,
+              file_key: link.fileKey,
+              link_name: link.linkName,
+              link_url: link.linkUrl,
+            })),
+          }
+
+          resolve(sendWithRetry.post("/api/files/related_links_batch", requestData))
+          return
+        }
+        catch (error) {
+          // Handle client errors immediately
+          if (error.status >= 400 && error.status < 500) {
+            reject(error)
+            return
           }
         }
-        let r = 1e3 * n * Math.random();
-        await new Promise(e => setTimeout(e, r));
-        n = Math.min(2 * n, 64);
+
+        // Exponential backoff with jitter
+        const delay = 1000 * retryMultiplier * Math.random()
+        await new Promise(resolve => setTimeout(resolve, delay))
+        retryMultiplier = Math.min(2 * retryMultiplier, 64)
       }
-    }, 100);
+    }, 100)
   }
-  addLinks(e) {
-    this.pendingRelatedLinks.push(...e);
-    return new Promise((e, t) => this.flushLinks(e, t));
+
+  /**
+   * Add links to the pending batch and trigger flush
+   * @param links - Array of related links to add
+   * @returns Promise that resolves when links are processed
+   */
+  addLinks(links: RelatedLink[]): Promise<unknown> {
+    this.pendingRelatedLinks.push(...links)
+    return new Promise((resolve, reject) => this.flushLinks(resolve, reject))
   }
 }
-export function $$I1() {
-  $$b2 = {
+
+/**
+ * Initializes the fullscreen API with actual implementations
+ */
+export function initializeFullscreenAPI(): void {
+  fullscreenAlias = {
     getIsExtension: () => isVsCodeEnvironment(),
-    setNodesReady(e, t, i, n) {
-      let a = e ? BuildStatus.BUILD : BuildStatus.NONE;
-      L({
-        nodeIds: t,
-        status: a,
-        sourceForLogging: i,
-        description: n,
-        editScopeType: SourceType.USER
-      });
+
+    setNodesReady(isBuilding, nodeIds, source, description) {
+      const status = isBuilding ? BuildStatus.BUILD : BuildStatus.NONE
+      setNodeStatus({
+        nodeIds,
+        status,
+        sourceForLogging: source,
+        description,
+        editScopeType: SourceType.USER,
+      })
     },
-    setNodesCompleted(e, t) {
-      L({
-        nodeIds: e,
+
+    setNodesCompleted(nodeIds, source) {
+      setNodeStatus({
+        nodeIds,
         status: BuildStatus.COMPLETED,
-        sourceForLogging: t,
-        editScopeType: SourceType.USER
-      });
+        sourceForLogging: source,
+        editScopeType: SourceType.USER,
+      })
     },
-    forwardExportsToExtension(e, t) {
+
+    forwardExportsToExtension(assetName, buffer) {
       sendAsset({
-        assetName: e,
-        buffer: t
-      });
+        assetName,
+        buffer,
+      })
     },
-    showStatusContextMenu(e, t) {
+
+    showStatusContextMenu(target, nodeId) {
       debugState.dispatch(showDropdownThunk({
         type: WJ,
         data: {
-          targetInViewport: e,
-          nodeId: t
-        }
-      }));
+          targetInViewport: target,
+          nodeId,
+        },
+      }))
     },
-    showLinterContextMenu(e) {
+
+    showLinterContextMenu(target) {
       debugState.dispatch(showDropdownThunk({
         type: AM,
         data: {
-          targetInViewport: e
-        }
-      }));
+          targetInViewport: target,
+        },
+      }))
     },
+
     isStatusContextMenuShowing: () => debugState.getState().dropdownShown?.type === WJ,
     isLinterContextMenuShowing: () => debugState.getState().dropdownShown?.type === AM,
-    showAnnotationsButtonContextMenu(e, t) {
+
+    showAnnotationsButtonContextMenu(target, annotationsCount) {
       debugState.dispatch(showDropdownThunk({
         type: XX,
         data: {
-          targetInViewport: e,
-          annotationsCount: t
-        }
-      }));
+          targetInViewport: target,
+          annotationsCount,
+        },
+      }))
     },
+
     isDevModeOverview() {
-      let e = debugState.getState().selectedView;
-      return "fullscreen" === e.view && !!e.showOverview;
+      const viewState = debugState.getState().selectedView
+      return viewState.view === "fullscreen" && !!viewState.showOverview
     },
-    enterDevModeFocusView(e, t) {
-      if (!e || e === defaultSessionLocalIDString) return;
-      let i = debugState.getState().selectedView;
-      atomStoreManager.set(atomM4, "dev_mode_canvas_ii");
-      let n = {
-        ...i,
+
+    enterDevModeFocusView(nodeId, backButtonTargetId) {
+      if (!nodeId || nodeId === defaultSessionLocalIDString) {
+        return
+      }
+
+      const currentView = debugState.getState().selectedView
+      atomStoreManager.set(atomM4, "dev_mode_canvas_ii")
+
+      const newView = {
+        ...currentView,
         editorType: FEditorType.DevHandoff,
         focusViewBackNavigation: {
-          toEditorType: i.editorType,
-          toOverview: !1
+          toEditorType: currentView.editorType,
+          toOverview: false,
         },
-        devModeFocusId: e,
-        overviewBackButtonTargetNodeId: t
-      };
-      debugState.dispatch(selectViewAction(n));
-      trackEventAnalytics("Dev Mode II Focus Entry Clicked");
+        devModeFocusId: nodeId,
+        overviewBackButtonTargetNodeId: backButtonTargetId,
+      }
+
+      debugState.dispatch(selectViewAction(newView))
+      trackEventAnalytics("Dev Mode II Focus Entry Clicked")
     },
+
     exitDevModeFocusOrOverview() {
-      let e = {
+      const currentView = {
         ...debugState.getState().selectedView,
-        showOverview: !1,
-        devModeFocusId: void 0
-      };
-      debugState.dispatch(selectViewAction(e));
+        showOverview: false,
+        devModeFocusId: undefined,
+      }
+      debugState.dispatch(selectViewAction(currentView))
     },
+
     isInteractiveInspectionEnabled: () => isInteractiveInspectionAndRollbackEnabled(),
     isChangingInspectionValues: eN,
-    onUnexpectedEditInFocusView() { },
-    getUnitName(e, t) {
-      let i = {
-        ...e,
-        type: e.type === PluginSource.FIRST_PARTY ? "first-party" : e.type === PluginSource.LOCAL_PLUGIN ? "local-plugin" : "published-plugin"
-      };
-      return getUnitForEntry(i, t);
-    }
-  };
+    onUnexpectedEditInFocusView() { }, // No-op function
+
+    getUnitName(source, unitId) {
+      const normalizedSource = {
+        ...source,
+        type: source.type === PluginSource.FIRST_PARTY
+          ? "first-party"
+          : source.type === PluginSource.LOCAL_PLUGIN
+            ? "local-plugin"
+            : "published-plugin",
+      }
+      return getUnitForEntry(normalizedSource, unitId)
+    },
+  }
 }
-export const GK = $$v0;
-export const Ln = $$I1;
-export const z4 = $$b2;
+
+// Export aliases with descriptive names
+export const GK = RelatedLinksManager
+export const Ln = initializeFullscreenAPI
+export const z4 = fullscreenAlias

@@ -21,7 +21,7 @@ import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { useSelectionPropertyValue } from "../905/275640";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -39,7 +39,7 @@ import { bL, l9, mc, c$ as _$$c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { EventShield } from "../905/821217";
 import { bL as _$$bL, RT, c$ as _$$c$2 } from "../905/867927";
-import { q as _$$q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { O as _$$O3 } from "../905/599243";
 import { cS, Cm } from "../figma_app/334459";
 import { q as _$$q2 } from "../905/74101";
@@ -184,7 +184,7 @@ function ee(e) {
       children: jsx(EventShield, {
         eventListeners: ["onMouseDown"],
         children: jsxs(_$$bL, {
-          legend: jsx(_$$q, {
+          legend: jsx(Legend, {
             children: getI18nString("properties_panel.transform_modifiers.repeat.type")
           }),
           value: e.transformModifier.repeatType,
@@ -206,7 +206,7 @@ function ee(e) {
         children: jsx("span", {
           className: Z,
           children: jsxs(_$$bL, {
-            legend: jsx(_$$q, {
+            legend: jsx(Legend, {
               children: getI18nString("properties_panel.transform_modifiers.repeat.direction")
             }),
             value: e.transformModifier.axis,
@@ -547,7 +547,7 @@ function eL(e) {
     });
     a2("transformModifiers");
   }, [k, dispatch, onChange, T]);
-  let D = o3(nt.useGrid) && isUI3;
+  let D = useLabConfiguration(labConfigurations.useGrid) && isUI3;
   let {
     useLargePreviewRows
   } = useContext(_$$Q2);

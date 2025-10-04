@@ -16,7 +16,7 @@ import { S as _$$S } from "../figma_app/11182";
 import { hideDropdownAction } from "../905/929976";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
-import { Cn } from "../905/862913";
+import { convertToRgba } from "../905/862913";
 import { useDropdownState } from "../905/848862";
 import { Ve } from "../figma_app/198840";
 import { FileCanView } from "../figma_app/43951";
@@ -113,7 +113,7 @@ export function $$M0(e) {
     children: [jsx(zq, {
       onContextMenu: u,
       image: jsxs(FK, {
-        backgroundColor: Cn(clientMeta),
+        backgroundColor: convertToRgba(clientMeta),
         children: [jsx(zx.Cover, {
           children: jsx("button", {
             className: n_,

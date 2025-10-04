@@ -3,7 +3,7 @@ import { useEffect, memo, useCallback, useRef, useMemo, useState } from "react";
 import { useSelector, useDispatch, useStore } from "react-redux";
 import { DesignGraphElements, Fullscreen, SchemaJoinStatus } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { uM } from "../905/738636";
+import { createAndOpenFile } from "../905/738636";
 import { postUserFlag } from "../905/985254";
 import { e } from "../905/621515";
 import { getNewFileConfig } from "../905/766303";
@@ -625,7 +625,7 @@ export function $$eo1() {
         },
         editorType: FFileType.DESIGN
       });
-      O(uM(e));
+      O(createAndOpenFile(e));
       ee();
     },
     onSecondaryCtaClick: ee,

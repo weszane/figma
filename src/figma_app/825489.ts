@@ -1,114 +1,194 @@
-import { noop } from 'lodash-es';
-import { l as _$$l } from "../905/716947";
-import { atom, createRemovableAtomFamily, mg, createAtomWithEquality, setupCustomAtom } from "../figma_app/27355";
-import s from "../vendor/239910";
-import { createLoadingState } from "../905/723791";
-import { equals } from "../figma_app/476572";
-import { canAdminPublish } from "../figma_app/275462";
-import { figmaLibrariesEnabledAtom } from "../figma_app/657017";
-import { getProviderConfigType } from "../figma_app/155411";
-import { hasRootPath } from "../figma_app/528509";
-import { mapLoadedFileComponents } from "../905/9585";
-import { i as _$$i } from "../905/667910";
-import { o as _$$o } from "../905/738144";
-import { F } from "../905/686267";
-import { kX, cM } from "../905/261982";
-import { openFileAtom } from "../figma_app/516028";
-import { createAtomWithReduxWithState, createReduxSubscriptionAtomWithState, setupReduxAtomWithState, attachReducerWrapper } from "../905/270322";
-import { SubscribedLibrariesForFile, CommunityLibraryComponentsAndStateGroups, CommunityLibraryStyleData, CommunityLibraryVariableCollectionDataWithVariables, CommunityLibraryModules } from "../figma_app/43951";
-import { hasTeamPaidAccess } from "../figma_app/345997";
-import { transformAndFilterSubscriptions } from "../figma_app/155728";
-import { currentTeamAtom } from "../figma_app/598018";
-import { LibrarySourceEnum } from "../figma_app/633080";
-var o = s;
-let $$x0 = atom(e => {
-  let t = e(openFileAtom);
-  if (!t) return createLoadingState();
-  let r = t.parentOrgId;
-  let n = !!t.teamId;
-  let i = hasRootPath(t?.project);
-  let a = e(SubscribedLibrariesForFile.Query({
-    fileKey: t.key ?? "",
-    teamId: t.teamId ?? "-1",
-    workspaceId: t.team?.workspaceId ?? null,
-    orgId: r,
-    group: getProviderConfigType() ?? null
-  }));
-  let s = e(figmaLibrariesEnabledAtom);
-  let o = e(currentTeamAtom);
-  let d = hasTeamPaidAccess(o);
-  return transformAndFilterSubscriptions(a, n, i, s, r, d);
-});
-let N = createRemovableAtomFamily(e => mg($$x0, t => new Set(t.data?.map(t => t[e])), equals));
-export function $$C2(e) {
-  return N(e);
+import { keyBy, noop } from 'lodash-es'
+import { mapLoadedFileComponents } from "../905/9585"
+import { mapAndSortVariableSets, mapVariablePropertiesFromResource } from "../905/261982"
+import { attachReducerWrapper, createAtomWithReduxWithState, createReduxSubscriptionAtomWithState, setupReduxAtomWithState } from "../905/270322"
+import { mapCommunityLibraryModules } from "../905/667910"
+import { extractHubFileStyles } from "../905/686267"
+import { createLoadingState } from "../905/723791"
+import { mapFileStateGroups } from "../905/738144"
+import { atom, createAtomWithEquality, createRemovableAtomFamily, mg, setupCustomAtom } from "../figma_app/27355"
+import { CommunityLibraryComponentsAndStateGroups, CommunityLibraryModules, CommunityLibraryStyleData, CommunityLibraryVariableCollectionDataWithVariables, SubscribedLibrariesForFile } from "../figma_app/43951"
+import { getProviderConfigType } from "../figma_app/155411"
+import { transformAndFilterSubscriptions } from "../figma_app/155728"
+import { canAdminPublish } from "../figma_app/275462"
+import { hasTeamPaidAccess } from "../figma_app/345997"
+import { equals } from "../figma_app/476572"
+import { openFileAtom } from "../figma_app/516028"
+import { hasRootPath } from "../figma_app/528509"
+import { currentTeamAtom } from "../figma_app/598018"
+import { LibrarySourceEnum } from "../figma_app/633080"
+import { figmaLibrariesEnabledAtom } from "../figma_app/657017"
+import { PrimitiveAtom } from 'jotai'
+// Refactored subscribed libraries atom with clear naming and structure
+export const subscribedLibrariesAtom = atom((get) => {
+  const openFile = get(openFileAtom)
+  if (!openFile) {
+    return createLoadingState()
+  }
+
+  const orgId = openFile.parentOrgId
+  const hasTeam = !!openFile.teamId
+  const isInRootProject = hasRootPath(openFile?.project)
+
+  const subscribedLibrariesQuery = get(SubscribedLibrariesForFile.Query({
+    fileKey: openFile.key ?? "",
+    teamId: openFile.teamId ?? "-1",
+    workspaceId: openFile.team?.workspaceId ?? null,
+    orgId,
+    group: getProviderConfigType() ?? null,
+  }))
+
+  const areFigmaLibrariesEnabled = get(figmaLibrariesEnabledAtom)
+  const currentTeam = get(currentTeamAtom)
+  const teamHasPaidAccess = hasTeamPaidAccess(currentTeam)
+
+  return transformAndFilterSubscriptions(
+    subscribedLibrariesQuery,
+    hasTeam,
+    isInRootProject,
+    areFigmaLibrariesEnabled,
+    orgId,
+    teamHasPaidAccess,
+  )
+})
+
+// Refactored atom family for library subscriptions with improved readability
+export const librarySubscriptionAtomFamily = createRemovableAtomFamily(
+  propertyKey => mg(
+    subscribedLibrariesAtom,
+    data => new Set(data.data?.map(item => item[propertyKey])),
+    equals,
+  ),
+)
+
+/**
+ * Get library subscription atom by property key
+ * @param propertyKey - The property key to filter subscriptions
+ * @returns Atom with filtered subscription data
+ */
+export function getLibrarySubscriptionAtom(propertyKey: string) {
+  return librarySubscriptionAtomFamily(propertyKey)
 }
-let $$w5 = createAtomWithReduxWithState(LibrarySourceEnum.LIBRARY, "SET_LIBRARY_PUBLISHING_MODE");
-let $$O6 = createReduxSubscriptionAtomWithState(e => e.openFile?.publishedHubFile?.id);
-let $$R1 = createReduxSubscriptionAtomWithState(e => e.openFile?.publishedHubFile?.libraryKey ? _$$l(e.openFile.publishedHubFile.libraryKey) : null);
-let L = createReduxSubscriptionAtomWithState(e => e.openFile?.editorType);
-let $$P3 = atom(null);
-let D = (e, t) => t;
-let $$k4 = (() => {
-  let e = createAtomWithEquality(atom(e => {
-    let t = e($$O6);
-    let r = e(L);
-    let n = {
+
+// Redux atoms for library publishing state management
+export const libraryPublishingModeAtom = createAtomWithReduxWithState(
+  LibrarySourceEnum.LIBRARY as any,
+  "SET_LIBRARY_PUBLISHING_MODE",
+)
+
+const publishedHubFileIdAtom = createReduxSubscriptionAtomWithState(
+  state => state.openFile?.publishedHubFile?.id,
+)
+
+const publishedHubFileLibraryKeyAtom = createReduxSubscriptionAtomWithState(
+  state => state.openFile?.publishedHubFile?.libraryKey
+    ? state.openFile.publishedHubFile.libraryKey
+    : null,
+)
+
+const editorTypeAtom = createReduxSubscriptionAtomWithState(
+  state => state.openFile?.editorType,
+)
+
+// Default atom for library state
+export const defaultLibraryKeyAtom = atom(null) as PrimitiveAtom<any>
+
+// Identity reducer function
+const identityReducer = (state: any, action: any) => action
+
+// Main library data composition atom with clear structure and type safety
+export const libraryDataCompositionAtom = (() => {
+  // Core atom for fetching and mapping library data
+  const baseLibraryDataAtom = createAtomWithEquality(
+    atom((get) => {
+      const hubFileId = get(publishedHubFileIdAtom)
+      const editorType = get<any>(editorTypeAtom)
+
+      // Initialize empty library data structure
+      const libraryData = {
+        variableSets: {},
+        variables: {},
+        styles: {},
+        components: {},
+        stateGroups: {},
+        modules: {},
+      }
+
+      // Early return if no hub file or user cannot publish
+      if (!hubFileId || !canAdminPublish(editorType)) {
+        return libraryData
+      }
+
+      // Fetch and map community library components and state groups
+      const componentsAndStateGroups = get<any>(CommunityLibraryComponentsAndStateGroups.Query({
+        hubFileId,
+      }))
+      const mappedComponents = mapLoadedFileComponents(componentsAndStateGroups)
+      const mappedStateGroups = mapFileStateGroups(componentsAndStateGroups)
+
+      // Fetch and map community library styles
+      const styleData = get<any>(CommunityLibraryStyleData.Query({
+        hubFileId,
+      }))
+      const mappedStyles = extractHubFileStyles(styleData)
+
+      // Fetch and map community library variables
+      const variableCollectionData = get<any>(CommunityLibraryVariableCollectionDataWithVariables.Query({
+        hubFileId,
+      }))
+      const mappedVariableSets = mapAndSortVariableSets({
+        type: "community",
+        value: variableCollectionData,
+      }, true)
+      const mappedVariables = mapVariablePropertiesFromResource({
+        type: "community",
+        value: variableCollectionData,
+      }, true)
+
+      // Fetch and map community library modules
+      const moduleData = get<any>(CommunityLibraryModules.Query({
+        hubFileId,
+      }))
+      const mappedModules = mapCommunityLibraryModules(moduleData)
+
+      // Populate library data with mapped values
+      libraryData.variables = keyBy(mappedVariables, "node_id")
+      libraryData.variableSets = keyBy(mappedVariableSets, "node_id")
+      libraryData.styles = keyBy(mappedStyles, "node_id")
+      libraryData.components = keyBy(mappedComponents, "node_id")
+      libraryData.stateGroups = keyBy(mappedStateGroups, "node_id")
+      libraryData.modules = keyBy(mappedModules, "node_id")
+
+      return libraryData
+    }, noop),
+  )
+
+  // Setup Redux integration for library data
+  const reduxIntegratedAtom = setupReduxAtomWithState(
+    baseLibraryDataAtom,
+    "SET_OPEN_HUB_FILE_PUBLISHED_LIVEGRAPH",
+    {
       variableSets: {},
       variables: {},
       styles: {},
       components: {},
       stateGroups: {},
-      modules: {}
-    };
-    if (!t || !canAdminPublish(r ?? void 0)) return n;
-    let i = e(CommunityLibraryComponentsAndStateGroups.Query({
-      hubFileId: t
-    }));
-    let a = mapLoadedFileComponents(i);
-    let s = _$$o(i);
-    let l = e(CommunityLibraryStyleData.Query({
-      hubFileId: t
-    }));
-    let d = F(l);
-    let u = e(CommunityLibraryVariableCollectionDataWithVariables.Query({
-      hubFileId: t
-    }));
-    let p = kX({
-      type: "community",
-      value: u
-    }, !0);
-    let _ = cM({
-      type: "community",
-      value: u
-    }, !0);
-    let y = e(CommunityLibraryModules.Query({
-      hubFileId: t
-    }));
-    let b = _$$i(y);
-    n.variables = o()(_, "node_id");
-    n.variableSets = o()(p, "node_id");
-    n.styles = o()(d, "node_id");
-    n.components = o()(a, "node_id");
-    n.stateGroups = o()(s, "node_id");
-    n.modules = o()(b, "node_id");
-    return n;
-  }, noop));
-  let t = setupReduxAtomWithState(e, "SET_OPEN_HUB_FILE_PUBLISHED_LIVEGRAPH", {
-    variableSets: {},
-    variables: {},
-    styles: {},
-    components: {},
-    stateGroups: {},
-    modules: {}
-  });
-  let r = setupCustomAtom(t, D);
-  return attachReducerWrapper(r, t.reducer);
-})();
-export const I1 = $$x0;
-export const RG = $$R1;
-export const cY = $$C2;
-export const dL = $$P3;
-export const jz = $$k4;
-export const pz = $$w5;
-export const yP = $$O6;
+      modules: {},
+    },
+  )
+
+  // Setup custom atom with identity reducer
+  const customAtom = setupCustomAtom(reduxIntegratedAtom, identityReducer)
+
+  // Attach reducer wrapper for proper state management
+  return attachReducerWrapper(customAtom, reduxIntegratedAtom.reducer)
+})()
+
+// Export refactored atoms with descriptive names
+export const I1 = subscribedLibrariesAtom
+export const RG = publishedHubFileLibraryKeyAtom
+export const cY = getLibrarySubscriptionAtom
+export const dL = defaultLibraryKeyAtom
+export const jz = libraryDataCompositionAtom
+export const pz = libraryPublishingModeAtom
+export const yP = publishedHubFileIdAtom

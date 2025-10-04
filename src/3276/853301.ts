@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import { LayoutTabType } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { VU } from "../905/625959";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 export function $$c0() {
   let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMMENTS);
-  let t = o3(nt.commentsA11y) && e;
+  let t = useLabConfiguration(labConfigurations.commentsA11y) && e;
   return useCallback(() => {
     if (!t) return;
     let e = document.querySelector("button[data-kb-comment-insertion-button]");

@@ -29,7 +29,7 @@ export function getUnitForEntry(entry: {
   id: string
   type: string
   pluginLanguage?: string
-}, isTextProperty?: boolean): string {
+}, isTextProperty?: any): string {
   const plugin = findPluginForEntry(entry.id, {
     searchLocalPlugins: entry.type === 'local-plugin',
     searchPublishedPlugins: entry.type === 'published-plugin',

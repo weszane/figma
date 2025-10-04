@@ -5,7 +5,7 @@ import { analyticsEventManager } from "../905/449184";
 import { bellFeedAPIInstance, getBellFeedAPI } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { BrowserInfo } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { selectViewAction } from "../905/929976";
@@ -96,7 +96,7 @@ function N() {
   }
 }
 export function $$C0(e) {
-  let t = WB();
+  let t = getCurrentLiveGraphClient();
   bellFeedAPIInstance?.setListener({
     name: "updateRealtimeTokens",
     listener(e) {

@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resourceUtils } from "../905/989992";
 import { debugState } from "../905/407919";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { batchPutFileAction } from "../figma_app/78808";
 import { prototypeResetRecents, recentPrototypePost } from "../905/70982";
 import { uo as _$$uo, nF } from "../905/466026";
@@ -47,7 +47,7 @@ export async function $$I1(e) {
   let i = _$$f.removeRecentFiles({
     fileKeys: n
   });
-  let a = WB().optimisticallyDelete({
+  let a = getCurrentLiveGraphClient().optimisticallyDelete({
     RecentFile2: r
   }, i);
   trackMultipleFileEvent("File RecentFiles Removed", t);

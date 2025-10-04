@@ -14,7 +14,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { AccessLevelEnum } from '../905/557142';
 import { FlashActions, handlePromiseError } from '../905/573154';
 import { cL } from '../905/748726';
-import { WB } from '../905/761735';
+import { getCurrentLiveGraphClient } from '../905/761735';
 import { sendWithRetry } from '../905/910117';
 import { t as _$$t2 } from '../figma_app/32680';
 import { ConfigGroups, isReduxDeprecationCutover } from '../figma_app/121751';
@@ -441,7 +441,7 @@ export const sendRoleInvites = createOptimistThunk(({
   // Apply optimistic creation
   const resourceCategory = mapResourceCategoryToRole(resourceType);
   if (resourceCategory) {
-    WB().optimisticallyCreate({
+    getCurrentLiveGraphClient().optimisticallyCreate({
       [resourceCategory]: arrayToIdMap(validEmails.map(email => ({
         id: `temp-role-${email}`,
         createdAt: new Date(),

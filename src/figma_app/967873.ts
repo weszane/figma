@@ -1,7 +1,7 @@
 import { NodeType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager } from "../figma_app/27355";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { v } from "../figma_app/314838";
@@ -11,7 +11,7 @@ let $$p7 = atom(!1);
 let $$_0 = atom(void 0);
 let $$h4 = atom(0);
 export function $$m5(e, t) {
-  WB().optimisticallyDeleteWithUUID({
+  getCurrentLiveGraphClient().optimisticallyDeleteWithUUID({
     ColorPalette: {
       [e]: null
     }
@@ -25,7 +25,7 @@ export function $$g8(e, t, r) {
   let {
     uuid
   } = e;
-  WB().optimisticallyCreateWithUUID({
+  getCurrentLiveGraphClient().optimisticallyCreateWithUUID({
     ColorPalette: {
       [uuid]: e
     }
@@ -44,7 +44,7 @@ export function $$f3(e, t, r) {
   let {
     uuid
   } = e;
-  WB().optimisticallyUpdateWithUUID({
+  getCurrentLiveGraphClient().optimisticallyUpdateWithUUID({
     ColorPalette: {
       [uuid]: e
     }
@@ -58,7 +58,7 @@ export function $$f3(e, t, r) {
   });
 }
 export function $$E10(e, t, r) {
-  WB().optimisticallyUpdate({
+  getCurrentLiveGraphClient().optimisticallyUpdate({
     Team: {
       [e]: {
         defaultColorPaletteUuid: t
@@ -71,7 +71,7 @@ export function $$E10(e, t, r) {
   });
 }
 export function $$y1(e, t) {
-  WB().optimisticallyUpdate({
+  getCurrentLiveGraphClient().optimisticallyUpdate({
     Team: {
       [e]: {
         defaultColorPaletteUuid: null

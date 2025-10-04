@@ -1,4 +1,4 @@
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -30,7 +30,7 @@ let $$p1 = createOptimistThunk((e, {
   });
   let _ = e.getState().user;
   let h = _ && findPublishedProfileForUser(_, e.getState().authedProfilesById);
-  _?.id && h && WB().optimisticallyCreate({
+  _?.id && h && getCurrentLiveGraphClient().optimisticallyCreate({
     CommunityHubLike: {
       [`optimistic-${t}-${h.id}`]: {
         pluginId: t,
@@ -69,7 +69,7 @@ let $$_0 = createOptimistThunk((e, {
       error: !0
     }));
   });
-  e.getState().user?.id && s && WB().optimisticallyDelete({
+  e.getState().user?.id && s && getCurrentLiveGraphClient().optimisticallyDelete({
     CommunityHubLike: {
       [s]: null
     }

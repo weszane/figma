@@ -14,7 +14,7 @@ import { selectMergedAssets } from '../figma_app/645694';
 import { getAssetKeyForPublish, findAssetForNode } from '../figma_app/646357';
 import { ComponentPropType, ComponentType, Fullscreen } from '../figma_app/763686';
 import { FZ, Qp } from '../figma_app/803787';
-import { tL } from '../figma_app/933328';
+import { fetchAndUpdateStateGroups } from '../figma_app/933328';
 import { createSelector } from '../vendor/925040';
 export function $$T2(e) {
   return e === ComponentPropType.INSTANCE_SWAP || !!getFeatureFlags().dse_slots && e === ComponentPropType.SLOT;
@@ -48,7 +48,7 @@ let w = createOptimistThunk((e, {
   componentKeys: r,
   callback: n
 }) => {
-  tL(r, t, e, C(e, n));
+  fetchAndUpdateStateGroups(r, t, e, C(e, n));
 });
 let O = () => createSelector([Qp, (e, t) => t], (e, t) => {
   let r = [];

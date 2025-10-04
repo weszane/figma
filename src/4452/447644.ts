@@ -14,7 +14,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { BadgeColor } from "../figma_app/919079";
 import { gw, MM, wv } from "../figma_app/236327";
 import { SecureLink } from "../figma_app/637027";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { Wi, JR } from "../figma_app/162641";
 import { y2 } from "../figma_app/563413";
 import { G as _$$G } from "../905/750789";
@@ -772,7 +772,7 @@ export function $$e$0({
     "data-tooltip": getI18nString("admin_dashboard.requests.sent_you_a_reminder", {
       requesterName: e.name ?? e.email ?? ""
     }),
-    children: jsx(h1, {
+    children: jsx(RelativeTimeDisplay, {
       capitalize: !0,
       date: e.updatedAt
     })

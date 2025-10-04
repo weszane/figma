@@ -4,8 +4,8 @@ import { isNotNullish } from "../figma_app/95419";
 import { AffineTransform } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
-import { XC } from "../905/512783";
-import { c4 } from "../figma_app/70421";
+import { CommentPinElement } from "../905/512783";
+import { aggregateUserComments } from "../figma_app/70421";
 import { EO, l0 } from "../figma_app/536669";
 import { g as _$$g } from "../905/88169";
 import { g as _$$g2 } from "../905/388772";
@@ -72,8 +72,8 @@ export function $$f0({
           x: 0,
           y: 0
         };
-        let t = c4(i.comments);
-        let n = XC.getPinSize(t.length);
+        let t = aggregateUserComments(i.comments);
+        let n = CommentPinElement.getPinSize(t.length);
         let r = {
           x: e.x + (_?.x ?? 0),
           y: e.y + (_?.y ?? 0),

@@ -55,7 +55,7 @@ import { KindEnum } from "../905/129884";
 import { Y as _$$Y } from "../905/465068";
 import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/318279";
-import { pz } from "../figma_app/825489";
+import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { Iq } from "../905/723429";
 import { i as _$$i } from "../905/797975";
 import { U as _$$U } from "../905/275247";
@@ -508,7 +508,7 @@ function e$({
   workspaceName: b,
   updateFirstDraftMetadata: v
 }) {
-  let I = useAtomWithSubscription(pz);
+  let I = useAtomWithSubscription(libraryPublishingModeAtom);
   let E = !a && 0 === s;
   let x = u.state === LibraryPublishStatusEnum.ASSEMBLING_COMPONENTS;
   let S = getFeatureFlags().first_draft_api_publish && (E || !r);
@@ -1289,7 +1289,7 @@ function tJ(e) {
   let h = useDispatch();
   let g = useModalManager(e);
   let _ = useRef(null);
-  let [b, I] = useAtomValueAndSetter(pz);
+  let [b, I] = useAtomValueAndSetter(libraryPublishingModeAtom);
   let [T, k] = useState("");
   let [R, F] = useState(void 0);
   let H = useCallback(e => {

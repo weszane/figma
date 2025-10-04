@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { ColorOptions } from "../figma_app/763686";
 import { colorToRgbaString } from "../figma_app/191804";
 import { getI18nString } from "../905/303541";
-import { Tn, OF, Zv, L5, QE, B8 } from "../figma_app/728075";
+import { neutralPaperColor, greenTealColor, redCaramelColor, redGoldColor, greenSageColor, neutralDarkColor } from "../figma_app/728075";
 let $$l5 = "TYPESCRIPT";
 let $$d3 = ["BASH", "CPP", "CSS", "GO", "GRAPHQL", "HTML", "JAVASCRIPT", "JSON", "KOTLIN", "PLAINTEXT", "PYTHON", "RUBY", "RUST", "SQL", "SWIFT", "TYPESCRIPT"];
 let $$c6 = {
@@ -49,32 +49,32 @@ let $$u7 = ["DRACULA", "DUOTONE_LIGHT", "DUOTONE_SEA", "DUOTONE_SPACE", "DUOTONE
 export function $$p4(e) {
   switch (e) {
     case "DUOTONE_LIGHT":
-      return Tn;
+      return neutralPaperColor;
     case "DUOTONE_SEA":
-      return OF;
+      return greenTealColor;
     case "DUOTONE_SPACE":
-      return Zv;
+      return redCaramelColor;
     case "DUOTONE_EARTH":
-      return L5;
+      return redGoldColor;
     case "DUOTONE_FOREST":
-      return QE;
+      return greenSageColor;
     default:
-      return B8;
+      return neutralDarkColor;
   }
 }
 export function $$_1(e) {
   switch (colorToRgbaString(e)) {
-    case B8:
+    case neutralDarkColor:
       return "DRACULA";
-    case Tn:
+    case neutralPaperColor:
       return "DUOTONE_LIGHT";
-    case OF:
+    case greenTealColor:
       return "DUOTONE_SEA";
-    case Zv:
+    case redCaramelColor:
       return "DUOTONE_SPACE";
-    case L5:
+    case redGoldColor:
       return "DUOTONE_EARTH";
-    case QE:
+    case greenSageColor:
       return "DUOTONE_FOREST";
     default:
       return "DRACULA";

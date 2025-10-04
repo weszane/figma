@@ -54,7 +54,7 @@ import { J as _$$J } from "../9410/617561";
 import { s as _$$s2 } from "../9410/760762";
 import { xG, n8 } from "../figma_app/121043";
 import { bL, c$ } from "../905/867927";
-import { q as _$$q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { O as _$$O2 } from "../905/666679";
 import { SvgComponent } from "../905/714743";
 import { styleBuilderInstance } from "../905/941192";
@@ -139,7 +139,7 @@ function ep() {
       width: "64px"
     }).$,
     children: jsxs(bL, {
-      legend: jsx(_$$q, {
+      legend: jsx(Legend, {
         children: getI18nString("slides.toolbar.view_mode")
       }),
       value: e ? "SSV" : "GRID",

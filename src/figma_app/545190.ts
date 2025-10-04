@@ -13,7 +13,7 @@ import { KindEnum, StatusEnum } from '../905/129884';
 import { ow as _$$ow, a3 } from '../905/188421';
 import { permissionScopeHandler } from '../905/189185';
 import { isInvalidValue, isValidValue, normalizeValue } from '../905/216495';
-import { nt, o3 } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { HiddenLabel } from '../905/270045';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { getBasename } from '../905/309735';
@@ -91,7 +91,7 @@ import { Og } from '../figma_app/882817';
 import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
 import { q as _$$q } from '../figma_app/905311';
 import { formatList } from '../figma_app/930338';
-import { Yi } from '../figma_app/933328';
+import { loadSharedVariable } from '../figma_app/933328';
 import { dD, DD, Jg } from '../figma_app/941824';
 let u = c;
 function A({
@@ -694,7 +694,7 @@ function eP({
     }));
     fullscreenValue.commit();
   }, []);
-  let y = o3(nt.useGridPart2);
+  let y = useLabConfiguration(labConfigurations.useGridPart2);
   let b = useRef(null);
   useEffect(() => {
     r.length ? b.current?.focus() : b.current?.blur();
@@ -823,7 +823,7 @@ function $$e6(e) {
         resolvedType: VariableResolvedDataType.MAP,
         value: {}
       };
-      t ? r(Yi({
+      t ? r(loadSharedVariable({
         item: t,
         callback: r => {
           let n = checkCondition(l, getFeatureFlags().ds_variant_props_write) ? e.uguid : void 0;
@@ -1409,7 +1409,7 @@ function tp({
   let {
     setIsDraggingSomePropDef
   } = w();
-  let A = o3(nt.useGridPart2);
+  let A = useLabConfiguration(labConfigurations.useGridPart2);
   return jsxs(KeyboardReceiver, {
     handleKeyDown: b,
     ref: S,

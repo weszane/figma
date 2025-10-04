@@ -10,7 +10,7 @@ import { n as _$$n } from "../figma_app/339971";
 import { canAccessFullDevMode } from "../figma_app/473493";
 import { updateDropdownSelectionAction, hideDropdownAction } from "../905/929976";
 import { Dm } from "../figma_app/8833";
-import { k$, gN, id, Dz } from "../figma_app/847915";
+import { hasSeparator, hasHeader, hasRenderFunction, getActionOrName } from "../figma_app/847915";
 import { formatI18nMessage } from "../905/482208";
 import { n as _$$n2 } from "../figma_app/307143";
 import { TrackingProvider } from "../figma_app/831799";
@@ -186,11 +186,11 @@ let J = registerModal(function () {
     })
   });
 }, "CommentDebugSettingsModal");
-class ea extends Error { }
+class ea extends Error {}
 async function es({
   dispatch: e,
   fileKey: t,
-  log: r = () => { }
+  log: r = () => {}
 }) {
   try {
     r("Generating file version...");
@@ -373,7 +373,7 @@ class e_ extends RecordingPureComponent {
   componentDidUpdate(e, t) {
     if (super.componentDidUpdate(e, t), this.props.selectionToUpdate && this.props.selectionToUpdate === SettingsAction.PREFERENCES) {
       let e = this.multilevelDropdown && this.multilevelDropdown.getActiveItemAtDepth(0);
-      !e || k$(e) || gN(e) || id(e) || !e.name || e.name !== ep ? (this.selectPreferencesMenu(), this.props.dispatch(updateDropdownSelectionAction({
+      !e || hasSeparator(e) || hasHeader(e) || hasRenderFunction(e) || !e.name || e.name !== ep ? (this.selectPreferencesMenu(), this.props.dispatch(updateDropdownSelectionAction({
         type: pi,
         data: {
           selectionToUpdate: null
@@ -445,7 +445,7 @@ export class $$em1 extends Component {
     };
     this.onSelectItem = (e, t) => {
       permissionScopeHandler.user(`fullscreen-menu-${e.action ?? "non-action"}`, () => {
-        if (e.callback && e.callback(Dz(e), e.args, this.props.dispatch, t), e.action && !e.input) {
+        if (e.callback && e.callback(getActionOrName(e), e.args, this.props.dispatch, t), e.action && !e.input) {
           let r = e.action;
           e.loadingIndicatorString ? this.props.dispatch(_$$n.set({
             message: e.loadingIndicatorString,

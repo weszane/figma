@@ -1,163 +1,302 @@
-import { jsx } from "react/jsx-runtime";
-import { useMemo, useState, useEffect, useRef } from "react";
-import { throwError } from "../figma_app/465776";
-import { dayjs } from "../905/920142";
-import { capitalize } from "../figma_app/930338";
-import { getI18nString } from "../905/303541";
-import { getI18nState } from "../figma_app/363242";
-function c(e, t) {
-  return "ja" === e ? "narrow" : t;
+import { useEffect, useMemo, useRef, useState } from "react"
+import { jsx } from "react/jsx-runtime"
+import { getI18nString } from "../905/303541"
+import { dayjs } from "../905/920142"
+import { getI18nState } from "../figma_app/363242"
+import { throwError } from "../figma_app/465776"
+import { capitalize } from "../figma_app/930338"
+
+
+
+/**
+ * Adjusts the style for Japanese locale to use narrow format
+ * @param locale - The locale string
+ * @param style - The original style
+ * @returns Adjusted style (narrow for Japanese, original for others)
+ */
+function adjustStyleForLocale(locale: string, style: Intl.RelativeTimeFormatStyle): Intl.RelativeTimeFormatStyle {
+  return locale === "ja" ? "narrow" : style
 }
-export function $$u1(e, t = "long", i = getI18nState().getPrimaryLocale(!1)) {
-  t = c(i, t);
-  let n = useMemo(() => new Intl.RelativeTimeFormat(i, {
-    style: t
-  }), [i, t]);
-  let [a, s] = useState(() => A(e));
-  let [o, l] = useState(() => f(n, e));
+
+/**
+ * Custom hook for relative time formatting with automatic updates
+ * @param date - The date to format
+ * @param style - The formatting style (default: "long")
+ * @param locale - The locale to use (default: primary locale from i18n state)
+ * @returns Formatted relative time string
+ */
+export function useRelativeTime(
+  date: Date | string | number | null,
+  style: Intl.RelativeTimeFormatStyle = "long",
+  locale: string = getI18nState().getPrimaryLocale(false)
+): string {
+  const adjustedStyle = adjustStyleForLocale(locale, style)
+
+  const relativeTimeFormatter = useMemo(() => new Intl.RelativeTimeFormat(locale, {
+    style: adjustedStyle,
+  }), [locale, adjustedStyle])
+
+  const updateInterval = useState(() => calculateUpdateInterval(date))[0]
+  const [formattedTime, setFormattedTime] = useState(() => formatRelativeTime(relativeTimeFormatter, date))
+
+  // Update formatted time when date or formatter changes
   useEffect(() => {
-    l(f(n, e));
-  }, [e, n]);
+    setFormattedTime(formatRelativeTime(relativeTimeFormatter, date))
+  }, [date, relativeTimeFormatter])
+
+  // Update interval when date changes
   useEffect(() => {
-    s(A(e));
-  }, [e]);
-  $$_0(() => {
-    a > 0 && null !== e && (l(f(n, e)), s(A(e)));
-  }, a);
-  return o || "";
+    calculateUpdateInterval(date)
+  }, [date])
+
+  // Auto-update the formatted time based on the interval
+  useInterval(() => {
+    if (updateInterval > 0 && date !== null) {
+      setFormattedTime(formatRelativeTime(relativeTimeFormatter, date))
+      calculateUpdateInterval(date)
+    }
+  }, updateInterval)
+
+  return formattedTime || ""
 }
-export function $$p2(e, t = "long", i = getI18nState().getPrimaryLocale(!1)) {
-  t = c(i, t);
-  return f(new Intl.RelativeTimeFormat(i, {
-    style: t
-  }), e) || "";
+
+/**
+ * Formats relative time without automatic updates
+ * @param date - The date to format
+ * @param style - The formatting style (default: "long")
+ * @param locale - The locale to use (default: primary locale from i18n state)
+ * @returns Formatted relative time string
+ */
+export function formatRelativeTimeStatic(
+  date: Date | string | number | null,
+  style: Intl.RelativeTimeFormatStyle = "long",
+  locale: string = getI18nState().getPrimaryLocale(false)
+): string {
+  const adjustedStyle = adjustStyleForLocale(locale, style)
+  return formatRelativeTime(new Intl.RelativeTimeFormat(locale, {
+    style: adjustedStyle,
+  }), date) || ""
 }
-export function $$m3(e) {
-  let t = $$u1(e.date, e.style, e.locale);
-  let {
-    onChange
-  } = e;
+
+/**
+ * Component for displaying relative time with optional onChange callback
+ */
+export function RelativeTimeDisplay(props: {
+  date: Date | string | number | null
+  style?: Intl.RelativeTimeFormatStyle
+  locale?: string
+  className?: string
+  title?: string
+  capitalize?: boolean
+  onChange?: (formattedTime: string) => void
+}): JSX.Element {
+  const formattedTime = useRelativeTime(props.date, props.style, props.locale)
+
   useEffect(() => {
-    onChange?.(t);
-  }, [onChange, t]);
+    props.onChange?.(formattedTime)
+  }, [props.onChange, formattedTime])
+
   return jsx("span", {
-    className: e.className || "",
-    title: e.title,
-    children: e.capitalize ? capitalize(t) : t
-  });
+    className: props.className || "",
+    title: props.title,
+    children: props.capitalize ? capitalize(formattedTime) : formattedTime,
+  })
 }
-function h(e, t) {
-  switch (t) {
+
+/**
+ * Converts time unit to milliseconds
+ * @param value - The numeric value
+ * @param unit - The time unit
+ * @returns Time in milliseconds
+ */
+function convertToMilliseconds(value: number, unit: string): number {
+  switch (unit) {
     case "second":
-      return 1e3 * e;
+      return 1e3 * value
     case "minute":
-      return 6e4 * e;
+      return 6e4 * value
     case "hour":
-      return 36e5 * e;
+      return 36e5 * value
     case "day":
-      return 864e5 * e;
+      return 864e5 * value
     case "month":
-      return 2592e6 * e;
+      return 2592e6 * value
     case "year":
-      return 31536e6 * e;
+      return 31536e6 * value
     default:
-      throwError(`Unsupported relative time unit (${t})`);
+      throwError(`Unsupported relative time unit (${unit})`)
   }
 }
-let g = Object.values({
+
+// Time unit configuration for relative time formatting
+const TIME_UNITS_CONFIG = Object.values({
   s: {
     min: 0,
-    max: h(45, "second"),
-    factor: h(1, "second"),
-    unit: "second"
+    max: convertToMilliseconds(45, "second"),
+    factor: convertToMilliseconds(1, "second"),
+    unit: "second",
   },
   m: {
-    min: h(45, "second"),
-    max: h(90, "second"),
-    unit: "minute"
+    min: convertToMilliseconds(45, "second"),
+    max: convertToMilliseconds(90, "second"),
+    unit: "minute",
   },
   mm: {
-    min: h(90, "second"),
-    max: h(45, "minute"),
-    factor: h(1, "minute"),
-    unit: "minute"
+    min: convertToMilliseconds(90, "second"),
+    max: convertToMilliseconds(45, "minute"),
+    factor: convertToMilliseconds(1, "minute"),
+    unit: "minute",
   },
   h: {
-    min: h(45, "minute"),
-    max: h(90, "minute"),
-    unit: "hour"
+    min: convertToMilliseconds(45, "minute"),
+    max: convertToMilliseconds(90, "minute"),
+    unit: "hour",
   },
   hh: {
-    min: h(90, "minute"),
-    max: h(22, "hour"),
-    factor: h(1, "hour"),
-    unit: "hour"
+    min: convertToMilliseconds(90, "minute"),
+    max: convertToMilliseconds(22, "hour"),
+    factor: convertToMilliseconds(1, "hour"),
+    unit: "hour",
   },
   d: {
-    min: h(22, "hour"),
-    max: h(36, "hour"),
-    factor: h(1, "day"),
-    unit: "day"
+    min: convertToMilliseconds(22, "hour"),
+    max: convertToMilliseconds(36, "hour"),
+    factor: convertToMilliseconds(1, "day"),
+    unit: "day",
   },
   dd: {
-    min: h(36, "hour"),
-    max: h(26, "day"),
-    factor: h(1, "day"),
-    unit: "day"
+    min: convertToMilliseconds(36, "hour"),
+    max: convertToMilliseconds(26, "day"),
+    factor: convertToMilliseconds(1, "day"),
+    unit: "day",
   },
   M: {
-    min: h(26, "day"),
-    max: h(45, "day"),
-    unit: "month"
+    min: convertToMilliseconds(26, "day"),
+    max: convertToMilliseconds(45, "day"),
+    unit: "month",
   },
   MM: {
-    min: h(45, "day"),
-    max: h(320, "day"),
-    factor: h(1, "month"),
-    unit: "month"
+    min: convertToMilliseconds(45, "day"),
+    max: convertToMilliseconds(320, "day"),
+    factor: convertToMilliseconds(1, "month"),
+    unit: "month",
   },
   yy: {
-    min: h(320, "day"),
+    min: convertToMilliseconds(320, "day"),
     max: void 0,
-    factor: h(1, "year"),
-    unit: "year"
+    factor: convertToMilliseconds(1, "year"),
+    unit: "year",
+  },
+})
+
+/**
+ * Formats a date relative to now using Intl.RelativeTimeFormat
+ * @param formatter - The RelativeTimeFormat instance
+ * @param date - The date to format
+ * @returns Formatted relative time string
+ */
+function formatRelativeTime(formatter: Intl.RelativeTimeFormat, date: Date | string | number | null = new Date()): string {
+  if (date === null) {
+    return "Invalid Date"
   }
-});
-function f(e, t = new Date()) {
-  let i;
-  if (null === t) return "Invalid Date";
-  i = "string" == typeof t || "number" == typeof t ? dayjs.utc(t).toDate() : t;
-  let n = new Date();
-  if (isNaN(i.getTime())) return i.toString();
-  let r = i.getTime() - n.getTime();
-  let a = Math.abs(r);
-  let o = r < 0;
-  for (let t of g) if (a >= t.min) {
-    if (t.max && a >= t.max) continue;
-    if (a < h(45, "second")) return getI18nString("general.time.just_now_past");
-    let i = e.format((o ? -1 : 1) * (t.factor ? Math.round(a / t.factor) : 1), t.unit);
-    getI18nState()?.pseudoLocale && (i = getI18nState().getPseudoLocalizedDynamicString(i));
-    return i;
+
+  let targetDate: Date
+  if (typeof date === "string" || typeof date === "number") {
+    targetDate = dayjs.utc(date).toDate()
+  } else {
+    targetDate = date
   }
-  return "Invalid Date";
+
+  const now = new Date()
+
+  if (isNaN(targetDate.getTime())) {
+    return targetDate.toString()
+  }
+
+  const timeDifference = targetDate.getTime() - now.getTime()
+  const absoluteDifference = Math.abs(timeDifference)
+  const isPast = timeDifference < 0
+
+  for (const unitConfig of TIME_UNITS_CONFIG) {
+    if (absoluteDifference >= unitConfig.min) {
+      if (unitConfig.max && absoluteDifference >= unitConfig.max) {
+        continue
+      }
+
+      if (absoluteDifference < convertToMilliseconds(45, "second")) {
+        return getI18nString("general.time.just_now_past")
+      }
+
+      let formattedTime = formatter.format(
+        (isPast ? -1 : 1) * (unitConfig.factor ? Math.round(absoluteDifference / unitConfig.factor) : 1),
+        unitConfig.unit as Intl.RelativeTimeFormatUnit
+      )
+
+      if (getI18nState()?.pseudoLocale) {
+        formattedTime = getI18nState().getPseudoLocalizedDynamicString(formattedTime)
+      }
+
+      return formattedTime
+    }
+  }
+
+  return "Invalid Date"
 }
-export function $$_0(e, t) {
-  let i = useRef();
-  let n = useRef(e);
+
+/**
+ * Custom hook for setting up intervals with dynamic callbacks
+ * @param callback - Function to call on each interval
+ * @param delay - Interval delay in milliseconds (0 or negative to disable)
+ * @returns Interval reference
+ */
+export function useInterval(callback: () => void, delay: number): React.MutableRefObject<NodeJS.Timeout | number | undefined> {
+  const intervalRef = useRef<NodeJS.Timeout | number>()
+  const callbackRef = useRef(callback)
+
+  // Update callback ref when callback changes
   useEffect(() => {
-    n.current = e;
-  }, [e]);
-  useEffect(() => (t > 0 && (i.current = setInterval(() => n.current(), t)), () => {
-    window.clearInterval(i.current);
-  }), [t]);
-  return i;
+    callbackRef.current = callback
+  }, [callback])
+
+  // Set up or clear interval when delay changes
+  useEffect(() => {
+    if (delay > 0) {
+      intervalRef.current = setInterval(() => callbackRef.current(), delay)
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }
+  }, [delay])
+
+  return intervalRef
 }
-function A(e) {
-  if (!e) return 0;
-  let t = Math.abs(dayjs.utc(e).diff(new Date()));
-  return t < h(1, "hour") ? h(30, "second") : t < h(1, "day") ? h(30, "minute") : h(6, "hour");
+
+/**
+ * Calculates the appropriate update interval based on how far the date is from now
+ * @param date - The date to calculate interval for
+ * @returns Update interval in milliseconds
+ */
+function calculateUpdateInterval(date: Date | string | number | null): number {
+  if (!date) {
+    return 0
+  }
+
+  const targetDate = dayjs.utc(date).toDate()
+  const timeDifference = Math.abs(dayjs.utc(targetDate).diff(new Date()))
+
+  if (timeDifference < convertToMilliseconds(1, "hour")) {
+    return convertToMilliseconds(30, "second")
+  } else if (timeDifference < convertToMilliseconds(1, "day")) {
+    return convertToMilliseconds(30, "minute")
+  } else {
+    return convertToMilliseconds(6, "hour")
+  }
 }
-export const $$ = $$_0;
-export const Ak = $$u1;
-export const JD = $$p2;
-export const h1 = $$m3;
+
+// Export aliases for backward compatibility
+export const Ak = useRelativeTime
+export const JD = formatRelativeTimeStatic
+export const h1 = RelativeTimeDisplay

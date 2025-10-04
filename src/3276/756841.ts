@@ -49,7 +49,7 @@ import { HH } from "../figma_app/841415";
 import { Ro } from "../figma_app/805373";
 import { f as _$$f } from "../figma_app/750432";
 import { K0 } from "../figma_app/778125";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { Kq } from "../figma_app/936061";
 import { FlashActions } from "../905/573154";
 import { resolveMessage } from "../905/231762";
@@ -95,7 +95,7 @@ import { noop } from 'lodash-es';
 import { H_, z6, CU, $Q, a2 } from "../905/963340";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { sendWithRetry } from "../905/910117";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { c1 } from "../figma_app/357047";
@@ -220,7 +220,7 @@ function el(e) {
       children: e.rootUser
     }), "\xa0", jsx("div", {
       className: "comment_metadata--timeCreated---00vM text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      children: e.isPendingFromSinatra ? renderI18nText("comments.in_a_moment") : jsx(h1, {
+      children: e.isPendingFromSinatra ? renderI18nText("comments.in_a_moment") : jsx(RelativeTimeDisplay, {
         date: e.createdAt,
         capitalize: !0
       })
@@ -1061,13 +1061,13 @@ let tl = createOptimistThunk((e, t) => {
     console.error(t);
   });
   let o = e.getState().user?.id;
-  t.id ? WB()?.optimisticallyUpdate({
+  t.id ? getCurrentLiveGraphClient()?.optimisticallyUpdate({
     FileFollower: {
       [t.id]: {
         notificationPreference: t.notification_preference
       }
     }
-  }, n) : o && WB()?.optimisticallyCreate({
+  }, n) : o && getCurrentLiveGraphClient()?.optimisticallyCreate({
     FileFollower: {
       [`optimistic-id-${t.key}`]: {
         key: t.key,
@@ -1130,13 +1130,13 @@ function tp() {
       c(FlashActions.flash(t));
       console.error(e);
     });
-    n?.data?.id ? WB()?.optimisticallyUpdate({
+    n?.data?.id ? getCurrentLiveGraphClient()?.optimisticallyUpdate({
       FileFollower: {
         [n?.data?.id]: {
           statusChangeNotifs: o
         }
       }
-    }, a) : t?.id && WB()?.optimisticallyCreate({
+    }, a) : t?.id && getCurrentLiveGraphClient()?.optimisticallyCreate({
       FileFollower: {
         [`optimistic-id-${e}`]: {
           key: e,

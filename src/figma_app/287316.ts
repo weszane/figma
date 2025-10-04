@@ -37,7 +37,7 @@ import { qW, Jc } from "../figma_app/27927";
 import { Qc, Iw, M8, gC } from "../figma_app/368611";
 import { B as _$$B } from "../figma_app/371825";
 import { j5 } from "../figma_app/844818";
-import { jR, Sb } from "../figma_app/728075";
+import { neutralDarkColor3, redApricotColor2 } from "../figma_app/728075";
 import { bE, LK, T5, xp, MC, FC, zD, p6, U9, X4, k as _$$k, E5, tj } from "../figma_app/340893";
 import { I as _$$I } from "../figma_app/688563";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -45,7 +45,7 @@ import { getI18nString } from "../905/303541";
 var h = _;
 let z = window.devicePixelRatio;
 function W({
-  color: e = jR
+  color: e = neutralDarkColor3
 }) {
   return jsxs("svg", {
     width: 88 * z,
@@ -341,7 +341,7 @@ function W({
   });
 }
 function K({
-  color: e = Sb
+  color: e = redApricotColor2
 }) {
   return jsxs("svg", {
     width: 88 * z,

@@ -6,7 +6,7 @@ import { useDispatch, useSelector, useStore } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { useDebouncedCallback } from 'use-debounce';
 import { CloseButton } from '../905/17223';
-import { iZ as _$$iZ } from '../905/29425';
+import { clusteredPinsInstance } from '../905/29425';
 import { i as _$$i3, Dp } from '../905/50151';
 import { ay } from '../905/56623';
 import { KeyCodes } from '../905/63728';
@@ -19,7 +19,7 @@ import { b as _$$b } from '../905/168657';
 import { t as _$$t4 } from '../905/192333';
 import { c as _$$c2 } from '../905/196462';
 import { gk } from '../905/222884';
-import { nt as _$$nt, o3 } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { resolveMessage } from '../905/231762';
 import { GH, I_, Le, wq } from '../905/234821';
 import { Q as _$$Q } from '../905/249555';
@@ -34,7 +34,7 @@ import { feedCommentAttachmentAPI } from '../905/375499';
 import { BusyReadyState, ComposerType, isCommentStateActive, NAVIGATION_BUTTONS, NEW_COMMENT_ID, ThreadType } from '../905/380385';
 import { iX } from '../905/415545';
 import { A3, Di, gy, IS, my, Nz, rX, u_, v2 } from '../905/428481';
-import { x as _$$x } from '../905/437800';
+import { isWebAnimationsApiSupported } from '../905/437800';
 import { IconButton } from '../905/443068';
 import { k as _$$k3 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
@@ -63,7 +63,7 @@ import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { g as _$$g3 } from '../905/757007';
 import { R as _$$R } from '../905/780757';
 import { useSingleEffect } from '../905/791079';
-import { G as _$$G } from '../905/799129';
+import { createAnimationPromise } from '../905/799129';
 import { ym } from '../905/807385';
 import { KeyboardReceiver } from '../905/826900';
 import { useCurrentUserOrg } from '../905/845253';
@@ -73,7 +73,7 @@ import { V as _$$V } from '../905/890500';
 import { showDropdownThunk } from '../905/929976';
 import { C as _$$C2, e as _$$e3 } from '../905/937623';
 import { postUserFlag } from '../905/985254';
-import { JD } from '../905/986103';
+import { formatRelativeTimeStatic } from '../905/986103';
 import { Q$, Us, zY } from '../1250/486464';
 import { A as _$$A3 } from '../1617/505000';
 import { T as _$$T, w as _$$w } from '../3276/279527';
@@ -98,11 +98,11 @@ import { hh } from '../figma_app/42945';
 import { FileCanEdit } from '../figma_app/43951';
 import { FEditorType } from '../figma_app/53721';
 import { addRectOffset, applyOffsetToViewport, getBasicViewportRect, getViewportInfo, getViewportZoom, getVisibleArea, memoizedRect, roundedDivision, useViewportWithDelta, viewportToScreen } from '../figma_app/62612';
-import { Ao, c4, LX, xN } from '../figma_app/70421';
+import { formatPinCoordinates, aggregateUserComments, PinVisibilityState, arePinCollectionsEqual } from '../figma_app/70421';
 import { getObservableValue } from '../figma_app/84367';
 import { clearSelectedViewCommentId } from '../figma_app/91703';
 import { wg as _$$wg } from '../figma_app/101956';
-import { $L, us, Xx } from '../figma_app/136698';
+import { getColorForMultiplayer, multiplayerColors, getMultiplayerTextColor } from '../figma_app/136698';
 import { buildStaticUrl, getInitialOptions } from '../figma_app/169182';
 import { t0 as _$$t3 } from '../figma_app/198840';
 import { AU, on } from '../figma_app/242565';
@@ -123,12 +123,12 @@ import { BI, sc, Yi } from '../figma_app/546509';
 import { isUserNotLoggedInAndEditorSupported } from '../figma_app/564183';
 import { Z5 as _$$Z } from '../figma_app/582377';
 import { wV } from '../figma_app/585209';
-import { k3, U6, yo } from '../figma_app/591738';
+import { canPinComments, isPinnedCommentsEnabled, shouldShowPinnedComments } from '../figma_app/591738';
 import { useCurrentViewState } from '../figma_app/623300';
 import { W as _$$W2 } from '../figma_app/642364';
 import { y as _$$y } from '../figma_app/705249';
 import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
-import { Dr, QQ, R3, Vm } from '../figma_app/728075';
+import { whiteColor, gray500Color, blackColor, whiteColor2 } from '../figma_app/728075';
 import { useAuthedActiveCommunityProfile } from '../figma_app/740025';
 import { getSidebarSplitPosition } from '../figma_app/740163';
 import { AppStateTsApi, DesignGraphElements, LayoutTabType, UserActionState } from '../figma_app/763686';
@@ -136,7 +136,7 @@ import { C as _$$C, nb as _$$nb, _v, a$, CX, dB, hx, hY, k7, lV, pD, q4, QD, RI,
 import { K0 } from '../figma_app/778125';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { Sw } from '../figma_app/805373';
-import { clampPointToBounds, isMessageMetaEmpty, isMessageMetaTooShort, sP } from '../figma_app/819288';
+import { clampPointToBounds, isMessageMetaEmpty, isMessageMetaTooShort, renderMessageMeta } from '../figma_app/819288';
 import { TrackingProvider } from '../figma_app/831799';
 import { HH } from '../figma_app/841415';
 import { LoadingSpinner } from '../figma_app/858013';
@@ -204,8 +204,8 @@ let eu = memo(({
         src: t
       };
     }
-    let n = $L(e.avatar_user_id, us);
-    let o = Xx(n);
+    let n = getColorForMultiplayer(e.avatar_user_id, multiplayerColors);
+    let o = getMultiplayerTextColor(n);
     return {
       src: t,
       fallbackStyle: {
@@ -267,7 +267,7 @@ let ep = memo(({
   });
 });
 function eh(e, t, n, o = !1) {
-  if (!t || !_$$x()) return Promise.resolve();
+  if (!t || !isWebAnimationsApiSupported()) return Promise.resolve();
   let a = `translate3d(${t.x}px, ${t.y}px, 0px) scale(0.2)`;
   return new Promise((t, i) => {
     let s = e.animate([{
@@ -312,7 +312,7 @@ let ef = memo(({
         } = i;
         if (d.current.style.opacity = '1.0', showClusterCount && c.current) {
           let e;
-          (e = c.current) ? (e.style.transition = 'none', e.style.opacity = '1', _$$G(e, [], {
+          (e = c.current) ? (e.style.transition = 'none', e.style.opacity = '1', createAnimationPromise(e, [], {
             duration: 1e3
           }).then(() => {
             e.style.removeProperty('opacity');
@@ -335,7 +335,7 @@ let ef = memo(({
     'tabIndex': 0,
     'className': W()(Di, {
       [gy]: e.isUnread,
-      [rX]: t === LX.DIMMED
+      [rX]: t === PinVisibilityState.DIMMED
     }),
     'style': {
       willChange: 'transform',
@@ -396,7 +396,7 @@ function eP(e, t) {
   };
 }
 function eI(e, t, n, o = !1) {
-  if (!t || !_$$x()) return Promise.resolve();
+  if (!t || !isWebAnimationsApiSupported()) return Promise.resolve();
   let a = `translate3d(${t.x}px, ${t.y}px, 0px) scale(0.2)`;
   return new Promise((t, i) => {
     let s = e.animate([{
@@ -417,7 +417,7 @@ function eI(e, t, n, o = !1) {
 let eT = memo(({
   pin: e
 }) => {
-  let t = useMemo(() => eg().sanitize(sP(e.previewMessageMeta), {
+  let t = useMemo(() => eg().sanitize(renderMessageMeta(e.previewMessageMeta), {
     ALLOWED_TAGS: ['img', 'span'],
     ALLOWED_ATTR: ['src', 'class'],
     ALLOWED_URI_REGEXP: new RegExp(buildStaticUrl('emoji/*'))
@@ -437,7 +437,7 @@ let eT = memo(({
     a !== '' ? s = i !== '' ? `${a} \xB7 ${i}` : a : i !== '' && (s = i);
     return s;
   }, [e.avatars, e.numUnreadReplies, e.numAttachments]);
-  let i = useMemo(() => JD(e.createdAt, 'short'), [e.createdAt]);
+  let i = useMemo(() => formatRelativeTimeStatic(e.createdAt, 'short'), [e.createdAt]);
   return jsxs('div', {
     className: $N,
     children: [jsxs('div', {
@@ -608,7 +608,7 @@ let eN = memo(({
           ((e = p.current) ? (requestAnimationFrame(() => {
             e.style.setProperty('--expandAnimationTime', '0.4s');
             e.classList.add(sz);
-          }), _$$G(e, [], {
+          }), createAnimationPromise(e, [], {
             duration: 400,
             endDelay: 3500
           }).then(() => {
@@ -635,9 +635,9 @@ let eN = memo(({
       'role': 'button',
       'tabIndex': 0,
       'className': W()(ij, C_, {
-        [wH]: t === LX.ACTIVE,
-        [_$$rX]: t === LX.DIMMED,
-        [Fm]: e.pending || t === LX.ACTIVE,
+        [wH]: t === PinVisibilityState.ACTIVE,
+        [_$$rX]: t === PinVisibilityState.DIMMED,
+        [Fm]: e.pending || t === PinVisibilityState.ACTIVE,
         [_$$gy]: e.isUnread
       }),
       'style': {
@@ -792,7 +792,7 @@ function eL({
     let i = a.reduce((e, t) => (e.set(t.id, t), e), new Map());
     let s = n.map(n => {
       let o = i.get(n.id);
-      return o ? (xN(n, o), {
+      return o ? (arePinCollectionsEqual(n, o), {
         cluster: n,
         animationInfo: {}
       }) : {
@@ -844,7 +844,7 @@ function eL({
           animationInfo: i
         }) => {
           let s;
-          s = e ? n.pins.find(t => t.id === e) ? LX.ACTIVE : LX.DIMMED : n.pins.every(e => e.isResolved) ? LX.DIMMED : t ? LX.DIMMED : LX.NORMAL;
+          s = e ? n.pins.find(t => t.id === e) ? PinVisibilityState.ACTIVE : PinVisibilityState.DIMMED : n.pins.every(e => e.isResolved) ? PinVisibilityState.DIMMED : t ? PinVisibilityState.DIMMED : PinVisibilityState.NORMAL;
           return jsx(_$$Fragment, {
             children: n.pins.length === 1 ? jsx(eD, {
               pin: n.pins[0],
@@ -884,7 +884,7 @@ let eF = (e, t, n, o) => {
     for (let t of e.avatars) r.has(t.avatar_user_id) ? (r.get(t.avatar_user_id).num_unread_comments += t.num_unread_comments, r.get(t.avatar_user_id).num_comments += t.num_comments) : r.set(t.avatar_user_id, t);
   }
   return {
-    id: threads.length === 1 ? threads[0].id : Ao(e, threads.length),
+    id: threads.length === 1 ? threads[0].id : formatPinCoordinates(e, threads.length),
     x: e.x,
     y: e.y,
     pins: i,
@@ -996,7 +996,7 @@ let eU = memo(e => {
     }));
   }, [m, u, X]);
   let el = useCallback(e => {
-    let t = c4(e.comments);
+    let t = aggregateUserComments(e.comments);
     let o = e.comments.slice(1).reduce((e, t) => t.isUnread ? e + 1 : e, 0);
     let a = e.comments[0].client_meta?.selection_box_anchor;
     if (a && e.comments[0].client_meta?.in_frame) {
@@ -1062,7 +1062,7 @@ let eU = memo(e => {
     Math.abs(deltaZoomScale) / zoomScale > 0.45 || Math.abs(deltaOffsetX) / width > 0.95 || Math.abs(deltaOffsetY) / height > 0.95 ? ec(1) : em(0);
   }, [u, deltaZoomScale, deltaOffsetX, deltaOffsetY, r.rebuildClustersZoomDelay, K.viewport, zoomScale, em, ec]);
   let ep = !!e.activeThread;
-  let eh = e.activeThread ? c4(e.activeThread.comments).length : 1;
+  let eh = e.activeThread ? aggregateUserComments(e.activeThread.comments).length : 1;
   let {
     setActivePinSize
   } = e;
@@ -1392,7 +1392,7 @@ function t3(e) {
   let t = useAtomWithSubscription(userAtom);
   let n = useAtomWithSubscription(openFileAtom);
   let a = kJ();
-  return yo({
+  return shouldShowPinnedComments({
     user: t,
     file: n,
     numPinnedCommentThreads: a
@@ -1409,7 +1409,7 @@ function t3(e) {
   }) : null;
 }
 function t4(e) {
-  return k3() ? e.children : null;
+  return canPinComments() ? e.children : null;
 }
 function t6(e) {
   let t = !useAtomWithSubscription(_$$wg);
@@ -1481,7 +1481,7 @@ function t8(e) {
   I_();
   _$$s();
   _$$Z2('comments_navigate');
-  let r = U6() && !!e.thread.commentPin;
+  let r = isPinnedCommentsEnabled() && !!e.thread.commentPin;
   return jsxs('div', {
     'className': F7,
     'data-testid': 'thread-header-container',
@@ -1745,11 +1745,11 @@ function nr(e) {
       attachmentUpdates: n
     });
   }, [updateCommentContent]);
-  let eg = o3(_$$nt.commentsA11y);
+  let eg = useLabConfiguration(labConfigurations.commentsA11y);
   let eb = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMMENTS);
   let ey = eg && eb;
   let ew = useCallback(() => {
-    ey ? _$$iZ?.focusPinById(ei) : document.getElementById(`accessibility-comment-pin-${ei}`)?.focus();
+    ey ? clusteredPinsInstance?.focusPinById(ei) : document.getElementById(`accessibility-comment-pin-${ei}`)?.focus();
   }, [ey, ei]);
   let ej = useCallback(() => {
     if (setIsPinned(!1), ew(), !isMessageMetaEmpty(p)) {
@@ -2184,11 +2184,11 @@ function nu(e) {
     }
     let e = 'anchor--anchor--P9sAD';
     resolved && (e = 'anchor--resolvedAnchor--iU0Ct anchor--anchor--P9sAD');
-    let t = R3;
-    let n = Dr;
+    let t = blackColor;
+    let n = whiteColor;
     active && (n = '#0d99ff');
-    let o = QQ;
-    active && (o = Vm, e += ' anchor--activeAnchor--464Qe anchor--anchor--P9sAD');
+    let o = gray500Color;
+    active && (o = whiteColor2, e += ' anchor--activeAnchor--464Qe anchor--anchor--P9sAD');
     return {
       anchorOutlineColor: t,
       anchorBodyColor: n,

@@ -1,58 +1,121 @@
-import { FontSourceType } from "../figma_app/763686";
-import { debugState } from "../905/407919";
-import { trackFileEvent } from "../figma_app/314264";
-export let $$n2;
-let o = !1;
-let l = !1;
-let d = !1;
-let c = !1;
-export function $$u0() {
-  l = !0;
-  h();
-}
-export function $$p3() {
-  o = !1;
-  l = !1;
-  d = !1;
-  c = !1;
-}
-export function $$_4(e, t) {
-  let r = debugState.getState();
-  let n = r.openFile?.key;
-  n && !c && (trackFileEvent("Show Missing Fonts Popover", n, r, {
-    fontListLoaded: e,
-    counts: t,
-    timeNow: performance.now()
-  }), c = !0);
-}
-function h() {
-  if (o && l && !d) {
-    let e = debugState.getState();
-    let t = new Set(Object.values(e.fonts).map(e => Object.values(e)).flat().map(e => e.source));
-    let r = e.openFile?.key;
-    let n = e.figFileDuplicatedFromHubFile;
-    let o = !1;
-    void 0 !== r && void 0 !== n && (o = null != n[r]);
-    trackFileEvent("has_missing_font", r, e, {
-      has_google_fonts: t.has(FontSourceType.GOOGLE),
-      has_local_fonts: t.has(FontSourceType.LOCAL),
-      has_shared_fonts: t.has(FontSourceType.SHARED),
-      is_community_duplicated_file: o
-    });
-    d = !0;
+import { debugState } from "../905/407919"
+import { trackFileEvent } from "../figma_app/314264"
+import { FontSourceType } from "../figma_app/763686"
+// Refactored code with meaningful names and improved structure
+let missingFontScannerCompleted = false
+let popoverTriggered = false
+let hasMissingFontEventTracked = false
+let showMissingFontsPopoverTracked = false
+
+export class MissingFontTracker {
+  /**
+   * Marks the missing font scanner as complete and triggers tracking if conditions are met
+   * (Original function: m.markMissingFontScannerAsComplete)
+   */
+  markMissingFontScannerAsComplete(): void {
+    missingFontScannerCompleted = true
+    this.trackMissingFontEvent()
+  }
+
+  /**
+   * Tracks missing font event when all conditions are met
+   * (Original function: h)
+   */
+  trackMissingFontEvent(): void {
+    if (missingFontScannerCompleted && popoverTriggered && !hasMissingFontEventTracked) {
+      const state = debugState.getState()
+      const fontSources = new Set(
+        Object.values(state.fonts)
+          .map(fontGroup => Object.values(fontGroup))
+          .flat()
+          .map(font => font.source),
+      )
+
+      const fileKey = state.openFile?.key
+      const duplicatedFiles = state.figFileDuplicatedFromHubFile
+
+      let isCommunityDuplicatedFile = false
+      if (fileKey !== undefined && duplicatedFiles !== undefined) {
+        isCommunityDuplicatedFile = duplicatedFiles[fileKey] != null
+      }
+
+      trackFileEvent("has_missing_font", fileKey, state, {
+        has_google_fonts: fontSources.has(FontSourceType.GOOGLE),
+        has_local_fonts: fontSources.has(FontSourceType.LOCAL),
+        has_shared_fonts: fontSources.has(FontSourceType.SHARED),
+        is_community_duplicated_file: isCommunityDuplicatedFile,
+      })
+
+      hasMissingFontEventTracked = true
+    }
   }
 }
-class m {
-  markMissingFontScannerAsComplete() {
-    o = !0;
-    h();
+
+/**
+ * Triggers the missing font popover
+ * (Original function: $$u0)
+ */
+export function triggerMissingFontPopover(): void {
+  popoverTriggered = true
+  // Attempt to track missing font event
+  const tracker = getMissingFontTracker()
+  if (tracker) {
+    tracker.trackMissingFontEvent()
   }
 }
-export function $$g1() {
-  $$n2 = new m();
+
+/**
+ * Resets all tracking flags
+ * (Original function: $$p3)
+ */
+export function resetMissingFontTracking(): void {
+  missingFontScannerCompleted = false
+  popoverTriggered = false
+  hasMissingFontEventTracked = false
+  showMissingFontsPopoverTracked = false
 }
-export const DI = $$u0;
-export const Ds = $$g1;
-export const ZO = $$n2;
-export const e8 = $$p3;
-export const vS = $$_4;
+
+/**
+ * Tracks the "Show Missing Fonts Popover" event
+ * (Original function: $$_4)
+ * @param fontListLoaded - Indicates if font list was loaded
+ * @param counts - Font counts data
+ */
+export function trackShowMissingFontsPopover(fontListLoaded: boolean, counts: any): void {
+  const state = debugState.getState()
+  const fileKey = state.openFile?.key
+
+  if (fileKey && !showMissingFontsPopoverTracked) {
+    trackFileEvent("Show Missing Fonts Popover", fileKey, state, {
+      fontListLoaded,
+      counts,
+      timeNow: performance.now(),
+    })
+    showMissingFontsPopoverTracked = true
+  }
+}
+
+let missingFontTrackerInstance: MissingFontTracker | null = null
+
+/**
+ * Initializes and returns the missing font tracker instance
+ * (Original function: $$g1)
+ */
+export function initializeMissingFontTracker(): void {
+  missingFontTrackerInstance = new MissingFontTracker()
+}
+
+/**
+ * Gets the missing font tracker instance
+ * (Original function: $$n2)
+ */
+export function getMissingFontTracker(): MissingFontTracker | null {
+  return missingFontTrackerInstance
+}
+
+// Exported aliases for backward compatibility
+export const DI = triggerMissingFontPopover
+export const Ds = initializeMissingFontTracker
+export const ZO = missingFontTrackerInstance
+export const e8 = resetMissingFontTracking
+export const vS = trackShowMissingFontsPopover

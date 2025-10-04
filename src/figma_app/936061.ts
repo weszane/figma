@@ -19,7 +19,7 @@ import { s as _$$s } from "../905/518538";
 import { getCurrentPage } from "../figma_app/202626";
 import { ro, k0 } from "../figma_app/12220";
 import { E as _$$E } from "../905/884338";
-import { g as _$$g } from "../figma_app/115586";
+import { useIsFullscreenReady } from "../figma_app/115586";
 import { EE, lB } from "../figma_app/731583";
 import { t as _$$t } from "../905/656351";
 var p = u;
@@ -67,7 +67,7 @@ export function $$R1(e, t) {
   let s = useMemo(() => Object.keys(r), [r]);
   let o = useRef({});
   let l = useDispatch();
-  let d = _$$g();
+  let d = useIsFullscreenReady();
   let c = useCallback(e => {
     let {
       nodeId,

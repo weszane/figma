@@ -6,8 +6,8 @@ import { Label } from "../905/270045";
 import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
-import { b as _$$b, c as _$$c } from "../905/308099";
-import { q } from "../905/932270";
+import { RadioInputRoot, RadioInputOption } from "../905/308099";
+import { Legend } from "../905/932270";
 import { InputComponent } from "../905/185998";
 import { ColorSpaceEnum, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -355,18 +355,18 @@ export function $$Y8({
   setValue: t,
   numSlides: i
 }) {
-  return jsxs(_$$b, {
+  return jsxs(RadioInputRoot, {
     value: e,
-    legend: jsx(q, {
+    legend: jsx(Legend, {
       children: getI18nString("fullscreen.properties_panel.export_settings.slides_content")
     }),
     onChange: t,
-    children: [jsx(_$$c, {
+    children: [jsx(RadioInputOption, {
       value: "all",
       label: jsx(Label, {
         children: getI18nString("fullscreen.properties_panel.export_settings.slides_content.all")
       })
-    }), i > 0 && jsx(_$$c, {
+    }), i > 0 && jsx(RadioInputOption, {
       value: "selection",
       label: jsx(Label, {
         children: getI18nString("fullscreen.properties_panel.export_settings.slides_content.selected", {

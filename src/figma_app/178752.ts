@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import { useSelector, useStore } from "react-redux";
 import { useLatestRef } from "../figma_app/922077";
 import { useSubscription } from "../figma_app/288654";
-import { eB } from "../figma_app/933328";
+import { updateLibrarySubscriptions } from "../figma_app/933328";
 import { getParentOrgId } from "../905/872904";
 import { WorkspaceSubscribedLibrariesForFile } from "../figma_app/43951";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -43,7 +43,7 @@ export function $$h0() {
     if (!p?.data || !c.data) return;
     let e = c.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions || [];
     let t = p.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions || [];
-    eB(r, t, e);
+    updateLibrarySubscriptions(r, t, e);
   }, [r, c, p]);
 }
 export const XS = $$h0;

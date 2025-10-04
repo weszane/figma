@@ -1,7 +1,7 @@
 import { useCallback, useRef } from 'react';
 import { jsx } from 'react/jsx-runtime';
 import { C } from '../905/213457';
-import { nt, o3 } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { trackEventAnalytics } from '../905/449184';
 import { F } from '../905/680873';
 import { EM, wu } from '../905/729783';
@@ -253,7 +253,7 @@ function AutoInteractable({
       }
     }, [])
   };
-  const isDebugMode = o3(nt.trackableDebug);
+  const isDebugMode = useLabConfiguration(labConfigurations.trackableDebug);
   const tooltipText = MF(() => R8({
     componentName: 'AutoInteractable',
     name,

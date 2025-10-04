@@ -1,63 +1,138 @@
-import { returnSecond, throwTypeError } from "../figma_app/465776";
-import { WhiteboardIntegrationType } from "../figma_app/763686";
-import { FFileType } from "../figma_app/191312";
-export let $$s1 = [FFileType.DESIGN, FFileType.WHITEBOARD, FFileType.SLIDES, FFileType.SITES, FFileType.COOPER, FFileType.FIGMAKE];
-var $$o7 = (e => (e[e.SUCCESS = 0] = "SUCCESS", e[e.WARNING = 1] = "WARNING", e[e.FAILURE = 2] = "FAILURE", e[e.BUSY = 3] = "BUSY", e[e.WAITING = 4] = "WAITING", e[e.CANCELED = 5] = "CANCELED", e))($$o7 || {});
-var $$l3 = (e => (e.START = "start", e.CONFIRM_PDF_IMPORT = "confirm_pdf_import", e.FILE_IMPORT_WITH_CANCELED_PDF = "file_import_with_canceled_pdf", e.FILE_IMPORT_WITH_CONFIRMED_PDF = "file_import_with_confirmed_pdf", e.IMPORT_REPO = "import_repo", e))($$l3 || {});
-export function $$d5(e) {
-  let t = e.replace(/\.[^\.]+$/, "");
-  return e.slice(t.length);
+import { FFileType } from "../figma_app/191312"
+import { returnSecond, throwTypeError } from "../figma_app/465776"
+import { WhiteboardIntegrationType } from "../figma_app/763686"
+
+// Supported file types for import/export operations
+export const SUPPORTED_FILE_TYPES: readonly FFileType[] = [
+  FFileType.DESIGN,
+  FFileType.WHITEBOARD,
+  FFileType.SLIDES,
+  FFileType.SITES,
+  FFileType.COOPER,
+  FFileType.FIGMAKE,
+] as const
+
+// Status codes for import/export operations
+export enum ImportExportStatus {
+  SUCCESS = 0,
+  WARNING = 1,
+  FAILURE = 2,
+  BUSY = 3,
+  WAITING = 4,
+  CANCELED = 5,
 }
-export function $$c2(e) {
-  let t = e.name;
-  return $$p6(t) || u(t, ".jam") ? FFileType.WHITEBOARD : u(t, ".deck") || u(t, ".pptx") ? FFileType.SLIDES : u(t, ".site") ? FFileType.SITES : u(t, ".buzz") ? FFileType.COOPER : u(t, ".make") ? FFileType.FIGMAKE : FFileType.DESIGN;
+
+// Event types for tracking import flow
+export enum ImportEventType {
+  START = "start",
+  CONFIRM_PDF_IMPORT = "confirm_pdf_import",
+  FILE_IMPORT_WITH_CANCELED_PDF = "file_import_with_canceled_pdf",
+  FILE_IMPORT_WITH_CONFIRMED_PDF = "file_import_with_confirmed_pdf",
+  IMPORT_REPO = "import_repo",
 }
-function u(e, t) {
-  t.startsWith(".") || (t = "." + t);
-  return $$d5(e).toLowerCase() === t;
+
+/**
+ * Extracts the file extension from a filename
+ * @param filename - The full filename
+ * @returns The file extension including the dot (e.g., ".fig", ".pdf")
+ */
+export function getFileExtension(filename: string): string {
+  const nameWithoutExtension = filename.replace(/\.[^.]+$/, "")
+  return filename.slice(nameWithoutExtension.length)
 }
-export function $$p6(e) {
-  return u(e, ".pdf");
+
+/**
+ * Determines the file type based on file extension
+ * @param file - File object containing name property
+ * @returns The corresponding FFileType
+ */
+export function determineFileType(file: { name: string }): FFileType {
+  const fileName = file.name
+  return isPdfFile(fileName) || hasExtension(fileName, ".jam")
+    ? FFileType.WHITEBOARD
+    : hasExtension(fileName, ".deck") || hasExtension(fileName, ".pptx")
+      ? FFileType.SLIDES
+      : hasExtension(fileName, ".site")
+        ? FFileType.SITES
+        : hasExtension(fileName, ".buzz")
+          ? FFileType.COOPER
+          : hasExtension(fileName, ".make")
+            ? FFileType.FIGMAKE
+            : FFileType.DESIGN
 }
-export function $$m0(e) {
-  switch (e) {
+
+/**
+ * Checks if a filename has a specific extension
+ * @param filename - The filename to check
+ * @param extension - The extension to match (with or without leading dot)
+ * @returns True if the filename has the specified extension
+ */
+function hasExtension(filename: string, extension: string): boolean {
+  const normalizedExt = extension.startsWith(".") ? extension : `.${extension}`
+  return getFileExtension(filename).toLowerCase() === normalizedExt
+}
+
+/**
+ * Checks if a file is a PDF
+ * @param filename - The filename to check
+ * @returns True if the file is a PDF
+ */
+export function isPdfFile(filename: string): boolean {
+  return hasExtension(filename, ".pdf")
+}
+
+/**
+ * Maps string identifiers to FFileType values
+ * @param typeIdentifier - String identifier for the file type
+ * @returns Corresponding FFileType or null for unknown types
+ */
+export function mapFileTypeFromString(typeIdentifier: string): FFileType | null {
+  switch (typeIdentifier) {
     case "fig":
-      return FFileType.DESIGN;
+      return FFileType.DESIGN
     case "jam":
-      return FFileType.WHITEBOARD;
+      return FFileType.WHITEBOARD
     case "deck":
-      return FFileType.SLIDES;
+      return FFileType.SLIDES
     case "sites":
-      return FFileType.SITES;
+      return FFileType.SITES
     case "buzz":
-      return FFileType.COOPER;
+      return FFileType.COOPER
     case "figmake":
-      return FFileType.FIGMAKE;
+      return FFileType.FIGMAKE
     default:
-      return returnSecond(e, null);
+      return returnSecond(typeIdentifier, null)
   }
 }
-export function $$h4(e) {
-  switch (e) {
+
+/**
+ * Gets human-readable name for whiteboard integration types
+ * @param integrationType - The whiteboard integration type
+ * @returns Human-readable name of the integration
+ */
+export function getWhiteboardIntegrationName(integrationType: WhiteboardIntegrationType): string {
+  switch (integrationType) {
     case WhiteboardIntegrationType.MIRO:
-      return "Miro";
+      return "Miro"
     case WhiteboardIntegrationType.MURAL:
-      return "Mural";
+      return "Mural"
     case WhiteboardIntegrationType.LUCID:
-      return "Lucid";
+      return "Lucid"
     case WhiteboardIntegrationType.JAMBOARD:
-      return "Jamboard";
+      return "Jamboard"
     case WhiteboardIntegrationType.UNKNOWN:
-      return "Unknown";
+      return "Unknown"
     default:
-      throwTypeError(e);
+      throwTypeError(integrationType)
   }
 }
-export const Ec = $$m0;
-export const Mk = $$s1;
-export const NU = $$c2;
-export const Y5 = $$l3;
-export const bT = $$h4;
-export const dv = $$d5;
-export const kI = $$p6;
-export const mO = $$o7;
+
+// Export aliases for backward compatibility
+export const Ec = mapFileTypeFromString
+export const Mk = SUPPORTED_FILE_TYPES
+export const NU = determineFileType
+export const Y5 = ImportEventType
+export const bT = getWhiteboardIntegrationName
+export const dv = getFileExtension
+export const kI = isPdfFile
+export const mO = ImportExportStatus

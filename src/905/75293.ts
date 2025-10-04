@@ -45,7 +45,7 @@ import { CopyPasteType, StyleVariableOperation, VariableResolvedDataType } from 
 import { parsePxNumber } from '../figma_app/783094';
 import { FormattedInputWithWrapper } from '../figma_app/841644';
 import { generateRecordingKey, useSetupPlayback } from '../figma_app/878298';
-import { Oe } from '../figma_app/933328';
+import { loadSharedVariableThunk } from '../figma_app/933328';
 import { X9 } from '../figma_app/975811';
 import { $$default } from '../svg/764361';
 let _ = f;
@@ -703,7 +703,7 @@ function eb({
   let p = useDispatch();
   let g = useCallback(async e => {
     if (e) {
-      let i = await p(Oe(e));
+      let i = await p(loadSharedVariableThunk(e));
       let n = convertVariableIdToKiwi(i);
       assertNotNullish(n);
       let r = {

@@ -150,7 +150,7 @@ import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary, ButtonSecon
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { lW } from "../figma_app/11182";
-import { Oi, QZ } from "../905/862913";
+import { isValidTeamPaymentOrNotRequired, hasFileAccessBasedOnSubscription } from "../905/862913";
 import { Q3, Cy, Bg } from "../figma_app/246699";
 import { ApprovalStatusEnum } from "../figma_app/736948";
 import { _9, J4, p8, fb, YU, Iz, lG, ET, mi } from "../figma_app/907616";
@@ -168,7 +168,7 @@ import { Dp, yJ, ml, hP, U as _$$U2, W7, cH, nM as _$$nM, M3 as _$$M, Fn, $j, d4
 import { useDropdownState } from "../905/848862";
 import { l6, c$ as _$$c$, sK } from "../905/794875";
 import { HU } from "../figma_app/926061";
-import { h1 as _$$h4 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { BannerInsetModal, BannerFullWidth } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { styleBuilderInstance } from "../905/941192";
@@ -208,7 +208,7 @@ import { l as _$$l } from "../905/716947";
 import { isSlideTemplateResource } from "../figma_app/471982";
 import { sG } from "../905/686934";
 import { ZS } from "../figma_app/519839";
-import { pz } from "../figma_app/825489";
+import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { UM, F4 } from "../figma_app/60023";
 import { ke } from "../905/58274";
@@ -2478,7 +2478,7 @@ class nn extends PureComponent {
       onReset,
       disabled
     } = this.props;
-    let l = passwordSetAt ? jsx(_$$h4, {
+    let l = passwordSetAt ? jsx(RelativeTimeDisplay, {
       date: passwordSetAt.toUTCString()
     }) : "";
     e = wasPasswordSetByCurrentUser ? renderI18nText("permissions.link_password_set_by_current_user", {
@@ -2753,7 +2753,7 @@ function na({
           selectedPermissionsLevel: G,
           setSelectedPermissionsLevel: eg,
           disabled: !x,
-          disableEdit: !(G === J4.EDIT || (i ? !(i.invite_whitelist_guest_invite_setting === ApprovalStatusEnum.BANNED && U === _9.ANYONE) : !!Oi(o || null, isDraftFileLG)))
+          disableEdit: !(G === J4.EDIT || (i ? !(i.invite_whitelist_guest_invite_setting === ApprovalStatusEnum.BANNED && U === _9.ANYONE) : !!isValidTeamPaymentOrNotRequired(o || null, isDraftFileLG)))
         }), jsx("div", {
           className: VA,
           children: G === J4.VIEW ? getI18nString("permissions_modal.file_share_settings.can_view_and_comment_on_this_file") : getI18nString("permissions_modal.file_share_settings.can_edit_this_file")
@@ -3199,7 +3199,7 @@ let n2 = registerModal(function ({
   onError: d
 }) {
   let u = useDispatch();
-  let p = Xr(pz);
+  let p = Xr(libraryPublishingModeAtom);
   let [m, g] = useState(!1);
   let {
     beforeUnpublishHubFile,
@@ -4130,7 +4130,7 @@ function rg({
         horizontalAlignItems: "space-between",
         children: [jsx("div", {
           children: renderI18nText("templates.detail.published_time", {
-            time: jsx(_$$h4, {
+            time: jsx(RelativeTimeDisplay, {
               date: t.updatedAt
             })
           })
@@ -4312,12 +4312,12 @@ let rI = memo(e => {
   if (!publishedTemplate) return renderI18nText("publishing.templates.menu.description.unpublished");
   let a = publishedTemplate.publishedByUser?.name;
   return a ? renderI18nText("publishing.templates.menu.description.published.v2", {
-    time: jsx(_$$h4, {
+    time: jsx(RelativeTimeDisplay, {
       date: publishedTemplate.updatedAt
     }),
     name: a
   }) : renderI18nText("publishing.templates.menu.description.published_no_name", {
-    time: jsx(_$$h4, {
+    time: jsx(RelativeTimeDisplay, {
       date: publishedTemplate.updatedAt
     })
   });
@@ -4348,7 +4348,7 @@ let rx = memo(e => {
   if (!publishedHubFile || !publishedHubFile.publishingStatusUpdatedAt) return renderI18nText("publishing.community.menu.description.unpublished_no_remix");
   let s = publishedHubFile.publishedByUser?.name;
   return renderI18nText("publishing.templates.menu.description.published.v2", {
-    time: jsx(_$$h4, {
+    time: jsx(RelativeTimeDisplay, {
       date: publishedHubFile.publishingStatusUpdatedAt
     }),
     name: s
@@ -4372,7 +4372,7 @@ function rR({
     roles: a
   });
   let g = (a, o) => jsx(_$$O, {
-    canEditRole: QZ(e.hasEditRole, e, s),
+    canEditRole: hasFileAccessBasedOnSubscription(e.hasEditRole, e, s),
     canMakeAdmin: !1,
     currentOrg: r,
     currentUserOrgId: e.parent_org_id || null,
@@ -5131,7 +5131,7 @@ function ay({
   let o = useIsStarterPlan(s).unwrapOr(!1);
   let l = selectUser();
   let d = (r, a) => jsx(aA, {
-    canEditRole: QZ(e.hasEditRole, e, i),
+    canEditRole: hasFileAccessBasedOnSubscription(e.hasEditRole, e, i),
     canMakeAdmin: !1,
     currentUser: l,
     fileRowResource: {
@@ -6255,7 +6255,7 @@ function su({
       org: t,
       team: i
     });
-    let u = QZ(e.hasEditRole, e, n);
+    let u = hasFileAccessBasedOnSubscription(e.hasEditRole, e, n);
     let p = useMemo(() => function ({
       file: e,
       canShareEditRole: t,

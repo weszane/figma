@@ -114,7 +114,7 @@ import { x as _$$x2 } from "../905/587214";
 import { LazyInputForwardRef } from "../905/408237";
 import { noop } from 'lodash-es';
 import { bL as _$$bL, c$ as _$$c$ } from "../905/867927";
-import { q as _$$q3 } from "../905/932270";
+import { Legend } from "../905/932270";
 import { G as _$$G } from "../905/865520";
 import { T as _$$T } from "../905/2124";
 import { V as _$$V } from "../905/802779";
@@ -1885,7 +1885,7 @@ function t6({
     children: jsxs(_$$bL, {
       value: e,
       onChange: n ? noop : t,
-      legend: jsx(_$$q3, {
+      legend: jsx(Legend, {
         children: getI18nString("figmake.toolbar.toggle_style")
       }),
       children: [jsx(_$$c$, {

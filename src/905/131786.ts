@@ -3,7 +3,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { removeSpaces } from "../figma_app/930338";
-import { nh, jD } from "../figma_app/933328";
+import { loadSharedStyle, upsertSharedSymbolOrStateGroup } from "../figma_app/933328";
 import { getAssetsForNodeIds } from "../figma_app/646357";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export function $$u1(e, t, i, n, r, a, o) {
@@ -35,7 +35,7 @@ export function $$m0(e, t, i, n) {
       s();
       return;
     }
-    n(nh({
+    n(loadSharedStyle({
       style: t,
       callback: t => {
         permissionScopeHandler.user("replace-libraries", () => Fullscreen.swapAllUsesOfStyle(e.key, t, i)) ? s() : o();
@@ -45,7 +45,7 @@ export function $$m0(e, t, i, n) {
   });
 }
 export async function $$h2(e, t) {
-  let i = await jD(t);
+  let i = await upsertSharedSymbolOrStateGroup(t);
   let n = i?.newSymbolOrStateGroupGuid;
   n && permissionScopeHandler.user("replace-libraries", () => {
     Fullscreen.swapAllInstancesOfComponentOrStateGroup(e, n, t.type === PrimaryWorkflowEnum.COMPONENT ? "" : t.default_state_key);

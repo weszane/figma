@@ -18,7 +18,7 @@ import { isLoading, isNullOrFailure } from '../905/18797';
 import { consentCounterAtom } from '../905/18800';
 import { useMemoCustom, useMemoStable, useStableMemo } from '../905/19536';
 import { a as _$$a8 } from '../905/29104';
-import { z4 as HandoffBindings } from '../905/37051';
+import { fullscreenAlias } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
 import { yx as DeprecatedXHRSendBindings } from '../905/41973';
 import { d as _$$d7 } from '../905/68441';
@@ -56,7 +56,7 @@ import { W as _$$W4 } from '../905/200727';
 import { Z as _$$Z2 } from '../905/224161';
 import { extractFirstEmoji, removePrefixAndVariation } from '../905/225144';
 import { C as _$$C2 } from '../905/226458';
-import { nt as _$$nt, o3 as _$$o } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { delay } from '../905/236856';
 import { x as widgetBindings } from '../905/239551';
 import { d as _$$d6 } from '../905/241150';
@@ -80,7 +80,7 @@ import { e as _$$e1 } from '../905/295932';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R5 } from '../905/304671';
-import { b as _$$b3, c as _$$c3 } from '../905/308099';
+import { RadioInputRoot, RadioInputOption } from '../905/308099';
 import { buildStateMachine, createUserEventTransition } from '../905/337355';
 import { L as _$$L2 } from '../905/348758';
 import { X as _$$X4 } from '../905/350405';
@@ -104,7 +104,7 @@ import { browserCapabilities as PlatformInfo } from '../905/409121';
 import { OnboardingModal } from '../905/425180';
 import { useModalManager } from '../905/437088';
 import { Link } from '../905/438674';
-import { W as _$$W2 } from '../905/442612';
+import { isBakeStarterPaywallEnabledWithoutLimit } from '../905/442612';
 import { IconButton } from '../905/443068';
 import { k as _$$k4 } from '../905/443820';
 import { NN, w4, y1 } from '../905/445814';
@@ -220,8 +220,8 @@ import { isCommunityHubSubView } from '../905/856857';
 import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n3, sg as _$$sg } from '../905/859698';
 import { AuthFlowStep } from '../905/862321';
-import { ud as _$$ud } from '../905/862913';
-import { q9 } from '../905/865071';
+import { useFileByKey } from '../905/862913';
+import { HiddenLabelPrimitive } from '../905/865071';
 import { bL as _$$bL2, c$ as _$$c$ } from '../905/867927';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
@@ -229,18 +229,18 @@ import { createDeferredPromise } from '../905/874553';
 import { replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset, replaceUsedLivegraphLocalNodeIdToDestinationFileName, replaceUsedLivegraphLocalNodeIdToDestinationKey, replaceUsedLivegraphSourceAssetKeyToDestinationKey, replaceUsedLivegraphSourceAssetKeyToFileName, replaceUsedLivegraphStyles, replaceUsedLivegraphUnnaturalKeyToNaturalKey } from '../905/879323';
 import { Db as thumbnailRequestManager } from '../905/881862';
 import { NP as webGPUTsContext } from '../905/889931';
-import { IY as PdfImportBindings } from '../905/901759';
+import { pdfImportManagerInstance } from '../905/901759';
 import { DragDataHandler } from '../905/904854';
 import { getRequest, sendWithRetry } from '../905/910117';
 import { _L as _$$_L } from '../905/911410';
 import { fullscreenCrashHandler } from '../905/913008';
-import { F as _$$F6 } from '../905/915030';
+import { ComFileType } from '../905/915030';
 import { dayjs } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
 import { Jn } from '../905/927294';
 import { selectViewAction } from '../905/929976';
 import { useAsyncWithReset } from '../905/931050';
-import { q as _$$q2, s as _$$s6 } from '../905/932270';
+import { Legend, HiddenLegend } from '../905/932270';
 import { I as _$$I2 } from '../905/932503';
 import { v as _$$v4 } from '../905/939922';
 import { selectUserFlag } from '../905/940356';
@@ -252,7 +252,7 @@ import { O as _$$O2 } from '../905/969533';
 import { multiplayerSessionManager as WebUserSyncing } from '../905/977824';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
-import { h1 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { Q as _$$Q } from '../905/986450';
 import { rn as _$$rn2 } from '../905/988099';
 import { colorCSSManipulatorInstance } from '../905/989956';
@@ -439,7 +439,7 @@ import { nb as _$$nb, fA, Tf } from '../figma_app/543100';
 import { latestSurveyResponseDateAtom, userFlagAtomFamily, userFlagExistsAtomFamily } from '../figma_app/545877';
 import { N as _$$N, Gm } from '../figma_app/548577';
 import { isFigmakeSitesEnabled, useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
-import { ZO as MissingFontsTrackerJs } from '../figma_app/557318';
+import { missingFontTrackerInstance } from '../figma_app/557318';
 import { isUserNotLoggedInAndEditorSupported } from '../figma_app/564183';
 import { getAtomMutate, handleResourceAtomMetrics, handleSuspenseRetainRelease, setupResourceAtomHandler } from '../figma_app/566371';
 import { NX } from '../figma_app/568591';
@@ -1727,7 +1727,7 @@ let ns = {
   WebAsync: () => WebAsync,
   JsBindingsTestHelpers: () => JsBindingsTestHelpers,
   ImageTsBindings: () => imageServiceInstance,
-  PdfImportBindings: () => PdfImportBindings,
+  PdfImportBindings: () => pdfImportManagerInstance,
   InteractionBindings: () => InteractionBindings,
   SitesBindings: () => SitesBindings,
   SitesJsBindings: () => SitesJsBindings,
@@ -1758,7 +1758,7 @@ let ns = {
   VariablesMirrorBindings: () => VariablesMirrorBindings,
   AssetMirrorBindings: () => assetMirrorInstance,
   AssetConsumptionMirrorBindings: () => AssetConsumptionMirrorBindings,
-  HandoffBindings: () => HandoffBindings,
+  HandoffBindings: () => fullscreenAlias,
   HandoffCallbacks: () => HandoffCallbacks,
   JSTextLayout: () => JSTextLayout,
   ScaleToolAPIBindings: () => ScaleToolAPIBindings,
@@ -1781,7 +1781,7 @@ let ns = {
   CoreUtils: () => CoreUtils,
   SummaryBindings: () => SummaryBindings,
   SceneGraphHookBindings: () => SceneGraphHookBindings,
-  MissingFontsTrackerJs: () => MissingFontsTrackerJs,
+  MissingFontsTrackerJs: () => missingFontTrackerInstance,
   StatsigConfigBindings: () => statsigConfigBindings,
   WhiteboardThemeTsBindings: () => whiteboardThemeTsBindings,
   QuickActionsBindings: () => QuickActionsBindings,
@@ -3964,7 +3964,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
       'aria-labelledby': e.id,
       'children': jsxs('div', {
         className: j()(cssBuilderInstance.grid.columnGap8.py16.px0.bb1.bSolid.colorBorder.$, s2),
-        children: [jsx(_$$s6, {
+        children: [jsx(HiddenLegend, {
           id: e.id,
           children: jsx('span', {
             className: cssBuilderInstance.textBodyMedium.lhNormal.p0.$,
@@ -3972,7 +3972,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           })
         }), e.choices.map((t, r) => jsxs('div', {
           className: j()(cssBuilderInstance.mb0.flex.justifyCenter.itemsCenter.alignCenter.textBodySmall.lhNormal.$, s5),
-          children: [jsx(q9, {
+          children: [jsx(HiddenLabelPrimitive, {
             htmlFor: `${e.id}-${t}`,
             children: t
           }), jsx(ManuallyLabeledRadioOption, {
@@ -4029,7 +4029,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
   }) {
     let [n, i] = useState(null);
     return jsxs('form', {
-      children: [jsx(_$$b3, {
+      children: [jsx(RadioInputRoot, {
         value: n?.answer,
         onChange: e => i(t.find(t => t.answer === e) ?? null),
         legend: jsx('legend', {
@@ -4038,7 +4038,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
         }),
         children: t.map(({
           answer: e
-        }) => jsx(_$$c3, {
+        }) => jsx(RadioInputOption, {
           label: jsx(Label, {
             children: e
           }),
@@ -5205,7 +5205,7 @@ function lF({
               data: {
                 team: r.team
               }
-            })) : e === FFileType.FIGMAKE && _$$W2() ? o(showModalHandler({
+            })) : e === FFileType.FIGMAKE && isBakeStarterPaywallEnabledWithoutLimit() ? o(showModalHandler({
               type: _$$i2,
               data: {
                 team: r.team
@@ -5456,7 +5456,7 @@ function l3({
         'children': s
       }), jsx('p', {
         className: 'recent_files--timestampMetadata--GvxiV recent_files--metadata--MhlWS',
-        children: h ? jsx(h1, {
+        children: h ? jsx(RelativeTimeDisplay, {
           date: h,
           capitalize: !0
         }) : null
@@ -6018,7 +6018,7 @@ function dG({
     let e = useRef(new Set());
     let t = useDispatch();
     let r = useAtomWithSubscription(dU);
-    let n = _$$ud();
+    let n = useFileByKey();
     let i = useMemoStable(() => {
       let e = {};
       for (let t of Object.values(n)) {
@@ -6432,7 +6432,7 @@ function ci({
         t.preventDefault();
         d(_$$an());
         d(y$({
-          type: e.type === _$$nb.PINNED_FILE ? _$$F6.PINNED_FILES : _$$F6.FILES,
+          type: e.type === _$$nb.PINNED_FILE ? ComFileType.PINNED_FILES : ComFileType.FILES,
           tiles: [e]
         }));
         show({
@@ -6646,7 +6646,7 @@ function cf() {
 function cE() {
   let e = useAtomWithSubscription(V1);
   let t = useDeferredValue(e);
-  let r = _$$o(_$$nt.interopFiles);
+  let r = useLabConfiguration(labConfigurations.interopFiles);
   let n = Xr(V1);
   let i = useAtomWithSubscription(XU);
   return r ? jsxs(setupThemeContext, {
@@ -7939,7 +7939,7 @@ function pB() {
           OffsetPathTsApi?.apply();
         },
         value: n === JoinType.MITER ? 'miter' : 'round',
-        legend: jsx(_$$q2, {
+        legend: jsx(Legend, {
           children: getI18nString('fullscreen.toolbar.offset-path-join-type-aria-label')
         }),
         children: [jsx(_$$c$, {
@@ -8646,7 +8646,7 @@ function _v({
   editorType: e,
   fileKey: t
 }) {
-  let r = _$$o(_$$nt.interopFiles);
+  let r = useLabConfiguration(labConfigurations.interopFiles);
   let n = useAtomWithSubscription(V1);
   let i = Xr(XU);
   let a = jsx(conditionalWrapper, {
@@ -9188,7 +9188,7 @@ executeWhenDomReady(async () => {
         JsKiwiSerialization: () => JsKiwiSerialization,
         TsFontManualLoader: () => TsFontManualLoader,
         StylesCheckBindings: () => StylesCheckBindings,
-        PdfImportBindings: () => PdfImportBindings,
+        PdfImportBindings: () => pdfImportManagerInstance,
         AutosaveSessionBindings: () => AutosaveSessionBindings,
         InteractionBindings: () => InteractionBindings,
         AccessibilityBindings: () => AccessibilityBindings,
@@ -9200,7 +9200,7 @@ executeWhenDomReady(async () => {
         VariablesMirrorBindings: () => VariablesMirrorBindings,
         AssetMirrorBindings: () => assetMirrorInstance,
         AssetConsumptionMirrorBindings: () => AssetConsumptionMirrorBindings,
-        HandoffBindings: () => HandoffBindings,
+        HandoffBindings: () => fullscreenAlias,
         LinterBindings: () => LinterBindings,
         HandoffCallbacks: () => HandoffCallbacks,
         ScaleToolAPIBindings: () => ScaleToolAPIBindings,
@@ -9220,7 +9220,7 @@ executeWhenDomReady(async () => {
         CoreUtils: () => CoreUtils,
         SummaryBindings: () => SummaryBindings,
         SceneGraphHookBindings: () => SceneGraphHookBindings,
-        MissingFontsTrackerJs: () => MissingFontsTrackerJs,
+        MissingFontsTrackerJs: () => missingFontTrackerInstance,
         EditScopeWebBindings: () => EditScopeWebBindings,
         QuickActionsBindings: () => QuickActionsBindings,
         BranchingWebBindings: () => BranchingWebBindings,

@@ -9,7 +9,7 @@ import { jO } from "../905/573265";
 import { hideModal } from "../905/156213";
 import { l as _$$l } from "../905/618307";
 import { LibrarySourceEnum, PublishStatusEnum } from "../figma_app/633080";
-import { pz } from "../figma_app/825489";
+import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { enqueueNetworkErrorBell } from "../905/470594";
 import { UM, F4, _g, Jw, cZ } from "../figma_app/60023";
 let _ = "Slides Template Publish Error";
@@ -57,7 +57,7 @@ function b(e) {
   } = e;
   let i = atomStoreManager.get(_g);
   let n = atomStoreManager.get(cZ);
-  switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), i) {
+  switch (atomStoreManager.set(libraryPublishingModeAtom, LibrarySourceEnum.LIBRARY), i) {
     case F4.PUBLISH_HUB_FILE_INITIATED:
       atomStoreManager.set(UM, {
         state: F4.PUBLISH_HUB_FILE_COMPLETED
@@ -97,7 +97,7 @@ function I(e) {
   } = e;
   let r = atomStoreManager.get(_g);
   let u = Jw(r);
-  switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), logError(ServiceCategories.SLIDES, _, {
+  switch (atomStoreManager.set(libraryPublishingModeAtom, LibrarySourceEnum.LIBRARY), logError(ServiceCategories.SLIDES, _, {
     publishState: r,
     publishStep: u,
     error

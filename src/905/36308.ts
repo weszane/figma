@@ -40,7 +40,7 @@ import { H as _$$H2 } from '../905/203408'
 import { AutoSuggestSessionManager } from '../905/203573'
 import { n as _$$n } from '../905/221510'
 import { y as _$$y3 } from '../905/225297'
-import { nt as _$$nt } from '../905/226610'
+import { labConfigurations } from '../905/226610'
 import { p as _$$p } from '../905/233082'
 import { l as _$$l } from '../905/241412'
 import { j as _$$j } from '../905/253683'
@@ -159,7 +159,6 @@ import { b as _$$b2 } from '../905/874849'
 import { $ as _$$$2 } from '../905/922405'
 import { hideDropdownAction } from '../905/929976'
 import { I as _$$I } from '../905/932503'
-
 import { O as _$$O4 } from '../905/936515'
 import { U as _$$U2 } from '../905/944163'
 import { dL, qz } from '../905/944871'
@@ -219,7 +218,7 @@ import { AppStateTsApi, ComponentPanelTab, EasingType, Fullscreen, LogToConsoleM
 import { X as _$$X4 } from '../figma_app/765161'
 import { BrowserInfo } from '../figma_app/778880'
 import { As } from '../figma_app/802241'
-import { hV as _$$hV, M3 as _$$M2, _p, lW, MH, pn, rH, u2 } from '../figma_app/847915'
+import { ARRANGE_MENU_ID, EDIT_MENU_ID, FIGMA_ACCOUNT_MENU_ID, OBJECT_MENU_ID, PREFERENCES_MENU_ID, TEXT_MENU_ID, VECTOR_MENU_ID, VIEW_MENU_ID } from '../figma_app/847915'
 import { YA } from '../figma_app/865646'
 import { desktopAPIInstance } from '../figma_app/876459'
 import { generateRecordingKey, useHandleFocusEvent } from '../figma_app/878298'
@@ -3932,14 +3931,16 @@ export function $$nN0(e) {
       }, {
         separator: !0,
       }]
-    : []), {
+    : []), 
+    {
     action: 'toggle-menu',
     displayText: gn() ? getI18nString('fullscreen_actions.toggle-actions-menu') : getI18nString('fullscreen_actions.toggle-menu'),
     hideForQuickCommand: !0,
     iconType: 'search',
     featureFlags: [],
     flags: ['!figmake'],
-  }, {
+  }, 
+  {
     separator: !0,
   }, ...(fileMenuArgs
     ? (function ({
@@ -4082,7 +4083,7 @@ export function $$nN0(e) {
         }]
       }(fileMenuArgs))
     : []), {
-    name: rH,
+    name: EDIT_MENU_ID,
     flags: ['!edit', '!dev_handoff', '!variables_table', '!figmake'],
     featureFlags: [],
     children: [{
@@ -4202,7 +4203,7 @@ export function $$nN0(e) {
       featureFlags: [],
     }],
   }, {
-    name: rH,
+    name: EDIT_MENU_ID,
     flags: ['!edit', 'dev_handoff', '!variables_table', '!figmake'],
     featureFlags: [],
     children: [{
@@ -4269,7 +4270,7 @@ export function $$nN0(e) {
       featureFlags: [],
     }],
   }, {
-    name: rH,
+    name: EDIT_MENU_ID,
     flags: ['edit', '!dev_handoff', '!variables_table', '!figmake'],
     featureFlags: [],
     children: [{
@@ -4452,7 +4453,7 @@ export function $$nN0(e) {
       }],
     }],
   }, {
-    name: rH,
+    name: EDIT_MENU_ID,
     flags: ['figmake', 'desktop_os_menu'],
     featureFlags: [],
     children: [{
@@ -4479,7 +4480,7 @@ export function $$nN0(e) {
       featureFlags: [],
     }],
   }, {
-    name: _p,
+    name: VIEW_MENU_ID,
     featureFlags: [],
     flags: ['!variables_table', '!figmake'],
     children: [{
@@ -4861,7 +4862,7 @@ export function $$nN0(e) {
       featureFlags: [],
     }],
   }, {
-    name: _$$M2,
+    name: OBJECT_MENU_ID,
     flags: ['!dev_handoff', '!figmake'],
     featureFlags: [],
     children: [{
@@ -5318,7 +5319,7 @@ export function $$nN0(e) {
       featureFlags: [],
     }],
   }, {
-    name: MH,
+    name: TEXT_MENU_ID,
     flags: ['edit', '!dev_handoff', '!figmake'],
     featureFlags: [],
     children: [{
@@ -5554,7 +5555,7 @@ export function $$nN0(e) {
       }, ...nT(_$$A4())],
     }, ...nk(), ...nT(dL(pluginAndWidgetMenuArgs, 'filemenu'))],
   }, {
-    name: pn,
+    name: ARRANGE_MENU_ID,
     flags: ['edit', '!dev_handoff', '!figmake'],
     featureFlags: [],
     children: [{
@@ -5643,7 +5644,7 @@ export function $$nN0(e) {
       featureFlags: [],
     }],
   }, {
-    name: u2,
+    name: VECTOR_MENU_ID,
     flags: ['edit', 'design', '!dev_handoff'],
     featureFlags: [],
     children: [{
@@ -5708,7 +5709,7 @@ export function $$nN0(e) {
     searchOnly: !0,
     featureFlags: [],
   }, {
-    name: lW,
+    name: PREFERENCES_MENU_ID,
     featureFlags: [],
     children: [{
       name: 'dev-handoff-code-settings-language',
@@ -6137,7 +6138,7 @@ export function $$nN0(e) {
       featureFlags: [],
       children: nT(YA(theme)),
     }, ...nT(function () {
-      let e = Object.values(_$$nt)
+      let e = Object.values(labConfigurations)
       let t = e.filter(e => e.canOverride())
       let i = () => e.filter(e => e.isOverridden(debugState.getState().userFlags))
       if (t.length === 0)
@@ -6237,7 +6238,7 @@ export function $$nN0(e) {
     platforms: ['mac', 'windows'],
     featureFlags: [],
   }, {
-    name: _$$hV,
+    name: FIGMA_ACCOUNT_MENU_ID,
     featureFlags: [],
     children: [{
       action: 'open-help',

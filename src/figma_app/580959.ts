@@ -36,7 +36,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { _j } from "../figma_app/843119";
 import { U as _$$U2 } from "../905/492359";
 import { hidePickerThunk, showPickerThunk, hideStylePicker, stylePickerViewChangedThunk, showStylePicker } from "../figma_app/91703";
-import { AV, nh } from "../figma_app/933328";
+import { applySharedStyle, loadSharedStyle } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { showPickerInStyleCreation, hidePickerInStyleCreation } from "../905/295712";
 import { updateCurrentSelectionPaintInPicker, forceUpdateSelectionPaintsForUndo } from "../905/854717";
@@ -58,7 +58,7 @@ import { useDropdownState } from "../905/848862";
 import { useAppModelProperty } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { Xo } from "../figma_app/482495";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { useStyleSubscriptionInfo, useStyleSubscriptionName, useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
 import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { Q as _$$Q } from "../figma_app/104130";
@@ -143,7 +143,7 @@ let $$ti6 = memo(function (e) {
   let l = useCallback((e, {
     fromSearch: r
   } = {}) => {
-    dispatch(AV({
+    dispatch(applySharedStyle({
       style: e,
       inheritStyleKeyField: "inheritFillStyleKey",
       fromSearch: r
@@ -160,7 +160,7 @@ let $$ti6 = memo(function (e) {
   let h = useCallback(() => {
     getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-paints-panel-fill-color-picker-show");
   }, []);
-  let m = o3(nt.useGrid);
+  let m = useLabConfiguration(labConfigurations.useGrid);
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "FillPanel",
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
@@ -236,7 +236,7 @@ export function $$ta0(e) {
   let c = zr();
   let u = normalizeValue(_$$b("guid"));
   let p = Fs("STROKE", "PROPS_PANEL", VariableResolvedDataType.COLOR);
-  let _ = o3(nt.useGrid);
+  let _ = useLabConfiguration(labConfigurations.useGrid);
   return jsx(dD.Provider, {
     value: {
       useGrid: _
@@ -291,7 +291,7 @@ class to extends PureComponent {
     this.onApplyStyle = (e, {
       fromSearch: t
     } = {}) => {
-      this.props.dispatch(AV({
+      this.props.dispatch(applySharedStyle({
         style: e,
         inheritStyleKeyField: "inheritFillStyleKeyForStroke",
         fromSearch: t
@@ -1380,7 +1380,7 @@ function tf({
     permissionScopeHandler.user("apply-paint-to-style", () => SelectionPaintHelpers.updateStyleWithPaint(n, t));
   }, [n]);
   let K = useCallback(e => {
-    v(nh({
+    v(loadSharedStyle({
       style: e,
       callback: e => {
         permissionScopeHandler.user("apply-style", () => SelectionPaintHelpers.updateStyle(n, e));
@@ -1575,7 +1575,7 @@ $$t_2.displayName = "Paint";
       };
       this.onApplyStyle = e => {
         let t = SelectionPaintHelpers.paintDataNodesInPaint(GP(this.props.paint));
-        this.props.dispatch(nh({
+        this.props.dispatch(loadSharedStyle({
           style: e,
           callback: e => {
             if (t.length > 1) this.props.dispatch(showModalHandler({

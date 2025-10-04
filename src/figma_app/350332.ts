@@ -9,7 +9,7 @@ import { setupDynamicConfigHandler } from "../figma_app/594947";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { AiMeterUsageView } from "../figma_app/43951";
 import { n as _$$n } from "../905/347702";
-import { Ac, ag, u6 } from "../905/509613";
+import { grantlistCheckStatus, jubileeTentativePlanEligibilityAtom, jubileeTentativeUserEligibilityAtom } from "../905/509613";
 import { JT } from "../figma_app/632248";
 var $$g1 = (e => (e.DAILY = "daily", e.MONTHLY = "monthly", e))($$g1 || {});
 function f() {
@@ -40,9 +40,9 @@ export let $$E0 = _$$n(e => {
   if (!e || !getFeatureFlags().qa_ai_metering || e === JT.ASSISTANT_CHAT || e === JT.FIND_INSPIRATION) return {
     withinMeter: !0
   };
-  let r = atomStoreManager.get(Ac);
-  let l = atomStoreManager.get(ag);
-  let d = atomStoreManager.get(u6);
+  let r = atomStoreManager.get(grantlistCheckStatus);
+  let l = atomStoreManager.get(jubileeTentativePlanEligibilityAtom);
+  let d = atomStoreManager.get(jubileeTentativeUserEligibilityAtom);
   let c = l || d;
   if ("unchecked" === r || "null_grantlist" === r && c) {
     let t = debugState && debugState.getState().selectedView;
@@ -54,7 +54,7 @@ export let $$E0 = _$$n(e => {
       fileKey: r || "missing",
       action: e
     });
-    atomStoreManager.set(Ac, c ? "with_grantlist" : "null_grantlist");
+    atomStoreManager.set(grantlistCheckStatus, c ? "with_grantlist" : "null_grantlist");
   }
   if (!t) return {
     withinMeter: !0,

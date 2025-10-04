@@ -7,7 +7,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
-import { Tn, fv } from "../figma_app/933328";
+import { useLibraryInfo, getOrgMigrationStatus } from "../figma_app/933328";
 import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { MH, cM, tK } from "../figma_app/803787";
 import { registerModal } from "../905/102752";
@@ -78,7 +78,7 @@ function D({
   }, [G, V, z]);
   let q = useSelector(e => e.currentUserOrgId);
   let $ = useSelector(fileVersionSelector);
-  let [Z] = Tn({
+  let [Z] = useLibraryInfo({
     currentOrgId: q
   });
   let X = Z.data || initialLibraryStats;
@@ -207,7 +207,7 @@ let $$B0 = registerModal(function (e) {
   let y = useSelector(e => Object.values(cM(e)).length);
   let b = useSelector(e => Object.values(tK(e)).length);
   let v = useMemo(() => Gk(A, y, b), [A, y, b]);
-  let [I] = setupResourceAtomHandler(fv(g));
+  let [I] = setupResourceAtomHandler(getOrgMigrationStatus(g));
   return f ? jsx(ModalRootComponent, {
     manager: c,
     width: "fit-content",

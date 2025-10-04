@@ -13,14 +13,14 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { reportError } from "../905/11";
 import { logInfo, logError } from "../905/714362";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { SvgComponent } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { A as _$$A } from "../905/222027";
 import { SizeOption } from "../905/171275";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { NA } from "../905/738636";
+import { handleAutosaveFileCreation } from "../905/738636";
 import { hideModal, popModalStack } from "../905/156213";
 import { useAutosaveFilesWithPermissions, deleteAutosaveDataForSessions, getUnsyncedAutosaveFilesForUsers, getAutosaveExpirationMs } from "../figma_app/840917";
 import { createPrefixKeyRange, createSessionNodeKeyRange } from "../905/25189";
@@ -74,7 +74,7 @@ let P = (e, a) => debounce(() => {
   s.searchParams.append("fuid", a);
   customHistory.redirect(s.toString(), "_blank");
 });
-let K = (e, a) => debounce(() => e(NA({
+let K = (e, a) => debounce(() => e(handleAutosaveFileCreation({
   file: a,
   openNewFileIn: TabOpenBehavior.NEW_TAB,
   source: NotificationType.AUTOSAVE_MODAL
@@ -117,7 +117,7 @@ function Y(e) {
       }), jsx("div", {
         className: hL,
         children: renderI18nText("tile.file_tile.edited_time", {
-          time: jsx(h1, {
+          time: jsx(RelativeTimeDisplay, {
             date: e.fileState.lastUpdatedAt
           })
         })

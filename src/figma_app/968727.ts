@@ -3,7 +3,7 @@ import { getI18nString } from "../905/303541";
 import { generateUniqueKey } from "../905/383708";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { FU } from "../figma_app/933328";
+import { insertSharedComponent } from "../figma_app/933328";
 import { getSelectedFile } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
 import { applyOffsetToViewport } from "../figma_app/62612";
@@ -60,7 +60,7 @@ let $$f0 = createOptimistThunk(async (e, t) => {
       libraryKey: generateUniqueKey(fileKey)
     })), m = e.getState(), f = getAssetsForLibraryKey(m.library.publishedByLibraryKey.components, n)[nodeId] ?? null);
   }
-  f ? e.dispatch(FU({
+  f ? e.dispatch(insertSharedComponent({
     item: f,
     canvasPosition: new Point(canvasX, canvasY),
     percentageOffset: new Point(.5, .5),

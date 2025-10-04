@@ -48,7 +48,7 @@ import { O as _$$O2 } from '../905/936515';
 import { styleBuilderInstance } from '../905/941192';
 import { ck } from '../905/952832';
 import { a as _$$a } from '../905/964520';
-import { h1 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { k as _$$k5 } from '../4452/48052';
 import { m as _$$m } from '../4452/114445';
 import { b as _$$b } from '../4452/320061';
@@ -574,11 +574,11 @@ function ts({
         }), jsx(ta, {}), e.lastNudgedAt ? jsx('div', {
           className: 'seat_requests_table_mini_view--reminder--SVXyk',
           children: renderI18nText('admin_dashboard.requests.reminder_sent', {
-            time: jsx(h1, {
+            time: jsx(RelativeTimeDisplay, {
               date: e.updatedAt
             })
           })
-        }) : jsx(h1, {
+        }) : jsx(RelativeTimeDisplay, {
           capitalize: !0,
           date: e.createdAt
         })]

@@ -44,7 +44,7 @@ import { e0 as _$$e } from "../905/696396";
 import { N as _$$N2 } from "../905/620375";
 import { A as _$$A } from "../905/81613";
 import { A as _$$A2 } from "../905/392698";
-import { pz } from "../figma_app/825489";
+import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { VisualBellIcon } from "../905/576487";
 import { $u } from "../figma_app/524655";
 import { r as _$$r } from "../905/149895";
@@ -1049,7 +1049,7 @@ function tP({
   let n = selectCurrentUser();
   let r = T6(t, n);
   let a = t?.editorType === FFileType.SLIDES;
-  let [o, l] = useAtomValueAndSetter(pz);
+  let [o, l] = useAtomValueAndSetter(libraryPublishingModeAtom);
   return (useEffect(() => {
     a && (l(LibrarySourceEnum.LIBRARY), permissionScopeHandler.system("slides-prepare-modules-for-publish", () => Fullscreen?.createSlideModulesForPublish()));
   }, [a, l]), t) ? jsx(tO, {

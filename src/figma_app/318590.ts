@@ -15,7 +15,7 @@ import { isFullscreenSlidesView } from "../905/35881";
 import { n as _$$n } from "../905/347702";
 import { hasJubileePermissionForDesign, hasJubileePermissionForWhiteboard } from "../figma_app/251115";
 import { isAssetSuggestionsEnabled } from "../figma_app/144974";
-import { p9, $7 } from "../905/509613";
+import { jubileeBAtom, checkEligibilityStatus } from "../905/509613";
 let T = atom(!1);
 let I = atom(null);
 let S = _$$n(() => atomStoreManager.get(T));
@@ -39,9 +39,9 @@ export function $$v8(e) {
     s(t);
   }, [t, s]);
 }
-let A = _$$n(() => !!useAtomWithSubscription(p9));
+let A = _$$n(() => !!useAtomWithSubscription(jubileeBAtom));
 export function $$x1() {
-  return !!$7("getHasAssetVisualSearchPermission") && !!getFeatureFlags().api_asset_search && S();
+  return !!checkEligibilityStatus("getHasAssetVisualSearchPermission") && !!getFeatureFlags().api_asset_search && S();
 }
 export function $$N0(e) {
   return getFeatureFlags().api_asset_search ? function (e) {
@@ -52,22 +52,22 @@ export function $$N0(e) {
       null !== t && atomStoreManager.set(I, !!t);
       return !!t;
     });
-  }(e).then(e => !!(e || $7("getHasAssetSearchPermission")) && S()) : Promise.resolve(!1);
+  }(e).then(e => !!(e || checkEligibilityStatus("getHasAssetSearchPermission")) && S()) : Promise.resolve(!1);
 }
 let $$C4 = _$$n(e => !!(getFeatureFlags().api_asset_search && (function (e) {
   let {
     getConfig
   } = selectExperimentConfigHook("exp_search_ai_assets", void 0, !0);
   return !!getConfig().getValue("allow_ai_results", !1) && e;
-}(e) || $7("useHasAssetSearchPermission"))) && S());
+}(e) || checkEligibilityStatus("useHasAssetSearchPermission"))) && S());
 let $$w2 = _$$n(() => {
   let e = A();
-  return !!$7("useHasFragmentSearchPermission") && (!getFeatureFlags().asset_suggestions_require_completed_backfill || !!e) && S();
+  return !!checkEligibilityStatus("useHasFragmentSearchPermission") && (!getFeatureFlags().asset_suggestions_require_completed_backfill || !!e) && S();
 });
 export function $$O6() {
   let e = function () {
-    let e = atomStoreManager.get(p9);
-    return !!$7("useHasFragmentSearchPermission") && (!getFeatureFlags().asset_suggestions_require_completed_backfill || !!e) && S();
+    let e = atomStoreManager.get(jubileeBAtom);
+    return !!checkEligibilityStatus("useHasFragmentSearchPermission") && (!getFeatureFlags().asset_suggestions_require_completed_backfill || !!e) && S();
   }();
   return $$R3() && e && isAssetSuggestionsEnabled();
 }

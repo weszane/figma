@@ -6,7 +6,7 @@ import o from "classnames";
 import { useDebounce } from 'use-debounce';
 import { colorToRgbaString, parseColor, getThemeBackgroundColor } from "../figma_app/191804";
 import { useLatestRef } from "../figma_app/922077";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString } from "../905/303541";
 import { getVisibleTheme } from "../905/640017";
@@ -453,7 +453,7 @@ export function $$ec1(e) {
   let {
     windowInnerHeight,
     windowInnerWidth
-  } = _$$l();
+  } = useWindowDimensions();
   useEffect(() => {
     $.current && X({
       width: $.current.offsetWidth,

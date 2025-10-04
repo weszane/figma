@@ -8,7 +8,7 @@ import { TrackedLinkButton } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { UserAvatar, AvatarSize } from "../905/590952";
 import { A } from "../905/563377";
-import { ud } from "../905/862913";
+import { useFileByKey } from "../905/862913";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
 var s = a;
@@ -24,7 +24,7 @@ export function $$I1({
   let r = useCurrentUserOrgId();
   let a = useSelector(e => e.user);
   let o = useCurrentFileKey();
-  let d = ud();
+  let d = useFileByKey();
   let c = {
     2: {
       modalGraphic: "custom_template_publish_nudge_content--modalGraphicSm--WcSGr custom_template_publish_nudge_content--modalGraphic--rfPmE",

@@ -1,52 +1,52 @@
-import { sha1Hex, sha1BytesFromHex, sha1HexFromBytes } from "../905/125019";
-import { ServiceCategories } from "../905/165054";
-import { SlidePptxImporterBindings, Fullscreen, FontSourceType } from "../figma_app/763686";
-import { delay } from "../905/236856";
-import { trackEventAnalytics } from "../905/449184";
-import { isFigmaEmail } from "../figma_app/416935";
-import { getInitialOptions } from "../figma_app/169182";
-import { UploadError } from "../905/623179";
 import { reportError } from "../905/11";
-import { logError } from "../905/714362";
-import { sendWithRetry } from "../905/910117";
-import { getI18nString } from "../905/303541";
-import { trackFileEvent } from "../figma_app/314264";
-import { fetchFontList, fetchFontFile } from "../905/777093";
-import { GK } from "../905/37051";
-import { C as _$$C } from "../905/991119";
-import { Ec, bT } from "../905/163189";
-import { enqueueNetworkErrorBell } from "../905/470594";
-import { OL, lZ, pl, Yw } from "../905/615657";
-import { Lg, Ij } from "../905/902099";
-import { permissionScopeHandler } from "../905/189185";
-import { getSingletonSceneGraph } from "../905/700578";
-import { fullscreenValue } from "../figma_app/455680";
-import w from "../vendor/7508";
-import { VS } from "../905/696699";
 import { VectorPathBuilder } from "../905/18922";
-import { Vy, zT } from "../905/484695";
-import { XMLParser } from "../vendor/870203";
-import { F as _$$F } from "../905/422355";
-import { getImageManager } from "../figma_app/624361";
-import { U_ } from "../905/327855";
-import { FEditorType } from "../figma_app/53721";
-import { convertMarkdownToEditorState } from "../905/877554";
-import { canCreateFileTypeAsync } from "../figma_app/687776";
-import { VisualBellActions } from "../905/302958";
-import { selectFolderView } from "../figma_app/976345";
-import { bE } from "../905/466026";
+import { RelatedLinksManager } from "../905/37051";
 import { y$ } from "../905/81009";
+import { sha1BytesFromHex, sha1Hex, sha1HexFromBytes } from "../905/125019";
+import { getWhiteboardIntegrationName, mapFileTypeFromString } from "../905/163189";
+import { ServiceCategories } from "../905/165054";
+import { permissionScopeHandler } from "../905/189185";
+import { delay } from "../905/236856";
+import { VisualBellActions } from "../905/302958";
+import { getI18nString } from "../905/303541";
+import { initializeFullscreenForNewFile } from "../905/327855";
+import { F as _$$F } from "../905/422355";
+import { trackEventAnalytics } from "../905/449184";
+import { bE } from "../905/466026";
+import { enqueueNetworkErrorBell } from "../905/470594";
+import { Vy, zT } from "../905/484695";
+import { ImportBaseError, ImportErrors, importErrorTracker, ServiceErrors } from "../905/615657";
+import { UploadError } from "../905/623179";
+import { VS } from "../905/696699";
+import { getSingletonSceneGraph } from "../905/700578";
+import { logError } from "../905/714362";
+import { fetchFontFile, fetchFontList } from "../905/777093";
+import { convertMarkdownToEditorState } from "../905/877554";
+import { trackPdfImportCompletion, processPdfImport } from "../905/902099";
+import { sendWithRetry } from "../905/910117";
+import { ComFileType } from "../905/915030";
+import { C as _$$C } from "../905/991119";
+import { FEditorType } from "../figma_app/53721";
+import { getInitialOptions } from "../figma_app/169182";
+import { trackFileEvent } from "../figma_app/314264";
+import { isFigmaEmail } from "../figma_app/416935";
+import { fullscreenValue } from "../figma_app/455680";
 import { fA } from "../figma_app/543100";
-import { F as _$$F4 } from "../905/915030";
-var C = w;
+import { getImageManager } from "../figma_app/624361";
+import { canCreateFileTypeAsync } from "../figma_app/687776";
+import { FontSourceType, Fullscreen, SlidePptxImporterBindings } from "../figma_app/763686";
+import { selectFolderView } from "../figma_app/976345";
+import w from "../vendor/7508";
+import { XMLParser } from "../vendor/870203";
+let C = w;
 function N(e, t = 1) {
   return e / 914400 * 72 * t;
 }
 function P(e) {
-  return "ctr" === e ? "CENTER" : "b" === e ? "BOTTOM" : "TOP";
+  return e === "ctr" ? "CENTER" : e === "b" ? "BOTTOM" : "TOP";
 }
 function O(e) {
-  return "ctr" === e ? "CENTER" : "just" === e || "dist" === e ? "JUSTIFIED" : "r" === e ? "RIGHT" : "LEFT";
+  return e === "ctr" ? "CENTER" : e === "just" || e === "dist" ? "JUSTIFIED" : e === "r" ? "RIGHT" : "LEFT";
 }
 function D(e) {
   return /^[0-9A-F]{6}$/i.test(e);
@@ -74,7 +74,7 @@ class j {
     });
   }
   convertToElementTree(e) {
-    return Array.isArray(e) ? e.map(e => this.convertToElementTreeItem(e)).filter(e => null !== e) : [this.convertToElementTreeItem(e)].filter(e => null !== e);
+    return Array.isArray(e) ? e.map(e => this.convertToElementTreeItem(e)).filter(e => e !== null) : [this.convertToElementTreeItem(e)].filter(e => e !== null);
   }
   convertToElementTreeItem(e) {
     let t = {
@@ -82,21 +82,27 @@ class j {
       elements: [],
       attributes: {}
     };
-    for (let i in e) if ("#text" === i) {
-      if ("string" == typeof e[i] && "" === e[i].trim()) return null;
-      t.type = "text";
-      t.text = e[i];
-    } else if (":@" === i) for (let n in t.attributes = {}, e[i]) t.attributes[n.replace(/^@/, "")] = e[i][n];else Array.isArray(e[i]) ? (t.name = i, t.elements = this.convertToElementTree(e[i])) : "object" == typeof e[i] && (t.name = i, t.elements = this.convertToElementTree([e[i]]));
-    t.elements && 0 === t.elements.length && delete t.elements;
-    0 === Object.keys(t.attributes || {}).length && delete t.attributes;
+    for (let i in e) {
+      if (i === "#text") {
+        if (typeof e[i] == "string" && e[i].trim() === "") return null;
+        t.type = "text";
+        t.text = e[i];
+      } else if (i === ":@") {
+        for (let n in t.attributes = {}, e[i]) t.attributes[n.replace(/^@/, "")] = e[i][n];
+      } else {
+        Array.isArray(e[i]) ? (t.name = i, t.elements = this.convertToElementTree(e[i])) : typeof e[i] == "object" && (t.name = i, t.elements = this.convertToElementTree([e[i]]));
+      }
+    }
+    t.elements && t.elements.length === 0 && delete t.elements;
+    Object.keys(t.attributes || {}).length === 0 && delete t.attributes;
     return t;
   }
   parse(e) {
-    if (!e) throw Error("XML is empty");
+    if (!e) throw new Error("XML is empty");
     let t = this.parser.parse(e);
-    if (!t) throw Error("XML failed to parse");
+    if (!t) throw new Error("XML failed to parse");
     let i = this.convertToElementTree(t);
-    if (!i || 0 === i.length || !i[0]) throw Error("XML failed to convert");
+    if (!i || i.length === 0 || !i[0]) throw new Error("XML failed to convert");
     return i[0];
   }
 }
@@ -124,7 +130,7 @@ function B(e, t) {
 function V(e, t) {
   let i = e;
   for (let e of t) {
-    let t = (e, t) => "function" == typeof t && e.name ? t(e.name) : e.name === t;
+    let t = (e, t) => typeof t == "function" && e.name ? t(e.name) : e.name === t;
     let n = i?.elements?.find(i => t(i, e));
     if (!n) return null;
     i = n;
@@ -133,7 +139,7 @@ function V(e, t) {
 }
 function G(e, t) {
   let i = e;
-  if (0 === t.length) return;
+  if (t.length === 0) return;
   t.forEach((e, n) => {
     if (n === t.length - 1) return;
     let r = i?.elements?.find(t => $$W(t, e));
@@ -144,20 +150,20 @@ function G(e, t) {
     i = r;
   });
   let n = t[t.length - 1];
-  if ("string" == typeof n) return i?.attributes?.[n];
+  if (typeof n == "string") return i?.attributes?.[n];
 }
 var z = (e => (e[e.BOOLEAN = 0] = "BOOLEAN", e[e.INT = 1] = "INT", e[e.FLOAT = 2] = "FLOAT", e[e.STRING = 3] = "STRING", e))(z || {});
 function H(e, t, i = 3) {
   let n;
   let r = U(e, t);
-  return 0 === r.length ? void 0 : (r?.[0].type === "text" && (n = r[0].text), 1 === i) ? parseInt(n) : 3 === i ? String(n) : n;
+  return r.length === 0 ? void 0 : (r?.[0].type === "text" && (n = r[0].text), i === 1) ? parseInt(n) : i === 3 ? String(n) : n;
 }
-let $$W = (e, t) => "function" == typeof t && e.name ? t(e.name) : e.name === t;
+let $$W = (e, t) => typeof t == "function" && e.name ? t(e.name) : e.name === t;
 function K(e) {
   return t => t.endsWith(e);
 }
 function Y(e, t) {
-  if (e.name !== t) throw Error(`pptx-import - assertElement expected ${t} but got ${e.name}`);
+  if (e.name !== t) throw new Error(`pptx-import - assertElement expected ${t} but got ${e.name}`);
 }
 function q(e) {
   let t = G(e, ["a:alpha", "val"]);
@@ -169,20 +175,24 @@ function $(e, t, i) {
     let r = G(e, ["a:srgbClr", "val"]);
     let a = q(n);
     let s = Z(t, r, i);
-    if (s) return {
-      color: s,
-      opacity: a
-    };
+    if (s) {
+      return {
+        color: s,
+        opacity: a
+      };
+    }
   }
   let r = V(e, ["a:schemeClr"]);
   if (r) {
     let n = G(e, ["a:schemeClr", "val"]);
     let a = q(r);
     let s = Z(t, n, i);
-    if (s) return {
-      color: s,
-      opacity: a
-    };
+    if (s) {
+      return {
+        color: s,
+        opacity: a
+      };
+    }
   }
   return null;
 }
@@ -249,7 +259,7 @@ function J({
   slideMaster: r,
   slideLayout: a
 }, s) {
-  if ("p:cSld" !== e.name) {
+  if (e.name !== "p:cSld") {
     Vy.error(`Failed extractBgForSlide with invalid node: ${e.name}`, s);
     return;
   }
@@ -281,7 +291,7 @@ function ee({
     for (let e of n) {
       let n = G(e, ["pos"]);
       let r = $(e, t, i);
-      n && "number" == typeof parseFloat(n) && r && a.push({
+      n && typeof parseFloat(n) == "number" && r && a.push({
         position: parseFloat(n) / 1e5,
         color: {
           ...r.color,
@@ -290,7 +300,7 @@ function ee({
       });
     }
     return a.length ? {
-      type: "circle" === r ? "GRADIENT_RADIAL" : "GRADIENT_LINEAR",
+      type: r === "circle" ? "GRADIENT_RADIAL" : "GRADIENT_LINEAR",
       visible: !0,
       opacity: 1,
       blendMode: "NORMAL",
@@ -342,7 +352,7 @@ function en(e, t) {
   }
 }
 function er(e, t, i) {
-  for (let n of U(e, ["p:cSld", "p:spTree"]).filter(e => "p:sp" === e.name)) {
+  for (let n of U(e, ["p:cSld", "p:spTree"]).filter(e => e.name === "p:sp")) {
     let e = eo(G(n, ["p:nvSpPr", "p:nvPr", "p:ph", "type"]), G(n, ["p:nvSpPr", "p:nvPr", "p:ph", "idx"]));
     let r = ea(n, i);
     let a = es(n, i);
@@ -398,7 +408,7 @@ let ec = ({
   let o = function (e, t) {
     let i = t?.size?.x ?? 0;
     let n = t?.size?.y ?? 0;
-    if (0 === i || 0 === n) return null;
+    if (i === 0 || n === 0) return null;
     let r = [];
     for (let t of e) {
       let e = parseInt(G(t, ["w"]) ?? "0", 10);
@@ -424,8 +434,8 @@ let ec = ({
           case "a:cubicBezTo":
             let l = function (e) {
               let t = [];
-              let i = e.elements?.filter(e => "a:pt" === e.name) ?? [];
-              if (3 !== i.length) throw Error("Invalid number of points for cubic bezier");
+              let i = e.elements?.filter(e => e.name === "a:pt") ?? [];
+              if (i.length !== 3) throw new Error("Invalid number of points for cubic bezier");
               i.forEach(e => {
                 t.push({
                   x: parseInt(G(e, ["x"]) ?? "0", 10),
@@ -464,7 +474,7 @@ let ec = ({
     slideTheme: n,
     slideMaster: r
   }, a) {
-    if ("p:sp" !== e.name) {
+    if (e.name !== "p:sp") {
       Vy.error(`Failed extractBgFillForSp with invalid node: ${e.name}`, a);
       return;
     }
@@ -502,8 +512,8 @@ let ec = ({
   return c;
 };
 function eu(e) {
-  let t = e.elements?.find(e => "a:pt" === e.name);
-  if (!t) throw Error("Point element not found");
+  let t = e.elements?.find(e => e.name === "a:pt");
+  if (!t) throw new Error("Point element not found");
   return {
     x: parseInt(G(t, ["x"]) ?? "0", 10),
     y: parseInt(G(t, ["y"]) ?? "0", 10)
@@ -530,7 +540,7 @@ function em(e, t, i) {
       break;
     case ep.roundRect:
       n.type = ep.roundRect;
-      n.cornerRadius = .1653 * Math.min(t.size.x, t.size.y);
+      n.cornerRadius = 0.1653 * Math.min(t.size.x, t.size.y);
       break;
     case ep.triangle:
       n.type = ep.triangle;
@@ -606,22 +616,22 @@ let ef = ({
     strokeWeight: c.width ? N(c.width) : void 0
   };
   i && r?.key && (p = ed(p, el(i, r)));
-  c.presetDash && "solid" !== c.presetDash && c.presetDash in et && (p.strokeDashes = et[c.presetDash]);
+  c.presetDash && c.presetDash !== "solid" && c.presetDash in et && (p.strokeDashes = et[c.presetDash]);
   void 0 === p.fills && (p.fills = []);
   return p;
 };
 function eA(e) {
   !function (e, t) {
-    if (!t.includes(e.name ?? "")) throw Error(`pptx-import - assertElementOneOf expected one of ${t} but got ${e.name}`);
+    if (!t.includes(e.name ?? "")) throw new Error(`pptx-import - assertElementOneOf expected one of ${t} but got ${e.name}`);
   }(e, ["a:defPPr", "a:pPr", "a:lvl1pPr", "a:lvl2pPr", "a:lvl3pPr", "a:lvl4pPr", "a:lvl5pPr", "a:lvl6pPr", "a:lvl7pPr", "a:lvl8pPr", "a:lvl9pPr"]);
   let t = V(e, ["a:buNone"]);
   let i = function (e) {
     if (!e || !e.name) return 0;
     if (/a:lvl\d+pPr/.test(e.name)) {
       let t = e.name.indexOf("lvl");
-      if (-1 !== t) return parseInt(e.name.slice(t + 3, t + 4));
+      if (t !== -1) return parseInt(e.name.slice(t + 3, t + 4));
     }
-    return "a:pPr" === e.name ? parseInt(G(e, ["lvl"]) ?? "0") : 0;
+    return e.name === "a:pPr" ? parseInt(G(e, ["lvl"]) ?? "0") : 0;
   }(e);
   return t ? {
     type: "NONE",
@@ -676,11 +686,11 @@ let ev = ({
   let o = function (e, t, i) {
     Y(e, "p:sp");
     let n = V(e, ["p:txBody"]);
-    return n ? (n.elements ?? []).filter(e => "a:p" === e.name).map(e => ({
+    return n ? (n.elements ?? []).filter(e => e.name === "a:p").map(e => ({
       runs: function (e, t, i) {
         let n;
         Y(e, "a:p");
-        let r = (e.elements ?? []).filter(e => "a:r" === e.name);
+        let r = (e.elements ?? []).filter(e => e.name === "a:r");
         let a = V(e, ["a:pPr"]);
         a && (n = ey(a, t, i));
         return r.map(e => {
@@ -700,14 +710,14 @@ let ev = ({
             Y(e, "a:rPr");
             let r = X(e, t);
             r && (n.fills = [r]);
-            "sng" === G(e, ["u"]) && (n.textDecoration = "UNDERLINE");
+            G(e, ["u"]) === "sng" && (n.textDecoration = "UNDERLINE");
             let a = e.attributes?.sz;
             if (a) {
               let e = parseInt(a) / 100 * i;
               n.fontSize = e;
             }
-            "1" === G(e, ["b"]) && (n.style.bold = !0);
-            "1" === G(e, ["i"]) && (n.style.italic = !0);
+            G(e, ["b"]) === "1" && (n.style.bold = !0);
+            G(e, ["i"]) === "1" && (n.style.italic = !0);
             return n;
           }(V(e, ["a:rPr"]), t, i);
           return {
@@ -717,7 +727,7 @@ let ev = ({
         });
       }(e, t, i),
       properties: function (e) {
-        var t;
+        let t;
         let i = V(e, ["a:pPr"]);
         if (!i) return;
         Y(i, "a:pPr");
@@ -743,7 +753,7 @@ let ev = ({
     let a = "";
     for (let [t, s] of e.entries()) {
       for (let e of s.runs) {
-        if (0 === e.text.length) continue;
+        if (e.text.length === 0) continue;
         let t = _$$F(JSON.stringify(e.properties));
         let s = 0;
         r[t] ? s = r[t] : (s = n.push(e.properties) - 1, r[t] = s);
@@ -765,7 +775,7 @@ let ev = ({
       styleOverrideTable: n
     };
   }(o, s);
-  if ("" === text) return;
+  if (text === "") return;
   let u = {
     fontSize: void 0,
     textAlignHorizontal: void 0,
@@ -789,7 +799,7 @@ let ev = ({
       let t = e.properties?.bulletProperties ?? s;
       let i = 0;
       let o = "NONE";
-      !t && n ? (o = n.lineTypes?.[0] ?? "NONE", i = n.lineIndentations?.[0] ?? 0) : t && (o = t.type, i = (t.level ?? 0) + ("NONE" === o ? 0 : 1));
+      !t && n ? (o = n.lineTypes?.[0] ?? "NONE", i = n.lineIndentations?.[0] ?? 0) : t && (o = t.type, i = (t.level ?? 0) + (o === "NONE" ? 0 : 1));
       r.push(o);
       a.push(i);
     });
@@ -822,7 +832,7 @@ let ev = ({
         u.fills = u.fills ?? e?.fills;
       }
     }
-    let e = t.textStyles[`${r.type}Style`] ?? ("ctrTitle" === r.type && t.textStyles.titleStyle);
+    let e = t.textStyles[`${r.type}Style`] ?? (r.type === "ctrTitle" && t.textStyles.titleStyle);
     r.type && e && (u.fontSize = u.fontSize ?? e.fontSize, u.textAlignHorizontal = u.textAlignHorizontal ?? e.textAlignHorizontal, u.textAlignVertical = u.textAlignVertical ?? e.textAlignVertical);
   }
   return {
@@ -854,7 +864,7 @@ async function eI(e, t) {
   };
 }
 async function eE(e) {
-  return (await Promise.all(e.map(e => eI(e[0], e[1])))).reduce((e, t) => null !== t ? {
+  return (await Promise.all(e.map(e => eI(e[0], e[1])))).reduce((e, t) => t !== null ? {
     ...e,
     images: [...e.images, t]
   } : {
@@ -896,8 +906,8 @@ class eS {
     });
   }
   findSlideThemes(e, t) {
-    let i = t.elements?.find(e => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" === e.attributes.Type)?.attributes.Target;
-    if ("string" != typeof i) throw Error(`Failed parsing slide theme rels for slide ${e}`);
+    let i = t.elements?.find(e => e.attributes.Type === "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme")?.attributes.Target;
+    if (typeof i != "string") throw new Error(`Failed parsing slide theme rels for slide ${e}`);
     let n = `ppt/theme/${i.split("/").pop()}`;
     this.updateRelationship(e, {
       themeFilename: n
@@ -905,8 +915,8 @@ class eS {
     return n;
   }
   findSlideMaster(e, t) {
-    let i = t.elements?.find(e => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster" === e.attributes.Type)?.attributes.Target;
-    if ("string" != typeof i) throw Error(`Failed parsing slide master rels for slide ${e}`);
+    let i = t.elements?.find(e => e.attributes.Type === "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster")?.attributes.Target;
+    if (typeof i != "string") throw new Error(`Failed parsing slide master rels for slide ${e}`);
     let n = i.split("/").pop();
     let r = {
       masterFilename: `ppt/slideMasters/${n}`,
@@ -917,7 +927,7 @@ class eS {
   }
   findSlideLayout(e, t) {
     let i = t.elements?.find(e => e.attributes?.Type === "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout")?.attributes?.Target;
-    if ("string" != typeof i) throw Error(`Failed parsing slide layout rels for slide ${e}`);
+    if (typeof i != "string") throw new Error(`Failed parsing slide layout rels for slide ${e}`);
     let n = i.split("/").pop();
     let r = {
       layoutFilename: `ppt/slideLayouts/${n}`,
@@ -928,7 +938,7 @@ class eS {
   }
   findSlideNotes(e, t) {
     let i = t.elements?.find(e => e.attributes?.Type === "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide")?.attributes?.Target;
-    if ("string" != typeof i) return;
+    if (typeof i != "string") return;
     let n = i.split("/").pop();
     let r = {
       notesFilename: `ppt/notesSlides/${n}`,
@@ -959,12 +969,12 @@ class eS {
   }
   getFile(e) {
     let t = this.files.get(e);
-    if (!t) throw Error(`Failed getFile for ${e}`);
+    if (!t) throw new Error(`Failed getFile for ${e}`);
     return t;
   }
   getImageFilename(e, t) {
     let i = this.getRelationships(e).imageTargets.find(e => e.id === t);
-    if (!i) throw Error(`Failed getImageTarget for slide ${e} and id ${t}`);
+    if (!i) throw new Error(`Failed getImageTarget for slide ${e} and id ${t}`);
     return i.file;
   }
   getRelationships(e) {
@@ -1020,10 +1030,10 @@ class eS {
     return this.relationships.get(e) ?? ex;
   }
   getUsedLayouts() {
-    return new Set([...this.relationships.values()].filter(e => null != e.layoutFilename && "" !== e.layoutFilename).map(e => e.layoutFilename));
+    return new Set([...this.relationships.values()].filter(e => e.layoutFilename != null && e.layoutFilename !== "").map(e => e.layoutFilename));
   }
   getUsedSlideMasters() {
-    return new Set([...this.relationships.values()].filter(e => null != e.masterFilename && "" !== e.masterFilename).map(e => e.masterFilename));
+    return new Set([...this.relationships.values()].filter(e => e.masterFilename != null && e.masterFilename !== "").map(e => e.masterFilename));
   }
   toDebugString() {
     return JSON.stringify([...this.relationships.entries()], null, 2);
@@ -1069,7 +1079,7 @@ let eC = class e {
     return this.xmlParser.parse(new TextDecoder().decode(e.contents));
   }
   parseMetadata() {
-    let t = [...this.files.keys()].reduce((e, t) => (-1 !== t.indexOf("ppt/slides/slide") && e++, e), 0);
+    let t = [...this.files.keys()].reduce((e, t) => (t.includes("ppt/slides/slide") && e++, e), 0);
     let i = this.files.get(e.PRESENTATION_FILE_PATH);
     let n = this.parseXml(i);
     let r = N(parseInt(G(n, ["p:sldSz", "cx"])), 1);
@@ -1085,7 +1095,7 @@ let eC = class e {
   parseSlideThemeXml(e) {
     if (e && this.themes.has(e)) return this.themes.get(e);
     let t = this.files.get(e);
-    if (!t) throw Error(`Missing theme file ${e}`);
+    if (!t) throw new Error(`Missing theme file ${e}`);
     let i = this.parseXml(t);
     let n = {
       colors: {}
@@ -1093,7 +1103,7 @@ let eC = class e {
     for (let t of U(i, ["a:themeElements", "a:clrScheme"])) {
       let i = t.name?.slice(2);
       let r = G(t, ["a:srgbClr", "val"]) ?? G(t, ["a:sysClr", "lastClr"]);
-      if (null != i) n.colors[i] = r;else throw Error(`Error parsing color ${i} in ${e}`);
+      if (i != null) n.colors[i] = r;else throw new Error(`Error parsing color ${i} in ${e}`);
     }
     return e ? (this.themes.set(e, n), n) : {};
   }
@@ -1118,7 +1128,9 @@ let eC = class e {
         }, m]);
         let i = V(o, ["p:txBody"]);
         i && (e.listStyles[d] = eb(i, r, this.metadata.scalingFactor));
-      } else m && e.renderables.push(m);
+      } else {
+        m && e.renderables.push(m);
+      }
     }
     return e;
   }
@@ -1152,7 +1164,9 @@ let eC = class e {
         }
         let r = {};
         let a = V(i, ["p:clrMap"]);
-        if (a && Object.keys(a.attributes ?? {}).length) for (let [e, t] of Object.entries(a.attributes ?? {})) r[e] = `${t}`;
+        if (a && Object.keys(a.attributes ?? {}).length) {
+          for (let [e, t] of Object.entries(a.attributes ?? {})) r[e] = `${t}`;
+        }
         n.colorMap = r;
         let s = this.relParser.getRelationships(e);
         let o = this.themes.get(s.themeFilename);
@@ -1165,35 +1179,39 @@ let eC = class e {
           slideMaster: n
         }, t);
       });
-    }), 0 === this.slideMasters.size) throw Error("Could not find any slide masters");
+    }), this.slideMasters.size === 0) {
+      throw new Error("Could not find any slide masters");
+    }
   }
   parseSlideLayoutXmls() {
-    for (let e of this.relParser.getUsedLayouts()) Vy.withSlideLayoutScope(e, t => {
-      let i = this.relParser.parseRelationshipsForLayout(e);
-      if (!i.masterFilename) return null;
-      let n = this.slideMasters.get(i.masterFilename);
-      let r = this.files.get(e);
-      let a = this.themes.get(i.themeFilename);
-      if (this.slideLayouts.has(r.name)) return this.slideLayouts.get(r.name);
-      let s = this.parseXml(r);
-      this.slideLayouts.set(r.name, {
-        pos: {},
-        textStyles: {},
-        listStyles: {},
-        renderables: [],
-        placeholders: [],
-        showMasterSp: !0
+    for (let e of this.relParser.getUsedLayouts()) {
+      Vy.withSlideLayoutScope(e, t => {
+        let i = this.relParser.parseRelationshipsForLayout(e);
+        if (!i.masterFilename) return null;
+        let n = this.slideMasters.get(i.masterFilename);
+        let r = this.files.get(e);
+        let a = this.themes.get(i.themeFilename);
+        if (this.slideLayouts.has(r.name)) return this.slideLayouts.get(r.name);
+        let s = this.parseXml(r);
+        this.slideLayouts.set(r.name, {
+          pos: {},
+          textStyles: {},
+          listStyles: {},
+          renderables: [],
+          placeholders: [],
+          showMasterSp: !0
+        });
+        let o = this.slideLayouts.get(r.name);
+        er(s, o, this.metadata.scalingFactor);
+        this.parseLayoutOrMasterShapes(o, s, n, o, this.themes.get(i.themeFilename), i, t);
+        o.backgroundFillStyle = J({
+          node: V(s, ["p:cSld"]),
+          imageHashes: this.imageHashes,
+          relationships: i,
+          slideTheme: a
+        }, t);
       });
-      let o = this.slideLayouts.get(r.name);
-      er(s, o, this.metadata.scalingFactor);
-      this.parseLayoutOrMasterShapes(o, s, n, o, this.themes.get(i.themeFilename), i, t);
-      o.backgroundFillStyle = J({
-        node: V(s, ["p:cSld"]),
-        imageHashes: this.imageHashes,
-        relationships: i,
-        slideTheme: a
-      }, t);
-    });
+    }
   }
   parseRelationshipsAndThemesForSlide(e) {
     let t = this.relParser.parseRelationshipsForSlide(e);
@@ -1205,7 +1223,7 @@ let eC = class e {
       if (t.notesFilename) {
         let e = this.files.get(t.notesFilename);
         let i = e ? this.parseXml(e) : null;
-        if (i) return B(i, "p:sp").filter(e => "body" === G(e, ["p:nvSpPr", "p:nvPr", "p:ph", "type"])).map(e => B(e, "a:p").map(e => B(e, "a:t").map(e => e.elements?.[0]?.text ?? "").join("")).join("\n")).join("\n");
+        if (i) return B(i, "p:sp").filter(e => G(e, ["p:nvSpPr", "p:nvPr", "p:ph", "type"]) === "body").map(e => B(e, "a:p").map(e => B(e, "a:t").map(e => e.elements?.[0]?.text ?? "").join("")).join("\n")).join("\n");
       }
       return null;
     });
@@ -1247,12 +1265,14 @@ let eC = class e {
   async parseImages() {
     return await Vy.withMetaScopeAsync("parsing images", null, async e => {
       let t = [];
-      for (let i of this.files.values()) if (i.name.startsWith("ppt/media/")) {
-        if (!ew.some(e => i.name.endsWith(e))) {
-          Vy.error(`Unsupported image format: ${i.name.split(".").pop()}`, e);
-          continue;
+      for (let i of this.files.values()) {
+        if (i.name.startsWith("ppt/media/")) {
+          if (!ew.some(e => i.name.endsWith(e))) {
+            Vy.error(`Unsupported image format: ${i.name.split(".").pop()}`, e);
+            continue;
+          }
+          t.push(i.name);
         }
-        t.push(i.name);
       }
       let i = await eE(t.map(e => [e.split("/").pop(), this.files.get(e).contents]));
       this.imageHashes = new Map(i.images.map(e => [e.name, e.sha1Hash]));
@@ -1261,7 +1281,9 @@ let eC = class e {
   }
   traverseAndMapSlideContentNodes(e, t, i, n, r, a, s) {
     let o = [];
-    if (a) for (let e of t?.renderables ?? []) o.push(e);
+    if (a) {
+      for (let e of t?.renderables ?? []) o.push(e);
+    }
     for (let e of i?.renderables ?? []) o.push(e);
     for (let a of e) {
       let e = G(a, ["p:nvSpPr", "p:nvPr", "p:ph", "type"]);
@@ -1353,11 +1375,11 @@ let eC = class e {
       });
       d && l.push(d);
     }
-    if (0 === l.length) {
+    if (l.length === 0) {
       Vy.error(`Failed to convert spNode: ${e.name}`, o);
       return;
     }
-    return 1 === l.length ? l[0] : {
+    return l.length === 1 ? l[0] : {
       type: "FRAME",
       children: l.map(e => ({
         ...e,
@@ -1374,7 +1396,7 @@ let eC = class e {
       let t = G(e, ["p:spPr", "a:xfrm", "rot"]) ?? G(e, ["p:grpSpPr", "a:xfrm", "rot"]);
       return t ? parseInt(t) / 6e4 * (Math.PI / 180) : 0;
     }(e);
-    let l = ["1" === (G(e, ["p:spPr", "a:xfrm", "flipH"]) ?? G(e, ["p:grpSpPr", "a:xfrm", "flipH"])), "1" === (G(e, ["p:spPr", "a:xfrm", "flipV"]) ?? G(e, ["p:grpSpPr", "a:xfrm", "flipH"]))];
+    let l = [(G(e, ["p:spPr", "a:xfrm", "flipH"]) ?? G(e, ["p:grpSpPr", "a:xfrm", "flipH"])) === "1", (G(e, ["p:spPr", "a:xfrm", "flipV"]) ?? G(e, ["p:grpSpPr", "a:xfrm", "flipH"])) === "1"];
     if (!a && n) {
       let e = n.key && i ? i.pos[n.key] : null;
       let o = n.key ? t.pos[n.key] : null;
@@ -1439,17 +1461,17 @@ let eC = class e {
 };
 eC.APP_FILE_PATH = "docProps/app.xml";
 eC.PRESENTATION_FILE_PATH = "ppt/presentation.xml";
-eC.SLIDE_MASTER_FILE_PATTERN = RegExp("^ppt/slideMasters/slideMaster[0-9]+.xml$");
+eC.SLIDE_MASTER_FILE_PATTERN = new RegExp("^ppt/slideMasters/slideMaster\\d+.xml$");
 eC.SLIDE_THEME_DIR_PATH = "ppt/theme/";
 eC.KNOWN_NON_VISUAL_NODES = ["p:grpSpPr", "p:nvGrpSpPr"];
 async function eP(e, t, i) {
   fullscreenValue.resetLoadedFigFile();
-  await U_(e, FEditorType.Slides);
+  await initializeFullscreenForNewFile(e, FEditorType.Slides);
   let n = new eC();
   await n.parsePPTX(i);
   let r = n.parseMetadata();
   let s = SlidePptxImporterBindings?.createSlides(r) ?? [];
-  if (0 === s.length) throw Error("No slides found in the pptx file");
+  if (s.length === 0) throw new Error("No slides found in the pptx file");
   let o = await n.parseImages();
   for (let e = 1; e < r.numSlides + 1; e++) n.parseRelationshipsAndThemesForSlide(e);
   n.parseSlideMasterXmls();
@@ -1463,14 +1485,16 @@ async function eP(e, t, i) {
       } = n.parseSlideContentXml(e);
       SlidePptxImporterBindings?.insertContentIntoSlide(t, addedNodes, nodeUpdates);
       (function (e, t, i) {
-        if (e) try {
-          let i = convertMarkdownToEditorState(e);
-          let n = getSingletonSceneGraph().get(t);
-          n && i && (n.slideSpeakerNotes = i);
-        } catch (e) {
-          console.error("pptx-import", `Failed to set slide speaker notes for slide #${i}`, {
-            error: e
-          });
+        if (e) {
+          try {
+            let i = convertMarkdownToEditorState(e);
+            let n = getSingletonSceneGraph().get(t);
+            n && i && (n.slideSpeakerNotes = i);
+          } catch (e) {
+            console.error("pptx-import", `Failed to set slide speaker notes for slide #${i}`, {
+              error: e
+            });
+          }
         }
       })(n.parseSlideNotesXml(e), t, e);
     }
@@ -1486,7 +1510,7 @@ async function eP(e, t, i) {
   };
   return {
     file: {
-      name: t.length > 100 ? t.slice(0, 99) + "\u2026" : t,
+      name: t.length > 100 ? `${t.slice(0, 99)}\u2026` : t,
       type: "deck",
       bytes: l,
       thumbnail: d,
@@ -1513,8 +1537,8 @@ let eB = {
   }
 };
 async function eV(e, t, i, n, a, s, o, l, d) {
-  var c = null;
-  let p = Ec(n);
+  let c = null;
+  let p = mapFileTypeFromString(n);
   try {
     let g;
     if (!(p && (await canCreateFileTypeAsync(d, p)))) {
@@ -1522,7 +1546,7 @@ async function eV(e, t, i, n, a, s, o, l, d) {
       let i = t.user?.drafts_folder_id;
       let n = !!i && d !== i && !!p && (await canCreateFileTypeAsync(i, p));
       let r = t.folders[d];
-      let a = new OL.InvalidPermissions(r?.name);
+      let a = new ImportErrors.InvalidPermissions(r?.name);
       e.dispatch(VisualBellActions.enqueue({
         message: a.message,
         type: "restricted-import-type",
@@ -1536,10 +1560,10 @@ async function eV(e, t, i, n, a, s, o, l, d) {
       }));
       return a;
     }
-    if (t.hasCanceled()) throw new OL.Canceled();
+    if (t.hasCanceled()) throw new ImportErrors.Canceled();
     let f = await function (e, t, i, n, a, s, o) {
-      if (e.hasCanceled()) return Promise.reject(new OL.Canceled());
-      let l = new lZ.ServiceUnavailable();
+      if (e.hasCanceled()) return Promise.reject(new ImportErrors.Canceled());
+      let l = new ServiceErrors.ServiceUnavailable();
       let d = function (e, t, i, n, r, a) {
         let s = new FormData();
         s.append("manifest", JSON.stringify({
@@ -1574,19 +1598,19 @@ async function eV(e, t, i, n, a, s, o, l, d) {
         reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e);
         return l;
       }).then(e => {
-        if (e.error) throw Error(e.error);
+        if (e.error) throw new Error(e.error);
         try {
           return JSON.parse(e.data);
         } catch (e) {
-          reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Unparseable canvas upload response"));
+          reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error("Unparseable canvas upload response"));
           return l;
         }
       });
     }(t, n, a, s || eB, o, l, d);
-    if (c = f.meta.file.key, t.hasCanceled()) throw new OL.Canceled();
+    if (c = f.meta.file.key, t.hasCanceled()) throw new ImportErrors.Canceled();
     if (!c) {
-      reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Converted file upload did not return a file key"));
-      return new lZ.ServiceUnavailable();
+      reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error("Converted file upload did not return a file key"));
+      return new ServiceErrors.ServiceUnavailable();
     }
     if (f.meta.file.file_repo_id) {
       let t = await sendWithRetry.put(`/api/repo/${f.meta.file.file_repo_id}`, {
@@ -1614,7 +1638,7 @@ async function eV(e, t, i, n, a, s, o, l, d) {
       };
     }
     e.dispatch(y$({
-      type: _$$F4.FILES,
+      type: ComFileType.FILES,
       tiles: [fA(g.file)]
     }));
     return {
@@ -1638,31 +1662,41 @@ async function eG(e, t, i) {
       let c = [];
       for (let u = o; u < o + 5 && u < t.length; u++) {
         let o = t[u];
-        if (e.hasCanceled()) throw new OL.Canceled();
+        if (e.hasCanceled()) throw new ImportErrors.Canceled();
         let p = "application/octet-stream";
-        if (e.isProbablyPNGFile(o.bytes)) p = "image/png";else if (e.isProbablyJPEGFile(o.bytes)) p = "image/jpeg";else if (e.isProbablyGIFFile(o.bytes)) p = "image/gif";else {
-          console.warn("warning: ignoring image with unknown type (" + Array.prototype.slice.call(o.bytes, 0, 10).map(e => (256 | e).toString(16).slice(-2)) + "...)");
+        if (e.isProbablyPNGFile(o.bytes)) {
+          p = "image/png";
+        } else if (e.isProbablyJPEGFile(o.bytes)) {
+          p = "image/jpeg";
+        } else if (e.isProbablyGIFFile(o.bytes)) {
+          p = "image/gif";
+        } else {
+          console.warn(`warning: ignoring image with unknown type (${Array.prototype.slice.call(o.bytes, 0, 10).map(e => (256 | e).toString(16).slice(-2))}...)`);
           continue;
         }
-        e.callUpdateProgressCallback(20 + (0 === r ? 0 : 80 * u / r));
+        e.callUpdateProgressCallback(20 + (r === 0 ? 0 : 80 * u / r));
         c.push(new Promise((e, t) => {
           let r = s => {
             let c = new XMLHttpRequest();
             let u = !1;
             c.onloadend = () => {
-              let i = pl.indexOf(c);
-              if (i > -1 && pl.slice(i, 1), 4 === c.readyState && 200 === c.status) e();else if (u) t(new OL.Canceled());else if (413 === c.status) {
+              let i = importErrorTracker.indexOf(c);
+              if (i > -1 && importErrorTracker.slice(i, 1), c.readyState === 4 && c.status === 200) {
+                e();
+              } else if (u) {
+                t(new ImportErrors.Canceled());
+              } else if (c.status === 413) {
                 a++;
                 e();
-              } else if (400 === c.status) {
+              } else if (c.status === 400) {
                 l++;
                 e();
-              } else if (401 !== c.status) {
+              } else if (c.status !== 401) {
                 let e = 3 - s;
                 if (--s > 0) {
-                  let t = 1e3 * Math.pow(2, e);
+                  let t = 1e3 * 2 ** e;
                   let i = t + t * Math.random();
-                  (429 === c.status || 503 === c.status) && (i *= 2);
+                  (c.status === 429 || c.status === 503) && (i *= 2);
                   console.warn("Image upload failed, retrying...");
                   setTimeout(() => {
                     r(s);
@@ -1670,7 +1704,7 @@ async function eG(e, t, i) {
                   return;
                 }
               }
-              let n = new lZ.ImageUploadFailed();
+              let n = new ServiceErrors.ImageUploadFailed();
               t(n);
             };
             c.onabort = () => {
@@ -1680,7 +1714,7 @@ async function eG(e, t, i) {
             let m = getInitialOptions().user_data?.id;
             m && c.setRequestHeader("X-Figma-User-ID", m);
             c.setRequestHeader("Content-Type", p);
-            pl.push(c);
+            importErrorTracker.push(c);
             c.send(o.bytes || null);
           };
           r(3);
@@ -1713,38 +1747,44 @@ async function eG(e, t, i) {
 function ez(e) {
   let t = fetchFontList([FontSourceType.LOCAL, FontSourceType.GOOGLE, FontSourceType.SHARED]);
   return {
-    getFont: async function (i) {
+    async getFont(i) {
       let n = await t;
-      for (let t of [n.localFontsList, n.indexFontsList, n.sharedFontsList]) if (void 0 !== t) for (let n of t) {
-        let t = function (e, t) {
-          if (e === t) return !0;
-          let i = e.toLowerCase().trim();
-          let n = t.toLowerCase().trim();
-          if (i === n) return "lower";
-          let r = i.split("-");
-          let a = n.split("-");
-          return 0 !== r.length && 0 !== a.length && a[0] === r[0] && (1 === r.length && 2 === a.length && "regular" === a[1] || 2 === r.length && 1 === a.length && "regular" === r[1]) && "assume-regular";
-        }(n.postscript, i);
-        if (t) {
-          !0 !== t && console.warn(`Fuzzy font name match: ${n.postscript} = ${i} (${t})`);
-          let r = e.getState();
-          let a = null;
-          if ("folder" === r.selectedView.view) {
-            let e = r.folders[r.selectedView.folderId];
-            a = e?.team_id ?? null;
+      for (let t of [n.localFontsList, n.indexFontsList, n.sharedFontsList]) {
+        if (void 0 !== t) {
+          for (let n of t) {
+            let t = function (e, t) {
+              if (e === t) return !0;
+              let i = e.toLowerCase().trim();
+              let n = t.toLowerCase().trim();
+              if (i === n) return "lower";
+              let r = i.split("-");
+              let a = n.split("-");
+              return r.length !== 0 && a.length !== 0 && a[0] === r[0] && (r.length === 1 && a.length === 2 && a[1] === "regular" || r.length === 2 && a.length === 1 && r[1] === "regular") && "assume-regular";
+            }(n.postscript, i);
+            if (t) {
+              !0 !== t && console.warn(`Fuzzy font name match: ${n.postscript} = ${i} (${t})`);
+              let r = e.getState();
+              let a = null;
+              if (r.selectedView.view === "folder") {
+                let e = r.folders[r.selectedView.folderId];
+                a = e?.team_id ?? null;
+              }
+              let s = await fetchFontFile({
+                source: n.source,
+                id: n.id,
+                postscriptName: n.postscript,
+                fileKey: r.openFile?.key || null,
+                teamId: a,
+                orgId: r.currentUserOrgId
+              });
+              if (s) {
+                return {
+                  name: n.postscript,
+                  font: s
+                };
+              }
+            }
           }
-          let s = await fetchFontFile({
-            source: n.source,
-            id: n.id,
-            postscriptName: n.postscript,
-            fileKey: r.openFile?.key || null,
-            teamId: a,
-            orgId: r.currentUserOrgId
-          });
-          if (s) return {
-            name: n.postscript,
-            font: s
-          };
         }
       }
       return new Promise((e, t) => t(null));
@@ -1753,17 +1793,17 @@ function ez(e) {
 }
 async function eH(e, t, i, n, r, a, s) {
   let c;
-  if (".svg" === t.extension) throw new OL.SvgFromFileBrowser();
+  if (t.extension === ".svg") throw new ImportErrors.SvgFromFileBrowser();
   let u = i.blob;
   if (!u) {
     logError("convertAndUploadFile", "attempted to convert a file with no blob");
-    return new lZ.NoBlob();
+    return new ServiceErrors.NoBlob();
   }
   a.fileLength = u.size;
   let m = isFigmaEmail(getInitialOptions()?.user_data?.email);
-  ".pdf" === t.extension ? (a.pdf_source_selected = bT(s), trackEventAnalytics("pdf_import_started", a, {
+  t.extension === ".pdf" ? (a.pdf_source_selected = getWhiteboardIntegrationName(s), trackEventAnalytics("pdf_import_started", a, {
     forwardToDatadog: !0
-  }), c = await Lg(e, t.basename, u, s)) : c = ".pptx" === t.extension ? await eP(e, t.basename, u) : await n.convertFile({
+  }), c = await processPdfImport(e, t.basename, u, s)) : c = t.extension === ".pptx" ? await eP(e, t.basename, u) : await n.convertFile({
     blob: u,
     featureFlags: r,
     fontLoader: ez(e),
@@ -1790,7 +1830,7 @@ async function eW(e, t, i, n, a, s, o, l) {
   }
   try {
     if (s.developerRelatedLinks) {
-      let e = new GK();
+      let e = new RelatedLinksManager();
       let t = s.developerRelatedLinks.map(e => ({
         fileKey,
         nodeId: e.nodeId,
@@ -1808,9 +1848,9 @@ async function eW(e, t, i, n, a, s, o, l) {
   };
 }
 export async function $$eK0(e, t, i, n, r, a, s, o) {
-  var l;
-  var d;
-  var c;
+  let l;
+  let d;
+  let c;
   let u = {
     entrypoint: "file_browser"
   };
@@ -1821,19 +1861,19 @@ export async function $$eK0(e, t, i, n, r, a, s, o) {
       videos,
       warnings
     } = await eH(e, t, r, n, i, u, s);
-    if (!file) throw new lZ.UnknownConversionError();
-    if (n.hasCanceled()) throw new OL.Canceled();
+    if (!file) throw new ServiceErrors.UnknownConversionError();
+    if (n.hasCanceled()) throw new ImportErrors.Canceled();
     let f = await eW(e, t, n, a, o, file, images, videos);
-    ".pptx" === t.extension && function (e, t, i) {
+    t.extension === ".pptx" && function (e, t, i) {
       let n = i.file?.fileKey;
       Vy.toFigment(n, zT.IMPORT, t.blob.size / 1024, e.bytes.length / 1024);
       Vy.reset();
     }(file, r, f);
     l = f.file?.fileKey;
     d = t.extension;
-    ".pdf" === d && (trackFileEvent("pdf_import_successful", l, e.getState(), u, {
+    d === ".pdf" && (trackFileEvent("pdf_import_successful", l, e.getState(), u, {
       forwardToDatadog: !0
-    }), Ij({
+    }), trackPdfImportCompletion({
       type: "success"
     }, u.entrypoint, u.fileLength, s));
     return {
@@ -1841,15 +1881,19 @@ export async function $$eK0(e, t, i, n, r, a, s, o) {
       warnings: f.warnings.concat(warnings)
     };
   } catch (e) {
-    if (".pdf" === t.extension) !function (e, t, i) {
-      if (e instanceof OL.Canceled) return;
-      "string" == typeof e && (e = Error(e));
-      let n = e instanceof Yw ? e : new lZ.UnknownConversionError();
-      Ij({
-        type: "failed",
-        error: n
-      }, t.entrypoint, t.fileLength, i);
-    }(e, u, s);else if (".pptx" === t.extension && ((c = e) instanceof OL.Canceled || ("string" == typeof c && (c = Error(c)), Vy.toFigment(r.fileKey, zT.IMPORT, r.blob.size / 1024, 0, c), Vy.reset()), !(e instanceof OL.Canceled))) throw new OL.GenericPptxError();
+    if (t.extension === ".pdf") {
+      !function (e, t, i) {
+        if (e instanceof ImportErrors.Canceled) return;
+        typeof e == "string" && (e = new Error(e));
+        let n = e instanceof ImportBaseError ? e : new ServiceErrors.UnknownConversionError();
+        trackPdfImportCompletion({
+          type: "failed",
+          error: n
+        }, t.entrypoint, t.fileLength, i);
+      }(e, u, s);
+    } else if (t.extension === ".pptx" && ((c = e) instanceof ImportErrors.Canceled || (typeof c == "string" && (c = new Error(c)), Vy.toFigment(r.fileKey, zT.IMPORT, r.blob.size / 1024, 0, c), Vy.reset()), !(e instanceof ImportErrors.Canceled))) {
+      throw new ImportErrors.GenericPptxError();
+    }
     throw e;
   }
 }
@@ -1862,7 +1906,7 @@ export async function $$eY1(e, t, i, n) {
     isUserFigmaEmployee: r,
     fileExtension: ".fig"
   });
-  if (!a.file) throw new lZ.UnknownConversionError();
+  if (!a.file) throw new ServiceErrors.UnknownConversionError();
   return a.file;
 }
 export const W = $$eK0;

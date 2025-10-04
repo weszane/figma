@@ -1,7 +1,7 @@
-import { yX, Wi, T_ } from "../vendor/284505";
+import { colorProfiles, getMode, parsers } from "../vendor/284505";
 let s = /[^\x00-\x7F]|[a-zA-Z_]/;
 let o = /[^\x00-\x7F]|[-\w]/;
-let $$a1 = {
+let Tok = {
   Function: "function",
   Ident: "ident",
   Number: "number",
@@ -39,15 +39,15 @@ function m(e) {
   if (("-" === e[h] || "+" === e[h]) && (r += e[h++]), r += v(e), "." === e[h] && /\d/.test(e[h + 1]) && (r += e[h++] + v(e)), ("e" === e[h] || "E" === e[h]) && (("-" === e[h + 1] || "+" === e[h + 1]) && /\d/.test(e[h + 2]) ? r += e[h++] + e[h++] + v(e) : /\d/.test(e[h + 1]) && (r += e[h++] + v(e))), p(e)) {
     let n = y(e);
     return "deg" === n || "rad" === n || "turn" === n || "grad" === n ? {
-      type: $$a1.Hue,
+      type: Tok.Hue,
       value: r * g[n]
     } : void 0;
   }
   return "%" === e[h] ? (h++, {
-    type: $$a1.Percentage,
+    type: Tok.Percentage,
     value: +r
   }) : {
-    type: $$a1.Number,
+    type: Tok.Number,
     value: +r
   };
 }
@@ -64,13 +64,13 @@ function y(e) {
 function b(e) {
   let r = y(e);
   return "(" === e[h] ? (h++, {
-    type: $$a1.Function,
+    type: Tok.Function,
     value: r
   }) : "none" === r ? {
-    type: $$a1.None,
+    type: Tok.None,
     value: void 0
   } : {
-    type: $$a1.Ident,
+    type: Tok.Ident,
     value: r
   };
 }
@@ -86,7 +86,7 @@ function O(e = "") {
     if ("," === r) return;
     if (")" === r) {
       i.push({
-        type: $$a1.ParenClose
+        type: Tok.ParenClose
       });
       continue;
     }
@@ -104,7 +104,7 @@ function O(e = "") {
       }
       if (p(n)) {
         i.push({
-          type: $$a1.Ident,
+          type: Tok.Ident,
           value: y(n)
         });
         continue;
@@ -121,18 +121,18 @@ function O(e = "") {
     if ("/" === r) {
       let e;
       for (; h < n.length && ("\n" === n[h] || "	" === n[h] || " " === n[h]);) h++;
-      if (d(n) && (e = m(n)).type !== $$a1.Hue) {
+      if (d(n) && (e = m(n)).type !== Tok.Hue) {
         i.push({
-          type: $$a1.Alpha,
+          type: Tok.Alpha,
           value: e
         });
         continue;
       }
       if (p(n) && "none" === y(n)) {
         i.push({
-          type: $$a1.Alpha,
+          type: Tok.Alpha,
           value: {
-            type: $$a1.None,
+            type: Tok.None,
             value: void 0
           }
         });
@@ -157,15 +157,15 @@ function O(e = "") {
 function x(e) {
   e._i = 0;
   let r = e[e._i++];
-  if (!r || r.type !== $$a1.Function || "color" !== r.value || (r = e[e._i++]).type !== $$a1.Ident) return;
-  let n = yX[r.value];
+  if (!r || r.type !== Tok.Function || "color" !== r.value || (r = e[e._i++]).type !== Tok.Ident) return;
+  let n = colorProfiles[r.value];
   if (!n) return;
   let s = {
     mode: n
   };
   let o = w(e, !1);
   if (!o) return;
-  let h = Wi(n).channels;
+  let h = getMode(n).channels;
   for (function () {
     let e = 0;
     let r;
@@ -173,7 +173,7 @@ function x(e) {
   }(); e < h.length; e++) {
     r = o[e];
     n = h[e];
-    r.type !== $$a1.None && (s[n] = r.type === $$a1.Number ? r.value : r.value / 100, "alpha" === n && (s[n] = Math.max(0, Math.min(1, s[n]))));
+    r.type !== Tok.None && (s[n] = r.type === Tok.Number ? r.value : r.value / 100, "alpha" === n && (s[n] = Math.max(0, Math.min(1, s[n]))));
   }
   return s;
 }
@@ -181,11 +181,11 @@ function w(e, r) {
   let n;
   let i = [];
   for (; e._i < e.length;) {
-    if ((n = e[e._i++]).type === $$a1.None || n.type === $$a1.Number || n.type === $$a1.Alpha || n.type === $$a1.Percentage || r && n.type === $$a1.Hue) {
+    if ((n = e[e._i++]).type === Tok.None || n.type === Tok.Number || n.type === Tok.Alpha || n.type === Tok.Percentage || r && n.type === Tok.Hue) {
       i.push(n);
       continue;
     }
-    if (n.type === $$a1.ParenClose) {
+    if (n.type === Tok.ParenClose) {
       if (e._i < e.length) return;
       continue;
     }
@@ -193,35 +193,35 @@ function w(e, r) {
   }
   if (!(i.length < 3) && !(i.length > 4)) {
     if (4 === i.length) {
-      if (i[3].type !== $$a1.Alpha) return;
+      if (i[3].type !== Tok.Alpha) return;
       i[3] = i[3].value;
     }
     3 === i.length && i.push({
-      type: $$a1.None,
+      type: Tok.None,
       value: void 0
     });
-    return i.every(e => e.type !== $$a1.Alpha) ? i : void 0;
+    return i.every(e => e.type !== Tok.Alpha) ? i : void 0;
   }
 }
 function k(e, r) {
   e._i = 0;
   let n = e[e._i++];
-  if (!n || n.type !== $$a1.Function) return;
+  if (!n || n.type !== Tok.Function) return;
   let i = w(e, r);
   if (i) {
     i.unshift(n.value);
     return i;
   }
 }
-export let $$_0 = e => {
+export let parse = e => {
   let r;
   if ("string" != typeof e) return;
   let n = O(e);
   let s = n ? k(n, !0) : void 0;
   let o = 0;
-  let a = T_.length;
-  for (; o < a;) if (void 0 !== (r = T_[o++](e, s))) return r;
+  let a = parsers.length;
+  for (; o < a;) if (void 0 !== (r = parsers[o++](e, s))) return r;
   return n ? x(n) : void 0;
 };
-export const Ay = $$_0;
-export const xW = $$a1;
+export const Ay = parse;
+export const xW = Tok;

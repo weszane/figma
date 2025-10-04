@@ -1,302 +1,406 @@
-import { f6 } from "../figma_app/516324";
-import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories } from "../905/165054";
-import { getFeatureFlags } from "../905/601108";
+import { reportError } from "../905/11";
+import { W } from "../905/39853";
 import { createActionCreator } from "../905/73481";
+import { hideModal } from "../905/156213";
+import { determineFileType, getFileExtension, ImportEventType, ImportExportStatus, isPdfFile } from "../905/163189";
+import { ServiceCategories } from "../905/165054";
+import { getI18nString } from "../905/303541";
+import { createOptimistThunk } from "../905/350402";
 import { trackEventAnalytics } from "../905/449184";
 import { subscribeAndAwaitData } from "../905/553831";
-import { reportError } from "../905/11";
+import { getFeatureFlags } from "../905/601108";
+import { getImportPermissionErrorMessage, importErrorTracker, ImportSpecificError, resetImportErrorTracker } from "../905/615657";
+import { fileImporter } from "../905/642505";
 import { logWarning } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
-import { canCreateFileType, canCreateFileTypeAsync } from "../figma_app/687776";
-import { getI18nString } from "../905/303541";
-import { selectFolderView } from "../figma_app/976345";
-import { createOptimistThunk } from "../905/350402";
-import { hideModal } from "../905/156213";
-import { fileImporter } from "../905/642505";
-import { isTeamFolderV2 } from "../figma_app/528509";
-import { W } from "../905/39853";
-import { cu, zX, pl, MS } from "../905/615657";
-import { Ij } from "../905/902099";
-import { FFileType } from "../figma_app/191312";
+import { trackPdfImportCompletion } from "../905/902099";
 import { FileImport } from "../figma_app/43951";
-import { isTeamAllowedToAddFiles, AddOperationType } from "../figma_app/598018";
-import { kI, Y5, mO, dv, NU } from "../905/163189";
-zip.workerScriptsPath = "/js/zip/";
-let $$C6 = createOptimistThunk(async e => {
+import { FFileType } from "../figma_app/191312";
+import { throwTypeError } from "../figma_app/465776";
+import { isTeamFolderV2 } from "../figma_app/528509";
+import { AddOperationType, isTeamAllowedToAddFiles } from "../figma_app/598018";
+import { canCreateFileType, canCreateFileTypeAsync } from "../figma_app/687776";
+import { selectFolderView } from "../figma_app/976345";
+import { isZipFile } from "./35608";
+
+/**
+ * Process the next file in the import queue
+ * Original name: $$C6
+ */
+const processNextFileImport = createOptimistThunk(async ({
+  dispatch
+}, getState) => {
+  // Early exit conditions
   if (!fileImporter) return;
-  let t = e.getState();
-  if (t.fileImport.isProcessingFile) return;
-  e.dispatch($$M5());
-  let i = t.fileImport.queue[0];
-  if (void 0 === i) return;
-  let o = t.fileImport.files[i];
-  if (!o || kI(o.name) && t.fileImport.step !== Y5.FILE_IMPORT_WITH_CONFIRMED_PDF || fileImporter.hasCanceled()) return;
-  if (o.status === mO.FAILURE) {
-    e.dispatch(U());
+  const state = getState();
+  if (state.fileImport.isProcessingFile) return;
+  dispatch(startProcessingFile());
+  const queueItemId = state.fileImport.queue[0];
+  if (queueItemId === undefined) return;
+  const fileItem = state.fileImport.files[queueItemId];
+  if (!fileItem || isPdfFile(fileItem.name) && state.fileImport.step !== ImportEventType.FILE_IMPORT_WITH_CONFIRMED_PDF || fileImporter!.hasCanceled()) {
     return;
   }
-  e.dispatch($$O10({
-    id: i,
-    status: mO.BUSY
+  if (fileItem.status === ImportExportStatus.FAILURE) {
+    dispatch(processNextQueuedFile());
+    return;
+  }
+
+  // Mark file as busy
+  dispatch(updateFileImportItem({
+    id: queueItemId,
+    status: ImportExportStatus.BUSY
   }));
-  let f = Date.now();
-  let _ = o.name.replace(/\.[^\.]+$/, "");
-  let I = dv(o.name).toLowerCase();
-  let C = t.user?.drafts_folder_id;
-  let T = o.folderId ?? ("folder" === t.selectedView.view ? t.selectedView.folderId : C);
-  let k = T && (await subscribeAndAwaitData(FileImport, {
-    projectId: T
+  const startTime = Date.now();
+  const fileNameWithoutExtension = fileItem.name.replace(/\.[^.]+$/, "");
+  const fileExtension = getFileExtension(fileItem.name).toLowerCase();
+  const userDraftsFolderId = state.user?.drafts_folder_id;
+  const targetFolderId = fileItem.folderId ?? (state.selectedView.view === "folder" ? state.selectedView.folderId : userDraftsFolderId);
+
+  // Get project information
+  const projectData = targetFolderId && (await subscribeAndAwaitData(FileImport, {
+    projectId: targetFolderId
   }, {
-    retainMs: 3e4
+    retainMs: 30000
   })).project;
-  if (!k) {
-    e.dispatch($$O10({
-      id: i,
-      status: mO.FAILURE,
+  if (!projectData) {
+    dispatch(updateFileImportItem({
+      id: queueItemId,
+      status: ImportExportStatus.FAILURE,
       message: getI18nString("fullscreen.file_import.unable_to_import")
     }));
-    e.dispatch(U());
+    dispatch(processNextQueuedFile());
     return;
   }
-  let R = NU(o);
-  let N = k.team;
-  let D = N?.id;
-  if (N && !isTeamAllowedToAddFiles(N, {
+  const fileType = determineFileType(fileItem);
+  const team = projectData.team;
+  const teamId = team?.id;
+
+  // Check team file limits
+  if (team && !isTeamAllowedToAddFiles(team, {
     type: AddOperationType.ADD_FILE,
-    editorType: R,
-    isDestinationTeamDrafts: isTeamFolderV2(k)
+    editorType: fileType,
+    isDestinationTeamDrafts: isTeamFolderV2(projectData)
   })) {
-    let t = (() => {
-      let e = N.name;
-      switch (R) {
+    const limitErrorMessage = (() => {
+      const teamName = team.name;
+      switch (fileType) {
         case FFileType.WHITEBOARD:
           return getI18nString("fullscreen.file_import.team_name_is_at_the_fig_jam_file_limit", {
-            teamName: e
+            teamName
           });
         case FFileType.SLIDES:
           return getI18nString("fullscreen.file_import.team_name_is_at_the_figma_slides_file_limit", {
-            teamName: N.name
+            teamName
           });
         case FFileType.DESIGN:
           return getI18nString("fullscreen.file_import.team_name_is_at_the_figma_file_limit", {
-            teamName: e
+            teamName
           });
         case FFileType.SITES:
           return getI18nString("fullscreen.file_import.your_team_doesnt_have_permissions_to_import_sites_files");
         case FFileType.COOPER:
           return getI18nString("fullscreen.file_import.team_name_is_at_the_figma_buzz_file_limit", {
-            teamName: e
+            teamName
           });
         case FFileType.FIGMAKE:
           return getI18nString("fullscreen.file_import.team_name_is_at_the_figma_make_file_limit", {
-            teamName: e
+            teamName
           });
         default:
-          throwTypeError(R);
+          throwTypeError(fileType);
       }
     })();
-    e.dispatch($$O10({
-      id: i,
-      status: mO.FAILURE,
-      message: t
+    dispatch(updateFileImportItem({
+      id: queueItemId,
+      status: ImportExportStatus.FAILURE,
+      message: limitErrorMessage
     }));
-    e.dispatch($$P14());
-    e.dispatch(U());
+    dispatch(failFileImportOnLimit());
+    dispatch(processNextQueuedFile());
     return;
   }
-  if (!canCreateFileType(k, R)) {
-    let t = cu(k.name);
-    let n = !!C && T !== C && (await canCreateFileTypeAsync(C, R));
-    e.dispatch($$O10({
-      id: i,
-      status: mO.FAILURE,
-      message: t,
-      cta: n ? {
+
+  // Check file creation permissions
+  if (!canCreateFileType(projectData, fileType)) {
+    const permissionErrorMessage = getImportPermissionErrorMessage(projectData.name);
+    const canCreateInDrafts = !!userDraftsFolderId && targetFolderId !== userDraftsFolderId && (await canCreateFileTypeAsync(userDraftsFolderId, fileType));
+    dispatch(updateFileImportItem({
+      id: queueItemId,
+      status: ImportExportStatus.FAILURE,
+      message: permissionErrorMessage,
+      cta: canCreateInDrafts ? {
         text: getI18nString("fullscreen.file_import.go_to_drafts"),
         action: () => {
-          e.dispatch(selectFolderView(C));
+          dispatch(selectFolderView(userDraftsFolderId));
         }
-      } : void 0
+      } : undefined
     }));
-    e.dispatch(U());
+    dispatch(processNextQueuedFile());
     return;
   }
-  let L = "unknown";
-  if (".pdf" === I || ".svg" === I || ".sketch" === I || ".zip" === I || ".jamboard" === I) L = I.substring(1);else if (".gif" === I || ".png" === I || ".jpg" === I || ".jpeg" === I) L = "img";else if (".fig" === I || ".jam" === I || ".deck" === I || ".site" === I || ".buzz" === I || ".make" === I) {
-    let e = new Uint8Array(await o.blob.slice(0, 20).arrayBuffer());
-    L = f6(e) ? "fig-zip" : "fig-kiwi";
+
+  // Determine file format
+  let fileFormat: string = "unknown";
+  if ([".pdf", ".svg", ".sketch", ".zip", ".jamboard"].includes(fileExtension)) {
+    fileFormat = fileExtension.substring(1);
+  } else if ([".gif", ".png", ".jpg", ".jpeg"].includes(fileExtension)) {
+    fileFormat = "img";
+  } else if ([".fig", ".jam", ".deck", ".site", ".buzz", ".make"].includes(fileExtension)) {
+    const fileHeader = new Uint8Array(await fileItem.blob.slice(0, 20).arrayBuffer());
+    fileFormat = isZipFile(fileHeader) ? "fig-zip" : "fig-kiwi";
   }
-  let F = generateUUIDv4();
+  const importId = generateUUIDv4();
   trackEventAnalytics("File Import Begin", {
-    importId: F
+    importId
   });
-  o.timer.start();
+  fileItem.timer.start();
   try {
-    let n = await W(e, {
-      basename: _,
-      extension: I
-    }, getFeatureFlags(), fileImporter, o, L, t.fileImport.selectedPdfType, T);
-    let r = {
-      id: i,
-      ...(n.file ? {
-        fileKey: n.file?.fileKey
+    // Perform the actual file import
+    const importResult = await W(dispatch, {
+      basename: fileNameWithoutExtension,
+      extension: fileExtension
+    }, getFeatureFlags(), fileImporter!,
+    // Add non-null assertion operator
+    fileItem, fileFormat, state.fileImport.selectedPdfType, targetFolderId);
+    const updatePayload = {
+      id: queueItemId,
+      ...(importResult.file ? {
+        fileKey: importResult.file?.fileKey
       } : {})
     };
-    if (n.warnings.length) e.dispatch($$O10({
-      ...r,
-      status: mO.WARNING,
-      message: n.warnings
-    }));else {
-      let t = {
-        ...r,
-        status: mO.SUCCESS
-      };
-      e.dispatch($$O10(t));
+
+    // Handle warnings or success
+    if (importResult.warnings.length) {
+      dispatch(updateFileImportItem({
+        ...updatePayload,
+        status: ImportExportStatus.WARNING,
+        message: importResult.warnings
+      }));
+    } else {
+      dispatch(updateFileImportItem({
+        ...updatePayload,
+        status: ImportExportStatus.SUCCESS
+      }));
     }
-    let a = Date.now();
-    if (console.log(`conversion took ${(a - f) / 1e3} seconds`), e.dispatch(U()), n.file) {
-      let e = n.file.fileKey;
-      o.timer.stop();
-      let t = {
-        ...n.file.sketchMeta,
-        importId: F,
-        extension: I,
-        format: L,
-        worked: !0,
-        teamId: D,
-        fileKey: e,
-        elapsedSeconds: o.timer.getElapsedTime() / 1e3
+    const endTime = Date.now();
+    console.log(`conversion took ${(endTime - startTime) / 1000} seconds`);
+    dispatch(processNextQueuedFile());
+
+    // Track successful import
+    if (importResult.file) {
+      const fileKey = importResult.file?.fileKey;
+      fileItem.timer.stop();
+      const importEventData = {
+        ...importResult.file.sketchMeta,
+        importId,
+        extension: fileExtension,
+        format: fileFormat,
+        worked: true,
+        teamId,
+        fileKey,
+        elapsedSeconds: fileItem.timer.getElapsedTime() / 1000
       };
-      trackEventAnalytics("File Imported", t, {
-        forwardToDatadog: !0
+      trackEventAnalytics("File Imported", importEventData, {
+        forwardToDatadog: true
       });
     }
-  } catch (t) {
+  } catch (error) {
     try {
-      "string" == typeof t && (t = Error(t));
-      e.dispatch($$O10({
-        id: i,
-        status: fileImporter.hasCanceled() ? mO.CANCELED : mO.FAILURE,
-        message: t && t.message ? t.message + "" : getI18nString("fullscreen.file_import.internal_error_please_try_again_later")
+      // Normalize error
+      if (typeof error === "string") {
+        // eslint-disable-next-line no-ex-assign
+        error = new Error(error);
+      }
+      dispatch(updateFileImportItem({
+        id: queueItemId,
+        status: fileImporter!.hasCanceled() ? ImportExportStatus.CANCELED : ImportExportStatus.FAILURE,
+        message: error && error.message ? `${error.message}` : getI18nString("fullscreen.file_import.internal_error_please_try_again_later")
       }));
-      let n = t.inferredFormat;
-      n && (L = n);
-      let r = t;
-      if (trackEventAnalytics("File Imported", {
-        importId: F,
-        extension: I,
-        format: L,
-        worked: !1,
-        canceled: fileImporter.hasCanceled(),
-        uploadFailed: r.imageUploadError || !1,
-        teamId: D
+
+      // Update format if inferred
+      const inferredFormat = (error as any).inferredFormat;
+      if (inferredFormat) {
+        fileFormat = inferredFormat;
+      }
+      const errorObj = error as any;
+
+      // Track failed import
+      trackEventAnalytics("File Imported", {
+        importId,
+        extension: fileExtension,
+        format: fileFormat,
+        worked: false,
+        canceled: fileImporter!.hasCanceled(),
+        uploadFailed: errorObj.imageUploadError || false,
+        teamId
       }, {
-        forwardToDatadog: !0
-      }), r.imageUploadError && trackEventAnalytics("File Import Image Upload Error", {
-        extension: I,
-        format: L,
-        teamId: D
-      }), !(t instanceof zX)) {
-        if (fileImporter.hasCanceled()) return;
-        if (!t.hasOwnProperty("reportError") || t.reportError) {
-          let e = t.warnings;
-          if (e?.length > 0) for (let t of e) logWarning("import", t);
-          reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, t.cause ? t.cause : t);
+        forwardToDatadog: true
+      });
+      if (errorObj.imageUploadError) {
+        trackEventAnalytics("File Import Image Upload Error", {
+          extension: fileExtension,
+          format: fileFormat,
+          teamId
+        });
+      }
+
+      // Report error unless it's an ImportSpecificError or cancellation
+      if (!(error instanceof ImportSpecificError)) {
+        if (fileImporter!.hasCanceled()) return;
+        if (!Object.prototype.hasOwnProperty.call(error, "reportError") || (error as any).reportError) {
+          const warnings = (error as any).warnings;
+          if (warnings?.length > 0) {
+            for (const warning of warnings) {
+              logWarning("import", warning);
+            }
+          }
+          reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, (error as any).cause ? (error as any).cause : error);
         }
       }
-    } catch (e) {
-      reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e);
+    } catch (reportingError) {
+      reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, reportingError);
     } finally {
-      e.dispatch(U());
+      dispatch(processNextQueuedFile());
     }
   }
 });
-let $$T13 = createActionCreator("FILE_IMPORT_SET_FROM_FILE_IMPORT_NUX_STEP");
-let $$k4 = createActionCreator("FILE_IMPORT_SHOW_IMPORT_PDF_CONFIRMATION");
-let $$R3 = createActionCreator("FILE_IMPORT_SHOW_IMPORT_FIGMA_DESIGN_REPO");
-let $$N9 = createActionCreator("FILE_IMPORT_CLEAR_IMPORTS");
-let $$P14 = createActionCreator("FILE_IMPORT_FAIL_ON_LIMIT");
-let $$O10 = createActionCreator("FILE_IMPORT_UPDATE_ITEM");
-let $$D7 = createActionCreator("FILE_IMPORT_ADD_TO_QUEUE");
-let $$L11 = createActionCreator("FILE_IMPORT_CLEAR_QUEUE");
-let $$F15 = createOptimistThunk(e => {
+
+// Action creators
+const setFromFileImportNuxStep = createActionCreator("FILE_IMPORT_SET_FROM_FILE_IMPORT_NUX_STEP");
+const showImportPdfConfirmation = createActionCreator("FILE_IMPORT_SHOW_IMPORT_PDF_CONFIRMATION");
+const showImportFigmaDesignRepo = createActionCreator("FILE_IMPORT_SHOW_IMPORT_FIGMA_DESIGN_REPO");
+const clearFileImports = createActionCreator("FILE_IMPORT_CLEAR_IMPORTS");
+const failFileImportOnLimit = createActionCreator("FILE_IMPORT_FAIL_ON_LIMIT");
+const updateFileImportItem = createActionCreator("FILE_IMPORT_UPDATE_ITEM");
+const addFileImportToQueue = createActionCreator("FILE_IMPORT_ADD_TO_QUEUE");
+const clearFileImportQueue = createActionCreator("FILE_IMPORT_CLEAR_QUEUE");
+
+/**
+ * Cancel all file imports
+ * Original name: $$F15
+ */
+const cancelAllFileImports = createOptimistThunk(({
+  dispatch,
+  getState
+}) => {
   if (!fileImporter) return;
-  let {
+  const {
     fileImport
-  } = e.getState();
-  fileImport.queue.length > 0 && (function (e) {
-    let t = new Set();
-    e.queue.forEach(i => {
-      let n = e.files[i]?.name ?? "";
-      let r = dv(n);
-      t.add(r.slice(1));
+  } = getState();
+  if (fileImport.queue.length > 0) {
+    // Track cancellation analytics
+    const extensions = new Set<string>();
+    fileImport.queue.forEach(itemId => {
+      const fileName = fileImport.files[itemId]?.name ?? "";
+      const extension = getFileExtension(fileName);
+      extensions.add(extension.slice(1));
     });
-    let i = 1 === t.size ? Array.from(t)[0] : t.size > 1 ? "multiple" : "";
+    const fileType = extensions.size === 1 ? Array.from(extensions)[0] : extensions.size > 1 ? "multiple" : "";
     trackEventAnalytics("File Import Cancelled", {
-      numFilesCancelled: e.queue.length,
-      fileType: i
+      numFilesCancelled: fileImport.queue.length,
+      fileType
     }, {
-      forwardToDatadog: !0
+      forwardToDatadog: true
     });
-  }(fileImport), function (e) {
-    e.queue.forEach(t => {
-      let i = e.files[t];
-      let n = i.name;
-      kI(n) && Ij({
-        type: "canceled"
-      }, "file_browser", i.blob?.size ?? 0, e.selectedPdfType);
+
+    // Handle PDF cancellations
+    fileImport.queue.forEach(itemId => {
+      const fileItem = fileImport.files[itemId];
+      const fileName = fileItem.name;
+      if (isPdfFile(fileName)) {
+        trackPdfImportCompletion({
+          state: "canceled"
+        }, "file_browser", fileItem.blob?.size ?? 0, fileImport.selectedPdfType);
+      }
     });
-  }(fileImport));
-  pl.forEach(e => {
-    e.onload = () => {};
-    e.abort();
+  }
+
+  // Abort all pending imports
+  importErrorTracker.forEach(xhr => {
+    (xhr as any).onload = () => {};
+    (xhr as any).abort();
   });
-  fileImporter.cancelConversion();
-  e.dispatch($$L11());
-  e.dispatch(U());
-  (function (e) {
-    let t = e.getState().fileImport.files;
-    for (let i of Object.keys(t).filter(e => {
-      let i = t[Number(e)];
-      return !!i && (i.status === mO.WAITING || i.status === mO.BUSY);
-    })) e.dispatch($$O10({
-      id: Number(i),
-      status: mO.CANCELED
+  fileImporter!.cancelConversion();
+  dispatch(clearFileImportQueue());
+  dispatch(processNextQueuedFile());
+
+  // Mark remaining items as canceled
+  const files = getState().fileImport.files;
+  for (const itemId of Object.keys(files).filter(id => {
+    const file = files[Number(id)];
+    return !!file && (file.status === ImportExportStatus.WAITING || file.status === ImportExportStatus.BUSY);
+  })) {
+    dispatch(updateFileImportItem({
+      id: Number(itemId),
+      status: ImportExportStatus.CANCELED
     }));
-  })(e);
-  MS();
+  }
+  resetImportErrorTracker();
 });
-let $$M5 = createActionCreator("FILE_IMPORT_START_PROCESSING_FILE");
-let $$j12 = createActionCreator("FILE_IMPORT_DONE_PROCESSING_FILE");
-let U = createOptimistThunk(e => {
-  e.dispatch($$j12());
-  e.getState().fileImport.queue.length > 0 && e.dispatch($$C6());
+const startProcessingFile = createActionCreator("FILE_IMPORT_START_PROCESSING_FILE");
+const doneProcessingFile = createActionCreator("FILE_IMPORT_DONE_PROCESSING_FILE");
+
+/**
+ * Process the next queued file
+ * Original name: U
+ */
+const processNextQueuedFile = createOptimistThunk(({
+  dispatch
+}, getState) => {
+  dispatch(doneProcessingFile());
+  if (getState().fileImport.queue.length > 0) {
+    dispatch(processNextFileImport());
+  }
 });
-let $$B1 = createActionCreator("FILE_IMPORT_CONFIRM_IMPORT_PDF");
-let $$V8 = createOptimistThunk((e, t) => {
-  e.dispatch($$B1(t));
-  e.getState().fileImport.queue.length > 0 && e.dispatch($$C6());
+const confirmImportPdf = createActionCreator("FILE_IMPORT_CONFIRM_IMPORT_PDF");
+
+/**
+ * Process confirmed PDF import
+ * Original name: $$V8
+ */
+const processConfirmedPdfImport = createOptimistThunk(({
+  dispatch,
+  getState
+}, payload) => {
+  dispatch(confirmImportPdf(payload));
+  if (getState().fileImport.queue.length > 0) {
+    dispatch(processNextFileImport());
+  }
 });
-let $$G2 = createActionCreator("FILE_IMPORT_CANCEL_IMPORT_PDF");
-let $$z0 = createOptimistThunk(e => {
-  e.dispatch($$G2());
-  let t = e.getState();
-  t.fileImport.queue.length > 0 ? e.dispatch($$C6()) : Object.values(t.fileImport.files).every(e => kI(e.name)) && (e.dispatch(hideModal()), e.dispatch($$N9()));
+const cancelImportPdf = createActionCreator("FILE_IMPORT_CANCEL_IMPORT_PDF");
+
+/**
+ * Process PDF import cancellation
+ * Original name: $$z0
+ */
+const processPdfImportCancellation = createOptimistThunk(({
+  dispatch
+}, getState) => {
+  dispatch(cancelImportPdf());
+  const state = getState();
+  if (state.fileImport.queue.length > 0) {
+    dispatch(processNextFileImport());
+  } else if (Object.values(state.fileImport.files).every((file: ObjectOf) => isPdfFile(file.name))) {
+    dispatch(hideModal());
+    dispatch(clearFileImports());
+  }
 });
-export const AU = $$z0;
-export const Fd = $$B1;
-export const Fj = $$G2;
-export const GR = $$R3;
-export const JK = $$k4;
-export const JR = $$M5;
-export const Jb = $$C6;
-export const Ud = $$D7;
-export const _9 = $$V8;
-export const cY = $$N9;
-export const fk = $$O10;
-export const lg = $$L11;
-export const n$ = $$j12;
-export const rf = $$T13;
-export const rj = $$P14;
-export const yD = $$F15;
+
+// Exported actions
+export const AU = processPdfImportCancellation;
+export const Fd = confirmImportPdf;
+export const Fj = cancelImportPdf;
+export const GR = showImportFigmaDesignRepo;
+export const JK = showImportPdfConfirmation;
+export const JR = startProcessingFile;
+export const Jb = processNextFileImport;
+export const Ud = addFileImportToQueue;
+export const _9 = processConfirmedPdfImport;
+export const cY = clearFileImports;
+export const fk = updateFileImportItem;
+export const lg = clearFileImportQueue;
+export const n$ = doneProcessingFile;
+export const rf = setFromFileImportNuxStep;
+export const rj = failFileImportOnLimit;
+export const yD = cancelAllFileImports;

@@ -64,7 +64,7 @@ export function handleExternalRedirect(options: RedirectOptions) {
     customHistory.postRedirect(`/exit?url=${encodeURIComponent(finalUrl)}`, options.openInNewWindow ? '_blank' : '');
   }
 }
-export function compareValues(a: any, b: any, c: any, d: any) {
+export function compareValues(a: any, b: any, c?: any, d?: any) {
   return a ? a !== b : c !== d;
 }
 interface FileNavigationOptions {

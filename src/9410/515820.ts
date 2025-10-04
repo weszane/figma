@@ -19,7 +19,7 @@ import { V as _$$V } from "../905/506207";
 import { P as _$$P } from "../905/347284";
 import { updateHoveredNode } from "../figma_app/741237";
 import { useCurrentViewState } from "../figma_app/623300";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { wV } from "../figma_app/779965";
 import { useDispatch, useSelector } from "react-redux";
 import { F as _$$F } from "../905/680873";
@@ -247,7 +247,7 @@ function Z({
   let _ = useRef(null);
   let [x, y] = useState(0);
   let b = e.length;
-  let C = o3(nt.newResizablePanel);
+  let C = useLabConfiguration(labConfigurations.newResizablePanel);
   let {
     height,
     setHeight,

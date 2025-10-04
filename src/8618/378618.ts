@@ -45,7 +45,7 @@ import { Vy } from "../8826/611318";
 import { Wv } from "../figma_app/711157";
 import { defaultGrayColor, blackColor } from "../figma_app/385874";
 import { useHasSceneGraphSelection, useAppModelProperty, useAppModelPropsShallow } from "../figma_app/722362";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { BS } from "../642/202922";
 import { Q as _$$Q } from "../9314/475980";
@@ -720,7 +720,7 @@ function tb({
     onlyCooperFrames
   } = useCooperFrameSelectionInfo();
   let $ = isCooperFeatureEnabled() && onlyCooperFrames;
-  let Z = o3(nt.designSelectionActionsPanel);
+  let Z = useLabConfiguration(labConfigurations.designSelectionActionsPanel);
   let eh = !tx() && Z;
   return jsxs(Fragment, {
     children: [0 === Object.keys(j).length && jsx(Mw, {
@@ -983,7 +983,7 @@ function tw({
     numSelected: _numSelected2
   } = useNonMixedSelectedStyleOrSelectionPropertyValues("pluginRelaunchData", "numSelected");
   let D = SJ();
-  let K = o3(nt.designSelectionActionsPanel);
+  let K = useLabConfiguration(labConfigurations.designSelectionActionsPanel);
   let L = !tx() && K;
   return jsxs(TabLoop, {
     children: [0 === Object.keys(j).length && jsx(Mw, {

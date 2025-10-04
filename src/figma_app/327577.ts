@@ -6,7 +6,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { S as _$$S } from "../905/539306";
 import { selectViewAction } from "../905/929976";
-import { uM } from "../905/738636";
+import { createAndOpenFile } from "../905/738636";
 import { getNewFileConfig } from "../905/766303";
 import { getAutosaveManagerInstance } from "../figma_app/840917";
 import { FFileType } from "../figma_app/191312";
@@ -127,7 +127,7 @@ let $$D10 = createOptimistThunk((e, t) => {
       },
       editorType: t.editorType
     });
-    e.dispatch(uM(i));
+    e.dispatch(createAndOpenFile(i));
   }
 });
 export function $$k5(e) {

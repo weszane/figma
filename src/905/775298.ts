@@ -1,46 +1,103 @@
-class n {
+/**
+ * Manages file creation state and cancellation
+ * Original class name: n
+ */
+class FileCreationManager {
+  private _isCanceled: boolean = false
+  private _onCanceled: (() => void) | null = null
+  private _resolveCompletionPromise: () => void = () => { }
+  private _promise: Promise<void>
+
   constructor() {
-    this._isCanceled = !1;
-    this._onCanceled = null;
-    this._resolveCompletionPromise = () => {};
-    this._promise = new Promise(e => {
-      this._resolveCompletionPromise = e;
-    });
+    this._promise = new Promise((resolve) => {
+      this._resolveCompletionPromise = resolve
+    })
   }
-  cancel() {
-    this._isCanceled = !0;
-    this._onCanceled && this._onCanceled();
+
+  /**
+   * Cancels the file creation process
+   */
+  cancel(): void {
+    this._isCanceled = true
+    if (this._onCanceled) {
+      this._onCanceled()
+    }
   }
-  setOnCanceled(e) {
-    this._onCanceled = e;
+
+  /**
+   * Sets a callback to be executed when cancellation occurs
+   * @param callback - Function to call on cancellation
+   */
+  setOnCanceled(callback: () => void): void {
+    this._onCanceled = callback
   }
-  get isCanceled() {
-    return this._isCanceled;
+
+  /**
+   * Gets the cancellation status
+   */
+  get isCanceled(): boolean {
+    return this._isCanceled
   }
-  done() {
-    return this._resolveCompletionPromise();
+
+  /**
+   * Resolves the completion promise
+   */
+  done(): void {
+    this._resolveCompletionPromise()
   }
-  waitForCompletion() {
-    return this._promise;
+
+  /**
+   * Returns a promise that resolves when the file creation is completed
+   */
+  waitForCompletion(): Promise<void> {
+    return this._promise
   }
 }
-let r = null;
-export function $$a2() {
-  return r;
+
+// Singleton instance for file creation management
+let fileCreationManager: FileCreationManager | null = null
+
+/**
+ * Gets the current file creation manager instance
+ * Original function name: $$a2
+ */
+export function getFileCreationManager(): FileCreationManager | null {
+  return fileCreationManager
 }
-export function $$s3() {
-  return !!r;
+
+/**
+ * Checks if file creation is in progress
+ * Original function name: $$s3
+ */
+export function isFileCreationInProgress(): boolean {
+  return !!fileCreationManager
 }
-export function $$o0() {
-  if (r) throw Error("File creation already in progress");
-  return r = new n();
+
+/**
+ * Initializes a new file creation process
+ * Original function name: $$o0
+ */
+export function startFileCreation(): FileCreationManager {
+  if (fileCreationManager) {
+    throw new Error("File creation already in progress")
+  }
+  return fileCreationManager = new FileCreationManager()
 }
-export function $$l1() {
-  if (!r) throw Error("File creation already in progress");
-  r.done();
-  r = null;
+
+/**
+ * Completes the current file creation process
+ * Original function name: $$l1
+ */
+export function completeFileCreation(): void {
+  if (!fileCreationManager) {
+    throw new Error("No file creation in progress")
+  }
+  fileCreationManager.done()
+  fileCreationManager = null
 }
-export const E7 = $$o0;
-export const UT = $$l1;
-export const aZ = $$a2;
-export const gD = $$s3;
+
+// Export aliases for backward compatibility
+export const E7 = startFileCreation
+export const UT = completeFileCreation
+export const aZ = getFileCreationManager
+export const gD = isFileCreationInProgress

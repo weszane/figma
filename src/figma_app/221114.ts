@@ -31,7 +31,7 @@ import { RecordingComponent, handleMouseEvent, generateRecordingKey, hookForKeyb
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { clickableBaseLinkTracked } from "../figma_app/637027";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -50,7 +50,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { removeOptimist } from "../905/766303";
 import { consumptionPaywallUtils } from "../905/224";
-import { ud } from "../905/862913";
+import { useFileByKey } from "../905/862913";
 import { fullscreenValue } from "../figma_app/455680";
 import { FPlanNameType } from "../figma_app/191312";
 import { MAX_USERS } from "../figma_app/345997";
@@ -420,7 +420,7 @@ export class $$eR4 extends RecordingComponent {
       children: [" ", this.props.isLinked ? jsx($$eO1, {
         onChange: this.setFormattedTime,
         time: this.props.time
-      }) : jsx(h1, {
+      }) : jsx(RelativeTimeDisplay, {
         onChange: this.setFormattedTime,
         date: this.props.time
       })]
@@ -718,7 +718,7 @@ class eM extends RecordingComponent {
           let e;
           if (null != t.label && t.label.length > 0) e = getI18nString("collaboration.feedback.viewing_version", {
             label: t.label
-          }); else {
+          });else {
             let r = xX(t.touched_at);
             e = getI18nString("collaboration.feedback.viewing_version", {
               label: r
@@ -758,7 +758,7 @@ class eM extends RecordingComponent {
     this.isAllowedToChangeVersion = () => null === this.props.modalShown && !hM();
     this.onKeyDown = hookForKeyboard(this, "keydown", e => {
       if (!this.props.dropdownShown && !this.props.modalShown && !this.props.versionHistory.compareId) {
-        if (e.keyCode === KeyCodes.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(exitVersionHistoryMode()); else if (e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.DOWN_ARROW) {
+        if (e.keyCode === KeyCodes.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(exitVersionHistoryMode());else if (e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.DOWN_ARROW) {
           if (!this.isAllowedToChangeVersion()) return;
           let t = this.props.versionHistory.versions.length;
           this.setState({
@@ -766,7 +766,7 @@ class eM extends RecordingComponent {
           });
           this.autoExpandGroupId = "";
           let r = -1;
-          if (this.props.versionHistory.activeId === CURRENT_VERSION_ID) e.keyCode === KeyCodes.DOWN_ARROW && (r = 0); else {
+          if (this.props.versionHistory.activeId === CURRENT_VERSION_ID) e.keyCode === KeyCodes.DOWN_ARROW && (r = 0);else {
             let t = this.props.versionHistory.versions.findIndex(e => e.id === this.props.versionHistory.activeId);
             -1 !== t && (r = e.keyCode === KeyCodes.UP_ARROW ? t - 1 : t + 1);
           }
@@ -1291,7 +1291,7 @@ function eB({
   isSection: o
 }) {
   let l = useDispatch();
-  let d = ud();
+  let d = useFileByKey();
   return jsx(Fragment, {
     children: e.map((a, c) => jsx($$eR4, {
       branchFileKey: a.branch_file_key,

@@ -6,7 +6,7 @@ import { Xr } from "../figma_app/27355";
 import { parseHex, areColorsEqual } from "../figma_app/191804";
 import { Eg } from "../figma_app/583114";
 import { useLatestRef } from "../figma_app/922077";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { GI, IZ, ez, lC, U9, qL } from "../905/125333";
 import { getI18nString } from "../905/303541";
@@ -27,7 +27,7 @@ export function $$N2() {
   let t = useDispatch();
   let r = Xr(Qv);
   return (n, i, a) => {
-    e && (r(i), WB().optimisticallyUpdate({}, _$$v.setUserColorPaletteOverrideForFile(e, n)).catch(e => {
+    e && (r(i), getCurrentLiveGraphClient().optimisticallyUpdate({}, _$$v.setUserColorPaletteOverrideForFile(e, n)).catch(e => {
       console.error(e);
       a || t(VisualBellActions.enqueue({
         message: getI18nString("fullscreen.color_palette.apply_palette_failure")

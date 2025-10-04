@@ -1,329 +1,472 @@
-import { reportError } from '../905/11';
-import { ServiceCategories } from '../905/165054';
-import { permissionScopeHandler, zk } from '../905/189185';
-import { maybeCreateSavepoint } from '../905/294113';
-import { getI18nString } from '../905/303541';
-import { e as _$$e2 } from '../905/365408';
-import { debugState } from '../905/407919';
-import { f as _$$f } from '../905/436809';
-import { handleAtomEvent } from '../905/502364';
-import { subscribeMultipleAndAwaitAll } from '../905/553831';
-import { n as _$$n } from '../905/917104';
-import { postUserFlag } from '../905/985254';
-import { atomStoreManager } from '../figma_app/27355';
-import { DevModeActivity } from '../figma_app/43951';
-import { isNotNullish } from '../figma_app/95419';
-import { j } from '../figma_app/172303';
-import { FEventType } from '../figma_app/191312';
-import { trackFileEvent } from '../figma_app/314264';
-import { S7 } from '../figma_app/379850';
-import { fullscreenValue } from '../figma_app/455680';
-import { canAccessFullDevMode } from '../figma_app/473493';
-import { isDevModeFocusViewCopyActive } from '../figma_app/544649';
-import { d as _$$d, cR, hv, pc } from '../figma_app/715641';
-import { Multiplayer, SessionOrigin, HandoffBindingsCpp, BuildStatus } from '../figma_app/763686';
-import { zi } from '../figma_app/867292';
-import { d1, hj } from '../figma_app/888478';
-function w({
-  status: e,
-  prevStatus: t,
-  source: r,
-  numNodesUpdated: n,
-  nodeId: i,
-  nodeType: a,
-  isReadOnly: s,
-  description: o,
-  isEdited: d
-}) {
-  let c = debugState.getState();
-  trackFileEvent('dev_handoff_edit_status', c.openFile?.key, c, {
-    status: e,
-    prevStatus: t,
-    source: r,
-    numNodesUpdated: n,
-    nodeId: i,
-    nodeType: a,
-    isViewOnly: s,
-    hasDescription: o !== '',
-    description: o,
-    isEdited: d
+import { reportError } from '../905/11'
+import { ServiceCategories } from '../905/165054'
+import { permissionScopeHandler, zk } from '../905/189185'
+import { maybeCreateSavepoint } from '../905/294113'
+import { getI18nString } from '../905/303541'
+import { devModeActivityRecorder } from '../905/365408'
+import { debugState } from '../905/407919'
+import { nodeStatusTracker } from '../905/436809'
+import { handleAtomEvent } from '../905/502364'
+import { subscribeMultipleAndAwaitAll } from '../905/553831'
+import { n as _$$n } from '../905/917104'
+import { postUserFlag } from '../905/985254'
+import { atomStoreManager } from '../figma_app/27355'
+import { DevModeActivity } from '../figma_app/43951'
+import { isNotNullish } from '../figma_app/95419'
+import { dispatchShowVisualBell } from '../figma_app/172303'
+import { FEventType } from '../figma_app/191312'
+import { trackFileEvent } from '../figma_app/314264'
+import { getBackgroundColorWithOverride } from '../figma_app/379850'
+import { fullscreenValue } from '../figma_app/455680'
+import { canAccessFullDevMode } from '../figma_app/473493'
+import { isDevModeFocusViewCopyActive } from '../figma_app/544649'
+import { d as _$$d, cR, hv, pc } from '../figma_app/715641'
+import { BuildStatus, HandoffBindingsCpp, Multiplayer, SessionOrigin } from '../figma_app/763686'
+import { zi } from '../figma_app/867292'
+import { d1, hj } from '../figma_app/888478'
+
+interface TrackEditStatusParams {
+  status: string
+  prevStatus: string
+  source: string
+  numNodesUpdated: number
+  nodeId: string
+  nodeType: string
+  isReadOnly: boolean
+  description: string
+  isEdited: boolean
+}
+
+/**
+ * Tracks dev handoff edit status events
+ * (Original function: w)
+ */
+function trackDevHandoffEditStatus({
+  status,
+  prevStatus,
+  source,
+  numNodesUpdated,
+  nodeId,
+  nodeType,
+  isReadOnly,
+  description,
+  isEdited,
+}: TrackEditStatusParams): void {
+  const state = debugState.getState()
+  trackFileEvent('dev_handoff_edit_status', state.openFile?.key, state, {
+    status,
+    prevStatus,
+    source,
+    numNodesUpdated,
+    nodeId,
+    nodeType,
+    isViewOnly: isReadOnly,
+    hasDescription: description !== '',
+    description,
+    isEdited,
   }, {
-    forwardToDatadog: !0
-  });
+    forwardToDatadog: true,
+  })
 }
-async function O(e, t, r, n, d) {
-  let u;
-  let p = debugState.dispatch;
-  let _ = debugState.getState();
-  let h = _.openFile?.key || '';
-  let m = d ?? void 0;
-  let g = performance.now();
-  if (atomStoreManager.set(pc, !0), t === BuildStatus.BUILD || t === BuildStatus.COMPLETED) {
+
+interface RecordStatusChangeActivityParams {
+  nodes: Array<{
+    id: string
+    name: string
+    type: string
+    pageName: string
+    prevStatus: BuildStatus
+    previewBackground: string
+    isUpdated: boolean
+  }>
+  status: BuildStatus
+  statusString: string
+  source: string
+  description: string | undefined
+}
+
+/**
+ * Records status change activity for dev mode
+ * (Original function: O)
+ */
+async function recordStatusChangeActivity({
+  nodes,
+  status,
+  statusString,
+  source,
+  description,
+}: RecordStatusChangeActivityParams): Promise<void> {
+  let versionId: string | undefined
+  const dispatch = debugState.dispatch
+  const state = debugState.getState()
+  const fileKey = state.openFile?.key || ''
+  const descriptionValue = description ?? undefined
+  const startTime = performance.now()
+
+  if (atomStoreManager.set(pc, true), status === BuildStatus.BUILD || status === BuildStatus.COMPLETED) {
     try {
-      let e = await maybeCreateSavepoint(h, zi(t) ?? void 0, m, p, !0);
-      u = e?.id;
-      h && !u && reportError(ServiceCategories.DEVELOPER_TOOLS, new Error('[Dev mode activity] createSavepoint returned no id'));
-    } catch (e) {
-      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`[Dev mode activity] Error creating version on status change: ${e.stack}`));
+      const savepoint = await maybeCreateSavepoint(fileKey, zi(status) ?? undefined, descriptionValue, dispatch, true)
+      versionId = savepoint?.id
+      if (fileKey && !versionId) {
+        reportError(ServiceCategories.DEVELOPER_TOOLS, new Error('[Dev mode activity] createSavepoint returned no id'))
+      }
+    }
+    catch (error) {
+      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`[Dev mode activity] Error creating version on status change: ${error.stack}`))
     }
   }
-  let y = !1;
-  permissionScopeHandler(zk.SYSTEM, 'store-status-activity', () => {
-    _$$e2.recordStatusChange({
-      fileKey: h,
-      nodes: e,
-      status: t,
-      description: m,
-      versionId: u
-    }).then(() => {
-      y = !0;
-    }).catch(e => {
-      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`[Dev mode activity] Error creating activity: ${e.stack}`));
-    }).finally(() => {
-      let t = performance.now() - g;
-      trackFileEvent('dev_handoff_status_activity', h, _, {
-        elapsedMs: t,
-        status: r,
-        source: n,
-        savedVersion: !!u,
-        savedActivity: y,
-        nodeIds: e.map(e => e.id)
+
+  let isActivitySaved = false
+  permissionScopeHandler(zk.SYSTEM, 'store-status-activity', async () => {
+    try {
+      await devModeActivityRecorder.recordStatusChange({
+        fileKey,
+        nodes,
+        status,
+        description: descriptionValue,
+        versionId,
+      })
+      isActivitySaved = true
+    }
+    catch (error) {
+      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`[Dev mode activity] Error creating activity: ${error.stack}`))
+    }
+    finally {
+      const elapsedMs = performance.now() - startTime
+      trackFileEvent('dev_handoff_status_activity', fileKey, state, {
+        elapsedMs,
+        status: statusString,
+        source,
+        savedVersion: !!versionId,
+        savedActivity: isActivitySaved,
+        nodeIds: nodes.map(node => node.id),
       }, {
-        forwardToDatadog: !0
-      });
-      atomStoreManager.set(pc, !1);
-    });
-  });
+        forwardToDatadog: true,
+      })
+      atomStoreManager.set(pc, false)
+    }
+  })
 }
-function R(e) {
-  switch (e) {
+
+/**
+ * Maps BuildStatus to string representation
+ * (Original function: R)
+ */
+function mapBuildStatusToString(status: BuildStatus): string {
+  switch (status) {
     case BuildStatus.BUILD:
-      return 'ready_for_dev';
+      return 'ready_for_dev'
     case BuildStatus.COMPLETED:
-      return 'completed';
+      return 'completed'
     default:
-      return 'none';
+      return 'none'
   }
 }
-async function $$L(e, t) {
-  let r = e.map(({
-    id: e,
-    isUpdated: r
-  }) => r ? {
-    fileKey: t,
-    nodeId: e
-  } : null).filter(isNotNullish);
-  if (r.length === 0) return {};
-  let i = await subscribeMultipleAndAwaitAll(DevModeActivity, r);
-  let a = {};
-  i.forEach(({
-    result: e
-  }, t) => {
-    if (e.data?.file.status === 'loaded') {
-      let n = e.data.file.data?.devModeActivity.filter(e => e.activityType === FEventType.STATUS_CHANGE).sort((e, t) => t.timestamp.getTime() - e.timestamp.getTime()) || [];
-      let i = r[t];
-      let s = n[0];
-      i && s && (a[i.nodeId] = s.id);
-    }
-  });
-  return a;
+
+interface NodeActivityLookupParams {
+  id: string
+  isUpdated: boolean
 }
-export async function $$P0({
-  nodeIds: e,
-  status: t,
-  description: r,
-  sourceForLogging: n,
-  editScopeType: i
-}) {
-  let d = debugState.getState();
-  let c = d.mirror.sceneGraph;
-  let E = d.openFile?.key ?? '';
-  let S = d.user?.id ?? '';
-  let v = HandoffBindingsCpp.isReadOnly(SessionOrigin.NODE_STATUS);
-  let A = R(t);
-  let x = debugState.dispatch;
-  if (t === BuildStatus.BUILD) {
-    x(postUserFlag({
-      has_marked_ready_for_dev: !0
-    }));
+
+/**
+ * Looks up previous activity IDs for nodes
+ * (Original function: $$L)
+ */
+async function lookupNodeActivityIds(
+  nodes: NodeActivityLookupParams[],
+  fileKey: string,
+): Promise<Record<string, string>> {
+  const activityRequests = nodes
+    .map(({ id, isUpdated }) => isUpdated ? { fileKey, nodeId: id } : null)
+    .filter(isNotNullish)
+
+  if (activityRequests.length === 0) {
+    return {}
+  }
+
+  const results = await subscribeMultipleAndAwaitAll(DevModeActivity, activityRequests)
+  const activityMap: Record<string, string> = {}
+
+  results.forEach(({ result }, index) => {
+    if (result.data?.file.status === 'loaded') {
+      const activities = result.data.file.data?.devModeActivity
+        .filter(activity => activity.activityType === FEventType.STATUS_CHANGE)
+        .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime()) || []
+
+      const request = activityRequests[index]
+      const latestActivity = activities[0]
+
+      if (request && latestActivity) {
+        activityMap[request.nodeId] = latestActivity.id
+      }
+    }
+  })
+
+  return activityMap
+}
+
+export interface SetNodeStatusParams {
+  nodeIds: string[]
+  status: BuildStatus
+  description?: string
+  sourceForLogging: string
+  editScopeType: any
+}
+
+/**
+ * Sets node status and handles related activities
+ * (Original function: $$P0)
+ */
+export async function setNodeStatus({
+  nodeIds,
+  status,
+  description,
+  sourceForLogging,
+  editScopeType,
+}: SetNodeStatusParams): Promise<void> {
+  const state = debugState.getState()
+  const sceneGraph = state.mirror.sceneGraph
+  const fileKey = state.openFile?.key ?? ''
+  const userId = state.user?.id ?? ''
+  const isReadOnly = HandoffBindingsCpp.isReadOnly(SessionOrigin.NODE_STATUS)
+  const statusString = mapBuildStatusToString(status)
+  const dispatch = debugState.dispatch
+
+  if (status === BuildStatus.BUILD) {
+    dispatch(postUserFlag({
+      has_marked_ready_for_dev: true,
+    }))
     handleAtomEvent({
       id: 'marked_ready_for_dev',
       properties: {
-        nodeIds: e
-      }
-    });
-    let t = atomStoreManager.get(hj);
-    if (t && e.includes(t)) {
-      let e = atomStoreManager.get(d1);
-      e.fn?.();
+        nodeIds,
+      },
+    })
+
+    const focusedNodeId = atomStoreManager.get(hj)
+    if (focusedNodeId && nodeIds.includes(focusedNodeId)) {
+      const focusView = atomStoreManager.get(d1)
+      focusView.fn?.()
     }
   }
-  let P = new Map();
-  let D = new Map();
-  let k = [];
-  for (let r of e) {
-    let e = c.get(r);
-    if (e) {
-      let n = e.getStatusInfo().status;
-      P.set(r, e.hasBeenEditedSinceLastStatusChange);
-      D.set(r, R(n));
-      let i = S7(c, r, e.containingCanvas || '');
-      let s = n === BuildStatus.BUILD && t === BuildStatus.BUILD;
-      let o = '';
-      if (e.containingCanvas) {
-        let t = c.get(e.containingCanvas);
-        t && (o = t.name);
+
+  const hasBeenEditedMap = new Map<string, boolean>()
+  const prevStatusStringMap = new Map<string, string>()
+  const nodeDataList: Array<{
+    id: string
+    name: string
+    type: string
+    pageName: string
+    prevStatus: BuildStatus
+    previewBackground: string
+    isUpdated: boolean
+  }> = []
+
+  for (const nodeId of nodeIds) {
+    const node = sceneGraph.get(nodeId)
+    if (node) {
+      const nodeStatus = node.getStatusInfo().status
+      hasBeenEditedMap.set(nodeId, node.hasBeenEditedSinceLastStatusChange)
+      prevStatusStringMap.set(nodeId, mapBuildStatusToString(nodeStatus))
+
+      const previewBackground = getBackgroundColorWithOverride(sceneGraph, nodeId, node.containingCanvas || '')
+      const isUpdated = nodeStatus === BuildStatus.BUILD && status === BuildStatus.BUILD
+
+      let pageName = ''
+      if (node.containingCanvas) {
+        const canvasNode = sceneGraph.get(node.containingCanvas)
+        if (canvasNode) {
+          pageName = canvasNode.name
+        }
       }
-      k.push({
-        id: r,
-        name: e.name,
-        type: e.type,
-        pageName: o,
-        prevStatus: n,
-        previewBackground: i,
-        isUpdated: s
-      });
-    }
-  }
-  let M = isDevModeFocusViewCopyActive();
-  if (v || M) {
-    let s = d.openFile;
-    let o = {
-      status: A,
-      canAccessDevModeRaw: s?.canAccessFullDevMode,
-      canAccessDevModeEntryPoint: s?.canAccessDevModeEntryPoint,
-      canAccessDevMode: canAccessFullDevMode(d),
-      fileRepoId: s?.fileRepoId,
-      userOrgId: d.user?.org_id,
-      currentTeamId: d.currentTeamId,
-      currentUserOrgId: d.currentUserOrgId,
-      source: n,
-      numNodes: e.length,
-      editScopeType: i,
-      userIdForMultiplayer: S,
-      linkAccess: s?.linkAccess,
-      fileCanEdit: s?.canEdit,
-      fileCanEditCanvas: s?.canEditCanvas,
-      fileCanEditIgnoreEduGracePeriod: s?.canEditIgnoreEduGracePeriod,
-      canManage: s?.canManage,
-      canView: s?.canView,
-      isTeamTemplate: s?.isTeamTemplate,
-      isTryFile: s?.isTryFile,
-      viewerExportRestricted: s?.viewerExportRestricted,
-      fileHasPartialOrgUser: !!s?.currentPartialOrgUser,
-      fileHasCurrentTeamUser: !!s?.currentTeamUser,
-      hasEditRole: s?.hasEditRole?.data
-    };
-    trackFileEvent('temp_debug_set_status_view_only', s?.key, d, o);
-    let l = !1;
-    setTimeout(() => {
-      l || trackFileEvent('temp_debug_set_status_view_only_failed', s?.key, d, o);
-    }, 2e3);
-    Multiplayer.sendSetNodeStatus(e, t, r ?? '', S);
-    let [c] = await Promise.all([$$L(k, E), _$$n()]);
-    if (l = !0, canAccessFullDevMode(d)) {
-      for (let {
-        id,
-        name,
-        type,
+
+      nodeDataList.push({
+        id: nodeId,
+        name: node.name,
+        type: node.type,
         pageName,
-        prevStatus,
-        previewBackground
-      } of k) {
-        _$$f.recordStatusChange({
-          fileKey: E,
+        prevStatus: nodeStatus,
+        previewBackground,
+        isUpdated,
+      })
+    }
+  }
+
+  const isFocusViewCopyActive = isDevModeFocusViewCopyActive()
+
+  if (isReadOnly || isFocusViewCopyActive) {
+    const openFile = state.openFile
+    const debugInfo = {
+      status: statusString,
+      canAccessDevModeRaw: openFile?.canAccessFullDevMode,
+      canAccessDevModeEntryPoint: openFile?.canAccessDevModeEntryPoint,
+      canAccessDevMode: canAccessFullDevMode(state),
+      fileRepoId: openFile?.fileRepoId,
+      userOrgId: state.user?.org_id,
+      currentTeamId: state.currentTeamId,
+      currentUserOrgId: state.currentUserOrgId,
+      source: sourceForLogging,
+      numNodes: nodeIds.length,
+      editScopeType,
+      userIdForMultiplayer: userId,
+      linkAccess: openFile?.linkAccess,
+      fileCanEdit: openFile?.canEdit,
+      fileCanEditCanvas: openFile?.canEditCanvas,
+      fileCanEditIgnoreEduGracePeriod: openFile?.canEditIgnoreEduGracePeriod,
+      canManage: openFile?.canManage,
+      canView: openFile?.canView,
+      isTeamTemplate: openFile?.isTeamTemplate,
+      isTryFile: openFile?.isTryFile,
+      viewerExportRestricted: openFile?.viewerExportRestricted,
+      fileHasPartialOrgUser: !!openFile?.currentPartialOrgUser,
+      fileHasCurrentTeamUser: !!openFile?.currentTeamUser,
+      hasEditRole: openFile?.hasEditRole?.data,
+    }
+
+    trackFileEvent('temp_debug_set_status_view_only', openFile?.key, state, debugInfo)
+
+    let isMultiplayerSent = false
+    setTimeout(() => {
+      if (!isMultiplayerSent) {
+        trackFileEvent('temp_debug_set_status_view_only_failed', openFile?.key, state, debugInfo)
+      }
+    }, 2000)
+
+    Multiplayer.sendSetNodeStatus(nodeIds, status, description ?? '', userId)
+
+    const [activityIds] = await Promise.all([lookupNodeActivityIds(nodeDataList, fileKey), _$$n()])
+    isMultiplayerSent = true
+
+    if (canAccessFullDevMode(state)) {
+      for (const { id, name, type, pageName, prevStatus, previewBackground } of nodeDataList) {
+        nodeStatusTracker.recordStatusChange({
+          fileKey,
           nodeId: id,
           nodeName: name,
           nodeType: type,
-          status: t,
+          status,
           prevStatus,
-          description: r || void 0,
+          description: description || undefined,
           pageName,
           previewBackground,
-          prevActivityId: c[id] || null
-        });
+          prevActivityId: activityIds[id] || null,
+        })
       }
     }
-    for (let {
-      id,
-      type
-    } of (O(k, t, A, n, r), k)) {
-      w({
-        status: A,
-        source: n,
-        numNodesUpdated: e.length,
+
+    // Record status change activity
+    await recordStatusChangeActivity({
+      nodes: nodeDataList,
+      status,
+      statusString,
+      source: sourceForLogging,
+      description,
+    })
+
+    // Track edit status for each node
+    for (const { id, type } of nodeDataList) {
+      trackDevHandoffEditStatus({
+        status: statusString,
+        source: sourceForLogging,
+        numNodesUpdated: nodeIds.length,
         nodeId: id,
         nodeType: type,
-        isReadOnly: v,
-        description: r ?? '',
-        prevStatus: D.get(id) ?? A,
-        isEdited: P.get(id) ?? !1
-      });
-    }
-  } else {
-    if (!navigator.onLine) {
-      j('offlineSettingNodeStatus', !0, {
-        message: getI18nString('dev_handoff.status.offline')
-      });
-      return;
-    }
-    permissionScopeHandler(i, 'set-nodes-status', () => {
-      for (let {
-        id
-      } of k) {
-        let n = c.get(id);
-        n && n.setStatus(t, S, r ?? void 0);
-      }
-      fullscreenValue.triggerAction('commit');
-    });
-    let a = await $$L(k, E);
-    for (let {
-      id,
-      name,
-      type,
-      pageName,
-      prevStatus,
-      previewBackground
-    } of k) {
-      canAccessFullDevMode(d) && _$$f.recordStatusChange({
-        fileKey: E,
-        nodeId: id,
-        nodeName: name,
-        nodeType: type,
-        status: t,
-        prevStatus,
-        description: r || void 0,
-        pageName,
-        previewBackground,
-        prevActivityId: a[id] || null
-      });
-    }
-    for (let {
-      id,
-      type
-    } of (O(k, t, A, n, r), k)) {
-      w({
-        status: A,
-        source: n,
-        numNodesUpdated: e.length,
-        nodeId: id,
-        nodeType: type,
-        isReadOnly: v,
-        description: r ?? '',
-        prevStatus: D.get(id) ?? A,
-        isEdited: P.get(id) ?? !1
-      });
+        isReadOnly,
+        description: description ?? '',
+        prevStatus: prevStatusStringMap.get(id) ?? statusString,
+        isEdited: hasBeenEditedMap.get(id) ?? false,
+      })
     }
   }
-  !function (e) {
-    let t = atomStoreManager.get(_$$d);
-    let r = atomStoreManager.get(cR);
-    let n = atomStoreManager.get(hv)?.data;
-    e !== BuildStatus.BUILD || t || r || n || atomStoreManager.set(_$$d, !0);
-  }(t);
+  else {
+    if (!navigator.onLine) {
+      dispatchShowVisualBell('offlineSettingNodeStatus', true, {
+        message: getI18nString('dev_handoff.status.offline'),
+      })
+      return
+    }
+
+    permissionScopeHandler(editScopeType, 'set-nodes-status', () => {
+      for (const { id } of nodeDataList) {
+        const node = sceneGraph.get(id)
+        if (node) {
+          node.setStatus(status, userId, description ?? undefined)
+        }
+      }
+      fullscreenValue.triggerAction('commit')
+    })
+
+    const activityIds = await lookupNodeActivityIds(nodeDataList, fileKey)
+
+    for (const { id, name, type, pageName, prevStatus, previewBackground } of nodeDataList) {
+      if (canAccessFullDevMode(state)) {
+        nodeStatusTracker.recordStatusChange({
+          fileKey,
+          nodeId: id,
+          nodeName: name,
+          nodeType: type,
+          status,
+          prevStatus,
+          description: description || undefined,
+          pageName,
+          previewBackground,
+          prevActivityId: activityIds[id] || null,
+        })
+      }
+    }
+
+    // Record status change activity
+    await recordStatusChangeActivity({
+      nodes: nodeDataList,
+      status,
+      statusString,
+      source: sourceForLogging,
+      description,
+    })
+
+    // Track edit status for each node
+    for (const { id, type } of nodeDataList) {
+      trackDevHandoffEditStatus({
+        status: statusString,
+        source: sourceForLogging,
+        numNodesUpdated: nodeIds.length,
+        nodeId: id,
+        nodeType: type,
+        isReadOnly,
+        description: description ?? '',
+        prevStatus: prevStatusStringMap.get(id) ?? statusString,
+        isEdited: hasBeenEditedMap.get(id) ?? false,
+      })
+    }
+  }
+
+  // Handle atom store state
+  (function handleAtomStoreState(currentStatus: BuildStatus) {
+    const isDevModeActive = atomStoreManager.get(_$$d)
+    const isReadOnlyMode = atomStoreManager.get(cR)
+    const hasData = atomStoreManager.get(hv)?.data
+    if (currentStatus !== BuildStatus.BUILD || isDevModeActive || isReadOnlyMode || hasData) {
+      return
+    }
+    atomStoreManager.set(_$$d, true)
+  })(status)
 }
-export function $$D1(e, t) {
-  return new Date(1e3 * e.lastUpdateUnixTimestamp) > t.createdAt;
+
+export interface IsNodeUpdatedSinceActivityParams {
+  lastUpdateUnixTimestamp: number
+  createdAt: Date
 }
-export const L = $$P0;
-export const y = $$D1;
+
+/**
+ * Checks if node was updated since activity was created
+ * (Original function: $$D1)
+ */
+export function isNodeUpdatedSinceActivity({
+  lastUpdateUnixTimestamp,
+  createdAt,
+}: IsNodeUpdatedSinceActivityParams): boolean {
+  return new Date(1000 * lastUpdateUnixTimestamp) > createdAt
+}
+
+export const L = setNodeStatus
+export const y = isNodeUpdatedSinceActivity

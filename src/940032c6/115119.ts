@@ -179,7 +179,7 @@ import { Link } from '../905/438674';
 import { v as _$$v10 } from '../905/439487';
 import { ConfirmationModal } from '../905/441305';
 import { v as _$$v7 } from '../905/442517';
-import { W as _$$W3 } from '../905/442612';
+import { isBakeStarterPaywallEnabledWithoutLimit } from '../905/442612';
 import { IconButton } from '../905/443068';
 import { k as _$$k7 } from '../905/443820';
 import { J as _$$J0 } from '../905/445197';
@@ -263,13 +263,13 @@ import { Point } from '../905/736624';
 import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { A as _$$A22 } from '../905/744692';
 import { T as _$$T3 } from '../905/745591';
-import { l as _$$l4 } from '../905/745972';
+import { useWindowDimensions } from '../905/745972';
 import { ArrowPosition, DraggableModal, DraggableModalManager } from '../905/748636';
 import { H as _$$H6 } from '../905/748658';
 import { G as _$$G9 } from '../905/750789';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { g as _$$g2 } from '../905/757007';
-import { WB } from '../905/761735';
+import { getCurrentLiveGraphClient } from '../905/761735';
 import { I as _$$I3 } from '../905/783004';
 import { z as _$$z3 } from '../905/788559';
 import { c$ as _$$c$6, l6 as _$$l1, sK as _$$sK, tV as _$$tV } from '../905/794875';
@@ -293,7 +293,7 @@ import { PositioningStrategy } from '../905/858282';
 import { isVsCodeEnvironment } from '../905/858738';
 import { AuthFlowStep } from '../905/862321';
 import { h as _$$h7 } from '../905/864281';
-import { Ay as _$$Ay7 } from '../905/865071';
+import { LabelPrimitive } from '../905/865071';
 import { bL as _$$bL, c$ as _$$c$2, RT } from '../905/867927';
 import { defaultSessionLocalID, defaultSessionLocalIDString, isValidSessionLocalID, parseSessionLocalID, sessionLocalIDToString } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
@@ -315,7 +315,7 @@ import { A as _$$A16 } from '../905/925160';
 import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
 import { z as _$$z8 } from '../905/931953';
-import { q as _$$q2 } from '../905/932270';
+import { Legend } from '../905/932270';
 import { I as _$$I4 } from '../905/932503';
 import { noop } from 'lodash-es';
 import { O as _$$O } from '../905/936515';
@@ -336,7 +336,7 @@ import { d as _$$d2 } from '../905/976845';
 import { J as _$$J12 } from '../905/980942';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
-import { h1 as _$$h5 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { resourceUtils } from '../905/989992';
 import { NONE_SYMBOL as _$$H5 } from '../905/992467';
 import { h as _$$h12 } from '../905/994594';
@@ -789,7 +789,7 @@ import { Badge, BadgeColor, BadgeSize } from '../figma_app/919079';
 import { useLatestRef } from '../figma_app/922077';
 import { f as _$$f7 } from '../figma_app/924252';
 import { capitalize, formatList, slugify } from '../figma_app/930338';
-import { nh as _$$nh, Gb, Zl } from '../figma_app/933328';
+import { loadSharedStyle, useFileLibrarySubscriptions, showMissingFontNotification } from '../figma_app/933328';
 import { h as _$$h13 } from '../figma_app/935454';
 import { dA as _$$dA, U_, VR, Ws, zq } from '../figma_app/938628';
 import { Ay as _$$Ay3 } from '../figma_app/948389';
@@ -1955,7 +1955,7 @@ function iO({
     children: jsxs(_$$bL, {
       value: t,
       onChange: i,
-      legend: jsx(_$$q2, {
+      legend: jsx(Legend, {
         children: getI18nString('sites.panel.code_window_display_picker.hidden_legend')
       }),
       recordingKey: generateRecordingKey('codeWindow', 'panelConfiguration'),
@@ -2151,7 +2151,7 @@ function iD({
     let [{
       windowInnerWidth: t,
       windowInnerHeight: i
-    }] = useDebounce(_$$l4(), 300, {
+    }] = useDebounce(useWindowDimensions(), 300, {
       equalityFn: deepEqual
     });
     let [n, l] = useAtomValueAndSetter(_$$yq);
@@ -2676,7 +2676,7 @@ function nI() {
   let o = $Y(r);
   let d = !s?.canEdit;
   let c = s && s.teamId && a;
-  let u = !!(d && c && _$$W3());
+  let u = !!(d && c && isBakeStarterPaywallEnabledWithoutLimit());
   return (useSingleEffect(() => {
     u && show();
   }), u && r) ? jsx(_$$c7, {
@@ -4235,7 +4235,7 @@ function sp({
               label: getI18nString('sites.toolbar.publish_modal.last_published_header'),
               content: jsxs('div', {
                 className: cssBuilderInstance.flex.itemsCenter.$,
-                children: [jsx(_$$h5, {
+                children: [jsx(RelativeTimeDisplay, {
                   date: d,
                   capitalize: !0
                 }), x && jsxs('span', {
@@ -5065,7 +5065,7 @@ function s5({
         children: jsxs(_$$bL, {
           'size': 'lg',
           'value': e,
-          'legend': jsx(_$$q2, {
+          'legend': jsx(Legend, {
             children: getI18nString('figmake.panel.display_picker.hidden_legend')
           }),
           'onChange': e => {
@@ -7500,7 +7500,7 @@ function oY({
               i(!1);
             });
             let l = getResourceDataOrFallback(_.data?.siteMount)?.siteDomain?.id ?? '';
-            WB()?.optimisticallyUpdate({
+            getCurrentLiveGraphClient()?.optimisticallyUpdate({
               SiteDomain: {
                 [l]: {
                   domain: `${c}${o}`
@@ -7717,7 +7717,7 @@ function oQ({
         className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
         children: renderI18nText('sites.toolbar.publish_modal.last_published_header')
       }), jsxs('div', {
-        children: [jsx(_$$h5, {
+        children: [jsx(RelativeTimeDisplay, {
           date: lastPublishedAt,
           capitalize: !0
         }), publishedBy && jsxs(Fragment, {
@@ -8079,7 +8079,7 @@ let ds = registerModal(e => {
                 fileKey,
                 domainVerified: o
               });
-              WB()?.optimisticallyDelete({
+              getCurrentLiveGraphClient()?.optimisticallyDelete({
                 SiteDomain: {
                   [r?.customDomain?.id ?? '']: null
                 }
@@ -8230,7 +8230,7 @@ function dm({
         fileKey: e
       });
       let n = a?.customDomain?.pairedDomain?.id;
-      n && WB()?.optimisticallyDelete({
+      n && getCurrentLiveGraphClient()?.optimisticallyDelete({
         SiteDomain: {
           [n]: null
         }
@@ -8835,7 +8835,7 @@ function dz({
     }), m && !e) {
       h(!1);
       try {
-        let e = WB();
+        let e = getCurrentLiveGraphClient();
         if (e) {
           await e.optimisticallyUpdate({
             SiteMount: {
@@ -8889,7 +8889,7 @@ function dz({
     f(!1);
     k(null);
     try {
-      let e = WB();
+      let e = getCurrentLiveGraphClient();
       if (e) {
         let n = `optimistic-pwd-config-${t}`;
         await e.optimisticallyCreate({
@@ -17106,7 +17106,7 @@ function h0(e) {
   let m = !x;
   let {
     windowInnerHeight
-  } = _$$l4();
+  } = useWindowDimensions();
   let [_, y] = useAtomValueAndSetter(_$$Yu);
   let [v, j] = useAtomValueAndSetter(_$$o7);
   let {
@@ -17661,7 +17661,7 @@ function h9() {
   let g = _$$g_ + _$$_4;
   let {
     windowInnerWidth
-  } = _$$l4();
+  } = useWindowDimensions();
   return e ? jsx(nH, {
     children: i ? jsxs(Fragment, {
       children: [jsx(h7, {}), jsx(iF, {
@@ -17714,7 +17714,7 @@ function gl() {
     className: 'xkotu8v x1rdy4ex',
     children: jsxs(_$$bL, {
       value: e === pf.CONNECT ? 'connect' : 'edit',
-      legend: jsx(_$$q2, {
+      legend: jsx(Legend, {
         children: renderI18nText('dakota.table_view.mode_toggle_switch.alt_text')
       }),
       onChange: e => {
@@ -18400,7 +18400,7 @@ function gL(e) {
   let [I, E] = useAtomValueAndSetter(_$$h10);
   let {
     windowInnerHeight
-  } = _$$l4();
+  } = useWindowDimensions();
   let A = q0({
     scrollContainerInnerRef: y,
     windowInnerHeight
@@ -19316,7 +19316,7 @@ function fs() {
           },
           children: [jsxs('div', {
             className: 'x1eimmx0 x1ov5mx2 xrvj5dj x1o61qjw x1plvh44 x1ti6jby x6s0dn4',
-            children: [jsx(_$$Ay7, {
+            children: [jsx(LabelPrimitive, {
               className: 'x1n0bwc9',
               htmlFor: 'breakpoint-name',
               children: getI18nString('sites.add_breakpoint_modal.name')
@@ -19326,7 +19326,7 @@ function fs() {
               'onChange': c,
               'autoFocus': !0,
               'data-1p-ignore': !0
-            }), jsx(_$$Ay7, {
+            }), jsx(LabelPrimitive, {
               className: 'x1n0bwc9',
               htmlFor: 'breakpoint-width',
               children: getI18nString('sites.add_breakpoint_modal.width')
@@ -20024,7 +20024,7 @@ function fq(e) {
       children: [jsx(_$$bL, {
         onChange: x,
         value: i,
-        legend: jsx(_$$q2, {
+        legend: jsx(Legend, {
           children: getI18nString('sites.preview.layouts')
         }),
         children: (o || []).map(e => jsx(_$$c$2, {
@@ -21202,7 +21202,7 @@ function _B({
   let {
     windowInnerWidth,
     windowInnerHeight
-  } = _$$l4();
+  } = useWindowDimensions();
   let S = fU();
   let C = useCallback(() => {
     let e = [];
@@ -21388,7 +21388,7 @@ function _X({
     let {
       windowInnerWidth,
       windowInnerHeight
-    } = _$$l4();
+    } = useWindowDimensions();
     let l = getFileTypePx();
     let [s, r] = useState(() => _r(windowInnerWidth, e.x));
     let [o, d] = useState(() => _o(windowInnerHeight, l, e.y));
@@ -22490,11 +22490,11 @@ function ya({
       inheritStyleKey: p,
       minBottomMargin: 4,
       onApplyStyle: (e, t) => {
-        o != null && e.key && e.content_hash && n(_$$nh({
+        o != null && e.key && e.content_hash && n(loadSharedStyle({
           style: e,
           callback: (e, t) => {
             if (t) {
-              Zl(n);
+              showMissingFontNotification(n);
               return;
             }
             _$$l.user('update-cms-rich-text-style-mapping', () => {
@@ -23352,7 +23352,7 @@ function vo({
   onChange: n
 }) {
   return jsxs(_$$bL, {
-    legend: jsx(_$$q2, {
+    legend: jsx(Legend, {
       children: getI18nString('fullscreen.type_panel.align_horizontal')
     }),
     value: t,
@@ -23385,7 +23385,7 @@ function vd({
     onChange: n,
     readonly: i,
     recordingKey: e,
-    legend: jsx(_$$q2, {
+    legend: jsx(Legend, {
       children: getI18nString('fullscreen.type_panel.align_vertical')
     }),
     children: [jsx(_$$c$2, {
@@ -26225,7 +26225,7 @@ function w_({
   return jsxs(_$$bL, {
     value: n,
     onChange: s,
-    legend: jsx(_$$q2, {
+    legend: jsx(Legend, {
       children: getI18nString('sites.panel.interactions_panel.replay_label')
     }),
     recordingKey: i,
@@ -27380,7 +27380,7 @@ function SN(e) {
       children: [jsx(k5, {
         label: renderI18nText('sites.panel.interactions_panel.marquee_direction'),
         input: jsxs(_$$bL, {
-          legend: jsx(_$$q2, {
+          legend: jsx(Legend, {
             children: getI18nString('sites.panel.interactions_panel.marquee_direction')
           }),
           value: o,
@@ -27446,7 +27446,7 @@ function SN(e) {
       }), jsx(k5, {
         label: renderI18nText('sites.panel.interactions_panel.marquee_infinite'),
         input: jsxs(_$$bL, {
-          legend: jsx(_$$q2, {
+          legend: jsx(Legend, {
             children: getI18nString('sites.panel.interactions_panel.marquee_direction')
           }),
           value: !isInvalidValue(c) && c ? 'TRUE' : 'FALSE',
@@ -30827,7 +30827,7 @@ let T2 = memo(({
   let O = P.find(e => e.userID === A?.userID)?.sitesViewState ?? null;
   let F = Ww();
   let M = NB(L);
-  Gb(_);
+  useFileLibrarySubscriptions(_);
   (function () {
     let e = performance.now();
     let t = useIsFullscreenReady();

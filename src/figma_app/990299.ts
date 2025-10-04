@@ -6,7 +6,7 @@ import { fileImporter } from "../905/642505";
 import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
 import { PageFolderFile } from "../905/652992";
-import { Mk } from "../905/163189";
+import { SUPPORTED_FILE_TYPES } from "../905/163189";
 import { fileActionEnum } from "../figma_app/630077";
 import { O } from "../905/174367";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
@@ -16,7 +16,7 @@ let $$g0 = createOptimistThunk(e => {
   let t = e.getState();
   let r = getSelectedFolder(t);
   let n = r && r.team_id && t.teams[r.team_id];
-  n && Mk.every(e => !checkTeamFileRestrictions(n, {
+  n && SUPPORTED_FILE_TYPES.every(e => !checkTeamFileRestrictions(n, {
     type: AddOperationType.ADD_FILE,
     editorType: e
   })) ? e.dispatch(showModalHandler({

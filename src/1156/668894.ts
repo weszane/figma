@@ -7,7 +7,7 @@ import { textDisplayConfig } from "../905/687265";
 import { stylex } from "@stylexjs/stylex";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { liveStoreInstance } from "../905/713695";
@@ -24,7 +24,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
 import { Link } from "../905/438674";
-import { b as _$$b, c as _$$c } from "../905/308099";
+import { RadioInputRoot, RadioInputOption } from "../905/308099";
 import { Label } from "../905/270045";
 import { C as _$$C } from "../905/520159";
 import { showModalHandler } from "../905/156213";
@@ -42,7 +42,7 @@ function q({
   setProjectIdToPause: n
 }) {
   let i = useAtomWithSubscription(kz);
-  return jsx(_$$b, {
+  return jsx(RadioInputRoot, {
     legend: jsx("p", {
       ...stylex.props(U.textBodyMediumStrong),
       children: getI18nString("figmake.settings.pause_project.radio.label")
@@ -50,7 +50,7 @@ function q({
     value: t,
     onChange: n,
     readonly: !!i,
-    children: e.map(e => jsx(_$$c, {
+    children: e.map(e => jsx(RadioInputOption, {
       value: e.id,
       label: jsx(Label, {
         children: jsx($, {
@@ -70,7 +70,7 @@ function $({
     }), jsx("p", {
       ...stylex.props(U.textBodyMediumSecondary),
       children: renderI18nText("figmake.settings.pause_project.created", {
-        timestamp: jsx(h1, {
+        timestamp: jsx(RelativeTimeDisplay, {
           date: e.created_at
         })
       })
@@ -534,7 +534,7 @@ function Y({
           }), jsx("span", {
             ...stylex.props(Q.textBodyMediumSecondary),
             children: renderI18nText("figmake.settings.pause_project.created", {
-              timestamp: jsx(h1, {
+              timestamp: jsx(RelativeTimeDisplay, {
                 date: e.created_at
               })
             })

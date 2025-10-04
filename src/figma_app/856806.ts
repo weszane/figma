@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
 import { s9 } from "../figma_app/913823";
-import { Xh, M7 } from "../figma_app/933328";
+import { loadingStateGroupsAtom, loadingPublishedComponentsAtom } from "../figma_app/933328";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { openFileLibraryKeyAtom, useCurrentFileKey } from "../figma_app/516028";
 import { useLibraries } from "../905/420347";
@@ -250,9 +250,9 @@ export function $$D1() {
     atomStoreManager.set(mO, null);
   }, [e]);
   let t = $$N3();
-  let r = useAtomWithSubscription(Xh);
+  let r = useAtomWithSubscription(loadingStateGroupsAtom);
   let a = useAtomWithSubscription(s9);
-  let l = useAtomWithSubscription(M7);
+  let l = useAtomWithSubscription(loadingPublishedComponentsAtom);
   let [u] = setupResourceAtomHandler(P({
     assetKeys: Array.from(t)
   }), {

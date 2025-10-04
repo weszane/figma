@@ -1,7 +1,7 @@
 import { Fullscreen, AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
 import { FEditorType } from "../figma_app/53721";
-import { XC } from "../905/512783";
+import { CommentPinElement } from "../905/512783";
 import { computeFullscreenViewportForNode, viewportToScreen } from "../figma_app/62612";
 import { rY4, PXB } from "../figma_app/27776";
 let d = parsePxInt(rY4) + parsePxInt(PXB);
@@ -60,7 +60,7 @@ let m = e => {
   let {
     width,
     height
-  } = XC.getPinSize(new Set(e.comments.map(e => e.user_id)).size);
+  } = CommentPinElement.getPinSize(new Set(e.comments.map(e => e.user_id)).size);
   let a = {
     origin: {
       x: canvasPosition.x,

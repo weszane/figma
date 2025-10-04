@@ -7,7 +7,7 @@ import { R as _$$R } from '../905/57445';
 import { selectWithShallowEqual } from '../905/103090';
 import { KindEnum } from '../905/129884';
 import { permissionScopeHandler } from '../905/189185';
-import { nt, o3 } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { fd, K8, LC, Me, Q_, RH, t$, UD, uZ, V_, YM } from '../905/246565';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { i as _$$i } from '../905/415810';
@@ -97,7 +97,7 @@ export function $$H0(e) {
     })));
   }, [containingProductComponentGUID, def, V]);
   let Q = dropdownShown?.type === G;
-  let ee = o3(nt.variablePillA11y) && !0;
+  let ee = useLabConfiguration(labConfigurations.variablePillA11y) && !0;
   let et = useRef(null);
   let er = _$$R(et);
   if (!def) return null;
@@ -235,7 +235,7 @@ function K(e) {
     nodeField,
     label
   } = e;
-  let h = o3(nt.variablePillA11y);
+  let h = useLabConfiguration(labConfigurations.variablePillA11y);
   let {
     ui3FirstButton,
     ui3SecondButton

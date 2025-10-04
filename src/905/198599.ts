@@ -29,7 +29,7 @@ import { fileVersionSelector, fileByKeySelector } from "../905/91038";
 import { FEditorType } from "../figma_app/53721";
 import { searchAPIHandler } from "../905/144933";
 import { getUUID } from "../figma_app/517115";
-import { cY, I1 } from "../figma_app/825489";
+import { getLibrarySubscriptionAtom, subscribedLibrariesAtom } from "../figma_app/825489";
 import { I as _$$I } from "../figma_app/130633";
 import { lj } from "../905/991973";
 import { Ci } from "../figma_app/318590";
@@ -75,8 +75,8 @@ export async function $$H1(e, t) {
   let d = fileVersionSelector(i);
   let g = B0();
   let f = await Ci("input-text" === e.type);
-  let C = atomStoreManager.get(cY("fileKey"));
-  let P = atomStoreManager.get(cY("libraryKey"));
+  let C = atomStoreManager.get(getLibrarySubscriptionAtom("fileKey"));
+  let P = atomStoreManager.get(getLibrarySubscriptionAtom("libraryKey"));
   let L = isFigmakeFullscreenView(i.selectedView) ? "figmake" : "input-text" === e.type ? "actions_assets_tab" : "actions_visual_search";
   if (!n || null == d) return;
   let U = generateUUIDv4();
@@ -177,7 +177,7 @@ export async function $$H1(e, t) {
         subscribedSearchResultCount: a.length,
         entryPoint: L,
         fileKey: n?.key,
-        numSubscribedLibraries: atomStoreManager.get(I1).data?.length ?? 0,
+        numSubscribedLibraries: atomStoreManager.get(subscribedLibrariesAtom).data?.length ?? 0,
         queryType: h.type.replace("input-", ""),
         selectedViewFileKey: "fullscreen" === i.selectedView.view && i.selectedView.fileKey ? i.selectedView.fileKey : void 0,
         totalShownResults: a.length,

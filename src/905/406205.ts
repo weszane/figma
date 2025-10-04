@@ -35,7 +35,7 @@ import { Z as _$$Z } from "../905/622097";
 import { i as _$$i } from "../905/610691";
 import { L as _$$L } from "../905/13390";
 import { selectViewAction, showDropdownThunk } from "../905/929976";
-import { zE as _$$zE } from "../905/738636";
+import { createNewFileWithRestrictions } from "../905/738636";
 import { setLastVisitedId } from "../905/93909";
 import { an, y$ } from "../905/81009";
 import { trackFolderEvent } from "../figma_app/314264";
@@ -53,7 +53,7 @@ import { mapProjectProperties } from "../figma_app/349248";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
 import { ViewTypeEnum } from "../figma_app/471068";
-import { F as _$$F } from "../905/915030";
+import { ComFileType } from "../905/915030";
 import { KindEnum } from "../905/129884";
 import { EXTERNAL_TEAMS } from "../905/200237";
 import { X as _$$X } from "../905/718513";
@@ -402,7 +402,7 @@ function ey(e) {
           }
         }
       }), t(an()), t(y$({
-        type: _$$F.FILES,
+        type: ComFileType.FILES,
         tiles: [h]
       })));
     },
@@ -442,7 +442,7 @@ function eb(e) {
     onClick: n => {
       n.preventDefault();
       n.stopPropagation();
-      e.canCreateFile && t(_$$zE({
+      e.canCreateFile && t(createNewFileWithRestrictions({
         state: i,
         editorType: FFileType.DESIGN,
         folderId: e.folder.id,

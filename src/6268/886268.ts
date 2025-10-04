@@ -64,7 +64,7 @@ import { WAFImage } from "../905/675859";
 import { f as _$$f3 } from "../figma_app/258006";
 import { G as _$$G, A as _$$A4 } from "../1250/975106";
 import { bL as _$$bL, RT } from "../905/867927";
-import { q as _$$q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -1184,7 +1184,7 @@ function no({
   return jsx(_$$bL, {
     value: e.installMethod,
     onChange: n,
-    legend: jsx(_$$q, {
+    legend: jsx(Legend, {
       children: getI18nString("dev_handoff.codebase_suggestions.installation_methods")
     }),
     children: o.map(e => jsx(RT, {

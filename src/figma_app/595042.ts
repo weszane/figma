@@ -1,7 +1,7 @@
 import { decodeBinarySchema, createKiwiCodec } from "../figma_app/870879";
-import { Q_, cq, Eo, SR, ut } from "../905/35608";
+import { FIG_KIWI, FIG_JAM, FIG_DIFF, FIG_DECA, FIG_SITE } from "../905/35608";
 import { z1, BX } from "../figma_app/153199";
-let s = [Q_, cq, Eo, SR, ut];
+let s = [FIG_KIWI, FIG_JAM, FIG_DIFF, FIG_DECA, FIG_SITE];
 export function $$o1(e) {
   let t = String.fromCharCode(...e.subarray(0, 8));
   if (!s.includes(t)) throw Error("Unsupported file type");
@@ -10,7 +10,7 @@ export function $$o1(e) {
 async function l(e, t, r) {
   if (0 === e.length) throw Error("Empty file");
   let s = new DataView(e.buffer);
-  let o = Q_.length;
+  let o = FIG_KIWI.length;
   if (o + 4 > e.length) throw Error("Missing version");
   let l = s.getUint32(o, !0);
   o += 4;

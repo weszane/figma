@@ -42,7 +42,7 @@ import { EH, ji, xo as _$$xo, MC, l0, zp } from "../figma_app/847014";
 import { createLoadedState, getResourceDataOrFallback } from "../905/723791";
 import { Bl } from "../figma_app/967857";
 import { IntegrationUtils } from "../figma_app/469876";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { openFileAtom, selectCurrentFile, useCurrentFileKey, useFullscreenViewFile, openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { modalTypeAtom } from "../figma_app/386952";
 import { I as _$$I } from "../figma_app/51637";
@@ -139,7 +139,7 @@ import { styleBuilderInstance } from "../905/941192";
 import { browserCapabilities } from "../905/409121";
 import ix from "classnames";
 import { CloseButton } from "../905/17223";
-import { Hz, Un, jg, Am } from "../figma_app/591738";
+import { isTruthy, isCommunityHomeShelfEnabled, CommunityHomeShelfMode, communityHomeShelfModeAtom } from "../figma_app/591738";
 import { Rf } from "../905/856036";
 import { sendWithRetry } from "../905/910117";
 import { w as _$$w3 } from "../3276/279527";
@@ -174,9 +174,9 @@ import { Q as _$$Q3 } from "../1250/220026";
 import { useLatestRef } from "../figma_app/922077";
 import { SvgComponent } from "../905/714743";
 import { Ji } from "../figma_app/972736";
-import { zE } from "../905/738636";
+import { createNewFileWithRestrictions } from "../905/738636";
 import { Fz } from "../figma_app/106207";
-import { g as _$$g } from "../figma_app/115586";
+import { useIsFullscreenReady } from "../figma_app/115586";
 import { B as _$$B2 } from "../905/524020";
 import { a6 as _$$a2, RD } from "../figma_app/198840";
 import { n as _$$n } from "../905/79930";
@@ -198,7 +198,7 @@ import { getStorage } from "../905/657224";
 import { SEEN_TRY_ONBOARDING_KEY } from "../figma_app/107215";
 import { setTagGlobal, captureMessage } from "../905/11";
 import { XZ } from "../figma_app/176973";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { kd, mW } from "../figma_app/797994";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { setupResourceAtomHandler } from "../905/713695";
@@ -1604,7 +1604,7 @@ function iw() {
     overlay: Smd,
     priority: _$$N.SECONDARY_MODAL,
     experiment: {
-      check: () => Hz(t ?? void 0),
+      check: () => isTruthy(t ?? void 0),
       predicate: e => e,
       postCheck: e => !e
     }
@@ -1796,7 +1796,7 @@ function i$(e) {
   }), () => t({
     eventName: "pan_zoom_completed"
   })), [t]);
-  let i = Un();
+  let i = isCommunityHomeShelfEnabled();
   return jsx(iF, {
     children: jsx(Dv, {
       targetType: "dom",
@@ -1831,7 +1831,7 @@ let i1 = buildUploadUrl("4e36d3bbbf8633fef1b86238f66bb1bf54f54d2a");
 function i2(e) {
   let t = BrowserInfo.mac ? getI18nString("rcs.figjam_onboarding.cmd") : getI18nString("rcs.figjam_onboarding.ctrl");
   let i = _$$v3() ? -10 : -3;
-  let a = Un();
+  let a = isCommunityHomeShelfEnabled();
   let s = _$$O2();
   useEffect(() => {
     s({
@@ -1884,7 +1884,7 @@ function i3(e) {
   });
 }
 function i5(e) {
-  let t = Un();
+  let t = isCommunityHomeShelfEnabled();
   return jsx(OnboardingModal, {
     testId: e.testId ? e.testId : "HandToolConnectorOverlay",
     modalType: OverlayType.SELF_CONTAINED,
@@ -4151,7 +4151,7 @@ let ni = e => {
   useEffect(() => (d(!0), () => {
     d(!1);
   }), [d]);
-  let c = _$$g();
+  let c = useIsFullscreenReady();
   useEffect(() => (c && WhiteboardStarterKitCppBindings?.setFigjamStarterKitEnabled(!0), () => {
     WhiteboardStarterKitCppBindings?.setFigjamStarterKitEnabled(!1);
   }), [c]);
@@ -4290,7 +4290,7 @@ let nn = _$$n2(({
   let t = Xr(_$$w5);
   let i = useDispatch();
   let r = useIsProgressBarHiddenOrLocked();
-  let a = _$$g();
+  let a = useIsFullscreenReady();
   let o = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   let {
     hubFiles,
@@ -4361,7 +4361,7 @@ function na(e) {
     let r = i?.get(t);
     return !r || !r.childCount || r.childrenAreAllGhosts;
   });
-  let i = Un();
+  let i = isCommunityHomeShelfEnabled();
   let a = _$$O2();
   let s = !i || t;
   let o = s ? "banner" : "popup";
@@ -4617,7 +4617,7 @@ function no(e) {
     templateInsertionLocation: RD.NEW_FILE,
     onHideModal,
     onClickUseCaseTile(e) {
-      l(zE({
+      l(createNewFileWithRestrictions({
         state: d,
         from: FileBrowserLocation.FIGJAM_MAKE_SOMETHING_POPUP,
         editorType: FFileType.WHITEBOARD,
@@ -4805,12 +4805,12 @@ let nm = "figjam_unified_onboarding_product";
 let nf = "figjam_unified_onboarding_pz";
 function ng(e) {
   handleAtomEvent({
-    id: e === jg.PRODUCT_THEN_PZ ? nm : nf
+    id: e === CommunityHomeShelfMode.PRODUCT_THEN_PZ ? nm : nf
   });
 }
 let n_ = [i3, i5];
 function nx() {
-  let e = useAtomWithSubscription(Am);
+  let e = useAtomWithSubscription(communityHomeShelfModeAtom);
   let {
     show,
     uniqueId,
@@ -4822,10 +4822,10 @@ function nx() {
   });
   let l = r_(useCallback(() => {
     complete();
-    e === jg.PZ_THEN_PRODUCT && handleAtomEvent({
+    e === CommunityHomeShelfMode.PZ_THEN_PRODUCT && handleAtomEvent({
       id: nm
     });
-    e === jg.PRODUCT_THEN_PZ && handleAtomEvent({
+    e === CommunityHomeShelfMode.PRODUCT_THEN_PZ && handleAtomEvent({
       id: rf
     });
   }, [complete, e]));
@@ -4840,7 +4840,7 @@ function nx() {
   });
 }
 function ny() {
-  let e = useAtomWithSubscription(Am);
+  let e = useAtomWithSubscription(communityHomeShelfModeAtom);
   let t = useAtomWithSubscription(_$$w5);
   let {
     show,
@@ -4856,10 +4856,10 @@ function ny() {
     show();
   });
   useEffect(() => {
-    t === _$$tX2.COMPLETED && e === jg.PRODUCT_THEN_PZ && handleAtomEvent({
+    t === _$$tX2.COMPLETED && e === CommunityHomeShelfMode.PRODUCT_THEN_PZ && handleAtomEvent({
       id: nf
     });
-    t === _$$tX2.COMPLETED && e === jg.PZ_THEN_PRODUCT && handleAtomEvent({
+    t === _$$tX2.COMPLETED && e === CommunityHomeShelfMode.PZ_THEN_PRODUCT && handleAtomEvent({
       id: rf
     });
   }, [t, e]);
@@ -5007,7 +5007,7 @@ function nB() {
       i.current?.();
     }, []), r.current) ? r.current : null == i.current || null == a.current ? (r.current = new Promise(n => {
       i.current?.();
-      i.current = WB().subscribe(e, t, e => {
+      i.current = getCurrentLiveGraphClient().subscribe(e, t, e => {
         ("loaded" === e.status || e.errors) && (a.current = e, n(a.current), r.current = void 0);
       });
     }), r.current) : Promise.resolve(a.current);
@@ -5091,7 +5091,7 @@ function nz({
 }) {
   let t = useAtomWithSubscription(l5);
   let i = useAtomWithSubscription(zo);
-  let n = useAtomWithSubscription(Am);
+  let n = useAtomWithSubscription(communityHomeShelfModeAtom);
   return t !== fD.NONE ? null : ("loaded" !== i.status || i.data) && !n ? jsx(nY, {
     openFile: e
   }) : jsx(nW, {
@@ -5100,7 +5100,7 @@ function nz({
 }
 let nV = (e, t) => {
   let i = useFullscreenViewFile();
-  let r = Xr(Am);
+  let r = Xr(communityHomeShelfModeAtom);
   let a = Xr(_$$w5);
   let o = useAtomWithSubscription(zo);
   let l = useIsProgressBarHiddenOrLocked();
@@ -5125,12 +5125,12 @@ function nW({
   let a = useAtomWithSubscription(zo);
   let o = userFlagAtomFamily("interacted_figjam_whats_new_v2_cta");
   let l = useAtomWithSubscription(o);
-  let d = Xr(Am);
+  let d = Xr(communityHomeShelfModeAtom);
   let {
     getConfig
   } = useUserFlagExperimentConfig("exposed_exp_figjam_unified_onboarding", "figjam_unified_onboarding");
   let u = useCallback(() => {
-    let e = getConfig().get("sequence", jg.DEFAULT);
+    let e = getConfig().get("sequence", CommunityHomeShelfMode.DEFAULT);
     d(e);
     return e;
   }, [getConfig, d]);
@@ -5147,7 +5147,7 @@ function nW({
     priority: _$$N.OVERRIDING_MODAL,
     experiment: {
       check: u,
-      predicate: e => e !== jg.DEFAULT,
+      predicate: e => e !== CommunityHomeShelfMode.DEFAULT,
       postCheck: e => (e || nK() || m(!0), !1)
     }
   }, [a, l]);
@@ -5164,7 +5164,7 @@ function nW({
     priority: _$$N.OVERRIDING_MODAL,
     experiment: {
       check: u,
-      predicate: e => e === jg.DEFAULT,
+      predicate: e => e === CommunityHomeShelfMode.DEFAULT,
       postCheck: (t, i) => {
         let r = nH({
           isTemplateFile: nM({
@@ -5181,20 +5181,20 @@ function nW({
       }
     }
   }, [a, l]);
-  let k = experimentResult || jg.DEFAULT;
-  let N = k === jg.DEFAULT ? _isShowing2 : isShowing;
-  let A = k === jg.DEFAULT ? _complete2 : complete;
-  let O = useMemo(() => k === jg.DEFAULT ? _ : [], [k, _]);
+  let k = experimentResult || CommunityHomeShelfMode.DEFAULT;
+  let N = k === CommunityHomeShelfMode.DEFAULT ? _isShowing2 : isShowing;
+  let A = k === CommunityHomeShelfMode.DEFAULT ? _complete2 : complete;
+  let O = useMemo(() => k === CommunityHomeShelfMode.DEFAULT ? _ : [], [k, _]);
   nV(uniqueId, useCallback(() => {
     show();
     _show();
   }, [show, _show]));
   let L = r_(A);
   let R = useCallback(() => {
-    k === jg.DEFAULT ? L() : h && (A(), ng(k));
+    k === CommunityHomeShelfMode.DEFAULT ? L() : h && (A(), ng(k));
   }, [L, A, h, k]);
   return (useEffect(() => {
-    0 === O.length && h && k !== jg.DEFAULT && ng(k);
+    0 === O.length && h && k !== CommunityHomeShelfMode.DEFAULT && ng(k);
   }, [h, O, k]), experimentResult && N && 0 !== O.length) ? jsx(ry, {
     steps: O,
     onComplete: R,
@@ -5292,7 +5292,7 @@ function n$() {
   let t = useAtomWithSubscription(e);
   let i = useAtomWithSubscription(nX);
   let [a, o] = useState(!1);
-  let l = Un();
+  let l = isCommunityHomeShelfEnabled();
   let {
     show,
     isShowing,
@@ -7805,7 +7805,7 @@ function s6(e) {
     onAbort
   } = e;
   useEffect(() => {
-    !t && isShowing && (Hz(r) ? i(!0) : onAbort());
+    !t && isShowing && (isTruthy(r) ? i(!0) : onAbort());
   }, [i, t, isShowing, onAbort, r]);
   return t ? e.children : null;
 }
@@ -8440,7 +8440,7 @@ export let $$le0 = memo(function ({
   let d = useFullscreenViewFile();
   let c = useAtomWithSubscription(modalTypeAtom);
   let u = _$$I();
-  return z4.getIsExtension() || "loaded" !== d.status || IntegrationUtils.isGoogleClassroomIntegration() || c === _$$E4 || c === _$$XC || isDevModeEditor && u ? null : jsxs(Suspense, {
+  return fullscreenAlias.getIsExtension() || "loaded" !== d.status || IntegrationUtils.isGoogleClassroomIntegration() || c === _$$E4 || c === _$$XC || isDevModeEditor && u ? null : jsxs(Suspense, {
     fallback: null,
     children: [jsx(lt, {
       openFile: t,

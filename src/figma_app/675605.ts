@@ -2,11 +2,11 @@ import { M } from "../905/637515";
 import { Uc, iZ } from "../figma_app/968444";
 import { getInitialOptions } from "../figma_app/169182";
 import { pP, xC, IL, No, eb, NF, cy, QI } from "../905/392533";
-import { Dz } from "../figma_app/847915";
+import { getActionOrName } from "../figma_app/847915";
 import { of } from "../figma_app/291792";
 import { b$ } from "../figma_app/805925";
 import { Wy } from "../figma_app/952446";
-import { nt } from "../905/226610";
+import { labConfigurations } from "../905/226610";
 import { xm } from "../figma_app/826288";
 import { browserCapabilities } from "../905/409121";
 export let $$n0;
@@ -55,7 +55,7 @@ class m {
       return t && t.callback && this.store?.dispatch ? (console.log("[CustomKeyboardShortcut] found action and running callback", {
         menuItem: t,
         itemDisplayText: e
-      }), () => t.callback(Dz(t), t.args, this.store.dispatch)) : (console.warn("[CustomKeyboardShortcut] could not find item for given action", {
+      }), () => t.callback(getActionOrName(t), t.args, this.store.dispatch)) : (console.warn("[CustomKeyboardShortcut] could not find item for given action", {
         menuItem: t,
         itemDisplayText: e
       }), null);
@@ -63,7 +63,7 @@ class m {
     this.store = e.store;
   }
   getCustomKeyboardShortcuts() {
-    if (!this.store || !nt.customKeyboardShortcuts.getValue()) return [];
+    if (!this.store || !labConfigurations.customKeyboardShortcuts.getValue()) return [];
     let e = Uc();
     let t = [];
     Object.entries(e).forEach(([e, {

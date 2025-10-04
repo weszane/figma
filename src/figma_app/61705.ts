@@ -8,7 +8,7 @@ import { getUserId } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { TabOpenBehavior } from "../figma_app/915202";
 import { P4 } from "../figma_app/911880";
-import { zE } from "../905/738636";
+import { createNewFileWithRestrictions } from "../905/738636";
 export function $$h1({
   newFileFrom: e,
   isDraftsFolder: t,
@@ -31,7 +31,7 @@ export function $$h1({
     contextClicked: i,
     triggerElement: a
   }) => l => {
-    f(zE({
+    f(createNewFileWithRestrictions({
       state: g,
       editorType: n,
       triggerElement: a,

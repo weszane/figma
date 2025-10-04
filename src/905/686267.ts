@@ -1,16 +1,27 @@
-import { mapStyleProperties } from "../figma_app/349248";
-export function $$r0(e) {
-  let t = [];
-  if (e?.status === "loaded") {
-    let i = e.data.communityLibraryByHubFileId;
-    if (i?.libraryHierarchyPaths) for (let e of i.libraryHierarchyPaths) for (let r of e.styles) t.push(mapStyleProperties(r, {
-      type: "hubFile",
-      file: {
-        id: i.hubFileId,
-        libraryKey: i.libraryKey
+import { mapStyleProperties } from "../figma_app/349248"
+
+export function extractHubFileStyles(data: any) {
+  const styles: any[] = []
+
+  if (data?.status === "loaded") {
+    const library = data.data.communityLibraryByHubFileId
+
+    if (library?.libraryHierarchyPaths) {
+      for (const hierarchyPath of library.libraryHierarchyPaths) {
+        for (const style of hierarchyPath.styles) {
+          styles.push(mapStyleProperties(style, {
+            type: "hubFile",
+            file: {
+              id: library.hubFileId,
+              libraryKey: library.libraryKey,
+            },
+          }))
+        }
       }
-    }));
+    }
   }
-  return t;
+
+  return styles
 }
-export const F = $$r0;
+
+export const F = extractHubFileStyles

@@ -7,7 +7,7 @@ import { setupThemeContext } from "../905/614223";
 import { buildUploadUrl } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { zE } from "../905/738636";
+import { createNewFileWithRestrictions } from "../905/738636";
 import { postUserFlag } from "../905/985254";
 import { w as _$$w } from "../0c62c2fd/912149";
 import { B } from "../905/524020";
@@ -144,7 +144,7 @@ export function $$j0(e) {
             t(postUserFlag({
               interacted_figjam_whats_new_v2_cta: !0
             }));
-            t(zE({
+            t(createNewFileWithRestrictions({
               state: n,
               editorType: FFileType.WHITEBOARD,
               team: void 0,

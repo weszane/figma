@@ -1,6 +1,6 @@
 import { A as _$$A } from "../vendor/711679";
 import { lG, c, gH, ZL } from "../vendor/850605";
-import { xW } from "../vendor/776654";
+import { Tok } from "../vendor/776654";
 import { O5 } from "../vendor/663074";
 import { j } from "../vendor/171112";
 import { x as _$$x } from "../vendor/298225";
@@ -123,19 +123,19 @@ let m = function (e, r) {
     mode: "hsl"
   };
   let [, i, s, o, a] = r;
-  if (i.type !== xW.None) {
-    if (i.type === xW.Percentage) return;
+  if (i.type !== Tok.None) {
+    if (i.type === Tok.Percentage) return;
     n.h = i.value;
   }
-  if (s.type !== xW.None) {
-    if (s.type === xW.Hue) return;
+  if (s.type !== Tok.None) {
+    if (s.type === Tok.Hue) return;
     n.s = s.value / 100;
   }
-  if (o.type !== xW.None) {
-    if (o.type === xW.Hue) return;
+  if (o.type !== Tok.None) {
+    if (o.type === Tok.Hue) return;
     n.l = o.value / 100;
   }
-  a.type !== xW.None && (n.alpha = Math.min(1, Math.max(0, a.type === xW.Number ? a.value : a.value / 100)));
+  a.type !== Tok.None && (n.alpha = Math.min(1, Math.max(0, a.type === Tok.Number ? a.value : a.value / 100)));
   return n;
 };
 export let $$w0 = {

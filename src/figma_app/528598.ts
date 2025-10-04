@@ -35,7 +35,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { setSelectedTypedPropDefId } from "../figma_app/389091";
 import { hideInstanceSwapPicker } from "../905/8732";
-import { Oe, uP } from "../figma_app/933328";
+import { loadSharedVariableThunk, loadSharedSymbolOrStateGroup } from "../figma_app/933328";
 import { KD } from "../figma_app/975811";
 import { isSitesFileType } from "../figma_app/976749";
 import { A as _$$A2 } from "../905/639174";
@@ -311,7 +311,7 @@ function eU(e) {
       },
       onVariableSelected: async e => {
         if (void 0 === e) return;
-        let t = await R(Oe(e));
+        let t = await R(loadSharedVariableThunk(e));
         if (!t) return;
         let n = y$(variableType, t);
         submitBehaviorAssignment ? submitBehaviorAssignment(typedPropDef.explicitDefID, n) : permissionScopeHandler.user("component-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, n, forBubbledProps));
@@ -453,7 +453,7 @@ function eU(e) {
         },
         onVariableSelected: async e => {
           if (assertNotNullish(variableType), void 0 === e) return;
-          let t = await R(Oe(e));
+          let t = await R(loadSharedVariableThunk(e));
           if (!t) return;
           let n = y$(variableType, t);
           submitBehaviorAssignment ? submitBehaviorAssignment(typedPropDef.explicitDefID, n) : permissionScopeHandler.user("component-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, y$(variableType, t), forBubbledProps));
@@ -919,7 +919,7 @@ function eq({
     recordingKey: "componentPropAssignment"
   }) : void 0, [preferredValuesFetchError, retryPreferredValuesFetch]);
   let C = useCallback(e => {
-    y(uP({
+    y(loadSharedSymbolOrStateGroup({
       item: e,
       alwaysFetch: u,
       targetUpsertScene: u ? SceneIdentifier.PLAYGROUND_SCENE : SceneIdentifier.ACTIVE_SCENE,

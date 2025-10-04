@@ -21,7 +21,7 @@ import { DE, fn } from "../figma_app/811257";
 import { EX } from "../figma_app/709323";
 import { eN } from "../905/331848";
 import { bL, c$ } from "../905/867927";
-import { q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { useDispatch } from "react-redux";
 import { AppStateTsApi, DrawingElementType } from "../figma_app/763686";
 import { hidePickerThunk, showPickerThunk, hideStylePicker } from "../figma_app/91703";
@@ -89,7 +89,7 @@ function O(e) {
   return jsxs(bL, {
     value: isInvalidValue(e.value) ? void 0 : e.value,
     onChange: e.onChange,
-    legend: jsx(q, {
+    legend: jsx(Legend, {
       children: getI18nString("fullscreen.properties_panel.stroke.position")
     }),
     readonly: e.disabled,

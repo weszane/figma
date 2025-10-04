@@ -9,7 +9,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { useSubscription } from "../figma_app/288654";
 import { PerfTimer } from "../905/609396";
 import { handleAtomEvent } from "../905/502364";
-import { nz, Yx, Tn } from "../figma_app/933328";
+import { useAllLibrarySubscriptions, initializeUserThunk, useLibraryInfo } from "../figma_app/933328";
 import { TrackingProvider } from "../figma_app/831799";
 import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
 import { selectPermissionsState } from "../figma_app/212807";
@@ -1304,11 +1304,11 @@ export function $$tM0({
   let [V, G] = useState(!1);
   let z = _$$F();
   let H = useRef(null);
-  nz();
+  useAllLibrarySubscriptions();
   useEffect(() => {
-    k(Yx({}));
+    k(initializeUserThunk({}));
   }, [k]);
-  let [W] = Tn({
+  let [W] = useLibraryInfo({
     currentOrgId: L,
     subscriptionFileKey: openFileKey,
     includeThumbnails: C

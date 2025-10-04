@@ -1,5 +1,5 @@
 import { datadogRum } from '@datadog/browser-rum';
-import rN from 'classnames';
+import classNames from 'classnames';
 import { diff } from 'deep-diff';
 import { initialize } from 'launchdarkly-js-client-sdk';
 import { groupBy, isEmpty, keyBy, memoize, pick } from 'lodash-es';
@@ -10,7 +10,7 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import optimist, { BEGIN, COMMIT, REVERT } from 'redux-optimist';
-import eW from 'statsig-js';
+import statsigSDK from 'statsig-js';
 import { Statsig } from 'statsig-react';
 import { reportError, setContextGlobal, setTagGlobal, SeverityLevel } from '../905/11';
 import { resolveAndResetPromise, resolvePromise } from '../905/2848';
@@ -22,11 +22,11 @@ import { fileChannelHandler, fileRepoChannelHandler, folderChannelHandler, meCha
 import { FolderPermissionsModal } from '../905/25249';
 import { setKeyboardShortcutPanelTab, usedKeyboardShortcut } from '../905/26824';
 import { useInitializeUniqueId } from '../905/27228';
-import { iZ as _$$iZ } from '../905/29425';
+import { clusteredPinsInstance } from '../905/29425';
 import { beginCreateNewFolder, hideMobileNav, searchResultClicked, setBrowserTileSortView, setDeletedFiles, setDeletedRepos, setFileBrowserLoading, showMobileNav, stopCreateNewFolder } from '../905/34809';
 import { isFullscreenSlidesView } from '../905/35881';
 import { p as _$$p } from '../905/36308';
-import { z4 } from '../905/37051';
+import { fullscreenAlias } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
 import { yz } from '../905/42209';
 import { A as _$$A8 } from '../905/47292';
@@ -36,7 +36,7 @@ import { m as _$$m4 } from '../905/65216';
 import { deleteRecentPrototype, prototypeHideComments, prototypeReset, prototypeResetRecents, prototypeSetBackgroundColor, prototypeSetCurrentPage, prototypeSetIsFooterVisible, prototypeSetIsReconnecting, prototypeSetPages, prototypeSetProgressBarMode, prototypeShowComments, prototypeShowOnlyMyComments, prototypeShowResolvedComments, recentPrototypePost, recentPrototypeUnmarkViewed, restoreRecentPrototype } from '../905/70982';
 import { createActionCreator } from '../905/73481';
 import { an as _$$an2, PW as _$$PW, y$ as _$$y$, TK } from '../905/81009';
-import { cY as _$$cY, fk as _$$fk, lg as _$$lg, n$ as _$$n$2, rf as _$$rf, rj as _$$rj, Fd, Fj, GR, JK, JR, Ud } from '../905/81459';
+import { addFileImportToQueue, cancelImportPdf, clearFileImportQueue, clearFileImports, confirmImportPdf, doneProcessingFile, failFileImportOnLimit, setFromFileImportNuxStep, showImportFigmaDesignRepo, showImportPdfConfirmation, startProcessingFile, updateFileImportItem } from '../905/81459';
 import { ck as _$$ck4 } from '../905/87821';
 import { fileVersionSelector } from '../905/91038';
 import { combineWithHyphen, ShareContext } from '../905/91820';
@@ -62,7 +62,7 @@ import { t as _$$t5 } from '../905/150656';
 import { liveStoreFileBinding } from '../905/155850';
 import { hideModal, hideSpecificModal, popModalStack, popPrevModal, showModal, showModalHandler, updateModal } from '../905/156213';
 import { ThemeProvider, useThemeContext } from '../905/158740';
-import { mO as _$$mO, Y5 as _$$Y3, kI } from '../905/163189';
+import { ImportEventType, ImportExportStatus, isPdfFile } from '../905/163189';
 import { ServiceCategories } from '../905/165054';
 import { createFontMetadata, getFontOwner } from '../905/165290';
 import { c as _$$c3 } from '../905/167005';
@@ -109,7 +109,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, loadI18nState, renderI18nText } from '../905/303541';
 import { T as _$$T3, v as _$$v4 } from '../905/309844';
 import { sR as _$$sR } from '../905/309846';
-import { $N, an as _$$an, OX, OZ, Sp, U_ } from '../905/327855';
+import { createNewFileWithRetry, getErrorMessage, getNewDocumentErrorMessage, initializeFullscreenForNewFile, initiateNewFileCreation, loadAndOpenFileInFullscreen } from '../905/327855';
 import { F as _$$F4, r as _$$r7 } from '../905/336143';
 import { v as _$$v5 } from '../905/344656';
 import { D6 as _$$D5, Nx } from '../905/345933';
@@ -245,15 +245,14 @@ import { liveStoreInstance, setupResourceAtomHandler } from '../905/713695';
 import { logDebug, logError, logInfo, logWarning } from '../905/714362';
 import { fontReducer } from '../905/714538';
 import { SvgComponent } from '../905/714743';
-import { H as _$$H6 } from '../905/715533';
-import { l as _$$l6 } from '../905/716947';
+import { RealtimeSubscriptionManager } from '../905/715533';
 import { I as _$$I2 } from '../905/717213';
 import { IpcStorageHandler } from '../905/724705';
-import { y as _$$y2 } from '../905/725962';
+import { MergeState } from '../905/725962';
 import { Point } from '../905/736624';
-import { uM as _$$uM, HO } from '../905/738636';
+import { createAndOpenFile, setFullscreenNewFileOpen } from '../905/738636';
 import { extractOriginalTextMap } from '../905/744769';
-import { l as _$$l1 } from '../905/745972';
+import { useWindowDimensions } from '../905/745972';
 import { AuthModal } from '../905/749159';
 import { k as _$$k6 } from '../905/749197';
 import { f as _$$f3 } from '../905/749689';
@@ -262,11 +261,11 @@ import { attachReactStackToError, ErrorBoundaryCrash, errorBoundaryFallbackTypes
 import { handlePluginError } from '../905/753206';
 import { getRepoById, getRepoByIdAlt, isBranch, isBranchAlt } from '../905/760074';
 import { m as _$$m } from '../905/760316';
-import { MV, WB } from '../905/761735';
+import { getCurrentLiveGraphClient, initializeLiveGraph } from '../905/761735';
 import { setTargetRef, updateTooltip } from '../905/765855';
 import { getNewFileConfig, getSelectedFile } from '../905/766303';
 import { handlePropertyState } from '../905/770460';
-import { gD } from '../905/775298';
+import { isFileCreationInProgress } from '../905/775298';
 import { pw as _$$pw, q5 as _$$q3 } from '../905/776312';
 import { preloadCommonFonts } from '../905/777093';
 import { isFullscreenDevHandoffView } from '../905/782918';
@@ -298,7 +297,7 @@ import { clearSelectionPaintsDueToLimitExceeded, forceUpdateSelectionPaintsForUn
 import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n2, Rf, VariableStyleId } from '../905/859698';
 import { AuthAction, AuthErrorCode, AuthField, AuthFlowStep, AuthProvider, SIGNED_UP_FROM_OPEN_SESSIONS } from '../905/862321';
-import { RD } from '../905/862913';
+import { getActiveFilesById } from '../905/862913';
 import { TeamExtendedDataMapper } from '../905/863010';
 import { xH as _$$xH2 } from '../905/869282';
 import { areSessionLocalIDsEqual, defaultSessionLocalIDString } from '../905/871411';
@@ -314,7 +313,7 @@ import { p as _$$p4 } from '../905/895920';
 import { t as _$$t } from '../905/897919';
 import { Au, h8, UK } from '../905/898493';
 import { sendWithRetry } from '../905/910117';
-import { F as _$$F6 } from '../905/915030';
+import { ComFileType } from '../905/915030';
 import { dayjs } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
 import { E as _$$E5, v as _$$v2 } from '../905/928543';
@@ -500,13 +499,13 @@ import { fileApiHandler } from '../figma_app/787550';
 import { parseMessage, realtimeClient } from '../figma_app/804490';
 import { eu as _$$eu } from '../figma_app/807786';
 import { containsDash } from '../figma_app/819288';
-import { pz as _$$pz, jz } from '../figma_app/825489';
+import { libraryDataCompositionAtom, libraryPublishingModeAtom } from '../figma_app/825489';
 import { wH } from '../figma_app/828908';
 import { SubscriptionType } from '../figma_app/831101';
 import { TrackingProvider, withTrackedClick } from '../figma_app/831799';
 import { CURRENT_VERSION_ID } from '../figma_app/841351';
 import { Ay as _$$Ay5 } from '../figma_app/846003';
-import { hV as _$$hV, id as _$$id, lW as _$$lW, pn as _$$pn, rH as _$$rH2, u2 as _$$u, _p, Dz, gN, k$, M3, MH, TV } from '../figma_app/847915';
+import { ARRANGE_MENU_ID, EDIT_MENU_ID, FIGMA_ACCOUNT_MENU_ID, getActionOrName, hasChildrenOrDropdown, hasHeader, hasRenderFunction, hasSeparator, OBJECT_MENU_ID, PREFERENCES_MENU_ID, TEXT_MENU_ID, VECTOR_MENU_ID, VIEW_MENU_ID } from '../figma_app/847915';
 import { r5 as _$$r3, r$ as _$$r$, ZH } from '../figma_app/855490';
 import { putProductComponentsThunk } from '../figma_app/864378';
 import { bellFeedAPIInstance, desktopAPIInstance, OpenTarget } from '../figma_app/876459';
@@ -519,7 +518,7 @@ import { LoadingBarStatus, PluginRunForContext, TabOpenBehavior } from '../figma
 import { l0 as _$$l9, OP } from '../figma_app/920435';
 import { useLatestRef } from '../figma_app/922077';
 import { desktopVisibilityEmitter } from '../figma_app/925651';
-import { $h as _$$$h, e$ as _$$e$, nz as _$$nz, tL as _$$tL, Z as _$$Z2, BK, Ee, fv, Kd, NW, Yx } from '../figma_app/933328';
+import { deleteLoadingStatesForFile, fetchAndUpdateStateGroups, fetchNumTeams, getLibraryStats, getOrgMigrationStatus, initializeUserThunk, INSERT_SHARED_COMPONENT, INSERT_SHARED_STATE_GROUP, resetProcessedKeys, SWAP_TO_SHARED_COMPONENT, useAllLibrarySubscriptions } from '../figma_app/933328';
 import { Q$ } from '../figma_app/934707';
 import { b4 } from '../figma_app/937413';
 import { I$ } from '../figma_app/940844';
@@ -531,7 +530,7 @@ import { lr as _$$lr, EG, Ji, qC } from '../figma_app/972736';
 import { clearPendingReload, hasPendingReload, isViewReloadSensitive, reloadIfPending, ReloadReasonEnum, scheduleReload, sendIpcRefreshSession, setFileBrowserLoadingHandler, switchAccountAndNavigate } from '../figma_app/976345';
 import { batchDeleteOrgUsersAction, batchDeleteOrgUsersThunk, batchUpdateOrgUsersAction, getOrgAdminsAction, updateOrgUserDescriptionAction } from '../figma_app/990058';
 import { IK } from '../figma_app/991245';
-import { setOrgInvites, setIsCreatingOrgInvites, deleteOrgInviteAction } from '../figma_app/996356';
+import { deleteOrgInviteAction, setIsCreatingOrgInvites, setOrgInvites } from '../figma_app/996356';
 import { fileBrowserPageManager } from '../figma_app/997907';
 import { A as _$$A12 } from '../svg/433566';
 import { A as _$$A2 } from '../vendor/3029';
@@ -554,7 +553,7 @@ function m({
     }
   }), [i]);
   let l = useRef(new Set());
-  let m = useCallback(e => (l.current.add(e), () => l.current.$$delete(e)), []);
+  let m = useCallback(e => (l.current.add(e), () => l.current.delete(e)), []);
   let h = useMemo(() => ({
     ...a,
     addThemeListener: m
@@ -589,14 +588,14 @@ function m({
   });
 }
 let U = {
-  [_$$rH2]: 'edit',
-  [_p]: 'view',
-  [M3]: 'object',
-  [_$$u]: 'vector',
-  [MH]: 'text',
-  [_$$pn]: 'arrange',
-  [_$$lW]: 'preferences',
-  [_$$hV]: 'help'
+  [EDIT_MENU_ID]: 'edit',
+  [VIEW_MENU_ID]: 'view',
+  [OBJECT_MENU_ID]: 'object',
+  [VECTOR_MENU_ID]: 'vector',
+  [TEXT_MENU_ID]: 'text',
+  [ARRANGE_MENU_ID]: 'arrange',
+  [PREFERENCES_MENU_ID]: 'preferences',
+  [FIGMA_ACCOUNT_MENU_ID]: 'help'
 };
 function B(e) {
   (async () => {
@@ -646,7 +645,7 @@ class G {
         isReadOnly: !1,
         isSearching: !1,
         selectedView: t.selectedView
-      }) && TV(r) && r.name in U) {
+      }) && hasChildrenOrDropdown(r) && r.name in U) {
         let e = U[r.name];
         if (e) {
           let t = i.convertToDesktopMenuGroup(r);
@@ -660,12 +659,12 @@ class G {
     };
   }
   convertToDesktopItem(e) {
-    return k$(e) ? {
+    return hasSeparator(e) ? {
       type: 'separator'
-    } : TV(e) ? this.convertToDesktopMenuGroup(e) : gN(e) || _$$id(e) ? null : e.action ? this.convertToDesktopActionItem(e) : this.convertToDesktopNonActionItem(e);
+    } : hasChildrenOrDropdown(e) ? this.convertToDesktopMenuGroup(e) : hasHeader(e) || hasRenderFunction(e) ? null : e.action ? this.convertToDesktopActionItem(e) : this.convertToDesktopNonActionItem(e);
   }
   convertToDesktopMenuGroup(e) {
-    let t = Dz(e);
+    let t = getActionOrName(e);
     let i = (e.children ?? []).filter(e => UN(e, {
       isDesktopMenu: !0,
       isReadOnly: !1,
@@ -680,7 +679,7 @@ class G {
     };
   }
   convertToDesktopActionItem(e) {
-    let t = Dz(e);
+    let t = getActionOrName(e);
     let i = handlePropertyState(e, t, this.options.appModel);
     i && (this.actionCheckedState[t] = i.isChecked);
     return {
@@ -691,7 +690,7 @@ class G {
     };
   }
   convertToDesktopNonActionItem(e) {
-    let t = Dz(e);
+    let t = getActionOrName(e);
     return FullscreenMenu.isNonActionItemKey(t) ? {
       type: 'non-action-item',
       key: t,
@@ -974,7 +973,7 @@ function eC(e) {
     })
   });
 }
-let eK = eW;
+let eK = statsigSDK;
 class e$ extends PureComponent {
   constructor(e) {
     super(e);
@@ -1642,7 +1641,7 @@ let t8 = {
     e.dispatch(_$$mg(t));
   },
   createAndOpenFile(e, t) {
-    e.dispatch(_$$uM(t));
+    e.dispatch(createAndOpenFile(t));
   },
   navigateToFile(e, t, i) {
     trackFileLoad(e, t);
@@ -1829,7 +1828,7 @@ function iv() {
     _$$q.onFrame();
   } catch (e) {}
   fullscreenValue?.onFrame();
-  getFeatureFlags()?.comments_react || _$$iZ?.onFrame();
+  getFeatureFlags()?.comments_react || clusteredPinsInstance?.onFrame();
   perfTimerFrameManagerBindings?.startProfile('redux-frame-handler', 100);
   ec?.();
   perfTimerFrameManagerBindings?.stopProfile('redux-frame-handler', 100);
@@ -1887,7 +1886,7 @@ let iz = e => t => function (i) {
           try {
             let t = JSON.parse(o.response);
             let i = Object.keys(t.meta.success);
-            let n = RD(i, e.getState());
+            let n = getActiveFilesById(i, e.getState());
             e.dispatch(VK({
               fileKeys: n,
               userInitiated: !1
@@ -1949,7 +1948,7 @@ let iz = e => t => function (i) {
         });
       }), YK.matches(i)) {
         let e = s.reduce((e, t) => (e[t] = null, e), {});
-        WB()?.optimisticallyDelete({
+        getCurrentLiveGraphClient()?.optimisticallyDelete({
           File: e
         }, o);
       }
@@ -1993,7 +1992,7 @@ let iz = e => t => function (i) {
       });
       let s = i.payload.file;
       let o = mapFileProperties(s, s.key);
-      o && WB().optimisticallyUpdate(o, n);
+      o && getCurrentLiveGraphClient().optimisticallyUpdate(o, n);
       let l = e.getState();
       l.selectedView.view === 'fullscreen' && l.openFile && o && subscribeAndGetStatus(OpenEditorFileData, {
         fileKey: s.key
@@ -2218,7 +2217,7 @@ let i6 = e => t => function (i) {
       let a = !!i.payload[e];
       if (!r && a) {
         let t = getInitialOptions().user_data?.id;
-        t && WB().optimisticallyCreate({
+        t && getCurrentLiveGraphClient().optimisticallyCreate({
           UserFlag: {
             [`optimistic-id-for-${e}`]: {
               userId: t,
@@ -2230,7 +2229,7 @@ let i6 = e => t => function (i) {
           }
         }, n);
       } else {
-        r && !a && WB().optimisticallyDelete({
+        r && !a && getCurrentLiveGraphClient().optimisticallyDelete({
           UserFlag: {
             [t[e].id]: null
           }
@@ -2351,11 +2350,11 @@ let ng = e => t => function (i) {
       e.dispatch(H1({
         votingStage: SessionStatus.NO_SESSION
       }));
-    }), teamLibraryCache.clearCache(), _$$e$(), dispatchDeleteLoadingStates(e.dispatch), clearTrackedState(), e.dispatch(componentClearPublishedItems({
+    }), teamLibraryCache.clearCache(), resetProcessedKeys(), dispatchDeleteLoadingStates(e.dispatch), clearTrackedState(), e.dispatch(componentClearPublishedItems({
       type: PrimaryWorkflowEnum.COMPONENT
     })), e.dispatch(componentClearPublishedItems({
       type: PrimaryWorkflowEnum.STATE_GROUP
-    })), n.openFile && e.dispatch(Kd({
+    })), n.openFile && e.dispatch(deleteLoadingStatesForFile({
       openFileKey: n.openFile.key
     })));
     return t(i);
@@ -2520,9 +2519,9 @@ let nS = e => t => function (i) {
       }
     }).catch(e => {});
   } else if (SL.matches(i)) {
-    desktopAPIInstance.isFileBrowserTab() || desktopAPIInstance.setMergingStatus(_$$y2.MERGING);
+    desktopAPIInstance.isFileBrowserTab() || desktopAPIInstance.setMergingStatus(MergeState.MERGING);
   } else if (_$$E3.matches(i)) {
-    desktopAPIInstance.isFileBrowserTab() || desktopAPIInstance.setMergingStatus(_$$y2.NOT_MERGING);
+    desktopAPIInstance.isFileBrowserTab() || desktopAPIInstance.setMergingStatus(MergeState.NOT_MERGING);
   } else if (newFileLoaded.matches(i)) {
     t(i);
     let n = e.getState();
@@ -2607,7 +2606,7 @@ let nQ = e => t => function (i) {
     let n = e.getState();
     let r = n.selectedView;
     let a = i.payload;
-    if (r.view === 'fullscreen' && a.view === 'fullscreen' && a.fileKey !== r.fileKey && gD()) {
+    if (r.view === 'fullscreen' && a.view === 'fullscreen' && a.fileKey !== r.fileKey && isFileCreationInProgress()) {
       logError('fullscreen', 'cannot change selected view while file creation is in progress', {
         'current selected view': r.view,
         'new selected view': a.view,
@@ -2641,11 +2640,11 @@ let nQ = e => t => function (i) {
       if (a.fileKey) {
         if (a.preloaded) {
           let t = a.fileKey;
-          let i = () => OZ(e, t, a.editorType).catch(t => {
-            let i = _$$an(t, getI18nString('user_facing_error.loading_a_file'));
+          let i = () => loadAndOpenFileInFullscreen(e, t, a.editorType).catch(t => {
+            let i = getErrorMessage(t, getI18nString('user_facing_error.loading_a_file'));
             e.dispatch(FlashActions.error(i));
           });
-          r.view === 'desktopNewTab' ? U_(e, a.editorType, !0).then(async () => {
+          r.view === 'desktopNewTab' ? initializeFullscreenForNewFile(e, a.editorType, !0).then(async () => {
             if (!n.fileByKey[t]) {
               let i = await fileApiHandler.getFiles({
                 fileKey: t
@@ -2683,9 +2682,9 @@ let nQ = e => t => function (i) {
           };
           a && (u.folder_id = a);
           c && (u.org_id = c.id);
-          U_(e, editorType, !0).then(() => {
-            Sp(e, u, null).then(n => {
-              OZ(e, n, editorType).then(() => {
+          initializeFullscreenForNewFile(e, editorType, !0).then(() => {
+            createNewFileWithRetry(e, u, null).then(n => {
+              loadAndOpenFileInFullscreen(e, n, editorType).then(() => {
                 fullscreenValue.onReady().then(() => {
                   _$$l3.user('try-plugin', () => {
                     e.dispatch(_$$$2({
@@ -2700,10 +2699,10 @@ let nQ = e => t => function (i) {
                   });
                 }).catch(() => e.dispatch(FlashActions.error(getI18nString('flash.unable_to_try_resource'))));
               }).catch(t => {
-                e.dispatch(FlashActions.error(OX(t)));
+                e.dispatch(FlashActions.error(getNewDocumentErrorMessage(t)));
               });
             }).catch(t => {
-              e.dispatch(FlashActions.error(OX(t)));
+              e.dispatch(FlashActions.error(getNewDocumentErrorMessage(t)));
             });
           });
         }
@@ -2737,7 +2736,7 @@ let nQ = e => t => function (i) {
           }
         }));
       } else {
-        z4.getIsExtension() && r.editorType === FEditorType.DevHandoff && a.nodeId && a.nodeId !== r.nodeId && SceneGraphHelpers?.setSelectedNodeAndCanvas(a.nodeId, !1);
+        fullscreenAlias.getIsExtension() && r.editorType === FEditorType.DevHandoff && a.nodeId && a.nodeId !== r.nodeId && SceneGraphHelpers?.setSelectedNodeAndCanvas(a.nodeId, !1);
       }
       if (a.commentThreadId) {
         let e = Jj();
@@ -2873,7 +2872,7 @@ function ry({
   });
 }
 let rv = rb;
-let rP = rN;
+let rP = classNames;
 let rH = 'dsa_file_row--numColVal--bT1UJ library_modal_stats--numCol---FbhI';
 function rW({
   file: e,
@@ -2912,7 +2911,7 @@ function rW({
         children: jsx('div', {
           className: 'dsa_file_row--openFileWrapper--m8Q9r',
           children: jsx(_$$x3, {
-            libraryKey: _$$l4(e) ?? _$$l6('')
+            libraryKey: _$$l4(e) ?? ''
           })
         })
       })]
@@ -3082,7 +3081,7 @@ function r0({
   let A = useDispatch();
   useEffect(() => {
     (async () => {
-      _ && l(await NW(_.id));
+      _ && l(await fetchNumTeams(_.id));
     })();
   }, [_, l, A]);
   let y = useRef(getStorage()).current;
@@ -3268,9 +3267,9 @@ function r7({
   let [_, A] = useState(null);
   let [y, b] = useState(_$$R3.OVERVIEW);
   let v = _$$F4();
-  let [I] = setupResourceAtomHandler(_$$Z2(r));
+  let [I] = setupResourceAtomHandler(getLibraryStats(r));
   let E = useMemo(() => I.data?.files.map(e => e.file).find(e => e.key === l?.fileKey), [l, I.data?.files]);
-  let [x] = setupResourceAtomHandler(fv(r));
+  let [x] = setupResourceAtomHandler(getOrgMigrationStatus(r));
   let S = useCallback(() => {
     c(null);
     p(null);
@@ -3313,9 +3312,9 @@ function r7({
     T();
     A(t);
   }, [C, w, T]);
-  _$$nz();
+  useAllLibrarySubscriptions();
   useEffect(() => {
-    i(Yx({}));
+    i(initializeUserThunk({}));
   }, [i]);
   let O = useCurrentPlanUser('DSALibraryView');
   let D = useIsOrgAdminUser(O).unwrapOr(!1);
@@ -3581,7 +3580,7 @@ async function av(e) {
     setTimeout(t, e);
   });
 }
-let aT = new _$$H6({
+let aT = new RealtimeSubscriptionManager({
   name: 'CommunityResourcePaymentShim',
   ...meChannelHandler,
   livegraphView: CommunityPaymentsForRealtimeShim,
@@ -3652,8 +3651,8 @@ function aF(e, t) {
     switch (t.method) {
       case 'delete':
         if ((n === PrimaryWorkflowEnum.COMPONENT || n === PrimaryWorkflowEnum.STATE_GROUP) && r.selectedView.view === 'fullscreen' && i[0].destination_key) {
-          n === PrimaryWorkflowEnum.COMPONENT && _$$tL(i.map(e => e.destination_key).filter(e => !!e), [], e);
-          n === PrimaryWorkflowEnum.STATE_GROUP && _$$tL([], i.map(e => e.destination_key).filter(e => !!e), e);
+          n === PrimaryWorkflowEnum.COMPONENT && fetchAndUpdateStateGroups(i.map(e => e.destination_key).filter(e => !!e), [], e);
+          n === PrimaryWorkflowEnum.STATE_GROUP && fetchAndUpdateStateGroups([], i.map(e => e.destination_key).filter(e => !!e), e);
           let t = {};
           let a = {};
           for (let e of i) {
@@ -3680,7 +3679,7 @@ function aF(e, t) {
           e.dispatch(putProductComponentsThunk({
             itemsById: r,
             fileKey: u.key,
-            libraryKey: _$$l6(u.library_key),
+            libraryKey: u.library_key,
             teamId: u.team_id,
             type: n
           }));
@@ -3712,7 +3711,7 @@ function aF(e, t) {
 function aM(e) {
   return e.replace(/\.\d+Z/, 'Z');
 }
-let aj = new _$$H6({
+let aj = new RealtimeSubscriptionManager({
   name: 'TeamChannelComponentsShim',
   ...teamMembersChannelHandler,
   livegraphView: ComponentUpdatesForTeam,
@@ -3726,7 +3725,7 @@ let aj = new _$$H6({
     let a = t.team?.id || '';
     for (let s of t.team?.componentUpdates || []) {
       let t = s.component?.nodeId || s.nodeId || '';
-      let o = _$$l6(s.component?.libraryKey ?? s.libraryKey ?? '');
+      let o = s.component?.libraryKey ?? s.libraryKey ?? '';
       let l = e.getState().library.publishedByLibraryKey.components;
       let d = aM(l?.[a]?.[o]?.[t]?.updated_at || '');
       if (s.updateType === 'delete' && !d || !s?.component && s.updateType !== 'delete' || s?.component && d >= aM(s.component?.updatedAt?.toISOString() || '')) continue;
@@ -3756,7 +3755,7 @@ let aj = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let aU = new _$$H6({
+let aU = new RealtimeSubscriptionManager({
   name: 'ProjectChannelComponentsShim',
   ...folderChannelHandler,
   livegraphView: ComponentUpdatesForProject,
@@ -3770,7 +3769,7 @@ let aU = new _$$H6({
     for (let a of t.project?.componentUpdates || []) {
       let t = a.component?.nodeId || a.nodeId || '';
       let s = atomStoreManager.get(filesByLibraryKeyAtom);
-      let o = _$$l6(a.component?.libraryKey ?? a.libraryKey ?? '');
+      let o = a.component?.libraryKey ?? a.libraryKey ?? '';
       let l = a.component?.file?.teamId || s[o]?.team_id || '';
       let d = e.getState().library.publishedByLibraryKey.components;
       let c = aM(d?.[l]?.[o]?.[t]?.updated_at || '');
@@ -3801,7 +3800,7 @@ let aU = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let aB = new _$$H6({
+let aB = new RealtimeSubscriptionManager({
   name: 'FileChannelComponentsShim',
   ...fileChannelHandler,
   livegraphView: ComponentUpdatesForFile,
@@ -3822,7 +3821,7 @@ let aB = new _$$H6({
     }), i.file?.componentUpdates || [])) {
       let t = o.component?.nodeId || o.nodeId || '';
       let i = atomStoreManager.get(filesByLibraryKeyAtom);
-      let s = _$$l6(o.component?.libraryKey ?? o.libraryKey ?? '');
+      let s = o.component?.libraryKey ?? o.libraryKey ?? '';
       let l = e.getState().library.publishedByLibraryKey.components;
       let d = o.component?.file?.teamId || i[s]?.team_id || '';
       let c = aM(l?.[d]?.[s]?.[t]?.updated_at || '');
@@ -3861,7 +3860,7 @@ function aV(e) {
     name: e.component?.name || '',
     file_key: e.component?.libraryResourceId || e?.fileKey || '',
     file_key_source: FileKeySourceEnum.LIVEGRAPH_DATA,
-    library_key: _$$l6(e.component?.libraryKey ?? e.libraryKey ?? ''),
+    library_key: e.component?.libraryKey ?? e.libraryKey ?? '',
     checkpoint_id: e.component?.checkpointId || void 0,
     unpublished_at: e.component?.unpublishedAt?.toISOString() || null,
     content_hash: e.component?.contentHash,
@@ -3922,12 +3921,12 @@ function aG(e) {
     default_state_key: e.stateGroup?.defaultStateKey || '',
     updated_at: e.stateGroup?.updatedAt?.toISOString(),
     hub_file_id: e.stateGroup?.hubFileId,
-    library_key: _$$l6(e.stateGroup?.libraryKey ?? e.libraryKey ?? ''),
+    library_key: e.stateGroup?.libraryKey ?? e.libraryKey ?? '',
     canvas_url: `/state_group/${e.stateGroup?.key}/canvas?ver=${e.stateGroup?.version}`,
     thumbnail_url: `/state_group/${e.stateGroup?.key}/thumbnail?ver=${e.stateGroup?.version}`
   };
 }
-let az = new _$$H6({
+let az = new RealtimeSubscriptionManager({
   name: 'TeamChannelStateGroupShim',
   ...teamMembersChannelHandler,
   livegraphView: StateGroupUpdatesForTeam,
@@ -3941,7 +3940,7 @@ let az = new _$$H6({
     let a = t.team?.id || '';
     for (let s of t.team?.stateGroupUpdates || []) {
       let t = s.stateGroup?.nodeId || s.nodeId || '';
-      let o = _$$l6(s.stateGroup?.libraryKey ?? s.libraryKey ?? '');
+      let o = s.stateGroup?.libraryKey ?? s.libraryKey ?? '';
       let l = e.getState().library.publishedByLibraryKey.stateGroups;
       let d = aM(l?.[a]?.[o]?.[t]?.updated_at || '');
       if (s.updateType === 'delete' && !d || !s?.stateGroup && s.updateType !== 'delete' || s?.stateGroup && d >= aM(s.stateGroup?.updatedAt?.toISOString() || '')) continue;
@@ -3971,7 +3970,7 @@ let az = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let aH = new _$$H6({
+let aH = new RealtimeSubscriptionManager({
   name: 'ProjectChannelStateGroupShim',
   ...folderChannelHandler,
   livegraphView: StateGroupUpdatesForProject,
@@ -3985,7 +3984,7 @@ let aH = new _$$H6({
     for (let a of t.project?.stateGroupUpdates || []) {
       let t = a.stateGroup?.nodeId || a.nodeId || '';
       let s = atomStoreManager.get(filesByLibraryKeyAtom);
-      let o = _$$l6(a.stateGroup?.libraryKey ?? a.libraryKey ?? '');
+      let o = a.stateGroup?.libraryKey ?? a.libraryKey ?? '';
       let l = e.getState().library.publishedByLibraryKey.stateGroups;
       let d = a.stateGroup?.file?.teamId || s[o]?.team_id || '';
       let c = aM(l?.[d]?.[o]?.[t]?.updated_at || '');
@@ -4016,7 +4015,7 @@ let aH = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let aW = new _$$H6({
+let aW = new RealtimeSubscriptionManager({
   name: 'FileChannelStateGroupShim',
   ...fileChannelHandler,
   livegraphView: StateGroupUpdatesForFile,
@@ -4037,7 +4036,7 @@ let aW = new _$$H6({
     }), i.file?.stateGroupUpdates || [])) {
       let t = o.stateGroup?.nodeId || o.nodeId || '';
       let i = atomStoreManager.get(filesByLibraryKeyAtom);
-      let s = _$$l6(o.stateGroup?.libraryKey ?? o.libraryKey ?? '');
+      let s = o.stateGroup?.libraryKey ?? o.libraryKey ?? '';
       let l = e.getState().library.publishedByLibraryKey.stateGroups;
       let d = o.stateGroup?.file?.teamId || i[s]?.team_id || '';
       let c = aM(l?.[d]?.[s]?.[t]?.updated_at || '');
@@ -4131,7 +4130,7 @@ function aX(e, t) {
   }
   return i;
 }
-let aQ = new _$$H6({
+let aQ = new RealtimeSubscriptionManager({
   name: 'FontFileForTeamShim',
   ...teamMembersChannelHandler,
   livegraphView: FontFileForTeamView,
@@ -4148,7 +4147,7 @@ let aQ = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let aJ = new _$$H6({
+let aJ = new RealtimeSubscriptionManager({
   name: 'FontFileForOrgShim',
   ...orgMembersChannelHandler,
   livegraphView: FontFileForOrgView,
@@ -4165,7 +4164,7 @@ let aJ = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let a1 = new _$$H6({
+let a1 = new RealtimeSubscriptionManager({
   name: 'OrgShim',
   ...orgMembersChannelHandler,
   livegraphView: OrgByIdForRealtimeShim,
@@ -4188,7 +4187,7 @@ let a1 = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let a2 = new _$$H6({
+let a2 = new RealtimeSubscriptionManager({
   name: 'OrgUserShim',
   ...meChannelHandler,
   livegraphView: OrgUsersForRealtimeShim,
@@ -4259,7 +4258,7 @@ function a3(e, t) {
       }));
   }
 }
-let a6 = new _$$H6({
+let a6 = new RealtimeSubscriptionManager({
   name: 'PluginShim',
   ...orgMembersChannelHandler,
   livegraphView: PluginUpdatesForOrg,
@@ -4435,7 +4434,7 @@ function st(e, t) {
     }
   }
 }
-let si = new _$$H6({
+let si = new RealtimeSubscriptionManager({
   name: 'FileRepoChannelRepoShim',
   ...fileRepoChannelHandler,
   livegraphView: RepoByIdForRealtimeShim,
@@ -4463,7 +4462,7 @@ let si = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let sn = new _$$H6({
+let sn = new RealtimeSubscriptionManager({
   name: 'FileChannelRepoShim',
   ...fileChannelHandler,
   livegraphView: ReposForFile,
@@ -4491,7 +4490,7 @@ let sn = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let sr = new _$$H6({
+let sr = new RealtimeSubscriptionManager({
   name: 'TeamChannelRepoShim',
   ...teamMembersChannelHandler,
   livegraphView: ReposForTeam,
@@ -4520,7 +4519,7 @@ let sr = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let sa = new _$$H6({
+let sa = new RealtimeSubscriptionManager({
   name: 'FolderChannelRepoShim',
   ...folderChannelHandler,
   livegraphView: ReposForProject,
@@ -4658,7 +4657,7 @@ function su(e, t) {
   i.byTeamId = sc(e.byTeamId, t, FResourceCategoryType.TEAM);
   return i;
 }
-let sm = new _$$H6({
+let sm = new RealtimeSubscriptionManager({
   name: 'TeamsShim',
   ...teamMembersChannelHandler,
   livegraphView: TeamByIdForRealtimeShim,
@@ -4743,7 +4742,7 @@ function sg(e) {
   }
   return i;
 }
-let sf = new _$$H6({
+let sf = new RealtimeSubscriptionManager({
   name: 'MeChannelRolesShim',
   ...meChannelHandler,
   livegraphView: RoleUpdatesForUser,
@@ -4860,7 +4859,7 @@ let sf = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let s_ = new _$$H6({
+let s_ = new RealtimeSubscriptionManager({
   name: 'TeamChannelRolesShim',
   ...teamMembersChannelHandler,
   livegraphView: RoleUpdatesForTeam,
@@ -4955,7 +4954,7 @@ function sA(e, t) {
             let n = t.role_data.team;
             !n || n.deleted_at || i.teams[n.id] || (e.dispatch(postTeamAction({
               team: n
-            })), e.dispatch(Yx({})));
+            })), e.dispatch(initializeUserThunk({})));
             let r = t.role_data.folder;
             !r || r.deleted_at || i.folders[r.id] || r.org_id && !r.team_id && r.path !== '' || e.dispatch(_$$bE(r));
             let a = t.role_data.file;
@@ -5086,7 +5085,7 @@ class sI {
   }
   logMessages(e, t) {}
 }
-let sS = new _$$H6({
+let sS = new RealtimeSubscriptionManager({
   name: 'TeamRoleRequestShim',
   ...meChannelHandler,
   livegraphView: UserTeamRoleRequestView,
@@ -5144,7 +5143,7 @@ let sT = e => ({
   created_at: e.createdAt.toISOString(),
   updated_at: e.updatedAt.toISOString()
 });
-let sk = new _$$H6({
+let sk = new RealtimeSubscriptionManager({
   name: 'UserEduGracePeriodShim',
   ...meChannelHandler,
   livegraphView: EduGracePeriodsForUser,
@@ -5170,7 +5169,7 @@ let sk = new _$$H6({
   fullReadEnabled: () => !0
 });
 let sN = '';
-let sP = new _$$H6({
+let sP = new RealtimeSubscriptionManager({
   name: 'UserShim',
   ...meChannelHandler,
   livegraphView: UserForRealtimeShim,
@@ -5251,7 +5250,7 @@ let sP = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let sO = new _$$H6({
+let sO = new RealtimeSubscriptionManager({
   name: 'UserTeamFlagShim',
   ...meChannelHandler,
   livegraphView: UserTeamFlagsForRealtimeShim,
@@ -5300,7 +5299,7 @@ let sO = new _$$H6({
   fullReadEnabled: () => !0
 });
 let sL = new Map();
-let sF = new _$$H6({
+let sF = new RealtimeSubscriptionManager({
   name: 'WhitelistedPluginShim',
   ...orgMembersChannelHandler,
   livegraphView: WhitelistedPluginsForOrg,
@@ -5352,7 +5351,7 @@ let sF = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let sM = new _$$H6({
+let sM = new RealtimeSubscriptionManager({
   name: 'WidgetShim',
   ...orgMembersChannelHandler,
   livegraphView: WidgetUpdatesForOrg,
@@ -5407,7 +5406,7 @@ let sj = new class {
   }
   handleRealtimeSubscription(e, t) {
     if (getFeatureFlags().skip_lg_shim_in_bell_view && t.getState().selectedView?.view === 'feed') return;
-    let i = WB();
+    let i = getCurrentLiveGraphClient();
     if (!i) {
       console.error('LiveGraph client is null in realtime shim');
       return;
@@ -5415,7 +5414,7 @@ let sj = new class {
     this.genericShims.forEach(n => n.handleSubscription(e, t, i));
   }
   handleRealtimeUnsubscription(e) {
-    if (!WB()) {
+    if (!getCurrentLiveGraphClient()) {
       console.error('LiveGraph client is null in realtime shim');
       return;
     }
@@ -5704,7 +5703,7 @@ function sV(e) {
       for (let [n, s] of Object.entries(e)) {
         if (!i.has(n)) {
           for (let e of Object.keys(s)) {
-            let i = _$$l6(e);
+            let i = e;
             let n = a[i];
             !n || n.folder_id && t.has(n.folder_id) || r.add(i);
           }
@@ -5848,22 +5847,22 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
     }
   } else if (batchSubscribeToRealtimeAction.matches(i)) {
     let t = e.getState();
-    let n = af()(t.fileByKey, e => _$$l6(e.library_key));
+    let n = af()(t.fileByKey, e => e.library_key);
     for (let t of i.payload.libraryKeys) {
       let i = n[t];
       i && sz(e, i);
     }
-  } else if (BK.matches(i)) {
+  } else if (SWAP_TO_SHARED_COMPONENT.matches(i)) {
     let t = e.getState();
-    let n = af()(t.fileByKey, e => _$$l6(e.library_key))[i.payload.item.library_key];
+    let n = af()(t.fileByKey, e => e.library_key)[i.payload.item.library_key];
     n && sz(e, n);
-  } else if (_$$$h.matches(i)) {
+  } else if (INSERT_SHARED_COMPONENT.matches(i)) {
     let t = e.getState();
-    let n = af()(t.fileByKey, e => _$$l6(e.library_key))[i.payload.item.library_key];
+    let n = af()(t.fileByKey, e => e.library_key)[i.payload.item.library_key];
     n && sz(e, n);
-  } else if (Ee.matches(i)) {
+  } else if (INSERT_SHARED_STATE_GROUP.matches(i)) {
     let t = e.getState();
-    let n = af()(t.fileByKey, e => _$$l6(e.library_key))[i.payload.item.library_key];
+    let n = af()(t.fileByKey, e => e.library_key)[i.payload.item.library_key];
     n && sz(e, n);
   } else if (_$$uo5.matches(i)) {
     let t = e.getState().user;
@@ -6439,33 +6438,33 @@ let od = e => e => function (t) {
 };
 function om() {
   return {
-    [_$$F6.FILES]: {},
-    [_$$F6.PINNED_FILES]: {},
-    [_$$F6.PROTOTYPES]: {},
-    [_$$F6.REPOS]: {},
-    [_$$F6.PROJECTS]: {},
-    [_$$F6.OFFLINE_FILES]: {}
+    [ComFileType.FILES]: {},
+    [ComFileType.PINNED_FILES]: {},
+    [ComFileType.PROTOTYPES]: {},
+    [ComFileType.REPOS]: {},
+    [ComFileType.PROJECTS]: {},
+    [ComFileType.OFFLINE_FILES]: {}
   };
 }
 function oh(e) {
   return {
-    [_$$F6.FILES]: {
-      ...e[_$$F6.FILES]
+    [ComFileType.FILES]: {
+      ...e[ComFileType.FILES]
     },
-    [_$$F6.PINNED_FILES]: {
-      ...e[_$$F6.PINNED_FILES]
+    [ComFileType.PINNED_FILES]: {
+      ...e[ComFileType.PINNED_FILES]
     },
-    [_$$F6.PROTOTYPES]: {
-      ...e[_$$F6.PROTOTYPES]
+    [ComFileType.PROTOTYPES]: {
+      ...e[ComFileType.PROTOTYPES]
     },
-    [_$$F6.REPOS]: {
-      ...e[_$$F6.REPOS]
+    [ComFileType.REPOS]: {
+      ...e[ComFileType.REPOS]
     },
-    [_$$F6.PROJECTS]: {
-      ...e[_$$F6.PROJECTS]
+    [ComFileType.PROJECTS]: {
+      ...e[ComFileType.PROJECTS]
     },
-    [_$$F6.OFFLINE_FILES]: {
-      ...e[_$$F6.OFFLINE_FILES]
+    [ComFileType.OFFLINE_FILES]: {
+      ...e[ComFileType.OFFLINE_FILES]
     }
   };
 }
@@ -6474,23 +6473,23 @@ function og(e, t) {
   if (_$$y$.matches(t)) {
     let i = oh(e);
     for (let e of t.payload.tiles) i[t.payload.type][Tf.getId(e)] = !0;
-    t.payload.type === _$$F6.PINNED_FILES ? (i[_$$F6.FILES] = {}, i[_$$F6.PROTOTYPES] = {}, i[_$$F6.REPOS] = {}) : i[_$$F6.PINNED_FILES] = {};
+    t.payload.type === ComFileType.PINNED_FILES ? (i[ComFileType.FILES] = {}, i[ComFileType.PROTOTYPES] = {}, i[ComFileType.REPOS] = {}) : i[ComFileType.PINNED_FILES] = {};
     return i;
   }
   if (_$$PW.matches(t)) {
     let i = oh(e);
     for (let e of t.payload.keys) i[t.payload.type][e] = !0;
-    t.payload.type === _$$F6.PINNED_FILES ? (i[_$$F6.FILES] = {}, i[_$$F6.PROTOTYPES] = {}, i[_$$F6.REPOS] = {}) : i[_$$F6.PINNED_FILES] = {};
+    t.payload.type === ComFileType.PINNED_FILES ? (i[ComFileType.FILES] = {}, i[ComFileType.PROTOTYPES] = {}, i[ComFileType.REPOS] = {}) : i[ComFileType.PINNED_FILES] = {};
     return i;
   }
   if (TK.matches(t)) {
     let i = oh(e);
     for (let e of t.payload.tileKeys) {
-      delete i[_$$F6.FILES][e];
-      delete i[_$$F6.PINNED_FILES][e];
-      delete i[_$$F6.PROTOTYPES][e];
-      delete i[_$$F6.REPOS][e];
-      delete i[_$$F6.OFFLINE_FILES][e];
+      delete i[ComFileType.FILES][e];
+      delete i[ComFileType.PINNED_FILES][e];
+      delete i[ComFileType.PROTOTYPES][e];
+      delete i[ComFileType.REPOS][e];
+      delete i[ComFileType.OFFLINE_FILES][e];
     }
     return i;
   }
@@ -6498,8 +6497,8 @@ function og(e, t) {
   if (P6.matches(t)) {
     let i = oh(e);
     for (let e in t.payload.fileKeys) {
-      delete i[_$$F6.FILES][e];
-      delete i[_$$F6.PINNED_FILES][e];
+      delete i[ComFileType.FILES][e];
+      delete i[ComFileType.PINNED_FILES][e];
     }
     return i;
   }
@@ -6936,7 +6935,7 @@ let oG = combineReducers({
     if (_$$li.matches(t)) return new Set(e).add(t.payload.commentUuid);
     if (wJ.matches(t)) {
       let i = new Set(e);
-      i.$$delete(t.payload.commentUuid);
+      i.delete(t.payload.commentUuid);
       return i;
     }
     return e;
@@ -7522,15 +7521,15 @@ function lr(e = ln, t) {
   } : e;
 }
 let lc = 0;
-let lu = _$$oB2((e, t) => _$$fk.matches(t) && t.payload.id === e.id ? {
+let lu = _$$oB2((e, t) => updateFileImportItem.matches(t) && t.payload.id === e.id ? {
   ...e,
   ...t.payload
 } : e, {
-  shouldIgnoreAction: e => !_$$fk.matches(e)
+  shouldIgnoreAction: e => !updateFileImportItem.matches(e)
 });
 function lp(e, t) {
   let i = {
-    step: _$$Y3.START,
+    step: ImportEventType.START,
     isDraggingImport: !1,
     queue: [],
     files: {},
@@ -7542,15 +7541,15 @@ function lp(e, t) {
     lc = 0;
     return i;
   }
-  if (Ud.matches(t)) {
+  if (addFileImportToQueue.matches(t)) {
     t.payload.forEach(t => {
-      if (kI(t.name) && e.step === _$$Y3.FILE_IMPORT_WITH_CANCELED_PDF) return;
+      if (isPdfFile(t.name) && e.step === ImportEventType.FILE_IMPORT_WITH_CANCELED_PDF) return;
       let i = new PerfTimer('file.import', {});
       let n = {
         id: lc++,
         name: t.name,
         blob: t.blob,
-        status: _$$mO.WAITING,
+        status: ImportExportStatus.WAITING,
         timer: i,
         folderId: t.folderId
       };
@@ -7560,7 +7559,7 @@ function lp(e, t) {
       };
       e.queue = [...e.queue, n.id];
     });
-  } else if (_$$fk.matches(t)) {
+  } else if (updateFileImportItem.matches(t)) {
     let i = Ql(e.files, t, lu);
     if (i !== e.files) {
       return {
@@ -7568,15 +7567,15 @@ function lp(e, t) {
         files: i
       };
     }
-  } else if (JR.matches(t)) {
-    if (e.step === _$$Y3.CONFIRM_PDF_IMPORT || e.queue.length === 0) return e;
+  } else if (startProcessingFile.matches(t)) {
+    if (e.step === ImportEventType.CONFIRM_PDF_IMPORT || e.queue.length === 0) return e;
     if (!e.isProcessingFile) {
       return {
         ...e,
         isProcessingFile: !0
       };
     }
-  } else if (_$$n$2.matches(t)) {
+  } else if (doneProcessingFile.matches(t)) {
     return e.queue.length ? {
       ...e,
       queue: e.queue.slice(1),
@@ -7585,47 +7584,47 @@ function lp(e, t) {
       ...e,
       isProcessingFile: !1
     };
-  } else if (_$$cY.matches(t)) {
+  } else if (clearFileImports.matches(t)) {
     if (fileImporter?.resetCancel(), !e.queue.length) return i;
-  } else if (_$$lg.matches(t)) {
+  } else if (clearFileImportQueue.matches(t)) {
     return {
       ...e,
       queue: []
     };
-  } else if (_$$rj.matches(t)) {
+  } else if (failFileImportOnLimit.matches(t)) {
     return {
       ...e,
       failedOnFileLimit: !0
     };
-  } else if (JK.matches(t)) {
+  } else if (showImportPdfConfirmation.matches(t)) {
     return {
       ...e,
-      step: _$$Y3.CONFIRM_PDF_IMPORT
+      step: ImportEventType.CONFIRM_PDF_IMPORT
     };
-  } else if (GR.matches(t) && getFeatureFlags().internal_only_debug_tools) {
+  } else if (showImportFigmaDesignRepo.matches(t) && getFeatureFlags().internal_only_debug_tools) {
     return {
       ...e,
-      step: _$$Y3.IMPORT_REPO
+      step: ImportEventType.IMPORT_REPO
     };
-  } else if (Fj.matches(t)) {
-    let t = e.queue.filter(t => !kI(e.files[t].name));
+  } else if (cancelImportPdf.matches(t)) {
+    let t = e.queue.filter(t => !isPdfFile(e.files[t].name));
     let i = {};
-    for (let t of Object.values(e.files)) kI(t.name) || (i[t.id] = t);
+    for (let t of Object.values(e.files)) isPdfFile(t.name) || (i[t.id] = t);
     return {
       ...e,
       queue: t,
       files: i,
-      step: _$$Y3.FILE_IMPORT_WITH_CANCELED_PDF
+      step: ImportEventType.FILE_IMPORT_WITH_CANCELED_PDF
     };
   } else {
-    if (Fd.matches(t)) {
+    if (confirmImportPdf.matches(t)) {
       return {
         ...e,
-        step: _$$Y3.FILE_IMPORT_WITH_CONFIRMED_PDF,
+        step: ImportEventType.FILE_IMPORT_WITH_CONFIRMED_PDF,
         selectedPdfType: t.payload
       };
     }
-    _$$rf.matches(t);
+    setFromFileImportNuxStep.matches(t);
   }
   return e;
 }
@@ -7968,7 +7967,7 @@ function lD(e) {
     if (componentClearPublishedItems.matches(i) && i.payload.type === e) return {};
     if (componentDelete.matches(i) && i.payload.type === e) {
       let e = i.payload.file;
-      let n = _$$l6(e.library_key);
+      let n = e.library_key;
       let r = e.team_id || NO_TEAM;
       let a = {
         ...t
@@ -7976,8 +7975,8 @@ function lD(e) {
       a[r] = {
         ...a[r]
       };
-      a[r][_$$l6(e.library_key)] = {
-        ...a[r][_$$l6(e.library_key)]
+      a[r][e.library_key] = {
+        ...a[r][e.library_key]
       };
       i.payload.nodeIds.forEach(e => {
         delete a[r][n][e];
@@ -8128,7 +8127,7 @@ let lU = combineReducers({
   }, t) {
     return componentReplaceOpenFilePublishedLivegraph.matches(t) ? t.payload : e;
   },
-  openHubFilePublished__LIVEGRAPH: jz.reducer,
+  openHubFilePublished__LIVEGRAPH: libraryDataCompositionAtom.reducer,
   local: lj,
   assetsPanelSearch(e = {
     query: '',
@@ -8209,7 +8208,7 @@ let lU = combineReducers({
       ...t.payload.localOldGuidToNewKey
     }
   } : e,
-  libraryPublishingMode: _$$pz.reducer,
+  libraryPublishingMode: libraryPublishingModeAtom.reducer,
   localVariablesById: _$$Cg.reducer,
   localVariableSetsById: qy.reducer,
   subscribedVariablesByIdFromLoadedPages: _$$bO.reducer,
@@ -10168,7 +10167,7 @@ function cU(e = {
   let i = e;
   initAction.matches(t) ? i = {
     mode: getInitialOptions().editing_file ? UIVisibilitySetting.HIDE_UI : UIVisibilitySetting.OFF
-  } : HO.matches(t) ? i = {
+  } : setFullscreenNewFileOpen.matches(t) ? i = {
     mode: t.payload.progressBarMode
   } : fullscreenOpen.matches(t) ? i = {
     mode: UIVisibilitySetting.HIDE_UI
@@ -10182,7 +10181,7 @@ function cU(e = {
   return i;
 }
 function cB(e = !1, t) {
-  if (HO.matches(t)) {
+  if (setFullscreenNewFileOpen.matches(t)) {
     if (t.payload.openNewFileIn === TabOpenBehavior.SAME_TAB) return !1;
   } else if (initAction.matches(t) || fullscreenOpen.matches(t) || reconnectingSucceeded.matches(t) || _$$o8.matches(t)) {
     return !1;
@@ -11673,7 +11672,7 @@ let pg = {
     if (orgsUnlockOrgs.matches(t)) {
       let i = new Set(e);
       t.payload.orgIds.forEach(e => {
-        i.has(e) && i.$$delete(e);
+        i.has(e) && i.delete(e);
       });
       return i;
     }
@@ -12403,8 +12402,8 @@ let pg = {
     }
     return e;
   },
-  mergingStatus(e = _$$y2.NOT_MERGING, t) {
-    return SL.matches(t) ? _$$y2.MERGING : _$$E3.matches(t) ? _$$y2.NOT_MERGING : Nu.matches(t) ? _$$y2.MERGING_ERROR : e;
+  mergingStatus(e = MergeState.NOT_MERGING, t) {
+    return SL.matches(t) ? MergeState.MERGING : _$$E3.matches(t) ? MergeState.NOT_MERGING : Nu.matches(t) ? MergeState.MERGING_ERROR : e;
   },
   openFileMerge(e = null, t) {
     return _$$nM.matches(t) ? t.payload : _$$ie.matches(t) ? null : e;
@@ -13314,11 +13313,11 @@ let md = createOptimistThunk((e, {
   }(e, r, a);
   void 0 !== t.currentTool && n.multiplayerEmoji.type === 'REACTING_OR_CHATTING' && e.dispatch(stopReactingAction());
 });
-let mp = createOptimistThunk((e, t) => {
-  let i = e.getState().mirror.appModel;
-  e.dispatch(mm(t));
-  e.dispatch(updateMirror(t));
-  e.dispatch(mh({
+let mp = createOptimistThunk((context, t) => {
+  let i = context.getState().mirror.appModel;
+  context.dispatch(mm(t));
+  context.dispatch(updateMirror(t));
+  context.dispatch(mh({
     ...t,
     previousAppModel: i
   }));
@@ -13805,14 +13804,14 @@ let hh = e => e => hm ? function (t) {
 let hv = 'frontend_commit_preview_tooltip--header--Lahum';
 let hI = 'frontend_commit_preview_tooltip--separator--JUjSs';
 function hE() {
-  getCookieOrStorage().$$delete(H_, {
+  getCookieOrStorage().delete(H_, {
     includeDotDomainPrefix: !0
   });
   let e = new URLSearchParams(customHistory.location.search);
-  (e.has(A7) || e.has(EL)) && (e.$$delete(A7), e.$$delete(EL), customHistory.replace(`${customHistory.location.pathname}?${e.toString()}${customHistory.location.hash}`, customHistory.location.state));
+  (e.has(A7) || e.has(EL)) && (e.delete(A7), e.delete(EL), customHistory.replace(`${customHistory.location.pathname}?${e.toString()}${customHistory.location.hash}`, customHistory.location.state));
   customHistory.reload('Cleared frontend commit preview cookie');
 }
-let hx = registerTooltip('frontend_commit_preview_indicator', ({
+let FrontendCommitPreviewIndicator = registerTooltip('frontend_commit_preview_indicator', ({
   desiredCommitSha: e,
   blockedReason: t
 }) => {
@@ -13911,7 +13910,7 @@ let hT = {
 };
 function hk(e) {
   let [t, i] = function () {
-    let e = _$$l1();
+    let e = useWindowDimensions();
     let [t, i] = useLocalStorageSync('developerDraggableIndicator', hT, {
       debounceTime: 1e3
     });
@@ -14014,7 +14013,7 @@ function hP() {
     'data-tooltip-desired-commit-sha': manifest_commit_sha_override_desired,
     'data-tooltip-max-width': 300,
     'data-tooltip-blocked-reason': manifest_commit_sha_override_blocked_reason,
-    'data-tooltip': hx,
+    'data-tooltip': FrontendCommitPreviewIndicator,
     'data-tooltip-interactive': !0,
     'data-tooltip-show-immediately': !0,
     'children': jsx(SvgComponent, {
@@ -14047,7 +14046,7 @@ function hM(e) {
   } = getInitialOptions();
   return i18n_desktop_version_support?.[e];
 }
-let hj = registerModal(e => {
+let DesktopLanguageSupportModal = registerModal(e => {
   let t = useModalManager(e);
   let i = getI18nState()?.getPrimaryLocale(!1);
   let r = useDispatch();
@@ -14289,7 +14288,7 @@ export async function $$hz0(e, t, d = {
     !function (e, t) {
       let i = getInitialOptions().user_data?.id;
       if (!i) return;
-      MV(i);
+      initializeLiveGraph(i);
       let {
         user_flags
       } = getInitialOptions();
@@ -14304,7 +14303,7 @@ export async function $$hz0(e, t, d = {
         }
         e(setAllUserFlags(r));
       }
-      WB().subscribe(BlockingUserState, {}, i => {
+      getCurrentLiveGraphClient().subscribe(BlockingUserState, {}, i => {
         if (i.status === 'loaded') {
           let n = {};
           for (let e of i.data.currentUser.userFlags) {
@@ -14423,7 +14422,7 @@ export async function $$hz0(e, t, d = {
         b.dispatch(_$$S6());
         b.dispatch(initAction());
       }));
-      d.loadBlank ? U_(b, FEditorType.Design).catch(e => reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e)) : d.newFileInfo && $N(b, d.newFileInfo, !0);
+      d.loadBlank ? initializeFullscreenForNewFile(b, FEditorType.Design).catch(e => reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e)) : d.newFileInfo && initiateNewFileCreation(b, d.newFileInfo, !0);
       performanceMetricsTracker.hydrateDurationMs = Math.round(measureSyncDuration('fileBrowserHydrate', ServiceCategories.WAYFINDING, () => {
         trackEventAnalytics('file-browser-hydrate', {
           location: 'app_entry'
@@ -14456,7 +14455,7 @@ export async function $$hz0(e, t, d = {
             trackingInfo: i,
             editorType: e
           });
-          b.dispatch(_$$uM(n));
+          b.dispatch(createAndOpenFile(n));
         } else if (e !== 'handleAction' || desktopAPIInstance.isFileBrowserTab() || isCommunityOrUserPath()) {
           if (e === 'handlePageCommand') {
             let {
@@ -14739,7 +14738,7 @@ export async function $$hz0(e, t, d = {
         let i = hM(t);
         let n = t && hD[t];
         (!n || !e.getState().userFlags[n]) && i && i > desktopAPIInstance.getVersion() && e.dispatch(showModalHandler({
-          type: hj
+          type: DesktopLanguageSupportModal
         }));
       })(b);
       IK(b);
@@ -15149,7 +15148,7 @@ export async function $$hz0(e, t, d = {
             link_url: e
           };
           let o = sendWithRetry.post(`/api/files/${t}/related_links`, s);
-          await WB()?.optimisticallyCreate({
+          await getCurrentLiveGraphClient()?.optimisticallyCreate({
             DeveloperRelatedLink: {
               [`optimistic-link-${generateUUIDv4()}`]: {
                 nodeId: r,
@@ -15304,7 +15303,7 @@ export async function $$hz0(e, t, d = {
     getSingletonSceneGraph().setChangeListenersConfig({
       getCurrentTimeMs: () => Date.now(),
       getTimeBudgetMs: () => 10,
-      deferFn: e => (iC.add(e), requestDeferredExecution(), () => iC.$$delete(e))
+      deferFn: e => (iC.add(e), requestDeferredExecution(), () => iC.delete(e))
     });
   });
 }

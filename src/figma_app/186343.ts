@@ -6,7 +6,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { VisualBellActions } from "../905/302958";
-import { _$ } from "../figma_app/379850";
+import { handleFullscreenViewTransition } from "../figma_app/379850";
 import { showModalHandler } from "../905/156213";
 import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_PAGE_LOADING } from "../905/784363";
 import { useDraftsPageLimitExperiment } from "../figma_app/297957";
@@ -117,7 +117,7 @@ export async function $$U2({
 let B = 0;
 export async function $$G0(e, t, r, n, i, a, o, p, h, g) {
   let f;
-  if (g && _$(n, g, "overview_set_current_page"), e === t) return;
+  if (g && handleFullscreenViewTransition(n, g, "overview_set_current_page"), e === t) return;
   let E = performance.now();
   let y = B += 1;
   a("action_page_switch_initiated", {

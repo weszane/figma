@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useEffect, useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import r, { C as _$$C } from "../905/222694";
+import r, { convertToRgba } from "../905/222694";
 import { noop } from 'lodash-es';
 import { C as _$$C2 } from "../905/520159";
 import { A as _$$A } from "../905/251970";
@@ -204,7 +204,7 @@ function z(e) {
             src: A || void 0,
             className: "quick_reply_thread_view--previewImage--gSK-n",
             style: {
-              backgroundColor: _$$C(file.checkpointClientMeta)
+              backgroundColor: convertToRgba(file.checkpointClientMeta)
             },
             alt: "thumbnail"
           })

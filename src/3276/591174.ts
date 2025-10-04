@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { createPortal } from "react-dom";
 import i from "classnames";
 import { fG } from "../figma_app/973927";
-import { Cn } from "../905/862913";
+import { convertToRgba } from "../905/862913";
 import { FK } from "../figma_app/961422";
 import { Ho } from "../figma_app/878651";
 import { y3, Yg } from "../figma_app/357202";
@@ -34,7 +34,7 @@ export function $$u0(e) {
     children: jsx(FK, {
       removeBorder: !0,
       children: jsx(Ho, {
-        backgroundColor: Cn(clientMeta),
+        backgroundColor: convertToRgba(clientMeta),
         image: imageUrl,
         isSet: thumbnailIsSet,
         isWhiteboard,

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useCallback, useLayoutEffect } from "react";
-import { C } from "../905/222694";
+import { convertToRgba } from "../905/222694";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import o from "classnames";
 import { dayjs } from "../905/920142";
@@ -91,7 +91,7 @@ export function $$y0({
     borderRadius: b,
     noBorder: T
   });
-  let w = t !== DesignsList.SLIDES ? C(o) : void 0;
+  let w = t !== DesignsList.SLIDES ? convertToRgba(o) : void 0;
   let O = t === DesignsList.DEFAULT_DESIGN || t === DesignsList.DEFAULT_WHITEBOARD || t === DesignsList.COOPER;
   return jsx(ThumbnailContainer, {
     borderRadius: b,

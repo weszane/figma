@@ -1,5 +1,5 @@
-import { u5, ip } from "../905/936492";
-import { XC } from "../905/512783";
+import { CLUSTER_SIZE, FigmaCommentClusterElement } from "../905/936492";
+import { CommentPinElement } from "../905/512783";
 import { rectDistance } from "../905/736624";
 class s {
   constructor(e, t, n) {
@@ -68,8 +68,8 @@ let l = (e, t) => {
 class d {
   constructor(e, t, n) {
     let i = $$r1(t, e.zoomScale);
-    let l = XC.getPinSize(3);
-    let d = Math.ceil(Math.max(u5, l.width, l.height) + i);
+    let l = CommentPinElement.getPinSize(3);
+    let d = Math.ceil(Math.max(CLUSTER_SIZE, l.width, l.height) + i);
     this.distanceGrid = new s(d, i, n);
   }
   getNearbyNeighbor(e) {
@@ -87,7 +87,7 @@ export function $$c0(e, t, n) {
     y: t.canvasPosition.y,
     threads: [t]
   });
-  let s = e => ip.getClusterViewportRect(e, t);
+  let s = e => FigmaCommentClusterElement.getClusterViewportRect(e, t);
   if (t.zoomScale <= n.minZoomPercentage / 100) {
     let e = new Map();
     do {

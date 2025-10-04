@@ -6,7 +6,7 @@ import { debugState } from "../905/407919";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { zE } from "../905/738636";
+import { createNewFileWithRestrictions } from "../905/738636";
 import { $ } from "../905/922405";
 import { sendToMakeFromDesignAtom } from "../figma_app/223206";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -169,7 +169,7 @@ let S = (e, t) => ({
         });
         let n = debugState.getState();
         let a = getPermissionsAndView(n);
-        i(zE({
+        i(createNewFileWithRestrictions({
           state: a,
           from: t,
           editorType: FFileType.FIGMAKE,

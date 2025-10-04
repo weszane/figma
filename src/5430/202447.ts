@@ -8,7 +8,7 @@ import { Ay } from "../905/506641";
 import { COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
 import { trackContextViewed } from "../figma_app/314264";
-import { Cn } from "../905/862913";
+import { convertToRgba } from "../905/862913";
 import { userIdAtom } from "../figma_app/864723";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { Ho } from "../figma_app/878651";
@@ -151,7 +151,7 @@ function w({
           image: e.thumbnail_url,
           isSet: l,
           isWhiteboard: o,
-          backgroundColor: Cn(e.client_meta),
+          backgroundColor: convertToRgba(e.client_meta),
           hubFileId: e.id,
           alt: getCurrentVersion(e).name + " preview",
           thumbnailContext: O7.DETAIL,

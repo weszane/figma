@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { getAtomMutate } from "../figma_app/566371";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -95,7 +95,7 @@ export function $$$$w0(e, t, r, m) {
         contentId: t.id,
         apiResourceType: mapVtResourceType(e)
       });
-      p && p.community_profile_id && WB().optimisticallyCreate({
+      p && p.community_profile_id && getCurrentLiveGraphClient().optimisticallyCreate({
         CommunityHubLike: {
           [`optimistic-${e.id}-${p.community_profile_id}`]: {
             profileId: p.community_profile_id,
@@ -146,7 +146,7 @@ export function $$$$w0(e, t, r, m) {
         contentId: s.id,
         apiResourceType: mapVtResourceType(e)
       });
-      r && WB().optimisticallyDelete({
+      r && getCurrentLiveGraphClient().optimisticallyDelete({
         CommunityHubLike: {
           [r]: null
         }

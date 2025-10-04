@@ -64,7 +64,7 @@ import { tL as _$$tL } from "../8826/642528";
 import { q as _$$q2 } from "../642/649844";
 import { o as _$$o } from "../8826/796619";
 import { bL, c$ as _$$c$ } from "../905/867927";
-import { q as _$$q3 } from "../905/932270";
+import { Legend } from "../905/932270";
 import { setupToggleButton } from "../905/167712";
 import { E as _$$E2 } from "../905/53857";
 import { C as _$$C } from "../8826/771306";
@@ -500,7 +500,7 @@ function es(e) {
     clearVariableConsumption
   } = _$$O2(C, VariableResolvedDataType.FLOAT);
   let N = useCallback((e, t = yesNoTrackingEnum.YES) => {
-    if (clearVariableConsumption(yesNoTrackingEnum.NO), e === vC) "number" == typeof s && minMaxApi.set(s || null, yesNoTrackingEnum.NO); else if (e === Bn) {
+    if (clearVariableConsumption(yesNoTrackingEnum.NO), e === vC) "number" == typeof s && minMaxApi.set(s || null, yesNoTrackingEnum.NO);else if (e === Bn) {
       minMaxApi.set(null, yesNoTrackingEnum.NO);
       let e = {
         [minMaxApi.widthOrHeight]: {
@@ -1224,7 +1224,7 @@ function td({
           });
         },
         recordingKey: "layout",
-        legend: jsx(_$$q3, {
+        legend: jsx(Legend, {
           children: getI18nString("fullscreen.properties_panel.stack_panel.layout")
         }),
         htmlAttributes: {

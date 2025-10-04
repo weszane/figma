@@ -18,7 +18,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
 import { useThemeContext } from "../905/640017";
 import { Rk } from "../figma_app/483189";
-import { PN, Vm, c7 } from "../figma_app/728075";
+import { overlayColor, whiteColor2, shadowColor } from "../figma_app/728075";
 import { clamp } from "../figma_app/492908";
 import { EventShield } from "../905/821217";
 import O from "classnames";
@@ -32,9 +32,9 @@ let y = memo(function (e) {
   let a = new Point(n, n + 100);
   let s = new Point(n + 100, n);
   let l = useThemeContext();
-  let c = l?.colorIcon || PN;
-  let p = l?.colorBg || Vm;
-  let u = l?.colorIconTertiary || c7;
+  let c = l?.colorIcon || overlayColor;
+  let p = l?.colorBg || whiteColor2;
+  let u = l?.colorIconTertiary || shadowColor;
   let _ = l.colorIconBrand;
   let {
     tempBezierValues,

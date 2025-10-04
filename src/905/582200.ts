@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { F } from "../905/680873";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { U2, MF, ET, fK, R8 } from "../905/939257";
 import { InteractivityContext } from "../905/896141";
 import { C } from "../905/213457";
@@ -23,7 +23,7 @@ export function $$d0({
   } = p;
   let g = MF(() => ET(trackablePath));
   fK(trackablePath, g, i);
-  let f = o3(nt.trackableDebug);
+  let f = useLabConfiguration(labConfigurations.trackableDebug);
   let _ = MF(() => R8({
     componentName: "Trackable",
     name: e,

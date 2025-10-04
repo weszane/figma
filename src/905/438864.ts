@@ -4,7 +4,7 @@ import { clearActiveFileUsersAction } from "../figma_app/78808";
 import { yJ, bE, HA, yH } from "../figma_app/598926";
 import { componentDeleteForFile } from "../905/879323";
 import { ProjectsForTeam, ProjectByIdForRealtimeShim } from "../figma_app/43951";
-import { H } from "../905/715533";
+import { RealtimeSubscriptionManager } from "../905/715533";
 import { teamMembersChannelHandler, folderChannelHandler } from "../905/25169";
 export function $$u2(e, t, i = !1) {
   if (t.folder) switch (t.method) {
@@ -36,7 +36,7 @@ export function $$u2(e, t, i = !1) {
       }));
   }
 }
-let $$p3 = new H({
+let $$p3 = new RealtimeSubscriptionManager({
   name: "TeamChannelFoldersShim",
   ...teamMembersChannelHandler,
   livegraphView: ProjectsForTeam,
@@ -73,7 +73,7 @@ let $$p3 = new H({
   }) => "communityHub" !== e.getState().selectedView.view
 });
 let m = getFalseValue() ? new Date("1970-01-01T00:00:00.000Z") : new Date();
-let $$h1 = new H({
+let $$h1 = new RealtimeSubscriptionManager({
   name: "FolderChannelFoldersShim",
   ...folderChannelHandler,
   livegraphView: ProjectByIdForRealtimeShim,

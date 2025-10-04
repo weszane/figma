@@ -2,8 +2,8 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
 import { ButtonLargeWide } from "../905/521428";
 import { k as _$$k } from "../905/443820";
-import { b as _$$b, c as _$$c } from "../905/308099";
-import { q } from "../905/932270";
+import { RadioInputRoot, RadioInputOption } from "../905/308099";
+import { Legend } from "../905/932270";
 import { Label } from "../905/270045";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -92,13 +92,13 @@ export function $$b0({
             marginLeft: "-8px"
           }).$,
           "data-testid": "cart-sidebar-billing-interval",
-          children: jsxs(_$$b, {
-            legend: jsx(q, {
+          children: jsxs(RadioInputRoot, {
+            legend: jsx(Legend, {
               children: renderI18nText("checkout.sidebar.switch_your_billing_interval")
             }),
             value: i,
             onChange: e => I(e),
-            children: [jsx(_$$c, {
+            children: [jsx(RadioInputOption, {
               value: BillingCycle.YEAR,
               label: jsxs(Label, {
                 className: cssBuilderInstance.flex.itemsCenter.gap16.$,
@@ -110,7 +110,7 @@ export function $$b0({
                   children: renderI18nText("checkout.sidebar.save_up_to_20")
                 })]
               })
-            }), jsx(_$$c, {
+            }), jsx(RadioInputOption, {
               value: BillingCycle.MONTH,
               label: jsx(Label, {
                 children: renderI18nText("checkout.sidebar.monthly")

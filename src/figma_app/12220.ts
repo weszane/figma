@@ -8,7 +8,7 @@ import { isPointInRect, Point } from "../905/736624";
 import { ih } from "../905/201151";
 import { viewportToScreen } from "../figma_app/62612";
 import { BusyReadyState, NEW_COMMENT_ID, ThreadType } from "../905/380385";
-import { XC, b1 } from "../905/512783";
+import { CommentPinElement, PostPinElement } from "../905/512783";
 import { NJv, QP5, oGx } from "../figma_app/27776";
 let $$m18 = 1;
 let $$g9 = {
@@ -227,9 +227,9 @@ export function $$P17(e, t, r, i) {
       switch (e) {
         case ThreadType.COMMENT_THREAD:
         case ThreadType.LITMUS_COMMENT_THREAD:
-          return XC;
+          return CommentPinElement;
         case ThreadType.FEED_POST:
-          return b1;
+          return PostPinElement;
         default:
           throwTypeError(e);
       }

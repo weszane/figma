@@ -18,7 +18,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { resolveUsedLibrariesAsync } from "../figma_app/646357";
 import { CommunityLibraryStyleData, LibraryStyleData, LibraryData } from "../figma_app/43951";
 import { mapStyleProperties, mapComponentProperties, mapStateGroupProperties } from "../figma_app/349248";
-import { jz } from "../figma_app/825489";
+import { libraryDataCompositionAtom } from "../figma_app/825489";
 import { useCurrentFileModules } from "../figma_app/409131";
 import { isValidLibraryKey } from "../figma_app/630951";
 import { createFileLibraryKeys } from "../905/651613";
@@ -66,7 +66,7 @@ export function $$M4({
   maxSubscriptionsBeforeCleanup: t = 20
 }) {
   let r = useCurrentFileKey();
-  useAtomValueAndSetter(jz);
+  useAtomValueAndSetter(libraryDataCompositionAtom);
   let [s, o] = useState({});
   let c = useCallback((e, t) => {
     o(r => ({

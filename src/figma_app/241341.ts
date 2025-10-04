@@ -34,7 +34,7 @@ import { styleIdMapping, activeVisualAttributes, ProjectDevelopmentPhases } from
 import { defaultSessionLocalIDString, sessionLocalIDToString } from '../905/871411';
 import { dF, Dx, mH } from '../905/917193';
 import { selectViewAction } from '../905/929976';
-import { q as _$$q } from '../905/932270';
+import { Legend } from '../905/932270';
 import { lE, mf, NI, X$ } from '../905/945781';
 import { kF, zg } from '../905/993733';
 import { E1 } from '../figma_app/9054';
@@ -539,7 +539,7 @@ export function $$eE2(e) {
   let eP = () => eO && jsx(bL, {
     value: M,
     onChange: e => F(e),
-    legend: jsx(_$$q, {
+    legend: jsx(Legend, {
       children: getI18nString('collaboration.branching.comparison_options')
     }),
     className: tH,

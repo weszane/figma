@@ -22,7 +22,7 @@ import { useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile, useCanAccessFu
 import { W as _$$W } from "../905/200727";
 import { TrackingProvider } from "../figma_app/831799";
 import { EditorPreferencesApi, getDevHandoffInspectSplitPosition, getColorFormat } from "../figma_app/740163";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { useCurrentFileKey, selectCurrentFile, useOpenFileLibraryKey, useSourceFileKey, selectOpenFileKey } from "../figma_app/516028";
 import { OnboardingSequence } from "../905/152487";
 import { xT, Yh, g_, Ye } from "../figma_app/32128";
@@ -164,7 +164,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
 import { bL as _$$bL, c$ as _$$c$ } from "../905/575478";
-import { q as _$$q2 } from "../905/932270";
+import { Legend } from "../905/932270";
 import { A as _$$A5 } from "../905/251970";
 import { trackFileEventWithUser, trackFileEventWithStore, trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { userFlagAtomFamily, userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -357,7 +357,7 @@ import { ab as _$$ab } from "../figma_app/870683";
 import { BT, q$ } from "../figma_app/644255";
 import { K as _$$K4 } from "../905/918348";
 import { E as _$$E7 } from "../905/53857";
-import { Ak } from "../905/986103";
+import { useRelativeTime } from "../905/986103";
 import { isInteractiveInspectionAndRollbackEnabled, isDevModeFocusViewActive } from "../figma_app/544649";
 import { WZ } from "../905/893645";
 import { setProgressBarState } from "../figma_app/91703";
@@ -1933,7 +1933,7 @@ function ns() {
   });
 }
 function nr() {
-  let e = useMemo(() => z4.getIsExtension(), []);
+  let e = useMemo(() => fullscreenAlias.getIsExtension(), []);
   let t = _$$W();
   useEffect(() => {
     xT(240, Yh, g_);
@@ -3403,7 +3403,7 @@ function iO() {
     })]
   });
 }
-function iM({ }) {
+function iM({}) {
   let e = useDispatch();
   let t = "install-messaging-dropdown";
   let n = useDropdownState();
@@ -3485,7 +3485,7 @@ function iF() {
         userInitiated: !0
       })),
       className: a2,
-      legend: jsx(_$$q2, {
+      legend: jsx(Legend, {
         children: renderI18nText("dev_handoff.configuration_wizard.theme_step.title")
       }),
       children: n.map(({
@@ -4649,7 +4649,7 @@ function i$({
       n || t(Number.parseInt(e, 10));
     },
     className: ek()("configuration_wizard--stepPicker--Ffab-", n && "configuration_wizard--disabledStepPicker--Ib2IX"),
-    legend: jsx(_$$q2, {
+    legend: jsx(Legend, {
       children: renderI18nText("dev_handoff.configuration_wizard.step_picker_legend")
     }),
     htmlAttributes: {
@@ -4814,7 +4814,7 @@ let oZ = class {
       if (n?.type === "PLAIN_TEXT") _$$n6({
         link: t,
         linkPreviewJson: n
-      }); else if (n?.type === "AUTH_REQUIRED") {
+      });else if (n?.type === "AUTH_REQUIRED") {
         let n = atomStoreManager.get(ok);
         let a = n[e.plugin_id]?.links ?? [];
         atomStoreManager.set(ok, n => ({
@@ -5081,8 +5081,8 @@ function o8({
   let D = t.linkPreview;
   let O = D && "PLAIN_TEXT" === D.type && D.text;
   let M = O && !t.isUserOverride && k;
-  let F = k && isAllowedUpload(k.plugin.plugin_id, z4.getIsExtension());
-  let z = z4.getIsExtension() || F;
+  let F = k && isAllowedUpload(k.plugin.plugin_id, fullscreenAlias.getIsExtension());
+  let z = fullscreenAlias.getIsExtension() || F;
   let V = useCallback(() => {
     x("Dev Handoff Related Links Open Hyperlink", {
       nodeId: h,
@@ -5109,7 +5109,7 @@ function o8({
       }));
       return;
     }
-    z4.getIsExtension() && openRelatedLink(t.linkUrl);
+    fullscreenAlias.getIsExtension() && openRelatedLink(t.linkUrl);
   }, [h, f?.type, x, t, F, k, c]);
   let G = () => {
     handleUrlAction(t.linkUrl) || c(setupHyperlinkHandler({
@@ -5751,7 +5751,7 @@ function lQ() {
           variables: s ?? null
         }, e))
       }), showMoreButton]
-    }), !z4.getIsExtension() && h && jsx(lX, {})]
+    }), !fullscreenAlias.getIsExtension() && h && jsx(lX, {})]
   });
 }
 function lq() {
@@ -8087,8 +8087,8 @@ function rX() {
     },
     setCurrentViewOrTab: setCurrentView,
     currentView: currentPluginView,
-    closeModal: () => { },
-    pinModal: () => { }
+    closeModal: () => {},
+    pinModal: () => {}
   }), [n, setCurrentView, currentPluginView]);
   return jsx(AutoLayout, {
     direction: "vertical",
@@ -8849,7 +8849,7 @@ function d2({
   isLatest: t
 }) {
   let n = d5(e);
-  let i = Ak(e.timestamp);
+  let i = useRelativeTime(e.timestamp);
   return jsx("h3", {
     className: d0,
     children: t ? renderI18nText("dev_handoff.workflows.focus_view.activity.activity_row_with_latest", {
@@ -8944,7 +8944,7 @@ function d9({
 }) {
   let u = useDispatch();
   let p = trackFileEventWithStore();
-  let h = Ak((t ?? 0) * 1e3);
+  let h = useRelativeTime((t ?? 0) * 1e3);
   let f = useDevModeFocusId();
   return jsx(jP, {
     dispatch: u,
@@ -9047,7 +9047,7 @@ function ct() {
 function cn({
   latest: e
 }) {
-  let t = Ak(e);
+  let t = useRelativeTime(e);
   return jsx(_$$E7, {
     variant: "inactiveOutline",
     children: getI18nString("dev_handoff.workflows.focus_view.activity.collapsed", {
@@ -9784,7 +9784,7 @@ function uo() {
     shouldResetOnSelectionChange: !0
   });
   return 0 === visibleItems.length ? null : jsxs(VZ, {
-    hideHeader: z4.getIsExtension(),
+    hideHeader: fullscreenAlias.getIsExtension(),
     title: getI18nString("dev_handoff.assets"),
     recordingKey: "assets",
     collapsiblePanelKey: "assets",
@@ -10286,7 +10286,7 @@ function ux() {
   } = e;
   return 0 === totalAssets && 0 === totalComponents ? null : jsxs(Fragment, {
     children: [totalAssets > 0 && jsxs(VZ, {
-      hideHeader: z4.getIsExtension(),
+      hideHeader: fullscreenAlias.getIsExtension(),
       title: getI18nString("dev_handoff.assets"),
       recordingKey: "assets",
       collapsiblePanelKey: "assets",
@@ -10313,7 +10313,7 @@ function ux() {
         assetType: assetTypeEnum.ASSET_VIDEO
       })]
     }), getFeatureFlags().dt_nested_components && totalComponents > 0 && jsx(VZ, {
-      hideHeader: z4.getIsExtension(),
+      hideHeader: fullscreenAlias.getIsExtension(),
       title: getI18nString("dev_handoff.assets.nested_components"),
       recordingKey: "nested_components",
       collapsiblePanelKey: "nested_components",
@@ -11336,7 +11336,7 @@ function pj(e) {
   let p = useDropdownState();
   let h = useRef(null);
   let f = useSceneGraphSelector();
-  let g = z4.getIsExtension();
+  let g = fullscreenAlias.getIsExtension();
   let x = useAtomWithSubscription(be);
   let m = mr(l ?? "", f);
   return jsx(_$$t5.TabPanel, {
@@ -11378,7 +11378,7 @@ function pj(e) {
                     }) : jsxs(Fragment, {
                       children: [jsx(pb, {}), jsxs(pv, {
                         children: [jsx("div", {
-                          className: ek()("inspect_panel--layerPreview--hxLhR", z4.getIsExtension() && "inspect_panel--isInExtension--kzn7u"),
+                          className: ek()("inspect_panel--layerPreview--hxLhR", fullscreenAlias.getIsExtension() && "inspect_panel--isInExtension--kzn7u"),
                           children: jsx(uQ, {})
                         }), jsx(_$$pm, {
                           inspectionModeLayout: "segmented"
@@ -11932,7 +11932,7 @@ function p4({
       className: "frame_picker--trigger--ZPMqZ",
       ref: o,
       onClick: function () {
-        if (t) n(!1); else {
+        if (t) n(!1);else {
           let e = o.current?.getBoundingClientRect();
           e && (c(e), n(!0));
         }
@@ -13249,7 +13249,7 @@ export function $$fm1() {
 }
 let f_ = memo(function () {
   useEffect(() => _$$K5, []);
-  let e = useMemo(() => z4.getIsExtension(), []);
+  let e = useMemo(() => fullscreenAlias.getIsExtension(), []);
   let t = useIsFullscreenOverview();
   let n = _$$e2();
   let l = !!useDevModeFocusId() && !t && !n;

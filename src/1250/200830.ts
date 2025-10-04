@@ -47,7 +47,7 @@ import { vM, J5 } from "../figma_app/692865";
 import { U as _$$U2 } from "../1250/501209";
 import { Gv, ak, iy, GV } from "../figma_app/532170";
 import { debugState } from "../905/407919";
-import { uM } from "../905/738636";
+import { createAndOpenFile } from "../905/738636";
 import { getNewFileConfig } from "../905/766303";
 import { TabOpenBehavior } from "../figma_app/915202";
 import { c4, Au } from "../figma_app/518077";
@@ -468,7 +468,7 @@ function eE(e) {
       e.onClickPrimaryCta();
       (function () {
         let e = debugState.getState();
-        debugState.dispatch(uM(getNewFileConfig({
+        debugState.dispatch(createAndOpenFile(getNewFileConfig({
           state: e,
           openNewFileIn: TabOpenBehavior.SAME_TAB
         })));

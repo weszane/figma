@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { getIsMac, getIsLinux, getIsWindows, isIpadDevice } from "../figma_app/778880";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { _o, k$, gN, id, Dz, TV, WJ, f4 } from "../figma_app/847915";
+import { hasActionOrCallback, hasSeparator, hasHeader, hasRenderFunction, getActionOrName, hasChildrenOrDropdown, isMenuItemChecked, getProperty } from "../figma_app/847915";
 import { formatI18nMessage } from "../905/482208";
 import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
@@ -17,7 +17,7 @@ import { K3 } from "../figma_app/678300";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { Bf } from "../figma_app/249941";
 export function $$v0(e, t) {
-  if (!e || !t.isSearching && _o(e) && e.searchOnly) return !1;
+  if (!e || !t.isSearching && hasActionOrCallback(e) && e.searchOnly) return !1;
   if (e.flags) {
     if (e.flags.indexOf("!ship") > -1) return !1;
     if (e.flags.indexOf("!desktop") > -1) {
@@ -68,7 +68,7 @@ export function $$v0(e, t) {
     let m = ck();
     if (e.flags.indexOf("!integration") > -1 && m || e.flags.indexOf("integration") > -1 && !m || e.flags.indexOf("!variables_table") > -1 && "fullscreen" === t.selectedView.view && t.selectedView.showDevModeVariablesTable) return !1;
   }
-  return !!(k$(e) || gN(e)) || !(null != e.platforms && !function (e) {
+  return !!(hasSeparator(e) || hasHeader(e)) || !(null != e.platforms && !function (e) {
     for (let t of e) {
       if ("mac" === t && getIsMac() || "linux" === t && getIsLinux()) return !0;
       if ("windows" === t && getIsWindows()) return !0;
@@ -88,7 +88,7 @@ export const jv = function e(t, i) {
   })).map(t => function (t, i) {
     let r;
     if (!t) return null;
-    if (k$(t)) {
+    if (hasSeparator(t)) {
       let e = {
         ...t
       };
@@ -96,17 +96,17 @@ export const jv = function e(t, i) {
       e.separator = !0;
       return e;
     }
-    if (gN(t)) return {
+    if (hasHeader(t)) return {
       displayText: t.name,
       displayTextClassName: t.displayTextClassName,
       disabled: !0
     };
-    if (id(t)) return {
+    if (hasRenderFunction(t)) return {
       ...t
     };
-    let o = _o(t) && t.disabled || !t.name && !(_o(t) && Yh(i.appModel, t.action));
-    if (!(_o(t) && t.disabledAndForceVisible) && o && i.removeDisabledItems) return null;
-    if (_o(t) && t.nodeId) return function (e, t, i) {
+    let o = hasActionOrCallback(t) && t.disabled || !t.name && !(hasActionOrCallback(t) && Yh(i.appModel, t.action));
+    if (!(hasActionOrCallback(t) && t.disabledAndForceVisible) && o && i.removeDisabledItems) return null;
+    if (hasActionOrCallback(t) && t.nodeId) return function (e, t, i) {
       if (!e) return null;
       debug(null != i.sceneGraph && null != i.sceneGraphSelection, "You should be providing a scene graph and a selection if you are rendering a menu item for a particular layer");
       let r = i.sceneGraph.get(t);
@@ -144,20 +144,20 @@ export const jv = function e(t, i) {
     let l = {
       ...t
     };
-    let d = Dz(t);
-    l.displayText = (TV(t) || _o(t)) && t.displayText || r || formatI18nMessage(d, t.args);
-    _o(t) && t.shortcutText ? l.shortcut = t.shortcutText : l.shortcut = c1(i.appModel.keyboardShortcuts, d);
+    let d = getActionOrName(t);
+    l.displayText = (hasChildrenOrDropdown(t) || hasActionOrCallback(t)) && t.displayText || r || formatI18nMessage(d, t.args);
+    hasActionOrCallback(t) && t.shortcutText ? l.shortcut = t.shortcutText : l.shortcut = c1(i.appModel.keyboardShortcuts, d);
     l.disabled = o;
-    l.visuallyDisabledWithSelection = _o(t) ? t.visuallyDisabledWithSelection : void 0;
-    l.rightText = _o(t) ? t.rightText : void 0;
-    l.rightIcon = _o(t) && t.rightIcon ? t.rightIcon : void 0;
-    l.isChecked = _o(t) && WJ(i.appModel, t);
+    l.visuallyDisabledWithSelection = hasActionOrCallback(t) ? t.visuallyDisabledWithSelection : void 0;
+    l.rightText = hasActionOrCallback(t) ? t.rightText : void 0;
+    l.rightIcon = hasActionOrCallback(t) && t.rightIcon ? t.rightIcon : void 0;
+    l.isChecked = hasActionOrCallback(t) && isMenuItemChecked(i.appModel, t);
     l.alwaysShowCheckMarkOffset = i.alwaysShowCheckMarkOffset ?? ("alwaysShowCheckMarkOffset" in t ? t.alwaysShowCheckMarkOffset : void 0);
-    l["data-onboarding-key"] = _o(t) ? t["data-onboarding-key"] : void 0;
-    l.source = _o(t) ? t.source : void 0;
-    TV(t) ? (t.children ? l.children = e(t.children, i) : t.childDropdown && (l.children = t.childDropdown.items), l.showDotDotDotButton = t.showDotDotDotButton, l.displayTextClassName = t.displayTextClassName, l.recordingKey = t.childDropdown && t.childDropdown.recordingKey || t.name) : l.recordingKey = t.recordingKey || t.action || t.name;
-    _o(t) && t.inputProperty && t.action && (l.input = {
-      value: f4(i.appModel, t.inputProperty),
+    l["data-onboarding-key"] = hasActionOrCallback(t) ? t["data-onboarding-key"] : void 0;
+    l.source = hasActionOrCallback(t) ? t.source : void 0;
+    hasChildrenOrDropdown(t) ? (t.children ? l.children = e(t.children, i) : t.childDropdown && (l.children = t.childDropdown.items), l.showDotDotDotButton = t.showDotDotDotButton, l.displayTextClassName = t.displayTextClassName, l.recordingKey = t.childDropdown && t.childDropdown.recordingKey || t.name) : l.recordingKey = t.recordingKey || t.action || t.name;
+    hasActionOrCallback(t) && t.inputProperty && t.action && (l.input = {
+      value: getProperty(i.appModel, t.inputProperty),
       width: t.inputWidth,
       onChange: e => {
         void 0 !== e && VU.get(t.action, t.source ?? "menu", {

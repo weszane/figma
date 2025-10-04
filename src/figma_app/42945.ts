@@ -7,7 +7,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import d from "../vendor/128080";
 import { emojiPresentationRegex, nativeToShortcode } from "../905/403166";
 import { getI18nString } from "../905/303541";
-import { WJ } from "../figma_app/379850";
+import { isNodeDescendantOf } from "../figma_app/379850";
 import { useDevModeFocusId } from "../figma_app/88239";
 import { nL, U3, RO } from "../figma_app/770088";
 import { setCommentsActiveFeedType } from "../figma_app/530167";
@@ -133,7 +133,7 @@ export function $$V5(e) {
       if (!t) return !0;
       let r = e.comments[0]?.client_meta?.node_id;
       let n = r ? getSingletonSceneGraph().get(r) : null;
-      return WJ(t, n);
+      return isNodeDescendantOf(t, n);
     },
     currentAsset: e => {
       let t = e.comments[0].client_meta?.node_id;

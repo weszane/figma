@@ -56,7 +56,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { useSessionStorageSync, getSessionStorage, useLocalStorageSync } from "../905/657224";
 import { hidePickerThunk } from "../figma_app/91703";
-import { Yf } from "../figma_app/933328";
+import { upsertEntireVariableSet } from "../figma_app/933328";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { hideVariablePicker } from "../905/330741";
 import { fullscreenValue } from "../figma_app/455680";
@@ -94,8 +94,8 @@ import { C as _$$C } from "../905/771975";
 import { O as _$$O3 } from "../905/666679";
 import { S as _$$S2 } from "../905/711470";
 import { C as _$$C2 } from "../figma_app/974443";
-import { UO } from "../905/261982";
-import { o3, nt } from "../905/226610";
+import { sortItemsByName } from "../905/261982";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { q as _$$q } from "../figma_app/905311";
 import { dD, IV } from "../figma_app/941824";
 import { Y9 as _$$Y2, Ad } from "../figma_app/811257";
@@ -138,7 +138,7 @@ import { deepEqual } from "../905/382883";
 import { ox, bL as _$$bL2 } from "../905/163832";
 import { useDebounce } from 'use-debounce';
 import { k9 } from "../905/182598";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { c as _$$c } from "../905/210851";
 import { n as _$$n } from "../905/971006";
 import { KeyboardReceiver, KeyboardEventWrapper } from "../905/826900";
@@ -1354,13 +1354,13 @@ function tx({
     });
   }, []);
   let f = useCallback(() => {
-    let e = UO(i).map(e => e.node_id);
+    let e = sortItemsByName(i).map(e => e.node_id);
     permissionScopeHandler.user("sort-variable-collections", () => {
       VariablesBindings?.reorderVariableSets("", e);
     });
   }, [i]);
   let _ = new Point(0, 0);
-  let A = o3(nt.useGrid);
+  let A = useLabConfiguration(labConfigurations.useGrid);
   let [y, b] = useState(466);
   let v = useCallback(e => {
     b(e.height - tE - 24);
@@ -3362,7 +3362,7 @@ function i0() {
   let [{
     windowInnerWidth: e,
     windowInnerHeight: t
-  }] = useDebounce(_$$l(), 300, {
+  }] = useDebounce(useWindowDimensions(), 300, {
     equalityFn: deepEqual
   });
   return {
@@ -4082,7 +4082,7 @@ export let $$i50 = registerModal(function () {
           }, j, eB, _),
           createVariableSetExtension: getFeatureFlags().ds_extended_collections ? ez(() => async e => {
             let t = c.find(t => t.node_id === e);
-            t && (await Yf(t));
+            t && (await upsertEntireVariableSet(t));
             return permissionScopeHandler.user("create-variable-set-extension", () => B?.(n, e)) ?? "";
           }, j, eB, _) : null,
           renameVariableSet: ez(() => (e, t) => permissionScopeHandler.user("rename-variable-set", () => VariablesBindings.editVariableSetName(e, t)) ? (fullscreenValue.triggerAction("commit"), !0) : (logError("variables", "Failed to rename variable set", {

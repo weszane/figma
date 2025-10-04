@@ -18,7 +18,7 @@ import { C as _$$C2 } from '../905/283236';
 import { VatGstInput } from '../905/289352';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { b as _$$b, c as _$$c } from '../905/308099';
+import { RadioInputRoot, RadioInputOption } from '../905/308099';
 import { z as _$$z } from '../905/353894';
 import { selectCurrentUser } from '../905/372672';
 import { Ay as _$$Ay2 } from '../905/506641';
@@ -30,7 +30,7 @@ import { SvgComponent } from '../905/714743';
 import { n as _$$n } from '../905/861286';
 import { sendWithRetry } from '../905/910117';
 import { selectViewAction } from '../905/929976';
-import { s as _$$s2 } from '../905/932270';
+import { HiddenLegend } from '../905/932270';
 import { _5, AA, AG, Be, C_, Cd, ck, DU, fI, h6, HC, IC, Ie, jH, JS, lA, Mt, nv, Oz, Ph, Pl, PX, r9, rb, SU, t$, TF, u7, UI, us, w1, Wz, xc, Yf, yu, yV } from '../905/941408';
 import { G as _$$G } from '../905/971006';
 import { A as _$$A7 } from '../1617/862644';
@@ -477,12 +477,12 @@ function eh(e) {
 function eg(e) {
   let t = !e.paymentMethods.length || !e.selectedPaymentMethodId;
   return jsxs('form', {
-    children: [!e.hideReusePaymentUi && jsxs(_$$b, {
+    children: [!e.hideReusePaymentUi && jsxs(RadioInputRoot, {
       value: e.selectedPaymentMethodId,
       onChange: t => {
         e.onSelectPaymentMethod(t);
       },
-      legend: jsx(_$$s2, {
+      legend: jsx(HiddenLegend, {
         children: jsx('span', {
           className: cssBuilderInstance.fontSemiBold.$,
           children: renderI18nText('community.buyer.payment_details')
@@ -490,7 +490,7 @@ function eg(e) {
       }),
       children: [e.paymentMethods.map((t, i) => jsxs('div', {
         className: cssBuilderInstance.flex.itemsStart.$,
-        children: [jsx(_$$c, {
+        children: [jsx(RadioInputOption, {
           value: t.payment_method_id,
           readonly: e.disabled || void 0,
           label: jsx(HiddenLabel, {
@@ -503,7 +503,7 @@ function eg(e) {
           isSelected: e.selectedPaymentMethodId === t.payment_method_id,
           isRemoveLoading: e.isRemovingCard
         })]
-      }, `payment-method-item--${t.payment_method_id}`)), jsx(_$$c, {
+      }, `payment-method-item--${t.payment_method_id}`)), jsx(RadioInputOption, {
         value: '',
         readonly: e.disabled || void 0,
         label: jsx(Label, {
@@ -542,12 +542,12 @@ function ef({
   setSubscriptionInterval: i
 }) {
   return jsx('form', {
-    children: jsx(_$$b, {
+    children: jsx(RadioInputRoot, {
       value: t,
       onChange(e) {
         i(e);
       },
-      legend: jsx(_$$s2, {
+      legend: jsx(HiddenLegend, {
         children: jsx('span', {
           className: cssBuilderInstance.fontSemiBold.$,
           children: renderI18nText('community.buyer.billing')
@@ -555,12 +555,12 @@ function ef({
       }),
       children: jsxs('div', {
         className: AG,
-        children: [jsx(_$$c, {
+        children: [jsx(RadioInputOption, {
           value: SubscriptionInterval.MONTHLY,
           label: jsx(Label, {
             children: renderI18nText('community.buyer.monthly')
           })
-        }), jsx(_$$c, {
+        }), jsx(RadioInputOption, {
           value: SubscriptionInterval.ANNUALLY,
           label: jsxs(Label, {
             className: cssBuilderInstance.flex.flexRow.itemsCenter.$,
@@ -1125,19 +1125,19 @@ export const CommunityCheckoutModal = registerModal(props => {
     children: jsx(HeaderModal, {
       title: jsxs('div', {
         children: [
-          // Title logic
-          (() => {
-            const resourceName = resource ? getCurrentVersion(resource)?.name : localResource ? localResource.manifest.name : undefined;
-            return resourceName !== 'undefined' && resource && monetizedMeta && monetizedMeta.is_subscription ? renderI18nText('community.buyer.subscribe_to_resource_name', {
-              resourceName
-            }) : renderI18nText('community.buyer.purchase_resource_name', {
-              resourceName
-            });
-          })(), (localResource || isAdminReview) && jsx(Badge, {
-            text: localResource ? renderI18nText('community.buyer.development') : renderI18nText('community.plugins.in_review'),
-            color: BadgeColor.WARNING,
-            className: Ph
-          })]
+        // Title logic
+        (() => {
+          const resourceName = resource ? getCurrentVersion(resource)?.name : localResource ? localResource.manifest.name : undefined;
+          return resourceName !== 'undefined' && resource && monetizedMeta && monetizedMeta.is_subscription ? renderI18nText('community.buyer.subscribe_to_resource_name', {
+            resourceName
+          }) : renderI18nText('community.buyer.purchase_resource_name', {
+            resourceName
+          });
+        })(), (localResource || isAdminReview) && jsx(Badge, {
+          text: localResource ? renderI18nText('community.buyer.development') : renderI18nText('community.plugins.in_review'),
+          color: BadgeColor.WARNING,
+          className: Ph
+        })]
       }),
       headerClassName: cssBuilderInstance.font13.mx8.$,
       headerSize: 'large',

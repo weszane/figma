@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
-import { b as _$$b, c as _$$c } from "../905/308099";
-import { s as _$$s } from "../905/932270";
+import { RadioInputRoot, RadioInputOption } from "../905/308099";
+import { HiddenLegend } from "../905/932270";
 import { Label } from "../905/270045";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -110,8 +110,8 @@ let R = registerModal(function (e) {
           })
         }), jsxs(DialogBody, {
           children: [jsx("form", {
-            children: jsx(_$$b, {
-              legend: jsx(_$$s, {
+            children: jsx(RadioInputRoot, {
+              legend: jsx(HiddenLegend, {
                 children: renderI18nText("fullscreen.color_management.user_color_profile_modal.options.label")
               }),
               value: r,
@@ -123,7 +123,7 @@ let R = registerModal(function (e) {
               },
               children: jsxs("div", {
                 className: cssBuilderInstance.flex.flexRow.gap20.mb12.$,
-                children: [jsx(_$$c, {
+                children: [jsx(RadioInputOption, {
                   value: M.SRGB,
                   label: jsx(Label, {
                     children: getI18nString("fullscreen.color_management.user_color_profile_modal.options.srgb.value")
@@ -131,7 +131,7 @@ let R = registerModal(function (e) {
                   htmlAttributes: {
                     "data-testid": C.srgbOption
                   }
-                }), jsx(_$$c, {
+                }), jsx(RadioInputOption, {
                   value: M.DISPLAY_P3,
                   label: jsx(Label, {
                     children: getI18nString("fullscreen.color_management.user_color_profile_modal.options.display_p3.value")

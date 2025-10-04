@@ -16,7 +16,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { useProjectFileCreationPermissions } from "../figma_app/687776";
 import { h as _$$h } from "../figma_app/334471";
 import { getI18nString } from "../905/303541";
-import { zE } from "../905/738636";
+import { createNewFileWithRestrictions } from "../905/738636";
 import { n6 } from "../905/234821";
 import { p as _$$p } from "../905/36308";
 import { useSendToMakeExperiment } from "../figma_app/297957";
@@ -159,7 +159,7 @@ function Q({
       trackingEventName: n
     }) => () => {
       let i = isFigmaNativeApp ? TabOpenBehavior.SAME_TAB : TabOpenBehavior.NEW_TAB;
-      let a = zE({
+      let a = createNewFileWithRestrictions({
         isDraftsFolder: !0,
         state: I,
         editorType: t,

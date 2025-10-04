@@ -2,8 +2,8 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
-import { b as _$$b, c as _$$c } from "../905/308099";
-import { q } from "../905/932270";
+import { RadioInputRoot, RadioInputOption } from "../905/308099";
+import { Legend } from "../905/932270";
 import { Y } from "../905/185567";
 import { w as _$$w } from "../905/770105";
 import { Y as _$$Y } from "../905/26051";
@@ -207,20 +207,20 @@ export function $$M1(e) {
   });
 }
 export function $$F3(e) {
-  return jsxs(_$$b, {
+  return jsxs(RadioInputRoot, {
     value: e.selectedPermissionsLevel,
     onChange: e.setSelectedPermissionsLevel,
-    legend: jsx(q, {
+    legend: jsx(Legend, {
       children: jsx(Fragment, {})
     }),
-    children: [jsx(_$$c, {
+    children: [jsx(RadioInputOption, {
       value: "view",
       readonly: e.disabled || void 0,
       label: jsx(Label, {
         className: A,
         children: renderI18nText("team_creation.view")
       })
-    }, "view-only"), jsx(_$$c, {
+    }, "view-only"), jsx(RadioInputOption, {
       value: "edit",
       readonly: e.disabled || e.disableEdit || void 0,
       label: jsx(Label, {

@@ -6,7 +6,7 @@ import { getI18nString } from "../905/303541";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { A$, X0 } from "../figma_app/837500";
 import { W, r } from "../905/134572";
-import { jR, vh, N0, qm, Sb, RO, k0, zt, t1, Ws, _M, jc, mO, az, Af, n7, p5, R2, Z6, xr, Po, is, Qw, bu, oW, Py, A4, X8, eN, _P, LL, fU, c6, U8, oK, SW, B9, Pp, k7, JI, _x, a6, Uw, FQ, fh, yG, DN, pZ, i4, Q2, iU, h3, PQ, T2, o$, Zz, $b, Q1, aT, K4, nL, Dd, B8, Tn, OF, Zv, L5, QE, g$, vD, Ah, wO, Td, qH, fV, nG, qt, DE, ev, vY, gn, xu, AN, wl } from "../figma_app/728075";
+import { neutralDarkColor3, gray600Color2, redSecondaryColor, redOrangeColor2, redApricotColor2, greenMintColor, blueTintColor, purpleSecondaryColor2, neutralLightColor3, neutralDarkColor2, gray600Color, uiBlueColor, purpleMagentaColor, neutralLightColor, redCoralColor, redTomatoColor, redGoldColor2, greenForestColor, gray700Color, uiGrayColor5, redLightColor, redHoneyColor, redLemonColor, greenLightColor, blueUltraLightColor, purpleUltraLightColor, uiGrayBorderColor, blueSkyColor, purpleLavenderColor, redBlushColor, redAmberColor2, redButterColor, greenSeafoamColor, uiGrayBorderColor2, uiBlueSlateColor2, redCinnamonColor, redAmberColor, redCantaloupeColor, greenJadeColor, blueLightColor, purpleLightColor, pinkRoseColor, uiGrayColor4, uiGrayColor2, uiBlueSteelColor, blueTintColor2, purpleSecondaryColor, redSecondaryColor2, pinkFlamingoColor, redOrangeColor, redApricotColor3, greenMintColor2, uiGrayColor3, uiBlueSlateColor, uiGreenMintColor, uiBluePeriwinkleColor, redPeachColor, uiPinkCarnationColor, redAmberColor3, redPineappleColor, greenEmeraldColor, uiGrayColor, neutralDarkColor, neutralPaperColor, greenTealColor, redCaramelColor, redGoldColor, greenSageColor, gray800Color, pinkCottonCandyColor, redApricotColor, yellowCreamColor, greenLimeColor, greenAquaColor, uiPurpleColor, neutralLightColor2, pinkBubblegumColor, yellowLemonColor, greenPearColor, greenCyanColor, purpleOrchidColor, pinkSalmonColor, gray900Color, neutralLightColor4 } from "../figma_app/728075";
 let p = ["base", "baseLight", "sticky", "highlight", "widget", "pencilUI3", "codeBlockTheme"];
 function _({
   colorsToCSS: e,
@@ -36,45 +36,45 @@ function g(e) {
   return m.get(e) ?? h;
 }
 let f = _({
-  colorsToCSS: new Map([[ColorOptions.BLACK, jR], [ColorOptions.GRAY_DARK, vh], [ColorOptions.RED, N0], [ColorOptions.ORANGE, qm], [ColorOptions.YELLOW, Sb], [ColorOptions.GREEN, RO], [ColorOptions.BLUE, k0], [ColorOptions.VIOLET, zt], [ColorOptions.WHITE, t1]]),
+  colorsToCSS: new Map([[ColorOptions.BLACK, neutralDarkColor3], [ColorOptions.GRAY_DARK, gray600Color2], [ColorOptions.RED, redSecondaryColor], [ColorOptions.ORANGE, redOrangeColor2], [ColorOptions.YELLOW, redApricotColor2], [ColorOptions.GREEN, greenMintColor], [ColorOptions.BLUE, blueTintColor], [ColorOptions.VIOLET, purpleSecondaryColor2], [ColorOptions.WHITE, neutralLightColor3]]),
   lightDisplayColors: void 0,
-  darkDisplayColors: new Map([[ColorOptions.BLACK, Ws], [ColorOptions.GRAY_DARK, _M], [ColorOptions.BLUE, jc], [ColorOptions.VIOLET, mO], [ColorOptions.WHITE, az], [ColorOptions.RED, Af], [ColorOptions.ORANGE, n7], [ColorOptions.YELLOW, p5], [ColorOptions.GREEN, R2]])
+  darkDisplayColors: new Map([[ColorOptions.BLACK, neutralDarkColor2], [ColorOptions.GRAY_DARK, gray600Color], [ColorOptions.BLUE, uiBlueColor], [ColorOptions.VIOLET, purpleMagentaColor], [ColorOptions.WHITE, neutralLightColor], [ColorOptions.RED, redCoralColor], [ColorOptions.ORANGE, redTomatoColor], [ColorOptions.YELLOW, redGoldColor2], [ColorOptions.GREEN, greenForestColor]])
 });
 function E(e = !1) {
   return AppStateTsApi?.uiState().showUI3Colors.getCopy() && !e ? function () {
     let e = g("base");
     return _({
-      colorsToCSS: new Map([[ColorOptions.BLACK, jR], [ColorOptions.GRAY_DARK, vh], [ColorOptions.YELLOW, W(r.YELLOW, e)], [ColorOptions.ORANGE, W(r.ORANGE, e)], [ColorOptions.RED, W(r.RED, e)], [ColorOptions.PINK, W(r.PINK, e)], [ColorOptions.VIOLET, W(r.VIOLET, e)], [ColorOptions.BLUE, W(r.BLUE, e)], [ColorOptions.TEAL, W(r.TEAL, e)], [ColorOptions.GREEN, W(r.GREEN, e)], [ColorOptions.WHITE, t1]]),
+      colorsToCSS: new Map([[ColorOptions.BLACK, neutralDarkColor3], [ColorOptions.GRAY_DARK, gray600Color2], [ColorOptions.YELLOW, W(r.YELLOW, e)], [ColorOptions.ORANGE, W(r.ORANGE, e)], [ColorOptions.RED, W(r.RED, e)], [ColorOptions.PINK, W(r.PINK, e)], [ColorOptions.VIOLET, W(r.VIOLET, e)], [ColorOptions.BLUE, W(r.BLUE, e)], [ColorOptions.TEAL, W(r.TEAL, e)], [ColorOptions.GREEN, W(r.GREEN, e)], [ColorOptions.WHITE, neutralLightColor3]]),
       lightDisplayColors: void 0,
       darkDisplayColors: void 0
     });
   }() : f;
 }
 let y = _({
-  colorsToCSS: new Map([[ColorOptions.GRAY, Z6], [ColorOptions.GRAY_LIGHT, xr], [ColorOptions.RED_LIGHT, Po], [ColorOptions.ORANGE_LIGHT, is], [ColorOptions.YELLOW_LIGHT, Qw], [ColorOptions.GREEN_LIGHT, bu], [ColorOptions.BLUE_LIGHT, oW], [ColorOptions.VIOLET_LIGHT, Py]]),
+  colorsToCSS: new Map([[ColorOptions.GRAY, gray700Color], [ColorOptions.GRAY_LIGHT, uiGrayColor5], [ColorOptions.RED_LIGHT, redLightColor], [ColorOptions.ORANGE_LIGHT, redHoneyColor], [ColorOptions.YELLOW_LIGHT, redLemonColor], [ColorOptions.GREEN_LIGHT, greenLightColor], [ColorOptions.BLUE_LIGHT, blueUltraLightColor], [ColorOptions.VIOLET_LIGHT, purpleUltraLightColor]]),
   lightDisplayColors: void 0,
-  darkDisplayColors: new Map([[ColorOptions.GRAY, _M], [ColorOptions.GRAY_LIGHT, A4], [ColorOptions.BLUE_LIGHT, X8], [ColorOptions.VIOLET_LIGHT, eN], [ColorOptions.RED_LIGHT, _P], [ColorOptions.ORANGE_LIGHT, LL], [ColorOptions.YELLOW_LIGHT, fU], [ColorOptions.GREEN_LIGHT, c6]])
+  darkDisplayColors: new Map([[ColorOptions.GRAY, gray600Color], [ColorOptions.GRAY_LIGHT, uiGrayBorderColor], [ColorOptions.BLUE_LIGHT, blueSkyColor], [ColorOptions.VIOLET_LIGHT, purpleLavenderColor], [ColorOptions.RED_LIGHT, redBlushColor], [ColorOptions.ORANGE_LIGHT, redAmberColor2], [ColorOptions.YELLOW_LIGHT, redButterColor], [ColorOptions.GREEN_LIGHT, greenSeafoamColor]])
 });
 function b() {
   return AppStateTsApi?.uiState().showUI3Colors.getCopy() ? function () {
     let e = g("baseLight");
     return _({
-      colorsToCSS: new Map([[ColorOptions.GRAY, Z6], [ColorOptions.GRAY_LIGHT, U8], [ColorOptions.YELLOW_LIGHT, W(r.YELLOW, e)], [ColorOptions.ORANGE_LIGHT, W(r.ORANGE, e)], [ColorOptions.RED_LIGHT, W(r.RED, e)], [ColorOptions.PINK_LIGHT, W(r.PINK, e)], [ColorOptions.VIOLET_LIGHT, W(r.VIOLET, e)], [ColorOptions.BLUE_LIGHT, W(r.BLUE, e)], [ColorOptions.TEAL_LIGHT, W(r.TEAL, e)], [ColorOptions.GREEN_LIGHT, W(r.GREEN, e)]]),
+      colorsToCSS: new Map([[ColorOptions.GRAY, gray700Color], [ColorOptions.GRAY_LIGHT, uiGrayBorderColor2], [ColorOptions.YELLOW_LIGHT, W(r.YELLOW, e)], [ColorOptions.ORANGE_LIGHT, W(r.ORANGE, e)], [ColorOptions.RED_LIGHT, W(r.RED, e)], [ColorOptions.PINK_LIGHT, W(r.PINK, e)], [ColorOptions.VIOLET_LIGHT, W(r.VIOLET, e)], [ColorOptions.BLUE_LIGHT, W(r.BLUE, e)], [ColorOptions.TEAL_LIGHT, W(r.TEAL, e)], [ColorOptions.GREEN_LIGHT, W(r.GREEN, e)]]),
       lightDisplayColors: void 0,
       darkDisplayColors: void 0
     });
   }() : y;
 }
 let T = _({
-  colorsToCSS: new Map([[ColorOptions.STICKY_GRAY, oK], [ColorOptions.STICKY_RED, SW], [ColorOptions.STICKY_ORANGE, B9], [ColorOptions.STICKY_YELLOW, Pp], [ColorOptions.STICKY_GREEN, k7], [ColorOptions.STICKY_BLUE, JI], [ColorOptions.STICKY_VIOLET, _x], [ColorOptions.STICKY_PINK, a6], [ColorOptions.STICKY_GRAY_LIGHT, Uw]]),
-  lightDisplayColors: new Map([[ColorOptions.STICKY_GRAY_LIGHT, FQ], [ColorOptions.STICKY_GRAY, fh], [ColorOptions.STICKY_BLUE, yG], [ColorOptions.STICKY_VIOLET, DN], [ColorOptions.STICKY_RED, pZ], [ColorOptions.STICKY_PINK, i4], [ColorOptions.STICKY_ORANGE, Q2], [ColorOptions.STICKY_YELLOW, iU], [ColorOptions.STICKY_GREEN, h3]]),
-  darkDisplayColors: new Map([[ColorOptions.STICKY_GRAY_LIGHT, PQ], [ColorOptions.STICKY_GRAY, T2], [ColorOptions.STICKY_BLUE, o$], [ColorOptions.STICKY_VIOLET, Zz], [ColorOptions.STICKY_RED, $b], [ColorOptions.STICKY_PINK, Q1], [ColorOptions.STICKY_ORANGE, aT], [ColorOptions.STICKY_YELLOW, K4], [ColorOptions.STICKY_GREEN, nL]])
+  colorsToCSS: new Map([[ColorOptions.STICKY_GRAY, uiBlueSlateColor2], [ColorOptions.STICKY_RED, redCinnamonColor], [ColorOptions.STICKY_ORANGE, redAmberColor], [ColorOptions.STICKY_YELLOW, redCantaloupeColor], [ColorOptions.STICKY_GREEN, greenJadeColor], [ColorOptions.STICKY_BLUE, blueLightColor], [ColorOptions.STICKY_VIOLET, purpleLightColor], [ColorOptions.STICKY_PINK, pinkRoseColor], [ColorOptions.STICKY_GRAY_LIGHT, uiGrayColor4]]),
+  lightDisplayColors: new Map([[ColorOptions.STICKY_GRAY_LIGHT, uiGrayColor2], [ColorOptions.STICKY_GRAY, uiBlueSteelColor], [ColorOptions.STICKY_BLUE, blueTintColor2], [ColorOptions.STICKY_VIOLET, purpleSecondaryColor], [ColorOptions.STICKY_RED, redSecondaryColor2], [ColorOptions.STICKY_PINK, pinkFlamingoColor], [ColorOptions.STICKY_ORANGE, redOrangeColor], [ColorOptions.STICKY_YELLOW, redApricotColor3], [ColorOptions.STICKY_GREEN, greenMintColor2]]),
+  darkDisplayColors: new Map([[ColorOptions.STICKY_GRAY_LIGHT, uiGrayColor3], [ColorOptions.STICKY_GRAY, uiBlueSlateColor], [ColorOptions.STICKY_BLUE, uiGreenMintColor], [ColorOptions.STICKY_VIOLET, uiBluePeriwinkleColor], [ColorOptions.STICKY_RED, redPeachColor], [ColorOptions.STICKY_PINK, uiPinkCarnationColor], [ColorOptions.STICKY_ORANGE, redAmberColor3], [ColorOptions.STICKY_YELLOW, redPineappleColor], [ColorOptions.STICKY_GREEN, greenEmeraldColor]])
 });
 function I() {
   return AppStateTsApi?.uiState().showUI3Colors.getCopy() ? function () {
     let e = g("sticky");
     return _({
-      colorsToCSS: new Map([[ColorOptions.WHITE, t1], [ColorOptions.STICKY_GRAY_UI3, Dd], [ColorOptions.STICKY_YELLOW, W(r.YELLOW, e)], [ColorOptions.STICKY_ORANGE, W(r.ORANGE, e)], [ColorOptions.STICKY_RED, W(r.RED, e)], [ColorOptions.STICKY_PINK, W(r.PINK, e)], [ColorOptions.STICKY_VIOLET, W(r.VIOLET, e)], [ColorOptions.STICKY_BLUE, W(r.BLUE, e)], [ColorOptions.STICKY_TEAL, W(r.TEAL, e)], [ColorOptions.STICKY_GREEN, W(r.GREEN, e)]]),
+      colorsToCSS: new Map([[ColorOptions.WHITE, neutralLightColor3], [ColorOptions.STICKY_GRAY_UI3, uiGrayColor], [ColorOptions.STICKY_YELLOW, W(r.YELLOW, e)], [ColorOptions.STICKY_ORANGE, W(r.ORANGE, e)], [ColorOptions.STICKY_RED, W(r.RED, e)], [ColorOptions.STICKY_PINK, W(r.PINK, e)], [ColorOptions.STICKY_VIOLET, W(r.VIOLET, e)], [ColorOptions.STICKY_BLUE, W(r.BLUE, e)], [ColorOptions.STICKY_TEAL, W(r.TEAL, e)], [ColorOptions.STICKY_GREEN, W(r.GREEN, e)]]),
       lightDisplayColors: void 0,
       darkDisplayColors: void 0
     });
@@ -82,26 +82,26 @@ function I() {
 }
 function S() {
   return _({
-    colorsToCSS: new Map([[ColorOptions.CODE_BLOCK_DRACULA, B8], [ColorOptions.CODE_BLOCK_DUOTONE_LIGHT, Tn], [ColorOptions.CODE_BLOCK_DUOTONE_SEA, OF], [ColorOptions.CODE_BLOCK_DUOTONE_SPACE, Zv], [ColorOptions.CODE_BLOCK_DUOTONE_EARTH, L5], [ColorOptions.CODE_BLOCK_DUOTONE_FOREST, QE]]),
+    colorsToCSS: new Map([[ColorOptions.CODE_BLOCK_DRACULA, neutralDarkColor], [ColorOptions.CODE_BLOCK_DUOTONE_LIGHT, neutralPaperColor], [ColorOptions.CODE_BLOCK_DUOTONE_SEA, greenTealColor], [ColorOptions.CODE_BLOCK_DUOTONE_SPACE, redCaramelColor], [ColorOptions.CODE_BLOCK_DUOTONE_EARTH, redGoldColor], [ColorOptions.CODE_BLOCK_DUOTONE_FOREST, greenSageColor]]),
     lightDisplayColors: void 0,
     darkDisplayColors: void 0
   });
 }
 let v = _({
-  colorsToCSS: new Map([[ColorOptions.HIGHLIGHT_GRAY, g$], [ColorOptions.HIGHLIGHT_RED, vD], [ColorOptions.HIGHLIGHT_ORANGE, Ah], [ColorOptions.HIGHLIGHT_YELLOW, wO], [ColorOptions.HIGHLIGHT_GREEN, Td], [ColorOptions.HIGHLIGHT_BLUE, qH], [ColorOptions.HIGHLIGHT_VIOLET, fV], [ColorOptions.HIGHLIGHT_WHITE, nG]]),
-  lightDisplayColors: new Map([[ColorOptions.HIGHLIGHT_RED, qt], [ColorOptions.HIGHLIGHT_YELLOW, DE], [ColorOptions.HIGHLIGHT_GREEN, ev], [ColorOptions.HIGHLIGHT_BLUE, vY], [ColorOptions.HIGHLIGHT_VIOLET, gn], [ColorOptions.HIGHLIGHT_ORANGE, xu], [ColorOptions.HIGHLIGHT_GRAY, AN], [ColorOptions.HIGHLIGHT_WHITE, wl]]),
-  darkDisplayColors: new Map([[ColorOptions.HIGHLIGHT_RED, qt], [ColorOptions.HIGHLIGHT_YELLOW, DE], [ColorOptions.HIGHLIGHT_GREEN, ev], [ColorOptions.HIGHLIGHT_BLUE, vY], [ColorOptions.HIGHLIGHT_VIOLET, gn], [ColorOptions.HIGHLIGHT_ORANGE, xu], [ColorOptions.HIGHLIGHT_GRAY, AN], [ColorOptions.HIGHLIGHT_WHITE, wl]])
+  colorsToCSS: new Map([[ColorOptions.HIGHLIGHT_GRAY, gray800Color], [ColorOptions.HIGHLIGHT_RED, pinkCottonCandyColor], [ColorOptions.HIGHLIGHT_ORANGE, redApricotColor], [ColorOptions.HIGHLIGHT_YELLOW, yellowCreamColor], [ColorOptions.HIGHLIGHT_GREEN, greenLimeColor], [ColorOptions.HIGHLIGHT_BLUE, greenAquaColor], [ColorOptions.HIGHLIGHT_VIOLET, uiPurpleColor], [ColorOptions.HIGHLIGHT_WHITE, neutralLightColor2]]),
+  lightDisplayColors: new Map([[ColorOptions.HIGHLIGHT_RED, pinkBubblegumColor], [ColorOptions.HIGHLIGHT_YELLOW, yellowLemonColor], [ColorOptions.HIGHLIGHT_GREEN, greenPearColor], [ColorOptions.HIGHLIGHT_BLUE, greenCyanColor], [ColorOptions.HIGHLIGHT_VIOLET, purpleOrchidColor], [ColorOptions.HIGHLIGHT_ORANGE, pinkSalmonColor], [ColorOptions.HIGHLIGHT_GRAY, gray900Color], [ColorOptions.HIGHLIGHT_WHITE, neutralLightColor4]]),
+  darkDisplayColors: new Map([[ColorOptions.HIGHLIGHT_RED, pinkBubblegumColor], [ColorOptions.HIGHLIGHT_YELLOW, yellowLemonColor], [ColorOptions.HIGHLIGHT_GREEN, greenPearColor], [ColorOptions.HIGHLIGHT_BLUE, greenCyanColor], [ColorOptions.HIGHLIGHT_VIOLET, purpleOrchidColor], [ColorOptions.HIGHLIGHT_ORANGE, pinkSalmonColor], [ColorOptions.HIGHLIGHT_GRAY, gray900Color], [ColorOptions.HIGHLIGHT_WHITE, neutralLightColor4]])
 });
 let A = _({
-  colorsToCSS: new Map([[ColorOptions.BLACK, jR], [ColorOptions.RED, N0], [ColorOptions.ORANGE, qm], [ColorOptions.YELLOW, Sb], [ColorOptions.GREEN, RO], [ColorOptions.BLUE, k0], [ColorOptions.VIOLET, zt], [ColorOptions.WHITE, t1]]),
+  colorsToCSS: new Map([[ColorOptions.BLACK, neutralDarkColor3], [ColorOptions.RED, redSecondaryColor], [ColorOptions.ORANGE, redOrangeColor2], [ColorOptions.YELLOW, redApricotColor2], [ColorOptions.GREEN, greenMintColor], [ColorOptions.BLUE, blueTintColor], [ColorOptions.VIOLET, purpleSecondaryColor2], [ColorOptions.WHITE, neutralLightColor3]]),
   lightDisplayColors: void 0,
-  darkDisplayColors: new Map([[ColorOptions.BLACK, Ws], [ColorOptions.BLUE, jc], [ColorOptions.VIOLET, mO], [ColorOptions.WHITE, az], [ColorOptions.RED, Af], [ColorOptions.ORANGE, n7], [ColorOptions.YELLOW, p5], [ColorOptions.GREEN, R2]])
+  darkDisplayColors: new Map([[ColorOptions.BLACK, neutralDarkColor2], [ColorOptions.BLUE, uiBlueColor], [ColorOptions.VIOLET, purpleMagentaColor], [ColorOptions.WHITE, neutralLightColor], [ColorOptions.RED, redCoralColor], [ColorOptions.ORANGE, redTomatoColor], [ColorOptions.YELLOW, redGoldColor2], [ColorOptions.GREEN, greenForestColor]])
 });
 function x() {
   return AppStateTsApi?.uiState().showUI3Colors.getCopy() ? function () {
     let e = g("pencilUI3");
     return _({
-      colorsToCSS: new Map([[ColorOptions.BLACK, jR], [ColorOptions.RED, W(r.RED, e)], [ColorOptions.ORANGE, W(r.ORANGE, e)], [ColorOptions.YELLOW, W(r.YELLOW, e)], [ColorOptions.GREEN, W(r.GREEN, e)], [ColorOptions.BLUE, W(r.BLUE, e)], [ColorOptions.VIOLET, W(r.VIOLET, e)], [ColorOptions.WHITE, t1]]),
+      colorsToCSS: new Map([[ColorOptions.BLACK, neutralDarkColor3], [ColorOptions.RED, W(r.RED, e)], [ColorOptions.ORANGE, W(r.ORANGE, e)], [ColorOptions.YELLOW, W(r.YELLOW, e)], [ColorOptions.GREEN, W(r.GREEN, e)], [ColorOptions.BLUE, W(r.BLUE, e)], [ColorOptions.VIOLET, W(r.VIOLET, e)], [ColorOptions.WHITE, neutralLightColor3]]),
       lightDisplayColors: void 0,
       darkDisplayColors: void 0
     });
@@ -124,7 +124,7 @@ export function $$M5() {
 let $$F12 = [ColorOptions.HIGHLIGHT_GRAY, ColorOptions.HIGHLIGHT_RED, ColorOptions.HIGHLIGHT_ORANGE, ColorOptions.HIGHLIGHT_YELLOW, ColorOptions.HIGHLIGHT_GREEN, ColorOptions.HIGHLIGHT_BLUE, ColorOptions.HIGHLIGHT_VIOLET, ColorOptions.HIGHLIGHT_WHITE];
 let j = [ColorOptions.CODE_BLOCK_DRACULA, ColorOptions.CODE_BLOCK_DUOTONE_LIGHT, ColorOptions.CODE_BLOCK_DUOTONE_SEA, ColorOptions.CODE_BLOCK_DUOTONE_EARTH, ColorOptions.CODE_BLOCK_DUOTONE_SPACE, ColorOptions.CODE_BLOCK_DUOTONE_FOREST];
 export function $$U11() {
-  let e = [jR, xr, N0, Sb, RO].map(e => colorCSSManipulatorInstance.parse(e));
+  let e = [neutralDarkColor3, uiGrayColor5, redSecondaryColor, redApricotColor2, greenMintColor].map(e => colorCSSManipulatorInstance.parse(e));
   let t = [ColorOptions.BLACK, ColorOptions.RED, ColorOptions.YELLOW, ColorOptions.GREEN, ColorOptions.BLUE].map(e => $$H1(e, "pencilUI3"));
   return AppStateTsApi?.uiState().showUI3Colors.getCopy() ? t : e;
 }

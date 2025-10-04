@@ -11,7 +11,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { registerModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
 import { s as _$$s } from "../5430/913603";
-import { zE } from "../905/738636";
+import { createNewFileWithRestrictions } from "../905/738636";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { B } from "../905/524020";
 import { FFileType } from "../figma_app/191312";
@@ -107,7 +107,7 @@ export function $$I0({
   let p = getIsMobile();
   let w = isAIFeaturesEnabledForCurrentUser();
   let E = (e, t) => {
-    u(zE({
+    u(createNewFileWithRestrictions({
       state: g,
       from: FileBrowserLocation.COMMUNITY_COLLECTIONS_PAGE,
       editorType: FFileType.WHITEBOARD,

@@ -1,7 +1,7 @@
 import { ServiceCategories } from "../905/165054";
 import { ColorOptions, WhiteboardTsApi, WeightLevel } from "../figma_app/763686";
 import { reportError } from "../905/11";
-import { t1 } from "../figma_app/728075";
+import { neutralLightColor3 } from "../figma_app/728075";
 var $$o1 = (e => (e[e.YELLOW = 0] = "YELLOW", e[e.ORANGE = 1] = "ORANGE", e[e.RED = 2] = "RED", e[e.PINK = 3] = "PINK", e[e.VIOLET = 4] = "VIOLET", e[e.BLUE = 5] = "BLUE", e[e.TEAL = 6] = "TEAL", e[e.GREEN = 7] = "GREEN", e))($$o1 || {});
 let l = new Map([[ColorOptions.YELLOW, 0], [ColorOptions.ORANGE, 1], [ColorOptions.RED, 2], [ColorOptions.PINK, 3], [ColorOptions.VIOLET, 4], [ColorOptions.BLUE, 5], [ColorOptions.TEAL, 6], [ColorOptions.GREEN, 7]]);
 let d = new Map();
@@ -30,7 +30,7 @@ export function $$c0(e, t) {
     }
   }();
   let i = d.get(e);
-  return i ? i[t] : (reportError(ServiceCategories.FIGJAM, Error(`The ${e} ColorRampName doesn't exist in the whiteboardUI3ColorRamps map`)), t1);
+  return i ? i[t] : (reportError(ServiceCategories.FIGJAM, Error(`The ${e} ColorRampName doesn't exist in the whiteboardUI3ColorRamps map`)), neutralLightColor3);
 }
 export const W = $$c0;
 export const r = $$o1;

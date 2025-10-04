@@ -2,7 +2,7 @@ import { jsx } from 'react/jsx-runtime';
 import { DesignsList } from '../905/171275';
 import { ThumbnailContainer } from '../905/600041';
 import { N } from '../905/794224';
-import { i4, Ph } from '../905/862913';
+import { hasPasswordProtectedPublicAccessFromEntity, hasPasswordProtectedPublicAccess } from '../905/862913';
 import { FileCanView } from '../figma_app/43951';
 import { FFileType } from '../figma_app/191312';
 import { useSubscription } from '../figma_app/288654';
@@ -15,7 +15,7 @@ export function $$_0({
   ...t
 }) {
   let r = $$p2(e.editorType, !!e.thumbnailGuid);
-  return e.canView && Ph(e) ? jsx(N, {
+  return e.canView && hasPasswordProtectedPublicAccess(e) ? jsx(N, {
     thumbnailType: r,
     ...t
   }) : jsx(V, {
@@ -34,7 +34,7 @@ export function $$h1({
     key: e.key
   });
   let l = $$p2(e.editor_type, !!e.thumbnail_guid);
-  if (i4(e)) {
+  if (hasPasswordProtectedPublicAccessFromEntity(e)) {
     if (r.status === 'loading') {
       return jsx(ThumbnailContainer, {
         ...t

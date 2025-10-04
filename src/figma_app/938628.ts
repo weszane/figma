@@ -12,7 +12,7 @@ import { S as _$$S2 } from '../905/177206';
 import { ow } from '../905/188421';
 import { permissionScopeHandler, scopeAwareFunction } from '../905/189185';
 import { isInvalidValue, isValidValue, MIXED_MARKER, normalizeValue } from '../905/216495';
-import { nt, o3 } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { F as _$$F } from '../905/258517';
 import { HiddenLabel } from '../905/270045';
 import { useSelectedStyleOrSelectionPropertyValues, useSelectionProperty, useSelectionPropertyValue, useSelectionPropertyValues } from '../905/275640';
@@ -48,7 +48,7 @@ import { EventShield } from '../905/821217';
 import { useDropdownState } from '../905/848862';
 import { bL, c$ } from '../905/867927';
 import { dayjs } from '../905/920142';
-import { q as _$$q } from '../905/932270';
+import { Legend } from '../905/932270';
 import { noop } from 'lodash-es';
 ;
 import { CU, H_, z6 } from '../905/963340';
@@ -2967,7 +2967,7 @@ let rj = memo(e => {
   });
 });
 let rV = tj('relative-x', (e, t) => Fullscreen?.setNodeSelectionOffsetWithAnchor(e, Axis.X, t) ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
-let rH = memo(e => o3(nt.fplScrubbableInput) ? jsx(rW, {
+let rH = memo(e => useLabConfiguration(labConfigurations.fplScrubbableInput) ? jsx(rW, {
   ...e
 }) : jsx(rz, {
   ...e
@@ -3033,7 +3033,7 @@ function rW(e) {
   });
 }
 let rK = tj('relative-y', (e, t) => Fullscreen?.setNodeSelectionOffsetWithAnchor(e, Axis.Y, t) ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
-let rY = memo(e => o3(nt.fplScrubbableInput) ? jsx(rX, {
+let rY = memo(e => useLabConfiguration(labConfigurations.fplScrubbableInput) ? jsx(rX, {
   ...e
 }) : jsx(r$, {
   ...e
@@ -3812,7 +3812,7 @@ export function $$ns3(e) {
     value: isInvalidValue(e.handleMirroring) ? void 0 : e.handleMirroring,
     onChange: i,
     recordingKey: e.recordingKey,
-    legend: jsx(_$$q, {
+    legend: jsx(Legend, {
       children: getI18nString('fullscreen.properties_panel.section_vector.label_mirroring')
     }),
     children: [jsx(c$, {

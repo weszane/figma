@@ -35,7 +35,7 @@ import { A as _$$A5 } from "../6828/559361";
 import { Link } from "../905/438674";
 import Y from "classnames";
 import { useSingleEffect } from "../905/791079";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { M3, dP } from "../figma_app/119475";
 import { LazyInputForwardRef } from "../905/408237";
@@ -642,7 +642,7 @@ function eg(e) {
   let g = $E()(l);
   let f = l.folder_id && r[l.folder_id]?.name;
   let E = renderI18nText("desktop_new_tab.edited_at_time_stamp", {
-    relativeTime: jsx(h1, {
+    relativeTime: jsx(RelativeTimeDisplay, {
       date: l.touched_at
     })
   });

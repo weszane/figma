@@ -385,7 +385,7 @@ export function useTransformSubscription(subscription: any, hasTeam: boolean, ha
 /**
  * Transform and filter subscriptions logic (original: $$M5)
  */
-function transformAndFilterSubscriptions(subscription: any, hasTeam: boolean, hasProjectRoot: boolean, figmaLibrariesEnabled: boolean, parentOrgId: string | null, isProOrStudent: boolean) {
+export function transformAndFilterSubscriptions(subscription: any, hasTeam: boolean, hasProjectRoot: boolean, figmaLibrariesEnabled: boolean, parentOrgId: string | null, isProOrStudent: boolean) {
   if (subscription.status === 'loading' || subscription.status === 'errors' || subscription.status === 'disabled') {
     return subscription;
   }

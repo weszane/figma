@@ -15,7 +15,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { TrackedButton } from "../905/599896";
 import { I as _$$I } from "../905/343721";
-import { A as _$$A2 } from "../905/658244";
+import { FileBrowser } from "../905/658244";
 import { createModalConfig, registerLegacyModal, registerModal } from "../905/102752";
 import { hideModal, showModalHandler } from "../905/156213";
 import { useStarterGlobalFileLimitsExperiment } from "../figma_app/297957";
@@ -30,7 +30,7 @@ import { isSitesFeatureEnabled } from "../905/561485";
 import { I as _$$I2 } from "../905/597430";
 import { L as _$$L } from "../905/479295";
 let $$v = "team-admin-confirm-downgrade";
-let I = _$$A2.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeModal), createModalConfig("ConfirmDowngradeModal"));
+let I = FileBrowser.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeModal), createModalConfig("ConfirmDowngradeModal"));
 registerLegacyModal($$v, I);
 let L = {
   title: renderI18nText("churn_friction.modal.team_libraries"),

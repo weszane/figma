@@ -336,7 +336,7 @@ const isNonProductionEnvironment = getInitialOptions().cluster_name !== 'prod'
  * Lab configurations object containing all available lab experiments
  * Each lab can be toggled by users with appropriate permissions
  */
-const labConfigurations = Object.freeze({
+export const labConfigurations = Object.freeze({
   customKeyboardShortcuts: new LabConfiguration({
     name: 'ce_custom_keyboard_shortcuts',
     getDisplayName: () => getI18nString('keyboard_settings.custom_keyboard_shortcuts'),

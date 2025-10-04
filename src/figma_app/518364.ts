@@ -2,9 +2,9 @@ import _require3 from "../0c62c2fd/556466";
 import _require2 from "../6268/886268";
 import _require from "../0c62c2fd/82390";
 import { NONE_SYMBOL } from "../905/992467";
-import { A } from "../905/658244";
+import { FileBrowser } from "../905/658244";
 import { fileBrowserPageManager, fileBrowserLoadingSnapshot, hideFileBrowserLoadingPage } from "../figma_app/997907";
-let $$s0 = A.createLazyComponent(async () => {
+let $$s0 = FileBrowser.createLazyComponent(async () => {
   let {
     FileBrowserView
   } = await Promise.all([]).then(_require);
@@ -14,13 +14,13 @@ let $$s0 = A.createLazyComponent(async () => {
   error: NONE_SYMBOL.NONE,
   componentName: "FileBrowserView"
 });
-let $$o2 = A.createLazyComponent(async () => {
+let $$o2 = FileBrowser.createLazyComponent(async () => {
   let {
     ComponentBrowserLibraryView
   } = await Promise.all([]).then(_require2);
   return ComponentBrowserLibraryView;
 });
-let $$l1 = A.createLazyComponent(async () => {
+let $$l1 = FileBrowser.createLazyComponent(async () => {
   let {
     FolderPageViewOmnicreateDropdown
   } = await Promise.all([]).then(_require3);

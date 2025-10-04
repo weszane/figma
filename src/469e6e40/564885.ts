@@ -8,7 +8,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
@@ -174,7 +174,7 @@ function S(e) {
       })()
     }), jsx("td", {
       className: "xi4r6k5 x1qxcl5b",
-      children: e.activity?.action_at ? jsx(h1, {
+      children: e.activity?.action_at ? jsx(RelativeTimeDisplay, {
         capitalize: !0,
         date: e.activity.action_at
       }) : jsx(C, {})

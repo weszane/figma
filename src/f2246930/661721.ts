@@ -9,7 +9,7 @@ import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { useDebounce } from 'use-debounce';
 import { createSuccessState, createLoadingState } from "../figma_app/851625";
 import { parsePxInt } from "../figma_app/783094";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { createDeepEqualSelector } from "../905/270781";
 import { setLocalStyleSelection } from "../905/879323";
 import { Dm } from "../figma_app/8833";
@@ -131,7 +131,7 @@ function I({
   let I = getCurrentFileType();
   let {
     windowInnerHeight
-  } = _$$l();
+  } = useWindowDimensions();
   let [P, K] = useState(window.innerHeight / 2);
   let Y = useMemo(() => windowInnerHeight - clamp(P, parsePxInt("design" === I ? LdP : tui), windowInnerHeight - 32), [P, I, windowInnerHeight]);
   let B = Xr(_$$O);

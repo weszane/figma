@@ -11,7 +11,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { generateRecordingKey } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
 import { Point } from "../905/736624";
-import { b$, FU, Bs, jR, a9, D6 } from "../figma_app/933328";
+import { insertSharedStateGroup, insertSharedComponent, insertSharedModule, insertResponsiveSet, cacheComponentKeyThunk, preloadStateGroup } from "../figma_app/933328";
 import { getCurrentFileType } from "../figma_app/976749";
 import { teamLibraryCache } from "../figma_app/80990";
 import { isEligibleElement } from "../figma_app/915774";
@@ -69,7 +69,7 @@ export function $$$$j0(e) {
       fullscreenValue.triggerAction("commit");
     };
     let d = pointerPercentageOffset || (e.useSmartPositioning ? new Point(.5, .5) : new Point());
-    if (V.type === PrimaryWorkflowEnum.STATE_GROUP) i(b$({
+    if (V.type === PrimaryWorkflowEnum.STATE_GROUP) i(insertSharedStateGroup({
       item: V,
       canvasPosition: dropPosition,
       percentageOffset: d,
@@ -81,7 +81,7 @@ export function $$$$j0(e) {
       isClick,
       insertionCallback: o,
       sourceForTracking: e.sourceForTracking
-    }));else if (V.type === PrimaryWorkflowEnum.COMPONENT) i(FU({
+    }));else if (V.type === PrimaryWorkflowEnum.COMPONENT) i(insertSharedComponent({
       item: V,
       canvasPosition: dropPosition,
       percentageOffset: d,
@@ -94,7 +94,7 @@ export function $$$$j0(e) {
       isClick,
       insertionCallback: o,
       sourceForTracking: e.sourceForTracking
-    }));else if (V.type === PrimaryWorkflowEnum.MODULE) i(Bs({
+    }));else if (V.type === PrimaryWorkflowEnum.MODULE) i(insertSharedModule({
       item: V,
       canvasPosition: dropPosition,
       percentageOffset: d,
@@ -109,7 +109,7 @@ export function $$$$j0(e) {
       sourceForTracking: e.sourceForTracking
     }));else if (V.type === PrimaryWorkflowEnum.RESPONSIVE_SET && hasAssetId(V)) {
       getFeatureFlags().sts_sprig_targeted_feedback && Sprig("track", "sites_blocks_insert");
-      i(jR({
+      i(insertResponsiveSet({
         item: V,
         cmsCollectionMappings: e.cmsCollectionMappings,
         canvasPosition: dropPosition,
@@ -214,10 +214,10 @@ export function $$$$j0(e) {
       updateSelectedNodeGuid();
       G ? "LIBRARY" === V.subscriptionStatus && teamLibraryCache.getCanvas({
         canvas_url: V.canvasUrl
-      }) : z || (teamLibraryCache.getCanvas(V), !isSubscribedLibrary(j.defaultPublished, V.library_key) && (V.type === PrimaryWorkflowEnum.COMPONENT && V.component_key && i(a9({
+      }) : z || (teamLibraryCache.getCanvas(V), !isSubscribedLibrary(j.defaultPublished, V.library_key) && (V.type === PrimaryWorkflowEnum.COMPONENT && V.component_key && i(cacheComponentKeyThunk({
         componentKey: V.component_key,
         callsite: "useInsertableLibraryItem"
-      })), V.type === PrimaryWorkflowEnum.STATE_GROUP && V.key && i(D6({
+      })), V.type === PrimaryWorkflowEnum.STATE_GROUP && V.key && i(preloadStateGroup({
         stateGroupKey: V.key
       }))));
       Fullscreen?.setShowCanvasDragAndDropOutlines(!0);

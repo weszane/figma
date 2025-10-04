@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import a from "../vendor/635";
 import { Ax } from "../figma_app/616261";
 import { dU, cT } from "../905/660732";
-import { k$, gN, id, _o } from "../figma_app/847915";
+import { hasSeparator, hasHeader, hasRenderFunction, hasActionOrCallback } from "../figma_app/847915";
 import { a as _$$a } from "../905/69481";
 import { Yh } from "../figma_app/357047";
 import { EG } from "../figma_app/995580";
@@ -22,14 +22,14 @@ export class $$E2 {
     }
   }
   addFigmaMenuItemsToSearchMap(e, t, r) {
-    if (!r || k$(r) || gN(r) || id(r) || !UN(r, {
+    if (!r || hasSeparator(r) || hasHeader(r) || hasRenderFunction(r) || !UN(r, {
       isDesktopMenu: !1,
       isReadOnly: e.isReadOnly,
       isSearching: !0,
       selectedView: t
     })) return;
     let i = "children" in r;
-    if (!_o(r) || i || r.hideForQuickCommand || this._addToIndexInternal(r), "plugins-menu" !== r.name && "widgets-menu" !== r.name && i) for (let i of (debug(null != r.children, "this should be the type of menu groups that has FullscreenMenuItem as children"), r.children)) this.addFigmaMenuItemsToSearchMap(e, t, i);
+    if (!hasActionOrCallback(r) || i || r.hideForQuickCommand || this._addToIndexInternal(r), "plugins-menu" !== r.name && "widgets-menu" !== r.name && i) for (let i of (debug(null != r.children, "this should be the type of menu groups that has FullscreenMenuItem as children"), r.children)) this.addFigmaMenuItemsToSearchMap(e, t, i);
   }
   _addToIndexInternal(e) {
     let {

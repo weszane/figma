@@ -1,13 +1,13 @@
-import { createContext, useEffect, useLayoutEffect, useMemo, useState } from 'react'
-import { jsx } from 'react/jsx-runtime'
-import { observableState } from '../905/441145'
-import { MV } from '../905/761735'
-import { getFalseValue, isInteractionPathCheck } from '../figma_app/897289'
+import { createContext, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { jsx } from 'react/jsx-runtime';
+import { observableState } from '../905/441145';
+import { initializeLiveGraph } from '../905/761735';
+import { getFalseValue, isInteractionPathCheck } from '../figma_app/897289';
 
 /**
  * Context for LivegraphProvider (original: $$d1)
  */
-export const LivegraphContext = createContext(null)
+export const LivegraphContext = createContext(null);
 
 /**
  * Provider component for LivegraphContext (original: $$u0)
@@ -18,50 +18,42 @@ export const LivegraphContext = createContext(null)
  */
 export function LivegraphProvider({
   userId = null,
-  children,
+  children
 }: {
-  userId?: string | null
-  children: React.ReactNode
+  userId?: string | null;
+  children: React.ReactNode;
 }) {
   // Track the current userId (original: n)
-  let currentUserId: string | null | undefined
-
+  let currentUserId: string | null | undefined;
   useLayoutEffect(() => {
-    if (
-      typeof currentUserId !== 'undefined'
-      && userId !== currentUserId
-      && !getFalseValue()
-      && !isInteractionPathCheck()
-    ) {
-      throw new Error(
-        'Only a single userId should be provided to LivegraphProvider at any time',
-      )
+    if (typeof currentUserId !== 'undefined' && userId !== currentUserId && !getFalseValue() && !isInteractionPathCheck()) {
+      throw new Error('Only a single userId should be provided to LivegraphProvider at any time');
     }
-    currentUserId = userId
+    currentUserId = userId;
     return () => {
-      currentUserId = undefined
-    }
-  }, [userId])
+      currentUserId = undefined;
+    };
+  }, [userId]);
 
   // Memoize client instance (original: i)
-  const client = useMemo(() => MV(userId), [userId])
+  const client = useMemo(() => initializeLiveGraph(userId), [userId]);
 
   // State for client (original: [d, u])
-  const [clientState, setClientState] = useState(client)
-
+  const [clientState, setClientState] = useState(client);
   useEffect(() => {
-    observableState.addListener(setClientState)
+    observableState.addListener(setClientState);
     return () => {
-      observableState.removeListener(setClientState)
-    }
-  }, [setClientState])
-
+      observableState.removeListener(setClientState);
+    };
+  }, [setClientState]);
   return jsx(LivegraphContext.Provider, {
-    value: { client: clientState },
-    children,
-  })
+    value: {
+      client: clientState
+    },
+    children
+  });
 }
 
 /** Exported context and provider for external usage */
-export const oD = LivegraphProvider // original: $$u0
-export const ob = LivegraphContext // original: $$d1
+export const oD = LivegraphProvider; // original: $$u0
+export const ob = LivegraphContext; // original: $$d1

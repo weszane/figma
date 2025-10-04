@@ -3,7 +3,7 @@ import { StateHierarchy, Fullscreen } from "../figma_app/763686";
 import { scopeAwareFunction, permissionScopeHandler } from "../905/189185";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { uO } from "../figma_app/933328";
+import { swapToSharedComponent } from "../figma_app/933328";
 import { memoizedProcessComponentsAndStateGroups, processLocalComponents } from "../figma_app/80990";
 import { getPublishedAssetsForLibrary, areNodesEqual } from "../figma_app/646357";
 import { getBasename, splitPath, getDirname } from "../905/309735";
@@ -172,7 +172,7 @@ export function $$v4(e, t, r, n, a, s, d, c) {
         ...d,
         queryId: c
       });
-    } else t(uO({
+    } else t(swapToSharedComponent({
       item: e,
       instanceGUIDs: n,
       sourceForTracking: a,

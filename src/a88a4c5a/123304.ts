@@ -30,7 +30,7 @@ import { r as _$$r7 } from '../905/11924';
 import { Ui3PositionType } from '../905/11928';
 import { DevModeUI } from '../905/15667';
 import { isLoading } from '../905/18797';
-import { z4 } from '../905/37051';
+import { fullscreenAlias } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
 import { $ as _$$$2 } from '../905/43354';
 import { k as _$$k3 } from '../905/44647';
@@ -122,7 +122,7 @@ import { CuratorPortal } from '../905/717951';
 import { E as _$$E3 } from '../905/719609';
 import { qW } from '../905/720292';
 import { Point } from '../905/736624';
-import { l as _$$l5 } from '../905/745972';
+import { useWindowDimensions } from '../905/745972';
 import { G as _$$G } from '../905/750789';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { useSingleEffect } from '../905/791079';
@@ -145,7 +145,7 @@ import { e as _$$e5 } from '../905/916195';
 import { dayjs } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
 import { Jn } from '../905/927294';
-import { q as _$$q5 } from '../905/932270';
+import { Legend } from '../905/932270';
 import { Violation } from '../905/940056';
 import { selectUserFlag } from '../905/940356';
 import { b as _$$b5 } from '../905/946806';
@@ -339,7 +339,7 @@ import { Fj } from '../figma_app/793429';
 import { iP as _$$iP, Dj } from '../figma_app/803054';
 import { $c, qN } from '../figma_app/803787';
 import { eBU } from '../figma_app/822011';
-import { dL as _$$dL } from '../figma_app/825489';
+import { defaultLibraryKeyAtom } from '../figma_app/825489';
 import { oV as _$$oV, FR, xp } from '../figma_app/827216';
 import { TrackedButton, TrackingProvider } from '../figma_app/831799';
 import { bL as _$$bL2, wi as _$$wi, gR } from '../figma_app/861123';
@@ -356,7 +356,7 @@ import { Cu, F7, yU } from '../figma_app/908460';
 import { FileBrowserLocation } from '../figma_app/915202';
 import { m3 } from '../figma_app/915281';
 import { useLatestRef } from '../figma_app/922077';
-import { Gb } from '../figma_app/933328';
+import { useFileLibrarySubscriptions } from '../figma_app/933328';
 import { _q, PA } from '../figma_app/957070';
 import { tZ as _$$tZ } from '../figma_app/960196';
 import { U as _$$U } from '../figma_app/964810';
@@ -1066,7 +1066,7 @@ function eU({
           },
           variant: 'primary',
           onClick() {
-            e && (l(), z4.setNodesReady(!0, [e], 'dev-node-change-upsell', null));
+            e && (l(), fullscreenAlias.setNodesReady(!0, [e], 'dev-node-change-upsell', null));
           },
           children: getI18nString('dev_handoff.rfd_signals_upsell.mark_ready_for_dev')
         })
@@ -2099,7 +2099,7 @@ function lV() {
   let h = !!selectUserFlag(bo);
   let m = _$$zl(l$).currentState === 'ui3_onboarding_was_shown_in_current_session';
   let f = _$$zl(_$$j3).currentState === 'no_figma_basics_onboarding_was_shown_in_current_session';
-  let y = useAtomWithSubscription(_$$dL);
+  let y = useAtomWithSubscription(defaultLibraryKeyAtom);
   let _ = isOnboardingComplete();
   let b = u?.canEdit;
   let j = d4(e => e.leftPanel.activeTab === UserInterfaceElements.LAYERS);
@@ -9771,7 +9771,7 @@ function oB() {
     let [{
       windowInnerHeight: n,
       windowInnerWidth: r
-    }] = useDebounce(_$$l5(), 300, {
+    }] = useDebounce(useWindowDimensions(), 300, {
       equalityFn: deepEqual
     });
     let s = 915;
@@ -10502,7 +10502,7 @@ function dg({
     children: jsxs(_$$bL3, {
       value: e,
       onChange: t,
-      legend: jsx(_$$q5, {
+      legend: jsx(Legend, {
         children: getI18nString('sites.panel.code_window_display_picker.hidden_legend')
       }),
       children: [jsx(_$$A6, {
@@ -10564,7 +10564,7 @@ function dy({
     let [{
       windowInnerWidth: t,
       windowInnerHeight: l
-    }] = useDebounce(_$$l5(), 300, {
+    }] = useDebounce(useWindowDimensions(), 300, {
       equalityFn: deepEqual
     });
     let [n, r] = useAtomValueAndSetter(yq);
@@ -10796,7 +10796,7 @@ let dN = memo(({
   let y = !!getFeatureFlags().internal_only_debug_tools || !!f.has_cursor_bot_onboarding_v2;
   let _ = d4(e => e.openFile);
   let b = _ ? _.key : '';
-  Gb(b);
+  useFileLibrarySubscriptions(b);
   _$$W2();
   useAutosuggestShadowRead();
   let j = BI();

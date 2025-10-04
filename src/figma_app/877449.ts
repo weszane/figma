@@ -5,12 +5,12 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { S as _$$S } from '../905/73063';
 import { Label } from '../905/270045';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { b as _$$b, c as _$$c } from '../905/308099';
+import { RadioInputRoot, RadioInputOption } from '../905/308099';
 import { setupShareModalTabHandler } from '../905/382697';
 import { openWindow } from '../905/508367';
 import { Button } from '../905/521428';
 import { buildFileUrl } from '../905/612685';
-import { s as _$$s } from '../905/932270';
+import { HiddenLegend } from '../905/932270';
 import { sR } from '../905/932881';
 import { styleBuilderInstance } from '../905/941192';
 import { postUserFlag } from '../905/985254';
@@ -95,8 +95,8 @@ export function $$F2(e) {
     children: jsxs('div', {
       className: cssBuilderInstance.flex.flexColumn.p16.$,
       children: [jsx('form', {
-        children: jsx(_$$b, {
-          legend: jsx(_$$s, {
+        children: jsx(RadioInputRoot, {
+          legend: jsx(HiddenLegend, {
             children: t ? jsx('div', {
               'className': cssBuilderInstance.textBodyMedium.pb8.$,
               'data-testid': 'share-to-google-classroom-disclaimer',
@@ -114,7 +114,7 @@ export function $$F2(e) {
           onChange: s,
           children: jsxs('div', {
             className: cssBuilderInstance.mt8.$,
-            children: [jsx(_$$c, {
+            children: [jsx(RadioInputOption, {
               value: 'edit',
               label: jsx(Label, {
                 htmlAttributes: {
@@ -126,7 +126,7 @@ export function $$F2(e) {
                 style: M,
                 children: renderI18nText('file_permissions_modal.google_classroom_modal.editable_option_description')
               }) : null
-            }), jsx(_$$c, {
+            }), jsx(RadioInputOption, {
               value: 'duplicate',
               label: jsx(Label, {
                 htmlAttributes: {

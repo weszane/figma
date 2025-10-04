@@ -8,7 +8,7 @@ import { jO } from "../905/573265";
 import { hideModal } from "../905/156213";
 import { l as _$$l } from "../905/618307";
 import { LibrarySourceEnum, PublishStatusEnum } from "../figma_app/633080";
-import { pz } from "../figma_app/825489";
+import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { enqueueNetworkErrorBell } from "../905/470594";
 import { _9, VW, UV, Jw, WU } from "../figma_app/755939";
 let f = "Cooper Template Publish Error";
@@ -64,7 +64,7 @@ let b = {
     } = e;
     let i = atomStoreManager.get(UV);
     let n = atomStoreManager.get(WU);
-    switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), i) {
+    switch (atomStoreManager.set(libraryPublishingModeAtom, LibrarySourceEnum.LIBRARY), i) {
       case VW.PUBLISH_HUB_FILE_INITIATED:
         atomStoreManager.set(_9, {
           state: VW.PUBLISH_HUB_FILE_COMPLETED
@@ -104,7 +104,7 @@ let b = {
     } = e;
     let c = atomStoreManager.get(UV);
     let u = Jw(c);
-    switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), logError(ServiceCategories.PROJECT_BUZZ, f, {
+    switch (atomStoreManager.set(libraryPublishingModeAtom, LibrarySourceEnum.LIBRARY), logError(ServiceCategories.PROJECT_BUZZ, f, {
       publishState: c,
       publishStep: u,
       error

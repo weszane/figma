@@ -2,7 +2,7 @@ import { getFeatureFlags } from "../905/601108";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { trimLastMessageMeta, flattenMessageMeta, Rc, getMessageType, MessageType } from "../figma_app/819288";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
 import { sendWithRetry } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
@@ -36,7 +36,7 @@ let $$_11 = createActionCreator("TEAM_FEED_SET_BELL_STATE");
 let $$A10 = createActionCreator("TEAM_FEED_SET_INITIAL_BELL_STATES");
 let $$y3 = createOptimistThunk((e, t) => {
   let i = e.getState().user;
-  let n = WB();
+  let n = getCurrentLiveGraphClient();
   let r = t.uuid;
   if (!i || !n || !r || t.commentId.startsWith($$R0)) return;
   let a = n.getIdFromUuid("FeedComment", r).then(e => sendWithRetry.del(`/api/feed_posts/comments/${e}`));
@@ -49,7 +49,7 @@ let $$y3 = createOptimistThunk((e, t) => {
 let $$b4 = createOptimistThunk((e, t) => {
   t.messageMeta = trimLastMessageMeta(t.messageMeta);
   let i = e.getState().user;
-  let n = WB();
+  let n = getCurrentLiveGraphClient();
   let r = t.uuid;
   if (!i || !n || !r) return;
   let l = n.getIdFromUuid("FeedComment", r).then(e => sendWithRetry.put(`/api/feed_posts/comments/${e}`, {
@@ -71,7 +71,7 @@ let $$b4 = createOptimistThunk((e, t) => {
 let $$v6 = createOptimistThunk((e, t) => {
   t.messageMeta = trimLastMessageMeta(t.messageMeta);
   let i = e.getState().user;
-  let n = WB();
+  let n = getCurrentLiveGraphClient();
   if (!i || !n) return;
   let r = generateUUIDv4();
   let c = sendWithRetry.post(`/api/feed_posts/${t.postUuid}/comments`, {
@@ -113,13 +113,13 @@ let $$I8 = createOptimistThunk((e, t) => {
     reactionId
   } = t;
   let a = E(commentUuid, emoji);
-  e.getState().user && WB().optimisticallyDelete({
+  e.getState().user && getCurrentLiveGraphClient().optimisticallyDelete({
     FeedReaction: {
       [reactionId]: null
     }
   }, a);
 });
-let E = (e, t) => WB().getIdFromUuid("FeedComment", e).then(e => sendWithRetry.del(`/api/feed_posts/comments/${e}/reactions`, {
+let E = (e, t) => getCurrentLiveGraphClient().getIdFromUuid("FeedComment", e).then(e => sendWithRetry.del(`/api/feed_posts/comments/${e}/reactions`, {
   emoji: t
 }));
 let $$x1 = createOptimistThunk((e, t) => {
@@ -136,7 +136,7 @@ let $$x1 = createOptimistThunk((e, t) => {
     type: emoji
   });
   let d = `optimistic-id-comment-${commentId}-${emoji}-${s.id}`;
-  WB().optimisticallyCreate({
+  getCurrentLiveGraphClient().optimisticallyCreate({
     FeedReaction: {
       [d]: {
         createdAt: new Date(),
@@ -148,7 +148,7 @@ let $$x1 = createOptimistThunk((e, t) => {
     }
   }, l);
 });
-let S = (e, t) => WB().getIdFromUuid("FeedComment", e).then(e => sendWithRetry.post(`/api/feed_posts/comments/${e}/reactions`, {
+let S = (e, t) => getCurrentLiveGraphClient().getIdFromUuid("FeedComment", e).then(e => sendWithRetry.post(`/api/feed_posts/comments/${e}/reactions`, {
   emoji: t
 }));
 let $$w9 = createOptimistThunk((e, t) => {
@@ -158,7 +158,7 @@ let $$w9 = createOptimistThunk((e, t) => {
     reactionId
   } = t;
   let a = C(feedPostUuid, emoji);
-  e.getState().user && WB().optimisticallyDelete({
+  e.getState().user && getCurrentLiveGraphClient().optimisticallyDelete({
     FeedReaction: {
       [reactionId]: null
     }
@@ -181,7 +181,7 @@ let $$T2 = createOptimistThunk((e, t) => {
     type: emoji
   });
   let d = `optimistic-id-${feedPostUuid}-${emoji}-${s.id}`;
-  WB().optimisticallyCreate({
+  getCurrentLiveGraphClient().optimisticallyCreate({
     FeedReaction: {
       [d]: {
         createdAt: new Date(),

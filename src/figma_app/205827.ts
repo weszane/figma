@@ -1,7 +1,7 @@
 import { filterNotNullish } from "../figma_app/656233";
 import { getFeatureFlags } from "../905/601108";
 import { dayjs } from "../905/920142";
-import { wN } from "../figma_app/591738";
+import { alwaysFalse } from "../figma_app/591738";
 import { FTrialType } from "../figma_app/191312";
 import { hasEditableLockedTeams, hasTeamPaidAccess } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
@@ -21,7 +21,7 @@ let $$T2 = "dismissed_pro_trials_v3_unlocked_expiry_banner";
   e.uxEnabled = () => !!getFeatureFlags().pro_trials_v3_ux;
   e.entryEnabled = () => e.uxEnabled() && !!getFeatureFlags().exp_pro_trials_v3;
   e.expiryEnabled = () => e.uxEnabled() && !!getFeatureFlags().pro_trials_v3_expiry;
-  e.isUserInVariant = wN;
+  e.isUserInVariant = alwaysFalse;
   e.getTrackingProperties = function (e) {
     return e ? {
       productArea: h,

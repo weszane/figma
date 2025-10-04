@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { e as _$$e } from "../figma_app/661119";
-import { $L, us } from "../figma_app/136698";
-import { $C } from "../figma_app/728075";
+import { getColorForMultiplayer, multiplayerColors } from "../figma_app/136698";
+import { yellowSunflowerColor } from "../figma_app/728075";
 export function $$l0({
   entity: e,
   adtlClassName: t,
@@ -37,7 +37,7 @@ export function $$l0({
         ...(l || {}),
         width: `${i}px`,
         height: `${i}px`,
-        background: e ? $L(e.id, us) : $C
+        background: e ? getColorForMultiplayer(e.id, multiplayerColors) : yellowSunflowerColor
       }
     }
   }));

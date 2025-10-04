@@ -3,7 +3,7 @@ import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { z } from "../905/239603";
 import { Gw, FB } from "../vendor/149334";
 import { debugState } from "../905/407919";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { reportError } from "../905/11";
 import { capitalize } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
@@ -194,7 +194,7 @@ export async function $$x11(e) {
     });
     let n = r?.data?.meta;
     n?.title && (t = decodeURIComponent(n?.title));
-  } catch (e) { } finally {
+  } catch (e) {} finally {
     if (!t) {
       let r = Gw(e);
       t = r ? capitalize(r) : "N/A";
@@ -221,9 +221,9 @@ export async function $$C2({
   source: c
 }) {
   let h = "";
-  if (n) h = n; else {
+  if (n) h = n;else {
     let t = FB(e);
-    if (t?.toLowerCase() === "github.com") h = "Github"; else if (t?.toLowerCase() === "jira.com" || t?.toLowerCase() === "atlassian.net") {
+    if (t?.toLowerCase() === "github.com") h = "Github";else if (t?.toLowerCase() === "jira.com" || t?.toLowerCase() === "atlassian.net") {
       h = "Jira";
       let t = function (e) {
         for (let t of M) {
@@ -242,7 +242,7 @@ export async function $$C2({
   };
   let g = sendWithRetry.post(`/api/files/${r}/related_links`, m);
   i && i();
-  WB()?.optimisticallyCreate({
+  getCurrentLiveGraphClient()?.optimisticallyCreate({
     DeveloperRelatedLink: {
       [`optimistic-link-${generateUUIDv4()}`]: {
         nodeId: t ?? "",
@@ -312,7 +312,7 @@ export function $$O1({
   void 0 !== a && (h.is_user_override = a);
   s && (h.link_preview_json = null);
   let m = sendWithRetry.put(`/api/files/${e}/related_links`, h);
-  WB()?.optimisticallyUpdate({
+  getCurrentLiveGraphClient()?.optimisticallyUpdate({
     DeveloperRelatedLink: {
       [r]: {
         linkName: n,
@@ -366,7 +366,7 @@ export function $$L8({
     node_id: t,
     link_id: r
   });
-  WB()?.optimisticallyDelete({
+  getCurrentLiveGraphClient()?.optimisticallyDelete({
     DeveloperRelatedLink: {
       [r]: null
     }
@@ -407,7 +407,7 @@ export async function $$D10({
       link_id: e.id,
       link_preview_json: t
     });
-    WB()?.optimisticallyUpdate({
+    getCurrentLiveGraphClient()?.optimisticallyUpdate({
       DeveloperRelatedLink: {
         [e.id]: {
           linkPreviewJson: JSON.stringify(t)

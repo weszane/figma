@@ -14,7 +14,7 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { useSubscription } from "../figma_app/288654";
 import { Badge, BadgeColor } from "../figma_app/919079";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { y2 } from "../figma_app/563413";
 import { lv } from "../figma_app/204891";
 import { V as _$$V } from "../figma_app/385855";
@@ -302,7 +302,7 @@ function ee(e) {
         className: "abandoned_draft_files_table--modifiedAtColumn--GOXML abandoned_draft_files_table--column--DMRf- table--column--974RA",
         sorting_key: X,
         getSortValue: e => e.touchedAt,
-        cellComponent: e => jsx(h1, {
+        cellComponent: e => jsx(RelativeTimeDisplay, {
           date: e.touchedAt
         })
       }, {
@@ -310,7 +310,7 @@ function ee(e) {
         className: "abandoned_draft_files_table--createdAtColumn--z6vBs abandoned_draft_files_table--column--DMRf- table--column--974RA",
         sorting_key: Q,
         getSortValue: e => e.createdAt.toDateString(),
-        cellComponent: e => jsx(h1, {
+        cellComponent: e => jsx(RelativeTimeDisplay, {
           date: e.createdAt
         })
       }],

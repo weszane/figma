@@ -2,7 +2,7 @@ import { getResponsiveChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { getResourceDataOrFallback } from "../905/723791";
 import { SiteBundles } from "../figma_app/43951";
 import { up } from "../figma_app/903209";
@@ -47,7 +47,7 @@ export async function $$p0(e) {
     error: !1
   });
   await function (e, t) {
-    let r = WB();
+    let r = getCurrentLiveGraphClient();
     if (!r) throw Error("LiveGraph client not available");
     return new Promise((n, i) => {
       let a = setTimeout(() => {

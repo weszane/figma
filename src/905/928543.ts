@@ -8,7 +8,7 @@ import d from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { w as _$$w } from "../905/835474";
 import { G5 } from "../figma_app/795674";
-import { JD, h1 } from "../905/986103";
+import { formatRelativeTimeStatic, RelativeTimeDisplay } from "../905/986103";
 import { LoadingRenderer } from "../905/211326";
 import { P as _$$P } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -248,7 +248,7 @@ class X extends PureComponent {
       }), jsx("div", {
         className: "library_item_view--componentViewFooterLastUpdated--K9SEB",
         children: this.props.fileStats.length > 0 && getI18nString("design_systems.libraries_modal.last_updated_time", {
-          timeFromNow: JD(this.props.fileStats[0]?.last_modified)
+          timeFromNow: formatRelativeTimeStatic(this.props.fileStats[0]?.last_modified)
         })
       })]
     })) : null;
@@ -402,7 +402,7 @@ class J extends PureComponent {
           children: this.props.numInstances.toLocaleString()
         }), jsx("div", {
           className: G,
-          children: jsx(h1, {
+          children: jsx(RelativeTimeDisplay, {
             date: this.props.lastModified
           })
         })]

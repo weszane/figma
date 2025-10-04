@@ -56,7 +56,7 @@ import { r as _$$r } from "../905/398386";
 import { Jt } from "../figma_app/401069";
 import { initializePluginAllowlist, initializeWidgetAllowlist } from "../905/837497";
 import { selectViewAction } from "../905/929976";
-import { Tn } from "../figma_app/933328";
+import { useLibraryInfo } from "../figma_app/933328";
 import { w4, yo, Jt as _$$Jt } from "../figma_app/28323";
 import { UK } from "../905/898493";
 import { Jt as _$$Jt2 } from "../figma_app/342125";
@@ -200,7 +200,7 @@ import { CW } from "../469e6e40/800566";
 import { sortBySelectors } from "../figma_app/656233";
 import { ResourceStatus } from "../905/663269";
 import { stripHtmlTags } from "../905/491152";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { W as _$$W } from "../5430/573261";
 import { BaseLinkComponent } from "../905/551536";
 import { A as _$$A7 } from "../5724/933949";
@@ -4309,7 +4309,7 @@ function sh({
     style: styleBuilderInstance.add({
       width: "10%"
     }).$,
-    children: jsx(h1, {
+    children: jsx(RelativeTimeDisplay, {
       date: e.approvedAt
     })
   });
@@ -4576,7 +4576,7 @@ function sS({
     style: styleBuilderInstance.add({
       width: "10%"
     }).$,
-    children: jsx(h1, {
+    children: jsx(RelativeTimeDisplay, {
       date: e
     })
   });
@@ -4903,7 +4903,7 @@ function sP(e) {
   let u = useCallback(e => {
     _(e);
   }, []);
-  let [m] = Tn({
+  let [m] = useLibraryInfo({
     currentOrgId: e.org.id,
     excludeDrafts: !0,
     includeSharingGroupInfo: getFeatureFlags().fc_general
@@ -5084,7 +5084,7 @@ function sB(e) {
       force: !0
     })), a(_$$Jt2()));
   }, [L, a, n.id]);
-  let [Z] = Tn({
+  let [Z] = useLibraryInfo({
     currentOrgId: n.id,
     excludeDrafts: !0,
     includeSharingGroupInfo: !0

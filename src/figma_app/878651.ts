@@ -27,7 +27,7 @@ import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { withTrackedClick } from "../figma_app/831799";
 import { isOrgOrTeamExport, useCurrentOrgAdminInfo } from "../figma_app/740025";
-import { Cn } from "../905/862913";
+import { convertToRgba } from "../905/862913";
 import { DropdownEnableState } from "../figma_app/188152";
 import { selectCurrentUser } from "../905/372672";
 import { a6 } from "../figma_app/198840";
@@ -733,7 +733,7 @@ $$ev7.defaultProps = {
           children: jsx("a", {
             className: Ai,
             style: {
-              backgroundColor: Cn(this.props.hubFile.client_meta),
+              backgroundColor: convertToRgba(this.props.hubFile.client_meta),
               backgroundImage: `url(${this.props.hubFile.thumbnail_url})`
             },
             onClick: this.onHubFileClick,

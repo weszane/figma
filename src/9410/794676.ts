@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useMemo, useRef, useCallback, memo, useLayoutEffect } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { y as _$$y } from "../905/725962";
+import { MergeState } from "../905/725962";
 import { getThemeContextOrDefault } from "../905/158740";
 import { getFeatureFlags } from "../905/601108";
 import { getStorage, localStorageRef } from "../905/657224";
@@ -54,7 +54,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { $$, ZN } from "../figma_app/781852";
 import { pB } from "../905/395919";
 import { getSelectedFile } from "../905/766303";
-import { ud } from "../905/862913";
+import { useFileByKey } from "../905/862913";
 import { isLoaded } from "../905/18797";
 import { subscribedSymbolsFromLoadedPagesSelector, subscribedStateGroupsFromLoadedPagesSelector } from "../figma_app/141508";
 import { useSubscribedLibraryFileKeys, useSubscribedLibraryKeys } from "../figma_app/155728";
@@ -139,11 +139,11 @@ import { OQ } from "../figma_app/991591";
 import { rH } from "../figma_app/49598";
 import { _J } from "../figma_app/378195";
 import { x4 as _$$x4 } from "../figma_app/913823";
-import { nz, Yx } from "../figma_app/933328";
+import { useAllLibrarySubscriptions, initializeUserThunk } from "../figma_app/933328";
 import { fullscreenCrashStateAtom } from "../figma_app/276445";
-import { N as _$$N } from "../figma_app/115586";
+import { useFullscreenReadySubscription } from "../figma_app/115586";
 import { getMemoryUsage } from "../figma_app/527873";
-import { DI } from "../figma_app/557318";
+import { triggerMissingFontPopover } from "../figma_app/557318";
 import { WR } from "../figma_app/109130";
 import { setupJubileePermission } from "../figma_app/251115";
 import { y1 } from "../figma_app/318590";
@@ -544,8 +544,8 @@ let t5 = memo(({
   OQ(i);
   y1(i);
   WR();
-  nz();
-  _$$N();
+  useAllLibrarySubscriptions();
+  useFullscreenReadySubscription();
   Ky();
   useEffect(() => {
     let e = () => {
@@ -619,9 +619,9 @@ let t5 = memo(({
     };
   }, [d]);
   useEffect(() => {
-    t && !o.current && (d(Yx({})), t && !p ? t?.canEdit && d(rH({
+    t && !o.current && (d(initializeUserThunk({})), t && !p ? t?.canEdit && d(rH({
       fileKey: t.key
-    })) : getFeatureFlags().ce_new_missing_fonts_logging && DI(), o.current = t);
+    })) : getFeatureFlags().ce_new_missing_fonts_logging && triggerMissingFontPopover(), o.current = t);
   }, [d, p, t]);
   useEffect(() => {
     RS(d, t?.key, h);
@@ -760,7 +760,7 @@ export function $$t80({
     let d = useSelector(e => e.loadingState);
     let c = useSelector(e => e.library.local);
     let u = useSelector(e => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
-    let p = ud();
+    let p = useFileByKey();
     let h = useSelector(e => e.folders);
     let m = useSubscribedLibraryFileKeys();
     let f = useSubscribedLibraryKeys();
@@ -1205,7 +1205,7 @@ export function $$t80({
   })();
   useEffect(() => {
     let e = e => {
-      if (B === _$$y.MERGING) {
+      if (B === MergeState.MERGING) {
         e.returnValue = "A merge operation is in progress. Closing the window could result in data loss or corruption; please wait until the operation completes.";
         e.preventDefault();
         i(trackFileEventThunk({
@@ -1215,7 +1215,7 @@ export function $$t80({
       }
     };
     let t = () => {
-      B === _$$y.MERGING && i(trackFileEventThunk({
+      B === MergeState.MERGING && i(trackFileEventThunk({
         name: "Page Closed During Merge"
       }));
     };

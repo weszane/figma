@@ -3,7 +3,7 @@ import { VariablesBindings, VariableDataType, VariableResolvedDataType, Operatio
 import { defaultSessionLocalIDString } from "../905/871411";
 import { analyticsEventManager } from "../905/449184";
 import { logWarning } from "../905/714362";
-import { ff } from "../figma_app/933328";
+import { upsertSharedVariable } from "../figma_app/933328";
 import { q } from "../905/113809";
 import { o as _$$o } from "../905/609215";
 import { Rb, yp, pN } from "../figma_app/852050";
@@ -192,7 +192,7 @@ export function $$z31(e, t, r, i) {
 }
 export async function $$W8(e, t) {
   let r = t.find(t => t.node_id === e.node_id);
-  r && (await ff(r));
+  r && (await upsertSharedVariable(r));
 }
 export function $$K13(e) {
   let [t, r] = e.split(" %%% ");

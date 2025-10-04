@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { nb, Tf } from "../figma_app/543100";
-import { F } from "../905/915030";
+import { ComFileType } from "../905/915030";
 import { IT } from "../905/864644";
 import { Q } from "../figma_app/787018";
 import { k8 } from "../figma_app/448654";
@@ -19,7 +19,7 @@ export function $$c0(e, t = !0) {
       prototypeIds: []
     };
     e.forEach(e => {
-      if (e.type === nb.FILE) t.fileKeys.push(Tf.getId(e)); else if (e.type === nb.REPO) t.repoIds.push(Tf.getId(e)); else if (e.type === nb.PROTOTYPE) {
+      if (e.type === nb.FILE) t.fileKeys.push(Tf.getId(e));else if (e.type === nb.REPO) t.repoIds.push(Tf.getId(e));else if (e.type === nb.PROTOTYPE) {
         let i = e.prototype.id;
         t.prototypeIds.push(i);
       }
@@ -32,9 +32,9 @@ export function $$p1({
   enabled: e = !0
 } = {}) {
   let t = useSelector(e => e.tileSelect);
-  let i = useMemo(() => [...Object.keys(t[F.FILES]), ...Object.keys(t[F.PINNED_FILES])], [t]);
-  let a = useMemo(() => Object.keys(t[F.REPOS]), [t]);
-  let c = useMemo(() => Object.keys(t[F.PROTOTYPES]).map(e => {
+  let i = useMemo(() => [...Object.keys(t[ComFileType.FILES]), ...Object.keys(t[ComFileType.PINNED_FILES])], [t]);
+  let a = useMemo(() => Object.keys(t[ComFileType.REPOS]), [t]);
+  let c = useMemo(() => Object.keys(t[ComFileType.PROTOTYPES]).map(e => {
     if (!e.includes(",")) throw Error(`Expected prototype id ${e} to be a client-side generated id`);
     let [t, i, n] = e.split(",");
     return n;

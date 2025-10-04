@@ -13,7 +13,7 @@ import { reportError } from '../905/11';
 import { useIsLoaded } from '../905/18797';
 import { useMemoStable } from '../905/19536';
 import { editorUtilities as _$$k3 } from '../905/22009';
-import { z4 } from '../905/37051';
+import { fullscreenAlias } from '../905/37051';
 import { KeyCodes } from '../905/63728';
 import { getPublishedComponentsForLibraryThunk } from '../905/64411';
 import { SimpleFuseSearch } from '../905/81982';
@@ -1429,7 +1429,7 @@ function st(e) {
   useEffect(() => {
     o !== '' && (_hasQueryResultsCached2(o) && _hasQueryResultsCached(o) && hasQueryResultsCached(o) || serverSideSearch(o, e => _setResultsForQuery5(o, e), e => _setResultsForQuery3(o, e), e => _setResultsForQuery2(o, e)), setResultsForQuery(o, t6.search(o).map(e => e.plugin_id)), _setResultsForQuery(o, t7.search(o).map(e => e.localFileId.toString())), _setResultsForQuery4(o, se.search(o).map(e => e.plugin_id)));
   }, [o, _hasQueryResultsCached2, hasQueryResultsCached, _hasQueryResultsCached, serverSideSearch, _setResultsForQuery4, _setResultsForQuery5, _setResultsForQuery2, _setResultsForQuery, _setResultsForQuery3, setResultsForQuery]);
-  let em = z4.getIsExtension() ? gC + Ix : i ? gC + Ix + ff + 8 : gC + Ix;
+  let em = fullscreenAlias.getIsExtension() ? gC + Ix : i ? gC + Ix + ff + 8 : gC + Ix;
   let ex = NF(em);
   let ep = i ? tn : l ? ti : ta;
   let eg = i ? 'fd_browse_resource_modal--devHandoffSearchBarContainerScrolled--KosxI fd_browse_resource_modal--devHandoffSearchBarContainer--zw9mg' : l ? ti : 'fd_browse_resource_modal--searchBarContainerScrolled--2-lJE fd_browse_resource_modal--searchBarContainer--Q2kZ7';
@@ -1803,7 +1803,7 @@ function sc(e) {
   let t = useRef(null);
   let s = isDevHandoffEditorType();
   let r = useIsSelectedViewFullscreenCooper();
-  let l = z4.getIsExtension() ? Ix + gC + 48 : s ? gC + Kr + Ix + ff : gC + Kr + Ix;
+  let l = fullscreenAlias.getIsExtension() ? Ix + gC + 48 : s ? gC + Kr + Ix + ff : gC + Kr + Ix;
   let {
     activeTab,
     currentView

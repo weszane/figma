@@ -2,8 +2,8 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { noop } from 'lodash-es';
-import { b as _$$b, c as _$$c } from "../905/308099";
-import { q } from "../905/932270";
+import { RadioInputRoot, RadioInputOption } from "../905/308099";
+import { Legend } from "../905/932270";
 import { Label } from "../905/270045";
 import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
@@ -62,15 +62,15 @@ let $$N0 = registerModal(function (e) {
         })
       }), getFeatureFlags().cmty_refund_modal_radio_input_migration ? jsxs("form", {
         className: cssBuilderInstance.my16.$,
-        children: [jsx(_$$b, {
+        children: [jsx(RadioInputRoot, {
           value: f ?? void 0,
           onChange: e => {
             b(e);
           },
-          legend: jsx(q, {
+          legend: jsx(Legend, {
             children: renderI18nText("community.buyer.refund_reason")
           }),
-          children: Object.values(CancellationReason).map(e => jsx(_$$c, {
+          children: Object.values(CancellationReason).map(e => jsx(RadioInputOption, {
             value: e,
             label: jsx(Label, {
               children: getRefundReasonString(e)

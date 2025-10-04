@@ -15,7 +15,7 @@ import { Z } from "../3276/966473";
 import { getUserId } from "../905/372672";
 import { FDocumentType, ITemplateType } from "../905/862883";
 import { KindEnum } from "../905/129884";
-import { $L, us } from "../figma_app/136698";
+import { getColorForMultiplayer, multiplayerColors } from "../figma_app/136698";
 import { LL, xG } from "../figma_app/565197";
 import { b as _$$b } from "../905/635568";
 import { $J, Yg } from "../figma_app/357202";
@@ -48,7 +48,7 @@ export function $$j0({
 }) {
   let d = e.hi_res_img_url || e.img_url;
   let c = `${d}?c=1`;
-  let p = $L(e.id, us);
+  let p = getColorForMultiplayer(e.id, multiplayerColors);
   let m = LL(c, e.name || e.handle || "", p);
   let b = getUserId();
   let T = _$$b();

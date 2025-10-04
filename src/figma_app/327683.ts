@@ -11,7 +11,7 @@ import { TW, sB, d$ } from "../905/958097";
 import { debugState } from "../905/407919";
 import { fetchDynamicConfig } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
-import { Oe } from "../figma_app/933328";
+import { loadSharedVariableThunk } from "../figma_app/933328";
 import { Vg, gU, Hf } from "../figma_app/407414";
 import { Ef } from "../905/107436";
 import { kA } from "../figma_app/726579";
@@ -352,7 +352,7 @@ export async function $$L5(e, t, r, n, s, o, l) {
   let b = VariableIdHandler.fromString(y.node_id);
   if (!b) return !1;
   let T = debugState.dispatch;
-  if (!(await T(Oe(y)))) return Promise.resolve(!1);
+  if (!(await T(loadSharedVariableThunk(y)))) return Promise.resolve(!1);
   let I = VariableIdHandler.toKiwi(b);
   let {
     index,

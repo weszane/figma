@@ -57,7 +57,7 @@ import { e0 as _$$e } from "../905/696396";
 import { AM, pT } from "../905/467351";
 import { Z5, R5 } from "../figma_app/861982";
 import { Ah } from "../figma_app/221114";
-import { k$, gN, id, _o, Dz, TV } from "../figma_app/847915";
+import { hasSeparator, hasHeader, hasRenderFunction, hasActionOrCallback, getActionOrName, hasChildrenOrDropdown } from "../figma_app/847915";
 import { formatI18nMessage } from "../905/482208";
 import { UN } from "../905/525678";
 import { Pu, Qq, MJ as _$$MJ, Oo } from "../figma_app/4616";
@@ -149,10 +149,10 @@ function em(e, t) {
     header: "",
     items: []
   };
-  for (let t of (i.push(n), e)) k$(t) ? (n = {
+  for (let t of (i.push(n), e)) hasSeparator(t) ? (n = {
     header: "",
     items: []
-  }, i.push(n)) : gN(t) ? n.header = t.name : n.items.push(t);
+  }, i.push(n)) : hasHeader(t) ? n.header = t.name : n.items.push(t);
   return 1 === i.length || i.every(e => !e.header) ? e.map(e => ef(e, t)) : i.map(e => jsx(MenuGroupComp, {
     title: jsx(MenuTitleComp, {
       children: e.header
@@ -161,21 +161,21 @@ function em(e, t) {
   }, e.header));
 }
 function ef(e, t) {
-  if (!e || k$(e) || gN(e) || id(e)) return null;
-  let i = _o(e) && e.disabled || !e.name && !(_o(e) && Yh(t.appModel, e.action));
-  if (!(_o(e) && e.disabledAndForceVisible) && i && t.removeDisabledItems) return null;
-  let n = Dz(e);
-  return _o(e) ? jsxs(Pu, {
+  if (!e || hasSeparator(e) || hasHeader(e) || hasRenderFunction(e)) return null;
+  let i = hasActionOrCallback(e) && e.disabled || !e.name && !(hasActionOrCallback(e) && Yh(t.appModel, e.action));
+  if (!(hasActionOrCallback(e) && e.disabledAndForceVisible) && i && t.removeDisabledItems) return null;
+  let n = getActionOrName(e);
+  return hasActionOrCallback(e) ? jsxs(Pu, {
     onClick: () => e.callback?.(e.action, {}, t.dispatch),
     recordingKey: e.recordingKey || e.action || e.name,
-    children: [(TV(e) || _o(e)) && e.displayText || formatI18nMessage(n, e.args), e.rightIcon && jsx(MenuItemTrail, {
+    children: [(hasChildrenOrDropdown(e) || hasActionOrCallback(e)) && e.displayText || formatI18nMessage(n, e.args), e.rightIcon && jsx(MenuItemTrail, {
       children: e.rightIcon
     }), e.rightText && jsx(MenuItemTrail, {
       children: e.rightText
     }), e.shortcutText && jsx(MenuShortcut, {
       children: e.shortcutText
     })]
-  }, e.name) : TV(e) && e.children ? jsxs(MenuSubMenu, {
+  }, e.name) : hasChildrenOrDropdown(e) && e.children ? jsxs(MenuSubMenu, {
     children: [jsx(Qq, {
       recordingKey: e.childDropdown && e.childDropdown.recordingKey || e.name,
       children: e.displayText

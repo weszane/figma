@@ -6,10 +6,10 @@ import { OpenTarget, desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { BrowserInfo } from "../figma_app/778880";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
-import { NA } from "../905/738636";
+import { handleAutosaveFileCreation } from "../905/738636";
 import { setLastVisitedPlan } from "../905/93909";
 import { isBranchAlt, findBranchById, isBranch } from "../905/760074";
-import { z4 } from "../905/37051";
+import { fullscreenAlias } from "../905/37051";
 import { Tf, nb } from "../figma_app/543100";
 import { useCurrentUserOrgId } from "../905/845253";
 import { getSelectedView } from "../figma_app/386952";
@@ -118,7 +118,7 @@ let w = ({
       });
       break;
     case nb.OFFLINE_FILE:
-      i(NA({
+      i(handleAutosaveFileCreation({
         file: e.file,
         openNewFileIn: TabOpenBehavior.NEW_TAB,
         source: NotificationType.OFFLINE_FILE_TILE
@@ -134,7 +134,7 @@ let C = ({
   selectedBranchKeyByRepoId: i,
   dispatch: n
 }) => {
-  e.type === nb.OFFLINE_FILE && n(NA({
+  e.type === nb.OFFLINE_FILE && n(handleAutosaveFileCreation({
     file: e.file,
     openNewFileIn: TabOpenBehavior.NEW_TAB,
     source: NotificationType.OFFLINE_FILE_TILE
@@ -173,7 +173,7 @@ let T = async ({
       }, f) : i(selectViewAction({
         view: "fullscreen",
         fileKey: e.file.key,
-        editorType: z4.getIsExtension() ? FEditorType.DevHandoff : e.file.editorType ? mapFileTypeToEditorType(e.file.editorType) : FEditorType.Design,
+        editorType: fullscreenAlias.getIsExtension() ? FEditorType.DevHandoff : e.file.editorType ? mapFileTypeToEditorType(e.file.editorType) : FEditorType.Design,
         prevSelectedView: d
       }));
       break;
@@ -222,7 +222,7 @@ let T = async ({
       }));
       break;
     case nb.OFFLINE_FILE:
-      i(NA({
+      i(handleAutosaveFileCreation({
         file: e.file,
         openNewFileIn: TabOpenBehavior.SAME_TAB,
         source: NotificationType.OFFLINE_FILE_TILE

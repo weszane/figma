@@ -1,8 +1,8 @@
 import { jsx, Fragment } from "react/jsx-runtime";
-import { Ak } from "../905/986103";
+import { useRelativeTime } from "../905/986103";
 export function $$a0(e) {
   let t = e.getDateFromGenericTile(e.tile);
-  let i = Ak(t);
+  let i = useRelativeTime(t);
   return jsx(Fragment, {
     children: i ?? "--"
   });

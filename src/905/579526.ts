@@ -1,4 +1,4 @@
-import { C } from "../905/222694";
+import { convertToRgba } from "../905/222694";
 import { ServiceCategories } from "../905/165054";
 import { getResourceDataOrFallback } from "../905/663269";
 import { bellFeedAPIInstance } from "../figma_app/876459";
@@ -113,7 +113,7 @@ export class $$u2 {
       } = e;
       return signedThumbnailUrl ? {
         url: signedThumbnailUrl,
-        backgroundColor: C(checkpointClientMeta),
+        backgroundColor: convertToRgba(checkpointClientMeta),
         fullWidth: !!thumbnailGuid
       } : void 0;
     }(e);
@@ -142,7 +142,7 @@ export class $$u2 {
 export function $$p1(e) {
   return e.thumbnail_url ? {
     url: e.thumbnail_url,
-    backgroundColor: C(e.client_meta),
+    backgroundColor: convertToRgba(e.client_meta),
     fullWidth: !!e.thumbnail_guid
   } : void 0;
 }

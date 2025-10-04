@@ -38,7 +38,7 @@ import { a as _$$a2 } from "../905/964520";
 import H from "../vendor/197638";
 import { getEmojiData } from "../905/403166";
 import { buildUploadUrl } from "../figma_app/169182";
-import { h1, Ak } from "../905/986103";
+import { RelativeTimeDisplay, useRelativeTime } from "../905/986103";
 import { FlashActions } from "../905/573154";
 import { getI18nState } from "../figma_app/363242";
 import { AvatarSize } from "../905/590952";
@@ -53,7 +53,7 @@ import { logError } from "../905/714362";
 import { p as _$$p } from "../figma_app/941287";
 import { noop } from 'lodash-es';
 import { TabLoop } from "../905/718764";
-import { C as _$$C } from "../905/807275";
+import { CircularBuffer } from "../905/807275";
 import { y as _$$y } from "../905/52479";
 import { Point } from "../905/736624";
 import { d as _$$d } from "../1577/847459";
@@ -315,7 +315,7 @@ function eb(e) {
                   className: "block_kit_row--planDivider--XnNq8",
                   children: "\xb7"
                 })]
-              }), jsx(h1, {
+              }), jsx(RelativeTimeDisplay, {
                 date: block.created_at,
                 style: "short"
               })]
@@ -473,7 +473,7 @@ function ej(e) {
     lastSeenTimestamp
   } = e;
   let a = ey(createdAt, lastSeenTimestamp);
-  let o = Ak(createdAt, "narrow");
+  let o = useRelativeTime(createdAt, "narrow");
   if ("today" !== a && "new" !== a) {
     let e = new Date(createdAt);
     let i = {};
@@ -709,7 +709,7 @@ function eL(e) {
 }
 let ez = class e {
   constructor() {
-    this.circularBuffer = new _$$C(e.BUFFER_CAPACITY);
+    this.circularBuffer = new CircularBuffer(e.BUFFER_CAPACITY);
     this.lastTimestamp = 0;
   }
   clear() {
@@ -1081,7 +1081,7 @@ function eW(e, t) {
       if (!desktopAPIInstance && r) d(_$$H({
         params: n.searchParams.toString(),
         hash: n.hash
-      })); else if (t.deeplink.use_unsafe) customHistory.unsafeRedirect(n.href, desktopAPIInstance ? void 0 : "_blank"); else if (e.inDesktopTray) customHistory.redirect(n.href); else try {
+      }));else if (t.deeplink.use_unsafe) customHistory.unsafeRedirect(n.href, desktopAPIInstance ? void 0 : "_blank");else if (e.inDesktopTray) customHistory.redirect(n.href);else try {
         let e = mapPathToSelectedView(s.getState(), o);
         if ("teamFeed" === e.view) {
           m && t.plan?.id.toString() === m.id ? d(selectViewAction(e)) : customHistory.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");

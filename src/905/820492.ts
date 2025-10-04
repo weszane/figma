@@ -63,7 +63,7 @@ import { Rs } from "../figma_app/761870";
 import { e0 as _$$e3 } from "../905/696396";
 import { profileServiceAPI } from "../905/608932";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { pz } from "../figma_app/825489";
+import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { HeaderModal } from "../905/519092";
 import { $ as _$$$ } from "../905/241406";
 import { F4, _g } from "../figma_app/60023";
@@ -1367,7 +1367,7 @@ let $$tl0 = registerModal(function (e) {
   });
   let a = getCommunityHubLikeStatus(n?.id, ResourceTypeNoComment.HUB_FILE);
   let o = useAtomWithSubscription(_g);
-  let l = Xr(pz);
+  let l = Xr(libraryPublishingModeAtom);
   return i ? _$$W2(i.editor_type) ? jsx(_$$T, {
     publishingEntryPoint: e.entryPoint,
     figFileKey: e.fileKey

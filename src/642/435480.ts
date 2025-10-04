@@ -9,7 +9,7 @@ import { isFullscreenDesignModeNotFocused } from "../figma_app/327588";
 import { e as _$$e } from "../1528/93111";
 import { q } from "../figma_app/590592";
 import { useNonMixedSelectionPropertyValue } from "../905/275640";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { m as _$$m } from "../905/99004";
 import { aZ } from "../figma_app/481279";
 import { KE, IV, tM, Ph } from "../figma_app/386160";
@@ -30,7 +30,7 @@ export function $$b1({
   let i = U1();
   let a = q();
   let o = isFullscreenDesignModeNotFocused();
-  let m = o3(nt.newResizablePanel);
+  let m = useLabConfiguration(labConfigurations.newResizablePanel);
   return jsx(_$$m, {
     role: "region",
     "aria-label": getI18nString("fullscreen_actions.right_sidebar_label"),

@@ -5,7 +5,7 @@ import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useDropdownState } from "../905/848862";
-import { j } from "../905/694231";
+import { variableSetDefaultModeService } from "../905/694231";
 import { l6, c$, sK } from "../905/794875";
 import { wx, Pf, VN, iE, nk, oS, UU, K0, kW, nI } from "../905/32813";
 import { A } from "../svg/660901";
@@ -33,12 +33,12 @@ export function $$h1({
   let S = useMemo(() => T?.id === f ? y : e.modes?.find(e => e.id === T?.id), [e, T, y]);
   let v = useCallback(t => {
     I(t);
-    t.id === f ? j.deleteDefaultMode({
+    t.id === f ? variableSetDefaultModeService.deleteDefaultMode({
       libraryKey: p,
       entityType: r.entityType,
       entityId: r.entityId,
       variableSetKey: e.key
-    }) : j.setDefaultMode({
+    }) : variableSetDefaultModeService.setDefaultMode({
       libraryKey: p,
       entityType: r.entityType,
       entityId: r.entityId,
@@ -90,7 +90,7 @@ export function $$g0({
   if (!t || 0 === t.length) return null;
   r &&= t.some(e => e.modes && e.modes.length > 1);
   let b = !f && r && d && a;
-  return (b && j.getDefaultModes({
+  return (b && variableSetDefaultModeService.getDefaultModes({
     libraryKey: a,
     entityType: d.entityType,
     entityId: d.entityId

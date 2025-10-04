@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
-import { rW } from "../figma_app/591738";
+import { shouldShowEditorBell } from "../figma_app/591738";
 import { Zr } from "../figma_app/678782";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { t as _$$t } from "../figma_app/501766";
 import { N as _$$N } from "../905/301843";
 import { m as _$$m } from "../905/701558";
@@ -168,7 +168,7 @@ export function $$q0() {
   } = useContext(_$$t);
   let t = useIsProgressBarHiddenOrLocked();
   let i = useSelector(e => e.mirror.appModel.showUi);
-  let l = o3(nt.designNavBar);
+  let l = useLabConfiguration(labConfigurations.designNavBar);
   return t || !i ? null : jsxs(_$$_2, {
     isCollapsed: isLeftPanelCollapsed,
     children: [(!l || isLeftPanelCollapsed) && jsx(xG, {}), isLeftPanelCollapsed ? jsx(N, {}) : jsx(G, {})]
@@ -176,7 +176,7 @@ export function $$q0() {
 }
 function G() {
   let e = Zr("toggle-sidebar");
-  let t = rW()();
+  let t = shouldShowEditorBell()();
   return jsxs("div", {
     className: "design_dev_handoff_left_panel_island--expandedIconSection--8-YFf",
     children: [jsx(n8, {}), jsx(En, {}), jsx(J, {}), jsx(T, {}), t && jsx($0, {}), e && jsx(_$$n2, {})]

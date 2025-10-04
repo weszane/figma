@@ -71,7 +71,7 @@ import { AccessLevelEnum } from "../905/557142";
 import { subscribeAndAwaitData } from "../905/553831";
 import { canCreateFileType } from "../figma_app/687776";
 import { openUrlInContext } from "../figma_app/976345";
-import { zE, uM } from "../905/738636";
+import { createNewFileWithRestrictions, createAndOpenFile } from "../905/738636";
 import { XZ } from "../figma_app/176973";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getNewFileConfig } from "../905/766303";
@@ -663,7 +663,7 @@ function eJ(e) {
         }
       })();
       let d = o ? TabOpenBehavior.NEW_TAB : TabOpenBehavior.SAME_TAB;
-      t(zE({
+      t(createNewFileWithRestrictions({
         state: i,
         editorType: e,
         team,
@@ -785,7 +785,7 @@ function eJ(e) {
             experiment: "exp_tooltips_plus_onboarding"
           }, "Failed to open captive file");
         };
-        r.dispatch(uM(t));
+        r.dispatch(createAndOpenFile(t));
       };
       try {
         let e = await liveStoreInstance.fetch(XZ({

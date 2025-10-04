@@ -20,7 +20,7 @@ import { qj } from "../figma_app/451499";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
-import { o3, nt } from "../905/226610";
+import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -31,7 +31,7 @@ import { zK, zM } from "../905/182453";
 import { Kx } from "../905/401389";
 import { Bf } from "../905/937445";
 import { bL, RT } from "../905/867927";
-import { q as _$$q } from "../905/932270";
+import { Legend } from "../905/932270";
 import { LengthInput, OpacityInput, PercentageBaseInput, ExpressionInput } from "../figma_app/178475";
 import { aO, UF, ml, gA, vG, qq, IK } from "../905/210945";
 import { Id, Zk } from "../figma_app/626177";
@@ -43,7 +43,7 @@ import { useDispatch } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
 import { convertVariableIdToKiwi, convertKiwiToVariableIdString } from "../905/805904";
 import $ from "classnames";
-import { Oe as _$$Oe } from "../figma_app/933328";
+import { loadSharedVariableThunk } from "../figma_app/933328";
 import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { ControlledVariablePickerProvider } from "../figma_app/260445";
 import { MH } from "../figma_app/394327";
@@ -138,7 +138,7 @@ function ed({
   let c = useDispatch();
   let u = useCallback(async e => {
     if (t && e) {
-      let i = await c(_$$Oe(e));
+      let i = await c(loadSharedVariableThunk(e));
       let n = convertVariableIdToKiwi(i);
       assertNotNullish(n);
       let r = {
@@ -356,7 +356,7 @@ function em(e) {
               ...a
             }, yesNoTrackingEnum.YES);
           },
-          legend: jsx(_$$q, {
+          legend: jsx(Legend, {
             children: renderI18nText("properties_panel.effects.blur.type")
           }),
           children: [jsx(RT, {
@@ -1421,7 +1421,7 @@ function tl(e) {
         appendedClassName: en,
         label: null,
         input: jsxs(bL, {
-          legend: jsx(_$$q, {
+          legend: jsx(Legend, {
             children: renderI18nText("properties_panel.noise.noise_type")
           }),
           value: e.effect.noiseType,
@@ -1724,7 +1724,7 @@ function th(e) {
     e.onChange(n, i);
   };
   let m = async t => {
-    let i = await e.dispatch(_$$Oe(t));
+    let i = await e.dispatch(loadSharedVariableThunk(t));
     let n = convertVariableIdToKiwi(i);
     if (!n) return;
     let r = {
@@ -1962,7 +1962,7 @@ function t_() {
   AppStateTsApi?.currentEditModeInDesign() === LayoutTabType.PROGRESSIVE_BLUR && fullscreenValue.triggerAction("toggle-progressive-blur-edit-mode");
 }
 function tA(e) {
-  let t = o3(nt.useGrid);
+  let t = useLabConfiguration(labConfigurations.useGrid);
   let i = getFeatureFlags().eu_fpl_migration_styles_picker_selects;
   let [a, s] = useState(e.effect.type);
   let o = (e, t) => {
@@ -2140,7 +2140,7 @@ let tL = {
   GLASS: 1
 };
 export function $$tF0(e) {
-  let t = o3(nt.useGrid);
+  let t = useLabConfiguration(labConfigurations.useGrid);
   let {
     Sprig
   } = useSprigWithSampling();

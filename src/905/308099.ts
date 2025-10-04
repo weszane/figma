@@ -1,52 +1,79 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { forwardRef } from "react";
-import { Description } from "../905/21985";
-import { generateInputId, generateDescId } from "../905/786321";
-import { useSelectionProvider } from "../905/751750";
-import { ManuallyLabeledRadioRoot, ManuallyLabeledRadioOption } from "../905/618904";
-import { UX, zr, h_ } from "../905/434007";
-export let $$c0 = forwardRef(function ({
-  legend: e,
-  children: t,
-  ...i
-}, r) {
+import type { ReactNode } from "react"
+import { forwardRef } from "react"
+import { jsx, jsxs } from "react/jsx-runtime"
+import { Description } from "../905/21985"
+import { h_, UX, zr } from "../905/434007"
+
+import { ManuallyLabeledRadioOption, ManuallyLabeledRadioRoot } from "../905/618904"
+import { useSelectionProvider } from "../905/751750"
+import { generateDescId, generateInputId } from "../905/786321"
+
+interface RadioInputRootProps {
+  legend?: ReactNode
+  children?: ReactNode
+  [key: string]: any
+}
+
+interface RadioInputOptionProps {
+  label?: ReactNode
+  children?: ReactNode
+  htmlAttributes?: Record<string, any>
+  [key: string]: any
+}
+
+export const RadioInputRoot = forwardRef<HTMLDivElement, RadioInputRootProps>(({
+  legend,
+  children,
+  ...props
+}, ref) => {
   return jsxs(ManuallyLabeledRadioRoot, {
-    ref: r,
-    ...i,
-    children: [e, jsx("div", {
-      className: UX,
-      children: t
-    })]
-  });
-});
-$$c0.displayName = "RadioInput.Root";
-export let $$u1 = forwardRef(function ({
-  label: e,
-  children: t,
-  htmlAttributes: i,
-  ...r
-}, c) {
-  let u = !!t;
-  let [p, m] = useSelectionProvider();
-  let h = generateInputId(p);
-  let g = u ? generateDescId(p) : void 0;
-  return jsx(m, {
-    value: p,
+    ref,
+    ...props,
+    children: [
+      legend,
+      jsx("div", {
+        className: UX,
+        children,
+      }),
+    ],
+  })
+})
+RadioInputRoot.displayName = "RadioInput.Root"
+
+export const RadioInputOption = forwardRef<HTMLInputElement, RadioInputOptionProps>(({
+  label,
+  children,
+  htmlAttributes,
+  ...props
+}, ref) => {
+  const hasDescription = !!children
+  const [value, SelectionProvider] = useSelectionProvider()
+  const inputId = generateInputId(value)
+  const descriptionId = hasDescription ? generateDescId(value) : undefined
+
+  return jsx(SelectionProvider, {
+    value,
     children: jsxs("div", {
       className: zr,
-      children: [jsx(ManuallyLabeledRadioOption, {
-        id: h,
-        ...r,
-        htmlAttributes: i,
-        "aria-describedby": g,
-        ref: c
-      }), e, u && jsx(Description, {
-        className: h_,
-        children: t
-      })]
-    })
-  });
-});
-$$u1.displayName = "RadioInput.Option";
-export const b = $$c0;
-export const c = $$u1;
+      children: [
+        jsx(ManuallyLabeledRadioOption, {
+          "id": inputId,
+          ...props,
+          "htmlAttributes": htmlAttributes,
+          "aria-describedby": descriptionId,
+          "ref": ref,
+        }),
+        label,
+        hasDescription && jsx(Description, {
+          className: h_,
+          children,
+        }),
+      ],
+    }),
+  })
+})
+RadioInputOption.displayName = "RadioInput.Option"
+
+// Export aliases for backward compatibility
+export const b = RadioInputRoot
+export const c = RadioInputOption

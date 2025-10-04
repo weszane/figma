@@ -1,81 +1,192 @@
-import { randomBetween } from "../figma_app/492908";
-import { serializeJSON } from "../905/251556";
-import { getFalseValue } from "../figma_app/897289";
-export class $$s0 {
-  constructor(e) {
-    this.config = e;
-    this.subscriptionMap = new Map();
-    this.onRealtimeMessage = null;
-    this.shimLogger = null;
+import { serializeJSON } from "../905/251556"
+import { randomBetween } from "../figma_app/492908"
+import { getFalseValue } from "../figma_app/897289"
+
+interface SubscriptionContext {
+  lgClient: any
+  store: any
+}
+
+
+
+export class RealtimeSubscriptionManager {
+  private config: any
+  private subscriptionMap: Map<string, () => void>
+  private onRealtimeMessage: ((message: any, store: any) => void) | null
+  private shimLogger: any | null
+
+  constructor(config: any) {
+    this.config = config
+    this.subscriptionMap = new Map()
+    this.onRealtimeMessage = null
+    this.shimLogger = null
   }
-  setOnRealtimeMessage(e) {
-    this.onRealtimeMessage = e;
+
+  /**
+   * Sets the callback function to handle realtime messages
+   * @param callback - Function to handle incoming messages
+   */
+  setOnRealtimeMessage(callback: (message: any, store: any) => void): void {
+    this.onRealtimeMessage = callback
   }
-  setLogger(e) {
-    this.shimLogger = e;
+
+  /**
+   * Sets the logger for shim messages
+   * @param logger - Logger instance
+   */
+  setLogger(logger: any): void {
+    this.shimLogger = logger
   }
-  handleSubscription(e, t, i) {
-    let s = {
-      lgClient: i,
-      store: t
-    };
-    if (!this.config.shouldHandle(e) || !this.config.darkReadEnabled(s)) return;
-    let o = this.config.parseChannelArgs(e);
-    let l = serializeJSON(o);
-    if (this.subscriptionMap.has(l)) return;
-    let d = null;
-    let c = () => {
-      d && clearTimeout(d);
-    };
-    let u = () => {
-      let e = () => {
-        let e = new Date(new Date().setHours(0, 0, 0, 0));
-        let n = this.config.livegraphArgs(o, e, s);
-        return i.subscribe(this.config.livegraphView, n, e => {
-          if ("loaded" !== e.status) return;
-          let i = this.config.convertLivegraphMessage(e.data, e.errors, n, s);
-          if (this.shimLogger?.logMessages(i, {
-            origin: this.config.name
-          }), this.config.fullReadEnabled(s)) {
-            let e = () => {
-              if (!this.onRealtimeMessage) throw Error("Forgot to set shim callback?");
-              this.onRealtimeMessage(i, t);
-            };
-            getFalseValue() ? e() : setTimeout(() => {
-              e();
-            });
+
+  /**
+   * Handles subscription to a channel
+   * @param channel - Channel to subscribe to
+   * @param store - Store instance
+   * @param lgClient - Livegraph client
+   */
+  handleSubscription(channel: any, store: any, lgClient: any): void {
+    const context: SubscriptionContext = {
+      lgClient,
+      store,
+    }
+
+    if (!this.config.shouldHandle(channel) || !this.config.darkReadEnabled(context)) {
+      return
+    }
+
+    const channelArgs = this.config.parseChannelArgs(channel)
+    const serializedChannel = serializeJSON(channelArgs)
+
+    if (this.subscriptionMap.has(serializedChannel)) {
+      return
+    }
+
+    let timeoutId: NodeJS.Timeout | number | null = null
+
+    const clearExistingTimeout = (): void => {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
+    }
+
+    const createSubscription = (): void => {
+      const subscribe = (): (() => void) => {
+        const today = new Date(new Date().setHours(0, 0, 0, 0))
+        const subscriptionArgs = this.config.livegraphArgs(channelArgs, today, context)
+
+        return lgClient.subscribe(
+          this.config.livegraphView,
+          subscriptionArgs,
+          (response: any) => {
+            if (response.status !== "loaded") {
+              return
+            }
+
+            const message = this.config.convertLivegraphMessage(
+              response.data,
+              response.errors,
+              subscriptionArgs,
+              context,
+            )
+
+            // Log messages if logger is available
+            this.shimLogger?.logMessages(message, {
+              origin: this.config.name,
+            })
+
+            // Process message if full read is enabled
+            if (this.config.fullReadEnabled(context)) {
+              const processMessage = (): void => {
+                if (!this.onRealtimeMessage) {
+                  throw new Error("Forgot to set shim callback?")
+                }
+                this.onRealtimeMessage(message, store)
+              }
+
+              if (getFalseValue()) {
+                processMessage()
+              }
+              else {
+                setTimeout(() => {
+                  processMessage()
+                })
+              }
+            }
+          },
+        )
+      }
+
+      clearExistingTimeout()
+
+      if (this.config.periodicallyResubscribe) {
+        const resubscribe = (): (() => void) => {
+          let timeout: NodeJS.Timeout | number | null = null
+          let unsubscribe: (() => void) | null = null
+
+          const scheduleResubscribe = (): void => {
+            unsubscribe = subscribe()
+            timeout = setTimeout(() => {
+              if (unsubscribe) {
+                unsubscribe()
+              }
+              scheduleResubscribe()
+            }, 86400000 + randomBetween(0, 3600000)) // 24 hours + random 0-1 hour
           }
-        });
-      };
-      c = this.config.periodicallyResubscribe ? function (e, t, i) {
-        let r = null;
-        let a = null;
-        let s = () => {
-          a = e();
-          r = setTimeout(() => {
-            a && a();
-            s();
-          }, 864e5 + randomBetween(0, 36e5));
-        };
-        s();
-        return () => {
-          r && clearTimeout(r);
-          a && a();
-        };
-      }(e, 0, 36e5) : e();
-    };
-    this.subscriptionMap.set(l, c);
-    this.config.delaySubscribeMs ? d = setTimeout(u, this.config.delaySubscribeMs()) : u();
+
+          scheduleResubscribe()
+
+          return (): void => {
+            if (timeout) {
+              clearTimeout(timeout)
+            }
+            if (unsubscribe) {
+              unsubscribe()
+            }
+          }
+        }
+
+        const unsubscribe = resubscribe()
+        this.subscriptionMap.set(serializedChannel, unsubscribe)
+      }
+      else {
+        const unsubscribe = subscribe()
+        this.subscriptionMap.set(serializedChannel, unsubscribe)
+      }
+    }
+
+    if (this.config.delaySubscribeMs) {
+      timeoutId = setTimeout(createSubscription, this.config.delaySubscribeMs())
+    }
+    else {
+      createSubscription()
+    }
   }
-  handleUnsubscription(e) {
-    if (!this.config.shouldHandle(e)) return;
-    let t = this.config.parseChannelArgs(e);
-    let i = serializeJSON(t);
-    let n = this.subscriptionMap.get(i);
-    n && (n(), this.subscriptionMap.$$delete(i));
+
+  /**
+   * Handles unsubscription from a channel
+   * @param channel - Channel to unsubscribe from
+   */
+  handleUnsubscription(channel: any): void {
+    if (!this.config.shouldHandle(channel)) {
+      return
+    }
+
+    const channelArgs = this.config.parseChannelArgs(channel)
+    const serializedChannel = serializeJSON(channelArgs)
+    const unsubscribe = this.subscriptionMap.get(serializedChannel)
+
+    if (unsubscribe) {
+      unsubscribe()
+      this.subscriptionMap.delete(serializedChannel)
+    }
   }
-  resetForTests() {
-    this.subscriptionMap.clear();
+
+  /**
+   * Resets all subscriptions for testing purposes
+   */
+  resetForTests(): void {
+    this.subscriptionMap.clear()
   }
 }
-export const H = $$s0;
+
+export const H = RealtimeSubscriptionManager

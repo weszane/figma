@@ -2,7 +2,7 @@ import { useState, useRef, useCallback, useLayoutEffect, useMemo, useContext } f
 import { atom } from "../figma_app/27355";
 import { F } from "../905/680873";
 import { useLatestRef } from "../figma_app/922077";
-import { l as _$$l } from "../905/745972";
+import { useWindowDimensions } from "../905/745972";
 import { getThemePx } from "../905/149328";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { y0 } from "../figma_app/718307";
@@ -22,7 +22,7 @@ export function $$h0({
   let x = useRef(!1);
   let {
     windowInnerHeight
-  } = _$$l();
+  } = useWindowDimensions();
   let b = useCallback(function (e) {
     _(e);
     f?.(e);

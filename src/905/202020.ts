@@ -8,10 +8,10 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { BadgeSize } from "../figma_app/919079";
 import { gS, c$ } from "../figma_app/236327";
-import { h1 } from "../905/986103";
+import { RelativeTimeDisplay } from "../905/986103";
 import { p as _$$p } from "../905/991924";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { WB } from "../905/761735";
+import { getCurrentLiveGraphClient } from "../905/761735";
 import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { VisualBellActions } from "../905/302958";
@@ -48,7 +48,7 @@ let x = createOptimistThunk(async (e, t) => {
     updated_at: new Date().toISOString()
   };
   let n = sendWithRetry.put(`/api/files/${t.branch.key}`, i);
-  await WB().optimisticallyUpdate({
+  await getCurrentLiveGraphClient().optimisticallyUpdate({
     File: {
       [t.branch.key]: {
         key: t.branch.key,
@@ -92,7 +92,7 @@ let w = createOptimistThunk(async (e, t) => {
     n.File[e.key] = t;
   });
   try {
-    let r = await WB().optimisticallyUpdate(n, i);
+    let r = await getCurrentLiveGraphClient().optimisticallyUpdate(n, i);
     if (207 === r.status) {
       try {
         let t = JSON.parse(r.response);
@@ -136,7 +136,7 @@ function B(e) {
     className: "branch_row--subtitleUsername---eghJ text--fontPos11--2LvXf text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa",
     children: e.user.handle || ""
   });
-  let i = useMemo(() => jsx(h1, {
+  let i = useMemo(() => jsx(RelativeTimeDisplay, {
     date: e.touchedAt
   }), [e.touchedAt]);
   return e.isMain || !e.isArchived ? renderI18nText("collaboration.branching.edited", {
@@ -217,7 +217,7 @@ export function $$V0(e) {
   return jsxs("li", {
     className: `branch_row--container--MD7zC ${e.isSelected ? "branch_row--selected--qBm47" : ""}`,
     onContextMenu: e => {
-      if (e.preventDefault(), e.stopPropagation(), m) t(hideDropdownAction()); else {
+      if (e.preventDefault(), e.stopPropagation(), m) t(hideDropdownAction());else {
         let n = {
           top: e.clientY,
           right: e.clientX,
@@ -313,7 +313,7 @@ export function $$V0(e) {
       className: "branch_row--menuColumn--XSWVZ",
       children: jsx(_$$d, {
         onClick: e => {
-          if (e.stopPropagation(), e.preventDefault(), m) t(hideDropdownAction()); else {
+          if (e.stopPropagation(), e.preventDefault(), m) t(hideDropdownAction());else {
             let e = A.current;
             t(showDropdownThunk({
               type: i,

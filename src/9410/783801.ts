@@ -23,7 +23,7 @@ import { $l } from "../905/721248";
 import { generateRecordingKey } from "../figma_app/878298";
 import { W as _$$W } from "../905/95038";
 import { useDropdownState } from "../905/848862";
-import { y as _$$y } from "../905/725962";
+import { MergeState } from "../905/725962";
 import { throwTypeError } from "../figma_app/465776";
 import { useLatestRef } from "../figma_app/922077";
 import { VisualBellActions } from "../905/302958";
@@ -188,7 +188,7 @@ function H({
       }
     }, [n, a, o, r, t]);
     useEffect(() => {
-      i === _$$y.MERGING_ERROR ? s(3) : 3 === a && i === _$$y.NOT_MERGING && s(0);
+      i === MergeState.MERGING_ERROR ? s(3) : 3 === a && i === MergeState.NOT_MERGING && s(0);
     }, [a, i]);
     useEffect(() => {
       let e;

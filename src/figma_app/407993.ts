@@ -27,7 +27,7 @@ import { XM } from "../905/486443";
 import { useAppModelProperty, useCurrentTool } from "../figma_app/722362";
 import { F as _$$F } from "../905/258517";
 import { KindEnum } from "../905/129884";
-import { $L, us } from "../figma_app/136698";
+import { getColorForMultiplayer, multiplayerColors } from "../figma_app/136698";
 import { _ as _$$_ } from "../figma_app/433187";
 import { setupCursorChatDisabledCheck } from "../figma_app/403368";
 import { Qn } from "../figma_app/580087";
@@ -788,7 +788,7 @@ function eT() {
       return r && r["500_500"] ? `${r["500_500"]}?c=1` : null;
     });
     let r = e ? e.name : null;
-    let n = $L(e?.userID, us);
+    let n = getColorForMultiplayer(e?.userID, multiplayerColors);
     let a = LL(t, r, n);
     let o = vv(t, r, n);
     return useMemo(() => ({

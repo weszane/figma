@@ -47,7 +47,7 @@ import { isNullOrFailure, useIsLoaded, useIsLoading } from '../905/18797';
 import { i as _$$i9 } from '../905/22844';
 import { setupPlaybackHandler, getImagePaintSignedUrl } from '../905/23253';
 import { a as _$$a6 } from '../905/29104';
-import { z4 as _$$z7 } from '../905/37051';
+import { fullscreenAlias } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
 import { p as _$$p2 } from '../905/42189';
 import { k as _$$k5 } from '../905/44647';
@@ -96,7 +96,7 @@ import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback } from '../
 import { FlexBox } from '../905/222272';
 import { V as _$$V2 } from '../905/223767';
 import { Cn } from '../905/225265';
-import { nt as _$$nt, o3 as _$$o2 } from '../905/226610';
+import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { n6 as _$$n0 } from '../905/234821';
 import { Panel } from '../905/236825';
 import { Rectangle } from '../905/249071';
@@ -206,7 +206,7 @@ import { TabLoop } from '../905/718764';
 import { N as _$$N5 } from '../905/720559';
 import { n as _$$n5 } from '../905/734251';
 import { E as _$$E8 } from '../905/737393';
-import { l as _$$l1 } from '../905/745972';
+import { useWindowDimensions } from '../905/745972';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { g as _$$g4 } from '../905/757007';
 import { getRepoById } from '../905/760074';
@@ -233,7 +233,7 @@ import { K as _$$K6 } from '../905/851274';
 import { PositioningStrategy } from '../905/858282';
 import { isVsCodeEnvironment } from '../905/858738';
 import { FDocumentType } from '../905/862883';
-import { Cn as _$$Cn } from '../905/862913';
+import { convertToRgba } from '../905/862913';
 import { W as _$$W7 } from '../905/865092';
 import { generateUUIDv4 } from '../905/871474';
 import { b as _$$b8 } from '../905/874849';
@@ -249,7 +249,7 @@ import { Ow } from '../905/921418';
 import { useFullscreenReady } from '../905/924253';
 import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, showDropdownThunk } from '../905/929976';
-import { q as _$$q4 } from '../905/932270';
+import { Legend } from '../905/932270';
 import { noop } from 'lodash-es';
 import { selectUserFlag } from '../905/940356';
 import { styleBuilderInstance } from '../905/941192';
@@ -259,7 +259,7 @@ import { CU, z6 } from '../905/963340';
 import { a as _$$a5 } from '../905/964520';
 import { d as _$$d1 } from '../905/976845';
 import { postUserFlag } from '../905/985254';
-import { h1 as _$$h0 } from '../905/986103';
+import { RelativeTimeDisplay } from '../905/986103';
 import { colorCSSManipulatorInstance } from '../905/989956';
 import { iN as _$$iN, sx as _$$sx3, Qs } from '../905/992395';
 import { D as _$$D7 } from '../905/993374';
@@ -405,7 +405,7 @@ import { gR as _$$gR, ts as _$$ts, LR, zo } from '../figma_app/120210';
 import { bu as _$$bu, n8 as _$$n2, tO as _$$tO, xG as _$$xG } from '../figma_app/121043';
 import { Lk } from '../figma_app/122682';
 import { $c, $l, D6 as _$$D8, gA as _$$gA, hL as _$$hL, rT as _$$rT2, U6 as _$$U4, vt as _$$vt2, Ev, H1, PK, Vw, w9, wQ } from '../figma_app/124493';
-import { $L, us as _$$us } from '../figma_app/136698';
+import { getColorForMultiplayer, multiplayerColors } from '../figma_app/136698';
 import { V as _$$V4 } from '../figma_app/144634';
 import { DF } from '../figma_app/146384';
 import { syncRecentPluginsThunk, syncRecentWidgetsThunk } from '../figma_app/147952';
@@ -560,7 +560,7 @@ import { rp as _$$rp, PI } from '../figma_app/703988';
 import { PreviewMode } from '../figma_app/707808';
 import { wY } from '../figma_app/708845';
 import { useAppModelProperty, useCurrentTool, useIsProgressBarHiddenOrLocked, useSceneGraphSelection, useSceneGraphSelector } from '../figma_app/722362';
-import { xr as _$$xr } from '../figma_app/728075';
+import { uiGrayColor5 } from '../figma_app/728075';
 import { lB as _$$lB, EE } from '../figma_app/731583';
 import { getCurrentOrgAdminInfo } from '../figma_app/740025';
 import { clearSelection, replaceSelection } from '../figma_app/741237';
@@ -614,7 +614,7 @@ import { useLatestRef } from '../figma_app/922077';
 import { searchStartSession, generateSessionId } from '../figma_app/925970';
 import { base64ToUint8Array, kebabToCamel, pluralize } from '../figma_app/930338';
 import { ZE } from '../figma_app/932285';
-import { uO as _$$uO, Gb } from '../figma_app/933328';
+import { swapToSharedComponent, useFileLibrarySubscriptions } from '../figma_app/933328';
 import { $x, _3 as _$$_7, _E as _$$_E, pf as _$$pf2, Vq as _$$Vq, B9, JI, MY, Pi, Ud } from '../figma_app/942553';
 import { Ay as _$$Ay5 } from '../figma_app/948389';
 import { Vi } from '../figma_app/955650';
@@ -2352,7 +2352,7 @@ function im({
   let d = useCallback(() => r(!1), [r]);
   let c = useCallback(() => r(!n), [r, n]);
   let u = s.current?.getBoundingClientRect();
-  let p = _$$o2(_$$nt.figjamPagePickerA11y);
+  let p = useLabConfiguration(labConfigurations.figjamPagePickerA11y);
   let h = `${useId()}-dropdown-trigger`;
   let m = `${useId()}-dropdown-menu`;
   let f = _$$dh();
@@ -2887,7 +2887,7 @@ function i4({
   useEffect(() => {
     d || (c(!0), h());
   }, [d, c, h]);
-  let f = _$$o2(_$$nt.figjamPagePickerA11y);
+  let f = useLabConfiguration(labConfigurations.figjamPagePickerA11y);
   let _ = jsxs(i8, {
     width: i,
     ref: a,
@@ -4751,7 +4751,7 @@ function s_({
         onPointerDown: onInsertableResourcePointerDown,
         className: dragState ? _$$J9 : void 0,
         children: jsxs(FK, {
-          backgroundColor: _$$Cn(clientMeta),
+          backgroundColor: convertToRgba(clientMeta),
           children: [jsx(zx.Cover, {
             children: jsx('div', {
               className: 'browse_resources_use_cases--hoverOverlay--84hkm browse_templates_tab--hoverOverlay--BpdyD'
@@ -10507,7 +10507,7 @@ function p0({
         'className': 'xon4yw5 x1u3p76b x19y5rnk x78zum5 x1q0g3np xeq5yr9 x6s0dn4 xb3r6kr',
         'children': jsx(_$$bL4, {
           onChange: _,
-          legend: jsx(_$$q4, {
+          legend: jsx(Legend, {
             children: u || i
           }),
           readonly: a,
@@ -10916,7 +10916,7 @@ function hZ({
       className: 'whiteboard_transparency--container---6CxE',
       children: jsx(_$$b9, {
         value: void 0 === p || isInvalidValue(p) ? void 0 : hz(p),
-        legend: jsx(_$$q4, {
+        legend: jsx(Legend, {
           children: getI18nString('whiteboard.inline_menu.shape_visibility.legend')
         }),
         onChange: h,
@@ -13953,7 +13953,7 @@ function _K({
             let i = await _$$uL({
               profileImageUrl: `${t.hi_res_img_url || t.img_url}?c=1`,
               userName: t.name || t.handle || '',
-              userColor: $L(t.id, _$$us),
+              userColor: getColorForMultiplayer(t.id, multiplayerColors),
               noCircleOutline: !1
             });
             let n = _$$lJ3(i).filter(e => e.name === 's-profile');
@@ -14030,7 +14030,7 @@ let _W = e => {
         profileUrl: await _$$uL({
           profileImageUrl: `${e.hi_res_img_url || e.img_url}?c=1`,
           userName: e.name || e.handle || '',
-          userColor: $L(e.id, _$$us),
+          userColor: getColorForMultiplayer(e.id, multiplayerColors),
           noCircleOutline: !0
         })
       })))).reduce((e, {
@@ -15268,7 +15268,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let a = useDispatch();
   let s = useCallback(e => {
     _$$l.user('swap-instance', () => {
-      a(_$$uO({
+      a(swapToSharedComponent({
         item: e,
         instanceGUIDs: r,
         sourceForTracking: 'FigJam Instance Swapper',
@@ -20769,7 +20769,7 @@ function b_({
 let bx = e => {
   let {
     windowInnerHeight
-  } = _$$l1();
+  } = useWindowDimensions();
   let i = Yk();
   return windowInnerHeight - (e.y + e.height) - i - 22;
 };
@@ -21889,7 +21889,7 @@ function bq({
           userId: i
         }), jsx('div', {
           className: 'previous_votes_view--timestamp--A1VKx',
-          children: jsx(_$$h0, {
+          children: jsx(RelativeTimeDisplay, {
             date: n
           })
         })]
@@ -21954,7 +21954,7 @@ let b8 = memo(({
         votingSessionInfo: e
       }), jsx('p', {
         className: 'voting_results_detail_view--bylineTimestamp--3Ugv4 text--fontPos12--YsUAh text--_fontBase--QdLsd',
-        children: jsx(_$$h0, {
+        children: jsx(RelativeTimeDisplay, {
           date: i.createdAt
         })
       })]
@@ -21997,10 +21997,10 @@ function b7({
     }
   }, [p, s, n]);
   let _ = function (e) {
-    if (!e) return _$$xr;
+    if (!e) return uiGrayColor5;
     let t = e.whiteboardColor;
     let i = BV(t, e.type === 'STICKY' ? 'sticky' : 'base');
-    return i ? colorCSSManipulatorInstance.format(i) : _$$xr;
+    return i ? colorCSSManipulatorInstance.format(i) : uiGrayColor5;
   }(r);
   let x = r ? r.type === 'SHAPE_WITH_TEXT' ? function (e) {
     switch (e) {
@@ -22711,7 +22711,7 @@ function yF() {
   let n = useSelector(e => _$$Yh(e.mirror.appModel, _$$ec2.action) && i);
   let r = useSelector(e => e.mirror.appModel.currentTool === _$$ec2.tool);
   let a = _$$n0();
-  let s = _$$z7.getIsExtension();
+  let s = fullscreenAlias.getIsExtension();
   useEffect(() => {
     !r && t.current && t.current === document.activeElement && KeyboardFocusManager.focusCustomCanvasFocusElement();
   }, [r, t]);
@@ -24382,7 +24382,7 @@ let vW = memo(({
   let y = useSelector(e => e.universalInsertModal);
   let w = useSelector(e => _$$h5(e));
   let I = useDispatch();
-  Gb(m);
+  useFileLibrarySubscriptions(m);
   _$$W(!0);
   let L = BI();
   _$$B9();
