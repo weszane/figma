@@ -21,7 +21,7 @@ import { linkWithTracking } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { b as _$$b } from "../figma_app/246400";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { styleBuilderInstance } from "../905/941192";
@@ -311,14 +311,14 @@ function ea(e) {
           })]
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               variant: "secondary",
               onClick: e.onClose,
               trackingProperties: {
                 trackingDescriptor: UpgradeAction.CANCEL
               },
               children: getI18nString("general.cancel")
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               type: "submit",
               disabled: C,
               trackingProperties: {

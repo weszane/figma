@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, memo, useMemo, useCallback, useState, useContext, useEffect, forwardRef } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
-import { T as _$$T } from "../905/745591";
+import { AnnouncementPrimitive } from "../905/745591";
 import { U1 } from "../figma_app/343967";
 import { getFeatureFlags } from "../905/601108";
 import { LoadingRenderer } from "../905/211326";
@@ -36,7 +36,7 @@ import { getUserId, selectCurrentUser } from "../905/372672";
 import { isCommentStateUpdatable, isCommentStateActive, ThreadType, isCommentStatePostable } from "../905/380385";
 import { ButtonPrimitive } from "../905/632989";
 import { MenuItemComp, MenuContainerComp, setupMenu, MenuRootComp, MenuItemTrail, MenuSubText, MenuShortcut, MenuSeparator, MenuTitleComp, MenuHiddenTitleComp } from "../figma_app/860955";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import { g as _$$g } from "../905/757007";
 import { W as _$$W } from "../905/569454";
@@ -444,7 +444,7 @@ let eS = memo(function (e) {
   } = setupMenu();
   let S = jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       "aria-label": getI18nString("comments.more_actions"),
       ...getTriggerProps(),
       children: jsx(_$$J, {
@@ -1224,7 +1224,7 @@ function tg(e) {
     }
   }, [t, r, manager.isOpen, d, l]), e.hideSettingsDropdown) ? null : jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       ...getTriggerProps(),
       "aria-label": getI18nString("comments.settings"),
       children: jsx(_$$J, {
@@ -1298,7 +1298,7 @@ function tb({
   }, [n, manager.isOpen, f]);
   return jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       ...getTriggerProps(),
       "aria-label": getI18nString("comments.sort_filter"),
       children: jsx(SvgComponent, {
@@ -1368,7 +1368,7 @@ function tw(e) {
 }
 function tj(e) {
   return e.hasActiveQuery ? jsx(tw, {
-    message: getFeatureFlags().a11y_comments_search ? jsx(_$$T, {
+    message: getFeatureFlags().a11y_comments_search ? jsx(AnnouncementPrimitive, {
       role: "alert",
       children: renderI18nText("comments.no_comments_matched_your_search")
     }) : renderI18nText("comments.no_comments_matched_your_search")

@@ -11,7 +11,7 @@ import { useFplStrings } from "../figma_app/415899";
 import { ensureContext } from "../905/61417";
 import { defaultComponentAttribute } from "../905/577641";
 import { isModifierKey } from "../905/658036";
-import { T } from "../905/745591";
+import { AnnouncementPrimitive } from "../905/745591";
 let p = memo(function (e) {
   return jsx("svg", {
     width: "24",
@@ -114,7 +114,7 @@ export function $$E3({
   htmlAttributes: e,
   ...t
 }) {
-  return jsx(T, {
+  return jsx(AnnouncementPrimitive, {
     ...t,
     htmlAttributes: e,
     className: "toast__message__wf2fG"

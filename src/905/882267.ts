@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { z as _$$z } from "../vendor/999105";
 import { isNullish } from "../figma_app/95419";
 import { ButtonWide } from "../905/521428";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { S as _$$S } from "../905/720922";
 import { D as _$$D } from "../905/716990";
 import { getFeatureFlags } from "../905/601108";
@@ -23,7 +23,7 @@ import { P as _$$P } from "../905/347284";
 import { ne } from "../figma_app/563413";
 import { SvgComponent, V as _$$V } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { S as _$$S2 } from "../figma_app/552746";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
@@ -834,7 +834,7 @@ function eG({
   r = e ? getI18nString("fullscreen.properties_panel.font_picker.org_upsell") : t ? getI18nString("fullscreen.properties_panel.font_picker.no_shared_fonts_orgname", {
     orgName: t
   }) : getI18nString("fullscreen.properties_panel.font_picker.no_shared_fonts");
-  let s = jsx($z, {
+  let s = jsx(WithTrackedButton, {
     variant: "secondary",
     innerText: "Learn more",
     onClick: () => {
@@ -842,7 +842,7 @@ function eG({
     },
     children: getI18nString("fullscreen.properties_panel.font_picker.no_shared_fonts.cta")
   });
-  let o = jsx($z, {
+  let o = jsx(WithTrackedButton, {
     variant: "primary",
     innerText: "Upgrade",
     onClick: i,
@@ -885,7 +885,7 @@ function ez({
         svg: _$$A6
       }), jsx("div", {
         children: renderI18nText("fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.text")
-      }), jsx(Spacer, {}), jsx($z, {
+      }), jsx(Spacer, {}), jsx(WithTrackedButton, {
         variant: "primary",
         onClick: e,
         children: renderI18nText("fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.cta")
@@ -924,7 +924,7 @@ function eW({
       initialPosition: t
     }));
   }, [i, t, a, s]);
-  return jsx(_$$d, {
+  return jsx(DialogTriggerButton, {
     ref: o,
     "aria-label": getI18nString("fullscreen.properties_panel.apply_variable"),
     "aria-expanded": !!s?.isShowingBindingUI,

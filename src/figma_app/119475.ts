@@ -98,7 +98,7 @@ const DEFAULT_NAVIGATION_OPTIONS = {
  * Represents a keyboard navigation item in the tree structure.
  * Original: g
  */
-class KeyboardNavigationItem {
+export class KeyboardNavigationItem {
   id: string | undefined
   path: number[]
   column: number | null

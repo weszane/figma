@@ -5,9 +5,9 @@ import { _m } from "../vendor/891888";
 import { debug, throwTypeError } from "../figma_app/465776";
 import { assertNotNullish, isNullish } from "../figma_app/95419";
 import { Button } from "../905/521428";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { IconButton } from "../905/443068";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { F as _$$F } from "../905/634016";
 import { D as _$$D } from "../905/555681";
 import { l as _$$l } from "../905/509505";
@@ -201,7 +201,7 @@ let eD = memo(function ({
           })]
         }), g && jsx("div", {
           className: "x6s0dn4 x78zum5 x3psx0u x5yr21d xl56j7k xugbqxq xctkrei x10l6tqk x3m8u43 x13vifvy x17dzmu4 x7r3dqx",
-          children: jsx(_$$d, {
+          children: jsx(DialogTriggerButton, {
             recordingKey: generateRecordingKey(t, "editStyleButton"),
             "data-tooltip": getI18nString("design_systems.styles.edit_style"),
             "data-tooltip-type": KindEnum.TEXT,
@@ -742,7 +742,7 @@ function eG({
               children: [jsx("div", {
                 className: "style_picker--pickerTitle--xydlB header_modal--headerModalTitle--32hFx",
                 children: H || getStyleTypeLabel(r)
-              }), _ && jsx(_$$d, {
+              }), _ && jsx(DialogTriggerButton, {
                 onClick: h,
                 "aria-expanded": em,
                 htmlAttributes: {
@@ -783,7 +783,7 @@ function eG({
             }),
             children: [W, d && jsx("div", {
               className: "style_picker--loadingSpinner--JIN5X",
-              children: jsx(_$$k, {})
+              children: jsx(LoadingSpinner, {})
             })]
           })
         })

@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import a from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { ButtonBasePrimary } from "../figma_app/637027";
@@ -28,7 +28,7 @@ export function $$u0({
       children: e
     }), t && jsx("span", {
       className: "insert_template_cta--spinner--xtwmE",
-      children: jsx(k, {
+      children: jsx(LoadingSpinner, {
         size: "md"
       })
     })]

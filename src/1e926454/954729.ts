@@ -14,7 +14,7 @@ import { N as _$$N } from "../905/809096";
 import { useDispatch, useSelector } from "react-redux";
 import { textDisplayConfig } from "../905/687265";
 import { props } from "@stylexjs/stylex";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { F5, Z as _$$Z } from "../figma_app/761870";
@@ -408,11 +408,11 @@ function er({
       })
     }), jsx(DialogFooter, {
       children: jsxs(DialogActionStrip, {
-        children: [jsx($z, {
+        children: [jsx(WithTrackedButton, {
           variant: "secondary",
           onClick: n,
           children: getI18nString("general.cancel")
-        }), jsx($z, {
+        }), jsx(WithTrackedButton, {
           onClick: () => submit(l),
           disabled: isSubmitting || !F5(l, onValidateToken),
           children: getI18nString("plan_invite_modal.send_invite")
@@ -607,20 +607,20 @@ function eb({
       })]
     }), jsx(DialogFooter, {
       children: jsxs(DialogActionStrip, {
-        children: [jsx($z, {
+        children: [jsx(WithTrackedButton, {
           variant: "secondary",
           onClick: s,
           children: getI18nString("general.cancel")
         }), jsx(Tabs.TabPanel, {
           ...O.inviteByEmail,
-          children: jsx($z, {
+          children: jsx(WithTrackedButton, {
             onClick: K,
             disabled: !F5(u, validateToken),
             children: getI18nString("plan_invite_modal.send_invite")
           })
         }), jsx(Tabs.TabPanel, {
           ...O.inviteByLink,
-          children: ("loaded" !== Y.status || !!q) && jsx($z, {
+          children: ("loaded" !== Y.status || !!q) && jsx(WithTrackedButton, {
             onClick: H,
             disabled: "loaded" !== Y.status,
             children: getI18nString("plan_invite_modal.copy_link")

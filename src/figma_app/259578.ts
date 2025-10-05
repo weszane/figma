@@ -2,13 +2,13 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useContext, useRef, useEffect, forwardRef, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { nearlyEqual } from "../figma_app/492908";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { G as _$$G } from "../905/117393";
 import { rgbToHsl, rgbToHsv, colorToRgb } from "../figma_app/273493";
 import { ColorFormatEnum, DesignGraphElements } from "../figma_app/763686";
 import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { c2 } from "../figma_app/243213";
+import { setOrRemoveAttribute } from "../figma_app/243213";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey, RecordingPureComponent } from "../figma_app/878298";
@@ -292,7 +292,7 @@ export function $$Q2({
           className: p()(go, {
             [TD]: V
           }),
-          children: V ? jsx(_$$d, {
+          children: V ? jsx(DialogTriggerButton, {
             "aria-expanded": t.currentTool === DesignGraphElements.DROPPER_COLOR,
             "aria-label": getI18nString("fullscreen.properties_panel.color_picker.sample_color"),
             htmlAttributes: {
@@ -381,7 +381,7 @@ export function $$er4(e) {
   let r = useRef(null);
   let s = "whiteboard" === e.displayType;
   useEffect(() => {
-    s && r.current && c2(r.current, "data-preferred-theme", e.theme);
+    s && r.current && setOrRemoveAttribute(r.current, "data-preferred-theme", e.theme);
   }, [s, e.theme]);
   let o = useMemo(() => s ? defaultColorManipulator : new FormattedHexColor({
     parseAlpha: !0
@@ -620,7 +620,7 @@ export function $$es7(e) {
   let r = useRef(null);
   let s = X7();
   useEffect(() => {
-    r.current && c2(r.current, "data-preferred-theme", e.theme);
+    r.current && setOrRemoveAttribute(r.current, "data-preferred-theme", e.theme);
   }, [e.theme]);
   let o = useMemo(() => new FormattedHexColor({
     parseAlpha: !0

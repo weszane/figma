@@ -8,7 +8,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
@@ -112,7 +112,7 @@ export let $$N0 = registerModal(function ({
               })]
             }), jsx(DialogFooter, {
               children: jsx(DialogActionStrip, {
-                children: jsx($z, {
+                children: jsx(WithTrackedButton, {
                   disabled: M,
                   onClick: G,
                   trackingProperties: {

@@ -5,7 +5,7 @@ import { Button } from "../905/521428";
 import { IconButton } from "../905/443068";
 import { bL, l9, mc, c$, wv } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ox } from "../905/163832";
 import { bL as _$$bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
@@ -291,7 +291,7 @@ export function $$K1({
 export function $$Y3() {
   return jsxs("div", {
     className: "lint_error_modal--lintErrorsFallbackContent--dG9tc lint_error_modal--lintErrorsContent--qTrOy",
-    children: [jsx(_$$k, {}), jsx("span", {
+    children: [jsx(LoadingSpinner, {}), jsx("span", {
       children: renderI18nText("sites.lint.looking-for-issues")
     })]
   });

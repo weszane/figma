@@ -19,7 +19,7 @@ import { w4, Y8 } from "../905/445814";
 import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { h as _$$h, O as _$$O } from "../905/142086";
@@ -373,7 +373,7 @@ export function $$et4({
   onCancel: c
 }) {
   var u;
-  if (!e) return [jsx($z, {
+  if (!e) return [jsx(WithTrackedButton, {
     variant: "destructive",
     onClick: c,
     htmlAttributes: {
@@ -381,7 +381,7 @@ export function $$et4({
     },
     children: renderI18nText("file_browser.file_import_view.cancel")
   }, "cancelButton")];
-  if (t.failedOnFileLimit) return [jsx($z, {
+  if (t.failedOnFileLimit) return [jsx(WithTrackedButton, {
     variant: "primary",
     onClick: () => {
       r();
@@ -404,7 +404,7 @@ export function $$et4({
     },
     children: renderI18nText("file_browser.file_import_view.next")
   }, "nextButton")];
-  let m = [(u = o ? "secondary" : "primary", jsx($z, {
+  let m = [(u = o ? "secondary" : "primary", jsx(WithTrackedButton, {
     variant: u,
     onClick: r,
     htmlAttributes: {
@@ -418,7 +418,7 @@ export function $$et4({
     stats: r,
     dispatch: s
   }) {
-    return jsx($z, {
+    return jsx(WithTrackedButton, {
       variant: "primary",
       onClick: () => {
         e();

@@ -5,7 +5,7 @@ import { Button } from "../905/521428";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { Link } from "../905/438674";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { IconButton } from "../905/443068";
 import { Tabs } from "../905/150656";
 import { k as _$$k2 } from "../905/44647";
@@ -269,7 +269,7 @@ function Q({
     className: "component_browser_detail_view--sourceCodeTab---zyhy",
     children: "loading" === r.status ? jsx("div", {
       className: "component_browser_detail_view--loadingCode--esp-4",
-      children: jsx(_$$k, {})
+      children: jsx(LoadingSpinner, {})
     }) : a ? jsx(yT, {
       includeMargin: !1,
       hideHeader: !0,
@@ -336,7 +336,7 @@ function H({
     children: [jsx("div", {
       className: "component_browser_detail_view--mcpTabInfoText--cp8bE",
       children: getI18nString("dev_handoff.component_browser.mcp_tab_info_text")
-    }), n ? jsx(_$$k, {}) : jsx(CH, {
+    }), n ? jsx(LoadingSpinner, {}) : jsx(CH, {
       value: i ?? "",
       extensions: [g4],
       theme: "light" === r.color ? "light" : "dark"

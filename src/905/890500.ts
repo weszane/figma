@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { setupMenu, MenuItemComp, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { J } from "../905/125993";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Df, Mv, AY, QY } from "../figma_app/770088";
@@ -128,7 +128,7 @@ export function $$y0(e) {
   } = getTriggerProps();
   return jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       "aria-label": e.label,
       recordingKey: e.recordingKey,
       ...F,

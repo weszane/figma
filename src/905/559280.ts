@@ -1,41 +1,41 @@
-import { noop } from 'lodash-es'
-import { Component, useCallback } from 'react'
-import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { ModalRootComponent } from '../905/38914'
-import { TrackedLinkButton } from '../905/160095'
-import { LoadingRenderer } from '../905/211326'
-import { useModalManager } from '../905/437088'
-import { TabLoop } from '../905/718764'
-import { Point } from '../905/736624'
-import { ArrowPosition, DraggableModalManager, HEADER_HEIGHT } from '../905/748636'
-import { cssBuilderInstance } from '../cssbuilder/589278'
-import { S as _$$S, qg, v0, zP } from '../figma_app/169752'
-import { xT } from '../figma_app/195407'
-import { DialogBody, DialogContents } from '../figma_app/272243'
-import { logAndTrackCTA } from '../figma_app/314264'
-import { CR, NJ, OA } from '../figma_app/419216'
-import { CornerPosition, MAX_WIDTH, OverlayType, TitlePosition } from '../figma_app/450829'
-import { iy, Uj } from '../figma_app/532170'
-import { $z } from '../figma_app/617427'
-import { useTracking, wrapWithTracking } from '../figma_app/831799'
-import { x as _$$x2 } from '../figma_app/849451'
+import { noop } from 'lodash-es';
+import { Component, useCallback } from 'react';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { ModalRootComponent } from '../905/38914';
+import { TrackedLinkButton } from '../905/160095';
+import { LoadingRenderer } from '../905/211326';
+import { useModalManager } from '../905/437088';
+import { TabLoop } from '../905/718764';
+import { Point } from '../905/736624';
+import { ArrowPosition, DraggableModalManager, HEADER_HEIGHT } from '../905/748636';
+import { cssBuilderInstance } from '../cssbuilder/589278';
+import { S as _$$S, qg, v0, zP } from '../figma_app/169752';
+import { xT } from '../figma_app/195407';
+import { DialogBody, DialogContents } from '../figma_app/272243';
+import { logAndTrackCTA } from '../figma_app/314264';
+import { CR, NJ, OA } from '../figma_app/419216';
+import { CornerPosition, MAX_WIDTH, OverlayType, TitlePosition } from '../figma_app/450829';
+import { iy, Uj } from '../figma_app/532170';
+import { WithTrackedButton } from '../figma_app/617427';
+import { useTracking, wrapWithTracking } from '../figma_app/831799';
+import { x as _$$x2 } from '../figma_app/849451';
 
 // Constants from original code (C, T, k)
-const HEADER_HEIGHT_CONSTANT = 48
-const PADDING_CONSTANT = 12
-const nullishCoalesce = <T>(value: T | null): T | undefined => value !== null ? value : undefined
+const HEADER_HEIGHT_CONSTANT = 48;
+const PADDING_CONSTANT = 12;
+const nullishCoalesce = <T,>(value: T | null): T | undefined => value !== null ? value : undefined;
 
 /**
  * Props interface for ModalFrame component.
  * Defines the expected properties for the ModalFrame class component.
  */
 interface ModalFrameProps {
-  onClose: () => void
-  step: any
-  dismissModal: () => void
-  onClickPrimaryCta: () => void
-  additionalOnExplicitDismiss?: () => void
-  dispatch: any
+  onClose: () => void;
+  step: any;
+  dismissModal: () => void;
+  onClickPrimaryCta: () => void;
+  additionalOnExplicitDismiss?: () => void;
+  dispatch: any;
 }
 
 /**
@@ -43,83 +43,77 @@ interface ModalFrameProps {
  * Handles rendering different types of modals based on step configuration.
  */
 export class RcsFrame extends Component<ModalFrameProps> {
-  static displayName = 'RcsFrame'
+  static displayName = 'RcsFrame';
   // Refactored state with explicit types
   state: {
-    modalHeight: number
+    modalHeight: number;
     rcsKeyLocation: {
-      top: number | null
-      left: number | null
-      arrowRelativeX: number | null
-      arrowRelativeY: number | null
-      arrowPosition: ArrowPosition | null
-    } | null
-    renderCount: number
-    title?: string
-    titleSetByStep?: any
+      top: number | null;
+      left: number | null;
+      arrowRelativeX: number | null;
+      arrowRelativeY: number | null;
+      arrowPosition: ArrowPosition | null;
+    } | null;
+    renderCount: number;
+    title?: string;
+    titleSetByStep?: any;
   } = {
     modalHeight: 328,
     rcsKeyLocation: null,
-    renderCount: 0,
-  }
+    renderCount: 0
+  };
 
   // Refactored instance variables
-  private getRcsKeyElementInterval: number | null = null
-  private button: HTMLElement | null = null
+  private getRcsKeyElementInterval: number | null = null;
+  private button: HTMLElement | null = null;
   constructor(props: ModalFrameProps) {
-    super(props)
+    super(props);
   }
 
   // Refactored lifecycle methods with comments tracing to original
   componentDidMount() {
-    window.addEventListener('beforeunload', this.props.onClose)
-    this.startScanningForRcsKeyElement()
-    document.addEventListener('readystatechange', this.renderIfDocumentComplete)
+    window.addEventListener('beforeunload', this.props.onClose);
+    this.startScanningForRcsKeyElement();
+    document.addEventListener('readystatechange', this.renderIfDocumentComplete);
   }
-
   componentWillUnmount() {
-    this.props.onClose()
-    window.removeEventListener('beforeunload', this.props.onClose)
-    document.removeEventListener('readystatechange', this.renderIfDocumentComplete)
-    this.cleanUpRcsKeyElementScanner()
+    this.props.onClose();
+    window.removeEventListener('beforeunload', this.props.onClose);
+    document.removeEventListener('readystatechange', this.renderIfDocumentComplete);
+    this.cleanUpRcsKeyElementScanner();
   }
-
   componentDidUpdate(prevProps: any) {
-    this.focusButton()
-    const currentStep = this.props.step
-    if (currentStep.modalType !== OverlayType.DRAGGABLE)
-      return
-    const prevStep = prevProps.step
+    this.focusButton();
+    const currentStep = this.props.step;
+    if (currentStep.modalType !== OverlayType.DRAGGABLE) return;
+    const prevStep = prevProps.step;
     if (prevStep.modalType !== OverlayType.DRAGGABLE || currentStep.onboardingKey && currentStep.onboardingKey !== prevStep.onboardingKey) {
-      this.startScanningForRcsKeyElement()
+      this.startScanningForRcsKeyElement();
     }
   }
 
   // Refactored getters with types
   get width(): number {
-    const step = this.props.step
+    const step = this.props.step;
     switch (step.modalType) {
       case OverlayType.FEATURE_UPDATE:
-        return step.width || MAX_WIDTH
+        return step.width || MAX_WIDTH;
       case OverlayType.DRAGGABLE:
-        return step.width || 350
+        return step.width || 350;
       default:
-        return 350
+        return 350;
     }
   }
-
   get height(): number {
-    return this.state.modalHeight || 328
+    return this.state.modalHeight || 328;
   }
 
   // Refactored static method
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
-    return nextProps.step !== prevState.titleSetByStep
-      ? {
-          title: undefined,
-          titleSetByStep: undefined,
-        }
-      : {}
+    return nextProps.step !== prevState.titleSetByStep ? {
+      title: undefined,
+      titleSetByStep: undefined
+    } : {};
   }
 
   // Refactored methods with TS docs and original names in comments
@@ -129,138 +123,137 @@ export class RcsFrame extends Component<ModalFrameProps> {
    */
   private renderIfDocumentComplete = () => {
     if (document.readyState === 'complete') {
-      this.forceRender()
+      this.forceRender();
     }
-  }
+  };
 
   /**
    * startScanningForRcsKeyElement - original method name
    */
   private startScanningForRcsKeyElement = () => {
-    this.cleanUpRcsKeyElementScanner()
-    const step = this.props.step
+    this.cleanUpRcsKeyElementScanner();
+    const step = this.props.step;
     if (step.modalType === OverlayType.DRAGGABLE) {
       if (!step.onboardingKey) {
         this.setState({
-          rcsKeyLocation: null,
-        })
-        return
+          rcsKeyLocation: null
+        });
+        return;
       }
       this.getRcsKeyElementInterval = setInterval(() => {
-        const element = this.getRcsKeyElement()
+        const element = this.getRcsKeyElement();
         if (element != null) {
-          const location = this.computeLocation(element.getBoundingClientRect())
+          const location = this.computeLocation(element.getBoundingClientRect());
           if (this.state.rcsKeyLocation == null || this.state.rcsKeyLocation.top !== location.top || this.state.rcsKeyLocation.left !== location.left) {
             this.setState({
-              rcsKeyLocation: location,
-            })
+              rcsKeyLocation: location
+            });
           }
-        }
-        else {
+        } else {
           this.setState({
-            rcsKeyLocation: null,
-          })
+            rcsKeyLocation: null
+          });
         }
-      }, 50)
+      }, 50);
     }
-  }
+  };
 
   /**
    * cleanUpRcsKeyElementScanner - original method name
    */
   private cleanUpRcsKeyElementScanner = () => {
     if (this.getRcsKeyElementInterval != null) {
-      clearInterval(this.getRcsKeyElementInterval)
-      this.getRcsKeyElementInterval = null
+      clearInterval(this.getRcsKeyElementInterval);
+      this.getRcsKeyElementInterval = null;
     }
-  }
+  };
 
   /**
    * acceptHeight - original method name
    */
   private acceptHeight = (height: number) => this.setState({
-    modalHeight: height,
-  })
+    modalHeight: height
+  });
 
   /**
    * nextButtonRef - original method name
    */
   private nextButtonRef = (element: HTMLElement | null) => {
     if (element) {
-      this.button = element
-      this.focusButton()
+      this.button = element;
+      this.focusButton();
     }
-  }
+  };
 
   /**
    * focusButton - original method name
    */
   private focusButton = () => {
     if (this.button && !this.props.step.UNSAFE_disableFocus) {
-      this.button.focus()
+      this.button.focus();
     }
-  }
+  };
 
   /**
    * computeLocation - original method name
    */
   private computeLocation = (rect: DOMRect): {
-    top: number | null
-    left: number | null
-    arrowRelativeX: number | null
-    arrowRelativeY: number | null
-    arrowPosition: ArrowPosition | null
+    top: number | null;
+    left: number | null;
+    arrowRelativeX: number | null;
+    arrowRelativeY: number | null;
+    arrowPosition: ArrowPosition | null;
   } => {
-    const step = this.props.step
+    const step = this.props.step;
     if (step.modalType !== OverlayType.DRAGGABLE) {
       return {
         top: null,
         left: null,
         arrowRelativeX: null,
         arrowRelativeY: null,
-        arrowPosition: null,
-      }
+        arrowPosition: null
+      };
     }
     if (step.pointDirection === TitlePosition.LEFT_TITLE) {
-      const top = rect.top + rect.height / 2
+      const top = rect.top + rect.height / 2;
       return {
         left: rect.left + rect.width + 16,
         top: top - 20,
         arrowRelativeX: -18,
         arrowRelativeY: HEADER_HEIGHT / 2 - 9,
-        arrowPosition: ArrowPosition.LEFT_TITLE,
-      }
+        arrowPosition: ArrowPosition.LEFT_TITLE
+      };
     }
     if (step.pointDirection === TitlePosition.RIGHT_TITLE) {
-      const top = rect.top + rect.height / 2
-      const left = rect.left - this.width - 16
-      const arrowRelativeY = HEADER_HEIGHT / 2 - 9
+      const top = rect.top + rect.height / 2;
+      const left = rect.left - this.width - 16;
+      const arrowRelativeY = HEADER_HEIGHT / 2 - 9;
       return {
         left,
         top: top - 20,
         arrowRelativeX: this.width,
         arrowRelativeY,
-        arrowPosition: ArrowPosition.RIGHT_TITLE,
-      }
+        arrowPosition: ArrowPosition.RIGHT_TITLE
+      };
     }
-    const centerX = rect.left + rect.width / 2
-    let top = rect.bottom + 18
-    let left = centerX - this.width / 2
-    left = Math.min(Math.max(left, 10), window.innerWidth - 10 - this.width)
-    const arrowRelativeX = centerX - left
-    let arrowPosition = ArrowPosition.TOP
+    const centerX = rect.left + rect.width / 2;
+    let top = rect.bottom + 18;
+    let left = centerX - this.width / 2;
+    left = Math.min(Math.max(left, 10), window.innerWidth - 10 - this.width);
+    const arrowRelativeX = centerX - left;
+    let arrowPosition = ArrowPosition.TOP;
     if (this.state.modalHeight != null && window.innerHeight - top < this.state.modalHeight + 12) {
-      top = rect.top - this.state.modalHeight - 12
-      arrowPosition = ArrowPosition.BOTTOM
+      top = rect.top - this.state.modalHeight - 12;
+      arrowPosition = ArrowPosition.BOTTOM;
     }
     return {
       left,
       top,
       arrowRelativeX,
       arrowRelativeY: null,
-      arrowPosition,
-    }
-  }
+      arrowPosition
+    };
+  };
 
   /**
    * getFramePosition - original method name
@@ -270,16 +263,16 @@ export class RcsFrame extends Component<ModalFrameProps> {
     left: null,
     arrowPosition: null,
     arrowRelativeX: null,
-    arrowRelativeY: null,
-  }
+    arrowRelativeY: null
+  };
 
   /**
    * getRcsKeyElement - original method name
    */
   private getRcsKeyElement = () => {
-    const step = this.props.step
-    return step.modalType === OverlayType.DRAGGABLE && step.onboardingKey ? xT(step.onboardingKey) : null
-  }
+    const step = this.props.step;
+    return step.modalType === OverlayType.DRAGGABLE && step.onboardingKey ? xT(step.onboardingKey) : null;
+  };
 
   /**
    * acceptTitle - original method name
@@ -287,26 +280,26 @@ export class RcsFrame extends Component<ModalFrameProps> {
   private acceptTitle = (title: string) => {
     this.setState({
       title,
-      titleSetByStep: this.props.step,
-    })
-  }
+      titleSetByStep: this.props.step
+    });
+  };
 
   /**
    * forceRender - original method name
    */
   private forceRender = () => this.setState({
-    renderCount: this.state.renderCount + 1,
-  })
+    renderCount: this.state.renderCount + 1
+  });
 
   /**
    * getPositionAndConstraints - original method name
    */
   private getPositionAndConstraints = (defaultLocation, initialPosition?: Point) => {
-    const framePosition = this.getFramePosition()
+    const framePosition = this.getFramePosition();
     if (framePosition.top && framePosition.left) {
       return {
-        initialPosition: new Point(framePosition.left, framePosition.top),
-      }
+        initialPosition: new Point(framePosition.left, framePosition.top)
+      };
     }
     switch (defaultLocation) {
       case CornerPosition.BOTTOM_LEFT:
@@ -314,85 +307,84 @@ export class RcsFrame extends Component<ModalFrameProps> {
           initialPosition: initialPosition || new Point(PADDING_CONSTANT, PADDING_CONSTANT),
           initialConstraints: {
             x: 'left',
-            y: 'bottom',
-          },
-        }
+            y: 'bottom'
+          }
+        };
       case CornerPosition.BOTTOM_RIGHT:
         return {
           initialPosition: initialPosition || new Point(64, 16),
           initialConstraints: {
             x: 'right',
-            y: 'bottom',
-          },
-        }
+            y: 'bottom'
+          }
+        };
       case CornerPosition.TOP_RIGHT:
         return {
           initialPosition: initialPosition || new Point(PADDING_CONSTANT, HEADER_HEIGHT_CONSTANT + PADDING_CONSTANT),
           initialConstraints: {
             x: 'right',
-            y: 'top',
-          },
-        }
+            y: 'top'
+          }
+        };
       case CornerPosition.CENTER:
       default:
         return {
-          initialPosition: initialPosition || new Point(window.innerWidth / 2 - this.width / 2, window.innerHeight / 2 - this.height / 2),
-        }
+          initialPosition: initialPosition || new Point(window.innerWidth / 2 - this.width / 2, window.innerHeight / 2 - this.height / 2)
+        };
     }
-  }
+  };
 
   // Refactored render method split into smaller parts
   render() {
-    const step = this.props.step
-    const framePosition = this.getFramePosition()
+    const step = this.props.step;
+    const framePosition = this.getFramePosition();
     const contextValue = {
       acceptTitle: this.acceptTitle,
       dismissModal: this.props.dismissModal,
       onClickPrimaryCta: this.props.onClickPrimaryCta,
-      forceRender: this.forceRender,
-    }
+      forceRender: this.forceRender
+    };
     const content = jsx(Uj.Provider, {
       value: this.forceRender,
       children: jsx(step.element, {
-        ...contextValue,
-      }),
-    })
-    return wrapWithTracking(this.renderModalType(step, framePosition, content), step.trackingContextName, step.trackingProperties, step.trackingEnabled)
+        ...contextValue
+      })
+    });
+    return wrapWithTracking(this.renderModalType(step, framePosition, content), step.trackingContextName, step.trackingProperties, step.trackingEnabled);
   }
 
   // Extracted render logic for modal types
   private renderModalType = (step: any, framePosition: any, content: any) => {
     switch (step.modalType) {
       case OverlayType.DRAGGABLE:
-        return this.renderDraggableModal(step, framePosition, content)
+        return this.renderDraggableModal(step, framePosition, content);
       case OverlayType.FEATURE_UPDATE:
-        return this.renderFeatureUpdateModal(step, content)
+        return this.renderFeatureUpdateModal(step, content);
       case OverlayType.WALK_THROUGH:
-        return this.renderWalkThroughModal(step, content)
+        return this.renderWalkThroughModal(step, content);
       case OverlayType.WELCOME:
-        return this.renderWelcomeModal(step, content)
+        return this.renderWelcomeModal(step, content);
       case OverlayType.SELF_CONTAINED:
-        return content
+        return content;
       case OverlayType.POINTER:
-        return this.renderPointerModal(step, content)
+        return this.renderPointerModal(step, content);
       case OverlayType.ANNOUNCEMENT_POINTER:
-        return this.renderAnnouncementPointerModal(step, content)
+        return this.renderAnnouncementPointerModal(step, content);
       default:
-        return content
+        return content;
     }
-  }
-
+  };
   private renderDraggableModal = (step: any, framePosition: any, content: any) => {
     const {
       initialPosition,
-      initialConstraints,
-    } = this.getPositionAndConstraints(step.defaultLocation, step.initialPosition)
-    const title = typeof step.title === 'function' ? step.title() : step.title
-    const displayTitle = this.state.title || title
-    const highlightKey = step.onboardingKey || step.highlightOnlyKey
+      initialConstraints
+    } = this.getPositionAndConstraints(step.defaultLocation, step.initialPosition);
+    const title = typeof step.title === 'function' ? step.title() : step.title;
+    const displayTitle = this.state.title || title;
+    const highlightKey = step.onboardingKey || step.highlightOnlyKey;
     return jsxs(Fragment, {
       children: [highlightKey && !step.disableHighlight && jsx(_$$x2, {
-        target: highlightKey,
+        target: highlightKey
       }), jsxs(DraggableModalManager, {
         acceptHeight: this.acceptHeight,
         animatedIn: true,
@@ -408,56 +400,52 @@ export class RcsFrame extends Component<ModalFrameProps> {
         onClose: this.props.dismissModal,
         title: displayTitle,
         zIndex: step.zIndex,
-        children: [content, step.disableFooter
-          ? null
-          : jsxs(iy, {
-              className: step.footerClassName,
-              children: [!step.hideStepCounter && step.stepCounter && jsx('div', {
-                className: _$$S,
-                children: step.stepCounter,
-              }), jsxs('div', {
-                className: v0,
-                children: [step.additionalButton && jsx('div', {
-                  className: cssBuilderInstance.ml8.$,
-                  children: jsx(AdditionalButton, {
-                    additionalButton: step.additionalButton,
-                    dismissModal: this.props.dismissModal,
-                    dispatch: this.props.dispatch,
-                  }),
-                }), jsx('div', {
-                  className: cssBuilderInstance.ml8.$,
-                  children: jsx($z, {
-                    ref: this.nextButtonRef,
-                    onClick: this.props.onClickPrimaryCta,
-                    trackingProperties: {
-                      trackingDescriptor: step.ctaTrackingDescriptor,
-                    },
-                    disabled: !!step.ctaIsLoading,
-                    children: jsx(LoadingRenderer, {
-                      isLoading: !!step.ctaIsLoading,
-                      className: zP,
-                      children: () => jsx('div', {
-                        children: step.ctaText,
-                      }),
-                    }),
-                  }),
-                })],
-              })],
-            })],
-      })],
-    })
-  }
-
+        children: [content, step.disableFooter ? null : jsxs(iy, {
+          className: step.footerClassName,
+          children: [!step.hideStepCounter && step.stepCounter && jsx('div', {
+            className: _$$S,
+            children: step.stepCounter
+          }), jsxs('div', {
+            className: v0,
+            children: [step.additionalButton && jsx('div', {
+              className: cssBuilderInstance.ml8.$,
+              children: jsx(AdditionalButton, {
+                additionalButton: step.additionalButton,
+                dismissModal: this.props.dismissModal,
+                dispatch: this.props.dispatch
+              })
+            }), jsx('div', {
+              className: cssBuilderInstance.ml8.$,
+              children: jsx(WithTrackedButton, {
+                ref: this.nextButtonRef,
+                onClick: this.props.onClickPrimaryCta,
+                trackingProperties: {
+                  trackingDescriptor: step.ctaTrackingDescriptor
+                },
+                disabled: !!step.ctaIsLoading,
+                children: jsx(LoadingRenderer, {
+                  isLoading: !!step.ctaIsLoading,
+                  className: zP,
+                  children: () => jsx('div', {
+                    children: step.ctaText
+                  })
+                })
+              })
+            })]
+          })]
+        })]
+      })]
+    });
+  };
   private renderFeatureUpdateModal = (step: any, content: any) => jsx(FeatureUpdateModal, {
     width: this.width,
     onAdditionalExplicitDismiss: this.props.additionalOnExplicitDismiss,
     onDismissModal: this.props.dismissModal,
-    children: content,
-  })
-
+    children: content
+  });
   private renderWalkThroughModal = (step: any, content: any) => jsxs(Fragment, {
     children: [!step.disableHighlight && jsx(_$$x2, {
-      target: step.onboardingKey,
+      target: step.onboardingKey
     }), jsx(CR, {
       additionalOnExplicitDismiss: this.props.additionalOnExplicitDismiss,
       className: step.className,
@@ -471,24 +459,22 @@ export class RcsFrame extends Component<ModalFrameProps> {
       targetKey: step.onboardingKey,
       topPadding: step.topPadding,
       width: step.width,
-      children: content,
-    })],
-  })
-
+      children: content
+    })]
+  });
   private renderWelcomeModal = (step: any, content: any) => jsxs(Fragment, {
     children: [step.fullscreen && jsx('div', {
-      className: qg,
+      className: qg
     }), jsx(WelcomeModal, {
       onDismissModal: this.props.dismissModal,
       children: jsx(TabLoop, {
-        children: content,
-      }),
-    })],
-  })
-
+        children: content
+      })
+    })]
+  });
   private renderPointerModal = (step: any, content: any) => jsxs(Fragment, {
     children: [step.showHighlight && jsx(_$$x2, {
-      target: step.onboardingKey,
+      target: step.onboardingKey
     }), jsx(NJ, {
       dismissModal: this.props.dismissModal,
       targetKey: step.onboardingKey,
@@ -498,12 +484,11 @@ export class RcsFrame extends Component<ModalFrameProps> {
       shouldNotWrapInParagraphTag: step.shouldNotWrapInParagraphTag,
       arrowPosition: step.arrowPosition,
       onTargetLost: step.onTargetLost,
-      children: content,
-    })],
-  })
-
+      children: content
+    })]
+  });
   private renderAnnouncementPointerModal = (step: any, content: any) => {
-    const title = typeof step.title === 'function' ? step.title() : step.title
+    const title = typeof step.title === 'function' ? step.title() : step.title;
     return jsx(OA, {
       arrowPosition: step.arrowPosition,
       bottomLeftText: step.stepCounter,
@@ -518,9 +503,9 @@ export class RcsFrame extends Component<ModalFrameProps> {
       title,
       topPadding: step.topPadding,
       width: step.width,
-      children: content,
-    })
-  }
+      children: content
+    });
+  };
 }
 
 // Refactored helper components with TS docs
@@ -532,48 +517,46 @@ function FeatureUpdateModal({
   children,
   width,
   onAdditionalExplicitDismiss,
-  onDismissModal,
+  onDismissModal
 }: {
-  children: any
-  width: number
-  onAdditionalExplicitDismiss?: () => void
-  onDismissModal: () => void
+  children: any;
+  width: number;
+  onAdditionalExplicitDismiss?: () => void;
+  onDismissModal: () => void;
 }) {
-  const tracking = useTracking()
+  const tracking = useTracking();
   const handleClose = useCallback(({
-    source,
+    source
   }: {
-    source: string
+    source: string;
   }) => {
     if (source === 'button') {
-      const context = tracking.name
+      const context = tracking.name;
       logAndTrackCTA({
         ...tracking.properties,
-        ...(context != null
-          ? {
-              trackingContext: context,
-            }
-          : {}),
-        text: 'Close',
-      })
+        ...(context != null ? {
+          trackingContext: context
+        } : {}),
+        text: 'Close'
+      });
     }
-    onAdditionalExplicitDismiss?.()
-    onDismissModal()
-  }, [onAdditionalExplicitDismiss, onDismissModal, tracking])
+    onAdditionalExplicitDismiss?.();
+    onDismissModal();
+  }, [onAdditionalExplicitDismiss, onDismissModal, tracking]);
   const manager = useModalManager({
     open: true,
-    onClose: handleClose,
-  })
+    onClose: handleClose
+  });
   return jsx(ModalRootComponent, {
     manager,
     width: width ?? 'fit-content',
     children: jsx(DialogContents, {
       children: jsx(DialogBody, {
         padding: 0,
-        children,
-      }),
-    }),
-  })
+        children
+      })
+    })
+  });
 }
 
 /**
@@ -581,26 +564,26 @@ function FeatureUpdateModal({
  */
 function WelcomeModal({
   children,
-  onDismissModal,
+  onDismissModal
 }: {
-  children: any
-  onDismissModal: () => void
+  children: any;
+  onDismissModal: () => void;
 }) {
   const manager = useModalManager({
     open: true,
     onClose: onDismissModal,
-    preventUserClose: true,
-  })
+    preventUserClose: true
+  });
   return jsx(ModalRootComponent, {
     manager,
     width: 'fit-content',
     children: jsx(DialogContents, {
       children: jsx(DialogBody, {
         padding: 0,
-        children,
-      }),
-    }),
-  })
+        children
+      })
+    })
+  });
 }
 
 /**
@@ -609,36 +592,30 @@ function WelcomeModal({
 function AdditionalButton({
   additionalButton,
   dismissModal,
-  dispatch,
+  dispatch
 }: {
-  additionalButton: any
-  dismissModal: () => void
-  dispatch: any
+  additionalButton: any;
+  dismissModal: () => void;
+  dispatch: any;
 }) {
-  if (!additionalButton)
-    return null
-  const trackingProps = additionalButton.textForTracking
-    ? {
-        text: additionalButton.textForTracking(),
-      }
-    : {}
-  return additionalButton.onClickBehavior === 'link'
-    ? jsx(TrackedLinkButton, {
-        href: additionalButton.href,
-        variant: 'secondary',
-        trackingProperties: trackingProps,
-        newTab: true,
-        children: additionalButton.label,
-      })
-    : jsx($z, {
-        onClick: () => {
-          additionalButton.onClick(dispatch)
-          dismissModal()
-        },
-        trackingProperties: trackingProps,
-        variant: 'secondary',
-        children: additionalButton.label,
-      })
+  if (!additionalButton) return null;
+  const trackingProps = additionalButton.textForTracking ? {
+    text: additionalButton.textForTracking()
+  } : {};
+  return additionalButton.onClickBehavior === 'link' ? jsx(TrackedLinkButton, {
+    href: additionalButton.href,
+    variant: 'secondary',
+    trackingProperties: trackingProps,
+    newTab: true,
+    children: additionalButton.label
+  }) : jsx(WithTrackedButton, {
+    onClick: () => {
+      additionalButton.onClick(dispatch);
+      dismissModal();
+    },
+    trackingProperties: trackingProps,
+    variant: 'secondary',
+    children: additionalButton.label
+  });
 }
-
-export const i = RcsFrame
+export const i = RcsFrame;

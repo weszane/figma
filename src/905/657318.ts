@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef, memo } from "react";
 import { useDispatch } from "react-redux";
 import { IconButton } from "../905/443068";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/708285";
 import { O as _$$O } from "../905/487602";
@@ -363,7 +363,7 @@ class eA extends RecordingPureComponent {
           name: "toggle_style_or_variables_picker",
           children: jsx("span", {
             className: `${this.props.isEmpty && c ? "" : DV} ${N4}`,
-            children: jsx(_$$d, {
+            children: jsx(DialogTriggerButton, {
               "aria-label": `${this.props.title}, ${A}`,
               "aria-expanded": a.includes(this.props.styleType) ? !!c : !!u,
               recordingKey: generateRecordingKey(this.props, "showStylesButton"),

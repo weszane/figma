@@ -6,7 +6,7 @@ import { Button } from "../905/521428";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { RelativeTimeDisplay } from "../905/986103";
 import { FlashActions } from "../905/573154";
@@ -92,7 +92,7 @@ export let $$E0 = registerModal(function (e) {
           className: "x1ib1h6n",
           children: g ? jsx("div", {
             className: "xrvj5dj x1ku5rj1 x5yr21d",
-            children: jsx(_$$k, {})
+            children: jsx(LoadingSpinner, {})
           }) : j ? jsx("div", {
             children: renderI18nText("members_tab.last_edit_modal.no_activity")
           }) : jsxs("table", {

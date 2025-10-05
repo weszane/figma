@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { uint8ArrayToBase64 } from "../figma_app/930338";
@@ -88,7 +88,7 @@ let b = registerModal(function (e) {
             overflow: "hidden"
           },
           children: n ? jsx("div", {
-            children: jsx(_$$k, {
+            children: jsx(LoadingSpinner, {
               size: "lg"
             })
           }) : y ? jsx(D, {

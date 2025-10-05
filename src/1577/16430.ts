@@ -6,7 +6,7 @@ import { useResourceRouteParams, useResourceFuid } from "../figma_app/979714";
 import { e as _$$e } from "../figma_app/661119";
 import { TrackedLink } from "../figma_app/831799";
 import { e as _$$e2 } from "../905/579755";
-import { C2 } from "../figma_app/699310";
+import { FigmaPartnerBadgeRenderer } from "../figma_app/699310";
 import { AG } from "../figma_app/999312";
 let m = "resource_page_header--resourceHeaderAvatar--FI-3x";
 let f = "resource_page_header--resourceHeaderAvatarWrapper--nn-w8";
@@ -48,7 +48,7 @@ export function $$h0({
           style: {
             zIndex: k - n
           },
-          children: C2(e, !0)
+          children: FigmaPartnerBadgeRenderer(e, !0)
         })]
       }, e.id);
     })
@@ -73,7 +73,7 @@ export function $$h0({
           style: {
             zIndex: 3 - t
           },
-          children: C2(e, !0)
+          children: FigmaPartnerBadgeRenderer(e, !0)
         })]
       }, e.id);
     }), jsx("div", {

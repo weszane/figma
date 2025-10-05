@@ -5,7 +5,7 @@ import { ButtonWide } from "../905/521428";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { _ } from "../905/381235";
 import { isLibrarySubscribed } from "../905/825399";
-import { hx } from "../905/66449";
+import { useKeyboardNavigationForClickable } from "../905/66449";
 import { W } from "../905/729905";
 export function $$p0({
   publishedLibrary: e,
@@ -42,7 +42,7 @@ export function $$p0({
   }, [unsubscribe]);
   let {
     setKeyboardNavigationElement
-  } = hx({
+  } = useKeyboardNavigationForClickable({
     path: i,
     column: s
   });

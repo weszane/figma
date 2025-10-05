@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
 import { m4, H5 } from "../figma_app/617606";
 import { IconButton } from "../905/443068";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { _ as _$$_ } from "../905/410717";
 import { A as _$$A } from "../905/126947";
 import { H } from "../905/999677";
@@ -182,7 +182,7 @@ export function $$w0(e) {
     onClick: L,
     children: jsx(H, {})
   }) : null;
-  let D = "progress" === type ? jsx(_$$k, {}) : A ? jsx(k, {}) : O;
+  let D = "progress" === type ? jsx(LoadingSpinner, {}) : A ? jsx(k, {}) : O;
   return jsx(N, {
     isInProgress: "progress" === type,
     isCurrentVersion: A,

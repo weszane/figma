@@ -15,7 +15,7 @@ import { textDisplayConfig } from "../905/687265";
 import { stylex } from "@stylexjs/stylex";
 import { logger } from "../905/651849";
 import { dayjs } from "../905/920142";
-import { rb, $z, c as _$$c } from "../figma_app/617427";
+import { WithTrackedButtonLink, WithTrackedButton, WithTrackedButtonLarge } from "../figma_app/617427";
 import { TrackedLink, TrackedLinkPrimitive } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -402,7 +402,7 @@ function B(e) {
               children: [jsx("span", {
                 children: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.wont_be_able_to_use_features")
               }), jsx("span", {
-                children: jsxs(rb, {
+                children: jsxs(WithTrackedButtonLink, {
                   onClick: n,
                   trackingProperties: {
                     trackingDescriptor: UpgradeAction.LEARN_MORE
@@ -431,14 +431,14 @@ function B(e) {
         })
       }), jsx(DialogFooter, {
         children: jsxs(DialogActionStrip, {
-          children: [jsx($z, {
+          children: [jsx(WithTrackedButton, {
             variant: "link",
             onClick: e.onClose,
             trackingProperties: {
               trackingDescriptor: UpgradeAction.KEEP_PLAN
             },
             children: getI18nString("org_admin_settings.schedule_cancellation_modal.keep_plan")
-          }), jsx(_$$c, {
+          }), jsx(WithTrackedButtonLarge, {
             variant: "secondary",
             onClick: s,
             trackingProperties: {
@@ -518,14 +518,14 @@ function G(e) {
         })
       }), jsx(DialogFooter, {
         children: jsxs(DialogActionStrip, {
-          children: [jsx($z, {
+          children: [jsx(WithTrackedButton, {
             variant: "link",
             onClick: e.onClose,
             trackingProperties: {
               trackingDescriptor: UpgradeAction.KEEP_PLAN
             },
             children: getI18nString("org_admin_settings.schedule_cancellation_modal.keep_plan")
-          }), jsx(_$$c, {
+          }), jsx(WithTrackedButtonLarge, {
             variant: "secondary",
             onClick: n,
             trackingProperties: {
@@ -607,14 +607,14 @@ function z(e) {
         })]
       }), jsx(DialogFooter, {
         children: jsxs(DialogActionStrip, {
-          children: [jsx($z, {
+          children: [jsx(WithTrackedButton, {
             variant: "secondary",
             onClick: e.onClose,
             trackingProperties: {
               trackingDescriptor: UpgradeAction.GO_BACK
             },
             children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.go_back")
-          }), jsx($z, {
+          }), jsx(WithTrackedButton, {
             variant: "destructive",
             onClick: i,
             trackingProperties: {
@@ -717,14 +717,14 @@ function W(e) {
           })
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               variant: "secondary",
               onClick: e.onClose,
               trackingProperties: {
                 trackingDescriptor: UpgradeAction.GO_BACK
               },
               children: getI18nString("modal.cancel")
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               variant: "primary",
               onClick: c,
               trackingProperties: {

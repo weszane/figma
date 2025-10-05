@@ -1,5 +1,6 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { Qs } from "../905/884682";
+import { jsx, jsxs } from "react/jsx-runtime"
+import { Qs } from "../905/884682"
+
 export function $$a0() {
   return jsxs("svg", {
     width: "91",
@@ -11,67 +12,67 @@ export function $$a0() {
       fill: "#C7B9FF",
       stroke: "black",
       strokeWidth: "2",
-      strokeLinecap: "square"
+      strokeLinecap: "square",
     }), jsx("ellipse", {
       rx: "1.93342",
       ry: "1.93342",
       transform: "matrix(-0.763233 -0.646124 -0.646124 0.763233 40.1971 58.871)",
-      fill: "black"
+      fill: "black",
     }), jsx("circle", {
       r: "1.93342",
       transform: "matrix(-0.763233 -0.646124 -0.646124 0.763233 29.7535 50.0292)",
-      fill: "black"
+      fill: "black",
     }), jsx("path", {
       d: "M22.1557 50.0292C17.6447 55.3579 18.3075 63.3346 23.6362 67.8457C28.9649 72.3568 36.9416 71.6939 41.4527 66.3652",
       stroke: "black",
       strokeWidth: "2",
-      strokeLinecap: "square"
+      strokeLinecap: "square",
     }), jsx("path", {
       d: "M32.6023 7.06809C22.9246 11.3264 18.5313 22.6238 22.7896 32.3015C27.0479 41.9793 38.3452 46.3726 48.023 42.1143C57.7007 37.856 62.094 26.5586 57.8357 16.8808C53.5774 7.20309 42.28 2.80978 32.6023 7.06809Z",
       fill: "#F24E1E",
       stroke: "black",
       strokeWidth: "2",
-      strokeLinecap: "square"
+      strokeLinecap: "square",
     }), jsx("circle", {
       r: "1.93342",
       transform: "matrix(-0.915312 0.402746 0.402748 0.915311 44.599 17.3433)",
-      fill: "black"
+      fill: "black",
     }), jsx("circle", {
       r: "1.93342",
       transform: "matrix(-0.915312 0.402745 0.402749 0.915311 32.0741 22.853)",
-      fill: "black"
+      fill: "black",
     }), jsx("path", {
       d: "M28.7423 29.6827C31.5541 36.0732 39.0141 38.9743 45.4046 36.1624C51.7951 33.3505 54.6961 25.8905 51.8842 19.5",
       stroke: "black",
       strokeWidth: "2",
-      strokeLinecap: "square"
+      strokeLinecap: "square",
     }), jsx("path", {
       d: "M54.919 34.8086C45.6007 39.8047 42.0969 51.4088 47.0931 60.7271C52.0892 70.0454 63.6934 73.5492 73.0116 68.553C82.3299 63.5569 85.8337 51.9527 80.8375 42.6345C75.8414 33.3162 64.2373 29.8124 54.919 34.8086Z",
       fill: "#FFC700",
       stroke: "black",
       strokeWidth: "2",
-      strokeLinecap: "square"
+      strokeLinecap: "square",
     }), jsx("circle", {
       r: "1.93342",
       transform: "matrix(-0.881313 0.472534 0.472529 0.881315 67.6771 44.1215)",
-      fill: "black"
+      fill: "black",
     }), jsx("circle", {
       r: "1.93342",
       transform: "matrix(-0.881313 0.472534 0.472529 0.881315 55.6172 50.5883)",
-      fill: "black"
+      fill: "black",
     }), jsx("path", {
       d: "M52.8247 57.6541C56.1238 63.8072 63.7863 66.1209 69.9394 62.8218C76.0925 59.5227 78.4062 51.8602 75.1071 45.707",
       stroke: "black",
       strokeWidth: "2",
-      strokeLinecap: "square"
-    })]
-  });
+      strokeLinecap: "square",
+    })],
+  })
 }
 export function $$s2({
   backgroundColor: e,
-  position: t
+  position: t,
 }) {
-  t.transform && (t.transform += " translate(-50%, -50%)");
+  t.transform && (t.transform += " translate(-50%, -50%)")
   return jsxs("svg", {
     className: Qs,
     width: "61",
@@ -84,23 +85,23 @@ export function $$s2({
       fill: e,
       stroke: "black",
       strokeWidth: "3",
-      strokeLinecap: "square"
+      strokeLinecap: "square",
     }), jsx("ellipse", {
       rx: "2.88558",
       ry: "2.88558",
       transform: "matrix(-0.999999 -0.0016395 -0.00164203 0.999999 40.897 23.4687)",
-      fill: "black"
+      fill: "black",
     }), jsx("circle", {
       r: "2.88558",
       transform: "matrix(-0.999999 -0.00164143 -0.00164007 0.999999 20.4752 23.4355)",
-      fill: "black"
+      fill: "black",
     }), jsx("path", {
       d: "M11.8063 30.7467C11.7892 41.1668 20.2224 49.6278 30.6425 49.6448C41.0626 49.6619 49.5236 41.2287 49.5407 30.8086",
       stroke: "black",
       strokeWidth: "3",
-      strokeLinecap: "square"
-    })]
-  });
+      strokeLinecap: "square",
+    })],
+  })
 }
 export function $$o1() {
   return jsx("svg", {
@@ -112,9 +113,9 @@ export function $$o1() {
       d: "M44.895 63.3676L45.7017 63.7579L46.1773 63.0027L49.3798 57.9187C55.0623 48.9364 59.837 41.3862 62.7789 34.6971C65.7274 27.9931 66.9051 22.0036 65.2203 16.174C62.4526 6.59714 52.6432 1.31996 42.9569 4.07582C40.1223 4.8823 37.7176 6.73921 35.766 8.93469C34.0837 10.8271 32.7027 13.0103 31.6392 15.0982C29.6222 13.8867 27.285 12.7614 24.8477 12.0411C22.02 11.2054 18.989 10.895 16.1544 11.7015C6.46807 14.4573 0.967658 24.0903 3.73535 33.6672C5.42007 39.4968 9.61771 43.957 15.6986 48.092C21.7659 52.2178 29.8473 56.1101 39.4634 60.7396C39.4635 60.7397 39.4637 60.7398 39.4639 60.7399L44.895 63.3676Z",
       fill: "#F24822",
       stroke: "black",
-      strokeWidth: "2"
-    })
-  });
+      strokeWidth: "2",
+    }),
+  })
 }
 export function $$l3() {
   return jsxs("svg", {
@@ -127,38 +128,38 @@ export function $$l3() {
       fill: "#0FA958",
       stroke: "black",
       strokeWidth: "2",
-      strokeMiterlimit: "4.25735"
+      strokeMiterlimit: "4.25735",
     }), jsx("path", {
       d: "M58.3998 37.0999V36.0999H57.3998H49.4926C40.881 36.0999 33.8999 29.1188 33.8999 20.5072V16.5928C33.8999 7.98112 40.881 1 49.4926 1H68.107C76.7186 1 83.6998 7.98112 83.6998 16.5928V23.6864C83.6998 28.7088 81.2806 33.4237 77.2008 36.3528L58.3998 49.8509V37.0999Z",
       fill: "white",
       stroke: "black",
       strokeWidth: "2",
-      strokeMiterlimit: "4.25735"
+      strokeMiterlimit: "4.25735",
     }), jsx("circle", {
       cx: "47.5997",
       cy: "18.8996",
       r: "2.79999",
       fill: "#FFC700",
       stroke: "black",
-      strokeWidth: "2"
+      strokeWidth: "2",
     }), jsx("circle", {
       cx: "58.8001",
       cy: "18.8996",
       r: "2.79999",
       fill: "#FFC700",
       stroke: "black",
-      strokeWidth: "2"
+      strokeWidth: "2",
     }), jsx("circle", {
       cx: "69.9998",
       cy: "18.8996",
       r: "2.79999",
       fill: "#FFC700",
       stroke: "black",
-      strokeWidth: "2"
-    })]
-  });
+      strokeWidth: "2",
+    })],
+  })
 }
-export const $E = $$a0;
-export const B1 = $$o1;
-export const eR = $$s2;
-export const iF = $$l3;
+export const $E = $$a0
+export const B1 = $$o1
+export const eR = $$s2
+export const iF = $$l3

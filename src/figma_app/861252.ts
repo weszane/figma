@@ -44,7 +44,7 @@ import { m as _$$m2 } from "../905/99004";
 import { x as _$$x2 } from "../905/106997";
 import { C as _$$C } from "../figma_app/859828";
 import { S as _$$S2 } from "../5132/525530";
-import { e6 } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { UpgradeAction } from "../905/370443";
 import { gh } from "../figma_app/598952";
 import { Px, Bl, go, HO, aN } from "../figma_app/57551";
@@ -162,7 +162,7 @@ function es() {
   let t = Xr(Bl);
   let r = Xr(go);
   let [i, a] = useAtomValueAndSetter(HO);
-  return i ? jsx(e6, {
+  return i ? jsx(WithTrackedPopupButtonPrimitive, {
     className: "dev_mode_demo_file_restart_button--restartButton--jXEnp",
     onClick: () => {
       e(aN.STATUSES);

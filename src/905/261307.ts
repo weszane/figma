@@ -8,7 +8,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { TrackedLinkPrimitive } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -129,7 +129,7 @@ export let $$O0 = registerModal(function ({
               })]
             }), jsx(DialogFooter, {
               children: jsx(DialogActionStrip, {
-                children: jsx($z, {
+                children: jsx(WithTrackedButton, {
                   onClick: W,
                   trackingProperties: {
                     trackingDescriptor: UpgradeAction.UPGRADE

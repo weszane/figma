@@ -50,7 +50,7 @@ import { customHistory } from "../905/612521";
 import { isGovCluster, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { isCommandOrShift } from "../905/63728";
 import { Wz } from "../figma_app/211694";
-import { e6 as _$$e2, c as _$$c } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive, WithTrackedButtonLarge } from "../figma_app/617427";
 import { getI18nState } from "../figma_app/363242";
 import { VisualBellActions } from "../905/302958";
 import { getRumLoggingConfig } from "../905/16237";
@@ -82,7 +82,7 @@ import { FEditorType } from "../figma_app/53721";
 import { TabOpenBehavior, FileBrowserLocation } from "../figma_app/915202";
 import { B as _$$B } from "../905/524020";
 import { i as _$$i2 } from "../905/46262";
-import { k as _$$k3 } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { setupThemeContext } from "../905/614223";
 import { props, stylex } from "@stylexjs/stylex";
 import { SvgComponent } from "../905/714743";
@@ -594,14 +594,14 @@ function eX({
   let d = useMemo(() => "primary" === e ? "primary" : n ? "ghostMobile" : "ghost", [e, n]);
   return jsx(setupThemeContext, {
     brand: i,
-    children: jsx(_$$e2, {
+    children: jsx(WithTrackedPopupButtonPrimitive, {
       ...a,
       ...props(eQ.button, eQ[d], n && eQ.mobile, "primary" === e && (r || t) && eQ.disabled),
       disabled: r || t,
       RUMEnabled: !0,
       children: t ? jsx("div", {
         className: "x78zum5 x6s0dn4 xl56j7k",
-        children: jsx(_$$k3, {})
+        children: jsx(LoadingSpinner, {})
       }) : l
     })
   });
@@ -992,7 +992,7 @@ function eJ(e) {
       R && (hasDesktopAPI() || i || e.currentQuestion !== pu.CHOOSE_PRODUCT) && customHistory.reload("NUX completion refresh");
     } else e.onNextQuestion();
   };
-  return I ? jsx(_$$c, {
+  return I ? jsx(WithTrackedButtonLarge, {
     disabled: es(),
     onClick: ew,
     trackingProperties: eo(),
@@ -3424,7 +3424,7 @@ let tV = forwardRef(function (e, r) {
   });
 });
 function tG(e) {
-  return jsxs(_$$e2, {
+  return jsxs(WithTrackedPopupButtonPrimitive, {
     "data-testid": OO,
     onClick: e.onBackButtonClick,
     className: "nux_dynamic_preview_mobile_top_bar_back_button--backButton--cwWpz",
@@ -4270,7 +4270,7 @@ let ih = {
 function i_({
   onClick: e
 }) {
-  return jsx(_$$e2, {
+  return jsx(WithTrackedPopupButtonPrimitive, {
     className: "x10l6tqk x1ypdohk x1peatla x1fu8urw x1xmnb5e x2b8uid x1lliihq xdvhukp x1axw3p3",
     onClick: e,
     "data-testid": OO,

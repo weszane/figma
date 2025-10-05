@@ -106,7 +106,7 @@ import { useModalManager } from '../905/437088';
 import { Link } from '../905/438674';
 import { isBakeStarterPaywallEnabledWithoutLimit } from '../905/442612';
 import { IconButton } from '../905/443068';
-import { k as _$$k4 } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { NN, w4, y1 } from '../905/445814';
 import { analyticsEventManager, getAnonymousId, trackEventAnalytics } from '../905/449184';
 import { E as _$$E7 } from '../905/453826';
@@ -192,7 +192,7 @@ import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { H as _$$H7 } from '../905/740869';
 import { R as _$$R2 } from '../905/741991';
 import { c as _$$c0, s as _$$s7 } from '../905/744710';
-import { T as _$$T3 } from '../905/745591';
+import { AnnouncementPrimitive } from '../905/745591';
 import { u as _$$u5 } from '../905/747030';
 import { PositioningStrategy } from '../905/748636';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes, RootErrorBoundaryFallback, useErrorBoundaryContext } from '../905/751457';
@@ -456,7 +456,7 @@ import { oR as _$$oR, wA as _$$wA } from '../figma_app/598952';
 import { PluginCallbacks } from '../figma_app/603466';
 import { Bu } from '../figma_app/604494';
 import { hG } from '../figma_app/613182';
-import { $z, Ih } from '../figma_app/617427';
+import { WithTrackedButton, WithTrackedButtonWide } from '../figma_app/617427';
 import { sv as NodeChatMessageHelper } from '../figma_app/617606';
 import { organizationAPIService } from '../figma_app/617654';
 import { imageServiceInstance } from '../figma_app/624361';
@@ -4016,7 +4016,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
   }
   e.SurveyContent = t;
   e.SurveyButton = function (e) {
-    return jsx(Ih, {
+    return jsx(WithTrackedButtonWide, {
       variant: 'secondary',
       onClick: () => e.onClickAnswer(e.answer),
       children: e.answer.answer
@@ -4106,7 +4106,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
             currentStep: e.progress.currentStep,
             totalSteps: e.progress.totalSteps
           })
-        }), jsx($z, {
+        }), jsx(WithTrackedButton, {
           variant: 'secondary',
           onClick: e.onSubmit,
           trackingProperties: {
@@ -4191,7 +4191,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
             })
           }), jsx('div', {
             className: cssBuilderInstance.mlAuto.$,
-            children: jsx($z, {
+            children: jsx(WithTrackedButton, {
               onClick: () => {
                 !e.required || t ? e.onSubmit() : i(getI18nString('rcs.surveys.this_field_is_required'));
               },
@@ -6899,7 +6899,7 @@ function ue({
     ...m,
     'data-tooltip-show-above': !0,
     'className': c9,
-    'children': jsx(_$$k4, {})
+    'children': jsx(LoadingSpinner, {})
   });
 }
 function ut({
@@ -7243,17 +7243,17 @@ function uA() {
   }, [isIllustrationViewLoaded, isDesignViewLoaded, isDevHandoffViewLoaded, newModeWhenLoaded]);
   let o = useMemo(() => [{
     mode: 'illustration',
-    icon: a.illustration ? jsx(_$$k4, {}) : jsx(uc, {}),
+    icon: a.illustration ? jsx(LoadingSpinner, {}) : jsx(uc, {}),
     label: getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.draw'),
     onboardingKey: _$$aQ
   }, {
     mode: 'design',
-    icon: a.design ? jsx(_$$k4, {}) : jsx(_$$P3, {}),
+    icon: a.design ? jsx(LoadingSpinner, {}) : jsx(_$$P3, {}),
     label: getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.design'),
     onboardingKey: Qj
   }, {
     mode: 'handoff',
-    icon: a.handoff ? jsx(_$$k4, {}) : jsx(_$$A0, {}),
+    icon: a.handoff ? jsx(LoadingSpinner, {}) : jsx(_$$A0, {}),
     label: getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.dev_mode'),
     onboardingKey: _$$wA
   }], [a]);
@@ -8322,7 +8322,7 @@ class _a extends RecordingPureComponent {
         children: [t && jsx(SvgComponent, {
           className: r ? 'notification--iconError--aqnJU notification--icon--ZWNx5' : 'notification--icon--ZWNx5',
           svg: t
-        }), jsx(_$$T3, {
+        }), jsx(AnnouncementPrimitive, {
           className: 'notification--message--6GSx7',
           children: e.message
         }), jsxs('div', {

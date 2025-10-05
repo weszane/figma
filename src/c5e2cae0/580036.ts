@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
 import { ButtonLargeWide } from "../905/521428";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { RadioInputRoot, RadioInputOption } from "../905/308099";
 import { Legend } from "../905/932270";
 import { Label } from "../905/270045";
@@ -63,7 +63,7 @@ export function $$b0({
   let V = jsx("div", {
     className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
     "data-testid": "cart-sidebar-loading",
-    children: jsx(_$$k, {})
+    children: jsx(LoadingSpinner, {})
   });
   return jsxs(_$$x, {
     title: e,

@@ -8,7 +8,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { F } from "../905/680873";
 import { SvgComponent } from "../905/714743";
-import { Ih } from "../figma_app/617427";
+import { WithTrackedButtonWide } from "../figma_app/617427";
 import { TrackedLinkPrimitive } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { selectViewAction } from "../905/929976";
@@ -324,7 +324,7 @@ function D(e) {
         };
         return jsx("div", {
           className: "memory_warning--memoryWarningButtonContainer--GkcGB",
-          children: jsx(Ih, {
+          children: jsx(WithTrackedButtonWide, {
             variant: "secondary",
             onClick: () => n(),
             trackingProperties: {
@@ -335,7 +335,7 @@ function D(e) {
         });
       })(), y && memoryUsedPct < im && jsx("div", {
         className: showMemoryUsage ? "memory_warning--recoveryModeBannerExitButtonContainer--7A1pw" : "memory_warning--recoveryModeExitButtonContainer--Y21eB",
-        children: jsx(Ih, {
+        children: jsx(WithTrackedButtonWide, {
           variant: "primary",
           onClick: () => t(editorType),
           children: renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_exit")

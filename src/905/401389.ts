@@ -3,7 +3,7 @@ import { memo, useCallback, useMemo, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { arraysEqual } from "../figma_app/656233";
 import { IconButton } from "../905/443068";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { setupToggleButton } from "../905/167712";
 import { O as _$$O } from "../905/487602";
 import { y as _$$y } from "../905/661502";
@@ -101,7 +101,7 @@ function Z(e) {
     e && toggleShowingStyles(e);
   }, [current, toggleShowingStyles]);
   let o = q();
-  return e.toggleShowingStyles ? jsx(_$$d, {
+  return e.toggleShowingStyles ? jsx(DialogTriggerButton, {
     "aria-label": getI18nString("fullscreen.properties_panel.style"),
     recordingKey: generateRecordingKey(e, "stylesButton"),
     "aria-expanded": e.isStylesPickerShown,

@@ -7,7 +7,7 @@ import { DialogContents, DialogHeader, DialogBody, DialogTitle } from "../figma_
 import { Tabs } from "../905/150656";
 import { IconButton } from "../905/443068";
 import { Checkbox } from "../905/274480";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { Button } from "../905/521428";
 import { R as _$$R } from "../905/621802";
 import { q as _$$q } from "../905/838985";
@@ -820,7 +820,7 @@ function eb({
             })]
           }, s) : jsxs("div", {
             className: cssBuilderInstance.flex.flexRow.bRadius8.p4.bSolid.colorBorder.b1.itemsCenter.my8.$,
-            children: [jsx(_$$k, {}), jsx("span", {
+            children: [jsx(LoadingSpinner, {}), jsx("span", {
               className: cssBuilderInstance.fontSemiBold.$,
               children: r.fileName
             })]

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo } from "react";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { A } from "../905/891805";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -13,7 +13,7 @@ export let $$h0 = memo(function ({
   recordingKey: t
 }) {
   let s = kG("corner-smoothing");
-  return jsx(_$$d, {
+  return jsx(DialogTriggerButton, {
     actionOnPointerDown: !0,
     recordingKey: t,
     "aria-label": getI18nString("fullscreen.properties_panel.transform_panel.corner_smoothing"),

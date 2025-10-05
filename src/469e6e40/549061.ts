@@ -26,7 +26,7 @@ import { FRequestsStr } from '../905/384551';
 import { _ as _$$_ } from '../905/410717';
 import { OnboardingModal } from '../905/425180';
 import { w as _$$w } from '../905/433065';
-import { k as _$$k } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { isCollaboratorType, ProductAccessTypeEnum } from '../905/513035';
 import { DashboardSections, MemberSections } from '../905/548208';
 import { VisualBellIcon } from '../905/576487';
@@ -88,7 +88,7 @@ import { Y as _$$Y2 } from '../figma_app/515088';
 import { userFlagExistsAtomFamily } from '../figma_app/545877';
 import { tI } from '../figma_app/599327';
 import { d as _$$d } from '../figma_app/603561';
-import { $z, Me } from '../figma_app/617427';
+import { WithTrackedButton, WithTrackedIconButton } from '../figma_app/617427';
 import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { SecureLink } from '../figma_app/637027';
 import { BillingSectionEnum, DashboardSection, WorkspaceTab } from '../figma_app/650409';
@@ -332,7 +332,7 @@ function e_({
     children: [jsxs('div', {
       className: cssBuilderInstance.flex.gap8.itemsCenter.$,
       children: [e, t]
-    }), s ? jsx(_$$k, {
+    }), s ? jsx(LoadingSpinner, {
       size: 'sm',
       htmlAttributes: {
         'data-testid': `${i}-loading-spinner`
@@ -416,7 +416,7 @@ function eu({
           })
         }), jsxs('div', {
           className: cssBuilderInstance.flex.gap8.$,
-          children: [s && jsx($z, {
+          children: [s && jsx(WithTrackedButton, {
             variant: 'secondary',
             onClick: s,
             trackingProperties: {
@@ -424,7 +424,7 @@ function eu({
             },
             trackingOptions: g,
             children: getI18nString('admin_dashboard.seat_counts_overview_card.add_seats')
-          }), jsx($z, {
+          }), jsx(WithTrackedButton, {
             onClick: i,
             trackingProperties: {
               trackingDescriptor: UpgradeAction.MANAGE_SEATS
@@ -601,7 +601,7 @@ function ti({
   return jsxs('div', {
     'className': cssBuilderInstance.flex.gap8.$,
     'data-testid': 'seat-requests-mini-view-row-cta',
-    'children': [jsx($z, {
+    'children': [jsx(WithTrackedButton, {
       variant: 'secondary',
       onClick: t,
       htmlAttributes: {
@@ -618,7 +618,7 @@ function ti({
         text: getI18nString('admin_dashboard.requests.approve'),
         showSpinner: o === 'approving' && d.has(e)
       })
-    }), jsx(Me, {
+    }), jsx(WithTrackedIconButton, {
       'aria-label': getI18nString('admin_dashboard.requests.details.title'),
       'onClick': a,
       'htmlAttributes': {
@@ -699,7 +699,7 @@ function t_({
   let r = useDispatch();
   let l = getRumLoggingConfig();
   return jsxs(Fragment, {
-    children: [jsx($z, {
+    children: [jsx(WithTrackedButton, {
       variant: 'secondary',
       onClick: () => {
         e.key.type === 'team' || s ? td(r, e.key.type === 'team' ? OrganizationType.TEAM : OrganizationType.ORG, e.key.parentId ?? '') : tc(r);
@@ -1244,7 +1244,7 @@ function tu({
                 hasBillingGroups: Z.length > 0,
                 numOfBillingGroupsManaged: ea.length,
                 isOrgAdmin: t
-              }), e9.length > 0 && jsx($z, {
+              }), e9.length > 0 && jsx(WithTrackedButton, {
                 variant: 'primary',
                 onClick: () => {
                   if (e4 === null || e5 === null) return;
@@ -1384,7 +1384,7 @@ function tm({
 function tp() {
   return jsx('div', {
     className: cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
-    children: jsx(_$$k, {})
+    children: jsx(LoadingSpinner, {})
   });
 }
 export function $$tg0({

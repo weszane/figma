@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { A } from "../905/891805";
 import { generateRecordingKey } from "../figma_app/878298";
 import { AutoInteractableWrapper } from "../905/277716";
@@ -37,7 +37,7 @@ export function $$_0() {
           children: renderI18nText("variables.local_variables_panel.local_variables_title")
         }), jsx(AutoInteractableWrapper, {
           name: "variables_modal_button",
-          children: jsx(_$$d, {
+          children: jsx(DialogTriggerButton, {
             onClick: t,
             recordingKey: generateRecordingKey("localVariablesPanel", "variablesModalButton"),
             "aria-expanded": n,

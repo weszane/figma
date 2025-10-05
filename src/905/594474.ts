@@ -6,7 +6,7 @@ import { deepEqual } from "../905/382883";
 import { ServiceCategories } from "../905/165054";
 import { Tabs } from "../905/150656";
 import { Button } from "../905/521428";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { useDebouncedCallback } from "use-debounce";
@@ -3258,7 +3258,7 @@ function iM({
       onClick: () => {
         checkProgress() && submit?.();
       },
-      children: draftSubmissionResult?.result === "pending" || eA ? jsx(_$$k, {
+      children: draftSubmissionResult?.result === "pending" || eA ? jsx(LoadingSpinner, {
         size: "sm"
       }) : getI18nString("community.publishing.publish")
     }) : jsx(Button, {
@@ -3464,7 +3464,7 @@ let $$iU0 = registerModal(function (e) {
   let f = getPublishedResourceOrNull(m ?? void 0, g ?? void 0, r) ?? void 0;
   let _ = s ?? f ?? void 0;
   let v = !s?.id && !!f;
-  if ("loading" === p || "loading" === h || !d.loaded) return jsx(_$$k, {});
+  if ("loading" === p || "loading" === h || !d.loaded) return jsx(LoadingSpinner, {});
   let I = {
     localExtension: r,
     existingExtension: _,

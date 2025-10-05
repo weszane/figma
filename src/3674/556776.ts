@@ -5,7 +5,7 @@ import { H } from "../vendor/373976";
 import { u as _$$u } from "../vendor/363976";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import { IAssertResource } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -298,7 +298,7 @@ function K({
     children: jsxs("div", {
       className: "pinned_plugins--dotContainer--SMpVn",
       ref: d,
-      children: [jsx(_$$d, {
+      children: [jsx(DialogTriggerButton, {
         recordingKey: "overflow_pins",
         "aria-expanded": !1,
         onClick: () => {

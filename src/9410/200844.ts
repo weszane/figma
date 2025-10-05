@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, forwardRef } from "react";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { withTrackedClick } from "../figma_app/831799";
 import { KindEnum } from "../905/129884";
 let l = memo(forwardRef(function ({
@@ -14,7 +14,7 @@ let l = memo(forwardRef(function ({
   dataTestId: c,
   children: u
 }, p) {
-  return jsx(_$$d, {
+  return jsx(DialogTriggerButton, {
     ref: p,
     "aria-expanded": t,
     htmlAttributes: {

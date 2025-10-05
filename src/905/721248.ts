@@ -38,7 +38,7 @@ import { $2, C_, cs, FD, ju, KZ, Mt, MY, Oh, Oi, on, PE, rB, Rw, s$, uA, WE, Xp,
 import { useModalManager } from '../905/437088';
 import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
-import { k as _$$k2 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { notificationActions } from '../905/463586';
 import { $T, _V, ED, z2 } from '../905/467351';
@@ -136,7 +136,7 @@ import { B3 } from '../figma_app/481279';
 import { selectOpenFile } from '../figma_app/516028';
 import { setHeapMemoryMode } from '../figma_app/527873';
 import { jq } from '../figma_app/563413';
-import { $z } from '../figma_app/617427';
+import { WithTrackedButton } from '../figma_app/617427';
 import { getStyleTypeLabel } from '../figma_app/646357';
 import { flatten, mapFilter } from '../figma_app/656233';
 import { DocumentMode, FileAndBranchTipType, GitReferenceType, LibraryUpdateStatus, PreviewStage, PropertyScope, SceneGraphHelpers, SchemaJoinStatus, VariablesBindings, ViewType } from '../figma_app/763686';
@@ -1593,7 +1593,7 @@ function tK(e) {
     children: e.isLoading ? jsxs(Fragment, {
       children: [jsx('span', {
         className: tG,
-        children: jsx(_$$k2, {})
+        children: jsx(LoadingSpinner, {})
       }), jsx('div', {
         children: renderI18nText('collaboration.branching_merge_modal.calculating_conflicts')
       })]
@@ -2356,7 +2356,7 @@ let iW = registerModal(e => {
         })]
       }), jsx(DialogFooter, {
         children: jsxs(DialogActionStrip, {
-          children: [jsx($z, {
+          children: [jsx(WithTrackedButton, {
             recordingKey: 'leaveReviewModal',
             onClick: () => {
               s(ed({
@@ -2407,7 +2407,7 @@ let iK = registerModal(e => {
         })]
       }), jsx(DialogFooter, {
         children: jsx(DialogActionStrip, {
-          children: jsx($z, {
+          children: jsx(WithTrackedButton, {
             variant: 'primary',
             recordingKey: 'requestReviewModal',
             onClick: () => {
@@ -4473,7 +4473,7 @@ function rn(e) {
   }) : jsxs('div', {
     className: n8,
     style: p,
-    children: [loading && jsx(_$$k2, {}), _ && jsx(_$$ec, {
+    children: [loading && jsx(LoadingSpinner, {}), _ && jsx(_$$ec, {
       image: _,
       className: g,
       canvasClassName: f

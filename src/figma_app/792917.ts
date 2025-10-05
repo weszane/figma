@@ -12,7 +12,7 @@ import { sendWithRetry } from "../905/910117";
 import { ModalCloseButton } from "../905/17223";
 import { RadioGroup, RadioOption } from "../905/306088";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { getRefundReasonString } from "../figma_app/808294";
 import { c9, oW } from "../figma_app/395505";
@@ -156,7 +156,7 @@ let C = registerModal(function (e) {
       })
     }), jsx("div", {
       className: v0,
-      children: jsx($z, {
+      children: jsx(WithTrackedButton, {
         onClick: () => r(hideModal()),
         variant: "secondary",
         children: renderI18nText("general.close")

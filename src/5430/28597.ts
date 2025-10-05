@@ -34,7 +34,7 @@ import { useDebounce } from 'use-debounce';
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { IW } from "../figma_app/563413";
 import { stylesQuery, componentsQuery } from "../figma_app/229259";
-import { o as _$$o } from "../905/451156";
+import { TabWithRecording } from "../905/451156";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getAssetKey, groupStylesByType, STYLE_TYPES, sortStyles } from "../figma_app/646357";
 import { KindEnum } from "../905/129884";
@@ -56,7 +56,7 @@ import { dx } from "../5430/309696";
 import { HeaderModal } from "../905/519092";
 import { F as _$$F } from "../5430/373843";
 import { k as _$$k2 } from "../5430/846627";
-import { C2, Gx, J3 } from "../figma_app/699310";
+import { FigmaPartnerBadgeRenderer, FigmaPartnerTooltip, hasFigmaPartnerBadge } from "../figma_app/699310";
 import { _ as _$$_ } from "../905/574895";
 import { A as _$$A3 } from "../905/72153";
 import { FRequestStatusType, FTemplateCategoryType } from "../figma_app/191312";
@@ -82,7 +82,7 @@ import { $ as _$$$ } from "../5430/953899";
 import { A as _$$A6 } from "../5430/728674";
 import { AG } from "../figma_app/999312";
 import { L as _$$L, I as _$$I } from "../1577/16430";
-import { k as _$$k3 } from "../905/443820";
+// import { LoadingSpinner } from "../905/443820";
 import { Button } from "../905/521428";
 import { ButtonPrimitive } from "../905/632989";
 import { LinkPrimitive } from "../figma_app/496441";
@@ -529,7 +529,7 @@ function ep({
     hideXIcon: !0
   });
 }
-class eh extends _$$o {
+class eh extends TabWithRecording {
   constructor() {
     super(...arguments);
     this.styleOverrides = () => ({
@@ -632,7 +632,7 @@ function eF({
   let n = isPluginResource(e) && isDevModeWithCodegen(getCurrentVersion(t)) && jsx(eU, {});
   let o = e.community_publishers.accepted.reduce((e, t) => e.concat(t.badges), []);
   let a = [...new Set(e.badges.concat(o))];
-  let l = C2({
+  let l = FigmaPartnerBadgeRenderer({
     badges: a
   }, !1, !0);
   let c = isPluginOrWidget(e) ? function (e) {
@@ -652,7 +652,7 @@ function eF({
   return jsxs(Fragment, {
     children: [r, i, n, l && jsxs("div", {
       className: qS,
-      children: [jsx(Gx, {
+      children: [jsx(FigmaPartnerTooltip, {
         children: l
       }), renderI18nText("community.detail_view.made_by_a_figma_partner")]
     }), c, u]
@@ -1073,7 +1073,7 @@ function tu({
   let t = AG();
   let r = isResourceHubProfilesEnabled();
   let i = e.community_publishers.accepted;
-  let n = [...i.filter(e => J3(e.badges)), ...i.filter(e => !J3(e.badges))];
+  let n = [...i.filter(e => hasFigmaPartnerBadge(e.badges)), ...i.filter(e => !hasFigmaPartnerBadge(e.badges))];
   let o = jsx(eF, {
     resource: e
   });
@@ -1156,7 +1156,7 @@ function tb({
     className: "xh8yej3 x1dltgaz x19y5rnk xb3r6kr x1bamp8i x1n2onr6",
     children: [a && !c && jsx("div", {
       className: "x10l6tqk x13vifvy xu96u03 xh8yej3 x5yr21d x78zum5 x6s0dn4 xl56j7k x1v8gsql",
-      children: jsx(_$$k3, {
+      children: jsx(LoadingSpinner, {
         size: "lg"
       })
     }), c ? jsx("div", {

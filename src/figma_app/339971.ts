@@ -1,7 +1,7 @@
 import { o as _$$o } from "../figma_app/54816";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { bL, QB } from "../905/174266";
 import { setupThemeContext } from "../905/614223";
 import d from "classnames";
@@ -39,7 +39,7 @@ export function $$h0({
   }, [e, t]);
   let r = e?.showLoadingSpinner ? jsx("div", {
     className: "blocked_ui_loading_indicator--icon--wujoz",
-    children: jsx(k, {})
+    children: jsx(LoadingSpinner, {})
   }) : null;
   return jsx(_$$d, {
     children: jsx(_, {

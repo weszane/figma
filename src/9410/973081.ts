@@ -72,7 +72,7 @@ import { debugState } from '../905/407919';
 import { browserCapabilities } from '../905/409121';
 import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
-import { k as _$$k4 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { useDraftsFolderProject } from '../905/461685';
 import { AutoLayout, Spacer } from '../905/470281';
@@ -296,7 +296,7 @@ import { jz as _$$jz } from '../figma_app/587765';
 import { getCurrentTeam } from '../figma_app/598018';
 import { Bu, dd, Lk, Rt } from '../figma_app/604494';
 import { PluginManager } from '../figma_app/612938';
-import { Ih } from '../figma_app/617427';
+import { WithTrackedButtonWide } from '../figma_app/617427';
 import { hasCmsCollection } from '../figma_app/618433';
 import { J3, JU, kD, kN } from '../figma_app/622574';
 import { copyTextToClipboard } from '../figma_app/623293';
@@ -4803,7 +4803,7 @@ function nj({
     mode: 'dark',
     children: jsx('div', {
       className: 'xdqdrvq',
-      children: jsx(Ih, {
+      children: jsx(WithTrackedButtonWide, {
         variant: t,
         recordingKey: i,
         onClick: n,
@@ -4973,7 +4973,7 @@ function nV({
         placeholder: getI18nString('dev_handoff.status.menu_note_placeholder'),
         type: 'textarea',
         value: t
-      }), jsx(Ih, {
+      }), jsx(WithTrackedButtonWide, {
         ref: l,
         variant: 'primary',
         onClick: p,
@@ -5464,7 +5464,7 @@ function as({
 function ac() {
   return jsx('div', {
     className: 'section_preset_picker--loadingSpinnerContainer--OM30n',
-    children: jsx(_$$k4, {
+    children: jsx(LoadingSpinner, {
       size: 'lg'
     })
   });
@@ -9026,7 +9026,7 @@ function oV({
     children: jsx(setupThemeContext, {
       mode: 'dark',
       children: jsxs(_$$bL2, {
-        children: [jsx(_$$k4, {}), jsx(QB, {
+        children: [jsx(LoadingSpinner, {}), jsx(QB, {
           children: renderI18nText('reconnecting_modal.loading')
         })]
       })
@@ -9040,7 +9040,7 @@ function oW() {
     children: jsx(setupThemeContext, {
       mode: 'dark',
       children: jsxs(_$$bL2, {
-        children: [jsx(_$$k4, {}), jsx(QB, {
+        children: [jsx(LoadingSpinner, {}), jsx(QB, {
           children: renderI18nText('waiting_for_sync_modal.saving')
         })]
       })

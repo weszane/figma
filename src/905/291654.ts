@@ -1,27 +1,26 @@
-import { partition } from 'lodash-es'
-import { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import { jsx, jsxs } from 'react/jsx-runtime'
-import { ModalRootComponent } from '../905/38914'
-import { c as _$$c } from '../905/73189'
-import { ModalSupportsBackground, registerModal } from '../905/102752'
-import { showModalHandler } from '../905/156213'
-import { renderI18nText } from '../905/303541'
-import { selectCurrentUser } from '../905/372672'
-import { useModalManager } from '../905/437088'
-import { analyticsEventManager } from '../905/449184'
-import { getFeatureFlags } from '../905/601108'
-import { getHighestPriorityFont } from '../905/714538'
-import { useSingleEffect } from '../905/791079'
-import { FONT_SF_COMPACT, FONT_SF_COMPACT_ROUNDED, FONT_SF_PRO_DISPLAY, FONT_SF_PRO_ROUNDED } from '../905/946258'
-import { postUserFlag } from '../905/985254'
-import { FEditorType } from '../figma_app/53721'
-import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243'
-import { mapFileToProductType } from '../figma_app/314264'
-import { selectCurrentFile } from '../figma_app/516028'
-import { $z } from '../figma_app/617427'
-import { FontSourceType } from '../figma_app/763686'
-
+import { partition } from 'lodash-es';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { jsx, jsxs } from 'react/jsx-runtime';
+import { ModalRootComponent } from '../905/38914';
+import { c as _$$c } from '../905/73189';
+import { ModalSupportsBackground, registerModal } from '../905/102752';
+import { showModalHandler } from '../905/156213';
+import { renderI18nText } from '../905/303541';
+import { selectCurrentUser } from '../905/372672';
+import { useModalManager } from '../905/437088';
+import { analyticsEventManager } from '../905/449184';
+import { getFeatureFlags } from '../905/601108';
+import { getHighestPriorityFont } from '../905/714538';
+import { useSingleEffect } from '../905/791079';
+import { FONT_SF_COMPACT, FONT_SF_COMPACT_ROUNDED, FONT_SF_PRO_DISPLAY, FONT_SF_PRO_ROUNDED } from '../905/946258';
+import { postUserFlag } from '../905/985254';
+import { FEditorType } from '../figma_app/53721';
+import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
+import { mapFileToProductType } from '../figma_app/314264';
+import { selectCurrentFile } from '../figma_app/516028';
+import { WithTrackedButton } from '../figma_app/617427';
+import { FontSourceType } from '../figma_app/763686';
 enum SFFontEnum {
   SF_PRO = 'SFPro',
   SF_COMPACT = 'SFCompact',
@@ -32,7 +31,7 @@ let T = {
       return jsxs('div', {
         style: {
           whiteSpace: 'pre-line',
-          fontWeight: 500,
+          fontWeight: 500
         },
         children: [`APPLE INC.
         LICENSE AGREEMENT FOR THE APPLE SF PRO FONT
@@ -86,18 +85,18 @@ let T = {
         10. Complete Agreement; Governing Language. This License constitutes the entire agreement between you and Apple relating to the use of the Apple Font licensed hereunder and supersedes all prior or contemporaneous understandings regarding such subject matter. No amendment to or modification of this License will be binding unless in writing and signed by Apple. To the extent that there are any inconsistent terms in any applicable Apple software license agreements, these terms shall govern your use of the Apple Font.
 
         EA1761
-        5/20/2021`],
-      })
+        5/20/2021`]
+      });
     },
     header: renderI18nText('community.eula.sf_pro_license_agreement'),
-    subtext: renderI18nText('community.eula.subext.sf_pro_license_agreement'),
+    subtext: renderI18nText('community.eula.subext.sf_pro_license_agreement')
   },
   [SFFontEnum.SF_COMPACT]: {
     content() {
       return jsxs('div', {
         style: {
           whiteSpace: 'pre-line',
-          fontWeight: 500,
+          fontWeight: 500
         },
         children: [`APPLE INC.
         LICENSE AGREEMENT FOR THE APPLE SF COMPACT FONT
@@ -152,38 +151,34 @@ let T = {
         10. Complete Agreement; Governing Language. This License constitutes the entire agreement between you and Apple relating to the use of the Apple Font licensed hereunder and supersedes all prior or contemporaneous understandings regarding such subject matter. No amendment to or modification of this License will be binding unless in writing and signed by Apple. To the extent that there are any inconsistent terms in any applicable Apple software license agreements, these terms shall govern your use of the Apple Font.
 
         EA1759
-        05/20/2021`],
-      })
+        05/20/2021`]
+      });
     },
     header: renderI18nText('community.eula.sf_compact_license_agreement'),
-    subtext: renderI18nText('community.eula.subtext.sf_compact_license_agreement'),
-  },
-}
+    subtext: renderI18nText('community.eula.subtext.sf_compact_license_agreement')
+  }
+};
 /**
  * AppleFontEulaModalProps - Props for AppleFontEulaModal (original: e)
  */
 export interface AppleFontEulaModalProps {
-  eulaConfig: AppleEulaConfig
-  eulasToShow?: number
-  eulaShown?: number
-  onAccept?: () => void
-  onDecline?: () => void
-  onClose: () => void
-  trigger?: string
-  asyncModal?: boolean
-  [key: string]: any
+  eulaConfig: AppleEulaConfig;
+  eulasToShow?: number;
+  eulaShown?: number;
+  onAccept?: () => void;
+  onDecline?: () => void;
+  onClose: () => void;
+  trigger?: string;
+  asyncModal?: boolean;
+  [key: string]: any;
 }
 
 /**
  * Tracks Apple font EULA modal display analytics (original: analyticsEventManager.trackDefinedEvent)
  */
-function trackAppleFontEulaDisplayed(
-  trigger: string | undefined,
-  eulaConfig: AppleEulaConfig,
-  asyncModal: boolean | undefined,
-) {
-  const user = selectCurrentUser()
-  const file = selectCurrentFile()
+function trackAppleFontEulaDisplayed(trigger: string | undefined, eulaConfig: AppleEulaConfig, asyncModal: boolean | undefined) {
+  const user = selectCurrentUser();
+  const file = selectCurrentFile();
   useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent('preset_libraries.apple_font_eula_displayed', {
       trigger,
@@ -193,191 +188,157 @@ function trackAppleFontEulaDisplayed(
       fileParentOrgId: file?.parentOrgId,
       fileKey: file?.key,
       asyncModal: asyncModal ?? false,
-      productType: mapFileToProductType(file),
-    })
-  })
+      productType: mapFileToProductType(file)
+    });
+  });
 }
 
 /**
  * Tracks Apple font EULA modal button click analytics (original: k)
  */
-function useTrackAppleFontEulaClicked(
-  eulaConfig: AppleEulaConfig,
-  trigger: string | undefined,
-  asyncModal: boolean | undefined,
-) {
-  const user = selectCurrentUser()
-  const file = selectCurrentFile()
-  return useCallback(
-    (actionType: string) => {
-      analyticsEventManager.trackDefinedEvent('preset_libraries.apple_font_eula_clicked', {
-        actionType,
-        trigger,
-        eulaConfig: eulaConfig.eula,
-        userId: user?.id,
-        fileTeamId: file?.teamId,
-        fileParentOrgId: file?.parentOrgId,
-        fileKey: file?.key,
-        asyncModal: asyncModal ?? false,
-        productType: mapFileToProductType(file),
-      })
-    },
-    [user, file, eulaConfig, trigger, asyncModal],
-  )
+function useTrackAppleFontEulaClicked(eulaConfig: AppleEulaConfig, trigger: string | undefined, asyncModal: boolean | undefined) {
+  const user = selectCurrentUser();
+  const file = selectCurrentFile();
+  return useCallback((actionType: string) => {
+    analyticsEventManager.trackDefinedEvent('preset_libraries.apple_font_eula_clicked', {
+      actionType,
+      trigger,
+      eulaConfig: eulaConfig.eula,
+      userId: user?.id,
+      fileTeamId: file?.teamId,
+      fileParentOrgId: file?.parentOrgId,
+      fileKey: file?.key,
+      asyncModal: asyncModal ?? false,
+      productType: mapFileToProductType(file)
+    });
+  }, [user, file, eulaConfig, trigger, asyncModal]);
 }
 
 /**
  * AppleFontEulaModal - Modal for Apple font EULA agreement (original: appleFontEualModal)
  */
-export const AppleFontEulaModal = registerModal(
-  (props: AppleFontEulaModalProps) => {
-    const dispatch = useDispatch()
-    const {
-      eulaConfig,
-      eulasToShow,
-      eulaShown,
-      onAccept,
-      onDecline,
-      onClose,
-      trigger,
-      asyncModal,
-      ...rest
-    } = props
-
-    const modalContent = T[eulaConfig.eula]
-    if (!modalContent) {
-      throw new Error(`Unsupported font eula: ${eulaConfig.eula}`)
-    }
-
-    trackAppleFontEulaDisplayed(trigger, eulaConfig, asyncModal)
-    const trackClick = useTrackAppleFontEulaClicked(eulaConfig, trigger, asyncModal)
-    const modalManager = useModalManager({
-      ...rest,
-      onClose,
-      preventUserClose: true,
+export const AppleFontEulaModal = registerModal((props: AppleFontEulaModalProps) => {
+  const dispatch = useDispatch();
+  const {
+    eulaConfig,
+    eulasToShow,
+    eulaShown,
+    onAccept,
+    onDecline,
+    onClose,
+    trigger,
+    asyncModal,
+    ...rest
+  } = props;
+  const modalContent = T[eulaConfig.eula];
+  if (!modalContent) {
+    throw new Error(`Unsupported font eula: ${eulaConfig.eula}`);
+  }
+  trackAppleFontEulaDisplayed(trigger, eulaConfig, asyncModal);
+  const trackClick = useTrackAppleFontEulaClicked(eulaConfig, trigger, asyncModal);
+  const modalManager = useModalManager({
+    ...rest,
+    onClose,
+    preventUserClose: true
+  });
+  return jsx(ModalRootComponent, {
+    manager: modalManager,
+    width: 600,
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
+          children: modalContent.header
+        })
+      }), jsxs(DialogBody, {
+        children: [jsx('div', {
+          style: {
+            color: 'var(--color-text-secondary)',
+            padding: '8px 0px'
+          },
+          children: modalContent.subtext
+        }), jsx('div', {
+          style: {
+            maxHeight: '360px'
+          },
+          children: modalContent.content()
+        })]
+      }), jsxs(DialogFooter, {
+        children: [eulasToShow !== undefined && eulaShown !== undefined && eulasToShow > 1 && jsx('div', {
+          'data-testid': 'eula-counts',
+          'children': renderI18nText('community.eula.i_of_count', {
+            i: eulaShown,
+            count: eulasToShow
+          })
+        }), jsxs(DialogActionStrip, {
+          children: [jsx(WithTrackedButton, {
+            onClick: () => {
+              dispatch(postUserFlag({
+                [eulaConfig.declinedUserFlag]: true
+              }));
+              trackClick('decline');
+              onDecline?.();
+              onClose();
+            },
+            variant: 'secondary',
+            children: renderI18nText('community.eula.disagree')
+          }), jsx(WithTrackedButton, {
+            onClick: () => {
+              dispatch(postUserFlag({
+                [eulaConfig.acceptedUserFlag]: true
+              }));
+              trackClick('accept');
+              onAccept?.();
+              onClose();
+            },
+            variant: 'primary',
+            children: renderI18nText('community.eula.agree')
+          })]
+        })]
+      })]
     })
-
-    return jsx(ModalRootComponent, {
-      manager: modalManager,
-      width: 600,
-      children: jsxs(DialogContents, {
-        children: [
-          jsx(DialogHeader, {
-            children: jsx(DialogTitle, { children: modalContent.header }),
-          }),
-          jsxs(DialogBody, {
-            children: [
-              jsx('div', {
-                style: { color: 'var(--color-text-secondary)', padding: '8px 0px' },
-                children: modalContent.subtext,
-              }),
-              jsx('div', {
-                style: { maxHeight: '360px' },
-                children: modalContent.content(),
-              }),
-            ],
-          }),
-          jsxs(DialogFooter, {
-            children: [
-              eulasToShow !== undefined
-              && eulaShown !== undefined
-              && eulasToShow > 1
-              && jsx('div', {
-                'data-testid': 'eula-counts',
-                'children': renderI18nText('community.eula.i_of_count', {
-                  i: eulaShown,
-                  count: eulasToShow,
-                }),
-              }),
-              jsxs(DialogActionStrip, {
-                children: [
-                  jsx($z, {
-                    onClick: () => {
-                      dispatch(postUserFlag({ [eulaConfig.declinedUserFlag]: true }))
-                      trackClick('decline')
-                      onDecline?.()
-                      onClose()
-                    },
-                    variant: 'secondary',
-                    children: renderI18nText('community.eula.disagree'),
-                  }),
-                  jsx($z, {
-                    onClick: () => {
-                      dispatch(postUserFlag({ [eulaConfig.acceptedUserFlag]: true }))
-                      trackClick('accept')
-                      onAccept?.()
-                      onClose()
-                    },
-                    variant: 'primary',
-                    children: renderI18nText('community.eula.agree'),
-                  }),
-                ],
-              }),
-            ],
-          }),
-        ],
-      }),
-    })
-  },
-  'APPLE_FONT_EULA_MODAL_TYPE',
-  ModalSupportsBackground.YES,
-)
+  });
+}, 'APPLE_FONT_EULA_MODAL_TYPE', ModalSupportsBackground.YES);
 
 // Exported alias for backward compatibility (original: appleFontEualModal)
-export const appleFontEualModal = AppleFontEulaModal
+export const appleFontEualModal = AppleFontEulaModal;
 /**
  * Editor types that support Apple EULA fonts (original: R)
  */
-const SupportedEditorTypes = new Set([
-  FEditorType.Design,
-  FEditorType.Whiteboard,
-  FEditorType.Slides,
-  FEditorType.Cooper,
-])
+const SupportedEditorTypes = new Set([FEditorType.Design, FEditorType.Whiteboard, FEditorType.Slides, FEditorType.Cooper]);
 
 /**
  * Font families that require Apple EULA (original: N)
  */
-const AppleEulaFontFamilies = new Set([
-  FONT_SF_PRO_DISPLAY,
-  FONT_SF_PRO_ROUNDED,
-  FONT_SF_COMPACT,
-  FONT_SF_COMPACT_ROUNDED,
-])
+const AppleEulaFontFamilies = new Set([FONT_SF_PRO_DISPLAY, FONT_SF_PRO_ROUNDED, FONT_SF_COMPACT, FONT_SF_COMPACT_ROUNDED]);
 
 /**
  * Apple EULA configuration per font type (original: $$P0)
  */
 export interface AppleEulaConfig {
-  eula: SFFontEnum
-  fontFamilies: string[]
-  acceptedUserFlag: string
-  declinedUserFlag: string
+  eula: SFFontEnum;
+  fontFamilies: string[];
+  acceptedUserFlag: string;
+  declinedUserFlag: string;
 }
-
 export const AppleEulaConfigs: Record<SFFontEnum, AppleEulaConfig> = {
   [SFFontEnum.SF_PRO]: {
     eula: SFFontEnum.SF_PRO,
     fontFamilies: ['SF Pro', 'SF Pro Rounded'],
     acceptedUserFlag: 'apple_sf_pro_eula_accepted',
-    declinedUserFlag: 'apple_sf_pro_eula_declined',
+    declinedUserFlag: 'apple_sf_pro_eula_declined'
   },
   [SFFontEnum.SF_COMPACT]: {
     eula: SFFontEnum.SF_COMPACT,
     fontFamilies: ['SF Compact', 'SF Compact Rounded'],
     acceptedUserFlag: 'apple_sf_compact_eula_accepted',
-    declinedUserFlag: 'apple_sf_compact_eula_declined',
-  },
-}
+    declinedUserFlag: 'apple_sf_compact_eula_declined'
+  }
+};
 
 /**
  * Map font family name to its EULA config (original: $$O)
  */
-export const FontFamilyToEulaConfig: Record<string, AppleEulaConfig> = Object.fromEntries(
-  Object.values(AppleEulaConfigs).flatMap(config =>
-    config.fontFamilies.map(family => [family, config]),
-  ),
-)
+export const FontFamilyToEulaConfig: Record<string, AppleEulaConfig> = Object.fromEntries(Object.values(AppleEulaConfigs).flatMap(config => config.fontFamilies.map(family => [family, config])));
 
 /**
  * Checks if the font source is Google (original: $$D7)
@@ -385,8 +346,8 @@ export const FontFamilyToEulaConfig: Record<string, AppleEulaConfig> = Object.fr
  * @param fonts Font map
  */
 export function isGoogleFontSource(family: string, fonts: Record<string, any>): boolean {
-  const font = getHighestPriorityFont(fonts[family])
-  return font?.source === FontSourceType.GOOGLE
+  const font = getHighestPriorityFont(fonts[family]);
+  return font?.source === FontSourceType.GOOGLE;
 }
 
 /**
@@ -396,7 +357,7 @@ export function isGoogleFontSource(family: string, fonts: Record<string, any>): 
  */
 export function getEulaConfigIfGoogleFont(family: string, fonts: Record<string, any>): AppleEulaConfig | undefined {
   if (getFeatureFlags().dse_sf_pro_font && family && isGoogleFontSource(family, fonts)) {
-    return FontFamilyToEulaConfig[family]
+    return FontFamilyToEulaConfig[family];
   }
 }
 
@@ -406,7 +367,7 @@ export function getEulaConfigIfGoogleFont(family: string, fonts: Record<string, 
  * @param fonts Font map
  */
 function hasEulaConfig(family: string, fonts: Record<string, any>): boolean {
-  return getEulaConfigIfGoogleFont(family, fonts) !== undefined
+  return getEulaConfigIfGoogleFont(family, fonts) !== undefined;
 }
 
 /**
@@ -416,8 +377,8 @@ function hasEulaConfig(family: string, fonts: Record<string, any>): boolean {
  * @param userFlags User flags
  */
 export function hasAcceptedEula(family: string, fonts: Record<string, any>, userFlags: Record<string, boolean>): boolean {
-  const config = getEulaConfigIfGoogleFont(family, fonts)
-  return !!config && !!userFlags[config.acceptedUserFlag]
+  const config = getEulaConfigIfGoogleFont(family, fonts);
+  return !!config && !!userFlags[config.acceptedUserFlag];
 }
 
 /**
@@ -427,7 +388,7 @@ export function hasAcceptedEula(family: string, fonts: Record<string, any>, user
  * @param userFlags User flags
  */
 export function requiresEula(family: string, fonts: Record<string, any>, userFlags: Record<string, boolean>): boolean {
-  return hasEulaConfig(family, fonts) && !hasAcceptedEula(family, fonts, userFlags)
+  return hasEulaConfig(family, fonts) && !hasAcceptedEula(family, fonts, userFlags);
 }
 
 /**
@@ -436,16 +397,21 @@ export function requiresEula(family: string, fonts: Record<string, any>, userFla
  * @param fontMap Font map
  * @param userFlags User flags
  */
-export function splitFontsByEula(
-  fonts: Array<{ family: string }>,
-  fontMap: Record<string, any>,
-  userFlags: FEditorType,
-): { eulaFonts: Array<{ family: string }>, nonEulaFonts: Array<{ family: string }> } {
-  const [eulaFonts, nonEulaFonts] = partition(
-    fonts,
-    font => hasEulaConfig(font.family, fontMap) && !isEditorTypeExcluded(font.family, userFlags),
-  )
-  return { eulaFonts, nonEulaFonts }
+export function splitFontsByEula(fonts: Array<{
+  family: string;
+}>, fontMap: Record<string, any>, userFlags: FEditorType): {
+  eulaFonts: Array<{
+    family: string;
+  }>;
+  nonEulaFonts: Array<{
+    family: string;
+  }>;
+} {
+  const [eulaFonts, nonEulaFonts] = partition(fonts, font => hasEulaConfig(font.family, fontMap) && !isEditorTypeExcluded(font.family, userFlags));
+  return {
+    eulaFonts,
+    nonEulaFonts
+  };
 }
 
 /**
@@ -456,17 +422,13 @@ export function splitFontsByEula(
  * @param showModal Show modal function
  * @param trigger Trigger type
  */
-export async function maybeShowEulaModal(
-  family: string,
-  userFlags: Record<string, boolean>,
-  fontMap: Record<string, any>,
-  showModal: Fn,
-  trigger: string,
-): Promise<boolean> {
-  const config = getEulaConfigIfGoogleFont(family, fontMap)
-  if (!config || !family || hasAcceptedEula(family, fontMap, userFlags))
-    return true
-  return await showEulaModal(showModal, { eula: config.eula, trigger })
+export async function maybeShowEulaModal(family: string, userFlags: Record<string, boolean>, fontMap: Record<string, any>, showModal: Fn, trigger: string): Promise<boolean> {
+  const config = getEulaConfigIfGoogleFont(family, fontMap);
+  if (!config || !family || hasAcceptedEula(family, fontMap, userFlags)) return true;
+  return await showEulaModal(showModal, {
+    eula: config.eula,
+    trigger
+  });
 }
 
 /**
@@ -477,32 +439,34 @@ export async function maybeShowEulaModal(
  * @param showModal Show modal function
  * @param trigger Trigger type
  */
-export async function handleMissingFontsEula(
-  missingFonts: Array<{ family: string }>,
-  fontMap: Record<string, any>,
-  userFlags: Record<string, boolean>,
-  showModal: Fn,
-  trigger: string,
-): Promise<{ stillMissingFonts: Array<{ family: string }> }> {
-  let stillMissingFonts = [...missingFonts]
+export async function handleMissingFontsEula(missingFonts: Array<{
+  family: string;
+}>, fontMap: Record<string, any>, userFlags: Record<string, boolean>, showModal: Fn, trigger: string): Promise<{
+  stillMissingFonts: Array<{
+    family: string;
+  }>;
+}> {
+  let stillMissingFonts = [...missingFonts];
   if (missingFonts.length === 0) {
-    return { stillMissingFonts }
+    return {
+      stillMissingFonts
+    };
   }
-  const shownEulas = new Set<SFFontEnum>()
+  const shownEulas = new Set<SFFontEnum>();
   for (const font of missingFonts) {
-    const config = getEulaConfigIfGoogleFont(font.family, fontMap)
-    if (
-      !config
-      || shownEulas.has(config.eula)
-      || (shownEulas.add(config.eula), userFlags[config.acceptedUserFlag])
-      || !(await showEulaModal(showModal, { eula: config.eula, trigger }))
-    ) {
-      continue
+    const config = getEulaConfigIfGoogleFont(font.family, fontMap);
+    if (!config || shownEulas.has(config.eula) || (shownEulas.add(config.eula), userFlags[config.acceptedUserFlag]) || !(await showEulaModal(showModal, {
+      eula: config.eula,
+      trigger
+    }))) {
+      continue;
     }
-    const familySet = new Set(config.fontFamilies)
-    stillMissingFonts = stillMissingFonts.filter(f => !familySet.has(f.family))
+    const familySet = new Set(config.fontFamilies);
+    stillMissingFonts = stillMissingFonts.filter(f => !familySet.has(f.family));
   }
-  return { stillMissingFonts }
+  return {
+    stillMissingFonts
+  };
 }
 
 /**
@@ -510,22 +474,19 @@ export async function handleMissingFontsEula(
  * @param showModal Show modal function
  * @param options Modal options
  */
-export function showEulaModal(
-  showModal: Fn,
-  options: {
-    eula: SFFontEnum
-    eulasToShow?: number
-    eulaShown?: number
-    trigger?: string
-  },
-): Promise<boolean> {
+export function showEulaModal(showModal: Fn, options: {
+  eula: SFFontEnum;
+  eulasToShow?: number;
+  eulaShown?: number;
+  trigger?: string;
+}): Promise<boolean> {
   const modalConfig = {
     eulaConfig: AppleEulaConfigs[options.eula],
     eulasToShow: options.eulasToShow,
     eulaShown: options.eulaShown,
-    trigger: options.trigger,
-  }
-  return new Promise((resolve) => {
+    trigger: options.trigger
+  };
+  return new Promise(resolve => {
     showModal(showModalHandler({
       type: appleFontEualModal,
       showModalsBeneath: true,
@@ -533,10 +494,10 @@ export function showEulaModal(
         ...modalConfig,
         onAccept: () => resolve(true),
         onDecline: () => resolve(false),
-        asyncModal: true,
-      },
-    }))
-  })
+        asyncModal: true
+      }
+    }));
+  });
 }
 
 /**
@@ -545,7 +506,7 @@ export function showEulaModal(
  * @param editorType Editor type
  */
 export function isEditorTypeExcluded(family: string, editorType: FEditorType): boolean {
-  return AppleEulaFontFamilies.has(family) && !SupportedEditorTypes.has(editorType)
+  return AppleEulaFontFamilies.has(family) && !SupportedEditorTypes.has(editorType);
 }
 
 /**
@@ -555,25 +516,19 @@ export function isEditorTypeExcluded(family: string, editorType: FEditorType): b
  * @param userFlags User flags
  * @param editorType Editor type
  */
-export function shouldShowEula(
-  family: string,
-  fontMap: Record<string, any>,
-  userFlags: Record<string, boolean>,
-  editorType: FEditorType,
-): boolean {
-  return !!isGoogleFontSource(family, fontMap)
-    && (isEditorTypeExcluded(family, editorType) || requiresEula(family, fontMap, userFlags))
+export function shouldShowEula(family: string, fontMap: Record<string, any>, userFlags: Record<string, boolean>, editorType: FEditorType): boolean {
+  return !!isGoogleFontSource(family, fontMap) && (isEditorTypeExcluded(family, editorType) || requiresEula(family, fontMap, userFlags));
 }
 
 // Exported aliases for backward compatibility
-export const kd = AppleEulaConfigs
-export const Ie = splitFontsByEula
-export const h_ = getEulaConfigIfGoogleFont
-export const qG = hasAcceptedEula
-export const jb = requiresEula
-export const O = shouldShowEula
-export const _D = isEditorTypeExcluded
-export const Rh = isGoogleFontSource
-export const oT = showEulaModal
-export const Cj = maybeShowEulaModal
-export const i6 = handleMissingFontsEula
+export const kd = AppleEulaConfigs;
+export const Ie = splitFontsByEula;
+export const h_ = getEulaConfigIfGoogleFont;
+export const qG = hasAcceptedEula;
+export const jb = requiresEula;
+export const O = shouldShowEula;
+export const _D = isEditorTypeExcluded;
+export const Rh = isGoogleFontSource;
+export const oT = showEulaModal;
+export const Cj = maybeShowEulaModal;
+export const i6 = handleMissingFontsEula;

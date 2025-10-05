@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { AuthFlowStep } from "../905/862321";
 import { SvgComponent } from "../905/714743";
 import { TrackingProvider, TrackedButton } from "../figma_app/831799";
-import { A } from "../figma_app/722506";
+import { SignedOutSignUpModal } from "../figma_app/722506";
 import { FL } from "../figma_app/248365";
 import { A as _$$A } from "../figma_app/122760";
 import p, { loggedOutCommunityActionModal, modalCloseButton } from "../figma_app/727769";
@@ -24,7 +24,7 @@ function _({
     children: jsx(_$$A, {
       className: loggedOutCommunityActionModal,
       onClick: i,
-      children: jsx(A, {
+      children: jsx(SignedOutSignUpModal, {
         props: {
           headerText: e,
           icon: t

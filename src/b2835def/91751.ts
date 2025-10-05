@@ -7,7 +7,7 @@ import { Xr } from "../figma_app/27355";
 import { useEffect } from "react";
 import { N } from "../905/57692";
 import { IconButton } from "../905/443068";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { stylex } from "@stylexjs/stylex";
 import { noop } from 'lodash-es';
 import { _ as _$$_ } from "../figma_app/658134";
@@ -63,7 +63,7 @@ function _({
         children: i
       });
     case "dialog":
-      return jsx(_$$d, {
+      return jsx(DialogTriggerButton, {
         "aria-label": r,
         "aria-expanded": e,
         disabled: t,

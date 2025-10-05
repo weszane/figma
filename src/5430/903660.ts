@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import i from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
-import { A5 } from "../figma_app/209680";
+import { SelectDropdown } from "../figma_app/209680";
 import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { PricingOptions } from "../905/237873";
 import { n as _$$n } from "../5430/859486";
@@ -25,7 +25,7 @@ export function $$p1({
   value: t,
   size: r
 }) {
-  return jsx(A5, {
+  return jsx(SelectDropdown, {
     name: getI18nString("community.landing_page.dropdown_filter__paid"),
     onUpdate: ([t]) => {
       e(t);

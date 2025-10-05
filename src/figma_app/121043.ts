@@ -5,7 +5,7 @@ import { Button } from "../905/521428";
 import { setupToggleButton } from "../905/167712";
 import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
-import { T as _$$T } from "../905/745591";
+import { AnnouncementPrimitive } from "../905/745591";
 import { V as _$$V } from "../905/291719";
 import { z as _$$z } from "../905/947624";
 import { m as _$$m } from "../figma_app/203842";
@@ -31,7 +31,7 @@ import { MediaQuerySvgComponent } from "../905/331623";
 import { i as _$$i, L as _$$L } from "../figma_app/942671";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { handleAtomEvent } from "../905/502364";
-import { c as _$$c } from "../figma_app/617427";
+import { WithTrackedButtonLarge } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { showModalHandler, hideSpecificModal } from "../905/156213";
@@ -338,7 +338,7 @@ let $$eD3 = memo(function ({
     label,
     tooltipIconComponent
   } = $$eP9();
-  return shouldShow ? jsx(_$$T, {
+  return shouldShow ? jsx(AnnouncementPrimitive, {
     className: e1,
     "data-tooltip-show-right": e,
     "data-tooltip-type": KindEnum.TEXT,
@@ -519,7 +519,7 @@ let $$eB8 = memo(function (e) {
   return jsx("span", {
     className: cssBuilderInstance.mr8.$,
     "data-preferred-theme": e.useDarkTheme ? "dark" : void 0,
-    children: jsx(_$$c, {
+    children: jsx(WithTrackedButtonLarge, {
       variant: "secondary",
       "aria-label": getI18nString("fullscreen.toolbar.log_in"),
       onClick: () => {

@@ -38,15 +38,15 @@ import { KindEnum } from "../905/129884";
 import { PluginImage } from "../905/480825";
 import { Ro } from "../figma_app/805373";
 import { f as _$$f2 } from "../figma_app/750432";
-import { W as _$$W } from "../905/316655";
+import { ProfileFollowButton } from "../905/316655";
 import { Qi } from "../figma_app/599917";
 import { a as _$$a } from "../905/889612";
 import { ho, X$, YW } from "../figma_app/870683";
 import { Ek } from "../905/483217";
 import { Ij } from "../905/988303";
 import { Cf, it } from "../905/504727";
-import { l as _$$l } from "../905/690005";
-import { G$, FF } from "../figma_app/588092";
+import { registerLoggedOutCommunityActionModal } from "../905/690005";
+import { COMMUNITY_OPT_IN_MODAL_NAME, CommunityOnboardingVariation } from "../figma_app/588092";
 import { H as _$$H } from "../905/209153";
 import { Bz, kj, h1, mH, ZX, eB, cT, wr, Ak, vG, wA as _$$wA, Az, K9, Ry, Tk, jG, qP, ZR, _ as _$$_, JM, cR, i1, __, t5, HC, dB, bI, vz, Z2, Ls, jq, q2, o_, IM, Gf, U$, w as _$$w, _F, bs, gx, MN, uB, Rw, Wf, hz, y as _$$y, hA, Pw, Ys, XC, sn, uu, a_, s3, kP, Ah, CD, Vz, my as _$$my, NB, Jt, zb, H as _$$H2, Yt, sj, Ai, tr, Ll, IC, pt, FK, uy, HG, DU, W8, kl, r9, TD, O3, _7, k1, u0, oQ, iR, t9, x7 } from "../905/417669";
 import { A as _$$A } from "../6828/409073";
@@ -388,7 +388,7 @@ export function $$eb5({
           origin: "plugin_install_signed_out"
         }));
         f(showModalHandler({
-          type: _$$l,
+          type: registerLoggedOutCommunityActionModal,
           data: {
             headerText: getI18nString("community.profiles.save_this_plugin_to_give_you_and_figma_a_boost"),
             icon: _$$A2,
@@ -674,9 +674,9 @@ function eT(e, t) {
     },
     onProfileCreate: r => {
       e(showModalHandler({
-        type: G$,
+        type: COMMUNITY_OPT_IN_MODAL_NAME,
         data: {
-          variations: [FF.OPT_IN],
+          variations: [CommunityOnboardingVariation.OPT_IN],
           userId: r.id,
           onFinish: () => e(_$$C2({
             id: t.pluginId,
@@ -876,7 +876,7 @@ $$ev7.defaultProps = {
               children: e.location
             }), jsxs("div", {
               className: k1,
-              children: [!this.props.isOwnProfile && jsx(_$$W, {
+              children: [!this.props.isOwnProfile && jsx(ProfileFollowButton, {
                 profile: e,
                 onClick: this.updateFollowInfoOnFollowClick,
                 onError: this.updateFollowInfoOnFollowClick

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, createContext, useContext, cloneElement, useMemo, useCallback, useState, useRef, forwardRef, createRef, useEffect, useLayoutEffect } from "react";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { stylex, props } from "@stylexjs/stylex";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { d as _$$d, k as _$$k2 } from "../5421/548912";
@@ -3707,7 +3707,7 @@ function nY() {
   return jsx("div", {
     className: "x10l6tqk x10a8y8t x1vjfegm x78zum5 xl56j7k x6s0dn4 x47corl",
     "data-testid": "html-preview-loading-overlay",
-    children: jsx(_$$k, {})
+    children: jsx(LoadingSpinner, {})
   });
 }
 export function $$nq0({

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { BrowserInfo } from "../figma_app/778880";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { TrackedLink } from "../905/160095";
 import { showModalHandler } from "../905/156213";
 import { googleDeviceIframeModal } from "../905/219868";
@@ -10,7 +10,7 @@ export function $$c0({
   title: t
 }) {
   let i = useDispatch();
-  return BrowserInfo.isMeetDevice ? jsx($z, {
+  return BrowserInfo.isMeetDevice ? jsx(WithTrackedButton, {
     variant: "link",
     onClick: () => i(showModalHandler({
       type: googleDeviceIframeModal,

@@ -8,7 +8,7 @@ import { isValidEmail } from "../figma_app/416935";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
@@ -66,14 +66,14 @@ let $$w0 = registerModal(function (e) {
           })]
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               variant: "secondary",
               onClick: e.onClose,
               trackingProperties: {
                 trackingDescriptor: UpgradeAction.CANCEL
               },
               children: renderI18nText("payments.cancel")
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               type: "submit",
               onClick: () => {
                 if (e.isOrg && C()) {

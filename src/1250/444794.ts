@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { Button, ButtonWide } from "../905/521428";
 import { Link } from "../905/438674";
@@ -18,7 +18,7 @@ import { Qp, JR, Wi } from "../figma_app/162641";
 import { A as _$$A } from "../905/615098";
 import { DesignsList } from "../905/171275";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { e6 } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Q as _$$Q } from "../905/978641";
 import { ce, Lm, U_, mF } from "../figma_app/755939";
@@ -51,7 +51,7 @@ export function $$z1() {
     className: cssBuilderInstance.flexColumn.alignCenter.pt32.pb16.$,
     children: jsx("div", {
       className: cssBuilderInstance.mxAuto.w24.h24.$,
-      children: jsx(_$$k, {})
+      children: jsx(LoadingSpinner, {})
     })
   });
 }
@@ -460,7 +460,7 @@ function en({
       document.dispatchEvent(i);
     }
   }, [t]);
-  return jsxs(e6, {
+  return jsxs(WithTrackedPopupButtonPrimitive, {
     ref: d,
     onClick: t,
     actionOnPointerDown: !0,

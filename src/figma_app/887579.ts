@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories } from "../905/165054";
 import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { LinkPrimitive } from "../figma_app/496441";
 import { Link } from "../905/438674";
 import { useSubscription } from "../figma_app/288654";
@@ -137,7 +137,7 @@ function N({
       style: {
         marginRight: 4
       },
-      children: jsx(k, {
+      children: jsx(LoadingSpinner, {
         size: "sm"
       })
     }) : void 0,

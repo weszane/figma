@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, memo } from "react";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { Q } from "../figma_app/447352";
 import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -64,7 +64,7 @@ export let $$b1 = memo(function ({
 }) {
   return jsx(AutoInteractableWrapper, {
     name: "independent_corner_radius_toggle",
-    children: jsx(_$$d, {
+    children: jsx(DialogTriggerButton, {
       actionOnPointerDown: !0,
       "aria-expanded": e,
       onClick: () => {

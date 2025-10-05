@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { range } from "../figma_app/492908";
 import { noop } from 'lodash-es';
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { Link } from "../905/438674";
 import c from "classnames";
 import { Y1 } from "../905/143116";
@@ -90,7 +90,7 @@ function k({
           children: renderI18nText("browse_templates_modal.context_menu.view_original_file")
         }), jsx("span", {
           className: cssBuilderInstance.if("loading" !== c.status, cssBuilderInstance.invisible).$,
-          children: jsx(_$$k, {})
+          children: jsx(LoadingSpinner, {})
         })]
       })
     })]
@@ -263,7 +263,7 @@ export function $$W1() {
     height: "fill-parent",
     verticalAlignItems: "center",
     horizontalAlignItems: "center",
-    children: jsx(_$$k, {
+    children: jsx(LoadingSpinner, {
       size: "lg"
     })
   });

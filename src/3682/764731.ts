@@ -20,7 +20,7 @@ import { A as _$$A } from "../3276/51271";
 import { K as _$$K } from "../3276/330497";
 import { QH } from "../9410/132424";
 import { U1 } from "../figma_app/343967";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { ButtonPrimitive } from "../905/632989";
 import { I as _$$I } from "../905/932503";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -1289,7 +1289,7 @@ remote: ${s}`);
               userId: user.id,
               onMuteButtonClickCallback: ef,
               disabled: call.microphonePermissionDenied
-            }), jsx(_$$d, {
+            }), jsx(DialogTriggerButton, {
               "aria-expanded": en,
               "aria-label": getI18nString("collaboration.voice.settings"),
               ref: ec,

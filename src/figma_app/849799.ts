@@ -8,7 +8,7 @@ import { Link } from "../905/438674";
 import { InputComponent } from "../905/185998";
 import { Textarea } from "../905/909590";
 import { Checkbox } from "../905/274480";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ButtonLarge } from "../905/521428";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { setupThemeContext } from "../905/614223";
@@ -249,7 +249,7 @@ export let $$L0 = function (e) {
             }), function (e, t, r) {
               let i = jsx("span", {
                 className: "form-module--inlineLoadingSpinner--DrfkC",
-                children: jsx(_$$k, {
+                children: jsx(LoadingSpinner, {
                   size: "md",
                   loadingText: getI18nString("report_abuse.submit_report_button_loading_text")
                 })

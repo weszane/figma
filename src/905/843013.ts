@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
 import { ButtonPrimitive } from "../905/632989";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { hx } from "../905/66449";
+import { useKeyboardNavigationForClickable } from "../905/66449";
 import { H } from "../905/348433";
 import { D } from "../905/169680";
 import { RU, hv, z_, wx, m_, i0 } from "../905/835035";
@@ -24,7 +24,7 @@ export function $$u0({
   let {
     setKeyboardNavigationElement,
     onClickWithFocus
-  } = hx({
+  } = useKeyboardNavigationForClickable({
     path: f,
     column: 0,
     onClick: h,

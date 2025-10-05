@@ -15,7 +15,7 @@ import { Ay as _$$Ay2 } from "../vendor/937019";
 import { A as _$$A7 } from "../vendor/572313";
 import { A as _$$A8 } from "../vendor/787998";
 import { A as _$$A9 } from "../vendor/706709";
-import { c2 } from "../figma_app/243213";
+import { setOrRemoveAttribute } from "../figma_app/243213";
 import { KeyCodes } from "../905/63728";
 import { sanitizeHtml } from "../905/69245";
 import { getI18nString } from "../905/303541";
@@ -524,7 +524,7 @@ export function $$j0({
         t.root.setAttribute("data-placeholder", "");
       };
       let i = () => {
-        c2(t.root, "data-placeholder", t.options.placeholder);
+        setOrRemoveAttribute(t.root, "data-placeholder", t.options.placeholder);
       };
       t.on(B.Quill.events.COMPOSITION_START, e);
       t.on(B.Quill.events.COMPOSITION_END, i);

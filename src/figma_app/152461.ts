@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
 import { ignoreUndefinedEqual } from "../905/382883";
 import { setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { H_ } from "../905/963340";
 import { J } from "../905/125993";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -22,7 +22,7 @@ export function $$g1() {
   } = $$f0();
   return jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       "aria-label": getI18nString("dev_handoff.code.settings.options"),
       htmlAttributes: {
         "data-tooltip-type": KindEnum.TEXT,

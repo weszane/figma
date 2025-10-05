@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { e as _$$e } from "../905/149844";
 import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
-import { e6 } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Z6 } from "../figma_app/451499";
 import { av } from "../figma_app/316316";
@@ -87,7 +87,7 @@ export function $$v1(e) {
   });
   let V = e.isNestedInConditional ? getI18nString("proto.prototype_panel.add_nested_action") : P ? getI18nString("sites.panel.add_interaction") : getI18nString("proto.prototype_panel.add");
   return jsxs(Fragment, {
-    children: [jsx(e6, {
+    children: [jsx(WithTrackedPopupButtonPrimitive, {
       ref: I,
       recordingKey: generateRecordingKey(recordingKey, "createActionDropdown"),
       className: R,

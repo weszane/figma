@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
 import { DialogBody, DialogContents, DialogHeader, DialogTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ModalRootComponent } from "../905/38914";
 import { setupAutofocusHandler } from "../905/128376";
 import { Button } from "../905/521428";
@@ -37,7 +37,7 @@ export function $$T0(e) {
     children: jsx("div", {
       className: cssBuilderInstance.flex.justifyCenter.$,
       "data-testid": "loading-spinner-container",
-      children: jsx(k, {})
+      children: jsx(LoadingSpinner, {})
     })
   });
   return jsx(ModalRootComponent, {

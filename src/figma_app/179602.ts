@@ -9,7 +9,7 @@ import { VisualBellActions } from "../905/302958";
 import { restrictProfileThunk, unrestrictProfileThunk } from "../figma_app/530167";
 import { profileServiceAPI } from "../905/608932";
 import { registerModal } from "../905/102752";
-import { y as _$$y } from "../905/617004";
+import { ProfileRowTile } from "../905/617004";
 import { ModalContainer } from "../figma_app/918700";
 import { tB, bV, Iy } from "../905/318500";
 export function $$f1(e) {
@@ -86,7 +86,7 @@ export function $$f1(e) {
     className: e.wrapperClassName ? e.wrapperClassName : "",
     children: jsx("div", {
       className: tB,
-      children: f.map(e => jsx(_$$y, {
+      children: f.map(e => jsx(ProfileRowTile, {
         profile: e,
         rightSide: e.is_restricted_by_current_user ? jsx(Button, {
           onClick: v.bind(null, e.id),

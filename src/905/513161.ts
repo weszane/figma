@@ -7,7 +7,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogTitle } from "../figma_app/272243";
 import { Link } from "../905/438674";
 import { ModalCloseButton } from "../905/17223";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { BellId } from "../905/576487";
@@ -47,7 +47,7 @@ export let $$b0 = registerModal(function ({
       className: "upsell_modals--footerRow--barMd modal--buttonRow--o2A0S",
       children: jsxs("div", {
         className: "upsell_modals--rightAlignedButtons--Y-exM",
-        children: [jsx($z, {
+        children: [jsx(WithTrackedButton, {
           variant: "secondary",
           onClick: () => {
             v(hideModal());

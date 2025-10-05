@@ -34,7 +34,7 @@ import { P as _$$P } from "../905/347284";
 import { fullscreenValue } from "../figma_app/455680";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { A as _$$A2 } from "../905/215698";
 import { l as _$$l } from "../905/479687";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -137,7 +137,7 @@ function Z(e) {
   } = setupMenu();
   return jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       "aria-label": getI18nString("fullscreen.properties_panel.edit_brush"),
       htmlAttributes: {
         "data-tooltip": getI18nString("fullscreen.properties_panel.edit_brush"),

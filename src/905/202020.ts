@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../905/521428";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { J } from "../905/125993";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -311,7 +311,7 @@ export function $$V0(e) {
       })
     }), jsx("div", {
       className: "branch_row--menuColumn--XSWVZ",
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         onClick: e => {
           if (e.stopPropagation(), e.preventDefault(), m) t(hideDropdownAction());else {
             let e = A.current;

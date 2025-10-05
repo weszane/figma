@@ -36,7 +36,7 @@ import { iX } from '../905/415545';
 import { A3, Di, gy, IS, my, Nz, rX, u_, v2 } from '../905/428481';
 import { isWebAnimationsApiSupported } from '../905/437800';
 import { IconButton } from '../905/443068';
-import { k as _$$k3 } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { handleAtomEvent } from '../905/502364';
 import { gX } from '../905/504768';
@@ -1981,7 +1981,7 @@ function nr(e) {
               viewportPositionFromClientPosition: e.viewportPositionFromClientPosition
             }, `thread-comment-${n.id}`)), e.isLoading && jsx('div', {
               className: wG,
-              children: jsx(_$$k3, {
+              children: jsx(LoadingSpinner, {
                 size: 'sm'
               })
             }), !e.commentCreationDisabled && jsx(_$$K, {

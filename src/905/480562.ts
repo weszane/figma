@@ -20,7 +20,7 @@ import { ms, MM, rr } from "../figma_app/236327";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { h as _$$h } from "../905/589458";
 import { o as _$$o } from "../905/918279";
-import { k as _$$k2 } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { dayjs } from "../905/920142";
 import { G5, S6 } from "../figma_app/795674";
 import { SvgComponent } from "../905/714743";
@@ -299,7 +299,7 @@ class eg extends PureComponent {
           className: Z,
           children: [jsx("div", {
             className: X,
-            children: jsx(_$$k2, {
+            children: jsx(LoadingSpinner, {
               size: "sm"
             })
           }), jsx("div", {
@@ -741,7 +741,7 @@ function eT({}) {
         className: Z,
         children: [jsx("div", {
           className: X,
-          children: jsx(_$$k2, {})
+          children: jsx(LoadingSpinner, {})
         }), jsx("div", {
           children: renderI18nText("design_systems.libraries_modal.loading_library_activity")
         })]

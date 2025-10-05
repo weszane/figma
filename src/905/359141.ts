@@ -8,7 +8,7 @@ import { Y as _$$Y2 } from '../905/26051';
 import { S as _$$S3 } from '../905/39877';
 import { d as _$$d2 } from '../905/49800';
 import { n1 } from '../905/55146';
-import { $_, ej as _$$ej, a8, bj, E4, hx, m3, p1, Tq, Y7 } from '../905/66449';
+import { useFocusElementWhenReady, SearchKeyboardNavigation, useKeyboardClickHandler, ConditionalKeyboardWrapper, useElementWithKeyboardArgs, useKeyboardNavigationForClickable, LibraryModalSections, useFocusRefElementWhenReady, KeyboardNavigationElement, KeyboardNavigationWrapper } from '../905/66449';
 import { U as _$$U2 } from '../905/103637';
 import { Q$ } from '../905/128313';
 import { KindEnum } from '../905/129884';
@@ -135,7 +135,7 @@ import { P as _$$P3 } from '../figma_app/582341';
 import { lX } from '../figma_app/588397';
 import { getCurrentTeam } from '../figma_app/598018';
 import { createTrackedAtom } from '../figma_app/615482';
-import { $z as _$$$z } from '../figma_app/617427';
+import { WithTrackedButton } from '../figma_app/617427';
 import { isPublishedLibraryWithAssets, isPublishedTeamLibrary, isTeamLibrary, LibraryPublishStatusEnum, PrimaryWorkflowEnum, PublishStatusEnum } from '../figma_app/633080';
 import { AssetFilterMode, getAssetKey, getAssetLibraryKey, getAssetVersion, LibrarySubscriptionContext, useCurrentUserOrg, useSubscribedAssets } from '../figma_app/646357';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
@@ -361,7 +361,7 @@ function eo({
       children: jsx(_$$S3, {
         publishedLibrary: e,
         onSubscribe: d,
-        kbPath: [m3.TabBodySection.Header],
+        kbPath: [LibraryModalSections.TabBodySection.Header],
         kbColumn: 3,
         entrypoint: 'details_view',
         positionForLogging: t,
@@ -566,13 +566,13 @@ function eB({
   let {
     setKeyboardNavigationElement,
     onClickWithFocus
-  } = hx({
+  } = useKeyboardNavigationForClickable({
     path: t,
     column: i,
     onClick: z
   });
   let Y = useRef(null);
-  let q = a8();
+  let q = useKeyboardClickHandler();
   let $ = useCallback(() => Y.current?.focus(), [Y]);
   let X = MB({
     onBoth: G,
@@ -816,8 +816,8 @@ function eK({
   let {
     setKeyboardNavigationElement,
     onClickWithFocus
-  } = hx({
-    path: [m3.TabBodySection.Body, a, m3.TeamsListSection.SeeMore],
+  } = useKeyboardNavigationForClickable({
+    path: [LibraryModalSections.TabBodySection.Body, a, LibraryModalSections.TeamsListSection.SeeMore],
     onClick: l,
     disabled: !s
   });
@@ -847,7 +847,7 @@ function eK({
       },
       children: e.slice(0, 3).map((e, t) => jsx(eB, {
         library: e,
-        kbPath: [m3.TabBodySection.Body, a, m3.TeamsListSection.CardRow],
+        kbPath: [LibraryModalSections.TabBodySection.Body, a, LibraryModalSections.TeamsListSection.CardRow],
         column: t,
         teamPositionForLogging: a + 1,
         positionForLogging: t + 1
@@ -884,7 +884,7 @@ function eZ({
 }) {
   let {
     setKeyboardNavigationElement
-  } = hx({
+  } = useKeyboardNavigationForClickable({
     path: i,
     column: r
   });
@@ -971,13 +971,13 @@ function eQ({
       innerClassName: cssBuilderInstance.px16.pb16.$,
       children: jsx(eG, {
         libraries: filteredLibraries,
-        kbPath: [m3.TabBodySection.Body]
+        kbPath: [LibraryModalSections.TabBodySection.Body]
       })
     }), canFilterLibraries && jsx(eX, {
       children: jsx(eZ, {
         filterOnAdded,
         toggleFilterOnAdded,
-        kbPath: [m3.TabBodySection.Footer]
+        kbPath: [LibraryModalSections.TabBodySection.Footer]
       })
     })]
   });
@@ -1226,7 +1226,7 @@ function e4({
       children: jsx(e7, {
         workspace: e,
         onClick: i,
-        kbPath: [m3.TabBodySection.Body, m3.WorkspacesSection.CurrentWorkspace]
+        kbPath: [LibraryModalSections.TabBodySection.Body, LibraryModalSections.WorkspacesSection.CurrentWorkspace]
       })
     })]
   });
@@ -1254,19 +1254,19 @@ function e3({
       children: [e.map((e, i) => jsx(e7, {
         workspace: e,
         onClick: () => t(e.id, i),
-        kbPath: [m3.TabBodySection.Body, m3.WorkspacesSection.AllWorkspaces, Math.floor(i / 3)],
+        kbPath: [LibraryModalSections.TabBodySection.Body, LibraryModalSections.WorkspacesSection.AllWorkspaces, Math.floor(i / 3)],
         column: i % 3
       }, e.id)), i && jsx(e8, {
         icon: jsx(_$$p, {}),
         title: getI18nString('design_systems.libraries_modal.draft_libraries'),
         onClick: () => t('drafts', s),
-        kbPath: [m3.TabBodySection.Body, m3.WorkspacesSection.AllWorkspaces, Math.floor(s / 3)],
+        kbPath: [LibraryModalSections.TabBodySection.Body, LibraryModalSections.WorkspacesSection.AllWorkspaces, Math.floor(s / 3)],
         column: s % 3
       }), r && jsx(e8, {
         icon: jsx(eh, {}),
         title: getI18nString('design_systems.libraries_modal.other_libraries'),
         onClick: () => t('other', o),
-        kbPath: [m3.TabBodySection.Body, m3.WorkspacesSection.AllWorkspaces, Math.floor(o / 3)],
+        kbPath: [LibraryModalSections.TabBodySection.Body, LibraryModalSections.WorkspacesSection.AllWorkspaces, Math.floor(o / 3)],
         column: o % 3
       })]
     })]
@@ -1312,7 +1312,7 @@ function e7({
   let {
     setKeyboardNavigationElement,
     onClickWithFocus
-  } = hx({
+  } = useKeyboardNavigationForClickable({
     path: i,
     column: r,
     onClick: t
@@ -1350,7 +1350,7 @@ function e8({
   let {
     setKeyboardNavigationElement,
     onClickWithFocus
-  } = hx({
+  } = useKeyboardNavigationForClickable({
     path: r,
     column: a,
     onClick: i
@@ -1897,7 +1897,7 @@ function tO({
   }, [t]);
   let {
     setKeyboardNavigationElement
-  } = hx({
+  } = useKeyboardNavigationForClickable({
     path: e,
     column: 1
   });
@@ -1959,7 +1959,7 @@ function tz({
   }, [isPublishingModalEnabled, isPublished]);
   let {
     setKeyboardNavigationElement
-  } = hx({
+  } = useKeyboardNavigationForClickable({
     path: t,
     column: i,
     disabled: d
@@ -2168,11 +2168,11 @@ function tZ({
   }) : jsx(Fragment, {
     children: e.data.map((e, r) => e.library_key === t?.libraryKey ? jsx(tW, {
       openFile: t,
-      kbPath: [m3.TabBodySection.Body, r],
+      kbPath: [LibraryModalSections.TabBodySection.Body, r],
       libraryGuidelinesEnabled: i
     }, e.library_key) : jsx(tY, {
       publishedLibrary: e,
-      kbPath: [m3.TabBodySection.Body, r]
+      kbPath: [LibraryModalSections.TabBodySection.Body, r]
     }, e.library_key))
   });
 }
@@ -2430,7 +2430,7 @@ function ic() {
     }, [e, t, sessionId]);
   }();
   return renderI18nText('design_systems.libraries_modal.share_components_on_new_plan', {
-    upgradePlanText: jsx(_$$$z, {
+    upgradePlanText: jsx(WithTrackedButton, {
       variant: 'link',
       onClick: e,
       trackingProperties: {
@@ -2471,7 +2471,7 @@ function ip() {
       children: renderI18nText('design_systems.libraries_modal.assets_created_in_this_file')
     }), jsx(tW, {
       openFile: e,
-      kbPath: [m3.InThisFileSection.CreatedInThisFile],
+      kbPath: [LibraryModalSections.InThisFileSection.CreatedInThisFile],
       libraryGuidelinesEnabled: i
     }), isBranchAlt(e) && jsx(t9, {})]
   }) : jsx(id, {}) : null;
@@ -2493,7 +2493,7 @@ function ih({
       children: renderI18nText('design_systems.libraries_modal.libraries_added_to_this_file')
     }), e.data?.map((e, t) => jsx(tY, {
       publishedLibrary: e,
-      kbPath: [m3.InThisFileSection.AddedToThisFile, t]
+      kbPath: [LibraryModalSections.InThisFileSection.AddedToThisFile, t]
     }, e.library_key))]
   });
 }
@@ -2504,8 +2504,8 @@ function ig({
   let {
     setKeyboardNavigationElement,
     onClickWithFocus
-  } = hx({
-    path: [m3.InThisFileSection.MissingLibrariesButton],
+  } = useKeyboardNavigationForClickable({
+    path: [LibraryModalSections.InThisFileSection.MissingLibrariesButton],
     onClick: t
   });
   return e.status !== 'loaded' ? jsx('div', {
@@ -2541,7 +2541,7 @@ function iA({
       children: renderI18nText('design_systems.libraries_modal.used_in_this_file_header')
     }), e.data.map((e, t) => jsx(tY, {
       publishedLibrary: e,
-      kbPath: [m3.InThisFileSection.UsedInThisFile, t]
+      kbPath: [LibraryModalSections.InThisFileSection.UsedInThisFile, t]
     }, e.library_key))]
   });
 }
@@ -2685,7 +2685,7 @@ function iv() {
           children: t.status === 'loading' ? jsx(iI, {}) : jsxs(Fragment, {
             children: [jsx(eG, {
               libraries: s,
-              kbPath: [m3.TabBodySection.Body]
+              kbPath: [LibraryModalSections.TabBodySection.Body]
             }), jsx(_$$W2.PageViewTracker, {
               metadata: o
             })]
@@ -2787,8 +2787,8 @@ function np({
   let {
     ref,
     kbArgs
-  } = E4({
-    path: [m3.UpdatesSection.List, i, m3.UpdatesListAssetSection[e.type], a],
+  } = useElementWithKeyboardArgs({
+    path: [LibraryModalSections.UpdatesSection.List, i, LibraryModalSections.UpdatesListAssetSection[e.type], a],
     disabled: !toggleReviewUpdatesModal
   });
   return jsxs('div', {
@@ -2827,7 +2827,7 @@ function np({
           width: 86
         }
       })]
-    }), toggleReviewUpdatesModal ? jsx(bj, {
+    }), toggleReviewUpdatesModal ? jsx(ConditionalKeyboardWrapper, {
       kbArgs,
       elementRef: ref,
       children: jsx(ButtonPrimitive, {
@@ -3117,8 +3117,8 @@ function ny({
   let {
     ref,
     kbArgs
-  } = E4({
-    path: [m3.UpdatesSection.List]
+  } = useElementWithKeyboardArgs({
+    path: [LibraryModalSections.UpdatesSection.List]
   });
   useEffect(() => {
     if (Y && !G) {
@@ -3173,7 +3173,7 @@ function ny({
       })
     }), jsx('div', {
       className: 'updates--viewAllButton--RpxHV',
-      children: c ? jsx(Tq, {
+      children: c ? jsx(KeyboardNavigationElement, {
         elementRef: ref,
         kbArgs,
         children: jsx(Button, {
@@ -3207,8 +3207,8 @@ function ny({
   let {
     ref: _ref,
     kbArgs: _kbArgs
-  } = E4({
-    path: [m3.UpdatesSection.Footer, m3.UpdatesSectionFooter.AllPagesToggle]
+  } = useElementWithKeyboardArgs({
+    path: [LibraryModalSections.UpdatesSection.Footer, LibraryModalSections.UpdatesSectionFooter.AllPagesToggle]
   });
   !function (e, t) {
     let i = e.current === document.activeElement;
@@ -3247,7 +3247,7 @@ function ny({
       })]
     }), jsxs('div', {
       className: 'updates--updateFooter--GiIYe',
-      children: [jsx(bj, {
+      children: [jsx(ConditionalKeyboardWrapper, {
         elementRef: _ref,
         kbArgs: _kbArgs,
         children: jsx(_$$d2, {
@@ -3462,7 +3462,7 @@ function nx() {
   let {
     tabPanelPropsMap
   } = useLibraryModalContext();
-  return jsx(_$$ej, {
+  return jsx(SearchKeyboardNavigation, {
     children: jsxs('main', {
       className: 'library_modal_tab_body--mainContent--JMEJp',
       children: [jsx(nS, {
@@ -3509,7 +3509,7 @@ function nS(e) {
     })
   });
 }
-let nF = [m3.TabStripSection.Search];
+let nF = [LibraryModalSections.TabStripSection.Search];
 function nM() {
   let {
     searchQuery,
@@ -3523,7 +3523,7 @@ function nM() {
     onFocusSearchBar();
   }, [onFocusSearchBar]);
   let l = useRef(null);
-  p1(l);
+  useFocusRefElementWhenReady(l);
   useEffect(() => {
     let e = lo();
     let t = t => {
@@ -3580,10 +3580,10 @@ function nU({
     setKeyboardNavigationElement,
     keyboardNavigationItem
   } = useKeyboardNavigationItem({
-    path: [m3.TabStripSection.Tabs, o],
+    path: [LibraryModalSections.TabStripSection.Tabs, o],
     onFocusThroughKeyboardNavigation: d
   });
-  return ($_(keyboardNavigationItem, l), a) ? jsxs('div', {
+  return (useFocusElementWhenReady(keyboardNavigationItem, l), a) ? jsxs('div', {
     'className': l ? 'library_modal_tab--activeTabContents--US-Xs library_modal_tab--tabContentsShared--V3tVN' : 'library_modal_tab--tabContents--Xaob1 library_modal_tab--tabContentsShared--V3tVN',
     'onClick': d,
     'role': 'tab',
@@ -3608,7 +3608,7 @@ function nV() {
     tabPropsMap
   } = useLibraryModalContext();
   let t = getParentOrgId();
-  return jsx(Y7, {
+  return jsx(KeyboardNavigationWrapper, {
     children: jsxs('nav', {
       className: 'library_modal_tab_strip--tabStrip----mnU',
       children: [jsx(nM, {}), jsx(nB, {}), tabCategories.map((i, a) => {

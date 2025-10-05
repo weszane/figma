@@ -28,7 +28,7 @@ import { OrganizationType } from "../905/833838";
 import { ManifestEditorType } from "../figma_app/155287";
 import { orgUserService } from "../figma_app/124713";
 import { registerModal } from "../905/102752";
-import { l as _$$l } from "../905/690005";
+import { registerLoggedOutCommunityActionModal } from "../905/690005";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { j as _$$j } from "../905/689815";
 import { A as _$$A } from "../6828/903761";
@@ -133,7 +133,7 @@ let $$V2 = createOptimistThunk((e, t) => {
     origin: "plugin_try_signed_out"
   }));
   e.dispatch(showModalHandler({
-    type: _$$l,
+    type: registerLoggedOutCommunityActionModal,
     data: {
       headerText: r,
       icon: t.isWidget ? _$$A2 : _$$A,

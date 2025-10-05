@@ -11,7 +11,7 @@ import { SortOptions } from "../figma_app/324237";
 import { BrowseUtils } from "../905/942203";
 import { ResourceTypes } from "../905/178090";
 import { getEditorTypeForResource, anchorEditorResource } from "../figma_app/773663";
-import { A5 } from "../figma_app/209680";
+import { SelectDropdown } from "../figma_app/209680";
 import { Yf, AV } from "../5430/297093";
 import { km, u9, hs, R6 } from "../5430/184698";
 import { F } from "../5430/993414";
@@ -24,7 +24,7 @@ function g({
   value: t,
   isSearch: r
 }) {
-  return jsx(A5, {
+  return jsx(SelectDropdown, {
     name: getI18nString("community.landing_page.dropdown_filter__creators"),
     onUpdate: ([t]) => {
       e(t);
@@ -42,7 +42,7 @@ function L({
   price: i,
   size: n
 }) {
-  return jsx(A5, {
+  return jsx(SelectDropdown, {
     name: getI18nString("community.curated_page.sort"),
     onUpdate: ([t]) => e(t),
     initialValues: [t],

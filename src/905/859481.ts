@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { A as _$$A } from "../905/891805";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -251,7 +251,7 @@ function G({
 }) {
   return l && t ? jsx(AutoInteractableWrapper, {
     name: "toggle_advanced_settings_button",
-    children: jsx(_$$d, {
+    children: jsx(DialogTriggerButton, {
       "aria-expanded": s,
       onClick: l,
       disabled: e,

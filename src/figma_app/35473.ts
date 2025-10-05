@@ -4,7 +4,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import s from "classnames";
 import { h8 } from "../figma_app/478006";
 import { S } from "../figma_app/109947";
-import { Me } from "../figma_app/617427";
+import { WithTrackedIconButton } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { useDropdownState } from "../905/848862";
@@ -32,7 +32,7 @@ export function $$g0({
     onClose,
     shouldHide
   } = r;
-  let A = jsx(Me, {
+  let A = jsx(WithTrackedIconButton, {
     "aria-label": getI18nString("fullscreen.toolbar.secondary_toolbar.close"),
     onClick: r.onClose,
     children: jsx(_$$A, {

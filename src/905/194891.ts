@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 export function $$s0({
   containerClassName: e
 }) {
@@ -10,7 +10,7 @@ export function $$s0({
     return () => clearTimeout(e);
   }, []), t) ? jsx("div", {
     className: e,
-    children: jsx(k, {
+    children: jsx(LoadingSpinner, {
       size: "sm"
     })
   }) : null;

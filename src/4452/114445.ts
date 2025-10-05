@@ -18,7 +18,7 @@ import { FOrganizationLevelType, FUserRoleType } from "../figma_app/191312";
 import { OrgUsersByIdView } from "../figma_app/43951";
 import { useTeamPlanFeatures } from "../figma_app/465071";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { lR, e6 } from "../figma_app/617427";
+import { WithTrackedButtonLargeWide, WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Zu } from "../4452/396452";
 import { getRumLoggingConfig } from "../905/16237";
@@ -53,7 +53,7 @@ function w({
   let o = getRumLoggingConfig();
   return jsxs("div", {
     className: cssBuilderInstance.wFull.flex.flexColumn.gap8.$,
-    children: [jsx(lR, {
+    children: [jsx(WithTrackedButtonLargeWide, {
       onClick: () => {
         t();
         e();
@@ -67,7 +67,7 @@ function w({
         text: getI18nString("admin_dashboard.request_flyout.approve"),
         showSpinner: "approving" === r && i.has(n)
       })
-    }), jsx(lR, {
+    }), jsx(WithTrackedButtonLargeWide, {
       onClick: () => {
         a();
         e();
@@ -150,7 +150,7 @@ function V({
     children: [jsx("div", {
       className: cssBuilderInstance.colorTextSecondary.$,
       children: e
-    }), a ? jsx(e6, {
+    }), a ? jsx(WithTrackedPopupButtonPrimitive, {
       className: "xt0psk2 xh8yej3 x1e9o9zf xt0b8zv",
       onClick: a,
       children: n

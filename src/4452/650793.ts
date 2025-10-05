@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { J } from "../905/125993";
 import i, { a } from "../905/964520";
-import { Me } from "../figma_app/617427";
+import { WithTrackedIconButton } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { Hv, Ib, oi } from "../figma_app/527041";
@@ -32,7 +32,7 @@ export function $$m3({
     "data-testid": "multi-select-list-menu",
     children: [jsx("div", {
       className: isOpen ? void 0 : Ib,
-      children: jsx(Me, {
+      children: jsx(WithTrackedIconButton, {
         ...getTriggerProps(),
         "aria-label": getI18nString("multi_select_list.more"),
         "data-testid": "multi-select-list-menu-cell-icon",
@@ -57,7 +57,7 @@ function _({
   });
 }
 export function $$p2() {
-  return jsx(Me, {
+  return jsx(WithTrackedIconButton, {
     "aria-label": getI18nString("multi_select_list.manage"),
     trackingProperties: {
       trackingDescriptor: UpgradeAction.MANAGE

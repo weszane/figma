@@ -14,7 +14,7 @@ import { Xr } from '../figma_app/27355';
 import { FProductAccessType } from '../figma_app/191312';
 import { MQ } from '../figma_app/197432';
 import { DialogActionStrip, DialogBody, DialogHiddenTitle, DialogContents, DialogFooter } from '../figma_app/272243';
-import { $z } from '../figma_app/617427';
+import { WithTrackedButton } from '../figma_app/617427';
 import { TrackingProvider } from '../figma_app/831799';
 let v = {
   title: {
@@ -54,7 +54,7 @@ function I(e) {
         })]
       }), jsx(DialogFooter, {
         children: jsx(DialogActionStrip, {
-          children: jsx($z, {
+          children: jsx(WithTrackedButton, {
             autoFocus: !0,
             variant: 'primary',
             onClick: e.onRequestUpgrade || e.onClose,

@@ -6,7 +6,7 @@ import { stylex } from "@stylexjs/stylex";
 import { logger } from "../905/651849";
 import { LoadingRenderer } from "../905/211326";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { e6, c as _$$c, $z, lR } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive, WithTrackedButtonLarge, WithTrackedButton, WithTrackedButtonLargeWide } from "../figma_app/617427";
 import { TrackedLinkButton } from "../905/160095";
 let m = {
   white: {
@@ -54,7 +54,7 @@ export function $$h0(e) {
   if ("custom" === f) {
     let i = e.ctaButtonMeta.customVariantStyles || [];
     t = function (e) {
-      return jsx(e6, {
+      return jsx(WithTrackedPopupButtonPrimitive, {
         ...e,
         ...stylex.props(i),
         children: e.children
@@ -63,14 +63,14 @@ export function $$h0(e) {
   } else if ("white" === f) t = function (e) {
     return jsx(setupThemeContext, {
       mode: "light",
-      children: jsx(e6, {
+      children: jsx(WithTrackedPopupButtonPrimitive, {
         ...e,
         ...stylex.props(m.white),
         children: e.children
       })
     });
   };else {
-    if (large && "button" === ctaButtonMeta.type) return jsx(_$$c, {
+    if (large && "button" === ctaButtonMeta.type) return jsx(WithTrackedButtonLarge, {
       variant: "primary-large-wide" === f ? "primary" : f,
       onClick: ctaButtonMeta.onClick,
       trackingProperties: {
@@ -84,7 +84,7 @@ export function $$h0(e) {
       },
       children: g
     });
-    t = large ? _$$c : $z;
+    t = large ? WithTrackedButtonLarge : WithTrackedButton;
   }
   switch (f) {
     case "custom":
@@ -110,7 +110,7 @@ export function $$h0(e) {
             children: g
           });
         case "text":
-          return jsx($z, {
+          return jsx(WithTrackedButton, {
             variant: "ghost",
             onClick: ctaButtonMeta.onClick,
             ..._,
@@ -133,7 +133,7 @@ export function $$h0(e) {
         logger.warn(`[FeatureEducation] CTAButton with variant 'primary-large-wide' is not implemented for type '${ctaButtonMeta.type}'`);
         return null;
       }
-      return jsx(lR, {
+      return jsx(WithTrackedButtonLargeWide, {
         variant: "primary",
         onClick: ctaButtonMeta.onClick,
         disabled: ctaButtonMeta.disabled ?? ctaButtonMeta.isLoading,

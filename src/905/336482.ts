@@ -11,7 +11,7 @@ import { $S } from "../905/918620";
 import { deepEqual } from "../905/382883";
 import { Tabs } from "../905/150656";
 import { Button } from "../905/521428";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { useAtomValueAndSetter } from "../figma_app/27355";
@@ -673,7 +673,7 @@ function eM({
       onClick: () => {
         checkProgress() && submit?.();
       },
-      children: draftSubmissionResult?.result === "pending" || ea ? jsx(_$$k, {
+      children: draftSubmissionResult?.result === "pending" || ea ? jsx(LoadingSpinner, {
         size: "sm"
       }) : getI18nString("community.publishing.publish")
     }) : jsx(Button, {
@@ -1655,7 +1655,7 @@ function td({
         checkProgress() && submit?.();
       },
       "data-testid": "resource-publishing-hub-file-form-view-submit-button",
-      children: draftSubmissionResult?.result === "pending" || eh ? jsx(_$$k, {
+      children: draftSubmissionResult?.result === "pending" || eh ? jsx(LoadingSpinner, {
         size: "sm"
       }) : getI18nString("community.publishing.publish")
     }) : jsx(Button, {

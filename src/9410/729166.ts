@@ -38,7 +38,7 @@ import { i as _$$i2 } from '../905/415810';
 import { D as _$$D, d as _$$d } from '../905/433403';
 import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
-import { k as _$$k2 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
 import { bL as _$$bL, mc as _$$mc, c$, l9, WL } from '../905/493196';
@@ -500,7 +500,7 @@ let en = function ({
                 })
               }), _.queryStatus === _$$H.LOADING && jsx('div', {
                 className: 'component_browser_onboarding--loadingSpinnerContainer--LkuHL',
-                children: jsx(_$$k2, {})
+                children: jsx(LoadingSpinner, {})
               })]
             })
           }), x && jsx(B, {
@@ -564,7 +564,7 @@ function ea() {
         componentKey: o?.componentKey,
         fallback: jsx('div', {
           className: 'component_browser_container--loadingContainer--j9mkU',
-          children: jsx(_$$k2, {})
+          children: jsx(LoadingSpinner, {})
         }),
         errorFallback: jsx('div', {
           children: getI18nString('dev_handoff.component_browser_onboarding.error_loading_component_browser')
@@ -1085,7 +1085,7 @@ function tu() {
         style: {
           left: e
         },
-        children: jsx(_$$k2, {
+        children: jsx(LoadingSpinner, {
           size: 'lg'
         })
       })
@@ -1948,7 +1948,7 @@ function iQ() {
         style: {
           left: i
         },
-        children: jsx(_$$k2, {
+        children: jsx(LoadingSpinner, {
           size: 'lg'
         })
       })

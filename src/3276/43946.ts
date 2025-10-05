@@ -14,7 +14,7 @@ import { sendWithRetry } from "../905/910117";
 import { WN } from "../figma_app/638601";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useProjectFileCreationPermissions, canCreateFileType } from "../figma_app/687776";
-import { $z, Me, lR } from "../figma_app/617427";
+import { WithTrackedButton, WithTrackedIconButton, WithTrackedButtonLargeWide } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Link } from "../905/438674";
@@ -69,7 +69,7 @@ function el(e) {
     })
   }) : jsx("div", {
     className: cssBuilderInstance.wFull.$,
-    children: jsx($z, {
+    children: jsx(WithTrackedButton, {
       variant: "secondary",
       onClick: e.onClick,
       disabled: e.disabled,
@@ -132,7 +132,7 @@ function ed(e) {
               })
             }), jsx("div", {
               className: "announcement--announcementCloseButton--vgH6U",
-              children: jsx(Me, {
+              children: jsx(WithTrackedIconButton, {
                 "aria-label": getI18nString("general.close"),
                 onClick: e.onDismiss ? e.onDismiss : () => {
                   a(postUserFlag({
@@ -222,7 +222,7 @@ let eg = [{
       layoutStyle: "brand",
       mainButtonOverride: jsx(setupThemeContext, {
         brand: "seascape",
-        children: jsx(lR, {
+        children: jsx(WithTrackedButtonLargeWide, {
           variant: "primary",
           onClick: d,
           trackingProperties: {
@@ -353,7 +353,7 @@ let eg = [{
         className: cssBuilderInstance.wFull.$,
         children: jsx(setupThemeContext, {
           brand: "dev-handoff",
-          children: jsx(lR, {
+          children: jsx(WithTrackedButtonLargeWide, {
             variant: "primary",
             onClick: () => {
               r();
@@ -447,7 +447,7 @@ let eg = [{
       layoutStyle: "brand",
       mainButtonOverride: jsx(setupThemeContext, {
         brand: "dev-handoff",
-        children: jsx(lR, {
+        children: jsx(WithTrackedButtonLargeWide, {
           variant: "primary",
           onClick: () => {
             t && customHistory.redirect(buildFileUrl({

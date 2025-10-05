@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { props } from "@stylexjs/stylex";
 import { Xf } from "../figma_app/153916";
 import { LoadingSpinner } from "../figma_app/858013";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { qf } from "../4452/780544";
 import { getRumLoggingConfig } from "../905/16237";
@@ -20,7 +20,7 @@ if (443 == require.j) {}
 export function $$b2() {
   let e = useDispatch();
   let t = getSelectedViewType();
-  return "orgAdminSettings" !== t && "seatRequests" !== t ? jsx(Fragment, {}) : jsx($z, {
+  return "orgAdminSettings" !== t && "seatRequests" !== t ? jsx(Fragment, {}) : jsx(WithTrackedButton, {
     variant: "secondary",
     onClick: () => {
       e(selectViewAction({
@@ -54,7 +54,7 @@ function j() {
   let a = t.summary.currency;
   let r = t.summary.monthly_subscription ? RenewalTermEnum.MONTH : RenewalTermEnum.YEAR;
   let i = getRumLoggingConfig();
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     htmlAttributes: {
       "data-testid": "admin-dashboard-approval-settings-button",
       "data-onboarding-key": qf
@@ -88,7 +88,7 @@ function I({
     isCurfEnabledForMembers: t === FVisibilityType.MEMBERS
   });
   let p = getRumLoggingConfig();
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     htmlAttributes: {
       "data-testid": "admin-dashboard-approval-settings-button",
       "data-onboarding-key": qf

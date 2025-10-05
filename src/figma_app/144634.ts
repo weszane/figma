@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { O } from "../905/969533";
 import { props } from "@stylexjs/stylex";
-import { e6, wt } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive, WithTrackedButtonPrimitive } from "../figma_app/617427";
 export function $$o0(e) {
   switch (e.variant) {
     case "toggle":
-      return jsx(e6, {
+      return jsx(WithTrackedPopupButtonPrimitive, {
         ...props(l.baseButton, e.checked && l.toggleChecked, e.disabled && l.disabled),
         "aria-label": e.ariaLabel,
         "aria-pressed": e.checked,
@@ -23,7 +23,7 @@ export function $$o0(e) {
         children: e.checked ? e.onIcon : e.offIcon
       });
     case "menu":
-      return jsxs(wt, {
+      return jsxs(WithTrackedButtonPrimitive, {
         ...(e.getTriggerProps ? e.getTriggerProps() : e.getPopoverTriggerProps()),
         ...props(l.baseButton, e.disabled && l.disabled),
         "aria-label": e.ariaLabel,
@@ -38,7 +38,7 @@ export function $$o0(e) {
         children: [e.children, jsx(O, {})]
       });
     case "button":
-      return jsx(e6, {
+      return jsx(WithTrackedPopupButtonPrimitive, {
         ...props(l.baseButton, e.disabled && l.disabled),
         "aria-label": e.ariaLabel,
         "data-testid": e.dataTestId,

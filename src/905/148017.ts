@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, PureComponent, createRef } from "react";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { EventShield } from "../905/821217";
 import { IconButton } from "../905/443068";
 import { E as _$$E } from "../905/375716";
@@ -367,7 +367,7 @@ class es extends PureComponent {
     let h = ee(i, "ui3" === this.props.version);
     let g = jsx(AutoInteractableWrapper, {
       name: "toggle_settings_picker_button",
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         ref: this.windowButtonRef,
         "aria-label": getI18nString("fullscreen.grid_panel.layout_guide_settings"),
         recordingKey: generateRecordingKey(this.props, "settings"),

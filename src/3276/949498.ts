@@ -6,7 +6,7 @@ import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { useRef, useLayoutEffect } from "react";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
@@ -252,7 +252,7 @@ function A({
     })
   }) : s ? jsx("div", {
     className: T,
-    children: jsx($z, {
+    children: jsx(WithTrackedButton, {
       trackingProperties: {
         numRequests: e.length
       },
@@ -296,13 +296,13 @@ function L(e) {
     request_type: aD(level)
   };
   return jsxs(Fragment, {
-    children: [jsx($z, {
+    children: [jsx(WithTrackedButton, {
       trackingProperties: u,
       trackingEventName: "Edit Request Tooltip - Request Denied",
       onClick: handleDeny,
       variant: "destructiveLink",
       children: renderI18nText("request_row.deny")
-    }), jsx($z, {
+    }), jsx(WithTrackedButton, {
       trackingProperties: u,
       trackingEventName: "Edit Request Tooltip - Request Approved",
       onClick: handleApprove,

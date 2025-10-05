@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, createElement } from "react";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { l as _$$l } from "../905/509505";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -100,6 +100,6 @@ export function $$S0({
     })
   }) : null;
 }
-let k = withTrackedClick(_$$d);
+let k = withTrackedClick(DialogTriggerButton);
 export const b = $$S0;
 export const A = $$v1;

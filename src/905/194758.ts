@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories } from "../905/165054";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { $ } from "../905/411599";
 import { X } from "../905/647103";
 import { V } from "../905/900932";
@@ -92,7 +92,7 @@ export function $$C0({
   k || (i.showing && reportError(ServiceCategories.AI_PRODUCTIVITY, Error("AiImageTools: dropdownBoundingRect is null")), k = new DOMRect(0, 0, 0, 0));
   let R = _$$a() ? getI18nString("fullscreen.properties_panel.ai_image_tools") : getI18nString("fullscreen.properties_panel.ai_image_tools_ga");
   return jsxs(Fragment, {
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       "aria-expanded": i.showing,
       ref: C,
       "aria-label": R,

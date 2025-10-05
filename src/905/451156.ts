@@ -1,45 +1,137 @@
-import { jsx } from "react/jsx-runtime";
-import { RecordingComponent, handleMouseEvent } from "../figma_app/878298";
-import { KindEnum } from "../905/129884";
-export class $$s0 extends RecordingComponent {
-  constructor(e) {
-    super(e);
-    this.styleOverrides = () => ({});
-    this.applyDefaultStyles = () => !0;
-    this.onClick = handleMouseEvent(this, "click", () => {
-      this.props.onClick && this.props.onClick(this.props.tab);
-    });
-    this.onMouseEnter = e => {
-      if (!this.props.onlyShowTooltipsWhenTruncated) return;
-      let t = e.target;
-      t.offsetWidth < t.scrollWidth ? this.state.showTooltip || this.setState({
-        showTooltip: !0
-      }) : this.state.showTooltip && this.setState({
-        showTooltip: !1
-      });
-    };
+import { jsx } from "react/jsx-runtime"
+import { KindEnum } from "../905/129884"
+import { handleMouseEvent, RecordingComponent } from "../figma_app/878298"
+
+interface TabProps {
+  "tab": string
+  "selectedTab"?: string
+  "disabled"?: boolean
+  "tooltipText"?: string
+  "showTooltipWhenDisabled"?: boolean
+  "onlyShowTooltipsWhenTruncated"?: boolean
+  "onClick"?: (tab: string) => void
+  "data-onboarding-key"?: string
+  "dataTestId"?: string
+  "dataText"?: string
+  "children"?: React.ReactNode
+}
+
+interface TabState {
+  showTooltip: boolean
+}
+
+/**
+ * Tab component that represents a selectable tab in the UI
+ * Original class name: $$s0
+ */
+export class TabWithRecording<T extends Record<string, any> = any> extends RecordingComponent<TabProps & T, TabState> {
+  constructor(props: TabProps & T) {
+    super(props)
+
     this.state = {
-      showTooltip: !0
-    };
+      showTooltip: true,
+    }
   }
+
+  /**
+   * Returns style overrides for different tab states
+   */
+ styleOverrides = (): Record<string, string> => ({})
+
+  /**
+   * Determines if default styles should be applied
+   */
+ applyDefaultStyles = (): boolean => true
+
+  /**
+   * Handles click events on the tab
+   */
+ onClick = handleMouseEvent(this, "click", () => {
+    if (this.props.onClick && this.props.tab) {
+      this.props.onClick(this.props.tab)
+    }
+  })
+
+  /**
+   * Handles mouse enter events to show tooltips when content is truncated
+   */
+   onMouseEnter = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    if (!this.props.onlyShowTooltipsWhenTruncated) {
+      return
+    }
+
+    const target = event.target as HTMLButtonElement
+
+    // Check if content is truncated (overflowing)
+    if (target.offsetWidth < target.scrollWidth) {
+      // Show tooltip if not already shown
+      if (!this.state.showTooltip) {
+        this.setState({ showTooltip: true })
+      }
+    }
+    else {
+      // Hide tooltip if currently shown
+      if (this.state.showTooltip) {
+        this.setState({ showTooltip: false })
+      }
+    }
+  }
+
+  /**
+   * Gets CSS class names based on tab state and props
+   */
+  getClassNames(): string {
+    const baseClasses = this.applyDefaultStyles()
+      ? "tab--base--26PPx text--fontPos13--xW8hS text--_fontBase--QdLsd"
+      : ""
+
+    const baseOverride = this.styleOverrides().base || ""
+
+    let stateClasses = this.applyDefaultStyles()
+      ? "tab--unselected--u-2SW"
+      : ""
+
+    let stateOverride = this.styleOverrides().unselected || ""
+
+    // Determine state-specific classes
+    if (this.props.disabled) {
+      if (this.props.tooltipText && this.props.showTooltipWhenDisabled) {
+        stateClasses = this.applyDefaultStyles()
+          ? "tab--disabledWithTooltip--2QX3R"
+          : ""
+        stateOverride = this.styleOverrides().disabledWithTooltip || ""
+      }
+      else {
+        stateClasses = this.applyDefaultStyles()
+          ? "tab--disabled--eOpvQ tab--disabledWithTooltip--2QX3R"
+          : ""
+        stateOverride = this.styleOverrides().disabled || ""
+      }
+    }
+    else if (this.props.selectedTab === this.props.tab) {
+      stateClasses = this.applyDefaultStyles()
+        ? "tab--selected--u0OBe"
+        : ""
+      stateOverride = this.styleOverrides().selected || ""
+    }
+
+    return `${baseClasses} ${baseOverride} ${stateClasses} ${stateOverride}`.trim()
+  }
+
   render() {
-    let e = this.applyDefaultStyles() ? "tab--base--26PPx text--fontPos13--xW8hS text--_fontBase--QdLsd" : "";
-    let t = this.styleOverrides().base;
-    let i = this.applyDefaultStyles() ? "tab--unselected--u-2SW" : "";
-    let r = this.styleOverrides().unselected;
-    this.props.disabled ? this.props.tooltipText && this.props.showTooltipWhenDisabled ? (i = this.applyDefaultStyles() ? "tab--disabledWithTooltip--2QX3R" : "", r = this.styleOverrides().disabledWithTooltip) : (i = this.applyDefaultStyles() ? "tab--disabled--eOpvQ tab--disabledWithTooltip--2QX3R" : "", r = this.styleOverrides().disabled) : this.props.selectedTab === this.props.tab && (i = this.applyDefaultStyles() ? "tab--selected--u0OBe" : "", r = this.styleOverrides().selected);
     return jsx("button", {
       "data-onboarding-key": this.props["data-onboarding-key"],
-      className: `${e} ${t || ""} ${i} ${r || ""}`,
-      onClick: this.onClick,
-      onMouseEnter: this.props.onlyShowTooltipsWhenTruncated ? this.onMouseEnter : void 0,
+      "className": this.getClassNames(),
+      "onClick": this.onClick,
+      "onMouseEnter": this.props.onlyShowTooltipsWhenTruncated ? this.onMouseEnter : undefined,
       "data-testid": this.props.dataTestId,
       "data-tooltip-type": KindEnum.TEXT,
-      "data-tooltip": this.state.showTooltip ? this.props.tooltipText : void 0,
+      "data-tooltip": this.state.showTooltip ? this.props.tooltipText : undefined,
       "data-text": this.props.dataText,
-      children: this.props.children
-    });
+      "children": this.props.children,
+    })
   }
+  static displayName = "Tab"
 }
-$$s0.displayName = "Tab";
-export const o = $$s0;
+
+export const o = TabWithRecording

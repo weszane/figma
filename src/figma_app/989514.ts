@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { IconButton } from "../905/443068";
 import { A } from "../905/251970";
 import s from "classnames";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { UpgradeAction } from "../905/370443";
@@ -53,14 +53,14 @@ function y(e) {
         verticalAlignItems: "center",
         direction: "horizontal",
         spacing: 8,
-        children: [e.lowerLeftText, jsx(Spacer, {}), e.onSecondaryCtaClick && jsx($z, {
+        children: [e.lowerLeftText, jsx(Spacer, {}), e.onSecondaryCtaClick && jsx(WithTrackedButton, {
           onClick: e.onSecondaryCtaClick,
           trackingProperties: {
             ctaTrackingDescriptor: e.secondaryCtaProps?.ctaTrackingDescriptor || UpgradeAction.BACK
           },
           variant: "secondary",
           children: e.secondaryCtaProps?.ctaText || renderI18nText("tooltips_plus_onboarding.back")
-        }), e.onPrimaryCtaClick && jsx($z, {
+        }), e.onPrimaryCtaClick && jsx(WithTrackedButton, {
           onClick: e.onPrimaryCtaClick,
           trackingProperties: {
             ctaTrackingDescriptor: e.primaryCtaProps?.ctaTrackingDescriptor || UpgradeAction.NEXT

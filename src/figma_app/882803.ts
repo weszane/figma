@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect, useRef, useCallback } from "react";
 import { clamp } from "../figma_app/492908";
 import { ButtonPrimitive } from "../905/632989";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { IconButton } from "../905/443068";
 import { p as _$$p } from "../905/673591";
 import { O as _$$O } from "../905/301080";
@@ -251,7 +251,7 @@ function w({
   });
   if ((e?.readyState() ?? 0) < 2 && !R.current) return jsx("div", {
     className: bb,
-    children: jsx(_$$k, {
+    children: jsx(LoadingSpinner, {
       size: "lg"
     })
   });

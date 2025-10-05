@@ -65,7 +65,7 @@ import { Link } from '../905/438674';
 import { ConfirmationModal } from '../905/441305';
 import { D as _$$D } from '../905/443020';
 import { IconButton } from '../905/443068';
-import { k as _$$k2 } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { a as _$$a2 } from '../905/462280';
 import { fK, Qh } from '../905/469533';
@@ -163,7 +163,7 @@ import { getFilteredPlans } from '../figma_app/496854';
 import { selectCurrentFile } from '../figma_app/516028';
 import { Au } from '../figma_app/518077';
 import { getAtomMutate, handleSuspenseRetainRelease } from '../figma_app/566371';
-import { $z } from '../figma_app/617427';
+import { WithTrackedButton } from '../figma_app/617427';
 import { ButtonBasePrimary, ButtonSecondary, BigTextInputForwardRef, ButtonNegative } from '../figma_app/637027';
 import { AM } from '../figma_app/637336';
 import { _Z, jE, pL, v0, Vq, yl } from '../figma_app/639088';
@@ -928,7 +928,7 @@ function eW(e) {
   return jsx(Fragment, {
     children: isPurchasesRequestError ? jsx('div', {
       className: 'purchase_home_and_history--loadingSpinner--s8P5A',
-      children: jsx(_$$k2, {})
+      children: jsx(LoadingSpinner, {})
     }) : (!!activePurchases.length || !!inactivePurchases.length) && jsx(y.Consumer, {
       children: ({
         setAccountModalSubViewData: e
@@ -1711,7 +1711,7 @@ function tD() {
         children: jsxs(Suspense, {
           fallback: jsx('div', {
             className: 'x78zum5 xl56j7k',
-            children: jsx(_$$k2, {})
+            children: jsx(LoadingSpinner, {})
           }),
           children: [_$$d.isBrowserNotificationSupported() && jsx(tO, {}), o && jsx(tk, {
             channelType: 'desktop_push',
@@ -3950,7 +3950,7 @@ function rO(e) {
       let {
         planParentId
       } = e.args;
-      if (e.result.status !== 'loaded') return jsx(_$$k2, {}, planParentId);
+      if (e.result.status !== 'loaded') return jsx(LoadingSpinner, {}, planParentId);
       let {
         planPermissions,
         planUser
@@ -4421,7 +4421,7 @@ function rF({
               children: renderI18nText('settings.account_settings.upgrade_figma_plan_reason')
             }), jsx('div', {
               className: cssBuilderInstance.mt16.$,
-              children: jsx($z, {
+              children: jsx(WithTrackedButton, {
                 onClick: () => {
                   t(showModalHandler({
                     type: _$$V2,

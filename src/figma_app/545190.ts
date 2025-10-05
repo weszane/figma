@@ -40,7 +40,7 @@ import { V as _$$V } from '../905/900932';
 import { showDropdownThunk, hideDropdownAction } from '../905/929976';
 import { calculatePickerPositionLeft } from '../905/959568';
 import { O as _$$O } from '../905/969533';
-import { d as _$$d } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { uj0 } from '../figma_app/27776';
 import { wS, xP } from '../figma_app/65182';
@@ -487,7 +487,7 @@ function eO({
   let eE = useCallback(() => {
     eg(!1);
   }, []);
-  if (F && !ec || eo || em && !I ? en.push(jsx(_$$d, {
+  if (F && !ec || eo || em && !I ? en.push(jsx(DialogTriggerButton, {
     'onClick': Y,
     'aria-label': getI18nString('design_systems.component_properties.edit_property'),
     'recordingKey': 'componentPropEditButton',

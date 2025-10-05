@@ -36,7 +36,7 @@ import { A as _$$A } from '../905/891805';
 import { debounce } from '../905/915765';
 import { showDropdownThunk, hideDropdownAction } from '../905/929976';
 import { O as _$$O } from '../905/969533';
-import { d as _$$d } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { A7, i4 } from '../9314/278494';
 import { Nu } from '../figma_app/23780';
 import { dGl, jNX, uj0 } from '../figma_app/27776';
@@ -437,7 +437,7 @@ function eu({
         style: {
           gridColumnEnd: 'span 1'
         }
-      }), jsx(_$$d, {
+      }), jsx(DialogTriggerButton, {
         'recordingKey': generateRecordingKey(h, 'customButton'),
         'aria-expanded': Y,
         'onClick': q,
@@ -881,7 +881,7 @@ function eO({
 }) {
   return jsxs(MenuRootComp, {
     manager: e,
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       'aria-label': getI18nString('design_systems.create_style.create_style'),
       'recordingKey': generateRecordingKey(s, 'addButton'),
       ...t,

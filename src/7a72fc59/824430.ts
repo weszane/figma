@@ -104,7 +104,7 @@ import { Link } from '../905/438674';
 import { I as _$$I } from '../905/439783';
 import { w as _$$w2 } from '../905/442596';
 import { IconButton } from '../905/443068';
-import { k as _$$k7 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { w4, y1 } from '../905/445814';
 import { trackEventAnalytics } from '../905/449184';
 import { $ as _$$$ } from '../905/455748';
@@ -220,7 +220,7 @@ import { B as _$$B2 } from '../905/957400';
 import { calculatePickerPositionLeft, calculatePickerPositionRight } from '../905/959568';
 import { a as _$$a4 } from '../905/964520';
 import { O as _$$O } from '../905/969533';
-import { d as _$$d3 } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { gg, Rk } from '../905/981217';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
@@ -421,7 +421,7 @@ import { w as _$$w } from '../figma_app/588564';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { a as _$$a6, z as _$$z3 } from '../figma_app/601188';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
-import { $z, e6 as _$$e3, Me } from '../figma_app/617427';
+import { WithTrackedButton, WithTrackedPopupButtonPrimitive, WithTrackedIconButton } from '../figma_app/617427';
 import { i as _$$i4 } from '../figma_app/622160';
 import { li as _$$li, Gi, O$, RD, wv } from '../figma_app/622574';
 import { getColorSpaceString } from '../figma_app/622881';
@@ -1680,7 +1680,7 @@ function tQ({
       ...stylex.props(i.content),
       children: [jsxs('div', {
         ...stylex.props(i.header),
-        children: [t && jsx(Me, {
+        children: [t && jsx(WithTrackedIconButton, {
           'aria-label': getI18nString('cooper.templates.header.back'),
           'onClick': t,
           'trackingProperties': {
@@ -1832,7 +1832,7 @@ function t8({
   let d = s ? nt : ne;
   return t ? jsxs('div', {
     ...stylex.props(d.container),
-    children: [jsxs(_$$e3, {
+    children: [jsxs(WithTrackedPopupButtonPrimitive, {
       'aria-label': a || getI18nString('cooper.templates.template_picker.org_view.see_more'),
       'onClick': t,
       'recordingKey': n,
@@ -2716,7 +2716,7 @@ function nY({
   let n = Ui({
     library: e
   });
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     variant: 'secondary',
     onClick: n,
     trackingProperties: {
@@ -3013,7 +3013,7 @@ function n4({
   variant: t = 'secondary'
 }) {
   let n = _$$aZ();
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     'aria-label': getI18nString('cooper.templates.new_template'),
     'onClick': n,
     'variant': t,
@@ -5401,7 +5401,7 @@ let oO = memo(({
           svg: _$$A11
         }), jsx('div', {
           children: renderI18nText('fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.text')
-        }), jsx(Spacer, {}), jsx($z, {
+        }), jsx(Spacer, {}), jsx(WithTrackedButton, {
           variant: 'primary',
           onClick: () => e(popModalStack()),
           children: renderI18nText('fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.cta')
@@ -5511,7 +5511,7 @@ let oO = memo(({
         let t = X ? renderI18nText('fullscreen.properties_panel.font_picker.org_upsell') : G ? renderI18nText('fullscreen.properties_panel.font_picker.no_shared_fonts_orgname', {
           orgName: G.name
         }) : renderI18nText('fullscreen.properties_panel.font_picker.no_shared_fonts');
-        let n = jsx($z, {
+        let n = jsx(WithTrackedButton, {
           variant: 'secondary',
           innerText: 'Learn more',
           onClick: () => {
@@ -5519,7 +5519,7 @@ let oO = memo(({
           },
           children: renderI18nText('fullscreen.properties_panel.font_picker.no_shared_fonts.cta')
         });
-        let l = jsx($z, {
+        let l = jsx(WithTrackedButton, {
           variant: 'primary',
           innerText: 'Upgrade',
           onClick: ef,
@@ -6084,7 +6084,7 @@ function al({
             name: _$$_2.LibraryFontStyle,
             children: jsx('div', {
               className: 'controls--libraryFontPickerButton--H8P2S',
-              children: jsx(_$$d3, {
+              children: jsx(DialogTriggerButton, {
                 'aria-expanded': !!(x && x.id === o2),
                 'aria-label': getI18nString('fullscreen.properties_panel.tooltip_applyStyles'),
                 'recordingKey': 'cooperFontPickerLibraryPickerButton',
@@ -11155,7 +11155,7 @@ function uI({
     children: jsx('div', {
       'className': 'x78zum5 xl56j7k x6s0dn4 xh8yej3',
       'data-testid': 'buzzBulkCreateChooseFile',
-      'children': n ? jsx(_$$k7, {}) : getI18nString('buzz.bulk_create.import.button_text')
+      'children': n ? jsx(LoadingSpinner, {}) : getI18nString('buzz.bulk_create.import.button_text')
     })
   });
 }
@@ -11552,7 +11552,7 @@ function uX() {
     horizontalAlignItems: 'center',
     children: [jsx('div', {
       className: 'x1afcbsf x1fuwyyc xuzhngd',
-      children: jsx(_$$k7, {})
+      children: jsx(LoadingSpinner, {})
     }), jsx('div', {
       className: 'xuzqwsy xw9jctd x10134s8 x2b8uid',
       children: jsx(TextWithTruncation, {
@@ -12497,7 +12497,7 @@ function xL({
       columnStyleXStyle: xO.columnGap
     }), r && jsx('div', {
       className: 'x78zum5 xl56j7k x6s0dn4 x1aaf699',
-      children: jsx(_$$k7, {})
+      children: jsx(LoadingSpinner, {})
     }), jsx(IntersectionSentinel, {
       onIntersectionChange: ({
         isIntersecting: e
@@ -14049,7 +14049,7 @@ function pK({
       }), jsx(DialogActionStrip, {
         children: jsx(AutoInteractableWrapper, {
           name: _$$_2.LibraryColorPicker,
-          children: jsx(_$$d3, {
+          children: jsx(DialogTriggerButton, {
             'aria-expanded': !!(r && r.id === pF),
             'aria-label': getI18nString('fullscreen.properties_panel.tooltip_applyStylesAndVariables'),
             'recordingKey': 'cooperFillPanelLibaryPickerButton',

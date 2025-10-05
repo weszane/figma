@@ -3,7 +3,7 @@ import { useState } from "react";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { O } from "../905/969533";
-import { e6 } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { TrackedLink } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { JT } from "../figma_app/847597";
@@ -42,7 +42,7 @@ export function $$h0({
   return jsx(BannerInset, {
     variant: "default",
     children: h ? jsxs(BannerMessage, {
-      children: [jsxs(e6, {
+      children: [jsxs(WithTrackedPopupButtonPrimitive, {
         onClick: f,
         trackingProperties: {
           trackingDescriptor: UpgradeAction.SEAT_COST_MESSAGING
@@ -55,7 +55,7 @@ export function $$h0({
         className: "x1rmmofs",
         children: y
       })]
-    }) : jsxs(e6, {
+    }) : jsxs(WithTrackedPopupButtonPrimitive, {
       onClick: f,
       trackingProperties: {
         trackingDescriptor: UpgradeAction.SEAT_COST_MESSAGING

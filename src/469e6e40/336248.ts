@@ -6,7 +6,7 @@ import { clickableBaseLinkTracked } from "../figma_app/637027";
 import { ny } from "../figma_app/819458";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { e6 } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
 import { q } from "../905/749058";
@@ -81,7 +81,7 @@ export function $$j4(e) {
     className: xm,
     "data-testid": e.testId,
     children: r
-  }) : jsx(e6, {
+  }) : jsx(WithTrackedPopupButtonPrimitive, {
     className: RU,
     innerText: e.label,
     onClick: i,

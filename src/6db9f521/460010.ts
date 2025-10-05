@@ -39,7 +39,7 @@ import { JT } from "../figma_app/632248";
 import { cT as _$$cT, wj, qy, RL, B3, Ag } from "../figma_app/862289";
 import { EG, JY, sH as _$$sH, mG, wd } from "../9410/236102";
 import { props, stylex } from "@stylexjs/stylex";
-import { k as _$$k2 } from "../905/443820";
+// import { LoadingSpinner } from "../905/443820";
 import { l as _$$l2 } from "../905/479687";
 import { textDisplayConfig } from "../905/687265";
 import { WAFImage } from "../905/675859";
@@ -365,7 +365,7 @@ import { zK, zM, lk as _$$lk } from "../905/182453";
 import { u as _$$u6 } from "../9410/354452";
 import { Gf, _f } from "../figma_app/293304";
 import { roundTo2Decimals } from "../figma_app/492908";
-import { d as _$$d6 } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { e as _$$e5 } from "../905/149844";
 import { z as _$$z2 } from "../9410/836234";
 import { A as _$$A9 } from "../905/891805";
@@ -710,7 +710,7 @@ function ei() {
       }), "ANALYZING_TEMPLATE" === e && i.templateLibraryKey && jsx(er, {
         libraryKey: i.templateLibraryKey,
         onFinished: () => t("GENERATING_DECK")
-      }), "GENERATING_DECK" === e && jsx(_$$k2, {})]
+      }), "GENERATING_DECK" === e && jsx(LoadingSpinner, {})]
     }), jsx(el, {
       step: e
     })]
@@ -801,7 +801,7 @@ function er({
     renderItem: a,
     scrollDelayMs: 1500,
     onFinished: t
-  }) : jsx(_$$k2, {});
+  }) : jsx(LoadingSpinner, {});
 }
 function el({
   step: e
@@ -830,7 +830,7 @@ function el({
       })
     }) : "active" === t ? jsx("div", {
       className: "x1kky2od xlup9mm x2lah0s x78zum5 x6s0dn4 xl56j7k",
-      children: jsx(_$$k2, {
+      children: jsx(LoadingSpinner, {
         size: "sm"
       })
     }) : jsx("div", {
@@ -2208,7 +2208,7 @@ function ie({
       children: e
     }), i && jsx(ButtonPrimitive, {
       onClick: l,
-      children: jsx(_$$k2, {})
+      children: jsx(LoadingSpinner, {})
     }), n && jsx(ButtonPrimitive, {
       onClick: s,
       children: jsx(_$$_3, {})
@@ -6456,7 +6456,7 @@ function oU({
       styleType: StyleType.TEXT
     }), jsx(AutoInteractableWrapper, {
       name: "slides_toggle_library_text_style_picker",
-      children: jsx(_$$d6, {
+      children: jsx(DialogTriggerButton, {
         "aria-expanded": !!d,
         onClick: () => {
           if (d) u(hideStylePicker());else if (e.current) {
@@ -6522,7 +6522,7 @@ function o$({
           inheritTextStyleKey: i,
           closePicker: n,
           recordingKey: o
-        }), jsx(_$$d6, {
+        }), jsx(DialogTriggerButton, {
           "aria-expanded": b,
           "aria-label": getI18nString("slides.properties_panel.text_style.create_new_style"),
           onClick: () => {
@@ -6663,7 +6663,7 @@ function oz({
       children: jsx(_$$z2, {})
     }), jsx("span", {
       className: E ? cssBuilderInstance.visible.$ : cssBuilderInstance.invisible.$,
-      children: jsx(_$$d6, {
+      children: jsx(DialogTriggerButton, {
         "aria-label": getI18nString("slides.properties_panel.text_style.edit_text_style"),
         onClick: t => {
           if (b) m(_$$sw());else if (j.current) {

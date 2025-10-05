@@ -27,7 +27,7 @@ import { useCurrentFileKey, selectCurrentFile, useOpenFileLibraryKey, useSourceF
 import { OnboardingSequence } from "../905/152487";
 import { xT, Yh, g_, Ye } from "../figma_app/32128";
 import { t as _$$t, c as _$$c } from "../905/722657";
-import { k as _$$k2 } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { setupThemeContext } from "../905/614223";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { isColorDark, colorToRgbaString } from "../figma_app/191804";
@@ -218,7 +218,7 @@ import { o as _$$o } from "../9410/925362";
 import { i as _$$i2, s as _$$s4 } from "../figma_app/553327";
 import { isNotNullish } from "../figma_app/95419";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuSeparator, MenuSubText, MenuLinkComp, MenuTitleComp } from "../figma_app/860955";
-import { d as _$$d3 } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { r as _$$r3 } from "../905/571562";
 import { J as _$$J5 } from "../905/125993";
 import { B as _$$B2 } from "../905/950875";
@@ -266,7 +266,7 @@ import { c as _$$c4 } from "../905/144429";
 import { m as _$$m2 } from "../905/886380";
 import { useDelayedTrue } from "../905/815905";
 import { z as _$$z2 } from "../905/284530";
-import { Me as _$$Me } from "../figma_app/617427";
+import { WithTrackedIconButton } from "../figma_app/617427";
 import { Qd } from "../figma_app/570310";
 import { IO, CU, c6 as _$$c5 } from "../figma_app/659187";
 import { hideInstanceSwapPicker } from "../905/8732";
@@ -773,7 +773,7 @@ function ev() {
     children: jsx("div", {
       "data-testid": "loading-spinner",
       className: _$$u,
-      children: jsx(_$$k2, {
+      children: jsx(LoadingSpinner, {
         size: "lg"
       })
     })
@@ -3219,7 +3219,7 @@ function ik({
 }) {
   let i = t ? jsx("div", {
     className: id,
-    children: jsx(_$$k2, {})
+    children: jsx(LoadingSpinner, {})
   }) : jsxs(KeyboardNavigationProvider, {
     children: [n.map((t, n) => jsx(iI, {
       plugin: t,
@@ -3290,7 +3290,7 @@ function iC() {
   } = usePluginData();
   let n = loading ? jsx("div", {
     className: id,
-    children: jsx(_$$k2, {})
+    children: jsx(LoadingSpinner, {})
   }) : jsx(KeyboardNavigationProvider, {
     children: inspectPlugins.map((e, t) => jsx(iT, {
       plugin: e
@@ -5419,7 +5419,7 @@ let lD = memo(({
                 mode: theme,
                 children: jsx("div", {
                   className: "playground_modal--themeButton---BLzd",
-                  children: jsx(_$$Me, {
+                  children: jsx(WithTrackedIconButton, {
                     "aria-label": getI18nString("design_systems.playground.change_background"),
                     onClick: invertTheme,
                     htmlAttributes: {
@@ -5533,7 +5533,7 @@ function lO({
               className: lP,
               children: jsx("div", {
                 className: "playground_modal--propsContainerLoading--XO18-",
-                children: jsx(_$$k2, {})
+                children: jsx(LoadingSpinner, {})
               })
             })]
           })
@@ -5915,7 +5915,7 @@ function l8({
     e.startsWith("www.") && (e = e.slice(4));
     return jsxs(fI, {
       className: l4,
-      children: [jsx(_$$k2, {
+      children: [jsx(LoadingSpinner, {
         size: "sm"
       }), jsx(_$$nV, {
         children: e
@@ -6399,7 +6399,7 @@ function sy({
     headerChildren: jsxs(Fragment, {
       children: [!et && jsx(fI, {
         className: "developer_related_links_panel--spinner--2ofDP draggable_list--addButton--D0q--",
-        children: jsx(_$$k2, {})
+        children: jsx(LoadingSpinner, {})
       }), et && Y && !N && jsx("span", {
         className: "developer_related_links_panel--addButton--0Fv7K draggable_list--addButton--D0q--",
         children: jsx(IconButton, {
@@ -6819,7 +6819,7 @@ function s3() {
   })), [c]);
   return jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$d3, {
+    children: [jsx(DialogTriggerButton, {
       "aria-label": getI18nString("dev_handoff.layer_options"),
       htmlAttributes: {
         "data-tooltip": getI18nString("dev_handoff.layer_options"),
@@ -8675,7 +8675,7 @@ function dN({
         bottom: 4
       },
       dataTestId: "codegen-spinner",
-      children: jsx(_$$k2, {})
+      children: jsx(LoadingSpinner, {})
     })
   }) : 0 !== code.length && code.some(e => e.lines.length > 0) ? jsxs("div", {
     className: ek()(dy, c && db, u && dj),
@@ -9000,7 +9000,7 @@ function ct() {
   if ("loading" === t || t && 0 === t.length && s) return jsx("div", {
     "data-onboarding-key": dz,
     className: "dev_handoff_activity_panel--loading--kM0Yf",
-    children: jsx(_$$k2, {})
+    children: jsx(LoadingSpinner, {})
   });
   if (!t || 0 === t.length || !e) return jsx("div", {
     "data-onboarding-key": dz
@@ -9029,7 +9029,7 @@ function ct() {
         focusNodeId: e
       }), s && jsx("li", {
         className: "dev_handoff_activity_panel--loadingInline--WHTg6",
-        children: jsx(_$$k2, {})
+        children: jsx(LoadingSpinner, {})
       }), t.map((i, o) => {
         let l = o === t.length - 1;
         return jsx(ca, {
@@ -9216,7 +9216,7 @@ function cr() {
 let cc = registerModal(function (e) {
   let t = lazy(() => _require);
   return jsx(Suspense, {
-    fallback: jsx(_$$k2, {}),
+    fallback: jsx(LoadingSpinner, {}),
     children: jsx(t, {
       ...e
     })
@@ -9701,7 +9701,7 @@ function ut({
   }, e?.assetId);
   return (_$$p2(e) || _$$cZ(e)) && t && t.length && t[0] ? jsx(_$$iV, {
     image: t[0],
-    loadingChildren: jsx(_$$k2, {}),
+    loadingChildren: jsx(LoadingSpinner, {}),
     variant: "icon",
     children: jsx(_$$b7, {})
   }) : null;
@@ -9940,7 +9940,7 @@ function ur({
       "data-tooltip-type": KindEnum.TEXT
     },
     recordingKey: `assets_download_all_${uh(e)}`,
-    children: isLocalExporting ? jsx(_$$k2, {
+    children: isLocalExporting ? jsx(LoadingSpinner, {
       size: "sm"
     }) : jsx(_$$b7, {})
   });
@@ -10049,7 +10049,7 @@ function uu({
   let [o, l] = useState(!1);
   let s = ud(e);
   return e === assetTypeEnum.ASSET_GIF ? null : jsxs(Fragment, {
-    children: [jsx(_$$d3, {
+    children: [jsx(DialogTriggerButton, {
       "aria-label": n ? getI18nString("fullscreen.properties_panel.export_disabled") : s,
       "aria-expanded": o,
       onClick: () => l(e => !e),
@@ -10475,7 +10475,7 @@ function uP() {
         className: uE,
         children: jsx("div", {
           className: "component_browser_in_context_mapping_section--codeConnectLoadingContainer--dkmkr",
-          children: jsx(_$$k2, {
+          children: jsx(LoadingSpinner, {
             size: "sm"
           })
         })
@@ -12523,7 +12523,7 @@ function hV({
   return jsxs(Fragment, {
     children: [jsx("div", {
       ref: s,
-      children: jsx(_$$d3, {
+      children: jsx(DialogTriggerButton, {
         onClick: function () {
           g ? t(hideDropdownAction()) : t(showDropdownThunk({
             type: hC
@@ -13038,7 +13038,7 @@ function fh() {
   return jsxs(Fragment, {
     children: [jsx("div", {
       ref: dropdownTargetRef,
-      children: jsx(_$$d3, {
+      children: jsx(DialogTriggerButton, {
         "aria-expanded": isDropdownShown,
         recordingKey: "dev_handoff.focus.options",
         onClick: toggleDropdown,

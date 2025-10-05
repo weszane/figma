@@ -83,7 +83,7 @@ import { noop } from 'lodash-es';
 import { FONT_SF_PRO_DISPLAY } from '../905/946258';
 import { L as _$$L } from '../905/954291';
 import { calculatePickerPositionLeft } from '../905/959568';
-import { d as _$$d } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { A as _$$A7 } from '../2854/357693';
 import { A as _$$A6 } from '../5724/388041';
 import { A as _$$A5 } from '../6828/85206';
@@ -3110,7 +3110,7 @@ class iS extends PureComponent {
         };
         i.push(jsx('span', {
           className: gb,
-          children: jsx(_$$d, {
+          children: jsx(DialogTriggerButton, {
             'aria-expanded': !!this.shownSettings(),
             'aria-label': getI18nString('fullscreen.type_panel.type_details'),
             onClick,
@@ -3156,7 +3156,7 @@ class iS extends PureComponent {
           name: 'open_type_settings_button',
           children: jsx('span', {
             className: gb,
-            children: jsx(_$$d, {
+            children: jsx(DialogTriggerButton, {
               'aria-expanded': !!this.shownSettings(),
               'aria-label': a,
               recordingKey,
@@ -3175,7 +3175,7 @@ class iS extends PureComponent {
       name: 'flip_text_path_button',
       children: jsx('span', {
         className: gb,
-        children: jsx(_$$d, {
+        children: jsx(DialogTriggerButton, {
           'aria-expanded': !1,
           'aria-label': getI18nString('fullscreen.type_panel.text_on_a_path_flip'),
           'recordingKey': generateRecordingKey(this.props, 'flipTextPathButton'),

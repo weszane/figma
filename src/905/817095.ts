@@ -21,7 +21,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useDispatch } from "react-redux";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
-import { k as _$$k2 } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { X as _$$X } from "../905/736922";
 import { Z } from "../905/279476";
 import { x as _$$x } from "../905/149501";
@@ -80,7 +80,7 @@ let D = memo(function (e) {
             "aria-label": getI18nString("feature_flag_overrides.pending_change")
           }), "loading" === e.status && jsx("div", {
             "data-testid": `${e.flagName}-loading-spinner`,
-            children: jsx(_$$k2, {})
+            children: jsx(LoadingSpinner, {})
           }), "success" === e.status && jsx(_$$g, {
             "aria-label": getI18nString("feature_flag_overrides.success")
           }), "error" === e.status && jsx(Z, {

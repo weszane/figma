@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, createContext, useMemo, useState, useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { clamp } from "../figma_app/492908";
 import { assertNotNullish } from "../figma_app/95419";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
@@ -301,7 +301,7 @@ function M({
     onMouseMove: s,
     children: [!d && (c ?? jsx("div", {
       className: "zoom_pan--loading--4jFeo",
-      children: jsx(k, {
+      children: jsx(LoadingSpinner, {
         size: "sm"
       })
     })), jsx("canvas", {

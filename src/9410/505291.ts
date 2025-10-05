@@ -3,7 +3,7 @@ import { memo } from "react";
 import { A } from "../905/251970";
 import s from "classnames";
 import { h8 } from "../figma_app/478006";
-import { Me } from "../figma_app/617427";
+import { WithTrackedIconButton } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 var o = s;
@@ -33,7 +33,7 @@ let $$$$p0 = memo(function (e) {
         content
       }), rightContent, rightContent && onClose && jsx("div", {
         className: "x1xc55vz"
-      }), onClose ? jsx(Me, {
+      }), onClose ? jsx(WithTrackedIconButton, {
         "aria-label": getI18nString("common.close"),
         onClick: onClose,
         recordingKey: "dltBannerCloseButton",

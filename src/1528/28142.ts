@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { J } from "../905/125993";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
@@ -15,7 +15,7 @@ export function $$c0(e) {
   return jsxs(Fragment, {
     children: [jsx("div", {
       ref: dropdownTargetRef,
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         "aria-label": getI18nString("dev_handoff.code.options"),
         recordingKey: e.recordingKey,
         "aria-expanded": isDropdownShown,

@@ -12,7 +12,7 @@ import { setupAutofocusHandler } from "../905/128376";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { InputComponent } from "../905/185998";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { Button } from "../905/521428";
 import { KeyCodes } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
@@ -117,7 +117,7 @@ function N(e) {
           "data-testid": "branch-create-modal-input"
         })
       }), jsxs(DialogFooter, {
-        children: [(s || "loading" === R.status) && jsx(_$$k, {}), jsxs(DialogActionStrip, {
+        children: [(s || "loading" === R.status) && jsx(LoadingSpinner, {}), jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: () => {

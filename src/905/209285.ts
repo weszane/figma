@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime"
-import { bj, E4, m3 } from "../905/66449"
+import { ConditionalKeyboardWrapper, LibraryModalSections, useElementWithKeyboardArgs } from "../905/66449"
 import { useLibraryFileLink } from "../905/217163"
 import { renderI18nText } from "../905/303541"
 import { Link } from "../905/438674"
@@ -18,8 +18,11 @@ export function OpenFileButton({
   libraryKey: string
 }) {
   // Original: let { ref, kbArgs } = E4(...)
-  const { elementRef, kbArgs } = E4({
-    path: [m3.TabBodySection.Footer],
+  const {
+    ref,
+    kbArgs,
+  } = useElementWithKeyboardArgs({
+    path: [LibraryModalSections.TabBodySection.Footer],
     column: 1,
   })
 
@@ -40,9 +43,8 @@ export function OpenFileButton({
   const handleEventStopPropagation = (event: React.MouseEvent) => {
     event.stopPropagation()
   }
-
-  return jsx(bj, {
-    elementRef,
+  return jsx(ConditionalKeyboardWrapper, {
+    elementRef: ref,
     kbArgs,
     children: jsx(Link.Button, {
       href: link,
@@ -53,7 +55,7 @@ export function OpenFileButton({
       htmlAttributes: {
         onMouseDown: handleEventStopPropagation,
       },
-      ref: elementRef,
+      ref,
       children: renderI18nText("design_systems.libraries_modal.open_file"),
     }),
   })

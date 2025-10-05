@@ -163,7 +163,7 @@ import { DefaultGroups, GroupType, UserGroupRole } from '../905/441038';
 import { $ as _$$$7 } from '../905/442144';
 import { isBakeStarterPaywallEnabledWithoutLimit } from '../905/442612';
 import { IconButton } from '../905/443068';
-import { k as _$$k3 } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { H as _$$H } from '../905/444904';
 import { NN, w4, y1 } from '../905/445814';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
@@ -300,7 +300,7 @@ import { ResourceStatus } from '../905/957591';
 import { d as _$$d7 } from '../905/958822';
 import { a as _$$a4 } from '../905/964520';
 import { setupWorkspaceIdentity } from '../905/967587';
-import { d as _$$d3 } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { searchEndSessionAction, searchSetParametersAction, startSearchSessionAction } from '../905/977218';
 import { i as _$$i3 } from '../905/977961';
 import { TextWithTruncation } from '../905/984674';
@@ -565,7 +565,7 @@ import { _O as _$$_O, CK } from '../figma_app/603826';
 import { A as _$$A17 } from '../figma_app/608914';
 import { x as _$$x7 } from '../figma_app/609500';
 import { hX as _$$hX } from '../figma_app/614170';
-import { $z, c as _$$c2, e6 as _$$e2, Ih, Me } from '../figma_app/617427';
+import { WithTrackedButton, WithTrackedButtonLarge, WithTrackedPopupButtonPrimitive, WithTrackedButtonWide, WithTrackedIconButton } from '../figma_app/617427';
 import { e2 as _$$e13, li as _$$li } from '../figma_app/622574';
 import { A5 as _$$A11, J5, jT } from '../figma_app/623414';
 import { fileActionEnum, getTeamUrl, paymentActionRequirementEnum } from '../figma_app/630077';
@@ -2522,7 +2522,7 @@ function rq(e) {
           className: 'favorited_section--actionButtons--VZ6Er',
           children: [jsx('div', {
             className: tz,
-            children: jsx(_$$d3, {
+            children: jsx(DialogTriggerButton, {
               'aria-expanded': !!k,
               'aria-label': getI18nString('favorited_resources.settings_tooltip'),
               'onClick': r => {
@@ -3174,7 +3174,7 @@ function a$(e) {
           })]
         }), jsx(_$$hK, {
           height: 12
-        }), jsx(Ih, {
+        }), jsx(WithTrackedButtonWide, {
           'onClick': e.onClickCTA,
           'data-testid': e.ctaDataTestId,
           'disabled': e.disabled,
@@ -4060,7 +4060,7 @@ function sZ(e) {
       children: [jsx('p', {
         children: renderI18nText('favorited_resources.custom_sections_banner_body')
       }), jsx('br', {}), jsx('p', {
-        children: jsx($z, {
+        children: jsx(WithTrackedButton, {
           variant: 'secondary',
           onClick: E,
           children: renderI18nText('favorited_resources.custom_sections_banner_create_new_section_button')
@@ -4817,7 +4817,7 @@ function iQ({
   } : canCreateTeam ? {
     kind: _$$A9.CUSTOM,
     key: iq.NEW_TEAM,
-    element: jsx(_$$c2, {
+    element: jsx(WithTrackedButtonLarge, {
       'aria-label': getI18nString('license_group_view.toolbar.new_team_button_aria_label'),
       'variant': 'primary',
       'onClick': n,
@@ -4894,7 +4894,7 @@ function ni({
   let n = useTracking();
   return jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$d3, {
+    children: [jsx(DialogTriggerButton, {
       ...getTriggerProps(),
       'aria-label': e,
       'data-onboarding-key': r,
@@ -4923,7 +4923,7 @@ function nn(e) {
   let l = !!(n && n.type === e.dropdownKey && n.data && n.data.targetRect);
   let d = useTracking();
   return jsxs(Fragment, {
-    children: [jsx(_$$d3, {
+    children: [jsx(DialogTriggerButton, {
       'ref': r,
       'aria-expanded': l,
       'aria-label': e.buttonAriaLabel,
@@ -5439,7 +5439,7 @@ function nB(e) {
   let y = {
     kind: _$$A9.CUSTOM,
     key: iq.VIEW_MEMBERS,
-    element: jsx(_$$c2, {
+    element: jsx(WithTrackedButtonLarge, {
       'variant': 'secondary',
       'onClick': () => {
         n(showModalHandler({
@@ -5460,7 +5460,7 @@ function nB(e) {
       'aria-label': getI18nString('file_browser.view_members_with_count', {
         numMembers: h
       }),
-      'children': e.isWorkspaceMembersLoading ? jsx(_$$k3, {}) : jsx(Fragment, {
+      'children': e.isWorkspaceMembersLoading ? jsx(LoadingSpinner, {}) : jsx(Fragment, {
         children: h.toString()
       })
     })
@@ -7512,7 +7512,7 @@ function l$({
   content: r,
   showSeeMore: s
 }) {
-  let i = t && s ? jsxs(_$$e2, {
+  let i = t && s ? jsxs(WithTrackedPopupButtonPrimitive, {
     'aria-label': getI18nString('community.resource_hub.see_more'),
     'onClick': () => {
       CA(t.pathname);
@@ -8666,7 +8666,7 @@ function dp({
           })]
         }), jsxs('div', {
           className: 'x78zum5 xdt5ytf x6s0dn4 xou54vl xkh2ocl xh8yej3 x2lah0s',
-          children: [jsx($z, {
+          children: [jsx(WithTrackedButton, {
             onClick: () => {
               t(startProUpgradeFlowThunk({
                 teamId: e,
@@ -8830,7 +8830,7 @@ function dv({
     return jsx('div', {
       className: 'x78zum5 xl56j7k x6s0dn4 xg87l8a',
       ref: n.sizeRef,
-      children: jsx(_$$k3, {})
+      children: jsx(LoadingSpinner, {})
     });
   }
   let S = getFeatureFlags().cooper;
@@ -12256,7 +12256,7 @@ function me({
   if (!userStateLoaded && !getFeatureFlags().stop_rendering_tiles_view_loading_spinner) {
     return jsx('div', {
       className: 'tiles_view--loading--6rn3X',
-      children: jsx(_$$k3, {})
+      children: jsx(LoadingSpinner, {})
     });
   }
   let e_ = !!O?.restrictions_list?.includes(FPlanLimitationType.LOCKED);
@@ -15475,7 +15475,7 @@ function pp(e) {
             children: jsx(Button, {
               onClick: d,
               disabled: n,
-              children: o ? jsx(_$$k3, {}) : renderI18nText('file_browser.new_file_creation_topbar.use_templates')
+              children: o ? jsx(LoadingSpinner, {}) : renderI18nText('file_browser.new_file_creation_topbar.use_templates')
             })
           })
         })
@@ -16068,7 +16068,7 @@ function p5({
         if (!t.ownerRole && t.team?.canAdmin && e.push({
           kind: _$$A9.CUSTOM,
           key: iq.CLAIM,
-          element: jsx(_$$c2, {
+          element: jsx(WithTrackedButtonLarge, {
             variant: 'secondary',
             onClick: c,
             children: getI18nString('file_browser.folder.join_as_owner')
@@ -16085,7 +16085,7 @@ function p5({
           let t = {
             kind: _$$A9.CUSTOM,
             key: iq.SHARE,
-            element: jsx(_$$c2, {
+            element: jsx(WithTrackedButtonLarge, {
               variant: 'secondary',
               onClick: I,
               htmlAttributes: {
@@ -16101,7 +16101,7 @@ function p5({
         x && e.push({
           kind: _$$A9.CUSTOM,
           key: iq.REQUEST_TO_EDIT,
-          element: jsx(_$$c2, {
+          element: jsx(WithTrackedButtonLarge, {
             variant: 'secondary',
             onClick: () => {
               S ? n(_$$lT({
@@ -16123,7 +16123,7 @@ function p5({
           key: iq.SETTINGS,
           element: jsxs('div', {
             className: 'x1n2onr6',
-            children: [jsx(Me, {
+            children: [jsx(WithTrackedIconButton, {
               'variant': 'secondary',
               'size': 'lg',
               'onClick': () => {
@@ -16511,7 +16511,7 @@ function fn() {
   }).filter(e => e !== null), [i]);
   return e.status !== 'loaded' || i.status !== 'loaded' ? jsx('div', {
     className: cssBuilderInstance.flex.wFull.hFull.alignCenter.justifyCenter.$,
-    children: jsx(_$$k3, {
+    children: jsx(LoadingSpinner, {
       htmlAttributes: {
         'data-testid': 'loading-spinner'
       }
@@ -20054,7 +20054,7 @@ function hM({
         _ && u.push({
           kind: _$$A9.CUSTOM,
           key: iq.JOIN_TEAM,
-          element: jsx(_$$c2, {
+          element: jsx(WithTrackedButtonLarge, {
             variant: 'secondary',
             onClick: GR(t, e.id, AccessLevelEnum.ADMIN),
             children: getI18nString('file_browser.team.join_team')
@@ -20068,7 +20068,7 @@ function hM({
           element: jsx('div', {
             'data-tooltip': g,
             'data-tooltip-type': f,
-            'children': jsx(_$$c2, {
+            'children': jsx(WithTrackedButtonLarge, {
               'data-onboarding-key': 'team-view-new-project-cta',
               'data-testid': 'team-view-new-project-cta',
               'variant': 'primary',
@@ -20091,7 +20091,7 @@ function hM({
         }) : !e.org_id || e.org_access === FAccessLevelType.SECRET || _ || i.canAdminTeam || u.push({
           kind: _$$A9.CUSTOM,
           key: iq.REQUEST_TO_EDIT,
-          element: jsx(_$$c2, {
+          element: jsx(WithTrackedButtonLarge, {
             variant: 'primary',
             onClick: () => {
               m ? t(_$$lT({
@@ -20110,7 +20110,7 @@ function hM({
         u.push({
           kind: _$$A9.CUSTOM,
           key: iq.INVITE,
-          element: jsx(_$$c2, {
+          element: jsx(WithTrackedButtonLarge, {
             variant: 'secondary',
             onClick: c ? noop : d,
             disabled: c,

@@ -28,9 +28,9 @@ import { bh } from "../1250/224366";
 import { LibraryKeyToFileLink } from "../figma_app/43951";
 import { SelectorType } from "../figma_app/707808";
 import { k1, qd, Mj } from "../1250/428971";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { ButtonPrimitive } from "../905/632989";
-import { k as _$$k2 } from "../905/443820";
+// import { LoadingSpinner } from "../905/443820";
 import { J as _$$J2 } from "../905/125993";
 import { g as _$$g } from "../905/757007";
 import { A as _$$A2 } from "../905/251970";
@@ -579,7 +579,7 @@ function em({
   } = setupMenu();
   return jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       "aria-label": getI18nString("dev_handoff.component_browser.bulk_icon_connect.more_options"),
       htmlAttributes: {
         "data-tooltip": getI18nString("dev_handoff.component_browser.bulk_icon_connect.more_options"),
@@ -706,7 +706,7 @@ function ep({
                 className: el,
                 children: [jsxs("div", {
                   className: er,
-                  children: [jsx(_$$k2, {
+                  children: [jsx(LoadingSpinner, {
                     size: "sm"
                   }), jsx("h2", {
                     className: ei,
@@ -765,7 +765,7 @@ function ep({
                 className: el,
                 children: [jsxs("div", {
                   className: er,
-                  children: [jsx(_$$k2, {
+                  children: [jsx(LoadingSpinner, {
                     size: "sm"
                   }), jsx("h2", {
                     className: ei,
@@ -1321,7 +1321,7 @@ function nw({
     [w6.NotSetup]: jsx(Fragment, {
       children: jsx(MenuItemComp, {
         onClick: p,
-        children: d ? jsx(_$$k2, {
+        children: d ? jsx(LoadingSpinner, {
           size: "sm"
         }) : getI18nString("dev_handoff.component_browser.settings.setup")
       })
@@ -1450,7 +1450,7 @@ function nN({
             children: jsx(_$$f3, {})
           }), _?.queryStatus === _$$H.LOADING ? jsx("div", {
             className: nu,
-            children: jsx(_$$k2, {
+            children: jsx(LoadingSpinner, {
               size: "sm"
             })
           }) : jsx("div", {
@@ -1486,7 +1486,7 @@ function nN({
             className: nf,
             children: [jsx("div", {
               className: nh,
-              children: jsx(_$$k2, {
+              children: jsx(LoadingSpinner, {
                 size: "sm"
               })
             }), jsx("div", {
@@ -1573,7 +1573,7 @@ function nC({
     softDismiss: !0
   });
   return jsxs(Fragment, {
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       ...getTriggerProps(),
       "aria-label": getI18nString("dev_handoff.component_browser.settings"),
       htmlAttributes: {

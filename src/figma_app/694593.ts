@@ -1,10 +1,10 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { setupThemeContext } from "../905/614223";
 import s from "classnames";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { e6 } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { HM } from "../905/190597";
 import { a as _$$a, i as _$$i } from "../905/297691";
 var o = s;
@@ -42,7 +42,7 @@ export function $$m1(e) {
     children: e.action.element
   }, e.action.key);
   let t = "isLoading" in e.action && !0 === e.action.isLoading;
-  let r = jsx(e6, {
+  let r = jsx(WithTrackedPopupButtonPrimitive, {
     className: o()(cssBuilderInstance.flex.itemsCenter.justifyCenter.$, e.action.showOnMobile ? null : _$$a, e.action.hideOnDesktop ? _$$i : null, "styleClass" in e.action ? e.action.styleClass : null, HM),
     htmlAttributes: {
       "data-test-id": "dataTestId" in e.action ? e.action.dataTestId : void 0,
@@ -55,7 +55,7 @@ export function $$m1(e) {
     "aria-label": "ariaLabel" in e.action ? e.action.ariaLabel : void 0,
     children: t ? jsx("span", {
       className: cssBuilderInstance.px4.$,
-      children: jsx(k, {})
+      children: jsx(LoadingSpinner, {})
     }) : jsx(h, {
       action: e.action
     })

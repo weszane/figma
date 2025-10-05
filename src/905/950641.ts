@@ -8,7 +8,7 @@ import { isStudentValidated } from "../figma_app/141320";
 import { linkWithTracking } from "../figma_app/637027";
 import { Wi } from "../figma_app/162641";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { e6, Ih } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive, WithTrackedButtonWide } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { lk } from "../figma_app/109538";
@@ -44,7 +44,7 @@ function R() {
           })
         })
       })]
-    }), jsx(e6, {
+    }), jsx(WithTrackedPopupButtonPrimitive, {
       className: cssBuilderInstance.colorBgSecondary.colorBorderDisabled.bSolid.b1.bRadius4.px8.$,
       style: styleBuilderInstance.add({
         paddingTop: "3px",
@@ -304,7 +304,7 @@ function D({
   plan: r,
   showTooltip: a
 }) {
-  return jsx(Ih, {
+  return jsx(WithTrackedButtonWide, {
     disabled: e,
     onClick: t,
     trackingProperties: {

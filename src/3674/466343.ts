@@ -9,7 +9,7 @@ import { capitalize } from "../figma_app/930338";
 import { getThemeContextOrDefault } from "../905/158740";
 import p from "classnames";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { lR, e6 } from "../figma_app/617427";
+import { WithTrackedButtonLargeWide, WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { styleBuilderInstance } from "../905/941192";
 import { getVisibleTheme } from "../905/640017";
 import { J } from "../905/273120";
@@ -81,7 +81,7 @@ function b({
 }) {
   return jsx("span", {
     className: cssBuilderInstance.cursorPointer.$,
-    children: jsx(lR, {
+    children: jsx(WithTrackedButtonLargeWide, {
       variant: "primary",
       onClick: t,
       trackingProperties: n,
@@ -104,7 +104,7 @@ function j({
 }) {
   return t ? jsx("div", {
     className: zr,
-    children: jsx(lR, {
+    children: jsx(WithTrackedButtonLargeWide, {
       variant: "secondary",
       onClick: n,
       trackingProperties: i,
@@ -117,7 +117,7 @@ function j({
         children: e
       })
     })
-  }) : jsx(e6, {
+  }) : jsx(WithTrackedPopupButtonPrimitive, {
     className: h()(cssBuilderInstance.flex.justifyCenter.alignCenter.py8.px32.h40.maxWFull.cursorPointer.$, zr),
     onClick: n,
     htmlAttributes: {

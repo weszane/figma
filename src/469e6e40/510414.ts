@@ -7,7 +7,7 @@ import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip 
 import { SM } from "../figma_app/153916";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { R as _$$R } from "../c5e2cae0/276031";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -98,12 +98,12 @@ let y = memo(function ({
         })
       }), jsx(DialogFooter, {
         children: jsxs(DialogActionStrip, {
-          children: [jsx($z, {
+          children: [jsx(WithTrackedButton, {
             variant: "secondary",
             onClick: () => w(),
             disabled: isLoading,
             children: renderI18nText("pro_cart.review.edit_details.cancel")
-          }), jsx($z, {
+          }), jsx(WithTrackedButton, {
             disabled: isLoading,
             type: "submit",
             children: renderI18nText("pro_cart.review.edit_details.save")

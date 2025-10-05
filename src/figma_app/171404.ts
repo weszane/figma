@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { props } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -203,7 +203,7 @@ function A(e) {
   }), "loading" === c.status) return jsx("div", {
     "data-testid": "social-proof",
     ...props(I.container, S[g](t)),
-    children: jsx(k, {})
+    children: jsx(LoadingSpinner, {})
   });
   if ("loaded" !== c.status || 0 === c.data.length) return null;
   let v = c.data;

@@ -31,7 +31,7 @@ import { e as _$$e, q as _$$q } from "../figma_app/905311";
 import { K0 } from "../figma_app/778125";
 import { A as _$$A } from "../2854/952200";
 import { A as _$$A2 } from "../1617/316388";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { x as _$$x } from "../905/587214";
 import { PickerOptionType } from "../905/211621";
 import { SecureLink } from "../figma_app/637027";
@@ -164,7 +164,7 @@ function Y(e) {
       children: [hasValues && jsx(Cc, {
         isSwapPicker: !1,
         isPreferredValues: !0
-      }), jsx(_$$d, {
+      }), jsx(DialogTriggerButton, {
         "aria-label": getI18nString("design_systems.component_properties.select_preferred_values"),
         "aria-expanded": h.isShown && h.id === pickerID,
         ref: _,

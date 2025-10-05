@@ -58,7 +58,7 @@ import { selectUser } from '../905/372672';
 import { useModalManager } from '../905/437088';
 import { Link } from '../905/438674';
 import { v as _$$v } from '../905/442517';
-import { k as _$$k2 } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { PluginImage } from '../905/480825';
 import { openWindow } from '../905/508367';
@@ -154,7 +154,7 @@ import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { p3 } from '../figma_app/588582';
 import { selectExperimentConfigHook } from '../figma_app/594947';
 import { getCurrentTeam } from '../figma_app/598018';
-import { $z } from '../figma_app/617427';
+import { WithTrackedButton } from '../figma_app/617427';
 import { organizationAPIService } from '../figma_app/617654';
 import { ButtonBasePrimary, BaseLinkComponent, ButtonSecondary, ButtonWhite, SecureLink, BigTextInputForwardRef, ButtonNegative, ButtonBasePrimaryTracked } from '../figma_app/637027';
 import { pL, v0 } from '../figma_app/639088';
@@ -278,7 +278,7 @@ let G = registerModal(() => {
     minWidth: 492,
     children: jsxs('div', {
       className: jE,
-      children: [s && jsx(_$$k2, {}), !s && jsxs(Fragment, {
+      children: [s && jsx(LoadingSpinner, {}), !s && jsxs(Fragment, {
         children: [jsx(B, {
           dispatch: e,
           org: t,
@@ -440,7 +440,7 @@ let eu = registerModal(() => {
     minWidth: 560,
     children: [jsxs('div', {
       className: jE,
-      children: [!a.config && jsx(_$$k2, {}), a.config && jsxs(Fragment, {
+      children: [!a.config && jsx(LoadingSpinner, {}), a.config && jsxs(Fragment, {
         children: [jsx('p', {
           className: Fm,
           children: renderI18nText('org_settings.sign_in_method.authentication_instruction')
@@ -4313,11 +4313,11 @@ let n9 = registerModal(e => {
           })]
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               variant: 'secondary',
               onClick: o,
               children: renderI18nText('org_settings.sites_publishing_toggle.cancel')
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               variant: 'destructive',
               onClick: () => {
                 if (c === d) {
@@ -4404,11 +4404,11 @@ let se = registerModal(e => {
           })]
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               variant: 'secondary',
               onClick: o,
               children: renderI18nText('org_settings.supabase_toggle.cancel')
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               variant: 'destructive',
               onClick: () => {
                 if (c === d) {

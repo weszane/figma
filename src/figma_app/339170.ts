@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { x as _$$x } from "../905/697290";
 import l from "classnames";
 import { useLatestRef } from "../figma_app/922077";
@@ -68,7 +68,7 @@ export function $$b0({
           children: b.length > 1 || 0 === b.length ? getI18nString("dev_handoff.focus_view.modes") : b[0]
         })
       })
-    }) : jsx(_$$d, {
+    }) : jsx(DialogTriggerButton, {
       ...O,
       children: jsx(_$$x, {})
     }), jsx(bt, {

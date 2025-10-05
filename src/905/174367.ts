@@ -10,7 +10,7 @@ import { BannerMessage } from "../905/363675";
 import { L } from "../905/857916";
 import { Y } from "../905/506207";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { c as _$$c } from "../figma_app/617427";
+import { WithTrackedButtonLarge } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { TrackingProvider } from "../figma_app/831799";
@@ -80,7 +80,7 @@ function E({
               })]
             }), jsx("div", {
               className: cssBuilderInstance.flex.flexRow.justifyCenter.gap8.$,
-              children: jsx(_$$c, {
+              children: jsx(WithTrackedButtonLarge, {
                 variant: "primary",
                 onClick: i,
                 children: renderI18nText("file_browser.file_import_view.import_from_computer")

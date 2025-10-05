@@ -5,7 +5,7 @@ import { deepEqual } from "../905/382883";
 import { Tabs } from "../905/150656";
 import { Link } from "../905/438674";
 import { Button } from "../905/521428";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { UI3ConditionalWrapper } from "../905/341359";
 import _ from "../vendor/241899";
@@ -424,7 +424,7 @@ function eO({
         checkProgress() && submit?.();
       },
       "data-testid": "resource-publishing-make-form-view-submit-button",
-      children: draftSubmissionResult?.result === "pending" || ev ? jsx(_$$k, {
+      children: draftSubmissionResult?.result === "pending" || ev ? jsx(LoadingSpinner, {
         size: "sm"
       }) : getI18nString("community.publishing.publish")
     }) : jsx(Button, {

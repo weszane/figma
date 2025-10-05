@@ -41,7 +41,7 @@ import { useTeamPlanFeatures } from '../figma_app/465071';
 import { CurrencyFormatter } from '../figma_app/514043';
 import { R as _$$R } from '../figma_app/522082';
 import { tI } from '../figma_app/599327';
-import { e6, lR } from '../figma_app/617427';
+import { WithTrackedPopupButtonPrimitive, WithTrackedButtonLargeWide } from '../figma_app/617427';
 import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { DashboardSection } from '../figma_app/650409';
 import { RG } from '../figma_app/684446';
@@ -418,7 +418,7 @@ function W(e) {
   });
 }
 function er(e) {
-  let t = jsx(e6, {
+  let t = jsx(WithTrackedPopupButtonPrimitive, {
     className: 'xt0psk2 xjbqb8w x1quhyk7 x1ypdohk x5hs570 xy9f4xx',
     onClick: e.onDiscountClick,
     trackingProperties: {
@@ -466,7 +466,7 @@ function el(e) {
     })
   }, {
     key: 'team-manage-seats',
-    content: c && o && l === FOrganizationLevelType.TEAM && a && jsx(lR, {
+    content: c && o && l === FOrganizationLevelType.TEAM && a && jsx(WithTrackedButtonLargeWide, {
       variant: 'secondary',
       onClick: () => {
         t(selectViewAction({
@@ -482,7 +482,7 @@ function el(e) {
     })
   }, {
     key: 'org-view-new-seat-charges',
-    content: c && o && l === FOrganizationLevelType.ORG && a && jsx(lR, {
+    content: c && o && l === FOrganizationLevelType.ORG && a && jsx(WithTrackedButtonLargeWide, {
       variant: 'secondary',
       onClick: () => {
         t(selectViewAction({
@@ -501,7 +501,7 @@ function el(e) {
     })
   }, {
     key: 'org-true-up-review',
-    content: c && o && l === FOrganizationLevelType.ORG && !a && m === InvoiceReviewState.REVIEW && jsx(lR, {
+    content: c && o && l === FOrganizationLevelType.ORG && !a && m === InvoiceReviewState.REVIEW && jsx(WithTrackedButtonLargeWide, {
       variant: 'secondary',
       onClick: () => {
         d ? t(showModalHandler({
@@ -850,7 +850,7 @@ let ew = [{
     invoice: e,
     setHighlightedInvoiceId: t,
     rowAriaLabel: a
-  }) => jsx(e6, {
+  }) => jsx(WithTrackedPopupButtonPrimitive, {
     'className': 'x78zum5 xl56j7k x6s0dn4 x1td3qas x1s928wv x1j6awrg xarstr8',
     'onClick': () => t(e.id),
     'aria-label': a,

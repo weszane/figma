@@ -1,6 +1,6 @@
 import { useRef, useContext } from "react";
 import { logger } from "../905/651849";
-import { Xx } from "../figma_app/243213";
+import { isFocusable } from "../figma_app/243213";
 import { useSingleEffect } from "../905/791079";
 import { trackEventAnalytics } from "../905/449184";
 import { wu, xd } from "../905/729783";
@@ -85,7 +85,7 @@ export function $$_2(e) {
   return {
     interactableTagName: e instanceof Element ? e.tagName : "EVENT_TARGET",
     interactableRole: e instanceof HTMLElement && e.getAttribute("role") || "",
-    interactableIsFocusable: e instanceof HTMLElement && Xx(e)
+    interactableIsFocusable: e instanceof HTMLElement && isFocusable(e)
   };
 }
 export const ET = $$h0;

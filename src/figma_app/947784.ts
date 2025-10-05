@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { l as _$$l } from '../905/152724';
+import { ProfilePartnerBadge } from '../905/152724';
 import { y } from '../905/158417';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { trackEventAnalytics } from '../905/449184';
@@ -79,7 +79,7 @@ export function $$T0({
           entity: e
         }), jsx('div', {
           className: 'author_dropdown_preview--profileBadgeV2--7363f',
-          children: jsx(_$$l, {
+          children: jsx(ProfilePartnerBadge, {
             profile: e,
             showBorder: !0
           })
@@ -124,7 +124,7 @@ export function $$T0({
           entity: e
         }), jsx('div', {
           className: 'author_dropdown_preview--profileBadge--VRnGn',
-          children: jsx(_$$l, {
+          children: jsx(ProfilePartnerBadge, {
             profile: e,
             showBorder: !0
           })
@@ -182,7 +182,7 @@ function S({
       children: [jsx('span', {
         className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
         children: e.name
-      }), jsx(_$$l, {
+      }), jsx(ProfilePartnerBadge, {
         profile: e
       })]
     })]

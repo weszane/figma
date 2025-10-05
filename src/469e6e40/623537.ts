@@ -52,9 +52,9 @@ import { FRequestsStr } from '../905/384551';
 import { OnboardingModal } from '../905/425180';
 import { useModalManager } from '../905/437088';
 import { GroupType } from '../905/441038';
-import { k as _$$k3 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
-import { o as _$$o } from '../905/451156';
+import { TabWithRecording } from '../905/451156';
 import { U as _$$U2 } from '../905/455766';
 import { AutoLayout, Spacer } from '../905/470281';
 import { b as _$$b } from '../905/484176';
@@ -145,7 +145,7 @@ import { JT, Qi } from '../figma_app/599327';
 import { d as _$$d } from '../figma_app/603561';
 import { aM as _$$aM, CC, dL, k_, Mj, o8, PR, RC, rH, w6, XO, zT } from '../figma_app/609194';
 import { C5, hX } from '../figma_app/614170';
-import { $z, Me } from '../figma_app/617427';
+import { WithTrackedButton, WithTrackedIconButton } from '../figma_app/617427';
 import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { fetchAndUpdateUpcomingInvoices } from '../figma_app/658324';
@@ -914,7 +914,7 @@ let tf = registerModal(({
           _(e.view);
         };
         return jsxs(AutoLayout, {
-          children: [t.map(e => jsx(_$$o, {
+          children: [t.map(e => jsx(TabWithRecording, {
             onClick: () => a(e),
             tab: e.view,
             selectedTab: c,
@@ -1020,7 +1020,7 @@ function tk(e) {
     return jsx(tj, {
       children: jsx('div', {
         className: 'x78zum5 xl56j7k x6s0dn4 xe8gcm xh8yej3',
-        children: jsx(_$$k3, {
+        children: jsx(LoadingSpinner, {
           'data-testid': 'bg-invoice-banner-loading'
         })
       })
@@ -2018,12 +2018,12 @@ let a$ = registerModal(e => {
           })
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               disabled: p,
               onClick: onClose,
               variant: 'secondary',
               children: getI18nString('general.cancel')
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               disabled: p,
               onClick: h,
               variant: 'primary',
@@ -2313,11 +2313,11 @@ let a1 = registerModal(e => {
           resources: a
         }) : jsx('div', {
           className: 'xrvj5dj x1ku5rj1 x5mc7k8',
-          children: jsx(_$$k3, {})
+          children: jsx(LoadingSpinner, {})
         })
       }), o.view === 'orgAdminSettings' && a && jsx(DialogFooter, {
         children: jsx(DialogActionStrip, {
-          children: jsx($z, {
+          children: jsx(WithTrackedButton, {
             variant: 'secondary',
             onClick: e.onRemoveUser,
             children: renderI18nText('members_tab.member_modal.remove_user_button')
@@ -2772,7 +2772,7 @@ function nn(e) {
   };
   let eS = e.selectedView.view === 'workspace';
   let eN = e.selectedView.view === 'licenseGroup';
-  let eI = jsx(Me, {
+  let eI = jsx(WithTrackedIconButton, {
     'aria-label': getI18nString('members_table.csv_export.get_csv'),
     'trackingProperties': {
       action: 'Export CSV'

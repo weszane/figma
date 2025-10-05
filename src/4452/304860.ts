@@ -44,7 +44,7 @@ import { useOrgManagesSeatsViaScim } from '../figma_app/543529';
 import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { CM, kj, NU, SI } from '../figma_app/599327';
 import { d as _$$d } from '../figma_app/603561';
-import { $z } from '../figma_app/617427';
+import { WithTrackedButton } from '../figma_app/617427';
 import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { Ro } from '../figma_app/805373';
 import { zRx } from '../figma_app/822011';
@@ -353,7 +353,7 @@ function er(e) {
           })
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               variant: 'secondary',
               onClick: () => p.props?.close({
                 source: 'button'
@@ -362,7 +362,7 @@ function er(e) {
                 trackingDescriptor: UpgradeAction.CANCEL
               },
               children: renderI18nText('plan_settings.auto_approval_settings.cancel')
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               variant: 'primary',
               onClick: X,
               trackingProperties: {

@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { o as _$$o } from "../905/451156";
+import { TabWithRecording } from "../905/451156";
 import { zP, NQ, xW, Y1 } from "../905/118234";
 var o = (e => (e.DEFAULT = "default", e.ADMIN_SETTINGS = "adminSettings", e))(o || {});
-class l extends _$$o {
+class l extends TabWithRecording {
   constructor() {
     super(...arguments);
     this.styleOverrides = () => ({
@@ -11,7 +11,7 @@ class l extends _$$o {
     });
   }
 }
-class d extends _$$o {
+class d extends TabWithRecording {
   constructor() {
     super(...arguments);
     this.styleOverrides = () => ({

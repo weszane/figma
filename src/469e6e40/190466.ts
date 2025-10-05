@@ -25,7 +25,7 @@ import { P as _$$P } from "../905/347284";
 import { IntersectionSentinel } from "../905/925868";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -920,7 +920,7 @@ function eK(e) {
     default:
       throwTypeError(e);
   } else "invite" === e.adminAccessAction ? (a = getI18nString("member_flyout_modal.invite_admin_access_label"), o = "invite-admin", t = () => c(e.member.email)) : throwTypeError(e.adminAccessAction);
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     variant: "secondary",
     onClick: t,
     trackingProperties: {
@@ -947,7 +947,7 @@ function eX(e) {
     default:
       throwTypeError(e);
   }
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     variant: "destructiveSecondary",
     onClick: a,
     trackingProperties: {

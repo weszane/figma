@@ -8,7 +8,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { Button } from "../905/521428";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { ks } from "../905/773401";
+import { LandingFormTextInput } from "../905/773401";
 import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UserAvatar } from "../905/590952";
@@ -86,7 +86,7 @@ export let $$b0 = registerModal(function (e) {
               e.preventDefault();
               T();
             },
-            children: jsx(ks, {
+            children: jsx(LandingFormTextInput, {
               "data-testid": "messageInput",
               className: "request_access_modal--inputRequestMessage--aa3K6",
               type: "textarea",

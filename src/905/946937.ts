@@ -8,7 +8,7 @@ import { DialogContents, DialogBody, DialogHeader, DialogTitle, DialogFooter, Di
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
 import { LoadingOverlay } from "../figma_app/858013";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { TrackedLinkButton } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { R as _$$R } from "../905/304671";
@@ -193,7 +193,7 @@ function z(e) {
           children: x
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               onClick: i,
               trackingProperties: {
                 trackingDescriptor: UpgradeAction.CANCEL

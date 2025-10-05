@@ -3,7 +3,7 @@ import i from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { r5 } from "../figma_app/947784";
-import { So } from "../figma_app/209680";
+import { HoverDropdown } from "../figma_app/209680";
 import { y } from "../905/158417";
 import { TrackedLink } from "../figma_app/831799";
 import { sA, cy, Zz, tF } from "../905/105487";
@@ -64,7 +64,7 @@ export function $$g1(e, t = !1, r = !1, i = !1) {
       }),
       creator1: c(e[0]),
       creator2: c(e[1])
-    }), e.length > 2 && jsx(So, {
+    }), e.length > 2 && jsx(HoverDropdown, {
       verticalPosition: "below",
       preview: jsx(r5, {
         authors: e

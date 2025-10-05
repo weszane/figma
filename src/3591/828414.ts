@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { PureComponent, createRef, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import u from "classnames";
 import { BrowserInfo, isMobileUA } from "../figma_app/778880";
@@ -318,7 +318,7 @@ function eg(e) {
       })]
     }), jsx("div", {
       className: Hq,
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         ref: e.optionsIconRef,
         onClick: e.onOptionsClick,
         "aria-expanded": e.isSelected,

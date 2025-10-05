@@ -15,7 +15,7 @@ import { ZU, Wg } from "../figma_app/986347";
 import { v as _$$v } from "../figma_app/339170";
 import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { useRef, useMemo } from "react";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { J } from "../905/125993";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { j } from "../905/834956";
@@ -34,7 +34,7 @@ function N({
   let l = _$$_(e);
   let u = useMemo(() => [o, l], [o, l]);
   return jsxs(Fragment, {
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       "aria-label": getI18nString("slides.properties_panel.text_style.more_actions"),
       ref: a,
       "aria-expanded": s,

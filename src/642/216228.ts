@@ -53,7 +53,7 @@ import { debugState } from '../905/407919';
 import { Y as _$$Y2 } from '../905/411989';
 import { OnboardingModal } from '../905/425180';
 import { IconButton } from '../905/443068';
-import { k as _$$k2 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { x as _$$x2 } from '../905/453561';
 import { $ as _$$$ } from '../905/455748';
@@ -118,7 +118,7 @@ import { ExtensionFeatureKey } from '../905/946805';
 import { $3 } from '../905/946937';
 import { t as _$$t7 } from '../905/947268';
 import { U as _$$U } from '../905/966438';
-import { d as _$$d } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { TextWithTruncation } from '../905/984674';
 import { H as _$$H, lj as _$$lj, r9 as _$$r2, QN, Rs } from '../905/991973';
 import { h as _$$h6 } from '../905/994594';
@@ -3082,7 +3082,7 @@ function rB() {
   } = wV();
   let S = currentView === S5.Libraries ? 0 : 1;
   let k = useAtomWithSubscription(suggestionsSeenTrackerAtom);
-  i || (!isInitialized || C && isLoading || C && l.status === 'loading' ? e = jsx(_$$k2, {
+  i || (!isInitialized || C && isLoading || C && l.status === 'loading' ? e = jsx(LoadingSpinner, {
     size: 'md'
   }) : C || (e = jsx('div', {
     ...props(rD.statusIndicator, k ? rD.statusIndicatorSeen : rD.statusIndicatorUnseen),
@@ -3962,7 +3962,7 @@ function nv({
 function nS() {
   return jsx('div', {
     ...stylex.props(_$$A3.p16),
-    children: jsx(_$$k2, {})
+    children: jsx(LoadingSpinner, {})
   });
 }
 let nT = createContext(void 0);
@@ -6420,7 +6420,7 @@ function iS({
       width: t
     },
     'data-testid': 'asset-panel-pages-spinner',
-    'children': jsx(_$$k2, {})
+    'children': jsx(LoadingSpinner, {})
   }) : d.length === 0 ? jsx('div', {
     style: {
       width: t
@@ -6527,7 +6527,7 @@ let iH = function ({
 }) {
   return e ? jsx('div', {
     className: 'maybe_loading--loadingContainer--Wfq03',
-    children: jsx(_$$k2, {})
+    children: jsx(LoadingSpinner, {})
   }) : jsx(Fragment, {
     children: t
   });
@@ -7493,7 +7493,7 @@ function lL({
   return jsxs(Fragment, {
     children: [jsx(EventShield, {
       eventListeners: o ? ['onMouseDown'] : [],
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         'onClick': c,
         'aria-expanded': o,
         'ref': _$$Ay4(t, setKeyboardNavigationElement),
@@ -7933,7 +7933,7 @@ function l0() {
   });
   return jsxs(EventShield, {
     eventListeners: e ? ['onMouseDown'] : [],
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       'data-onboarding-key': lZ,
       'ref': setKeyboardNavigationElement,
       'onClick': () => {

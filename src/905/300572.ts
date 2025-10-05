@@ -2,10 +2,10 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
 import { LibraryTabEnum } from "../figma_app/633080";
-import { o as _$$o } from "../905/451156";
+import { TabWithRecording } from "../905/451156";
 import { fA } from "../905/542608";
 import { vR } from "../905/522530";
-class $$c extends _$$o {}
+class $$c extends TabWithRecording {}
 export function $$u0({
   availableTabs: e,
   selectedTab: t,

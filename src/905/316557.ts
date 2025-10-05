@@ -59,7 +59,7 @@ import { Xo, lK, UZ, k1, kO } from "../figma_app/687767";
 import { B as _$$B } from "../905/118396";
 import { KL, Z3 } from "../figma_app/450967";
 import { EventShield } from "../905/821217";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { O as _$$O } from "../905/969533";
 import { getFontStyleMapping } from "../905/714538";
 import { A as _$$A3 } from "../905/536006";
@@ -902,7 +902,7 @@ function eH({
 }) {
   return e && jsx("span", {
     className: i ? cssBuilderInstance.visible.$ : cssBuilderInstance.invisible.$,
-    children: jsx(_$$d, {
+    children: jsx(DialogTriggerButton, {
       "aria-label": getI18nString("slides.properties_panel.theme.edit_template_style"),
       onClick: e,
       "aria-expanded": !!t,

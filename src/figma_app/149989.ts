@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useRef, useCallback, useContext, useLayoutEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { VariableResolvedDataType, VariablesBindings, VariableDataType, DesignGraphElements } from "../figma_app/763686";
 import { StyleType } from "../figma_app/276332";
 import { getFeatureFlags } from "../905/601108";
@@ -756,7 +756,7 @@ export function $$el3({
             layout: eh
           })
         },
-        children: jsx(_$$k, {})
+        children: jsx(LoadingSpinner, {})
       }) : 0 === eL.length && 0 === eR.length && 0 === eP.length && 0 === eD.length ? Z(F, eh, !!Q, u) : "list" === eh ? jsx(HZ, {
         ref: eF,
         className: jG,

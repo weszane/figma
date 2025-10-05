@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
 import { ModalCloseButton } from "../905/17223";
@@ -44,7 +44,7 @@ let $$S0 = registerModal(function (e) {
     popStack: !0,
     children: jsx("div", {
       className: Do,
-      children: jsx(_$$k, {})
+      children: jsx(LoadingSpinner, {})
     })
   });
   let w = S.data;

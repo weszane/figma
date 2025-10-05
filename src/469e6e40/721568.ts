@@ -6,14 +6,14 @@ import { k } from "../905/44647";
 import { r as _$$r } from "../905/571562";
 import d from "classnames";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { e6 } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { Spacer } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 var c = d;
 let g = "highlight--container--2-8sY";
 let h = "highlight--background--1B0mj";
 export function $$x0(e) {
-  return jsxs(e6, {
+  return jsxs(WithTrackedPopupButtonPrimitive, {
     className: g,
     disabled: e.disabled,
     onClick: e.onClick,

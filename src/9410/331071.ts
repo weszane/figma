@@ -76,7 +76,7 @@ import { $ as _$$$2 } from '../905/411599';
 import { loadPluginFont } from '../905/426868';
 import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
-import { k as _$$k2 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { V as _$$V4 } from '../905/453354';
 import { e as _$$e4 } from '../905/462154';
@@ -1257,7 +1257,7 @@ function t8({
       t = jsxs(t7, {
         children: [jsx('div', {
           className: cssBuilderInstance.pl4.flex.itemsCenter.justifyCenter.$,
-          children: jsx(_$$k2, {})
+          children: jsx(LoadingSpinner, {})
         }), jsx('div', {
           className: cssBuilderInstance.colorTextSecondary.$,
           children: getI18nString('assistant.chat.status.loading')

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { Fullscreen, DesignGraphElements } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
-import { NX } from "../figma_app/243213";
+import { hasAncestorWithAttribute } from "../figma_app/243213";
 import { Point } from "../905/736624";
 import { s1, uR, d6 } from "../figma_app/304207";
 import { closeUniversalInsertModal } from "../905/116101";
@@ -78,7 +78,7 @@ export function $$I0(e, t, r) {
   }, [a, o, c]);
   useEffect(() => {
     let n = n => {
-      if (!e || NX(n.target, "data-does-not-dismiss-modal")) return;
+      if (!e || hasAncestorWithAttribute(n.target, "data-does-not-dismiss-modal")) return;
       let i = t.current?.getEl();
       if (!i) return;
       let a = i.contains(n.target);

@@ -4,7 +4,7 @@ import { useSelector, useDispatch, useStore } from "react-redux";
 import { debounce } from "../905/915765";
 import { isNotNullish } from "../figma_app/95419";
 import { Et } from "../figma_app/397267";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { Button } from "../905/521428";
 import { IconButton } from "../905/443068";
 import { l as _$$l } from "../905/509505";
@@ -656,7 +656,7 @@ function eW(e) {
           disabled: !0,
           children: jsx("div", {
             className: cssBuilderInstance.w150.mx12.flex.justifyCenter.$,
-            children: jsx(_$$k, {})
+            children: jsx(LoadingSpinner, {})
           })
         }, "loading");
         let {

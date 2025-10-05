@@ -61,7 +61,7 @@ import { A as _$$A2 } from "../vendor/454088";
 import { dayjs } from "../905/920142";
 import { useLatestRef } from "../figma_app/922077";
 import { isDevEnvironment } from "../figma_app/169182";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { TrackedLink } from "../905/160095";
 import { DeepLinkType } from "../905/15667";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
@@ -149,7 +149,7 @@ import { SvgComponent } from "../905/714743";
 import { kS, C4 } from "../figma_app/325912";
 import { oU, oR, XJ, IB, qE } from "../1156/418246";
 import { Kj } from "../1156/201513";
-import { k as _$$k3 } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { r as _$$r2 } from "../905/11924";
 import { w as _$$w } from "../905/433065";
 import { Z as _$$Z3 } from "../1156/98576";
@@ -185,7 +185,7 @@ import { cortexAPI } from "../figma_app/432652";
 import { Vc } from "../figma_app/211694";
 import { Z as _$$Z4 } from "../1156/154963";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuItemLead, MenuSubText } from "../figma_app/860955";
-import { d as _$$d2 } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { g as _$$g3 } from "../905/496772";
 import { G as _$$G2 } from "../905/865520";
 import { A as _$$A7 } from "../905/126947";
@@ -1044,7 +1044,7 @@ function tq() {
   let a = $Y(s);
   let l = i ? UpsellModalType.FIGMAKE_METER_LIMIT_TOAST : UpsellModalType.LIVING_DESIGNS_METER_LIMIT_TOAST;
   let o = _$$y(s, l);
-  return t === FPlanNameType.STARTER && getFeatureFlags().bake_starter_limit && a ? jsx($z, {
+  return t === FPlanNameType.STARTER && getFeatureFlags().bake_starter_limit && a ? jsx(WithTrackedButton, {
     variant: "primary",
     onClick: o,
     children: renderI18nText("figmake.meter_limit.view_plans")
@@ -1059,11 +1059,11 @@ function t$() {
     folderId: null
   });
   let n = useIsSelectedFigmakeFullscreen() ? FProductAccessType.FIGMAKE : FProductAccessType.SITES;
-  return getIsUpgradeHandlerLoading() ? jsx($z, {
+  return getIsUpgradeHandlerLoading() ? jsx(WithTrackedButton, {
     variant: "primary",
     disabled: !0,
     children: renderI18nText("figmake.meter_limit.request_full_seat")
-  }) : jsx($z, {
+  }) : jsx(WithTrackedButton, {
     variant: "primary",
     onClick: handleUpgrade({
       licenseType: n,
@@ -2064,7 +2064,7 @@ function nj({
   interaction: n
 }) {
   return jsx(nC, {
-    icon: jsx(_$$k3, {
+    icon: jsx(LoadingSpinner, {
       size: "md"
     }),
     title: e,
@@ -2309,7 +2309,7 @@ function nL({
 function nz() {
   return jsx("div", {
     className: "x78zum5 xdt5ytf x167g77z xkh2ocl xl56j7k x6s0dn4 x1tamke2 xh8yej3",
-    children: jsx(_$$k3, {})
+    children: jsx(LoadingSpinner, {})
   });
 }
 function nM({
@@ -4584,7 +4584,7 @@ function iy({
     })), D]
   }) : jsx("div", {
     ref: k,
-    children: jsx(_$$d2, {
+    children: jsx(DialogTriggerButton, {
       "aria-label": getI18nString("sites.modal.select_library"),
       "aria-expanded": j,
       "data-tooltip-show-above": !0,

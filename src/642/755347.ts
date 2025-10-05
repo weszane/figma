@@ -27,7 +27,7 @@ import { Wv } from "../figma_app/711157";
 import { fn, DE } from "../figma_app/811257";
 import { wu } from "../1528/306300";
 import { M as _$$M } from "../figma_app/339170";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { u as _$$u } from "../905/911813";
 import { u as _$$u2 } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
@@ -77,7 +77,7 @@ function K(e) {
   });
   return jsx("div", {
     className: RK,
-    children: jsx(_$$d, {
+    children: jsx(DialogTriggerButton, {
       ref: o,
       recordingKey: generateRecordingKey(e, "visibilityVariableBindingControl"),
       "aria-expanded": p,
@@ -143,7 +143,7 @@ function ec({
       recordingKey: generateRecordingKey(s, "blendMode", e)
     }, t);
   });
-  return p && o?.type !== t || o?.type === _$$J(e) ? jsx(_$$d, {
+  return p && o?.type !== t || o?.type === _$$J(e) ? jsx(DialogTriggerButton, {
     "aria-label": getI18nString("properties.dropdown.remove_blend_mode"),
     "aria-expanded": !0,
     actionOnPointerDown: !0,
@@ -202,7 +202,7 @@ function eh({
     eventListeners: ["onWheel"],
     children: jsxs(MenuRootComp, {
       manager,
-      children: [jsx(_$$d, {
+      children: [jsx(DialogTriggerButton, {
         recordingKey: e,
         "aria-label": getI18nString("properties.dropdown.apply_blend_mode"),
         htmlAttributes: {

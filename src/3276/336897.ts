@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setupMenu, MenuItemComp, MenuContainerComp, MenuRootComp } from "../figma_app/860955";
-import { u as _$$u } from "../905/65923";
+import { PopupButtonPrimitive } from "../905/65923";
 import { bL as _$$bL, O6, HG } from "../905/598775";
 import { J as _$$J } from "../905/125993";
 import { getFeatureFlags } from "../905/601108";
@@ -138,7 +138,7 @@ function V(e) {
     manager,
     children: [jsx("div", {
       className: G7,
-      children: jsx(_$$u, {
+      children: jsx(PopupButtonPrimitive, {
         className: Xg,
         "aria-label": getI18nString("fullscreen.toolbar.multiplayer.more_options"),
         "data-tooltip-type": KindEnum.TEXT,

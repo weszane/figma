@@ -29,10 +29,10 @@ import { U as _$$U } from "../905/29665";
 import { T as _$$T } from "../905/485734";
 import { t as _$$t2 } from "../905/340158";
 import { ConfirmationModal2 } from "../figma_app/918700";
-import { x as _$$x } from "../905/209285";
+import { OpenFileButton } from "../905/209285";
 import { I as _$$I } from "../905/266213";
 import { isLibraryModalContextAvailable, useLibraryModalContextOptional } from "../905/753512";
-import { m3, hx } from "../905/66449";
+import { LibraryModalSections, useKeyboardNavigationForClickable } from "../905/66449";
 import { RR } from "../905/514666";
 var l = o;
 function O() {
@@ -154,12 +154,12 @@ export function $$W0(e) {
       children: R
     }), jsxs("div", {
       className: z,
-      children: [jsx(_$$x, {
+      children: [jsx(OpenFileButton, {
         libraryKey: e.libraryKey
       }), t ? jsx(K, {
         onClick: e.onRemapLibraryClick,
         variant: "secondary",
-        kbPath: [m3.TabBodySection.Footer],
+        kbPath: [LibraryModalSections.TabBodySection.Footer],
         kbColumn: 2,
         children: renderI18nText("design_systems.libraries_modal.swap_library")
       }) : jsx("div", {
@@ -197,7 +197,7 @@ export function $$W0(e) {
           disabled: E,
           onClick: k,
           variant: "secondary",
-          kbPath: [m3.TabBodySection.Footer],
+          kbPath: [LibraryModalSections.TabBodySection.Footer],
           kbColumn: 1,
           children: renderI18nText("design_systems.libraries_modal.unpublish")
         }) : jsx("div", {
@@ -239,7 +239,7 @@ function K({
 }) {
   let {
     setKeyboardNavigationElement
-  } = hx({
+  } = useKeyboardNavigationForClickable({
     path: r,
     column: a
   });

@@ -42,7 +42,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
-import { $z, Me } from "../figma_app/617427";
+import { WithTrackedButton, WithTrackedIconButton } from "../figma_app/617427";
 import { getRumLoggingConfig } from "../905/16237";
 import { hideModal, showModalHandler } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
@@ -78,7 +78,7 @@ import { e as _$$e2 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { OnboardingModal } from "../905/425180";
 import { Clh } from "../figma_app/6204";
-import { k as _$$k3 } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { U as _$$U } from "../905/275247";
 import { n as _$$n } from "../4452/550447";
 import { a as _$$a } from "../905/964520";
@@ -117,7 +117,7 @@ let ee = registerModal(function (e) {
           children: t
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               variant: "secondary",
               onClick: d,
               trackingProperties: {
@@ -125,7 +125,7 @@ let ee = registerModal(function (e) {
               },
               trackingOptions: c,
               children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.cancel")
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               variant: "primary",
               onClick: () => {
                 d();
@@ -198,10 +198,10 @@ function eM({
   let p = getRumLoggingConfig();
   return _ ? jsx("div", {
     className: "x78zum5 x6s0dn4 xe8ttls",
-    children: jsx(_$$k3, {
+    children: jsx(LoadingSpinner, {
       size: "sm"
     })
-  }) : jsx(Me, {
+  }) : jsx(WithTrackedIconButton, {
     "aria-label": getI18nString("admin_dashboard.requests.approve"),
     onClick: t => {
       t.stopPropagation();
@@ -228,7 +228,7 @@ function eL({
   setHighlightedItemId: t
 }) {
   let a = getRumLoggingConfig();
-  return jsx(Me, {
+  return jsx(WithTrackedIconButton, {
     "aria-label": getI18nString("admin_dashboard.requests.details.title"),
     onClick: a => {
       a.stopPropagation();

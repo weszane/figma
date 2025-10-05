@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useCallback, useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { EventShield } from "../905/821217";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -99,7 +99,7 @@ function P({
     recordingKey: generateRecordingKey(r, "borderSide")
   };
   let l = Fz(a, t);
-  return jsx(_$$d, {
+  return jsx(DialogTriggerButton, {
     "aria-expanded": e,
     onClick: e => {
       i?.(e);

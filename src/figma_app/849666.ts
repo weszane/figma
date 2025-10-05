@@ -39,7 +39,7 @@ import { customHistory } from "../905/612521";
 import { AUTH_COMPLETE } from "../905/194276";
 import { AuthFlowStep } from "../905/862321";
 import { trackAuthEvent } from "../905/248178";
-import { lR, $z } from "../figma_app/617427";
+import { WithTrackedButtonLargeWide, WithTrackedButton } from "../figma_app/617427";
 import { f as _$$f } from "../figma_app/908415";
 import { hideModalHandler, hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
@@ -214,7 +214,7 @@ let eE = registerModal(function (e) {
             children: renderI18nText("google_device_try_file_modal.enter_email.error_message")
           }), jsx(CustomSpacer, {
             multiple: 2
-          }), jsx(lR, {
+          }), jsx(WithTrackedButtonLargeWide, {
             type: "submit",
             onClick: n => {
               if (n.preventDefault(), n.stopPropagation(), null == r || !1 === isValidEmail(r) || !c) {
@@ -303,7 +303,7 @@ let eb = registerModal(function (e) {
             })
           }), jsx(CustomSpacer, {
             multiple: 3
-          }), jsx(lR, {
+          }), jsx(WithTrackedButtonLargeWide, {
             onClick: e => {
               e.preventDefault();
               e.stopPropagation();
@@ -315,7 +315,7 @@ let eb = registerModal(function (e) {
           }), jsx("div", {
             className: NJ,
             children: renderI18nText("google_device_try_file_modal.got_mail.email_not_received", {
-              send_again_link: jsx($z, {
+              send_again_link: jsx(WithTrackedButton, {
                 variant: "link",
                 onClick: r => {
                   if (r.preventDefault(), r.stopPropagation(), !s) {
@@ -336,7 +336,7 @@ let eb = registerModal(function (e) {
           }), jsx("div", {
             className: NJ,
             children: renderI18nText("google_device_try_file_modal.got_mail.wrong_address", {
-              use_different_email_link: jsx($z, {
+              use_different_email_link: jsx(WithTrackedButton, {
                 variant: "link",
                 onClick: e => {
                   e.preventDefault();
@@ -451,7 +451,7 @@ function eN() {
     }));
   };
   let s = getI18nString("figjam_try.save_board");
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     htmlAttributes: {
       "data-test-id": "meet-btn"
     },
@@ -597,7 +597,7 @@ function eD({
         })]
       }), jsxs("div", {
         className: _o,
-        children: [!isGovCluster() && jsx($z, {
+        children: [!isGovCluster() && jsx(WithTrackedButton, {
           variant: "secondary",
           onClick: () => {
             Rm({
@@ -635,7 +635,7 @@ function eD({
           }
         }, "spacer-div"), jsx("div", {
           className: vk,
-          children: jsx($z, {
+          children: jsx(WithTrackedButton, {
             variant: "signup",
             onClick: () => {
               s({

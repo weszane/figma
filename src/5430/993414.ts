@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import i from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
-import { A5 } from "../figma_app/209680";
+import { SelectDropdown } from "../figma_app/209680";
 import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { Vr } from "../5430/297093";
 import { useRouteParams } from "../figma_app/321395";
@@ -20,7 +20,7 @@ export function $$f0({
   size: c
 }) {
   let u = Vr(r, i);
-  return u.length <= 1 ? null : jsx(A5, {
+  return u.length <= 1 ? null : jsx(SelectDropdown, {
     name: getI18nString("community.landing_page.dropdown_filter__editor"),
     onUpdate: ([t]) => {
       e(t);

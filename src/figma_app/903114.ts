@@ -14,7 +14,7 @@ import { reportError } from "../905/11";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { RelativeTimeDisplay } from "../905/986103";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -292,7 +292,7 @@ function ee({
   let P = getRumLoggingConfig();
   return jsx(DialogFooter, {
     children: jsxs(DialogActionStrip, {
-      children: [jsx($z, {
+      children: [jsx(WithTrackedButton, {
         disabled: A,
         onClick: () => d(null),
         variant: "secondary",
@@ -300,7 +300,7 @@ function ee({
           trackingDescriptor: UpgradeAction.BACK
         },
         children: getI18nString("modify_plan_user_seat_modal.button.back")
-      }), jsx($z, {
+      }), jsx(WithTrackedButton, {
         disabled: A,
         onClick: () => {
           x(!0);

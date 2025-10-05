@@ -5,7 +5,7 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { setupThemeContext } from "../905/614223";
 import { buildUploadUrl } from "../figma_app/169182";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { createNewFileWithRestrictions } from "../905/738636";
 import { postUserFlag } from "../905/985254";
@@ -138,7 +138,7 @@ export function $$j0(e) {
       className: "whats_new_v2--ctaRow--8jvr-",
       children: [jsx(setupThemeContext, {
         brand: "whiteboard",
-        children: jsx($z, {
+        children: jsx(WithTrackedButton, {
           onClick: () => {
             I();
             t(postUserFlag({

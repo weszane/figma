@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
-import { SD } from "../figma_app/243213";
+import { findClosestHTMLElement } from "../figma_app/243213";
 import { H } from "../905/620380";
 if (443 == require.j) {}
 let i = 443 == require.j ? ["Enter", " "] : null;
@@ -36,7 +36,7 @@ export function $$l0(e, t = {}) {
       e.forEach(e => {
         e.ref.current && a.set(e.ref.current, e.shouldClearHighlight);
       });
-      let s = SD(t.target);
+      let s = findClosestHTMLElement(t.target);
       for (; s;) {
         let e = a.get(s);
         if ("boolean" == typeof e) return e;

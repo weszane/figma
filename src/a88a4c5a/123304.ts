@@ -80,7 +80,7 @@ import { F as _$$F2 } from '../905/422355';
 import { OnboardingModal } from '../905/425180';
 import { useModalManager } from '../905/437088';
 import { IconButton } from '../905/443068';
-import { k as _$$k2 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { E as _$$E } from '../905/453826';
 import { l as _$$l7 } from '../905/479687';
@@ -308,7 +308,7 @@ import { l2 as _$$l2, rL as _$$rL, _i, bk, Hl, mr, PM, VK, vP } from '../figma_a
 import { Xu } from '../figma_app/588582';
 import { q as _$$q2, T as _$$T4 } from '../figma_app/590592';
 import { oR as _$$oR, E_ } from '../figma_app/598952';
-import { $z, e6 as _$$e } from '../figma_app/617427';
+import { WithTrackedButton, WithTrackedPopupButtonPrimitive } from '../figma_app/617427';
 import { lV as _$$lV } from '../figma_app/617606';
 import { kQ, pZ } from '../figma_app/620124';
 import { o9 as _$$o } from '../figma_app/621201';
@@ -1060,7 +1060,7 @@ function eU({
       className: JP,
       children: jsx(setupThemeContext, {
         brand: 'dev-handoff',
-        children: jsx($z, {
+        children: jsx(WithTrackedButton, {
           trackingProperties: {
             trackingDescriptor: UpgradeAction.MARK_READY_FOR_DEV
           },
@@ -1494,7 +1494,7 @@ function tq({
         }), jsx('div', {
           children: renderI18nText('dev_mode_demo_file.check_out_our_interactive_test')
         })]
-      }), jsx(_$$e, {
+      }), jsx(WithTrackedPopupButtonPrimitive, {
         trackingProperties: {
           trackingDescriptor: UpgradeAction.DEMO_FILE_THUMBNAIL
         },
@@ -1506,7 +1506,7 @@ function tq({
           src: buildUploadUrl('eab479b46c1a94910464200211143d64fe917ae1')
         })
       }), jsx('div', {
-        children: jsx(_$$e, {
+        children: jsx(WithTrackedPopupButtonPrimitive, {
           trackingProperties: {
             trackingDescriptor: UpgradeAction.CHECK_IT_OUT
           },
@@ -1699,7 +1699,7 @@ function t4() {
             }), jsx('div', {
               children: renderI18nText('upsell.figma_make_upsell_in_design_editor.description')
             })]
-          }), jsx(_$$e, {
+          }), jsx(WithTrackedPopupButtonPrimitive, {
             'data-testid': 'figma-make-upsell-in-design-editor-overlay-asset',
             'trackingProperties': {
               trackingDescriptor: UpgradeAction.FIGMA_MAKE_UPSELL_ASSET
@@ -1717,7 +1717,7 @@ function t4() {
           }), jsx(setupThemeContext, {
             brand: 'seascape',
             mode: 'dark',
-            children: jsx(_$$e, {
+            children: jsx(WithTrackedPopupButtonPrimitive, {
               'data-testid': 'figma-make-upsell-in-design-editor-overlay-cta',
               'trackingProperties': {
                 trackingDescriptor: UpgradeAction.TRY_IT_NOW
@@ -4341,7 +4341,7 @@ function iP() {
     children: jsx(Button, {
       disabled: isRunning,
       onClick: handleClick,
-      iconPrefix: isRunning ? jsx(_$$k2, {}) : void 0,
+      iconPrefix: isRunning ? jsx(LoadingSpinner, {}) : void 0,
       children: 'Inspect groups'
     })
   });
@@ -4373,7 +4373,7 @@ function iV() {
     children: jsx(Button, {
       disabled: isRunning,
       onClick: handleClick,
-      iconPrefix: isRunning ? jsx(_$$k2, {}) : void 0,
+      iconPrefix: isRunning ? jsx(LoadingSpinner, {}) : void 0,
       children: 'Inspect Vis. G Field Hashes'
     })
   });
@@ -4988,7 +4988,7 @@ let rn = memo(() => {
 let ri = memo(() => {
   return jsxs('div', {
     className: 'x78zum5 xdt5ytf x6s0dn4 xl56j7k x1nfngrj x98rzlu',
-    children: [jsx(_$$k2, {}), jsx('span', {
+    children: [jsx(LoadingSpinner, {}), jsx('span', {
       ...stylex.props(ra.loadingText),
       children: renderI18nText('design_linter.modal.loading')
     }), getFeatureFlags().aip_flower_garden_debug && jsx(iX, {})]
@@ -6355,7 +6355,7 @@ function r3({
   } = e;
   let d = jsx('div', {
     className: 'x78zum5 x5yr21d xh8yej3 x6s0dn4 xl56j7k x1v8gsql',
-    children: jsx(_$$k2, {
+    children: jsx(LoadingSpinner, {
       size: 'md'
     })
   });
@@ -7207,14 +7207,14 @@ function sF({
       }),
       'data-tooltip-type': KindEnum.TEXT,
       'disabled': t,
-      'children': t ? jsx(_$$k2, {
+      'children': t ? jsx(LoadingSpinner, {
         size: 'sm'
       }) : jsx(sx, {})
     })
   }) : jsxs('div', {
     ...stylex.props(sD.blockActionButton, sD.blockActionButtonText, sD.blockActionButtonLoading, sD.blockActionButtonDisabled),
     'data-testid': 'design-linter-loading-action-button',
-    'children': [jsx(_$$k2, {
+    'children': [jsx(LoadingSpinner, {
       size: 'sm'
     }), getI18nString('design_linter.suggestion_block.loading')]
   });
@@ -9684,7 +9684,7 @@ function oI({
         disabled: s,
         children: jsxs('div', {
           className: 'x78zum5 x6s0dn4 x1jnr06f',
-          children: [r && jsx(_$$k2, {
+          children: [r && jsx(LoadingSpinner, {
             size: 'sm'
           }), renderI18nText('design_linter.suggestion_block.apply_all_btn')]
         })

@@ -11,7 +11,7 @@ import p from "classnames";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { Z } from "../905/189618";
 import { d as _$$d } from "../905/86829";
-import { Me } from "../figma_app/617427";
+import { WithTrackedIconButton } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { Spacer } from "../905/470281";
 import { k as _$$k } from "../905/963262";
@@ -65,7 +65,7 @@ export function $$U1({
     isDevMode: !0,
     ...s
   }), [p.id, p.type, a, e, t, s]);
-  return e ? jsx(Me, {
+  return e ? jsx(WithTrackedIconButton, {
     ...u,
     "aria-label": u["aria-label"] ?? r,
     htmlAttributes: {

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useRef, useId, useState, useCallback, useEffect } from "react";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { r as _$$r } from "../905/571562";
 import o from "../vendor/128080";
 import { useLatestRef } from "../figma_app/922077";
@@ -89,7 +89,7 @@ function S(e) {
   let t = useHandleMouseEvent(generateRecordingKey(e, "dropdownIconButton"), "click", () => {
     e.onSelect();
   });
-  return jsx(_$$d, {
+  return jsx(DialogTriggerButton, {
     "aria-label": e.iconAriaLabel,
     "aria-expanded": e.isActive,
     variant: "secondary",

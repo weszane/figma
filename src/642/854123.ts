@@ -35,7 +35,7 @@ import { serializeQuery } from "../905/634134";
 import { IW } from "../figma_app/563413";
 import { getFeatureFlags } from "../905/601108";
 import { SvgComponent } from "../905/714743";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nState } from "../figma_app/363242";
 import { A as _$$A2 } from "../b2835def/491732";
 import { WAFImage } from "../905/675859";
@@ -216,7 +216,7 @@ let Y = () => {
 let X = memo(function () {
   let e = Y().map(e => jsx("span", {
     className: cssBuilderInstance.flex.gap8.colorTextBrand.cursorPointer.$,
-    children: jsx($z, {
+    children: jsx(WithTrackedButton, {
       variant: "link",
       onClick: () => {
         openWindow(e.href, "_blank", "noopener");
@@ -399,7 +399,7 @@ function el({
 }) {
   return jsx("span", {
     className: cssBuilderInstance.flex.colorTextBrand.cursorPointer.$,
-    children: jsx($z, {
+    children: jsx(WithTrackedButton, {
       variant: "link",
       onClick: e.onClick,
       children: e.label
@@ -721,7 +721,7 @@ function eS({
       className: cssBuilderInstance.flex.flexColumn.gap16.pt24.$,
       children: e.articles.map(e => jsx("span", {
         className: cssBuilderInstance.colorTextBrand.cursorPointer.alignLeft.fpl__textBodyMediumStrongFontWeight.$,
-        children: jsx($z, {
+        children: jsx(WithTrackedButton, {
           variant: "link",
           trackingProperties: {
             articleId: e.articleId

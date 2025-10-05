@@ -10,7 +10,7 @@ import { k as _$$k } from "../905/582200";
 import { interactiveAnchorTracked } from "../figma_app/637027";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { Me } from "../figma_app/617427";
+import { WithTrackedIconButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { af } from "../figma_app/559491";
 import { PluginAction } from "../905/15667";
@@ -179,7 +179,7 @@ function B(e) {
           })
         }), jsx("div", {
           className: "plugin_panel--iconContainer--KltJf",
-          children: jsx(Me, {
+          children: jsx(WithTrackedIconButton, {
             recordingKey: e.recordingKey,
             trackingProperties: {
               action: "minus"

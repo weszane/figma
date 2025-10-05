@@ -29,7 +29,7 @@ import { sw } from "../figma_app/914957";
 import { Xo } from "../figma_app/482495";
 import { getObservableValue } from "../figma_app/84367";
 import { calculatePickerPositionLeft } from "../905/959568";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { A as _$$A } from "../905/891805";
 import { AutoInteractableWrapper } from "../905/277716";
 import { useNonMixedSelectionPropertyValue } from "../905/275640";
@@ -168,7 +168,7 @@ function X(e) {
   let r = U();
   return jsx(AutoInteractableWrapper, {
     name: "toggle_advanced_settings_button",
-    children: jsx(_$$d, {
+    children: jsx(DialogTriggerButton, {
       "aria-expanded": r,
       onClick: t,
       disabled: e.disabled,

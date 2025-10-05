@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, forwardRef, useEffect, useRef, useCallback } from "react";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
@@ -649,7 +649,7 @@ function eD({
 }) {
   return t ? jsx("div", {
     className: "connected_projects_table--loadingSpinnerContainer--E8QWF",
-    children: jsx(_$$k, {})
+    children: jsx(LoadingSpinner, {})
   }) : e;
 }
 let eM = {
@@ -1068,7 +1068,7 @@ export function $$eq0(e) {
       verticalAlignItems: "center",
       spacing: 16,
       padding: 32,
-      children: jsx(_$$k, {})
+      children: jsx(LoadingSpinner, {})
     }), !I && 0 !== T && jsxs(Fragment, {
       children: [jsx(_$$A, {}), k && a && E && jsx(eU, {
         planType: k,

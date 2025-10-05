@@ -1617,7 +1617,14 @@ export interface UsedLIVEGRAPH {
 }
 
 export interface LoadingState {
-  [key: string]: string
+  [key: string]: APILoadingStatus
+}
+
+export enum APILoadingStatus {
+  INIT = 'INIT',
+  LOADING = 'LOADING',
+  SUCCESS = 'SUCCESS',
+  FAILURE = 'FAILURE',
 }
 
 export interface Mirror {

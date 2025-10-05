@@ -24,8 +24,8 @@ import { trackEventAnalytics } from "../905/449184";
 import { AUTH_INIT } from "../905/194276";
 import { showModalHandler } from "../905/156213";
 import { LU } from "../figma_app/692865";
-import { l as _$$l } from "../905/690005";
-import { G$, FF } from "../figma_app/588092";
+import { registerLoggedOutCommunityActionModal } from "../905/690005";
+import { COMMUNITY_OPT_IN_MODAL_NAME, CommunityOnboardingVariation } from "../figma_app/588092";
 import { A as _$$A } from "../draftjs_composer/840527";
 var m = l;
 let F = ({
@@ -38,7 +38,7 @@ let F = ({
       origin: "comments_signed_out"
     }));
     n(showModalHandler({
-      type: _$$l,
+      type: registerLoggedOutCommunityActionModal,
       data: {
         headerText: "Join Figma to leave comments on files and plugins",
         icon: _$$A,
@@ -49,10 +49,10 @@ let F = ({
   }
   if (e === NoUserProfileStatus.NO_PROFILE) {
     n(showModalHandler({
-      type: G$,
+      type: COMMUNITY_OPT_IN_MODAL_NAME,
       data: {
         userId: t,
-        variations: [FF.COMMENTS, FF.OPT_IN]
+        variations: [CommunityOnboardingVariation.COMMENTS, CommunityOnboardingVariation.OPT_IN]
       }
     }));
     return;

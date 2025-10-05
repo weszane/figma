@@ -8,7 +8,7 @@ import { showModalHandler } from "../905/156213";
 import { isBranchAlt } from "../905/760074";
 import { fA, qN, $c, Iy, p9 } from "../figma_app/803787";
 import { LibraryPublishStatusEnum, PublishStatusEnum } from "../figma_app/633080";
-import { bj, E4, m3 } from "../905/66449";
+import { ConditionalKeyboardWrapper, useElementWithKeyboardArgs, LibraryModalSections } from "../905/66449";
 import { dD } from "../905/519113";
 import { $3 } from "../905/946937";
 class f extends RecordingPureComponent {
@@ -49,7 +49,7 @@ class f extends RecordingPureComponent {
     let e = this.props.currentFileIsPublished;
     let t = this.props.currentFileHasLocalAssets;
     let i = this.props.currentFileHasChangesToPublish;
-    return e ? t || i ? jsx(bj, {
+    return e ? t || i ? jsx(ConditionalKeyboardWrapper, {
       elementRef: this.props.buttonRef,
       kbArgs: this.props.kbArgs,
       children: jsx(ButtonWide, {
@@ -62,7 +62,7 @@ class f extends RecordingPureComponent {
         ref: this.props.buttonRef,
         children: renderI18nText("design_systems.libraries_modal.publish")
       })
-    }) : this.props.publishedState : t ? jsx(bj, {
+    }) : this.props.publishedState : t ? jsx(ConditionalKeyboardWrapper, {
       elementRef: this.props.buttonRef,
       kbArgs: this.props.kbArgs,
       children: jsx(ButtonWide, {
@@ -88,8 +88,8 @@ export let $$_0 = connect(e => ({
   let {
     ref,
     kbArgs
-  } = E4({
-    path: [m3.TabBodySection.Footer],
+  } = useElementWithKeyboardArgs({
+    path: [LibraryModalSections.TabBodySection.Footer],
     column: 2
   });
   let r = useAtomWithSubscription(qN);

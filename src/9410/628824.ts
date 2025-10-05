@@ -6,7 +6,7 @@ import { f as _$$f } from "../figma_app/913332";
 import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
 import { hV } from "../figma_app/822177";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { kD, tS } from "../figma_app/622574";
@@ -71,7 +71,7 @@ function w() {
       children: [a, jsx(RJ, {
         viewOnly: !0,
         variant: "brand-secondary"
-      }), jsx($z, {
+      }), jsx(WithTrackedButton, {
         onClick: () => {
           t && n && i({
             templateIdentifier: {

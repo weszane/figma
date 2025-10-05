@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "../905/438674";
 import { Button } from "../905/521428";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { getSupportEmail } from "../figma_app/169182";
 import { T } from "../figma_app/257703";
@@ -168,7 +168,7 @@ export let $$y0 = registerModal(function (e) {
     fixedTopDynamic: !0,
     children: jsxs("div", {
       className: jE,
-      children: [d && jsx(k, {}), !d && jsxs(Fragment, {
+      children: [d && jsx(LoadingSpinner, {}), !d && jsxs(Fragment, {
         children: [jsx(j, {
           hideEditButton: !0,
           org: a,

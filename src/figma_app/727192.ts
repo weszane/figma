@@ -14,7 +14,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { isCommandEvent, KeyCodes, getModifierBitmask } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 import { y as _$$y } from "../figma_app/404310";
-import { Me } from "../figma_app/617427";
+import { WithTrackedIconButton } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { useDevModeFocusId } from "../figma_app/88239";
 import { lW } from "../figma_app/11182";
@@ -282,7 +282,7 @@ export function $$U1(e) {
       children: X
     }), !z && jsxs("div", {
       className: p()(W0, x && QU),
-      children: [additionalHeaders, W && copyAllValue && !x && jsx(Me, {
+      children: [additionalHeaders, W && copyAllValue && !x && jsx(WithTrackedIconButton, {
         htmlAttributes: {
           ...eventHandlers,
           "data-tooltip": getI18nString("inspect_panel.copy"),

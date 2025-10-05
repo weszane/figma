@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { ButtonWide } from "../905/521428";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { AppStateTsApi, BuzzCloneHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -183,7 +183,7 @@ export function $$C0({
       disabled: 0 === Object.keys(e).length || R,
       children: R ? jsx("div", {
         className: "x78zum5 xl56j7k x6s0dn4",
-        children: jsx(_$$k, {})
+        children: jsx(LoadingSpinner, {})
       }) : getI18nString("buzz.bulk_create.create_assets_button", {
         count: w
       })

@@ -80,7 +80,7 @@ import { A as _$$A1 } from "../2854/77351";
 import { A as _$$A10 } from "../svg/275646";
 import { useMenu, MenuRoot, MenuContainer, MenuItemPrimitive } from "../905/465888";
 import { MenuRootComp, MenuContainerComp, MenuGroupComp, MenuItemComp } from "../figma_app/860955";
-import { d as _$$d2 } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { Link } from "../905/438674";
 import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
@@ -3283,7 +3283,7 @@ function n5({
   }, [m]);
   let eO = jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$d2, {
+    children: [jsx(DialogTriggerButton, {
       "aria-label": getI18nString("dev_handoff.annotations.more_actions"),
       recordingKey: "createAnnotationMoreActions",
       htmlAttributes: {

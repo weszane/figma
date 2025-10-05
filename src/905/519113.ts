@@ -5,7 +5,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter } from "../figma_app/272243";
-import { k as _$$k } from "../905/443820";
+// import { LoadingSpinner } from "../905/443820";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
 import { Button } from "../905/521428";
@@ -76,7 +76,7 @@ import { l as _$$l } from "../905/29665";
 import { fo, og, UJ, Xm } from "../905/935570";
 import { R as _$$R } from "../905/256203";
 import { k as _$$k3 } from "../905/700890";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { AutoLayout, Spacer } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { isBranch } from "../905/760074";
@@ -175,7 +175,7 @@ function ey() {
   });
   state === qy.RUNNING ? e = jsxs(FlexBox, {
     fullWidth: !0,
-    children: [jsx(_$$k, {}), jsx("span", {
+    children: [jsx(LoadingSpinner, {}), jsx("span", {
       className: "xiqqdae xkezfkh",
       children: getI18nString("figmake.ds_imports.extract_library_header")
     }), jsx("span", {
@@ -540,7 +540,7 @@ function e$({
           onClick: t,
           variant: "secondary",
           children: renderI18nText("design_systems.publishing_modal.cancel")
-        }), I === LibrarySourceEnum.LIBRARY && jsx($z, {
+        }), I === LibrarySourceEnum.LIBRARY && jsx(WithTrackedButton, {
           variant: "primary",
           disabled: w && !S,
           onClick: () => S ? v?.() : d(),
@@ -1588,7 +1588,7 @@ function tJ(e) {
             children: tN
           })
         }), jsx(DialogBody, {
-          children: jsx(_$$k, {})
+          children: jsx(LoadingSpinner, {})
         })]
       })
     })

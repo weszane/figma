@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import n from "classnames";
-import { e6 } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { HM } from "../905/190597";
 var a = n;
 export function $$l0({
@@ -11,7 +11,7 @@ export function $$l0({
   trackingProperties: l,
   large: d
 }) {
-  return jsx(e6, {
+  return jsx(WithTrackedPopupButtonPrimitive, {
     className: a()({
       [HM]: !0,
       "connector_modal_cta_button--button--mhvSu text--fontPos12Whyte---tkNx text--_fontBaseWhyte--efAjI": !0,

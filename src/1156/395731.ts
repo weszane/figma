@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Button } from "../905/521428";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { S } from "../5132/724052";
 import { textDisplayConfig } from "../905/687265";
 import { stylex } from "@stylexjs/stylex";
@@ -144,7 +144,7 @@ export function $$v3({
     disabled: !0,
     children: jsxs("div", {
       className: "x78zum5 x1q0g3np x6s0dn4",
-      children: [jsx(k, {}), jsx("p", {
+      children: [jsx(LoadingSpinner, {}), jsx("p", {
         ...stylex.props(E.textBodyMedium),
         children: t
       })]

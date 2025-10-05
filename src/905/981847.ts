@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import a from "classnames";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -57,7 +57,7 @@ export function $$f0(e) {
       })
     }), jsxs("div", {
       className: e.overlayText || e.isUploading ? Xu : VO,
-      children: [e.isUploading && jsx(k, {}), e.overlayText]
+      children: [e.isUploading && jsx(LoadingSpinner, {}), e.overlayText]
     })]
   });
 }

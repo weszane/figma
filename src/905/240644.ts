@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
 export function $$o0({
@@ -10,7 +10,7 @@ export function $$o0({
     "data-testid": "actions-loading-component",
     children: [jsx("div", {
       className: cssBuilderInstance.h24.w24.flex.justifyCenter.itemsCenter.$,
-      children: jsx(k, {})
+      children: jsx(LoadingSpinner, {})
     }), jsx("div", {
       className: cssBuilderInstance.overflowHidden.noWrap.ellipsis.$,
       children: jsx(TextWithTruncation, {

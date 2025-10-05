@@ -13,7 +13,7 @@ import { C as _$$C } from "../905/520159";
 import { a as _$$a } from "../905/964520";
 import { A as _$$A } from "../905/251970";
 import x from "classnames";
-import { e6, $z } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive, WithTrackedButton } from "../figma_app/617427";
 import { j as _$$j } from "../905/261906";
 import { hideModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
@@ -54,7 +54,7 @@ function v({
             top: "8px",
             right: "8px"
           }).$,
-          children: jsx(e6, {
+          children: jsx(WithTrackedPopupButtonPrimitive, {
             htmlAttributes: {
               "data-testid": "close-modal-button"
             },
@@ -84,7 +84,7 @@ function v({
             }).$,
             children: [jsx("div", {
               className: cssBuilderInstance.flex.$,
-              children: t > 1 && jsx($z, {
+              children: t > 1 && jsx(WithTrackedButton, {
                 iconPrefix: jsx(_$$C, {}),
                 variant: "ghost",
                 onClick: n,
@@ -107,16 +107,16 @@ function v({
             }), jsx("div", {
               className: cssBuilderInstance.flex.gap8.justifyEnd.$,
               children: t === a ? jsxs(Fragment, {
-                children: [jsx($z, {
+                children: [jsx(WithTrackedButton, {
                   variant: "secondary",
                   onClick: r,
                   children: renderI18nText("seat_billing_terms.modal.not_now")
-                }), jsx($z, {
+                }), jsx(WithTrackedButton, {
                   variant: "primary",
                   onClick: o,
                   children: renderI18nText("seat_billing_terms.modal.accept")
                 })]
-              }) : jsx($z, {
+              }) : jsx(WithTrackedButton, {
                 variant: "ghost",
                 onClick: i,
                 children: jsxs("div", {

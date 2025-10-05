@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import o from "../vendor/241899";
 import { P } from "../905/347284";
@@ -70,7 +70,7 @@ export function $$x0(e) {
             backToList: e.backToList,
             numMissingLibraries: e.libraryKeys.length
           }), jsxs(P, {
-            children: [x && jsx(k, {}), !x && e.libraryKeys.map(e => {
+            children: [x && jsx(LoadingSpinner, {}), !x && e.libraryKeys.map(e => {
               let t = o[e];
               if (!t) return;
               let r = t.reduce((e, t) => e + (t.type === PrimaryWorkflowEnum.STYLE ? 1 : 0), 0);

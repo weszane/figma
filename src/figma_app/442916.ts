@@ -16,8 +16,8 @@ import { AuthFlowStep } from "../905/862321";
 import { F0 } from "../905/178707";
 import { CustomSpacer } from "../905/585996";
 import { BigTextInput } from "../figma_app/637027";
-import { Ak } from "../905/773401";
-import { lR, $z } from "../figma_app/617427";
+import { landingFormButton } from "../905/773401";
+import { WithTrackedButtonLargeWide, WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { S as _$$S } from "../5132/668270";
 import { showModalHandler, hideModal } from "../905/156213";
@@ -139,7 +139,7 @@ function H({
       })
     }), jsx(CustomSpacer, {
       multiple: 3
-    }), BrowserInfo.isMeetDevice ? jsx(lR, {
+    }), BrowserInfo.isMeetDevice ? jsx(WithTrackedButtonLargeWide, {
       onClick: onClose,
       type: "submit",
       children: renderI18nText("figjam_try.onboarding_submit")
@@ -156,7 +156,7 @@ function H({
         children: renderI18nText("figjam_try.onboarding_name_validation_error")
       }), jsx(CustomSpacer, {
         multiple: 2
-      }), jsx(lR, {
+      }), jsx(WithTrackedButtonLargeWide, {
         type: "submit",
         children: renderI18nText("figjam_try.onboarding_submit")
       })]
@@ -179,7 +179,7 @@ function H({
     }), d && !BrowserInfo.isMeetDevice && jsx("div", {
       className: G,
       children: renderI18nText("figjam_try.already_have_an_account", {
-        log_in: jsx($z, {
+        log_in: jsx(WithTrackedButton, {
           onClick: openLoginModal,
           variant: "link",
           children: renderI18nText("figjam_try.already_have_an_account_log_in")
@@ -237,7 +237,7 @@ function z({
         }), jsx(CustomSpacer, {
           multiple: 2
         })]
-      }), jsx(Ak, {
+      }), jsx(landingFormButton, {
         type: "submit",
         children: l ? getI18nString("whiteboard.open_sessions.onboarding_anonymous_submit") : getI18nString("whiteboard.open_sessions.onboarding_viewer_submit", {
           email: e.email
@@ -267,7 +267,7 @@ function z({
           }), jsx("div", {
             className: B,
             children: renderI18nText("whiteboard.open_sessions.already_have_an_account", {
-              log_in: jsx($z, {
+              log_in: jsx(WithTrackedButton, {
                 onClick: openLoginModal,
                 variant: "link",
                 children: renderI18nText("whiteboard.open_sessions.already_have_an_account_log_in")

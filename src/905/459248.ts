@@ -6,7 +6,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { Button, ButtonWide } from "../905/521428";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { IconButton } from "../905/443068";
 import { r as _$$r } from "../905/571562";
 import { A as _$$A } from "../905/24328";
@@ -623,7 +623,7 @@ export let $$eZ0 = registerModal(function (e) {
                 "--color-icon": "var(--btn-color)",
                 transform: "translate(-50%, -50%)"
               }).$,
-              children: jsx(_$$k, {})
+              children: jsx(LoadingSpinner, {})
             })]
           })]
         })]

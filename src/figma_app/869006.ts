@@ -36,7 +36,7 @@ import { n2 } from "../figma_app/478006";
 import { useCurrentPlanUser } from "../figma_app/465071";
 import { i as _$$i } from "../905/46262";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { e6 } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { accountTypeRequestHandler } from "../905/281010";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition, PositioningStrategy } from "../905/858282";
@@ -262,7 +262,7 @@ function Z(e) {
     children: jsxs("div", {
       className: cssBuilderInstance.relative.$,
       onMouseEnter: () => !a && requestCanBeNudged ? s(!0) : null,
-      children: [jsx(e6, {
+      children: [jsx(WithTrackedPopupButtonPrimitive, {
         disabled: !0,
         type: "button",
         className: "pending_upgrade_request_view--buttonToolbarTertiary--Cb3ED",

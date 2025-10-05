@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { Button } from "../905/521428";
 import { e } from "../905/149844";
@@ -375,7 +375,7 @@ export function $$X0({
     trackingContext: a,
     source: l
   });
-  if (isLoading) return jsx(_$$k, {});
+  if (isLoading) return jsx(LoadingSpinner, {});
   let x = existingProjects.filter(e => e.status.toLowerCase() !== TL.REMOVED);
   return jsxs("div", {
     children: [jsx(ButtonPrimitive, {

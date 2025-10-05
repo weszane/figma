@@ -50,7 +50,7 @@ import { T$, w3 } from "../figma_app/865646";
 import { setFileBrowserUserId, getUserPlan, setCommunityProfileId } from "../figma_app/502247";
 import { OrganizationType } from "../905/833838";
 import { s as _$$s2, c as _$$c } from "../905/744710";
-import { G$, FF } from "../figma_app/588092";
+import { COMMUNITY_OPT_IN_MODAL_NAME, CommunityOnboardingVariation } from "../figma_app/588092";
 import { ButtonBasePrimary } from "../figma_app/637027";
 import { registerModal } from "../905/102752";
 import { HeaderModal } from "../905/519092";
@@ -470,10 +470,10 @@ let eq = (e, t) => {
   let n = getI18nString("navbar.profile_switcher.create_a_community_profile");
   let l = () => {
     t(showModalHandler({
-      type: G$,
+      type: COMMUNITY_OPT_IN_MODAL_NAME,
       data: {
         userId: e.id,
-        variations: [FF.OPT_IN]
+        variations: [CommunityOnboardingVariation.OPT_IN]
       }
     }));
   };

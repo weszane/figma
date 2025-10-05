@@ -5,7 +5,7 @@ import { useDelayedTrue } from "../905/815905";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogHiddenTitle, DialogBody } from "../figma_app/272243";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { styleBuilderInstance } from "../905/941192";
 import { popModalStack } from "../905/156213";
 function p(e) {
@@ -35,7 +35,7 @@ function p(e) {
           style: styleBuilderInstance.flex.itemsCenter.justifyCenter.add({
             height: `${e.estimatedHeight}px`
           }).$,
-          children: jsx(k, {})
+          children: jsx(LoadingSpinner, {})
         })
       })]
     })

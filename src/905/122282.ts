@@ -16,7 +16,7 @@ import { getCurrentTeam, getCurrentTeamId } from "../figma_app/598018";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { memo, useMemo, useCallback, useState, useEffect, useRef, useLayoutEffect } from "react";
 import { sha1Hex } from "../905/125019";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
@@ -25,7 +25,7 @@ import C from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { useSubscription } from "../figma_app/288654";
 import { SvgComponent } from "../905/714743";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/859195";
 import { UpgradeAction } from "../905/370443";
@@ -708,7 +708,7 @@ function ta({
         checkProgress() && submit?.();
       },
       "data-testid": "publishing-modal-publish-button",
-      children: draftSubmissionResult?.result === "pending" || N ? jsx(_$$k, {
+      children: draftSubmissionResult?.result === "pending" || N ? jsx(LoadingSpinner, {
         size: "sm"
       }) : getI18nString("community.publishing.publish")
     })]
@@ -1378,12 +1378,12 @@ function tO({
               }), renderI18nText("community.publish.fix_errors")]
             })
           }), jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               variant: "secondary",
               disabled: k,
               onClick: eD,
               children: renderI18nText("general.cancel")
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               variant: "primary",
               type: "submit",
               ref: E,
@@ -1399,7 +1399,7 @@ function tO({
                 style: {
                   width: x ? `${x - 16}px` : void 0
                 },
-                children: jsx(_$$k, {
+                children: jsx(LoadingSpinner, {
                   size: "sm"
                 })
               }) : o ? renderI18nText("templates.publishing.publish.updates") : renderI18nText("templates.publishing.publish")

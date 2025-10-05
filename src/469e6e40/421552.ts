@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId, useState, useMemo, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sortByPropertyWithOptions, sortBySelectors } from "../figma_app/656233";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/419236";
@@ -44,7 +44,7 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { S as _$$S2 } from "../905/711470";
 import { A as _$$A } from "../905/251970";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { parsePxInt } from "../figma_app/783094";
 import { useWindowDimensions } from "../905/745972";
 import { SecureLink } from "../figma_app/637027";
@@ -115,7 +115,7 @@ function X(e) {
   };
   return jsxs("div", {
     className: "x78zum5 xl56j7k x6s0dn4",
-    children: [jsx($z, {
+    children: [jsx(WithTrackedButton, {
       variant: "secondary",
       iconPrefix: jsx(_$$S2, {}),
       ...getTriggerProps(),
@@ -173,7 +173,7 @@ function X(e) {
             children: renderI18nText("resources_tab.libraries.filters")
           }), jsxs("div", {
             className: "x78zum5 x6s0dn4",
-            children: [enabledFilterIds.size > 0 && jsx($z, {
+            children: [enabledFilterIds.size > 0 && jsx(WithTrackedButton, {
               variant: "ghost",
               onClick: () => {
                 onChange(new Set());
@@ -1698,7 +1698,7 @@ export function $$tx1(e) {
       })]
     }), isLoading ? jsx("div", {
       className: cssBuilderInstance.wFull.hFull.flex.flexRow.justifyCenter.itemsCenter.$,
-      children: jsx(_$$k, {})
+      children: jsx(LoadingSpinner, {})
     }) : jsx("div", {
       className: cssBuilderInstance.overflowAuto.$,
       children: jsx(_$$P, {

@@ -31,7 +31,7 @@ import { P as _$$P } from '../905/347284';
 import { selectCurrentUser } from '../905/372672';
 import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
-import { k as _$$k2 } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { AutoLayout } from '../905/470281';
 import { Jz } from '../905/504727';
@@ -54,7 +54,7 @@ import { isVsCodeEnvironment } from '../905/858738';
 import { W as _$$W } from '../905/865092';
 import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, showDropdownThunk } from '../905/929976';
-import { d as _$$d } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { TextWithTruncation } from '../905/984674';
 import { S as _$$S } from '../905/989967';
 import { N as _$$N } from '../3271/584206';
@@ -100,7 +100,7 @@ import { BI } from '../figma_app/546509';
 import { af, Qi } from '../figma_app/559491';
 import { IW } from '../figma_app/563413';
 import { a as _$$a2, z as _$$z } from '../figma_app/601188';
-import { Me } from '../figma_app/617427';
+import { WithTrackedIconButton } from '../figma_app/617427';
 import { clickableBaseLinkTracked } from '../figma_app/637027';
 import { isTrackedState, usedComponentsStateGroupsPromise } from '../figma_app/646357';
 import { shuffle } from '../figma_app/656233';
@@ -1157,7 +1157,7 @@ function tJ({
     if (hasAllowList ? allowListIsLoading : S) {
       return jsx('div', {
         className: 'xqui205 xh8yej3 x1o2pa38',
-        children: jsx(_$$k2, {})
+        children: jsx(LoadingSpinner, {})
       });
     }
     if (!(B !== null) && !hasAllowList) return null;
@@ -1172,7 +1172,7 @@ function tJ({
         'children': [hasAllowList ? renderI18nText('universal_insert.approved_from_figma_community') : renderI18nText('universal_insert.from_community'), jsx('a', {
           href,
           target: '_blank',
-          children: jsx(Me, {
+          children: jsx(WithTrackedIconButton, {
             onClick,
             'aria-label': getI18nString('universal_insert.go_to_community'),
             'htmlAttributes': {
@@ -1764,7 +1764,7 @@ function sd({
       className: 'fd_browse_resource_modal--searchBarFilterButton--hQeym',
       children: jsx('div', {
         ref: f,
-        children: jsx(_$$d, {
+        children: jsx(DialogTriggerButton, {
           'aria-expanded': h,
           'onClick': H,
           'htmlAttributes': {

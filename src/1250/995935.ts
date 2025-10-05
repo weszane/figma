@@ -26,7 +26,7 @@ import { T as _$$T2 } from '../905/378189';
 import { A as _$$A3 } from '../905/389851';
 import { s as _$$s } from '../905/403855';
 import { useModalManager } from '../905/437088';
-import { k as _$$k2 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { openWindow } from '../905/508367';
 import { Button } from '../905/521428';
@@ -117,7 +117,7 @@ import { rc } from '../figma_app/531331';
 import { getAtomMutate } from '../figma_app/566371';
 import { getCurrentTeam, getCurrentTeamId } from '../figma_app/598018';
 import { n3 as _$$n2, DB, Vg } from '../figma_app/600310';
-import { $z, c as _$$c, e6 as _$$e } from '../figma_app/617427';
+import { WithTrackedButton, WithTrackedButtonLarge, WithTrackedPopupButtonPrimitive } from '../figma_app/617427';
 import { tS as _$$tS2, ac, J3, kD, kN } from '../figma_app/622574';
 import { BaseLinkComponent, ButtonSecondaryTracked, SecureLink } from '../figma_app/637027';
 import { canAdminTeam, canEditTeam } from '../figma_app/642025';
@@ -162,7 +162,7 @@ function ek({
     'data-tooltip': getI18nString('billing.open_invoice_reminder.button_tooltip'),
     'data-tooltip-show-immediately': !0
   };
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     onClick: () => {
       t.length > 1 ? n(selectViewAction({
         view: 'teamAdminConsole',
@@ -224,7 +224,7 @@ function th() {
   let {
     openCooperPublishFlow
   } = _$$t2();
-  return jsx(_$$e, {
+  return jsx(WithTrackedPopupButtonPrimitive, {
     className: 'x78zum5 xjwf9q1 xx99whi xl56j7k x6s0dn4 x19y5rnk x1r7xphn x1a33sea',
     onClick: () => openCooperPublishFlow('editor-pre-publish-banner'),
     trackingProperties: {
@@ -236,7 +236,7 @@ function th() {
   });
 }
 function tb() {
-  return jsx(_$$e, {
+  return jsx(WithTrackedPopupButtonPrimitive, {
     className: 'x78zum5 xjwf9q1 xx99whi xl56j7k x6s0dn4 x19y5rnk xkq88pg x1tk3asg x1ypdohk',
     onClick: () => openWindow(qv, '_blank'),
     trackingProperties: {
@@ -276,7 +276,7 @@ function tk({
         })
       }), jsx(DialogFooter, {
         children: jsx(DialogActionStrip, {
-          children: jsx(_$$k2, {
+          children: jsx(LoadingSpinner, {
             size: 'md'
           })
         })
@@ -1484,7 +1484,7 @@ let nt = {
             children: T
           }), jsx('span', {
             className: 'x10l6tqk xwa60dl x1nrll8i x11lhmoz',
-            children: jsx(_$$k2, {
+            children: jsx(LoadingSpinner, {
               size: 'md'
             })
           })]
@@ -1813,7 +1813,7 @@ let no = {
       i && (l(!0), await i(), l(!1));
     };
     if (!t || n) return null;
-    let p = jsx(_$$c, {
+    let p = jsx(WithTrackedButtonLarge, {
       disabled: !i || o,
       onClick: m,
       variant: 'primary',
@@ -2047,7 +2047,7 @@ let nd = {
       description: renderI18nText('banner.starter_view_only.upgrade_to_pro'),
       button: canEditTeam ? {
         type: MA.CUSTOM,
-        element: jsx(_$$e, {
+        element: jsx(WithTrackedPopupButtonPrimitive, {
           onClick: d,
           style: styleBuilderInstance.mr8.colorTextBrand.$,
           children: renderI18nText('banner.starter_view_only.upgrade_button')

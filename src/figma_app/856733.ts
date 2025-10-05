@@ -13,7 +13,7 @@ import { useSingleEffect } from '../905/791079';
 import { postUserFlag } from '../905/985254';
 import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { selectCurrentFile } from '../figma_app/516028';
-import { $z } from '../figma_app/617427';
+import { WithTrackedButton } from '../figma_app/617427';
 
 /**
  * AppleEulaModalProps - Props for AppleEulaModal component
@@ -116,7 +116,7 @@ export function AppleEulaModal({
             count: eulasToShow
           })
         }), jsxs(DialogActionStrip, {
-          children: [jsx($z, {
+          children: [jsx(WithTrackedButton, {
             onClick: () => {
               trackEulaClick('decline');
               onDecline?.();
@@ -124,7 +124,7 @@ export function AppleEulaModal({
             },
             variant: 'secondary',
             children: renderI18nText('community.eula.disagree')
-          }), jsx($z, {
+          }), jsx(WithTrackedButton, {
             onClick: () => {
               trackEulaClick('accept');
               dispatch(postUserFlag({

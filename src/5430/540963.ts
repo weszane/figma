@@ -12,17 +12,17 @@ import { registerModal } from '../905/102752';
 import { J as _$$J2 } from '../905/125993';
 import { KindEnum } from '../905/129884';
 import { OnboardingSequence } from '../905/152487';
-import { l as _$$l } from '../905/152724';
+import { ProfilePartnerBadge } from '../905/152724';
 import { hideModal, showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { ResourceTypes } from '../905/178090';
 import { useSingleEffect } from '../905/791079';
 import { LoadingRenderer } from '../905/211326';
-import { w as _$$w } from '../905/230422';
+import { registerFollowsListModal } from '../905/230422';
 import { PricingOptions } from '../905/237873';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { W as _$$W } from '../905/316655';
+import { ProfileFollowButton } from '../905/316655';
 import { MediaQuerySvgComponent } from '../905/331623';
 import { P as _$$P } from '../905/347284';
 import { A6 } from '../905/350234';
@@ -31,7 +31,7 @@ import { z as _$$z2 } from '../905/353894';
 import { selectCurrentUser } from '../905/372672';
 import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
-import { k as _$$k2 } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { E as _$$E } from '../905/453826';
 import { handleAtomEvent } from '../905/502364';
@@ -403,7 +403,7 @@ function eh({
     className: 'x78zum5 x1q0g3np x6s0dn4 x1v2ro7d',
     children: [s && jsx(e_, {
       profile: e
-    }), !r && jsx(_$$W, {
+    }), !r && jsx(ProfileFollowButton, {
       profile: e
     }), r && jsx(ep, {
       profile: e
@@ -548,7 +548,7 @@ function eE({
       emptyResourceStateQuery: m1(e.editorType || _$$k.Editors.ALL),
       customLoadingView: o ? jsx('div', {
         className: 'x78zum5 xl56j7k x6s0dn4 x1bz8wuu',
-        children: jsx(_$$k2, {})
+        children: jsx(LoadingSpinner, {})
       }) : void 0,
       skipResourceLimit: !0
     }), c && jsx(_$$D, {
@@ -1881,7 +1881,7 @@ function r9(e) {
     readOnly: !n,
     maxLength: 100
   });
-  let h = jsx(_$$W, {
+  let h = jsx(ProfileFollowButton, {
     profile,
     trackingProperties: {
       viewingProfileId: profile.id
@@ -1941,7 +1941,7 @@ function r9(e) {
         truncate: 'end',
         text: o,
         className: 'profile_resources_grid--profileNameText--WdY6t'
-      }), jsx(_$$l, {
+      }), jsx(ProfilePartnerBadge, {
         profile,
         tooltip: !0
       })]
@@ -2004,7 +2004,7 @@ function se({
   useEffect(() => {
     if (s && a) {
       o(showModalHandler({
-        type: _$$w,
+        type: registerFollowsListModal,
         data: {
           currentSelectedView: t,
           profile: s,

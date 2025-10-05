@@ -1,7 +1,7 @@
 import A from 'classnames';
 import { createContext, memo, useCallback, useContext, useEffect, useMemo } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { u as _$$u } from '../905/65923';
+import { PopupButtonPrimitive } from '../905/65923';
 import { bm, mb, Zf } from '../905/107436';
 import { ImageOverlayComponent } from '../905/129046';
 import { KindEnum } from '../905/129884';
@@ -13,7 +13,7 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { X } from '../905/319582';
 import { UpgradeAction } from '../905/370443';
 import { OnboardingModal } from '../905/425180';
-import { k as _$$k } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { l as _$$l } from '../905/479687';
 import { ButtonWide } from '../905/521428';
 import { e } from '../905/621515';
@@ -26,7 +26,7 @@ import { noop } from 'lodash-es';
 ;
 import { j$, xm } from '../905/936278';
 import { calculatePickerPositionLeft } from '../905/959568';
-import { d as _$$d } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { JUF } from '../figma_app/6204';
 import { buildUploadUrl } from '../figma_app/169182';
 import { yesNoTrackingEnum } from '../figma_app/198712';
@@ -96,7 +96,7 @@ export function $$Z0({
     standardMet
   } = useContext($$X1).colorContrastInfo;
   return jsxs(Fragment, {
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       'aria-label': getI18nString('fullscreen.properties_panel.color_contrast.check'),
       'aria-expanded': e,
       'onClick': c,
@@ -301,7 +301,7 @@ export function $$Q2({
   }, [setIgnoreTimeout]);
   if (!contrastInfoShown) return null;
   if (isUnavailable || !foregroundColor || !backgroundColor) {
-    let e = toolStatus === j$.LOADING ? jsx(_$$k, {
+    let e = toolStatus === j$.LOADING ? jsx(LoadingSpinner, {
       htmlAttributes: {
         'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.color_contrast.loading')
@@ -381,7 +381,7 @@ export function $$Q2({
     'role': 'group',
     'className': 'color_contrast_info--colorContrastRow--yDDg9 color_contrast_info--colorContrastRowBase--x7tX0',
     'ref': contrastRowRef,
-    'children': [jsxs(_$$u, {
+    'children': [jsxs(PopupButtonPrimitive, {
       'aria-haspopup': 'dialog',
       'aria-expanded': showColorSwatchInfoFlyout,
       'aria-label': getI18nString('fullscreen.properties_panel.color_contrast_ratio', {
@@ -433,7 +433,7 @@ export function $$Q2({
         })]
       }), jsx('div', {
         ref: dropdownTargetRef,
-        children: jsx(_$$d, {
+        children: jsx(DialogTriggerButton, {
           'aria-expanded': isDropdownShown,
           'onClick': toggleDropdown,
           'aria-label': getI18nString('fullscreen.properties_panel.color_contrast.settings'),

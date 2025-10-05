@@ -87,7 +87,7 @@ import { Yh } from "../figma_app/357047";
 import { m7, Hh } from "../figma_app/386160";
 import { A as _$$A2 } from "../svg/179975";
 import { A as _$$A3 } from "../svg/299062";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { s as _$$s } from "../8826/112372";
 import { U as _$$U, s as _$$s2 } from "../642/632766";
 import { Q as _$$Q } from "../905/567676";
@@ -1340,7 +1340,7 @@ function t_({
   });
   let u = trackFileEventWithUser();
   let g = useSelector(selectSceneGraphSelectionKeys);
-  let m = jsx(_$$d, {
+  let m = jsx(DialogTriggerButton, {
     onClick: () => {
       n(!t);
       StackBindingsCpp.setFocusStackPanelInput(SpacingConstants.PADDING_ALL, !1);

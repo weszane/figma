@@ -22,7 +22,7 @@ import { IconButton } from "../905/443068";
 import { X } from "../905/736922";
 import { lW } from "../figma_app/11182";
 import { getVisibleTheme } from "../905/640017";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { g as _$$g } from "../905/125190";
 import { VisualBellActions } from "../905/302958";
 import { UserAPIHandlers } from "../905/93362";
@@ -218,7 +218,7 @@ function U({
   };
   return l ? jsxs("div", {
     className: "codebase_suggestions_onboarding_step--loading--bMSPa",
-    children: [jsx(_$$k, {}), getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_generating_token")]
+    children: [jsx(LoadingSpinner, {}), getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_generating_token")]
   }) : jsxs("div", {
     children: [jsxs("div", {
       className: "codebase_suggestions_onboarding_step--buttons--VXcCO",

@@ -11,7 +11,7 @@ import { ShelfViewType, isMonetizedWithClientMeta, isPlugin, hasMonetizedResourc
 import { EditorType } from '../figma_app/155287';
 import { FTemplateCategoryType } from '../figma_app/191312';
 import { mapResourceType } from '../figma_app/471982';
-import { e6 } from '../figma_app/617427';
+import { WithTrackedPopupButtonPrimitive } from '../figma_app/617427';
 import { getProductPriceString, hasTrialAvailable } from '../figma_app/808294';
 import { DefaultLoadingSpinner } from '../figma_app/858013';
 let s = a;
@@ -51,7 +51,7 @@ export function $$S1({
   let N = !!(hasClientMeta(e) && e.viewer_mode === FTemplateCategoryType.WHITEBOARD || (isPlugin(e) || isWidget(e)) && e.editor_type === EditorType.FIGJAM);
   let C = r === ShelfViewType.DETAIL && isMonetizedWithClientMeta(e);
   let w = renderI18nText('community.buyer.preview');
-  let O = jsx(e6, {
+  let O = jsx(WithTrackedPopupButtonPrimitive, {
     onClick: I,
     className: 'purchase_button_view--previewButton--d8Fc0',
     trackingProperties: {

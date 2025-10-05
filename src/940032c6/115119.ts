@@ -181,7 +181,7 @@ import { ConfirmationModal } from '../905/441305';
 import { v as _$$v7 } from '../905/442517';
 import { isBakeStarterPaywallEnabledWithoutLimit } from '../905/442612';
 import { IconButton } from '../905/443068';
-import { k as _$$k7 } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { J as _$$J0 } from '../905/445197';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { EmbedProviderType } from '../905/450589';
@@ -262,7 +262,7 @@ import { N as _$$N1 } from '../905/720559';
 import { Point } from '../905/736624';
 import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { A as _$$A22 } from '../905/744692';
-import { T as _$$T3 } from '../905/745591';
+import { AnnouncementPrimitive } from '../905/745591';
 import { useWindowDimensions } from '../905/745972';
 import { ArrowPosition, DraggableModal, DraggableModalManager } from '../905/748636';
 import { H as _$$H6 } from '../905/748658';
@@ -332,7 +332,7 @@ import { a as _$$a4 } from '../905/964520';
 import { b as _$$b8 } from '../905/966382';
 import { IMAGE_TYPE_VALUES } from '../905/966582';
 import { O as _$$O4 } from '../905/969533';
-import { d as _$$d2 } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { J as _$$J12 } from '../905/980942';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
@@ -695,7 +695,7 @@ import { e as _$$e6 } from '../figma_app/601186';
 import { a as _$$a12, z as _$$z10 } from '../figma_app/601188';
 import { Bu } from '../figma_app/604494';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
-import { $z, c as _$$c9, Ih } from '../figma_app/617427';
+import { WithTrackedButton, WithTrackedButtonLarge, WithTrackedButtonWide } from '../figma_app/617427';
 import { lV as _$$lV, AD, H5, MK } from '../figma_app/617606';
 import { renameCollectionOptimistically, getCollectionSummaryStatus, getCollectionViewStatus, deleteCollectionOptimistically, createCollectionOptimistically } from '../figma_app/618433';
 import { _b as _$$_b, uP as _$$uP, Dw, HA, IX, Og, q9 } from '../figma_app/618665';
@@ -2265,7 +2265,7 @@ function iD({
           className: 'x98rzlu x78zum5 x13a6bvl',
           children: [R.length > 0 && jsx('div', {
             className: 'x1mh6rdz',
-            children: jsx(_$$d2, {
+            children: jsx(DialogTriggerButton, {
               'ref': T,
               'aria-label': getI18nString('sites.panel.code_window_more_options'),
               'aria-expanded': I.showing,
@@ -3225,7 +3225,7 @@ function ax({
     fileKey: e
   }));
   if (i.status === _$$H3.LOADING) {
-    return jsx(_$$k7, {
+    return jsx(LoadingSpinner, {
       'data-testid': 'loading-spinner'
     });
   }
@@ -3513,7 +3513,7 @@ function ab() {
       label: getI18nString('sites.toolbar.publish_modal.issues_label'),
       content: jsxs('div', {
         className: 'x78zum5 x1q0g3np',
-        children: [jsx(_$$k7, {
+        children: [jsx(LoadingSpinner, {
           size: 'sm'
         }), jsx('span', {
           className: 'x1iog12x x1n0bwc9',
@@ -4421,7 +4421,7 @@ function sp({
               'data-testid': 'sitesModalPublishButton',
               'children': r || inProgress ? jsxs('div', {
                 className: v()(cssBuilderInstance.flex.itemsCenter.gap4.justifyCenter.$, 'styles-module--loadingSpinnerWrapper--mnPxw'),
-                children: [jsx(_$$k7, {
+                children: [jsx(LoadingSpinner, {
                   size: 'sm'
                 }), renderI18nText('sites.toolbar.publish_modal.publishing_label')]
               }) : Z ? renderI18nText('sites.toolbar.publish_modal.update') : renderI18nText('sites.toolbar.publish_modal.publish')
@@ -4714,7 +4714,7 @@ function sj({
   hasEllipsis: i
 }) {
   let n = e.key;
-  let a = t ? _$$c9 : Ih;
+  let a = t ? WithTrackedButtonLarge : WithTrackedButtonWide;
   let s = renderI18nText('sites.toolbar.publish');
   let r = renderI18nText('figmake.header.publish');
   _$$$D({
@@ -4795,7 +4795,7 @@ function sA({
   }, [manager, c]);
   return jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$c9, {
+    children: [jsx(WithTrackedButtonLarge, {
       'children': renderI18nText('figmake.header.publish'),
       'variant': 'secondary',
       'data-testid': 'make-publish-button',
@@ -5640,7 +5640,7 @@ function rN({
   let c = d.current?.getBoundingClientRect();
   c || (n.showing && reportError(ServiceCategories.AI_PRODUCTIVITY, new Error('FigMake connected project view: dropdownBoundingRect is null')), c = new DOMRect(0, 0, 0, 0));
   return jsxs(Fragment, {
-    children: [jsx(_$$d2, {
+    children: [jsx(DialogTriggerButton, {
       'aria-expanded': n.showing,
       'ref': d,
       'aria-label': getI18nString('figmake.settings.connected_project.dropdown.label'),
@@ -5872,7 +5872,7 @@ function rD({
         children: e
       }),
       actions: jsxs(Fragment, {
-        children: [jsx(_$$k7, {}), i && n && jsx(rN, {
+        children: [jsx(LoadingSpinner, {}), i && n && jsx(rN, {
           connectedProject: n,
           isPending: !0
         })]
@@ -5961,7 +5961,7 @@ function rU({
 function rK() {
   return jsx('div', {
     className: 'x78zum5 xl56j7k x6s0dn4 x98rzlu',
-    children: jsx(_$$k7, {})
+    children: jsx(LoadingSpinner, {})
   });
 }
 function rH() {
@@ -7561,7 +7561,7 @@ function oY({
       })
     }), jsx('div', {
       className: 'x78zum5 x1q0g3np x6s0dn4 xxk0z11 xztvwtv x1nfngrj',
-      children: g ? jsx(_$$k7, {}) : jsxs(Fragment, {
+      children: g ? jsx(LoadingSpinner, {}) : jsxs(Fragment, {
         children: [jsx(Button, {
           variant: 'secondary',
           onClick: t,
@@ -7732,7 +7732,7 @@ function oQ({
       })]
     }), m && jsx('div', {
       className: 'x78zum5 x1q0g3np x6s0dn4 xxk0z11 xztvwtv',
-      children: jsx($z, {
+      children: jsx(WithTrackedButton, {
         'variant': 'secondary',
         'recordingKey': 'edit-subdomain',
         'data-testid': 'edit-subdomain-cta',
@@ -7966,7 +7966,7 @@ function dn({
       className: 'x78zum5',
       children: [jsx('div', {
         className: 'x1db2dqx',
-        children: jsx($z, {
+        children: jsx(WithTrackedButton, {
           variant: 'secondary',
           onClick: e,
           type: 'button',
@@ -7976,13 +7976,13 @@ function dn({
           },
           children: renderI18nText('sites.metadata.domains.cancel')
         })
-      }), jsx($z, {
+      }), jsx(WithTrackedButton, {
         type: 'submit',
         disabled: p,
         trackingProperties: {
           trackingDescriptor: UpgradeAction.SAVE
         },
-        children: p ? jsx(_$$k7, {}) : renderI18nText('sites.metadata.domains.save')
+        children: p ? jsx(LoadingSpinner, {}) : renderI18nText('sites.metadata.domains.save')
       })]
     })]
   });
@@ -8011,7 +8011,7 @@ function dl({
   let f = o && h || p.status === 'loading';
   let _ = f || n || p.status !== 'loaded';
   return jsx('div', {
-    children: jsx($z, {
+    children: jsx(WithTrackedButton, {
       'variant': 'secondary',
       'disabled': _,
       'onClick': () => {
@@ -8032,7 +8032,7 @@ function dl({
       'trackingProperties': {
         trackingDescriptor: UpgradeAction.ADD_CONNECTED_DOMAIN
       },
-      'children': f ? jsx(_$$k7, {
+      'children': f ? jsx(LoadingSpinner, {
         'data-testid': 'loading-spinner'
       }) : jsx('div', {
         className: 'x8rdmch xctkrei x1gskr33 x1ihwiht',
@@ -8137,7 +8137,7 @@ function dc({
       className: 'x1n2onr6',
       children: jsxs(EventShield, {
         eventListeners: r ? ['onMouseDown'] : [],
-        children: [jsx(_$$d2, {
+        children: [jsx(DialogTriggerButton, {
           'aria-expanded': r,
           'aria-label': getI18nString('sites.metadata.domain.more_options'),
           'onClick': o,
@@ -8374,7 +8374,7 @@ function dk({
   if (status === 'loading') {
     return jsx('div', {
       className: 'x78zum5 xl56j7k',
-      children: jsx(_$$k7, {})
+      children: jsx(LoadingSpinner, {})
     });
   }
   let {
@@ -8522,7 +8522,7 @@ function dS({
         className: 'x78zum5 x1q0g3np x1jnr06f',
         children: [jsx(dC, {
           domainInfo: e
-        }), g && jsx(_$$k7, {
+        }), g && jsx(LoadingSpinner, {
           'data-testid': 'loading-spinner',
           'size': 'sm'
         })]
@@ -10142,7 +10142,7 @@ function cb({
   if (_$$$D({
     fileKey: i
   }), n.isLoading) {
-    return jsx(_$$k7, {
+    return jsx(LoadingSpinner, {
       size: 'sm'
     });
   }
@@ -12010,7 +12010,7 @@ function uW({
       className: 'x78zum5 x1q0g3np x6s0dn4 x167g77z',
       children: [jsx(_$$g2, {
         className: 'xoqga94 x1iog12x'
-      }), jsx(_$$T3, {
+      }), jsx(AnnouncementPrimitive, {
         role: 'alert',
         className: 'x1g2dr8m xiqqdae xkezfkh x1giz659 x14kxzw3',
         children: getI18nString('figmake.feedback_modal.title')
@@ -16021,7 +16021,7 @@ function hr({
     disabled: i,
     variant: 'primary',
     onClick: c,
-    children: i ? jsx(_$$k7, {}) : renderI18nText('dakota.import_csv_modal.select_file_button')
+    children: i ? jsx(LoadingSpinner, {}) : renderI18nText('dakota.import_csv_modal.select_file_button')
   });
 }
 function ho({
@@ -17830,7 +17830,7 @@ function ga() {
             displayOverTarget: !0,
             items: h
           }) : null]
-        }) : jsx(_$$k7, {})
+        }) : jsx(LoadingSpinner, {})
       })]
     }), getFeatureFlags().dakota_focus_binding && S && jsx(gl, {})]
   });
@@ -21703,7 +21703,7 @@ function bd({
       className: 'sites_template_tile--sitesTile--YocFZ',
       children: [n && jsx('div', {
         className: 'sites_template_tile--loadingSpinner--uPkfX',
-        children: jsx(_$$k7, {})
+        children: jsx(LoadingSpinner, {})
       }), jsx(WAFImage, {
         onDragStart: preventDefault,
         className: 'sites_template_tile--tileImage---JSpP',
@@ -22102,7 +22102,7 @@ function bI({
         r(e.id, t);
       },
       variant: 'primary',
-      children: i ? jsx(_$$k7, {}) : renderI18nText('sites.onboarding.templates.use_this_template')
+      children: i ? jsx(LoadingSpinner, {}) : renderI18nText('sites.onboarding.templates.use_this_template')
     })]
   });
 }

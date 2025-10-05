@@ -6,7 +6,7 @@ import { noop } from 'lodash-es';
 import { TabLoop } from "../905/718764";
 import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
-import { T as _$$T } from "../905/745591";
+import { AnnouncementPrimitive } from "../905/745591";
 import { ScreenReaderOnly } from "../905/172252";
 import { h as _$$h } from "../905/994594";
 import { A as _$$A } from "../905/251970";
@@ -978,7 +978,7 @@ function eB({
   let c = (!l && !i && !s || getFeatureFlags().interop_pages) && (e > 0 || t || hasNotLoaded(o) || !n);
   return jsxs("div", {
     className: _M,
-    children: [jsx(_$$T, {
+    children: [jsx(AnnouncementPrimitive, {
       "data-testid": "canvas-search-info",
       className: qp,
       role: e > 0 ? "status" : "alert",

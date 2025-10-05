@@ -33,7 +33,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { isNullish } from "../figma_app/95419";
 import { A as _$$A } from "../905/251970";
 import { g as _$$g } from "../905/125190";
-import { e6, Ih } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive, WithTrackedButtonWide } from "../figma_app/617427";
 import { lk } from "../figma_app/109538";
 import { SalesUpsellModalType } from "../905/380801";
 import { B as _$$B3 } from "../905/261906";
@@ -66,7 +66,7 @@ function X({
         fontWeight: 400
       }).$,
       children: renderI18nText("plan_comparison.campfire.org.description")
-    }), jsx(e6, {
+    }), jsx(WithTrackedPopupButtonPrimitive, {
       className: "campfire_org_upgrade_multi_team_modal--closeButton--THg83",
       onClick: t,
       children: jsx(_$$A, {})
@@ -77,7 +77,7 @@ function X({
         children: [jsx(W, {
           currency: e
         }), jsxs("div", {
-          children: [jsx(Ih, {
+          children: [jsx(WithTrackedButtonWide, {
             onClick: a,
             children: renderI18nText("plan_comparison.campfire.choose_plan")
           }), jsx("div", {

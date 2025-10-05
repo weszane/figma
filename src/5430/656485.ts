@@ -24,7 +24,7 @@ import { PluginImage } from "../905/480825";
 import { FM } from "../5430/773914";
 import { AG } from "../figma_app/999312";
 import { Z as _$$Z } from "../figma_app/947784";
-import { So } from "../figma_app/209680";
+import { HoverDropdown } from "../figma_app/209680";
 import { A6 } from "../905/350234";
 import { ResourceType } from "../figma_app/354658";
 import { EditorType } from "../figma_app/155287";
@@ -260,7 +260,7 @@ function eo({
         currentUserLiked: i,
         likeCount: n.like_count,
         inPluginRow: !0
-      }), jsx(So, {
+      }), jsx(HoverDropdown, {
         disableRepositioning: !0,
         className: l()("plugin_row--toolTip--Uxz1M dropdown--dropdown--IX0tU text--fontPos14--OL9Hp text--_fontBase--QdLsd", "plugin_row--toolTipPositioning--OgVuh"),
         preview: renderI18nText("community.try.used_by_n_people", {
@@ -354,7 +354,7 @@ export function $$ea0({
         className: "plugin_row--privatePluginRowAvatarName--3yafW text--fontPos13--xW8hS text--_fontBase--QdLsd",
         children: e_.name
       })]
-    }) : jsx(So, {
+    }) : jsx(HoverDropdown, {
       preview: jsx(_$$Z, {
         author: e_,
         isHoverStateRedesignEnabled: !0
@@ -391,7 +391,7 @@ export function $$ea0({
     ef = t?.length > 0 ? _$$P(t[0])[0] : e.thumbnail_url || "";
   }
   let ey = _$$X(ef) ? "16/9" : "2/1";
-  let eg = jsx(So, {
+  let eg = jsx(HoverDropdown, {
     preview: jsx(Z, {
       plugin: e,
       aspectRatio: ey,

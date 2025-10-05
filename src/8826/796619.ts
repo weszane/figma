@@ -19,7 +19,7 @@ import { KindEnum } from "../905/129884";
 import { L as _$$L } from "../905/158054";
 import { k as _$$k2 } from "../905/336528";
 import { l6, c$ as _$$c$ } from "../905/794875";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { bL as _$$bL } from "../905/911410";
 import { useLatestRef } from "../figma_app/922077";
 import { k as _$$k3 } from "../905/582200";
@@ -58,7 +58,7 @@ function T({
   return jsxs(Fragment, {
     children: [jsx(P, {
       name: n.buttonInteractableName,
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         actionOnPointerDown: !0,
         onClick: t => {
           if (t.stopPropagation(), o.showing) {

@@ -4,8 +4,8 @@ import { connect, useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
 import { Button } from "../905/521428";
 import { EventShield } from "../905/821217";
-import { d as _$$d } from "../905/976845";
-import { k as _$$k } from "../905/443820";
+import { DialogTriggerButton } from "../905/976845";
+import { LoadingSpinner } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
@@ -14,7 +14,7 @@ import { P as _$$P } from "../905/537307";
 import { getFeatureFlags } from "../905/601108";
 import { c$, ms, MM } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { TrackedLink } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
@@ -136,7 +136,7 @@ function D(e) {
     eventListeners: ["onMouseDown"],
     children: [jsx("div", {
       ref: n,
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         "aria-expanded": o(),
         disabled: e.loading,
         "aria-label": getI18nString("team_join_links.team_invite_link_settings"),
@@ -179,7 +179,7 @@ function M(e) {
     className: "team_join_link_permissions--linkAndDropdown--dOdkB",
     children: [jsxs("span", {
       className: "team_join_link_permissions--urlSection--fh6VF",
-      children: [!e.url && jsx(_$$k, {}), e.url && jsx("span", {
+      children: [!e.url && jsx(LoadingSpinner, {}), e.url && jsx("span", {
         className: O,
         children: e.url
       })]
@@ -217,7 +217,7 @@ function M(e) {
     className: "team_join_link_permissions--linkAndDropdownV2--7DFWL",
     children: [jsxs("div", {
       className: "team_join_link_permissions--urlSectionV2--YS4eI",
-      children: [!e.url && jsx(_$$k, {}), e.url && jsx("span", {
+      children: [!e.url && jsx(LoadingSpinner, {}), e.url && jsx("span", {
         className: O,
         children: e.url
       })]
@@ -264,11 +264,11 @@ registerModal(function (e) {
         children: renderI18nText("team_join_links.modal_description")
       }), jsx(DialogFooter, {
         children: jsxs(DialogActionStrip, {
-          children: [jsx($z, {
+          children: [jsx(WithTrackedButton, {
             variant: "secondary",
             onClick: () => t(popModalStack()),
             children: renderI18nText("team_join_links.cancel")
-          }), jsx($z, {
+          }), jsx(WithTrackedButton, {
             variant: "destructive",
             onClick: () => {
               e.resetLink();

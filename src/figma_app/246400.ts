@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, Suspense } from "react";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { ButtonPrimitive } from "../905/632989";
 import { styleBuilderInstance } from "../905/941192";
@@ -11,7 +11,7 @@ function c() {
       width: d,
       height: "100px"
     }).$,
-    children: jsx(k, {
+    children: jsx(LoadingSpinner, {
       size: "sm"
     })
   });

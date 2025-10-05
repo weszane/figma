@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
@@ -48,7 +48,7 @@ export function $$y0() {
       }) : renderI18nText("proto.prototype_panel.video_error_panel.upgrade_team_to_upload_video")
     }), !(canMoveFileToProPlus && y) && jsx("div", {
       className: Tw,
-      children: jsx($z, {
+      children: jsx(WithTrackedButton, {
         htmlAttributes: {
           "data-testid": "video-error-panel-upgrade-team-button"
         },

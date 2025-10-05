@@ -15,7 +15,7 @@ import { getSingletonSceneGraph } from '../905/700578';
 import { useDropdown } from '../905/848862';
 import { noop } from 'lodash-es';
 ;
-import { d as _$$d } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { defaultSerializationOptions, extractBooleanFieldDescriptions } from '../905/998509';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { MM, wv } from '../figma_app/236327';
@@ -394,7 +394,7 @@ function P({
   let g = h.current?.getBoundingClientRect();
   g || (g = new DOMRect(0, 0, 0, 0));
   return jsxs(Fragment, {
-    children: [jsx(_$$d, {
+    children: [jsx(DialogTriggerButton, {
       'aria-expanded': o.showing,
       'onClick': () => o.toggle(),
       'aria-label': 'JSX debug settings',

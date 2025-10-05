@@ -60,7 +60,7 @@ import { r as _$$r2 } from '../905/398386';
 import { s as _$$s2 } from '../905/411990';
 import { OnboardingModal } from '../905/425180';
 import { Link } from '../905/438674';
-import { k as _$$k3 } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { AutoLayout } from '../905/470281';
 import { X as _$$X } from '../905/482718';
@@ -1835,7 +1835,7 @@ function aw(e) {
   return t.status !== 'loaded' || e.isLoading ? jsx('div', {
     'className': cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     'data-testid': 'invoices-tab-loading',
-    'children': jsx(_$$k3, {})
+    'children': jsx(LoadingSpinner, {})
   }) : jsx(ay, {
     planInvoices: t.data,
     billingSummary: e.billingSummary,
@@ -1955,7 +1955,7 @@ function aA(e) {
   return a.status !== 'loaded' || g.status !== 'loaded' || h.status !== 'loaded' || w.status === 'loading' || e.isLoading ? jsx('div', {
     'className': cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     'data-testid': 'billing-overview-tab-loading',
-    'children': jsx(_$$k3, {})
+    'children': jsx(LoadingSpinner, {})
   }) : jsx(_$$i2, {
     adjustAnnualSeatsAction: e.adjustAnnualSeatsAction,
     adjustRenewalSeats: N,

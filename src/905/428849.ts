@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { A } from "../vendor/723372";
 import { rN, Jo } from "../905/872033";
 import { r as _$$r } from "../905/571562";
-import { u as _$$u } from "../905/65923";
+import { PopupButtonPrimitive } from "../905/65923";
 import { dialogTriggerButton, icon } from "../905/820710";
 let c = forwardRef(({
   variant: e,
@@ -25,7 +25,7 @@ let u = forwardRef(({
   htmlAttributes: r,
   size: c = "md",
   ...u
-}, p) => jsx(_$$u, {
+}, p) => jsx(PopupButtonPrimitive, {
   ...u,
   ref: Jo(p),
   onClick: t,

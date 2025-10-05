@@ -33,7 +33,7 @@ import { Y as _$$Y } from '../905/912236';
 import { noop } from 'lodash-es';
 ;
 import { styleBuilderInstance } from '../905/941192';
-import { d as _$$d } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { ay, RW } from '../figma_app/17220';
 import { useIsFullscreenSlidesView } from '../figma_app/21029';
@@ -914,7 +914,7 @@ export function $$to1({
     }),
     children: t || r ? jsx('span', {
       className: zU,
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         'ref': r ? e.dropdownTargetButtonRef : void 0,
         'recordingKey': e.recordingKey,
         'aria-expanded': e.isSelected,

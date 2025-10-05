@@ -17,7 +17,7 @@ import { selectCurrentUser } from "../905/372672";
 import { liveStoreInstance } from "../905/713695";
 import { hasClientMeta, isWidget, ResourceTypeNoComment } from "../figma_app/45218";
 import { a as _$$a } from "../figma_app/601188";
-import { G$, FF } from "../figma_app/588092";
+import { COMMUNITY_OPT_IN_MODAL_NAME, CommunityOnboardingVariation } from "../figma_app/588092";
 export function $$k0(e, t, i, p) {
   let b = function (e, t, i, l) {
     let a = useDispatch();
@@ -38,10 +38,10 @@ export function $$k0(e, t, i, p) {
       if (e.stopPropagation(), s) {
         if (!s.community_profile_id) {
           a(showModalHandler({
-            type: G$,
+            type: COMMUNITY_OPT_IN_MODAL_NAME,
             data: {
               userId: s.id,
-              variations: [FF.OPT_IN],
+              variations: [CommunityOnboardingVariation.OPT_IN],
               onFinish: () => o()
             }
           }));
@@ -123,10 +123,10 @@ export function $$k0(e, t, i, p) {
       if (e.stopPropagation(), m) {
         if (!m.community_profile_id) {
           x(showModalHandler({
-            type: G$,
+            type: COMMUNITY_OPT_IN_MODAL_NAME,
             data: {
               userId: m.id,
-              variations: [FF.OPT_IN],
+              variations: [CommunityOnboardingVariation.OPT_IN],
               onFinish: () => k()
             }
           }));

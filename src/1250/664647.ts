@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useRef, useEffect } from "react";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import s from "classnames";
 var l = s;
@@ -21,7 +21,7 @@ export let $$d0 = forwardRef(function ({
     className: "component_browser_input_dropdown--container--2FBO7",
     children: d ? jsx("li", {
       className: "component_browser_input_dropdown--loading--dViPC",
-      children: jsx(k, {})
+      children: jsx(LoadingSpinner, {})
     }) : jsx("ul", {
       ref: c,
       className: "component_browser_input_dropdown--list--m1Kui",

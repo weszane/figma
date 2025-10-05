@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { E as _$$E } from "../905/53857";
 import { IconButton } from "../905/443068";
 import { L as _$$L } from "../1577/392861";
 import { i as _$$i } from "../905/22844";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { showModal } from "../905/156213";
@@ -160,7 +160,7 @@ function L({
             },
             children: jsx(_$$i, {})
           })]
-        }), i && jsx($z, {
+        }), i && jsx(WithTrackedButton, {
           variant: "secondary",
           disabled: e.isTeamDefault,
           onClick: () => {
@@ -219,7 +219,7 @@ export let $$B0 = registerModal(function ({
             children: [jsx("div", {
               className: "manage_color_palettes_modal--manageText---c1Ro",
               children: renderI18nText("whiteboard.color_palettes.manage_modal.manage_your_teams_color_palettes")
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               variant: "primary",
               onClick: () => {
                 h(showModal({
@@ -252,7 +252,7 @@ export let $$B0 = registerModal(function ({
                 theme: i,
                 showMakeDefaultButton: e
               }, t.uuid))]
-            }) : jsx(_$$k, {
+            }) : jsx(LoadingSpinner, {
               size: "lg",
               htmlAttributes: {
                 "data-testid": "loading-spinner"

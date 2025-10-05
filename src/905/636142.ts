@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useContext } from "react";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { u as _$$u } from "../905/911813";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
@@ -26,7 +26,7 @@ export function $$g0({
       [c6]: "OnboardNewTextContentRowLocation" !== y && !g,
       [_$$e]: _
     }),
-    children: jsx(_$$d, {
+    children: jsx(DialogTriggerButton, {
       "aria-expanded": !!_,
       onClick: e => A ? A(e.currentTarget) : void 0,
       "aria-label": l,

@@ -6,7 +6,7 @@ import { ServiceCategories } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuHiddenTitleComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
-import { u as _$$u } from "../905/65923";
+import { PopupButtonPrimitive } from "../905/65923";
 import { z6, CU, H_ } from "../905/963340";
 import { z as _$$z } from "../905/252950";
 import { o as _$$o } from "../905/830042";
@@ -1246,7 +1246,7 @@ function eU(e) {
   } = getTriggerProps();
   return jsxs(MenuRootComp, {
     manager,
-    children: [jsx(_$$u, {
+    children: [jsx(PopupButtonPrimitive, {
       ...a,
       ref: t => {
         ref(t);

@@ -4,7 +4,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "../905/521428";
 import { ButtonPrimitive } from "../905/632989";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { _L } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { AppStateTsApi } from "../figma_app/763686";
@@ -213,7 +213,7 @@ export function $$I0({
         }, {}) : isLoading ? jsx(function () {
           return jsxs("div", {
             className: "x78zum5 xl56j7k x6s0dn4 x5yr21d x167g77z",
-            children: [jsx(_$$k, {}), jsx("div", {
+            children: [jsx(LoadingSpinner, {}), jsx("div", {
               className: "x1n0bwc9",
               children: getI18nString("slides.charts.import_data_modal.loading")
             })]

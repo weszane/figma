@@ -1,12 +1,12 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
-import s, { k as _$$k } from "../905/443820";
+import s, { LoadingSpinner } from "../905/443820";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { Xf } from "../figma_app/153916";
 import { useSubscription } from "../figma_app/288654";
 import { b as _$$b } from "../figma_app/246400";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
@@ -252,7 +252,7 @@ function $(e) {
       className: WZ,
       children: jsx("div", {
         className: ix,
-        children: jsx($z, {
+        children: jsx(WithTrackedButton, {
           variant: "primary",
           onClick: () => {
             c();
@@ -303,7 +303,7 @@ function Z({
             })]
           })
         })]
-      }), !!i && jsx(_$$k, {}), !!t && !i && jsx("div", {
+      }), !!i && jsx(LoadingSpinner, {}), !!t && !i && jsx("div", {
         children: getI18nString("file_permissions_modal.update_seat_tab.per_month", {
           priceString: t
         })

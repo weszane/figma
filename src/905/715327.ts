@@ -38,7 +38,7 @@ import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { V as _$$V } from "../905/223767";
@@ -1081,7 +1081,7 @@ function tT({
             children: renderI18nText("design_systems.libraries_modal.publish_components_as_a_library")
           }), jsx("p", {
             children: renderI18nText("design_systems.libraries_modal.share_components_on_new_plan", {
-              upgradePlanText: jsx($z, {
+              upgradePlanText: jsx(WithTrackedButton, {
                 variant: "link",
                 onClick: function () {
                   s(showModalHandler({

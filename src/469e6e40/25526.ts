@@ -40,7 +40,7 @@ import { Ui3PositionType } from "../905/11928";
 import { M as _$$M } from "../469e6e40/490222";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
-import { k as _$$k3 } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { AutoLayout } from "../905/470281";
 import { b as _$$b } from "../905/168239";
 import { K as _$$K2 } from "../905/628118";
@@ -146,7 +146,7 @@ import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip,
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { Button } from "../905/521428";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { registerModal } from "../905/102752";
 import { g as _$$g4 } from "../469e6e40/136803";
 import { HeaderModal } from "../905/519092";
@@ -431,7 +431,7 @@ function eo(e) {
         },
         src: a,
         allow: "clipboard-write"
-      }) : jsx(_$$k3, {
+      }) : jsx(LoadingSpinner, {
         loadingText: "Loading search results"
       })
     })]
@@ -497,7 +497,7 @@ function ed(e) {
         },
         src: a,
         allow: "clipboard-write"
-      }) : jsx(_$$k3, {
+      }) : jsx(LoadingSpinner, {
         loadingText: "Loading access insights"
       })
     })]
@@ -1888,7 +1888,7 @@ let aw = registerModal(function (e) {
               variant: "secondary",
               onClick: e.onClose,
               children: renderI18nText("general.cancel")
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               variant: "destructive",
               disabled: !_,
               type: "submit",
@@ -2465,7 +2465,7 @@ function aG(e) {
   return e.isLoading || "loaded" !== a.status ? jsx("div", {
     className: cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     "data-testid": "billing-groups-tab-loading",
-    children: jsx(_$$k3, {})
+    children: jsx(LoadingSpinner, {})
   }) : jsx(Fragment, {
     children: t.length > 0 ? jsx(aU, {
       org: e.org,
@@ -2499,7 +2499,7 @@ function aH(e) {
   return "loaded" !== t.status ? jsx("div", {
     className: cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     "data-testid": "invoices-tab-loading",
-    children: jsx(_$$k3, {})
+    children: jsx(LoadingSpinner, {})
   }) : jsx(_$$Q3, {
     minContentWidth: 1024,
     children: jsx("div", {
@@ -2527,7 +2527,7 @@ function a4() {
   return jsx("div", {
     className: cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     "data-testid": "billing-overview-tab-loading",
-    children: jsx(_$$k3, {})
+    children: jsx(LoadingSpinner, {})
   });
 }
 function a5(e) {
@@ -3782,7 +3782,7 @@ function nH(e) {
     }), e.isLoading ? jsx("div", {
       className: "x78zum5 xl56j7k x6s0dn4 x5yr21d",
       "data-testid": "loading-spinner",
-      children: jsx(_$$k3, {
+      children: jsx(LoadingSpinner, {
         size: "lg"
       })
     }) : o]

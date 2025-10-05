@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EventShield } from "../905/821217";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { A as _$$A } from "../905/891805";
 import { t as _$$t } from "../905/947268";
 import { Z } from "../905/498136";
@@ -59,7 +59,7 @@ let $$k2 = forwardRef(function ({
     "data-testid": "instance-swapper-settings-container",
     children: [jsx(EventShield, {
       eventListeners: _ ? ["onMouseDown"] : [],
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         onClick: v,
         "aria-expanded": _,
         ref: Ay(u, c),

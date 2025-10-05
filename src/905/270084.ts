@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { memoizeByArgs } from "../figma_app/815945";
 import u from "classnames";
 import { parsePxInt } from "../figma_app/783094";
-import { Og } from "../figma_app/243213";
+import { isInputElement } from "../figma_app/243213";
 import { trackedSvgComponent } from "../figma_app/637027";
 import { Wi, JR } from "../figma_app/162641";
 import { P as _$$P } from "../905/347284";
@@ -176,7 +176,7 @@ function P(e) {
   }, [eL, getItemKey, singleSelect, eh, eD, eO]);
   let eM = useCallback(e => isRowClickable ? isRowClickable(e) : eL(e), [isRowClickable, eL]);
   let ej = useCallback((e, t) => {
-    if (!Og(e.target) && eM(t)) return eh.size > 0 ? eF(e, t) : onRowClick?.(t);
+    if (!isInputElement(e.target) && eM(t)) return eh.size > 0 ? eF(e, t) : onRowClick?.(t);
   }, [eM, eh.size, eF, onRowClick]);
   let eU = useCallback(e => {
     let n = getItemKey(items[e]);
@@ -619,7 +619,7 @@ class j extends Component {
     };
     this.isRowClickable = e => this.props.isRowClickable ? this.props.isRowClickable(e) : this.isItemSelectable(e);
     this.onRowClick = (e, t) => {
-      if (!Og(e.target) && this.isRowClickable(t)) return this.state.selectedItemKeys.size > 0 ? this.onRowSelect(e, t) : this.props.onRowClick?.(t);
+      if (!isInputElement(e.target) && this.isRowClickable(t)) return this.state.selectedItemKeys.size > 0 ? this.onRowSelect(e, t) : this.props.onRowClick?.(t);
     };
     this.isFirstInSelectedGroup = e => {
       let t = this.props.items[e];

@@ -11,9 +11,9 @@ import { useState } from "react";
 import { throwError } from "../figma_app/465776";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { G } from "../905/800369";
-import { lR } from "../figma_app/617427";
+import { WithTrackedButtonLargeWide } from "../figma_app/617427";
 import { LJ } from "../c5e2cae0/793139";
 import { W } from "../c5e2cae0/173602";
 import { Um } from "../figma_app/681712";
@@ -112,7 +112,7 @@ function A({
   let k = jsx("div", {
     className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
     "data-testid": "cart-review-submit-loading",
-    children: jsx(_$$k, {})
+    children: jsx(LoadingSpinner, {})
   });
   return jsxs(_$$x, {
     title: e,
@@ -137,7 +137,7 @@ function A({
       }).$,
       "data-testid": "cart-review-terms-checkbox",
       children: A
-    }), jsx(lR, {
+    }), jsx(WithTrackedButtonLargeWide, {
       onClick: g,
       disabled: E,
       htmlAttributes: {

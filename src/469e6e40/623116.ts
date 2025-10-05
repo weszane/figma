@@ -25,7 +25,7 @@ import { Wi, JR } from "../figma_app/162641";
 import { y2 } from "../figma_app/563413";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { Me, $z } from "../figma_app/617427";
+import { WithTrackedIconButton, WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
@@ -1615,7 +1615,7 @@ function tL(e) {
       children: jsx(TextWithTruncation, {
         children: renderI18nText("teams_table.assign_teams")
       })
-    }), jsx(Me, {
+    }), jsx(WithTrackedIconButton, {
       "aria-label": getI18nString("members_table.csv_export.get_csv"),
       onClick: e4,
       variant: "secondary",
@@ -1639,7 +1639,7 @@ function tL(e) {
       children: jsx(TextWithTruncation, {
         children: renderI18nText("teams_table.assign_teams")
       })
-    }), jsx($z, {
+    }), jsx(WithTrackedButton, {
       iconPrefix: jsx(_$$v, {}),
       onClick: e4,
       trackingProperties: {
@@ -1864,7 +1864,7 @@ function tL(e) {
               },
               suggestedFilters: tn,
               rowFilters: []
-            }), e5 && jsx($z, {
+            }), e5 && jsx(WithTrackedButton, {
               iconPrefix: jsx(_$$A, {}),
               variant: "ghost",
               onClick: () => {

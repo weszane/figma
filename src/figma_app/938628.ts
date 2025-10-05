@@ -52,7 +52,7 @@ import { Legend } from '../905/932270';
 import { noop } from 'lodash-es';
 ;
 import { CU, H_, z6 } from '../905/963340';
-import { d as _$$d } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { N as _$$N2 } from '../905/995635';
 import { A as _$$A11 } from '../2854/374356';
 import { cssBuilderInstance } from '../cssbuilder/589278';
@@ -3294,7 +3294,7 @@ export function $$r48(e) {
     disabled: p,
     recordingKey: e.recordingKey
   });
-  let P = d ? jsx(_$$d, {
+  let P = d ? jsx(DialogTriggerButton, {
     'aria-expanded': g,
     'recordingKey': generateRecordingKey(e, 'constraintsButton'),
     'onClick': () => f(!g),

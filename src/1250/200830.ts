@@ -53,7 +53,7 @@ import { TabOpenBehavior } from "../figma_app/915202";
 import { c4, Au } from "../figma_app/518077";
 import { K as _$$K } from "../1250/166809";
 import { OC } from "../1250/791136";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { ImageOverlayComponent } from "../905/129046";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { alwaysTrue } from "../figma_app/863319";
@@ -559,7 +559,7 @@ function eP(e) {
     children: [jsxs(ak, {
       children: [renderI18nText("rcs.welcome_step.welcome_to_figma"), jsx("br", {}), jsx("br", {}), renderI18nText("rcs.welcome_step.we_re_different_from_other_design_tools_in_some_really_special_ways_so_we_d_like_to_take_you_through_them")]
     }), jsx(iy, {
-      children: jsx($z, {
+      children: jsx(WithTrackedButton, {
         onClick: e.onClickPrimaryCta,
         variant: "primary",
         children: renderI18nText("rcs.welcome_step_view.next")

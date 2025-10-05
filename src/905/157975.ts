@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
@@ -220,7 +220,7 @@ let $$B0 = registerModal(function (e) {
         padding: 0,
         children: "loading" === I.status ? jsx("div", {
           className: "dsa_file_view_modal--loadingSpinnerContainer--aSSip",
-          children: jsx(_$$k, {})
+          children: jsx(LoadingSpinner, {})
         }) : "loaded" === I.status && I.data.is_currently_migrating ? jsx(_$$l2, {}) : jsx("div", {
           className: "dsa_file_view_modal--container--olqOl",
           children: jsx(D, {

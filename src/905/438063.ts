@@ -5,7 +5,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
@@ -163,7 +163,7 @@ export let $$M0 = registerModal(function (e) {
             disabled: 0 === g.length && 0 === y.length || t,
             children: t ? jsxs("div", {
               className: "x78zum5 x1q0g3np x6s0dn4 x1n0bwc9",
-              children: [jsx(_$$k, {}), getI18nString("buzz.toolbar.export_modal.export_button_text_exporting", {
+              children: [jsx(LoadingSpinner, {}), getI18nString("buzz.toolbar.export_modal.export_button_text_exporting", {
                 assetCount: Q
               })]
             }) : getI18nString("buzz.toolbar.export_modal.export_button_text", {

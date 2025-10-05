@@ -19,7 +19,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, getI18nStringAlias, getLocalizedPath, renderI18nText } from '../905/303541';
 import { UpgradeAction } from '../905/370443';
 import { Link } from '../905/438674';
-import { k as _$$k3 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { appendSearchParam } from '../905/508367';
 import { HeaderModalContainer } from '../905/519092';
@@ -31,8 +31,8 @@ import { k as _$$k2 } from '../905/644504';
 import { I8, TA } from '../905/667970';
 import { Hc, p8, sT } from '../905/694658';
 import { SvgComponent } from '../905/714743';
-import { T as _$$T } from '../905/745591';
-import { Q9 } from '../905/773401';
+import { AnnouncementPrimitive } from '../905/745591';
+import { TrackedButton } from '../905/773401';
 import { AuthAction, AuthErrorCode, AuthField, AuthFlowStep, AuthProvider, ClientPlatform } from '../905/862321';
 import { t as _$$t2 } from '../905/897919';
 import { sendWithRetry } from '../905/910117';
@@ -125,7 +125,7 @@ function v(e) {
           }), e.auth.hint && jsx('p', {
             className: y()('auth_form--hint--nmNHu auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw', o),
             children: e.auth.hint
-          }), !e.hideError && !!e.auth.error && jsx(_$$T, {
+          }), !e.hideError && !!e.auth.error && jsx(AnnouncementPrimitive, {
             role: 'alert',
             children: jsx('p', {
               className: 'auth_form--error--EtrjX auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw',
@@ -515,7 +515,7 @@ function Q(e) {
         })
       }), jsx(CustomSpacer, {
         multiple: 4
-      }), jsx(Q9, {
+      }), jsx(TrackedButton, {
         name: 'request_org_access_modal_cta',
         onClick: () => {
           o(!0);
@@ -770,7 +770,7 @@ function ey(e) {
       }), jsx(CustomSpacer, {
         multiple: 3
       }), e.auth.error && jsxs(Fragment, {
-        children: [jsx(_$$T, {
+        children: [jsx(AnnouncementPrimitive, {
           role: 'alert',
           children: jsx('div', {
             className: 'app_auth--error--EpXOP',
@@ -949,7 +949,7 @@ function eb(e) {
       appDescriptor: t
     });
     o = jsxs(Fragment, {
-      children: [jsx(_$$T, {
+      children: [jsx(AnnouncementPrimitive, {
         role: 'alert',
         children: jsxs('h1', {
           className: ec,
@@ -1021,7 +1021,7 @@ function ev(e) {
         children: [jsx('div', {
           className: 'app_auth--message--WN7nZ auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw',
           children: getI18nString('auth.generic-loading')
-        }), jsx(_$$k3, {})]
+        }), jsx(LoadingSpinner, {})]
       })
     })
   });

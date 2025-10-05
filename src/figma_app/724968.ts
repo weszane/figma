@@ -5,7 +5,7 @@ import { MAX_IMAGE_URLS } from "../905/869092";
 import { noop } from 'lodash-es';
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuTitleComp, MenuItemComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { bL as _$$bL, c$ } from "../905/575478";
 import { Legend } from "../905/932270";
 import { s as _$$s } from "../905/551945";
@@ -121,7 +121,7 @@ export function $$ec2({
     manager,
     children: [jsx("div", {
       className: "x19y5rnk x1q3zegg",
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         ...getTriggerProps(),
         "aria-label": r,
         "data-tooltip-show-above": !0,

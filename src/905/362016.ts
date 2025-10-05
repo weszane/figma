@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { E as _$$E } from "../905/500201";
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
@@ -291,7 +291,7 @@ export function $$H0(e) {
       libraryFileKey: file.key
     }), b ? jsx("div", {
       className: z,
-      children: jsx(_$$k, {})
+      children: jsx(LoadingSpinner, {})
     }) : v.length > 0 && jsxs("div", {
       className: G,
       children: [jsx("div", {
@@ -306,7 +306,7 @@ export function $$H0(e) {
       className: "dsa_file_view_overview--divider--TIoHM"
     }), E && !b ? jsx("div", {
       className: z,
-      children: jsx(_$$k, {})
+      children: jsx(LoadingSpinner, {})
     }) : x.length > 0 && jsxs("div", {
       className: G,
       children: [jsx("div", {
@@ -329,7 +329,7 @@ function W({
   let o = useMemo(() => i?.filter(e => !e.unpublishedAt), [i]);
   return "loading" === t.status ? jsx("div", {
     className: z,
-    children: jsx(_$$k, {})
+    children: jsx(LoadingSpinner, {})
   }) : o && 0 !== o.length ? jsxs("div", {
     className: G,
     children: [jsx("div", {

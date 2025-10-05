@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
-import { u as _$$u } from "../905/65923";
+import { PopupButtonPrimitive } from "../905/65923";
 import { ButtonPrimitive } from "../905/632989";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -17,7 +17,7 @@ import x from "classnames";
 import { colorToHex } from "../905/436288";
 import { areColorArraysEqual, areColorsEqual, parseHex, multiplayerColors, blackColor } from "../figma_app/191804";
 import { generateUUIDv4 } from "../905/871474";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { showModal, popModalStack } from "../905/156213";
@@ -71,7 +71,7 @@ function V({
       })
     }), jsxs("div", {
       className: "edit_color_palette_modal--colorCircleOuter--ZJqke",
-      children: [jsx(_$$u, {
+      children: [jsx(PopupButtonPrimitive, {
         "aria-label": getI18nString("whiteboard.colors.palette.hexadecimal", {
           hex: colorToHex(e)
         }),
@@ -244,7 +244,7 @@ function Q({
               removeColor: () => et(t),
               dropperDisabled: G,
               theme: f
-            }, "editbutton-" + e + "-" + t)), !es && jsx(_$$u, {
+            }, "editbutton-" + e + "-" + t)), !es && jsx(PopupButtonPrimitive, {
               "aria-label": getI18nString("whiteboard.color_palettes.modal.add_color"),
               "aria-haspopup": !0,
               "aria-expanded": !1,
@@ -270,11 +270,11 @@ function Q({
           children: [jsx(TextWithTruncation, {
             color: "secondary",
             children: renderI18nText("whiteboard.color_palettes.modal.palettes_visible_to_everyone")
-          }), jsx($z, {
+          }), jsx(WithTrackedButton, {
             variant: "secondary",
             onClick: t,
             children: renderI18nText("whiteboard.color_palettes.modal.cancel")
-          }), jsx($z, {
+          }), jsx(WithTrackedButton, {
             variant: "primary",
             disabled: !ec,
             type: "submit",

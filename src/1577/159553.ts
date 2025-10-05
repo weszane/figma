@@ -3,7 +3,7 @@ import { useState, useContext, useEffect, useRef, useMemo, useCallback, Fragment
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { debounce } from "../905/915765";
 import { Tabs } from "../905/150656";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import _ from "classnames";
@@ -1095,7 +1095,7 @@ function eW(e, t) {
     }, [d, _, e.currentPlanFilter, e.inDesktopTray, u, s, m]);
     if (e.isFetchingNotifications) return jsx("div", {
       className: "user_notifications_dropdown--loadingContainer--jY9PZ",
-      children: jsx(_$$k, {})
+      children: jsx(LoadingSpinner, {})
     });
     if (0 === e.notifications.length) return jsx("div", {
       className: "user_notifications_dropdown--emptyRow--4UwYl",

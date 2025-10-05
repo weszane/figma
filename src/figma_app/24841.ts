@@ -19,7 +19,7 @@ import { showModalHandler } from "../905/156213";
 import { clearAnalytics } from "../figma_app/314264";
 import { hasUnsyncedAutosaveFiles } from "../figma_app/840917";
 import { isCommunityHubView } from "../figma_app/740025";
-import { y as _$$y, J } from "../905/235145";
+import { REFRESH_SESSION_STATE_ACTION, INITIAL_SESSION_STATE } from "../905/235145";
 import { sessionApiInstance } from "../905/202181";
 import { createOptimistThunk } from "../905/350402";
 let $$A1 = createOptimistThunk(async () => {
@@ -60,7 +60,7 @@ let N = createOptimistThunk(e => {
   sessionApiInstance.logoutAllUsers().then(() => {
     clearAnalytics();
     U2.clear();
-    new IpcStorageHandler().sendToAllTabs(_$$y, J);
+    new IpcStorageHandler().sendToAllTabs(REFRESH_SESSION_STATE_ACTION, INITIAL_SESSION_STATE);
     customHistory.redirect(`${t ? "/community" : ""}/?fuid=`);
   }).catch(t => {
     let r = t.data?.message || getI18nString("file_browser.file_browser_actions.logout_error_without_email");
@@ -96,7 +96,7 @@ let w = () => {
       forwardToDatadog: !0,
       batchRequest: !0
     });
-  } catch (e) { }
+  } catch (e) {}
 };
 let O = createOptimistThunk((e, t) => {
   sessionApiInstance.logoutOneUser(t.user.id).then(r => {

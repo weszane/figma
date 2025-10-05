@@ -3,7 +3,7 @@ import { useLayoutEffect, forwardRef, useRef, useImperativeHandle, useMemo, useC
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories } from "../905/165054";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { ButtonPrimitive } from "../905/632989";
 import { R as _$$R } from "../905/621802";
 import { r as _$$r } from "../905/571562";
@@ -611,7 +611,7 @@ export function $$eh0({
     recordingKey: d,
     value: t ? null : jsx("div", {
       className: Em,
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         "aria-label": getI18nString("design_systems.styles.edit_style"),
         recordingKey: generateRecordingKey(d, "editStyleButton"),
         htmlAttributes: {

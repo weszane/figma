@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useMemo, useRef } from "react";
 import { ButtonPrimitive } from "../905/632989";
-import { T as _$$T } from "../905/745591";
+import { AnnouncementPrimitive } from "../905/745591";
 import r from "classnames";
 import { colorToString } from "../905/436288";
 import { N as _$$N } from "../vendor/930821";
@@ -277,10 +277,10 @@ export function $$O0(e) {
                     className: l()(B),
                     recordingKey: generateRecordingKey(e, "message"),
                     onClick: message.onClick,
-                    children: jsx(_$$T, {
+                    children: jsx(AnnouncementPrimitive, {
                       children: message.text
                     })
-                  }) : jsx(_$$T, {
+                  }) : jsx(AnnouncementPrimitive, {
                     className: l()(B),
                     children: message.text
                   })

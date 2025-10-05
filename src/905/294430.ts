@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { memo, useCallback, useRef, Children, cloneElement, useContext, useId, useMemo, useState, useEffect, createRef, forwardRef, PureComponent } from "react";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { T as _$$T } from "../905/68180";
 import { IconButton } from "../905/443068";
 import { O as _$$O } from "../905/487602";
@@ -2435,7 +2435,7 @@ class tV extends PureComponent {
     });
     let p = this.props.selected && this.props.hasFocus;
     let m = this.props.selected && !this.props.hasFocus;
-    let h = jsx(_$$d, {
+    let h = jsx(DialogTriggerButton, {
       onClick: this.toggleSettings,
       recordingKey: generateRecordingKey(this.props, "toggleSettings"),
       "aria-expanded": !!r,

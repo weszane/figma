@@ -5,7 +5,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { parsePxNumber } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
 import { AG } from "../figma_app/999312";
-import { ms } from "../figma_app/209680";
+import { DropdownBase } from "../figma_app/209680";
 import { E } from "../5430/741319";
 import { D } from "../5430/253633";
 import { getActiveSearchRouteWithCommunity } from "../figma_app/455722";
@@ -110,7 +110,7 @@ export function $$w0({
       context: NavigationType.NAV,
       width: parsePxNumber(h63)
     }) : null;
-    return jsx(ms, {
+    return jsx(DropdownBase, {
       preview: e,
       className: f ? "dropdown_search_input--resourceHubDropdown--QsSk6" : "dropdown_search_input--dropdown--fBh7I dropdown--dropdown--IX0tU text--fontPos14--OL9Hp text--_fontBase--QdLsd",
       disableRepositioning: !0,

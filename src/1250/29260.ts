@@ -7,7 +7,7 @@ import { BannerFullWidth } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { bL, DZ, mc, c$ } from "../905/493196";
 import { ButtonLargeWide, Button } from "../905/521428";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { A as _$$A } from "../905/251970";
 import { g as _$$g } from "../905/125190";
 import { getFeatureFlags } from "../905/601108";
@@ -442,7 +442,7 @@ function q({
           children: getI18nString("dev_handoff.component_browser_onboarding.directory_selection_input_label")
         }), isLoading ? jsx("div", {
           className: "github_settings_modal--directorySpinnerWrapper--yT0nj",
-          children: jsx(_$$k, {})
+          children: jsx(LoadingSpinner, {})
         }) : jsx(O, {
           libraryKey: t,
           items: n,

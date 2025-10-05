@@ -21,7 +21,7 @@ import { AssetFilterMode } from "../figma_app/646357";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r6 } from "../905/542608";
 import { LibraryModalContextProvider } from "../905/753512";
-import { m3 } from "../905/66449";
+import { LibraryModalSections } from "../905/66449";
 import { V } from "../905/843013";
 import { Q } from "../905/572508";
 import { S as _$$S } from "../905/348433";
@@ -187,7 +187,7 @@ function G({
               }
             }))) : (createLibraryImport(n), e());
           },
-          kbPath: [m3.TabBodySection.Body, i]
+          kbPath: [LibraryModalSections.TabBodySection.Body, i]
         }, `LibraryListItem-${i}`))
       })
     })]

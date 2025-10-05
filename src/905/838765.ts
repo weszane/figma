@@ -10,7 +10,7 @@ import { UserAvatar, AvatarSize } from "../905/590952";
 import { U3 } from "../figma_app/412189";
 import { U6 } from "../figma_app/599917";
 import { L } from "../905/606555";
-import { v as _$$v } from "../905/617004";
+import { ProfileWithResourcesTile } from "../905/617004";
 import { Cf, it } from "../905/504727";
 import { xY } from "../figma_app/439332";
 import { H } from "../905/209153";
@@ -56,7 +56,7 @@ function v(e) {
     hidePointWhenContentOffScreen: !0,
     disableDropdownScrollContainer: !0,
     propagateCloseClick: !0,
-    children: jsx(_$$v, {
+    children: jsx(ProfileWithResourcesTile, {
       profile: void 0 !== isFollowing ? {
         ...profile,
         current_user_is_following: isFollowing

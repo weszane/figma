@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import i from "classnames";
 var n = i;
 var o = (e => (e.Medium = "Medium", e.Large = "Large", e))(o || {});
@@ -7,7 +7,7 @@ export function $$l0(e) {
   let t;
   return e.isLoading ? jsx("div", {
     className: "tile_grid--loadingContainer--1gQIv",
-    children: jsx(k, {
+    children: jsx(LoadingSpinner, {
       htmlAttributes: {
         "data-testid": "loading-spinner"
       }

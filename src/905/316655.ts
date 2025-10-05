@@ -1,128 +1,203 @@
-import { jsx } from "react/jsx-runtime";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { k as _$$k } from "../905/443820";
-import { isMobileUA } from "../figma_app/778880";
-import { AUTH_INIT } from "../905/194276";
-import { $z } from "../figma_app/617427";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { unfollowEntityThunk, followEntityThunk } from "../figma_app/530167";
-import { showModalHandler } from "../905/156213";
-import { HubAction, FigmaResourceType } from "../figma_app/350203";
-import { isOrgOrTeamExport } from "../figma_app/740025";
-import { isLoading, isSuccess, isFailure } from "../905/18797";
-import { KindEnum } from "../905/129884";
-import { l as _$$l } from "../905/690005";
-import { G$, FF } from "../figma_app/588092";
-import { A as _$$A } from "../6828/373785";
-import { A as _$$A2 } from "../6828/806421";
-export function $$v0({
-  profile: e,
-  trackingProperties: t,
-  onClick: i,
-  onError: v
-}) {
-  let I = useDispatch();
-  let E = useSelector(e => "user" in e ? e.user : null);
-  let x = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
-  let S = useSelector(e => "user" in e ? e.user?.community_profile_id ?? null : null);
-  let w = useSelector(e => "loadingState" in e ? e.loadingState : {});
-  let [C, T] = useState(!1);
-  let [k, R] = useState(!1);
-  let [N, P] = useState(!0);
-  let [O, D] = useState(e.current_user_is_following);
-  let L = O ? unfollowEntityThunk.loadingKeyForPayload(e.id) : followEntityThunk.loadingKeyForPayload(e.id);
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { jsx } from "react/jsx-runtime"
+import { isFailure, isLoading, isSuccess } from "../905/18797"
+import { KindEnum } from "../905/129884"
+import { showModalHandler } from "../905/156213"
+import { AUTH_INIT } from "../905/194276"
+import { getI18nString, renderI18nText } from "../905/303541"
+import { LoadingSpinner } from "../905/443820"
+import { registerLoggedOutCommunityActionModal } from "../905/690005"
+import { A as _$$A } from "../6828/373785"
+import { A as _$$A2 } from "../6828/806421"
+import { FigmaResourceType, HubAction } from "../figma_app/350203"
+import { followEntityThunk, unfollowEntityThunk } from "../figma_app/530167"
+import { COMMUNITY_OPT_IN_MODAL_NAME, CommunityOnboardingVariation } from "../figma_app/588092"
+import { WithTrackedButton } from "../figma_app/617427"
+import { isOrgOrTeamExport } from "../figma_app/740025"
+import { isMobileUA } from "../figma_app/778880"
+
+export interface ProfileFollowButtonProps {
+  profile: {
+    id: string
+    name?: string
+    current_user_is_following: boolean
+  }
+  trackingProperties?: Record<string, any>
+  onClick?: () => void
+  onError?: () => void
+}
+
+/**
+ * Button component for following/unfollowing a community profile
+ * Handles various states including loading, hover, and different user scenarios
+ *
+ * Original function name: $$v0
+ */
+export function ProfileFollowButton({
+  profile,
+  trackingProperties,
+  onClick,
+  onError,
+}: ProfileFollowButtonProps) {
+  const dispatch = useDispatch<AppDispatch>()
+  const currentUser = useSelector<AppState>(state => "user" in state ? state.user : null) as AppState["user"]
+  const authedActiveCommunityProfile = useSelector<AppState>(state => "authedActiveCommunityProfile" in state ? state.authedActiveCommunityProfile : null)
+  const currentUserProfileId = useSelector<AppState>(state => "user" in state ? state.user?.community_profile_id ?? null : null)
+  const loadingState = useSelector<AppState>(state => "loadingState" in state ? state.loadingState : {}) as AppState["loadingState"]
+
+  const [isHoveringUnfollow, setIsHoveringUnfollow] = useState<boolean>(false)
+  const [isFollowingActionLoading, setIsFollowingActionLoading] = useState<boolean>(false)
+  const [showFullUnfollowText, setShowFullUnfollowText] = useState<boolean>(true)
+  const [isCurrentlyFollowing, setIsCurrentlyFollowing] = useState(profile.current_user_is_following)
+
+  const loadingKey = isCurrentlyFollowing
+    ? unfollowEntityThunk.loadingKeyForPayload(profile.id)
+    : followEntityThunk.loadingKeyForPayload(profile.id)
+
+  // Handle follow/unfollow action completion
   useEffect(() => {
-    k && !isLoading(w, L) && (isSuccess(w, L) ? (R(!1), D(!O)) : isFailure(w, L) && (R(!1), v?.()));
-  }, [w, L, k, O, v]);
-  let F = (e, i) => {
-    if (isMobileUA) {
-      window.location.href = "/login";
-      return;
+    if (isFollowingActionLoading && !isLoading(loadingState, loadingKey)) {
+      if (isSuccess(loadingState, loadingKey)) {
+        setIsFollowingActionLoading(false)
+        setIsCurrentlyFollowing(!isCurrentlyFollowing)
+      }
+      else if (isFailure(loadingState, loadingKey)) {
+        setIsFollowingActionLoading(false)
+        onError?.()
+      }
     }
-    I(AUTH_INIT({
-      origin: i
-    }));
-    I(showModalHandler({
-      type: _$$l,
+  }, [loadingState, loadingKey, isFollowingActionLoading, isCurrentlyFollowing, onError])
+
+  /**
+   * Handle case when user is not authenticated
+   * Redirects mobile users to login or shows authentication modal
+   */
+  const handleUnauthenticatedUser = (headerText: string, origin: string) => {
+    if (isMobileUA) {
+      window.location.href = "/login"
+      return
+    }
+
+    dispatch(AUTH_INIT({ origin }))
+    dispatch(showModalHandler({
+      type: registerLoggedOutCommunityActionModal,
       data: {
-        headerText: e,
-        icon: t?.modalTab ? _$$A2 : _$$A,
-        dispatch: I
-      }
-    }));
-  };
-  let M = C && N;
-  return isOrgOrTeamExport(x) ? jsx($z, {
-    "data-tooltip-type": KindEnum.TEXT,
-    "data-tooltip": getI18nString("community.follow.org_and_team_profiles_cannot_follow_other_profiles"),
-    "data-tooltip-show-immediately": !0,
-    disabled: !0,
-    variant: "secondary",
-    children: renderI18nText("community.follow.follow")
-  }) : O ? jsx($z, {
-    htmlAttributes: {
-      onMouseEnter: () => {
-        T(!0);
+        headerText,
+        icon: trackingProperties?.modalTab ? _$$A2 : _$$A,
+        dispatch,
       },
-      onMouseLeave: () => {
-        T(!1);
-        P(!0);
+    }))
+  }
+
+  const shouldShowUnfollowConfirmation = isHoveringUnfollow && showFullUnfollowText
+
+  // Case: Organization or team profiles cannot follow others
+  if (isOrgOrTeamExport(authedActiveCommunityProfile)) {
+    return jsx(WithTrackedButton, {
+      "data-tooltip-type": KindEnum.TEXT,
+      "data-tooltip": getI18nString("community.follow.org_and_team_profiles_cannot_follow_other_profiles"),
+      "data-tooltip-show-immediately": true,
+      "disabled": true,
+      "variant": "secondary",
+      "children": renderI18nText("community.follow.follow"),
+    })
+  }
+
+  // Case: User is already following this profile
+  if (isCurrentlyFollowing) {
+    return jsx(WithTrackedButton, {
+      htmlAttributes: {
+        onMouseEnter: () => {
+          setIsHoveringUnfollow(true)
+        },
+        onMouseLeave: () => {
+          setIsHoveringUnfollow(false)
+          setShowFullUnfollowText(true)
+        },
+      },
+      variant: shouldShowUnfollowConfirmation && !isFollowingActionLoading ? "destructiveSecondary" : "secondary",
+      onClick: (event) => {
+        event.stopPropagation()
+        if (currentUser && !isFollowingActionLoading) {
+          setIsFollowingActionLoading(true)
+          onClick?.()
+          dispatch(unfollowEntityThunk(profile.id))
+        }
+      },
+      trackingProperties: {
+        followerProfileId: currentUserProfileId,
+        followedProfileId: profile.id,
+        action: HubAction.PROFILE_UNFOLLOW,
+        communityHubEntity: FigmaResourceType.PROFILES,
+        ...(trackingProperties || {}),
+      },
+      children: isFollowingActionLoading
+        ? jsx("div", {
+          className: "x78zum5 x6s0dn4 xl56j7k x1nfngrj",
+          children: jsx(LoadingSpinner, {
+            size: "sm",
+          }),
+        })
+        : shouldShowUnfollowConfirmation ? getI18nString("community.follow.unfollow") : getI18nString("community.follow.following"),
+    })
+  }
+
+  // Case: User is not following this profile
+  return jsx(WithTrackedButton, {
+    onClick: (event) => {
+      event.stopPropagation()
+
+      // Handle unauthenticated user
+      if (!currentUser) {
+        const followMessage = profile.name
+          ? getI18nString("community.follow.follow_profile_name_to_keep_up_with_what_they_publish", {
+            profileName: profile.name,
+          })
+          : getI18nString("community.follow.follow_this_profile_to_keep_up_with_what_they_publish")
+
+        handleUnauthenticatedUser(followMessage, "hub_file_follow_signed_out")
+        return
       }
-    },
-    variant: M && !k ? "destructiveSecondary" : "secondary",
-    onClick: t => {
-      t.stopPropagation();
-      E && !k && (R(!0), i?.(), I(unfollowEntityThunk(e.id)));
-    },
-    trackingProperties: {
-      followerProfileId: S,
-      followedProfileId: e.id,
-      action: HubAction.PROFILE_UNFOLLOW,
-      communityHubEntity: FigmaResourceType.PROFILES,
-      ...(t || {})
-    },
-    children: k ? jsx("div", {
-      className: "x78zum5 x6s0dn4 xl56j7k x1nfngrj",
-      children: jsx(_$$k, {
-        size: "sm"
-      })
-    }) : M ? getI18nString("community.follow.unfollow") : getI18nString("community.follow.following")
-  }) : jsx($z, {
-    onClick: t => {
-      if (t.stopPropagation(), !E) {
-        F(e.name ? getI18nString("community.follow.follow_profile_name_to_keep_up_with_what_they_publish", {
-          profileName: e.name
-        }) : getI18nString("community.follow.follow_this_profile_to_keep_up_with_what_they_publish"), "hub_file_follow_signed_out");
-        return;
-      }
-      if (!E.community_profile_id) {
-        I(showModalHandler({
-          type: G$,
+
+      // Handle user without community profile
+      if (!currentUser.community_profile_id) {
+        dispatch(showModalHandler({
+          type: COMMUNITY_OPT_IN_MODAL_NAME,
           data: {
-            userId: E.id,
-            variations: [FF.OPT_IN],
-            onFinish: () => I(followEntityThunk(e.id))
-          }
-        }));
-        return;
+            userId: currentUser.id,
+            variations: [CommunityOnboardingVariation.OPT_IN],
+            onFinish: () => dispatch(followEntityThunk(profile.id)),
+          },
+        }))
+        return
       }
-      k || (P(!1), R(!0), i?.(), I(followEntityThunk(e.id)));
+
+      // Normal follow action
+      if (!isFollowingActionLoading) {
+        setShowFullUnfollowText(false)
+        setIsFollowingActionLoading(true)
+        onClick?.()
+        dispatch(followEntityThunk(profile.id))
+      }
     },
     trackingProperties: {
-      followerProfileId: S,
-      followedProfileId: e.id,
+      followerProfileId: currentUserProfileId,
+      followedProfileId: profile.id,
       action: HubAction.PROFILE_FOLLOW,
       communityHubEntity: FigmaResourceType.PROFILES,
-      ...(t || {})
+      ...(trackingProperties || {}),
     },
     variant: "primary",
-    children: k ? jsx("div", {
-      className: "x78zum5 x6s0dn4 xl56j7k x1nfngrj",
-      children: jsx(_$$k, {
-        size: "sm"
+    children: isFollowingActionLoading
+      ? jsx("div", {
+        className: "x78zum5 x6s0dn4 xl56j7k x1nfngrj",
+        children: jsx(LoadingSpinner, {
+          size: "sm",
+        }),
       })
-    }) : getI18nString("community.follow.follow")
-  });
+      : getI18nString("community.follow.follow"),
+  })
 }
-export const W = $$v0;
+
+export const W = ProfileFollowButton

@@ -9,7 +9,7 @@ import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { BrowserInfo } from "../figma_app/778880";
 import { handleAtomEvent } from "../905/502364";
-import { c as _$$c } from "../figma_app/617427";
+import { WithTrackedButtonLarge } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { D9 } from "../1250/182479";
 import { DG } from "../9410/60600";
@@ -233,7 +233,7 @@ function ea({
   }[e];
   let a = null;
   "openSession" === e && (a = jsx(_$$I, {}));
-  return jsx(_$$c, {
+  return jsx(WithTrackedButtonLarge, {
     disabled: en(e),
     variant: "disabled" !== n ? n : void 0,
     iconPrefix: a,

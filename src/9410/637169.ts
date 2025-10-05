@@ -6,7 +6,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { buildUploadUrl } from "../figma_app/169182";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { useRfdSignalsUpsellExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
@@ -81,7 +81,7 @@ function N({
       className: JP,
       children: jsx(setupThemeContext, {
         brand: "dev-handoff",
-        children: jsx($z, {
+        children: jsx(WithTrackedButton, {
           trackingProperties: {
             trackingDescriptor: UpgradeAction.MARK_READY_FOR_DEV
           },
@@ -209,7 +209,7 @@ export function $$O1() {
       className: JP,
       children: jsx(setupThemeContext, {
         brand: "dev-handoff",
-        children: jsx($z, {
+        children: jsx(WithTrackedButton, {
           trackingProperties: {
             trackingDescriptor: UpgradeAction.SHOW_ME_HOW
           },

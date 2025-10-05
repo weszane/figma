@@ -8,7 +8,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { n as _$$n, v as _$$v } from "../905/458699";
 import { QP } from "../figma_app/487970";
-import { l as _$$l } from "../905/152724";
+import { ProfilePartnerBadge } from "../905/152724";
 import { Xy } from "../figma_app/578832";
 import { A6 } from "../905/350234";
 import { getSearchSessionIdFromSelector } from "../figma_app/387599";
@@ -248,7 +248,7 @@ export function $$D2({
         children: [jsx("span", {
           className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
           children: model.name
-        }), jsx(_$$l, {
+        }), jsx(ProfilePartnerBadge, {
           profile: model,
           tooltip: !0
         })]

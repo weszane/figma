@@ -8,7 +8,7 @@ import { EM, wu } from '../905/729783';
 import { InteractivityContext } from '../905/896141';
 import { microtaskThrottle } from '../905/915765';
 import { ET, MF, ps, Pu, R8, VC } from '../905/939257';
-import { Ap, Bu, qR, SD } from '../figma_app/243213';
+import { isInputEditable, isButtonLike, findAncestorMatchingCondition, findClosestHTMLElement } from '../figma_app/243213';
 // Original file: /Users/allen/github/fig/src/905/277716.ts
 
 // Refactored utility functions for event handling and interaction tracking
@@ -21,7 +21,7 @@ import { Ap, Bu, qR, SD } from '../figma_app/243213';
  * @returns The HTMLElement if valid, otherwise undefined.
  */
 function isHTMLElement(element: any): HTMLElement | undefined {
-  const htmlElement = SD(element);
+  const htmlElement = findClosestHTMLElement(element);
   if (!htmlElement) {
     console.error(`${JSON.stringify(element)} is not an HTMLElement`);
   }
@@ -80,10 +80,10 @@ const handlePointerDown = throttleFunction((eventElements: {
     target,
     root
   } = eventElements;
-  if (!isInteractiveElement(target) || target.hasAttribute('data-non-interactive') || Ap(target)) {
+  if (!isInteractiveElement(target) || target.hasAttribute('data-non-interactive') || isInputEditable(target)) {
     return;
   }
-  const interactable = qR(target, root, Bu);
+  const interactable = findAncestorMatchingCondition(target, root, isButtonLike);
   trackCallback(interactable ? {
     userInputMethod: 'pointer',
     interactionType: 'action',
@@ -129,10 +129,10 @@ const handleKeyDown = throttleFunction((eventElements: {
     target,
     root
   } = eventElements;
-  if (!isInteractiveElement(target) || target.hasAttribute('data-non-interactive') || Ap(target)) {
+  if (!isInteractiveElement(target) || target.hasAttribute('data-non-interactive') || isInputEditable(target)) {
     return;
   }
-  const interactable = qR(target, root, Bu);
+  const interactable = findAncestorMatchingCondition(target, root, isButtonLike);
   if (interactable && key === 'Enter') {
     trackCallback({
       userInputMethod: 'keyboard',
@@ -167,7 +167,7 @@ const handleChange = throttleFunction((eventElements: {
   const {
     target
   } = eventElements;
-  if (!(!isInteractiveElement(target) || target.hasAttribute('data-non-interactive')) && Ap(target)) {
+  if (!(!isInteractiveElement(target) || target.hasAttribute('data-non-interactive')) && isInputEditable(target)) {
     if (currentRef.current === target) {
       return;
     }

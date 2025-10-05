@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, createRef } from "react";
 import { flushSync } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
@@ -102,7 +102,7 @@ export function $$Z0() {
         isEmpty: 0 === _.responsiveTextStyleVariants.length,
         faded: 0 === _.responsiveTextStyleVariants.length,
         titleTx: renderI18nText("sites.panel.responsive_text_style.title"),
-        children: jsx(_$$d, {
+        children: jsx(DialogTriggerButton, {
           ref: t,
           onClick: () => e.toggle(),
           "aria-expanded": e.showing,
@@ -340,7 +340,7 @@ function et({
           children: ["\xb7 ", _]
         })]
       }),
-      leftIcon: jsx(_$$d, {
+      leftIcon: jsx(DialogTriggerButton, {
         ref: c,
         "aria-expanded": p.showing,
         "aria-label": getI18nString("sites.panel.responsive_text_style.settings"),

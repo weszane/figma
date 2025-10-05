@@ -7,7 +7,7 @@ import { getFirstKey } from "../figma_app/493477";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { IconButton } from "../905/443068";
 import { s as _$$s2 } from "../905/403855";
 import { J as _$$J2 } from "../905/125993";
@@ -622,7 +622,7 @@ let eF = forwardRef(function ({
     name: "toggle_export_settings_modal_button",
     children: jsx("span", {
       className: uX,
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         "aria-expanded": !!I,
         "aria-label": getI18nString("fullscreen.export_panel.export_settings"),
         recordingKey: U,

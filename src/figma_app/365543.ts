@@ -7,7 +7,7 @@ import l from "classnames";
 import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
 import { Spacing } from "../figma_app/637027";
 import { MediaQuerySvgComponent } from "../905/331623";
-import { Me } from "../figma_app/617427";
+import { WithTrackedIconButton } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
@@ -68,7 +68,7 @@ class T extends RecordingPureComponent {
             children: this.props.title
           }), jsx("span", {
             className: zD,
-            children: jsx(Me, {
+            children: jsx(WithTrackedIconButton, {
               onClick: this.onDismiss,
               "aria-label": getI18nString("fullscreen.properties_panel.hint_panel.close"),
               recordingKey: generateRecordingKey(this.props.recordingKey, "x"),

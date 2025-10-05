@@ -26,7 +26,7 @@ import { HeaderModal } from "../905/519092";
 import { getFeatureFlags } from "../905/601108";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { sR as _$$sR, gq, KZ } from "../905/932881";
-import { k as _$$k2 } from "../905/443820";
+// import { LoadingSpinner } from "../905/443820";
 import { m as _$$m } from "../905/701558";
 import { Y as _$$Y } from "../905/185567";
 import { atom, useAtomWithSubscription, Xr, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
@@ -91,7 +91,7 @@ import { KindEnum } from "../905/129884";
 import { Qy } from "../figma_app/146384";
 import { m as _$$m2 } from "../905/636019";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { VisualBellActions } from "../905/302958";
 import { L as _$$L2 } from "../905/92291";
 import { A as _$$A2 } from "../5724/600086";
@@ -154,7 +154,7 @@ import { isValidTeamPaymentOrNotRequired, hasFileAccessBasedOnSubscription } fro
 import { Q3, Cy, Bg } from "../figma_app/246699";
 import { ApprovalStatusEnum } from "../figma_app/736948";
 import { _9, J4, p8, fb, YU, Iz, lG, ET, mi } from "../figma_app/907616";
-import { m_ } from "../figma_app/209680";
+import { TooltipDropdown } from "../figma_app/209680";
 import { $ as _$$$ } from "../figma_app/995722";
 import { AccessLevelEnum } from "../905/557142";
 import { setupRoleRow, generateRoleOptions, getUserHandleOrEmail } from "../905/144598";
@@ -337,7 +337,7 @@ function en({
       icon: a,
       text: s,
       onClick: e,
-      rightSideElement: t ? jsx(_$$k2, {}) : void 0,
+      rightSideElement: t ? jsx(LoadingSpinner, {}) : void 0,
       expandCaret: !t
     })
   });
@@ -907,7 +907,7 @@ let to = registerModal(function (e) {
                         code: h.data.code
                       })
                     })]
-                  }), jsx($z, {
+                  }), jsx(WithTrackedButton, {
                     variant: "secondary",
                     onClick: g.refetch,
                     children: renderI18nText("file_permissions_modal.share_as.google_device.reset_code")
@@ -923,7 +923,7 @@ let to = registerModal(function (e) {
               children: renderI18nText("file_permissions_modal.share_as.google_device.open_session_countdown", {
                 remainingHours: i?.remainingHours,
                 remainingMinutes: i?.remainingMinutes,
-                end_now: jsx($z, {
+                end_now: jsx(WithTrackedButton, {
                   variant: "destructiveLink",
                   onClick: () => {
                     s(deleteWorkshopOptimistic({
@@ -952,7 +952,7 @@ let to = registerModal(function (e) {
                 variant: "secondary",
                 onClick: p,
                 children: renderI18nText("general.cancel")
-              }), jsx($z, {
+              }), jsx(WithTrackedButton, {
                 variant: "primary",
                 onClick: g.refetch,
                 children: renderI18nText("file_permissions_modal.share_as.google_device.reset_code")
@@ -963,7 +963,7 @@ let to = registerModal(function (e) {
           scrolling: "none",
           children: jsx("div", {
             className: cssBuilderInstance.flex.itemsCenter.justifyCenter.my8.minH250.minW400.$,
-            children: jsx(_$$k2, {})
+            children: jsx(LoadingSpinner, {})
           })
         })]
       })
@@ -2028,7 +2028,7 @@ function iM({
   };
   return o ? jsx("div", {
     className: "x78zum5 x6s0dn4 x167g77z",
-    children: jsx(m_, {
+    children: jsx(TooltipDropdown, {
       preview: getI18nString("permissions_modal.file_share_settings.viewers_cannot_export_hover"),
       children: jsx(Checkbox, {
         ...d
@@ -3044,7 +3044,7 @@ function nc(e) {
           })
         }), jsx("div", {
           className: cssBuilderInstance.flex.justifyEnd.pt16.$,
-          children: jsx($z, {
+          children: jsx(WithTrackedButton, {
             onClick: () => {
               i(!0);
               t(popModalStack());
@@ -3817,7 +3817,7 @@ class rt extends Component {
           })]
         }), jsx(TrackingProvider, {
           name: "Community Publish Button",
-          children: jsx($z, {
+          children: jsx(WithTrackedButton, {
             disabled: !!this.props.canPublishError || !this.state.thumbnail || !!this.props.disablePublish,
             onClick: this.publish,
             "data-testid": "community-publish-button",
@@ -4242,7 +4242,7 @@ function rb() {
         }),
         icon: T.inProgress ? jsx("div", {
           className: cssBuilderInstance.w32.h32.flex.itemsCenter.justifyCenter.$,
-          children: jsx(_$$k2, {
+          children: jsx(LoadingSpinner, {
             size: "lg"
           })
         }) : g && S ? _$$A10 : _$$A1,

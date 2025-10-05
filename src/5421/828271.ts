@@ -4,9 +4,9 @@ import { createContext, memo, useMemo, useCallback, useRef, useContext, useState
 import { useDispatch, useSelector } from "react-redux";
 import { noop } from 'lodash-es';
 import { Label } from "../905/270045";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { IconButton } from "../905/443068";
-import { u as _$$u } from "../905/65923";
+import { PopupButtonPrimitive } from "../905/65923";
 import { Z as _$$Z } from "../905/279476";
 import { O as _$$O } from "../905/487602";
 import { SymbolOverrideType, Fullscreen, NodePropertyCategory, CanvasComponentType } from "../figma_app/763686";
@@ -602,7 +602,7 @@ function eA({
     "aria-selected": ea,
     children: jsx(s2, {
       label: null,
-      leftIcon: jsx(_$$d, {
+      leftIcon: jsx(DialogTriggerButton, {
         "aria-expanded": eQ && !!Q,
         recordingKey: generateRecordingKey(B, "interactionIcon"),
         htmlAttributes: {
@@ -640,7 +640,7 @@ function eA({
     })
   });
   if (U) return e3;
-  let e5 = jsxs(_$$u, {
+  let e5 = jsxs(PopupButtonPrimitive, {
     className: b()({
       "prototype_interaction_list--interactionButton--q-58Q": !0,
       "prototype_interaction_list--interactionButtonSelected--8YX9A": eJ,

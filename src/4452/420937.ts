@@ -5,7 +5,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
@@ -60,14 +60,14 @@ export let $$h0 = registerModal(function (e) {
           children: t
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               variant: "secondary",
               onClick: b,
               trackingProperties: {
                 trackingDescriptor: UpgradeAction.CANCEL
               },
               children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.cancel")
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               variant: "primary",
               onClick: () => {
                 b();

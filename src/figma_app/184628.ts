@@ -5,7 +5,7 @@ import { w4, Z9 } from "../figma_app/770359";
 import { lV, lr } from "../figma_app/617606";
 import { noop } from 'lodash-es';
 import { IconButton } from "../905/443068";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { R as _$$R } from "../905/256203";
 import { m as _$$m } from "../905/375522";
 import { b as _$$b } from "../905/484176";
@@ -363,7 +363,7 @@ export function $$Q0({
 function ee() {
   return jsx("div", {
     className: "x10l6tqk x13vifvy xu96u03 x3m8u43 x1ey2m1c xldgpng x1vjfegm x78zum5 xl56j7k x6s0dn4 x47corl",
-    children: jsx(_$$k, {})
+    children: jsx(LoadingSpinner, {})
   });
 }
 export const O = $$Q0;

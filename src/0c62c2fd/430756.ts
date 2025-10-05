@@ -13,7 +13,7 @@ import { BigTextInputForwardRef, BUTTON_INTERNAL_CONST_Q33 } from "../figma_app/
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { LoadingOverlay } from "../figma_app/858013";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { stopCreateNewFolder } from "../905/34809";
 import { vt } from "../figma_app/598926";
@@ -312,11 +312,11 @@ export function $$er0(e) {
                 maxSteps: 2
               })
             }), jsxs(DialogActionStrip, {
-              children: [jsx($z, {
+              children: [jsx(WithTrackedButton, {
                 onClick: ew,
                 variant: "secondary",
                 children: 0 === G ? renderI18nText("project_creation.cancel") : renderI18nText("project_creation.back")
-              }), jsx($z, {
+              }), jsx(WithTrackedButton, {
                 variant: "primary",
                 onClick: () => {
                   if (0 === G) V(1);else if (ed) {

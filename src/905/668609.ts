@@ -7,7 +7,7 @@ import { O as _$$O } from "../905/969533";
 import { getI18nString } from "../905/303541";
 import { Bf } from "../905/937445";
 import { vG, IK } from "../905/210945";
-import { u as _$$u } from "../905/65923";
+import { PopupButtonPrimitive } from "../905/65923";
 import { g as _$$g } from "../905/125190";
 import h from "classnames";
 import { H as _$$H } from "../905/762413";
@@ -98,7 +98,7 @@ let k = forwardRef(({
   variant: i = "ghost",
   htmlAttributes: a,
   ...s
-}, o) => jsx(_$$u, {
+}, o) => jsx(PopupButtonPrimitive, {
   ...s,
   ref: o,
   htmlAttributes: {

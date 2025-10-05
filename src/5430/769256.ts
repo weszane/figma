@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { IntersectionSentinel } from "../905/925868";
 import { A } from "../5430/204784";
 if (443 == require.j) {}
@@ -40,7 +40,7 @@ function c({
   return jsx(Fragment, {
     children: e && jsxs("div", {
       className: "x78zum5 xl56j7k x6s0dn4 xg87l8a",
-      children: [jsx(k, {}), jsx(IntersectionSentinel, {
+      children: [jsx(LoadingSpinner, {}), jsx(IntersectionSentinel, {
         onIntersectionChange: e => {
           e.isIntersecting && t();
         }

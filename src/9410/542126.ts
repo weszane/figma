@@ -3,7 +3,7 @@ import { useRef, useMemo, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { EventShield } from "../905/821217";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuItemLead, MenuItemTrail, MenuSubText } from "../figma_app/860955";
 import { z6, CU, H_ } from "../905/963340";
 import { A as _$$A } from "../905/891805";
@@ -145,7 +145,7 @@ function D({
     eventListeners: ["onClick", "onMouseUp"],
     children: [jsx("div", {
       ref: h,
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         "aria-expanded": c.showing,
         onClick: () => c.toggle(),
         actionOnPointerDown: !0,
@@ -238,7 +238,7 @@ function F({
     eventListeners: ["onClick", "onMouseUp"],
     children: jsxs(MenuRootComp, {
       manager,
-      children: [jsx(_$$d, {
+      children: [jsx(DialogTriggerButton, {
         "aria-label": getI18nString("canvas_search.settings"),
         recordingKey: generateRecordingKey(a, "settings"),
         htmlAttributes: {

@@ -141,7 +141,7 @@ import { _ as _$$_2 } from '../905/410717';
 import { useModalManager } from '../905/437088';
 import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
-import { k as _$$k4 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { L as _$$L2 } from '../905/453756';
 import { $ as _$$$3, h as _$$h8 } from '../905/455748';
@@ -257,7 +257,7 @@ import { p as _$$p9 } from '../905/951634';
 import { t as _$$t8 } from '../905/958417';
 import { CU, z6 } from '../905/963340';
 import { a as _$$a5 } from '../905/964520';
-import { d as _$$d1 } from '../905/976845';
+import { DialogTriggerButton } from '../905/976845';
 import { postUserFlag } from '../905/985254';
 import { RelativeTimeDisplay } from '../905/986103';
 import { colorCSSManipulatorInstance } from '../905/989956';
@@ -530,7 +530,7 @@ import { PluginCallbacks } from '../figma_app/603466';
 import { es as _$$es2, fF as _$$fF, FN as _$$FN, fV as _$$fV, hZ as _$$hZ, jJ as _$$jJ, sM as _$$sM, UH as _$$UH, w4 as _$$w2, Zj as _$$Zj, assertNotNullish, Cb, Cd, LY, Oo, TQ, Uy, wg } from '../figma_app/610446';
 import { En as _$$En } from '../figma_app/613182';
 import { Yv } from '../figma_app/616107';
-import { $z, Me } from '../figma_app/617427';
+import { WithTrackedButton, WithTrackedIconButton } from '../figma_app/617427';
 import { li as _$$li, tS as _$$tS2, wv as _$$wv, Gi, GR, L_ } from '../figma_app/622574';
 import { processImageWithThumbnail } from '../figma_app/624361';
 import { $ as _$$$5, jo as _$$jo, Ld } from '../figma_app/629335';
@@ -3153,7 +3153,7 @@ function nj() {
           variant: 'link-onbrand',
           recordingKey: 'reactiveGuidanceViewPermission',
           hideViewOnlyText: !0
-        }), jsx(Me, {
+        }), jsx(WithTrackedIconButton, {
           'onClick': a,
           'trackingEventName': 'reactive_guidance_tooltip_closed',
           'recordingKey': 'reactiveGuidanceTooltip',
@@ -3633,7 +3633,7 @@ function n4(e) {
         className: 'figjam_upsell_modal--genericBottomHalf--ZGBjw',
         children: [jsx('span', {
           children: secondaryText
-        }), jsx($z, {
+        }), jsx(WithTrackedButton, {
           onClick: () => {
             m();
             u(showModalHandler({
@@ -5608,7 +5608,7 @@ function ow() {
   }) : jsx('span', {
     'className': oS,
     'data-testid': 'loading-spinner',
-    'children': jsx(_$$k4, {})
+    'children': jsx(LoadingSpinner, {})
   });
 }
 function oI({
@@ -5668,7 +5668,7 @@ function oI({
   }) : jsx('span', {
     'className': oS,
     'data-testid': 'loading-spinner',
-    'children': jsx(_$$k4, {})
+    'children': jsx(LoadingSpinner, {})
   });
 }
 let ok = 'browse_recent_and_saved_view--subTitle--04tFz text--fontPos12--YsUAh text--_fontBase--QdLsd';
@@ -5692,7 +5692,7 @@ function oM() {
   if (!r.loaded && !m) {
     return jsx('div', {
       className: cssBuilderInstance.flex.justifyCenter.alignCenter.p24.$,
-      children: jsx(_$$k4, {})
+      children: jsx(LoadingSpinner, {})
     });
   }
   if (n.length === 0 && c.length === 0) {
@@ -7484,7 +7484,7 @@ function de({
       children: e
     }), jsxs('div', {
       className: cssBuilderInstance.flex.itemsCenter.gap4.$,
-      children: [i, jsx(Me, {
+      children: [i, jsx(WithTrackedIconButton, {
         'onClick': t,
         'aria-label': getI18nString('common.close'),
         'actionOnPointerDown': a,
@@ -13941,7 +13941,7 @@ function _K({
       case c:
         t = [jsx(_$$c$, {
           className: ex()(_B, 'face_stamp_control--faceStampOption__loading--o6hDI'),
-          children: jsx(_$$k4, {
+          children: jsx(LoadingSpinner, {
             size: 'lg'
           })
         }, 'loading')];
@@ -17464,7 +17464,7 @@ function gP() {
           editorType: FileKindEnum.FIGJAM
         }), isLoading ? jsx('div', {
           className: _$$dz,
-          children: jsx(_$$k4, {
+          children: jsx(LoadingSpinner, {
             htmlAttributes: {
               'data-testid': 'canvas-search-loading-spinner'
             }
@@ -17815,7 +17815,7 @@ function g9({
     ignoreCheck: !0,
     children: jsx('div', {
       className: 'music_dropdown--loadingSpinner--0IUIG',
-      children: jsx(_$$k4, {})
+      children: jsx(LoadingSpinner, {})
     })
   }, 'loading-music-options')];
   useEffect(() => {
@@ -22229,7 +22229,7 @@ let yr = memo(e => {
       }), jsx('div', {
         className: cssBuilderInstance.mlAuto.$,
         ref: dropdownTargetRef,
-        children: _ && jsx(_$$d1, {
+        children: _ && jsx(DialogTriggerButton, {
           'aria-label': getI18nString('meetings_panel.header.overflow_menu_aria_label'),
           'onClick': f,
           'htmlAttributes': {

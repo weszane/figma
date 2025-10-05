@@ -76,7 +76,7 @@ import { _ as _$$_4 } from '../905/410717';
 import { F as _$$F } from '../905/427107';
 import { N as _$$N4 } from '../905/430294';
 import { useModalManager } from '../905/437088';
-import { k as _$$k4 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { aJ, Oc } from '../905/449579';
 import { n as _$$n2 } from '../905/451212';
@@ -3368,7 +3368,7 @@ function iY(e) {
         children: [jsxs('div', {
           children: [jsxs('div', {
             className: 'x78zum5 x1q0g3np x167g77z x6xwguf',
-            children: [renderI18nText('auto_suggest.eval.results.tests_run'), ' ', m.progress.numComplete, ' /', ' ', m.progress.numTotal, ' ', b && jsx(_$$k4, {})]
+            children: [renderI18nText('auto_suggest.eval.results.tests_run'), ' ', m.progress.numComplete, ' /', ' ', m.progress.numTotal, ' ', b && jsx(LoadingSpinner, {})]
           }), jsx('br', {}), jsxs('div', {
             className: 'x78zum5 x1q0g3np x167g77z',
             children: [iG.map(e => jsxs('div', {

@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
-import { NX } from "../figma_app/243213";
+import { hasAncestorWithAttribute } from "../figma_app/243213";
 import { useSingleEffect } from "../905/791079";
 import { KeyCodes } from "../905/63728";
 import { Point } from "../905/736624";
@@ -65,7 +65,7 @@ import { hasTeamPaidAccess } from "../figma_app/345997";
 import { getCurrentTeam } from "../figma_app/598018";
 import { fO } from "../figma_app/329496";
 import { X as _$$X2 } from "../905/257331";
-import { k as _$$k3 } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { Fullscreen, VariablesBindings } from "../figma_app/763686";
 import { useLatestRef } from "../figma_app/922077";
 import { k as _$$k4 } from "../905/582200";
@@ -622,7 +622,7 @@ function ti({
     f?.state === "LOADED" && f?.currentAssetData?.nodeData?.playgroundGUID && null != _ && _ !== y && (x(), Fullscreen.clearPlaygroundScene());
   }, [y, _, x, e.type, f]), !f) return jsx("div", {
     className: "component_flyout--spinner--c-wap",
-    children: jsx(_$$k3, {})
+    children: jsx(LoadingSpinner, {})
   });
   let b = "LOADED" === f.state ? f.currentAssetData : f.previousAssetData;
   let C = "ERROR" === f.state ? f.errorType : void 0;
@@ -800,7 +800,7 @@ export function $$tu1({
       let t = D.current?.getEl() ?? F.current;
       if (t) {
         if (!t.contains(e.target)) {
-          if (B(!1), NX(e.target, "data-does-not-dismiss-component-flyout")) return;
+          if (B(!1), hasAncestorWithAttribute(e.target, "data-does-not-dismiss-component-flyout")) return;
           closeFlyout();
           return;
         }

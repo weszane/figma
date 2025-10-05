@@ -113,7 +113,7 @@ import { getQueryParam, removeQueryParam } from "../905/609392";
 import { APILoadingStatus } from "../905/520829";
 import { CustomSpacer } from "../905/585996";
 import { LoadingRenderer } from "../905/211326";
-import { lR, $z, Me, c as _$$c2 } from "../figma_app/617427";
+import { WithTrackedButtonLargeWide, WithTrackedButton, WithTrackedIconButton, WithTrackedButtonLarge } from "../figma_app/617427";
 import { Q as _$$Q2 } from "../5132/668270";
 import { D as _$$D2 } from "../figma_app/908415";
 import { useModalManager } from "../905/437088";
@@ -204,7 +204,7 @@ import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { setupResourceAtomHandler } from "../905/713695";
 import { getCurrentTeam } from "../figma_app/598018";
 import { useIsCanvasEditDisabled } from "../905/595131";
-import { k as _$$k3 } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { openUrlInContext } from "../figma_app/976345";
 import { dO } from "../figma_app/318123";
 import { c as _$$c3 } from "../905/850166";
@@ -1194,7 +1194,7 @@ function tV({
         })
       }), jsx(CustomSpacer, {
         multiple: 3
-      }), jsx(lR, {
+      }), jsx(WithTrackedButtonLargeWide, {
         onClick: () => {
           "loaded" === l.status && getResourceDataOrFallback(l.data?.deviceTryFile) ? t(_$$D2({
             fileKey: i
@@ -1310,7 +1310,7 @@ function t$(e) {
             })
           }), jsx(CustomSpacer, {
             multiple: 3
-          }), jsx(lR, {
+          }), jsx(WithTrackedButtonLargeWide, {
             onClick: e.onClose,
             children: renderI18nText("figjam_try.already_claimed_modal.continue")
           })]
@@ -1768,7 +1768,7 @@ class iX extends PureComponent {
             onClick: this.props.onNext,
             autoFocus: !0,
             children: e
-          }) : jsx($z, {
+          }) : jsx(WithTrackedButton, {
             onClick: this.props.onNext,
             children: e
           })]
@@ -4485,7 +4485,7 @@ function ns(e) {
           className: iy()("browse_templates_make_something_onboarding--closeHeader--tGUaS", {
             [r6]: s
           }),
-          children: jsx(Me, {
+          children: jsx(WithTrackedIconButton, {
             onClick: onClickCloseButton,
             "aria-label": getI18nString("general.close"),
             trackingEventName: "modal closed",
@@ -4510,7 +4510,7 @@ function ns(e) {
               className: "browse_templates_make_something_onboarding--templateButtonContainer--ey3hb",
               children: jsx("div", {
                 className: "browse_templates_make_something_onboarding--templateButtonShadow--PGxmP",
-                children: jsx(_$$c2, {
+                children: jsx(WithTrackedButtonLarge, {
                   variant: "secondary",
                   onClick: onClickMoreTemplatesButton,
                   iconPrefix: jsx(_$$Q3, {}),
@@ -4650,7 +4650,7 @@ function no(e) {
           children: [jsx("div", {
             className: "browse_templates_make_something_onboarding--popupTitle--qSiMo text--fontPos14Whyte--pEiDq text--_fontBaseWhyte--efAjI",
             children: renderI18nText("figjam_onboarding_make_something.popup.title")
-          }), jsx(Me, {
+          }), jsx(WithTrackedIconButton, {
             onClick: onClickCloseButton,
             "aria-label": getI18nString("general.close"),
             trackingEventName: "modal closed",
@@ -4698,7 +4698,7 @@ function no(e) {
                 useOriginalSrcFills_DEPRECATED: !0
               }), t]
             }, i))
-          }), jsx(lR, {
+          }), jsx(WithTrackedButtonLargeWide, {
             trackingEventName: "more templates click",
             onClick: onClickMoreTemplatesButton,
             variant: "ghost",
@@ -4906,7 +4906,7 @@ function nR(e) {
                 children: renderI18nText("rcs.figjam_onboarding.maybe_later")
               }), jsx("div", {
                 className: "onboard_figjam_viewer--openTutorialButton--4AqFo",
-                children: jsx($z, {
+                children: jsx(WithTrackedButton, {
                   onClick: () => {
                     if ("loaded" !== e.figJamTemplateFileResult.status || null == e.figJamTemplateFileResult.data || e.figJamTemplateFileResult.data.length < 1) return;
                     let i = e.figJamTemplateFileResult.data?.[0] ?? null;
@@ -4915,7 +4915,7 @@ function nR(e) {
                   },
                   disabled: "loading" === e.figJamTemplateFileResult.status,
                   variant: "primary",
-                  children: "loading" === e.figJamTemplateFileResult.status || null == e.figJamTemplateFileResult.data ? jsx(_$$k3, {
+                  children: "loading" === e.figJamTemplateFileResult.status || null == e.figJamTemplateFileResult.data ? jsx(LoadingSpinner, {
                     htmlAttributes: {
                       "data-testid": "loading-spinner"
                     }
@@ -7688,7 +7688,7 @@ function sq(e) {
         multiple: 2
       }), jsx("div", {
         className: kP,
-        children: jsx($z, {
+        children: jsx(WithTrackedButton, {
           onClick: l,
           variant: "primary",
           children: renderI18nText("rcs.upsell_libraries.visual_bell.got_it")

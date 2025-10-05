@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { clamp } from "../figma_app/492908";
 import { noop } from 'lodash-es';
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { p as _$$p } from "../905/673591";
 import { O as _$$O } from "../905/301080";
@@ -166,7 +166,7 @@ export function $$j1({
   });
   return i ? jsx("div", {
     className: m()(vx, jJ, bb),
-    children: jsx(_$$k, {
+    children: jsx(LoadingSpinner, {
       size: "lg"
     })
   }) : BrowserInfo.isIpad && a ? null : ee ? Y && !v ? eh : null : jsxs(Fragment, {

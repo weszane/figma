@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import { NodePropertyCategory, DesignGraphElements, DrawingElementType } from "../figma_app/763686";
 import { ri, nc } from "../figma_app/15927";
@@ -126,7 +126,7 @@ function B(e) {
   });
   let J = jsx("span", {
     className: "pencil_tool_panel--advancedStroke--1497y",
-    children: jsx(_$$d, {
+    children: jsx(DialogTriggerButton, {
       onClick: () => {
         if (e.pickerShown?.id === t) w(hidePickerThunk());else {
           if (!z) return;

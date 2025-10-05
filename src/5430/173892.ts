@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import i from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
-import { A5 } from "../figma_app/209680";
+import { SelectDropdown } from "../figma_app/209680";
 import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { CO } from "../5430/297093";
 import { anchorEditorResource } from "../figma_app/773663";
@@ -16,7 +16,7 @@ export function $$p0({
   size: i
 }) {
   let o = CO(r);
-  return o.length <= 1 ? null : jsx(A5, {
+  return o.length <= 1 ? null : jsx(SelectDropdown, {
     name: getI18nString("community.landing_page.dropdown_filter__resource_type"),
     onUpdate: ([t]) => {
       e(t);

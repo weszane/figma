@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useContext, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { m as _$$m } from "../905/367152";
 import { M as _$$M } from "../1528/793871";
 import { e as _$$e } from "../905/149844";
@@ -462,7 +462,7 @@ function ef({
     icon: t !== StateHierarchy.STATE ? jsx("div", {
       ref: s,
       className: "props_panel--addButtonContainer--a58gi",
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         "aria-expanded": e,
         htmlAttributes: {
           "data-tooltip-type": KindEnum.TEXT,

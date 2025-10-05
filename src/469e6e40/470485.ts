@@ -5,7 +5,7 @@ import { T } from "../7021/675372";
 import l from "classnames";
 import { Wi } from "../figma_app/162641";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { e6 } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { TrackedLinkPrimitive } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -52,7 +52,7 @@ export function $$j0(e) {
     ...C,
     trackingDescriptor: UpgradeAction.UPGRADE
   };
-  l.tier === FPlanNameType.PRO ? t = jsx(e6, {
+  l.tier === FPlanNameType.PRO ? t = jsx(WithTrackedPopupButtonPrimitive, {
     onClick: k,
     className: E,
     trackingProperties: N,

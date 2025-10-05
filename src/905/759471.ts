@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, forwardRef, PureComponent, useCallback, useContext, useRef, useState } from "react";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { T as _$$T } from "../905/68180";
 import { IconButton } from "../905/443068";
 import { O as _$$O } from "../905/487602";
@@ -755,7 +755,7 @@ function eB(e) {
   if (isUI3) {
     let e = selected && hasFocus;
     let t = selected && !hasFocus;
-    let r = jsx(_$$d, {
+    let r = jsx(DialogTriggerButton, {
       onClick: ec,
       recordingKey: generateRecordingKey(q, "toggleSettings"),
       "aria-expanded": !!Z,

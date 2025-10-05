@@ -17,7 +17,7 @@ import { P as _$$P } from '../905/347284';
 import { $ as _$$$ } from '../905/355181';
 import { useModalManager } from '../905/437088';
 import { IconButton } from '../905/443068';
-import { k as _$$k } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { AutoLayout } from '../905/470281';
 import { Button } from '../905/521428';
@@ -49,7 +49,7 @@ import { throwTypeError } from '../figma_app/465776';
 import { hP } from '../figma_app/527041';
 import { Lp, y2 } from '../figma_app/563413';
 import { Ax, Jt } from '../figma_app/616261';
-import { $z } from '../figma_app/617427';
+import { WithTrackedButton } from '../figma_app/617427';
 import { DashboardSection, FigResourceType } from '../figma_app/650409';
 import { getOrgAdminTabMessage } from '../figma_app/809387';
 import { memoizeByArgs } from '../figma_app/815945';
@@ -221,7 +221,7 @@ function H(e) {
       })]
     }), e.isLoading ? jsx('div', {
       className: cssBuilderInstance.wFull.hFull.flex.flexRow.justifyCenter.itemsCenter.$,
-      children: jsx(_$$k, {})
+      children: jsx(LoadingSpinner, {})
     }) : jsx(Cj, {
       actionBar: e => {
         if (e.length === 0) return jsx(Fragment, {});
@@ -1064,7 +1064,7 @@ let eM = class e extends RecordingComponent {
     };
   }
   componentDidMount() {
-    this.props.onRightActionsChange?.(jsx($z, {
+    this.props.onRightActionsChange?.(jsx(WithTrackedButton, {
       variant: 'primary',
       iconPrefix: jsx(_$$e, {}),
       onClick: this.onUploadClick,

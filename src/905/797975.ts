@@ -29,7 +29,7 @@ import { WAFImage } from "../905/675859";
 import { r as _$$r2 } from "../905/571838";
 import { useDispatch } from "react-redux";
 import { E as _$$E2 } from "../905/53857";
-import { k as _$$k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { V as _$$V } from "../905/291719";
 import { g as _$$g2 } from "../905/757007";
 import { U as _$$U } from "../905/275247";
@@ -293,7 +293,7 @@ function Y({
   let T = e => {
     switch (e.state) {
       case z8.INCOMPLETE:
-        return h && e.taskId === h.taskId ? jsx(_$$k, {
+        return h && e.taskId === h.taskId ? jsx(LoadingSpinner, {
           size: "md"
         }) : jsx(_$$V, {});
       case z8.SUCCEEDED:

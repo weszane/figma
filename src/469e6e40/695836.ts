@@ -8,7 +8,7 @@ import { L as _$$L } from "../905/704296";
 import { props } from "@stylexjs/stylex";
 import { analyticsEventManager } from "../905/449184";
 import { Wi, JR } from "../figma_app/162641";
-import { e6, hH } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive, WithTrackedDialogTriggerButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -452,7 +452,7 @@ function $(e) {
     verticalAlignItems: "center",
     direction: "vertical",
     width: "hug-contents",
-    children: e.suggestedFilters.map(e => jsx(e6, {
+    children: e.suggestedFilters.map(e => jsx(WithTrackedPopupButtonPrimitive, {
       "aria-label": getI18nString("people_table_filters.add_suggested_filter_button_aria_label", {
         suggestedFilter: e.display
       }),
@@ -548,7 +548,7 @@ export function $$B0({
         currentFilters: a
       })]
     }), k && !g && jsxs(Fragment, {
-      children: [jsx(hH, {
+      children: [jsx(WithTrackedDialogTriggerButton, {
         "aria-label": t,
         innerText: t,
         ...getTriggerProps(),

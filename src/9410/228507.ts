@@ -2,7 +2,7 @@ import _require from "../1200/785121";
 import { jsx } from "react/jsx-runtime";
 import { lazy, Suspense } from "react";
 import { DialogContents } from "../figma_app/272243";
-import { k } from "../905/443820";
+import { LoadingSpinner } from "../905/443820";
 import { _L } from "../905/911410";
 import { g4 } from "../9410/43961";
 let d = lazy(() => Promise.all([]).then(_require));
@@ -10,7 +10,7 @@ function c() {
   return jsx(DialogContents, {
     children: jsx("div", {
       className: g4,
-      children: jsx(k, {})
+      children: jsx(LoadingSpinner, {})
     })
   });
 }

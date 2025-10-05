@@ -9,7 +9,7 @@ import { P } from "../figma_app/582341";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { isTeamLibrary } from "../figma_app/633080";
 import { lastActionDetails } from "../905/612212";
-import { hx, m3 } from "../905/66449";
+import { useKeyboardNavigationForClickable, LibraryModalSections } from "../905/66449";
 let g = "library_modal_body_header--libraryPath--PUMmE";
 let f = "library_modal_body_header--libraryPathLink--SgLKL";
 export function $$_0({
@@ -28,8 +28,8 @@ export function $$_0({
   let {
     setKeyboardNavigationElement,
     onClickWithFocus
-  } = hx({
-    path: [m3.TabBodySection.Header],
+  } = useKeyboardNavigationForClickable({
+    path: [LibraryModalSections.TabBodySection.Header],
     column: 0,
     onClick: f
   });
@@ -114,14 +114,14 @@ function y({
   let a = getParentOrgIdIfOrgLevel(r);
   let {
     setKeyboardNavigationElement
-  } = hx({
-    path: [m3.TabBodySection.Header],
+  } = useKeyboardNavigationForClickable({
+    path: [LibraryModalSections.TabBodySection.Header],
     column: 1
   });
   let {
     setKeyboardNavigationElement: _setKeyboardNavigationElement
-  } = hx({
-    path: [m3.TabBodySection.Header],
+  } = useKeyboardNavigationForClickable({
+    path: [LibraryModalSections.TabBodySection.Header],
     column: 2
   });
   if (e || t) {

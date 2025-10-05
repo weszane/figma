@@ -3,7 +3,7 @@ import { memo, useState, useMemo } from "react";
 import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
 import { MenuRootComp, MenuContainerComp } from "../figma_app/860955";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { N as _$$N } from "../905/852320";
 import { l as _$$l } from "../905/803103";
 import { getFeatureFlags } from "../905/601108";
@@ -137,7 +137,7 @@ function P({
     eventListeners: ["onWheel"],
     children: jsxs(MenuRootComp, {
       manager,
-      children: [jsx(_$$d, {
+      children: [jsx(DialogTriggerButton, {
         recordingKey: i,
         disabled: t,
         "aria-label": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),

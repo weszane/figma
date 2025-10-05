@@ -23,7 +23,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { Button, ButtonWide } from "../905/521428";
 import { A as _$$A } from "../905/891805";
 import { s as _$$s2, K as _$$K2 } from "../c5e2cae0/341232";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { AutoLayout } from "../905/470281";
 import { showModalHandler } from "../905/156213";
 import { compareProductAccessTypes } from "../figma_app/217457";
@@ -136,7 +136,7 @@ function O({
 }) {
   let i = useDispatch();
   let l = getRumLoggingConfig();
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     "aria-label": getI18nString("checkout.additional_seats.add_seats_to_assign_later"),
     htmlAttributes: {
       "data-testid": "additional-seats--button"

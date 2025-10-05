@@ -19,7 +19,7 @@ import { createOptimistThunk } from '../905/350402';
 import { resendInvite } from '../905/351260';
 import { UpgradeAction } from '../905/370443';
 import { selectUser } from '../905/372672';
-import { k as _$$k } from '../905/443820';
+// import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { AutoLayout } from '../905/470281';
 import { HeaderModal } from '../905/519092';
@@ -594,7 +594,7 @@ function ed(e) {
     children: renderI18nText('file_browser.team.no_members')
   }) : y || !lgDataLoaded ? jsx('div', {
     className: 'members_list--loadingSpinnerContainer--2hZae',
-    children: jsx(_$$k, {})
+    children: jsx(LoadingSpinner, {})
   }) : jsxs('div', {
     children: [jsx(eo, {
       teamId: e.teamId,

@@ -4,7 +4,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { e6, lR } from "../figma_app/617427";
+import { WithTrackedPopupButtonPrimitive, WithTrackedButtonLargeWide } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { TeamAvatar, AvatarSize } from "../905/590952";
 import { DeepLinkType } from "../905/15667";
@@ -143,11 +143,11 @@ function S({
             children: b
           }), jsxs("div", {
             className: cssBuilderInstance.flex.flexRow.mt8.gap8.$,
-            children: [jsx(e6, {
+            children: [jsx(WithTrackedPopupButtonPrimitive, {
               className: "shared_vr_draft_tooltip--ignoreButton---wVA0",
               onClick: v,
               children: renderI18nText("viewer_restricted_tooltip.ignore")
-            }), jsx(lR, {
+            }), jsx(WithTrackedButtonLargeWide, {
               variant: "primary",
               type: "submit",
               onClick: e => {

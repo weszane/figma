@@ -32,7 +32,7 @@ import { P as _$$P2 } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { JU, ks } from "../figma_app/626177";
-import { d as _$$d } from "../905/976845";
+import { DialogTriggerButton } from "../905/976845";
 import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
@@ -312,7 +312,7 @@ function J({
       children: [jsx(JU, {
         className: X,
         children: renderI18nText("variables.edit_modal.input_label.token_name")
-      }), l && jsx(_$$d, {
+      }), l && jsx(DialogTriggerButton, {
         "aria-label": getI18nString("variables.edit_modal.add_code_syntax"),
         ref: m,
         "aria-expanded": s,
@@ -1556,7 +1556,7 @@ function tk({
   }, "reorder")))), 0 === S.length) ? null : jsxs(Fragment, {
     children: [jsx("div", {
       ref: x,
-      children: jsx(_$$d, {
+      children: jsx(DialogTriggerButton, {
         "aria-label": getI18nString("variables.authoring_modal.more_variable_set_options_tooltip"),
         htmlAttributes: {
           "data-tooltip": getI18nString("variables.authoring_modal.more_variable_set_options_tooltip"),
@@ -1864,7 +1864,7 @@ let t$ = forwardRef(function ({
           className: R()("variables_modal_table_item--editButton--n24g1", {
             "variables_modal_table_item--editing--LGvvx": K
           }),
-          children: jsx(_$$d, {
+          children: jsx(DialogTriggerButton, {
             "aria-label": getI18nString("variables.authoring_modal.edit_variable_button_tooltip"),
             onClick: e => {
               e.stopPropagation();
@@ -2963,7 +2963,7 @@ function iE({
 }) {
   return jsx("div", {
     ...stylex.props(iT.filterButtonWrapper, e && iT.filterButtonWrapper_Active),
-    children: jsx(_$$d, {
+    children: jsx(DialogTriggerButton, {
       "aria-label": getI18nString("variables.authoring_modal.search.filters"),
       ...t,
       children: e ? jsx(_$$S3, {}) : jsx(_$$S2, {})

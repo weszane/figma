@@ -15,7 +15,7 @@ import { ScreenReaderOnly } from "../905/172252";
 import { Tabs } from "../905/150656";
 import b from "../vendor/116389";
 import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
-import { $z, rb, e6 } from "../figma_app/617427";
+import { WithTrackedButton, WithTrackedButtonLink, WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { B as _$$B } from "../905/261906";
 import { RR } from "../figma_app/307841";
@@ -80,7 +80,7 @@ function D() {
   }), [e?.key]);
 }
 function M(e) {
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     onClick: e.onClick,
     variant: e.variant ?? "secondary",
     trackingProperties: {
@@ -91,7 +91,7 @@ function M(e) {
   });
 }
 function P(e) {
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     onClick: e.onClick,
     variant: "secondary",
     trackingProperties: {
@@ -404,7 +404,7 @@ function em(e) {
         return null;
     }
   }, [c]);
-  let u = useMemo(() => c === FPlanNameType.PRO ? jsx($z, {
+  let u = useMemo(() => c === FPlanNameType.PRO ? jsx(WithTrackedButton, {
     variant: "secondary",
     onClick: () => {
       t(showModalHandler({
@@ -431,7 +431,7 @@ function em(e) {
   }), [t, c, o?.id]);
   let m = useMemo(() => {
     let e = getI18nString("admin_settings.plan_information_widget_card.seat_terms.heading");
-    let s = jsx(rb, {
+    let s = jsx(WithTrackedButtonLink, {
       onClick: () => {
         adjustAnnualSeatsAction?.id !== _$$m.TRIAL_READ_ONLY && adjustAnnualSeatsAction?.perform({
           dispatch: t
@@ -542,7 +542,7 @@ function ey(e) {
       })]
     }), jsxs("div", {
       className: "x78zum5 x6s0dn4 x1nfngrj",
-      children: [e.badge, e.clickable && jsx(e6, {
+      children: [e.badge, e.clickable && jsx(WithTrackedPopupButtonPrimitive, {
         className: "x1s928wv x1j6awrg xarstr8",
         onClick: e.clickable.onClick,
         trackingProperties: {
@@ -649,7 +649,7 @@ function ek(e) {
       if (e.planType === FOrganizationLevelType.ORG && e.upcomingAnnualInvoice.billing_mechanics === BillingMechanics.LEGACY) {
         let t = e.previewInvoice;
         let a = e.upcomingAnnualInvoice.id;
-        return jsx($z, {
+        return jsx(WithTrackedButton, {
           variant: "primary",
           onClick: () => {
             t(a);
@@ -669,7 +669,7 @@ function ek(e) {
         trusted: !0,
         newTab: !0,
         children: getI18nString("admin_settings.plan_subscription_card.contact_support")
-      }) : e.adjustRenewalSeats && !e.renewalConfirmed ? jsx($z, {
+      }) : e.adjustRenewalSeats && !e.renewalConfirmed ? jsx(WithTrackedButton, {
         variant: "primary",
         onClick: e.adjustRenewalSeats,
         trackingProperties: {
@@ -764,7 +764,7 @@ function eI(e) {
   }) : r, [e.planType, e.upcomingInvoice, r]);
   let o = e.previewInvoice;
   let d = useMemo(() => {
-    if (!e.upcomingInvoice) return jsx($z, {
+    if (!e.upcomingInvoice) return jsx(WithTrackedButton, {
       variant: "secondary",
       onClick: e.viewAllInvoices,
       trackingProperties: {
@@ -774,7 +774,7 @@ function eI(e) {
     });
     {
       let t = e.upcomingInvoice.id;
-      return jsx($z, {
+      return jsx(WithTrackedButton, {
         variant: "secondary",
         onClick: () => {
           o(t);
@@ -932,7 +932,7 @@ function eF(e) {
   });
 }
 function eq(e) {
-  return jsx($z, {
+  return jsx(WithTrackedButton, {
     onClick: () => {
       e.viewInvoice(e.invoice.id);
     },

@@ -19,7 +19,7 @@ import { hasClientMeta, isPlugin, isWidget, isMonetizedWithClientMeta } from "..
 import { e0 } from "../905/696396";
 import { Q as _$$Q } from "../5430/662041";
 import { T as _$$T } from "../5132/203178";
-import { J3 } from "../figma_app/699310";
+import { hasFigmaPartnerBadge } from "../figma_app/699310";
 import { hasOrgRole } from "../figma_app/300692";
 import { E as _$$E } from "../905/53857";
 import { I as _$$I } from "../5430/750114";
@@ -47,7 +47,7 @@ import { logAndTrackCTA } from "../figma_app/314264";
 import { ResourceSaveFromResourceId, ResourceSave, PluginInstall, AllowlistedPlugin } from "../figma_app/43951";
 import { UserProfileTab } from "../figma_app/707808";
 import { a as _$$a } from "../figma_app/601188";
-import { G$, FF } from "../figma_app/588092";
+import { COMMUNITY_OPT_IN_MODAL_NAME, CommunityOnboardingVariation } from "../figma_app/588092";
 import { isOrgOrTeam } from "../figma_app/11961";
 import { getCommunityHubLikeStatus, getCommunityHubLikeStatusByResourceId } from "../905/841666";
 import { w as _$$w } from "../5430/495667";
@@ -138,10 +138,10 @@ function et(e, t, r, s) {
       };
       if (!n.authedActiveCommunityProfile?.public_at) {
         r(showModalHandler({
-          type: G$,
+          type: COMMUNITY_OPT_IN_MODAL_NAME,
           data: {
             userId: n.user.id,
-            variations: [FF.OPT_IN],
+            variations: [CommunityOnboardingVariation.OPT_IN],
             onFinish: t
           }
         }));
@@ -198,10 +198,10 @@ function er(e, t, r, s, i) {
     } else {
       if (!a.authedActiveCommunityProfile?.public_at) {
         n(showModalHandler({
-          type: G$,
+          type: COMMUNITY_OPT_IN_MODAL_NAME,
           data: {
             userId: a.user.id,
-            variations: [FF.OPT_IN],
+            variations: [CommunityOnboardingVariation.OPT_IN],
             onFinish: () => es({
               state: a,
               dispatch: n,
@@ -1024,7 +1024,7 @@ export function $$eH1({
   resource: m,
   layout: _ = "oneColumn"
 }) {
-  let p = [...t.filter(e => J3(e.badges)), ...t.filter(e => !J3(e.badges))];
+  let p = [...t.filter(e => hasFigmaPartnerBadge(e.badges)), ...t.filter(e => !hasFigmaPartnerBadge(e.badges))];
   let h = u ? jsxs("div", {
     className: tF,
     children: [jsx(_$$L, {

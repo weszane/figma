@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { x } from "../905/587214";
-import { Me } from "../figma_app/617427";
+import { WithTrackedIconButton } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { rE } from "../figma_app/186343";
 import { KindEnum } from "../905/129884";
@@ -9,7 +9,7 @@ export function $$d1({
   recordingKey: t,
   tooltipText: i
 }) {
-  return jsx(Me, {
+  return jsx(WithTrackedIconButton, {
     recordingKey: t,
     "aria-label": i,
     onClick: e,

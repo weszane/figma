@@ -16,7 +16,7 @@ import { JI, Yj } from '../905/416496';
 import { useModalManager } from '../905/437088';
 import { Y as _$$Y } from '../905/438063';
 import { IconButton } from '../905/443068';
-import { k as _$$k3 } from '../905/443820';
+import { LoadingSpinner } from '../905/443820';
 import { Button, ButtonLarge } from '../905/521428';
 import { useIsFullscreenSitesView } from '../905/561485';
 import { k as _$$k2 } from '../905/582200';
@@ -663,7 +663,7 @@ function eu({
                 children: jsx(setupThemeContext, {
                   brand: 'cooper',
                   mode: 'dark',
-                  children: jsx(_$$k3, {})
+                  children: jsx(LoadingSpinner, {})
                 })
               }), jsx(pu, {
                 ref,

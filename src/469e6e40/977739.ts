@@ -11,7 +11,7 @@ import { RadioGroup, RadioOption } from "../905/306088";
 import { LoadingSpinner } from "../figma_app/858013";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
-import { $z } from "../figma_app/617427";
+import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -380,14 +380,14 @@ let $$z0 = registerModal(function ({
           })
         }), jsx(DialogFooter, {
           children: jsxs(DialogActionStrip, {
-            children: [jsx($z, {
+            children: [jsx(WithTrackedButton, {
               variant: "secondary",
               onClick: a.onClose,
               trackingProperties: {
                 trackingDescriptor: UpgradeAction.CANCEL
               },
               children: getI18nString("general.cancel")
-            }), jsx($z, {
+            }), jsx(WithTrackedButton, {
               type: "submit",
               disabled: V || "loaded" !== T.status || "" !== F.inputValue,
               trackingProperties: {

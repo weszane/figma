@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { T } from "../905/745591";
+import { AnnouncementPrimitive } from "../905/745591";
 import a from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { RecordingComponent, generateRecordingKey } from "../figma_app/878298";
@@ -171,7 +171,7 @@ class $$E extends RecordingComponent {
           className: "mentions_typeahead--noMatchesFoundSearchTerm--smkuY",
           children: [renderI18nText("comments.at_mention"), this.props.typeahead.search]
         });
-        let t = jsx(T, {
+        let t = jsx(AnnouncementPrimitive, {
           role: "alert",
           children: jsx("div", {
             className: "mentions_typeahead--noMatchesFoundRow--9mNPs",
