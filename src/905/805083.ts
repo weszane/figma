@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { e0 } from "../905/696396";
 import { a as _$$a } from "../905/275092";
 import { U } from "../905/540113";
-import { c as _$$c } from "../905/167005";
+import { OverviewStatsView } from "../905/167005";
 import { i as _$$i } from "../905/565139";
 import { V } from "../905/697254";
 import { KZ } from "../905/193404";
@@ -112,7 +112,7 @@ function I({
       fileCount: r.data?.summary.total_files ?? 0
     })
   }];
-  return jsx(_$$c, {
+  return jsx(OverviewStatsView, {
     isLoading: "loading" === r.status,
     stats: s
   });

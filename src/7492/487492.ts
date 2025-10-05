@@ -40,7 +40,7 @@ import { ResourceTypeNoComment } from '../figma_app/45218';
 import { bE } from '../figma_app/78725';
 import { checkResourceEligibility, checkResourceSubscriptionActive, getPluginedWidgetWithPayment, getPublishedPluginWithPayment, getResourcePaymentFromState, isResourcePaymentFailed, isResourcePaymentPending } from '../figma_app/86989';
 import { assertNotNullish } from '../figma_app/95419';
-import { M3 } from '../figma_app/119475';
+import { useKeyboardNavigationItem } from '../figma_app/119475';
 import { hasLocalFileId } from '../figma_app/155287';
 import { FFileType } from '../figma_app/191312';
 import { B6, CF, fO, IT } from '../figma_app/201703';
@@ -50,7 +50,7 @@ import { getPluginVersion, isDevModeWithCodegen, pluginMetadata } from '../figma
 import { logAndTrackCTA } from '../figma_app/314264';
 import { ur, xY } from '../figma_app/439332';
 import { $3, op, QP } from '../figma_app/487970';
-import { s as _$$s3 } from '../figma_app/504088';
+import { SimpleComponentType } from '../figma_app/504088';
 import { ButtonBasePrimary } from '../figma_app/637027';
 import { canRequestExtensionVersion } from '../figma_app/684168';
 import { getResourceTaglineOrDescription, isResourcePendingPublishing } from '../figma_app/777551';
@@ -102,7 +102,7 @@ function ef(e, i, t) {
     setKeyboardNavigationElement,
     isFauxFocused,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: i || [0],
     fauxClick: s,
     id: e
@@ -134,7 +134,7 @@ export function $$ey4({
   let g = useCallback(() => viewResource({
     id: c ?? e
   }), [e, viewResource, c]);
-  let p = useMemo(() => activeTab === _$$s3.WIDGET ? {
+  let p = useMemo(() => activeTab === SimpleComponentType.WIDGET ? {
     viewWidgetDetails: g,
     keyboardNavigationPath: t,
     shouldFocusFirstItem: s
@@ -143,7 +143,7 @@ export function $$ey4({
     keyboardNavigationPath: t,
     shouldFocusFirstItem: s
   }, [activeTab, t, g, s]);
-  if (activeTab === _$$s3.WIDGET) {
+  if (activeTab === SimpleComponentType.WIDGET) {
     switch (i) {
       case 'community':
         r = jsx(eV, {

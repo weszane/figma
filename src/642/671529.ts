@@ -83,7 +83,7 @@ import { j as _$$j } from "../642/638075";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { G$ } from "../figma_app/159296";
 import { GY, _w } from "../642/435480";
-import { t as _$$t3 } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { trackEventAnalytics } from "../905/449184";
 import { WN } from "../figma_app/638601";
 import { U as _$$U } from "../905/492359";
@@ -660,7 +660,7 @@ function eZ({
   let n = WN();
   let l = e.reduce((e, t) => (e[t.tab] = !0, e), {});
   let a = e.find(e => e.active);
-  let [d,, c] = _$$t3.useManagedTabs(l, a?.tab.toString() ?? "", e => {
+  let [d,, c] = Tabs.useManagedTabs(l, a?.tab.toString() ?? "", e => {
     let t = parseInt(e);
     let r = eq(t, u).analyticsName;
     if (trackEventAnalytics("properties-panel-select-tab", {
@@ -681,9 +681,9 @@ function eZ({
     className: A7,
     children: [jsx("div", {
       className: tq,
-      children: jsx(_$$t3.TabStrip, {
+      children: jsx(Tabs.TabStrip, {
         manager: c,
-        children: e.map((e, t) => jsx(_$$t3.Tab, {
+        children: e.map((e, t) => jsx(Tabs.Tab, {
           ...d[e.tab],
           children: e.label
         }, `props-panel-tab-${t}`))

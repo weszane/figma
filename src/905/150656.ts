@@ -1,52 +1,79 @@
-import { jsx, jsxs } from 'react/jsx-runtime';
-import { useTabState, useTabManager } from '../905/56919';
-import { N } from '../905/130112';
-import { eg, gy, I5, SZ, zw } from '../905/183218';
-import { r as _$$r } from '../905/216849';
-import { TabsPrimitiveTabStrip } from '../905/840133';
-import { A } from '../vendor/723372';
-function o({
-  children: e,
-  ...t
-}) {
+import classNames from 'classnames'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { useTabManager, useTabState } from '../905/56919'
+import { N } from '../905/130112'
+import { eg, gy, I5, SZ, zw } from '../905/183218'
+import { r as _$$r } from '../905/216849'
+import { TabsPrimitiveTabStrip } from '../905/840133'
+
+interface TabProps {
+  children: React.ReactNode
+  [key: string]: any
+}
+
+interface TabPanelProps {
+  height?: 'fill' | string
+  [key: string]: any
+}
+
+interface TabStripProps {
+  [key: string]: any
+}
+
+/**
+ * Tab component - Renders a tab with hidden and visible spans for accessibility
+ * (Original: function o)
+ */
+function Tab({ children, ...props }: TabProps): JSX.Element {
   return jsxs(_$$r, {
-    ...t,
+    ...props,
     className: eg,
-    children: [jsx('span', {
-      'aria-hidden': !0,
-      'className': zw,
-      'children': e
-    }), jsx('span', {
-      children: e
-    })]
-  });
+    children: [
+      jsx('span', {
+        'aria-hidden': true,
+        'className': zw,
+        'children': children,
+      }),
+      jsx('span', {
+        children,
+      }),
+    ],
+  })
 }
-o.displayName = 'Tabs.Tab';
-function c(e) {
-  let {
-    height,
-    ...i
-  } = e;
+Tab.displayName = 'Tabs.Tab'
+
+/**
+ * TabPanel component - Renders a tab panel with optional fill height
+ * (Original: function c)
+ */
+function TabPanel({ height, ...props }: TabPanelProps): JSX.Element {
   return jsx(N, {
-    ...i,
-    className: A(SZ, {
-      [I5]: height === 'fill'
-    })
-  });
+    ...props,
+    className: classNames(SZ, {
+      [I5]: height === 'fill',
+    }),
+  })
 }
-c.displayName = 'Tabs.TabPanel';
-function p(e) {
+TabPanel.displayName = 'Tabs.TabPanel'
+
+/**
+ * TabStrip component - Renders a tab strip
+ * (Original: function p)
+ */
+function TabStrip(props: TabStripProps): JSX.Element {
   return jsx(TabsPrimitiveTabStrip, {
-    ...e,
-    className: gy
-  });
+    ...props,
+    className: gy,
+  })
 }
-p.displayName = 'Tabs.TabStrip';
-export let $$m0 = {
-  Tab: o,
-  TabPanel: c,
-  TabStrip: p,
+TabStrip.displayName = 'Tabs.TabStrip'
+
+export const Tabs = {
+  Tab,
+  TabPanel,
+  TabStrip,
   useTabs: useTabState,
-  useManagedTabs: useTabManager
-};
-export const t = $$m0;
+  useManagedTabs: useTabManager,
+}
+
+export const t = Tabs

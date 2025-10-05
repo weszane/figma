@@ -15,7 +15,7 @@ import { TextWithTruncation } from "../905/984674";
 import { renameFileOptimistic } from "../figma_app/78808";
 import { NN } from "../905/466026";
 import { renameAutosaveFileMutation, OfflineFileType } from "../figma_app/840917";
-import { Y6, nb, Tf } from "../figma_app/543100";
+import { renamingStateAtom, TileType, TileUtils } from "../figma_app/543100";
 import { FileCanEdit } from "../figma_app/43951";
 import { KindEnum } from "../905/129884";
 import { Cu, ol } from "../figma_app/603826";
@@ -24,30 +24,30 @@ export function $$S0(e) {
   let [t, i] = useState(null);
   let m = useDispatch();
   let x = getAtomMutate(renameAutosaveFileMutation);
-  let S = Xr(Y6);
+  let S = Xr(renamingStateAtom);
   let C = useSubscription(FileCanEdit, {
-    key: e.tile.type === nb.FILE ? e.tile.file.key : ""
+    key: e.tile.type === TileType.FILE ? e.tile.file.key : ""
   }, {
-    enabled: e.tile.type === nb.FILE
+    enabled: e.tile.type === TileType.FILE
   });
-  let T = Tf.useIsRenaming(e.tile);
-  let k = Tf.getName(e.tile);
+  let T = TileUtils.useIsRenaming(e.tile);
+  let k = TileUtils.getName(e.tile);
   if (T) return jsx(_$$p, {
     style: {
       width: "100%",
       border: "unset",
       boxShadow: "inset 0 -1px 0 0 var(--color-border)"
     },
-    placeholderValue: Tf.getName(e.tile),
+    placeholderValue: TileUtils.getName(e.tile),
     submit: t => {
       S(null);
-      e.tile.type === nb.FILE ? m(renameFileOptimistic({
+      e.tile.type === TileType.FILE ? m(renameFileOptimistic({
         file: e.tile.file,
         name: t
-      })) : e.tile.type === nb.REPO ? m(NN({
+      })) : e.tile.type === TileType.REPO ? m(NN({
         repo: e.tile.repo,
         name: t
-      })) : e.tile.type === nb.OFFLINE_FILE && x({
+      })) : e.tile.type === TileType.OFFLINE_FILE && x({
         fileKey: e.tile.file.fileKey,
         name: t,
         source: OfflineFileType.OFFLINE_FILE_TILE
@@ -55,7 +55,7 @@ export function $$S0(e) {
     },
     cancel: () => {
       S(null);
-      e.tile.type === nb.OFFLINE_FILE && x({
+      e.tile.type === TileType.OFFLINE_FILE && x({
         fileKey: e.tile.file.fileKey,
         source: OfflineFileType.OFFLINE_FILE_TILE
       });
@@ -67,7 +67,7 @@ export function $$S0(e) {
       let n = t.target;
       n.offsetWidth < n.scrollWidth && e.tile ? i(n.innerText) : i(null);
     } : void 0;
-    let a = !!e.checksForViewOnlyLabels && e.tile.type === nb.FILE && e.tile.file.teamId === e.checksForViewOnlyLabels.teamId && e.checksForViewOnlyLabels.isLockedTeam;
+    let a = !!e.checksForViewOnlyLabels && e.tile.type === TileType.FILE && e.tile.file.teamId === e.checksForViewOnlyLabels.teamId && e.checksForViewOnlyLabels.isLockedTeam;
     return jsxs("div", {
       className: e.isListView ? Cu : cssBuilderInstance.flex.flexRow.itemsCenter.gap4.$,
       onMouseEnter: r,
@@ -107,8 +107,8 @@ function w({
 }
 let C = (e, t, i) => {
   if (i) return !1;
-  let n = e.type === nb.FILE && e.file.trashedAt && e.file.teamId !== t;
-  let r = e.type === nb.REPO && e.repo.trashed_at && e.repo.team_id !== t;
+  let n = e.type === TileType.FILE && e.file.trashedAt && e.file.teamId !== t;
+  let r = e.type === TileType.REPO && e.repo.trashed_at && e.repo.team_id !== t;
   return n || r;
 };
 export const A = $$S0;

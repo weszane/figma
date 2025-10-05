@@ -1,3 +1,5 @@
+import type { PrimitiveAtom, WritableAtom } from 'jotai'
+import type { SuspendableResource } from './157003'
 import { InfiniteQueryObserver, isCancelledError, MutationObserver, QueryClient } from '@tanstack/query-core'
 import { produce, setAutoFreeze } from 'immer'
 import { atom } from 'jotai'
@@ -24,7 +26,7 @@ import { logError } from '../905/714362'
 import { createTeamManager } from '../905/844455'
 import { generateUUIDv4 } from '../905/871474'
 import { denormalizeRoot, normalizeRoot, SchemaLibrary } from '../905/893701'
-import { shouldSampleRequest, sendWithRetry } from '../905/910117'
+import { sendWithRetry, shouldSampleRequest } from '../905/910117'
 import { getUserPlan } from '../905/912096'
 import { resourceUtils } from '../905/989992'
 import { atomStoreManager, createCustomAtom, createRemovableAtomFamily, setupAtomWithMount, useAtomWithSubscription } from '../figma_app/27355'
@@ -678,7 +680,7 @@ class QueryProviderContext {
   private _objectStores: any
   private _queryAtomFamilies: Set<any>
   private _gremlinConfig?: any
-
+  uniqueQueryKeys: Set<string> = new Set()
   /**
    * Constructs a new QueryProviderContext.
    * @param atomStore - The atom store instance.
@@ -826,6 +828,18 @@ class QueryProviderContext {
   }
 }
 
+export interface LiveStore_QueryConfig<Args = any, Data = any, Output = Data> {
+  key?: string
+  fetch: (args: Args, context: any) => Promise<Data>
+  enabled?: (args: Args) => boolean
+  output?: (params: { data: Data, get: any, args: Args }, context: any) => Output
+  refetchIntervalMs?: number
+  stalenessPolicy?: string
+  gcPolicy?: string
+  schema?: any
+  sync?: (args: Args, context: any & { mutate: (updater: (draft: Data) => void) => void }) => void | (() => void)
+  syncObjects?: boolean
+}
 // Original: class z
 /**
  * Main LiveStore class that manages queries, mutations, and object interactions.
@@ -861,22 +875,33 @@ class LiveStore {
     return this.queryProviderContext
   }
 
-
   /**
    * Creates the Query method.
    * @returns The Query function.
    */
-  private createQueryMethod() {
+  /**
+   * Refactored createQueryMethod with generics and type safety.
+   * @template Args, Data, Output
+   * @returns Query method with correct type annotations.
+   * Original: createQueryMethod
+   */
+  private createQueryMethod<
+    Args = any,
+    Data = any,
+    Output = SuspendableResource,
+  >(): (queryConfig: LiveStore_QueryConfig<Args, Data, Output>) => (args: Args) => WritableAtom<SuspendableResource, any, any> & {
+    queryKey: number[]
+    queryFn: () => Promise<Data>
+    __OPAQUE_RQ_QUERY__: symbol
+  } {
     const extrasProvider = this.extrasProvider
-    const getQueryContext = this.getQueryContext.bind(this)
-    return (queryConfig: any) => {
-      if (queryConfig.key && getQueryContext().uniqueQueryKeys.add(queryConfig.key)) {
-        // Key added
-      }
+    const getQueryContext = this.getQueryContext.bind(this) as () => QueryProviderContext
+    return (queryConfig: LiveStore_QueryConfig<Args, Data, Output>) => {
+      queryConfig.key && getQueryContext().uniqueQueryKeys.add(queryConfig.key)
       if (queryConfig.refetchIntervalMs !== undefined && queryConfig.refetchIntervalMs < 1000) {
         throw new Error(`⚠️ Whoa there! You're trying to poll a query every ${queryConfig.refetchIntervalMs}ms -- that's probably much faster than you actually want. Please use a value of at least 1000ms, or reach out to #a-frontend-platform if you have a different use case.`)
       }
-      const queryAtomFamily = createRemovableAtomFamily((args: any) => {
+      const queryAtomFamily = createRemovableAtomFamily((args: Args) => {
         const context = extrasProvider()
         const queryKey = [++queryKeyCounter]
         const enabled = !queryConfig.enabled || queryConfig.enabled(args)
@@ -934,12 +959,15 @@ class LiveStore {
             }
           }
         })
-        let dataAtom = atom((get: any) => get(mountedAtom).data, (get: any, set: any, action: any) => {
-          if (action.type !== 'REMOTE_UPDATE') {
-            return set(mountedAtom, action)
-          }
-          getQueryContext().queryClient.setQueryData(queryKey, action.data)
-        })
+        let dataAtom = atom<Data, any, any>(
+          (get: any) => get(mountedAtom).data,
+          (get: any, set: any, action: any) => {
+            if (action.type !== 'REMOTE_UPDATE') {
+              return set(mountedAtom, action)
+            }
+            getQueryContext().queryClient.setQueryData(queryKey, action.data)
+          },
+        )
         const objectStores = getQueryContext().objectStores
         const schema = queryConfig.schema && buildSchema(queryConfig.schema, createObjectDefMap(objectStores))
         if (schema?.requiresNormalization) {
@@ -947,10 +975,10 @@ class LiveStore {
         }
         if (queryConfig.sync) {
           const originalAtom = dataAtom
-          dataAtom = setupAtomWithMount(originalAtom, () => queryConfig.sync(args, {
+          dataAtom = setupAtomWithMount(originalAtom, () => queryConfig.sync!(args, {
             ...context,
-            mutate: (updater: any) => {
-              const currentData = produce(atomStoreManager.get(originalAtom), (draft: any) => {
+            mutate: (updater: (draft: Data) => void) => {
+              const currentData = produce(atomStoreManager.get(originalAtom), (draft: Data) => {
                 if (draft !== undefined) {
                   updater(draft)
                 }
@@ -959,16 +987,17 @@ class LiveStore {
                 atomStoreManager.set(originalAtom, { type: 'REMOTE_UPDATE', data: currentData })
               }
             },
-          }))
+          })) as PrimitiveAtom<Data>
         }
-        const outputAtom = createCustomAtom(dataAtom, (get: any) => {
+        // Cast dataAtom to PrimitiveAtom<Output> for createCustomAtom, since Output may be the same as Data or transformed by output()
+        const outputAtom: PrimitiveAtom<Output> = createCustomAtom<Output, any, any>(dataAtom as unknown as PrimitiveAtom<Output>, (get: any) => {
           const { output } = queryConfig
           const data = get(dataAtom)
           return output
             ? (data === undefined ? undefined : output({ data, get, args }, context))
             : data
         })
-        const queryAtom = createCustomAtom(outputAtom, (get: any) => {
+        const queryAtom: WritableAtom<SuspendableResource, any, any> = createCustomAtom<Output, SuspendableResource, any>(outputAtom, (get: any) => {
           const result = get(mountedAtom)
           if (!enabled) {
             return resourceUtils.disabledSuspendable(promiseManager)
@@ -994,7 +1023,7 @@ class LiveStore {
           __OPAQUE_RQ_QUERY__: OPAQUE_RQ_QUERY,
         })
       }, deepEqualIgnoreKeys)
-      return (args: any) => {
+      return (args: Args) => {
         getQueryContext().registerQueryAtomFamily(queryAtomFamily)
         return queryAtomFamily(args)
       }
@@ -1035,9 +1064,9 @@ class LiveStore {
               return observer.refetch({ refetchPage: (page: any, index: number) => index === 0 }).then((result: any) => {
                 getQueryContext().queryClient.setQueryData(observer.options.queryKey, (data: any) => data
                   ? {
-                    pages: data.pages.slice(0, 1),
-                    pageParams: data.pageParams.slice(0, 1),
-                  }
+                      pages: data.pages.slice(0, 1),
+                      pageParams: data.pageParams.slice(0, 1),
+                    }
                   : data)
                 return result
               })
@@ -1140,12 +1169,12 @@ class LiveStore {
           return queryConfig.joinPages
             ? queryConfig.joinPages(joinedPages)
             : joinedPages.reduce((acc: any[], page: any) => {
-              if (!Array.isArray(page.data)) {
-                throw new TypeError('Expected array data in page')
-              }
-              acc.push(...page.data)
-              return acc
-            }, [])
+                if (!Array.isArray(page.data)) {
+                  throw new TypeError('Expected array data in page')
+                }
+                acc.push(...page.data)
+                return acc
+              }, [])
         })
         const outputAtom = createCustomAtom(joinedDataAtom, (get: any) => {
           const { output } = queryConfig

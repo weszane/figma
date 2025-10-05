@@ -9,7 +9,7 @@ import { liveStoreInstance } from "../905/713695";
 import { PageTypeEnum } from "../figma_app/10554";
 import { $S } from "../905/918620";
 import { deepEqual } from "../905/382883";
-import { t as _$$t2 } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -501,7 +501,7 @@ function eM({
     details: !0,
     advanced: !0
   }), []);
-  let [b, x, D] = _$$t2.useTabs(y, {
+  let [b, x, D] = Tabs.useTabs(y, {
     orientation: "vertical"
   });
   let Z = _$$b(D);
@@ -576,7 +576,7 @@ function eM({
     className: KT,
     children: [jsx("div", {
       className: Cd,
-      children: jsxs(_$$t2.TabStrip, {
+      children: jsxs(Tabs.TabStrip, {
         manager: Z,
         children: [jsx(_$$y, {
           ...b.details,
@@ -594,7 +594,7 @@ function eM({
       })
     }), jsxs("div", {
       className: DK,
-      children: [jsxs(_$$t2.TabPanel, {
+      children: [jsxs(Tabs.TabPanel, {
         ...x.details,
         children: [jsx(Mm, {
           id: tZ.NAME_INPUT,
@@ -622,7 +622,7 @@ function eM({
             }
           })
         })]
-      }), jsxs(_$$t2.TabPanel, {
+      }), jsxs(Tabs.TabPanel, {
         ...x.advanced,
         children: [jsx(_$$A3, {
           authorField: e.fieldStates.author
@@ -1380,7 +1380,7 @@ function td({
     thumbnail: !0,
     advanced: !0
   }), []);
-  let [et, ei, en] = _$$t2.useTabs(ee, {
+  let [et, ei, en] = Tabs.useTabs(ee, {
     orientation: "vertical"
   });
   let er = _$$b(en);
@@ -1488,7 +1488,7 @@ function td({
     className: KT,
     children: [jsxs("div", {
       className: Cd,
-      children: [jsxs(_$$t2.TabStrip, {
+      children: [jsxs(Tabs.TabStrip, {
         manager: er,
         children: [jsx(_$$y, {
           ...et.details,
@@ -1523,7 +1523,7 @@ function td({
       })]
     }), jsxs("div", {
       className: DK,
-      children: [jsxs(_$$t2.TabPanel, {
+      children: [jsxs(Tabs.TabPanel, {
         ...ei.details,
         children: [jsx(Mm, {
           id: tZ.NAME_INPUT,
@@ -1566,7 +1566,7 @@ function td({
             }
           })
         })]
-      }), jsxs(_$$t2.TabPanel, {
+      }), jsxs(Tabs.TabPanel, {
         ...ei.thumbnail,
         children: [jsx(Mm, {
           id: tZ.THUMBNAIL_UPLOADER,
@@ -1586,7 +1586,7 @@ function td({
             ...b.carouselMedia
           })
         })]
-      }), jsxs(_$$t2.TabPanel, {
+      }), jsxs(Tabs.TabPanel, {
         ...ei.advanced,
         children: [jsx(_$$A3, {
           authorField: e.fieldStates.author

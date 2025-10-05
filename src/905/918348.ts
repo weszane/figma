@@ -9,8 +9,8 @@ import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { useSingleEffect } from "../905/791079";
 import { zL } from "../905/294543";
-import { S as _$$S } from "../905/491708";
-import { px } from "../905/201014";
+import { extractCopyExportRestrictions } from "../905/491708";
+import { getCodegenHandler } from "../905/201014";
 import { JG } from "../figma_app/852050";
 import { sendGeneratedCode } from "../figma_app/415217";
 import { useCounter } from "../905/949750";
@@ -51,11 +51,11 @@ export function $$E0({
   let D = useSelector(e => e.versionHistory.activeId);
   let L = getSingletonSceneGraph();
   let F = zL();
-  let M = px(c);
+  let M = getCodegenHandler(c);
   let j = JG({
     enabled: "first-party" === t.type
   });
-  let U = useSelector(_$$S, deepEqual);
+  let U = useSelector(extractCopyExportRestrictions, deepEqual);
   useEffect(() => {
     M.rebuildNodeCache();
   }, [M, D, E, j]);

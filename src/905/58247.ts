@@ -1,8 +1,8 @@
 import { debugState } from "../905/407919";
-import { En, pM } from "../905/116101";
+import { setUniversalInsertModalOpen, handleResourceDetails } from "../905/116101";
 import { PluginSourceType, AssetTabType, ExtensionFeatureKey } from "../905/946805";
 import { RM, $I } from "../figma_app/322845";
-import { s as _$$s } from "../figma_app/504088";
+import { SimpleComponentType } from "../figma_app/504088";
 export function $$l1(e) {
   if (RM()) {
     let t = function (e, t) {
@@ -13,9 +13,9 @@ export function $$l1(e) {
           return PluginSourceType.FROM_ORG;
       }
       switch (e) {
-        case _$$s.PLUGIN:
+        case SimpleComponentType.PLUGIN:
           return PluginSourceType.PLUGINS;
-        case _$$s.WIDGET:
+        case SimpleComponentType.WIDGET:
           return PluginSourceType.WIDGETS;
         default:
           return PluginSourceType.ALL;
@@ -31,7 +31,7 @@ export function $$l1(e) {
         source: e.source
       }
     });
-  } else debugState.dispatch(En(e));
+  } else debugState.dispatch(setUniversalInsertModalOpen(e));
 }
 export function $$d0(e, t) {
   RM() ? $I({
@@ -43,7 +43,7 @@ export function $$d0(e, t) {
     trackingData: {
       source: e.source
     }
-  }) : debugState.dispatch(pM(e));
+  }) : debugState.dispatch(handleResourceDetails(e));
 }
 export const e = $$d0;
 export const s = $$l1;

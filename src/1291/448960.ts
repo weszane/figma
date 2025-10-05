@@ -13,13 +13,13 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
 import { hideDropdownAction } from "../905/929976";
-import { jy } from "../905/116101";
+import { handlePinningState } from "../905/116101";
 import { TrackingProvider } from "../figma_app/831799";
 import { VU } from "../905/625959";
 import { LR, zo, J$, gR } from "../figma_app/120210";
 import { useDropdownState } from "../905/848862";
-import { t as _$$t2 } from "../905/192333";
-import { t as _$$t3 } from "../905/150656";
+import { PinningState } from "../905/192333";
+import { Tabs } from "../905/150656";
 import { Z } from "../905/189618";
 import { Q } from "../1291/188959";
 import { styleBuilderInstance } from "../905/941192";
@@ -42,10 +42,10 @@ function k() {
         display: "inline-flex",
         padding: "12px 20px"
       }).$,
-      children: jsx(_$$t3.TabStrip, {
+      children: jsx(Tabs.TabStrip, {
         manager: tabManager,
         children: I.map(e => {
-          let s = createElement(_$$t3.Tab, {
+          let s = createElement(Tabs.Tab, {
             ...tabPropsMap[e],
             key: e,
             htmlAttributes: {
@@ -127,7 +127,7 @@ function O({
   }, []);
   let [k, L] = useState(!1);
   let A = useDropdownState();
-  J$(C.pinned === _$$t2.NOT_PINNED, N, d ? `[data-element-target=${d}]` : void 0);
+  J$(C.pinned === PinningState.NOT_PINNED, N, d ? `[data-element-target=${d}]` : void 0);
   let B = useLatestRef(p);
   useEffect(() => {
     void 0 !== B && (B && !p || !B && p) && L(!0);
@@ -143,7 +143,7 @@ function O({
     setIsTransitioning: L
   }), [E, x, u, T, I, g, k, L]);
   return e ? jsxs(Fragment, {
-    children: [C.pinned === _$$t2.PINNED && r && jsx("div", {
+    children: [C.pinned === PinningState.PINNED && r && jsx("div", {
       className: "browse_all_resources_modal_container--dockLeft--K-xtd",
       style: {
         width: gR
@@ -155,7 +155,7 @@ function O({
         autoflowHeight: !0,
         bounds: s,
         canResetPosition: l,
-        containerClassName: C.pinned === _$$t2.PINNED_AND_DOCKED_LEFT ? "browse_all_resources_modal_container--modalContainerPinAnimation--mjZ0f browse_all_resources_modal_container--modalContainer--dG0DL" : "browse_all_resources_modal_container--modalContainer--dG0DL",
+        containerClassName: C.pinned === PinningState.PINNED_AND_DOCKED_LEFT ? "browse_all_resources_modal_container--modalContainerPinAnimation--mjZ0f browse_all_resources_modal_container--modalContainer--dG0DL" : "browse_all_resources_modal_container--modalContainer--dG0DL",
         contentContainerClassName: "browse_all_resources_modal_container--modalContentContainer--I9Qp2",
         disableDragging: _,
         initialPosition: t || e,
@@ -168,8 +168,8 @@ function O({
         },
         onDragStart: () => {
           VU.get("set-tool-default", "toolbar")();
-          $(jy({
-            pinned: _$$t2.PINNED
+          $(handlePinningState({
+            pinned: PinningState.PINNED
           }));
         },
         onLeaveBound: () => {

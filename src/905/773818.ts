@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, createContext, useEffect, useContext } from "react";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { M3 } from "../figma_app/119475";
+import { useKeyboardNavigationItem } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { setupAutoFocusHandler, setupKeyboardNavigationFocus } from "../905/44915";
@@ -84,7 +84,7 @@ export function $$g0({
       isFauxFocused,
       setKeyboardNavigationElement,
       keyboardNavigationItem
-    } = M3({
+    } = useKeyboardNavigationItem({
       disabled: y,
       path: [layoutIndex, rowIndex],
       column: columnIndex,

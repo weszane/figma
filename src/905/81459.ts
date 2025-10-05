@@ -27,7 +27,7 @@ import { isZipFile } from "./35608";
  * Process the next file in the import queue
  * Original name: $$C6
  */
-const processNextFileImport = createOptimistThunk(async ({
+export const processNextFileImport = createOptimistThunk(async ({
   dispatch
 }, getState) => {
   // Early exit conditions
@@ -267,20 +267,20 @@ const processNextFileImport = createOptimistThunk(async ({
 });
 
 // Action creators
-const setFromFileImportNuxStep = createActionCreator("FILE_IMPORT_SET_FROM_FILE_IMPORT_NUX_STEP");
-const showImportPdfConfirmation = createActionCreator("FILE_IMPORT_SHOW_IMPORT_PDF_CONFIRMATION");
-const showImportFigmaDesignRepo = createActionCreator("FILE_IMPORT_SHOW_IMPORT_FIGMA_DESIGN_REPO");
-const clearFileImports = createActionCreator("FILE_IMPORT_CLEAR_IMPORTS");
-const failFileImportOnLimit = createActionCreator("FILE_IMPORT_FAIL_ON_LIMIT");
-const updateFileImportItem = createActionCreator("FILE_IMPORT_UPDATE_ITEM");
-const addFileImportToQueue = createActionCreator("FILE_IMPORT_ADD_TO_QUEUE");
-const clearFileImportQueue = createActionCreator("FILE_IMPORT_CLEAR_QUEUE");
+export const setFromFileImportNuxStep = createActionCreator("FILE_IMPORT_SET_FROM_FILE_IMPORT_NUX_STEP");
+export const showImportPdfConfirmation = createActionCreator("FILE_IMPORT_SHOW_IMPORT_PDF_CONFIRMATION");
+export const showImportFigmaDesignRepo = createActionCreator("FILE_IMPORT_SHOW_IMPORT_FIGMA_DESIGN_REPO");
+export const clearFileImports = createActionCreator("FILE_IMPORT_CLEAR_IMPORTS");
+export const failFileImportOnLimit = createActionCreator("FILE_IMPORT_FAIL_ON_LIMIT");
+export const updateFileImportItem = createActionCreator("FILE_IMPORT_UPDATE_ITEM");
+export const addFileImportToQueue = createActionCreator("FILE_IMPORT_ADD_TO_QUEUE");
+export const clearFileImportQueue = createActionCreator("FILE_IMPORT_CLEAR_QUEUE");
 
 /**
  * Cancel all file imports
  * Original name: $$F15
  */
-const cancelAllFileImports = createOptimistThunk(({
+export const cancelAllFileImports = createOptimistThunk(({
   dispatch,
   getState
 }) => {
@@ -338,14 +338,14 @@ const cancelAllFileImports = createOptimistThunk(({
   }
   resetImportErrorTracker();
 });
-const startProcessingFile = createActionCreator("FILE_IMPORT_START_PROCESSING_FILE");
-const doneProcessingFile = createActionCreator("FILE_IMPORT_DONE_PROCESSING_FILE");
+export const startProcessingFile = createActionCreator("FILE_IMPORT_START_PROCESSING_FILE");
+export const doneProcessingFile = createActionCreator("FILE_IMPORT_DONE_PROCESSING_FILE");
 
 /**
  * Process the next queued file
  * Original name: U
  */
-const processNextQueuedFile = createOptimistThunk(({
+export const processNextQueuedFile = createOptimistThunk(({
   dispatch
 }, getState) => {
   dispatch(doneProcessingFile());
@@ -353,13 +353,13 @@ const processNextQueuedFile = createOptimistThunk(({
     dispatch(processNextFileImport());
   }
 });
-const confirmImportPdf = createActionCreator("FILE_IMPORT_CONFIRM_IMPORT_PDF");
+export const confirmImportPdf = createActionCreator("FILE_IMPORT_CONFIRM_IMPORT_PDF");
 
 /**
  * Process confirmed PDF import
  * Original name: $$V8
  */
-const processConfirmedPdfImport = createOptimistThunk(({
+export const processConfirmedPdfImport = createOptimistThunk(({
   dispatch,
   getState
 }, payload) => {
@@ -368,13 +368,13 @@ const processConfirmedPdfImport = createOptimistThunk(({
     dispatch(processNextFileImport());
   }
 });
-const cancelImportPdf = createActionCreator("FILE_IMPORT_CANCEL_IMPORT_PDF");
+export const cancelImportPdf = createActionCreator("FILE_IMPORT_CANCEL_IMPORT_PDF");
 
 /**
  * Process PDF import cancellation
  * Original name: $$z0
  */
-const processPdfImportCancellation = createOptimistThunk(({
+export const processPdfImportCancellation = createOptimistThunk(({
   dispatch
 }, getState) => {
   dispatch(cancelImportPdf());

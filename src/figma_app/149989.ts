@@ -12,7 +12,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { KeyCodes } from "../905/63728";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { ErrorBoundaryCrash } from "../905/751457";
-import { Nt, c2, yn, lv, dP } from "../figma_app/119475";
+import { isDownKey, isUpKey, isLeftKey, isRightKey, KeyboardNavigationProvider } from "../figma_app/119475";
 import { SvgComponent } from "../905/714743";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
@@ -723,7 +723,7 @@ export function $$el3({
       });
       t ? e$(t) : l && b();
       N();
-    } else t.keyCode === KeyCodes.ESCAPE ? N() : (Nt(t, !1) || c2(t, !1) || yn(t.code, !1) || lv(t.code, !1)) && (ec ? (eF.current?.getVirtualItems() ?? []).some(e => {
+    } else t.keyCode === KeyCodes.ESCAPE ? N() : (isDownKey(t, !1) || isUpKey(t, !1) || isLeftKey(t.code, !1) || isRightKey(t.code, !1)) && (ec ? (eF.current?.getVirtualItems() ?? []).some(e => {
       let t = eM.current[e.index];
       return "items" in t && t.items.some(e => tx(e) === ec);
     }) || eU(ec, {
@@ -732,7 +732,7 @@ export function $$el3({
       align: "center"
     }) : ej());
   }, [e, r, eP, eD, ec, N, e$, l, b, el, eU, ej]);
-  return jsxs(dP, {
+  return jsxs(KeyboardNavigationProvider, {
     recordingKey: f,
     onClick: hideStyleContextMenu,
     children: [jsx("div", {

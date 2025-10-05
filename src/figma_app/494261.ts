@@ -13,7 +13,7 @@ import { vr } from "../figma_app/475472";
 import { AccessLevelEnum } from "../905/557142";
 import { c as _$$c } from "../figma_app/52714";
 import { organizationAPIService } from "../figma_app/617654";
-import { bE } from "../905/98702";
+import { rolePostAction } from "../905/98702";
 let $$y13 = "team_join_request_submitted";
 let $$b15 = "permission_request_submitted";
 let $$T7 = createOptimistThunk(async (e, t) => {
@@ -58,7 +58,7 @@ let $$S2 = createOptimistThunk((e, t) => {
     data: t
   }) => {
     e.dispatch(FlashActions.flash(getI18nString("org_actions.request_approved")));
-    e.dispatch(bE({
+    e.dispatch(rolePostAction({
       role: t.meta
     }));
   }).catch(t => {

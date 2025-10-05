@@ -21,22 +21,22 @@ import { e as _$$e3, N as _$$N } from '../905/55273';
 import { e as _$$e2 } from '../905/58247';
 import { K as _$$K2 } from '../905/63322';
 import { KeyCodes } from '../905/63728';
-import { l as _$$l5 } from '../905/65216';
+import { setupReturnToInstanceHandler } from '../905/65216';
 import { m as _$$m2 } from '../905/70820';
 import { z as _$$z2 } from '../905/95280';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { e5 as _$$e5 } from '../905/104019';
 import { Z as _$$Z2 } from '../905/104740';
 import { q as _$$q2, w as _$$w3 } from '../905/112768';
-import { En, jy, KE } from '../905/116101';
+import { setUniversalInsertModalOpen, handlePinningState, closeUniversalInsertModal } from '../905/116101';
 import { u as _$$u } from '../905/117966';
 import { fullscreenPerfManager } from '../905/125218';
 import { ez as _$$ez, lC as _$$lC, _o, GI, HV, IZ, qL, SK, U9, Vi, W6, wp, yE } from '../905/125333';
 import { J as _$$J5 } from '../905/125483';
 import { setupAutofocusHandler } from '../905/128376';
 import { KindEnum } from '../905/129884';
-import { g as _$$g2 } from '../905/142432';
-import { hO } from '../905/145989';
+import { interactiveSlideElementInsertedEmitter } from '../905/142432';
+import { migrateLegacySpellCheckLanguage } from '../905/145989';
 import { n as _$$n4 } from '../905/155450';
 import { hideModal, hideModalHandler, hideSpecificModal, showModal, showModalConditional, showModalHandler } from '../905/156213';
 import { TrackedLink } from '../905/160095';
@@ -45,7 +45,7 @@ import { ServiceCategories } from '../905/165054';
 import { NotificationCategory } from '../905/170564';
 import { d as _$$d3 } from '../905/189168';
 import { scopeAwareFunction as _$$nc, permissionScopeHandler } from '../905/189185';
-import { t as _$$t3 } from '../905/192333';
+import { PinningState } from '../905/192333';
 import { AUTH_INIT } from '../905/194276';
 import { isStackOverflowError } from '../905/194389';
 import { Cg } from '../905/195479';
@@ -93,7 +93,7 @@ import { ch } from '../905/443517';
 import { s as _$$s8 } from '../905/445054';
 import { trackEventAnalytics } from '../905/449184';
 import { CM, xL, Yv } from '../905/459248';
-import { QC } from '../905/461516';
+import { SpellCheckEngine } from '../905/461516';
 import { notificationActions } from '../905/463586';
 import { isSpecialRoutePath } from '../905/470286';
 import { enqueueNetworkErrorBell } from '../905/470594';
@@ -387,7 +387,7 @@ import { LIBRARY_PREFERENCES_MODAL, PrimaryWorkflowEnum, SubscriptionStatusEnum 
 import { BG as _$$BG } from '../figma_app/634288';
 import { BigTextInputForwardRef, ButtonBaseReversedContainer } from '../figma_app/637027';
 import { canMemberOrg } from '../figma_app/642025';
-import { Ju } from '../figma_app/644255';
+import { initializeNodeChangeHandler } from '../figma_app/644255';
 import { selectStateGroupAssetsMap } from '../figma_app/645694';
 import { CN, Wz } from '../figma_app/651866';
 import { mapFilter } from '../figma_app/656233';
@@ -453,7 +453,7 @@ import { c as _$$c } from '../figma_app/968727';
 import { e4 as _$$e7 } from '../figma_app/968938';
 import { KD, Lk } from '../figma_app/975811';
 import { getEditorTypeFromView } from '../figma_app/976749';
-import { gH } from '../figma_app/985200';
+import { DEFAULT_ALLOWED_ORIGINS } from '../figma_app/985200';
 import _require from '../vendor/89702';
 import { hp } from '../vendor/162266';
 import ah from '../vendor/223926';
@@ -4316,7 +4316,7 @@ let lw = new class {
       validatedPermissions: PluginPermissions.forFirstPartyPlugin(),
       isLocal: !1,
       capabilities: [],
-      allowedDomains: gH,
+      allowedDomains: DEFAULT_ALLOWED_ORIGINS,
       editorType: [ManifestEditorType.FIGJAM, ManifestEditorType.FIGMA, ManifestEditorType.SITES],
       html: null,
       incrementalSafeApi: !1,
@@ -4471,7 +4471,7 @@ async function lO({
   pluginState.currentPluginRunID = o;
   try {
     await E9({
-      allowedDomains: gH,
+      allowedDomains: DEFAULT_ALLOWED_ORIGINS,
       apiVersion: pS,
       capabilities: [],
       stats: new PluginApiMetrics(),
@@ -4549,7 +4549,7 @@ async function lF(e, {
     let o = handleSelectedView();
     if (!o) throw new Error('Cannot run widget while logged out');
     await E9({
-      allowedDomains: manifest.networkAccess?.allowedDomains ?? gH,
+      allowedDomains: manifest.networkAccess?.allowedDomains ?? DEFAULT_ALLOWED_ORIGINS,
       apiVersion: manifest.api,
       capabilities: manifest.capabilities ?? [],
       checkSyntax: !1,
@@ -5212,7 +5212,7 @@ export function $$lq1(e, t, i, n) {
     OX();
     PR();
     bJ();
-    Ju();
+    initializeNodeChangeHandler();
     qb();
     pP();
     YL();
@@ -5591,10 +5591,10 @@ let lX = class e extends sP(sN(sR)) {
     this.fontListPromise == null && (this.fontListPromise = fullscreenPerfManager.timeAsync('fetchFontList', fetchFontList));
   }
   static prepareSpellCheck() {
-    BrowserInfo.isIpad || (hO(), (async () => {
+    BrowserInfo.isIpad || (migrateLegacySpellCheckLanguage(), (async () => {
       let e = await x5();
       fJ(e);
-      e === QC.HUNSPELL && _$$jk();
+      e === SpellCheckEngine.HUNSPELL && _$$jk();
     })());
   }
   showFragmentSearchSuggestion() {
@@ -5792,11 +5792,11 @@ let lX = class e extends sP(sN(sR)) {
     let e = this._store.getState().selectedView;
     if (!(e && e.view === 'fullscreen' && (e.editorType === FEditorType.Whiteboard || e.editorType === FEditorType.Slides || e.editorType === FEditorType.Cooper))) return;
     let t = this._store.getState().universalInsertModal;
-    t.showing && t.pinned === _$$t3.NOT_PINNED ? t.pinned === _$$t3.NOT_PINNED ? (fullscreenValue.triggerAction('set-tool-default', {
+    t.showing && t.pinned === PinningState.NOT_PINNED ? t.pinned === PinningState.NOT_PINNED ? (fullscreenValue.triggerAction('set-tool-default', {
       source: 'menu'
-    }), this.dispatch(KE())) : this.dispatch(jy({
-      pinned: _$$t3.NOT_PINNED
-    })) : this.dispatch(En({
+    }), this.dispatch(closeUniversalInsertModal())) : this.dispatch(handlePinningState({
+      pinned: PinningState.NOT_PINNED
+    })) : this.dispatch(setUniversalInsertModalOpen({
       initialX: 0,
       initialY: 0
     }));
@@ -6547,7 +6547,7 @@ let lX = class e extends sP(sN(sR)) {
     }();
   }
   showReturnToInstanceVisualBell(e) {
-    this.dispatch(_$$l5(e));
+    this.dispatch(setupReturnToInstanceHandler(e));
   }
   showReturnToVariantVisualBell(e, t, i) {
     _$$P2(e, t, i);
@@ -7271,7 +7271,7 @@ let lX = class e extends sP(sN(sR)) {
     oI.publishFrameSelectionForMirror(e, t, i, n, r);
   }
   trackInteractiveSlideElementInsertedForSprig() {
-    _$$g2.emit();
+    interactiveSlideElementInsertedEmitter.emit();
   }
   attemptedSketchFileDrop() {
     this.dispatch(showModalHandler({
@@ -7341,7 +7341,7 @@ let lX = class e extends sP(sN(sR)) {
         fullscreenValue.triggerAction('clear-tool', {
           source: 'menu'
         });
-        i(En({
+        i(setUniversalInsertModalOpen({
           initialX: 0,
           initialY: 0,
           initialTab: _$$p.STICKERS_AND_COMPONENTS
@@ -7386,18 +7386,18 @@ let lX = class e extends sP(sN(sR)) {
         x,
         y
       } = Nh(this._state.mirror.appModel.showUi);
-      e.universalInsertModal?.showing ? this._state.mirror.appModel.showUi && e.universalInsertModal.pinned !== _$$t3.NOT_PINNED ? (fullscreenValue.triggerAction('clear-tool', {
+      e.universalInsertModal?.showing ? this._state.mirror.appModel.showUi && e.universalInsertModal.pinned !== PinningState.NOT_PINNED ? (fullscreenValue.triggerAction('clear-tool', {
         source: 'menu'
-      }), this.dispatch(jy({
+      }), this.dispatch(handlePinningState({
         initialX: x,
         initialY: y,
-        pinned: _$$t3.NOT_PINNED
-      }))) : (this.dispatch(KE()), Fullscreen?.triggerAction('set-tool-default', null)) : (trackEventAnalytics('Inserts menu opened'), fullscreenValue.triggerAction('clear-tool', {
+        pinned: PinningState.NOT_PINNED
+      }))) : (this.dispatch(closeUniversalInsertModal()), Fullscreen?.triggerAction('set-tool-default', null)) : (trackEventAnalytics('Inserts menu opened'), fullscreenValue.triggerAction('clear-tool', {
         source: 'menu'
-      }), this.dispatch(En({
+      }), this.dispatch(setUniversalInsertModalOpen({
         initialX: x,
         initialY: y,
-        pinned: _$$t3.NOT_PINNED
+        pinned: PinningState.NOT_PINNED
       })));
     }
   }

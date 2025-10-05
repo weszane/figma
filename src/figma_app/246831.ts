@@ -26,7 +26,7 @@ import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { ms, c$ } from "../figma_app/236327";
-import { M3, dP } from "../figma_app/119475";
+import { useKeyboardNavigationItem, KeyboardNavigationProvider } from "../figma_app/119475";
 import { Lp } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getFileKey } from "../905/412913";
@@ -101,7 +101,7 @@ let eD = memo(function ({
     setKeyboardNavigationElement,
     keyboardNavigationItem,
     isFauxFocused
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: null === u ? [1, r, s, d] : [1, r, s, Math.floor(d / 6)],
     column: u,
     id: e.isLocal ? e.node_id : e.key
@@ -718,7 +718,7 @@ function eG({
   }, [Y, t, stylePickerShown]);
   let eb = useIsFullscreenSlidesView();
   let eT = useAtomWithSubscription(TN).length > 0;
-  return jsx(dP, {
+  return jsx(KeyboardNavigationProvider, {
     recordingKey: e,
     onKeyDown: et,
     onMouseMove: es,
@@ -803,7 +803,7 @@ export function $$eV2({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     id: "search",
     path: [0],
     onFauxFocus: s

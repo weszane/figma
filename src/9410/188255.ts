@@ -100,12 +100,12 @@ import { A as _$$A5 } from "../1250/487166";
 import { Ay as _$$Ay3 } from "../1250/615231";
 import { sR as _$$sR } from "../9410/67768";
 import { vi } from "../9410/772021";
-import { En } from "../905/116101";
+import { setUniversalInsertModalOpen } from "../905/116101";
 import { wg, NZ, pQ, zo, J1, PD } from "../figma_app/101956";
 import { LR } from "../figma_app/120210";
 import { w as _$$w2 } from "../0c62c2fd/912149";
 import { getUserId } from "../905/372672";
-import { t as _$$t3 } from "../905/192333";
+import { PinningState } from "../905/192333";
 import { j as _$$j } from "../figma_app/59886";
 import { zP, Uj, SS, ZQ } from "../figma_app/330088";
 import { s as _$$s3 } from "../figma_app/354567";
@@ -1103,10 +1103,10 @@ function tR(e) {
   });
   let o = _$$j(s);
   useMemo(() => {
-    viewedSidebar || (setViewedSidebar(!0), a(En({
+    viewedSidebar || (setViewedSidebar(!0), a(setUniversalInsertModalOpen({
       initialX: 0,
       initialY: 0,
-      pinned: _$$t3.PINNED_AND_DOCKED_LEFT,
+      pinned: PinningState.PINNED_AND_DOCKED_LEFT,
       initialSelectedCategory: o
     })));
   }, [a, o, viewedSidebar, setViewedSidebar]);
@@ -7909,7 +7909,7 @@ function oo() {
         type: "button",
         label: renderI18nText("rcs.figjam_diagram_onboarding.see_templates"),
         onClick: () => {
-          t(En({
+          t(setUniversalInsertModalOpen({
             initialX: 0,
             initialY: 0,
             initialTab: _$$p.TEMPLATES

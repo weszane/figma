@@ -7,7 +7,7 @@ import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { useSubscribedLibraries } from "../figma_app/155728";
 import { Nh, mb } from "../figma_app/188908";
 import { useSiteKitAssets } from "../figma_app/177636";
-import { Ei } from "../905/825399";
+import { filterLibrariesBySharingGroups } from "../905/825399";
 import { lY } from "../905/939482";
 import { x as _$$x } from "../905/453561";
 export function $$$$g0({
@@ -40,7 +40,7 @@ export function $$$$g0({
     ...e,
     library_key: e.libraryKey
   })), [A]);
-  let x = Ei(E);
+  let x = filterLibrariesBySharingGroups(E);
   return useMemo(() => {
     let e = [];
     let i = [];

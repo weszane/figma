@@ -18,7 +18,7 @@ import { useLibraryFileLink } from "../905/217163";
 import { LibraryAgeEnum, getDraftsSidebarString, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { e0 } from "../905/696396";
 import { DSAApiServiceInstance } from "../905/669853";
-import { c as _$$c } from "../905/167005";
+import { OverviewStatsView } from "../905/167005";
 import { i as _$$i } from "../905/565139";
 import { o as _$$o } from "../905/918279";
 import { V as _$$V } from "../905/697254";
@@ -467,7 +467,7 @@ class ee extends PureComponent {
         fileCount: this.state.statsData?.total_file_usage ?? 0
       })
     }];
-    return jsx(_$$c, {
+    return jsx(OverviewStatsView, {
       isLoading: null == this.state.statsData,
       stats: e
     });

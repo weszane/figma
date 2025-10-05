@@ -61,7 +61,7 @@ import { Z as _$$Z2 } from '../905/498136';
 import { x as _$$x } from '../905/505155';
 import { g as _$$g3 } from '../905/505662';
 import { getLibraryNames } from '../905/506188';
-import { E as _$$E3 } from '../905/511388';
+import { LibraryIconWithTooltip } from '../905/511388';
 import { RecordableButton } from '../905/511649';
 import { RR as _$$RR } from '../905/514666';
 import { dD } from '../905/519113';
@@ -143,7 +143,7 @@ import { isNotNullish } from '../figma_app/95419';
 import { tz as _$$tz, fM } from '../figma_app/112055';
 import { sitesViewSetterAtomFamily } from '../figma_app/115923';
 import { eT as _$$eT } from '../figma_app/116234';
-import { M3, q_ } from '../figma_app/119475';
+import { useKeyboardNavigationItem, useKeyboardNavigationLookupMap } from '../figma_app/119475';
 import { LR } from '../figma_app/120210';
 import { I as _$$I2 } from '../figma_app/130633';
 import { $H, MA, ye } from '../figma_app/134428';
@@ -422,7 +422,7 @@ function ec({
   let {
     keyboardNavigationItem,
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: h,
     id: e.key,
     disabled: (folderPath?.length ?? 0) > i
@@ -523,7 +523,7 @@ function e3({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     ...H,
     id: getAssetKeyForSubscription(e),
     onFocus: R,
@@ -758,7 +758,7 @@ function e7({
       searchSessionId
     } = Gq();
     let i = ht();
-    let l = q_();
+    let l = useKeyboardNavigationLookupMap();
     let a = LR();
     let o = useSelector(e => e.universalInsertModal.showing);
     let d = useCallback(() => {
@@ -1530,7 +1530,7 @@ function t1({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     ...k,
     id: getAssetKeyForSubscription(e),
     disabled: w
@@ -1877,7 +1877,7 @@ function sc({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     ...j
   });
   C0(keyboardNavigationItem, o && currentView === S5.Assets);
@@ -3553,7 +3553,7 @@ let ns = forwardRef(({
   });
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.BREADCRUMB],
     column: ButtonType.ELLIPSIS
   });
@@ -3646,7 +3646,7 @@ function nr({
   });
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.BREADCRUMB],
     column: ButtonType.LIBRARY
   });
@@ -3705,7 +3705,7 @@ let nn = forwardRef(({
   let c = useMemo(() => na(t, isCurrentlySkippingPage, isCurrentlySkippingFirstFolder), [t, isCurrentlySkippingFirstFolder, isCurrentlySkippingPage]);
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.BREADCRUMB],
     column: ButtonType.STUBS + t
   });
@@ -4329,7 +4329,7 @@ function nV({
   let N = currentView !== S5.Libraries;
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.CONTENTS, ContentType.LIBRARIES, i, l],
     column: o,
     id: e.libraryKey,
@@ -6083,7 +6083,7 @@ function ii({
   let {
     keyboardNavigationItem,
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.CONTENTS, ContentType.PAGES, t],
     id: e.id,
     disabled: p
@@ -6211,7 +6211,7 @@ function ib({
   let {
     keyboardNavigationItem,
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.CONTENTS, ContentType.PAGES, i],
     column: l,
     id: e.id,
@@ -7409,7 +7409,7 @@ function lC({
   }, [focusSearchBar, i, navigateToTop]);
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.HEADER, SearchType.LIBRARY_SEARCH_CHIP]
   });
   return e ? jsx(_$$v, {
@@ -7440,7 +7440,7 @@ function lj({
   }, [focusSearchBar, i, navigateToTop]);
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.HEADER, SearchType.LIBRARY_SEARCH_CHIP]
   });
   return e ? jsxs('div', {
@@ -7465,7 +7465,7 @@ function lL({
   let t = useRef(null);
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.HEADER, SearchType.SEARCH_AND_FILTER],
     column: ActionType.SETTINGS
   });
@@ -7730,7 +7730,7 @@ function lO({
         className: 'asset_panel_settings--optionRightIcon--zi-2v',
         children: t ? jsx(_$$FX, {}) : s ? jsx('div', {
           className: cssBuilderInstance.ml2.$,
-          children: jsx(_$$E3, {
+          children: jsx(LibraryIconWithTooltip, {
             libraryKey: void 0
           })
         }) : null
@@ -7927,7 +7927,7 @@ function l0() {
   let [e, t] = useState(!1);
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.HEADER, SearchType.SEARCH_AND_FILTER],
     column: ActionType.VISUAL_SEARCH_BUTTON
   });

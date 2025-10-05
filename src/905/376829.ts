@@ -9,7 +9,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { KJ, $T, Vx, V0 } from "../905/657710";
 import { hO } from "../figma_app/545293";
 import { xH, eB } from "../905/546357";
-import { t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { useLatestRef } from "../figma_app/922077";
 import { ModelTypeConfigs, getModelTypeHeaderI18n, FolderType, FileBrowserAction, TeamSortField, PublicModelType, CreatorResourceType, convertModelTypeToSearchModelType, SearchModelType } from "../figma_app/162807";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
@@ -57,7 +57,7 @@ function A(e) {
     onChange
   } = e;
   let i = ModelTypeConfigs[e.searchScope].modelTypes;
-  let [n,, s] = t.useTabs(i.reduce((e, t) => (e[t] = !0, e), {}), {
+  let [n,, s] = Tabs.useTabs(i.reduce((e, t) => (e[t] = !0, e), {}), {
     defaultActive: e.searchModelType
   });
   useEffect(() => {
@@ -69,9 +69,9 @@ function A(e) {
   }, [e.searchModelType, o, s]);
   return jsx("div", {
     className: "search_model_toggle--tabsRedesign--dUZl9",
-    children: jsx(t.TabStrip, {
+    children: jsx(Tabs.TabStrip, {
       manager: s,
-      children: i.map(e => createElement(t.Tab, {
+      children: i.map(e => createElement(Tabs.Tab, {
         ...n[e],
         key: e
       }, getModelTypeHeaderI18n(e)))

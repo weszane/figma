@@ -11,10 +11,10 @@ import { getParentOrgId } from "../905/872904";
 import { useSubscribedLibraries, useUntransformedSubscribedLibraries } from "../figma_app/155728";
 import { getCurrentTeam } from "../figma_app/598018";
 import { isPublishedTeamLibrary, isTeamLibrary, isCommunityLibrary } from "../figma_app/633080";
-import { L } from "../905/773253";
-import { er, sz, zm } from "../905/753512";
-import { S as _$$S } from "../905/612212";
-import { mG, PW, LI, Px } from "../905/825399";
+import { useVisibility } from "../905/773253";
+import { isLibraryModalContextAvailable, useLibraryModalContextOptional, useLibraryModalContext } from "../905/753512";
+import { lastActionDetails } from "../905/612212";
+import { useTeamOrgAccess, mapLibrariesByKeys, mapSubscribedLibraries, isLibrarySubscribed } from "../905/825399";
 import { Q } from "../905/616985";
 var $$n0;
 var d = l;
@@ -44,21 +44,21 @@ var d = l;
     emptyState: i,
     loading: r
   } = {}) {
-    let o = er();
-    let d = L();
+    let o = isLibraryModalContextAvailable();
+    let d = useVisibility();
     let u = o && !d && !r;
     let p = n();
     let m = E(p, t);
-    let h = useAtomWithSubscription(_$$S.lastActionAtom);
+    let h = useAtomWithSubscription(lastActionDetails.lastActionAtom);
     let g = function () {
       let {
         hasProAccess,
         hasOrgAccess,
         hasEntAccess
-      } = mG();
+      } = useTeamOrgAccess();
       return hasEntAccess ? "ent" : hasOrgAccess ? "org" : hasProAccess ? "pro" : "starter";
     }();
-    let f = sz();
+    let f = useLibraryModalContextOptional();
     let _ = f?.sessionId;
     let I = x();
     useEffect(function () {
@@ -99,10 +99,10 @@ var d = l;
     let s = useFigmaLibrariesEnabled();
     return useCallback(() => {
       let a = new Set([...workspaceApprovedLibraryKeys, ...orgApprovedLibraryKeys]);
-      let o = PW(a, e.filter(isPublishedTeamLibrary));
-      let l = LI(r.data?.file?.libraryOrgSubscriptions ?? [], e, s);
-      let d = LI(r.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions ?? [], e, s);
-      let c = LI(r.data?.file?.libraryTeamSubscriptions ?? [], e, s);
+      let o = mapLibrariesByKeys(a, e.filter(isPublishedTeamLibrary));
+      let l = mapSubscribedLibraries(r.data?.file?.libraryOrgSubscriptions ?? [], e, s);
+      let d = mapSubscribedLibraries(r.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions ?? [], e, s);
+      let c = mapSubscribedLibraries(r.data?.file?.libraryTeamSubscriptions ?? [], e, s);
       let u = l.concat(d).concat(c);
       let p = e.filter(e => n.data?.some(t => t.libraryKey === e.library_key));
       return {
@@ -122,15 +122,15 @@ var d = l;
     let {
       searchSessionId,
       queryId
-    } = sz() ?? {};
+    } = useLibraryModalContextOptional() ?? {};
     let o = useFigmaLibrariesEnabled();
     let l = getParentOrgId();
-    let d = Px(e);
+    let d = isLibrarySubscribed(e);
     return useCallback(() => {
       let a = new Set([...workspaceApprovedLibraryKeys, ...orgApprovedLibraryKeys]);
-      let c = LI(t.data?.file?.libraryOrgSubscriptions ?? [], [e], o);
-      let u = LI(t.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions ?? [], [e], o);
-      let p = LI(t.data?.file?.libraryTeamSubscriptions ?? [], [e], o);
+      let c = mapSubscribedLibraries(t.data?.file?.libraryOrgSubscriptions ?? [], [e], o);
+      let u = mapSubscribedLibraries(t.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions ?? [], [e], o);
+      let p = mapSubscribedLibraries(t.data?.file?.libraryTeamSubscriptions ?? [], [e], o);
       let m = null;
       c.length > 0 || orgApprovedLibraryKeys.has(e.library_key) ? m = "org" : u.length > 0 || workspaceApprovedLibraryKeys.has(e.library_key) ? m = "workspace" : p.length > 0 && (m = "team");
       let {
@@ -223,7 +223,7 @@ var d = l;
       sessionId,
       searchSessionId,
       queryId
-    } = zm();
+    } = useLibraryModalContext();
     let u = n();
     return useCallback(() => {
       let {

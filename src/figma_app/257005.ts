@@ -13,7 +13,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { isLibraryResource } from "../figma_app/471982";
 import { startSearchSessionAction } from "../905/977218";
 import { Q1 } from "../905/201596";
-import { nb } from "../figma_app/543100";
+import { TileType } from "../figma_app/543100";
 import { selectPermissionsState } from "../figma_app/212807";
 import { fileEntityDataMapper } from "../905/943101";
 import { CommunityPlaygroundFileSelectorRecentFilesView, FileCanEdit } from "../figma_app/43951";
@@ -65,7 +65,7 @@ export function $$L1(e) {
     return resourceUtils.loaded(e.filter(e => e.file?.editorType != null && l.includes(e.file.editorType)));
   }, [o, l]);
   let c = useMemo(() => "loaded" !== t.status ? [] : t.data.flatMap(e => null !== e.file ? [{
-    type: nb.FILE,
+    type: TileType.FILE,
     file: {
       ...e.file,
       signedPreviewThumbnailUrls: null,
@@ -81,7 +81,7 @@ export function $$L1(e) {
     className: Vg,
     onClick: e.deselectActiveFile,
     children: c.map(t => {
-      if (t.type !== nb.FILE) return null;
+      if (t.type !== TileType.FILE) return null;
       let {
         file
       } = t;

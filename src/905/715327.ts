@@ -18,14 +18,14 @@ import { FileCanEdit, LibraryIsBranch, TeamCanAdmin, SharingGroupsByResourceConn
 import { hasAdminRoleAccessOnTeam } from "../figma_app/642025";
 import { NO_TEAM, getDraftsSidebarString, isCommunityLibraryFile, initialLibraryStats } from "../figma_app/633080";
 import { e0 as _$$e } from "../905/696396";
-import { r as _$$r, F as _$$F } from "../905/336143";
+import { UsedStylesContext, useUsedStyles } from "../905/336143";
 import { I as _$$I } from "../905/423735";
 import { TabLoop } from "../905/718764";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { mapLibraryAttributes } from "../905/128063";
 import { Yt } from "../905/712714";
 import { ZO, kz, d_, tq } from "../905/691188";
-import { C as _$$C, Y as _$$Y } from "../905/180528";
+import { SubscriptionFileViewHeader, MissingLibrariesHeader } from "../905/180528";
 import { g as _$$g } from "../905/317997";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { Link } from "../905/438674";
@@ -54,7 +54,7 @@ import { NX, k9 } from "../figma_app/777207";
 import { SR } from "../figma_app/852050";
 import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
-import { gE, DV } from "../905/842072";
+import { useProcessedLibraryResults, useCommunityLibrarySearch } from "../905/842072";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { UpsellModalType } from "../905/165519";
 import { AccessLevelEnum } from "../905/557142";
@@ -70,11 +70,11 @@ import { OnboardingModal } from "../905/425180";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { getCurrentTeamId } from "../figma_app/598018";
 import { l6, c$ } from "../905/794875";
-import { SF, CK, Yy, is, mJ, mo, TW } from "../905/55862";
+import { getFilterDisplayName, filterLibraries, getLibraryViewFilterStates, useEnsurePresetLibrariesFilter, sortLibrariesByCriteria, getPublishedLibraryKeys, searchLibraries } from "../905/55862";
 import { UDe } from "../figma_app/6204";
 import { i as _$$i2 } from "../905/565139";
-import { y as _$$y, C as _$$C2 } from "../905/109977";
-import { A as _$$A } from "../905/47292";
+import { LibraryFileBestMatchesComponent, LibraryBestMatchesComponent } from "../905/109977";
+import { LibraryFilterRows } from "../905/47292";
 import { aU } from "../figma_app/757606";
 import { ButtonWide } from "../905/521428";
 import { Badge, BadgeColor } from "../figma_app/919079";
@@ -87,12 +87,12 @@ import { RR } from "../905/514666";
 import { c as _$$c2 } from "../905/426262";
 import { u as _$$u } from "../905/831362";
 import { m as _$$m } from "../905/760316";
-import { Bj, eR as _$$eR, h5, yz } from "../905/42209";
+import { FileRowLeftV2, FileRowRightV2, FileRowLeft, FileRowRight } from "../905/42209";
 import { Q as _$$Q } from "../905/711770";
 import { getResourceDataOrFallback } from "../905/723791";
 import { generateRecordingKey } from "../figma_app/878298";
 import { KP, L1 } from "../figma_app/12491";
-import { E as _$$E2 } from "../905/511388";
+import { LibraryIconWithTooltip } from "../905/511388";
 import { createFileLibraryKeys } from "../905/651613";
 import { ButtonPrimitive } from "../905/632989";
 import { w as _$$w } from "../905/768636";
@@ -107,7 +107,7 @@ import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { A as _$$A2 } from "../6828/117346";
 import { f as _$$f } from "../905/405189";
 import { U as _$$U } from "../905/763676";
-import { ry } from "../905/825399";
+import { useFigmaLibraries } from "../905/825399";
 var d = l;
 function O({
   canEditSubscriptions: e,
@@ -130,7 +130,7 @@ function O({
       libraryKey: i
     },
     children: jsxs(TabLoop, {
-      children: [a ? jsx(_$$C, {
+      children: [a ? jsx(SubscriptionFileViewHeader, {
         libraryStat: a,
         libraryKey: i,
         showingDefaultSubscriptionsForTeamId: l,
@@ -139,7 +139,7 @@ function O({
         canEditSubscriptions: e,
         onBackToList: s,
         sharingGroupData: u
-      }) : jsx(_$$Y, {
+      }) : jsx(MissingLibrariesHeader, {
         backToList: s,
         numMissingLibraries: 1
       }), jsx(_$$g, {
@@ -181,7 +181,7 @@ function ew({
     });
   }, [i, o, d]);
   let h = useMemo(() => ({
-    format: e => SF(e, l),
+    format: e => getFilterDisplayName(e, l),
     isEqual: (e, t) => "workspace" === e.type && "workspace" === t.type ? e.id === t.id : e.type === t.type
   }), [l]);
   let g = useCallback(e => "workspace" === e.type ? `workspace-${e.id}` : e.type, []);
@@ -300,7 +300,7 @@ function e4({
   let P = S.productComponents.modified.wellFormed.length;
   let O = S.styles.modified.wellFormed.length;
   let D = S.variableSets.modified.wellFormed.length + O + P;
-  let L = jsxs(Bj, {
+  let L = jsxs(FileRowLeftV2, {
     children: [e.thumbnail_url && jsx("div", {
       className: e.thumbnail_guid ? eQ : eX,
       style: {
@@ -341,7 +341,7 @@ function e4({
       })]
     })]
   });
-  let F = jsx(_$$eR, {
+  let F = jsx(FileRowRightV2, {
     children: data?.file?.hasPermission && jsx(_$$I2, {
       entryPoint: RR.LIBRARY_MODAL_OVERVIEW,
       recordingKey: "libraryPublishButton",
@@ -403,7 +403,7 @@ function te({
   let I = "community" === t.library_type || t.thumbnail_guid ? eQ : eX;
   let E = useMemo(() => _ && u ? jsx("div", {
     className: "file_row--presetLibraryIcon--WOwB2",
-    children: jsx(_$$E2, {
+    children: jsx(LibraryIconWithTooltip, {
       libraryKey: f.libraryKey,
       showTooltip: !0,
       redirectToHubFile: !0
@@ -415,7 +415,7 @@ function te({
     })
   }) : null, [f, A, _, u]);
   let x = t.thumbnail_url;
-  let S = jsxs(Bj, {
+  let S = jsxs(FileRowLeftV2, {
     children: [x && jsx("div", {
       className: I,
       style: {
@@ -441,7 +441,7 @@ function te({
       })]
     })]
   });
-  let w = jsx(_$$eR, {
+  let w = jsx(FileRowRightV2, {
     children: jsx(kz, {
       libraryKey: f.libraryKey,
       showingDefaultSubscriptionsForUser: !1,
@@ -478,14 +478,14 @@ function tn({
     htmlAttributes: {
       "data-testid": "missing_libraries_file_row"
     },
-    children: [jsx(h5, {
+    children: [jsx(FileRowLeft, {
       children: jsx("div", {
         className: cssBuilderInstance.font12.overflowHidden.ellipsis.$,
         children: getI18nString("design_systems.libraries_modal.plural.includes_missing_library", {
           missingLibCount: a
         })
       })
-    }), jsx(yz, {
+    }), jsx(FileRowRight, {
       children: null
     }), jsx(_$$w, {})]
   });
@@ -524,7 +524,7 @@ function tl({
     disabledClassName: "file_row--fileRowWithBorderNoHover--6FizW file_row_styles--fileRowBase--USCNr",
     recordingKey: c,
     ariaLabel: _,
-    children: [jsx(h5, {
+    children: [jsx(FileRowLeft, {
       children: jsxs("div", {
         className: cssBuilderInstance.flex.itemsCenter.px6.minW0.$,
         children: [jsx(_$$u, {
@@ -539,14 +539,14 @@ function tl({
           })
         }), b && jsx("div", {
           className: cssBuilderInstance.ml4.$,
-          children: jsx(_$$E2, {
+          children: jsx(LibraryIconWithTooltip, {
             libraryKey: e.library_key,
             showTooltip: !0,
             redirectToHubFile: !0
           })
         })]
       })
-    }), jsx(yz, {
+    }), jsx(FileRowRight, {
       children: p ? jsx("div", {
         className: cssBuilderInstance.mlAuto.$,
         children: jsx(_$$B2, {
@@ -578,7 +578,7 @@ function tp({
   viewFile: c
 }) {
   let u = g7();
-  let p = CK({
+  let p = filterLibraries({
     libraryFiles: u,
     currentLibrariesViewFilterState: null,
     hideUnsubscribedFiles: i,
@@ -586,7 +586,7 @@ function tp({
   });
   let m = Ev(p);
   let h = useMemo(() => a ? o.map(transformLibraryWithCounts) : [], [a, o]);
-  let g = CK({
+  let g = filterLibraries({
     libraryFiles: h,
     currentLibrariesViewFilterState: null,
     hideUnsubscribedFiles: i
@@ -632,7 +632,7 @@ function tp({
         recordingKey: `communityLibraryRow.${i.library_name}`,
         showPresetLibraryIcon: !0,
         viewFile: c
-      }, i.library_key), a && jsx(_$$y, {
+      }, i.library_key), a && jsx(LibraryFileBestMatchesComponent, {
         libraryFile: _[t.key],
         width: s,
         inTeamLibrarySettingsModal: A
@@ -666,7 +666,7 @@ function tm({
   isConnectedProjectLibraryShare: A
 }) {
   let y = !d;
-  let b = CK({
+  let b = filterLibraries({
     libraryFiles: t,
     currentLibrariesViewFilterState: y ? a : null,
     hideUnsubscribedFiles: o,
@@ -676,7 +676,7 @@ function tm({
     mapFromLibraryKeyToSharingGroupData: _
   });
   let v = useFigmaLibrariesEnabled();
-  let I = gE(c);
+  let I = useProcessedLibraryResults(c);
   let E = useMemo(() => !!v && (a?.type === "presetLibraries" || d), [a?.type, v, d]);
   let x = m || !!p;
   let S = !d && (!!a || x) && 0 === b.length && !E;
@@ -775,7 +775,7 @@ function th({
           publishedLibrary: m,
           recordingKey: `subscriptionListViewFileRow.${o}.${a.name}`,
           viewFile: g
-        }), l && jsx(_$$C2, {
+        }), l && jsx(LibraryBestMatchesComponent, {
           searchQuery: d,
           publishedLibrary: m,
           inline: !0,
@@ -824,10 +824,10 @@ function tS(e) {
   let {
     fileByKey
   } = selectPermissionsState();
-  let w = Yy(showingDefaultSubscriptionsForTeamId, !!mapFromLibraryKeyToSharingGroupData);
+  let w = getLibraryViewFilterStates(showingDefaultSubscriptionsForTeamId, !!mapFromLibraryKeyToSharingGroupData);
   let C = Fl();
   let [T, k] = useState(w && w.length > 0 ? w[0] : null);
-  is(w, T, k);
+  useEnsurePresetLibrariesFilter(w, T, k);
   let R = useRef(null);
   let N = useCallback(e => {
     k(e);
@@ -847,7 +847,7 @@ function tS(e) {
     prevCol: null,
     isDescending: !0
   }), [isSearching]);
-  let Z = mJ({
+  let Z = sortLibrariesByCriteria({
     libraryFiles,
     showingDefaultSubscriptionsForTeamId,
     sortState: $,
@@ -858,7 +858,7 @@ function tS(e) {
   let {
     hasResults,
     isLoading: _isLoading
-  } = DV(debouncedSearchQuery);
+  } = useCommunityLibrarySearch(debouncedSearchQuery);
   let er = v && !isSearching && (!T || "currentFile" === T.type);
   let ea = er;
   let ec = isSearching && 0 === libraryFiles.length && !_isLoading && !hasResults;
@@ -890,7 +890,7 @@ function tS(e) {
     width
   });
   let eh = em;
-  isSearching || (T?.type === "org" && (eh = jsx(_$$A, {
+  isSearching || (T?.type === "org" && (eh = jsx(LibraryFilterRows, {
     libraryFiles: Z,
     allLibrariesViewFilterStates: w,
     handleLibrariesViewFilterChange: N,
@@ -964,7 +964,7 @@ function tS(e) {
         }), P && T && jsxs("div", {
           className: tv,
           children: [jsx(_$$i2, {
-            assetOrFileName: SF(T, x?.name),
+            assetOrFileName: getFilterDisplayName(T, x?.name),
             onBack: () => N({
               type: "org"
             })
@@ -1152,14 +1152,14 @@ function tk({
   viewFile: c,
   viewMissingFiles: u
 }) {
-  let p = useContext(_$$r);
+  let p = useContext(UsedStylesContext);
   let m = useSelector(getSelectedFile);
   let [h, g] = useState(new Set());
   let f = Fl();
   let _ = useAtomWithSubscription(hubFileAndPresetKeysSetAtom);
   let A = useMemo(() => d()(l, e => e.library_key), [l]);
   let [y, b] = useMemo(() => V()(p?.allUsedLibraryKeys ? Array.from(p.allUsedLibraryKeys) : [], e => !!A[e]), [A, p?.allUsedLibraryKeys]);
-  let v = mo({
+  let v = getPublishedLibraryKeys({
     libraryFiles: l
   });
   useEffect(() => g(e => new Set([...e, ...y, ...v])), [v, y]);
@@ -1194,7 +1194,7 @@ function tk({
           recordingKey: `subscriptionListViewFileRow.usedInThisFile.${l.name}`,
           usedInThisFile: !0,
           viewFile: c
-        }), e && jsx(_$$C2, {
+        }), e && jsx(LibraryBestMatchesComponent, {
           searchQuery: t,
           publishedLibrary: d,
           inline: !0,
@@ -1302,7 +1302,7 @@ export function $$tM0({
   let [M, j] = useState(null);
   let [U, B] = useState(!1);
   let [V, G] = useState(!1);
-  let z = _$$F();
+  let z = useUsedStyles();
   let H = useRef(null);
   useAllLibrarySubscriptions();
   useEffect(() => {
@@ -1314,7 +1314,7 @@ export function $$tM0({
     includeThumbnails: C
   });
   let K = W?.data || initialLibraryStats;
-  let Y = ry();
+  let Y = useFigmaLibraries();
   let q = useMemo(() => d()(K?.files ?? [], e => e.library_key), [K]);
   let $ = useMemo(() => M ? q[M] ?? null : null, [q, M]);
   let Z = useCallback(() => {
@@ -1344,7 +1344,7 @@ export function $$tM0({
     isSearchLoading,
     libraryFiles,
     onSearchQueryChange
-  } = TW(K.files);
+  } = searchLibraries(K.files);
   let ea = Y.result.some(e => e.library_key === M);
   let es = useSubscription(TeamCanAdmin, {
     id: e ?? ""
@@ -1433,7 +1433,7 @@ export function $$tM0({
   }) : null;
   return jsx(TrackingProvider, {
     name: _$$e.LIBRARY_SUBSCRIPTIONS,
-    children: jsx(_$$r.Provider, {
+    children: jsx(UsedStylesContext.Provider, {
       value: z,
       children: jsxs("div", {
         className: "library_subscriptions--slidingPaneContainer--PMYWT sliding_pane--slidingPaneContainer--RQkXf",

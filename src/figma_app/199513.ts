@@ -18,7 +18,7 @@ import { batchPutFileAction } from "../figma_app/78808";
 import { yJ, bE, Kc } from "../figma_app/598926";
 import { showModalHandler } from "../905/156213";
 import { nX } from "../905/466026";
-import { uo as _$$uo } from "../905/98702";
+import { roleBatchPutAction } from "../905/98702";
 import { trackFolderEvent } from "../figma_app/314264";
 import { consumptionPaywallUtils } from "../905/224";
 import { validateFolderName } from "../figma_app/528509";
@@ -57,7 +57,7 @@ let Y = createOptimistThunk((e, {
     e.dispatch(nX({
       repos: r.repos
     }));
-    e.dispatch(_$$uo({
+    e.dispatch(roleBatchPutAction({
       roles: r.roles
     }));
     e.dispatch(Kc({
@@ -80,7 +80,7 @@ let $ = liveStoreInstance.Query({
     t.dispatch(nX({
       repos: r.data.meta.repos
     }));
-    t.dispatch(_$$uo({
+    t.dispatch(roleBatchPutAction({
       roles: r.data.meta.roles
     }));
     t.dispatch(Kc({
@@ -182,7 +182,7 @@ let $$J0 = liveStoreInstance.PaginatedQuery({
     r.dispatch(nX({
       repos: a.repos
     }));
-    r.dispatch(_$$uo({
+    r.dispatch(roleBatchPutAction({
       roles: a.roles
     }));
     r.dispatch(Kc({

@@ -3,7 +3,7 @@ import { useMemo, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogActionStrip } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
@@ -110,7 +110,7 @@ function F() {
     open: !0,
     onClose: t
   });
-  let [m, x, w] = _$$t.useTabs({
+  let [m, x, w] = Tabs.useTabs({
     active: !0,
     yours: !0,
     archived: !0
@@ -195,15 +195,15 @@ function F() {
           padding: 0,
           children: [jsx("div", {
             className: $,
-            children: jsxs(_$$t.TabStrip, {
+            children: jsxs(Tabs.TabStrip, {
               manager: w,
-              children: [jsx(_$$t.Tab, {
+              children: [jsx(Tabs.Tab, {
                 ...m.active,
                 children: renderI18nText("collaboration.branching_modal.tab_active")
-              }), jsx(_$$t.Tab, {
+              }), jsx(Tabs.Tab, {
                 ...m.yours,
                 children: renderI18nText("collaboration.branching_modal.tab_yours")
-              }), jsx(_$$t.Tab, {
+              }), jsx(Tabs.Tab, {
                 ...m.archived,
                 children: renderI18nText("collaboration.branching_modal.tab_archived")
               }), W && jsx(DialogActionStrip, {
@@ -226,7 +226,7 @@ function F() {
             })
           }), jsx(D, {}), jsx("div", {
             className: X,
-            children: jsx(_$$t.TabPanel, {
+            children: jsx(Tabs.TabPanel, {
               ...x[w.activeTab],
               children: Y
             })

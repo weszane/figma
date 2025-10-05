@@ -1,9 +1,32 @@
 import { createActionCreator } from "../905/73481";
-let $$r2 = createActionCreator("RESET_TILE_SELECTION");
-let $$a1 = createActionCreator("DESELECT_TILES");
-let $$s3 = createActionCreator("SELECT_TILES");
-let $$o0 = createActionCreator("SELECT_TILES_BY_KEYS");
-export const PW = $$o0;
-export const TK = $$a1;
-export const an = $$r2;
-export const y$ = $$s3;
+// Action creators for tile selection functionality
+
+/**
+ * Action creator for resetting tile selection.
+ * Original: $$r2
+ */
+export const resetTileSelection = createActionCreator("RESET_TILE_SELECTION");
+
+/**
+ * Action creator for deselecting tiles.
+ * Original: $$a1
+ */
+export const deselectTiles = createActionCreator("DESELECT_TILES");
+
+/**
+ * Action creator for selecting tiles.
+ * Original: $$s3
+ */
+export const selectTiles = createActionCreator("SELECT_TILES");
+
+/**
+ * Action creator for selecting tiles by keys.
+ * Original: $$o0
+ */
+export const selectTilesByKeys = createActionCreator("SELECT_TILES_BY_KEYS");
+
+// Exports with meaningful names (update any imports accordingly)
+export const PW = selectTilesByKeys;
+export const TK = deselectTiles;
+export const an = resetTileSelection;
+export const y$ = selectTiles;

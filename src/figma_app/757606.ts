@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Ay } from "../figma_app/272902";
 import { analyticsEventManager } from "../905/449184";
 import { useSingleEffect } from "../905/791079";
-import { M3 } from "../figma_app/119475";
+import { useKeyboardNavigationItem } from "../figma_app/119475";
 import { IW, Lp } from "../figma_app/563413";
 import { searchEndSession, searchStartSession } from "../figma_app/925970";
 import { fullscreenValue } from "../figma_app/455680";
@@ -166,7 +166,7 @@ export function $$b0({
   }, [E]);
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: h,
     column: r,
     disabled: !p,

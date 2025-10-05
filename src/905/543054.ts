@@ -8,9 +8,9 @@ import { isInteractionPathCheck } from "../figma_app/897289";
 import { createNoOpValidator } from "../figma_app/181241";
 import { getLanguages, isHaveSpellingLanguages } from "../905/283918";
 import { V } from "../905/666831";
-import { l9 } from "../905/145989";
+import { getSpellCheckLanguage } from "../905/145989";
 import { B } from "../905/627729";
-import { SB, hz, QC, fi } from "../905/461516";
+import { BRAND_WORDS_URL, DEFAULT_MODE, SpellCheckEngine, LANGUAGE_DICTIONARIES } from "../905/461516";
 let n;
 let p = new class {
   constructor() {
@@ -37,7 +37,7 @@ export async function $$A7() {
 }
 export async function $$y2() {
   try {
-    let e = await fetch(SB);
+    let e = await fetch(BRAND_WORDS_URL);
     return (await e.text()).split("\n").filter(e => e.length > 0);
   } catch (e) {}
   return [];
@@ -68,9 +68,9 @@ let v = new class {
   }
   async populateSupportedLanguages(e) {
     let t = [];
-    let i = BrowserInfo.mac ? [hz] : [];
+    let i = BrowserInfo.mac ? [DEFAULT_MODE] : [];
     switch (e) {
-      case QC.DESKTOP:
+      case SpellCheckEngine.DESKTOP:
         {
           if (!desktopAPIInstance) {
             reportError(ServiceCategories.DESKTOP, Error("desktopApp is not defined, this should not happen as desktop spellcheck has already been initialized"));
@@ -92,11 +92,11 @@ let v = new class {
           t = [...i, ...n];
           break;
         }
-      case QC.AGENT:
+      case SpellCheckEngine.AGENT:
         t = [...i, ...(await getLanguages())];
         break;
       default:
-        t = Object.keys(fi);
+        t = Object.keys(LANGUAGE_DICTIONARIES);
     }
     this.addLanguages(t);
   }
@@ -108,7 +108,7 @@ export function $$E1() {
   return v.getSupportedLanguages();
 }
 export function $$x3(e) {
-  let t = l9(e);
+  let t = getSpellCheckLanguage(e);
   if (t && v.supportsLanguage(t)) return t;
   let i = function () {
     let e = navigator.languages;
@@ -117,7 +117,7 @@ export function $$x3(e) {
   return i && v.supportsLanguage(i) ? i : v.getSupportedLanguages()[0] ?? "en-US";
 }
 export async function $$S4() {
-  n || (n = (await V()) ? QC.DESKTOP : !isInteractionPathCheck() && (await isHaveSpellingLanguages()) ? QC.AGENT : QC.HUNSPELL);
+  n || (n = (await V()) ? SpellCheckEngine.DESKTOP : !isInteractionPathCheck() && (await isHaveSpellingLanguages()) ? SpellCheckEngine.AGENT : SpellCheckEngine.HUNSPELL);
   return n;
 }
 export function $$w5() {

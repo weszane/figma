@@ -90,7 +90,7 @@ import { L6 } from '../905/498948';
 import { O as _$$O2 } from '../905/501876';
 import { handleAtomEvent } from '../905/502364';
 import { l as _$$l4 } from '../905/509505';
-import { E as _$$E6 } from '../905/511388';
+import { LibraryIconWithTooltip } from '../905/511388';
 import { Vector2D } from '../905/512402';
 import { C as _$$C2 } from '../905/520159';
 import { Button } from '../905/521428';
@@ -237,7 +237,7 @@ import { Fz, Zg } from '../figma_app/106207';
 import { z as _$$z } from '../figma_app/106763';
 import { Jl, UM, wh, yq } from '../figma_app/114522';
 import { useAttachments } from '../figma_app/119420';
-import { dP } from '../figma_app/119475';
+import { KeyboardNavigationProvider } from '../figma_app/119475';
 import { Lk } from '../figma_app/122682';
 import { rh as _$$rh } from '../figma_app/139865';
 import { S2 } from '../figma_app/159296';
@@ -3983,7 +3983,7 @@ function iS({
     filteredItems: _,
     searchQuery: l
   });
-  return jsxs(dP, {
+  return jsxs(KeyboardNavigationProvider, {
     recordingKey: o,
     children: [_.length > 0 ? jsx('div', {
       ref: a,
@@ -7828,7 +7828,7 @@ function s0({
       children: e
     }), i && r && jsx(KP, {
       libraryKey: t
-    }), o && jsx(_$$E6, {
+    }), o && jsx(LibraryIconWithTooltip, {
       libraryKey: t,
       showTooltip: !0
     })]

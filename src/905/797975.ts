@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogCloseButton, DialogBody, DialogCustomContents } from "../figma_app/272243";
 import { bL as _$$bL } from "../905/246123";
@@ -729,7 +729,7 @@ let $$ep0 = registerModal(function (e) {
   let t = useModalManager({
     ...e
   });
-  let [i, g, A] = _$$t.useTabs({
+  let [i, g, A] = Tabs.useTabs({
     theming: !0,
     guidelines: !0
   }, {
@@ -766,7 +766,7 @@ let $$ep0 = registerModal(function (e) {
                   children: getI18nString("figmake.design_system_imports.library_extraction_modal.sidebar_subtitle")
                 })]
               }), jsx(fI, {
-                children: jsxs(_$$t.TabStrip, {
+                children: jsxs(Tabs.TabStrip, {
                   manager: A,
                   children: [jsxs(_$$r, {
                     ...i.theming,
@@ -800,11 +800,11 @@ let $$ep0 = registerModal(function (e) {
             })
           }), jsxs(fh, {
             className: "x1bhy1sc xh8yej3 xb3r6kr",
-            children: [jsx(_$$t.TabPanel, {
+            children: [jsx(Tabs.TabPanel, {
               ...g.theming,
               height: "fill",
               children: jsx(ea, {})
-            }), jsx(_$$t.TabPanel, {
+            }), jsx(Tabs.TabPanel, {
               ...g.guidelines,
               height: "fill",
               children: jsx(ed, {})

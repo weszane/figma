@@ -3,56 +3,56 @@ import { ButtonPrimitive } from "../905/632989";
 import { B } from "../905/950875";
 import s from "classnames";
 import { getI18nString } from "../905/303541";
-import { eo } from "../905/49095";
+import { DesignIssueType } from "../905/49095";
 import { KindEnum } from "../905/129884";
 var o = s;
 export function $$u1(e) {
   switch (e.id) {
-    case eo.NoStyleForColor:
+    case DesignIssueType.NoStyleForColor:
       return getI18nString("dev_handoff.code.hints.color_missing_style");
-    case eo.VariableNotResolved:
+    case DesignIssueType.VariableNotResolved:
       return getI18nString("dev_handoff.code.hints.variable_not_resolved");
-    case eo.AbsolutePosition:
+    case DesignIssueType.AbsolutePosition:
       return getI18nString("dev_handoff.code.hints.absolute_position", {
         name: e.name
       });
-    case eo.BordersDontTakeUpSpace:
+    case DesignIssueType.BordersDontTakeUpSpace:
       return getI18nString("dev_handoff.code.hints.borders_dont_take_up_space");
-    case eo.SinglePaint:
+    case DesignIssueType.SinglePaint:
       return getI18nString("dev_handoff.code.hints.single_paint");
-    case eo.UnsupportedPaint:
+    case DesignIssueType.UnsupportedPaint:
       return getI18nString("dev_handoff.code.hints.unsupported_paint");
-    case eo.UnsupportedGradientPaint:
+    case DesignIssueType.UnsupportedGradientPaint:
       return getI18nString("dev_handoff.code.hints.unsupported_gradient_paint");
-    case eo.LeadingTrim:
+    case DesignIssueType.LeadingTrim:
       return getI18nString("dev_handoff.code.hints.leading_trim");
-    case eo.BackgroundBlendModePlusLighterDarker:
+    case DesignIssueType.BackgroundBlendModePlusLighterDarker:
       return getI18nString("dev_handoff.code.hints.background_blend_mode_plus_lighter_darker", {
         value: e.value
       });
-    case eo.PlusDarker:
+    case DesignIssueType.PlusDarker:
       return getI18nString("dev_handoff.code.hints.plus_darker");
-    case eo.SwiftUISeparateBorderWidth:
+    case DesignIssueType.SwiftUISeparateBorderWidth:
       return getI18nString("dev_handoff.code.hints.swift_ui_separate_border_width");
-    case eo.SwiftUIBlurNoSpread:
+    case DesignIssueType.SwiftUIBlurNoSpread:
       return getI18nString("dev_handoff.code.hints.swift_ui_blur_no_spread");
-    case eo.SwiftUIOnlySingleFillForShapes:
+    case DesignIssueType.SwiftUIOnlySingleFillForShapes:
       return getI18nString("dev_handoff.code.hints.swift_ui_only_single_fill_for_shapes");
-    case eo.SwiftUISeparateCornerRadius:
+    case DesignIssueType.SwiftUISeparateCornerRadius:
       return getI18nString("dev_handoff.code.hints.swift_ui_separate_corner_radius");
-    case eo.SwiftUISpacersForSpaceBetween:
+    case DesignIssueType.SwiftUISpacersForSpaceBetween:
       return getI18nString("dev_handoff.code.hints.swift_ui_spacers_for_space_between");
-    case eo.ComposeSeparateBorderWidth:
+    case DesignIssueType.ComposeSeparateBorderWidth:
       return getI18nString("dev_handoff.code.hints.compose_separate_border_width");
-    case eo.ComposeShadowIncompatibility:
+    case DesignIssueType.ComposeShadowIncompatibility:
       return getI18nString("dev_handoff.code.hints.compose_shadow_incompatibility");
-    case eo.ComposeBlurTip:
+    case DesignIssueType.ComposeBlurTip:
       return getI18nString("dev_handoff.code.hints.compose_blur_tip");
-    case eo.DisplayP3Fallback:
+    case DesignIssueType.DisplayP3Fallback:
       return getI18nString("dev_handoff.code.hints.display_p3_fallback");
-    case eo.EffectsInSvg:
+    case DesignIssueType.EffectsInSvg:
       return getI18nString("dev_handoff.code.hints.effects_in_svg");
-    case eo.SwiftUIBackgroundBlur:
+    case DesignIssueType.SwiftUIBackgroundBlur:
       return getI18nString("dev_handoff.code.hints.swift_ui_background_blur");
   }
 }

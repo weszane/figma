@@ -181,7 +181,7 @@ import { AG } from "../figma_app/999312";
 import { O as _$$O } from "../5430/638907";
 import { D as _$$D3 } from "../5430/769256";
 import { SortOptions } from "../figma_app/324237";
-import { t as _$$t2 } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { useLatestRef } from "../figma_app/922077";
 import { PricingOptions } from "../905/237873";
@@ -5594,7 +5594,7 @@ function aA(e) {
     let n = ap()[e];
     let a = useRef(void 0);
     let r = useMemo(() => Object.keys(i).reduce((e, t) => (e[t] = !0, i[t]?.defaultActive && (a.current = t), e), {}), [i]);
-    let [o, l, c] = _$$t2.useTabs(r, {
+    let [o, l, c] = Tabs.useTabs(r, {
       defaultActive: a.current
     });
     let d = useLatestRef(c.activeTab);
@@ -5681,10 +5681,10 @@ function aA(e) {
           children: f.featuredResources.subheading
         })]
       }), jsx(UI3ConditionalWrapper, {
-        children: jsx(_$$t2.TabStrip, {
+        children: jsx(Tabs.TabStrip, {
           manager: tabManager,
           children: Object.entries(tabConfig).map(([e, t]) => jsx(Fragment, {
-            children: tabPropsMap[e] ? jsx(_$$t2.Tab, {
+            children: tabPropsMap[e] ? jsx(Tabs.Tab, {
               ...tabPropsMap[e],
               children: t.tabTitle
             }, e) : null

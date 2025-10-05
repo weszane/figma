@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { noop } from 'lodash-es';
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { bL, RT } from "../905/867927";
 import { Legend } from "../905/932270";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -186,14 +186,14 @@ function L({
   selectedTabKey: r
 }) {
   let i = e.reduce((e, t) => (e[t.key] = !0, e), {});
-  let [a,, s] = _$$t.useManagedTabs(i, r, t, {
+  let [a,, s] = Tabs.useManagedTabs(i, r, t, {
     recordingKey: "devHandoffPanelTabs"
   });
   return jsx("div", {
     className: rb,
-    children: jsx(_$$t.TabStrip, {
+    children: jsx(Tabs.TabStrip, {
       manager: s,
-      children: e.map(e => jsx(_$$t.Tab, {
+      children: e.map(e => jsx(Tabs.Tab, {
         ...a[e.key],
         children: e.label
       }, e.key))

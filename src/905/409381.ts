@@ -36,7 +36,7 @@ export function getLinearGradientPoints(matrix: Matrix2x3): Point2D[] {
  * @param matrix - The input 2x3 matrix.
  * @returns Array of transformed points.
  */
-export function getRadialGradientPoints(matrix: Matrix2x3): Point2D[] {
+export function getRadialGradientPoints(matrix: Matrix2x3): [Point2D, Point2D, Point2D] {
   let mat = [...toArray2x3(matrix), [0, 0, 1]]
   if (determinant(mat) === 0) {
     mat = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]

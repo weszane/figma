@@ -1,101 +1,230 @@
-import { throwTypeError } from "../figma_app/465776";
-import { Fullscreen } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
-import { l as _$$l } from "../905/716947";
-import { removeSpaces } from "../figma_app/930338";
-import { loadSharedStyle, upsertSharedSymbolOrStateGroup } from "../figma_app/933328";
-import { getAssetsForNodeIds } from "../figma_app/646357";
-import { PrimaryWorkflowEnum } from "../figma_app/633080";
-export function $$u1(e, t, i, n, r, a, o) {
-  let l = $$p3(e, t, i, n, r, o);
-  let d = {
-    ...l
-  };
-  for (let [e, t] of Object.entries(a)) {
-    let i = _$$l(e);
-    let n = l[i];
-    n ? d[i] = [...n, ...t] : d[i] = t;
+import { permissionScopeHandler } from "../905/189185"
+
+import { throwTypeError } from "../figma_app/465776"
+import { PrimaryWorkflowEnum } from "../figma_app/633080"
+import { getAssetsForNodeIds } from "../figma_app/646357"
+import { Fullscreen } from "../figma_app/763686"
+import { removeSpaces } from "../figma_app/930338"
+import { loadSharedStyle, upsertSharedSymbolOrStateGroup } from "../figma_app/933328"
+
+// $$u1
+/**
+ * mergeAssetMaps
+ * Merges two asset maps (grouped by library key). Values for the same key are concatenated.
+ *
+ * Original name: $$u1
+ */
+export function mergeAssetMaps(
+  nodeA: any,
+  nodeB: any,
+  nodeC: any,
+  nodeD: any,
+  nodeE: any,
+  additionalMap: Record<string, any[]>,
+): Record<string, any[]> {
+  const baseMap = groupAssetsByLibraryKey(nodeA, nodeB, nodeC, nodeD, nodeE, /* lastArg */ undefined)
+  const merged: Record<string, any[]> = { ...baseMap }
+
+  for (const [libKey, items] of Object.entries(additionalMap)) {
+    const key = libKey as string
+    const existing = baseMap[key]
+    if (existing)
+      merged[key] = [...existing, ...items]
+    else merged[key] = items
   }
-  return d;
+
+  return merged
 }
-export function $$p3(e, t, i, n, r, a) {
-  let s = getAssetsForNodeIds(e, t, i, n, r, a);
-  let o = {};
-  for (let e of s) {
-    if (!e.library_key) continue;
-    let t = e.library_key;
-    o[t] ??= [];
-    o[t].push(e);
+interface Asset { library_key?: string, [k: string]: any }
+// $$p3
+/**
+ * groupAssetsByLibraryKey
+ * Calls getAssetsForNodeIds(...) and groups returned assets by their `library_key`.
+ *
+ * Original name: $$p3
+ */
+export function groupAssetsByLibraryKey(
+  arg0: any,
+  arg1: any,
+  arg2: any,
+  arg3: any,
+  arg4: any,
+  arg5: any,
+): Record<string, any[]> {
+  
+
+  const assets = getAssetsForNodeIds(arg0, arg1, arg2, arg3, arg4, arg5) as Asset[]
+  const grouped: Record<string, Asset[]> = {}
+
+  for (const asset of assets) {
+    if (!asset.library_key)
+      continue
+    const key = asset.library_key
+    grouped[key] ??= []
+    grouped[key].push(asset)
   }
-  return o;
+
+  return grouped
 }
-export function $$m0(e, t, i, n) {
-  return new Promise((s, o) => {
-    if (!e.content_hash) {
-      s();
-      return;
+
+// $$m0
+/**
+ * replaceStyleIfContentHash
+ * If the provided style metadata has a content_hash, loads the shared style and replaces all uses
+ * via Fullscreen.swapAllUsesOfStyle under the "replace-libraries" permission scope.
+ *
+ * Resolves when replacement is allowed/successful, rejects otherwise.
+ *
+ * Original name: $$m0
+ */
+export function replaceStyleIfContentHash(
+  styleMeta: { content_hash?: unknown, key?: string },
+  styleToLoad: any,
+  extraArg: any,
+  dispatchLoad: (p: any) => void,
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (!styleMeta?.content_hash) {
+      resolve()
+      return
     }
-    n(loadSharedStyle({
-      style: t,
-      callback: t => {
-        permissionScopeHandler.user("replace-libraries", () => Fullscreen.swapAllUsesOfStyle(e.key, t, i)) ? s() : o();
-      },
-      omitFullscreenCommit: !0
-    }));
-  });
+
+    dispatchLoad(
+      loadSharedStyle({
+        style: styleToLoad,
+        callback: (loadedStyle: any) => {
+          // permissionScopeHandler.user returns a truthy/falsey value in original code context
+          const ok = permissionScopeHandler.user("replace-libraries", () =>
+            Fullscreen.swapAllUsesOfStyle(styleMeta.key, loadedStyle, extraArg))
+          ok ? resolve() : reject()
+        },
+        omitFullscreenCommit: true,
+      }),
+    )
+  })
 }
-export async function $$h2(e, t) {
-  let i = await upsertSharedSymbolOrStateGroup(t);
-  let n = i?.newSymbolOrStateGroupGuid;
-  n && permissionScopeHandler.user("replace-libraries", () => {
-    Fullscreen.swapAllInstancesOfComponentOrStateGroup(e, n, t.type === PrimaryWorkflowEnum.COMPONENT ? "" : t.default_state_key);
-  });
-}
-export function $$g6(e, t) {
-  let i = Object.create(null);
-  let n = Object.create(null);
-  let r = Object.create(null);
-  for (let e of t.components) i[removeSpaces(e.name)] = e;
-  for (let e of t.stateGroups) n[removeSpaces(e.name)] = e;
-  for (let e of t.styles) {
-    let {
-      name,
-      style_type
-    } = e;
-    let n = r[style_type] || Object.create(null);
-    n[removeSpaces(name)] = e;
-    r[style_type] = n;
+
+// $$h2
+/**
+ * upsertAndSwapComponentOrStateGroup
+ * Upserts a shared symbol or state group and, if a new GUID is returned, swaps all instances
+ * in Fullscreen (under "replace-libraries" permission).
+ *
+ * Original name: $$h2
+ */
+export async function upsertAndSwapComponentOrStateGroup(localId: string, item: any): Promise<void> {
+  const result = await upsertSharedSymbolOrStateGroup(item)
+  const newGuid = result?.newSymbolOrStateGroupGuid
+  if (newGuid) {
+    permissionScopeHandler.user("replace-libraries", () => {
+      Fullscreen.swapAllInstancesOfComponentOrStateGroup(
+        localId,
+        newGuid,
+        item.type === PrimaryWorkflowEnum.COMPONENT ? "" : item.default_state_key,
+      )
+    })
   }
-  let a = {
-    components: new Map(),
-    styles: new Map()
-  };
-  for (let t of [...e.components, ...e.stateGroups]) {
-    let e = n[removeSpaces(t.name)] || i[removeSpaces(t.name)] || null;
-    a.components.set(t, e);
+}
+
+// $$g6
+/**
+ * buildLibraryLookupMap
+ * Builds lookup maps from a remote library payload to local items.
+ *
+ * - Creates quick-lookup objects keyed by removeSpaces(name) for components, stateGroups, and styles.
+ * - Returns a pair of Maps:
+ *   - components: Map<localItem, matchedRemoteItem | null>
+ *   - styles: Map<localStyleItem, matchedRemoteStyle | null>
+ *
+ * Original name: $$g6
+ */
+export function buildLibraryLookupMap(remote: { components: any[], stateGroups: any[], styles: any[] }, local: { components: any[], stateGroups: any[], styles: any[] }) {
+  const componentsByName: Record<string, any> = Object.create(null)
+  const stateGroupsByName: Record<string, any> = Object.create(null)
+  const stylesByTypeAndName: Record<string, Record<string, any>> = Object.create(null)
+
+  for (const comp of remote.components) componentsByName[removeSpaces(comp.name)] = comp
+  for (const sg of remote.stateGroups) stateGroupsByName[removeSpaces(sg.name)] = sg
+
+  for (const style of remote.styles) {
+    const { name, style_type } = style
+    const byType = stylesByTypeAndName[style_type] || Object.create(null)
+    byType[removeSpaces(name)] = style
+    stylesByTypeAndName[style_type] = byType
   }
-  for (let t of e.styles) {
-    let e = r[t.style_type]?.[removeSpaces(t.name)] || null;
-    a.styles.set(t, e);
+
+  const result = {
+    components: new Map<any, any>(),
+    styles: new Map<any, any>(),
   }
-  return a;
+
+  for (const localItem of [...local.components, ...local.stateGroups]) {
+    const match = stateGroupsByName[removeSpaces(localItem.name)] || componentsByName[removeSpaces(localItem.name)] || null
+    result.components.set(localItem, match)
+  }
+
+  for (const localStyle of local.styles) {
+    const match = stylesByTypeAndName[localStyle.style_type]?.[removeSpaces(localStyle.name)] || null
+    result.styles.set(localStyle, match)
+  }
+
+  return result
 }
-export function $$f4(e) {
-  return [...e].sort((e, t) => e.name < t.name ? -1 : 1);
+
+// $$f4
+/**
+ * sortByName
+ * Returns a new array sorted by the `name` property (ascending).
+ *
+ * Original name: $$f4
+ */
+export function sortByName<T extends { name: string }>(items: Iterable<T>) {
+  return [...items].sort((a, b) => (a.name < b.name ? -1 : 1))
 }
-export function $$_5(e = []) {
-  let t = {
-    components: [],
-    stateGroups: [],
-    styles: []
-  };
-  for (let i of $$f4(e)) i.type === PrimaryWorkflowEnum.STYLE ? t.styles.push(i) : i.type === PrimaryWorkflowEnum.STATE_GROUP ? t.stateGroups.push(i) : i.type === PrimaryWorkflowEnum.VARIABLE_SET || i.type === PrimaryWorkflowEnum.VARIABLE || (i.type === PrimaryWorkflowEnum.COMPONENT ? t.components.push(i) : i.type === PrimaryWorkflowEnum.MODULE || throwTypeError(i, "Unhandled item type"));
-  return t;
+
+// $$_5
+/**
+ * separateItemsByType
+ * Categorizes an array of items into { components, stateGroups, styles } according to PrimaryWorkflowEnum.
+ *
+ * Original name: $$_5
+ */
+export function separateItemsByType(items: any[] = []) {
+  const categorized = {
+    components: [] as any[],
+    stateGroups: [] as any[],
+    styles: [] as any[],
+  }
+
+  for (const item of sortByName(items)) {
+    if (item.type === PrimaryWorkflowEnum.STYLE) {
+      categorized.styles.push(item)
+    }
+    else if (item.type === PrimaryWorkflowEnum.STATE_GROUP) {
+      categorized.stateGroups.push(item)
+    }
+    else if (item.type === PrimaryWorkflowEnum.VARIABLE_SET || item.type === PrimaryWorkflowEnum.VARIABLE) {
+      // keep as-is (no placement in this categorization)
+    }
+    else if (item.type === PrimaryWorkflowEnum.COMPONENT) {
+      categorized.components.push(item)
+    }
+    else if (item.type === PrimaryWorkflowEnum.MODULE) {
+      // modules are ignored in this categorization
+    }
+    else {
+      throwTypeError(item, "Unhandled item type")
+    }
+  }
+
+  return categorized
 }
-export const $l = $$m0;
-export const MV = $$u1;
-export const RJ = $$h2;
-export const TE = $$p3;
-export const VV = $$f4;
-export const px = $$_5;
-export const q = $$g6;
+
+// Preserve original exported identifiers as aliases to the refactored functions
+export const $l = replaceStyleIfContentHash // $$m0
+export const MV = mergeAssetMaps // $$u1
+export const RJ = upsertAndSwapComponentOrStateGroup // $$h2
+export const TE = groupAssetsByLibraryKey // $$p3
+export const VV = sortByName // $$f4
+export const px = separateItemsByType // $$_5
+export const q = buildLibraryLookupMap // $$g6

@@ -30,7 +30,7 @@ import { UpgradeAction } from "../905/370443";
 import { getVisibleTheme } from "../905/640017";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { _Z, eC, $1 } from "../905/539601";
-import { ck as _$$ck } from "../905/87821";
+import { isIntegrationContext } from "../905/87821";
 import { NE } from "../3276/373312";
 import { w as _$$w } from "../0c62c2fd/912149";
 import { useFullscreenViewFile, selectCurrentFile } from "../figma_app/516028";
@@ -164,7 +164,7 @@ function ed(e) {
   });
 }
 buildUploadUrl("a553882986986c96fc7d298a674e9e0522d05b53");
-let ec = _$$ck();
+let ec = isIntegrationContext();
 export var $$em1 = (e => (e.DESIGN = "Design", e.PROTOTYPE = "Prototype", e.INSPECT = "Inspect", e.HANDOFF = "Handoff", e.COMMENTS = "Comments", e))($$em1 || {});
 let eu = {
   assetSrc: buildUploadUrl("828793d9a2d4cff784587a20da2cd458dceddfe9"),

@@ -16,10 +16,10 @@ import { getI18nString } from "../905/303541";
 import { Spacer } from "../905/470281";
 import { k as _$$k } from "../905/963262";
 import { v4 } from "../figma_app/655139";
-import { Z4, M$, NT, Q6 } from "../905/77776";
-import { kt, j5, Gj } from "../figma_app/711907";
-import { bv } from "../905/49095";
-import { G6, P1 } from "../905/246310";
+import { BOUND_VAR_START_REGEX, BOUND_VAR_END_REGEX, BOUND_STYLE_START_REGEX, BOUND_STYLE_END_REGEX } from "../905/77776";
+import { joinCodeBlocks, ChangeType, getIndentString } from "../figma_app/711907";
+import { IssueCategoryEnum } from "../905/49095";
+import { SUGGESTED_VARIABLE_START_PATTERN, SUGGESTED_VARIABLE_END_PATTERN } from "../905/246310";
 import { lW } from "../figma_app/11182";
 import { showDropdownThunk } from "../905/929976";
 import { Sl } from "../figma_app/8833";
@@ -33,7 +33,7 @@ var _ = p;
 let k = atom(!1);
 let M = e => e.filter(e => !e.excludeFromCopy);
 function F(e, t = {}) {
-  return e.replace(Z4, "").replace(M$, "").replace(NT, "").replace(Q6, "").replace(G6, "").replace(P1, "").replace(_$$k, e => {
+  return e.replace(BOUND_VAR_START_REGEX, "").replace(BOUND_VAR_END_REGEX, "").replace(BOUND_STYLE_START_REGEX, "").replace(BOUND_STYLE_END_REGEX, "").replace(SUGGESTED_VARIABLE_START_PATTERN, "").replace(SUGGESTED_VARIABLE_END_PATTERN, "").replace(_$$k, e => {
     let r = t[e];
     return r ? "INSTANCE" === r.type || "D2C" === r.type ? `/* ${r.name} */` : `/* ${r.message} */` : "/* unknown instance */";
   });
@@ -41,7 +41,7 @@ function F(e, t = {}) {
 function j(e, t = {}) {
   return filterNotNullish(e.map(e => {
     let r = M(e.lines);
-    return 0 === r.length ? null : F(kt(r, !0), t);
+    return 0 === r.length ? null : F(joinCodeBlocks(r, !0), t);
   })).join("\n\n");
 }
 export function $$U1({
@@ -281,12 +281,12 @@ export function $$G4(e) {
             return jsx("div", {
               className: x4,
               children: e.map((e, r) => {
-                let i = e.diff === j5.ADDED ? "+" : e.diff === j5.REMOVED ? "-" : null;
+                let i = e.diff === ChangeType.ADDED ? "+" : e.diff === ChangeType.REMOVED ? "-" : null;
                 return jsx("div", {
                   className: _()({
                     [BJ]: !0,
-                    [L6]: !t && e.diff === j5.ADDED,
-                    [pG]: !t && e.diff === j5.REMOVED,
+                    [L6]: !t && e.diff === ChangeType.ADDED,
+                    [pG]: !t && e.diff === ChangeType.REMOVED,
                     [wY]: t && !e.excludeFromCopy
                   }),
                   "aria-hidden": !0,
@@ -337,9 +337,9 @@ function H({
     let o = t[i];
     let c = e.lines[i];
     if (!o || !c) return null;
-    let u = 8 * Gj(o).length + 16 + 8;
+    let u = 8 * getIndentString(o).length + 16 + 8;
     let p = F(c.code.toString(), e.pills);
-    let h = a && (o.diff === j5.ADDED || o.diff === j5.REMOVED);
+    let h = a && (o.diff === ChangeType.ADDED || o.diff === ChangeType.REMOVED);
     let m = jsxs("span", {
       style: {
         display: "inline-block",
@@ -351,9 +351,9 @@ function H({
       "data-testid": `${e.name}${i}`,
       onClick: l,
       children: [h && jsxs(ScreenReaderOnly, {
-        children: [o.diff === j5.ADDED && getI18nString("dev_handoff.compare_changes.code_line.added_line", {
+        children: [o.diff === ChangeType.ADDED && getI18nString("dev_handoff.compare_changes.code_line.added_line", {
           line: p
-        }), o.diff === j5.REMOVED && getI18nString("dev_handoff.compare_changes.code_line.removed_line", {
+        }), o.diff === ChangeType.REMOVED && getI18nString("dev_handoff.compare_changes.code_line.removed_line", {
           line: p
         })]
       }), jsx("span", {
@@ -363,7 +363,7 @@ function H({
       })]
     }, "code");
     let g = o.hint;
-    let f = void 0 !== g && g.type === bv.Tooltip ? jsx(_$$A, {
+    let f = void 0 !== g && g.type === IssueCategoryEnum.Tooltip ? jsx(_$$A, {
       hint: _$$x(g),
       hidden: r
     }) : null;
@@ -371,10 +371,10 @@ function H({
     return jsxs("div", {
       className: _()({
         [n8]: !0,
-        [vN]: y === j5.ADDED && !s,
-        [rq]: y === j5.REMOVED && !s,
-        [R0]: a && y !== j5.ADDED && y !== j5.REMOVED && !s,
-        [r9]: a && y === j5.REMOVED && s,
+        [vN]: y === ChangeType.ADDED && !s,
+        [rq]: y === ChangeType.REMOVED && !s,
+        [R0]: a && y !== ChangeType.ADDED && y !== ChangeType.REMOVED && !s,
+        [r9]: a && y === ChangeType.REMOVED && s,
         [wY]: s && !o?.excludeFromCopy
       }),
       children: [m, f]

@@ -9,7 +9,7 @@ import { e as _$$e } from "../905/311297";
 import { M as _$$M } from "../905/269719";
 import { useDispatch } from "react-redux";
 import { selectViewAction } from "../905/929976";
-import { Tf } from "../figma_app/543100";
+import { TileUtils } from "../figma_app/543100";
 import { InterProfileType } from "../905/895626";
 import { az } from "../figma_app/805373";
 import { E as _$$E2 } from "../905/391888";
@@ -25,13 +25,13 @@ import { C as _$$C } from "../905/226458";
 import { A as _$$A } from "../905/100919";
 function _(e) {
   let t = useDispatch();
-  let i = Tf.getOwner(e.tile);
+  let i = TileUtils.getOwner(e.tile);
   if (!i) return jsx(TextWithTruncation, {
     fontSize: 13,
     truncate: !0,
     children: "--"
   });
-  let r = Tf.getOrgId(e.tile);
+  let r = TileUtils.getOrgId(e.tile);
   return jsx("div", {
     className: "generic_tile_owner--hugContents--77Wld",
     children: jsx(az, {
@@ -81,8 +81,8 @@ function b(e) {
   });
 }
 function E(e) {
-  let t = Tf.getSharedByName(e.tile);
-  let i = Tf.getSharedBy(e.tile) ?? null;
+  let t = TileUtils.getSharedByName(e.tile);
+  let i = TileUtils.getSharedBy(e.tile) ?? null;
   let o = wW(i).user;
   return i ? jsxs("div", {
     className: cssBuilderInstance.flex.itemsCenter.gap8.$,
@@ -152,7 +152,7 @@ function O({
   isHovered: i
 }) {
   let r = Xg(e);
-  let a = Tf.getIsFavorited(e);
+  let a = TileUtils.getIsFavorited(e);
   return r && (a || t || i) ? jsx(_$$e, {
     tile: e,
     entrypoint: "file_list_row",
@@ -193,7 +193,7 @@ let F = {
     truncate: !0,
     children: jsx(_$$M, {
       tile: e,
-      getDateFromGenericTile: Tf.getTouchedAt
+      getDateFromGenericTile: TileUtils.getTouchedAt
     })
   })
 };
@@ -207,7 +207,7 @@ let M = {
     truncate: !0,
     children: jsx(_$$M, {
       tile: e,
-      getDateFromGenericTile: Tf.getTrashedAt
+      getDateFromGenericTile: TileUtils.getTrashedAt
     })
   })
 };
@@ -219,7 +219,7 @@ let j = {
   renderRowCell: e => jsx($$D1, {
     children: jsx(b, {
       tile: e,
-      getFolderIdFromGenericTile: Tf.getFolderId
+      getFolderIdFromGenericTile: TileUtils.getFolderId
     })
   })
 };
@@ -233,7 +233,7 @@ let U = {
     truncate: !0,
     children: jsx(_$$M, {
       tile: e,
-      getDateFromGenericTile: Tf.getCreatedAt
+      getDateFromGenericTile: TileUtils.getCreatedAt
     })
   })
 };
@@ -247,7 +247,7 @@ let B = {
     truncate: !0,
     children: jsx(_$$M, {
       tile: e,
-      getDateFromGenericTile: Tf.getSharedAt
+      getDateFromGenericTile: TileUtils.getSharedAt
     })
   })
 };

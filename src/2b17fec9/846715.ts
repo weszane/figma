@@ -24,7 +24,7 @@ import { BI } from "../figma_app/546509";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
-import { t as _$$t2 } from "../905/192333";
+import { PinningState } from "../905/192333";
 import { C as _$$C } from "../figma_app/859828";
 import { $J, Z9, qv } from "../figma_app/634656";
 import { O as _$$O, X as _$$X2 } from "../9410/435916";
@@ -990,7 +990,7 @@ let tw = memo(function () {
     marginLeft: 0,
     marginRight: 0
   };
-  window.innerWidth < parsePxInt(ejp) && window.innerWidth > parsePxInt(nnJ) && e === _$$t2.PINNED_AND_DOCKED_LEFT && (Z.marginLeft = gR);
+  window.innerWidth < parsePxInt(ejp) && window.innerWidth > parsePxInt(nnJ) && e === PinningState.PINNED_AND_DOCKED_LEFT && (Z.marginLeft = gR);
   (function () {
     let e = function () {
       let {

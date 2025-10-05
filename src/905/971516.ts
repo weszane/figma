@@ -1,120 +1,163 @@
-import { ServiceCategories } from "../905/165054";
-import { reportError } from "../905/11";
-import { N } from "../905/64868";
-import { R } from "../905/927840";
-import { t as _$$t } from "../905/367656";
-import { H2, fl, wI, $r, ut } from "../905/707098";
-import { Ux, Q } from "../905/121113";
-export class $$c0 {
-  constructor(e, t) {
-    this._cachedProperties = {};
-    this._EXPENSIVE_TO_READ_node = e;
-    this.nodeCache = t;
+import { reportError } from "../905/11"
+import { BorderProperties } from "../905/64868"
+import { FixedLayoutNodeWrapper, StrokeNodeWrapper } from "../905/121113"
+import { ServiceCategories } from "../905/165054"
+import { LayoutNode } from "../905/367656"
+import { memoizeFn, resolveEffectStyle, resolveFillStyle, resolveStrokeStyle, resolveVariable } from "../905/707098"
+import { GridLayoutProperties } from "../905/927840"
+
+type Node = any
+type NodeCache = any
+
+type BoundVariables = any
+type InferredVariables = any
+
+export class ShapeNodeProperties {
+  private _cachedProperties: Record<string, any>
+  private _EXPENSIVE_TO_READ_node: Node
+  private nodeCache: NodeCache
+
+  constructor(e: Node, t: NodeCache) {
+    this._cachedProperties = {}
+    this._EXPENSIVE_TO_READ_node = e
+    this.nodeCache = t
   }
-  static from(e, t) {
-    return new $$c0(e, t);
+
+  static from(e: Node, t: NodeCache) {
+    return new ShapeNodeProperties(e, t)
   }
-  readValue(e, t) {
-    return H2(this._cachedProperties, e, this._EXPENSIVE_TO_READ_node, t);
+
+  private readValue<T>(key: string, getter: (node: Node) => T): T {
+    return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
+
   get isGroup() {
-    return !1;
+    return false
   }
+
   get border() {
-    return this.readValue("border", e => {
-      let t;
-      "RECTANGLE" === e.type ? t = new N(e, this.nodeCache, this.boundVariables, this.inferredVariables) : "LINE" === e.type ? t = new N({
-        strokes: [],
-        strokeAlign: e.strokeAlign,
-        strokeBottomWeight: 0,
-        strokeTopWeight: 0,
-        strokeLeftWeight: 0,
-        strokeRightWeight: 0,
-        bottomRightRadius: 0,
-        topLeftRadius: 0,
-        topRightRadius: 0,
-        bottomLeftRadius: 0,
-        dashPattern: []
-      }, this.nodeCache, this.boundVariables, this.inferredVariables) : "ELLIPSE" === e.type ? t = new N(new Ux(e), this.nodeCache, this.boundVariables, this.inferredVariables) : reportError(ServiceCategories.DEVELOPER_TOOLS, Error(`Unexpected node type for border: ${e?.type}`));
-      return t;
-    });
+    return this.readValue("border", (e) => {
+      let t
+      e.type === "RECTANGLE"
+        ? t = new BorderProperties(e, this.nodeCache, this.boundVariables, this.inferredVariables)
+        : e.type === "LINE"
+          ? t = new BorderProperties({
+            strokes: [],
+            strokeAlign: e.strokeAlign,
+            strokeBottomWeight: 0,
+            strokeTopWeight: 0,
+            strokeLeftWeight: 0,
+            strokeRightWeight: 0,
+            bottomRightRadius: 0,
+            topLeftRadius: 0,
+            topRightRadius: 0,
+            bottomLeftRadius: 0,
+            dashPattern: [],
+          }, this.nodeCache, this.boundVariables, this.inferredVariables)
+          : e.type === "ELLIPSE" ? t = new BorderProperties(new StrokeNodeWrapper(e), this.nodeCache, this.boundVariables, this.inferredVariables) : reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`Unexpected node type for border: ${e?.type}`))
+      return t
+    })
   }
+
   get fills() {
-    return this.readValue("fills", e => {
-      let t;
-      return "symbol" == typeof e?.fills ? [] : ("RECTANGLE" === e.type ? t = e?.fills?.filter(e => e.visible ?? !0) ?? [] : "LINE" === e.type ? t = e?.strokes?.filter(e => e.visible ?? !0) ?? [] : "ELLIPSE" === e.type ? t = e?.fills?.filter(e => e.visible ?? !0) ?? [] : reportError(ServiceCategories.DEVELOPER_TOOLS, Error(`Unexpected node type for fill: ${e?.type}`)), t);
-    });
+    return this.readValue("fills", (e) => {
+      let t
+      return typeof e?.fills == "symbol" ? [] : (e.type === "RECTANGLE" ? t = e?.fills?.filter(e => e.visible ?? !0) ?? [] : e.type === "LINE" ? t = e?.strokes?.filter(e => e.visible ?? !0) ?? [] : e.type === "ELLIPSE" ? t = e?.fills?.filter(e => e.visible ?? !0) ?? [] : reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`Unexpected node type for fill: ${e?.type}`)), t)
+    })
   }
+
   get layout() {
-    return this.readValue("layout", e => {
-      let t;
-      if ("RECTANGLE" === e.type) t = new _$$t(e, this.nodeCache);else if ("LINE" === e.type) {
-        let i = 0;
-        let n = 0;
+    return this.readValue("layout", (e) => {
+      let t
+      if (e.type === "RECTANGLE") {
+        t = new LayoutNode(e, this.nodeCache)
+      }
+      else if (e.type === "LINE") {
+        let i = 0
+        let n = 0
         switch (Math.round(e.rotation)) {
           case 0:
           case 180:
-            i = e.width;
-            n = e.strokeWeight;
-            break;
+            i = e.width
+            n = e.strokeWeight
+            break
           case 90:
           case -90:
-            i = e.strokeWeight;
-            n = e.width;
-            break;
+            i = e.strokeWeight
+            n = e.width
+            break
           default:
-            i = e.width;
-            n = e.height;
+            i = e.width
+            n = e.height
         }
-        t = new _$$t(new Q(e, i, n), this.nodeCache);
-      } else "ELLIPSE" === e.type && (t = new _$$t(e, this.nodeCache));
-      return t;
-    });
+        t = new LayoutNode(new FixedLayoutNodeWrapper(e, i, n), this.nodeCache)
+      }
+      else {
+        e.type === "ELLIPSE" && (t = new LayoutNode(e, this.nodeCache))
+      }
+      return t
+    })
   }
+
   get gridLayout() {
-    return this.readValue("gridLayout", e => new R(e));
+    return this.readValue("gridLayout", e => new GridLayoutProperties(e))
   }
+
   get fillStyle() {
-    return this.readValue("fillStyle", e => fl(e, this.nodeCache.stylesResolver));
+    return this.readValue("fillStyle", e => resolveFillStyle(e, this.nodeCache.stylesResolver))
   }
+
   get strokeStyle() {
-    return this.readValue("strokeStyle", e => wI(e, this.nodeCache.stylesResolver));
+    return this.readValue("strokeStyle", e => resolveStrokeStyle(e, this.nodeCache.stylesResolver))
   }
+
   get effectStyle() {
-    return this.readValue("effectStyle", e => $r(e, this.nodeCache.stylesResolver));
+    return this.readValue("effectStyle", e => resolveEffectStyle(e, this.nodeCache.stylesResolver))
   }
+
   get id() {
-    return this.readValue("id", e => e.id);
+    return this.readValue("id", e => e.id)
   }
+
   get name() {
-    return this.readValue("name", e => e.name);
+    return this.readValue("name", e => e.name)
   }
+
   get effects() {
-    return this.readValue("effects", e => e.effects.filter(e => e.visible ?? !0));
+    return this.readValue("effects", e => e.effects.filter(e => e.visible ?? !0))
   }
+
   get opacity() {
-    return this.readValue("opacity", e => e.opacity);
+    return this.readValue("opacity", e => e.opacity)
   }
+
   get blendMode() {
-    return this.readValue("blendMode", e => e.blendMode);
+    return this.readValue("blendMode", e => e.blendMode)
   }
-  get boundVariables() {
-    return this.readValue("boundVariables", e => e.boundVariables);
+
+  get boundVariables(): BoundVariables {
+    return this.readValue("boundVariables", e => e.boundVariables)
   }
-  get inferredVariables() {
-    return this.readValue("inferredVariables", e => e.availableInferredVariables);
+
+  get inferredVariables(): InferredVariables {
+    return this.readValue("inferredVariables", e => e.availableInferredVariables)
   }
-  getVariableValue(e) {
-    return ut(this.boundVariables, this.inferredVariables, e, this.nodeCache.variableResolver);
+
+  getVariableValue(e: string) {
+    return resolveVariable(this.boundVariables, this.inferredVariables, e, this.nodeCache.variableResolver)
   }
-  setName(e) {
-    this._cachedProperties.name = e;
+
+  setName(e: string) {
+    this._cachedProperties.name = e
   }
+
   isAutoLayout() {
-    return !1;
+    return false
   }
+
   isGrid() {
-    return !1;
+    return false
   }
 }
-export const j = $$c0;
+
+export const j = ShapeNodeProperties

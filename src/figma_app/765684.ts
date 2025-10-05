@@ -5,7 +5,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
-import { M3 } from "../figma_app/119475";
+import { useKeyboardNavigationItem } from "../figma_app/119475";
 import { getAssetKeyForSubscription } from "../figma_app/473391";
 import { isEligibleElement } from "../figma_app/915774";
 import { getPartnerType } from "../905/853613";
@@ -78,7 +78,7 @@ function R({
   let {
     keyboardNavigationItem,
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [1, t],
     column: r ? null : e,
     id: getAssetKeyForSubscription(o.item),

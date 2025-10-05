@@ -5,7 +5,7 @@ import { Button } from "../905/521428";
 import { l as _$$l } from "../905/509505";
 import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
-import { M3 } from "../figma_app/119475";
+import { useKeyboardNavigationItem } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { useParentOrgOfOpenFile } from "../figma_app/543529";
@@ -112,7 +112,7 @@ function P({
 }) {
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.CONTENTS, KitType.UI_KITS, t]
   });
   let a = _9(e, "assets_panel_empty_state");
@@ -199,7 +199,7 @@ function j({
 }) {
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [SectionType.CONTENTS, KitType.CTA],
     disabled: i
   });

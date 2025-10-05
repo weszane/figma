@@ -1,6 +1,6 @@
 import { parsePxInt } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
-import { t as _$$t2 } from "../905/192333";
+import { PinningState } from "../905/192333";
 import { BuT, yUQ, XaD, fWT, nnJ, tui, i_6 } from "../figma_app/27776";
 export function $$o0(e) {
   let t = [getI18nString("whiteboard.inserts.search_placeholder_1"), getI18nString("whiteboard.inserts.search_placeholder_2"), getI18nString("whiteboard.inserts.search_placeholder_3"), getI18nString("whiteboard.inserts.search_placeholder_4"), getI18nString("whiteboard.inserts.search_placeholder_5"), getI18nString("whiteboard.inserts.search_placeholder_6"), getI18nString("whiteboard.inserts.search_placeholder_7"), getI18nString("whiteboard.inserts.search_placeholder_8")];
@@ -17,9 +17,9 @@ let $$h1 = parsePxInt(tui);
 let $$m7 = parsePxInt(i_6);
 let $$g8 = p + $$m7;
 export function $$f6(e, t, r, n) {
-  let i = e === _$$t2.PINNED_AND_DOCKED_LEFT && window.innerWidth >= _ ? 0 : n;
+  let i = e === PinningState.PINNED_AND_DOCKED_LEFT && window.innerWidth >= _ ? 0 : n;
   let s = window.innerHeight - r - $$h1 - 2 * $$m7 - i;
-  return e === _$$t2.PINNED_AND_DOCKED_LEFT ? s : Math.min(t, s);
+  return e === PinningState.PINNED_AND_DOCKED_LEFT ? s : Math.min(t, s);
 }
 export const DN = $$o0;
 export const E0 = $$h1;

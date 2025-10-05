@@ -4,7 +4,7 @@ import { A as _$$A } from "../vendor/648136";
 import { Y1 } from "../vendor/891888";
 import { setupDragHandler } from "../905/97346";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
-import { dP } from "../figma_app/119475";
+import { KeyboardNavigationProvider } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Spacer } from "../905/470281";
 import { renderBadgesLayout } from "../905/154591";
@@ -244,7 +244,7 @@ export function $$A0({
         disableWidth: !0,
         children: ({
           height: e
-        }) => jsx(dP, {
+        }) => jsx(KeyboardNavigationProvider, {
           children: jsx(Y1, {
             itemSize: 18,
             itemCount: C?.length || 0,
@@ -263,7 +263,7 @@ export function $$A0({
       })
     }), jsx("div", {
       className: io,
-      children: jsx(dP, {
+      children: jsx(KeyboardNavigationProvider, {
         style: {
           width: "100%",
           height: "100%"

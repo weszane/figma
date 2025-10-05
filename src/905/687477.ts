@@ -27,7 +27,7 @@ import { desktopAPIInstance } from '../figma_app/876459';
 import { setKeyPressCallback, shouldIgnoreKeyEvent } from '../figma_app/896988';
 import { ClipboardOperation } from '../figma_app/915202';
 import { escapeHtml } from '../figma_app/930338';
-import { Wh, Yx } from '../figma_app/985200';
+import { PluginIframeMode, PluginInstanceManager } from '../figma_app/985200';
 /**
  * Enum representing modifier key flags for keyboard events
  * Used to combine multiple modifier keys using bitwise operations
@@ -2749,10 +2749,10 @@ function shouldHandleApplePencilDrawing(): boolean {
  * @param shouldStopEvents - Whether to stop pointer events from propagating
  */
 function updatePointerEventState(shouldStopEvents: boolean): void {
-  Yx.instance[Wh.INSPECT]?.updateState({
+  PluginInstanceManager.instance[PluginIframeMode.INSPECT]?.updateState({
     stopPointerEvents: shouldStopEvents
   });
-  Yx.instance[Wh.MODAL]?.updateState({
+  PluginInstanceManager.instance[PluginIframeMode.MODAL]?.updateState({
     stopPointerEvents: shouldStopEvents
   });
 }

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, Fragment } from "react";
 import { useDispatch } from "react-redux";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/116389";
 import { AutoLayout, Spacer } from "../905/470281";
@@ -150,7 +150,7 @@ function D({
     ...e,
     [t]: !0
   }), {}), [t]);
-  let [d, u, m] = _$$t.useManagedTabs(l, i, a);
+  let [d, u, m] = Tabs.useManagedTabs(l, i, a);
   return jsxs(AutoLayout, {
     padding: {
       horizontal: 32,
@@ -158,7 +158,7 @@ function D({
     },
     height: "hug-contents",
     dataTestId: "org-admin-settings-secondary-tabs",
-    children: [jsx(_$$t.TabStrip, {
+    children: [jsx(Tabs.TabStrip, {
       manager: m,
       children: t.map(t => {
         let a = d[t];
@@ -167,7 +167,7 @@ function D({
             children: [t === BillingSectionEnum.OVERVIEW && jsx(_$$s, {
               planType: FOrganizationLevelType.ORG
             }), t === BillingSectionEnum.BILLING_GROUPS && jsx(I, {})]
-          }), jsx(_$$t.Tab, {
+          }), jsx(Tabs.Tab, {
             ...a,
             "data-onboarding-key": BZ[t],
             "data-testid": t === i ? "org-admin-settings-secondary-tab-selected" : "org-admin-settings-secondary-tab",

@@ -11,11 +11,11 @@ import { G as _$$G } from "../905/186289";
 import { ms, wv, c$ } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { S as _$$S, le, TH } from "../figma_app/11182";
-import { qP, Fb } from "../figma_app/909778";
+import { removeFileFavorite, addFileFavorite } from "../figma_app/909778";
 import { showModalHandler } from "../905/156213";
-import { y$ } from "../905/81009";
+import { selectTiles } from "../905/81009";
 import { nk } from "../figma_app/2023";
-import { fA } from "../figma_app/543100";
+import { createFileTile } from "../figma_app/543100";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { ComFileType } from "../905/915030";
 import { SelectedViewPathManager } from "../905/870666";
@@ -262,9 +262,9 @@ let V = e => ({
           view: "folder",
           folderId: e.folderId
         }));
-        i(y$({
+        i(selectTiles({
           type: ComFileType.FILES,
-          tiles: [fA(fileEntityDataMapper.toSinatra(e))]
+          tiles: [createFileTile(fileEntityDataMapper.toSinatra(e))]
         }));
       }
     };
@@ -275,14 +275,14 @@ let V = e => ({
       id: "set_favorite_status",
       text: e.isFavorited ? getI18nString("tile.favoriting.remove_from_favorites") : getI18nString("tile.favoriting.add_to_favorites"),
       onClick: () => {
-        e.isFavorited ? i(qP({
+        e.isFavorited ? i(removeFileFavorite({
           file: {
             editorType: e.editorType,
             key: e.key
           },
           entrypoint: "search_dropdown",
           fileBrowserEntryPoint: !0
-        })) : i(Fb({
+        })) : i(addFileFavorite({
           file: e,
           entrypoint: "search_dropdown",
           fileBrowserEntryPoint: !0

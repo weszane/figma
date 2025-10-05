@@ -57,7 +57,7 @@ import { B as _$$B4 } from '../905/55104';
 import { isCommandOrShift, KeyCodes } from '../905/63728';
 import { y as _$$y4 } from '../905/76789';
 import { n as _$$n5 } from '../905/79930';
-import { an as _$$an, y$ as _$$y$, PW } from '../905/81009';
+import { resetTileSelection, selectTiles, selectTilesByKeys } from '../905/81009';
 import { setupPricesTransform, ensureLoadedResource } from '../905/84777';
 import { combineWithHyphen, ShareContext } from '../905/91820';
 import { UserAPIHandlers } from '../905/93362';
@@ -73,7 +73,7 @@ import { KindEnum } from '../905/129884';
 import { f as _$$f6, r as _$$r8 } from '../905/136283';
 import { toggleSidebarSectionCollapsedState } from '../905/148074';
 import { e as _$$e0 } from '../905/149844';
-import { t as _$$t5 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { hideModal, hideModalHandler, hideSpecificModal, popModalStack, popPrevModal, showModalHandler, updateModal } from '../905/156213';
 import { i as _$$i } from '../905/159448';
 import { TrackedLinkButton } from '../905/160095';
@@ -85,7 +85,7 @@ import { DesignsList, SizeOption } from '../905/171275';
 import { Be as _$$Be } from '../905/172516';
 import { Cm } from '../905/174697';
 import { ResourceTypes, ResourceTypeSubset } from '../905/178090';
-import { Z as _$$Z5 } from '../905/184216';
+import { DowntimeActionsEnum } from '../905/184216';
 import { InputComponent } from '../905/185998';
 import { HM } from '../905/190597';
 import { w as _$$w3 } from '../905/191841';
@@ -543,7 +543,7 @@ import { R as _$$R3, jn } from '../figma_app/522082';
 import { P as _$$P7 } from '../figma_app/527262';
 import { getOrgIdFromFolderOrTeam, getSidebarStringOrValue, getSortFilterConfig, hasRootPath, isOrgFolder, isRootPath, isTempId } from '../figma_app/528509';
 import { Gv as _$$Gv } from '../figma_app/532170';
-import { fA as _$$fA, gB as _$$gB, nb as _$$nb, nw as _$$nw, Tf as _$$Tf, uy as _$$uy, Nu, Y6, yF } from '../figma_app/543100';
+import { createFileTile, createOfflineFileTile, TileType, useSelectedTilesFilter, TileUtils, findBestBranchForRepoTile, createPrototypeTile, renamingStateAtom } from '../figma_app/543100';
 import { uZ as _$$uZ, Jo, jU } from '../figma_app/544879';
 import { userFlagExistsAtomFamily } from '../figma_app/545877';
 import { S as _$$S0 } from '../figma_app/552746';
@@ -570,7 +570,7 @@ import { e2 as _$$e13, li as _$$li } from '../figma_app/622574';
 import { A5 as _$$A11, J5, jT } from '../figma_app/623414';
 import { fileActionEnum, getTeamUrl, paymentActionRequirementEnum } from '../figma_app/630077';
 import { BaseLinkComponent, BigButtonPrimaryTracked, BigTextInput, ButtonBasePrimaryTracked, ButtonBaseReversedContainer, ButtonLinkTracked, ButtonNegativeTracked, ButtonSecondary, ButtonSecondaryLinkTracked, ButtonSecondaryTracked, clickableBaseLinkTracked, linkWithTracking, trackedButtonClickHandler } from '../figma_app/637027';
-import { Sh, yJ } from '../figma_app/637328';
+import { updateFavoriteResourcesThunk, updateFileBrowserPreferencesThunk } from '../figma_app/637328';
 import { getDefaultBrowseOptions } from '../figma_app/640564';
 import { canAdminOrg, canAdminTeam, canEditTeam, canMemberOrg, canOwnTeam, getPermissionsState, getPermissionsStateMemoized, getRolesForUserAndTeam, hasMinRole, hasViewerRoleAccessOnTeam, isOrgUserExternallyRestrictedFromState } from '../figma_app/642025';
 import { GG } from '../figma_app/643789';
@@ -624,14 +624,14 @@ import { SW } from '../figma_app/846003';
 import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
 import { defaultSectionKey, DUserRole, TGroupType } from '../figma_app/858344';
 import { MenuContainerComp, MenuGroupComp, MenuItemComp, MenuRootComp, setupMenu } from '../figma_app/860955';
-import { ds as _$$ds, gV as _$$gV, sb as _$$sb, t$ as _$$t$, D6, kK, R3, T0, TF } from '../figma_app/863319';
+import { getAllFavoritedItems, isFavoritesLimitReached, sortFavoritedResources, sortWithPinnedItems, alwaysTrue, getMaxLimit, isEmptyName, findFavoritedItem, processFavorites } from '../figma_app/863319';
 import { VE } from '../figma_app/869776';
 import { desktopAPIInstance, OpenTarget } from '../figma_app/876459';
 import { cS as _$$cS2, hT as _$$hT2, Ho } from '../figma_app/878651';
 import { C as _$$C4 } from '../figma_app/887997';
 import { v as _$$v3 } from '../figma_app/899624';
 import { debouncedTrackOrgEvent } from '../figma_app/901889';
-import { $$if, de as _$$de, lF as _$$lF, ox as _$$ox, pS as _$$pS, to as _$$to, DN, Ic, jv, Mv, N9, qP, U6, V1, vg, vr, X7, yH, YI, ZW } from '../figma_app/909778';
+import { $$if, deleteSidebarSection, setFavoritesCountAction, removeTeamFavorite, setNewSectionIndexAction, setMovingResourceAction, addTeamFavorite, addFavoritesToPlanlessSidebar, removeFolderFromFavorites, addFolderFavorite, bulkSetResourcesAsFavorites, removeFileFavorite, updateExpandedSectionsAction, moveFavoritedResourceToSection, updateSidebarSection, unstarAllFavorites, removePrototypeFavorite, createSidebarSectionWithResource, createSidebarSection, addWorkspaceFavorite } from '../figma_app/909778';
 import { TabOpenBehavior, FileBrowserLocation } from '../figma_app/915202';
 import { resolveDashboardSection } from '../figma_app/915977';
 import { ConfirmationModal2 } from '../figma_app/918700';
@@ -1128,7 +1128,7 @@ let tN = registerModal(e => {
   });
   return jsx(ConfirmationModal2, {
     onConfirm: () => {
-      t(_$$de({
+      t(deleteSidebarSection({
         sidebarSectionId: e.sectionId
       }));
     },
@@ -1158,7 +1158,7 @@ function tA(e) {
   let r = tR();
   if (r == null) return jsx(Fragment, {});
   let s = () => {
-    r.data.favoritesCount === 0 ? t(_$$de({
+    r.data.favoritesCount === 0 ? t(deleteSidebarSection({
       sidebarSectionId: r.data.customSection.id
     })) : t(showModalHandler({
       type: tN,
@@ -1327,12 +1327,12 @@ function rh(e) {
     if (trackFavoritesContextMenuActionClicked('show_in_project'), t(selectViewAction({
       view: 'folder',
       folderId: e.folderId
-    })), t(_$$an()), n.fileRepoId) {
+    })), t(resetTileSelection()), n.fileRepoId) {
       let r = transformFileRepoData(e.favoritedFile);
-      r != null && t(_$$y$({
+      r != null && t(selectTiles({
         type: ComFileType.REPOS,
         tiles: [{
-          type: _$$nb.REPO,
+          type: TileType.REPO,
           repo: r,
           branches: [],
           selectedBranchKey: ''
@@ -1340,9 +1340,9 @@ function rh(e) {
       }));
     } else {
       if (!o) return;
-      t(_$$y$({
+      t(selectTiles({
         type: ComFileType.FILES,
-        tiles: [_$$fA(o)]
+        tiles: [createFileTile(o)]
       }));
     }
   }, {
@@ -1504,7 +1504,7 @@ function rj(e) {
         favoriteId: e.favorite.id,
         resourceType: FEntityType.TEAM
       };
-      r ? t(V1(s)) : t(_$$ox(s));
+      r ? t(moveFavoritedResourceToSection(s)) : t(removeTeamFavorite(s));
     }
   });
   return jsxs(Fragment, {
@@ -1609,7 +1609,7 @@ function rR(e) {
     })));
   };
   let v = () => {
-    t(qP({
+    t(removeFileFavorite({
       file: {
         key: d.key,
         editorType: d.editorType ?? FFileType.DESIGN
@@ -1636,7 +1636,7 @@ function rR(e) {
           favoriteId: e.favorite.id,
           resourceType: FEntityType.FILE
         };
-        t(V1(r));
+        t(moveFavoritedResourceToSection(r));
       } else {
         r || v();
       }
@@ -1771,7 +1771,7 @@ function rL(e) {
         folder: r,
         favoriteId: e.favorite.id
       };
-      a ? t(Mv(i)) : t(jv(i));
+      a ? t(addFolderFavorite(i)) : t(removeFolderFromFavorites(i));
     }
   });
   let p = extractFirstEmoji(r.path);
@@ -1842,7 +1842,7 @@ function r$(e) {
     customHistory.redirect(m, '_blank');
   };
   let p = (r, a) => {
-    r || t(X7({
+    r || t(removePrototypeFavorite({
       prototype: {
         file_key: e.favorite.prototype.fileKey,
         page_id: e.favorite.prototype.pageId
@@ -1868,7 +1868,7 @@ function r$(e) {
           favoriteId: e.favorite.id,
           resourceType: FEntityType.PROTOTYPE
         };
-        t(V1(r));
+        t(moveFavoritedResourceToSection(r));
       } else {
         p(!1, e.favorite.id);
       }
@@ -1988,7 +1988,7 @@ function rV(e) {
         sectionId: a,
         favoriteId: e.favorite.id
       };
-      r ? t(ZW(s)) : t($$if(s));
+      r ? t(addWorkspaceFavorite(s)) : t($$if(s));
     }
   });
   let _ = e.favorite.workspace ? jsx(z6, {
@@ -2283,7 +2283,7 @@ function rq(e) {
   let t = useDispatch();
   let r = useSelector(e => e.currentTeamId);
   let n = useCurrentUserOrgId() ?? null;
-  let o = _$$sb(e.favorites, e.order);
+  let o = sortFavoritedResources(e.favorites, e.order);
   let l = getSelectedView();
   let [d, c] = useState(!1);
   let u = useSelector(e => e.favorites.movingResource);
@@ -2327,7 +2327,7 @@ function rq(e) {
       id: 'favorited',
       orgId: n
     }, !p), p ? r.add('favorited') : r.$$delete('favorited'));
-    t(U6({
+    t(updateExpandedSectionsAction({
       collapsedCustomSections: r
     }));
   }, [p, n, e.section, m, t]);
@@ -2344,10 +2344,10 @@ function rq(e) {
       s = [...i.slice(0, e), r, ...i.slice(e)];
     }
     if (trackFavoritesReordered(), x(r), e.section?.id) {
-      n ? t(vg({
+      n ? t(updateSidebarSection({
         sectionId: e.section.id,
         orderedFavoriteIds: s
-      })) : t(V1({
+      })) : t(moveFavoritedResourceToSection({
         favoriteId: r,
         sectionId: e.section.id,
         resourceType: a,
@@ -2355,12 +2355,12 @@ function rq(e) {
       }));
       return;
     }
-    n || t(V1({
+    n || t(moveFavoritedResourceToSection({
       favoriteId: r,
       sectionId: void 0,
       resourceType: a
     }));
-    t(yJ({
+    t(updateFileBrowserPreferencesThunk({
       prefs: {
         id: e.fileBrowserPreferences?.id || 'optimistic-id',
         orderedFavoritedResourceIds: s,
@@ -2407,7 +2407,7 @@ function rq(e) {
     c = c.filter(e => !e.is_favorited);
     let u = o.map(e => e.resource.id);
     let m = i.length + d.length + c.length;
-    let _ = kK(n);
+    let _ = getMaxLimit(n);
     if (m + o.length > _) {
       t(VisualBellActions.enqueue({
         message: getI18nString('tile.favoriting.max_favorites', {
@@ -2418,7 +2418,7 @@ function rq(e) {
     }
     let p = null;
     b && (p = u.indexOf(b.draggedOverFavoriteId) + (b.dropBefore ? 0 : 1));
-    t(N9({
+    t(bulkSetResourcesAsFavorites({
       files: i,
       repos: d,
       prototypes: c,
@@ -2448,7 +2448,7 @@ function rq(e) {
     'favorited_section--actionButtonsVisibleOnHover--AOJ8E': !H,
     'favorited_section--actionButtonsVisible--Ey4QI': V && !H
   });
-  let J = e.section?.name === void 0 ? getI18nString('sidebar.new_section') : R3(e.section) ? getI18nString('sidebar.starred') : e.section.name;
+  let J = e.section?.name === void 0 ? getI18nString('sidebar.new_section') : isEmptyName(e.section) ? getI18nString('sidebar.starred') : e.section.name;
   return jsxs(_$$Y, {
     className: $,
     isDragTarget: L,
@@ -2495,24 +2495,24 @@ function rq(e) {
             className: 'favorited_section--input--8x-Vh',
             placeholderValue: J,
             submit: r => {
-              e.isCreatingNewSection ? (u ? t(yH({
+              e.isCreatingNewSection ? (u ? t(createSidebarSectionWithResource({
                 name: r,
                 insertAtIndex: e.sectionIndex,
                 currentOrderedSections: e.allSections.map(e => e.id),
                 prefs: e.fileBrowserPreferences ?? void 0,
                 newResourceForSection: u
-              })) : t(YI({
+              })) : t(createSidebarSection({
                 name: r,
                 insertAtIndex: e.sectionIndex,
                 currentOrderedSections: e.allSections.map(e => e.id),
                 prefs: e.fileBrowserPreferences ?? void 0
-              })), e.setNewCustomSectionIndex && e.setNewCustomSectionIndex(void 0)) : e.section && (t(vg({
+              })), e.setNewCustomSectionIndex && e.setNewCustomSectionIndex(void 0)) : e.section && (t(updateSidebarSection({
                 sectionId: e.section.id,
                 name: r.trim()
               })), e.setRenamingSectionId && e.setRenamingSectionId(void 0));
             },
             cancel: () => {
-              e.isCreatingNewSection ? (e.setNewCustomSectionIndex && e.setNewCustomSectionIndex(void 0), u && t(_$$to({
+              e.isCreatingNewSection ? (e.setNewCustomSectionIndex && e.setNewCustomSectionIndex(void 0), u && t(setMovingResourceAction({
                 movingResource: void 0
               }))) : e.setRenamingSectionId && e.setRenamingSectionId(void 0);
             },
@@ -2548,7 +2548,7 @@ function rq(e) {
       })
     }), jsx('div', {
       className: p ? void 0 : cssBuilderInstance.hidden.$,
-      children: o.length === 0 ? e.allSections.length === 1 && R3(e.allSections[0]) && !e.isCreatingNewSection ? jsx(tH, {
+      children: o.length === 0 ? e.allSections.length === 1 && isEmptyName(e.allSections[0]) && !e.isCreatingNewSection ? jsx(tH, {
         setNewCustomSectionIndex: e.setNewCustomSectionIndex
       }) : jsx(Fragment, {}) : jsx('div', {
         onMouseMove: F,
@@ -2592,7 +2592,7 @@ function rX(e) {
   });
 }
 function rQ(e) {
-  let t = _$$ds(e.favoritedFiles, e.favoritedPrototypes, e.favoritedProjects, e.favoritedTeams, e.favoritedWorkspaces);
+  let t = getAllFavoritedItems(e.favoritedFiles, e.favoritedPrototypes, e.favoritedProjects, e.favoritedTeams, e.favoritedWorkspaces);
   return jsx(rq, {
     favorites: t,
     order: e.fileBrowserPreferences?.orderedFavoritedResourceIds ?? void 0,
@@ -2607,16 +2607,16 @@ function rZ(e) {
   let r = useSelector(e => e.dragState);
   let n = useSelector(e => e.favorites.newCustomSectionIndex);
   let o = useSelector(e => e.favorites.favoritesCount);
-  let l = _$$ds(e.favoritedFiles, e.favoritedPrototypes, e.favoritedProjects, e.favoritedTeams, e.favoritedWorkspaces);
+  let l = getAllFavoritedItems(e.favoritedFiles, e.favoritedPrototypes, e.favoritedProjects, e.favoritedTeams, e.favoritedWorkspaces);
   let [d, c] = useState();
   let [u, m] = useState();
   let [_, p] = useState(!1);
-  let f = useMemo(() => _$$t$(e.userSidebarSections ?? [], e.fileBrowserPreferences?.orderedSidebarSections ?? void 0), [e.userSidebarSections, e.fileBrowserPreferences?.orderedSidebarSections]);
+  let f = useMemo(() => sortWithPinnedItems(e.userSidebarSections ?? [], e.fileBrowserPreferences?.orderedSidebarSections ?? void 0), [e.userSidebarSections, e.fileBrowserPreferences?.orderedSidebarSections]);
   useMemo(() => {
     o && o < 15 && l.length >= 15 && handleAtomEvent({
       id: FAVORITES_COUNT_CROSSED_THRESHOLD_EVENT
     });
-    t(_$$lF({
+    t(setFavoritesCountAction({
       favoritesCount: l.length
     }));
   }, [o, l.length, t]);
@@ -2633,7 +2633,7 @@ function rZ(e) {
     let a = d === 'starred' ? void 0 : d;
     if (r.type === _$$R4.Favorite) {
       let e = r.data;
-      t(V1({
+      t(moveFavoritedResourceToSection({
         favoriteId: e.resource.id,
         sectionId: a,
         resourceType: e.resourceType
@@ -2641,7 +2641,7 @@ function rZ(e) {
     } else if (r.type === _$$R4.SidebarSection && a) {
       let s = f.map(e => e.id) ?? [];
       let i = moveElement(s, r.data, a, _);
-      t(yJ({
+      t(updateFileBrowserPreferencesThunk({
         prefs: {
           id: e.fileBrowserPreferences?.id || 'optimistic-id',
           orderedFavoritedResourceIds: e.fileBrowserPreferences?.orderedFavoritedResourceIds,
@@ -2663,7 +2663,7 @@ function rZ(e) {
     c(void 0);
   }, []);
   let j = useCallback(e => {
-    t(_$$pS({
+    t(setNewSectionIndexAction({
       newCustomSectionIndex: e
     }));
   }, [t]);
@@ -2783,7 +2783,7 @@ let at = registerModal(e => {
               return t;
             });
             let l = e.favorites.filter(e => !(e.resourceType === FEntityType.FILE && e.resource.file?.key) || !s[e.resource.file?.key]).map(e => e.resource.id);
-            n(Ic({
+            n(addFavoritesToPlanlessSidebar({
               favoriteIds: l,
               teamId: r
             }));
@@ -2833,7 +2833,7 @@ function ai(e) {
   let c = e.teamUser?.planlessFavoritedFiles?.filter(t => !e.dataDriftCorrectedTeamResources?.favoritedFilesKeySet.has(t.resourceId));
   let u = e.teamUser?.planlessFavoritedPrototypes?.filter(t => !e.dataDriftCorrectedTeamResources?.favoritedPrototypesIdSet.has(t.resourceId));
   let m = e.teamUser?.planlessFavoritedProjects?.filter(t => !e.dataDriftCorrectedTeamResources?.favoritedFoldersIdSet.has(t.resourceId));
-  let _ = _$$ds(c, u, m);
+  let _ = getAllFavoritedItems(c, u, m);
   let p = !d.has(as);
   let f = useCallback(() => {
     toggleSidebarSectionCollapsedState({
@@ -2842,12 +2842,12 @@ function ai(e) {
       orgId: null
     }, !p);
     p ? d.add(as) : d.$$delete(as);
-    t(U6({
+    t(updateExpandedSectionsAction({
       collapsedCustomSections: d
     }));
   }, [p, d, t]);
   let g = useCallback(() => {
-    t(vr({
+    t(unstarAllFavorites({
       favoriteIds: _.map(e => e.id)
     }));
   }, [t, _]);
@@ -4031,7 +4031,7 @@ function sZ(e) {
   };
   let T = getFeatureFlags().file_browser_sidebar_semantic_html;
   let E = () => {
-    t(_$$pS({
+    t(setNewSectionIndexAction({
       newCustomSectionIndex: 0
     }));
     j();
@@ -4042,7 +4042,7 @@ function sZ(e) {
   let k = useCurrentUserOrgUser();
   let R = k && k.permission === FUserRoleType.ADMIN;
   let A = Fz();
-  let O = D6(r);
+  let O = alwaysTrue(r);
   let F = () => S && l.show_create_new_section_banner ? jsxs('div', {
     className: 'sidebar--betaAnnouncementContainer--FfmFT',
     children: [jsxs('div', {
@@ -4300,13 +4300,13 @@ function s0(e) {
   } : null, [c]);
   let j = Zr(c?.org ?? null);
   let T = useMemo(() => {
-    if (w && w.currentTeamUser && o) return TF(w, o, _);
+    if (w && w.currentTeamUser && o) return processFavorites(w, o, _);
   }, [w, o, _]);
   let E = e.showingFileBrowserLoader;
   if (useEffect(() => {
     if (o && w && w?.currentTeamUser) {
       let e = w.currentTeamUser;
-      !e.fileBrowserPreferences && w.fileBrowserPreferences && l(Sh({
+      !e.fileBrowserPreferences && w.fileBrowserPreferences && l(updateFavoriteResourcesThunk({
         prefs: w.fileBrowserPreferences,
         orderedFolderSubscriptions: w.fileBrowserSectionPreferences?.filter(e => e.teamId === o)[0]?.orderedFolderIds ?? [],
         teamUser: e
@@ -5285,7 +5285,7 @@ let nL = (e, t) => e.baseOrgUser === null ? -1 : t.baseOrgUser === null ? 1 : e.
 let nD = registerModal(e => {
   let t = useModalManager(e);
   let [r, i] = useState('');
-  let [n, o, l] = _$$t5.useTabs({
+  let [n, o, l] = Tabs.useTabs({
     MEMBERS: !0,
     ADMINS: !0
   });
@@ -5307,12 +5307,12 @@ let nD = registerModal(e => {
       children: [jsxs(DialogHeader, {
         children: [jsx(DialogHiddenTitle, {
           children: getI18nString('workspace_view.members_modal.title')
-        }), jsxs(_$$t5.TabStrip, {
+        }), jsxs(Tabs.TabStrip, {
           manager: l,
-          children: [jsx(_$$t5.Tab, {
+          children: [jsx(Tabs.Tab, {
             ...n.MEMBERS,
             children: getI18nString('workspace_view.members_modal.members')
-          }), jsx(_$$t5.Tab, {
+          }), jsx(Tabs.Tab, {
             ...n.ADMINS,
             children: getI18nString('workspace_view.members_modal.admins')
           })]
@@ -5328,7 +5328,7 @@ let nD = registerModal(e => {
           innerClassName: 'workspace_members_modal--membersContainer--16pMi',
           children: jsxs('div', {
             className: 'workspace_members_modal--modalContainer--3d9wu',
-            children: [jsx(_$$t5.TabPanel, {
+            children: [jsx(Tabs.TabPanel, {
               ...o.MEMBERS,
               children: d.length === 0 ? jsx(nP, {
                 content: renderI18nText('workspace_view.members_modal.no_members', {
@@ -5339,7 +5339,7 @@ let nD = registerModal(e => {
                 query: r,
                 users: d
               })
-            }), jsx(_$$t5.TabPanel, {
+            }), jsx(Tabs.TabPanel, {
               ...o.ADMINS,
               children: c.length === 0 ? jsx(nP, {
                 content: renderI18nText('workspace_view.members_modal.no_admins', {
@@ -5433,7 +5433,7 @@ function nB(e) {
         sectionId: a,
         favoriteId: r
       };
-      e ? n(ZW(s)) : n($$if(s));
+      e ? n(addWorkspaceFavorite(s)) : n($$if(s));
     }
   }, [n, workspace]);
   let y = {
@@ -6020,8 +6020,8 @@ function os({
       isDraggable: !1,
       handleOpenItem: m,
       onSelection: e => {
-        n(_$$an());
-        n(PW({
+        n(resetTileSelection());
+        n(selectTilesByKeys({
           type: ComFileType.FILES,
           keys: e.map(e => e.key)
         }));
@@ -6379,7 +6379,7 @@ function oE({
   let f = useMemo(() => _.filter(({
     file: e
   }) => !!e).map(e => _$$bn(e.file)), [_]);
-  let g = _$$nw(f);
+  let g = useSelectedTilesFilter(f);
   let h = useMemo(() => _.sort((e, t) => e.createdAt > t.createdAt ? 1 : -1), [_]);
   return jsxs(Fragment, {
     children: [_.length > 0 ? jsx(_$$A10, {
@@ -6400,9 +6400,9 @@ function oE({
         })
       },
       handleContextMenu: (e, r, a) => {
-        t(_$$an());
+        t(resetTileSelection());
         let s = e.map(e => e.file).filter(e => e !== null);
-        t(PW({
+        t(selectTilesByKeys({
           type: ComFileType.FILES,
           keys: s.map(e => e.key)
         }));
@@ -9663,7 +9663,7 @@ function d8({
       tab: e
     }).href);
   };
-  let [d, c, m] = _$$t5.useManagedTabs({
+  let [d, c, m] = Tabs.useManagedTabs({
     [PublishSourceType.INTERNAL]: !0,
     [PublishSourceType.COMMUNITY]: !0
   }, e, e => {
@@ -9671,7 +9671,7 @@ function d8({
   });
   let _ = Object.keys(PublishSourceType).map(e => {
     let r = PublishSourceType[e] === PublishSourceType.COMMUNITY;
-    return jsx(_$$t5.Tab, {
+    return jsx(Tabs.Tab, {
       ...d[PublishSourceType[e]],
       ...(r && {
         'data-onboarding-key': d5
@@ -9694,7 +9694,7 @@ function d8({
     }, e);
   });
   return jsxs('div', {
-    children: [jsx(_$$t5.TabStrip, {
+    children: [jsx(Tabs.TabStrip, {
       manager: m,
       children: _
     }), jsx(d2, {
@@ -10233,7 +10233,7 @@ function cO({
       from: e
     });
   };
-  let [d, c, m] = _$$t5.useManagedTabs({
+  let [d, c, m] = Tabs.useManagedTabs({
     [ResourceTypeSubset.FILES]: !0,
     [ResourceTypeSubset.PLUGINS]: !0,
     [ResourceTypeSubset.WIDGETS]: !0
@@ -10245,7 +10245,7 @@ function cO({
       count = 0,
       hasMore
     } = o[ResourceTypeSubset[e]];
-    return jsxs(_$$t5.Tab, {
+    return jsxs(Tabs.Tab, {
       ...d[ResourceTypeSubset[e]],
       children: [jsx('span', {
         children: function (e, t) {
@@ -10268,7 +10268,7 @@ function cO({
   });
   return jsx('div', {
     children: jsx(_$$g4, {
-      leftSide: jsx(_$$t5.TabStrip, {
+      leftSide: jsx(Tabs.TabStrip, {
         manager: m,
         children: _
       }),
@@ -11266,9 +11266,9 @@ function u_(e) {
 }
 function uf(e) {
   let t = e.tabs ? jsx(UI3ConditionalWrapper, {
-    children: jsx(_$$t5.TabStrip, {
+    children: jsx(Tabs.TabStrip, {
       manager: e.tabManager,
-      children: e.tabs.map(e => createElement(_$$t5.Tab, {
+      children: e.tabs.map(e => createElement(Tabs.Tab, {
         ...e.tabProps,
         key: e.tabName
       }, e.tabName))
@@ -11352,7 +11352,7 @@ function uy({
   let r = useSelector(e => e.tileSortFilterStateByView);
   let n = ub(t, r, e);
   let o = uv(t, r, e);
-  let [l, d, c] = _$$t5.useManagedTabs({
+  let [l, d, c] = Tabs.useManagedTabs({
     deletedFiles: !0,
     trashedFolders: !0
   }, e.view, useCallback(e => {
@@ -11697,7 +11697,7 @@ function u1({
   currentSharedByFilter: i,
   isListView: n
 }) {
-  e.type === _$$nb.FILE && (r(trackFileClicked({
+  e.type === TileType.FILE && (r(trackFileClicked({
     fileKey: e.file.key,
     entrypoint: 'file tile',
     currentPlanFilter: s,
@@ -11712,34 +11712,34 @@ function u1({
   }));
 }
 let u4 = (e, t) => {
-  let r = _$$Tf.getName(e) || '';
-  let a = _$$Tf.getName(t) || '';
+  let r = TileUtils.getName(e) || '';
+  let a = TileUtils.getName(t) || '';
   return COLLATOR.compare(r, a);
 };
 let u2 = (e, t) => {
-  let r = (_$$Tf.getName(e) || '').toLowerCase();
-  let a = (_$$Tf.getName(t) || '').toLowerCase();
+  let r = (TileUtils.getName(e) || '').toLowerCase();
+  let a = (TileUtils.getName(t) || '').toLowerCase();
   return r === a ? 0 : r < a ? -1 : 1;
 };
 let u5 = (e, t) => {
-  if (e.type !== _$$nb.FILE || t.type !== _$$nb.FILE) return 0;
+  if (e.type !== TileType.FILE || t.type !== TileType.FILE) return 0;
   let r = e.file;
   let a = t.file;
   return r.createdAt < a.createdAt ? 1 : -1;
 };
-let u8 = (e, t) => e.type !== _$$nb.PROTOTYPE || t.type !== _$$nb.PROTOTYPE ? 0 : e.prototype.file_key < t.prototype.file_key ? -1 : 1;
+let u8 = (e, t) => e.type !== TileType.PROTOTYPE || t.type !== TileType.PROTOTYPE ? 0 : e.prototype.file_key < t.prototype.file_key ? -1 : 1;
 let u6 = (e, t) => {
-  let r = _$$Tf.getAccessedAt(e);
-  let a = _$$Tf.getAccessedAt(t);
+  let r = TileUtils.getAccessedAt(e);
+  let a = TileUtils.getAccessedAt(t);
   return r && a ? r > a ? 1 : -1 : a ? -1 : r ? 1 : 0;
 };
-let u3 = (e, t) => _$$Tf.getCreatedAt(e) > _$$Tf.getCreatedAt(t) ? 1 : -1;
+let u3 = (e, t) => TileUtils.getCreatedAt(e) > TileUtils.getCreatedAt(t) ? 1 : -1;
 let u7 = (e, t) => {
-  let r = _$$Tf.getTouchedAt(e);
-  let a = _$$Tf.getTouchedAt(t);
+  let r = TileUtils.getTouchedAt(e);
+  let a = TileUtils.getTouchedAt(t);
   return r === null || a === null ? 0 : r > a ? 1 : -1;
 };
-let u9 = (e, t) => e.type !== _$$nb.FILE && e.type !== _$$nb.REPO || t.type !== _$$nb.FILE && t.type !== _$$nb.REPO ? 0 : (e.type === _$$nb.FILE ? e.file.trashedAt : e.repo.trashed_at) > (t.type === _$$nb.FILE ? t.file.trashedAt : t.repo.trashed_at) ? 1 : -1;
+let u9 = (e, t) => e.type !== TileType.FILE && e.type !== TileType.REPO || t.type !== TileType.FILE && t.type !== TileType.REPO ? 0 : (e.type === TileType.FILE ? e.file.trashedAt : e.repo.trashed_at) > (t.type === TileType.FILE ? t.file.trashedAt : t.repo.trashed_at) ? 1 : -1;
 function me({
   currentPlanFilter: e,
   currentSharedByFilter: t,
@@ -11817,48 +11817,48 @@ function me({
   let H = x.tileSortFilterConfig.viewMode ?? ViewMode.GRID;
   let K = H === ViewMode.LIST;
   let Y = w.view === 'recentsAndSharing' && w.tab === ViewTypeEnum.SHARED_FILES;
-  let J = (e, t, r) => e === PermissionType.ANY || e === PermissionType.SELF && r.type === _$$nb.FILE && r.file.creatorId === t || e === PermissionType.SELF && r.type === _$$nb.REPO && r.branches[0].creator_id === t || e === PermissionType.OTHER && r.type === _$$nb.FILE && r.file.creatorId !== t || e === PermissionType.OTHER && r.type === _$$nb.REPO && r.branches[0].creator_id !== t;
+  let J = (e, t, r) => e === PermissionType.ANY || e === PermissionType.SELF && r.type === TileType.FILE && r.file.creatorId === t || e === PermissionType.SELF && r.type === TileType.REPO && r.branches[0].creator_id === t || e === PermissionType.OTHER && r.type === TileType.FILE && r.file.creatorId !== t || e === PermissionType.OTHER && r.type === TileType.REPO && r.branches[0].creator_id !== t;
   let X = (e, t) => {
     let r = 'design';
-    switch (t.type === _$$nb.FILE ? r = t.file.editorType : t.type === _$$nb.PINNED_FILE ? r = t.file.editorType : t.type === _$$nb.OFFLINE_FILE && (r = t.file.editorType), e) {
+    switch (t.type === TileType.FILE ? r = t.file.editorType : t.type === TileType.PINNED_FILE ? r = t.file.editorType : t.type === TileType.OFFLINE_FILE && (r = t.file.editorType), e) {
       case FileType.ANY:
         return !0;
       case FileType.DESIGN:
-        if (t.type === _$$nb.FILE || t.type === _$$nb.REPO || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'design';
+        if (t.type === TileType.FILE || t.type === TileType.REPO || t.type === TileType.PINNED_FILE || t.type === TileType.OFFLINE_FILE) return r === 'design';
         return !1;
       case FileType.FIGJAM:
-        if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'whiteboard';
+        if (t.type === TileType.FILE || t.type === TileType.PINNED_FILE || t.type === TileType.OFFLINE_FILE) return r === 'whiteboard';
         return !1;
       case FileType.PROTOTYPE:
-        return t.type === _$$nb.PROTOTYPE;
+        return t.type === TileType.PROTOTYPE;
       case FileType.SLIDES:
-        if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'slides';
+        if (t.type === TileType.FILE || t.type === TileType.PINNED_FILE || t.type === TileType.OFFLINE_FILE) return r === 'slides';
         return !1;
       case FileType.SITES:
-        if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'sites';
+        if (t.type === TileType.FILE || t.type === TileType.PINNED_FILE || t.type === TileType.OFFLINE_FILE) return r === 'sites';
         return !1;
       case FileType.COOPER:
-        if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'cooper';
+        if (t.type === TileType.FILE || t.type === TileType.PINNED_FILE || t.type === TileType.OFFLINE_FILE) return r === 'cooper';
         return !1;
       case FileType.MAKE:
-        if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'figmake';
+        if (t.type === TileType.FILE || t.type === TileType.PINNED_FILE || t.type === TileType.OFFLINE_FILE) return r === 'figmake';
         return !1;
       default:
         throwTypeError(e);
     }
   };
-  let Q = (e, t) => !e || e === `${_$$Tf.getSharedBy(t)}`;
+  let Q = (e, t) => !e || e === `${TileUtils.getSharedBy(t)}`;
   let Z = useCallback((e, t) => {
     if (w.view === 'recentsAndSharing' && w.tab === ViewTypeEnum.SHARED_FILES || !e || !e.planId) return !0;
     let r = e.planId;
     switch (t.type) {
-      case _$$nb.FILE:
+      case TileType.FILE:
         return (e.planType === 'org' ? t.file.parentOrgId : t.file.teamId) === r;
-      case _$$nb.REPO:
+      case TileType.REPO:
         return (e.planType === 'org' ? t.repo.parent_org_id : t.repo.team_id) === r;
-      case _$$nb.PROTOTYPE:
+      case TileType.PROTOTYPE:
         return (e.planType === 'org' ? t.prototype.parent_org?.id : t.prototype.parent_team?.id) === r;
-      case _$$nb.OFFLINE_FILE:
+      case TileType.OFFLINE_FILE:
         return e.planType === 'org' && t.file.orgId === r;
       default:
         return !1;
@@ -11869,7 +11869,7 @@ function me({
     let a;
     let s;
     let i = e.filter(e => Q(t.filters.sharedBy, e) && X(t.filters.fileType, e) && J(t.filters.creator, A.user?.id, e) && Z(t.filters.plan, e));
-    if (r = Y ? i.filter(e => e.type === _$$nb.FILE || e.type === _$$nb.PROTOTYPE || e.type === _$$nb.REPO) : i.filter(e => e.type === _$$nb.FILE || e.type === _$$nb.REPO || e.type === _$$nb.OFFLINE_FILE), w.view === 'recentsAndSharing' && w.tab === ViewTypeEnum.SHARED_FILES) return i;
+    if (r = Y ? i.filter(e => e.type === TileType.FILE || e.type === TileType.PROTOTYPE || e.type === TileType.REPO) : i.filter(e => e.type === TileType.FILE || e.type === TileType.REPO || e.type === TileType.OFFLINE_FILE), w.view === 'recentsAndSharing' && w.tab === ViewTypeEnum.SHARED_FILES) return i;
     let n = t.sort.dir === SortOrder.DESC;
     switch (t.sort.key) {
       case SortField.ACCESSED_AT:
@@ -11905,12 +11905,12 @@ function me({
         return [];
     }
     if (a = n ? _$$f5.reverse(a) : a, s.sort(a), l) {
-      for (; s[s.length - 1]?.type === _$$nb.OFFLINE_FILE;) s.pop();
+      for (; s[s.length - 1]?.type === TileType.OFFLINE_FILE;) s.pop();
     }
     return s;
   }, [Y, Z, l, C, w, A.user?.id]);
   let et = useMemo(() => ee(v, x.tileSortFilterConfig), [ee, v, x.tileSortFilterConfig]);
-  let er = useAtomWithSubscription(Y6);
+  let er = useAtomWithSubscription(renamingStateAtom);
   let ea = useCallback((r, a, s) => {
     u1({
       tile: r,
@@ -11930,7 +11930,7 @@ function me({
       selectedBranchKeyByRepoId: i,
       renamingItem: n
     }) {
-      if (_$$Tf.isRenaming(e, n) || e.type === _$$nb.FILE && e.file.trashedAt || e.type === _$$nb.REPO && e.repo.trashed_at) {
+      if (TileUtils.isRenaming(e, n) || e.type === TileType.FILE && e.file.trashedAt || e.type === TileType.REPO && e.repo.trashed_at) {
         t.preventDefault();
         t.stopPropagation();
         return;
@@ -11942,7 +11942,7 @@ function me({
       if (desktopAPIInstance) {
         let a;
         switch (l = l ?? OpenTarget.FOCAL_TAB, t.preventDefault(), t.stopPropagation(), e.type) {
-          case _$$nb.FILE:
+          case TileType.FILE:
             a = !!(e.file.isTeamTemplate && canUseCustomTemplates(s));
             desktopAPIInstance.openFile({
               fileKey: e.file.key,
@@ -11955,7 +11955,7 @@ function me({
               userId: d?.id
             });
             break;
-          case _$$nb.PINNED_FILE:
+          case TileType.PINNED_FILE:
             a = !!(e.file.isTeamTemplate && canUseCustomTemplates(s));
             desktopAPIInstance.openFile({
               fileKey: e.file.key,
@@ -11966,10 +11966,10 @@ function me({
               userId: d?.id
             });
             break;
-          case _$$nb.PROTOTYPE:
+          case TileType.PROTOTYPE:
             desktopAPIInstance.openPrototype(e.prototype.file_key, e.prototype.page_id, e.prototype.fig_file.name || '', l, d?.id);
             break;
-          case _$$nb.REPO:
+          case TileType.REPO:
             let n = findBranchById(e.repo, e.branches, i);
             desktopAPIInstance.openFile({
               fileKey: n.key,
@@ -11981,7 +11981,7 @@ function me({
               userId: d?.id
             });
             break;
-          case _$$nb.OFFLINE_FILE:
+          case TileType.OFFLINE_FILE:
             r(handleAutosaveFileCreation({
               file: e.file,
               openNewFileIn: TabOpenBehavior.NEW_TAB,
@@ -11994,7 +11994,7 @@ function me({
         return;
       }
       if (l != null) {
-        if (r(hideDropdownAction()), e.type === _$$nb.OFFLINE_FILE) {
+        if (r(hideDropdownAction()), e.type === TileType.OFFLINE_FILE) {
           r(handleAutosaveFileCreation({
             file: e.file,
             openNewFileIn: TabOpenBehavior.NEW_TAB,
@@ -12005,7 +12005,7 @@ function me({
           return;
         }
         if (t instanceof KeyboardEvent) {
-          let r = _$$Tf.getUrl(e, i);
+          let r = TileUtils.getUrl(e, i);
           customHistory.redirect(r, '_blank');
           t.preventDefault();
           t.stopPropagation();
@@ -12028,7 +12028,7 @@ function me({
         selectedView: a
       };
       switch (e.type) {
-        case _$$nb.FILE:
+        case TileType.FILE:
           compareValues(m, e.file.parentOrgId, _, e.file.teamId) ? navigateToFile({
             file: {
               key: e.file.key,
@@ -12041,7 +12041,7 @@ function me({
             prevSelectedView: p
           }));
           break;
-        case _$$nb.PINNED_FILE:
+        case TileType.PINNED_FILE:
           compareValues(m, e.file.parentOrgId, _, e.file.teamId) ? navigateToFile({
             file: {
               key: e.file.key,
@@ -12054,7 +12054,7 @@ function me({
             prevSelectedView: p
           }));
           break;
-        case _$$nb.PROTOTYPE:
+        case TileType.PROTOTYPE:
           let g = e.prototype.fig_file;
           compareValues(m, g.parent_org_id, _, g.team_id) ? navigateToFile({
             base: 'proto',
@@ -12070,7 +12070,7 @@ function me({
             prevSelectedView: p
           }));
           break;
-        case _$$nb.REPO:
+        case TileType.REPO:
           {
             let t = findBranchById(e.repo, e.branches, i);
             if (!t) throw new Error(`Branch not found for repo ${e.repo.id}`);
@@ -12087,7 +12087,7 @@ function me({
             }));
             break;
           }
-        case _$$nb.OFFLINE_FILE:
+        case TileType.OFFLINE_FILE:
           r(handleAutosaveFileCreation({
             file: e.file,
             openNewFileIn: TabOpenBehavior.SAME_TAB,
@@ -12119,7 +12119,7 @@ function me({
     });
   }, [K, e, t, w, $]);
   let ei = useCallback((e, t, r) => {
-    let a = _$$Tf.getId(e);
+    let a = TileUtils.getId(e);
     _$$$5.start(a);
     show({
       data: {
@@ -12136,7 +12136,7 @@ function me({
       }
     });
   }, [show]);
-  let en = _$$nw(v);
+  let en = useSelectedTilesFilter(v);
   let [eo, el] = useState([]);
   let {
     setVisibleTiles
@@ -12177,13 +12177,13 @@ function me({
       let r = [];
       e.forEach(e => {
         switch (e.type) {
-          case _$$nb.FILE:
+          case TileType.FILE:
             r.push({
               fileKey: e.file.key
             });
             break;
-          case _$$nb.REPO:
-            let t = yF(e);
+          case TileType.REPO:
+            let t = createPrototypeTile(e);
             r.push({
               fileKey: t.key
             });
@@ -12346,7 +12346,7 @@ function me({
         enabled: showing,
         properties: {
           tileType: e?.type,
-          tileFileId: e?.type === _$$nb.FILE ? e?.file.key : void 0
+          tileFileId: e?.type === TileType.FILE ? e?.file.key : void 0
         },
         children: jsx(_$$i4, {
           tileActions: b,
@@ -12446,7 +12446,7 @@ function ma() {
         if (t.file && t.file.trashedAt) {
           let r;
           e.push((r = t.file, {
-            type: _$$nb.FILE,
+            type: TileType.FILE,
             file: {
               ...r,
               signedPreviewThumbnailUrls: null
@@ -12458,7 +12458,7 @@ function ma() {
             if (!e.sourceFile) return null;
             let t = _$$H3.toSinatra(e);
             return {
-              type: _$$nb.REPO,
+              type: TileType.REPO,
               repo: t,
               branches: [fileEntityDataMapper.toSinatra(e.sourceFile)],
               selectedBranchKey: e.sourceFile.key
@@ -12472,8 +12472,8 @@ function ma() {
     let o = useDispatch();
     useEffect(() => {
       if (n.data) {
-        let e = n.data?.filter(e => e.type === _$$nb.FILE).map(e => fileEntityDataMapper.toSinatra(e.file)) || [];
-        let t = n.data?.filter(e => e.type === _$$nb.REPO).map(e => e.repo) || [];
+        let e = n.data?.filter(e => e.type === TileType.FILE).map(e => fileEntityDataMapper.toSinatra(e.file)) || [];
+        let t = n.data?.filter(e => e.type === TileType.REPO).map(e => e.repo) || [];
         o(batchPutFileAction({
           files: e
         }));
@@ -14029,14 +14029,14 @@ function _c(e) {
     !c.isFetchingNextPage && c.hasNextPage && u.fetchNextPage();
   }, [c.isFetchingNextPage, c.hasNextPage, u]);
   let f = useMemo(() => {
-    let e = (c.data?.files || []).map(e => _$$fA(e));
+    let e = (c.data?.files || []).map(e => createFileTile(e));
     let t = c.data?.filesByRepoId || {};
     return [...e, ...(c.data?.repos || []).map(e => ({
-      type: _$$nb.REPO,
+      type: TileType.REPO,
       repo: e,
       branches: t[e.id],
       selectedBranchKey: selectedBranchKeyByRepoId[e.id] || ''
-    })), ...Object.values(n).filter(e => e.orgId === o).map(_$$gB)];
+    })), ...Object.values(n).filter(e => e.orgId === o).map(createOfflineFileTile)];
   }, [o, c.data?.files, c.data?.filesByRepoId, c.data?.repos, n, selectedBranchKeyByRepoId]);
   let h = jsxs(Fragment, {
     children: [jsx(me, {
@@ -14333,9 +14333,9 @@ function _L(e) {
   let {
     item
   } = e;
-  let o = _$$Tf.getFileOrMainBranchKey(item) ?? '';
+  let o = TileUtils.getFileOrMainBranchKey(item) ?? '';
   let l = e => a => {
-    a.detail > 1 && !_$$Tf.getTrashedAt(item) && (u1({
+    a.detail > 1 && !TileUtils.getTrashedAt(item) && (u1({
       tile: e,
       index: 0,
       dispatch: t,
@@ -14364,21 +14364,21 @@ function _L(e) {
       children: [jsx('button', {
         className: 'drafts_to_move_page_view--fileName--U3mn4',
         onClick: l(item),
-        children: _$$Tf.getName(item)
+        children: TileUtils.getName(item)
       }), e.shouldDisplayFileDates && jsxs('div', {
         className: 'drafts_to_move_page_view--fileCellDatesSection--LFnvg',
         children: [jsx('span', {
           className: _I,
           children: renderI18nText('file_browser.drafts_to_move.file_created_at_label', {
             timeDifference: jsx(RelativeTimeDisplay, {
-              date: _$$Tf.getCreatedAt(item)
+              date: TileUtils.getCreatedAt(item)
             })
           })
         }), jsx('span', {
           className: _I,
           children: renderI18nText('file_browser.drafts_to_move.file_last_modified_at_label', {
             timeDifference: jsx(RelativeTimeDisplay, {
-              date: _$$Tf.getTouchedAt(item) ?? ''
+              date: TileUtils.getTouchedAt(item) ?? ''
             })
           })
         })]
@@ -14514,20 +14514,20 @@ function _M() {
     let t = X.length + Q.length;
     q && !M && (e === 0 && t > 0 && R('deleted-draft-files'), B(!0));
   }, [q, M, ee.length, Z.length, Q.length, X.length]);
-  let et = useMemo(() => ee.concat(X).map(e => _$$fA(e)), [ee, X]);
+  let et = useMemo(() => ee.concat(X).map(e => createFileTile(e)), [ee, X]);
   let er = k === 'deleted-draft-files' ? X : ee;
-  let ea = useMemo(() => er.map(e => _$$fA(e)), [er]);
+  let ea = useMemo(() => er.map(e => createFileTile(e)), [er]);
   let ei = useMemo(() => Z.map(e => {
     let t = n[e.id].map(e => c[e]).filter(e => !!e);
     return {
-      type: _$$nb.REPO,
+      type: TileType.REPO,
       repo: e,
       branches: t,
       selectedBranchKey: m[e.id]
     };
   }), [Z, m, c, n]);
   let en = useMemo(() => Q.map(e => ({
-    type: _$$nb.REPO,
+    type: TileType.REPO,
     repo: e.repo,
     branches: [e.main_file],
     selectedBranchKey: e.main_file?.key
@@ -14560,8 +14560,8 @@ function _M() {
     let t = [];
     let r = [];
     e.forEach(e => {
-      e.type === _$$nb.FILE && t.push(e.file);
-      e.type === _$$nb.REPO && r.push(e.repo);
+      e.type === TileType.FILE && t.push(e.file);
+      e.type === TileType.REPO && r.push(e.repo);
     });
     return {
       draftsToMove: t,
@@ -14610,7 +14610,7 @@ function _M() {
     let n = [{
       name: getI18nString('file_browser.drafts_to_move.table_header_name'),
       className: 'drafts_to_move_page_view--nameColumn--sSZYF drafts_to_move_page_view--column--jpRzM table--column--974RA',
-      getSortValue: e => _$$Tf.getName(e),
+      getSortValue: e => TileUtils.getName(e),
       cellComponent: e => jsx(_L, {
         item: e,
         shouldDisplayFileDates: !i
@@ -14619,9 +14619,9 @@ function _M() {
     i && n.push({
       name: getI18nString('file_browser.drafts_to_move.table_header_last_modified'),
       className: _N,
-      getSortValue: e => _$$Tf.getTouchedAt(e) ?? '',
+      getSortValue: e => TileUtils.getTouchedAt(e) ?? '',
       cellComponent: e => {
-        let t = _$$Tf.getTouchedAt(e);
+        let t = TileUtils.getTouchedAt(e);
         return t ? jsx(RelativeTimeDisplay, {
           date: t
         }) : '';
@@ -14629,9 +14629,9 @@ function _M() {
     }, {
       name: getI18nString('file_browser.drafts_to_move.table_header_created'),
       className: _N,
-      getSortValue: e => _$$Tf.getCreatedAt(e),
+      getSortValue: e => TileUtils.getCreatedAt(e),
       cellComponent: e => jsx(RelativeTimeDisplay, {
-        date: _$$Tf.getCreatedAt(e)
+        date: TileUtils.getCreatedAt(e)
       })
     });
     n.push({
@@ -14639,7 +14639,7 @@ function _M() {
       className: 'drafts_to_move_page_view--moveButtonColumn--Mvc2P drafts_to_move_page_view--column--jpRzM table--column--974RA',
       cellComponent: s => r === 0 ? jsxs(Fragment, {
         children: [jsx(ButtonSecondaryTracked, {
-          className: U()('drafts_to_move_page_view--openDraftButton--zXZGf', cssBuilderInstance.if(!!_$$Tf.getTrashedAt(s), cssBuilderInstance.invisible).$),
+          className: U()('drafts_to_move_page_view--openDraftButton--zXZGf', cssBuilderInstance.if(!!TileUtils.getTrashedAt(s), cssBuilderInstance.invisible).$),
           onClick: e => t(e, s),
           children: renderI18nText('file_browser.drafts_to_move.open_draft_button')
         }), jsx(ButtonSecondaryTracked, {
@@ -14730,7 +14730,7 @@ function _M() {
           }),
           columns: ev,
           emptyContent: '',
-          getItemKey: e => _$$Tf.getFileOrMainBranchKey(e) ?? '',
+          getItemKey: e => TileUtils.getFileOrMainBranchKey(e) ?? '',
           isLoading: !_$$s6,
           itemTypeContext: {
             itemType: 'draftToMove',
@@ -15092,7 +15092,7 @@ function _Z({
   let m = _$$v4();
   let _ = useCallback((t, r, a) => {
     m(t, r);
-    let s = t.type === _$$nb.PINNED_FILE ? t.file : null;
+    let s = t.type === TileType.PINNED_FILE ? t.file : null;
     trackFileBrowserFileClick(FILE_BROWSER_FILE_CLICKED, s, {
       entrypoint: a,
       selectedView: o.view,
@@ -15105,8 +15105,8 @@ function _Z({
     _(_4(e.file), t, 'pinned files');
   }, [_]);
   let f = useCallback((e, t, r) => {
-    n(_$$an());
-    n(PW({
+    n(resetTileSelection());
+    n(selectTilesByKeys({
       type: ComFileType.PINNED_FILES,
       keys: e.map(e => e.file.key)
     }));
@@ -15136,7 +15136,7 @@ function _Z({
   let h = useMemo(() => t.filter(({
     file: e
   }) => !!e).map(e => _4(e.file)), [t]);
-  let x = _$$nw(h);
+  let x = useSelectedTilesFilter(h);
   let b = useMemo(() => t.sort((e, t) => e.file.createdAt > t.file.createdAt ? 1 : -1), [t]);
   return jsxs('div', {
     className: cssBuilderInstance.px32.pb8.m0.$,
@@ -15206,7 +15206,7 @@ function _1({
 }
 function _4(e) {
   return {
-    type: _$$nb.PINNED_FILE,
+    type: TileType.PINNED_FILE,
     file: e
   };
 }
@@ -15688,7 +15688,7 @@ function pS(e) {
     }));
   }, [n, t, e.folderId]);
   let o = useCallback(() => {
-    t(_$$an());
+    t(resetTileSelection());
   }, [t]);
   return n.length !== 0 ? jsxs('div', {
     children: [jsx('div', {
@@ -15764,8 +15764,8 @@ function pk({
     isShowingLockedRedesign: b || f && p,
     additionalVisibilityRequirements: !n
   });
-  let E = [...useMemo(() => e.map(e => _$$fA(e)), [e]), ...d.filter(e => !e.trashed_at).map(e => ({
-    type: _$$nb.REPO,
+  let E = [...useMemo(() => e.map(e => createFileTile(e)), [e]), ...d.filter(e => !e.trashed_at).map(e => ({
+    type: TileType.REPO,
     repo: e,
     branches: t[e.id],
     selectedBranchKey: x[e.id] || ''
@@ -15839,7 +15839,7 @@ function p$(e) {
     currentTeamId: null
   });
   let d = useMemo(() => {
-    if (l.status === 'loaded') return T0(l.data, e.folder.id);
+    if (l.status === 'loaded') return findFavoritedItem(l.data, e.folder.id);
   }, [l, e.folder.id]);
   if (l.status !== 'loaded') {
     return jsx('div', {
@@ -15849,7 +15849,7 @@ function p$(e) {
       })
     });
   }
-  let c = _$$gV(l.data, o);
+  let c = isFavoritesLimitReached(l.data, o);
   let u = e.dropdownKey && n && n.type === e.dropdownKey && n.data && n.data.targetRect;
   let m = r.current && n?.data?.targetRef === r.current && n?.type === jU;
   let _ = r.current;
@@ -16018,7 +16018,7 @@ function p5({
       sectionId: a,
       favoriteId: r
     };
-    t ? n(Mv(s)) : n(jv(s));
+    t ? n(addFolderFavorite(s)) : n(removeFolderFromFavorites(s));
   };
   let F = function (e) {
     let t = _$$u7(e.id);
@@ -16720,15 +16720,15 @@ function fv(e) {
       orgViewTab: e
     }));
   };
-  let [d, c, u] = _$$t5.useManagedTabs(o, e.selectedTab, e => {
+  let [d, c, u] = Tabs.useManagedTabs(o, e.selectedTab, e => {
     l(e);
   });
-  let m = fx.map(e => createElement(_$$t5.Tab, {
+  let m = fx.map(e => createElement(Tabs.Tab, {
     ...d[e],
     key: e
   }, fb(e)));
   let _ = jsx(UI3ConditionalWrapper, {
-    children: jsx(_$$t5.TabStrip, {
+    children: jsx(Tabs.TabStrip, {
       manager: u,
       children: m
     })
@@ -16868,7 +16868,7 @@ function fk(e) {
         sectionId: r,
         favoriteId: t
       };
-      e ? b(ZW(a)) : b($$if(a));
+      e ? b(addWorkspaceFavorite(a)) : b($$if(a));
     }
   }, [b, workspace]);
   f && (isColorDarkByLuminance(f) ? (t = 'org_page_view--workspaceTileTitleColorForDarkBackground--m6sFp', r = 'org_page_view--secondaryTextColorOnDarkBackground--7Ru-V') : (t = 'org_page_view--workspaceTileTitleColorForLightBackground---zSTU', r = 'org_page_view--secondaryTextColorOnLightBackground--68byE'));
@@ -18567,7 +18567,7 @@ function gz(e) {
               signedPreviewThumbnailUrls: null,
               trackTags: null
             };
-            return _$$fA(fileEntityDataMapper.toSinatra(a), {
+            return createFileTile(fileEntityDataMapper.toSinatra(a), {
               sharedAt: r.sharedAt,
               sharedByUser: r.sharedByUser
             });
@@ -18594,7 +18594,7 @@ function gz(e) {
               ...r
             });
             return convertCamelToSnakeWithLeading({
-              type: _$$nb.REPO,
+              type: TileType.REPO,
               repo: n,
               branches: i,
               selectedBranchKey: ''
@@ -18615,7 +18615,7 @@ function gz(e) {
               ...r
             });
             return convertCamelToSnakeWithLeading({
-              type: _$$nb.PROTOTYPE,
+              type: TileType.PROTOTYPE,
               prototype: a
             }, {
               prototypePerms: _$$R10(prototype)
@@ -18944,16 +18944,16 @@ function g2({
     _editorTypeRaw: r
   });
   let l = O8();
-  let d = useMemo(() => n.transform(e => e.map(e => _$$fA(e))), [n]);
-  let c = useMemo(() => l.transform(e => e.map(Nu)), [l]);
+  let d = useMemo(() => n.transform(e => e.map(e => createFileTile(e))), [n]);
+  let c = useMemo(() => l.transform(e => e.map(createPrototypeTile)), [l]);
   let u = function () {
     let e = useSelector(e => e.recentRepos);
     let t = useSelector(e => e.selectedBranchKeyByRepoId);
-    return useMemo(() => e.map(e => _$$uy(e, t)), [e, t]);
+    return useMemo(() => e.map(e => findBestBranchForRepoTile(e, t)), [e, t]);
   }();
   let m = function () {
     let e = useUnsyncedAutosaveFiles();
-    return useMemo(() => Object.values(e).map(_$$gB), [e]);
+    return useMemo(() => Object.values(e).map(createOfflineFileTile), [e]);
   }();
   let _ = useMemo(() => resourceUtils.merge([d, c], u, m), [m, d, c, u]);
   let p = useMemo(() => ({
@@ -19214,21 +19214,21 @@ function ha(e) {
     filters: p,
     tab: t
   }, 'recentsAndSharingTileFilters');
-  let [y, w, j] = _$$t5.useManagedTabs({
+  let [y, w, j] = Tabs.useManagedTabs({
     [ViewTypeEnum.RECENTLY_VIEWED]: !0,
     [ViewTypeEnum.SHARED_FILES]: !0,
     [ViewTypeEnum.SHARED_PROJECTS]: !0
   }, e.selectedTab, e => {
     g(e);
   });
-  let T = he.map((e, t) => jsx(_$$t5.Tab, {
+  let T = he.map((e, t) => jsx(Tabs.Tab, {
     ...y[e],
     children: ht(e)
   }, t));
   let C = [v, b];
   return jsx(_$$g4, {
     leftSide: jsx(UI3ConditionalWrapper, {
-      children: jsx(_$$t5.TabStrip, {
+      children: jsx(Tabs.TabStrip, {
         manager: j,
         children: T
       })
@@ -19443,7 +19443,7 @@ function hf(e) {
     currentTeamId: null
   });
   let d = useMemo(() => {
-    if (l.status === 'loaded') return T0(l.data, e.team.id);
+    if (l.status === 'loaded') return findFavoritedItem(l.data, e.team.id);
   }, [l, e.team.id]);
   if (l.status !== 'loaded') {
     return jsx('div', {
@@ -19453,7 +19453,7 @@ function hf(e) {
       })
     });
   }
-  let c = _$$gV(l.data, o);
+  let c = isFavoritesLimitReached(l.data, o);
   let u = e.dropdownKey && n && n.type === e.dropdownKey && n.data && n.data.targetRect;
   let m = r.current && n?.data?.targetRef === r.current && n?.type === jU;
   let _ = r.current;
@@ -19881,7 +19881,7 @@ function hM({
         sectionId: a,
         favoriteId: r
       };
-      t ? C(DN(s)) : C(_$$ox(s));
+      t ? C(addTeamFavorite(s)) : C(removeTeamFavorite(s));
     }
   }, [C, e]);
   let L = () => {
@@ -20711,7 +20711,7 @@ let xr = e => {
       config: x.tileSortFilterConfig
     })
   }, 'sort-filter')] : [];
-  let [H, K, Y] = _$$t5.useManagedTabs({
+  let [H, K, Y] = Tabs.useManagedTabs({
     [InterProfileType.INTERNAL_PROFILE]: !0,
     [InterProfileType.INTERNAL_PROFILE_POSTS]: !0
   }, V, e => {
@@ -20723,12 +20723,12 @@ let xr = e => {
   });
   let J = jsx(_$$g4, {
     leftSide: _ ? jsx(UI3ConditionalWrapper, {
-      children: jsxs(_$$t5.TabStrip, {
+      children: jsxs(Tabs.TabStrip, {
         manager: Y,
-        children: [jsx(_$$t5.Tab, {
+        children: [jsx(Tabs.Tab, {
           ...H[InterProfileType.INTERNAL_PROFILE],
           children: getI18nString('internal_profile.file_contributions')
-        }, InterProfileType.INTERNAL_PROFILE), jsx(_$$t5.Tab, {
+        }, InterProfileType.INTERNAL_PROFILE), jsx(Tabs.Tab, {
           ...H[InterProfileType.INTERNAL_PROFILE_POSTS],
           children: getI18nString('internal_profile.posts')
         }, InterProfileType.INTERNAL_PROFILE_POSTS)]
@@ -20790,7 +20790,7 @@ let xr = e => {
       source_file_key: null,
       is_try_file: !1
     };
-    return _$$fA(t);
+    return createFileTile(t);
   }(e)) : [], [$]);
   return wrapWithTracking(jsx(_$$r4, {
     scrollableContainerClass: 'internal_user_profile_page_view--pageContainer--FQu11',
@@ -20821,14 +20821,14 @@ let xr = e => {
               enabled: showing,
               properties: {
                 tileType: e?.type,
-                tileFileId: e?.type === _$$nb.FILE ? e?.file.key : void 0
+                tileFileId: e?.type === TileType.FILE ? e?.file.key : void 0
               },
               children: jsx(_$$i4, {
                 tileActions: xt,
                 selectedTiles: e ? [e] : [],
                 tile: e,
                 openTile: () => {
-                  e?.type === _$$nb.FILE && openFileInFullscreen(r, e.file);
+                  e?.type === TileType.FILE && openFileInFullscreen(r, e.file);
                 },
                 dropdownVisible: showing
               })
@@ -22115,7 +22115,7 @@ class x8 extends PureComponent {
       return s;
     };
     this.onTick = () => {
-      this.payload != null && this.props.dispatch(_$$Z5.onTick({
+      this.payload != null && this.props.dispatch(DowntimeActionsEnum.onTick({
         payload: this.payload,
         hostname: window.location.hostname,
         currentTimeMs: Date.now()
@@ -22183,8 +22183,8 @@ function x6(e) {
         case _$$A30.Warning:
           if (payload && notifMinutesRemaining != null && hidingDowntimeNotif !== _$$y5.warningHidden) {
             let r = n(notifMinutesRemaining);
-            let s = i(payload.helpcenterUrl, _$$Z5.hideWarningNotif());
-            let o = a(_$$Z5.hideWarningNotif());
+            let s = i(payload.helpcenterUrl, DowntimeActionsEnum.hideWarningNotif());
+            let o = a(DowntimeActionsEnum.hideWarningNotif());
             dispatch(notificationActions.dequeue({
               type: NotificationType.DOWNTIME
             }));
@@ -22200,8 +22200,8 @@ function x6(e) {
           break;
         case _$$A30.Ongoing:
           if (payload && hidingDowntimeNotif !== _$$y5.ongoingHidden) {
-            let r = i(payload.helpcenterUrl, _$$Z5.hideOngoingNotif());
-            let s = a(_$$Z5.hideOngoingNotif());
+            let r = i(payload.helpcenterUrl, DowntimeActionsEnum.hideOngoingNotif());
+            let s = a(DowntimeActionsEnum.hideOngoingNotif());
             dispatch(notificationActions.dequeue({
               type: NotificationType.DOWNTIME
             }));

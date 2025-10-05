@@ -3,7 +3,7 @@ import { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { noop } from 'lodash-es';
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { r as _$$r } from "../905/571838";
 import { k as _$$k } from "../905/792988";
 import { q as _$$q } from "../905/820062";
@@ -425,7 +425,7 @@ export function $$eE0({
   }, [debouncedAssetSearch, flushDebouncedAssetSearch, C, eP, eL]);
   let ek = _$$s3();
   let eM = useRef(null);
-  let [eF, ej, eU] = _$$t.useTabs({
+  let [eF, ej, eU] = Tabs.useTabs({
     [xA.COMPONENTS]: !0,
     [xA.FRAGMENTS]: d,
     [xA.COMMUNITY]: c
@@ -615,7 +615,7 @@ export function $$eE0({
             children: [jsx("div", {
               children: (d || c) && eW
             }), jsxs("div", {
-              children: [eq && jsx(_$$t.TabPanel, {
+              children: [eq && jsx(Tabs.TabPanel, {
                 ...ej[xA.COMPONENTS],
                 children: jsx("div", {
                   className: cssBuilderInstance.h24.flex.itemsCenter.$,
@@ -627,7 +627,7 @@ export function $$eE0({
                     showTooltipOnEllipsis: !0
                   })
                 })
-              }), d && jsx(_$$t.TabPanel, {
+              }), d && jsx(Tabs.TabPanel, {
                 ...ej[xA.FRAGMENTS],
                 children: jsx("div", {
                   className: cssBuilderInstance.h24.flex.itemsCenter.$,
@@ -636,7 +636,7 @@ export function $$eE0({
                     entryPoint: G4.ACTIONS_ASSETS_TAB_DETAIL
                   })
                 })
-              }), c && jsx(_$$t.TabPanel, {
+              }), c && jsx(Tabs.TabPanel, {
                 ...ej[xA.COMMUNITY],
                 children: jsx("div", {
                   className: cssBuilderInstance.h24.$
@@ -651,7 +651,7 @@ export function $$eE0({
         value: {
           activeTabId: eU.activeTab
         },
-        children: [jsx(_$$t.TabPanel, {
+        children: [jsx(Tabs.TabPanel, {
           ...ej[xA.COMPONENTS],
           children: jsx(_$$q2, {
             children: eE ? jsx(_$$S2, {
@@ -671,7 +671,7 @@ export function $$eE0({
               }
             })
           }, eK)
-        }), d && jsx(_$$t.TabPanel, {
+        }), d && jsx(Tabs.TabPanel, {
           ...ej[xA.FRAGMENTS],
           children: jsx(_$$q2, {
             children: jsx(_$$M, {
@@ -684,7 +684,7 @@ export function $$eE0({
               entryPoint: G4.ACTIONS_ASSETS_TAB_DETAIL
             })
           }, eY)
-        }), c && jsx(_$$t.TabPanel, {
+        }), c && jsx(Tabs.TabPanel, {
           ...ej[xA.COMMUNITY],
           children: jsx(_$$q2, {
             children: jsx(_$$M, {

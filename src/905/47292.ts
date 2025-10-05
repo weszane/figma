@@ -1,24 +1,24 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { useSubscription } from "../figma_app/288654";
+import * as stylex from "@stylexjs/stylex";
+import { useCallback, useMemo } from "react";
+import { jsx, jsxs } from "react/jsx-runtime";
+import { FileRowLeft, FileRowRight } from "../905/42209";
+import { getFilterDisplayName } from "../905/55862";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { useCurrentUserOrgId } from "../905/845253";
-import { WorkspacesDirectoryView } from "../figma_app/43951";
-import { wM } from "../figma_app/329496";
-import { useMemo, useCallback } from "react";
-import { bL, gZ } from "../905/598775";
-import { ButtonPrimitive } from "../905/632989";
-import { e as _$$e } from "../905/916195";
-import { textDisplayConfig } from "../905/687265";
-import { stylex } from "@stylexjs/stylex";
-import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { cssBuilderInstance } from "../cssbuilder/589278";
-import { useCurrentPrivilegedPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
-import { getCurrentTeamId } from "../figma_app/598018";
-import { SF } from "../905/55862";
+import { bL, gZ } from "../905/598775";
+import { getFeatureFlags } from "../905/601108";
+import { ButtonPrimitive } from "../905/632989";
+import { textDisplayConfig } from "../905/687265";
 import { w } from "../905/768636";
-import { h5, yz } from "../905/42209";
+import { useCurrentUserOrgId } from "../905/845253";
 import { p as _$$p } from "../905/895920";
+import { e as _$$e } from "../905/916195";
+import { cssBuilderInstance } from "../cssbuilder/589278";
+import { WorkspacesDirectoryView } from "../figma_app/43951";
+import { useSubscription } from "../figma_app/288654";
+import { wM } from "../figma_app/329496";
+import { getParentOrgIdIfOrgLevel, useCurrentPrivilegedPlan } from "../figma_app/465071";
+import { getCurrentTeamId } from "../figma_app/598018";
 let E = {
   leftSide: {
     display: "x78zum5",
@@ -37,20 +37,20 @@ let E = {
     $$css: !0
   },
   row: {
-    display: "xrvj5dj",
-    height: "xsdox4t",
-    gridTemplateColumns: "x1j4phcj",
-    alignItems: "x6s0dn4",
-    paddingLeft: "x1k8dnhd",
-    paddingInlineStart: null,
-    paddingInlineEnd: null,
-    cursor: "xt0e3qv",
-    width: "xh8yej3",
-    justifyItems: "x1olij9z",
-    boxSizing: "x9f619",
+    "display": "xrvj5dj",
+    "height": "xsdox4t",
+    "gridTemplateColumns": "x1j4phcj",
+    "alignItems": "x6s0dn4",
+    "paddingLeft": "x1k8dnhd",
+    "paddingInlineStart": null,
+    "paddingInlineEnd": null,
+    "cursor": "xt0e3qv",
+    "width": "xh8yej3",
+    "justifyItems": "x1olij9z",
+    "boxSizing": "x9f619",
     ":hover_backgroundColor": "xv2f06h",
     ":hover_color": "x1c5oinq",
-    $$css: !0
+    "$$css": !0
   },
   rowUi3: {
     height: "x1vqgdyp",
@@ -78,7 +78,7 @@ function x({
   let o = getParentOrgIdIfOrgLevel(s);
   let l = s?.name;
   let m = getCurrentTeamId();
-  let x = useMemo(() => SF(e, l), [e, l]);
+  let x = useMemo(() => getFilterDisplayName(e, l), [e, l]);
   let S = useCallback(() => {
     trackEventAnalytics("CTA Clicked", {
       name: "Library Preference Modal Change filter",
@@ -86,7 +86,7 @@ function x({
       teamId: m,
       location: "org",
       filterType: e.type,
-      workspaceId: "workspace" === e.type && e.id
+      workspaceId: e.type === "workspace" && e.id
     });
     i(e);
   }, [o, e, i, m]);
@@ -107,99 +107,165 @@ function x({
           count: t,
           filterDisplayName: x
         }),
-        onClick: S,
-        className: "x1mh6rdz x19y5rnk x5hs570 xy9f4xx",
-        children: jsx(_$$e, {})
+        "onClick": S,
+        "className": "x1mh6rdz x19y5rnk x5hs570 xy9f4xx",
+        "children": jsx(_$$e, {})
       })
     })]
   }) : jsxs(ButtonPrimitive, {
     className: "filter_row--rowWithBorder--SuTTQ filter_row--row--jgf08 file_row_styles--fileRowBase--USCNr file_row_styles--fileRowHover--WZeMw",
     onClick: S,
-    children: [jsx(h5, {
+    children: [jsx(FileRowLeft, {
       children: jsx("div", {
         className: cssBuilderInstance.truncate.ellipsis.textBodyMedium.$,
         children: x
       })
-    }), jsx(yz, {
+    }), jsx(FileRowRight, {
       children: getI18nString("design_systems.libraries_modal.plural.num_library", {
         count: t
       })
     }), jsx(w, {})]
   });
 }
-export function $$w0({
-  libraryFiles: e,
-  allLibrariesViewFilterStates: t,
-  handleLibrariesViewFilterChange: i,
-  showingDefaultSubscriptionsForUser: d,
-  isSearching: c
-}) {
-  let u = useCurrentUserOrgId();
-  let p = t?.find(e => "workspace" === e.type);
-  let m = p && "workspace" === p.type && p.id;
-  let h = useSubscription(WorkspacesDirectoryView, {
-    orgId: u
+export interface LibraryFilterRowProps {
+  libraryFiles: any[];
+  allLibrariesViewFilterStates: Array<{
+    type: string;
+    id?: string;
+  }> | null;
+  handleLibrariesViewFilterChange: (filter: any) => void;
+  showingDefaultSubscriptionsForUser: boolean;
+  isSearching: boolean;
+}
+interface WorkspaceFilter {
+  type: "workspace";
+  id: string;
+  name: string;
+}
+interface DraftsFilter {
+  type: "drafts";
+}
+interface UnassignedFilter {
+  type: "unassigned";
+}
+interface PresetLibrariesFilter {
+  type: "presetLibraries";
+}
+type FilterType = WorkspaceFilter | DraftsFilter | UnassignedFilter | PresetLibrariesFilter;
+
+/**
+ * Component that displays workspace filter rows for the libraries modal
+ * @param props - LibraryFilterRowProps
+ * @returns JSX element
+ */
+export function LibraryFilterRows({
+  libraryFiles,
+  allLibrariesViewFilterStates,
+  handleLibrariesViewFilterChange,
+  showingDefaultSubscriptionsForUser,
+  isSearching
+}: LibraryFilterRowProps) {
+  const currentOrgId = useCurrentUserOrgId();
+
+  // Find the current workspace filter if it exists
+  const currentWorkspaceFilter = allLibrariesViewFilterStates?.find(filter => filter.type === "workspace");
+  const currentWorkspaceId = currentWorkspaceFilter && currentWorkspaceFilter.type === "workspace" && currentWorkspaceFilter.id;
+
+  // Fetch workspaces data
+  const workspacesSubscription = useSubscription(WorkspacesDirectoryView, {
+    orgId: currentOrgId
   });
-  let g = "loaded" !== h.status;
-  let f = h.data?.org?.workspaces ?? [];
-  let _ = g ? [] : [...f];
-  let A = h.data?.currentUser?.baseOrgUser?.workspaceUsers;
-  let y = A?.find(e => e?.isMainWorkspace)?.workspaceId;
-  let {
+  const isWorkspacesLoading = workspacesSubscription.status !== "loaded";
+  const workspacesData = workspacesSubscription.data?.org?.workspaces ?? [];
+  const availableWorkspaces = isWorkspacesLoading ? [] : [...workspacesData];
+
+  // Get user's main workspace
+  const workspaceUsers = workspacesSubscription.data?.currentUser?.baseOrgUser?.workspaceUsers;
+  const mainWorkspaceId = workspaceUsers?.find(user => user?.isMainWorkspace)?.workspaceId;
+
+  // Calculate library counts
+  const {
     libraryCountByWorkspaceId,
     unassignedLibrariesCount,
     draftLibrariesCount
-  } = wM(e);
-  let E = !t?.some(e => "workspace" === e.type && e.id === y) && y && (libraryCountByWorkspaceId[y] ?? !1);
-  let w = _.filter(e => e.id !== m && e.id !== y && (libraryCountByWorkspaceId[e.id] ?? 0) > 0);
-  return 0 !== unassignedLibrariesCount || 0 !== draftLibrariesCount || 0 !== w.length || c || E ? jsxs("div", {
-    className: "subscription_list_workspace_rows--teamSectionsWrapper--WPYUg",
-    children: [jsx("div", {
-      className: "subscription_list_workspace_rows--header--ry-qO",
-      children: renderI18nText("design_systems.libraries_modal.workspaces")
-    }), d && draftLibrariesCount > 0 && jsx(x, {
-      filter: {
-        type: "drafts"
-      },
-      count: draftLibrariesCount,
-      handleLibrariesViewFilterChange: i,
-      showBottomBorder: !0
-    }), E && jsx(x, {
-      filter: {
-        type: "workspace",
-        id: y,
-        name: _.find(e => e.id === y)?.name ?? ""
-      },
-      count: libraryCountByWorkspaceId[y] ?? 0,
-      handleLibrariesViewFilterChange: i,
-      showBottomBorder: !0
-    }, y), w.map((e, t) => jsx(x, {
-      filter: {
-        type: "workspace",
-        id: e.id,
-        name: e.name
-      },
-      count: libraryCountByWorkspaceId[e.id] ?? 0,
-      handleLibrariesViewFilterChange: i,
-      showBottomBorder: t === w.length - 1 && (draftLibrariesCount > 0 || unassignedLibrariesCount > 0)
-    }, e.id)), !d && draftLibrariesCount > 0 && jsx(x, {
-      filter: {
-        type: "drafts"
-      },
-      count: draftLibrariesCount,
-      handleLibrariesViewFilterChange: i,
-      showBottomBorder: !1
-    }), unassignedLibrariesCount > 0 && jsx(x, {
-      filter: {
-        type: "unassigned"
-      },
-      count: unassignedLibrariesCount,
-      handleLibrariesViewFilterChange: i
-    })]
-  }) : jsx(_$$p, {
-    onViewPresetsClicked: () => i({
+  } = wM(libraryFiles);
+
+  // Check if we should show the main workspace
+  const shouldShowMainWorkspace = !allLibrariesViewFilterStates?.some(filter => filter.type === "workspace" && filter.id === mainWorkspaceId) && mainWorkspaceId && (libraryCountByWorkspaceId[mainWorkspaceId] ?? false);
+
+  // Filter workspaces to show (excluding current and main, and only those with libraries)
+  const filteredWorkspaces = availableWorkspaces.filter(workspace => workspace.id !== currentWorkspaceId && workspace.id !== mainWorkspaceId && (libraryCountByWorkspaceId[workspace.id] ?? 0) > 0);
+
+  // Determine if we should render the workspace section
+  const shouldRenderWorkspaceSection = unassignedLibrariesCount !== 0 || draftLibrariesCount !== 0 || filteredWorkspaces.length !== 0 || isSearching || shouldShowMainWorkspace;
+  if (shouldRenderWorkspaceSection) {
+    return jsxs("div", {
+      className: "subscription_list_workspace_rows--teamSectionsWrapper--WPYUg",
+      children: [
+      // Header
+      jsx("div", {
+        className: "subscription_list_workspace_rows--header--ry-qO",
+        children: renderI18nText("design_systems.libraries_modal.workspaces")
+      }),
+      // Drafts section (shown when showing default subscriptions)
+      showingDefaultSubscriptionsForUser && draftLibrariesCount > 0 && jsx(x, {
+        filter: {
+          type: "drafts"
+        },
+        count: draftLibrariesCount,
+        handleLibrariesViewFilterChange,
+        showBottomBorder: true
+      }),
+      // Main workspace section
+      shouldShowMainWorkspace && jsx(x, {
+        filter: {
+          type: "workspace",
+          id: mainWorkspaceId,
+          name: availableWorkspaces.find(ws => ws.id === mainWorkspaceId)?.name ?? ""
+        },
+        count: libraryCountByWorkspaceId[mainWorkspaceId] ?? 0,
+        handleLibrariesViewFilterChange,
+        showBottomBorder: true
+      }, mainWorkspaceId),
+      // Other workspaces
+      filteredWorkspaces.map((workspace, index) => jsx(x, {
+        filter: {
+          type: "workspace",
+          id: workspace.id,
+          name: workspace.name
+        },
+        count: libraryCountByWorkspaceId[workspace.id] ?? 0,
+        handleLibrariesViewFilterChange,
+        showBottomBorder: index === filteredWorkspaces.length - 1 && (draftLibrariesCount > 0 || unassignedLibrariesCount > 0)
+      }, workspace.id)),
+      // Drafts section (shown when not showing default subscriptions)
+      !showingDefaultSubscriptionsForUser && draftLibrariesCount > 0 && jsx(x, {
+        filter: {
+          type: "drafts"
+        },
+        count: draftLibrariesCount,
+        handleLibrariesViewFilterChange,
+        showBottomBorder: false
+      }),
+      // Unassigned libraries section
+      unassignedLibrariesCount > 0 && jsx(x, {
+        filter: {
+          type: "unassigned"
+        },
+        count: unassignedLibrariesCount,
+        handleLibrariesViewFilterChange
+      })]
+    });
+  }
+
+  // Fallback when no workspaces/libraries to show
+  return jsx(_$$p, {
+    onViewPresetsClicked: () => handleLibrariesViewFilterChange({
       type: "presetLibraries"
     })
   });
 }
-export const A = $$w0;
+
+// Export with original name for backward compatibility
+export const $$w0 = LibraryFilterRows;
+export const A = LibraryFilterRows;

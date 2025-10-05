@@ -69,13 +69,13 @@ import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
 import { Z as _$$Z4 } from '../905/104740';
 import { K as _$$K5 } from '../905/107582';
-import { SI } from '../905/116101';
+import { setUniversalInsertScrolledDevelopmentSection } from '../905/116101';
 import { sha1HexFromBytes } from '../905/125019';
 import { ez as _$$ez, Ch, Fk, U9, W6 } from '../905/125333';
 import { J as _$$J6 } from '../905/125993';
 import { KindEnum, PositionEnum } from '../905/129884';
 import { A as _$$A60 } from '../905/139173';
-import { t as _$$t3 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { popModalStack, showModal, showModalHandler } from '../905/156213';
 import { zW } from '../905/162414';
 import { ServiceCategories } from '../905/165054';
@@ -5499,7 +5499,7 @@ function of(e) {
   let a = useSelector(e => e.universalInsertModal.scrollDevelopmentSectionIntoView);
   let s = useRef(null);
   if (s.current && a) {
-    t(SI({}));
+    t(setUniversalInsertScrolledDevelopmentSection({}));
     let e = s.current;
     setTimeout(() => e.scrollIntoView({
       behavior: 'smooth'
@@ -7368,7 +7368,7 @@ function lH({
     tabPanelPropsMap
   } = _$$cX();
   return jsxs(Fragment, {
-    children: [jsx(_$$t3.TabPanel, {
+    children: [jsx(Tabs.TabPanel, {
       ...tabPanelPropsMap.All,
       children: t ? jsx(aY, {
         debouncedSearchQuery: b,
@@ -7396,7 +7396,7 @@ function lH({
         widgetSearchHasResolved: _,
         widgetSearchIsLoading: f
       }) : jsx(sW, {})
-    }), jsx(_$$t3.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...tabPanelPropsMap.Widgets,
       children: t ? jsx(lc, {
         query: t,
@@ -7408,12 +7408,12 @@ function lH({
         developmentSearchResultIds: x,
         lastWidgetSearchQuery: v
       }) : jsx(lT, {})
-    }), jsx(_$$t3.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...tabPanelPropsMap.Stickers,
       children: jsx(FN, {
         query: t
       })
-    }), jsx(_$$t3.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...tabPanelPropsMap.Plugins,
       children: t ? jsx(s8, {
         query: t,
@@ -7425,7 +7425,7 @@ function lH({
         hasResolved: u,
         lastPluginSearchQuery: y
       }) : jsx(oF, {})
-    }), jsx(_$$t3.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...tabPanelPropsMap.Templates,
       children: t ? jsx(la, {
         templates: i,
@@ -7438,7 +7438,7 @@ function lH({
       }) : jsx(_$$J7, {
         setPreviewHubFile: e
       })
-    }), jsx(_$$t3.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...tabPanelPropsMap.More,
       children: t ? jsx(s4, {
         results: n,

@@ -12,7 +12,7 @@ import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { MH, cM, tK } from "../figma_app/803787";
 import { registerModal } from "../905/102752";
 import { useTabState } from "../905/56919";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { getFeatureFlags } from "../905/601108";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { fileVersionSelector } from "../905/91038";
@@ -107,7 +107,7 @@ function D({
           tabProps: Q
         }), getFeatureFlags().dse_fpl_wave_1 ? jsxs("div", {
           className: cssBuilderInstance.minH0.$,
-          children: [jsx(_$$t.TabPanel, {
+          children: [jsx(Tabs.TabPanel, {
             ...J.overview,
             height: "fill",
             children: t && jsx(_$$l, {
@@ -117,7 +117,7 @@ function D({
               onItemClick: W,
               width: i
             })
-          }), jsx(_$$t.TabPanel, {
+          }), jsx(Tabs.TabPanel, {
             ...J.analytics,
             height: "fill",
             children: jsx(_$$O, {

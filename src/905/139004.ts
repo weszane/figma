@@ -1,104 +1,244 @@
-import { F } from "../905/136718";
-import { B } from "../905/113996";
-import { L } from "../905/687364";
-import { B as _$$B } from "../905/248554";
-import { j } from "../905/971516";
-import { z } from "../905/897942";
-import { t } from "../905/367656";
-var c = (e => (e[e.Break = 0] = "Break", e[e.SkipChildren = 1] = "SkipChildren", e))(c || {});
-export var $$u1 = (e => (e[e.FIXED = 0] = "FIXED", e[e.FILL_PARENT = 1] = "FILL_PARENT", e[e.HUG_CONTENTS = 2] = "HUG_CONTENTS", e))($$u1 || {});
-export function $$p6(e) {
-  return e instanceof L || e instanceof j || e instanceof _$$B || e instanceof F;
+import { BasicNodeProperties } from "../905/113996"
+import { ComponentNodeProperties } from "../905/136718"
+import { InstanceNodeProperties } from "../905/248554"
+import { LayoutNode } from "../905/367656"
+import { FrameNodeProperties } from "../905/687364"
+import { NodeProperties } from "../905/897942"
+import { ShapeNodeProperties } from "../905/971516"
+
+/**
+ * Enum representing sizing modes for layout nodes.
+ * @enum {number}
+ */
+export enum SizingModeEnum {
+  FIXED = 0,
+  FILL_PARENT = 1,
+  HUG_CONTENTS = 2,
 }
-export function $$m7(e) {
-  return e instanceof z;
+
+/**
+ * Type guard to check if a node has layout constraints.
+ * @param node - The node to check
+ * @returns True if node is an instance of layout-constrained node types
+ */
+export function isLayoutConstrainedNode(node: any): boolean {
+  return (
+    node instanceof FrameNodeProperties
+    || node instanceof ShapeNodeProperties
+    || node instanceof InstanceNodeProperties
+    || node instanceof ComponentNodeProperties
+  )
 }
-export function $$h5(e) {
-  return e instanceof L || e instanceof F || e instanceof B || e instanceof _$$B;
+
+/**
+ * Type guard to check if a node is a basic node property instance.
+ * @param node - The node to check
+ * @returns True if node is an instance of NodeProperties
+ */
+export function isBasicNode(node: any): boolean {
+  return node instanceof NodeProperties
 }
-export class $$g0 {
+
+/**
+ * Type guard to check if a node supports auto-layout features.
+ * @param node - The node to check
+ * @returns True if node supports auto-layout
+ */
+export function isAutoLayoutSupportedNode(node: any): boolean {
+  return (
+    node instanceof FrameNodeProperties
+    || node instanceof ComponentNodeProperties
+    || node instanceof BasicNodeProperties
+    || node instanceof InstanceNodeProperties
+  )
+}
+
+/**
+ * Base class representing a generic node in the layout system.
+ * Provides common properties and methods for all node types.
+ */
+export class GenericNode {
+  id: string
+  name: string
+  type: string
+  layout: LayoutNode
+
   constructor() {
-    this.id = "unimplemented";
-    this.name = "unimplemented";
-    this.type = "unimplemented";
-    this.layout = t.empty();
+    this.id = "unimplemented"
+    this.name = "unimplemented"
+    this.type = "unimplemented"
+    this.layout = LayoutNode.empty()
   }
-  static from(e) {
-    let t = new $$g0();
-    t.type = e.type;
-    t.name = e.name;
-    t.id = e.id;
-    return t;
+
+  /**
+   * Create a GenericNode from another node object.
+   * @param sourceNode - The source node to copy properties from
+   * @returns A new GenericNode instance with copied properties
+   */
+  static from(sourceNode: any): GenericNode {
+    const node = new GenericNode()
+    node.type = sourceNode.type
+    node.name = sourceNode.name
+    node.id = sourceNode.id
+    return node
   }
-  isAutoLayout() {
-    return !1;
+
+  /**
+   * Check if this node uses auto-layout.
+   * @returns False by default, subclasses may override
+   */
+  isAutoLayout(): boolean {
+    return false
   }
-  isGrid() {
-    return !1;
+
+  /**
+   * Check if this node is a grid layout.
+   * @returns False by default, subclasses may override
+   */
+  isGrid(): boolean {
+    return false
   }
-  setName(e) {}
-  getVariableValue(e) {
-    return null;
+
+  /**
+   * Set the name of this node.
+   * @param name - The new name for the node
+   */
+  setName(_name: string): void { }
+
+  /**
+   * Get the value of a variable associated with this node.
+   * @param variableName - The name of the variable to retrieve
+   * @returns Null by default, subclasses may override
+   */
+  getVariableValue(_variableName: string): any {
+    return null
   }
 }
-export function $$f2(e) {
-  return e.layout.parent?.isAutoLayout() && "VERTICAL" === e.layout.parent.autoLayout.layoutMode ? $$_4(e) : $$A3(e);
-}
-export function $$_4(e) {
-  if ((e.layout.parent?.isAutoLayout() || e.layout.parent?.isGrid()) && "ABSOLUTE" !== e.layout.layoutPositioning) {
-    switch (e.layout.parent.autoLayout.layoutMode) {
+
+/**
+ * Determine sizing mode based on parent's vertical layout configuration.
+ * @param node - The node to evaluate
+ * @returns The appropriate sizing mode
+ */
+export function getSizingModeForVerticalParent(node: any): SizingModeEnum {
+  // Check parent layout constraints
+  if (
+    (node.layout.parent?.isAutoLayout() || node.layout.parent?.isGrid())
+    && node.layout.layoutPositioning !== "ABSOLUTE"
+  ) {
+    switch (node.layout.parent.autoLayout.layoutMode) {
       case "HORIZONTAL":
-        if (1 === e.layout.layoutGrow) return 1;
-        break;
+        if (node.layout.layoutGrow === 1)
+          return SizingModeEnum.FILL_PARENT
+        break
       case "VERTICAL":
-        if ("STRETCH" === e.layout.layoutAlign) return 1;
+        if (node.layout.layoutAlign === "STRETCH")
+          return SizingModeEnum.FILL_PARENT
     }
-    if (e.layout.parent?.isGrid() && 1 === e.layout.layoutGrow) return 1;
+    if (node.layout.parent?.isGrid() && node.layout.layoutGrow === 1)
+      return SizingModeEnum.FILL_PARENT
   }
-  if ((e.isGrid() || e.isAutoLayout() && "HORIZONTAL" === e.autoLayout.layoutMode) && e.children.length > 0) switch (e.autoLayout.primaryAxisSizingMode) {
-    case "AUTO":
-      return 2;
-    case "FIXED":
-      return 0;
+
+  // Handle horizontal layouts or grids with children
+  if (
+    (node.isGrid() || (node.isAutoLayout() && node.autoLayout.layoutMode === "HORIZONTAL"))
+    && node.children.length > 0
+  ) {
+    switch (node.autoLayout.primaryAxisSizingMode) {
+      case "AUTO":
+        return SizingModeEnum.HUG_CONTENTS
+      case "FIXED":
+        return SizingModeEnum.FIXED
+    }
   }
-  if (e.isAutoLayout() && "VERTICAL" === e.autoLayout.layoutMode && e.children.length > 0) switch (e.autoLayout.counterAxisSizingMode) {
-    case "AUTO":
-      return 2;
-    case "FIXED":
-      return 0;
+
+  // Handle vertical auto-layout with children
+  if (node.isAutoLayout() && node.autoLayout.layoutMode === "VERTICAL" && node.children.length > 0) {
+    switch (node.autoLayout.counterAxisSizingMode) {
+      case "AUTO":
+        return SizingModeEnum.HUG_CONTENTS
+      case "FIXED":
+        return SizingModeEnum.FIXED
+    }
   }
-  return e instanceof z && "WIDTH_AND_HEIGHT" === e.textAutoResize ? 2 : 0;
+
+  // Text handling
+  return node instanceof NodeProperties && node.textAutoResize === "WIDTH_AND_HEIGHT"
+    ? SizingModeEnum.HUG_CONTENTS
+    : SizingModeEnum.FIXED
 }
-export function $$A3(e) {
-  if ((e.layout.parent?.isAutoLayout() || e.layout.parent?.isGrid()) && "ABSOLUTE" !== e.layout.layoutPositioning) {
-    switch (e.layout.parent.autoLayout.layoutMode) {
+
+/**
+ * Determine sizing mode based on parent's horizontal layout configuration.
+ * @param node - The node to evaluate
+ * @returns The appropriate sizing mode
+ */
+export function getSizingModeForHorizontalParent(node: any): SizingModeEnum {
+  // Check parent layout constraints
+  if (
+    (node.layout.parent?.isAutoLayout() || node.layout.parent?.isGrid())
+    && node.layout.layoutPositioning !== "ABSOLUTE"
+  ) {
+    switch (node.layout.parent.autoLayout.layoutMode) {
       case "VERTICAL":
-        if (1 === e.layout.layoutGrow) return 1;
-        break;
+        if (node.layout.layoutGrow === 1)
+          return SizingModeEnum.FILL_PARENT
+        break
       case "HORIZONTAL":
-        if ("STRETCH" === e.layout.layoutAlign) return 1;
+        if (node.layout.layoutAlign === "STRETCH")
+          return SizingModeEnum.FILL_PARENT
     }
-    if (e.layout.parent?.isGrid() && 1 === e.layout.layoutGrow) return 1;
+    if (node.layout.parent?.isGrid() && node.layout.layoutGrow === 1)
+      return SizingModeEnum.FILL_PARENT
   }
-  if (e.isAutoLayout() && "VERTICAL" === e.autoLayout.layoutMode && e.children.length > 0) switch (e.autoLayout.primaryAxisSizingMode) {
-    case "AUTO":
-      return 2;
-    case "FIXED":
-      return 0;
+
+  // Handle vertical auto-layout with children
+  if (node.isAutoLayout() && node.autoLayout.layoutMode === "VERTICAL" && node.children.length > 0) {
+    switch (node.autoLayout.primaryAxisSizingMode) {
+      case "AUTO":
+        return SizingModeEnum.HUG_CONTENTS
+      case "FIXED":
+        return SizingModeEnum.FIXED
+    }
   }
-  if ((e.isGrid() || e.isAutoLayout() && "HORIZONTAL" === e.autoLayout.layoutMode) && e.children.length > 0) switch (e.autoLayout.counterAxisSizingMode) {
-    case "AUTO":
-      return 2;
-    case "FIXED":
-      return 0;
+
+  // Handle horizontal layouts or grids with children
+  if (
+    (node.isGrid() || (node.isAutoLayout() && node.autoLayout.layoutMode === "HORIZONTAL"))
+    && node.children.length > 0
+  ) {
+    switch (node.autoLayout.counterAxisSizingMode) {
+      case "AUTO":
+        return SizingModeEnum.HUG_CONTENTS
+      case "FIXED":
+        return SizingModeEnum.FIXED
+    }
   }
-  return e instanceof z && ("WIDTH_AND_HEIGHT" === e.textAutoResize || "HEIGHT" === e.textAutoResize) ? 2 : 0;
+
+  // Text handling
+  return node instanceof NodeProperties
+    && (node.textAutoResize === "WIDTH_AND_HEIGHT" || node.textAutoResize === "HEIGHT")
+    ? SizingModeEnum.HUG_CONTENTS
+    : SizingModeEnum.FIXED
 }
-export const J3 = $$g0;
-export const XQ = $$u1;
-export const fw = $$f2;
-export const qn = $$A3;
-export const BL = $$_4;
-export const u_ = $$h5;
-export const HW = $$p6;
-export const KH = $$m7;
+
+/**
+ * Determine the appropriate sizing mode for a node based on its parent layout.
+ * @param node - The node to evaluate
+ * @returns The appropriate sizing mode
+ */
+export function getNodeSizingMode(node: any): SizingModeEnum {
+  return node.layout.parent?.isAutoLayout() && node.layout.parent.autoLayout.layoutMode === "VERTICAL"
+    ? getSizingModeForVerticalParent(node)
+    : getSizingModeForHorizontalParent(node)
+}
+
+// Export aliases for backward compatibility
+export const J3 = GenericNode
+export const XQ = SizingModeEnum
+export const fw = getNodeSizingMode
+export const qn = getSizingModeForHorizontalParent
+export const BL = getSizingModeForVerticalParent
+export const u_ = isAutoLayoutSupportedNode
+export const HW = isLayoutConstrainedNode
+export const KH = isBasicNode

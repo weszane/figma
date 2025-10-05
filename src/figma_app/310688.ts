@@ -13,8 +13,8 @@ export function trackResourceRemovedFromFavorites(
   selectedView: string,
   entrypoint: string,
   resourceType: string,
-  editorType: string,
-  fileBrowserUnfavorite: boolean,
+  editorType?: string,
+  fileBrowserUnfavorite?: boolean,
 ): void {
   trackEventAnalytics("resource_removed_from_favorites", {
     resource_id: resourceId,
@@ -35,8 +35,8 @@ export function trackResourceAddedToFavorites(
   selectedView: string,
   entrypoint: string,
   resourceType: string,
-  editorType: string,
-  fileBrowserFavorite: boolean,
+  editorType?: string,
+  fileBrowserFavorite?: boolean,
 ): void {
   trackEventAnalytics("resource_added_to_favorites", {
     resourceId,

@@ -4,7 +4,7 @@ import { noop } from 'lodash-es';
 import { getI18nString } from "../905/303541";
 import { jU } from "../figma_app/544879";
 import { showDropdownThunk } from "../905/929976";
-import { kK } from "../figma_app/863319";
+import { getMaxLimit } from "../figma_app/863319";
 export function $$c0({
   subscription: e,
   orgId: t,
@@ -49,7 +49,7 @@ export function $$c0({
     buttonRef: m,
     isDropdownShown: h,
     tooltip: e.favorite ? getI18nString("favorited_resources.remove_from_sidebar") : e.hasMaxFavorites ? getI18nString("tile.favoriting.max_favorites", {
-      maxFavorites: kK(t)
+      maxFavorites: getMaxLimit(t)
     }) : getI18nString("favorited_resources.add_to_sidebar")
   };
 }

@@ -35,7 +35,7 @@ import { bu, k9, DQ, y$ } from "../905/712714";
 import { getUserLocale } from "../figma_app/514043";
 import { A as _$$A3 } from "../905/27250";
 import { throwTypeError } from "../figma_app/465776";
-import { t as _$$t2 } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { Label } from "../905/270045";
 import { bL, DZ, mc, zW, c$ } from "../905/493196";
 import { analyticsEventManager } from "../905/449184";
@@ -1227,7 +1227,7 @@ function e$({
     type: _$$l.VARIABLE_MODES,
     items: t.items.filter(e => e.collectionKey === h)
   }, [t, h]);
-  let [I, E, x] = _$$t2.useTabs({
+  let [I, E, x] = Tabs.useTabs({
     variables: !0,
     modes: !0
   });
@@ -1237,12 +1237,12 @@ function e$({
       tableType: S
     }), jsxs("div", {
       className: "library_item_stats_by_asset--tabStrip--6YFuB",
-      children: [jsxs(_$$t2.TabStrip, {
+      children: [jsxs(Tabs.TabStrip, {
         manager: x,
-        children: [jsx(_$$t2.Tab, {
+        children: [jsx(Tabs.Tab, {
           ...I.variables,
           children: getI18nString("design_systems.libraries_modal.variables")
-        }), jsx(_$$t2.Tab, {
+        }), jsx(Tabs.Tab, {
           ...I.modes,
           children: getI18nString("design_systems.libraries_modal.modes")
         })]
@@ -1268,7 +1268,7 @@ function e$({
           })]
         })]
       })]
-    }), jsx(_$$t2.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...E.variables,
       children: jsx(Gy, {
         statsData: b,
@@ -1276,7 +1276,7 @@ function e$({
         onRowClick: s,
         onScrollTo: o
       })
-    }), jsx(_$$t2.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...E.modes,
       children: jsx(vA, {
         statsData: v,

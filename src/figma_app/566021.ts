@@ -35,7 +35,7 @@ import { hidePickerThunk } from "../figma_app/91703";
 import { getHostnameFromUrl, findCommonSymbolId } from "../figma_app/164212";
 import { Tv } from "../figma_app/151869";
 import { DraggableModalManager } from "../905/748636";
-import { t as _$$t2 } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { A as _$$A } from "../2854/372209";
 import { A as _$$A2 } from "../2854/253373";
 function h(e) {
@@ -355,7 +355,7 @@ function er({
   recordingKey: l
 }) {
   var d;
-  let [c,, u] = _$$t2.useTabs(ee, {
+  let [c,, u] = Tabs.useTabs(ee, {
     defaultActive: (d = t ?? [], !o || isInvalidValue(e) || e.length > 0 || d.length > 0 ? "selected_variant" : "component_set"),
     recordingKey: l ?? "variantDocumentationMenu"
   });
@@ -364,9 +364,9 @@ function er({
   return kL(_) ? jsxs(Fragment, {
     children: [!!p && jsx("div", {
       className: "variant_documentation_menu--ui3TabContainer--P2Vqv",
-      children: jsx(_$$t2.TabStrip, {
+      children: jsx(Tabs.TabStrip, {
         manager: u,
-        children: Q.map(e => jsx(_$$t2.Tab, {
+        children: Q.map(e => jsx(Tabs.Tab, {
           ...c[e],
           children: et[e].displayName()
         }, e))

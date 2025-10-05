@@ -34,7 +34,7 @@ export function useTabState(
   tabsConfig: Record<string, any>,
   options?: {
     defaultActive?: string | (() => string)
-  },
+  } & ObjectOf,
 ) {
   const [activeTab, setActiveTab] = useState<string>(() => {
     if (typeof options?.defaultActive === 'function') {

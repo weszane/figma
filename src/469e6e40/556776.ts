@@ -19,7 +19,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { syncFetchedVersionsThunk } from "../figma_app/147952";
-import { IN } from "../905/116101";
+import { setUniversalInsertViewResourceDetails } from "../905/116101";
 import { p as _$$p } from "../469e6e40/489933";
 import { stopPropagation } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
@@ -34,7 +34,7 @@ import { setupUserPluginPreferences } from "../figma_app/545541";
 import { PluginImage } from "../905/480825";
 import { j as _$$j } from "../905/834956";
 import { Cf } from "../905/504727";
-import { s as _$$s2 } from "../figma_app/504088";
+import { SimpleComponentType } from "../figma_app/504088";
 import { yG, dr } from "../7492/487492";
 export function $$$1() {
   let e = setupUserPluginPreferences();
@@ -239,10 +239,10 @@ function V({
       "data-tooltip-type": B || U ? void 0 : KindEnum.TEXT,
       "data-tooltip": B || U ? void 0 : e.name,
       onClick: t => {
-        b ? (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), f(IN({
+        b ? (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), f(setUniversalInsertViewResourceDetails({
           fdPreviewResource: {
             id: e.plugin_id,
-            type: _$$s2.PLUGIN
+            type: SimpleComponentType.PLUGIN
           }
         }))) : I ? D(t) : r && (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), _ !== e.plugin_id && (o(), p("Dev Handoff Ran Pinned Plugin", {
           pluginId: e.plugin_id

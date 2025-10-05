@@ -1,7 +1,7 @@
 import { reportError } from "../905/11";
 import { VectorPathBuilder } from "../905/18922";
 import { RelatedLinksManager } from "../905/37051";
-import { y$ } from "../905/81009";
+import { selectTiles } from "../905/81009";
 import { sha1BytesFromHex, sha1Hex, sha1HexFromBytes } from "../905/125019";
 import { getWhiteboardIntegrationName, mapFileTypeFromString } from "../905/163189";
 import { ServiceCategories } from "../905/165054";
@@ -31,7 +31,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { trackFileEvent } from "../figma_app/314264";
 import { isFigmaEmail } from "../figma_app/416935";
 import { fullscreenValue } from "../figma_app/455680";
-import { fA } from "../figma_app/543100";
+import { createFileTile } from "../figma_app/543100";
 import { getImageManager } from "../figma_app/624361";
 import { canCreateFileTypeAsync } from "../figma_app/687776";
 import { FontSourceType, Fullscreen, SlidePptxImporterBindings } from "../figma_app/763686";
@@ -1637,9 +1637,9 @@ async function eV(e, t, i, n, a, s, o, l, d) {
         }
       };
     }
-    e.dispatch(y$({
+    e.dispatch(selectTiles({
       type: ComFileType.FILES,
-      tiles: [fA(g.file)]
+      tiles: [createFileTile(g.file)]
     }));
     return {
       fileKey: c

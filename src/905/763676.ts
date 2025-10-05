@@ -16,21 +16,21 @@ import { J as _$$J2 } from '../905/445197';
 import { trackEventAnalytics } from '../905/449184';
 import { T as _$$T } from '../905/486858';
 import { getLibraryName } from '../905/506188';
-import { t as _$$t2 } from '../905/511388';
+import { DefaultLibraryIcon } from '../905/511388';
 import { C as _$$C } from '../905/520159';
 import { Button } from '../905/521428';
 import { C2, Kw, Tb, VJ } from '../905/610995';
 import { PluginAction, setupPlaybackHandler } from '../905/656545';
 import { SvgComponent } from '../905/714743';
 import { l as _$$l } from '../905/716947';
-import { er as _$$er } from '../905/753512';
+import { isLibraryModalContextAvailable } from '../905/753512';
 import { getSelectedFile } from '../905/766303';
 import { useSingleEffect } from '../905/791079';
 import { O as _$$O } from '../905/791978';
 import { uQ } from '../905/794875';
 import { handleLoadAllPagesWithVersionCheck } from '../905/807667';
 import { zi } from '../905/824449';
-import { Qj } from '../905/825399';
+import { usePublishedLibraries } from '../905/825399';
 import { j as _$$j } from '../905/834956';
 import { HiddenLabelPrimitive } from '../905/865071';
 import { ManuallyLabeledCheckbox } from '../905/909715';
@@ -91,7 +91,7 @@ function ec({
   let l = useDispatch();
   let d = useSelector(e => e.dropdownShown);
   let c = selectCurrentFile();
-  let u = Qj({
+  let u = usePublishedLibraries({
     includeLocalLibrary: !0
   });
   let p = useMemo(() => u.result?.filter(t => t.library_key !== e), [u, e]);
@@ -169,7 +169,7 @@ function ec({
           recordingKey: e.name,
           rightIcon: jsx('div', {
             className: cssBuilderInstance.flex.alignCenter.justifyCenter.flexShrink0.$,
-            children: jsx(_$$t2, {})
+            children: jsx(DefaultLibraryIcon, {})
           })
         };
         if (s) {
@@ -227,7 +227,7 @@ function ec({
       }
     })
   });
-  let D = _$$er();
+  let D = isLibraryModalContextAvailable();
   return jsxs(Fragment, {
     children: [jsx(uQ, {
       property: t,
@@ -520,7 +520,7 @@ export function $$ef0({
     toLibraryKey: R ?? null
   });
   let z = useMemo(() => G.styles.size !== 0 || G.components.size !== 0, [G]);
-  let H = _$$er();
+  let H = isLibraryModalContextAvailable();
   return jsx('div', {
     'className': H ? 'subscription_file_replace_libraries_view--wrapperRedesign--qA7NT subscription_file_replace_libraries_view--wrapper--ZStG3' : 'subscription_file_replace_libraries_view--wrapper--ZStG3',
     'data-testid': `subscription_file_replace_libraries_view_${e}`,

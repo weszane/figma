@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { vq } from './8732';
 import { lQ } from './934246';
-import { dP, M3 } from '../figma_app/119475';
+import { KeyboardNavigationProvider, useKeyboardNavigationItem } from '../figma_app/119475';
 import { handleKeyboardEventByState } from '../figma_app/896988';
 export enum NavigationPath {
   Search = 0,
@@ -108,7 +108,7 @@ export function KeyboardNavigationProvider({
     path: [NavigationPath.ScrollContainer, 0, 1],
     column: 0
   } : null, [isSearching]);
-  return jsxs(dP, {
+  return jsxs(KeyboardNavigationProvider, {
     onKeyDown: handleKeyDown,
     overrideLeft,
     overrideRight,
@@ -131,7 +131,7 @@ const BeforeItemRef = forwardRef<HTMLElement, {
   const {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [NavigationPath.BeforeItems],
     column: props.index
   });
@@ -173,7 +173,7 @@ export function useKeyboardNavigationItemForSearch() {
   const {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [NavigationPath.Search],
     id: 'search',
     navigationOptions: {
@@ -189,7 +189,7 @@ export function useKeyboardNavigationItemForParentSubpath(disabled: boolean) {
   const {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [NavigationPath.ParentSubpath],
     id: 'parentSubpath',
     disabled
@@ -211,7 +211,7 @@ export function useKeyboardNavigationItemForLeaf(index: number, numCols: number,
   const {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [NavigationPath.ScrollContainer, 0, row],
     column: col,
     id: `leaf-${index}`,
@@ -227,7 +227,7 @@ export function useKeyboardNavigationItemForSubpath(index: number, id: string, d
   const {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [NavigationPath.ScrollContainer, 1, index],
     id: `subpath-${id}`,
     disabled

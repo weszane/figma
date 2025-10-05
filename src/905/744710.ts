@@ -21,7 +21,7 @@ import { selectWithShallowEqual } from '../905/103090';
 import { setupAutofocusHandler } from '../905/128376';
 import { KindEnum } from '../905/129884';
 import { M as _$$M } from '../905/130634';
-import { t as _$$t } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { hideModal, popModalStack, showModalHandler } from '../905/156213';
 import { TrackedLink } from '../905/160095';
 import { ServiceCategories } from '../905/165054';
@@ -4767,7 +4767,7 @@ let $$rB0 = registerModal(e => {
       properties: {}
     });
   };
-  let [I, E, x] = _$$t.useTabs({
+  let [I, E, x] = Tabs.useTabs({
     ACCOUNT: !0,
     COMMUNITY: !0,
     NOTIFICATIONS: !0,
@@ -4795,9 +4795,9 @@ let $$rB0 = registerModal(e => {
   }) : jsxs(DialogHeader, {
     children: [jsx(DialogHiddenTitle, {
       children: getI18nString('general.settings')
-    }), jsx(_$$t.TabStrip, {
+    }), jsx(Tabs.TabStrip, {
       manager: x,
-      children: Object.values($$rM1).map(e => createElement(_$$t.Tab, {
+      children: Object.values($$rM1).map(e => createElement(Tabs.Tab, {
         ...I[e],
         key: e
       }, rU[e]()))
@@ -4811,7 +4811,7 @@ let $$rB0 = registerModal(e => {
       height: 'full',
       children: jsxs(DialogContents, {
         children: [S, jsx(DialogBody, {
-          children: Object.values($$rM1).map(e => createElement(_$$t.TabPanel, {
+          children: Object.values($$rM1).map(e => createElement(Tabs.TabPanel, {
             ...E[e],
             key: e
           }, rj[e]()))

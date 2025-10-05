@@ -76,7 +76,7 @@ import { f as _$$f } from '../figma_app/58113';
 import { m as _$$m } from '../figma_app/60940';
 import { isModalOpenAtom } from '../figma_app/69680';
 import { initiateResourcePurchaseFlow, checkResourceEligibility, isResourcePaymentFailed, getResourcePaymentFromState, isUserEligibleForPurchase } from '../figma_app/86989';
-import { dP, M3 } from '../figma_app/119475';
+import { KeyboardNavigationProvider, useKeyboardNavigationItem } from '../figma_app/119475';
 import { LR } from '../figma_app/120210';
 import { getPluginAllowListKey, getWidgetAllowListKey } from '../figma_app/155287';
 import { M as _$$M } from '../figma_app/170366';
@@ -93,7 +93,7 @@ import { getPluginContent, getWidgetContent } from '../figma_app/427318';
 import { cu } from '../figma_app/439332';
 import { getParentOrgIdIfOrgLevel, useCurrentPrivilegedPlan, useCurrentPublicPlan } from '../figma_app/465071';
 import { $3, op as _$$op } from '../figma_app/487970';
-import { s as _$$s2, Y as _$$Y } from '../figma_app/504088';
+import { SimpleComponentType, OrgListViewType } from '../figma_app/504088';
 import { useCurrentFileKey } from '../figma_app/516028';
 import { hI, I4, JL, QW } from '../figma_app/522242';
 import { BI } from '../figma_app/546509';
@@ -374,7 +374,7 @@ function eQ(e) {
   let {
     activeTab
   } = IT();
-  let r = activeTab === _$$s2.PLUGIN;
+  let r = activeTab === SimpleComponentType.PLUGIN;
   let l = usePublishedPlugins();
   let o = usePluginedWidgets();
   let d = (r ? l : o)[e.resourceId];
@@ -400,7 +400,7 @@ function eG(e) {
   let {
     activeTab
   } = IT();
-  let r = activeTab === _$$s2.PLUGIN;
+  let r = activeTab === SimpleComponentType.PLUGIN;
   let l = useDispatch();
   let o = isDevHandoffEditorType();
   let d = useIsSelectedViewFullscreenCooper();
@@ -608,14 +608,14 @@ function ez() {
   } = IT();
   return jsx(eH, {
     onBack: closeResource,
-    text: activeTab === _$$s2.PLUGIN ? renderI18nText('universal_insert.plugin') : renderI18nText('universal_insert.widget')
+    text: activeTab === SimpleComponentType.PLUGIN ? renderI18nText('universal_insert.plugin') : renderI18nText('universal_insert.widget')
   });
 }
 function e$(e) {
   let {
     activeTab
   } = IT();
-  let s = activeTab === _$$s2.PLUGIN ? 'plugin' : 'widget';
+  let s = activeTab === SimpleComponentType.PLUGIN ? 'plugin' : 'widget';
   let {
     href,
     onClick
@@ -732,7 +732,7 @@ function e7() {
     allowNonVsCodePluginsInVsCode: !0
   });
   let r = useLocalPluginsExcludingWidgets();
-  let n = activeTab === _$$s2.WIDGET;
+  let n = activeTab === SimpleComponentType.WIDGET;
   let l = n ? r : s;
   let o = _$$M();
   let d = getUnpublishedResources(n);
@@ -782,7 +782,7 @@ function tf() {
   let {
     href,
     onClick
-  } = getVsCodeLinkProps(`/community/${activeTab === _$$s2.PLUGIN ? 'plugins' : 'widgets/figma_design'}${s ? '/devmode' : ''}`);
+  } = getVsCodeLinkProps(`/community/${activeTab === SimpleComponentType.PLUGIN ? 'plugins' : 'widgets/figma_design'}${s ? '/devmode' : ''}`);
   return t?.shouldOptimizeForIpadApp ? null : jsxs(clickableBaseLinkTracked, {
     className: 'fd_browse_resource_modal--communityLink--gI-Ei fd_browse_resource_modal--communityLinkBase---qAie text--fontPos12--YsUAh text--_fontBase--QdLsd',
     href,
@@ -823,8 +823,8 @@ function tj({
   let {
     activeTab
   } = IT();
-  let n = activeTab === _$$s2.PLUGIN;
-  s = e === _$$Y.ORG_PRIVATE_EXPANDED_LIST ? n ? renderI18nText('universal_insert.all_internal_plugins') : renderI18nText('universal_insert.all_internal_widgets') : n ? renderI18nText('universal_insert.all_approved_plugins') : renderI18nText('universal_insert.all_approved_widgets');
+  let n = activeTab === SimpleComponentType.PLUGIN;
+  s = e === OrgListViewType.ORG_PRIVATE_EXPANDED_LIST ? n ? renderI18nText('universal_insert.all_internal_plugins') : renderI18nText('universal_insert.all_internal_widgets') : n ? renderI18nText('universal_insert.all_approved_plugins') : renderI18nText('universal_insert.all_approved_widgets');
   return jsxs('div', {
     className: 'fd_browse_resource_modal--expandedViewHeader--uLZl5',
     children: [jsxs('div', {
@@ -853,12 +853,12 @@ function ty({
   } = IT();
   let r = _$$h('plugin');
   let n = _$$h('widget');
-  let i = activeTab === _$$s2.WIDGET;
+  let i = activeTab === SimpleComponentType.WIDGET;
   let l = useAllowlistedPlugins();
   let o = filterDevModeEntriesAndMemo(Object.values(l));
   let d = useAllowlistedWidgets();
   let c = i ? Object.keys(d) : o.map(e => e.plugin_id);
-  t = e === _$$Y.ORG_PRIVATE_EXPANDED_LIST ? jsx(Fragment, {
+  t = e === OrgListViewType.ORG_PRIVATE_EXPANDED_LIST ? jsx(Fragment, {
     children: (i ? n : r).map((e, t) => jsx(_$$ff, {
       resourceId: e.plugin_id,
       type: R7.ORG_PRIVATE,
@@ -897,7 +897,7 @@ function tM(e) {
   let {
     activeTab
   } = IT();
-  let c = activeTab === _$$s2.WIDGET;
+  let c = activeTab === SimpleComponentType.WIDGET;
   let u = _$$h('plugin');
   let _ = filterDevModeEntriesAndMemo(u);
   let m = _$$h('widget');
@@ -943,7 +943,7 @@ function tM(e) {
       keyboardNavigationPath: [B6, t]
     }, e.plugin_id)), g && x.length > Xo && jsx(tB, {
       viewExpandedList: () => {
-        viewExpandedList(_$$Y.ORG_PRIVATE_EXPANDED_LIST);
+        viewExpandedList(OrgListViewType.ORG_PRIVATE_EXPANDED_LIST);
       },
       ctaText: c ? getI18nString('universal_insert.all_internal_widgets') : getI18nString('universal_insert.all_internal_plugins')
     })]
@@ -983,7 +983,7 @@ function tM(e) {
         keyboardNavigationPath: [B6 + 1, t]
       }, e)), p && F.length > 5 && jsx(tB, {
         viewExpandedList: () => {
-          viewExpandedList(_$$Y.ORG_ALLOWLIST_EXPANDED_LIST);
+          viewExpandedList(OrgListViewType.ORG_ALLOWLIST_EXPANDED_LIST);
         },
         ctaText: c ? getI18nString('universal_insert.all_approved_widgets') : getI18nString('universal_insert.all_approved_plugins')
       })]
@@ -1098,7 +1098,7 @@ function tJ({
   let {
     activeTab
   } = IT();
-  let l = activeTab === _$$s2.WIDGET;
+  let l = activeTab === SimpleComponentType.WIDGET;
   let o = isDevHandoffEditorType();
   let d = useAtomWithSubscription(isModalOpenAtom) && o;
   let [u, _] = useState(!1);
@@ -1152,7 +1152,7 @@ function tJ({
   let {
     href,
     onClick
-  } = getVsCodeLinkProps(`/community/${activeTab === _$$s2.PLUGIN ? 'plugins' : 'widgets'}`);
+  } = getVsCodeLinkProps(`/community/${activeTab === SimpleComponentType.PLUGIN ? 'plugins' : 'widgets'}`);
   return useMemo(() => {
     if (hasAllowList ? allowListIsLoading : S) {
       return jsx('div', {
@@ -1189,7 +1189,7 @@ function tJ({
         keyboardNavigationPath: [t, s]
       }, e)), hasAllowList && n.length > 5 ? jsx(tB, {
         viewExpandedList: () => {
-          e(_$$Y.ORG_ALLOWLIST_EXPANDED_LIST);
+          e(OrgListViewType.ORG_ALLOWLIST_EXPANDED_LIST);
         },
         ctaText: l ? getI18nString('universal_insert.all_approved_widgets') : getI18nString('universal_insert.all_approved_plugins')
       }) : jsxs(Fragment, {
@@ -1247,7 +1247,7 @@ function t2(e) {
   let s = useFilteredDedupedRecentlyUsedPlugins();
   let r = useDedupedRecentlyUsedWidgets();
   let i = useInstalledPluginsAndWidgets();
-  let l = activeTab === _$$s2.WIDGET;
+  let l = activeTab === SimpleComponentType.WIDGET;
   let {
     filterByAllowlist,
     filterByPublicResourcesAllowed
@@ -1272,7 +1272,7 @@ function t2(e) {
     return jsxs(TrackingProvider, {
       name: 'Recents and saved',
       children: [jsx(_$$H, {
-        isWidget: activeTab === _$$s2.WIDGET
+        isWidget: activeTab === SimpleComponentType.WIDGET
       }), jsx(tJ, {
         viewExpandedList: e.viewExpandedList,
         keyboardNavigationOffset: B6 + 2
@@ -1280,7 +1280,7 @@ function t2(e) {
     });
   }
   let m = jsx(t3, {
-    isWidget: activeTab === _$$s2.WIDGET
+    isWidget: activeTab === SimpleComponentType.WIDGET
   });
   let x = c.length > 0;
   let p = _.length > 0;
@@ -1331,7 +1331,7 @@ function st(e) {
   let {
     activeTab
   } = IT();
-  let r = activeTab === _$$s2.WIDGET;
+  let r = activeTab === SimpleComponentType.WIDGET;
   let i = isDevHandoffEditorType();
   let l = useIsSelectedViewFullscreenCooper();
   let o = e.query.trim();
@@ -1417,7 +1417,7 @@ function st(e) {
     serverSideSearch,
     isLoading,
     hasResolved
-  } = activeTab === _$$s2.PLUGIN ? {
+  } = activeTab === SimpleComponentType.PLUGIN ? {
     serverSideSearch: pluginServerSideSearch,
     isLoading: pluginSearchIsLoading,
     hasResolved: pluginSearchHasResolved
@@ -1553,19 +1553,19 @@ function sa(e) {
   });
 }
 let sn = () => ({
-  [_$$s2.COMPONENT]: {
+  [SimpleComponentType.COMPONENT]: {
     label: getI18nString('universal_insert.components'),
-    tab: _$$s2.COMPONENT,
+    tab: SimpleComponentType.COMPONENT,
     resourceTypeLabel: getI18nString('universal_insert.components_resource_type')
   },
-  [_$$s2.PLUGIN]: {
+  [SimpleComponentType.PLUGIN]: {
     label: getI18nString('community.view_bar.plugins'),
-    tab: _$$s2.PLUGIN,
+    tab: SimpleComponentType.PLUGIN,
     resourceTypeLabel: getI18nString('community.plugins.plugin')
   },
-  [_$$s2.WIDGET]: {
+  [SimpleComponentType.WIDGET]: {
     label: getI18nString('community.view_bar.widgets'),
-    tab: _$$s2.WIDGET,
+    tab: SimpleComponentType.WIDGET,
     resourceTypeLabel: getI18nString('community.plugins.widget')
   }
 });
@@ -1609,7 +1609,7 @@ export function $$so0() {
   let _ = useIsSelectedViewFullscreenCooper();
   let m = u || _ ? 'fd_browse_resource_modal--slidingPaneContainerAdjustable--ge7kl sliding_pane--slidingPaneContainer--RQkXf' : 'fd_browse_resource_modal--slidingPaneContainer--sW-oK sliding_pane--slidingPaneContainer--RQkXf';
   let [p, h] = useState(initialFdView ? '' : r || '');
-  let [v, f] = useState(_$$Y.MAIN);
+  let [v, f] = useState(OrgListViewType.MAIN);
   let j = useCallback(e => {
     if (e.keyCode === KeyCodes.ENTER) {
       let t = e.target;
@@ -1622,7 +1622,7 @@ export function $$so0() {
   }, [p]);
   let w = useMemo(() => jsx(si, {
     onClick: t => {
-      t !== _$$s2.COMPONENT && e.current?.querySelector('input')?.focus();
+      t !== SimpleComponentType.COMPONENT && e.current?.querySelector('input')?.focus();
       setCurrentViewOrTab({
         newTab: t
       });
@@ -1631,7 +1631,7 @@ export function $$so0() {
   }), [activeTab, setCurrentViewOrTab]);
   let b = useMemo(() => {
     let t = ta;
-    return (u ? t = tn : _ && (t = ti), activeTab === _$$s2.COMPONENT) ? jsx(TrackingProvider, {
+    return (u ? t = tn : _ && (t = ti), activeTab === SimpleComponentType.COMPONENT) ? jsx(TrackingProvider, {
       name: activeTab,
       children: jsx($, {
         header: w,
@@ -1643,14 +1643,14 @@ export function $$so0() {
       children: [!u && !_ && w, jsx('div', {
         onMouseDown: e => e.stopPropagation(),
         onPointerDown: e => e.stopPropagation(),
-        children: jsxs(dP, {
+        children: jsxs(KeyboardNavigationProvider, {
           onKeyDown: j,
           children: [jsx('div', {
             className: t,
             ref: e,
             children: jsx(sd, {
               searchQuery: p,
-              placeholder: activeTab === _$$s2.PLUGIN ? getI18nString('universal_insert.search_all_plugins') : activeTab === _$$s2.WIDGET ? getI18nString('universal_insert.search_all_widgets') : getI18nString('universal_insert.search_all_extensions'),
+              placeholder: activeTab === SimpleComponentType.PLUGIN ? getI18nString('universal_insert.search_all_plugins') : activeTab === SimpleComponentType.WIDGET ? getI18nString('universal_insert.search_all_widgets') : getI18nString('universal_insert.search_all_extensions'),
               setSearchQuery: h
             })
           }), p.length === 0 && jsx(sc, {
@@ -1670,11 +1670,11 @@ export function $$so0() {
   let L = null;
   l ? L = jsx(eQ, {
     resourceId: l
-  }) : (v === _$$Y.ORG_PRIVATE_EXPANDED_LIST || v === _$$Y.ORG_ALLOWLIST_EXPANDED_LIST) && (L = jsx(dP, {
+  }) : (v === OrgListViewType.ORG_PRIVATE_EXPANDED_LIST || v === OrgListViewType.ORG_ALLOWLIST_EXPANDED_LIST) && (L = jsx(KeyboardNavigationProvider, {
     onKeyDown: j,
     children: jsx(tC, {
       viewType: v,
-      onBackPress: () => f(_$$Y.MAIN)
+      onBackPress: () => f(OrgListViewType.MAIN)
     })
   }));
   return jsxs('div', {
@@ -1696,7 +1696,7 @@ function sd({
   let r = useDispatch();
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     id: 'search',
     path: [np, 0]
   });
@@ -1837,7 +1837,7 @@ function sc(e) {
       }), e.currentView === 'development' && jsx('div', {
         className: 'fd_browse_resource_modal--mainViewHeaderRightSide--hxfTP text--fontPos12--YsUAh text--_fontBase--QdLsd',
         children: jsx(_$$n, {
-          resourceType: activeTab === _$$s2.WIDGET ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN
+          resourceType: activeTab === SimpleComponentType.WIDGET ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN
         })
       })]
     }), jsx(_$$P, {
@@ -1858,7 +1858,7 @@ function su({
   let s = useCurrentUserOrg()?.id;
   let r = getPendingPublisherWidgets();
   let n = getPendingPublisherWidgetsForCurrentUser();
-  let i = activeTab === _$$s2.WIDGET ? n : r;
+  let i = activeTab === SimpleComponentType.WIDGET ? n : r;
   let l = e === 'org' ? i.filter(e => e.org_id && e.org_id === s) : i;
   return l.length === 0 ? null : jsxs('div', {
     children: [l.map((e, t) => jsx(_$$ff, {

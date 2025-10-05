@@ -17,7 +17,7 @@ import E from "classnames";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
-import { M3 } from "../figma_app/119475";
+import { useKeyboardNavigationItem } from "../figma_app/119475";
 import { SvgComponent } from "../905/714743";
 import { G as _$$G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
@@ -30,7 +30,7 @@ import { stopPropagation } from "../figma_app/753501";
 import { i as _$$i2 } from "../figma_app/85949";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
-import { E as _$$E2 } from "../905/511388";
+import { LibraryIconWithTooltip } from "../905/511388";
 import { useCurrentUserOrg } from "../905/845253";
 import { getBasename } from "../905/309735";
 import { isBigmaEnabledAlias3 } from "../figma_app/336853";
@@ -385,7 +385,7 @@ function ec({
         })
       }), f && jsx("div", {
         className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml4.$,
-        children: jsx(_$$E2, {
+        children: jsx(LibraryIconWithTooltip, {
           libraryKey
         })
       })]
@@ -408,7 +408,7 @@ function ec({
         })
       }), f && jsx("div", {
         className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml4.$,
-        children: jsx(_$$E2, {
+        children: jsx(LibraryIconWithTooltip, {
           libraryKey
         })
       })]
@@ -462,7 +462,7 @@ export function $$ep5({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: c,
     id: tx(t),
     onFauxFocus: f
@@ -549,7 +549,7 @@ export function $$eh0({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: c,
     id: tx(e) ?? void 0,
     onFauxFocus: y
@@ -643,7 +643,7 @@ function em({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: a,
     onFauxFocus: d
   });
@@ -685,7 +685,7 @@ function eg({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: a,
     onFauxFocus: d
   });
@@ -752,7 +752,7 @@ function ef({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: l,
     onFauxFocus: h
   });
@@ -1005,7 +1005,7 @@ function eb({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: o,
     column: l,
     id: tx(e),
@@ -1063,7 +1063,7 @@ function eT({
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: s,
     column: o,
     id: tx(e),

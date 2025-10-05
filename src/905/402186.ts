@@ -8,7 +8,7 @@ import { e0 } from "../905/696396";
 import { l as _$$l, n as _$$n } from "../905/402643";
 import { a as _$$a } from "../905/275092";
 import { U as _$$U } from "../905/540113";
-import { c as _$$c } from "../905/167005";
+import { OverviewStatsView } from "../905/167005";
 import { i as _$$i } from "../905/565139";
 import { V } from "../905/697254";
 import { KZ } from "../905/193404";
@@ -110,7 +110,7 @@ function I({
       fileCount: i.data?.summary.total_files ?? 0
     })
   }];
-  return jsx(_$$c, {
+  return jsx(OverviewStatsView, {
     isLoading: "loading" === i.status,
     stats: r
   });

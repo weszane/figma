@@ -31,7 +31,7 @@ import { t as _$$t2 } from "../905/340158";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { x as _$$x } from "../905/209285";
 import { I as _$$I } from "../905/266213";
-import { er, sz } from "../905/753512";
+import { isLibraryModalContextAvailable, useLibraryModalContextOptional } from "../905/753512";
 import { m3, hx } from "../905/66449";
 import { RR } from "../905/514666";
 var l = o;
@@ -87,10 +87,10 @@ let M = registerModal(function ({
 let z = "subscription_file_view_footer--fileViewFooterButtons--qrfWL";
 let H = "subscription_file_view_footer--fileViewFooterButton--I2olA";
 export function $$W0(e) {
-  let t = er();
+  let t = isLibraryModalContextAvailable();
   let {
     sessionId
-  } = sz() ?? {};
+  } = useLibraryModalContextOptional() ?? {};
   let {
     teams,
     localStyles,

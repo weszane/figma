@@ -15,7 +15,7 @@ import { debug, throwTypeError } from "../figma_app/465776"
 import { useHasUnclaimedAutosaveChanges } from "../figma_app/840917"
 
 // Tile type enumeration
-enum TileType {
+export enum TileType {
   FILE = "FILE",
   PROTOTYPE = "PROTOTYPE",
   REPO = "REPO",
@@ -944,3 +944,15 @@ export const tilePermissionAtomFamilyAlias = tilePermissionAtomFamily
 export const TileTypeEnum = TileType
 export const useSelectedTilesFilterAlias = useSelectedTilesFilter
 export const createRepoTileAlias = findBestBranchForRepoTile
+export const Nu = createPrototypeTile
+export const Tf = TileUtils
+export const Y6 = renamingStateAtom
+export const YC = tileTypeToComponentFileTypeMap
+export const c_ = useTileAutosaveChanges;
+export const fA = createFileTile
+export const gB = createOfflineFileTile
+export const hi = tilePermissionAtomFamily
+export const nb = TileType;
+export const nw = useSelectedTilesFilter;
+export const uy = findBestBranchForRepoTile
+export const yF = createPrototypeTile

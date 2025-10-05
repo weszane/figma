@@ -16,7 +16,7 @@ import { showModalHandler } from '../905/156213';
 import { Qt, zW } from '../905/162414';
 import { ServiceCategories } from '../905/165054';
 import { b as _$$b } from '../905/168657';
-import { t as _$$t4 } from '../905/192333';
+import { PinningState } from '../905/192333';
 import { c as _$$c2 } from '../905/196462';
 import { gk } from '../905/222884';
 import { labConfigurations, useLabConfiguration } from '../905/226610';
@@ -1768,7 +1768,7 @@ function nr(e) {
     }));
     ew();
   }, [dispatch, setIsPinned, ew]);
-  let eP = useSelector(e => e.universalInsertModal?.pinned === _$$t4.PINNED_AND_DOCKED_LEFT);
+  let eP = useSelector(e => e.universalInsertModal?.pinned === PinningState.PINNED_AND_DOCKED_LEFT);
   let eI = useLatestRef(R);
   let eT = eI && eI !== R;
   let eM = eI && V.equals(eI);

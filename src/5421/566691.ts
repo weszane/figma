@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useRef } from "react";
 import { IconButton } from "../905/443068";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { S } from "../905/711470";
 import { i as _$$i } from "../905/708784";
 import { L } from "../905/704296";
@@ -107,7 +107,7 @@ export function $$S0({
       n.disconnect();
     };
   }, [t]);
-  let [C, N, S] = _$$t.useManagedTabs({
+  let [C, N, S] = Tabs.useManagedTabs({
     properties: n,
     console: !0
   }, l, e => s(e));
@@ -134,12 +134,12 @@ export function $$S0({
         className: "devtools_code_console--headerRow--2O6aI",
         children: [jsx("div", {
           className: "devtools_code_console--headerRowTabs--Qo6UD",
-          children: jsxs(_$$t.TabStrip, {
+          children: jsxs(Tabs.TabStrip, {
             manager: S,
-            children: [jsx(_$$t.Tab, {
+            children: [jsx(Tabs.Tab, {
               ...C.properties,
               children: renderI18nText("sites.code_component.properties")
-            }), jsx(_$$t.Tab, {
+            }), jsx(Tabs.Tab, {
               ...C.console,
               children: renderI18nText("sites.code_component.console")
             })]
@@ -160,11 +160,11 @@ export function $$S0({
         })]
       }), jsxs("div", {
         className: "devtools_code_console--tabPanelContainer--w2g7B",
-        children: [0 === Object.keys(assignmentValuesByDefId).length ? jsx(_$$t.TabPanel, {
+        children: [0 === Object.keys(assignmentValuesByDefId).length ? jsx(Tabs.TabPanel, {
           ...N.properties,
           height: "fill",
           children: jsx(F, {})
-        }) : jsx(_$$t.TabPanel, {
+        }) : jsx(Tabs.TabPanel, {
           ...N.properties,
           height: "fill",
           children: jsx(_$$P, {
@@ -178,7 +178,7 @@ export function $$S0({
               windowRef: t
             })
           })
-        }), jsx(_$$t.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...N.console,
           height: "fill",
           children: jsx(_$$P, {

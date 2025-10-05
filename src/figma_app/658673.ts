@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
-import { KE, En } from "../905/116101";
+import { closeUniversalInsertModal, setUniversalInsertModalOpen } from "../905/116101";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { IntegrationUtils } from "../figma_app/469876";
 import { KindEnum } from "../905/129884";
@@ -19,11 +19,11 @@ export function $$E0() {
   let r = e && t;
   let E = useDispatch();
   let y = useCallback(() => {
-    r ? (E(KE()), Fullscreen?.triggerActionInUserEditScope("set-tool-default", {
+    r ? (E(closeUniversalInsertModal()), Fullscreen?.triggerActionInUserEditScope("set-tool-default", {
       source: fK
     })) : (Fullscreen?.triggerActionInUserEditScope("clear-tool", {
       source: fK
-    }), E(En({
+    }), E(setUniversalInsertModalOpen({
       initialX: 0,
       initialY: 0
     })), logAndTrackCTA({

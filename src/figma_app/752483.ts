@@ -26,7 +26,7 @@ import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { p as _$$p } from "../905/42189";
-import { s as _$$s2 } from "../figma_app/504088";
+import { SimpleComponentType } from "../figma_app/504088";
 import { ModalContainer } from "../figma_app/918700";
 import { $v } from "../figma_app/613182";
 import { A as _$$A } from "../905/438475";
@@ -279,7 +279,7 @@ export let $$W0 = registerModal(function ({
       initialX: 0,
       initialY: 0,
       initialTab: el ? "widget" === e ? _$$p.WIDGETS : _$$p.PLUGINS : void 0,
-      initialFdResourceTab: eo ? "widget" === e ? _$$s2.WIDGET : _$$s2.PLUGIN : void 0,
+      initialFdResourceTab: eo ? "widget" === e ? SimpleComponentType.WIDGET : SimpleComponentType.PLUGIN : void 0,
       initialFdView: eo ? "development" : void 0,
       scrollDevelopmentSectionIntoView: el,
       source: "extension-new-develompent-modal"

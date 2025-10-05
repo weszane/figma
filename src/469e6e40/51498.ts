@@ -12,7 +12,7 @@ import { S as _$$S, V as _$$V } from '../469e6e40/678381';
 import { E as _$$E3 } from '../905/53857';
 import { J as _$$J } from '../905/129695';
 import { KindEnum } from '../905/129884';
-import { t as _$$t2 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { hideModal, popModalStack, showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { InputComponent } from '../905/185998';
@@ -626,7 +626,7 @@ let em = {
   Contents(e) {
     let t;
     let a = useDispatch();
-    let [s, i, r] = _$$t2.useTabs({
+    let [s, i, r] = Tabs.useTabs({
       idp_details: !0,
       domain_mapping: !0
     });
@@ -704,12 +704,12 @@ let em = {
           }), jsx(_$$m.Header, {
             children: jsx('div', {
               ...props(l ? e_.tabStrip : e_.tabStripPreNickname),
-              children: jsxs(_$$t2.TabStrip, {
+              children: jsxs(Tabs.TabStrip, {
                 manager: r,
-                children: [jsx(_$$t2.Tab, {
+                children: [jsx(Tabs.Tab, {
                   ...s.idp_details,
                   children: getI18nString('idp_management.flyout.identity_provider')
-                }), jsx(_$$t2.Tab, {
+                }), jsx(Tabs.Tab, {
                   ...s.domain_mapping,
                   children: getI18nString('idp_management.flyout.domain_mapping')
                 })]
@@ -718,14 +718,14 @@ let em = {
           })]
         }), jsxs('div', {
           className: 'x78zum5 xdt5ytf xh8yej3 x98rzlu x2lwn1j xysyzu8',
-          children: [jsx(_$$t2.TabPanel, {
+          children: [jsx(Tabs.TabPanel, {
             ...i.idp_details,
             children: jsx(el, {
               idpData: e.idpData,
               k12GoogleOrg: e.org.k12_google_org,
               canOrgUseMultiIdpScim: e.canOrgUseMultiIdpScim
             })
-          }), jsx(_$$t2.TabPanel, {
+          }), jsx(Tabs.TabPanel, {
             ...i.domain_mapping,
             children: jsx(eo, {
               idpData: e.idpData,

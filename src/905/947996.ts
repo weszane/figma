@@ -9,7 +9,7 @@ import { styleBuilderInstance } from "../905/941192";
 import { UserAvatar } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 import { preventDefault } from "../figma_app/753501";
-import { E as _$$E } from "../905/511388";
+import { LibraryIconWithTooltip } from "../905/511388";
 import { D } from "../905/621624";
 var $$n0;
 var l = o;
@@ -89,7 +89,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
         children: renderI18nText("community.community_author", {
           author: e
         })
-      }), jsx(_$$E, {
+      }), jsx(LibraryIconWithTooltip, {
         libraryKey: void 0,
         showTooltip: !0,
         isFragment: !0

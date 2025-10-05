@@ -16,7 +16,7 @@ import { F as _$$F } from "../figma_app/954027";
 import { reportError } from "../905/11";
 import { base64ToUint8Array, uint8ArrayToBase64 } from "../figma_app/930338";
 import { GI, IZ, SK } from "../905/125333";
-import { KE, En, jx } from "../905/116101";
+import { closeUniversalInsertModal, setUniversalInsertModalOpen, updateSourceRect } from "../905/116101";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { Ii } from "../figma_app/644079";
 import { CB } from "../figma_app/442259";
@@ -27,7 +27,7 @@ import { Ef, se, HS, yx } from "../figma_app/546509";
 import { WC, T$, wi } from "../figma_app/792783";
 import { getObservableValue } from "../figma_app/84367";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { t as _$$t } from "../905/192333";
+import { PinningState } from "../905/192333";
 import { Yh } from "../figma_app/357047";
 import { b as _$$b } from "../905/635568";
 import { JI, Vq, pf, pc, xH, $$in, sg, Ud } from "../figma_app/942553";
@@ -1819,10 +1819,10 @@ export function $$eE0() {
     }
   }, [q]);
   let ee = wi();
-  let et = useSelector(e => e.universalInsertModal.pinned === _$$t.NOT_PINNED);
+  let et = useSelector(e => e.universalInsertModal.pinned === PinningState.NOT_PINNED);
   let en = useDispatch();
   let eu = useCallback(e => {
-    ee ? (et && $$el4("set-tool-default"), en(KE())) : ($$el4("clear-tool"), en(En({
+    ee ? (et && $$el4("set-tool-default"), en(closeUniversalInsertModal())) : ($$el4("clear-tool"), en(setUniversalInsertModalOpen({
       initialX: 0,
       initialY: 0,
       sourceRect: e
@@ -1830,7 +1830,7 @@ export function $$eE0() {
   }, [en, ee, et]);
   let eh = useSelector(e => !!e.universalInsertModal.sourceRect);
   let em = useCallback(e => {
-    eh && en(jx({
+    eh && en(updateSourceRect({
       sourceRect: e
     }));
   }, [en, eh]);
@@ -1852,7 +1852,7 @@ export function $$eE0() {
       eb();
       (t = e === y && $$eo1(y) ? ei() : $$es3.get(e)) && $$el4(t);
     }, eE._native_toolbar_activate_overflowing_tool = (t, r) => {
-      switch (r.y = e(r.y), "INSERT" !== t && et && en(KE()), "STAMP" !== t && q && CB.closeWheel(), t) {
+      switch (r.y = e(r.y), "INSERT" !== t && et && en(closeUniversalInsertModal()), "STAMP" !== t && q && CB.closeWheel(), t) {
         case "SHAPE":
         case "CONNECTOR":
           break;

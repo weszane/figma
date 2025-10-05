@@ -12,7 +12,7 @@ import { _ as _$$_ } from "../905/264868";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { N } from "../905/794224";
 import { ThumbnailContainer } from "../905/600041";
-import { Tf, nb, hi } from "../figma_app/543100";
+import { TileUtils, TileType, tilePermissionAtomFamily } from "../figma_app/543100";
 import { FilePermissionsLgShadowView } from "../figma_app/43951";
 function g({
   thumbnailUrl: e,
@@ -126,24 +126,24 @@ function f({
   });
 }
 let v = e => {
-  let t = Tf.getIsThumbnailFullWidth(e);
-  let i = Tf.getEditorType(e);
-  return e.type === nb.PROTOTYPE ? DesignsList.PROTOTYPE : e.type === nb.OFFLINE_FILE ? DesignsList.OFFLINE : i === FFileType.SLIDES ? DesignsList.SLIDES : i === FFileType.WHITEBOARD ? t ? DesignsList.WHITEBOARD : DesignsList.DEFAULT_WHITEBOARD : t ? DesignsList.DESIGN : DesignsList.DEFAULT_DESIGN;
+  let t = TileUtils.getIsThumbnailFullWidth(e);
+  let i = TileUtils.getEditorType(e);
+  return e.type === TileType.PROTOTYPE ? DesignsList.PROTOTYPE : e.type === TileType.OFFLINE_FILE ? DesignsList.OFFLINE : i === FFileType.SLIDES ? DesignsList.SLIDES : i === FFileType.WHITEBOARD ? t ? DesignsList.WHITEBOARD : DesignsList.DEFAULT_WHITEBOARD : t ? DesignsList.DESIGN : DesignsList.DEFAULT_DESIGN;
 };
 export function $$I0({
   tile: e,
   interactiveThumbnailsEnabled: t,
   ...i
 }) {
-  let o = useAtomWithSubscription(hi(e));
-  let l = Tf.getThumbnailUrl(e);
-  let c = Tf.getTouchedAt(e);
+  let o = useAtomWithSubscription(tilePermissionAtomFamily(e));
+  let l = TileUtils.getThumbnailUrl(e);
+  let c = TileUtils.getTouchedAt(e);
   let u = v(e);
-  let p = Tf.getFileOrMainBranchKey(e);
+  let p = TileUtils.getFileOrMainBranchKey(e);
   if (useSubscription(FilePermissionsLgShadowView(getFeatureFlags().iam_pv2_lg_pol_smoke && p ? {
     fileKey: p,
     linkAccessOverrideKey: null
-  } : null)), Tf.getIsPasswordProtected(e)) {
+  } : null)), TileUtils.getIsPasswordProtected(e)) {
     if ("loading" === o.status) return jsx(ThumbnailContainer, {
       ...i
     });
@@ -152,13 +152,13 @@ export function $$I0({
       ...i
     });
   }
-  let m = Tf.getClientMeta(e);
-  let h = Tf.getEditorType(e);
-  let g = Tf.getFileOrMainBranchKey(e);
+  let m = TileUtils.getClientMeta(e);
+  let h = TileUtils.getEditorType(e);
+  let g = TileUtils.getFileOrMainBranchKey(e);
   return getFeatureFlags().scrub_file_browser_search_results && t && l ? jsx(f, {
     thumbnailUrl: l,
     thumbnailType: u,
-    additionalThumbnailUrls: Tf.getPreviewThumbnailUrls(e) ?? [],
+    additionalThumbnailUrls: TileUtils.getPreviewThumbnailUrls(e) ?? [],
     clientMeta: m,
     lastTouchedAt: c,
     editorType: h,

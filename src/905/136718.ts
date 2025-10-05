@@ -1,106 +1,145 @@
-import { H } from "../905/730910";
-import { c } from "../905/543659";
-import { N } from "../905/64868";
-import { R } from "../905/927840";
-import { t } from "../905/367656";
-import { normalizeObjectKeys } from "../905/8035";
-import { H2, fl, wI, $r, ut } from "../905/707098";
-export class $$c0 {
-  constructor(e, t) {
-    this._cachedProperties = {};
-    this._EXPENSIVE_TO_READ_node = e;
-    this.nodeCache = t;
+import { normalizeObjectKeys } from "../905/8035"
+import { BorderProperties } from "../905/64868"
+import { LayoutNode } from "../905/367656"
+import { AutoLayoutPropertyReader } from "../905/543659"
+import { memoizeFn, resolveEffectStyle, resolveFillStyle, resolveStrokeStyle, resolveVariable } from "../905/707098"
+import { getVisibleChildNodes } from "../905/730910"
+import { GridLayoutProperties } from "../905/927840"
+
+type Node = any
+type NodeCache = any
+type BoundVariables = any
+type InferredVariables = any
+export class ComponentNodeProperties {
+  private _cachedProperties: Record<string, any>
+  private _EXPENSIVE_TO_READ_node: Node
+  private nodeCache: NodeCache
+  constructor(e: Node, t: NodeCache) {
+    this._cachedProperties = {}
+    this._EXPENSIVE_TO_READ_node = e
+    this.nodeCache = t
   }
-  readValue(e, t) {
-    return H2(this._cachedProperties, e, this._EXPENSIVE_TO_READ_node, t);
+
+  private readValue<T>(key: string, getter: (node: Node) => T): T {
+    return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
+
   get id() {
-    return this.readValue("id", e => e.id);
+    return this.readValue("id", e => e.id)
   }
+
   get name() {
-    return this.readValue("name", e => e.name);
+    return this.readValue("name", e => e.name)
   }
+
   get isGroup() {
-    return !1;
+    return false
   }
+
   get layout() {
-    return this.readValue("layout", e => new t(e, this.nodeCache));
+    return this.readValue("layout", e => new LayoutNode(e, this.nodeCache))
   }
+
   get autoLayout() {
-    return this.readValue("autoLayout", e => new c(e));
+    return this.readValue("autoLayout", e => new AutoLayoutPropertyReader(e))
   }
+
   get gridLayout() {
-    return this.readValue("gridLayout", e => new R(e));
+    return this.readValue("gridLayout", e => new GridLayoutProperties(e))
   }
+
   get border() {
-    return this.readValue("border", e => new N(e, this.nodeCache, this.boundVariables, this.inferredVariables));
+    return this.readValue("border", e => new BorderProperties(e, this.nodeCache, this.boundVariables, this.inferredVariables))
   }
+
   get fills() {
-    return this.readValue("fills", e => "symbol" == typeof e?.fills ? [] : (e?.fills ?? []).filter(e => e.visible ?? !0));
+    return this.readValue("fills", e => typeof e?.fills === "symbol" ? [] : (e?.fills ?? []).filter(e => e.visible ?? !0))
   }
+
   get effects() {
-    return this.readValue("effects", e => e.effects.filter(e => e.visible ?? !0));
+    return this.readValue("effects", e => e.effects.filter(e => e.visible ?? !0))
   }
+
   get clipsContent() {
-    return this.readValue("clipsContent", e => e.clipsContent);
+    return this.readValue("clipsContent", e => e.clipsContent)
   }
+
   get variantProperties() {
-    return this.readValue("variantProperties", e => e.variantProperties);
+    return this.readValue("variantProperties", e => e.variantProperties)
   }
+
   get opacity() {
-    return this.readValue("opacity", e => e.opacity);
+    return this.readValue("opacity", e => e.opacity)
   }
+
   get blendMode() {
-    return this.readValue("blendMode", e => e.blendMode);
+    return this.readValue("blendMode", e => e.blendMode)
   }
+
   get componentName() {
-    return this.readValue("componentName", e => e.parent?.type === "COMPONENT_SET" ? e.parent.name : e.name);
+    return this.readValue("componentName", e => e.parent?.type === "COMPONENT_SET" ? e.parent.name : e.name)
   }
+
   get properties() {
-    return this.readValue("properties", e => {
-      let t;
+    return this.readValue("properties", (e) => {
+      let t
       if (e.parent?.type === "COMPONENT_SET") {
-        let i = e.parent;
-        t = normalizeObjectKeys(i.componentPropertyDefinitions);
-      } else t = normalizeObjectKeys(e.componentPropertyDefinitions);
-      return t;
-    });
+        let i = e.parent
+        t = normalizeObjectKeys(i.componentPropertyDefinitions)
+      }
+      else {
+        t = normalizeObjectKeys(e.componentPropertyDefinitions)
+      }
+      return t
+    })
   }
+
   get fillStyle() {
-    return this.readValue("fillStyle", e => fl(e, this.nodeCache.stylesResolver));
+    return this.readValue("fillStyle", e => resolveFillStyle(e, this.nodeCache.stylesResolver))
   }
+
   get strokeStyle() {
-    return this.readValue("strokeStyle", e => wI(e, this.nodeCache.stylesResolver));
+    return this.readValue("strokeStyle", e => resolveStrokeStyle(e, this.nodeCache.stylesResolver))
   }
+
   get effectStyle() {
-    return this.readValue("effectStyle", e => $r(e, this.nodeCache.stylesResolver));
+    return this.readValue("effectStyle", e => resolveEffectStyle(e, this.nodeCache.stylesResolver))
   }
-  get boundVariables() {
-    return this.readValue("boundVariables", e => e.boundVariables);
+
+  get boundVariables(): BoundVariables {
+    return this.readValue("boundVariables", e => e.boundVariables)
   }
-  get inferredVariables() {
-    return this.readValue("inferredVariables", e => e.availableInferredVariables);
+
+  get inferredVariables(): InferredVariables {
+    return this.readValue("inferredVariables", e => e.availableInferredVariables)
   }
+
   get children() {
-    return this.readValue("children", e => H(this.nodeCache, e));
+    return this.readValue("children", e => getVisibleChildNodes(this.nodeCache, e))
   }
-  getVariableValue(e) {
-    return ut(this.boundVariables, this.inferredVariables, e, this.nodeCache.variableResolver);
+
+  getVariableValue(e: string) {
+    return resolveVariable(this.boundVariables, this.inferredVariables, e, this.nodeCache.variableResolver)
   }
-  setName(e) {
-    this._cachedProperties.name = e;
+
+  setName(e: string) {
+    this._cachedProperties.name = e
   }
-  static from(e, t) {
-    return new $$c0(e, t);
+
+  static from(e: Node, t: NodeCache) {
+    return new ComponentNodeProperties(e, t)
   }
+
   isAutoLayout() {
-    return "NONE" !== this.autoLayout.layoutMode && !this.isGrid();
+    return this.autoLayout.layoutMode !== "NONE" && !this.isGrid()
   }
+
   isLayoutContainer() {
-    return "NONE" !== this.autoLayout.layoutMode;
+    return this.autoLayout.layoutMode !== "NONE"
   }
+
   isGrid() {
-    return "GRID" === this.gridLayout.layoutMode;
+    return this.gridLayout.layoutMode === "GRID"
   }
 }
-export const F = $$c0;
+export const F = ComponentNodeProperties

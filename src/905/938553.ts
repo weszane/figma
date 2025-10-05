@@ -138,7 +138,7 @@ import { oE, zK } from '../figma_app/397269';
 import { isValidEmail } from '../figma_app/416935';
 import { throwTypeError } from '../figma_app/465776';
 import { getPluginWidgetLabel, mapFileTypeToEnum } from '../figma_app/471982';
-import { s as _$$s3 } from '../figma_app/504088';
+import { SimpleComponentType } from '../figma_app/504088';
 import { Dl, fd, fy, gD, Ij, pm, Qi, R8, se, uX, Vp, wx, zn } from '../figma_app/559491';
 import { isAcceptedPublisher, isAnyPublisher, sendPublisherInvites } from '../figma_app/564095';
 import { $W, oB as _$$oB, Dd, f7, j4, kN, of, UU, xw } from '../figma_app/599979';
@@ -1996,7 +1996,7 @@ class iW extends Component {
           initialX: 0,
           initialY: 0,
           initialTab: i === 'figjam' ? this.isWidget() ? _$$p.WIDGETS : _$$p.PLUGINS : void 0,
-          initialFdResourceTab: i === 'figma' ? this.isWidget() ? _$$s3.WIDGET : _$$s3.PLUGIN : void 0,
+          initialFdResourceTab: i === 'figma' ? this.isWidget() ? SimpleComponentType.WIDGET : SimpleComponentType.PLUGIN : void 0,
           initialFdView: i === 'figma' ? 'development' : void 0,
           scrollDevelopmentSectionIntoView: i === 'figjam',
           source: 'extension-publish-modal'

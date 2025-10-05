@@ -2,10 +2,11 @@ import { FlashActions } from '../905/573154'
 import { getFeatureFlags } from '../905/601108'
 import { selectViewAction } from '../905/929976'
 import { FFileType, FPlanNameType } from '../figma_app/191312'
+import { isIntegrationContext } from '../figma_app/469876'
 import { isTeamFolderV2 } from '../figma_app/528509'
 import { AddOperationType, checkTeamFileRestrictions } from '../figma_app/598018'
 import { canCreateFileType } from '../figma_app/687776'
-import { desktopAPIInstance } from '../figma_app/876459'
+import { desktopAPIInstance } from '../figma_app/876459' // $$g3
 
 /**
  * Shows the file browser or displays an error if desktopAPIInstance is unavailable.
@@ -71,5 +72,6 @@ export function canCreateTeamFile(file: { teamId?: string, plan?: { tier?: FPlan
 // Refactored exports for clarity and traceability
 export const A7 = showFileBrowserOrError // $$p0
 export const ds = getRandomString // $$h2
-export const xp = canCreateTeamFile // $$g3
-export { ck } from '../figma_app/469876'
+export const xp = canCreateTeamFile
+export const ck = isIntegrationContext
+export {isIntegrationContext}

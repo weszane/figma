@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { setupAutoFocusHandler, setupKeyboardNavigationFocus } from '../905/44915';
 import { useListItemRegistration } from '../905/479155';
-import { M3 } from '../figma_app/119475';
+import { useKeyboardNavigationItem } from '../figma_app/119475';
 
 /**
  * Handles keyboard navigation and focus logic for a grid/list item.
@@ -43,7 +43,7 @@ export function usKeyboardFocusHandler({
     isFauxFocused,
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path,
     column,
     navigationOptions: typeof navigationOptions === 'function' ? navigationOptions({

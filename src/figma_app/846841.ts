@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { noop } from 'lodash-es';
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { ButtonPrimitive } from "../905/632989";
 import { k as _$$k } from "../905/792988";
 import { q as _$$q } from "../905/820062";
@@ -196,7 +196,7 @@ export function $$eR6({
   let [ti, ta] = useAtomValueAndSetter(B1);
   let ts = e ? "actions-visual-search-library-filter" : $$ew1;
   let to = !e || et;
-  let [tl, td, tc] = _$$t.useTabs({
+  let [tl, td, tc] = Tabs.useTabs({
     [Qx.PLAN_FILE_ASSETS]: to,
     [Qx.COMMUNITY]: !0
   }, {
@@ -500,7 +500,7 @@ export function $$eR6({
             justify: "space-between",
             children: [jsx("div", {
               children: tw
-            }), jsx(_$$t.TabPanel, {
+            }), jsx(Tabs.TabPanel, {
               ...td[Qx.PLAN_FILE_ASSETS],
               children: jsxs("div", {
                 className: cssBuilderInstance.if(!e, cssBuilderInstance.h24).if(e, cssBuilderInstance.h32).flex.itemsCenter.$,
@@ -535,7 +535,7 @@ export function $$eR6({
                   entryPoint: ez
                 })]
               })
-            }), jsx(_$$t.TabPanel, {
+            }), jsx(Tabs.TabPanel, {
               ...td[Qx.COMMUNITY],
               children: jsx("div", {
                 className: cssBuilderInstance.if(!e, cssBuilderInstance.h24).if(e, cssBuilderInstance.h32).flex.itemsCenter.$
@@ -549,7 +549,7 @@ export function $$eR6({
         value: {
           activeTabId: tc.activeTab
         },
-        children: [to && jsx(_$$t.TabPanel, {
+        children: [to && jsx(Tabs.TabPanel, {
           ...td[Qx.PLAN_FILE_ASSETS],
           children: jsx(ZD.Provider, {
             value: {
@@ -626,7 +626,7 @@ export function $$eR6({
               })
             }, tV)
           })
-        }), jsx(_$$t.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...td[Qx.COMMUNITY],
           children: jsx(_$$q2, {
             children: jsx(_$$M, {

@@ -19,8 +19,8 @@ import { Pp } from "../vendor/330821";
 import { trackEventAnalytics } from "../905/449184";
 import { K } from "../905/918348";
 import { WEB } from "../905/359509";
-import { j5 } from "../figma_app/711907";
-import { qZ } from "../905/201014";
+import { ChangeType } from "../figma_app/711907";
+import { CodegenPlatform } from "../905/201014";
 import { Q } from "../905/346809";
 import { WD } from "../figma_app/571341";
 var d = l;
@@ -178,7 +178,7 @@ let L = memo(({
     plugin: l
   }) {
     let d = useMemo(() => s.id === WEB && "first-party" === s.type ? {
-      id: qZ.CSS,
+      id: CodegenPlatform.CSS,
       type: "first-party"
     } : s, [s]);
     return function ({
@@ -219,10 +219,10 @@ let L = memo(({
             let n;
             i.added ? (n = {
               ...e.lines[a],
-              diff: j5.ADDED
+              diff: ChangeType.ADDED
             }, a++) : (i.removed ? n = {
               ...t.lines[s],
-              diff: j5.REMOVED,
+              diff: ChangeType.REMOVED,
               excludeFromCopy: !0
             } : (n = e.lines[a], a++), s++);
             o.push(n);

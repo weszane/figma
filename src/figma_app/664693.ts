@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
 import { ServiceCategories } from "../905/165054";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { ButtonPrimitive } from "../905/632989";
@@ -42,7 +42,7 @@ export function $$U0() {
     type: "option",
     text: e.name
   })), [t]);
-  let [u, p, _] = _$$t.useTabs({
+  let [u, p, _] = Tabs.useTabs({
     [i6.STRUCTURE]: !0,
     [i6.THEME]: !0,
     [i6.EXAMPLES]: !0
@@ -71,17 +71,17 @@ export function $$U0() {
         items: d,
         disabled: 0 === d.length
       }), jsxs(FlexBox, {
-        children: [jsxs(_$$t.TabStrip, {
+        children: [jsxs(Tabs.TabStrip, {
           manager: _,
-          children: [jsx(_$$t.Tab, {
+          children: [jsx(Tabs.Tab, {
             recordingKey: "lintStructure",
             ...u.structure,
             children: "Structure"
-          }), jsx(_$$t.Tab, {
+          }), jsx(Tabs.Tab, {
             recordingKey: "lintTheme",
             ...u.theme,
             children: "Theme"
-          }), jsx(_$$t.Tab, {
+          }), jsx(Tabs.Tab, {
             recordingKey: "lintExamples",
             ...u.examples,
             children: "Examples"
@@ -105,7 +105,7 @@ export function $$U0() {
       })]
     }), a && result && jsxs("div", {
       className: cssBuilderInstance.wFull.$,
-      children: [jsx(_$$t.TabPanel, {
+      children: [jsx(Tabs.TabPanel, {
         ...p.structure,
         children: jsx($$V1, {
           validationFailures: result,
@@ -113,7 +113,7 @@ export function $$U0() {
           category: i6.STRUCTURE,
           supportedKitType: v2.FIRST_PARTY
         })
-      }), jsx(_$$t.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...p.theme,
         children: jsx($$V1, {
           validationFailures: result,
@@ -121,7 +121,7 @@ export function $$U0() {
           category: i6.THEME,
           supportedKitType: v2.FIRST_PARTY
         })
-      }), jsx(_$$t.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...p.examples,
         children: jsx($$V1, {
           validationFailures: result,

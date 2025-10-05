@@ -11,7 +11,7 @@ import { LIBRARY_PREFERENCES_MODAL, LibraryTabEnum } from "../figma_app/633080";
 import { Vg } from "../905/300621";
 import { r6 } from "../905/542608";
 import { T } from "../figma_app/472024";
-import { FX } from "../905/753512";
+import { getTabKeyFromEnum } from "../905/753512";
 export function $$_0({
   entrypoint: e,
   modalType: t,
@@ -33,7 +33,7 @@ export function $$_0({
       orgId: b,
       isBranch: y ? isBranchAlt(y) : void 0,
       isRedesign: v,
-      tab: v ? FX(i) : void 0
+      tab: v ? getTabKeyFromEnum(i) : void 0
     }, {
       forwardToDatadog: !0
     });

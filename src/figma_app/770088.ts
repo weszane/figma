@@ -3,7 +3,7 @@ import { onboardingCommentIdAtom } from '../905/29425';
 import { m as _$$m } from '../905/70820';
 import { createActionCreator } from '../905/73481';
 import { showModalHandler } from '../905/156213';
-import { zq } from '../905/193529';
+import { lastCreatedCommentIdAction } from '../905/193529';
 import { resolveMessage } from '../905/231762';
 import { waitForAnimationFrame } from '../905/236856';
 import { VisualBellActions } from '../905/302958';
@@ -785,7 +785,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
     e.getState().userFlags.has_created_comment || e.dispatch(postUserFlag({
       has_created_comment: !0
     }));
-    e.dispatch(zq({
+    e.dispatch(lastCreatedCommentIdAction({
       lastCreatedCommentId: g.id
     }));
   }).catch(r => {

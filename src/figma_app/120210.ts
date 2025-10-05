@@ -6,11 +6,11 @@ import { parsePxInt } from "../figma_app/783094";
 import { NX } from "../figma_app/243213";
 import { Point } from "../905/736624";
 import { s1, uR, d6 } from "../figma_app/304207";
-import { KE } from "../905/116101";
+import { closeUniversalInsertModal } from "../905/116101";
 import { isWhiteboardFileType } from "../figma_app/976749";
 import { findProfile } from "../figma_app/740025";
 import { Tc } from "../905/797478";
-import { t } from "../905/192333";
+import { PinningState } from "../905/192333";
 import { wR } from "../figma_app/293326";
 import { kLt, M$q } from "../figma_app/27776";
 let $$E3 = 480;
@@ -65,7 +65,7 @@ export function $$T1() {
   let e = useDispatch();
   return useCallback((t = !0) => {
     Fullscreen && t && Fullscreen.triggerAction("set-tool-default", null);
-    e(KE());
+    e(closeUniversalInsertModal());
   }, [e]);
 }
 export function $$I0(e, t, r) {
@@ -98,7 +98,7 @@ export function $$I0(e, t, r) {
   }, [r, u, e, t, d]);
 }
 export function $$S4(e) {
-  return e.mirror.appModel.currentTool === DesignGraphElements.NONE && e.universalInsertModal.showing && e.universalInsertModal.pinned === t.NOT_PINNED;
+  return e.mirror.appModel.currentTool === DesignGraphElements.NONE && e.universalInsertModal.showing && e.universalInsertModal.pinned === PinningState.NOT_PINNED;
 }
 export function $$v2(e, t, r, a) {
   let s = useDispatch();

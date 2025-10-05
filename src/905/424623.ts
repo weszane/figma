@@ -12,9 +12,9 @@ import { LibraryDataByLibraryKey } from "../figma_app/43951";
 import { mapComponentProperties, mapStateGroupProperties, mapStyleProperties } from "../figma_app/349248";
 import { subscribedSymbolsNodeIdsFromLoadedPagesSelector, subscribedStateGroupsNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { r as _$$r } from "../905/336143";
+import { UsedStylesContext } from "../905/336143";
 import { VJ, Kw } from "../905/610995";
-import { MV, px, q, VV, $l, RJ } from "../905/131786";
+import { mergeAssetMaps, separateItemsByType, buildLibraryLookupMap, sortByName, replaceStyleIfContentHash, upsertAndSwapComponentOrStateGroup } from "../905/131786";
 export function $$b3() {
   let e = useDispatch();
   let t = useSelector(e => e.mirror.sceneGraph);
@@ -22,8 +22,8 @@ export function $$b3() {
   let a = useSelector(subscribedStateGroupsNodeIdsFromLoadedPagesSelector);
   let s = useSelector(e => e.library);
   let o = useSelector(e => e.fileVersion);
-  let l = useContext(_$$r);
-  return useMemo(() => MV(t, i, a, s.publishedByLibraryKey, o, l?.allUsedStylesByLibraryKey || {}, e), [t, i, a, s.publishedByLibraryKey, o, l, e]);
+  let l = useContext(UsedStylesContext);
+  return useMemo(() => mergeAssetMaps(t, i, a, s.publishedByLibraryKey, o, l?.allUsedStylesByLibraryKey || {}, e), [t, i, a, s.publishedByLibraryKey, o, l, e]);
 }
 export function $$v1({
   fromLibraryKey: e,
@@ -31,10 +31,10 @@ export function $$v1({
 }) {
   let i = function (e) {
     let t = $$b3()[e];
-    return px(t);
+    return separateItemsByType(t);
   }(e);
   let n = x(t);
-  return q(i, n);
+  return buildLibraryLookupMap(i, n);
 }
 export function $$I2({
   fromLibraryKey: e,
@@ -74,10 +74,10 @@ function x(e) {
       }
     } : void 0 : void 0;
   }(e);
-  return useMemo(() => null == t ? px() : {
-    components: VV(t.libraryHierarchyPaths.map(e => e.components.map(e => mapComponentProperties(e, t.assetFile))).reduce((e, t) => [...e, ...t], [])),
-    stateGroups: VV(t.libraryHierarchyPaths.map(e => e.stateGroups.map(e => mapStateGroupProperties(e, t.assetFile))).reduce((e, t) => [...e, ...t], [])),
-    styles: VV(t.libraryHierarchyPaths.map(e => e.styles.map(e => mapStyleProperties(e, t.assetFile))).reduce((e, t) => [...e, ...t], []))
+  return useMemo(() => null == t ? separateItemsByType() : {
+    components: sortByName(t.libraryHierarchyPaths.map(e => e.components.map(e => mapComponentProperties(e, t.assetFile))).reduce((e, t) => [...e, ...t], [])),
+    stateGroups: sortByName(t.libraryHierarchyPaths.map(e => e.stateGroups.map(e => mapStateGroupProperties(e, t.assetFile))).reduce((e, t) => [...e, ...t], [])),
+    styles: sortByName(t.libraryHierarchyPaths.map(e => e.styles.map(e => mapStyleProperties(e, t.assetFile))).reduce((e, t) => [...e, ...t], []))
   }, [t]);
 }
 export function $$S0(e) {
@@ -105,7 +105,7 @@ export function $$S0(e) {
         let i = Fullscreen.getNumUsagesOfStyle(e.key, r);
         if (0 === i) continue;
         _ += i;
-        p.push($l(e, t, r, o).then(() => o(updateLibraryRemappingProgress({
+        p.push(replaceStyleIfContentHash(e, t, r, o).then(() => o(updateLibraryRemappingProgress({
           done: i
         }))));
         continue;
@@ -118,7 +118,7 @@ export function $$S0(e) {
       let u = e.type === PrimaryWorkflowEnum.COMPONENT ? e.content_hash : e.version;
       if (!l || !u) continue;
       let b = Fullscreen.getNumInstancesReferencingProductComponent(l);
-      0 !== b && (A += b, p.push(RJ(l, s).then(() => o(updateLibraryRemappingProgress({
+      0 !== b && (A += b, p.push(upsertAndSwapComponentOrStateGroup(l, s).then(() => o(updateLibraryRemappingProgress({
         done: b
       })))));
     }

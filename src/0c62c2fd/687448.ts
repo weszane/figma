@@ -18,7 +18,7 @@ import { VisualBellActions } from "../905/302958";
 import { l as _$$l } from "../905/767868";
 import { C as _$$C } from "../905/226458";
 import { selectViewAction } from "../905/929976";
-import { fA } from "../figma_app/543100";
+import { createFileTile } from "../figma_app/543100";
 import { getSelectedView } from "../figma_app/386952";
 import { DUserRole, TGroupType } from "../figma_app/858344";
 import { noop } from 'lodash-es';
@@ -149,7 +149,7 @@ export function $$U0({
 }) {
   let [E, I] = useState(u ?? []);
   let [N, C] = useState(!1);
-  let S = fA(i);
+  let S = createFileTile(i);
   let k = _$$l(i.folder_id);
   let R = countGraphemes(E, {
     includeTrailingWhitespace: !0

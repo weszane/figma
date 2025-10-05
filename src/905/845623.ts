@@ -44,7 +44,7 @@ let $$x0 = _$$n(() => {
     let e = f();
     let t = useLibraries(e);
     let i = t.data;
-    let [a] = setupResourceAtomHandler(EverPublishedLibraryQuery.EverPublishedLibraryQuery({
+    let [a] = setupResourceAtomHandler(EverPublishedLibraryQuery({
       libraryKeys: e
     }));
     let s = g(a);

@@ -11,7 +11,7 @@ import { reportError } from '../905/11';
 import { isLoading } from '../905/18797';
 import { setKeyboardShortcutPanelTab } from '../905/26824';
 import { isFullscreenSlidesView } from '../905/35881';
-import { P as _$$P2 } from '../905/36308';
+import { getMaskState } from '../905/36308';
 import { fullscreenAlias } from '../905/37051';
 import { A as _$$A3 } from '../905/51490';
 import { A as _$$A9 } from '../905/51743';
@@ -31,14 +31,14 @@ import { J as _$$J2 } from '../905/129695';
 import { KindEnum } from '../905/129884';
 import { N as _$$N } from '../905/130112';
 import { getFileTypeLargePx, getFileTypePx } from '../905/149328';
-import { t as _$$t7 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { b as _$$b } from '../905/168657';
 import { bL as _$$bL2, QB } from '../905/174266';
 import { zK, zM } from '../905/182453';
 import { permissionScopeHandler as _$$l, zk } from '../905/189185';
-import { t as _$$t3 } from '../905/192333';
+import { PinningState } from '../905/192333';
 import { c as _$$c } from '../905/196462';
 import { WP } from '../905/198599';
 import { l as _$$l4 } from '../905/202425';
@@ -739,7 +739,7 @@ function ej({
 function eO({
   children: e
 }) {
-  let t = useSelector(e => e.universalInsertModal?.pinned === _$$t3.PINNED_AND_DOCKED_LEFT);
+  let t = useSelector(e => e.universalInsertModal?.pinned === PinningState.PINNED_AND_DOCKED_LEFT);
   let i = _$$a2();
   let {
     isPropertiesPanelCollapsed
@@ -4062,7 +4062,7 @@ let ns = class e extends PureComponent {
       action: 'mask-selection',
       flags: ['edit'],
       get displayText() {
-        let e = _$$P2();
+        let e = getMaskState();
         return formatI18nMessage(e);
       }
     }, p ? {
@@ -9328,7 +9328,7 @@ let li = {
       onCreateStyle: c,
       onClose: u
     });
-    let [x, y, b] = _$$t7.useTabs({
+    let [x, y, b] = Tabs.useTabs({
       createStyle: !p,
       createVariable: !0
     }, {
@@ -9347,19 +9347,19 @@ let li = {
         children: [jsxs(DialogHeader, {
           children: [jsx(DialogHiddenTitle, {
             children: renderI18nText('design_systems.create_style.title')
-          }), jsxs(_$$t7.TabStrip, {
+          }), jsxs(Tabs.TabStrip, {
             manager: b,
-            children: [jsx(_$$t7.Tab, {
+            children: [jsx(Tabs.Tab, {
               ...x.createStyle,
               children: renderI18nText('design_systems.create_style.style')
-            }), jsx(_$$t7.Tab, {
+            }), jsx(Tabs.Tab, {
               ...x.createVariable,
               children: renderI18nText('variables.create_modal.title')
             })]
           })]
         }), jsxs(DialogBody, {
           padding: 0,
-          children: [jsx(_$$t7.TabPanel, {
+          children: [jsx(Tabs.TabPanel, {
             ...y.createStyle,
             children: jsx(oU, {
               inheritStyleKeyField: i,
@@ -9368,7 +9368,7 @@ let li = {
               onSubmit: onCreateStyleSubmit,
               shouldUseEyedropperStyleCreationFlow: h ?? !1
             })
-          }), jsx(_$$t7.TabPanel, {
+          }), jsx(Tabs.TabPanel, {
             ...y.createVariable,
             children: jsx(CreateVariableForm, {
               resolvedType: l,

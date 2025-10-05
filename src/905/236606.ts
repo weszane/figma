@@ -10,9 +10,9 @@ import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../905/963262";
 import { Fj } from "../figma_app/793429";
-import { Z4, M$, NT, Q6 } from "../905/77776";
-import { kt } from "../figma_app/711907";
-import { G6, P1 } from "../905/246310";
+import { BOUND_VAR_START_REGEX, BOUND_VAR_END_REGEX, BOUND_STYLE_START_REGEX, BOUND_STYLE_END_REGEX } from "../905/77776";
+import { joinCodeBlocks } from "../figma_app/711907";
+import { SUGGESTED_VARIABLE_START_PATTERN, SUGGESTED_VARIABLE_END_PATTERN } from "../905/246310";
 import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { useSubscribedLibraries } from "../figma_app/155728";
@@ -550,7 +550,7 @@ export function $$en1(e, t, i = {}, a, s) {
       }
     }(t);
     let a = 0;
-    let s = kt(e).replace(n, (e, t) => e ? (i[`${a}`] = {
+    let s = joinCodeBlocks(e).replace(n, (e, t) => e ? (i[`${a}`] = {
       highlightedColor: t,
       cssColor: r(t)
     }, e.replace(t, `INTERNALCHITID${a++}_`)) : "");
@@ -573,38 +573,38 @@ export function $$en1(e, t, i = {}, a, s) {
         tokens: []
       };
       e.forEach(e => {
-        if (e.types.includes("comment") && e.content.match(Z4)) {
-          let n = Z4.exec(e.content)[1];
+        if (e.types.includes("comment") && e.content.match(BOUND_VAR_START_REGEX)) {
+          let n = BOUND_VAR_START_REGEX.exec(e.content)[1];
           t.push(i);
           i = {
             tokens: [],
             varId: n
           };
-        } else if (e.types.includes("comment") && e.content.match(M$)) {
+        } else if (e.types.includes("comment") && e.content.match(BOUND_VAR_END_REGEX)) {
           t.push(i);
           i = {
             tokens: []
           };
-        } else if (e.types.includes("comment") && e.content.match(NT)) {
-          let n = NT.exec(e.content)[1];
+        } else if (e.types.includes("comment") && e.content.match(BOUND_STYLE_START_REGEX)) {
+          let n = BOUND_STYLE_START_REGEX.exec(e.content)[1];
           t.push(i);
           i = {
             tokens: [],
             styleId: n
           };
-        } else if (e.types.includes("comment") && e.content.match(Q6)) {
+        } else if (e.types.includes("comment") && e.content.match(BOUND_STYLE_END_REGEX)) {
           t.push(i);
           i = {
             tokens: []
           };
-        } else if (e.types.includes("comment") && e.content.match(G6)) {
-          let n = G6.exec(e.content)[1];
+        } else if (e.types.includes("comment") && e.content.match(SUGGESTED_VARIABLE_START_PATTERN)) {
+          let n = SUGGESTED_VARIABLE_START_PATTERN.exec(e.content)[1];
           t.push(i);
           i = {
             tokens: [],
             matchId: n
           };
-        } else e.types.includes("comment") && e.content.match(P1) ? (t.push(i), i = {
+        } else e.types.includes("comment") && e.content.match(SUGGESTED_VARIABLE_END_PATTERN) ? (t.push(i), i = {
           tokens: []
         }) : i.tokens.push(e);
       });

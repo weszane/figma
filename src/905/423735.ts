@@ -20,14 +20,14 @@ import { LibraryItemTilesByPage } from "../905/909811";
 import { Yt } from "../905/712714";
 import { c as _$$c } from "../905/511370";
 import { ZO } from "../905/691188";
-import { er as _$$er, sz } from "../905/753512";
-import { LI } from "../905/825399";
+import { isLibraryModalContextAvailable, useLibraryModalContextOptional } from "../905/753512";
+import { mapSubscribedLibraries } from "../905/825399";
 import { W as _$$W } from "../905/729905";
 import { RV } from "../figma_app/214643";
-import { Tf, Go, jN } from "../905/297574";
+import { mergeComponentsWithOrphanStateGroups, getLibraryLooseComponentAndStateGroupCount, useUsedStylesCount } from "../905/297574";
 import { W as _$$W2 } from "../905/657133";
 import { G as _$$G } from "../905/647352";
-import { C as _$$C } from "../905/180528";
+import { SubscriptionFileViewHeader } from "../905/180528";
 import { c as _$$c2 } from "../905/317997";
 import { Cb, dk, eT, p9, FA } from "../905/985059";
 var d = l;
@@ -42,7 +42,7 @@ export function $$F0({
   bodyOnly: U
 }) {
   let B = useFigmaLibrariesEnabled();
-  let V = _$$er();
+  let V = isLibraryModalContextAvailable();
   let G = useSubscription(LibraryModalAssetsDataByLibraryKey, {
     libraryKey: e
   }, {
@@ -61,13 +61,13 @@ export function $$F0({
   let $ = getCurrentTeam();
   let Z = !l && !F;
   let [X] = setupResourceAtomHandler(Yt(e));
-  let Q = useMemo(() => "loaded" !== X.status ? [] : Tf(X.data.components, X.data.stateGroups), [X]);
+  let Q = useMemo(() => "loaded" !== X.status ? [] : mergeComponentsWithOrphanStateGroups(X.data.components, X.data.stateGroups), [X]);
   let J = _$$c2({
     libraryKey: e
   });
   let ee = useHandleMouseEvent("communityLibraryFileView.backCaret", "mousedown", t);
-  let et = Go(e ?? _$$l(""));
-  let ei = jN(e);
+  let et = getLibraryLooseComponentAndStateGroupCount(e ?? _$$l(""));
+  let ei = useUsedStylesCount(e);
   let en = useSelector(e => !!$?.org_id && e.orgById[$.org_id]?.bigma_enabled);
   let er = ZO(l, F);
   let ea = useMemo(() => er(e), [e, er]);
@@ -82,16 +82,16 @@ export function $$F0({
     let {
       searchSessionId,
       queryId
-    } = sz() ?? {};
+    } = useLibraryModalContextOptional() ?? {};
     return useCallback(() => {
       let r = new Set([...workspaceApprovedLibraryKeys, ...orgApprovedLibraryKeys]);
-      let l = LI(i.data?.file?.libraryOrgSubscriptions ?? [], [{
+      let l = mapSubscribedLibraries(i.data?.file?.libraryOrgSubscriptions ?? [], [{
         library_key: e
       }], t);
-      let d = LI(i.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions ?? [], [{
+      let d = mapSubscribedLibraries(i.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions ?? [], [{
         library_key: e
       }], t);
-      let c = LI(i.data?.file?.libraryTeamSubscriptions ?? [], [{
+      let c = mapSubscribedLibraries(i.data?.file?.libraryTeamSubscriptions ?? [], [{
         library_key: e
       }], t);
       let u = null;
@@ -180,7 +180,7 @@ export function $$F0({
       libraryKey: e
     },
     children: jsxs(TabLoop, {
-      children: [jsx(_$$C, {
+      children: [jsx(SubscriptionFileViewHeader, {
         libraryStat: null,
         libraryKey: e,
         showingDefaultSubscriptionsForTeamId: l,

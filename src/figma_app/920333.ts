@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo, createContext, useContext, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { isNotNullish, assertNotNullish } from "../figma_app/95419";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
@@ -114,7 +114,7 @@ export function $$U6({
   children: s
 }) {
   let l = useCurrentFileKey();
-  let [d, u, p] = _$$t.useTabs({
+  let [d, u, p] = Tabs.useTabs({
     Recents: !1,
     Saved: !1,
     Explore: !1,

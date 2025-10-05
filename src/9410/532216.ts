@@ -40,7 +40,7 @@ import { logAndTrackCTA } from "../figma_app/314264";
 import { getRepoByIdAlt, isDefaultFile, isBranchAlt } from "../905/760074";
 import { m as _$$m, t as _$$t2 } from "../905/364535";
 import { $n } from "../905/930279";
-import { ck } from "../905/87821";
+import { isIntegrationContext } from "../905/87821";
 import { SR } from "../figma_app/852050";
 import { BI, m0 as _$$m2 } from "../figma_app/546509";
 import { selectCurrentFile, selectOpenFileObject } from "../figma_app/516028";
@@ -77,7 +77,7 @@ import { useFloatingTree } from "@floating-ui/react";
 import { RR } from "../figma_app/307841";
 import { l as _$$l } from "../905/714607";
 import { I as _$$I } from "../905/531560";
-import { qP, Fb } from "../figma_app/909778";
+import { removeFileFavorite, addFileFavorite } from "../figma_app/909778";
 import { $m } from "../figma_app/78808";
 import { Rh } from "../905/844322";
 import { kj, U1 } from "../905/191601";
@@ -86,7 +86,7 @@ import { showModalHandler } from "../905/156213";
 import { VK } from "../905/880488";
 import { isRestrictedPlanAccess } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/300562";
-import { T0, gV, t$ } from "../figma_app/863319";
+import { findFavoritedItem, isFavoritesLimitReached, sortWithPinnedItems } from "../figma_app/863319";
 import { getProjectUrl } from "../figma_app/528509";
 import { selectPermissionsState } from "../figma_app/212807";
 import { fileEntityDataMapper } from "../905/943101";
@@ -277,17 +277,17 @@ let e6 = memo(function () {
       currentTeamId: i
     });
     return useMemo(() => {
-      if (e && "loaded" === r.status) return T0(r.data, e.key);
+      if (e && "loaded" === r.status) return findFavoritedItem(r.data, e.key);
     }, [e, r]);
   }();
   let d = !!l;
   let c = selectCurrentUser();
   let u = selectCurrentFile();
   let p = te();
-  let h = "loaded" === i.status && gV(i.data, e);
+  let h = "loaded" === i.status && isFavoritesLimitReached(i.data, e);
   let m = i.data?.currentUser?.userSidebarSections != null ? getResourceDataOrFallback(i.data.currentUser.userSidebarSections) : null;
   let f = i.data?.currentUser?.baseOrgUser?.fileBrowserPreferences?.orderedSidebarSections ?? [];
-  let g = t$(m ?? [], f);
+  let g = sortWithPinnedItems(m ?? [], f);
   let _ = g.find(e => e.id === l?.resource.sidebarSectionId);
   let x = u?.folderId === c?.personal_drafts_folder_id;
   let y = pH(u?.key ?? null, {
@@ -319,7 +319,7 @@ let e7 = memo(function ({
       currentTeamId: r
     });
     let o = useMemo(() => {
-      if (t && "loaded" === s.status) return T0(s.data, t.key);
+      if (t && "loaded" === s.status) return findFavoritedItem(s.data, t.key);
     }, [t, s]);
     return (i, r) => {
       if (!t) return;
@@ -330,7 +330,7 @@ let e7 = memo(function ({
         file: fileEntityDataMapper.toLiveGraph(t),
         fileBrowserEntryPoint: !1
       };
-      i ? e(qP(n)) : e(Fb(n));
+      i ? e(removeFileFavorite(n)) : e(addFileFavorite(n));
     };
   }();
   let l = getI18nString("favorited_resources.add_to_sidebar");
@@ -414,13 +414,13 @@ let e8 = memo(function () {
     })]
   }) : null;
 });
-let e9 = ck();
+let e9 = isIntegrationContext();
 let te = () => {
   let e = selectCurrentFile();
   let t = useSelector(e => e.plans);
   return useMemo(() => !!t.find(t => e?.plan?.tier === FPlanNameType.ORG || e?.plan?.tier === FPlanNameType.ENTERPRISE ? `organization::${t.plan_id}` === e?.plan?.id : `team::${t.plan_id}` === e?.plan?.id), [t, e?.plan?.tier, e?.plan?.id]);
 };
-let tt = ck();
+let tt = isIntegrationContext();
 let ti = memo(function ({
   recordingKey: e = ""
 }) {

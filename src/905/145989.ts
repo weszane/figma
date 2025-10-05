@@ -1,34 +1,96 @@
-import { localStorageRef } from "../905/657224";
-import { IpcStorageHandler } from "../905/724705";
-import { fi, QC } from "../905/461516";
-var $$s0 = (e => (e.DESKTOP = "spellCheckDesktopLanguage", e.HUNSPELL = "spellCheckHunspellLanguage", e))($$s0 || {});
-let o = "spellCheckLanguage";
-export function $$l2() {
+import { LANGUAGE_DICTIONARIES, SpellCheckEngine } from "../905/461516"
+import { localStorageRef } from "../905/657224"
+import { IpcStorageHandler } from "../905/724705"
+
+export enum SpellCheckStorageKey {
+  DESKTOP = "spellCheckDesktopLanguage",
+  HUNSPELL = "spellCheckHunspellLanguage",
+}
+
+const LEGACY_SPELL_CHECK_LANGUAGE_KEY = "spellCheckLanguage"
+
+/**
+ * Migrates legacy spell check language settings to the new storage format.
+ *
+ * This function checks for the existence of a legacy language setting and migrates it
+ * to either the Hunspell or Desktop spell check engine based on the available dictionaries.
+ * The legacy setting is removed after migration.
+ *
+ * Original function name: $$l2
+ */
+export function migrateLegacySpellCheckLanguage(): void {
+  if (!localStorageRef)
+    return
+
+  const legacyLanguage = localStorageRef.getItem(LEGACY_SPELL_CHECK_LANGUAGE_KEY)
+  if (legacyLanguage === null)
+    return
+
+  const hasDesktopLanguage = typeof localStorageRef.getItem(SpellCheckStorageKey.DESKTOP) === "string"
+  const hasHunspellLanguage = typeof localStorageRef.getItem(SpellCheckStorageKey.HUNSPELL) === "string"
+
+  // Only migrate if neither new storage keys exist
+  if (!hasDesktopLanguage && !hasHunspellLanguage) {
+    if (Object.keys(LANGUAGE_DICTIONARIES).includes(legacyLanguage)) {
+      setSpellCheckLanguage(SpellCheckStorageKey.HUNSPELL, legacyLanguage)
+    }
+    else {
+      setSpellCheckLanguage(SpellCheckStorageKey.DESKTOP, legacyLanguage)
+    }
+    localStorageRef.removeItem(LEGACY_SPELL_CHECK_LANGUAGE_KEY)
+  }
+}
+
+/**
+ * Gets the appropriate storage key for a given spell check engine.
+ *
+ * @param engine - The spell check engine to get the storage key for
+ * @returns The corresponding storage key string
+ *
+ * Original function name: $$d4
+ */
+export function getSpellCheckStorageKey(engine: SpellCheckEngine): string {
+  switch (engine) {
+    case SpellCheckEngine.DESKTOP:
+    case SpellCheckEngine.AGENT:
+      return SpellCheckStorageKey.DESKTOP
+    case SpellCheckEngine.HUNSPELL:
+      return SpellCheckStorageKey.HUNSPELL
+    default:
+      throw new Error(`Unknown spell check engine: ${engine}`)
+  }
+}
+
+/**
+ * Sets a spell check language in local storage and notifies other tabs.
+ *
+ * @param key - The storage key to set
+ * @param value - The language value to store
+ *
+ * Original function name: $$c1
+ */
+export function setSpellCheckLanguage(key: string, value: string): void {
   if (localStorageRef) {
-    let e = localStorageRef.getItem(o);
-    if (null === e) return;
-    let t = "string" == typeof localStorageRef.getItem("spellCheckDesktopLanguage");
-    let i = "string" == typeof localStorageRef.getItem("spellCheckHunspellLanguage");
-    t || i || (Object.keys(fi).includes(e) ? $$c1("spellCheckHunspellLanguage", e) : $$c1("spellCheckDesktopLanguage", e), localStorageRef.removeItem(o));
+    localStorageRef.setItem(key, value)
+    new IpcStorageHandler().sendToOtherTabs(key)
   }
 }
-export function $$d4(e) {
-  switch (e) {
-    case QC.DESKTOP:
-    case QC.AGENT:
-      return "spellCheckDesktopLanguage";
-    case QC.HUNSPELL:
-      return "spellCheckHunspellLanguage";
-  }
+
+/**
+ * Gets a spell check language from local storage.
+ *
+ * @param key - The storage key to retrieve
+ * @returns The stored language value or null if not found
+ *
+ * Original function name: $$u3
+ */
+export function getSpellCheckLanguage(key: string): string | null {
+  return localStorageRef?.getItem(key) ?? null
 }
-export function $$c1(e, t) {
-  localStorageRef && (localStorageRef.setItem(e, t), new IpcStorageHandler().sendToOtherTabs(e));
-}
-export function $$u3(e) {
-  return localStorageRef && localStorageRef.getItem(e) || null;
-}
-export const Kz = $$s0;
-export const Up = $$c1;
-export const hO = $$l2;
-export const l9 = $$u3;
-export const up = $$d4;
+
+// Exported constants with meaningful names
+export const Kz = SpellCheckStorageKey
+export const Up = setSpellCheckLanguage
+export const hO = migrateLegacySpellCheckLanguage
+export const l9 = getSpellCheckLanguage
+export const up = getSpellCheckStorageKey

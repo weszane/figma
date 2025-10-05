@@ -29,7 +29,7 @@ import { bA } from "../figma_app/745458";
 import { useSubscribedLibraryKeys } from "../figma_app/155728";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { AX, r6 } from "../905/542608";
-import { sz } from "../905/753512";
+import { useLibraryModalContextOptional } from "../905/753512";
 function k() {
   reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Query for library consumers aborted during reconnect"));
 }
@@ -136,7 +136,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
   let W = B.productType;
   let {
     sessionId
-  } = sz() ?? {};
+  } = useLibraryModalContextOptional() ?? {};
   let Y = wM(scopedVariableSetUpdates.map(e => e.key));
   let $ = useCallback((e, r) => {
     if (Object.values(AX).includes(e)) {

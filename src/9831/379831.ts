@@ -39,7 +39,7 @@ import { R as _$$R } from "../905/741991";
 import { TreeRow } from "../905/27174";
 import eE from "classnames";
 import { R as _$$R2 } from "../905/307199";
-import { dP, M3 } from "../figma_app/119475";
+import { KeyboardNavigationProvider, useKeyboardNavigationItem } from "../figma_app/119475";
 import { SvgComponent } from "../905/714743";
 import { A as _$$A2 } from "../f2246930/129503";
 import { A as _$$A3 } from "../6828/718668";
@@ -604,7 +604,7 @@ function eF({
     o(!1);
     t(e.object.id);
   }, [o, t]);
-  return jsxs(dP, {
+  return jsxs(KeyboardNavigationProvider, {
     className: cssBuilderInstance.flex1.$,
     ref: d,
     allowVim: !0,
@@ -673,7 +673,7 @@ function eP({
   }();
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [0, 0],
     id: "input"
   });
@@ -740,7 +740,7 @@ function eU({
     setKeyboardNavigationElement,
     keyboardNavigationItem,
     isFauxFocused
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [1, t],
     id: object.id
   });

@@ -1,48 +1,66 @@
-import { H } from "../905/730910";
-import { t } from "../905/367656";
-import { normalizeObjectKeys } from "../905/8035";
-import { H2 } from "../905/707098";
-export class $$o0 {
-  constructor(e, t) {
-    this._cachedProperties = {};
-    this.nodeCache = t;
-    this._EXPENSIVE_TO_READ_node = e;
+import { normalizeObjectKeys } from "../905/8035"
+import { LayoutNode } from "../905/367656"
+import { memoizeFn } from "../905/707098"
+import { getVisibleChildNodes } from "../905/730910"
+
+type NodeCache = any
+type Node = any
+export class BasicNodeProperties {
+  private _cachedProperties: Record<string, any>
+  private nodeCache: NodeCache
+  private _EXPENSIVE_TO_READ_node: Node
+  constructor(e: Node, t: NodeCache) {
+    this._cachedProperties = {}
+    this.nodeCache = t
+    this._EXPENSIVE_TO_READ_node = e
   }
-  readValue(e, t) {
-    return H2(this._cachedProperties, e, this._EXPENSIVE_TO_READ_node, t);
+
+  private readValue<T>(key: string, getter: (node: Node) => T): T {
+    return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
+
   get id() {
-    return this.readValue("id", e => e.id);
+    return this.readValue("id", e => e.id)
   }
+
   get name() {
-    return this.readValue("name", e => e.name);
+    return this.readValue("name", e => e.name)
   }
+
   get layout() {
-    return this.readValue("layout", e => new t(e, this.nodeCache));
+    return this.readValue("layout", e => new LayoutNode(e, this.nodeCache))
   }
+
   get properties() {
-    return this.readValue("properties", e => normalizeObjectKeys(e.componentPropertyDefinitions));
+    return this.readValue("properties", e => normalizeObjectKeys(e.componentPropertyDefinitions))
   }
+
   get children() {
-    return this.readValue("children", e => H(this.nodeCache, e));
+    return this.readValue("children", e => getVisibleChildNodes(this.nodeCache, e))
   }
-  getVariableValue(e) {
-    return null;
+
+  getVariableValue(_e: string) {
+    return null
   }
-  setName(e) {
-    this._cachedProperties.name = e;
+
+  setName(e: string) {
+    this._cachedProperties.name = e
   }
-  static from(e, t) {
-    return new $$o0(e, t);
+
+  static from(e: Node, t: NodeCache) {
+    return new BasicNodeProperties(e, t)
   }
+
   isAutoLayout() {
-    return !1;
+    return false
   }
+
   isLayoutContainer() {
-    return !1;
+    return false
   }
+
   isGrid() {
-    return !1;
+    return false
   }
 }
-export const B = $$o0;
+export const B = BasicNodeProperties

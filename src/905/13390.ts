@@ -7,7 +7,7 @@ import { reportError } from '../905/11';
 import { NotificationType } from '../905/18613';
 import { searchResultClicked } from '../905/34809';
 import { removeRecentPrototypeViewed } from '../905/70982';
-import { an, y$ } from '../905/81009';
+import { resetTileSelection, selectTiles } from '../905/81009';
 import { combineWithHyphen, ShareContext } from '../905/91820';
 import { selectWithShallowEqual } from '../905/103090';
 import { h as _$$h, O as _$$O } from '../905/142086';
@@ -56,7 +56,7 @@ import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from '../figma_app/4650
 import { throwError, throwTypeError } from '../figma_app/465776';
 import { jn } from '../figma_app/522082';
 import { isRootPath } from '../figma_app/528509';
-import { nb, Tf, Y6 } from '../figma_app/543100';
+import { TileType, TileUtils, renamingStateAtom } from '../figma_app/543100';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { gO, z6 } from '../figma_app/598926';
@@ -70,9 +70,9 @@ import { e as _$$e4 } from '../figma_app/831857';
 import { V1 } from '../figma_app/834392';
 import { autosaveFilesQuery, mapOfflineFiles, setCurrentRenamingFileKey } from '../figma_app/840917';
 import { rC, we } from '../figma_app/861982';
-import { D6 } from '../figma_app/863319';
+import { alwaysTrue } from '../figma_app/863319';
 import { desktopAPIInstance } from '../figma_app/876459';
-import { Fb, iN, qP, X7 } from '../figma_app/909778';
+import { addFileFavorite, addPrototypeFavorite, removeFileFavorite, removePrototypeFavorite } from '../figma_app/909778';
 import { TabOpenBehavior } from '../figma_app/915202';
 import { g4 as _$$g, b4, n_ } from '../figma_app/937413';
 function v({
@@ -158,7 +158,7 @@ export function $$ek0(e) {
     userId: eB
   }));
   let eG = useMemo(() => eV?.data ?? {}, [eV]);
-  let ez = eU.type === nb.FILE ? eU.file?.teamId : void 0;
+  let ez = eU.type === TileType.FILE ? eU.file?.teamId : void 0;
   let eH = vt(ez);
   let eW = jn();
   let {
@@ -166,8 +166,8 @@ export function $$ek0(e) {
     getUpgradeEligibility,
     getUpgradePathway
   } = wH({
-    folderId: eU.type === nb.FILE ? eU.file.folderId : null,
-    fileInBrowser: eU.type === nb.FILE ? eU.file : void 0
+    folderId: eU.type === TileType.FILE ? eU.file.folderId : null,
+    fileInBrowser: eU.type === TileType.FILE ? eU.file : void 0
   });
   let e$ = GI('tile_action_dropdown');
   let eZ = setupDynamicConfigHandler('file_multi_move_limit').getDynamicConfig().get('fileLimit', 100);
@@ -178,7 +178,7 @@ export function $$ek0(e) {
           view: 'folder',
           folderId: e.file.folderId
         }));
-        i(y$({
+        i(selectTiles({
           type: ComFileType.FILES,
           tiles: [e]
         }));
@@ -194,7 +194,7 @@ export function $$ek0(e) {
       view: 'folder',
       folderId: e.repo.folder_id
     }));
-    i(y$({
+    i(selectTiles({
       type: ComFileType.REPOS,
       tiles: [e]
     }));
@@ -203,21 +203,21 @@ export function $$ek0(e) {
     switch (e.searchIndexToLog != null && i(searchResultClicked({
       index: e.searchIndexToLog
     })), t.type) {
-      case nb.FILE:
+      case TileType.FILE:
         let n = getDesignFileUrl(t.file);
         openFileInNewTab(n, t.file.key, selectedView, i);
         break;
-      case nb.PINNED_FILE:
+      case TileType.PINNED_FILE:
         openFileInNewTab(buildFileUrl(t), t.file.key, selectedView, i);
         break;
-      case nb.PROTOTYPE:
+      case TileType.PROTOTYPE:
         openPrototypeInNewTab(t.prototype.url, t.prototype.file_key, t.prototype.page_id, selectedView);
         break;
-      case nb.REPO:
+      case TileType.REPO:
         let r = findBranchById(t.repo, t.branches, selectedBranchKeyByRepoId);
         customHistory.redirect(generateUrl(r, t.repo, 'file'), '_blank');
         break;
-      case nb.OFFLINE_FILE:
+      case TileType.OFFLINE_FILE:
         i(handleAutosaveFileCreation({
           file: t.file,
           openNewFileIn: TabOpenBehavior.NEW_TAB,
@@ -284,7 +284,7 @@ export function $$ek0(e) {
   let e8 = e => !!hasPendingRequest(e) && t0 === _$$q.CANNOT_UPGRADE;
   let e9 = e => {
     switch (e.type) {
-      case nb.FILE:
+      case TileType.FILE:
         let t = e.file;
         i(copyShareLinkOptimistic({
           fileKey: t.key,
@@ -296,7 +296,7 @@ export function $$ek0(e) {
           source: ShareContext.FILE_TILE_CONTEXT_MENU
         }));
         break;
-      case nb.PINNED_FILE:
+      case TileType.PINNED_FILE:
         i(copyShareLinkOptimistic({
           fileKey: e.file.key,
           url: buildFileUrl({
@@ -307,7 +307,7 @@ export function $$ek0(e) {
           source: ShareContext.FILE_TILE_CONTEXT_MENU
         }));
         break;
-      case nb.PROTOTYPE:
+      case TileType.PROTOTYPE:
         i(_$$S({
           url: buildFileUrlInternal({
             base: 'proto',
@@ -319,7 +319,7 @@ export function $$ek0(e) {
           })
         }));
         break;
-      case nb.REPO:
+      case TileType.REPO:
         let n = findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
         i(copyShareLinkOptimistic({
           fileKey: n.key,
@@ -328,24 +328,24 @@ export function $$ek0(e) {
         }));
     }
   };
-  let te = Xr(Y6);
+  let te = Xr(renamingStateAtom);
   let tt = e => {
     te({
       type: 'FILE',
       id: e.key
     });
-    i(an());
+    i(resetTileSelection());
   };
   let ti = e => {
     te({
       type: 'REPO',
       id: e.id
     });
-    i(an());
+    i(resetTileSelection());
   };
   let tn = e => {
     setCurrentRenamingFileKey(e);
-    i(an());
+    i(resetTileSelection());
   };
   let tr = e => {
     i(_$$Z({
@@ -356,7 +356,7 @@ export function $$ek0(e) {
     i(n_({
       toDraft: !1
     }));
-    i(an());
+    i(resetTileSelection());
   };
   let ts = e => {
     e.folderId != null && i(showModalHandler({
@@ -420,7 +420,7 @@ export function $$ek0(e) {
     }
     if (r === 1) {
       let r = e.selectedTiles[0];
-      if (r?.type === nb.FILE) {
+      if (r?.type === TileType.FILE) {
         _$$h(fileEntityDataMapper.toSinatra(r.file), null, i, void 0, void 0, {
           canMove: !!t?.canMove,
           isUserViewerRestricted: !!t?.isUserRestrictedForSeat,
@@ -429,7 +429,7 @@ export function $$ek0(e) {
           draftsMoveData: t6,
           canMoveWithReasons: t?.canMoveWithReasons
         }, void 0, !0);
-      } else if (r?.type === nb.REPO) {
+      } else if (r?.type === TileType.REPO) {
         let e = r.branches.find(e => isDefaultFile(e, r.repo));
         _$$h(e ?? null, r.repo, i, void 0, void 0, {
           canMove: !!n?.canMove,
@@ -441,14 +441,14 @@ export function $$ek0(e) {
         }, void 0, !0);
       }
     } else {
-      let t = e.selectedTiles.filter(e => e.type === nb.FILE).map(e => fileEntityDataMapper.toSinatra(e.file));
-      let n = e.selectedTiles.filter(e => e.type === nb.REPO).map(e => e.repo);
+      let t = e.selectedTiles.filter(e => e.type === TileType.FILE).map(e => fileEntityDataMapper.toSinatra(e.file));
+      let n = e.selectedTiles.filter(e => e.type === TileType.REPO).map(e => e.repo);
       _$$O(t, n, i, void 0, !0);
     }
   };
   let tu = () => {
     i(_$$g());
-    i(an());
+    i(resetTileSelection());
   };
   let tp = () => {
     let e = Object.keys(tileSelect[ComFileType.REPOS]);
@@ -473,7 +473,7 @@ export function $$ek0(e) {
         pageId: n
       }));
     }
-    i(an());
+    i(resetTileSelection());
   };
   let tm = () => {
     let t = e.sourceFile;
@@ -507,7 +507,7 @@ export function $$ek0(e) {
       entrypoint: 'dropdown',
       fileBrowserFavorite: !0
     };
-    n ? i(Fb(r)) : i(qP(r));
+    n ? i(addFileFavorite(r)) : i(removeFileFavorite(r));
   };
   let tg = (e, t) => {
     let n = {
@@ -515,7 +515,7 @@ export function $$ek0(e) {
       entrypoint: 'dropdown',
       fileBrowserEntryPoint: !0
     };
-    t ? i(iN(n)) : i(X7(n));
+    t ? i(addPrototypeFavorite(n)) : i(removePrototypeFavorite(n));
   };
   let tf = (e, t, i, n) => {
     let r = e.is_favorited && t.some(e => e.id === i?.id);
@@ -545,12 +545,12 @@ export function $$ek0(e) {
       entrypoint: 'dropdown',
       fileBrowserFavorite: !0
     };
-    r ? i(Fb(a)) : i(qP(a));
+    r ? i(addFileFavorite(a)) : i(removeFileFavorite(a));
   };
   let tA = (t, n, r) => {
     if (r === 1) {
       let r = e.selectedTiles[0];
-      if (r?.type === nb.FILE) {
+      if (r?.type === TileType.FILE) {
         _$$h(fileEntityDataMapper.toSinatra(r.file), null, i, void 0, void 0, {
           canMove: !!t?.canMove,
           isUserViewerRestricted: !!t?.isUserRestrictedForSeat,
@@ -560,7 +560,7 @@ export function $$ek0(e) {
           hasConnectedPlanUserInOrg: t7,
           canMoveWithReasons: t?.canMoveWithReasons
         });
-      } else if (r?.type === nb.REPO) {
+      } else if (r?.type === TileType.REPO) {
         let e = r.branches.find(e => isDefaultFile(e, r.repo));
         _$$h(e ?? null, r.repo, i, void 0, void 0, {
           canMove: !!n?.canMove,
@@ -573,8 +573,8 @@ export function $$ek0(e) {
         });
       }
     } else {
-      let t = e.selectedTiles.filter(e => e.type === nb.FILE).map(e => fileEntityDataMapper.toSinatra(e.file));
-      let n = e.selectedTiles.filter(e => e.type === nb.REPO).map(e => e.repo);
+      let t = e.selectedTiles.filter(e => e.type === TileType.FILE).map(e => fileEntityDataMapper.toSinatra(e.file));
+      let n = e.selectedTiles.filter(e => e.type === TileType.REPO).map(e => e.repo);
       _$$O(t, n, i);
     }
   };
@@ -613,25 +613,25 @@ export function $$ek0(e) {
     return t.size === 1 && (t.has('team') || i.size === 1);
   }, [e.permsByFileKey, e.permsByRepoId, ty, tv]);
   let tU = _$$e4();
-  let tB = eU.type === nb.FILE ? eU.file : null;
-  let tV = eU.type === nb.PINNED_FILE ? eU.file : null;
+  let tB = eU.type === TileType.FILE ? eU.file : null;
+  let tV = eU.type === TileType.PINNED_FILE ? eU.file : null;
   let tG = tV || tB;
-  let tz = eU.type === nb.REPO ? eU.repo : null;
+  let tz = eU.type === TileType.REPO ? eU.repo : null;
   let tH = (tG && e.permsByFileKey[tG.key]) ?? null;
   let tW = (tz && e.permsByRepoId[tz.id]) ?? null;
-  let tK = e.tile.type === nb.PROTOTYPE ? e.tile.prototype : null;
+  let tK = e.tile.type === TileType.PROTOTYPE ? e.tile.prototype : null;
   let tY = tz != null && eU.branches ? eU.branches.find(e => isDefaultFile(e, tz)) : null;
   let tq = tY ? fileEntityDataMapper.toLiveGraph(tY) : null;
-  let t$ = e.tile.type === nb.OFFLINE_FILE ? e.tile.file : null;
-  let tZ = mu(e.tile.type === nb.FILE ? fileEntityDataMapper.toSinatra(e.tile.file) : null, eB);
+  let t$ = e.tile.type === TileType.OFFLINE_FILE ? e.tile.file : null;
+  let tZ = mu(e.tile.type === TileType.FILE ? fileEntityDataMapper.toSinatra(e.tile.file) : null, eB);
   let tX = useCurrentUserOrgUser();
-  let tQ = eU.type === nb.REPO ? tq : tG;
+  let tQ = eU.type === TileType.REPO ? tq : tG;
   let tJ = $S({
     fileKey: tQ?.key ?? '',
     file: tQ ? fileEntityDataMapper.toSinatra(tQ) : null
   });
   let t0 = useMemo(() => {
-    let e = Tf.getEditorType(eU);
+    let e = TileUtils.getEditorType(eU);
     if (!user || !e || !tQ) return null;
     let t = fileEntityDataMapper.toSinatra(tQ);
     let i = tJ.data?.file?.mustUpgradeToShareDraft ?? !1;
@@ -654,11 +654,11 @@ export function $$ek0(e) {
   let t6 = jB({
     files: tB ? [fileEntityDataMapper.toSinatra(tB)] : [],
     repos: tz ? [tz] : [],
-    destinationFolderId: Tf.getFolderId(eU),
+    destinationFolderId: TileUtils.getFolderId(eU),
     isDestinationDrafts: !1
   });
   let t7 = Cp(t6.destinationPlan?.key || null, t6.licenseType);
-  let t8 = e.selectedTiles.filter(e => e.type === nb.FILE).map(e => e.file).some(e => e.editorType === FFileType.FIGMAKE) && t6.requiresUpgrade && !tU;
+  let t8 = e.selectedTiles.filter(e => e.type === TileType.FILE).map(e => e.file).some(e => e.editorType === FFileType.FIGMAKE) && t6.requiresUpgrade && !tU;
   let t9 = useCurrentPlanUser('TileActionDropdown');
   let ie = useIsOrgMemberOrAdminUser(t9).unwrapOr(!1);
   let it = useAtomWithSubscription(V1);
@@ -694,7 +694,7 @@ export function $$ek0(e) {
     totalSelected: ia
   }));
   let ib = ((t, n) => {
-    let r = D6(currentUserOrgId);
+    let r = alwaysTrue(currentUserOrgId);
     let a = r ? getI18nString('favorited_resources.remove_from_sidebar') : getI18nString('tile.favoriting.remove_from_favorites');
     return {
       [eC.COPY_LINK]: e => ({
@@ -703,7 +703,7 @@ export function $$ek0(e) {
       }),
       [eC.DELETE]: (e, i, n) => {
         let r = !1;
-        if (e.type === nb.REPO) {
+        if (e.type === TileType.REPO) {
           let t = findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
           r = !isDefaultFile(t, e.repo);
         }
@@ -763,18 +763,18 @@ export function $$ek0(e) {
       }),
       [eC.RENAME]: e => {
         switch (e.type) {
-          case nb.FILE:
+          case TileType.FILE:
             return {
               displayText: getI18nString('tile.dropdown.rename'),
               callback: () => tt(e.file)
             };
-          case nb.REPO:
+          case TileType.REPO:
             let t = findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
             return {
               displayText: isDefaultFile(t, e.repo) ? getI18nString('tile.dropdown.rename') : getI18nString('tile.dropdown.rename_file'),
               callback: () => ti(e.repo)
             };
-          case nb.OFFLINE_FILE:
+          case TileType.OFFLINE_FILE:
             return {
               displayText: getI18nString('tile.dropdown.rename'),
               callback: () => tn(e.file)
@@ -794,14 +794,14 @@ export function $$ek0(e) {
       }),
       [eC.RESTORE_FROM_VERSION]: e => {
         switch (e.type) {
-          case nb.FILE:
+          case TileType.FILE:
             return {
               displayText: getI18nString('fullscreen_actions.toggle-version-history'),
               callback: () => {
                 tr(e.file);
               }
             };
-          case nb.REPO:
+          case TileType.REPO:
             let t = findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
             return {
               displayText: getI18nString('fullscreen_actions.toggle-version-history'),
@@ -816,10 +816,10 @@ export function $$ek0(e) {
       [eC.SHARE]: e => {
         let t = (() => {
           switch (e.type) {
-            case nb.FILE:
-            case nb.PINNED_FILE:
+            case TileType.FILE:
+            case TileType.PINNED_FILE:
               return e.file;
-            case nb.REPO:
+            case TileType.REPO:
               return findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
             default:
               reportError(ServiceCategories.WAYFINDING, new Error('Invalid tile type when rendering DropdownActionOptions.SHARE'), {
@@ -833,7 +833,7 @@ export function $$ek0(e) {
               return null;
           }
         })();
-        let i = Tf.getEditorType(e);
+        let i = TileUtils.getEditorType(e);
         let n = getProductAccessTypeOrDefault(i);
         return {
           displayText: getI18nString('tile.dropdown.share'),
@@ -847,12 +847,12 @@ export function $$ek0(e) {
       },
       [eC.SHOW_IN_FOLDER]: e => {
         switch (e.type) {
-          case nb.FILE:
+          case TileType.FILE:
             return {
               displayText: getI18nString('tile.dropdown.show_in_project'),
               callback: () => eX(e)
             };
-          case nb.REPO:
+          case TileType.REPO:
             return {
               displayText: getI18nString('tile.dropdown.show_in_project'),
               callback: () => eQ(e)
@@ -951,13 +951,13 @@ export function $$ek0(e) {
         templateName: e.name
       }),
       [eC.PUBLISH_ORG_TEMPLATE]: e => {
-        let t = !!Tf.getIsTeamTemplate(e);
-        let n = Tf.getFileOrMainBranchKey(e);
-        let r = Tf.getName(e);
-        let a = Tf.getFolderId(e);
-        let s = Tf.getTeamId(e);
-        let o = Tf.getEditorType(e);
-        let l = Tf.getOrgId(e);
+        let t = !!TileUtils.getIsTeamTemplate(e);
+        let n = TileUtils.getFileOrMainBranchKey(e);
+        let r = TileUtils.getName(e);
+        let a = TileUtils.getFolderId(e);
+        let s = TileUtils.getTeamId(e);
+        let o = TileUtils.getEditorType(e);
+        let l = TileUtils.getOrgId(e);
         let d = isDrafts || a !== null && isRootPath(folders[a]);
         return we({
           dispatch: i,
@@ -998,7 +998,7 @@ export function $$ek0(e) {
     let A = tN.length + tx.length;
     let y = tP.length + tS.length;
     let v = !isDrafts && A === 0 && y === 0 && _ === 0 && !e.tileActions.showInFolder && u;
-    let I = D6(currentUserOrgId);
+    let I = alwaysTrue(currentUserOrgId);
     return {
       [eC.COPY_LINK]: () => !!(e.tileActions.copyLink && u && !t$),
       [eC.DELETE]: () => !!(e.tileActions.$$delete && f > 0 && t2 === 0 && !p),

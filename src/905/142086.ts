@@ -73,7 +73,7 @@ import { jB, LU, xd } from '../figma_app/722141';
 import { getProductAccessTypeOrDefault } from '../figma_app/765689';
 import { TrackingProvider } from '../figma_app/831799';
 import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
-import { ds, sb, t$, TF } from '../figma_app/863319';
+import { getAllFavoritedItems, sortFavoritedResources, sortWithPinnedItems, processFavorites } from '../figma_app/863319';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { requestOrgAccountTypeAction } from '../figma_app/990058';
 import { useDebounce } from 'use-debounce';
@@ -229,7 +229,7 @@ function ey(e) {
     setSelectedTeam(e, n);
     setBreadcrumbView(X.STARRED_TEAM);
   }, [setSelectedTeam, setBreadcrumbView]);
-  let r = useMemo(() => sb(e.favorites, e.order), [e.favorites, e.order]);
+  let r = useMemo(() => sortFavoritedResources(e.favorites, e.order), [e.favorites, e.order]);
   return jsxs('div', {
     children: [jsx('div', {
       className: cssBuilderInstance.p8.ml8.colorTextSecondary.$,
@@ -270,8 +270,8 @@ function ey(e) {
   });
 }
 function eb(e) {
-  let t = useMemo(() => t$(e.userSidebarSections ?? [], e.fileBrowserPreferences?.orderedSidebarSections ?? void 0), [e.userSidebarSections, e.fileBrowserPreferences?.orderedSidebarSections]);
-  let i = ds(null, null, e.favoritedProjects, e.favoritedTeams, null);
+  let t = useMemo(() => sortWithPinnedItems(e.userSidebarSections ?? [], e.fileBrowserPreferences?.orderedSidebarSections ?? void 0), [e.userSidebarSections, e.fileBrowserPreferences?.orderedSidebarSections]);
+  let i = getAllFavoritedItems(null, null, e.favoritedProjects, e.favoritedTeams, null);
   let n = useMemo(() => {
     let e = {};
     i.forEach(t => {
@@ -632,7 +632,7 @@ let eR = registerModal(e => {
     currentOrgId: e5 ? e2 : null,
     currentTeamId: e5 ? null : eT?.id ?? null
   });
-  let tc = useMemo(() => e5 || td.status !== 'loaded' || eT === null ? null : TF(td.data.currentUser, eT.id, ti), [e5, td, eT, ti]);
+  let tc = useMemo(() => e5 || td.status !== 'loaded' || eT === null ? null : processFavorites(td.data.currentUser, eT.id, ti), [e5, td, eT, ti]);
   let tu = useMemo(() => {
     if (td.status !== 'loaded') return null;
     let e = e5 ? td.data.currentUser.favoritedProjects : tc?.favoritedProjects;

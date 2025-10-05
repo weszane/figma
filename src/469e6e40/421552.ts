@@ -25,7 +25,7 @@ import { K as _$$K } from "../905/628118";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { cX } from "../figma_app/12491";
 import { S0 } from "../905/863795";
-import { E as _$$E2 } from "../905/511388";
+import { LibraryIconWithTooltip } from "../905/511388";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { NJ } from "../figma_app/518077";
 import { mapLibraryAttributes } from "../905/128063";
@@ -315,7 +315,7 @@ let ey = function ({
           })
         }), C && jsx("div", {
           className: cssBuilderInstance.inlineBlock.ml4.$,
-          children: jsx(_$$E2, {
+          children: jsx(LibraryIconWithTooltip, {
             libraryKey: e.libraryKey,
             showTooltip: !0,
             redirectToHubFile: !0
@@ -1655,7 +1655,7 @@ export function $$tx1(e) {
           })
         }) : l ? jsx("div", {
           className: cssBuilderInstance.ml4.$,
-          children: jsx(_$$E2, {
+          children: jsx(LibraryIconWithTooltip, {
             libraryKey: e.library_key,
             showTooltip: !0,
             redirectToHubFile: !0

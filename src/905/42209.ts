@@ -1,37 +1,59 @@
-import { jsx } from "react/jsx-runtime";
-export function $$r0({
-  children: e
-}) {
+import { jsx } from "react/jsx-runtime"
+
+/**
+ * FileRowLeft component - original name: $$r0
+ * Renders a div with the left side class for file rows.
+ */
+export const FileRowLeft: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return jsx("div", {
     className: "file_row_sides--fileRowLeft--owCyK",
-    children: e
-  });
+    children,
+  })
 }
-export function $$a1({
-  children: e
-}) {
+
+/**
+ * FileRowLeftV2 component - original name: $$a1
+ * Renders a div with the v2 left side class for file rows.
+ */
+export const FileRowLeftV2: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return jsx("div", {
     className: "file_row_sides--fileRowLeft_v2---dnKL",
-    children: e
-  });
+    children,
+  })
 }
-export function $$s2({
-  children: e
-}) {
+
+/**
+ * FileRowRight component - original name: $$s2
+ * Renders a div with the right side class for file rows.
+ */
+export const FileRowRight: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return jsx("div", {
     className: "file_row_sides--fileRowRight--BGY2z",
-    children: e
-  });
+    children,
+  })
 }
-export function $$o3({
-  children: e
-}) {
+
+/**
+ * FileRowRightV2 component - original name: $$o3
+ * Renders a div with the v2 right side class for file rows.
+ */
+export const FileRowRightV2: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return jsx("div", {
     className: "file_row_sides--fileRowRight_v2--bITuC",
-    children: e
-  });
+    children,
+  })
 }
-export const h5 = $$r0;
-export const Bj = $$a1;
-export const yz = $$s2;
-export const eR = $$o3;
+
+// Refactored exports to use new component names
+export const h5 = FileRowLeft
+export const Bj = FileRowLeftV2
+export const yz = FileRowRight
+export const eR = FileRowRightV2

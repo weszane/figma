@@ -32,7 +32,7 @@ import { filePutAction } from "../figma_app/78808";
 import { u as _$$u } from "../905/747030";
 import { showModalHandler } from "../905/156213";
 import { addTemplateToRecentsThunkAction } from "../figma_app/147952";
-import { uo } from "../905/98702";
+import { roleBatchPutAction } from "../905/98702";
 import { HubEventType } from "../figma_app/350203";
 import { N as _$$N } from "../figma_app/23271";
 import { trackFileObjEvent } from "../figma_app/314264";
@@ -249,7 +249,7 @@ let $$eI20 = createOptimistThunk(async (e, {
     fileKey: fig_file_metadata.key
   })), fig_file_metadata.file && e.dispatch(filePutAction({
     file: fig_file_metadata.file
-  })), fig_file_metadata.roles && e.dispatch(uo({
+  })), fig_file_metadata.roles && e.dispatch(roleBatchPutAction({
     roles: fig_file_metadata.roles
   })));
   e.dispatch($$eh0({

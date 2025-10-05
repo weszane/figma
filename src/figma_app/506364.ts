@@ -8,9 +8,9 @@ import { SpellingAgent } from "../905/283918";
 import { f } from "../905/666831";
 import { LJ, N_, oz, LE, x5, Ev } from "../905/543054";
 import { mz } from "../905/715541";
-import { up as _$$up } from "../905/145989";
+import { getSpellCheckStorageKey } from "../905/145989";
 import { X } from "../905/326527";
-import { QC } from "../905/461516";
+import { SpellCheckEngine } from "../905/461516";
 let g = new class {
   constructor() {
     this._suggestionsCache = new LRUCache(100);
@@ -41,16 +41,16 @@ let g = new class {
   async ensureImplementationLoaded() {
     if (this._current) return;
     let e = await x5();
-    let t = _$$up(e);
+    let t = getSpellCheckStorageKey(e);
     let r = Ev(t);
     switch (e) {
-      case QC.DESKTOP:
+      case SpellCheckEngine.DESKTOP:
         await this.setCurrentImplementation(new f(), r);
         break;
-      case QC.AGENT:
+      case SpellCheckEngine.AGENT:
         await this.setCurrentImplementation(new SpellingAgent(), r);
         break;
-      case QC.HUNSPELL:
+      case SpellCheckEngine.HUNSPELL:
         await this.setCurrentImplementation(new mz(), r);
     }
   }

@@ -14,212 +14,312 @@ import { FEntityType } from "../figma_app/191312"
 import { trackFavoritesToAddToSidebarClick, trackFavoritesToMoveUnstarAllClick, trackFileBrowserSidebarCustomSectionCreated, trackFileBrowserSidebarCustomSectionDeleted, trackFileBrowserSidebarCustomSectionRenamed, trackResourceAddedToFavorites, trackResourceRemovedFromFavorites } from "../figma_app/310688"
 import { createFileResource, createFolderResource, createPrototypeResource, createTeamResource, createWorkspaceResource, transformFileData } from "../figma_app/411744"
 import { throwTypeError } from "../figma_app/465776"
-import { nb } from "../figma_app/543100"
-import { ah } from "../figma_app/637328"
-import { D6 } from "../figma_app/863319"
+import { TileType } from "../figma_app/543100"
+import { updateFileBrowserPreferencesOptimistically } from "../figma_app/637328"
+import { alwaysTrue } from "../figma_app/863319"
 
-let $$I17 = createActionCreator("SET_FAVORITES_COUNT")
-let $$S6 = createActionCreator("UPDATE_EXPANDED_CUSTOM_SECTIONS")
-let $$v21 = createActionCreator("SET_MOVING_RESOURCE")
-let $$A19 = createActionCreator("SET_NEW_SECTION_INDEX")
-let $$x22 = createOptimistThunk((e, t) => {
-  let {
+export let setFavoritesCountAction = createActionCreator("SET_FAVORITES_COUNT")
+export let updateExpandedSectionsAction = createActionCreator("UPDATE_EXPANDED_CUSTOM_SECTIONS")
+export let setMovingResourceAction = createActionCreator("SET_MOVING_RESOURCE")
+export let setNewSectionIndexAction = createActionCreator("SET_NEW_SECTION_INDEX")
+/**
+ * Updates a user sidebar section with new name and/or ordered favorite IDs
+ * Original function: updateSidebarSection
+ */
+export let updateSidebarSection = createOptimistThunk(({ dispatch }, action) => {
+  const {
     name,
     orderedFavoriteIds,
-  } = t
-  let i = sendWithRetry.put(`/api/user_sidebar_sections/${t.sectionId}`, {
+    sectionId,
+  } = action
+
+  // Update section via API
+  const apiPromise = sendWithRetry.put(`/api/user_sidebar_sections/${sectionId}`, {
     ordered_favorited_resource_ids: orderedFavoriteIds,
     name,
-  }).catch((t) => {
-    e.dispatch(VisualBellActions.enqueue({
-      message: `${t.data.message}`,
+  }).catch((error) => {
+    dispatch(VisualBellActions.enqueue({
+      message: `${error.data.message}`,
     }))
   })
+
+  // Optimistically update local store
   getCurrentLiveGraphClient().optimisticallyUpdate({
     UserSidebarSection: {
-      [t.sectionId]: {
-        ...(name
-          ? {
-              name,
-            }
-          : {}),
-        ...(orderedFavoriteIds
-          ? {
-              orderedFavoritedResourceIds: orderedFavoriteIds,
-            }
-          : {}),
+      [sectionId]: {
+        ...(name ? { name } : {}),
+        ...(orderedFavoriteIds ? { orderedFavoritedResourceIds: orderedFavoriteIds } : {}),
       },
     },
-  }, i)
-  t.name && trackFileBrowserSidebarCustomSectionRenamed(t.sectionId, t.name)
+  }, apiPromise)
+
+  // Track renaming event
+  if (name) {
+    trackFileBrowserSidebarCustomSectionRenamed(sectionId, name)
+  }
 })
-let $$N11 = createOptimistThunk((e, t) => {
-  let r = sendWithRetry.del(`/api/user_sidebar_sections/${t.sidebarSectionId}`).catch((t) => {
-    e.dispatch(VisualBellActions.enqueue({
-      message: `${t.msg}`,
+
+/**
+ * Deletes a user sidebar section
+ * Original function: deleteSidebarSection
+ */
+export let deleteSidebarSection = createOptimistThunk(({ dispatch }, action) => {
+  const { sidebarSectionId } = action
+
+  // Delete section via API
+  const apiPromise = sendWithRetry.del(`/api/user_sidebar_sections/${sidebarSectionId}`).catch((error) => {
+    dispatch(VisualBellActions.enqueue({
+      message: `${error.msg}`,
     }))
   })
-  trackFileBrowserSidebarCustomSectionDeleted(t.sidebarSectionId)
+
+  // Track deletion event
+  trackFileBrowserSidebarCustomSectionDeleted(sidebarSectionId)
+
+  // Optimistically delete from local store
   getCurrentLiveGraphClient().optimisticallyDelete({
     UserSidebarSection: {
-      [t.sidebarSectionId]: null,
+      [sidebarSectionId]: null,
     },
-  }, r)
+  }, apiPromise)
 })
-let $$C3 = createOptimistThunk((e, t) => {
-  let r = {
-    favorited_resource_ids: t.favoriteIds,
-    team_id: t.teamId,
+
+/**
+ * Adds favorited resources to sidebar
+ * Original function: addFavoritesToPlanlessSidebar
+ */
+export let addFavoritesToPlanlessSidebar = createOptimistThunk(({ dispatch }, action) => {
+  const { favoriteIds, teamId } = action
+
+  // Track UI interaction
+  trackFavoritesToAddToSidebarClick(favoriteIds, teamId)
+
+  // Update via API
+  const requestData = {
+    favorited_resource_ids: favoriteIds,
+    team_id: teamId,
   }
-  trackFavoritesToAddToSidebarClick(t.favoriteIds, t.teamId)
-  sendWithRetry.put("/api/planless_favorited_resource_plan_id", r).catch((t) => {
-    e.dispatch(VisualBellActions.enqueue({
-      message: `${t.data.message}`,
+
+  sendWithRetry.put("/api/planless_favorited_resource_plan_id", requestData).catch((error) => {
+    dispatch(VisualBellActions.enqueue({
+      message: `${error.data.message}`,
     }))
   })
 })
-let $$w7 = createOptimistThunk((e, t) => {
-  let r = {
-    section_id: t.sectionId,
-    ordered_favorite_ids: t.orderedFavoriteIds,
+
+/**
+ * Moves a favorited resource to a specific section
+ * Original function: moveFavoritedResourceToSection
+ */
+export let moveFavoritedResourceToSection = createOptimistThunk(({ dispatch }, action) => {
+  const { sectionId, orderedFavoriteIds, favoriteId, resourceType } = action
+
+  // Prepare request data
+  const requestData = {
+    section_id: sectionId,
+    ordered_favorite_ids: orderedFavoriteIds,
   }
-  let n = sendWithRetry.put(`/api/favorited_resources/${t.favoriteId}`, r).catch((t) => {
-    e.dispatch(VisualBellActions.enqueue({
-      message: `${t.data.message}`,
+
+  // Update via API
+  const apiPromise = sendWithRetry.put(`/api/favorited_resources/${favoriteId}`, requestData).catch((error) => {
+    dispatch(VisualBellActions.enqueue({
+      message: `${error.data.message}`,
     }))
   })
-  t.sectionId && getCurrentLiveGraphClient().optimisticallyUpdate({
-    UserSidebarSection: {
-      [t.sectionId]: {
-        orderedFavoritedResourceIds: t.orderedFavoriteIds,
+
+  // Update section ordering if section exists
+  if (sectionId) {
+    getCurrentLiveGraphClient().optimisticallyUpdate({
+      UserSidebarSection: {
+        [sectionId]: {
+          orderedFavoritedResourceIds: orderedFavoriteIds,
+        },
       },
-    },
-  }, n)
-  let i = {
-    [t.favoriteId]: {
-      sidebarSectionId: t.sectionId,
+    }, apiPromise)
+  }
+
+  // Update resource's section assignment based on type
+  const resourceUpdate = {
+    [favoriteId]: {
+      sidebarSectionId: sectionId,
     },
   }
-  switch (t.resourceType) {
+
+  switch (resourceType) {
     case FEntityType.TEAM:
-      getCurrentLiveGraphClient().optimisticallyUpdate({
-        FavoritedTeam: i,
-      }, n)
+      getCurrentLiveGraphClient().optimisticallyUpdate({ FavoritedTeam: resourceUpdate }, apiPromise)
       break
     case FEntityType.FOLDER:
-      getCurrentLiveGraphClient().optimisticallyUpdate({
-        FavoritedProject: i,
-      }, n)
+      getCurrentLiveGraphClient().optimisticallyUpdate({ FavoritedProject: resourceUpdate }, apiPromise)
       break
     case FEntityType.FILE:
-      getCurrentLiveGraphClient().optimisticallyUpdate({
-        FavoritedFile: i,
-      }, n)
+      getCurrentLiveGraphClient().optimisticallyUpdate({ FavoritedFile: resourceUpdate }, apiPromise)
       break
     case FEntityType.PROTOTYPE:
-      getCurrentLiveGraphClient().optimisticallyUpdate({
-        FavoritedPrototype: i,
-      }, n)
+      getCurrentLiveGraphClient().optimisticallyUpdate({ FavoritedPrototype: resourceUpdate }, apiPromise)
       break
     case FEntityType.WORKSPACE:
-      getCurrentLiveGraphClient().optimisticallyUpdate({
-        FavoritedWorkspace: i,
-      }, n)
+      getCurrentLiveGraphClient().optimisticallyUpdate({ FavoritedWorkspace: resourceUpdate }, apiPromise)
+      break
   }
 })
-let $$O24 = createOptimistThunk((e, t) => {
-  let r = e.getState().currentUserOrgId ?? null
-  let n = {
-    name: t.name,
-    org_id: r,
-    insert_at_index: t.insertAtIndex,
-    ordered_sections: t.currentOrderedSections,
+
+/**
+ * Creates a new user sidebar section with a resource
+ * Original function: createSidebarSectionWithResource
+ */
+export let createSidebarSectionWithResource = createOptimistThunk(({ dispatch, getState }, action) => {
+  const state = getState()
+  const orgId = state.currentUserOrgId ?? null
+
+  // Prepare request data
+  const requestData = {
+    name: action.name,
+    org_id: orgId,
+    insert_at_index: action.insertAtIndex,
+    ordered_sections: action.currentOrderedSections,
   }
-  let i = sendWithRetry.post("/api/user_sidebar_sections", n).then((r) => {
-    if (!r?.data.meta) {
-      e.dispatch($$v21({
-        movingResource: void 0,
-      }))
+
+  // Create section via API
+  const apiPromise = sendWithRetry.post("/api/user_sidebar_sections", requestData).then((response) => {
+    if (!response?.data.meta) {
+      dispatch(setMovingResourceAction({ movingResource: undefined }))
       return
     }
-    Y(e.dispatch, t.newResourceForSection.resourceType, t.newResourceForSection.isFavorited, t.newResourceForSection.resourceId, void 0, r.data.meta)
-    e.dispatch($$v21({
-      movingResource: void 0,
-    }))
-  }).catch((t) => {
-    e.dispatch(VisualBellActions.enqueue({
-      message: `${t.msg}`,
+
+    // Associate new resource with section
+    favoriteResource(
+      dispatch,
+      action.newResourceForSection.resourceType,
+      action.newResourceForSection.isFavorited,
+      action.newResourceForSection.resourceId,
+      undefined,
+      response.data.meta,
+    )
+
+    dispatch(setMovingResourceAction({ movingResource: undefined }))
+  }).catch((error) => {
+    dispatch(VisualBellActions.enqueue({
+      message: `${error.msg}`,
     }))
   })
-  if (getCurrentLiveGraphClient().optimisticallyCreate({
+
+  // Optimistically create section in local store
+  const optimisticSectionId = "optimistic-id-custom-section-id"
+  getCurrentLiveGraphClient().optimisticallyCreate({
     UserSidebarSection: {
-      [q]: {
-        userId: e.getState().user?.id ?? "",
-        orgId: r,
+      [optimisticSectionId]: {
+        userId: state.user?.id ?? "",
+        orgId,
         teamId: null,
-        name: t.name,
+        name: action.name,
         createdAt: new Date(),
         orderedFavoritedResourceIds: [],
       },
     },
-  }, i), t.prefs && t.currentOrderedSections) {
-    let n = t.currentOrderedSections.length
-    let a = [...t.currentOrderedSections?.slice(0, t.insertAtIndex), q, ...t.currentOrderedSections.slice(t.insertAtIndex, n)]
-    let s = {
-      id: t.prefs?.id,
-      orderedFavoritedResourceIds: t.prefs?.orderedFavoritedResourceIds,
-      orderedTeamIds: t.prefs?.orderedTeamIds,
-      orderedLicenseGroupIds: t.prefs?.orderedLicenseGroupIds,
-      orderedSidebarSections: a,
+  }, apiPromise)
+
+  // Update file browser preferences if needed
+  if (action.prefs && action.currentOrderedSections) {
+    const sectionsLength = action.currentOrderedSections.length
+    const updatedOrderedSections = [
+      ...action.currentOrderedSections.slice(0, action.insertAtIndex),
+      optimisticSectionId,
+      ...action.currentOrderedSections.slice(action.insertAtIndex, sectionsLength),
+    ]
+
+    const prefsUpdate = {
+      id: action.prefs?.id,
+      orderedFavoritedResourceIds: action.prefs?.orderedFavoritedResourceIds,
+      orderedTeamIds: action.prefs?.orderedTeamIds,
+      orderedLicenseGroupIds: action.prefs?.orderedLicenseGroupIds,
+      orderedSidebarSections: updatedOrderedSections,
     }
-    ah(s, e.getState().user?.id, r, null, i)
+
+    updateFileBrowserPreferencesOptimistically(
+      prefsUpdate,
+      state.user?.id,
+      orgId,
+      null,
+      apiPromise,
+    )
   }
 })
-let $$R9 = createOptimistThunk((e, t) => {
-  let r = e.getState().currentUserOrgId ?? null
-  let n = {
-    name: t.name,
-    org_id: r,
-    insert_at_index: t.insertAtIndex,
-    ordered_sections: t.currentOrderedSections,
+
+/**
+ * Creates a new user sidebar section
+ * Original function: createSidebarSection
+ */
+export let createSidebarSection = createOptimistThunk(({ dispatch, getState }, action) => {
+  const state = getState()
+  const orgId = state.currentUserOrgId ?? null
+
+  // Prepare request data
+  const requestData = {
+    name: action.name,
+    org_id: orgId,
+    insert_at_index: action.insertAtIndex,
+    ordered_sections: action.currentOrderedSections,
   }
-  let i = sendWithRetry.post("/api/user_sidebar_sections", n).then((e) => {
-    trackFileBrowserSidebarCustomSectionCreated(e?.data.meta, t.name)
-  }).catch((t) => {
-    e.dispatch(VisualBellActions.enqueue({
-      message: `${t.msg}`,
+
+  // Create section via API
+  const apiPromise = sendWithRetry.post("/api/user_sidebar_sections", requestData).then((response) => {
+    trackFileBrowserSidebarCustomSectionCreated(response?.data.meta, action.name)
+  }).catch((error) => {
+    dispatch(VisualBellActions.enqueue({
+      message: `${error.msg}`,
     }))
   })
-  let a = "optimistic-id-custom-section-id"
-  if (getCurrentLiveGraphClient().optimisticallyCreate({
+
+  // Optimistically create section in local store
+  const optimisticSectionId = "optimistic-id-custom-section-id"
+  getCurrentLiveGraphClient().optimisticallyCreate({
     UserSidebarSection: {
-      [a]: {
-        userId: e.getState().user?.id ?? "",
-        orgId: r,
+      [optimisticSectionId]: {
+        userId: state.user?.id ?? "",
+        orgId,
         teamId: null,
-        name: t.name,
+        name: action.name,
         createdAt: new Date(),
         orderedFavoritedResourceIds: [],
       },
     },
-  }, i), t.prefs && t.currentOrderedSections) {
-    let n = t.currentOrderedSections.length
-    let s = [...t.currentOrderedSections?.slice(0, t.insertAtIndex), a, ...t.currentOrderedSections.slice(t.insertAtIndex, n)]
-    let o = {
-      id: t.prefs?.id,
-      orderedFavoritedResourceIds: t.prefs?.orderedFavoritedResourceIds,
-      orderedTeamIds: t.prefs?.orderedTeamIds,
-      orderedLicenseGroupIds: t.prefs?.orderedLicenseGroupIds,
-      orderedSidebarSections: s,
+  }, apiPromise)
+
+  // Update file browser preferences if needed
+  if (action.prefs && action.currentOrderedSections) {
+    const sectionsLength = action.currentOrderedSections.length
+    const updatedOrderedSections = [
+      ...action.currentOrderedSections.slice(0, action.insertAtIndex),
+      optimisticSectionId,
+      ...action.currentOrderedSections.slice(action.insertAtIndex, sectionsLength),
+    ]
+
+    const prefsUpdate = {
+      id: action.prefs?.id,
+      orderedFavoritedResourceIds: action.prefs?.orderedFavoritedResourceIds,
+      orderedTeamIds: action.prefs?.orderedTeamIds,
+      orderedLicenseGroupIds: action.prefs?.orderedLicenseGroupIds,
+      orderedSidebarSections: updatedOrderedSections,
     }
-    ah(o, e.getState().user?.id, r, null, i)
+
+    updateFileBrowserPreferencesOptimistically(
+      prefsUpdate,
+      state.user?.id,
+      orgId,
+      null,
+      apiPromise,
+    )
   }
 })
-let $$L5 = createOptimistAction("BULK_RESOURCE_SET_FAVORITE", (e, t, {
-  optimistId: r,
-  liveStore: n,
-}) => {
-  let {
+
+/**
+ * Bulk sets resources as favorites
+ * Original function: bulkSetResourcesAsFavorites
+ */
+export let bulkSetResourcesAsFavorites = createOptimistAction("BULK_RESOURCE_SET_FAVORITE", ({ dispatch, getState }, action, { optimistId, liveStore }) => {
+  const state = getState()
+  const {
     files,
     repos,
     prototypes,
@@ -227,118 +327,205 @@ let $$L5 = createOptimistAction("BULK_RESOURCE_SET_FAVORITE", (e, t, {
     teamId,
     selectedView,
     entrypoint,
-  } = t
-  let y = e.getState().currentTeamId
-  let b = e.getState().currentUserOrgId
-  let I = y ?? b
-  let S = files.filter(e => !e.is_favorited && (e.team_id === I || e.parent_org_id === I))
-  let v = S.map(e => e.key)
-  let A = repos.filter(e => !e.is_favorited && (e.team_id === I || e.parent_org_id === I)).filter(Boolean)
-  let x = A.map(e => e.default_file_key)
-  let N = prototypes.filter(e => !e.is_favorited && (e.parent_team?.id === I || e.parent_org?.id === I))
-  let C = N.map(e => `${e.file_key},${e.page_id}`)
-  let w = {
-    files: x.concat(v),
+    insertAtIndex,
+    orderedFavorites,
+    sectionId,
+    fileBrowserPrefs,
+  } = action
+
+  // Determine organization context
+  const currentTeamId = state.currentTeamId
+  const currentUserOrgId = state.currentUserOrgId
+  const effectiveOrgId = currentTeamId ?? currentUserOrgId
+
+  // Filter non-favorited files
+  const nonFavoritedFiles = files.filter(file =>
+    !file.is_favorited && (file.team_id === effectiveOrgId || file.parent_org_id === effectiveOrgId),
+  )
+  const fileKeys = nonFavoritedFiles.map(file => file.key)
+
+  // Filter non-favorited repos
+  const nonFavoritedRepos = repos
+    .filter(repo => !repo.is_favorited && (repo.team_id === effectiveOrgId || repo.parent_org_id === effectiveOrgId))
+    .filter(Boolean)
+  const repoFileKeys = nonFavoritedRepos.map(repo => repo.default_file_key)
+
+  // Filter non-favorited prototypes
+  const nonFavoritedPrototypes = prototypes.filter(proto =>
+    !proto.is_favorited && (proto.parent_team?.id === effectiveOrgId || proto.parent_org?.id === effectiveOrgId),
+  )
+  const prototypeKeys = nonFavoritedPrototypes.map(proto => `${proto.file_key},${proto.page_id}`)
+
+  // Prepare API request data
+  const requestData = {
+    files: repoFileKeys.concat(fileKeys),
     org_id: orgId,
     team_id: teamId,
-    prototypes: C,
-    insert_at_index: t.insertAtIndex,
-    ordered_favorites: t.orderedFavorites,
-    section_id: t.sectionId,
+    prototypes: prototypeKeys,
+    insert_at_index: insertAtIndex,
+    ordered_favorites: orderedFavorites,
+    section_id: sectionId,
   }
-  files.forEach((e) => {
-    trackResourceAddedToFavorites(e.key, selectedView, entrypoint, FEntityType.FILE, e.editor_type, !0)
+
+  // Track analytics events
+  files.forEach((file) => {
+    trackResourceAddedToFavorites(
+      file.key,
+      selectedView,
+      entrypoint,
+      FEntityType.FILE,
+      file.editor_type,
+      true,
+    )
   })
-  repos.forEach((e) => {
-    trackResourceAddedToFavorites(e.default_file_key ?? void 0, selectedView, entrypoint, FEntityType.FILE, "design", !0)
+
+  repos.forEach((repo) => {
+    trackResourceAddedToFavorites(
+      repo.default_file_key ?? undefined,
+      selectedView,
+      entrypoint,
+      FEntityType.FILE,
+      "design",
+      true,
+    )
   })
-  prototypes.forEach((e) => {
-    trackResourceAddedToFavorites(e.file_key, selectedView, entrypoint, FEntityType.PROTOTYPE, "design", !0)
+
+  prototypes.forEach((proto) => {
+    trackResourceAddedToFavorites(
+      proto.file_key,
+      selectedView,
+      entrypoint,
+      FEntityType.PROTOTYPE,
+      "design",
+      true,
+    )
   })
-  let O = sendWithRetry.put("/api/bulk_favorite_resources", w).then(() => {
-    e.dispatch(createOptimistCommitAction(r))
-  }).catch((t) => {
-    e.dispatch(createOptimistRevertAction(r))
+
+  // Execute bulk favorite API call
+  const apiPromise = sendWithRetry.put("/api/bulk_favorite_resources", requestData).then(() => {
+    dispatch(createOptimistCommitAction(optimistId))
+  }).catch((error) => {
+    dispatch(createOptimistRevertAction(optimistId))
     try {
-      e.dispatch(VisualBellActions.enqueue({
-        message: t.message,
-      }))
+      dispatch(VisualBellActions.enqueue({ message: error.message }))
     }
-    catch (t) {
-      e.dispatch(FlashActions.error("An error occurred while favoriting these items"))
+    catch {
+      dispatch(FlashActions.error("An error occurred while favoriting these items"))
     }
   })
-  let R = e.getState().user?.id
-  if (!R)
+
+  // Get current user ID
+  const userId = state.user?.id
+  if (!userId)
     return
-  let L = {}
-  let P = {}
-  let D = []
-  if (N.forEach((e) => {
-    D.push(`optimistic-id-${e.fig_file.key}`)
-    P[`optimistic-id-${e.fig_file.key}`] = createPrototypeResource(e, R, orgId, t.sectionId)
-  }), A.forEach((e) => {
-    let r = e.default_file_key
-    if (r) {
-      let e = n.readCachedFile(r)
-      e && (D.push(`optimistic-id-${e.key}`), L[`optimistic-id-${e.key}`] = createFileResource(e, R, orgId, t.sectionId))
+
+  // Prepare optimistic updates
+  const fileUpdates = {}
+  const prototypeUpdates = {}
+  const optimisticIds = []
+
+  // Process prototypes
+  nonFavoritedPrototypes.forEach((proto) => {
+    const optimisticId = `optimistic-id-${proto.fig_file.key}`
+    optimisticIds.push(optimisticId)
+    prototypeUpdates[optimisticId] = createPrototypeResource(proto, userId, orgId, sectionId)
+  })
+
+  // Process repos
+  nonFavoritedRepos.forEach((repo) => {
+    const fileKey = repo.default_file_key
+    if (fileKey) {
+      const cachedFile = liveStore.readCachedFile(fileKey)
+      if (cachedFile) {
+        const optimisticId = `optimistic-id-${cachedFile.key}`
+        optimisticIds.push(optimisticId)
+        fileUpdates[optimisticId] = createFileResource(cachedFile, userId, orgId, sectionId)
+      }
     }
-  }), S.forEach((e) => {
-    D.push(`optimistic-id-${e.key}`)
-    L[`optimistic-id-${e.key}`] = createFileResource(e, R, orgId, t.sectionId)
-  }), getCurrentLiveGraphClient().optimisticallyCreate({
-    FavoritedFile: L,
-    FavoritedPrototype: P,
-  }, O), t.insertAtIndex === null) {
+  })
+
+  // Process files
+  nonFavoritedFiles.forEach((file) => {
+    const optimisticId = `optimistic-id-${file.key}`
+    optimisticIds.push(optimisticId)
+    fileUpdates[optimisticId] = createFileResource(file, userId, orgId, sectionId)
+  })
+
+  // Apply optimistic updates
+  getCurrentLiveGraphClient().optimisticallyCreate({
+    FavoritedFile: fileUpdates,
+    FavoritedPrototype: prototypeUpdates,
+  }, apiPromise)
+
+  // Skip ordering update if insert index is null
+  if (insertAtIndex === null) {
     return
   }
-  let k = [...t.orderedFavorites.slice(0, t.insertAtIndex), ...D, ...t.orderedFavorites.slice(t.insertAtIndex)]
-  if (t.sectionId) {
+
+  // Update ordering of favorites
+  const updatedOrder = [
+    ...orderedFavorites.slice(0, insertAtIndex),
+    ...optimisticIds,
+    ...orderedFavorites.slice(insertAtIndex),
+  ]
+
+  // Apply ordering update to either section or global preferences
+  if (sectionId) {
     getCurrentLiveGraphClient().optimisticallyUpdate({
       UserSidebarSection: {
-        [t.sectionId]: {
-          orderedFavoritedResourceIds: k,
+        [sectionId]: {
+          orderedFavoritedResourceIds: updatedOrder,
         },
       },
-    }, O)
+    }, apiPromise)
   }
   else {
-    let e = {
-      id: t.fileBrowserPrefs?.id || "optimistic-id",
-      orderedFavoritedResourceIds: k,
-      orderedTeamIds: t.fileBrowserPrefs?.orderedTeamIds,
-      orderedLicenseGroupIds: t.fileBrowserPrefs?.orderedLicenseGroupIds,
+    const prefsUpdate = {
+      id: fileBrowserPrefs?.id || "optimistic-id",
+      orderedFavoritedResourceIds: updatedOrder,
+      orderedTeamIds: fileBrowserPrefs?.orderedTeamIds,
+      orderedLicenseGroupIds: fileBrowserPrefs?.orderedLicenseGroupIds,
     }
-    ah(e, R, orgId, null, O)
+
+    updateFileBrowserPreferencesOptimistically(
+      prefsUpdate,
+      userId,
+      orgId,
+      null,
+      apiPromise,
+    )
   }
 })
-let $$P12 = createOptimistThunk((e, t) => {
-  let {
-    tile,
-    entrypoint,
-    favoriteId,
-    fileBrowserEntryPoint,
-  } = t
+
+/**
+ * Handles unfavoriting based on tile type
+ * Original function: handleTileUnfavorite
+ */
+export let handleTileUnfavorite = createOptimistThunk(({ dispatch }, action) => {
+  const { tile, entrypoint, favoriteId, fileBrowserEntryPoint } = action
+
   switch (tile.type) {
-    case nb.FILE:
-    case nb.PINNED_FILE:
-      e.dispatch($$H20({
+    case TileType.FILE:
+    case TileType.PINNED_FILE:
+      dispatch(removeFileFavorite({
         entrypoint,
         favoriteId,
         file: tile.file,
         fileBrowserEntryPoint,
       }))
       return
-    case nb.PROTOTYPE:
-      e.dispatch($$G8({
+
+    case TileType.PROTOTYPE:
+      dispatch(removePrototypeFavorite({
         entrypoint,
         favoriteId,
         prototype: tile.prototype,
         fileBrowserEntryPoint,
       }))
       return
-    case nb.REPO:
-      e.dispatch($$H20({
+
+    case TileType.REPO:
+      dispatch(removeFileFavorite({
         entrypoint,
         favoriteId,
         file: fileEntityDataMapper.toLiveGraph(findBranchById(tile.repo, tile.branches, {})),
@@ -346,366 +533,550 @@ let $$P12 = createOptimistThunk((e, t) => {
         fileBrowserEntryPoint,
       }))
       return
-    case nb.OFFLINE_FILE:
+
+    case TileType.OFFLINE_FILE:
       return
+
     default:
       throwTypeError(tile)
   }
 })
-let $$D16 = createOptimistAction("REMOVE_FOLDER_FAVORITE", (e, t, {
-  optimistId: r,
-}) => {
-  let {
-    folder,
-    sectionId,
-  } = t
-  trackResourceRemovedFromFavorites(folder.id, e.getState().selectedView.view, t.entrypoint, FEntityType.FOLDER)
-  let a = Y(e.dispatch, FEntityType.FOLDER, !1, folder.id, r, sectionId)
-  t.favoriteId && getCurrentLiveGraphClient().optimisticallyDelete({
-    FavoritedProject: {
-      [t.favoriteId]: null,
-    },
-  }, a)
-})
-let $$k1 = createOptimistThunk(async (e, t, {
-  liveStore: r,
-}) => {
-  let {
-    tile,
+
+/**
+ * Removes a folder from favorites
+ * Original function: removeFolderFromFavorites
+ */
+// Helper function for favoriting/unfavoriting resources via API
+// Original: K
+function favoriteFileFullscreen(dispatch: any, resourceType: FEntityType, isFavorited: boolean, fileKey: string, isSidebar: boolean) {
+  return sendWithRetry.put("/api/favorited_resources", {
+    resource_type: resourceType,
+    is_favorited: isFavorited,
+    file_key: fileKey,
+  }).then(() => {
+    const removedMessage = isSidebar ? getI18nString("tile.favoriting.file_removed_from_sidebar") : getI18nString("tile.favoriting.file_removed_from_favorites")
+    const addedMessage = isSidebar ? getI18nString("tile.favoriting.file_added_to_sidebar") : getI18nString("tile.favoriting.file_added_to_favorites")
+    dispatch(VisualBellActions.enqueue({
+      message: isFavorited ? addedMessage : removedMessage,
+    }))
+  }).catch((error: any) => {
+    const resolvedMessage = resolveMessage(error)
+    if (resolvedMessage) {
+      try {
+        dispatch(VisualBellActions.enqueue({
+          message: resolvedMessage,
+        }))
+      }
+      catch {
+        dispatch(FlashActions.error("An error occurred while favoriting this item"))
+      }
+    }
+  })
+}
+
+// Helper function for favoriting/unfavoriting resources via API with additional params
+// Original: favoriteResource
+function favoriteResource(dispatch: any, resourceType: FEntityType, isFavorited: boolean, resourceIdOrKey: string, optimistId?: string | number, sectionId?: string, pageId?: string, showBell?: boolean) {
+  return sendWithRetry.put("/api/favorited_resources", {
+    resource_type: resourceType,
+    is_favorited: isFavorited,
+    resource_id_or_key: resourceIdOrKey,
+    page_id: pageId,
+    section_id: sectionId,
+  }).then(() => {
+    if (optimistId)
+      dispatch(createOptimistCommitAction(optimistId))
+    if (showBell || resourceType !== FEntityType.FILE) {
+      const message = isFavorited ? getI18nString("sidebar.item_added_bell_message") : getI18nString("sidebar.item_removed_bell_message")
+      dispatch(VisualBellActions.enqueue({
+        message,
+      }))
+    }
+  }).catch((error: any) => {
+    const resolvedMessage = resolveMessage(error)
+    if (resolvedMessage) {
+      if (optimistId)
+        dispatch(createOptimistRevertAction(optimistId))
+      try {
+        dispatch(VisualBellActions.enqueue({
+          message: resolvedMessage,
+        }))
+      }
+      catch {
+        const action = isFavorited ? "favoriting this item" : "removing this favorite"
+        dispatch(FlashActions.error(`An error occurred while ${action}`))
+      }
+    }
+  })
+}
+
+// Folder-related favorite actions
+
+/**
+ * Removes a folder from favorites
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * @param optimistId - Optimistic update ID
+ * Original function: removeFolderFromFavorites
+ */
+export const removeFolderFromFavorites = createOptimistAction("REMOVE_FOLDER_FAVORITE", ({ dispatch, getState }, action: { folder: any, sectionId?: string, entrypoint: string, favoriteId?: string }, { optimistId }) => {
+  const { folder, sectionId, entrypoint, favoriteId } = action
+  const state = getState()
+
+  trackResourceRemovedFromFavorites(
+    folder.id,
+    state.selectedView.view,
     entrypoint,
-    favoriteId,
+    FEntityType.FOLDER,
+  )
+
+  const removalPromise = favoriteResource(
+    dispatch,
+    FEntityType.FOLDER,
+    false,
+    folder.id,
+    optimistId,
     sectionId,
-    fileBrowserEntryPoint,
-  } = t
+  )
+
+  if (favoriteId) {
+    getCurrentLiveGraphClient().optimisticallyDelete({
+      FavoritedProject: {
+        [favoriteId]: null,
+      },
+    }, removalPromise)
+  }
+})
+
+/**
+ * Adds a folder to favorites
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * @param optimistId - Optimistic update ID
+ * Original function: addFolderFavorite
+ */
+export const addFolderFavorite = createOptimistAction("ADD_FOLDER_FAVORITE", ({ dispatch, getState }, action: { folder: any, sectionId?: string, entrypoint: string, favoriteId?: string }, { optimistId }) => {
+  const { folder, sectionId, entrypoint, favoriteId } = action
+  const state = getState()
+
+  trackResourceAddedToFavorites(folder.id, state.selectedView.view, entrypoint, FEntityType.FOLDER)
+
+  const addPromise = favoriteResource(dispatch, FEntityType.FOLDER, true, folder.id, optimistId, sectionId)
+  const userId = state.user?.id
+  const orgId = state.currentUserOrgId
+
+  if (userId) {
+    if (favoriteId && sectionId) {
+      getCurrentLiveGraphClient().optimisticallyUpdate({
+        FavoritedProject: {
+          [favoriteId]: {
+            sidebarSectionId: sectionId,
+          },
+        },
+      }, addPromise)
+    }
+    if ("is_favorited" in folder && !favoriteId) {
+      getCurrentLiveGraphClient().optimisticallyCreate({
+        FavoritedProject: {
+          [`optimistic-id-${folder.id}`]: createFolderResource(folder, userId, orgId, sectionId),
+        },
+      }, addPromise)
+    }
+  }
+})
+
+// Workspace-related favorite actions
+
+/**
+ * Removes a workspace from favorites
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * Original function: removeWorkspaceFavorite
+ */
+export const removeWorkspaceFavorite = createOptimistThunk(({ dispatch, getState }, action: { workspace: any, entrypoint: string, favoriteId?: string }) => {
+  const { workspace, entrypoint, favoriteId } = action
+  const state = getState()
+
+  trackResourceRemovedFromFavorites(workspace.id, state.selectedView.view, entrypoint, FEntityType.WORKSPACE)
+
+  const removalPromise = favoriteResource(dispatch, FEntityType.WORKSPACE, false, workspace.id)
+
+  if (favoriteId) {
+    getCurrentLiveGraphClient().optimisticallyDelete({
+      FavoritedWorkspace: {
+        [favoriteId]: null,
+      },
+    }, removalPromise)
+  }
+})
+
+/**
+ * Adds a workspace to favorites
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * Original function: addWorkspaceFavorite
+ */
+export const addWorkspaceFavorite = createOptimistThunk(({ dispatch, getState }, action: { workspace: any, sectionId?: string, entrypoint: string, favoriteId?: string }) => {
+  const { workspace, sectionId, entrypoint, favoriteId } = action
+  const state = getState()
+  const orgId = state.currentUserOrgId
+
+  trackResourceAddedToFavorites(workspace.id, state.selectedView.view, entrypoint, FEntityType.WORKSPACE)
+
+  const addPromise = favoriteResource(dispatch, FEntityType.WORKSPACE, true, workspace.id, undefined, sectionId)
+  const userId = state.user?.id
+
+  if (userId) {
+    if (favoriteId && sectionId) {
+      getCurrentLiveGraphClient().optimisticallyUpdate({
+        FavoritedWorkspace: {
+          [favoriteId]: {
+            sidebarSectionId: sectionId,
+          },
+        },
+      }, addPromise)
+    }
+    else {
+      getCurrentLiveGraphClient().optimisticallyCreate({
+        FavoritedWorkspace: {
+          [`optimistic-id-${workspace.id}`]: createWorkspaceResource(workspace, userId, orgId, sectionId),
+        },
+      }, addPromise)
+    }
+  }
+})
+
+// Team-related favorite actions
+
+/**
+ * Removes a team from favorites
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * Original function: removeTeamFavorite
+ */
+export const removeTeamFavorite = createOptimistThunk(({ dispatch, getState }, action: { team: any, entrypoint: string, favoriteId?: string }) => {
+  const { team, entrypoint, favoriteId } = action
+  const state = getState()
+
+  trackResourceRemovedFromFavorites(team.id, state.selectedView.view, entrypoint, FEntityType.TEAM)
+
+  const removalPromise = favoriteResource(dispatch, FEntityType.TEAM, false, team.id)
+
+  if (favoriteId) {
+    getCurrentLiveGraphClient().optimisticallyDelete({
+      FavoritedTeam: {
+        [favoriteId]: null,
+      },
+    }, removalPromise)
+  }
+})
+
+/**
+ * Adds a team to favorites
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * Original function: addTeamFavorite
+ */
+export const addTeamFavorite = createOptimistThunk(({ dispatch, getState }, action: { team: any, sectionId?: string, entrypoint: string, favoriteId?: string }) => {
+  const { team, sectionId, entrypoint, favoriteId } = action
+  const state = getState()
+  const orgId = state.currentUserOrgId
+
+  trackResourceAddedToFavorites(team.id, state.selectedView.view, entrypoint, FEntityType.TEAM)
+
+  const addPromise = favoriteResource(dispatch, FEntityType.TEAM, true, team.id, undefined, sectionId)
+  const userId = state.user?.id
+
+  if (userId) {
+    if (favoriteId && sectionId) {
+      getCurrentLiveGraphClient().optimisticallyUpdate({
+        FavoritedTeam: {
+          [favoriteId]: {
+            sidebarSectionId: sectionId,
+          },
+        },
+      }, addPromise)
+    }
+    else {
+      getCurrentLiveGraphClient().optimisticallyCreate({
+        FavoritedTeam: {
+          [`optimistic-id-${team.id}`]: createTeamResource(team, userId, orgId, sectionId),
+        },
+      }, addPromise)
+    }
+  }
+})
+
+// Prototype-related favorite actions
+
+/**
+ * Removes a prototype from favorites
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * @param optimistId - Optimistic update ID
+ * Original function: removePrototypeFavorite
+ */
+export const removePrototypeFavorite = createOptimistAction("REMOVE_PROTOTYPE_FAVORITE", ({ dispatch, getState }, action: { prototype: any, entrypoint: string, fileBrowserEntryPoint?: boolean, favoriteId?: string }, { optimistId }) => {
+  const { prototype, entrypoint, fileBrowserEntryPoint } = action
+  const state = getState()
+
+  trackResourceRemovedFromFavorites(prototype.file_key, state.selectedView.view, entrypoint, FEntityType.PROTOTYPE, undefined, fileBrowserEntryPoint)
+
+  const removalPromise = favoriteResource(dispatch, FEntityType.PROTOTYPE, false, prototype.file_key, optimistId, undefined, prototype.page_id)
+
+  if (state.user?.id && action.favoriteId) {
+    getCurrentLiveGraphClient().optimisticallyDelete({
+      FavoritedPrototype: {
+        [action.favoriteId]: null,
+      },
+    }, removalPromise)
+  }
+})
+
+/**
+ * Adds a prototype to favorites
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * @param optimistId - Optimistic update ID
+ * Original function: addPrototypeFavorite
+ */
+export const addPrototypeFavorite = createOptimistAction("ADD_PROTOTYPE_FAVORITE", ({ dispatch, getState }, action: { prototype: any, entrypoint: string, sectionId?: string, fileBrowserEntryPoint?: any, favoriteId?: string }, { optimistId }) => {
+  const { prototype, entrypoint, sectionId, fileBrowserEntryPoint, favoriteId } = action
+  const state = getState()
+  const orgId = state.currentUserOrgId
+
+  trackResourceAddedToFavorites(prototype.file_key, state.selectedView.view, entrypoint, FEntityType.PROTOTYPE, "prototype", fileBrowserEntryPoint)
+
+  const addPromise = favoriteResource(dispatch, FEntityType.PROTOTYPE, true, prototype.fig_file.key, optimistId, sectionId, prototype.page_id)
+  const userId = state.user?.id
+
+  if (userId) {
+    if (favoriteId && sectionId) {
+      getCurrentLiveGraphClient().optimisticallyUpdate({
+        FavoritedPrototype: {
+          [favoriteId]: {
+            sidebarSectionId: sectionId,
+          },
+        },
+      }, addPromise)
+    }
+    else {
+      getCurrentLiveGraphClient().optimisticallyCreate({
+        FavoritedPrototype: {
+          [`optimistic-id-${prototype.fig_file.key}`]: createPrototypeResource(prototype, userId, orgId, sectionId),
+        },
+      }, addPromise)
+    }
+  }
+})
+
+// File-related favorite actions
+
+/**
+ * Removes a file from favorites
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * @param optimistId - Optimistic update ID
+ * Original function: removeFileFavorite
+ */
+export const removeFileFavorite = createOptimistAction("REMOVE_FILE_FAVORITE", ({ dispatch, getState }, action: { file: any, entrypoint: string, fileBrowserEntryPoint?: any, favoriteId?: string; repoId?: string }, { optimistId }) => {
+  const state = getState()
+  const selectedView = state.selectedView.view
+  const { file, entrypoint, fileBrowserEntryPoint, favoriteId } = action
+
+  trackResourceRemovedFromFavorites(file.key, selectedView, entrypoint, FEntityType.FILE, file.editorType ?? "design", fileBrowserEntryPoint)
+
+  const removalPromise = selectedView === "fullscreen"
+    ? favoriteFileFullscreen(dispatch, FEntityType.FILE, false, file.key, alwaysTrue(state.currentUserOrgId))
+    : favoriteResource(dispatch, FEntityType.FILE, false, file.key, optimistId)
+
+  if (state.user?.id && favoriteId) {
+    getCurrentLiveGraphClient().optimisticallyDelete({
+      FavoritedFile: {
+        [favoriteId]: null,
+      },
+    }, removalPromise)
+  }
+})
+
+/**
+ * Action creator for adding a file favorite
+ * Original function: addFileFavoriteAction
+ */
+export const addFileFavoriteAction = createActionCreator("ADD_FILE_FAVORITE")
+
+/**
+ * Adds a file to favorites
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * Original function: addFileFavorite
+ */
+export const addFileFavorite = createOptimistThunk(({ dispatch, getState, optimisticDispatch }, action: { file: any, entrypoint: string, sectionId?: string, fileBrowserEntryPoint?: any, favoriteId?: string, repoId?: string }) => {
+  const { optimistId } = optimisticDispatch(addFileFavoriteAction(action))
+  const { file, entrypoint, sectionId, fileBrowserEntryPoint, favoriteId } = action
+  const state = getState()
+
+  trackResourceAddedToFavorites(file.key, state.selectedView.view, entrypoint, FEntityType.FILE, file.editorType ?? "design", fileBrowserEntryPoint)
+
+  const addPromise = favoriteResource(dispatch, FEntityType.FILE, true, file.key, optimistId, sectionId, undefined, alwaysTrue(state.currentUserOrgId))
+  const userId = state.user?.id
+
+  if (userId) {
+    if (favoriteId && sectionId) {
+      getCurrentLiveGraphClient().optimisticallyUpdate({
+        FavoritedFile: {
+          [favoriteId]: {
+            sidebarSectionId: sectionId,
+            orgId: state.currentUserOrgId ?? null,
+            resourceType: FEntityType.FILE,
+            userId,
+          },
+        },
+      }, addPromise)
+    }
+    else if ((state.currentTeamId && state.currentTeamId === file.teamId) || (state.currentUserOrgId && file.parentOrgId)) {
+      const readableFile = transformFileData(fileEntityDataMapper.toSinatra(file))
+      getCurrentLiveGraphClient().optimisticallyCreate({
+        FavoritedFile: {
+          [`optimistic-id-${file.key}`]: {
+            userId,
+            orgId: state.currentUserOrgId ?? null,
+            teamId: state.currentTeamId ?? null,
+            sidebarSectionId: sectionId ?? null,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            resourceId: file.key,
+            resourceType: FEntityType.FILE,
+            readableFile,
+          },
+        },
+      }, addPromise)
+    }
+  }
+})
+
+// Tile-related handlers
+
+/**
+ * Handles adding favorites based on tile type
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param action - Action payload
+ * @param liveStore - Live store instance
+ * Original function: addTileFavorite
+ */
+export const addTileFavorite = createOptimistThunk(async ({ dispatch, getState }, action: { tile: any, entrypoint: string, favoriteId?: string, sectionId?: string, fileBrowserEntryPoint?: any }, { liveStore }) => {
+  const { tile, entrypoint, favoriteId, sectionId, fileBrowserEntryPoint } = action
+
   switch (tile.type) {
-    case nb.FILE:
-      e.dispatch($$W2({
+    case TileType.FILE:
+      dispatch(addFileFavorite({
         entrypoint,
         favoriteId,
         sectionId,
         file: tile.file,
         fileBrowserEntryPoint,
       }))
-      return
-    case nb.PINNED_FILE:
-      let d = await r.fetchFile(tile.file.key)
-      e.dispatch($$W2({
+      break
+    case TileType.PINNED_FILE: {
+      const fetchedFile = await liveStore.fetchFile(tile.file.key)
+      dispatch(addFileFavorite({
         entrypoint,
         favoriteId,
         sectionId,
-        file: fileEntityDataMapper.toLiveGraph(d),
+        file: fileEntityDataMapper.toLiveGraph(fetchedFile),
         fileBrowserEntryPoint,
       }))
-      return
-    case nb.PROTOTYPE:
-      e.dispatch($$V14({
+      break
+    }
+    case TileType.PROTOTYPE:
+      dispatch(addPrototypeFavorite({
         entrypoint,
         favoriteId,
         sectionId,
         prototype: tile.prototype,
         fileBrowserEntryPoint,
       }))
-      return
-    case nb.REPO:
-      e.dispatch($$W2({
+      break
+    case TileType.REPO:
+      dispatch(addFileFavorite({
         entrypoint,
         favoriteId,
         sectionId,
-        file: fileEntityDataMapper.toLiveGraph(findBranchById(tile.repo, tile.branches, e.getState().selectedBranchKeyByRepoId)),
+        file: fileEntityDataMapper.toLiveGraph(findBranchById(tile.repo, tile.branches, getState().selectedBranchKeyByRepoId)),
         repoId: tile.repo.id,
         fileBrowserEntryPoint,
       }))
-      return
-    case nb.OFFLINE_FILE:
-      return
+      break
+    case TileType.OFFLINE_FILE:
+      break
     default:
       throwTypeError(tile)
   }
 })
-let $$M4 = createOptimistAction("ADD_FOLDER_FAVORITE", (e, t, {
-  optimistId: r,
-}) => {
-  let {
-    folder,
-    sectionId,
-  } = t
-  trackResourceAddedToFavorites(folder.id, e.getState().selectedView.view, t.entrypoint, FEntityType.FOLDER)
-  let a = Y(e.dispatch, FEntityType.FOLDER, !0, folder.id, r, sectionId)
-  let d = e.getState().user?.id
-  let c = e.getState().currentUserOrgId
-  d && (t.favoriteId && t.sectionId && getCurrentLiveGraphClient().optimisticallyUpdate({
-    FavoritedProject: {
-      [t.favoriteId]: {
-        sidebarSectionId: t.sectionId,
-      },
-    },
-  }, a), "is_favorited" in folder && (t.favoriteId || getCurrentLiveGraphClient().optimisticallyCreate({
-    FavoritedProject: {
-      [`optimistic-id-${folder.id}`]: createFolderResource(folder, d, c, sectionId),
-    },
-  }, a)))
-})
-let $$F15 = createOptimistThunk((e, t) => {
-  let {
-    workspace,
-  } = t
-  trackResourceRemovedFromFavorites(workspace.id, e.getState().selectedView.view, t.entrypoint, FEntityType.WORKSPACE)
-  let n = Y(e.dispatch, FEntityType.WORKSPACE, !1, workspace.id, void 0)
-  t.favoriteId && getCurrentLiveGraphClient().optimisticallyDelete({
-    FavoritedWorkspace: {
-      [t.favoriteId]: null,
-    },
-  }, n)
-})
-let $$j10 = createOptimistThunk((e, t) => {
-  let {
-    workspace,
-    sectionId,
-  } = t
-  let i = e.getState().currentUserOrgId
-  trackResourceAddedToFavorites(workspace.id, e.getState().selectedView.view, t.entrypoint, FEntityType.WORKSPACE)
-  let a = Y(e.dispatch, FEntityType.WORKSPACE, !0, workspace.id, void 0, sectionId)
-  let d = e.getState().user?.id
-  d && (t.favoriteId && t.sectionId
-    ? getCurrentLiveGraphClient().optimisticallyUpdate({
-        FavoritedWorkspace: {
-          [t.favoriteId]: {
-            sidebarSectionId: t.sectionId,
-          },
-        },
-      }, a)
-    : getCurrentLiveGraphClient().optimisticallyCreate({
-        FavoritedWorkspace: {
-          [`optimistic-id-${workspace.id}`]: createWorkspaceResource(workspace, d, i, sectionId),
-        },
-      }, a))
-})
-let $$U18 = createOptimistThunk((e, t) => {
-  let {
-    team,
-  } = t
-  trackResourceRemovedFromFavorites(team.id, e.getState().selectedView.view, t.entrypoint, FEntityType.TEAM)
-  let n = Y(e.dispatch, FEntityType.TEAM, !1, team.id, void 0)
-  t.favoriteId && getCurrentLiveGraphClient().optimisticallyDelete({
-    FavoritedTeam: {
-      [t.favoriteId]: null,
-    },
-  }, n)
-})
-let $$B0 = createOptimistThunk((e, t) => {
-  let {
-    team,
-    sectionId,
-  } = t
-  let i = e.getState().currentUserOrgId
-  trackResourceAddedToFavorites(team.id, e.getState().selectedView.view, t.entrypoint, FEntityType.TEAM)
-  let a = Y(e.dispatch, FEntityType.TEAM, !0, team.id, void 0, sectionId)
-  let d = e.getState().user?.id
-  d && (t.favoriteId && t.sectionId
-    ? getCurrentLiveGraphClient().optimisticallyUpdate({
-        FavoritedTeam: {
-          [t.favoriteId]: {
-            sidebarSectionId: t.sectionId,
-          },
-        },
-      }, a)
-    : getCurrentLiveGraphClient().optimisticallyCreate({
-        FavoritedTeam: {
-          [`optimistic-id-${team.id}`]: createTeamResource(team, d, i, sectionId),
-        },
-      }, a))
-})
-let $$G8 = createOptimistAction("REMOVE_PROTOTYPE_FAVORITE", (e, t, {
-  optimistId: r,
-}) => {
-  let {
-    prototype,
-    entrypoint,
-    fileBrowserEntryPoint,
-  } = t
-  trackResourceRemovedFromFavorites(prototype.file_key, e.getState().selectedView.view, entrypoint, FEntityType.PROTOTYPE, void 0, fileBrowserEntryPoint)
-  let l = Y(e.dispatch, FEntityType.PROTOTYPE, !1, prototype.file_key, r, void 0, prototype.page_id)
-  e.getState().user?.id && t.favoriteId && getCurrentLiveGraphClient().optimisticallyDelete({
-    FavoritedPrototype: {
-      [t.favoriteId]: null,
-    },
-  }, l)
-})
-let $$V14 = createOptimistAction("ADD_PROTOTYPE_FAVORITE", (e, t, {
-  optimistId: r,
-}) => {
-  let {
-    prototype,
-    entrypoint,
-    sectionId,
-    fileBrowserEntryPoint,
-  } = t
-  let c = e.getState().currentUserOrgId
-  trackResourceAddedToFavorites(prototype.file_key, e.getState().selectedView.view, entrypoint, FEntityType.PROTOTYPE, "prototype", fileBrowserEntryPoint)
-  let u = Y(e.dispatch, FEntityType.PROTOTYPE, !0, prototype.fig_file.key, r, sectionId, prototype.page_id)
-  let p = e.getState().user?.id
-  p && (t.favoriteId && t.sectionId
-    ? getCurrentLiveGraphClient().optimisticallyUpdate({
-        FavoritedPrototype: {
-          [t.favoriteId]: {
-            sidebarSectionId: t.sectionId,
-          },
-        },
-      }, u)
-    : getCurrentLiveGraphClient().optimisticallyCreate({
-        FavoritedPrototype: {
-          [`optimistic-id-${prototype.fig_file.key}`]: createPrototypeResource(prototype, p, c, sectionId),
-        },
-      }, u))
-})
-let $$H20 = createOptimistAction("REMOVE_FILE_FAVORITE", (e, t, {
-  optimistId: r,
-}) => {
-  let n = e.getState().selectedView.view
-  let {
-    file,
-    entrypoint,
-    fileBrowserEntryPoint,
-  } = t
-  trackResourceRemovedFromFavorites(file.key, n, entrypoint, FEntityType.FILE, file.editorType ?? "design", fileBrowserEntryPoint)
-  let d = n === "fullscreen" ? K(e.dispatch, FEntityType.FILE, !1, file.key, D6(e.getState().currentUserOrgId)) : Y(e.dispatch, FEntityType.FILE, !1, file.key, r)
-  e.getState().user?.id && t.favoriteId && getCurrentLiveGraphClient().optimisticallyDelete({
-    FavoritedFile: {
-      [t.favoriteId]: null,
-    },
-  }, d)
-})
-let $$z13 = createActionCreator("ADD_FILE_FAVORITE")
-let $$W2 = createOptimistThunk((e, t) => {
-  let {
-    optimistId,
-  } = e.optimisticDispatch($$z13(t))
-  let {
-    file,
-    entrypoint,
-    sectionId,
-    fileBrowserEntryPoint,
-  } = t
-  trackResourceAddedToFavorites(file.key, e.getState().selectedView.view, entrypoint, FEntityType.FILE, file.editorType ?? "design", fileBrowserEntryPoint)
-  let c = Y(e.dispatch, FEntityType.FILE, !0, file.key, optimistId, sectionId, void 0, D6(e.getState().currentUserOrgId))
-  let u = e.getState().user?.id
-  if (u) {
-    if (t.favoriteId && t.sectionId) {
-      getCurrentLiveGraphClient().optimisticallyUpdate({
-        FavoritedFile: {
-          [t.favoriteId]: {
-            sidebarSectionId: t.sectionId,
-            orgId: e.getState().currentUserOrgId ?? null,
-            resourceType: FEntityType.FILE,
-            userId: u,
-          },
-        },
-      }, c)
-    }
-    else if (e.getState().currentTeamId && e.getState().currentTeamId === t.file.teamId || e.getState().currentUserOrgId && t.file.parentOrgId) {
-      let r = transformFileData(fileEntityDataMapper.toSinatra(file))
-      getCurrentLiveGraphClient().optimisticallyCreate({
-        FavoritedFile: {
-          [`optimistic-id-${file.key}`]: {
-            userId: u,
-            orgId: e.getState().currentUserOrgId ?? null,
-            teamId: e.getState().currentTeamId ?? null,
-            sidebarSectionId: t.sectionId ?? null,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            resourceId: file.key,
-            resourceType: FEntityType.FILE,
-            readableFile: r,
-          },
-        },
-      }, c)
-    }
-  }
-})
-let K = (e, t, r, n, i) => sendWithRetry.put("/api/favorited_resources", {
-  resource_type: t,
-  is_favorited: r,
-  file_key: n,
-}).then(() => {
-  let t = i ? getI18nString("tile.favoriting.file_removed_from_sidebar") : getI18nString("tile.favoriting.file_removed_from_favorites")
-  let n = i ? getI18nString("tile.favoriting.file_added_to_sidebar") : getI18nString("tile.favoriting.file_added_to_favorites")
-  e(VisualBellActions.enqueue({
-    message: r ? n : t,
-  }))
-}).catch((t) => {
-  let r = resolveMessage(t)
-  if (r) {
-    try {
-      e(VisualBellActions.enqueue({
-        message: r,
-      }))
-    }
-    catch (t) {
-      e(FlashActions.error("An error occurred while favoriting this item"))
-    }
-  }
-})
-let Y = (e, t, r, n, a, s, o, l) => sendWithRetry.put("/api/favorited_resources", {
-  resource_type: t,
-  is_favorited: r,
-  resource_id_or_key: n,
-  page_id: o,
-  section_id: s,
-}).then(() => {
-  if (a && e(createOptimistCommitAction(a)), l || t !== FEntityType.FILE) {
-    let t = r ? getI18nString("sidebar.item_added_bell_message") : getI18nString("sidebar.item_removed_bell_message")
-    e(VisualBellActions.enqueue({
-      message: t,
-    }))
-  }
-}).catch((t) => {
-  let n = resolveMessage(t)
-  if (n) {
-    a && e(createOptimistRevertAction(a))
-    try {
-      e(VisualBellActions.enqueue({
-        message: n,
-      }))
-    }
-    catch (n) {
-      let t = r ? "favoriting this item" : "removing this favorite"
-      e(FlashActions.error(`An error occurred while ${t}`))
-    }
-  }
-})
-let $ = e => (trackFavoritesToMoveUnstarAllClick(e.favorited_resource_ids), sendWithRetry.del("/api/favorited_resources", APIParameterUtils.toAPIParameters(e)))
-let $$X23 = createOptimistThunk((e, t) => {
-  $({
-    favorited_resource_ids: t.favoriteIds,
-  }).catch((t) => {
-    e.dispatch(VisualBellActions.enqueue({
-      message: `${t.data.message}`,
+
+
+
+/**
+ * Helper function for unfavoriting multiple resources via API
+ * Original: $
+ */
+function unstarFavorites(params: { favorited_resource_ids: string }) {
+  trackFavoritesToMoveUnstarAllClick(params.favorited_resource_ids)
+  return sendWithRetry.del("/api/favorited_resources", APIParameterUtils.toAPIParameters(params))
+}
+
+/**
+ * Unstars all specified favorites
+ * Original: $$X23
+ */
+export const unstarAllFavorites = createOptimistThunk(({ dispatch }, action) => {
+  unstarFavorites({
+    favorited_resource_ids: action.favoriteIds,
+  }).catch((error) => {
+    dispatch(VisualBellActions.enqueue({
+      message: `${error.data.message}`,
     }))
   })
 })
-let q = "optimistic-id-custom-section-id"
-export const DN = $$B0
-export const EX = $$k1
-export const Fb = $$W2
-export const Ic = $$C3
-export const Mv = $$M4
-export const N9 = $$L5
-export const U6 = $$S6
-export const V1 = $$w7
-export const X7 = $$G8
-export const YI = $$R9
-export const ZW = $$j10
-export const de = $$N11
-export const dy = $$P12
-export const gG = $$z13
-export const iN = $$V14
-export const _$$if = $$F15
-export const jv = $$D16
-export const lF = $$I17
-export const ox = $$U18
-export const pS = $$A19
-export const qP = $$H20
-export const to = $$v21
-export const vg = $$x22
-export const vr = $$X23
-export const yH = $$O24
+
+/**
+ * Optimistic ID for custom section creation
+ * Original: q
+ */
+
+export const DN = addTeamFavorite
+export const EX = addTileFavorite
+export const Fb = addFileFavorite
+export const Ic = addFavoritesToPlanlessSidebar
+export const Mv = addFolderFavorite
+export const N9 = bulkSetResourcesAsFavorites
+export const U6 = updateExpandedSectionsAction
+export const V1 = moveFavoritedResourceToSection
+export const X7 = removePrototypeFavorite
+export const YI = createSidebarSection
+export const ZW = addWorkspaceFavorite
+export const de = deleteSidebarSection
+export const dy = handleTileUnfavorite
+export const gG = addFileFavoriteAction
+export const iN = addPrototypeFavorite
+export const _$$if = removeWorkspaceFavorite
+export const jv = removeFolderFromFavorites
+export const lF = setFavoritesCountAction
+export const ox = removeTeamFavorite
+export const pS = setNewSectionIndexAction
+export const qP = removeFileFavorite
+export const to = setMovingResourceAction
+export const vg = updateSidebarSection
+export const vr = unstarAllFavorites
+export const yH = createSidebarSectionWithResource

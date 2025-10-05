@@ -12,8 +12,8 @@ import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
 import { Rh } from "../905/844322";
 import { showModalHandler } from "../905/156213";
-import { i as _$$i } from "../905/182187";
-import { an } from "../905/81009";
+import { restoreRepositories } from "../905/182187";
+import { resetTileSelection } from "../905/81009";
 import { trackFileCopied } from "../figma_app/314264";
 import { consumptionPaywallUtils } from "../905/224";
 import { extractValuesByKey } from "../905/439650";
@@ -74,12 +74,12 @@ export let $$F1 = createOptimistThunk(async (e, t) => {
   }
   if (repoIds && repoIds.length > 0) {
     let t = await Promise.all(repoIds.map(e => liveStoreInstance.fetchRepo(e)));
-    e.dispatch(_$$i({
+    e.dispatch(restoreRepositories({
       reposById: s()(t, "id"),
       userInitiated: !0
     }));
   }
-  e.dispatch(an());
+  e.dispatch(resetTileSelection());
 });
 async function j({
   selectedFileKeys: e,

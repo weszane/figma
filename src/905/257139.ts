@@ -7,7 +7,7 @@ import { N0, We, GY, zq, oz, wI } from "../figma_app/782261";
 import { P } from "../905/347284";
 import { DG } from "../figma_app/585235";
 import { KO } from "../figma_app/914674";
-import { M3 } from "../figma_app/119475";
+import { useKeyboardNavigationItem } from "../figma_app/119475";
 import { Q } from "../figma_app/765684";
 function m({
   enableKeyboardNavigation: e,
@@ -78,7 +78,7 @@ function g({
   let {
     keyboardNavigationItem,
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [1, r],
     id: i.key
   });

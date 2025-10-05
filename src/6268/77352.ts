@@ -7,7 +7,7 @@ import { BannerMessage } from "../905/363675";
 import { Link } from "../905/438674";
 import { k as _$$k } from "../905/443820";
 import { IconButton } from "../905/443068";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { k as _$$k2 } from "../905/44647";
 import { v as _$$v } from "../4452/513456";
 import { _ as _$$_ } from "../7021/243271";
@@ -25,7 +25,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { yT } from "../figma_app/332598";
-import { $e } from "../figma_app/711907";
+import { getLanguageFromFileExtension } from "../figma_app/711907";
 import { D as _$$D } from "../6268/819008";
 import { Fq } from "../1250/51387";
 import { uI } from "../6268/693700";
@@ -252,7 +252,7 @@ function Q({
   let a = r.data?.content;
   let l = useMemo(() => {
     let n = a?.split("\n") ?? [];
-    let o = $e(e.selectedFile?.title ?? "");
+    let o = getLanguageFromFileExtension(e.selectedFile?.title ?? "");
     return {
       lines: n.map((e, n) => {
         let o = Math.floor((e.match(/^(\s*)/)?.[1] || "").length / 2);
@@ -275,12 +275,12 @@ function Q({
       hideHeader: !0,
       section: {
         lines: l.lines,
-        language: $e(e.selectedFile?.title ?? ""),
+        language: getLanguageFromFileExtension(e.selectedFile?.title ?? ""),
         name: e.selectedFile?.title ?? "code"
       },
       code: [{
         lines: l.lines,
-        language: $e(e.selectedFile?.title ?? ""),
+        language: getLanguageFromFileExtension(e.selectedFile?.title ?? ""),
         name: e.selectedFile?.title ?? "code"
       }],
       copyAllActionEnabled: !0
@@ -413,16 +413,16 @@ function X({
     SourceCode: o && !n,
     Mcp: getFeatureFlags().dt_component_browser_mcp_tab ?? !1
   };
-  let [d, _, p] = _$$t.useTabs(l, {
+  let [d, _, p] = Tabs.useTabs(l, {
     defaultActive: "Info"
   });
   return jsx("div", {
     className: "component_browser_detail_view--componentDetailTabsPanel--NXILY",
     children: jsxs("div", {
       className: "component_browser_detail_view--tabsContainer--S8u8q",
-      children: [p.tabs.length > 1 && jsx(_$$t.TabStrip, {
+      children: [p.tabs.length > 1 && jsx(Tabs.TabStrip, {
         manager: p,
-        children: p.tabs.map(e => a[e] ? jsx(_$$t.Tab, {
+        children: p.tabs.map(e => a[e] ? jsx(Tabs.Tab, {
           ...d[e],
           children: function (e) {
             switch (e) {
@@ -439,7 +439,7 @@ function X({
         className: "component_browser_detail_view--tabContent--xWwoa",
         children: p.tabs.map(e => {
           let n = a[e];
-          return n ? jsx(_$$t.TabPanel, {
+          return n ? jsx(Tabs.TabPanel, {
             ..._[e],
             children: n
           }, e) : null;

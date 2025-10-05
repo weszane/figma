@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useEffect, useCallback, forwardRef } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { noop } from 'lodash-es';
-import { t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { T as _$$T } from "../905/336775";
 import { s as _$$s } from "../905/551945";
 import { SceneGraphHelpers } from "../figma_app/763686";
@@ -141,7 +141,7 @@ export function $$ec2({
   } = _$$g();
   let B = 0 === libraries.length && 0 === librariesForConnectedProject.length;
   let G = eH();
-  let [z, H, W] = t.useTabs({
+  let [z, H, W] = Tabs.useTabs({
     [xA.FRAGMENTS]: !0,
     [xA.COMPONENTS]: Ko(),
     [xA.COMMUNITY]: G
@@ -243,7 +243,7 @@ export function $$ec2({
           gap: 8,
           align: "center",
           justify: "space-between",
-          children: [Y, Ko() && jsx(t.TabPanel, {
+          children: [Y, Ko() && jsx(Tabs.TabPanel, {
             ...H[xA.COMPONENTS],
             children: jsx("div", {
               className: cssBuilderInstance.h32.flex.itemsCenter.$,
@@ -271,7 +271,7 @@ export function $$ec2({
                 recordingKey: ed
               })
             })
-          }), jsx(t.TabPanel, {
+          }), jsx(Tabs.TabPanel, {
             ...H[xA.FRAGMENTS],
             children: jsx("div", {
               className: cssBuilderInstance.h32.flex.itemsCenter.$,
@@ -280,7 +280,7 @@ export function $$ec2({
                 entryPoint: G4.ACTIONS_VISUAL_SEARCH_VIEW
               })
             })
-          }), G && jsx(t.TabPanel, {
+          }), G && jsx(Tabs.TabPanel, {
             ...H[xA.COMMUNITY],
             children: jsx("div", {
               className: cssBuilderInstance.h32.$
@@ -293,7 +293,7 @@ export function $$ec2({
         value: {
           activeTabId: W.activeTab
         },
-        children: [Ko() && jsx(t.TabPanel, {
+        children: [Ko() && jsx(Tabs.TabPanel, {
           ...H[xA.COMPONENTS],
           children: jsx(_$$q, {
             children: B ? jsx(_$$S, {
@@ -309,7 +309,7 @@ export function $$ec2({
               stretchEmptyStates: !0
             })
           }, c)
-        }), jsx(t.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...H[xA.FRAGMENTS],
           children: jsx(_$$q, {
             children: jsx(_$$M, {
@@ -319,7 +319,7 @@ export function $$ec2({
               entryPoint: G4.ACTIONS_VISUAL_SEARCH_VIEW
             })
           }, d)
-        }), G && jsx(t.TabPanel, {
+        }), G && jsx(Tabs.TabPanel, {
           ...H[xA.COMMUNITY],
           children: jsx(_$$q, {
             children: jsx(_$$M, {

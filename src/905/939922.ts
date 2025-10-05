@@ -10,7 +10,7 @@ import { handleAutosaveFileCreation } from "../905/738636";
 import { setLastVisitedPlan } from "../905/93909";
 import { isBranchAlt, findBranchById, isBranch } from "../905/760074";
 import { fullscreenAlias } from "../905/37051";
-import { Tf, nb } from "../figma_app/543100";
+import { TileUtils, TileType } from "../figma_app/543100";
 import { useCurrentUserOrgId } from "../905/845253";
 import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
@@ -76,11 +76,11 @@ let w = ({
     return;
   }
   r = r ?? OpenTarget.FOCAL_TAB;
-  let s = Tf.getIsTeamTemplate(e);
-  let l = Tf.getName(e);
-  let d = Tf.getEditorType(e);
+  let s = TileUtils.getIsTeamTemplate(e);
+  let l = TileUtils.getName(e);
+  let d = TileUtils.getEditorType(e);
   switch (e.type) {
-    case nb.FILE:
+    case TileType.FILE:
       desktopAPIInstance.openFile({
         fileKey: e.file.key,
         title: e.file.name,
@@ -92,7 +92,7 @@ let w = ({
         userId: n?.id
       });
       break;
-    case nb.PINNED_FILE:
+    case TileType.PINNED_FILE:
       desktopAPIInstance.openFile({
         fileKey: e.file.key,
         title: l,
@@ -102,10 +102,10 @@ let w = ({
         userId: n?.id
       });
       break;
-    case nb.PROTOTYPE:
+    case TileType.PROTOTYPE:
       desktopAPIInstance.openPrototype(e.prototype.file_key, e.prototype.page_id, e.prototype.fig_file.name || "", r, n?.id);
       break;
-    case nb.REPO:
+    case TileType.REPO:
       let c = findBranchById(e.repo, e.branches, t);
       c && desktopAPIInstance.openFile({
         fileKey: c.key,
@@ -117,7 +117,7 @@ let w = ({
         userId: n?.id
       });
       break;
-    case nb.OFFLINE_FILE:
+    case TileType.OFFLINE_FILE:
       i(handleAutosaveFileCreation({
         file: e.file,
         openNewFileIn: TabOpenBehavior.NEW_TAB,
@@ -134,12 +134,12 @@ let C = ({
   selectedBranchKeyByRepoId: i,
   dispatch: n
 }) => {
-  e.type === nb.OFFLINE_FILE && n(handleAutosaveFileCreation({
+  e.type === TileType.OFFLINE_FILE && n(handleAutosaveFileCreation({
     file: e.file,
     openNewFileIn: TabOpenBehavior.NEW_TAB,
     source: NotificationType.OFFLINE_FILE_TILE
   }));
-  let r = Tf.getEditUrl(e, i);
+  let r = TileUtils.getEditUrl(e, i);
   customHistory.redirect(r, "_blank");
   t.preventDefault();
 };
@@ -164,7 +164,7 @@ let T = async ({
     selectedView: r
   };
   switch (e.type) {
-    case nb.FILE:
+    case TileType.FILE:
       compareValues(n, e.file.parentOrgId, o, e.file.teamId) ? navigateToFile({
         file: {
           key: e.file.key,
@@ -177,7 +177,7 @@ let T = async ({
         prevSelectedView: d
       }));
       break;
-    case nb.PINNED_FILE:
+    case TileType.PINNED_FILE:
       let _ = await liveStoreInstance.fetchFile(e.file.key);
       compareValues(n, _.parent_org_id, o, _.team_id) ? navigateToFile({
         file: {
@@ -191,7 +191,7 @@ let T = async ({
         prevSelectedView: d
       }));
       break;
-    case nb.PROTOTYPE:
+    case TileType.PROTOTYPE:
       let A = e.prototype.fig_file;
       compareValues(n, A.parent_org_id, o, A.team_id) ? navigateToFile({
         base: "proto",
@@ -207,7 +207,7 @@ let T = async ({
         prevSelectedView: d
       }));
       break;
-    case nb.REPO:
+    case TileType.REPO:
       let b = findBranchById(e.repo, e.branches, t);
       if (!b) return;
       compareValues(n, b.parent_org_id, o, b.team_id) ? navigateToFile({
@@ -221,7 +221,7 @@ let T = async ({
         prevSelectedView: d
       }));
       break;
-    case nb.OFFLINE_FILE:
+    case TileType.OFFLINE_FILE:
       i(handleAutosaveFileCreation({
         file: e.file,
         openNewFileIn: TabOpenBehavior.SAME_TAB,

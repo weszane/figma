@@ -11,10 +11,10 @@ import { w } from "../905/13390";
 import { useFavoriteResource } from "../905/347011";
 import { d as _$$d } from "../figma_app/307143";
 import { ac } from "../905/930279";
-import { t$ } from "../figma_app/863319";
+import { sortWithPinnedItems } from "../figma_app/863319";
 import { userHasPlan } from "../905/697795";
 import { useFileByKey } from "../905/862913";
-import { nb, Tf } from "../figma_app/543100";
+import { TileType, TileUtils } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
 import { FEntityType } from "../figma_app/191312";
 export function $$I0({
@@ -34,10 +34,10 @@ export function $$I0({
   let k = useMemo(() => {
     if (!i) return null;
     let e = null;
-    if (i.type === nb.FILE) e = i.file;else if (i.type === nb.REPO) {
+    if (i.type === TileType.FILE) e = i.file;else if (i.type === TileType.REPO) {
       let t = T[i.repo.default_file_key];
       e = t ? fileEntityDataMapper.toLiveGraph(t) : null;
-    } else i.type === nb.PINNED_FILE && (e = i.file);
+    } else i.type === TileType.PINNED_FILE && (e = i.file);
     return e;
   }, [T, i]);
   let R = function ({
@@ -50,8 +50,8 @@ export function $$I0({
     _$$d({
       file: e ?? null
     });
-    let a = t ? Tf.getOrgId(t) : null;
-    let s = t ? Tf.getFavoriteResourceTeamId(t) : null;
+    let a = t ? TileUtils.getOrgId(t) : null;
+    let s = t ? TileUtils.getFavoriteResourceTeamId(t) : null;
     let o = userHasPlan(a, s);
     let l = useFavoriteResource(n ?? "", FEntityType.FILE, a, s);
     let d = pH(e?.key ?? "", {
@@ -60,7 +60,7 @@ export function $$I0({
     let u = l.hasMaxFavorites;
     let p = l.favorite;
     let A = l.orderedSidebarSections ?? [];
-    let b = t$(l.userSidebarSections ?? [], A);
+    let b = sortWithPinnedItems(l.userSidebarSections ?? [], A);
     let I = b.find(e => e.id === p?.resource.sidebarSectionId);
     return {
       loading: "loaded" !== l.status || "loaded" !== r.status || "disabled" !== d.status && "loaded" !== d.status,
@@ -78,7 +78,7 @@ export function $$I0({
     tile: i,
     tileActions: e
   });
-  let N = R.loading && i?.type !== nb.OFFLINE_FILE || "loaded" !== filePermissions.status || "loaded" !== repoPermissions.status || "loaded" !== protoPermissions.status;
+  let N = R.loading && i?.type !== TileType.OFFLINE_FILE || "loaded" !== filePermissions.status || "loaded" !== repoPermissions.status || "loaded" !== protoPermissions.status;
   return (useWebLoggerTimerEffect(N, e => {
     analyticsEventManager.trackDefinedEvent("file_browser.context_menu_load_queries_time", {
       durationMs: Math.round(e),
@@ -94,7 +94,7 @@ export function $$I0({
       className: "subscribed_tile_action_dropdown--tileActions--zsKOG",
       loadedQueries: R.data,
       onMount: () => {
-        $.endAndReport(`${Tf.getId(i)}`);
+        $.endAndReport(`${TileUtils.getId(i)}`);
       },
       openTile: t,
       permsByFileKey: filePermissions.data,

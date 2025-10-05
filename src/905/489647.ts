@@ -12,7 +12,7 @@ import { createOptimistThunk } from "../905/350402";
 import { W9 } from "../figma_app/559491";
 import { s as _$$s } from "../905/58247";
 import { fetchAndSyncVersions } from "../figma_app/147952";
-import { IN } from "../905/116101";
+import { setUniversalInsertViewResourceDetails } from "../905/116101";
 import { fullscreenValue } from "../figma_app/455680";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { noop } from "../905/813868";
@@ -31,7 +31,7 @@ import { RM, $I } from "../figma_app/322845";
 import { Ag } from "../905/235578";
 import { C as _$$C } from "../figma_app/959385";
 import { p as _$$p } from "../905/42189";
-import { s as _$$s2 } from "../figma_app/504088";
+import { SimpleComponentType } from "../figma_app/504088";
 import { fK } from "../figma_app/300024";
 export let $$j0 = createOptimistThunk(async (e, t) => {
   await fullscreenValue.onReady();
@@ -128,11 +128,11 @@ export let $$j0 = createOptimistThunk(async (e, t) => {
         trackingData: {
           source: q
         }
-      }) : e.dispatch(IN({
-        initialFdResourceTab: isWidget ? _$$s2.WIDGET : _$$s2.PLUGIN,
+      }) : e.dispatch(setUniversalInsertViewResourceDetails({
+        initialFdResourceTab: isWidget ? SimpleComponentType.WIDGET : SimpleComponentType.PLUGIN,
         fdPreviewResource: {
           id: tryPluginId,
-          type: isWidget ? _$$s2.WIDGET : _$$s2.PLUGIN
+          type: isWidget ? SimpleComponentType.WIDGET : SimpleComponentType.PLUGIN
         }
       }));
       return;
@@ -147,10 +147,10 @@ export let $$j0 = createOptimistThunk(async (e, t) => {
         setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
         _$$s({
           ...Y,
-          initialFdResourceTab: _$$s2.PLUGIN,
+          initialFdResourceTab: SimpleComponentType.PLUGIN,
           fdPreviewResource: {
             id: tryPluginId,
-            type: _$$s2.PLUGIN
+            type: SimpleComponentType.PLUGIN
           },
           source: q
         });
@@ -174,10 +174,10 @@ export let $$j0 = createOptimistThunk(async (e, t) => {
     case FEditorType.Cooper:
       getFeatureFlags().buzz_plugins && (atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS), _$$s({
         ...Y,
-        initialFdResourceTab: _$$s2.PLUGIN,
+        initialFdResourceTab: SimpleComponentType.PLUGIN,
         fdPreviewResource: {
           id: tryPluginId,
-          type: _$$s2.PLUGIN
+          type: SimpleComponentType.PLUGIN
         },
         source: q
       }));

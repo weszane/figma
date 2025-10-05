@@ -13,7 +13,7 @@ import { g as _$$g } from "../figma_app/777171";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { fullscreenAlias } from "../905/37051";
 import { getBasicViewportRect } from "../figma_app/62612";
-import { t as _$$t2 } from "../905/192333";
+import { PinningState } from "../905/192333";
 import { O } from "../figma_app/71774";
 import { F } from "../figma_app/603239";
 import { cG } from "../figma_app/940844";
@@ -42,7 +42,7 @@ export function $$M8(e) {
   if (fullscreenAlias.getIsExtension()) return s - C - e;
   if (r) return window.innerHeight - C - e;
   let o = window.innerHeight - t.y - C - e;
-  return n === _$$t2.PINNED_AND_DOCKED_LEFT ? o : Math.min(v - e, o);
+  return n === PinningState.PINNED_AND_DOCKED_LEFT ? o : Math.min(v - e, o);
 }
 export let $$F1 = createContext(null);
 export function $$j5() {

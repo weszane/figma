@@ -18,7 +18,7 @@ import { isExtension, everyLocalSubscription, isLocalSubscription, isLocalSubscr
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { P as _$$P } from "../905/201667";
 import { throwTypeError } from "../figma_app/465776";
-import { t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { bL, _L } from "../905/911410";
 import { DialogContents, DialogHeader, DialogHiddenTitle, DialogBody } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
@@ -636,7 +636,7 @@ function ep(e) {
   useEffect(() => {
     0 === variables.length && onClose();
   }, [variables, onClose]);
-  let [_, A, y] = t.useTabs({
+  let [_, A, y] = Tabs.useTabs({
     details: !0,
     scoping: variables.some(e => $8().includes(e.resolvedType))
   }, {
@@ -657,13 +657,13 @@ function ep(e) {
       children: [jsxs(DialogHeader, {
         children: [jsx(DialogHiddenTitle, {
           children: renderI18nText("variables.edit_modal.title")
-        }), jsxs(t.TabStrip, {
+        }), jsxs(Tabs.TabStrip, {
           manager: y,
-          children: [jsx(t.Tab, {
+          children: [jsx(Tabs.Tab, {
             ..._.details,
             recordingKey: generateRecordingKey(e.recordingKey, "tabs", "details"),
             children: renderI18nText("variables.edit_modal.tabs.details")
-          }), jsx(t.Tab, {
+          }), jsx(Tabs.Tab, {
             ..._.scoping,
             recordingKey: generateRecordingKey(e.recordingKey, "tabs", "scoping"),
             children: renderI18nText("variables.edit_modal.tabs.scoping")
@@ -680,7 +680,7 @@ function ep(e) {
             spacing: 0,
             horizontalAlignItems: "stretch",
             children: jsxs(Fragment, {
-              children: [jsx(t.TabPanel, {
+              children: [jsx(Tabs.TabPanel, {
                 ...A.details,
                 forceMount: !0,
                 children: 1 === variables.length ? jsx(em, {
@@ -703,7 +703,7 @@ function ep(e) {
                   setVariableScope,
                   recordingKey: e.recordingKey
                 })
-              }), jsx(t.TabPanel, {
+              }), jsx(Tabs.TabPanel, {
                 ...A.scoping,
                 forceMount: !0,
                 children: jsx(ef, {

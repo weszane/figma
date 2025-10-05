@@ -13,7 +13,7 @@ import { U as _$$U2 } from '../905/103637';
 import { Q$ } from '../905/128313';
 import { KindEnum } from '../905/129884';
 import { c as _$$c3 } from '../905/144429';
-import { t as _$$t2 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { hideModalHandler, showModalHandler } from '../905/156213';
 import { TrackedLink } from '../905/160095';
 import { ServiceCategories } from '../905/165054';
@@ -59,7 +59,7 @@ import { Q as _$$Q2 } from '../905/572508';
 import { s as _$$s } from '../905/587936';
 import { getFeatureFlags } from '../905/601108';
 import { PerfTimer } from '../905/609396';
-import { S as _$$S } from '../905/612212';
+import { lastActionDetails } from '../905/612212';
 import { Q as _$$Q3 } from '../905/616985';
 import { d as _$$d, Q as _$$Q } from '../905/620793';
 import { ButtonPrimitive } from '../905/632989';
@@ -75,16 +75,16 @@ import { createLoadedState, createLoadingState } from '../905/723791';
 import { W as _$$W2 } from '../905/729905';
 import { G as _$$G } from '../905/750789';
 import { ErrorBoundaryCrash } from '../905/751457';
-import { er as _$$er, sz, Tp, zm } from '../905/753512';
+import { isLibraryModalContextAvailable, useLibraryModalContextOptional, LibraryModalContextProvider, useLibraryModalContext } from '../905/753512';
 import { $$ei1, $$et0 } from '../905/759609';
 import { isBranchAlt } from '../905/760074';
 import { areSetsSubset } from '../905/760682';
 import { U as _$$U } from '../905/763676';
 import { w as _$$w } from '../905/770105';
-import { _w, Ir, mq } from '../905/789781';
+import { draftStatus, tabCategories, tabUtils } from '../905/789781';
 import { i as _$$i } from '../905/797975';
 import { handleLoadAllPagesWithVersionCheck } from '../905/807667';
-import { _5, eS as _$$eS2, W as _$$W, b1, mG, Pq, Px, Qj, ry } from '../905/825399';
+import { filterLibrariesWithAssets, useSharingGroupLibraries, filterSubscribedLibraries, useIsLibrarySubscribed, useTeamOrgAccess, getTeamLibraryInfo, isLibrarySubscribed, usePublishedLibraries, useFigmaLibraries } from '../905/825399';
 import { V as _$$V } from '../905/843013';
 import { useDropdownState } from '../905/848862';
 import { getParentOrgId } from '../905/872904';
@@ -108,7 +108,7 @@ import { LibraryModalAssetsDataByLibraryKey, OrgTeamView } from '../figma_app/43
 import { FEditorType } from '../figma_app/53721';
 import { h as _$$h2 } from '../figma_app/58251';
 import { assertNotNullish, isNotNullish } from '../figma_app/95419';
-import { M3 } from '../figma_app/119475';
+import { useKeyboardNavigationItem } from '../figma_app/119475';
 import { directlySubscribedStylesUniqueKeysAtom } from '../figma_app/141508';
 import { LibrarySubscriptionType, useSubscribedLibraries, useUntransformedSubscribedLibraries } from '../figma_app/155728';
 import { JR, Qp, Wi } from '../figma_app/162641';
@@ -169,7 +169,7 @@ function y(e) {
   let {
     hasSwitchedTabs,
     tabManager
-  } = zm();
+  } = useLibraryModalContext();
   return useCallback(() => {
     let r = _.getElapsedTime();
     r && !hasSwitchedTabs && (analyticsEventManager.trackDefinedEvent('library_modal.load_time', {
@@ -232,7 +232,7 @@ function ea({
   let l = useOpenFileLibraryKey() === e.library_key;
   let {
     debouncedSearchQuery
-  } = zm();
+  } = useLibraryModalContext();
   let u = function () {
     let e = useDropdownState();
     let t = useDispatch();
@@ -240,7 +240,7 @@ function ea({
       e && e.type === LibraryItemTileContextMenuType.LIBRARY_MODAL && t(hideDropdownAction());
     }, [t, e]);
   }();
-  let p = mq.useTabContentsWidth();
+  let p = tabUtils.useTabContentsWidth();
   return jsxs('div', {
     className: cssBuilderInstance.flex.flexColumn.hFull.$,
     onMouseDown: u,
@@ -282,7 +282,7 @@ function es({
   let a = i.library_key;
   let s = isTeamLibrary(i) ? i.team_id : null;
   let o = getParentOrgId();
-  let l = mq.useTabContentsWidth();
+  let l = tabUtils.useTabContentsWidth();
   let [d] = setupResourceAtomHandler(Yt(a));
   let c = useSubscription(LibraryModalAssetsDataByLibraryKey, {
     libraryKey: a
@@ -322,7 +322,7 @@ function eo({
     let n = useCurrentUserOrg();
     let {
       workspaces
-    } = zm();
+    } = useLibraryModalContext();
     let o = i?.workspace_id;
     return useMemo(() => {
       let r;
@@ -400,7 +400,7 @@ let ed = createContext({
 function ec({
   children: e
 }) {
-  let t = mq.useTabContentsWidth();
+  let t = tabUtils.useTabContentsWidth();
   let [i, a] = useState(null);
   let [s, o] = useState(null);
   let [l, d] = useState(0);
@@ -459,7 +459,7 @@ function eu() {
   e = assertNotNullish(viewLibraryDetails, 'useViewLibraryDetails must be used within a LibraryDetailsContext');
   let t = _$$W2.usePath();
   return useCallback((i, n, r) => {
-    _$$S.setLastAction(_$$S.NavAction.LIBRARY);
+    lastActionDetails.setLastAction(lastActionDetails.NavAction.LIBRARY);
     viewLibraryDetails(i, t, n, r);
   }, [t, viewLibraryDetails]);
 }
@@ -483,7 +483,7 @@ let eS = ex;
 let eR = ek;
 let eF = 'library_card--textContainer--eV7Dt';
 function eM() {
-  return Math.floor((mq.useTabContentsWidth() - 16) / 3);
+  return Math.floor((tabUtils.useTabContentsWidth() - 16) / 3);
 }
 function ej() {
   return eM() - 16;
@@ -503,7 +503,7 @@ function eB({
   let u = eu();
   let m = isTeamLibrary(e) ? e.team_name : e.community_author_name;
   let h = !isPublishedTeamLibrary(e) || e.thumbnail_guid !== null;
-  let g = Px(e);
+  let g = isLibrarySubscribed(e);
   let [_, A, y] = _$$e(!1);
   let b = useSyncedState(_);
   let [v, E, x] = _$$e(!1);
@@ -519,7 +519,7 @@ function eB({
   } = _$$W2.usePositionDataForLogging();
   let {
     sessionId
-  } = zm();
+  } = useLibraryModalContext();
   let L = _$$W2.usePath();
   let F = _$$W2.useFileMetadata();
   let M = _$$W2.useMetadataForSubscribeEvent(e, {
@@ -777,7 +777,7 @@ function eW({
   let s = _$$W2.useFileMetadata();
   let {
     sessionId
-  } = zm();
+  } = useLibraryModalContext();
   let l = _$$W2.usePath();
   let d = useCallback((e, t, n) => {
     let r = eS()(a.map(([, e]) => e.slice(0, 3).length));
@@ -790,7 +790,7 @@ function eW({
       nTeams: a.filter(([e]) => !!e).length,
       nLibraries: r
     });
-    _$$S.setLastAction(_$$S.NavAction.TEAM_SEE_MORE);
+    lastActionDetails.setLastAction(lastActionDetails.NavAction.TEAM_SEE_MORE);
     i(e);
   }, [s, i, l, a, sessionId]);
   return jsx(Fragment, {
@@ -911,7 +911,7 @@ function eQ({
   libraries: i,
   id: a
 }) {
-  let s = Pq(i);
+  let s = getTeamLibraryInfo(i);
   let {
     filteredLibraries,
     filterOnAdded,
@@ -922,7 +922,7 @@ function eQ({
     let {
       tabManager,
       sessionId
-    } = zm();
+    } = useLibraryModalContext();
     let l = _$$W2.useFileMetadata();
     let d = useCallback(() => {
       analyticsEventManager.trackDefinedEvent('library_modal.filtered', {
@@ -933,7 +933,7 @@ function eQ({
       });
       a();
     }, [l, t, a, sessionId, tabManager.activeTab]);
-    let c = b1();
+    let c = useIsLibrarySubscribed();
     let u = useMemo(() => e.some(e => c(e.library_key)), [c, e]);
     let m = useMemo(() => {
       let i = [...e];
@@ -953,7 +953,7 @@ function eQ({
     return {
       ...e,
       library_team_id: a,
-      n_draft_libraries: a === _w ? e.n_libraries : 0
+      n_draft_libraries: a === draftStatus ? e.n_libraries : 0
     };
   }, [u, a]);
   _$$W2.useLogPageView({
@@ -1006,7 +1006,7 @@ function e0() {
 }
 let e1 = 'library_modal_ent_view--workspaceCard--f-qmb';
 function e2() {
-  let e = mq.useTabContentsWidth();
+  let e = tabUtils.useTabContentsWidth();
   let {
     workspaces,
     draftLibraries,
@@ -1015,12 +1015,12 @@ function e2() {
   } = function () {
     let {
       workspaces: _workspaces
-    } = zm();
+    } = useLibraryModalContext();
     let t = _$$z();
     let {
       result,
       status
-    } = Qj();
+    } = usePublishedLibraries();
     let a = useMemo(() => result.filter(isTeamLibrary) ?? [], [result]);
     let s = useMemo(() => {
       let e = {};
@@ -1084,7 +1084,7 @@ function e2() {
     x(null);
   }, []);
   let C = useMemo(() => m ? {
-    id: _w,
+    id: draftStatus,
     name: getI18nString('design_systems.libraries_modal.draft_libraries'),
     libraries: draftLibraries
   } : E ? _ ? otherLibraries.find(e => e.id === E) ?? null : u ? u.teams.find(e => e.id === E) ?? null : null : null, [E, u, draftLibraries, m, _, otherLibraries]);
@@ -1103,7 +1103,7 @@ function e2() {
   let L = _$$W2.useFileMetadata();
   let {
     sessionId
-  } = zm();
+  } = useLibraryModalContext();
   let M = useCallback(e => (n, r, s) => {
     let o = workspaces.length;
     draftLibraries.length > 0 && o++;
@@ -1118,7 +1118,7 @@ function e2() {
       nWorkspaces: o
     });
     k(r + 1);
-    _$$S.setLastAction(_$$S.NavAction.WORKSPACE);
+    lastActionDetails.setLastAction(lastActionDetails.NavAction.WORKSPACE);
     n === 'drafts' ? h() : n === 'other' ? A() : c(n);
   }, [draftLibraries.length, L, h, A, otherLibraries.length, sessionId, workspaces.length]);
   return isLoading || workspaces.length !== 0 || draftLibraries.length !== 0 || otherLibraries.length !== 0 ? jsx(_$$W2.PositionDataProvider, {
@@ -1422,7 +1422,7 @@ let tt = {
 function tl({
   onlyJoinedTeams: e = !1
 }) {
-  let t = mq.useTabContentsWidth();
+  let t = tabUtils.useTabContentsWidth();
   let {
     teamsWithLibraries,
     draftLibraries,
@@ -1481,7 +1481,7 @@ function tl({
     let {
       result,
       status: _status
-    } = Qj();
+    } = usePublishedLibraries();
     let l = useMemo(() => result.filter(isTeamLibrary) ?? [], [result]);
     let d = useMemo(() => {
       if (n && e) return teams;
@@ -1528,14 +1528,14 @@ function tl({
     l && !isLoading && o();
   }, [l, isLoading, o]);
   let [d, c] = useState(null);
-  let u = useMemo(() => d === _w ? {
-    id: _w,
+  let u = useMemo(() => d === draftStatus ? {
+    id: draftStatus,
     name: getI18nString('design_systems.libraries_modal.draft_libraries'),
     libraries: draftLibraries
   } : d ? teamsWithLibraries.find(e => e.id === d) : null, [d, draftLibraries, teamsWithLibraries]);
   let p = useMemo(() => {
     if (!u) return;
-    if (u.id === _w) return teamsWithLibraries.length + 1;
+    if (u.id === draftStatus) return teamsWithLibraries.length + 1;
     let e = teamsWithLibraries.findIndex(e => e.id === u.id);
     if (e >= 0) return e + 1;
   }, [u, teamsWithLibraries]);
@@ -1547,7 +1547,7 @@ function tl({
   }, []);
   let {
     hasProAccess
-  } = mG();
+  } = useTeamOrgAccess();
   let f = _$$W2.useMetadataForTeamsWithLibraries(teamsWithLibraries, draftLibraries);
   if (teamsWithLibraries.length === 0 && draftLibraries.length === 0 && !isLoading) {
     let t = hasProAccess ? e ? jsx(tu, {}) : jsx(e0, {}) : jsx(tc, {});
@@ -1582,7 +1582,7 @@ function tl({
     section: 'team',
     children: jsxs(_$$W2.PushContainerWithPaths, {
       width: t,
-      paths: [['teams'], [d === _w ? 'drafts' : 'team']],
+      paths: [['teams'], [d === draftStatus ? 'drafts' : 'team']],
       children: [jsx(td, {
         teamsWithLibraries,
         draftLibraries,
@@ -1646,7 +1646,7 @@ function tc() {
   let i = selectCurrentFile();
   let {
     sessionId
-  } = zm();
+  } = useLibraryModalContext();
   let s = useCallback(() => {
     e(showModalHandler({
       type: $3,
@@ -1692,7 +1692,7 @@ function tm() {
   let {
     hasEntAccess,
     hasOrgAccess
-  } = mG();
+  } = useTeamOrgAccess();
   let i = assertNotNullish(useCurrentUserOrg(), 'org object should always be defined in library modal org tab');
   let r = hasEntAccess && i.workspaces_count && i.workspaces_count > 0;
   assert(hasOrgAccess, 'Org tab should not render if user does not have org access');
@@ -1796,17 +1796,17 @@ function tS() {
     } = Fl();
     let i = useUntransformedSubscribedLibraries();
     let n = useSubscribedLibraries();
-    let a = Qj();
-    let s = ry();
+    let a = usePublishedLibraries();
+    let s = useFigmaLibraries();
     let o = _$$z();
     let l = useMemo(() => a.status !== 'loaded' ? [] : a.result, [a]);
     let d = useMemo(() => a.status !== 'loaded' || s.status !== 'loaded' && s.status !== 'disabled' ? createLoadingState() : createLoadedState([...a.result, ...s.result]), [a, s]);
-    let c = _5(orgApprovedLibraryKeys, a);
-    let u = _5(workspaceApprovedLibraryKeys, a);
-    let p = _$$W(i.data?.file?.libraryOrgSubscriptions ?? [], d);
-    let m = _$$W(i.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions ?? [], d);
-    let h = _$$W(i.data?.file?.libraryTeamSubscriptions ?? [], d);
-    let g = _$$eS2(l);
+    let c = filterLibrariesWithAssets(orgApprovedLibraryKeys, a);
+    let u = filterLibrariesWithAssets(workspaceApprovedLibraryKeys, a);
+    let p = filterSubscribedLibraries(i.data?.file?.libraryOrgSubscriptions ?? [], d);
+    let m = filterSubscribedLibraries(i.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions ?? [], d);
+    let h = filterSubscribedLibraries(i.data?.file?.libraryTeamSubscriptions ?? [], d);
+    let g = useSharingGroupLibraries(l);
     return useMemo(() => {
       if (i.status !== 'loaded' || c.status !== 'loaded' || u.status !== 'loaded' || p.status !== 'loaded' || m.status !== 'loaded' || h.status !== 'loaded' || g.status !== 'loaded') return createLoadingState();
       let e = {
@@ -1872,7 +1872,7 @@ let tw = e => !e || e.orgLibraries.length === 0 && e.workspaceLibraries.length =
 function tC() {
   let {
     hasEntAccess
-  } = mG();
+  } = useTeamOrgAccess();
   let t = hasEntAccess ? getI18nString('design_systems.libraries_modal.no_recommended_libraries_ent_text') : getI18nString('design_systems.libraries_modal.no_recommended_libraries_pro_org_text');
   let i = jsx(Link.Button, {
     variant: 'secondary',
@@ -1983,7 +1983,7 @@ let tH = () => {
   let t = useSelector(_$$fA);
   let {
     sessionId
-  } = sz() ?? {};
+  } = useLibraryModalContextOptional() ?? {};
   let n = getCurrentTeam();
   let a = useCallback(() => {
     e(showModalHandler({
@@ -2026,7 +2026,7 @@ function tW({
       sessionId,
       searchSessionId,
       queryId
-    } = zm();
+    } = useLibraryModalContext();
     let c = fV(e ?? void 0);
     return useMemo(() => {
       if (i.status === 'loaded' && i.data.length > 0) {
@@ -2091,7 +2091,7 @@ function tY({
   let d = _$$W2.useMetadataForLibrary(e);
   let {
     sessionId
-  } = zm();
+  } = useLibraryModalContext();
   let u = _$$W2.usePath();
   let m = (t[t.length - 1] ?? 0) + 1;
   let h = eu();
@@ -2155,7 +2155,7 @@ function tZ({
     }();
     let {
       searchQuery
-    } = zm();
+    } = useLibraryModalContext();
     let i = useLatestRef(searchQuery);
     useEffect(() => {
       searchQuery !== i && e();
@@ -2180,14 +2180,14 @@ function tX() {
   let {
     debouncedSearchQuery,
     searchResults
-  } = zm();
+  } = useLibraryModalContext();
   let i = searchResults.status !== 'loaded';
   let a = searchResults?.data?.length === 0;
   let {
     queryId,
     searchQuery,
     searchSessionId
-  } = zm();
+  } = useLibraryModalContext();
   let d = useMemo(() => ({
     query: searchQuery,
     query_id: queryId,
@@ -2292,10 +2292,10 @@ function t4() {
 function t3() {
   let {
     hasProAccess
-  } = mG();
+  } = useTeamOrgAccess();
   let {
     tabManager
-  } = zm();
+  } = useLibraryModalContext();
   let i = useCallback(() => {
     tabManager.setActiveTab('recommended');
   }, [tabManager]);
@@ -2343,7 +2343,7 @@ function id() {
     let t = useDispatch();
     let {
       sessionId
-    } = zm();
+    } = useLibraryModalContext();
     let n = selectCurrentFile();
     let a = useCallback(() => {
       t(showModalHandler({
@@ -2375,11 +2375,11 @@ function id() {
     let t = _$$x();
     return useMemo(() => e && Object.values(t).some(t => t.id === e.id), [e, t]);
   }();
-  let i = _$$er();
+  let i = isLibraryModalContextAvailable();
   let a = selectCurrentFile();
   let {
     sessionId
-  } = zm();
+  } = useLibraryModalContext();
   let o = t || !i;
   useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent('library_modal.publish_upsell_banner_shown', {
@@ -2411,7 +2411,7 @@ function ic() {
     let t = selectCurrentFile();
     let {
       sessionId
-    } = zm();
+    } = useLibraryModalContext();
     return useCallback(() => {
       e(showModalHandler({
         type: _$$V2,
@@ -2461,7 +2461,7 @@ function ip() {
   let e = selectCurrentFile();
   let {
     hasProAccess
-  } = mG();
+  } = useTeamOrgAccess();
   let i = t$();
   let r = getSelectedView();
   let a = r.view === 'fullscreen' && r.editorType !== FEditorType.Slides && r.editorType !== FEditorType.Cooper;
@@ -2560,7 +2560,7 @@ function iy({
   });
 }
 function ib() {
-  let e = mq.useTabContentsWidth();
+  let e = tabUtils.useTabContentsWidth();
   let [t, i] = useState(!1);
   let a = useCallback(() => i(!1), []);
   let s = useCallback(() => i(!0), []);
@@ -2648,7 +2648,7 @@ function ib() {
 }
 function iv() {
   let e = useSubscribedLibraries();
-  let t = ry();
+  let t = useFigmaLibraries();
   let i = y('tab_loaded');
   let a = useLatestRef(t);
   useEffect(() => {
@@ -2990,7 +2990,7 @@ function ny({
   switchedTabs: l
 }) {
   SR();
-  let c = _$$er();
+  let c = isLibraryModalContextAvailable();
   let h = function () {
     let [e, t] = useAtomValueAndSetter(iz);
     let i = useDispatch();
@@ -3440,12 +3440,12 @@ let nI = {
   n_variables: 0
 };
 function nE() {
-  let e = mq.useTabContentsWidth();
+  let e = tabUtils.useTabContentsWidth();
   let {
     entrypoint,
     hasSwitchedTabs,
     initialUpdatesModalScope
-  } = zm();
+  } = useLibraryModalContext();
   let [o, d] = useState(initialUpdatesModalScope);
   return jsx(LibrarySubscriptionContext.Provider, {
     value: o,
@@ -3461,7 +3461,7 @@ function nE() {
 function nx() {
   let {
     tabPanelPropsMap
-  } = zm();
+  } = useLibraryModalContext();
   return jsx(_$$ej, {
     children: jsxs('main', {
       className: 'library_modal_tab_body--mainContent--JMEJp',
@@ -3504,7 +3504,7 @@ function nS(e) {
   } = e;
   return jsx(_$$W2.Page, {
     name: `${name}_tab`,
-    children: jsx(_$$t2.TabPanel, {
+    children: jsx(Tabs.TabPanel, {
       ...i
     })
   });
@@ -3517,9 +3517,9 @@ function nM() {
     clearSearchQuery,
     onFocusSearchBar,
     modalRef
-  } = zm();
+  } = useLibraryModalContext();
   let o = useCallback(() => {
-    _$$S.setLastAction(_$$S.NavAction.FOCUS_SEARCH);
+    lastActionDetails.setLastAction(lastActionDetails.NavAction.FOCUS_SEARCH);
     onFocusSearchBar();
   }, [onFocusSearchBar]);
   let l = useRef(null);
@@ -3574,12 +3574,12 @@ function nU({
 }) {
   let l = i.activeTab === s;
   let d = useCallback(() => {
-    l || (i.setActiveTab(s), _$$S.setLastAction(_$$S.NavAction.TAB));
+    l || (i.setActiveTab(s), lastActionDetails.setLastAction(lastActionDetails.NavAction.TAB));
   }, [i, l, s]);
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: [m3.TabStripSection.Tabs, o],
     onFocusThroughKeyboardNavigation: d
   });
@@ -3606,12 +3606,12 @@ function nB() {
 function nV() {
   let {
     tabPropsMap
-  } = zm();
+  } = useLibraryModalContext();
   let t = getParentOrgId();
   return jsx(Y7, {
     children: jsxs('nav', {
       className: 'library_modal_tab_strip--tabStrip----mnU',
-      children: [jsx(nM, {}), jsx(nB, {}), Ir.map((i, a) => {
+      children: [jsx(nM, {}), jsx(nB, {}), tabCategories.map((i, a) => {
         switch (i) {
           case 'thisFile':
             return createElement(nU, {
@@ -3679,8 +3679,8 @@ export function $$nG0({
   sessionId: d
 }) {
   let c = m9();
-  Qj();
-  ry();
+  usePublishedLibraries();
+  useFigmaLibraries();
   useSingleEffect(() => {
     _.stop();
     _.reset();
@@ -3688,9 +3688,9 @@ export function $$nG0({
   });
   let u = useRef(null);
   useEffect(() => {
-    _$$S.setLastAction(_$$S.NavAction.OPEN_MODAL);
+    lastActionDetails.setLastAction(lastActionDetails.NavAction.OPEN_MODAL);
   }, []);
-  return jsx(Tp, {
+  return jsx(LibraryModalContextProvider, {
     entrypoint: e,
     initialTab: t,
     sessionId: d,

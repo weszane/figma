@@ -7,7 +7,7 @@ import { ServiceCategories } from "../905/165054";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { ButtonPrimitive } from "../905/632989";
 import { Button } from "../905/521428";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { s as _$$s } from "../905/403855";
 import { B as _$$B } from "../905/950875";
 import { setupThemeContext } from "../905/614223";
@@ -1145,7 +1145,7 @@ function e1(e) {
   let t = usePlanUserCreationContextExperiment()(e.planType);
   let a = ["manage"];
   e.planType === FOrganizationLevelType.ORG && a.push("activity");
-  let [s, i, r] = _$$t.useTabs(a.reduce((e, t) => ({
+  let [s, i, r] = Tabs.useTabs(a.reduce((e, t) => ({
     ...e,
     [t]: !0
   }), {}), {
@@ -1157,25 +1157,25 @@ function e1(e) {
     children: [jsx("div", {
       className: cssBuilderInstance.pt6.pb6.pl16.pr16.h32.flexGrow0.bb1.bSolid.colorBorder.flex.flexRow.itemsCenter.$,
       "data-testid": "tab-strip",
-      children: jsxs(_$$t.TabStrip, {
+      children: jsxs(Tabs.TabStrip, {
         manager: r,
-        children: [jsx(_$$t.Tab, {
+        children: [jsx(Tabs.Tab, {
           ...s.manage,
           children: getI18nString("member_flyout_modal.tabs.manage_tab_title")
-        }), e.planType === FOrganizationLevelType.ORG && jsx(_$$t.Tab, {
+        }), e.planType === FOrganizationLevelType.ORG && jsx(Tabs.Tab, {
           ...s.activity,
           children: getI18nString("member_flyout_modal.tabs.activity_tab_title")
         })]
       })
     }), jsxs("div", {
       className: cssBuilderInstance.flexGrow1.hFull.overflowAuto.$,
-      children: [jsx(_$$t.TabPanel, {
+      children: [jsx(Tabs.TabPanel, {
         ...i.manage,
         children: jsx(eZ, {
           ...e,
           displayPlanUserMembershipRecord: t
         })
-      }), e.planType === FOrganizationLevelType.ORG && jsx(_$$t.TabPanel, {
+      }), e.planType === FOrganizationLevelType.ORG && jsx(Tabs.TabPanel, {
         ...i.activity,
         height: "fill",
         children: jsx(e0, {

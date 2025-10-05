@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
@@ -175,7 +175,7 @@ function eO({
     thumbnail: !0,
     advanced: !0
   }), []);
-  let [er, en, ei] = _$$t.useTabs(et, {
+  let [er, en, ei] = Tabs.useTabs(et, {
     orientation: "vertical"
   });
   let ea = _$$b(ei);
@@ -278,7 +278,7 @@ function eO({
     className: KT,
     children: [jsxs("div", {
       className: Cd,
-      children: [jsxs(_$$t.TabStrip, {
+      children: [jsxs(Tabs.TabStrip, {
         manager: ea,
         children: [jsx(_$$y, {
           ...er.details,
@@ -313,7 +313,7 @@ function eO({
       })]
     }), jsxs("div", {
       className: DK,
-      children: [jsxs(_$$t.TabPanel, {
+      children: [jsxs(Tabs.TabPanel, {
         ...en.details,
         children: [jsx(Mm, {
           id: tZ.NAME_INPUT,
@@ -356,7 +356,7 @@ function eO({
             children: t.fullURL
           })
         })]
-      }), jsx(_$$t.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...en.thumbnail,
         children: jsx(Mm, {
           id: tZ.THUMBNAIL_UPLOADER,
@@ -367,7 +367,7 @@ function eO({
             ...J.carouselMedia
           })
         })
-      }), jsxs(_$$t.TabPanel, {
+      }), jsxs(Tabs.TabPanel, {
         ...en.advanced,
         children: [jsx(Mm, {
           id: tZ.PROMPT_VISIBILITY_CHECKBOX,

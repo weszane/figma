@@ -12,7 +12,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { C as _$$C, e as _$$e } from "../469e6e40/517544";
 import { isNullish } from "../figma_app/95419";
 import { ScreenReaderOnly } from "../905/172252";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import b from "../vendor/116389";
 import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
 import { $z, rb, e6 } from "../figma_app/617427";
@@ -213,7 +213,7 @@ function G(e) {
   let o = D();
   let d = useProAnnualImprovementsExperiment();
   let c = useDispatch();
-  let [_, u, m] = _$$t.useManagedTabs(useMemo(() => ({
+  let [_, u, m] = Tabs.useManagedTabs(useMemo(() => ({
     [FBillingPeriodType.YEAR]: !0,
     [FBillingPeriodType.MONTH]: !0
   }), []), r, useCallback(e => {
@@ -238,14 +238,14 @@ function G(e) {
         trackingProperties: o,
         variant: g ? "primary" : "secondary"
       }, "manage")]),
-      children: jsx(_$$t.TabStrip, {
+      children: jsx(Tabs.TabStrip, {
         manager: m,
-        children: a.map(e => createElement(_$$t.Tab, {
+        children: a.map(e => createElement(Tabs.Tab, {
           ..._[e],
           key: e
         }, getI18nString(`admin_settings.billing.seat_counts.by_billing_interval.${e}`)))
       })
-    }), a.map(t => createElement(_$$t.TabPanel, {
+    }), a.map(t => createElement(Tabs.TabPanel, {
       ...u[t],
       key: t
     }, jsx(TrackingProvider, {

@@ -22,7 +22,7 @@ import { FigmaSchema } from "../905/125137";
 import { createPluginInstance, defineAlertFunction } from "../905/472793";
 import { NoOpVm } from "../905/700654";
 import K from "../905/536567";
-import { VY } from "../figma_app/985200";
+import { FetchPlugin } from "../figma_app/985200";
 import { JX } from "../905/104019";
 let n;
 var r;
@@ -1418,7 +1418,7 @@ let $$eu1 = _$$n(async e => {
           r.clear();
         });
       })(M, stats, q);
-      let Q = new VY(e.pluginID || "", {
+      let Q = new FetchPlugin(e.pluginID || "", {
         allowedDomains: e.allowedDomains,
         isLocal
       });

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { UserInterfaceElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -24,22 +24,22 @@ export function $$b3({
       e.preventDefault();
       e.stopPropagation();
     },
-    children: jsxs(_$$t.TabStrip, {
+    children: jsxs(Tabs.TabStrip, {
       manager: e,
-      children: [jsx(_$$t.Tab, {
+      children: [jsx(Tabs.Tab, {
         ...t[$$f2],
         htmlAttributes: {
           "data-testid": pk
         },
         children: renderI18nText("fullscreen.pages_panel.file_tab")
-      }), jsx(_$$t.Tab, {
+      }), jsx(Tabs.Tab, {
         ...t[h],
         children: renderI18nText("fullscreen.pages_panel.code_tab")
-      }), jsx(_$$t.Tab, {
+      }), jsx(Tabs.Tab, {
         ...t[$$p0],
         onboardingKey: Qr,
         children: renderI18nText("fullscreen.pages_panel.assets_tab")
-      }), jsx(_$$t.Tab, {
+      }), jsx(Tabs.Tab, {
         ...t[$$x1],
         children: renderI18nText("fullscreen.pages_panel.chat_tab")
       })]
@@ -79,7 +79,7 @@ export function $$y4(e, t) {
         })(0);
     }
   }, [showLayersPanel, showCodePanel, showPublish, showChat]);
-  return _$$t.useManagedTabs({
+  return Tabs.useManagedTabs({
     [$$f2]: !0,
     [h]: y && j,
     [$$p0]: !S,

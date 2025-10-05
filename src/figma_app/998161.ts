@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { noop } from 'lodash-es';
 import { IconButton } from "../905/443068";
 import { DialogHeader, DialogTitle, DialogActionStrip, DialogContents, DialogBody } from "../figma_app/272243";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { bL } from "../905/911410";
 import { ButtonPrimitive } from "../905/632989";
 import { R as _$$R } from "../905/649743";
@@ -116,7 +116,7 @@ export function $$J0({
   let m = PG(t);
   let f = o9(_, Vz);
   let b = ["custom_color", "library"];
-  let [T, v, A] = _$$t.useTabs({
+  let [T, v, A] = Tabs.useTabs({
     custom_color: b.includes("custom_color"),
     library: b.includes("library")
   }, {
@@ -153,12 +153,12 @@ export function $$J0({
           padding: 0,
           children: [jsxs("div", {
             className: "x78zum5 x1qughib xe8ttls x1kgkb76",
-            children: [jsxs(_$$t.TabStrip, {
+            children: [jsxs(Tabs.TabStrip, {
               manager: A,
-              children: [jsx(_$$t.Tab, {
+              children: [jsx(Tabs.Tab, {
                 ...T.custom_color,
                 children: renderI18nText("fullscreen.properties_panel.color_picker.custom")
-              }), jsx(_$$t.Tab, {
+              }), jsx(Tabs.Tab, {
                 ...T.library,
                 children: renderI18nText("fullscreen.properties_panel.color_picker.libraries")
               })]
@@ -166,7 +166,7 @@ export function $$J0({
               paint: e,
               onChange: t
             })]
-          }), jsx(_$$t.TabPanel, {
+          }), jsx(Tabs.TabPanel, {
             ...v.custom_color,
             children: jsx(Z, {
               paint: e,
@@ -175,7 +175,7 @@ export function $$J0({
               recordingKey: "slidesCustomColorPicker",
               hideCustomColorPickerFillTypeToggle: p
             })
-          }), jsx(_$$t.TabPanel, {
+          }), jsx(Tabs.TabPanel, {
             ...v.library,
             children: jsx(Rp, {
               selectedItem: null,

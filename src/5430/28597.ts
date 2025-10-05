@@ -33,7 +33,7 @@ import { b as _$$b } from "../5430/872214";
 import { useDebounce } from 'use-debounce';
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { IW } from "../figma_app/563413";
-import { lH, r4 } from "../figma_app/229259";
+import { stylesQuery, componentsQuery } from "../figma_app/229259";
 import { o as _$$o } from "../905/451156";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getAssetKey, groupStylesByType, STYLE_TYPES, sortStyles } from "../figma_app/646357";
@@ -444,11 +444,11 @@ function em({
     trailing: !0,
     leading: !1
   });
-  let [l] = setupResourceAtomHandler(lH({
+  let [l] = setupResourceAtomHandler(stylesQuery({
     hubFileId: e
   }));
   let c = useMemo(() => es("loaded" === l.status ? l.data : []), [l]);
-  let [d] = setupResourceAtomHandler(r4(e));
+  let [d] = setupResourceAtomHandler(componentsQuery(e));
   let {
     itemsByPageId,
     topLevelComponents,

@@ -19,7 +19,7 @@ import { K } from "../905/226178";
 import { setLastVisitedPlan } from "../905/93909";
 import { useHasUnclaimedAutosaveChanges } from "../figma_app/840917";
 import { hasPasswordProtectedPublicAccessFromEntity } from "../905/862913";
-import { fA } from "../figma_app/543100";
+import { createFileTile } from "../figma_app/543100";
 import { OrganizationType } from "../905/833838";
 import { KindEnum } from "../905/129884";
 import { W } from "../905/244810";
@@ -69,7 +69,7 @@ function N(e) {
     file
   } = e;
   let l = e.tile;
-  let d = useMemo(() => l || fA(file), [l, file]);
+  let d = useMemo(() => l || createFileTile(file), [l, file]);
   return jsxs(Fragment, {
     children: [jsx(NU, {
       file: e.file,

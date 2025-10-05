@@ -487,7 +487,7 @@ export let insertSharedComponent = createOptimistThunk((store, payload) => {
     source: PluginAction.INSERT_SHARED_COMPONENT,
   }))
 })
-let INSERT_SHARED_STATE_GROUP = createActionCreator('INSERT_SHARED_STATE_GROUP')
+export let INSERT_SHARED_STATE_GROUP = createActionCreator('INSERT_SHARED_STATE_GROUP')
 /**
  * Optimist thunk to insert a shared state group into the canvas.
  * Handles both local and shared state groups, including upserting shared ones.
@@ -1526,7 +1526,7 @@ export const fetchAndUpdateStateGroupsThunk = createOptimistThunk(async (store) 
  * Fetches and updates state groups and symbols, dispatches updates to the store.
  * (Original function: fetchAndUpdateStateGroups)
  */
-async function fetchAndUpdateStateGroups(symbolKeys: string[], stateGroupKeys: string[], store: any, options?: any) {
+export async function fetchAndUpdateStateGroups(symbolKeys: string[], stateGroupKeys: string[], store: any, options?: any) {
   if (symbolKeys.length === 0 && stateGroupKeys.length === 0) {
     atomStoreManager.set(loadingStateGroupsAtom, 'loaded')
     return
@@ -1603,20 +1603,20 @@ async function fetchAndUpdateStateGroups(symbolKeys: string[], stateGroupKeys: s
  * Internal cache for component keys and promises.
  * (Original variables: th, tm)
  */
-let cachedComponentKey: string | null = null
-let cachedComponentPromise: Promise<any> | null = null
+export let cachedComponentKey: string | null = null
+export let cachedComponentPromise: Promise<any> | null = null
 
 /**
  * Atom for tracking loading state of state groups.
  * (Original variable: loadingStateGroupsAtom)
  */
-const loadingStateGroupsAtom = atom('loading')
+export const loadingStateGroupsAtom = atom('loading')
 
 /**
  * Atom for tracking loading state of published components.
  * (Original variable: loadingPublishedComponentsAtom)
  */
-const loadingPublishedComponentsAtom = atom('loading')
+export const loadingPublishedComponentsAtom = atom('loading')
 export async function loadComponentV2ByKey(store: any, componentKey: string, source?: string): Promise<{
   component: any
   parentStateGroup: any
@@ -1815,7 +1815,7 @@ export async function loadPublishedComponents(store: any): Promise<void> {
  * Query for fetching organization migration status.
  * (Original function: getOrgMigrationStatus)
  */
-const getOrgMigrationStatus = liveStoreInstance.Query({
+export const getOrgMigrationStatus = liveStoreInstance.Query({
   fetch: async (orgId: string) => (await DSAApiServiceInstance.getOrgMigrationStatus({
     orgId,
   })).data.meta,
@@ -1826,7 +1826,7 @@ const getOrgMigrationStatus = liveStoreInstance.Query({
  * Query for fetching library statistics.
  * (Original function: getLibraryStats)
  */
-const getLibraryStats = liveStoreInstance.Query({
+export const getLibraryStats = liveStoreInstance.Query({
   fetch: async (orgId: string) => await fetchLibraryStats(debugState.dispatch, orgId),
   key: 'libraryStats',
 })
@@ -1838,7 +1838,7 @@ const getLibraryStats = liveStoreInstance.Query({
  * @param orgId - The organization ID.
  * @returns Library statistics object.
  */
-async function fetchLibraryStats(dispatch: any, orgId: string): Promise<any> {
+export async function fetchLibraryStats(dispatch: any, orgId: string): Promise<any> {
   const request = DSAApiServiceInstance.getLibraries({
     orgId,
     fv: EightSeven,
@@ -1911,7 +1911,7 @@ async function fetchLibraryStats(dispatch: any, orgId: string): Promise<any> {
  * Query for fetching library information.
  * (Original function: getLibraryInfo)
  */
-const getLibraryInfo = liveStoreInstance.Query({
+export const getLibraryInfo = liveStoreInstance.Query({
   fetch: (params: any) => fetchLibraryInfo(params),
   key: 'libraryInfo',
 })
@@ -1920,7 +1920,7 @@ const getLibraryInfo = liveStoreInstance.Query({
  * Query for fetching library information version 2.
  * (Original function: getLibraryInfoV2)
  */
-const getLibraryInfoV2 = liveStoreInstance.Query({
+export const getLibraryInfoV2 = liveStoreInstance.Query({
   fetch: async (params: any) => ((await librariesAPI.getLibrariesV2(params)) as any).data.meta ?? [],
   key: 'libraryInfoV2',
 })
@@ -1956,7 +1956,7 @@ export function useLibraryInfo(params: any, options: any = {}): any {
  * @param params - Parameters including currentOrgId, excludeDrafts, etc.
  * @returns Library information object.
  */
-async function fetchLibraryInfo(params: {
+export async function fetchLibraryInfo(params: {
   currentOrgId: string
   excludeDrafts?: boolean
   subscriptionFileKey?: string

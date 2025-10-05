@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { getParentOrgId } from "../905/872904";
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
-import { Tf } from "../905/297574";
+import { mergeComponentsWithOrphanStateGroups } from "../905/297574";
 import { Wb, rV, uU } from "../905/627262";
 import { Xk, DQ, y$ } from "../905/712714";
 import { n as _$$n } from "../905/402643";
@@ -52,13 +52,13 @@ export function $$h4({
       };
       if (!getFeatureFlags().dsa_styles_variables_ui) return {
         type: _$$n.PRODUCT_COMPONENTS,
-        items: Tf(components, stateGroups)
+        items: mergeComponentsWithOrphanStateGroups(components, stateGroups)
       };
       switch (e) {
         case _$$n.PRODUCT_COMPONENTS:
           return {
             type: _$$n.PRODUCT_COMPONENTS,
-            items: Tf(components, stateGroups)
+            items: mergeComponentsWithOrphanStateGroups(components, stateGroups)
           };
         case _$$n.STYLES:
           return {

@@ -14,7 +14,7 @@ import { sendRoleInvites } from "../905/351260";
 import { AccessLevelEnum } from "../905/557142";
 import { roleServiceAPI } from "../figma_app/66216";
 import { createOptimistThunk } from "../905/350402";
-import { bE as _$$bE } from "../905/98702";
+import { rolePostAction } from "../905/98702";
 let $$b10 = createOptimistThunk((e, t) => sendWithRetry.put(`/api/folders/${t.folderId}/description`, {
   description: t.description
 }).then(({
@@ -127,7 +127,7 @@ let $$w11 = createOptimistThunk((e, t) => {
       }).then(({
         data: t
       }) => {
-        for (let r of t.meta) e.dispatch(_$$bE({
+        for (let r of t.meta) e.dispatch(rolePostAction({
           role: r
         }));
       });

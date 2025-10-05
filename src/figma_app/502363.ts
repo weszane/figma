@@ -17,7 +17,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H as _$$H } from "../905/799228";
 import { p as _$$p } from "../figma_app/837956";
-import { D6 } from "../figma_app/863319";
+import { alwaysTrue } from "../figma_app/863319";
 import { SearchFilterWorkspaceView } from "../figma_app/43951";
 import { SearchAnalytics } from "../905/574958";
 import { Q0 } from "../905/994947";
@@ -37,7 +37,7 @@ import Y from "classnames";
 import { useSingleEffect } from "../905/791079";
 import { RelativeTimeDisplay } from "../905/986103";
 import { $E, w4 } from "../905/445814";
-import { M3, dP } from "../figma_app/119475";
+import { useKeyboardNavigationItem, KeyboardNavigationProvider } from "../figma_app/119475";
 import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
 import { XW } from "../905/182534";
@@ -166,7 +166,7 @@ class U extends Component {
   }
   renderProjectContextMenu() {
     let e = _$$H(this.props.dropdownShown);
-    return D6(this.props.currentOrgId) && e && jsx(_$$p, {
+    return alwaysTrue(this.props.currentOrgId) && e && jsx(_$$p, {
       folder: e,
       useLGPerms: !0
     });
@@ -511,7 +511,7 @@ function eh(e) {
   });
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: ep,
     onFocus: _onFocus,
     onBlur: _onBlur
@@ -631,7 +631,7 @@ function eg(e) {
     keyboardNavigationItem,
     setKeyboardNavigationElement,
     isFauxFocused
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: c,
     onFauxFocus: onFocus,
     onFauxBlur: onBlur
@@ -697,7 +697,7 @@ function ef(e) {
   let {
     setKeyboardNavigationElement,
     isFauxFocused
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: l,
     onFauxFocus: onFocus,
     onFauxBlur: onBlur
@@ -777,7 +777,7 @@ let eK = registerModal(function () {
     onHide: u,
     popStack: !0,
     "data-testid": "facetedSearchModal",
-    children: jsx(dP, {
+    children: jsx(KeyboardNavigationProvider, {
       children: jsxs(a3.Provider, {
         value: Vm.PREVIEW,
         children: [jsx("div", {
@@ -886,7 +886,7 @@ export function $$e53({
     className: $()("faceted_search_entrypoint--fullResultsSearchWrapper--UiZa5", {
       [e1]: getFeatureFlags().file_browser_sidebar_row_ui
     }),
-    children: jsx(dP, {
+    children: jsx(KeyboardNavigationProvider, {
       children: jsx(_$$Y, {})
     })
   }) : jsxs(ButtonPrimitive, {

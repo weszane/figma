@@ -212,7 +212,7 @@ export class Point implements IPoint {
    * @param t - The interpolation factor (0 to 1).
    * @returns A new interpolated Point.
    */
-  static interpolate(a: Point, b: Point, t: number): Point {
+  static interpolate(a: IPoint, b: IPoint, t: number): Point {
     return new Point(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t)
   }
 

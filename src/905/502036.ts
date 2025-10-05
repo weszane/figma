@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { H } from "../905/474029";
-import { Mv, jv } from "../figma_app/909778";
+import { addFolderFavorite, removeFolderFromFavorites } from "../figma_app/909778";
 import { useFBGNavigationUpdatesTreatment, FBGNavigationUpdatesVariants } from "../figma_app/297957";
 import { userHasPlan } from "../905/697795";
 import { getSelectedView } from "../figma_app/386952";
@@ -25,7 +25,7 @@ export function $$p0(e) {
       sectionId: n,
       folder
     };
-    e ? m(Mv(r)) : m(jv(r));
+    e ? m(addFolderFavorite(r)) : m(removeFolderFromFavorites(r));
   }, [m, folder]);
   return _ && f ? jsx(H, {
     setFavorite: A,

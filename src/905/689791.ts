@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createElement, forwardRef, useCallback } from "react";
 import { DialogHiddenTitle, DialogActionStrip, DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { bL } from "../905/911410";
 import { DesignGraphElements } from "../figma_app/763686";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
@@ -21,9 +21,9 @@ function p({
   return tabs.length <= 1 ? null : jsxs(Fragment, {
     children: [e ?? jsx(DialogHiddenTitle, {
       children: e
-    }), jsx(_$$t.TabStrip, {
+    }), jsx(Tabs.TabStrip, {
       manager: t,
-      children: i && tabs.map(e => createElement(_$$t.Tab, {
+      children: i && tabs.map(e => createElement(Tabs.Tab, {
         ...i[e.name],
         key: e.name + "Tab",
         recordingKey: e.recordingKey ? generateRecordingKey(l, e.recordingKey) : void 0
@@ -43,7 +43,7 @@ function m({
   return 0 === tabs.length ? null : 1 === tabs.length ? tabs[0]?.content ?? null : jsxs(Fragment, {
     children: [jsx("div", {
       className: "asset_binding_picker--bodyForMultipleTabs--yb0cv"
-    }), tabs.map(e => createElement(_$$t.TabPanel, {
+    }), tabs.map(e => createElement(Tabs.TabPanel, {
       ...t[e.name],
       key: e.name + "TabPanel"
     }, e.content))]
@@ -60,7 +60,7 @@ export let $$h0 = forwardRef(function ({
     tabs,
     defaultActiveTabId
   } = e;
-  let [f, _, A] = _$$t.useTabs(tabs.reduce((e, t) => (e[t.name] = !0, e), {}), defaultActiveTabId ? {
+  let [f, _, A] = Tabs.useTabs(tabs.reduce((e, t) => (e[t.name] = !0, e), {}), defaultActiveTabId ? {
     defaultActive: defaultActiveTabId
   } : {});
   return jsxs(Fragment, {

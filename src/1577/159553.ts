@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useEffect, useRef, useMemo, useCallback, Fragment as _$$Fragment } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { debounce } from "../905/915765";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { k as _$$k } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
@@ -940,7 +940,7 @@ export function $$eX0(e) {
   let p = $$eJ2([...notificationFeedMap.values()], u);
   let h = $$eK3(p);
   let b = useHighPriorityNotificationsExperiment(h);
-  let [k, w, v] = _$$t.useTabs({
+  let [k, w, v] = Tabs.useTabs({
     all: !0,
     priority: !!b && h,
     unread: !0
@@ -1000,13 +1000,13 @@ export function $$eX0(e) {
         markAllAsReadFn,
         tabManager: v,
         tabPropsMap: k
-      }), jsx(_$$t.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...w.all,
         children: P(p)
-      }), jsx(_$$t.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...w.priority,
         children: P(A)
-      }), jsx(_$$t.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...w.unread,
         children: P(T)
       })]
@@ -1191,12 +1191,12 @@ function eW(e, t) {
     });
   };
   e.FilterToggle = function (e) {
-    let t = jsxs(_$$t.TabStrip, {
+    let t = jsxs(Tabs.TabStrip, {
       manager: e.tabManager,
-      children: [jsx(_$$t.Tab, {
+      children: [jsx(Tabs.Tab, {
         ...e.tabPropsMap.all,
         children: getI18nString("user_notification.all")
-      }), jsx(_$$t.Tab, {
+      }), jsx(Tabs.Tab, {
         ...e.tabPropsMap.priority,
         children: function (e) {
           let t = e.reduce((e, t) => e + Number(eT(t)), 0);
@@ -1204,7 +1204,7 @@ function eW(e, t) {
             actionableCount: t
           });
         }(e.notifications)
-      }), jsx(_$$t.Tab, {
+      }), jsx(Tabs.Tab, {
         ...e.tabPropsMap.unread,
         children: function (e) {
           let t = e.reduce((e, t) => e + Number(t.is_unread), 0);

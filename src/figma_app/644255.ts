@@ -1,21 +1,48 @@
-import { HandoffBindingsCpp } from "../figma_app/763686";
-export let $$n3;
-let a = [];
-export function $$s0(e) {
-  a.push(e);
-  a.length && HandoffBindingsCpp.setIsNodeChangeCallbackRegistered(!0);
+import { HandoffBindingsCpp } from "../figma_app/763686"
+
+// Node change callback registry
+let nodeChangeCallbacks: Array<(event: any) => void> = []
+
+// Node change handler object
+export let nodeChangeHandler: { nodeChange: (event: any) => void } | undefined
+
+/**
+ * Register a node change callback
+ * @param callback - Function to be called when node changes occur
+ */
+export function registerNodeChangeCallback(callback: (event: any) => void): void {
+  nodeChangeCallbacks.push(callback)
+  if (nodeChangeCallbacks.length > 0) {
+    HandoffBindingsCpp.setIsNodeChangeCallbackRegistered(true)
+  }
 }
-export function $$o2(e) {
-  (a = a.filter(t => t !== e)).length || HandoffBindingsCpp.setIsNodeChangeCallbackRegistered(!1);
+
+/**
+ * Unregister a node change callback
+ * @param callback - Function to be removed from the callback registry
+ */
+export function unregisterNodeChangeCallback(callback: (event: any) => void): void {
+  nodeChangeCallbacks = nodeChangeCallbacks.filter(cb => cb !== callback)
+  if (nodeChangeCallbacks.length === 0) {
+    HandoffBindingsCpp.setIsNodeChangeCallbackRegistered(false)
+  }
 }
-export function $$l1() {
-  $$n3 = {
-    nodeChange: e => {
-      for (let t of a) t(e);
-    }
-  };
+
+/**
+ * Initialize the node change handler
+ */
+export function initializeNodeChangeHandler(): void {
+  nodeChangeHandler = {
+    nodeChange: (event: any) => {
+      for (const callback of nodeChangeCallbacks) {
+        callback(event)
+      }
+    },
+  }
 }
-export const BT = $$s0;
-export const Ju = $$l1;
-export const q$ = $$o2;
-export const rS = $$n3;
+
+// Aliases for backward compatibility
+export const BT = registerNodeChangeCallback // alias for $$s0
+export const Ju = initializeNodeChangeHandler // alias for $$l1
+export const q$ = unregisterNodeChangeCallback // alias for $$o2
+export const rS = nodeChangeHandler // alias for $$n3

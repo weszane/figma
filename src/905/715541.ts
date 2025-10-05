@@ -1,12 +1,12 @@
 import _require from "../vendor/112457";
-import { LR, iW } from "../905/461516";
+import { waitForCondition, getDictionaryConfig } from "../905/461516";
 import { B } from "../905/627729";
 let n;
 let r;
 var o = (e => (e[e.NOT_STARTED = 0] = "NOT_STARTED", e[e.LOADING = 1] = "LOADING", e[e.FINISHED = 2] = "FINISHED", e))(o || {});
 let l = 0;
 async function d(e) {
-  1 === l ? await LR(() => 2 !== l, 50) : (n || (l = 1, n = e || (await _require).loadModule), l = 2);
+  1 === l ? await waitForCondition(() => 2 !== l, 50) : (n || (l = 1, n = e || (await _require).loadModule), l = 2);
   return n;
 }
 async function c(e, t) {
@@ -21,14 +21,14 @@ async function u(e, t, i) {
   return n.create(r, a);
 }
 async function p(e, t) {
-  let i = iW(t);
+  let i = getDictionaryConfig(t);
   return await u(e, i.affURL, i.dicURL);
 }
 let m = null;
 let h = null;
 let g = !1;
 async function f(e) {
-  if (await LR(() => !!g && (!g || null === m) || (g = !0, !1)), h !== e && _(), null === m) {
+  if (await waitForCondition(() => !!g && (!g || null === m) || (g = !0, !1)), h !== e && _(), null === m) {
     let t = await d();
     m = await p(t, e);
     h = e;

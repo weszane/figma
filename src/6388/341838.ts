@@ -27,7 +27,7 @@ import { s as _$$s2 } from "../1291/549862";
 import { I as _$$I } from "../905/542485";
 import { lW } from "../figma_app/370763";
 import { rM } from "../figma_app/241541";
-import { KE } from "../905/116101";
+import { closeUniversalInsertModal } from "../905/116101";
 import { gt } from "../6388/574648";
 let o;
 function C({
@@ -126,7 +126,7 @@ function P() {
         iconPrefix: jsx(_$$s2, {}),
         onClick: () => {
           activateTool(DesignGraphElements.TABLE);
-          e(KE());
+          e(closeUniversalInsertModal());
         },
         recordingKey: "table-insert-button",
         children: getI18nString("fullscreen_actions.set-tool-table")
@@ -134,7 +134,7 @@ function P() {
         iconPrefix: jsx(_$$I, {}),
         onClick: () => {
           activateTool(DesignGraphElements.CODE_BLOCK);
-          e(KE());
+          e(closeUniversalInsertModal());
         },
         recordingKey: "codeBlockInsertButton",
         children: getI18nString("fullscreen_actions.set-tool-code-block")
@@ -142,7 +142,7 @@ function P() {
         iconPrefix: jsx(L, {}),
         onClick: () => {
           activateTool(DesignGraphElements.SLIDE_NUMBER);
-          e(KE());
+          e(closeUniversalInsertModal());
         },
         recordingKey: "slide-number-insert-button",
         children: getI18nString("fullscreen_actions.set-tool-slide-number")

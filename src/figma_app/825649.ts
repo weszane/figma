@@ -15,7 +15,7 @@ import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { Dl } from "../figma_app/601682";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useComponentBrowserEntrypoint } from "../figma_app/88239";
-import { qP, Fb } from "../figma_app/909778";
+import { removeFileFavorite, addFileFavorite } from "../figma_app/909778";
 import { hideDropdownAction } from "../905/929976";
 import { $m } from "../figma_app/78808";
 import { Rh } from "../905/844322";
@@ -34,12 +34,12 @@ import { isBranchAlt, getRepoByIdAlt, isDefaultFile } from "../905/760074";
 import { t as _$$t2, m as _$$m } from "../905/364535";
 import { $n } from "../905/930279";
 import { F as _$$F } from "../905/300562";
-import { T0, gV, t$ as _$$t$ } from "../figma_app/863319";
+import { findFavoritedItem, isFavoritesLimitReached, sortWithPinnedItems } from "../figma_app/863319";
 import { getProjectUrl } from "../figma_app/528509";
 import { fullscreenValue } from "../figma_app/455680";
 import { R6 } from "../figma_app/504823";
 import { jK, hP } from "../figma_app/829197";
-import { ck } from "../905/87821";
+import { isIntegrationContext } from "../905/87821";
 import { SR } from "../figma_app/852050";
 import { BI, m0 } from "../figma_app/546509";
 import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
@@ -77,7 +77,7 @@ import { fx, PF } from "../figma_app/657972";
 import { DF, RG } from "../figma_app/146384";
 import { F as _$$F3 } from "../figma_app/928238";
 let $$eN0 = "FILENAME_VIEW_MOVE_TO_PROJECT";
-let eC = ck();
+let eC = isIntegrationContext();
 var ew = (e => (e.DISABLED = "disabled", e.PUBLISH = "publish", e.SHOW_UPSELL_MODAL = "show_upsell_modal", e))(ew || {});
 export function $$eO1({
   trackEvent: e,
@@ -134,7 +134,7 @@ export function $$eO1({
   });
   let e7 = JT();
   let e9 = useMemo(() => {
-    if (eM && "loaded" === eK.status) return T0(eK.data, eM.key);
+    if (eM && "loaded" === eK.status) return findFavoritedItem(eK.data, eM.key);
   }, [eM, eK]);
   let te = useSelector(F9);
   let tt = useSelector(e => e.mirror.appModel.topLevelMode);
@@ -206,7 +206,7 @@ export function $$eO1({
   let tM = eP.editorType;
   let tF = tM !== FEditorType.Whiteboard;
   let tj = !!(tF && isBranchAlt(eM));
-  let tU = "loaded" === eK.status && gV(eK.data, eV);
+  let tU = "loaded" === eK.status && isFavoritesLimitReached(eK.data, eV);
   let tB = "loaded" === e6.status && (null === e6.data.file || e6.data.file && AM(e6.data.file) === pT.MERGED);
   let tG = tj && ("loaded" !== e6.status || tB);
   let tV = !eM.canExport;
@@ -223,7 +223,7 @@ export function $$eO1({
   let tZ = eM.canEdit && !!eM.thumbnailGuid;
   let tQ = eK.data?.currentUser?.baseOrgUser?.fileBrowserPreferences?.orderedSidebarSections ?? [];
   let t0 = eK.data?.currentUser?.userSidebarSections != null ? getResourceDataOrFallback(eK.data.currentUser.userSidebarSections) : null;
-  let t1 = _$$t$(t0 ?? [], tQ);
+  let t1 = sortWithPinnedItems(t0 ?? [], tQ);
   let t2 = t1.find(e => e.id === e9?.resource.sidebarSectionId);
   let t5 = () => {
     let e = [];
@@ -289,7 +289,7 @@ export function $$eO1({
       file: fileEntityDataMapper.toLiveGraph(eU),
       fileBrowserEntryPoint: !1
     };
-    e ? z(qP(r)) : z(Fb(r));
+    e ? z(removeFileFavorite(r)) : z(addFileFavorite(r));
   };
   let t7 = e => {
     z(showModalHandler({

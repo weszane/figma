@@ -36,7 +36,7 @@ import { selectWithShallowEqual } from '../905/103090';
 import { K as _$$K2 } from '../905/107582';
 import { useCounter } from '../905/108595';
 import { q as _$$q5 } from '../905/112768';
-import { IN } from '../905/116101';
+import { setUniversalInsertViewResourceDetails } from '../905/116101';
 import { t as _$$t4 } from '../905/117577';
 import { h as _$$h4 } from '../905/123399';
 import { sha1HexFromBytes } from '../905/125019';
@@ -47,7 +47,7 @@ import { A as _$$A7 } from '../905/139173';
 import { ScrollContainer } from '../905/143421';
 import { _ as _$$_5 } from '../905/144222';
 import { e as _$$e9 } from '../905/149844';
-import { t as _$$t5 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { hideModal, popModalStack, showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
@@ -332,7 +332,7 @@ import { getObservableValue } from '../figma_app/84367';
 import { showPickerThunk, hidePickerThunk } from '../figma_app/91703';
 import { Iy, XS } from '../figma_app/95367';
 import { isNotNullish, isNullish } from '../figma_app/95419';
-import { dP as _$$dP2 } from '../figma_app/119475';
+import { KeyboardNavigationProvider } from '../figma_app/119475';
 import { n8 as _$$n7, Kd } from '../figma_app/121043';
 import { Lk as _$$Lk } from '../figma_app/122682';
 import { Rp } from '../figma_app/149989';
@@ -403,7 +403,7 @@ import { V$ } from '../figma_app/479760';
 import { aZ as _$$aZ2 } from '../figma_app/481279';
 import { Xo } from '../figma_app/482495';
 import { roundTo2Decimals } from '../figma_app/492908';
-import { s as _$$s8 } from '../figma_app/504088';
+import { SimpleComponentType } from '../figma_app/504088';
 import { Ep } from '../figma_app/504823';
 import { u as _$$u4 } from '../figma_app/514229';
 import { useCurrentFileKey, selectCurrentFile, openFileKeyAtom } from '../figma_app/516028';
@@ -484,7 +484,7 @@ import { T as _$$T4 } from '../figma_app/962636';
 import { fG, NH } from '../figma_app/973927';
 import { KD } from '../figma_app/975811';
 import { trackFileClicked } from '../figma_app/976345';
-import { jv as _$$jv, Wh as _$$Wh } from '../figma_app/985200';
+import { PluginSandbox, PluginIframeMode } from '../figma_app/985200';
 import { A as _$$A19 } from '../vendor/21595';
 import { useDebouncedCallback } from 'use-debounce';
 import { P as _$$P6 } from '../vendor/348225';
@@ -5866,7 +5866,7 @@ function o7({
       t && (l(t, !0), e());
     }
   });
-  return jsx(_$$dP2, {
+  return jsx(KeyboardNavigationProvider, {
     recordingKey: o4,
     onKeyDown: A,
     onMouseMove: z,
@@ -7166,7 +7166,7 @@ function aU(e) {
     style: {
       '--color-bg': 'transparent'
     },
-    children: jsx(_$$t5.TabStrip, {
+    children: jsx(Tabs.TabStrip, {
       ...e
     })
   });
@@ -7176,20 +7176,20 @@ function aK({
   effectControls: t,
   recordingKey: n
 }) {
-  let [l, r, i] = _$$t5.useTabs(e.reduce((e, t) => (e[t] = !0, e), {}));
+  let [l, r, i] = Tabs.useTabs(e.reduce((e, t) => (e[t] = !0, e), {}));
   return e.length ? jsxs('div', {
     className: 'xoxg38l x1rg5ohu',
     children: [jsx('div', {
       className: 'xe8ttls',
       children: jsx(aU, {
         manager: i,
-        children: e.map(e => createElement(_$$t5.Tab, {
+        children: e.map(e => createElement(Tabs.Tab, {
           ...l[e],
           key: e,
           recordingKey: generateRecordingKey(n, 'tab', e)
         }, t[e].displayName))
       })
-    }), jsx(a$, {}), e.map(e => createElement(_$$t5.TabPanel, {
+    }), jsx(a$, {}), e.map(e => createElement(Tabs.TabPanel, {
       ...r[e],
       key: e
     }, t[e].renderDetailsPanel()))]
@@ -8736,7 +8736,7 @@ function s4() {
     let t = su();
     let n = useSelector(e => e.mirror.selectionProperties.numSelectedByType);
     let l = !!n && Kl(n, ['TEXT']);
-    return _$$t5.useTabs({
+    return Tabs.useTabs({
       [sd.NONE]: !l && !anyCooperFrames,
       [sd.SOLID]: !0,
       [sd.GRADIENT]: !0,
@@ -8876,25 +8876,25 @@ function s6({
         className: 'x1rkcj0o',
         children: [jsxs(aU, {
           manager: n,
-          children: [jsx(_$$t5.Tab, {
+          children: [jsx(Tabs.Tab, {
             ...e.NONE,
             htmlAttributes: {
               'data-testid': 'cooper-inline-fill-submenu-tab-none'
             },
             children: getI18nString('cooper.inline_menu.fill_submenu.no_fill')
-          }), jsx(_$$t5.Tab, {
+          }), jsx(Tabs.Tab, {
             ...e.SOLID,
             htmlAttributes: {
               'data-testid': 'cooper-inline-fill-submenu-tab-solid'
             },
             children: getI18nString('cooper.inline_menu.fill_submenu.color')
-          }), jsx(_$$t5.Tab, {
+          }), jsx(Tabs.Tab, {
             ...e.GRADIENT,
             htmlAttributes: {
               'data-testid': 'cooper-inline-fill-submenu-tab-gradient'
             },
             children: getI18nString('cooper.inline_menu.fill_submenu.gradient')
-          }), jsx(_$$t5.Tab, {
+          }), jsx(Tabs.Tab, {
             ...e.MEDIA,
             htmlAttributes: {
               'data-testid': 'cooper-inline-fill-submenu-tab-media'
@@ -8903,29 +8903,29 @@ function s6({
           })]
         }), jsx('div', {
           className: 'xdn4y7b xm73e5p xjm9jq1 xzqstp9'
-        }), jsx(_$$t5.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...t.MIXED,
           children: jsx(s1, {
             displayText: getI18nString('cooper.inline_menu.fill_submenu.mixed_selection_body')
           })
-        }), jsx(_$$t5.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...t.NONE,
           children: jsx(s1, {
             displayText: getI18nString('cooper.inline_menu.fill_submenu.no_fill_body')
           })
-        }), jsx(_$$t5.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...t.SOLID,
           children: jsx(s_, {
             fillColor: l,
             closeMenu: u
           })
-        }), jsx(_$$t5.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...t.GRADIENT,
           children: jsx(sz, {
             paint: l,
             closeMenu: u
           })
-        }), jsx(_$$t5.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...t.MEDIA,
           children: jsx(sQ, {
             paint: l,
@@ -9000,7 +9000,7 @@ function dn({
   onChange: n,
   recordingKey: l
 }) {
-  let [r, i, s] = _$$t5.useTabs({
+  let [r, i, s] = Tabs.useTabs({
     STRETCH: !0,
     FIT: !0,
     FILL: !0,
@@ -9076,7 +9076,7 @@ function dr({
   children: e,
   ...t
 }) {
-  return jsx(_$$t5.TabPanel, {
+  return jsx(Tabs.TabPanel, {
     ...t,
     children: jsx('div', {
       className: 'x78zum5',
@@ -9093,15 +9093,15 @@ function di({
   return jsx(_$$R4, {
     children: jsxs(aU, {
       manager: e,
-      children: [jsx(_$$t5.Tab, {
+      children: [jsx(Tabs.Tab, {
         ...t.FIT,
         recordingKey: generateRecordingKey(n, 'tab', 'FIT'),
         children: l.current.format('FIT')
-      }), jsx(_$$t5.Tab, {
+      }), jsx(Tabs.Tab, {
         ...t.FILL,
         recordingKey: generateRecordingKey(n, 'tab', 'FILL'),
         children: l.current.format('FILL')
-      }), jsx(_$$t5.Tab, {
+      }), jsx(Tabs.Tab, {
         ...t.STRETCH,
         recordingKey: generateRecordingKey(n, 'tab', 'STRETCH'),
         children: l.current.format('STRETCH')
@@ -9505,7 +9505,7 @@ function dw({
   onStrokePaintClick: d
 }) {
   let c = useMemo(() => t && i ? isInvalidValue(t) ? MIXED_MARKER : t.length > 1 ? 'DASHED' : deepEqual(t, e.SOLID.dashPattern) ? 'SOLID' : 'NONE' : 'NONE', [t, i, e]);
-  let [u, x, p] = _$$t5.useTabs(Object.keys(e).reduce((e, t) => (e[t] = !0, e), {
+  let [u, x, p] = Tabs.useTabs(Object.keys(e).reduce((e, t) => (e[t] = !0, e), {
     MIXED: !0
   }), {
     defaultActive: isInvalidValue(c) ? 'MIXED' : c,
@@ -9536,7 +9536,7 @@ function dw({
         name: _$$_2.StrokeDashPatternSelector,
         children: jsx(aU, {
           manager: p,
-          children: Object.entries(e).map(([e, t]) => jsx(_$$t5.Tab, {
+          children: Object.entries(e).map(([e, t]) => jsx(Tabs.Tab, {
             ...u[e],
             htmlAttributes: {
               'data-testid': `cooper-inline-border-tab-${e}`
@@ -9547,16 +9547,16 @@ function dw({
       })
     }), jsx('div', {
       className: 'xjm9jq1 xh8yej3 xbpqucl'
-    }), jsx(_$$t5.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...x.MIXED,
       children: jsx(dP, {})
-    }), jsx(_$$t5.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...x.NONE,
       children: jsx(dL, {})
-    }), jsx(_$$t5.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...x.SOLID,
       children: h
-    }), jsx(_$$t5.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...x.DASHED,
       children: h
     })]
@@ -10506,7 +10506,7 @@ function cH({
   let r = useCallback(e => {
     setSearchQuery(e.trim());
   }, [setSearchQuery]);
-  let [i, s, d] = _$$t5.useTabs({
+  let [i, s, d] = Tabs.useTabs({
     objects: !0,
     shapes: !0
   });
@@ -10524,12 +10524,12 @@ function cH({
         })
       }), !searchQuery && jsx('div', {
         className: 'x77yl0c',
-        children: jsxs(_$$t5.TabStrip, {
+        children: jsxs(Tabs.TabStrip, {
           manager: d,
-          children: [jsx(_$$t5.Tab, {
+          children: [jsx(Tabs.Tab, {
             ...i.objects,
             children: getI18nString('cooper.left_rail.objects')
-          }), jsx(_$$t5.Tab, {
+          }), jsx(Tabs.Tab, {
             ...i.shapes,
             children: getI18nString('cooper.left_rail.shapes')
           })]
@@ -10540,12 +10540,12 @@ function cH({
       searchQuery,
       debouncedSearchQuery: l
     }) : jsxs(Fragment, {
-      children: [jsx(_$$t5.TabPanel, {
+      children: [jsx(Tabs.TabPanel, {
         ...s.objects,
         children: jsx(cX, {
           positionerRef: e
         })
-      }), jsx(_$$t5.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...s.shapes,
         children: jsx(cY, {
           positionerRef: e
@@ -11484,14 +11484,14 @@ function uK() {
   }();
   let n = useDispatch();
   let l = useMemo(() => ({
-    activeTab: _$$s8.PLUGIN,
+    activeTab: SimpleComponentType.PLUGIN,
     viewResource: e => {
-      n(IN({
+      n(setUniversalInsertViewResourceDetails({
         fdPreviewResource: e
       }));
     },
     closeResource: () => {
-      n(IN({
+      n(setUniversalInsertViewResourceDetails({
         fdPreviewResource: void 0
       }));
     },
@@ -11513,7 +11513,7 @@ function uK() {
 function uW() {
   let e = useAtomWithSubscription(_$$d4);
   let t = useAtomWithSubscription(FP);
-  return e === 'RUNNING' && t === _$$Wh.BUZZ_LEFT_PANEL;
+  return e === 'RUNNING' && t === PluginIframeMode.BUZZ_LEFT_PANEL;
 }
 function uH({
   panelWidth: e
@@ -11535,8 +11535,8 @@ function uH({
       'data-testid': 'cooperPluginPanelContainer',
       'children': jsx(useCachedSubtree, {
         isVisible: !0,
-        children: () => jsx(_$$jv, {
-          iframeId: _$$Wh.BUZZ_LEFT_PANEL,
+        children: () => jsx(PluginSandbox, {
+          iframeId: PluginIframeMode.BUZZ_LEFT_PANEL,
           width: e,
           fillParent: !0
         })
@@ -13209,7 +13209,7 @@ function x4() {
         }
         if (fdPreviewResource) {
           return () => {
-            c(IN({
+            c(setUniversalInsertViewResourceDetails({
               fdPreviewResource: void 0
             }));
           };
@@ -13424,8 +13424,8 @@ function x3({
   return e === AssetCategoryEnum.PLUGINS && t ? jsx(IconButton, {
     'onClick': () => {
       let e = PluginUIManager.getInstance();
-      e?.switchContainer(_$$Wh.MODAL);
-      atomStoreManager.set(FP, _$$Wh.MODAL);
+      e?.switchContainer(PluginIframeMode.MODAL);
+      atomStoreManager.set(FP, PluginIframeMode.MODAL);
     },
     'aria-label': getI18nString('cooper.plugins.open_in_modal'),
     'children': jsx(c_, {})

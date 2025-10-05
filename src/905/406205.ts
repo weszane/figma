@@ -37,10 +37,10 @@ import { L as _$$L } from "../905/13390";
 import { selectViewAction, showDropdownThunk } from "../905/929976";
 import { createNewFileWithRestrictions } from "../905/738636";
 import { setLastVisitedId } from "../905/93909";
-import { an, y$ } from "../905/81009";
+import { resetTileSelection, selectTiles } from "../905/81009";
 import { trackFolderEvent } from "../figma_app/314264";
-import { eU } from "../figma_app/863319";
-import { Tf, fA } from "../figma_app/543100";
+import { extractFavoritedResource } from "../figma_app/863319";
+import { TileUtils, createFileTile } from "../figma_app/543100";
 import { useDropdownState } from "../905/848862";
 import { x as _$$x2 } from "../905/98916";
 import { selectPermissionsState } from "../figma_app/212807";
@@ -107,7 +107,7 @@ function em(e) {
     orgId: f,
     teamId: f ? null : y
   });
-  let E = resourceUtils.useTransform(v, e => void 0 !== eU(e, FEntityType.FOLDER)).unwrapOr(!!e.folder.is_favorited);
+  let E = resourceUtils.useTransform(v, e => void 0 !== extractFavoritedResource(e, FEntityType.FOLDER)).unwrapOr(!!e.folder.is_favorited);
   let x = YO(e.folder.id);
   let S = _$$E2();
   let w = n => {
@@ -362,7 +362,7 @@ function ey(e) {
     show,
     data
   } = _$$L();
-  let d = !!data?.tile && Tf.getId(data.tile) === e.file.key;
+  let d = !!data?.tile && TileUtils.getId(data.tile) === e.file.key;
   let p = t => {
     t.preventDefault();
     t.stopPropagation();
@@ -375,7 +375,7 @@ function ey(e) {
     e.onFileClick(e.file);
   };
   let m = e.file;
-  let h = useMemo(() => fA(m), [m]);
+  let h = useMemo(() => createFileTile(m), [m]);
   return jsxs("button", {
     className: c()("folder_list_card--fileTile--tAGh3", {
       "folder_list_card--selected--om9Zo": d
@@ -401,7 +401,7 @@ function ey(e) {
             height: 1
           }
         }
-      }), t(an()), t(y$({
+      }), t(resetTileSelection()), t(selectTiles({
         type: ComFileType.FILES,
         tiles: [h]
       })));

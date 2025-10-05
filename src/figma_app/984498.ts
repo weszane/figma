@@ -7,9 +7,9 @@ import { ContextType, DEFAULT_SEARCH_CONTEXT } from '../figma_app/257779'
 import { getDefaultConfigValue, getFrameSectionVersion } from '../figma_app/407767'
 import { getUUID } from '../figma_app/517115'
 
-const AUTO_SUGGEST_EVENT_PREFIX = 'auto-suggest'
+export const AUTO_SUGGEST_EVENT_PREFIX = 'auto-suggest'
 
-const SKIP_LOGGING_CONTEXT_TYPES = new Set([
+export const SKIP_LOGGING_CONTEXT_TYPES = new Set([
   ContextType.EVAL,
   ContextType.SHADOW_SUGGESTIONS,
 ])

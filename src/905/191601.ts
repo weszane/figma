@@ -8,7 +8,7 @@ import { ResourceStatus } from "../905/723791";
 import { reportError } from "../905/11";
 import { hideModal, showModalHandler } from "../905/156213";
 import { hT, YM } from "../905/561087";
-import { nb } from "../figma_app/543100";
+import { TileType } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
 import { SiteMount, FileLastPublishedAt } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
@@ -24,7 +24,7 @@ import { BannerMessage } from "../905/363675";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { createOptimistThunk } from "../905/350402";
 import { vv } from "../figma_app/435872";
-import { an } from "../905/81009";
+import { resetTileSelection } from "../905/81009";
 import { VK, YK } from "../905/880488";
 let I = registerModal(function (e) {
   let {
@@ -274,9 +274,9 @@ async function L(e) {
   return !1;
 }
 export function $$F0(e, t, i) {
-  let n = e.filter(e => e.type === nb.FILE);
-  let r = e.filter(e => e.type === nb.REPO);
-  let a = e.filter(e => e.type === nb.OFFLINE_FILE);
+  let n = e.filter(e => e.type === TileType.FILE);
+  let r = e.filter(e => e.type === TileType.REPO);
+  let a = e.filter(e => e.type === TileType.OFFLINE_FILE);
   let l = n.map(e => e.file.key);
   let d = r.map(e => e.repo.id);
   let c = a.map(e => e.file.fileKey);
@@ -359,7 +359,7 @@ let $$M2 = createOptimistThunk(async (e, t, {
       fileKeys: Object.keys(t.filesByKey)
     }));
     t.offlineFilesByKey && d > 0 && e.dispatch(vv(t.offlineFilesByKey));
-    e.dispatch(an());
+    e.dispatch(resetTileSelection());
   };
   m === d ? e.dispatch(showModalHandler({
     type: I,

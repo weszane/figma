@@ -1,14 +1,27 @@
-import { createEventEmitter, useEventSubscription } from "../figma_app/516794";
-import { useSprigWithSampling } from "../905/99656";
-export let $$a1 = createEventEmitter();
-export function $$s0() {
-  let {
-    Sprig
-  } = useSprigWithSampling();
-  useEventSubscription($$a1, () => {
-    Sprig("track", "interactive_slide_element_inserted");
-  });
-  return null;
+import { useSprigWithSampling } from "../905/99656"
+import { createEventEmitter, useEventSubscription } from "../figma_app/516794"
+
+// Original: $$a1
+/**
+ * Event emitter for interactive slide element insertion events.
+ */
+export let interactiveSlideElementInsertedEmitter = createEventEmitter()
+
+// Original: $$s0
+/**
+ * Sets up event subscription to track interactive slide element insertions using Sprig analytics.
+ * @returns null - This is a side-effect hook component.
+ */
+export function setupInteractiveSlideElementTracking() {
+  const { Sprig } = useSprigWithSampling()
+  useEventSubscription(interactiveSlideElementInsertedEmitter, () => {
+    Sprig("track", "interactive_slide_element_inserted")
+  })
+  return null
 }
-export const A = $$s0;
-export const g = $$a1;
+
+// Original: A = $$s0
+export const A = setupInteractiveSlideElementTracking
+
+// Original: g = $$a1
+export const g = interactiveSlideElementInsertedEmitter

@@ -1,93 +1,167 @@
-var $$n2 = (e => (e[e.NoStyleForColor = 0] = "NoStyleForColor", e[e.VariableNotResolved = 1] = "VariableNotResolved", e[e.AbsolutePosition = 2] = "AbsolutePosition", e[e.BordersDontTakeUpSpace = 3] = "BordersDontTakeUpSpace", e[e.SinglePaint = 4] = "SinglePaint", e[e.UnsupportedPaint = 5] = "UnsupportedPaint", e[e.UnsupportedGradientPaint = 6] = "UnsupportedGradientPaint", e[e.LeadingTrim = 7] = "LeadingTrim", e[e.PlusDarker = 8] = "PlusDarker", e[e.BackgroundBlendModePlusLighterDarker = 9] = "BackgroundBlendModePlusLighterDarker", e[e.SwiftUISeparateBorderWidth = 10] = "SwiftUISeparateBorderWidth", e[e.SwiftUIBlurNoSpread = 11] = "SwiftUIBlurNoSpread", e[e.SwiftUIOnlySingleFillForShapes = 12] = "SwiftUIOnlySingleFillForShapes", e[e.SwiftUISeparateCornerRadius = 13] = "SwiftUISeparateCornerRadius", e[e.SwiftUISpacersForSpaceBetween = 14] = "SwiftUISpacersForSpaceBetween", e[e.ComposeSeparateBorderWidth = 15] = "ComposeSeparateBorderWidth", e[e.ComposeShadowIncompatibility = 16] = "ComposeShadowIncompatibility", e[e.ComposeBlurTip = 17] = "ComposeBlurTip", e[e.DisplayP3Fallback = 18] = "DisplayP3Fallback", e[e.EffectsInSvg = 19] = "EffectsInSvg", e[e.SwiftUIBackgroundBlur = 20] = "SwiftUIBackgroundBlur", e))($$n2 || {});
-var $$r1 = (e => (e.Tooltip = "tooltip", e.Comment = "comment", e))($$r1 || {});
-export let $$a0 = {
-  NoStyleForColor: {
-    id: 0,
-    type: "tooltip"
-  },
-  VariableNotResolved: {
-    id: 1,
-    type: "tooltip"
-  },
-  AbsolutePosition: e => ({
-    id: 2,
-    name: e,
-    type: "tooltip"
-  }),
-  BordersDontTakeUpSpace: {
-    id: 3,
-    type: "tooltip"
-  },
-  SinglePaint: {
-    id: 4,
-    type: "tooltip"
-  },
-  UnsupportedPaint: {
-    id: 5,
-    type: "tooltip"
-  },
-  UnsupportedGradientPaint: {
-    id: 6,
-    type: "tooltip"
-  },
-  LeadingTrim: {
-    id: 7,
-    type: "tooltip"
-  },
-  DisplayP3Fallback: {
-    id: 18,
-    type: "tooltip"
-  },
-  PlusDarker: {
-    id: 8,
-    type: "tooltip"
-  },
-  BackgroundBlendModePlusLighterDarker: e => ({
-    id: 9,
-    value: e,
-    type: "tooltip"
-  }),
-  EffectsInSvg: {
-    id: 19,
-    type: "tooltip"
-  },
-  SwiftUISeparateBorderWidth: {
-    id: 10,
-    type: "tooltip"
-  },
-  SwiftUIBlurNoSpread: {
-    id: 11,
-    type: "tooltip"
-  },
-  SwiftUIOnlySingleFillForShapes: {
-    id: 12,
-    type: "tooltip"
-  },
-  SwiftUISeparateCornerRadius: {
-    id: 13,
-    type: "tooltip"
-  },
-  SwiftUISpacersForSpaceBetween: {
-    id: 14,
-    type: "tooltip"
-  },
-  SwiftUIBackgroundBlur: {
-    id: 20,
-    type: "tooltip"
-  },
-  ComposeSeparateBorderWidth: {
-    id: 15,
-    type: "tooltip"
-  },
-  ComposeShadowIncompatibility: {
-    id: 16,
-    type: "tooltip"
-  },
-  ComposeBlurTip: {
-    id: 17,
-    type: "tooltip"
+// Enum for representing different design conversion issues
+export enum DesignIssueType {
+  NoStyleForColor = 0,
+  VariableNotResolved = 1,
+  AbsolutePosition = 2,
+  BordersDontTakeUpSpace = 3,
+  SinglePaint = 4,
+  UnsupportedPaint = 5,
+  UnsupportedGradientPaint = 6,
+  LeadingTrim = 7,
+  PlusDarker = 8,
+  BackgroundBlendModePlusLighterDarker = 9,
+  SwiftUISeparateBorderWidth = 10,
+  SwiftUIBlurNoSpread = 11,
+  SwiftUIOnlySingleFillForShapes = 12,
+  SwiftUISeparateCornerRadius = 13,
+  SwiftUISpacersForSpaceBetween = 14,
+  ComposeSeparateBorderWidth = 15,
+  ComposeShadowIncompatibility = 16,
+  ComposeBlurTip = 17,
+  DisplayP3Fallback = 18,
+  EffectsInSvg = 19,
+  SwiftUIBackgroundBlur = 20,
+}
+
+// Enum for representing issue categories
+export enum IssueCategoryEnum {
+  Tooltip = "tooltip",
+  Comment = "comment",
+}
+
+// Factory functions for creating issue objects
+export interface DesignIssue {
+  id: number
+  type: IssueCategoryEnum
+}
+
+interface AbsolutePositionIssue extends DesignIssue {
+  name: string
+}
+
+interface BlendModeIssue extends DesignIssue {
+  value: string
+}
+
+function createAbsolutePositionIssue(name: string): AbsolutePositionIssue {
+  return {
+    id: DesignIssueType.AbsolutePosition,
+    name,
+    type: IssueCategoryEnum.Tooltip,
   }
-};
-export const A2 = $$a0;
-export const bv = $$r1;
-export const eo = $$n2;
+}
+
+function createBlendModeIssue(value: string): BlendModeIssue {
+  return {
+    id: DesignIssueType.BackgroundBlendModePlusLighterDarker,
+    value,
+    type: IssueCategoryEnum.Tooltip,
+  }
+}
+
+// Design issue definitions with clear categorization
+export const DesignIssues = {
+  NoStyleForColor: {
+    id: DesignIssueType.NoStyleForColor,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  VariableNotResolved: {
+    id: DesignIssueType.VariableNotResolved,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  AbsolutePosition: createAbsolutePositionIssue,
+
+  BordersDontTakeUpSpace: {
+    id: DesignIssueType.BordersDontTakeUpSpace,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  SinglePaint: {
+    id: DesignIssueType.SinglePaint,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  UnsupportedPaint: {
+    id: DesignIssueType.UnsupportedPaint,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  UnsupportedGradientPaint: {
+    id: DesignIssueType.UnsupportedGradientPaint,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  LeadingTrim: {
+    id: DesignIssueType.LeadingTrim,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  DisplayP3Fallback: {
+    id: DesignIssueType.DisplayP3Fallback,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  PlusDarker: {
+    id: DesignIssueType.PlusDarker,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  BackgroundBlendModePlusLighterDarker: createBlendModeIssue,
+
+  EffectsInSvg: {
+    id: DesignIssueType.EffectsInSvg,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  SwiftUISeparateBorderWidth: {
+    id: DesignIssueType.SwiftUISeparateBorderWidth,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  SwiftUIBlurNoSpread: {
+    id: DesignIssueType.SwiftUIBlurNoSpread,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  SwiftUIOnlySingleFillForShapes: {
+    id: DesignIssueType.SwiftUIOnlySingleFillForShapes,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  SwiftUISeparateCornerRadius: {
+    id: DesignIssueType.SwiftUISeparateCornerRadius,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  SwiftUISpacersForSpaceBetween: {
+    id: DesignIssueType.SwiftUISpacersForSpaceBetween,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  SwiftUIBackgroundBlur: {
+    id: DesignIssueType.SwiftUIBackgroundBlur,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  ComposeSeparateBorderWidth: {
+    id: DesignIssueType.ComposeSeparateBorderWidth,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  ComposeShadowIncompatibility: {
+    id: DesignIssueType.ComposeShadowIncompatibility,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+
+  ComposeBlurTip: {
+    id: DesignIssueType.ComposeBlurTip,
+    type: IssueCategoryEnum.Tooltip,
+  } as DesignIssue,
+}
+
+// Export aliases for backward compatibility
+export const A2 = DesignIssues
+export const bv = IssueCategoryEnum
+export const eo = DesignIssueType

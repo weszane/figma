@@ -341,7 +341,7 @@ export function findNext<T>(e: T[], t: number, r: (item: T, index: number) => bo
  * @param r - Predicate.
  * @returns The found element or undefined.
  */
-export function findPrevious<T>(e: T[], t: number, r: (item: T, index: number) => boolean = isNotNullish): T | undefined {
+export function findPrevious<T>(e: T[], t: number, r: (item: T, index: number) => boolean = isNotNullish) {
   for (let n = t - 1; n >= 0; n--) {
     let t = e[n];
     if (r(t, n)) return t;

@@ -6,7 +6,6 @@ import { createFileKeySchema, StyleSchema } from '../figma_app/633080'
 // Define interface for API parameters to improve type safety
 interface ApiParams {
   hubFileId: string
-  xr: any // Assuming xr is an API client; replace with proper type if available
 }
 
 /**
@@ -30,7 +29,7 @@ class CommunityLibrariesService {
    * @returns Validated API response.
    */
   getPublishedComponents(params: ApiParams) {
-    return this.publishedComponentsValidator.validate(async ({ xr }: { xr: any }) => await xr.get(`/api/community_libraries/${params.hubFileId}/published_components`))
+    return this.publishedComponentsValidator.validate(async ({ xr }) => await xr.get(`/api/community_libraries/${params.hubFileId}/published_components`))
   }
 
   /**
@@ -40,7 +39,7 @@ class CommunityLibrariesService {
    * @returns Validated API response.
    */
   getLibraryStyles(params: ApiParams) {
-    return this.libraryStylesValidator.validate(async ({ xr }: { xr: any }) => await xr.get(`/api/community_libraries/${params.hubFileId}/styles`))
+    return this.libraryStylesValidator.validate(async ({ xr }) => await xr.get(`/api/community_libraries/${params.hubFileId}/styles`))
   }
 
   /**
@@ -50,7 +49,7 @@ class CommunityLibrariesService {
    * @returns Validated API response.
    */
   getCommunityLibraries() {
-    return this.communityLibrariesValidator.validate(async ({ xr }: { xr: any }) => await xr.get('/api/community_libraries'))
+    return this.communityLibrariesValidator.validate(async ({ xr }) => await xr.get('/api/community_libraries'))
   }
 
   /**
@@ -60,7 +59,7 @@ class CommunityLibrariesService {
    * @returns Validated API response.
    */
   getCommunityLibrariesVisualAssets() {
-    return this.communityLibrariesValidator.validate(async ({ xr }: { xr: any }) => await xr.get('/api/community_libraries/visual_assets'))
+    return this.communityLibrariesValidator.validate(async ({ xr }) => await xr.get('/api/community_libraries/visual_assets'))
   }
 }
 

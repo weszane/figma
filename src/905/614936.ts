@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { SKIP_RECORDING } from "../figma_app/878298";
 import { useSingleEffect } from "../905/791079";
-import { dP } from "../figma_app/119475";
+import { KeyboardNavigationProvider } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useDropdownState } from "../905/848862";
 import { JB } from "../figma_app/604494";
@@ -31,7 +31,7 @@ export function $$m0({
   useEffect(() => {
     b();
   }, [b]);
-  return jsx(dP, {
+  return jsx(KeyboardNavigationProvider, {
     allowHorizontalNavigationWhileInputFocused: !0,
     ref: m,
     className: cssBuilderInstance.if(t, cssBuilderInstance.flex.flexColumn.hFull.overflowHidden).if(i, cssBuilderInstance.wFull).$,

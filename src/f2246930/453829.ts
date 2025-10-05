@@ -1,7 +1,7 @@
 import _require from "@stylexjs/stylex";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { Button } from "../905/521428";
 import { IconButton } from "../905/443068";
 import { Textarea } from "../905/909590";
@@ -55,7 +55,7 @@ export function $$b0({
       timeoutOverride: 3e3
     }));
   }, [t]);
-  let [k, z, E] = _$$t.useTabs({
+  let [k, z, E] = Tabs.useTabs({
     LogMessages: !0,
     RawData: !0
   });
@@ -89,16 +89,16 @@ export function $$b0({
       })]
     }), jsxs("div", {
       className: "x98rzlu x78zum5 xdt5ytf x2lwn1j x5yr21d x1odjw0f x1mh6rdz xg2d0mh",
-      children: [jsxs(_$$t.TabStrip, {
+      children: [jsxs(Tabs.TabStrip, {
         manager: E,
-        children: [jsx(_$$t.Tab, {
+        children: [jsx(Tabs.Tab, {
           ...k.LogMessages,
           children: "Messages"
-        }), jsx(_$$t.Tab, {
+        }), jsx(Tabs.Tab, {
           ...k.RawData,
           children: "Raw Data"
         })]
-      }), jsx(_$$t.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...z.LogMessages,
         children: jsx("div", {
           style: {
@@ -111,7 +111,7 @@ export function $$b0({
             parentRef: m
           })
         })
-      }), jsx(_$$t.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...z.RawData,
         height: "fill",
         children: jsx("div", {

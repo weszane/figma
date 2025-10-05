@@ -8,7 +8,7 @@ import { useMemoStable } from "../905/19536";
 import c from "../vendor/524488";
 import { wY } from "../figma_app/708845";
 import { KeyCodes } from "../905/63728";
-import { z3 } from "../figma_app/119475";
+import { useBlurFocusedItem } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -62,7 +62,7 @@ export function $$W0({
   let W = useIsLoading(fi) || "loading" === z.status;
   let $ = useMemoStable(() => currentSearch?.result.data?.map(e => e.library_key), [currentSearch]);
   let X = getLibraryNames($ || []);
-  let q = z3("faux");
+  let q = useBlurFocusedItem("faux");
   let J = _$$s2(currentSearch);
   let Z = "";
   currentSearch && "input-text" === currentSearch.input.type ? Z = currentSearch.input.query : J && (Z = J.name);

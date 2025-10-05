@@ -25,7 +25,7 @@ import { KindEnum } from '../905/129884';
 import { _ as _$$_5 } from '../905/136246';
 import { searchAPIHandler } from '../905/144933';
 import { e as _$$e2 } from '../905/149844';
-import { t as _$$t3 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { hideModalHandler, popModalStack, showModalHandler, updateModal } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { setupToggleButton } from '../905/167712';
@@ -255,7 +255,7 @@ import { wo } from '../figma_app/109130';
 import { Og } from '../figma_app/109758';
 import { f as _$$f } from '../figma_app/109947';
 import { O as _$$O2 } from '../figma_app/114128';
-import { dP as _$$dP } from '../figma_app/119475';
+import { KeyboardNavigationProvider } from '../figma_app/119475';
 import { I as _$$I2 } from '../figma_app/130633';
 import { isQaSearchFrecencyEnabled, isFirstDraftMakeChangesEnabled } from '../figma_app/144974';
 import { I9, Vr } from '../figma_app/151869';
@@ -392,7 +392,7 @@ import { O as _$$O5 } from '../figma_app/959385';
 import { fJ, x0 } from '../figma_app/963341';
 import { serializeJSX, deserializeJSX } from '../figma_app/964367';
 import { getSelectedEditorType, getCurrentFileType, isWhiteboardFileType, isDevHandoffEditorType, getEditorTypeOrNull, getEditorTypeFromView } from '../figma_app/976749';
-import { gH } from '../figma_app/985200';
+import { DEFAULT_ALLOWED_ORIGINS } from '../figma_app/985200';
 import { ah as _$$ah, EG, Hr, J8 } from '../figma_app/995580';
 import { A as _$$A7 } from '../svg/499035';
 import { A as _$$A14 } from '../svg/586486';
@@ -775,7 +775,7 @@ async function ty(e, t) {
   let s = generateRandomID();
   pluginState.currentPluginRunID = s;
   E9({
-    allowedDomains: gH,
+    allowedDomains: DEFAULT_ALLOWED_ORIGINS,
     apiVersion: pS,
     capabilities: [],
     stats: new PluginApiMetrics(),
@@ -2377,7 +2377,7 @@ let ae = {
     });
   },
   [nq.FONT](e) {
-    let [t, i, r] = _$$t3.useTabs({
+    let [t, i, r] = Tabs.useTabs({
       [nX.TITLE]: e.titleFont !== null,
       [nX.BODY]: e.bodyFont !== null,
       [nX.LABLE]: e.labelFont !== null
@@ -2390,15 +2390,15 @@ let ae = {
         className: cssBuilderInstance.flex.flex1.flexRow.gap8.p8.$,
         children: [jsx(as, {
           recordingKey: e.recordingKey
-        }), jsxs(_$$t3.TabStrip, {
+        }), jsxs(Tabs.TabStrip, {
           manager: r,
-          children: [jsx(_$$t3.Tab, {
+          children: [jsx(Tabs.Tab, {
             ...t.title,
             children: renderI18nText('first_draft.theme_panel.label.fontTitle')
-          }), jsx(_$$t3.Tab, {
+          }), jsx(Tabs.Tab, {
             ...t.body,
             children: renderI18nText('first_draft.theme_panel.label.fontBody')
-          }), jsx(_$$t3.Tab, {
+          }), jsx(Tabs.Tab, {
             ...t.label,
             children: renderI18nText('first_draft.theme_panel.label.fontLabel')
           })]
@@ -2407,17 +2407,17 @@ let ae = {
         className: cssBuilderInstance.wFull.colorBgTertiary.h1.$
       }), jsxs('div', {
         className: cssBuilderInstance.flex.flex1.flexColumn.gap8.p8.$,
-        children: [jsx(_$$t3.TabPanel, {
+        children: [jsx(Tabs.TabPanel, {
           ...i.title,
           children: jsx(ar, {
             ...e
           })
-        }), jsx(_$$t3.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...i.body,
           children: jsx(an, {
             ...e
           })
-        }), jsx(_$$t3.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...i.label,
           children: jsx(aa, {
             ...e
@@ -2826,7 +2826,7 @@ function af(e) {
   let [y, b] = useState(0);
   let [C, v] = useState(new Error(getI18nString('first_draft.something_went_wrong')));
   let [E, T] = useState(null);
-  let [w, S, j] = _$$t3.useTabs({
+  let [w, S, j] = Tabs.useTabs({
     prompt: !0,
     theme: !0
   }, {
@@ -3441,7 +3441,7 @@ function ag({
     }), jsxs('div', {
       'className': rB()(cssBuilderInstance.p8.relative.$, r.activeTab === 'theme' && 'first_draft_make_changes_view--contentBoxed--L-H0e', eu && cssBuilderInstance.elevation500.radiusLarge.$),
       'data-testid': 'readyForPromptView',
-      'children': [jsx(_$$t3.TabPanel, {
+      'children': [jsx(Tabs.TabPanel, {
         ...o.prompt,
         children: jsx(XG, {
           action: _$$JT.FIRST_DRAFT_MAKE_CHANGES,
@@ -3451,7 +3451,7 @@ function ag({
           suggestion: p,
           suggestionPills: getFeatureFlags().first_draft_new_prompt_pills ? m : void 0
         })
-      }), jsx(_$$t3.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...o.theme,
         children: jsx(n9, {
           activeTab: eu,
@@ -3467,12 +3467,12 @@ function ag({
       }), jsxs(FlexBox, {
         fullWidth: !0,
         justify: 'space-between',
-        children: [jsxs(_$$t3.TabStrip, {
+        children: [jsxs(Tabs.TabStrip, {
           manager: r,
-          children: [jsx(_$$t3.Tab, {
+          children: [jsx(Tabs.Tab, {
             ...s.theme,
             children: renderI18nText('first_draft.style')
-          }), jsx(_$$t3.Tab, {
+          }), jsx(Tabs.Tab, {
             ...s.prompt,
             children: jsx('span', {
               'data-testid': 'promptTabLabel',
@@ -4657,7 +4657,7 @@ function sc({
   return jsx(_$$s2, {
     name: 'firstDraftKitPicker',
     recordingKey: 'firstDraftKitPicker',
-    children: jsx(_$$dP, {
+    children: jsx(KeyboardNavigationProvider, {
       children: jsxs('div', {
         'className': cssBuilderInstance.flex.flexColumn.gap8.pt8.$,
         'data-testid': 'kitSelectionListContainer',

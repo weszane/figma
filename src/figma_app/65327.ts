@@ -13,7 +13,7 @@ import { t as _$$t, c as _$$c } from "../905/722657";
 import { hideAllPickersAndPreviews } from "../905/12476";
 import { selectViewAction } from "../905/929976";
 import { setProgressBarState } from "../figma_app/91703";
-import { IN, pM, KE } from "../905/116101";
+import { setUniversalInsertViewResourceDetails, handleResourceDetails, closeUniversalInsertModal } from "../905/116101";
 import { postUserFlag } from "../905/985254";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
@@ -27,7 +27,7 @@ import { FEditorType } from "../figma_app/53721";
 import { LoadingBarStatus } from "../figma_app/915202";
 import { ManifestEditorType } from "../figma_app/155287";
 import { cq } from "../905/794154";
-import { s as _$$s } from "../figma_app/504088";
+import { SimpleComponentType } from "../figma_app/504088";
 import { R as _$$R } from "../905/300969";
 import { c as _$$c2 } from "../905/580030";
 export function $$k0(e, t) {
@@ -67,7 +67,7 @@ export function $$k0(e, t) {
         let t = getPluginVersion(e);
         isDevModePlugin(t) && (n = {
           id: i.universalInsertModal.fdPreviewResource.id,
-          type: _$$s.PLUGIN
+          type: SimpleComponentType.PLUGIN
         });
       }
       r(selectViewAction({
@@ -82,7 +82,7 @@ export function $$k0(e, t) {
         id: K.compareVersionId
       })));
       Y && fullscreenValue.triggerAction("toggle-prototyping-info");
-      n && r(IN({
+      n && r(setUniversalInsertViewResourceDetails({
         fdPreviewResource: n
       }));
       handleEnterMode(i, FEditorType.DevHandoff, e, t, ee);
@@ -108,7 +108,7 @@ export function $$k0(e, t) {
       if (getSelectedDevModePropertiesPanelTab()?.getCopy() === IAssertResource.PLUGIN && n.universalInsertModal.fdPreviewResource) {
         let e = getPluginMetadata(n.universalInsertModal.fdPreviewResource.id, n.publishedPlugins);
         let t = getPluginVersion(e);
-        t?.manifest?.editorType?.includes(ManifestEditorType.FIGMA) && r(pM({
+        t?.manifest?.editorType?.includes(ManifestEditorType.FIGMA) && r(handleResourceDetails({
           id: n.universalInsertModal.fdPreviewResource.id,
           isWidget: !1
         }));
@@ -121,7 +121,7 @@ export function $$k0(e, t) {
         devModeFocusId: void 0,
         showDevModeVariablesTable: void 0
       }));
-      r(KE());
+      r(closeUniversalInsertModal());
       G || (H || r(postUserFlag({
         dev_mode_should_see_paywall_reminder: !0
       })), B || setPropertiesPanelTab(DesignWorkspace.INSPECT), W(_$$c.DEFAULT));

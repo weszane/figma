@@ -13,8 +13,8 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { v as _$$v } from "../905/939922";
 import { A as _$$A } from "../905/351112";
 import { Fh, Mw, U1 } from "../905/191601";
-import { an, y$ } from "../905/81009";
-import { Tf, nb, hi, c_, Y6, YC } from "../figma_app/543100";
+import { resetTileSelection, selectTiles } from "../905/81009";
+import { TileUtils, TileType, tilePermissionAtomFamily, useTileAutosaveChanges, renamingStateAtom, tileTypeToComponentFileTypeMap } from "../figma_app/543100";
 import { useCurrentUserOrgId } from "../905/845253";
 import { getSelectedView } from "../figma_app/386952";
 import { fileEntityDataMapper } from "../905/943101";
@@ -74,13 +74,13 @@ function N(e) {
       fontSize: 13,
       truncate: !0,
       fontWeight: "medium",
-      children: Tf.getName(e.tile)
+      children: TileUtils.getName(e.tile)
     })]
   });
 }
 function H(e) {
   let t = useSelector(e => e.orgById);
-  let i = Tf.getOrgId(e.tile);
+  let i = TileUtils.getOrgId(e.tile);
   if (!i) return jsx(Fragment, {});
   let r = t[i];
   return r ? jsx(_$$H, {
@@ -92,12 +92,12 @@ function H(e) {
 }
 function $(e) {
   switch (e.tile.type) {
-    case nb.FILE:
-    case nb.REPO:
-    case nb.PINNED_FILE:
-    case nb.OFFLINE_FILE:
+    case TileType.FILE:
+    case TileType.REPO:
+    case TileType.PINNED_FILE:
+    case TileType.OFFLINE_FILE:
       return renderI18nText(e.shorter ? "tile.file_tile.password_protected_shorter" : "tile.file_tile.password_protected");
-    case nb.PROTOTYPE:
+    case TileType.PROTOTYPE:
       return renderI18nText(e.shorter ? "tile.file_tile.password_protected_shorter" : "tile.file_tile.password_protected_prototype");
     default:
       throwTypeError(e.tile);
@@ -105,10 +105,10 @@ function $(e) {
 }
 function X(e) {
   let t = getUserId();
-  let i = Tf.getTrashedUserId(e.tile);
+  let i = TileUtils.getTrashedUserId(e.tile);
   let r = jsx(_$$M, {
     tile: e.tile,
-    getDateFromGenericTile: Tf.getTrashedAt
+    getDateFromGenericTile: TileUtils.getTrashedAt
   });
   return i && i === t ? renderI18nText("tile.file_tile.trashed_by_you", {
     time: r
@@ -132,7 +132,7 @@ function Q({
   });
 }
 function J(e) {
-  let t = e.tile.type === nb.REPO && e.tile.branches.filter(e => !e.trashed_at).length || 0;
+  let t = e.tile.type === TileType.REPO && e.tile.branches.filter(e => !e.trashed_at).length || 0;
   return !e.hideBranchIndicator && t > 1 ? jsxs(Fragment, {
     children: [renderI18nText("tile.file_tile.branch_count", {
       branchCount: t
@@ -142,33 +142,33 @@ function J(e) {
   });
 }
 function ee(e) {
-  let t = useAtomWithSubscription(hi(e.tile));
+  let t = useAtomWithSubscription(tilePermissionAtomFamily(e.tile));
   let i = renderI18nText("tile.file_tile.edited_time", {
     time: jsx(_$$M, {
       tile: e.tile,
-      getDateFromGenericTile: Tf.getTouchedAt
+      getDateFromGenericTile: TileUtils.getTouchedAt
     })
   });
   return "deletedFiles" === e.selectedView.view ? jsx(X, {
     tile: e.tile
-  }) : "recentsAndSharing" === e.selectedView.view && e.selectedView.tab === ViewTypeEnum.SHARED_FILES ? Tf.getSharedBy(e.tile) ? renderI18nText("team_tile.shared_by", {
-    shared_by_text: Tf.getSharedByName(e.tile)
+  }) : "recentsAndSharing" === e.selectedView.view && e.selectedView.tab === ViewTypeEnum.SHARED_FILES ? TileUtils.getSharedBy(e.tile) ? renderI18nText("team_tile.shared_by", {
+    shared_by_text: TileUtils.getSharedByName(e.tile)
   }) : renderI18nText("swy_tile.shared_date", {
     shared_date: jsx(_$$M, {
       tile: e.tile,
-      getDateFromGenericTile: Tf.getSharedAt
+      getDateFromGenericTile: TileUtils.getSharedAt
     })
   }) : "user" === e.selectedView.view ? renderI18nText("tile.file_tile.last_activity_time", {
     time: jsx(_$$M, {
       tile: e.tile,
-      getDateFromGenericTile: Tf.getTouchedAt
+      getDateFromGenericTile: TileUtils.getTouchedAt
     })
-  }) : e.tile.type === nb.FILE && e.tile.file.trackTags?.source === "import" && new Date(e.tile.file.touchedAt) <= e.tile.file.createdAt ? renderI18nText("tile.file_tile.imported_time", {
+  }) : e.tile.type === TileType.FILE && e.tile.file.trackTags?.source === "import" && new Date(e.tile.file.touchedAt) <= e.tile.file.createdAt ? renderI18nText("tile.file_tile.imported_time", {
     time: jsx(_$$M, {
       tile: e.tile,
-      getDateFromGenericTile: Tf.getCreatedAt
+      getDateFromGenericTile: TileUtils.getCreatedAt
     })
-  }) : Tf.getIsPasswordProtected(e.tile) ? "loading" === t.status ? null : t.data ? jsxs(Fragment, {
+  }) : TileUtils.getIsPasswordProtected(e.tile) ? "loading" === t.status ? null : t.data ? jsxs(Fragment, {
     children: [jsx($, {
       tile: e.tile,
       shorter: !0
@@ -178,7 +178,7 @@ function ee(e) {
   }) : i;
 }
 function et(e) {
-  let t = Tf.getFolderId(e.tile);
+  let t = TileUtils.getFolderId(e.tile);
   let i = _$$p(t);
   let r = i.data?.folderName || null;
   let a = i.data?.isTrashed || !1;
@@ -385,9 +385,9 @@ function eI({
   let [u, m] = useState(!1);
   let g = _$$C(e);
   let f = getSelectedView();
-  let _ = Tf.getTeamId(e);
-  let A = Tf.getOrgId(e);
-  let b = c_(e).unwrapOr(!1);
+  let _ = TileUtils.getTeamId(e);
+  let A = TileUtils.getOrgId(e);
+  let b = useTileAutosaveChanges(e).unwrapOr(!1);
   return jsx(_$$i, {
     thumbnail: jsx(_$$e, {
       tile: e,
@@ -418,7 +418,7 @@ function eI({
       hideBranchIndicator: s,
       selectedView: f
     }),
-    bottomRightContent: e.type === nb.OFFLINE_FILE ? jsx(_$$z, {
+    bottomRightContent: e.type === TileType.OFFLINE_FILE ? jsx(_$$z, {
       "data-tooltip": getI18nString("tile.offline_file_tile.offline_upload_tooltip"),
       "data-tooltip-type": KindEnum.TEXT
     }) : !getFeatureFlags().dtm_deprecation_pre_migration_onboarding || _ || A ? jsx(_$$V, {
@@ -453,8 +453,8 @@ function eE({
       tile: e,
       size: 24
     });
-    let r = Tf.getEditorType(e);
-    return e.type === nb.FILE && e.file.isPublishedSite && r ? jsx(setupThemeContext, {
+    let r = TileUtils.getEditorType(e);
+    return e.type === TileType.FILE && e.file.isPublishedSite && r ? jsx(setupThemeContext, {
       brand: _$$K2(r),
       children: jsx(_$$E2, {
         variant: "brandFilled",
@@ -464,7 +464,7 @@ function eE({
   })();
   return jsxs("div", {
     className: "x78zum5 x6s0dn4 x1v2ro7d",
-    children: [a, t && e.type === nb.REPO && !r && jsx(eb, {
+    children: [a, t && e.type === TileType.REPO && !r && jsx(eb, {
       repoTile: e,
       buttonThemeVersion: "ui3"
     })]
@@ -476,7 +476,7 @@ function ex({
   isHoveredOrSelected: i
 }) {
   if (!Xg(e)) return null;
-  let r = Tf.getIsFavorited(e);
+  let r = TileUtils.getIsFavorited(e);
   return jsx("div", {
     ...props(i || t || r ? eS.topRightContentShown : eS.topRightContentHidden),
     children: jsx(_$$e2, {
@@ -503,19 +503,19 @@ let eC = e => {
   let r = [];
   e.forEach(e => {
     switch (e.type) {
-      case nb.FILE:
+      case TileType.FILE:
         i.push(e);
         break;
-      case nb.PROTOTYPE:
+      case TileType.PROTOTYPE:
         n.push(e);
         break;
-      case nb.REPO:
+      case TileType.REPO:
         t.push(e);
         break;
-      case nb.PINNED_FILE:
+      case TileType.PINNED_FILE:
         debug(!0, "Do not expect to be rendering project or pinned tiles here");
         break;
-      case nb.OFFLINE_FILE:
+      case TileType.OFFLINE_FILE:
         r.push(e);
         break;
       default:
@@ -548,32 +548,32 @@ export function $$eT0({
   let j = useCurrentUserOrgId();
   let U = Xr(yH);
   let B = _$$v();
-  let V = useAtomWithSubscription(Y6);
+  let V = useAtomWithSubscription(renamingStateAtom);
   let G = useCallback(e => {
-    F(an());
+    F(resetTileSelection());
     let {
       fileTiles,
       offlineFileTiles,
       repoTiles,
       prototypeTiles
     } = eC(e);
-    fileTiles.length > 0 && F(y$({
-      type: YC[nb.FILE],
+    fileTiles.length > 0 && F(selectTiles({
+      type: tileTypeToComponentFileTypeMap[TileType.FILE],
       tiles: fileTiles
     }));
-    offlineFileTiles.length > 0 && F(y$({
-      type: YC[nb.OFFLINE_FILE],
+    offlineFileTiles.length > 0 && F(selectTiles({
+      type: tileTypeToComponentFileTypeMap[TileType.OFFLINE_FILE],
       tiles: offlineFileTiles
     }));
-    repoTiles.length > 0 && F(y$({
-      type: YC[nb.REPO],
+    repoTiles.length > 0 && F(selectTiles({
+      type: tileTypeToComponentFileTypeMap[TileType.REPO],
       tiles: repoTiles
     }));
-    prototypeTiles.length > 0 && F(y$({
-      type: YC[nb.PROTOTYPE],
+    prototypeTiles.length > 0 && F(selectTiles({
+      type: tileTypeToComponentFileTypeMap[TileType.PROTOTYPE],
       tiles: prototypeTiles
     }));
-    U([...new Set(e.map(e => Tf.getFolderId(e)).filter(e => null !== e))]);
+    U([...new Set(e.map(e => TileUtils.getFolderId(e)).filter(e => null !== e))]);
   }, [F, U]);
   let {
     gutterColumn,
@@ -594,7 +594,7 @@ export function $$eT0({
     filePermissions,
     repoPermissions
   } = xD();
-  let Y = useCallback(e => e.every(e => qf(e, j) && !Tf.isRenaming(e, V)), [V, j]);
+  let Y = useCallback(e => e.every(e => qf(e, j) && !TileUtils.isRenaming(e, V)), [V, j]);
   let q = {
     containerStyle: O ?? ek.gridContainerDefault,
     renderTileDragImage: e => jsx(_$$e, {
@@ -624,7 +624,7 @@ export function $$eT0({
   return jsx(_$$A, {
     canSelectedItemsBeDragged: Y,
     doNotFocusOnLoad: k,
-    getAriaLabel: Tf.getName,
+    getAriaLabel: TileUtils.getName,
     gridViewProps: Z,
     handleContextMenu: (t, n, r) => {
       let a = i[r];

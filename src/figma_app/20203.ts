@@ -1,14 +1,14 @@
 import { useCallback, useEffect } from 'react';
 import { Fragment, jsx } from 'react/jsx-runtime';
 import { atom, useAtomWithSubscription, Xr } from '../figma_app/27355';
-import { bh } from '../figma_app/119475';
+import { useFocusFirstItem } from '../figma_app/119475';
 let $$o0 = 0;
 let $$l6 = 1;
 let $$d2 = 2;
 let $$c1 = 3;
 let $$u5 = 4;
 export function $$p7() {
-  let e = bh();
+  let e = useFocusFirstItem();
   useEffect(() => {
     let t = t => {
       if (document.activeElement && document.activeElement !== document.body) return;

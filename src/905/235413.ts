@@ -1,63 +1,158 @@
-import n from "../vendor/60324";
-var r = n;
-export function $$a0(e, t = 3) {
-  if (void 0 !== e) return r()(e, t);
+import { round } from "lodash-es"
+
+/**
+ * Rounds a number to a specified number of decimal places.
+ * @param value - The number to round.
+ * @param decimals - The number of decimal places to round to. Defaults to 3.
+ * @returns The rounded number.
+ */
+export function roundToDecimal(value: number, decimals: number = 3): number {
+  if (value !== undefined)
+    return round(value, decimals)
 }
-export class $$s4 {
-  constructor(e) {
-    this._value = e;
+
+/**
+ * Represents a pixel value that can be converted to a string with 'px' suffix.
+ */
+export class PixelValue {
+  private readonly _value: number | string
+
+  constructor(value: number | string) {
+    this._value = value
   }
+
+  /**
+   * Gets the string representation of the pixel value.
+   * @returns The pixel value as a string with 'px' suffix, or '0' if the value is zero.
+   */
+  get value(): string {
+    if (typeof this._value === "number") {
+      const roundedValue = roundToDecimal(this._value)
+      return `${roundedValue}${roundedValue !== 0 ? "px" : ""}`
+    }
+    return String(this._value)
+  }
+
+  /**
+   * Checks if this pixel value is equal to another pixel value.
+   * @param other - The other pixel value to compare with.
+   * @returns True if the values are equal, false otherwise.
+   */
+  equals(other: PixelValue): boolean {
+    return this.value === other.value
+  }
+}
+
+/**
+ * Represents a percentage value that can be converted to a string with '%' suffix.
+ */
+export class PercentageValue {
+  private readonly _value: number
+
+  constructor(value: number) {
+    this._value = value
+  }
+
+  /**
+   * Gets the string representation of the percentage value.
+   * @returns The percentage value as a string with '%' suffix.
+   */
+  get value(): string {
+    return `${roundToDecimal(this._value)}%`
+  }
+
+  /**
+   * Checks if this percentage value is equal to another percentage value.
+   * @param other - The other percentage value to compare with.
+   * @returns True if the values are equal, false otherwise.
+   */
+  equals(other: PercentageValue): boolean {
+    return this.value === other.value
+  }
+}
+
+/**
+ * Represents a string value.
+ */
+export class StringValue {
+  private readonly _value: string | number
+
+  constructor(value: string | number) {
+    this._value = value
+  }
+
+  /**
+   * Gets the string representation of the value.
+   * @returns The string value.
+   */
+  get value(): string {
+    return `${this._value}`
+  }
+
+  /**
+   * Checks if this string value is equal to another string value.
+   * @param other - The other string value to compare with.
+   * @returns True if the values are equal, false otherwise.
+   */
+  equals(other: StringValue): boolean {
+    return this.value === other.value
+  }
+}
+
+/**
+ * Represents a raw value.
+ */
+export class RawValue {
+  private readonly _value: string | number
+
+  constructor(value: string | number) {
+    this._value = value
+  }
+
+  /**
+   * Gets the raw value.
+   * @returns The raw value.
+   */
   get value() {
-    return "number" == typeof this._value ? `${$$a0(this._value)}${0 !== $$a0(this._value) ? "px" : ""}` : this._value;
+    return this._value
   }
-  equals(e) {
-    return this.value === e.value;
-  }
-}
-export class $$o2 {
-  constructor(e) {
-    this._value = e;
-  }
-  get value() {
-    return `${$$a0(this._value)}%`;
-  }
-  equals(e) {
-    return this.value === e.value;
+
+  /**
+   * Checks if this raw value is equal to another raw value.
+   * @param other - The other raw value to compare with.
+   * @returns True if the values are equal, false otherwise.
+   */
+  equals(other: RawValue): boolean {
+    return this.value === other.value
   }
 }
-export class $$l5 {
-  constructor(e) {
-    this._value = e;
+
+/**
+ * Represents a normal value.
+ */
+export class NormalValue {
+  /**
+   * Gets the string representation of the normal value.
+   * @returns The string "normal".
+   */
+  get value(): string {
+    return "normal"
   }
-  get value() {
-    return `${this._value}`;
-  }
-  equals(e) {
-    return this.value === e.value;
-  }
-}
-export class $$d1 {
-  constructor(e) {
-    this._value = e;
-  }
-  get value() {
-    return this._value;
-  }
-  equals(e) {
-    return this.value === e.value;
-  }
-}
-export class $$c3 {
-  get value() {
-    return "normal";
-  }
-  equals(e) {
-    return this.value === e.value;
+
+  /**
+   * Checks if this normal value is equal to another normal value.
+   * @param other - The other normal value to compare with.
+   * @returns True if the values are equal, false otherwise.
+   */
+  equals(other: NormalValue): boolean {
+    return this.value === other.value
   }
 }
-export const LI = $$a0;
-export const O$ = $$d1;
-export const QE = $$o2;
-export const Qf = $$c3;
-export const RU = $$s4;
-export const lS = $$l5;
+
+// Export aliases for backward compatibility
+export const LI = roundToDecimal
+export const O$ = RawValue
+export const QE = PercentageValue
+export const Qf = NormalValue
+export const RU = PixelValue
+export const lS = StringValue

@@ -10,13 +10,13 @@ import { getLibraryNames } from "../905/506188";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lX } from "../figma_app/588397";
 import { w } from "../905/768636";
-import { er } from "../905/753512";
+import { isLibraryModalContextAvailable } from "../905/753512";
 import { W } from "../905/729905";
 import { renderI18nText } from "../905/303541";
 import { Q } from "../905/620793";
 import { lh } from "../905/424623";
 import { U as _$$U } from "../905/763676";
-import { Y } from "../905/180528";
+import { MissingLibrariesHeader } from "../905/180528";
 var l = o;
 function b({
   backToList: e,
@@ -32,7 +32,7 @@ function b({
 export function $$x0(e) {
   let [t, i] = useState(null);
   let o = lh();
-  let A = er();
+  let A = isLibraryModalContextAvailable();
   let y = getLibraryNames(e.libraryKeys);
   let x = "loading" === y.status;
   let S = useCallback(() => {
@@ -66,7 +66,7 @@ export function $$x0(e) {
           children: [A ? jsx(b, {
             backToList: e.backToList,
             numMissingLibraries: e.libraryKeys.length
-          }) : jsx(Y, {
+          }) : jsx(MissingLibrariesHeader, {
             backToList: e.backToList,
             numMissingLibraries: e.libraryKeys.length
           }), jsxs(P, {

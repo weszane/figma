@@ -15,7 +15,7 @@ import { a6 } from '../905/129660';
 import { KindEnum } from '../905/129884';
 import { ScrollContainer } from '../905/143421';
 import { ku, Rz } from '../905/149223';
-import { t as _$$t } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { OPTICAL_SIZE_AXIS_TAG } from '../905/165290';
 import { U as _$$U } from '../905/169553';
 import { zK, zM } from '../905/182453';
@@ -2638,16 +2638,16 @@ function t6(e) {
         children: getI18nString('type_settings.type_settings')
       }), jsx(DialogTabStrip, {
         manager: e.tabManager,
-        children: tX().map(i => jsx(_$$t.Tab, {
+        children: tX().map(i => jsx(Tabs.Tab, {
           ...e.tabPropsMap[i],
           children: t(i)
         }, i))
       })]
     }) : jsx('div', {
       className: 'type_settings--tabsHeader--AWpX1',
-      children: jsx(_$$t.TabStrip, {
+      children: jsx(Tabs.TabStrip, {
         manager: e.tabManager,
-        children: tX().map(i => jsx(_$$t.Tab, {
+        children: tX().map(i => jsx(Tabs.Tab, {
           ...e.tabPropsMap[i],
           children: t(i)
         }, i))
@@ -2681,13 +2681,13 @@ function t6(e) {
       wrapper: i,
       condition: !getFeatureFlags().ce_tv_fpl_type_settings,
       children: jsxs(Fragment, {
-        children: [jsx(_$$t.TabPanel, {
+        children: [jsx(Tabs.TabPanel, {
           ...e.tabPanelPropsMap.Basics,
           children: t1(t)
-        }), jsx(_$$t.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...e.tabPanelPropsMap.Details,
           children: t6()
-        }), jsx(_$$t.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...e.tabPanelPropsMap.Variable,
           children: t9()
         })]
@@ -2893,7 +2893,7 @@ export function $$ix0(e) {
   let i = selectWithShallowEqual(e => Cy(e.mirror));
   let n = useAtomWithSubscription($i) === 'text-panel';
   let a = vK();
-  let [o, d, c] = _$$t.useTabs({
+  let [o, d, c] = Tabs.useTabs({
     Basics: !0,
     Details: !0,
     Variable: !0

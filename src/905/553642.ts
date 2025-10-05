@@ -3,8 +3,8 @@ import { getI18nState } from "../figma_app/363242";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { jI } from "../figma_app/506364";
 import { LE, i3, Ev, x5 } from "../905/543054";
-import { up, Up } from "../905/145989";
-import { hz, QC } from "../905/461516";
+import { getSpellCheckStorageKey, setSpellCheckLanguage } from "../905/145989";
+import { DEFAULT_MODE, SpellCheckEngine } from "../905/461516";
 export function $$c1() {
   return {
     action: "toggle-spell-check",
@@ -21,13 +21,13 @@ export function $$u0() {
     languageDisplay: "standard"
   }) : void 0;
   let c = e => {
-    if (e === hz) return getI18nString("spell_check.auto_detect_language_display_text");
+    if (e === DEFAULT_MODE) return getI18nString("spell_check.auto_detect_language_display_text");
     try {
       return i && i.of(e) || e;
     } catch (e) {}
     return e;
   };
-  e.sort((e, i) => e === hz ? -1 : i === hz ? 1 : c(e).localeCompare(c(i), t || "en"));
+  e.sort((e, i) => e === DEFAULT_MODE ? -1 : i === DEFAULT_MODE ? 1 : c(e).localeCompare(c(i), t || "en"));
   return e.map(e => ({
     recordingKey: `spell-check-dictionary-option-${e}`,
     action: "redo-spell-checking",
@@ -39,14 +39,14 @@ export function $$u0() {
     flags: ["!desktop_os_menu"],
     get checked() {
       let t = i3();
-      let i = void 0 !== t ? t : QC.HUNSPELL;
-      let n = up(i);
+      let i = void 0 !== t ? t : SpellCheckEngine.HUNSPELL;
+      let n = getSpellCheckStorageKey(i);
       return EditorPreferencesApi().spellCheckPreference.getCopy() && Ev(n) === e;
     },
     callback: async () => {
       let t = await x5();
-      let i = up(t);
-      Up(i, e);
+      let i = getSpellCheckStorageKey(t);
+      setSpellCheckLanguage(i, e);
       await jI(e);
     }
   }));

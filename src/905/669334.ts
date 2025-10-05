@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { ButtonPrimitive } from "../905/632989";
 import { r as _$$r } from "../905/571562";
 import { getFeatureFlags } from "../905/601108";
@@ -104,12 +104,12 @@ let $$k0 = memo(({
   return getFeatureFlags().dse_fpl_wave_1 ? jsx("div", {
     children: jsxs("div", {
       className: "dsa_file_view_tabs--tabStrip--fxcSP dsa_file_view_tabs--tabsHeaderBordered--Ogkvc",
-      children: [jsxs(_$$t.TabStrip, {
+      children: [jsxs(Tabs.TabStrip, {
         manager: N,
-        children: [jsx(_$$t.Tab, {
+        children: [jsx(Tabs.Tab, {
           ...R.overview,
           children: $$S[_$$R.OVERVIEW]
-        }), jsx(_$$t.Tab, {
+        }), jsx(Tabs.Tab, {
           ...R.analytics,
           children: $$S[_$$R.ANALYTICS]
         })]

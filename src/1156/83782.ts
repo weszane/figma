@@ -12,7 +12,7 @@ import { stylex } from "@stylexjs/stylex";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useSingleEffect } from "../905/791079";
-import { dP } from "../figma_app/119475";
+import { KeyboardNavigationProvider } from "../figma_app/119475";
 import { TrackedLink } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { hideModalHandler, showModalHandler } from "../905/156213";
@@ -20,7 +20,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { AssetFilterMode } from "../figma_app/646357";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r6 } from "../905/542608";
-import { Tp } from "../905/753512";
+import { LibraryModalContextProvider } from "../905/753512";
 import { m3 } from "../905/66449";
 import { V } from "../905/843013";
 import { Q } from "../905/572508";
@@ -163,11 +163,11 @@ function G({
           })]
         })]
       })
-    }), jsx(Tp, {
+    }), jsx(LibraryModalContextProvider, {
       entrypoint: r6.FIGMAKE,
       initialTab: void 0,
       initialUpdatesModalScope: AssetFilterMode.CURRENT,
-      children: jsx(dP, {
+      children: jsx(KeyboardNavigationProvider, {
         children: d.map((n, i) => jsx(V, {
           header: n.library_name,
           subheader: n.team_name,

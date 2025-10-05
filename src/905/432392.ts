@@ -1,32 +1,82 @@
-export var $$n4 = (e => (e[e.PIXEL = 0] = "PIXEL", e[e.SCALED = 1] = "SCALED", e))($$n4 || {});
-export function $$r5({
-  customSettings: e = {}
-}) {
-  return e?.hideLayout === "true";
+/**
+ * Unit types for measurements
+ * @enum {number}
+ */
+export enum MeasureUnitType {
+  PIXEL = 0,
+  SCALED = 1,
 }
-export function $$a1({
-  customSettings: e = {}
-}) {
-  return e?.hideColor === "true";
+
+/**
+ * Checks if layout should be hidden based on custom settings
+ * @param {object} params - Function parameters
+ * @param {object} params.customSettings - Custom settings object
+ * @returns {boolean} True if layout should be hidden
+ */
+export function shouldHideLayout({ customSettings = {} }: { customSettings?: { hideLayout?: string } }): boolean {
+  return customSettings?.hideLayout === "true"
 }
-export function $$s0(e) {
-  return $$r5(e) || $$a1(e);
+
+/**
+ * Checks if color should be hidden based on custom settings
+ * @param {object} params - Function parameters
+ * @param {object} params.customSettings - Custom settings object
+ * @returns {boolean} True if color should be hidden
+ */
+export function shouldHideColor({ customSettings = {} }: { customSettings?: { hideColor?: string } }): boolean {
+  return customSettings?.hideColor === "true"
 }
-export function $$o2(e, {
-  unit: t,
-  scaleFactor: i
-}, n = 5) {
-  return 0 === t || 1 === i || 0 === i ? $$l3(e, n) : $$l3(e / i, n);
+
+/**
+ * Checks if either layout or color should be hidden
+ * @param {object} params - Function parameters
+ * @returns {boolean} True if either layout or color should be hidden
+ */
+export function shouldHideLayoutOrColor(params: { customSettings?: { hideLayout?: string, hideColor?: string } }): boolean {
+  return shouldHideLayout(params) || shouldHideColor(params)
 }
-export function $$l3(e, t = 5) {
-  return Number(e.toLocaleString("en", {
-    maximumFractionDigits: t,
-    useGrouping: !1
-  }));
+
+/**
+ * Formats a number value with scaling consideration
+ * @param {number} value - The value to format
+ * @param {object} scaleParams - Scaling parameters
+ * @param {MeasureUnitType} scaleParams.unit - The unit type
+ * @param {number} scaleParams.scaleFactor - The scale factor
+ * @param {number} maxFractionDigits - Maximum fraction digits (default: 5)
+ * @returns {number} Formatted number
+ */
+export function formatScaledValue(
+  value: number,
+  { unit, scaleFactor }: { unit: MeasureUnitType, scaleFactor: number },
+  maxFractionDigits: number = 5,
+): number {
+  // Return early if no scaling needed
+  if (unit === MeasureUnitType.PIXEL || scaleFactor === 1 || scaleFactor === 0) {
+    return formatNumber(value, maxFractionDigits)
+  }
+
+  return formatNumber(value / scaleFactor, maxFractionDigits)
 }
-export const Hw = $$s0;
-export const KY = $$a1;
-export const hX = $$o2;
-export const nk = $$l3;
-export const tK = $$n4;
-export const vy = $$r5;
+
+/**
+ * Formats a number to a specified precision without grouping
+ * @param {number} value - The value to format
+ * @param {number} maxFractionDigits - Maximum fraction digits (default: 5)
+ * @returns {number} Formatted number
+ */
+export function formatNumber(value: number, maxFractionDigits: number = 5): number {
+  return Number(
+    value.toLocaleString("en", {
+      maximumFractionDigits: maxFractionDigits,
+      useGrouping: false,
+    }),
+  )
+}
+
+// Export aliases for backward compatibility
+export const Hw = shouldHideLayoutOrColor
+export const KY = shouldHideColor
+export const hX = formatScaledValue
+export const nk = formatNumber
+export const tK = MeasureUnitType
+export const vy = shouldHideLayout

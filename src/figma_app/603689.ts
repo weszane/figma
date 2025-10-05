@@ -24,7 +24,7 @@ import { yx as DeprecatedXHRSendBindings } from '../905/41973';
 import { d as _$$d7 } from '../905/68441';
 import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677';
 import { executeWhenDomReady } from '../905/78171';
-import { an as _$$an, y$ } from '../905/81009';
+import { resetTileSelection, selectTiles } from '../905/81009';
 import { x as CoreUtils } from '../905/89282';
 import { X as tsGlContextBindings } from '../905/91006';
 import { FP as _$$FP } from '../905/98947';
@@ -38,7 +38,7 @@ import { ImageOverlayComponent } from '../905/129046';
 import { KindEnum } from '../905/129884';
 import { a as _$$a4, J as _$$J } from '../905/142348';
 import { E as _$$E2 } from '../905/142894';
-import { t as _$$t2 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { OnboardingSequence } from '../905/152487';
 import { showModalHandler } from '../905/156213';
 import { ox as _$$ox } from '../905/163832';
@@ -47,7 +47,7 @@ import { UpsellModalType } from '../905/165519';
 import { m as _$$m2 } from '../905/168176';
 import { NotificationCategory } from '../905/170564';
 import { P as _$$P3 } from '../905/175083';
-import { g as _$$g2 } from '../905/181093';
+import { SuspenseWithGuardrail } from '../905/181093';
 import { Y as _$$Y3 } from '../905/185567';
 import { ThemeContext } from '../905/187165';
 import { featureAPI } from '../905/189279';
@@ -320,7 +320,7 @@ import { xo as EditScopeWebBindings } from '../figma_app/106634';
 import { b as _$$b2 } from '../figma_app/108592';
 import { u as _$$u6 } from '../figma_app/110635';
 import { sitesViewSetterAtomFamily } from '../figma_app/115923';
-import { dP as _$$dP, M3 as _$$M3 } from '../figma_app/119475';
+import { KeyboardNavigationProvider, useKeyboardNavigationItem } from '../figma_app/119475';
 import { yB } from '../figma_app/120294';
 import { $ as _$$$2, E as _$$E5 } from '../figma_app/126651';
 import { F as _$$F8 } from '../figma_app/127204';
@@ -435,7 +435,7 @@ import { yu as WhiteboardDltConstantBindings } from '../figma_app/533986';
 import { q4 } from '../figma_app/536669';
 import { Lj as AccessibilityBindings, xM } from '../figma_app/539925';
 import { yH } from '../figma_app/540726';
-import { nb as _$$nb, fA, Tf } from '../figma_app/543100';
+import { TileType, createFileTile, TileUtils } from '../figma_app/543100';
 import { latestSurveyResponseDateAtom, userFlagAtomFamily, userFlagExistsAtomFamily } from '../figma_app/545877';
 import { N as _$$N, Gm } from '../figma_app/548577';
 import { isFigmakeSitesEnabled, useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
@@ -470,7 +470,7 @@ import { assetCategoryAtom, AssetCategoryEnum } from '../figma_app/639711';
 import { jW } from '../figma_app/640683';
 import { zl as _$$zl, ST } from '../figma_app/641749';
 import { xn, Yk } from '../figma_app/644079';
-import { rS as HandoffCallbacks } from '../figma_app/644255';
+import { nodeChangeHandler } from '../figma_app/644255';
 import { batchFetchFiles } from '../figma_app/646357';
 import { P as _$$P4 } from '../figma_app/650304';
 import { R as _$$R6 } from '../figma_app/652260';
@@ -597,7 +597,7 @@ function ec(e) {
   let d = he([...notificationFeedMap.values()], a);
   let c = _$$e2(d);
   let u = useHighPriorityNotificationsExperiment(c);
-  let [p, _, h] = _$$t2.useTabs({
+  let [p, _, h] = Tabs.useTabs({
     all: !0,
     priority: !!u && c,
     unread: !0
@@ -653,13 +653,13 @@ function ec(e) {
         isFetchingNotifications,
         notifications: d,
         markAllAsReadFn
-      }), jsx(_$$t2.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ..._.all,
         children: E(d)
-      }), jsx(_$$t2.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ..._.priority,
         children: E(g)
-      }), jsx(_$$t2.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ..._.unread,
         children: E(f)
       })]
@@ -1759,7 +1759,7 @@ let ns = {
   AssetMirrorBindings: () => assetMirrorInstance,
   AssetConsumptionMirrorBindings: () => AssetConsumptionMirrorBindings,
   HandoffBindings: () => fullscreenAlias,
-  HandoffCallbacks: () => HandoffCallbacks,
+  HandoffCallbacks: () => nodeChangeHandler,
   JSTextLayout: () => JSTextLayout,
   ScaleToolAPIBindings: () => ScaleToolAPIBindings,
   LinterBindings: () => LinterBindings,
@@ -5180,7 +5180,7 @@ function lF({
   let p = n || i;
   let {
     setKeyboardNavigationElement
-  } = _$$M3({
+  } = useKeyboardNavigationItem({
     path: [$t],
     column: t,
     disabled: p
@@ -5284,7 +5284,7 @@ let lZ = 'recent_files--placeholdersContainer--mAriX';
 let lQ = 'recent_files--fadeOut--A045K';
 var l0 = (e => (e[e.LOADING = 0] = 'LOADING', e[e.TRANSITIONING = 1] = 'TRANSITIONING', e[e.LOADED = 2] = 'LOADED', e))(l0 || {});
 function l1(e) {
-  return e.type === _$$nb.FILE ? e.file : fileEntityDataMapper.toLiveGraph(e.mainFile);
+  return e.type === TileType.FILE ? e.file : fileEntityDataMapper.toLiveGraph(e.mainFile);
 }
 function l2(e) {
   let [t, r] = useState(e ? 2 : 0);
@@ -5304,7 +5304,7 @@ function l5({
   let r = selectCurrentUser();
   let n = useSelector(e => e.activeFileUsers);
   let i = lJ().status === 'loaded';
-  let a = useMemoCustom(() => filterNotNullish(e.map(e => e.type === _$$nb.FILE || e.type === _$$nb.REPO ? l1(e).key : null)), [e], (e, t) => {
+  let a = useMemoCustom(() => filterNotNullish(e.map(e => e.type === TileType.FILE || e.type === TileType.REPO ? l1(e).key : null)), [e], (e, t) => {
     let r = new Set(e);
     for (let e of t) {
       if (!r.has(e)) return !1;
@@ -5352,7 +5352,7 @@ function l5({
       }), u !== 0 && jsx('ul', {
         className: 'recent_files--loadedRecentFiles--lT-EL',
         children: e.map((e, t) => {
-          let i = Tf.getId(e);
+          let i = TileUtils.getId(e);
           return jsx(_$$Fragment, {
             children: jsx(l3, {
               item: e,
@@ -5374,14 +5374,14 @@ function l3({
 }) {
   let i;
   let a = useDispatch();
-  let s = Tf.getName(e);
+  let s = TileUtils.getName(e);
   let o = useRef(null);
   let [d, c] = useState(null);
   useEffect(() => {
     o.current && (o.current.offsetWidth < o.current.scrollWidth && s ? c(s) : c(null));
   }, [o, s]);
   let u = useRef(null);
-  let p = _$$M3({
+  let p = useKeyboardNavigationItem({
     path: [FC, t]
   });
   useEffect(() => {
@@ -5405,34 +5405,34 @@ function l3({
   }, [p.isFocused]);
   let _ = [];
   switch (e.type) {
-    case _$$nb.FILE:
-    case _$$nb.REPO:
+    case TileType.FILE:
+    case TileType.REPO:
       {
         let t = l1(e);
         i = getDesignFileUrl(t);
         _ = gH(r, n.id, t.key);
         break;
       }
-    case _$$nb.PROTOTYPE:
+    case TileType.PROTOTYPE:
       i = e.prototype.url;
       break;
     default:
       throwTypeError(e);
   }
-  let h = Tf.getAccessedAt(e);
+  let h = TileUtils.getAccessedAt(e);
   return jsx('li', {
     className: 'recent_files--fileListItemContainer--HM7J0',
     children: jsxs(LinkPrimitive, {
       className: 'recent_files--fileListItem--Czr-8',
       href: i,
       onClick(t) {
-        if (t.preventDefault(), e.type === _$$nb.FILE || e.type === _$$nb.REPO) {
+        if (t.preventDefault(), e.type === TileType.FILE || e.type === TileType.REPO) {
           let t = l1(e);
           a(I$({
             fileKey: t.key
           }));
         } else {
-          e.type === _$$nb.PROTOTYPE && a(Mx({
+          e.type === TileType.PROTOTYPE && a(Mx({
             fileKey: e.prototype.file_key,
             pageId: e.prototype.page_id
           }));
@@ -5525,7 +5525,7 @@ function l8() {
   }));
   let {
     setKeyboardNavigationElement
-  } = _$$M3({
+  } = useKeyboardNavigationItem({
     path: [_$$lW]
   });
   return jsx('div', {
@@ -5637,17 +5637,17 @@ function dr() {
   let A = useMemo(() => {
     if (a) return v.current;
     let e = [];
-    for (let r of t ?? []) e.push(fA(r));
+    for (let r of t ?? []) e.push(createFileTile(r));
     for (let t of r ?? []) {
       e.push({
-        type: _$$nb.PROTOTYPE,
+        type: TileType.PROTOTYPE,
         prototype: t
       });
     }
     for (let t of n) {
       let r = t.files.find(e => isDefaultFile(e, t.repo));
       r && e.push({
-        type: _$$nb.REPO,
+        type: TileType.REPO,
         repo: t.repo,
         branches: t.files,
         accessed_at: t.timestamp,
@@ -5656,8 +5656,8 @@ function dr() {
       });
     }
     e.sort((e, t) => {
-      let r = Tf.getAccessedAt(e);
-      let n = Tf.getAccessedAt(t);
+      let r = TileUtils.getAccessedAt(e);
+      let n = TileUtils.getAccessedAt(t);
       return r && n ? -r.localeCompare(n) : n ? 1 : r ? -1 : 0;
     });
     return e.slice(0, 10);
@@ -5688,7 +5688,7 @@ function dr() {
   } = JO();
   return s ? jsx(dn, {
     backgroundColor: s
-  }) : jsxs(_$$dP, {
+  }) : jsxs(KeyboardNavigationProvider, {
     overrideUp,
     overrideDown,
     children: [jsx(y7, {}), jsxs('div', {
@@ -6430,9 +6430,9 @@ function ci({
       isSelected: e.file.key === a,
       onContextMenu: t => {
         t.preventDefault();
-        d(_$$an());
-        d(y$({
-          type: e.type === _$$nb.PINNED_FILE ? ComFileType.PINNED_FILES : ComFileType.FILES,
+        d(resetTileSelection());
+        d(selectTiles({
+          type: e.type === TileType.PINNED_FILE ? ComFileType.PINNED_FILES : ComFileType.FILES,
           tiles: [e]
         }));
         show({
@@ -6498,9 +6498,9 @@ function co() {
   }));
   handleSuspenseRetainRelease(i);
   let a = i.unwrapOr(void 0)?.project?.pinnedFiles;
-  let s = useMemo(() => n.filter(e => !a || !a.some(t => t.file?.key === e.key)).map(e => fA(e)).sort((e, t) => {
-    let r = Tf.getTouchedAt(e);
-    let n = Tf.getTouchedAt(t);
+  let s = useMemo(() => n.filter(e => !a || !a.some(t => t.file?.key === e.key)).map(e => createFileTile(e)).sort((e, t) => {
+    let r = TileUtils.getTouchedAt(e);
+    let n = TileUtils.getTouchedAt(t);
     return r === null || n === null ? 0 : r > n ? -1 : 1;
   }).slice(0, 50), [n, a]);
   return jsx(ci, {
@@ -6533,7 +6533,7 @@ function cu() {
   let n = r.unwrapOr(void 0)?.project?.pinnedFiles;
   assert(!!n, 'Pinned Files is undefined');
   let i = useMemo(() => n.filter(e => !!e.file).map(e => ({
-    type: _$$nb.PINNED_FILE,
+    type: TileType.PINNED_FILE,
     file: e.file
   })), [n]);
   let a = useDispatch();
@@ -8682,7 +8682,7 @@ function _v({
         children: e
       })]
     }),
-    children: jsxs(_$$g2, {
+    children: jsxs(SuspenseWithGuardrail, {
       fallback: jsx(xZ, {}),
       children: [(isDesignOrIllustration(e) || e === FEditorType.DevHandoff) && jsx(_A, {}), jsx(_S, {
         editorType: e,
@@ -9202,7 +9202,7 @@ executeWhenDomReady(async () => {
         AssetConsumptionMirrorBindings: () => AssetConsumptionMirrorBindings,
         HandoffBindings: () => fullscreenAlias,
         LinterBindings: () => LinterBindings,
-        HandoffCallbacks: () => HandoffCallbacks,
+        HandoffCallbacks: () => nodeChangeHandler,
         ScaleToolAPIBindings: () => ScaleToolAPIBindings,
         EmojiTsBindings: () => EmojiTsBindings,
         NodeChatMessageHelper: () => NodeChatMessageHelper,

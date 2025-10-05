@@ -1,94 +1,174 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { Fragment } from "react";
-import { formatNumber } from "../figma_app/930338";
-import { Wi } from "../figma_app/162641";
-import { LoadingRenderer } from "../905/211326";
-import { renderI18nText } from "../905/303541";
-import { V } from "../905/697254";
-import { zi, iL } from "../905/824449";
-import { SvgComponent } from "../905/714743";
-import { U } from "../905/604606";
-function m({
-  type: e
-}) {
-  let t = U(e);
-  return jsx(SvgComponent, {
-    svg: t
-  });
+import { Fragment } from "react"
+import { jsx, jsxs } from "react/jsx-runtime"
+import { LoadingRenderer } from "../905/211326"
+import { renderI18nText } from "../905/303541"
+import { U } from "../905/604606"
+import { V } from "../905/697254"
+import { SvgComponent } from "../905/714743"
+import { iL, zi } from "../905/824449"
+import { Wi } from "../figma_app/162641"
+import { formatNumber } from "../figma_app/930338"
+
+interface StatBase {
+  header: string
+  word?: string
+  count?: number
 }
-let h = "overview_stats_view--sectionHeader--0xDdk library_section_header--sectionHeader--U79xZ";
-let g = "overview_stats_view--stat--XjnZv text--fontPos14--OL9Hp text--_fontBase--QdLsd";
-export function $$f0({
-  isLoading: e,
-  stats: t
-}) {
+
+interface DescriptionAndImageStat extends StatBase {
+  type: typeof V.DESCRIPTION_AND_IMAGE
+  imageData: {
+    type: "variable" | "style" | "image"
+    variableType?: string
+    style?: any
+    url?: string
+  }
+  description?: string
+}
+
+interface CountStat extends StatBase {
+  type: typeof V.COUNT
+}
+
+type Stat = DescriptionAndImageStat | CountStat
+
+interface StatIconProps {
+  type: string
+}
+
+/**
+ * Renders an SVG icon based on the provided type
+ * @param props - Component props
+ * @returns JSX element
+ */
+function StatIcon({ type }: StatIconProps) {
+  const svgData = U(type)
+  return jsx(SvgComponent, {
+    svg: svgData,
+  })
+}
+
+const SECTION_HEADER_CLASS_NAME = "overview_stats_view--sectionHeader--0xDdk library_section_header--sectionHeader--U79xZ"
+const STAT_CLASS_NAME = "overview_stats_view--stat--XjnZv text--fontPos14--OL9Hp text--_fontBase--QdLsd"
+
+interface OverviewStatsViewProps {
+  isLoading: boolean
+  stats: Stat[]
+}
+
+/**
+ * Main component for displaying overview statistics
+ * @param props - Component props
+ * @returns JSX element
+ */
+export function OverviewStatsView({ isLoading, stats }: OverviewStatsViewProps) {
   return jsx("div", {
     className: "overview_stats_view--overviewStats--vEzXs",
-    children: t.map(t => {
-      let i = t.type === V.DESCRIPTION_AND_IMAGE ? "Description" : t.header;
+    children: stats.map((stat) => {
+      const key = stat.type === V.DESCRIPTION_AND_IMAGE ? "Description" : stat.header
       return jsx(Fragment, {
-        children: t.type === V.DESCRIPTION_AND_IMAGE ? jsx(LoadingRenderer, {
-          isLoading: e,
-          className: g,
-          children: () => jsx(_, {
-            stat: t
+        children: stat.type === V.DESCRIPTION_AND_IMAGE
+          ? jsx(LoadingRenderer, {
+            isLoading,
+            className: STAT_CLASS_NAME,
+            children: () => jsx(DescriptionAndImageStatComponent, {
+              stat: stat as DescriptionAndImageStat,
+            }),
           })
-        }) : jsx(A, {
-          stat: t,
-          isLoading: e
-        })
-      }, i);
-    })
-  });
+          : jsx(CountStatComponent, {
+            stat: stat as CountStat,
+            isLoading,
+          }),
+      }, key)
+    }),
+  })
 }
-function _({
-  stat: e
-}) {
+
+interface DescriptionAndImageStatProps {
+  stat: DescriptionAndImageStat
+}
+
+/**
+ * Component for rendering description and image statistics
+ * @param props - Component props
+ * @returns JSX element
+ */
+function DescriptionAndImageStatComponent({ stat }: DescriptionAndImageStatProps) {
   return jsxs("div", {
-    className: "overview_stats_view--componentDescriptionAndImage--ijsqj",
+    "className": "overview_stats_view--componentDescriptionAndImage--ijsqj",
     "data-testid": "overview-stats-description-and-image",
-    children: ["variable" === e.imageData.type ? jsx("div", {
-      className: "overview_stats_view--variableIcon--jbynq overview_stats_view--_baseImage--klmBx",
-      children: jsx(m, {
-        type: e.imageData.variableType
-      })
-    }) : "style" === e.imageData.type ? jsx("div", {
-      className: "overview_stats_view--styleIcon--3vy99 overview_stats_view--_baseImage--klmBx",
-      children: jsx(zi, {
-        dsStyle: e.imageData.style,
-        disableOutline: !0,
-        size: iL.Large_DSA
-      })
-    }) : jsx("img", {
-      src: e.imageData.url,
-      className: "overview_stats_view--componentImage---YJZq overview_stats_view--_baseImage--klmBx",
-      alt: ""
-    }), null != e.description && jsxs("div", {
-      children: [jsx("div", {
-        className: h,
-        children: renderI18nText("design_systems.libraries_modal.description")
-      }), jsx("div", {
-        className: "overview_stats_view--componentDescription--lR6ir text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-        children: e.description
-      })]
-    })]
-  });
+    "children": [
+      stat.imageData.type === "variable"
+        ? jsx("div", {
+          className: "overview_stats_view--variableIcon--jbynq overview_stats_view--_baseImage--klmBx",
+          children: jsx(StatIcon, {
+            type: stat.imageData.variableType!,
+          }),
+        })
+        : stat.imageData.type === "style"
+          ? jsx("div", {
+            className: "overview_stats_view--styleIcon--3vy99 overview_stats_view--_baseImage--klmBx",
+            children: jsx(zi, {
+              dsStyle: stat.imageData.style,
+              disableOutline: true,
+              size: iL.Large_DSA,
+            }),
+          })
+          : jsx("img", {
+            src: stat.imageData.url,
+            className: "overview_stats_view--componentImage---YJZq overview_stats_view--_baseImage--klmBx",
+            alt: "",
+          }),
+      stat.description != null && jsxs("div", {
+        children: [
+          jsx("div", {
+            className: SECTION_HEADER_CLASS_NAME,
+            children: renderI18nText("design_systems.libraries_modal.description"),
+          }),
+          jsx("div", {
+            className: "overview_stats_view--componentDescription--lR6ir text--fontPos14--OL9Hp text--_fontBase--QdLsd",
+            children: stat.description,
+          }),
+        ],
+      }),
+    ],
+  })
 }
-function A({
-  stat: e,
-  isLoading: t = !1
-}) {
-  return e.word ? jsxs("div", {
+
+interface CountStatComponentProps {
+  stat: CountStat
+  isLoading?: boolean
+}
+
+/**
+ * Component for rendering count-based statistics
+ * @param props - Component props
+ * @returns JSX element or null if no word is defined
+ */
+function CountStatComponent({ stat, isLoading = false }: CountStatComponentProps) {
+  // Early return if no word is defined
+  if (!stat.word) {
+    return null
+  }
+
+  return jsxs("div", {
     "data-testid": "overview-stats-count",
-    children: [jsx("div", {
-      className: h,
-      children: e.header
-    }), t ? jsx(Wi, {
-      className: "overview_stats_view--statLoading--3DxiI"
-    }) : jsx("div", {
-      className: g,
-      children: null == e.count ? "" : `${formatNumber(e.count)} ${e.word}`
-    })]
-  }) : null;
+    "children": [
+      jsx("div", {
+        className: SECTION_HEADER_CLASS_NAME,
+        children: stat.header,
+      }),
+      isLoading
+        ? jsx(Wi, {
+          className: "overview_stats_view--statLoading--3DxiI",
+        })
+        : jsx("div", {
+          className: STAT_CLASS_NAME,
+          children: stat.count == null ? "" : `${formatNumber(stat.count)} ${stat.word}`,
+        }),
+    ],
+  })
 }
-export const c = $$f0;
+
+// Export with a more descriptive name
+export const c = OverviewStatsView

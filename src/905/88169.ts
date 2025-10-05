@@ -3,7 +3,7 @@ import { useMemo, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonPrimitive } from "../905/632989";
 import o from "classnames";
-import { zq } from "../905/193529";
+import { lastCreatedCommentIdAction } from "../905/193529";
 import { l as _$$l } from "../905/600666";
 import { o as _$$o } from "../905/602035";
 import { rH } from "../figma_app/404319";
@@ -25,7 +25,7 @@ export function $$m0({
   let b = useDispatch();
   let v = useSelector(e => e.screenreader.lastCreatedCommentId);
   useLayoutEffect(() => {
-    v && i === v && (A?.current?.focus(), b(zq({
+    v && i === v && (A?.current?.focus(), b(lastCreatedCommentIdAction({
       lastCreatedCommentId: null
     })));
   }, [v, i, b, A]);

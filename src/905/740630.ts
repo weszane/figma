@@ -10,7 +10,7 @@ import { _C } from "../figma_app/709893";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { FX } from "../figma_app/12491";
 import { sF } from "../figma_app/777207";
-import { t as _$$t2 } from "../905/511388";
+import { DefaultLibraryIcon } from "../905/511388";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { Sh } from "../figma_app/803787";
 import { I as _$$I } from "../figma_app/130633";
@@ -160,7 +160,7 @@ export function $$x0({
             libraryKey: t
           }) => jsx(S, {
             value: t,
-            rightIcon: jsx(_$$t2, {}),
+            rightIcon: jsx(DefaultLibraryIcon, {}),
             text: allLibrariesByLibraryKey.get(t)?.name ?? "",
             showTooltipOnEllipsis: e
           }, t))]

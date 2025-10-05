@@ -1,292 +1,536 @@
-import { createContext, forwardRef, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { jsx } from 'react/jsx-runtime';
-import { useStableMemo } from '../905/19536';
-import { isExactModifier, ModifierKeyCodes } from '../905/63728';
-import { RecordableDiv } from '../905/511649';
-import { logger } from '../905/651849';
-import { noop } from 'lodash-es';;
-import { assertNotNullish, isNullish } from '../figma_app/95419';
-import { throwTypeError } from '../figma_app/465776';
-import { findNearest, findNext, findPrevious, popLast } from '../figma_app/656233';
-import { BrowserInfo } from '../figma_app/778880';
-let h = {
-  preventScroll: !1,
-  block: 'nearest'
-};
-let m = {
-  supportHorizontalNavigation: !0,
-  simulateClickOnEnter: !0
-};
-class g {
+import { noop } from 'lodash-es'
+import { createContext, forwardRef, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { useStableMemo } from '../905/19536'
+import { isExactModifier, ModifierKeyCodes } from '../905/63728'
+import { RecordableDiv } from '../905/511649'
+import { logger } from '../905/651849'
+import { assertNotNullish, isNullish } from '../figma_app/95419'
+import { throwTypeError } from '../figma_app/465776'
+import { findNearest, findNext, findPrevious, popLast } from '../figma_app/656233'
+import { BrowserInfo } from '../figma_app/778880'
+
+
+interface FocusOptions extends ScrollIntoViewOptions {
+  preventScroll: boolean
+}
+
+interface TreeNode {
+  type: 'parent' | 'leaf'
+  children?: TreeNode[]
+  items?: KeyboardNavigationItem[]
+}
+
+interface KeyboardItemNavigationOptions {
+  supportHorizontalNavigation: boolean
+  simulateClickOnEnter: boolean
+  skipOnDownNavigation?: boolean
+  skipOnRightNavigation?: boolean
+  fauxFocusByDefault?: boolean
+}
+
+interface TreeNode {
+  type: 'parent' | 'leaf'
+  children?: TreeNode[]
+  items?: KeyboardNavigationItem[]
+}
+
+interface KeyboardNavigationItemConstructor {
+  id?: string
+  path: number[]
+  column?: number
+  element: HTMLElement
+  defaultFocusOptions?: FocusOptions
+  setIsFauxFocused: (isFauxFocused: boolean, item: KeyboardNavigationItem) => void
+  fauxClick?: () => void
+  onFocusThroughKeyboardNavigation?: () => void
+  keyboardItemNavigationOptions?: KeyboardItemNavigationOptions
+}
+
+interface KeyboardNavigationContextValue {
+  tree: TreeNode
+  lookupMap: Map<string, KeyboardNavigationItem>
+  onFocusItem: (item: KeyboardNavigationItem) => void
+  onBlurItem: (item: KeyboardNavigationItem) => void
+  onFauxFocusItem: (item: KeyboardNavigationItem, onBlur: () => void) => void
+  onFauxBlurItem: (item: KeyboardNavigationItem) => void
+  fauxBlurItem: () => void
+  blurItem: () => void
+  setDefaultFauxFocusedItem: (item: KeyboardNavigationItem | null) => void
+  fauxFocusDefaultItem: () => void
+  useKeyNavFauxFocusSync?: boolean
+}
+
+interface UseKeyboardNavigationItemProps {
+  path: number[]
+  column?: number | null
+  id?: string
+  defaultFocusOptions?: FocusOptions
+  onFocus?: () => void
+  onBlur?: () => void
+  onFauxFocus?: () => void
+  onFauxBlur?: () => void
+  onFocusThroughKeyboardNavigation?: () => void
+  fauxClick?: () => void
+  disabled?: boolean
+  navigationOptions?: KeyboardItemNavigationOptions
+}
+
+interface UseKeyboardNavigationItemReturn {
+  setKeyboardNavigationElement: (element: HTMLElement | null) => void
+  keyboardNavigationItem: KeyboardNavigationItem | null
+  isFocused: boolean
+  isFauxFocused: boolean
+}
+// Original: h
+const DEFAULT_FOCUS_OPTIONS: FocusOptions = {
+  preventScroll: false,
+  block: 'nearest',
+}
+
+// Original: m
+const DEFAULT_NAVIGATION_OPTIONS = {
+  supportHorizontalNavigation: true,
+  simulateClickOnEnter: true,
+}
+
+/**
+ * Represents a keyboard navigation item in the tree structure.
+ * Original: g
+ */
+class KeyboardNavigationItem {
+  id: string | undefined
+  path: number[]
+  column: number | null
+  element: HTMLElement
+  defaultFocusOptions: FocusOptions
+  setIsFauxFocused: (isFauxFocused: boolean, item: KeyboardNavigationItem) => void
+  fauxClick: (() => void) | undefined
+  onFocusThroughKeyboardNavigation: (() => void) | undefined
+  navigationOptions: { supportHorizontalNavigation: boolean, simulateClickOnEnter: boolean, skipOnDownNavigation?: boolean, skipOnRightNavigation?: boolean, fauxFocusByDefault?: boolean }
+
   constructor({
-    id: e,
-    path: t,
-    column: r,
-    element: n,
-    defaultFocusOptions: i = h,
-    setIsFauxFocused: a,
-    fauxClick: s,
-    onFocusThroughKeyboardNavigation: o,
-    keyboardItemNavigationOptions: l = m
-  }) {
-    this.id = e;
-    this.path = t;
-    this.column = r;
-    this.element = n;
-    this.defaultFocusOptions = i;
-    this.setIsFauxFocused = a;
-    this.fauxClick = s;
-    this.onFocusThroughKeyboardNavigation = o;
-    this.navigationOptions = l;
+    id,
+    path,
+    column,
+    element,
+    defaultFocusOptions = DEFAULT_FOCUS_OPTIONS,
+    setIsFauxFocused,
+    fauxClick,
+    onFocusThroughKeyboardNavigation,
+    keyboardItemNavigationOptions = DEFAULT_NAVIGATION_OPTIONS,
+  }: KeyboardNavigationItemConstructor) {
+    this.id = id
+    this.path = path
+    this.column = column
+    this.element = element
+    this.defaultFocusOptions = defaultFocusOptions
+    this.setIsFauxFocused = setIsFauxFocused
+    this.fauxClick = fauxClick
+    this.onFocusThroughKeyboardNavigation = onFocusThroughKeyboardNavigation
+    this.navigationOptions = keyboardItemNavigationOptions
   }
-  addToTree(e, t) {
-    this.tree = e;
-    (function (e, t) {
-      let r;
-      let {
-        path,
-        column
-      } = t;
+
+  tree: TreeNode // Original: this.tree
+
+  /**
+   * Adds this item to the navigation tree.
+   */
+  addToTree(tree: any, lookupMap: Map<string, KeyboardNavigationItem> | null) {
+    this.tree = tree
+    // Original: (function (e, t) { ... })(e, this)
+    const addItemToTree = (tree: any, item: KeyboardNavigationItem) => {
+      let leaf: any
+      const { path, column } = item
       try {
-        r = P(e, path, !0);
-      } catch (e) {
-        logger.warn('Failed to add item to KeyboardNavigationProvider tree: ', t);
-        return;
+        leaf = getLeaf(tree, path, true)
       }
-      let a = column ?? 0;
-      let s = r.items[a]?.element;
-      s && s !== t.element && logger.warn('Overwriting item in KeyboardNavigationProvider tree. Existing item: ', r.items[a], ' New item: ', t);
-      r.items[a] = t;
-    })(e, this);
-    t && this.id && t.set(this.id, this);
+      catch {
+        logger.warn('Failed to add item to KeyboardNavigationProvider tree: ', item)
+        return
+      }
+      const col = column ?? 0
+      const existingItem = leaf.items[col]?.element
+      if (existingItem && existingItem !== item.element) {
+        logger.warn('Overwriting item in KeyboardNavigationProvider tree. Existing item: ', leaf.items[col], ' New item: ', item)
+      }
+      leaf.items[col] = item
+    }
+    addItemToTree(tree, this)
+    if (lookupMap && this.id) {
+      lookupMap.set(this.id, this)
+    }
   }
-  removeFromTree(e) {
-    this.tree && (function (e, t) {
-      let r;
-      let n;
-      let {
-        path,
-        column
-      } = t;
-      try {
-        r = (n = P(e, path)).items[column || 0] ?? null;
-      } catch (e) {
-        logger.warn('Item not found in KeyboardNavigationProvider tree: ', t);
-        return;
-      }
-      if (!r) {
-        logger.warn('Item not found in KeyboardNavigationProvider tree: ', t);
-        return;
-      }
-      if (r.element !== t.element) {
-        logger.warn('Item found in KeyboardNavigationProvider tree, but it does not match the expected item: ', r, t);
-        return;
-      }
-      if (n.items[column || 0] = void 0, n.items.every(isNullish)) {
-        L(e, path.slice(0, -1)).children[path[path.length - 1]] = void 0;
-        for (let t = path.length - 1; t >= 1; t--) {
-          let r = path.slice(0, t);
-          let [n, s] = popLast(r);
-          let o = L(e, n);
-          if (L(e, r).children.every(isNullish)) o.children[s] = void 0;else break;
+
+  /**
+   * Removes this item from the navigation tree.
+   */
+  removeFromTree(lookupMap: Map<string, KeyboardNavigationItem> | null) {
+    if (this.tree) {
+      // Original: (function (e, t) { ... }(this.tree, this))
+      const removeItemFromTree = (tree: any, item: KeyboardNavigationItem) => {
+        let leaf: any
+        let parent: any
+        const { path, column } = item
+        try {
+          parent = getLeaf(tree, path)
+          leaf = parent.items[column || 0] ?? null
         }
-        e.children.every(isNullish) && (e.children = []);
+        catch {
+          logger.warn('Item not found in KeyboardNavigationProvider tree: ', item)
+          return
+        }
+        if (!leaf) {
+          logger.warn('Item not found in KeyboardNavigationProvider tree: ', item)
+          return
+        }
+        if (leaf.element !== item.element) {
+          logger.warn('Item found in KeyboardNavigationProvider tree, but it does not match the expected item: ', leaf, item)
+          return
+        }
+        parent.items[column || 0] = undefined
+        if (parent.items.every(isNullish)) {
+          getParent(tree, path.slice(0, -1)).children[path[path.length - 1]] = undefined
+          for (let i = path.length - 1; i >= 1; i--) {
+            const ancestorPath = path.slice(0, i)
+            const [parentPath, index] = popLast(ancestorPath)
+            const ancestorParent = getParent(tree, parentPath)
+            if (getParent(tree, ancestorPath).children.every(isNullish)) {
+              ancestorParent.children[index] = undefined
+            }
+            else {
+              break
+            }
+          }
+          if (tree.children.every(isNullish)) {
+            tree.children = []
+          }
+        }
       }
-    }(this.tree, this), this.tree = void 0);
-    e && this.id && e.$$delete(this.id);
+      removeItemFromTree(this.tree, this)
+      this.tree = undefined
+    }
+    if (lookupMap && this.id) {
+      lookupMap.delete(this.id)
+    }
   }
-  focus(e = this.defaultFocusOptions) {
-    this.element.focus({
-      preventScroll: !0
-    });
-    this.onFocusThroughKeyboardNavigation?.();
-    e.preventScroll || this.element.scrollIntoView(e);
+
+  /**
+   * Focuses the element.
+   */
+  focus(options = this.defaultFocusOptions) {
+    this.element.focus({ preventScroll: true })
+    this.onFocusThroughKeyboardNavigation?.()
+    if (!options.preventScroll) {
+      this.element.scrollIntoView(options)
+    }
   }
+
+  /**
+   * Blurs the element.
+   */
   blur() {
-    this.element.blur();
+    this.element.blur()
   }
-  fauxFocus(e = this.defaultFocusOptions) {
-    this.setIsFauxFocused(!0, this);
-    e.preventScroll || this.element.scrollIntoView(e);
+
+  /**
+   * Sets faux focus on the item.
+   */
+  fauxFocus(options = this.defaultFocusOptions) {
+    this.setIsFauxFocused(true, this)
+    if (!options.preventScroll) {
+      this.element.scrollIntoView(options)
+    }
   }
+
+  /**
+   * Removes faux focus from the item.
+   */
   fauxBlur() {
-    this.setIsFauxFocused(!1, this);
+    this.setIsFauxFocused(false, this)
   }
+
+  /**
+   * Simulates a click on the element.
+   */
   simulateClick() {
-    this.fauxClick ? this.fauxClick() : this.element.dispatchEvent(new MouseEvent('click', {
-      view: window,
-      bubbles: !0,
-      cancelable: !0
-    }));
+    if (this.fauxClick) {
+      this.fauxClick()
+    }
+    else {
+      this.element.dispatchEvent(new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+      }))
+    }
   }
+
+  /**
+   * Gets the item above this one.
+   */
   getItemAbove() {
-    return this.tree && R(this.tree, this, 'up');
+    return this.tree ? findVerticalItem(this.tree, this, 'up') : null
   }
+
+  /**
+   * Gets the item below this one, skipping items that should be skipped.
+   */
   getItemBelow() {
-    if (!this.tree) return null;
-    let e = R(this.tree, this, 'down') || null;
-    for (; e && e.navigationOptions.skipOnDownNavigation;) e = e.getItemBelow();
-    return e;
+    if (!this.tree)
+      return null
+    let item = findVerticalItem(this.tree, this, 'down') || null
+    while (item && item.navigationOptions.skipOnDownNavigation) {
+      item = item.getItemBelow()
+    }
+    return item
   }
+
+  /**
+   * Gets the item to the left of this one.
+   */
   getItemToTheLeft() {
-    return this.tree && O(this.tree, this, 'left');
+    return this.tree ? findHorizontalItem(this.tree, this, 'left') : null
   }
+
+  /**
+   * Gets the item to the right of this one, skipping items that should be skipped.
+   */
   getItemToTheRight() {
-    if (!this.tree) return null;
-    let e = O(this.tree, this, 'right') || null;
-    for (; e && e.navigationOptions.skipOnRightNavigation;) e = e.getItemToTheRight();
-    return e;
+    if (!this.tree)
+      return null
+    let item = findHorizontalItem(this.tree, this, 'right') || null
+    while (item && item.navigationOptions.skipOnRightNavigation) {
+      item = item.getItemToTheRight()
+    }
+    return item
   }
 }
-let f = createContext(null);
-let $$E4 = forwardRef(({
-  onKeyDown: e,
-  allowVim: t = !1,
-  disabled: r,
-  overrideDown: a,
-  overrideUp: s,
-  overrideLeft: l,
-  overrideRight: d,
-  allowHorizontalNavigationWhileInputFocused: c = !1,
-  useKeyNavFauxFocusSync: u,
-  useFocusOnly: p,
-  useDisplayContents: h,
-  stopPropagationOnEventHandle: m = !1,
-  ...g
-}, E) => {
-  let y = useRef({
-    type: 'parent',
-    children: []
-  });
-  let b = useRef(new Map());
-  let T = useRef(null);
-  let I = useCallback(e => {
-    T.current === e && (T.current = null);
-  }, []);
-  let N = useCallback(e => {
-    T.current = e;
-  }, []);
-  let C = useRef(null);
-  let w = useRef(null);
-  let O = useRef(noop);
-  let R = useCallback(e => {
-    e === C.current && (C.current = null, O.current(), O.current = noop);
-  }, []);
-  let L = useCallback((e, t) => {
-    C.current && R(C.current);
-    C.current = e;
-    O.current = t;
-  }, [R]);
-  let P = useCallback(e => {
-    m && e.stopPropagation();
-    e.preventDefault();
-  }, [m]);
-  let M = useCallback(r => {
-    let n = T.current;
-    let i = C.current;
-    let o = k(r);
-    let u = !(r.metaKey || r.ctrlKey || r.altKey || r.shiftKey) && c;
-    if ($$S3(r, t)) {
-      if (i && !p) {
-        P(r);
-        let e = D(y.current, i, s);
-        e ? e?.fauxFocus() : i.getItemAbove()?.fauxFocus();
-      } else if (n) {
-        P(r);
-        let e = D(y.current, n, s);
-        e ? e?.focus() : n.getItemAbove()?.focus();
-      }
-    } else if ($$v1(r, t)) {
-      if (i && !p) {
-        P(r);
-        let e = D(y.current, i, a);
-        e ? e?.fauxFocus() : i.getItemBelow()?.fauxFocus();
-      } else if (n) {
-        P(r);
-        let e = D(y.current, n, a);
-        e ? e?.focus() : n.getItemBelow()?.focus();
-      } else {
-        w.current && w.current.fauxFocus();
-      }
-    } else if ($$A7(o, t, u)) {
-      if (i && i.navigationOptions.supportHorizontalNavigation && !p) {
-        P(r);
-        let e = D(y.current, i, l);
-        e ? e?.fauxFocus() : i.getItemToTheLeft()?.fauxFocus();
-      } else if (n) {
-        P(r);
-        let e = D(y.current, n, l);
-        e ? e?.focus() : n.getItemToTheLeft()?.focus();
-      }
-    } else if ($$x5(o, t, u)) {
-      if (i && i.navigationOptions.supportHorizontalNavigation && !p) {
-        P(r);
-        let e = D(y.current, i, d);
-        e ? e?.fauxFocus() : i.getItemToTheRight()?.fauxFocus();
-      } else if (n) {
-        P(r);
-        let e = D(y.current, n, d);
-        e ? e?.focus() : n.getItemToTheRight()?.focus();
-      }
-    } else {
-      o === 'Enter' ? i && !p && (P(r), i.navigationOptions.simulateClickOnEnter && i.simulateClick()) : o === 'Escape' && (n || i) && (P(r), n && n.blur(), i && i.fauxBlur());
+
+// Original: f
+const KeyboardNavigationContext = createContext<KeyboardNavigationContextValue | null>(null)
+
+
+
+interface KeyboardNavigationProviderProps {
+  onKeyDown?: (event: KeyboardEvent) => void
+  allowVim?: boolean
+  disabled?: boolean
+  overrideDown?: (item: KeyboardNavigationItem) => { path: number[], column?: number } | undefined
+  overrideUp?: (item: KeyboardNavigationItem) => { path: number[], column?: number } | undefined
+  overrideLeft?: (item: KeyboardNavigationItem) => { path: number[], column?: number } | undefined
+  overrideRight?: (item: KeyboardNavigationItem) => { path: number[], column?: number } | undefined
+  allowHorizontalNavigationWhileInputFocused?: boolean
+  useKeyNavFauxFocusSync?: boolean
+  useFocusOnly?: boolean
+  useDisplayContents?: boolean
+  stopPropagationOnEventHandle?: boolean
+}
+
+/**
+ * Provides keyboard navigation context and handles key events.
+ * Original: $$E4
+ */
+export const KeyboardNavigationProvider = forwardRef<HTMLDivElement, KeyboardNavigationProviderProps>(({
+  onKeyDown,
+  allowVim = false,
+  disabled,
+  overrideDown,
+  overrideUp,
+  overrideLeft,
+  overrideRight,
+  allowHorizontalNavigationWhileInputFocused = false,
+  useKeyNavFauxFocusSync,
+  useFocusOnly,
+  useDisplayContents,
+  stopPropagationOnEventHandle = false,
+  ...rest
+}, ref) => {
+  const treeRef = useRef<TreeNode>({ type: 'parent', children: [] })
+  const lookupMapRef = useRef(new Map<string, KeyboardNavigationItem>())
+  const focusedItemRef = useRef<KeyboardNavigationItem | null>(null)
+  const fauxFocusedItemRef = useRef<KeyboardNavigationItem | null>(null)
+  const defaultFauxFocusedItemRef = useRef<KeyboardNavigationItem | null>(null)
+  const fauxFocusTimeoutRef = useRef(noop)
+
+  const handleFocusItem = useCallback((item: KeyboardNavigationItem) => {
+    focusedItemRef.current = item
+  }, [])
+
+  const handleBlurItem = useCallback((item: KeyboardNavigationItem) => {
+    if (focusedItemRef.current === item) {
+      focusedItemRef.current = null
     }
-    e?.(r);
-  }, [c, t, e, p, s, a, l, d, P]);
-  let F = useMemo(() => ({
-    tree: y.current,
-    lookupMap: b.current,
-    onFocusItem: N,
-    onBlurItem: I,
-    onFauxFocusItem: L,
-    onFauxBlurItem: R,
-    fauxBlurItem: () => C.current?.fauxBlur(),
-    blurItem: () => T.current?.blur(),
-    setDefaultFauxFocusedItem: e => {
-      w.current || (w.current = e);
+  }, [])
+
+  const handleFauxBlurItem = useCallback((item: KeyboardNavigationItem) => {
+    if (fauxFocusedItemRef.current === item) {
+      fauxFocusedItemRef.current = null
+      fauxFocusTimeoutRef.current()
+      fauxFocusTimeoutRef.current = noop
+    }
+  }, [])
+
+  const handleFauxFocusItem = useCallback((item: KeyboardNavigationItem, onTimeout: () => void) => {
+    if (fauxFocusedItemRef.current) {
+      handleFauxBlurItem(fauxFocusedItemRef.current)
+    }
+    fauxFocusedItemRef.current = item
+    fauxFocusTimeoutRef.current = onTimeout
+  }, [handleFauxBlurItem])
+
+  const preventDefaultAndStopPropagation = useCallback((event: KeyboardEvent) => {
+    if (stopPropagationOnEventHandle) {
+      event.stopPropagation()
+    }
+    event.preventDefault()
+  }, [stopPropagationOnEventHandle])
+
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    const focusedItem = focusedItemRef.current
+    const fauxFocusedItem = fauxFocusedItemRef.current
+    const key = getKey(event)
+    const isModifierFree = !(event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) && allowHorizontalNavigationWhileInputFocused
+
+    const handleNavigation = (direction: 'up' | 'down' | 'left' | 'right', override?: (item: KeyboardNavigationItem) => { path: number[], column?: number } | undefined) => {
+      if (fauxFocusedItem && !useFocusOnly) {
+        preventDefaultAndStopPropagation(event)
+        const overrideItem = override ? getOverrideItem(treeRef.current, fauxFocusedItem, override) : null
+        const targetItem = overrideItem || fauxFocusedItem[`getItem${direction.charAt(0).toUpperCase() + direction.slice(1)}`]()
+        targetItem?.fauxFocus()
+      }
+      else if (focusedItem) {
+        preventDefaultAndStopPropagation(event)
+        const overrideItem = override ? getOverrideItem(treeRef.current, focusedItem, override) : null
+        const targetItem = overrideItem || focusedItem[`getItem${direction.charAt(0).toUpperCase() + direction.slice(1)}`]()
+        targetItem?.focus()
+      }
+      else if (direction === 'down' && defaultFauxFocusedItemRef.current) {
+        preventDefaultAndStopPropagation(event)
+        defaultFauxFocusedItemRef.current.fauxFocus()
+      }
+    }
+
+    if (isUpKey(event, allowVim)) {
+      handleNavigation('up', overrideUp)
+    }
+    else if (isDownKey(event, allowVim)) {
+      handleNavigation('down', overrideDown)
+    }
+    else if (isLeftKey(key, allowVim, isModifierFree)) {
+      if (fauxFocusedItem?.navigationOptions.supportHorizontalNavigation && !useFocusOnly) {
+        handleNavigation('left', overrideLeft)
+      }
+      else if (focusedItem) {
+        handleNavigation('left', overrideLeft)
+      }
+    }
+    else if (isRightKey(key, allowVim, isModifierFree)) {
+      if (fauxFocusedItem?.navigationOptions.supportHorizontalNavigation && !useFocusOnly) {
+        handleNavigation('right', overrideRight)
+      }
+      else if (focusedItem) {
+        handleNavigation('right', overrideRight)
+      }
+    }
+    else if (key === 'Enter' && fauxFocusedItem && !useFocusOnly) {
+      preventDefaultAndStopPropagation(event)
+      if (fauxFocusedItem.navigationOptions.simulateClickOnEnter) {
+        fauxFocusedItem.simulateClick()
+      }
+    }
+    else if (key === 'Escape' && (focusedItem || fauxFocusedItem)) {
+      preventDefaultAndStopPropagation(event)
+      focusedItem?.blur()
+      fauxFocusedItem?.fauxBlur()
+    }
+
+    onKeyDown?.(event)
+  }, [allowHorizontalNavigationWhileInputFocused, allowVim, onKeyDown, useFocusOnly, overrideUp, overrideDown, overrideLeft, overrideRight, preventDefaultAndStopPropagation])
+
+  const contextValue = useMemo<KeyboardNavigationContextValue>(() => ({
+    tree: treeRef.current,
+    lookupMap: lookupMapRef.current,
+    onFocusItem: handleFocusItem,
+    onBlurItem: handleBlurItem,
+    onFauxFocusItem: handleFauxFocusItem,
+    onFauxBlurItem: handleFauxBlurItem,
+    fauxBlurItem: () => fauxFocusedItemRef.current?.fauxBlur(),
+    blurItem: () => focusedItemRef.current?.blur(),
+    setDefaultFauxFocusedItem: (item) => {
+      if (!defaultFauxFocusedItemRef.current) {
+        defaultFauxFocusedItemRef.current = item
+      }
     },
     fauxFocusDefaultItem: () => {
-      w.current?.fauxFocus();
+      defaultFauxFocusedItemRef.current?.fauxFocus()
     },
-    useKeyNavFauxFocusSync: u
-  }), [N, I, L, R, u]);
-  return jsx(f.Provider, {
-    value: F,
+    useKeyNavFauxFocusSync: useKeyNavFauxFocusSync || false,
+  }), [handleFocusItem, handleBlurItem, handleFauxFocusItem, handleFauxBlurItem, useKeyNavFauxFocusSync])
+
+  return jsx(KeyboardNavigationContext.Provider, {
+    value: contextValue,
     children: jsx(RecordableDiv, {
-      style: h ? {
-        display: 'contents'
-      } : void 0,
-      onKeyDown: r ? e : M,
-      forwardedRef: E,
-      ...g
-    })
-  });
-});
-export function $$y0({
-  path: e,
-  column: t = null,
-  id: r,
-  defaultFocusOptions: n,
-  onFocus: a,
-  onBlur: s,
-  onFauxFocus: o,
-  onFauxBlur: c,
-  onFocusThroughKeyboardNavigation: u,
-  fauxClick: p,
-  disabled: _,
-  navigationOptions: h
-}) {
-  let m = useStableMemo(e);
-  let E = useStableMemo(n);
-  let y = useStableMemo(h);
-  if (m.length === 0) throw new Error('Path must be non-empty');
-  if (m.some(e => e < 0)) throw new Error('All path indices must be non-negative');
-  if (t != null && t < 0) throw new Error('Column must be non-negative');
-  let [b, T] = useState(void 0);
-  let [I, S] = useState(!1);
-  let [v, A] = useState(!1);
-  let x = useRef(null);
-  let {
+      style: useDisplayContents ? { display: 'contents' } : undefined,
+      onKeyDown: disabled ? onKeyDown : handleKeyDown,
+      forwardedRef: ref,
+      ...rest,
+    }),
+  })
+})
+
+export const dP = KeyboardNavigationProvider
+// Original: useKeyboardNavigationItem
+/**
+ * Hook for managing a keyboard navigation item within the provider context.
+ * @param path - The path in the navigation tree.
+ * @param column - The column index, optional.
+ * @param id - Unique identifier for the item.
+ * @param defaultFocusOptions - Default focus options.
+ * @param onFocus - Callback when item gains focus.
+ * @param onBlur - Callback when item loses focus.
+ * @param onFauxFocus - Callback when item gains faux focus.
+ * @param onFauxBlur - Callback when item loses faux focus.
+ * @param onFocusThroughKeyboardNavigation - Callback for keyboard navigation focus.
+ * @param fauxClick - Function to simulate click.
+ * @param disabled - Whether the item is disabled.
+ * @param navigationOptions - Navigation options for the item.
+ * @returns Object with setters and state for the navigation item.
+ */
+export function useKeyboardNavigationItem({
+  path,
+  column = null,
+  id,
+  defaultFocusOptions,
+  onFocus,
+  onBlur,
+  onFauxFocus,
+  onFauxBlur,
+  onFocusThroughKeyboardNavigation,
+  fauxClick,
+  disabled,
+  navigationOptions,
+}: UseKeyboardNavigationItemProps): UseKeyboardNavigationItemReturn {
+  const memoizedPath = useStableMemo(path)
+  const memoizedDefaultFocusOptions = useStableMemo(defaultFocusOptions)
+  const memoizedNavigationOptions = useStableMemo(navigationOptions)
+
+  if (memoizedPath.length === 0) {
+    throw new Error('Path must be non-empty')
+  }
+  if (memoizedPath.some(index => index < 0)) {
+    throw new Error('All path indices must be non-negative')
+  }
+  if (column != null && column < 0) {
+    throw new Error('Column must be non-negative')
+  }
+
+  const [element, setElement] = useState<HTMLElement | undefined>(undefined)
+  const [isFocused, setIsFocused] = useState(false)
+  const [isFauxFocused, setIsFauxFocused] = useState(false)
+  const timeoutRef = useRef<NodeJS.Timeout | number | null>(null)
+
+  const {
     tree,
     lookupMap,
     onFocusItem,
@@ -294,253 +538,437 @@ export function $$y0({
     onFauxFocusItem,
     onFauxBlurItem,
     setDefaultFauxFocusedItem,
-    useKeyNavFauxFocusSync
-  } = assertNotNullish(useContext(f), 'Must use `useKeyboardNavigationItem` inside `<KeyboardNavigationProvider>');
+    useKeyNavFauxFocusSync,
+  } = assertNotNullish(useContext(KeyboardNavigationContext), 'Must use `useKeyboardNavigationItem` inside `<KeyboardNavigationProvider>`')
+
   useEffect(() => {
-    if (b && !_) {
-      let e = () => S(!0);
-      let t = () => S(!1);
-      b.addEventListener('focus', e);
-      b.addEventListener('blur', t);
-      b === document.activeElement && e();
+    if (element && !disabled) {
+      const handleFocus = () => setIsFocused(true)
+      const handleBlur = () => setIsFocused(false)
+      element.addEventListener('focus', handleFocus)
+      element.addEventListener('blur', handleBlur)
+      if (element === document.activeElement) {
+        handleFocus()
+      }
       return () => {
-        b.removeEventListener('focus', e);
-        b.removeEventListener('blur', t);
-        b === document.activeElement && t();
-      };
-    }
-  }, [_, b]);
-  let k = useCallback(e => {
-    A(t => (t && (c?.(), onFauxBlurItem(e)), !1));
-  }, [c, onFauxBlurItem]);
-  let M = useCallback(e => {
-    A(t => (t || (o?.(), onFauxFocusItem(e, () => {
-      x.current !== null && clearTimeout(x.current);
-      x.current = setTimeout(() => {
-        k(e);
-      }, 0);
-    })), !0));
-  }, [k, o, onFauxFocusItem]);
-  let F = useCallback((e, t) => {
-    e ? M(t) : k(t);
-  }, [M, k]);
-  useEffect(() => () => {
-    x.current !== null && clearTimeout(x.current);
-  }, []);
-  let j = useMemo(() => b == null || _ ? null : new g({
-    id: r,
-    path: m,
-    column: t,
-    element: b,
-    defaultFocusOptions: E,
-    setIsFauxFocused: useKeyNavFauxFocusSync ? F : A,
-    fauxClick: p,
-    onFocusThroughKeyboardNavigation: u,
-    keyboardItemNavigationOptions: y
-  }), [b, _, r, m, t, E, useKeyNavFauxFocusSync, F, p, u, y]);
-  useEffect(() => {
-    if (j) {
-      j.addToTree(tree, lookupMap);
-      j.navigationOptions.fauxFocusByDefault && setDefaultFauxFocusedItem(j);
-      return () => {
-        j.removeFromTree(lookupMap);
-        j.navigationOptions.fauxFocusByDefault && setDefaultFauxFocusedItem(null);
-      };
-    }
-  }, [j, lookupMap, setDefaultFauxFocusedItem, tree]);
-  useEffect(() => {
-    if (j && I) {
-      a?.();
-      onFocusItem(j);
-      return () => {
-        s?.();
-        onBlurItem(j);
-      };
-    }
-  }, [j, I, a, s, onFocusItem, onBlurItem]);
-  useEffect(() => {
-    if (!useKeyNavFauxFocusSync && j && v) {
-      o?.();
-      onFauxFocusItem(j, () => {
-        A(!1);
-      });
-      return () => {
-        c?.();
-        onFauxBlurItem(j);
-      };
-    }
-  }, [j, v, o, c, onFauxFocusItem, onFauxBlurItem, useKeyNavFauxFocusSync]);
-  return {
-    setKeyboardNavigationElement: T,
-    keyboardNavigationItem: j,
-    isFocused: I,
-    isFauxFocused: v
-  };
-}
-export function $$b6() {
-  let {
-    lookupMap
-  } = assertNotNullish(useContext(f), 'Must use `useKeyboardNavigationLookupMap` inside `<KeyboardNavigationProvider>');
-  return useCallback(t => lookupMap.get(t), [lookupMap]);
-}
-export function $$T8(e = 'real') {
-  let {
-    blurItem,
-    fauxBlurItem
-  } = assertNotNullish(useContext(f), 'Must use `useBlurFocusedItem` inside `<KeyboardNavigationProvider>');
-  return useCallback(() => {
-    switch (e) {
-      case 'real':
-        blurItem();
-        break;
-      case 'faux':
-        fauxBlurItem();
-        break;
-      default:
-        throwTypeError(e);
-    }
-  }, [blurItem, fauxBlurItem, e]);
-}
-export function $$I2({
-  preventScroll: e
-} = {}) {
-  let {
-    tree
-  } = assertNotNullish(useContext(f), 'Must use `useFocusFirstItem` inside `<KeyboardNavigationProvider>');
-  return useCallback(() => {
-    let r = function e(t) {
-      if (t.type === 'leaf') return t.items.find(e => e != null) ?? null;
-      for (let r of t.children) {
-        if (r) {
-          let t = e(r);
-          if (t) return t;
+        element.removeEventListener('focus', handleFocus)
+        element.removeEventListener('blur', handleBlur)
+        if (element === document.activeElement) {
+          handleBlur()
         }
       }
-      return null;
-    }(tree);
-    r?.focus({
-      preventScroll: e
-    });
-  }, [e, tree]);
+    }
+  }, [disabled, element])
+
+  const fauxBlur = useCallback((item: KeyboardNavigationItem) => {
+    setIsFauxFocused((prev) => {
+      if (prev) {
+        onFauxBlur?.()
+        onFauxBlurItem(item)
+      }
+      return false
+    })
+  }, [onFauxBlur, onFauxBlurItem])
+
+  const fauxFocus = useCallback((item: KeyboardNavigationItem) => {
+    setIsFauxFocused((prev) => {
+      if (!prev) {
+        onFauxFocus?.()
+        onFauxFocusItem(item, () => {
+          if (timeoutRef.current !== null) {
+            clearTimeout(timeoutRef.current)
+          }
+          timeoutRef.current = setTimeout(() => {
+            fauxBlur(item)
+          }, 0)
+        })
+      }
+      return true
+    })
+  }, [fauxBlur, onFauxFocus, onFauxFocusItem])
+
+  const setIsFauxFocusedHandler = useCallback((isFauxFocused: boolean, item: KeyboardNavigationItem) => {
+    if (isFauxFocused) {
+      fauxFocus(item)
+    }
+    else {
+      fauxBlur(item)
+    }
+  }, [fauxFocus, fauxBlur])
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current !== null) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [])
+
+  const keyboardNavigationItem = useMemo(() => {
+    if (element == null || disabled) {
+      return null
+    }
+    return new KeyboardNavigationItem({
+      id,
+      path: memoizedPath,
+      column,
+      element,
+      defaultFocusOptions: memoizedDefaultFocusOptions,
+      setIsFauxFocused: useKeyNavFauxFocusSync ? setIsFauxFocusedHandler : setIsFauxFocused,
+      fauxClick,
+      onFocusThroughKeyboardNavigation,
+      keyboardItemNavigationOptions: memoizedNavigationOptions,
+    })
+  }, [element, disabled, id, memoizedPath, column, memoizedDefaultFocusOptions, useKeyNavFauxFocusSync, setIsFauxFocusedHandler, fauxClick, onFocusThroughKeyboardNavigation, memoizedNavigationOptions])
+
+  useEffect(() => {
+    if (keyboardNavigationItem) {
+      keyboardNavigationItem.addToTree(tree, lookupMap)
+      if (keyboardNavigationItem.navigationOptions.fauxFocusByDefault) {
+        setDefaultFauxFocusedItem(keyboardNavigationItem)
+      }
+      return () => {
+        keyboardNavigationItem.removeFromTree(lookupMap)
+        if (keyboardNavigationItem.navigationOptions.fauxFocusByDefault) {
+          setDefaultFauxFocusedItem(null)
+        }
+      }
+    }
+  }, [keyboardNavigationItem, lookupMap, setDefaultFauxFocusedItem, tree])
+
+  useEffect(() => {
+    if (keyboardNavigationItem && isFocused) {
+      onFocus?.()
+      onFocusItem(keyboardNavigationItem)
+      return () => {
+        onBlur?.()
+        onBlurItem(keyboardNavigationItem)
+      }
+    }
+  }, [keyboardNavigationItem, isFocused, onFocus, onBlur, onFocusItem, onBlurItem])
+
+  useEffect(() => {
+    if (!useKeyNavFauxFocusSync && keyboardNavigationItem && isFauxFocused) {
+      onFauxFocus?.()
+      onFauxFocusItem(keyboardNavigationItem, () => {
+        setIsFauxFocused(false)
+      })
+      return () => {
+        onFauxBlur?.()
+        onFauxBlurItem(keyboardNavigationItem)
+      }
+    }
+  }, [keyboardNavigationItem, isFauxFocused, onFauxFocus, onFauxBlur, onFauxFocusItem, onFauxBlurItem, useKeyNavFauxFocusSync])
+
+  return {
+    setKeyboardNavigationElement: setElement,
+    keyboardNavigationItem,
+    isFocused,
+    isFauxFocused,
+  }
 }
-export function $$S3(e, t) {
-  let r = k(e);
-  let n = isExactModifier(e, ModifierKeyCodes.CONTROL);
-  let i = BrowserInfo.mac && n;
-  return r === 'ArrowUp' || r === 'KeyK' && t && N() || i && r === 'KeyP';
+
+// Original: useKeyboardNavigationLookupMap
+/**
+ * Hook to get a function for looking up keyboard navigation items by ID.
+ * @returns Function that takes an ID and returns the corresponding item or undefined.
+ */
+export function useKeyboardNavigationLookupMap() {
+  const { lookupMap } = assertNotNullish(useContext(KeyboardNavigationContext), 'Must use `useKeyboardNavigationLookupMap` inside `<KeyboardNavigationProvider>`')
+  return useCallback((id: string) => lookupMap.get(id), [lookupMap])
 }
-export function $$v1(e, t) {
-  let r = k(e);
-  let n = isExactModifier(e, ModifierKeyCodes.CONTROL);
-  let i = BrowserInfo.mac && n;
-  return r === 'ArrowDown' || r === 'KeyJ' && t && N() || i && r === 'KeyN';
+
+// Original: useBlurFocusedItem
+/**
+ * Hook to get a function for blurring the currently focused or faux-focused item.
+ * @param type - Type of blur: 'real' for actual focus, 'faux' for faux focus.
+ * @returns Function to perform the blur.
+ */
+export function useBlurFocusedItem(type: 'real' | 'faux' = 'real') {
+  const { blurItem, fauxBlurItem } = assertNotNullish(useContext(KeyboardNavigationContext), 'Must use `useBlurFocusedItem` inside `<KeyboardNavigationProvider>`')
+  return useCallback(() => {
+    switch (type) {
+      case 'real':
+        blurItem()
+        break
+      case 'faux':
+        fauxBlurItem()
+        break
+      default:
+        throwTypeError(type)
+    }
+  }, [blurItem, fauxBlurItem, type])
 }
-export function $$A7(e, t, r = !1) {
-  return e === 'ArrowLeft' && C(r) || e === 'KeyH' && t && N();
+
+// Original: useFocusFirstItem
+/**
+ * Hook to get a function for focusing the first item in the navigation tree.
+ * @param options - Options for focusing, including preventScroll.
+ * @returns Function to focus the first item.
+ */
+export function useFocusFirstItem({ preventScroll }: { preventScroll?: boolean } = {}) {
+  const { tree } = assertNotNullish(useContext(KeyboardNavigationContext), 'Must use `useFocusFirstItem` inside `<KeyboardNavigationProvider>`')
+  return useCallback(() => {
+    const findFirstItem = (node: any): KeyboardNavigationItem | null => {
+      if (node.type === 'leaf') {
+        return node.items.find((item: KeyboardNavigationItem | undefined) => item != null) ?? null
+      }
+      for (const child of node.children) {
+        if (child) {
+          const item = findFirstItem(child)
+          if (item) {
+            return item
+          }
+        }
+      }
+      return null
+    }
+    const firstItem = findFirstItem(tree)
+    firstItem?.focus({ preventScroll })
+  }, [preventScroll, tree])
 }
-export function $$x5(e, t, r = !1) {
-  return e === 'ArrowRight' && C(r) || e === 'KeyL' && t && N();
+
+// Original: isUpKey
+/**
+ * Checks if the event corresponds to an up navigation key.
+ * @param event - The keyboard event.
+ * @param allowVim - Whether Vim keys are allowed.
+ * @returns True if it's an up key.
+ */
+export function isUpKey(event: KeyboardEvent, allowVim: boolean): boolean {
+  const key = getKey(event)
+  const isCtrl = isExactModifier(event, ModifierKeyCodes.CONTROL)
+  const isMacCtrl = BrowserInfo.mac && isCtrl
+  return key === 'ArrowUp' || (key === 'KeyK' && allowVim && !isInputFocused()) || (isMacCtrl && key === 'KeyP')
 }
-function N() {
-  return !w(document.activeElement);
+
+// Original: isDownKey
+/**
+ * Checks if the event corresponds to a down navigation key.
+ * @param event - The keyboard event.
+ * @param allowVim - Whether Vim keys are allowed.
+ * @returns True if it's a down key.
+ */
+export function isDownKey(event: KeyboardEvent, allowVim: boolean): boolean {
+  const key = getKey(event)
+  const isCtrl = isExactModifier(event, ModifierKeyCodes.CONTROL)
+  const isMacCtrl = BrowserInfo.mac && isCtrl
+  return key === 'ArrowDown' || (key === 'KeyJ' && allowVim && !isInputFocused()) || (isMacCtrl && key === 'KeyN')
 }
-function C(e) {
-  let t = document.activeElement;
-  return !w(t) || !!e || (t instanceof HTMLDivElement ? t.textContent === '' : t.value === '');
+
+// Original: isLeftKey
+/**
+ * Checks if the event corresponds to a left navigation key.
+ * @param key - The key string.
+ * @param allowVim - Whether Vim keys are allowed.
+ * @param allowHorizontalWhileInputFocused - Whether to allow horizontal navigation while input is focused.
+ * @returns True if it's a left key.
+ */
+export function isLeftKey(key: string, allowVim: boolean, allowHorizontalWhileInputFocused: boolean = false): boolean {
+  return (key === 'ArrowLeft' && canNavigateHorizontally(allowHorizontalWhileInputFocused)) || (key === 'KeyH' && allowVim && !isInputFocused())
 }
-function w(e) {
-  return !!e && (e instanceof HTMLInputElement || e instanceof HTMLTextAreaElement) || e instanceof HTMLDivElement && e.contentEditable === 'true';
+
+// Original: isRightKey
+/**
+ * Checks if the event corresponds to a right navigation key.
+ * @param key - The key string.
+ * @param allowVim - Whether Vim keys are allowed.
+ * @param allowHorizontalWhileInputFocused - Whether to allow horizontal navigation while input is focused.
+ * @returns True if it's a right key.
+ */
+export function isRightKey(key: string, allowVim: boolean, allowHorizontalWhileInputFocused: boolean = false): boolean {
+  return (key === 'ArrowRight' && canNavigateHorizontally(allowHorizontalWhileInputFocused)) || (key === 'KeyL' && allowVim && !isInputFocused())
 }
-function O(e, {
-  path: t,
-  column: r
-}, n) {
-  if (r == null) return;
-  let i = P(e, t);
-  return (n === 'left' ? findPrevious : findNext)(i.items, r) || R(e, {
-    path: t,
-    column: n === 'left' ? 1 / 0 : -1
-  }, n === 'left' ? 'up' : 'down');
+
+// Original: N
+/**
+ * Checks if the active element is not an input field.
+ * @returns True if not focused on input.
+ */
+function isInputFocused(): boolean {
+  return !isInputElement(document.activeElement)
 }
-function R(e, {
-  path: t,
-  column: r
-}, n) {
-  for (let i = t.length - 1; i >= 0; i--) {
-    let s = t.slice(0, i);
-    let o = t[i];
-    let l = L(e, s);
-    let d = (n === 'up' ? findPrevious : findNext)(l.children, o);
-    if (d) {
-      let e = (n === 'up' ? function e(t) {
-        if (t.type === 'leaf') return t;
-        let r = findPrevious(t.children, t.children.length);
-        if (r) return e(r);
-        throw new Error('Expected a node but got nothing');
-      } : function e(t) {
-        if (t.type === 'leaf') return t;
-        let r = findNext(t.children, -1);
-        if (r) return e(r);
-        throw new Error('Expected a node but got nothing');
-      })(d);
-      return findNearest(e.items, r || 0);
+
+// Original: C
+/**
+ * Determines if horizontal navigation is allowed based on focus state.
+ * @param allowHorizontalWhileInputFocused - Whether to allow when input is focused.
+ * @returns True if can navigate horizontally.
+ */
+function canNavigateHorizontally(allowHorizontalWhileInputFocused: boolean): boolean {
+  const activeElement = document.activeElement
+  return !isInputElement(activeElement) || allowHorizontalWhileInputFocused || (activeElement instanceof HTMLDivElement ? activeElement.textContent === '' : (activeElement as HTMLInputElement).value === '')
+}
+
+// Original: w
+/**
+ * Checks if the element is an input, textarea, or editable div.
+ * @param element - The element to check.
+ * @returns True if it's an input element.
+ */
+function isInputElement(element: Element | null): boolean {
+  return !!element && ((element instanceof HTMLInputElement) || (element instanceof HTMLTextAreaElement) || (element instanceof HTMLDivElement && element.contentEditable === 'true'))
+}
+
+// Original: O
+/**
+ * Finds the next or previous item horizontally in the same row.
+ * @param tree - The navigation tree.
+ * @param item - The current item with path and column.
+ * @param direction - 'left' or 'right'.
+ * @returns The found item or null.
+ */
+function findHorizontalItem(tree: TreeNode, { path, column }: { path: number[], column: number | null }, direction: 'left' | 'right'): KeyboardNavigationItem | null {
+  if (column == null) {
+    return null
+  }
+  const leaf = getLeaf(tree, path)
+  const foundItem = direction === 'left' ? findPrevious(leaf.items, column) : findNext(leaf.items, column)
+  if (foundItem) {
+    return foundItem
+  }
+  // If not found in row, look vertically in the opposite direction
+  return findVerticalItem(tree, { path, column: direction === 'left' ? Infinity : -1 }, direction === 'left' ? 'up' : 'down')
+}
+
+// Original: R
+/**
+ * Finds the next or previous item vertically in the tree.
+ * @param tree - The navigation tree.
+ * @param item - The current item with path and column.
+ * @param direction - 'up' or 'down'.
+ * @returns The found item or null.
+ */
+function findVerticalItem(tree: any, { path, column }: { path: number[], column: number | null }, direction: 'up' | 'down'): KeyboardNavigationItem | null {
+  for (let i = path.length - 1; i >= 0; i--) {
+    const ancestorPath = path.slice(0, i)
+    const index = path[i]
+    const parent = getParent(tree, ancestorPath)
+    const sibling = direction === 'up' ? findPrevious(parent.children, index) : findNext(parent.children, index)
+    if (sibling) {
+      const targetLeaf = direction === 'up' ? findLastLeaf(sibling) : findFirstLeaf(sibling)
+      return findNearest(targetLeaf.items, column ?? 0)
     }
   }
+  return null
 }
-function L(e, t, r = !1) {
-  for (let n of t) {
-    let t = e.children[n];
-    if (t) {
-      if (t.type === 'leaf') throw new Error('Expected a parent but got a leaf');
-      e = t;
-    } else if (r) {
-      let t = {
-        type: 'parent',
-        children: []
-      };
-      e.children[n] = t;
-      e = t;
-    } else {
-      throw new Error('Expected a parent but got nothing');
+
+// Helper function for finding the last leaf in a subtree (for up navigation)
+function findLastLeaf(node: any): any {
+  if (node.type === 'leaf') {
+    return node
+  }
+  const lastChild = findPrevious(node.children, node.children.length)
+  if (lastChild) {
+    return findLastLeaf(lastChild)
+  }
+  throw new Error('Expected a node but got nothing')
+}
+
+// Helper function for finding the first leaf in a subtree (for down navigation)
+function findFirstLeaf(node: any): any {
+  if (node.type === 'leaf') {
+    return node
+  }
+  const firstChild = findNext(node.children, -1)
+  if (firstChild) {
+    return findFirstLeaf(firstChild)
+  }
+  throw new Error('Expected a node but got nothing')
+}
+
+// Original: L
+/**
+ * Gets or creates a parent node at the given path.
+ * @param tree - The root tree.
+ * @param path - The path to the parent.
+ * @param createIfMissing - Whether to create missing nodes.
+ * @returns The parent node.
+ */
+function getParent(tree: TreeNode, path: number[], createIfMissing: boolean = false): TreeNode {
+  let current = tree
+  for (const index of path) {
+    let child = current.children[index]
+    if (child) {
+      if (child.type === 'leaf') {
+        throw new Error('Expected a parent but got a leaf')
+      }
+      current = child
+    }
+    else if (createIfMissing) {
+      child = { type: 'parent', children: [] }
+      current.children[index] = child
+      current = child
+    }
+    else {
+      throw new Error('Expected a parent but got nothing')
     }
   }
-  return e;
+  return current
 }
-function P(e, t, r = !1) {
-  let [n, i] = popLast(t);
-  let s = L(e, n, r);
-  let o = s.children[i];
-  if (o) {
-    if (o.type !== 'parent') return o;
-    throw new Error('Expected a parent but got a leaf');
+
+// Original: P
+/**
+ * Gets or creates a leaf node at the given path.
+ * @param tree - The root tree.
+ * @param path - The path to the leaf.
+ * @param createIfMissing - Whether to create missing nodes.
+ * @returns The leaf node.
+ */
+function getLeaf(tree: TreeNode, path: number[], createIfMissing: boolean = false): TreeNode | undefined {
+  const [parentPath, index] = popLast(path)
+  const parent = getParent(tree, parentPath, createIfMissing)
+  let child = parent.children[index]
+  if (child) {
+    if (child.type !== 'parent') {
+      return child
+    }
+    throw new Error('Expected a parent but got a leaf')
   }
-  if (r) {
-    let e = {
-      type: 'leaf',
-      items: []
-    };
-    s.children[i] = e;
-    return e;
+  if (createIfMissing) {
+    child = { type: 'leaf', items: [] }
+    parent.children[index] = child
+    return child
   }
-  throw new Error('Expected a leaf but got nothing');
+  throw new Error('Expected a leaf but got nothing')
 }
-function D(e, t, r) {
+
+// Original: D
+/**
+ * Gets an item based on an override function.
+ * @param tree - The navigation tree.
+ * @param item - The current item.
+ * @param override - The override function.
+ * @returns The overridden item or null.
+ */
+function getOverrideItem(tree: any, item: KeyboardNavigationItem, override?: (item: KeyboardNavigationItem) => { path: number[], column?: number } | undefined): KeyboardNavigationItem | null {
   try {
-    let n;
-    let i;
-    let a = r?.(t);
-    return a && (n = a.path, i = a.column, P(e, n).items[i ?? 0]);
-  } catch (e) {}
+    const overrideResult = override?.(item)
+    if (overrideResult) {
+      const { path, column } = overrideResult
+      return getLeaf(tree, path).items[column ?? 0]
+    }
+  }
+  catch {
+    // Ignore errors
+  }
+  return null
 }
-function k(e) {
-  return e.code ?? e.key;
+
+// Original: k
+/**
+ * Gets the key from the event, preferring code over key.
+ * @param event - The keyboard event.
+ * @returns The key string.
+ */
+function getKey(event: KeyboardEvent): string {
+  return event.code ?? event.key
 }
-export const M3 = $$y0;
-export const Nt = $$v1;
-export const bh = $$I2;
-export const c2 = $$S3;
-export const dP = $$E4;
-export const lv = $$x5;
-export const q_ = $$b6;
-export const yn = $$A7;
-export const z3 = $$T8;
+export const M3 = useKeyboardNavigationItem
+export const Nt = isDownKey
+export const bh = useFocusFirstItem
+export const c2 = isUpKey
+export const lv = isRightKey
+export const q_ = useKeyboardNavigationLookupMap
+export const yn = isLeftKey
+export const z3 = useBlurFocusedItem

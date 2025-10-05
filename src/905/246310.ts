@@ -1,457 +1,809 @@
-import { VariableDataType } from "../figma_app/763686";
-import { Q1 } from "../905/721592";
-import { kz } from "../905/77776";
-import { W4, P2 } from "../905/804867";
-import { h as _$$h } from "../905/34040";
-import { u as _$$u } from "../905/363827";
-import { RU, lS } from "../905/235413";
-import { A2 } from "../905/49095";
-import { J3, KH, u_, HW } from "../905/139004";
-import { B } from "../905/113996";
-import { a as _$$a } from "../905/860779";
-import { z } from "../905/897942";
-import { jg } from "../905/707098";
-let $$f3 = /\/\*SUGGESTED_VAR_START_(.*?)\*\//g;
-let $$_7 = /\/\*SUGGESTED_VAR_END\*\//g;
-export function $$A10(e, t) {
-  if (e.boundVariables?.radius) {
-    let i = e.boundVariables.radius.id;
-    let n = t.nodeCache.variableResolver?.resolveVariable(i);
-    return n ? {
-      name: n.name,
-      codeSyntax: n.codeSyntax,
-      status: jg.Resolved,
-      id: n.id
-    } : {
-      status: jg.NotResolved
-    };
+import { StringValueObject } from "../905/34040"
+import { DesignIssues } from "../905/49095"
+import { CssVariable } from "../905/77776"
+import { BasicNodeProperties } from "../905/113996"
+import { GenericNode, isAutoLayoutSupportedNode, isBasicNode, isLayoutConstrainedNode } from "../905/139004"
+import { PixelValue, StringValue } from "../905/235413"
+import { SuggestedVariableReference } from "../905/363827"
+import { VariableStatus } from "../905/707098"
+import { ColorFormatter } from "../905/721592"
+import { ColorStop, LinearGradient } from "../905/804867"
+import { NodeWrapper } from "../905/860779"
+import { NodeProperties } from "../905/897942"
+import { VariableDataType } from "../figma_app/763686"
+
+// Regular expression patterns for variable references
+export const SUGGESTED_VARIABLE_START_PATTERN = /\/\*SUGGESTED_VAR_START_(.*?)\*\//g // $$f3
+export const SUGGESTED_VARIABLE_END_PATTERN = /\/\*SUGGESTED_VAR_END\*\//g // $$_7
+
+/**
+ * Get radius variable information from node
+ * @param node - The node to check for bound variables
+ * @param context - Context containing node cache and variable resolver
+ * @returns Variable information or status
+ */
+export function getRadiusVariable(node: any, context: any) { // $$A10
+  if (node.boundVariables?.radius) {
+    const variableId = node.boundVariables.radius.id
+    const resolvedVariable = context.nodeCache.variableResolver?.resolveVariable(variableId)
+
+    return resolvedVariable
+      ? {
+          name: resolvedVariable.name,
+          codeSyntax: resolvedVariable.codeSyntax,
+          status: VariableStatus.Resolved,
+          id: resolvedVariable.id,
+        }
+      : {
+          status: VariableStatus.NotResolved,
+        }
   }
+
   return {
-    status: jg.NotFound
-  };
-}
-export function $$y12(e, t, i) {
-  if (e.boundVariables?.[t]) {
-    let n = e.boundVariables[t].id;
-    let r = i.nodeCache.variableResolver?.resolveVariable(n);
-    return r ? {
-      name: r.name,
-      codeSyntax: r.codeSyntax,
-      status: jg.Resolved,
-      id: r.id
-    } : {
-      status: jg.NotResolved
-    };
+    status: VariableStatus.NotFound,
   }
-  return {
-    status: jg.NotFound
-  };
 }
-export function $$b11(e, t, i, n) {
-  if (e.boundVariables?.color) {
-    let t = e.boundVariables.color.id;
-    let i = n.nodeCache.variableResolver?.resolveVariable(t);
-    return i ? {
-      name: i.name,
-      codeSyntax: i.codeSyntax,
-      status: jg.Resolved,
-      id: t
-    } : {
-      status: jg.NotResolved
-    };
+
+/**
+ * Get variable information for a specific field from node
+ * @param node - The node to check for bound variables
+ * @param field - The field name to look up
+ * @param context - Context containing node cache and variable resolver
+ * @returns Variable information or status
+ */
+export function getFieldVariable(node: any, field: string, context: any) { // $$y12
+  if (node.boundVariables?.[field]) {
+    const variableId = node.boundVariables[field].id
+    const resolvedVariable = context.nodeCache.variableResolver?.resolveVariable(variableId)
+
+    return resolvedVariable
+      ? {
+          name: resolvedVariable.name,
+          codeSyntax: resolvedVariable.codeSyntax,
+          status: VariableStatus.Resolved,
+          id: resolvedVariable.id,
+        }
+      : {
+          status: VariableStatus.NotResolved,
+        }
   }
+
   return {
-    status: jg.NotFound
-  };
+    status: VariableStatus.NotFound,
+  }
 }
-export function $$v20(e, t, i) {
-  let n = e.getVariableValue(t);
-  let r = $$I13(n, {
-    value: i
-  });
+
+/**
+ * Get color variable information from node
+ * @param node - The node to check for bound variables
+ * @param unused1 - Unused parameter (kept for compatibility)
+ * @param unused2 - Unused parameter (kept for compatibility)
+ * @param context - Context containing node cache and variable resolver
+ * @returns Variable information or status
+ */
+export function getColorVariable(node: any, unused1: any, unused2: any, context: any) { // $$b11
+  if (node.boundVariables?.color) {
+    const colorVariableId = node.boundVariables.color.id
+    const resolvedVariable = context.nodeCache.variableResolver?.resolveVariable(colorVariableId)
+
+    return resolvedVariable
+      ? {
+          name: resolvedVariable.name,
+          codeSyntax: resolvedVariable.codeSyntax,
+          status: VariableStatus.Resolved,
+          id: colorVariableId, // Note: Using the original ID from boundVariables, not resolved variable
+        }
+      : {
+          status: VariableStatus.NotResolved,
+        }
+  }
+
   return {
-    variable: n,
-    hint: r
-  };
+    status: VariableStatus.NotFound,
+  }
 }
-export function $$I13(e, t, i) {
-  switch (e?.status) {
-    case jg.NotResolved:
-      return A2.VariableNotResolved;
-    case jg.NotFound:
-      return i?.isColor ? A2.NoStyleForColor : void 0;
+
+/**
+ * Get variable value and associated hint
+ * @param node - The node to get variable value from
+ * @param variableName - Name of the variable to retrieve
+ * @param value - The value to check
+ * @returns Object containing variable and hint
+ */
+export function getVariableWithHint(node: any, variableName: string, value: any) { // $$v20
+  const variable = node.getVariableValue(variableName)
+  const hint = getVariableHint(variable, {
+    value,
+  })
+
+  return {
+    variable,
+    hint,
+  }
+}
+
+/**
+ * Get hint based on variable status
+ * @param variable - The variable to check
+ * @param options - Options for hint generation
+ * @param additionalOptions - Additional options
+ * @returns Appropriate design issue or undefined
+ */
+export function getVariableHint(variable: any, options?: any, additionalOptions?: any) { // $$I13
+  switch (variable?.status) {
+    case VariableStatus.NotResolved:
+      return DesignIssues.VariableNotResolved
+    case VariableStatus.NotFound:
+      return additionalOptions?.isColor ? DesignIssues.NoStyleForColor : undefined
     default:
-      return;
+      return undefined
   }
 }
-export function $$E19(e, t, i, n, r) {
-  if (t.variable?.value) {
-    let i = t.variable.value;
-    return new kz(i.name, e, r, {
-      name: i.name,
-      id: i.id,
-      codeSyntax: i.codeSyntax
-    });
+
+/**
+ * Create CSS variable if variable has value
+ * @param fallbackValue - Fallback value if no variable
+ * @param variableInfo - Information about the variable
+ * @param unused - Unused parameter (kept for compatibility)
+ * @param unused2 - Unused parameter (kept for compatibility)
+ * @param cssProperty - CSS property name
+ * @returns CssVariable instance or fallback value
+ */
+export function createCssVariableIfAvailable(
+  fallbackValue: PixelValue | StringValue | ColorFormatter | LinearGradient | StringValueObject,
+  variableInfo: any,
+  unused: any,
+  unused2: any,
+  cssProperty: string,
+) { // $$E19
+  if (variableInfo.variable?.value) {
+    const variableValue = variableInfo.variable.value
+    return new CssVariable(variableValue.name, fallbackValue, cssProperty, {
+      name: variableValue.name,
+      id: variableValue.id,
+      codeSyntax: variableValue.codeSyntax,
+    })
   }
-  return e;
+
+  return fallbackValue
 }
-export function $$x0(e, t, i, n, r) {
-  let s = $$I13(t, e);
-  return (s && (i[n] = s), t?.status === jg.Resolved) ? new kz(t.name, e, r, t.status === jg.Resolved ? t : void 0) : e;
-}
-function S({
-  raw: e,
-  styleField: t,
-  suggestedVars: i,
-  node: n,
-  field: r,
-  matchIndex: a,
-  arrayIndex: s,
-  preferences: o
-}) {
-  let d = C({
-    node: n,
-    field: r,
-    matchIndex: a,
-    arrayIndex: s,
-    preferences: o
-  });
-  if (d) {
-    let n = new _$$u(e, d.id);
-    i.has(t) || i.set(t, {});
-    let r = i.get(t);
-    r[d.id] = d.matchingVars;
-    i.set(t, r);
-    return n;
+
+/**
+ * Create CSS variable with validation
+ * @param fallbackValue - Fallback value if no variable
+ * @param variableData - Variable data to process
+ * @param issues - Issues object to populate
+ * @param fieldName - Field name for issues
+ * @param cssProperty - CSS property name
+ * @returns CssVariable instance or fallback value
+ */
+export function createValidatedCssVariable<T extends PixelValue | StringValue | ColorFormatter | LinearGradient | StringValueObject>(
+  fallbackValue: T,
+  variableData: any,
+  issues: any,
+  fieldName: string,
+  cssProperty: string,
+) { // $$x0
+  const hint = getVariableHint(variableData, fallbackValue)
+
+  if (hint) {
+    issues[fieldName] = hint
   }
-  return e;
+
+  return variableData?.status === VariableStatus.Resolved
+    ? new CssVariable(variableData.name, fallbackValue, cssProperty, variableData.status === VariableStatus.Resolved ? variableData : undefined)
+    : fallbackValue
 }
-export function $$w9(e) {
-  let t = {};
-  for (let i of e) if (i) for (let [e, n] of Object.entries(i)) t[e] = n;
-  return Object.keys(t).length ? t : void 0;
-}
-function C({
-  node: e,
-  field: t,
-  matchIndex: i = 0,
-  arrayIndex: n = 0,
-  preferences: r
-}) {
-  if (!r.generateForCodePanel) return;
-  let a = $$j14(t, e);
-  if (a && a[n]) return {
-    id: `${i}`,
-    matchingVars: a[n]
-  };
-}
-export function $$T18(e, t, i) {
-  if (!i.generateForCodePanel) return e;
-  let n = void 0 !== t.status ? t.status === jg.Resolved ? t.id : void 0 : t.id;
-  return n ? `/*BOUND_VAR_START_${n}*/${e}/*BOUND_VAR_END*/` : e;
-}
-export function $$k5({
-  value: e,
-  node: t,
-  field: i,
-  matchIndex: n,
-  arrayIndex: r,
-  preferences: a
-}) {
-  let s = C({
-    node: t,
-    field: i,
-    matchIndex: n,
-    arrayIndex: r,
-    preferences: a
-  });
-  if (s) return {
-    value: function ({
-      value: e,
-      id: t
-    }) {
-      return `/*SUGGESTED_VAR_START_${t}*/${e}/*SUGGESTED_VAR_END*/`;
-    }({
-      value: e,
-      id: s.id
-    }),
-    matchingVars: {
-      [s.id]: s.matchingVars
+
+/**
+ * Process raw value with suggested variable reference
+ * @param params - Parameters for processing
+ * @returns Processed value with variable reference or original value
+ */
+function processWithSuggestedVariableReference({
+  raw: rawValue,
+  styleField,
+  suggestedVars,
+  node,
+  field,
+  matchIndex,
+  arrayIndex,
+  preferences,
+}: {
+  raw: any
+  styleField: string
+  suggestedVars: Map<string, any>
+  node: any
+  field: string
+  matchIndex: number
+  arrayIndex: number
+  preferences: any
+}) { // S
+  const suggestionResult = getSuggestedVariable({
+    node,
+    field,
+    matchIndex,
+    arrayIndex,
+    preferences,
+  })
+
+  if (suggestionResult) {
+    const suggestedReference = new SuggestedVariableReference(rawValue, suggestionResult.id)
+
+    if (!suggestedVars.has(styleField)) {
+      suggestedVars.set(styleField, {})
     }
-  };
-}
-export function $$R17(e) {
-  let {
-    raw
-  } = e;
-  return raw instanceof RU ? S({
-    ...e,
-    raw
-  }) : raw;
-}
-export function $$N15(e) {
-  let {
-    raw
-  } = e;
-  if (raw instanceof W4 && raw.isFromSolid) {
-    let i = raw.colorStops.map(t => {
-      let {
-        color
-      } = t;
-      return color instanceof Q1 ? new P2(S({
-        ...e,
-        raw: color
-      }), t.position) : t;
-    });
-    return raw.toNewWithColorStops(i);
+
+    const fieldSuggestions = suggestedVars.get(styleField)
+    fieldSuggestions[suggestionResult.id] = suggestionResult.matchingVars
+    suggestedVars.set(styleField, fieldSuggestions)
+
+    return suggestedReference
   }
-  return raw instanceof Q1 ? S({
-    ...e,
-    raw
-  }) : raw;
+
+  return rawValue
 }
-export function $$P4(e) {
-  let {
-    raw
-  } = e;
-  return raw instanceof lS ? S({
-    ...e,
-    raw
-  }) : raw;
-}
-export function $$O8(e) {
-  let {
-    raw
-  } = e;
-  return raw instanceof _$$h ? S({
-    ...e,
-    raw
-  }) : raw;
-}
-export function $$D16(e) {
-  return e.reduce((e, t, i) => {
-    let {
-      visible = !0
-    } = t;
-    visible && e.push({
-      paint: t,
-      index: i
-    });
-    return e;
-  }, []);
-}
-export function $$L2(e) {
-  return e.reduce((e, t, i) => {
-    let {
-      visible = !0
-    } = t;
-    if (visible) switch (t.type) {
-      case "SOLID":
-        e.push({
-          paint: t,
-          index: i
-        });
-        break;
-      case "GRADIENT_ANGULAR":
-      case "GRADIENT_DIAMOND":
-      case "GRADIENT_LINEAR":
-      case "GRADIENT_RADIAL":
-        if (0 === t.gradientStops.length) break;
-        let r = t.gradientStops[0].color;
-        e.push({
-          paint: {
-            type: "SOLID",
-            opacity: r.a,
-            color: {
-              r: r.r,
-              g: r.g,
-              b: r.b
-            }
-          },
-          index: i,
-          hint: A2.UnsupportedGradientPaint
-        });
-        break;
-      default:
-        e.push({
-          paint: {
-            type: "SOLID",
-            color: {
-              r: 0,
-              g: 0,
-              b: 0
-            }
-          },
-          index: i,
-          hint: A2.UnsupportedPaint
-        });
-    }
-    return e;
-  }, []);
-}
-export function $$F1(e, t, i) {
-  if (!(t instanceof B) && !(t instanceof J3)) switch (e) {
-    case "fills":
-      if (t instanceof z) return t.textSegments[0]?.fills?.[i];
-      return t.fills[i];
-    case "strokes":
-      if (t instanceof z) return;
-      if (t instanceof _$$a) return t.strokes[i];
-      return t.border.strokes[i];
-    case "textDecorationColor":
-      if (!KH(t) || !t.textSegments[0]) return;
-      let n = t.textSegments[0].textDecorationColor.rawValue;
-      if ("AUTO" === n.value) return;
-      return n.value;
-  }
-}
-export function $$M6(e, t) {
-  if (!(t instanceof B) && !(t instanceof J3)) switch (e) {
-    case "width":
-      return t.layout.width;
-    case "height":
-      return t.layout.height;
-    case "paddingTop":
-      if (!u_(t) || !t.isAutoLayout()) return;
-      return t.autoLayout.paddingTop;
-    case "paddingRight":
-      if (!u_(t) || !t.isAutoLayout()) return;
-      return t.autoLayout.paddingRight;
-    case "paddingBottom":
-      if (!u_(t) || !t.isAutoLayout()) return;
-      return t.autoLayout.paddingBottom;
-    case "paddingLeft":
-      if (!u_(t) || !t.isAutoLayout()) return;
-      return t.autoLayout.paddingLeft;
-    case "itemSpacing":
-      if (!u_(t) || !t.isAutoLayout()) return;
-      return t.autoLayout.itemSpacing;
-    case "opacity":
-      return t.opacity;
-    case "minWidth":
-      return t.layout.minWidth;
-    case "maxWidth":
-      return t.layout.maxWidth;
-    case "minHeight":
-      return t.layout.minHeight;
-    case "maxHeight":
-      return t.layout.maxHeight;
-    case "counterAxisSpacing":
-      if (!u_(t) || !t.isAutoLayout()) return;
-      return t.autoLayout.counterAxisSpacing;
-    case "gridRowGap":
-      if (!u_(t) || !t.isGrid()) return;
-      return t.gridLayout.gridRowGap;
-    case "gridColumnGap":
-      if (!u_(t) || !t.isGrid()) return;
-      return t.gridLayout.gridColumnGap;
-    case "strokeWeight":
-      if (t instanceof _$$a) return t.strokeWeight.rawValue;
-      if (!HW(t)) return;
-      return t.border.strokeTopWeight.rawValue;
-    case "strokeTopWeight":
-      if (!HW(t)) return;
-      return t.border.strokeTopWeight.rawValue;
-    case "strokeRightWeight":
-      if (!HW(t)) return;
-      return t.border.strokeRightWeight.rawValue;
-    case "strokeBottomWeight":
-      if (!HW(t)) return;
-      return t.border.strokeBottomWeight.rawValue;
-    case "strokeLeftWeight":
-      if (!HW(t)) return;
-      return t.border.strokeLeftWeight.rawValue;
-    case "topLeftRadius":
-      if (!HW(t)) return;
-      return t.border.topLeftRadius;
-    case "topRightRadius":
-      if (!HW(t)) return;
-      return t.border.topRightRadius;
-    case "bottomLeftRadius":
-      if (!HW(t)) return;
-      return t.border.bottomLeftRadius;
-    case "bottomRightRadius":
-      if (!HW(t)) return;
-      return t.border.bottomRightRadius;
-    case "fontSize":
-      if (!KH(t)) return;
-      return t.textSegments[0].fontSize.rawValue;
-    case "lineHeight":
-      if (!KH(t)) return;
-      let i = t.textSegments[0].lineHeight.rawValue;
-      if ("AUTO" === i.unit) return;
-      return i.value;
-  }
-}
-export function $$j14(e, t) {
-  if (t instanceof B || t instanceof J3) return [];
-  if ("fills" === e || "strokes" === e) {
-    let i = t.inferredVariables[e];
-    return i ? i.map((i, r) => {
-      let a = $$F1(e, t, r);
-      return a && "SOLID" === a.type && i && 0 !== i.length ? {
-        ids: i.map(e => e.id),
-        rawValue: {
-          type: VariableDataType.COLOR,
-          value: {
-            ...a.color,
-            a: a.opacity ?? 1
-          }
-        }
-      } : null;
-    }) : [];
-  }
-  if ("textDecorationColor" === e) {
-    let i = t.inferredVariables[e];
-    if (!i) return [];
-    let r = $$F1(e, t, 0);
-    return r && "SOLID" === r.type && i && 0 !== i.length ? [{
-      ids: i.map(e => e.id),
-      rawValue: {
-        type: VariableDataType.COLOR,
-        value: {
-          ...r.color,
-          a: r.opacity ?? 1
-        }
+
+/**
+ * Merge multiple suggestion objects
+ * @param suggestionObjects - Array of suggestion objects to merge
+ * @returns Merged suggestions or undefined if empty
+ */
+export function mergeSuggestedVariables(suggestionObjects: any[]) { // $$w9
+  const mergedSuggestions: Record<string, any> = {}
+
+  for (const suggestionObj of suggestionObjects) {
+    if (suggestionObj) {
+      for (const [key, value] of Object.entries(suggestionObj)) {
+        mergedSuggestions[key] = value
       }
-    }] : [null];
+    }
   }
-  let i = t.inferredVariables[e];
-  if (!i) return [];
-  if ("fontFamily" === e) return KH(t) ? [{
-    ids: i.map(e => e.id),
-    rawValue: {
-      type: VariableDataType.STRING,
-      value: t.textSegments[0].fontName.family.rawValue
-    }
-  }] : [];
-  let r = $$M6(e, t);
-  return r ? [{
-    ids: i.map(e => e.id),
-    rawValue: {
-      type: VariableDataType.FLOAT,
-      value: r
-    }
-  }] : [];
+
+  return Object.keys(mergedSuggestions).length > 0 ? mergedSuggestions : undefined
 }
-export const DX = $$x0;
-export const Eu = $$F1;
-export const F$ = $$L2;
-export const G6 = $$f3;
-export const JT = $$P4;
-export const Kp = $$k5;
-export const LI = $$M6;
-export const P1 = $$_7;
-export const ZN = $$O8;
-export const a3 = $$w9;
-export const bE = $$A10;
-export const hO = $$b11;
-export const jX = $$y12;
-export const mJ = $$I13;
-export const nK = $$j14;
-export const nb = $$N15;
-export const oE = $$D16;
-export const oy = $$R17;
-export const pO = $$T18;
-export const vV = $$E19;
-export const zr = $$v20;
+
+/**
+ * Get suggested variable for a field
+ * @param params - Parameters for getting suggested variable
+ * @returns Suggested variable information or undefined
+ */
+function getSuggestedVariable({
+  node,
+  field,
+  matchIndex = 0,
+  arrayIndex = 0,
+  preferences,
+}: {
+  node: any
+  field: string
+  matchIndex?: number
+  arrayIndex?: number
+  preferences: any
+}) { // C
+  if (!preferences.generateForCodePanel) {
+    return undefined
+  }
+
+  const inferredVariables = getInferredVariables(field, node)
+
+  if (inferredVariables && inferredVariables[arrayIndex]) {
+    return {
+      id: `${matchIndex}`,
+      matchingVars: inferredVariables[arrayIndex],
+    }
+  }
+
+  return undefined
+}
+
+/**
+ * Wrap value with bound variable markers
+ * @param value - Value to wrap
+ * @param variableData - Variable data
+ * @param preferences - Preferences for generation
+ * @returns Wrapped value with variable markers or original value
+ */
+export function wrapWithBoundVariableMarkers(value: string, variableData: any, preferences: any) { // $$T18
+  if (!preferences.generateForCodePanel) {
+    return value
+  }
+
+  const variableId = variableData.status !== undefined
+    ? variableData.status === VariableStatus.Resolved ? variableData.id : undefined
+    : variableData.id
+
+  return variableId
+    ? `/*BOUND_VAR_START_${variableId}*/${value}/*BOUND_VAR_END*/`
+    : value
+}
+
+/**
+ * Wrap value with suggested variable markers
+ * @param params - Parameters for wrapping
+ * @returns Object with wrapped value and matching variables
+ */
+export function wrapWithSuggestedVariableMarkers({
+  value,
+  node,
+  field,
+  matchIndex,
+  arrayIndex,
+  preferences,
+}: {
+  value: string
+  node: any
+  field: string
+  matchIndex?: number
+  arrayIndex?: number
+  preferences: any
+}) { // $$k5
+  const suggestionResult = getSuggestedVariable({
+    node,
+    field,
+    matchIndex,
+    arrayIndex,
+    preferences,
+  })
+
+  if (suggestionResult) {
+    const wrapValueWithId = ({ value, id }: { value: string, id: string }) => {
+      return `/*SUGGESTED_VAR_START_${id}*/${value}/*SUGGESTED_VAR_END*/`
+    }
+
+    return {
+      value: wrapValueWithId({
+        value,
+        id: suggestionResult.id,
+      }),
+      matchingVars: {
+        [suggestionResult.id]: suggestionResult.matchingVars,
+      },
+    }
+  }
+
+  return undefined
+}
+
+/**
+ * Process pixel value with suggested variable
+ * @param params - Parameters for processing
+ * @returns Processed value
+ */
+export function processPixelValue(params: any) { // $$R17
+  const { raw } = params
+
+  return raw instanceof PixelValue
+    ? processWithSuggestedVariableReference({
+        ...params,
+        raw,
+      })
+    : raw
+}
+
+/**
+ * Process color value with suggested variable
+ * @param params - Parameters for processing
+ * @returns Processed value
+ */
+export function processColorValue(params: any) { // $$N15
+  const { raw } = params
+
+  if (raw instanceof LinearGradient && raw.isFromSolid) {
+    const processedColorStops = raw.colorStops.map((stop) => {
+      const { color } = stop
+
+      return color instanceof ColorFormatter
+        ? new ColorStop(processWithSuggestedVariableReference({
+          ...params,
+          raw: color,
+        }), stop.position)
+        : stop
+    })
+
+    return raw.toNewWithColorStops(processedColorStops)
+  }
+
+  return raw instanceof ColorFormatter
+    ? processWithSuggestedVariableReference({
+        ...params,
+        raw,
+      })
+    : raw
+}
+
+/**
+ * Process string value with suggested variable
+ * @param params - Parameters for processing
+ * @returns Processed value
+ */
+export function processStringValue(params: any) { // $$P4
+  const { raw } = params
+
+  return raw instanceof StringValue
+    ? processWithSuggestedVariableReference({
+        ...params,
+        raw,
+      })
+    : raw
+}
+
+/**
+ * Process string value object with suggested variable
+ * @param params - Parameters for processing
+ * @returns Processed value
+ */
+export function processStringValueObject(params: any) { // $$O8
+  const { raw } = params
+
+  return raw instanceof StringValueObject
+    ? processWithSuggestedVariableReference({
+        ...params,
+        raw,
+      })
+    : raw
+}
+
+/**
+ * Filter visible paints
+ * @param paints - Array of paints to filter
+ * @returns Array of visible paints with indices
+ */
+export function filterVisiblePaints(paints: any[]) { // $$D16
+  return paints.reduce((result: any[], paint: any, index: number) => {
+    const { visible = true } = paint
+
+    if (visible) {
+      result.push({
+        paint,
+        index,
+      })
+    }
+
+    return result
+  }, [])
+}
+
+/**
+ * Process paints and convert unsupported types
+ * @param paints - Array of paints to process
+ * @returns Array of processed paints with indices
+ */
+export function processPaints(paints: any[]) { // $$L2
+  return paints.reduce((result: any[], paint: any, index: number) => {
+    const { visible = true } = paint
+
+    if (visible) {
+      switch (paint.type) {
+        case "SOLID":
+          result.push({
+            paint,
+            index,
+          })
+          break
+
+        case "GRADIENT_ANGULAR":
+        case "GRADIENT_DIAMOND":
+        case "GRADIENT_LINEAR":
+        case "GRADIENT_RADIAL":
+          if (paint.gradientStops.length === 0) {
+            break
+          }
+
+          const firstStopColor = paint.gradientStops[0].color
+          result.push({
+            paint: {
+              type: "SOLID",
+              opacity: firstStopColor.a,
+              color: {
+                r: firstStopColor.r,
+                g: firstStopColor.g,
+                b: firstStopColor.b,
+              },
+            },
+            index,
+            hint: DesignIssues.UnsupportedGradientPaint,
+          })
+          break
+
+        default:
+          result.push({
+            paint: {
+              type: "SOLID",
+              color: {
+                r: 0,
+                g: 0,
+                b: 0,
+              },
+            },
+            index,
+            hint: DesignIssues.UnsupportedPaint,
+          })
+      }
+    }
+
+    return result
+  }, [])
+}
+
+/**
+ * Get field value from node
+ * @param fieldName - Name of the field to retrieve
+ * @param node - Node to retrieve value from
+ * @param index - Index for array fields
+ * @returns Field value or undefined
+ */
+export function getNodeFieldValue(fieldName: string, node: any, index: number) { // $$F1
+  if (!(node instanceof BasicNodeProperties) && !(node instanceof GenericNode)) {
+    switch (fieldName) {
+      case "fills":
+        if (node instanceof NodeProperties) {
+          return node.textSegments[0]?.fills?.[index]
+        }
+        return node.fills[index]
+
+      case "strokes":
+        if (node instanceof NodeProperties) {
+          return undefined
+        }
+        if (node instanceof NodeWrapper) {
+          return node.strokes[index]
+        }
+        return node.border.strokes[index]
+
+      case "textDecorationColor":
+        if (!isBasicNode(node) || !node.textSegments[0]) {
+          return undefined
+        }
+        const textDecorationRawValue = node.textSegments[0].textDecorationColor.rawValue
+        if (textDecorationRawValue.value === "AUTO") {
+          return undefined
+        }
+        return textDecorationRawValue.value
+    }
+  }
+
+  return undefined
+}
+
+/**
+ * Get layout measurement from node
+ * @param measurementName - Name of the measurement to retrieve
+ * @param node - Node to retrieve measurement from
+ * @returns Measurement value or undefined
+ */
+export function getNodeLayoutMeasurement(measurementName: string, node: any) { // $$M6
+  if (!(node instanceof BasicNodeProperties) && !(node instanceof GenericNode)) {
+    switch (measurementName) {
+      case "width":
+        return node.layout.width
+      case "height":
+        return node.layout.height
+      case "paddingTop":
+        if (!isAutoLayoutSupportedNode(node) || !node.isAutoLayout()) {
+          return undefined
+        }
+        return node.autoLayout.paddingTop
+      case "paddingRight":
+        if (!isAutoLayoutSupportedNode(node) || !node.isAutoLayout()) {
+          return undefined
+        }
+        return node.autoLayout.paddingRight
+      case "paddingBottom":
+        if (!isAutoLayoutSupportedNode(node) || !node.isAutoLayout()) {
+          return undefined
+        }
+        return node.autoLayout.paddingBottom
+      case "paddingLeft":
+        if (!isAutoLayoutSupportedNode(node) || !node.isAutoLayout()) {
+          return undefined
+        }
+        return node.autoLayout.paddingLeft
+      case "itemSpacing":
+        if (!isAutoLayoutSupportedNode(node) || !node.isAutoLayout()) {
+          return undefined
+        }
+        return node.autoLayout.itemSpacing
+      case "opacity":
+        return node.opacity
+      case "minWidth":
+        return node.layout.minWidth
+      case "maxWidth":
+        return node.layout.maxWidth
+      case "minHeight":
+        return node.layout.minHeight
+      case "maxHeight":
+        return node.layout.maxHeight
+      case "counterAxisSpacing":
+        if (!isAutoLayoutSupportedNode(node) || !node.isAutoLayout()) {
+          return undefined
+        }
+        return node.autoLayout.counterAxisSpacing
+      case "gridRowGap":
+        if (!isAutoLayoutSupportedNode(node) || !node.isGrid()) {
+          return undefined
+        }
+        return node.gridLayout.gridRowGap
+      case "gridColumnGap":
+        if (!isAutoLayoutSupportedNode(node) || !node.isGrid()) {
+          return undefined
+        }
+        return node.gridLayout.gridColumnGap
+      case "strokeWeight":
+        if (node instanceof NodeWrapper) {
+          return node.strokeWeight.rawValue
+        }
+        if (!isLayoutConstrainedNode(node)) {
+          return undefined
+        }
+        return node.border.strokeTopWeight.rawValue
+      case "strokeTopWeight":
+        if (!isLayoutConstrainedNode(node)) {
+          return undefined
+        }
+        return node.border.strokeTopWeight.rawValue
+      case "strokeRightWeight":
+        if (!isLayoutConstrainedNode(node)) {
+          return undefined
+        }
+        return node.border.strokeRightWeight.rawValue
+      case "strokeBottomWeight":
+        if (!isLayoutConstrainedNode(node)) {
+          return undefined
+        }
+        return node.border.strokeBottomWeight.rawValue
+      case "strokeLeftWeight":
+        if (!isLayoutConstrainedNode(node)) {
+          return undefined
+        }
+        return node.border.strokeLeftWeight.rawValue
+      case "topLeftRadius":
+        if (!isLayoutConstrainedNode(node)) {
+          return undefined
+        }
+        return node.border.topLeftRadius
+      case "topRightRadius":
+        if (!isLayoutConstrainedNode(node)) {
+          return undefined
+        }
+        return node.border.topRightRadius
+      case "bottomLeftRadius":
+        if (!isLayoutConstrainedNode(node)) {
+          return undefined
+        }
+        return node.border.bottomLeftRadius
+      case "bottomRightRadius":
+        if (!isLayoutConstrainedNode(node)) {
+          return undefined
+        }
+        return node.border.bottomRightRadius
+      case "fontSize":
+        if (!isBasicNode(node)) {
+          return undefined
+        }
+        return node.textSegments[0].fontSize.rawValue
+      case "lineHeight":
+        if (!isBasicNode(node)) {
+          return undefined
+        }
+        const lineHeightRawValue = node.textSegments[0].lineHeight.rawValue
+        if (lineHeightRawValue.unit === "AUTO") {
+          return undefined
+        }
+        return lineHeightRawValue.value
+    }
+  }
+
+  return undefined
+}
+
+/**
+ * Get inferred variables for a field
+ * @param fieldName - Name of the field
+ * @param node - Node to get inferred variables from
+ * @returns Array of inferred variables
+ */
+export function getInferredVariables(fieldName: string, node: any) { // $$j14
+  if (node instanceof BasicNodeProperties || node instanceof GenericNode) {
+    return []
+  }
+
+  if (fieldName === "fills" || fieldName === "strokes") {
+    const inferredVars = node.inferredVariables[fieldName]
+
+    return inferredVars
+      ? inferredVars.map((vars: any, index: number) => {
+          const fieldValue = getNodeFieldValue(fieldName, node, index)
+
+          return fieldValue && fieldValue.type === "SOLID" && vars && vars.length !== 0
+            ? {
+                ids: vars.map((v: any) => v.id),
+                rawValue: {
+                  type: VariableDataType.COLOR,
+                  value: {
+                    ...fieldValue.color,
+                    a: fieldValue.opacity ?? 1,
+                  },
+                },
+              }
+            : null
+        })
+      : []
+  }
+
+  if (fieldName === "textDecorationColor") {
+    const inferredVars = node.inferredVariables[fieldName]
+
+    if (!inferredVars) {
+      return []
+    }
+
+    const fieldValue = getNodeFieldValue(fieldName, node, 0)
+
+    return fieldValue && fieldValue.type === "SOLID" && inferredVars && inferredVars.length !== 0
+      ? [{
+          ids: inferredVars.map((v: any) => v.id),
+          rawValue: {
+            type: VariableDataType.COLOR,
+            value: {
+              ...fieldValue.color,
+              a: fieldValue.opacity ?? 1,
+            },
+          },
+        }]
+      : [null]
+  }
+
+  const inferredVars = node.inferredVariables[fieldName]
+
+  if (!inferredVars) {
+    return []
+  }
+
+  if (fieldName === "fontFamily") {
+    return isBasicNode(node)
+      ? [{
+          ids: inferredVars.map((v: any) => v.id),
+          rawValue: {
+            type: VariableDataType.STRING,
+            value: node.textSegments[0].fontName.family.rawValue,
+          },
+        }]
+      : []
+  }
+
+  const measurementValue = getNodeLayoutMeasurement(fieldName, node)
+
+  return measurementValue
+    ? [{
+        ids: inferredVars.map((v: any) => v.id),
+        rawValue: {
+          type: VariableDataType.FLOAT,
+          value: measurementValue,
+        },
+      }]
+    : []
+}
+
+// Export aliases for backward compatibility
+export const DX = createValidatedCssVariable // $$x0
+export const Eu = getNodeFieldValue // $$F1
+export const F$ = processPaints // $$L2
+export const G6 = SUGGESTED_VARIABLE_START_PATTERN // $$f3
+export const JT = processStringValue // $$P4
+export const Kp = wrapWithSuggestedVariableMarkers // $$k5
+export const LI = getNodeLayoutMeasurement // $$M6
+export const P1 = SUGGESTED_VARIABLE_END_PATTERN // $$_7
+export const ZN = processStringValueObject // $$O8
+export const a3 = mergeSuggestedVariables // $$w9
+export const bE = getRadiusVariable // $$A10
+export const hO = getColorVariable // $$b11
+export const jX = getFieldVariable // $$y12
+export const mJ = getVariableHint // $$I13
+export const nK = getInferredVariables // $$j14
+export const nb = processColorValue // $$N15
+export const oE = filterVisiblePaints // $$D16
+export const oy = processPixelValue // $$R17
+export const pO = wrapWithBoundVariableMarkers // $$T18
+export const vV = createCssVariableIfAvailable // $$E19
+export const zr = getVariableWithHint // $$v20

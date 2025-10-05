@@ -129,7 +129,7 @@ import { GC } from "../905/782020";
 import { postUserFlag } from "../905/985254";
 import { jK } from "../figma_app/934707";
 import { overlayStateAtom } from "../905/12032";
-import { qZ, px as _$$px } from "../905/201014";
+import { CodegenPlatform, getCodegenHandler } from "../905/201014";
 import { T as _$$T, q as _$$q } from "../figma_app/590592";
 import { L3 } from "../figma_app/701001";
 import { useIsProgressBarHiddenOrLocked, useSceneGraphSelector, SceneGraphContext, useSceneGraphSelection, useAppModelProperty } from "../figma_app/722362";
@@ -174,13 +174,13 @@ import { RadioPrimitiveRoot } from "../905/22449";
 import { RadioPrimitiveOption } from "../905/34525";
 import { Link } from "../905/438674";
 import { S as _$$S2 } from "../5132/724052";
-import { dP as _$$dP } from "../figma_app/119475";
+import { KeyboardNavigationProvider } from "../figma_app/119475";
 import { usePluginData } from "../905/477505";
 import { gB } from "../905/294543";
 import { Be, $b } from "../469e6e40/370592";
 import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { Rg, LO } from "../figma_app/243025";
-import { tK as _$$tK } from "../905/432392";
+import { MeasureUnitType } from "../905/432392";
 import { KD } from "../figma_app/975811";
 import { getCodegenLanguages } from "../905/661977";
 import { X as _$$X } from "../905/839893";
@@ -328,17 +328,17 @@ import { d as _$$d7 } from "../9410/441456";
 import { useDevModeFocusId, useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser, useHasReadyNodesWithParentOrg } from "../figma_app/88239";
 import { RE, Pz } from "../0c62c2fd/214758";
 import { A as _$$A17 } from "../6828/85206";
-import { t as _$$t5 } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { y$ } from "../figma_app/835219";
 import { aq as _$$aq } from "../figma_app/399472";
 import { selectIsExportRestricted, selectIsCopyExportAllowed } from "../figma_app/212807";
 import { d4 as _$$d8, be, pluginTriggeredFromAtom, pluginIdAtom } from "../figma_app/474636";
-import { jv, Wh } from "../figma_app/985200";
+import { PluginSandbox, PluginIframeMode } from "../figma_app/985200";
 import { PluginUIManager } from "../905/261467";
-import { IN } from "../905/116101";
+import { setUniversalInsertViewResourceDetails } from "../905/116101";
 import { z as _$$z5 } from "../3271/42512";
 import { B0 } from "../figma_app/201703";
-import { s as _$$s5 } from "../figma_app/504088";
+import { SimpleComponentType } from "../figma_app/504088";
 import { initialViewAtom, defaultViewAtom } from "../figma_app/69680";
 import { iT as _$$iT } from "../figma_app/74165";
 import { qs } from "../469e6e40/556776";
@@ -354,7 +354,7 @@ import dd from "../vendor/961736";
 import { c as _$$c7 } from "../905/241436";
 import { incrementCounter } from "../905/949750";
 import { ab as _$$ab } from "../figma_app/870683";
-import { BT, q$ } from "../figma_app/644255";
+import { registerNodeChangeCallback, unregisterNodeChangeCallback } from "../figma_app/644255";
 import { K as _$$K4 } from "../905/918348";
 import { E as _$$E7 } from "../905/53857";
 import { useRelativeTime } from "../905/986103";
@@ -3116,7 +3116,7 @@ function ij() {
           })]
         })
       }, e))
-    }), n === _$$tK.SCALED && jsxs(Fragment, {
+    }), n === MeasureUnitType.SCALED && jsxs(Fragment, {
       children: [jsx("div", {
         className: "configuration_wizard--optionHeadingWithPadding--MnGm9 configuration_wizard--optionHeading--9e-1V text--fontPos12Whyte---tkNx text--_fontBaseWhyte--efAjI",
         children: renderI18nText("dev_handoff.alternative_units.inspection_scale_factor")
@@ -3220,7 +3220,7 @@ function ik({
   let i = t ? jsx("div", {
     className: id,
     children: jsx(_$$k2, {})
-  }) : jsxs(_$$dP, {
+  }) : jsxs(KeyboardNavigationProvider, {
     children: [n.map((t, n) => jsx(iI, {
       plugin: t,
       onSelect: e
@@ -3291,7 +3291,7 @@ function iC() {
   let n = loading ? jsx("div", {
     className: id,
     children: jsx(_$$k2, {})
-  }) : jsx(_$$dP, {
+  }) : jsx(KeyboardNavigationProvider, {
     children: inspectPlugins.map((e, t) => jsx(iT, {
       plugin: e
     }, `${e.id}_${t}`))
@@ -8074,14 +8074,14 @@ function rX() {
   }();
   let n = useDispatch();
   let l = useMemo(() => ({
-    activeTab: _$$s5.PLUGIN,
+    activeTab: SimpleComponentType.PLUGIN,
     viewResource: e => {
-      n(IN({
+      n(setUniversalInsertViewResourceDetails({
         fdPreviewResource: e
       }));
     },
     closeResource: () => {
-      n(IN({
+      n(setUniversalInsertViewResourceDetails({
         fdPreviewResource: void 0
       }));
     },
@@ -8129,8 +8129,8 @@ function rJ() {
       children: [d && jsx(rq, {}), jsx("div", {
         style: h,
         "data-testid": "pluginPanelContainer",
-        children: jsx(jv, {
-          iframeId: Wh.INSPECT,
+        children: jsx(PluginSandbox, {
+          iframeId: PluginIframeMode.INSPECT,
           width: n,
           fillParent: !0
         })
@@ -8139,7 +8139,7 @@ function rJ() {
   });
 }
 let rQ = memo(function (e) {
-  return jsx(_$$t5.TabPanel, {
+  return jsx(Tabs.TabPanel, {
     ...e.tabProps,
     forceMount: !0,
     height: "fill",
@@ -8278,9 +8278,9 @@ function r7({
 function r8(e) {
   return jsx("div", {
     className: cssBuilderInstance.wFull.bb1.bSolid.colorBorder.pl8.pb8.$,
-    children: jsx(_$$t5.TabStrip, {
+    children: jsx(Tabs.TabStrip, {
       manager: e.tabProps.manager,
-      children: jsx(_$$t5.Tab, {
+      children: jsx(Tabs.Tab, {
         ...e.tabProps,
         children: getI18nString("dev_handoff.tab.comment")
       })
@@ -8296,16 +8296,16 @@ function r6(e) {
     className: A7,
     children: [jsx("div", {
       className: _$$tq,
-      children: jsxs(_$$t5.TabStrip, {
+      children: jsxs(Tabs.TabStrip, {
         manager: tabManager,
-        children: [jsx(_$$t5.Tab, {
+        children: [jsx(Tabs.Tab, {
           ...tabPropsMap[r5[IAssertResource.PRIMARY]],
           children: getI18nString("dev_handoff.tab.inspect")
-        }), jsx(_$$t5.Tab, {
+        }), jsx(Tabs.Tab, {
           ...tabPropsMap[r5[IAssertResource.STRING_MANAGEMENT]],
           onboardingKey: _$$iA.STRINGS_TAB,
           children: getI18nString("dev_handoff.tab.string_management")
-        }), jsx(_$$t5.Tab, {
+        }), jsx(Tabs.Tab, {
           ...tabPropsMap[r5[IAssertResource.PLUGIN]],
           children: getI18nString("dev_handoff.tab.plugins")
         })]
@@ -8508,7 +8508,7 @@ function dw({
   let f = v4();
   let g = e ?? f;
   let x = useMemo(() => g.id === _$$uz && "first-party" === g.type ? {
-    id: qZ.CSS,
+    id: CodegenPlatform.CSS,
     type: "first-party"
   } : g, [g]);
   let m = useAtomWithSubscription(pluginIdAtom);
@@ -8592,17 +8592,17 @@ function dN({
     id: e,
     regenerateCode: t
   }) => {
-    e === v && (_$$px().nodeCache?.invalidate(e), t ? (C(), _(!1)) : _(!0));
+    e === v && (getCodegenHandler().nodeCache?.invalidate(e), t ? (C(), _(!1)) : _(!0));
   }, [v, C]);
-  useEffect(() => (BT(T), () => {
-    q$(T);
+  useEffect(() => (registerNodeChangeCallback(T), () => {
+    unregisterNodeChangeCallback(T);
   }), [T]);
   useEffect(() => {
     E || _(!1);
   }, [E, v]);
   let S = useCallback(() => {
     _(!1);
-    _$$px().rebuildNodeCache();
+    getCodegenHandler().rebuildNodeCache();
     incrementCounter();
   }, []);
   let L = function (e, t) {
@@ -11339,7 +11339,7 @@ function pj(e) {
   let g = fullscreenAlias.getIsExtension();
   let x = useAtomWithSubscription(be);
   let m = mr(l ?? "", f);
-  return jsx(_$$t5.TabPanel, {
+  return jsx(Tabs.TabPanel, {
     ...e.tabProps,
     height: "fill",
     children: jsxs("div", {
@@ -11516,7 +11516,7 @@ function pA({
   }) : null;
 }
 function pP(e) {
-  return jsx(_$$t5.TabPanel, {
+  return jsx(Tabs.TabPanel, {
     ...e.tabProps,
     children: jsx("div", {
       className: "dev_handoff_comments_panel--devHandoffCommentsPanel--1Lqo9",
@@ -11537,7 +11537,7 @@ let pL = memo(function () {
     isNodeSelected: Object.keys(e.mirror.sceneGraphSelection).length > 0,
     versionHistoryActive: e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.DEV_HANDOFF_HISTORY
   }));
-  let [i, s] = _$$t5.useTabs({
+  let [i, s] = Tabs.useTabs({
     comment: !0
   });
   let r = useDevModeFocusId();
@@ -11548,7 +11548,7 @@ let pL = memo(function () {
   Object.values(r5).forEach(e => {
     h[e] = p.has(e);
   });
-  let [f, g, _] = _$$t5.useManagedTabs(h, r5[c] ?? r5[IAssertResource.PRIMARY], e => {
+  let [f, g, _] = Tabs.useManagedTabs(h, r5[c] ?? r5[IAssertResource.PRIMARY], e => {
     let t = r3[e];
     if (null == t) {
       reportError(ServiceCategories.DEVELOPER_TOOLS, Error(`DevHandoffRightPanel: Unknown tabId '${e}' passed to onSetTab`));
@@ -13257,7 +13257,7 @@ let f_ = memo(function () {
   _$$uj();
   vy();
   useEffect(() => {
-    _$$px().prepareVmIfNeeded();
+    getCodegenHandler().prepareVmIfNeeded();
   }, []);
   _$$W4(1700);
   !function () {

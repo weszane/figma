@@ -10,7 +10,7 @@ import { hasActionOrCallback, hasSeparator, hasHeader, hasRenderFunction, getAct
 import { formatI18nMessage } from "../905/482208";
 import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
-import { ck } from "../905/87821";
+import { isIntegrationContext } from "../905/87821";
 import { FEditorType } from "../figma_app/53721";
 import { Yh, c1 } from "../figma_app/357047";
 import { K3 } from "../figma_app/678300";
@@ -65,7 +65,7 @@ export function $$v0(e, t) {
         if (!s) return !1;
     }
     if (e.flags.indexOf("!desktop_os_menu") > -1 && t.isDesktopMenu || e.flags.indexOf("desktop_os_menu") > -1 && !t.isDesktopMenu) return !1;
-    let m = ck();
+    let m = isIntegrationContext();
     if (e.flags.indexOf("!integration") > -1 && m || e.flags.indexOf("integration") > -1 && !m || e.flags.indexOf("!variables_table") > -1 && "fullscreen" === t.selectedView.view && t.selectedView.showDevModeVariablesTable) return !1;
   }
   return !!(hasSeparator(e) || hasHeader(e)) || !(null != e.platforms && !function (e) {

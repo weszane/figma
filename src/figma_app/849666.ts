@@ -9,7 +9,7 @@ import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { v as _$$v } from "../figma_app/354567";
 import { isUserNotLoggedInAndDesignEditor } from "../figma_app/564183";
 import { getRepoByIdAlt, isBranchAlt } from "../905/760074";
-import { ck } from "../905/87821";
+import { isIntegrationContext } from "../905/87821";
 import { Kx } from "../figma_app/546509";
 import { selectOpenFile, useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -658,7 +658,7 @@ export function $$ek0() {
   let t = selectCurrentUser();
   let r = useCurrentFileWorkshopModeStatus(!0);
   let E = useSelector(e => e.progressBarState.mode);
-  let y = ck();
+  let y = isIntegrationContext();
   let b = _$$N();
   let T = !e;
   let I = !b && r.enabled;

@@ -17,7 +17,7 @@ import { L as _$$L } from "../905/713563";
 import { selectCurrentUser } from "../905/372672";
 import { ButtonPrimitive } from "../905/632989";
 import v from "classnames";
-import { M3 } from "../figma_app/119475";
+import { useKeyboardNavigationItem } from "../figma_app/119475";
 import { getI18nString } from "../905/303541";
 import { HighlightedText } from "../905/287602";
 var I = v;
@@ -45,7 +45,7 @@ function C({
   let {
     setKeyboardNavigationElement,
     isFauxFocused
-  } = M3({
+  } = useKeyboardNavigationItem({
     id: s,
     path: o
   });

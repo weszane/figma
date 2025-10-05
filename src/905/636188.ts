@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import a from "classnames";
 import { P } from "../905/347284";
-import { yc } from "../905/825399";
+import { useScrollHandler } from "../905/825399";
 var s = a;
 export function $$d0(e) {
   let {
@@ -13,7 +13,7 @@ export function $$d0(e) {
   let {
     isScrolled,
     handleScroll
-  } = yc();
+  } = useScrollHandler();
   let u = useCallback((e, i) => {
     handleScroll(e);
     onScroll?.(e, i);

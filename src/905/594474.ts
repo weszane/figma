@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
 import { ServiceCategories } from "../905/165054";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -2858,7 +2858,7 @@ function iM({
   };
   let B = _$$w3(e.fieldStates.cocreators);
   let V = _$$D(e.fieldStates);
-  let [G, z, Q] = _$$t.useTabs(iF, {
+  let [G, z, Q] = Tabs.useTabs(iF, {
     orientation: "vertical"
   });
   let J = _$$b(Q);
@@ -3018,7 +3018,7 @@ function iM({
     className: KT,
     children: [jsxs("div", {
       className: Cd,
-      children: [jsx(_$$t.TabStrip, {
+      children: [jsx(Tabs.TabStrip, {
         manager: J,
         children: [{
           key: "details",
@@ -3055,7 +3055,7 @@ function iM({
       })]
     }), jsxs("div", {
       className: DK,
-      children: [jsxs(_$$t.TabPanel, {
+      children: [jsxs(Tabs.TabPanel, {
         ...z.details,
         children: [jsx(Mm, {
           id: _$$tZ.NAME_INPUT,
@@ -3106,7 +3106,7 @@ function iM({
             }
           })
         })]
-      }), jsxs(_$$t.TabPanel, {
+      }), jsxs(Tabs.TabPanel, {
         ...z.media,
         children: [jsx(Mm, {
           id: _$$tZ.ICON_UPLOADER,
@@ -3144,14 +3144,14 @@ function iM({
             ...V.carouselMedia
           })
         })]
-      }), jsx(_$$t.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...z.security,
         children: jsx(eL, {
           dataSecurityFieldManager: F,
           isWidget,
           ...V.dataSecurity
         })
-      }), jsxs(_$$t.TabPanel, {
+      }), jsxs(Tabs.TabPanel, {
         ...z.advanced,
         children: [jsx(tS, {
           publishRoleField: e.fieldStates.publishRole,

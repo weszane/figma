@@ -1,199 +1,318 @@
-import { AffineTransform } from "../905/583953";
-import { Vector2D } from "../905/512402";
-import { getRadialGradientPoints } from "../905/409381";
-import { toMatrix2x3 } from "../905/117560";
-import { Point } from "../905/736624";
-import { EG } from "../905/721592";
-function d(e) {
-  return e.map(e => e.value).join(", ");
+import type { IPoint } from "../905/736624"
+import { toMatrix2x3 } from "../905/117560"
+import { getRadialGradientPoints } from "../905/409381"
+import { Vector2D } from "../905/512402"
+import { AffineTransform } from "../905/583953"
+import { formatPercentage } from "../905/721592"
+import { Point } from "../905/736624"
+
+/**
+ * Helper function to join color stop values with commas
+ * Original name: d
+ */
+function joinColorStops(colorStops: ColorStop[]): string {
+  return colorStops.map(stop => stop.value).join(", ")
 }
-export class $$c1 {
-  constructor(e, t) {
-    this.color = e;
-    this.position = t;
+
+/**
+ * Represents a color stop in a gradient
+ * Original name: $$c1
+ */
+export class ColorStop {
+  color: any
+  position: number
+
+  constructor(color: any, position: number) {
+    this.color = color
+    this.position = position
   }
-  get value() {
-    return `${this.color.value} ${EG(this.position, 2)}`;
+
+  get value(): string {
+    return `${this.color.value} ${formatPercentage(this.position, 2)}`
   }
-  equals(e) {
-    return this.value === e.value;
-  }
-}
-class u {
-  constructor(e, t) {
-    this.color = e;
-    this.position = t;
-  }
-  get value() {
-    return `${this.color.value} ${360 * this.position}deg`;
-  }
-  equals(e) {
-    return this.value === e.value;
-  }
-}
-class p {
-  constructor(e, t) {
-    this.color = e;
-    this.position = t;
-  }
-  get value() {
-    return `${this.color.value} ${EG(this.position / 2)}`;
-  }
-  equals(e) {
-    return this.value === e.value;
+
+  equals(other: ColorStop): boolean {
+    return this.value === other.value
   }
 }
-export class $$m2 {
-  static fromColor(e, t = !1) {
-    return new $$m2([new $$c1(e, 0), new $$c1(e, 1)], 0, t);
+
+/**
+ * Represents a color stop with degree-based positioning for conic gradients
+ * Original name: u
+ */
+class DegreeBasedColorStop {
+  color: any
+  position: number
+
+  constructor(color: any, position: number) {
+    this.color = color
+    this.position = position
   }
-  static fromGradientPaint({
-    gradientTransform: e,
-    gradientStops: t
-  }, i) {
-    if (1 === t.length) return $$m2.fromColor(i.parseSingleStop(t[0]));
-    let a = {
-      topLeft: {
-        x: 0,
-        y: 0
-      },
-      topRight: {
-        x: 1,
-        y: 0
-      },
-      bottomLeft: {
-        x: 0,
-        y: 1
-      },
-      bottomRight: {
-        x: 1,
-        y: 1
-      }
-    };
-    let s = AffineTransform.fromNumbers(e[0][0], e[0][1], e[0][2], e[1][0], e[1][1], e[1][2]);
-    s.invert();
-    let l = e => {
-      let t = Point.interpolate({
-        x: 0,
-        y: .5
-      }, {
-        x: 1,
-        y: .5
-      }, e);
-      let i = s.transformPoint(new Vector2D(t.x, t.y));
+
+  get value(): string {
+    return `${this.color.value} ${360 * this.position}deg`
+  }
+
+  equals(other: DegreeBasedColorStop): boolean {
+    return this.value === other.value
+  }
+}
+
+/**
+ * Represents a color stop with halved positioning for diamond gradients
+ * Original name: p
+ */
+class DiamondColorStop {
+  color: any
+  position: number
+
+  constructor(color: any, position: number) {
+    this.color = color
+    this.position = position
+  }
+
+  get value(): string {
+    return `${this.color.value} ${formatPercentage(this.position / 2)}`
+  }
+
+  equals(other: DiamondColorStop): boolean {
+    return this.value === other.value
+  }
+}
+
+/**
+ * Represents a linear gradient
+ * Original name: $$m2
+ */
+export class LinearGradient {
+  angle: number
+  colorStops: ColorStop[]
+  isFromSolid: boolean
+
+  /**
+   * Creates a linear gradient from a single color
+   */
+  static fromColor(color: any, isFromSolid: boolean = false): LinearGradient {
+    return new LinearGradient([new ColorStop(color, 0), new ColorStop(color, 1)], 0, isFromSolid)
+  }
+
+  /**
+   * Creates a linear gradient from gradient paint data
+   */
+  static fromGradientPaint(
+    {
+      gradientTransform,
+      gradientStops,
+    }: {
+      gradientTransform: number[][]
+      gradientStops: any[]
+    },
+    parser: any,
+  ): LinearGradient {
+    if (gradientStops.length === 1) {
+      return LinearGradient.fromColor(parser.parseSingleStop(gradientStops[0]))
+    }
+
+    const corners = {
+      topLeft: { x: 0, y: 0 },
+      topRight: { x: 1, y: 0 },
+      bottomLeft: { x: 0, y: 1 },
+      bottomRight: { x: 1, y: 1 },
+    }
+
+    const transform = AffineTransform.fromNumbers(
+      gradientTransform[0][0],
+      gradientTransform[0][1],
+      gradientTransform[0][2],
+      gradientTransform[1][0],
+      gradientTransform[1][1],
+      gradientTransform[1][2],
+    )
+    transform.invert()
+
+    const interpolatePosition = (position: number) => {
+      const point = Point.interpolate(
+        { x: 0, y: 0.5 },
+        { x: 1, y: 0.5 },
+        position,
+      )
+      const transformedPoint = transform.transformPoint(new Vector2D(point.x, point.y))
       return {
-        x: i.x,
-        y: i.y
-      };
-    };
-    let d = t.map(e => ({
-      color: e.color,
-      location: l(e.position),
-      boundVariables: e.boundVariables
-    }));
-    0 > s.determinant() && s.scale(1, -1);
-    let u = new Point(s.axisY().x, s.axisY().y);
-    let p = u.scale(-1).rotate90().unit();
-    let h = Math.PI / 2;
-    let g = {
-      x: 0,
-      y: 0
-    };
-    let f = {
-      x: 0,
-      y: 0
-    };
-    let _ = u.scale(-1).toAngle();
-    _ > 0 && _ < h ? (g = a.topRight, f = a.bottomLeft) : _ >= h ? (g = a.bottomRight, f = a.topLeft) : _ <= 0 && _ > -h ? (g = a.topLeft, f = a.bottomRight) : _ <= -h && (g = a.bottomLeft, f = a.topRight);
-    let A = (e, t, i) => {
-      let n = Point.subtract(t, e);
-      return Point.dot(Point.subtract(i, e), n) / Point.dot(n, n);
-    };
-    let y = (e, t, i) => Point.interpolate(e, t, A(e, t, i));
-    let b = y(new Point(), p, g);
-    let v = y(new Point(), p, f);
-    let I = Point.size(Point.subtract(v, b));
-    return new $$m2(d.map(e => {
-      let t = Point.dot(Point.subtract(e.location, b), p) / I;
-      return new $$c1(i.parseSingleStop(e), t);
-    }), 180 / Math.PI * (_ + Math.PI));
+        x: transformedPoint.x,
+        y: transformedPoint.y,
+      }
+    }
+
+    const stops = gradientStops.map(stop => ({
+      color: stop.color,
+      location: interpolatePosition(stop.position),
+      boundVariables: stop.boundVariables,
+    }))
+
+    if (transform.determinant() < 0) {
+      transform.scale(1, -1)
+    }
+
+    const yAxis = new Point(transform.axisY().x, transform.axisY().y)
+    const perpendicular = yAxis.scale(-1).rotate90().unit()
+    const halfPi = Math.PI / 2
+
+    let startPoint = { x: 0, y: 0 }
+    let endPoint = { x: 0, y: 0 }
+
+    const angle = yAxis.scale(-1).toAngle()
+
+    if (angle > 0 && angle < halfPi) {
+      startPoint = corners.topRight
+      endPoint = corners.bottomLeft
+    }
+    else if (angle >= halfPi) {
+      startPoint = corners.bottomRight
+      endPoint = corners.topLeft
+    }
+    else if (angle <= 0 && angle > -halfPi) {
+      startPoint = corners.topLeft
+      endPoint = corners.bottomRight
+    }
+    else if (angle <= -halfPi) {
+      startPoint = corners.bottomLeft
+      endPoint = corners.topRight
+    }
+
+    const calculateProjection = (a: Point, b: Point, point: IPoint): number => {
+      const vector = Point.subtract(b, a)
+      return Point.dot(Point.subtract(point, a), vector) / Point.dot(vector, vector)
+    }
+
+    const interpolateAlongLine = (a: Point, b: Point, point: IPoint): Point => {
+      return Point.interpolate(a, b, calculateProjection(a, b, point))
+    }
+
+    const projectedStart = interpolateAlongLine(new Point(0, 0), perpendicular, startPoint)
+    const projectedEnd = interpolateAlongLine(new Point(0, 0), perpendicular, endPoint)
+    const distance = Point.size(Point.subtract(projectedEnd, projectedStart))
+
+    return new LinearGradient(
+      stops.map((stop) => {
+        const projectedDistance = Point.dot(Point.subtract(stop.location, projectedStart), perpendicular) / distance
+        return new ColorStop(parser.parseSingleStop(stop), projectedDistance)
+      }),
+      180 / Math.PI * (angle + Math.PI),
+    )
   }
-  constructor(e, t, i = !1) {
-    this.angle = t;
-    this.colorStops = e;
-    this.isFromSolid = i;
+
+  constructor(colorStops: ColorStop[], angle: number, isFromSolid: boolean = false) {
+    this.angle = angle
+    this.colorStops = colorStops
+    this.isFromSolid = isFromSolid
   }
-  get value() {
-    let e = Math.round(this.angle);
-    360 === e && (e = 0);
-    return `linear-gradient(${e}deg, ${d(this.colorStops)})`;
+
+  get value(): string {
+    let normalizedAngle = Math.round(this.angle)
+    if (normalizedAngle === 360) {
+      normalizedAngle = 0
+    }
+    return `linear-gradient(${normalizedAngle}deg, ${joinColorStops(this.colorStops)})`
   }
-  equals(e) {
-    return this.value === e.value;
+
+  equals(other: LinearGradient): boolean {
+    return this.value === other.value
   }
-  toNewWithColorStops(e) {
-    return new $$m2(e, this.angle, this.isFromSolid);
-  }
-}
-export class $$h0 {
-  constructor(e, t) {
-    let [{
-      x: i,
-      y: n
-    }, {
-      x: r,
-      y: o
-    }, {
-      x: l,
-      y: d
-    }] = getRadialGradientPoints(toMatrix2x3(e.gradientTransform));
-    this.centerX = i;
-    this.centerY = n;
-    this.width = Math.sqrt((l - i) * (l - i) + (d - n) * (d - n));
-    this.height = Math.sqrt((r - i) * (r - i) + (o - n) * (o - n));
-    this.colorStops = e.gradientStops.map(e => new $$c1(t.parseSingleStop(e), e.position));
-  }
-  get value() {
-    return `radial-gradient(${EG(this.width, 2)} ${EG(this.height, 2)} at ${EG(this.centerX, 2)} ${EG(this.centerY, 2)}, ${d(this.colorStops)})`;
-  }
-  equals(e) {
-    return this.value === e.value;
-  }
-}
-export class $$g3 {
-  constructor(e, t) {
-    let [{
-      x: i,
-      y: n
-    }, {
-      x: r,
-      y: o
-    }] = getRadialGradientPoints(toMatrix2x3(e.gradientTransform));
-    this.centerX = i;
-    this.centerY = n;
-    this.angle = 180 * Math.atan2(o - n, r - i) / Math.PI + 90;
-    this.colorStops = e.gradientStops.map(e => new u(t.parseSingleStop(e), e.position));
-  }
-  get value() {
-    return `conic-gradient(from ${Math.round(this.angle)}deg at ${EG(this.centerX, 2)} ${EG(this.centerY, 2)}, ${d(this.colorStops)})`;
-  }
-  equals(e) {
-    return this.value === e.value;
+
+  toNewWithColorStops(colorStops: ColorStop[]): LinearGradient {
+    return new LinearGradient(colorStops, this.angle, this.isFromSolid)
   }
 }
-export class $$f4 {
-  constructor(e, t) {
-    this.colorStops = e.gradientStops.map(e => new p(t.parseSingleStop(e), e.position));
+
+/**
+ * Represents a radial gradient
+ * Original name: $$h0
+ */
+export class RadialGradient {
+  centerX: number
+  centerY: number
+  width: number
+  height: number
+  colorStops: ColorStop[]
+
+  constructor(gradientData: any, parser: any) {
+    const [{ x: x1, y: y1 }, { x: x2, y: y2 }, { x: x3, y: y3 }] = getRadialGradientPoints(toMatrix2x3(gradientData.gradientTransform))
+
+    this.centerX = x1
+    this.centerY = y1
+    this.width = Math.sqrt((x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1))
+    this.height = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
+    this.colorStops = gradientData.gradientStops.map(
+      (stop: any) => new ColorStop(parser.parseSingleStop(stop), stop.position),
+    )
   }
-  get value() {
-    return ["bottom right", "bottom left", "top left", "top right"].map(e => `linear-gradient(to ${e}, ${d(this.colorStops)}) ${e} / 50% 50% no-repeat`).join(", ");
+
+  get value(): string {
+    return `radial-gradient(${formatPercentage(this.width, 2)} ${formatPercentage(this.height, 2)} at ${formatPercentage(this.centerX, 2)} ${formatPercentage(this.centerY, 2)}, ${joinColorStops(this.colorStops)})`
   }
-  equals(e) {
-    return this.value === e.value;
+
+  equals(other: RadialGradient): boolean {
+    return this.value === other.value
   }
 }
-export const Ey = $$h0;
-export const P2 = $$c1;
-export const W4 = $$m2;
-export const jN = $$g3;
-export const n_ = $$f4;
+
+/**
+ * Represents a conic gradient
+ * Original name: $$g3
+ */
+export class ConicGradient {
+  centerX: number
+  centerY: number
+  angle: number
+  colorStops: DegreeBasedColorStop[]
+
+  constructor(gradientData: any, parser: any) {
+    const [{x: x1, y: y1}, {x: x2, y: y2}] = getRadialGradientPoints(toMatrix2x3(gradientData.gradientTransform))
+
+    this.centerX = x1
+    this.centerY = y1
+    this.angle = 180 * Math.atan2(y2 - y1, x2 - x1) / Math.PI + 90
+    this.colorStops = gradientData.gradientStops.map(
+      (stop: any) => new DegreeBasedColorStop(parser.parseSingleStop(stop), stop.position),
+    )
+  }
+
+  get value(): string {
+    return `conic-gradient(from ${Math.round(this.angle)}deg at ${formatPercentage(this.centerX, 2)} ${formatPercentage(this.centerY, 2)}, ${joinColorStops(this.colorStops)})`
+  }
+
+  equals(other: ConicGradient): boolean {
+    return this.value === other.value
+  }
+}
+
+/**
+ * Represents a diamond gradient
+ * Original name: $$f4
+ */
+export class DiamondGradient {
+  colorStops: DiamondColorStop[]
+
+  constructor(gradientData: any, parser: any) {
+    this.colorStops = gradientData.gradientStops.map(
+      (stop: any) => new DiamondColorStop(parser.parseSingleStop(stop), stop.position),
+    )
+  }
+
+  get value(): string {
+    return ["bottom right", "bottom left", "top left", "top right"]
+      .map(position => `linear-gradient(to ${position}, ${joinColorStops(this.colorStops)}) ${position} / 50% 50% no-repeat`)
+      .join(", ")
+  }
+
+  equals(other: DiamondGradient): boolean {
+    return this.value === other.value
+  }
+}
+
+// Export aliases for backward compatibility
+export const Ey = RadialGradient
+export const P2 = ColorStop
+export const W4 = LinearGradient
+export const jN = ConicGradient
+export const n_ = DiamondGradient

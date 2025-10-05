@@ -1,68 +1,148 @@
-import { getCurrentLiveGraphClient } from "../905/761735";
-import { sendWithRetry } from "../905/910117";
-import { createOptimistThunk } from "../905/350402";
-export function $$s1(e, t, r, i, a) {
-  e.id && "optimistic-id" !== e.id ? getCurrentLiveGraphClient()?.optimisticallyUpdate({
-    FileBrowserPreferences: {
-      [e.id]: {
-        orderedTeamIds: e.orderedTeamIds,
-        orderedFavoritedResourceIds: e.orderedFavoritedResourceIds,
-        orderedSidebarSections: e.orderedSidebarSections,
-        orgId: r,
-        teamId: i,
-        orderedLicenseGroupIds: e.orderedLicenseGroupIds
-      }
-    }
-  }, a) : null != t && getCurrentLiveGraphClient()?.optimisticallyCreate({
-    FileBrowserPreferences: {
-      "optimistic-id": {
-        userId: t,
-        migratedToSections: !0,
-        sidebarMigrationStatus: null,
-        orderedTeamIds: e.orderedTeamIds || null,
-        orderedFavoritedResourceIds: e.orderedFavoritedResourceIds || null,
-        orderedSidebarSections: e.orderedSidebarSections || null,
-        updatedAt: new Date(),
-        createdAt: new Date(),
-        orgId: r,
-        teamId: i,
-        orderedLicenseGroupIds: e.orderedLicenseGroupIds || null
-      }
-    }
-  }, a);
+import { createOptimistThunk } from "../905/350402"
+import { getCurrentLiveGraphClient } from "../905/761735"
+import { sendWithRetry } from "../905/910117"
+
+interface FileBrowserPreferences {
+  id?: string
+  userId?: string
+  orderedTeamIds?: string[] | null
+  orderedFavoritedResourceIds?: string[] | null
+  orderedSidebarSections?: any[] | null
+  orderedLicenseGroupIds?: string[] | null
+  orgId?: string | null
+  teamId?: string | null
+  migratedToSections?: boolean
+  sidebarMigrationStatus?: any
+  updatedAt?: Date
+  createdAt?: Date
 }
-let $$o2 = createOptimistThunk((e, t) => {
-  let r = e.getState().user?.id;
-  let n = e.getState().currentUserOrgId;
-  let a = e.getState().currentTeamId;
-  let o = sendWithRetry.put("/api/file_browser_preferences", {
-    ordered_team_ids: t.prefs.orderedTeamIds,
-    ordered_favorites: t.prefs.orderedFavoritedResourceIds,
-    org_id: n,
-    team_id: a,
-    ordered_license_group_ids: t.prefs.orderedLicenseGroupIds,
-    ordered_sidebar_sections: t.prefs.orderedSidebarSections
-  });
-  $$s1(t.prefs, r, n, a, o);
-});
-let $$l0 = createOptimistThunk((e, t) => {
-  let r = e.getState().user?.id;
-  let n = e.getState().currentTeamId;
-  let a = t.teamUser;
-  let o = t.prefs.orderedFavoritedResourceIds;
-  let l = [];
-  if (o) for (var d of o) (a.favoritedFiles?.some(e => e.id === d) || a.favoritedPrototypes?.some(e => e.id === d)) && l.push(d);
-  let c = a.favoritedProjects?.filter(e => t.orderedFolderSubscriptions.includes(e.resourceId)).map(e => e.id) ?? [];
-  l.push(...c);
-  let u = sendWithRetry.put("/api/file_browser_preferences", {
-    ordered_favorites: l,
-    team_id: n
-  });
-  $$s1({
+
+interface TeamUser {
+  favoritedFiles?: { id: string }[]
+  favoritedPrototypes?: { id: string }[]
+  favoritedProjects?: { id: string, resourceId: string }[]
+}
+
+interface UpdatePreferencesParams {
+  prefs: FileBrowserPreferences
+  teamUser?: TeamUser
+  orderedFolderSubscriptions?: string[]
+}
+
+/**
+ * Updates file browser preferences optimistically
+ * Original function: $$s1
+ */
+export function updateFileBrowserPreferencesOptimistically(
+  preferences: FileBrowserPreferences,
+  userId: string | undefined,
+  orgId: string | null,
+  teamId: string | null,
+  requestPromise: Promise<any>,
+): void {
+  const hasValidId = preferences.id && preferences.id !== "optimistic-id"
+
+  if (hasValidId) {
+    getCurrentLiveGraphClient()?.optimisticallyUpdate({
+      FileBrowserPreferences: {
+        [preferences.id]: {
+          orderedTeamIds: preferences.orderedTeamIds,
+          orderedFavoritedResourceIds: preferences.orderedFavoritedResourceIds,
+          orderedSidebarSections: preferences.orderedSidebarSections,
+          orgId,
+          teamId,
+          orderedLicenseGroupIds: preferences.orderedLicenseGroupIds,
+        },
+      },
+    }, requestPromise)
+  }
+  else if (userId != null) {
+    getCurrentLiveGraphClient()?.optimisticallyCreate({
+      FileBrowserPreferences: {
+        "optimistic-id": {
+          userId,
+          migratedToSections: true,
+          sidebarMigrationStatus: null,
+          orderedTeamIds: preferences.orderedTeamIds || null,
+          orderedFavoritedResourceIds: preferences.orderedFavoritedResourceIds || null,
+          orderedSidebarSections: preferences.orderedSidebarSections || null,
+          updatedAt: new Date(),
+          createdAt: new Date(),
+          orgId,
+          teamId,
+          orderedLicenseGroupIds: preferences.orderedLicenseGroupIds || null,
+        },
+      },
+    }, requestPromise)
+  }
+}
+
+/**
+ * Thunk for updating file browser preferences
+ * Original function: $$o2
+ */
+const updateFileBrowserPreferencesThunk = createOptimistThunk((dispatch, params: UpdatePreferencesParams) => {
+  const state = dispatch.getState()
+  const userId = state.user?.id
+  const orgId = state.currentUserOrgId
+  const teamId = state.currentTeamId
+
+  const requestPromise = sendWithRetry.put("/api/file_browser_preferences", {
+    ordered_team_ids: params.prefs.orderedTeamIds,
+    ordered_favorites: params.prefs.orderedFavoritedResourceIds,
+    org_id: orgId,
+    team_id: teamId,
+    ordered_license_group_ids: params.prefs.orderedLicenseGroupIds,
+    ordered_sidebar_sections: params.prefs.orderedSidebarSections,
+  })
+
+  updateFileBrowserPreferencesOptimistically(params.prefs, userId, orgId, teamId, requestPromise)
+})
+
+/**
+ * Thunk for updating favorite resources
+ * Original function: $$l0
+ */
+const updateFavoriteResourcesThunk = createOptimistThunk((dispatch, params: UpdatePreferencesParams) => {
+  const state = dispatch.getState()
+  const userId = state.user?.id
+  const teamId = state.currentTeamId
+  const teamUser = params.teamUser
+  const orderedFavoritedResourceIds = params.prefs.orderedFavoritedResourceIds
+
+  if (!teamUser || !orderedFavoritedResourceIds)
+    return
+
+  const favoriteResourceIds: string[] = []
+
+  // Filter valid favorite resource IDs
+  for (const resourceId of orderedFavoritedResourceIds) {
+    const isFavoriteFile = teamUser.favoritedFiles?.some(file => file.id === resourceId)
+    const isFavoritePrototype = teamUser.favoritedPrototypes?.some(prototype => prototype.id === resourceId)
+
+    if (isFavoriteFile || isFavoritePrototype) {
+      favoriteResourceIds.push(resourceId)
+    }
+  }
+
+  // Add favorited projects that are in ordered folder subscriptions
+  const favoritedProjectIds = teamUser.favoritedProjects
+    ?.filter(project => params.orderedFolderSubscriptions?.includes(project.resourceId))
+    .map(project => project.id) ?? []
+
+  favoriteResourceIds.push(...favoritedProjectIds)
+
+  const requestPromise = sendWithRetry.put("/api/file_browser_preferences", {
+    ordered_favorites: favoriteResourceIds,
+    team_id: teamId,
+  })
+
+  updateFileBrowserPreferencesOptimistically({
     id: "optimistic-id",
-    orderedFavoritedResourceIds: l
-  }, r, null, n, u);
-});
-export const Sh = $$l0;
-export const ah = $$s1;
-export const yJ = $$o2;
+    orderedFavoritedResourceIds: favoriteResourceIds,
+  }, userId, null, teamId, requestPromise)
+})
+
+export const Sh = updateFavoriteResourcesThunk
+export const ah = updateFileBrowserPreferencesOptimistically
+export const yJ = updateFileBrowserPreferencesThunk

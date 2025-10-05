@@ -25,61 +25,60 @@ import { useInitializeUniqueId } from '../905/27228';
 import { clusteredPinsInstance } from '../905/29425';
 import { beginCreateNewFolder, hideMobileNav, searchResultClicked, setBrowserTileSortView, setDeletedFiles, setDeletedRepos, setFileBrowserLoading, showMobileNav, stopCreateNewFolder } from '../905/34809';
 import { isFullscreenSlidesView } from '../905/35881';
-import { p as _$$p } from '../905/36308';
+import { generateFullscreenMenuItems } from '../905/36308';
 import { fullscreenAlias } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
-import { yz } from '../905/42209';
-import { A as _$$A8 } from '../905/47292';
-import { mJ as _$$mJ, CK, SF, TW } from '../905/55862';
+import { FileRowRight } from '../905/42209';
+import { LibraryFilterRows } from '../905/47292';
+import { filterLibraries, getFilterDisplayName, searchLibraries, sortLibrariesByCriteria } from '../905/55862';
 import { useTabState } from '../905/56919';
-import { m as _$$m4 } from '../905/65216';
+import { checkAndShowReturnToInstanceBell } from '../905/65216';
 import { deleteRecentPrototype, prototypeHideComments, prototypeReset, prototypeResetRecents, prototypeSetBackgroundColor, prototypeSetCurrentPage, prototypeSetIsFooterVisible, prototypeSetIsReconnecting, prototypeSetPages, prototypeSetProgressBarMode, prototypeShowComments, prototypeShowOnlyMyComments, prototypeShowResolvedComments, recentPrototypePost, recentPrototypeUnmarkViewed, restoreRecentPrototype } from '../905/70982';
 import { createActionCreator } from '../905/73481';
-import { an as _$$an2, PW as _$$PW, y$ as _$$y$, TK } from '../905/81009';
+import { deselectTiles, resetTileSelection, selectTiles, selectTilesByKeys } from '../905/81009';
 import { addFileImportToQueue, cancelImportPdf, clearFileImportQueue, clearFileImports, confirmImportPdf, doneProcessingFile, failFileImportOnLimit, setFromFileImportNuxStep, showImportFigmaDesignRepo, showImportPdfConfirmation, startProcessingFile, updateFileImportItem } from '../905/81459';
-import { ck as _$$ck4 } from '../905/87821';
 import { fileVersionSelector } from '../905/91038';
 import { combineWithHyphen, ShareContext } from '../905/91820';
 import { UserAPIHandlers } from '../905/93362';
 import { batchPutPlan, setLastVisitedPlan } from '../905/93909';
 import { setupDragHandler } from '../905/97346';
-import { bE as _$$bE4, uo as _$$uo5, yH as _$$yH3, yJ as _$$yJ5 } from '../905/98702';
+import { roleBatchPutAction, roleDeleteAction, rolePostAction, rolePutAction } from '../905/98702';
 import { useSprigWithSampling } from '../905/99656';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
-import { C as _$$C2 } from '../905/109977';
+import { LibraryBestMatchesComponent } from '../905/109977';
 import { LivestoreBinding, LivestoreStore } from '../905/113138';
-import { oB as _$$oB2, Oi, Ql, ZN } from '../905/115338';
-import { eo as _$$eo, En, IN, jx, KE, Kl, SI } from '../905/116101';
+import { bindWithIgnore, composeFn, reduceArray, reduceObject } from '../905/115338';
+import { closeUniversalInsertModal, setUniversalInsertModalClose, setUniversalInsertModalOpen, setUniversalInsertModalPin, setUniversalInsertScrolledDevelopmentSection, setUniversalInsertViewResourceDetails, updateSourceRect } from '../905/116101';
 import { fullscreenPerfManager } from '../905/125218';
 import { mapLibraryAttributes } from '../905/128063';
 import { KindEnum, PopupType, PositionEnum } from '../905/129884';
 import { filterNavigationConfig, navigationConfig } from '../905/139708';
-import { A as _$$A11 } from '../905/142432';
-import { Kz as _$$Kz } from '../905/145989';
+import { setupInteractiveSlideElementTracking } from '../905/142432';
+import { SpellCheckStorageKey } from '../905/145989';
 import { getCollapsedSectionIdentifiers } from '../905/148074';
 import { handleOptimistTransactionWithError } from '../905/150006';
-import { t as _$$t5 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { liveStoreFileBinding } from '../905/155850';
 import { hideModal, hideSpecificModal, popModalStack, popPrevModal, showModal, showModalHandler, updateModal } from '../905/156213';
 import { ThemeProvider, useThemeContext } from '../905/158740';
 import { ImportEventType, ImportExportStatus, isPdfFile } from '../905/163189';
 import { ServiceCategories } from '../905/165054';
 import { createFontMetadata, getFontOwner } from '../905/165290';
-import { c as _$$c3 } from '../905/167005';
-import { a as _$$a2 } from '../905/173279';
-import { C as _$$C, Y as _$$Y } from '../905/180528';
-import { g as _$$g } from '../905/181093';
+import { OverviewStatsView } from '../905/167005';
+import { desktopFeatureFlags } from '../905/173279';
+import { MissingLibrariesHeader, SubscriptionFileViewHeader } from '../905/180528';
+import { SuspenseWithGuardrail } from '../905/181093';
 import { isFullscreenInterceptElement } from '../905/181774';
-import { i as _$$i4 } from '../905/182187';
-import { Z as _$$Z4 } from '../905/184216';
+import { restoreRepositories } from '../905/182187';
+import { DowntimeActionsEnum } from '../905/184216';
 import { getMPVisibleTheme, getThemePreferenceFromLocalStorage, isEnhancedContrastEnabled } from '../905/187165';
 import { permissionScopeHandler as _$$l3 } from '../905/189185';
 import { getGpuDeviceInfo } from '../905/190247';
-import { t as _$$t9 } from '../905/192333';
-import { mC as _$$mC, X7 as _$$X5, zq } from '../905/193529';
+import { PinningState } from '../905/192333';
+import { errorStateActionCreator, lastCreatedCommentIdAction, screenReaderEnableAction } from '../905/193529';
 import { AUTH_COMPLETE, AUTH_EMAIL_ONLY, AUTH_GOOGLE_SIGNUP, AUTH_INIT, AUTH_RESET_PASSWORD, AUTH_SAML_START_FROM_SESSION, AUTH_SEND_EMAIL_SAML_START, AUTH_SEND_PASSWORD_RESET, AUTH_SET_AUTH_LOADING, AUTH_SET_REDIRECT_URL, AUTH_SHOW_ERROR, AUTH_SIGN_IN, AUTH_SIGN_UP, changeAuthFormState, redirectAfterRedeem, startSamlEmailVerification } from '../905/194276';
 import { getSelectedId } from '../905/200237';
-import { px as _$$px2 } from '../905/201014';
+import { getCodegenHandler } from '../905/201014';
 import { sessionApiInstance } from '../905/202181';
 import { x as _$$x3 } from '../905/209285';
 import { createMixedArray, MIXED_MARKER } from '../905/216495';
@@ -110,7 +109,7 @@ import { getI18nString, loadI18nState, renderI18nText } from '../905/303541';
 import { T as _$$T3, v as _$$v4 } from '../905/309844';
 import { sR as _$$sR } from '../905/309846';
 import { createNewFileWithRetry, getErrorMessage, getNewDocumentErrorMessage, initializeFullscreenForNewFile, initiateNewFileCreation, loadAndOpenFileInFullscreen } from '../905/327855';
-import { F as _$$F4, r as _$$r7 } from '../905/336143';
+import { useUsedStyles, UsedStylesContext } from '../905/336143';
 import { v as _$$v5 } from '../905/344656';
 import { D6 as _$$D5, Nx } from '../905/345933';
 import { updateJoinStatus } from '../905/346794';
@@ -157,7 +156,7 @@ import { formatI18nMessage } from '../905/482208';
 import { R as _$$R } from '../905/483499';
 import { sendMetric } from '../905/485103';
 import { $ as _$$$2 } from '../905/489647';
-import { S as _$$S7 } from '../905/491708';
+import { extractCopyExportRestrictions } from '../905/491708';
 import { b as _$$b4 } from '../905/493664';
 import { folderLivestoreBinding } from '../905/493958';
 import { C as _$$C3 } from '../905/496700';
@@ -452,7 +451,7 @@ import { df as _$$df, Sb as _$$Sb, De, WM } from '../figma_app/519839';
 import { A as _$$A9 } from '../figma_app/526287';
 import { P as _$$P, Z as _$$Z } from '../figma_app/529847';
 import { addFollow, deleteFollow, flushNewCommentsQueue, followEntity, hideAdminProfileBanner, insertCommunityMention, resetCommentState, restrictProfile, savePageState, setCommentReplies, setComments, setCommentsActiveFeedType, setCommentState, setCommunityAuthedActiveProfileAlias, showAdminProfileBanner, unfollowEntity, unrestrictProfile } from '../figma_app/530167';
-import { Tf } from '../figma_app/543100';
+import { TileUtils } from '../figma_app/543100';
 import { Jj } from '../figma_app/546509';
 import { isFigmakeSitesEnabled } from '../figma_app/552876';
 import { l7 as _$$l8, uV as _$$uV, uw as _$$uw, fs, GV, KJ, L4, Qi, Vx } from '../figma_app/559491';
@@ -512,7 +511,7 @@ import { bellFeedAPIInstance, desktopAPIInstance, OpenTarget } from '../figma_ap
 import { Ed } from '../figma_app/883490';
 import { o as _$$o } from '../figma_app/885533';
 import { getFalseValue, isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/897289';
-import { iN as _$$iN, lF as _$$lF3, Mv as _$$Mv, pS as _$$pS, to as _$$to2, U6 as _$$U4, X7 as _$$X4, gG, jv, N9, qP } from '../figma_app/909778';
+import { addFileFavoriteAction, addFolderFavorite, addPrototypeFavorite, bulkSetResourcesAsFavorites, removeFileFavorite, removeFolderFromFavorites, removePrototypeFavorite, setFavoritesCountAction, setMovingResourceAction, setNewSectionIndexAction, updateExpandedSectionsAction } from '../figma_app/909778';
 import { nH as _$$nH, sw as _$$sw, Ev, FL } from '../figma_app/914957';
 import { LoadingBarStatus, PluginRunForContext, TabOpenBehavior } from '../figma_app/915202';
 import { l0 as _$$l9, OP } from '../figma_app/920435';
@@ -608,7 +607,7 @@ function B(e) {
           isEnLocale: getI18nState().getPrimaryLocale(!1) === languageCodes.EN,
           appModel: i
         };
-        let r = _$$p({
+        let r = generateFullscreenMenuItems({
           theme: t,
           backToFileArgs: {
             shouldShowBackToFiles: !1
@@ -1795,7 +1794,7 @@ if (desktopAPIInstance && getInitialOptions().user_data && (desktopAPIInstance.s
 }
 if (desktopAPIInstance) {
   let e = getFeatureFlags();
-  let t = Object.fromEntries(_$$a2.map(t => [t, e[t]]));
+  let t = Object.fromEntries(desktopFeatureFlags.map(t => [t, e[t]]));
   desktopAPIInstance.setFeatureFlags({
     desktop_push_notifs_win: !0,
     desktop_extension_registry: !0,
@@ -2346,7 +2345,7 @@ let ng = e => t => function (i) {
       url: e
     }) => {
       e && revokeThumbnailUrl(e);
-    }), e.dispatch(componentClearLocal()), resetAllAsyncPromises(), e.dispatch(notificationActions.clearAll()), n.modalShown && e.dispatch(hideModal()), n.universalInsertModal.showing && e.dispatch(KE()), e.dispatch(_$$Ho({})), fullscreenValue.onReady().then(() => {
+    }), e.dispatch(componentClearLocal()), resetAllAsyncPromises(), e.dispatch(notificationActions.clearAll()), n.modalShown && e.dispatch(hideModal()), n.universalInsertModal.showing && e.dispatch(closeUniversalInsertModal()), e.dispatch(_$$Ho({})), fullscreenValue.onReady().then(() => {
       e.dispatch(H1({
         votingStage: SessionStatus.NO_SESSION
       }));
@@ -2722,7 +2721,7 @@ let nQ = e => t => function (i) {
           let e = n.theme.visibleTheme;
           Fullscreen?.setEditorTheme(e || '');
         }
-        a.editorType === FEditorType.DevHandoff ? (e.dispatch(KE()), e.dispatch(hideModal()), t && fullscreenValue.onReady().then(() => fullscreenValue.triggerAction('set-tool-comments'))) : (a.editorType === FEditorType.Design && (r.editorType === FEditorType.Illustration || r.editorType === FEditorType.DevHandoff) || a.editorType === FEditorType.Illustration && (r.editorType === FEditorType.Design || r.editorType === FEditorType.DevHandoff)) && (e.dispatch(hideModal()), fullscreenValue.onReady().then(() => {
+        a.editorType === FEditorType.DevHandoff ? (e.dispatch(closeUniversalInsertModal()), e.dispatch(hideModal()), t && fullscreenValue.onReady().then(() => fullscreenValue.triggerAction('set-tool-comments'))) : (a.editorType === FEditorType.Design && (r.editorType === FEditorType.Illustration || r.editorType === FEditorType.DevHandoff) || a.editorType === FEditorType.Illustration && (r.editorType === FEditorType.Design || r.editorType === FEditorType.DevHandoff)) && (e.dispatch(hideModal()), fullscreenValue.onReady().then(() => {
           t && fullscreenValue.triggerAction('set-tool-comments');
           let i = e.getState();
           let n = !!i.openFile?.canEdit;
@@ -2802,7 +2801,7 @@ function ry({
     properties: {
       libraryKey: t.key
     },
-    children: [A ? jsx(_$$C, {
+    children: [A ? jsx(SubscriptionFileViewHeader, {
       libraryStat: A,
       libraryKey: I.libraryKey,
       showingDefaultSubscriptionsForTeamId: null,
@@ -2810,7 +2809,7 @@ function ry({
       showingDefaultSubscriptionsForOrg: c,
       canEditSubscriptions: e,
       onBackToList: r
-    }) : jsx(_$$Y, {
+    }) : jsx(MissingLibrariesHeader, {
       backToList: r,
       numMissingLibraries: 1
     }), jsx(_$$S4, {
@@ -2825,7 +2824,7 @@ function ry({
       tabProps: y
     }), getFeatureFlags().dse_fpl_wave_1 ? jsxs('div', {
       className: cssBuilderInstance.minH0.$,
-      children: [jsx(_$$t5.TabPanel, {
+      children: [jsx(Tabs.TabPanel, {
         ...b.overview,
         height: 'fill',
         children: jsx(_$$l5, {
@@ -2835,7 +2834,7 @@ function ry({
           onItemClick: a,
           width: p
         })
-      }), jsx(_$$t5.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...b.analytics,
         height: 'fill',
         children: jsx(_$$O2, {
@@ -2915,7 +2914,7 @@ function rW({
           })
         })
       })]
-    }), jsx(yz, {
+    }), jsx(FileRowRight, {
       children: t ? jsx(_$$I2, {
         numComponents: i,
         numStateGroups: r,
@@ -2971,7 +2970,7 @@ function rY({
   viewFile: c,
   width: u
 }) {
-  let p = CK({
+  let p = filterLibraries({
     libraryFiles: e,
     currentLibrariesViewFilterState: r ? null : i
   });
@@ -3004,7 +3003,7 @@ function rY({
             numVariables: e.num_variables,
             recordingKey: `subscriptionListViewFileRow.${p}.${i.name}`,
             viewFile: c
-          }), r && jsx(_$$C2, {
+          }), r && jsx(LibraryBestMatchesComponent, {
             publishedLibrary: mapLibraryAttributes(e),
             searchQuery: a,
             inline: !0,
@@ -3076,7 +3075,7 @@ function r0({
     isSearchLoading,
     libraryFiles,
     onSearchQueryChange
-  } = TW(t.files);
+  } = searchLibraries(t.files);
   let _ = useCurrentUserOrg();
   let A = useDispatch();
   useEffect(() => {
@@ -3104,7 +3103,7 @@ function r0({
     I(n);
     y.set(rJ, n);
   }, [v, y]);
-  let x = _$$mJ({
+  let x = sortLibrariesByCriteria({
     libraryFiles,
     showingDefaultSubscriptionsForTeamId: null,
     sortState: v
@@ -3115,7 +3114,7 @@ function r0({
   } : null, [S]);
   let [C, T] = useState(w);
   let k = useMemo(() => !isSearching && (C?.type === 'workspace' || C?.type === 'drafts' || C?.type === 'unassigned'), [C, isSearching]);
-  let R = S && C?.type === 'org' ? jsx(_$$A8, {
+  let R = S && C?.type === 'org' ? jsx(LibraryFilterRows, {
     libraryFiles: x,
     allLibrariesViewFilterStates: [C],
     handleLibrariesViewFilterChange: T,
@@ -3172,7 +3171,7 @@ function r0({
         }), k && C && jsxs('div', {
           className: rQ,
           children: [jsx(_$$i2, {
-            assetOrFileName: SF(C, _?.name),
+            assetOrFileName: getFilterDisplayName(C, _?.name),
             onBack: () => T({
               type: 'org'
             })
@@ -3241,7 +3240,7 @@ function r1({
     });
     return e;
   }, [t, teamsWithLibraries, totalLibraries, totalComponents, totalStyles, totalVariables]);
-  return jsx(_$$c3, {
+  return jsx(OverviewStatsView, {
     isLoading: e,
     stats: c
   });
@@ -3266,7 +3265,7 @@ function r7({
   let [g, f] = useState(null);
   let [_, A] = useState(null);
   let [y, b] = useState(_$$R3.OVERVIEW);
-  let v = _$$F4();
+  let v = useUsedStyles();
   let [I] = setupResourceAtomHandler(getLibraryStats(r));
   let E = useMemo(() => I.data?.files.map(e => e.file).find(e => e.key === l?.fileKey), [l, I.data?.files]);
   let [x] = setupResourceAtomHandler(getOrgMigrationStatus(r));
@@ -3329,7 +3328,7 @@ function r7({
   let F = I.data || initialLibraryStats;
   return jsx(_$$t6, {
     page: _$$e3.DSA_LIBRARY_VIEW,
-    children: jsx(_$$r7.Provider, {
+    children: jsx(UsedStylesContext.Provider, {
       value: v,
       children: jsxs('div', {
         className: 'dsa_library_view--slidingPaneContainer--fZTf- sliding_pane--slidingPaneContainer--RQkXf',
@@ -4579,7 +4578,7 @@ function sl(e) {
     if (n && n.resource_type === e) {
       let e = n.resource_id_or_key;
       let r = function (e = {}, t) {
-        if (_$$bE4.matches(t) || _$$yJ5.matches(t)) {
+        if (rolePostAction.matches(t) || rolePutAction.matches(t)) {
           let i;
           let n = t.payload.role;
           let r = {
@@ -4602,7 +4601,7 @@ function sl(e) {
           };
           return r;
         }
-        if (_$$yH3.matches(t)) {
+        if (roleDeleteAction.matches(t)) {
           let i = t.payload.role;
           if (so(i) in e) {
             let t = {
@@ -4929,7 +4928,7 @@ function sA(e, t) {
       case 'put':
         {
           let i = t.role;
-          if (e.dispatch(_$$yJ5({
+          if (e.dispatch(rolePutAction({
             role: i
           })), t.role_data) {
             let i = e.getState();
@@ -4945,7 +4944,7 @@ function sA(e, t) {
       case 'post':
         {
           let i = t.role;
-          e.dispatch(_$$bE4({
+          e.dispatch(rolePostAction({
             role: t.role
           }));
           let n = e.getState().user;
@@ -4965,7 +4964,7 @@ function sA(e, t) {
           break;
         }
       case 'delete':
-        e.dispatch(_$$yH3({
+        e.dispatch(roleDeleteAction({
           role: t.role
         }));
     }
@@ -5864,14 +5863,14 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
     let t = e.getState();
     let n = af()(t.fileByKey, e => e.library_key)[i.payload.item.library_key];
     n && sz(e, n);
-  } else if (_$$uo5.matches(i)) {
+  } else if (roleBatchPutAction.matches(i)) {
     let t = e.getState().user;
     for (let n of i.payload.roles) t != null && n.user_id === t.id && sH(e, n);
-  } else if (_$$yJ5.matches(i) || _$$bE4.matches(i)) {
+  } else if (rolePutAction.matches(i) || rolePostAction.matches(i)) {
     let t = e.getState().user;
     let n = i.payload.role;
     t != null && n.user_id === t.id && sH(e, n);
-  } else if (_$$yH3.matches(i)) {
+  } else if (roleDeleteAction.matches(i)) {
     let t = e.getState().user;
     let r = i.payload.role;
     if (t && r.user_id === t.id) {
@@ -5926,7 +5925,7 @@ let sq = e => t => function (i) {
         i && fetchTeamRoles(i.id, e);
       }
     }
-  } else if (_$$yH3.matches(i)) {
+  } else if (roleDeleteAction.matches(i)) {
     t(i);
     let n = e.getState();
     let r = i.payload.role;
@@ -6470,19 +6469,19 @@ function oh(e) {
 }
 function og(e, t) {
   if (!e) return om();
-  if (_$$y$.matches(t)) {
+  if (selectTiles.matches(t)) {
     let i = oh(e);
-    for (let e of t.payload.tiles) i[t.payload.type][Tf.getId(e)] = !0;
+    for (let e of t.payload.tiles) i[t.payload.type][TileUtils.getId(e)] = !0;
     t.payload.type === ComFileType.PINNED_FILES ? (i[ComFileType.FILES] = {}, i[ComFileType.PROTOTYPES] = {}, i[ComFileType.REPOS] = {}) : i[ComFileType.PINNED_FILES] = {};
     return i;
   }
-  if (_$$PW.matches(t)) {
+  if (selectTilesByKeys.matches(t)) {
     let i = oh(e);
     for (let e of t.payload.keys) i[t.payload.type][e] = !0;
     t.payload.type === ComFileType.PINNED_FILES ? (i[ComFileType.FILES] = {}, i[ComFileType.PROTOTYPES] = {}, i[ComFileType.REPOS] = {}) : i[ComFileType.PINNED_FILES] = {};
     return i;
   }
-  if (TK.matches(t)) {
+  if (deselectTiles.matches(t)) {
     let i = oh(e);
     for (let e of t.payload.tileKeys) {
       delete i[ComFileType.FILES][e];
@@ -6493,7 +6492,7 @@ function og(e, t) {
     }
     return i;
   }
-  if (_$$an2.matches(t)) return om();
+  if (resetTileSelection.matches(t)) return om();
   if (P6.matches(t)) {
     let i = oh(e);
     for (let e in t.payload.fileKeys) {
@@ -6513,7 +6512,7 @@ let of = e => t => function (i) {
         for (let i of Object.keys(e)) t += Object.keys(e[i]).length;
       }
       return t;
-    }(e.getState().tileSelect) && e.dispatch(_$$an2());
+    }(e.getState().tileSelect) && e.dispatch(resetTileSelection());
   }
   return t(i);
 };
@@ -7506,22 +7505,22 @@ let ln = {
   favoritesCount: 0
 };
 function lr(e = ln, t) {
-  return _$$pS.matches(t) ? {
+  return setNewSectionIndexAction.matches(t) ? {
     ...e,
     newCustomSectionIndex: t.payload.newCustomSectionIndex
-  } : _$$to2.matches(t) ? {
+  } : setMovingResourceAction.matches(t) ? {
     ...e,
     movingResource: t.payload.movingResource
-  } : _$$U4.matches(t) ? {
+  } : updateExpandedSectionsAction.matches(t) ? {
     ...e,
     collapsedCustomSections: t.payload.collapsedCustomSections
-  } : _$$lF3.matches(t) ? {
+  } : setFavoritesCountAction.matches(t) ? {
     ...e,
     favoritesCount: t.payload.favoritesCount
   } : e;
 }
 let lc = 0;
-let lu = _$$oB2((e, t) => updateFileImportItem.matches(t) && t.payload.id === e.id ? {
+let lu = bindWithIgnore((e, t) => updateFileImportItem.matches(t) && t.payload.id === e.id ? {
   ...e,
   ...t.payload
 } : e, {
@@ -7560,7 +7559,7 @@ function lp(e, t) {
       e.queue = [...e.queue, n.id];
     });
   } else if (updateFileImportItem.matches(t)) {
-    let i = Ql(e.files, t, lu);
+    let i = reduceObject(e.files, t, lu);
     if (i !== e.files) {
       return {
         ...e,
@@ -7628,7 +7627,7 @@ function lp(e, t) {
   }
   return e;
 }
-let lg = Oi((e = {}, t) => {
+let lg = composeFn((e = {}, t) => {
   if (hydrateFileBrowser.matches(t)) {
     let t = {
       ...e
@@ -7655,7 +7654,7 @@ let lg = Oi((e = {}, t) => {
       };
     }
   }
-  if (gG.matches(t) || qP.matches(t)) {
+  if (addFileFavoriteAction.matches(t) || removeFileFavorite.matches(t)) {
     let i = t.payload.file.key;
     let n = e[i];
     if (n) {
@@ -7663,11 +7662,11 @@ let lg = Oi((e = {}, t) => {
         ...e,
         [i]: {
           ...n,
-          is_favorited: gG.matches(t)
+          is_favorited: addFileFavoriteAction.matches(t)
         }
       };
     }
-  } else if (N9.matches(t)) {
+  } else if (bulkSetResourcesAsFavorites.matches(t)) {
     if (t.payload.files) {
       let i = {
         ...e
@@ -7742,7 +7741,7 @@ let lg = Oi((e = {}, t) => {
     }
     return i || e;
   }
-  return Ql(e, t, _$$N4);
+  return reduceObject(e, t, _$$N4);
 }, liveStoreFileBinding.reducer);
 function lf(e, t) {
   let i = e.folder_id;
@@ -8508,17 +8507,17 @@ function lW(e, t) {
     return [t.payload.prototype].concat(n);
   }
   if (recentPrototypeUnmarkViewed.matches(t)) return e.filter(e => e.file_key !== t.payload.fileKey || e.page_id !== t.payload.pageId);
-  if (_$$iN.matches(t) || _$$X4.matches(t)) {
+  if (addPrototypeFavorite.matches(t) || removePrototypeFavorite.matches(t)) {
     let i = e.findIndex(e => e.file_key === t.payload.prototype.file_key && e.page_id === t.payload.prototype.page_id);
     if (i === -1) return e;
     let n = [...e];
     n[i] = {
       ...n[i],
-      is_favorited: _$$iN.matches(t)
+      is_favorited: addPrototypeFavorite.matches(t)
     };
     return n;
   }
-  if (N9.matches(t)) {
+  if (bulkSetResourcesAsFavorites.matches(t)) {
     if (t.payload.prototypes) {
       let i = [...e];
       t.payload.prototypes.forEach(t => {
@@ -8543,13 +8542,13 @@ function lW(e, t) {
   }
   return e;
 }
-let lY = _$$oB2((e, t) => _$$yJ7.matches(t) || _$$CN.matches(t) ? t.payload && t.payload.repo && t.payload.repo.id !== e.id ? e : {
+let lY = bindWithIgnore((e, t) => _$$yJ7.matches(t) || _$$CN.matches(t) ? t.payload && t.payload.repo && t.payload.repo.id !== e.id ? e : {
   ...e,
   ...t.payload.repo
 } : e, {
   shouldIgnoreAction: e => !(_$$yJ7.matches(e) || _$$CN.matches(e))
 });
-let lq = Oi((e = {}, t) => {
+let lq = composeFn((e = {}, t) => {
   if (hydrateFileBrowser.matches(t)) {
     let t = {
       ...e
@@ -8575,14 +8574,14 @@ let lq = Oi((e = {}, t) => {
     hasFileRepo(file) && file.file_repo && (i[file.file_repo.id] = file.file_repo);
     return i;
   }
-  if (gG.matches(t) || qP.matches(t)) {
+  if (addFileFavoriteAction.matches(t) || removeFileFavorite.matches(t)) {
     let i = {
       ...e
     };
     let {
       repoId
     } = t.payload;
-    let r = gG.matches(t);
+    let r = addFileFavoriteAction.matches(t);
     return repoId ? (i[repoId] = {
       ...i[repoId],
       is_favorited: r
@@ -8597,7 +8596,7 @@ let lq = Oi((e = {}, t) => {
       [repo.id]: repo
     };
   }
-  if (N9.matches(t)) {
+  if (bulkSetResourcesAsFavorites.matches(t)) {
     if (t.payload.repos) {
       let i = {
         ...e
@@ -8639,7 +8638,7 @@ let lq = Oi((e = {}, t) => {
       }), delete i[n]);
     }
     return i || e;
-  } else if (_$$i4.matches(t)) {
+  } else if (restoreRepositories.matches(t)) {
     let i = null;
     for (let n in t.payload.reposById) {
       e[n] && (i || (i = {
@@ -8659,7 +8658,7 @@ let lq = Oi((e = {}, t) => {
     });
     return i;
   }
-  return Ql(e, t, lY);
+  return reduceObject(e, t, lY);
 }, liveStoreRepoBinding.reducer);
 let l$ = (e, t, i) => {
   if (t.length === 0) return e;
@@ -8730,7 +8729,7 @@ function lZ(e = {}, t) {
     };
     for (let e in i) i[e] = i[e].filter(e => !t.payload.reposById[e]);
     return i;
-  } else if (_$$i4.matches(t)) {
+  } else if (restoreRepositories.matches(t)) {
     let i = {
       ...e
     };
@@ -8749,9 +8748,9 @@ function lX(e = {}, t) {
     [t.payload.repoId]: t.payload.branchKey
   } : selectViewAction.matches(t) || hydrateFileBrowser.matches(t) ? {} : e;
 }
-let lQ = _$$oB2((e, t) => {
+let lQ = bindWithIgnore((e, t) => {
   let i = lY(e.repo, t);
-  let n = ZN(e.files, t, _$$N4);
+  let n = reduceArray(e.files, t, _$$N4);
   if (P6.matches(t)) {
     n = n.filter(e => !t.payload.fileKeys[e.key]);
   } else if (YF.matches(t)) {
@@ -8794,7 +8793,7 @@ function lJ(e = [], t) {
       };
       return e.slice(0, i).concat(r).concat(e.slice(i + 1));
     }
-  } else if (gG.matches(t) || qP.matches(t)) {
+  } else if (addFileFavoriteAction.matches(t) || removeFileFavorite.matches(t)) {
     if (t.payload.repoId) {
       let i = e.findIndex(e => e.repo.id === t.payload.repoId);
       if (i === -1) return e;
@@ -8803,12 +8802,12 @@ function lJ(e = [], t) {
         ...e[i],
         repo: {
           ...e[i].repo,
-          is_favorited: gG.matches(t)
+          is_favorited: addFileFavoriteAction.matches(t)
         }
       };
       return n;
     }
-  } else if (N9.matches(t) && t.payload.repos) {
+  } else if (bulkSetResourcesAsFavorites.matches(t) && t.payload.repos) {
     let i = [...e];
     t.payload.repos.forEach(t => {
       let n = e.findIndex(e => e.repo.id === t.id);
@@ -8822,7 +8821,7 @@ function lJ(e = [], t) {
     });
     return i;
   }
-  return ZN(e, t, lQ);
+  return reduceArray(e, t, lQ);
 }
 let l1 = {
   summary: {
@@ -8902,7 +8901,7 @@ function dt(e = {}, t) {
       [i]: a
     };
   }
-  if (_$$yJ5.matches(t)) {
+  if (rolePutAction.matches(t)) {
     let i = t.payload.role;
     let n = i.resource_type === 'team' ? i.resource_id_or_key : void 0;
     if (n && e[n]) {
@@ -8916,7 +8915,7 @@ function dt(e = {}, t) {
       }
     }
   }
-  if (_$$bE4.matches(t)) {
+  if (rolePostAction.matches(t)) {
     let i = t.payload.role;
     let n = i.resource_type === 'team' ? i.resource_id_or_key : void 0;
     if (n && e[n]) {
@@ -8965,7 +8964,7 @@ function dt(e = {}, t) {
       return a;
     }
   }
-  if (_$$yH3.matches(t)) {
+  if (roleDeleteAction.matches(t)) {
     let i = t.payload.role;
     let n = i?.resource_type === 'team' ? i.resource_id_or_key : void 0;
     if (n && e[n]) {
@@ -9209,7 +9208,7 @@ let dA = combineReducers({
     return w3.matches(t) ? t.payload.userTeamCount : e;
   }
 });
-let dv = Oi((e = {}, t) => {
+let dv = composeFn((e = {}, t) => {
   if (_$$bE.matches(t)) {
     let i = t.payload;
     return {
@@ -9247,7 +9246,7 @@ let dv = Oi((e = {}, t) => {
     }
     return i;
   }
-  if (_$$Mv.matches(t)) {
+  if (addFolderFavorite.matches(t)) {
     let i = {
       ...e
     };
@@ -9258,7 +9257,7 @@ let dv = Oi((e = {}, t) => {
       is_favorited: !0
     }, i) : e;
   }
-  if (jv.matches(t)) {
+  if (removeFolderFromFavorites.matches(t)) {
     let i = {
       ...e
     };
@@ -9269,9 +9268,9 @@ let dv = Oi((e = {}, t) => {
       is_favorited: !1
     }, i) : e;
   }
-  return Ql(e, t, dI);
+  return reduceObject(e, t, dI);
 }, folderLivestoreBinding.reducer);
-let dI = _$$oB2((e, t) => {
+let dI = bindWithIgnore((e, t) => {
   if (_$$yJ2.matches(t)) {
     return t.payload.folder.id !== e.id ? e : {
       ...e,
@@ -10497,7 +10496,7 @@ function uI(e) {
   };
 }
 uI(uv);
-let ux = _$$oB2((e, t) => {
+let ux = bindWithIgnore((e, t) => {
   return updateOrgUserDescriptionAction.matches(t) && e && t.payload && t.payload.orgUser && e.id === t.payload.orgUser.id ? {
     ...e,
     description: t.payload.orgUser.description || e.description
@@ -10549,11 +10548,11 @@ let uS = uI((e = {}, t) => {
     }
     return i;
   }
-  return Ql(e, t, ux);
+  return reduceObject(e, t, ux);
 });
 let uw = {};
 let uP = new LivestoreBinding('PUBLISHED_PLUGINS').binding;
-let uD = Oi((e = {}, t) => {
+let uD = composeFn((e = {}, t) => {
   if (Vx.matches(t)) {
     let i = {
       ...e
@@ -10911,7 +10910,7 @@ function uX(e, t, i) {
     ...n
   });
 }
-let uQ = Oi((e = {}, t) => {
+let uQ = composeFn((e = {}, t) => {
   if (setTeamUsersInitial.matches(t) || putTeamUser.matches(t)) {
     let {
       teamId,
@@ -10949,7 +10948,7 @@ let uQ = Oi((e = {}, t) => {
   }
   return e;
 }, uZ.reducer);
-let u0 = Oi((e = {}, t) => {
+let u0 = composeFn((e = {}, t) => {
   if (hydrateFileBrowser.matches(t)) {
     let i = {
       ...e
@@ -11053,7 +11052,7 @@ let u6 = {
 };
 let u9 = {
   showing: !1,
-  pinned: _$$t9.NOT_PINNED,
+  pinned: PinningState.NOT_PINNED,
   initialX: 0,
   initialY: 0,
   initialFdResourceTab: void 0,
@@ -11111,16 +11110,16 @@ window && (window.userAnalyticsDataTools = {
 });
 let pd = combineReducers({
   hidingDowntimeNotif(e = _$$y6.noneHidden, t) {
-    return _$$Z4.hideOngoingNotif.matches(t) ? _$$y6.ongoingHidden : _$$Z4.hideWarningNotif.matches(t) ? _$$y6.warningHidden : e;
+    return DowntimeActionsEnum.hideOngoingNotif.matches(t) ? _$$y6.ongoingHidden : DowntimeActionsEnum.hideWarningNotif.matches(t) ? _$$y6.warningHidden : e;
   },
   notifMinutesRemaining(e = null, t) {
-    return _$$Z4.onTick.matches(t) ? Math.floor((t.payload.payload.downtimeStartDate.getTime() - Date.now()) / 1e3 / 60) : e;
+    return DowntimeActionsEnum.onTick.matches(t) ? Math.floor((t.payload.payload.downtimeStartDate.getTime() - Date.now()) / 1e3 / 60) : e;
   },
   payload(e = null, t) {
-    return _$$Z4.onTick.matches(t) ? t.payload.payload : e;
+    return DowntimeActionsEnum.onTick.matches(t) ? t.payload.payload : e;
   },
   status(e = _$$A0.Finished, t) {
-    if (_$$Z4.onTick.matches(t)) {
+    if (DowntimeActionsEnum.onTick.matches(t)) {
       let {
         payload,
         hostname,
@@ -11545,7 +11544,7 @@ let pg = {
       for (let n of t.payload.repoIds) e[n] && delete i[n];
       return i;
     }
-    if (_$$i4.matches(t)) {
+    if (restoreRepositories.matches(t)) {
       let i = {
         ...e
       };
@@ -11597,7 +11596,7 @@ let pg = {
       delete i.byFolderId[t.payload.folderId];
       return i;
     }
-    return _$$uo5.matches(t) ? su(e, t.payload.roles) : sd(e, t);
+    return roleBatchPutAction.matches(t) ? su(e, t.payload.roles) : sd(e, t);
   },
   twoFactorAuth: Wm,
   tooltip(e = u6, t) {
@@ -11923,7 +11922,7 @@ let pg = {
   },
   teamUserByTeamId: uQ,
   universalInsertModal(e = u9, t) {
-    return En.matches(t) ? {
+    return setUniversalInsertModalOpen.matches(t) ? {
       showing: !0,
       pinned: t.payload.pinned || e.pinned,
       initialX: t.payload.initialX,
@@ -11937,23 +11936,23 @@ let pg = {
       initialSearch: t.payload.initialSearch,
       initialSelectedCategory: t.payload.initialSelectedCategory,
       sourceRect: t.payload.sourceRect
-    } : IN.matches(t) ? {
+    } : setUniversalInsertViewResourceDetails.matches(t) ? {
       ...e,
       ...t.payload
-    } : SI.matches(t) ? {
+    } : setUniversalInsertScrolledDevelopmentSection.matches(t) ? {
       ...e,
       scrollDevelopmentSectionIntoView: !1
-    } : _$$eo.matches(t) ? {
+    } : setUniversalInsertModalClose.matches(t) ? {
       ...e,
       showing: !1,
-      pinned: _$$t9.NOT_PINNED,
+      pinned: PinningState.NOT_PINNED,
       initialX: 0,
       initialY: 0,
       initialFdResourceTab: void 0,
       initialFdView: void 0,
       fdPreviewResource: void 0,
       previewResource: void 0
-    } : Kl.matches(t) ? t.payload.initialX && t.payload.initialY ? {
+    } : setUniversalInsertModalPin.matches(t) ? t.payload.initialX && t.payload.initialY ? {
       ...e,
       showing: !0,
       pinned: t.payload.pinned,
@@ -11963,7 +11962,7 @@ let pg = {
       ...e,
       showing: !0,
       pinned: t.payload.pinned
-    } : jx.matches(t) ? {
+    } : updateSourceRect.matches(t) ? {
       ...e,
       sourceRect: t.payload.sourceRect
     } : e;
@@ -12493,7 +12492,7 @@ let pg = {
         ...n
       };
     }
-    if (_$$X5.matches(t)) {
+    if (screenReaderEnableAction.matches(t)) {
       let {
         scope = 'PERSISTENT',
         enabled,
@@ -12538,7 +12537,7 @@ let pg = {
               sendWithRetry.put('/api/user', {
                 enable_screenreader: enabled
               }).catch(() => {
-                debugState.dispatch(_$$X5({
+                debugState.dispatch(screenReaderEnableAction({
                   enabled: !!i,
                   scope: 'BACKEND'
                 }));
@@ -12549,7 +12548,7 @@ let pg = {
         default:
           throwTypeError(scope);
       }
-    } else if (_$$mC.matches(t)) {
+    } else if (errorStateActionCreator.matches(t)) {
       let {
         errorType
       } = t.payload;
@@ -12557,7 +12556,7 @@ let pg = {
         ...e,
         errorType
       };
-    } else if (zq.matches(t)) {
+    } else if (lastCreatedCommentIdAction.matches(t)) {
       let {
         lastCreatedCommentId
       } = t.payload;
@@ -12813,7 +12812,7 @@ let pg = {
         }
       };
     }
-    if (gG.matches(t) || qP.matches(t)) {
+    if (addFileFavoriteAction.matches(t) || removeFileFavorite.matches(t)) {
       let i = e.responses[PublicModelType.FILES];
       if (i != null) {
         let n = i.results;
@@ -12824,7 +12823,7 @@ let pg = {
             ...n[r],
             model: {
               ...n[r].model,
-              is_favorited: gG.matches(t)
+              is_favorited: addFileFavoriteAction.matches(t)
             }
           };
           return {
@@ -13381,7 +13380,7 @@ let mh = createOptimistThunk((e, t) => {
   let n = t.selectionProperties?.derivedProperties.changes;
   n && _$$F9(i.user, i.mirror.sceneGraphSelection, n);
   e.dispatch(_$$q5());
-  e.dispatch(_$$m4());
+  e.dispatch(checkAndShowReturnToInstanceBell());
   e.dispatch(Ed());
   t.selection && t.selection.userTriggered && e.dispatch(mg());
 });
@@ -13790,7 +13789,7 @@ let hc = e => t => function (i) {
   }
   return t(i);
 };
-let hm = _$$ck4();
+let hm = isIntegrationContext();
 let hh = e => e => hm ? function (t) {
   return showModal.matches(t) && t.payload.type === AuthModal ? window.self.origin !== window.parent.origin ? e(t) : void sendMessageToParent({
     action: 'showAuthModal',
@@ -14327,7 +14326,7 @@ export async function $$hz0(e, t, d = {
       b.dispatch(FY({
         enhancedContrast: e
       }));
-    }), O.register(KEYBOARD_LAYOUT_PREFERENCE_KEY, handleExternalKeyboardLayoutUpdate), O.register(wc.MouseScrollToZoom, Zp), O.register(wc.RightClickDragToPan, _$$tB), O.register(_$$Kz.DESKTOP, () => _$$up2(_$$Kz.DESKTOP)), O.register(_$$Kz.HUNSPELL, () => _$$up2(_$$Kz.HUNSPELL)), h0(b), k === 'fullscreen' || k === 'communityHub' || !P) {
+    }), O.register(KEYBOARD_LAYOUT_PREFERENCE_KEY, handleExternalKeyboardLayoutUpdate), O.register(wc.MouseScrollToZoom, Zp), O.register(wc.RightClickDragToPan, _$$tB), O.register(SpellCheckStorageKey.DESKTOP, () => _$$up2(SpellCheckStorageKey.DESKTOP)), O.register(SpellCheckStorageKey.HUNSPELL, () => _$$up2(SpellCheckStorageKey.HUNSPELL)), h0(b), k === 'fullscreen' || k === 'communityHub' || !P) {
       let {
         editing_file
       } = getInitialOptions();
@@ -14969,7 +14968,7 @@ export async function $$hz0(e, t, d = {
             let _ = Object.keys(p.sceneGraphSelection);
             let y = _.length > 0 ? _[0] : null;
             let b = i !== y;
-            g !== a && (c = s, g !== null && g !== defaultSessionLocalIDString && (_$$px2(c).rebuildNodeCache(), function (e, t) {
+            g !== a && (c = s, g !== null && g !== defaultSessionLocalIDString && (getCodegenHandler(c).rebuildNodeCache(), function (e, t) {
               let i = {};
               let n = [[e, 0]];
               for (; n.length > 0;) {
@@ -15096,11 +15095,11 @@ export async function $$hz0(e, t, d = {
           if (!t || t === defaultSessionLocalIDString) return;
           let n = e.getState();
           let r = n.mirror.sceneGraph;
-          let a = _$$S7(n);
+          let a = extractCopyExportRestrictions(n);
           let {
             propertiesByLayer,
             error
-          } = await _$$px2(r).getCSSPropertiesOfSubTree({
+          } = await getCodegenHandler(r).getCSSPropertiesOfSubTree({
             nodeId: r.guidFromDeveloperFriendlyId(t),
             preferences: i,
             canRunCodegenArgs: a
@@ -15121,11 +15120,11 @@ export async function $$hz0(e, t, d = {
           if (!r) return;
           let t = e.getState();
           let i = e.getState().mirror.sceneGraph;
-          let n = _$$S7(t);
+          let n = extractCopyExportRestrictions(t);
           let {
             code,
             error
-          } = await _$$px2(i).getHTMLSkeleton({
+          } = await getCodegenHandler(i).getHTMLSkeleton({
             nodeId: r,
             canRunCodegenArgs: n
           });
@@ -15267,7 +15266,7 @@ export async function $$hz0(e, t, d = {
                           children: jsx(mR, {
                             children: jsxs(_$$Q, {
                               backend: eb,
-                              children: [jsx(mz, {}), jsx(mW, {}), jsx(mB, {}), jsx(mH, {}), jsx(mJ, {}), jsx(m3, {}), jsx(mZ, {}), jsx(_$$A11, {}), jsx(m5, {}), jsx(CustomRouter, {
+                              children: [jsx(mz, {}), jsx(mW, {}), jsx(mB, {}), jsx(mH, {}), jsx(mJ, {}), jsx(m3, {}), jsx(mZ, {}), jsx(setupInteractiveSlideElementTracking, {}), jsx(m5, {}), jsx(CustomRouter, {
                                 children: jsx(e, {})
                               })]
                             })
@@ -15280,7 +15279,7 @@ export async function $$hz0(e, t, d = {
               })
             })
           });
-          return getFeatureFlags().common_app_entry_suspense && !isInteractionOrEvalMode() ? jsx(_$$g, {
+          return getFeatureFlags().common_app_entry_suspense && !isInteractionOrEvalMode() ? jsx(SuspenseWithGuardrail, {
             fallback: null,
             source: 'common_app_entry',
             children: t

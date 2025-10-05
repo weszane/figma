@@ -11,7 +11,7 @@ import { HubTypeEnum } from "../figma_app/45218";
 import { manifestErrorMessage, ManifestErrorType } from "../figma_app/155287";
 import { handleSelectedView } from "../905/622391";
 import { p as _$$p } from "../905/42189";
-import { s as _$$s2 } from "../figma_app/504088";
+import { SimpleComponentType } from "../figma_app/504088";
 import { Po, Zy } from "../figma_app/378195";
 let E = M();
 let $$y0 = createOptimistThunk(async (e, {
@@ -56,7 +56,7 @@ let $$y0 = createOptimistThunk(async (e, {
       initialX: 0,
       initialY: 0,
       initialTab: "figjam" === c ? "widget" === t ? _$$p.WIDGETS : _$$p.PLUGINS : void 0,
-      initialFdResourceTab: "figjam" !== c ? "widget" === t ? _$$s2.WIDGET : _$$s2.PLUGIN : void 0,
+      initialFdResourceTab: "figjam" !== c ? "widget" === t ? SimpleComponentType.WIDGET : SimpleComponentType.PLUGIN : void 0,
       initialFdView: "figjam" !== c ? "development" : void 0,
       scrollDevelopmentSectionIntoView: "figjam" === c,
       source: "extension-import"

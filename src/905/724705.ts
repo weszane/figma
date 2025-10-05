@@ -76,7 +76,7 @@ export class IpcStorageHandler {
    * Sends a message to other tabs via localStorage.
    * Original method name: sendToOtherTabs
    */
-  sendToOtherTabs(message: string, payload: any): void {
+  sendToOtherTabs(message: string, payload: any = {}): void {
     if (this.storage) {
       try {
         this.storage[IPC_PREFIX + message] = JSON.stringify([payload, Math.random()])

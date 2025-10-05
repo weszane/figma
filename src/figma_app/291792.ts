@@ -18,12 +18,12 @@ import { h as _$$h } from "../figma_app/334471";
 import { getI18nString } from "../905/303541";
 import { createNewFileWithRestrictions } from "../905/738636";
 import { n6 } from "../905/234821";
-import { p as _$$p } from "../905/36308";
+import { generateFullscreenMenuItems } from "../905/36308";
 import { useSendToMakeExperiment } from "../figma_app/297957";
 import { $n, gW } from "../905/930279";
 import { fullscreenValue } from "../figma_app/455680";
 import { f as _$$f } from "../figma_app/990299";
-import { ck } from "../905/87821";
+import { isIntegrationContext } from "../905/87821";
 import { isZoomIntegration } from "../figma_app/469876";
 import { isFigmaNativeApp } from "../905/575846";
 import { TY } from "../figma_app/701001";
@@ -56,7 +56,7 @@ export function $$J1({
   });
   let a = useSelector(e => e.userStateLoaded);
   let s = useMemo(() => ({
-    shouldShowBackToFiles: (!ck() || isZoomIntegration() && !!getFeatureFlags().integ_zoom_allow_file_switching) && !desktopAPIInstance && !isChromebookTabbed(),
+    shouldShowBackToFiles: (!isIntegrationContext() || isZoomIntegration() && !!getFeatureFlags().integ_zoom_allow_file_switching) && !desktopAPIInstance && !isChromebookTabbed(),
     isDisabled: !a
   }), [a]);
   let o = c4();
@@ -66,7 +66,7 @@ export function $$J1({
   let u = er();
   let p = fS();
   let h = TJ();
-  return useMemo(() => _$$p({
+  return useMemo(() => generateFullscreenMenuItems({
     fileMenuArgs: r,
     pluginAndWidgetMenuArgs: o,
     additionalDebugItems: e,
@@ -110,7 +110,7 @@ export function $$Z2() {
   let c = er();
   let u = fS();
   let p = TJ();
-  return useMemo(() => _$$p({
+  return useMemo(() => generateFullscreenMenuItems({
     fileMenuArgs: r,
     pluginAndWidgetMenuArgs: s,
     theme: o,
@@ -197,7 +197,7 @@ function Q({
     }, [t, F, U]);
     let H = getFeatureFlags().ui3_design_file_creation_menu_nested;
     return useMemo(() => {
-      if (ck()) return [];
+      if (isIntegrationContext()) return [];
       let e = F.map(({
         editorType: e,
         canCreate: r
@@ -372,7 +372,7 @@ export function $$en0(e, {
       status: "hidden"
     }
   } : gW(selectOpenFile(e), getPermissionsState(e), e.selectedView.editorType, t, e.mirror.appModel.topLevelMode, e.mirror.appModel.multiplayerSessionState, i, o, a, null);
-  return _$$p({
+  return generateFullscreenMenuItems({
     fileMenuArgs: {
       fileCreationMenuItems: [],
       branchingActionsStatus: l,

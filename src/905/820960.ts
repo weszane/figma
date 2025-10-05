@@ -10,7 +10,7 @@ import { W as _$$W } from "../905/307631";
 import { a as _$$a } from "../905/332662";
 import { useFavoriteResource } from "../905/347011";
 import { H as _$$H } from "../905/474029";
-import { DN, ox } from "../figma_app/909778";
+import { addTeamFavorite, removeTeamFavorite } from "../figma_app/909778";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { trackTeamEvent } from "../figma_app/314264";
@@ -88,7 +88,7 @@ export function $$O2(e) {
         sectionId: r,
         favoriteId: n
       };
-      t ? i(DN(a)) : i(ox(a));
+      t ? i(addTeamFavorite(a)) : i(removeTeamFavorite(a));
     }
   }, [i, e.team]);
   let X = "search" === M.view;

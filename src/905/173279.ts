@@ -1,3 +1,33 @@
+/**
+ * List of desktop feature flags
+ * Original variable name: i
+ */
+export const desktopFeatureFlags = [
+  "desktop_app_badge_notifications",
+  "desktop_fb_autorefresh_daily",
+  "desktop_performance_metrics",
+  "desktop_server_error_pages",
+  "desktop_show_connection_test",
+  "desktop_show_tab_audio_indicator",
+  "desktop_skip_loading_screen",
+  "desktop_tabbar_bell",
+  "desktop_tabbar_bell_dev",
+  "desktop_tabbar_renaming",
+  "desktop_tab_renaming_rollout",
+  "desktop_agent_debug",
+  "desktop_livegraph_client",
+  "desktop_power_monitor_logging",
+  "desktop_icon_tl_v1",
+  "desktop_new_icons_v1",
+  "desktop_new_rev_icon_v1",
+  "desktop_new_rev_icon_v2",
+  "desktop_community_tab_auto_close",
+  "desktop_lg_background_unsub",
+  "desktop_lg_splay",
+  "desktop_default_hp_gpu_setting",
+  "desktop_lg_exclude_proxy_users",
+  "desktop_floating_eyedropper_fake_cursor",
+  "desktop_fcm_notifications",
+]
 
-let i = ["desktop_app_badge_notifications", "desktop_fb_autorefresh_daily", "desktop_performance_metrics", "desktop_server_error_pages", "desktop_show_connection_test", "desktop_show_tab_audio_indicator", "desktop_skip_loading_screen", "desktop_tabbar_bell", "desktop_tabbar_bell_dev", "desktop_tabbar_renaming", "desktop_tab_renaming_rollout", "desktop_agent_debug", "desktop_livegraph_client", "desktop_power_monitor_logging", "desktop_icon_tl_v1", "desktop_new_icons_v1", "desktop_new_rev_icon_v1", "desktop_new_rev_icon_v2", "desktop_community_tab_auto_close", "desktop_lg_background_unsub", "desktop_lg_splay", "desktop_default_hp_gpu_setting", "desktop_lg_exclude_proxy_users", "desktop_floating_eyedropper_fake_cursor", "desktop_fcm_notifications"];
-export const a=i
+export const a = desktopFeatureFlags

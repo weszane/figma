@@ -56,7 +56,7 @@ import { OC } from "../1250/791136";
 import { $z } from "../figma_app/617427";
 import { ImageOverlayComponent } from "../905/129046";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { D6 } from "../figma_app/863319";
+import { alwaysTrue } from "../figma_app/863319";
 import { orgSubscriptionAtom } from "../905/296690";
 import { RG } from "../figma_app/684446";
 import { sortByPropertyWithOptions, shuffle } from "../figma_app/656233";
@@ -688,7 +688,7 @@ function eK() {
   let t = useAtomWithSubscription(orgSubscriptionAtom);
   let n = RG();
   let r = renderI18nText("rcs.org_welcome.click_on_the_organization_button_on_the_left_to_find_teams_to_join");
-  D6(e) ? r = n ? renderI18nText("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join") : renderI18nText("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join") : t && (r = renderI18nText("rcs.org_welcome.click_the_current_org_name_span_button_on_the_left_to_find_teams_to_join", {
+  alwaysTrue(e) ? r = n ? renderI18nText("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join") : renderI18nText("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join") : t && (r = renderI18nText("rcs.org_welcome.click_the_current_org_name_span_button_on_the_left_to_find_teams_to_join", {
     orgName: jsx("span", {
       className: cssBuilderInstance.fontBold.$,
       children: t.name

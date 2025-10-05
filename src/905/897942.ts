@@ -1,133 +1,359 @@
-import { R } from "../905/927840";
-import { t } from "../905/367656";
-import { X } from "../905/361176";
-import { H2, fl, $r, wI, V$, Hb, ut } from "../905/707098";
-export class $$o0 {
-  constructor(e, t) {
-    this._cachedProperties = {};
-    this._EXPENSIVE_TO_READ_node = e;
-    this.nodeCache = t;
+import { resolveVariableValue } from "../905/361176"
+import { LayoutNode } from "../905/367656"
+import { hasProperty, memoizeFn, resolveEffectStyle, resolveFillStyle, resolveStrokeStyle, resolveTextStyle, resolveVariable } from "../905/707098"
+import { GridLayoutProperties } from "../905/927840"
+
+export class NodeProperties {
+  private _cachedProperties: Record<string, any>
+  private _EXPENSIVE_TO_READ_node: any
+  nodeCache: any
+
+  constructor(node: any, cache: any) {
+    this._cachedProperties = {}
+    this._EXPENSIVE_TO_READ_node = node
+    this.nodeCache = cache
   }
-  static from(e, t) {
-    return new $$o0(e, t);
+
+  static from(node: any, cache: any): NodeProperties {
+    return new NodeProperties(node, cache)
   }
-  readValue(e, t) {
-    return H2(this._cachedProperties, e, this._EXPENSIVE_TO_READ_node, t);
+
+  /**
+   * Reads a value from the node and caches it for future access.
+   * @param key - The property key to read and cache
+   * @param getter - Function to extract the value from the node
+   * @returns The cached or newly computed value
+   */
+  private readValue<T>(key: string, getter: (node: any) => T): T {
+    return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
-  get id() {
-    return this.readValue("id", e => e.id);
+
+  /**
+   * Unique identifier for the node
+   */
+  get id(): string {
+    return this.readValue("id", node => node.id)
   }
-  get name() {
-    return this.readValue("name", e => e.name);
+
+  /**
+   * Name of the node
+   */
+  get name(): string {
+    return this.readValue("name", node => node.name)
   }
-  get autoRename() {
-    return this.readValue("autoRename", e => e.autoRename);
+
+  /**
+   * Whether the node should auto-rename
+   */
+  get autoRename(): boolean {
+    return this.readValue("autoRename", node => node.autoRename)
   }
-  get layout() {
-    return this.readValue("layout", e => new t(e, this.nodeCache));
+
+  /**
+   * Layout properties of the node
+   */
+  get layout(): LayoutNode {
+    return this.readValue("layout", node => new LayoutNode(node, this.nodeCache))
   }
-  get gridLayout() {
-    return this.readValue("gridLayout", e => new R(e));
+
+  /**
+   * Grid layout properties of the node
+   */
+  get gridLayout(): GridLayoutProperties {
+    return this.readValue("gridLayout", node => new GridLayoutProperties(node))
   }
-  get opacity() {
-    return this.readValue("opacity", e => e.opacity);
+
+  /**
+   * Opacity of the node (0-1)
+   */
+  get opacity(): number {
+    return this.readValue("opacity", node => node.opacity)
   }
-  get blendMode() {
-    return this.readValue("blendMode", e => e.blendMode);
+
+  /**
+   * Blend mode of the node
+   */
+  get blendMode(): BlendMode {
+    return this.readValue("blendMode", node => node.blendMode)
   }
-  get characters() {
-    return this.readValue("characters", e => e.characters);
+
+  /**
+   * Text content of the node (if it's a text node)
+   */
+  get characters(): string {
+    return this.readValue("characters", node => node.characters)
   }
-  get textAlignHorizontal() {
-    return this.readValue("textAlignHorizontal", e => e.textAlignHorizontal);
+
+  /**
+   * Horizontal text alignment
+   */
+  get textAlignHorizontal(): "LEFT" | "CENTER" | "RIGHT" | "JUSTIFIED" {
+    return this.readValue("textAlignHorizontal", node => node.textAlignHorizontal)
   }
-  get textAlignVertical() {
-    return this.readValue("textAlignVertical", e => e.textAlignVertical);
+
+  /**
+   * Vertical text alignment
+   */
+  get textAlignVertical(): "TOP" | "CENTER" | "BOTTOM" {
+    return this.readValue("textAlignVertical", node => node.textAlignVertical)
   }
-  get textAutoResize() {
-    return this.readValue("textAutoResize", e => e.textAutoResize);
+
+  /**
+   * Text auto-resize behavior
+   */
+  get textAutoResize(): "NONE" | "WIDTH_AND_HEIGHT" | "HEIGHT" {
+    return this.readValue("textAutoResize", node => node.textAutoResize)
   }
-  get paragraphIndent() {
-    return this.readValue("paragraphIndent", e => e.paragraphIndent);
+
+  /**
+   * Paragraph indentation
+   */
+  get paragraphIndent(): number {
+    return this.readValue("paragraphIndent", node => node.paragraphIndent)
   }
-  get paragraphSpacing() {
-    return this.readValue("paragraphSpacing", e => e.paragraphSpacing);
+
+  /**
+   * Spacing between paragraphs
+   */
+  get paragraphSpacing(): number {
+    return this.readValue("paragraphSpacing", node => node.paragraphSpacing)
   }
-  get effects() {
-    return this.readValue("effects", e => e.effects.filter(e => e.visible ?? !0));
+
+  /**
+   * Visible effects applied to the node
+   */
+  get effects(): Effect[] {
+    return this.readValue("effects", node => node.effects.filter(effect => effect.visible ?? true))
   }
-  get strokes() {
-    return this.readValue("strokes", e => e.strokes.filter(e => e.visible ?? !0));
+
+  /**
+   * Visible stroke paints applied to the node
+   */
+  get strokes(): Paint[] {
+    return this.readValue("strokes", node => node.strokes.filter(stroke => stroke.visible ?? true))
   }
-  get strokeWeight() {
-    return this.readValue("strokeWeight", e => "number" != typeof e.strokeWeight ? 0 : e.strokeWeight);
+
+  /**
+   * Stroke weight (thickness) of the node
+   */
+  get strokeWeight(): number {
+    return this.readValue("strokeWeight", node =>
+      typeof node.strokeWeight !== "number" ? 0 : node.strokeWeight)
   }
-  get fillStyle() {
-    return this.readValue("fillStyle", e => fl(e, this.nodeCache.stylesResolver));
+
+  /**
+   * Fill style associated with the node
+   */
+  get fillStyle(): any {
+    return this.readValue("fillStyle", node =>
+      resolveFillStyle(node, this.nodeCache.stylesResolver))
   }
-  get effectStyle() {
-    return this.readValue("effectStyle", e => $r(e, this.nodeCache.stylesResolver));
+
+  /**
+   * Effect style associated with the node
+   */
+  get effectStyle(): any {
+    return this.readValue("effectStyle", node =>
+      resolveEffectStyle(node, this.nodeCache.stylesResolver))
   }
-  get strokeStyle() {
-    return this.readValue("strokeStyle", e => wI(e, this.nodeCache.stylesResolver));
+
+  /**
+   * Stroke style associated with the node
+   */
+  get strokeStyle(): any {
+    return this.readValue("strokeStyle", node =>
+      resolveStrokeStyle(node, this.nodeCache.stylesResolver))
   }
-  get textStyle() {
-    return this.readValue("textStyle", e => V$(e, this.nodeCache.stylesResolver));
+
+  /**
+   * Text style associated with the node
+   */
+  get textStyle(): any {
+    return this.readValue("textStyle", node =>
+      resolveTextStyle(node, this.nodeCache.stylesResolver))
   }
-  get maxLines() {
-    return this.readValue("maxLines", e => e.maxLines ?? void 0);
+
+  /**
+   * Maximum number of lines for text nodes
+   */
+  get maxLines(): number | undefined {
+    return this.readValue("maxLines", node => node.maxLines ?? undefined)
   }
-  get textSegments() {
-    return this.readValue("textSegments", e => (e.textSegments ? e.textSegments : e.getStyledTextSegments(["fontSize", "fontName", "fontWeight", "textCase", "textDecoration", "textDecorationStyle", "textDecorationSkipInk", "textDecorationColor", "textDecorationThickness", "textDecorationOffset", "letterSpacing", "lineHeight", "fills", "textStyleId", "fillStyleId", "hyperlink", "boundVariables"])).map(e => {
-      let t = X(e.boundVariables ?? {}, {}, this.nodeCache.variableResolver, e.fontName.family, "fontFamily");
-      let i = X(e.boundVariables ?? {}, {}, this.nodeCache.variableResolver, e.fontWeight, "fontWeight");
-      let n = i.variable?.value?.resolvedType === "FLOAT" ? i : {
-        rawValue: e.fontWeight
-      };
-      let r = X(e.boundVariables ?? {}, {}, this.nodeCache.variableResolver, e.fontSize, "fontSize");
-      let s = X(e.boundVariables ?? {}, {}, this.nodeCache.variableResolver, e.lineHeight, "lineHeight");
-      let o = X(e.boundVariables ?? {}, {}, this.nodeCache.variableResolver, e.letterSpacing, "letterSpacing");
-      let l = X(e.boundVariables ?? {}, {}, this.nodeCache.variableResolver, e.textDecorationColor, "textDecorationColor");
-      return {
-        ...e,
-        fontName: {
-          ...e.fontName,
-          family: t
-        },
-        fontWeight: n,
-        fontSize: r,
-        lineHeight: s,
-        letterSpacing: o,
-        textDecorationColor: l
-      };
-    }));
+
+  /**
+   * Styled text segments with resolved variables
+   */
+  get textSegments(): any[] {
+    return this.readValue("textSegments", (node) => {
+      const segments = node.textSegments
+        ? node.textSegments
+        : node.getStyledTextSegments([
+          "fontSize",
+          "fontName",
+          "fontWeight",
+          "textCase",
+          "textDecoration",
+          "textDecorationStyle",
+          "textDecorationSkipInk",
+          "textDecorationColor",
+          "textDecorationThickness",
+          "textDecorationOffset",
+          "letterSpacing",
+          "lineHeight",
+          "fills",
+          "textStyleId",
+          "fillStyleId",
+          "hyperlink",
+          "boundVariables",
+        ])
+
+      return segments.map((segment) => {
+        // Resolve font family variable
+        const fontFamilyVar = resolveVariableValue(
+          segment.boundVariables ?? {},
+          {},
+          this.nodeCache.variableResolver,
+          segment.fontName.family,
+          "fontFamily",
+        )
+
+        // Resolve font weight variable
+        const fontWeightVar = resolveVariableValue(
+          segment.boundVariables ?? {},
+          {},
+          this.nodeCache.variableResolver,
+          segment.fontWeight,
+          "fontWeight",
+        )
+
+        // Use variable if it's a float type, otherwise use raw value
+        const resolvedFontWeight = fontWeightVar.variable?.value?.resolvedType === "FLOAT"
+          ? fontWeightVar
+          : { rawValue: segment.fontWeight }
+
+        // Resolve other text properties
+        const fontSizeVar = resolveVariableValue(
+          segment.boundVariables ?? {},
+          {},
+          this.nodeCache.variableResolver,
+          segment.fontSize,
+          "fontSize",
+        )
+
+        const lineHeightVar = resolveVariableValue(
+          segment.boundVariables ?? {},
+          {},
+          this.nodeCache.variableResolver,
+          segment.lineHeight,
+          "lineHeight",
+        )
+
+        const letterSpacingVar = resolveVariableValue(
+          segment.boundVariables ?? {},
+          {},
+          this.nodeCache.variableResolver,
+          segment.letterSpacing,
+          "letterSpacing",
+        )
+
+        const textDecorationColorVar = resolveVariableValue(
+          segment.boundVariables ?? {},
+          {},
+          this.nodeCache.variableResolver,
+          segment.textDecorationColor,
+          "textDecorationColor",
+        )
+
+        return {
+          ...segment,
+          fontName: {
+            ...segment.fontName,
+            family: fontFamilyVar,
+          },
+          fontWeight: resolvedFontWeight,
+          fontSize: fontSizeVar,
+          lineHeight: lineHeightVar,
+          letterSpacing: letterSpacingVar,
+          textDecorationColor: textDecorationColorVar,
+        }
+      })
+    })
   }
-  get leadingTrim() {
-    return this.readValue("leadingTrim", e => e.leadingTrim);
+
+  /**
+   * Leading trim setting for text
+   */
+  get leadingTrim(): "NONE" | "CAP_HEIGHT" | "ALL_ASCENDER_DECENDER" {
+    return this.readValue("leadingTrim", node => node.leadingTrim)
   }
-  get openTypeFeatures() {
-    return this.readValue("openTypeFeatures", e => e?.openTypeFeatures);
+
+  /**
+   * OpenType feature settings
+   */
+  get openTypeFeatures(): Record<string, any> | undefined {
+    return this.readValue("openTypeFeatures", node => node?.openTypeFeatures)
   }
-  get boundVariables() {
-    return this.readValue("boundVariables", e => e.boundVariables);
+
+  /**
+   * Variables bound to this node's properties
+   */
+  get boundVariables(): any {
+    return this.readValue("boundVariables", node => node.boundVariables)
   }
-  get inferredVariables() {
-    return this.readValue("inferredVariables", e => e.availableInferredVariables);
+
+  /**
+   * Inferred variables available for this node
+   */
+  get inferredVariables(): any {
+    return this.readValue("inferredVariables", node => node.availableInferredVariables)
   }
-  hasVariable(e) {
-    return Hb(this.boundVariables, e);
+
+  /**
+   * Check if a variable is bound to this node
+   * @param variablePath - Path to the variable
+   * @returns Whether the variable exists
+   */
+  hasVariable(variablePath: string): boolean {
+    return hasProperty(this.boundVariables, variablePath)
   }
-  getVariableValue(e) {
-    return ut(this.boundVariables, this.inferredVariables, e, this.nodeCache.variableResolver);
+
+  /**
+   * Get the resolved value of a bound variable
+   * @param variablePath - Path to the variable
+   * @returns Resolved variable value
+   */
+  getVariableValue(variablePath: string): any {
+    return resolveVariable(
+      this.boundVariables,
+      this.inferredVariables,
+      variablePath,
+      this.nodeCache.variableResolver,
+    )
   }
-  setName(e) {
-    this._cachedProperties.name = e;
+
+  /**
+   * Set the name property (bypassing cache)
+   * @param name - New name for the node
+   */
+  setName(name: string): void {
+    this._cachedProperties.name = name
   }
-  isAutoLayout() {
-    return !1;
+
+  /**
+   * Check if this node uses auto-layout
+   * @returns False (overridden in subclasses)
+   */
+  isAutoLayout(): boolean {
+    return false
   }
-  isGrid() {
-    return !1;
+
+  /**
+   * Check if this node is a grid
+   * @returns False (overridden in subclasses)
+   */
+  isGrid(): boolean {
+    return false
   }
 }
-export const z = $$o0;
+
+export const z = NodeProperties

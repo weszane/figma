@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { Agb } from "../figma_app/822011";
 import a from "classnames";
-import { E as _$$E } from "../905/511388";
+import { LibraryIconWithTooltip } from "../905/511388";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { H } from "../905/991973";
@@ -38,7 +38,7 @@ export function $$g1({
     })
   }) : e !== y && (T || I) ? jsx("div", {
     className: S,
-    children: jsx(_$$E, {
+    children: jsx(LibraryIconWithTooltip, {
       showTooltip: t,
       libraryKey: e,
       tooltipDelay: r,

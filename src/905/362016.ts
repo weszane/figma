@@ -13,7 +13,7 @@ import { getParentOrgId } from "../905/872904";
 import { LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
 import { KindEnum } from "../905/129884";
 import { c as _$$c } from "../905/511370";
-import { lH, Ze } from "../905/297574";
+import { fetchLibraryStylesByFileKeyQuery, useLibraryAssetsFromStats } from "../905/297574";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { A as _$$A } from "../905/408320";
 import { q } from "../905/820062";
@@ -24,7 +24,7 @@ import { lX } from "../figma_app/588397";
 import { liveStoreInstance } from "../905/713695";
 import { DSAApiServiceInstance } from "../905/669853";
 import { V as _$$V } from "../905/697254";
-import { c as _$$c2 } from "../905/167005";
+import { OverviewStatsView } from "../905/167005";
 import { Xk } from "../905/712714";
 let w = "dsa_file_view_assets--stickySection---ITu-";
 let C = "dsa_file_view_assets--headerIcon--fdLRQ";
@@ -199,7 +199,7 @@ function M({
       insertCount: t?.data?.num_weekly_insertions ?? 0
     })
   }], [t]);
-  return jsx(_$$c2, {
+  return jsx(OverviewStatsView, {
     isLoading: "loading" === t.status,
     stats: i
   });
@@ -245,7 +245,7 @@ function j({
       insertCount: i?.num_weekly_insertions ?? 0
     })
   }], [i]);
-  return jsx(_$$c2, {
+  return jsx(OverviewStatsView, {
     isLoading: "loading" === t.status,
     stats: a
   });
@@ -267,7 +267,7 @@ export function $$H0(e) {
     onItemClick
   } = e;
   let f = getParentOrgId();
-  let [y] = setupResourceAtomHandler(lH(file.key));
+  let [y] = setupResourceAtomHandler(fetchLibraryStylesByFileKeyQuery(file.key));
   let b = "loading" === y.status;
   let v = useMemo(() => [...("loaded" === y.status ? y.data : [])].sort(compareStyles), [y]);
   let [I] = setupResourceAtomHandler(Xk({
@@ -277,7 +277,7 @@ export function $$H0(e) {
     entryPointForLogging: entrypoint
   }));
   let E = "loading" === I.status;
-  let x = Ze({
+  let x = useLibraryAssetsFromStats({
     productComponentStats: I.data,
     libraryKey: _$$l(file)
   });

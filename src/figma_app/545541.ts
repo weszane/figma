@@ -1,7 +1,7 @@
 import { produce } from 'immer';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { qZ } from '../905/201014';
+import { CodegenPlatform } from '../905/201014';
 import { D as _$$D } from '../905/273829';
 import { getUserId } from '../905/372672';
 import { getCodegenLanguagePreference } from '../905/515076';
@@ -425,7 +425,7 @@ const DEFAULT_PREFERENCES_WITH_CODEGEN = {
   ...DEFAULT_PREFERENCES,
   codegenSettings: {
     language: {
-      id: qZ.CSS,
+      id: CodegenPlatform.CSS,
       type: FPluginType.FIRST_PARTY,
       pluginLanguage: null
     },

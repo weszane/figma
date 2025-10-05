@@ -4,7 +4,7 @@ import { RadioPrimitiveOption } from "../905/34525";
 import { RadioPrimitiveRoot } from "../905/22449";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { KeyCodes } from "../905/63728";
-import { z3 } from "../figma_app/119475";
+import { useBlurFocusedItem } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { usKeyboardFocusHandler } from "../905/286442";
 import { m as _$$m } from "../figma_app/175364";
@@ -105,7 +105,7 @@ export function $$T1({
 }
 export function $$I0(e) {
   let t = useRef(null);
-  let r = z3("faux");
+  let r = useBlurFocusedItem("faux");
   let {
     active,
     focus

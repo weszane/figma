@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -94,7 +94,7 @@ function ep({
     thumbnail: !0,
     advanced: !0
   }), []);
-  let [ec, ep, em] = _$$t.useTabs(ed, {
+  let [ec, ep, em] = Tabs.useTabs(ed, {
     orientation: "vertical"
   });
   let eg = _$$b(em);
@@ -197,7 +197,7 @@ function ep({
     className: KT,
     children: [jsxs("div", {
       className: Cd,
-      children: [jsxs(_$$t.TabStrip, {
+      children: [jsxs(Tabs.TabStrip, {
         manager: eg,
         children: [jsx(_$$y, {
           ...ec.details,
@@ -232,7 +232,7 @@ function ep({
       })]
     }), jsxs("div", {
       className: DK,
-      children: [jsxs(_$$t.TabPanel, {
+      children: [jsxs(Tabs.TabPanel, {
         ...ep.details,
         children: [jsx(Mm, {
           id: tZ.NAME_INPUT,
@@ -275,7 +275,7 @@ function ep({
             }
           })
         })]
-      }), jsxs(_$$t.TabPanel, {
+      }), jsxs(Tabs.TabPanel, {
         ...ep.thumbnail,
         children: [jsx(Mm, {
           id: tZ.THUMBNAIL_UPLOADER,
@@ -293,7 +293,7 @@ function ep({
             ...er.carouselMedia
           })
         })]
-      }), jsxs(_$$t.TabPanel, {
+      }), jsxs(Tabs.TabPanel, {
         ...ep.advanced,
         children: [jsx(_$$A2, {
           authorField: e.fieldStates.author

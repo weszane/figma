@@ -6,7 +6,7 @@ import { EventShield } from "../905/821217";
 import { Link } from "../905/438674";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
-import { M3 } from "../figma_app/119475";
+import { useKeyboardNavigationItem } from "../figma_app/119475";
 import { HighlightedText } from "../905/287602";
 import { S as _$$S } from "../905/417453";
 import { searchInputAtom } from "../905/61477";
@@ -45,7 +45,7 @@ export function $$E0({
   let {
     setKeyboardNavigationElement,
     isFauxFocused
-  } = M3({
+  } = useKeyboardNavigationItem({
     id: i,
     path: c
   });

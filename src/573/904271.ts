@@ -20,7 +20,7 @@ import { Q as _$$Q } from "../9410/629866";
 import { cT, n0, GQ, vr, TU, _4, bi, Ye } from "../figma_app/32128";
 import { G as _$$G, N as _$$N } from "../b2835def/560769";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { $ as _$$$2 } from "../905/455748";
 import { F as _$$F } from "../905/680873";
 import { $ as _$$$3 } from "../9410/841699";
@@ -50,7 +50,7 @@ import { useSingleEffect } from "../905/791079";
 import { useSubscription } from "../figma_app/288654";
 import { getFileTypePx } from "../905/149328";
 import { O as _$$O } from "../905/257139";
-import { dP, q_, M3 } from "../figma_app/119475";
+import { KeyboardNavigationProvider, useKeyboardNavigationLookupMap, useKeyboardNavigationItem } from "../figma_app/119475";
 import { LoadingSpinner } from "../figma_app/858013";
 import { setShouldSearchDefaultLibraries, setAssetsSearchOptions } from "../905/879323";
 import { showModalHandler } from "../905/156213";
@@ -87,7 +87,7 @@ import { isValidLibraryKey } from "../figma_app/630951";
 import { Fl, fV } from "../figma_app/236178";
 import { FX, KP } from "../figma_app/12491";
 import { NX, k9, sF } from "../figma_app/777207";
-import { t as _$$t3, E as _$$E2 } from "../905/511388";
+import { DefaultLibraryIcon, LibraryIconWithTooltip } from "../905/511388";
 import { P as _$$P2, J as _$$J } from "../figma_app/582341";
 import { useComponentFlyoutModal } from "../figma_app/608944";
 import { l6, c$, sK } from "../905/794875";
@@ -406,7 +406,7 @@ function eW(e) {
         libraryKey: fileKeyToLibraryKey[e]
       },
       removeTextRightPadding: !0,
-      rightSettingsIcon: jsx(_$$t3, {})
+      rightSettingsIcon: jsx(DefaultLibraryIcon, {})
     }, e))]
   });
 }
@@ -680,7 +680,7 @@ class tK extends Component {
           })
         }), (hasResourcePresetKeyStatic(this.props.subscribedLibraryKey) || isKeyInQNOrR9(this.props.subscribedLibraryKey)) && jsx("div", {
           className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml4.$,
-          children: jsx(_$$E2, {
+          children: jsx(LibraryIconWithTooltip, {
             libraryKey: this.props.subscribedLibraryKey,
             showTooltip: !0,
             redirectToHubFile: !0
@@ -1082,7 +1082,7 @@ function t6({
       return t;
     });
   }, [a, u]);
-  return jsx(dP, {
+  return jsx(KeyboardNavigationProvider, {
     recordingKey: "localComponents",
     className: "component_sidebar--container--Wxtr4",
     dataTestId: "component-sidebar",
@@ -1124,7 +1124,7 @@ function t9({
   } = Gq();
   _$$y();
   _$$S();
-  let I = q_();
+  let I = useKeyboardNavigationLookupMap();
   useEffect(() => {
     c(setShouldSearchDefaultLibraries({
       shouldSearchDefaultLibraries: !1
@@ -1560,19 +1560,19 @@ function se({
   let h = t3.improved;
   let {
     setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: h.libraryModal.path,
     column: h.libraryModal.column
   });
   let {
     setKeyboardNavigationElement: _setKeyboardNavigationElement
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: t3.improved.dropdown.path,
     column: t3.improved.dropdown.column
   });
   let {
     setKeyboardNavigationElement: _setKeyboardNavigationElement2
-  } = M3({
+  } = useKeyboardNavigationItem({
     path: h.viewToggle.path,
     column: h.viewToggle.column
   });
@@ -1898,7 +1898,7 @@ function sN({
   isInTab: t,
   tabProps: s
 }) {
-  return getFeatureFlags().ui3_left_panel_tabs_fpl && s ? jsx(_$$t.TabPanel, {
+  return getFeatureFlags().ui3_left_panel_tabs_fpl && s ? jsx(Tabs.TabPanel, {
     height: "fill",
     ...s,
     children: jsx("div", {

@@ -16,7 +16,7 @@ import { VideoOverlayComponent } from '../905/129046';
 import { KindEnum } from '../905/129884';
 import { executeWithDSAAction } from '../905/135117';
 import { e as SVG } from '../905/149844';
-import { t as _$$t } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { ServiceCategories } from '../905/165054';
 import { getThemeBorderStyle } from '../905/187165';
 import { FormattedInputVariant3 } from '../905/203369';
@@ -1751,15 +1751,15 @@ function it({
       children: renderI18nText('fullscreen.color_picker')
     }), jsxs(DialogTabStrip, {
       manager: i,
-      children: [jsx(_$$t.Tab, {
+      children: [jsx(Tabs.Tab, {
         ...r.custom_color,
         recordingKey: generateRecordingKey(t, 'viewTabs.customColor'),
         children: renderI18nText('fullscreen.properties_panel.color_picker.custom')
-      }), jsx(_$$t.Tab, {
+      }), jsx(Tabs.Tab, {
         ...r.library,
         recordingKey: generateRecordingKey(t, 'viewTabs.library'),
         children: renderI18nText('fullscreen.properties_panel.color_picker.libraries')
-      }), r.cms && jsx(_$$t.Tab, {
+      }), r.cms && jsx(Tabs.Tab, {
         ...r.cms,
         recordingKey: generateRecordingKey(t, 'viewTabs.dakota'),
         children: renderI18nText('variables.binding_ui.variable_dakota_tab_name')
@@ -1819,7 +1819,7 @@ export let $$ii1 = forwardRef(({
   } = ZI();
   let em = isSitesFileType();
   let eh = useAppModelPropsShallow('currentPage', 'currentSelectedProperty').currentSelectedProperty.type === NodePropertyCategory.STROKE;
-  let [eg, ef, e_] = _$$t.useTabs({
+  let [eg, ef, e_] = Tabs.useTabs({
     custom_color: !0,
     library: !0,
     cms: em && showDakotaFieldPicker && !eh
@@ -1936,10 +1936,10 @@ export let $$ii1 = forwardRef(({
     variableScopes: Q ?? eT
   });
   let eO = es ? eP : jsxs(Fragment, {
-    children: [jsx(_$$t.TabPanel, {
+    children: [jsx(Tabs.TabPanel, {
       ...ef.custom_color,
       children: eP
-    }), jsx(_$$t.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...ef.library,
       children: jsx(is, {
         disabledVariableIds: new Set(),
@@ -1951,7 +1951,7 @@ export let $$ii1 = forwardRef(({
         keepOpenOnItemSelect: Y,
         variableScopes: Q
       })
-    }), eg.cms && jsx(_$$t.TabPanel, {
+    }), eg.cms && jsx(Tabs.TabPanel, {
       ...ef.cms,
       children: jsx(_$$h, {
         onClose: K,
@@ -2229,7 +2229,7 @@ export function $$io0({
   let S = getColorFormat();
   let C = useCurrentTool();
   let T = useMemo(() => f ? ['custom_color', 'library'] : ['custom_color'], [f]);
-  let [R, N, P] = _$$t.useTabs({
+  let [R, N, P] = Tabs.useTabs({
     custom_color: T.includes('custom_color'),
     library: T.includes('library'),
     cms: !1
@@ -2304,7 +2304,7 @@ export function $$io0({
           tabProps: R
         }), jsxs(DialogBody, {
           padding: 0,
-          children: [jsxs(_$$t.TabPanel, {
+          children: [jsxs(Tabs.TabPanel, {
             ...N.custom_color,
             children: [jsx(S7, {
               canAcceptStyles: !1,
@@ -2321,7 +2321,7 @@ export function $$io0({
               onChange: g,
               recordingKey: h
             })]
-          }), jsx(_$$t.TabPanel, {
+          }), jsx(Tabs.TabPanel, {
             ...N.library,
             children: jsx(is, {
               selectedItem: t,

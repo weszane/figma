@@ -72,7 +72,7 @@ import { debug } from '../figma_app/465776';
 import { ViewTypeEnum } from '../figma_app/471068';
 import { LinkPrimitive } from '../figma_app/496441';
 import { jn } from '../figma_app/522082';
-import { fA, nb } from '../figma_app/543100';
+import { createFileTile, TileType } from '../figma_app/543100';
 import { getCurrentTeamId } from '../figma_app/598018';
 import { N as _$$N2 } from '../figma_app/609500';
 import { canMemberOrg, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
@@ -539,7 +539,7 @@ function eM(e) {
     data
   } = _$$L2();
   let p = useCallback((i, n, r) => {
-    i.type === nb.FILE && (t(filePutAction({
+    i.type === TileType.FILE && (t(filePutAction({
       file: fileEntityDataMapper.toSinatra(i.file)
     })), s(r, 'key' in n && n.key === 'Enter' ? SearchAnalytics.Query.ClickAction.ENTER : SearchAnalytics.Query.ClickAction.CLICK, e.results.find(e => e.model.key === i.file.key)));
   }, [t, e.results, s]);
@@ -559,7 +559,7 @@ function eM(e) {
   }, [t, i]);
   let h = useMemo(() => e.results.map(({
     model: e
-  }) => fA(e)), [e.results]);
+  }) => createFileTile(e)), [e.results]);
   let g = useCallback((e, t, i) => {
     show({
       data: {
@@ -603,7 +603,7 @@ function eM(e) {
         enabled: showing,
         properties: {
           tileType: e?.type,
-          tileFileId: e?.type === nb.FILE ? e?.file.key : void 0
+          tileFileId: e?.type === TileType.FILE ? e?.file.key : void 0
         },
         children: jsx(_$$i, {
           tileActions: eD,

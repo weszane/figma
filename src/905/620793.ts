@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { P } from "../figma_app/582341";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { isTeamLibrary } from "../figma_app/633080";
-import { S } from "../905/612212";
+import { lastActionDetails } from "../905/612212";
 import { hx, m3 } from "../905/66449";
 let g = "library_modal_body_header--libraryPath--PUMmE";
 let f = "library_modal_body_header--libraryPathLink--SgLKL";
@@ -22,7 +22,7 @@ export function $$_0({
   showBottomBorder: g
 }) {
   let f = useCallback(() => {
-    S.setLastAction(S.NavAction.BACK_BUTTON);
+    lastActionDetails.setLastAction(lastActionDetails.NavAction.BACK_BUTTON);
     u?.();
   }, [u]);
   let {

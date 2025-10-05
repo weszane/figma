@@ -1,84 +1,186 @@
-import { isNotNull } from "../905/8035";
-var $$r5 = (e => (e[e.StyleNotSet = 0] = "StyleNotSet", e[e.StyleNotFound = 1] = "StyleNotFound", e))($$r5 || {});
-export function $$a1(e, t, i, n) {
-  if (!(t in e)) {
-    let r = n(i);
-    e[t] = r;
+import { isNotNull } from "../905/8035"
+
+// Enum for style resolution status
+export enum StyleStatus {
+  StyleNotSet = 0,
+  StyleNotFound = 1,
+}
+
+// Enum for variable resolution status
+export enum VariableStatus {
+  NotFound = 0,
+  NotResolved = 1,
+  Resolved = 2,
+  Matching = 3,
+}
+
+/**
+ * Memoization helper function
+ * @param cache - Object to store cached values
+ * @param key - Key to check in cache
+ * @param defaultValue - Default value to use if key is not in cache
+ * @param factory - Function to generate value if not in cache
+ * @returns The cached or newly created value
+ */
+export function memoizeFn<T, K extends keyof any, V>(
+  cache: Record<K, V>,
+  key: K,
+  defaultValue: T,
+  factory: (value: T) => V,
+): V {
+  if (!(key in cache)) {
+    const newValue = factory(defaultValue)
+    cache[key] = newValue
   }
-  return e[t];
+  return cache[key]
 }
-export function $$s6(e, t) {
-  let i;
-  if ("string" == typeof e.fillStyleId) {
-    let r = e.fillStyleId;
-    return (i = t.resolveColor(r), isNotNull(i)) ? i : 1;
+
+/**
+ * Resolves fill style from a node
+ * @param node - Node with potential fill style
+ * @param resolver - Style resolver object
+ * @returns Resolved style or status code
+ */
+export function resolveFillStyle(node: { fillStyleId?: string }, resolver: { resolveColor: (id: string) => any }): any {
+  if (typeof node.fillStyleId === "string") {
+    const styleId = node.fillStyleId
+    const resolved = resolver.resolveColor(styleId)
+    return isNotNull(resolved) ? resolved : StyleStatus.StyleNotFound
   }
-  return 0;
+  return StyleStatus.StyleNotSet
 }
-export function $$o10(e, t) {
-  let i;
-  if ("string" == typeof e.strokeStyleId) {
-    let r = e.strokeStyleId;
-    return (i = t.resolveColor(r), isNotNull(i)) ? i : 1;
+
+/**
+ * Resolves stroke style from a node
+ * @param node - Node with potential stroke style
+ * @param resolver - Style resolver object
+ * @returns Resolved style or status code
+ */
+export function resolveStrokeStyle(node: { strokeStyleId?: string }, resolver: { resolveColor: (id: string) => any }): any {
+  if (typeof node.strokeStyleId === "string") {
+    const styleId = node.strokeStyleId
+    const resolved = resolver.resolveColor(styleId)
+    return isNotNull(resolved) ? resolved : StyleStatus.StyleNotFound
   }
-  return 0;
+  return StyleStatus.StyleNotSet
 }
-export function $$l0(e, t) {
-  let i;
-  if ("string" == typeof e.effectStyleId) {
-    let r = e.effectStyleId;
-    return (i = t.resolveEffect(r), isNotNull(i)) ? i : 1;
+
+/**
+ * Resolves effect style from a node
+ * @param node - Node with potential effect style
+ * @param resolver - Style resolver object
+ * @returns Resolved style or status code
+ */
+export function resolveEffectStyle(node: { effectStyleId?: string }, resolver: { resolveEffect: (id: string) => any }): any {
+  if (typeof node.effectStyleId === "string") {
+    const styleId = node.effectStyleId
+    const resolved = resolver.resolveEffect(styleId)
+    return isNotNull(resolved) ? resolved : StyleStatus.StyleNotFound
   }
-  return 0;
+  return StyleStatus.StyleNotSet
 }
-export function $$d4(e, t) {
-  let i;
-  if ("string" == typeof e.textStyleId) {
-    let r = e.textStyleId;
-    return (i = t.resolveTextStyle(r), isNotNull(i)) ? i : 1;
+
+/**
+ * Resolves text style from a node
+ * @param node - Node with potential text style
+ * @param resolver - Style resolver object
+ * @returns Resolved style or status code
+ */
+export function resolveTextStyle(node: { textStyleId?: string }, resolver: { resolveTextStyle: (id: string) => any }): any {
+  if (typeof node.textStyleId === "string") {
+    const styleId = node.textStyleId
+    const resolved = resolver.resolveTextStyle(styleId)
+    return isNotNull(resolved) ? resolved : StyleStatus.StyleNotFound
   }
-  return 0;
+  return StyleStatus.StyleNotSet
 }
-export function $$c8(e) {
-  return 0 !== e && 1 !== e;
+
+/**
+ * Checks if a value represents a resolved style (not a status code)
+ * @param value - Value to check
+ * @returns True if value is a resolved style
+ */
+export function isResolvedStyle(value: any): boolean {
+  return value !== StyleStatus.StyleNotSet && value !== StyleStatus.StyleNotFound
 }
-export function $$u3(e, t) {
-  return e && void 0 !== e[t];
+
+/**
+ * Checks if an object has a specific property
+ * @param obj - Object to check
+ * @param key - Property key to look for
+ * @returns True if object has the property
+ */
+export function hasProperty<T, K extends keyof T>(obj: T, key: K): boolean {
+  return obj && obj[key] !== undefined
 }
-export var $$p7 = (e => (e[e.NotFound = 0] = "NotFound", e[e.NotResolved = 1] = "NotResolved", e[e.Resolved = 2] = "Resolved", e[e.Matching = 3] = "Matching", e))($$p7 || {});
-export function $$m9(e, t, i, n) {
-  if (!n) return null;
-  if ($$u3(e, i)) return function (e, t) {
-    if (!t) return {
-      status: 0
-    };
-    let i = e.resolveVariable(t.id);
-    return i ? {
-      name: i.name,
-      codeSyntax: i.codeSyntax ?? void 0,
-      status: 2,
-      id: i.id
-    } : {
-      status: 1
-    };
-  }(n, e[i]);
-  let r = t?.[i];
-  return r && 0 !== r.length ? {
-    status: 3,
-    vars: r
-  } : null;
+
+/**
+ * Resolves a variable with proper status tracking
+ * @param variables - Variables collection
+ * @param localVars - Local variables mapping
+ * @param key - Variable key to resolve
+ * @param resolver - Variable resolver object
+ * @returns Resolution result with status
+ */
+export function resolveVariable(
+  variables: Record<string, any>,
+  localVars: Record<string, any[]> | undefined,
+  key: string,
+  resolver: { resolveVariable: (id: string) => any } | null,
+): { status: VariableStatus, name?: string, codeSyntax?: any, id?: string, vars?: any[] } | null {
+  if (!resolver)
+    return null
+
+  if (hasProperty(variables, key)) {
+    const variable = variables[key]
+    if (!variable) {
+      return {
+        status: VariableStatus.NotFound,
+      }
+    }
+
+    const resolvedVar = resolver.resolveVariable(variable.id)
+    return resolvedVar
+      ? {
+        name: resolvedVar.name,
+        codeSyntax: resolvedVar.codeSyntax ?? undefined,
+        status: VariableStatus.Resolved,
+        id: resolvedVar.id,
+      }
+      : {
+        status: VariableStatus.NotResolved,
+      }
+  }
+
+  const localVariables = localVars?.[key]
+  if (localVariables && localVariables.length > 0) {
+    return {
+      status: VariableStatus.Matching,
+      vars: localVariables,
+    }
+  }
+
+  return null
 }
-export function $$h2(e) {
-  return !!e && 2 === e.status;
+
+/**
+ * Checks if a variable resolution result is successfully resolved
+ * @param result - Variable resolution result
+ * @returns True if result is resolved
+ */
+export function isVariableResolved(result: { status: VariableStatus } | null): boolean {
+  return !!result && result.status === VariableStatus.Resolved
 }
-export const $r = $$l0;
-export const H2 = $$a1;
-export const HN = $$h2;
-export const Hb = $$u3;
-export const V$ = $$d4;
-export const _2 = $$r5;
-export const fl = $$s6;
-export const jg = $$p7;
-export const oQ = $$c8;
-export const ut = $$m9;
-export const wI = $$o10;
+
+// Export aliases for backward compatibility
+export const $r = resolveEffectStyle
+export const H2 = memoizeFn
+export const HN = isVariableResolved
+export const Hb = hasProperty
+export const V$ = resolveTextStyle
+export const _2 = StyleStatus
+export const fl = resolveFillStyle
+export const jg = VariableStatus
+export const oQ = isResolvedStyle
+export const ut = resolveVariable
+export const wI = resolveStrokeStyle

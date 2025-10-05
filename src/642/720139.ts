@@ -13,7 +13,7 @@ import { NX } from "../figma_app/243213";
 import { useSingleEffect } from "../905/791079";
 import { KeyCodes } from "../905/63728";
 import { Point } from "../905/736624";
-import { c2, Nt, yn, lv } from "../figma_app/119475";
+import { isUpKey, isDownKey, isLeftKey, isRightKey } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -58,7 +58,7 @@ import { DraggableModalManager } from "../905/748636";
 import { Wi, JR } from "../figma_app/162641";
 import { q as _$$q2 } from "../figma_app/58251";
 import { useLibraryFileLink } from "../905/217163";
-import { E as _$$E } from "../905/511388";
+import { LibraryIconWithTooltip } from "../905/511388";
 import { hasResourcePresetKey } from "../figma_app/255679";
 import { useCurrentUserOrg } from "../905/845253";
 import { hasTeamPaidAccess } from "../figma_app/345997";
@@ -240,7 +240,7 @@ function e_({
       })
     }), isPresetLibrary && jsx("div", {
       className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml2.$,
-      children: jsx(_$$E, {
+      children: jsx(LibraryIconWithTooltip, {
         libraryKey: e,
         showTooltip: !0
       })
@@ -819,22 +819,22 @@ export function $$tu1({
     if (!i) return;
     let l = t.keyCode === KeyCodes.TAB;
     let a = t.shiftKey;
-    if (c2(t, !1)) {
+    if (isUpKey(t, !1)) {
       i.getItemAbove()?.focus();
       s?.();
       return;
     }
-    if (Nt(t, !1)) {
+    if (isDownKey(t, !1)) {
       i.getItemBelow()?.focus();
       s?.();
       return;
     }
-    if (yn(r, !1) || l && a) {
+    if (isLeftKey(r, !1) || l && a) {
       i.getItemToTheLeft()?.focus();
       s?.();
       return;
     }
-    if (lv(r, !1) || l && !a) {
+    if (isRightKey(r, !1) || l && !a) {
       i.getItemToTheRight()?.focus();
       s?.();
       return;

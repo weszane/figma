@@ -1,64 +1,114 @@
-export var $$n2 = (e => (e.ADDED = "ADDED", e.REMOVED = "REMOVED", e))($$n2 || {});
-export function $$i4(e, t = 0, r, n) {
-  let a = {
-    code: e,
-    matchingVars: n
-  };
-  r && (a.hint = r);
-  t && (a.indent = t);
-  return a;
+import type { DesignIssue } from "../905/49095"
+
+// Refactored enum for better readability (original: $$n2)
+export enum ChangeType {
+  ADDED = "ADDED",
+  REMOVED = "REMOVED",
 }
-export function $$a3(e, t = !1) {
-  return e.map(e => t ? $$s1(e) + e.code : e.code).join("\n");
+
+// Refactored function to create code block objects (original: $$i4)
+export interface CodeBlock {
+  code: string
+  indent?: number
+  hint?: DesignIssue
+  matchingVars?: any
 }
-export function $$s1(e) {
-  return e.indent && e.indent > 0 ? "  ".repeat(e.indent) : "";
+
+export function createCodeBlock(
+  code: string,
+  indent: number = 0,
+  hint?: DesignIssue,
+  matchingVars?: any,
+): CodeBlock {
+  const block: CodeBlock = {
+    code,
+    matchingVars,
+  }
+
+  if (hint !== undefined) {
+    block.hint = hint
+  }
+
+  if (indent > 0) {
+    block.indent = indent
+  }
+
+  return block
 }
-export function $$o0(e) {
-  if (!e || "string" != typeof e) return "plaintext";
-  switch (e.split(".").pop()?.toLowerCase()) {
+
+// Refactored function to join code blocks (original: $$a3)
+export function joinCodeBlocks(blocks: CodeBlock[], includeIndentation: boolean = false): string {
+  return blocks
+    .map(block =>
+      includeIndentation ? `${getIndentString(block)}${block.code}` : block.code,
+    )
+    .join("\n")
+}
+
+// Refactored helper function for indentation (original: $$s1)
+export function getIndentString(block: CodeBlock): string {
+  if (block.indent && block.indent > 0) {
+    return "  ".repeat(block.indent)
+  }
+  return ""
+}
+
+// Refactored function to determine language from file extension (original: $$o0)
+export function getLanguageFromFileExtension(filename: string): string {
+  if (!filename || typeof filename !== "string") {
+    return "plaintext"
+  }
+
+  const extension = filename.split(".").pop()?.toLowerCase()
+
+  switch (extension) {
     case "ts":
     case "tsx":
-      return "typescript";
+      return "typescript"
     case "js":
     case "jsx":
-      return "javascript";
+      return "javascript"
     case "css":
-      return "css";
+      return "css"
     case "json":
-      return "json";
+      return "json"
     case "html":
     case "htm":
-      return "html";
+      return "html"
     case "md":
+      return "markdown"
     case "py":
-      return "python";
+      return "python"
     case "rb":
-      return "ruby";
+      return "ruby"
     case "go":
-      return "go";
+      return "go"
     case "cpp":
     case "cc":
     case "cxx":
     case "h":
     case "hpp":
-      return "cpp";
+      return "cpp"
     case "yml":
+    case "yaml":
+      return "yaml"
     case "xml":
-      return "xml";
+      return "xml"
     case "swift":
-      return "swift";
+      return "swift"
     case "kt":
     case "kts":
-      return "kotlin";
+      return "kotlin"
     case "rs":
-      return "rust";
+      return "rust"
     default:
-      return "plaintext";
+      return "plaintext"
   }
 }
-export const $e = $$o0;
-export const Gj = $$s1;
-export const j5 = $$n2;
-export const kt = $$a3;
-export const n8 = $$i4;
+
+// Export aliases for backward compatibility
+export const $e = getLanguageFromFileExtension
+export const Gj = getIndentString
+export const j5 = ChangeType
+export const kt = joinCodeBlocks
+export const n8 = createCodeBlock

@@ -36,7 +36,7 @@ import { Cj } from "../905/270084";
 import { jT } from "../4452/650793";
 import { e as _$$e } from "../905/295932";
 import { BadgeColor, Badge, BadgeSize } from "../figma_app/919079";
-import { t as _$$t3 } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { ButtonPrimitive } from "../905/632989";
 import { Bs, Hg } from "../905/672745";
 import { I as _$$I } from "../4452/82228";
@@ -674,7 +674,7 @@ let eM = {
     let l = useDispatch();
     let o = useTeamPlanFeatures().unwrapOr(null);
     let [d, c] = useState("overview");
-    let [_, u, m] = _$$t3.useManagedTabs({
+    let [_, u, m] = Tabs.useManagedTabs({
       overview: !0,
       people: !0
     }, d, e => c(e));
@@ -723,12 +723,12 @@ let eM = {
               className: "connected_projects_table--separatorAboveTabStrip--zUAM-"
             }), jsx("div", {
               className: cssBuilderInstance.pl12.pr24.py8.$,
-              children: jsxs(_$$t3.TabStrip, {
+              children: jsxs(Tabs.TabStrip, {
                 manager: m,
-                children: [jsx(_$$t3.Tab, {
+                children: [jsx(Tabs.Tab, {
                   ..._.overview,
                   children: getI18nString("resource_connection.overview")
-                }), jsx(_$$t3.Tab, {
+                }), jsx(Tabs.Tab, {
                   ..._.people,
                   children: getI18nString("resource_connection.people")
                 })]
@@ -737,7 +737,7 @@ let eM = {
           })]
         })
       }), jsxs(_$$m.Body, {
-        children: [jsx(_$$t3.TabPanel, {
+        children: [jsx(Tabs.TabPanel, {
           ...u.overview,
           children: jsx(eD, {
             loading: "loading" === g.status || "loading" === h.status,
@@ -753,7 +753,7 @@ let eM = {
               })
             })
           })
-        }), jsx(_$$t3.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...u.people,
           children: jsx(eD, {
             loading: "loading" === g.status,

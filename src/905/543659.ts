@@ -1,60 +1,148 @@
-import { H2 } from "../905/707098";
-export class $$r0 {
-  constructor(e) {
-    this._cachedProperties = {};
-    this._EXPENSIVE_TO_READ_node = e;
+import { memoizeFn } from "../905/707098"
+
+/**
+ * Class for reading auto-layout properties with caching mechanism
+ * Original name: $$r0
+ */
+export class AutoLayoutPropertyReader {
+  private _cachedProperties: Record<string, any>
+  private _EXPENSIVE_TO_READ_node: any
+
+  constructor(node: any) {
+    this._cachedProperties = {}
+    this._EXPENSIVE_TO_READ_node = node
   }
-  readValue(e, t) {
-    return H2(this._cachedProperties, e, this._EXPENSIVE_TO_READ_node, t);
+
+  /**
+   * Read a value with caching
+   * @param key - Cache key
+   * @param getter - Function to get the value from node
+   * @returns The cached or computed value
+   */
+  private readValue<T>(key: string, getter: (node: any) => T): T {
+    return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
-  readAutoLayoutValue(e, t, i) {
-    let n = this.readValue("inferredAutoLayout", e => e.inferredAutoLayout);
-    return this.readValue(e, n ? i : t);
+
+  /**
+   * Read an auto-layout value with fallback to inferred auto-layout
+   * @param key - Cache key
+   * @param directGetter - Function to get value directly from node
+   * @param inferredGetter - Function to get value from inferred auto-layout
+   * @returns The value from either direct or inferred source
+   */
+  private readAutoLayoutValue<T>(
+    key: string,
+    directGetter: (node: any) => T,
+    inferredGetter: (node: any) => T,
+  ): T {
+    const inferredAutoLayout = this.readValue("inferredAutoLayout", (node: any) => node.inferredAutoLayout)
+    return this.readValue(key, inferredAutoLayout ? inferredGetter : directGetter)
   }
-  get layoutMode() {
-    return this.readAutoLayoutValue("layoutMode", e => e.layoutMode, e => e.inferredAutoLayout.layoutMode);
+
+  // Auto-layout properties
+  get layoutMode(): string {
+    return this.readAutoLayoutValue(
+      "layoutMode",
+      (node: any) => node.layoutMode,
+      (node: any) => node.inferredAutoLayout.layoutMode,
+    )
   }
-  get primaryAxisSizingMode() {
-    return this.readAutoLayoutValue("primaryAxisSizingMode", e => e.primaryAxisSizingMode, e => e.inferredAutoLayout.primaryAxisSizingMode);
+
+  get primaryAxisSizingMode(): string {
+    return this.readAutoLayoutValue(
+      "primaryAxisSizingMode",
+      (node: any) => node.primaryAxisSizingMode,
+      (node: any) => node.inferredAutoLayout.primaryAxisSizingMode,
+    )
   }
-  get counterAxisSizingMode() {
-    return this.readAutoLayoutValue("counterAxisSizingMode", e => e.counterAxisSizingMode, e => e.inferredAutoLayout.counterAxisSizingMode);
+
+  get counterAxisSizingMode(): string {
+    return this.readAutoLayoutValue(
+      "counterAxisSizingMode",
+      (node: any) => node.counterAxisSizingMode,
+      (node: any) => node.inferredAutoLayout.counterAxisSizingMode,
+    )
   }
-  get primaryAxisAlignItems() {
-    return this.readAutoLayoutValue("primaryAxisAlignItems", e => e.primaryAxisAlignItems, e => e.inferredAutoLayout.primaryAxisAlignItems);
+
+  get primaryAxisAlignItems(): string {
+    return this.readAutoLayoutValue(
+      "primaryAxisAlignItems",
+      (node: any) => node.primaryAxisAlignItems,
+      (node: any) => node.inferredAutoLayout.primaryAxisAlignItems,
+    )
   }
-  get counterAxisAlignItems() {
-    return this.readAutoLayoutValue("counterAxisAlignItems", e => e.counterAxisAlignItems, e => e.inferredAutoLayout.counterAxisAlignItems);
+
+  get counterAxisAlignItems(): string {
+    return this.readAutoLayoutValue(
+      "counterAxisAlignItems",
+      (node: any) => node.counterAxisAlignItems,
+      (node: any) => node.inferredAutoLayout.counterAxisAlignItems,
+    )
   }
-  get paddingLeft() {
-    return this.readAutoLayoutValue("paddingLeft", e => e.paddingLeft, e => e.inferredAutoLayout.paddingLeft);
+
+  get paddingLeft(): number {
+    return this.readAutoLayoutValue(
+      "paddingLeft",
+      (node: any) => node.paddingLeft,
+      (node: any) => node.inferredAutoLayout.paddingLeft,
+    )
   }
-  get paddingRight() {
-    return this.readAutoLayoutValue("paddingRight", e => e.paddingRight, e => e.inferredAutoLayout.paddingRight);
+
+  get paddingRight(): number {
+    return this.readAutoLayoutValue(
+      "paddingRight",
+      (node: any) => node.paddingRight,
+      (node: any) => node.inferredAutoLayout.paddingRight,
+    )
   }
-  get paddingTop() {
-    return this.readAutoLayoutValue("paddingTop", e => e.paddingTop, e => e.inferredAutoLayout.paddingTop);
+
+  get paddingTop(): number {
+    return this.readAutoLayoutValue(
+      "paddingTop",
+      (node: any) => node.paddingTop,
+      (node: any) => node.inferredAutoLayout.paddingTop,
+    )
   }
-  get paddingBottom() {
-    return this.readAutoLayoutValue("paddingBottom", e => e.paddingBottom, e => e.inferredAutoLayout.paddingBottom);
+
+  get paddingBottom(): number {
+    return this.readAutoLayoutValue(
+      "paddingBottom",
+      (node: any) => node.paddingBottom,
+      (node: any) => node.inferredAutoLayout.paddingBottom,
+    )
   }
-  get itemSpacing() {
-    return this.readAutoLayoutValue("itemSpacing", e => e.itemSpacing, e => e.inferredAutoLayout.itemSpacing);
+
+  get itemSpacing(): number {
+    return this.readAutoLayoutValue(
+      "itemSpacing",
+      (node: any) => node.itemSpacing,
+      (node: any) => node.inferredAutoLayout.itemSpacing,
+    )
   }
-  get strokesIncludedInLayout() {
-    return this.readValue("strokesIncludedInLayout", e => e.strokesIncludedInLayout);
+
+  // Other layout properties
+  get strokesIncludedInLayout(): boolean {
+    return this.readValue("strokesIncludedInLayout", (node: any) => node.strokesIncludedInLayout)
   }
-  get layoutWrap() {
-    return this.readValue("layoutWrap", e => e.layoutWrap);
+
+  get layoutWrap(): string {
+    return this.readValue("layoutWrap", (node: any) => node.layoutWrap)
   }
-  get counterAxisAlignContent() {
-    return this.readValue("counterAxisAlignContent", e => e.counterAxisAlignContent);
+
+  get counterAxisAlignContent(): string {
+    return this.readValue("counterAxisAlignContent", (node: any) => node.counterAxisAlignContent)
   }
-  get counterAxisSpacing() {
-    return this.readValue("counterAxisSpacing", e => e.counterAxisSpacing ?? void 0);
+
+  get counterAxisSpacing(): number | undefined {
+    return this.readValue("counterAxisSpacing", (node: any) => node.counterAxisSpacing ?? undefined)
   }
-  static empty() {
-    return new $$r0({
+
+  /**
+   * Create an empty instance with default values
+   * @returns A new instance with default values
+   */
+  static empty(): AutoLayoutPropertyReader {
+    return new AutoLayoutPropertyReader({
       layoutMode: "NONE",
       primaryAxisSizingMode: "FIXED",
       counterAxisSizingMode: "FIXED",
@@ -65,21 +153,39 @@ export class $$r0 {
       paddingTop: 0,
       paddingBottom: 0,
       itemSpacing: 0,
-      strokesIncludedInLayout: !1,
+      strokesIncludedInLayout: false,
       inferredAutoLayout: null,
       layoutWrap: "NO_WRAP",
       counterAxisAlignContent: "AUTO",
-      counterAxisSpacing: 0
-    });
+      counterAxisSpacing: 0,
+    })
   }
-  static from(e) {
-    return "GROUP" === e.type ? this.fromGroupNode(e) : this.fromBaseFrame(e);
+
+  /**
+   * Create an instance from a node
+   * @param node - The node to create from
+   * @returns A new instance
+   */
+  static from(node: any): AutoLayoutPropertyReader {
+    return node.type === "GROUP" ? this.fromGroupNode(node) : this.fromBaseFrame(node)
   }
-  static fromBaseFrame(e) {
-    return new $$r0(e);
+
+  /**
+   * Create an instance from a base frame node
+   * @param node - The base frame node
+   * @returns A new instance
+   */
+  static fromBaseFrame(node: any): AutoLayoutPropertyReader {
+    return new AutoLayoutPropertyReader(node)
   }
-  static fromGroupNode(e) {
-    return new $$r0({
+
+  /**
+   * Create an instance from a group node
+   * @param node - The group node
+   * @returns A new instance
+   */
+  static fromGroupNode(node: any): AutoLayoutPropertyReader {
+    return new AutoLayoutPropertyReader({
       layoutMode: "NONE",
       primaryAxisSizingMode: "FIXED",
       counterAxisSizingMode: "FIXED",
@@ -90,12 +196,13 @@ export class $$r0 {
       paddingTop: 0,
       paddingBottom: 0,
       itemSpacing: 0,
-      strokesIncludedInLayout: !1,
-      inferredAutoLayout: e.inferredAutoLayoutResult,
+      strokesIncludedInLayout: false,
+      inferredAutoLayout: node.inferredAutoLayoutResult,
       layoutWrap: "NO_WRAP",
       counterAxisAlignContent: "AUTO",
-      counterAxisSpacing: 0
-    });
+      counterAxisSpacing: 0,
+    })
   }
 }
-export const c = $$r0;
+
+export const c = AutoLayoutPropertyReader

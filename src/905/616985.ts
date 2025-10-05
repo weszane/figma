@@ -3,7 +3,7 @@ import { useMemo, useState, useLayoutEffect } from "react";
 import { decimalToPercent } from "../905/436288";
 import { $, h } from "../905/455748";
 import { useLatestRef } from "../figma_app/922077";
-import { H } from "../905/773253";
+import { VisibilityProvider } from "../905/773253";
 let d = "push_container--panel--WJ-MY";
 export function $$c0({
   width: e,
@@ -56,7 +56,7 @@ function u({
       p(!0);
     }, o));
   }, [i, c, o]);
-  return jsx(H, {
+  return jsx(VisibilityProvider, {
     isHidden: !i,
     children: jsx("div", {
       "aria-hidden": !i,

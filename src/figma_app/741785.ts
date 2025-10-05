@@ -11,7 +11,7 @@ import { setupLazyComponentFactory } from "../905/992467";
 import { generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
 import { Point } from "../905/736624";
-import { dP } from "../figma_app/119475";
+import { KeyboardNavigationProvider } from "../figma_app/119475";
 import { getI18nString } from "../905/303541";
 import { q } from "../905/113809";
 import { q as _$$q } from "../905/417424";
@@ -180,7 +180,7 @@ function H({
       dragHeaderOnly: !1,
       initialWidth: 258,
       canRenderBelowViewport: !0,
-      children: jsx(dP, {
+      children: jsx(KeyboardNavigationProvider, {
         recordingKey: d,
         children: jsx("div", {
           children: jsx(G, {

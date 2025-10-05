@@ -6,7 +6,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { a as _$$a } from "../905/999566";
 import { showModalHandler } from "../905/156213";
-import { nb } from "../figma_app/543100";
+import { TileType } from "../figma_app/543100";
 import { getUserId } from "../905/372672";
 import { Au } from "../figma_app/518077";
 import { FileWorkspacePinActionsView, WorkspacePinnedFileKeysView } from "../figma_app/43951";
@@ -128,7 +128,7 @@ export function $$b2(e) {
 export let $$T1 = 8;
 export function $$I4(e) {
   return {
-    type: nb.FILE,
+    type: TileType.FILE,
     file: {
       ...e,
       signedPreviewThumbnailUrls: null

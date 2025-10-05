@@ -3,7 +3,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { r as _$$r } from "../905/571838";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "../vendor/524488";
-import { z3 } from "../figma_app/119475";
+import { useBlurFocusedItem } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hO } from "../figma_app/545293";
@@ -205,7 +205,7 @@ export function $$O1({
   dataTestId: b
 }) {
   let T = _$$r2("fragments_grid", t, a, h, E);
-  let S = z3("faux");
+  let S = useBlurFocusedItem("faux");
   return jsx(_$$x, {
     primary: !0,
     columns: r,

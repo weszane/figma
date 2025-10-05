@@ -45,7 +45,7 @@ import { IAssertResource } from '../figma_app/763686';
 import { C3, SH } from '../figma_app/790714';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { isInteractionPathCheck } from '../figma_app/897289';
-import { Ew, gH, Yx } from '../figma_app/985200';
+import { getPluginIframeMode, DEFAULT_ALLOWED_ORIGINS, PluginInstanceManager } from '../figma_app/985200';
 let n;
 let r;
 let a;
@@ -339,7 +339,7 @@ async function ei(e) {
   let {
     runResult
   } = await Z({
-    allowedDomains: gH,
+    allowedDomains: DEFAULT_ALLOWED_ORIGINS,
     apiVersion: pS,
     capabilities: [],
     checkSyntax: !1,
@@ -397,9 +397,9 @@ async function ei(e) {
 }
 async function en(e, t) {
   await a7(e);
-  await Promise.all([Yx.getInstanceLoading(Ew({
+  await Promise.all([PluginInstanceManager.getInstanceLoading(getPluginIframeMode({
     triggeredFrom: void 0
-  })), Yx.getInstanceLoading(Ew({
+  })), PluginInstanceManager.getInstanceLoading(getPluginIframeMode({
     triggeredFrom: t
   }))]);
   e === 'realms' && (r || (r = ei('realms').catch(e => {
@@ -913,7 +913,7 @@ function em({
       let {
         networkAccess
       } = e;
-      return networkAccess ? t && networkAccess.devAllowedDomains ? networkAccess.devAllowedDomains.includes('*') || networkAccess.allowedDomains.includes('none') ? networkAccess.devAllowedDomains : Array.from(new Set([...networkAccess.devAllowedDomains, ...networkAccess.allowedDomains])) : networkAccess.allowedDomains : gH;
+      return networkAccess ? t && networkAccess.devAllowedDomains ? networkAccess.devAllowedDomains.includes('*') || networkAccess.allowedDomains.includes('none') ? networkAccess.devAllowedDomains : Array.from(new Set([...networkAccess.devAllowedDomains, ...networkAccess.allowedDomains])) : networkAccess.allowedDomains : DEFAULT_ALLOWED_ORIGINS;
     }(e, t),
     apiVersion: e.api,
     capabilities: e.capabilities ?? [],

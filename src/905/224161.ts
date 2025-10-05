@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
 import { camelToKebab } from "../figma_app/930338";
 import { defaultContextValue, isWhiteboardFullscreen } from "../905/187165";
-import { mN } from "../figma_app/985200";
+import { PluginUIManager } from "../figma_app/985200";
 export function $$o0(e, t, i, l, d = !0) {
   let [c, u] = useState(defaultContextValue);
   let p = isWhiteboardFullscreen(i);
@@ -13,7 +13,7 @@ export function $$o0(e, t, i, l, d = !0) {
         t ? i.setAttribute("data-preferred-theme", t) : i.removeAttribute("data-preferred-theme");
         "light" === t ? i.style.colorScheme = "light" : "dark" === t && (i.style.colorScheme = "dark");
         l ? i.setAttribute("data-enhanced-contrast", "") : i.removeAttribute("data-enhanced-contrast");
-        let n = mN.getInstance();
+        let n = PluginUIManager.getInstance();
         n && n.isInnerIframeActive() && n.handleThemeUpdate();
         let a = getComputedStyle(i);
         u(new Proxy({}, {

@@ -10,7 +10,7 @@ import { switchAccountAndNavigate } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction, hydrateFileBrowser } from "../905/929976";
 import { loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
-import { bE } from "../905/98702";
+import { rolePostAction } from "../905/98702";
 import { setTeamCreationLoadingAction, postTeamAction, renameTeamAction, changeSharingSettingsAction, joinTeamAction, batchJoinTeamAction } from "../figma_app/240735";
 import { b as _$$b } from "../905/493664";
 import { trackTeamEvent } from "../figma_app/314264";
@@ -98,7 +98,7 @@ export function $$C2(e, t, r) {
   }).then(({
     data: i
   }) => {
-    for (let e of i.meta) t.dispatch(bE({
+    for (let e of i.meta) t.dispatch(rolePostAction({
       role: e
     }));
     let s = t.getState().currentUserOrgId && !ignoreCurrentPlan;

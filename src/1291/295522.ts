@@ -4,7 +4,7 @@ import { stylex } from "@stylexjs/stylex";
 import { renderI18nText } from "../905/303541";
 import { lW } from "../figma_app/850075";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { E } from "../905/511388";
+import { LibraryIconWithTooltip } from "../905/511388";
 let c = {
   communitySourceText: {
     ...textDisplayConfig.textBodyMedium,
@@ -23,7 +23,7 @@ export function $$u0({
   let m = e && u[e];
   return a && m ? jsxs("div", {
     className: "x78zum5 x1q0g3np x1cy8zhl xg2d0mh",
-    children: [jsx(E, {
+    children: [jsx(LibraryIconWithTooltip, {
       libraryKey: e,
       showTooltip: !0,
       isNewIcon: !0

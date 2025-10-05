@@ -1,89 +1,223 @@
-import { R } from "../905/927840";
-import { t } from "../905/367656";
-import { isNotNull } from "../905/8035";
-import { H2, fl, _2, wI, ut } from "../905/707098";
-export class $$o0 {
-  constructor(e, t) {
-    this._cachedProperties = {};
-    this.children = [];
-    this._EXPENSIVE_TO_READ_node = e;
-    this.nodeCache = t;
+import { isNotNull } from "../905/8035"
+import { LayoutNode } from "../905/367656"
+import { memoizeFn, resolveFillStyle, resolveStrokeStyle, resolveVariable, StyleStatus } from "../905/707098"
+import { GridLayoutProperties } from "../905/927840"
+
+export class NodeWrapper {
+  private _cachedProperties: Record<string, any>
+  children: any[]
+  private _EXPENSIVE_TO_READ_node: any
+  nodeCache: any
+
+  constructor(node: any, nodeCache: any) {
+    this._cachedProperties = {}
+    this.children = []
+    this._EXPENSIVE_TO_READ_node = node
+    this.nodeCache = nodeCache
   }
-  readValue(e, t) {
-    return H2(this._cachedProperties, e, this._EXPENSIVE_TO_READ_node, t);
+
+  /**
+   * Reads a value from the node and memoizes it
+   * @param key - The key to memoize the value under
+   * @param resolver - Function to resolve the value from the node
+   * @returns The resolved value
+   */
+  readValue<T>(key: string, resolver: (node: any) => T): T {
+    return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, resolver)
   }
-  static from(e, t) {
-    return new $$o0(e, t);
+
+  /**
+   * Factory method to create a NodeWrapper instance
+   * @param node - The node to wrap
+   * @param nodeCache - The cache for node-related data
+   * @returns A new NodeWrapper instance
+   */
+  static from(node: any, nodeCache: any): NodeWrapper {
+    return new NodeWrapper(node, nodeCache)
   }
-  get id() {
-    return this.readValue("id", e => e.id);
+
+  /**
+   * Gets the node's ID
+   */
+  get id(): string {
+    return this.readValue("id", node => node.id)
   }
-  get name() {
-    return this.readValue("name", e => e.name);
+
+  /**
+   * Gets the node's name
+   */
+  get name(): string {
+    return this.readValue("name", node => node.name)
   }
-  get layout() {
-    return this.readValue("layout", e => new t(e, this.nodeCache));
+
+  /**
+   * Gets the node's layout information
+   */
+  get layout(): LayoutNode {
+    return this.readValue("layout", node => new LayoutNode(node, this.nodeCache))
   }
-  get gridLayout() {
-    return this.readValue("gridLayout", e => new R(e));
+
+  /**
+   * Gets the node's grid layout properties
+   */
+  get gridLayout(): GridLayoutProperties {
+    return this.readValue("gridLayout", node => new GridLayoutProperties(node))
   }
-  get strokeWeight() {
-    return this.readValue("strokeWeight", e => "GROUP" === e.type || "number" != typeof e.strokeWeight ? {
-      rawValue: 0
-    } : {
-      rawValue: e.strokeWeight
-    });
+
+  /**
+   * Gets the node's stroke weight
+   */
+  get strokeWeight(): { rawValue: number } {
+    return this.readValue("strokeWeight", node =>
+      node.type === "GROUP" || typeof node.strokeWeight !== "number"
+        ? {
+          rawValue: 0,
+        }
+        : {
+          rawValue: node.strokeWeight,
+        })
   }
-  get strokes() {
-    return this.readValue("strokes", e => "GROUP" === e.type ? [] : e.strokes ? e.strokes.filter(e => e.visible ?? !0) : []);
+
+  /**
+   * Gets the node's visible strokes
+   */
+  get strokes(): any[] {
+    return this.readValue("strokes", node =>
+      node.type === "GROUP"
+        ? []
+        : node.strokes
+          ? node.strokes.filter((stroke: any) => stroke.visible ?? true)
+          : [])
   }
-  get fills() {
-    return this.readValue("fills", e => "GROUP" === e.type || "symbol" == typeof e?.fills ? [] : e?.fills ? e.fills.filter(e => e.visible ?? !0) : []);
+
+  /**
+   * Gets the node's visible fills
+   */
+  get fills(): any[] {
+    return this.readValue("fills", node =>
+      node.type === "GROUP" || typeof node?.fills === "symbol"
+        ? []
+        : node?.fills
+          ? node.fills.filter((fill: any) => fill.visible ?? true)
+          : [])
   }
-  get fillStyle() {
-    return this.readValue("fillStyle", e => "GROUP" !== e.type ? fl(e, this.nodeCache.stylesResolver) : _2.StyleNotSet);
+
+  /**
+   * Gets the node's fill style
+   */
+  get fillStyle(): any {
+    return this.readValue("fillStyle", node =>
+      node.type !== "GROUP"
+        ? resolveFillStyle(node, this.nodeCache.stylesResolver)
+        : StyleStatus.StyleNotSet)
   }
-  get strokeStyle() {
-    return this.readValue("strokeStyle", e => "GROUP" !== e.type ? wI(e, this.nodeCache.stylesResolver) : _2.StyleNotSet);
+
+  /**
+   * Gets the node's stroke style
+   */
+  get strokeStyle(): any {
+    return this.readValue("strokeStyle", node =>
+      node.type !== "GROUP"
+        ? resolveStrokeStyle(node, this.nodeCache.stylesResolver)
+        : StyleStatus.StyleNotSet)
   }
-  get effects() {
-    return this.readValue("effects", e => e.effects ? e.effects.filter(e => e.visible ?? !0) : []);
+
+  /**
+   * Gets the node's visible effects
+   */
+  get effects(): any[] {
+    return this.readValue("effects", node =>
+      node.effects
+        ? node.effects.filter((effect: any) => effect.visible ?? true)
+        : [])
   }
-  get opacity() {
-    return this.readValue("opacity", e => e.opacity);
+
+  /**
+   * Gets the node's opacity
+   */
+  get opacity(): number {
+    return this.readValue("opacity", node => node.opacity)
   }
-  get blendMode() {
-    return this.readValue("blendMode", e => e.blendMode);
+
+  /**
+   * Gets the node's blend mode
+   */
+  get blendMode(): any {
+    return this.readValue("blendMode", node => node.blendMode)
   }
-  get boundVariables() {
-    return this.readValue("boundVariables", e => e.boundVariables);
+
+  /**
+   * Gets the node's bound variables
+   */
+  get boundVariables(): any {
+    return this.readValue("boundVariables", node => node.boundVariables)
   }
-  get inferredVariables() {
-    return this.readValue("inferredVariables", e => e.availableInferredVariables);
+
+  /**
+   * Gets the node's inferred variables
+   */
+  get inferredVariables(): any {
+    return this.readValue("inferredVariables", node => node.availableInferredVariables)
   }
-  getVariableValue(e) {
-    return ut(this.boundVariables, this.inferredVariables, e, this.nodeCache.variableResolver);
+
+  /**
+   * Gets the value of a variable bound to the node
+   * @param variableName - The name of the variable to resolve
+   * @returns The resolved variable value
+   */
+  getVariableValue(variableName: string): any {
+    return resolveVariable(
+      this.boundVariables,
+      this.inferredVariables,
+      variableName,
+      this.nodeCache.variableResolver,
+    )
   }
-  setName(e) {
-    this._cachedProperties.name = e;
+
+  /**
+   * Sets the node's name in the cache
+   * @param name - The name to set
+   */
+  setName(name: string): void {
+    this._cachedProperties.name = name
   }
-  async getDocumentAsync() {
-    let e = this._EXPENSIVE_TO_READ_node;
-    if (!e) throw Error("Node reference does not exist");
-    if (!isNotNull(this._cachedProperties.document)) {
-      let t = new window.DOMParser();
-      let i = new TextDecoder().decode(await e.exportAsync({
-        format: "SVG"
-      }));
-      this._cachedProperties.document = t.parseFromString(i, "image/svg+xml");
+
+  /**
+   * Gets the node's SVG document asynchronously
+   * @returns A promise that resolves to the parsed SVG document
+   */
+  async getDocumentAsync(): Promise<Document> {
+    const node = this._EXPENSIVE_TO_READ_node
+    if (!node) {
+      throw new Error("Node reference does not exist")
     }
-    return this._cachedProperties.document;
+
+    if (!isNotNull(this._cachedProperties.document)) {
+      const parser = new window.DOMParser()
+      const svgData = new TextDecoder().decode(await node.exportAsync({
+        format: "SVG",
+      }))
+      this._cachedProperties.document = parser.parseFromString(svgData, "image/svg+xml")
+    }
+
+    return this._cachedProperties.document
   }
-  isAutoLayout() {
-    return !1;
+
+  /**
+   * Checks if the node uses auto layout
+   * @returns false (placeholder implementation)
+   */
+  isAutoLayout(): boolean {
+    return false
   }
-  isGrid() {
-    return !1;
+
+  /**
+   * Checks if the node is a grid
+   * @returns false (placeholder implementation)
+   */
+  isGrid(): boolean {
+    return false
   }
 }
-export const a = $$o0;
+
+export const a = NodeWrapper

@@ -10,7 +10,7 @@ import { t as _$$t3 } from '../905/117577';
 import { fullscreenPerfManager } from '../905/125218';
 import { J as _$$J } from '../905/125993';
 import { KindEnum } from '../905/129884';
-import { t as _$$t2 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { F as _$$F2 } from '../905/160142';
 import { ox } from '../905/163832';
 import { ServiceCategories } from '../905/165054';
@@ -315,7 +315,7 @@ function Q({
   let s = getVisibleTheme() === 'dark';
   let o = n.reduce((e, t) => (e[t.installMethod] = !0, e), {});
   let l = i.installMethod;
-  let [d, c, u] = _$$t2.useManagedTabs(o, l, a, {
+  let [d, c, u] = Tabs.useManagedTabs(o, l, a, {
     orientation: 'vertical'
   });
   let p = _$$G();
@@ -360,9 +360,9 @@ function Q({
           })]
         }), jsx('div', {
           className: 'codebase_suggestions_onboarding--methodMenu--O6Pdz',
-          children: jsx(_$$t2.TabStrip, {
+          children: jsx(Tabs.TabStrip, {
             manager: u,
-            children: Object.keys(o).map(e => jsx(_$$t2.Tab, {
+            children: Object.keys(o).map(e => jsx(Tabs.Tab, {
               ...d[e],
               children: function (e) {
                 let t = n.find(t => t.installMethod === e);
@@ -1619,12 +1619,12 @@ function iV(e) {
     [OverviewTab.BUILD]: !1,
     [OverviewTab.COMPLETED]: !1
   }), [e.tabs]);
-  let [i, a, s] = _$$t2.useManagedTabs(t, e.selected, e.onTabSelected);
-  return jsx(_$$t2.TabStrip, {
+  let [i, a, s] = Tabs.useManagedTabs(t, e.selected, e.onTabSelected);
+  return jsx(Tabs.TabStrip, {
     manager: s,
     children: e.tabs.map(t => {
       let n = t.key === e.selected;
-      return jsxs(_$$t2.Tab, {
+      return jsxs(Tabs.Tab, {
         ...i[t.key],
         children: [t.label, void 0 !== t.count && jsx(_$$s2, {
           count: t.count,

@@ -12,11 +12,11 @@ import { getSelectedFile } from "../905/766303";
 import { compareStyles } from "../figma_app/646357";
 import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
 import { LibraryItemTilesByPage } from "../905/909811";
-import { C } from "../905/109977";
-import { r as _$$r } from "../905/336143";
+import { LibraryBestMatchesComponent } from "../905/109977";
+import { UsedStylesContext } from "../905/336143";
 import { c as _$$c } from "../905/511370";
 import { RV } from "../figma_app/214643";
-import { Ze, Go, jN, sU } from "../905/297574";
+import { useLibraryAssetsFromStats, getLibraryLooseComponentAndStateGroupCount, useUsedStylesCount, fetchLibraryStylesByLibraryKeyQuery } from "../905/297574";
 import { W as _$$W } from "../905/657133";
 import { G as _$$G } from "../905/647352";
 import { PV, eT, p9, FA } from "../905/985059";
@@ -47,7 +47,7 @@ export function $$w1(e) {
   let F = $$C0({
     libraryKey
   });
-  let M = Ze({
+  let M = useLibraryAssetsFromStats({
     productComponentStats,
     libraryKey
   });
@@ -55,15 +55,15 @@ export function $$w1(e) {
     libraryKey
   });
   let U = useMemo(() => "loaded" === j.status && j.data.libraryKeyToFile?.file ? j.data.libraryKeyToFile.file.variableCollections : [], [j]);
-  let B = Go(libraryKey);
-  let V = jN(libraryKey);
+  let B = getLibraryLooseComponentAndStateGroupCount(libraryKey);
+  let V = useUsedStylesCount(libraryKey);
   let G = !!D && D.library_key === libraryKey;
   let z = _$$W();
   let H = z ? PV : eT;
   let W = jsxs(_$$P, {
     width,
     className: cssBuilderInstance.flexGrow1.$,
-    children: [jsx(C, {
+    children: [jsx(LibraryBestMatchesComponent, {
       inline: !1,
       publishedLibrary,
       onItemClick: void 0,
@@ -123,8 +123,8 @@ export function $$w1(e) {
 export function $$C0({
   libraryKey: e
 }) {
-  let [t] = setupResourceAtomHandler(sU(e));
-  let i = useContext(_$$r);
+  let [t] = setupResourceAtomHandler(fetchLibraryStylesByLibraryKeyQuery(e));
+  let i = useContext(UsedStylesContext);
   return useMemo(() => [...(("loaded" === t.status ? t.data : []) ?? i?.allUsedStylesByLibraryKey[e] ?? [])].sort(compareStyles), [t, i?.allUsedStylesByLibraryKey, e]);
 }
 export const c = $$C0;

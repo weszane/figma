@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect, useRef, useMemo, useCal
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogBody, DialogTitle } from "../figma_app/272243";
-import { t as _$$t } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { IconButton } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { k as _$$k } from "../905/443820";
@@ -192,7 +192,7 @@ ${en}`;
     model: K
   })).getReader();
   let l = "";
-  for (; ;) {
+  for (;;) {
     let {
       done,
       value
@@ -317,7 +317,7 @@ export function $$el0(e) {
           role: "assistant",
           content: ""
         };
-        for (a(e => [...e, u]); ;) {
+        for (a(e => [...e, u]);;) {
           let {
             done,
             value
@@ -547,7 +547,7 @@ function ed() {
   });
 }
 function ep() {
-  let [e, t, s] = _$$t.useTabs({
+  let [e, t, s] = Tabs.useTabs({
     chat: !0,
     prompts: !0
   }, {
@@ -555,20 +555,20 @@ function ep() {
   });
   return jsxs("section", {
     className: cssBuilderInstance.flex.flexColumn.flexGrow1.p4.$,
-    children: [jsxs(_$$t.TabStrip, {
+    children: [jsxs(Tabs.TabStrip, {
       manager: s,
-      children: [jsx(_$$t.Tab, {
+      children: [jsx(Tabs.Tab, {
         ...e.chat,
         children: getI18nString("dev_handoff.mc.chat")
-      }), jsx(_$$t.Tab, {
+      }), jsx(Tabs.Tab, {
         ...e.prompts,
         children: getI18nString("dev_handoff.mc.prompts")
       })]
-    }), jsx(_$$t.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...t.chat,
       height: "fill",
       children: jsx(eu, {})
-    }), jsx(_$$t.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...t.prompts,
       height: "fill",
       children: jsx(em, {})
@@ -918,7 +918,7 @@ Once the user asks you to proceed, reply with the split components.`, {
           label: "Cancel",
           type: "cancel_add_variant"
         }]);
-      } else if ("show_canvas" === l.type) a(!0); else if ("continue_add_variant" === l.type) {
+      } else if ("show_canvas" === l.type) a(!0);else if ("continue_add_variant" === l.type) {
         if (_chat.setLastMessageActions([]), _chat.addDummyAssistantMessage("Please wait..."), !t) return;
         let {
           files
@@ -1126,7 +1126,7 @@ function eT() {
   });
 }
 function eF() {
-  let [e, t, s] = _$$t.useTabs({
+  let [e, t, s] = Tabs.useTabs({
     sideBySide: !1,
     overlay: !0,
     diff: !1
@@ -1134,25 +1134,25 @@ function eF() {
     defaultActive: "overlay"
   });
   return jsxs("section", {
-    children: [jsxs(_$$t.TabStrip, {
+    children: [jsxs(Tabs.TabStrip, {
       manager: s,
-      children: [jsx(_$$t.Tab, {
+      children: [jsx(Tabs.Tab, {
         ...e.sideBySide,
         children: getI18nString("dev_handoff.mc.side_by_side")
-      }), jsx(_$$t.Tab, {
+      }), jsx(Tabs.Tab, {
         ...e.overlay,
         children: getI18nString("dev_handoff.mc.overlay")
-      }), jsx(_$$t.Tab, {
+      }), jsx(Tabs.Tab, {
         ...e.diff,
         children: getI18nString("dev_handoff.mc.diff")
       })]
-    }), jsx(_$$t.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...t.sideBySide,
       children: null
-    }), jsx(_$$t.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...t.overlay,
       children: null
-    }), jsx(_$$t.TabPanel, {
+    }), jsx(Tabs.TabPanel, {
       ...t.diff,
       children: null
     })]

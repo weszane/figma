@@ -20,7 +20,7 @@ import { JZ, qR } from "../figma_app/696043";
 import { showDropdownThunk, hideDropdownAction, selectViewAction } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
 import { PluginAction } from "../905/15667";
-import { KE } from "../905/116101";
+import { closeUniversalInsertModal } from "../905/116101";
 import { withTrackedClick } from "../figma_app/831799";
 import { useCanRunExtensions, findLocalPluginById } from "../figma_app/844435";
 import { useDropdownState } from "../905/848862";
@@ -90,7 +90,7 @@ export function $$ed0(e) {
     propagateCloseClick: !0,
     children: [jsx(c$, {
       onClick: t => {
-        if (t.stopPropagation(), i(KE()), !n) return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
+        if (t.stopPropagation(), i(closeUniversalInsertModal()), !n) return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
         i(showModalHandler({
           type: _$$h,
           data: {
@@ -102,7 +102,7 @@ export function $$ed0(e) {
     }), jsx(c$, {
       onClick: e => {
         if (e.stopPropagation(), !n) {
-          i(KE());
+          i(closeUniversalInsertModal());
           return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
         }
         i(JZ({

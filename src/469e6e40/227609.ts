@@ -39,7 +39,7 @@ import { Ui3PositionType } from '../905/11928';
 import { isLoaded, isLoading } from '../905/18797';
 import { createModalConfig, registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
-import { t as _$$t2 } from '../905/150656';
+import { Tabs } from '../905/150656';
 import { showModalHandler } from '../905/156213';
 import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
@@ -2011,7 +2011,7 @@ function aO(e) {
       })
     }));
   }, [t, e.team.id]);
-  let [s, o, d] = _$$t2.useManagedTabs({
+  let [s, o, d] = Tabs.useManagedTabs({
     overview: !0,
     invoices: !0
   }, e.activeTab, n);
@@ -2051,13 +2051,13 @@ function aO(e) {
         children: [jsx(ah, {
           selectedTab: DashboardSections.BILLING,
           teamId: e.team.id,
-          secondaryTabs: jsxs(_$$t2.TabStrip, {
+          secondaryTabs: jsxs(Tabs.TabStrip, {
             manager: d,
-            children: [jsx(_$$t2.Tab, {
+            children: [jsx(Tabs.Tab, {
               ...s.overview,
               'data-onboarding-key': l4,
               'children': getI18nString('team_view.toolbar.billing.overview')
-            }), jsx(_$$t2.Tab, {
+            }), jsx(Tabs.Tab, {
               ...s.invoices,
               children: getI18nString('team_view.toolbar.billing.invoices')
             })]
@@ -2067,7 +2067,7 @@ function aO(e) {
           })
         }), jsxs('div', {
           className: 'billing_view--tabPanelContainer--Y7VJk',
-          children: [jsx(_$$t2.TabPanel, {
+          children: [jsx(Tabs.TabPanel, {
             ...o.overview,
             children: jsx(aR, {
               team: e.team,
@@ -2077,7 +2077,7 @@ function aO(e) {
               isLoading: e.isBillingSummaryLoading,
               adjustAnnualSeatsAction: u
             })
-          }), jsx(_$$t2.TabPanel, {
+          }), jsx(Tabs.TabPanel, {
             ...o.invoices,
             children: jsx(ak, {
               teamId: e.team.id,
@@ -2095,7 +2095,7 @@ function aP(e) {
   let t = useDispatch();
   let a = useTeamPlanPublicInfo();
   let n = a?.data?.tier === FPlanNameType.STUDENT;
-  let [s, o, d] = _$$t2.useManagedTabs({
+  let [s, o, d] = Tabs.useManagedTabs({
     'abandoned-drafts': !0,
     'connected-projects': !n
   }, e.activeTab, useCallback(a => {
@@ -2117,12 +2117,12 @@ function aP(e) {
       children: [jsx(ah, {
         selectedTab: DashboardSections.CONTENT,
         teamId: e.team.id,
-        secondaryTabs: jsxs(_$$t2.TabStrip, {
+        secondaryTabs: jsxs(Tabs.TabStrip, {
           manager: d,
-          children: [jsx(_$$t2.Tab, {
+          children: [jsx(Tabs.Tab, {
             ...s['abandoned-drafts'],
             children: getI18nString('team_view.toolbar.drafts')
-          }), jsxs(_$$t2.Tab, {
+          }), jsxs(Tabs.Tab, {
             ...s['connected-projects'],
             ...(c && {
               'data-onboarding-key': _$$k6
@@ -2132,13 +2132,13 @@ function aP(e) {
         })
       }), jsxs('div', {
         className: 'content_view--tabPanelContainer--2h2yj',
-        children: [jsx(_$$t2.TabPanel, {
+        children: [jsx(Tabs.TabPanel, {
           ...o['abandoned-drafts'],
           children: jsx(_$$M, {
             planType: OrganizationType.TEAM,
             team: e.team
           })
-        }), jsx(_$$t2.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...o['connected-projects'],
           height: 'fill',
           children: jsx(_$$k5, {

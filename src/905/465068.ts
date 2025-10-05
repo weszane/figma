@@ -1,11 +1,11 @@
-import { oB } from "../905/115338";
+import { bindWithIgnore } from "../905/115338";
 import { filePutAction, postFileAction, filePermissionsPutAction } from "../figma_app/78808";
 import { yH } from "../figma_app/598926";
 import { FPermissionLevelType } from "../figma_app/191312";
 export function $$s1(e) {
   return !!(e && e.org_browsable && (e.link_access === FPermissionLevelType.ORG_EDIT || e.link_access === FPermissionLevelType.ORG_VIEW));
 }
-export let $$o0 = oB(function (e, t) {
+export let $$o0 = bindWithIgnore(function (e, t) {
   if (yH.matches(t)) {
     if (e.folder_id && t.payload.folderIds.indexOf(e.folder_id) > -1) return {
       ...e,

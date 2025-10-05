@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { X7 } from "../905/193529";
+import { screenReaderEnableAction } from "../905/193529";
 export function $$s0() {
   return useSelector(e => !!e.screenreader.enabled);
 }
@@ -9,7 +9,7 @@ export function $$o1() {
   let t = useSelector(e => e.screenreader.enabled);
   let i = useSelector(e => e.user || void 0);
   return [t, useCallback((t, n) => {
-    e(X7({
+    e(screenReaderEnableAction({
       enabled: t,
       scope: n,
       user: i

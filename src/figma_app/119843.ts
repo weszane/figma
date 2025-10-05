@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
-import { dP } from "../figma_app/119475";
+import { KeyboardNavigationProvider } from "../figma_app/119475";
 import { P } from "../905/347284";
 import { a3, Vm } from "../905/703676";
 import { Wm, _o, T$ } from "../905/697409";
@@ -28,7 +28,7 @@ export function $$c0({
     ref: _,
     children: jsx(P, {
       className: c ? _o : T$,
-      children: jsx(dP, {
+      children: jsx(KeyboardNavigationProvider, {
         children: jsx(a3.Provider, {
           value: Vm.DROPDOWN,
           children: t

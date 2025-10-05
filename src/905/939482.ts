@@ -3,7 +3,7 @@ import { ServiceCategories } from "../905/165054";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { setupStarterUserCallback } from "../figma_app/275462";
-import { fI, In } from "../figma_app/229259";
+import { librariesQuery, visualAssetsQuery } from "../figma_app/229259";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
@@ -13,7 +13,7 @@ let h = [];
 let g = [];
 export function $$f1(e) {
   let t = useFigmaLibrariesEnabled();
-  let [i] = setupResourceAtomHandler(fI(void 0), {
+  let [i] = setupResourceAtomHandler(librariesQuery(void 0), {
     enabled: !e?.disabled && t
   });
   let o = useCurrentUserOrgId();
@@ -30,7 +30,7 @@ export function $$f1(e) {
 }
 export function $$_2() {
   let e = !!setupStarterUserCallback()();
-  let [t] = setupResourceAtomHandler(In(void 0), {
+  let [t] = setupResourceAtomHandler(visualAssetsQuery(void 0), {
     enabled: e
   });
   let i = useCurrentUserOrgId();

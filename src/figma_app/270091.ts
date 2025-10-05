@@ -45,7 +45,7 @@ import { Fl } from "../figma_app/236178";
 import { FX } from "../figma_app/12491";
 import { NX, k9 as _$$k3, sF } from "../figma_app/777207";
 import { filesByLibraryKeyAtom } from "../905/977779";
-import { t as _$$t3 } from "../905/511388";
+import { DefaultLibraryIcon } from "../905/511388";
 import { P as _$$P } from "../figma_app/582341";
 import { setupSwapOrInsertHandler } from "../905/290607";
 import { g5 } from "../figma_app/178752";
@@ -638,7 +638,7 @@ function eW(e) {
           return jsx(_$$c, {
             value: e,
             removeTextRightPadding: !0,
-            rightSettingsIcon: jsx(_$$t3, {})
+            rightSettingsIcon: jsx(DefaultLibraryIcon, {})
           }, getLibraryKey(e));
         }
         function i(e) {

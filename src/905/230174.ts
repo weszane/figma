@@ -14,7 +14,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { isValidLibraryKey } from "../figma_app/630951";
 import { FX } from "../figma_app/12491";
 import { sF } from "../figma_app/777207";
-import { t as _$$t3 } from "../905/511388";
+import { DefaultLibraryIcon } from "../905/511388";
 import { P as _$$P } from "../figma_app/582341";
 import { useCurrentUserOrg } from "../905/845253";
 import { isBigmaEnabledAlias3 } from "../figma_app/336853";
@@ -91,7 +91,7 @@ function T({
       }), pass.map(e => jsx(R, {
         value: e.libraryKey,
         formattedValue: e.fileName,
-        rightIcon: jsx(_$$t3, {})
+        rightIcon: jsx(DefaultLibraryIcon, {})
       }, e.fileKey))]
     })]
   });

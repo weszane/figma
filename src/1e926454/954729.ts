@@ -42,7 +42,7 @@ import { zz } from "../figma_app/80683";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { viewCollaboratorSet } from "../905/332483";
 import { compareProductAccessTypes, useFormatProductNamesForSeatType } from "../figma_app/217457";
-import { t as _$$t2 } from "../905/150656";
+import { Tabs } from "../905/150656";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { T as _$$T } from "../figma_app/257703";
 import { VisualBellActions } from "../905/302958";
@@ -467,7 +467,7 @@ function eb({
     M?.canAdmin && e.push(AccessLevelEnum.ADMIN);
     return e;
   }, [M]);
-  let [B, O, F] = _$$t2.useTabs({
+  let [B, O, F] = Tabs.useTabs({
     inviteByEmail: !0,
     inviteByLink: !0
   }, {
@@ -539,18 +539,18 @@ function eb({
     children: [jsxs(DialogHeader, {
       children: [jsx(DialogHiddenTitle, {
         children: getI18nString("plan_invite_modal.team.hidden_title")
-      }), jsxs(_$$t2.TabStrip, {
+      }), jsxs(Tabs.TabStrip, {
         manager: F,
-        children: [jsx(_$$t2.Tab, {
+        children: [jsx(Tabs.Tab, {
           ...B.inviteByEmail,
           children: getI18nString("plan_invite_modal.invite_by_email")
-        }), jsx(_$$t2.Tab, {
+        }), jsx(Tabs.Tab, {
           ...B.inviteByLink,
           children: getI18nString("plan_invite_modal.invite_by_link")
         })]
       })]
     }), jsxs(DialogBody, {
-      children: [jsx(_$$t2.TabPanel, {
+      children: [jsx(Tabs.TabPanel, {
         ...O.inviteByEmail,
         children: _$$r(p) ? jsx(_$$X, {
           resourceType: "team"
@@ -594,7 +594,7 @@ function eb({
             hideCostMessaging: $.length > 0 && z.length === $.length
           })]
         })
-      }), jsx(_$$t2.TabPanel, {
+      }), jsx(Tabs.TabPanel, {
         ...O.inviteByLink,
         children: jsx(_$$i, {
           teamId: I,
@@ -611,14 +611,14 @@ function eb({
           variant: "secondary",
           onClick: s,
           children: getI18nString("general.cancel")
-        }), jsx(_$$t2.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...O.inviteByEmail,
           children: jsx($z, {
             onClick: K,
             disabled: !F5(u, validateToken),
             children: getI18nString("plan_invite_modal.send_invite")
           })
-        }), jsx(_$$t2.TabPanel, {
+        }), jsx(Tabs.TabPanel, {
           ...O.inviteByLink,
           children: ("loaded" !== Y.status || !!q) && jsx($z, {
             onClick: H,
