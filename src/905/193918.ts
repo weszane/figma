@@ -44,7 +44,7 @@ import { FDomainVerificationStatusType } from '../figma_app/191312';
 import { a6 } from '../figma_app/198840';
 import { getPluginVersion } from '../figma_app/300692';
 import { CHECKOUT_ROUTE } from '../figma_app/350203';
-import { U3 } from '../figma_app/412189';
+import { useWindowEvent } from '../figma_app/412189';
 import { getResourceType } from '../figma_app/427318';
 import { isEmptyAddress, getCurrentVersion } from '../figma_app/471982';
 import { BigButtonPrimary, EnhancedInput, SecureLink } from '../figma_app/637027';
@@ -703,7 +703,7 @@ function eR(e) {
   let l = useCallback(() => {
     o.current && (mobileScrollContainerRef?.current?.scrollTop ? o.current.classList.add(HC) : o.current.classList.remove(HC));
   }, [o, mobileScrollContainerRef]);
-  U3('scroll', l, !0);
+  useWindowEvent('scroll', l, !0);
   return jsxs('header', {
     className: UI,
     ref: o,

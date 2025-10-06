@@ -16,7 +16,7 @@ import { ResourceConnectionByPlan } from "../figma_app/43951";
 import { useTeamPlanFeatures } from "../figma_app/465071";
 import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { K as _$$K2 } from "../4452/401058";
 import { A as _$$A } from "../4452/239888";
 import { useDispatch } from "react-redux";
@@ -900,7 +900,7 @@ function eU(e) {
     })
   });
   return jsxs(TrackingProvider, {
-    name: e0.CONNECTED_PROJECTS_TABLE,
+    name: TrackingKeyEnum.CONNECTED_PROJECTS_TABLE,
     properties: {
       planId,
       planType
@@ -1048,7 +1048,7 @@ export function $$eq0(e) {
     return t.length + a.length + n.length + s.length;
   }, [E]);
   return t ? jsxs(TrackingProvider, {
-    name: e0.CONNECTED_PROJECTS_TAB,
+    name: TrackingKeyEnum.CONNECTED_PROJECTS_TAB,
     properties: {
       planId: a,
       planType: k

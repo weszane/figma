@@ -7,7 +7,7 @@ import { IconButton } from "../905/443068";
 import { K as _$$K } from "../905/851274";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { _P } from "../figma_app/2590";
+import { trackPrototypeScaleChangeEvent } from "../figma_app/2590";
 import { X7 } from "../905/713167";
 import { fI } from "../figma_app/626177";
 import { Io, yv } from "../905/119782";
@@ -32,7 +32,7 @@ export function $$_0(e) {
   let l = X7();
   function d(i) {
     let n = e.paint.animatedImage?.hash ? sha1HexFromBytes(e.paint.animatedImage?.hash).toLowerCase() : null;
-    t(_P({
+    t(trackPrototypeScaleChangeEvent({
       name: "Video previewed",
       params: {
         type: "gif",

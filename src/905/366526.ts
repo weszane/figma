@@ -226,7 +226,7 @@ import { tD as _$$tD, FO, Hj } from '../905/682977';
 import { hasStatsigClientApiKey, isPlanKeyTargetingEnabled, RETRY_COUNT, setEnvironmentFlag } from '../905/683495';
 import { replaceColonWithDash } from '../905/691205';
 import { Hc } from '../905/694658';
-import { e0 as _$$e3 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { setupLoadingStateHandler } from '../905/696711';
 import { R as _$$R3, V as _$$V3 } from '../905/697254';
 import { setupPopstateListener } from '../905/697795';
@@ -509,7 +509,7 @@ import { r5 as _$$r3, r$ as _$$r$, ZH } from '../figma_app/855490';
 import { putProductComponentsThunk } from '../figma_app/864378';
 import { bellFeedAPIInstance, desktopAPIInstance, OpenTarget } from '../figma_app/876459';
 import { Ed } from '../figma_app/883490';
-import { o as _$$o } from '../figma_app/885533';
+import { transparentBlack } from '../figma_app/885533';
 import { getFalseValue, isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/897289';
 import { addFileFavoriteAction, addFolderFavorite, addPrototypeFavorite, bulkSetResourcesAsFavorites, removeFileFavorite, removeFolderFromFavorites, removePrototypeFavorite, setFavoritesCountAction, setMovingResourceAction, setNewSectionIndexAction, updateExpandedSectionsAction } from '../figma_app/909778';
 import { nH as _$$nH, sw as _$$sw, Ev, FL } from '../figma_app/914957';
@@ -1373,7 +1373,7 @@ let t_ = e => t => async function (i) {
           mailingListOptIn: e.getState().auth.optInEmail,
           user_id: t?.meta?.id
         }), getInitialOptions().integration_host || e.getState().auth.fromMsTeams) {
-          let i = e.getState().auth.fromMsTeams ? _$$e3.MS_TEAMS_BOT : _$$e3.MS_TEAMS_TAB;
+          let i = e.getState().auth.fromMsTeams ? TrackingKeyEnum.MS_TEAMS_BOT : TrackingKeyEnum.MS_TEAMS_TAB;
           let n = getInitialOptions().integration_host === 'msft' || e.getState().auth.fromMsTeams;
           trackEventAnalytics('Integration Signup Success', {
             user_id: t?.meta?.id,
@@ -2797,7 +2797,7 @@ function ry({
   });
   let I = createFileLibraryKeys(t.key, _$$l4(t));
   return jsxs(_$$t6, {
-    page: _$$e3.DSA_FILE_VIEW,
+    page: TrackingKeyEnum.DSA_FILE_VIEW,
     properties: {
       libraryKey: t.key
     },
@@ -3327,7 +3327,7 @@ function r7({
   let L = m != null || u != null || g != null || _ != null;
   let F = I.data || initialLibraryStats;
   return jsx(_$$t6, {
-    page: _$$e3.DSA_LIBRARY_VIEW,
+    page: TrackingKeyEnum.DSA_LIBRARY_VIEW,
     children: jsx(UsedStylesContext.Provider, {
       value: v,
       children: jsxs('div', {
@@ -3434,7 +3434,7 @@ let as = registerModal(e => {
     }));
   };
   return jsx(TrackingProvider, {
-    name: _$$e3.ORG_SETTINGS,
+    name: TrackingKeyEnum.ORG_SETTINGS,
     properties: {
       section: e.tab,
       orgId: r.id
@@ -10646,7 +10646,7 @@ let uM = {
   showResolvedComments: !1,
   pages: [],
   currentPageId: null,
-  backgroundColor: _$$o,
+  backgroundColor: transparentBlack,
   isReconnecting: !1,
   isFooterVisible: !1
 };

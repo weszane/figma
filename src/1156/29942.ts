@@ -27,7 +27,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { O1, Zl, uQ, Tv } from "../figma_app/311375";
 import { showModalHandler } from "../905/156213";
 import { useSceneGraphSelector } from "../figma_app/722362";
-import { KP } from "../figma_app/440875";
+import { useCurrentSessionID } from "../figma_app/440875";
 import { IMAGE_TYPE_VALUES } from "../905/966582";
 import { f3, YD, Vo } from "../figma_app/690664";
 import { mC, A5, YZ, Z3, s0, $W, lA } from "../figma_app/325537";
@@ -5079,7 +5079,7 @@ export default function App() {
     setInput: e,
     sendMessage: ez
   });
-  let eR = KP();
+  let eR = useCurrentSessionID();
   let eF = void 0 !== exchange && exchange.messages.length > 0;
   let eO = Wn(t);
   !function ({

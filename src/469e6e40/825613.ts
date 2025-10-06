@@ -30,7 +30,7 @@ import { TeamCreationControls } from "../figma_app/482728";
 import { r as _$$r } from "../469e6e40/505264";
 import { Hj } from "../905/682977";
 import { p3 } from "../figma_app/588582";
-import { T as _$$T } from "../figma_app/257703";
+import { ListFormatter } from "../figma_app/257703";
 let y = {
   [ProductAccessTypeEnum.EXPERT]: {
     displayName: () => getI18nString("general.bundle.expert")
@@ -170,7 +170,7 @@ function V({
   return jsx("span", {
     children: renderI18nText("activity_log.event.workspace_admins_add", {
       adminNames: jsx("b", {
-        children: jsx(_$$T, {
+        children: jsx(ListFormatter, {
           children: e.metadata.new_admin_names.map(e => jsx("span", {
             children: e
           }, e))
@@ -189,7 +189,7 @@ function W({
   return jsx("span", {
     children: renderI18nText("activity_log.event.workspace_admins_remove.v2", {
       adminNames: jsx("b", {
-        children: jsx(_$$T, {
+        children: jsx(ListFormatter, {
           children: e.metadata.removed_admin_names.map(e => jsx("span", {
             children: e
           }, e))
@@ -244,7 +244,7 @@ function K({
   return jsx("span", {
     children: renderI18nText("activity_log.event.workspace_members_add", {
       memberEmails: jsx("b", {
-        children: jsx(_$$T, {
+        children: jsx(ListFormatter, {
           children: e.metadata.new_member_emails.map(e => jsx("span", {
             children: e
           }, e))
@@ -263,7 +263,7 @@ function X({
   return jsx("span", {
     children: renderI18nText("activity_log.event.workspace_members_remove", {
       memberEmails: jsx("b", {
-        children: jsx(_$$T, {
+        children: jsx(ListFormatter, {
           children: e.metadata.removed_member_emails.map(e => jsx("span", {
             children: e
           }, e))
@@ -377,7 +377,7 @@ function en({
   return e.metadata.is_billing_group ? jsx("span", {
     children: renderI18nText("activity_log.event.billing_group_admins_add", {
       adminNames: jsx("b", {
-        children: jsx(_$$T, {
+        children: jsx(ListFormatter, {
           children: e.metadata.new_admin_names.map(e => jsx("span", {
             children: e
           }, e))
@@ -398,7 +398,7 @@ function es({
   return e.metadata.is_billing_group ? jsx("span", {
     children: renderI18nText("activity_log.event.billing_group_admins_remove.v2", {
       adminNames: jsx("b", {
-        children: jsx(_$$T, {
+        children: jsx(ListFormatter, {
           children: e.metadata.removed_admin_names.map(e => jsx("span", {
             children: e
           }, e))
@@ -422,7 +422,7 @@ function ei({
         children: e.metadata.name
       }),
       adminNames: jsx("b", {
-        children: jsx(_$$T, {
+        children: jsx(ListFormatter, {
           children: e.metadata.admins.map(e => jsx("span", {
             children: e
           }, e))
@@ -442,7 +442,7 @@ function ei({
         children: e.metadata.name
       }),
       adminNames: jsx("b", {
-        children: jsx(_$$T, {
+        children: jsx(ListFormatter, {
           children: e.metadata.admins.map(e => jsx("span", {
             children: e
           }, e))

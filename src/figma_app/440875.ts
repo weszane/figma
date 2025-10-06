@@ -1,233 +1,388 @@
-import { useCallback, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { throwTypeError } from "../figma_app/465776";
-import { isNotNullish, isNullish } from "../figma_app/95419";
-import { Multiplayer } from "../figma_app/763686";
-import { useAtomWithSubscription } from "../figma_app/27355";
-import { useLatestRef } from "../figma_app/922077";
-import { getIsMobile, isInFigmaMobile, isIpadDevice } from "../figma_app/778880";
-import { Dv, Fj, jI } from "../905/763714";
-import { isInteractionPathCheck } from "../figma_app/897289";
-import { getViewerInstance } from "../figma_app/632319";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { e as _$$e } from "../905/383776";
-import { useDevModeFocusId, useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
-import { createOptimistThunk } from "../905/350402";
-import { updateMultiplayerStateThunk } from "../figma_app/91703";
-import { fullscreenAlias } from "../905/37051";
-import { clearSelection } from "../figma_app/741237";
-import { XM, e2 } from "../905/486443";
-import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
-import { getSelectedViewType } from "../figma_app/386952";
-import { useDelayedCallback } from "../905/116724";
-var $$x2 = (e => (e.INITIAL = "initial", e.NEXT = "next", e))($$x2 || {});
-let $$N10 = createOptimistThunk((e, t) => {
-  let r = e.getState().multiplayer.allUsers.find(e => e.sessionID === t.presenterSessionID);
-  let n = r?.name ?? "";
-  let i = r ? getI18nString("collaboration.spotlight.visual_bell.user_left_the_spotlight", {
-    userName: n
-  }) : getI18nString("collaboration.spotlight.visual_bell.the_presenter_left_the_spotlight");
-  e.dispatch(VisualBellActions.enqueue({
-    message: i,
-    type: "presentation_stopped_alert"
-  }));
-});
-let $$C5 = createOptimistThunk((e, t) => {
-  e.dispatch(VisualBellActions.dequeue({
-    matchType: "presentation_stopped_alert"
-  }));
-});
-let w = (e, t, r, n) => {
-  let i = isNotNullish(t) && e !== t;
-  let a = r === t;
-  let o = n === t;
-  return i && !a && !o;
-};
-function O() {
-  let e = getSelectedViewType();
-  let t = useDispatch();
-  let r = useSelector(e => e.multiplayer);
-  let a = useCallback(e => {
-    t(updateMultiplayerStateThunk({
-      ...r,
-      observingSessionID: e
-    }));
-  }, [r, t]);
-  let s = useCallback(e => {
-    Multiplayer.observeUser(e);
-  }, []);
-  return "prototype" === e ? a : s;
+import { useCallback, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { fullscreenAlias } from "../905/37051"
+import { useDelayedCallback } from "../905/116724"
+import { VisualBellActions } from "../905/302958"
+import { getI18nString } from "../905/303541"
+import { createOptimistThunk } from "../905/350402"
+import { useIsFullscreenWithDevVariables } from "../905/383776"
+import { e2, XM } from "../905/486443"
+import { Dv, Fj, jI } from "../905/763714"
+import { useAtomWithSubscription } from "../figma_app/27355"
+import { useDevModeFocusId, useIsFullscreenDevModeComponentBrowser, useIsFullscreenOverview } from "../figma_app/88239"
+import { updateMultiplayerStateThunk } from "../figma_app/91703"
+import { isNotNullish, isNullish } from "../figma_app/95419"
+import { getSelectedViewType } from "../figma_app/386952"
+import { throwTypeError } from "../figma_app/465776"
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876"
+import { getViewerInstance } from "../figma_app/632319"
+import { clearSelection } from "../figma_app/741237"
+import { Multiplayer } from "../figma_app/763686"
+import { getIsMobile, isInFigmaMobile, isIpadDevice } from "../figma_app/778880"
+import { isInteractionPathCheck } from "../figma_app/897289"
+import { useLatestRef } from "../figma_app/922077"
+
+
+enum AutoFollowType {
+  INITIAL = "initial",
+  NEXT = "next",
 }
-export function $$R12(e) {
-  let {
-    multiplayer: {
-      observingSessionID,
-      presenterSessionID,
-      sessionID
-    }
-  } = e;
-  let c = useDispatch();
-  let _ = getSelectedViewType();
-  let h = useAtomWithSubscription(Dv);
-  let [m, g] = useState("initial");
-  let f = useLatestRef(presenterSessionID);
-  let E = observingSessionID === presenterSessionID;
-  let y = sessionID === presenterSessionID || h;
-  let b = w(f, presenterSessionID, observingSessionID, sessionID);
-  let I = useAtomWithSubscription(Fj);
-  let S = isInteractionPathCheck() ? 0 : I;
-  let x = useAtomWithSubscription(jI);
-  let [R, L] = useState(null);
+// Thunk for handling presentation stop events with user-specific messages
+const handlePresentationStoppedThunk = createOptimistThunk(({dispatch, getState}, { presenterSessionID }) => {
+  const state = getState().multiplayer
+  const presenterUser = state.allUsers.find(user => user.sessionID === presenterSessionID)
+  const presenterName = presenterUser?.name ?? ""
+
+  const message = presenterUser
+    ? getI18nString("collaboration.spotlight.visual_bell.user_left_the_spotlight", {
+      userName: presenterName,
+    })
+    : getI18nString("collaboration.spotlight.visual_bell.the_presenter_left_the_spotlight")
+
+  dispatch(VisualBellActions.enqueue({
+    message,
+    type: "presentation_stopped_alert",
+  }))
+})
+
+// Thunk for clearing presentation stop alerts
+const clearPresentationStoppedAlertThunk = createOptimistThunk(({dispatch}) => {
+  dispatch(VisualBellActions.dequeue({
+    matchType: "presentation_stopped_alert",
+  }))
+})
+
+// Helper function to determine if a user change should trigger observation
+function shouldObserveUserChange(previousPresenterRef: React.MutableRefObject<string | null>, currentPresenter: string | null, observingSession: string | number | null, currentSession: number | string | null): boolean {
+  const hasPresenterChanged = isNotNullish(currentPresenter) && previousPresenterRef.current !== currentPresenter
+  const isObservingPresenter = observingSession === currentPresenter
+  const isCurrentUserPresenter = currentSession === currentPresenter
+
+  return hasPresenterChanged && !isObservingPresenter && !isCurrentUserPresenter
+}
+
+// Hook to get the appropriate observe function based on view type
+function useObserveFunction() {
+  const viewType = getSelectedViewType()
+  const dispatch = useDispatch<AppDispatch>()
+  const multiplayerState = useSelector<AppState, AppState['multiplayer']>(state => state.multiplayer)
+
+  const updateObservingSession = useCallback((sessionID: number) => {
+    dispatch(updateMultiplayerStateThunk({
+      ...multiplayerState,
+      observingSessionID: sessionID,
+    }))
+  }, [dispatch, multiplayerState])
+
+  const observeUser = useCallback((sessionID: number) => {
+    Multiplayer.observeUser(sessionID)
+  }, [])
+
+  return viewType === "prototype" ? updateObservingSession : observeUser
+}
+
+// Main hook for handling auto-follow functionality
+export function useAutoFollowPresenter(multiplayerState: AppState['multiplayer']) {
+  const {
+    observingSessionID,
+    presenterSessionID,
+    sessionID,
+  } = multiplayerState
+
+  const dispatch = useDispatch<AppDispatch>()
+  const viewType = getSelectedViewType()
+  const isDevMode = useAtomWithSubscription(Dv)
+  const [autoFollowType, setAutoFollowType] = useState("initial")
+  const previousPresenterRef = useLatestRef(presenterSessionID)
+  const isObservingPresenter = observingSessionID === presenterSessionID
+  const isCurrentUserPresenter = sessionID === presenterSessionID || isDevMode
+  const shouldTriggerObservation = shouldObserveUserChange(
+    previousPresenterRef,
+    presenterSessionID,
+    observingSessionID,
+    sessionID,
+  )
+
+  const interactionPathDelay = useAtomWithSubscription(Fj)
+  const autoFollowDelay = isInteractionPathCheck() ? 0 : interactionPathDelay
+  const presentationStartDelay = useAtomWithSubscription(jI)
+  const [pendingPresenterSession, setPendingPresenterSession] = useState<number | null>(null)
+
+  // Clear pending presenter session after timeout
   useEffect(() => {
-    let e = null;
-    null != R && (e = setTimeout(() => L(null), 1e3));
+    let timeoutId: NodeJS.Timeout | number | null = null
+
+    if (pendingPresenterSession != null) {
+      timeoutId = setTimeout(() => {
+        setPendingPresenterSession(null)
+      }, 1000)
+    }
+
     return () => {
-      e && clearTimeout(e);
-    };
-  }, [R]);
-  let P = O();
-  let D = useCallback(() => {
-    isNotNullish(presenterSessionID) && ("prototype" !== _ && clearSelection(), P(presenterSessionID));
-  }, [presenterSessionID, P, _]);
-  let k = useCallback(() => {
-    D();
-    presenterSessionID && L(presenterSessionID);
-  }, [presenterSessionID, D]);
-  R === observingSessionID && L(null);
-  let {
-    isActive,
-    start,
-    cancel,
-    complete
-  } = useDelayedCallback(k);
-  let B = useCallback(() => {
-    cancel();
-    L(null);
-  }, [cancel]);
-  let G = b && observingSessionID === f;
-  let V = b && !G;
-  let H = isNullish(presenterSessionID) && isNotNullish(f) && observingSessionID === f;
-  isActive && y && B();
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
+    }
+  }, [pendingPresenterSession])
+
+  const observeFunction = useObserveFunction()
+
+  // Observe the current presenter
+  const observeCurrentPresenter = useCallback(() => {
+    if (isNotNullish(presenterSessionID)) {
+      if (viewType !== "prototype") {
+        clearSelection()
+      }
+      observeFunction(presenterSessionID)
+    }
+  }, [presenterSessionID, observeFunction, viewType])
+
+  // Start auto-follow process
+  const startAutoFollow = useCallback(() => {
+    observeCurrentPresenter()
+    if (presenterSessionID) {
+      setPendingPresenterSession(presenterSessionID)
+    }
+  }, [presenterSessionID, observeCurrentPresenter])
+
+  // Clear pending session if it matches current observation
+  if (pendingPresenterSession === observingSessionID) {
+    setPendingPresenterSession(null)
+  }
+
+  const {
+    isActive: isAutoFollowActive,
+    start: startAutoFollowTimer,
+    cancel: cancelAutoFollow,
+    complete: completeAutoFollow,
+  } = useDelayedCallback(startAutoFollow)
+
+  // Callback to cancel auto-follow
+  const cancelAutoFollowCallback = useCallback(() => {
+    cancelAutoFollow()
+    setPendingPresenterSession(null)
+  }, [cancelAutoFollow])
+
+  // Determine auto-follow states
+  const shouldStartPresentationFollow = shouldTriggerObservation && observingSessionID === previousPresenterRef.current
+  const shouldResetPresentationFollow = shouldTriggerObservation && !shouldStartPresentationFollow
+  const shouldHandlePresenterLeft
+    = isNullish(presenterSessionID)
+    && isNotNullish(previousPresenterRef.current)
+    && observingSessionID === previousPresenterRef.current
+
+  // Cancel auto-follow if user becomes presenter
+  if (isAutoFollowActive && isCurrentUserPresenter) {
+    cancelAutoFollowCallback()
+  }
+
+  // Effects for handling different auto-follow scenarios
   useEffect(() => {
-    G && (c($$C5()), start(x), g("next"));
-  }, [x, c, G, start]);
+    if (shouldStartPresentationFollow) {
+      dispatch(clearPresentationStoppedAlertThunk())
+      startAutoFollowTimer(presentationStartDelay)
+      setAutoFollowType("next")
+    }
+  }, [presentationStartDelay, dispatch, shouldStartPresentationFollow, startAutoFollowTimer])
+
   useEffect(() => {
-    V && (c($$C5()), start(S), g("initial"));
-  }, [S, c, V, start]);
+    if (shouldResetPresentationFollow) {
+      dispatch(clearPresentationStoppedAlertThunk())
+      startAutoFollowTimer(autoFollowDelay)
+      setAutoFollowType("initial")
+    }
+  }, [autoFollowDelay, dispatch, shouldResetPresentationFollow, startAutoFollowTimer])
+
   useEffect(() => {
-    H && (P(-1), B(), c($$N10({
-      presenterSessionID: f
-    })));
-  }, [B, c, f, H, e.multiplayer, P]);
+    if (shouldHandlePresenterLeft) {
+      observeFunction(-1)
+      cancelAutoFollowCallback()
+      dispatch(handlePresentationStoppedThunk({
+        presenterSessionID: previousPresenterRef.current!,
+      }))
+    }
+  }, [
+    shouldHandlePresenterLeft,
+    observeFunction,
+    cancelAutoFollowCallback,
+    dispatch,
+    previousPresenterRef,
+  ])
+
   useEffect(() => {
-    isActive && E && B();
-  }, [E, B, isActive]);
-  let z = (() => {
-    switch (m) {
+    if (isAutoFollowActive && isObservingPresenter) {
+      cancelAutoFollowCallback()
+    }
+  }, [isObservingPresenter, cancelAutoFollowCallback, isAutoFollowActive])
+
+  // Determine current auto-follow delay
+  const autoFollowDelayMs = (() => {
+    switch (autoFollowType) {
       case "next":
-        return x;
+        return presentationStartDelay
       case "initial":
-        return S;
+        return autoFollowDelay
       default:
-        throwTypeError(m);
+        throwTypeError(autoFollowType)
     }
-  })();
+  })()
+
   return {
-    isAutoFollowPending: !y && (V || G || isActive || null != R),
-    cancelAutoFollowCallback: B,
-    completeAutoFollowCallback: complete,
-    observeCurrentPresenter: D,
-    autoFollowType: m,
-    autoFollowDelayMs: z
-  };
+    isAutoFollowPending: !isCurrentUserPresenter && (
+      shouldResetPresentationFollow
+      || shouldStartPresentationFollow
+      || isAutoFollowActive
+      || pendingPresenterSession != null
+    ),
+    cancelAutoFollowCallback,
+    completeAutoFollowCallback: completeAutoFollow,
+    observeCurrentPresenter,
+    autoFollowType,
+    autoFollowDelayMs,
+  }
 }
-export function $$L4() {
-  return useSelector(({
-    multiplayer: {
-      sessionID: e
-    }
-  }) => e);
+
+// Hook to get current session ID
+export function useCurrentSessionID() {
+  return useSelector<AppState, number>(state => state.multiplayer.sessionID)
 }
-export function $$P9() {
-  return useSelector(({
-    multiplayer: {
-      observingSessionID: e
-    }
-  }) => e);
+
+// Hook to get observing session ID
+export function useObservingSessionID() {
+  return useSelector<AppState, number>(state => state.multiplayer.observingSessionID)
 }
-export function $$D8() {
-  let e = useSelector(e => e.multiplayer);
-  return e.allUsers.find(t => t.sessionID === e.sessionID) ?? null;
+
+// Hook to get current user info
+export function useCurrentUser() {
+  const multiplayerState = useSelector<AppState, AppState['multiplayer']>(state => state.multiplayer)
+  return multiplayerState.allUsers.find(user => user.sessionID === multiplayerState.sessionID) ?? null
 }
-export function $$k0() {
-  let e = useSelector(e => e.multiplayer);
-  return e.allUsers.find(t => t.sessionID === e.observingSessionID) ?? null;
+
+// Hook to get observing user info
+export function useObservingUser() {
+  const multiplayerState = useSelector<AppState, AppState['multiplayer']>(state => state.multiplayer)
+  return multiplayerState.allUsers.find(user => user.sessionID === multiplayerState.observingSessionID) ?? null
 }
-export function $$M11() {
-  let e = useSelector(e => e.multiplayer);
-  return e.allUsers.find(t => t.sessionID === e.presenterSessionID) ?? null;
+
+// Hook to get presenter user info
+export function usePresenterUser() {
+  const multiplayerState = useSelector<AppState, AppState['multiplayer']>(state => state.multiplayer)
+  return multiplayerState.allUsers.find(user => user.sessionID === multiplayerState.presenterSessionID) ?? null
 }
-export function $$F7({
-  multiplayer: e
+
+// Hook to handle presentation stopping based on various conditions
+export function usePresentationStopHandler({
+  multiplayer: multiplayerState,
+}: {
+  multiplayer: {
+    presenterSessionID: string | null
+    sessionID: string
+  }
 }) {
-  let t = function () {
-    let e = useIsSelectedFigmakeFullscreen();
-    let t = $$U3();
-    let r = XM();
-    let n = useDevModeFocusId();
-    let i = useIsFullscreenOverview();
-    let a = _$$e();
-    let s = useIsFullscreenDevModeComponentBrowser();
-    return !!t && !r && !n && !i && !a && !s && !e;
-  }();
-  let r = e.presenterSessionID === e.sessionID;
-  let i = getSelectedViewType();
-  let a = useCallback(() => {
-    "prototype" === i ? getViewerInstance()?.stopPresenting() : Multiplayer.stopPresenting();
-  }, [i]);
+  const canPresent = (() => {
+    const isFigmakeFullscreen = useIsSelectedFigmakeFullscreen()
+    const isPresentationAllowed = useIsPresentationAllowed()
+    const isDevToolsOpen = XM()
+    const isDevModeFocus = e2()
+    const devFocusId = useDevModeFocusId()
+    const isOverviewFullscreen = useIsFullscreenOverview()
+    const isDevVariablesFullscreen = useIsFullscreenWithDevVariables()
+    const isComponentBrowserFullscreen = useIsFullscreenDevModeComponentBrowser()
+
+    return !!isPresentationAllowed
+      && !isDevToolsOpen
+      && !isDevModeFocus
+      && !devFocusId
+      && !isOverviewFullscreen
+      && !isDevVariablesFullscreen
+      && !isComponentBrowserFullscreen
+      && !isFigmakeFullscreen
+  })()
+
+  const isCurrentUserPresenter = multiplayerState.presenterSessionID === multiplayerState.sessionID
+  const viewType = getSelectedViewType()
+
+  const stopPresenting = useCallback(() => {
+    if (viewType === "prototype") {
+      getViewerInstance()?.stopPresenting()
+    }
+    else {
+      Multiplayer.stopPresenting()
+    }
+  }, [viewType])
+
   useEffect(() => {
-    !t && r && a();
-  }, [t, r, a]);
+    if (!canPresent && isCurrentUserPresenter) {
+      stopPresenting()
+    }
+  }, [canPresent, isCurrentUserPresenter, stopPresenting])
 }
-export function $$j6({
-  multiplayer: e
+
+// Hook to handle observation reset based on conditions
+export function useObservationResetHandler({
+  multiplayer: multiplayerState,
+}: {
+  multiplayer: {
+    observingSessionID: number | null
+  }
 }) {
-  let t = O();
-  let r = !$$B1();
-  let i = -1 !== e.observingSessionID;
+  const observeFunction = useObserveFunction()
+  const shouldResetObservation = !useIsObservationAllowed()
+  const hasActiveObservation = multiplayerState.observingSessionID !== -1
+
   useEffect(() => {
-    !r && i && t(-1);
-  }, [r, i, t]);
+    if (!shouldResetObservation && hasActiveObservation) {
+      observeFunction(-1)
+    }
+  }, [shouldResetObservation, hasActiveObservation, observeFunction])
 }
-export function $$U3() {
-  let e = useIsSelectedFigmakeFullscreen();
-  return !(getIsMobile() && isInFigmaMobile() && !isIpadDevice() || fullscreenAlias?.getIsExtension()) && !e;
+
+// Hook to determine if presentation is allowed
+export function useIsPresentationAllowed() {
+  const isFigmakeFullscreen = useIsSelectedFigmakeFullscreen()
+  const isMobileApp = getIsMobile() && isInFigmaMobile() && !isIpadDevice
+  const isExtensionFullscreen = fullscreenAlias?.getIsExtension()
+
+  return !(isMobileApp || isExtensionFullscreen) && !isFigmakeFullscreen
 }
-export function $$B1() {
-  let e = useIsSelectedFigmakeFullscreen();
-  let t = XM();
-  let r = e2();
-  let n = useDevModeFocusId();
-  let i = useIsFullscreenOverview();
-  return !!t || !!r || !!n || !!i || !!e;
+
+// Hook to determine if observation is allowed
+export function useIsObservationAllowed() {
+  const isFigmakeFullscreen = useIsSelectedFigmakeFullscreen()
+  const isDevToolsOpen = XM()
+  const isDevModeFocus = e2()
+  const devFocusId = useDevModeFocusId()
+  const isOverviewFullscreen = useIsFullscreenOverview()
+
+  return !!isDevToolsOpen
+    || !!isDevModeFocus
+    || !!devFocusId
+    || !!isOverviewFullscreen
+    || !!isFigmakeFullscreen
 }
-export function $$G13() {
-  let e = useSelector(e => e.multiplayer);
-  let t = e.sessionsNominatingCurrentUser[0];
-  return t ? e.allUsers.find(e => e.sessionID === t) ?? null : null;
+
+// Hook to get the user nominating current user
+export function useNominatingUser() {
+  const multiplayerState = useSelector<AppState, AppState['multiplayer']>(state => state.multiplayer)
+  const nominatingSessionID = multiplayerState.sessionsNominatingCurrentUser[0]
+
+  return nominatingSessionID
+    ? multiplayerState.allUsers.find(user => user.sessionID === nominatingSessionID) ?? null
+    : null
 }
-export const $0 = $$k0;
-export const By = $$B1;
-export const D_ = $$x2;
-export const HG = $$U3;
-export const KP = $$L4;
-export const Lt = $$C5;
-export const Pi = $$j6;
-export const VA = $$F7;
-export const Ww = $$D8;
-export const _E = $$P9;
-export const c3 = $$N10;
-export const dR = $$M11;
-export const oW = $$R12;
-export const y = $$G13;
+
+// Export aliases for backward compatibility
+export const $0 = useObservingUser
+export const By = useIsObservationAllowed
+export const D_ = AutoFollowType
+export const HG = useIsPresentationAllowed
+export const KP = useCurrentSessionID
+export const Lt = clearPresentationStoppedAlertThunk
+export const Pi = useObservationResetHandler
+export const VA = usePresentationStopHandler
+export const Ww = useCurrentUser
+export const _E = useObservingSessionID
+export const c3 = handlePresentationStoppedThunk
+export const dR = usePresenterUser
+export const oW = useAutoFollowPresenter
+export const y = useNominatingUser

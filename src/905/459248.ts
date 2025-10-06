@@ -47,7 +47,7 @@ import { useDropdownState } from "../905/848862";
 import { fontLoadingAtom } from "../figma_app/623300";
 import { KindEnum } from "../905/129884";
 import { getFontStyleMapping } from "../905/714538";
-import { e0 as _$$e2 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ay } from "../figma_app/628987";
 import { zz } from "../905/32188";
@@ -505,7 +505,7 @@ export let $$eZ0 = registerModal(function (e) {
   if (!S) return null;
   let e1 = Object.keys(replacements).filter(e => eK(replacements[e].newName)).length > 0;
   return jsx(TrackingProvider, {
-    name: _$$e2.MISSING_FONTS_MODAL,
+    name: TrackingKeyEnum.MISSING_FONTS_MODAL,
     children: jsxs(DraggableModalManager, {
       initialPosition: S,
       container: eQ,

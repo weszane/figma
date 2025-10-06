@@ -32,7 +32,7 @@ import { A as _$$A } from '../b2835def/22707';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
-import { Ay as _$$Ay } from '../figma_app/272902';
+import { createMultiRefCallback } from '../figma_app/272902';
 import { useIsCooperBulkCreateMode, useNodeHasVideoPaint } from '../figma_app/334505';
 import { fullscreenValue } from '../figma_app/455680';
 import { go } from '../figma_app/524655';
@@ -442,7 +442,7 @@ let $$el0 = forwardRef(({
       caret: eK,
       collapsedStatesDisabled: el
     }) : null, jsxs(_$$_2.Item, {
-      'ref': _$$Ay(es, eE),
+      'ref': createMultiRefCallback(es, eE),
       'className': cssBuilderInstance.wFull.relative.$,
       'data-testid': J ? 'mini-carousel-item' : 'carousel-item',
       'data-tooltip': children.length > 0 && isCollapsed ? W(eN, ey) : void 0,

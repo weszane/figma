@@ -40,7 +40,7 @@ import { OpenEditorFileData } from "../figma_app/43951";
 import { l as _$$l, s as _$$s } from "../905/618307";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { ContainerTypeMap } from "../905/186961";
-import { e0 as _$$e } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { N as _$$N2 } from "../905/620375";
 import { A as _$$A } from "../905/81613";
 import { A as _$$A2 } from "../905/392698";
@@ -568,7 +568,7 @@ function tr({
     localComponents
   } = useSelector(Pn, deepEqual);
   return "loading" !== status && data && s ? jsx(TrackingProvider, {
-    name: _$$e.TEAM_TEMPLATE_PUBLISH_MODAL_V2,
+    name: TrackingKeyEnum.TEAM_TEMPLATE_PUBLISH_MODAL_V2,
     properties: {
       source: e,
       userId: i?.id,
@@ -1294,7 +1294,7 @@ function tO({
       error: !0
     }));
   }, [l, y]), l) ? jsx(TrackingProvider, {
-    name: _$$e.TEAM_TEMPLATE_PUBLISH_MODAL,
+    name: TrackingKeyEnum.TEAM_TEMPLATE_PUBLISH_MODAL,
     properties: {
       source: i,
       orgId: t?.id,

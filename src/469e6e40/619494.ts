@@ -6,7 +6,7 @@ import { Button } from "../905/521428";
 import { LoadingSpinner } from "../905/443820";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { getSupportEmail } from "../figma_app/169182";
-import { T } from "../figma_app/257703";
+import { ListFormatter } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { mW } from "../469e6e40/182832";
@@ -42,7 +42,7 @@ function j(e) {
     return jsx("p", {
       className: wz,
       children: renderI18nText("org_settings.sso.domain_requirement", {
-        domains: jsx(T, {
+        domains: jsx(ListFormatter, {
           formatType: "disjunction",
           children: t.map(e => jsx("span", {
             className: Vq,

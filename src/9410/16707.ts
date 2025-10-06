@@ -20,7 +20,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { getObservableValue } from "../figma_app/84367";
 import { currentTeamAtom } from "../figma_app/598018";
 import { N as _$$N } from "../figma_app/268271";
-import { qo } from "../905/696396";
+import { OrgPersonal } from "../905/696396";
 import { U as _$$U } from "../905/455766";
 import { ImageOverlayComponent } from "../905/129046";
 import { _l } from "../figma_app/995208";
@@ -106,7 +106,7 @@ export function $$H1({
     return plan?.tier !== FPlanNameType.STARTER && plan?.tier !== FPlanNameType.STUDENT && (planUser?.seatTypeLicenseTypes?.includes(FProductAccessType.SLIDES) ?? !1);
   }();
   let v = useDispatch();
-  let T = x.data === qo.ORG;
+  let T = x.data === OrgPersonal.ORG;
   let S = atomStoreManager.get(orgSubscriptionAtom);
   let j = atomStoreManager.get(currentTeamAtom);
   let k = debugState.getState().openFile;

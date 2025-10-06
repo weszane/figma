@@ -15,7 +15,7 @@ import { NEW_COMMENT_ID, ThreadType } from '../905/380385';
 import { iX } from '../905/415545';
 import { CommentPinElement } from '../905/512783';
 import { s as _$$s } from '../905/518538';
-import { E as _$$E } from '../905/617605';
+import { calculateCommentPinViewport } from '../905/617605';
 import { Point } from '../905/736624';
 import { ArrowPosition } from '../905/748636';
 import { R as _$$R } from '../905/780757';
@@ -545,7 +545,7 @@ let ed = () => {
   let e = _$$Z();
   let t = useContext(viewportNavigatorContext);
   let n = useSelector(e => e.selectedView);
-  return useCallback(o => e(_$$E(o.threads[0], t, n, !1, !0)), [e, t, n]);
+  return useCallback(o => e(calculateCommentPinViewport(o.threads[0], t, n, !1, !0)), [e, t, n]);
 };
 let $$ec0 = memo(e => {
   return jsx(er, {

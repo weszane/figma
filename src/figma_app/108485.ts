@@ -15,7 +15,7 @@ import { openFileAtom, useEditorType } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { isOnboardingComplete } from "../figma_app/242339";
 import { N as _$$N2 } from "../figma_app/268271";
-import { qo } from "../905/696396";
+import { OrgPersonal } from "../905/696396";
 import { U } from "../905/455766";
 import { OnboardingRenderFrame } from "../905/284399";
 import { yP, Iy } from "../figma_app/551322";
@@ -54,7 +54,7 @@ export function $$O1() {
       canShow: (t, r, n, i, a, s, l) => {
         let d = !!e && isTeamFolderV2(e.project);
         let c = O === FFileType.WHITEBOARD && s || O === FFileType.DESIGN && L;
-        return r === qo.PERSONAL && c && (i || d) && !jj(n, "ran_move_drafts_nudge_machine") && (G(postUserFlag({
+        return r === OrgPersonal.PERSONAL && c && (i || d) && !jj(n, "ran_move_drafts_nudge_machine") && (G(postUserFlag({
           ran_move_drafts_nudge_machine: !0
         })), !0) && !l && !!a && !!t;
       },

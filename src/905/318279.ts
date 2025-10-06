@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
 import { clampOptional } from "../figma_app/492908";
-import { cZ } from "../figma_app/272902";
+import { setRefValue } from "../figma_app/272902";
 import { parsePxNumber } from "../figma_app/783094";
 import { KeyCodes } from "../905/63728";
 import { LazyInputForwardRef } from "../905/408237";
@@ -14,7 +14,7 @@ export class $$h0 extends Component {
     super(...arguments);
     this.currentHeight = 0;
     this.ref = e => {
-      cZ(this.props.innerRef, e);
+      setRefValue(this.props.innerRef, e);
       e && !this.textarea && (this.textarea = e, this.resizeTextareaToFitValue(this.textarea.value), this.props.enforceStuckToTop && (this.textarea.scrollTop = 0), this.props.selectOnMount && (this.textarea.select(), this.textarea.setSelectionRange(this.textarea.value.length, this.textarea.value.length)));
     };
     this.resizeTextareaToFitValue = e => {

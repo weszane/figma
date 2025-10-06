@@ -18,7 +18,7 @@ import { isDevHandoffEditorType } from "../figma_app/976749";
 import { handleModalError, isDefaultFileAlt, handleError, isBranchAlt } from "../905/760074";
 import { RepoFiles, MergeStatusRepoFiles } from "../figma_app/43951";
 import { SourceDirection, CPPEventType } from "../905/535806";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { $l } from "../905/721248";
 import { generateRecordingKey } from "../figma_app/878298";
 import { W as _$$W } from "../905/95038";
@@ -134,7 +134,7 @@ function j(e) {
         acceptCallback: () => {
           dispatch(hx({
             direction: SourceDirection.FROM_SOURCE,
-            trackingContextName: e0.BRANCHING_UPDATE_NOTIFICATION
+            trackingContextName: TrackingKeyEnum.BRANCHING_UPDATE_NOTIFICATION
           }));
           trackEventAnalytics("Branch Update Alert", {
             action: "Update",

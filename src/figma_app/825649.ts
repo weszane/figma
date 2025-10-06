@@ -55,7 +55,7 @@ import { exitVersionHistoryMode, enterVersionHistoryMode } from "../figma_app/84
 import { FEditorType } from "../figma_app/53721";
 import { TeamOrgType } from "../figma_app/10554";
 import { Yh, c1 } from "../figma_app/357047";
-import { e0 as _$$e } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { Q as _$$Q } from "../figma_app/113686";
 import { e as _$$e2 } from "../905/225961";
 import { AM, pT } from "../905/467351";
@@ -308,11 +308,11 @@ export function $$eO1({
     }));
   };
   let re = !eC && eP.editorType === FEditorType.Design && eM.canEdit;
-  let rt = jv(_$$t2(tn, _$$e.EDITOR_TOOLBAR, tt), {
+  let rt = jv(_$$t2(tn, TrackingKeyEnum.EDITOR_TOOLBAR, tt), {
     appModel: eL,
     selectedView: eP
   });
-  let rr = jv(_$$m(tn, _$$e.EDITOR_TOOLBAR, tt, ti), {
+  let rr = jv(_$$m(tn, TrackingKeyEnum.EDITOR_TOOLBAR, tt, ti), {
     appModel: eL,
     selectedView: eP
   });
@@ -341,7 +341,7 @@ export function $$eO1({
     callback: () => {
       z(hideDropdownAction());
       Ah(eL.activeCanvasEditModeType) ? z(exitVersionHistoryMode()) : z(enterVersionHistoryMode({
-        source: _$$e.EDITOR_TOOLBAR
+        source: TrackingKeyEnum.EDITOR_TOOLBAR
       }));
     }
   }]), ...ri(!!ta, [rC({
@@ -580,7 +580,7 @@ export function $$eO1({
     }
   }])];
   return jsx(TrackingProvider, {
-    name: _$$e.EDITOR_FILENAME_DROPDOWN,
+    name: TrackingKeyEnum.EDITOR_FILENAME_DROPDOWN,
     properties: {
       ...tg,
       slideConversionDropdownEntrypoint: eZ

@@ -37,7 +37,7 @@ import { FPlanNameType } from "../figma_app/191312";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { UserAPIHandlers } from "../905/93362";
 import { F as _$$F } from "../5132/756360";
-import { S as _$$S } from "../figma_app/420927";
+import { KeyboardShortcut } from "../figma_app/420927";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nState } from "../figma_app/363242";
 import { setKeyboardShortcutPanelTab } from "../905/26824";
@@ -3179,7 +3179,7 @@ let t7 = class e extends RecordingPureComponent {
       shouldShow: () => fullscreenValue.isReady(),
       onClick: this.onClickKeyboardShortcuts,
       label: jsxs(Fragment, {
-        children: [renderI18nText("help_widget.menu.keyboard_shortcuts"), jsx(_$$S, {
+        children: [renderI18nText("help_widget.menu.keyboard_shortcuts"), jsx(KeyboardShortcut, {
           shortcut: c1(this.props.keyboardShortcuts, "open-shortcuts"),
           className: "help_widget--shortcut--H4xrS"
         })]

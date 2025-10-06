@@ -30,7 +30,7 @@ import { PaginatedAbandonedDraftFilesView, ProjectNameById } from "../figma_app/
 import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { OrganizationType } from "../905/833838";
 import { DashboardSections } from "../905/548208";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { Cj } from "../905/270084";
 import { zx, VU } from "../4452/650793";
 import { MenuSeparator } from "../figma_app/860955";
@@ -263,7 +263,7 @@ function ee(e) {
     }));
   }, [t]);
   return jsxs(TrackingProvider, {
-    name: e0.ABANDONED_DRAFT_FILES_TABLE,
+    name: TrackingKeyEnum.ABANDONED_DRAFT_FILES_TABLE,
     properties: {
       folderId: e.abandonedDraftFolderId,
       teamId: F?.teamId,

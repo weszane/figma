@@ -10,7 +10,7 @@ import { getDisplayNameAlt, isDefaultFileAlt, isBranchAlt } from "../905/760074"
 import { useDropdownState } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { x as _$$x } from "../905/106997";
 import { X } from "../9410/208213";
 import { s as _$$s } from "../9410/760762";
@@ -95,7 +95,7 @@ export function $$k4() {
     children: jsx(C, {
       repo: t,
       dispatch: s,
-      trackingContextName: e0.EDITOR_TOOLBAR_ACTION
+      trackingContextName: TrackingKeyEnum.EDITOR_TOOLBAR_ACTION
     })
   }) : i && e.fileRepoId ? jsx("div", {
     className: l()(T, w),
@@ -122,7 +122,7 @@ function A() {
   return null === t || t < 1 ? null : jsx(ButtonPrimitive, {
     className: "left_panel_header_components--button--zghbk",
     onClick: () => e(o5({
-      trackingContextName: e0.EDITOR_TOOLBAR_ACTION
+      trackingContextName: TrackingKeyEnum.EDITOR_TOOLBAR_ACTION
     })),
     children: renderI18nText("fullscreen.filename_view.branch-count", {
       BRANCHES: t

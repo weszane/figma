@@ -12,7 +12,7 @@ import { getCurrentFileType } from "../figma_app/976749";
 import { FDeviceType } from "../figma_app/191312";
 import { LatestClipboardData } from "../figma_app/43951";
 import { trackFileEvent } from "../figma_app/314264";
-import { aq } from "../figma_app/412189";
+import { useIsMounted } from "../figma_app/412189";
 export function $$E0(e, t) {
   return !!(e?.is_ipad_user || isFigmaEmail(t));
 }
@@ -20,7 +20,7 @@ export function $$y1() {
   let e = useDispatch();
   let t = useRef("");
   let r = "whiteboard" === getCurrentFileType();
-  let a = aq();
+  let a = useIsMounted();
   let E = isIpadDevice ? FDeviceType.DESKTOP : FDeviceType.IPAD;
   let y = useSubscription(LatestClipboardData, {
     deviceType: E

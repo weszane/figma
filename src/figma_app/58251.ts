@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef } from "react";
-import { Ay } from "../figma_app/272902";
+import { createMultiRefCallback } from "../figma_app/272902";
 import s from "classnames";
 import { NG } from "../figma_app/709893";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -33,7 +33,7 @@ export function $$p0({
   ...u
 }) {
   let p = useRef(null);
-  let _ = Ay(s, p);
+  let _ = createMultiRefCallback(s, p);
   let h = NG({
     text: t,
     textRef: p,

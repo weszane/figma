@@ -15,8 +15,8 @@ import { getNudgeAmounts } from "../figma_app/740163";
 import { clearSelection } from "../figma_app/741237";
 import { valueOrFallback, isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
 import { useSelectionPropertyValue, useSelectionProperty, useSelectedStyleOrSelectionPropertyValues, useSelectionPropertyValues, useNonMixedSelectedStyleOrSelectionPropertyValues, useNonMixedSelectionPropertyValues, useNonMixedSelectionPropertyValue } from "../905/275640";
-import { _P, $J, Qx } from "../figma_app/2590";
-import { e0 as _$$e } from "../905/696396";
+import { trackPrototypeScaleChangeEvent, updatePrototypeDevice, normalizePrototypeDeviceConfig } from "../figma_app/2590";
+import { TrackingKeyEnum } from "../905/696396";
 import { Mw, ON } from "../3276/43946";
 import { u as _$$u } from "../figma_app/365543";
 import { YR } from "../figma_app/365713";
@@ -25,7 +25,7 @@ import { Legend } from "../905/932270";
 import { c$ as _$$c$, bL as _$$bL, l9, mc, wv, DZ } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import { atomStoreManager } from "../figma_app/27355";
-import { hY, yr, $X, Fh, r6, J_, AG, $w, dr } from "../figma_app/349969";
+import { DEVICE_PRESETS_BY_ID, DEVICE_PRESETS_BY_NAME, isCustomFrameRequired, getDevicePresetWithFallback, androidDeviceNames, extendedDeviceNames, appleWatchDeviceNames, appleDeviceNames, archivedDeviceNames } from "../figma_app/349969";
 import { formattedColorManipulator, defaultColorManipulator } from "../905/713722";
 import { KindEnum } from "../905/129884";
 import { LengthInput } from "../figma_app/178475";
@@ -123,7 +123,7 @@ function z(e) {
     }
   }, [dispatch, pickerShown]);
   let s = useCallback((e, t) => {
-    dispatch(_P({
+    dispatch(trackPrototypeScaleChangeEvent({
       name: "Prototype Background Modified"
     }));
     fullscreenValue.updateSelectionProperties({
@@ -176,14 +176,14 @@ let X = "prototype_device_panel--labelInactive--pv4Sf";
 class J extends PureComponent {
   constructor() {
     super(...arguments);
-    this.deviceInfo = () => hY[this.props.prototypeDevice.presetIdentifier];
+    this.deviceInfo = () => DEVICE_PRESETS_BY_ID[this.props.prototypeDevice.presetIdentifier];
     this.shouldShowModelDropdown = () => {
       let e = this.deviceInfo();
-      return yr[e?.deviceName || ""].length > 1;
+      return DEVICE_PRESETS_BY_NAME[e?.deviceName || ""].length > 1;
     };
     this.onModelChange = e => {
       if (!this.deviceInfo()) return;
-      let t = hY[e];
+      let t = DEVICE_PRESETS_BY_ID[e];
       if (!t) return;
       let n = this.props.prototypeDevice.rotation;
       fullscreenValue.updateSelectionProperties({
@@ -315,7 +315,7 @@ class J extends PureComponent {
         icon: jsx(w, {})
       })]
     });
-    let i = $X(e.type || "NONE", e.presetIdentifier);
+    let i = isCustomFrameRequired(e.type || "NONE", e.presetIdentifier);
     let r = jsxs(fI, {
       children: [t, i && n]
     });
@@ -425,11 +425,11 @@ class ee extends RecordingPureComponent {
       isEqual: (e, t) => "NONE" === e || "CUSTOM" === e || "PRESENTATION" === e || "NONE" === t || "CUSTOM" === t || "PRESENTATION" === t ? e === t : e.presetIdentifier === t.presetIdentifier
     };
     this.onChange = e => {
-      $J(e, this.props.prototypeDevice);
+      updatePrototypeDevice(e, this.props.prototypeDevice);
       let t = this.props.prototypeDevice.type;
       let n = t;
       n = "NONE" === e ? "NONE" : "PRESENTATION" === e ? "PRESENTATION" : "CUSTOM" === e ? "CUSTOM" : "PRESET";
-      this.props.dispatch(_P({
+      this.props.dispatch(trackPrototypeScaleChangeEvent({
         name: "Prototype Device Type Changed",
         params: {
           oldType: this.props.prototypeDevice.presetIdentifier || t,
@@ -439,7 +439,7 @@ class ee extends RecordingPureComponent {
       }));
     };
     this.renderPresetOption = (e, t) => {
-      let n = Fh(e, this.props.prototypeDevice);
+      let n = getDevicePresetWithFallback(e, this.props.prototypeDevice);
       if (null === n) return null;
       let i = n.framePresetSize;
       return jsx(_$$c$, {
@@ -457,10 +457,10 @@ class ee extends RecordingPureComponent {
   }
   render() {
     let e;
-    let t = "string" == typeof (e = "NONE" === this.props.prototypeDevice.type ? "NONE" : "PRESENTATION" === this.props.prototypeDevice.type ? "PRESENTATION" : "CUSTOM" === this.props.prototypeDevice.type ? "CUSTOM" : hY[this.props.prototypeDevice.presetIdentifier] || "NONE") ? e : e.presetIdentifier;
+    let t = "string" == typeof (e = "NONE" === this.props.prototypeDevice.type ? "NONE" : "PRESENTATION" === this.props.prototypeDevice.type ? "PRESENTATION" : "CUSTOM" === this.props.prototypeDevice.type ? "CUSTOM" : DEVICE_PRESETS_BY_ID[this.props.prototypeDevice.presetIdentifier] || "NONE") ? e : e.presetIdentifier;
     return jsxs(_$$bL, {
       onChange: e => {
-        "NONE" === e || "PRESENTATION" === e || "CUSTOM" === e ? this.onChange(e) : this.onChange(Fh(e, this.props.prototypeDevice));
+        "NONE" === e || "PRESENTATION" === e || "CUSTOM" === e ? this.onChange(e) : this.onChange(getDevicePresetWithFallback(e, this.props.prototypeDevice));
       },
       recordingKey: generateRecordingKey(this.props, "select"),
       value: t,
@@ -474,7 +474,7 @@ class ee extends RecordingPureComponent {
         children: [jsx(_$$c$, {
           value: "NONE",
           children: renderI18nText("proto.frame_preset_panel.no_device")
-        }), jsx(wv, {}), r6.map(this.renderPresetOption), jsx(wv, {}), J_.map(this.renderPresetOption), jsx(wv, {}), AG.map(this.renderPresetOption), jsx(wv, {}), $w.map(this.renderPresetOption), jsx(wv, {}), jsx(_$$c$, {
+        }), jsx(wv, {}), androidDeviceNames.map(this.renderPresetOption), jsx(wv, {}), extendedDeviceNames.map(this.renderPresetOption), jsx(wv, {}), appleWatchDeviceNames.map(this.renderPresetOption), jsx(wv, {}), appleDeviceNames.map(this.renderPresetOption), jsx(wv, {}), jsx(_$$c$, {
           value: "CUSTOM",
           children: jsxs("div", {
             className: Y,
@@ -494,7 +494,7 @@ class ee extends RecordingPureComponent {
               children: renderI18nText("proto.frame_preset_panel.fill")
             })]
           })
-        }), jsx(wv, {}), dr.map(this.renderPresetOption)]
+        }), jsx(wv, {}), archivedDeviceNames.map(this.renderPresetOption)]
       })]
     });
   }
@@ -505,7 +505,7 @@ class et extends RecordingPureComponent {
     super(...arguments);
     this.formatter = {
       format: e => {
-        let t = hY[e];
+        let t = DEVICE_PRESETS_BY_ID[e];
         return t ? t.getI18nStyleName() : getI18nString("proto.frame_preset_panel.missing");
       },
       isEqual: (e, t) => e === t
@@ -514,14 +514,14 @@ class et extends RecordingPureComponent {
       let n = e.presetIdentifier;
       return jsx(_$$c$, {
         value: n,
-        children: hY[n].getI18nStyleName()
+        children: DEVICE_PRESETS_BY_ID[n].getI18nStyleName()
       }, t);
     };
   }
   render() {
-    let e = hY[this.props.presetIdentifier];
+    let e = DEVICE_PRESETS_BY_ID[this.props.presetIdentifier];
     if (!e) return null;
-    let t = yr[e.deviceName];
+    let t = DEVICE_PRESETS_BY_NAME[e.deviceName];
     let n = this.props.presetIdentifier;
     return jsxs(_$$bL, {
       onChange: this.props.onChange,
@@ -633,7 +633,7 @@ let e_ = function (e) {
         e.updateSelectionProperties({
           videoAutoplay: t
         });
-        e.dispatch(_P({
+        e.dispatch(trackPrototypeScaleChangeEvent({
           name: "Node video autoplay Changed",
           params: {
             newAutoplay: t,
@@ -657,7 +657,7 @@ let e_ = function (e) {
       e.updateSelectionProperties({
         videoMediaLoop: t
       });
-      e.dispatch(_P({
+      e.dispatch(trackPrototypeScaleChangeEvent({
         name: "Node video loop changed",
         params: {
           newLoop: t,
@@ -684,7 +684,7 @@ let e_ = function (e) {
       e.updateSelectionProperties({
         videoMuted: t
       });
-      e.dispatch(_P({
+      e.dispatch(trackPrototypeScaleChangeEvent({
         name: "Node video muted changed",
         params: {
           newMuteValue: t,
@@ -818,7 +818,7 @@ function ez({
   let d = useCallback(() => s ? eV : "HORIZONTAL" === l ? eR : eM, [s, l]);
   let c = useId();
   let u = useCallback(e => {
-    n(_P({
+    n(trackPrototypeScaleChangeEvent({
       name: "Overflow Behavior changed",
       params: {
         newDirection: e,
@@ -874,7 +874,7 @@ function eG({
   let a = useSelectionPropertyValue("scrollBehavior") || "SCROLLS";
   let l = useCallback(e => {
     let t;
-    switch (n(_P({
+    switch (n(trackPrototypeScaleChangeEvent({
       name: "Node Scroll Behavior Changed",
       params: {
         newValue: e
@@ -951,7 +951,7 @@ function eY(e) {
     formatter: l,
     id: a,
     onChange: e => {
-      t(_P({
+      t(trackPrototypeScaleChangeEvent({
         name: "Node Scroll Behavior Changed",
         params: {
           newValue: e
@@ -1090,7 +1090,7 @@ export let $$e70 = withTracking(function (e) {
   let U = null !== H && H > 0;
   let F = useDispatch();
   let K = useCallback(() => {
-    F(_P({
+    F(trackPrototypeScaleChangeEvent({
       name: "Show Prototype Settings Clicked"
     }));
     clearSelection();
@@ -1166,12 +1166,12 @@ export let $$e70 = withTracking(function (e) {
         isUI3: !0,
         pickerShown,
         prototypeBackgroundColor,
-        prototypeDevice: Qx(prototypeDevice),
+        prototypeDevice: normalizePrototypeDeviceConfig(prototypeDevice),
         recordingKey: "devicePanel",
         smallNudgeAmount,
         titleRef: Y
       }, "device-panel"), ee && jsx(_$$A, {})]
     }), et, U && jsx("div", {})]
   });
-}, _$$e.PROTOTYPE_PANEL);
+}, TrackingKeyEnum.PROTOTYPE_PANEL);
 export const Z0 = $$e70;

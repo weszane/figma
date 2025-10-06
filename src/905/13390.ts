@@ -28,7 +28,7 @@ import { customHistory } from '../905/612521';
 import { buildFileUrl, buildFileUrlInternal, getDesignFileUrl } from '../905/612685';
 import { j as _$$j, l as _$$l2 } from '../905/618243';
 import { g_ } from '../905/646788';
-import { e0 as _$$e2 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { openFileInNewTab, openPrototypeInNewTab } from '../905/697795';
 import { l as _$$l } from '../905/714607';
 import { handleAutosaveFileCreation } from '../905/738636';
@@ -479,7 +479,7 @@ export function $$ek0(e) {
     let t = e.sourceFile;
     let n = e.loadedQueries.createBranchStatus;
     if (!t || !n) return;
-    let r = _$$e2.FILE_BROWSER;
+    let r = TrackingKeyEnum.FILE_BROWSER;
     switch (n.status) {
       case 'upsell-org':
         i(_$$j({

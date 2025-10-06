@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { e as _$$e } from "../905/383776";
+import { useIsFullscreenWithDevVariables } from "../905/383776";
 import { useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { selectCurrentFile } from "../figma_app/516028";
 import { cQ, EG } from "../figma_app/144692";
@@ -9,7 +9,7 @@ export function $$c0({
 }) {
   let t = selectCurrentFile();
   let a = useIsFullscreenOverview();
-  let c = _$$e();
+  let c = useIsFullscreenWithDevVariables();
   let d = useIsFullscreenDevModeComponentBrowser();
   return t && t.key && t.name ? jsxs(SZ, {
     shouldUseBottomBorder: !!e,

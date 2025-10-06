@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Xr } from "../figma_app/27355";
-import { B4 } from "../figma_app/385215";
+import { stopPresenting } from "../figma_app/385215";
 import { $ } from "../905/532878";
 import { KP } from "../figma_app/31103";
 import { useDevModeFocusId } from "../figma_app/88239";
@@ -14,7 +14,7 @@ export function $$m0({
   variableId: i
 }) {
   let m = getSelectedView();
-  let h = B4();
+  let h = stopPresenting();
   let g = useDispatch();
   let f = useDevModeFocusId();
   let _ = Xr($);

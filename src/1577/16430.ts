@@ -7,7 +7,7 @@ import { e as _$$e } from "../figma_app/661119";
 import { TrackedLink } from "../figma_app/831799";
 import { e as _$$e2 } from "../905/579755";
 import { FigmaPartnerBadgeRenderer } from "../figma_app/699310";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 let m = "resource_page_header--resourceHeaderAvatar--FI-3x";
 let f = "resource_page_header--resourceHeaderAvatarWrapper--nn-w8";
 let p = "resource_page_header--resourceHeaderFigmaPartnerBadge--cgvkO";
@@ -17,7 +17,7 @@ export function $$h0({
   showFigmaPartnerBadge: i,
   openInNewTab: o = !1
 }) {
-  let h = AG();
+  let h = useIsResourceHub();
   let b = useResourceRouteParams() ?? void 0;
   let x = useResourceFuid() ?? void 0;
   let k = h ? 2 : 3;

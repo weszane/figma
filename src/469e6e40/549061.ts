@@ -36,7 +36,7 @@ import { removeQueryParam, getQueryParam } from '../905/609392';
 import { e as _$$e3 } from '../905/621515';
 import { ResourceStatus, getResourceDataOrFallback } from '../905/663269';
 import { BannerButton } from '../905/692618';
-import { e0 as _$$e2 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { G as _$$G } from '../905/750789';
 import { AutoLayout } from '../905/470281';
 import { OrganizationType } from '../905/833838';
@@ -390,7 +390,7 @@ function eu({
   }];
   let g = getRumLoggingConfig();
   return jsx(TrackingProvider, {
-    name: _$$e2.SEAT_COUNTS_OVERVIEW_CARD,
+    name: TrackingKeyEnum.SEAT_COUNTS_OVERVIEW_CARD,
     properties: {
       planType: t,
       planId: e
@@ -1207,7 +1207,7 @@ function tu({
   let ty = et && !t;
   let tw = getRumLoggingConfig();
   return jsx(TrackingProvider, {
-    name: _$$e2.SEAT_REQUESTS_MINI_VIEW,
+    name: TrackingKeyEnum.SEAT_REQUESTS_MINI_VIEW,
     children: jsxs(_$$B2, {
       onShouldFetchNextPage: () => {
         eN && !eI && eT && ed?.data?.adminDashboardRequests?.loadNext(25);
@@ -1370,7 +1370,7 @@ function tm({
   let a;
   a = t ? e === UpgradeRequestSetting.ALL_USERS ? getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.billing_group_admin.all_users') : getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.billing_group_admin.members') : e === UpgradeRequestSetting.ALL_USERS ? getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.admin.all_users_setting') : getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.admin.members_only_setting');
   return jsx(TrackingProvider, {
-    name: _$$e2.CURF_PENDING_REQUESTS_BANNER,
+    name: TrackingKeyEnum.CURF_PENDING_REQUESTS_BANNER,
     children: jsx('div', {
       children: jsx(_$$_2, {
         dataTestId: 'curf-pending-requests-banner',
@@ -1429,7 +1429,7 @@ export function $$tg0({
   return jsx(Suspense, {
     fallback: jsx(tp, {}),
     children: jsx(TrackingProvider, {
-      name: _$$e2.BILLING_REMODEL_ADMIN_DASHBOARD,
+      name: TrackingKeyEnum.BILLING_REMODEL_ADMIN_DASHBOARD,
       trackingOptions: l,
       children: jsx('div', {
         children: jsxs('div', {

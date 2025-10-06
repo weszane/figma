@@ -54,7 +54,7 @@ import { HiddenLabel, Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
 import { AIActionProgressType } from '../905/278499';
 import { Ay as _$$Ay, Tr } from '../905/281495';
-import { G as _$$G2 } from '../905/298663';
+import { useIsCodeViewPanel } from '../905/298663';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { l as _$$l2 } from '../905/331642';
@@ -63,7 +63,7 @@ import { n as _$$n } from '../905/347702';
 import { getUserId, selectCurrentUser } from '../905/372672';
 import { isCommentStateActive } from '../905/380385';
 import { deepEqual } from '../905/382883';
-import { e as _$$e } from '../905/383776';
+import { useIsFullscreenWithDevVariables } from '../905/383776';
 import { P as _$$P4 } from '../905/392438';
 import { pB } from '../905/395919';
 import { WidgetTypes } from '../905/403797';
@@ -269,7 +269,7 @@ import { HR } from '../figma_app/397881';
 import { rg as _$$rg } from '../figma_app/401069';
 import { setupCursorChatDisabledCheck } from '../figma_app/403368';
 import { NF } from '../figma_app/406976';
-import { S as _$$S } from '../figma_app/420927';
+import { KeyboardShortcut } from '../figma_app/420927';
 import { V8 } from '../figma_app/443991';
 import { A0, Mc, R4 } from '../figma_app/454974';
 import { fullscreenValue } from '../figma_app/455680';
@@ -578,7 +578,7 @@ function eu() {
             children: i.shortcutText.length > 0 ? jsx('div', {
               className: 'auto_layout_hints--smallShortcutText--lHZ8Q',
               children: i.shortcutText
-            }) : jsx(_$$S, {
+            }) : jsx(KeyboardShortcut, {
               shortcut: i.shortcutText
             })
           }), jsx('p', {
@@ -2213,7 +2213,7 @@ function iC({
       children: i && i.map(e => jsx('div', {
         children: jsx('div', {
           className: el()(i_, e.isMetaKey ? 'eyedropper_v2--keyMetaBadge--S1g3y eyedropper_v2--keyBadge--9GITk' : 'eyedropper_v2--keyTextBadge--ERRPy eyedropper_v2--keyBadge--9GITk'),
-          children: jsx(_$$S, {
+          children: jsx(KeyboardShortcut, {
             shortcut: e.label
           })
         })
@@ -8865,7 +8865,7 @@ class ok extends RecordingPureComponent {
         })]
       }), n && !o && jsx('div', {
         className: LE,
-        children: jsx(_$$S, {
+        children: jsx(KeyboardShortcut, {
           shortcut: n
         })
       }), !n && o && jsxs('div', {
@@ -9048,7 +9048,7 @@ function oW() {
   });
 }
 function o$(e) {
-  let t = _$$G2();
+  let t = useIsCodeViewPanel();
   let i = JI();
   if (t || !i) return null;
   let n = normalizeValue(i?.url) ?? '';
@@ -9413,7 +9413,7 @@ export function $$lr0({
   hasCmsCollection(T);
   let A = t.openFile?.editorType === 'design';
   let O = useIsFullscreenOverview();
-  let B = _$$e();
+  let B = useIsFullscreenWithDevVariables();
   let G = useIsFullscreenDevModeComponentBrowser();
   let K = useIsSelectedFigmakeFullscreen();
   let [H] = useAtomValueAndSetter(autosaveAtom);

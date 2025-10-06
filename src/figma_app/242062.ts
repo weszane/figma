@@ -33,8 +33,8 @@ import { stopChattingThunk, stopReactingAction } from '../figma_app/308685';
 import { getI18nState } from '../figma_app/363242';
 import { p as _$$p } from '../figma_app/372802';
 import { setupCursorChatDisabledCheck } from '../figma_app/403368';
-import { Po } from '../figma_app/412189';
-import { _E, KP } from '../figma_app/440875';
+import { useDocumentEvent } from '../figma_app/412189';
+import { useObservingSessionID, useCurrentSessionID } from '../figma_app/440875';
 import { debug } from '../figma_app/465776';
 import { usePrefersReducedMotion } from '../figma_app/469468';
 import { oP } from '../figma_app/580087';
@@ -958,7 +958,7 @@ function eQ({
   viewportInfo: e,
   cursorEntities: t
 }) {
-  let r = KP();
+  let r = useCurrentSessionID();
   let n = useSelector(({
     multiplayer: {
       allUsers: e
@@ -1230,7 +1230,7 @@ function td({
 }) {
   let r = multiplayerSessionManager.useReactionsBySessionId();
   let n = Object.keys(r);
-  let s = KP();
+  let s = useCurrentSessionID();
   let o = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   return jsx(Fragment, {
     children: n.map(n => {
@@ -1585,7 +1585,7 @@ function t_() {
     subscribeToUpdates_EXPENSIVE: !1
   });
   let n = useMemo(() => r.getCommentsWrapperOffset(t), [r, t]);
-  let o = KP();
+  let o = useCurrentSessionID();
   let d = XM();
   let c = useSelector(e => e.multiplayerEmoji);
   let u = !getObservableValue(AppStateTsApi?.uiState().hideMultiplayerCursors, !1);
@@ -1674,11 +1674,11 @@ function t_() {
         });
       }, [e]);
       let y = i && o;
-      Po('keydown', h, y);
-      Po('keyup', m, y);
-      Po('pointerdown', g, y);
-      Po('pointerup', f, y);
-      Po('mousemove', E, y && d);
+      useDocumentEvent('keydown', h, y);
+      useDocumentEvent('keyup', m, y);
+      useDocumentEvent('pointerdown', g, y);
+      useDocumentEvent('pointerup', f, y);
+      useDocumentEvent('mousemove', E, y && d);
     }(e.cursorWiggleDetector);
     let t = trackFileEventWithUser();
     let [r, n] = useState([]);
@@ -1898,8 +1898,8 @@ function tm({
     updateSynchronously: m
   })[e];
   let E = !_ && g ? g.chatMessage : [null];
-  let b = KP();
-  let S = _E();
+  let b = useCurrentSessionID();
+  let S = useObservingSessionID();
   let N = !!(o && g?.mouse && el(o, g, l, S, b));
   if (th(g, !!(E && E.length && E[0]), N), !N || !g?.mouse) return null;
   let C = !!getFeatureFlags().ee_text_selection_in_mp && g.focusOnTextCursor;

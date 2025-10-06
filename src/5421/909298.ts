@@ -15,7 +15,7 @@ import { isInvalidValue } from "../905/216495";
 import { h6 } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { getLibraryNames } from "../905/506188";
-import { Zh } from "../figma_app/2590";
+import { trackDefinedFileEventWrapper } from "../figma_app/2590";
 import { zt } from "../figma_app/84580";
 import { A as _$$A } from "../897/590880";
 import { l6, c$, sK } from "../905/794875";
@@ -105,7 +105,7 @@ export function $$M1() {
     getDefaultNewModeForVariableCollectionKey: f,
     reportAnalyticsEventWhenSelected: e => {
       let t = SceneGraphTsApi.getVariableSetInfoForSetModeAnalytics(e);
-      T(Zh({
+      T(trackDefinedFileEventWrapper({
         name: "prototype.set_mode_select_variable_set",
         params: {
           ...t

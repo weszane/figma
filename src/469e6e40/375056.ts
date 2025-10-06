@@ -27,7 +27,7 @@ import { collaboratorSet } from "../905/332483";
 import { compareProductAccessTypes } from "../figma_app/217457";
 import { FOrganizationLevelType, FBillingPeriodType, FTeamStatusType, FPlanNameType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan, useTeamPlanFeatures } from "../figma_app/465071";
-import { e0 as _$$e2 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { getFeatureFlags } from "../905/601108";
 import { _ as _$$_, Y as _$$Y } from "../469e6e40/781142";
 import { showModalHandler } from "../905/156213";
@@ -203,8 +203,8 @@ function $(e) {
   });
 }
 let B = {
-  [FBillingPeriodType.YEAR]: _$$e2.ANNUAL_SEATS_TAB,
-  [FBillingPeriodType.MONTH]: _$$e2.MONTHLY_SEATS_TAB
+  [FBillingPeriodType.YEAR]: TrackingKeyEnum.ANNUAL_SEATS_TAB,
+  [FBillingPeriodType.MONTH]: TrackingKeyEnum.MONTHLY_SEATS_TAB
 };
 function G(e) {
   let t = e.adjustAnnualSeatsAction;

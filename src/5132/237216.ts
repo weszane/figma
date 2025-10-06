@@ -1,37 +1,50 @@
-import { useDispatch } from "react-redux";
-import { trackEventAnalytics } from "../905/449184";
-import { gE } from "../5132/642384";
-import { _ as _$$_ } from "../905/456042";
-import { showModalHandler } from "../905/156213";
-import { selectCurrentUser } from "../905/372672";
-import { hasClientMeta } from "../figma_app/45218";
-import { T } from "../5132/203178";
-import { getSearchSessionIdFromSelector } from "../figma_app/387599";
-export function $$u0(e, l = !1, i = !1, _ = !1) {
-  let h = useDispatch();
-  let m = getSearchSessionIdFromSelector();
-  let f = T();
-  let g = selectCurrentUser();
-  if (!hasClientMeta(e)) return () => {};
-  let v = gE(l => {
+import { useDispatch } from "react-redux"
+import { showModalHandler } from "../905/156213"
+import { selectCurrentUser } from "../905/372672"
+import { trackEventAnalytics } from "../905/449184"
+import { WorkspaceSelectorModal } from "../905/456042"
+import { isResourceHubContext } from "../5132/203178"
+import { createDuplicateTemplateHandler } from "../5132/642384"
+import { hasClientMeta } from "../figma_app/45218"
+import { getSearchSessionIdFromSelector } from "../figma_app/387599"
+
+export function useDuplicateTemplateHandler(
+  file: any,
+  adminReviewerOverride: boolean = false,
+  isFreemiumPreview: boolean = false,
+  skipWorkspaceSelectionOverride: boolean = false,
+) {
+  const dispatch = useDispatch<AppDispatch>()
+  const searchSessionId = getSearchSessionIdFromSelector()
+  const isResourceHub = isResourceHubContext()
+  const currentUser = selectCurrentUser()
+
+  if (!hasClientMeta(file)) {
+    return () => { }
+  }
+
+  const handleDuplicateTemplate = createDuplicateTemplateHandler((payload) => {
     trackEventAnalytics("try_it_out_drafts_picker_menu_opened", {
-      hubFileId: e.id,
-      searchSessionId: m
-    });
-    h(showModalHandler({
-      type: _$$_,
+      hubFileId: file.id,
+      searchSessionId,
+    })
+
+    dispatch(showModalHandler({
+      type: WorkspaceSelectorModal,
       data: {
-        payload: l
-      }
-    }));
+        payload,
+      },
+    }))
   }, {
-    isFreemiumPreview: i,
-    adminReviewerOverride: l,
-    skipWorkspaceSelection: f || _,
-    userId: g?.id
-  });
+    isFreemiumPreview,
+    adminReviewerOverride,
+    skipWorkspaceSelection: isResourceHub || skipWorkspaceSelectionOverride,
+    userId: currentUser?.id,
+  })
+
   return () => {
-    h(v(e));
-  };
+    dispatch(handleDuplicateTemplate(file))
+  }
 }
-export const A = $$u0;
+
+export const A = useDuplicateTemplateHandler

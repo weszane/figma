@@ -574,7 +574,7 @@ export function hookForKeyboard(recorder: any, eventType: string, handler: Fn, o
  * @param options - Additional options.
  * @returns The memoized handler.
  */
-export function useHandleKeyboardEvent(key: any, eventType: string, handler: Fn, options: any) {
+export function useHandleKeyboardEvent(key: any, eventType: string, handler: Fn, options: any = {}) {
   const recorder = useRecordingKey(key)
   return useMemo(() => hookForKeyboard(recorder, eventType, handler, options), [recorder, eventType, handler, options])
 }

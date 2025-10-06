@@ -176,7 +176,7 @@ import { H as _$$H7 } from '../905/474029';
 import { R as _$$R4 } from '../905/483499';
 import { e as _$$e9 } from '../905/483726';
 import { bL as _$$bL3, c$ as _$$c$2, l9 as _$$l5, mc as _$$mc3 } from '../905/493196';
-import { q as _$$q4 } from '../905/495564';
+import { useUserOrgPath } from '../905/495564';
 import { handleAtomEvent } from '../905/502364';
 import { z as _$$z12 } from '../905/502533';
 import { extractPropertyFromNestedObjects } from '../905/504360';
@@ -231,7 +231,7 @@ import { R as _$$R2 } from '../905/687502';
 import { a as _$$a10 } from '../905/692930';
 import { e as _$$e17 } from '../905/693478';
 import { T as _$$T6 } from '../905/696189';
-import { e0 as _$$e7, qo } from '../905/696396';
+import { TrackingKeyEnum, OrgPersonal } from '../905/696396';
 import { setEditorDocumentTitle, openFileInNewTab, userHasPlan, openFileInFullscreen } from '../905/697795';
 import { X as _$$X } from '../905/698965';
 import { L as _$$L4 } from '../905/704296';
@@ -307,7 +307,7 @@ import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
 import { RelativeTimeDisplay } from '../905/986103';
 import { resourceUtils } from '../905/989992';
-import { p as _$$p3 } from '../905/991924';
+import { PlaybackInput } from '../905/991924';
 import { h as _$$h8 } from '../905/994594';
 import { a as _$$a7 } from '../905/999566';
 import { P as _$$P4 } from '../1250/15189';
@@ -477,7 +477,7 @@ import { vt } from '../figma_app/231614';
 import { c$ as _$$c$, ms as _$$ms, MM, Ve } from '../figma_app/236327';
 import { fetchTeamMembersThunk, getTeamAction, postTeamAction, restoreTeamThunk, setTeamCreationLoadingAction } from '../figma_app/240735';
 import { p as _$$p4 } from '../figma_app/243977';
-import { T as _$$T5 } from '../figma_app/257703';
+import { ListFormatter } from '../figma_app/257703';
 import { ZF } from '../figma_app/258114';
 import { N as _$$N } from '../figma_app/268271';
 import { DialogBody, DialogContents, DialogHeader, DialogHiddenTitle } from '../figma_app/272243';
@@ -514,7 +514,7 @@ import { getCurrentQueryId, getSearchSessionIdFromSelector } from '../figma_app/
 import { adminPermissionConfig, createComparator, defaultComparator, setupShadowRead, useShadowRead, useShadowReadLoaded } from '../figma_app/391338';
 import { xF as _$$xF, WG } from '../figma_app/405906';
 import { transformFileRepoData } from '../figma_app/411744';
-import { aq as _$$aq } from '../figma_app/412189';
+import { useIsMounted } from '../figma_app/412189';
 import { o8 as _$$o2, sm as _$$sm } from '../figma_app/425283';
 import { getMainContent, hasContent, hasLibraryKey, hasResourceType, isFigmakeTemplate, mapVtToFileType } from '../figma_app/427318';
 import { zE as _$$zE, Jw } from '../figma_app/435872';
@@ -652,7 +652,7 @@ import { updateOrgUserDescriptionAction, getOrgUserByUserIdAction, getOrgAdminsA
 import { L as _$$L7 } from '../figma_app/990299';
 import { dn as _$$dn } from '../figma_app/994403';
 import { fileBrowserPageManager } from '../figma_app/997907';
-import { mk as _$$mk, Rj } from '../figma_app/999312';
+import { CommunityContextEnum, CommunityContext } from '../figma_app/999312';
 import { A as _$$A27 } from '../svg/68792';
 import { A as _$$A21 } from '../svg/128912';
 import { A as _$$A19 } from '../svg/169256';
@@ -2491,7 +2491,7 @@ function rq(e) {
         }), jsx('div', {
           'className': 'favorited_section--sectionName--PrU2k ellipsis--ellipsis--Tjyfa',
           'data-onboarding-key': e.allSections.length === 1 ? null : 'FAVORITES_ONBOARDING_KEY',
-          'children': e.isRenaming ? jsx(_$$p3, {
+          'children': e.isRenaming ? jsx(PlaybackInput, {
             className: 'favorited_section--input--8x-Vh',
             placeholderValue: J,
             submit: r => {
@@ -2868,7 +2868,7 @@ function ai(e) {
     updateRearrangeDragState: noop
   }, t.resource.resourceId));
   return jsx(TrackingProvider, {
-    name: _$$e7.FAVORITES_TO_MOVE_SECTION,
+    name: TrackingKeyEnum.FAVORITES_TO_MOVE_SECTION,
     properties: {
       userId: l,
       numFiles: _.length
@@ -3826,7 +3826,7 @@ function sL() {
   let r = useResourceRouteParams();
   let s = useResourceFuid();
   return t[w3] ? null : jsx(TrackingProvider, {
-    name: _$$e7.COMMUNITY_MOVED_TO_RESOURCE_HUB_BANNER,
+    name: TrackingKeyEnum.COMMUNITY_MOVED_TO_RESOURCE_HUB_BANNER,
     children: jsx('div', {
       className: 'x15dj09p',
       children: jsxs(BannerInline, {
@@ -4902,7 +4902,7 @@ function ni({
     }), jsx(_$$s3, {
       groups: t,
       minItemContentWidth: 192,
-      trackedContext: _$$e7.PAGE_HEADER_DROPDOWN,
+      trackedContext: TrackingKeyEnum.PAGE_HEADER_DROPDOWN,
       onTrackedItemClick: e => {
         logAndTrackCTA({
           ...n.properties,
@@ -4958,7 +4958,7 @@ function nn(e) {
         });
       },
       showPoint: !0
-    }), _$$e7.PAGE_HEADER_DROPDOWN)]
+    }), TrackingKeyEnum.PAGE_HEADER_DROPDOWN)]
   });
 }
 let n_ = liveStoreInstance.Mutation(async e => {
@@ -8321,7 +8321,7 @@ function l1({
   currentOrgId: e
 }) {
   return jsx(TrackingProvider, {
-    name: _$$e7.RESOURCE_HUB_COMMUNITY_TAB_DISABLED_PAGE,
+    name: TrackingKeyEnum.RESOURCE_HUB_COMMUNITY_TAB_DISABLED_PAGE,
     properties: {
       orgId: e
     },
@@ -8381,7 +8381,7 @@ function l5({
   return t ? jsx(l1, {
     currentOrgId: e
   }) : jsx(TrackingProvider, {
-    name: _$$e7.RESOURCE_HUB_COMMUNITY_RESOURCES_HOME_PAGE,
+    name: TrackingKeyEnum.RESOURCE_HUB_COMMUNITY_RESOURCES_HOME_PAGE,
     children: jsxs('div', {
       className: 'x78zum5 xdt5ytf xh8yej3 x5yr21d x1665zp3',
       ref: r.sizeRef,
@@ -8494,11 +8494,11 @@ function dd({
   t = e === FPlanNameType.ORG || e === FPlanNameType.ENTERPRISE ? color === 'dark' ? buildUploadUrl('156640b467fc94700549db25a70310582e3ef24b') : buildUploadUrl('923655d3d7ad0e0261946e6b8175911e0daceff3') : color === 'dark' ? buildUploadUrl('199fc5fd43ab7b8cdb2208db7a7a1c8b4f039119') : buildUploadUrl('363ceafa11ccd8ba7b2d9fe2b9aba1f8f8477596');
   let s = dn({
     newFileFrom: FileBrowserLocation.RESOURCE_HUB_FEW_TEMPLATES_UPSELL,
-    contextClicked: _$$e7.RESOURCE_HUB_FEW_TEMPLATES_UPSELL,
+    contextClicked: TrackingKeyEnum.RESOURCE_HUB_FEW_TEMPLATES_UPSELL,
     forceOpenNewTab: !0
   });
   return jsx(TrackingProvider, {
-    name: _$$e7.RESOURCE_HUB_FEW_TEMPLATES_UPSELL,
+    name: TrackingKeyEnum.RESOURCE_HUB_FEW_TEMPLATES_UPSELL,
     children: jsxs('div', {
       className: 'x78zum5 x1q0g3np xh8yej3 xeq9io7 xgqmno8 x3s0vfn',
       children: [jsx('div', {
@@ -8554,7 +8554,7 @@ function du({
   r = e === FPlanNameType.ORG || e === FPlanNameType.ENTERPRISE ? t ? buildUploadUrl('ceafb20933e03362e3d3f6c8191e892c8321d3db') : color === 'dark' ? buildUploadUrl('156640b467fc94700549db25a70310582e3ef24b') : buildUploadUrl('923655d3d7ad0e0261946e6b8175911e0daceff3') : color === 'dark' ? buildUploadUrl('199fc5fd43ab7b8cdb2208db7a7a1c8b4f039119') : buildUploadUrl('363ceafa11ccd8ba7b2d9fe2b9aba1f8f8477596');
   let o = dn({
     newFileFrom: FileBrowserLocation.RESOURCE_HUB_NO_RESOURCES_UPSELL,
-    contextClicked: _$$e7.RESOURCE_HUB_NO_RESOURCES_UPSELL,
+    contextClicked: TrackingKeyEnum.RESOURCE_HUB_NO_RESOURCES_UPSELL,
     forceOpenNewTab: !0
   });
   let l = new ResourceHubHomeRouteClass({
@@ -8563,7 +8563,7 @@ function du({
   }, i);
   let d = t ? getI18nString('community.resource_hub.template_publishing_has_been_disabled') : getI18nString('community.resource_hub.streamline_your_work_with_custom');
   return jsx(TrackingProvider, {
-    name: _$$e7.RESOURCE_HUB_NO_RESOURCES_UPSELL,
+    name: TrackingKeyEnum.RESOURCE_HUB_NO_RESOURCES_UPSELL,
     children: jsxs('div', {
       className: 'x78zum5 xdt5ytf x6s0dn4 xh8yej3 x16g6g8t xgqmno8 x1sjmt1f xl56j7k',
       children: [jsx('div', {
@@ -8638,7 +8638,7 @@ function dp({
     tab: PublishSourceType.COMMUNITY
   }, s);
   return jsx(TrackingProvider, {
-    name: _$$e7.RESOURCE_HUB_UPGRADE_UPSELL,
+    name: TrackingKeyEnum.RESOURCE_HUB_UPGRADE_UPSELL,
     properties: {
       planTier: FPlanNameType.STARTER,
       teamId: e
@@ -8938,7 +8938,7 @@ function dv({
     className: 'x78zum5 xdt5ytf x1665zp3',
     ref: n.sizeRef,
     children: jsxs(TrackingProvider, {
-      name: _$$e7.RESOURCE_HUB_INTERNAL_RESOURCES_HOME_PAGE,
+      name: TrackingKeyEnum.RESOURCE_HUB_INTERNAL_RESOURCES_HOME_PAGE,
       children: [jsx(oq, {
         tab: PublishSourceType.INTERNAL
       }), A.length > 1 && jsx('div', {
@@ -9276,7 +9276,7 @@ function dD({
     internalResourcesRoute: d,
     resourceImpressionTracking: onIntersectionChange
   })), jsx(TrackingProvider, {
-    name: _$$e7.RESOURCE_HUB_INTERNAL_RESOURCES_PAGE,
+    name: TrackingKeyEnum.RESOURCE_HUB_INTERNAL_RESOURCES_PAGE,
     children: jsx('div', {
       className: dS,
       children: n
@@ -9562,7 +9562,7 @@ function dZ() {
   let p = _$$V5(r, d, MAX_DESCRIPTION_LENGTH2);
   let g = p.filterState;
   return jsx(TrackingProvider, {
-    name: _$$e7.RESOURCE_HUB_CATEGORY,
+    name: TrackingKeyEnum.RESOURCE_HUB_CATEGORY,
     properties: {
       category: categorySlug,
       tag: tagSlug
@@ -9940,7 +9940,7 @@ function ch() {
   if (!l || !d) return jsx(Fragment, {});
   let p = isFigmakeTemplate(l);
   return jsx(TrackingProvider, {
-    name: _$$e7.RESOURCE_HUB_COMMUNITY_RESOURCE_DETAIL_PAGE,
+    name: TrackingKeyEnum.RESOURCE_HUB_COMMUNITY_RESOURCE_DETAIL_PAGE,
     properties: _,
     children: jsxs('div', {
       children: [p ? jsx(_$$Y4, {
@@ -10021,7 +10021,7 @@ function cw() {
     className: dS,
     ref: r.sizeRef,
     children: jsx(TrackingProvider, {
-      name: _$$e7.RESOURCE_HUB_SAVES_PAGE,
+      name: TrackingKeyEnum.RESOURCE_HUB_SAVES_PAGE,
       children: i
     })
   });
@@ -10359,7 +10359,7 @@ function cL({
   let w = y && b > 0;
   let j = y && !w;
   return jsx(TrackingProvider, {
-    name: _$$e7.RESOURCE_HUB_SEARCH,
+    name: TrackingKeyEnum.RESOURCE_HUB_SEARCH,
     children: jsxs('div', {
       className: dS,
       ref: p.sizeRef,
@@ -10411,9 +10411,9 @@ function cD() {
   return n.status !== 'loading' && t ? (m || e(selectViewAction({
     view: 'recentsAndSharing'
   })), jsx(TrackingProvider, {
-    name: _$$e7.RESOURCE_HUB,
-    children: jsx(Rj.Provider, {
-      value: _$$mk.RESOURCE_HUB,
+    name: TrackingKeyEnum.RESOURCE_HUB,
+    children: jsx(CommunityContext.Provider, {
+      value: CommunityContextEnum.RESOURCE_HUB,
       children: jsx(UI3ConditionalWrapper, {
         children: jsx(Route, {
           path: RESOURCE_ROUTE,
@@ -10685,8 +10685,8 @@ function cU() {
   let e = jsx(cM, {});
   return isResourceHubInternalSearchEnabled() ? jsxs('div', {
     className: 'x78zum5 x6s0dn4 x1qughib xaobbuh xozqiw3',
-    children: [e, jsx(Rj.Provider, {
-      value: _$$mk.RESOURCE_HUB,
+    children: [e, jsx(CommunityContext.Provider, {
+      value: CommunityContextEnum.RESOURCE_HUB,
       children: jsx('div', {
         className: 'xflo6bn x14coe6r',
         children: jsx(ci, {})
@@ -10833,7 +10833,7 @@ function us(e) {
     e && l(e.scrollHeight > e.offsetHeight);
   }, []);
   let c = useMemo(() => (r.length > 0 && (r[0].t = r[0].t?.trimStart(), r[r.length - 1].t = r[r.length - 1].t?.trimEnd()), r), [r]);
-  let u = _$$q4();
+  let u = useUserOrgPath();
   let m = useCallback((e = [], t) => e ? e.map((e, r) => {
     let i = (e.user_annotated ? e.user_annotated.handle : e.t) || '';
     let n = sanitizeInput(i);
@@ -12342,7 +12342,7 @@ function me({
       let e = data?.tile ?? null;
       let t = data?.index;
       return jsx(TrackingProvider, {
-        name: d ? _$$e7.PROJECT_TILES_VIEW_DROPDOWN : _$$e7.TILES_VIEW_DROP_DOWN,
+        name: d ? TrackingKeyEnum.PROJECT_TILES_VIEW_DROPDOWN : TrackingKeyEnum.TILES_VIEW_DROP_DOWN,
         enabled: showing,
         properties: {
           tileType: e?.type,
@@ -13218,7 +13218,7 @@ function m3(e, t, r) {
     }) : renderI18nText('payments.please_reach_out_to_org_admins', {
       orgName: n.name,
       admins: s && jsxs('span', {
-        children: [' ', jsx(_$$T5, {
+        children: [' ', jsx(ListFormatter, {
           formatType: 'disjunction',
           children: d
         })]
@@ -14074,7 +14074,7 @@ function _c(e) {
     }) : void 0,
     content: v,
     viewbar: jsx(_o, {})
-  }), _$$e7.FILE_BROWSER, {
+  }), TrackingKeyEnum.FILE_BROWSER, {
     view: 'drafts'
   });
 }
@@ -14821,7 +14821,7 @@ function _M() {
         })
       })]
     })
-  }), _$$e7.FILE_BROWSER, {
+  }), TrackingKeyEnum.FILE_BROWSER, {
     view: 'draftsToMove',
     selectedTab: k
   });
@@ -16279,7 +16279,7 @@ function p8({
     view: 'project',
     folderId: e,
     canEdit: c.canEdit,
-    userSpace: T ? qo.ORG : qo.PERSONAL
+    userSpace: T ? OrgPersonal.ORG : OrgPersonal.PERSONAL
   };
   let k = jsxs('div', {
     className: 'x78zum5 x167g77z x6s0dn4',
@@ -16343,7 +16343,7 @@ function p8({
       leftSide: null,
       rightSide: k
     })
-  }), _$$e7.FILE_BROWSER, S);
+  }), TrackingKeyEnum.FILE_BROWSER, S);
 }
 function p6() {
   let e;
@@ -16402,7 +16402,7 @@ function p6() {
         children: renderI18nText('file_browser.limited_space_team_projects.heading')
       })
     })
-  }), _$$e7.FILE_BROWSER, {
+  }), TrackingKeyEnum.FILE_BROWSER, {
     view: 'limitedSpaceTeamProjects'
   });
 }
@@ -16833,7 +16833,7 @@ function fk(e) {
   } = e;
   let [c, u] = useState(!1);
   let m = useSelector(e => e.currentUserOrgId);
-  let _ = _$$aq();
+  let _ = useIsMounted();
   let p = workspace.colorConfig?.colors ?? [];
   let f = e.isMainWorkspace ? p[0] : void 0;
   let g = useAtomWithSubscription(_$$aN(workspace.id));
@@ -18062,7 +18062,7 @@ function gT() {
     },
     hasCustomWASMBuild: isUsingLocalBuild,
     children: jsx(TrackingProvider, {
-      name: _$$e7.COMMUNITY_HOME_SHELF,
+      name: TrackingKeyEnum.COMMUNITY_HOME_SHELF,
       children: jsx(gy, {})
     })
   });
@@ -20418,7 +20418,7 @@ function h6(e) {
             shape: 'CIRCLE'
           }));
           logAndTrackCTA({
-            trackingContext: _$$e7.FILE_BROWSER,
+            trackingContext: TrackingKeyEnum.FILE_BROWSER,
             context: 'job_title',
             text: 'Update Photo'
           });
@@ -20817,7 +20817,7 @@ let xr = e => {
           }), (() => {
             let e = _data?.tile ?? null;
             return jsx(TrackingProvider, {
-              name: _$$e7.TILES_VIEW_DROP_DOWN,
+              name: TrackingKeyEnum.TILES_VIEW_DROP_DOWN,
               enabled: showing,
               properties: {
                 tileType: e?.type,
@@ -20846,7 +20846,7 @@ let xr = e => {
       org: m,
       orgUser: e.orgUser
     })
-  }), _$$e7.USER_DETAILS, {
+  }), TrackingKeyEnum.USER_DETAILS, {
     view: 'org_user',
     userId: t
   });
@@ -21040,7 +21040,7 @@ function x_({
           pageHeaderContent: getI18nString('file_browser.tool_bar.trash'),
           pageContent: wrapWithTracking(jsx(mj, {
             selectedTab: mw.FILES
-          }, 'trashed'), _$$e7.FILE_BROWSER, {
+          }, 'trashed'), TrackingKeyEnum.FILE_BROWSER, {
             view: 'trashed'
           })
         };
@@ -21063,7 +21063,7 @@ function x_({
           pageHeaderContent: getI18nString('file_browser.tool_bar.trash'),
           pageContent: wrapWithTracking(jsx(mj, {
             selectedTab: mw.FOLDERS
-          }, 'trashed'), _$$e7.FILE_BROWSER, {
+          }, 'trashed'), TrackingKeyEnum.FILE_BROWSER, {
             view: 'trashed'
           })
         };
@@ -21082,7 +21082,7 @@ function x_({
             pageContent: wrapWithTracking(jsx(_c, {
               folderId: n.folderId,
               userId: t.id
-            }, 'drafts'), _$$e7.FILE_BROWSER_DRAFTS, {
+            }, 'drafts'), TrackingKeyEnum.FILE_BROWSER_DRAFTS, {
               orgId: r,
               teamId: o
             })
@@ -21091,7 +21091,7 @@ function x_({
         return {
           pageContent: wrapWithTracking(jsx(p8, {
             folderId: n.folderId
-          }, `folder-${n.folderId}`), _$$e7.FOLDER_PAGE, {
+          }, `folder-${n.folderId}`), TrackingKeyEnum.FOLDER_PAGE, {
             orgId: r,
             teamId: o,
             folderId: n.folderId
@@ -21112,7 +21112,7 @@ function x_({
               pageContent: wrapWithTracking(jsx(y$, {
                 workspaceId: n.workspaceId,
                 selectedTab: n.selectedTab
-              }), _$$e7.WORKSPACE_ADMIN_SETTINGS_PAGE, {
+              }), TrackingKeyEnum.WORKSPACE_ADMIN_SETTINGS_PAGE, {
                 workspaceId: n.workspaceId,
                 workspaceViewTab: n.selectedTab
               })
@@ -21125,7 +21125,7 @@ function x_({
               pageHeaderDividerHidden: !0,
               pageContent: wrapWithTracking(n.workspaceId ? jsx(oR, {
                 workspaceId: n.workspaceId
-              }, n.workspaceId) : jsx(iZ, {}), _$$e7.WORKSPACE_DIRECTORY_PAGE, {
+              }, n.workspaceId) : jsx(iZ, {}), TrackingKeyEnum.WORKSPACE_DIRECTORY_PAGE, {
                 workspaceId: n.workspaceId,
                 workspaceGroupViewTab: n.selectedTab
               })
@@ -21139,7 +21139,7 @@ function x_({
             pageContent: wrapWithTracking(jsx(VY, {
               licenseGroupId: n.licenseGroupId,
               selectedTab: n.selectedTab
-            }), _$$e7.LICENSE_GROUP_ADMIN_SETTINGS_PAGE, {
+            }), TrackingKeyEnum.LICENSE_GROUP_ADMIN_SETTINGS_PAGE, {
               licenseGroupId: n.licenseGroupId,
               licenseGroupViewTab: n.selectedTab
             })
@@ -21155,7 +21155,7 @@ function x_({
           pageContent: wrapWithTracking(jsx(fF, {
             orgId: n.orgId,
             selectedTab: n.orgViewTab
-          }), _$$e7.ORG_PAGE, {
+          }), TrackingKeyEnum.ORG_PAGE, {
             orgId: n.orgId,
             orgViewTab: (n.orgViewTab === _$$X.HOME ? 'HOME' : n.orgViewTab) || ''
           })
@@ -21173,7 +21173,7 @@ function x_({
             selectedWorkspaceId: n.selectedWorkspaceId,
             showResourceConnectionInviteModal: n.showResourceConnectionInviteModal,
             showResourceConnectionFlyout: n.showResourceConnectionFlyout
-          }), _$$e7.ORG_ADMIN_SETTINGS_PAGE, {
+          }), TrackingKeyEnum.ORG_ADMIN_SETTINGS_PAGE, {
             orgId: r,
             orgViewTab: n.orgAdminSettingsViewTab,
             source: n.orgAdminSettingsViewTab || 'dashboard',
@@ -21186,7 +21186,7 @@ function x_({
             abandonedDraftFolderId: n.abandonedDraftFolderId,
             planType: n.adminPlanType,
             planId: n.planId
-          }), _$$e7.ABANDONED_DRAFTS_PAGE, n.adminPlanType === OrganizationType.ORG ? {
+          }), TrackingKeyEnum.ABANDONED_DRAFTS_PAGE, n.adminPlanType === OrganizationType.ORG ? {
             orgId: n.planId
           } : {
             teamId: n.planId
@@ -21215,7 +21215,7 @@ function x_({
           })]
         });
         return {
-          pageContent: wrapWithTracking(jsx(Oe, {}), _$$e7.ORG_DOMAIN_MANAGEMENT_PAGE, {
+          pageContent: wrapWithTracking(jsx(Oe, {}), TrackingKeyEnum.ORG_DOMAIN_MANAGEMENT_PAGE, {
             orgId: r
           }),
           pageHeaderContent: m
@@ -21224,7 +21224,7 @@ function x_({
         return {
           pageContent: wrapWithTracking(jsx(wu, {
             selectedTab: n.selectedTab
-          }), _$$e7.BILLING_GROUP_DASHBOARD_SETTINGS_PAGE, {
+          }), TrackingKeyEnum.BILLING_GROUP_DASHBOARD_SETTINGS_PAGE, {
             orgId: r,
             orgViewTab: n.selectedTab
           })
@@ -21242,9 +21242,9 @@ function x_({
             userId: t.id,
             accountModalTab: n.accountModalTab,
             emailPolicyToUnsubscribeFrom: n.emailPolicyToUnsubscribeFrom
-          }), _$$e7.FILE_BROWSER, {
+          }), TrackingKeyEnum.FILE_BROWSER, {
             view: 'recentsAndSharing',
-            userSpace: r ? qo.ORG : qo.PERSONAL
+            userSpace: r ? OrgPersonal.ORG : OrgPersonal.PERSONAL
           })
         };
       case 'resourceUnavailable':
@@ -21264,7 +21264,7 @@ function x_({
             pageHeaderContent: jsx(xp, {
               query
             }),
-            pageContent: wrapWithTracking(jsx(bS, {}), _$$e7.UNIFIED_SEARCH, {
+            pageContent: wrapWithTracking(jsx(bS, {}), TrackingKeyEnum.UNIFIED_SEARCH, {
               showInternalModal: r && searchScope !== SpaceAccessType.COMMUNITY,
               showCommunityModal: r && searchScope === SpaceAccessType.COMMUNITY
             })
@@ -21272,7 +21272,7 @@ function x_({
         }
       case 'seatRequests':
         return {
-          pageContent: wrapWithTracking(jsx(_$$m, {}), _$$e7.SEAT_REQUESTS_PAGE, {
+          pageContent: wrapWithTracking(jsx(_$$m, {}), TrackingKeyEnum.SEAT_REQUESTS_PAGE, {
             orgId: r,
             teamId: o,
             planType: n.adminPlanType
@@ -21292,9 +21292,9 @@ function x_({
               upgradeModalType: n.upgradeModalType,
               showProOnboardingModal: n.isProUpgrade,
               showResourceConnectionInviteModal: n.showResourceConnectionInviteModal
-            }, `team-${n.teamId}`), _$$e7.TEAM_PAGE, {
+            }, `team-${n.teamId}`), TrackingKeyEnum.TEAM_PAGE, {
               teamId: n.teamId,
-              userSpace: r ? qo.ORG : qo.PERSONAL,
+              userSpace: r ? OrgPersonal.ORG : OrgPersonal.PERSONAL,
               orgId: r
             }),
             pageHeaderContent: jsx(ho, {
@@ -21317,7 +21317,7 @@ function x_({
               selectedSecondaryTab: t,
               showResourceConnectionInviteModal: n.showResourceConnectionInviteModal,
               showResourceConnectionFlyout: n.showResourceConnectionFlyout
-            }), _$$e7.TEAM_ADMIN_PAGE, {
+            }), TrackingKeyEnum.TEAM_ADMIN_PAGE, {
               teamId: n.teamId,
               teamAdminConsoleViewTab: e,
               teamAdminConsoleViewSecondaryTab: t
@@ -21375,7 +21375,7 @@ function x_({
           })]
         });
         return {
-          pageContent: wrapWithTracking(jsx(T3, {}), _$$e7.ORG_IDP_MANAGEMENT_PAGE, {
+          pageContent: wrapWithTracking(jsx(T3, {}), TrackingKeyEnum.ORG_IDP_MANAGEMENT_PAGE, {
             orgId: r
           }),
           pageHeaderContent: f

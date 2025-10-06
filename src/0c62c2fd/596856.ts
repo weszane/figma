@@ -1,9 +1,9 @@
-import { K } from "../905/498709";
+import { createRegisterMenuEvent } from "../905/498709";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 let {
   useRegisterMenu,
   isOpenAtom
-} = K();
+} = createRegisterMenuEvent();
 let $$n0 = () => useAtomValueAndSetter(isOpenAtom)[0];
 let $$o1 = 443 == require.j ? useRegisterMenu : null;
 export const S = $$n0;

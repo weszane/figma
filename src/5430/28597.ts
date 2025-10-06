@@ -22,9 +22,9 @@ import { COMMUNITY_WIDTH, COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { getDynamicContentTranslation, normalizeSearchString, isResourcePublicWithComments } from "../figma_app/740025";
 import { hasHubFileOrPresetKey } from "../figma_app/255679";
 import { MediaType } from "../figma_app/809727";
-import { e0 as _$$e2 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { Q as _$$Q } from "../5430/662041";
-import { T as _$$T } from "../5132/203178";
+import { isResourceHubContext } from "../5132/203178";
 import { R as _$$R } from "../5430/129716";
 import { A as _$$A } from "../5430/202447";
 import { AuthFlowStep } from "../905/862321";
@@ -80,7 +80,7 @@ import { Wi, JR } from "../figma_app/162641";
 import { GS } from "../5430/342380";
 import { $ as _$$$ } from "../5430/953899";
 import { A as _$$A6 } from "../5430/728674";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { L as _$$L, I as _$$I } from "../1577/16430";
 // import { LoadingSpinner } from "../905/443820";
 import { Button } from "../905/521428";
@@ -1070,7 +1070,7 @@ function tl({
 function tu({
   resource: e
 }) {
-  let t = AG();
+  let t = useIsResourceHub();
   let r = isResourceHubProfilesEnabled();
   let i = e.community_publishers.accepted;
   let n = [...i.filter(e => hasFigmaPartnerBadge(e.badges)), ...i.filter(e => !hasFigmaPartnerBadge(e.badges))];
@@ -1429,7 +1429,7 @@ export function $$tH1({
 }) {
   if (!_$$M()) return jsx(A, {});
   {
-    let t = hasHubFile(e) ? _$$e2.COMMUNITY_HUB_FILE : isWidgetResource(e) ? _$$e2.COMMUNITY_HUB_WIDGET : _$$e2.COMMUNITY_HUB_PLUGIN;
+    let t = hasHubFile(e) ? TrackingKeyEnum.COMMUNITY_HUB_FILE : isWidgetResource(e) ? TrackingKeyEnum.COMMUNITY_HUB_WIDGET : TrackingKeyEnum.COMMUNITY_HUB_PLUGIN;
     return jsx(_$$Q, {
       resource: e,
       viewContext: t
@@ -1565,7 +1565,7 @@ function t$({
   }) : null;
 }
 function tz() {
-  let e = _$$T();
+  let e = isResourceHubContext();
   return {
     showTags: !e,
     showSidebarPublisherDetailsContainer: e,

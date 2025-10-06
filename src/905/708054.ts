@@ -11,7 +11,7 @@ import { popModalStack, hideModal } from "../905/156213";
 import { HubAction, FigmaResourceType } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
 import { isSuccess, isFailure } from "../905/18797";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerLegacyModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
 function y() {
@@ -1619,7 +1619,7 @@ let w = class e extends Component {
       className: "change_profile_handle--handleModal--VvHfq modal--modalShadow--d-rJf",
       popStack: !0,
       children: jsxs(TrackingProvider, {
-        name: e0.PROFILE_CREATE_MODAL,
+        name: TrackingKeyEnum.PROFILE_CREATE_MODAL,
         properties: e,
         children: [jsx("div", {
           className: "change_profile_handle--contentHeaderImage--P8Bdk",

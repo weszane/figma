@@ -31,11 +31,11 @@ import { showModalHandler, hideModalHandler } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { KindEnum } from "../905/129884";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { S as _$$S } from "../5430/743953";
 import { Kj, bb, W6 } from "../7222/418961";
-import { Rj, mk } from "../figma_app/999312";
+import { CommunityContext, CommunityContextEnum } from "../figma_app/999312";
 import { X6 } from "../5430/28597";
 import { Y as _$$Y } from "../5430/601486";
 import { Q as _$$Q } from "../5430/117345";
@@ -51,7 +51,7 @@ import { ITemplateType } from "../905/862883";
 import { noop } from "../5430/262192";
 import { H as _$$H } from "../5430/992445";
 import { to as _$$to } from "../figma_app/764679";
-import { H as _$$H2 } from "../905/548668";
+import { slideOrCooperNewFileUrl } from "../905/548668";
 let $ = (e, t, r) => {
   e(showModalHandler({
     type: Z,
@@ -215,10 +215,10 @@ let Z = registerModal(function (e) {
     sharedRouteParams: x
   });
   return jsx(UI3ConditionalWrapper, {
-    children: jsx(Rj.Provider, {
-      value: mk.RESOURCE_HUB,
+    children: jsx(CommunityContext.Provider, {
+      value: CommunityContextEnum.RESOURCE_HUB,
       children: jsx(TrackingProvider, {
-        name: e0.RESOURCE_HUB_LIGHTBOX_RDP,
+        name: TrackingKeyEnum.RESOURCE_HUB_LIGHTBOX_RDP,
         properties: en,
         children: jsx(ModalRootComponent, {
           manager: et,
@@ -408,7 +408,7 @@ function eu(e) {
     }) : noop.addResourceUse({
       resourceId: e.id
     });
-    let s = _$$H2(FFileType.SLIDES, t);
+    let s = slideOrCooperNewFileUrl(FFileType.SLIDES, t);
     customHistory.redirect(s, "_blank");
   } else {
     let t = r ? void 0 : e.id;
@@ -471,7 +471,7 @@ function e_(e) {
     }) : noop.addResourceUse({
       resourceId: e.id
     });
-    let s = _$$H2(FFileType.COOPER, t);
+    let s = slideOrCooperNewFileUrl(FFileType.COOPER, t);
     customHistory.redirect(s, "_blank");
   } else {
     let t = r ? void 0 : e.id;

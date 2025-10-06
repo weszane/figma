@@ -18,7 +18,7 @@ import { getCurrentLiveGraphClient } from '../905/761735';
 import { sendWithRetry } from '../905/910117';
 import { t as _$$t2 } from '../figma_app/32680';
 import { ConfigGroups, isReduxDeprecationCutover } from '../figma_app/121751';
-import { T as _$$T } from '../figma_app/257703';
+import { ListFormatter } from '../figma_app/257703';
 import { trackFileEvent, trackRoleEvent } from '../figma_app/314264';
 import { checkDomainExists } from '../figma_app/336853';
 import { arrayToIdMap, mapResourceCategoryToRole } from '../figma_app/349248';
@@ -49,7 +49,7 @@ let orgGuestsBannedModal = registerModal(e => {
         className: jE,
         children: renderI18nText('permissions.guests_banned.invite_wasnt_sent_org_name', {
           numEmails: e.emails.length,
-          listEmails: jsx(_$$T, {
+          listEmails: jsx(ListFormatter, {
             children: e.emails.map(e => jsx('span', {
               children: e
             }, e))
@@ -89,7 +89,7 @@ let requestAccessWarningModal = registerModal(e => {
         className: jE,
         children: [renderI18nText('permissions.invites_require_access.invites_sent_but_will_require_access_org_name', {
           numEmails: e.emails.length,
-          listEmails: jsx(_$$T, {
+          listEmails: jsx(ListFormatter, {
             children: e.emails.map(e => jsx('span', {
               children: e
             }, e))
@@ -125,7 +125,7 @@ let inviteWhiteListErrorModal = registerModal(e => {
         className: jE,
         children: renderI18nText('permissions.invites_whitelist.the_following_users_were_not_approved_guests_in_org_name_org_please_request_access_for_them', {
           numEmails: e.emails.length,
-          listEmails: jsx(_$$T, {
+          listEmails: jsx(ListFormatter, {
             children: e.emails.map(e => jsx('span', {
               children: e
             }, e))
@@ -158,7 +158,7 @@ let deprovisionedUserModal = registerModal(e => {
         className: jE,
         children: renderI18nText('permissions.deprovisioned_users.these_users_are_no_longer_in_the_org_name_organization_add_them_again_through_SCIM', {
           numEmails: e.emails.length,
-          listEmails: jsx(_$$T, {
+          listEmails: jsx(ListFormatter, {
             children: e.emails.map(e => jsx('span', {
               children: e
             }, e))
@@ -191,7 +191,7 @@ let orgRestrictedInviteModal = registerModal(e => {
         className: jE,
         children: renderI18nText('permissions.org_restricted_invite.these_invites_couldn_t_be_sent_with_org_name.seat_rename', {
           numEmails: e.emails.length,
-          listEmails: jsx(_$$T, {
+          listEmails: jsx(ListFormatter, {
             children: e.emails.map(e => jsx('span', {
               children: e
             }, e))

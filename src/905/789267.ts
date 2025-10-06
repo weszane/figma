@@ -21,7 +21,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getEditorTheme } from "../905/389382";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { w as _$$w } from "../figma_app/171404";
 import { T as _$$T } from "../905/434246";
@@ -56,7 +56,7 @@ export let $$N0 = registerModal(function ({
     onClose: () => {
       logAndTrackCTA({
         ...P,
-        trackingContext: e0.AUTO_UPGRADE_CONFIRMATION_MODAL,
+        trackingContext: TrackingKeyEnum.AUTO_UPGRADE_CONFIRMATION_MODAL,
         trackingDescriptor: UpgradeAction.CANCEL
       });
       i();
@@ -81,7 +81,7 @@ export let $$N0 = registerModal(function ({
       }));
     },
     children: jsx(TrackingProvider, {
-      name: e0.AUTO_UPGRADE_CONFIRMATION_MODAL,
+      name: TrackingKeyEnum.AUTO_UPGRADE_CONFIRMATION_MODAL,
       properties: P,
       trackingOptions: U,
       children: jsx(setupThemeContext, {

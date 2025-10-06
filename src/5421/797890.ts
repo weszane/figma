@@ -26,7 +26,7 @@ import { isValidValue, normalizeValue, MIXED_MARKER, valueOrFallback, isInvalidV
 import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { I as _$$I } from "../5421/927984";
-import { _P } from "../figma_app/2590";
+import { trackPrototypeScaleChangeEvent } from "../figma_app/2590";
 import { ClipboardOperation } from "../figma_app/915202";
 import { KindEnum } from "../905/129884";
 import { KeyboardReceiver } from "../905/826900";
@@ -75,7 +75,7 @@ import { lg } from "../figma_app/651753";
 import { t as _$$t2 } from "../5421/711842";
 import { b as _$$b } from "../5421/909298";
 import { DraggableModalManager, ArrowPosition, HEADER_HEIGHT } from "../905/748636";
-import { G as _$$G } from "../905/298663";
+import { useIsCodeViewPanel } from "../905/298663";
 import { x as _$$x } from "../897/253631";
 import { c as _$$c, P as _$$P3 } from "../905/200950";
 import { prototypeInteractionModalWidth, prototypeInteractionModalExpandedWidth } from "../figma_app/786175";
@@ -317,7 +317,7 @@ function ew(e) {
         n({
           interactionType: o
         });
-        t(_P({
+        t(trackPrototypeScaleChangeEvent({
           name: "Prototype Interaction Type Changed",
           params: {
             newType: o,
@@ -798,7 +798,7 @@ let $$e90 = memo(function ({
   if (useEffect(() => (document.addEventListener("keydown", c), document.addEventListener("keyup", p), () => {
     document.removeEventListener("keydown", c);
     document.removeEventListener("keyup", p);
-  }), [c, p]), _$$G() || !t || !l) return null;
+  }), [c, p]), useIsCodeViewPanel() || !t || !l) return null;
   let u = selectedInteractions.some(e => e.actions?.some(e => "CONDITIONAL" === e.connectionType));
   return jsx(e7, {
     category: n,
@@ -901,7 +901,7 @@ let e7 = memo(function ({
   Y && (eA = eS);
   let [eL, eR] = useState(x);
   let eM = useCallback(() => {
-    B || (V(_P({
+    B || (V(trackPrototypeScaleChangeEvent({
       name: "prototype_interaction_details_modal_dragged"
     })), H(!0));
   }, [V, B, H]);
@@ -924,7 +924,7 @@ let e7 = memo(function ({
     eR(x);
   }, [x]);
   useEffect(() => () => {
-    V(_P({
+    V(trackPrototypeScaleChangeEvent({
       name: "prototype_interaction_details_modal_closed"
     }));
   }, [V]);
@@ -978,7 +978,7 @@ let e7 = memo(function ({
   } = _$$b();
   let ts = useAppModelProperty("currentPage");
   let td = useCallback((e, t, n, o) => {
-    V(_P({
+    V(trackPrototypeScaleChangeEvent({
       name: "Prototype delete action",
       params: {
         action: e,
@@ -1175,7 +1175,7 @@ let e7 = memo(function ({
       }
       ez && (!Y || t) && ez(!0);
       e9 && e9(n);
-      V(_P({
+      V(trackPrototypeScaleChangeEvent({
         name: "Prototype add action",
         params: {
           action: e.connectionType ? e.connectionType : "NONE",
@@ -1476,7 +1476,7 @@ function te({
         total_num_interactions: n.length
       });
       fullscreenValue.showVisualBellWithUndo("selected-matching-noodles", o, !1);
-      r(_P({
+      r(trackPrototypeScaleChangeEvent({
         name: "prototype_select_matching_interactions",
         params: {
           num_connectors: n.length

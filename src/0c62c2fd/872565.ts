@@ -13,7 +13,7 @@ import { getAtomMutate } from "../figma_app/566371";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { ms, c$, wv } from "../figma_app/236327";
 import { BigTextInputForwardRef, ButtonBasePrimary, ButtonSecondary, ButtonBasePrimaryTracked } from "../figma_app/637027";
-import { p as _$$p } from "../905/991924";
+import { PlaybackInput } from "../905/991924";
 import { LazyInputForwardRef } from "../905/408237";
 import { BlueLoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
@@ -44,7 +44,7 @@ import { b as _$$b, A as _$$A } from "../figma_app/965813";
 import { X as _$$X } from "../905/698965";
 import { OrganizationType } from "../905/833838";
 import { KindEnum } from "../905/129884";
-import { e0 as _$$e2 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { createNoOpValidator } from "../figma_app/181241";
 import { isElementHidden } from "../905/826900";
 import { HeaderModal } from "../905/519092";
@@ -1108,7 +1108,7 @@ export class $$e32 extends PureComponent {
         throwTypeError(_);
     }
     return jsx(TrackingProvider, {
-      name: _$$e2.FILE_MOVE_MODAL,
+      name: TrackingKeyEnum.FILE_MOVE_MODAL,
       properties: t,
       children: jsxs(HeaderModal, {
         title: i,
@@ -1354,7 +1354,7 @@ export function $$e95(e) {
           children: jsx(R, {
             team,
             isBackgroundTransparent: !0,
-            trackingContextName: _$$e2.FILE_MOVE_MODAL
+            trackingContextName: TrackingKeyEnum.FILE_MOVE_MODAL
           })
         })]
       })]
@@ -1422,13 +1422,13 @@ export function $$tt6(e) {
             isSearchingFolders: !!fileMove.isSearchResult,
             onDoubleClick: e.onDoubleClick,
             onFileMoveContextMenu: e.onFileMoveContextMenu,
-            trackingContextName: _$$e2.FILE_MOVE_MODAL
+            trackingContextName: TrackingKeyEnum.FILE_MOVE_MODAL
           }, `${r.teamId} ${r.id}`);
         })]
       }, `Team Section ${s}`);
     }), !e.orgId && jsx(eH, {
       teamNameMaxWidth: e.teamNameMaxWidth,
-      trackingContextName: _$$e2.FILE_MOVE_MODAL,
+      trackingContextName: TrackingKeyEnum.FILE_MOVE_MODAL,
       orgId: e.orgId,
       selectedView,
       teams: i,
@@ -1472,7 +1472,7 @@ function tr(e) {
     },
     children: o ? jsx("div", {
       className: eG,
-      children: jsx(_$$p, {
+      children: jsx(PlaybackInput, {
         className: "file_move--renameInput--WL-5T",
         placeholderValue: getSidebarPath(folder),
         submit: e => s(folder, e),

@@ -9,7 +9,7 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { getSelectedFile } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
-import { h as _$$h } from "../905/438683";
+import { openResiger } from "../905/438683";
 import { UU } from "../figma_app/770088";
 let g = e => {
   let t = e.getState();
@@ -19,7 +19,7 @@ let g = e => {
   t.mirror.appModel.showUi || fullscreenValue.triggerAction("toggle-ui");
   t.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS && fullscreenValue.triggerAction("set-tool-comments");
   requestAnimationFrame(() => {
-    _$$h();
+    openResiger();
   });
 };
 let f = (e, t, r, n) => {
@@ -44,7 +44,7 @@ let $$E0 = createOptimistThunk((e, t) => {
       message: n,
       type: "comments-opted-in",
       button: r,
-      onDismiss: () => { },
+      onDismiss: () => {},
       timeoutOverride: 15e3
     }));
   }
@@ -112,7 +112,7 @@ let $$I4 = createOptimistThunk((e, t) => {
       message: r,
       type: "dev-mode-opted-in",
       button: t,
-      onDismiss: () => { },
+      onDismiss: () => {},
       timeoutOverride: 15e3
     }));
   }

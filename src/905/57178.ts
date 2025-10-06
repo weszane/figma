@@ -1,274 +1,454 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { noop } from 'lodash-es';
-import { Button } from "../905/521428";
-import { ButtonPrimitive } from "../905/632989";
-import { Multiplayer } from "../figma_app/763686";
-import { desktopAPIInstance } from "../figma_app/876459";
-import { customHistory } from "../905/612521";
-import { ignoreCommandOrShift } from "../905/63728";
-import { tu, oJ } from "../figma_app/385215";
-import { getViewerInstance } from "../figma_app/632319";
-import { renderI18nText } from "../905/303541";
-import { showDropdownThunk } from "../905/929976";
-import { hideTooltip } from "../905/765855";
-import { postUserFlag } from "../905/985254";
-import { HG } from "../figma_app/440875";
-import { T as _$$T, N as _$$N } from "../905/847283";
-import { getSelectedViewType } from "../figma_app/386952";
-import { a as _$$a } from "../905/298663";
-import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
-import { useIsFullscreenSitesView } from "../905/561485";
-import { registerTooltip } from "../905/524523";
-let w = "view_user_profile_tooltip--base--SgkjR tooltip--column--zo-M5 text--fontPos11--2LvXf text--_fontBase--QdLsd";
-let C = "view_user_profile_tooltip--handle--RzZyC";
-let T = "view_user_profile_tooltip--userHandleAndLink--b3O-1 view_user_profile_tooltip--base--SgkjR tooltip--column--zo-M5 text--fontPos11--2LvXf text--_fontBase--QdLsd";
-let k = "view_user_profile_tooltip--line--BVW2y";
-export var $$R0 = (e => (e.VIEW_PROFILE = "view-profile", e.EDIT_NAME = "edit-name", e.START_OBSERVE = "start-observe", e.STOP_OBSERVE = "stop-observe", e.START_PRESENTING = "start-presenting", e.STOP_PRESENTING = "stop-presenting", e.FOLLOW_PRESENTER = "follow-presenter", e.NOMINATE_PRESENTER = "nominate-presenter", e.NONE = "none", e))($$R0 || {});
-function N(e) {
+import { noop } from 'lodash-es'
+import { useCallback } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { jsx, jsxs } from "react/jsx-runtime"
+import { ignoreCommandOrShift } from "../905/63728"
+import { isCodeViewPanel } from "../905/298663"
+import { renderI18nText } from "../905/303541"
+import { Button } from "../905/521428"
+import { registerTooltip } from "../905/524523"
+import { useIsFullscreenSitesView } from "../905/561485"
+import { customHistory } from "../905/612521"
+import { ButtonPrimitive } from "../905/632989"
+import { hideTooltip } from "../905/765855"
+import { SpotlightEventType, useSpotlightCTATracking } from "../905/847283"
+import { showDropdownThunk } from "../905/929976"
+import { postUserFlag } from "../905/985254"
+import { cancelNomination, nominatePresenter } from "../figma_app/385215"
+import { getSelectedViewType } from "../figma_app/386952"
+import { useIsPresentationAllowed } from "../figma_app/440875"
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876"
+import { getViewerInstance } from "../figma_app/632319"
+import { Multiplayer } from "../figma_app/763686"
+import { desktopAPIInstance } from "../figma_app/876459"
+
+let w = "view_user_profile_tooltip--base--SgkjR tooltip--column--zo-M5 text--fontPos11--2LvXf text--_fontBase--QdLsd"
+let C = "view_user_profile_tooltip--handle--RzZyC"
+let T = "view_user_profile_tooltip--userHandleAndLink--b3O-1 view_user_profile_tooltip--base--SgkjR tooltip--column--zo-M5 text--fontPos11--2LvXf text--_fontBase--QdLsd"
+let k = "view_user_profile_tooltip--line--BVW2y"
+// Define the action types for the user profile tooltip
+export enum UserProfileTooltipAction {
+  VIEW_PROFILE = "view-profile",
+  EDIT_NAME = "edit-name",
+  START_OBSERVE = "start-observe",
+  STOP_OBSERVE = "stop-observe",
+  START_PRESENTING = "start-presenting",
+  STOP_PRESENTING = "stop-presenting",
+  FOLLOW_PRESENTER = "follow-presenter",
+  NOMINATE_PRESENTER = "nominate-presenter",
+  NONE = "none",
+}
+
+// Component for displaying user handle with a primary button
+interface UserProfileTooltipContentProps {
+  userHandle: string
+  actionText: React.ReactNode
+  actionCallback: (e: React.MouseEvent) => void
+}
+
+function UserProfileTooltipContent({ userHandle, actionText, actionCallback }: UserProfileTooltipContentProps) {
   return jsxs("div", {
     className: w,
-    children: [jsx("span", {
-      className: C,
-      dir: "auto",
-      children: e.userHandle
-    }), jsx("div", {
-      className: k
-    }), jsx(Button, {
-      variant: "primary",
-      onClick: e.actionCallback,
-      children: e.actionText
-    })]
-  });
+    children: [
+      jsx("span", {
+        className: C,
+        dir: "auto",
+        children: userHandle,
+      }),
+      jsx("div", {
+        className: k,
+      }),
+      jsx(Button, {
+        variant: "primary",
+        onClick: actionCallback,
+        children: actionText,
+      }),
+    ],
+  })
 }
-function P(e) {
+
+// Component for displaying user handle with a primitive button
+interface UserProfileTooltipLinkProps {
+  userHandle: string
+  actionText: React.ReactNode
+  actionCallback: (e: React.MouseEvent) => void
+}
+
+function UserProfileTooltipLink({ userHandle, actionText, actionCallback }: UserProfileTooltipLinkProps) {
   return jsxs(ButtonPrimitive, {
-    onClick: e.actionCallback,
+    onClick: actionCallback,
     className: T,
-    children: [jsx("span", {
-      className: C,
-      dir: "auto",
-      children: e.userHandle
-    }), e.actionText]
-  });
+    children: [
+      jsx("span", {
+        className: C,
+        dir: "auto",
+        children: userHandle,
+      }),
+      actionText,
+    ],
+  })
 }
-function O(e) {
-  let t = useDispatch();
-  let {
-    buttonCallback,
-    linkCallback,
-    disabled
-  } = e;
-  let c = useCallback(e => {
-    linkCallback(e);
-    t(hideTooltip());
-  }, [linkCallback, t]);
-  let u = useCallback(e => {
-    buttonCallback && (buttonCallback(e), t(hideTooltip()));
-  }, [buttonCallback, t]);
-  let p = jsxs(ButtonPrimitive, {
-    onClick: c,
+
+// Component for displaying user handle with both link and button
+interface UserProfileTooltipCompositeProps {
+  userHandle: string
+  linkText: React.ReactNode
+  linkCallback: (e: React.MouseEvent) => void
+  buttonText: React.ReactNode
+  buttonCallback?: (e: React.MouseEvent) => void
+  buttonVariant: "primary" | "secondary"
+  disabled?: boolean
+}
+
+function UserProfileTooltipComposite({
+  userHandle,
+  linkText,
+  linkCallback,
+  buttonText,
+  buttonCallback,
+  buttonVariant,
+  disabled,
+}: UserProfileTooltipCompositeProps) {
+  const dispatch = useDispatch<AppDispatch>()
+
+  const handleLinkClick = useCallback((e: React.MouseEvent) => {
+    linkCallback(e)
+    dispatch(hideTooltip())
+  }, [linkCallback, dispatch])
+
+  const handleButtonClick = useCallback((e: React.MouseEvent) => {
+    if (buttonCallback) {
+      buttonCallback(e)
+      dispatch(hideTooltip())
+    }
+  }, [buttonCallback, dispatch])
+
+  const linkElement = jsxs(ButtonPrimitive, {
+    onClick: handleLinkClick,
     className: T,
     disabled,
-    children: [jsx("span", {
-      className: C,
-      dir: "auto",
-      children: e.userHandle
-    }), e.linkText]
-  });
+    children: [
+      jsx("span", {
+        className: C,
+        dir: "auto",
+        children: userHandle,
+      }),
+      linkText,
+    ],
+  })
+
   return jsxs("div", {
-    className: w,
-    "data-preferred-theme": "secondary" === e.buttonVariant ? "dark" : void 0,
-    children: [p, jsx("div", {
-      className: k
-    }), jsx(Button, {
-      variant: e.buttonVariant,
-      onClick: u,
-      disabled: "secondary" === e.buttonVariant && !e.buttonCallback,
-      children: e.buttonText
-    })]
-  });
+    "className": w,
+    "data-preferred-theme": buttonVariant === "secondary" ? "dark" : void 0,
+    "children": [
+      linkElement,
+      jsx("div", {
+        className: k,
+      }),
+      jsx(Button, {
+        variant: buttonVariant,
+        onClick: handleButtonClick,
+        disabled: buttonVariant === "secondary" && !buttonCallback,
+        children: buttonText,
+      }),
+    ],
+  })
 }
-function D(e) {
-  return jsx(P, {
+
+// Component for displaying user handle with no action
+interface UserProfileTooltipNoneProps {
+  userHandle: string
+}
+
+function UserProfileTooltipNone({ userHandle }: UserProfileTooltipNoneProps) {
+  return jsx(UserProfileTooltipLink, {
     actionText: null,
     actionCallback: noop,
-    userHandle: e.userHandle
-  });
+    userHandle,
+  })
 }
-let L = {
-  "edit-name": function (e) {
-    let t = useDispatch();
-    return jsx(P, {
+
+// Action handlers for different tooltip actions
+const ACTION_HANDLERS: Record<UserProfileTooltipAction, React.FC<any>> = {
+  [UserProfileTooltipAction.EDIT_NAME]: function EditNameHandler({ userHandle }: { userHandle: string }) {
+    const dispatch = useDispatch<AppDispatch>()
+
+    const handleEditName = useCallback((e: React.MouseEvent) => {
+      e.stopPropagation()
+      e.preventDefault()
+      dispatch(showDropdownThunk({
+        type: "multiplayer-nickname-dropdown",
+      }))
+    }, [dispatch])
+
+    return jsx(UserProfileTooltipLink, {
       actionText: renderI18nText("avatar.tooltip.edit_name"),
-      actionCallback: e => {
-        e.stopPropagation();
-        e.preventDefault();
-        t(showDropdownThunk({
-          type: "multiplayer-nickname-dropdown"
-        }));
-      },
-      userHandle: e.userHandle
-    });
+      actionCallback: handleEditName,
+      userHandle,
+    })
   },
-  "start-observe": function (e) {
-    let t = useDispatch();
-    let i = HG();
-    if (useIsSelectedFigmakeFullscreen()) return jsx(D, {
-      ...e
-    });
-    let r = i => {
-      i.stopPropagation();
-      Multiplayer && null != e.userSessionID && (Multiplayer.observeUser(e.userSessionID), t(postUserFlag({
-        aware_of_observation_mode: !0
-      })));
-    };
-    return i ? jsx(P, {
-      actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_follow"),
-      actionCallback: r,
-      userHandle: e.userHandle
-    }) : jsx(P, {
-      actionText: renderI18nText("collaboration.spotlight.tooltip.legacy.click_to_observe_user"),
-      actionCallback: r,
-      userHandle: e.userHandle
-    });
-  },
-  "stop-observe": function (e) {
-    let t = HG();
-    let i = e => {
-      e.stopPropagation();
-      Multiplayer.observeUser(-1);
-    };
-    return t ? jsx(P, {
-      actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_unfollow"),
-      actionCallback: i,
-      userHandle: e.userHandle
-    }) : jsx(P, {
-      actionText: renderI18nText("collaboration.spotlight.tooltip.legacy.click_to_stop_observing_user"),
-      actionCallback: i,
-      userHandle: e.userHandle
-    });
-  },
-  "view-profile": function (e) {
-    let t = ignoreCommandOrShift(t => {
-      t.stopPropagation();
-      customHistory.redirect(e.profileUrl, desktopAPIInstance ? void 0 : "_blank");
-    });
-    return jsx(P, {
-      actionText: renderI18nText("avatar.tooltip.view_profile"),
-      actionCallback: t,
-      userHandle: e.userHandle
-    });
-  },
-  "start-presenting": function (e) {
-    let t = _$$T();
-    let i = getSelectedViewType();
-    return jsx(N, {
-      actionText: renderI18nText("collaboration.spotlight.tooltip.spotlight_me"),
-      actionCallback: e => {
-        e.stopPropagation();
-        e.preventDefault();
-        t(_$$N.START);
-        "prototype" === i ? getViewerInstance()?.startPresenting() : Multiplayer.startPresenting();
-      },
-      userHandle: e.userHandle
-    });
-  },
-  "stop-presenting": function (e) {
-    return jsx(P, {
-      actionText: renderI18nText("collaboration.spotlight.tooltip.stop_presenting"),
-      actionCallback: e => {
-        e.stopPropagation();
-        e.preventDefault();
-        Multiplayer.stopPresenting();
-      },
-      userHandle: e.userHandle
-    });
-  },
-  "follow-presenter": function (e) {
-    let t = useDispatch();
-    return jsx(P, {
-      actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_follow"),
-      actionCallback: i => {
-        i.stopPropagation();
-        null != e.userSessionID && (Multiplayer.observeUser(e.userSessionID), t(postUserFlag({
-          aware_of_observation_mode: !0
-        })));
-      },
-      userHandle: renderI18nText("avatar.tooltip.spotlight_user_handle", {
-        handle: e.userHandle
+
+  [UserProfileTooltipAction.START_OBSERVE]: function StartObserveHandler({
+    userHandle,
+    userSessionID,
+  }: {
+    userHandle: string
+    userSessionID?: number
+  }) {
+    const dispatch = useDispatch()
+    const isPresentationAllowed = useIsPresentationAllowed()
+    const isFullscreen = useIsSelectedFigmakeFullscreen()
+
+    if (isFullscreen) {
+      return jsx(UserProfileTooltipNone, {
+        userHandle,
       })
-    });
+    }
+
+    const handleStartObserve = useCallback((e: React.MouseEvent) => {
+      e.stopPropagation()
+      if (Multiplayer && userSessionID != null) {
+        Multiplayer.observeUser(userSessionID)
+        dispatch(postUserFlag({
+          aware_of_observation_mode: true,
+        }))
+      }
+    }, [userSessionID, dispatch])
+
+    return isPresentationAllowed
+      ? jsx(UserProfileTooltipLink, {
+        actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_follow"),
+        actionCallback: handleStartObserve,
+        userHandle,
+      })
+      : jsx(UserProfileTooltipLink, {
+        actionText: renderI18nText("collaboration.spotlight.tooltip.legacy.click_to_observe_user"),
+        actionCallback: handleStartObserve,
+        userHandle,
+      })
   },
-  "nominate-presenter": function (e) {
-    let t = useSelector(e => e.multiplayer);
-    let i = useIsFullscreenSitesView();
-    let s = t && t.sessionNominatedByCurrentUser === e.userSessionID;
-    let o = tu();
-    let l = useCallback(() => {
-      o(e.userSessionID, t);
-    }, [o, e.userSessionID, t]);
-    let d = oJ();
-    let h = useCallback(() => {
-      null != e.userSessionID && d(e.userSessionID, t);
-    }, [e.userSessionID, d, t]);
-    let f = ignoreCommandOrShift(t => {
-      t.stopPropagation();
-      customHistory.redirect(e.profileUrl, desktopAPIInstance ? void 0 : "_blank");
-    });
-    let _ = i && !!e.sitesViewState && _$$a(e.sitesViewState);
-    return s ? jsx(O, {
-      linkText: renderI18nText("avatar.tooltip.view_profile"),
-      linkCallback: f,
-      buttonText: renderI18nText("collaboration.spotlight.tooltip.cancel_ask_to_spotlight"),
-      buttonCallback: h,
-      buttonVariant: "secondary",
-      userHandle: e.userHandle
-    }) : jsx(O, {
-      linkText: renderI18nText("avatar.tooltip.view_profile"),
-      linkCallback: f,
-      disabled: _,
-      buttonText: renderI18nText("collaboration.spotlight.tooltip.ask_to_spotlight"),
-      buttonCallback: l,
-      buttonVariant: "primary",
-      userHandle: e.userHandle
-    });
+
+  [UserProfileTooltipAction.STOP_OBSERVE]: function StopObserveHandler({ userHandle }: { userHandle: string }) {
+    const isPresentationAllowed = useIsPresentationAllowed()
+
+    const handleStopObserve = useCallback((e: React.MouseEvent) => {
+      e.stopPropagation()
+      Multiplayer.observeUser(-1)
+    }, [])
+
+    return isPresentationAllowed
+      ? jsx(UserProfileTooltipLink, {
+        actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_unfollow"),
+        actionCallback: handleStopObserve,
+        userHandle,
+      })
+      : jsx(UserProfileTooltipLink, {
+        actionText: renderI18nText("collaboration.spotlight.tooltip.legacy.click_to_stop_observing_user"),
+        actionCallback: handleStopObserve,
+        userHandle,
+      })
   },
-  none: D
-};
-let $$F1 = registerTooltip("view_user_profile", function (e) {
-  let {
+
+  [UserProfileTooltipAction.VIEW_PROFILE]: function ViewProfileHandler({
+    userHandle,
+    profileUrl,
+  }: {
+    userHandle: string
+    profileUrl: string
+  }) {
+    const handleViewProfile = ignoreCommandOrShift((e: React.MouseEvent) => {
+      e.stopPropagation()
+      customHistory.redirect(profileUrl, desktopAPIInstance ? undefined : "_blank")
+    })
+
+    return jsx(UserProfileTooltipLink, {
+      actionText: renderI18nText("avatar.tooltip.view_profile"),
+      actionCallback: handleViewProfile,
+      userHandle,
+    })
+  },
+
+  [UserProfileTooltipAction.START_PRESENTING]: function StartPresentingHandler({ userHandle }: { userHandle: string }) {
+    const trackSpotlightCTA = useSpotlightCTATracking()
+    const viewType = getSelectedViewType()
+
+    const handleStartPresenting = useCallback((e: React.MouseEvent) => {
+      e.stopPropagation()
+      e.preventDefault()
+      trackSpotlightCTA(SpotlightEventType.START)
+      if (viewType === "prototype") {
+        getViewerInstance()?.startPresenting()
+      }
+      else {
+        Multiplayer.startPresenting()
+      }
+    }, [trackSpotlightCTA, viewType])
+
+    return jsx(UserProfileTooltipContent, {
+      actionText: renderI18nText("collaboration.spotlight.tooltip.spotlight_me"),
+      actionCallback: handleStartPresenting,
+      userHandle,
+    })
+  },
+
+  [UserProfileTooltipAction.STOP_PRESENTING]: function StopPresentingHandler({ userHandle }: { userHandle: string }) {
+    const handleStopPresenting = useCallback((e: React.MouseEvent) => {
+      e.stopPropagation()
+      e.preventDefault()
+      Multiplayer.stopPresenting()
+    }, [])
+
+    return jsx(UserProfileTooltipLink, {
+      actionText: renderI18nText("collaboration.spotlight.tooltip.stop_presenting"),
+      actionCallback: handleStopPresenting,
+      userHandle,
+    })
+  },
+
+  [UserProfileTooltipAction.FOLLOW_PRESENTER]: function FollowPresenterHandler({
+    userHandle,
+    userSessionID,
+  }: {
+    userHandle: string
+    userSessionID?: number
+  }) {
+    const dispatch = useDispatch()
+
+    const handleFollowPresenter = useCallback((e: React.MouseEvent) => {
+      e.stopPropagation()
+      if (userSessionID != null) {
+        Multiplayer.observeUser(userSessionID)
+        dispatch(postUserFlag({
+          aware_of_observation_mode: true,
+        }))
+      }
+    }, [userSessionID, dispatch])
+
+    return jsx(UserProfileTooltipLink, {
+      actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_follow"),
+      actionCallback: handleFollowPresenter,
+      userHandle: renderI18nText("avatar.tooltip.spotlight_user_handle", {
+        handle: userHandle,
+      }),
+    })
+  },
+
+  [UserProfileTooltipAction.NOMINATE_PRESENTER]: function NominatePresenterHandler({
+    userHandle,
+    profileUrl,
+    userSessionID,
+    sitesViewState,
+  }: {
+    userHandle: string
+    profileUrl: string
+    userSessionID?: string
+    sitesViewState?: number
+  }) {
+    const multiplayerState = useSelector((state: any) => state.multiplayer)
+    const isFullscreenSitesView = useIsFullscreenSitesView()
+    const isNominated = multiplayerState && multiplayerState.sessionNominatedByCurrentUser === userSessionID
+
+    const nominate = nominatePresenter()
+    const handleNominate = useCallback(() => {
+      if (userSessionID !== undefined) {
+        nominate(userSessionID, multiplayerState)
+      }
+    }, [nominate, userSessionID, multiplayerState])
+
+    const cancel = cancelNomination()
+    const handleCancelNomination = useCallback(() => {
+      if (userSessionID != null) {
+        cancel(userSessionID, multiplayerState)
+      }
+    }, [userSessionID, cancel, multiplayerState])
+
+    const handleViewProfile = ignoreCommandOrShift((e: React.MouseEvent) => {
+      e.stopPropagation()
+      customHistory.redirect(profileUrl, desktopAPIInstance ? undefined : "_blank")
+    })
+
+    const isDisabled = isFullscreenSitesView && sitesViewState !== undefined && isCodeViewPanel(sitesViewState)
+
+    return isNominated
+      ? jsx(UserProfileTooltipComposite, {
+        linkText: renderI18nText("avatar.tooltip.view_profile"),
+        linkCallback: handleViewProfile,
+        buttonText: renderI18nText("collaboration.spotlight.tooltip.cancel_ask_to_spotlight"),
+        buttonCallback: handleCancelNomination,
+        buttonVariant: "secondary",
+        userHandle,
+      })
+      : jsx(UserProfileTooltipComposite, {
+        linkText: renderI18nText("avatar.tooltip.view_profile"),
+        linkCallback: handleViewProfile,
+        disabled: isDisabled,
+        buttonText: renderI18nText("collaboration.spotlight.tooltip.ask_to_spotlight"),
+        buttonCallback: handleNominate,
+        buttonVariant: "primary",
+        userHandle,
+      })
+  },
+
+  [UserProfileTooltipAction.NONE]: UserProfileTooltipNone,
+}
+
+// Register the tooltip component
+export const UserProfileTooltip = registerTooltip(
+  "view_user_profile",
+  ({
     action,
     profileUrl,
     userHandle,
     userSessionID,
-    sitesViewState
-  } = e;
-  let o = L[action];
-  return jsx(o, {
-    profileUrl,
-    userHandle,
-    userSessionID,
-    sitesViewState
-  });
-}, e => {
-  let t;
-  let i;
-  let n = e.getAttribute("data-tooltip-user-profile-url") || "";
-  let r = e.getAttribute("data-tooltip-user-handle") || "";
-  let a = e.getAttribute("data-tooltip-user-session-id");
-  let s = e.getAttribute("data-tooltip-user-view-state");
-  null != a && Number.isNaN(t = Number(a)) && (t = void 0);
-  s && !isNaN(parseInt(s)) && (i = parseInt(s));
-  return {
-    profileUrl: n,
-    userHandle: r,
-    userSessionID: t,
-    action: e.getAttribute("data-tooltip-click-action"),
-    unconstrainWidth: "true" === e.getAttribute("data-tooltip-unconstrain-width"),
-    sitesViewState: i
-  };
-});
-export const c = $$R0;
-export const M = $$F1;
+    sitesViewState,
+  }: {
+    action: UserProfileTooltipAction
+    profileUrl: string
+    userHandle: string
+    userSessionID?: number
+    sitesViewState?: number
+  }) => {
+    const HandlerComponent = ACTION_HANDLERS[action]
+    return jsx(HandlerComponent, {
+      profileUrl,
+      userHandle,
+      userSessionID,
+      sitesViewState,
+    })
+  },
+  (element: HTMLElement) => {
+    let userSessionID: number | undefined
+    let sitesViewState: number | undefined
+
+    const profileUrl = element.getAttribute("data-tooltip-user-profile-url") || ""
+    const userHandle = element.getAttribute("data-tooltip-user-handle") || ""
+    const sessionIdAttr = element.getAttribute("data-tooltip-user-session-id")
+    const viewStateAttr = element.getAttribute("data-tooltip-user-view-state")
+
+    if (sessionIdAttr != null) {
+      const parsedId = Number(sessionIdAttr)
+      if (!Number.isNaN(parsedId)) {
+        userSessionID = parsedId
+      }
+    }
+
+    if (viewStateAttr) {
+      const parsedState = parseInt(viewStateAttr)
+      if (!isNaN(parsedState)) {
+        sitesViewState = parsedState
+      }
+    }
+
+    return {
+      profileUrl,
+      userHandle,
+      userSessionID,
+      action: element.getAttribute("data-tooltip-click-action") as UserProfileTooltipAction,
+      unconstrainWidth: element.getAttribute("data-tooltip-unconstrain-width") === "true",
+      sitesViewState,
+    }
+  },
+)
+
+export const c = UserProfileTooltipAction
+export const M = UserProfileTooltip

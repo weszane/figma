@@ -16,9 +16,9 @@ import { getPluginOrWidgetContent, getResourceType, isOrgPrivatePluginOrWidget, 
 import { ViewSectionMap, SCORE_OFFSET } from "../figma_app/701107";
 import { getOrgAdminAccess, isResourcePublicWithComments } from "../figma_app/740025";
 import { hasClientMeta, isPlugin, isWidget, isMonetizedWithClientMeta } from "../figma_app/45218";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { Q as _$$Q } from "../5430/662041";
-import { T as _$$T } from "../5132/203178";
+import { isResourceHubContext } from "../5132/203178";
 import { hasFigmaPartnerBadge } from "../figma_app/699310";
 import { hasOrgRole } from "../figma_app/300692";
 import { E as _$$E } from "../905/53857";
@@ -35,7 +35,7 @@ import { sendWithRetry } from "../905/910117";
 import { AuthFlowStep } from "../905/862321";
 import { handleAtomEvent } from "../905/502364";
 import { VisualBellActions } from "../905/302958";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { FL } from "../figma_app/248365";
 import { getCurrentSearchSessionId } from "../figma_app/387599";
 import { ProfileRouteState } from "../905/934145";
@@ -409,7 +409,7 @@ function ea(e, t) {
     });
     return hasContent(e) ? getResourceDataOrFallback(t.data?.resourceSaveFromResourceId)?.createdAt || null : r.data?.resourceSave?.createdAt || s.data?.pluginInstall?.createdAt || null;
   }(e);
-  let o = AG();
+  let o = useIsResourceHub();
   let a = useResourceRouteParams();
   let l = useResourceFuid() ?? void 0;
   let c = useSelector(e => e.authedActiveCommunityProfile?.profile_handle);
@@ -908,7 +908,7 @@ export function $$eF0({
     showSaveButton,
     showAuthorsHeader
   } = function () {
-    let e = _$$T();
+    let e = isResourceHubContext();
     return {
       showLikeButton: !0,
       showSaveButton: (!e || isTntSavingEnabled()) && !0,
@@ -917,7 +917,7 @@ export function $$eF0({
   }();
   let c = getResourceName(e);
   let d = useSelector(e => getOrgAdminAccess(e));
-  let x = isViewerModeResource(t) ? e0.COMMUNITY_HUB_FILE : isWidget(t) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
+  let x = isViewerModeResource(t) ? TrackingKeyEnum.COMMUNITY_HUB_FILE : isWidget(t) ? TrackingKeyEnum.COMMUNITY_HUB_WIDGET : TrackingKeyEnum.COMMUNITY_HUB_PLUGIN;
   let j = null;
   let w = jsx(_$$q, {
     resource: e,

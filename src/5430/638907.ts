@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { usePrefersMediaQuery } from "../figma_app/469468";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { M } from "../5430/704379";
 import { A } from "../5430/728674";
 import { hasResourceType } from "../figma_app/427318";
@@ -14,7 +14,7 @@ import { fk } from "../5430/480225";
 import { d8i, g8m } from "../figma_app/27776";
 if (443 == require.j) {}
 export function $$f0(e) {
-  let t = AG();
+  let t = useIsResourceHub();
   let r = usePrefersMediaQuery(`(max-width: ${d8i})`);
   let f = usePrefersMediaQuery(`(max-width: ${g8m})`);
   let {

@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { yJ } from "../figma_app/24841";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { useDropdownState } from "../905/848862";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { l6, c$ } from "../905/794875";
 import { Lt } from "../figma_app/639088";
@@ -53,7 +53,7 @@ function I(e) {
       jobTitleSeenList: k.toString()
     });
     logAndTrackCTA({
-      trackingContext: e0.FILE_BROWSER,
+      trackingContext: TrackingKeyEnum.FILE_BROWSER,
       context: "job_title",
       text: "Change Role",
       jobTitle: e,

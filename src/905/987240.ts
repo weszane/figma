@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { getDevModeFocusId } from "../figma_app/88239";
 import { createOptimistThunk } from "../905/350402";
-import { _P, Zh } from "../figma_app/2590";
+import { trackPrototypeScaleChangeEvent, trackDefinedFileEventWrapper } from "../figma_app/2590";
 import { isFirstPageCurrentSelector } from "../905/91038";
 import { hg } from "../figma_app/425489";
 import { xY } from "../figma_app/354027";
@@ -30,7 +30,7 @@ export let $$y0 = createOptimistThunk((e, {
   let w = "" !== i ? PresentationValidationStatus.VALID : PrototypingTsApi.currentPagePrototypeStatus();
   if (w !== PresentationValidationStatus.VALID) {
     let t;
-    switch (e.dispatch(_P({
+    switch (e.dispatch(trackPrototypeScaleChangeEvent({
       name: "Prototype Editor Play Button Blocked",
       params: {
         isFirstPage: S
@@ -63,7 +63,7 @@ export let $$y0 = createOptimistThunk((e, {
       payload: {
         onOpen: t => {
           let i = x.mirror.sceneGraph.getCurrentPage()?.prototypeDevice?.presetIdentifier || "";
-          e.dispatch(Zh({
+          e.dispatch(trackDefinedFileEventWrapper({
             name: "prototype.editor_play_button_clicked",
             params: {
               isFirstPage: S,

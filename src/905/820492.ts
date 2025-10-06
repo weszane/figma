@@ -60,7 +60,7 @@ import { AccessLevelEnum } from "../905/557142";
 import { ShareAction } from "../figma_app/707808";
 import { SourceType } from "../figma_app/175992";
 import { Rs } from "../figma_app/761870";
-import { e0 as _$$e3 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { profileServiceAPI } from "../905/608932";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { libraryPublishingModeAtom } from "../figma_app/825489";
@@ -94,7 +94,7 @@ import { y4I } from "../figma_app/822011";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
 import { A as _$$A15 } from "../905/118358";
-import { GP, w6 } from "../figma_app/292324";
+import { getScalingOptionLabel, getViewPortScalingModeFromConfig } from "../figma_app/292324";
 import { A as _$$A16 } from "../905/857789";
 import { A as _$$A17 } from "../905/568234";
 import { A as _$$A18 } from "../905/392698";
@@ -275,7 +275,7 @@ function e4({
     property: e,
     onChange: t,
     scalingDropdownFormatter: {
-      format: e => GP(w6({
+      format: e => getScalingOptionLabel(getViewPortScalingModeFromConfig({
         viewportScalingMode: e,
         contentScalingMode: "fixed"
       }))
@@ -1250,7 +1250,7 @@ class ts extends Component {
       t = !0;
     } else e = this.renderForm();
     return jsx(TrackingProvider, {
-      name: _$$e3.COMMUNITY_HUB_FILE_PUBLISH_MODAL,
+      name: TrackingKeyEnum.COMMUNITY_HUB_FILE_PUBLISH_MODAL,
       properties: {
         entryPoint: this.props.entryPoint,
         fileKey: this.props.fileKey,

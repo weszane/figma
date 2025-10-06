@@ -28,7 +28,7 @@ import { getUserId } from "../905/372672";
 import { getCurrentTeamId } from "../figma_app/598018";
 import { I_ } from "../figma_app/616107";
 import { FEditorType } from "../figma_app/53721";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { B as _$$B } from "../figma_app/397954";
 import { Vk } from "../figma_app/153399";
@@ -310,7 +310,7 @@ export let $$$0 = registerModal(function ({
       "edit_color_palette_modal--hidden--EDk-H": f
     }),
     children: jsx(TrackingProvider, {
-      name: e0.FIGJAM_EDIT_PALETTE_MODAL,
+      name: TrackingKeyEnum.FIGJAM_EDIT_PALETTE_MODAL,
       properties: {
         userId: s,
         teamId: c,

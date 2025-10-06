@@ -3,7 +3,7 @@ import { MenuContainerComp, MenuGroupComp } from "../figma_app/860955";
 import { DropdownThemeProvider } from "../figma_app/215667";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { TrackingProvider } from "../figma_app/831799";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { e as _$$e } from "../figma_app/919092";
 export let $$c1 = "FILE_CREATION_OMNICREATE_DROPDOWN";
 export function $$u0({
@@ -28,7 +28,7 @@ export function $$u0({
           "data-onboarding-key": t
         },
         children: jsxs(TrackingProvider, {
-          name: e0.RESOURCE_CREATION_DROPDOWN,
+          name: TrackingKeyEnum.RESOURCE_CREATION_DROPDOWN,
           properties: {
             ...r,
             fileCreationDefaultsDropdownType: $$c1

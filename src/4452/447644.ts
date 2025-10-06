@@ -48,7 +48,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/421473";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { m as _$$m } from "../4452/114445";
 import { xo, OW } from "../figma_app/425283";
 import { v as _$$v } from "../4452/562448";
@@ -100,7 +100,7 @@ let ee = registerModal(function (e) {
   }) : renderI18nText("admin_dashboard.seat_requests.bulk_approve_modal.body");
   let c = getRumLoggingConfig();
   return jsx(TrackingProvider, {
-    name: e0.BULK_APPROVE_CONFIRMATION_MODAL,
+    name: TrackingKeyEnum.BULK_APPROVE_CONFIRMATION_MODAL,
     properties: {
       planType: e.plan.key.type,
       planId: e.plan.key.parentId
@@ -992,7 +992,7 @@ export function $$e$0({
     })]
   });
   return jsxs(TrackingProvider, {
-    name: e0.UPGRADE_REQUESTS_TABLE,
+    name: TrackingKeyEnum.UPGRADE_REQUESTS_TABLE,
     properties: {
       adminRequestsDashboard: !0,
       orgId: tp ? $ : void 0,

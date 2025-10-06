@@ -242,7 +242,7 @@ import { A as _$$A3 } from '../4711/61765';
 import { A as _$$A2 } from '../4711/145260';
 import { A as _$$A4 } from '../4711/621307';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { Zh } from '../figma_app/2590';
+import { trackDefinedFileEventWrapper } from '../figma_app/2590';
 import { o$ as _$$o$, t4 as _$$t2, C9, K9, ku, uR, W_, wi } from '../figma_app/8833';
 import { parseEditorStateToPlainText } from '../figma_app/9619';
 import { canEditBasedOnPlan, checkZoomWidgetAccess, isExportRestricted } from '../figma_app/12796';
@@ -320,7 +320,7 @@ import { Kx } from '../figma_app/342355';
 import { xQ } from '../figma_app/345195';
 import { hasTeamPaidAccess } from '../figma_app/345997';
 import { Qy, v$ } from '../figma_app/347120';
-import { ln as _$$ln, BG } from '../figma_app/349969';
+import { isMobileDevice, determineFrameType } from '../figma_app/349969';
 import { KE as _$$KE } from '../figma_app/351862';
 import { pi as _$$pi, TY, Yh } from '../figma_app/357047';
 import { pH } from '../figma_app/357433';
@@ -3775,7 +3775,7 @@ class oo {
         }
       case 'toggle-inline-preview':
         let t = e.payload.source === 'toolbar' ? 'button' : e.payload.source;
-        atomStoreManager.get(hg).modalStatus === _$$bi.OPEN ? (this._store.dispatch(Zh({
+        atomStoreManager.get(hg).modalStatus === _$$bi.OPEN ? (this._store.dispatch(trackDefinedFileEventWrapper({
           name: 'prototype.close_inline_viewer',
           params: {
             source: t
@@ -7101,10 +7101,10 @@ let lX = class e extends sP(sN(sR)) {
     (i === FEditorType.Design || i === FEditorType.Illustration || i === FEditorType.DevHandoff) && handleEnterMode(this._store.getState(), i, t);
   }
   getDeviceInfoForSize(e, t) {
-    return BG(e, t);
+    return determineFrameType(e, t);
   }
   presetDeviceSupportsTouch(e) {
-    return _$$ln(e);
+    return isMobileDevice(e);
   }
   sizeMatchesFramePreset(e) {
     return fS({

@@ -8,7 +8,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { F } from "../905/422355";
 import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
-import { fh } from "../figma_app/412189";
+import { useMemoizedValue } from "../figma_app/412189";
 import { nc } from "../figma_app/570630";
 var $$d = s;
 var g = (e => (e.DISABLED = "disabled", e.CREATING = "creating", e.RECREATING = "recreating", e.READY = "ready", e.BUNDLING = "bundling", e.UNRECOVERABLE = "unrecoverable_error", e))(g || {});
@@ -422,7 +422,7 @@ export function $$b1(e, t) {
         return returnSecond(n, null, `Invalid status: ${n.status}`);
     }
   }, [C, n, T, S]);
-  return fh(A, (e, t) => e?.state === t?.state);
+  return useMemoizedValue(A, (e, t) => e?.state === t?.state);
 }
 export const T = $$_0;
 export const d = $$b1;

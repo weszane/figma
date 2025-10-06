@@ -15,7 +15,7 @@ import { isDesignFileType, isSitesFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback, normalizeValue, isValidValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { useDropdownState } from "../905/848862";
-import { _P, Zh } from "../figma_app/2590";
+import { trackPrototypeScaleChangeEvent, trackDefinedFileEventWrapper } from "../figma_app/2590";
 import { J as _$$J } from "../905/980942";
 import { uQ } from "../figma_app/151869";
 import { Checkbox } from "../905/274480";
@@ -147,7 +147,7 @@ function K({
     permissionScopeHandler.user("overlay-background-type-edit-scope", () => {
       PrototypingTsApi.setOverlayBackgroundType(sessionLocalIDToString(s), t);
     });
-    g(_P({
+    g(trackPrototypeScaleChangeEvent({
       name: "Overlay background visible changed",
       params: {
         backgroundType: t
@@ -159,7 +159,7 @@ function K({
     permissionScopeHandler.user("overlay-background-interaction-edit-scope", () => {
       PrototypingTsApi.setOverlayBackgroundInteraction(sessionLocalIDToString(s), t);
     });
-    g(_P({
+    g(trackPrototypeScaleChangeEvent({
       name: "Overlay background interaction changed",
       params: {
         backgroundInteraction: t
@@ -196,7 +196,7 @@ function K({
     permissionScopeHandler.user("overlay-position-type-edit-scope", () => {
       PrototypingTsApi.setOverlayPositionType(sessionLocalIDToString(s), e);
     });
-    g(_P({
+    g(trackPrototypeScaleChangeEvent({
       name: "Overlay position changed",
       params: {
         position: e
@@ -527,7 +527,7 @@ function eh({
       conditionalActions: n
     });
     _ && _(new Op([h[0], e, o - 1]));
-    I(_P({
+    I(trackPrototypeScaleChangeEvent({
       name: "Prototype add action",
       params: {
         action: t.connectionType ? t.connectionType : "NONE",
@@ -544,7 +544,7 @@ function eh({
       let i = [];
       if (o && o.actions) for (let e = 0; e < o.actions.length; e++) {
         let n = o.actions[e];
-        e !== t ? i.push(n) : I(_P({
+        e !== t ? i.push(n) : I(trackPrototypeScaleChangeEvent({
           name: "Prototype delete action",
           params: {
             action: n.connectionType ? n.connectionType : "NONE",
@@ -860,7 +860,7 @@ function eX({
       let i = VariablesBindings.getVariableResolvedValue(t.node_id, new Map());
       !e && t.resolvedType === VariableResolvedDataType.COLOR && i && (o.targetVariableData = i ?? void 0);
       n(o);
-      x(Zh({
+      x(trackDefinedFileEventWrapper({
         name: "prototype.variable_selected",
         params: {
           collectionId: t.variableSetId,
@@ -1073,7 +1073,7 @@ function te({
   let I = LH(c);
   let j = jsx(Checkbox, {
     onChange: t => {
-      h(_P({
+      h(trackPrototypeScaleChangeEvent({
         name: "Preserve Scroll Changed",
         params: {
           newValue: t
@@ -1102,7 +1102,7 @@ function te({
   });
   let T = jsx(Checkbox, {
     onChange: t => {
-      h(_P({
+      h(trackPrototypeScaleChangeEvent({
         name: "Reset Scroll Position Changed",
         params: {
           newValue: t,
@@ -1155,7 +1155,7 @@ function te({
   });
   let w = jsx(Checkbox, {
     onChange: t => {
-      h(_P({
+      h(trackPrototypeScaleChangeEvent({
         name: "Reset Component State Changed",
         params: {
           newValue: t,
@@ -1185,7 +1185,7 @@ function te({
   });
   let P = jsx(Checkbox, {
     onChange: t => {
-      h(_P({
+      h(trackPrototypeScaleChangeEvent({
         name: "Reset Video Position Changed",
         params: {
           newValue: t
@@ -1445,7 +1445,7 @@ function tf({
     n({
       mediaSkipToTime: e
     });
-    _(_P({
+    _(trackPrototypeScaleChangeEvent({
       name: "Media skip to time changed",
       params: {
         value: e
@@ -1565,7 +1565,7 @@ function tf({
       n({
         mediaSkipByAmount: e
       });
-      _(_P({
+      _(trackPrototypeScaleChangeEvent({
         name: "Media skip by amount changed",
         params: {
           value: e
@@ -1609,7 +1609,7 @@ let tb = ({
   return useCallback((n, o) => {
     let i = parseSessionLocalID(n);
     i && e(i);
-    t(_P({
+    t(trackPrototypeScaleChangeEvent({
       name: "Prototype navigation destination changed",
       params: {
         source: "panel",
@@ -1696,13 +1696,13 @@ export function $$tv0({
   let ec = e => ed(e, es);
   let ep = useCallback(e => {
     m(e);
-    S(_P({
+    S(trackPrototypeScaleChangeEvent({
       name: "Variant based prototyping UI changed",
       params: {
         source: "panel"
       }
     }));
-    S(_P({
+    S(trackPrototypeScaleChangeEvent({
       name: "Prototype navigation destination changed",
       params: {
         source: "panel",
@@ -1735,7 +1735,7 @@ export function $$tv0({
         y({
           openUrlInNewTab: e
         });
-        S(_P({
+        S(trackPrototypeScaleChangeEvent({
           name: "Open Url In New Tab Changed",
           params: {
             value: e

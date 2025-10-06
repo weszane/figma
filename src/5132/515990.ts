@@ -1,6 +1,12 @@
-import { useTracking } from "../figma_app/831799";
-import { e0 } from "../905/696396";
-export function $$r0() {
-  return useTracking().name === e0.RESOURCE_HUB_LIGHTBOX_RDP;
+import { TrackingKeyEnum } from "../905/696396"
+import { useTracking } from "../figma_app/831799"
+/**
+ * Checks if the current tracking context matches the Resource Hub Lightbox RDP tracking key.
+ *
+ * @returns boolean indicating whether the current tracking name matches RESOURCE_HUB_LIGHTBOX_RDP
+ */
+export function isResourceHubLightboxRdp(): boolean {
+  return useTracking().name === TrackingKeyEnum.RESOURCE_HUB_LIGHTBOX_RDP
 }
-export const I = $$r0;
+
+export const I = isResourceHubLightboxRdp

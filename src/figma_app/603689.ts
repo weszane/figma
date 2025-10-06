@@ -91,7 +91,7 @@ import { UpgradeAction } from '../905/370443';
 import { getUserId, selectCurrentUser } from '../905/372672';
 import { k as _$$k2 } from '../905/381239';
 import { deepEqual } from '../905/382883';
-import { e as _$$e10 } from '../905/383776';
+import { useIsFullscreenWithDevVariables } from '../905/383776';
 import { h as _$$h6 } from '../905/388624';
 import { A as _$$A0 } from '../905/389851';
 import { transformAtom } from '../905/401885';
@@ -174,7 +174,7 @@ import { CustomModalComponent } from '../905/684425';
 import { windowManagerInstance } from '../905/687477';
 import { BannerButton } from '../905/692618';
 import { isFigmascopeView } from '../905/694285';
-import { e0 as _$$e9, qo } from '../905/696396';
+import { TrackingKeyEnum, OrgPersonal } from '../905/696396';
 import { getSingletonSceneGraph } from '../905/700578';
 import { liveStoreInstance } from '../905/713695';
 import { alphaColorManipulator, defaultColorManipulator } from '../905/713722';
@@ -394,7 +394,7 @@ import { LH as _$$LH, zm } from '../figma_app/384673';
 import { getFullscreenFileKey, getSelectedView, getSelectedViewType } from '../figma_app/386952';
 import { T as _$$T2 } from '../figma_app/399971';
 import { Cj } from '../figma_app/407993';
-import { aq as _$$aq } from '../figma_app/412189';
+import { useIsMounted } from '../figma_app/412189';
 import { rr as _$$rr, tw as _$$tw, CL, FH, RS, zH } from '../figma_app/412796';
 import { FplStringsProvider } from '../figma_app/415899';
 import { R as _$$R4 } from '../figma_app/421558';
@@ -2206,7 +2206,7 @@ function iW() {
   });
 }
 function iq() {
-  let e = _$$aq();
+  let e = useIsMounted();
   let t = useDispatch();
   let r = getQueryParam('locale');
   let n = getQueryParam('hub_file_id');
@@ -4376,14 +4376,14 @@ let on = buildStateMachine({
     transitions: [createUserEventTransition('Context Viewed', 'await_leave_settings', {
       condition: ({
         event: e
-      }) => e.properties.name === _$$e9.ORG_ADMIN_SETTINGS_PAGE
+      }) => e.properties.name === TrackingKeyEnum.ORG_ADMIN_SETTINGS_PAGE
     })]
   }, {
     id: 'await_leave_settings',
     transitions: [createUserEventTransition('Context Viewed', 'completed', {
       condition: ({
         event: e
-      }) => e.properties.name !== _$$e9.ORG_ADMIN_SETTINGS_PAGE
+      }) => e.properties.name !== TrackingKeyEnum.ORG_ADMIN_SETTINGS_PAGE
     })]
   }, {
     id: 'completed',
@@ -4501,7 +4501,7 @@ let om = buildStateMachine({
     transitions: [createUserEventTransition('Context Viewed', 'await_abandon_cart', {
       condition: ({
         event: e
-      }) => e.properties.name === _$$e9.ORG_CHECKOUT_FLOW
+      }) => e.properties.name === TrackingKeyEnum.ORG_CHECKOUT_FLOW
     })]
   }, {
     id: 'await_abandon_cart',
@@ -4512,7 +4512,7 @@ let om = buildStateMachine({
             name: e
           }
         }
-      }) => e === _$$e9.FILE_BROWSER || e === _$$e9.TEAM_PAGE
+      }) => e === TrackingKeyEnum.FILE_BROWSER || e === TrackingKeyEnum.TEAM_PAGE
     })]
   }, {
     id: 'complete',
@@ -4980,7 +4980,7 @@ function o1({
     isShowing,
     testId: 'product_trial_pending_overlay',
     children: t.data ? jsx(TrackingProvider, {
-      name: _$$e9.PENDING_PRODUCT_TRIAL_OVERLAY,
+      name: TrackingKeyEnum.PENDING_PRODUCT_TRIAL_OVERLAY,
       properties: {
         trialId: t.data.id,
         orgId: t.data.resourceId
@@ -5596,7 +5596,7 @@ function dr() {
   let o = useRef(null);
   let [d, c] = useState(0);
   let u = useAtomWithSubscription(_$$d9);
-  let p = (u.data ? u.data : qo.ORG) === qo.ORG;
+  let p = (u.data ? u.data : OrgPersonal.ORG) === OrgPersonal.ORG;
   let _ = hasUserAccess(!!useAtomWithSubscription(_$$t4).data, p);
   let [h, m] = useState(void 0);
   let g = null;
@@ -8046,7 +8046,7 @@ function pz() {
   let i = useIsProgressBarHiddenOrLocked();
   let a = function () {
     let e = useIsFullscreenOverview();
-    let t = _$$e10();
+    let t = useIsFullscreenWithDevVariables();
     let r = useIsFullscreenDevModeComponentBrowser();
     return e || t || r;
   }();
@@ -8079,7 +8079,7 @@ function pz() {
       h?.showBanner && (g(!0), setTimeout(() => g(!1), 1e3));
     }
   }, [s, n, activateTool, activeToolId, close, g, h?.showBanner]), i || a || getFilteredFeatureFlags().ce_il_root && c === _$$n5.LOADING) ? jsx(Fragment, {}) : jsx(TrackingProvider, {
-    name: _$$e9.EDITOR_TOOLBELT,
+    name: TrackingKeyEnum.EDITOR_TOOLBELT,
     children: jsxs(XS, {
       'data-testid': 'design-toolbelt-wrapper',
       'children': [jsxs(Iy, {

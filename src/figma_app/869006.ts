@@ -29,7 +29,7 @@ import { RR } from "../figma_app/307841";
 import { useOneClickAskToEditExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { n2 } from "../figma_app/478006";
@@ -164,7 +164,7 @@ function V(e) {
   });
   let h = getRumLoggingConfig();
   return t ? jsx(TrackingProvider, {
-    name: e0.FILE_REQUEST_UPGRADE_BUTTON,
+    name: TrackingKeyEnum.FILE_REQUEST_UPGRADE_BUTTON,
     trackingOptions: h,
     properties: {
       fileKey: e.fileKey,
@@ -191,7 +191,7 @@ function V(e) {
 }
 function z(e) {
   return jsx(TrackingProvider, {
-    name: e0.FILE_PENDING_EDIT_ROLE_REQUEST_LABEL,
+    name: TrackingKeyEnum.FILE_PENDING_EDIT_ROLE_REQUEST_LABEL,
     children: jsx(C, {
       variant: e.variant,
       toolTipMessage: e.pendingToolTipMessage,
@@ -228,7 +228,7 @@ function J({
     shouldDisableAnimation: !0,
     targetKey: e,
     testId: "nudge-cta-callout",
-    trackingContextName: e0.REQUEST_SENT_NUDGE_POPOVER
+    trackingContextName: TrackingKeyEnum.REQUEST_SENT_NUDGE_POPOVER
   });
 }
 function Z(e) {
@@ -258,7 +258,7 @@ function Z(e) {
   let f = "account-request-type-nudge-key";
   let E = renderI18nText("fullscreen.toolbar.request.request_sent");
   return jsx(TrackingProvider, {
-    name: e0.REQUEST_SENT_NUDGE_STATUS,
+    name: TrackingKeyEnum.REQUEST_SENT_NUDGE_STATUS,
     children: jsxs("div", {
       className: cssBuilderInstance.relative.$,
       onMouseEnter: () => !a && requestCanBeNudged ? s(!0) : null,

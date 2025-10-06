@@ -60,7 +60,7 @@ import { R as _$$R2 } from '../905/621802';
 import { ButtonPrimitive } from '../905/632989';
 import { getVisibleTheme } from '../905/640017';
 import { In } from '../905/672640';
-import { e0 as _$$e2 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { G as _$$G } from '../905/702115';
 import { H as _$$H } from '../905/706055';
 import { ak as _$$ak, ed as _$$ed, es as _$$es, FD as _$$FD, Hb as _$$Hb, iG as _$$iG, tp as _$$tp, ai, Dn, G9, ho, j2, jT, k2, kb, kd, Kl, lq, lT, LX, mK, OF, oW, pG, Rm, rU, S1, sB, UT, v2, w5, Wd, WH, Wr, XA, Xl } from '../905/710747';
@@ -3651,7 +3651,7 @@ let nw = memo(e => {
             hasDuplicateConflictingGuids: e.hasDuplicateConflictingGuids
           }), jsx(wy, {
             children: jsxs(TrackingProvider, {
-              name: _$$e2.BRANCHING_REVIEW_MODAL,
+              name: TrackingKeyEnum.BRANCHING_REVIEW_MODAL,
               properties: {
                 fileKey: branch.key,
                 fileRepoId: branch.file_repo_id,
@@ -3734,7 +3734,7 @@ let nw = memo(e => {
         return jsxs(qj, {
           children: [jsxs(wy, {
             children: [jsx(TrackingProvider, {
-              name: _$$e2.BRANCH_DIFF_DETAIL,
+              name: TrackingKeyEnum.BRANCH_DIFF_DETAIL,
               properties: {
                 fileKey: branch.source_file_key,
                 fileRepoId: branch.file_repo_id
@@ -5356,7 +5356,7 @@ let rR = memo(e => {
       fileName: e.fileName,
       group: M
     }), jsxs(TrackingProvider, {
-      name: _$$e2.BRANCHING_CONFLICT_GROUP,
+      name: TrackingKeyEnum.BRANCHING_CONFLICT_GROUP,
       properties: {
         conflictGroup: M.id,
         conflictGroupIdx: w,
@@ -5517,7 +5517,7 @@ let rN = memo(e => {
   return _ ? jsx(qj, {
     children: jsx(wy, {
       children: jsx(TrackingProvider, {
-        name: _$$e2.BRANCHING_CONFLICT_RESOLUTION_MODAL,
+        name: TrackingKeyEnum.BRANCHING_CONFLICT_RESOLUTION_MODAL,
         properties: {
           ...z,
           ...V
@@ -5563,7 +5563,7 @@ let rN = memo(e => {
       })
     })
   }) : jsx(TrackingProvider, {
-    name: _$$e2.BRANCHING_UPDATE_FROM_MAIN_MODAL,
+    name: TrackingKeyEnum.BRANCHING_UPDATE_FROM_MAIN_MODAL,
     properties: {
       ...z,
       ...V
@@ -5955,7 +5955,7 @@ function rM(e) {
     sourceCheckpointKey: e.sourceCheckpointKey,
     onClose: eb,
     children: [ev && jsx(TrackingProvider, {
-      name: _$$e2.BRANCHING_CONFLICTING_GUIDS_BUG,
+      name: TrackingKeyEnum.BRANCHING_CONFLICTING_GUIDS_BUG,
       properties: {
         fileKey: eh.key,
         fileRepoId: eh.file_repo_id,

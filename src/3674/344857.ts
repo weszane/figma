@@ -104,7 +104,7 @@ import { Spacing } from "../figma_app/637027";
 import { buildFileUrl } from "../905/612685";
 import { openInBrowser, openRelatedLink, openAutocompleteLineSettings, openAutocompleteBlockSettings, createFileLink } from "../figma_app/415217";
 import { A as _$$A3 } from "../svg/756305";
-import { e as _$$e2 } from "../905/383776";
+import { useIsFullscreenWithDevVariables } from "../905/383776";
 import { setupToggleButton } from "../905/167712";
 import { A as _$$A4 } from "../vendor/648136";
 import { _m } from "../vendor/891888";
@@ -378,7 +378,7 @@ import { L as _$$L3 } from "../469e6e40/302359";
 import { InspectState, VariableDetailModalWidth, ModalMaxHeight, StyleDetailModal, ModalWindowType } from "../905/560959";
 import { g as _$$g3 } from "../905/246147";
 import { useFullscreenReady } from "../905/924253";
-import { e0 as _$$e5 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { Mw, ON as _$$ON } from "../3276/43946";
 import { t as _$$t6 } from "../figma_app/143965";
 import { L as _$$L4 } from "../figma_app/467950";
@@ -11360,7 +11360,7 @@ function pj(e) {
           enableOverscroll: !0,
           containerId: INSPECT_PANEL,
           children: jsx(TrackingProvider, {
-            name: _$$e5.CODE_PANEL,
+            name: TrackingKeyEnum.CODE_PANEL,
             children: jsx(TabLoop, {
               children: jsx("div", {
                 className: g ? "inspect_panel--inspectPanelContentsBottomAligned--MOK20" : "inspect_panel--inspectPanelContents--iYf8P",
@@ -13226,7 +13226,7 @@ function fx() {
 export function $$fm1() {
   let e = useIsFullscreenOverview();
   let t = useIsFullscreenDevModeComponentBrowser();
-  let n = _$$e2();
+  let n = useIsFullscreenWithDevVariables();
   let i = useDevModeFocusId();
   let o = useCanAccessFullDevMode();
   let l = _$$T();
@@ -13251,7 +13251,7 @@ let f_ = memo(function () {
   useEffect(() => _$$K5, []);
   let e = useMemo(() => fullscreenAlias.getIsExtension(), []);
   let t = useIsFullscreenOverview();
-  let n = _$$e2();
+  let n = useIsFullscreenWithDevVariables();
   let l = !!useDevModeFocusId() && !t && !n;
   let r = useCanUseDevModeDemoFile();
   _$$uj();

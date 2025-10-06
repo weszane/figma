@@ -44,7 +44,7 @@ import { viewCollaboratorSet } from "../905/332483";
 import { compareProductAccessTypes, useFormatProductNamesForSeatType } from "../figma_app/217457";
 import { Tabs } from "../905/150656";
 import { useWebLoggerTimerEffect } from "../905/485103";
-import { T as _$$T } from "../figma_app/257703";
+import { ListFormatter } from "../figma_app/257703";
 import { VisualBellActions } from "../905/302958";
 import { LN, Kq } from "../905/941249";
 import { u as _$$u } from "../1e926454/858319";
@@ -494,7 +494,7 @@ function eb({
     }, e));
     return renderI18nText("plan_invite_modal.team.seat_already_assigned", {
       count: n.length,
-      emailString: jsx(_$$T, {
+      emailString: jsx(ListFormatter, {
         children: n
       })
     });

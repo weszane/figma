@@ -7,7 +7,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
 import { isViewportPanning } from "../figma_app/62612";
 import { N } from "../figma_app/268271";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { OnboardingSequence } from "../905/152487";
 import { mI } from "../9410/983167";
 import { ArrowPosition } from "../905/858282";
@@ -77,7 +77,7 @@ export function $$v0() {
     isShowing,
     testId: "FigJamAISummarizationEntrpointPointerOverlay",
     children: jsx(TrackingProvider, {
-      name: e0.AI_INLINE_MENU_ORGANIZE_SUMMARY_TOOLTIP,
+      name: TrackingKeyEnum.AI_INLINE_MENU_ORGANIZE_SUMMARY_TOOLTIP,
       children: jsx(C, {
         onClose: () => {
           t(!1);

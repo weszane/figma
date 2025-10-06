@@ -72,7 +72,7 @@ import { UpgradeAction } from '../905/370443';
 import { getUserId, selectCurrentUser } from '../905/372672';
 import { _ as _$$_ } from '../905/381235';
 import { deepEqual } from '../905/382883';
-import { e as _$$e3 } from '../905/383776';
+import { useIsFullscreenWithDevVariables } from '../905/383776';
 import { u as _$$u } from '../905/389684';
 import { mapAndAggregateResources } from '../905/401885';
 import { _ as _$$_3 } from '../905/410717';
@@ -10800,7 +10800,7 @@ let dN = memo(({
   _$$W2();
   useAutosuggestShadowRead();
   let j = BI();
-  let v = _$$e3();
+  let v = useIsFullscreenWithDevVariables();
   let C = useIsFullscreenDevModeComponentBrowser();
   let k = useIsFullscreenOverview();
   let E = getObservableValue(EditorPreferencesApi().enableCodegenMcpServer, !1);

@@ -7,7 +7,7 @@ import { getResourceDataOrFallback } from "../905/663269";
 import d from "../vendor/116389";
 import { isGovCluster, getInitialOptions } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
-import { O as _$$O } from "../905/539306";
+import { createUserContext } from "../905/539306";
 import { reportError } from "../905/11";
 import { renderAvatar } from "../figma_app/3731";
 import { getI18nString } from "../905/303541";
@@ -101,7 +101,7 @@ export function $$A1({
       let o;
       let l = n.find(e => e.plan_id === r);
       if (!l) return;
-      let d = _$$O(l, e.id);
+      let d = createUserContext(l, e.id);
       let c = a.currentUserOrgId;
       let u = a.currentTeamId;
       let p = d.orgId;
@@ -144,7 +144,7 @@ export function $$A1({
   };
 }
 function S(e, t, n, r) {
-  let i = _$$O(e, t.id);
+  let i = createUserContext(e, t.id);
   let o = getWorkspaceName(n, i);
   let l = isSameWorkspaceIdentity(n, i);
   let d = getFeatureFlags().dtm_deprecation_post_migration_onboarding && r?.starterTeamCreated && r?.isDraftsToMovePlan && r?.dtmMigrationCompleted && !r?.seenDtmPostMigrationBadge;

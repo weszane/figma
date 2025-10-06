@@ -79,7 +79,7 @@ import { K as _$$K } from '../905/628118';
 import { s as _$$s4 } from '../905/645504';
 import { adminPermissionConfig } from '../905/654645';
 import { FileBrowser } from '../905/658244';
-import { e0 as _$$e4 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { RenewalTermEnum } from '../905/712921';
 import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
@@ -1844,7 +1844,7 @@ function aw(e) {
 }
 function ak(e) {
   return jsx(TrackingProvider, {
-    name: _$$e4.BILLING_INVOICES_TAB,
+    name: TrackingKeyEnum.BILLING_INVOICES_TAB,
     properties: {
       teamId: e.teamId
     },
@@ -1988,7 +1988,7 @@ function aA(e) {
 }
 function aR(e) {
   return jsx(TrackingProvider, {
-    name: _$$e4.BILLING_OVERVIEW_TAB,
+    name: TrackingKeyEnum.BILLING_OVERVIEW_TAB,
     properties: {
       teamId: e.team.id
     },
@@ -2042,7 +2042,7 @@ function aO(e) {
         planType: FOrganizationLevelType.TEAM
       })
     }), jsx(TrackingProvider, {
-      name: _$$e4.BILLING_VIEW,
+      name: TrackingKeyEnum.BILLING_VIEW,
       properties: {
         teamId: e.team.id
       },
@@ -2108,7 +2108,7 @@ function aP(e) {
   }, [t, e.team.id]));
   let c = _$$b5(a?.data?.tier);
   return jsx(TrackingProvider, {
-    name: _$$e4.CONTENT_VIEW,
+    name: TrackingKeyEnum.CONTENT_VIEW,
     properties: {
       teamId: e.team.id
     },

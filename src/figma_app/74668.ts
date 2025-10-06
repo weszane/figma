@@ -12,7 +12,7 @@ import { VariableResolvedDataType, VariableDataType } from "../figma_app/763686"
 import { Te } from "../vendor/813803";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Ay } from "../figma_app/272902";
+import { createMultiRefCallback } from "../figma_app/272902";
 import E from "classnames";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -580,7 +580,7 @@ export function $$eh0({
     });
   }, [e, showStyleDetails]);
   return jsx(eo, {
-    ref: Ay(k, setKeyboardNavigationElement),
+    ref: createMultiRefCallback(k, setKeyboardNavigationElement),
     highlightStyle: o ? 1 : 0,
     isDisabled: !1,
     isLinterItem: r,

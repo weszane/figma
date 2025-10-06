@@ -193,7 +193,7 @@ export function isExactModifier(e: KeyboardEvent, mask: number): boolean {
  * @returns True if command or shift event, false otherwise.
  * (Original: $$h5)
  */
-export function isCommandOrShift(e: KeyboardEvent): boolean {
+export function isCommandOrShift(e: React.MouseEvent): boolean {
   return !!e && (
     (e.metaKey && BrowserInfo.mac)
     || (e.ctrlKey && !BrowserInfo.mac)
@@ -207,8 +207,8 @@ export function isCommandOrShift(e: KeyboardEvent): boolean {
  * @returns Wrapped event handler.
  * (Original: $$g1)
  */
-export function ignoreCommandOrShift(handler: (e: KeyboardEvent) => void): (e: KeyboardEvent) => void {
-  return (e: KeyboardEvent) => {
+export function ignoreCommandOrShift(handler: (e: React.MouseEvent) => void): (e: React.MouseEvent) => void {
+  return (e: React.MouseEvent) => {
     if (!isCommandOrShift(e)) {
       handler(e)
     }

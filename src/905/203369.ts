@@ -10,7 +10,7 @@ import { By } from '../905/777187';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { J, P } from '../figma_app/120873';
 import { yesNoTrackingEnum } from '../figma_app/198712';
-import { cZ } from '../figma_app/272902';
+import { setRefValue } from '../figma_app/272902';
 import { jT } from '../figma_app/626177';
 import { BrowserInfo } from '../figma_app/778880';
 import { SKIP_RECORDING } from '../figma_app/878298';
@@ -200,7 +200,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
       let value = this.props.property;
       try {
         value = this.props.formatter.parse(input.value || (this.props.placeholder ?? ''), normalizeValue(this.props.property) ?? undefined);
-      } catch { }
+      } catch {}
       if (value == null && !this.props.allowEmpty) return;
       if (isValidValue(value)) {
         const targets = getIncrementTargets(this.props.formatter, input);
@@ -407,7 +407,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
       children: [this.renderVariablePill(), jsx(jT, {
         'ref': (el: any) => {
           this.inputRef.current = el;
-          cZ(this.props.forwardedRef, el);
+          setRefValue(this.props.forwardedRef, el);
         },
         'aria-description': this.props.ariaDescription,
         'aria-label': this.props.ariaLabel,
@@ -450,19 +450,19 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
  * Subclass of FormattedInput.
  * Original: $$E1
  */
-export class FormattedInputVariant1 extends FormattedInput { }
+export class FormattedInputVariant1 extends FormattedInput {}
 
 /**
  * Subclass of FormattedInput.
  * Original: $$x2
  */
-export class FormattedInputVariant2 extends FormattedInput { }
+export class FormattedInputVariant2 extends FormattedInput {}
 
 /**
  * Subclass of FormattedInput.
  * Original: $$S0
  */
-export class FormattedInputVariant3 extends FormattedInput { }
+export class FormattedInputVariant3 extends FormattedInput {}
 
 // Refactored exports with new names
 export const AN = FormattedInputVariant3;

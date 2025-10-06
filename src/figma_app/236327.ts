@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, Children, useRef, useEffect, useCallback, cloneElement, forwardRef, PureComponent } from "react";
 import { noop } from 'lodash-es';
 import { setupThemeContext } from "../905/614223";
-import { Ay } from "../figma_app/272902";
+import { createMultiRefCallback } from "../figma_app/272902";
 import l from "classnames";
 import { handleUrlAction } from "../905/280005";
 import { isCommandOrShift } from "../905/63728";
@@ -203,7 +203,7 @@ export let $$N4 = forwardRef(function ({
   let a = useRef(null);
   let s = $$x10(a, e);
   return jsx($$j9, {
-    dropdownRef: Ay(a, r),
+    dropdownRef: createMultiRefCallback(a, r),
     style: s,
     ...t
   });

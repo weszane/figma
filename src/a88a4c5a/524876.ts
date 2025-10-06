@@ -28,7 +28,7 @@ import { H as _$$H } from '../905/674803';
 import { Point } from '../905/736624';
 import { A as _$$A } from '../905/744692';
 import { getMentionsResult } from '../905/772425';
-import { JZ, xS } from '../905/901964';
+import { uploadImageAttachment, DEFAULT_THUMBNAIL_SIZE } from '../905/901964';
 import { selectUserFlag } from '../905/940356';
 import { kG } from '../905/958668';
 import { UPLOAD_ERRORS, IMAGE_TYPE_VALUES } from '../905/966582';
@@ -288,14 +288,14 @@ export function $$ed1(e) {
   }, [dispatch, e0]);
   let e2 = useCallback(t => {
     if (!eG || !updateAttachment || t.length === 0) return;
-    let l = _$$K2(t, eK, xS, IMAGE_TYPE_VALUES, e1);
+    let l = _$$K2(t, eK, DEFAULT_THUMBNAIL_SIZE, IMAGE_TYPE_VALUES, e1);
     eX(e => e + l.length);
     l.forEach((t, l) => {
       if (IMAGE_TYPE_VALUES.includes(t.type)) {
         let n = URL.createObjectURL(t);
         let i = new Date();
         i.setMilliseconds(i.getMilliseconds() + l);
-        JZ(e.recordingKey, updateAttachment, eY, e1, n, t.type, eg, i, t.name || null);
+        uploadImageAttachment(e.recordingKey, updateAttachment, eY, e1, n, t.type, eg, i, t.name || null);
       } else {
         throw new Error('unexpected file type');
       }
@@ -471,7 +471,7 @@ export function $$ed1(e) {
           'children': jsx(c, {})
         }), eG && jsx(_$$n, {
           'svgAltText': getI18nString('comments.upload_images'),
-          'isDisabled': eW.length >= xS,
+          'isDisabled': eW.length >= DEFAULT_THUMBNAIL_SIZE,
           'acceptedFileTypes': IMAGE_TYPE_VALUES.join(','),
           'inputRef': eJ,
           'inputId': `fileUploadIconInput-${e.recordingKey}`,

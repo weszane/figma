@@ -18,7 +18,7 @@ import { VisualBellActions } from "../905/302958";
 import { getCurrentFileType } from "../figma_app/976749";
 import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 import { Z } from "../905/104740";
-import { aq } from "../figma_app/412189";
+import { useIsMounted } from "../figma_app/412189";
 import { KindEnum } from "../905/129884";
 import { H as _$$H } from "../9410/748457";
 import { v9, ei, N6, Sq, Z9, _E } from "../9410/733790";
@@ -32,7 +32,7 @@ export function $$I0({
   hasMultipleSelections: k
 }) {
   let N = useDispatch();
-  let A = aq();
+  let A = useIsMounted();
   let O = Z("canvas_search_navigate");
   let L = useSelector(e => e.canvasSearch.scope);
   let {

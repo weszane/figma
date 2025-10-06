@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { S } from "../905/539306";
+import { findCurrentPlan } from "../905/539306";
 import { CAPTURE_FLAG, SearchAnalytics } from "../905/574958";
 let $$l1 = "search_file_browser_full_results";
 let d = e => "href" in e ? e.href : null;
@@ -50,10 +50,10 @@ let u = e => {
 };
 let $$p0 = connect((e, t) => {
   let i = new SearchAnalytics.Analytics(e.search, u(t), {
-    plan: S(e)
+    plan: findCurrentPlan(e)
   });
   return (t, n) => (i.update(t.search, u(n), {
-    plan: S(t)
+    plan: findCurrentPlan(t)
   }), {
     analytics: i,
     selectedView: e.selectedView

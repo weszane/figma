@@ -3,20 +3,20 @@ import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { mapTemplateCategoryToFileType } from "../figma_app/471982";
 import { COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { hasMonetizedResourceMetadata, hasClientMeta, isWidget } from "../figma_app/45218";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 export function $$c0(e) {
   let t = hasMonetizedResourceMetadata(e);
   return hasClientMeta(e) ? {
-    name: e0.COMMUNITY_HUB_FILE,
+    name: TrackingKeyEnum.COMMUNITY_HUB_FILE,
     properties: u(e)
   } : isWidget(e) ? {
-    name: e0.COMMUNITY_HUB_WIDGET,
+    name: TrackingKeyEnum.COMMUNITY_HUB_WIDGET,
     properties: {
       widgetId: e.id,
       isMonetized: t
     }
   } : {
-    name: e0.COMMUNITY_HUB_PLUGIN,
+    name: TrackingKeyEnum.COMMUNITY_HUB_PLUGIN,
     properties: {
       pluginId: e.id,
       isMonetized: t

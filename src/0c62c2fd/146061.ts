@@ -21,7 +21,7 @@ import { mapProjectProperties } from "../figma_app/349248";
 import { UpsellModalType } from "../905/165519";
 import { getTeamUrl } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { HeaderModal } from "../905/519092";
 import { Uc } from "../4452/915131";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
@@ -115,7 +115,7 @@ export function $$M0(e) {
   let et = Object.keys(H).length > 0;
   let er = M && r && r.team.id === M.id;
   return jsx(TrackingProvider, {
-    name: e0.FILE_MOVE_MODAL,
+    name: TrackingKeyEnum.FILE_MOVE_MODAL,
     properties: z,
     children: jsx(HeaderModal, {
       title: getI18nString("file_browser.folder_move.modal_header", {

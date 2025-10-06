@@ -14,7 +14,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { Tg, CommunityRoute, ResourceType } from "../figma_app/354658";
 import { S as _$$S } from "../figma_app/11182";
 import { hasPublishScope, hasClientMeta, isWidgetOrPlugin } from "../figma_app/45218";
-import { H } from "../905/548668";
+import { slideOrCooperNewFileUrl } from "../905/548668";
 export function $$b3({
   publishedResourceContent: e
 }) {
@@ -74,7 +74,7 @@ export function $$E5({
   let b = "borderless" === o;
   let v = useDispatch();
   let [I, E] = useState(!1);
-  let x = new URL(H(e, t), document.baseURI).href;
+  let x = new URL(slideOrCooperNewFileUrl(e, t), document.baseURI).href;
   useEffect(() => {
     if (I) {
       let e = setTimeout(() => {
@@ -125,7 +125,7 @@ export function $$x1({
   editorType: e,
   libraryKey: t
 }) {
-  let i = new URL(H(e, t), document.baseURI).href;
+  let i = new URL(slideOrCooperNewFileUrl(e, t), document.baseURI).href;
   return jsx(Link.Button, {
     variant: "secondary",
     href: i,

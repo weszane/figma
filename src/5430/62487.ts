@@ -13,7 +13,7 @@ import { getSearchSessionIdFromSelector } from '../figma_app/387599';
 import { selectEditorResource } from '../figma_app/773663';
 import { getResourceTypesForBrowse } from '../figma_app/777551';
 import { generateSessionId, searchIncrementQueryCount, searchStartSession } from '../figma_app/925970';
-import { mk } from '../figma_app/999312';
+import { CommunityContextEnum } from '../figma_app/999312';
 function v(e) {
   return e.length === 0 ? [] : e.map(e => e.model);
 }
@@ -294,8 +294,8 @@ export function $$P2(e, t) {
         widgets: !0
       }), trackEventAnalytics(HubEventType.SEARCH_QUERY_RESULT, {
         query: e.query,
-        scope: mk.RESOURCE_HUB,
-        entry_point: mk.RESOURCE_HUB,
+        scope: CommunityContextEnum.RESOURCE_HUB,
+        entry_point: CommunityContextEnum.RESOURCE_HUB,
         context: 'searchView',
         search_session_id: _,
         query_id: i,

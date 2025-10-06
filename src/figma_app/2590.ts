@@ -1,220 +1,304 @@
-import { throwTypeError, assertNotNullish, assert } from "../figma_app/465776";
-import { ServiceCategories } from "../905/165054";
-import { PresetType } from "../figma_app/763686";
-import { produce } from "immer";
-import { KeyCodes } from "../905/63728";
-import { reportError } from "../905/11";
-import { createOptimistThunk } from "../905/350402";
-import { selectViewAction } from "../905/929976";
-import { hY, qt } from "../figma_app/349969";
-import { trackFileEvent, trackDefinedFileEvent } from "../figma_app/314264";
-import { fullscreenValue } from "../figma_app/455680";
-import { valueOrFallback } from "../905/216495";
-import { getFileKeyFromSelectedView } from "../figma_app/193867";
-export function $$g9(e) {
-  switch (e) {
+import { produce } from "immer"
+import { reportError } from "../905/11"
+import { KeyCodes } from "../905/63728"
+import { ServiceCategories } from "../905/165054"
+import { valueOrFallback } from "../905/216495"
+import { createOptimistThunk } from "../905/350402"
+import { selectViewAction } from "../905/929976"
+import { getFileKeyFromSelectedView } from "../figma_app/193867"
+import { trackDefinedFileEvent, trackFileEvent } from "../figma_app/314264"
+import { DEVICE_PRESETS_BY_ID, getDeviceCategory } from "../figma_app/349969"
+import { fullscreenValue } from "../figma_app/455680"
+import { assert, assertNotNullish, throwTypeError } from "../figma_app/465776"
+import { PresetType } from "../figma_app/763686"
+// Map string device types to PresetType enum values
+export function mapToDevicePresetType(deviceType: string): PresetType {
+  switch (deviceType) {
     case "NONE":
-      return PresetType.NONE;
+      return PresetType.NONE
     case "PRESET":
-      return PresetType.PRESET;
+      return PresetType.PRESET
     case "CUSTOM":
-      return PresetType.CUSTOM;
+      return PresetType.CUSTOM
+
     case "PRESENTATION":
-      return PresetType.PRESENTATION;
+      return PresetType.PRESENTATION
     default:
-      throwTypeError(e);
+      throwTypeError(deviceType)
   }
 }
-export function $$f11(e) {
-  return e === PresetType.PRESET || e === PresetType.CUSTOM ? "scale-down" : e === PresetType.PRESENTATION ? "contain" : "min-zoom";
+
+// Determine content scaling mode based on preset type
+export function getContentScalingMode(presetType: PresetType): string {
+  return presetType === PresetType.PRESET || presetType === PresetType.CUSTOM
+    ? "scale-down"
+    : presetType === PresetType.PRESENTATION
+      ? "contain"
+      : "min-zoom"
 }
-export function $$E5(e) {
-  return "fixed";
+
+// Get CSS position value for device frames
+export function getDeviceFramePosition(): string {
+  return "fixed"
 }
-export function $$y4(e, t) {
-  return !t?.disableDefaultKeyboardNav && ([KeyCodes.LEFT_ARROW, KeyCodes.PAGE_UP].includes(e.keyCode) || e.shiftKey && e.keyCode === KeyCodes.N);
+
+// Check if keyboard event should navigate to previous item
+export function shouldNavigateToPreviousItem(event: KeyboardEvent, options?: { disableDefaultKeyboardNav?: boolean }): boolean {
+  return !options?.disableDefaultKeyboardNav && (
+    [KeyCodes.LEFT_ARROW, KeyCodes.PAGE_UP].includes(event.keyCode)
+    || (event.shiftKey && event.keyCode === KeyCodes.N)
+  )
 }
-export function $$b1(e, t) {
-  return !(t?.disableDefaultKeyboardNav || t?.inlinePreview && e.keyCode === KeyCodes.SPACE && e.shiftKey) && [KeyCodes.RIGHT_ARROW, KeyCodes.SPACE, KeyCodes.ENTER, KeyCodes.N, KeyCodes.PAGE_DOWN].includes(e.keyCode);
+
+// Check if keyboard event should navigate to next item
+export function shouldNavigateToNextItem(event: KeyboardEvent, options?: {
+  disableDefaultKeyboardNav?: boolean
+  inlinePreview?: boolean
+}): boolean {
+  return !(options?.disableDefaultKeyboardNav
+    || (options?.inlinePreview && event.keyCode === KeyCodes.SPACE && event.shiftKey))
+  && [KeyCodes.RIGHT_ARROW, KeyCodes.SPACE, KeyCodes.ENTER, KeyCodes.N, KeyCodes.PAGE_DOWN].includes(event.keyCode)
 }
-export function $$T10(e, t) {
-  return !t?.disableDefaultKeyboardNav && e.keyCode === KeyCodes.R && !e.metaKey && !e.shiftKey && !e.ctrlKey;
+
+// Check if keyboard event should trigger refresh/reload
+export function shouldTriggerRefresh(event: KeyboardEvent, options?: { disableDefaultKeyboardNav?: boolean }): boolean {
+  return !options?.disableDefaultKeyboardNav
+    && event.keyCode === KeyCodes.R
+    && !event.metaKey
+    && !event.shiftKey
+    && !event.ctrlKey
 }
-export function $$I3(e) {
-  var t;
+
+// Normalize prototype device configuration with fallback values
+export function normalizePrototypeDeviceConfig(deviceConfig: any): {
+  type: string
+  size: { x: number, y: number }
+  presetIdentifier: string
+  rotation: string
+} {
+  const config = valueOrFallback(deviceConfig, {
+    type: "NONE",
+    size: { x: 0, y: 0 },
+  })
+
   return {
-    type: (t = valueOrFallback(e, {
-      type: "NONE",
-      size: {
-        x: 0,
-        y: 0
-      }
-    })).type || "NONE",
-    size: t.size || {
-      x: 0,
-      y: 0
-    },
-    presetIdentifier: t.presetIdentifier || "",
-    rotation: t.rotation || "NONE"
-  };
+    type: config.type || "NONE",
+    size: config.size || { x: 0, y: 0 },
+    presetIdentifier: config.presetIdentifier || "",
+    rotation: config.rotation || "NONE",
+  }
 }
-let S = e => "PRESET" === e.type ? e.presetIdentifier : "";
-export function $$v0(e, t) {
-  if ("NONE" === e) fullscreenValue.updateSelectionProperties({
-    prototypeDevice: {
-      type: "NONE",
-      size: {
-        x: 0,
-        y: 0
+
+// Helper to extract preset identifier from device config
+export function getPresetIdentifier(deviceConfig: { type: string, presetIdentifier?: string }): string {
+  return deviceConfig.type === "PRESET" ? deviceConfig.presetIdentifier || "" : ""
+}
+
+// Update prototype device settings based on selected device
+export function updatePrototypeDevice(selectedDevice: any, currentDeviceConfig: any): void {
+  if (selectedDevice === "NONE") {
+    fullscreenValue.updateSelectionProperties({
+      prototypeDevice: {
+        type: "NONE",
+        size: { x: 0, y: 0 },
+        rotation: "NONE",
       },
-      rotation: "NONE"
-    }
-  });else if ("PRESENTATION" === e) fullscreenValue.updateSelectionProperties({
-    prototypeDevice: {
-      type: "PRESENTATION",
-      size: {
-        x: 0,
-        y: 0
+    })
+  }
+  else if (selectedDevice === "PRESENTATION") {
+    fullscreenValue.updateSelectionProperties({
+      prototypeDevice: {
+        type: "PRESENTATION",
+        size: { x: 0, y: 0 },
+        rotation: "NONE",
       },
-      rotation: "NONE"
+    })
+  }
+  else if (selectedDevice === "CUSTOM") {
+    let size = currentDeviceConfig.size
+    if (size.x === 0 && size.y === 0) {
+      size = { x: 500, y: 500 }
     }
-  });else if ("CUSTOM" === e) {
-    let e = t.size;
-    0 === e.x && 0 === e.y && (e = {
-      x: 500,
-      y: 500
-    });
-    let r = "CUSTOM" === t.type ? t.rotation : "NONE";
+
+    const rotation = currentDeviceConfig.type === "CUSTOM" ? currentDeviceConfig.rotation : "NONE"
+
     fullscreenValue.updateSelectionProperties({
       prototypeDevice: {
         type: "CUSTOM",
-        size: e,
-        rotation: r
-      }
-    });
-  } else {
-    let r = hY[S(t)];
-    if (null != r && r.deviceName === e.deviceName) return;
-    let n = "PRESET" === t.type && qt(S(t)) === qt(e.presetIdentifier) ? t.rotation : "NONE";
+        size,
+        rotation,
+      },
+    })
+  }
+  else {
+    // Handle PRESET type
+    const currentPreset = DEVICE_PRESETS_BY_ID[getPresetIdentifier(currentDeviceConfig)]
+    if (currentPreset != null && currentPreset.deviceName === selectedDevice.deviceName) {
+      return // No change needed
+    }
+
+    const shouldPreserveRotation = currentDeviceConfig.type === "PRESET"
+      && getDeviceCategory(getPresetIdentifier(currentDeviceConfig))
+      === getDeviceCategory(selectedDevice.presetIdentifier)
+
+    const rotation = shouldPreserveRotation ? currentDeviceConfig.rotation : "NONE"
+
     fullscreenValue.updateSelectionProperties({
       prototypeDevice: {
         type: "PRESET",
         size: {
-          x: e.framePresetSize.x,
-          y: e.framePresetSize.y
+          x: selectedDevice.framePresetSize.x,
+          y: selectedDevice.framePresetSize.y,
         },
-        presetIdentifier: e.presetIdentifier,
-        rotation: n
-      }
-    });
+        presetIdentifier: selectedDevice.presetIdentifier,
+        rotation,
+      },
+    })
   }
 }
-let $$A6 = .2;
-let $$x2 = createOptimistThunk((e, t) => {
-  if (t.userInitiated) {
-    let r = {
-      scalingMode: t.viewportScalingMode,
-      contentScalingMode: t.contentScalingMode,
-      source: t.source
-    };
-    e.dispatch($$N8({
-      name: "Prototype Scale Changed",
-      params: r
-    }));
-  }
-  let r = e.getState().selectedView;
-  if ("prototype" === r.view) {
-    let n = produce(r, e => {
-      void 0 === e.scalingInfo && (e.scalingInfo = {});
-      t.hasOwnProperty("viewportScalingMode") && (e.scalingInfo.viewportScalingMode = t.viewportScalingMode);
-      t.hasOwnProperty("contentScalingMode") && (e.scalingInfo.contentScalingMode = t.contentScalingMode);
-    });
-    e.dispatch(selectViewAction(n));
-  }
-});
-createOptimistThunk((e, {
-  showHotspots: t
-}) => {
-  let r = e.getState().selectedView;
-  if (r && "prototype" === r.view) {
-    let n = {
-      ...r,
-      showHotspots: t
-    };
-    e.dispatch(selectViewAction(n));
-  }
-});
-createOptimistThunk((e, {
-  showDeviceFrame: t
-}) => {
-  let r = e.getState().selectedView;
-  assertNotNullish(r, "selectedView must be defined to show device frame");
-  assert("prototype" === r.view, "must be in the view to show device frame");
-  let i = {
-    ...r,
-    showDeviceFrame: t
-  };
-  e.dispatch(selectViewAction(i));
-});
-createOptimistThunk((e, {
-  newDevice: t
-}) => {
-  let r = e.getState().selectedView;
-  assertNotNullish(r, "selectedView must be defined to set initial device frame");
-  assert("prototype" === r.view, "must be in the view to set initial device frame");
-  let i = {
-    ...r,
-    initialDevice: t,
-    overrideDevice: void 0
-  };
-  e.dispatch(selectViewAction(i));
-});
-createOptimistThunk((e, {
-  newDevice: t
-}) => {
-  let r = e.getState().selectedView;
-  assertNotNullish(r, "selectedView must be defined to set override device frame");
-  assert("prototype" === r.view, "must be in the view to set override device frame");
-  let i = {
-    ...r,
-    overrideDevice: t
-  };
-  e.dispatch(selectViewAction(i));
-});
-let $$N8 = createOptimistThunk((e, t) => {
-  let r = e.getState();
-  let n = t.params || {};
-  let i = getFileKeyFromSelectedView(r.selectedView);
-  trackFileEvent(t.name, i, r, n);
-});
-let $$C7 = (() => {
-  let e = createOptimistThunk((e, t) => {
-    let r = e.getState();
-    let n = t.params || {};
-    let a = getFileKeyFromSelectedView(r.selectedView);
-    if (!a) {
-      reportError(ServiceCategories.PROTOTYPING, Error("No file key for prototype event"));
-      return;
+
+// Default animation duration for prototype transitions
+export const DEFAULT_ANIMATION_DURATION = 0.2
+
+// Thunk for handling prototype scaling changes
+export const handlePrototypeScaleChange = createOptimistThunk(({dispatch, getState}, actionParams) => {
+  if (actionParams.userInitiated) {
+    const trackingParams = {
+      scalingMode: actionParams.viewportScalingMode,
+      contentScalingMode: actionParams.contentScalingMode,
+      source: actionParams.source,
     }
-    trackDefinedFileEvent(t.name, a, r, n);
-  });
-  return ({
-    name: t,
-    params: r
-  }) => e({
-    name: t,
-    params: r
-  });
-})();
-export const $J = $$v0;
-export const Hs = $$b1;
-export const Jr = $$x2;
-export const Qx = $$I3;
-export const RL = $$y4;
-export const Rv = $$E5;
-export const UG = $$A6;
-export const Zh = $$C7;
-export const _P = $$N8;
-export const _Q = $$g9;
-export const fz = $$T10;
-export const qb = $$f11;
+
+    dispatch(trackPrototypeScaleChangeEvent({
+      name: "Prototype Scale Changed",
+      params: trackingParams,
+    }))
+  }
+
+  const state = getState()
+  const selectedView = state.selectedView
+
+  if (selectedView.view === "prototype") {
+    const updatedView = produce(selectedView, (draft) => {
+      if (draft.scalingInfo === undefined) {
+        draft.scalingInfo = {}
+      }
+
+      if (Object.prototype.hasOwnProperty.call(actionParams, "viewportScalingMode")) {
+        draft.scalingInfo.viewportScalingMode = actionParams.viewportScalingMode
+      }
+
+      if (Object.prototype.hasOwnProperty.call(actionParams, "contentScalingMode")) {
+        draft.scalingInfo.contentScalingMode = actionParams.contentScalingMode
+      }
+    })
+
+    dispatch(selectViewAction(updatedView))
+  }
+})
+
+// Thunk for toggling hotspot visibility
+// createOptimistThunk((dispatch, { showHotspots }) => {
+//   const state = dispatch.getState()
+//   const selectedView = state.selectedView
+
+//   if (selectedView && selectedView.view === "prototype") {
+//     const updatedView = {
+//       ...selectedView,
+//       showHotspots,
+//     }
+
+//     dispatch(selectViewAction(updatedView))
+//   }
+// })
+
+// // Thunk for toggling device frame visibility
+// createOptimistThunk((dispatch, { showDeviceFrame }) => {
+//   const state = dispatch.getState()
+//   const selectedView = state.selectedView
+
+//   assertNotNullish(selectedView, "selectedView must be defined to show device frame")
+//   assert(selectedView.view === "prototype", "must be in the view to show device frame")
+
+//   const updatedView = {
+//     ...selectedView,
+//     showDeviceFrame,
+//   }
+
+//   dispatch(selectViewAction(updatedView))
+// })
+
+// // Thunk for setting initial device
+// createOptimistThunk((dispatch, { newDevice }) => {
+//   const state = dispatch.getState()
+//   const selectedView = state.selectedView
+
+//   assertNotNullish(selectedView, "selectedView must be defined to set initial device frame")
+//   assert(selectedView.view === "prototype", "must be in the view to set initial device frame")
+
+//   const updatedView = {
+//     ...selectedView,
+//     initialDevice: newDevice,
+//     overrideDevice: undefined,
+//   }
+
+//   dispatch(selectViewAction(updatedView))
+// })
+
+// // Thunk for setting override device
+// createOptimistThunk((dispatch, { newDevice }) => {
+//   const state = dispatch.getState()
+//   const selectedView = state.selectedView
+
+//   assertNotNullish(selectedView, "selectedView must be defined to set override device frame")
+//   assert(selectedView.view === "prototype", "must be in the view to set override device frame")
+
+//   const updatedView = {
+//     ...selectedView,
+//     overrideDevice: newDevice,
+//   }
+
+//   dispatch(selectViewAction(updatedView))
+// })
+
+// Thunk for tracking file events
+export const trackPrototypeScaleChangeEvent = createOptimistThunk((dispatch, eventParams) => {
+  const state = dispatch.getState()
+  const params = eventParams.params || {}
+  const fileKey = getFileKeyFromSelectedView(state.selectedView)
+
+  trackFileEvent(eventParams.name, fileKey, state, params)
+})
+
+// Thunk for tracking defined file events
+export const trackDefinedFileEventWrapper = (() => {
+  const trackEvent = createOptimistThunk((dispatch, eventParams) => {
+    const state = dispatch.getState()
+    const params = eventParams.params || {}
+    const fileKey = getFileKeyFromSelectedView(state.selectedView)
+
+    if (!fileKey) {
+      reportError(ServiceCategories.PROTOTYPING, new Error("No file key for prototype event"))
+      return
+    }
+
+    trackDefinedFileEvent(eventParams.name, fileKey, state, params)
+  })
+
+  return ({ name, params }: { name: string, params?: any }) =>
+    trackEvent({ name, params })
+})()
+
+// Export aliases for backward compatibility
+export const $J = updatePrototypeDevice
+export const Hs = shouldNavigateToNextItem
+export const Jr = handlePrototypeScaleChange
+export const Qx = normalizePrototypeDeviceConfig
+export const RL = shouldNavigateToPreviousItem
+export const Rv = getDeviceFramePosition
+export const UG = DEFAULT_ANIMATION_DURATION
+export const Zh = trackDefinedFileEventWrapper
+export const _P = trackPrototypeScaleChangeEvent
+export const _Q = mapToDevicePresetType
+export const fz = shouldTriggerRefresh
+export const qb = getContentScalingMode

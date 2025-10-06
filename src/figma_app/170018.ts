@@ -1,6 +1,6 @@
 import { assert, assertNotNullish } from "../figma_app/465776";
 import { RotationType } from "../figma_app/763686";
-import { hY } from "../figma_app/349969";
+import { DEVICE_PRESETS_BY_ID } from "../figma_app/349969";
 export function $$s0(e) {
   let t = e.getCurrentPage();
   assert(!!t, "expected currentPage to exist");
@@ -25,7 +25,7 @@ export function $$l1(e, t, r) {
   };
 }
 let d = e => {
-  let t = hY[e];
+  let t = DEVICE_PRESETS_BY_ID[e];
   assertNotNullish(t, "getDeviceImageIdealSize must take in a valid presetIdentifier");
   return {
     x: t.imageSize.x / t.scaleFactor,
@@ -40,7 +40,7 @@ export function $$c4(e, t) {
   let {
     framePresetSize,
     offset
-  } = hY[e];
+  } = DEVICE_PRESETS_BY_ID[e];
   let o = d(e);
   let l = t === RotationType.CCW_90;
   let c = {
@@ -58,8 +58,8 @@ export function $$c4(e, t) {
   };
 }
 export function $$u2(e, t) {
-  let r = hY[e];
-  let i = hY[t];
+  let r = DEVICE_PRESETS_BY_ID[e];
+  let i = DEVICE_PRESETS_BY_ID[t];
   assertNotNullish(r, "expected device1 to exist");
   assertNotNullish(i, "expected device2 to exist");
   return r.deviceName === i.deviceName && r.imageSize.x === i.imageSize.x && r.imageSize.y === i.imageSize.y;

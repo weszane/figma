@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { IntersectionSentinel } from "../905/925868";
 import { AutoLayout } from "../905/470281";
-import { T } from "../5132/203178";
+import { isResourceHubContext } from "../5132/203178";
 import { Gm } from "../5430/873109";
 import { X } from "../5430/512075";
 import { U6 } from "../5430/28597";
@@ -11,7 +11,7 @@ export function $$u0({
   resourceContent: t
 }) {
   let [r, c] = useState(!1);
-  let u = T();
+  let u = isResourceHubContext();
   return jsxs(AutoLayout, {
     width: "100%",
     direction: "vertical",

@@ -53,7 +53,7 @@ import { UpsellModalType } from "../905/165519";
 import { FEditorType } from "../figma_app/53721";
 import { TeamOrgType } from "../figma_app/10554";
 import { Yh, c1 } from "../figma_app/357047";
-import { e0 as _$$e } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { AM, pT } from "../905/467351";
 import { Z5, R5 } from "../figma_app/861982";
 import { Ah } from "../figma_app/221114";
@@ -579,7 +579,7 @@ let ti = memo(function ({
       let t = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
       return () => {
         Ah(t) ? e(exitVersionHistoryMode()) : e(enterVersionHistoryMode({
-          source: _$$e.EDITOR_TOOLBAR
+          source: TrackingKeyEnum.EDITOR_TOOLBAR
         }));
       };
     }(),
@@ -726,18 +726,18 @@ let ti = memo(function ({
   let tP = c.folderId === eK?.personal_drafts_folder_id;
   let tF = c.canEdit && !!c.thumbnailGuid;
   let tB = !tt && i.editorType === FEditorType.Design && c.canEdit;
-  let tU = em(_$$m(tu, _$$e.EDITOR_TOOLBAR, tp, tm), {
+  let tU = em(_$$m(tu, TrackingKeyEnum.EDITOR_TOOLBAR, tp, tm), {
     appModel: t,
     selectedView: i,
     dispatch: _
   });
-  let tG = em(_$$t2(tu, _$$e.EDITOR_TOOLBAR, tp), {
+  let tG = em(_$$t2(tu, TrackingKeyEnum.EDITOR_TOOLBAR, tp), {
     appModel: t,
     selectedView: i,
     dispatch: _
   });
   return jsx(TrackingProvider, {
-    name: _$$e.EDITOR_FILENAME_DROPDOWN,
+    name: TrackingKeyEnum.EDITOR_FILENAME_DROPDOWN,
     properties: {
       ...ty,
       slideConversionDropdownEntrypoint: th

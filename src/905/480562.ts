@@ -11,7 +11,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { postUserFlag } from "../905/985254";
 import { selectUserFlag } from "../905/940356";
-import { e0 as _$$e } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { n as _$$n, l as _$$l } from "../905/402643";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { r as _$$r } from "../905/571562";
@@ -1323,7 +1323,7 @@ export function $$eJ0({
     orgId: a?.parent_org_id
   }), [e, a?.parent_org_id]);
   return jsx(_$$t3, {
-    page: _$$e.DSA_FILE_VIEW_ANALYTICS,
+    page: TrackingKeyEnum.DSA_FILE_VIEW_ANALYTICS,
     properties: T,
     children: jsxs("div", {
       className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.maxHFull.$,

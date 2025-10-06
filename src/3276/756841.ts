@@ -15,7 +15,7 @@ import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
 import { useFullscreenReady } from "../905/924253";
 import { useCurrentTool } from "../figma_app/722362";
-import { e0 as _$$e } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { i$, Z5, uw } from "../figma_app/582377";
 import { hB, Ue, Lc, Qj, Yo, lM } from "../905/301347";
 import { v as _$$v } from "../905/266815";
@@ -100,7 +100,7 @@ import { sendWithRetry } from "../905/910117";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { c1 } from "../figma_app/357047";
 import { notificationAPI } from "../905/894881";
-import { Z as _$$Z2 } from "../905/438683";
+import { useRegisterMenu } from "../905/438683";
 import { A as _$$A7 } from "../svg/343167";
 import { A as _$$A8 } from "../svg/383262";
 import { A as _$$A9 } from "../2854/890611";
@@ -1215,7 +1215,7 @@ function tg(e) {
   } = setupMenu();
   let r = isUserNotLoggedInAndEditorSupported();
   let l = WN();
-  _$$Z2(manager);
+  useRegisterMenu(manager);
   let d = useLatestRef(manager.isOpen);
   return (useEffect(() => {
     if (d !== manager.isOpen) {
@@ -1410,7 +1410,7 @@ function tk({
       hidePageName: t.hidePageName,
       hideOrphanedState: t.hideOrphanedState
     })]
-  }), _$$e.COMMENTS_TOOL, {
+  }), TrackingKeyEnum.COMMENTS_TOOL, {
     currentTool: n
   });
 }

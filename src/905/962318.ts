@@ -22,7 +22,7 @@ import { e as _$$e, T as _$$T } from '../905/949616';
 import { isDevEnvironment } from '../figma_app/169182';
 import { DialogActionStrip, DialogBody, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { getI18nState } from '../figma_app/363242';
-import { aq } from '../figma_app/412189';
+import { useIsMounted } from '../figma_app/412189';
 import { throwError } from '../figma_app/465776';
 import { selectExperimentConfigHook } from '../figma_app/594947';
 import { TrackingProvider } from '../figma_app/831799';
@@ -105,7 +105,7 @@ export let $$P0 = registerModal(({
   let U = j.some(e => e.value === T) ? T : defaultLanguage;
   let [B, V] = useState(U);
   let [G, z] = useState(!1);
-  let H = aq();
+  let H = useIsMounted();
   let W = function ({
     onError: e,
     onSuccess: t

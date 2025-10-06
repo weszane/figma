@@ -2,7 +2,7 @@ import { useRef, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { AppStateTsApi, DesignGraphElements, UserActionState } from "../figma_app/763686";
 import { useLatestRef } from "../figma_app/922077";
-import { L3 } from "../figma_app/385215";
+import { isObserving } from "../figma_app/385215";
 import { clearSelection } from "../figma_app/741237";
 import { useIsProgressBarHiddenOrLocked, useHasSceneGraphSelection, useCurrentTool } from "../figma_app/722362";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
@@ -35,7 +35,7 @@ export function $$h1() {
         } else h.current && isPropertiesPanelCollapsed && togglePropertiesPanelCollapsed();
       }
     }, [e, u, isPropertiesPanelCollapsed, togglePropertiesPanelCollapsed, setPropertiesPanelCollapsed, t, r, _]);
-  }(useSelector(e => L3(e.multiplayer)));
+  }(useSelector(e => isObserving(e.multiplayer)));
 }
 export function $$m0() {
   let e = !getObservableValue(AppStateTsApi?.uiState()?.showPropertiesPanel, !0);

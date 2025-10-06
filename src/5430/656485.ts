@@ -22,7 +22,7 @@ import { TrackedLink } from "../figma_app/831799";
 import { ShelfViewType, hasMonetizedResourceMetadata, hasFreemiumCode, ResourceTypeNoComment } from "../figma_app/45218";
 import { PluginImage } from "../905/480825";
 import { FM } from "../5430/773914";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { Z as _$$Z } from "../figma_app/947784";
 import { HoverDropdown } from "../figma_app/209680";
 import { A6 } from "../905/350234";
@@ -211,7 +211,7 @@ function en({
   trackTileClick: t,
   version: r
 }) {
-  let i = AG();
+  let i = useIsResourceHub();
   let o = useDispatch();
   let a = useResourceRouteParams();
   let l = buildCommunityPathById({
@@ -295,7 +295,7 @@ export function $$ea0({
   let I;
   let k = !!getFeatureFlags().cmty_release_plugin_row_v2;
   let A = !k && "twoColumn" === T;
-  let P = AG();
+  let P = useIsResourceHub();
   let O = isResourceHubProfilesEnabled();
   let B = useDispatch();
   let D = getSearchSessionIdFromSelector();

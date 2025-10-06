@@ -36,7 +36,7 @@ import { i as _$$i } from '../905/610691';
 import { customHistory } from '../905/612521';
 import { getDesignFileUrlWithOptions } from '../905/612685';
 import { x as _$$x } from '../905/695363';
-import { e0 as _$$e } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { d as _$$d } from '../905/720066';
 import { b0 } from '../905/763690';
 import { $b, h2 } from '../905/820960';
@@ -599,7 +599,7 @@ function eM(e) {
       let e = data?.tile ?? null;
       let t = e ? [e] : [];
       return jsx(TrackingProvider, {
-        name: _$$e.TILES_VIEW_DROP_DOWN,
+        name: TrackingKeyEnum.TILES_VIEW_DROP_DOWN,
         enabled: showing,
         properties: {
           tileType: e?.type,

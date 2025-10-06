@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { K } from "../905/498709";
+import { createRegisterMenuEvent } from "../905/498709";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { q } from "../1556/198651";
 let $$a0 = "FILE_BROWSER_ACCOUNT_SWITCHER_DROPDOWN";
@@ -7,7 +7,7 @@ let {
   open,
   close,
   useRegisterMenu
-} = K();
+} = createRegisterMenuEvent();
 export function $$u1() {
   let e = useDispatch();
   return {

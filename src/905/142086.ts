@@ -38,7 +38,7 @@ import { eb as _$$eb, _Z, Al, bV, BY, Er, IS, KF, mt, qr, rJ, Rt, rx, Ub, Uo, Xv
 import { getResourceDataOrFallback } from '../905/663269';
 import { In } from '../905/672640';
 import { P as _$$P2 } from '../905/688136';
-import { e0 as _$$e } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { SvgComponent } from '../905/714743';
 import { TabLoop } from '../905/718764';
 import { s as _$$s2 } from '../905/761565';
@@ -774,7 +774,7 @@ let eR = registerModal(e => {
   let tM = !tA.isAdminSelfUpgrade && tA?.requiresManualUpgrade;
   let tj = !eS || eS.id === ex || eS.id !== tg?.id || eK || loading || tM || cannotUpgradeDisableAction || tT;
   return jsx(TrackingProvider, {
-    name: _$$e.FILE_MOVE_MODAL,
+    name: TrackingKeyEnum.FILE_MOVE_MODAL,
     properties: eq,
     children: jsx(TabLoop, {
       children: jsxs(HeaderModal, {

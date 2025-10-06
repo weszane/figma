@@ -19,7 +19,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { createNoOpValidator } from "../figma_app/181241";
 class w {
   constructor() {
@@ -97,7 +97,7 @@ let $$R1 = createOptimistThunk((e, {
   }), getInitialOptions().integration_host && trackEventAnalytics("Integration Login Success", {
     user_id: t?.meta?.id,
     integrationHost: getInitialOptions().integration_host,
-    trackedContext: e0.MS_TEAMS_TAB
+    trackedContext: TrackingKeyEnum.MS_TEAMS_TAB
   }), $$N7(t, i.auth.redirectUrl)) {
     let i = t.meta.id;
     e.dispatch(startSamlEmailVerification({

@@ -49,7 +49,7 @@ import { parseKeyCodes, getGamepadInputLabel, formatKeyboardShortcut } from "../
 import { Cy, n9, DV, a2, R as _$$R } from "../figma_app/976110";
 import { B as _$$B2 } from "../905/872019";
 import { a as _$$a } from "../905/29104";
-import { Zh } from "../figma_app/2590";
+import { trackDefinedFileEventWrapper } from "../figma_app/2590";
 import { Yh } from "../figma_app/357047";
 import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
@@ -106,7 +106,7 @@ function eu() {
             module: jsx(_$$p, {}),
             name: ExtensionFeatureKey.MAGIC_LINK,
             beforeModuleOpen: () => {
-              e(Zh({
+              e(trackDefinedFileEventWrapper({
                 name: "prototype.ai_magic_link_entry_clicked",
                 params: {
                   source: "properties_panel"

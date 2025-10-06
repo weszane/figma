@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { O } from "../5430/638907";
 import { D } from "../5430/769256";
 export function $$l0({
@@ -8,7 +8,7 @@ export function $$l0({
   categoryPageData: t,
   numTilesPerRow: r
 }) {
-  let l = AG();
+  let l = useIsResourceHub();
   let c = useRef(null);
   let d = e.url_slug;
   let {

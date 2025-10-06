@@ -11,7 +11,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { useLatestRef } from "../figma_app/922077";
 import { BrowserInfo, isMobileNotFigmaMobile, isAnyMobile } from "../figma_app/778880";
-import { y7, oJ, $ as _$$$, jA, NB, L3, KI } from "../figma_app/385215";
+import { acceptNomination, cancelNomination, stopFollowing, isCurrentUserPresenting, hasNominations, isObserving, trackActionWithTiming } from "../figma_app/385215";
 import { Fj, Dv, ah, uc } from "../905/763714";
 import { getFileTypePx } from "../905/149328";
 import { getViewerInstance } from "../figma_app/632319";
@@ -21,8 +21,8 @@ import { _o } from "../figma_app/701001";
 import { getBasicViewportRect } from "../figma_app/62612";
 import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
-import { $0, dR, Ww, y as _$$y, oW, D_, HG, By, VA, Pi } from "../figma_app/440875";
-import { T as _$$T, N as _$$N2 } from "../905/847283";
+import { useObservingUser, usePresenterUser, useCurrentUser, useNominatingUser, useAutoFollowPresenter, AutoFollowType, useIsPresentationAllowed, useIsObservationAllowed, usePresentationStopHandler, useObservationResetHandler } from "../figma_app/440875";
+import { useSpotlightCTATracking, SpotlightEventType } from "../905/847283";
 import { getSelectedView, getSelectedViewType } from "../figma_app/386952";
 import { a8, $i } from "../figma_app/467440";
 import { h0, JJ } from "../figma_app/61403";
@@ -194,9 +194,9 @@ function J(e) {
     colorOverride,
     overlayStatus
   } = e;
-  let a = $0();
-  let s = dR();
-  let o = Ww();
+  let a = useObservingUser();
+  let s = usePresenterUser();
+  let o = useCurrentUser();
   let l = getSelectedView();
   let d = 0;
   "prototype" === l.view ? d = l.isPresenterView ? 3 : 2 : isAnyMobile && (d = 1);
@@ -261,16 +261,16 @@ function $(e) {
     isTabAccessible = !1,
     hideOthersOverlayOverride = !1
   } = e;
-  let c = Ww();
-  let h = dR();
-  let m = $0();
-  let f = _$$y();
+  let c = useCurrentUser();
+  let h = usePresenterUser();
+  let m = useObservingUser();
+  let f = useNominatingUser();
   let y = selectCurrentFile();
   let E = useAtomWithSubscription(Fj);
-  let T = _$$T();
-  let w = y7();
-  let N = oJ();
-  let A = _$$$();
+  let T = useSpotlightCTATracking();
+  let w = acceptNomination();
+  let N = cancelNomination();
+  let A = stopFollowing();
   let [O, L] = useState(!1);
   useEffect(() => {
     L(!1);
@@ -285,7 +285,7 @@ function $(e) {
     observeCurrentPresenter,
     autoFollowType,
     autoFollowDelayMs
-  } = oW(e);
+  } = useAutoFollowPresenter(e);
   let {
     isWaitingForFirstFollower,
     stopPresenting
@@ -294,14 +294,14 @@ function $(e) {
     let r = e.followerCount;
     let [a, s] = useAtomValueAndSetter(Dv);
     0 === r || t || i(!0);
-    let d = jA(e) || a;
-    jA(e) && a && s(!1);
+    let d = isCurrentUserPresenting(e) || a;
+    isCurrentUserPresenting(e) && a && s(!1);
     !d && t && i(!1);
     let c = d && 0 === r && !t;
-    let u = _$$T();
+    let u = useSpotlightCTATracking();
     let p = getSelectedViewType();
     let h = useCallback(() => {
-      u(_$$N2.STOP);
+      u(SpotlightEventType.STOP);
       "prototype" === p ? getViewerInstance()?.stopPresenting() : Multiplayer.stopPresenting();
     }, [u, p]);
     let m = useCallback(() => !!c && (h(), !0), [h, c]);
@@ -317,7 +317,7 @@ function $(e) {
       showingExplainer,
       isPendingPresenting
     } = e;
-    return jA(_multiplayer) || isPendingPresenting ? "presenting" : showingExplainer ? "showing_explainer" : NB(_multiplayer) ? "prompt_to_accept_nomination" : "none";
+    return isCurrentUserPresenting(_multiplayer) || isPendingPresenting ? "presenting" : showingExplainer ? "showing_explainer" : hasNominations(_multiplayer) ? "prompt_to_accept_nomination" : "none";
   }({
     multiplayer,
     showingExplainer: useAtomWithSubscription(ah),
@@ -330,7 +330,7 @@ function $(e) {
       presenterUser,
       suppressRejoinPrompt
     } = e;
-    return _isAutoFollowPending ? "pending_auto_follow" : L3(_multiplayer2) ? "following" : presenterUser && !suppressRejoinPrompt ? "prompt_to_rejoin" : "none";
+    return _isAutoFollowPending ? "pending_auto_follow" : isObserving(_multiplayer2) ? "following" : presenterUser && !suppressRejoinPrompt ? "prompt_to_rejoin" : "none";
   }({
     multiplayer,
     isAutoFollowPending,
@@ -362,10 +362,10 @@ function $(e) {
   let er = useCallback(() => {
     L(!0);
     cancelAutoFollowCallback();
-    T(_$$N2.IGNORE);
+    T(SpotlightEventType.IGNORE);
   }, [cancelAutoFollowCallback, T]);
-  let en = autoFollowType === D_.INITIAL;
-  let ea = useCallback(() => "pending_auto_follow" === ei && !!isAutoFollowPending && autoFollowType === D_.INITIAL && (cancelAutoFollowCallback(), !0), [autoFollowType, cancelAutoFollowCallback, isAutoFollowPending, ei]);
+  let en = autoFollowType === AutoFollowType.INITIAL;
+  let ea = useCallback(() => "pending_auto_follow" === ei && !!isAutoFollowPending && autoFollowType === AutoFollowType.INITIAL && (cancelAutoFollowCallback(), !0), [autoFollowType, cancelAutoFollowCallback, isAutoFollowPending, ei]);
   O1(ea, KD.MULTIPLAYER_SPOTLIGHT);
   let es = Z();
   let eo = "showing_explainer" === ee;
@@ -586,7 +586,7 @@ function $(e) {
                   });
                 }
               case "prompt_to_rejoin":
-                let e = () => KI(observeCurrentPresenter, multiplayer, "Spotlight Rejoined", statusChangedAt);
+                let e = () => trackActionWithTiming(observeCurrentPresenter, multiplayer, "Spotlight Rejoined", statusChangedAt);
                 if (null !== m || null === h) return null;
                 let i = renderI18nText("collaboration.spotlight.bell.follower.reprompt_spotlight_on_presenter", {
                   presenterUserName: h.name
@@ -605,7 +605,7 @@ function $(e) {
                     text: i,
                     onClick: e
                   },
-                  onCloseCallback: () => KI(() => L(!0), multiplayer, "Spotlight Rejoin Dismissed", statusChangedAt),
+                  onCloseCallback: () => trackActionWithTiming(() => L(!0), multiplayer, "Spotlight Rejoin Dismissed", statusChangedAt),
                   progressBar: !1,
                   progressBarDurationMs: 0,
                   renderKey: `${h.sessionID}`,
@@ -631,12 +631,12 @@ export function $$ee0({
   let n = useSelector(({
     multiplayer: e
   }) => e);
-  let s = HG();
-  let o = By();
+  let s = useIsPresentationAllowed();
+  let o = useIsObservationAllowed();
   let l = -1 !== n.observingSessionID;
-  return (VA({
+  return (usePresentationStopHandler({
     multiplayer: n
-  }), Pi({
+  }), useObservationResetHandler({
     multiplayer: n
   }), o) ? null : s ? jsx($, {
     multiplayer: n,
@@ -653,7 +653,7 @@ function et(e) {
     prototypeHeaderHidden,
     isTabAccessible = !1
   } = e;
-  let s = $0();
+  let s = useObservingUser();
   let o = selectCurrentFile();
   let l = useSelector(e => e.multiplayer.allUsers.length);
   let d = useRef(l);

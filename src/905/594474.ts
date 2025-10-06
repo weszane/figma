@@ -153,7 +153,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { getCurrentUserOrgUser } from "../figma_app/951233";
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
 import { PageTypeEnum } from "../figma_app/10554";
-import { e0 as _$$e3 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r as _$$r5 } from "../905/490676";
 import { KT, Cd, ME, jc, DK, $o } from "../905/54042";
@@ -1709,7 +1709,7 @@ let id = {
     fetchInitialValue: ({
       existingResourceContent: e
     }) => e && getCurrentPluginVersion(e)?.tagline || "",
-    validate: ({ }, e) => {
+    validate: ({}, e) => {
       let t = trimOrEmpty(e);
       return 0 === t.length ? [{
         key: "TAGLINE_EMPTY",
@@ -1742,7 +1742,7 @@ let id = {
       }
     },
     canSet: () => !0,
-    validate: ({ }, e) => {
+    validate: ({}, e) => {
       if (!e) return [{
         key: "ICON_MISSING",
         data: {}
@@ -1817,7 +1817,7 @@ let id = {
       } = await e;
       return existingStatus ? securityForm : null;
     },
-    validate: ({ }, e) => {
+    validate: ({}, e) => {
       if (!e) return;
       let t = _$$ir(e.questions);
       if (t) return [{
@@ -1834,7 +1834,7 @@ let id = {
     fetchInitialValue: ({
       localExtension: e
     }) => !!e,
-    validate: () => { },
+    validate: () => {},
     canSet: ({
       localExtension: e,
       existingExtension: t
@@ -1873,7 +1873,7 @@ let id = {
     fetchInitialValue: ({
       existingExtension: e
     }) => !!e?.monetized_resource_metadata?.is_subscription,
-    validate: () => { },
+    validate: () => {},
     canSet: ({
       existingExtension: e,
       isWidget: t
@@ -1890,7 +1890,7 @@ let id = {
         discountPercentage: t?.annual_discount_percentage
       };
     },
-    validate: ({ }, {
+    validate: ({}, {
       isActive: e,
       discountPercentage: t
     }) => {
@@ -1950,7 +1950,7 @@ let id = {
         is_public: !0
       };
     },
-    validate: ({ }, e) => {
+    validate: ({}, e) => {
       if (!Q4(e)) return [{
         key: "INVALID_PUBLISH_ROLE",
         data: {
@@ -3423,7 +3423,7 @@ function ij(e) {
     (localExtension?.error || S) && __(_$$tZ.MANIFEST_INFO);
   }, [localExtension?.error, S]);
   return jsx(TrackingProvider, {
-    name: _$$e3.COMMUNITY_HUB_PLUGIN_PUBLISH_MODAL_V2,
+    name: TrackingKeyEnum.COMMUNITY_HUB_PLUGIN_PUBLISH_MODAL_V2,
     properties: {
       entryPoint,
       userId: m.id,

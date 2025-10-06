@@ -1,6 +1,6 @@
 import { ServiceCategories } from "../905/165054";
 import { trackEventAnalytics } from "../905/449184";
-import { O as _$$O } from "../905/539306";
+import { createUserContext } from "../905/539306";
 import { isMobileUA } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { AUTH_INIT } from "../905/194276";
@@ -8,9 +8,9 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { t as _$$t2 } from "../905/706346";
-import { _ as _$$_ } from "../905/456042";
+import { WorkspaceSelectorModal } from "../905/456042";
 import { getCurrentSearchSessionId, getQueryIdFromState } from "../figma_app/387599";
-import { y as _$$y } from "../905/444931";
+import { processWorkspaceContext } from "../905/444931";
 import { createOptimistThunk } from "../905/350402";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { addWidgetToRecentsThunk, addPluginToRecentsThunk } from "../figma_app/147952";
@@ -18,7 +18,7 @@ import { mapEditorTypeTo } from "../905/808775";
 import { hb, VT } from "../905/551193";
 import { setupAuthedUserPlanLoader } from "../905/352022";
 import { getWorkspaceName } from "../905/967587";
-import { F as _$$F2 } from "../905/504462";
+import { createUserContexts } from "../905/504462";
 import { canMemberOrg } from "../figma_app/642025";
 import { hasOrgRole, getCurrentPluginVersion, getPluginVersion } from "../figma_app/300692";
 import { setRecentUserData } from "../figma_app/502247";
@@ -98,7 +98,7 @@ let G = createOptimistThunk(async (e, t) => {
     let a = !0;
     let o = !0;
     if (r && (a = await hb(t.resource, r), o = VT(t.resource, r)), hasOrgRole(t.resource) && !canMemberOrg(e.orgId, i, e.userId)) return;
-    let l = _$$y(e, mapFileTypeToEditorType(t.editorType), i, plans);
+    let l = processWorkspaceContext(e, mapFileTypeToEditorType(t.editorType), i, plans);
     l.publicPluginsOrWidgetDisabled = !a;
     l.extensionRequestsAllowed = o;
     return l;
@@ -112,7 +112,7 @@ let G = createOptimistThunk(async (e, t) => {
     return;
   }
   e.dispatch(showModalHandler({
-    type: _$$_,
+    type: WorkspaceSelectorModal,
     data: {
       payload: {
         extension: t.resource,
@@ -201,7 +201,7 @@ let $$H0 = createOptimistThunk((e, t) => {
     tryPluginParams: void 0
   };
   let p = r.plans.filter(e => e.plan_type === OrganizationType.TEAM).map(e => {
-    let t = _$$O(e, n.id);
+    let t = createUserContext(e, n.id);
     return {
       ...t,
       workspaceName: getWorkspaceName(r, t),
@@ -217,7 +217,7 @@ let $$H0 = createOptimistThunk((e, t) => {
     return;
   }
   1 === p.length ? (setRecentUserData(n.id, !1, null, void 0, p[0].teamId ?? null), _$$j(u, null, p[0].teamId ?? null, n.id), l()) : e.dispatch(showModalHandler({
-    type: _$$_,
+    type: WorkspaceSelectorModal,
     data: {
       payload: {
         workspaces: p,
@@ -291,7 +291,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
   let g = null;
   try {
     g = await e.dispatch(setupAuthedUserPlanLoader(!0));
-    m = _$$F2(r, t.resource, g);
+    m = createUserContexts(r, t.resource, g);
   } catch (r) {
     let t = r?.data?.message || getI18nString("file_browser.error_try_again");
     e.dispatch(VisualBellActions.enqueue({

@@ -31,7 +31,7 @@ import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { openWindow } from '../905/508367';
 import { Button } from '../905/521428';
 import { DashboardSections } from '../905/548208';
-import { H as _$$H } from '../905/548668';
+import { slideOrCooperNewFileUrl } from '../905/548668';
 import { FlashActions } from '../905/573154';
 import { useIsCanvasEditDisabled } from '../905/595131';
 import { getFeatureFlags } from '../905/601108';
@@ -1495,7 +1495,7 @@ let nt = {
       onClick: () => {
         if (r && l) {
           if (f) {
-            let e = new URL(_$$H(m, l.libraryKey), document.baseURI).href;
+            let e = new URL(slideOrCooperNewFileUrl(m, l.libraryKey), document.baseURI).href;
             customHistory.redirect(e, '_blank');
           } else {
             i({

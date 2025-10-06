@@ -80,7 +80,7 @@ let l = {
     hitTargetSvgUrl: buildUploadUrl("1e7ee2e1781f9fc738cee031d0574758d00b2fff")
   }
 };
-let $$d0 = [{
+export let APPLE_WATCH_PRESET_LIST = [{
   presetIdentifier: "APPLE_WATCH_SERIES_10_42MM",
   url: buildUploadUrl("0bd5b5eb8da208960a29482724c3c8404652dfb7"),
   thumbnailUrl: buildUploadUrl("373782b2cdc5489693f42cc4b367aa7dd8127dc5"),
@@ -279,4 +279,4 @@ let $$d0 = [{
   archived: !0,
   ...l
 }];
-export const t = $$d0;
+export const t = APPLE_WATCH_PRESET_LIST;

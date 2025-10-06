@@ -168,7 +168,7 @@ import { hasLibraryKeyInSet, hasResourcePresetKey, queryUiKitsFeedbackUrls } fro
 import { SearchEventType, MAX_CONCURRENT_FRAGMENT_LOADS, ContextType, SUPPORTED_NODE_TYPES, SearchResultType, SEARCH_CONFIG, DEFAULT_SEARCH_CONTEXT } from '../figma_app/257779';
 import { useRecentlyUsed } from '../figma_app/267183';
 import { N as _$$N } from '../figma_app/268271';
-import { Ay as _$$Ay4 } from '../figma_app/272902';
+import { createMultiRefCallback } from '../figma_app/272902';
 import { alwaysFalseCallback2, setupStarterUserCallback } from '../figma_app/275462';
 import { useSubscription } from '../figma_app/288654';
 import { $z } from '../figma_app/297733';
@@ -1001,9 +1001,9 @@ function tj(e, t = '', {
   isPreset: s,
   sortingFn: r
 } = {
-    isPreset: !1,
-    sortingFn: void 0
-  }) {
+  isPreset: !1,
+  sortingFn: void 0
+}) {
   let n = new Map();
   let i = [];
   r ? e.sort(r) : sortWithPriority(e, {
@@ -2961,12 +2961,12 @@ function rB() {
                 }).catch(e => {
                   if (logError('auto_suggest', 'Error fetching suggestions', {
                     error: e
-                  }), e.name === 'AbortError') { }
+                  }), e.name === 'AbortError') {}
                 }).finally(() => {
                   signal.aborted || (c(!1), l(`${rw(n)} - FINISHED`));
                   try {
                     d.destroy();
-                  } catch (e) { }
+                  } catch (e) {}
                 });
               } else {
                 n && (c(!1), r([]), p(n.guid), l(`${rw(n)} - INVALID TARGET`));
@@ -3494,7 +3494,7 @@ let ne = e => {
     if (s < 0) {
       let e = l.current[r.length];
       e && i(t => [...t, e.scrollWidth]);
-    } else if (s === 0) { } else if (r.length > 0) {
+    } else if (s === 0) {} else if (r.length > 0) {
       let e = r.length - 1;
       s > r[e] - (o.current && r.length === 1 ? o.current.scrollWidth : 0) && i(e => e.slice(0, -1));
     }
@@ -7496,7 +7496,7 @@ function lL({
       children: jsx(DialogTriggerButton, {
         'onClick': c,
         'aria-expanded': o,
-        'ref': _$$Ay4(t, setKeyboardNavigationElement),
+        'ref': createMultiRefCallback(t, setKeyboardNavigationElement),
         'aria-label': getI18nString('design_systems.assets_panel.settings_label'),
         'aria-haspopup': 'listbox',
         'htmlAttributes': {

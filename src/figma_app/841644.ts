@@ -15,7 +15,7 @@ import { m as _$$m } from '../905/886380';
 import { o as _$$o } from '../905/949628';
 import { i as _$$i } from '../figma_app/85949';
 import { FormattedInputWithWrapper } from '../figma_app/260445';
-import { Ay } from '../figma_app/272902';
+import { createMultiRefCallback } from '../figma_app/272902';
 import { Gp } from '../figma_app/779179';
 import { SG } from '../figma_app/852050';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
@@ -195,7 +195,7 @@ export const FormattedInputWrapper = forwardRef<HTMLDivElement, FormattedInputWr
   }, 'variableBindingButton')].filter(Boolean);
   return jsxs(Fragment, {
     children: [jsx(ComboInputContainer, {
-      ref: Ay(ref, containerRef),
+      ref: createMultiRefCallback(ref, containerRef),
       disabled,
       fullHeight,
       iconLayout,
@@ -358,7 +358,7 @@ export const PickerControl = forwardRef<HTMLDivElement, PickerControlProps>(({
     }
   });
   return jsx('div', {
-    'ref': Ay(ref, containerRef),
+    'ref': createMultiRefCallback(ref, containerRef),
     'className': classNames(inputClassName, {
       [jX]: true,
       [NH]: isActive && !inputClassName

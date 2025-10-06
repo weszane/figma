@@ -24,7 +24,7 @@ export function createEventEmitter() {
      * Emit an event to all subscribers.
      * @param payload - Data to pass to subscribers.
      */
-    emit(payload: any): void {
+    emit(payload?: any): void {
       for (const handler of subscribers) {
         handler(payload)
       }

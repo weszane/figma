@@ -7,7 +7,7 @@ import { Xr } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
 import { getAtomMutate } from "../figma_app/566371";
 import { Badge, BadgeColor } from "../figma_app/919079";
-import { p as _$$p } from "../905/991924";
+import { PlaybackInput } from "../905/991924";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -32,7 +32,7 @@ export function $$S0(e) {
   });
   let T = TileUtils.useIsRenaming(e.tile);
   let k = TileUtils.getName(e.tile);
-  if (T) return jsx(_$$p, {
+  if (T) return jsx(PlaybackInput, {
     style: {
       width: "100%",
       border: "unset",

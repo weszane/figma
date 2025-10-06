@@ -4,7 +4,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { P } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { a as _$$a } from "../905/275092";
 import { U } from "../905/540113";
 import { OverviewStatsView } from "../905/167005";
@@ -43,7 +43,7 @@ export let $$v0 = memo(function ({
   let x = useRef(null);
   let S = nZ(x);
   return jsx(_$$t2, {
-    page: e0.DSA_VARIABLE_VIEW,
+    page: TrackingKeyEnum.DSA_VARIABLE_VIEW,
     properties: E,
     children: jsxs("div", {
       className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,

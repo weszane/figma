@@ -31,7 +31,7 @@ import { getFeatureFlags } from '../905/601108';
 import { setupThemeContext } from '../905/614223';
 import { getVisibleTheme } from '../905/640017';
 import { WAFImage } from '../905/675859';
-import { e0 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { SvgComponent } from '../905/714743';
 import { c as _$$c2, t as _$$t2 } from '../905/722657';
 import { ErrorBoundaryCrash } from '../905/751457';
@@ -491,7 +491,7 @@ export function $$eb0(e) {
       })
     });
   }
-  let eF = er ? e0.ONE_CLICK_REQUEST_NOTE_MODAL : eL ? e0.CONFIGURED_REQUEST_UPGRADE_MODAL : e0.REQUEST_UPGRADE_MODAL;
+  let eF = er ? TrackingKeyEnum.ONE_CLICK_REQUEST_NOTE_MODAL : eL ? TrackingKeyEnum.CONFIGURED_REQUEST_UPGRADE_MODAL : TrackingKeyEnum.REQUEST_UPGRADE_MODAL;
   let eM = {
     ...trackingProperties,
     billableProductKey: e.seatTypeKey,

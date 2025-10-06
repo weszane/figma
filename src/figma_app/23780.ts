@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { l as _$$l } from "../905/479687";
 import a from "classnames";
 import { c$ } from "../figma_app/236327";
-import { S } from "../figma_app/420927";
+import { KeyboardShortcut } from "../figma_app/420927";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 var s = a;
 export function $$c2(e) {
@@ -44,7 +44,7 @@ export function $$_0(e) {
     }), jsx("div", {
       className: "action_option--text--fSMIm",
       children: e.text
-    }), e.shortcut ? jsx(S, {
+    }), e.shortcut ? jsx(KeyboardShortcut, {
       shortcut: e.shortcut,
       className: "action_option--shortcut--w0R75 action_option--rightIconContainer--rTqI4"
     }) : e.rightIcon && jsx(p, {
@@ -72,7 +72,7 @@ export function $$h1(e) {
           children: [jsx("div", {
             className: "action_option--largeText--d3Px5 action_option--text--fSMIm",
             children: e.text
-          }), null != e.shortcut && jsx(S, {
+          }), null != e.shortcut && jsx(KeyboardShortcut, {
             shortcut: e.shortcut,
             className: "action_option--largeShortcut--4uECE action_option--shortcut--w0R75 action_option--rightIconContainer--rTqI4"
           })]

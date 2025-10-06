@@ -42,7 +42,7 @@ import { customHistory } from '../905/612521';
 import { e as _$$e2 } from '../905/621515';
 import { WAFImage } from '../905/675859';
 import { textDisplayConfig } from '../905/687265';
-import { e0 as _$$e } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { setupLoadingStateHandler } from '../905/696711';
 import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { SvgComponent } from '../905/714743';
@@ -133,7 +133,7 @@ import { v_ } from '../figma_app/878651';
 import { ConfirmationModal2 } from '../figma_app/918700';
 import { formatNumber } from '../figma_app/930338';
 import { ResourceHubHomeRouteClass, useResourceFuid, useResourceRouteParams } from '../figma_app/979714';
-import { AG } from '../figma_app/999312';
+import { useIsResourceHub } from '../figma_app/999312';
 import { A as _$$A7 } from '../svg/16929';
 import { A as _$$A8 } from '../svg/21216';
 import { A as _$$A2 } from '../svg/35845';
@@ -269,7 +269,7 @@ function J({
   profile: e,
   avatarSize: t = 96
 }) {
-  let r = AG();
+  let r = useIsResourceHub();
   let s = isResourceHubProfilesEnabled();
   let o = hasUserAccessToProfile(e) && !r;
   let [a, l] = useState(generateUUIDv4());
@@ -469,7 +469,7 @@ function eI({
 }) {
   let t = buildUploadUrl('8b7a937ff662171bfc1bb88ac6c2803aa6434608');
   let r = function () {
-    let e = AG();
+    let e = useIsResourceHub();
     let t = useResourceRouteParams();
     let r = useResourceFuid() ?? void 0;
     return e && t ? new ResourceHubHomeRouteClass({
@@ -519,7 +519,7 @@ function eE({
   queryResult: s,
   numTilesPerRow: n
 }) {
-  let o = AG();
+  let o = useIsResourceHub();
   let [{
     data: a,
     status: l,
@@ -612,7 +612,7 @@ function eA({
     className: 'x78zum5 xdt5ytf x1fwvi78 xzc32ve xrsdzbr',
     ref: s.sizeRef,
     children: e ? jsxs(TrackingProvider, {
-      name: _$$e.RESOURCE_HUB_PROFILE,
+      name: TrackingKeyEnum.RESOURCE_HUB_PROFILE,
       properties: {
         handle: e.profile_handle,
         profileId: e.id
@@ -2022,7 +2022,7 @@ function se({
     className: 'community_hub_public_profile--loadingContainer--GUi6s',
     isLoading: !s,
     children: () => jsx(TrackingProvider, {
-      name: _$$e.COMMUNITY_HUB_PROFILE,
+      name: TrackingKeyEnum.COMMUNITY_HUB_PROFILE,
       properties: {
         handle: s.profile_handle,
         profileId: s.id
@@ -2143,7 +2143,7 @@ function se({
             tabIndex: 0,
             children: renderI18nText('community.profiles.resources')
           }), t, s && jsx(TrackingProvider, {
-            name: _$$e.COMMUNITY_PROFILE_METRICS_TAB,
+            name: TrackingKeyEnum.COMMUNITY_PROFILE_METRICS_TAB,
             children: jsx('div', {
               className: tP,
               children: jsxs('div', {
@@ -2175,7 +2175,7 @@ function se({
           tabIndex: 0,
           children: renderI18nText('community.profiles.resources')
         }), t, s && jsxs(TrackingProvider, {
-          name: _$$e.COMMUNITY_PROFILE_METRICS_TAB,
+          name: TrackingKeyEnum.COMMUNITY_PROFILE_METRICS_TAB,
           children: [jsx(_$$p, {
             children: jsx(to, {
               onboardingKey: eX
@@ -2237,7 +2237,7 @@ export function $$si0({
 }) {
   let t = useRouteStateInstance(ProfileRouteState);
   let r = useRouteStateInstance(ResourceHubProfileRouteState);
-  let s = AG();
+  let s = useIsResourceHub();
   let a = useDispatch();
   let l = t?.params.profileHandle ?? r?.params.profileHandle ?? null;
   let [c] = setupResourceAtomHandler(ss(l ?? ''));

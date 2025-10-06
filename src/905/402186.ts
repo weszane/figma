@@ -4,7 +4,7 @@ import { P } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { setupResourceAtomHandler } from "../905/713695";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { l as _$$l, n as _$$n } from "../905/402643";
 import { a as _$$a } from "../905/275092";
 import { U as _$$U } from "../905/540113";
@@ -43,7 +43,7 @@ export let $$v0 = memo(function ({
   let x = useRef(null);
   let S = nZ(x);
   return jsx(_$$t2, {
-    page: e0.DSA_STYLE_VIEW,
+    page: TrackingKeyEnum.DSA_STYLE_VIEW,
     properties: E,
     children: jsxs("div", {
       className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,

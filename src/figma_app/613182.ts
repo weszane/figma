@@ -26,7 +26,7 @@ import { FEditorType } from '../figma_app/53721';
 import { scaleRect } from '../figma_app/62612';
 import { Ec } from '../figma_app/319732';
 import { c1 } from '../figma_app/357047';
-import { S as _$$S } from '../figma_app/420927';
+import { KeyboardShortcut } from '../figma_app/420927';
 import { fullscreenValue } from '../figma_app/455680';
 import { debug } from '../figma_app/465776';
 import { Fullscreen, Position } from '../figma_app/763686';
@@ -296,7 +296,7 @@ function W(e) {
                     className: l,
                     style: d,
                     children: t.target.text
-                  }), jsx(_$$S, {
+                  }), jsx(KeyboardShortcut, {
                     shortcut: e,
                     className: LE
                   })]
@@ -332,7 +332,7 @@ function W(e) {
                     className: l,
                     style: d,
                     children: a
-                  }), jsx(_$$S, {
+                  }), jsx(KeyboardShortcut, {
                     shortcut: s,
                     className: LE
                   })]

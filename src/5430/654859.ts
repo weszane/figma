@@ -26,7 +26,7 @@ import { Lj } from '../figma_app/835219';
 import { generateSessionId, searchEndSession, searchIncrementQueryCount, searchSessionSeeMoreClick, searchStartSession } from '../figma_app/925970';
 import { NavigationType } from '../figma_app/930386';
 import { I$ } from '../figma_app/940844';
-import { AG } from '../figma_app/999312';
+import { useIsResourceHub } from '../figma_app/999312';
 let c = l;
 let L = 'community_search_duration';
 let M = 'search_dropdown--meta--a-aV4';
@@ -376,7 +376,7 @@ export function $$K0(e) {
   } = _$$W(context);
   let v = useDispatch();
   let j = getSearchSessionIdFromSelector(!0);
-  let w = AG();
+  let w = useIsResourceHub();
   let C = useCallback(() => {
     v(searchSessionSeeMoreClick({}));
     trackEventAnalytics('search_show_all_clicked', {

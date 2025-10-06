@@ -7,7 +7,7 @@ import { U } from '../905/405962';
 import { useModalManager } from '../905/437088';
 import { Q } from '../905/467310';
 import { AutoLayout } from '../905/470281';
-import { e0 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { useCurrentUserOrg } from '../905/845253';
 import { dayjs } from '../905/920142';
 import { TextWithTruncation } from '../905/984674';
@@ -72,7 +72,7 @@ export function $$x0(e) {
     children: renderI18nText('payments_modal.contact_support')
   }, 'contact_support')]);
   return jsx(TrackingProvider, {
-    name: e0.ORG_SUSPENSION_MODAL,
+    name: TrackingKeyEnum.ORG_SUSPENSION_MODAL,
     properties: {
       orgId: h?.id,
       isOrgAdmin: i

@@ -61,7 +61,7 @@ import { extractOrgUsersByUserId } from "../figma_app/951233";
 import { sendRoleInvites } from "../905/351260";
 import { lB, Ey, To } from "../905/148137";
 import { AccessLevelEnum } from "../905/557142";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { organizationAPIService } from "../figma_app/617654";
 import { validateVatGstId } from "../905/57562";
 import { n as _$$n } from "../905/861286";
@@ -1055,7 +1055,7 @@ export class $$eM2 extends Component {
       })]
     });
     return jsxs(TrackingProvider, {
-      name: e0.ORG_CHECKOUT_FLOW,
+      name: TrackingKeyEnum.ORG_CHECKOUT_FLOW,
       properties: {
         step: t,
         currency: this.state.currency,

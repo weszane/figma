@@ -47,7 +47,7 @@ import { useStrictDeepEqualSceneValue, $y, useDeepEqualSceneValue } from "../fig
 import { sp, K3 } from "../figma_app/678300";
 import { isInstanceSimplified } from "../figma_app/164212";
 import { p as _$$p } from "../figma_app/353099";
-import { S as _$$S2 } from "../figma_app/420927";
+import { KeyboardShortcut } from "../figma_app/420927";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
@@ -164,7 +164,7 @@ function ep() {
     priority: _$$N.SECONDARY_MODAL
   });
   let l = browserCapabilities.isApple();
-  let a = useMemo(() => jsx(_$$S2, {
+  let a = useMemo(() => jsx(KeyboardShortcut, {
     shortcut: l ? "\u2303\u21E7A" : "Ctrl+Alt+Shift+A"
   }), [l]);
   _$$E2(uniqueId, $$in, () => {

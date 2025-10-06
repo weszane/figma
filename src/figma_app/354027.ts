@@ -3,7 +3,7 @@ import { throwTypeError, assert, assertNotNullish } from "../figma_app/465776";
 import { PresetType, RotationType } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { L_ } from "../figma_app/349969";
+import { supportsInlinePreview } from "../figma_app/349969";
 import { fullscreenValue } from "../figma_app/455680";
 import { FEditorType } from "../figma_app/53721";
 import { HEADER_HEIGHT } from "../905/748636";
@@ -158,7 +158,7 @@ export function $$N5(e, t, r, a, s) {
   let m = h.height - HEADER_HEIGHT - 2 * $$_11;
   let f = Math.max(.5 * h.width, $$g1);
   let E = $W(s);
-  let y = !!E && L_(E);
+  let y = !!E && supportsInlinePreview(E);
   if (!(0 === c.type && r && y)) {
     let e = A($$S9(c, o), {
       x: f,

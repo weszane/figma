@@ -4,7 +4,7 @@ import { useNonMixedSelectionPropertyValue } from "../905/275640";
 import { useSceneGraphSelection } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCachedSubtree } from "../figma_app/679183";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { Q } from "../9314/475980";
 import { Mw, ON } from "../3276/43946";
 import { t as _$$t } from "../figma_app/440177";
@@ -32,7 +32,7 @@ export function $$g0({
     }, "code-local-styles")
   });
   return jsxs(TrackingProvider, {
-    name: e0.CODE_PANEL,
+    name: TrackingKeyEnum.CODE_PANEL,
     children: [jsx(Mw, {
       panelName: ON.INSPECT
     }), jsx(_$$t, {

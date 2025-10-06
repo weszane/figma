@@ -12,7 +12,7 @@ import { IconButton } from '../905/443068';
 import { P as _$$P } from '../905/537307';
 import { findTeamById } from '../905/613917';
 import { adminPermissionConfig } from '../905/654645';
-import { e0 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { defaultColorManipulator } from '../905/713722';
 import { showTooltip } from '../905/765855';
 import { G as _$$G } from '../905/865520';
@@ -64,7 +64,7 @@ function H({
     closeColorPalettePicker: t
   }, e.uuid));
   return jsx(TrackingProvider, {
-    name: e0.COLOR_PALETTE_PICKER,
+    name: TrackingKeyEnum.COLOR_PALETTE_PICKER,
     children: jsx('div', {
       className: l()({
         'color_palette_picker--wrapper--DVGTu': !0,

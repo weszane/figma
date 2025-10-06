@@ -11,7 +11,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { f0 } from "../figma_app/975811";
 import { getBigNudgeAmount } from "../figma_app/740163";
-import { _P } from "../figma_app/2590";
+import { trackPrototypeScaleChangeEvent } from "../figma_app/2590";
 import { KindEnum } from "../905/129884";
 import { TimeDurationInput } from "../figma_app/178475";
 import { X7 } from "../905/713167";
@@ -37,7 +37,7 @@ export function $$E0(e) {
   let O = paint.video?.hash ? sha1HexFromBytes(paint.video?.hash).toLowerCase() : null;
   let [D, L] = useState(!1);
   let F = useCallback(e => {
-    R(_P({
+    R(trackPrototypeScaleChangeEvent({
       name: "Video previewed",
       params: {
         type: "video",

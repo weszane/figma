@@ -3,7 +3,7 @@ import { forwardRef, useRef, Children, useMemo, useContext, createContext, useCa
 import { fI, V6 } from "../905/201252";
 import { fh } from "../905/127493";
 import { setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
-import { SV } from "../figma_app/272902";
+import { useMultiRefCallback } from "../figma_app/272902";
 import d from "classnames";
 import { SvgComponent } from "../905/714743";
 import { conditionalWrapper } from "../905/579635";
@@ -20,7 +20,7 @@ let $$m2 = forwardRef(function ({
   ...p
 }, h) {
   let m = useRef(null);
-  let g = SV(m, h);
+  let g = useMultiRefCallback(m, h);
   return jsxs(fI, {
     ref: g,
     className: c()(Rv, {
@@ -52,7 +52,7 @@ let $$g1 = forwardRef(function ({
   ...g
 }, f) {
   let E = useRef(null);
-  let y = SV(E, f);
+  let y = useMultiRefCallback(E, f);
   return jsxs(fI, {
     ref: y,
     className: c()(PU, {
@@ -95,7 +95,7 @@ let $$f0 = forwardRef(function ({
   ...m
 }, g) {
   let f = useRef(null);
-  let E = SV(f, g);
+  let E = useMultiRefCallback(f, g);
   let y = useMemo(() => Children.map(r, e => null !== e ? 1 : 0)?.reduce((e, t) => e + t, 0) || 0, [r]);
   return jsxs(fI, {
     ref: E,
@@ -140,7 +140,7 @@ let $$E10 = forwardRef(function ({
   ...g
 }, f) {
   let E = useRef(null);
-  let y = SV(E, f);
+  let y = useMultiRefCallback(E, f);
   return jsxs(fI, {
     ref: y,
     className: c()(q0, {
@@ -188,7 +188,7 @@ let $$y7 = forwardRef(function ({
   ...f
 }, E) {
   let y = useRef(null);
-  let b = SV(y, E);
+  let b = useMultiRefCallback(y, E);
   let {
     isDragging
   } = useContext($$v9);
@@ -232,7 +232,7 @@ let $$b8 = forwardRef(function ({
   ...f
 }, E) {
   let y = useRef(null);
-  let b = SV(y, E);
+  let b = useMultiRefCallback(y, E);
   return jsxs(fI, {
     ref: b,
     className: c()(Vb, {
@@ -275,7 +275,7 @@ let $$T3 = forwardRef(function ({
   ...m
 }, g) {
   let f = useRef(null);
-  let E = SV(f, g);
+  let E = useMultiRefCallback(f, g);
   return jsxs(fI, {
     ref: E,
     className: c()(cd, {
@@ -319,7 +319,7 @@ let $$I6 = forwardRef(function ({
   ...g
 }, f) {
   let E = useRef(null);
-  let y = SV(E, f);
+  let y = useMultiRefCallback(E, f);
   return jsxs(fI, {
     ref: y,
     className: c()(_$$o, {

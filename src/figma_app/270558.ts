@@ -6,7 +6,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { renderI18nText } from "../905/303541";
-import { M } from "../905/456042";
+import { WorkspaceAvatar } from "../905/456042";
 import { hideModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
@@ -48,7 +48,7 @@ export let $$f0 = registerModal(function (e) {
                 r();
                 payload.onSelectWorkspace(e, t);
               },
-              avatar: M,
+              avatar: WorkspaceAvatar,
               editorType: payload.editorType,
               useCase: payload.useCase
             })

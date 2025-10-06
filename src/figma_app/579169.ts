@@ -5,10 +5,10 @@ import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { UserForRcs, EduOffboardingData } from "../figma_app/43951";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { bW } from "../905/587414";
-import { qo } from "../905/696396";
+import { OrgPersonal } from "../905/696396";
 import { mapAndAggregateResources, transformAtom } from "../905/401885";
 import { ZS, rg, _s } from "../figma_app/33126";
-let $$_9 = mapAndAggregateResources([UserForRcs.Query({}), ZS], ([e, t]) => null != e.currentUser.id && t?.canRead ? qo.ORG : qo.PERSONAL);
+let $$_9 = mapAndAggregateResources([UserForRcs.Query({}), ZS], ([e, t]) => null != e.currentUser.id && t?.canRead ? OrgPersonal.ORG : OrgPersonal.PERSONAL);
 let $$h11 = transformAtom(UserForRcs.Query({}), e => e.currentUser.createdAt);
 let $$m0 = transformAtom($$h11, e => e.getTime() <= Date.now() - 12096e5);
 let $$g1 = mapAndAggregateResources([rg, UserForRcs.Query({})], ([e, t], r) => {

@@ -9,7 +9,7 @@ import { SceneGraphHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager, Xr } from "../figma_app/27355";
-import { SV } from "../figma_app/272902";
+import { useMultiRefCallback } from "../figma_app/272902";
 import { generateRecordingKey, useHandleChangeEvent } from "../figma_app/878298";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
@@ -342,7 +342,7 @@ export let $$eu0 = forwardRef(({
 }, t) => {
   let i = useCurrentFileKey();
   let a = useRef(null);
-  let s = SV(t, a);
+  let s = useMultiRefCallback(t, a);
   let o = useCallback(t => {
     i && (ID({
       ...e,

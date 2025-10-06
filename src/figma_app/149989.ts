@@ -5,7 +5,7 @@ import { LoadingSpinner } from "../905/443820";
 import { VariableResolvedDataType, VariablesBindings, VariableDataType, DesignGraphElements } from "../figma_app/763686";
 import { StyleType } from "../figma_app/276332";
 import { getFeatureFlags } from "../905/601108";
-import { Ay } from "../figma_app/272902";
+import { createMultiRefCallback } from "../figma_app/272902";
 import u from "classnames";
 import { useSingleEffect } from "../905/791079";
 import { useLatestRef } from "../figma_app/922077";
@@ -899,7 +899,7 @@ function ep({
       className: qc,
       svg: _$$A2
     }), jsx(jT, {
-      ref: Ay(e, o),
+      ref: createMultiRefCallback(e, o),
       className: Rt,
       value: t,
       onChange: r,

@@ -22,10 +22,10 @@ import { compareProductAccessTypes } from "../figma_app/217457";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { ProductTierEnum } from "../905/712921";
 import { BillingCycle } from "../figma_app/831101";
-import { e0 } from "../905/696396";
-if (443 == require.j) { }
-if (443 == require.j) { }
-if (443 == require.j) { }
+import { TrackingKeyEnum } from "../905/696396";
+if (443 == require.j) {}
+if (443 == require.j) {}
+if (443 == require.j) {}
 export function $$E0({
   countByBillableProductKey: e,
   billingInterval: t,
@@ -75,7 +75,7 @@ export function $$E0({
   });
   let F = t === BillingCycle.YEAR;
   return jsx(TrackingProvider, {
-    name: e0.CART_REVIEW_PURCHASE_SUMMARY,
+    name: TrackingKeyEnum.CART_REVIEW_PURCHASE_SUMMARY,
     properties: {
       tier: l,
       billingInterval: t,

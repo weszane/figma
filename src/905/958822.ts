@@ -52,7 +52,7 @@ import { j as _$$j, l as _$$l } from "../905/618243";
 import { getRepoById, findBranchById, filterBranches } from "../905/760074";
 import { ac } from "../905/930279";
 import { liveStoreInstance } from "../905/713695";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { generateUUIDv4 } from "../905/871474";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { noop } from "../905/834956";
@@ -269,7 +269,7 @@ let e_ = (e, t, i, n, r, a) => {
     children: c
   }), "hidden" !== r.status && i) {
     let e;
-    let t = e0.FILE_BROWSER;
+    let t = TrackingKeyEnum.FILE_BROWSER;
     switch (r.status) {
       case "upsell-org":
         e = () => a(_$$j({

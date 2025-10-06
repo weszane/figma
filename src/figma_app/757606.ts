@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Ay } from "../figma_app/272902";
+import { createMultiRefCallback } from "../figma_app/272902";
 import { analyticsEventManager } from "../905/449184";
 import { useSingleEffect } from "../905/791079";
 import { useKeyboardNavigationItem } from "../figma_app/119475";
@@ -99,7 +99,7 @@ export function $$y1(e) {
     f(e) && e.onBlur();
   }, [entryPointForTracking, L?.key, L?.parentOrgId, L?.teamId, e, D]);
   return isFigjam || isLibraryModalUi3 ? jsx(IW, {
-    ref: Ay(k, forwardedRef),
+    ref: createMultiRefCallback(k, forwardedRef),
     className,
     clearSearch: j,
     focusOnMount: !1,
@@ -113,7 +113,7 @@ export function $$y1(e) {
     recordingKey,
     withUI3Icon: isLibraryModalUi3
   }) : f(e) ? jsx(K, {
-    ref: Ay(k, forwardedRef),
+    ref: createMultiRefCallback(k, forwardedRef),
     clearSearch: j,
     focusOnMount: !1,
     isKeyDownHandled: F,
@@ -124,7 +124,7 @@ export function $$y1(e) {
     query,
     recordingKey
   }) : jsx(Lp, {
-    ref: Ay(k, forwardedRef),
+    ref: createMultiRefCallback(k, forwardedRef),
     className,
     clearSearch: j,
     dataTestId: "asset-panel-search-bar-input",
@@ -180,7 +180,7 @@ export function $$b0({
     className: t,
     entryPointForTracking: b,
     extraSpacing: a,
-    forwardedRef: Ay(S, T),
+    forwardedRef: createMultiRefCallback(S, T),
     hideSearchIcon: o,
     hideXIcon: c,
     isFigjam: u,

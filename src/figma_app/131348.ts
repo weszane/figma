@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { ButtonPrimitive } from "../905/632989";
 import { z6, CU } from "../905/963340";
 import { r } from "../905/571562";
-import { SV } from "../figma_app/272902";
+import { useMultiRefCallback } from "../figma_app/272902";
 import m from "classnames";
 import { L } from "../figma_app/819472";
 import { hideTooltip } from "../905/765855";
@@ -34,7 +34,7 @@ function $$I(e) {
     ...S
   } = getTriggerProps();
   let v = Jo();
-  let A = SV(v, ref);
+  let A = useMultiRefCallback(v, ref);
   let x = useContext(sg);
   let N = disabled || x;
   let C = L();

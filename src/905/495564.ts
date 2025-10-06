@@ -1,15 +1,30 @@
 import { useSelector } from 'react-redux'
 import { getOrgOrTeamPath } from '../905/890459'
 
-export function $$a0(e) {
-  let {
-    currentUserOrgId,
-  } = e
-  currentUserOrgId || getOrgOrTeamPath(e)
+/**
+ * Gets the organization path for the current user
+ * @param params - Object containing currentUserOrgId and other properties
+ * @returns The organization path string
+ */
+export function getUserOrgPath(params: { currentUserOrgId?: string, [key: string]: any }): string {
+  const { currentUserOrgId } = params
+
+  // If currentUserOrgId is not provided, attempt to get org/team path
+  if (!currentUserOrgId) {
+    getOrgOrTeamPath(params)
+  }
+
   return `/${currentUserOrgId}`
 }
-export function $$s1() {
-  return useSelector($$a0)
+
+/**
+ * React hook to get the current user's organization path from Redux store
+ * @returns The organization path string
+ */
+export function useUserOrgPath(): string {
+  return useSelector(getUserOrgPath)
 }
-export const j = $$a0
-export const q = $$s1
+
+// Export aliases for backward compatibility
+export const j = getUserOrgPath
+export const q = useUserOrgPath

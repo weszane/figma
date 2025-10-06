@@ -6,14 +6,14 @@ import { debugState } from "../905/407919";
 import { fullscreenValue } from "../figma_app/455680";
 import { replaceSelection } from "../figma_app/741237";
 import { interactionTestAtom } from "../figma_app/617727";
-import { Zh } from "../figma_app/2590";
+import { trackDefinedFileEventWrapper } from "../figma_app/2590";
 import { getValidPrototypeNodeId } from "../905/291518";
 import { Ew } from "../figma_app/170018";
 import { hF, l5, HS } from "../figma_app/354027";
 import { A as _$$A } from "../905/991888";
 let g = 0;
 let f = () => {
-  0 !== g && (debugState.dispatch(Zh({
+  0 !== g && (debugState.dispatch(trackDefinedFileEventWrapper({
     name: "prototype.frame_following_selection_replaced",
     params: {
       jumps: g

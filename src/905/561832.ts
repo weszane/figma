@@ -23,7 +23,7 @@ import { handleError } from "../905/760074";
 import { waitForJoinStatus } from "../905/346794";
 import { FEditorType } from "../figma_app/53721";
 import { CPPEventType, SourceDirection } from "../905/535806";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { DraggableModalManager } from "../905/748636";
 import { ss } from "../905/746499";
@@ -130,7 +130,7 @@ let F = (e, t, i) => {
         title: renderI18nText(`collaboration.branching.merge_error.could_not_start_${s}`),
         description: n = renderI18nText("collaboration.branching.merge_error.branch_archived_description"),
         primaryButtonText: renderI18nText("base_notifications.dismiss"),
-        primaryAction: () => { }
+        primaryAction: () => {}
       };
     case 3:
       return {
@@ -179,7 +179,7 @@ function M(e) {
     });
   });
   return jsx(TrackingProvider, {
-    name: e0.BRANCHING_MERGE_ERROR_MODAL,
+    name: TrackingKeyEnum.BRANCHING_MERGE_ERROR_MODAL,
     children: jsx(DraggableModalManager, {
       isCloseHidden: !0,
       title: i.title,

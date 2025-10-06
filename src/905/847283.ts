@@ -1,22 +1,42 @@
-import { useCallback } from "react";
-import { useStore } from "react-redux";
-import { trackFileEvent } from "../figma_app/314264";
-var $$s0 = (e => (e.START = "start", e.STOP = "stop", e.IGNORE = "ignore", e))($$s0 || {});
-export function $$o1() {
-  let e = useStore();
-  return useCallback(t => {
-    let i = e.getState();
-    let n = i.openFile?.key;
-    let r = i.multiplayer;
-    let s = r.allUsers.find(e => e.sessionID === r.sessionID);
-    let o = r.allUsers.length;
-    let l = s?.userID;
-    trackFileEvent("Spotlight CTA Clicked", n, i, {
-      userId: l,
-      numFileUsers: o,
-      eventType: t
-    });
-  }, [e]);
+import { useCallback } from "react"
+import { useStore } from "react-redux"
+import { trackFileEvent } from "../figma_app/314264"
+/**
+ * Enum for spotlight event types
+ * Original name: $$s0
+ */
+export enum SpotlightEventType {
+  START = "start",
+  STOP = "stop",
+  IGNORE = "ignore",
 }
-export const N = $$s0;
-export const T = $$o1;
+
+/**
+ * Custom hook for tracking spotlight CTA events
+ * Original name: $$o1
+ */
+export function useSpotlightCTATracking() {
+  const store = useStore()
+
+  return useCallback((eventType: SpotlightEventType) => {
+    const state: AppState = store.getState() as AppState
+    const fileKey = state.openFile?.key
+    const multiplayer = state.multiplayer
+
+    const currentUser = multiplayer.allUsers.find(
+      user => user.sessionID === multiplayer.sessionID,
+    )
+
+    const userCount = multiplayer.allUsers.length
+    const userId = currentUser?.userID
+
+    trackFileEvent("Spotlight CTA Clicked", fileKey, state, {
+      userId,
+      numFileUsers: userCount,
+      eventType,
+    })
+  }, [store])
+}
+
+export const N = SpotlightEventType
+export const T = useSpotlightCTATracking

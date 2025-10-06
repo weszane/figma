@@ -22,7 +22,7 @@ import { useStarterGlobalFileLimitsExperiment } from "../figma_app/297957";
 import { TrackedAnchor, TrackingProvider } from "../figma_app/831799";
 import { ChurnFrictionPersonalizedModalView } from "../figma_app/43951";
 import { STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { W as _$$W } from "../905/244810";
 import { ModalContainer } from "../figma_app/918700";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
@@ -443,7 +443,7 @@ export let $$z0 = registerModal(function ({
     })]
   });
   return jsx(TrackingProvider, {
-    name: e0.CHURN_FRICTION_PERSONALIZED_VALUE_MODAL,
+    name: TrackingKeyEnum.CHURN_FRICTION_PERSONALIZED_VALUE_MODAL,
     properties: {
       team_id: e
     },

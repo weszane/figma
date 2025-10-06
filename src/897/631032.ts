@@ -5,7 +5,7 @@ import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../897/929006";
 import { isSitesFileType } from "../figma_app/976749";
-import { _P } from "../figma_app/2590";
+import { trackPrototypeScaleChangeEvent } from "../figma_app/2590";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { LengthInput } from "../figma_app/178475";
@@ -636,7 +636,7 @@ export let $$Y0 = memo(function (e) {
       transitionDuration: a
     });
     BG.trigger("restartSpringAnimation");
-    r === yesNoTrackingEnum.YES && t(_P({
+    r === yesNoTrackingEnum.YES && t(trackPrototypeScaleChangeEvent({
       name: "Prototype Spring Animations Set Custom Value",
       params: {
         editedValue: i,

@@ -11,9 +11,9 @@ import { useSingleEffect } from "../905/791079";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
-import { Q4 } from "../5132/642384";
-import { _ as _$$_ } from "../905/456042";
-import { A as _$$A } from "../5132/237216";
+import { createNewFileHandler } from "../5132/642384";
+import { WorkspaceSelectorModal } from "../905/456042";
+import { useDuplicateTemplateHandler } from "../5132/237216";
 import { hideModal, showModalHandler } from "../905/156213";
 import { getPartnerType } from "../905/853613";
 import { selectCurrentUser } from "../905/372672";
@@ -35,7 +35,7 @@ import { IE } from "../5430/231178";
 import { hasHubFileOrPresetKey } from "../figma_app/255679";
 import { KindEnum } from "../905/129884";
 import { F as _$$F } from "../5430/926195";
-import { T as _$$T } from "../5132/203178";
+import { isResourceHubContext } from "../5132/203178";
 import { Q } from "../5430/345616";
 import { nu, uD } from "../5430/774694";
 let L = "use_preset_options_modal--presetOptionsModal__optionText--BPEmi";
@@ -46,7 +46,7 @@ let E = registerModal(function ({
 }) {
   let r = useDispatch();
   let o = selectCurrentUser();
-  let j = _$$A(e, !1, !1, t);
+  let j = useDuplicateTemplateHandler(e, !1, !1, t);
   useSingleEffect(() => {
     analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_displayed", {
       userId: o?.id,
@@ -67,9 +67,9 @@ let E = registerModal(function ({
     });
   }, [E, e, o]);
   let R = useCallback(() => {
-    let s = Q4(e => {
+    let s = createNewFileHandler(e => {
       r(showModalHandler({
-        type: _$$_,
+        type: WorkspaceSelectorModal,
         data: {
           payload: e
         }
@@ -185,8 +185,8 @@ export function $$Q0({
   let h = getCommunityResourcePayment(e);
   let x = IE(e);
   let f = Rr(c);
-  let v = _$$A(e);
-  let b = _$$T();
+  let v = useDuplicateTemplateHandler(e);
+  let b = isResourceHubContext();
   let j = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH}px)`);
   let w = getResourceActionText(t);
   let {

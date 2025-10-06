@@ -390,3 +390,4 @@ export function renderMessageMeta(meta: MessageMeta[] = []): string {
 }
 
 export const sP =  renderMessageMeta
+export const Rc = normalizeMessageMeta

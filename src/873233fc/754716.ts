@@ -22,7 +22,7 @@ import { MO } from "../3682/618608";
 import { pc } from "../figma_app/152690";
 import { O as _$$O, w as _$$w } from "../3674/344857";
 import { useCanAccessFullDevMode, useCanUseDevModeDemoFile } from "../figma_app/473493";
-import { e as _$$e } from "../905/383776";
+import { useIsFullscreenWithDevVariables } from "../905/383776";
 import { useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { useFileLibrarySubscriptions } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
@@ -795,7 +795,7 @@ let eX = memo(({
   let n = useAppModelProperty("loadingEmbeds");
   let c = !!useCanAccessFullDevMode();
   let m = useIsFullscreenOverview();
-  let x = _$$e();
+  let x = useIsFullscreenWithDevVariables();
   let p = useIsFullscreenDevModeComponentBrowser();
   let h = Lk();
   let g = useCanUseDevModeDemoFile();

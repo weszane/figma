@@ -31,7 +31,7 @@ import { BannerMessage } from '../905/363675';
 import { O as _$$O4 } from '../905/365108';
 import { selectCurrentUser } from '../905/372672';
 import { deepEqual } from '../905/382883';
-import { e as _$$e3 } from '../905/383776';
+import { useIsFullscreenWithDevVariables } from '../905/383776';
 import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A4 } from '../905/408320';
 import { i as _$$i2 } from '../905/415810';
@@ -147,15 +147,15 @@ import { f as _$$f } from '../figma_app/258006';
 import { a as _$$a } from '../figma_app/289605';
 import { isUsingLocalBuild } from '../figma_app/298277';
 import { mapFileToProductType } from '../figma_app/314264';
-import { bq, Gn, hY, L_, qt } from '../figma_app/349969';
+import { DeviceCategory, preloadDevicePreviewImages, DEVICE_PRESETS_BY_ID, supportsInlinePreview, getDeviceCategory } from '../figma_app/349969';
 import { ut as _$$ut, Ah, Fe, HS, hX, kl, l5, nw, Sq, UB, wR, xY } from '../figma_app/354027';
 import { handleFullscreenViewTransition, getBackgroundColorWithOverride } from '../figma_app/379850';
-import { B4 } from '../figma_app/385215';
+import { stopPresenting } from '../figma_app/385215';
 import { getSelectedView } from '../figma_app/386952';
 import { c as _$$c2 } from '../figma_app/391827';
 import { Hr, Oi } from '../figma_app/394327';
 import { bi } from '../figma_app/425489';
-import { dR, Ww } from '../figma_app/440875';
+import { usePresenterUser, useCurrentUser } from '../figma_app/440875';
 import { fullscreenValue } from '../figma_app/455680';
 import { assert, assertNotNullish, throwTypeError } from '../figma_app/465776';
 import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile } from '../figma_app/473493';
@@ -1276,7 +1276,7 @@ function tp({
 function th({
   title: e
 }) {
-  let t = Ww();
+  let t = useCurrentUser();
   let i = useDropdownState();
   let s = useSelector(e => e.multiplayer);
   let o = selectCurrentFile();
@@ -1645,8 +1645,8 @@ function iY() {
   let s = useDropdownState();
   let o = useSelector(e => e.multiplayer);
   let l = useMemo(() => o.allUsers.find(e => e.sessionID === o.sessionID) || null, [o.allUsers, o.sessionID]);
-  let d = dR();
-  let c = B4();
+  let d = usePresenterUser();
+  let c = stopPresenting();
   let u = useCallback(e => {
     Lx(e, l?.sessionID, t, !1, o, d, c);
   }, [l?.sessionID, t, o, d, c]);
@@ -2470,7 +2470,7 @@ function i8() {
 }
 let rU = 'hit-target-resize';
 function rG(e) {
-  let t = hY[e.devicePresetIdentifier].inlinePreviewInfo?.hitTargetSvgUrl;
+  let t = DEVICE_PRESETS_BY_ID[e.devicePresetIdentifier].inlinePreviewInfo?.hitTargetSvgUrl;
   let [i, a] = useState(null);
   useEffect(() => {
     fetch(t).then(e => e.text()).then(e => a(e)).catch(() => console.warn('Failed to fetch hit target SVG. Falling back to rectangular resize boundary.'));
@@ -2499,7 +2499,7 @@ function rK({
 }) {
   let m = useCallback(() => {
     let e = t();
-    let i = (16 / ((c ? e.bottom - e.top : e.right - e.left) / hY[d].imageSize.x)).toFixed(2);
+    let i = (16 / ((c ? e.bottom - e.top : e.right - e.left) / DEVICE_PRESETS_BY_ID[d].imageSize.x)).toFixed(2);
     document.querySelectorAll(`[id^=${rU}]`).forEach(e => e.setAttribute('stroke-width', `${i}`));
   }, [d, c, t]);
   useEffect(() => {
@@ -2524,7 +2524,7 @@ function rK({
   });
   let _ = useRef(null);
   let x = useRef(null);
-  let y = useMemo(() => qt(d) === bq.WATCH, [d]);
+  let y = useMemo(() => getDeviceCategory(d) === DeviceCategory.WATCH, [d]);
   let b = useCallback(e => {
     let t = e.currentTarget.getBoundingClientRect();
     let i = e.clientX - t.left;
@@ -2591,7 +2591,7 @@ function rK({
   return (useEffect(() => {
     document.querySelectorAll(`[id^=${rU}]`).forEach(e => E(e));
   }, [d, E]), p) ? null : c ? (() => {
-    let e = hY[d].imageSize;
+    let e = DEVICE_PRESETS_BY_ID[d].imageSize;
     let t = e.x / e.y;
     return jsx('div', {
       children: jsx(SvgComponent, {
@@ -2703,7 +2703,7 @@ let r0 = memo(({
   let [k, N] = useState(v.y + uF);
   let A = getSingletonSceneGraph().getCurrentPage()?.prototypeDevice || null;
   let O = A?.presetIdentifier;
-  let L = !!O && L_(O);
+  let L = !!O && supportsInlinePreview(O);
   let R = C && L && f;
   let {
     showing
@@ -2830,7 +2830,7 @@ let r0 = memo(({
     });
   }, [W]);
   let et = useMemo(() => {
-    if (R && hY[O].inlinePreviewInfo?.hitTargetSvgUrl) {
+    if (R && DEVICE_PRESETS_BY_ID[O].inlinePreviewInfo?.hitTargetSvgUrl) {
       return function (e) {
         let t = A.rotation === RotationType.CCW_90;
         return jsx(rG, {
@@ -2872,7 +2872,7 @@ let r0 = memo(({
     }
   }, [v, E, O, R, A, ee, W]);
   useEffect(() => {
-    O && L_(O) && Gn(O);
+    O && supportsInlinePreview(O) && preloadDevicePreviewImages(O);
   }, [O]);
   let er = useCallback(() => {
     let e = V();
@@ -3433,7 +3433,7 @@ export function $$r40({
   let t = useSelector(xY);
   let i = useSelector(e => e.mirror.appModel.currentPage);
   let n = useIsFullscreenOverview();
-  let s = _$$e3();
+  let s = useIsFullscreenWithDevVariables();
   let l = useIsFullscreenDevModeComponentBrowser();
   let d = isDesignFileType();
   let c = isDevHandoffEditorType();

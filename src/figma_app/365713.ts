@@ -15,7 +15,7 @@ import { renderI18nText } from "../905/303541";
 import { Zl } from "../figma_app/311375";
 import { cortexAPI, StreamAsyncIteratorWithTimeout } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
-import { Zh } from "../figma_app/2590";
+import { trackDefinedFileEventWrapper } from "../figma_app/2590";
 import { A } from "../905/202425";
 import { pD } from "../905/727576";
 import { isMagicLinkEnabled } from "../figma_app/144974";
@@ -244,7 +244,7 @@ export async function $$D0(e, t, r, n) {
   let o;
   if ("TOPLEVEL" === e.type && function (e, t) {
     let r = i9(e.unfilteredScene.children);
-    t(Zh({
+    t(trackDefinedFileEventWrapper({
       name: "prototype.ai_magic_link_input_existing_interactions",
       params: {
         existingInteractions: JSON.stringify(r.interactionIds)

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { U3 } from "../figma_app/412189";
+import { useWindowEvent } from "../figma_app/412189";
 let a = 1 / 60 * 1e3;
 export function $$s0(e, t) {
   let [r, s] = useState(0);
@@ -20,7 +20,7 @@ export function $$s0(e, t) {
       cancelAnimationFrame(t);
     });
   }, [r, e]);
-  U3("mousemove", useCallback(r => {
+  useWindowEvent("mousemove", useCallback(r => {
     if (!t || !e) return;
     let n = e.scrollTop;
     let {

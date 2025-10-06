@@ -6,9 +6,9 @@ import { parsePxNumber } from "../figma_app/783094";
 import { useLatestRef } from "../figma_app/922077";
 import { getInitialOptions } from "../figma_app/169182";
 import { getFileTypePx } from "../905/149328";
-import { Ww } from "../figma_app/440875";
+import { useCurrentUser } from "../figma_app/440875";
 import { Ro } from "../figma_app/805373";
-import { W } from "../figma_app/54182";
+import { AvatarWithTooltip } from "../figma_app/54182";
 import { Ocz, bnr, Ko3 } from "../figma_app/27776";
 import { qb, C7, _L, ws } from "../9410/574786";
 var s = a;
@@ -74,7 +74,7 @@ export function $$j1(e) {
     return t;
   }(e);
   let l = qb;
-  let d = Ww();
+  let d = useCurrentUser();
   let u = w(useMemo(() => ({
     user: e.user,
     observingSessionID: e.observingSessionID,
@@ -90,7 +90,7 @@ export function $$j1(e) {
       [C7]: !e.horizontal,
       [_L]: e.horizontal
     }),
-    children: jsxs(W, {
+    children: jsxs(AvatarWithTooltip, {
       id: e.tooltipProxyId,
       user: {
         id: user.userID,

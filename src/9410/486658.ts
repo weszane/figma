@@ -13,7 +13,7 @@ import { isFullscreenAndInFocusedNodeView } from "../figma_app/327588";
 import { fullscreenValue } from "../figma_app/455680";
 import { useSceneGraphSelection, useAppModelProperty } from "../figma_app/722362";
 import { useSyncedRef } from "../905/633914";
-import { U3 } from "../figma_app/412189";
+import { useWindowEvent } from "../figma_app/412189";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from "../figma_app/167249";
 import { I as _$$I } from "../figma_app/827540";
@@ -74,7 +74,7 @@ export function $$w2({
       p.includes(e) ? A(e) : O(e);
     }, [p, A, O]);
     let R = _$$I();
-    U3("keydown", r => {
+    useWindowEvent("keydown", r => {
       if (!N8() || Fullscreen.isInCursorChat() || !w || R || j || function (e, t, i, r) {
         if (1 === t.length && "string" == typeof t[0]) {
           let n = t[0];
@@ -216,7 +216,7 @@ export function $$w2({
       "PENDING_CANVAS_GRID_UPDATE" === f.current && b(!1);
     }, [o, b, f]), isInteractionPathCheck() && (Wh.reorder = e => {
       L(e.map(e => t[e]));
-    }, Wh.onMouseDown = A), U3("mouseup", () => {
+    }, Wh.onMouseDown = A), useWindowEvent("mouseup", () => {
       initializeStub("slide.onMouseUp", {});
       v(null);
       w(!1);

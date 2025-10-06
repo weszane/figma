@@ -31,7 +31,7 @@ import { FEditorType } from "../figma_app/53721";
 import { SelectorType } from "../figma_app/707808";
 import { teamAPIClient } from "../905/834575";
 import { fullscreenRestoreModal } from "../905/26554";
-import { on } from "../figma_app/292324";
+import { emptyFunction } from "../figma_app/292324";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { getFullscreenViewFile } from "../figma_app/516028";
 import { mapToEditorType } from "../figma_app/300692";
@@ -226,7 +226,7 @@ let W = createOptimistThunk((e, t) => {
   if ("prototype" === selectedView.view) {
     let n = selectedView.isPresenterView ? "presenter" : "slides" === selectedView.file.editor_type ? "deck" : "proto";
     let r = mapPathToSelectedView(e.getState(), `/${n}/${selectedView.file.key}`, t.params, t.hash);
-    r && (r.nodeId !== selectedView.nodeId || r.startingPointNodeId !== selectedView.startingPointNodeId) && (on(), e.dispatch(selectViewAction(r)));
+    r && (r.nodeId !== selectedView.nodeId || r.startingPointNodeId !== selectedView.startingPointNodeId) && (emptyFunction(), e.dispatch(selectViewAction(r)));
   }
 });
 let K = createOptimistThunk((e, t) => {

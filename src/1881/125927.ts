@@ -5,7 +5,7 @@ import o from "classnames";
 import { isValidEmail } from "../figma_app/416935";
 import { useSubscription } from "../figma_app/288654";
 import { SecureLink } from "../figma_app/637027";
-import { T as _$$T } from "../figma_app/257703";
+import { ListFormatter } from "../figma_app/257703";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { cL } from "../905/748726";
 import { showModalHandler, popModalStack } from "../905/156213";
@@ -83,7 +83,7 @@ export function $$U3({
     let e = T.map(e => `@${e.domain}`);
     if (I) return renderI18nText("org_invite.email_input_description.multiple_domains.expanded", {
       orgName: E.name,
-      domainList: jsx(_$$T, {
+      domainList: jsx(ListFormatter, {
         children: e.map(e => jsx("span", {
           children: e
         }, e))
@@ -230,7 +230,7 @@ let C = registerModal(function (e) {
       children: jsxs(Fragment, {
         children: [renderI18nText("org_invite.pending_guest_confirmation.description", {
           numEmails: e.emails.length,
-          emailList: jsx(_$$T, {
+          emailList: jsx(ListFormatter, {
             className: "org_invite_modal--orgGuestEmails--JpKT2",
             children: e.emails
           })

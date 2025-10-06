@@ -23,7 +23,7 @@ import { selectOpenFileKey, selectOpenFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { RepoFiles } from "../figma_app/43951";
 import { KindEnum } from "../905/129884";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/202020";
 import { p$, jG, Ge } from "../905/822842";
@@ -178,7 +178,7 @@ function F() {
   let $ = cssBuilderInstance.p8.$;
   let X = cssBuilderInstance.pr4.$;
   return jsx(TrackingProvider, {
-    name: e0.BRANCHES_MODAL,
+    name: TrackingKeyEnum.BRANCHES_MODAL,
     properties: {
       fileRepoId: k.fileRepoId,
       fileKey: k.key
@@ -211,7 +211,7 @@ function F() {
                   "aria-label": getI18nString("collaboration.branching_modal.create_branch_tooltip"),
                   onClick: () => {
                     k && e(_$$l({
-                      trackingContextName: e0.FILE_BROWSER,
+                      trackingContextName: TrackingKeyEnum.FILE_BROWSER,
                       sourceFileKey: k.key,
                       dispatchedFromEditor: !0
                     }));

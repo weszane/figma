@@ -13,7 +13,7 @@ import { InputPrimitive } from '../905/246212';
 import { useSelectionProperty, useSelectionPropertyValue } from '../905/275640';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { selectCurrentUser } from '../905/372672';
-import { e as _$$e } from '../905/383776';
+import { useIsFullscreenWithDevVariables } from '../905/383776';
 import { debugState } from '../905/407919';
 import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
@@ -920,7 +920,7 @@ export function $$eU1({
   let o = useAppModelProperty('currentPage');
   let u = useSelector(e => e.comments);
   let p = useIsFullscreenOverview();
-  let h = _$$e();
+  let h = useIsFullscreenWithDevVariables();
   let f = useIsFullscreenDevModeComponentBrowser();
   let x = isUserNotLoggedInAndEditorSupported();
   let y = useCanUseDevModeDemoFile();

@@ -24,7 +24,7 @@ import { x as _$$x } from '../5421/193325';
 import { t as _$$t2 } from '../5421/711842';
 import { b as _$$b } from '../5421/909298';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { _P } from '../figma_app/2590';
+import { trackPrototypeScaleChangeEvent } from '../figma_app/2590';
 import { useAtomValueAndSetter } from '../figma_app/27355';
 import { hP, hV, Oz, YT, zt } from '../figma_app/84580';
 import { av } from '../figma_app/316316';
@@ -691,7 +691,7 @@ export function $$en0({
         nodeID: e.sourceNodeID,
         interactionID: e.id
       }));
-      C(_P({
+      C(trackPrototypeScaleChangeEvent({
         name: 'Prototype action changed',
         params: {
           action: e,

@@ -13,7 +13,7 @@ import { W as _$$W } from "../5430/53744";
 import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { buildCommunityPathById } from "../figma_app/471982";
 import { ProfileRouteState } from "../905/934145";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { A as _$$A } from "../svg/355105";
 import { A as _$$A2 } from "../svg/545021";
 if (443 == require.j) {}
@@ -33,7 +33,7 @@ export function $$b0({
 }) {
   let N = useDispatch();
   let E = getSearchSessionIdFromSelector(!0);
-  let S = AG();
+  let S = useIsResourceHub();
   let [R, k] = useState(!1);
   let A = useRef(null);
   let P = useRef(null);

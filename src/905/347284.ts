@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memoizeByArgs } from "../figma_app/815945";
-import { cZ } from "../figma_app/272902";
+import { setRefValue } from "../figma_app/272902";
 import s from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { BrowserInfo } from "../figma_app/778880";
@@ -74,7 +74,7 @@ export class $$h0 extends RecordingComponent {
     };
     this.setScrollContainer = e => {
       this.outerResizeObserver.disconnect();
-      e && (this.scrollContainer = e, cZ(this.props.scrollContainerRef, e), this.props.initialScrollTop && (this.scrollContainer.scrollTop = this.props.initialScrollTop), this.outerResizeObserver.observe(e), this.recomputeScrollbar("vertical"), this.recomputeScrollbar("horizontal"));
+      e && (this.scrollContainer = e, setRefValue(this.props.scrollContainerRef, e), this.props.initialScrollTop && (this.scrollContainer.scrollTop = this.props.initialScrollTop), this.outerResizeObserver.observe(e), this.recomputeScrollbar("vertical"), this.recomputeScrollbar("horizontal"));
     };
     this.setScrollContent = e => {
       this.resizeObserver.disconnect();
@@ -139,7 +139,7 @@ export class $$h0 extends RecordingComponent {
       let c = 0;
       if (d) {
         let n = scrollSize - trackSize;
-        if ("vertical" === e) c = scrollPos / n * (trackSize - o); else if ("horizontal" === e) {
+        if ("vertical" === e) c = scrollPos / n * (trackSize - o);else if ("horizontal" === e) {
           let e = parsePxNumber(trackPadding) + parsePxNumber(scrollBarYWidth);
           c = scrollPos / n * (trackSize - o - e) + e;
         }

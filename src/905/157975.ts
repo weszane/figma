@@ -17,7 +17,7 @@ import { getFeatureFlags } from "../905/601108";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { fileVersionSelector } from "../905/91038";
 import { LibraryAgeEnum, PrimaryWorkflowEnum, initialLibraryStats } from "../figma_app/633080";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { O as _$$O } from "../905/480562";
 import { l as _$$l } from "../905/362016";
 import { S as _$$S } from "../905/669334";
@@ -87,7 +87,7 @@ function D({
     analytics: !0
   });
   return jsx(_$$t2, {
-    page: e0.DSA_FILE_VIEW,
+    page: TrackingKeyEnum.DSA_FILE_VIEW,
     properties: {
       libraryKey: t?.key
     },

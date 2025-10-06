@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { A } from "../5132/237216";
+import { useDuplicateTemplateHandler } from "../5132/237216";
 import { getResourceType } from "../figma_app/427318";
 import { aI } from "../figma_app/558929";
 import { selectCurrentUser } from "../905/372672";
@@ -23,7 +23,7 @@ export function $$f0(e) {
   let w = useTeamPlanUser().unwrapOr(null);
   let E = useTeamPlanFeatures().unwrapOr(null);
   let L = _$$o(w, E, j, FEditorType.Whiteboard);
-  let N = A(e.resource, !0);
+  let N = useDuplicateTemplateHandler(e.resource, !0);
   if (!f || !t || !getFeatureFlags().community_hub_admin_reviewer) return jsx(Fragment, {});
   function S(t) {
     return "hub_file" === getResourceType(e.resource);

@@ -13,7 +13,7 @@ import { cP, Xi, mj } from "../figma_app/451499";
 import { fullscreenValue } from "../figma_app/455680";
 import { av } from "../figma_app/316316";
 import { useSceneGraphSelector } from "../figma_app/722362";
-import { Zh } from "../figma_app/2590";
+import { trackDefinedFileEventWrapper } from "../figma_app/2590";
 import { J } from "../905/980942";
 import { Ay } from "../figma_app/976110";
 import { Gh, d_, xP } from "../905/727576";
@@ -106,7 +106,7 @@ export function $$k0({
             children: jsx(ActionButton, {
               onAction: () => {
                 let e = selectedNoodleIds[0];
-                R(Zh({
+                R(trackDefinedFileEventWrapper({
                   name: "prototype.ai_magic_link_review_reject_connector",
                   params: {
                     connectorId: JSON.stringify(e)

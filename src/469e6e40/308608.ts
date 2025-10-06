@@ -56,7 +56,7 @@ import { MX, EQ } from "../figma_app/684446";
 import { OrgUsersByIdView, AdminRequestDashboardView, AdminRequestDashOrgInfo } from "../figma_app/43951";
 import { $ as _$$$2 } from "../figma_app/126651";
 import { UpgradeRequestSetting } from "../figma_app/482728";
-import { e0 as _$$e2 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { accountTypeRequestHandler } from "../905/281010";
 import { az } from "../figma_app/805373";
 import { p as _$$p } from "../figma_app/353099";
@@ -322,7 +322,7 @@ let eI = registerModal(function ({
       size: "medium"
     })
   }) : jsx(TrackingProvider, {
-    name: _$$e2.UPGRADE_REQUESTS_DETAIL_MODAL,
+    name: TrackingKeyEnum.UPGRADE_REQUESTS_DETAIL_MODAL,
     properties: {
       adminRequestsDashboard: !0,
       accountTypeRequestId: e.id,
@@ -1226,7 +1226,7 @@ export function $$eD0({
     })]
   });
   return jsx(TrackingProvider, {
-    name: _$$e2.UPGRADE_REQUESTS_TABLE,
+    name: TrackingKeyEnum.UPGRADE_REQUESTS_TABLE,
     properties: {
       adminRequestsDashboard: !0,
       orgId: e5 ? a : void 0,

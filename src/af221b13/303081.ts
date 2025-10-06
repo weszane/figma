@@ -19,9 +19,9 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString, getTranslatedDynamicContent } from "../905/303541";
 import { AuthFlowStep } from "../905/862321";
 import { FL, Ay as _$$Ay } from "../figma_app/248365";
-import { u5, gE } from "../5132/642384";
+import { createNewSlideHandler, createDuplicateTemplateHandler } from "../5132/642384";
 import { s as _$$s2 } from "../5430/913603";
-import { _ as _$$_ } from "../905/456042";
+import { WorkspaceSelectorModal } from "../905/456042";
 import { ts as _$$ts, Sb } from "../figma_app/49598";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
@@ -162,7 +162,7 @@ import { A as _$$A29 } from "../svg/484954";
 import { textDisplayConfig } from "../905/687265";
 import { props, stylex } from "@stylexjs/stylex";
 import { logAndTrackCTA, trackContextViewed } from "../figma_app/314264";
-import { e0 as _$$e4 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { GS } from "../5430/342380";
 import { DesignToolType, mapEditorToType } from "../figma_app/277543";
 import { P as _$$P2 } from "../5430/540963";
@@ -177,7 +177,7 @@ import { e as _$$e5 } from "../5430/604204";
 import { Ay as _$$Ay6 } from "../figma_app/103728";
 import { ButtonLarge } from "../905/521428";
 import { FileBrowserLocation } from "../figma_app/915202";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { O as _$$O } from "../5430/638907";
 import { D as _$$D3 } from "../5430/769256";
 import { SortOptions } from "../figma_app/324237";
@@ -486,9 +486,9 @@ let $ = registerModal(function (e) {
     i(postUserFlag({
       signed_up_from_community: !0
     }));
-    let e = u5(e => {
+    let e = createNewSlideHandler(e => {
       i(showModalHandler({
-        type: _$$_,
+        type: WorkspaceSelectorModal,
         data: {
           payload: e
         }
@@ -501,9 +501,9 @@ let $ = registerModal(function (e) {
     i(postUserFlag({
       signed_up_from_community: !0
     }));
-    let t = gE(e => {
+    let t = createDuplicateTemplateHandler(e => {
       i(showModalHandler({
-        type: _$$_,
+        type: WorkspaceSelectorModal,
         data: {
           payload: e
         }
@@ -4341,7 +4341,7 @@ function nX() {
         onClick: () => {
           logAndTrackCTA({
             action: HubAction.MAKE_BANNER_CLICK,
-            viewContext: _$$e4.COMMUNITY_HUB_LANDING
+            viewContext: TrackingKeyEnum.COMMUNITY_HUB_LANDING
           });
         },
         children: jsxs("div", {
@@ -4962,7 +4962,7 @@ function as() {
     tagSlug
   } = e.params;
   return jsx(TrackingProvider, {
-    name: _$$e4.COMMUNITY_HUB_CATEGORY,
+    name: TrackingKeyEnum.COMMUNITY_HUB_CATEGORY,
     properties: {
       category: categorySlug,
       tag: tagSlug
@@ -4984,7 +4984,7 @@ function au() {
   let i = () => {
     logAndTrackCTA({
       action: HubAction.MAKE_SOMETHING_NEW,
-      viewContext: _$$e4.COMMUNITY_RESOURCE_LANDING_PAGE,
+      viewContext: TrackingKeyEnum.COMMUNITY_RESOURCE_LANDING_PAGE,
       loggedIn: !0
     });
   };
@@ -5129,7 +5129,7 @@ let af = {
   }
 };
 function ab(e) {
-  let t = AG();
+  let t = useIsResourceHub();
   let i = useRef(null);
   let n = useRef(null);
   let {
@@ -5546,7 +5546,7 @@ let aT = () => ({
 });
 var aI = (e => (e.IDLE = "idle", e.LOADING = "loading", e.SUCCESS = "success", e.ERROR = "error", e))(aI || {});
 function aA(e) {
-  let t = AG();
+  let t = useIsResourceHub();
   let i = useRef(null);
   let n = e.resourceType === ResourceTypeEnum.FIGMAKE_TEMPLATE && getFeatureFlags().cmty_make_page_feed_shelf;
   let {
@@ -5639,7 +5639,7 @@ function aA(e) {
   useEffect(() => {
     void 0 !== prevActiveTab && prevActiveTab !== tabManager.activeTab && logAndTrackCTA({
       action: HubAction.FEATURED_RESOURCES_TAB_CLICK,
-      viewContext: _$$e4.COMMUNITY_RESOURCE_LANDING_PAGE,
+      viewContext: TrackingKeyEnum.COMMUNITY_RESOURCE_LANDING_PAGE,
       tab: tabConfig[tabManager.activeTab]?.tabTitle
     });
   }, [prevActiveTab, tabConfig, tabManager.activeTab]);
@@ -5749,7 +5749,7 @@ function aP() {
   return i && !getFeatureFlags()[i] ? jsx(Redirect, {
     to: new _$$_2().to
   }) : jsxs(TrackingProvider, {
-    name: _$$e4.COMMUNITY_RESOURCE_LANDING_PAGE,
+    name: TrackingKeyEnum.COMMUNITY_RESOURCE_LANDING_PAGE,
     children: [jsx(n, {}), jsx("div", {
       ...stylex.props(aR.feedContainer),
       children: jsxs("div", {
@@ -5821,7 +5821,7 @@ function a5({
     t > m[1] ? (g(e => [e[0] + 1, e[1] + 1]), h(p - 10)) : t < m[0] && (g(e => [e[0] - 1, e[1] - 1]), h(p + 10));
   };
   return jsx(TrackingProvider, {
-    name: _$$e4.COMMUNITY_MOBILE_RDP_CAROUSEL,
+    name: TrackingKeyEnum.COMMUNITY_MOBILE_RDP_CAROUSEL,
     properties: {
       resource_type: getResourceType(t),
       resource_id: e.id,

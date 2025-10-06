@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { usePrefersMediaQuery } from "../figma_app/469468";
 import { getI18nString } from "../905/303541";
-import { u5 } from "../5132/642384";
+import { createNewSlideHandler } from "../5132/642384";
 import { s as _$$s } from "../5430/913603";
 import { Q } from "../5430/345616";
-import { _ as _$$_ } from "../905/456042";
+import { WorkspaceSelectorModal } from "../905/456042";
 import { vQ } from "../5430/664984";
 import { getResourceActionText } from "../figma_app/777551";
 import { ResourceTypeEnum } from "../figma_app/306946";
@@ -19,7 +19,7 @@ import { IE } from "../5430/231178";
 import { selectCurrentUser } from "../905/372672";
 import { FileTypeEnum } from "../905/71785";
 import { KindEnum } from "../905/129884";
-import { T as _$$T } from "../5132/203178";
+import { isResourceHubContext } from "../5132/203178";
 import { nu, uD } from "../5430/774694";
 export function $$T0({
   resource: e,
@@ -28,7 +28,7 @@ export function $$T0({
   let r = IE(e);
   let T = useDispatch();
   let I = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH}px)`);
-  let N = _$$T();
+  let N = isResourceHubContext();
   let E = selectCurrentUser();
   let S = useCallback(() => {
     if (I) {
@@ -41,10 +41,10 @@ export function $$T0({
       }));
       return;
     }
-    let t = u5(e => {
+    let t = createNewSlideHandler(e => {
       trackEventAnalytics("try_it_out_drafts_picker_menu_opened", r);
       T(showModalHandler({
-        type: _$$_,
+        type: WorkspaceSelectorModal,
         data: {
           payload: e
         }

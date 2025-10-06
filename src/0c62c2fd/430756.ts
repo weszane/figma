@@ -33,7 +33,7 @@ import { Wj } from "../905/913057";
 import { UpsellModalType } from "../905/165519";
 import { AccessLevelEnum } from "../905/557142";
 import { Z as _$$Z } from "../figma_app/761870";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { e as _$$e } from "../905/393279";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useSingleEffect } from "../905/791079";
@@ -282,7 +282,7 @@ export function $$er0(e) {
     });
   })();
   return jsx(TrackingProvider, {
-    name: e0.CREATE_NEW_PROJECT_MODAL,
+    name: TrackingKeyEnum.CREATE_NEW_PROJECT_MODAL,
     properties: {
       teamId: el?.id,
       ...H

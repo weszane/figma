@@ -11,7 +11,7 @@ import { renderI18nText } from "../905/303541";
 import { setupHyperlinkHandler } from "../figma_app/815170";
 import { getSelectedViewType } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
-import { q } from "../905/495564";
+import { useUserOrgPath } from "../905/495564";
 import { PositionEnum, KindEnum } from "../905/129884";
 import { N as _$$N } from "../905/984200";
 import { $x } from "../905/780715";
@@ -162,7 +162,7 @@ let N = memo(e => {
   }) : null;
 });
 let $$C1 = memo(e => {
-  let t = q();
+  let t = useUserOrgPath();
   let r = useSelector(t => e.mentionedProfiles || t.communityHub?.comments?.mentionedProfiles);
   let i = (e, t, r, a, s) => e.map((e, o) => {
     let l = "";

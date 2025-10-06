@@ -9,7 +9,7 @@ import { e as _$$e } from "../905/621515";
 import { Sb } from "../figma_app/101956";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { ImageOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
@@ -44,7 +44,7 @@ export function $$I3() {
     userFlagOnShow: E,
     targetKey: $$b1,
     onClose: s.complete,
-    trackingContextName: e0.AI_TOPBAR_TOOLTIP,
+    trackingContextName: TrackingKeyEnum.AI_TOPBAR_TOOLTIP,
     title: renderI18nText("whiteboard.ai_onboarding.ai_templates_toolbar.title"),
     description: renderI18nText("whiteboard.ai_onboarding.ai_templates_toolbar.description"),
     emphasized: !0
@@ -93,7 +93,7 @@ export function $$k2({
     },
     targetKey: e,
     title: renderI18nText("whiteboard.ai_onboarding.new_file_modal.title"),
-    trackingContextName: e0.AI_MODAL_ONBOARDING_TOOLTIP,
+    trackingContextName: TrackingKeyEnum.AI_MODAL_ONBOARDING_TOOLTIP,
     userFlagOnShow: v
   });
 }

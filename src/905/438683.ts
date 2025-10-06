@@ -1,9 +1,10 @@
-import { K } from "../905/498709";
+import { createRegisterMenuEvent } from "../905/498709"
+
 let {
   useRegisterMenu,
-  open
-} = K();
-let $$a1 = r;
-let $$s0 = n;
-export const Z = $$s0;
-export const h = $$a1;
+  open,
+} = createRegisterMenuEvent()
+let openResiger = open
+export {openResiger, useRegisterMenu}
+export const Z = useRegisterMenu
+export const h = openResiger

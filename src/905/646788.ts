@@ -51,7 +51,7 @@ import { combineWithHyphen, ShareContext } from "../905/91820";
 import { iO as _$$iO, s5, t9 as _$$t2, yI } from "../905/915142";
 import { appendSearchParams } from "../905/508367";
 import { selectWithShallowEqual } from "../905/103090";
-import { e as _$$e } from "../905/383776";
+import { useIsFullscreenWithDevVariables } from "../905/383776";
 import { A8 } from "../figma_app/617506";
 import { copyShareLinkOptimistic, copyEmbedCodeOptimistic, startWorkshopSessionOptimistic, deleteWorkshopOptimistic, updateFilePermissionsOptimistic } from "../figma_app/78808";
 import { generateUrl, isBranch, isDefaultFile } from "../905/760074";
@@ -175,7 +175,7 @@ import { styleBuilderInstance } from "../905/941192";
 import { t as _$$t4 } from "../905/833100";
 import { A as _$$A6 } from "../905/563377";
 import { PageTypeEnum } from "../figma_app/10554";
-import { e0 as _$$e5 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { y4I, _YF } from "../figma_app/822011";
 import { deepEqual } from "../905/382883";
 import { useMemoShallow } from "../905/19536";
@@ -280,7 +280,7 @@ import { useDelayedCallback } from "../905/116724";
 import { w as _$$w2 } from "../905/733703";
 import { l as _$$l2 } from "../905/572910";
 import { sendMetric, useWebLoggerTimerEffect } from "../905/485103";
-import { _P } from "../figma_app/2590";
+import { trackPrototypeScaleChangeEvent } from "../figma_app/2590";
 import { F as _$$F4 } from "../905/680873";
 import { useSprigWithSampling } from "../905/99656";
 function T(e) {
@@ -360,7 +360,7 @@ function eA({
   let d = X();
   let c = useIsFullscreenOverview();
   let u = useDevModeFocusId();
-  let p = _$$e();
+  let p = useIsFullscreenWithDevVariables();
   let m = useIsFullscreenDevModeComponentBrowser();
   let g = useFullscreenComponentKey();
   let f = A8();
@@ -4115,7 +4115,7 @@ function rg({
     sha1: "buffer" in d ? sha1Hex(d.buffer) : void 0
   }, [d, t.thumbnailUrl]);
   return jsx(TrackingProvider, {
-    name: _$$e5.TEMPLATE_DETAILS,
+    name: TrackingKeyEnum.TEMPLATE_DETAILS,
     children: jsxs("div", {
       className: "publish_tab--publishedTemplate--nQEjl",
       children: [jsx(_$$N3, {
@@ -4201,7 +4201,7 @@ function rb() {
     file: e,
     template: u
   }) : i === ShareAction.PUBLISH_COMMUNITY || "community" === l ? jsx(rn, {}) : jsx(TrackingProvider, {
-    name: _$$e5.SHARE_MODAL_PUBLISH_TAB,
+    name: TrackingKeyEnum.SHARE_MODAL_PUBLISH_TAB,
     children: jsxs("div", {
       className: "publish_tab--publishTab--FVuph",
       children: [jsx(rc, {
@@ -6528,7 +6528,7 @@ export let $$sm0 = registerModal(function ({
     let e = isPrototypeView();
     let t = useDispatch();
     useEffect(() => {
-      e && t(_P({
+      e && t(trackPrototypeScaleChangeEvent({
         name: "Prototype Share Opened"
       }));
     }, [t, e]);

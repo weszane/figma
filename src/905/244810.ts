@@ -4,7 +4,7 @@ import { q3, rR } from "../figma_app/258114";
 import { KindEnum } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 import { f } from "../figma_app/750432";
-import { W as _$$W } from "../figma_app/54182";
+import { AvatarWithTooltip } from "../figma_app/54182";
 import { c as _$$c } from "../905/784033";
 import { R3, DA, Ou, my, wn, yZ } from "../905/497688";
 var a = r;
@@ -24,7 +24,7 @@ export function $$m0(e) {
         [DA]: e.isVoiceAvatar,
         [Ou]: e.overlapped
       }),
-      children: jsx(_$$W, {
+      children: jsx(AvatarWithTooltip, {
         ...d,
         children: jsx(Ro, {
           className: my,

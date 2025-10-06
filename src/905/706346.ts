@@ -8,7 +8,7 @@ import { UI3ConditionalWrapper } from "../905/341359";
 import { renderI18nText } from "../905/303541";
 import { hideModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { Rj, RR, jJ, b_, _s, HE, Y1 } from "../905/820658";
 export let $$f0 = registerModal(function (e) {
@@ -22,7 +22,7 @@ export let $$f0 = registerModal(function (e) {
   });
   return jsx(UI3ConditionalWrapper, {
     children: jsx(TrackingProvider, {
-      name: e0.COMMUNITY_REDIRECT_THIRD_PARTY_PLUGIN_MODAL,
+      name: TrackingKeyEnum.COMMUNITY_REDIRECT_THIRD_PARTY_PLUGIN_MODAL,
       children: jsx(ModalRootComponent, {
         manager: h,
         width: 440,

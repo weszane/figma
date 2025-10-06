@@ -68,7 +68,7 @@ import { RECENT_PLUGINS_FIGMA_DESIGN, RECENT_PLUGINS_FIGJAM, RECENT_PLUGINS_SLID
 import { DW } from "../figma_app/578011";
 import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { getSession } from "../905/574958";
-import { e0 as _$$e } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { L as _$$L } from "../905/92291";
 import { atom, useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/27355";
 import eO from "../vendor/879378";
@@ -1310,7 +1310,7 @@ function t9({
     updateWatchedStablePaths,
     getPageIdsForNodes: h,
     children: g
-  }) : g, _$$e.EDITOR, null != t ? getFileEditInfo(t) : {}, null != t && s && o);
+  }) : g, TrackingKeyEnum.EDITOR, null != t ? getFileEditInfo(t) : {}, null != t && s && o);
 }
 function ie({
   file: e

@@ -17,7 +17,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { isBigmaEnabledAlias } from "../figma_app/336853";
 import { s as _$$s2 } from "../905/82276";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { Ht } from "../figma_app/522930";
 import { Kt, iq, AF } from "../figma_app/80782";
 import { z as _$$z } from "../figma_app/497127";
@@ -173,7 +173,7 @@ export function $$L0({
       children: renderI18nText("browse_templates_modal.published_from")
     }), jsx(Ve, {
       label: T,
-      menuTrackingContextName: e0.TEMPLATES_BROWSE_FILTERS,
+      menuTrackingContextName: TrackingKeyEnum.TEMPLATES_BROWSE_FILTERS,
       menuTrackingProperties: {
         isEnterpriseOrg: o
       },

@@ -123,7 +123,7 @@ import { W as _$$W3 } from "../9410/92046";
 import { d as _$$d2 } from "../1006/820986";
 import { isWhitespace } from "../figma_app/930338";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { KP } from "../figma_app/440875";
+import { useCurrentSessionID } from "../figma_app/440875";
 import { selectCurrentUser } from "../905/372672";
 import { e as _$$e, $v } from "../figma_app/259678";
 import { Xu } from "../figma_app/588582";
@@ -2010,7 +2010,7 @@ function ny({
   };
   let S = ry();
   let A = useAtomWithSubscription(f3);
-  let w = KP();
+  let w = useCurrentSessionID();
   let {
     exchange,
     user

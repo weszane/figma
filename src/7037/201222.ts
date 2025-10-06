@@ -46,7 +46,7 @@ import { N as _$$N } from '../figma_app/268271';
 import { useSubscription } from '../figma_app/288654';
 import { p as _$$p } from '../figma_app/353099';
 import { getSelectedView } from '../figma_app/386952';
-import { S as _$$S } from '../figma_app/420927';
+import { KeyboardShortcut } from '../figma_app/420927';
 import { CornerPosition, OverlayType } from '../figma_app/450829';
 import { throwTypeError } from '../figma_app/465776';
 import { ButtonBasePrimaryTracked } from '../figma_app/637027';
@@ -177,10 +177,10 @@ function eo() {
   useEffect(() => {
     !s && t.completed && e.show();
   }, [e, s, t]);
-  let a = useMemo(() => jsx(_$$S, {
+  let a = useMemo(() => jsx(KeyboardShortcut, {
     shortcut: '\u2318\xB1'
   }), []);
-  let d = useMemo(() => jsx(_$$S, {
+  let d = useMemo(() => jsx(KeyboardShortcut, {
     shortcut: 'Ctrl\xB1'
   }), []);
   return jsx(OnboardingRenderFrame, {

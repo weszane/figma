@@ -48,7 +48,7 @@ import { mapEditorTypeToLoggingTag } from "../905/327855";
 import { fullscreenPerfManager } from "../905/125218";
 import { getAutosaveState, FileProcessingStatus, finishAutosaveWait } from "../figma_app/139113";
 import { getFullscreenViewFile } from "../figma_app/516028";
-import { c3, Lt } from "../figma_app/440875";
+import { handlePresentationStoppedThunk, clearPresentationStoppedAlertThunk } from "../figma_app/440875";
 import { usedComponentsPromise, findLibraryNameForAsset } from "../figma_app/646357";
 class M {
   static attemptToParseFrom(e) {
@@ -287,12 +287,12 @@ export class $$eu0 {
     });
   }
   showPresentationStoppedVisualBell(e) {
-    this.dispatch(c3({
+    this.dispatch(handlePresentationStoppedThunk({
       presenterSessionID: e
     }));
   }
   cancelPresentationStoppedVisualBell() {
-    this.dispatch(Lt());
+    this.dispatch(clearPresentationStoppedAlertThunk());
   }
   setBackgroundFlushInterval(e) {
     setupFlushTimer(e);

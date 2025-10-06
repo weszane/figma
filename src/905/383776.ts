@@ -1,5 +1,17 @@
-import { useSelector } from "react-redux";
-export function $$r0() {
-  return useSelector(e => "fullscreen" === e.selectedView.view && !!e.selectedView.showDevModeVariablesTable);
+import { useSelector } from "react-redux"
+/**
+ * Custom hook to determine if the current view is fullscreen and dev mode variables table is shown
+ * Original name: $$r0
+ */
+export function useIsFullscreenWithDevVariables(): boolean {
+  return useSelector<AppState, boolean>(state =>
+    state.selectedView.view === "fullscreen"
+    && !!state.selectedView.showDevModeVariablesTable,
+  )
 }
-export const e = $$r0;
+
+/**
+ * Alias for useIsFullscreenWithDevVariables hook
+ * Original name: e
+ */
+export const e = useIsFullscreenWithDevVariables

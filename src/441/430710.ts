@@ -14,8 +14,8 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { hY } from "../figma_app/349969";
-import { eo } from "../905/505138";
+import { DEVICE_PRESETS_BY_ID } from "../figma_app/349969";
+import { ANDROID_PRESET_LIST } from "../905/505138";
 import { getPrototypeSelectedView } from "../figma_app/386952";
 import { getUserId } from "../905/372672";
 import { getObservableValue } from "../figma_app/84367";
@@ -45,7 +45,7 @@ export function $$L0(e) {
   let N = useMemo(() => {
     let t = $$B3(e.configData);
     if (!t) return;
-    let i = hY[t.presetIdentifier];
+    let i = DEVICE_PRESETS_BY_ID[t.presetIdentifier];
     let n = t.rotation === RotationType.CCW_90;
     let {
       x,
@@ -342,7 +342,7 @@ export function $$M2(e) {
 }
 export function $$B3(e) {
   return $$M2(e) ? function (e) {
-    let t = hY[e.deviceFramePreset ?? ""];
+    let t = DEVICE_PRESETS_BY_ID[e.deviceFramePreset ?? ""];
     return t ? {
       type: PresetType.PRESET,
       size: t.framePresetSize,
@@ -351,7 +351,7 @@ export function $$B3(e) {
     } : null;
   }(e) : null;
 }
-let V = eo[0];
+let V = ANDROID_PRESET_LIST[0];
 let $ = {
   type: PresetType.PRESET,
   size: V?.framePresetSize ?? {

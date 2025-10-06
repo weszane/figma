@@ -3,7 +3,7 @@ import { LoadingSpinner } from "../905/443820";
 import a from "classnames";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { $K } from "../905/901964";
+import { calculateThumbnailDimensions } from "../905/901964";
 import { hr, RS, P3, zG, i3, ig, vi, nL, q_, ck, Xu, VO } from "../905/958668";
 import { A } from "../svg/927263";
 var s = a;
@@ -33,7 +33,7 @@ export function $$g1(e) {
 }
 export function $$f0(e) {
   let t = e.dimensions ?? void 0;
-  let i = t && (p(t) ? t : m(t) ? h(t) : $K(t.width, t.height, 256));
+  let i = t && (p(t) ? t : m(t) ? h(t) : calculateThumbnailDimensions(t.width, t.height, 256));
   return jsxs("button", {
     className: s()(e.isSelected ? ig : vi, e.isFigmake && nL),
     onClick: () => {

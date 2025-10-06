@@ -32,7 +32,7 @@ import { ModifyPlanUserSeatModalView } from "../figma_app/43951";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { getPlanData } from "../figma_app/428858";
 import { E as _$$E } from "../figma_app/126651";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { j as _$$j } from "../figma_app/617663";
 import { devModalTypes } from "../figma_app/124713";
 import { B as _$$B2 } from "../figma_app/395012";
@@ -234,7 +234,7 @@ function $(e) {
     product: _$$E(licenseType)
   });
   return jsxs(TrackingProvider, {
-    name: e0.SHARE_MODAL_UPDATE_SEAT_TAB,
+    name: TrackingKeyEnum.SHARE_MODAL_UPDATE_SEAT_TAB,
     children: [jsxs("div", {
       className: "x78zum5 xk0qfmw xdt5ytf x1pulhmw xclx6tv x17akokd x1qxcl5b xno9bf3 x1betce5",
       children: [jsx("div", {

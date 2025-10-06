@@ -21,7 +21,7 @@ import { ProductAccessTypeEnum } from "../905/513035";
 import { useGetLicenseTypesForSeatType, SeatDescriptionVisibility } from "../figma_app/217457";
 import { formatSortedProductNames } from "../905/584964";
 import { CurrencyFormatter } from "../figma_app/514043";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { linkWithTracking } from "../figma_app/637027";
 var b = x;
 function v({
@@ -293,7 +293,7 @@ export function $$B0({
     licenseTypes: e
   }) => e.length > 4) ? "16" : "24", [k]);
   return a ? jsx(TrackingProvider, {
-    name: e0.SEAT_BILLING_TERMS_MODAL,
+    name: TrackingKeyEnum.SEAT_BILLING_TERMS_MODAL,
     properties: {
       orgId: e
     },

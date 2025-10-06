@@ -144,7 +144,7 @@ import { AI_ACTION_STARTED, AI_ACTION_ENDED } from '../905/278499';
 import { Z as _$$Z5 } from '../905/279476';
 import { useTheme } from '../905/289770';
 import { createSavepoint } from '../905/294113';
-import { a as _$$a8, G as _$$G5 } from '../905/298663';
+import { isCodeViewPanel, useIsCodeViewPanel } from '../905/298663';
 import { $ as _$$$ } from '../905/302575';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -247,7 +247,7 @@ import { WAFImage } from '../905/675859';
 import { textDisplayConfig } from '../905/687265';
 import { Qr as _$$Qr } from '../905/690539';
 import { a as _$$a7 } from '../905/693578';
-import { e0 as _$$e4 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { getSingletonSceneGraph } from '../905/700578';
 import { s as _$$s6 } from '../905/702260';
 import { L as _$$L2 } from '../905/704296';
@@ -623,7 +623,7 @@ import { p as _$$p } from '../figma_app/372802';
 import { G as _$$G3 } from '../figma_app/373780';
 import { O as _$$O8 } from '../figma_app/373984';
 import { LH } from '../figma_app/384673';
-import { j$ as _$$j$, B4, NB } from '../figma_app/385215';
+import { cancelPresenterNomination, stopPresenting, hasNominations } from '../figma_app/385215';
 import { defaultGrayColor, blackColor } from '../figma_app/385874';
 import { rq as _$$rq2 } from '../figma_app/386160';
 import { getResponsiveSetForNodes, getResponsiveChildren, getParent, ZQ } from '../figma_app/387100';
@@ -639,7 +639,7 @@ import { d as _$$d11, s as _$$s12 } from '../figma_app/429226';
 import { cortexAPI } from '../figma_app/432652';
 import { JW } from '../figma_app/433317';
 import { Ij } from '../figma_app/433401';
-import { $0, dR as _$$dR, Ww } from '../figma_app/440875';
+import { useObservingUser, usePresenterUser, useCurrentUser } from '../figma_app/440875';
 import { D as _$$D7 } from '../figma_app/446411';
 import { Q as _$$Q10 } from '../figma_app/447352';
 import { cP as _$$cP, dg as _$$dg, vX as _$$vX } from '../figma_app/451499';
@@ -1617,7 +1617,7 @@ function tz() {
     onActivateTool: activateTool
   });
   return jsx(TrackingProvider, {
-    name: _$$e4.EDITOR_TOOLBELT,
+    name: TrackingKeyEnum.EDITOR_TOOLBELT,
     children: jsx('div', {
       ref: b,
       children: jsxs(XS, {
@@ -3753,7 +3753,7 @@ function aX({
       }), jsx('div', {
         className: 'show_love_modal--rightColumn--VCAkU',
         children: jsx(TrackingProvider, {
-          name: _$$e4.FIGMA_MAKE_COMMUNITY_ATTRIBUTION,
+          name: TrackingKeyEnum.FIGMA_MAKE_COMMUNITY_ATTRIBUTION,
           children: jsx(_$$Q3, {
             resource: t.data,
             viewContext: 'Figma Make Community Attribution',
@@ -4078,7 +4078,7 @@ let sr = registerModal(({
     return i ? t.hubFiles[i] : void 0;
   });
   return status === 'loading' || d.status === 'loading' ? null : c ? jsx(TrackingProvider, {
-    name: _$$e4.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
+    name: TrackingKeyEnum.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
     properties: {
       userId: i?.id,
       orgId: n?.id,
@@ -6469,7 +6469,7 @@ async function oh(e, t, i) {
             error: 1
           };
         }
-      } catch { }
+      } catch {}
       return {
         success: !1,
         error: 3
@@ -9934,7 +9934,7 @@ function cm({
       return n;
     }
   }, [s.faviconID]);
-  useEffect(() => { }, [s.faviconID]);
+  useEffect(() => {}, [s.faviconID]);
   return jsx('div', {
     className: 'x1dc814f x1ff1495',
     children: jsx(d8, {
@@ -13172,7 +13172,7 @@ async function xw(e, t, i) {
       });
       await navigator.clipboard.write([i]);
       a();
-    } catch (e) { }
+    } catch (e) {}
   }
 }
 async function xS(e, t) {
@@ -13619,7 +13619,7 @@ let xE = memo(({
       });
     }
   }, [e]);
-  let E = useCallback(e => { }, []);
+  let E = useCallback(e => {}, []);
   useEffect(() => {
     S(i.current?.api, u);
   }, [u, S]);
@@ -14787,7 +14787,7 @@ function mv({
           ...Object.fromEntries(Object.entries(e).filter(([e]) => !n[e])),
           ...l
         }));
-      } catch (e) { } finally {
+      } catch (e) {} finally {
         b.current = !1;
       }
     }, _), b.current = !0) : (k(n), m(l)));
@@ -16178,7 +16178,7 @@ let hd = registerModal(e => {
                 }));
               }
             }) : jsx(ho, {
-              onImportFailure: () => { },
+              onImportFailure: () => {},
               onImportSuccess: e => {
                 r(e);
                 d(e.name);
@@ -16721,7 +16721,7 @@ function hb() {
       g(l);
       f(e => new Set(e).add(l));
       let a = (await hg(t)).getReader();
-      for (h(!1); ;) {
+      for (h(!1);;) {
         let {
           done,
           value
@@ -17251,7 +17251,7 @@ function h0(e) {
         deleteItem: () => {
           _$$l.user('delete-code-component', () => {
             let t = getSingletonSceneGraph().get(e);
-            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e); else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid); else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid); else throw new Error(`Invalid node type for deletion: ${t?.type}`);
+            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e);else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid);else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid);else throw new Error(`Invalid node type for deletion: ${t?.type}`);
             fullscreenValue.triggerAction('commit');
           });
         },
@@ -20898,8 +20898,8 @@ async function _T({
   ignoreKnown: e = !1,
   widths: t
 } = {
-    ignoreKnown: !1
-  }) {
+  ignoreKnown: !1
+}) {
   _S();
   let i = _C();
   if (!i.length) throw new Error('No breakpoint frames in selection');
@@ -21359,7 +21359,7 @@ let _q = e => {
   for (let t of e.directlySelectedNodes) {
     for (; t;) {
       if (t.isBreakpointFrame || t.isResponsiveSet) return t;
-      if (t.parentNode) t = t.parentNode; else break;
+      if (t.parentNode) t = t.parentNode;else break;
     }
   }
 };
@@ -23235,7 +23235,7 @@ function ve({
     })
   });
 }
-class vt extends _$$c$6 { }
+class vt extends _$$c$6 {}
 function vs({
   directManipulationEditor: e,
   classNameEditingController: t,
@@ -23501,12 +23501,12 @@ let vu = memo(e => {
       message: t,
       error: !0,
       button: {
-        action: () => { },
+        action: () => {},
         text: getI18nString('figmake.refresh')
       }
     }));
   }, [n]);
-  let o = useMemo(() => new _$$q0(t, e => { }, r), [t, r]);
+  let o = useMemo(() => new _$$q0(t, e => {}, r), [t, r]);
   let d = _$$lj(t);
   return jsxs(Fragment, {
     children: [jsx(yZ, {
@@ -30817,16 +30817,16 @@ let T2 = memo(({
   let k = _$$U();
   let S = useDispatch();
   let C = L3();
-  let T = _$$G5();
+  let T = useIsCodeViewPanel();
   let I = selectCurrentUser();
-  let E = _$$dR();
-  let N = B4();
-  let A = $0();
+  let E = usePresenterUser();
+  let N = stopPresenting();
+  let A = useObservingUser();
   let L = useSelector(e => e.multiplayer);
   let P = L.allUsers;
   let O = P.find(e => e.userID === A?.userID)?.sitesViewState ?? null;
-  let F = Ww();
-  let M = NB(L);
+  let F = useCurrentUser();
+  let M = hasNominations(L);
   useFileLibrarySubscriptions(_);
   (function () {
     let e = performance.now();
@@ -30929,12 +30929,12 @@ let T2 = memo(({
       return !0;
     }(c, t) && i([...c]));
   })(_);
-  let D = y && !j && !_$$a8(v);
+  let D = y && !j && !isCodeViewPanel(v);
   useEffect(() => {
     fullscreenValue.isReady() && (Multiplayer && Multiplayer.sendSitesViewState(v), SitesBindingsCpp && SitesBindingsCpp.notifyUpdateToSitesViewState());
   }, [v]);
   useEffect(() => {
-    A && O && _$$a8(O) ? S(VisualBellActions.enqueue({
+    A && O && isCodeViewPanel(O) ? S(VisualBellActions.enqueue({
       message: getI18nString('left_rail.user_away_from_canvas_notification', {
         userHandle: A.name
       }),
@@ -30951,7 +30951,7 @@ let T2 = memo(({
     })));
   }, [I, S, T, E, N]);
   useEffect(() => {
-    Multiplayer && F && M && T && (_$$j$(F.sessionID), S(VisualBellActions.enqueue({
+    Multiplayer && F && M && T && (cancelPresenterNomination(F.sessionID), S(VisualBellActions.enqueue({
       message: getI18nString('left_rail.ask_to_spotlight_ended_only_available'),
       type: $$T50
     })));

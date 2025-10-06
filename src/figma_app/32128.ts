@@ -11,7 +11,7 @@ import { getSingletonSceneGraph } from '../905/700578';
 import { atom, useAtomValueAndSetter, createRemovableAtomFamily } from '../figma_app/27355';
 import { useLatestRef } from '../figma_app/922077';
 import { getObservableValue } from '../figma_app/84367';
-import { L3 } from '../figma_app/385215';
+import { isObserving } from '../figma_app/385215';
 import { fullscreenValue } from '../figma_app/455680';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { useAppModelProperty } from '../figma_app/722362';
@@ -80,7 +80,7 @@ export function $$G7() {
         source: 'spotlight-following'
       }));
     }, [e, r, t]);
-  }(useSelector(e => L3(e.multiplayer)));
+  }(useSelector(e => isObserving(e.multiplayer)));
 }
 export function $$V8() {
   return useSelector(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === ViewType.HISTORY);

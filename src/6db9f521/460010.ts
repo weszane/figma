@@ -45,11 +45,11 @@ import { textDisplayConfig } from "../905/687265";
 import { WAFImage } from "../905/675859";
 import { fq, Jn, NG, m4, S7 } from "../7222/396421";
 import { useMemoStable } from "../905/19536";
-import { B4 } from "../figma_app/385215";
+import { stopPresenting } from "../figma_app/385215";
 import { WN } from "../figma_app/638601";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { useDropdownState, useDropdown } from "../905/848862";
-import { dR as _$$dR } from "../figma_app/440875";
+import { usePresenterUser } from "../figma_app/440875";
 import { m as _$$m2 } from "../9410/532216";
 import { n as _$$n2 } from "../9410/783801";
 import { _ as _$$_2 } from "../1528/446737";
@@ -899,8 +899,8 @@ function eE() {
   let n = useSelector(e => e.user);
   let o = useMemo(() => i.allUsers.find(e => e.sessionID === i.sessionID) || null, [i.allUsers, i.sessionID]);
   let d = useDropdownState();
-  let c = _$$dR();
-  let u = B4();
+  let c = usePresenterUser();
+  let u = stopPresenting();
   let p = useCallback(t => {
     Lx(t, o?.sessionID, e, !1, i, c, u);
   }, [o?.sessionID, e, i, c, u]);

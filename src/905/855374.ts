@@ -108,7 +108,7 @@ import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuSeparator
 import { stylex } from "@stylexjs/stylex";
 import { P as _$$P4 } from "../905/537307";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
-import { Ay as _$$Ay } from "../figma_app/272902";
+import { createMultiRefCallback } from "../figma_app/272902";
 import { m as _$$m2 } from "../905/871166";
 import { i as _$$i2 } from "../905/415810";
 import { v6, Ar, N0, GC as _$$GC, uM, Mz, $4, SS } from "../905/984793";
@@ -1825,7 +1825,7 @@ let t$ = forwardRef(function ({
       className: R()("variables_modal_table_item--row--fBkV2", {
         "variables_modal_table_item--selectedRow--w9Grw": t
       }),
-      ref: _$$Ay(T, k),
+      ref: createMultiRefCallback(T, k),
       "data-index": A.index,
       isSelected: t,
       onMouseDown: B,

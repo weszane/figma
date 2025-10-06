@@ -19,7 +19,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, valueOrFallback } from "../905/216495";
 import { useSelectionProperty } from "../905/275640";
 import { useOpenFileObjectWithSinatraType } from "../figma_app/516028";
-import { qb, Rv } from "../figma_app/2590";
+import { getContentScalingMode, getDeviceFramePosition } from "../figma_app/2590";
 import { serializeFullViewerQueryParams } from "../figma_app/831696";
 import { KindEnum } from "../905/129884";
 import { uQ, Tv } from "../figma_app/151869";
@@ -204,8 +204,8 @@ export function $$F1(t) {
             let e = PrototypingTsApi.currentDeviceType();
             let o = serializeFullViewerQueryParams({
               scalingInfo: {
-                viewportScalingMode: qb(e),
-                contentScalingMode: Rv(e)
+                viewportScalingMode: getContentScalingMode(e),
+                contentScalingMode: getDeviceFramePosition(e)
               },
               nodeId: void 0,
               startingPointNodeId: t,

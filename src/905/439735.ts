@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import a from "classnames";
 import { camelToKebab } from "../figma_app/930338";
 import { Spacing } from "../figma_app/637027";
-import { S } from "../figma_app/420927";
+import { KeyboardShortcut } from "../figma_app/420927";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { formatI18nMessage } from "../905/482208";
 import { c1 } from "../figma_app/357047";
@@ -66,7 +66,7 @@ export function $$g0({
         children: [jsx("span", {
           className: cssBuilderInstance.font11.fontSemiBold.colorText.$,
           children: a
-        }), jsx(S, {
+        }), jsx(KeyboardShortcut, {
           shortcut: g,
           className: s()(cssBuilderInstance.flex.columnGap4.fontSemiBold.colorTextSecondary.$, "animated_tooltip--shortcut--kyqA8")
         })]

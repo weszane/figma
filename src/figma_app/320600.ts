@@ -19,7 +19,7 @@ import { VU } from "../905/625959";
 import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 import { FEditorType } from "../figma_app/53721";
 import { pi } from "../figma_app/357047";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { j as _$$j } from "../905/834956";
 import { getFeatureFlags } from "../905/601108";
@@ -485,7 +485,7 @@ export class $$em1 extends Component {
   render() {
     let e = this.transformMenuItems(this.props.menuItems);
     return this.hasMenuValidItems() ? jsx(TrackingProvider, {
-      name: e0.EDITOR_MENU,
+      name: TrackingKeyEnum.EDITOR_MENU,
       children: jsx(_$$j, {
         ref: this.multilevelDropdownRef,
         activatePathOnMount: this.props.activatePathOnMount,

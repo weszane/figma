@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { trackEventAnalytics } from "../905/449184";
-import { T } from "../figma_app/257703";
+import { ListFormatter } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { selectCurrentFile } from "../figma_app/516028";
 import { W5, bF } from "../figma_app/120294";
@@ -28,7 +28,7 @@ export function $$u0() {
   e = n.length > 3 ? [...n.slice(0, 2), getI18nString("collaboration.voice.n_others", {
     numUsers: n.length - 2
   })] : n;
-  let d = jsx(T, {
+  let d = jsx(ListFormatter, {
     children: e
   });
   return renderI18nText("collaboration.voice.are_talking_in_this_file", {

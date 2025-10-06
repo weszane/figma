@@ -3944,6 +3944,7 @@ export interface Files {
 }
 
 export interface SelectedView {
+  showDevModeVariablesTable: any
   showOverview: boolean
   view: string
   editorType: number

@@ -16,7 +16,7 @@ import { TrackedLink } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useLibraryFileLink } from "../905/217163";
 import { LibraryAgeEnum, getDraftsSidebarString, PrimaryWorkflowEnum } from "../figma_app/633080";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { DSAApiServiceInstance } from "../905/669853";
 import { OverviewStatsView } from "../905/167005";
 import { i as _$$i } from "../905/565139";
@@ -142,7 +142,7 @@ let $$q1 = memo(function (e) {
   let l = useRef(null);
   let d = nZ(l);
   return jsx(_$$t2, {
-    page: e0.DSA_STATE_GROUP_VIEW,
+    page: TrackingKeyEnum.DSA_STATE_GROUP_VIEW,
     properties: o,
     children: jsxs("div", {
       className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
@@ -187,7 +187,7 @@ export function $$$0({
   }), [e.component_key]);
   let u = e.containing_frame?.containingStateGroup ? _$$w(e.name) : e.name;
   return jsx(_$$t2, {
-    page: e0.DSA_COMPONENT_VIEW,
+    page: TrackingKeyEnum.DSA_COMPONENT_VIEW,
     properties: c,
     children: jsxs("div", {
       className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,

@@ -1,133 +1,344 @@
-import { assertNotNullish } from "../figma_app/465776";
-import { E } from "../905/484990";
-import { eo } from "../905/505138";
-import { o as _$$o } from "../905/873528";
-import { t as _$$t } from "../905/432457";
-let l = [{
-  deviceName: "Slide 16:9",
+import { APPLE_WATCH_PRESET_LIST } from "../905/432457"
+import { APPLE_PRESET_LIST } from "../905/484990"
+import { ANDROID_PRESET_LIST } from "../905/505138"
+import { Extended_PRESET_LIST } from "../905/873528"
+import { assertNotNullish } from "../figma_app/465776"
+
+interface FramePreset {
+  deviceName: string
   framePresetSize: {
-    x: 1920,
-    y: 1080
+    x: number
+    y: number
   }
-}, {
-  deviceName: "Slide 4:3",
+}
+
+interface DevicePreset {
+  presetIdentifier: string
+  deviceName: string
   framePresetSize: {
-    x: 1024,
-    y: 768
+    x: number
+    y: number
   }
-}];
-let $$d10 = Object.create(null);
-for (let e of [eo, _$$o, _$$t, E]) for (let t of e) $$d10[t.presetIdentifier] = t;
-function c(e, t) {
-  let r = new Set();
-  let n = [];
-  for (let i of e) r.has(i.deviceName) || (r.add(i.deviceName), i.archived ? t?.push(i.deviceName) : n.push(i.deviceName));
-  return n;
+  archived?: boolean
+  isSuggested?: boolean
+  hideUnlessActive?: boolean
+  url?: string
+  inlinePreviewInfo?: {
+    hitTargetSvgUrl: string
+  }
 }
-let $$u9 = [];
-let $$p13 = c(eo, $$u9);
-let $$_6 = c(_$$o, $$u9);
-let $$h2 = c(_$$t, $$u9);
-let $$m1 = c(E, $$u9);
-let $$g14 = Object.create(null);
-for (let e in $$d10) {
-  let t = $$d10[e];
-  let r = t.deviceName;
-  r in $$g14 || ($$g14[r] = []);
-  $$g14[r].push(t);
+
+// Presentation slide presets
+const PRESENTATION_SLIDES: FramePreset[] = [
+  {
+    deviceName: "Slide 16:9",
+    framePresetSize: {
+      x: 1920,
+      y: 1080,
+    },
+  },
+  {
+    deviceName: "Slide 4:3",
+    framePresetSize: {
+      x: 1024,
+      y: 768,
+    },
+  },
+]
+
+// Create a map of all device presets by their identifier for quick lookup
+export const DEVICE_PRESETS_BY_ID: Record<string, DevicePreset> = Object.create(null)
+for (const presetList of [ANDROID_PRESET_LIST, Extended_PRESET_LIST, APPLE_WATCH_PRESET_LIST, APPLE_PRESET_LIST]) {
+  for (const preset of presetList) {
+    DEVICE_PRESETS_BY_ID[preset.presetIdentifier] = preset
+  }
 }
-let f = (e, t) => {
-  for (let r of [eo, _$$o, _$$t, E]) for (let n of r) if (n.framePresetSize.x === e && n.framePresetSize.y === t) return n;
-  return null;
-};
-export function $$E0(e, t) {
-  if ("NONE" === e || "PRESENTATION" === e) return !1;
-  if ("CUSTOM" === e) return !0;
-  if ("PRESET" === e && null != t) {
-    let e = $$d10[t];
-    if (null != e) {
-      let t = -1 !== $$h2.indexOf(e.deviceName);
-      let r = -1 !== $$m1.indexOf(e.deviceName);
-      return !t && !r;
+
+/**
+ * Extract unique device names from preset lists, optionally collecting archived device names
+ * @param presets - Array of device presets
+ * @param archivedDevices - Optional array to collect archived device names
+ * @returns Array of non-archived device names
+ */
+function getUniqueDeviceNames(presets: DevicePreset[], archivedDevices?: string[]): string[] {
+  const seenDeviceNames = new Set<string>()
+  const activeDeviceNames: string[] = []
+
+  for (const preset of presets) {
+    if (!seenDeviceNames.has(preset.deviceName)) {
+      seenDeviceNames.add(preset.deviceName)
+      if (preset.archived) {
+        archivedDevices?.push(preset.deviceName)
+      }
+      else {
+        activeDeviceNames.push(preset.deviceName)
+      }
     }
   }
-  return !1;
+
+  return activeDeviceNames
 }
-export var $$y8 = (e => (e[e.UNKNOWN = 0] = "UNKNOWN", e[e.PHONE = 1] = "PHONE", e[e.TABLET = 2] = "TABLET", e[e.WATCH = 3] = "WATCH", e[e.DESKTOP = 4] = "DESKTOP", e))($$y8 || {});
-export function $$b12(e) {
-  let t = $$d10[e];
-  if (null == t) return 0;
-  let r = t.deviceName;
-  return -1 !== $$p13.indexOf(r) ? 1 : -1 !== $$_6.indexOf(r) ? 2 : -1 !== $$h2.indexOf(r) ? 3 : -1 !== $$m1.indexOf(r) ? 4 : 0;
+
+// Collect archived device names
+const archivedDeviceNames: string[] = []
+
+// Get unique device names for each preset list
+const androidDeviceNames = getUniqueDeviceNames(ANDROID_PRESET_LIST, archivedDeviceNames)
+const extendedDeviceNames = getUniqueDeviceNames(Extended_PRESET_LIST, archivedDeviceNames)
+const appleWatchDeviceNames = getUniqueDeviceNames(APPLE_WATCH_PRESET_LIST, archivedDeviceNames)
+const appleDeviceNames = getUniqueDeviceNames(APPLE_PRESET_LIST, archivedDeviceNames)
+
+// Group presets by device name
+const DEVICE_PRESETS_BY_NAME: Record<string, DevicePreset[]> = Object.create(null)
+for (const presetId in DEVICE_PRESETS_BY_ID) {
+  const preset = DEVICE_PRESETS_BY_ID[presetId]
+  const deviceName = preset.deviceName
+
+  if (!(deviceName in DEVICE_PRESETS_BY_NAME)) {
+    DEVICE_PRESETS_BY_NAME[deviceName] = []
+  }
+
+  DEVICE_PRESETS_BY_NAME[deviceName].push(preset)
 }
-export function $$T3(e, t) {
-  for (let r of l) if (r.framePresetSize.x === e && r.framePresetSize.y === t) return {
-    type: "PRESENTATION",
-    presetIdentifier: "",
-    portraitDeviceSize: {
-      x: 0,
-      y: 0
-    },
-    rotation: "NONE"
-  };
-  let r = f(e, t);
-  return null != r ? {
-    type: "PRESET",
-    presetIdentifier: r.presetIdentifier,
-    portraitDeviceSize: r.framePresetSize,
-    rotation: "NONE"
-  } : null != (r = f(t, e)) && $$E0("PRESET", r.presetIdentifier) ? {
-    type: "PRESET",
-    presetIdentifier: r.presetIdentifier,
-    portraitDeviceSize: r.framePresetSize,
-    rotation: "CCW_90"
-  } : null;
+
+/**
+ * Find a device preset matching specific dimensions
+ * @param width - Width of the frame
+ * @param height - Height of the frame
+ * @returns Matching device preset or null
+ */
+function findPresetByDimensions(width: number, height: number): DevicePreset | null {
+  for (const presetList of [ANDROID_PRESET_LIST, Extended_PRESET_LIST, APPLE_WATCH_PRESET_LIST, APPLE_PRESET_LIST]) {
+    for (const preset of presetList) {
+      if (preset.framePresetSize.x === width && preset.framePresetSize.y === height) {
+        return preset
+      }
+    }
+  }
+  return null
 }
-export function $$I11(e) {
-  let t = $$b12(e || "");
-  return 4 !== t && 0 !== t;
+
+/**
+ * Check if a device type requires a custom frame
+ * @param deviceType - Type of device frame
+ * @param presetIdentifier - Identifier for the preset
+ * @returns Whether a custom frame is needed
+ */
+export function isCustomFrameRequired(deviceType: string, presetIdentifier: string | null): boolean {
+  if (deviceType === "NONE" || deviceType === "PRESENTATION") {
+    return false
+  }
+
+  if (deviceType === "CUSTOM") {
+    return true
+  }
+
+  if (deviceType === "PRESET" && presetIdentifier != null) {
+    const preset = DEVICE_PRESETS_BY_ID[presetIdentifier]
+    if (preset != null) {
+      const isAppleWatch = appleWatchDeviceNames.includes(preset.deviceName)
+      const isAppleDevice = appleDeviceNames.includes(preset.deviceName)
+      return !isAppleWatch && !isAppleDevice
+    }
+  }
+
+  return false
 }
-c(eo.filter(function (e) {
-  return !0 === e.isSuggested;
-})).slice(0, 5);
-c(_$$o).slice(0, 5);
-c(_$$t).slice(0, 5);
-c(E).slice(0, 5);
-let $$S7 = e => !!function (e) {
-  let t = $$d10[e];
-  return t?.inlinePreviewInfo || null;
-}(e);
-let v = e => {
-  new Image().src = e;
-};
-export function $$A5(e) {
-  if (!e) return;
-  let t = $$d10[e];
-  assertNotNullish(t?.inlinePreviewInfo, "inline preview device info should not be null if we're preloading the device image. (presetDeviceSupportsInlinePreview == true)");
-  v(t.url);
-  v(t.inlinePreviewInfo.hitTargetSvgUrl);
+
+/**
+ * Device categories enumeration
+ */
+export enum DeviceCategory {
+  UNKNOWN = 0,
+  PHONE = 1,
+  TABLET = 2,
+  WATCH = 3,
+  DESKTOP = 4,
 }
-export function $$x4(e, t) {
-  let r = $$d10[e] || $$g14[e][0];
-  if (t && "PRESET" === t.type) {
-    let n = $$d10[t.presetIdentifier];
-    let i = n.hideUnlessActive && !n.archived && r.framePresetSize.x === n.framePresetSize.x && r.framePresetSize.y === n.framePresetSize.y;
-    if (n && n.deviceName === e) r = n;else if (!i && r.hideUnlessActive && !r.archived) return null;
-  } else if (r.hideUnlessActive && !r.archived) return null;
-  return r;
+
+/**
+ * Determine the category of a device by its preset identifier
+ * @param presetIdentifier - Identifier for the preset
+ * @returns Device category
+ */
+export function getDeviceCategory(presetIdentifier: string): DeviceCategory {
+  const preset = DEVICE_PRESETS_BY_ID[presetIdentifier]
+  if (preset == null) {
+    return DeviceCategory.UNKNOWN
+  }
+
+  const deviceName = preset.deviceName
+  if (androidDeviceNames.includes(deviceName)) {
+    return DeviceCategory.PHONE
+  }
+  if (extendedDeviceNames.includes(deviceName)) {
+    return DeviceCategory.TABLET
+  }
+  if (appleWatchDeviceNames.includes(deviceName)) {
+    return DeviceCategory.WATCH
+  }
+  if (appleDeviceNames.includes(deviceName)) {
+    return DeviceCategory.DESKTOP
+  }
+
+  return DeviceCategory.UNKNOWN
 }
-export const $X = $$E0;
-export const $w = $$m1;
-export const AG = $$h2;
-export const BG = $$T3;
-export const Fh = $$x4;
-export const Gn = $$A5;
-export const J_ = $$_6;
-export const L_ = $$S7;
-export const bq = $$y8;
-export const dr = $$u9;
-export const hY = $$d10;
-export const ln = $$I11;
-export const qt = $$b12;
-export const r6 = $$p13;
-export const yr = $$g14;
+
+/**
+ * Determine frame type and properties based on dimensions
+ * @param width - Width of the frame
+ * @param height - Height of the frame
+ * @returns Frame information or null
+ */
+export function determineFrameType(width: number, height: number): {
+  type: "PRESENTATION" | "PRESET"
+  presetIdentifier: string
+  portraitDeviceSize: { x: number, y: number }
+  rotation: "NONE" | "CCW_90"
+} | null {
+  // Check if dimensions match presentation slides
+  for (const slide of PRESENTATION_SLIDES) {
+    if (slide.framePresetSize.x === width && slide.framePresetSize.y === height) {
+      return {
+        type: "PRESENTATION",
+        presetIdentifier: "",
+        portraitDeviceSize: {
+          x: 0,
+          y: 0,
+        },
+        rotation: "NONE",
+      }
+    }
+  }
+
+  // Try to find exact match
+  let preset = findPresetByDimensions(width, height)
+  if (preset != null) {
+    return {
+      type: "PRESET",
+      presetIdentifier: preset.presetIdentifier,
+      portraitDeviceSize: preset.framePresetSize,
+      rotation: "NONE",
+    }
+  }
+
+  // Try rotated match
+  preset = findPresetByDimensions(height, width)
+  if (preset != null && isCustomFrameRequired("PRESET", preset.presetIdentifier)) {
+    return {
+      type: "PRESET",
+      presetIdentifier: preset.presetIdentifier,
+      portraitDeviceSize: preset.framePresetSize,
+      rotation: "CCW_90",
+    }
+  }
+
+  return null
+}
+
+/**
+ * Check if a device is a mobile device (not desktop or unknown)
+ * @param presetIdentifier - Identifier for the preset
+ * @returns Whether the device is a mobile device
+ */
+export function isMobileDevice(presetIdentifier: string | null): boolean {
+  const category = getDeviceCategory(presetIdentifier || "")
+  return category !== DeviceCategory.DESKTOP && category !== DeviceCategory.UNKNOWN
+}
+
+// Generate suggested device lists (unused but kept for compatibility)
+getUniqueDeviceNames(ANDROID_PRESET_LIST.filter(preset => preset.isSuggested === true)).slice(0, 5)
+getUniqueDeviceNames(Extended_PRESET_LIST).slice(0, 5)
+getUniqueDeviceNames(APPLE_WATCH_PRESET_LIST).slice(0, 5)
+getUniqueDeviceNames(APPLE_PRESET_LIST).slice(0, 5)
+
+/**
+ * Check if a device supports inline preview
+ * @param presetIdentifier - Identifier for the preset
+ * @returns Whether the device supports inline preview
+ */
+function supportsInlinePreview(presetIdentifier: string): boolean {
+  const preset = DEVICE_PRESETS_BY_ID[presetIdentifier]
+  return !!preset?.inlinePreviewInfo
+}
+
+/**
+ * Preload device images
+ * @param presetIdentifier - Identifier for the preset
+ */
+function preloadImage(url: string): void {
+  new Image().src = url
+}
+
+/**
+ * Preload device preview images
+ * @param presetIdentifier - Identifier for the preset
+ */
+export function preloadDevicePreviewImages(presetIdentifier: string): void {
+  if (!presetIdentifier) {
+    return
+  }
+
+  const preset = DEVICE_PRESETS_BY_ID[presetIdentifier]
+  assertNotNullish(
+    preset?.inlinePreviewInfo,
+    "inline preview device info should not be null if we're preloading the device image. (presetDeviceSupportsInlinePreview == true)",
+  )
+
+  preloadImage(preset.url!)
+  preloadImage(preset.inlinePreviewInfo!.hitTargetSvgUrl)
+}
+
+/**
+ * Get device preset with fallback handling
+ * @param deviceName - Name of the device
+ * @param currentFrame - Current frame information
+ * @returns Device preset or null
+ */
+export function getDevicePresetWithFallback(
+  deviceName: string,
+  currentFrame?: { type: string, presetIdentifier: string } | null,
+): DevicePreset | null {
+  let preset = DEVICE_PRESETS_BY_ID[deviceName] || DEVICE_PRESETS_BY_NAME[deviceName]?.[0]
+
+  if (currentFrame && currentFrame.type === "PRESET") {
+    const currentPreset = DEVICE_PRESETS_BY_ID[currentFrame.presetIdentifier]
+
+    if (currentPreset) {
+      const isSameSizeAndHidden
+        = currentPreset.hideUnlessActive
+        && !currentPreset.archived
+        && preset.framePresetSize.x === currentPreset.framePresetSize.x
+        && preset.framePresetSize.y === currentPreset.framePresetSize.y
+
+      if (currentPreset.deviceName === deviceName) {
+        preset = currentPreset
+      }
+      else if (!isSameSizeAndHidden && preset.hideUnlessActive && !preset.archived) {
+        return null
+      }
+    }
+  }
+  else if (preset.hideUnlessActive && !preset.archived) {
+    return null
+  }
+
+  return preset
+}
+
+// Export constants with meaningful names
+export const $X = isCustomFrameRequired
+export const $w = appleDeviceNames
+export const AG = appleWatchDeviceNames
+export const BG = determineFrameType
+export const Fh = getDevicePresetWithFallback
+export const Gn = preloadDevicePreviewImages
+export const J_ = extendedDeviceNames
+export const L_ = supportsInlinePreview
+export const bq = DeviceCategory
+export const dr = archivedDeviceNames
+export const hY = DEVICE_PRESETS_BY_ID
+export const ln = isMobileDevice
+export const qt = getDeviceCategory
+export const r6 = androidDeviceNames
+export const yr = DEVICE_PRESETS_BY_NAME

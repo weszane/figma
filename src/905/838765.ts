@@ -7,7 +7,7 @@ import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UserAvatar, AvatarSize } from "../905/590952";
-import { U3 } from "../figma_app/412189";
+import { useWindowEvent } from "../figma_app/412189";
 import { U6 } from "../figma_app/599917";
 import { L } from "../905/606555";
 import { ProfileWithResourcesTile } from "../905/617004";
@@ -214,7 +214,7 @@ function R(e) {
       toggleFollowing,
       fetchCreatorFollowStatus
     } = b();
-    if (U3("scroll", () => i(!1)), !e.publishers || !e.publishers.length) return null;
+    if (useWindowEvent("scroll", () => i(!1)), !e.publishers || !e.publishers.length) return null;
     let d = e.publishers[0];
     return jsxs("div", {
       onMouseLeave: () => i(!1),
@@ -311,7 +311,7 @@ function R(e) {
       toggleFollowing,
       fetchCreatorFollowStatus
     } = b();
-    U3("scroll", () => u(!1));
+    useWindowEvent("scroll", () => u(!1));
     return o ? jsx("div", {
       onMouseLeave: () => {
         u(!1);

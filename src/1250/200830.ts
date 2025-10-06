@@ -30,7 +30,7 @@ import { A as _$$A } from "../905/956262";
 import { UC, uA } from "../figma_app/33126";
 import { of, mW } from "../figma_app/797994";
 import { hasAnyOnboardingFlag } from "../figma_app/242339";
-import { qo } from "../905/696396";
+import { OrgPersonal } from "../905/696396";
 import { U as _$$U } from "../905/455766";
 import { OnboardingRenderFrame } from "../905/284399";
 import { Rx, IY, q9 } from "../1556/690522";
@@ -595,7 +595,7 @@ let eU = () => {
   let e = getStorage();
   try {
     return !!e.get(SIGNED_UP_FROM_OPEN_SESSIONS);
-  } catch (e) {}
+  } catch (e) { }
   return !1;
 };
 function eG() {
@@ -623,7 +623,7 @@ function eG() {
           isReset: n,
           isOrgUserExternallyRestricted: a
         }) {
-          let r = t === qo.ORG;
+          let r = t === OrgPersonal.ORG;
           let i = of(e);
           let s = getFeatureFlags().limited_plan_spaces && getInitialOptions().is_limited_team_plan;
           let l = mW(e, "not_gen_0");
@@ -639,7 +639,7 @@ function eG() {
           isReset: e,
           isOrgUserExternallyRestricted: r
         }).filter(e => !!e);
-        return !!i.length && (p(i), v(eB(n === qo.ORG && a)), !0);
+        return !!i.length && (p(i), v(eB(n === OrgPersonal.ORG && a)), !0);
       }
     });
   }, [u]);
@@ -712,7 +712,7 @@ function eZ() {
   }, [e, t]);
   useSingleEffect(() => {
     n.show({
-      canShow: (e, t) => e === qo.ORG && !t
+      canShow: (e, t) => e === OrgPersonal.ORG && !t
     });
   });
   return jsx(_$$X, {
@@ -896,7 +896,7 @@ function tc() {
   }, [o, s, l, d, c, t]);
   return (useSingleEffect(() => {
     show({
-      canShow: (e, t, n, a, r, i) => e === qo.ORG && !!t && !n && !!a && 0 !== a.length && !r && !!i,
+      canShow: (e, t, n, a, r, i) => e === OrgPersonal.ORG && !!t && !n && !!a && 0 !== a.length && !r && !!i,
       onShow: () => {
         orgUserService.postOrgUserFlags({
           orgUserId: r.current,
@@ -2482,7 +2482,7 @@ function a_() {
     switch (t) {
       case "pro":
         n.show({
-          canShow: e => e === qo.PERSONAL,
+          canShow: e => e === OrgPersonal.PERSONAL,
           onShow: () => {
             let t = {
               dispatch: e,
@@ -2502,7 +2502,7 @@ function a_() {
         break;
       case "plan_comparison":
         n.show({
-          canShow: e => e === qo.PERSONAL,
+          canShow: e => e === OrgPersonal.PERSONAL,
           onShow: () => {
             e(showModalHandler({
               type: _$$V,

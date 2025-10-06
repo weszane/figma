@@ -2,7 +2,7 @@ import _require2 from "../formatter/895744";
 import _require from "../formatter/851958";
 import { useState, useCallback, useEffect } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { aq } from "../figma_app/412189";
+import { useIsMounted } from "../figma_app/412189";
 import { parseLoose } from "../905/253473";
 function a(e, t, r) {
   r(e, t);
@@ -272,7 +272,7 @@ class c {
 }
 export function $$E1(e, t = !1, r) {
   let [o, a] = useState(t ? e : null);
-  let p = aq();
+  let p = useIsMounted();
   let l = useCallback(async () => {
     if (t) {
       a(e);

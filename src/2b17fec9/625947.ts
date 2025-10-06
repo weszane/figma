@@ -196,7 +196,7 @@ import { p as _$$p8 } from '../905/682418';
 import { textDisplayConfig } from '../905/687265';
 import { E as _$$E7 } from '../905/690713';
 import { PopoverPrimitiveContainer, usePopoverPrimitive } from '../905/691059';
-import { e0 as _$$e8 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { l as _$$l0 } from '../905/697177';
 import { getSingletonSceneGraph } from '../905/700578';
 import { dG as _$$dG } from '../905/709354';
@@ -477,7 +477,7 @@ import { B as _$$B5, M as _$$M5 } from '../figma_app/371825';
 import { G as _$$G3 } from '../figma_app/373780';
 import { _J as _$$_J } from '../figma_app/378195';
 import { Aw } from '../figma_app/383828';
-import { B4 } from '../figma_app/385215';
+import { stopPresenting } from '../figma_app/385215';
 import { pauseTimerThunk, pauseMusicThunk, stopMusicThunk, resetSelectedSongAndMusicStartTime, ACTIVE_SONG_NOT_FOUND, setTimerModalThunk, startMusicThunk, resumeTimerThunk, setMusicStandaloneVolumeThunk, updateEditorDocumentTitle, setMusicIsMutedThunk, getLastReceivedSongTimestamp, updateMusicSongIdThunk, setStartChimePlayed, fetchActiveSongsThunk, startTimerThunk, stopTimerThunk, adjustTimerThunk, setStandaloneMusicPlayer } from '../figma_app/389091';
 import { aq as _$$aq2, Xt } from '../figma_app/399472';
 import { lJ as _$$lJ3 } from '../figma_app/407856';
@@ -486,7 +486,7 @@ import { uv as _$$uv, CR } from '../figma_app/419216';
 import { cortexAPI } from '../figma_app/432652';
 import { cu as _$$cu, xY as _$$xY, Vv } from '../figma_app/439332';
 import { $n as _$$$n, wv as _$$wv4, K0, W1 } from '../figma_app/439493';
-import { dR as _$$dR2 } from '../figma_app/440875';
+import { usePresenterUser } from '../figma_app/440875';
 import { U as _$$U2 } from '../figma_app/441035';
 import { bo as _$$bo } from '../figma_app/447445';
 import { fu as _$$fu2, iH as _$$iH, jm as _$$jm, lG as _$$lG, nw as _$$nw, At, Mh, O$ } from '../figma_app/449975';
@@ -8164,7 +8164,7 @@ function d8({
   };
   let h = _$$a6() ? getI18nString('whiteboard.ai_modal.beta_badge') : getI18nString('qa.ai');
   return jsx(TrackingProvider, {
-    name: _$$e8.AI_PROMPT_BUILDER_ENTRY_VIEW,
+    name: TrackingKeyEnum.AI_PROMPT_BUILDER_ENTRY_VIEW,
     properties: {
       fileKey: n
     },
@@ -8288,7 +8288,7 @@ function ci({
   }
   let _ = _$$a6() ? getI18nString('whiteboard.ai_modal.beta_badge') : getI18nString('qa.ai');
   return jsx(TrackingProvider, {
-    name: _$$e8.AI_PROMPT_BUILDER_GENERATE_STAGE,
+    name: TrackingKeyEnum.AI_PROMPT_BUILDER_GENERATE_STAGE,
     properties: {
       fileKey: l?.key
     },
@@ -8418,7 +8418,7 @@ function cl({
   let i = ca();
   U1(i);
   return jsx(TrackingProvider, {
-    name: _$$e8.AI_PROMPT_BUILDER_MODAL,
+    name: TrackingKeyEnum.AI_PROMPT_BUILDER_MODAL,
     properties: {
       fileKey: t,
       modalSource: Wl.TOP_BAR
@@ -8455,7 +8455,7 @@ function cc({
   let r = ca();
   return jsxs(Fragment, {
     children: [jsx(TrackingProvider, {
-      name: _$$e8.AI_PROMPT_BUILDER_MODAL,
+      name: TrackingKeyEnum.AI_PROMPT_BUILDER_MODAL,
       properties: {
         fileKey: i,
         modalSource: Wl.NEW_FILE
@@ -8492,7 +8492,7 @@ function cu() {
     }
   };
   return jsxs(TrackingProvider, {
-    name: _$$e8.AI_PROMPT_BUILDER_TEMPLATES_CALLOUT,
+    name: TrackingKeyEnum.AI_PROMPT_BUILDER_TEMPLATES_CALLOUT,
     properties: {
       fileKey: e
     },
@@ -23169,10 +23169,10 @@ function y8() {
   let t = selectCurrentFile();
   let i = useDropdownState();
   let n = useSelector(e => e.multiplayer);
-  let r = _$$dR2();
+  let r = usePresenterUser();
   let a = selectCurrentUser();
   let s = useMemo(() => n.allUsers.find(e => e.sessionID === n.sessionID) || null, [n.allUsers, n.sessionID]);
-  let u = B4();
+  let u = stopPresenting();
   let p = useIsProgressBarHiddenOrLocked();
   let f = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
   let _ = !isAIFeaturesEnabledForCurrentUser() && Uy() && !Cd();

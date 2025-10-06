@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { isWidget, ShelfViewType, hasMonetizedResourceMetadata, isThirdPartyMonetized, hasFreemiumCode } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { gz, GJ, X7, dC, l0, vf, Wc, d6 } from "../5430/455879";
-import { I as _$$I } from "../5132/515990";
+import { isResourceHubLightboxRdp } from "../5132/515990";
 import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { getResourceActionText } from "../figma_app/777551";
 import { hJ, XY } from "../905/506641";
@@ -21,7 +21,7 @@ import { useAllowlistedPlugins, useAllowlistedWidgets } from "../figma_app/84443
 import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
 import { generateCommunityUrl } from "../905/882646";
 import { getUserId } from "../905/372672";
-import { U3 } from "../figma_app/412189";
+import { useWindowEvent } from "../figma_app/412189";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan, useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { getCurrentPluginVersion, pluginMetadata, hasOrgRole } from "../figma_app/300692";
@@ -52,7 +52,7 @@ export function $$M0({
   let Q = hasOrgRole(e);
   let Z = !!W?.org_id;
   let q = F && (G ? B : D);
-  j = _$$I() ? "right" : r === ShelfViewType.DETAIL ? "center" : "left";
+  j = isResourceHubLightboxRdp() ? "right" : r === ShelfViewType.DETAIL ? "center" : "left";
   let Y = r === ShelfViewType.REDESIGNED_PLUGIN_ROW;
   let {
     dropdownIsShown,
@@ -61,7 +61,7 @@ export function $$M0({
   } = WW(e, j, r);
   let ee = useRef(null);
   let et = getSearchSessionIdFromSelector();
-  if (U3("scroll", () => {
+  if (useWindowEvent("scroll", () => {
     (r === ShelfViewType.PLUGIN_ROW || r === ShelfViewType.REDESIGNED_PLUGIN_ROW) && toggleSwitchEditorDropdown(ee, !1);
   }), $ === pluginMetadata) return null;
   let er = hasMonetizedResourceMetadata(e);

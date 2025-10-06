@@ -116,7 +116,7 @@ import { t as _$$t3 } from '../figma_app/162756';
 import { Qk } from '../figma_app/188908';
 import { FTeamType } from '../figma_app/191312';
 import { Fl, fV } from '../figma_app/236178';
-import { Ay } from '../figma_app/272902';
+import { createMultiRefCallback } from '../figma_app/272902';
 import { useSubscription } from '../figma_app/288654';
 import { lo } from '../figma_app/297733';
 import { f9 } from '../figma_app/328188';
@@ -593,7 +593,7 @@ function eB({
       'onFocus': A,
       'onBlur': C,
       'data-testid': 'library-card-button',
-      'ref': Ay(setKeyboardNavigationElement, Y),
+      'ref': createMultiRefCallback(setKeyboardNavigationElement, Y),
       'children': jsxs('div', {
         className: cssBuilderInstance.flex.flexColumn.gap8.wFull.$,
         children: [jsx('div', {

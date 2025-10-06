@@ -36,7 +36,7 @@ import { logAndTrackCTA } from "../figma_app/314264";
 import { Sz } from "../figma_app/12535";
 import { E as _$$E } from "../1556/957507";
 import { PageTypeEnum } from "../figma_app/10554";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { j as _$$j } from "../905/834956";
 import { ConfirmationModal2 } from "../figma_app/918700";
@@ -139,7 +139,7 @@ function V(e) {
   let p = useSelector(e => e.currentUserOrgId);
   let h = getSearchSessionIdFromSelector();
   let y = shouldShowCreatorNudge(resource);
-  let f = hasClientMeta(e.resource) ? e0.COMMUNITY_HUB_FILE : isWidget(resource) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
+  let f = hasClientMeta(e.resource) ? TrackingKeyEnum.COMMUNITY_HUB_FILE : isWidget(resource) ? TrackingKeyEnum.COMMUNITY_HUB_WIDGET : TrackingKeyEnum.COMMUNITY_HUB_PLUGIN;
   let v = selectCurrentUser();
   let w = hasClientMeta(e.resource);
   let E = isPlugin(e.resource);
@@ -164,7 +164,7 @@ function V(e) {
         hubFileId: resource.id,
         isMonetized: V,
         text: Z,
-        trackingContext: e0.COMMUNITY_HUB_FILE,
+        trackingContext: TrackingKeyEnum.COMMUNITY_HUB_FILE,
         searchSessionId: h,
         has_carousel_media_nudge: y
       }), fileKey && r(_$$t2({
@@ -196,7 +196,7 @@ function V(e) {
           hubFileId: resource.id,
           isMonetized: V,
           text: e,
-          trackingContext: e0.COMMUNITY_HUB_FILE,
+          trackingContext: TrackingKeyEnum.COMMUNITY_HUB_FILE,
           searchSessionId: h,
           has_carousel_media_nudge: y
         });
@@ -217,7 +217,7 @@ function V(e) {
             hubFileId: resource.id,
             isMonetized: V,
             text: e,
-            trackingContext: e0.COMMUNITY_HUB_FILE
+            trackingContext: TrackingKeyEnum.COMMUNITY_HUB_FILE
           });
           r(showModalHandler({
             type: X,

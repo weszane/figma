@@ -130,7 +130,7 @@ import { J as _$$J3 } from '../figma_app/179602';
 import { FPlanNameType, FOrganizationLevelType, FCostCenterType } from '../figma_app/191312';
 import { getProductAccessTypeByKey } from '../figma_app/217457';
 import { Bg } from '../figma_app/246699';
-import { T as _$$T } from '../figma_app/257703';
+import { ListFormatter } from '../figma_app/257703';
 import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { isResourceHubEnabled } from '../figma_app/275462';
 import { useSubscription } from '../figma_app/288654';
@@ -3183,7 +3183,7 @@ let nm = registerModal(() => {
       children: [jsx('p', {
         className: nd,
         children: renderI18nText('org_settings.guest_control.guest_definition', {
-          domains: jsx(_$$T, {
+          domains: jsx(ListFormatter, {
             formatType: 'disjunction',
             children: m.map(e => jsxs('span', {
               children: ['@', e.domain]
@@ -4802,7 +4802,7 @@ export function $$sr0(e) {
       }), jsx('span', {
         className: cssBuilderInstance.mt8.$,
         children: org.ip_ranges.length !== 0 ? renderI18nText('settings_tab.ip_restriction_range', {
-          ipRanges: jsx(_$$T, {
+          ipRanges: jsx(ListFormatter, {
             formatType: 'unit',
             children: org.ip_ranges.map(e => jsx('span', {
               children: e
@@ -4896,7 +4896,7 @@ export function $$sr0(e) {
           children: jsx(TextWithTruncation, {
             truncate: 'end',
             children: renderI18nText('settings_tab.ip_allowlist_ranges_list', {
-              ranges: jsx(_$$T, {
+              ranges: jsx(ListFormatter, {
                 formatType: 'unit',
                 children: ec.map(e => jsx('span', {
                   children: e.ipRange

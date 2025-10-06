@@ -13,7 +13,7 @@ import { LargeLoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { fullscreenAlias } from "../905/37051";
 import { getSelectedView } from "../figma_app/386952";
-import { aq } from "../figma_app/412189";
+import { useIsMounted } from "../figma_app/412189";
 import { FFileType } from "../figma_app/191312";
 import { getEditorViewType } from "../905/187165";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
@@ -161,7 +161,7 @@ function M(e) {
 }
 function F(e) {
   let [t, r] = useState(!1);
-  let a = aq();
+  let a = useIsMounted();
   return ((desktopAPIInstance ? desktopAPIInstance.getZoomFactor() : BrowserInfo.chrome || BrowserInfo.safari ? Promise.resolve(window.outerWidth / window.innerWidth) : Promise.resolve(void 0)).then(e => {
     e && (e < .95 || e > 1.05) && a() && !t && r(!0);
   }), t || isFigmaMobileApp() || fullscreenAlias.getIsExtension()) ? jsx(j, {

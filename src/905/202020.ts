@@ -9,7 +9,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { BadgeSize } from "../figma_app/919079";
 import { gS, c$ } from "../figma_app/236327";
 import { RelativeTimeDisplay } from "../905/986103";
-import { p as _$$p } from "../905/991924";
+import { PlaybackInput } from "../905/991924";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getCurrentLiveGraphClient } from "../905/761735";
 import { sendWithRetry } from "../905/910117";
@@ -25,13 +25,13 @@ import { showModalHandler, hideModal } from "../905/156213";
 import { ShareContext } from "../905/91820";
 import { FEditorType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { Ro } from "../figma_app/805373";
 import { e as _$$e } from "../905/225961";
 import { Cf } from "../905/504727";
 import { a$ } from "../905/467351";
 function g(e) {
-  return e.isRenaming ? jsx(_$$p, {
+  return e.isRenaming ? jsx(PlaybackInput, {
     className: `renamable_title--renameInput--kVdEz text--fontPos13--xW8hS text--_fontBase--QdLsd ${e.className || ""}`,
     placeholderValue: e.placeholderValue,
     submit: e.submitTitle,
@@ -303,7 +303,7 @@ export function $$V0(e) {
           }));
           trackEventAnalytics("Open File Click", {
             fileKey: e.branch.key,
-            source: e0.BRANCHES_MODAL,
+            source: TrackingKeyEnum.BRANCHES_MODAL,
             fileRepoId: e.branch.fileRepoId
           });
         },

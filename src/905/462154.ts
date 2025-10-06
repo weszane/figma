@@ -10,7 +10,7 @@ import { logDebug } from '../905/714362';
 import { E0 } from '../905/848469';
 import { e_ } from '../905/866195';
 import { iconClassifierEndpointSchema } from '../905/889788';
-import { Zh } from '../figma_app/2590';
+import { trackDefinedFileEventWrapper } from '../figma_app/2590';
 import { computeFullscreenViewportForNode } from '../figma_app/62612';
 import { isMagicLinkEnabled } from '../figma_app/144974';
 import { FI, rq, Sh } from '../figma_app/262240';
@@ -29,7 +29,7 @@ export let $$C1 = async ({
   getFeatureFlags().prototype_ai_magic_link_ensemble_model && (g4(e => {
     let t = e.name;
     let i = e.time;
-    debugState.dispatch(Zh({
+    debugState.dispatch(trackDefinedFileEventWrapper({
       name: 'prototype.ai_magic_link_feature_computed',
       params: {
         name: t,
@@ -44,7 +44,7 @@ export let $$C1 = async ({
       num_interactions_need_destination_node: e.numInteractionsNeedDestinationNode,
       num_interactions_destination_node_is_same_tlf: e.numInteractionsDestinationNodeIsSameTLF
     };
-    debugState.dispatch(Zh({
+    debugState.dispatch(trackDefinedFileEventWrapper({
       name: 'prototype.ai_magic_link_gpt_post_processing',
       params: t
     }));
@@ -95,7 +95,7 @@ export let $$C1 = async ({
     ICON,
     IMAGE
   } = kC(i, P, ['TEXT', 'ICON', 'IMAGE']);
-  T(Zh({
+  T(trackDefinedFileEventWrapper({
     name: 'prototype.ai_magic_link_started',
     params: {
       selectedNodeIds: JSON.stringify(N),
@@ -143,7 +143,7 @@ export let $$C1 = async ({
       throw new Error(b.errorMessage);
     }
     let v = b.generatedInteractions.map(e => e.id);
-    T(Zh({
+    T(trackDefinedFileEventWrapper({
       name: 'prototype.ai_magic_link_completed',
       params: {
         status: 'success',
@@ -154,7 +154,7 @@ export let $$C1 = async ({
     return b;
   } catch (e) {
     e instanceof FI && (logDebug('Magic Link', JSON.stringify(e.looseNodeInfo)), reportError(ServiceCategories.PROTOTYPING, new Error(e.toString())));
-    T(Zh({
+    T(trackDefinedFileEventWrapper({
       name: 'prototype.ai_magic_link_completed',
       params: {
         status: 'failure',

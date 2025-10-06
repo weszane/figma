@@ -78,7 +78,7 @@ import { selectUser } from "../905/372672";
 import { getCurrentUserOrgUser } from "../figma_app/951233";
 import { ResourceTypeNoComment, hasClientMeta } from "../figma_app/45218";
 import { LibrarySourceEnum } from "../figma_app/633080";
-import { e0 as _$$e3 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { KT, Cd, DK, $o, ME, jc } from "../905/54042";
 import { r as _$$r3 } from "../905/490676";
@@ -832,7 +832,7 @@ function ej(e) {
     }
   }, [A]);
   return jsx(TrackingProvider, {
-    name: _$$e3.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
+    name: TrackingKeyEnum.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
     properties: {
       userId: s.id,
       orgId: l?.id,
@@ -1792,7 +1792,7 @@ function tc(e) {
     authedActiveCommunityProfile: p
   });
   return jsx(TrackingProvider, {
-    name: _$$e3.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
+    name: TrackingKeyEnum.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
     properties: {
       userId: s.id,
       orgId: d?.id,

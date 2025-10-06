@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useCallback } from "react";
-import { p } from "../905/991924";
+import { PlaybackInput } from "../905/991924";
 import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 export let $$o0 = forwardRef(function (e, t) {
   let {
@@ -10,7 +10,7 @@ export let $$o0 = forwardRef(function (e, t) {
     onKeyDown?.(e);
     handleKeyboardEventByState(e, KeyboardEventResponse.NO);
   }, [onKeyDown]);
-  return jsx(p, {
+  return jsx(PlaybackInput, {
     ...e,
     ref: t,
     onKeyDown: o

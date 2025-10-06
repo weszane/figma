@@ -66,7 +66,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
 import { getCurrentUserOrgUser } from "../figma_app/951233";
 import { ResourceTypeNoComment } from "../figma_app/45218";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { t as _$$t3 } from "../figma_app/305141";
 import { _t } from "../figma_app/171413";
 import { l as _$$l2 } from "../905/121353";
@@ -566,7 +566,7 @@ export function $$eL0(e) {
   });
   let i = _t(e.figFile?.key ?? "");
   return jsx(TrackingProvider, {
-    name: e0.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
+    name: TrackingKeyEnum.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
     properties: {
       userId: t.user.id,
       orgId: t.org?.id,

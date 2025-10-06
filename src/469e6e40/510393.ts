@@ -13,7 +13,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { d as _$$d } from "../905/44199";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { P } from "../905/392438";
 function j(e) {
@@ -40,7 +40,7 @@ let $$w0 = registerModal(function (e) {
   let E = () => v.tokens.filter(e => e.state === _$$d.OK).map(e => e.content).join(",");
   let C = () => v.tokens.filter(e => e.state === _$$d.ERROR).length > 0;
   return jsx(TrackingProvider, {
-    name: e0.CHANGE_BILLING_CONTACT_MODAL,
+    name: TrackingKeyEnum.CHANGE_BILLING_CONTACT_MODAL,
     children: jsx(ModalRootComponent, {
       manager: t,
       width: 341,

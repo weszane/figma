@@ -23,7 +23,7 @@ import { Button } from '../905/521428';
 import { VisualBellIcon } from '../905/576487';
 import { getResourceDataOrFallback } from '../905/663269';
 import { textDisplayConfig } from '../905/687265';
-import { e0 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { RenewalTermEnum } from '../905/712921';
 import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { N as _$$N2 } from '../905/809096';
@@ -294,7 +294,7 @@ function er(e) {
   }, []);
   let Z = g || !currency || status === 'errors' || !x;
   return jsx(TrackingProvider, {
-    name: e0.AUTO_APPROVAL_SETTINGS_MODAL,
+    name: TrackingKeyEnum.AUTO_APPROVAL_SETTINGS_MODAL,
     properties: {
       planType: z.key.type,
       orgId: z.key.type === FOrganizationLevelType.ORG ? z.key.parentId : void 0,
@@ -395,7 +395,7 @@ function ei({
 }
 function el() {
   return jsx(TrackingProvider, {
-    name: e0.SCIM_INFO_BADGE,
+    name: TrackingKeyEnum.SCIM_INFO_BADGE,
     children: jsx(_$$_, {
       dataTestId: 'scim-info-badge',
       color: _$$S.INFORMATION,
@@ -415,7 +415,7 @@ function el() {
 }
 function eo() {
   return jsx(TrackingProvider, {
-    name: e0.CURF_MEMBER_INFO_BADGE,
+    name: TrackingKeyEnum.CURF_MEMBER_INFO_BADGE,
     children: jsx(_$$_, {
       dataTestId: 'curf-member-only-info-badge',
       color: _$$S.INFORMATION,

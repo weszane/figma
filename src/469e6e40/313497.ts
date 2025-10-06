@@ -23,7 +23,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { organizationAPIService } from "../figma_app/617654";
 import { registerModal } from "../905/102752";
 import { I as _$$I } from "../905/597430";
@@ -637,7 +637,7 @@ function V(e) {
     },
     "data-testid": `org-schedule-cancellation-modal-${t}`,
     children: jsx(TrackingProvider, {
-      name: e0.ORG_SCHEDULE_CANCELLATION_MODAL,
+      name: TrackingKeyEnum.ORG_SCHEDULE_CANCELLATION_MODAL,
       properties: {
         orgId: e.orgId,
         step: t
@@ -699,7 +699,7 @@ function W(e) {
     });
   }, [a, e.orgId, onClose]);
   return jsx(TrackingProvider, {
-    name: e0.ORG_UNSCHEDULE_CANCELLATION_MODAL,
+    name: TrackingKeyEnum.ORG_UNSCHEDULE_CANCELLATION_MODAL,
     properties: {
       orgId: e.orgId
     },

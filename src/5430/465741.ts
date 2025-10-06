@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { usePrefersMediaQuery } from "../figma_app/469468";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { fk } from "../5430/480225";
 import { T as _$$T } from "../5430/373013";
 import m from "classnames";
@@ -28,7 +28,7 @@ import { selectEditorResource, syncEditorResourceWithHistory } from "../figma_ap
 import { z } from "../5430/143080";
 import { MAX_BANNER_CLICKS } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { T as _$$T2 } from "../5430/126619";
 import { ial, cVr, N6X } from "../figma_app/27776";
 var _ = m;
@@ -117,7 +117,7 @@ export function $$U1({
   emptyStateActions: o,
   numTilesPerRow: a = 5
 }) {
-  let u = AG();
+  let u = useIsResourceHub();
   let m = !u && useSelector(e => !!(e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id));
   let _ = usePrefersMediaQuery(`(max-width: ${ial})`);
   let p = usePrefersMediaQuery(`(max-width: ${cVr})`);
@@ -162,7 +162,7 @@ export function $$U1({
 }
 export function $$V0() {
   return jsx(TrackingProvider, {
-    name: e0.COMMUNITY_HUB_SEARCH,
+    name: TrackingKeyEnum.COMMUNITY_HUB_SEARCH,
     children: jsx(W, {})
   });
 }

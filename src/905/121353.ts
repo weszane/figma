@@ -58,7 +58,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
 import { getCurrentUserOrgUser } from "../figma_app/951233";
 import { ResourceTypeNoComment } from "../figma_app/45218";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { KT, Cd, ME, jc, DK, $o } from "../905/54042";
 var m = p;
 function ep({
@@ -483,7 +483,7 @@ export function $$em0(e) {
     sceneGraph: g
   });
   return jsx(TrackingProvider, {
-    name: e0.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
+    name: TrackingKeyEnum.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
     properties: {
       userId: o.id,
       orgId: c?.id,

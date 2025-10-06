@@ -17,7 +17,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { ignoreCommandOrShift } from "../905/63728";
-import { Vi, B4, tu, oJ } from "../figma_app/385215";
+import { startPresenting, stopPresenting, nominatePresenter, cancelNomination } from "../figma_app/385215";
 import { ah, Dv } from "../905/763714";
 import { getFileTypePx } from "../905/149328";
 import { WN } from "../figma_app/638601";
@@ -39,10 +39,10 @@ import { isIntegrationContext } from "../figma_app/469876";
 import { Zr } from "../figma_app/678782";
 import { AD, wF, Wq, uC, A8 } from "../figma_app/578768";
 import { selectCurrentFile } from "../figma_app/516028";
-import { dR } from "../figma_app/440875";
+import { usePresenterUser } from "../figma_app/440875";
 import { useDelayedCallback } from "../905/116724";
 import { _P } from "../figma_app/2590";
-import { q as _$$q } from "../905/495564";
+import { useUserOrgPath } from "../905/495564";
 import { YL, gW } from "../figma_app/122682";
 import { KindEnum } from "../905/129884";
 import { x as _$$x } from "../905/106997";
@@ -62,7 +62,7 @@ import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { A as _$$A2 } from "../3276/51271";
 import { K as _$$K } from "../3276/330497";
 import { WF, tL, sl, Te, iw, iG, zc } from "../9410/132424";
-import { a as _$$a, G as _$$G } from "../905/298663";
+import { isCodeViewPanel, useIsCodeViewPanel } from "../905/298663";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { s as _$$s2 } from "../3276/362217";
@@ -278,16 +278,16 @@ function eI({
     cancel();
     C(!1);
   }, [cancel, C]);
-  let J = Vi();
+  let J = startPresenting();
   let q = useCallback(() => {
     h || (J(), Y(), S(!0), B(hideDropdownAction()));
   }, [Y, B, S, J, h]);
-  let Z = B4();
+  let Z = stopPresenting();
   let ee = useCallback(() => {
     Z();
     B(hideDropdownAction());
   }, [B, Z]);
-  let et = dR();
+  let et = usePresenterUser();
   let ei = et && i.sessionID === et.sessionID ? jsx(pz, {
     onClick: ee,
     className: BK,
@@ -451,17 +451,17 @@ function ek({
     cancel();
     M(!1);
   }, [cancel, M]);
-  let ei = Vi();
+  let ei = startPresenting();
   let er = useCallback(() => {
     d || (ei(), et(), F(!0), Y(hideDropdownAction()), S());
   }, [et, Y, F, ei, d, S]);
-  let en = B4();
+  let en = stopPresenting();
   let ea = useCallback(() => {
     en();
     Y(hideDropdownAction());
     S();
   }, [Y, en, S]);
-  let es = dR();
+  let es = usePresenterUser();
   let eo = es && e.sessionID === es.sessionID ? jsx(pz, {
     onClick: ea,
     className: BK,
@@ -513,7 +513,7 @@ function ek({
     let n = [];
     let a = f.sessionNominatedByCurrentUser === e.sessionID;
     let s = f.presenterSessionID === e.sessionID;
-    let o = _ && !!e.sitesViewState && _$$a(e.sitesViewState);
+    let o = _ && !!e.sitesViewState && isCodeViewPanel(e.sitesViewState);
     !t || s || d || (a ? n.push({
       text: renderI18nText("collaboration.spotlight.tooltip.menu.cancel_ask_to_spotlight"),
       onClick: () => {
@@ -661,7 +661,7 @@ let $$eO0 = memo(function (e) {
   let q = useMemo(() => multiplayer.allUsers.filter(e => e.sessionID !== currentUser?.sessionID), [multiplayer.allUsers, currentUser]);
   let $ = useSelector(e => "prototype" === e.selectedView.view || "presentation" === e.selectedView.view);
   let ee = Zr("spotlight-me");
-  let et = _$$G();
+  let et = useIsCodeViewPanel();
   let ei = !$ && (e.disableFollowing || k || !ee);
   ei && et && (t = getI18nString("left_rail.only_available_on_canvas"));
   let [er, en] = useAtomValueAndSetter(ah);
@@ -687,11 +687,11 @@ let $$eO0 = memo(function (e) {
       otherUserSessionsCount: ed.length
     });
   }, [currentUser.sessionID, M, dropdownShown?.type, ed.length, eu]);
-  let eh = dR();
+  let eh = usePresenterUser();
   let em = eh && eh.sessionID !== currentUser.sessionID ? eh : null;
-  let ef = _$$q();
-  let eg = tu();
-  let eC = oJ();
+  let ef = useUserOrgPath();
+  let eg = nominatePresenter();
+  let eC = cancelNomination();
   let eE = useIsFullscreenSitesView();
   let eT = useMemo(() => ({
     label: e => e.name,
@@ -706,7 +706,7 @@ let $$eO0 = memo(function (e) {
       let a = [];
       let s = multiplayer.sessionNominatedByCurrentUser === e.sessionID;
       let o = multiplayer.presenterSessionID === e.sessionID;
-      let l = eE && !!e.sitesViewState && _$$a(e.sitesViewState);
+      let l = eE && !!e.sitesViewState && isCodeViewPanel(e.sitesViewState);
       o || ei || (s ? a.push({
         text: renderI18nText("collaboration.spotlight.tooltip.menu.cancel_ask_to_spotlight"),
         onClick: () => {

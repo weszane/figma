@@ -1,11 +1,11 @@
-import { K } from "../905/498709";
+import { createRegisterMenuEvent } from "../905/498709";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 let {
   useRegisterMenu,
   open,
   close,
   isOpenAtom
-} = K();
+} = createRegisterMenuEvent();
 let $$l0 = s;
 let $$d2 = () => useAtomValueAndSetter(isOpenAtom)[0];
 let $$c1 = r;

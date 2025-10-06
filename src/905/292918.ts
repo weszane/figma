@@ -16,7 +16,7 @@ import { handlePluginError } from "../905/753206";
 import A, { maybeCreateSavepoint } from "../905/294113";
 import { FEditorType } from "../figma_app/53721";
 import { BranchType, SourceDirection } from "../905/535806";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { fileApiHandler } from "../figma_app/787550";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useEffect } from "react";
@@ -509,7 +509,7 @@ let $$em1 = createOptimistThunk(e => {
       onCheckpointSelected: t => {
         e.dispatch($$ep3({
           direction: SourceDirection.FROM_SOURCE,
-          trackingContextName: e0.BRANCHING_UPDATE_FROM_VERSION_MODAL,
+          trackingContextName: TrackingKeyEnum.BRANCHING_UPDATE_FROM_VERSION_MODAL,
           sourceCheckpointKey: "latest" === t ? void 0 : t
         }));
       }

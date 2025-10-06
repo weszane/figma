@@ -5,7 +5,7 @@ import { OQ } from "../5430/903660";
 import { y } from "../5430/173892";
 import { getEditorTypeForResource } from "../figma_app/773663";
 import { TrackingProvider } from "../figma_app/831799";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 if (443 == require.j) {}
 export function $$u0({
   context: e,
@@ -23,7 +23,7 @@ export function $$u0({
     price
   } = t;
   return jsx(TrackingProvider, {
-    name: e0.RESOURCE_HUB_FEED_FILTERS,
+    name: TrackingKeyEnum.RESOURCE_HUB_FEED_FILTERS,
     children: jsx(DropdownThemeProvider, {
       mode: "match",
       children: jsxs("div", {

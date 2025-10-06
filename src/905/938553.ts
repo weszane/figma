@@ -76,7 +76,7 @@ import { A as _$$A30 } from '../905/663296';
 import { $ as _$$$2 } from '../905/668315';
 import { qu, UR } from '../905/671449';
 import { A as _$$A22 } from '../905/676119';
-import { e0 as _$$e2 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { $i, Ay as _$$Ay2 } from '../905/702716';
 import { liveStoreInstance, setupResourceAtomHandler } from '../905/713695';
 import { SvgComponent } from '../905/714743';
@@ -3395,7 +3395,7 @@ class iW extends Component {
       });
     }
     return jsx(TrackingProvider, {
-      name: _$$e2.COMMUNITY_HUB_PLUGIN_PUBLISH_MODAL,
+      name: TrackingKeyEnum.COMMUNITY_HUB_PLUGIN_PUBLISH_MODAL,
       properties: {
         entryPoint: this.props.entryPoint,
         isInEditPageMode: this.isInEditPageMode(),

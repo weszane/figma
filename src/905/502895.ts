@@ -9,7 +9,7 @@ import { Point } from "../905/736624";
 import { VideoPlayerError, loadVideoSource } from "../905/284552";
 import { LargeLoadingSpinner } from "../figma_app/858013";
 import { generatePaintIcon, convertImageDataToURL } from "../905/619652";
-import { _P } from "../figma_app/2590";
+import { trackPrototypeScaleChangeEvent } from "../figma_app/2590";
 import { fileApiHandler } from "../figma_app/787550";
 let f = window.performance.now();
 let _ = (e, t, i) => {
@@ -56,7 +56,7 @@ export function $$$$A0(e) {
   let D = useLatestRef(O);
   let L = useDispatch();
   let F = useCallback((e, t, i, n) => {
-    L(_P({
+    L(trackPrototypeScaleChangeEvent({
       name: "video_load",
       params: {
         status: "failure",
@@ -69,7 +69,7 @@ export function $$$$A0(e) {
     }));
   }, [L]);
   let M = useCallback((e, n, r) => {
-    L(_P({
+    L(trackPrototypeScaleChangeEvent({
       name: "video_load",
       params: {
         status: "success",

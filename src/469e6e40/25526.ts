@@ -47,7 +47,7 @@ import { K as _$$K2 } from "../905/628118";
 import { TrackingProvider } from "../figma_app/831799";
 import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, WorkspaceTab, BillingSectionEnum, MemberView, FigResourceType } from "../figma_app/650409";
-import { e0 as _$$e3 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { g as _$$g2 } from "../figma_app/638694";
 import { k as _$$k4 } from "../469e6e40/115523";
 import { isSelectedOrgAdminSettingsMissingResources } from "../figma_app/422062";
@@ -389,7 +389,7 @@ function eo(e) {
     });
   }, [t, n, e.org.id]);
   return jsxs(TrackingProvider, {
-    name: _$$e3.FILE_LIST_BETA,
+    name: TrackingKeyEnum.FILE_LIST_BETA,
     properties: {
       orgId: e.org.id,
       teamId: null
@@ -455,7 +455,7 @@ function ed(e) {
     });
   }, [t, n, e.org.id]);
   return jsxs(TrackingProvider, {
-    name: _$$e3.ACCESS_INSIGHT,
+    name: TrackingKeyEnum.ACCESS_INSIGHT,
     properties: {
       orgId: e.org.id,
       teamId: null
@@ -2481,7 +2481,7 @@ function aG(e) {
 }
 function az(e) {
   return jsx(TrackingProvider, {
-    name: _$$e3.BILLING_GROUPS_TAB,
+    name: TrackingKeyEnum.BILLING_GROUPS_TAB,
     properties: {
       orgId: e.org.id
     },
@@ -2514,7 +2514,7 @@ function aH(e) {
 }
 function aY(e) {
   return jsx(TrackingProvider, {
-    name: _$$e3.BILLING_INVOICES_TAB,
+    name: TrackingKeyEnum.BILLING_INVOICES_TAB,
     properties: {
       orgId: e.org.id
     },
@@ -2664,7 +2664,7 @@ function a3(e) {
 }
 function a8(e) {
   return jsx(TrackingProvider, {
-    name: _$$e3.BILLING_OVERVIEW_TAB,
+    name: TrackingKeyEnum.BILLING_OVERVIEW_TAB,
     properties: {
       orgId: e.org.id
     },
@@ -2817,7 +2817,7 @@ function nu(e) {
     revalidateOnMount: !0
   });
   return jsxs(TrackingProvider, {
-    name: _$$e3.BILLING_VIEW,
+    name: TrackingKeyEnum.BILLING_VIEW,
     properties: {
       orgId: e.org.id
     },
@@ -3861,7 +3861,7 @@ function n4(e) {
     children: renderI18nText("members_table.create_user_group_button")
   });
   return jsxs(TrackingProvider, {
-    name: _$$e3.ORG_ADMIN_PEOPLE_VIEW,
+    name: TrackingKeyEnum.ORG_ADMIN_PEOPLE_VIEW,
     properties: {
       orgId: e.org.id
     },

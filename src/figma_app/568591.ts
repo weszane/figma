@@ -5,7 +5,7 @@ import { deepEqual } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
-import { extractInviteTokens, Rc } from "../figma_app/819288";
+import { extractInviteTokens, normalizeMessageMeta } from "../figma_app/819288";
 import { useLatestRef } from "../figma_app/922077";
 import { beginEventRecording } from "../905/761735";
 import { getLivegraphClient, useSubscription } from "../figma_app/288654";
@@ -18,7 +18,7 @@ import { sendWithRetry } from "../905/910117";
 import { pI } from "../figma_app/770088";
 import { pf } from "../905/201151";
 import { getSelectedEditorType } from "../figma_app/976749";
-import { Mu, QG } from "../905/901964";
+import { createAttachmentsLookup, convertToFileComment } from "../905/901964";
 import { gj } from "../figma_app/12220";
 import { W9, gu, Hu } from "../figma_app/936061";
 import { N as _$$N } from "../figma_app/261650";
@@ -200,7 +200,7 @@ class j {
     this.client.optimistically((e, t) => {
       let r = this.client.loadedComments.map(e => e.orderId || 0);
       let o = r.length > 0 ? Math.max(...r) : 0;
-      let l = Rc(messageMeta);
+      let l = normalizeMessageMeta(messageMeta);
       t.optimisticallyCreateWithUUID({
         Comment: {
           [uuid]: {
@@ -237,7 +237,7 @@ class j {
           }
         }
       }, f);
-      let d = Mu(attachments, fileKey, uuid);
+      let d = createAttachmentsLookup(attachments, fileKey, uuid);
       if (d && t.optimisticallyCreate({
         CommentAttachment: d
       }, f), !e.file.currentUserCommentReadStatus) {
@@ -291,7 +291,7 @@ class j {
       tracking_context: t.trackingContext,
       pending_mentions: u
     });
-    let h = Rc(messageMeta);
+    let h = normalizeMessageMeta(messageMeta);
     let m = _$$e(this.client.subscription);
     let {
       user
@@ -339,11 +339,11 @@ class j {
             thumbnailUrl: null,
             isCanvasMention: !1,
             commentPin: null,
-            attachments: attachments.map(e => QG(e, fileKey, uuid))
+            attachments: attachments.map(e => convertToFileComment(e, fileKey, uuid))
           }
         }
       }, _);
-      let r = Mu(attachments, fileKey, uuid);
+      let r = createAttachmentsLookup(attachments, fileKey, uuid);
       r && t.optimisticallyCreate({
         CommentAttachment: r
       }, _);

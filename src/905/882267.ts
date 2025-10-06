@@ -53,7 +53,7 @@ import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { getHighestPriorityFont } from "../905/714538";
 import { calculatePickerPositionLeft } from "../905/959568";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { fI } from "../figma_app/626177";
 import { We } from "../905/805224";
 import { FormattedInputContext } from "../905/427409";
@@ -587,7 +587,7 @@ function eF({
     recordingKey: r
   });
   return jsx(TrackingProvider, {
-    name: e0.FONT_PICK_FONT_SET_DROPDOWN,
+    name: TrackingKeyEnum.FONT_PICK_FONT_SET_DROPDOWN,
     enabled: c,
     children: jsx("div", {
       className: "font_picker--fontSetDropdown--8aux5",

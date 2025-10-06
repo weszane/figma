@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { K } from "../905/498709";
+import { createRegisterMenuEvent } from "../905/498709";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { A } from "../1250/278368";
 let $$l0 = "FILE_BROWSER_PLAN_SWITCHER";
@@ -8,7 +8,7 @@ let {
   close,
   open,
   useRegisterMenu
-} = K();
+} = createRegisterMenuEvent();
 export function $$u1() {
   let e = useDispatch();
   return {

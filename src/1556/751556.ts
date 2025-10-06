@@ -66,7 +66,7 @@ import { logAndTrackCTA } from "../figma_app/314264";
 import { X as _$$X } from "../figma_app/91315";
 import { ck } from "../905/952832";
 import { InterProfileType } from "../905/895626";
-import { e0 as _$$e3 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { S as _$$S } from "../1556/805548";
 import { s as _$$s3 } from "../905/539471";
 import { T$ as _$$T$, B$, SO } from "../1556/114224";
@@ -236,7 +236,7 @@ function eT({
       userViewTab: InterProfileType.INTERNAL_PROFILE
     })));
     x && logAndTrackCTA({
-      trackingContext: _$$e3.FILE_BROWSER,
+      trackingContext: TrackingKeyEnum.FILE_BROWSER,
       context: "job_title",
       text: "Internal Profile"
     });

@@ -20,7 +20,7 @@ import { PaginatedAbandonedDraftsView } from "../figma_app/43951";
 import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { OrganizationType } from "../905/833838";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { Cj } from "../905/270084";
 import { zx, VU } from "../4452/650793";
 import { p as _$$p2 } from "../469e6e40/348454";
@@ -154,7 +154,7 @@ export function $$U0(e) {
     }));
   }, [t, I, e.planType]);
   return jsxs(TrackingProvider, {
-    name: e0.ABANDONED_DRAFTS_TABLE,
+    name: TrackingKeyEnum.ABANDONED_DRAFTS_TABLE,
     properties: {
       orgId: e.planType === OrganizationType.ORG ? e.org.id : null,
       teamId: e.planType === OrganizationType.TEAM ? e.team.id : null

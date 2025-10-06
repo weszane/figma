@@ -17,7 +17,7 @@ import { setFileInfo } from "../figma_app/682945";
 import { enterVersionHistoryMode, loadVersionIncrementally, startCompareChanges } from "../figma_app/841351";
 import { SourceDirection } from "../905/535806";
 import { versionHandlerInstance } from "../905/985740";
-import { h as _$$h } from "../905/438683";
+import { openResiger } from "../905/438683";
 import { createOptimistThunk } from "../905/350402";
 let $$x1 = createActionCreator("FULLSCREEN_DOCUMENT_LOADED");
 let $$S0 = createOptimistThunk(e => {
@@ -50,7 +50,7 @@ let $$S0 = createOptimistThunk(e => {
   i.fileKey && i.compareVersionId && (e.dispatch(enterVersionHistoryMode()), e.dispatch(startCompareChanges({
     fromVersionId: i.compareVersionId
   })));
-  i && i.fileKey && i.showCommentPreferencesPicker && _$$h();
+  i && i.fileKey && i.showCommentPreferencesPicker && openResiger();
   let a = t.openFile;
   let E = i.reviewNumber;
   if (i && i.framePresetName) {

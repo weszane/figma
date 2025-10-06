@@ -11,7 +11,7 @@ import { markPrototypeViewed } from "../905/70982";
 import { fullscreenAlias } from "../905/37051";
 import { isFigmaNativeApp } from "../905/575846";
 import { mapFileSummary } from "../figma_app/349248";
-import { _P, Zh, qb, Rv } from "../figma_app/2590";
+import { trackPrototypeScaleChangeEvent, trackDefinedFileEventWrapper, getContentScalingMode, getDeviceFramePosition } from "../figma_app/2590";
 import { serializeFullViewerQueryParams } from "../figma_app/831696";
 import { isFirstPageCurrentSelector } from "../905/91038";
 import { openInBrowser } from "../figma_app/415217";
@@ -34,12 +34,12 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
   let k = isFirstPageCurrentSelector(C);
   let R = C.mirror.sceneGraph.get(T);
   let N = R?.prototypeDevice?.presetIdentifier || "";
-  isSlides ? e.dispatch(_P({
+  isSlides ? e.dispatch(trackPrototypeScaleChangeEvent({
     name: isPresenterViewWithPopoutAudienceView ? "slides.presentation_mode.present_slides_with_speaker_notes" : "slides.presentation_mode.present_slides",
     params: {
       source
     }
-  })) : e.dispatch(Zh({
+  })) : e.dispatch(trackDefinedFileEventWrapper({
     name: "prototype.editor_play_button_clicked",
     params: {
       isFirstPage: k,
@@ -50,8 +50,8 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
   }));
   let P = PrototypingTsApi.currentDeviceType();
   let O = {
-    viewportScalingMode: scalingInfo?.viewportScalingMode ?? qb(P),
-    contentScalingMode: scalingInfo?.contentScalingMode ?? Rv(P)
+    viewportScalingMode: scalingInfo?.viewportScalingMode ?? getContentScalingMode(P),
+    contentScalingMode: scalingInfo?.contentScalingMode ?? getDeviceFramePosition(P)
   };
   let D = C.lastVisitedPlanId || null;
   let L = serializeFullViewerQueryParams({

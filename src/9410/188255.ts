@@ -12,7 +12,7 @@ import { postUserFlag } from "../905/985254";
 import { withTrackedClick, TrackingProvider, useTracking } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
 import { N as _$$N, D as _$$D } from "../figma_app/268271";
-import { e0 as _$$e2 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { OnboardingSequence } from "../905/152487";
 import { RSb, B14, y4J, t_E, qnr, kmj, hsL, JGK, XAb, Ttn, Nwg, BrS, v75, Smd, H2x, DKg, wRI, Kze, MJs, zoI, lLk, kp0, Njd, jRE, Byv, Y2_, KTt, HU3, g4U, uPw, Fq3, a9B, ENg, CVA, IQ, K_h, Fff, uTW, sJD, _5$ } from "../figma_app/6204";
 import { IconButton } from "../905/443068";
@@ -134,7 +134,7 @@ import { A as _$$A7 } from "../1250/545022";
 import { selectExperimentConfigHook, useUserFlagExperimentConfig } from "../figma_app/594947";
 import { setLeftPanelTab } from "../figma_app/91703";
 import { ArrowPosition, PositioningStrategy } from "../905/858282";
-import { S as _$$S2 } from "../figma_app/420927";
+import { KeyboardShortcut } from "../figma_app/420927";
 import { styleBuilderInstance } from "../905/941192";
 import { browserCapabilities } from "../905/409121";
 import ix from "classnames";
@@ -230,7 +230,7 @@ import { H as _$$H } from "../figma_app/907304";
 import { w as _$$w6 } from "../figma_app/106955";
 import { m5, rj as _$$rj } from "../9410/983733";
 import { _1, kP } from "../figma_app/809086";
-import { e as _$$e3 } from "../905/383776";
+import { useIsFullscreenWithDevVariables } from "../905/383776";
 import { useIsFullscreenOverview, useDevModeFocusId, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { wX } from "../figma_app/710136";
 import { hasJubileePermissionForDesign } from "../figma_app/251115";
@@ -623,7 +623,7 @@ function et() {
   return jsx(OnboardingSequence, {
     isShowing,
     children: isShowing && jsx(TrackingProvider, {
-      name: _$$e2.AI_SUMMARY_TOPBAR_NUDGE,
+      name: TrackingKeyEnum.AI_SUMMARY_TOPBAR_NUDGE,
       children: jsx(q, {
         onClose: () => {
           e(postUserFlag({
@@ -1530,10 +1530,10 @@ function i_() {
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
   let l = browserCapabilities.isApple();
-  let d = useMemo(() => jsx(_$$S2, {
+  let d = useMemo(() => jsx(KeyboardShortcut, {
     shortcut: l ? "\u2318K" : "Ctrl+K"
   }), [l]);
-  let c = useMemo(() => jsx(_$$S2, {
+  let c = useMemo(() => jsx(KeyboardShortcut, {
     shortcut: l ? "\u21E7\u2318U" : "Shift+Ctrl+U"
   }), [l]);
   _$$E2(uniqueId, ["show_link_shortcuts_overlay"], () => {
@@ -7463,7 +7463,7 @@ function sB() {
   let h = isDesignFileType();
   let m = useIsFullscreenOverview();
   let g = useDevModeFocusId();
-  let _ = _$$e3();
+  let _ = useIsFullscreenWithDevVariables();
   let x = useIsFullscreenDevModeComponentBrowser();
   let b = !!getFeatureFlags().ui3_and_ai_welcome_modal;
   let C = useIsProgressBarHiddenOrLocked();

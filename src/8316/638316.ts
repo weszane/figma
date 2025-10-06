@@ -11,10 +11,10 @@ import { UI3ConditionalWrapper } from "../905/341359";
 import { useWindowDimensions } from "../905/745972";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { Rj, RR, jJ, b_, _s, HE, Y1 } from "../905/820658";
-import { A as _$$A } from "../5132/237216";
+import { useDuplicateTemplateHandler } from "../5132/237216";
 import { partitionUsersByPurchaseEligibility } from "../figma_app/808294";
 import { isResourceDelisted, isResourceBlocked } from "../figma_app/777551";
 import { isOrgOrTeamExport } from "../figma_app/740025";
@@ -42,7 +42,7 @@ let v = registerModal(function (e) {
   let j = x.windowInnerWidth && x.windowInnerWidth < 550 ? "md" : 440;
   return jsx(UI3ConditionalWrapper, {
     children: jsx(TrackingProvider, {
-      name: e0.COMMUNITY_REDIRECT_PURCHASE_MODAL,
+      name: TrackingKeyEnum.COMMUNITY_REDIRECT_PURCHASE_MODAL,
       children: jsx(ModalRootComponent, {
         manager: s,
         width: j,
@@ -97,7 +97,7 @@ export function $$P0({
   let d = getUserId();
   let m = useSelector(e => e.authedUsers);
   let y = initiateResourcePurchaseFlow(e);
-  let b = _$$A(e, !0);
+  let b = useDuplicateTemplateHandler(e, !0);
   let x = useDispatch();
   if (!hasMonetizedResourceMetadata(e) && !isThirdPartyMonetized(e)) return null;
   let f = !1;

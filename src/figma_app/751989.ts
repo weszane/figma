@@ -16,7 +16,7 @@ import { FFileType } from "../figma_app/191312";
 import { MoveDraftsTeamData } from "../figma_app/43951";
 import { isOnboardingComplete } from "../figma_app/242339";
 import { N } from "../figma_app/268271";
-import { qo } from "../905/696396";
+import { OrgPersonal } from "../905/696396";
 import { OnboardingRenderFrame } from "../905/284399";
 import { $ } from "../figma_app/108485";
 import { hA } from "../figma_app/551322";
@@ -54,7 +54,7 @@ export function $$C0() {
         let o = 0 === (s?.currentUser?.teamEditRoles?.map(e => e.team) ?? []).filter(e => e && e.projects && !e.deletedAt && e.projects.length > 0).length;
         let d = !!t && isTeamFolderV2(t.project);
         let c = C === FFileType.WHITEBOARD && n || C === FFileType.DESIGN && O;
-        return e && (r || d) && c && i === qo.PERSONAL && !o && !mW(a, "ran_move_drafts_nudge_v2_num_3") && (mW(a, "ran_move_drafts_nudge_v2_num_2") ? !jj(a, "ran_move_drafts_nudge_v2_num_2") && (F(postUserFlag({
+        return e && (r || d) && c && i === OrgPersonal.PERSONAL && !o && !mW(a, "ran_move_drafts_nudge_v2_num_3") && (mW(a, "ran_move_drafts_nudge_v2_num_2") ? !jj(a, "ran_move_drafts_nudge_v2_num_2") && (F(postUserFlag({
           ran_move_drafts_nudge_v2_num_3: !0
         })), !0) : mW(a, "ran_move_drafts_nudge_v2_num_1") ? !jj(a, "ran_move_drafts_nudge_v2_num_1") && (F(postUserFlag({
           ran_move_drafts_nudge_v2_num_2: !0

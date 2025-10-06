@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { U1 } from "../figma_app/343967";
-import { cZ } from "../figma_app/272902";
+import { setRefValue } from "../figma_app/272902";
 import o from "classnames";
 import { Dm } from "../figma_app/8833";
 import { Yh, g_ } from "../figma_app/32128";
@@ -38,7 +38,7 @@ export function $$h0({
   });
   let _ = U1();
   let E = useCallback(t => {
-    cZ(h, t);
+    setRefValue(h, t);
     _(e ? t : null);
   }, [_, e]);
   return jsx("div", {

@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, createRef } from "react";
 import { EventShield } from "../905/821217";
 import { O } from "../905/969533";
-import { cZ } from "../figma_app/272902";
+import { setRefValue } from "../figma_app/272902";
 import l from "classnames";
 import { RecordingComponent, handleMouseEvent } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
@@ -26,8 +26,8 @@ export class $$f0 extends RecordingComponent {
     this.wrapperRef = createRef();
     this.buttonRef = createRef();
     this.setButtonRef = e => {
-      cZ(this.buttonRef, e);
-      cZ(this.props.forwardedRef, e);
+      setRefValue(this.buttonRef, e);
+      setRefValue(this.props.forwardedRef, e);
     };
     this.onClick = handleMouseEvent(this, "click", e => {
       this.props.onClick?.(e);

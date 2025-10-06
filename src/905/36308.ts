@@ -122,7 +122,7 @@ import { o5 } from '../905/664512';
 import { e as _$$e } from '../905/678389';
 import { p as _$$p2 } from '../905/682418';
 import { trackAccessibilityEvent, AccessibilityActionType } from '../905/693155';
-import { e0 as _$$e4 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { openUrl } from '../905/697795';
 import { SingletonSceneGraph } from '../905/700578';
 import { E as _$$E4 } from '../905/701278';
@@ -4022,7 +4022,7 @@ export function generateFullscreenMenuItems(e) {
       featureFlags: ['cooper']
     }, {
       separator: !0
-    }, ...nT(_$$m2(e, _$$e4.EDITOR_MENU, i, s)), ...nT(_$$t3(e, _$$e4.EDITOR_MENU, i)), {
+    }, ...nT(_$$m2(e, TrackingKeyEnum.EDITOR_MENU, i, s)), ...nT(_$$t3(e, TrackingKeyEnum.EDITOR_MENU, i)), {
       separator: !0
     }];
     return [{

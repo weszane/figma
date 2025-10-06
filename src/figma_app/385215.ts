@@ -1,153 +1,303 @@
-import { useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { Multiplayer } from "../figma_app/763686";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { isPrototypeView } from "../figma_app/976749";
-import { T as _$$T, N } from "../905/847283";
-import { trackEventAnalytics } from "../905/449184";
-import { getViewerInstance } from "../figma_app/632319";
-function p(e) {
-  let {
+import { useCallback } from "react"
+import { useDispatch } from "react-redux"
+import { VisualBellActions } from "../905/302958"
+import { getI18nString } from "../905/303541"
+import { trackEventAnalytics } from "../905/449184"
+import { SpotlightEventType, useSpotlightCTATracking } from "../905/847283"
+import { getViewerInstance } from "../figma_app/632319"
+import { Multiplayer } from "../figma_app/763686"
+import { isPrototypeView } from "../figma_app/976749"
+
+// Define types for better type safety
+interface User {
+  sessionID: string;
+  userID: string;
+  name?: string;
+}
+
+interface SpotlightState {
+  allUsers: User[];
+  sessionID: string;
+  deviceNameFilter?: string;
+  presenterSessionID?: string;
+  observingSessionID: string | number;
+  sessionsNominatingCurrentUser: string[];
+}
+
+interface SpotlightInfo {
+  isPrototypeViewer: boolean;
+  presentingUserId?: string;
+  presentingSessionId?: string;
+  observingUserId?: string;
+  observingSessionId?: string;
+  currentUserId?: string;
+  currentUserSessionId?: string;
+}
+
+/**
+ * Extracts relevant spotlight information from the state.
+ * Original function: p
+ */
+function extractSpotlightInfo(state: SpotlightState): SpotlightInfo {
+  const {
     observingSessionID,
-    presenterSessionID
-  } = e;
-  let n = e.allUsers.find(t => t.sessionID === e.sessionID);
-  let i = presenterSessionID ? e.allUsers.find(e => e.sessionID === presenterSessionID) : null;
-  let a = observingSessionID ? e.allUsers.find(e => e.sessionID === observingSessionID) : null;
+    presenterSessionID,
+  } = state;
+  const currentUser = state.allUsers.find(user => user.sessionID === state.sessionID);
+  const presentingUser = presenterSessionID ? state.allUsers.find(user => user.sessionID === presenterSessionID) : null;
+  const observingUser = observingSessionID ? state.allUsers.find(user => user.sessionID === observingSessionID) : null;
   return {
-    isPrototypeViewer: "prototype" === e.deviceNameFilter,
-    presentingUserId: i?.userID,
-    presentingSessionId: i?.sessionID,
-    observingUserId: a?.userID,
-    observingSessionId: a?.sessionID,
-    currentUserId: n?.userID,
-    currentUserSessionId: n?.sessionID
+    isPrototypeViewer: state.deviceNameFilter === "prototype",
+    presentingUserId: presentingUser?.userID,
+    presentingSessionId: presentingUser?.sessionID,
+    observingUserId: observingUser?.userID,
+    observingSessionId: observingUser?.sessionID,
+    currentUserId: currentUser?.userID,
+    currentUserSessionId: currentUser?.sessionID,
   };
 }
-export function $$_5() {
-  let e = _$$T();
-  let t = isPrototypeView();
+
+/**
+ * Hook to start presenting.
+ * Original function: $$_5
+ */
+export function startPresenting() {
+  const trackCTA = useSpotlightCTATracking();
+  const isPrototype = isPrototypeView();
   return useCallback(() => {
-    e(N.START);
-    t ? getViewerInstance()?.startPresenting() : Multiplayer.startPresenting();
-  }, [t, e]);
+    trackCTA(SpotlightEventType.START);
+    if (isPrototype) {
+      getViewerInstance()?.startPresenting();
+    } else {
+      Multiplayer.startPresenting();
+    }
+  }, [isPrototype, trackCTA]);
 }
-export function $$h1() {
-  let e = isPrototypeView();
+
+/**
+ * Hook to stop presenting.
+ * Original function: $$h1
+ */
+export function stopPresenting() {
+  const isPrototype = isPrototypeView();
   return useCallback(() => {
-    e ? getViewerInstance()?.stopPresenting() : Multiplayer.stopPresenting();
-  }, [e]);
+    if (isPrototype) {
+      getViewerInstance()?.stopPresenting();
+    } else {
+      Multiplayer.stopPresenting();
+    }
+  }, [isPrototype]);
 }
-export function $$m9() {
-  let e = isPrototypeView();
-  let t = useDispatch();
-  return useCallback((r, n) => {
-    e ? y(r, n, getViewerInstance(), t) : y(r, n, null, t);
-  }, [e, t]);
+
+/**
+ * Hook to nominate a presenter.
+ * Original function: $$m9
+ */
+export function nominatePresenter() {
+  const isPrototype = isPrototypeView();
+  const dispatch = useDispatch();
+  return useCallback((sessionId: string, state: SpotlightState) => {
+    if (isPrototype) {
+      performNomination(sessionId, state, getViewerInstance(), dispatch);
+    } else {
+      performNomination(sessionId, state, null, dispatch);
+    }
+  }, [isPrototype, dispatch]);
 }
-export function $$g8() {
-  let e = isPrototypeView();
-  let t = useDispatch();
-  return useCallback((r, n) => {
-    e ? T(r, n, getViewerInstance(), t) : T(r, n, null, t);
-  }, [e, t]);
+
+/**
+ * Hook to cancel nomination.
+ * Original function: $$g8
+ */
+export function cancelNomination() {
+  const isPrototype = isPrototypeView();
+  const dispatch = useDispatch();
+  return useCallback((sessionId: string, state: SpotlightState) => {
+    if (isPrototype) {
+      performCancelNomination(sessionId, state, getViewerInstance(), dispatch);
+    } else {
+      performCancelNomination(sessionId, state, null, dispatch);
+    }
+  }, [isPrototype, dispatch]);
 }
-export function $$f0() {
-  let e = isPrototypeView();
-  let t = useDispatch();
-  return useCallback(r => {
-    e ? v(r, getViewerInstance()) : v(r, null);
-    t(VisualBellActions.enqueue({
+
+/**
+ * Hook to stop following.
+ * Original function: $$f0
+ */
+export function stopFollowing() {
+  const isPrototype = isPrototypeView();
+  const dispatch = useDispatch();
+  return useCallback((state: SpotlightState) => {
+    if (isPrototype) {
+      performStopFollowing(state, getViewerInstance());
+    } else {
+      performStopFollowing(state, null);
+    }
+    dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.spotlight.bell.stopped_following"),
-      role: "status"
+      role: "status",
     }));
-  }, [e, t]);
+  }, [isPrototype, dispatch]);
 }
-export function $$E10() {
-  let e = isPrototypeView();
-  return useCallback(t => {
-    e ? I(t, getViewerInstance()) : I(t, null);
-  }, [e]);
+
+/**
+ * Hook to accept nomination.
+ * Original function: $$E10
+ */
+export function acceptNomination() {
+  const isPrototype = isPrototypeView();
+  return useCallback((state: SpotlightState) => {
+    if (isPrototype) {
+      performAcceptNomination(state, getViewerInstance());
+    } else {
+      performAcceptNomination(state, null);
+    }
+  }, [isPrototype]);
 }
-function y(e, t, r, n) {
-  r ? r.nominatePresenter(e) : Multiplayer.nominatePresenter(e);
-  let i = t.allUsers.find(t => t.sessionID === e);
-  if (i?.name) {
-    let e = getI18nString("collaboration.spotlight.visual_bell.nominated_user_to_spotlight", {
-      userName: i.name
+
+/**
+ * Performs the nomination action.
+ * Original function: y
+ */
+function performNomination(sessionId: string, state: SpotlightState, viewerInstance: any, dispatch: any) {
+  if (viewerInstance) {
+    viewerInstance.nominatePresenter(sessionId);
+  } else {
+    Multiplayer.nominatePresenter(sessionId);
+  }
+  const nominatedUser = state.allUsers.find(user => user.sessionID === sessionId);
+  if (nominatedUser?.name) {
+    const message = getI18nString("collaboration.spotlight.visual_bell.nominated_user_to_spotlight", {
+      userName: nominatedUser.name,
     });
-    n(VisualBellActions.enqueue({
-      message: e,
-      type: "nominated_presenter"
+    dispatch(VisualBellActions.enqueue({
+      message,
+      type: "nominated_presenter",
     }));
   }
   trackEventAnalytics("Spotlight Nomination Requested", {
-    nominatedSessionID: e,
-    nominatedUserID: i?.userID,
-    ...p(t)
+    nominatedSessionID: sessionId,
+    nominatedUserID: nominatedUser?.userID,
+    ...extractSpotlightInfo(state),
   });
 }
-export function $$b6(e, t) {
-  t ? t.cancelPresenterNomination(e) : Multiplayer.cancelPresenterNomination(e);
+
+/**
+ * Cancels presenter nomination.
+ * Original function: $$b6
+ */
+export function cancelPresenterNomination(sessionId: string, viewerInstance: any) {
+  if (viewerInstance) {
+    viewerInstance.cancelPresenterNomination(sessionId);
+  } else {
+    Multiplayer.cancelPresenterNomination(sessionId);
+  }
 }
-function T(e, t, r, n) {
-  $$b6(e, r);
-  let i = t.allUsers.find(t => t.sessionID === e);
-  let a = getI18nString("collaboration.spotlight.visual_bell.stopped_nominating_user_to_spotlight");
-  n(VisualBellActions.enqueue({
-    message: a,
-    type: "nominated_presenter"
+
+/**
+ * Performs the cancel nomination action.
+ * Original function: T
+ */
+function performCancelNomination(sessionId: string, state: SpotlightState, viewerInstance: any, dispatch: any) {
+  cancelPresenterNomination(sessionId, viewerInstance);
+  const nominatedUser = state.allUsers.find(user => user.sessionID === sessionId);
+  const message = getI18nString("collaboration.spotlight.visual_bell.stopped_nominating_user_to_spotlight");
+  dispatch(VisualBellActions.enqueue({
+    message,
+    type: "nominated_presenter",
   }));
   trackEventAnalytics("Spotlight Nomination Canceled", {
-    cancelledNomineeSessionId: i?.sessionID,
-    cancelledNomineeUserId: i?.userID,
-    cancelledByNominee: e === t.sessionID,
-    ...p(t)
+    cancelledNomineeSessionId: nominatedUser?.sessionID,
+    cancelledNomineeUserId: nominatedUser?.userID,
+    cancelledByNominee: sessionId === state.sessionID,
+    ...extractSpotlightInfo(state),
   });
 }
-function I(e, t) {
-  t ? t.startPresenting() : Multiplayer.startPresenting();
-  let r = e.sessionsNominatingCurrentUser[0];
-  let n = e.allUsers.find(e => e.sessionID === r);
+
+/**
+ * Performs the accept nomination action.
+ * Original function: I
+ */
+function performAcceptNomination(state: SpotlightState, viewerInstance: any) {
+  if (viewerInstance) {
+    viewerInstance.startPresenting();
+  } else {
+    Multiplayer.startPresenting();
+  }
+  const nominatorSessionId = state.sessionsNominatingCurrentUser[0];
+  const nominatorUser = state.allUsers.find(user => user.sessionID === nominatorSessionId);
   trackEventAnalytics("Spotlight Nomination Accepted", {
-    nominatorSessionId: n?.sessionID,
-    nominatorUserId: n?.userID,
-    ...p(e)
+    nominatorSessionId: nominatorUser?.sessionID,
+    nominatorUserId: nominatorUser?.userID,
+    ...extractSpotlightInfo(state),
   });
 }
-export function $$S2(e, t, r, n) {
-  let i = performance.now();
-  e();
-  n && trackEventAnalytics(r, {
-    sessionId: t.sessionID,
-    timeToActionSeconds: Math.trunc(i - n) / 1e3,
-    ...p(t)
-  });
+
+/**
+ * Tracks an action with timing.
+ * Original function: $$S2
+ */
+export function trackActionWithTiming(action: () => void, state: SpotlightState, eventName: string, startTime?: number) {
+  const start = performance.now();
+  action();
+  if (startTime) {
+    trackEventAnalytics(eventName, {
+      sessionId: state.sessionID,
+      timeToActionSeconds: Math.trunc(start - startTime) / 1000,
+      ...extractSpotlightInfo(state),
+    });
+  }
 }
-function v(e, t) {
-  t ? getViewerInstance()?.setObservingSessionID(-1) : Multiplayer.observeUser(-1);
+
+/**
+ * Performs the stop following action.
+ * Original function: v
+ */
+function performStopFollowing(state: SpotlightState, viewerInstance: any) {
+  if (viewerInstance) {
+    getViewerInstance()?.setObservingSessionID(-1);
+  } else {
+    Multiplayer.observeUser(-1);
+  }
   trackEventAnalytics("Spotlight Stop Following", {
-    ...p(e)
+    ...extractSpotlightInfo(state),
   });
 }
-export function $$A7(e) {
-  return e.presenterSessionID === e.sessionID;
+
+/**
+ * Checks if the current user is presenting.
+ * Original function: $$A7
+ */
+export function isCurrentUserPresenting(state: SpotlightState): boolean {
+  return state.presenterSessionID === state.sessionID;
 }
-export function $$x3(e) {
-  return -1 !== e.observingSessionID;
+
+/**
+ * Checks if the user is observing.
+ * Original function: $$x3
+ */
+export function isObserving(state: SpotlightState): boolean {
+  return state.observingSessionID !== -1;
 }
-export function $$N4(e) {
-  return e.sessionsNominatingCurrentUser.length > 0;
+
+/**
+ * Checks if there are nominations for the current user.
+ * Original function: $$N4
+ */
+export function hasNominations(state: SpotlightState): boolean {
+  return state.sessionsNominatingCurrentUser.length > 0;
 }
-export const $ = $$f0;
-export const B4 = $$h1;
-export const KI = $$S2;
-export const L3 = $$x3;
-export const NB = $$N4;
-export const Vi = $$_5;
-export const j$ = $$b6;
-export const jA = $$A7;
-export const oJ = $$g8;
-export const tu = $$m9;
-export const y7 = $$E10;
+
+// Updated exports with meaningful names
+export const $ = stopFollowing;
+export const B4 = stopPresenting;
+export const KI = trackActionWithTiming;
+export const L3 = isObserving;
+export const NB = hasNominations;
+export const Vi = startPresenting;
+export const j$ = cancelPresenterNomination;
+export const jA = isCurrentUserPresenting;
+export const oJ = cancelNomination;
+export const tu = nominatePresenter;
+export const y7 = acceptNomination;

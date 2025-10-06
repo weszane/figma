@@ -19,7 +19,7 @@ import { isSitesFileType } from "../figma_app/976749";
 import { getSmallNudgeAmount } from "../figma_app/740163";
 import { isValidValue, normalizeValue, valueOrFallback, isInvalidValue } from "../905/216495";
 import { useDropdownState } from "../905/848862";
-import { _P } from "../figma_app/2590";
+import { trackPrototypeScaleChangeEvent } from "../figma_app/2590";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { TimeMillisecondsInput } from "../figma_app/178475";
@@ -267,7 +267,7 @@ export function $$q2({
         transitionDuration: r
       });
       BG.trigger("restartSpringAnimation");
-      n === yesNoTrackingEnum.YES && d(_P({
+      n === yesNoTrackingEnum.YES && d(trackPrototypeScaleChangeEvent({
         name: "Prototype Spring Animations Set Custom Value",
         params: {
           editedValue: "DURATION",
@@ -293,7 +293,7 @@ export function $$q2({
     dispatch: d,
     dropdownShown: h,
     onChange: t => {
-      d(_P({
+      d(trackPrototypeScaleChangeEvent({
         name: "Prototype Transition Easing Changed",
         params: {
           newEasing: t
@@ -324,7 +324,7 @@ export function $$q2({
       dispatch: d,
       inputClassName: Gl,
       onValueChange: t => {
-        d(_P({
+        d(trackPrototypeScaleChangeEvent({
           name: "Prototype Transition Duration Changed",
           params: {
             newDuration: t
@@ -379,7 +379,7 @@ export function $$q2({
     dispatch: d,
     dropdownShown: h,
     onChange: t => {
-      d(_P({
+      d(trackPrototypeScaleChangeEvent({
         name: "Prototype Transition Type Changed",
         params: {
           newType: t,
@@ -413,7 +413,7 @@ export function $$q2({
   let ep = k ? jsx($$eo3, {
     property: e.direction ? e.direction : null,
     onChange: t => {
-      d(_P({
+      d(trackPrototypeScaleChangeEvent({
         name: "Prototype Transition Direction Changed",
         params: {
           newDirection: t,
@@ -451,7 +451,7 @@ export function $$q2({
   let ed = jsx(Checkbox, {
     onChange: t => {
       let n = normalizeValue(e.behavior);
-      d(_P({
+      d(trackPrototypeScaleChangeEvent({
         name: "Smart Animate Changed",
         params: {
           newValue: t,

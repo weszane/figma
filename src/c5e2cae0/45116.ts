@@ -14,7 +14,7 @@ import { getRumLoggingConfig } from "../905/16237";
 import { useCartSeatSelectionClarityExperiment } from "../figma_app/297957";
 import { TrackingProvider } from "../figma_app/831799";
 import { ProductTierEnum } from "../905/712921";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { useModalManager } from "../905/437088";
@@ -353,7 +353,7 @@ export function $$q0({
   let M = useCartSeatSelectionClarityExperiment();
   let R = S === ProductTierEnum.PRO && M();
   return jsx(TrackingProvider, {
-    name: e0.SELECT_SEATS_TABLE,
+    name: TrackingKeyEnum.SELECT_SEATS_TABLE,
     properties: {
       selectedUserSeatTypes: Tj(C.selectedUserSeatTypes),
       countBySeatType: gS(O$(C.selectedUserSeatTypes, C.additionalSeatCounts)),

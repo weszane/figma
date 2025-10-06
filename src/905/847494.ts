@@ -3,7 +3,7 @@ import { useRef, useCallback } from "react";
 import { U1 } from "../figma_app/343967";
 import { N } from "../905/57692";
 import { Xr } from "../figma_app/27355";
-import { SV } from "../figma_app/272902";
+import { useMultiRefCallback } from "../figma_app/272902";
 import d from "classnames";
 import { Dm } from "../figma_app/8833";
 import { bo } from "../figma_app/447445";
@@ -21,7 +21,7 @@ export function $$f0({
   let _ = U1(f);
   let A = Xr(dN);
   let y = useCallback(e => A(e), [A]);
-  let b = SV(_, y);
+  let b = useMultiRefCallback(_, y);
   let v = _$$N();
   return jsx(N, {
     ref: b,

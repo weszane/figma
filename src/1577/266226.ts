@@ -20,7 +20,7 @@ import { ColorPalettesForTeam } from "../figma_app/43951";
 import { getCurrentTeamId } from "../figma_app/598018";
 import { fJ } from "../figma_app/616107";
 import { KindEnum } from "../905/129884";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { RN, In, dq } from "../figma_app/967873";
@@ -197,7 +197,7 @@ export let $$B0 = registerModal(function ({
     enabled: !!u
   });
   return jsx(TrackingProvider, {
-    name: e0.FIGJAM_MANAGE_PALETTES_MODAL,
+    name: TrackingKeyEnum.FIGJAM_MANAGE_PALETTES_MODAL,
     properties: {
       entryPoint: t,
       userId: d,

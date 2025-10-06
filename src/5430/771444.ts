@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { W } from "../5430/573261";
-import { _ as _$$_ } from "../905/456042";
-import { I } from "../5132/515990";
+import { WorkspaceSelectorModal } from "../905/456042";
+import { isResourceHubLightboxRdp } from "../5132/515990";
 import { getResourceType } from "../figma_app/427318";
 import { showModalHandler } from "../905/156213";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -17,7 +17,7 @@ export function $$x0({
 }) {
   let r = useDispatch();
   let x = selectCurrentUser();
-  let f = I();
+  let f = isResourceHubLightboxRdp();
   let y = Object.values(useSelector(e => getOrgAdminAccess(e))).filter(t => isPlugin(e) && t.plugins_whitelist_enforced || isWidget(e) && t.widgets_whitelist_enforced);
   let g = (e, t) => {
     r(showModalHandler({
@@ -52,7 +52,7 @@ export function $$x0({
         userId: x?.id || ""
       }));
       r(showModalHandler({
-        type: _$$_,
+        type: WorkspaceSelectorModal,
         data: {
           payload: {
             extension: e,

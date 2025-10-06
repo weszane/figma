@@ -70,7 +70,7 @@ import { UpsellModalType } from "../905/165519";
 import { ProductTierEnum } from "../905/712921";
 import { UpgradeSteps, BillingCycle, SubscriptionType } from "../figma_app/831101";
 import { CreateUpgradeAction, TeamType, isCreateOrUpgrade } from "../figma_app/707808";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { PlanInvoiceService } from "../905/223084";
 import { Q as _$$Q } from "../figma_app/113686";
 import { Label } from "../905/270045";
@@ -785,7 +785,7 @@ function eY(e) {
     userId: a.id
   })?.is3DS;
   return e.selectedView.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) ? jsx(Fragment, {}) : jsx(TrackingProvider, {
-    name: e0.TEAM_CHECKOUT_FLOW,
+    name: TrackingKeyEnum.TEAM_CHECKOUT_FLOW,
     properties: {
       teamId: e.selectedView.teamId,
       planType: e.selectedView.planType,

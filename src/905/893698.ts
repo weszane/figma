@@ -8,7 +8,7 @@ import { t as _$$t } from "../905/947268";
 import { Z } from "../905/498136";
 import { e as _$$e } from "../905/295932";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { Ay } from "../figma_app/272902";
+import { createMultiRefCallback } from "../figma_app/272902";
 import { useStorageEventSync } from "../905/657224";
 import { analyticsEventManager } from "../905/449184";
 import { PickerOptionType } from "../905/211621";
@@ -62,7 +62,7 @@ let $$k2 = forwardRef(function ({
       children: jsx(DialogTriggerButton, {
         onClick: v,
         "aria-expanded": _,
-        ref: Ay(u, c),
+        ref: createMultiRefCallback(u, c),
         "aria-label": getI18nString("design_systems.instance_swap_picker.settings"),
         "aria-haspopup": "listbox",
         htmlAttributes: {

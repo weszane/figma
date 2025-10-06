@@ -5,7 +5,7 @@ import { defaultInputState } from "../905/768014";
 import { isFakeTouchEvent } from "../905/955878";
 import { isNonTextInput } from "../905/705398";
 import { getFeatureFlags } from "../905/601108";
-import { cZ } from "../figma_app/272902";
+import { setRefValue } from "../figma_app/272902";
 import { $z } from "../figma_app/297733";
 export function $$p0(e) {
   return getFeatureFlags().fpl_app_focus_improvements ? jsx(_, {
@@ -60,7 +60,7 @@ function h({
     let n = useRef(noop);
     let d = useRef(!1);
     return useCallback(e => {
-      cZ(void 0, e);
+      setRefValue(void 0, e);
       t.current();
       r.current();
       n.current();

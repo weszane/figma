@@ -11,7 +11,7 @@ import { hideModal } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/421473";
-import { e0 } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 export let $$h0 = registerModal(function (e) {
   let t;
   let a = useModalManager(e);
@@ -45,7 +45,7 @@ export let $$h0 = registerModal(function (e) {
     manager: a,
     width: "lg",
     children: jsx(TrackingProvider, {
-      name: e0.APPROVE_ALL_CONFIRMATION_MODAL,
+      name: TrackingKeyEnum.APPROVE_ALL_CONFIRMATION_MODAL,
       properties: {
         planType: e.plan.key.type,
         planId: e.plan.key.parentId,

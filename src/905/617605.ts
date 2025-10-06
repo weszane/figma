@@ -1,111 +1,218 @@
-import { Fullscreen, AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
-import { parsePxInt } from "../figma_app/783094";
-import { FEditorType } from "../figma_app/53721";
-import { CommentPinElement } from "../905/512783";
-import { computeFullscreenViewportForNode, viewportToScreen } from "../figma_app/62612";
-import { rY4, PXB } from "../figma_app/27776";
-let d = parsePxInt(rY4) + parsePxInt(PXB);
-export function $$c0(e, t, i, r, a) {
-  return "fullscreen" === i.view && Fullscreen ? u(e, t, i, r, a) : Promise.resolve(p(e, t, i));
+import { CommentPinElement } from "../905/512783"
+
+import { FEditorType } from "../figma_app/53721"
+import { computeFullscreenViewportForNode, viewportToScreen } from "../figma_app/62612"
+import { AppStateTsApi, Fullscreen, SlideConstantsCppBindings } from "../figma_app/763686"
+
+let d = 256
+/**
+ * Calculates the viewport for a comment pin element based on the current view mode.
+ *
+ * @param commentPinElement - The comment pin element containing canvas position and comments data
+ * @param viewportManager - Manager for handling viewport information and transformations
+ * @param viewConfig - Configuration object containing view mode and editor type
+ * @param isPreviewMode - Flag indicating if the viewport is in preview mode
+ * @param shouldAdjustForBanner - Flag indicating if viewport should account for banner height
+ * @returns Promise resolving to viewport configuration or null if no adjustment needed
+ */
+export function calculateCommentPinViewport(
+  commentPinElement: any,
+  viewportManager: any,
+  viewConfig: any,
+  isPreviewMode: boolean,
+  shouldAdjustForBanner: boolean,
+): Promise<any | null> {
+  return viewConfig.view === "fullscreen" && Fullscreen
+    ? calculateFullscreenViewport(commentPinElement, viewportManager, viewConfig, isPreviewMode, shouldAdjustForBanner)
+    : Promise.resolve(calculateStandardViewport(commentPinElement, viewportManager, viewConfig))
 }
-let u = (e, t, i, n, r) => {
-  let a = e.page;
-  let s = m(e);
-  return s && a ? computeFullscreenViewportForNode({
-    nodeId: a,
-    nodeAbsoluteBounds: s,
-    alwaysPan: !1,
-    viewportRect: h(t, i, r),
-    noPanViewportMultiplier: n ? 0 : .9,
-    panJustEnoughViewportMultiplier: n ? 0 : 1.5
-  }) : Promise.resolve(null);
-};
-let p = (e, t, i) => {
-  if (!e.canvasPosition || "communityHub" !== i.view && "prototype" !== i.view) return null;
-  let n = t.getViewportInfo();
-  let r = viewportToScreen(n, e.canvasPosition);
-  let a = e.comments[0].client_meta?.selection_box_anchor;
-  let s = a ? viewportToScreen(n, a) : r;
-  if (!((e, t) => {
-    let i = n.width;
-    let r = n.height;
-    return e - 64 > 0 && e + 64 < i && t - 64 > 0 && t + 64 < r;
-  })(Math.min(r.x, s.x), Math.min(r.y, s.y))) {
-    let t = e.canvasPosition.x;
-    let r = e.canvasPosition.y;
-    let s = n.zoomScale;
-    if (a) {
-      t = (e.canvasPosition.x + a.x) / 2;
-      r = (e.canvasPosition.y + a.y) / 2;
-      let o = Math.abs(e.canvasPosition.x - a.x);
-      let l = Math.abs(e.canvasPosition.y - a.y);
-      let d = (n.width - 128) / o;
-      let c = (n.height - 128) / l;
-      "prototype" !== i.view && (s = Math.min(n.zoomScale, d, c));
-    }
-    return {
-      centerX: t,
-      centerY: r,
-      scale: s
-    };
+
+/**
+ * Calculates fullscreen viewport configuration for comment pin elements.
+ *
+ * @param commentPinElement - The comment pin element
+ * @param viewportManager - Manager for viewport operations
+ * @param viewConfig - View configuration
+ * @param isPreviewMode - Preview mode flag
+ * @param shouldAdjustForBanner - Banner adjustment flag
+ * @returns Promise resolving to viewport configuration or null
+ */
+function calculateFullscreenViewport(commentPinElement: any, viewportManager: any, viewConfig: any, isPreviewMode: boolean, shouldAdjustForBanner: boolean): Promise<any | null> {
+  const pageId = commentPinElement.page
+  const nodeBounds = calculateNodeBounds(commentPinElement)
+
+  return nodeBounds && pageId
+    ? computeFullscreenViewportForNode({
+      nodeId: pageId,
+      nodeAbsoluteBounds: nodeBounds,
+      alwaysPan: false,
+      viewportRect: calculateViewportRect(viewportManager, viewConfig, shouldAdjustForBanner),
+      noPanViewportMultiplier: isPreviewMode ? 0 : 0.9,
+      panJustEnoughViewportMultiplier: isPreviewMode ? 0 : 1.5,
+    })
+    : Promise.resolve(null)
+}
+
+/**
+ * Calculates standard viewport configuration for community hub or prototype views.
+ *
+ * @param commentPinElement - The comment pin element
+ * @param viewportManager - Manager for viewport operations
+ * @param viewConfig - View configuration
+ * @returns Viewport configuration object or null
+ */
+function calculateStandardViewport(commentPinElement: any, viewportManager: any, viewConfig: any): any | null {
+  if (!commentPinElement.canvasPosition
+    || (viewConfig.view !== "communityHub" && viewConfig.view !== "prototype")) {
+    return null
   }
-  return null;
-};
-let m = e => {
-  let {
-    canvasPosition,
-    selectionAnchorCanvasPosition
-  } = e;
-  if (!canvasPosition) return null;
-  let {
-    width,
-    height
-  } = CommentPinElement.getPinSize(new Set(e.comments.map(e => e.user_id)).size);
-  let a = {
+
+  const viewportInfo = viewportManager.getViewportInfo()
+  const commentPosition = viewportToScreen(viewportInfo, commentPinElement.canvasPosition)
+  const anchorPosition = commentPinElement.comments[0].client_meta?.selection_box_anchor
+  const anchorScreenPosition = anchorPosition
+    ? viewportToScreen(viewportInfo, anchorPosition)
+    : commentPosition
+
+  // Check if the comment position is within safe viewport bounds (64px padding)
+  const isWithinSafeBounds = (x: number, y: number): boolean => {
+    return x - 64 > 0
+      && x + 64 < viewportInfo.width
+      && y - 64 > 0
+      && y + 64 < viewportInfo.height
+  }
+
+  const minX = Math.min(commentPosition.x, anchorScreenPosition.x)
+  const minY = Math.min(commentPosition.y, anchorScreenPosition.y)
+
+  if (!isWithinSafeBounds(minX, minY)) {
+    let centerX = commentPinElement.canvasPosition.x
+    let centerY = commentPinElement.canvasPosition.y
+    let scale = viewportInfo.zoomScale
+
+    if (anchorPosition) {
+      // Calculate center point between comment and anchor
+      centerX = (commentPinElement.canvasPosition.x + anchorPosition.x) / 2
+      centerY = (commentPinElement.canvasPosition.y + anchorPosition.y) / 2
+
+      // Calculate optimal scale to fit both points
+      const widthDiff = Math.abs(commentPinElement.canvasPosition.x - anchorPosition.x)
+      const heightDiff = Math.abs(commentPinElement.canvasPosition.y - anchorPosition.y)
+      const widthScale = (viewportInfo.width - 128) / widthDiff
+      const heightScale = (viewportInfo.height - 128) / heightDiff
+
+      // Apply scale constraint for non-prototype views
+      if (viewConfig.view !== "prototype") {
+        scale = Math.min(viewportInfo.zoomScale, widthScale, heightScale)
+      }
+    }
+
+    return {
+      centerX,
+      centerY,
+      scale,
+    }
+  }
+
+  return null
+}
+
+/**
+ * Calculates bounding box for a comment pin element.
+ *
+ * @param commentPinElement - The comment pin element
+ * @returns Bounding box object or null
+ */
+function calculateNodeBounds(commentPinElement: any): any | null {
+  const { canvasPosition, selectionAnchorCanvasPosition } = commentPinElement
+
+  if (!canvasPosition) {
+    return null
+  }
+
+  // Get pin size based on number of unique comment authors
+  const uniqueAuthors = new Set(commentPinElement.comments.map((comment: any) => comment.user_id)).size
+  const { width, height } = CommentPinElement.getPinSize(uniqueAuthors)
+
+  // Initial bounds based on comment pin position
+  const pinBounds = {
     origin: {
       x: canvasPosition.x,
-      y: canvasPosition.y - height
+      y: canvasPosition.y - height,
     },
     size: {
       x: width,
-      y: height
-    }
-  };
-  if (!selectionAnchorCanvasPosition) return a;
-  {
-    let e = Math.min(selectionAnchorCanvasPosition.x, a.origin.x);
-    let t = Math.max(selectionAnchorCanvasPosition.x, a.origin.x + a.size.x);
-    let n = Math.min(selectionAnchorCanvasPosition.y, a.origin.y);
-    return {
-      origin: {
-        x: e,
-        y: n
-      },
-      size: {
-        x: t - e,
-        y: Math.max(selectionAnchorCanvasPosition.y, a.origin.y + a.size.y) - n
-      }
-    };
+      y: height,
+    },
   }
-};
-let h = (e, t, i) => {
-  let r = e.getViewportInfo();
-  let s = {
+
+  // Expand bounds if selection anchor exists
+  if (!selectionAnchorCanvasPosition) {
+    return pinBounds
+  }
+
+  const minX = Math.min(selectionAnchorCanvasPosition.x, pinBounds.origin.x)
+  const maxX = Math.max(selectionAnchorCanvasPosition.x, pinBounds.origin.x + pinBounds.size.x)
+  const minY = Math.min(selectionAnchorCanvasPosition.y, pinBounds.origin.y)
+  const maxY = Math.max(selectionAnchorCanvasPosition.y, pinBounds.origin.y + pinBounds.size.y)
+
+  return {
     origin: {
-      x: 0,
-      y: 0
+      x: minX,
+      y: minY,
     },
     size: {
-      x: r.width,
-      y: r.height
-    }
-  };
-  if ("fullscreen" === t.view && t.editorType === FEditorType.Whiteboard && i && (s.size.x -= d), "fullscreen" === t.view && t.editorType === FEditorType.Slides && AppStateTsApi.singleSlideView().isFocusedNodeViewEnabled()) {
-    let e = AppStateTsApi.editorPreferences().speakerNotesHeight.getCopy() + (SlideConstantsCppBindings?.dragHandleTotalHeight() ?? 0);
-    s.size.y -= e;
+      x: maxX - minX,
+      y: maxY - minY,
+    },
   }
-  let o = AppStateTsApi?.uiState().editorBannerHeight.getCopy() ?? 0;
-  o && (s.origin.y += o, s.size.y -= o);
-  return s;
-};
-export const E = $$c0;
+}
+
+/**
+ * Calculates viewport rectangle dimensions accounting for UI elements.
+ *
+ * @param viewportManager - Manager for viewport operations
+ * @param viewConfig - View configuration
+ * @param shouldAdjustForBanner - Flag to adjust for banner height
+ * @returns Viewport rectangle configuration
+ */
+function calculateViewportRect(viewportManager: any, viewConfig: any, shouldAdjustForBanner: boolean): any {
+  const viewportInfo = viewportManager.getViewportInfo()
+  const viewportRect = {
+    origin: {
+      x: 0,
+      y: 0,
+    },
+    size: {
+      x: viewportInfo.width,
+      y: viewportInfo.height,
+    },
+  }
+
+  // Adjust for whiteboard mode sidebar
+  if (viewConfig.view === "fullscreen"
+    && viewConfig.editorType === FEditorType.Whiteboard
+    && shouldAdjustForBanner) {
+    viewportRect.size.x -= d
+  }
+
+  // Adjust for slides mode speaker notes
+  if (viewConfig.view === "fullscreen"
+    && viewConfig.editorType === FEditorType.Slides
+    && AppStateTsApi.singleSlideView().isFocusedNodeViewEnabled()) {
+    const speakerNotesHeight = AppStateTsApi.editorPreferences().speakerNotesHeight.getCopy()
+    const dragHandleHeight = SlideConstantsCppBindings?.dragHandleTotalHeight() ?? 0
+    viewportRect.size.y -= (speakerNotesHeight + dragHandleHeight)
+  }
+
+  // Adjust for editor banner
+  const bannerHeight = AppStateTsApi?.uiState().editorBannerHeight.getCopy() ?? 0
+  if (bannerHeight) {
+    viewportRect.origin.y += bannerHeight
+    viewportRect.size.y -= bannerHeight
+  }
+
+  return viewportRect
+}
+
+export const E = calculateCommentPinViewport

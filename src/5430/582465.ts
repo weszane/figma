@@ -4,7 +4,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
 import { parsePxNumber } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { DropdownBase } from "../figma_app/209680";
 import { E } from "../5430/741319";
 import { D } from "../5430/253633";
@@ -79,7 +79,7 @@ export function $$w0({
   isMobile: t,
   dropdownSelector: r
 }) {
-  let f = AG();
+  let f = useIsResourceHub();
   let y = getActiveSearchRouteWithCommunity();
   let g = !!y;
   let v = y?.search.query;

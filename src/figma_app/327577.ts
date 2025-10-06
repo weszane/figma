@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { isChromebookTabbed } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
-import { S as _$$S } from "../905/539306";
+import { findCurrentPlan } from "../905/539306";
 import { selectViewAction } from "../905/929976";
 import { createAndOpenFile } from "../905/738636";
 import { getNewFileConfig } from "../905/766303";
@@ -70,7 +70,7 @@ let $$R0 = createOptimistThunk((e, t) => {
     result: n
   };
   let s = {
-    plan: _$$S(r)
+    plan: findCurrentPlan(r)
   };
   new SearchAnalytics.Analytics(r.search, a, s).click(n.search_model_type, r.selectedView, {
     action: t.clickAction

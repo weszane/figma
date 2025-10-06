@@ -17,7 +17,7 @@ import { getParentOrgId } from "../905/872904";
 import { FileCanEdit, LibraryIsBranch, TeamCanAdmin, SharingGroupsByResourceConnection } from "../figma_app/43951";
 import { hasAdminRoleAccessOnTeam } from "../figma_app/642025";
 import { NO_TEAM, getDraftsSidebarString, isCommunityLibraryFile, initialLibraryStats } from "../figma_app/633080";
-import { e0 as _$$e } from "../905/696396";
+import { TrackingKeyEnum } from "../905/696396";
 import { UsedStylesContext, useUsedStyles } from "../905/336143";
 import { I as _$$I } from "../905/423735";
 import { TabLoop } from "../905/718764";
@@ -1069,7 +1069,7 @@ function tT({
   SR();
   let s = useDispatch();
   return jsx(TrackingProvider, {
-    name: _$$e.LIBRARY_MODAL_UPSELL,
+    name: TrackingKeyEnum.LIBRARY_MODAL_UPSELL,
     children: jsx("div", {
       className: cssBuilderInstance.pt16.mx16.$,
       children: jsxs("div", {
@@ -1432,7 +1432,7 @@ export function $$tM0({
     })
   }) : null;
   return jsx(TrackingProvider, {
-    name: _$$e.LIBRARY_SUBSCRIPTIONS,
+    name: TrackingKeyEnum.LIBRARY_SUBSCRIPTIONS,
     children: jsx(UsedStylesContext.Provider, {
       value: z,
       children: jsxs("div", {

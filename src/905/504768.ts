@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
-import { trimLastMessageMeta, flattenMessageMeta, Rc, getMessageType, MessageType } from "../figma_app/819288";
+import { trimLastMessageMeta, flattenMessageMeta, normalizeMessageMeta, getMessageType, MessageType } from "../figma_app/819288";
 import { getCurrentLiveGraphClient } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
 import { sendWithRetry } from "../905/910117";
@@ -59,7 +59,7 @@ let $$b4 = createOptimistThunk((e, t) => {
   trackEventAnalytics("Team Feed Comment Edited", {
     text: flattenMessageMeta(t.messageMeta)
   });
-  let c = Rc(t.messageMeta);
+  let c = normalizeMessageMeta(t.messageMeta);
   n.optimisticallyUpdateWithUUID({
     FeedComment: {
       [r]: {
@@ -87,7 +87,7 @@ let $$v6 = createOptimistThunk((e, t) => {
     text: flattenMessageMeta(t.messageMeta),
     postUuid: t.postUuid
   });
-  let m = Rc(t.messageMeta);
+  let m = normalizeMessageMeta(t.messageMeta);
   n.optimisticallyCreateWithUUID({
     FeedComment: {
       [r]: {

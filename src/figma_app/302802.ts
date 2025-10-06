@@ -15,7 +15,7 @@ import { selectViewAction } from "../905/929976";
 import { AssetAtomMap } from "../figma_app/31188";
 import { multiplayerSessionManager } from "../905/977824";
 import { getSingleSelectedNode } from "../figma_app/722362";
-import { KP } from "../figma_app/440875";
+import { useCurrentSessionID } from "../figma_app/440875";
 import { selectCurrentUser } from "../905/372672";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { getObservableOrFallback, subscribeObservable } from "../figma_app/84367";
@@ -52,7 +52,7 @@ export function $$G4(e) {
   return e?.isCodeFile ? Object.values(t).filter(t => t.exportedFromCodeFileId === CodeFileIdHandler.fromLocalNodeIdObj(e)).sort((e, t) => "default" === e.codeExportName ? -1 : "default" === t.codeExportName ? 1 : e.name.localeCompare(t.name)) : [];
 }
 export function $$V19() {
-  let e = KP();
+  let e = useCurrentSessionID();
   let t = multiplayerSessionManager.useInfoBySessionId({
     updateSynchronously: !1
   });

@@ -3,7 +3,7 @@ import { assertNotNullish } from "../figma_app/465776";
 import { RotationType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import o from "classnames";
-import { hY } from "../figma_app/349969";
+import { DEVICE_PRESETS_BY_ID } from "../figma_app/349969";
 import { is, Ho } from "../figma_app/170018";
 import { Wc } from "../9410/855699";
 import { qW, Cb, Q$, Q0, mT, M4 } from "../9410/874933";
@@ -45,7 +45,7 @@ export function $$g0({
       presetIdentifier,
       rotation
     } = s;
-    let r = hY[presetIdentifier];
+    let r = DEVICE_PRESETS_BY_ID[presetIdentifier];
     if (o) {
       let e = r?.inlinePreviewInfo;
       assertNotNullish(e, "inlinePreviewDeviceData should exist since device is supported for inline preview");

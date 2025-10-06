@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { AvatarSize, UserAvatar } from "../905/590952";
 import { KindEnum } from "../905/129884";
-import { W } from "../figma_app/54182";
+import { AvatarWithTooltip } from "../figma_app/54182";
 let l = AvatarSize.MEDIUM20;
 export function $$o0(e) {
   let t = e.users.slice(0, e.numAvatarsToDisplay);
@@ -17,7 +17,7 @@ export function $$o0(e) {
       children: e.totalNum - t.length
     }), t.reverse().map(t => jsx("div", {
       className: "avatars_pile--avatar--6RPYa",
-      children: jsx(W, {
+      children: jsx(AvatarWithTooltip, {
         user: t,
         children: jsx(UserAvatar, {
           user: t,

@@ -14,7 +14,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { Ay } from "../905/281495";
 import { getPropertiesPanelTab, setPropertiesPanelTab, replaceSelection } from "../figma_app/741237";
 import { getObservableValue } from "../figma_app/84367";
-import { Zh } from "../figma_app/2590";
+import { trackDefinedFileEventWrapper } from "../figma_app/2590";
 import { Yh } from "../figma_app/357047";
 import { d as _$$d } from "../figma_app/550089";
 import { ft, sT, _U } from "../figma_app/365713";
@@ -92,7 +92,7 @@ function j() {
           let r;
           let n;
           tlfAmount > 10 && (r = renderI18nText("magic_link.tlf_selection_too_large"), n = "Select 10 or fewer frames");
-          n && e(Zh({
+          n && e(trackDefinedFileEventWrapper({
             name: "prototype.ai_magic_link_action_instruction",
             params: {
               instruction: n,
@@ -128,7 +128,7 @@ function j() {
       });
     case qy.ERROR:
       if (fullscreenValue.triggerAction("end-magic-link"), t.error instanceof ft) {
-        e(Zh({
+        e(trackDefinedFileEventWrapper({
           name: "prototype.ai_magic_link_custom_error",
           params: {
             error: "invalid_selection_from_generic_layers"
@@ -137,7 +137,7 @@ function j() {
         return jsx(U, {});
       }
       if (t.error instanceof sT) {
-        e(Zh({
+        e(trackDefinedFileEventWrapper({
           name: "prototype.ai_magic_link_custom_error",
           params: {
             error: "no_interactions_generated"
@@ -148,7 +148,7 @@ function j() {
         });
       }
       if (t.error instanceof _U) {
-        e(Zh({
+        e(trackDefinedFileEventWrapper({
           name: "prototype.ai_magic_link_custom_error",
           params: {
             error: "no_interactions_generated_existing_interactions"
@@ -214,7 +214,7 @@ export function $$B0(e) {
       module: jsx($$M1, {}),
       name: ExtensionFeatureKey.MAGIC_LINK,
       beforeModuleOpen: () => {
-        t(Zh({
+        t(trackDefinedFileEventWrapper({
           name: "prototype.ai_magic_link_entry_clicked",
           params: {
             source: "quick_actions_suggestion"

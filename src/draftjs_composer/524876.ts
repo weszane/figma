@@ -29,7 +29,7 @@ import { useAtMentionInviteExperiment } from "../figma_app/297957";
 import { getCurrentFileType, isPrototypeView } from "../figma_app/976749";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { trackUserEvent } from "../figma_app/314264";
-import { xS, JZ } from "../905/901964";
+import { DEFAULT_THUMBNAIL_SIZE, uploadImageAttachment } from "../905/901964";
 import { eR as _$$eR } from "../figma_app/12220";
 import { $W, KD } from "../figma_app/317394";
 import { H as _$$H } from "../905/674803";
@@ -286,14 +286,14 @@ export function $$em1(e) {
   }, [dispatch, e0]);
   let e1 = useCallback(t => {
     if (!eW || !updateAttachment || 0 === t.length) return;
-    let n = _$$K2(t, eV, xS, IMAGE_TYPE_VALUES, e2);
+    let n = _$$K2(t, eV, DEFAULT_THUMBNAIL_SIZE, IMAGE_TYPE_VALUES, e2);
     eZ(e => e + n.length);
     n.forEach((t, n) => {
       if (IMAGE_TYPE_VALUES.includes(t.type)) {
         let o = URL.createObjectURL(t);
         let i = new Date();
         i.setMilliseconds(i.getMilliseconds() + n);
-        JZ(e.recordingKey, updateAttachment, eY, e2, o, t.type, eh, i, t.name || null);
+        uploadImageAttachment(e.recordingKey, updateAttachment, eY, e2, o, t.type, eh, i, t.name || null);
       } else throw Error("unexpected file type");
     });
   }, [eW, updateAttachment, eV, e2, e.recordingKey, eh]);
@@ -467,7 +467,7 @@ export function $$em1(e) {
           children: jsx(d, {})
         }), eW && jsx(_$$n, {
           svgAltText: getI18nString("comments.upload_images"),
-          isDisabled: eG.length >= xS,
+          isDisabled: eG.length >= DEFAULT_THUMBNAIL_SIZE,
           acceptedFileTypes: IMAGE_TYPE_VALUES.join(","),
           inputRef: eJ,
           inputId: `fileUploadIconInput-${e.recordingKey}`,

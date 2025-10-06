@@ -7,7 +7,7 @@ import { reportError } from '../905/11';
 import { BuyerAPIHandler } from '../905/180';
 import { DeepLinkType } from '../905/15667';
 import { ModalCloseButton } from '../905/17223';
-import { lW as _$$lW } from '../905/31837';
+import { shouldShowMfaSetupForGuests } from '../905/31837';
 import { X as _$$X } from '../905/33014';
 import { eK as _$$eK, av, E0, IJ, qq, sy, Wc } from '../905/37362';
 import { ModalFormContents, ModalRootComponent } from '../905/38914';
@@ -90,7 +90,7 @@ import { B7, Bb, zd } from '../905/651696';
 import { getResourceDataOrFallback } from '../905/663269';
 import { L as _$$L3 } from '../905/671373';
 import { trackAccessibilityEvent, AccessibilityActionType } from '../905/693155';
-import { e0 as _$$e } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { L as _$$L } from '../905/704296';
 import { S3 } from '../905/708054';
 import { gY as _$$gY, IT, liveStoreInstance } from '../905/713695';
@@ -1700,7 +1700,7 @@ function tD() {
     return e.join(',');
   }, [i, s]);
   return jsx(TrackingProvider, {
-    name: _$$e.NOTIFICATION_SETTINGS_MODAL,
+    name: TrackingKeyEnum.NOTIFICATION_SETTINGS_MODAL,
     properties: {
       user_id: e?.id,
       fileKey: t?.key
@@ -2750,7 +2750,7 @@ let ni = registerModal(e => {
 function nn({
   userEmailFeatures: e
 }) {
-  let t = _$$lW();
+  let t = shouldShowMfaSetupForGuests();
   let i = useCurrentPrivilegedPlan('EmailChangeWarning').unwrapOr(null);
   let n = i?.name;
   return t && n ? jsx('div', {
@@ -4457,7 +4457,7 @@ function rF({
           variant: 'link',
           onClick: () => {
             logAndTrackCTA({
-              trackingContext: _$$e.USER_SETTINGS,
+              trackingContext: TrackingKeyEnum.USER_SETTINGS,
               text: 'Change Languages'
             });
             t(showModalHandler({
@@ -4569,7 +4569,7 @@ function rF({
           variant: 'link',
           onClick: () => {
             logAndTrackCTA({
-              trackingContext: _$$e.USER_SETTINGS,
+              trackingContext: TrackingKeyEnum.USER_SETTINGS,
               text: 'Change File View History Preference'
             });
             t(showModalHandler({

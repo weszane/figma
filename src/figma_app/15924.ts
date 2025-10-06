@@ -4,7 +4,7 @@ import { isSubscription } from '../905/54385';
 import { KindEnum } from '../905/129884';
 import { renderI18nText } from '../905/303541';
 import { trackEventAnalytics } from '../905/449184';
-import { e0 } from '../905/696396';
+import { TrackingKeyEnum } from '../905/696396';
 import { O as _$$O } from '../905/791978';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { ShelfViewType, isMonetizedWithClientMeta, isPlugin, hasMonetizedResourceMetadata, hasClientMeta, isWidget, isThirdPartyMonetized } from '../figma_app/45218';
@@ -55,7 +55,7 @@ export function $$S1({
     onClick: I,
     className: 'purchase_button_view--previewButton--d8Fc0',
     trackingProperties: {
-      name: e0.COMMUNITY_HUB_FILE_PREVIEW_BUTTON
+      name: TrackingKeyEnum.COMMUNITY_HUB_FILE_PREVIEW_BUTTON
     },
     children: jsx('span', {
       className: 'purchase_button_view--previewText--QuDMh text--fontNeg14--ARPWl text--_fontBase--QdLsd text--_negText--j9g-L',

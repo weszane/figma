@@ -4,7 +4,7 @@ import { IntersectionSentinel } from "../905/925868";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { C } from "../figma_app/514836";
-import { T } from "../5132/203178";
+import { isResourceHubContext } from "../5132/203178";
 import { Gm } from "../5430/873109";
 import { X } from "../5430/512075";
 import { X as _$$X } from "../5430/712117";
@@ -15,7 +15,7 @@ export function $$p1({
 }) {
   let [r, u] = useState(!1);
   let p = C(e);
-  let h = T();
+  let h = isResourceHubContext();
   return jsx("div", {
     className: fG,
     children: jsxs(AutoLayout, {

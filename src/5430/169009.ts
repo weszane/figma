@@ -29,7 +29,7 @@ import { setShowResolved, removeCommentsByAuthor, reportComment, deleteComment }
 import { useDropdownState } from "../905/848862";
 import { p as _$$p } from "../905/927118";
 import { j as _$$j } from "../905/834956";
-import { T as _$$T } from "../5132/203178";
+import { isResourceHubContext } from "../5132/203178";
 import { Link } from "react-router-dom";
 import { IconButton } from "../905/443068";
 import { J as _$$J } from "../905/125993";
@@ -37,7 +37,7 @@ import H from "classnames";
 import { RelativeTimeDisplay } from "../905/986103";
 import { SvgComponent } from "../905/714743";
 import { Badge, BadgeColor } from "../figma_app/919079";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { y as _$$y } from "../905/158417";
 import { isResourceHubProfilesEnabled } from "../figma_app/275462";
 import { KindEnum } from "../905/129884";
@@ -524,7 +524,7 @@ setupLazyComponentFactory("lazy_comment_editable_typeahead", {
   })
 });
 function eI(e) {
-  let t = AG();
+  let t = useIsResourceHub();
   let r = isResourceHubProfilesEnabled();
   let {
     comment,
@@ -882,7 +882,7 @@ function eA(e) {
   let o = selectCurrentUser();
   let [a, _] = useState(!1);
   let [p, I] = useState(!1);
-  let N = _$$T();
+  let N = isResourceHubContext();
   let [E, S] = useState(!0);
   let R = useRef(null);
   let A = useSelector(e => "communityHub" === e.selectedView.view && "hubFile" === e.selectedView.subView && e.selectedView.fullscreenState && t0(e.selectedView.fullscreenState));

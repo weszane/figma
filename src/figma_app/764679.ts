@@ -9,14 +9,14 @@ import { useSingleEffect } from "../905/791079";
 import { y1, w4 } from "../905/445814";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { AG } from "../figma_app/999312";
+import { useIsResourceHub } from "../figma_app/999312";
 import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { getCurrentVersion } from "../figma_app/471982";
 import { lx, aI, s0 } from "../figma_app/558929";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { useDropdownState } from "../905/848862";
-import { U3 } from "../figma_app/412189";
+import { useWindowEvent } from "../figma_app/412189";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { hasOrgRole, getPluginVersion } from "../figma_app/300692";
@@ -214,7 +214,7 @@ function V({
   let s = useDispatch();
   let o = getPluginVersion(i);
   let l = getSearchSessionIdFromSelector();
-  let d = AG();
+  let d = useIsResourceHub();
   return jsx(j, {
     onClick: () => {
       if (!e) {
@@ -242,7 +242,7 @@ export function $$H1(e, t, r) {
   let p = useDispatch();
   let g = useDropdownState();
   let f = g?.type === z && g.data.resourceId === e.id && g.data.viewContext === r;
-  let y = AG();
+  let y = useIsResourceHub();
   let A = memo(function ({
     primaryFullscreenEditorType: r
   }) {
@@ -340,7 +340,7 @@ export function $$H1(e, t, r) {
         resource: e
       })
     };
-    U3("resize", () => {
+    useWindowEvent("resize", () => {
       f && p(hideDropdownAction());
     });
     let K = (() => {

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { S } from "../905/539306";
+import { findCurrentPlan } from "../905/539306";
 import { mv, AR } from "../905/182534";
 import { searchEndSessionAction } from "../905/977218";
 import { useCurrentUserOrgId } from "../905/845253";
@@ -27,7 +27,7 @@ export function $$h0(e, t, i) {
   let s = useDispatch();
   let l = useSelector(e => e.search);
   let c = getSelectedView();
-  let u = useSelector(e => S(e));
+  let u = useSelector(e => findCurrentPlan(e));
   return useCallback(n => {
     s(searchEndSessionAction());
     i && m(i, t, e, n, l, c, u);
@@ -40,7 +40,7 @@ export function $$g1() {
   let p = getCurrentTeam()?.id;
   let h = useSelector(e => e.search);
   let g = getSelectedView();
-  let f = useSelector(e => S(e));
+  let f = useSelector(e => findCurrentPlan(e));
   return useCallback((n, r, a) => {
     if (e(searchEndSessionAction()), !a) return;
     let l = a.model;
