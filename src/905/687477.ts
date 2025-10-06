@@ -685,7 +685,7 @@ class FullscreenEventManager {
    * @param cppAPI - The C++ API instance
    * @param viewElement - The view HTML element
    */
-  private initializeProperties(cppAPI: any, viewElement: HTMLElement): void {
+  initializeProperties(cppAPI: any, viewElement: HTMLElement): void {
     this.pendingViewHandle = null;
     this.lastViewHandleWithFocus = null;
     this.currentViewHandleWithFocus = null;
@@ -729,7 +729,7 @@ class FullscreenEventManager {
    * Creates and configures the root element
    * @param viewElement - The view HTML element to append
    */
-  private setupRootElement(viewElement: HTMLElement): void {
+  setupRootElement(viewElement: HTMLElement): void {
     this.rootElement = document.createElement('div');
     this.rootElement.id = 'fullscreen-root';
     this.rootElement.appendChild(viewElement);
@@ -740,7 +740,7 @@ class FullscreenEventManager {
   /**
    * Sets up focus event listeners for intercept elements
    */
-  private setupFocusEventListeners(): void {
+  setupFocusEventListeners(): void {
     document.addEventListener('focus', (e: FocusEvent) => {
       const target = e.target instanceof HTMLElement ? e.target : null;
       if (target && this.isInterceptElement(target)) {
@@ -754,14 +754,14 @@ class FullscreenEventManager {
    * @param element - The element to check
    * @returns True if the element has intercept attributes
    */
-  private isInterceptElement(element: HTMLElement): boolean {
+  isInterceptElement(element: HTMLElement): boolean {
     return !!(element.getAttribute('data-fullscreen-intercept') || element.getAttribute('data-fullscreen-intercept-dangerously-include-tab'));
   }
 
   /**
    * Sets up drag event listeners to prevent default behavior
    */
-  private setupDragEventListeners(): void {
+  setupDragEventListeners(): void {
     this.viewElement.addEventListener('dragenter', wrapFullscreenEventHandler(preventDefault));
     this.viewElement.addEventListener('dragover', wrapFullscreenEventHandler(preventDefault));
   }
@@ -769,7 +769,7 @@ class FullscreenEventManager {
   /**
    * Sets up window focus and blur event listeners
    */
-  private setupWindowFocusEventListeners(): void {
+  setupWindowFocusEventListeners(): void {
     window.addEventListener('focus', wrapFullscreenEventHandler(() => {
       if (this.lastViewHandleWithFocus !== null) {
         if (getFeatureFlags().a11y_design_dom_mirror) {
@@ -788,7 +788,7 @@ class FullscreenEventManager {
   /**
    * Sets up context menu event listeners
    */
-  private setupContextMenuEventListeners(): void {
+  setupContextMenuEventListeners(): void {
     this.viewElement.addEventListener('contextmenu', wrapFullscreenEventHandler((contextMenuEvent: Event) => {
       if (isTextInputElement(contextMenuEvent.target as HTMLInputElement)) {
         this.fullscreenExpectsMouseReleaseEvent = false;
@@ -818,7 +818,7 @@ class FullscreenEventManager {
   /**
    * Sets up keyboard event listeners
    */
-  private setupKeyboardEventListeners(): void {
+  setupKeyboardEventListeners(): void {
     document.addEventListener('keydown', wrapDebugFullscreenEventHandler((e: KeyboardEvent) => {
       this.isHandlingDoubleInputForMicrosoftIMEFix = false;
       this.lastKeydownEventAccepted = false;
@@ -901,7 +901,7 @@ class FullscreenEventManager {
    * @param e - The keyboard event
    * @returns True if the event should be allowed
    */
-  private shouldAllowKeyboardEvent(e: KeyboardEvent): boolean {
+  shouldAllowKeyboardEvent(e: KeyboardEvent): boolean {
     if (isEventProcessed(e)) {
       return false;
     }
@@ -956,7 +956,7 @@ class FullscreenEventManager {
   /**
    * Sets up wheel event listeners
    */
-  private setupWheelEventListeners(): void {
+  setupWheelEventListeners(): void {
     if (!window.PointerEvent) {
       trackEventAnalytics('No PointerEvent available');
     }
@@ -1071,7 +1071,7 @@ class FullscreenEventManager {
   /**
    * Sets up pointer and touch event listeners
    */
-  private setupPointerAndTouchEventListeners(): void {
+  setupPointerAndTouchEventListeners(): void {
     if (browserCapabilities.isIpadNative()) {
       this.setupIPadSideChannelEvents();
     }
@@ -1087,7 +1087,7 @@ class FullscreenEventManager {
   /**
    * Sets up standard pointer events for non-iPad devices
    */
-  private setupStandardPointerEvents(): void {
+  setupStandardPointerEvents(): void {
     const supportsPressure = window.PointerEvent && getFeatureFlags().ce_il_pressure_sensitivity && !isMobileUA;
     const clickTracker = new ClickCountTracker();
     const createTouchHandler = () => {
@@ -1186,7 +1186,7 @@ class FullscreenEventManager {
   /**
    * Sets up resize and visibility change listeners
    */
-  private setupResizeAndVisibilityListeners(): void {
+  setupResizeAndVisibilityListeners(): void {
     window.addEventListener('resize', this.onResize);
     UpdateVisibilityStatus();
     document.addEventListener('visibilitychange', UpdateVisibilityStatus);

@@ -119,7 +119,7 @@ class LabConfiguration {
   getEffectiveValue(userFlags: UserFlags): boolean {
     const isOverriddenToTrue = this.isUserOverriddenToTrue(userFlags)
     const isOverriddenToFalse = this.isUserOverriddenToFalse(userFlags)
-    
+
     let trueOverride = isOverriddenToTrue
     let falseOverride = isOverriddenToFalse
 
@@ -141,7 +141,7 @@ class LabConfiguration {
       // Resolve conflict by using the most recently updated flag
       const trueUpdatedAt = userFlags[this.trueOverrideUserFlag]?.updatedAt
       const falseUpdatedAt = userFlags[this.falseOverrideUserFlag]?.updatedAt
-      
+
       if (trueUpdatedAt !== falseUpdatedAt) {
         if (trueUpdatedAt && falseUpdatedAt && trueUpdatedAt > falseUpdatedAt) {
           falseOverride = false
@@ -164,7 +164,7 @@ class LabConfiguration {
    * @param params - Parameters for calculating effective value
    * @returns Effective boolean value
    */
-  private calculateEffectiveLabValue({
+  calculateEffectiveLabValue({
     trueOverrideUserFlag,
     falseOverrideUserFlag,
     canOverride,
@@ -238,12 +238,12 @@ class LabConfiguration {
 
     const currentValue = this.getValue()
     const newValue = !currentValue
-    
+
     const userFlagUpdates = {
       [this.trueOverrideUserFlag]: false,
       [this.falseOverrideUserFlag]: false,
     }
-    
+
     userFlagUpdates[newValue ? this.trueOverrideUserFlag : this.falseOverrideUserFlag] = true
 
     dispatch(postUserFlag(userFlagUpdates))
@@ -267,11 +267,11 @@ class LabConfiguration {
   getDefaultVisualBellMessage(enabled: boolean): string {
     return enabled
       ? getI18nString('lab.enabled', {
-          labName: this.getDisplayName(),
-        })
+        labName: this.getDisplayName(),
+      })
       : getI18nString('lab.disabled', {
-          labName: this.getDisplayName(),
-        })
+        labName: this.getDisplayName(),
+      })
   }
 
   /**
@@ -281,7 +281,7 @@ class LabConfiguration {
    */
   resetToDefault(user: any, dispatch: any): void {
     const currentValue = this.getValue()
-    
+
     dispatch(postUserFlag({
       [this.trueOverrideUserFlag]: false,
       [this.falseOverrideUserFlag]: false,

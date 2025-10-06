@@ -1,15 +1,50 @@
-export let $$n0 = new class {
+export interface ScaleToolAPI {
+  scaleToolActivated: () => void
+  subscribeScaleToolActivated: (listener: () => void) => void
+  unsubscribeScaleToolActivated: (listener: () => void) => void
+}
+
+export class ScaleToolAPIBindingsImpl implements ScaleToolAPI {
+  scaleToolActivatedListeners: Set<() => void>
+
   constructor() {
-    this.scaleToolActivatedListeners = new Set();
+    this.scaleToolActivatedListeners = new Set()
   }
-  scaleToolActivated() {
-    for (let e of this.scaleToolActivatedListeners) e();
+
+  /**
+   * Notifies all subscribed listeners that the scale tool has been activated.
+   * (Original function: scaleToolActivated)
+   */
+  scaleToolActivated(): void {
+    for (const listener of this.scaleToolActivatedListeners) {
+      listener()
+    }
   }
-  subscribeScaleToolActivated(e) {
-    this.scaleToolActivatedListeners.add(e);
+
+  /**
+   * Subscribes a listener to be notified when the scale tool is activated.
+   * @param listener - The callback function to execute when the scale tool is activated.
+   * (Original function: subscribeScaleToolActivated)
+   */
+  subscribeScaleToolActivated(listener: () => void): void {
+    this.scaleToolActivatedListeners.add(listener)
   }
-  unsubscribeScaleToolActivated(e) {
-    this.scaleToolActivatedListeners.$$delete(e);
+
+  /**
+   * Unsubscribes a listener from scale tool activation notifications.
+   * @param listener - The callback function to remove.
+   * (Original function: unsubscribeScaleToolActivated)
+   */
+  unsubscribeScaleToolActivated(listener: () => void): void {
+    this.scaleToolActivatedListeners.delete(listener)
   }
-}();
-export const h = $$n0;
+}
+
+// Create singleton instance
+export const ScaleToolAPIBindings = new ScaleToolAPIBindingsImpl()
+
+/**
+ * Alias for ScaleToolAPIBindings.
+ * (Original variable: h)
+ */
+export const h = ScaleToolAPIBindings

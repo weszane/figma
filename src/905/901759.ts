@@ -3148,7 +3148,7 @@ function normalizeSvgNamespaces(svgString: string): string {
  * Manages PDF import operations, including source selection, conversion, and error handling.
  */
 class PdfImportManager {
-  private getPdfSourcePromise: Promise<any> | null = null;
+  getPdfSourcePromise: Promise<any> | null = null;
 
   /**
    * Checks if PDF imports should be blocked based on application state.
@@ -3348,7 +3348,7 @@ class PdfImportManager {
    * @param imagesToImport - Array of images to import with hashes.
    * @returns Mapped image data with node IDs.
    */
-  private mapImagesToNodes(images: any[], imagesToImport: any[]): any[] {
+  mapImagesToNodes(images: any[], imagesToImport: any[]): any[] {
     const hashToNodes = new Map<string, any[]>();
     imagesToImport.forEach(({
       nodeId,

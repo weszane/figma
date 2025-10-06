@@ -17,9 +17,9 @@ interface ReposData {
 }
 
 export class DragDataHandler {
-  private _dataTransfer: DataTransfer
-  private _type: string
-  private _data: any
+  _dataTransfer: DataTransfer
+  _type: string
+  _data: any
 
   constructor(dataTransfer: DataTransfer) {
     this._dataTransfer = dataTransfer
@@ -58,7 +58,7 @@ export class DragDataHandler {
    * @param mimeType - The MIME type to check for
    * @returns boolean indicating if the type is present
    */
-  private _containsType(mimeType: string): boolean {
+  _containsType(mimeType: string): boolean {
     return !!this._dataTransfer.types
       && Array.from(this._dataTransfer.types).includes(mimeType)
   }
@@ -66,7 +66,7 @@ export class DragDataHandler {
   /**
    * Sets the data transfer data as JSON string
    */
-  private _setDataAsText(): void {
+  _setDataAsText(): void {
     this._dataTransfer.setData(this._type, JSON.stringify(this._data))
   }
 

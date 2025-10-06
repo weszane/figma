@@ -28,13 +28,13 @@ interface InstallStatusParams {
  * Handles all plugin-related API endpoints with proper validation
  */
 export class PluginAPIService {
-  private readonly orgWhitelistValidator = createNoOpValidator()
-  private readonly versionsValidator = createNoOpValidator()
-  private readonly pluginsValidator = createNoOpValidator()
-  private readonly profileValidator = createNoOpValidator()
-  private readonly orgValidator = createNoOpValidator()
-  private readonly installStatusValidator = createNoOpValidator()
-  private readonly unpublishedPluginsValidator = createNoOpValidator()
+  readonly orgWhitelistValidator = createNoOpValidator()
+  readonly versionsValidator = createNoOpValidator()
+  readonly pluginsValidator = createNoOpValidator()
+  readonly profileValidator = createNoOpValidator()
+  readonly orgValidator = createNoOpValidator()
+  readonly installStatusValidator = createNoOpValidator()
+  readonly unpublishedPluginsValidator = createNoOpValidator()
 
   /**
    * Gets the organization whitelist for plugins

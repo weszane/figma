@@ -6,7 +6,7 @@ import { isFigmaBetaOrDev } from '../905/981904'
  * Handles API-related operations for desktop features, versioning, and client information.
  */
 export class DesktopApplicationAPI {
-  private api: any // Original: this.api = e; - assuming api object with version, osVersion, etc.
+  api: any // Original: this.api = e; - assuming api object with version, osVersion, etc.
 
   /**
    * Constructor for DesktopAPI - original name: $$a0.constructor

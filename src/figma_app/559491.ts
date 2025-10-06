@@ -882,14 +882,14 @@ export function $$ep30(e, t) {
     raw: !0,
     headers: {
       'Content-Type': 'text/javascript',
-      'Cache-Control': 'private, max-age=86400',
+      'Cache-Control': ', max-age=86400',
       'x-amz-acl': 'bucket-owner-full-control'
     }
   }) : sendWithRetry.crossOriginPost(codePath, s, {
     raw: !0,
     headers: {
       'Content-Type': 'multipart/form-data',
-      'Cache-Control': 'private, max-age=86400'
+      'Cache-Control': ', max-age=86400'
     }
   });
 }

@@ -12,10 +12,10 @@ I initially created the Phase 18 network communication module but didn't show **
 
 ```typescript
 class e9 {
-  private runtimeWrapper: PluginRuntimeWrapper
+   runtimeWrapper: PluginRuntimeWrapper
   // Phase 18: Network and Real-Time Communication Systems
-  private httpClient: AdvancedHTTPClientManager
-  private communicationPrefs: CommunicationPreferenceManager
+   httpClient: AdvancedHTTPClientManager
+   communicationPrefs: CommunicationPreferenceManager
 
   constructor(e, t) {
     // Create an instance of the extracted PluginRuntimeWrapper

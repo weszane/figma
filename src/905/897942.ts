@@ -4,8 +4,8 @@ import { hasProperty, memoizeFn, resolveEffectStyle, resolveFillStyle, resolveSt
 import { GridLayoutProperties } from "../905/927840"
 
 export class NodeProperties {
-  private _cachedProperties: Record<string, any>
-  private _EXPENSIVE_TO_READ_node: any
+  _cachedProperties: Record<string, any>
+  _EXPENSIVE_TO_READ_node: any
   nodeCache: any
 
   constructor(node: any, cache: any) {
@@ -24,7 +24,7 @@ export class NodeProperties {
    * @param getter - Function to extract the value from the node
    * @returns The cached or newly computed value
    */
-  private readValue<T>(key: string, getter: (node: any) => T): T {
+  readValue<T>(key: string, getter: (node: any) => T): T {
     return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
 

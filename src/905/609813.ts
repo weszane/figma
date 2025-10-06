@@ -4,11 +4,11 @@
  */
 export class TimerHandler {
   /** The performance-based start time (ms) */
-  private _startTime: number = performance.now()
+  _startTime: number = performance.now()
   /** The epoch-based start time (ms) */
-  private _startEpochTime: number = Date.now()
+  _startEpochTime: number = Date.now()
   /** Timeout ID for scheduled timeout */
-  private _timerId: ReturnType<typeof setTimeout> | null = null
+  _timerId: ReturnType<typeof setTimeout> | null = null
   /** Optional metadata associated with the timer */
   metadata: any = null
   /** Indicates if the timer has finished */
@@ -96,7 +96,7 @@ export class TimerHandler {
    * Handles document visibility changes.
    * Original method name: onVisibilityChange
    */
-  private onVisibilityChange = (): void => {
+  onVisibilityChange = (): void => {
     if (document.visibilityState === 'hidden') {
       this.backgrounded = true
     }
@@ -106,7 +106,7 @@ export class TimerHandler {
    * Handles offline event.
    * Original method name: onOffline
    */
-  private onOffline = (): void => {
+  onOffline = (): void => {
     this.wasOffline = true
   }
 

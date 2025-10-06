@@ -48,7 +48,7 @@ export class DraggableModalView extends RecordingComponent {
     // Bind event handlers
     this.stopPropagation = event => event.stopPropagation()
 
-    // Initialize private properties
+    // Initialize  properties
     this._dragState = 'None'
     this._containerRef = null
 

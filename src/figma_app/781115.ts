@@ -37,21 +37,21 @@ export interface ViewerConnectArgs {
  * (Original: $$u0)
  */
 export class LoadTimeTracker {
-  private _lastConnectToMs: number = -1
-  private _lastConnectToID?: any
-  private _scheduledTimeouts: number[] = []
-  private _domContentLoaded: number = -1
-  private _livegraphStartTime: number = -1
-  private _multiplayerStartTime: number = -1
-  private _multiplayerSatisfiedTime: number = -1
-  private _liveGraphSubscriptionLoaded: number = -1
-  private _multiplayerFirstResponse: number = -1
-  private _multiplayerFirstFinish: number = -1
-  private _iflCompleted: number = -1
-  private _sentViewerConnectToMetric: boolean = false
-  private _connectArgs: ViewerConnectArgs | null = null
-  private _isInEmbed: boolean = self !== top
-  private reportedAbandon: boolean = false
+  _lastConnectToMs: number = -1
+  _lastConnectToID?: any
+  _scheduledTimeouts: number[] = []
+  _domContentLoaded: number = -1
+  _livegraphStartTime: number = -1
+  _multiplayerStartTime: number = -1
+  _multiplayerSatisfiedTime: number = -1
+  _liveGraphSubscriptionLoaded: number = -1
+  _multiplayerFirstResponse: number = -1
+  _multiplayerFirstFinish: number = -1
+  _iflCompleted: number = -1
+  _sentViewerConnectToMetric: boolean = false
+  _connectArgs: ViewerConnectArgs | null = null
+  _isInEmbed: boolean = self !== top
+  reportedAbandon: boolean = false
   public enableProfiling: boolean = false
   public fullscreenEvents: Record<string, number> = {
     loadAndStartFullscreenIfNecessary: -1,
@@ -63,10 +63,10 @@ export class LoadTimeTracker {
   public renderingEventsReported: boolean = false
   public wasViewerLoadReported: boolean = false
   public wasInlinePreviewModalOpenedSinceViewerLoaded: boolean = false
-  private _wasBackgroundedOnceWhileLoading: boolean = false
-  private _totalVisibleLoadTime: number = 0
-  private _wasVisiblyLoading: boolean = false
-  private _lastTabSwitchOrLoadChange: number = -1
+  _wasBackgroundedOnceWhileLoading: boolean = false
+  _totalVisibleLoadTime: number = 0
+  _wasVisiblyLoading: boolean = false
+  _lastTabSwitchOrLoadChange: number = -1
 
   /**
    * Reports viewer abandon event.
@@ -407,7 +407,7 @@ export class LoadTimeTracker {
    * Forms native load time metadata event.
    * (Original: _formNativeLoadTimeMetadataFigmentEvent)
    */
-  private _formNativeLoadTimeMetadataFigmentEvent(e: any, timeOrigin: number): Record<string, any> {
+  _formNativeLoadTimeMetadataFigmentEvent(e: any, timeOrigin: number): Record<string, any> {
     return {
       user_load_start_time: e.userLoadStartTime,
       user_load_start_relative: e.userLoadStartTime - timeOrigin,

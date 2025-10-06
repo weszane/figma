@@ -776,7 +776,7 @@ o.addEnum({
 });
 o.addEnum({
   name: "OrgAccess",
-  values: ["public", "private", "secret"],
+  values: ["public", "", "secret"],
 });
 o.addEnum({
   name: "OrgPermission",

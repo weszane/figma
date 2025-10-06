@@ -2,7 +2,7 @@ import { sendWithRetry } from "../905/910117"
 import { APIParameterUtils, createNoOpValidator } from "../figma_app/181241"
 
 export class VariableSetDefaultModeService {
-  private validator = createNoOpValidator()
+  validator = createNoOpValidator()
 
   /**
    * Get default modes for variable sets

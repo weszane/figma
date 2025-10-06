@@ -24,7 +24,7 @@ class SingletonSceneGraph extends SceneGraph {
   // Holds the singleton instance
   static instance: SingletonSceneGraph = new SingletonSceneGraph()
 
-  private constructor() {
+  constructor() {
     super(sceneDocumentType)
   }
 }

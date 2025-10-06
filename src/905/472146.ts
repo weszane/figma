@@ -178,11 +178,11 @@ export enum ChartFeatureKey {
   ANNOTATIONS_AND_STATUS = 'annotations-and-status',
   COMPARE_CHANGES = 'compare-changes',
   PLUGINS_AND_EXTENSIONS = 'plugins-and-extensions',
-  PRIVATE_PLUGINS = 'private-plugins',
+  PRIVATE_PLUGINS = '-plugins',
   DEV_MODE = 'dev-mode',
   VIDEO_IN_PROTOTYPE = 'video-in-prototype',
   PROJECT_AND_TEAM_TRANSFER = 'project-and-team-transfer',
-  PRIVATE_PROJECTS = 'private-projects',
+  PRIVATE_PROJECTS = '-projects',
   PROTOTYPE_SHARING_PERMISSIONS = 'prototype-sharing-permissions',
   DESIGN_SYSTEM_MODES = 'design-system-modes',
   PASSWORD_PROTECTION = 'password-protection',
@@ -202,7 +202,7 @@ export enum ChartFeatureKey {
   AUDIO_CONVERSATIONS_V2 = 'audio-conversations-v2',
   DESIGN_SYSTEM_ANALYTICS_V2 = 'design-system-analytics-v2',
   SINGLE_SIGN_ON_V2 = 'single-sign-on-v2',
-  PRIVATE_PLUGINS_V2 = 'private-plugins-v2',
+  PRIVATE_PLUGINS_V2 = '-plugins-v2',
 }
 
 /**
@@ -329,7 +329,7 @@ export const ChartFeatureDetailsMap: Record<string, ChartFeatureDetails> = {
     name: () => getI18nString('plan_comparison.chart.dev_mode.plugins_and_extensions.name'),
     details: () => getI18nString('plan_comparison.chart.dev_mode.plugins_and_extensions.details'),
   },
-  'private-plugins': {
+  '-plugins': {
     id: 'Private plugins',
     name: () => getI18nString('plan_comparison.chart.dev_mode.private_plugins.name'),
     details: () => getI18nString('plan_comparison.chart.dev_mode.private_plugins.details'),
@@ -349,7 +349,7 @@ export const ChartFeatureDetailsMap: Record<string, ChartFeatureDetails> = {
     name: () => getI18nString('plan_comparison.chart.project_transfer.name'),
     details: () => getI18nString('plan_comparison.chart.project_transfer.details'),
   },
-  'private-projects': {
+  '-projects': {
     id: 'Private projects',
     name: () => getI18nString('plan_comparison.chart.private_projects.name'),
     details: () => getI18nString('plan_comparison.chart.private_projects.details'),
@@ -449,7 +449,7 @@ export const ChartFeatureDetailsMap: Record<string, ChartFeatureDetails> = {
     name: () => getI18nString('plan_comparison.chart.single_sign_on_v2.name'),
     details: () => getI18nString('plan_comparison.chart.single_sign_on_v2.details'),
   },
-  'private-plugins-v2': {
+  '-plugins-v2': {
     id: 'Private plugins',
     name: () => getI18nString('plan_comparison.chart.private_plugins_v2.name'),
     details: () => getI18nString('plan_comparison.chart.private_plugins_v2.details'),
@@ -497,7 +497,7 @@ export const StudentChartFeatureKeys: string[] = [
   'annotations-and-status',
   'compare-changes',
   'plugins-and-extensions',
-  'private-plugins',
+  '-plugins',
 ]
 
 let ProPlanConfig = {
@@ -523,11 +523,11 @@ let ProPlanConfig = {
   'annotations-and-status': !0,
   'compare-changes': !0,
   'plugins-and-extensions': !0,
-  'private-plugins': !1,
+  '-plugins': !1,
   'dev-mode': !0,
   'video-in-prototype': !0,
   'project-and-team-transfer': !0,
-  'private-projects': !0,
+  '-projects': !0,
   'prototype-sharing-permissions': !0,
   'design-system-modes': !0,
   'password-protection': !0,
@@ -547,7 +547,7 @@ let ProPlanConfig = {
   'audio-conversations-v2': !0,
   'design-system-analytics-v2': !1,
   'single-sign-on-v2': !1,
-  'private-plugins-v2': !1,
+  '-plugins-v2': !1,
 }
 export let SubscriptionPlans = {
   [FPlanNameType.STARTER]: {
@@ -576,11 +576,11 @@ export let SubscriptionPlans = {
     'annotations-and-status': !1,
     'compare-changes': !1,
     'plugins-and-extensions': !1,
-    'private-plugins': !1,
+    '-plugins': !1,
     'dev-mode': !1,
     'video-in-prototype': !1,
     'project-and-team-transfer': !1,
-    'private-projects': !1,
+    '-projects': !1,
     'prototype-sharing-permissions': !1,
     'design-system-modes': !1,
     'password-protection': !1,
@@ -600,7 +600,7 @@ export let SubscriptionPlans = {
     'audio-conversations-v2': !1,
     'design-system-analytics-v2': !1,
     'single-sign-on-v2': !1,
-    'private-plugins-v2': !1,
+    '-plugins-v2': !1,
   },
   [FPlanNameType.PRO]: ProPlanConfig,
   [FPlanNameType.STUDENT]: ProPlanConfig,
@@ -627,11 +627,11 @@ export let SubscriptionPlans = {
     'annotations-and-status': !0,
     'compare-changes': !0,
     'plugins-and-extensions': !0,
-    'private-plugins': !0,
+    '-plugins': !0,
     'dev-mode': !0,
     'video-in-prototype': !0,
     'project-and-team-transfer': !0,
-    'private-projects': !0,
+    '-projects': !0,
     'prototype-sharing-permissions': !0,
     'design-system-modes': !0,
     'password-protection': !0,
@@ -651,7 +651,7 @@ export let SubscriptionPlans = {
     'audio-conversations-v2': !0,
     'design-system-analytics-v2': !0,
     'single-sign-on-v2': !0,
-    'private-plugins-v2': !0,
+    '-plugins-v2': !0,
   },
   [FPlanNameType.ENTERPRISE]: {
     'usage-limits': () => getI18nString('plan_comparison.chart.usage_limits.unlimited'),
@@ -676,11 +676,11 @@ export let SubscriptionPlans = {
     'annotations-and-status': !0,
     'compare-changes': !0,
     'plugins-and-extensions': !0,
-    'private-plugins': !0,
+    '-plugins': !0,
     'dev-mode': !0,
     'video-in-prototype': !0,
     'project-and-team-transfer': !0,
-    'private-projects': !0,
+    '-projects': !0,
     'prototype-sharing-permissions': !0,
     'design-system-modes': !0,
     'password-protection': !0,
@@ -700,7 +700,7 @@ export let SubscriptionPlans = {
     'audio-conversations-v2': !0,
     'design-system-analytics-v2': !0,
     'single-sign-on-v2': !0,
-    'private-plugins-v2': !0,
+    '-plugins-v2': !0,
   },
 }
 /**

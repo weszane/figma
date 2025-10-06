@@ -77,7 +77,7 @@ class EditorUIStateManager {
    * Returns the prefix string for a given editor type.
    * (Extracted from setEditorType)
    */
-  private getPrefixForEditorType(editorType: FEditorType): string {
+  getPrefixForEditorType(editorType: FEditorType): string {
     switch (editorType) {
       case FEditorType.Design:
         return ''

@@ -24,13 +24,13 @@ import { perfTimerFrameManagerBindings } from '../figma_app/763686'
 import { Sw } from '../figma_app/805373'
 
 class SlidingWindow2D {
-  private leftIdx: number = 0
-  private rightIdx: number = 0
-  private topIdx: number = 0
-  private bottomIdx: number = 0
-  private leftToRight: Array<any> = []
-  private topToBottom: Array<any> = []
-  private bufferedRect: any
+  leftIdx: number = 0
+  rightIdx: number = 0
+  topIdx: number = 0
+  bottomIdx: number = 0
+  leftToRight: Array<any> = []
+  topToBottom: Array<any> = []
+  bufferedRect: any
 
   constructor(values: Array<any>, rect: any, buffer: number) {
     this.bufferedRect = expandRect(rect, buffer)
@@ -231,7 +231,7 @@ class SlidingWindow2D {
   /**
    * Updates the directional indexes based on the current viewport
    */
-  private updateDirectionalIndexes(
+  updateDirectionalIndexes(
     xSorted: Array<any>,
     ySorted: Array<any>,
     leftIdx: number,
@@ -270,41 +270,41 @@ class SlidingWindow2D {
     }
   }
 
-  private offTheLeft(item: any, rect: any): boolean {
+  offTheLeft(item: any, rect: any): boolean {
     return item.x < rect.x
   }
 
-  private offTheRight(item: any, rect: any): boolean {
+  offTheRight(item: any, rect: any): boolean {
     return item.x > rect.x + rect.width
   }
 
-  private offTheTop(item: any, rect: any): boolean {
+  offTheTop(item: any, rect: any): boolean {
     return item.y < rect.y
   }
 
-  private offTheBottom(item: any, rect: any): boolean {
+  offTheBottom(item: any, rect: any): boolean {
     return item.y > rect.y + rect.height
   }
 
-  private withinXDimensions(item: any, rect: any): boolean {
+  withinXDimensions(item: any, rect: any): boolean {
     return !this.offTheLeft(item, rect) && !this.offTheRight(item, rect)
   }
 
-  private withinYDimensions(item: any, rect: any): boolean {
+  withinYDimensions(item: any, rect: any): boolean {
     return !this.offTheTop(item, rect) && !this.offTheBottom(item, rect)
   }
 
-  private withinRect(item: any, rect: any): boolean {
+  withinRect(item: any, rect: any): boolean {
     return this.withinXDimensions(item, rect) && this.withinYDimensions(item, rect)
   }
 
-  private windowAssert(condition: boolean): void {
+  windowAssert(condition: boolean): void {
     if (!condition) {
       throw new Error(`The comment 2D sliding window has gotten into an invalid state: ${JSON.stringify(this)}`)
     }
   }
 
-  private assertIndexes(rect: any): void {
+  assertIndexes(rect: any): void {
     const length = this.leftToRight.length
 
     this.windowAssert(this.leftIdx === 0 || this.leftToRight[this.leftIdx - 1].x < rect.x)
@@ -351,11 +351,11 @@ export class ClusteredPinsElement extends HTMLElement {
   }
 
   // Rendering state
-  private _lastRenderedDataset: any = null
-  private _lastDatasetChangeAnimatedAt: number = Date.now()
-  private isZoomingOut: boolean = false
-  private shouldDisablePointerEvents: boolean = false
-  private _lastRenderedShouldDisablePointerEvents: boolean = false
+  _lastRenderedDataset: any = null
+  _lastDatasetChangeAnimatedAt: number = Date.now()
+  isZoomingOut: boolean = false
+  shouldDisablePointerEvents: boolean = false
+  _lastRenderedShouldDisablePointerEvents: boolean = false
 
   // Event handlers
   public onElementClicked: ((id: string) => void) | null = null
@@ -365,20 +365,20 @@ export class ClusteredPinsElement extends HTMLElement {
   public onElementDragStart: ((id: string) => void) | null = null
 
   // Viewport management
-  private lastRenderedViewport: any = null
+  lastRenderedViewport: any = null
   public currentViewport: any = undefined
   public getWrapperOffset: ((viewport: any) => { x: number, y: number }) | undefined = undefined
-  private focusOneOfIDs: Set<string> = new Set()
+  focusOneOfIDs: Set<string> = new Set()
 
   // Configuration and state
   public clientConfig: any = null
-  private draggingElement: any = null
-  private hasHighlightedPinnedThreads: boolean = false
-  private clusterElementsById: Map<string, any> = new Map()
+  draggingElement: any = null
+  hasHighlightedPinnedThreads: boolean = false
+  clusterElementsById: Map<string, any> = new Map()
 
   // DOM elements
-  private wrapper: HTMLDivElement
-  private slidingWindow: SlidingWindow2D
+  wrapper: HTMLDivElement
+  slidingWindow: SlidingWindow2D
 
   /**
    * Frame update callback that handles rendering based on current viewport and dataset
@@ -491,7 +491,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Determines if a cluster comes from a frame move operation
    */
-  private clusterComesFromFrameMove(cluster: any, otherClusters: any[]): boolean {
+  clusterComesFromFrameMove(cluster: any, otherClusters: any[]): boolean {
     if (!cluster.anchoredNode)
       return false
 
@@ -512,7 +512,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Processes dataset updates and manages cluster additions/removals
    */
-  private processDatasetUpdate(viewport: any): void {
+  processDatasetUpdate(viewport: any): void {
     // Calculate differences between current and previous datasets
     const { added, removed } = diffSets(
       this.ds.clusters.leafNodes,
@@ -614,7 +614,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Determines the visibility state for a cluster based on selection and resolution status
    */
-  private getSelectedState(cluster: any, selectedPinId: string | null, dimUnselectedPins: boolean): PinVisibilityState {
+  getSelectedState(cluster: any, selectedPinId: string | null, dimUnselectedPins: boolean): PinVisibilityState {
     if (selectedPinId) {
       // If a pin is selected, active state if this cluster contains it, dimmed otherwise
       return cluster.pins.find((pin: any) => pin.id === selectedPinId)
@@ -632,7 +632,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Updates the selected states of all visible clusters
    */
-  private updateSelectedStates(selectedPinId: string | null, dimUnselectedPins: boolean): void {
+  updateSelectedStates(selectedPinId: string | null, dimUnselectedPins: boolean): void {
     // Update specifically selected pin if it's a single pin cluster
     if (selectedPinId) {
       const selectedCluster = this.ds.clusters.all().find((cluster: any) => cluster.id === selectedPinId)
@@ -662,7 +662,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Updates the emphasized state of cluster elements
    */
-  private updateEmphasizedElements(
+  updateEmphasizedElements(
     currentEmphasizedIds: string[],
     previousEmphasizedIds: string[] | undefined,
   ): void {
@@ -705,7 +705,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Processes viewport updates and manages cluster visibility
    */
-  private processViewportUpdate(currentViewport: any, previousViewport: any): void {
+  processViewportUpdate(currentViewport: any, previousViewport: any): void {
     // Handle zoom scale changes
     if (previousViewport?.zoomScale !== currentViewport.zoomScale) {
       this.cancelAllDragging()
@@ -728,7 +728,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Main render method that processes viewport and dataset changes
    */
-  private render(currentViewport: any, previousViewport: any): void {
+  render(currentViewport: any, previousViewport: any): void {
     reactTimerGroup.start('comments-render')
 
     let needsRender = false
@@ -770,7 +770,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Updates the wrapper element's position based on viewport
    */
-  private renderWrapperPosition(viewport: any): void {
+  renderWrapperPosition(viewport: any): void {
     this.wrapper.style.top = `${viewport.y + viewport.height / 2}px`
     this.wrapper.style.left = `${viewport.x + viewport.width / 2}px`
 
@@ -805,7 +805,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Updates transforms for all visible elements based on zoom scale
    */
-  private updateElementTransforms(viewport: any): void {
+  updateElementTransforms(viewport: any): void {
     for (const cluster of this.slidingWindow.allValuesInWindow()) {
       const clusterElement = this.clusterElementsById.get(cluster.id)
       if (!clusterElement)
@@ -830,7 +830,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Adds multiple clusters to the sliding window and DOM at once
    */
-  private bulkAddClusters(clusters: any[], viewport: any): void {
+  bulkAddClusters(clusters: any[], viewport: any): void {
     this.slidingWindow.bulkAddValues(clusters)
     for (const cluster of clusters) {
       if (this.slidingWindow.isValueInWindow(cluster)) {
@@ -842,7 +842,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Updates an existing cluster by removing and re-adding it
    */
-  private updateCluster(cluster: any, viewport: any): void {
+  updateCluster(cluster: any, viewport: any): void {
     if (cluster.isSinglePin) {
       // For single pin clusters, just update the existing element
       this.slidingWindow.removeValue(cluster)
@@ -859,7 +859,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Adds a cluster to the sliding window and DOM if it's in the visible area
    */
-  private addCluster(cluster: any, viewport: any, changeType: string): void {
+  addCluster(cluster: any, viewport: any, changeType: string): void {
     if (this.slidingWindow.addValue(cluster)) {
       this.addClusterToDom(cluster, viewport, changeType)
     }
@@ -868,7 +868,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Removes a cluster from the sliding window and DOM
    */
-  private removeCluster(cluster: any, viewport: any, changeType: string, hasManyRemovals: boolean = false): void {
+  removeCluster(cluster: any, viewport: any, changeType: string, hasManyRemovals: boolean = false): void {
     const wasInWindow = this.slidingWindow.isValueInWindow(cluster)
     this.slidingWindow.removeValue(cluster)
 
@@ -943,7 +943,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Updates an existing avatar pin element with new cluster data
    */
-  private updateAvatarPin(cluster: any, viewport: any): void {
+  updateAvatarPin(cluster: any, viewport: any): void {
     const pinElement = this.clusterElementsById.get(cluster.id)
 
     if (!pinElement) {
@@ -967,7 +967,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Handles pin element click events
    */
-  private onPinElementClicked(pinId: string): void {
+  onPinElementClicked(pinId: string): void {
     if (this.onElementClicked) {
       this.onElementClicked(pinId)
     }
@@ -976,7 +976,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Handles pin element drag end events
    */
-  private onPinElementDragEnd(pinId: string, _element: any): void {
+  onPinElementDragEnd(pinId: string, _element: any): void {
     if (this.onElementDragEnd) {
       this.onElementDragEnd(pinId)
     }
@@ -986,7 +986,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Handles pin element drag move events
    */
-  private onPinElementDragMove(position: { x: number, y: number }): void {
+  onPinElementDragMove(position: { x: number, y: number }): void {
     if (this.onElementDragMove) {
       this.onElementDragMove(position)
     }
@@ -995,7 +995,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Handles pin element drag start events
    */
-  private onPinElementDragStart(pinId: string, element: any): void {
+  onPinElementDragStart(pinId: string, element: any): void {
     if (this.draggingElement) {
       this.draggingElement.cancelDrag()
       console.error('Started dragging a new element without ending another drag')
@@ -1011,7 +1011,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Handles pin element context menu events
    */
-  private onPinContextMenu(pinId: string, event: MouseEvent): void {
+  onPinContextMenu(pinId: string, event: MouseEvent): void {
     if (this.onElementContextMenu) {
       this.onElementContextMenu(pinId, event)
     }
@@ -1020,7 +1020,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Cancels all active dragging operations
    */
-  private cancelAllDragging(): void {
+  cancelAllDragging(): void {
     if (this.draggingElement) {
       this.draggingElement.cancelDrag()
     }
@@ -1030,7 +1030,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Adds a cluster element to the DOM
    */
-  private addClusterToDom(cluster: any, viewport: any, changeType: string): void {
+  addClusterToDom(cluster: any, viewport: any, changeType: string): void {
     // Skip if element already exists
     if (this.clusterElementsById.get(cluster.id)) {
       return
@@ -1190,7 +1190,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Removes a cluster element from the DOM
    */
-  private removeClusterFromDom(
+  removeClusterFromDom(
     cluster: any,
     viewport: any,
     changeType: string,
@@ -1245,7 +1245,7 @@ export class ClusteredPinsElement extends HTMLElement {
   /**
    * Updates which clusters are visible based on current viewport
    */
-  private updateViewportVisibleClusters(viewport: any): void {
+  updateViewportVisibleClusters(viewport: any): void {
     const visibleArea = getVisibleArea(viewport)
     const buffer = roundedDivision(78, viewport.zoomScale)
     const windowUpdate = this.slidingWindow.updateWindow(visibleArea, buffer)

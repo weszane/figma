@@ -151,7 +151,7 @@ export function $$L1({
           children: [jsx(SvgComponent, {
             className: hz,
             svg: _$$A2
-          }), renderI18nText("community.cards.private"), "OrgWidgetsView" === i && jsx(_$$r, {
+          }), renderI18nText("community.cards."), "OrgWidgetsView" === i && jsx(_$$r, {
             resource: t
           })]
         })

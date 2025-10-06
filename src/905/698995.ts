@@ -9,7 +9,7 @@ import { mapEditorTypeToString } from '../figma_app/53721'
  * DesktopAPI class handles interactions with the desktop API, including version checks, file operations, audio, and more.
  */
 export class DesktopAPI {
-  private api: any
+  api: any
 
   /**
    * Constructor for DesktopAPI.

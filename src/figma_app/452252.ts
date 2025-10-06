@@ -22,7 +22,7 @@ import { NN } from "../905/466026";
 import { autosaveFileInfoAtom, renameAutosaveFileMutation, OfflineFileType } from "../figma_app/840917";
 import { getDisplayNameAlt } from "../905/760074";
 import { setEditorDocumentTitle } from "../905/697795";
-import { hx } from "../figma_app/290668";
+import { handleAccessibilityKeyboardEvents } from "../figma_app/290668";
 import { selectCurrentFile, selectOpenFile, useCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { useLabConfiguration, labConfigurations } from "../905/226610";
@@ -95,7 +95,7 @@ class W extends RecordingPureComponent {
         "data-tooltip": e ? this.props.name : void 0,
         "data-tooltip-type": KindEnum.TEXT,
         "data-testid": this.props.dataTestId || "filename",
-        onKeyDown: e => hx({
+        onKeyDown: e => handleAccessibilityKeyboardEvents({
           e,
           onClickHandler: this.startRenaming
         })

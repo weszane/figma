@@ -74,15 +74,15 @@ async function addActivityLogEntry(entry: any): Promise<void> {
  * Original: f
  */
 class ActivityTracker {
-  private queue: AsyncJobQueue
-  private nextPromiseResolve: () => void
-  private nextFlushPromise: Promise<void>
-  private hasLoggedFlushError: boolean
-  private currentLog: any
+  queue: AsyncJobQueue
+  nextPromiseResolve: () => void
+  nextFlushPromise: Promise<void>
+  hasLoggedFlushError: boolean
+  currentLog: any
 
   constructor(fileKey: string, userID: string, startingSessionID: string) {
     this.queue = new AsyncJobQueue()
-    this.nextPromiseResolve = () => {}
+    this.nextPromiseResolve = () => { }
     this.nextFlushPromise = new Promise(resolve => this.nextPromiseResolve = resolve)
     this.hasLoggedFlushError = false
     this.currentLog = {
@@ -126,7 +126,7 @@ class ActivityTracker {
   /**
    * Merges two commit objects.
    */
-  private mergeCommits(existingCommit: any, newCommit: any): any {
+  mergeCommits(existingCommit: any, newCommit: any): any {
     const nodeMap: Record<string, any> = {}
     existingCommit.changedNodes.forEach((node: any) => nodeMap[node.nodeID] = node)
     existingCommit.clearedNodes.forEach((nodeID: string) => nodeMap[nodeID] = null)
@@ -170,7 +170,7 @@ class ActivityTracker {
   /**
    * Logs a flush error if not already logged.
    */
-  private logFlushError(message: string, shouldLog: boolean, extraData?: any): void {
+  logFlushError(message: string, shouldLog: boolean, extraData?: any): void {
     if (this.hasLoggedFlushError)
       return
     this.hasLoggedFlushError = true
@@ -276,7 +276,7 @@ async function sendActivityLogTelemetry(): Promise<void> {
  * Original: $$y1
  */
 export class AutosaveActivityLogManager {
-  private state: any
+  state: any
 
   constructor() {
     this.state = { type: 'online' }
@@ -287,7 +287,7 @@ export class AutosaveActivityLogManager {
   /**
    * Starts the flush interval timer.
    */
-  private startFlushInterval(): () => void {
+  startFlushInterval(): () => void {
     const intervalId = setInterval(() => {
       if (this.state.type !== 'offline') {
         logAutosaveError('We should only call flush if there is something to flush')
@@ -358,7 +358,7 @@ export class AutosaveActivityLogManager {
   /**
    * Records a Sentry breadcrumb if offline.
    */
-  private recordSentryBreadcrumb(breadcrumb: any): void {
+  recordSentryBreadcrumb(breadcrumb: any): void {
     if (this.state.type === 'online')
       return
     this.state.activityTracker.addLog({

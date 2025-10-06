@@ -33,7 +33,7 @@ export interface FullscreenAPI {
   isInteractiveInspectionEnabled: () => boolean
   isChangingInspectionValues: () => boolean
   onUnexpectedEditInFocusView: () => void
-  getUnitName: (source: {type: PluginSource; id: string}, unitId: string) => string
+  getUnitName: (source: { type: PluginSource; id: string }, unitId: string) => string
 }
 
 // Initial implementation that throws errors until initialized
@@ -90,8 +90,8 @@ interface RelatedLink {
 
 // Refactored class for managing related links with better naming and structure
 export class RelatedLinksManager {
-  private pendingRelatedLinks: RelatedLink[] = []
-  private flushLinks: (resolve: (value: unknown) => void, reject: (reason?: unknown) => void) => void
+  pendingRelatedLinks: RelatedLink[] = []
+  flushLinks: (resolve: (value: unknown) => void, reject: (reason?: unknown) => void) => void
 
   constructor() {
     // Refactored flushLinks with clearer variable names and structure

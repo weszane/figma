@@ -16,19 +16,19 @@ import { TextWithTruncation } from "../905/984674";
 import { showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { getColorSpaceSupportStatus } from "../figma_app/622881";
-import { jK, it } from "../figma_app/829197";
-import { M } from "../905/366117";
+import { useUserColorProfileSubscription, updateUserColorProfilePreference } from "../figma_app/829197";
+import { ColorSpaceType } from "../905/366117";
 import { registerModal } from "../905/102752";
 import { s as _$$s3 } from "../905/445054";
 import { jH, yF, cd } from "../905/187370";
 let x = (e, t) => {
   switch (e) {
-    case M.SRGB:
+    case ColorSpaceType.SRGB:
       return {
         text: getI18nString("fullscreen.color_management.user_color_profile_modal.info.srgb_supported"),
         type: "info"
       };
-    case M.DISPLAY_P3:
+    case ColorSpaceType.DISPLAY_P3:
       switch (t.status) {
         case "SupportedNatively":
         case "SupportedWithPolyfill":
@@ -72,22 +72,22 @@ let C = {
 let $$w2 = atom(!1);
 let $$O0 = "user_color_profile_modal_closed";
 let R = registerModal(function (e) {
-  let t = jK();
+  let t = useUserColorProfileSubscription();
   let r = function (e) {
     switch (e) {
-      case M.DEFAULT:
-      case M.SRGB:
-        return M.SRGB;
-      case M.DISPLAY_P3:
-        return M.DISPLAY_P3;
+      case ColorSpaceType.DEFAULT:
+      case ColorSpaceType.SRGB:
+        return ColorSpaceType.SRGB;
+      case ColorSpaceType.DISPLAY_P3:
+        return ColorSpaceType.DISPLAY_P3;
     }
   }(t.colorProfilePreference);
   let E = x(r, getColorSpaceSupportStatus());
   let S = function (e) {
     switch (e) {
-      case M.SRGB:
+      case ColorSpaceType.SRGB:
         return getI18nString("fullscreen.color_management.user_color_profile_modal.options.srgb.description");
-      case M.DISPLAY_P3:
+      case ColorSpaceType.DISPLAY_P3:
         return getI18nString("fullscreen.color_management.user_color_profile_modal.options.display_p3.description");
     }
   }(r);
@@ -116,7 +116,7 @@ let R = registerModal(function (e) {
               }),
               value: r,
               onChange: e => {
-                it({
+                updateUserColorProfilePreference({
                   colorProfilePreference: e,
                   id: t.id
                 });
@@ -124,7 +124,7 @@ let R = registerModal(function (e) {
               children: jsxs("div", {
                 className: cssBuilderInstance.flex.flexRow.gap20.mb12.$,
                 children: [jsx(RadioInputOption, {
-                  value: M.SRGB,
+                  value: ColorSpaceType.SRGB,
                   label: jsx(Label, {
                     children: getI18nString("fullscreen.color_management.user_color_profile_modal.options.srgb.value")
                   }),
@@ -132,7 +132,7 @@ let R = registerModal(function (e) {
                     "data-testid": C.srgbOption
                   }
                 }), jsx(RadioInputOption, {
-                  value: M.DISPLAY_P3,
+                  value: ColorSpaceType.DISPLAY_P3,
                   label: jsx(Label, {
                     children: getI18nString("fullscreen.color_management.user_color_profile_modal.options.display_p3.value")
                   }),

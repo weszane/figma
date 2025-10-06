@@ -18,7 +18,7 @@ const LinkMetadataSchema = z.object({
  * Original class: $$a0
  */
 class LinkMetadataHandler {
-  private LinkMetadataSchemaValidator: any
+  LinkMetadataSchemaValidator: any
 
   constructor() {
     this.LinkMetadataSchemaValidator = createNoOpValidator() // Consider replacing with LinkMetadataSchema if validation is needed

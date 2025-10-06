@@ -1,65 +1,142 @@
-import { GAMEPAD_BUTTON_AXIS_OFFSET } from "../905/550169";
-import { browserCapabilities } from "../905/409121";
-export function $$a2(e) {
-  let t = [];
-  let r = browserCapabilities.isApple();
-  r && e.metaKey && t.push("\u2318");
-  !r && e.metaKey && t.push(e.ctrlKey ? "\u2318" : "Ctrl");
-  e.ctrlKey && t.push(r ? "\u2303" : "Ctrl");
-  e.shiftKey && t.push(r ? "\u21E7" : "Shift");
-  e.altKey && t.push(r ? "\u2325" : "Alt");
-  t.push($$c4[e.keyCode] || String.fromCharCode(e.keyCode));
-  return t.join(r ? "" : "+");
-}
-export function $$s3(e) {
-  if (!e) return null;
-  let t = {
-    metaKey: !1,
-    ctrlKey: !1,
-    shiftKey: !1,
-    altKey: !1,
-    keyCode: 0
-  };
-  for (let r of e) switch (r) {
-    case 16:
-      t.shiftKey = !0;
-      break;
-    case 17:
-      t.ctrlKey = !0;
-      break;
-    case 18:
-      t.altKey = !0;
-      break;
-    case 91:
-    case 92:
-    case 93:
-    case 224:
-      t.metaKey = !0;
-      break;
-    default:
-      t.keyCode = r;
+import { browserCapabilities } from "../905/409121"
+import { GAMEPAD_BUTTON_AXIS_OFFSET } from "../905/550169"
+
+/**
+ * Formats a keyboard event into a human-readable string representation
+ * @param event - The keyboard event to format
+ * @returns A string representation of the keyboard shortcut
+ */
+export function formatKeyboardShortcut(event: KeyboardEvent): string {
+  const parts: string[] = []
+  const isApplePlatform = browserCapabilities.isApple()
+
+  // Handle modifier keys
+  if (isApplePlatform && event.metaKey) {
+    parts.push("\u2318") // ⌘
   }
-  return t.keyCode ? t : null;
+  if (!isApplePlatform && event.metaKey) {
+    parts.push(event.ctrlKey ? "\u2318" : "Ctrl")
+  }
+  if (event.ctrlKey) {
+    parts.push(isApplePlatform ? "\u2303" : "Ctrl") // ⌃
+  }
+  if (event.shiftKey) {
+    parts.push(isApplePlatform ? "\u21E7" : "Shift") // ⇧
+  }
+  if (event.altKey) {
+    parts.push(isApplePlatform ? "\u2325" : "Alt") // ⌥
+  }
+
+  // Handle main key
+  const keyLabel = KEY_CODE_MAP[event.keyCode] || String.fromCharCode(event.keyCode)
+  parts.push(keyLabel)
+
+  return parts.join(isApplePlatform ? "" : "+")
 }
-export function $$o5(e) {
-  return [e.keyCode, e.shiftKey ? 16 : 0, e.ctrlKey ? 17 : 0, e.altKey ? 18 : 0, e.metaKey ? 91 : 0].filter(Boolean);
-}
-export function $$l0(e, t = !1) {
-  if (!e || e?.triggerDevice === "KEYBOARD") return null;
-  let r = u.get(e?.triggerDevice);
-  let i = e?.keyCodes?.[0] ?? 0;
-  let a = r?.get(i) ?? function (e) {
-    if (e >= GAMEPAD_BUTTON_AXIS_OFFSET) {
-      let t = Math.floor((e - GAMEPAD_BUTTON_AXIS_OFFSET) / 2);
-      return `Axis ${t} ${e % 2 == 0 ? "-" : "+"}`;
+
+/**
+ * Parses an array of key codes into a keyboard event-like object
+ * @param keyCodes - Array of key codes to parse
+ * @returns An object representing the keyboard state, or null if invalid
+ */
+export function parseKeyCodes(keyCodes: number[]): KeyboardEventState | null {
+  if (!keyCodes || keyCodes.length === 0) {
+    return null
+  }
+
+  const state: KeyboardEventState = {
+    metaKey: false,
+    ctrlKey: false,
+    shiftKey: false,
+    altKey: false,
+    keyCode: 0,
+  }
+
+  for (const code of keyCodes) {
+    switch (code) {
+      case 16:
+        state.shiftKey = true
+        break
+      case 17:
+        state.ctrlKey = true
+        break
+      case 18:
+        state.altKey = true
+        break
+      case 91:
+      case 92:
+      case 93:
+      case 224:
+        state.metaKey = true
+        break
+      default:
+        state.keyCode = code
     }
-    return `Button ${e}`;
-  }(i);
-  a.length <= 1 && !t && (a += " (Gamepad)");
-  return a;
+  }
+
+  return state.keyCode ? state : null
 }
-let $$d1 = new Set([16, 17, 18, 91, 92, 93, 224]);
-let $$c4 = {
+
+/**
+ * Converts a keyboard event to an array of key codes
+ * @param event - The keyboard event to convert
+ * @returns An array of key codes representing the event
+ */
+export function keyboardEventToKeyCodes(event: KeyboardEventState): number[] {
+  return [
+    event.keyCode,
+    event.shiftKey ? 16 : 0,
+    event.ctrlKey ? 17 : 0,
+    event.altKey ? 18 : 0,
+    event.metaKey ? 91 : 0,
+  ].filter(Boolean)
+}
+
+/**
+ * Gets the label for a gamepad button or axis
+ * @param input - The input configuration
+ * @param includeGamepadSuffix - Whether to include "(Gamepad)" suffix for short labels
+ * @returns The label for the gamepad input, or null if not applicable
+ */
+export function getGamepadInputLabel(
+  input: GamepadInput | null,
+  includeGamepadSuffix: boolean = false,
+): string | null {
+  if (!input || input?.triggerDevice === "KEYBOARD") {
+    return null
+  }
+
+  const deviceMap = GAMEPAD_BUTTON_MAP.get(input?.triggerDevice as GamepadType)
+  const keyCode = input?.keyCodes?.[0] ?? 0
+
+  let label = deviceMap?.get(keyCode) ?? getGenericGamepadLabel(keyCode)
+
+  // Add gamepad suffix for short labels
+  if (label.length <= 1 && !includeGamepadSuffix) {
+    label += " (Gamepad)"
+  }
+
+  return label
+}
+
+/**
+ * Generates a generic label for gamepad buttons or axes
+ * @param keyCode - The key code to generate a label for
+ * @returns A generic label for the gamepad input
+ */
+function getGenericGamepadLabel(keyCode: number): string {
+  if (keyCode >= GAMEPAD_BUTTON_AXIS_OFFSET) {
+    const axisIndex = Math.floor((keyCode - GAMEPAD_BUTTON_AXIS_OFFSET) / 2)
+    return `Axis ${axisIndex} ${keyCode % 2 === 0 ? "-" : "+"}`
+  }
+  return `Button ${keyCode}`
+}
+
+// Set of modifier key codes
+const MODIFIER_KEY_CODES = new Set([16, 17, 18, 91, 92, 93, 224])
+
+// Map of key codes to human-readable names
+const KEY_CODE_MAP: Record<number, string> = {
   3: "Break",
   8: "Backspace",
   9: "Tab",
@@ -76,10 +153,10 @@ let $$c4 = {
   34: "Page Down",
   35: "End",
   36: "Home",
-  37: "\u2190",
-  38: "\u2191",
-  39: "\u2192",
-  40: "\u2193",
+  37: "\u2190", // ←
+  38: "\u2191", // ↑
+  39: "\u2192", // →
+  40: "\u2193", // ↓
   41: "Select",
   42: "Print",
   43: "Execute",
@@ -101,7 +178,7 @@ let $$c4 = {
   59: "=",
   60: "<",
   61: "=",
-  63: "\xdf",
+  63: "\xDF",
   64: "@",
   65: "A",
   66: "B",
@@ -195,12 +272,118 @@ let $$c4 = {
   220: "\\",
   221: "]",
   222: "'",
-  223: "`"
-};
-let u = new Map([["SWITCH_PRO", new Map([[0, "B"], [1, "A"], [2, "Y"], [3, "X"], [4, "L"], [5, "R"], [6, "ZL"], [7, "ZR"], [8, "-"], [9, "+"], [10, "LStick Press"], [11, "RStick Press"], [12, "DPad Up"], [13, "DPad Down"], [14, "DPad Left"], [15, "DPad Right"], [16, "Home"], [17, "Capture"], [1e3, "LStick Left"], [1001, "LStick Right"], [1002, "LStick Up"], [1003, "LStick Down"], [1004, "RStick Left"], [1005, "RStick Right"], [1006, "RStick Up"], [1007, "RStick Down"]])], ["PS4", new Map([[0, "X"], [1, "\u25CB"], [2, "\u25A1"], [3, "\u25B3"], [4, "L1"], [5, "R1"], [6, "L2"], [7, "R2"], [8, "Share"], [9, "Options"], [10, "LStick Press"], [11, "RStick Press"], [12, "DPad Up"], [13, "DPad Down"], [14, "DPad Left"], [15, "DPad Right"], [16, "Home"], [17, "Touch Pad"], [1e3, "LStick Left"], [1001, "LStick Right"], [1002, "LStick Up"], [1003, "LStick Down"], [1004, "RStick Left"], [1005, "RStick Right"], [1006, "RStick Up"], [1007, "RStick Down"]])], ["XBOX_ONE", new Map([[0, "A"], [1, "B"], [2, "X"], [3, "Y"], [4, "LB"], [5, "RB"], [6, "LT"], [7, "RT"], [8, "View"], [9, "Menu"], [10, "LStick Press"], [11, "RStick Press"], [12, "DPad Up"], [13, "DPad Down"], [14, "DPad Left"], [15, "DPad Right"], [16, "Xbox Button"], [1e3, "LStick Left"], [1001, "LStick Right"], [1002, "LStick Up"], [1003, "LStick Down"], [1004, "RStick Left"], [1005, "RStick Right"], [1006, "RStick Up"], [1007, "RStick Down"]])]]);
-export const E8 = $$l0;
-export const RI = $$d1;
-export const U8 = $$a2;
-export const _i = $$s3;
-export const pu = $$c4;
-export const wb = $$o5;
+  223: "`",
+}
+
+// Map of gamepad button mappings for different platforms
+const GAMEPAD_BUTTON_MAP = new Map<GamepadType, Map<number, string>>([
+  ["SWITCH_PRO", new Map([
+    [0, "B"],
+    [1, "A"],
+    [2, "Y"],
+    [3, "X"],
+    [4, "L"],
+    [5, "R"],
+    [6, "ZL"],
+    [7, "ZR"],
+    [8, "-"],
+    [9, "+"],
+    [10, "LStick Press"],
+    [11, "RStick Press"],
+    [12, "DPad Up"],
+    [13, "DPad Down"],
+    [14, "DPad Left"],
+    [15, "DPad Right"],
+    [16, "Home"],
+    [17, "Capture"],
+    [1000, "LStick Left"],
+    [1001, "LStick Right"],
+    [1002, "LStick Up"],
+    [1003, "LStick Down"],
+    [1004, "RStick Left"],
+    [1005, "RStick Right"],
+    [1006, "RStick Up"],
+    [1007, "RStick Down"],
+  ])],
+  ["PS4", new Map([
+    [0, "X"],
+    [1, "\u25CB"],
+    [2, "\u25A1"],
+    [3, "\u25B3"],
+    [4, "L1"],
+    [5, "R1"],
+    [6, "L2"],
+    [7, "R2"],
+    [8, "Share"],
+    [9, "Options"],
+    [10, "LStick Press"],
+    [11, "RStick Press"],
+    [12, "DPad Up"],
+    [13, "DPad Down"],
+    [14, "DPad Left"],
+    [15, "DPad Right"],
+    [16, "Home"],
+    [17, "Touch Pad"],
+    [1000, "LStick Left"],
+    [1001, "LStick Right"],
+    [1002, "LStick Up"],
+    [1003, "LStick Down"],
+    [1004, "RStick Left"],
+    [1005, "RStick Right"],
+    [1006, "RStick Up"],
+    [1007, "RStick Down"],
+  ])],
+  ["XBOX_ONE", new Map([
+    [0, "A"],
+    [1, "B"],
+    [2, "X"],
+    [3, "Y"],
+    [4, "LB"],
+    [5, "RB"],
+    [6, "LT"],
+    [7, "RT"],
+    [8, "View"],
+    [9, "Menu"],
+    [10, "LStick Press"],
+    [11, "RStick Press"],
+    [12, "DPad Up"],
+    [13, "DPad Down"],
+    [14, "DPad Left"],
+    [15, "DPad Right"],
+    [16, "Xbox Button"],
+    [1000, "LStick Left"],
+    [1001, "LStick Right"],
+    [1002, "LStick Up"],
+    [1003, "LStick Down"],
+    [1004, "RStick Left"],
+    [1005, "RStick Right"],
+    [1006, "RStick Up"],
+    [1007, "RStick Down"],
+  ])],
+])
+
+// Type definitions
+export type GamepadType = "SWITCH_PRO" | "PS4" | "XBOX_ONE"
+
+export interface KeyboardEventState {
+  metaKey: boolean
+  ctrlKey: boolean
+  shiftKey: boolean
+  altKey: boolean
+  keyCode: number
+}
+
+interface GamepadInput {
+  triggerDevice: string | null
+  keyCodes?: number[]
+}
+
+// Export aliases for backward compatibility
+export const E8 = getGamepadInputLabel
+export const RI = MODIFIER_KEY_CODES
+export const U8 = formatKeyboardShortcut
+export const _i = parseKeyCodes
+export const pu = KEY_CODE_MAP
+export const wb = keyboardEventToKeyCodes
+
+

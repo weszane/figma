@@ -54,7 +54,7 @@ import { fullscreenOpen, setFileVersion, setNeedsUpgrade, setProgressBarState } 
 import { EightSeven } from '../figma_app/111825';
 import { setAutosaveStatus } from '../figma_app/139113';
 import { getGracePeriodStatus } from '../figma_app/141320';
-import { dK, x2, xt } from '../figma_app/149304';
+import { testWebGLSupport, isASTCCompressionSupported, WebGLTestResult } from '../figma_app/149304';
 import { getInitialOptions, isLocalDevOnCluster } from '../figma_app/169182';
 import { Xg } from '../figma_app/199513';
 import { ColorTokenManager } from '../figma_app/214121';
@@ -490,7 +490,7 @@ let $$ej0 = createOptimistThunk(async (e, {
   }
 });
 let eU = createOptimistThunk((e, t) => {
-  if (fullscreenValue.resetLoadedFigFile(), clearReportedErrors(), dK() !== xt.SUCCESS) throw new Error('webGLSupport() call failed but we\'re opening fullscreen. Don\'t dispatch fullscreen.open() directly - use selectView instead.');
+  if (fullscreenValue.resetLoadedFigFile(), clearReportedErrors(), testWebGLSupport() !== WebGLTestResult.SUCCESS) throw new Error('webGLSupport() call failed but we\'re opening fullscreen. Don\'t dispatch fullscreen.open() directly - use selectView instead.');
   let i = e.getState().user;
   let {
     file,
@@ -554,7 +554,7 @@ let eH = createOptimistThunk(async (e, {
     i ? setupAutosaveManager(t.key, i.id) : logInfo('Autosave', 'Not creating manager for logged out user');
     let d = isValidSessionLocalID(parseSessionLocalID(o)) ? o : '';
     let v = getBackgroundColorForTheme(getMPVisibleTheme(A.theme.themePreference));
-    BrowserInfo.isIpadNative && x2() && _$$v.getFeatureGate('figjam_ipad_compressed_textures') && (getImageManager().setShouldUseCompressedTextures(!0), sendWithRetry.post(`/file/${t.key}/generate_compressed_textures`).catch(e => {
+    BrowserInfo.isIpadNative && isASTCCompressionSupported() && _$$v.getFeatureGate('figjam_ipad_compressed_textures') && (getImageManager().setShouldUseCompressedTextures(!0), sendWithRetry.post(`/file/${t.key}/generate_compressed_textures`).catch(e => {
       logInfo('image', 'Failed to generate compressed textures', {
         fileKey: t.key,
         error: e

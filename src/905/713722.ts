@@ -22,7 +22,7 @@ interface IncrementTargets {
 }
 
 class HexColorManipulator extends ColorManipulator {
-  private options: ColorOptions
+  options: ColorOptions
 
   constructor(options: ColorOptions = {}) {
     super()

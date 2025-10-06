@@ -5,8 +5,8 @@ import { createNoOpValidator } from '../figma_app/181241'
  * AccountTypeRequestHandler - Handles account type request operations.
  */
 export class AccountTypeRequestHandler {
-  private approveRequestsSchemaValidator = createNoOpValidator();
-  private denyRequestsSchemaValidator = createNoOpValidator();
+  approveRequestsSchemaValidator = createNoOpValidator();
+  denyRequestsSchemaValidator = createNoOpValidator();
 
   /**
    * Approves account type requests.

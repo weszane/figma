@@ -78,13 +78,13 @@ export interface SpringPhysics {
   precision: number
 }
 
-export type EasingType = 
+export type EasingType =
   | 'EASE_IN' | 'EASE_OUT' | 'EASE_IN_AND_OUT' | 'LINEAR'
   | 'EASE_IN_BACK' | 'EASE_OUT_BACK' | 'EASE_IN_AND_OUT_BACK'
   | 'CUSTOM_CUBIC_BEZIER' | 'GENTLE' | 'QUICK' | 'BOUNCY' | 'SLOW'
   | 'CUSTOM_SPRING'
 
-export type TransitionType = 
+export type TransitionType =
   | 'DISSOLVE' | 'SMART_ANIMATE' | 'SCROLL_ANIMATE'
   | 'MOVE_IN' | 'MOVE_OUT' | 'PUSH' | 'SLIDE_IN' | 'SLIDE_OUT'
 
@@ -197,7 +197,7 @@ export const CSS_EASING_FUNCTIONS = {
  * Original: Easing functionality from 207214.ts and related files
  */
 export class EasingManager {
-  private customEasings: Map<string, (t: number) => number> = new Map()
+  customEasings: Map<string, (t: number) => number> = new Map()
 
   /**
    * Get easing function by type
@@ -242,21 +242,21 @@ export class EasingManager {
    */
   createCubicBezierFunction(controlPoints: CubicBezierControlPoints): (t: number) => number {
     const { x1, y1, x2, y2 } = controlPoints
-    
+
     return (t: number): number => {
       // Simplified cubic bezier approximation
       // For production, would use more sophisticated solver
       const cx = 3 * x1
       const bx = 3 * (x2 - x1) - cx
       const ax = 1 - cx - bx
-      
+
       const cy = 3 * y1
       const by = 3 * (y2 - y1) - cy
       const ay = 1 - cy - by
-      
+
       const sampleCurveX = (t: number) => ((ax * t + bx) * t + cx) * t
       const sampleCurveY = (t: number) => ((ay * t + by) * t + cy) * t
-      
+
       // Simple approximation - for production would use Newton-Raphson
       let x = t
       for (let i = 0; i < 8; i++) {
@@ -264,7 +264,7 @@ export class EasingManager {
         if (Math.abs(currentX) < 0.001) break
         x -= currentX / (3 * ax * x * x + 2 * bx * x + cx)
       }
-      
+
       return sampleCurveY(x)
     }
   }
@@ -320,7 +320,7 @@ export class EasingManager {
  * Original: Spring animation from 641273.ts and figma_app files
  */
 export class SpringAnimationManager {
-  private activeAnimations: Map<string, Animation> = new Map()
+  activeAnimations: Map<string, Animation> = new Map()
 
   /**
    * Create spring animation configuration
@@ -328,7 +328,7 @@ export class SpringAnimationManager {
    */
   createSpringConfig(springType: 'GENTLE' | 'QUICK' | 'BOUNCY' | 'SLOW' | 'CUSTOM_SPRING', customConfig?: SpringConfiguration): SpringPhysics {
     let config: SpringConfiguration
-    
+
     switch (springType) {
       case 'GENTLE':
         config = SPRING_PRESETS.gentle
@@ -377,8 +377,8 @@ export class SpringAnimationManager {
     const newVelocity = velocity + acceleration * deltaTime
     const newValue = current + newVelocity * deltaTime
 
-    const isDone = 
-      Math.abs(newVelocity) < spring.precision && 
+    const isDone =
+      Math.abs(newVelocity) < spring.precision &&
       Math.abs(displacement) < spring.precision
 
     return {
@@ -461,7 +461,7 @@ export class SpringAnimationManager {
  * Original: Keyframe management from 207214.ts and 961984.ts
  */
 export class KeyframeAnimationManager {
-  private animationClasses: Map<string, HTMLStyleElement> = new Map()
+  animationClasses: Map<string, HTMLStyleElement> = new Map()
 
   /**
    * Create keyframe animation
@@ -474,20 +474,20 @@ export class KeyframeAnimationManager {
   ): string {
     const keyframeRule = this.generateKeyframeRule(name, keyframes)
     const animationCSS = this.generateAnimationCSS(name, config)
-    
+
     const styleElement = document.createElement('style')
     styleElement.textContent = `${keyframeRule}\n${animationCSS}`
     document.head.appendChild(styleElement)
-    
+
     this.animationClasses.set(name, styleElement)
-    
+
     return `${name}-animation`
   }
 
   /**
    * Generate CSS keyframe rule
    */
-  private generateKeyframeRule(name: string, keyframes: KeyframeDefinition[]): string {
+  generateKeyframeRule(name: string, keyframes: KeyframeDefinition[]): string {
     const keyframeBlocks = keyframes.map(kf => {
       const percentage = Math.round(kf.offset * 100)
       const properties = Object.entries(kf.value)
@@ -502,7 +502,7 @@ export class KeyframeAnimationManager {
   /**
    * Generate CSS animation rule
    */
-  private generateAnimationCSS(name: string, config: AnimationConfig): string {
+  generateAnimationCSS(name: string, config: AnimationConfig): string {
     const easingManager = new EasingManager()
     const easing = easingManager.toCSSEasing(config.easing)
     const duration = `${config.duration}ms`
@@ -544,7 +544,7 @@ export class KeyframeAnimationManager {
   /**
    * Convert camelCase to kebab-case
    */
-  private kebabCase(str: string): string {
+  kebabCase(str: string): string {
     return str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
   }
 }
@@ -554,7 +554,7 @@ export class KeyframeAnimationManager {
  * Original: Transition management from 50897.ts and 961984.ts
  */
 export class TransitionManager {
-  private activeTransitions: Map<string, Animation> = new Map()
+  activeTransitions: Map<string, Animation> = new Map()
 
   /**
    * Create transition animation
@@ -568,7 +568,7 @@ export class TransitionManager {
   ): Animation {
     const keyframes = this.buildTransitionKeyframes(transitionConfig, fromState, toState)
     const easingManager = new EasingManager()
-    
+
     const animation = new Animation(
       new KeyframeEffect(element, keyframes, {
         duration: transitionConfig.duration * 1000, // Convert to milliseconds
@@ -584,7 +584,7 @@ export class TransitionManager {
    * Build keyframes for transition
    * Original: keyframe building from 961984.ts
    */
-  private buildTransitionKeyframes(
+  buildTransitionKeyframes(
     config: TransitionConfig,
     fromState: Record<string, any>,
     toState: Record<string, any>
@@ -595,21 +595,21 @@ export class TransitionManager {
           { ...fromState, opacity: 1 },
           { ...toState, opacity: 0 }
         ]
-      
+
       case 'SLIDE_IN':
       case 'SLIDE_OUT':
         return this.buildSlideKeyframes(config, fromState, toState)
-      
+
       case 'MOVE_IN':
       case 'MOVE_OUT':
         return this.buildMoveKeyframes(config, fromState, toState)
-      
+
       case 'PUSH':
         return this.buildPushKeyframes(config, fromState, toState)
-      
+
       case 'SMART_ANIMATE':
         return [fromState, toState]
-      
+
       default:
         return [fromState, toState]
     }
@@ -618,14 +618,14 @@ export class TransitionManager {
   /**
    * Build slide transition keyframes
    */
-  private buildSlideKeyframes(
+  buildSlideKeyframes(
     config: TransitionConfig,
     fromState: Record<string, any>,
     toState: Record<string, any>
   ): Keyframe[] {
     const direction = config.direction || 'LEFT'
     const isSlideIn = config.type === 'SLIDE_IN'
-    
+
     let transform = ''
     switch (direction) {
       case 'LEFT':
@@ -658,7 +658,7 @@ export class TransitionManager {
   /**
    * Build move transition keyframes
    */
-  private buildMoveKeyframes(
+  buildMoveKeyframes(
     config: TransitionConfig,
     fromState: Record<string, any>,
     toState: Record<string, any>
@@ -670,13 +670,13 @@ export class TransitionManager {
   /**
    * Build push transition keyframes
    */
-  private buildPushKeyframes(
+  buildPushKeyframes(
     config: TransitionConfig,
     fromState: Record<string, any>,
     toState: Record<string, any>
   ): Keyframe[] {
     const direction = config.direction || 'LEFT'
-    
+
     let transform = ''
     switch (direction) {
       case 'LEFT':
@@ -714,9 +714,9 @@ export class TransitionManager {
 
     const animation = this.createTransition(element, config, fromState, toState)
     this.activeTransitions.set(id, animation)
-    
+
     animation.play()
-    
+
     return animation.finished.then(() => {
       this.activeTransitions.delete(id)
     })
@@ -783,7 +783,7 @@ export class MotionInterpolationManager {
     easing?: (t: number) => number
   ): { r: number; g: number; b: number; a: number } {
     const easedT = easing ? easing(t) : t
-    
+
     return {
       r: this.lerp(startColor.r, endColor.r, easedT),
       g: this.lerp(startColor.g, endColor.g, easedT),
@@ -802,7 +802,7 @@ export class MotionInterpolationManager {
     easing?: (t: number) => number
   ): { x: number; y: number; scaleX: number; scaleY: number; rotation: number } {
     const easedT = easing ? easing(t) : t
-    
+
     return {
       x: this.lerp(startTransform.x, endTransform.x, easedT),
       y: this.lerp(startTransform.y, endTransform.y, easedT),
@@ -818,16 +818,16 @@ export class MotionInterpolationManager {
   interpolatePath(points: { x: number; y: number }[], t: number): { x: number; y: number } {
     if (points.length === 0) return { x: 0, y: 0 }
     if (points.length === 1) return points[0]
-    
+
     const scaledT = t * (points.length - 1)
     const index = Math.floor(scaledT)
     const localT = scaledT - index
-    
+
     if (index >= points.length - 1) return points[points.length - 1]
-    
+
     const start = points[index]
     const end = points[index + 1]
-    
+
     return {
       x: this.lerp(start.x, end.x, localT),
       y: this.lerp(start.y, end.y, localT)

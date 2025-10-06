@@ -7,9 +7,9 @@ import { addUnique, removeElement } from '../figma_app/656233'
  */
 export class EventEmitter {
   /** Name of the emitter instance. */
-  private _name: string
+  _name: string
   /** Map of event names to arrays of listener functions. */
-  private _listenersByEvent: Record<string, Fn[]>
+  _listenersByEvent: Record<string, Fn[]>
 
   /**
    * Creates an EventEmitter instance.

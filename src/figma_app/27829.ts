@@ -77,8 +77,8 @@ export function createSnapshotComponent(elementId: string, onClone?: (clone: HTM
  * @see u
  */
 class DependencyManager {
-  private deps: Record<string, Promise<void>> = {}
-  private onStatusChange: (status: string) => void
+  deps: Record<string, Promise<void>> = {}
+  onStatusChange: (status: string) => void
 
   constructor(onStatusChange: (status: string) => void) {
     this.onStatusChange = onStatusChange

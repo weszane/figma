@@ -61,8 +61,8 @@ interface AnalyticsErrorData extends WidgetContext {
  * Original class name: P (anonymous class)
  */
 class WidgetErrorTracker {
-  private readonly errorsReported: ReportedError[] = [];
-  private readonly numErrorsReported: Record<ErrorType, number> = {
+  readonly errorsReported: ReportedError[] = [];
+  readonly numErrorsReported: Record<ErrorType, number> = {
     validation: 0,
     invalid_prop: 0,
     applying_prop: 0,
@@ -70,7 +70,7 @@ class WidgetErrorTracker {
     scene_divergence: 0,
     widget_update_error: 0,
   };
-  private readonly scheduleFlushErrors: () => void;
+  readonly scheduleFlushErrors: () => void;
   constructor() {
     this.scheduleFlushErrors = debounce(() => {
       // Use setTimeout to add the delay that was originally hardcoded
@@ -86,15 +86,15 @@ class WidgetErrorTracker {
    * Checks if the current file is a playground file
    * Original: inline anonymous function
    */
-  private isInPlaygroundFile(): boolean {
+  isInPlaygroundFile(): boolean {
     if (!debugState || !debugState.getState()) {
       return false;
     }
     const selectedView = debugState.getState().selectedView;
     return Boolean(
       selectedView &&
-        "isPlaygroundFile" in selectedView &&
-        selectedView.isPlaygroundFile,
+      "isPlaygroundFile" in selectedView &&
+      selectedView.isPlaygroundFile,
     );
   }
 
@@ -106,7 +106,7 @@ class WidgetErrorTracker {
    * @param errors - Array of error instances
    * @param context - Widget context information
    */
-  private trackErrorInner(
+  trackErrorInner(
     errorType: ErrorType,
     errors: Error[],
     context: WidgetContext = {},
@@ -181,7 +181,7 @@ class WidgetErrorTracker {
    * Groups errors by widget node ID for the specified error type
    * Original method: part of sendSegmentErrors logic
    */
-  private groupErrorsByWidgetNode(
+  groupErrorsByWidgetNode(
     errorType: ErrorType,
   ): Record<string, ReportedError> {
     const groupedErrors: Record<string, ReportedError> = {};
@@ -206,7 +206,7 @@ class WidgetErrorTracker {
    * Formats error messages for analytics
    * Original: inline logic in sendSegmentErrors
    */
-  private formatErrorMessages(errors: Error[]): string {
+  formatErrorMessages(errors: Error[]): string {
     return errors
       .map((error) =>
         error
@@ -220,7 +220,7 @@ class WidgetErrorTracker {
    * Gets current file key from application state
    * Original: inline logic in sendSegmentErrors
    */
-  private getCurrentFileKey(): string | null {
+  getCurrentFileKey(): string | null {
     const state = debugState.getState();
     return state?.openFile?.key ?? null;
   }
@@ -231,7 +231,7 @@ class WidgetErrorTracker {
    *
    * @param errorType - Type of errors to send
    */
-  private sendSegmentErrors(errorType: ErrorType): void {
+  sendSegmentErrors(errorType: ErrorType): void {
     const groupedErrors = this.groupErrorsByWidgetNode(errorType);
     const currentFileKey = this.getCurrentFileKey();
     for (const [widgetNodeID, errorGroup] of Object.entries(groupedErrors)) {

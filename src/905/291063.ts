@@ -7,8 +7,8 @@
  * check completion status, and wait for all jobs to finish.
  */
 export class AsyncJobQueue {
-  private jobs: (() => Promise<void>)[] = []
-  private worker: Promise<void> | undefined
+  jobs: (() => Promise<void>)[] = []
+  worker: Promise<void> | undefined
 
   constructor() {
     this.jobs = []
@@ -61,7 +61,7 @@ export class AsyncJobQueue {
    * Processes jobs sequentially from the queue.
    * @returns A promise that resolves when all jobs are processed.
    */
-  private async start(): Promise<void> {
+  async start(): Promise<void> {
     let job = this.jobs.shift()
     while (job) {
       await job()

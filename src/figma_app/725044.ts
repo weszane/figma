@@ -39,43 +39,43 @@ export function getStickyWidgetEventName(type: StickyWidgetType): string {
  * Class responsible for tracking performance metrics, including frame rates, events, and analytics logging.
  */
 export class PerformanceTracker {
-  private _analyticsEventName: string;
-  private _processTimersForLogging: (timers: any[]) => any[];
-  private _timerDepth: number;
-  private _forwardToDatadog: boolean;
-  private _tsmerMetrics: any;
-  private _customLogMetricsCallbackHistogram: (metrics: any) => void;
-  private _isRecording: boolean;
-  private _isCanceled: boolean;
-  private _onFrameStartCallback: () => void;
-  private _isFirstLogForTab: boolean;
-  private _imagesLoadingState: 'loading' | 'loaded' | null;
-  private _ongoingSpotlight: boolean;
-  private _multiplayerUserCount: number;
-  private _numberOfRenderedCommentsWatermark: number;
-  private _lastRecordedNumberOfRenderedComments: number;
-  private _distributionByWorkName: Map<string, FPSDistribution>;
-  private _lastKnownFrameMs: number | null;
-  private _lastKnownMetricsFrameMs: number | null;
-  private _lastKnownFrameIndex: number | null;
-  private _lastLogTime: number | null;
-  private _scheduledLogAtMs: number | null;
-  private _lastRecordedHitCountByName: Record<string, number>;
-  private _lastRecordedDurationSinceLastFrame: Record<string, number>;
-  private _fileKey: string | null;
-  private _productType: string;
-  private _gpuDeviceInfo: any;
-  private _activeNamedEvents: Set<string>;
-  private _singleFrameNamedEvents: Set<string>;
-  private _eventTrackers: Map<string, any>;
-  private _contextRestoredCount: number;
-  private _maxRenderLayerCount: number;
-  private _maxRenderedTileBytesUsed: number;
-  private _numAnimationsFromCpp: number;
-  private _numAnimationsFromTs: number;
-  private _tileRenderersUsed: Set<string>;
-  private _currentTileRenderer: string;
-  private _slowFrameTracker: SlowFrameTracker;
+  _analyticsEventName: string;
+  _processTimersForLogging: (timers: any[]) => any[];
+  _timerDepth: number;
+  _forwardToDatadog: boolean;
+  _tsmerMetrics: any;
+  _customLogMetricsCallbackHistogram: (metrics: any) => void;
+  _isRecording: boolean;
+  _isCanceled: boolean;
+  _onFrameStartCallback: () => void;
+  _isFirstLogForTab: boolean;
+  _imagesLoadingState: 'loading' | 'loaded' | null;
+  _ongoingSpotlight: boolean;
+  _multiplayerUserCount: number;
+  _numberOfRenderedCommentsWatermark: number;
+  _lastRecordedNumberOfRenderedComments: number;
+  _distributionByWorkName: Map<string, FPSDistribution>;
+  _lastKnownFrameMs: number | null;
+  _lastKnownMetricsFrameMs: number | null;
+  _lastKnownFrameIndex: number | null;
+  _lastLogTime: number | null;
+  _scheduledLogAtMs: number | null;
+  _lastRecordedHitCountByName: Record<string, number>;
+  _lastRecordedDurationSinceLastFrame: Record<string, number>;
+  _fileKey: string | null;
+  _productType: string;
+  _gpuDeviceInfo: any;
+  _activeNamedEvents: Set<string>;
+  _singleFrameNamedEvents: Set<string>;
+  _eventTrackers: Map<string, any>;
+  _contextRestoredCount: number;
+  _maxRenderLayerCount: number;
+  _maxRenderedTileBytesUsed: number;
+  _numAnimationsFromCpp: number;
+  _numAnimationsFromTs: number;
+  _tileRenderersUsed: Set<string>;
+  _currentTileRenderer: string;
+  _slowFrameTracker: SlowFrameTracker;
 
   constructor(
     analyticsEventName: string,
@@ -83,7 +83,7 @@ export class PerformanceTracker {
     timerDepth: number = 1,
     forwardToDatadog: boolean = false,
     tsmerMetrics: any = null,
-    customLogMetricsCallbackHistogram: (metrics: any) => void = () => {},
+    customLogMetricsCallbackHistogram: (metrics: any) => void = () => { },
     enableSlowFrameTracking: boolean = false,
     onSlowFrameDetected: Fn,
     onFrameSampled: Fn
@@ -96,7 +96,7 @@ export class PerformanceTracker {
     this._customLogMetricsCallbackHistogram = customLogMetricsCallbackHistogram;
     this._isRecording = false;
     this._isCanceled = false;
-    this._onFrameStartCallback = () => {};
+    this._onFrameStartCallback = () => { };
     this._isFirstLogForTab = true;
     this._imagesLoadingState = null;
     this._ongoingSpotlight = false;
@@ -139,7 +139,7 @@ export class PerformanceTracker {
   /**
    * Schedules a log event to occur two minutes from now if not already scheduled.
    */
-  private scheduleLogTwoMinutesFromNow(): void {
+  scheduleLogTwoMinutesFromNow(): void {
     if (this._scheduledLogAtMs === null) {
       this._scheduledLogAtMs = performance.now() + 120000; // 2 minutes
     }
@@ -149,7 +149,7 @@ export class PerformanceTracker {
   /**
    * Handles document visibility changes, logging if necessary.
    */
-  private _onDocumentVisibilityChange(): void {
+  _onDocumentVisibilityChange(): void {
     this.handleDocumentVisibilityChange(document.visibilityState);
   }
 
@@ -217,7 +217,7 @@ export class PerformanceTracker {
    * Starts recording a named event.
    * @param eventName - The name of the event.
    */
-  private _startRecordingNamedEvent(eventName: string): void {
+  _startRecordingNamedEvent(eventName: string): void {
     this._activeNamedEvents.add(eventName);
   }
 
@@ -235,7 +235,7 @@ export class PerformanceTracker {
    * Stops recording a named event.
    * @param eventName - The name of the event.
    */
-  private _stopRecordingNamedEvent(eventName: string): void {
+  _stopRecordingNamedEvent(eventName: string): void {
     this._activeNamedEvents.delete(eventName);
   }
 
@@ -301,7 +301,7 @@ export class PerformanceTracker {
    * @param reason - The reason for logging.
    * @param async - Whether to log asynchronously.
    */
-  private _logToAnalytics(reason: string, async: boolean = false): void {
+  _logToAnalytics(reason: string, async: boolean = false): void {
     const metrics: Record<string, any> = {};
     metrics.schema = new FPSDistribution().schema();
     metrics.reason = reason;
@@ -352,7 +352,7 @@ export class PerformanceTracker {
    * Sends the log request to analytics.
    * @param metrics - The metrics to send.
    */
-  private _sendLogRequest(metrics: Record<string, any>): void {
+  _sendLogRequest(metrics: Record<string, any>): void {
     const options = {
       forwardToDatadog: this._forwardToDatadog,
       batchRequest: true,
@@ -368,7 +368,7 @@ export class PerformanceTracker {
    * @param path - Current path.
    * @returns Processed timer data.
    */
-  private _processTimerTree(timers: any[], depth: number, path: string[]): any[] {
+  _processTimerTree(timers: any[], depth: number, path: string[]): any[] {
     if (depth >= this._timerDepth) {
       return [];
     }
@@ -520,7 +520,7 @@ export class PerformanceTracker {
     return this._scheduledLogAtMs != null;
   }
 
-  private _shouldLogToAnalytics(): boolean {
+  _shouldLogToAnalytics(): boolean {
     return this._isRecording && this._scheduledLogAtMs != null;
   }
 
@@ -528,7 +528,7 @@ export class PerformanceTracker {
     return this._productType;
   }
 
-  private _resetLogState(): void {
+  _resetLogState(): void {
     this._lastKnownFrameMs = null;
     this._imagesLoadingState = null;
     this._ongoingSpotlight = false;
@@ -585,7 +585,7 @@ export class PerformanceTracker {
     return this._tsmerMetrics;
   }
 
-  private _getOrCreateDistribution(name: string): FPSDistribution {
+  _getOrCreateDistribution(name: string): FPSDistribution {
     let dist = this._distributionByWorkName.get(name);
     if (!dist) {
       dist = new FPSDistribution();

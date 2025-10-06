@@ -48,10 +48,10 @@ class AutoSuggestSceneGraph extends (ReduxSceneGraph ?? class { }) {
  * Original name: $$d0
  */
 export class AutoSuggestSessionManager {
-  private readonly sessionID: string
-  private readonly sceneMap: Map<string, AutoSuggestSceneGraph>
-  private readonly sessionType: string
-  private readonly abortController: AbortController
+  readonly sessionID: string
+  readonly sceneMap: Map<string, AutoSuggestSceneGraph>
+  readonly sessionType: string
+  readonly abortController: AbortController
 
   /**
    * Creates a new auto-suggest session
@@ -180,7 +180,7 @@ export class AutoSuggestSessionManager {
    * Validates the session state
    * @throws {InvalidSessionError} When session is aborted or invalid
    */
-  private validation(): void {
+  validation(): void {
     if (this.abortController.signal.aborted) {
       throw new InvalidSessionError()
     }
@@ -193,7 +193,7 @@ export class AutoSuggestSessionManager {
    * Validates that fullscreen is available
    * @throws {Error} When fullscreen is not initialized
    */
-  private validateFullScreenAvailable(): void {
+  validateFullScreenAvailable(): void {
     if (!Fullscreen) {
       throw new Error('Fullscreen is not initialized')
     }
@@ -203,7 +203,7 @@ export class AutoSuggestSessionManager {
    * Validates that the scene is available
    * @throws {InvalidSessionError} When session ID mismatch occurs
    */
-  private validateSceneAvailable(): void {
+  validateSceneAvailable(): void {
     const currentSessionID = Fullscreen?.getAutoSuggestSessionID(this.sessionType)
     if (!currentSessionID || currentSessionID !== this.sessionID) {
       this.abortController.abort()

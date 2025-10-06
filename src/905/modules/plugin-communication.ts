@@ -67,10 +67,10 @@ export interface FetchResponse {
  * Original: message handling logic from 472793.ts
  */
 export class PluginMessageHandler {
-  private eventHandlers: Map<string, Array<(...args: any[]) => void>> = new Map()
-  private onMessageCallback?: (...args: any[]) => void
-  private pluginID?: string
-  private vm: any
+  eventHandlers: Map<string, Array<(...args: any[]) => void>> = new Map()
+  onMessageCallback?: (...args: any[]) => void
+  pluginID?: string
+  vm: any
 
   constructor(pluginID?: string, vm?: any) {
     this.pluginID = pluginID
@@ -126,7 +126,7 @@ export class PluginMessageHandler {
    * Validate plugin message
    * Original: plugin ID validation logic from 472793.ts
    */
-  private validatePluginMessage(data: any, origin: string): boolean {
+  validatePluginMessage(data: any, origin: string): boolean {
     // Handle origin normalization
     let normalizedOrigin = origin
     if (/^https?:\/\/%7b[a-f0-9.-]+%7d$/.test(normalizedOrigin)) {
@@ -135,7 +135,7 @@ export class PluginMessageHandler {
 
     if (data.pluginId !== '*' && ('pluginId' in data || origin !== 'null')) {
       if (this.pluginID && (
-        data.pluginId === this.pluginID || 
+        data.pluginId === this.pluginID ||
         (Array.isArray(data.pluginId) && data.pluginId.includes(this.pluginID))
       )) {
         return true
@@ -155,9 +155,9 @@ export class PluginMessageHandler {
    * Process plugin message
    * Original: pluginMessage handling from 472793.ts
    */
-  private processPluginMessage(data: UIMessage, origin: string): void {
+  processPluginMessage(data: UIMessage, origin: string): void {
     const messageHandlers = this.eventHandlers.get('message')
-    
+
     if ((!messageHandlers || !messageHandlers.length) && !this.onMessageCallback) {
       console.warn('Message from UI to plugin dropped due to no message handler installed')
       return
@@ -169,7 +169,7 @@ export class PluginMessageHandler {
       const args = [wrappedMessage, wrappedOrigin]
 
       this.fireEventSync('message', args)
-      
+
       if (this.onMessageCallback) {
         this.vm.callFunction(this.onMessageCallback, this.vm.undefined, ...args)
       }
@@ -180,10 +180,10 @@ export class PluginMessageHandler {
    * Process plugin drop events
    * Original: pluginDrop handling from 472793.ts
    */
-  private processPluginDrop(data: any): void {
+  processPluginDrop(data: any): void {
     // Validate drop data structure
     const dropData = data.pluginDrop
-    
+
     if (!dropData.items && !dropData.files) {
       console.warn('Invalid drop data: must have items or files')
       return
@@ -202,7 +202,7 @@ export class PluginMessageHandler {
    * Fire synchronous event
    * Original: fireEventSync pattern
    */
-  private fireEventSync(eventType: string, args: any[]): void {
+  fireEventSync(eventType: string, args: any[]): void {
     const handlers = this.eventHandlers.get(eventType)
     if (handlers) {
       handlers.forEach(handler => {
@@ -246,12 +246,12 @@ export class PluginMessageHandler {
   }
 
   // Stub methods that would be implemented with actual dependencies
-  private triggerPluginAction(action: string, data: any): void {
+  triggerPluginAction(action: string, data: any): void {
     // Would integrate with plugin action system
     console.warn('Plugin action triggered:', action, data)
   }
 
-  private postMessageToIframe(message: any, options: any): void {
+  postMessageToIframe(message: any, options: any): void {
     // Would integrate with iframe messaging system
     console.warn('Post message to iframe:', message, options)
   }
@@ -262,13 +262,13 @@ export class PluginMessageHandler {
  * Original: iframe creation and management from 911344.ts, 197553.ts
  */
 export class IframeManager {
-  private outerIframeElement?: HTMLIFrameElement
-  private innerIframeElement?: HTMLIFrameElement
-  private networkIframeElement?: HTMLIFrameElement
-  private toplevelWindowMessageChannel?: MessageChannel
-  private messageEventListener?: (event: MessageEvent) => void
-  private loaded: Promise<void>
-  private pluginId?: string
+  outerIframeElement?: HTMLIFrameElement
+  innerIframeElement?: HTMLIFrameElement
+  networkIframeElement?: HTMLIFrameElement
+  toplevelWindowMessageChannel?: MessageChannel
+  messageEventListener?: (event: MessageEvent) => void
+  loaded: Promise<void>
+  pluginId?: string
 
   constructor(outerIframe?: HTMLIFrameElement, pluginId?: string) {
     this.outerIframeElement = outerIframe
@@ -296,23 +296,23 @@ export class IframeManager {
     }
   ): HTMLIFrameElement {
     const iframe = document.createElement('iframe')
-    
+
     // Set iframe properties
     iframe.name = options.name
     iframe.id = 'plugin-iframe'
-    
+
     // Set permissions
     iframe.allow = this.getPermissions(options)
-    
+
     // Set content
     iframe.src = this.getLoaderShimSrc(htmlContent, options.isLocal)
-    
+
     // Apply styling
     this.setIframeStyle(iframe, true)
-    
+
     // Set up message handling
     this.setupMessageHandling(iframe, messageHandler)
-    
+
     this.innerIframeElement = iframe
     return iframe
   }
@@ -321,19 +321,19 @@ export class IframeManager {
    * Get iframe permissions string
    * Original: getPermissions from 911344.ts
    */
-  private getPermissions(options: {
+  getPermissions(options: {
     cameraAccess: boolean
     microphoneAccess: boolean
     displayCaptureAccess: boolean
     clipboardWriteAccess: boolean
   }): string {
     const permissions: string[] = []
-    
+
     if (options.cameraAccess) permissions.push('camera')
     if (options.microphoneAccess) permissions.push('microphone')
     if (options.displayCaptureAccess) permissions.push('display-capture')
     if (options.clipboardWriteAccess) permissions.push('clipboard-write')
-    
+
     return permissions.join('; ')
   }
 
@@ -341,9 +341,9 @@ export class IframeManager {
    * Generate loader shim source
    * Original: getLoaderShimSrc from 911344.ts
    */
-  private getLoaderShimSrc(htmlContent: string, isLocal: boolean): string {
+  getLoaderShimSrc(htmlContent: string, isLocal: boolean): string {
     const securityPolicy = this.getSecurityPolicyViolationDevLogging(isLocal)
-    
+
     const shimScript = `
       onmessage = (event) => {
         if (event.source === parent && event.origin === "${window.location.origin}") {
@@ -351,7 +351,7 @@ export class IframeManager {
         }
       }
     `
-    
+
     return `data:text/html;base64,${btoa(`<script>${shimScript}</script>`)}`
   }
 
@@ -359,9 +359,9 @@ export class IframeManager {
    * Get security policy violation logging
    * Original: getSecurityPolicyViolationDevLogging from 911344.ts
    */
-  private getSecurityPolicyViolationDevLogging(isLocal: boolean): string {
+  getSecurityPolicyViolationDevLogging(isLocal: boolean): string {
     if (!isLocal) return ''
-    
+
     return `
       document.addEventListener('securitypolicyviolation', (event) => {
         console.warn('Security Policy Violation:', {
@@ -377,14 +377,14 @@ export class IframeManager {
    * Set iframe styling
    * Original: setIframeStyle from 911344.ts
    */
-  private setIframeStyle(iframe: HTMLIFrameElement, includeThemeColors: boolean): void {
+  setIframeStyle(iframe: HTMLIFrameElement, includeThemeColors: boolean): void {
     iframe.style.display = 'block'
     iframe.style.margin = '0'
     iframe.style.border = 'none'
     iframe.style.padding = '0'
     iframe.style.width = '100%'
     iframe.style.height = '100%'
-    
+
     if (!includeThemeColors) {
       iframe.style.backgroundColor = 'white'
     }
@@ -394,15 +394,15 @@ export class IframeManager {
    * Setup message handling
    * Original: message channel setup from 911344.ts
    */
-  private setupMessageHandling(iframe: HTMLIFrameElement, messageHandler: (event: MessageEvent) => void): void {
+  setupMessageHandling(iframe: HTMLIFrameElement, messageHandler: (event: MessageEvent) => void): void {
     this.messageEventListener = (event: MessageEvent) => {
       if (!event.source || event.source !== iframe.contentWindow) return
-      
+
       const wrappedEvent = {
         data: event.data,
         origin: event.origin
       }
-      
+
       this.toplevelWindowMessageChannel?.port1.postMessage(wrappedEvent)
     }
 
@@ -422,7 +422,7 @@ export class IframeManager {
    */
   async handleThemeUpdate(): Promise<void> {
     await this.loaded
-    
+
     if (this.innerIframeElement?.contentWindow) {
       this.innerIframeElement.contentWindow.postMessage({
         figmaMessage: {
@@ -444,7 +444,7 @@ export class IframeManager {
     if (!options.skipQueue) {
       await this.loaded
     }
-    
+
     if (this.innerIframeElement?.contentWindow) {
       this.innerIframeElement.contentWindow.postMessage(message, options.origin)
     }
@@ -476,7 +476,7 @@ export class IframeManager {
   }
 
   // Private helper methods
-  private getThemeVariables(): any {
+  getThemeVariables(): any {
     // Would return actual theme variables
     return {}
   }
@@ -487,9 +487,9 @@ export class IframeManager {
  * Original: service worker management from 811033.ts
  */
 export class ServiceWorkerManager {
-  private messaging: any
-  private vapidKey: string
-  private onMessageUnsubscribe?: () => void
+  messaging: any
+  vapidKey: string
+  onMessageUnsubscribe?: () => void
 
   constructor(messaging: any, vapidKey: string) {
     this.messaging = messaging
@@ -522,7 +522,7 @@ export class ServiceWorkerManager {
    */
   async getServiceWorkerRegistration(): Promise<ServiceWorkerRegistration | null> {
     if (!navigator.serviceWorker) return null
-    
+
     try {
       const registration = await navigator.serviceWorker.getRegistration()
       return registration || null
@@ -595,7 +595,7 @@ export class ServiceWorkerManager {
    * Send Firebase token to server
    * Original: sendFirebaseTokenToServer from 811033.ts
    */
-  private sendFirebaseTokenToServer(): void {
+  sendFirebaseTokenToServer(): void {
     // Would send token to server
     console.warn('Firebase token sent to server')
   }
@@ -604,7 +604,7 @@ export class ServiceWorkerManager {
    * Register service worker when permission granted
    * Original: registerServiceWorkerWhenPermissionGranted from 811033.ts
    */
-  private async registerServiceWorkerWhenPermissionGranted(): Promise<void> {
+  async registerServiceWorkerWhenPermissionGranted(): Promise<void> {
     await this.registerServiceWorker()
     this.sendFirebaseTokenToServer()
   }
@@ -615,9 +615,9 @@ export class ServiceWorkerManager {
  * Original: worker management from 242083.ts, 161470.ts, 177177.ts
  */
 export class WorkerThreadManager {
-  private worker?: Worker
-  private messageHandlers: Map<string, (data: any) => void> = new Map()
-  private workerState: 'uninitialized' | 'spawned' | 'initialized' | 'error' = 'uninitialized'
+  worker?: Worker
+  messageHandlers: Map<string, (data: any) => void> = new Map()
+  workerState: 'uninitialized' | 'spawned' | 'initialized' | 'error' = 'uninitialized'
 
   /**
    * Spawn worker thread
@@ -631,7 +631,7 @@ export class WorkerThreadManager {
 
     try {
       this.worker = new Worker(workerURL)
-      
+
       if (!this.worker) {
         console.error('Failed to spawn worker')
         this.processStateChange('error')
@@ -640,7 +640,7 @@ export class WorkerThreadManager {
 
       this.worker.addEventListener('error', this.onError.bind(this))
       this.worker.addEventListener('message', this.onMessage.bind(this))
-      
+
       this.processStateChange('spawn')
       return true
     } catch (error) {
@@ -693,9 +693,9 @@ export class WorkerThreadManager {
    * Handle worker messages
    * Original: onMessage from 242083.ts
    */
-  private onMessage(event: MessageEvent): void {
+  onMessage(event: MessageEvent): void {
     const { type, id } = event.data
-    
+
     if (id) {
       this.processStateChange(id)
     }
@@ -710,7 +710,7 @@ export class WorkerThreadManager {
    * Handle worker errors
    * Original: onError from 242083.ts
    */
-  private onError(error: ErrorEvent): void {
+  onError(error: ErrorEvent): void {
     console.error('Worker error:', error)
     error.preventDefault()
     this.processStateChange('error')
@@ -720,7 +720,7 @@ export class WorkerThreadManager {
    * Process state machine events
    * Original: processStateMachineEvent from 242083.ts
    */
-  private processStateChange(event: string): void {
+  processStateChange(event: string): void {
     switch (event) {
       case 'spawn':
         this.workerState = 'spawned'
@@ -766,10 +766,10 @@ export class WorkerThreadManager {
  * Original: network fetch through iframe from 197553.ts
  */
 export class NetworkFetchManager {
-  private pluginID: string
-  private nextMessageID = 0
-  private messageCallbacks: Record<string, (response: any) => void> = {}
-  private iframeManager: IframeManager
+  pluginID: string
+  nextMessageID = 0
+  messageCallbacks: Record<string, (response: any) => void> = {}
+  iframeManager: IframeManager
 
   constructor(pluginID: string, iframeManager: IframeManager) {
     this.pluginID = pluginID
@@ -790,10 +790,10 @@ export class NetworkFetchManager {
    * Post message and wait for response
    * Original: postMessageAndWait from 197553.ts
    */
-  private postMessageAndWait(message: any): Promise<any> {
+  postMessageAndWait(message: any): Promise<any> {
     return new Promise((resolve, reject) => {
       message.id = this.nextMessageID++
-      
+
       this.messageCallbacks[message.id] = (response: any) => {
         if (response.data) {
           resolve(response.data)

@@ -132,7 +132,7 @@ abstract class BaseRecordableComponent extends RecordingPureComponent<BaseRecord
   /**
    * Bind event handlers to props (originally complex conditional logic)
    */
-  private bindEventHandlers(props: any): void {
+  bindEventHandlers(props: any): void {
     const eventBindings = [
       { prop: 'onClick', handler: this.onClick },
       { prop: 'onDoubleClick', handler: this.onDoubleClick },
@@ -161,7 +161,7 @@ abstract class BaseRecordableComponent extends RecordingPureComponent<BaseRecord
   /**
    * Add data attributes to props
    */
-  private addDataAttributes(props: any, dataTestId?: string, dataOnboardingKey?: string): void {
+  addDataAttributes(props: any, dataTestId?: string, dataOnboardingKey?: string): void {
     if (dataTestId) {
       props['data-testid'] = dataTestId
     }

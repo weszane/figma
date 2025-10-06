@@ -5,8 +5,8 @@ import { memoizeFn } from "../905/707098"
  * Original name: $$r0
  */
 export class AutoLayoutPropertyReader {
-  private _cachedProperties: Record<string, any>
-  private _EXPENSIVE_TO_READ_node: any
+  _cachedProperties: Record<string, any>
+  _EXPENSIVE_TO_READ_node: any
 
   constructor(node: any) {
     this._cachedProperties = {}
@@ -19,7 +19,7 @@ export class AutoLayoutPropertyReader {
    * @param getter - Function to get the value from node
    * @returns The cached or computed value
    */
-  private readValue<T>(key: string, getter: (node: any) => T): T {
+  readValue<T>(key: string, getter: (node: any) => T): T {
     return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
 
@@ -30,7 +30,7 @@ export class AutoLayoutPropertyReader {
    * @param inferredGetter - Function to get value from inferred auto-layout
    * @returns The value from either direct or inferred source
    */
-  private readAutoLayoutValue<T>(
+  readAutoLayoutValue<T>(
     key: string,
     directGetter: (node: any) => T,
     inferredGetter: (node: any) => T,

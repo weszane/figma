@@ -19,17 +19,17 @@ export const SKIP_LOGGING_CONTEXT_TYPES = new Set([
  * Tracks funnel events, timers, and debug information
  */
 export class AutoSuggestAnalyticsLogger {
-  private analyticsData: typeof DEFAULT_SEARCH_CONTEXT
-  private config: {
+  analyticsData: typeof DEFAULT_SEARCH_CONTEXT
+  config: {
     logFunnelEvents?: boolean
     logTimers?: boolean
     logDebugInfo?: boolean
   }
 
-  private timers: number[]
-  private debugInfo: Record<string, unknown>
-  private entryPoint: ContextType
-  private shouldLog: boolean
+  timers: number[]
+  debugInfo: Record<string, unknown>
+  entryPoint: ContextType
+  shouldLog: boolean
 
   constructor({
     analyticsData = DEFAULT_SEARCH_CONTEXT,

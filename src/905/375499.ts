@@ -4,7 +4,7 @@ import { createNoOpValidator, defaultValidator } from '../figma_app/181241'
  * Original class: $$r0
  */
 export class FeedCommentAttachmentService {
-  private feedCommentAttachmentSchemaValidator = createNoOpValidator()
+  feedCommentAttachmentSchemaValidator = createNoOpValidator()
 
   /**
    * Posts a new feed comment attachment.

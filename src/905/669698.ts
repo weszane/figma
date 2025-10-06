@@ -169,7 +169,7 @@ export class FrozenConfigManager {
   static getDynamicConfigBoolean(
     key: string,
     prop: any,
-    defaultValue: boolean,
+    defaultValue: any,
     source: string = this.DefaultSourceLoggingString,
   ): boolean {
     this.populateDynamicConfig(key, source)
@@ -184,7 +184,7 @@ export class FrozenConfigManager {
   static getExperimentBoolean(
     key: string,
     prop: any,
-    defaultValue: boolean,
+    defaultValue: any,
     source: string = this.DefaultSourceLoggingString,
   ): boolean {
     this.populateExperimentConfig(key, source)
@@ -210,7 +210,7 @@ export class FrozenConfigManager {
   static getDynamicConfigNumber(
     key: string,
     prop: any,
-    defaultValue: number,
+    defaultValue: any,
     source: string = this.DefaultSourceLoggingString,
   ): number {
     this.populateDynamicConfig(key, source)
@@ -225,7 +225,7 @@ export class FrozenConfigManager {
   static getExperimentNumber(
     key: string,
     prop: any,
-    defaultValue: number,
+    defaultValue: any,
     source: string = this.DefaultSourceLoggingString,
   ): number {
     this.populateExperimentConfig(key, source)

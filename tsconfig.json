@@ -12,7 +12,8 @@
     "moduleResolution": "bundler",
     "typeRoots": [
       "./node_modules/@types",
-      "./node_modules/@figma"
+      "./node_modules/@figma",
+      "./node_modules/@webgpu"
     ],
     "allowJs": true,
     "checkJs": false,

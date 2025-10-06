@@ -139,7 +139,7 @@ import { ox, bL as _$$bL2 } from "../905/163832";
 import { useDebounce } from 'use-debounce';
 import { k9 } from "../905/182598";
 import { useWindowDimensions } from "../905/745972";
-import { c as _$$c } from "../905/210851";
+import { selectFileInfo } from "../905/210851";
 import { n as _$$n } from "../905/971006";
 import { KeyboardReceiver, KeyboardEventWrapper } from "../905/826900";
 var R = k;
@@ -3467,7 +3467,7 @@ function i2({
   let [b, v] = useState(!1);
   let [I, E] = useLocalStorageSync("variables-modal-maximized", !1);
   !function (e) {
-    let t = useSelector(_$$c);
+    let t = useSelector(selectFileInfo);
     let [i, n] = useState(!1);
     useEffect(() => {
       i || (n(!0), trackEventAnalytics("ds_variables_modal_opened", {

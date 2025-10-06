@@ -39,7 +39,7 @@ const FileMetadataSchemaValidator = createMetaValidator(
  * FileMetadataService handles fetching and validating file metadata
  */
 class FileMetadataService {
-  private validator = FileMetadataSchemaValidator
+  validator = FileMetadataSchemaValidator
 
   /**
    * Fetches file metadata for a given file key

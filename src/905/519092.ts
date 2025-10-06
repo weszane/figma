@@ -54,7 +54,7 @@ export interface HeaderModalProps {
 
 export class HeaderModal extends Component<HeaderModalProps> {
   static displayName = 'HeaderModal'
-  private backgroundRef: React.RefObject<HTMLDivElement>
+  backgroundRef: React.RefObject<HTMLDivElement>
 
   constructor(props: HeaderModalProps) {
     super(props)
@@ -70,7 +70,7 @@ export class HeaderModal extends Component<HeaderModalProps> {
     }
   }
 
-  private handleBackgroundMouseDown = (event: React.MouseEvent): void => {
+  handleBackgroundMouseDown = (event: React.MouseEvent): void => {
     if (!this.props.disableClickOutsideToHide && this.props.onClose) {
       this.props.onClose(event)
     }
@@ -79,11 +79,11 @@ export class HeaderModal extends Component<HeaderModalProps> {
     }
   }
 
-  private handleModalMouseDown = (event: React.MouseEvent): void => {
+  handleModalMouseDown = (event: React.MouseEvent): void => {
     event.stopPropagation()
   }
 
-  private handleKeyDown = (event: React.KeyboardEvent): void => {
+  handleKeyDown = (event: React.KeyboardEvent): void => {
     event.stopPropagation()
 
     if (event.keyCode === KeyCodes.ESCAPE
@@ -170,17 +170,17 @@ export class HeaderModal extends Component<HeaderModalProps> {
 
           return hasBottomSection
             ? jsxs(Fragment, {
-                children: [
-                  jsx('div', {
-                    className: SM,
-                    children: headerModalContainer,
-                  }),
-                  bottomSection,
-                ],
-              })
+              children: [
+                jsx('div', {
+                  className: SM,
+                  children: headerModalContainer,
+                }),
+                bottomSection,
+              ],
+            })
             : jsx(Fragment, {
-                children: headerModalContainer,
-              })
+              children: headerModalContainer,
+            })
         })(),
       }),
     })
@@ -258,31 +258,31 @@ export function ConfirmationModal(props: ConfirmationModalProps) {
     headerClassName: props.useRedesign ? classNames(cssBuilderInstance.textBodyLargeStrong.pb4.pt4.$, props.headerClassName) : undefined,
     children: props.useRedesign
       ? jsxs('div', {
-          className: cssBuilderInstance.flex.flexColumn.$,
-          children: [
-            jsx('div', {
-              className: cssBuilderInstance.if(!props.fullWidthContent, cssBuilderInstance.p16).flex.flexColumn.$,
-              children: props.children,
-            }),
-            jsx('div', {
-              className: cssBuilderInstance.flex.justifyEnd.p16.bt1.colorBorder.bSolid.$,
-              children: buttons,
-            }),
-          ],
-        })
+        className: cssBuilderInstance.flex.flexColumn.$,
+        children: [
+          jsx('div', {
+            className: cssBuilderInstance.if(!props.fullWidthContent, cssBuilderInstance.p16).flex.flexColumn.$,
+            children: props.children,
+          }),
+          jsx('div', {
+            className: cssBuilderInstance.flex.justifyEnd.p16.bt1.colorBorder.bSolid.$,
+            children: buttons,
+          }),
+        ],
+      })
       : jsxs('div', {
-          className: UR,
-          children: [
-            jsx('div', {
-              className: xR,
-              children: props.children,
-            }),
-            jsx('div', {
-              className: qG,
-              children: buttons,
-            }),
-          ],
-        }),
+        className: UR,
+        children: [
+          jsx('div', {
+            className: xR,
+            children: props.children,
+          }),
+          jsx('div', {
+            className: qG,
+            children: buttons,
+          }),
+        ],
+      }),
   })
 }
 
@@ -368,26 +368,26 @@ export class HeaderModalContainer extends Component<HeaderModalContainerProps> {
             }),
             typeof this.props.title === 'function'
               ? this.props.title(closeButton, {
-                  titleId: this.props.titleId,
-                })
+                titleId: this.props.titleId,
+              })
               : jsxs(Fragment, {
-                  children: [
-                    typeof this.props.title === 'string'
-                      ? jsx(TitleElement, {
-                          title: this.props.title,
-                          titleId: this.props.titleId,
-                          truncateTitleText: this.props.truncateTitleText,
-                        })
-                      : this.props.title,
-                    jsxs('div', {
-                      className: hS,
-                      children: [
-                        this.props.customButton,
-                        !this.props.isCloseHidden && closeButton,
-                      ],
-                    }),
-                  ],
-                }),
+                children: [
+                  typeof this.props.title === 'string'
+                    ? jsx(TitleElement, {
+                      title: this.props.title,
+                      titleId: this.props.titleId,
+                      truncateTitleText: this.props.truncateTitleText,
+                    })
+                    : this.props.title,
+                  jsxs('div', {
+                    className: hS,
+                    children: [
+                      this.props.customButton,
+                      !this.props.isCloseHidden && closeButton,
+                    ],
+                  }),
+                ],
+              }),
           ],
         }),
         this.props.children,

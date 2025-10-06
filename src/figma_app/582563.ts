@@ -7,7 +7,7 @@ import { getInitialOptions } from '../figma_app/169182'
  */
 class SafeModeOptions {
   /** Stores the forced render time value (ms) */
-  private static forcedRenderTimeMsValue: number | null = null
+  static forcedRenderTimeMsValue: number | null = null
 
   /**
    * Initializes SafeModeOptions by checking user email and URL params.
@@ -39,7 +39,7 @@ SafeModeOptions.initialize()
  * Provides forced render time value, defaulting to -1 if unset.
  */
 class SafeModeRenderController {
-  constructor(private safeModeOptions: SafeModeOptions) {}
+  constructor(safeModeOptions: SafeModeOptions) { }
 
   /**
    * Returns the forced render time value (ms), or -1 if not set.

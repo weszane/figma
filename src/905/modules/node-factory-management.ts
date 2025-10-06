@@ -99,15 +99,15 @@ export class AdvancedVectorDataProcessor {
           windingRule: region.windingRule,
           loops: region.loops,
         }
-        
+
         // Process fill style ID
         processedRegion.fillStyleId = region.fillStyleRef ? _$$nM(region.fillStyleRef) : ''
-        
+
         // Process fill paints
         if (region.fillPaints) {
           processedRegion.fills = e1(region.fillPaints.data)
         }
-        
+
         return processedRegion
       }),
     }
@@ -124,8 +124,8 @@ export class AdvancedNodeError extends Error {
 
 // Advanced Node Validation and Error Handling
 export class AdvancedNodeValidator {
-  private config: NodeValidationConfig
-  private errorHandler: (error: Error, context?: ErrorContext) => void
+  config: NodeValidationConfig
+  errorHandler: (error: Error, context?: ErrorContext) => void
 
   constructor(config: NodeValidationConfig, errorHandler?: (error: Error, context?: ErrorContext) => void) {
     this.config = config
@@ -136,15 +136,15 @@ export class AdvancedNodeValidator {
   validateImmutableFrame(e: any): any {
     if (!e.isInImmutableFrame)
       throw new Error('Expected node to be an ImmutableFrame sublayer')
-    
+
     let currentNode = e
     while (currentNode && !MT(currentNode.type)) {
       currentNode = currentNode.parentNode
     }
-    
+
     if (!currentNode || !MT(currentNode.type))
       throw new Error('Failed to find containing Immutable frame')
-    
+
     return currentNode
   }
 
@@ -204,14 +204,14 @@ export class AdvancedNodeValidator {
     return true
   }
 
-  private defaultErrorHandler(error: Error, context?: ErrorContext): void {
+  defaultErrorHandler(error: Error, context?: ErrorContext): void {
     console.error('Node validation error:', error.message, context)
   }
 }
 
 // Advanced Widget and Component Processing
 export class AdvancedWidgetProcessor {
-  private validationConfig: NodeValidationConfig
+  validationConfig: NodeValidationConfig
 
   constructor(config?: NodeValidationConfig) {
     this.validationConfig = config || {
@@ -243,7 +243,7 @@ export class AdvancedWidgetProcessor {
     }
   }
 
-  private createSyncedObject(params: any): any {
+  createSyncedObject(params: any): any {
     // This would use the actual _$$u function in real implementation
     return {
       vm: params.vm,
@@ -253,7 +253,7 @@ export class AdvancedWidgetProcessor {
     }
   }
 
-  private createZodSchema(type: string, inner?: any): any {
+  createZodSchema(type: string, inner?: any): any {
     // This would use actual Zod in real implementation
     return {
       type,
@@ -317,13 +317,13 @@ export class UtilityFunctions {
     if (!this.isValidNode(node)) {
       throw new Error('Invalid node object')
     }
-    
+
     const value = this.safePropertyAccess(node, property)
-    
+
     if (validator && !validator(value)) {
       throw new Error(`Property ${property} failed validation`)
     }
-    
+
     return value
   }
 }
@@ -346,7 +346,7 @@ export function createAdvancedNodeValidator(
     allowedTypes: new Set(['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE', 'TEXT', 'VECTOR']),
     requiredProperties: ['id', 'type']
   }
-  
+
   const finalConfig = { ...defaultConfig, ...config }
   return new AdvancedNodeValidator(finalConfig, errorHandler)
 }

@@ -121,7 +121,7 @@ import { i } from '../905/661697';
 import { o5 } from '../905/664512';
 import { e as _$$e } from '../905/678389';
 import { p as _$$p2 } from '../905/682418';
-import { f as _$$f, h as _$$h7 } from '../905/693155';
+import { trackAccessibilityEvent, AccessibilityActionType } from '../905/693155';
 import { e0 as _$$e4 } from '../905/696396';
 import { openUrl } from '../905/697795';
 import { SingletonSceneGraph } from '../905/700578';
@@ -6130,7 +6130,7 @@ export function generateFullscreenMenuItems(e) {
       searchSynonyms: ['screenreader', 'accessibility'],
       callback: (e, t, i) => {
         let n = !tX.screenreader.enabled;
-        _$$f(n ? _$$h7.TOGGLE_DOM_ON_MENU : _$$h7.TOGGLE_DOM_OFF_MENU);
+        trackAccessibilityEvent(n ? AccessibilityActionType.TOGGLE_DOM_ON_MENU : AccessibilityActionType.TOGGLE_DOM_OFF_MENU);
         i(screenReaderEnableAction({
           enabled: !tX.screenreader.enabled,
           scope: 'PERSISTENT',
@@ -6642,7 +6642,7 @@ export function generateFullscreenMenuItems(e) {
     displayForQuickCommand: 'theme-enhanced-contrast-quick-command',
     checked: debugState.getState().theme.enhancedContrast,
     callback: (e, t, i) => {
-      _$$f(_$$h7.TOGGLE_ENHANCED_CONTRAST_ON);
+      trackAccessibilityEvent(AccessibilityActionType.TOGGLE_ENHANCED_CONTRAST_ON);
       i(fK({
         enhancedContrast: !debugState.getState().theme.enhancedContrast,
         userInitiated: !0

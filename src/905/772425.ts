@@ -10,13 +10,13 @@ interface AtMentionsAPI {
 }
 
 class AtMentionsLibrary {
-  private api: AtMentionsAPI
-  private orgId: string
-  private teamId: string
-  private fileKey: string
-  private maxResultsCount: number
-  private includeHiResAvatars: boolean
-  private checkPermissions: boolean
+  api: AtMentionsAPI
+  orgId: string
+  teamId: string
+  fileKey: string
+  maxResultsCount: number
+  includeHiResAvatars: boolean
+  checkPermissions: boolean
 
   /**
    * Constructor for AtMentionsLibrary.
@@ -115,10 +115,10 @@ interface ShareModalAPI {
 }
 
 class ShareModalContactsLibrary {
-  private api: ShareModalAPI
-  private orgId: string
-  private teamId: string
-  private maxResultsCount: number
+  api: ShareModalAPI
+  orgId: string
+  teamId: string
+  maxResultsCount: number
 
   /**
    * Constructor for ShareModalContactsLibrary.
@@ -235,9 +235,9 @@ interface FeedAtMentionsAPI {
 }
 
 export class FeedAtMentionsLibrary {
-  private api: FeedAtMentionsAPI
-  private orgId: string
-  private feedPostPublicUuid: string
+  api: FeedAtMentionsAPI
+  orgId: string
+  feedPostPublicUuid: string
 
   /**
    * Constructor for FeedAtMentionsLibrary.
@@ -307,7 +307,7 @@ export class FeedAtMentionsLibrary {
 
 // Original 'u' - Refactored to UserSearchLibrary
 const userSearchLibrary = new (class {
-  private searchLibrary: WorkerFuseSearch
+  searchLibrary: WorkerFuseSearch
 
   constructor(searchLibrary: WorkerFuseSearch) {
     this.searchLibrary = searchLibrary

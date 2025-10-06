@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { B3 } from "../905/709095";
 import { logError } from "../905/714362";
 import { runProfileSession, PerfProfileLevel } from "../905/958077";
-import { l as _$$l } from "../figma_app/773170";
+import { colorProfileManagerInstance } from "../figma_app/773170";
 export let $$d0 = new class {
   constructor() {
     this.onFrameCb = null;
@@ -13,12 +13,12 @@ export let $$d0 = new class {
         case ColorSpaceEnum.SRGB:
           if ("srgb" === r) return;
           e.drawingBufferColorSpace = "srgb";
-          _$$l.setCanvasColorProfile(ColorSpaceEnum.SRGB);
+          colorProfileManagerInstance.setCanvasColorProfile(ColorSpaceEnum.SRGB);
           break;
         case ColorSpaceEnum.DISPLAY_P3:
           if ("display-p3" === r) return;
           e.drawingBufferColorSpace = "display-p3";
-          _$$l.setCanvasColorProfile(ColorSpaceEnum.DISPLAY_P3);
+          colorProfileManagerInstance.setCanvasColorProfile(ColorSpaceEnum.DISPLAY_P3);
           break;
         default:
           logError("color management", "unsupported color space", {

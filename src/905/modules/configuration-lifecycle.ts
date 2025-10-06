@@ -58,9 +58,9 @@ export interface PluginPreferences {
  * Plugin Configuration Manager
  */
 export class PluginConfigurationManager {
-  private config: PluginPreferences
-  private parentPreferences: PluginPreferences | null
-  private parentEnabledPreferences: PluginPreferences | null
+  config: PluginPreferences
+  parentPreferences: PluginPreferences | null
+  parentEnabledPreferences: PluginPreferences | null
 
   constructor(
     config: PluginPreferences,
@@ -80,7 +80,7 @@ export class PluginConfigurationManager {
     const orgPinsNotInUserPins = this.getOrgPinsNotInUserPins()
     const allPins = [...this.config.pins, ...orgPinsNotInUserPins]
     const removedSet = new Set(this.config.removedInheritedPins)
-    
+
     return allPins
       .filter(pin => {
         if (removedSet.has(pin.pluginId)) return false
@@ -96,11 +96,11 @@ export class PluginConfigurationManager {
    */
   getCodegenSettings(): CodegenSettings | null {
     const hasOverride = this.config.codegenSettings?.behavior === 'OVERRIDE'
-    
+
     if (this.parentPreferences && !hasOverride) {
       return this.parentPreferences.codegenSettings ?? null
     }
-    
+
     return this.config.codegenSettings
   }
 
@@ -135,7 +135,7 @@ export class PluginConfigurationManager {
   unpinPlugin(pluginId: string): PluginConfigurationManager {
     return this.update(config => {
       config.pins = config.pins.filter(pin => pin.pluginId !== pluginId)
-      
+
       // Add to removed inherited pins if it was inherited
       if (this.isInheritedPin(pluginId)) {
         config.removedInheritedPins = [...config.removedInheritedPins, pluginId]
@@ -258,22 +258,22 @@ export class PluginConfigurationManager {
 
   // Private helper methods
 
-  private getOrgPinsNotInUserPins(): Array<{ pluginId: string; inherited: boolean }> {
+  getOrgPinsNotInUserPins(): Array<{ pluginId: string; inherited: boolean }> {
     // Mock implementation - would contain actual org pin logic
     return []
   }
 
-  private isInheritedPinValid(_pluginId: string): boolean {
+  isInheritedPinValid(_pluginId: string): boolean {
     // Mock implementation - would check parent preferences
     return !!this.parentPreferences
   }
 
-  private isInheritedPin(pluginId: string): boolean {
+  isInheritedPin(pluginId: string): boolean {
     // Check if plugin exists in parent preferences
     return !!this.parentPreferences?.pins.some(pin => pin.pluginId === pluginId)
   }
 
-  private localLanguageTypeToLgLanguageType(type: string): string | null {
+  localLanguageTypeToLgLanguageType(type: string): string | null {
     // Mock mapping - would contain actual language type conversion
     const mapping: Record<string, string> = {
       'first-party': 'FIRST_PARTY',
@@ -282,12 +282,12 @@ export class PluginConfigurationManager {
     return mapping[type] || null
   }
 
-  private localUnitToLgUnit(unit: string): string {
+  localUnitToLgUnit(unit: string): string {
     // Mock conversion - would contain actual unit conversion
     return unit.toUpperCase()
   }
 
-  private getDefaultPreferences() {
+  getDefaultPreferences() {
     return {
       customSettings: null,
       unit: 'PIXEL',
@@ -300,9 +300,9 @@ export class PluginConfigurationManager {
  * Plugin Lifecycle Manager
  */
 export class PluginLifecycleManager {
-  private currentRunState: any = null
-  private runQueue: any[] = []
-  private upgradeHandler: ((plugin: any) => void) | null = null
+  currentRunState: any = null
+  runQueue: any[] = []
+  upgradeHandler: ((plugin: any) => void) | null = null
 
   /**
    * Set upgrade handler for plugin updates
@@ -360,12 +360,12 @@ export class PluginLifecycleManager {
    */
   findExistingRunState(pluginArgs: any, mode: string): any | null {
     const currentPluginId = this.currentRunState?.runPluginArgs.plugin.plugin_id
-    
+
     if (currentPluginId === pluginArgs.plugin.plugin_id) {
       return this.currentRunState
     }
 
-    return this.runQueue.find(state => 
+    return this.runQueue.find(state =>
       state.runPluginArgs.plugin.plugin_id === pluginArgs.plugin.plugin_id &&
       state.mode === mode
     ) || null
@@ -377,7 +377,7 @@ export class PluginLifecycleManager {
    */
   prepPluginForRun(plugin: any): void {
     this.log('prepPluginForRun', 'Prepping plugin for run', { plugin })
-    
+
     // Mock implementation - would contain actual plugin preparation
     // dW(plugin, null)
     // f$()
@@ -392,7 +392,7 @@ export class PluginLifecycleManager {
   async terminatePlugin(): Promise<void> {
     this.log('terminatePlugin', 'Terminating plugin')
     this.currentRunState = null
-    
+
     // Mock implementation - would contain actual termination logic
     // await wY()
     // await yQ()
@@ -413,7 +413,7 @@ export class PluginLifecycleManager {
    */
   async maybeTerminatePluginAfterRunSettled(runState: any): Promise<void> {
     const { mode } = runState
-    
+
     this.log('maybeTerminatePluginAfterRunSettled', 'Maybe terminating plugin', {
       toMaybeTerminate: runState
     })
@@ -449,7 +449,7 @@ export class PluginLifecycleManager {
    * Log lifecycle events
    * Original: log(t, r, n = {})
    */
-  private log(method: string, message: string, data: any = {}): void {
+  log(method: string, message: string, data: any = {}): void {
     // Using console.warn for development logging - would use proper logger in production
     console.warn(`[PluginLifecycle:${method}] ${message}`, data)
   }
@@ -470,12 +470,12 @@ export class PluginConfigUtils {
     if (!pluginConfig) return false
 
     if (pluginConfig.type === 'local') {
-      return !!pluginContext.localFileId && 
+      return !!pluginContext.localFileId &&
         pluginConfig.localFileId === pluginContext.localFileId
     }
 
     if (pluginConfig.type === 'published') {
-      return !pluginContext.localFileId && 
+      return !pluginContext.localFileId &&
         !!pluginContext.plugin_id &&
         pluginConfig.pluginId === pluginContext.plugin_id
     }
@@ -533,7 +533,7 @@ export class PluginConfigUtils {
  * Local Storage and Persistence Manager
  */
 export class PersistenceManager {
-  private storagePrefix: string
+  storagePrefix: string
 
   constructor(storagePrefix = 'figma_plugin_') {
     this.storagePrefix = storagePrefix
@@ -559,9 +559,9 @@ export class PersistenceManager {
     try {
       const key = `${this.storagePrefix}prefs_${userId}`
       const serialized = localStorage.getItem(key)
-      
+
       if (!serialized) return null
-      
+
       return JSON.parse(serialized)
     } catch (error) {
       console.error('Failed to load preferences:', error)
@@ -628,19 +628,19 @@ export class PersistenceManager {
   removeStaleLifecycleItems(): void {
     try {
       const keys = Object.keys(localStorage)
-      const lifecycleKeys = keys.filter(key => 
+      const lifecycleKeys = keys.filter(key =>
         key.startsWith(`${this.storagePrefix}lifecycle_`)
       )
-      
+
       // Remove items older than 30 days
       const thirtyDaysAgo = new Date()
       thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
-      
+
       lifecycleKeys.forEach(key => {
         try {
           const item = JSON.parse(localStorage.getItem(key) || '{}')
           const updatedAt = new Date(item.updatedAt)
-          
+
           if (updatedAt < thirtyDaysAgo) {
             localStorage.removeItem(key)
           }

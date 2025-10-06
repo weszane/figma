@@ -150,7 +150,7 @@ export class QueryDef {
    * Processes field arguments, setting defaults if needed.
    * Original logic from constructor.
    */
-  private processFieldArgs(): void {
+  processFieldArgs(): void {
     for (const arg of this.objectFieldDef.args) {
       if (!(arg.name in this.fieldArgs) && arg.name === 'initialPageSize') {
         this.fieldArgs = {
@@ -169,7 +169,7 @@ export class QueryDef {
    * @param {any} schema - Schema.
    * @param {any} metadata - Metadata.
    */
-  private processFields(fields: any, viewArgs: any, schema: any, metadata: any): void {
+  processFields(fields: any, viewArgs: any, schema: any, metadata: any): void {
     validateFieldArguments(this.path, this.fieldArgs, this.objectFieldDef.args, viewArgs, this.isComputedFieldDependency, schema, metadata)
     for (const [key, value] of Object.entries(fields ?? {})) {
       let fieldName = key
@@ -236,7 +236,7 @@ export class QueryDef {
    * @param {any} metadata - Metadata.
    * @param {boolean} isOptional - Optional flag.
    */
-  private handleQueryField(fieldName: string, fieldDef: any, args: any, nestedFields: any, viewArgs: any, schema: any, metadata: any, isOptional: boolean): void {
+  handleQueryField(fieldName: string, fieldDef: any, args: any, nestedFields: any, viewArgs: any, schema: any, metadata: any, isOptional: boolean): void {
     if (nestedFields === NULL_FIELD_REF) {
       throw createValidationError(this.path, `expected nested fields for '${fieldName}' but got '_'`)
     }
@@ -284,7 +284,7 @@ export class QueryDef {
    * @param {any} metadata - Metadata.
    * @param {boolean} isOptional - Optional flag.
    */
-  private handleComputedField(fieldName: string, fieldDef: any, args: any, nestedFields: any, viewArgs: any, schema: any, metadata: any, isOptional: boolean): void {
+  handleComputedField(fieldName: string, fieldDef: any, args: any, nestedFields: any, viewArgs: any, schema: any, metadata: any, isOptional: boolean): void {
     if (nestedFields !== NULL_FIELD_REF && !fieldDef.isComputedObject()) {
       throw createValidationError(this.path, `cannot query field '${fieldName}'.`)
     }
@@ -304,7 +304,7 @@ export class QueryDef {
    * @param {any} nestedFields - Nested fields.
    * @param {boolean} isOptional - Optional flag.
    */
-  private handleProjectedField(fieldName: string, fieldDef: any, nestedFields: any, isOptional: boolean): void {
+  handleProjectedField(fieldName: string, fieldDef: any, nestedFields: any, isOptional: boolean): void {
     if (nestedFields !== NULL_FIELD_REF) {
       throw createValidationError(this.path, `cannot query field '${fieldName}'`)
     }
@@ -319,7 +319,7 @@ export class QueryDef {
    * @param {any} schema - Schema.
    * @param {any} metadata - Metadata.
    */
-  private setupPermissions(viewArgs: any, schema: any, metadata: any): void {
+  setupPermissions(viewArgs: any, schema: any, metadata: any): void {
     const {
       checkCanRead,
       shadowCheckCanRead,
@@ -344,7 +344,7 @@ export class QueryDef {
    * Adds dependent fields to transmitted fields.
    * Original logic from constructor.
    */
-  private addDependentFields(): void {
+  addDependentFields(): void {
     for (const dependentField of this.objectFieldDef.dependentFields) {
       this.transmittedFields.add(dependentField)
     }
@@ -354,7 +354,7 @@ export class QueryDef {
    * Logs debug information.
    * Original logic from constructor.
    */
-  private logDebugInfo(): void {
+  logDebugInfo(): void {
     this.context?.options?.logger?.debug('VIEW_QUERY_DEF.CREATE', this.debugFields)
   }
 

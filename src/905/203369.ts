@@ -72,10 +72,10 @@ interface FormattedInputState {
 export class FormattedInput extends PureComponent<FormattedInputProps, FormattedInputState> {
   static displayName = 'FormattedInput';
   static contextType = FormattedInputContext;
-  private previousContext: any = null;
-  private inputRef = createRef<any>();
-  private didIncrement = false;
-  private needToSelectAll = false;
+  previousContext: any = null;
+  inputRef = createRef<any>();
+  didIncrement = false;
+  needToSelectAll = false;
   constructor(props: FormattedInputProps) {
     super(props);
     this.state = {
@@ -88,7 +88,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Checks if two values look equal based on the formatter.
    * Original: this.looksEqual
    */
-  private looksEqual = (value1: any, value2: any): boolean => {
+  looksEqual = (value1: any, value2: any): boolean => {
     const isInvalid1 = !isValidValue(value1);
     const isInvalid2 = !isValidValue(value2);
     if (isInvalid1 !== isInvalid2) return false;
@@ -100,7 +100,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Selects all text in the input or applies default selection.
    * Original: this.selectAll
    */
-  private selectAll = (): void => {
+  selectAll = (): void => {
     const input = this.inputRef.current;
     if (isValidValue(this.props.property) && this.props.formatter.defaultSelection) {
       const selection = this.props.formatter.defaultSelection(input.value);
@@ -115,7 +115,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Handles focus event.
    * Original: this.onFocus
    */
-  private onFocus = (e: any): void => {
+  onFocus = (e: any): void => {
     this.needToSelectAll = true;
     if (this.props.shouldClearOnFocus) {
       this.setState({
@@ -129,7 +129,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Handles blur event, parsing and validating input.
    * Original: this.onBlur
    */
-  private onBlur = (e: any): void => {
+  onBlur = (e: any): void => {
     this.props.onBlur?.(e);
     const property = this.props.property;
     const inputValue = this.inputRef.current?.value;
@@ -170,7 +170,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Handles input change.
    * Original: this.onChange
    */
-  private onChange = (e: any): void => {
+  onChange = (e: any): void => {
     this.setState({
       editingValue: e.target.value.toString()
     });
@@ -180,7 +180,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Handles key down events, including navigation and special keys.
    * Original: this.onKeyDown
    */
-  private onKeyDown = (e: any): any => {
+  onKeyDown = (e: any): any => {
     if (handleKeyboardEventByState(e, this.shouldForwardUndo()) || (this.props.onKeyDown?.(e), e.defaultPrevented)) return;
     this.didIncrement = false;
     const input = this.inputRef.current;
@@ -245,7 +245,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Handles key up events, including autocomplete.
    * Original: this.onKeyUp
    */
-  private onKeyUp = (e: any): any => {
+  onKeyUp = (e: any): any => {
     if (handleKeyboardEventByState(e, this.shouldForwardUndo())) return SKIP_RECORDING;
     this.props.onKeyUp?.(e);
     const input = this.inputRef.current;
@@ -267,7 +267,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Handles mouse up, potentially selecting all.
    * Original: this.onMouseUp
    */
-  private onMouseUp = (e: any): any => {
+  onMouseUp = (e: any): any => {
     const input = this.inputRef.current;
     if (!this.state.editingValue && isInvalidValue(this.props.property)) input.select?.();
     if (!this.needToSelectAll) return SKIP_RECORDING;
@@ -279,7 +279,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Handles mouse leave, resetting select all flag.
    * Original: this.onMouseLeave
    */
-  private onMouseLeave = (e: any): void => {
+  onMouseLeave = (e: any): void => {
     if (this.needToSelectAll) this.needToSelectAll = false;
   };
 
@@ -287,13 +287,13 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Checks if variables should be handled.
    * Original: this.shouldHandleVariables
    */
-  private shouldHandleVariables = (): boolean => !!(this.props.variablesDisabled === false && this.context);
+  shouldHandleVariables = (): boolean => !!(this.props.variablesDisabled === false && this.context);
 
   /**
    * Handles click, potentially showing binding UI.
    * Original: this.onClick
    */
-  private onClick = (e: any): void => {
+  onClick = (e: any): void => {
     this.props.onClick?.(e);
     if (this.shouldHandleVariables() && this.context?.boundVariableId) {
       const input = this.inputRef.current;
@@ -356,7 +356,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Determines if undo should be forwarded.
    * Original: this.shouldForwardUndo
    */
-  private shouldForwardUndo() {
+  shouldForwardUndo() {
     if (this.state.editingValue === null) return KeyboardEventResponse.YES;
     if (isValidValue(this.props.property)) {
       const formatted = this.props.property == null ? '' : this.props.formatter.format(this.props.property);
@@ -369,7 +369,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Gets the value to render in the input.
    * Original: this.valueForRender
    */
-  private valueForRender(): string {
+  valueForRender(): string {
     if (this.state.editingValue !== null) return this.state.editingValue;
     if (isValidValue(this.props.property)) {
       return this.props.property == null ? '' : this.props.formatter.format(this.props.property);
@@ -381,7 +381,7 @@ export class FormattedInput extends PureComponent<FormattedInputProps, Formatted
    * Renders the variable pill if applicable.
    * Original: this.renderVariablePill
    */
-  private renderVariablePill(): any {
+  renderVariablePill(): any {
     if (!this.shouldHandleVariables()) return null;
     const value = this.valueForRender();
     return this.context?.boundVariableId && value ? jsx(P, {

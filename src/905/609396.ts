@@ -309,7 +309,7 @@ export class HierarchicalTimerGroup {
    * Start event handler.
    * Original: onStart
    */
-  private onStart = (name: string) => {
+  onStart = (name: string) => {
     let node: TimerNode | null = null
     let nodes = this.rootNodes
     if (this.nodeStack.length > 0) {
@@ -332,7 +332,7 @@ export class HierarchicalTimerGroup {
    * Stop event handler.
    * Original: onStop
    */
-  private onStop = (name: string, elapsed: number) => {
+  onStop = (name: string, elapsed: number) => {
     const node = this.nodeStack.pop()
     if (!node) {
       console.error('Got onStop with an empty result stack')
@@ -349,9 +349,9 @@ export class HierarchicalTimerGroup {
 // Performance API support check
 const isPerfApiAvailable
   = typeof performance !== 'undefined'
-    && 'mark' in performance
-    && 'measure' in performance
-    && 'clearMarks' in performance
+  && 'mark' in performance
+  && 'measure' in performance
+  && 'clearMarks' in performance
 
 /**
  * PerfTimer class for advanced performance measurement.
@@ -426,7 +426,7 @@ export class PerfTimer extends Timer {
         performance.clearMarks(this.performanceMarkStartName)
         performance.clearMarks(this.performanceMarkEndName)
       }
-      catch {}
+      catch { }
       this.mark = undefined
     }
     if (this.group) {
@@ -707,7 +707,7 @@ PerfTimerManager.globalInstance = new PerfTimerManager()
  * Original: $$f0
  */
 export class DistributionAnalytics {
-  private _distributions: Map<string, Distribution> = new Map()
+  _distributions: Map<string, Distribution> = new Map()
 
   create(name: string, bins: number[]): void {
     this._distributions.set(name, new Distribution(name, bins))
@@ -739,7 +739,7 @@ class Distribution {
   totalMs = 0
   count = 0
   meanDistanceSq = 0
-  private _analytics_distribution_name: string
+  _analytics_distribution_name: string
   _buckets: number[]
   _bins: number[]
 

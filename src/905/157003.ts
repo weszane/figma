@@ -40,11 +40,11 @@ export interface CacheScheduler {
  * Stores key-value pairs with expiration logic.
  */
 export class ExpiringCache<T = any> {
-  private cacheScheduler: CacheScheduler
-  private cacheTTL: number
-  private values: Map<string, ExpiringCacheEntry<T>>
-  private nextCheckAt: number | null
-  private pendingCleanUp: any | null
+  cacheScheduler: CacheScheduler
+  cacheTTL: number
+  values: Map<string, ExpiringCacheEntry<T>>
+  nextCheckAt: number | null
+  pendingCleanUp: any | null
 
   /**
    * Create a new ExpiringCache.
@@ -179,9 +179,9 @@ function createSubscriptionPromise(store: any, atom: any, key: any): Promise<voi
  */
 export type SuspendableResource
   = | ReturnType<typeof resourceUtils.disabledSuspendable>
-    | ReturnType<typeof resourceUtils.loadingSuspendable>
-    | ReturnType<typeof resourceUtils.errorSuspendable>
-    | ReturnType<typeof resourceUtils.loadedSuspendable>
+  | ReturnType<typeof resourceUtils.loadingSuspendable>
+  | ReturnType<typeof resourceUtils.errorSuspendable>
+  | ReturnType<typeof resourceUtils.loadedSuspendable>
 
 /**
  * Main function to create an atom family with caching and subscription logic.

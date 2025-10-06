@@ -33,13 +33,13 @@ let a = `
  * Original class name: e
  */
 export class FetchPlugin {
-  private pluginID: string
-  private nextMessageID: number
-  private outerIframe: any
-  private messageCallbacks: Record<number, (data: any) => void>
-  private innerIframe: any
-  private allowedDomains: string[]
-  private isLocal: boolean
+  pluginID: string
+  nextMessageID: number
+  outerIframe: any
+  messageCallbacks: Record<number, (data: any) => void>
+  innerIframe: any
+  allowedDomains: string[]
+  isLocal: boolean
 
   // Static property to store inner iframes by plugin ID
   static innerIframes: Record<string, any> = {}
@@ -65,7 +65,7 @@ export class FetchPlugin {
    * Original method name: handleMessages
    * @param event - The message event
    */
-  private handleMessages(event: MessageEvent): void {
+  handleMessages(event: MessageEvent): void {
     const data = event.data
     if (data.id in this.messageCallbacks) {
       this.messageCallbacks[data.id](data)
@@ -77,7 +77,7 @@ export class FetchPlugin {
    * Create an inner iframe for the plugin
    * Original method name: createInnerIframe
    */
-  private createInnerIframe(): void {
+  createInnerIframe(): void {
     const iframeConfig = {
       name: `${this.pluginID} fetch`,
       isWidget: false,
@@ -98,7 +98,7 @@ export class FetchPlugin {
    * Get or create an inner iframe for the plugin
    * Original method name: getOrCreateInnerIframe
    */
-  private getOrCreateInnerIframe(): void {
+  getOrCreateInnerIframe(): void {
     if (!this.innerIframe) {
       if (this.pluginID in FetchPlugin.innerIframes) {
         this.innerIframe = FetchPlugin.innerIframes[this.pluginID]
@@ -115,7 +115,7 @@ export class FetchPlugin {
    * @param message - The message to send
    * @returns A promise that resolves with the response data
    */
-  private postMessageAndWait(message: any): Promise<any> {
+  postMessageAndWait(message: any): Promise<any> {
     this.getOrCreateInnerIframe()
 
     return new Promise((resolve, reject) => {

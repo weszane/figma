@@ -18,13 +18,13 @@ export interface IntersectionSentinelProps {
  */
 export class IntersectionSentinel extends PureComponent<IntersectionSentinelProps> {
   /** Ref to the sentinel DOM node */
-  private scrollSentinel = createRef<HTMLDivElement>()
+  scrollSentinel = createRef<HTMLDivElement>()
   /** IntersectionObserver instance */
-  private intersectionObserver: IntersectionObserver | null = null
+  intersectionObserver: IntersectionObserver | null = null
   /** Current intersection state */
-  private _isIntersecting = false
+  _isIntersecting = false
   /** Initial intersection state */
-  private initialIntersectionState: boolean | null = null
+  initialIntersectionState: boolean | null = null
 
   /**
    * Returns current intersection state.

@@ -51,7 +51,7 @@ class LoggedOutCommunityActionModal extends Component<LoggedOutCommunityActionMo
    * Handle login button click event
    * Initializes auth flow for sign in and shows auth modal
    */
-  private readonly onLogInClick = (): void => {
+  readonly onLogInClick = (): void => {
     const { dispatch, redirectPath } = this.props
 
     dispatch(AUTH_INIT({
@@ -72,7 +72,7 @@ class LoggedOutCommunityActionModal extends Component<LoggedOutCommunityActionMo
    * Handle signup button click event
    * Initializes auth flow for sign up and shows auth modal
    */
-  private readonly onSignUpClick = (): void => {
+  readonly onSignUpClick = (): void => {
     const { dispatch } = this.props
 
     dispatch(AUTH_INIT({

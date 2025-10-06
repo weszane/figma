@@ -22,9 +22,9 @@ import { getFeatureFlags } from '../905/601108';
 import { logger } from '../905/651849';
 import { windowManagerInstance } from '../905/687477';
 import { EventEmitter } from '../905/690073';
-import { f as _$$f, h as _$$h } from '../905/693155';
+import { trackAccessibilityEvent, AccessibilityActionType } from '../905/693155';
 import { ErrorBoundaryCrash } from '../905/751457';
-import { e as _$$e } from '../905/810168';
+import { useIsScreenReaderEnabled } from '../905/810168';
 import { d2, Dm, rp } from '../905/845277';
 import { _ as _$$_, W as _$$W } from '../905/898204';
 import { showDropdownThunk } from '../905/929976';
@@ -38,7 +38,7 @@ import { isNotNullish } from '../figma_app/95419';
 import { s as _$$s2, w as _$$w } from '../figma_app/154255';
 import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from '../figma_app/167249';
 import { conditionalFeatureFlag } from '../figma_app/169182';
-import { k4 } from '../figma_app/290668';
+import { useAccessibilityFocusManager } from '../figma_app/290668';
 import { vF } from '../figma_app/290870';
 import { Gl, of } from '../figma_app/297733';
 import { c1 } from '../figma_app/357047';
@@ -751,7 +751,7 @@ let ex = memo(() => {
     nodeMapping: AppMode.DESIGN,
     navigationTelemetryTag: 'design_navigate',
     children: jsx(Z, {
-      accessibilityLogAction: _$$h.DESIGN_UPDATE_NODE,
+      accessibilityLogAction: AccessibilityActionType.DESIGN_UPDATE_NODE,
       extractorCtor: eA
     })
   });
@@ -762,7 +762,7 @@ let eC = memo(() => {
     nodeMapping: AppMode.DESIGN,
     navigationTelemetryTag: 'devmode_navigate',
     children: jsx(Z, {
-      accessibilityLogAction: _$$h.DEVMODE_UPDATE_NODE,
+      accessibilityLogAction: AccessibilityActionType.DEVMODE_UPDATE_NODE,
       extractorCtor: eA
     })
   }) : null;
@@ -876,7 +876,7 @@ let eP = memo(() => {
     navigationTelemetryTag: 'figjam_navigate',
     nodeMapping: AppMode.FIGJAM,
     children: jsx(eL, {
-      accessibilityLogAction: _$$h.FIGJAM_UPDATE_NODE,
+      accessibilityLogAction: AccessibilityActionType.FIGJAM_UPDATE_NODE,
       extractorCtor: ew,
       navigationTelemetryTag: 'figjam_navigate'
     })
@@ -1150,7 +1150,7 @@ let eV = memo(() => {
     nodeMapping: AppMode.SLIDES,
     navigationTelemetryTag: 'slides_navigate',
     children: jsx(Z, {
-      accessibilityLogAction: _$$h.SLIDES_UPDATE_NODE,
+      accessibilityLogAction: AccessibilityActionType.SLIDES_UPDATE_NODE,
       extractorCtor: eG
     })
   });
@@ -1228,7 +1228,7 @@ let eJ = memo(() => {
     nodeMapping: AppMode.FIGJAM,
     navigationTelemetryTag: 'figjam_navigate',
     children: jsx(Z, {
-      accessibilityLogAction: _$$h.FIGJAM_UPDATE_NODE,
+      accessibilityLogAction: AccessibilityActionType.FIGJAM_UPDATE_NODE,
       extractorCtor: eq
     })
   });
@@ -1237,23 +1237,23 @@ let $$eQ1 = createContext({
   loggerEventName: 'uninit_navigate'
 });
 let e0 = {
-  loadAction: _$$h.FIGJAM_INITIAL_TREE_LOAD,
+  loadAction: AccessibilityActionType.FIGJAM_INITIAL_TREE_LOAD,
   RootComponent: eP
 };
 let e1 = {
-  loadAction: _$$h.FIGJAM_INITIAL_TREE_LOAD,
+  loadAction: AccessibilityActionType.FIGJAM_INITIAL_TREE_LOAD,
   RootComponent: eJ
 };
 let e2 = {
-  loadAction: _$$h.DESIGN_INITIAL_TREE_LOAD,
+  loadAction: AccessibilityActionType.DESIGN_INITIAL_TREE_LOAD,
   RootComponent: ex
 };
 let e5 = {
-  loadAction: _$$h.DEVMODE_INITIAL_TREE_LOAD,
+  loadAction: AccessibilityActionType.DEVMODE_INITIAL_TREE_LOAD,
   RootComponent: eC
 };
 let e3 = {
-  loadAction: _$$h.SLIDES_INITIAL_TREE_LOAD,
+  loadAction: AccessibilityActionType.SLIDES_INITIAL_TREE_LOAD,
   RootComponent: eV
 };
 let $$e40 = memo(() => {
@@ -1285,7 +1285,7 @@ function e8() {
   }({
     loggerEvent: loggerEventName
   });
-  let r = _$$e();
+  let r = useIsScreenReaderEnabled();
   of(e);
   let s = useDispatch();
   let o = useSelector(e => !!e.modalShown);
@@ -1299,7 +1299,7 @@ function e8() {
     })));
   }, [s, o, r]);
   let l = useRef(null);
-  k4(l);
+  useAccessibilityFocusManager(l);
   let d = function (e) {
     switch (e) {
       case FEditorType.Design:
@@ -1439,7 +1439,7 @@ function e6({
     }));
   }, [f]);
   useEffect(() => {
-    _$$f(r);
+    trackAccessibilityEvent(r);
   }, [r]);
   let y = e => {
     t.current = e;

@@ -37,7 +37,7 @@ import { scopeAwareFunction } from "../905/189185";
 import { useLatestRef } from "../figma_app/922077";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
-import { h as _$$h } from "../905/943864";
+import { ScaleToolAPIBindings } from "../905/943864";
 import { useAppModelProperty } from "../figma_app/722362";
 import { o as _$$o } from "../905/237202";
 import { $4, Zk } from "../figma_app/626177";
@@ -342,9 +342,9 @@ function ey(e) {
     let e = () => {
       N.current && (x(!1), N.current.focus(), N.current.select());
     };
-    _$$h.subscribeScaleToolActivated(e);
+    ScaleToolAPIBindings.subscribeScaleToolActivated(e);
     return () => {
-      _$$h.unsubscribeScaleToolActivated(e);
+      ScaleToolAPIBindings.unsubscribeScaleToolActivated(e);
     };
   }, []);
   useEffect(() => {
@@ -505,9 +505,9 @@ let eI = memo(function ({
       let e = () => {
         n.current && (r(!1), p(!1), n.current.focus(), n.current.select());
       };
-      _$$h.subscribeScaleToolActivated(e);
+      ScaleToolAPIBindings.subscribeScaleToolActivated(e);
       return () => {
-        _$$h.unsubscribeScaleToolActivated(e);
+        ScaleToolAPIBindings.unsubscribeScaleToolActivated(e);
       };
     }, []);
     useEffect(() => {

@@ -27,8 +27,8 @@ function createTemplate(html: string): HTMLTemplateElement {
  * Manages rendering and updating of avatar elements within a cluster
  */
 class FigmaClusterAvatarsElement extends HTMLElement {
-  private _lastAvatars: any[] = []
-  private _avatars: any[] = []
+  _lastAvatars: any[] = []
+  _avatars: any[] = []
 
   constructor() {
     super()
@@ -144,9 +144,9 @@ if ("customElements" in window && !customElements.get(FigmaClusterAvatarsElement
  * Manages the overall comment cluster UI including avatars, counts, and positioning
  */
 export class FigmaCommentClusterElement extends HTMLElement {
-  private _avatars: any[] = []
-  private _creationChangeType: string | null = null
-  private _pinnedToFileIcon: Node | null = null
+  _avatars: any[] = []
+  _creationChangeType: string | null = null
+  _pinnedToFileIcon: Node | null = null
 
   constructor() {
     super()
@@ -311,7 +311,7 @@ export class FigmaCommentClusterElement extends HTMLElement {
   /**
    * Helper to toggle CSS classes based on attribute values
    */
-  private setClassOn(
+  setClassOn(
     element: Element,
     attributeName: string,
     changedAttribute: string,
@@ -378,7 +378,7 @@ export class FigmaCommentClusterElement extends HTMLElement {
   /**
    * Animates element directionally
    */
-  private animateDirectionally(
+  animateDirectionally(
     position: Point | null,
     offset: number,
     callback?: () => void,
@@ -424,7 +424,7 @@ export class FigmaCommentClusterElement extends HTMLElement {
   /**
    * Animates the cluster thread count
    */
-  private animateClusterThreadCount(): Promise<void> {
+  animateClusterThreadCount(): Promise<void> {
     const countElement = this.clusterCountElement
     if (!countElement)
       return Promise.resolve()
@@ -509,7 +509,7 @@ export class FigmaCommentClusterElement extends HTMLElement {
   /**
    * Adds pinned to file icon if not already present
    */
-  private addIconWhenPinnedToFileIfAbsent(): void {
+  addIconWhenPinnedToFileIfAbsent(): void {
     if (!this._pinnedToFileIcon) {
       this._pinnedToFileIcon = FigmaCommentClusterElement.pinnedToFileIcon.content.cloneNode(true)
       this.pinnedThreadToFileIndicator?.prepend(this._pinnedToFileIcon)

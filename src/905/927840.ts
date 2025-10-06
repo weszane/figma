@@ -27,8 +27,8 @@ interface LayoutNode {
 
 // Rename class to improve readability (original: $$r0)
 export class GridLayoutProperties {
-  private _cachedProperties: Record<string, any>
-  private _EXPENSIVE_TO_READ_node: LayoutNode
+  _cachedProperties: Record<string, any>
+  _EXPENSIVE_TO_READ_node: LayoutNode
 
   constructor(node: LayoutNode) {
     this._cachedProperties = {}
@@ -39,7 +39,7 @@ export class GridLayoutProperties {
    * Reads a value using memoization
    * (original: readValue)
    */
-  private readValue(key: string, getter: (node: LayoutNode) => any): any {
+  readValue(key: string, getter: (node: LayoutNode) => any): any {
     return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
 
@@ -47,7 +47,7 @@ export class GridLayoutProperties {
    * Reads a grid layout value using memoization
    * (original: readGridLayoutValue)
    */
-  private readGridLayoutValue(key: string, getter: (node: LayoutNode) => any): any {
+  readGridLayoutValue(key: string, getter: (node: LayoutNode) => any): any {
     return this.readValue(key, getter)
   }
 

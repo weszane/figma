@@ -40,7 +40,7 @@ import { formatI18nMessage } from "../905/482208";
 import { isWorkshopModeEnabled } from "../figma_app/789";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { getAutosaveManagerInstance } from "../figma_app/840917";
-import { hx } from "../figma_app/290668";
+import { handleAccessibilityKeyboardEvents } from "../figma_app/290668";
 import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
 import { getCanvasViewState } from "../905/758967";
@@ -384,7 +384,7 @@ export function $$ej5(e) {
       "data-tooltip-type": KindEnum.LOOKUP,
       fallbackSvg: u || void 0,
       innerSpanRef: _,
-      onKeyDown: e => hx({
+      onKeyDown: e => handleAccessibilityKeyboardEvents({
         e,
         onClickHandler: h(!0)
       }),

@@ -3,7 +3,7 @@
  * Original class name: $$n0
  */
 export class StringValueObject {
-  private readonly strValue: string
+  readonly strValue: string
 
   /**
    * Creates a new StringValueObject instance.

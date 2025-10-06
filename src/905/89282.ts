@@ -1,56 +1,248 @@
-export let $$n0 = {
-  codePointToLowerCase: e => e > 65535 ? e : String.fromCharCode(e).toLowerCase().charCodeAt(0),
-  codePointToUpperCase: e => e > 65535 ? e : String.fromCharCode(e).toUpperCase().charCodeAt(0),
-  stringToLowerCase: e => e.toLowerCase(),
-  stringToUpperCase: e => e.toUpperCase(),
-  setLocalStorage(e, t) {
+export interface CoreUtilsType {
+  /**
+   * Converts a Unicode code point to lowercase.
+   * @CoreUtils.codePointToLowerCase
+   */
+  codePointToLowerCase: (codePoint: number) => number
+
+  /**
+   * Converts a Unicode code point to uppercase.
+   * @CoreUtils.codePointToUpperCase
+   */
+  codePointToUpperCase: (codePoint: number) => number
+
+  /**
+   * Converts a string to lowercase.
+   * @CoreUtils.stringToLowerCase
+   */
+  stringToLowerCase: (str: string) => string
+
+  /**
+   * Converts a string to uppercase.
+   * @CoreUtils.stringToUpperCase
+   */
+  stringToUpperCase: (str: string) => string
+
+  /**
+   * Sets a value in localStorage.
+   * @CoreUtils.setLocalStorage
+   */
+  setLocalStorage: (key: string, value: string) => void
+
+  /**
+   * Gets a value from localStorage.
+   * @CoreUtils.getLocalStorage
+   */
+  getLocalStorage: (key: string) => string | null
+
+  /**
+   * Checks if a key exists in localStorage.
+   * @CoreUtils.hasLocalStorage
+   */
+  hasLocalStorage: (key: string) => boolean
+
+  /**
+   * Removes a key from localStorage.
+   * @CoreUtils.clearLocalStorage
+   */
+  clearLocalStorage: (key: string) => void
+
+  /**
+   * Creates a new RegExp object.
+   * @CoreUtils.regexNew
+   */
+  regexNew: (pattern: string) => RegExp
+
+  /**
+   * Searches for a match in a string using a RegExp.
+   * @CoreUtils.regexSearch
+   */
+  regexSearch: (regexp: RegExp, text: string) => { index: number, match: string, subgroups: string[] } | null
+
+  /**
+   * Finds all matches in a string using a RegExp.
+   * @CoreUtils.regexFindAll
+   */
+  regexFindAll: (regexp: RegExp, text: string) => string[]
+
+  /**
+   * Splits a string using a RegExp.
+   * @CoreUtils.regexSplit
+   */
+  regexSplit: (regexp: RegExp, text: string) => string[]
+
+  /**
+   * Tests if a string matches a RegExp.
+   * @CoreUtils.regexMatch
+   */
+  regexMatch: (regexp: RegExp, text: string) => boolean
+
+  /**
+   * Replaces all matches in a string using a RegExp.
+   * @CoreUtils.regexReplaceAll
+   */
+  regexReplaceAll: (regexp: RegExp, text: string, replacement: string) => string
+
+  /**
+   * Removes all spaces from a string.
+   * @CoreUtils.regexRemoveSpaces
+   */
+  regexRemoveSpaces: (text: string) => string
+}
+
+/**
+ * Utility functions for common operations.
+ * @CoreUtils
+ */
+export const CoreUtils: CoreUtilsType = {
+  /**
+   * Converts a Unicode code point to lowercase.
+   * @CoreUtils.codePointToLowerCase
+   */
+  codePointToLowerCase: (codePoint: number): number =>
+    codePoint > 65535 ? codePoint : String.fromCharCode(codePoint).toLowerCase().charCodeAt(0),
+
+  /**
+   * Converts a Unicode code point to uppercase.
+   * @CoreUtils.codePointToUpperCase
+   */
+  codePointToUpperCase: (codePoint: number): number =>
+    codePoint > 65535 ? codePoint : String.fromCharCode(codePoint).toUpperCase().charCodeAt(0),
+
+  /**
+   * Converts a string to lowercase.
+   * @CoreUtils.stringToLowerCase
+   */
+  stringToLowerCase: (str: string): string => str.toLowerCase(),
+
+  /**
+   * Converts a string to uppercase.
+   * @CoreUtils.stringToUpperCase
+   */
+  stringToUpperCase: (str: string): string => str.toUpperCase(),
+
+  /**
+   * Sets a value in localStorage.
+   * @CoreUtils.setLocalStorage
+   */
+  setLocalStorage(key: string, value: string): void {
     try {
-      window.localStorage[e] = t;
-    } catch (e) {}
-  },
-  getLocalStorage(e) {
-    try {
-      return window.localStorage[e];
-    } catch (e) {
-      return null;
+      window.localStorage[key] = value
+    }
+    catch {
+      // Silently fail if localStorage is not available
     }
   },
-  hasLocalStorage(e) {
+
+  /**
+   * Gets a value from localStorage.
+   * @CoreUtils.getLocalStorage
+   */
+  getLocalStorage(key: string): string | null {
     try {
-      return e in window.localStorage;
-    } catch (e) {
-      return !1;
+      return window.localStorage[key] || null
+    }
+    catch {
+      return null
     }
   },
-  clearLocalStorage(e) {
+
+  /**
+   * Checks if a key exists in localStorage.
+   * @CoreUtils.hasLocalStorage
+   */
+  hasLocalStorage(key: string): boolean {
     try {
-      window.localStorage.removeItem(e);
-    } catch (e) {}
+      return key in window.localStorage
+    }
+    catch {
+      return false
+    }
   },
-  regexNew: e => new RegExp(e),
-  regexSearch(e, t) {
-    let i = e.exec(t);
-    if (!i) return null;
-    let n = i.shift();
+
+  /**
+   * Removes a key from localStorage.
+   * @CoreUtils.clearLocalStorage
+   */
+  clearLocalStorage(key: string): void {
+    try {
+      window.localStorage.removeItem(key)
+    }
+    catch {
+      // Silently fail if localStorage is not available
+    }
+  },
+
+  /**
+   * Creates a new RegExp object.
+   * @CoreUtils.regexNew
+   */
+  regexNew: (pattern: string): RegExp => new RegExp(pattern),
+
+  /**
+   * Searches for a match in a string using a RegExp.
+   * @CoreUtils.regexSearch
+   */
+  regexSearch(regexp: RegExp, text: string): { index: number, match: string, subgroups: string[] } | null {
+    const match = regexp.exec(text)
+    if (!match)
+      return null
+
+    const matchedText = match.shift() as string
     return {
-      index: new TextEncoder().encode(t.slice(0, i.index)).length,
-      match: n,
-      subgroups: i
-    };
+      index: new TextEncoder().encode(text.slice(0, match.index)).length,
+      match: matchedText,
+      subgroups: match,
+    }
   },
-  regexFindAll(e, t) {
-    let i;
-    let n = RegExp(e.source, "g");
-    let r = [];
-    for (; i = n.exec(t);) r.push(i[0]);
-    return r;
+
+  /**
+   * Finds all matches in a string using a RegExp.
+   * @CoreUtils.regexFindAll
+   */
+  regexFindAll(regexp: RegExp, text: string): string[] {
+    const globalRegex = new RegExp(regexp.source, "g")
+    const matches: string[] = []
+    let match: RegExpExecArray | null
+
+    // eslint-disable-next-line no-cond-assign
+    while ((match = globalRegex.exec(text)) !== null) {
+      matches.push(match[0])
+    }
+
+    return matches
   },
-  regexSplit: (e, t) => t.split(e),
-  regexMatch: (e, t) => e.test(t),
-  regexReplaceAll(e, t, i) {
-    let n = RegExp(e.source, "g");
-    return t.replace(n, i);
+
+  /**
+   * Splits a string using a RegExp.
+   * @CoreUtils.regexSplit
+   */
+  regexSplit: (regexp: RegExp, text: string): string[] => text.split(regexp),
+
+  /**
+   * Tests if a string matches a RegExp.
+   * @CoreUtils.regexMatch
+   */
+  regexMatch: (regexp: RegExp, text: string): boolean => regexp.test(text),
+
+  /**
+   * Replaces all matches in a string using a RegExp.
+   * @CoreUtils.regexReplaceAll
+   */
+  regexReplaceAll(regexp: RegExp, text: string, replacement: string): string {
+    const globalRegex = new RegExp(regexp.source, "g")
+    return text.replace(globalRegex, replacement)
   },
-  regexRemoveSpaces: e => e.replace(/\s+/g, "")
-};
-export const x = $$n0;
+
+  /**
+   * Removes all spaces from a string.
+   * @CoreUtils.regexRemoveSpaces
+   */
+  regexRemoveSpaces: (text: string): string => text.replace(/\s+/g, ""),
+}
+
+/**
+ * Alias for CoreUtils.
+ * @x
+ */
+export const x = CoreUtils

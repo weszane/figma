@@ -633,7 +633,7 @@ function e2({
     P && !L && f(hideTooltip());
   }, [P, f, L]);
   let R = e.isLocal && isInteractionOrEvalMode() ? _$$eT(e.node_id, y).join('-') : e.node_id;
-  let O = o === 'Local components' || o === 'Local private components' || e.isLocal;
+  let O = o === 'Local components' || o === 'Local  components' || e.isLocal;
   let D = p === 'grid';
   let F = !u && D;
   let B = getFeatureFlags().api_asset_search_with_scores;
@@ -1001,9 +1001,9 @@ function tj(e, t = '', {
   isPreset: s,
   sortingFn: r
 } = {
-  isPreset: !1,
-  sortingFn: void 0
-}) {
+    isPreset: !1,
+    sortingFn: void 0
+  }) {
   let n = new Map();
   let i = [];
   r ? e.sort(r) : sortWithPriority(e, {
@@ -2961,12 +2961,12 @@ function rB() {
                 }).catch(e => {
                   if (logError('auto_suggest', 'Error fetching suggestions', {
                     error: e
-                  }), e.name === 'AbortError') {}
+                  }), e.name === 'AbortError') { }
                 }).finally(() => {
                   signal.aborted || (c(!1), l(`${rw(n)} - FINISHED`));
                   try {
                     d.destroy();
-                  } catch (e) {}
+                  } catch (e) { }
                 });
               } else {
                 n && (c(!1), r([]), p(n.guid), l(`${rw(n)} - INVALID TARGET`));
@@ -3494,7 +3494,7 @@ let ne = e => {
     if (s < 0) {
       let e = l.current[r.length];
       e && i(t => [...t, e.scrollWidth]);
-    } else if (s === 0) {} else if (r.length > 0) {
+    } else if (s === 0) { } else if (r.length > 0) {
       let e = r.length - 1;
       s > r[e] - (o.current && r.length === 1 ? o.current.scrollWidth : 0) && i(e => e.slice(0, -1));
     }

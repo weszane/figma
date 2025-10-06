@@ -113,7 +113,7 @@ function E(e, t, r) {
   let a = [];
   let s = [];
   let o = {};
-  for (let e of t) if (getFeatureFlags().dse_templates_proto && e.type === PrimaryWorkflowEnum.COMPONENT && isTemplateAsset(e)) a.push(e);else if (isPrimaryWorkflowType(e) && e.containing_frame?.nodeId && "" !== e.containing_frame.name) {
+  for (let e of t) if (getFeatureFlags().dse_templates_proto && e.type === PrimaryWorkflowEnum.COMPONENT && isTemplateAsset(e)) a.push(e); else if (isPrimaryWorkflowType(e) && e.containing_frame?.nodeId && "" !== e.containing_frame.name) {
     let t = e.containing_frame.nodeId;
     n[t] = n[t] || [];
     n[t].push(e);
@@ -252,7 +252,7 @@ export function $$b0({
         key: "privateToThisFile",
         name: getI18nString("design_systems.assets_panel.hidden"),
         type: "PAGE",
-        sectionNameForTracking: 0 === n ? "Local private components" : "Local private templates",
+        sectionNameForTracking: 0 === n ? "Local  components" : "Local  templates",
         isFilePublished: l,
         stickyHeaderTokens: []
       };

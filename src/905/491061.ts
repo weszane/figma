@@ -6,11 +6,11 @@ import { createDeferredPromise } from '../905/874553'
  */
 export class RetainedPromiseManager {
   /** Function to retain the resource. Original: retainFn */
-  private retainFn: () => (() => void) | void
+  retainFn: () => (() => void) | void
   /** Deferred promise object. Original: deferred */
-  private deferred: ReturnType<typeof createDeferredPromise>
+  deferred: ReturnType<typeof createDeferredPromise>
   /** Unsubscribe/release function. Original: unsub */
-  private unsub: (() => void) | null
+  unsub: (() => void) | null
 
   /**
    * @param retainFn Function that retains the resource and returns a release function.
@@ -28,7 +28,7 @@ export class RetainedPromiseManager {
    * Creates a new deferred promise.
    * Original: createDeferred
    */
-  private createDeferred() {
+  createDeferred() {
     const deferred = createDeferredPromise()
     deferred.promise = deferred.promise.catch(() => { })
     return deferred

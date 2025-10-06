@@ -1,5 +1,5 @@
 const VALID_PRIORITIES = ['user-blocking', 'user-visible', 'background'] as const
-type TaskPriority = typeof VALID_PRIORITIES[number]
+export type TaskPriority = typeof VALID_PRIORITIES[number]
 
 /**
  * PriorityChange event for task priority changes
@@ -22,8 +22,8 @@ export class TaskPriorityChangeEvent extends Event {
  * (Original name: $$a0)
  */
 export class TaskController extends AbortController {
-  private priority_: TaskPriority
-  private isPriorityChanging_: boolean
+  priority_: TaskPriority
+  isPriorityChanging_: boolean
 
   constructor(init: { priority?: TaskPriority } = {}) {
     super()

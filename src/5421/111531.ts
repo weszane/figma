@@ -2365,7 +2365,7 @@ function nE({
                 endIndex: n,
                 matchedString: t
               });
-            } while (i = o.exec(e));
+            } while ((i = o.exec(e)) !== null);
             return r;
           }(e, o.assetVariableName).filter(t => !function (e, t) {
             let n = t;

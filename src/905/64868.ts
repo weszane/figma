@@ -7,11 +7,11 @@ type BoundVariables = any
 type InferredVariables = any
 
 export class BorderProperties {
-  private cachedProperties: Record<string, any>
-  private _EXPENSIVE_TO_READ_node: Node
-  private nodeCache: NodeCache
-  private boundVariables: BoundVariables
-  private inferredVariables: InferredVariables
+  cachedProperties: Record<string, any>
+  _EXPENSIVE_TO_READ_node: Node
+  nodeCache: NodeCache
+  boundVariables: BoundVariables
+  inferredVariables: InferredVariables
 
   constructor(e: Node, t: NodeCache, i: BoundVariables, n: InferredVariables) {
     this.cachedProperties = {}
@@ -37,7 +37,7 @@ export class BorderProperties {
     }, null, {}, {})
   }
 
-  private readValue<T>(key: string, getter: (node: Node) => T): T {
+  readValue<T>(key: string, getter: (node: Node) => T): T {
     return memoizeFn(this.cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
 

@@ -6,7 +6,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { formatList } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { e as _$$e } from "../905/810168";
+import { useIsScreenReaderEnabled } from "../905/810168";
 import { xM, lU } from "../figma_app/539925";
 import { fullscreenValue } from "../figma_app/455680";
 import { FEditorType } from "../figma_app/53721";
@@ -36,7 +36,7 @@ export function $$b3(e) {
   }, [e]);
   let t = selectWithShallowEqual(e => Object.keys(e.mirror.sceneGraphSelection).length);
   let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.DESIGN_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.WHITEBOARD_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.SITES_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMMENTS || e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.SLIDE_LAYOUT);
-  let h = _$$e();
+  let h = useIsScreenReaderEnabled();
   let [b, I] = selectWithShallowEqual(e => {
     let t;
     null != e.mirror.appModel.currentStampToolName && "" !== e.mirror.appModel.currentStampToolName && (t = TI(e.mirror.appModel.currentStampToolName)());

@@ -2,7 +2,7 @@
  * File Activity Types
  * Original variable: $$n16
  */
-export enum  FFileActivityType {
+export enum FFileActivityType {
   FILE_SEEN = 'file_seen',
   DESIGN_FILE_SEEN = 'design_file_seen',
   WHITEBOARD_FILE_SEEN = 'whiteboard_file_seen',
@@ -16,7 +16,7 @@ export enum  FFileActivityType {
  * Team Types
  * Original variable: $$i7
  */
-export enum  FTeamType {
+export enum FTeamType {
   TEAM = 'team',
   COMMUNITY = 'community',
 }
@@ -25,7 +25,7 @@ export enum  FTeamType {
  * Component Types
  * Original variable: $$a22
  */
-export enum  FComponentType {
+export enum FComponentType {
   RESPONSIVE_SET = 'responsive_set',
   CONSTRAINED_TEMPLATE = 'constrained_template',
   CODE_COMPONENT = 'code_component',
@@ -35,7 +35,7 @@ export enum  FComponentType {
  * Inheritance Types
  * Original variable: $$s66
  */
-export enum  FInheritanceType {
+export enum FInheritanceType {
   INHERIT = 'INHERIT',
   NONE = 'NONE',
   OVERRIDE = 'OVERRIDE',
@@ -45,7 +45,7 @@ export enum  FInheritanceType {
  * Product Types
  * Original variable: $$o62
  */
-export enum  FProductType {
+export enum FProductType {
   DESIGN = 'design',
   WHITEBOARD = 'whiteboard',
   DEV_MODE = 'dev_mode',
@@ -61,7 +61,7 @@ export enum  FProductType {
  * License Types
  * Original variable: $$l6
  */
-export enum  FLicenseType {
+export enum FLicenseType {
   STANDALONE = 'standalone',
   BUNDLE = 'bundle',
   ADD_ON = 'add_on',
@@ -71,7 +71,7 @@ export enum  FLicenseType {
  * Billing Period Types
  * Original variable: $$d17
  */
-export enum  FBillingPeriodType {
+export enum FBillingPeriodType {
   MONTH = 'month',
   YEAR = 'year',
 }
@@ -80,7 +80,7 @@ export enum  FBillingPeriodType {
  * Plan Tier Types
  * Original variable: $$c15
  */
-export enum  FPlanTierType {
+export enum FPlanTierType {
   ORGANIZATION = 'Organization',
   ENTERPRISE = 'Enterprise',
 }
@@ -89,7 +89,7 @@ export enum  FPlanTierType {
  * Organization Types
  * Original variable: $$u11
  */
-export enum  FOrganizationType {
+export enum FOrganizationType {
   ORG = 'Org',
 }
 
@@ -108,7 +108,7 @@ export enum  FOrganizationType {
  * Billing Entity Types
  * Original variable: $$_5
  */
-export enum  FBillingEntityType {
+export enum FBillingEntityType {
   PLAN = 'plan',
   PRODUCT = 'product',
 }
@@ -117,7 +117,7 @@ export enum  FBillingEntityType {
  * Plugin Types
  * Original variable: $$h48
  */
-export enum  FPluginType {
+export enum FPluginType {
   PUBLISHED_PLUGIN = 'published-plugin',
   FIRST_PARTY = 'first-party',
 }
@@ -126,7 +126,7 @@ export enum  FPluginType {
  * Override Types
  * Original variable: $$m28
  */
-export enum  FOverrideType {
+export enum FOverrideType {
   INHERIT = 'INHERIT',
   OVERRIDE = 'OVERRIDE',
 }
@@ -135,7 +135,7 @@ export enum  FOverrideType {
  * Animation Trigger Types
  * Original variable: $$g2
  */
-export enum  FAnimationTriggerType {
+export enum FAnimationTriggerType {
   MOTION = 'motion',
   MOUSE = 'mouse',
   SCROLLING = 'scrolling',
@@ -145,7 +145,7 @@ export enum  FAnimationTriggerType {
  * Animation Effect Types
  * Original variable: $$f58
  */
-export enum  FAnimationEffectType {
+export enum FAnimationEffectType {
   LIGHTBOX = 'lightbox',
   SPIN = 'spin',
   TYPEWRITER = 'typewriter',
@@ -158,7 +158,7 @@ export enum  FAnimationEffectType {
  * Node Types
  * Original variable: $$E35
  */
-export enum  FNodeType {
+export enum FNodeType {
   FRAME = 'FRAME',
   IMAGE = 'IMAGE',
   TEXT = 'TEXT',
@@ -177,7 +177,7 @@ export enum  FNodeType {
  * Color Space Types
  * Original variable: $$y3
  */
-export enum  FColorSpaceType {
+export enum FColorSpaceType {
   DEFAULT = 'default',
   SRGB = 'srgb',
   DISPLAY_P3 = 'display_p3',
@@ -187,7 +187,7 @@ export enum  FColorSpaceType {
  * Publisher Types
  * Original variable: $$b63
  */
-export enum  FPublisherType {
+export enum FPublisherType {
   CREATOR = 'creator',
   PUBLISHER = 'publisher',
 }
@@ -222,7 +222,7 @@ export enum  FPublisherType {
  * Visibility Types
  * Original variable: $$S29
  */
-export enum  FVisibilityType {
+export enum FVisibilityType {
   MEMBERS = 'members',
   ALL_USERS = 'all_users',
 }
@@ -240,7 +240,7 @@ export enum  FVisibilityType {
  * Device Types
  * Original variable: $$A44
  */
-export enum  FDeviceType {
+export enum FDeviceType {
   DESKTOP = 'desktop',
   IPAD = 'ipad',
 }
@@ -249,7 +249,7 @@ export enum  FDeviceType {
  * Event Types
  * Original variable: $$x56
  */
-export enum  FEventType {
+export enum FEventType {
   STATUS_CHANGE = 'status_change',
 }
 
@@ -257,7 +257,7 @@ export enum  FEventType {
  * Unit Types
  * Original variable: $$N61
  */
-export enum  FUnitType {
+export enum FUnitType {
   PIXEL = 'PIXEL',
   SCALED = 'SCALED',
 }
@@ -266,7 +266,7 @@ export enum  FUnitType {
  * File Types
  * Original variable: $$C39
  */
-export enum  FFileType {
+export enum FFileType {
   DESIGN = 'design',
   WHITEBOARD = 'whiteboard',
   SLIDES = 'slides',
@@ -279,7 +279,7 @@ export enum  FFileType {
  * Entity Types
  * Original variable: $$w42
  */
-export enum  FEntityType {
+export enum FEntityType {
   FILE = 'file',
   PROTOTYPE = 'prototype',
   FOLDER = 'folder',
@@ -291,7 +291,7 @@ export enum  FEntityType {
  * Cost Center Types
  * Original variable: $$O30
  */
-export enum  FCostCenterType {
+export enum FCostCenterType {
   COST_CENTER = 'costCenter',
   ORGANIZATION = 'organization',
   DIVISION = 'division',
@@ -312,7 +312,7 @@ export enum  FCostCenterType {
  * Access Types
  * Original variable: $$L27
  */
-export enum  FAccessType {
+export enum FAccessType {
   ALLOWED = 'allowed',
   MEMBERS_ONLY = 'members_only',
   BANNED = 'banned',
@@ -322,7 +322,7 @@ export enum  FAccessType {
  * Trial Types
  * Original variable: $$P8
  */
-export enum  FTrialType {
+export enum FTrialType {
   PRO_TRIAL = 'pro_trial',
   DOWNGRADED_ORG_TEAM = 'downgraded_org_team',
   PROMO_CODE = 'promo_code',
@@ -333,7 +333,7 @@ export enum  FTrialType {
  * Container Types
  * Original variable: $$$$D57
  */
-export enum  FContainerType {
+export enum FContainerType {
   ORG = 'Org',
   WORKSPACE = 'Workspace',
   TEAM = 'Team',
@@ -355,7 +355,7 @@ export enum  FContainerType {
  * Product Access Types
  * Original variable: $$M9
  */
-export enum  FProductAccessType {
+export enum FProductAccessType {
   DESIGN = 'design',
   WHITEBOARD = 'whiteboard',
   DEV_MODE = 'dev_mode',
@@ -369,7 +369,7 @@ export enum  FProductAccessType {
  * Permission Level Types
  * Original variable: $$F21
  */
-export enum  FPermissionLevelType {
+export enum FPermissionLevelType {
   ORG_VIEW = 'org_view',
   ORG_EDIT = 'org_edit',
   WORKSPACE_EDIT = 'workspace_edit',
@@ -485,7 +485,7 @@ export enum  FPermissionLevelType {
  * Build Status Types
  * Original variable: $$Y68
  */
-export enum  FBuildStatusType {
+export enum FBuildStatusType {
   BUILD = 'build',
   COMPLETED = 'completed',
   NONE = 'none',
@@ -495,9 +495,9 @@ export enum  FBuildStatusType {
  * Access Level Types
  * Original variable: $$$41
  */
-export enum  FAccessLevelType {
+export enum FAccessLevelType {
   PUBLIC = 'public',
-  PRIVATE = 'private',
+  PRIVATE = '',
   SECRET = 'secret',
 }
 
@@ -505,7 +505,7 @@ export enum  FAccessLevelType {
  * Plan Feature Types
  * Original variable: $$X4
  */
-export enum  FPlanFeatureType {
+export enum FPlanFeatureType {
   STARTER = 'starter',
   FULL = 'full',
   RESTRICTED = 'restricted',
@@ -524,7 +524,7 @@ export enum  FPlanFeatureType {
  * User Role Types
  * Original variable: $$J38
  */
-export enum  FUserRoleType {
+export enum FUserRoleType {
   ADMIN = 'admin',
   MEMBER = 'member',
   GUEST = 'guest',
@@ -547,7 +547,7 @@ export enum  FUserRoleType {
  * Upgrade Reason Types
  * Original variable: $$Q32
  */
-export enum  FUpgradeReasonType {
+export enum FUpgradeReasonType {
   ROLE_UPGRADE = 'role_upgrade',
   INVITE_REDEEM = 'invite_redeem',
   ORG_INVITE_REDEEM = 'org_invite_redeem',
@@ -597,7 +597,7 @@ export enum  FUpgradeReasonType {
  * Resource Target Types
  * Original variable: $$ee37
  */
-export enum  FResourceTargetType {
+export enum FResourceTargetType {
   FILE = 'file',
   FILE_REPO = 'file_repo',
   FOLDER = 'folder',
@@ -609,7 +609,7 @@ export enum  FResourceTargetType {
  * Container Kind Types
  * Original variable: $$et12
  */
-export enum  FContainerKindType {
+export enum FContainerKindType {
   FOLDER = 'Folder',
   WORKSPACE = 'Workspace',
 }
@@ -618,7 +618,7 @@ export enum  FContainerKindType {
  * Pin Status Types
  * Original variable: $$er49
  */
-export enum  FPinStatusType {
+export enum FPinStatusType {
   UNPINNED = 'unpinned',
   PINNED = 'pinned',
 }
@@ -627,7 +627,7 @@ export enum  FPinStatusType {
  * Plan Access Types
  * Original variable: $$en45
  */
-export enum  FPlanAccessType {
+export enum FPlanAccessType {
   STARTER = 'starter',
   FULL = 'full',
   RESTRICTED = 'restricted',
@@ -637,7 +637,7 @@ export enum  FPlanAccessType {
  * Organization Entity Types
  * Original variable: $$ei53
  */
-export enum  FOrganizationEntityType {
+export enum FOrganizationEntityType {
   ORG = 'Org',
   TEAM = 'Team',
 }
@@ -646,7 +646,7 @@ export enum  FOrganizationEntityType {
  * Member Role Types
  * Original variable: $$ea34
  */
-export enum  FMemberRoleType {
+export enum FMemberRoleType {
   ADMIN = 'admin',
   MEMBER = 'member',
   GUEST = 'guest',
@@ -656,7 +656,7 @@ export enum  FMemberRoleType {
  * Team Status Types
  * Original variable: $$es31
  */
-export enum  FTeamStatusType {
+export enum FTeamStatusType {
   INCOMPLETE = 'incomplete',
   ACTIVE = 'active',
   UNPAID = 'unpaid',
@@ -669,7 +669,7 @@ export enum  FTeamStatusType {
  * Plan Name Types
  * Original variable: $$eo1
  */
-export enum  FPlanNameType {
+export enum FPlanNameType {
   STARTER = 'starter',
   STUDENT = 'student',
   PRO = 'pro',
@@ -681,7 +681,7 @@ export enum  FPlanNameType {
  * Organization Level Types
  * Original variable: $$el18
  */
-export enum  FOrganizationLevelType {
+export enum FOrganizationLevelType {
   ORG = 'organization',
   TEAM = 'team',
 }
@@ -690,7 +690,7 @@ export enum  FOrganizationLevelType {
  * Event Source Types
  * Original variable: $$ed50
  */
-export enum  FEventSourceType {
+export enum FEventSourceType {
   ASSET_TRANSFER = 'asset_transfer',
   AUTO_UPGRADE = 'auto_upgrade',
   BACKFILL = 'backfill',
@@ -741,7 +741,7 @@ export enum  FEventSourceType {
  * User Type Classification
  * Original variable: $$eu47
  */
-export enum  FUserTypeClassification {
+export enum FUserTypeClassification {
   ORG_USER = 'org_user',
   TEAM_USER = 'team_user',
 }
@@ -750,7 +750,7 @@ export enum  FUserTypeClassification {
  * Request Status Types
  * Original variable: $$ep40
  */
-export enum  FRequestStatusType {
+export enum FRequestStatusType {
   PENDING = 'pending',
   APPROVED = 'approved',
   REJECTED = 'rejected',
@@ -760,7 +760,7 @@ export enum  FRequestStatusType {
  * Provider Config Types
  * Original variable: $$e_65
  */
-export enum  FProviderConfigType {
+export enum FProviderConfigType {
   DEFAULT = 'default',
   INTERNAL = 'internal',
   CONFIG24 = 'config24',
@@ -772,7 +772,7 @@ export enum  FProviderConfigType {
  * Auth Provider Types
  * Original variable: $$eh23
  */
-export enum  FAuthProviderType {
+export enum FAuthProviderType {
   FIGMA = 'figma',
   APPLE = 'apple',
   GOOGLE = 'google',
@@ -782,7 +782,7 @@ export enum  FAuthProviderType {
  * View Permission Types
  * Original variable: $$em24
  */
-export enum  FViewPermissionType {
+export enum FViewPermissionType {
   ORG_VIEW = 'org_view',
   VIEW = 'view',
   INHERIT = 'inherit',
@@ -802,7 +802,7 @@ export enum  FViewPermissionType {
  * Permission Denial Reasons
  * Original variable: $$ef25
  */
-export enum  FPermissionDenialReason {
+export enum FPermissionDenialReason {
   TEST = 'test',
   FILE_DENY_CONNECTED_GUEST_CAN_MOVE = 'file_deny_connected_guest_can_move',
   FILE_REPO_DENY_CONNECTED_GUEST_CAN_MOVE = 'file_repo_deny_connected_guest_can_move',
@@ -881,7 +881,7 @@ export enum  FPermissionDenialReason {
  * Publication Status Types
  * Original variable: $$eE13
  */
-export enum  FPublicationStatusType {
+export enum FPublicationStatusType {
   BLOCKED = 'blocked',
   ORG_PRIVATE = 'org_private',
   PENDING_USER_VISUAL_COMPLIANCE = 'pending_user_visual_compliance',
@@ -897,7 +897,7 @@ export enum  FPublicationStatusType {
  * Access Request Status Types
  * Original variable: $$ey60
  */
-export enum  FAccessRequestStatusType {
+export enum FAccessRequestStatusType {
   PENDING = 'pending',
   APPROVED = 'approved',
   DENIED = 'denied',
@@ -908,7 +908,7 @@ export enum  FAccessRequestStatusType {
  * Resource Category Types
  * Original variable: $$eb64
  */
-export enum  FResourceCategoryType {
+export enum FResourceCategoryType {
   FILE = 'file',
   FILE_REPO = 'file_repo',
   FOLDER = 'folder',
@@ -957,7 +957,7 @@ export enum  FResourceCategoryType {
  * Feature Adoption Status Types
  * Original variable: $$ev20
  */
-export enum  FFeatureAdoptionStatusType {
+export enum FFeatureAdoptionStatusType {
   NONE = 'NONE',
   ACCEPTED = 'ACCEPTED',
   STARTED_ONBOARDING = 'STARTED_ONBOARDING',
@@ -969,7 +969,7 @@ export enum  FFeatureAdoptionStatusType {
  * Student Team Status Types
  * Original variable: $$eA55
  */
-export enum  FStudentTeamStatusType {
+export enum FStudentTeamStatusType {
   STUDENT_TEAM_NULL = 'not_student_team',
   STUDENT_TEAM_CURRENT = 'current_student_team',
   STUDENT_TEAM_EXPIRED = 'expired_student_team',
@@ -979,7 +979,7 @@ export enum  FStudentTeamStatusType {
  * Payment Health Status Types
  * Original variable: $$ex26
  */
-export enum  FPaymentHealthStatusType {
+export enum FPaymentHealthStatusType {
   OK = 'ok',
   GRACE_PERIOD = 'grace_period',
   PAST_DUE = 'past_due',
@@ -991,7 +991,7 @@ export enum  FPaymentHealthStatusType {
  * Domain Verification Status Types
  * Original variable: $$eN54
  */
-export enum  FDomainVerificationStatusType {
+export enum FDomainVerificationStatusType {
   UNVERIFIED = 'unverified',
   VERIFIED = 'verified',
   PENDING = 'pending',
@@ -1002,7 +1002,7 @@ export enum  FDomainVerificationStatusType {
  * Team Access Permission Types
  * Original variable: $$eC46
  */
-export enum  FTeamAccessPermissionType {
+export enum FTeamAccessPermissionType {
   TEAM_ACCESS_VIEW = 'team_view',
   TEAM_ACCESS_EDIT = 'team_edit',
   TEAM_ACCESS_DISABLED = 'team_access_disabled',
@@ -1012,7 +1012,7 @@ export enum  FTeamAccessPermissionType {
  * Basic Permission Types
  * Original variable: $$ew59
  */
-export enum  FBasicPermissionType {
+export enum FBasicPermissionType {
   VIEW = 'view',
   EDIT = 'edit',
 }
@@ -1021,7 +1021,7 @@ export enum  FBasicPermissionType {
  * Plan Limitation Types
  * Original variable: $$eO19
  */
-export enum  FPlanLimitationType {
+export enum FPlanLimitationType {
   LOCKED = 'locked',
   EDITORS_LIMITED = 'editors_limited',
   PROJECTS_LIMITED = 'projects_limited',
@@ -1041,7 +1041,7 @@ export enum  FPlanLimitationType {
  * Plan Restriction Types
  * Original variable: $$eR36
  */
-export enum  FPlanRestrictionType {
+export enum FPlanRestrictionType {
   STARTER = 'starter',
   FULL = 'full',
   RESTRICTED = 'restricted',
@@ -1051,7 +1051,7 @@ export enum  FPlanRestrictionType {
  * Seat Assignment Reason Types
  * Original variable: $$eL0
  */
-export enum  FSeatAssignmentReasonType {
+export enum FSeatAssignmentReasonType {
   RESOURCE_MOVED_TO_TEAM = 'resource_moved_to_team',
   RESOURCE_RESTORED_FROM_TRASH = 'resource_restored_from_trash',
   JOIN_LINK_REDEEM = 'join_link_redeem',
@@ -1097,7 +1097,7 @@ export enum  FSeatAssignmentReasonType {
  * Billing Model Types
  * Original variable: $$eP14
  */
-export enum  FBillingModelType {
+export enum FBillingModelType {
   SEATS_MODEL_BILLING_2025 = 'seats_model_billing_2025',
 }
 
@@ -1115,7 +1115,7 @@ export enum  FBillingModelType {
  * Folder Types
  * Original variable: $$ek10
  */
-export enum  FFolderType {
+export enum FFolderType {
   FOLDER = 'folder',
 }
 
@@ -1123,7 +1123,7 @@ export enum  FFolderType {
  * Approval Method Types
  * Original variable: $$eM33
  */
-export enum  FApprovalMethodType {
+export enum FApprovalMethodType {
   AUTO_APPROVED = 'auto_approved',
   AUTO_APPROVED_AVAILABLE_SEAT = 'auto_approved_available_seat',
   AUTO_APPROVED_EDU = 'auto_approved_edu',
@@ -1139,7 +1139,7 @@ export enum  FApprovalMethodType {
  * User Verification Status Types
  * Original variable: $$eF52
  */
-export enum  FUserVerificationStatusType {
+export enum FUserVerificationStatusType {
   VERIFIED = 'verified',
   UNVERIFIED = 'unverified',
   BLOCKED = 'blocked',
@@ -1149,7 +1149,7 @@ export enum  FUserVerificationStatusType {
  * Template Category Types
  * Original variable: $$ej67
  */
-export enum  FTemplateCategoryType {
+export enum FTemplateCategoryType {
   CANVAS = 'canvas',
   PROTOTYPE = 'prototype',
   WHITEBOARD = 'whiteboard',
@@ -1164,7 +1164,7 @@ export enum  FTemplateCategoryType {
  * Organization Role Types
  * Original variable: $$eU43
  */
-export enum  FOrganizationRoleType {
+export enum FOrganizationRoleType {
   ADMIN = 'admin',
   MEMBER = 'member',
 }
@@ -1173,7 +1173,7 @@ export enum  FOrganizationRoleType {
  * Team Assignment Method Types
  * Original variable: $$eB51
  */
-export enum  FTeamAssignmentMethodType {
+export enum FTeamAssignmentMethodType {
   SELF_SELECTED = 'self',
   MOVED_BY_ADMIN = 'moved',
   AUTO_ASSIGNED = 'auto',

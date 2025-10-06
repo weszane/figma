@@ -31,7 +31,7 @@ export interface IViewSelector {
  * Original class name: $$n0
  */
 export class ViewSelectorGroup {
-  private selectors: IViewSelector[]
+  selectors: IViewSelector[]
 
   /**
    * @param selectors Array of selector objects implementing IViewSelector.

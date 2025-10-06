@@ -10,10 +10,10 @@ interface SubscriptionContext {
 
 
 export class RealtimeSubscriptionManager {
-  private config: any
-  private subscriptionMap: Map<string, () => void>
-  private onRealtimeMessage: ((message: any, store: any) => void) | null
-  private shimLogger: any | null
+  config: any
+  subscriptionMap: Map<string, () => void>
+  onRealtimeMessage: ((message: any, store: any) => void) | null
+  shimLogger: any | null
 
   constructor(config: any) {
     this.config = config

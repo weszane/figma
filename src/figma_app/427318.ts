@@ -146,7 +146,7 @@ export function isPluginOrWidget(entity: any): boolean {
 }
 
 /**
- * Checks if the entity is an org-private plugin/widget.
+ * Checks if the entity is an org- plugin/widget.
  * @param entity
  */
 export function isOrgPrivatePluginOrWidget(entity: any): boolean {
@@ -203,7 +203,7 @@ export function isMonetizedFigJamTemplate(entity: any, meta: any): boolean {
 }
 
 /**
- * Checks if the entity has org-private publishing status.
+ * Checks if the entity has org- publishing status.
  * @param entity
  */
 function hasOrgPrivatePublishingStatus(entity: any): boolean {
@@ -230,7 +230,7 @@ export function hasResourceType(entity: any): boolean {
 }
 
 /**
- * Checks if the entity has a resource_type and org-private publishing status.
+ * Checks if the entity has a resource_type and org- publishing status.
  * @param entity
  */
 export function hasOrgPrivateResourceType(entity: any): boolean {
@@ -248,7 +248,7 @@ export function hasContent(entity: any): boolean {
 }
 
 /**
- * Checks if the entity has content and org-private publishing status.
+ * Checks if the entity has content and org- publishing status.
  * @param entity
  */
 export function hasOrgPrivateContent(entity: any): boolean {

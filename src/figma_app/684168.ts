@@ -179,7 +179,7 @@ export function canRequestExtension({
 }
 
 /**
- * Determines if an extension version can be requested (not allowlisted, not private).
+ * Determines if an extension version can be requested (not allowlisted, not ).
  * Original: $$m0
  */
 export function canRequestExtensionVersion({

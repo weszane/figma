@@ -21,7 +21,7 @@ const frameTimeDataMap = new WeakMap<DurationVital, number[]>();
  * (original: $$p0)
  */
 class ObservabilityClient {
-  private isEnabled: boolean;
+  isEnabled: boolean;
   constructor() {
     this.isEnabled = !!getFeatureFlags().observability_client;
   }
@@ -257,11 +257,11 @@ export const observabilityClient = new ObservabilityClient();
  */
 class UserFlow {
   public context: Record<string, any>;
-  private ended: boolean;
-  private name: string;
-  private eventOptions?: Record<string, any>;
-  private trackFps?: boolean;
-  private internalDuration: DurationVital;
+  ended: boolean;
+  name: string;
+  eventOptions?: Record<string, any>;
+  trackFps?: boolean;
+  internalDuration: DurationVital;
   constructor({
     name,
     team,
@@ -438,20 +438,20 @@ class UserFlow {
  * (original: h)
  */
 class DurationVital {
-  private started: boolean;
-  private stopped: boolean;
-  private startTime: number;
-  private fpsMonitorId: number | null;
-  private frameCount: number;
-  private lastFpsUpdate: number;
-  private name: string;
-  private description?: string;
-  private context: Record<string, any>;
-  private level: LogLevelStr;
-  private trackFps: boolean;
-  private team: string;
-  private fpsCollectionDurationMs: number;
-  private onStop?: (duration: number, fpsStats?: any, frameTimeStats?: any) => void;
+  started: boolean;
+  stopped: boolean;
+  startTime: number;
+  fpsMonitorId: number | null;
+  frameCount: number;
+  lastFpsUpdate: number;
+  name: string;
+  description?: string;
+  context: Record<string, any>;
+  level: LogLevelStr;
+  trackFps: boolean;
+  team: string;
+  fpsCollectionDurationMs: number;
+  onStop?: (duration: number, fpsStats?: any, frameTimeStats?: any) => void;
   constructor(name: string, {
     level,
     description,
@@ -488,7 +488,7 @@ class DurationVital {
   /**
    * Start monitoring frame rate for FPS stats.
    */
-  private startFrameRateMonitoring() {
+  startFrameRateMonitoring() {
     if (this.fpsMonitorId !== null) return;
     this.frameCount = 0;
     this.lastFpsUpdate = performance.now();
@@ -526,7 +526,7 @@ class DurationVital {
   /**
    * Stop FPS monitoring and add stats to context.
    */
-  private stopFpsMonitoring() {
+  stopFpsMonitoring() {
     if (this.fpsMonitorId !== null) {
       cancelAnimationFrame(this.fpsMonitorId);
       this.fpsMonitorId = null;

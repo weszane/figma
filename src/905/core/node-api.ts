@@ -590,7 +590,7 @@ export function normalizeTextCase(vm, fallback, textCase, smallCaps) {
   let result = textCase || 'ORIGINAL';
   if (smallCaps !== undefined && result === 'ORIGINAL') {
     if (smallCaps === 'mixed') return fallback;
-    if (smallCaps === 'SMALL') result = 'SMALL_CAPS';else if (smallCaps === 'ALL_SMALL') result = 'SMALL_CAPS_FORCED';
+    if (smallCaps === 'SMALL') result = 'SMALL_CAPS'; else if (smallCaps === 'ALL_SMALL') result = 'SMALL_CAPS_FORCED';
   }
   return vm.newString(result);
 }
@@ -905,16 +905,16 @@ export function processOpenTypeFeatures({
   }
 
   // Number case
-  if (numberCase === 'OLDSTYLE') result.ONUM = true;else if (numberCase === 'LINING') result.LNUM = true;
+  if (numberCase === 'OLDSTYLE') result.ONUM = true; else if (numberCase === 'LINING') result.LNUM = true;
 
   // Number spacing
-  if (numberSpacing === 'PROPORTIONAL') result.PNUM = true;else if (numberSpacing === 'TABULAR') result.TNUM = true;
+  if (numberSpacing === 'PROPORTIONAL') result.PNUM = true; else if (numberSpacing === 'TABULAR') result.TNUM = true;
 
   // Fraction
   if (fraction === 'STACKED') result.FRAC = true;
 
   // Script
-  if (script === 'SUPER') result.SUPS = true;else if (script === 'SUB') result.SUBS = true;
+  if (script === 'SUPER') result.SUPS = true; else if (script === 'SUB') result.SUBS = true;
   const wrapped = vm.deepWrap(result);
   vm.deepFreezeObject(wrapped);
   return wrapped;
@@ -1787,15 +1787,15 @@ export function tQNewExpressionParser(e) {
   // Use extracted Phase 21 Advanced Variable Parser
   // Original tQ function logic moved to ./modules/variable-expression-processing.ts
   const variableProcessor = createAdvancedVariableExpressionProcessor(undefined,
-  // config
-  {
-    w1,
-    Hr
-  },
-  // hrUtilities
-  debugStateI,
-  // dIFunction
-  _$$sH); // sHFunction  );
+    // config
+    {
+      w1,
+      Hr
+    },
+    // hrUtilities
+    debugStateI,
+    // dIFunction
+    _$$sH); // sHFunction  );
   const variableParser = createAdvancedVariableParser(variableProcessor, debugStateI);
   return variableParser.convertVariableToInternal(e);
 }
@@ -2570,7 +2570,7 @@ export const NodeAPI = {
   },
   /**
    * Execute findAll traversal with callback filtering
-   * @private
+   * @
    */
   executeFindAllTraversal(callbackHandle, config) {
     const {
@@ -2609,21 +2609,21 @@ export const NodeAPI = {
   },
   /**
    * Get children nodes for traversal
-   * @private
+   * @
    */
   getNodeChildren(node) {
     return node.type === 'TABLE' ? node.sortedTableCells.reverse() : node.reversedChildrenGuids;
   },
   /**
    * Check if node should be skipped during traversal
-   * @private
+   * @
    */
   shouldSkipNode(node, isRootLevel, vm) {
     return isRootLevel && node.isInternalOnlyNode || isInImmutableContext(vm, node);
   },
   /**
    * Check if node should be included in results
-   * @private
+   * @
    */
   shouldIncludeNode(nodeHandle, hasCallback, callbackHandle, vm) {
     if (!hasCallback) {
@@ -2660,7 +2660,7 @@ export const NodeAPI = {
   },
   /**
    * Execute findAllWithCriteria search
-   * @private
+   * @
    */
   executeFindAllWithCriteria(criteriaHandle, config) {
     const {
@@ -2693,7 +2693,7 @@ export const NodeAPI = {
   },
   /**
    * Validate search criteria
-   * @private
+   * @
    */
   validateCriteria(criteria, pluginID) {
     if (criteria.sharedPluginData?.namespace) {
@@ -2708,7 +2708,7 @@ export const NodeAPI = {
   },
   /**
    * Process and normalize criteria for search
-   * @private
+   * @
    */
   processCriteria(criteria, pluginID) {
     let processedPluginData;
@@ -8646,7 +8646,7 @@ export const NodeAPI = {
       key: 'getPluginData',
       metricsKey: 'node.getPluginData',
       cb(keyHandle) {
-        dnode7(pluginID, 'get private plugin data');
+        dnode7(pluginID, 'get  plugin data');
         const key = _$$u({
           vm,
           handle: keyHandle,
@@ -8663,7 +8663,7 @@ export const NodeAPI = {
       key: 'setPluginData',
       metricsKey: 'node.setPluginData',
       cb(keyHandle, valueHandle) {
-        dnode7(pluginID, 'set private plugin data');
+        dnode7(pluginID, 'set  plugin data');
         const key = _$$u({
           vm,
           handle: keyHandle,
@@ -8693,7 +8693,7 @@ export const NodeAPI = {
       key: 'getPluginDataKeys',
       metricsKey: 'node.getPluginDataKeys',
       cb() {
-        dnode7(pluginID, 'get private plugin data keys');
+        dnode7(pluginID, 'get  plugin data keys');
         return vm.deepWrap(getNode(this).getPluginDataKeys(pluginID));
       },
       isAllowedInReadOnly: true,
@@ -9703,7 +9703,7 @@ export const NodeAPI = {
           property: 'options'
         });
         let type;
-        if (v.type === 'ORDERED') type = 'ORDERED_LIST';else if (v.type === 'UNORDERED') type = 'UNORDERED_LIST';else if (v.type === 'NONE') type = 'PLAIN';else throw new Error('Unknown list option');
+        if (v.type === 'ORDERED') type = 'ORDERED_LIST'; else if (v.type === 'UNORDERED') type = 'UNORDERED_LIST'; else if (v.type === 'NONE') type = 'PLAIN'; else throw new Error('Unknown list option');
         node.setRangeLineType(s, e, type);
         return vm.undefined;
       },

@@ -15,10 +15,10 @@ interface ParseCallback {
  * Original class name: o
  */
 class NotesParser {
-  private onParse: ParseCallback
-  private state: number
-  private buffer: string
-  private cursor: number
+  onParse: ParseCallback
+  state: number
+  buffer: string
+  cursor: number
 
   constructor(callback: ParseCallback) {
     this.onParse = callback
@@ -182,7 +182,7 @@ export const cortexAPI = createCortexAPI({
  * Original class name: $$u0
  */
 export class StreamAsyncIterator<T> {
-  private stream: ReadableStream<T>
+  stream: ReadableStream<T>
 
   constructor(stream: ReadableStream<T>) {
     this.stream = stream
@@ -209,8 +209,8 @@ export class StreamAsyncIterator<T> {
  * Original class name: $$p1
  */
 export class StreamAsyncIteratorWithTimeout<T> {
-  private stream: ReadableStream<T>
-  private timeoutMs: number
+  stream: ReadableStream<T>
+  timeoutMs: number
 
   constructor(stream: ReadableStream<T>, timeoutMs: number) {
     this.stream = stream

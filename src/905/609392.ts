@@ -2,7 +2,7 @@ import { parseQuery } from '../905/634134'
 
 // Refactored query parameter management module
 class QueryParamsManager {
-  private params: Record<string, string> = {}
+  params: Record<string, string> = {}
 
   /**
    * Updates the stored query parameters by parsing the provided query string.

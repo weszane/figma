@@ -20,16 +20,16 @@ interface InteractionData {
  * Original: $$a0
  */
 class WidgetInteractionTracker {
-  private _interactionStartedAtMs: number = -1;
-  private _pluginID: string | null = null;
-  private _interactionType: string | null = null;
-  private _numRenders: number = 0;
-  private _totalRenderMs: number = 0;
-  private _totalUnwrappingRenderResultMs: number = 0;
-  private _numReconciliations: number = 0;
-  private _totalReconciliationMs: number = 0;
-  private _durationBeforeVmStart: number = 0;
-  private _reconciliationIsScheduled: boolean = false;
+  _interactionStartedAtMs: number = -1;
+  _pluginID: string | null = null;
+  _interactionType: string | null = null;
+  _numRenders: number = 0;
+  _totalRenderMs: number = 0;
+  _totalUnwrappingRenderResultMs: number = 0;
+  _numReconciliations: number = 0;
+  _totalReconciliationMs: number = 0;
+  _durationBeforeVmStart: number = 0;
+  _reconciliationIsScheduled: boolean = false;
 
   /**
    * Starts tracking an interaction.

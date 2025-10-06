@@ -1,6 +1,6 @@
-import { Kd, UX } from '../figma_app/155287'
-import { buildUploadUrl, getInitialOptions, isLocalCluster } from '../figma_app/169182'
-import { isInteractionPathCheck, Lg } from '../figma_app/897289'
+import { Kd, UX } from '../figma_app/155287';
+import { buildUploadUrl, getInitialOptions, isLocalCluster } from '../figma_app/169182';
+import { isInteractionPathCheck, getFalseValue } from '../figma_app/897289';
 
 /**
  * Plugin ID constants for prod and staging clusters.
@@ -23,8 +23,8 @@ export const PROD_PLUGIN_IDS = {
   staging4: '1100944790471783866',
   cortexAnalytics2: '1268676638869538880',
   openExternal1: '1217135789855512677',
-  openExternal2: '1217657098906612843',
-}
+  openExternal2: '1217657098906612843'
+};
 
 /**
  * Permissions mapping for prod cluster plugin IDs.
@@ -51,8 +51,8 @@ export const PROD_PLUGIN_PERMISSIONS: Record<string, any> = {
   '857346721138427857': ['filekey'],
   '745330164019088593': ['filekey'],
   '1377781599688680355': ['cortex', 'analytics', 'filekey', 'firstdraft'],
-  '1340067847030742527': ['cortex', 'analytics', 'filekey', 'firstdraft'],
-}
+  '1340067847030742527': ['cortex', 'analytics', 'filekey', 'firstdraft']
+};
 
 /**
  * Domain mapping for prod cluster plugin IDs.
@@ -64,8 +64,8 @@ export const PROD_PLUGIN_DOMAINS: Record<string, string> = {
   [PROD_PLUGIN_IDS.recordWidget3]: 'https://recordwidget.vimeocdn.com',
   [PROD_PLUGIN_IDS.recordWidget4]: 'https://recordwidget.vimeocdn.com',
   [PROD_PLUGIN_IDS.figma1]: 'https://www.figma.com',
-  [PROD_PLUGIN_IDS.figma2]: 'https://www.figma.com',
-}
+  [PROD_PLUGIN_IDS.figma2]: 'https://www.figma.com'
+};
 
 /**
  * Permissions mapping for staging cluster plugin IDs.
@@ -107,24 +107,24 @@ export const STAGING_PLUGIN_PERMISSIONS: Record<string, any> = {
   '1065825789137646656': Kd,
   '1105998344712102365': Kd,
   '1065825795062708289': ['hidecursors'],
-  '1065825813933952067': ['hidecursors'],
-}
+  '1065825813933952067': ['hidecursors']
+};
 
 /**
  * Upload URL mapping for staging cluster plugin IDs.
  * Original variable name: x
  */
 export const STAGING_UPLOAD_URLS: Record<string, string> = {
-  [PROD_PLUGIN_IDS.openExternal1]: buildUploadUrl('83e16c32f7fbe88022ff9fcff130cdd6c6423861'),
-}
+  [PROD_PLUGIN_IDS.openExternal1]: buildUploadUrl('83e16c32f7fbe88022ff9fcff130cdd6c6423861')
+};
 
 /**
  * Upload URL mapping for prod cluster plugin IDs.
  * Original variable name: N
  */
 export const PROD_UPLOAD_URLS: Record<string, string> = {
-  [PROD_PLUGIN_IDS.analytics1]: buildUploadUrl('83e16c32f7fbe88022ff9fcff130cdd6c6423861'),
-}
+  [PROD_PLUGIN_IDS.analytics1]: buildUploadUrl('83e16c32f7fbe88022ff9fcff130cdd6c6423861')
+};
 
 /**
  * Staging domain mapping.
@@ -134,40 +134,40 @@ export const STAGING_DOMAINS: Record<string, string> = {
   [PROD_PLUGIN_IDS.staging1]: 'https://staging.figma.com',
   [PROD_PLUGIN_IDS.staging2]: 'https://staging.figma.com',
   [PROD_PLUGIN_IDS.staging3]: 'https://staging.figma.com',
-  [PROD_PLUGIN_IDS.staging4]: 'https://staging.figma.com',
-}
+  [PROD_PLUGIN_IDS.staging4]: 'https://staging.figma.com'
+};
 
 /**
  * Sets for openexternal plugin IDs.
  * Original variable names: w, O
  */
-export const STAGING_OPENEXTERNAL_SET = new Set([PROD_PLUGIN_IDS.openExternal1, PROD_PLUGIN_IDS.openExternal2])
-export const PROD_OPENEXTERNAL_SET = new Set([PROD_PLUGIN_IDS.analytics1, PROD_PLUGIN_IDS.analytics2, PROD_PLUGIN_IDS.analytics3, '1220851659530313303'])
+export const STAGING_OPENEXTERNAL_SET = new Set([PROD_PLUGIN_IDS.openExternal1, PROD_PLUGIN_IDS.openExternal2]);
+export const PROD_OPENEXTERNAL_SET = new Set([PROD_PLUGIN_IDS.analytics1, PROD_PLUGIN_IDS.analytics2, PROD_PLUGIN_IDS.analytics3, '1220851659530313303']);
 
 /**
  * Plugin ID mapping for staging and prod clusters.
  * Original variable names: R, L
  */
 export const STAGING_PLUGIN_ID_MAP: Record<string, string> = {
-  '1311749001261674187': '1311747530036311881',
-}
+  '1311749001261674187': '1311747530036311881'
+};
 export const PROD_PLUGIN_ID_MAP: Record<string, string> = {
-  '1312547578554957136': '1311777988952403297',
-}
+  '1312547578554957136': '1311777988952403297'
+};
 
 /**
  * Lists for plugin ID checks.
  * Original variable names: P, D
  */
-export const STAGING_PLUGIN_ID_LIST = ['1286790870036328880']
-export const PROD_PLUGIN_ID_LIST = ['1286792998372727741', '1471237098317254321', '1499098169301830432', '1497629632442770130']
+export const STAGING_PLUGIN_ID_LIST = ['1286790870036328880'];
+export const PROD_PLUGIN_ID_LIST = ['1286792998372727741', '1471237098317254321', '1499098169301830432', '1497629632442770130'];
 
 /**
  * Empty permission and domain maps for interaction path/local clusters.
  * Original variable names: M, F
  */
-export const INTERACTION_PATH_DOMAINS: Record<string, string> = {}
-export const INTERACTION_PATH_PERMISSIONS: Record<string, any> = {}
+export const INTERACTION_PATH_DOMAINS: Record<string, string> = {};
+export const INTERACTION_PATH_PERMISSIONS: Record<string, any> = {};
 
 /**
  * Checks if plugin ID is trusted for the current cluster.
@@ -175,17 +175,17 @@ export const INTERACTION_PATH_PERMISSIONS: Record<string, any> = {}
  * @param pluginId
  */
 export function isTrustedPluginId(pluginId: string): boolean {
-  const cluster = getInitialOptions().cluster_name
+  const cluster = getInitialOptions().cluster_name;
   if (cluster === 'prod') {
-    return pluginId in PROD_PLUGIN_DOMAINS || pluginId in PROD_PLUGIN_PERMISSIONS
+    return pluginId in PROD_PLUGIN_DOMAINS || pluginId in PROD_PLUGIN_PERMISSIONS;
   }
   if (cluster === 'staging') {
-    return pluginId in STAGING_DOMAINS || pluginId in STAGING_PLUGIN_PERMISSIONS
+    return pluginId in STAGING_DOMAINS || pluginId in STAGING_PLUGIN_PERMISSIONS;
   }
-  if (isInteractionPathCheck() || Lg()) {
-    return pluginId in INTERACTION_PATH_DOMAINS
+  if (isInteractionPathCheck() || getFalseValue()) {
+    return pluginId in INTERACTION_PATH_DOMAINS;
   }
-  return !!isLocalCluster()
+  return !!isLocalCluster();
 }
 
 /**
@@ -194,20 +194,20 @@ export function isTrustedPluginId(pluginId: string): boolean {
  * @param pluginId
  */
 export function getPluginDomain(pluginId: string): string | undefined {
-  const cluster = getInitialOptions().cluster_name
+  const cluster = getInitialOptions().cluster_name;
   if (cluster === 'prod') {
-    return PROD_PLUGIN_DOMAINS[pluginId] ?? undefined
+    return PROD_PLUGIN_DOMAINS[pluginId] ?? undefined;
   }
   if (cluster === 'staging') {
-    return STAGING_DOMAINS[pluginId] ?? undefined
+    return STAGING_DOMAINS[pluginId] ?? undefined;
   }
-  if (isInteractionPathCheck() || Lg()) {
-    return INTERACTION_PATH_DOMAINS[pluginId] ?? undefined
+  if (isInteractionPathCheck() || getFalseValue()) {
+    return INTERACTION_PATH_DOMAINS[pluginId] ?? undefined;
   }
   if (isLocalCluster()) {
-    return '*'
+    return '*';
   }
-  return undefined
+  return undefined;
 }
 
 /**
@@ -217,22 +217,22 @@ export function getPluginDomain(pluginId: string): string | undefined {
  */
 export function getPluginPermissions(pluginId: string): Set<string> {
   if (!isTrustedPluginId(pluginId)) {
-    throw new Error('Untrusted pluginID')
+    throw new Error('Untrusted pluginID');
   }
-  const cluster = getInitialOptions().cluster_name
+  const cluster = getInitialOptions().cluster_name;
   if (cluster === 'prod') {
-    return new Set(PROD_PLUGIN_PERMISSIONS[pluginId] ?? [])
+    return new Set(PROD_PLUGIN_PERMISSIONS[pluginId] ?? []);
   }
   if (cluster === 'staging') {
-    return new Set(STAGING_PLUGIN_PERMISSIONS[pluginId] ?? [])
+    return new Set(STAGING_PLUGIN_PERMISSIONS[pluginId] ?? []);
   }
-  if (isInteractionPathCheck() || Lg()) {
-    return new Set(INTERACTION_PATH_PERMISSIONS[pluginId] ?? [])
+  if (isInteractionPathCheck() || getFalseValue()) {
+    return new Set(INTERACTION_PATH_PERMISSIONS[pluginId] ?? []);
   }
   if (isLocalCluster()) {
-    return new Set(UX)
+    return new Set(UX);
   }
-  return new Set()
+  return new Set();
 }
 
 /**
@@ -240,15 +240,15 @@ export function getPluginPermissions(pluginId: string): Set<string> {
  * Original function name: $$G4
  */
 export function getOpenExternalPluginIds(): Set<string> {
-  const cluster = getInitialOptions().cluster_name
+  const cluster = getInitialOptions().cluster_name;
   if (cluster === 'prod') {
-    return PROD_OPENEXTERNAL_SET
+    return PROD_OPENEXTERNAL_SET;
   }
   if (cluster === 'staging') {
-    return STAGING_OPENEXTERNAL_SET
+    return STAGING_OPENEXTERNAL_SET;
   }
   // For interaction path/local clusters, always return empty set
-  return new Set()
+  return new Set();
 }
 
 /**
@@ -257,11 +257,11 @@ export function getOpenExternalPluginIds(): Set<string> {
  * @param pluginId
  */
 export function isAllowedUploadPluginId(pluginId: string): boolean {
-  const cluster = getInitialOptions().cluster_name
+  const cluster = getInitialOptions().cluster_name;
   if (cluster === 'prod') {
-    return pluginId === PROD_PLUGIN_IDS.analytics2
+    return pluginId === PROD_PLUGIN_IDS.analytics2;
   }
-  return cluster === 'staging' && pluginId === PROD_PLUGIN_IDS.openExternal2
+  return cluster === 'staging' && pluginId === PROD_PLUGIN_IDS.openExternal2;
 }
 
 /**
@@ -271,9 +271,9 @@ export function isAllowedUploadPluginId(pluginId: string): boolean {
  * @param isUpload
  */
 export function isAllowedUpload(pluginId: string, isUpload: boolean): boolean {
-  const cluster = getInitialOptions().cluster_name
-  const checkId = cluster === 'staging' ? PROD_PLUGIN_IDS.openExternal1 : PROD_PLUGIN_IDS.analytics1
-  return !(isUpload && pluginId === checkId)
+  const cluster = getInitialOptions().cluster_name;
+  const checkId = cluster === 'staging' ? PROD_PLUGIN_IDS.openExternal1 : PROD_PLUGIN_IDS.analytics1;
+  return !(isUpload && pluginId === checkId);
 }
 
 /**
@@ -282,14 +282,14 @@ export function isAllowedUpload(pluginId: string, isUpload: boolean): boolean {
  * @param pluginId
  */
 export function getPluginUploadUrl(pluginId: string): string | undefined {
-  const cluster = getInitialOptions().cluster_name
+  const cluster = getInitialOptions().cluster_name;
   if (cluster === 'prod') {
-    return PROD_UPLOAD_URLS[pluginId]
+    return PROD_UPLOAD_URLS[pluginId];
   }
   if (cluster === 'staging') {
-    return STAGING_UPLOAD_URLS[pluginId]
+    return STAGING_UPLOAD_URLS[pluginId];
   }
-  return undefined
+  return undefined;
 }
 
 /**
@@ -298,14 +298,14 @@ export function getPluginUploadUrl(pluginId: string): string | undefined {
  * @param pluginId
  */
 export function isPluginIdAllowed(pluginId: string): boolean {
-  const cluster = getInitialOptions().cluster_name
+  const cluster = getInitialOptions().cluster_name;
   if (cluster === 'prod') {
-    return PROD_PLUGIN_ID_LIST.includes(pluginId)
+    return PROD_PLUGIN_ID_LIST.includes(pluginId);
   }
   if (cluster === 'staging') {
-    return STAGING_PLUGIN_ID_LIST.includes(pluginId)
+    return STAGING_PLUGIN_ID_LIST.includes(pluginId);
   }
-  return !!(isInteractionPathCheck() || Lg()) || !!isLocalCluster()
+  return !!(isInteractionPathCheck() || getFalseValue()) || !!isLocalCluster();
 }
 
 /**
@@ -314,25 +314,25 @@ export function isPluginIdAllowed(pluginId: string): boolean {
  * @param pluginId
  */
 export function getMappedPluginId(pluginId: string): string | undefined {
-  const cluster = getInitialOptions().cluster_name
+  const cluster = getInitialOptions().cluster_name;
   if (cluster === 'prod') {
-    return PROD_PLUGIN_ID_MAP[pluginId]
+    return PROD_PLUGIN_ID_MAP[pluginId];
   }
   if (cluster === 'staging') {
-    return STAGING_PLUGIN_ID_MAP[pluginId]
+    return STAGING_PLUGIN_ID_MAP[pluginId];
   }
-  return undefined
+  return undefined;
 }
 
 // Exported aliases for backward compatibility
-export const HB = getPluginDomain
-export const P8 = isAllowedUploadPluginId
-export const Ph = PROD_PLUGIN_IDS.cortexAnalytics
-export const T0 = PROD_PLUGIN_IDS.cortexAnalytics2
-export const Up = getOpenExternalPluginIds
-export const Y3 = getMappedPluginId
-export const Zl = isAllowedUpload
-export const eZ = isTrustedPluginId
-export const sA = getPluginUploadUrl
-export const xp = getPluginPermissions
-export const yb = isPluginIdAllowed
+export const HB = getPluginDomain;
+export const P8 = isAllowedUploadPluginId;
+export const Ph = PROD_PLUGIN_IDS.cortexAnalytics;
+export const T0 = PROD_PLUGIN_IDS.cortexAnalytics2;
+export const Up = getOpenExternalPluginIds;
+export const Y3 = getMappedPluginId;
+export const Zl = isAllowedUpload;
+export const eZ = isTrustedPluginId;
+export const sA = getPluginUploadUrl;
+export const xp = getPluginPermissions;
+export const yb = isPluginIdAllowed;

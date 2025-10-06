@@ -71,9 +71,9 @@ export interface GamepadState {
  * Listens for gamepad connection/disconnection and button presses.
  */
 export class GameControllerListener {
-  private emitter: EventEmitter
-  private state: Map<number, GamepadState>
-  private rafHandle: number
+  emitter: EventEmitter
+  state: Map<number, GamepadState>
+  rafHandle: number
 
   constructor() {
     this.emitter = new EventEmitter('GameControllerListener')
@@ -165,7 +165,7 @@ export class GameControllerListener {
   /**
    * Handles gamepad connection event (original: onGamePadConnected)
    */
-  private handleGamePadConnected(): void {
+  handleGamePadConnected(): void {
     if (!this.rafHandle) {
       this.rafHandle = window.requestAnimationFrame(this.tick)
     }
@@ -174,7 +174,7 @@ export class GameControllerListener {
   /**
    * Handles gamepad disconnection event (original: onGamePadDisconnected)
    */
-  private handleGamePadDisconnected(): void {
+  handleGamePadDisconnected(): void {
     if (!Array.from(window.navigator.getGamepads()).some(Boolean)) {
       window.cancelAnimationFrame(this.rafHandle)
       this.rafHandle = 0
@@ -184,7 +184,7 @@ export class GameControllerListener {
   /**
    * Animation frame loop to poll gamepad state and trigger button press events (original: tick)
    */
-  private handleTick(): void {
+  handleTick(): void {
     for (const gamepad of window.navigator.getGamepads()) {
       if (!gamepad)
         continue
@@ -209,9 +209,9 @@ export class GameControllerListener {
     this.rafHandle = window.requestAnimationFrame(this.tick)
   }
 
-  private onGamePadConnected: (e: Event) => void
-  private onGamePadDisconnected: (e: Event) => void
-  private tick: () => void
+  onGamePadConnected: (e: Event) => void
+  onGamePadDisconnected: (e: Event) => void
+  tick: () => void
 }
 
 /**

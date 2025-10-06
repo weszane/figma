@@ -10,7 +10,7 @@ import h from "../vendor/77708";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
-import { PN, isInteractionPathCheck } from "../figma_app/897289";
+import { isInteractionOrEvalMode, isInteractionPathCheck } from "../figma_app/897289";
 import { setLeftPanelTab } from "../figma_app/91703";
 import { copyToSitesFromDesignAtom } from "../figma_app/223206";
 import { fullscreenValue } from "../figma_app/455680";
@@ -137,7 +137,7 @@ let en = atom(null, (e, t, r) => {
   t(ee, new Set(n));
   e(_b)?.mode === "modal" && t(_$$W, !0);
   e(oD) ? (er.cancel(), et(e, t)) : (et.cancel(), er(e, t));
-  PN() && (et.flush(), er.flush());
+  isInteractionOrEvalMode() && (et.flush(), er.flush());
 });
 function es(e, t) {
   return "pending" !== e.status && "error" !== e.status && e.nodeGuid === t;

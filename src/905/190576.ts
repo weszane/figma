@@ -3,7 +3,7 @@ import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
 import { getPermissionActionKey } from '../figma_app/756995'
 
 class TrashedFoldersAPI {
-  private validator = createNoOpValidator()
+  validator = createNoOpValidator()
 
   getTrashedFolders(params: {
     orgId?: string

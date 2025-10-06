@@ -69,9 +69,9 @@ export interface PaintFilter {
  * Handles complex paint processing with support for all paint types
  */
 export class AdvancedPaintProcessor {
-  private logger: any
-  private imageManager: any
-  private animatedImageManager: any
+  logger: any
+  imageManager: any
+  animatedImageManager: any
 
   constructor(logger?: any, imageManager?: any, animatedImageManager?: any) {
     this.logger = logger || console
@@ -141,7 +141,7 @@ export class AdvancedPaintProcessor {
   /**
    * Process solid color paint
    */
-  private processSolidPaint(paintConfig: any, visible: boolean, opacity: number, blendMode: string): PaintConfig {
+  processSolidPaint(paintConfig: any, visible: boolean, opacity: number, blendMode: string): PaintConfig {
     const result: PaintConfig = {
       type: paintConfig.type,
       color: {
@@ -154,8 +154,8 @@ export class AdvancedPaintProcessor {
     }
 
     // Handle variable bindings for solid color
-    if (paintConfig.boundVariables?.color?.id && 
-      paintConfig.boundVariables.color.type === 'VARIABLE_ALIAS' && 
+    if (paintConfig.boundVariables?.color?.id &&
+      paintConfig.boundVariables.color.type === 'VARIABLE_ALIAS' &&
       this.isValidVariableId(paintConfig.boundVariables.color.id)) {
       result.colorVar = {
         dataType: 'ALIAS',
@@ -172,13 +172,13 @@ export class AdvancedPaintProcessor {
   /**
    * Process gradient paint (linear, radial, angular, diamond)
    */
-  private processGradientPaint(paintConfig: any, visible: boolean, opacity: number, blendMode: string): PaintConfig {
+  processGradientPaint(paintConfig: any, visible: boolean, opacity: number, blendMode: string): PaintConfig {
     return {
       type: paintConfig.type,
       transform: this.convertGradientTransform(paintConfig.gradientTransform),
-      stopsVar: paintConfig.gradientStops.map((stop: any) => 
-        stop.boundVariables?.color?.id && 
-          stop.boundVariables.color?.type === 'VARIABLE_ALIAS' && 
+      stopsVar: paintConfig.gradientStops.map((stop: any) =>
+        stop.boundVariables?.color?.id &&
+          stop.boundVariables.color?.type === 'VARIABLE_ALIAS' &&
           this.isValidVariableId(stop.boundVariables.color.id)
           ? {
             color: stop.color,
@@ -206,12 +206,12 @@ export class AdvancedPaintProcessor {
   /**
    * Process pattern paint
    */
-  private processPatternPaint(paintConfig: any, visible: boolean, opacity: number, blendMode: string): PaintConfig {
+  processPatternPaint(paintConfig: any, visible: boolean, opacity: number, blendMode: string): PaintConfig {
     // Validate and clamp scaling factor
     if (paintConfig.scalingFactor !== undefined) {
       const minScale = 0.01 // wU equivalent
       const maxScale = 4.0   // Iz equivalent
-      
+
       if (paintConfig.scalingFactor < minScale) {
         this.logger.warn(`Pattern scalingFactor of ${paintConfig.scalingFactor} is too small and will be clamped to ${minScale}`)
         paintConfig.scalingFactor = minScale
@@ -227,7 +227,7 @@ export class AdvancedPaintProcessor {
     if (paintConfig.spacing !== undefined) {
       const minSpacing = -1000 // IF equivalent
       const maxSpacing = 1000  // yR equivalent
-      
+
       if (paintConfig.spacing.x < minSpacing) {
         this.logger.warn(`Pattern spacing.x of ${paintConfig.spacing.x} is too small and will be clamped to ${minSpacing}`)
         paintConfig.spacing.x = minSpacing
@@ -275,7 +275,7 @@ export class AdvancedPaintProcessor {
   /**
    * Process image or video paint
    */
-  private processImageVideoPaint(figmaContext: any, bufferArray: any[], paintConfig: any, visible: boolean, opacity: number, blendMode: string): PaintConfig {
+  processImageVideoPaint(figmaContext: any, bufferArray: any[], paintConfig: any, visible: boolean, opacity: number, blendMode: string): PaintConfig {
     // Validation
     if (paintConfig.scalingFactor != null && paintConfig.scalingFactor <= 0) {
       throw new Error('Image scaleFactor must be greater than 0')
@@ -296,8 +296,8 @@ export class AdvancedPaintProcessor {
     }
 
     // Get transform
-    const transform = paintConfig.type === 'IMAGE' 
-      ? paintConfig.imageTransform 
+    const transform = paintConfig.type === 'IMAGE'
+      ? paintConfig.imageTransform
       : paintConfig.videoTransform
 
     // Process scale mode
@@ -336,7 +336,7 @@ export class AdvancedPaintProcessor {
       try {
         const imageData = figmaContext.getPrivateImageOrThrow(imageHash)
         this.validateImageBytes(imageData.bytes, 'Missing bytes for image')
-        
+
         result.image!.dataBlob = bufferArray.length
         bufferArray.push({ bytes: imageData.bytes })
 
@@ -364,7 +364,7 @@ export class AdvancedPaintProcessor {
   /**
    * Process paint filter configuration
    */
-  private processPaintFilter(filters: any): PaintFilter {
+  processPaintFilter(filters: any): PaintFilter {
     const baseFilter: PaintFilter = {
       exposure: 0,
       contrast: 0,
@@ -393,7 +393,7 @@ export class AdvancedPaintProcessor {
   /**
    * Process gradient stop
    */
-  private processGradientStop(stop: any): GradientStop {
+  processGradientStop(stop: any): GradientStop {
     return {
       color: stop.color,
       position: stop.position
@@ -401,54 +401,54 @@ export class AdvancedPaintProcessor {
   }
 
   // Helper methods (placeholders for actual implementation)
-  private convertBlendMode(blendMode: any): string {
+  convertBlendMode(blendMode: any): string {
     // Placeholder - should call actual blend mode conversion function
     return blendMode || 'NORMAL'
   }
 
-  private convertGradientTransform(transform: any): any {
+  convertGradientTransform(transform: any): any {
     // Placeholder - should call actual transform conversion function (eZ equivalent)
     return transform
   }
 
-  private convertTextDecorationColor(color: any): any {
+  convertTextDecorationColor(color: any): any {
     // Placeholder - should call actual text decoration color conversion
     return color
   }
 
-  private isValidVariableId(_id: string): boolean {
+  isValidVariableId(_id: string): boolean {
     // Placeholder - should call actual variable ID validation (_$$fn equivalent)
     return true
   }
 
-  private convertVariableId(id: string): string {
+  convertVariableId(id: string): string {
     // Placeholder - should call actual variable ID conversion (_$$sH equivalent)
     return id
   }
 
-  private resolveSourceNode(nodeId: string): string | null {
+  resolveSourceNode(nodeId: string): string | null {
     // Placeholder - should call actual source node resolution (sH equivalent)
     return nodeId
   }
 
-  private createImageHash(_hash: any): Uint8Array {
+  createImageHash(_hash: any): Uint8Array {
     // Placeholder - should call actual image hash creation (aD equivalent)
     return new Uint8Array()
   }
 
-  private getAnimatedImageInfo(_hash: any): { status: string; coverFrameHash?: any } {
+  getAnimatedImageInfo(_hash: any): { status: string; coverFrameHash?: any } {
     // Placeholder - should call actual animated image info getter (NfO.getAnimatedImageInfo equivalent)
     return { status: 'LOADED' }
   }
 
-  private validateImageBytes(bytes: any, message: string): void {
+  validateImageBytes(bytes: any, message: string): void {
     // Placeholder - should call actual byte validation (B1 equivalent)
     if (!bytes) {
       throw new Error(message)
     }
   }
 
-  private mergeWithBaseFilter(customFilter: any, baseFilter: PaintFilter): PaintFilter {
+  mergeWithBaseFilter(customFilter: any, baseFilter: PaintFilter): PaintFilter {
     // Placeholder - should call actual filter merging (Kb equivalent)
     return { ...baseFilter, ...customFilter }
   }
@@ -459,7 +459,7 @@ export class AdvancedPaintProcessor {
  * Manages fill processing operations
  */
 export class AdvancedFillManager {
-  private paintProcessor: AdvancedPaintProcessor
+  paintProcessor: AdvancedPaintProcessor
 
   constructor(paintProcessor?: AdvancedPaintProcessor) {
     this.paintProcessor = paintProcessor || new AdvancedPaintProcessor()

@@ -9,14 +9,14 @@ import { contactsAPIService } from '../figma_app/477548'
  * Represents a contacts library for the share modal, handling listing and searching of users and user groups.
  */
 class ShareModalContactsLibrary {
-  private api: {
+  api: {
     list: (params: any) => Promise<any>
     search: (params: any) => Promise<any>
   }
 
-  private planId: any
-  private userLimit: number
-  private userGroupLimit: number
+  planId: any
+  userLimit: number
+  userGroupLimit: number
   constructor(planId: any, userLimit?: number, userGroupLimit?: number, api = {
     list: contactsAPIService.getShareModalContactsWithUserGroups,
     search: contactsAPIService.searchShareModalContactsWithUserGroups,
@@ -226,9 +226,9 @@ export async function getLibraryContacts(currentOrgId: any, teamId: any): Promis
   const results = await library.library.search('')
   return results
     ? results.map((contact: any, index: number) => ({
-        ...contact,
-        rank: index + 1,
-      }))
+      ...contact,
+      rank: index + 1,
+    }))
     : []
 }
 

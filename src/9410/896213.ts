@@ -34,7 +34,7 @@ import { updateMultiplayerStateThunk } from "../figma_app/91703";
 import { postUserFlag } from "../905/985254";
 import { stopPropagation } from "../figma_app/753501";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
-import { hx } from "../figma_app/290668";
+import { handleAccessibilityKeyboardEvents } from "../figma_app/290668";
 import { isIntegrationContext } from "../figma_app/469876";
 import { Zr } from "../figma_app/678782";
 import { AD, wF, Wq, uC, A8 } from "../figma_app/578768";
@@ -775,7 +775,7 @@ let $$eO0 = memo(function (e) {
       id: "multiplayer-toolbar-container",
       onClick: stopPropagation,
       onKeyDown: e => {
-        hx({
+        handleAccessibilityKeyboardEvents({
           e,
           onClickHandler: e => {
             N ? O(Command.FOLLOW_PRESENTER) : ep(e);

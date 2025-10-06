@@ -15,7 +15,7 @@ export function roundToDecimal(value: number, decimals: number = 3): number {
  * Represents a pixel value that can be converted to a string with 'px' suffix.
  */
 export class PixelValue {
-  private readonly _value: number | string
+  readonly _value: number | string
 
   constructor(value: number | string) {
     this._value = value
@@ -47,7 +47,7 @@ export class PixelValue {
  * Represents a percentage value that can be converted to a string with '%' suffix.
  */
 export class PercentageValue {
-  private readonly _value: number
+  readonly _value: number
 
   constructor(value: number) {
     this._value = value
@@ -75,7 +75,7 @@ export class PercentageValue {
  * Represents a string value.
  */
 export class StringValue {
-  private readonly _value: string | number
+  readonly _value: string | number
 
   constructor(value: string | number) {
     this._value = value
@@ -103,7 +103,7 @@ export class StringValue {
  * Represents a raw value.
  */
 export class RawValue {
-  private readonly _value: string | number
+  readonly _value: string | number
 
   constructor(value: string | number) {
     this._value = value

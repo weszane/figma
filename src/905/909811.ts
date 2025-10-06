@@ -33,7 +33,7 @@ interface LibraryItemTilesByPageProps {
   onItemClick?: (item: any) => void;
   className?: string;
 }
-interface LibraryItemTilesByPageState {}
+interface LibraryItemTilesByPageState { }
 
 /**
  * Component that renders library items grouped by page
@@ -127,14 +127,14 @@ function getAssetId(item: any) {
       return item.node_id;
   }
 }
-interface LibraryItemTilesByFrameProps extends LibraryItemTilesByPageProps {}
+interface LibraryItemTilesByFrameProps extends LibraryItemTilesByPageProps { }
 
 /**
  * Component that renders library items grouped by frame
  * Original name: R
  */
 class LibraryItemTilesByFrame extends PureComponent<LibraryItemTilesByFrameProps> {
-  private readonly CHUNK_SIZE = 5;
+  readonly CHUNK_SIZE = 5;
   render() {
     const frameItemsMap: Record<string, any[]> = {};
     const ungroupedItems: any[] = [];
@@ -223,7 +223,7 @@ function calculateGutterWidth(containerWidth: number, itemWidth: number, gutterW
   const spacesBetweenItems = itemsPerRow - 1;
   return gutterWidth + (adjustedWidth - (itemsPerRow * itemWidth + spacesBetweenItems * gutterWidth)) / spacesBetweenItems;
 }
-interface LibraryItemTileGridProps extends LibraryItemTilesByPageProps {}
+interface LibraryItemTileGridProps extends LibraryItemTilesByPageProps { }
 
 /**
  * Component that renders a grid of library item tiles

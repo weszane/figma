@@ -221,11 +221,11 @@ export interface Phase26CoreUtilities {
  * Provides the main implementation class for all core utilities
  */
 export class DefaultPhase26CoreUtilities implements Phase26CoreUtilities {
-  private dataStructure = AdvancedDataStructureManager
-  private validation = AdvancedValidationManager
-  private transformation = AdvancedTransformationManager
-  private nodeCreation = AdvancedNodeCreationManager
-  private urlProcessor = AdvancedURLProcessor
+  dataStructure = AdvancedDataStructureManager
+  validation = AdvancedValidationManager
+  transformation = AdvancedTransformationManager
+  nodeCreation = AdvancedNodeCreationManager
+  urlProcessor = AdvancedURLProcessor
 
   extractUserPluginKeyArray(data: any): any[] {
     return this.dataStructure.extractUserPluginKeyArray(data)

@@ -71,8 +71,8 @@ interface ReconcileNodeParams {
 
 /** Named replacement for anonymous usage tracker class (original variable: c) */
 class ComponentUsageTracker {
-  private _pluginID: string | null = null
-  private _componentCounts: Record<string, number> = {}
+  _pluginID: string | null = null
+  _componentCounts: Record<string, number> = {}
 
   startReconciliation(pluginId: string) {
     this._pluginID = pluginId
@@ -573,7 +573,7 @@ function reconcileNode(params: ReconcileNodeParams): SceneNodeAdapter | null {
 
   // Remaining props (skip primary and sizing-limit props)
   for (const key in newVNode!.props) {
-    if (PRIMARY_PROP_SET.has(key as any) || LIMIT_SIZING_PROP_SET.has(key as any ))
+    if (PRIMARY_PROP_SET.has(key as any) || LIMIT_SIZING_PROP_SET.has(key as any))
       continue
     writePropIfChanged(key)
   }
@@ -591,7 +591,7 @@ function reconcileNode(params: ReconcileNodeParams): SceneNodeAdapter | null {
     handleElementSizing(newVNode!, figmaNode, newParentDirection)
   }
 
-  ;(['x', 'y'] as const).forEach((axis) => {
+  ; (['x', 'y'] as const).forEach((axis) => {
     const next = newVNode!.renderMetaData?.[axis]
     const prev = oldVNode ? oldVNode.renderMetaData?.[axis] : undefined
     if (!deepEqual(prev, next)) {

@@ -1,94 +1,174 @@
-import { UIVisibilitySetting, SchemaJoinStatus } from "../figma_app/763686";
-import { atomStoreManager } from "../figma_app/27355";
-import { handleOutOfMemoryError } from "../figma_app/553184";
-import { BrowserInfo } from "../figma_app/778880";
-import { setTagGlobal } from "../905/11";
-import { getProductType } from "../figma_app/314264";
-import { isActiveAtom } from "../905/617744";
-import { fullscreenCrashHandler } from "../905/913008";
-import { getMemoryUsage } from "../figma_app/527873";
-export class $$p0 {
+import { setTagGlobal } from "../905/11"
+import { isActiveAtom } from "../905/617744"
+import { fullscreenCrashHandler } from "../905/913008"
+import { atomStoreManager } from "../figma_app/27355"
+import { getProductType } from "../figma_app/314264"
+import { getMemoryUsage } from "../figma_app/527873"
+import { handleOutOfMemoryError } from "../figma_app/553184"
+import { SchemaJoinStatus, UIVisibilitySetting } from "../figma_app/763686"
+import { BrowserInfo } from "../figma_app/778880"
+
+export class MemoryStateManager {
+  _fullscreenCrashed: boolean
+  _receivedFailedAllocation: boolean
+  _lastAction: string | null
+  _lastWebContextMessage: string | null
+  _fileLoadTime: number | null
+
   constructor() {
-    this._fullscreenCrashed = !1;
-    this._receivedFailedAllocation = !1;
-    this._lastAction = null;
-    this._lastWebContextMessage = null;
-    this._fileLoadTime = null;
+    this._fullscreenCrashed = false
+    this._receivedFailedAllocation = false
+    this._lastAction = null
+    this._lastWebContextMessage = null
+    this._fileLoadTime = null
   }
-  oomState(e) {
-    let t = getMemoryUsage();
-    let i = this._fileLoadTime;
-    let n = i ? window.performance.now() - i : 0;
+
+  /**
+   * Constructs out-of-memory state information
+   * (Original name: oomState)
+   */
+  protected buildOOMState(baseState: Record<string, unknown>): Record<string, unknown> {
+    const totalMemoryInBytes = getMemoryUsage()
+    const fileLoadTime = this._fileLoadTime
+    const timeSinceFileLoad = fileLoadTime ? window.performance.now() - fileLoadTime : 0
+
     return {
-      ...e,
-      totalMemoryInBytes: t,
-      fileLoaded: !!i,
-      timeSinceFileLoad: n,
+      ...baseState,
+      totalMemoryInBytes,
+      fileLoaded: !!fileLoadTime,
+      timeSinceFileLoad,
       is64BitBrowser: BrowserInfo.is64BitBrowser,
       lastAction: this._lastAction,
-      lastWebContextMessage: this._lastWebContextMessage
-    };
+      lastWebContextMessage: this._lastWebContextMessage,
+    }
   }
-  documentIsLoaded() {
-    this._fileLoadTime = window.performance.now();
+
+  /**
+   * Marks the document as loaded by recording the current time
+   * (Original name: documentIsLoaded)
+   */
+  markDocumentLoaded(): void {
+    this._fileLoadTime = window.performance.now()
   }
-  resetOOMState() {
-    this._fileLoadTime = null;
-    this._lastAction = null;
+
+  /**
+   * Resets out-of-memory tracking state
+   * (Original name: resetOOMState)
+   */
+  resetOOMTracking(): void {
+    this._fileLoadTime = null
+    this._lastAction = null
   }
-  recordActionForReportingOOM(e) {
-    this._lastAction = e;
+
+  /**
+   * Records an action for out-of-memory reporting
+   * (Original name: recordActionForReportingOOM)
+   * @param action - The action to record
+   */
+  recordActionForOOM(action: string): void {
+    this._lastAction = action
   }
 }
-export class $$m1 extends $$p0 {
-  get _state() {
-    if (!this._store) throw Error("Calling _state without a valid store");
-    return this._store.getState();
+
+export class OutOfMemoryHandler extends MemoryStateManager {
+  _store: any
+
+  /**
+   * Gets the current application state
+   * (Original name: _state)
+   */
+  protected get currentState(): any {
+    if (!this._store) {
+      throw new Error("Calling currentState without a valid store")
+    }
+    return this._store.getState()
   }
-  constructor(e) {
-    super();
-    this._store = e;
+
+  constructor(store: any) {
+    super()
+    this._store = store
   }
+
+  /**
+   * Gets the currently open file key
+   * (Original name: openFileKey)
+   */
   openFileKey() {
-    return this._state.openFile?.key || null;
+    return this.currentState.openFile?.key || null
   }
-  allocationFailed(e, t, i, s, p, m, h, g, f, _) {
-    if (this._receivedFailedAllocation) return;
-    setTagGlobal("wasm_oom", "yes");
-    this._receivedFailedAllocation = !0;
-    let A = getMemoryUsage();
-    let y = (m / 1024).toFixed(1);
-    let b = (i / 1024 / 1024).toFixed(1);
-    let v = (A / 1024 / 1024).toFixed(1);
-    console.log(`malloc of size ${y}KB failed
-        (high water mark was ${b}MB,
-        total reserved memory was ${v}MB)`);
-    let I = this.oomState({
-      heapMemoryMode: e,
-      heapMemoryLimit: t,
-      mallocHighWatermark: i,
-      currentAllocatedBytes: s,
-      maxAllocatedBytes: p,
-      failedSize: m,
-      fontBytes: h,
-      migration: g,
-      migrationFrom: f,
-      migrationTo: _
-    });
+
+  /**
+   * Handles allocation failure events
+   * (Original name: allocationFailed)
+   */
+  handleAllocationFailure(
+    heapMemoryMode: any,
+    heapMemoryLimit: number,
+    mallocHighWatermark: number,
+    currentAllocatedBytes: number,
+    maxAllocatedBytes: number,
+    failedSize: number,
+    fontBytes: number,
+    migration: any,
+    migrationFrom: any,
+    migrationTo: any,
+  ): void {
+    // Prevent duplicate handling
+    if (this._receivedFailedAllocation) {
+      return
+    }
+
+    // Mark OOM event
+    setTagGlobal("wasm_oom", "yes")
+    this._receivedFailedAllocation = true
+
+    // Calculate memory metrics
+    const totalMemoryInBytes = getMemoryUsage()
+    const failedSizeKB = (failedSize / 1024).toFixed(1)
+    const highWatermarkMB = (mallocHighWatermark / 1024 / 1024).toFixed(1)
+    const totalReservedMB = (totalMemoryInBytes / 1024 / 1024).toFixed(1)
+
+    // Log memory failure details
+    console.log(`malloc of size ${failedSizeKB}KB failed
+        (high water mark was ${highWatermarkMB}MB,
+        total reserved memory was ${totalReservedMB}MB)`)
+
+    // Build OOM state information
+    const oomStateData = this.buildOOMState({
+      heapMemoryMode,
+      heapMemoryLimit,
+      mallocHighWatermark,
+      currentAllocatedBytes,
+      maxAllocatedBytes,
+      failedSize,
+      fontBytes,
+      migration,
+      migrationFrom,
+      migrationTo,
+    })
+
+    // Handle OOM error with full context
     handleOutOfMemoryError({
-      ...I,
-      progressBarMode: UIVisibilitySetting[this._state.progressBarState.mode],
-      multiplayerSessionState: SchemaJoinStatus[this._state.mirror.appModel.multiplayerSessionState],
+      ...oomStateData,
+      progressBarMode: UIVisibilitySetting[this.currentState.progressBarState.mode],
+      multiplayerSessionState: SchemaJoinStatus[this.currentState.mirror.appModel.multiplayerSessionState],
       editingFileKey: this.openFileKey(),
-      isReadOnly: this._state.mirror.appModel.isReadOnly,
+      isReadOnly: this.currentState.mirror.appModel.isReadOnly,
       appType: "editor",
-      productType: getProductType(this._state.selectedView, null)
-    });
-    let E = atomStoreManager.get(isActiveAtom);
-    fullscreenCrashHandler.showMemoryCrashModal({
-      isBranching: E
-    }, this.openFileKey(), this._store);
+      productType: getProductType(this.currentState.selectedView, null),
+    })
+
+    // Show crash modal
+    const isBranching = atomStoreManager.get(isActiveAtom)
+    fullscreenCrashHandler.showMemoryCrashModal(
+      {
+        isBranching,
+      },
+      this.openFileKey(),
+      this._store,
+    )
   }
 }
-export const Q = $$p0;
-export const a = $$m1;
+
+export const Q = MemoryStateManager
+export const a = OutOfMemoryHandler

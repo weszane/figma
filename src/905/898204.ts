@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useSyncExternalStore } from "react";
-import { f } from "../905/693155";
+import { trackAccessibilityEvent } from "../905/693155";
 import { Timer } from "../905/609396";
 import { vF, J4 } from "../figma_app/290870";
 import { shallowEqual } from "react-redux";
@@ -142,7 +142,7 @@ export function $$p0(e, t) {
         n.start();
         let s = e(...i);
         n.stop();
-        f(t, {
+        trackAccessibilityEvent(t, {
           elapsedTime: n.getElapsedTime(),
           numNodes: s.size
         });

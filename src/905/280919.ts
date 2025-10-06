@@ -15,7 +15,7 @@ import { getInitialOptions, getStaticDomain } from '../figma_app/169182';
 import { isFigmaEmail, isSyntheticTesterEmail } from '../figma_app/416935';
 import { getInitialDynamicConfig } from '../figma_app/594947';
 let I = ['api/web_logger', 'data:', '/api/figment-proxy/monitor'];
-let E = ['s3-alpha.figma.com', 's3-alpha-sig.figma.com', 's3-alpha-sig-oac.figma.com', 's3-staging-sig.staging.figma.com', 's3-figma-videos-production-sig.com', 'figma-fonts-private-production', getStaticDomain()];
+let E = ['s3-alpha.figma.com', 's3-alpha-sig.figma.com', 's3-alpha-sig-oac.figma.com', 's3-staging-sig.staging.figma.com', 's3-figma-videos-production-sig.com', 'figma-fonts--production', getStaticDomain()];
 let x = /(googlebot\/|bot|Googlebot-Mobile|Googlebot-Image|Google favicon|Mediapartners-Google|bingbot|slurp|java|wget|curl|Commons-HttpClient|Python-urllib|libwww|httpunit|nutch|phpcrawl|msnbot|jyxobot|FAST-WebCrawler|FAST Enterprise Crawler|biglotron|teoma|convera|seekbot|gigablast|exabot|ngbot|ia_archiver|GingerCrawler|webmon |httrack|webcrawler|grub.org|UsineNouvelleCrawler|antibot|netresearchserver|speedy|fluffy|bibnum.bnf|findlink|msrbot|panscient|yacybot|AISearchBot|IOI|ips-agent|tagoobot|MJ12bot|dotbot|woriobot|yanga|buzzbot|mlbot|yandexbot|purebot|Linguee Bot|Voyager|CyberPatrol|voilabot|baiduspider|citeseerxbot|spbot|twengabot|postrank|turnitinbot|scribdbot|page2rss|sitebot|linkdex|Adidxbot|blekkobot|ezooms|dotbot|Mail.RU_Bot|discobot|heritrix|findthatfile|europarchive.org|NerdByNature.Bot|sistrix crawler|ahrefsbot|Aboundex|domaincrawler|wbsearchbot|summify|ccbot|edisterbot|seznambot|ec2linkfinder|gslfbot|aihitbot|intelium_bot|facebookexternalhit|yeti|RetrevoPageAnalyzer|lb-spider|sogou|lssbot|careerbot|wotbox|wocbot|ichiro|DuckDuckBot|lssrocketcrawler|drupact|webcompanycrawler|acoonbot|openindexspider|gnam gnam spider|web-archive-net.com.bot|backlinkcrawler|coccoc|integromedb|content crawler spider|toplistbot|seokicks-robot|it2media-domain-crawler|ip-web-crawler.com|siteexplorer.info|elisabot|proximic|changedetection|blexbot|arabot|WeSEE:Search|niki-bot|CrystalSemanticsBot|rogerbot|360Spider|psbot|InterfaxScanBot|Lipperhey SEO Service|CC Metadata Scaper|g00g1e.net|GrapeshotCrawler|urlappendbot|brainobot|fr-crawler|binlar|SimpleCrawler|Livelapbot|Twitterbot|cXensebot|smtbot|bnf.fr_bot|A6-Indexer|ADmantX|Facebot|Twitterbot|OrangeBot|memorybot|AdvBot|MegaIndex|SemanticScholarBot|ltx71|nerdybot|xovibot|BUbiNG|Qwantify|archive.org_bot|Applebot|TweetmemeBot|crawler4j|findxbot|SemrushBot|yoozBot|lipperhey|y!j-asr|Domain Re-Animator Bot|AddThis)/i;
 let S = /(qawolf\.email|qawolf\d{1,2}\.com|qawolfworkflows\.com|uibuilder\.awsapps\.com)/;
 let w = {
@@ -210,9 +210,9 @@ let O = class e {
     this._overallCircuitBreakerRatePerSecond = -1;
     this._numWeightedEventsInBucket = 0;
     this._weightedEventTypesInBucket = {};
-    this._onEnableDatadog = () => {};
-    this._onDisableDatadog = () => {};
-    this._onCircuitBreakerError = () => {};
+    this._onEnableDatadog = () => { };
+    this._onDisableDatadog = () => { };
+    this._onCircuitBreakerError = () => { };
     this._enableEventWeighting = !1;
     this.debouncedCountIncrement = debounce(t => {
       let i = 1;

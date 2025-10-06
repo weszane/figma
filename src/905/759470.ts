@@ -10,9 +10,9 @@ let $$u5 = [() => getI18nString("community.publishing.getting_everything_ready")
 let $$p9 = [() => getI18nString("community.publishing.getting_everything_ready"), () => getI18nString("community.publishing.gathering_all_the_layers"), () => getI18nString("community.publishing.compiling_all_templates")];
 let $$m4 = {
   public: () => getI18nString("community.publishing.and_youre_live"),
-  private: () => getI18nString("community.publishing.and_youre_live"),
+  : () => getI18nString("community.publishing.and_youre_live"),
   inReview: () => getI18nString("community.publishing.we_have_received_your_submission"),
-  error: () => getI18nString("community.publishing.something_went_wrong")
+    error: () => getI18nString("community.publishing.something_went_wrong")
 };
 let $$h2 = {
   public: () => getI18nString("community.publishing.you_did_it_thanks_for_putting_your_work_out_there"),
@@ -23,11 +23,11 @@ let $$h2 = {
     resourceName: e,
     orgName: t
   }),
-  private: e => getI18nString("community.publishing.your_templates_are_published_to", {
+  : e => getI18nString("community.publishing.your_templates_are_published_to", {
     publishScopeEntityName: e
   }),
   inReview: () => getI18nString("community.publishing.our_team_will_review_this_resource"),
-  error: () => getI18nString("community.publishing.please_try_again_or_report_this_file_to_the_figma_team_for_support")
+    error: () => getI18nString("community.publishing.please_try_again_or_report_this_file_to_the_figma_team_for_support")
 };
 export const DM = $$o0;
 export const GT = $$l1;

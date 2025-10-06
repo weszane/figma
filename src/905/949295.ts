@@ -6,9 +6,9 @@ import { createNoOpValidator } from '../figma_app/181241'
  */
 export class SongsApiHandler {
   /** Validator for songs schema (original: SongsSchemaValidator) */
-  private songsSchemaValidator = createNoOpValidator()
+  songsSchemaValidator = createNoOpValidator()
   /** Validator for active song schema (original: ActiveSchemaValidator) */
-  private activeSchemaValidator = createNoOpValidator()
+  activeSchemaValidator = createNoOpValidator()
 
   /**
    * Fetches the list of songs.

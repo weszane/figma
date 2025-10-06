@@ -36,13 +36,13 @@ catch {
  */
 export class KiwiCodec {
   [x: string]: any
-  private definitions: Record<string, any> = {}
-  private fieldValueToIndex: Record<string, Record<number, number>> = {}
-  private enums: Record<string, Record<string | number, string | number>> = {}
-  private nonArrayDefinitionsToDedup: Set<string>
-  private arrayDefinitionsToDedup: Set<string>
-  private sensitiveFields: Set<string>
-  private shouldIgnoreForRedaction: RegExp
+  definitions: Record<string, any> = {}
+  fieldValueToIndex: Record<string, Record<number, number>> = {}
+  enums: Record<string, Record<string | number, string | number>> = {}
+  nonArrayDefinitionsToDedup: Set<string>
+  arrayDefinitionsToDedup: Set<string>
+  sensitiveFields: Set<string>
+  shouldIgnoreForRedaction: RegExp
 
   constructor(
     schema: string | Uint8Array | ByteBuffer | any,
@@ -100,7 +100,7 @@ export class KiwiCodec {
    * Processes an ENUM definition.
    * Original: part of constructor loop
    */
-  private processEnum(def: any): void {
+  processEnum(def: any): void {
     const enumMap: Record<string | number, string | number> = {}
     for (const field of def.fields) {
       enumMap[field.name] = field.value
@@ -114,7 +114,7 @@ export class KiwiCodec {
    * Processes a STRUCT or MESSAGE definition.
    * Original: part of constructor loop
    */
-  private processStructOrMessage(def: any): void {
+  processStructOrMessage(def: any): void {
     (this as any)[`decode${def.name}`] = (data: any, cache?: any) => this.decodeObject(def, data, cache);
     (this as any)[`encode${def.name}`] = (data: any) => this.encodeObject(def, data);
     (this as any)[`redact${def.name}`] = (data: any) => this.redactObject(def, data)
@@ -153,7 +153,7 @@ export class KiwiCodec {
    * Decodes a single field.
    * Original: decodeSingleField
    */
-  private decodeSingleField(field: any, buffer: ByteBuffer, cache?: any): any {
+  decodeSingleField(field: any, buffer: ByteBuffer, cache?: any): any {
     switch (field.type) {
       case 'bool': return !!buffer.readByte()
       case 'byte': return buffer.readByte()
@@ -180,7 +180,7 @@ export class KiwiCodec {
    * Encodes a single field.
    * Original: encodeSingleField
    */
-  private encodeSingleField(field: any, value: any, buffer: ByteBuffer): void {
+  encodeSingleField(field: any, value: any, buffer: ByteBuffer): void {
     switch (field.type) {
       case 'bool':
       case 'byte': buffer.writeByte(value); break
@@ -214,7 +214,7 @@ export class KiwiCodec {
    * Hashes a single field.
    * Original: hashSingleField
    */
-  private hashSingleField(field: any, buffer: BufferHashReader): void {
+  hashSingleField(field: any, buffer: BufferHashReader): void {
     switch (field.type) {
       case 'bool':
       case 'byte': buffer.readByte(); break
@@ -241,7 +241,7 @@ export class KiwiCodec {
    * Redacts a single field.
    * Original: redactSingleField
    */
-  private redactSingleField(field: any, buffer: ByteBuffer): void {
+  redactSingleField(field: any, buffer: ByteBuffer): void {
     switch (field.type) {
       case 'bool':
       case 'byte': buffer.readByte(); break
@@ -275,7 +275,7 @@ export class KiwiCodec {
    * Decodes an array field.
    * Original: decodeArrayField
    */
-  private decodeArrayField(field: any, buffer: ByteBuffer, cache?: any) {
+  decodeArrayField(field: any, buffer: ByteBuffer, cache?: any) {
     if (field.type === 'byte')
       return buffer.readByteArray()
 
@@ -315,7 +315,7 @@ export class KiwiCodec {
    * Decodes an object.
    * Original: decodeObject
    */
-  private decodeObject(def: any, buffer: any, cache?: any): any {
+  decodeObject(def: any, buffer: any, cache?: any): any {
     if (!(buffer instanceof ByteBuffer))
       buffer = new ByteBuffer(buffer)
 
@@ -375,7 +375,7 @@ export class KiwiCodec {
    * Hashes an object.
    * Original: hashObject
    */
-  private hashObject(def: any, buffer: BufferHashReader): void {
+  hashObject(def: any, buffer: BufferHashReader): void {
     if (def.kind === 'MESSAGE') {
       while (true) {
         const tag = buffer.readVarUint()
@@ -421,7 +421,7 @@ export class KiwiCodec {
    * Encodes an object.
    * Original: encodeObject
    */
-  private encodeObject(def: any, obj: any, buffer?: ByteBuffer) {
+  encodeObject(def: any, obj: any, buffer?: ByteBuffer) {
     const isNewBuffer = !buffer
     buffer = buffer || new ByteBuffer()
 
@@ -460,7 +460,7 @@ export class KiwiCodec {
    * Redacts an object.
    * Original: redactObject
    */
-  private redactObject(def: any, buffer: any): void {
+  redactObject(def: any, buffer: any): void {
     if (!(buffer instanceof ByteBuffer))
       buffer = new ByteBuffer(buffer)
     if (def.kind === 'MESSAGE') {

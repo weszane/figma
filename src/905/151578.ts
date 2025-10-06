@@ -28,14 +28,14 @@ export interface SceneValueTrackerOptions {
  * @originalName $$l1
  */
 export class SceneValueTracker {
-  private lastArgs: any[] | null = null
-  private lastValue: any = null
-  private lastRevision: number | null | undefined = null
-  private lastSceneInstance: any = null
-  private scene: any
-  private computeValue: (...args: any[]) => any
-  private deepEqual: boolean
-  private allowDeferral: boolean
+  lastArgs: any[] | null = null
+  lastValue: any = null
+  lastRevision: number | null | undefined = null
+  lastSceneInstance: any = null
+  scene: any
+  computeValue: (...args: any[]) => any
+  deepEqual: boolean
+  allowDeferral: boolean
 
   /**
    * @param scene - The scene object.
@@ -114,11 +114,11 @@ export class SceneValueTracker {
  * @originalName $$d0
  */
 export class SimpleSceneValueTracker {
-  private lastArgs: any[] | null = null
-  private lastValue: any = null
-  private lastSceneInstance: any = null
-  private scene: any
-  private computeValue: (...args: any[]) => any
+  lastArgs: any[] | null = null
+  lastValue: any = null
+  lastSceneInstance: any = null
+  scene: any
+  computeValue: (...args: any[]) => any
 
   /**
    * @param scene - The scene object.

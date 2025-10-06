@@ -154,7 +154,7 @@ export class ComputedFieldDef {
    * @returns ExistenceStatus or undefined.
    * @originalName template
    */
-  private computeTemplateStatus(schema: any): ExistenceStatus | undefined {
+  computeTemplateStatus(schema: any): ExistenceStatus | undefined {
     return schema.objectMapping?.[this.objectDef.name]?.computedFields[this.name] === hasNonEmptyFirstValue
       ? ExistenceStatus.Exists
       : undefined
@@ -240,7 +240,7 @@ export class ComputedFieldDef {
    * @returns ViewDefinition instance.
    * @originalName makeViewDef (exists branch)
    */
-  private buildExistsView(viewDef: ViewDefinition): ViewDefinition {
+  buildExistsView(viewDef: ViewDefinition): ViewDefinition {
     const rootQuery = viewDef.root.getQueryByName('root')
     if (!rootQuery) {
       throw new Error(

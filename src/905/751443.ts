@@ -4,8 +4,8 @@ import { APIParameterUtils, createMetaValidator } from '../figma_app/181241'
 import { ignore } from '../figma_app/709165'
 
 export class DefaultContentService {
-  private readonly defaultInsertsSchemaValidator: ReturnType<typeof createMetaValidator>
-  private readonly defaultCollageItemsSchemaValidator: ReturnType<typeof createMetaValidator>
+  readonly defaultInsertsSchemaValidator: ReturnType<typeof createMetaValidator>
+  readonly defaultCollageItemsSchemaValidator: ReturnType<typeof createMetaValidator>
 
   constructor() {
     this.defaultInsertsSchemaValidator = createMetaValidator('DefaultInsertsSchemaValidator', z.object({

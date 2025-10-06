@@ -13,8 +13,8 @@ type Validates = ReturnType<typeof createMetaValidator>
  * Original: $$a0
  */
 class CommunityCategoryHandler {
-  private CommunityAllCategoriesSchemaValidator: Validates
-  private CommunityCategorySchemaValidator: Validates
+  CommunityAllCategoriesSchemaValidator: Validates
+  CommunityCategorySchemaValidator: Validates
 
   constructor() {
     this.CommunityAllCategoriesSchemaValidator = createMetaValidator('CommunityAllCategoriesSchemaValidator', Hg, 'xrv_api_community_categories', true)

@@ -53,14 +53,14 @@ export interface DesktopTokenParams {
  * NotificationAPI provides methods for notification-related API calls.
  */
 export class NotificationAPI {
-  private UpdatedNotificationSchemaValidator = createNoOpValidator()
-  private MarkNotificationAsReadSchemaValidator = createNoOpValidator()
-  private AcceptNotificationSchemaValidator = createNoOpValidator()
-  private RejectNotificationSchemaValidator = createNoOpValidator()
-  private CommunityServerDrivenSchemaValidator = createNoOpValidator()
-  private ServerDrivenPlanSchemaValidator = createNoOpValidator()
-  private WebTokenRegistrationSchemaValidator = createNoOpValidator()
-  private DesktopTokenRegistrationSchemaValidator = createNoOpValidator()
+  UpdatedNotificationSchemaValidator = createNoOpValidator()
+  MarkNotificationAsReadSchemaValidator = createNoOpValidator()
+  AcceptNotificationSchemaValidator = createNoOpValidator()
+  RejectNotificationSchemaValidator = createNoOpValidator()
+  CommunityServerDrivenSchemaValidator = createNoOpValidator()
+  ServerDrivenPlanSchemaValidator = createNoOpValidator()
+  WebTokenRegistrationSchemaValidator = createNoOpValidator()
+  DesktopTokenRegistrationSchemaValidator = createNoOpValidator()
 
   /**
    * Updates a notification.

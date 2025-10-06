@@ -5,7 +5,7 @@ import { setupAdvancedLazyLoader } from '../905/992467'
  * Original class name: $$r0
  */
 export class LazyComponentFactory {
-  private args: ObjectOf
+  args: ObjectOf
 
   /**
    * Initializes the LazyComponentFactory with arguments.

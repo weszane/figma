@@ -5,12 +5,12 @@
  * Original class name: $$n0
  */
 export class CircularBuffer<T> {
-  private maxElements: number
-  private callback: ((evictedElement: T) => void) | undefined
-  private size: number
-  private start: number
-  private end: number
-  private buffer: (T | undefined)[]
+  maxElements: number
+  callback: ((evictedElement: T) => void) | undefined
+  size: number
+  start: number
+  end: number
+  buffer: (T | undefined)[]
 
   /**
    * Creates a new circular buffer.

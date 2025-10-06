@@ -50,7 +50,7 @@ class PolymorphicSchemaBase {
   constructor(schema: any, schemaAttribute?: string | ((input: any, parent?: any, key?: any) => string)) {
     if (schemaAttribute) {
       this._schemaAttribute
-      = typeof schemaAttribute === 'string' ? (input: any) => (input as any)[schemaAttribute] : schemaAttribute
+        = typeof schemaAttribute === 'string' ? (input: any) => (input as any)[schemaAttribute] : schemaAttribute
     }
     this.define(schema)
   }
@@ -94,9 +94,9 @@ class PolymorphicSchemaBase {
     return this.isSingleSchema || idOrValue == null
       ? idOrValue
       : {
-          id: idOrValue,
-          schema: this.getSchemaAttribute(input, parent, key),
-        }
+        id: idOrValue,
+        schema: this.getSchemaAttribute(input, parent, key),
+      }
   }
 
   // original: denormalizeValue
@@ -104,10 +104,10 @@ class PolymorphicSchemaBase {
     const schemaKey = isMaybeImmutable(input) ? input.get('schema') : (input as any).schema
     return this.isSingleSchema || schemaKey
       ? denormalizeField(
-          ((this.isSingleSchema ? undefined : isMaybeImmutable(input) ? input.get('id') : (input as any).id) as any)
-          || input,
-          this.isSingleSchema ? this.schema : this.schema[schemaKey],
-        )
+        ((this.isSingleSchema ? undefined : isMaybeImmutable(input) ? input.get('id') : (input as any).id) as any)
+        || input,
+        this.isSingleSchema ? this.schema : this.schema[schemaKey],
+      )
       : input
   }
 }
@@ -130,23 +130,23 @@ const getKeyFromMaybeImmutable = (key: string) => (obj: any) => (isMaybeImmutabl
 // Entity Schema
 // original: class d
 class EntitySchema {
-  private _key: string
-  private _getId: (input: any, parent?: any, key?: any) => Id
-  private _idAttribute: string | ((input: any, parent?: any, key?: any) => Id)
-  private _mergeStrategy: (entityA: any, entityB: any) => any
-  private _processStrategy: (input: any, parent?: any, key?: any) => any
-  private _fallbackStrategy: (id: Id, schema: EntitySchema) => any
+  _key: string
+  _getId: (input: any, parent?: any, key?: any) => Id
+  _idAttribute: string | ((input: any, parent?: any, key?: any) => Id)
+  _mergeStrategy: (entityA: any, entityB: any) => any
+  _processStrategy: (input: any, parent?: any, key?: any) => any
+  _fallbackStrategy: (id: Id, schema: EntitySchema) => any
   schema: SchemaMap = {}
 
   constructor(
     key: string,
-   definition: SchemaMap = {},
-   options: {
-     idAttribute?: string | ((input: any, parent?: any, key?: any) => Id)
-     mergeStrategy?: (entityA: any, entityB: any) => any
-     processStrategy?: (input: any, parent?: any, key?: any) => any
-     fallbackStrategy?: (id: Id, schema: EntitySchema) => any
-   } = {},
+    definition: SchemaMap = {},
+    options: {
+      idAttribute?: string | ((input: any, parent?: any, key?: any) => Id)
+      mergeStrategy?: (entityA: any, entityB: any) => any
+      processStrategy?: (input: any, parent?: any, key?: any) => any
+      fallbackStrategy?: (id: Id, schema: EntitySchema) => any
+    } = {},
   ) {
     if (!key || typeof key !== 'string')
       throw new Error(`Expected a string key for Entity, but found ${key}.`)
@@ -296,14 +296,14 @@ const normalizeRecursive: Visit = (input, parent, key, schema, addEntity, visite
     ? typeof schema !== 'object' || (schema.normalize && typeof schema.normalize === 'function')
       ? schema.normalize(input, parent, key, normalizeRecursive, addEntity, visited)
       : (Array.isArray(schema) ? normalizeArray : normalizeObjectWithSchema)(
-          schema as any,
-          input,
-          parent,
-          key,
-          normalizeRecursive,
-          addEntity,
-          visited,
-        )
+        schema as any,
+        input,
+        parent,
+        key,
+        normalizeRecursive,
+        addEntity,
+        visited,
+      )
     : input
 
 // original: array normalize branch inside p -> extracted
@@ -421,8 +421,7 @@ const SchemaLibrary = {
 function normalizeRoot(input: any, schema: any) {
   if (!input || typeof input !== 'object') {
     throw new Error(
-      `Unexpected input given to normalize. Expected type to be "object", found "${
-        input === null ? 'null' : typeof input
+      `Unexpected input given to normalize. Expected type to be "object", found "${input === null ? 'null' : typeof input
       }".`,
     )
   }

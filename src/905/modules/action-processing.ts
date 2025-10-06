@@ -48,7 +48,7 @@ export enum MediaAction {
  */
 export enum VariableDataType {
   BOOLEAN = 'BOOLEAN',
-  FLOAT = 'FLOAT', 
+  FLOAT = 'FLOAT',
   STRING = 'STRING',
   COLOR = 'COLOR',
   MAP = 'MAP',
@@ -109,10 +109,10 @@ export class ActionProcessor {
   /**
    * Process variable setting actions
    */
-  private static processVariableAction(action: any): any {
+  static processVariableAction(action: any): any {
     const targetVariable = action.targetVariable?.id
     let variableId = null
-    
+
     if (targetVariable) {
       // Mock variable ID processing - would need proper implementation
       variableId = targetVariable
@@ -128,7 +128,7 @@ export class ActionProcessor {
   /**
    * Process variable mode actions
    */
-  private static processVariableModeAction(action: any): any {
+  static processVariableModeAction(action: any): any {
     // Check feature flag (mock implementation)
     if (!this.isVariableModeActionEnabled()) {
       return null
@@ -136,7 +136,7 @@ export class ActionProcessor {
 
     const variableSetID = action.targetVariableSetID
     let variableCollectionId = null
-    
+
     if (variableSetID) {
       // Mock collection ID processing
       variableCollectionId = variableSetID
@@ -152,13 +152,13 @@ export class ActionProcessor {
   /**
    * Process conditional actions
    */
-  private static processConditionalAction(action: any): any {
+  static processConditionalAction(action: any): any {
     if (!action.condition || !action.trueAction) {
       throw new Error('Conditional actions require condition and trueAction.')
     }
 
     const processedCondition = this.processVariableValue(action.condition)
-    
+
     if (processedCondition.resolvedDataType !== 'BOOLEAN') {
       throw new Error('Conditional actions require a boolean condition.')
     }
@@ -175,7 +175,7 @@ export class ActionProcessor {
   /**
    * Process media runtime actions
    */
-  private static processMediaAction(action: any): any {
+  static processMediaAction(action: any): any {
     const transitionNodeID = action.transitionNodeID
     let mediaSkipByAmount = 0
     let mediaSkipToTime = 0
@@ -202,9 +202,9 @@ export class ActionProcessor {
   /**
    * Process node navigation actions
    */
-  private static processNodeAction(action: any): any {
+  static processNodeAction(action: any): any {
     const destinationId = action.destinationId
-    
+
     if (!destinationId) {
       return null
     }
@@ -242,7 +242,7 @@ export class ActionProcessor {
   /**
    * Process navigation transitions
    */
-  private static processNavigation(navigation: any[]): any[] {
+  static processNavigation(navigation: any[]): any[] {
     return navigation.map(nav => {
       const processedNav: any = {}
 
@@ -289,7 +289,7 @@ export class ActionProcessor {
   /**
    * Process variable values with type checking
    */
-  private static processVariableValue(variableData: any): any {
+  static processVariableValue(variableData: any): any {
     if (!variableData) {
       return null
     }
@@ -310,7 +310,7 @@ export class ActionProcessor {
   /**
    * Extract variable value based on type
    */
-  private static extractVariableValue(value: any): any {
+  static extractVariableValue(value: any): any {
     if (value.floatValue !== undefined) {
       return value.floatValue
     }
@@ -335,14 +335,14 @@ export class ActionProcessor {
         expressionArguments: value.expressionValue.expressionArguments || []
       }
     }
-    
+
     return value
   }
 
   /**
    * Infer data type from value
    */
-  private static inferDataType(value: any): string {
+  static inferDataType(value: any): string {
     if (typeof value === 'boolean') return 'BOOLEAN'
     if (typeof value === 'number') return 'FLOAT'
     if (typeof value === 'string') return 'STRING'
@@ -357,7 +357,7 @@ export class ActionProcessor {
   /**
    * Check if variable mode actions are enabled (mock)
    */
-  private static isVariableModeActionEnabled(): boolean {
+  static isVariableModeActionEnabled(): boolean {
     // Mock feature flag check
     return true
   }
@@ -382,7 +382,7 @@ export class ReactionManager {
           throw new Error('You cannot create multiple actions on Reactions with your current plan.')
         }
 
-        processedReaction.actions = reaction.actions.length < 1 
+        processedReaction.actions = reaction.actions.length < 1
           ? [{ connectionType: 'NONE' }]
           : reaction.actions
             .map(action => ActionProcessor.processConnectionAction(action))
@@ -410,7 +410,7 @@ export class ReactionManager {
   /**
    * Check if multiple actions are allowed
    */
-  private static isMultipleActionsAllowed(): boolean {
+  static isMultipleActionsAllowed(): boolean {
     // Mock plan check - would normally verify user subscription
     return true
   }
@@ -418,7 +418,7 @@ export class ReactionManager {
   /**
    * Generate unique ID for reactions
    */
-  private static generateUniqueID(): string {
+  static generateUniqueID(): string {
     return `reaction_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
   }
 }

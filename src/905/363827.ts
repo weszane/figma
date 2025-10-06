@@ -3,7 +3,7 @@
  * (Original class: $$n0)
  */
 export class SuggestedVariablesCollection {
-  private suggestedVars: Map<string, any>
+  suggestedVars: Map<string, any>
 
   /**
    * Create a SuggestedVariablesCollection.
@@ -65,8 +65,8 @@ export class SuggestedVariablesCollection {
  * (Original class: $$r1)
  */
 export class SuggestedVariableReference {
-   raw: { value: any }
-   matchingVarId: string
+  raw: { value: any }
+  matchingVarId: string
 
   /**
    * Create a SuggestedVariableReference.

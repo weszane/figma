@@ -6,8 +6,8 @@ import { flushSync } from 'react-dom'
  * Manages frame listeners and schedules UI updates using requestAnimationFrame.
  */
 class FrameBatcher {
-  private _frameListeners: Set<() => void>
-  private _rafHandle: number
+  _frameListeners: Set<() => void>
+  _rafHandle: number
 
   constructor() {
     this._frameListeners = new Set()
@@ -51,8 +51,8 @@ class FrameBatcher {
  * Publishes state changes and provides React hooks for subscription.
  */
 export class StatePublisher {
-  private _frameBatcher: FrameBatcher
-  private _value: any
+  _frameBatcher: FrameBatcher
+  _value: any
 
   /**
    * @param initialValue - Initial state value.
@@ -119,7 +119,7 @@ export class StatePublisher {
  * Publishes state changes only if comparison function returns false.
  */
 export class ComparableStatePublisher extends StatePublisher {
-  private comparisonFunction: (prev: any, next: any) => boolean
+  comparisonFunction: (prev: any, next: any) => boolean
 
   /**
    * @param initialValue - Initial state value.

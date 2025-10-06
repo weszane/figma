@@ -103,16 +103,16 @@ enum ImageState {
 class ImageDownloadItem {
   static MAX_PRIORITY = Number.MAX_SAFE_INTEGER;
   hash: string;
-  private _priority: number;
+  _priority: number;
   compressedTextureS3Path: string | null = null;
   shouldDownloadCompressedTexture: boolean | null = null;
   retries: number = 0;
   state: ImageState = ImageState.AWAITING_SINATRA_LOOKUP;
   s3Path?: string;
   retryTime?: number;
-  private _downloadPromise: Promise<Uint8Array<any>> | null = null;
-  private _imageIsReady: () => void = () => { };
-  private _readyPromise: Promise<void>;
+  _downloadPromise: Promise<Uint8Array<any>> | null = null;
+  _imageIsReady: () => void = () => { };
+  _readyPromise: Promise<void>;
   constructor(hash: string, priority: number) {
     this.hash = hash;
     this._priority = priority;
@@ -189,9 +189,9 @@ class ImageDownloadItem {
  * Original class name: x
  */
 class ImageDownloadQueue {
-  private queue: ImageDownloadItem[] = [];
-  private byHash = new Map<string, ImageDownloadItem>();
-  private needsSort = false;
+  queue: ImageDownloadItem[] = [];
+  byHash = new Map<string, ImageDownloadItem>();
+  needsSort = false;
   get length(): number {
     return this.queue.length;
   }

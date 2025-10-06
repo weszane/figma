@@ -18,7 +18,7 @@ import { startLibraryUpdate, completeLibraryUpdate, failLibraryUpdate } from "..
 import { hideModal } from "../905/156213";
 import { getNextSessionId, createSessionPromise, isIncrementalSessionOrValidating } from "../figma_app/582924";
 import { wM } from "../figma_app/852050";
-import { c as _$$c } from "../905/210851";
+import { selectFileInfo } from "../905/210851";
 import { openFileAtom, selectCurrentFile } from "../figma_app/516028";
 import { useDelayedCallback } from "../905/116724";
 import { getUserId } from "../905/372672";
@@ -129,7 +129,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
     scopedVariableSetUpdates,
     scopedLibraryAssetUpdates
   } = useAtomWithSubscription(u);
-  let B = useSelector(_$$c);
+  let B = useSelector(selectFileInfo);
   let V = B.file_key;
   let H = p?.parentOrgId?.toString();
   let z = B.file_team_id?.toString();

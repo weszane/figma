@@ -37,7 +37,7 @@ interface TileCopyLinkModalProps {
 class TileCopyLinkModal extends Component<TileCopyLinkModalProps> {
   static displayName = 'TileCopyLinkModal'
   // Original field: inputRef
-  private inputRef = (el: HTMLInputElement | null): void => {
+  inputRef = (el: HTMLInputElement | null): void => {
     if (el) {
       el.focus()
       el.select()
@@ -45,7 +45,7 @@ class TileCopyLinkModal extends Component<TileCopyLinkModalProps> {
   }
 
   // Original method: hideModal
-  private hideModal = (): void => {
+  hideModal = (): void => {
     this.props.dispatch(hideModal())
   }
 

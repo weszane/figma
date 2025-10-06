@@ -56,7 +56,7 @@ export class ParameterizedComputation {
    * Build filtered arguments excluding natural key fields
    * Original inline logic in constructor
    */
-  private buildFilteredArgs(args: Record<string, any>): Record<string, any> {
+  buildFilteredArgs(args: Record<string, any>): Record<string, any> {
     const filteredArgs: Record<string, any> = {}
     for (const key in args) {
       if (!key.startsWith('_nk_')) {
@@ -70,7 +70,7 @@ export class ParameterizedComputation {
    * Create computation ID for caching/identification
    * Original inline logic in constructor
    */
-  private createComputationId(instanceId: string, filteredArgs: Record<string, any>, permissionArgs?: any): string {
+  createComputationId(instanceId: string, filteredArgs: Record<string, any>, permissionArgs?: any): string {
     const idComponents = [this.objectName, this.fieldName, instanceId, filteredArgs]
     if (permissionArgs) {
       idComponents.push(permissionArgs)
@@ -140,7 +140,7 @@ export class ComputedFieldQuery {
    * Validate computed object fields for view compatibility
    * Original method: validateComputedObject
    */
-  private validateComputedObjectFields(schema: any, viewName: string): void {
+  validateComputedObjectFields(schema: any, viewName: string): void {
     if (!this.computedFieldDef.isComputedObject()) {
       return
     }
@@ -157,21 +157,21 @@ export class ComputedFieldQuery {
   /**
    * Get the actual field name, handling aliased fields
    */
-  private getActualFieldName(fieldName: string, fieldConfig: any): string {
+  getActualFieldName(fieldName: string, fieldConfig: any): string {
     return fieldConfig && hasFieldsProperty(fieldConfig) && fieldConfig.aliasedField ? fieldConfig.aliasedField : fieldName
   }
 
   /**
    * Check if an optional field should be skipped
    */
-  private shouldSkipOptionalField(objectDef: any, fieldName: string, fieldConfig: any): boolean {
+  shouldSkipOptionalField(objectDef: any, fieldName: string, fieldConfig: any): boolean {
     return !objectDef.fields.has(fieldName) && hasFieldsProperty(fieldConfig) && fieldConfig?.optional
   }
 
   /**
    * Validate field compatibility with views
    */
-  private validateFieldViewCompatibility(objectDef: any, fieldName: string, viewName: string): void {
+  validateFieldViewCompatibility(objectDef: any, fieldName: string, viewName: string): void {
     const fieldDef = objectDef.fieldDef(fieldName)
     if ((fieldDef instanceof ObjectFieldDefinition || fieldDef instanceof ScalarField) && fieldDef.bannedFromViews && !this.parent.isComputedFieldDependency) {
       throw new CustomError(`The field ${fieldName} from view ${viewName} should not be selected on views and queried on client side because it's marked with bannedFromViews attribute on the object graph. It can only be used as part of computed field dependency.`)
@@ -182,7 +182,7 @@ export class ComputedFieldQuery {
    * Validate field arguments
    * Original inline logic using uH function
    */
-  private validateFieldArguments(fieldPath: string[], fieldName: string, metadata?: any): void {
+  validateFieldArguments(fieldPath: string[], fieldName: string, metadata?: any): void {
     validateFieldArguments([...fieldPath, fieldName], {
       ...this.fieldArgs,
       ...this.createDummyNaturalKeyArgs(this.parent.objectDef),
@@ -193,7 +193,7 @@ export class ComputedFieldQuery {
    * Create dummy arguments for natural key fields
    * Original method: dummyArgs
    */
-  private createDummyNaturalKeyArgs(objectDef: {
+  createDummyNaturalKeyArgs(objectDef: {
     naturalKey: any[]
     fields: any
   }): Record<string, any> {
@@ -214,7 +214,7 @@ export class ComputedFieldQuery {
   /**
    * Get dummy value based on field type
    */
-  private getDummyValueForType(typeKind: string): any {
+  getDummyValueForType(typeKind: string): any {
     const typeMap: Record<string, any> = {
       string: '',
       bigint: '0',
@@ -244,7 +244,7 @@ export class ComputedFieldQuery {
   /**
    * Build computation arguments
    */
-  private buildComputationArgs(evaluationContext: any, objectContext: any, instance: any, naturalKeyFields: string[] | null, additionalArgs?: Map<string, any>): Record<string, any> {
+  buildComputationArgs(evaluationContext: any, objectContext: any, instance: any, naturalKeyFields: string[] | null, additionalArgs?: Map<string, any>): Record<string, any> {
     const args: Record<string, any> = {
       _rootId: instance.id,
     }
@@ -274,7 +274,7 @@ export class ComputedFieldQuery {
    * Build object queries for computed object fields
    * Original method: buildObjectQueries
    */
-  private buildObjectQueries(schema: any, metadata?: any): void {
+  buildObjectQueries(schema: any, metadata?: any): void {
     if (!this.computedFieldDef.isComputedObject()) {
       return
     }
@@ -294,7 +294,7 @@ export class ComputedFieldQuery {
   /**
    * Process a single object field
    */
-  private processObjectField(schema: any, originalFieldName: string, fieldConfig: any, metadata?: any): void {
+  processObjectField(schema: any, originalFieldName: string, fieldConfig: any, metadata?: any): void {
     const {
       actualFieldName,
       isOptional,
@@ -313,7 +313,7 @@ export class ComputedFieldQuery {
   /**
    * Parse field configuration to extract field name, optionality, and nested fields
    */
-  private parseFieldConfig(originalFieldName: string, fieldConfig: any) {
+  parseFieldConfig(originalFieldName: string, fieldConfig: any) {
     let actualFieldName = originalFieldName
     let isOptional = false
     let nestedFields = fieldConfig
@@ -338,7 +338,7 @@ export class ComputedFieldQuery {
   /**
    * Check if a field is available in the schema
    */
-  private isFieldAvailable(schema: any, fieldName: string, isOptional: boolean): boolean {
+  isFieldAvailable(schema: any, fieldName: string, isOptional: boolean): boolean {
     const hasField = schema.objectDef(this.computedFieldDef.type)?.fields.has(fieldName)
     return hasField || !isOptional
   }
@@ -346,14 +346,14 @@ export class ComputedFieldQuery {
   /**
    * Check if a field configuration indicates it's optional
    */
-  private isOptionalField(fieldConfig: any): boolean {
+  isOptionalField(fieldConfig: any): boolean {
     return fieldConfig && hasFieldsProperty(fieldConfig) && fieldConfig.optional
   }
 
   /**
    * Validate scalar field requirements
    */
-  private validateScalarField(schema: any, fieldName: string): void {
+  validateScalarField(schema: any, fieldName: string): void {
     const fieldDef = schema.objectDef(this.computedFieldDef.type)?.fieldDef(fieldName)
     if (fieldDef instanceof ObjectFieldDefinition && !fieldDef.embedded) {
       throw createValidationError(this.parent.path, `expected nested fields for '${fieldName}' but got '_'. ${fieldName} is an object field and should be selected with individual fields.`)
@@ -363,7 +363,7 @@ export class ComputedFieldQuery {
   /**
    * Build nested object query
    */
-  private buildNestedObjectQuery(schema: any, originalFieldName: string, actualFieldName: string, fieldConfig: any, nestedFields: any, isOptional: boolean, metadata?: any): void {
+  buildNestedObjectQuery(schema: any, originalFieldName: string, actualFieldName: string, fieldConfig: any, nestedFields: any, isOptional: boolean, metadata?: any): void {
     const fieldDef = schema.objectDef(this.computedFieldDef.type)?.fieldDef(actualFieldName)
     if (!fieldDef) {
       throw createValidationError(this.parent.path, `field definition for name "${actualFieldName}" doesn't exist in the schema`)
@@ -379,7 +379,7 @@ export class ComputedFieldQuery {
   /**
    * Validate nested fields are provided
    */
-  private validateNestedFields(fieldName: string, fields: any): void {
+  validateNestedFields(fieldName: string, fields: any): void {
     if (fields === NULL_FIELD_REF || !fields) {
       throw createValidationError(this.parent.path, `expected nested fields for '${fieldName}' but got '_'`)
     }
@@ -388,7 +388,7 @@ export class ComputedFieldQuery {
   /**
    * Create object query for nested field
    */
-  private createObjectQuery(originalFieldName: string, fieldDef: ObjectFieldDefinition, fieldArgs: any, fields: any, schema: any, isOptional: boolean, metadata?: any): void {
+  createObjectQuery(originalFieldName: string, fieldDef: ObjectFieldDefinition, fieldArgs: any, fields: any, schema: any, isOptional: boolean, metadata?: any): void {
     this.computedObjectQueries.set(originalFieldName, new QueryDef({
       parent: this,
       objectDef: schema.objectDef(fieldDef.type),
@@ -411,7 +411,7 @@ export class ComputedFieldQuery {
   /**
    * Add filter fields from field definition
    */
-  private addFilterFields(fieldDef: ObjectFieldDefinition): void {
+  addFilterFields(fieldDef: ObjectFieldDefinition): void {
     if (!this.filterFields) {
       this.filterFields = new Set()
     }

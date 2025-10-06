@@ -16,6 +16,7 @@ declare global {
   let TaskController = TaskControllerPrority
   type Dispatch = (action: any) => any
   interface Window {
+    webGLTestResult: any
     Module: {
       wasmBinaryFile: any
       preRun: () => void

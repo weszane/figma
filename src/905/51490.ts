@@ -1,5 +1,5 @@
 import { ColorSpaceEnum, ColorProfileEnum } from "../figma_app/763686";
-import { M } from "../905/366117";
+import { ColorSpaceType } from "../905/366117";
 function a(e, t) {
   switch (e) {
     case "DOCUMENT":
@@ -25,7 +25,7 @@ export function $$s0(e, t) {
 export function $$o1(e, t) {
   switch (e) {
     case ColorProfileEnum.LEGACY:
-      return t === M.DISPLAY_P3 ? ColorSpaceEnum.DISPLAY_P3 : ColorSpaceEnum.SRGB;
+      return t === ColorSpaceType.DISPLAY_P3 ? ColorSpaceEnum.DISPLAY_P3 : ColorSpaceEnum.SRGB;
     case ColorProfileEnum.SRGB:
       return ColorSpaceEnum.SRGB;
     case ColorProfileEnum.DISPLAY_P3:

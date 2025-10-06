@@ -6,7 +6,7 @@ import { UIVisibilitySetting } from "../figma_app/763686";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import d from "classnames";
 import { logWarning } from "../905/714362";
-import { PN } from "../figma_app/897289";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { zn, Ns } from "../figma_app/768070";
 import { fullscreenValue } from "../figma_app/455680";
 import { buildFileUrlInternal } from "../905/612685";
@@ -113,7 +113,7 @@ let v = forwardRef(function ({
     children: [jsx("iframe", {
       ref: I,
       title: "Inline Preview",
-      src: PN() ? F : P,
+      src: isInteractionOrEvalMode() ? F : P,
       className: c()(VR, D ? dS : null)
     }), !N && jsx(z2, {
       shouldNotOverflow: !0,

@@ -33,20 +33,20 @@ interface StaleTimeAccumulator {
  * Collects and manages frame timing and sharpness metrics for fullscreen rendering.
  */
 export class PerformanceLogger {
-  private _benchmarkOnlyMetrics: BenchmarkOnlyMetrics
-  private _collectBenchmarkOnlyMetrics: boolean
-  private _editFrameDistribution: FPSDistribution
-  private _editFrameDistributionWhileNotPanningOrZooming: FPSDistribution
-  private _remoteFrameDistribution: FPSDistribution
-  private _remoteFrameDistributionWhileNotPanningOrZooming: FPSDistribution
-  private _staleTimeAccumulators: StaleTimeAccumulator[]
-  private _panEventTracker: PanTracker
-  private _zoomEventTracker: ZoomScaleTracker
-  private _lastFrameTime: number
-  private _lastEditFrameTime: number
-  private _lastFrameStaleness: number
-  private _lastDisplayedRenderChangeCounter: number | null
-  private _renderTreeSwapStartTime: number | null
+  _benchmarkOnlyMetrics: BenchmarkOnlyMetrics
+  _collectBenchmarkOnlyMetrics: boolean
+  _editFrameDistribution: FPSDistribution
+  _editFrameDistributionWhileNotPanningOrZooming: FPSDistribution
+  _remoteFrameDistribution: FPSDistribution
+  _remoteFrameDistributionWhileNotPanningOrZooming: FPSDistribution
+  _staleTimeAccumulators: StaleTimeAccumulator[]
+  _panEventTracker: PanTracker
+  _zoomEventTracker: ZoomScaleTracker
+  _lastFrameTime: number
+  _lastEditFrameTime: number
+  _lastFrameStaleness: number
+  _lastDisplayedRenderChangeCounter: number | null
+  _renderTreeSwapStartTime: number | null
 
   constructor() {
     this._benchmarkOnlyMetrics = this.createEmptyBenchmarkMetrics()
@@ -273,7 +273,7 @@ export class PerformanceLogger {
   /**
    * Creates an empty BenchmarkOnlyMetrics object.
    */
-  private createEmptyBenchmarkMetrics(): BenchmarkOnlyMetrics {
+  createEmptyBenchmarkMetrics(): BenchmarkOnlyMetrics {
     return {
       editFrames: [],
       editFramesWhileNotPanningOrZooming: [],

@@ -74,8 +74,8 @@ import { OS } from "../9410/635666";
 import { OnboardingModal } from "../905/425180";
 import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { A as _$$A4 } from "../905/956262";
-import { jK, C$ } from "../figma_app/829197";
-import { M as _$$M2 } from "../905/366117";
+import { useUserColorProfileSubscription, useDefaultToP3TransitionHandler } from "../figma_app/829197";
+import { ColorSpaceType } from "../905/366117";
 import { U as _$$U } from "../905/455766";
 import { OnboardingRenderFrame } from "../905/284399";
 import { O0, nu as _$$nu, eg as _$$eg } from "../figma_app/452252";
@@ -824,12 +824,12 @@ function tr() {
   let d = e4();
   let c = e5();
   let [u, p] = useAtomValueAndSetter(e6);
-  let h = jK();
+  let h = useUserColorProfileSubscription();
   let [m, _] = useState(!1);
   let [x] = useAtomValueAndSetter(_$$n$);
-  let b = C$();
+  let b = useDefaultToP3TransitionHandler();
   useEffect(() => {
-    o || null != u || h.colorProfilePreference !== _$$M2.DEFAULT || (p(_$$M2.DISPLAY_P3), b(_$$M2.DISPLAY_P3, {
+    o || null != u || h.colorProfilePreference !== ColorSpaceType.DEFAULT || (p(ColorSpaceType.DISPLAY_P3), b(ColorSpaceType.DISPLAY_P3, {
       canSeeP3: d,
       desktopSetting: l,
       p3Plugins: c
@@ -938,10 +938,10 @@ function ts() {
   let t = e4();
   let i = e5();
   let [r, a] = useAtomValueAndSetter(e6);
-  let o = jK();
-  let l = C$();
+  let o = useUserColorProfileSubscription();
+  let l = useDefaultToP3TransitionHandler();
   useEffect(() => {
-    null == r && o.colorProfilePreference === _$$M2.DEFAULT && (a(_$$M2.SRGB), l(_$$M2.SRGB, {
+    null == r && o.colorProfilePreference === ColorSpaceType.DEFAULT && (a(ColorSpaceType.SRGB), l(ColorSpaceType.SRGB, {
       canSeeP3: t,
       desktopSetting: e,
       p3Plugins: i
@@ -951,15 +951,15 @@ function ts() {
 }
 function to() {
   let e = function () {
-    let e = jK().colorProfilePreference !== _$$M2.DEFAULT;
+    let e = useUserColorProfileSubscription().colorProfilePreference !== ColorSpaceType.DEFAULT;
     let t = function () {
       let [e] = jJ();
       let t = e4();
       let i = e5();
-      return t && i && ["unmanaged", "default", null].includes(e) ? _$$M2.DISPLAY_P3 : _$$M2.SRGB;
+      return t && i && ["unmanaged", "default", null].includes(e) ? ColorSpaceType.DISPLAY_P3 : ColorSpaceType.SRGB;
     }();
     let [i] = useAtomValueAndSetter(e6);
-    return e && null === i ? 0 : t === _$$M2.SRGB ? 1 : t === _$$M2.DISPLAY_P3 ? 2 : 0;
+    return e && null === i ? 0 : t === ColorSpaceType.SRGB ? 1 : t === ColorSpaceType.DISPLAY_P3 ? 2 : 0;
   }();
   if (!function (e) {
     let t = useIsProgressBarHiddenOrLocked();

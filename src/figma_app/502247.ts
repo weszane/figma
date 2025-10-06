@@ -36,8 +36,8 @@ const METRIC_EVENTS = {
  */
 class BatchedMetricsReporter {
   batchedCustomEvents: any[] = []
-  private _currentlySendingBatchedEvents = false
-  private sendBatchedEventsInterval: ReturnType<typeof setInterval>
+  _currentlySendingBatchedEvents = false
+  sendBatchedEventsInterval: ReturnType<typeof setInterval>
   constructor() {
     document.addEventListener('visibilitychange', this.onVisibilityChange)
     window.addEventListener('pagehide', this.sendBatchedEvents)
@@ -67,7 +67,7 @@ class BatchedMetricsReporter {
     try {
       await sendBatchedMetrics(events)
     }
-    catch {}
+    catch { }
     this._currentlySendingBatchedEvents = false
   }
 

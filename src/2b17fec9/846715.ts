@@ -16,7 +16,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { TrackingProvider } from "../figma_app/831799";
 import { xn } from "../figma_app/644079";
-import { C_ } from "../figma_app/290668";
+import { useFocusArea } from "../figma_app/290668";
 import { LR, gR } from "../figma_app/120210";
 import { XM } from "../905/486443";
 import { useIsProgressBarHiddenOrLocked, useCurrentTool } from "../figma_app/722362";
@@ -1018,7 +1018,7 @@ let tw = memo(function () {
     state: Y,
     dispatch: X
   }), [Y, X]);
-  C_(I);
+  useFocusArea(I);
   let J = 414 >= (L?.width || 0);
   let Q = useCurrentTool();
   let ee = useSelector(e => e.multiplayerEmoji.type);

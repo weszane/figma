@@ -3,9 +3,9 @@
  * (Original class: n)
  */
 class HashHelper {
-  private _float: Float32Array
-  private _int: Int32Array
-  private _value: number
+  _float: Float32Array
+  _int: Int32Array
+  _value: number
 
   constructor() {
     this._float = new Float32Array(1)
@@ -78,7 +78,7 @@ class HashHelper {
    * Combines two numbers into a hash value.
    * (Original method: _combine)
    */
-  private _combine(hash: number, value: number): number {
+  _combine(hash: number, value: number): number {
     return value + 0x9E3779B9 + (hash << 6) + (hash >> 2)
   }
 }
@@ -88,8 +88,8 @@ class HashHelper {
  * (Original class: $$r0)
  */
 export class BufferHashReader {
-  private _helper: HashHelper
-  private _bb: any // Replace 'any' with the actual type if available
+  _helper: HashHelper
+  _bb: any // Replace 'any' with the actual type if available
 
   constructor(buffer: any) {
     this._helper = new HashHelper()

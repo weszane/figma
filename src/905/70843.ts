@@ -5,8 +5,8 @@ import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
  * Original class: $$r0
  */
 export class CodeSuggestionAPIHandler {
-  private zipSchemaValidator = createNoOpValidator();
-  private deleteAllCodeSuggestionsResultSchemaValidator = createNoOpValidator();
+  zipSchemaValidator = createNoOpValidator();
+  deleteAllCodeSuggestionsResultSchemaValidator = createNoOpValidator();
 
   /**
    * Deletes all code suggestions for the given parameters.

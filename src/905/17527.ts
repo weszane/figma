@@ -3,7 +3,7 @@ import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
  * Validator and API handler for Hub File Metadata.
  */
 export class HubFileMetadataHandler {
-  private hubFileMetadataSchemaValidator
+  hubFileMetadataSchemaValidator
 
   constructor() {
     // Original: HubFileMetadataSchemaValidator

@@ -1,34 +1,54 @@
-import { PageType } from "../figma_app/763686";
-import { getI18nString } from "../905/303541";
-import { _i, U8, E8 } from "../figma_app/800999";
-export let $$s0 = new class {
-  getDisplayStringFromKeyTrigger(e, t) {
-    let i;
-    let s = _i(t);
-    if (e === PageType.KEYBOARD) return s ? getI18nString("proto.interaction.type.key_specific", {
-      key_combo: U8(s)
-    }) : getI18nString("proto.interaction.type.key_gamepad");
-    switch (e) {
-      case PageType.XBOX_ONE:
-        i = "XBOX_ONE";
-        break;
-      case PageType.PS4:
-        i = "PS4";
-        break;
-      case PageType.SWITCH_PRO:
-        i = "SWITCH_PRO";
-        break;
-      case PageType.UNKNOWN_CONTROLLER:
-      default:
-        i = "UNKNOWN_CONTROLLER";
+import { getI18nString } from "../905/303541"
+import { ControllerType } from "../figma_app/13528"
+import { formatKeyboardShortcut, getGamepadInputLabel, parseKeyCodes } from "../figma_app/800999"
+
+class PrototypingFormatter {
+  /**
+   * Gets the display string for a key trigger based on the controller type and key codes
+   * @param pageType - The type of page/input device
+   * @param keyCodes - The key codes to process
+   * @returns Localized string representation of the key trigger
+   */
+  getDisplayStringFromKeyTrigger(pageType: ControllerType, keyCodes: number[]): string {
+    // Handle keyboard input type
+    if (pageType === ControllerType.KEYBOARD) {
+      const parsedKeyCodes = parseKeyCodes(keyCodes)
+      return parsedKeyCodes
+        ? getI18nString("proto.interaction.type.key_specific", {
+            key_combo: formatKeyboardShortcut(parsedKeyCodes as any),
+          })
+        : getI18nString("proto.interaction.type.key_gamepad")
     }
-    let o = E8({
-      keyCodes: t,
-      triggerDevice: i
-    }, !0);
-    return o ? getI18nString("proto.interaction.type.gamepad_specific", {
-      key_combo: o
-    }) : getI18nString("proto.interaction.type.key_gamepad");
+
+    // Map page types to gamepad device types
+    let gamepadDeviceType: string
+    switch (pageType) {
+      case ControllerType.XBOX_ONE:
+        gamepadDeviceType = "XBOX_ONE"
+        break
+      case ControllerType.PS4:
+        gamepadDeviceType = "PS4"
+        break
+      case ControllerType.SWITCH_PRO:
+        gamepadDeviceType = "SWITCH_PRO"
+        break
+      case ControllerType.UNKNOWN_CONTROLLER:
+      default:
+        gamepadDeviceType = "UNKNOWN_CONTROLLER"
+    }
+
+    // Get gamepad label and return appropriate localized string
+    const gamepadLabel = getGamepadInputLabel({
+      keyCodes,
+      triggerDevice: gamepadDeviceType,
+    }, true)
+
+    return gamepadLabel
+      ? getI18nString("proto.interaction.type.gamepad_specific", {
+          key_combo: gamepadLabel,
+        })
+      : getI18nString("proto.interaction.type.key_gamepad")
   }
-}();
-export const u = $$s0;
+}
+export let prototypingFormatterInstance = new PrototypingFormatter()
+export const u = prototypingFormatterInstance

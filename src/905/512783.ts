@@ -30,8 +30,8 @@ function isModifierKeyPressed(event: PointerEvent): boolean {
  * @class DragManager
  */
 class DragManager {
-  private _element: HTMLElement | null = null
-  private _dragState: {
+  _element: HTMLElement | null = null
+  _dragState: {
     start: { x: number, y: number }
     hasStarted: boolean
     mouseOffset: { x: number, y: number }
@@ -93,7 +93,7 @@ class DragManager {
   /**
    * Emits the current drag state to the listener.
    */
-  private emitDragState(state: { id: string, offset: { x: number, y: number } } | null): void {
+  emitDragState(state: { id: string, offset: { x: number, y: number } } | null): void {
     if (this.listener) {
       this.listener(state)
     }
@@ -121,7 +121,7 @@ class DragManager {
   /**
    * Handles pointer down events to initiate drag operations.
    */
-  private onPointerDown(event: PointerEvent): void {
+  onPointerDown(event: PointerEvent): void {
     // Only handle left mouse button (button 0) without modifier keys
     if (event.button !== 0 || isModifierKeyPressed(event)) {
       return
@@ -170,7 +170,7 @@ class DragManager {
   /**
    * Handles pointer up events to end drag operations.
    */
-  private onPointerUp(event: PointerEvent): boolean | void {
+  onPointerUp(event: PointerEvent): boolean | void {
     // Release pointer capture
     if (this._element) {
       this._element.releasePointerCapture(event.pointerId)
@@ -211,7 +211,7 @@ class DragManager {
   /**
    * Computes the offset based on the current drag state and mouse position.
    */
-  private computeOffset(
+  computeOffset(
     dragState: {
       start: { x: number, y: number }
       mouseOffset: { x: number, y: number }
@@ -252,7 +252,7 @@ class DragManager {
   /**
    * Handles pointer move events during drag operations.
    */
-  private onPointerMove(event: PointerEvent): void {
+  onPointerMove(event: PointerEvent): void {
     if (!this._dragState || !this._element) {
       return
     }
@@ -311,9 +311,9 @@ function createTemplate(html: string): HTMLTemplateElement {
  * @extends HTMLElement
  */
 class CommentSelectionBox extends HTMLElement {
-  private _bounds: { x: number, y: number, width: number, height: number } | null = null
-  private _lastBounds: { x: number, y: number, width: number, height: number } | null = null
-  private _borderOutside: boolean = false
+  _bounds: { x: number, y: number, width: number, height: number } | null = null
+  _lastBounds: { x: number, y: number, width: number, height: number } | null = null
+  _borderOutside: boolean = false
 
   static readonly desiredElementName = 'figma-comment-selection-box'
   static readonly BORDER_WIDTH_PX = 2
@@ -441,27 +441,27 @@ class CommentSelectionBox extends HTMLElement {
  */
 export class CommentPinElement extends HTMLElement {
   // State properties
-  private _lastPosition: { x: number, y: number } | null = null
-  private _position: { x: number, y: number } = { x: 0, y: 0 }
-  private _lastData: any = null
-  private _data: any = null
-  private _dragManager: DragManager | null = null
-  private _lastDragOffset: { x: number, y: number } | null = null
-  private _dragOffset: { x: number, y: number } | null = null
-  private _lastSelectionBoxAnchor: { x: number, y: number } | null = null
-  private _selectionBoxAnchor: { x: number, y: number } | null = null
-  private _lastOtherBoundingBoxes: Record<string, any> = {}
-  private _otherBoundingBoxes: Record<string, any> = {}
-  private _lastRenderPosition: { x: number, y: number } | null = null
-  private _lastRenderedMessageMeta: any = null
-  private _lastZoomScale: number | null = null
-  private _zoomScale: number = 1
+  _lastPosition: { x: number, y: number } | null = null
+  _position: { x: number, y: number } = { x: 0, y: 0 }
+  _lastData: any = null
+  _data: any = null
+  _dragManager: DragManager | null = null
+  _lastDragOffset: { x: number, y: number } | null = null
+  _dragOffset: { x: number, y: number } | null = null
+  _lastSelectionBoxAnchor: { x: number, y: number } | null = null
+  _selectionBoxAnchor: { x: number, y: number } | null = null
+  _lastOtherBoundingBoxes: Record<string, any> = {}
+  _otherBoundingBoxes: Record<string, any> = {}
+  _lastRenderPosition: { x: number, y: number } | null = null
+  _lastRenderedMessageMeta: any = null
+  _lastZoomScale: number | null = null
+  _zoomScale: number = 1
 
   // UI elements
-  private _loadingSpinner: Node | null = null
+  _loadingSpinner: Node | null = null
   pendingTimeout: number | null = null
   timestampUpdateInterval: number | null = null
-   template: HTMLTemplateElement
+  template: HTMLTemplateElement
 
   // Event handlers
   onClick: (event: MouseEvent) => void
@@ -1101,7 +1101,7 @@ export class CommentPinElement extends HTMLElement {
    * @param actualValue - The actual attribute value
    * @param className - The class name to toggle
    */
-  private setClassOn(
+  setClassOn(
     expectedValue: string,
     attributeName: string,
     actualValue: string,
@@ -1123,7 +1123,7 @@ export class CommentPinElement extends HTMLElement {
    * @param className - The class name to toggle
    * @param element - The element to apply styling to (defaults to this)
    */
-  private syncStyle(condition: any, className: string, element: HTMLElement = this): void {
+  syncStyle(condition: any, className: string, element: HTMLElement = this): void {
     const shouldHaveClass = !!condition
     if (shouldHaveClass && !element.classList.contains(className)) {
       element.classList.add(className)
@@ -1242,7 +1242,7 @@ export class CommentPinElement extends HTMLElement {
 }
 export let PINNABLE_COMMENT_PIN_TEST_ID = 'pinnable-comment-pin'
 export class PinnableCommentPinElement extends CommentPinElement {
-  private _pinnedToFileIcon: Node | null = null
+  _pinnedToFileIcon: Node | null = null
 
   static readonly desiredElementName = 'figma-pinnable-comment-pin'
 
@@ -1284,7 +1284,7 @@ export class PinnableCommentPinElement extends CommentPinElement {
   /**
    * Adds the pinned to file icon if it's not already present
    */
-  private addIconWhenPinnedToFileIfAbsent(): void {
+  addIconWhenPinnedToFileIfAbsent(): void {
     if (!this._pinnedToFileIcon) {
       this._pinnedToFileIcon = PinnableCommentPinElement.pinnedToFileIcon.content.cloneNode(true)
       this.pinnedThreadToFileIndicator.prepend(this._pinnedToFileIcon)

@@ -9,7 +9,7 @@ import { AppStateTsApi, Fullscreen, FullscreenPerfMetrics } from '../figma_app/7
  * Original: $$o13
  */
 export class ZoomScaleTracker {
-  private _zoomScale: number
+  _zoomScale: number
 
   constructor() {
     this._zoomScale = this.getZoomScale()
@@ -40,9 +40,9 @@ export class ZoomScaleTracker {
  * Original: $$l1
  */
 export class PanTracker {
-  private _offsetX: number
-  private _offsetY: number
-  private _zoomTracker: ZoomScaleTracker
+  _offsetX: number
+  _offsetY: number
+  _zoomTracker: ZoomScaleTracker
 
   constructor() {
     this._zoomTracker = new ZoomScaleTracker()
@@ -84,8 +84,8 @@ export class PanTracker {
  * Original: $$d14
  */
 export class MouseMoveTracker {
-  private _didMouseMove: boolean
-  private _panTracker: PanTracker
+  _didMouseMove: boolean
+  _panTracker: PanTracker
 
   constructor() {
     this._didMouseMove = false
@@ -110,7 +110,7 @@ export class MouseMoveTracker {
  * Original: $$c12
  */
 export class RenderTreeStaleTracker {
-  constructor() {}
+  constructor() { }
 
   /**
    * Returns true if the render tree is stale.
@@ -125,9 +125,9 @@ export class RenderTreeStaleTracker {
  * Original: $$u4
  */
 export class ChatStateTracker {
-  private _isCurrentUserChatting: boolean
-  private _isOtherUserChatting: boolean
-  private _otherUserChattingSessionIds: Set<string>
+  _isCurrentUserChatting: boolean
+  _isOtherUserChatting: boolean
+  _otherUserChattingSessionIds: Set<string>
 
   constructor() {
     this._isCurrentUserChatting = false
@@ -168,7 +168,7 @@ export class ChatStateTracker {
  * Original: $$p5
  */
 export class CursorReactionTracker {
-  private _cursorReactionIsActive: boolean
+  _cursorReactionIsActive: boolean
 
   constructor() {
     this._cursorReactionIsActive = false
@@ -206,7 +206,7 @@ export class CursorReactionTracker {
  * Original: $$m6
  */
 export class ViewportCoverageTracker {
-  private _mode: CoverageStatus
+  _mode: CoverageStatus
 
   constructor(mode: CoverageStatus) {
     this._mode = mode
@@ -232,7 +232,7 @@ export class ViewportCoverageTracker {
  * Original: $$h7
  */
 export class RenderTreeStalenessThresholdTracker {
-  private _thresholdMs: number
+  _thresholdMs: number
 
   constructor(thresholdMs: number) {
     this._thresholdMs = thresholdMs
@@ -258,8 +258,8 @@ export class RenderTreeStalenessThresholdTracker {
  * Original: $$g10
  */
 export class MultiplayerUserCountTracker {
-  private _threshold: number
-  private _getMultiplayerUserCount: () => number
+  _threshold: number
+  _getMultiplayerUserCount: () => number
 
   constructor(threshold: number, getUserCount: () => number) {
     this._threshold = threshold
@@ -279,10 +279,10 @@ export class MultiplayerUserCountTracker {
  * Original: $$f3
  */
 export class MultiplayerPanZoomTracker {
-  private _threshold: number
-  private _panTracker: PanTracker
-  private _zoomTracker: ZoomScaleTracker
-  private _getMultiplayerUserCount: () => number
+  _threshold: number
+  _panTracker: PanTracker
+  _zoomTracker: ZoomScaleTracker
+  _getMultiplayerUserCount: () => number
 
   constructor(threshold: number, getUserCount: () => number) {
     this._threshold = threshold
@@ -308,9 +308,9 @@ export class MultiplayerPanZoomTracker {
  * Original: $$_8
  */
 export class MinViewportSharpnessTracker {
-  private _sharpnessThreshold: number
-  private _zoomEventTracker: ZoomScaleTracker
-  private _panEventTracker: PanTracker
+  _sharpnessThreshold: number
+  _zoomEventTracker: ZoomScaleTracker
+  _panEventTracker: PanTracker
 
   constructor(sharpnessThreshold: number) {
     this._sharpnessThreshold = sharpnessThreshold
@@ -333,9 +333,9 @@ export class MinViewportSharpnessTracker {
  * Original: $$A2
  */
 export class AvgViewportSharpnessTracker {
-  private _sharpnessThreshold: number
-  private _zoomEventTracker: ZoomScaleTracker
-  private _panEventTracker: PanTracker
+  _sharpnessThreshold: number
+  _zoomEventTracker: ZoomScaleTracker
+  _panEventTracker: PanTracker
 
   constructor(sharpnessThreshold: number) {
     this._sharpnessThreshold = sharpnessThreshold
@@ -358,7 +358,7 @@ export class AvgViewportSharpnessTracker {
  * Original: $$y0
  */
 export class AnnotationVisibilityTracker {
-  private _isShowingAnnotations: boolean
+  _isShowingAnnotations: boolean
 
   constructor() {
     this._isShowingAnnotations = false
@@ -384,7 +384,7 @@ export class AnnotationVisibilityTracker {
  * Original: $$b16
  */
 export class ActiveStateTracker {
-  private _isActive: boolean
+  _isActive: boolean
 
   constructor() {
     this._isActive = false
@@ -450,7 +450,7 @@ export interface SelectionProperties {
 }
 
 export class SelectionChangeTracker {
-  private _selection: SelectionProperties | undefined
+  _selection: SelectionProperties | undefined
 
   constructor() {
     const state = debugState.getState()

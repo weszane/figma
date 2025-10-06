@@ -53,7 +53,7 @@ import { Y as _$$Y2 } from "../5421/483739";
 import { getBigNudgeAmount } from "../figma_app/740163";
 import { TimeMillisecondsInput, TimeDurationInput } from "../figma_app/178475";
 import { GameControllerListener } from "../905/550169";
-import { _i, E8, U8 as _$$U, RI, pu, wb } from "../figma_app/800999";
+import { parseKeyCodes, getGamepadInputLabel, formatKeyboardShortcut, MODIFIER_KEY_CODES, KEY_CODE_MAP, keyboardEventToKeyCodes } from "../figma_app/800999";
 import { A as _$$A4 } from "../897/590880";
 import { selectWithShallowEqual } from "../905/103090";
 import { Q as _$$Q } from "../figma_app/67145";
@@ -105,7 +105,7 @@ function es({
   setShouldFocusKeyCaptureField: o
 }) {
   let a;
-  let l = _i(t?.keyCodes);
+  let l = parseKeyCodes(t?.keyCodes);
   let s = t => e({
     keyCodes: t,
     triggerDevice: "KEYBOARD"
@@ -134,10 +134,10 @@ function es({
     };
   }, [e, d]);
   let u = null;
-  let h = E8(t);
+  let h = getGamepadInputLabel(t);
   d ? a = jsx(ed, {
     children: renderI18nText("proto.keyCapture.press_key_lowercase")
-  }) : t?.triggerDevice === "KEYBOARD" && l ? u = _$$U(l) : h ? u = h : a = jsx(ed, {
+  }) : t?.triggerDevice === "KEYBOARD" && l ? u = formatKeyboardShortcut(l) : h ? u = h : a = jsx(ed, {
     children: renderI18nText("proto.keyCapture.click_to_set_key")
   });
   return jsx(rp, {
@@ -151,13 +151,13 @@ function es({
       e.preventDefault();
       e.stopPropagation();
       let t = e.which || e.keyCode;
-      !RI.has(t) && pu[t] && (t === l?.keyCode && e.repeat ? s(wb({
+      !MODIFIER_KEY_CODES.has(t) && KEY_CODE_MAP[t] && (t === l?.keyCode && e.repeat ? s(keyboardEventToKeyCodes({
         keyCode: t,
         metaKey: e.metaKey || l.metaKey,
         shiftKey: e.shiftKey || l.shiftKey,
         ctrlKey: e.ctrlKey || l.ctrlKey,
         altKey: e.altKey || l.altKey
-      })) : s(wb({
+      })) : s(keyboardEventToKeyCodes({
         ...e,
         keyCode: t
       })), document.activeElement instanceof HTMLElement && document.activeElement.blur());

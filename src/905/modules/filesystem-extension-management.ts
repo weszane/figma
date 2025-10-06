@@ -121,9 +121,9 @@ export interface StorageStats {
  * Handles local file extension operations and VS Code integration
  */
 export class VSCodeExtensionManager {
-  private extensionCache: Map<string, LocalExtensionManifest> = new Map()
-  private metadataCache: Map<string, ExtensionMetadata> = new Map()
-  private isVSCodeAvailable: boolean = false
+  extensionCache: Map<string, LocalExtensionManifest> = new Map()
+  metadataCache: Map<string, ExtensionMetadata> = new Map()
+  isVSCodeAvailable: boolean = false
 
   constructor() {
     this.checkVSCodeAvailability()
@@ -133,7 +133,7 @@ export class VSCodeExtensionManager {
    * Check if VS Code extension is available
    * Original: T()
    */
-  private checkVSCodeAvailability(): void {
+  checkVSCodeAvailability(): void {
     try {
       this.isVSCodeAvailable = !!(window as any).__figmaVSCodePlugin
     } catch {
@@ -145,7 +145,7 @@ export class VSCodeExtensionManager {
    * Validate VS Code availability and throw error if not available
    * Original: throwNoVsCodeErrorMessage()
    */
-  private validateVSCodeAvailability(): void {
+  validateVSCodeAvailability(): void {
     if (!this.isVSCodeAvailable) {
       throw new Error('[VSCodeExtensionManager] VS Code extension not available')
     }
@@ -166,7 +166,7 @@ export class VSCodeExtensionManager {
    */
   async getExtensionManifest(extensionId: string): Promise<LocalExtensionManifest> {
     this.validateVSCodeAvailability()
-    
+
     // Check cache first
     if (this.extensionCache.has(extensionId)) {
       return this.extensionCache.get(extensionId)!
@@ -212,7 +212,7 @@ export class VSCodeExtensionManager {
    */
   async writeNewExtensionToDisk(name: string, files: Record<string, string>): Promise<void> {
     this.validateVSCodeAvailability()
-    
+
     const extensionDirectory = {
       name,
       files,
@@ -256,7 +256,7 @@ export class VSCodeExtensionManager {
   async getExtensionMetadataMap(): Promise<Record<string, ExtensionMetadata>> {
     this.validateVSCodeAvailability()
     const result = await this.sendVSCodeMessage('getLocalManifestFileExtensionIdsToCachedMetadataMap')
-    
+
     // Update cache
     Object.entries(result).forEach(([id, metadata]) => {
       this.metadataCache.set(id, metadata as ExtensionMetadata)
@@ -313,7 +313,7 @@ export class VSCodeExtensionManager {
   /**
    * Send message to VS Code extension
    */
-  private async sendVSCodeMessage(type: string, data?: any, expectResponse: boolean = true): Promise<any> {
+  async sendVSCodeMessage(type: string, data?: any, expectResponse: boolean = true): Promise<any> {
     if (!this.isVSCodeAvailable) {
       throw new Error('VS Code extension not available')
     }
@@ -321,7 +321,7 @@ export class VSCodeExtensionManager {
     return new Promise((resolve, reject) => {
       try {
         const message = { type, data, id: Math.random().toString(36) }
-        
+
         if (expectResponse) {
           const timeout = setTimeout(() => {
             reject(new Error(`VS Code message timeout: ${type}`))
@@ -331,7 +331,7 @@ export class VSCodeExtensionManager {
             if (event.data.id === message.id) {
               clearTimeout(timeout)
               window.removeEventListener('message', handleResponse)
-              
+
               if (event.data.error) {
                 reject(new Error(event.data.error))
               } else {
@@ -344,7 +344,7 @@ export class VSCodeExtensionManager {
         }
 
         window.postMessage(message, '*')
-        
+
         if (!expectResponse) {
           resolve(undefined)
         }
@@ -375,9 +375,9 @@ export class VSCodeExtensionManager {
  * Handles file system navigation and directory operations
  */
 export class FileBrowserManager {
-  private currentDirectory: string = '/'
-  private directoryCache: Map<string, DirectoryEntry[]> = new Map()
-  private fileCache: Map<string, any> = new Map()
+  currentDirectory: string = '/'
+  directoryCache: Map<string, DirectoryEntry[]> = new Map()
+  fileCache: Map<string, any> = new Map()
 
   /**
    * Show file browser dialog
@@ -394,7 +394,7 @@ export class FileBrowserManager {
         const input = document.createElement('input')
         input.type = 'file'
         input.multiple = options.allowMultiple || false
-        
+
         if (options.fileTypes?.length) {
           input.accept = options.fileTypes.join(',')
         }
@@ -438,7 +438,7 @@ export class FileBrowserManager {
   async createDirectory(path: string, _options: FileSystemOptions = {}): Promise<void> {
     // Simulate directory creation
     // console.log(`Creating directory: ${path}`, options)
-    
+
     // Invalidate cache
     const parentPath = path.substring(0, path.lastIndexOf('/'))
     this.directoryCache.delete(parentPath)
@@ -449,7 +449,7 @@ export class FileBrowserManager {
    */
   async deleteFileOrDirectory(path: string, _recursive: boolean = false): Promise<void> {
     // Simulate deletion - implementation would use native APIs
-    
+
     // Invalidate caches
     this.fileCache.delete(path)
     const parentPath = path.substring(0, path.lastIndexOf('/'))
@@ -461,7 +461,7 @@ export class FileBrowserManager {
    */
   async copyFileOrDirectory(sourcePath: string, targetPath: string, _options: FileSystemOptions = {}): Promise<void> {
     // Simulate copy operation - implementation would use native APIs
-    
+
     // Invalidate target directory cache
     const targetParent = targetPath.substring(0, targetPath.lastIndexOf('/'))
     this.directoryCache.delete(targetParent)
@@ -472,7 +472,7 @@ export class FileBrowserManager {
    */
   async moveFileOrDirectory(sourcePath: string, targetPath: string): Promise<void> {
     // Simulate move operation - implementation would use native APIs
-    
+
     // Invalidate caches
     const sourceParent = sourcePath.substring(0, sourcePath.lastIndexOf('/'))
     const targetParent = targetPath.substring(0, targetPath.lastIndexOf('/'))
@@ -516,9 +516,9 @@ export class FileBrowserManager {
  * Handles browser localStorage operations with enhanced features
  */
 export class LocalStorageManager {
-  private storagePrefix: string
-  private compressionEnabled: boolean = false
-  private encryptionEnabled: boolean = false
+  storagePrefix: string
+  compressionEnabled: boolean = false
+  encryptionEnabled: boolean = false
 
   constructor(prefix: string = 'figma_plugin_') {
     this.storagePrefix = prefix
@@ -551,11 +551,11 @@ export class LocalStorageManager {
     try {
       const fullKey = this.getFullKey(key, namespace)
       const item = localStorage.getItem(fullKey)
-      
+
       if (!item) return null
 
       const parsed = this.deserializeValue(item)
-      
+
       // Check expiration
       if (this.isExpired(parsed)) {
         this.removeItem(key, namespace)
@@ -694,16 +694,16 @@ export class LocalStorageManager {
   /**
    * Private helper methods
    */
-  private getFullKey(key: string, namespace?: string): string {
+  getFullKey(key: string, namespace?: string): string {
     if (namespace) {
       return `${this.storagePrefix}${namespace}_${key}`
     }
     return `${this.storagePrefix}${key}`
   }
 
-  private serializeValue(value: any, options: StorageOptions): string {
+  serializeValue(value: any, options: StorageOptions): string {
     let serialized = JSON.stringify(value)
-    
+
     if (this.compressionEnabled && options.compress) {
       // In real implementation, add compression here
       serialized = this.compress(serialized)
@@ -717,7 +717,7 @@ export class LocalStorageManager {
     return serialized
   }
 
-  private deserializeValue(value: string): any {
+  deserializeValue(value: string): any {
     try {
       return JSON.parse(value)
     } catch {
@@ -725,7 +725,7 @@ export class LocalStorageManager {
     }
   }
 
-  private addExpiration(value: string, expiresAt: Date): string {
+  addExpiration(value: string, expiresAt: Date): string {
     const wrapper = {
       value,
       expiresAt: expiresAt.getTime()
@@ -733,32 +733,32 @@ export class LocalStorageManager {
     return JSON.stringify(wrapper)
   }
 
-  private isExpired(parsed: any): boolean {
+  isExpired(parsed: any): boolean {
     if (parsed && typeof parsed === 'object' && parsed.expiresAt) {
       return Date.now() > parsed.expiresAt
     }
     return false
   }
 
-  private extractValue(parsed: any): any {
+  extractValue(parsed: any): any {
     if (parsed && typeof parsed === 'object' && 'value' in parsed) {
       return this.deserializeValue(parsed.value)
     }
     return parsed
   }
 
-  private extractNamespace(key: string): string {
+  extractNamespace(key: string): string {
     const withoutPrefix = key.substring(this.storagePrefix.length)
     const namespaceEnd = withoutPrefix.indexOf('_')
     return namespaceEnd > 0 ? withoutPrefix.substring(0, namespaceEnd) : 'default'
   }
 
-  private compress(value: string): string {
+  compress(value: string): string {
     // Placeholder for compression implementation
     return value
   }
 
-  private encrypt(value: string): string {
+  encrypt(value: string): string {
     // Placeholder for encryption implementation
     return value
   }
@@ -769,9 +769,9 @@ export class LocalStorageManager {
  * Handles plugin manifest validation and capability checking
  */
 export class ManifestValidator {
-  private capabilities: Set<string> = new Set()
-  private permissions: Set<string> = new Set()
-  private manifestCache: Map<string, LocalExtensionManifest> = new Map()
+  capabilities: Set<string> = new Set()
+  permissions: Set<string> = new Set()
+  manifestCache: Map<string, LocalExtensionManifest> = new Map()
 
   constructor(manifest?: LocalExtensionManifest) {
     if (manifest) {
@@ -784,13 +784,13 @@ export class ManifestValidator {
    */
   loadManifest(manifest: LocalExtensionManifest): void {
     this.validateManifestStructure(manifest)
-    
+
     this.capabilities.clear()
     this.permissions.clear()
 
     manifest.capabilities?.forEach(cap => this.capabilities.add(cap))
     manifest.permissions?.forEach(perm => this.permissions.add(perm))
-    
+
     this.manifestCache.set(manifest.id, manifest)
   }
 
@@ -830,10 +830,10 @@ export class ManifestValidator {
    */
   validatePermission(permission: string, isWidget: boolean = false): void {
     if (!this.hasPermission(permission)) {
-      const docsUrl = isWidget 
+      const docsUrl = isWidget
         ? 'https://www.figma.com/widget-docs/widget-manifest/#permissions'
         : 'https://www.figma.com/plugin-docs/manifest/#permissions'
-      
+
       throw new Error(
         `"${permission}" permission not specified in manifest.json. ` +
         `Add the following to your manifest.json: "permissions": ["${permission}"]. ` +
@@ -845,10 +845,10 @@ export class ManifestValidator {
   /**
    * Validate manifest structure
    */
-  private validateManifestStructure(manifest: LocalExtensionManifest): void {
+  validateManifestStructure(manifest: LocalExtensionManifest): void {
     const required = ['id', 'name', 'version', 'main']
     const missing = required.filter(field => !manifest[field as keyof LocalExtensionManifest])
-    
+
     if (missing.length > 0) {
       throw new Error(`Invalid manifest: missing required fields: ${missing.join(', ')}`)
     }
@@ -865,7 +865,7 @@ export class ManifestValidator {
   /**
    * Validate capabilities list
    */
-  private validateCapabilities(capabilities: string[]): void {
+  validateCapabilities(capabilities: string[]): void {
     const validCapabilities = [
       'codegen',
       'textreview',
@@ -883,7 +883,7 @@ export class ManifestValidator {
   /**
    * Validate permissions list
    */
-  private validatePermissions(permissions: string[]): void {
+  validatePermissions(permissions: string[]): void {
     const validPermissions = [
       'currentuser',
       'fileusers',
@@ -955,8 +955,8 @@ export function createManifestValidator(manifest?: LocalExtensionManifest): Mani
  */
 export function isStorageAccessible(): boolean {
   try {
-    return typeof Storage !== 'undefined' && 
-      typeof window !== 'undefined' && 
+    return typeof Storage !== 'undefined' &&
+      typeof window !== 'undefined' &&
       window.localStorage !== null
   } catch {
     return false
@@ -981,9 +981,9 @@ export function getStorageUsagePercentage(): number {
  */
 export function validateFilePath(path: string): boolean {
   // Basic path validation
-  return typeof path === 'string' && 
-    path.length > 0 && 
-    !path.includes('..') && 
+  return typeof path === 'string' &&
+    path.length > 0 &&
+    !path.includes('..') &&
     /^[\w./-]+$/.test(path)
 }
 
@@ -1016,7 +1016,7 @@ export function formatFileSize(bytes: number): string {
  */
 export {
   VSCodeExtensionManager as ExtensionManager,
-  FileBrowserManager as FileManager, 
+  FileBrowserManager as FileManager,
   LocalStorageManager as StorageManager,
   ManifestValidator as Validator
 }

@@ -13,11 +13,11 @@ interface LoadTimer {
 
 type LogEvent
   = | { type: "receiveNodeChanges", size: number }
-    | { type: "sendSceneGraphQuery" | "receiveSceneGraphReply", queries: string[] }
-    | { type: "finishIncrementalLoading", fileKey: string }
+  | { type: "sendSceneGraphQuery" | "receiveSceneGraphReply", queries: string[] }
+  | { type: "finishIncrementalLoading", fileKey: string }
 
 class IncrementalLoadTimerReporter implements LoadTimer {
-  private reporter: IncrementalLoadTimer | null = null
+  reporter: IncrementalLoadTimer | null = null
 
   constructor() {
     this.reporter = null

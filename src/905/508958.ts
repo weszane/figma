@@ -38,13 +38,13 @@ interface TransformConfig<T = any, U = any> {
  * Original class: l
  */
 class FieldTransformer {
-  private _sinatraT: any = null
-  private _liveGraphT: any = null
+  _sinatraT: any = null
+  _liveGraphT: any = null
 
   constructor(
     public nameStrategy: symbol | string,
     public transformations: TransformConfig,
-  ) {}
+  ) { }
 
   /**
    * Transform field to camel case
@@ -113,7 +113,7 @@ class FieldTransformer {
    * Internal transformer creation method
    * Original: t
    */
-  private createTransformer(strategy: string | symbol, config: TransformConfig): FieldTransformer {
+  createTransformer(strategy: string | symbol, config: TransformConfig): FieldTransformer {
     const nameStrategy = this.nameStrategy === UNSPECIFIED_TRANSFORM ? strategy : this.nameStrategy
     const transformations = this.transformations.default ? config : this.transformations
     return new FieldTransformer(nameStrategy, transformations)

@@ -9,7 +9,7 @@ import { k as _$$k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, withTracking } from "../figma_app/831799";
-import { xv } from "../figma_app/290668";
+import { getFirstTabbableElement } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { clearSelection } from "../figma_app/741237";
@@ -1111,7 +1111,7 @@ export let $$e70 = withTracking(function (e) {
       Y.current.focus();
       return;
     }
-    let e = xv(q.current);
+    let e = getFirstTabbableElement(q.current);
     e && e.focus();
   }, [U]);
   let X = !isValidValue(transitionNodeID) || isValidSessionLocalID(normalizeValue(transitionNodeID));

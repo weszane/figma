@@ -45,7 +45,7 @@ import { e as _$$e } from "../figma_app/905311";
 import { h6 } from "../905/401389";
 import { Zj } from "../figma_app/365713";
 import { hD } from "../figma_app/84580";
-import { _i, E8, U8 } from "../figma_app/800999";
+import { parseKeyCodes, getGamepadInputLabel, formatKeyboardShortcut } from "../figma_app/800999";
 import { Cy, n9, DV, a2, R as _$$R } from "../figma_app/976110";
 import { B as _$$B2 } from "../905/872019";
 import { a as _$$a } from "../905/29104";
@@ -746,9 +746,9 @@ export function $$eR1(e, t, n) {
 function eM(e, t, n) {
   let o = t.format(e.interactionType ?? "NONE");
   if ("ON_KEY_DOWN" === e.interactionType && e.keyTrigger && e.keyTrigger.keyCodes) {
-    let t = _i(e.keyTrigger.keyCodes);
-    let i = E8(e.keyTrigger, !0);
-    if ("KEYBOARD" === e.keyTrigger.triggerDevice && t) return n ? U8(t) : o + " (" + U8(t) + ")";
+    let t = parseKeyCodes(e.keyTrigger.keyCodes);
+    let i = getGamepadInputLabel(e.keyTrigger, !0);
+    if ("KEYBOARD" === e.keyTrigger.triggerDevice && t) return n ? formatKeyboardShortcut(t) : o + " (" + formatKeyboardShortcut(t) + ")";
     if (i) return n ? i : o + " (" + i + ")";
   }
   return o;

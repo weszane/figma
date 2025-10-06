@@ -262,7 +262,7 @@ let garbageCollectPromise: Promise<void> | null = null;
 export async function garbageCollectAutosave(userID: string): Promise<void> {
   async function collect() {
     for (const dbName of ['figma-autosave-v2', 'figma-autosave-darklaunch-v2']) {
-      deleteDB(dbName).catch(() => {});
+      deleteDB(dbName).catch(() => { });
     }
     try {
       const sessions = await go(createPrefixKeyRange(userID), async e => Date.now() - e.lastUpdatedAt < getAutosaveExpirationMs());
@@ -808,8 +808,8 @@ function hasPersistedChanges(fileKey: string, nodes: Array<{
  * Listens for commit events and allows waiting for the next commit.
  */
 class CommitEventListener {
-  private nextEventPromise: Promise<void>;
-  private nextEventPromiseResolve!: () => void;
+  nextEventPromise: Promise<void>;
+  nextEventPromiseResolve!: () => void;
   constructor() {
     this.nextEventPromise = new Promise(resolve => {
       this.nextEventPromiseResolve = resolve;
@@ -841,13 +841,13 @@ class CommitEventListener {
 class AutosaveManager {
   public userID: string;
   public fileCreationManager: FileCreationManager | null;
-  private _state: {
+  _state: {
     type: string;
     session?: AutosaveSession;
   };
-  private _fileKey: string;
-  private _hasReportedError: boolean;
-  private _sessionsToRestore: Promise<any[]>;
+  _fileKey: string;
+  _hasReportedError: boolean;
+  _sessionsToRestore: Promise<any[]>;
   constructor(userID: string, fileKey: string) {
     this.userID = userID;
     this._state = {
@@ -1048,9 +1048,9 @@ async function updateNewFileInfo(userID: string, fileKey: string, name: string):
  * Manages creation and metadata for new files.
  */
 class FileCreationManager {
-  private _pendingRealFileKey: string | null;
+  _pendingRealFileKey: string | null;
   public fileKey: string;
-  private _newFileInfo: any;
+  _newFileInfo: any;
   constructor(fileKey: string, newFileInfo: any) {
     this._pendingRealFileKey = null;
     this.fileKey = fileKey;

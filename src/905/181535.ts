@@ -24,9 +24,9 @@ import { _o, dc, kL, mh, NJ, r9, UV, xn } from '../figma_app/779179'
 // Refactored: Renamed to roundToPixel for clarity, added type annotations and JSDoc.
 const roundToPixel: (value: number) => number = 'devicePixelRatio' in window
   ? (value: number) => {
-      const pixelRatio = window.devicePixelRatio
-      return Math.floor(value * pixelRatio + 0.5) / pixelRatio
-    }
+    const pixelRatio = window.devicePixelRatio
+    return Math.floor(value * pixelRatio + 0.5) / pixelRatio
+  }
   : (value: number) => Math.round(value)
 
 // Original code: class A { ... }
@@ -99,7 +99,7 @@ interface ScrubCursorProps {
 
 // Original code: let O = new class { ... }
 // Refactored: Renamed to ScrubManager, added types, JSDoc, split into smaller methods, simplified conditionals.
-// This is a large class; I've broken it into logical sections with private methods where possible.
+// This is a large class; I've broken it into logical sections with  methods where possible.
 interface ScrubManagerOptions {
   disablePointerLock?: boolean
 }
@@ -135,7 +135,7 @@ interface WheelMultiplier {
 
 interface ScrubContext {
   cursorSize: any
-  cursorStyle?: string 
+  cursorStyle?: string
   renderCursor: any
   wheelMultiplier?: number | WheelMultiplier
   wheelSingleAxis?: 'x' | 'y' | false
@@ -196,7 +196,7 @@ class WheelCapture {
     }
   }
 
-  private computeMultiplier(multiplier?: number | WheelMultiplier): WheelMultiplier {
+  computeMultiplier(multiplier?: number | WheelMultiplier): WheelMultiplier {
     const defaultMultiplier = { x: 1, y: 1 }
     if (!multiplier)
       return defaultMultiplier
@@ -232,7 +232,7 @@ class WheelCapture {
     return true
   }
 
-  private onBatchTimeout(): void {
+  onBatchTimeout(): void {
     this.batchTimer = null
     this.end(null)
   }
@@ -401,7 +401,7 @@ function ScrubCursor({ width = 12, height = 13, arrowWidth, ...props }: ScrubCur
 
 // Original code: let O = new class { ... }
 // Refactored: Renamed to ScrubManager, added types, JSDoc, split into smaller methods, simplified conditionals.
-// This is a large class; I've broken it into logical sections with private methods where possible.
+// This is a large class; I've broken it into logical sections with  methods where possible.
 interface ScrubManagerOptions {
   disablePointerLock?: boolean
 }
@@ -468,7 +468,7 @@ class ScrubManager {
   }
 
   // Event handlers (kept as arrow functions for binding)
-  private _onPointerDown = (event: PointerEvent) => {
+  _onPointerDown = (event: PointerEvent) => {
     const target = event.target as HTMLElement
     const context = this.trackedElements.get(target)
     if (context) {
@@ -486,14 +486,14 @@ class ScrubManager {
     }
   }
 
-  private onClick = (event: MouseEvent) => {
+  onClick = (event: MouseEvent) => {
     if (this.trackedElements.has(event.target as HTMLElement)) {
       event.stopPropagation()
       event.preventDefault()
     }
   }
 
-  private onWheelForTracked = (event: WheelEvent) => {
+  onWheelForTracked = (event: WheelEvent) => {
     let delta = { x: -event.deltaX, y: -event.deltaY }
     switch (event.deltaMode) {
       case WheelEvent.DOM_DELTA_LINE:
@@ -516,7 +516,7 @@ class ScrubManager {
     }
   }
 
-  private onPointerEnterTracked = (event: PointerEvent) => {
+  onPointerEnterTracked = (event: PointerEvent) => {
     this.pointerEventerEvent = event
     const [trackedElement] = this.findTrackedElement(event.target as HTMLElement)
     this.pointerInTrackedElement = trackedElement
@@ -526,12 +526,12 @@ class ScrubManager {
     }
   }
 
-  private onPointerLeaveTracked = (event: PointerEvent) => {
+  onPointerLeaveTracked = (event: PointerEvent) => {
     this.pointerInTrackedElement = null
     this.updateCaptureWheelEvents(event)
   }
 
-  private onKeyDown = (event: KeyboardEvent) => {
+  onKeyDown = (event: KeyboardEvent) => {
     this.updateKeyStates(event)
     if (event.keyCode === KeyCodes.ESCAPE && this.activeContext) {
       event.preventDefault()
@@ -539,7 +539,7 @@ class ScrubManager {
     }
   }
 
-  private onKeyUp = (event: KeyboardEvent) => {
+  onKeyUp = (event: KeyboardEvent) => {
     this.updateKeyStates(event)
     if (event.keyCode === KeyCodes.ESCAPE && this.activeContext) {
       this.stopTracking(event, true)
@@ -548,7 +548,7 @@ class ScrubManager {
     }
   }
 
-  private onPointerMove = (event: PointerEvent) => {
+  onPointerMove = (event: PointerEvent) => {
     let delta: Distance
     if (browserFeatures.pointerLock) {
       delta = { x: event.movementX, y: event.movementY }
@@ -578,23 +578,23 @@ class ScrubManager {
     }
   }
 
-  private onPointerUp = (event: PointerEvent) => {
+  onPointerUp = (event: PointerEvent) => {
     this.cancelPointerDownTimeout()
     this.stopTracking(event, false)
   }
 
-  private onPointerCancel = (event: PointerEvent) => {
+  onPointerCancel = (event: PointerEvent) => {
     this.cancelPointerDownTimeout()
     this.stopTracking(event, true)
   }
 
-  private onPointerLockFailure = () => {
+  onPointerLockFailure = () => {
     this.customCursorContext?.remove()
     this.customCursorContext = null
     this.startTracking()
   }
 
-  private onPointerLockChange = (event: Event) => {
+  onPointerLockChange = (event: Event) => {
     if (this.activeContext) {
       if (document.pointerLockElement === this.activeElement) {
         this.startTracking()
@@ -605,7 +605,7 @@ class ScrubManager {
     }
   }
 
-  private onWindowBlur = (event: FocusEvent) => {
+  onWindowBlur = (event: FocusEvent) => {
     this.isAltKeyPressed = false
     this.onAltKeyChange(null)
     this.isShiftKeyPressed = false
@@ -722,7 +722,7 @@ class ScrubManager {
     }
   }
 
-  private setStyleOverridesForTracked(element: HTMLElement, enabled: boolean): void {
+  setStyleOverridesForTracked(element: HTMLElement, enabled: boolean): void {
     const context = this.trackedElements.get(element)
     const pointerEvents = enabled ? 'none' : null
     const cursor = enabled && context ? getCursorStyle(context) : null
@@ -840,13 +840,13 @@ class ScrubManager {
     try {
       this.activeElement.setPointerCapture(event.pointerId)
     }
-    catch {}
+    catch { }
     const startScrub = () => {
       this.cancelPointerDownTimeout()
       this.customCursorContext = new CustomCursor(context, this.startPosition)
       this.customCursorContext.create()
       if (!this.options.disablePointerLock && browserFeatures.pointerLock) {
-        this.activeElement!.requestPointerLock()?.catch(() => {})
+        this.activeElement!.requestPointerLock()?.catch(() => { })
       }
       else {
         this.onPointerLockFailure()
@@ -867,7 +867,7 @@ class ScrubManager {
     }
   }
 
-  private updateKeyStates(event: KeyboardEvent): void {
+  updateKeyStates(event: KeyboardEvent): void {
     if (this.isAltKeyPressed !== event.altKey) {
       this.isAltKeyPressed = event.altKey
       this.onAltKeyChange(event)
@@ -894,7 +894,7 @@ interface ScrubbableContextValue {
 }
 
 export const ScrubbableContext = createContext<ScrubbableContextValue>({
-  setScrubbableElement: () => {},
+  setScrubbableElement: () => { },
 })
 
 // Original code: export class $$F0 extends PureComponent { ... }
@@ -978,7 +978,7 @@ export class ScrubbableControl extends PureComponent<ScrubbableControlProps, Scr
     }, 128, { leading: true })
   }
 
-  private initializeEventHandlers(): void {
+  initializeEventHandlers(): void {
     this.onToggleAlt = (isPressed: boolean) => {
       if (!this.labelRef.current)
         return
@@ -995,7 +995,7 @@ export class ScrubbableControl extends PureComponent<ScrubbableControlProps, Scr
     }
   }
 
-  private initializeScrubContext(): void {
+  initializeScrubContext(): void {
     this.scrubContext = {
       cursorStyle: 'ew-resize',
       wheelSingleAxis: 'x',
@@ -1028,9 +1028,9 @@ export class ScrubbableControl extends PureComponent<ScrubbableControlProps, Scr
     scrubManager.unregisterAltKeyListener(this.onToggleAlt)
   }
 
-  private onToggleAlt: (isPressed: boolean) => void
+  onToggleAlt: (isPressed: boolean) => void
 
-  private setScrubbableElement = (element: HTMLElement | null): void => {
+  setScrubbableElement = (element: HTMLElement | null): void => {
     if (element === this.labelRef.current) {
       this.nonAltScrubElement = element
     }
@@ -1056,7 +1056,7 @@ export class ScrubbableControl extends PureComponent<ScrubbableControlProps, Scr
     }
   }
 
-  private onScrubBegin = (event: ScrubEvent): boolean | void => {
+  onScrubBegin = (event: ScrubEvent): boolean | void => {
     if (this.props.scrubbingDisabled)
       return false
     if (this.props.value == null) {
@@ -1077,9 +1077,9 @@ export class ScrubbableControl extends PureComponent<ScrubbableControlProps, Scr
     this.setState({ inLiveScrub: true })
   }
 
-  private preScrubValue: any
+  preScrubValue: any
 
-  private onScrubChange = (event: ScrubEvent): void => {
+  onScrubChange = (event: ScrubEvent): void => {
     if (!this.props.formatter.incrementBy)
       return
     this.didJustScrub = true
@@ -1109,7 +1109,7 @@ export class ScrubbableControl extends PureComponent<ScrubbableControlProps, Scr
     }
   }
 
-  private onScrubEnd = (event: ScrubEvent): void => {
+  onScrubEnd = (event: ScrubEvent): void => {
     if (this.didJustScrub || this.props.onScrubClick?.()) {
       this.didJustScrub = false
     }
@@ -1124,7 +1124,7 @@ export class ScrubbableControl extends PureComponent<ScrubbableControlProps, Scr
     this.setState({ inLiveScrub: false })
   }
 
-  private renderScrubCursor = (data: { distance: Distance }): React.ReactElement => {
+  renderScrubCursor = (data: { distance: Distance }): React.ReactElement => {
     const scale = this.getScaleFromDistance(data.distance.y)
     if (this.currentScrubScale !== scale) {
       const prevScale = this.currentScrubScale
@@ -1146,7 +1146,7 @@ export class ScrubbableControl extends PureComponent<ScrubbableControlProps, Scr
     })
   }
 
-  private updateScrubContext(): void {
+  updateScrubContext(): void {
     const bigIncrement = this.props.bigNudgeAmount * (this.props.postBigNudgeAmount ?? 0.5)
     const wheelMultiplier = this.props.wheelMultiplier != null ? this.props.wheelMultiplier * (this.props.postWheelMultiplier ?? 0.2) : undefined
     const scrubStartDelay = this.props.onScrubClick ? 250 : undefined
@@ -1192,7 +1192,7 @@ export class ScrubbableControl extends PureComponent<ScrubbableControlProps, Scr
     })
   }
 
-  private getScaleFromDistance(distanceY: number): number {
+  getScaleFromDistance(distanceY: number): number {
     const normalized = distanceY / (window.screen ? window.screen.height : 768)
     const clamped = Math.max(-1, Math.min(1, normalized))
     return clamped < -0.5 ? 8 : clamped < -0.25 ? 4 : clamped < -0.125 ? 2 : clamped > 0.5 ? -8 : clamped > 0.25 ? -4 : clamped > 0.125 ? -2 : 1

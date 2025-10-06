@@ -245,7 +245,7 @@ export class DSAApiService {
   }
 
   // Helper methods for common API call patterns
-  private makeValidatedGetRequest(endpoint: string, params: any, validator: any) {
+  makeValidatedGetRequest(endpoint: string, params: any, validator: any) {
     const token = generateDSAToken(params);
     return validator.validate(async ({
       xr
@@ -254,7 +254,7 @@ export class DSAApiService {
       ...token
     })));
   }
-  private makeValidatedPostRequest(endpoint: string, params: any, validator: any) {
+  makeValidatedPostRequest(endpoint: string, params: any, validator: any) {
     return validator.validate(async ({
       xr
     }: any) => await xr.post(endpoint, APIParameterUtils.toAPIParameters(params)));

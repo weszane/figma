@@ -35,13 +35,13 @@ var z;
 var F = (e, t, i) => {
   if (!t.has(e)) throw TypeError("Cannot " + i);
 };
-var U = (e, t, i) => (F(e, t, "read from private field"), i ? i.call(e) : t.get(e));
+var U = (e, t, i) => (F(e, t, "read from  field"), i ? i.call(e) : t.get(e));
 var P = (e, t, i) => {
-  if (t.has(e)) throw TypeError("Cannot add the same private member more than once");
+  if (t.has(e)) throw TypeError("Cannot add the same  member more than once");
   t instanceof WeakSet ? t.add(e) : t.set(e, i);
 };
-var j = (e, t, i, r) => (F(e, t, "write to private field"), r ? r.call(e, i) : t.set(e, i), i);
-var B = (e, t, i) => (F(e, t, "access private method"), i);
+var j = (e, t, i, r) => (F(e, t, "write to  field"), r ? r.call(e, i) : t.set(e, i), i);
+var B = (e, t, i) => (F(e, t, "access  method"), i);
 var q = new Uint8Array(8);
 var H = new DataView(q.buffer);
 var N = e => [(e % 256 + 256) % 256];

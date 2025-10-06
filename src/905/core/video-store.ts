@@ -3,17 +3,17 @@ import { Et } from '../125019'
 import { thumbnailGenerator } from '../435722'
 import { NfO } from '../../figma_app/763686'
 /**
- * VideoStore - Manages private video cache, thumbnail generation, and SHA1-based video management.
+ * VideoStore - Manages  video cache, thumbnail generation, and SHA1-based video management.
  * Handles video bytes loading, thumbnail extraction, and resource cleanup.
  */
 export class VideoStore {
-  private thumbnailGenerator: ThumbnailGenerator
-  private hashToPrivateVideo: Map<string, {
+  thumbnailGenerator: ThumbnailGenerator
+  hashToPrivateVideo: Map<string, {
     sha1: string
   }>
 
-  private hashToCoverImageHash: Map<string, string>
-  private hashToCoverThumbnailImageHash: Map<string, string>
+  hashToCoverImageHash: Map<string, string>
+  hashToCoverThumbnailImageHash: Map<string, string>
 
   constructor() {
     this.thumbnailGenerator = thumbnailGenerator
@@ -25,7 +25,7 @@ export class VideoStore {
   /**
    * Asynchronously creates a video from bytes, validates, generates thumbnail, and stores hashes.
    * @param videoBytes - The video data as an ArrayBuffer or TypedArray.
-   * @returns Promise resolving to the private video object.
+   * @returns Promise resolving to the  video object.
    */
   async createVideoAsync(videoBytes: ArrayBuffer | Uint8Array): Promise<{
     sha1: string
@@ -50,9 +50,9 @@ export class VideoStore {
   }
 
   /**
-   * Retrieves or creates a private video entry by SHA1 hash.
+   * Retrieves or creates a  video entry by SHA1 hash.
    * @param hash - The SHA1 hash of the video.
-   * @returns The private video object.
+   * @returns The  video object.
    */
   getOrCreatePrivateVideo(hash: string): {
     sha1: string
@@ -77,9 +77,9 @@ export class VideoStore {
   }
 
   /**
-   * Retrieves a private video by hash or throws if not found.
+   * Retrieves a  video by hash or throws if not found.
    * @param hash - The SHA1 hash of the video.
-   * @returns The private video object.
+   * @returns The  video object.
    * @throws Error if the video does not exist.
    */
   getPrivateVideoOrThrow(hash: string): {

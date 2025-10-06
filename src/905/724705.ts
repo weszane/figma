@@ -7,9 +7,9 @@ const IPC_PREFIX = 'ipc:'
  * Original class name: $$a0
  */
 export class IpcStorageHandler {
-  private storage: Storage
-  private callbacks: Record<string, Array<(payload: any) => void>>
-  private _onStorageEvent: (e: StorageEvent) => void
+  storage: Storage
+  callbacks: Record<string, Array<(payload: any) => void>>
+  _onStorageEvent: (e: StorageEvent) => void
 
   constructor() {
     this.storage = localStorageRef
@@ -64,7 +64,7 @@ export class IpcStorageHandler {
    * Returns the callback array for a given message key, creating it if necessary.
    * Original method name: _callbacksForMessage
    */
-  private getCallbacksForMessage(message: string): Array<(payload: any) => void> {
+  getCallbacksForMessage(message: string): Array<(payload: any) => void> {
     const key = IPC_PREFIX + message
     if (!this.callbacks[key]) {
       this.callbacks[key] = []

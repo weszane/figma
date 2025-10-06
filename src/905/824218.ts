@@ -65,7 +65,7 @@ export class ObjectFieldDefinition {
    * Parse order by configuration
    * Original function: anonymous function in constructor
    */
-  private parseOrderByConfig(orderByConfig: any): any {
+  parseOrderByConfig(orderByConfig: any): any {
     if (!orderByConfig) return undefined;
     if (orderByConfig === 'Unordered') return 'Unordered';
     return orderByConfig.map((item: any) => Array.isArray(item) ? item : [item, 'ASC']);
@@ -143,7 +143,7 @@ export class ObjectFieldDefinition {
    * Validate that the referenced object type exists
    * Original code: inline validation in validate method
    */
-  private validateObjectTypeExists(schema: any, objectDefinition: any): void {
+  validateObjectTypeExists(schema: any, objectDefinition: any): void {
     if (!schema.objects.has(this.type.name)) {
       this.throwFieldError(objectDefinition, `refers to undefined object type '${this.type.name}'`);
     }
@@ -153,7 +153,7 @@ export class ObjectFieldDefinition {
    * Validate checkCanRead configuration
    * Original code: inline validation in validate method
    */
-  private validateCanReadConfiguration(schema: any, objectDefinition: any, usedArguments: Set<string>): void {
+  validateCanReadConfiguration(schema: any, objectDefinition: any, usedArguments: Set<string>): void {
     if (!this.checkCanRead) return;
     if (Object.keys(this.checkCanRead).length === 0) {
       this.throwFieldError(objectDefinition, 'uses checkCanRead attribute and it doesn\'t take any arguments. checkCanRead must take arguments such as { userId: fieldArg(\'userId\') } or { userId: session(\'userId\') }. This also means the corresponding canRead field must take these arguments as well.');
@@ -173,7 +173,7 @@ export class ObjectFieldDefinition {
    * Validate embedded field configuration
    * Original code: inline validation in validate method
    */
-  private validateEmbeddedConfiguration(schema: any, objectDefinition: any): void {
+  validateEmbeddedConfiguration(schema: any, objectDefinition: any): void {
     const referencedObject = schema.objectDef(this.type);
     if (this.embedded && !referencedObject.embedded && !referencedObject.def.computed) {
       this.throwFieldError(objectDefinition, `refers to object '${this.type.name}' as an embedded field, but object '${this.type.name}' is not marked as embedded or computed`);
@@ -187,7 +187,7 @@ export class ObjectFieldDefinition {
    * Validate that the field is resolvable
    * Original code: inline validation in validate method
    */
-  private validateResolvability(objectDefinition: any): void {
+  validateResolvability(objectDefinition: any): void {
     if (!this.isResolvable(objectDefinition)) {
       this.throwFieldError(objectDefinition, 'does not contain a filter or resolver and is not embedded');
     }
@@ -197,7 +197,7 @@ export class ObjectFieldDefinition {
    * Validate canRead field configuration
    * Original code: inline validation in validate method
    */
-  private validateCanReadField(schema: any, objectDefinition: any): void {
+  validateCanReadField(schema: any, objectDefinition: any): void {
     if (!this.checkCanRead) return;
     const referencedObject = schema.objectDef(this.type);
     if (this.checkCanRead.fieldName || referencedObject.fields.has('canRead')) {
@@ -221,7 +221,7 @@ export class ObjectFieldDefinition {
    * Validate filter conditions
    * Original code: complex nested validation in validate method
    */
-  private validateFilterConditions(schema: any, objectDefinition: any, usedArguments: Set<string>): void {
+  validateFilterConditions(schema: any, objectDefinition: any, usedArguments: Set<string>): void {
     const referencedObject = schema.objectDef(this.type);
     const validateFieldExists = (condition: any) => {
       const field = referencedObject.fields.get(condition.left);
@@ -272,7 +272,7 @@ export class ObjectFieldDefinition {
    * Validate binary filter conditions
    * Original code: case 'binary' in validateCondition function
    */
-  private validateBinaryCondition(condition: any, objectDefinition: any, schema: any, validateFieldExists: Fn, validateArgumentOrParentField: Function): void {
+  validateBinaryCondition(condition: any, objectDefinition: any, schema: any, validateFieldExists: Fn, validateArgumentOrParentField: Function): void {
     const leftField = validateFieldExists(condition);
     if (['list', 'map', 'object', 'objects'].includes(leftField.type.kind)) {
       throw new CustomError(oneLine`
@@ -313,7 +313,7 @@ export class ObjectFieldDefinition {
    * Validate literal values in filter conditions
    * Original code: nested switch statement in binary condition validation
    */
-  private validateLiteralValue(condition: any, leftField: any, objectDefinition: any, schema: any): void {
+  validateLiteralValue(condition: any, leftField: any, objectDefinition: any, schema: any): void {
     switch (leftField.type.kind) {
       case 'int':
       case 'float':
@@ -370,7 +370,7 @@ export class ObjectFieldDefinition {
    * Validate 'in' filter conditions
    * Original code: case 'in' in validateCondition function
    */
-  private validateInCondition(condition: any, objectDefinition: any, schema: any, validateFieldExists: Fn, validateArgumentOrParentField: Function): void {
+  validateInCondition(condition: any, objectDefinition: any, schema: any, validateFieldExists: Fn, validateArgumentOrParentField: Function): void {
     const leftField = validateFieldExists(condition);
     if (['list', 'map', 'object', 'objects', 'date', 'datetime'].includes(leftField.type.kind)) {
       throw new CustomError(oneLine`
@@ -398,7 +398,7 @@ export class ObjectFieldDefinition {
    * Validate literal values in 'in' filter conditions
    * Original code: nested validation in 'in' condition
    */
-  private validateInLiteralValues(condition: any, leftField: any, objectDefinition: any, schema: any): void {
+  validateInLiteralValues(condition: any, leftField: any, objectDefinition: any, schema: any): void {
     switch (leftField.type.kind) {
       case 'int':
       case 'float':
@@ -447,7 +447,7 @@ export class ObjectFieldDefinition {
    * Validate resolver configuration
    * Original code: resolver validation in validate method
    */
-  private validateResolverConfiguration(schema: any, objectDefinition: any, usedArguments: Set<string>): void {
+  validateResolverConfiguration(schema: any, objectDefinition: any, usedArguments: Set<string>): void {
     if (this.resolver?.type === 'HTTP') {
       this.validateHttpResolver(this.resolver, objectDefinition, usedArguments);
     }
@@ -467,7 +467,7 @@ export class ObjectFieldDefinition {
    * Validate pagination configuration
    * Original code: pagination validation in validate method
    */
-  private validatePaginationConfiguration(schema: any, objectDefinition: any, usedArguments: Set<string>): void {
+  validatePaginationConfiguration(schema: any, objectDefinition: any, usedArguments: Set<string>): void {
     if (!this.pagination) return;
     const objectFields = schema.objects.get(this.type.name)?.fields;
     if (!objectFields) {
@@ -481,7 +481,7 @@ export class ObjectFieldDefinition {
    * Validate that all declared arguments are used
    * Original code: final validation loop in validate method
    */
-  private validateAllArgumentsUsed(objectDefinition: any, usedArguments: Set<string>): void {
+  validateAllArgumentsUsed(objectDefinition: any, usedArguments: Set<string>): void {
     for (const argument of this.args) {
       if (!usedArguments.has(argument.name) && argument.name !== 'initialPageSize') {
         this.throwFieldError(objectDefinition, `declares argument '${argument.name}' but does not use it`);
@@ -603,7 +603,7 @@ export class ObjectFieldDefinition {
    * Validate cursor pagination configuration
    * Original code: cursor pagination validation in validatePaginationConfig
    */
-  private validateCursorPaginationConfig(paginationConfig: any, objectDefinition: any, usedArguments: Set<string>, objectFields: Map<string, any>): void {
+  validateCursorPaginationConfig(paginationConfig: any, objectDefinition: any, usedArguments: Set<string>, objectFields: Map<string, any>): void {
     const objectTypeName = this.type.name;
     for (const [cursorName, fieldNames] of Object.entries(paginationConfig.cursorColumnSet)) {
       for (const fieldName of fieldNames) {
@@ -630,7 +630,7 @@ export class ObjectFieldDefinition {
    * Validate selected cursor column configuration
    * Original code: selectedCursorColumn validation in cursor pagination
    */
-  private validateSelectedCursorColumn(paginationConfig: any, objectDefinition: any, usedArguments: Set<string>): void {
+  validateSelectedCursorColumn(paginationConfig: any, objectDefinition: any, usedArguments: Set<string>): void {
     if (hasTypeProperty(paginationConfig.selectedCursorColumn)) {
       const argument = findItemByName(this.args, paginationConfig.selectedCursorColumn.ref);
       if (!argument) {
@@ -651,7 +651,7 @@ export class ObjectFieldDefinition {
    * Validate sort order configuration
    * Original code: sortOrder validation in cursor pagination
    */
-  private validateSortOrder(paginationConfig: any, objectDefinition: any, usedArguments: Set<string>): void {
+  validateSortOrder(paginationConfig: any, objectDefinition: any, usedArguments: Set<string>): void {
     if (hasTypeProperty(paginationConfig.sortOrder)) {
       const argument = findItemByName(this.args, paginationConfig.sortOrder.ref);
       if (!argument) {
@@ -669,7 +669,7 @@ export class ObjectFieldDefinition {
    * Validate ID column configuration
    * Original code: idColumn validation in cursor pagination
    */
-  private validateIdColumn(paginationConfig: any, objectDefinition: any, objectFields: Map<string, any>): void {
+  validateIdColumn(paginationConfig: any, objectDefinition: any, objectFields: Map<string, any>): void {
     if (paginationConfig.idColumn) {
       const field = objectFields.get(paginationConfig.idColumn);
       if (!field) {

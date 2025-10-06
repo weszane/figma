@@ -1979,10 +1979,10 @@ function t1(e) {
         isExpanded: o
       },
       onClick: d
-    }), "private:header", 32, i), o && ($(jsx("div", {
+    }), ":header", 32, i), o && ($(jsx("div", {
       className: "publishing_modal--subheader--g6LTL",
       children: renderI18nText("design_systems.publishing_modal.these_wont_be_published")
-    }), "private:subheader", 22, i), K(N, i), K(O, i, void 0, !0), K(F, i), K(B, i), _$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) && K(v, i), _$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) && K(S, i)));
+    }), ":subheader", 22, i), K(N, i), K(O, i, void 0, !0), K(F, i), K(B, i), _$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) && K(v, i), _$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) && K(S, i)));
     return i;
   })();
   return jsx(_$$O, {

@@ -21,9 +21,9 @@ import { DEFAULT_ALLOWED_ORIGINS } from '../figma_app/985200';
  * Manages widget effects (class g)
  */
 class WidgetEffectManager {
-  private vm: any;
-  private effects: any[];
-  private cleanups: any[];
+  vm: any;
+  effects: any[];
+  cleanups: any[];
   public hasRunEffects: boolean;
   constructor(vm: any) {
     this.vm = vm;
@@ -90,9 +90,9 @@ class WidgetEffectManager {
  * Manages promises for widget rendering (class A)
  */
 class WidgetPromiseManager {
-  private promises: Set<Promise<any>>;
-  private currentPromise: Promise<void> | null;
-  private currentResolve: (() => void) | null;
+  promises: Set<Promise<any>>;
+  currentPromise: Promise<void> | null;
+  currentResolve: (() => void) | null;
   constructor() {
     this.promises = new Set();
     this.currentPromise = null;
@@ -164,12 +164,12 @@ function waitForNextFrame(): Promise<void> {
  * Schedules and manages widget renders (class v)
  */
 class WidgetRenderScheduler {
-  private renderFn: () => Promise<void>;
-  private wait: () => Promise<void>;
-  private currentTask: Promise<void> | null;
-  private isRendering: boolean;
-  private needsReschedule: boolean;
-  private shouldReschedule: boolean;
+  renderFn: () => Promise<void>;
+  wait: () => Promise<void>;
+  currentTask: Promise<void> | null;
+  isRendering: boolean;
+  needsReschedule: boolean;
+  shouldReschedule: boolean;
   constructor(renderFn: () => Promise<void>, wait: () => Promise<void> = waitForNextFrame) {
     this.renderFn = renderFn;
     this.wait = wait;
@@ -276,18 +276,18 @@ interface WaitForFinishOptions {
  * WidgetManager manages the lifecycle and rendering of a widget (class $$T0)
  */
 export class WidgetManager {
-  private vm: NoOpVm;
-  private pluginId: string;
-  private runtimeBridge: any;
-  private widgetFunction: any;
-  private currentWidgetId: string | null;
-  private renderingStateById: Map<string, WidgetRenderingState>;
-  private promiseManager: WidgetPromiseManager;
-  private lifecycleCommand: LifecycleCommand | null;
-  private isCanceled: boolean;
-  private isCleared: boolean;
-  private shutdownActions: (() => void)[];
-  private reenableUnsafeGlobalsHandle?: any;
+  vm: NoOpVm;
+  pluginId: string;
+  runtimeBridge: any;
+  widgetFunction: any;
+  currentWidgetId: string | null;
+  renderingStateById: Map<string, WidgetRenderingState>;
+  promiseManager: WidgetPromiseManager;
+  lifecycleCommand: LifecycleCommand | null;
+  isCanceled: boolean;
+  isCleared: boolean;
+  shutdownActions: (() => void)[];
+  reenableUnsafeGlobalsHandle?: any;
   constructor(vm: NoOpVm, pluginId: string, runtimeBridge: any) {
     this.vm = vm;
     this.pluginId = pluginId;

@@ -52,8 +52,8 @@ interface NodeElement {
  * Original class: e9
  */
 export class PluginNodeRuntime {
-  private pluginID: string
-  private vm: PluginVM
+  pluginID: string
+  vm: PluginVM
 
   constructor(pluginID: string, vm: PluginVM) {
     this.pluginID = pluginID
@@ -197,7 +197,7 @@ export class PluginNodeRuntime {
   }
 
   // Helper methods (would need actual implementations)
-  private createSceneNode(type: string, _tracking: any): SceneNode {
+  createSceneNode(type: string, _tracking: any): SceneNode {
     // Mock implementation - would need actual e7() function
     return {
       id: `mock-${type}-${Date.now()}`,
@@ -206,7 +206,7 @@ export class PluginNodeRuntime {
     }
   }
 
-  private createSVGNode(element: NodeElement, tracking: any, ancestorNode: any): SceneNode {
+  createSVGNode(element: NodeElement, tracking: any, ancestorNode: any): SceneNode {
     // Mock implementation - would need actual UN().createNodeFromSVG()
     const svgNode = this.createSceneNode('SVG', tracking)
     svgNode.widgetCachedAncestor = ancestorNode
@@ -219,10 +219,10 @@ export class PluginNodeRuntime {
  * Original class: te
  */
 export class PluginNodeAdapter {
-  private id: string
-  private pluginNode: SceneNode | null
-  private runtime: PluginNodeRuntime
-  private shimNode: SceneNode | null = null
+  id: string
+  pluginNode: SceneNode | null
+  runtime: PluginNodeRuntime
+  shimNode: SceneNode | null = null
 
   constructor(id: string, pluginNode: SceneNode | null, runtime: PluginNodeRuntime) {
     this.id = id
@@ -243,7 +243,7 @@ export class PluginNodeAdapter {
   get children(): PluginNodeAdapter[] {
     const shim = this.readShim()
     const childGuids = shim?.reversedChildrenGuids ?? []
-    return [...childGuids].reverse().map(guid => 
+    return [...childGuids].reverse().map(guid =>
       new PluginNodeAdapter(guid, null, this.runtime)
     )
   }
@@ -337,7 +337,7 @@ export class PluginNodeAdapter {
   /**
    * Internal property writing implementation
    */
-  private writePropertyInner(propertyName: string, _value: any): void {
+  writePropertyInner(propertyName: string, _value: any): void {
     try {
       const node = this.getPluginNodeSlow()
       if (node) {
@@ -359,11 +359,11 @@ export class PluginNodeAdapter {
   /**
    * Internal text range writing implementation
    */
-  private writeTextRangeInner(
-    start: number, 
-    end: number, 
-    propertyName: string, 
-    value: any, 
+  writeTextRangeInner(
+    start: number,
+    end: number,
+    propertyName: string,
+    value: any,
     _validateRange = false
   ): void {
     try {
@@ -418,8 +418,8 @@ export function createPluginNodeRuntime(pluginID: string, vm: PluginVM): PluginN
  * Factory function to create a plugin node adapter
  */
 export function createPluginNodeAdapter(
-  nodeId: string, 
-  pluginNode: SceneNode | null, 
+  nodeId: string,
+  pluginNode: SceneNode | null,
   runtime: PluginNodeRuntime
 ): PluginNodeAdapter {
   return new PluginNodeAdapter(nodeId, pluginNode, runtime)

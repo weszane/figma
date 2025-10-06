@@ -130,7 +130,7 @@ import { getViewportX, computeFullscreenViewportForNode, getViewportY } from '..
 import { U as _$$U2 } from '../figma_app/65327';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { useIsFullscreenOverview, useNodesWithStatusLoaded, useIsFullscreenDevModeComponentBrowser } from '../figma_app/88239';
-import { ap } from '../figma_app/149304';
+import { shouldUseWebGL2 } from '../figma_app/149304';
 import { Cj } from '../figma_app/151869';
 import { Ig } from '../figma_app/155647';
 import { JR, Qp } from '../figma_app/162641';
@@ -192,7 +192,7 @@ import { TR } from '../figma_app/867292';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { generateRecordingKey, SKIP_RECORDING, useHandleMouseEvent } from '../figma_app/878298';
 import { SortBy, atomH1, trackOverviewStats, OverviewTab, atomM4, trackOverviewAvatars } from '../figma_app/879363';
-import { isInteractionPathCheck, Lg } from '../figma_app/897289';
+import { isInteractionPathCheck, getFalseValue } from '../figma_app/897289';
 import { trackFileEventWithStore, trackDefinedFileEventWithStore } from '../figma_app/901889';
 import { fq, Ou } from '../figma_app/953049';
 import { isDesignFileType, isDevHandoffEditorType, isWhiteboardFileType } from '../figma_app/976749';
@@ -2666,7 +2666,7 @@ let r$ = memo(({
         forwardToDatadog: !0
       }), n({
         type: 'HANDLE_PREVIEW_CRASHED'
-      }), Lg() || isInteractionPathCheck() || isDevEnvironment()) {
+      }), getFalseValue() || isInteractionPathCheck() || isDevEnvironment()) {
         throw new Error('Inline preview crashed');
       }
     },
@@ -3315,7 +3315,7 @@ function r5() {
         getFeatureFlags()?.fullscreen_use_threaded_rendering || function () {
           let e = dX('fullscreen');
           if (!e || webGPUBindings?.usingWebGPU()) return;
-          let t = ap() ? e.getContext('webgl2') : e.getContext('webgl');
+          let t = shouldUseWebGL2() ? e.getContext('webgl2') : e.getContext('webgl');
           if (!t || !window.expectedWebGLContextAttributes) return;
           let i = t.getContextAttributes();
           if (!i) return;

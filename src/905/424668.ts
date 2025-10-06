@@ -1,7 +1,7 @@
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
 
 class WidgetAPIClient {
-  private validators = {
+  validators = {
     orgWhitelist: createNoOpValidator(),
     versions: createNoOpValidator(),
     widgets: createNoOpValidator(),
@@ -37,7 +37,7 @@ class WidgetAPIClient {
     }) => await client.get('/api/widgets', APIParameterUtils.toAPIParameters(params)))
   }
 
-  getProfile<T = any>({ profileId, ...params }) { 
+  getProfile<T = any>({ profileId, ...params }) {
     return this.validators.profile.validate<T>(async ({
       xr: client,
     }) => await client.get(`/api/widgets/profile/${profileId}`, APIParameterUtils.toAPIParameters(params)))

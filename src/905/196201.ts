@@ -14,15 +14,15 @@ interface LRUNode<K, V> {
  */
 export class LRUCache<K, V> {
   /** Maximum number of elements allowed in the cache */
-  private maxElements: number
+  maxElements: number
   /** Current size of the cache */
-  private size: number
+  size: number
   /** Map of keys to nodes */
-  private nodeByKey: Record<string, LRUNode<K, V>>
+  nodeByKey: Record<string, LRUNode<K, V>>
   /** Head of the doubly linked list (most recently used) */
-  private head: LRUNode<K, V> | null
+  head: LRUNode<K, V> | null
   /** Tail of the doubly linked list (least recently used) */
-  private tail: LRUNode<K, V> | null
+  tail: LRUNode<K, V> | null
 
   /**
    * @param maxElements Maximum number of elements in the cache
@@ -121,7 +121,7 @@ export class LRUCache<K, V> {
    * Moves a node to the head of the list (most recently used).
    * Original method name: moveElemToHead
    */
-  private moveElemToHead(node: LRUNode<K, V>): void {
+  moveElemToHead(node: LRUNode<K, V>): void {
     this.removeFromList(node)
     this.addElemAsHead(node)
   }
@@ -130,7 +130,7 @@ export class LRUCache<K, V> {
    * Removes a node from the doubly linked list.
    * Original method name: removeFromList
    */
-  private removeFromList(node: LRUNode<K, V>): void {
+  removeFromList(node: LRUNode<K, V>): void {
     const prev = node.prev
     const next = node.next
     if (prev)
@@ -148,7 +148,7 @@ export class LRUCache<K, V> {
    * Adds a node as the head of the doubly linked list.
    * Original method name: addElemAsHead
    */
-  private addElemAsHead(node: LRUNode<K, V>): void {
+  addElemAsHead(node: LRUNode<K, V>): void {
     if (this.head) {
       node.next = this.head
       this.head.prev = node

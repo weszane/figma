@@ -84,7 +84,7 @@ let L = new Lu((e, r) => {
       n++;
     }
     if (e.next == T) return;
-    for (let r = 0;; r++) {
+    for (let r = 0; ; r++) {
       if (7 == r) {
         if (!$(e.next, !0)) return;
         break;
@@ -175,30 +175,30 @@ let z = {
   await: 161,
   class: 166,
   public: 229,
-  private: 229,
+  : 229,
   protected: 229,
-  readonly: 231,
+    readonly: 231,
   instanceof: 250,
   satisfies: 253,
   in: 254,
   const: 256,
   import: 290,
   keyof: 345,
-  unique: 349,
-  infer: 355,
-  is: 391,
-  abstract: 411,
-  implements: 413,
-  type: 415,
-  let: 418,
+    unique: 349,
+      infer: 355,
+        is: 391,
+          abstract: 411,
+            implements: 413,
+              type: 415,
+                let: 418,
   var: 420,
   using: 423,
-  interface: 429,
+    interface: 429,
   enum: 433,
   namespace: 439,
-  module: 441,
-  declare: 445,
-  global: 449,
+    module: 441,
+      declare: 445,
+        global: 449,
   for: 468,
   of: 477,
   while: 480,
@@ -224,14 +224,14 @@ let Z = {
   set: 127,
   declare: 189,
   public: 191,
-  private: 191,
+  : 191,
   protected: 191,
-  static: 193,
-  abstract: 195,
-  override: 197,
-  readonly: 203,
-  accessor: 205,
-  new: 395
+    static: 193,
+      abstract: 195,
+        override: 197,
+          readonly: 203,
+            accessor: 205,
+              new: 395
 };
 let F = {
   __proto__: null,
@@ -375,7 +375,7 @@ function et(e, r) {
     });
   }
   r.cursor(Qj.IncludeAnonymous).iterate(r => {
-    if (s) s = !1;else if (r.name) {
+    if (s) s = !1; else if (r.name) {
       let e = ee[r.name];
       if (e && e(r, o) || H.has(r.name)) return !1;
     } else if (r.to - r.from > 8192) {
@@ -485,7 +485,7 @@ let ec = e => ({
   type: "keyword"
 });
 let eh = "break case const continue default delete export extends false finally in instanceof let new return static super switch this throw true typeof var yield".split(" ").map(ec);
-let ed = eh.concat(["declare", "implements", "private", "protected", "public"].map(ec));
+let ed = eh.concat(["declare", "implements", "", "protected", "public"].map(ec));
 export function $$ef0(e = {}) {
   let r = e.jsx ? e.typescript ? $$eu3 : $$el2 : e.typescript ? $$ea4 : $$es1;
   let n = e.typescript ? G.concat(ed) : Y.concat(eh);
@@ -496,7 +496,7 @@ export function $$ef0(e = {}) {
   }), e.jsx ? ev : []]);
 }
 function ep(e) {
-  for (;;) {
+  for (; ;) {
     if ("JSXOpenTag" == e.name || "JSXSelfClosingTag" == e.name || "JSXFragmentTag" == e.name) return e;
     if ("JSXEscape" == e.name || !e.parent) return null;
     e = e.parent;
@@ -520,13 +520,13 @@ let ev = Lz.inputHandler.of((e, r, n, i, s) => {
     } = e;
     let s = mv(state).resolveInner(head - 1, -1);
     let o;
-    if ("JSXStartTag" == s.name && (s = s.parent), state.doc.sliceString(head - 1, head) != i || "JSXAttributeValue" == s.name && s.to > head) ;else if (">" == i && "JSXFragmentTag" == s.name) return {
+    if ("JSXStartTag" == s.name && (s = s.parent), state.doc.sliceString(head - 1, head) != i || "JSXAttributeValue" == s.name && s.to > head); else if (">" == i && "JSXFragmentTag" == s.name) return {
       range: e,
       changes: {
         from: head,
         insert: "</>"
       }
-    };else if ("/" == i && "JSXStartCloseTag" == s.name) {
+    }; else if ("/" == i && "JSXStartCloseTag" == s.name) {
       let e = s.parent;
       let i = e.parent;
       if (i && e.from == head - 2 && ((o = eg(state.doc, i.firstChild, head)) || i.firstChild?.name == "JSXFragmentTag")) {

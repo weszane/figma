@@ -60,8 +60,8 @@ export interface MediaActionConfig {
  * Handles complex navigation, transitions, and media controls
  */
 export class AdvancedNavigationProcessor {
-  private nodeRegistry: Map<string, any>
-  private logger: any
+  nodeRegistry: Map<string, any>
+  logger: any
 
   constructor(nodeRegistry?: Map<string, any>, logger?: any) {
     this.nodeRegistry = nodeRegistry || new Map()
@@ -114,7 +114,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process SET_VARIABLE action type
    */
-  private processSetVariableAction(e: any): NavigationAction {
+  processSetVariableAction(e: any): NavigationAction {
     const targetVariableId = e.targetVariable?.id
     const variableId = targetVariableId ? this.convertVariableId(targetVariableId) : null
 
@@ -128,7 +128,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process SET_VARIABLE_MODE action type
    */
-  private processSetVariableModeAction(e: any): NavigationAction | null {
+  processSetVariableModeAction(e: any): NavigationAction | null {
     // Check feature flag (placeholder for actual implementation)
     if (!this.isFeatureEnabled('prototype_set_mode_action')) {
       return null
@@ -147,7 +147,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process CONDITIONAL action type
    */
-  private processConditionalAction(e: any): NavigationAction {
+  processConditionalAction(e: any): NavigationAction {
     const conditionalBlocks: ConditionalBlock[] = []
 
     if (e.conditionalActions) {
@@ -166,7 +166,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process individual conditional block
    */
-  private processConditionalBlock(e: any): ConditionalBlock {
+  processConditionalBlock(e: any): ConditionalBlock {
     const block: ConditionalBlock = { actions: [] }
 
     if (e.condition !== undefined) {
@@ -190,7 +190,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process UPDATE_MEDIA_RUNTIME action type
    */
-  private processMediaRuntimeAction(e: any): NavigationAction | null {
+  processMediaRuntimeAction(e: any): NavigationAction | null {
     if (e.mediaAction === undefined) {
       return null
     }
@@ -220,7 +220,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process basic media actions (play, pause, mute, etc.)
    */
-  private processBasicMediaAction(e: any): NavigationAction {
+  processBasicMediaAction(e: any): NavigationAction {
     const nodeId = this.convertNodeId(e.transitionNodeID)
     const nodeInfo = nodeId ? this.nodeRegistry.get(nodeId) : null
 
@@ -234,7 +234,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process skip media actions (forward/backward)
    */
-  private processSkipMediaAction(e: any): NavigationAction {
+  processSkipMediaAction(e: any): NavigationAction {
     const nodeId = this.convertNodeId(e.transitionNodeID)
     const nodeInfo = nodeId ? this.nodeRegistry.get(nodeId) : null
     const destinationId = nodeInfo ? this.getNodeGuid(nodeInfo.guid) : null
@@ -251,7 +251,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process skip to timestamp media action
    */
-  private processSkipToMediaAction(e: any): NavigationAction {
+  processSkipToMediaAction(e: any): NavigationAction {
     const nodeId = this.convertNodeId(e.transitionNodeID)
     const nodeInfo = nodeId ? this.nodeRegistry.get(nodeId) : null
     const destinationId = nodeInfo ? this.getNodeGuid(nodeInfo.guid) : null
@@ -268,7 +268,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process INTERNAL_NODE action type with navigation and transitions
    */
-  private processInternalNodeAction(e: any): NavigationAction {
+  processInternalNodeAction(e: any): NavigationAction {
     const action: NavigationAction = { type: 'NODE' }
 
     // Process destination node
@@ -302,7 +302,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process navigation type and convert to supported format
    */
-  private processNavigationType(navigationType: string): string | null {
+  processNavigationType(navigationType: string): string | null {
     switch (navigationType) {
       case 'NAVIGATE':
       case 'SWAP':
@@ -320,7 +320,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process transition configuration
    */
-  private processTransitionConfig(e: any): TransitionConfig | null {
+  processTransitionConfig(e: any): TransitionConfig | null {
     const transitionType = e.transitionType || 'INSTANT_TRANSITION'
 
     switch (transitionType) {
@@ -345,7 +345,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process advanced transition types (slide, push, move, etc.)
    */
-  private processAdvancedTransition(transitionType: string, e: any): TransitionConfig | null {
+  processAdvancedTransition(transitionType: string, e: any): TransitionConfig | null {
     const config: TransitionConfig = { type: '', matchLayers: !!e.transitionShouldSmartAnimate }
     let isValid = true
 
@@ -384,7 +384,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process transition direction from transition type string
    */
-  private processTransitionDirection(transitionType: string): string | null {
+  processTransitionDirection(transitionType: string): string | null {
     if (transitionType.includes('_LEFT')) return 'RIGHT'
     if (transitionType.includes('_RIGHT')) return 'LEFT'
     if (transitionType.includes('_TOP')) return 'BOTTOM'
@@ -395,7 +395,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process easing configuration
    */
-  private processEasingConfig(e: any) {
+  processEasingConfig(e: any) {
     const easingType = e.easingType || 'OUT_CUBIC'
 
     switch (easingType) {
@@ -453,7 +453,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process variable value with support for different data types
    */
-  private processVariableValue(e: any): any {
+  processVariableValue(e: any): any {
     if (e.floatValue !== undefined) return e.floatValue
     if (e.textValue !== undefined) return e.textValue
     if (e.boolValue !== undefined) return e.boolValue
@@ -484,7 +484,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Convert variable type to supported format
    */
-  private convertVariableType(type: string): string {
+  convertVariableType(type: string): string {
     switch (type) {
       case 'BOOLEAN':
         return 'BOOLEAN'
@@ -500,32 +500,32 @@ export class AdvancedNavigationProcessor {
   }
 
   // Helper methods (placeholders for actual implementation)
-  private convertVariableId(id: string): string {
+  convertVariableId(id: string): string {
     // Placeholder for actual variable ID conversion
     return id
   }
 
-  private convertVariableSetId(id: string): string {
+  convertVariableSetId(id: string): string {
     // Placeholder for actual variable set ID conversion  
     return id
   }
 
-  private convertVariableModeId(id: string): string {
+  convertVariableModeId(id: string): string {
     // Placeholder for actual variable mode ID conversion
     return id
   }
 
-  private convertNodeId(id: string): string | null {
+  convertNodeId(id: string): string | null {
     // Placeholder for actual node ID conversion
     return id
   }
 
-  private getNodeGuid(guid: string): string {
+  getNodeGuid(guid: string): string {
     // Placeholder for actual GUID processing
     return guid
   }
 
-  private isFeatureEnabled(_feature: string): boolean {
+  isFeatureEnabled(_feature: string): boolean {
     // Placeholder for actual feature flag check
     return true
   }
@@ -536,8 +536,8 @@ export class AdvancedNavigationProcessor {
  * Handles complex property writing with type-specific logic
  */
 export class AdvancedPropertyWriter {
-  private componentManager: any
-  private logger: any
+  componentManager: any
+  logger: any
 
   constructor(componentManager?: any, logger?: any) {
     this.componentManager = componentManager
@@ -580,7 +580,7 @@ export class AdvancedPropertyWriter {
   /**
    * Write widget-specific properties
    */
-  private writeWidgetProperty(node: any, propertyName: string, value: any): void {
+  writeWidgetProperty(node: any, propertyName: string, value: any): void {
     if (node) {
       (node as any)[propertyName] = value
     }
@@ -589,7 +589,7 @@ export class AdvancedPropertyWriter {
   /**
    * Write component ID property
    */
-  private writeComponentId(node: any, componentId: any): void {
+  writeComponentId(node: any, componentId: any): void {
     if (node && this.componentManager) {
       this.componentManager.applyComponentProps(node, { componentId })
     }
@@ -598,7 +598,7 @@ export class AdvancedPropertyWriter {
   /**
    * Write component properties
    */
-  private writeComponentProps(node: any, componentProps: any): void {
+  writeComponentProps(node: any, componentProps: any): void {
     if (node && this.componentManager) {
       this.componentManager.applyComponentProps(node, { componentProps })
     }
@@ -607,7 +607,7 @@ export class AdvancedPropertyWriter {
   /**
    * Write nested instances visibility
    */
-  private writeNestedInstancesVisibility(node: any, visibility: any): void {
+  writeNestedInstancesVisibility(node: any, visibility: any): void {
     if (node && this.componentManager) {
       this.componentManager.applyComponentProps(node, { nestedInstancesVisibility: visibility })
     }
@@ -616,7 +616,7 @@ export class AdvancedPropertyWriter {
   /**
    * Write nested component properties
    */
-  private writeComponentPropsNested(node: any, propsNested: any): void {
+  writeComponentPropsNested(node: any, propsNested: any): void {
     if (node && this.componentManager) {
       this.componentManager.applyComponentProps(node, { componentPropsNested: propsNested })
     }
@@ -625,7 +625,7 @@ export class AdvancedPropertyWriter {
   /**
    * Write shared plugin data
    */
-  private writeSharedPluginData(node: any, data: any): void {
+  writeSharedPluginData(node: any, data: any): void {
     if (node && this.componentManager) {
       this.componentManager.writeSharedPluginData(node, data)
     }
@@ -634,7 +634,7 @@ export class AdvancedPropertyWriter {
   /**
    * Write plugin data
    */
-  private writePluginData(node: any, data: any): void {
+  writePluginData(node: any, data: any): void {
     if (node && this.componentManager) {
       this.componentManager.writePluginData(node, data)
     }
@@ -643,7 +643,7 @@ export class AdvancedPropertyWriter {
   /**
    * Write generic property directly to plugin node
    */
-  private writeGenericProperty(pluginNode: any, propertyName: string, value: any): void {
+  writeGenericProperty(pluginNode: any, propertyName: string, value: any): void {
     if (pluginNode) {
       (pluginNode as any)[propertyName] = value
     }
@@ -655,7 +655,7 @@ export class AdvancedPropertyWriter {
  * Handles text formatting operations with comprehensive type support
  */
 export class AdvancedTextRangeProcessor {
-  private logger: any
+  logger: any
 
   constructor(logger?: any) {
     this.logger = logger || console

@@ -13,8 +13,8 @@ export const NOT_VISIBLE_RUN_ANYWAY = Symbol('NotVisibleRunAnyway');
  * Original class: $$u0
  */
 export class CachedSubtreeRenderer {
-  private _callback: (...args: any[]) => any;
-  private _previousValue: any;
+  _callback: (...args: any[]) => any;
+  _previousValue: any;
   constructor(callback: (...args: any[]) => any) {
     this._callback = callback;
     this._previousValue = null;

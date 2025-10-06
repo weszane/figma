@@ -77,7 +77,7 @@ export class LocalizationHandler {
    * Processes static entries, merging if required.
    * Original method name: processEntries
    */
-  private processEntries(
+  processEntries(
     entries: Record<string, LocalizationEntry>,
     merge: boolean = false,
   ): Record<string, LocalizationEntry> {
@@ -94,7 +94,7 @@ export class LocalizationHandler {
    * Processes dynamic entries, merging if required.
    * Original method name: processDynamicEntries
    */
-  private processDynamicEntries(
+  processDynamicEntries(
     entries: Record<string, LocalizationEntry>,
     merge: boolean = false,
   ): Record<string, LocalizationEntry> {
@@ -111,7 +111,7 @@ export class LocalizationHandler {
    * Compiles a message string using IntlMessageFormat.
    * Original method name: compile
    */
-  private compile(message: string): IntlMessageFormat {
+  compile(message: string): IntlMessageFormat {
     return new IntlMessageFormat(message, this.locale, undefined, {
       formatters: this.formatters,
     })

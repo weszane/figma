@@ -15,7 +15,7 @@ import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { userAtom } from "../figma_app/864723";
 import { fullscreenValue } from "../figma_app/455680";
-import { c as _$$c } from "../905/210851";
+import { selectFileInfo } from "../905/210851";
 import { openFileAtom } from "../figma_app/516028";
 import { useSubscribedAssets, AssetFilterMode } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
@@ -227,7 +227,7 @@ function W() {
   let {
     file_key,
     file_team_id
-  } = useSelector(_$$c);
+  } = useSelector(selectFileInfo);
   let r = useAtomWithSubscription(openFileAtom);
   let n = useAtomWithSubscription(userAtom);
   return useMemo(() => ({

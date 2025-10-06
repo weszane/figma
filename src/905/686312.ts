@@ -6,7 +6,7 @@
  * @returns The WebGLRenderingContext or null if creation fails.
  * @originalName $$n1
  */
-export function createWebGLContext(useWebGL2: boolean, contextAttributes: WebGLContextAttributes = {}, canvas: HTMLCanvasElement | null = null): WebGLRenderingContext | WebGL2RenderingContext | null {
+export function createWebGLContext(useWebGL2: boolean, contextAttributes: WebGLContextAttributes = {}, canvas: OffscreenCanvas | HTMLCanvasElement | null = null): WebGLRenderingContext | WebGL2RenderingContext | null {
   const targetCanvas = canvas ?? document.createElement('canvas')
   let context: WebGLRenderingContext | WebGL2RenderingContext | null = null
   try {
@@ -27,7 +27,7 @@ export function createWebGLContext(useWebGL2: boolean, contextAttributes: WebGLC
  * @returns The WebGLRenderingContext or null if creation fails.
  * @originalName $$r2
  */
-export function getPreferredWebGLContext(useWebGL2: boolean, canvas: HTMLCanvasElement | null = null): WebGLRenderingContext | WebGL2RenderingContext | null {
+export function getPreferredWebGLContext(useWebGL2: boolean, canvas: OffscreenCanvas | HTMLCanvasElement | null = null): WebGLRenderingContext | WebGL2RenderingContext | null {
   let context = createWebGLContext(useWebGL2, { powerPreference: 'high-performance' }, canvas)
   if (!context) {
     context = createWebGLContext(useWebGL2, { powerPreference: 'default' }, canvas)

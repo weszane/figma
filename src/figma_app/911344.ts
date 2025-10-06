@@ -183,14 +183,14 @@ interface ThemePayload {
  * (Original class name: I)
  */
 class PluginIframeManager {
-  private outerIframeElement: HTMLIFrameElement
-  private innerIframeElement: HTMLIFrameElement
-  private networkIframeElement: HTMLIFrameElement | null
-  private toplevelWindowMessageChannel: MessageChannel | null
-  private loaded: Promise<void>
-  private pluginId: string | null
-  private iframeMessageEventListener: (event: MessageEvent) => void
-  private setIframeStyle: (element: HTMLElement, includeThemeColors: boolean) => void
+  outerIframeElement: HTMLIFrameElement
+  innerIframeElement: HTMLIFrameElement
+  networkIframeElement: HTMLIFrameElement | null
+  toplevelWindowMessageChannel: MessageChannel | null
+  loaded: Promise<void>
+  pluginId: string | null
+  iframeMessageEventListener: (event: MessageEvent) => void
+  setIframeStyle: (element: HTMLElement, includeThemeColors: boolean) => void
   constructor(outerIframe: HTMLIFrameElement, initialHtmlContent: string, messageHandler: (data: any) => void, options: IframeOptions) {
     this.outerIframeElement = outerIframe
     let resolveLoaded: () => void
@@ -283,7 +283,7 @@ class PluginIframeManager {
    * @param options - Plugin permission options
    * @returns Formatted permissions string
    */
-  private getPermissions(options: IframeOptions): string {
+  getPermissions(options: IframeOptions): string {
     const {
       name = '',
       isWidget = false,
@@ -323,7 +323,7 @@ class PluginIframeManager {
    * @param isLocal - Whether running in local environment
    * @returns Script string or empty string
    */
-  private getSecurityPolicyViolationDevLogging(isLocal: boolean): string {
+  getSecurityPolicyViolationDevLogging(isLocal: boolean): string {
     if (!isLocal) {
       return ''
     }
@@ -345,7 +345,7 @@ class PluginIframeManager {
    * @param isLocal - Whether running in local environment
    * @returns Data URL for iframe source
    */
-  private getLoaderShimSrc(includeThemeColors: boolean, isLocal: boolean = false): string {
+  getLoaderShimSrc(includeThemeColors: boolean, isLocal: boolean = false): string {
     let themeScript = ''
     if (includeThemeColors) {
       const theme = document.body.getAttribute('data-editor-theme') === 'whiteboard' ? 'light' : document.body.getAttribute('data-preferred-theme')
@@ -448,11 +448,11 @@ interface PluginSandboxState {
  * (Original class name: $$S0)
  */
 export class PluginSandbox extends Component<PluginSandboxProps, PluginSandboxState> {
-  private outerIframeElement: HTMLIFrameElement | null = null
-  private outerIframeLoaded: boolean = false
-  private instanceLoadingResolve!: () => void
-  private instanceLoadingReject!: (reason?: any) => void
-  private setOuterIframeRef: (element: HTMLIFrameElement | null) => void
+  outerIframeElement: HTMLIFrameElement | null = null
+  outerIframeLoaded: boolean = false
+  instanceLoadingResolve!: () => void
+  instanceLoadingReject!: (reason?: any) => void
+  setOuterIframeRef: (element: HTMLIFrameElement | null) => void
   constructor(props: PluginSandboxProps) {
     super(props)
     this.state = {

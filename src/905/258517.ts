@@ -2,7 +2,7 @@ import { reportError } from '../905/11';
 import { I as _$$I } from '../905/117966';
 import { gpuFullscreenEventNames, fullscreenPerfManager } from '../905/125218';
 import { ServiceCategories } from '../905/165054';
-import { r as _$$r } from '../905/210851';
+import { buildAnalyticsContext } from '../905/210851';
 import { analyticsEventManager, trackEventAnalytics, trackFullScreenAnalytics } from '../905/449184';
 import { sendHistogram } from '../905/485103';
 import { AggregationType, LanguageType } from '../905/535806';
@@ -44,14 +44,14 @@ export let $$w0 = new class {
     setModeEventHandler(this.trackFromFullscreen.bind(this));
   }
   trackFromFullscreen(e, t, i, n, r, a) {
-    trackFullScreenAnalytics(e, _$$r(t), {
+    trackFullScreenAnalytics(e, buildAnalyticsContext(t), {
       forwardToDatadog: i,
       batchRequest: r ?? void 0,
       addToRUM: a ?? void 0
     });
   }
   trackDefinedEventFromFullscreen(e, t) {
-    analyticsEventManager.trackDefinedFullscreenEvent(e, _$$r(t));
+    analyticsEventManager.trackDefinedFullscreenEvent(e, buildAnalyticsContext(t));
   }
   resetDefinedAnalyticsForDocument() {
     analyticsEventManager.resetDefinedAnalyticsForDocument();

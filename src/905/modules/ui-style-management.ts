@@ -81,8 +81,8 @@ interface SceneGraph {
  */
 export class StyleManagementRuntime {
   constructor(
-    private sceneGraph: SceneGraph,
-    private runtime: PluginRuntime
+    sceneGraph: SceneGraph,
+    runtime: PluginRuntime
   ) { }
 
   /**
@@ -116,7 +116,7 @@ export class StyleManagementRuntime {
   get(styleRef: any): SceneNode | null {
     const parsedRef = this.parseStyleRef(styleRef)
     if (!parsedRef) return null
-    
+
     const styleNode = this.sceneGraph.getStyleNodeByRef(parsedRef)
     return styleNode && !this.isSoftDeleted(styleNode) ? styleNode : null
   }
@@ -134,7 +134,7 @@ export class StyleManagementRuntime {
       const allStyles = this.getAllLocalStyles(styleTypeValue)
       const styleMap = this.createStyleMap(allStyles, styleType)
       const flattenedStyles = this.flattenStyles(styleMap)
-      
+
       const targetFolder = this.getTargetFolder(targetNode.name)
       let targetStyle = null
       let referenceStyle = null
@@ -169,11 +169,11 @@ export class StyleManagementRuntime {
         if (!referenceStyle) {
           return `No local reference node found with style key: ${referenceNode.styleKeyForPublish}`
         }
-        
+
         if (this.getTargetFolder(referenceNode.name) !== targetFolder) {
           return 'Target and reference node must live in the same folder.'
         }
-        
+
         this.moveStyleToPosition(targetStyle, referenceStyle, referenceParent, targetFolder)
       }
 
@@ -195,7 +195,7 @@ export class StyleManagementRuntime {
 
       const allStyles = this.getAllLocalStyles(styleTypeValue)
       const styleMap = this.createStyleMap(allStyles, styleType)
-      
+
       let targetFolder = null as any
       let referenceFolder = null as any
       let targetParent = null as any
@@ -236,15 +236,15 @@ export class StyleManagementRuntime {
   }
 
   // Helper methods (mock implementations)
-  private parseStyleRef(ref: any): any {
+  parseStyleRef(ref: any): any {
     return ref // Mock implementation
   }
 
-  private isSoftDeleted(_node: SceneNode): boolean {
+  isSoftDeleted(_node: SceneNode): boolean {
     return false // Mock implementation
   }
 
-  private getStyleTypeValue(styleType?: string): number | undefined {
+  getStyleTypeValue(styleType?: string): number | undefined {
     const styleTypes: Record<string, number> = {
       'FILL': 0,
       'STROKE': 1,
@@ -254,27 +254,27 @@ export class StyleManagementRuntime {
     return styleType ? styleTypes[styleType] : undefined
   }
 
-  private getAllLocalStyles(_styleType: number): any[] {
+  getAllLocalStyles(_styleType: number): any[] {
     return [] // Mock implementation
   }
 
-  private createStyleMap(_styles: any[], _styleType: string): any {
+  createStyleMap(_styles: any[], _styleType: string): any {
     return { styles: [], subfolders: [] } // Mock implementation
   }
 
-  private flattenStyles(_styleMap: any): any[] {
+  flattenStyles(_styleMap: any): any[] {
     return [] // Mock implementation
   }
 
-  private getTargetFolder(name?: string): string {
+  getTargetFolder(name?: string): string {
     return name || 'default'
   }
 
-  private moveStyleToPosition(_target: any, _reference: any, _parent: any, _folder: string): void {
+  moveStyleToPosition(_target: any, _reference: any, _parent: any, _folder: string): void {
     // Mock implementation
   }
 
-  private moveFolderToPosition(_target: any, _reference: any, _parent: any): void {
+  moveFolderToPosition(_target: any, _reference: any, _parent: any): void {
     // Mock implementation
   }
 }
@@ -358,11 +358,11 @@ export class PaintConversionUtils {
   }
 
   // Helper methods
-  private static transformGradient(transform: any): any {
+  static transformGradient(transform: any): any {
     return transform // Mock implementation
   }
 
-  private static convertGradientStop(stop: any): any {
+  static convertGradientStop(stop: any): any {
     if (stop.boundVariables?.color?.id && stop.boundVariables.color?.type === 'VARIABLE_ALIAS') {
       return {
         color: stop.color,
@@ -382,7 +382,7 @@ export class PaintConversionUtils {
     }
   }
 
-  private static convertPatternPaint(paint: Paint, visible: boolean, opacity: number, blendMode: string): any {
+  static convertPatternPaint(paint: Paint, visible: boolean, opacity: number, blendMode: string): any {
     // Clamp scaling factor
     if (paint.scalingFactor !== undefined) {
       const minScale = 0.01 // Mock constant
@@ -415,7 +415,7 @@ export class PaintConversionUtils {
  * Handles component property application and plugin data management
  */
 export class ComponentPropertyManager {
-  constructor(private runtime: PluginRuntime) { }
+  constructor(runtime: PluginRuntime) { }
 
   /**
    * Apply component properties to a node
@@ -533,11 +533,11 @@ export class ComponentPropertyManager {
   }
 
   // Helper methods
-  private getComponent(_componentId: string): any {
+  getComponent(_componentId: string): any {
     return null // Mock implementation
   }
 
-  private getNodeShim(_node: SceneNode): any {
+  getNodeShim(_node: SceneNode): any {
     return null // Mock implementation
   }
 }

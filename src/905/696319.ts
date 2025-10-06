@@ -27,7 +27,7 @@ let g = {
   current: null
 };
 let f = null;
-let _ = () => {};
+let _ = () => { };
 function A() {
   m && (m.setAttribute(p, ""), g.current && (_ = function (e, t) {
     let i = function (e) {
@@ -114,9 +114,9 @@ function A() {
   }(m, g)));
 }
 function y() {
-  m && (m.removeAttribute(p), _(), _ = () => {});
+  m && (m.removeAttribute(p), _(), _ = () => { });
 }
-let b = () => {};
+let b = () => { };
 let x = isBrowser && !!document.documentElement.requestPointerLock && !isSafari;
 async function S(e) {
   let t = e.requestPointerLock();
@@ -169,7 +169,7 @@ let O = forwardRef(({
   ...t
 }, i) => {
   let [a, s] = useState(1);
-  let o = e?.private;
+  let o = e?.;
   let l = o?.getScrubProps;
   let d = o?.Cursor;
   let c = o?.setScrubScaleChangeCallback;
@@ -439,7 +439,7 @@ let H = forwardRef(({
           }), addEventlistenerWithCleanup(window, "blur", y));
           b = () => {
             e();
-            b = () => {};
+            b = () => { };
           };
         }(), ++h, () => {
           0 == --h && b();
@@ -495,7 +495,7 @@ let H = forwardRef(({
         let d = e => P(i, e, o, O, t.shiftKey);
         if (j.current) j.current(e => d(e).value, {
           commit: !1
-        });else {
+        }); else {
           let n = d(N.current);
           areValuesEqual(i, n.value, e) || (l(n.value, Object.assign(t, {
             commit: !1
@@ -510,11 +510,11 @@ let H = forwardRef(({
         if (j.current = null, t.cancelled) n ? n(e => e, {
           commit: !0,
           cancelled: !0
-        }) : _(N.current, t);else {
+        }) : _(N.current, t); else {
           let r = e => P(i, e, 0, O, t.shiftKey).value;
           if (n) n(r, {
             commit: !0
-          });else {
+          }); else {
             let n = r(N.current);
             (F.current || !areValuesEqual(i, n, e)) && l(n, Object.assign(t, {
               commit: !0
@@ -530,44 +530,44 @@ let H = forwardRef(({
     });
     return {
       scrubbing,
-      private: {
-        getScrubProps,
-        Cursor,
-        setScrubScaleChangeCallback: U
-      }
+      : {
+  getScrubProps,
+    Cursor,
+    setScrubScaleChangeCallback: U
+}
     };
   }({
-    value: p.value,
-    getStringValue: p.getStringValue,
-    formatter: p.formatter,
-    disabled: t.disabled,
-    onChange: (e, {
-      commit: t
-    }) => p.onChange(e, {
-      commit: t,
-      source: "scrub"
-    }),
-    onChangeRestricted: t.onChangeRestricted,
-    onCancel: e => p.onChange(e, {
-      commit: !0,
-      source: "scrub"
-    }),
-    onScrubScaleChange: e
-  });
-  let E = useMemo(() => ({
-    ctx: p,
-    manager: _
-  }), [p, _]);
-  useLayoutEffect(() => a(E), [E]);
-  let {
-    inputProps
-  } = p;
-  let O = setupRefUpdater(i, inputProps.ref);
-  return jsx(InputComponent, {
-    ...inputProps,
-    ref: O,
-    "data-faux-focus": _.scrubbing || void 0
-  });
+  value: p.value,
+  getStringValue: p.getStringValue,
+  formatter: p.formatter,
+  disabled: t.disabled,
+  onChange: (e, {
+    commit: t
+  }) => p.onChange(e, {
+    commit: t,
+    source: "scrub"
+  }),
+  onChangeRestricted: t.onChangeRestricted,
+  onCancel: e => p.onChange(e, {
+    commit: !0,
+    source: "scrub"
+  }),
+  onScrubScaleChange: e
+});
+let E = useMemo(() => ({
+  ctx: p,
+  manager: _
+}), [p, _]);
+useLayoutEffect(() => a(E), [E]);
+let {
+  inputProps
+} = p;
+let O = setupRefUpdater(i, inputProps.ref);
+return jsx(InputComponent, {
+  ...inputProps,
+  ref: O,
+  "data-faux-focus": _.scrubbing || void 0
+});
 });
 H.displayName = "ScrubbableInput.Field";
 let W = forwardRef(({

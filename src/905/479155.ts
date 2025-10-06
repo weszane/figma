@@ -43,8 +43,8 @@ interface LayoutProviderProps {
  * Registry for managing items with indices and references
  */
 class ItemRegistry {
-  private listLength = 0
-  private map = new Map<string, ItemRegistryEntry>()
+  listLength = 0
+  map = new Map<string, ItemRegistryEntry>()
 
   reset() {
     this.listLength = 0
@@ -87,8 +87,8 @@ class ItemRegistry {
  * Tracker for managing layout items with DOM position sorting
  */
 export class LayoutTracker {
-  private items: LayoutItem[] = []
-  private listeners = new Map<string, () => void>()
+  items: LayoutItem[] = []
+  listeners = new Map<string, () => void>()
 
   register(item: LayoutItem, onChange: () => void = noop) {
     if (item.ref.current === null || this.items.findIndex(existingItem => existingItem.id === item.id) > -1) {
@@ -132,7 +132,7 @@ export class LayoutTracker {
     return this.items.findIndex(predicate)
   }
 
-  private notifyItemsChanged() {
+  notifyItemsChanged() {
     for (const listener of this.listeners.values()) {
       listener()
     }

@@ -17,7 +17,7 @@ interface SelectionHandler {
 }
 type DocumentChangeHandler = (event: any) => void;
 type StyleChangeHandler = (events: any[]) => void;
-type NodeChangeHandler = (events: any[]) => void;
+type HandoffCallbacks = (events: any[]) => void;
 type TimerChangeHandler = (timer: any) => void;
 type CodegenPreferencesChangeHandler = (prefs: any) => void;
 type SlidesViewChangeHandler = (view: any) => void;
@@ -38,7 +38,7 @@ let accessibleNodeIdsProviders: AccessibleNodeIdsProvider[] = [];
 let accessiblePagesProviders: AccessiblePagesProvider[] = [];
 let documentChangeHandlers: DocumentChangeHandler[] = [];
 let styleChangeHandlers: StyleChangeHandler[] = [];
-let nodeChangeHandlers: NodeChangeHandler[] = [];
+let nodeChangeHandlers: HandoffCallbacks[] = [];
 let stackInvariantCallback: StackInvariantHandler | null = null;
 let pluginPageLoadedCallback: (() => Promise<any>) | null = null;
 
@@ -399,7 +399,7 @@ export function unregisterStyleChangeHandler(handler: StyleChangeHandler) {
 /**
  * Registers a node change handler ($$K1).
  */
-export function registerNodeChangeHandler(handler: NodeChangeHandler) {
+export function registerNodeChangeHandler(handler: HandoffCallbacks) {
   nodeChangeHandlers.push(handler);
   updateDocumentChangeCallbackRegistration();
 }
@@ -407,7 +407,7 @@ export function registerNodeChangeHandler(handler: NodeChangeHandler) {
 /**
  * Unregisters a node change handler ($$Y48).
  */
-export function unregisterNodeChangeHandler(handler: NodeChangeHandler) {
+export function unregisterNodeChangeHandler(handler: HandoffCallbacks) {
   nodeChangeHandlers = nodeChangeHandlers.filter(h => h !== handler);
   updateDocumentChangeCallbackRegistration();
 }

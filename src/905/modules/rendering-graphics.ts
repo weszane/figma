@@ -71,28 +71,28 @@ export interface TextRenderingState {
   textRise: number
 }
 
-export type DrawingToolType = 
-  | 'pen' 
-  | 'brush' 
-  | 'pencil' 
-  | 'eraser' 
-  | 'highlighter' 
+export type DrawingToolType =
+  | 'pen'
+  | 'brush'
+  | 'pencil'
+  | 'eraser'
+  | 'highlighter'
   | 'washi-tape'
 
-export type BlendMode = 
-  | 'normal' 
-  | 'multiply' 
-  | 'screen' 
-  | 'overlay' 
-  | 'darken' 
-  | 'lighten' 
-  | 'color-dodge' 
+export type BlendMode =
+  | 'normal'
+  | 'multiply'
+  | 'screen'
+  | 'overlay'
+  | 'darken'
+  | 'lighten'
+  | 'color-dodge'
   | 'color-burn'
 
-export type TextRenderingMode = 
-  | 'FILL' 
-  | 'STROKE' 
-  | 'FILL_STROKE' 
+export type TextRenderingMode =
+  | 'FILL'
+  | 'STROKE'
+  | 'FILL_STROKE'
   | 'ADD_TO_PATH'
 
 export type GraphicsBackend = 'WebGL' | 'WebGPU' | 'Auto'
@@ -102,13 +102,13 @@ export type GraphicsBackend = 'WebGL' | 'WebGPU' | 'Auto'
  * Original: WebGL context management from 91006.ts
  */
 export class WebGLContextManager {
-  private glContext: WebGLRenderingContext | WebGL2RenderingContext | null = null
-  private contextLostListener?: any
-  private currentContextLostCallback?: (event: Event) => void
-  private currentContextRestoredCallback?: (event: Event) => void
-  private contextLostMessageReceived = false
-  private vendorName?: string
-  private rendererName?: string
+  glContext: WebGLRenderingContext | WebGL2RenderingContext | null = null
+  contextLostListener?: any
+  currentContextLostCallback?: (event: Event) => void
+  currentContextRestoredCallback?: (event: Event) => void
+  contextLostMessageReceived = false
+  vendorName?: string
+  rendererName?: string
 
   /**
    * Initialize WebGL context
@@ -118,7 +118,7 @@ export class WebGLContextManager {
     try {
       const canvas = document.createElement('canvas')
       const gl = canvas.getContext('webgl2') || canvas.getContext('webgl')
-      
+
       if (!gl) {
         console.warn('WebGL not supported')
         return false
@@ -126,7 +126,7 @@ export class WebGLContextManager {
 
       this.glContext = gl
       this.extractVendorInfo()
-      
+
       return true
     } catch (error) {
       console.error('Failed to initialize WebGL context:', error)
@@ -141,17 +141,17 @@ export class WebGLContextManager {
   release(): void {
     if (this.glContext) {
       const canvas = this.glContext.canvas
-      
+
       // Remove event listeners
       canvas?.removeEventListener('webglcontextlost', this.currentContextLostCallback!)
       canvas?.removeEventListener('webglcontextrestored', this.currentContextRestoredCallback!)
-      
+
       // Lose context if extension is available
       const loseContextExt = this.glContext.getExtension('WEBGL_lose_context')
       if (loseContextExt) {
         loseContextExt.loseContext()
       }
-      
+
       this.glContext = null
       this.contextLostListener = undefined
       this.currentContextLostCallback = undefined
@@ -186,7 +186,7 @@ export class WebGLContextManager {
 
     this.currentContextRestoredCallback = (_event: Event) => {
       this.contextLostListener?.reportContextRestored()
-      
+
       if (!this.contextLostMessageReceived) {
         this.handleContextLost()
       }
@@ -301,7 +301,7 @@ export class WebGLContextManager {
   /**
    * Extract vendor and renderer information
    */
-  private extractVendorInfo(): void {
+  extractVendorInfo(): void {
     if (!this.glContext) return
 
     const debugInfo = this.glContext.getExtension('WEBGL_debug_renderer_info')
@@ -314,7 +314,7 @@ export class WebGLContextManager {
   /**
    * Handle context lost event
    */
-  private handleContextLost(): void {
+  handleContextLost(): void {
     this.contextLostMessageReceived = true
     console.warn('WebGL context lost')
   }
@@ -322,7 +322,7 @@ export class WebGLContextManager {
   /**
    * Handle context restored event
    */
-  private handleContextRestored(): void {
+  handleContextRestored(): void {
     this.contextLostMessageReceived = false
     console.warn('WebGL context restored')
   }
@@ -340,15 +340,15 @@ export class WebGLContextManager {
  * Original: WebGPU context management from 889931.ts
  */
 export class WebGPUContextManager {
-  private device?: any // GPUDevice when available
-  private adapter?: any // GPUAdapter when available
-  private initializationStatus = 'not_initialized'
-  private recreateDeviceOnNextDestroy = false
+  device?: any // GPUDevice when available
+  adapter?: any // GPUAdapter when available
+  initializationStatus = 'not_initialized'
+  recreateDeviceOnNextDestroy = false
 
   /**
    * Check if WebGPU is available
    */
-  private isWebGPUAvailable(): boolean {
+  isWebGPUAvailable(): boolean {
     return typeof navigator !== 'undefined' && 'gpu' in navigator
   }
 
@@ -499,7 +499,7 @@ export class WebGPUContextManager {
 
     const data = new Uint8Array(buffer.getMappedRange())
     const result = new Uint8Array(data)
-    
+
     buffer.unmap()
     buffer.destroy()
 
@@ -514,7 +514,7 @@ export class WebGPUContextManager {
     if (!this.isWebGPUAvailable()) {
       return 'bgra8unorm'
     }
-    
+
     const gpu = (navigator as any).gpu
     return gpu?.getPreferredCanvasFormat?.() || 'bgra8unorm'
   }
@@ -543,7 +543,7 @@ export class WebGPUContextManager {
   /**
    * Set initialization status
    */
-  private setInitializationStatus(status: string): void {
+  setInitializationStatus(status: string): void {
     this.initializationStatus = status
   }
 
@@ -551,7 +551,7 @@ export class WebGPUContextManager {
    * Test basic WebGPU rendering capabilities
    * Original: testBasicRendering from 889931.ts
    */
-  private async testBasicRendering(): Promise<void | Error> {
+  async testBasicRendering(): Promise<void | Error> {
     if (!this.device) {
       return new Error('Device not available for rendering test')
     }
@@ -601,10 +601,10 @@ export class WebGPUContextManager {
  * Original: Graphics backend selection from 149304.ts
  */
 export class GraphicsBackendManager {
-  private webglManager: WebGLContextManager
-  private webgpuManager: WebGPUContextManager
-  private currentBackend: GraphicsBackend = 'Auto'
-  private forceWebGPU = false
+  webglManager: WebGLContextManager
+  webgpuManager: WebGPUContextManager
+  currentBackend: GraphicsBackend = 'Auto'
+  forceWebGPU = false
 
   constructor() {
     this.webglManager = new WebGLContextManager()
@@ -645,7 +645,7 @@ export class GraphicsBackendManager {
   shouldUseWebGPU(): boolean {
     if (this.currentBackend === 'WebGPU') return true
     if (this.currentBackend === 'WebGL') return false
-    
+
     // Auto detection
     return this.forceWebGPU || this.isWebGPUPreferred()
   }
@@ -727,11 +727,11 @@ export class GraphicsBackendManager {
   /**
    * Detect backend preference from environment
    */
-  private detectBackendPreference(): void {
+  detectBackendPreference(): void {
     // Check for WebGPU override
     const urlParams = new URLSearchParams(window.location.search)
     const backendOverride = urlParams.get('graphics_backend')
-    
+
     if (backendOverride === 'webgpu') {
       this.currentBackend = 'WebGPU'
       this.forceWebGPU = true
@@ -743,7 +743,7 @@ export class GraphicsBackendManager {
   /**
    * Check if WebGPU is preferred
    */
-  private isWebGPUPreferred(): boolean {
+  isWebGPUPreferred(): boolean {
     // Check if browser has good WebGPU support
     return typeof navigator !== 'undefined' && 'gpu' in navigator
   }
@@ -752,9 +752,9 @@ export class GraphicsBackendManager {
    * Log rendering initialization status
    * Original: rendering analytics from 149304.ts
    */
-  private logRenderingInitialization(status: string): void {
+  logRenderingInitialization(status: string): void {
     const capabilities = this.getRenderingCapabilities()
-    
+
     console.warn('Rendering initialization:', {
       status,
       renderer: capabilities.rendererName,
@@ -770,8 +770,8 @@ export class GraphicsBackendManager {
  * Original: Drawing tools logic from 275043.ts and 421558.ts
  */
 export class DrawingToolsManager {
-  private activeToolState: DrawingToolState
-  private toolProperties: Map<DrawingToolType, DrawingToolProperties>
+  activeToolState: DrawingToolState
+  toolProperties: Map<DrawingToolType, DrawingToolProperties>
 
   constructor() {
     this.activeToolState = {
@@ -854,9 +854,9 @@ export class DrawingToolsManager {
   updateToolProperties(tool: DrawingToolType, properties: Partial<DrawingToolProperties>): void {
     const currentProps = this.toolProperties.get(tool) || this.getDefaultToolProperties()
     const updatedProps = { ...currentProps, ...properties }
-    
+
     this.toolProperties.set(tool, updatedProps)
-    
+
     if (this.activeToolState.activeTool === tool) {
       this.activeToolState.toolProperties = updatedProps
     }
@@ -865,14 +865,14 @@ export class DrawingToolsManager {
   /**
    * Get tool properties
    */
-  private getToolProperties(tool: DrawingToolType): DrawingToolProperties {
+  getToolProperties(tool: DrawingToolType): DrawingToolProperties {
     return this.toolProperties.get(tool) || this.getDefaultToolProperties()
   }
 
   /**
    * Get default tool properties
    */
-  private getDefaultToolProperties(): DrawingToolProperties {
+  getDefaultToolProperties(): DrawingToolProperties {
     return {
       color: { r: 0, g: 0, b: 0, a: 1 },
       strokeWidth: 2,
@@ -885,9 +885,9 @@ export class DrawingToolsManager {
   /**
    * Initialize tool properties for all tools
    */
-  private initializeToolProperties(): void {
+  initializeToolProperties(): void {
     const tools: DrawingToolType[] = ['pen', 'brush', 'pencil', 'eraser', 'highlighter', 'washi-tape']
-    
+
     tools.forEach(tool => {
       this.toolProperties.set(tool, this.getDefaultToolProperties())
     })
@@ -896,7 +896,7 @@ export class DrawingToolsManager {
   /**
    * Check if tool is thick/heavy
    */
-  private isThickTool(tool: DrawingToolType): boolean {
+  isThickTool(tool: DrawingToolType): boolean {
     return ['brush', 'highlighter', 'washi-tape'].includes(tool)
   }
 }
@@ -906,8 +906,8 @@ export class DrawingToolsManager {
  * Original: Text rendering logic from 177177.ts
  */
 export class TextRenderingManager {
-  private currentTextState: TextRenderingState
-  private textMatrix: number[] = [1, 0, 0, 1, 0, 0]
+  currentTextState: TextRenderingState
+  textMatrix: number[] = [1, 0, 0, 1, 0, 0]
 
   constructor() {
     this.currentTextState = {
@@ -967,7 +967,7 @@ export class TextRenderingManager {
    */
   setTextRise(rise: number): void {
     this.currentTextState.textRise = rise
-    
+
     // Apply rise to text matrix
     if (rise !== 0) {
       const matrix = [...this.currentTextState.textMatrix]
@@ -987,10 +987,10 @@ export class TextRenderingManager {
     y: number
   ): void {
     const state = this.currentTextState
-    
+
     // Apply font properties
     context.font = `${state.fontWeight} ${state.fontSize}px ${state.fontFamily}`
-    
+
     // Apply transformation matrix
     context.save()
     context.setTransform(
@@ -1008,19 +1008,19 @@ export class TextRenderingManager {
         context.fillStyle = state.fillColor
         context.fillText(text, x, y)
         break
-        
+
       case 'STROKE':
         context.strokeStyle = state.strokeColor
         context.strokeText(text, x, y)
         break
-        
+
       case 'FILL_STROKE':
         context.fillStyle = state.fillColor
         context.fillText(text, x, y)
         context.strokeStyle = state.strokeColor
         context.strokeText(text, x, y)
         break
-        
+
       case 'ADD_TO_PATH':
         // Text as path (not directly supported in Canvas API)
         context.fillStyle = 'transparent'
@@ -1060,7 +1060,7 @@ export class TextRenderingManager {
  * Original: Canvas view state from 13528.ts
  */
 export class CanvasViewStateManager {
-  private viewState: CanvasViewState
+  viewState: CanvasViewState
 
   constructor() {
     this.viewState = {

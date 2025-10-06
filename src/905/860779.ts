@@ -4,9 +4,9 @@ import { memoizeFn, resolveFillStyle, resolveStrokeStyle, resolveVariable, Style
 import { GridLayoutProperties } from "../905/927840"
 
 export class NodeWrapper {
-  private _cachedProperties: Record<string, any>
+  _cachedProperties: Record<string, any>
   children: any[]
-  private _EXPENSIVE_TO_READ_node: any
+  _EXPENSIVE_TO_READ_node: any
   nodeCache: any
 
   constructor(node: any, nodeCache: any) {

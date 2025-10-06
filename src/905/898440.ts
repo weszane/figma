@@ -70,7 +70,7 @@ interface PendingWAFVerification {
  * Original class name: $$d1
  */
 export class WAFValidationHandler {
-  private pendingWAFVerification?: PendingWAFVerification
+  pendingWAFVerification?: PendingWAFVerification
 
   /**
    * Waits for WAF validation to complete.
@@ -122,7 +122,7 @@ export class WAFValidationHandler {
    * Handles postMessage events for WAF validation.
    * Original property name: onMessage
    */
-  private onMessage = (event: MessageEvent) => {
+  onMessage = (event: MessageEvent) => {
     if (
       this.pendingWAFVerification
       && event.data === 'waf-successful'

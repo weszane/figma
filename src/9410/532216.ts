@@ -72,7 +72,7 @@ import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { fx, PF } from "../figma_app/657972";
 import { z6 } from "../905/963340";
 import { R6 } from "../figma_app/504823";
-import { jK, hP } from "../figma_app/829197";
+import { useUserColorProfileSubscription, mapColorSpaceToEnum } from "../figma_app/829197";
 import { useFloatingTree } from "@floating-ui/react";
 import { RR } from "../figma_app/307841";
 import { l as _$$l } from "../905/714607";
@@ -188,8 +188,8 @@ let eI = memo(function () {
   let e = R6();
   let {
     colorProfilePreference
-  } = jK();
-  let i = hP(colorProfilePreference) === ColorSpaceEnum.DISPLAY_P3 ? "p3" : "srgb";
+  } = useUserColorProfileSubscription();
+  let i = mapColorSpaceToEnum(colorProfilePreference) === ColorSpaceEnum.DISPLAY_P3 ? "p3" : "srgb";
   let n = [{
     value: ColorProfileEnum.SRGB,
     label: getI18nString("fullscreen.filename_view.color_management.color_profile_srgb")

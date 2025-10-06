@@ -368,7 +368,7 @@ let Y = forwardRef(({
       t(e => e === D - 1 ? e : D++);
     }];
   }();
-  useImperativeHandle(y?.private.posRef, () => ({
+  useImperativeHandle(y?..posRef, () => ({
     pos,
     setPos
   }), [pos, setPos]);
@@ -528,8 +528,8 @@ export function $$q0({
   let w = useRef(null);
   let C = useRef();
   let R = useIsRecording();
-  let N = manager?.private.preventUserResize ?? !1;
-  useImperativeHandle(manager?.private.sizeRef, () => ({
+  let N = manager?..preventUserResize ?? !1;
+  useImperativeHandle(manager?..sizeRef, () => ({
     size: E,
     setSize: x
   }), [E, x]);
@@ -705,11 +705,11 @@ export function $$Z3({
     setSize(e) {
       i.current?.setSize(e);
     },
-    private: {
-      posRef: t,
-      sizeRef: i,
-      preventUserResize: e
-    }
+    : {
+    posRef: t,
+    sizeRef: i,
+    preventUserResize: e
+  }
   }), [e]);
 }
 $$q0.displayName = "WindowPrimitive.Resizable";

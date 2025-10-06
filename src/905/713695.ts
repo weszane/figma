@@ -312,11 +312,11 @@ let queryKeyCounter = 0
  * Original: class S
  */
 class BatchProcessor {
-  constructor(private processBatch: (operations: any[]) => void) {
+  constructor(processBatch: (operations: any[]) => void) {
     this.batchedOperations = []
   }
 
-  private batchedOperations: any[]
+  batchedOperations: any[]
 
   enqueue(operation: any): void {
     this.batchedOperations.push(operation)
@@ -332,7 +332,7 @@ class BatchProcessor {
  * Original: class w
  */
 class ObjectStoreManager {
-  constructor(private stores: any) {
+  constructor(stores: any) {
     this.resolutions = []
     const batchProcessor = new BatchProcessor(ops => this.processBatch(ops))
     for (const key of Object.keys(stores)) {
@@ -341,9 +341,9 @@ class ObjectStoreManager {
     }
   }
 
-  private resolutions: any[]
+  resolutions: any[]
 
-  private processBatch(operations: any[]): void {
+  processBatch(operations: any[]): void {
     const groupedOps: any = {}
     for (const op of operations) {
       const uniqueName = extractNormalizedObjectInfo(op.store.objectDef).uniqueName
@@ -380,7 +380,7 @@ class ObjectStoreManager {
  * Original: class C
  */
 class StoreProxy {
-  constructor(private store: any, private batch: BatchProcessor) { }
+  constructor(store: any, batch: BatchProcessor) { }
 
   update(id: any, updater: any): void {
     this.batch.enqueue({
@@ -406,13 +406,13 @@ class StoreProxy {
  * Original: class k
  */
 class QueryMutationManager {
-  constructor(private client: QueryClient) {
+  constructor(client: QueryClient) {
     this.invalidations = new Set()
     this.changes = new Set()
   }
 
-  private invalidations: Set<any>
-  private changes: Set<any>
+  invalidations: Set<any>
+  changes: Set<any>
 
   registerPromise(promise: Promise<any>): void {
     promise
@@ -455,7 +455,7 @@ class QueryMutationManager {
     })
   }
 
-  private revert(): void {
+  revert(): void {
     [...this.changes].reverse().forEach((change) => {
       this.client.setQueryData<ObjectOf>(change.query.queryKey, data =>
         '_version' in data && data._version === change.version ? change.rollback : data)
@@ -466,7 +466,7 @@ class QueryMutationManager {
     return this.client.invalidateQueries(queryKey)
   }
 
-  private invalidate(): void {
+  invalidate(): void {
     [...this.changes, ...this.invalidations]
       .filter(item => item.queryState?.fetchStatus === 'fetching')
       .forEach((item) => {
@@ -674,12 +674,12 @@ function buildHydratedEntities(
  * Original class name: G
  */
 class QueryProviderContext {
-  private _reporter: any = null
-  private _atomStore: any
-  private _queryClient: QueryClient
-  private _objectStores: any
-  private _queryAtomFamilies: Set<any>
-  private _gremlinConfig?: any
+  _reporter: any = null
+  _atomStore: any
+  _queryClient: QueryClient
+  _objectStores: any
+  _queryAtomFamilies: Set<any>
+  _gremlinConfig?: any
   uniqueQueryKeys: Set<string> = new Set()
   /**
    * Constructs a new QueryProviderContext.
@@ -706,7 +706,7 @@ class QueryProviderContext {
    * Creates a new QueryClient with default options.
    * @returns The QueryClient instance.
    */
-  private createQueryClient(): QueryClient {
+  createQueryClient(): QueryClient {
     return new QueryClient({
       defaultOptions: {
         queries: {
@@ -732,7 +732,7 @@ class QueryProviderContext {
    * @param storesConfig - The stores configuration.
    * @returns The built object stores.
    */
-  private buildStores(storesConfig: any): any {
+  buildStores(storesConfig: any): any {
     if (!storesConfig)
       return {}
     const stores: any = {}
@@ -846,9 +846,9 @@ export interface LiveStore_QueryConfig<Args = any, Data = any, Output = Data> {
  * Original class name: z
  */
 class LiveStore {
-  private extrasProvider: () => any
-  private queryProviderContext: QueryProviderContext
-  private gremlinConfig?: any
+  extrasProvider: () => any
+  queryProviderContext: QueryProviderContext
+  gremlinConfig?: any
 
   /**
    * Constructs a new LiveStore instance.
@@ -885,7 +885,7 @@ class LiveStore {
    * @returns Query method with correct type annotations.
    * Original: createQueryMethod
    */
-  private createQueryMethod<
+  createQueryMethod<
     Args = any,
     Data = any,
     Output = SuspendableResource,
@@ -1034,7 +1034,7 @@ class LiveStore {
    * Creates the PaginatedQuery method.
    * @returns The PaginatedQuery function.
    */
-  private createPaginatedQueryMethod() {
+  createPaginatedQueryMethod() {
     const extrasProvider = this.extrasProvider
     const getQueryContext = this.getQueryContext.bind(this)
     return (queryConfig: any) => {
@@ -1064,9 +1064,9 @@ class LiveStore {
               return observer.refetch({ refetchPage: (page: any, index: number) => index === 0 }).then((result: any) => {
                 getQueryContext().queryClient.setQueryData(observer.options.queryKey, (data: any) => data
                   ? {
-                      pages: data.pages.slice(0, 1),
-                      pageParams: data.pageParams.slice(0, 1),
-                    }
+                    pages: data.pages.slice(0, 1),
+                    pageParams: data.pageParams.slice(0, 1),
+                  }
                   : data)
                 return result
               })
@@ -1169,12 +1169,12 @@ class LiveStore {
           return queryConfig.joinPages
             ? queryConfig.joinPages(joinedPages)
             : joinedPages.reduce((acc: any[], page: any) => {
-                if (!Array.isArray(page.data)) {
-                  throw new TypeError('Expected array data in page')
-                }
-                acc.push(...page.data)
-                return acc
-              }, [])
+              if (!Array.isArray(page.data)) {
+                throw new TypeError('Expected array data in page')
+              }
+              acc.push(...page.data)
+              return acc
+            }, [])
         })
         const outputAtom = createCustomAtom(joinedDataAtom, (get: any) => {
           const { output } = queryConfig
@@ -1220,7 +1220,7 @@ class LiveStore {
    * Creates the Mutation method.
    * @returns The Mutation function.
    */
-  private createMutationMethod() {
+  createMutationMethod() {
     const extrasProvider = this.extrasProvider
     const getQueryContext = this.getQueryContext.bind(this)
     return (mutationConfig: any) => {
@@ -1256,7 +1256,7 @@ class LiveStore {
    * Creates the ObjectQuery method.
    * @returns The ObjectQuery function.
    */
-  private createObjectQueryMethod() {
+  createObjectQueryMethod() {
     const getQueryContext = this.getQueryContext.bind(this)
     return (store: any) => createRemovableAtomFamily((id: any) => {
       if (!id) {
@@ -1297,7 +1297,7 @@ class LiveStore {
    * @param actionHandler - Handler for actions.
    * @returns A tuple of atoms for the query.
    */
-  private createQueryAtoms(optionsFn: any, contextFn: any, observerFactory: any, actionHandler: any): [any, any] {
+  createQueryAtoms(optionsFn: any, contextFn: any, observerFactory: any, actionHandler: any): [any, any] {
     const observersMapAtom = atom(() => new WeakMap())
     const updateCounterAtom = atom(0)
     const uniqueSymbol = Symbol('')
@@ -1405,7 +1405,7 @@ class LiveStore {
   [key: `readCached${string}`]: (id: any) => any
   [key: `fetch${string}`]: (id: any, options?: any) => Promise<any>
 
-  private _attachAPIs(stores: any): void {
+  _attachAPIs(stores: any): void {
     for (const key in stores) {
       const store = stores[key];
       (this as any)[`fetch${key}`] = async (id: any, options: any = {}) => {
@@ -1462,8 +1462,8 @@ let Q = {
  * Original: class J
  */
 class QueryTimer {
-  private _startTime: number
-  private _timerId: number | null
+  _startTime: number
+  _timerId: number | null
   metadata: any
   finished: boolean
   backgrounded: boolean
@@ -1495,7 +1495,7 @@ class QueryTimer {
    * Handles visibility change events to track if the document is backgrounded.
    * Original: onVisibilityChange
    */
-  private onVisibilityChange = (): void => {
+  onVisibilityChange = (): void => {
     if (document.visibilityState === 'hidden') {
       this.backgrounded = true
     }
@@ -1525,17 +1525,17 @@ let ee = createReduxSubscriptionAtomWithState(e => e.currentUserOrgId)
  * Original: let et = new class { ... }()
  */
 class MetricsReporter {
-  private batchedCustomEvents: any[] = []
-  private batchedNumericEvents: any[] = []
-  private onVisibilityChange: () => Promise<void>
-  private _currentlySendingBatchedEvents: boolean = false
-  private sendBatchedEvents: () => Promise<void>
-  private sendBatchedEventsInterval: number
-  private reportCustomEvent: (metric: string, tags?: Record<string, any>) => void
-  private reportNumericEvent: (metric: string, value: number, tags?: Record<string, any>) => void
-  private getDefaultTags: () => Record<string, any>
-  private getFigmentTags: () => Record<string, any>
-  private reportQueryRequested: (queryKey: string) => (status: string) => void
+  batchedCustomEvents: any[] = []
+  batchedNumericEvents: any[] = []
+  onVisibilityChange: () => Promise<void>
+  _currentlySendingBatchedEvents: boolean = false
+  sendBatchedEvents: () => Promise<void>
+  sendBatchedEventsInterval: number
+  reportCustomEvent: (metric: string, tags?: Record<string, any>) => void
+  reportNumericEvent: (metric: string, value: number, tags?: Record<string, any>) => void
+  getDefaultTags: () => Record<string, any>
+  getFigmentTags: () => Record<string, any>
+  reportQueryRequested: (queryKey: string) => (status: string) => void
 
   /**
    * Constructs a new MetricsReporter instance, setting up event listeners and intervals.

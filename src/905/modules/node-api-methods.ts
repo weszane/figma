@@ -50,7 +50,7 @@ export interface SyncedStateData {
  * Handles core node operations like toString, clone, remove, etc.
  */
 export class AdvancedNodeOperationsManager {
-  private config: NodeAPIConfig
+  config: NodeAPIConfig
 
   constructor(config: NodeAPIConfig) {
     this.config = config
@@ -62,7 +62,7 @@ export class AdvancedNodeOperationsManager {
    */
   static setupToString(config: NodeAPIConfig, handle: any): void {
     const { vm, defineVmFunction } = config
-    
+
     defineVmFunction({
       handle,
       key: 'toString',
@@ -83,7 +83,7 @@ export class AdvancedNodeOperationsManager {
    */
   static setupClone(config: NodeAPIConfig, handle: any): void {
     const { getNodeFactory, editorType, defineVmFunction, getNode, documentAccessState } = config
-    
+
     defineVmFunction({
       handle,
       key: 'clone',
@@ -91,31 +91,31 @@ export class AdvancedNodeOperationsManager {
       cb() {
         const node = getNode(this)
         const nodeType = node.type
-        
+
         // Editor-specific validation logic
-        if (nodeType === 'DOCUMENT' || 
-          (editorType === '_$$nT.Design' || editorType === '_$$nT.Illustration') && 
-          '_$$tO.includes(nodeType)' || 
+        if (nodeType === 'DOCUMENT' ||
+          (editorType === '_$$nT.Design' || editorType === '_$$nT.Illustration') &&
+          '_$$tO.includes(nodeType)' ||
           editorType === '_$$nT.Whiteboard' && 'fx.includes(nodeType)') {
           throw new Error(`Cloning ${nodeType} nodes is not supported in the current editor`)
         }
-        
+
         if (editorType === '_$$nT.Sites' && node.type === 'CANVAS') {
           throw new Error('Cannot add pages to a Site')
         }
-        
+
         if (node.isResponsiveSet) {
           throw new Error('Cannot clone a webpage')
         }
-        
+
         const clonedNode = node.clone()
-        
+
         // Special handling for CANVAS nodes
         if (nodeType === 'CANVAS') {
           // Note: av function needs to be imported or passed in config
           // av(clonedNode, documentAccessState, { ignoreReduxState: true })
         }
-        
+
         return getNodeFactory().createNode(clonedNode, 'node.clone')
       },
       isAllowedInReadOnly: false,
@@ -129,7 +129,7 @@ export class AdvancedNodeOperationsManager {
    */
   static setupCloneWidget(config: NodeAPIConfig, handle: any): void {
     const { vm, pluginID, getNodeFactory, widgetManager, defineVmFunction, getNode, sceneGraph } = config
-    
+
     defineVmFunction({
       handle,
       key: 'cloneWidget',
@@ -138,26 +138,26 @@ export class AdvancedNodeOperationsManager {
         if (!widgetManager) {
           return vm.undefined
         }
-        
+
         const node = getNode(this)
         if (node.widgetId !== pluginID) {
           return vm.undefined
         }
-        
+
         const clonedNode = node.clone()
         const clonedHandle = getNodeFactory().createNode(clonedNode, 'node.cloneWidget')
         const clonedNodeObj = getNode(clonedHandle)
-        
+
         // Remove reversed children
         clonedNodeObj.reversedChildrenGuids.forEach((guid: string) => {
           const childNode = sceneGraph.get(guid)
           childNode?.removeSelfAndChildren()
         })
-        
+
         // Handle synced state - this would need the ip function imported
         // const { syncedState, syncedMap } = ip(vm, syncedStateArg, syncedMapArg)
         // _$$rJ(clonedNodeObj, syncedState, syncedMap)
-        
+
         widgetManager.scheduleRender(clonedNode)
         return clonedHandle
       },
@@ -172,7 +172,7 @@ export class AdvancedNodeOperationsManager {
    */
   static setupSetWidgetSyncedState(config: NodeAPIConfig, handle: any): void {
     const { vm, pluginID, widgetManager, pluginVersionID, defineVmFunction, getNode } = config
-    
+
     defineVmFunction({
       handle,
       key: 'setWidgetSyncedState',
@@ -181,18 +181,18 @@ export class AdvancedNodeOperationsManager {
         if (!widgetManager) {
           return vm.undefined
         }
-        
+
         const node = getNode(this)
         if (node.widgetId !== pluginID) {
           return vm.undefined
         }
-        
+
         // Handle synced state processing - needs ip function
         // const { syncedState, syncedMap } = ip(vm, syncedStateArg, syncedMapArg)
-        
+
         // Update node with synced state - needs _$$rJ function
         // _$$rJ(node, syncedState, syncedMap)
-        
+
         widgetManager.scheduleRender(node)
         return vm.undefined
       },
@@ -207,7 +207,7 @@ export class AdvancedNodeOperationsManager {
    */
   static setupRemove(config: NodeAPIConfig, handle: any): void {
     const { vm, defineVmFunction, getNode } = config
-    
+
     defineVmFunction({
       handle,
       key: 'remove',
@@ -228,7 +228,7 @@ export class AdvancedNodeOperationsManager {
    */
   static setupExportNode(config: NodeAPIConfig, handle: any): void {
     const { vm, defineVmFunction, getNode } = config
-    
+
     defineVmFunction({
       handle,
       key: 'exportNode',
@@ -250,7 +250,7 @@ export class AdvancedNodeOperationsManager {
  * Handles parent-child relationships and tree traversal
  */
 export class AdvancedNodeHierarchyManager {
-  private config: NodeAPIConfig
+  config: NodeAPIConfig
 
   constructor(config: NodeAPIConfig) {
     this.config = config
@@ -262,7 +262,7 @@ export class AdvancedNodeHierarchyManager {
    */
   static setupParent(config: NodeAPIConfig, handle: any): void {
     const { vm, getNodeFactory, defineVmFunction, getNode } = config
-    
+
     defineVmFunction({
       handle,
       key: 'parent',
@@ -270,11 +270,11 @@ export class AdvancedNodeHierarchyManager {
       cb() {
         const node = getNode(this)
         const parentNode = node.parent
-        
+
         if (!parentNode) {
           return vm.$$null
         }
-        
+
         return getNodeFactory().createNode(parentNode, 'node.parent')
       },
       isAllowedInReadOnly: true,
@@ -288,7 +288,7 @@ export class AdvancedNodeHierarchyManager {
    */
   static setupGetTopLevelFrame(config: NodeAPIConfig, handle: any): void {
     const { vm, getNodeFactory, defineVmFunction, getNode } = config
-    
+
     defineVmFunction({
       handle,
       key: 'getTopLevelFrame',
@@ -296,11 +296,11 @@ export class AdvancedNodeHierarchyManager {
       cb() {
         const node = getNode(this)
         const topLevelFrame = node.getTopLevelFrame()
-        
+
         if (!topLevelFrame) {
           return vm.$$null
         }
-        
+
         return getNodeFactory().createNode(topLevelFrame, 'node.getTopLevelFrame')
       },
       isAllowedInReadOnly: true,
@@ -314,7 +314,7 @@ export class AdvancedNodeHierarchyManager {
    */
   static setupChildren(config: NodeAPIConfig, handle: any): void {
     const { vm, getNodeFactory, defineVmFunction, getNode } = config
-    
+
     defineVmFunction({
       handle,
       key: 'children',
@@ -322,11 +322,11 @@ export class AdvancedNodeHierarchyManager {
       cb() {
         const node = getNode(this)
         const children = node.children || []
-        
-        const childrenHandles = children.map((child: any) => 
+
+        const childrenHandles = children.map((child: any) =>
           getNodeFactory().createNode(child, 'node.children')
         )
-        
+
         return vm.newArray(childrenHandles)
       },
       isAllowedInReadOnly: true,
@@ -340,7 +340,7 @@ export class AdvancedNodeHierarchyManager {
  * Handles findOne, findAll, findChild, findChildren operations
  */
 export class AdvancedNodeSearchManager {
-  private config: NodeAPIConfig
+  config: NodeAPIConfig
 
   constructor(config: NodeAPIConfig) {
     this.config = config
@@ -352,7 +352,7 @@ export class AdvancedNodeSearchManager {
    */
   static setupFindOne(config: NodeAPIConfig, handle: any): void {
     const { vm, getNodeFactory, defineVmFunction, getNode } = config
-    
+
     defineVmFunction({
       handle,
       key: 'findOne',
@@ -360,16 +360,16 @@ export class AdvancedNodeSearchManager {
       cb(predicateHandle: any) {
         const node = getNode(this)
         const predicate = vm.unwrapFunction(predicateHandle)
-        
+
         // Implementation would need the actual search logic
         // const foundNode = node.findOne(predicate)
-        
+
         // if (!foundNode) {
         //   return vm.$$null
         // }
-        
+
         // return getNodeFactory().createNode(foundNode, 'node.findOne')
-        
+
         // Placeholder return for now
         return vm.$$null
       },
@@ -384,7 +384,7 @@ export class AdvancedNodeSearchManager {
    */
   static setupFindAll(config: NodeAPIConfig, handle: any): void {
     const { vm, getNodeFactory, defineVmFunction, getNode } = config
-    
+
     defineVmFunction({
       handle,
       key: 'findAll',
@@ -392,16 +392,16 @@ export class AdvancedNodeSearchManager {
       cb(predicateHandle: any) {
         const node = getNode(this)
         const predicate = vm.unwrapFunction(predicateHandle)
-        
+
         // Implementation would need the actual search logic
         // const foundNodes = node.findAll(predicate)
-        
+
         // const nodeHandles = foundNodes.map((foundNode: any) => 
         //   getNodeFactory().createNode(foundNode, 'node.findAll')
         // )
-        
+
         // return vm.newArray(nodeHandles)
-        
+
         // Placeholder return for now
         return vm.newArray([])
       },

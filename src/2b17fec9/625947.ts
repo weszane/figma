@@ -447,7 +447,7 @@ import { queryDefaultLibrariesMeta, getLibraryNameByKey, useLibraryItemsAndMetad
 import { filterArrayByEditorTypeAndMemo } from '../figma_app/279454';
 import { W6 as _$$W5, Jm } from '../figma_app/287316';
 import { useSubscription } from '../figma_app/288654';
-import { C_ } from '../figma_app/290668';
+import { useFocusArea } from '../figma_app/290668';
 import { mS as _$$mS, wR, zD } from '../figma_app/293326';
 import { kw } from '../figma_app/298911';
 import { b as _$$b6 } from '../figma_app/300024';
@@ -3005,7 +3005,7 @@ function nd({
   children: t
 }) {
   let i = useRef(null);
-  C_(i);
+  useFocusArea(i);
   let n = _$$ew();
   let r = function (e) {
     let [t, i] = useState(0);
@@ -16961,7 +16961,7 @@ let gm = memo(({
     selectionChanged: C,
     setShouldSectionShowUnlockWithFriction: v
   });
-  C_(i);
+  useFocusArea(i);
   let E = useSelector(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     return t.length === 1 && n.currentlySelectedNode.nodeId === t[0] ? n.currentlySelectedNode.ariaLabel : null;
@@ -17095,7 +17095,7 @@ let g_ = memo(({
     selectionChanged: y,
     setShouldSectionShowUnlockWithFriction: b
   });
-  C_(r);
+  useFocusArea(r);
   let C = useSelector(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     return t.length === 1 && a.currentlySelectedNode.nodeId === t[0] ? a.currentlySelectedNode.ariaLabel : null;
@@ -23184,7 +23184,7 @@ function y8() {
   }, [s?.sessionID, e, n, r, u]);
   let v = U1();
   let C = useRef(null);
-  return (C_(C, p), p) ? jsx('div', {
+  return (useFocusArea(C, p), p) ? jsx('div', {
     className: y5,
     style: {
       visibility: BrowserInfo.isIpadNative ? 'hidden' : 'visible'

@@ -7,24 +7,24 @@ import { logger as loggerRef } from '../905/651849'
  * Original class name: $$s0
  */
 export class PluginApiMetrics {
-  private _counters: Map<string, number>
-  private _perfMetrics: Map<string, PerfMetric>
-  private _pluginDataHistogram: Map<string, Map<string, number>>
-  private _pluginDataSize: Map<string, number>
-  private _sharedPluginDataSize: Map<string, number>
-  private _pluginDataMaximumKeyCountExceeded: boolean
-  private _hasResizedNodeWithMissingFont: boolean
-  private _executionTimeMeasurementState: number
-  private _tmpStackInvariantFields: Map<string, Set<string>>
-  private _stackInvariantFields: Record<string, number>
-  private _totalValidationDuration: number
-  private _validationCount: number
-  private _clientStorageUsageDelta: number
-  private _totalClientStorageUsage: number
-  private _startTimestamp: number
-  private _timeMarks: Record<string, number>
-  private _numPagesLoaded: number
-  private _parameterValues?: Record<string, unknown>
+  _counters: Map<string, number>
+  _perfMetrics: Map<string, PerfMetric>
+  _pluginDataHistogram: Map<string, Map<string, number>>
+  _pluginDataSize: Map<string, number>
+  _sharedPluginDataSize: Map<string, number>
+  _pluginDataMaximumKeyCountExceeded: boolean
+  _hasResizedNodeWithMissingFont: boolean
+  _executionTimeMeasurementState: number
+  _tmpStackInvariantFields: Map<string, Set<string>>
+  _stackInvariantFields: Record<string, number>
+  _totalValidationDuration: number
+  _validationCount: number
+  _clientStorageUsageDelta: number
+  _totalClientStorageUsage: number
+  _startTimestamp: number
+  _timeMarks: Record<string, number>
+  _numPagesLoaded: number
+  _parameterValues?: Record<string, unknown>
 
   constructor() {
     this._counters = new Map()

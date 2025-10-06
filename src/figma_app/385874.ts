@@ -289,7 +289,7 @@ export function alignmentFromAnchorPosition(e: AnchorPosition): any {
  * Original name: $$M7
  */
 class PaintManager {
-  private cache: { [key: string]: any } = {}
+  cache: { [key: string]: any } = {}
 
   /**
    * Clears the cache.
@@ -326,7 +326,7 @@ class PaintManager {
    * @param s - Config.
    * @returns The initialized paint.
    */
-  private initPaintWithDefaultImagePaint(e: Paint['type'], t: any, r: boolean, n: string, i: any, a: boolean, s: any) {
+  initPaintWithDefaultImagePaint(e: Paint['type'], t: any, r: boolean, n: string, i: any, a: boolean, s: any) {
     const paint = {
       type: e,
       opacity: 1,
@@ -400,16 +400,16 @@ class PaintManager {
    * @param n - Reverse flag.
    * @returns Stops and stopsVar.
    */
-  private getPaintStopsAndStopsVar(e: any, t: any, r: any, n: boolean): { stops: any[], stopsVar: any[] } {
+  getPaintStopsAndStopsVar(e: any, t: any, r: any, n: boolean): { stops: any[], stopsVar: any[] } {
     const stops = n
       ? [
-          { position: 0, color: r },
-          { position: 1, color: e },
-        ]
+        { position: 0, color: r },
+        { position: 1, color: e },
+      ]
       : [
-          { position: 0, color: e },
-          { position: 1, color: r },
-        ]
+        { position: 0, color: e },
+        { position: 1, color: r },
+      ]
     const stopsVar = stops.map(transformColorStop)
     if (t) {
       stopsVar[n ? 1 : 0].colorVar = t
@@ -423,7 +423,7 @@ class PaintManager {
    * @param t - Key.
    * @returns The cached paint.
    */
-  private cachePaint(e: any, t: string): any {
+  cachePaint(e: any, t: string): any {
     this.cache[t] = this.cache[t] || clone(e)
     if (isGradientType(e.type)) {
       this.transferGradientAttributes(e, this.cache[t])
@@ -446,7 +446,7 @@ class PaintManager {
    * @param e - Source.
    * @param t - Target.
    */
-  private transferGeneralAttributes(e: any, t: any): void {
+  transferGeneralAttributes(e: any, t: any): void {
     t.opacity = e.opacity
     t.blendMode = e.blendMode
     t.visible = e.visible
@@ -457,7 +457,7 @@ class PaintManager {
    * @param e - Source.
    * @param t - Target.
    */
-  private transferColorAttributes(e: any, t: any): void {
+  transferColorAttributes(e: any, t: any): void {
     t.color = e.color
   }
 
@@ -466,7 +466,7 @@ class PaintManager {
    * @param e - Source.
    * @param t - Target.
    */
-  private transferGradientAttributes(e: any, t: any): void {
+  transferGradientAttributes(e: any, t: any): void {
     t.stops = e.stops
     t.stopsVar = e.stopsVar
     t.transform = e.transform
@@ -477,7 +477,7 @@ class PaintManager {
    * @param e - Source.
    * @param t - Target.
    */
-  private transferImageAttributes(e: any, t: any): void {
+  transferImageAttributes(e: any, t: any): void {
     t.image = e.image
     t.imageThumbnail = e.imageThumbnail
     t.animatedImage = e.animatedImage
@@ -495,7 +495,7 @@ class PaintManager {
    * @param e - Source.
    * @param t - Target.
    */
-  private transferVideoAttributes(e: any, t: any): void {
+  transferVideoAttributes(e: any, t: any): void {
     t.imageThumbnail = e.imageThumbnail
     t.animationFrame = e.animationFrame
     t.imageScaleMode = e.imageScaleMode

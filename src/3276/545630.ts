@@ -107,7 +107,7 @@ import { buildStaticUrl, getInitialOptions } from '../figma_app/169182';
 import { t0 as _$$t3 } from '../figma_app/198840';
 import { AU, on } from '../figma_app/242565';
 import { useSubscription } from '../figma_app/288654';
-import { C_ as _$$C_ } from '../figma_app/290668';
+import { useFocusArea } from '../figma_app/290668';
 import { viewportNavigatorContext } from '../figma_app/298911';
 import { KD, O1 } from '../figma_app/317394';
 import { p as _$$p } from '../figma_app/353099';
@@ -1811,7 +1811,7 @@ function nr(e) {
       popout: () => eH()
     });
   }, [modalRef, eH]);
-  _$$C_(P);
+  useFocusArea(P);
   useEffect(() => {
     if (n && !e.mountUnfocused) {
       switch (n) {

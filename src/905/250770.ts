@@ -1,10 +1,11 @@
-import { cw, WU } from "../figma_app/290668";
-export let $$r0 = {
+import { focusNextArea, focusPreviousArea } from "../figma_app/290668"
+
+export let AccessibleAreasBindings = {
   cycleFocusBackward(e) {
-    cw(e);
+    focusPreviousArea(e)
   },
   cycleFocusForward(e) {
-    WU(e);
-  }
-};
-export const H = $$r0;
+    focusNextArea(e)
+  },
+}
+export const H = AccessibleAreasBindings

@@ -397,7 +397,7 @@ import { l as _$$l6 } from "../905/716947";
 import cP from "../vendor/7508";
 import cR from "../vendor/656470";
 import cO from "../vendor/260986";
-import { nl as _$$nl2 } from "../figma_app/897289";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { VisualBellIcon } from "../905/576487";
 import { O as _$$O5, K as _$$K5 } from "../figma_app/140784";
 import { rg as _$$rg, aK as _$$aK } from "../figma_app/401069";
@@ -9362,7 +9362,7 @@ let c9 = memo(({
   media: t = [],
   showComponentControls: n
 }) => {
-  let d = _$$nl2();
+  let d = isInteractionPathCheck();
   let c = useCurrentFileKey();
   let [u, p] = useAtomValueAndSetter(g6);
   let f = !ua() || u;
@@ -9734,7 +9734,7 @@ function ua() {
   let t = useSubscription(FileCanExport, {
     key: e
   });
-  return !!_$$nl2() || t.data?.file && "error" !== t.data.file.status && t.data?.file?.data?.hasPermission;
+  return !!isInteractionPathCheck() || t.data?.file && "error" !== t.data.file.status && t.data?.file?.data?.hasPermission;
 }
 function ui({
   chits: e,

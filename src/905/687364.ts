@@ -11,16 +11,16 @@ type NodeCache = any
 type BoundVariables = any
 type InferredVariables = any
 export class FrameNodeProperties {
-  private _cachedProperties: Record<string, any>
-  private _EXPENSIVE_TO_READ_node: Node
-  private nodeCache: NodeCache
+  _cachedProperties: Record<string, any>
+  _EXPENSIVE_TO_READ_node: Node
+  nodeCache: NodeCache
   constructor(e: Node, t: NodeCache) {
     this._cachedProperties = {}
     this._EXPENSIVE_TO_READ_node = e
     this.nodeCache = t
   }
 
-  private readValue<T>(key: string, getter: (node: Node) => T): T {
+  readValue<T>(key: string, getter: (node: Node) => T): T {
     return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
 

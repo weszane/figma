@@ -53,7 +53,7 @@ export enum NetworkErrorType {
  * Handles network compatibility checks for presigned posts and font lists.
  */
 class NetworkCompatibilityService {
-  private checkPresignedPostValidator = createNoOpValidator();
+  checkPresignedPostValidator = createNoOpValidator();
 
   /**
    * Validates presigned post network compatibility.

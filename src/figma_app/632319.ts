@@ -14,11 +14,11 @@ import { isInteractionPathCheck } from '../figma_app/897289'
  * Original class name: d
  */
 class SocketConnectionTracker {
-  private _timeOfLastDisconnectMs: number | null = null
-  private _timeOfLastConnectionMs: number | null = null
-  private _timeOfFirstConnectionMs: number | null = null
-  private _definedConnectionAttemptEventName: string
-  private _definedDisconnectEventName: string
+  _timeOfLastDisconnectMs: number | null = null
+  _timeOfLastConnectionMs: number | null = null
+  _timeOfFirstConnectionMs: number | null = null
+  _definedConnectionAttemptEventName: string
+  _definedDisconnectEventName: string
 
   constructor(connectionAttemptEventName: string, disconnectEventName: string) {
     this._definedConnectionAttemptEventName = connectionAttemptEventName

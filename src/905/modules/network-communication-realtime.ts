@@ -117,13 +117,13 @@ export interface CommunicationPreference {
  * Enhanced version consolidating HTTPClientManager from api-integration-services.ts
  */
 export class AdvancedHTTPClientManager {
-  private baseURL: string
-  private defaultHeaders: Record<string, string>
-  private requestCache: Map<string, { response: NetworkResponse; expires: number }>
-  private requestQueue: Map<string, Promise<NetworkResponse>>
-  private rateLimiter: Map<string, { count: number; resetTime: number }>
-  private networkMetrics: NetworkMetrics
-  private interceptors: {
+  baseURL: string
+  defaultHeaders: Record<string, string>
+  requestCache: Map<string, { response: NetworkResponse; expires: number }>
+  requestQueue: Map<string, Promise<NetworkResponse>>
+  rateLimiter: Map<string, { count: number; resetTime: number }>
+  networkMetrics: NetworkMetrics
+  interceptors: {
     request: Array<(request: NetworkRequest) => NetworkRequest | Promise<NetworkRequest>>
     response: Array<(response: NetworkResponse) => NetworkResponse | Promise<NetworkResponse>>
   }
@@ -154,7 +154,7 @@ export class AdvancedHTTPClientManager {
   /**
    * Setup network status monitoring
    */
-  private setupNetworkMonitoring(): void {
+  setupNetworkMonitoring(): void {
     window.addEventListener('online', () => {
       this.networkMetrics.connectionStatus = 'online'
       this.networkMetrics.lastUpdated = Date.now()
@@ -185,7 +185,7 @@ export class AdvancedHTTPClientManager {
    */
   async request<T = any>(config: NetworkRequest): Promise<NetworkResponse<T>> {
     const startTime = Date.now()
-    
+
     try {
       // Apply request interceptors
       let requestConfig = { ...config }
@@ -230,7 +230,7 @@ export class AdvancedHTTPClientManager {
   /**
    * Execute HTTP request with retries
    */
-  private async executeRequest<T>(config: NetworkRequest, startTime: number, attempt: number = 1): Promise<NetworkResponse<T>> {
+  async executeRequest<T>(config: NetworkRequest, startTime: number, attempt: number = 1): Promise<NetworkResponse<T>> {
     const url = config.url.startsWith('http') ? config.url : `${this.baseURL}${config.url}`
     const headers = { ...this.defaultHeaders, ...config.headers }
 
@@ -246,10 +246,10 @@ export class AdvancedHTTPClientManager {
 
     try {
       const response = await fetch(url, fetchConfig)
-      
+
       let data: T
       const contentType = response.headers.get('content-type')
-      
+
       if (contentType?.includes('application/json')) {
         data = await response.json()
       } else if (contentType?.includes('text/')) {
@@ -324,15 +324,15 @@ export class AdvancedHTTPClientManager {
   /**
    * Cache management methods
    */
-  private generateCacheKey(config: NetworkRequest): string {
+  generateCacheKey(config: NetworkRequest): string {
     return `${config.method || 'GET'}:${config.url}:${JSON.stringify(config.headers || {})}`
   }
 
-  private generateRequestKey(config: NetworkRequest): string {
+  generateRequestKey(config: NetworkRequest): string {
     return `${config.method || 'GET'}:${config.url}:${JSON.stringify(config.body || {})}`
   }
 
-  private getFromCache(key: string): NetworkResponse | null {
+  getFromCache(key: string): NetworkResponse | null {
     const cached = this.requestCache.get(key)
     if (cached && cached.expires > Date.now()) {
       return { ...cached.response, cached: true }
@@ -341,17 +341,17 @@ export class AdvancedHTTPClientManager {
     return null
   }
 
-  private addToCache(key: string, response: NetworkResponse, ttl: number = 300000): void { // 5 minutes default
+  addToCache(key: string, response: NetworkResponse, ttl: number = 300000): void { // 5 minutes default
     this.requestCache.set(key, {
       response: { ...response },
       expires: Date.now() + ttl
     })
   }
 
-  private checkRateLimit(url: string): void {
+  checkRateLimit(url: string): void {
     const domain = new URL(url, this.baseURL).hostname
     const limit = this.rateLimiter.get(domain)
-    
+
     if (limit) {
       if (Date.now() > limit.resetTime) {
         this.rateLimiter.set(domain, { count: 1, resetTime: Date.now() + 60000 })
@@ -365,7 +365,7 @@ export class AdvancedHTTPClientManager {
     }
   }
 
-  private parseHeaders(headers: Headers): Record<string, string> {
+  parseHeaders(headers: Headers): Record<string, string> {
     const result: Record<string, string> = {}
     headers.forEach((value, key) => {
       result[key] = value
@@ -373,7 +373,7 @@ export class AdvancedHTTPClientManager {
     return result
   }
 
-  private updateMetrics(startTime: number, fromCache: boolean): void {
+  updateMetrics(startTime: number, fromCache: boolean): void {
     this.networkMetrics.requestCount++
     this.networkMetrics.responseTime = Date.now() - startTime
     if (fromCache) {
@@ -382,7 +382,7 @@ export class AdvancedHTTPClientManager {
     this.networkMetrics.lastUpdated = Date.now()
   }
 
-  private delay(ms: number): Promise<void> {
+  delay(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms))
   }
 
@@ -405,13 +405,13 @@ export class AdvancedHTTPClientManager {
  * WebSocket Manager for Real-Time Communication
  */
 export class WebSocketManager {
-  private socket: WebSocket | null = null
-  private config: WebSocketConfig
-  private reconnectAttempts: number = 0
-  private messageQueue: WebSocketMessage[] = []
-  private eventListeners: Map<string, Set<(message: WebSocketMessage) => void>> = new Map()
-  private heartbeatInterval: number | null = null
-  private connectionState: 'connecting' | 'connected' | 'disconnected' | 'error' = 'disconnected'
+  socket: WebSocket | null = null
+  config: WebSocketConfig
+  reconnectAttempts: number = 0
+  messageQueue: WebSocketMessage[] = []
+  eventListeners: Map<string, Set<(message: WebSocketMessage) => void>> = new Map()
+  heartbeatInterval: number | null = null
+  connectionState: 'connecting' | 'connected' | 'disconnected' | 'error' = 'disconnected'
 
   constructor(config: WebSocketConfig) {
     this.config = {
@@ -509,7 +509,7 @@ export class WebSocketManager {
   /**
    * Emit message to listeners
    */
-  private emit(eventType: string, message: WebSocketMessage): void {
+  emit(eventType: string, message: WebSocketMessage): void {
     this.eventListeners.get(eventType)?.forEach(callback => {
       try {
         callback(message)
@@ -522,7 +522,7 @@ export class WebSocketManager {
   /**
    * Handle incoming messages
    */
-  private handleMessage(event: MessageEvent): void {
+  handleMessage(event: MessageEvent): void {
     try {
       const message: WebSocketMessage = JSON.parse(event.data)
       this.emit(message.type, message)
@@ -535,7 +535,7 @@ export class WebSocketManager {
   /**
    * Handle disconnection with reconnection logic
    */
-  private handleDisconnection(event: CloseEvent): void {
+  handleDisconnection(event: CloseEvent): void {
     this.emit('disconnect', { type: 'disconnect', data: event, timestamp: Date.now() })
 
     if (this.config.reconnect && this.reconnectAttempts < this.config.maxReconnectAttempts!) {
@@ -551,7 +551,7 @@ export class WebSocketManager {
   /**
    * Start heartbeat to keep connection alive
    */
-  private startHeartbeat(): void {
+  startHeartbeat(): void {
     if (this.config.heartbeatInterval) {
       this.heartbeatInterval = window.setInterval(() => {
         this.send({ type: 'ping' })
@@ -562,7 +562,7 @@ export class WebSocketManager {
   /**
    * Stop heartbeat
    */
-  private stopHeartbeat(): void {
+  stopHeartbeat(): void {
     if (this.heartbeatInterval) {
       clearInterval(this.heartbeatInterval)
       this.heartbeatInterval = null
@@ -572,7 +572,7 @@ export class WebSocketManager {
   /**
    * Process queued messages
    */
-  private processMessageQueue(): void {
+  processMessageQueue(): void {
     while (this.messageQueue.length > 0) {
       const message = this.messageQueue.shift()!
       this.socket?.send(JSON.stringify(message))
@@ -601,10 +601,10 @@ export class WebSocketManager {
  * Event Stream Manager for Server-Sent Events
  */
 export class EventStreamManager {
-  private eventSource: EventSource | null = null
-  private config: EventStreamConfig
-  private reconnectAttempts: number = 0
-  private eventListeners: Map<string, Set<(message: EventStreamMessage) => void>> = new Map()
+  eventSource: EventSource | null = null
+  config: EventStreamConfig
+  reconnectAttempts: number = 0
+  eventListeners: Map<string, Set<(message: EventStreamMessage) => void>> = new Map()
 
   constructor(config: EventStreamConfig) {
     this.config = {
@@ -673,7 +673,7 @@ export class EventStreamManager {
   /**
    * Handle incoming messages
    */
-  private handleMessage(event: MessageEvent): void {
+  handleMessage(event: MessageEvent): void {
     const message: EventStreamMessage = {
       data: event.data,
       lastEventId: event.lastEventId,
@@ -685,7 +685,7 @@ export class EventStreamManager {
   /**
    * Handle custom events
    */
-  private handleCustomEvent(eventType: string, event: MessageEvent): void {
+  handleCustomEvent(eventType: string, event: MessageEvent): void {
     const message: EventStreamMessage = {
       event: eventType,
       data: event.data,
@@ -698,7 +698,7 @@ export class EventStreamManager {
   /**
    * Handle errors with reconnection logic
    */
-  private handleError(_error: Event): void {
+  handleError(_error: Event): void {
     this.emit('error', { data: 'error', timestamp: Date.now() })
 
     if (this.config.reconnect && this.reconnectAttempts < this.config.maxReconnectAttempts!) {
@@ -713,7 +713,7 @@ export class EventStreamManager {
   /**
    * Emit events to listeners
    */
-  private emit(eventType: string, message: EventStreamMessage): void {
+  emit(eventType: string, message: EventStreamMessage): void {
     this.eventListeners.get(eventType)?.forEach(callback => {
       try {
         callback(message)
@@ -736,9 +736,9 @@ export class EventStreamManager {
  * Push Notification Manager
  */
 export class PushNotificationManager {
-  private config: PushNotificationConfig
-  private serviceWorkerRegistration: ServiceWorkerRegistration | null = null
-  private subscription: PushSubscription | null = null
+  config: PushNotificationConfig
+  serviceWorkerRegistration: ServiceWorkerRegistration | null = null
+  subscription: PushSubscription | null = null
 
   constructor(config: PushNotificationConfig) {
     this.config = {
@@ -786,7 +786,7 @@ export class PushNotificationManager {
     }
 
     const applicationServerKey = this.urlB64ToUint8Array(this.config.vapidKey)
-    
+
     this.subscription = await this.serviceWorkerRegistration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey,
@@ -821,12 +821,12 @@ export class PushNotificationManager {
   /**
    * Convert VAPID key to Uint8Array
    */
-  private urlB64ToUint8Array(base64String: string): Uint8Array {
+  urlB64ToUint8Array(base64String: string): Uint8Array {
     const padding = '='.repeat((4 - base64String.length % 4) % 4)
     const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/')
     const rawData = window.atob(base64)
     const outputArray = new Uint8Array(rawData.length)
-    
+
     for (let i = 0; i < rawData.length; ++i) {
       outputArray[i] = rawData.charCodeAt(i)
     }
@@ -838,9 +838,9 @@ export class PushNotificationManager {
  * Broadcast Channel Manager for Multi-Tab Communication
  */
 export class BroadcastChannelManager {
-  private channel: BroadcastChannel | null = null
-  private config: BroadcastConfig
-  private messageListeners: Set<(message: any) => void> = new Set()
+  channel: BroadcastChannel | null = null
+  config: BroadcastConfig
+  messageListeners: Set<(message: any) => void> = new Set()
 
   constructor(config: BroadcastConfig) {
     this.config = config
@@ -850,7 +850,7 @@ export class BroadcastChannelManager {
   /**
    * Initialize broadcast channel
    */
-  private initialize(): void {
+  initialize(): void {
     if ('BroadcastChannel' in window) {
       this.channel = new BroadcastChannel(this.config.channelName)
       this.channel.onmessage = (event) => {
@@ -889,7 +889,7 @@ export class BroadcastChannelManager {
   /**
    * Handle incoming messages
    */
-  private handleMessage(event: MessageEvent): void {
+  handleMessage(event: MessageEvent): void {
     if (!this.config.allowCrossOrigin && event.data.origin !== window.location.origin) {
       return
     }
@@ -917,9 +917,9 @@ export class BroadcastChannelManager {
  * Enhanced version consolidating CommunicationPreferenceService from api-integration-services.ts
  */
 export class CommunicationPreferenceManager {
-  private httpClient: AdvancedHTTPClientManager
-  private preferences: Map<string, CommunicationPreference> = new Map()
-  private subscribers: Set<(preferences: CommunicationPreference[]) => void> = new Set()
+  httpClient: AdvancedHTTPClientManager
+  preferences: Map<string, CommunicationPreference> = new Map()
+  subscribers: Set<(preferences: CommunicationPreference[]) => void> = new Set()
 
   constructor(httpClient?: AdvancedHTTPClientManager) {
     this.httpClient = httpClient || new AdvancedHTTPClientManager('/api')
@@ -1014,7 +1014,7 @@ export class CommunicationPreferenceManager {
   /**
    * Load preferences from storage
    */
-  private async loadPreferences(): Promise<void> {
+  async loadPreferences(): Promise<void> {
     try {
       const stored = localStorage.getItem('communication_preferences')
       if (stored) {
@@ -1031,7 +1031,7 @@ export class CommunicationPreferenceManager {
   /**
    * Save preferences to storage
    */
-  private savePreferences(): void {
+  savePreferences(): void {
     try {
       const preferences = Array.from(this.preferences.values())
       localStorage.setItem('communication_preferences', JSON.stringify(preferences))
@@ -1044,7 +1044,7 @@ export class CommunicationPreferenceManager {
   /**
    * Update local preferences from API response
    */
-  private updateLocalPreferences(data: any): void {
+  updateLocalPreferences(data: any): void {
     // Transform API response to local preference format
     if (data && Array.isArray(data.preferences)) {
       data.preferences.forEach((pref: any) => {
@@ -1063,10 +1063,10 @@ export class CommunicationPreferenceManager {
   /**
    * Update single preference
    */
-  private updateLocalPreference(channelType: string, policyType: string, policySetting: string): void {
+  updateLocalPreference(channelType: string, policyType: string, policySetting: string): void {
     const key = `${channelType}:${policyType}`
     const existing = this.preferences.get(key)
-    
+
     this.preferences.set(key, {
       channelType,
       policyType,
@@ -1074,28 +1074,28 @@ export class CommunicationPreferenceManager {
       enabled: existing?.enabled !== false,
       priority: existing?.priority || 0
     })
-    
+
     this.savePreferences()
   }
 
   /**
    * Update channel setting
    */
-  private updateChannelSetting(channelType: string, channelSetting: string): void {
+  updateChannelSetting(channelType: string, channelSetting: string): void {
     // Update all preferences for this channel type
     this.preferences.forEach((pref) => {
       if (pref.channelType === channelType) {
         pref.enabled = channelSetting === 'enabled'
       }
     })
-    
+
     this.savePreferences()
   }
 
   /**
    * Notify subscribers of preference changes
    */
-  private notifySubscribers(preferences: CommunicationPreference[]): void {
+  notifySubscribers(preferences: CommunicationPreference[]): void {
     this.subscribers.forEach(callback => {
       try {
         callback(preferences)
@@ -1110,9 +1110,9 @@ export class CommunicationPreferenceManager {
  * Network Status Monitor
  */
 export class NetworkStatusMonitor {
-  private listeners: Set<(status: NetworkMetrics) => void> = new Set()
-  private metrics: NetworkMetrics
-  private monitoring: boolean = false
+  listeners: Set<(status: NetworkMetrics) => void> = new Set()
+  metrics: NetworkMetrics
+  monitoring: boolean = false
 
   constructor() {
     this.metrics = {
@@ -1188,7 +1188,7 @@ export class NetworkStatusMonitor {
   /**
    * Handle online event
    */
-  private handleOnline = (): void => {
+  handleOnline = (): void => {
     this.metrics.connectionStatus = 'online'
     this.updateStatus()
   }
@@ -1196,7 +1196,7 @@ export class NetworkStatusMonitor {
   /**
    * Handle offline event
    */
-  private handleOffline = (): void => {
+  handleOffline = (): void => {
     this.metrics.connectionStatus = 'offline'
     this.updateStatus()
   }
@@ -1204,7 +1204,7 @@ export class NetworkStatusMonitor {
   /**
    * Handle connection change
    */
-  private handleConnectionChange = (): void => {
+  handleConnectionChange = (): void => {
     if ('connection' in navigator) {
       const connection = (navigator as any).connection
       if (connection.downlink < 1) {
@@ -1219,7 +1219,7 @@ export class NetworkStatusMonitor {
   /**
    * Update status and notify listeners
    */
-  private updateStatus(): void {
+  updateStatus(): void {
     this.metrics.lastUpdated = Date.now()
     this.listeners.forEach(callback => {
       try {

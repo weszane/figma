@@ -582,7 +582,7 @@ import { DialogTitle, DialogArrow, DialogActionStrip, DialogBody, DialogCustomFo
 import { StyleType, mapTypeToStyleKey } from '../figma_app/276332';
 import { DesignToolType } from '../figma_app/277543';
 import { useSubscription } from '../figma_app/288654';
-import { C_ as _$$C_ } from '../figma_app/290668';
+import { useFocusArea } from '../figma_app/290668';
 import { useMakeEmptyStateRefreshExperiment } from '../figma_app/297957';
 import { C9 as _$$C2, f6 as _$$f5, gz as _$$gz, pO as _$$pO2, tq as _$$tq, vD as _$$vD, wE as _$$wE, yj as _$$yj, I4, qe, XW } from '../figma_app/302802';
 import { p as _$$p0 } from '../figma_app/304289';
@@ -775,7 +775,7 @@ import { wh as _$$wh2, AP, OG } from '../figma_app/876589';
 import { createRecordingCallback, generateRecordingKey, SKIP_RECORDING, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
 import { w as _$$w7 } from '../figma_app/883622';
 import { handleKeyboardEventByState, KeyboardEventResponse } from '../figma_app/896988';
-import { isInteractionPathCheck, PN } from '../figma_app/897289';
+import { isInteractionPathCheck, isInteractionOrEvalMode } from '../figma_app/897289';
 import { i as _$$i8 } from '../figma_app/901786';
 import { trackDefinedFileEventWithStore, trackFileEventWithStore, trackFileEventWithUser } from '../figma_app/901889';
 import { $D as _$$$D, up as _$$up, HB, MT } from '../figma_app/903209';
@@ -1456,7 +1456,7 @@ function tz() {
   let f = useAtomWithSubscription(_$$wg);
   let _ = useAtomWithSubscription(Bu);
   let b = useRef(null);
-  _$$C_(b, p);
+  useFocusArea(b, p);
   let y = AE();
   let v = _$$uh();
   let j = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
@@ -6469,7 +6469,7 @@ async function oh(e, t, i) {
             error: 1
           };
         }
-      } catch {}
+      } catch { }
       return {
         success: !1,
         error: 3
@@ -9934,7 +9934,7 @@ function cm({
       return n;
     }
   }, [s.faviconID]);
-  useEffect(() => {}, [s.faviconID]);
+  useEffect(() => { }, [s.faviconID]);
   return jsx('div', {
     className: 'x1dc814f x1ff1495',
     children: jsx(d8, {
@@ -10666,7 +10666,7 @@ ${p},
   {
       "name": "${t}",
       "version": "0.1.0",
-      "private": true,
+      "": true,
       "dependencies": {
 ${x}
       },
@@ -13172,7 +13172,7 @@ async function xw(e, t, i) {
       });
       await navigator.clipboard.write([i]);
       a();
-    } catch (e) {}
+    } catch (e) { }
   }
 }
 async function xS(e, t) {
@@ -13619,7 +13619,7 @@ let xE = memo(({
       });
     }
   }, [e]);
-  let E = useCallback(e => {}, []);
+  let E = useCallback(e => { }, []);
   useEffect(() => {
     S(i.current?.api, u);
   }, [u, S]);
@@ -14787,7 +14787,7 @@ function mv({
           ...Object.fromEntries(Object.entries(e).filter(([e]) => !n[e])),
           ...l
         }));
-      } catch (e) {} finally {
+      } catch (e) { } finally {
         b.current = !1;
       }
     }, _), b.current = !0) : (k(n), m(l)));
@@ -16178,7 +16178,7 @@ let hd = registerModal(e => {
                 }));
               }
             }) : jsx(ho, {
-              onImportFailure: () => {},
+              onImportFailure: () => { },
               onImportSuccess: e => {
                 r(e);
                 d(e.name);
@@ -16721,7 +16721,7 @@ function hb() {
       g(l);
       f(e => new Set(e).add(l));
       let a = (await hg(t)).getReader();
-      for (h(!1);;) {
+      for (h(!1); ;) {
         let {
           done,
           value
@@ -17251,7 +17251,7 @@ function h0(e) {
         deleteItem: () => {
           _$$l.user('delete-code-component', () => {
             let t = getSingletonSceneGraph().get(e);
-            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e);else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid);else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid);else throw new Error(`Invalid node type for deletion: ${t?.type}`);
+            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e); else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid); else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid); else throw new Error(`Invalid node type for deletion: ${t?.type}`);
             fullscreenValue.triggerAction('commit');
           });
         },
@@ -20898,8 +20898,8 @@ async function _T({
   ignoreKnown: e = !1,
   widths: t
 } = {
-  ignoreKnown: !1
-}) {
+    ignoreKnown: !1
+  }) {
   _S();
   let i = _C();
   if (!i.length) throw new Error('No breakpoint frames in selection');
@@ -21359,7 +21359,7 @@ let _q = e => {
   for (let t of e.directlySelectedNodes) {
     for (; t;) {
       if (t.isBreakpointFrame || t.isResponsiveSet) return t;
-      if (t.parentNode) t = t.parentNode;else break;
+      if (t.parentNode) t = t.parentNode; else break;
     }
   }
 };
@@ -21392,7 +21392,7 @@ function _X({
     let l = getFileTypePx();
     let [s, r] = useState(() => _r(windowInnerWidth, e.x));
     let [o, d] = useState(() => _o(windowInnerHeight, l, e.y));
-    let c = PN() ? 100 : t.x;
+    let c = isInteractionOrEvalMode() ? 100 : t.x;
     let [u, p] = useState(new Point(100, 100));
     let x = useCallback(e => {
       let t = _r(windowInnerWidth, e);
@@ -23235,7 +23235,7 @@ function ve({
     })
   });
 }
-class vt extends _$$c$6 {}
+class vt extends _$$c$6 { }
 function vs({
   directManipulationEditor: e,
   classNameEditingController: t,
@@ -23501,12 +23501,12 @@ let vu = memo(e => {
       message: t,
       error: !0,
       button: {
-        action: () => {},
+        action: () => { },
         text: getI18nString('figmake.refresh')
       }
     }));
   }, [n]);
-  let o = useMemo(() => new _$$q0(t, e => {}, r), [t, r]);
+  let o = useMemo(() => new _$$q0(t, e => { }, r), [t, r]);
   let d = _$$lj(t);
   return jsxs(Fragment, {
     children: [jsx(yZ, {

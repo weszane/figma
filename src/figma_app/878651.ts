@@ -378,7 +378,7 @@ export function $$eb5({
           }));
         }
       }
-    })));else {
+    }))); else {
       if (!m) {
         if (isMobileUA) {
           window.location.href = "/login";
@@ -413,7 +413,7 @@ export function $$eb5({
         children: [jsx(SvgComponent, {
           className: hz,
           svg: _$$A4
-        }), renderI18nText("community.cards.private")]
+        }), renderI18nText("community.cards.")]
       }), jsxs("div", {
         className: _$$y,
         children: [h && e_(e.comments_setting) && jsx(eh, {

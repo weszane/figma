@@ -20,8 +20,8 @@ interface RenderListByChunksState {
 
 export class RenderListByChunks extends Component<RenderListByChunksProps, RenderListByChunksState> {
   static displayName = 'RenderListByChunks'
-  private frameRequest: number | null = null
-  private calledOnAllChunksRendered = false
+  frameRequest: number | null = null
+  calledOnAllChunksRendered = false
 
   constructor(props: RenderListByChunksProps) {
     super(props)
@@ -55,7 +55,7 @@ export class RenderListByChunks extends Component<RenderListByChunksProps, Rende
     }
   }
 
-  private tick = (): void => {
+  tick = (): void => {
     this.setState(prevState => ({
       maxIndex: prevState.maxIndex + this.props.chunkSize,
     }), () => {
@@ -64,7 +64,7 @@ export class RenderListByChunks extends Component<RenderListByChunksProps, Rende
     })
   }
 
-  private tickIfNeeded = (): void => {
+  tickIfNeeded = (): void => {
     if (!this.frameRequest) {
       if (Children.count(this.props.children) <= this.state.maxIndex) {
         if (this.props.onAllChunksRendered && !this.calledOnAllChunksRendered) {

@@ -1189,7 +1189,7 @@ function tS({
         icon: jsx(_$$$4, {}),
         roleToPublishAs: PublisherType.ORG,
         title: l.name,
-        subtitle: getI18nString("community.cards.private")
+        subtitle: getI18nString("community.cards.")
       }), jsx(tw, {
         icon: jsx(_$$Y, {}),
         roleToPublishAs: PublisherType.PUBLIC,
@@ -1709,7 +1709,7 @@ let id = {
     fetchInitialValue: ({
       existingResourceContent: e
     }) => e && getCurrentPluginVersion(e)?.tagline || "",
-    validate: ({}, e) => {
+    validate: ({ }, e) => {
       let t = trimOrEmpty(e);
       return 0 === t.length ? [{
         key: "TAGLINE_EMPTY",
@@ -1742,7 +1742,7 @@ let id = {
       }
     },
     canSet: () => !0,
-    validate: ({}, e) => {
+    validate: ({ }, e) => {
       if (!e) return [{
         key: "ICON_MISSING",
         data: {}
@@ -1817,7 +1817,7 @@ let id = {
       } = await e;
       return existingStatus ? securityForm : null;
     },
-    validate: ({}, e) => {
+    validate: ({ }, e) => {
       if (!e) return;
       let t = _$$ir(e.questions);
       if (t) return [{
@@ -1834,7 +1834,7 @@ let id = {
     fetchInitialValue: ({
       localExtension: e
     }) => !!e,
-    validate: () => {},
+    validate: () => { },
     canSet: ({
       localExtension: e,
       existingExtension: t
@@ -1873,7 +1873,7 @@ let id = {
     fetchInitialValue: ({
       existingExtension: e
     }) => !!e?.monetized_resource_metadata?.is_subscription,
-    validate: () => {},
+    validate: () => { },
     canSet: ({
       existingExtension: e,
       isWidget: t
@@ -1890,7 +1890,7 @@ let id = {
         discountPercentage: t?.annual_discount_percentage
       };
     },
-    validate: ({}, {
+    validate: ({ }, {
       isActive: e,
       discountPercentage: t
     }) => {
@@ -1950,7 +1950,7 @@ let id = {
         is_public: !0
       };
     },
-    validate: ({}, e) => {
+    validate: ({ }, e) => {
       if (!Q4(e)) return [{
         key: "INVALID_PUBLISH_ROLE",
         data: {

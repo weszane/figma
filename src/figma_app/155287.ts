@@ -351,14 +351,14 @@ export function hasLocalFileId(obj: any): boolean {
 }
 
 /**
- * Checks if plugin is private and not local (original: $$J26)
+ * Checks if plugin is  and not local (original: $$J26)
  */
 export function isPrivatePlugin(obj: any): boolean {
   return !hasLocalFileId(obj) && !!obj.is_private;
 }
 
 /**
- * Checks if plugin is not local and not private (original: $$Z9)
+ * Checks if plugin is not local and not  (original: $$Z9)
  */
 export function isPublicPlugin(obj: any): boolean {
   return !hasLocalFileId(obj) && !isPrivatePlugin(obj);

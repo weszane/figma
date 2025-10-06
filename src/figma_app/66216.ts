@@ -20,9 +20,9 @@ export interface RolesParams {
  * RoleService provides methods to validate and fetch role-related data.
  */
 export class RoleService {
-  private fileUsersSchemaValidator = createNoOpValidator()
-  private teamSchemaValidator = createNoOpValidator()
-  private rolesSchemaValidator = createNoOpValidator()
+  fileUsersSchemaValidator = createNoOpValidator()
+  teamSchemaValidator = createNoOpValidator()
+  rolesSchemaValidator = createNoOpValidator()
 
   /**
    * Validates and fetches file users.

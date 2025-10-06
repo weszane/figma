@@ -34,7 +34,7 @@ class I18nState {
     missing: string[];
   };
   /** Current pseudo locale, if any */
-  private _pseudoLocale?: string;
+  _pseudoLocale?: string;
 
   /**
    * Constructs the I18nState.

@@ -100,8 +100,8 @@ export class StrokeNodeWrapper {
  */
 export class FixedLayoutNodeWrapper {
   readonly node: any
-  private readonly _width: number
-  private readonly _height: number
+  readonly _width: number
+  readonly _height: number
 
   constructor(node: any, width: number, height: number) {
     this.node = node
@@ -199,7 +199,7 @@ export class FixedLayoutNodeWrapper {
  * Original name: $$a2
  */
 export class AutoLayoutNodeWrapper {
-  private readonly node: any
+  readonly node: any
 
   constructor(node: any) {
     this.node = node

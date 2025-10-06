@@ -89,7 +89,7 @@ import { getThemePreference } from '../905/640017';
 import { B7, Bb, zd } from '../905/651696';
 import { getResourceDataOrFallback } from '../905/663269';
 import { L as _$$L3 } from '../905/671373';
-import { f as _$$f2, h as _$$h3 } from '../905/693155';
+import { trackAccessibilityEvent, AccessibilityActionType } from '../905/693155';
 import { e0 as _$$e } from '../905/696396';
 import { L as _$$L } from '../905/704296';
 import { S3 } from '../905/708054';
@@ -4511,7 +4511,7 @@ function rF({
           onChange: (e, {
             source: i
           }) => {
-            _$$f2(e ? _$$h3.TOGGLE_ENHANCED_CONTRAST_ON : _$$h3.TOGGLE_ENHANCED_CONTRAST_OFF, {
+            trackAccessibilityEvent(e ? AccessibilityActionType.TOGGLE_ENHANCED_CONTRAST_ON : AccessibilityActionType.TOGGLE_ENHANCED_CONTRAST_OFF, {
               isMouseEvent: i === 'mouse'
             });
             t(fK({

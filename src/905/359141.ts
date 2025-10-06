@@ -19,7 +19,7 @@ import { TrackedLink } from '../905/160095';
 import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { useSingleEffect } from '../905/791079';
-import { c as _$$c2 } from '../905/210851';
+import { selectFileInfo } from '../905/210851';
 import { libraryKeyMapAtom } from '../905/221694';
 import { V as _$$V2 } from '../905/223767';
 import { B as _$$B } from '../905/224000';
@@ -3069,7 +3069,7 @@ function ny({
     return e?.metadata;
   }();
   let g = Xr(wy);
-  let _ = useSelector(_$$c2);
+  let _ = useSelector(selectFileInfo);
   let A = useAtomWithSubscription(openFileAtom);
   let y = A?.parentOrgId?.toString();
   let b = _.file_team_id?.toString();

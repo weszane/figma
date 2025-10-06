@@ -13,7 +13,7 @@ import { hY } from "../figma_app/770088";
 import { y as _$$y } from "../figma_app/705249";
 import { j, N as _$$N } from "../figma_app/261650";
 import { fullscreenValue } from "../figma_app/455680";
-import { B_, mo, PN, $r } from "../figma_app/141088";
+import { addBoundsChangeListener, removeBoundsChangeListener, watchBoundsForNodes, watchBoundsForStablePaths } from "../figma_app/141088";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { s as _$$s } from "../905/518538";
 import { getCurrentPage } from "../figma_app/202626";
@@ -160,9 +160,9 @@ export function $$L0() {
         let e = () => {
           t(new Date());
         };
-        B_(e);
+        addBoundsChangeListener(e);
         return () => {
-          mo(e);
+          removeBoundsChangeListener(e);
         };
       }
     }
@@ -170,10 +170,10 @@ export function $$L0() {
   let r = useCallback(e => {
     fullscreenValue?.isReady() && (C ? EE("comments", e, e => {
       t(new Date());
-    }) : PN(new Set(e)));
+    }) : watchBoundsForNodes(new Set(e)));
   }, []);
   let i = useCallback(e => {
-    fullscreenValue?.isReady() && $r(new Set(e));
+    fullscreenValue?.isReady() && watchBoundsForStablePaths(new Set(e));
   }, []);
   return {
     anchorPositions: useCallback(memoizeByArgs(t => fullscreenValue?.isReady() && e ? Fullscreen.getCanvasSpaceCommentLocations(t) : {}), [e]),

@@ -58,15 +58,15 @@ let reactionCounter = 0;
  * Original class name: p
  */
 class MultiplayerSessionManager {
-  private _currentSessionId: number;
-  private _infoBySessionId: StatePublisher;
-  private _voiceMetadataBySessionId: ComparableStatePublisher;
-  private _reactionsBySessionId: StatePublisher;
-  private _reactionTimeout: number;
-  private _onReactionsUpdated?: () => void;
-  private _onInfoBySessionIdUpdated?: () => void;
-  private _onOtherUserMouseMoved?: () => void;
-  private _cursorChatLoggerTimerID: ReturnType<typeof setTimeout> | null;
+  _currentSessionId: number;
+  _infoBySessionId: StatePublisher;
+  _voiceMetadataBySessionId: ComparableStatePublisher;
+  _reactionsBySessionId: StatePublisher;
+  _reactionTimeout: number;
+  _onReactionsUpdated?: () => void;
+  _onInfoBySessionIdUpdated?: () => void;
+  _onOtherUserMouseMoved?: () => void;
+  _cursorChatLoggerTimerID: ReturnType<typeof setTimeout> | null;
   constructor() {
     this._currentSessionId = -1;
     this._infoBySessionId = new StatePublisher({});

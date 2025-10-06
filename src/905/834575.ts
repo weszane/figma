@@ -9,20 +9,20 @@ type Validates = ReturnType<typeof createNoOpValidator>
  * Handles team-related API operations with schema validation.
  */
 export class TeamAPIClient {
-  private MembersSchemaValidator: Validates
-  private TeamUsersSchemaValidator: Validates
-  private TeamSchemaValidator: Validates
-  private DeletedSchemaValidator: Validates
-  private TeamNameSchemaValidator: Validates
-  private SubscriptionStatusSchemaValidator: Validates
-  private UsersLastActiveSchemaValidator: Validates
-  private FoldersSchemaValidator: Validates
-  private TeamAdminsSchemaValidator: Validates
-  private TeamDeletionFileCountSchemaValidator: Validates
-  private HasPublishedSiteSchemaValidator: Validates
-  private TeamUserInvariantBackfillStatsSchemaValidator: Validates
-  private TeamRoleRequestSchemaValidator: Validates
-  private showDanglingTeamUserBackfillBannerSchemaValidator: Validates
+  MembersSchemaValidator: Validates
+  TeamUsersSchemaValidator: Validates
+  TeamSchemaValidator: Validates
+  DeletedSchemaValidator: Validates
+  TeamNameSchemaValidator: Validates
+  SubscriptionStatusSchemaValidator: Validates
+  UsersLastActiveSchemaValidator: Validates
+  FoldersSchemaValidator: Validates
+  TeamAdminsSchemaValidator: Validates
+  TeamDeletionFileCountSchemaValidator: Validates
+  HasPublishedSiteSchemaValidator: Validates
+  TeamUserInvariantBackfillStatsSchemaValidator: Validates
+  TeamRoleRequestSchemaValidator: Validates
+  showDanglingTeamUserBackfillBannerSchemaValidator: Validates
 
   constructor() {
     this.MembersSchemaValidator = createNoOpValidator()

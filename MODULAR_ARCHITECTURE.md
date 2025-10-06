@@ -272,16 +272,16 @@ interface APIContext {
 ```typescript
 class au {
   // Module Properties
-  private coreAPI: CoreAPIModule
-  private buzzAPI: BuzzAPIModule
-  private uiAPI: UIAPIModule
+   coreAPI: CoreAPIModule
+   buzzAPI: BuzzAPIModule
+   uiAPI: UIAPIModule
   // ... 27 total modules
   
   constructor(options: any) {
     this.initializeModules()
   }
   
-  private initializeModules() {
+   initializeModules() {
     const context: APIContext = this.createAPIContext()
     
     // Initialize all 27 modules with shared context
@@ -343,7 +343,7 @@ class au {
 
 ```typescript
 class BaseAPIModule {
-  private vmHandles = new Map<string, any>()
+   vmHandles = new Map<string, any>()
   
   protected getMemoizedVMHandle(key: string, factory: () => any): any {
     if (!this.vmHandles.has(key)) {

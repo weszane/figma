@@ -147,7 +147,7 @@ export class PluginUIManager {
       }> = {};
       try {
         positions = JSON.parse(storage.getItem(PLUGIN_POSITIONS_KEY) || '');
-      } catch {}
+      } catch { }
       if (!positions || typeof positions !== 'object') positions = {};
       positions[this.pluginID] = {
         x: pos.x,
@@ -221,7 +221,7 @@ export class PluginUIManager {
       try {
         const pos = JSON.parse(storage.getItem(PLUGIN_POSITIONS_KEY) || '')[this.pluginID];
         return new Point(clamp(pos.x, 0, window.innerWidth - this.iframeWidth), clamp(pos.y, 0, window.innerHeight - this.iframeHeight));
-      } catch {}
+      } catch { }
     }
     return null;
   }
@@ -388,7 +388,7 @@ export class PluginUIManager {
    * Destroy the iframe and clean up state.
    * (Original: _destroyIframe)
    */
-  private _destroyIframe(): void {
+  _destroyIframe(): void {
     this.hideIframe();
     this.innerIframeHtml = '';
     if (this.innerIframe) {
@@ -483,8 +483,8 @@ export class PluginUIManager {
    */
   getIsInsert(): boolean {
     return this.isWidget
-    // eslint-disable-next-line no-prototype-builtins
-    && this.widgetCommand?.hasOwnProperty('context') && this.widgetCommand.context === 'insert';
+      // eslint-disable-next-line no-prototype-builtins
+      && this.widgetCommand?.hasOwnProperty('context') && this.widgetCommand.context === 'insert';
   }
 
   /**
@@ -565,7 +565,7 @@ export class PluginUIManager {
       timeoutOverride: options.timeout,
       timeoutType: 'exact',
       button: options.button,
-      onDismiss: isLongTimeout ? () => {} : undefined,
+      onDismiss: isLongTimeout ? () => { } : undefined,
       onDequeue,
       error: options.error
     };
@@ -669,14 +669,14 @@ export class PluginUIManager {
  * (Original: $$O0)
  */
 export class DummyUIManager {
-  tearDown(): void {}
-  makeIframe(_e: any): void {}
+  tearDown(): void { }
+  makeIframe(_e: any): void { }
   isInnerIframeActive(): boolean {
     return false;
   }
-  destroyIframe(): void {}
-  setIframeSize(_e: any, _t: any): void {}
-  setIframePosition(_e: any, _t: any): void {}
+  destroyIframe(): void { }
+  setIframeSize(_e: any, _t: any): void { }
+  setIframePosition(_e: any, _t: any): void { }
   getIframePosition(): {
     windowSpace: Point;
     canvasSpace: Point;
@@ -686,13 +686,13 @@ export class DummyUIManager {
       canvasSpace: new Point(0, 0)
     };
   }
-  showIframe(): void {}
-  hideIframe(): void {}
-  setHideVisibleUI(_e: any): void {}
-  postMessageToIframe(_e: any, _t: any): void {}
-  showPluginVisualBell(_e: any, _t: any, _i: any): void {}
-  cancelPluginVisualBell(_e: any): void {}
-  switchContainer(_e: any): void {}
+  showIframe(): void { }
+  hideIframe(): void { }
+  setHideVisibleUI(_e: any): void { }
+  postMessageToIframe(_e: any, _t: any): void { }
+  showPluginVisualBell(_e: any, _t: any, _i: any): void { }
+  cancelPluginVisualBell(_e: any): void { }
+  switchContainer(_e: any): void { }
   get isInspectPanel(): boolean {
     return false;
   }

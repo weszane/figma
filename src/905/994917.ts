@@ -23,21 +23,21 @@ class LineBreakPosition {
 }
 
 class LineBreakIterator {
-  private string: string
-  private pos: number = 0
-  private posAdjustedForSurrogateCodePoints: number = 0
-  private hitEndOfString: boolean = false
-  private curClass: number | null = null
-  private nextClass: number | null = null
-  private LB8a: boolean = false
-  private LB21a: boolean = false
-  private LB30a: number = 0
+  string: string
+  pos: number = 0
+  posAdjustedForSurrogateCodePoints: number = 0
+  hitEndOfString: boolean = false
+  curClass: number | null = null
+  nextClass: number | null = null
+  LB8a: boolean = false
+  LB21a: boolean = false
+  LB30a: number = 0
 
   constructor(text: string) {
     this.string = text
   }
 
-  private nextCodePoint(): number {
+  nextCodePoint(): number {
     const highSurrogate = this.string.charCodeAt(this.pos++)
     const lowSurrogate = this.string.charCodeAt(this.pos)
 
@@ -49,11 +49,11 @@ class LineBreakIterator {
     return highSurrogate
   }
 
-  private nextCharClass(): number {
+  nextCharClass(): number {
     return normalizeCharClass(a.get(this.nextCodePoint()))
   }
 
-  private getSimpleBreak(): boolean | null {
+  getSimpleBreak(): boolean | null {
     switch (this.nextClass) {
       case 41: // Line break class values
         return false
@@ -69,7 +69,7 @@ class LineBreakIterator {
     return null
   }
 
-  private getPairTableBreak(previousClass: number): boolean {
+  getPairTableBreak(previousClass: number): boolean {
     let shouldBreak = false
 
     if (this.curClass !== null && this.nextClass !== null) {
@@ -187,7 +187,7 @@ function normalizeCurrentClass(charClass: number): number {
   }
 }
 
-export const LineBreakProcessor = new class {
+export const JSTextLayoutImpl = new class {
   getAllLineBreakPositions(text: string): number[] {
     const iterator = new LineBreakIterator(text)
     const positions: number[] = []
@@ -203,4 +203,4 @@ export const LineBreakProcessor = new class {
   }
 }()
 
-export const Q = LineBreakProcessor
+export const Q = JSTextLayoutImpl

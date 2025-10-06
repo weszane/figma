@@ -18,7 +18,7 @@ class LoadTimer {
   events: LoadTimerEvents = {}
 
   // Event names that this timer subscribes to
-  private static readonly SUBSCRIBED_EVENTS = [
+  static readonly SUBSCRIBED_EVENTS = [
     'applyNodeChanges',
     'multiplayerMessageSize',
     'initializePrototypeLib',
@@ -103,10 +103,10 @@ class FunctionTimer {
   meta: FunctionTimerMeta = {}
 
   // Debounced tracking function to avoid excessive analytics calls
-  private track: (data: FunctionPerformanceData) => void
+  track: (data: FunctionPerformanceData) => void
 
   // Event names that this timer subscribes to
-  private static readonly SUBSCRIBED_EVENTS = [
+  static readonly SUBSCRIBED_EVENTS = [
     'applyNodeChanges',
     'getNodeChangesForSwap',
     'multiplayerMessageSize',

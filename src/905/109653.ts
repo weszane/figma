@@ -21,7 +21,7 @@ import { T as _$$T } from "../905/943304";
 import { x as _$$x } from "../905/956141";
 import { jT } from "../905/870778";
 var d = l;
-let $$S = memo(function ({}) {
+let $$S = memo(function ({ }) {
   return jsxs("svg", {
     width: "578",
     height: "272",
@@ -245,7 +245,7 @@ function P({
       children: jsx(O, {
         header: (() => {
           let i = T(e, t);
-          return t[i] ? t[i]() : s === FPublicationStatusType.APPROVED_PUBLIC ? MY.$$public() : s === FPublicationStatusType.ORG_PRIVATE ? MY.$$private() : s && isResourcePendingPublishing({
+          return t[i] ? t[i]() : s === FPublicationStatusType.APPROVED_PUBLIC ? MY.$$public() : s === FPublicationStatusType.ORG_PRIVATE ? MY.$$() : s && isResourcePendingPublishing({
             publishing_status: s
           }) ? MY.inReview() : MY.error();
         })(),
@@ -254,7 +254,7 @@ function P({
             if (s === FPublicationStatusType.APPROVED_PUBLIC) return I_.$$public();
             if (s === FPublicationStatusType.ORG_PRIVATE && r) {
               let e = getFieldValueOrDefault(r, void 0) === ContainerTypeMap.ORG ? l : d;
-              return I_.$$private(e?.name);
+              return I_.$$(e?.name);
             }
             if (s === FPublicationStatusType.ORG_PRIVATE && a) {
               let e = l?.name || "";

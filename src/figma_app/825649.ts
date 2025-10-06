@@ -38,7 +38,7 @@ import { findFavoritedItem, isFavoritesLimitReached, sortWithPinnedItems } from 
 import { getProjectUrl } from "../figma_app/528509";
 import { fullscreenValue } from "../figma_app/455680";
 import { R6 } from "../figma_app/504823";
-import { jK, hP } from "../figma_app/829197";
+import { useUserColorProfileSubscription, mapColorSpaceToEnum } from "../figma_app/829197";
 import { isIntegrationContext } from "../905/87821";
 import { SR } from "../figma_app/852050";
 import { BI, m0 } from "../figma_app/546509";
@@ -154,8 +154,8 @@ export function $$eO1({
   let t_ = R6();
   let {
     colorProfilePreference
-  } = jK();
-  let tm = hP(colorProfilePreference);
+  } = useUserColorProfileSubscription();
+  let tm = mapColorSpaceToEnum(colorProfilePreference);
   let tg = _$$h.useTrackingContext({
     trigger: UpsellModalType.FILE_DUPLICATE
   });

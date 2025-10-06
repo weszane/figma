@@ -98,8 +98,8 @@ export function $$I12({
         if (libraryKey === l) {
           if (pageId === PRIVATE_TYPE) {
             return {
-              componentSectionNameForTracking: "Local private components",
-              templateSectionNameForTracking: "Local private templates",
+              componentSectionNameForTracking: "Local  components",
+              templateSectionNameForTracking: "Local  templates",
             }
           }
           return {
@@ -130,9 +130,9 @@ export function $$S11(e, t) {
   let r = [...e]
   t && NX(t)
     ? k9({
-        libraries: r,
-        approvedLibraryKeysByResourceType: t,
-      })
+      libraries: r,
+      approvedLibraryKeysByResourceType: t,
+    })
     : sortByPropertyWithOptions(r, "name")
   return r
 }
@@ -153,15 +153,15 @@ export function $$x1(e, {
   let r = e.numComponents + e.numStateGroups
   return t || r > 0
     ? {
-        name: e.name,
-        libraryKey: e.libraryKey,
-        numComponents: r,
-        numTemplates: 0,
-        thumbnailUrl: e.thumbnailUrlOverride ?? e.thumbnailUrl,
-        thumbnailShouldCover: !!e.thumbnailGuid || e.libraryType === "community",
-        type: ModeType.DESIGN,
-        libraryType: e.libraryType,
-      }
+      name: e.name,
+      libraryKey: e.libraryKey,
+      numComponents: r,
+      numTemplates: 0,
+      thumbnailUrl: e.thumbnailUrlOverride ?? e.thumbnailUrl,
+      thumbnailShouldCover: !!e.thumbnailGuid || e.libraryType === "community",
+      type: ModeType.DESIGN,
+      libraryType: e.libraryType,
+    }
     : null
 }
 export function $$N10(e, t, r = 10, i = 2, a = 30) {
@@ -232,21 +232,21 @@ export function $$L4(e) {
     })
     e.source !== AUTO_SUGGEST_EVENT_PREFIX
       ? analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
-          ..._,
-          ...h,
-          assetType: type,
-          position: sectionPosition,
-          reciprocalRank: Et(sectionPosition) ? 1 / (1 + sectionPosition) : void 0,
-          query: searchQuery,
-          sessionId: searchSessionId,
-          entryPoint: "assets-panel",
-          componentSuggestionSessionId: s,
-        })
+        ..._,
+        ...h,
+        assetType: type,
+        position: sectionPosition,
+        reciprocalRank: Et(sectionPosition) ? 1 / (1 + sectionPosition) : void 0,
+        query: searchQuery,
+        sessionId: searchSessionId,
+        entryPoint: "assets-panel",
+        componentSuggestionSessionId: s,
+      })
       : trackComponentInserted({
-          assetType: type,
-          assetKey: _.assetKey,
-          libraryKey: _.assetLibraryKey,
-        })
+        assetType: type,
+        assetKey: _.assetKey,
+        libraryKey: _.assetLibraryKey,
+      })
   }, [e, t, i, r, s])
 }
 export const LH = $$A0

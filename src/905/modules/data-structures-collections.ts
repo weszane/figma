@@ -82,10 +82,10 @@ export type CollectionType = 'ARRAY' | 'MAP' | 'SET' | 'QUEUE' | 'STACK' | 'TREE
  * Original: HashMap from 543209.ts
  */
 export class HashMap<K, V> {
-  private _buckets: Map<number, HashMapEntry<K, V>[]>
-  private _hash: (key: K) => number
-  private _equals: (a: K, b: K) => boolean
-  private _size: number = 0
+  _buckets: Map<number, HashMapEntry<K, V>[]>
+  _hash: (key: K) => number
+  _equals: (a: K, b: K) => boolean
+  _size: number = 0
 
   /**
    * Constructor
@@ -104,7 +104,7 @@ export class HashMap<K, V> {
   get(key: K, defaultValue: V): V {
     const hash = this._hash(key)
     const bucket = this._buckets.get(hash)
-    
+
     if (bucket !== undefined) {
       for (const entry of bucket) {
         if (this._equals(key, entry.key)) {
@@ -112,7 +112,7 @@ export class HashMap<K, V> {
         }
       }
     }
-    
+
     return defaultValue
   }
 
@@ -123,12 +123,12 @@ export class HashMap<K, V> {
   set(key: K, value: V): void {
     const hash = this._hash(key)
     let bucket = this._buckets.get(hash)
-    
+
     if (bucket === undefined) {
       bucket = []
       this._buckets.set(hash, bucket)
     }
-    
+
     // Check if key already exists
     for (let i = 0; i < bucket.length; i++) {
       if (this._equals(key, bucket[i].key)) {
@@ -136,7 +136,7 @@ export class HashMap<K, V> {
         return
       }
     }
-    
+
     // Add new entry
     bucket.push({ key, value })
     this._size++
@@ -148,7 +148,7 @@ export class HashMap<K, V> {
   has(key: K): boolean {
     const hash = this._hash(key)
     const bucket = this._buckets.get(hash)
-    
+
     if (bucket !== undefined) {
       for (const entry of bucket) {
         if (this._equals(key, entry.key)) {
@@ -156,7 +156,7 @@ export class HashMap<K, V> {
         }
       }
     }
-    
+
     return false
   }
 
@@ -166,22 +166,22 @@ export class HashMap<K, V> {
   delete(key: K): boolean {
     const hash = this._hash(key)
     const bucket = this._buckets.get(hash)
-    
+
     if (bucket !== undefined) {
       for (let i = 0; i < bucket.length; i++) {
         if (this._equals(key, bucket[i].key)) {
           bucket.splice(i, 1)
           this._size--
-          
+
           if (bucket.length === 0) {
             this._buckets.delete(hash)
           }
-          
+
           return true
         }
       }
     }
-    
+
     return false
   }
 
@@ -256,10 +256,10 @@ export class HashMap<K, V> {
  * Original: Memory functionality from 684180.ts and related files
  */
 export class MemoryManager {
-  private memoryUsageCallbacks: Set<(stats: MemoryUsageStats) => void> = new Set()
-  private monitoringInterval: NodeJS.Timeout | null = null
-  private memoryThreshold: number = 0.8 // 80% threshold
-  private lastMemoryCheck: number = 0
+  memoryUsageCallbacks: Set<(stats: MemoryUsageStats) => void> = new Set()
+  monitoringInterval: NodeJS.Timeout | null = null
+  memoryThreshold: number = 0.8 // 80% threshold
+  lastMemoryCheck: number = 0
 
   /**
    * Get current memory usage
@@ -301,11 +301,11 @@ export class MemoryManager {
    */
   startMonitoring(intervalMs: number = 5000): void {
     this.stopMonitoring()
-    
+
     this.monitoringInterval = setInterval(() => {
       const stats = this.getMemoryUsage()
       this.lastMemoryCheck = Date.now()
-      
+
       // Notify callbacks
       this.memoryUsageCallbacks.forEach(callback => {
         try {
@@ -314,7 +314,7 @@ export class MemoryManager {
           console.warn('Memory usage callback error:', error)
         }
       })
-      
+
       // Check thresholds
       this.checkMemoryThresholds(stats)
     }, intervalMs)
@@ -333,9 +333,9 @@ export class MemoryManager {
   /**
    * Check memory thresholds
    */
-  private checkMemoryThresholds(stats: MemoryUsageStats): void {
+  checkMemoryThresholds(stats: MemoryUsageStats): void {
     const usageRatio = stats.totalMemory > 0 ? stats.usedMemory / stats.totalMemory : 0
-    
+
     if (usageRatio > this.memoryThreshold) {
       this.triggerMemoryWarning(stats, usageRatio)
     }
@@ -344,9 +344,9 @@ export class MemoryManager {
   /**
    * Trigger memory warning
    */
-  private triggerMemoryWarning(stats: MemoryUsageStats, usageRatio: number): void {
+  triggerMemoryWarning(stats: MemoryUsageStats, usageRatio: number): void {
     console.warn(`Memory usage high: ${(usageRatio * 100).toFixed(1)}%`, stats)
-    
+
     // Dispatch custom event
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('memoryWarning', {
@@ -393,18 +393,18 @@ export class MemoryManager {
   getMemoryRecommendations(stats: MemoryUsageStats): string[] {
     const recommendations: string[] = []
     const usageRatio = stats.totalMemory > 0 ? stats.usedMemory / stats.totalMemory : 0
-    
+
     if (usageRatio > 0.8) {
       recommendations.push('Consider breaking large files into smaller ones')
       recommendations.push('Clean up unused layers and components')
       recommendations.push('Flatten complex shapes when possible')
       recommendations.push('Trim unused component variants')
     }
-    
+
     if (stats.arrayBuffers > 100 * 1024 * 1024) { // 100MB
       recommendations.push('Large ArrayBuffer usage detected - check for memory leaks')
     }
-    
+
     return recommendations
   }
 }
@@ -414,11 +414,11 @@ export class MemoryManager {
  * Original: Cache functionality from various files
  */
 export class LRUCache<T> {
-  private cache: Map<string, CacheEntry<T>> = new Map()
-  private accessOrder: string[] = []
-  private maxSize: number
-  private maxAge: number
-  private currentSize: number = 0
+  cache: Map<string, CacheEntry<T>> = new Map()
+  accessOrder: string[] = []
+  maxSize: number
+  maxAge: number
+  currentSize: number = 0
 
   constructor(maxSize: number = 1000, maxAge: number = 5 * 60 * 1000) { // 5 minutes default
     this.maxSize = maxSize
@@ -430,21 +430,21 @@ export class LRUCache<T> {
    */
   get(key: string): T | undefined {
     const entry = this.cache.get(key)
-    
+
     if (!entry) {
       return undefined
     }
-    
+
     // Check if expired
     if (Date.now() - entry.timestamp > this.maxAge) {
       this.delete(key)
       return undefined
     }
-    
+
     // Update access
     entry.accessCount++
     this.updateAccessOrder(key)
-    
+
     return entry.value
   }
 
@@ -454,7 +454,7 @@ export class LRUCache<T> {
   set(key: string, value: T, size: number = 1): void {
     // Remove existing entry if it exists
     this.delete(key)
-    
+
     // Create new entry
     const entry: CacheEntry<T> = {
       key,
@@ -463,11 +463,11 @@ export class LRUCache<T> {
       accessCount: 1,
       size
     }
-    
+
     this.cache.set(key, entry)
     this.accessOrder.push(key)
     this.currentSize += size
-    
+
     // Evict if necessary
     this.evictIfNecessary()
   }
@@ -480,15 +480,15 @@ export class LRUCache<T> {
     if (!entry) {
       return false
     }
-    
+
     this.cache.delete(key)
     this.currentSize -= entry.size
-    
+
     const index = this.accessOrder.indexOf(key)
     if (index > -1) {
       this.accessOrder.splice(index, 1)
     }
-    
+
     return true
   }
 
@@ -507,14 +507,14 @@ export class LRUCache<T> {
   getStats(): { size: number; count: number; hitRate: number } {
     let totalAccess = 0
     let totalHits = 0
-    
+
     for (const entry of this.cache.values()) {
       totalAccess += entry.accessCount
       if (entry.accessCount > 1) {
         totalHits += entry.accessCount - 1
       }
     }
-    
+
     return {
       size: this.currentSize,
       count: this.cache.size,
@@ -525,7 +525,7 @@ export class LRUCache<T> {
   /**
    * Update access order
    */
-  private updateAccessOrder(key: string): void {
+  updateAccessOrder(key: string): void {
     const index = this.accessOrder.indexOf(key)
     if (index > -1) {
       this.accessOrder.splice(index, 1)
@@ -536,12 +536,12 @@ export class LRUCache<T> {
   /**
    * Evict entries if necessary
    */
-  private evictIfNecessary(): void {
+  evictIfNecessary(): void {
     // Evict by count
     while (this.cache.size > this.maxSize) {
       this.evictLeastRecentlyUsed()
     }
-    
+
     // Evict expired entries
     this.evictExpired()
   }
@@ -549,7 +549,7 @@ export class LRUCache<T> {
   /**
    * Evict least recently used entry
    */
-  private evictLeastRecentlyUsed(): void {
+  evictLeastRecentlyUsed(): void {
     if (this.accessOrder.length > 0) {
       const oldestKey = this.accessOrder[0]
       this.delete(oldestKey)
@@ -559,16 +559,16 @@ export class LRUCache<T> {
   /**
    * Evict expired entries
    */
-  private evictExpired(): void {
+  evictExpired(): void {
     const now = Date.now()
     const expiredKeys: string[] = []
-    
+
     for (const [key, entry] of this.cache.entries()) {
       if (now - entry.timestamp > this.maxAge) {
         expiredKeys.push(key)
       }
     }
-    
+
     expiredKeys.forEach(key => this.delete(key))
   }
 }
@@ -583,16 +583,16 @@ export class CollectionUtils {
    */
   static sort<T>(array: T[], options: SortingOptions<T>): T[] {
     const { compareFn, direction, field, stable = true } = options
-    
+
     let compareFunction: (a: T, b: T) => number
-    
+
     if (compareFn) {
       compareFunction = compareFn
     } else if (field) {
       compareFunction = (a: T, b: T) => {
         const aVal = a[field]
         const bVal = b[field]
-        
+
         if (aVal < bVal) return -1
         if (aVal > bVal) return 1
         return 0
@@ -604,12 +604,12 @@ export class CollectionUtils {
         return 0
       }
     }
-    
+
     // Apply direction
-    const finalCompareFn = direction === 'desc' 
+    const finalCompareFn = direction === 'desc'
       ? (a: T, b: T) => -compareFunction(a, b)
       : compareFunction
-    
+
     // Use stable sort if requested
     if (stable) {
       return array
@@ -629,17 +629,17 @@ export class CollectionUtils {
    */
   static filter<T>(array: T[], options: FilterOptions<T>): T[] {
     const { predicate, limit, offset = 0 } = options
-    
+
     let result = array.filter(predicate)
-    
+
     if (offset > 0) {
       result = result.slice(offset)
     }
-    
+
     if (limit !== undefined && limit > 0) {
       result = result.slice(0, limit)
     }
-    
+
     return result
   }
 
@@ -647,11 +647,11 @@ export class CollectionUtils {
    * Group array by key
    */
   static groupBy<T, K extends string | number | symbol>(
-    array: T[], 
+    array: T[],
     keyFn: (item: T) => K
   ): Record<K, T[]> {
     const groups = {} as Record<K, T[]>
-    
+
     for (const item of array) {
       const key = keyFn(item)
       if (!groups[key]) {
@@ -659,7 +659,7 @@ export class CollectionUtils {
       }
       groups[key].push(item)
     }
-    
+
     return groups
   }
 
@@ -670,10 +670,10 @@ export class CollectionUtils {
     if (!keyFn) {
       return [...new Set(array)]
     }
-    
+
     const seen = new Set<string>()
     const result: T[] = []
-    
+
     for (const item of array) {
       const key = keyFn(item)
       if (!seen.has(key)) {
@@ -681,7 +681,7 @@ export class CollectionUtils {
         result.push(item)
       }
     }
-    
+
     return result
   }
 
@@ -690,11 +690,11 @@ export class CollectionUtils {
    */
   static chunk<T>(array: T[], size: number): T[][] {
     const chunks: T[][] = []
-    
+
     for (let i = 0; i < array.length; i += size) {
       chunks.push(array.slice(i, i + size))
     }
-    
+
     return chunks
   }
 
@@ -703,7 +703,7 @@ export class CollectionUtils {
    */
   static flatten<T>(array: (T | T[])[]): T[] {
     const result: T[] = []
-    
+
     for (const item of array) {
       if (Array.isArray(item)) {
         result.push(...this.flatten(item))
@@ -711,7 +711,7 @@ export class CollectionUtils {
         result.push(item)
       }
     }
-    
+
     return result
   }
 
@@ -721,9 +721,9 @@ export class CollectionUtils {
   static intersection<T>(...arrays: T[][]): T[] {
     if (arrays.length === 0) return []
     if (arrays.length === 1) return [...arrays[0]]
-    
+
     const [first, ...rest] = arrays
-    
+
     return first.filter(item => {
       return rest.every(arr => arr.includes(item))
     })
@@ -751,9 +751,9 @@ export class CollectionUtils {
  * Original: Buffer handling from 548559.ts
  */
 export class BufferManager {
-  private buffers: Map<string, BufferInfo> = new Map()
-  private totalSize: number = 0
-  private maxSize: number = 100 * 1024 * 1024 // 100MB default
+  buffers: Map<string, BufferInfo> = new Map()
+  totalSize: number = 0
+  maxSize: number = 100 * 1024 * 1024 // 100MB default
 
   /**
    * Create buffer
@@ -763,19 +763,19 @@ export class BufferManager {
     if (this.totalSize + size > this.maxSize) {
       this.freeOldestBuffers(size)
     }
-    
+
     const buffer = new ArrayBuffer(size)
-    
+
     const info: BufferInfo = {
       buffer,
       byteLength: size,
       byteOffset: 0,
       type
     }
-    
+
     this.buffers.set(id, info)
     this.totalSize += size
-    
+
     return buffer
   }
 
@@ -795,10 +795,10 @@ export class BufferManager {
     if (!info) {
       return false
     }
-    
+
     this.buffers.delete(id)
     this.totalSize -= info.byteLength
-    
+
     return true
   }
 
@@ -836,7 +836,7 @@ export class BufferManager {
    */
   setMaxSize(maxSize: number): void {
     this.maxSize = maxSize
-    
+
     // Free buffers if over limit
     if (this.totalSize > this.maxSize) {
       this.freeOldestBuffers(0)
@@ -846,12 +846,12 @@ export class BufferManager {
   /**
    * Free oldest buffers to make space
    */
-  private freeOldestBuffers(requiredSpace: number): void {
+  freeOldestBuffers(requiredSpace: number): void {
     const targetSize = this.maxSize - requiredSpace
-    
+
     // Convert to array and sort by some criteria (could be access time, creation time, etc.)
     const bufferEntries = Array.from(this.buffers.entries())
-    
+
     // For simplicity, just remove in order until we have enough space
     for (const [id] of bufferEntries) {
       if (this.totalSize <= targetSize) {
@@ -869,20 +869,20 @@ export class BufferManager {
     if (!sourceInfo) {
       return false
     }
-    
+
     const newBuffer = new ArrayBuffer(sourceInfo.byteLength)
     new Uint8Array(newBuffer).set(new Uint8Array(sourceInfo.buffer))
-    
+
     const targetInfo: BufferInfo = {
       buffer: newBuffer,
       byteLength: sourceInfo.byteLength,
       byteOffset: 0,
       type: sourceInfo.type
     }
-    
+
     this.buffers.set(targetId, targetInfo)
     this.totalSize += targetInfo.byteLength
-    
+
     return true
   }
 }
@@ -904,9 +904,9 @@ export function createHashMap<V>(): HashMap<string, V> {
     }
     return hash
   }
-  
+
   const stringEquals = (a: string, b: string): boolean => a === b
-  
+
   return new HashMap(stringHash, stringEquals)
 }
 
@@ -916,7 +916,7 @@ export function createHashMap<V>(): HashMap<string, V> {
 export function createNumberHashMap<V>(): HashMap<number, V> {
   const numberHash = (num: number): number => Math.floor(num)
   const numberEquals = (a: number, b: number): boolean => a === b
-  
+
   return new HashMap(numberHash, numberEquals)
 }
 

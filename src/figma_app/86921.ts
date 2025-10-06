@@ -2,7 +2,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { SET_MINIMAL_MFA_USER } from "../905/194276";
 import { hydrateFileBrowser, initAction } from "../905/929976";
 import { yJ, WJ, C$, hz } from "../figma_app/24841";
-import { eu } from "../figma_app/829197";
+import { updateUserColorProfileAction } from "../figma_app/829197";
 export function $$l4(e, t) {
   return t && t.id === e.id ? "You" : e.handle;
 }
@@ -52,7 +52,7 @@ export function $$u2(e = null, t) {
     ...e,
     drafts_folder_id: t.payload.drafts_folder_id,
     personal_drafts_folder_id: t.payload.personal_drafts_folder_id
-  } : null;else if (eu.matches(t)) return e ? {
+  } : null;else if (updateUserColorProfileAction.matches(t)) return e ? {
     ...e,
     color_profile: t.payload.color_profile
   } : null;

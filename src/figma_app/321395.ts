@@ -8,16 +8,16 @@ import { generateCommunityPagePaths, getCurrentCommunityBasePath } from '../figm
 /**
  * Empty function placeholder (original: $$d0)
  */
-export function captureRouteEvent(_: unknown): void {}
+export function captureRouteEvent(_: unknown): void { }
 
 /**
  * RouteState class encapsulates route parameters, search, and state.
  * (original: $$c8)
  */
 export class RouteState {
-  private _params: Record<string, any>
-  private _search: Record<string, any>
-  private _state: Record<string, any>
+  _params: Record<string, any>
+  _search: Record<string, any>
+  _state: Record<string, any>
 
   /** Get route params */
   get params(): Record<string, any> {

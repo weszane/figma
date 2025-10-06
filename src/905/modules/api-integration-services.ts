@@ -68,9 +68,9 @@ export interface ServiceBindings {
  * HTTP Client Manager
  */
 export class HTTPClientManager {
-  private baseURL: string
-  private defaultHeaders: Record<string, string>
-  private validators: Map<string, any> = new Map()
+  baseURL: string
+  defaultHeaders: Record<string, string>
+  validators: Map<string, any> = new Map()
 
   constructor(baseURL = '', defaultHeaders: Record<string, string> = {}) {
     this.baseURL = baseURL
@@ -97,13 +97,13 @@ export class HTTPClientManager {
     request: APIRequest
   ): Promise<APIResponse<T>> {
     const validator = this.validators.get(endpoint)
-    
+
     if (validator) {
       return validator.validate(async ({ xr: httpClient }: any) => {
         return await this.executeRequest(httpClient, request)
       })
     }
-    
+
     return this.executeRequest(null, request)
   }
 
@@ -118,7 +118,7 @@ export class HTTPClientManager {
     try {
       const _client = httpClient || this
       const url = this.resolveURL(request.url)
-      
+
       const config = {
         method: request.method,
         headers: { ...this.defaultHeaders, ...request.headers },
@@ -127,7 +127,7 @@ export class HTTPClientManager {
 
       // Mock implementation - would use actual HTTP client
       const response = await this.mockRequest(url, config)
-      
+
       return {
         data: response.data,
         status: response.status,
@@ -184,26 +184,26 @@ export class HTTPClientManager {
 
   // Private helper methods
 
-  private resolveURL(url: string): string {
+  resolveURL(url: string): string {
     if (url.startsWith('http')) return url
     return `${this.baseURL}${url.startsWith('/') ? url : `/${url}`}`
   }
 
-  private buildURLWithParams(url: string, params?: Record<string, any>): string {
+  buildURLWithParams(url: string, params?: Record<string, any>): string {
     if (!params) return url
-    
+
     const searchParams = new URLSearchParams()
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
         searchParams.append(key, String(value))
       }
     })
-    
+
     const paramString = searchParams.toString()
     return paramString ? `${url}?${paramString}` : url
   }
 
-  private async mockRequest(url: string, config: any): Promise<any> {
+  async mockRequest(url: string, config: any): Promise<any> {
     // Mock implementation - would be replaced with actual HTTP client
     return {
       data: { success: true, url, config },
@@ -218,7 +218,7 @@ export class HTTPClientManager {
  * File Operations Manager
  */
 export class FileOperationsManager {
-  private httpClient: HTTPClientManager
+  httpClient: HTTPClientManager
 
   constructor(httpClient?: HTTPClientManager) {
     this.httpClient = httpClient || new HTTPClientManager()
@@ -232,12 +232,12 @@ export class FileOperationsManager {
     try {
       const { file, uploadConfig, onProgress } = request
       const formData = new FormData()
-      
+
       // Add upload fields
       Object.entries(uploadConfig.fields).forEach(([key, value]) => {
         formData.append(key, value)
       })
-      
+
       // Add file
       formData.append('file', file)
 
@@ -246,7 +246,7 @@ export class FileOperationsManager {
         const progressInterval = setInterval(() => {
           const progress = Math.random() * 100
           onProgress(Math.min(progress, 100))
-          
+
           if (progress >= 100) {
             clearInterval(progressInterval)
           }
@@ -277,13 +277,13 @@ export class FileOperationsManager {
   async downloadFile(url: string, filename?: string): Promise<Blob> {
     try {
       const response = await fetch(url)
-      
+
       if (!response.ok) {
         throw new Error(`Download failed: ${response.statusText}`)
       }
 
       const blob = await response.blob()
-      
+
       // If filename provided, trigger download
       if (filename) {
         const downloadURL = URL.createObjectURL(blob)
@@ -309,14 +309,14 @@ export class FileOperationsManager {
    */
   async getUploadConfig(type: 'icon' | 'cover' | 'code' | 'snapshot'): Promise<UploadConfig> {
     const response = await this.httpClient.get(`/api/upload/config/${type}`)
-    
+
     // Type assertion for response data structure
     const data = response.data as {
       upload_url: string
       fields: Record<string, string>
       signed_cloudfront_url?: string
     }
-    
+
     return {
       url: data.upload_url,
       fields: data.fields,
@@ -329,8 +329,8 @@ export class FileOperationsManager {
  * Service Registry and Binding Manager
  */
 export class ServiceRegistryManager {
-  private services: Map<string, ServiceBindings> = new Map()
-  private globalBindings: ServiceBindings = {}
+  services: Map<string, ServiceBindings> = new Map()
+  globalBindings: ServiceBindings = {}
 
   /**
    * Initialize global service bindings
@@ -338,7 +338,7 @@ export class ServiceRegistryManager {
    */
   initializeGlobalBindings(bindings: ServiceBindings): void {
     this.globalBindings = { ...this.globalBindings, ...bindings }
-    
+
     // Register all facet APIs
     this.registerFacetAPIs(bindings)
   }
@@ -353,13 +353,13 @@ export class ServiceRegistryManager {
       editScopeBindings: this.globalBindings.EditScopeBindings,
       nodeTsApi: this.globalBindings.NodeTsApi,
       sceneGraphTsApi: this.globalBindings.SceneGraphTsApi,
-      
+
       // Helper services
       assistantTools: this.globalBindings.AssistantTools,
       fonts: this.globalBindings.Fonts,
       cmsAnalytics: this.globalBindings.CmsAnalytics,
       imageCppBindings: this.globalBindings.ImageCppBindings,
-      
+
       // Facet APIs
       ...this.getFacetAPIs()
     }
@@ -389,7 +389,7 @@ export class ServiceRegistryManager {
   getAvailableAPIs(): ServiceBindings {
     const requiredAPIs = [
       'NodeTsApi',
-      'NodeTsApiGenerated', 
+      'NodeTsApiGenerated',
       'SceneGraphTsApi',
       'StackFacetTsApiGenerated',
       'PrototypingFacetTsApiGenerated',
@@ -398,7 +398,7 @@ export class ServiceRegistryManager {
     ]
 
     const apis: ServiceBindings = {}
-    
+
     requiredAPIs.forEach(apiName => {
       const api = this.globalBindings[apiName]
       if (!api) {
@@ -419,7 +419,7 @@ export class ServiceRegistryManager {
 
   // Private helper methods
 
-  private registerFacetAPIs(bindings: ServiceBindings): void {
+  registerFacetAPIs(bindings: ServiceBindings): void {
     const facetAPIs = [
       'AccessibilityFacetTsApiGenerated',
       'AnnotationFacetTsApiGenerated',
@@ -449,9 +449,9 @@ export class ServiceRegistryManager {
     })
   }
 
-  private getFacetAPIs(): ServiceBindings {
+  getFacetAPIs(): ServiceBindings {
     const facetAPIs: ServiceBindings = {}
-    
+
     Object.keys(this.globalBindings).forEach(key => {
       if (key.includes('FacetTsApiGenerated')) {
         facetAPIs[this.camelCase(key)] = this.globalBindings[key]
@@ -461,7 +461,7 @@ export class ServiceRegistryManager {
     return facetAPIs
   }
 
-  private camelCase(str: string): string {
+  camelCase(str: string): string {
     return str.charAt(0).toLowerCase() + str.slice(1)
   }
 }
@@ -470,9 +470,9 @@ export class ServiceRegistryManager {
  * Network Access and Domain Manager
  */
 export class NetworkAccessManager {
-  private allowedDomains: string[] = []
-  private devAllowedDomains: string[] = []
-  private isLocalDevelopment = false
+  allowedDomains: string[] = []
+  devAllowedDomains: string[] = []
+  isLocalDevelopment = false
 
   /**
    * Configure network access from manifest
@@ -480,7 +480,7 @@ export class NetworkAccessManager {
    */
   configureFromManifest(manifest: ServiceManifest, isLocal = false): void {
     this.isLocalDevelopment = isLocal
-    
+
     if (manifest.networkAccess) {
       this.allowedDomains = manifest.networkAccess.allowedDomains || []
       this.devAllowedDomains = manifest.networkAccess.devAllowedDomains || []
@@ -501,11 +501,11 @@ export class NetworkAccessManager {
       if (this.devAllowedDomains.includes('*')) {
         return ['*'] // Wildcard access
       }
-      
+
       if (this.allowedDomains.includes('none')) {
         return this.devAllowedDomains
       }
-      
+
       // Merge and deduplicate
       return Array.from(new Set([...this.devAllowedDomains, ...this.allowedDomains]))
     }
@@ -518,10 +518,10 @@ export class NetworkAccessManager {
    */
   isDomainAllowed(domain: string): boolean {
     const allowed = this.getAllowedDomains()
-    
+
     if (allowed.includes('*')) return true
     if (allowed.includes('none')) return false
-    
+
     return allowed.some(allowedDomain => {
       if (allowedDomain === domain) return true
       if (allowedDomain.startsWith('*.')) {
@@ -549,9 +549,9 @@ export class NetworkAccessManager {
  * Plugin Capability Manager
  */
 export class PluginCapabilityManager {
-  private capabilities: string[] = []
-  private apiVersion = '1.0.0'
-  private vmType: 'cppvm' | 'jsvm' = 'cppvm'
+  capabilities: string[] = []
+  apiVersion = '1.0.0'
+  vmType: 'cppvm' | 'jsvm' = 'cppvm'
 
   /**
    * Configure from plugin manifest
@@ -601,7 +601,7 @@ export class PluginCapabilityManager {
  * API Request Management Services
  */
 export class RequestManagementService {
-  private httpClient: HTTPClientManager
+  httpClient: HTTPClientManager
 
   constructor() {
     this.httpClient = new HTTPClientManager('/api')
@@ -655,7 +655,7 @@ export class RequestManagementService {
  * Communication Preference Service
  */
 export class CommunicationPreferenceService {
-  private httpClient: HTTPClientManager
+  httpClient: HTTPClientManager
 
   constructor() {
     this.httpClient = new HTTPClientManager('/api')

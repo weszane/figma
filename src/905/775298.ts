@@ -3,10 +3,10 @@
  * Original class name: n
  */
 class FileCreationManager {
-  private _isCanceled: boolean = false
-  private _onCanceled: (() => void) | null = null
-  private _resolveCompletionPromise: () => void = () => { }
-  private _promise: Promise<void>
+  _isCanceled: boolean = false
+  _onCanceled: (() => void) | null = null
+  _resolveCompletionPromise: () => void = () => { }
+  _promise: Promise<void>
 
   constructor() {
     this._promise = new Promise((resolve) => {

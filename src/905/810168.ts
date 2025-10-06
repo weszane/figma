@@ -1,20 +1,40 @@
-import { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { screenReaderEnableAction } from "../905/193529";
-export function $$s0() {
-  return useSelector(e => !!e.screenreader.enabled);
+import { useCallback } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { screenReaderEnableAction } from "../905/193529"
+/**
+ * Custom hook to check if screen reader is enabled
+ * Original name: $$s0
+ */
+export function useIsScreenReaderEnabled(): boolean {
+  return useSelector<AppState, boolean>(state => !!state.screenreader?.enabled)
 }
-export function $$o1() {
-  let e = useDispatch();
-  let t = useSelector(e => e.screenreader.enabled);
-  let i = useSelector(e => e.user || void 0);
-  return [t, useCallback((t, n) => {
-    e(screenReaderEnableAction({
-      enabled: t,
-      scope: n,
-      user: i
-    }));
-  }, [e, i])];
+
+/**
+ * Custom hook to manage screen reader state
+ * Original name: $$o1
+ */
+export function useScreenReaderManager(): [
+  boolean,
+  (enabled: boolean, scope?: string) => void,
+] {
+  const dispatch = useDispatch()
+  const isEnabled = useSelector<AppState, boolean>(state => state.screenreader?.enabled ?? false)
+  const user = useSelector<AppState, AppState["user"]>(state => state.user)
+
+  const setScreenReaderEnabled = useCallback((
+    enabled: boolean,
+    scope?: string,
+  ) => {
+    dispatch(screenReaderEnableAction({
+      enabled,
+      scope,
+      user,
+    }))
+  }, [dispatch, user])
+
+  return [isEnabled, setScreenReaderEnabled]
 }
-export const e = $$s0;
-export const y = $$o1;
+
+// Export aliases for backward compatibility
+export const e = useIsScreenReaderEnabled
+export const y = useScreenReaderManager

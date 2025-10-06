@@ -83,12 +83,12 @@ export interface TelemetryData {
  * Original: class $$s0 from 545265.ts - performance metrics collection
  */
 export class PerformanceMetricsManager {
-  private _perfMetrics: Map<string, PerformanceMetric> = new Map()
-  private _pluginDataHistogram: Map<string, Map<string, number>> = new Map()
-  private _stackInvariantFields: Record<string, number> = {}
-  private _tmpStackInvariantFields: Map<string, Set<string>> = new Map()
-  private _executionTimeMeasurementState = 0
-  private _numPagesLoaded = 0
+  _perfMetrics: Map<string, PerformanceMetric> = new Map()
+  _pluginDataHistogram: Map<string, Map<string, number>> = new Map()
+  _stackInvariantFields: Record<string, number> = {}
+  _tmpStackInvariantFields: Map<string, Set<string>> = new Map()
+  _executionTimeMeasurementState = 0
+  _numPagesLoaded = 0
 
   /**
    * Add performance metric
@@ -96,7 +96,7 @@ export class PerformanceMetricsManager {
    */
   addPerfMetric(name: string, value: number): void {
     const existing = this._perfMetrics.get(name)
-    
+
     if (existing) {
       existing.min = Math.min(existing.min, value)
       existing.max = Math.max(existing.max, value)
@@ -118,7 +118,7 @@ export class PerformanceMetricsManager {
    */
   updatePluginDataHistogram(pluginId: string, dataSize: number): void {
     let histogram = this._pluginDataHistogram.get(pluginId)
-    
+
     if (!histogram) {
       histogram = new Map()
       this._pluginDataHistogram.set(pluginId, histogram)
@@ -173,7 +173,7 @@ export class PerformanceMetricsManager {
   shouldMeasureExecutionTime(metricName: string): boolean {
     // Feature flag check would go here
     const perfMetricsEnabled = true // getFeatureFlags().plugins_perf_metrics
-    
+
     if (!perfMetricsEnabled) return false
 
     if (this._perfMetrics.has(metricName)) {
@@ -261,9 +261,9 @@ export class PerformanceMetricsManager {
  * Original: performance timing and profiling operations from 670985.ts, 609396.ts
  */
 export class BrowserPerformanceProfiler {
-  private markers: Map<string, number> = new Map()
-  private measurements: PerformanceMeasurement[] = []
-  private isEnabled: boolean
+  markers: Map<string, number> = new Map()
+  measurements: PerformanceMeasurement[] = []
+  isEnabled: boolean
 
   constructor(enabled = true) {
     this.isEnabled = enabled && this.isPerformanceAPIAvailable()
@@ -273,7 +273,7 @@ export class BrowserPerformanceProfiler {
    * Check if Performance API is available
    * Original: performance API availability checks
    */
-  private isPerformanceAPIAvailable(): boolean {
+  isPerformanceAPIAvailable(): boolean {
     return typeof performance !== 'undefined' &&
       'mark' in performance &&
       'measure' in performance &&
@@ -320,7 +320,7 @@ export class BrowserPerformanceProfiler {
 
       try {
         const measure = performance.measure(spanName, `${spanName}.startSpan`, `${spanName}.endSpan`)
-        
+
         // Store measurement
         this.measurements.push({
           name: spanName,
@@ -388,12 +388,12 @@ export class BrowserPerformanceProfiler {
 
   // Private helper methods
 
-  private trackVitalStart(_spanName: string, _team?: string): void {
+  trackVitalStart(_spanName: string, _team?: string): void {
     // Would integrate with monitoring system like Sentry or DataDog
     // Removing debug logging to comply with lint rules
   }
 
-  private trackVitalEnd(_spanName: string): void {
+  trackVitalEnd(_spanName: string): void {
     // Would integrate with monitoring system
     // Removing debug logging to comply with lint rules
   }
@@ -404,11 +404,11 @@ export class BrowserPerformanceProfiler {
  * Original: analytics tracking from 449184.ts, 331365.ts, 293658.ts
  */
 export class AnalyticsEventTracker {
-  private userId?: string
-  private anonymousId?: string
-  private sessionId: string
-  private events: AnalyticsEvent[] = []
-  private isEnabled: boolean
+  userId?: string
+  anonymousId?: string
+  sessionId: string
+  events: AnalyticsEvent[] = []
+  isEnabled: boolean
 
   constructor(isEnabled = true) {
     this.isEnabled = isEnabled
@@ -434,7 +434,7 @@ export class AnalyticsEventTracker {
     }
 
     this.userId = userData.id
-    
+
     // Store user traits
     const traits = {
       email: userData.email,
@@ -475,7 +475,7 @@ export class AnalyticsEventTracker {
     }
 
     this.events.push(event)
-    
+
     // In real implementation, would send to analytics service
     // Note: Using console.warn to comply with lint rules
     if (event.eventType === 'user_identified' || event.eventType === 'user_logged_out') {
@@ -520,7 +520,7 @@ export class AnalyticsEventTracker {
   /**
    * Generate unique session ID
    */
-  private generateSessionId(): string {
+  generateSessionId(): string {
     return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
   }
 
@@ -544,12 +544,12 @@ export class AnalyticsEventTracker {
  * Original: telemetry collection from 815544.ts, 193284.ts
  */
 export class TelemetryDataCollector {
-  private telemetryData: TelemetryData[] = []
-  private isEnabled: boolean
-  private sampleRate: number
-  private maxEventsPerPage: number
-  private service: string
-  private version: string
+  telemetryData: TelemetryData[] = []
+  isEnabled: boolean
+  sampleRate: number
+  maxEventsPerPage: number
+  service: string
+  version: string
 
   constructor(config: {
     enabled?: boolean
@@ -594,14 +594,14 @@ export class TelemetryDataCollector {
    * Check if telemetry should be sampled
    * Original: sampling logic from 815544.ts
    */
-  private shouldSample(): boolean {
+  shouldSample(): boolean {
     return Math.random() < this.sampleRate
   }
 
   /**
    * Get runtime environment information
    */
-  private getRuntimeEnvironment(): string {
+  getRuntimeEnvironment(): string {
     return typeof window !== 'undefined' ? 'browser' : 'node'
   }
 
@@ -609,7 +609,7 @@ export class TelemetryDataCollector {
    * Get connectivity information
    * Original: connectivity detection patterns
    */
-  private getConnectivityInfo(): any {
+  getConnectivityInfo(): any {
     if (typeof navigator !== 'undefined' && 'connection' in navigator) {
       const connection = (navigator as any).connection
       return {
@@ -624,7 +624,7 @@ export class TelemetryDataCollector {
   /**
    * Get experimental features
    */
-  private getExperimentalFeatures(): string[] {
+  getExperimentalFeatures(): string[] {
     // Would check feature flags or experimental API usage
     return []
   }
@@ -649,9 +649,9 @@ export class TelemetryDataCollector {
  * Original: context menu performance tracking from 293658.ts
  */
 export class ContextMenuPerformanceTracker {
-  private profiler: BrowserPerformanceProfiler
-  private analytics: AnalyticsEventTracker
-  private type: string
+  profiler: BrowserPerformanceProfiler
+  analytics: AnalyticsEventTracker
+  type: string
 
   constructor(type: string, profiler: BrowserPerformanceProfiler, analytics: AnalyticsEventTracker) {
     this.type = type
@@ -711,16 +711,16 @@ export class UserAnalyticsDataProcessor {
    * Determine work location from analytics data
    * Original: work_location logic from 931912.ts
    */
-  private determineWorkLocation(data: UserAnalyticsData): string | undefined {
+  determineWorkLocation(data: UserAnalyticsData): string | undefined {
     // Note: work_location_no_answer property would need to be added to interface
     const workLocationNoAnswer = (data as any).work_location_no_answer
-    
+
     if (workLocationNoAnswer) return 'no_answer'
     if (data.is_company) return 'company'
     if (data.is_agency) return 'agency'
     if (data.is_freelancer) return 'freelancer'
     if (data.is_school) return 'school'
-    
+
     return undefined
   }
 }

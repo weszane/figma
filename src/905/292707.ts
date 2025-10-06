@@ -79,7 +79,7 @@ class AppModal extends Component<AppModalProps> {
    * Checks if all modals are rendered as modal dialogs.
    * (original: anonymous function in componentDidUpdate)
    */
-  private checkModalSubtree(modalStack: Array<any>) {
+  checkModalSubtree(modalStack: Array<any>) {
     if (modalStack.every(e => nonModalTypes.has(e.modal.type)))
       return
     const modalElements = document.querySelectorAll(`.${appModalCachedSubtreeClass}`)

@@ -1,5 +1,5 @@
-export let $$n0 = {
+export let ScreenBindings = {
   width: () => screen.width,
   height: () => screen.height
 };
-export const N = $$n0;
+export const N = ScreenBindings;

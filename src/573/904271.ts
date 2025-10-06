@@ -495,7 +495,7 @@ function tS({
     U && !z && f(hideTooltip());
   }, [U, f, z]);
   let $ = e.isLocal && isInteractionOrEvalMode() ? _$$eT(e.node_id, _).join("-") : e.node_id;
-  let B = "Local components" === u || "Local private components" === u || e.isLocal;
+  let B = "Local components" === u || "Local  components" === u || e.isLocal;
   let V = l !== rp.SMALL && !F;
   let W = !F && getFeatureFlags().api_asset_search_with_scores;
   let G = _$$Y2(e);

@@ -83,7 +83,7 @@ export class CssVariable {
    * @param fallbackValue - The fallback value for the CSS variable
    * @returns The processed CSS value string with annotations
    */
-  private processFigmaVariableValue(figmaVar: any, fallbackValue: string): string | null {
+  processFigmaVariableValue(figmaVar: any, fallbackValue: string): string | null {
     if (!figmaVar.id) {
       return null
     }
@@ -114,7 +114,7 @@ export class CssVariable {
    * @param fallbackValue - The fallback value for the CSS variable
    * @returns The processed CSS value string with annotations
    */
-  private processFigmaStyleValue(styleKey: string, variableName: string, fallbackValue: string): string | null {
+  processFigmaStyleValue(styleKey: string, variableName: string, fallbackValue: string): string | null {
     if (!styleKey) {
       return null
     }

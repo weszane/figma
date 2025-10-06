@@ -124,14 +124,14 @@ export const UI_COMPONENT_CLASSES = {
   labeledInputGroupDisabled: 'basic_form--labeledInputGroupDisabled--BKwa0 basic_form--labeledInputGroup--aeD6L',
   hoverLabel: 'basic_form--hoverLabel--LKjBC',
   hoverLabelHasValue: 'basic_form--hoverLabel__hasValue--YDJPR',
-  
+
   // Checkbox Controls
   checkboxContainer: 'basic_form--checkboxContainer--7vOVn',
   checkbox: 'basic_form--checkbox--C-tcA',
   checkboxSvg: 'basic_form--checkboxSvg--JFwlf',
   checkboxShowFocus: 'basic_form--checkboxShowFocus--bZTt6',
   checkboxLabel: 'basic_form--label--p2msE',
-  
+
   // Button Controls
   buttonGroup: 'basic_form--buttonGroup--a5B5-',
   buttonGroupReversed: 'basic_form--buttonGroup_reversed--LKwyG',
@@ -139,7 +139,7 @@ export const UI_COMPONENT_CLASSES = {
   buttonSecondary: 'basic_form--btnSecondaryMenu--JITnz basic_form--btn--FSrmp ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd',
   buttonBig: 'basic_form--btnBig--mR0CY ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd basic_form--bigInput--OIoA- basic_form--input--mz9WY',
   fullWidth: 'basic_form--fullWidth--RThzY',
-  
+
   // Dialog Components
   dialogContents: 'dialog-common__contents__qZfqO',
   dialogCustomContents: 'dialog-common__customContents__yo2GE',
@@ -153,7 +153,7 @@ export const UI_COMPONENT_CLASSES = {
   dialogBodyNoScroll: 'dialog-common__bodyNoScroll__uv5kv',
   dialogFooter: 'dialog-common__footer__YrACL',
   dialogActionStrip: 'dialog-common__actionStrip__QIF--',
-  
+
   // Paint Panel Components
   paintPanelColorValueContainer: 'paint_panels--paintPanelColorValueContainer--squRD paint_panels--colorValueContainer--DGeSP raw_components--borderFocusWithin--BaipZ paint_panels--_baseColorValueContainer--t-UIV raw_components--base--T7G0z raw_components--singleRowHeight--dKM4t',
   paintPanelVariableValueContainer: 'paint_panels--paintPanelVariableValueContainer--bxDVz paint_panels--_baseColorValueContainer--t-UIV raw_components--base--T7G0z raw_components--singleRowHeight--dKM4t',
@@ -162,7 +162,7 @@ export const UI_COMPONENT_CLASSES = {
   colorInput: 'paint_panels--colorInput--nSz13',
   strokeInput: 'paint_panels--strokeInput--Zg8DO raw_components--flushLeft--YH-5P',
   strokeWeight: 'paint_panels--strokeWeight---jmn2 raw_components--borderFocusWithin--BaipZ',
-  
+
   // Color Controls
   colorControlsWrapper: 'color_controls--colorControlsWrapper--1JzY4',
   sliderContainer: 'color_controls--sliderContainer--JCkl2',
@@ -171,7 +171,7 @@ export const UI_COMPONENT_CLASSES = {
   typeSelectNewUI: 'color_controls--typeSelectNewUI--MrWw5',
   colorInputs: 'color_controls--colorInputs--gDGL3 raw_components--multiValueInput--2UviX raw_components--borderFocusWithin--BaipZ',
   colorInputsNewUI: 'color_controls--colorInputsNewUI--o-7u7',
-  
+
   // Variable Controls
   variableControlWrapper: 'variable_control--comboInputControl--8-2Lm',
   variableControlInput: 'variable_control--inputWrapper--3rpcl',
@@ -180,7 +180,7 @@ export const UI_COMPONENT_CLASSES = {
   variableControlNoBorder: 'variable_control--comboInputControlWithNoBorder--iNf1c',
   applyVariableIcon: 'variable_control--applyVariableIcon--5OLyR',
   detachIconContainer: 'variable_control--detachIconContainer--mq-yv',
-  
+
   // Component Browser
   componentBrowserWrapper: 'component_browser_input--wrapper--VlXZo',
   componentBrowserDisabled: 'component_browser_input--disabled--QH8GR',
@@ -196,8 +196,8 @@ export const UI_COMPONENT_CLASSES = {
  * Original: Text input functionality from 190597.ts
  */
 export class TextInputManager {
-  private inputElements: Map<string, HTMLInputElement | HTMLTextAreaElement> = new Map()
-  private validators: Map<string, (value: string) => boolean> = new Map()
+  inputElements: Map<string, HTMLInputElement | HTMLTextAreaElement> = new Map()
+  validators: Map<string, (value: string) => boolean> = new Map()
 
   /**
    * Create and register a text input
@@ -206,7 +206,7 @@ export class TextInputManager {
   createTextInput(props: TextInputProps): HTMLInputElement | HTMLTextAreaElement {
     const input = document.createElement(props.multiline ? 'textarea' : 'input') as HTMLInputElement | HTMLTextAreaElement
     const inputId = props.id || this.generateInputId()
-    
+
     // Set basic properties
     input.id = inputId
     input.className = this.getInputClassName(props)
@@ -214,37 +214,37 @@ export class TextInputManager {
     input.placeholder = props.placeholder || ''
     input.disabled = props.disabled || false
     input.readOnly = props.readonly || false
-    
+
     if (!props.multiline && props.type) {
       (input as HTMLInputElement).type = props.type
     }
-    
+
     if (props.multiline && props.rows) {
       (input as HTMLTextAreaElement).rows = props.rows
     }
-    
+
     if (props.maxLength) {
       input.maxLength = props.maxLength
     }
-    
+
     if (!props.multiline && props.pattern) {
       (input as HTMLInputElement).pattern = props.pattern
     }
-    
+
     if (!props.multiline && props.required) {
       (input as HTMLInputElement).required = props.required
     }
-    
+
     if (props.name) {
       input.name = props.name
     }
-    
+
     // Add event listeners
     this.addInputEventListeners(input, props)
-    
+
     // Register the input
     this.inputElements.set(inputId, input)
-    
+
     return input
   }
 
@@ -253,13 +253,13 @@ export class TextInputManager {
    * Original: labeled input group from 190597.ts
    */
   createLabeledInputGroup(
-    label: string, 
-    input: HTMLInputElement | HTMLTextAreaElement, 
+    label: string,
+    input: HTMLInputElement | HTMLTextAreaElement,
     disabled: boolean = false
   ): HTMLDivElement {
     const container = document.createElement('div')
-    container.className = disabled 
-      ? UI_COMPONENT_CLASSES.labeledInputGroupDisabled 
+    container.className = disabled
+      ? UI_COMPONENT_CLASSES.labeledInputGroupDisabled
       : UI_COMPONENT_CLASSES.labeledInputGroup
 
     const labelElement = document.createElement('label')
@@ -335,22 +335,22 @@ export class TextInputManager {
   /**
    * Get input class name based on props
    */
-  private getInputClassName(props: TextInputProps): string {
+  getInputClassName(props: TextInputProps): string {
     if (props.className) {
       return props.className
     }
-    
+
     if (props.multiline) {
       return UI_COMPONENT_CLASSES.bigTextInput
     }
-    
+
     return UI_COMPONENT_CLASSES.textInput
   }
 
   /**
    * Add event listeners to input
    */
-  private addInputEventListeners(input: HTMLInputElement | HTMLTextAreaElement, props: TextInputProps): void {
+  addInputEventListeners(input: HTMLInputElement | HTMLTextAreaElement, props: TextInputProps): void {
     if (props.onChange) {
       input.addEventListener('input', (event) => {
         const target = event.target as HTMLInputElement | HTMLTextAreaElement
@@ -372,7 +372,7 @@ export class TextInputManager {
   /**
    * Generate unique input ID
    */
-  private generateInputId(): string {
+  generateInputId(): string {
     return `text-input-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   }
 }
@@ -382,7 +382,7 @@ export class TextInputManager {
  * Original: Checkbox functionality from 190597.ts
  */
 export class CheckboxManager {
-  private checkboxElements: Map<string, HTMLInputElement> = new Map()
+  checkboxElements: Map<string, HTMLInputElement> = new Map()
 
   /**
    * Create checkbox component
@@ -436,9 +436,9 @@ export class CheckboxManager {
    * Create checkbox visual element
    * Original: checkbox SVG from 190597.ts
    */
-  private createCheckboxVisual(showFocus: boolean): HTMLElement {
+  createCheckboxVisual(showFocus: boolean): HTMLElement {
     const visual = document.createElement('div')
-    visual.className = showFocus 
+    visual.className = showFocus
       ? `${UI_COMPONENT_CLASSES.checkboxSvg} ${UI_COMPONENT_CLASSES.checkboxShowFocus}`
       : UI_COMPONENT_CLASSES.checkboxSvg
 
@@ -463,7 +463,7 @@ export class CheckboxManager {
   /**
    * Add checkbox event listeners
    */
-  private addCheckboxEventListeners(checkbox: HTMLInputElement, props: CheckboxProps): void {
+  addCheckboxEventListeners(checkbox: HTMLInputElement, props: CheckboxProps): void {
     if (props.onChange) {
       checkbox.addEventListener('change', () => {
         props.onChange!(checkbox.checked)
@@ -492,7 +492,7 @@ export class CheckboxManager {
   /**
    * Generate unique checkbox ID
    */
-  private generateCheckboxId(): string {
+  generateCheckboxId(): string {
     return `checkbox-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   }
 }
@@ -502,7 +502,7 @@ export class CheckboxManager {
  * Original: Button functionality from 190597.ts
  */
 export class ButtonManager {
-  private buttonElements: Map<string, HTMLButtonElement> = new Map()
+  buttonElements: Map<string, HTMLButtonElement> = new Map()
 
   /**
    * Create button component
@@ -540,8 +540,8 @@ export class ButtonManager {
    */
   createButtonGroup(buttons: HTMLButtonElement[], reversed: boolean = false): HTMLDivElement {
     const group = document.createElement('div')
-    group.className = reversed 
-      ? UI_COMPONENT_CLASSES.buttonGroupReversed 
+    group.className = reversed
+      ? UI_COMPONENT_CLASSES.buttonGroupReversed
       : UI_COMPONENT_CLASSES.buttonGroup
 
     buttons.forEach(button => {
@@ -554,7 +554,7 @@ export class ButtonManager {
   /**
    * Get button class name based on props
    */
-  private getButtonClassName(props: ButtonProps): string {
+  getButtonClassName(props: ButtonProps): string {
     if (props.className) {
       return props.className
     }
@@ -604,7 +604,7 @@ export class ButtonManager {
   /**
    * Generate unique button ID
    */
-  private generateButtonId(): string {
+  generateButtonId(): string {
     return `button-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   }
 }
@@ -614,8 +614,8 @@ export class ButtonManager {
  * Original: Dialog functionality from 511376.ts
  */
 export class DialogManager {
-  private openDialogs: Map<string, HTMLElement> = new Map()
-  private dialogBackdrop: HTMLElement | null = null
+  openDialogs: Map<string, HTMLElement> = new Map()
+  dialogBackdrop: HTMLElement | null = null
 
   /**
    * Create dialog component
@@ -648,9 +648,9 @@ export class DialogManager {
    * Create dialog contents
    * Original: dialog contents from 511376.ts
    */
-  private createDialogContents(props: DialogProps): HTMLElement {
+  createDialogContents(props: DialogProps): HTMLElement {
     const contents = document.createElement('div')
-    contents.className = props.allowOverflow 
+    contents.className = props.allowOverflow
       ? `${UI_COMPONENT_CLASSES.dialogContents} ${UI_COMPONENT_CLASSES.dialogAllowOverflow}`
       : UI_COMPONENT_CLASSES.dialogContents
 
@@ -663,12 +663,12 @@ export class DialogManager {
     // Create body
     const body = document.createElement('div')
     body.className = UI_COMPONENT_CLASSES.dialogBody
-    
+
     // Add children content (placeholder for React components)
     const contentDiv = document.createElement('div')
     contentDiv.textContent = '[Dialog Content]'
     body.appendChild(contentDiv)
-    
+
     contents.appendChild(body)
 
     // Create footer if custom footer provided
@@ -686,9 +686,9 @@ export class DialogManager {
    * Create dialog header
    * Original: dialog header from 511376.ts
    */
-  private createDialogHeader(
-    title?: string, 
-    showCloseButton?: boolean, 
+  createDialogHeader(
+    title?: string,
+    showCloseButton?: boolean,
     onClose?: () => void
   ): HTMLElement {
     const header = document.createElement('div')
@@ -706,11 +706,11 @@ export class DialogManager {
       closeButton.className = UI_COMPONENT_CLASSES.dialogClose
       closeButton.setAttribute('aria-label', 'Close dialog')
       closeButton.textContent = '×'
-      
+
       if (onClose) {
         closeButton.addEventListener('click', onClose)
       }
-      
+
       header.appendChild(closeButton)
     }
 
@@ -720,7 +720,7 @@ export class DialogManager {
   /**
    * Create dialog backdrop
    */
-  private createDialogBackdrop(): void {
+  createDialogBackdrop(): void {
     this.dialogBackdrop = document.createElement('div')
     this.dialogBackdrop.className = 'dialog-backdrop'
     this.dialogBackdrop.style.cssText = `
@@ -754,7 +754,7 @@ export class DialogManager {
     if (dialog) {
       dialog.remove()
       this.openDialogs.delete(dialogId)
-      
+
       // Hide backdrop if no dialogs open
       if (this.openDialogs.size === 0 && this.dialogBackdrop) {
         this.dialogBackdrop.style.display = 'none'
@@ -765,20 +765,20 @@ export class DialogManager {
   /**
    * Get dialog class name
    */
-  private getDialogClassName(props: DialogProps): string {
+  getDialogClassName(props: DialogProps): string {
     let className = 'dialog-component'
-    
+
     if (props.className) {
       className += ` ${props.className}`
     }
-    
+
     return className
   }
 
   /**
    * Generate unique dialog ID
    */
-  private generateDialogId(): string {
+  generateDialogId(): string {
     return `dialog-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   }
 }
@@ -788,7 +788,7 @@ export class DialogManager {
  * Original: Color control functionality from 698732.ts and 228217.ts
  */
 export class ColorControlManager {
-  private colorControls: Map<string, HTMLElement> = new Map()
+  colorControls: Map<string, HTMLElement> = new Map()
 
   /**
    * Create color control component
@@ -826,7 +826,7 @@ export class ColorControlManager {
    * Create color input field
    * Original: color input from 228217.ts
    */
-  private createColorInput(props: ColorControlProps): HTMLElement {
+  createColorInput(props: ColorControlProps): HTMLElement {
     const container = document.createElement('div')
     container.className = UI_COMPONENT_CLASSES.paintPanelColorValueContainer
 
@@ -866,12 +866,12 @@ export class ColorControlManager {
    * Create color sliders
    * Original: slider creation from 698732.ts
    */
-  private createColorSliders(props: ColorControlProps): HTMLElement {
+  createColorSliders(props: ColorControlProps): HTMLElement {
     const container = document.createElement('div')
     container.className = UI_COMPONENT_CLASSES.sliderContainer
 
     const sliderTypes = this.getSliderTypes(props.format || 'rgb')
-    
+
     sliderTypes.forEach(type => {
       const slider = this.createSlider(type, props)
       container.appendChild(slider)
@@ -883,7 +883,7 @@ export class ColorControlManager {
   /**
    * Create individual slider
    */
-  private createSlider(type: string, props: ColorControlProps): HTMLElement {
+  createSlider(type: string, props: ColorControlProps): HTMLElement {
     const slider = document.createElement('input')
     slider.type = 'range'
     slider.className = UI_COMPONENT_CLASSES.slider
@@ -903,7 +903,7 @@ export class ColorControlManager {
   /**
    * Create alpha slider
    */
-  private createAlphaSlider(props: ColorControlProps): HTMLElement {
+  createAlphaSlider(props: ColorControlProps): HTMLElement {
     const slider = document.createElement('input')
     slider.type = 'range'
     slider.className = UI_COMPONENT_CLASSES.slider
@@ -923,7 +923,7 @@ export class ColorControlManager {
   /**
    * Convert color to string representation
    */
-  private colorToString(color: ColorValue, format: ColorFormat): string {
+  colorToString(color: ColorValue, format: ColorFormat): string {
     switch (format) {
       case 'hex':
         return `#${Math.round(color.r * 255).toString(16).padStart(2, '0')}${Math.round(color.g * 255).toString(16).padStart(2, '0')}${Math.round(color.b * 255).toString(16).padStart(2, '0')}`
@@ -940,7 +940,7 @@ export class ColorControlManager {
   /**
    * Parse color string to ColorValue
    */
-  private parseColorString(colorString: string): ColorValue | null {
+  parseColorString(colorString: string): ColorValue | null {
     // Simple hex color parsing
     const hexMatch = colorString.match(/^#([0-9a-f]{6})$/i)
     if (hexMatch) {
@@ -958,7 +958,7 @@ export class ColorControlManager {
   /**
    * Convert RGB to HSL
    */
-  private rgbToHsl(color: ColorValue): { h: number; s: number; l: number } {
+  rgbToHsl(color: ColorValue): { h: number; s: number; l: number } {
     const { r, g, b } = color
     const max = Math.max(r, g, b)
     const min = Math.min(r, g, b)
@@ -985,7 +985,7 @@ export class ColorControlManager {
   /**
    * Get slider types for color format
    */
-  private getSliderTypes(format: ColorFormat): string[] {
+  getSliderTypes(format: ColorFormat): string[] {
     switch (format) {
       case 'rgb': return ['r', 'g', 'b']
       case 'hsl': return ['h', 's', 'l']
@@ -997,7 +997,7 @@ export class ColorControlManager {
   /**
    * Get slider maximum value
    */
-  private getSliderMax(type: string): string {
+  getSliderMax(type: string): string {
     switch (type) {
       case 'h': return '360'
       case 's':
@@ -1013,7 +1013,7 @@ export class ColorControlManager {
   /**
    * Get current slider value
    */
-  private getSliderValue(type: string, color: ColorValue): string {
+  getSliderValue(type: string, color: ColorValue): string {
     switch (type) {
       case 'r': return Math.round(color.r * 255).toString()
       case 'g': return Math.round(color.g * 255).toString()
@@ -1025,22 +1025,22 @@ export class ColorControlManager {
   /**
    * Update color from slider change
    */
-  private updateColorFromSlider(type: string, value: number, currentColor: ColorValue): ColorValue {
+  updateColorFromSlider(type: string, value: number, currentColor: ColorValue): ColorValue {
     const newColor = { ...currentColor }
-    
+
     switch (type) {
       case 'r': newColor.r = value / 255; break
       case 'g': newColor.g = value / 255; break
       case 'b': newColor.b = value / 255; break
     }
-    
+
     return newColor
   }
 
   /**
    * Generate unique control ID
    */
-  private generateControlId(): string {
+  generateControlId(): string {
     return `color-control-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   }
 }
@@ -1050,7 +1050,7 @@ export class ColorControlManager {
  * Original: Variable control functionality from 838262.ts
  */
 export class VariableControlManager {
-  private variableControls: Map<string, HTMLElement> = new Map()
+  variableControls: Map<string, HTMLElement> = new Map()
 
   /**
    * Create variable control component
@@ -1093,7 +1093,7 @@ export class VariableControlManager {
   /**
    * Create variable input field
    */
-  private createVariableInput(props: VariableControlProps): HTMLElement {
+  createVariableInput(props: VariableControlProps): HTMLElement {
     const input = document.createElement('input')
     input.type = 'text'
     input.value = props.variable ? props.variable.name : ''
@@ -1112,7 +1112,7 @@ export class VariableControlManager {
    * Create apply variable icon
    * Original: apply variable icon from 838262.ts
    */
-  private createApplyVariableIcon(): HTMLElement {
+  createApplyVariableIcon(): HTMLElement {
     const icon = document.createElement('div')
     icon.className = UI_COMPONENT_CLASSES.applyVariableIcon
     icon.textContent = '🔗' // Placeholder icon
@@ -1123,14 +1123,14 @@ export class VariableControlManager {
    * Create detach icon
    * Original: detach icon from 838262.ts
    */
-  private createDetachIcon(props: VariableControlProps): HTMLElement {
+  createDetachIcon(props: VariableControlProps): HTMLElement {
     const iconContainer = document.createElement('div')
     iconContainer.className = UI_COMPONENT_CLASSES.detachIconContainer
 
     const icon = document.createElement('button')
     icon.textContent = '×'
     icon.title = 'Detach variable'
-    
+
     icon.addEventListener('click', (e) => {
       e.stopPropagation()
       props.onVariableChange(null)
@@ -1143,10 +1143,10 @@ export class VariableControlManager {
   /**
    * Open variable picker modal
    */
-  private openVariablePicker(props: VariableControlProps): void {
+  openVariablePicker(props: VariableControlProps): void {
     // Would open a modal with variable selection
     console.warn('Variable picker would open here')
-    
+
     // For demo, just call the callback with a mock variable
     const mockVariable: VariableReference = {
       id: 'var-1',
@@ -1154,7 +1154,7 @@ export class VariableControlManager {
       type: 'COLOR',
       valuesByMode: { default: { r: 0, g: 0.5, b: 1, a: 1 } }
     }
-    
+
     setTimeout(() => {
       props.onVariableChange(mockVariable)
     }, 100)
@@ -1163,20 +1163,20 @@ export class VariableControlManager {
   /**
    * Get variable control class name
    */
-  private getVariableControlClassName(props: VariableControlProps): string {
+  getVariableControlClassName(props: VariableControlProps): string {
     let className = UI_COMPONENT_CLASSES.variableControlWrapper
-    
+
     if (props.variable) {
       className += ` ${UI_COMPONENT_CLASSES.variableControlActive}`
     }
-    
+
     return className
   }
 
   /**
    * Generate unique control ID
    */
-  private generateControlId(): string {
+  generateControlId(): string {
     return `variable-control-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   }
 }

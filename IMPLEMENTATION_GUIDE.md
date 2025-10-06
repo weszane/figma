@@ -10,8 +10,8 @@ Each module follows this consistent structure:
 
 ```typescript
 class ExampleAPIModule {
-  private context: APIContext
-  private vmHandles = new Map<string, any>()
+   context: APIContext
+   vmHandles = new Map<string, any>()
 
   constructor(context: APIContext) {
     this.context = context
@@ -31,7 +31,7 @@ class ExampleAPIModule {
   /**
    * createExampleMethod - VM-wrapped method example
    */
-  private createExampleMethod() {
+   createExampleMethod() {
     return this.context.defineVmFunction({
       metricsKey: 'example.exampleMethod',
       cb: (param1: any, param2: any) => {
@@ -44,7 +44,7 @@ class ExampleAPIModule {
   /**
    * getMemoizedVMHandle - Performance-optimized handle caching
    */
-  private getMemoizedVMHandle(key: string, factory: () => any): any {
+   getMemoizedVMHandle(key: string, factory: () => any): any {
     if (!this.vmHandles.has(key)) {
       this.vmHandles.set(key, factory())
     }
@@ -59,7 +59,7 @@ class ExampleAPIModule {
 
 ```typescript
 class NewAPIModule {
-  private context: APIContext
+   context: APIContext
 
   constructor(context: APIContext) {
     this.context = context
@@ -71,7 +71,7 @@ class NewAPIModule {
     }
   }
 
-  private createNewFeature() {
+   createNewFeature() {
     return this.context.defineVmFunction({
       metricsKey: 'new.feature',
       cb: () => {
@@ -88,9 +88,9 @@ class NewAPIModule {
 ```typescript
 class au {
   // Add module property
-  private newAPI: NewAPIModule
+   newAPI: NewAPIModule
 
-  private initializeModules() {
+   initializeModules() {
     const context = this.createAPIContext()
 
     // Initialize new module
@@ -209,7 +209,7 @@ class ModuleB {
     )
   }
 
-  private handleModuleAEvent(data: any) {
+   handleModuleAEvent(data: any) {
     // React to ModuleA events
   }
 }
@@ -219,7 +219,7 @@ class ModuleB {
 
 ```typescript
 class SharedStateModule {
-  private state = new Map<string, any>()
+   state = new Map<string, any>()
 
   getAPI() {
     return {
@@ -246,9 +246,9 @@ class SharedStateModule {
 
 ```typescript
 class OptimizedModule {
-  private cache = new Map<string, any>()
+   cache = new Map<string, any>()
 
-  private getCachedResult(key: string, computation: () => any): any {
+   getCachedResult(key: string, computation: () => any): any {
     if (!this.cache.has(key)) {
       this.cache.set(key, computation())
     }
@@ -269,9 +269,9 @@ class OptimizedModule {
 
 ```typescript
 class LazyModule {
-  private _heavyFeature: any = null
+   _heavyFeature: any = null
 
-  private getHeavyFeature() {
+   getHeavyFeature() {
     if (!this._heavyFeature) {
       this._heavyFeature = this.initializeHeavyFeature()
     }
@@ -304,7 +304,7 @@ class HealthCheckModule {
     }
   }
 
-  private checkAllModules(): ModuleHealth[] {
+   checkAllModules(): ModuleHealth[] {
     return [
       this.checkModule('core', this.context.coreAPI),
       this.checkModule('storage', this.context.storageAPI),
@@ -318,7 +318,7 @@ class HealthCheckModule {
 
 ```typescript
 class PerformanceModule {
-  private metrics = new Map<string, PerformanceMetric>()
+   metrics = new Map<string, PerformanceMetric>()
 
   measureOperation<T>(name: string, operation: () => T): T {
     const start = performance.now()
@@ -333,7 +333,7 @@ class PerformanceModule {
     }
   }
 
-  private recordMetric(name: string, duration: number, status: string) {
+   recordMetric(name: string, duration: number, status: string) {
     if (!this.metrics.has(name)) {
       this.metrics.set(name, {
         totalCalls: 0,

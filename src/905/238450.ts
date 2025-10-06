@@ -153,7 +153,7 @@ export function $$d0(e, t = {}) {
   }
   for (let t = 0; t < 2; t++) {
     let a = ") = 0;";
-    for (let s of (0 === t ? (c.push("class Visitor {"), c.push("public:")) : (c.push("class Writer : public Visitor {"), c.push("private:"), c.push("  kiwi::WriteBuffer &_wb;"), c.push("public:"), c.push("  Writer(kiwi::WriteBuffer &wb) : _wb(wb) {}"), a = ") override;"), e.definitions)) {
+    for (let s of (0 === t ? (c.push("class Visitor {"), c.push("public:")) : (c.push("class Writer : public Visitor {"), c.push(":"), c.push("  kiwi::WriteBuffer &_wb;"), c.push("public:"), c.push("  Writer(kiwi::WriteBuffer &wb) : _wb(wb) {}"), a = ") override;"), e.definitions)) {
       if ("STRUCT" === s.kind) {
         let e = n(i, "", s.fields, !1);
         if (null !== e) {

@@ -8,8 +8,8 @@ import { getRequest } from '../905/910117'
  * Original class: $$o0
  */
 export class PluginCodeCache {
-  private cache: Record<string, any>
-  private requestsInFlight: Record<string, Promise<any>>
+  cache: Record<string, any>
+  requestsInFlight: Record<string, Promise<any>>
 
   constructor() {
     this.clearCache()

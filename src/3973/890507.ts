@@ -309,10 +309,10 @@ export function trackClientUpdateUserTime(updateTimeMs: number, success: boolean
  * Timer class for Statsig operations.
  */
 export class StatsigTimer {
-  private caughtError: boolean = false;
-  private elapsedTimeMs: number = 0;
-  private error: Error | null = null;
-  private timer: PerfTimer;
+  caughtError: boolean = false;
+  elapsedTimeMs: number = 0;
+  error: Error | null = null;
+  timer: PerfTimer;
   constructor(label: string) {
     this.timer = new PerfTimer(label, {});
   }

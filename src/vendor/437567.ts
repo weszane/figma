@@ -25,7 +25,7 @@ function $$d(e) {
         o = "default";
       }
     });
-  }, 300));else if ((e instanceof HTMLElement || e instanceof SVGElement) && e && s.has(e)) {
+  }, 300)); else if ((e instanceof HTMLElement || e instanceof SVGElement) && e && s.has(e)) {
     let t = s.get(e);
     let a = "userSelect" in e.style ? "userSelect" : "webkitUserSelect";
     "none" === e.style[a] && (e.style[a] = t);
@@ -34,18 +34,18 @@ function $$d(e) {
   }
 }
 let m = createContext({
-  register: () => {}
+  register: () => { }
 });
 function h(e, t, a) {
-  if (!t.has(e)) throw TypeError("attempted to " + a + " private field on non-instance");
+  if (!t.has(e)) throw TypeError("attempted to " + a + "  field on non-instance");
   return t.get(e);
 }
 m.displayName = "PressResponderContext";
 function f(e, t, a) {
   var u = h(e, t, "set");
   !function (e, t, a) {
-    if (t.set) t.set.call(e, a);else {
-      if (!t.writable) throw TypeError("attempted to set read only private field");
+    if (t.set) t.set.call(e, a); else {
+      if (!t.writable) throw TypeError("attempted to set read only  field");
       t.value = a;
     }
   }(e, u, a);

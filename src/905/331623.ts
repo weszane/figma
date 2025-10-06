@@ -43,7 +43,7 @@ export class MediaQuerySvgComponent extends PureComponent<
    * Handles media query list change event.
    * Original method name: onMediaQueryListChange
    */
-  private handleMediaQueryListChange = (event: MediaQueryListEvent) => {
+  handleMediaQueryListChange = (event: MediaQueryListEvent) => {
     this.setState({
       matches: event.matches,
     })

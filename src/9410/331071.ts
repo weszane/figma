@@ -380,7 +380,7 @@ import { hasDesktopAPI } from '../figma_app/876459';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
 import { Jj, vj } from '../figma_app/883990';
 import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
-import { PN } from '../figma_app/897289';
+import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { FileBrowserLocation } from '../figma_app/915202';
 import { D as _$$D2, p as _$$p4 } from '../figma_app/930185';
 import { bL, C5, GX, jb, JT, Nf, Oy, vA, wj, ZM } from '../figma_app/930214';
@@ -900,7 +900,7 @@ async function tC(e, t, i, r) {
       o.push(t);
     }
     let l = (await eZ(s, o, r)).getReader();
-    for (;;) {
+    for (; ;) {
       let {
         done,
         value
@@ -1016,7 +1016,7 @@ function t0(e) {
             obj: e,
             depth
           });
-        } catch (e) {}
+        } catch (e) { }
       }
       return obj.startsWith('data:image') ? jsx(t$, {
         url: obj
@@ -1392,7 +1392,7 @@ function it({
   try {
     let i = new DOMParser().parseFromString(e, 'text/xml').getElementsByTagName('user_input');
     i.length > 0 && (t = i[0].textContent || '');
-  } catch {}
+  } catch { }
   return jsx('div', {
     children: t.split('\n').map((e, t) => jsxs('span', {
       children: [e, jsx('br', {})]
@@ -2032,7 +2032,7 @@ var nX = (e => (e.TITLE = 'title', e.BODY = 'body', e.LABLE = 'label', e))(nX ||
 let nZ = 'theme_editor--svgText--yyKtR';
 let nQ = createContext({
   activeTab: nq.COLOR,
-  onTabChange: () => {},
+  onTabChange: () => { },
   recordingKey: void 0
 });
 function n$({
@@ -2919,7 +2919,7 @@ function af(e) {
         if (!r) return [];
         try {
           return _$$z.array(PromptSchema).parse(JSON.parse(r));
-        } catch {}
+        } catch { }
         return [];
       }(f.guid);
       let y = function (e) {
@@ -2959,7 +2959,7 @@ function af(e) {
       })(f.guid, _);
       let v = C.getReader();
       let E = [];
-      for (;;) {
+      for (; ;) {
         let {
           done,
           value
@@ -4486,20 +4486,20 @@ let aJ = async ({
     for (let r of (i.name = 'Results', ComponentPropsAiCPPBindings.setTextContentOnTextNode(i.guid, `False Negative Count: ${l.reduce((e, t) => e + t.falseNegativeCount, 0)}
 False Positive Count: ${l.reduce((e, t) => e + t.falsePositiveCount, 0)}
 Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 10, i.size = {
-      x: 200,
-      y: 200
-    }, i.fills = i.fills.concat([{
-      type: 'SOLID',
-      color: {
-        r: 0,
-        g: 0,
-        b: 0,
-        a: 1
-      },
-      visible: !0,
-      opacity: 1,
-      blendMode: 'NORMAL'
-    }]), t.appendChild(i), e.appendChild(t), l)) {
+        x: 200,
+        y: 200
+      }, i.fills = i.fills.concat([{
+        type: 'SOLID',
+        color: {
+          r: 0,
+          g: 0,
+          b: 0,
+          a: 1
+        },
+        visible: !0,
+        opacity: 1,
+        blendMode: 'NORMAL'
+      }]), t.appendChild(i), e.appendChild(t), l)) {
       let t = r.result;
       if (!equals(t.expectedComponents, t.components)) {
         let i = FirstDraftHelpers.cloneNodeForComponentize(t.node.guid);
@@ -6033,7 +6033,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           l = updatedU;
           d = updatedV;
           let c = sink;
-          for (;;) {
+          for (; ;) {
             let e = predecessors[c];
             s[c] = e;
             let i = o[e];
@@ -7858,7 +7858,7 @@ function oO(e) {
   });
 }
 let oM = e => isCheckedOrHasPropertyValue(e) && !e.hideCheckForQuickCommand;
-let oP = () => {};
+let oP = () => { };
 function oF({
   item: e,
   searchQuery: t,
@@ -8005,7 +8005,7 @@ function oF({
       VU.get(e.action, 'quick-actions', e.args)();
     });
     E(i);
-    oM(e) && !PN() ? x() : e.keepMenuOpen || _();
+    oM(e) && !isInteractionOrEvalMode() ? x() : e.keepMenuOpen || _();
     d ? d().catch(t => {
       reportError(ServiceCategories.AI_FOR_PRODUCTION, t, {
         extra: {
@@ -8567,7 +8567,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
+            callback: () => { },
             displayNode: m ? renderI18nText('fullscreen_actions.quick_actions.find-in-community', {
               searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -8605,7 +8605,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
+            callback: () => { },
             displayNode: m ? o ? renderI18nText('fullscreen_actions.quick_actions.find-at-plan-file', {
               searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -8661,7 +8661,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
+            callback: () => { },
             displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? 'fullscreen_actions.quick_actions.search-at-plan-file-and-community' : 'fullscreen_actions.quick_actions.find-at-plan-file-and-community', {
               searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -8711,7 +8711,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
+            callback: () => { },
             displayNode: renderI18nText('fullscreen_actions.assistant-chat-query', {
               query: jsx(TextWithTruncation, {
                 color: 'secondary',
@@ -10043,7 +10043,7 @@ let dy = liveStoreInstance.Query({
     data: e
   }) => ({
     public: e.results.$$public.map(e => e.model),
-    private: e.results.$$private.map(e => e.model)
+    : e.results.$$.map(e => e.model)
   })
 });
 let db = liveStoreInstance.Query({
@@ -10070,7 +10070,7 @@ let db = liveStoreInstance.Query({
       public: fail.map(({
         model: e
       }) => e.content?.plugin || e.content?.widget).filter(e => !!e),
-      private: pass.map(({
+      : pass.map(({
         model: e
       }) => e.content?.plugin || e.content?.widget).filter(e => !!e)
     };
@@ -10153,146 +10153,146 @@ function dv({
         status: n,
         results: a || {
           public: [],
-          private: []
-        },
-        errors: s
+          : []
+},
+errors: s
       };
     }(e);
-    let n = function (e) {
-      let t = getLocalPlugins();
-      let i = useMemo(() => Object.values(t), [t]);
-      let r = useMemo(() => new SimpleFuseSearch(i, FUSE_CONFIG_PROFILE), [i]);
-      return useMemo(() => r.search(e), [r, e]);
-    }(e);
-    return useMemo(() => {
-      switch (status) {
-        case 'loading':
-          return {
-            loading: !0,
-            privateExtensions: [],
-            publicExtensions: [],
-            localExtensions: []
-          };
-        case 'loaded':
-          return {
-            loading: !1,
-            publicExtensions: results.$$public,
-            privateExtensions: results.$$private,
-            localExtensions: n
-          };
-        case 'disabled':
-          return {
-            loading: !1,
-            privateExtensions: [],
-            publicExtensions: [],
-            localExtensions: []
-          };
-        case 'errors':
-          reportError(ServiceCategories.EXTENSIBILITY, new Error('[useSearchExtensions] Unable to fetch search results'), {
-            tags: {
-              status
-            },
-            extra: {
-              errors
-            }
-          });
-          return {
-            loading: !1,
-            privateExtensions: [],
-            publicExtensions: [],
-            localExtensions: []
-          };
-        default:
-          throwTypeError(status);
-      }
-    }, [results?.private, results?.public, n, status, errors]);
+let n = function (e) {
+  let t = getLocalPlugins();
+  let i = useMemo(() => Object.values(t), [t]);
+  let r = useMemo(() => new SimpleFuseSearch(i, FUSE_CONFIG_PROFILE), [i]);
+  return useMemo(() => r.search(e), [r, e]);
+}(e);
+return useMemo(() => {
+  switch (status) {
+    case 'loading':
+      return {
+        loading: !0,
+        privateExtensions: [],
+        publicExtensions: [],
+        localExtensions: []
+      };
+    case 'loaded':
+      return {
+        loading: !1,
+        publicExtensions: results.$$public,
+        privateExtensions: results.$$,
+        localExtensions: n
+      };
+    case 'disabled':
+      return {
+        loading: !1,
+        privateExtensions: [],
+        publicExtensions: [],
+        localExtensions: []
+      };
+    case 'errors':
+      reportError(ServiceCategories.EXTENSIBILITY, new Error('[useSearchExtensions] Unable to fetch search results'), {
+        tags: {
+          status
+        },
+        extra: {
+          errors
+        }
+      });
+      return {
+        loading: !1,
+        privateExtensions: [],
+        publicExtensions: [],
+        localExtensions: []
+      };
+    default:
+      throwTypeError(status);
+  }
+}, [results?., results?.public, n, status, errors]);
   }(p);
-  let b = function (e, t) {
-    let i = lk(t);
-    let r = useMemo(() => new SimpleFuseSearch(i, FUSE_CONFIG_COMMENT), [i]);
-    return useMemo(() => r.search(e), [r, e]);
-  }(p, t);
-  useEffect(() => {
-    let e = [...publicExtensions, ...privateExtensions];
-    e.length !== 0 && f(Qi({
-      publishedPlugins: e,
-      src: 'Quick actions'
-    }));
-  }, [f, privateExtensions, publicExtensions]);
-  let {
-    myExtensions,
-    fromOrgExtensions,
-    communityExtensions
-  } = dw(function ({
-    publicExtensions: e,
-    privateExtensions: t,
-    localExtensions: i
-  }) {
-    let r = Oy();
-    return useMemo(() => {
-      let n = (e, t) => e.map(e => getCurrentPluginVersion(e)).filter(e => !!e).map(e => r(e, t));
-      let a = n(e, Ag.COMMUNITY);
-      let s = n(t, Ag.ORG_PRIVATE);
-      return [...i.map(e => r(e, Ag.LOCAL)), ...s, ...a];
-    }, [r, i, t, e]);
-  }({
-    publicExtensions,
-    privateExtensions,
-    localExtensions
-  }), e, t);
-  let N = myExtensions.length + fromOrgExtensions.length + communityExtensions.length + b.length;
-  let A = function ({
-    myExtensions: e,
-    actionItems: t,
-    fromOrgExtensions: i,
-    communityExtensions: r
-  }) {
-    let n = HD('My Extensions', e);
-    let a = NH(t);
-    let s = HD('From Org', i);
-    let o = HD('From Community', r);
-    return _$$i2([n, a, s, o]);
-  }({
-    myExtensions,
-    actionItems: b,
-    fromOrgExtensions,
-    communityExtensions
-  });
-  return (useEffect(() => {
-    r === AssetTabType.EXTENSIONS && l && !loading && i({
-      quickActionsSessionId: l,
-      quickActionsQueryId: h,
-      searchQuery: p,
-      numSearchResults: N,
-      currentSelection: m,
-      module: r,
-      moduleFilters: t,
-      qaVersion: $L,
-      searchQueryResults: A
-    });
-  }, [m, i, r, N, l, h, t, loading, A, p]), _$$iC({
-    activeTab: AssetTabType.EXTENSIONS,
-    isLoading: loading,
-    passthroughErrorMessage: GX(p) ? getI18nString('search.error.max_query_length_exceeded') : null,
-    query: d,
-    resultsCount: N
-  }), loading) ? jsx(_$$R6, {}) : GX(p) ? jsx(dC, {}) : N === 0 ? jsx(da, {}) : jsx(M6, {
-    numResults: N,
+let b = function (e, t) {
+  let i = lk(t);
+  let r = useMemo(() => new SimpleFuseSearch(i, FUSE_CONFIG_COMMENT), [i]);
+  return useMemo(() => r.search(e), [r, e]);
+}(p, t);
+useEffect(() => {
+  let e = [...publicExtensions, ...privateExtensions];
+  e.length !== 0 && f(Qi({
+    publishedPlugins: e,
+    src: 'Quick actions'
+  }));
+}, [f, privateExtensions, publicExtensions]);
+let {
+  myExtensions,
+  fromOrgExtensions,
+  communityExtensions
+} = dw(function ({
+  publicExtensions: e,
+  privateExtensions: t,
+  localExtensions: i
+}) {
+  let r = Oy();
+  return useMemo(() => {
+    let n = (e, t) => e.map(e => getCurrentPluginVersion(e)).filter(e => !!e).map(e => r(e, t));
+    let a = n(e, Ag.COMMUNITY);
+    let s = n(t, Ag.ORG_PRIVATE);
+    return [...i.map(e => r(e, Ag.LOCAL)), ...s, ...a];
+  }, [r, i, t, e]);
+}({
+  publicExtensions,
+  privateExtensions,
+  localExtensions
+}), e, t);
+let N = myExtensions.length + fromOrgExtensions.length + communityExtensions.length + b.length;
+let A = function ({
+  myExtensions: e,
+  actionItems: t,
+  fromOrgExtensions: i,
+  communityExtensions: r
+}) {
+  let n = HD('My Extensions', e);
+  let a = NH(t);
+  let s = HD('From Org', i);
+  let o = HD('From Community', r);
+  return _$$i2([n, a, s, o]);
+}({
+  myExtensions,
+  actionItems: b,
+  fromOrgExtensions,
+  communityExtensions
+});
+return (useEffect(() => {
+  r === AssetTabType.EXTENSIONS && l && !loading && i({
+    quickActionsSessionId: l,
+    quickActionsQueryId: h,
+    searchQuery: p,
+    numSearchResults: N,
+    currentSelection: m,
+    module: r,
     moduleFilters: t,
-    children: jsxs(_$$B6, {
-      primary: !0,
-      resultCount: N,
-      children: [jsx(dn, {
-        extensions: myExtensions
-      }), jsx(dr, {
-        actions: b
-      }), jsx(dE, {
-        extensions: fromOrgExtensions
-      }), jsx(dT, {
-        extensions: communityExtensions
-      })]
-    })
+    qaVersion: $L,
+    searchQueryResults: A
   });
+}, [m, i, r, N, l, h, t, loading, A, p]), _$$iC({
+  activeTab: AssetTabType.EXTENSIONS,
+  isLoading: loading,
+  passthroughErrorMessage: GX(p) ? getI18nString('search.error.max_query_length_exceeded') : null,
+  query: d,
+  resultsCount: N
+}), loading) ? jsx(_$$R6, {}) : GX(p) ? jsx(dC, {}) : N === 0 ? jsx(da, {}) : jsx(M6, {
+  numResults: N,
+  moduleFilters: t,
+  children: jsxs(_$$B6, {
+    primary: !0,
+    resultCount: N,
+    children: [jsx(dn, {
+      extensions: myExtensions
+    }), jsx(dr, {
+      actions: b
+    }), jsx(dE, {
+      extensions: fromOrgExtensions
+    }), jsx(dT, {
+      extensions: communityExtensions
+    })]
+  })
+});
 }
 function dE({
   extensions: e

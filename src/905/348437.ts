@@ -3,7 +3,7 @@ import { createNoOpValidator, defaultValidator } from '../figma_app/181241'
  * Validator for FileCommentAttachmentSchema operations.
  */
 export class FileCommentAttachmentHandler {
-  private fileCommentAttachmentSchemaValidator = createNoOpValidator()
+  fileCommentAttachmentSchemaValidator = createNoOpValidator()
 
   /**
    * Posts a new file comment attachment.

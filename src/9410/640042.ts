@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { retryAsync } from "../figma_app/562352";
 import { logger } from "../905/651849";
 import { m as _$$m, y as _$$y } from "../9410/643761";
-import { PN } from "../figma_app/897289";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { loadVideoJs, loadVideoSource } from "../905/284552";
 import { fullscreenValue } from "../figma_app/455680";
 import { getVisibleArea, getViewportInfo } from "../figma_app/62612";
@@ -90,7 +90,7 @@ export async function $$E3(e, t, i) {
       textTrackDisplay: !1,
       nativeTextTracks: !1
     }, async () => {
-      if (PN()) {
+      if (isInteractionOrEvalMode()) {
         a.src({
           type: "video/mp4",
           src: `https://static.figma.com/uploads/${i}`

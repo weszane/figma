@@ -7,14 +7,14 @@
 // Ensured same functionality as original.
 
 export class ByteBuffer {
-  private _data: Uint8Array
-  private _start: number
-  private _index: number
+  _data: Uint8Array
+  _start: number
+  _index: number
   public length: number
 
   // Static helpers for float conversion (originally global n and r)
-  private static readonly int32View = new Int32Array(1)
-  private static readonly float32View = new Float32Array(ByteBuffer.int32View.buffer)
+  static readonly int32View = new Int32Array(1)
+  static readonly float32View = new Float32Array(ByteBuffer.int32View.buffer)
 
   /**
    * Constructor for ByteBuffer.
@@ -213,7 +213,7 @@ export class ByteBuffer {
   }
 
   // Helper for readString
-  private readCodePoint(): number {
+  readCodePoint(): number {
     const firstByte = this.readByte()
     if (firstByte < 192)
       return firstByte
@@ -232,7 +232,7 @@ export class ByteBuffer {
    * Grows the buffer by the specified amount.
    * @param amount - The amount to grow.
    */
-  private _growBy(amount: number): void {
+  _growBy(amount: number): void {
     if (this.length + amount > this._data.length) {
       const newData = new Uint8Array((this.length + amount) << 1)
       newData.set(this._data)
@@ -316,7 +316,7 @@ export class ByteBuffer {
    * Helper for writing uint64.
    * @param binary - The binary string.
    */
-  private writeVarUint64Helper(binary: string): void {
+  writeVarUint64Helper(binary: string): void {
     if (!binary)
       return
     let count = 0
@@ -352,7 +352,7 @@ export class ByteBuffer {
    * @param binary - The binary string.
    * @returns The result.
    */
-  private subtractOne(binary: string): string {
+  subtractOne(binary: string): string {
     const digits = binary.split('').map(Number)
     let borrow = 1
     for (let i = digits.length - 1; i >= 0; i--) {
@@ -373,7 +373,7 @@ export class ByteBuffer {
    * @param str - The input string.
    * @returns The cleaned string.
    */
-  private cleanNumericString(str: string): string {
+  cleanNumericString(str: string): string {
     let result = ''
     for (let i = 0; i < str.length; i++) {
       const char = str.charAt(i)
@@ -425,7 +425,7 @@ export class ByteBuffer {
   }
 
   // Helpers for writeString
-  private getCodePoint(str: string, index: number): number {
+  getCodePoint(str: string, index: number): number {
     const code = str.charCodeAt(index)
     if (index + 1 === str.length || code < 55296 || code >= 56320) {
       return code
@@ -433,7 +433,7 @@ export class ByteBuffer {
     return (code << 10) + str.charCodeAt(++index) - 0x35FDC00
   }
 
-  private writeCodePoint(codePoint: number): void {
+  writeCodePoint(codePoint: number): void {
     if (codePoint < 128) {
       this.writeByte(codePoint)
     }
@@ -492,7 +492,7 @@ export class ByteBuffer {
   }
 
   // Helper for redactString
-  private writeCodePointForOverwrite(codePoint: number): void {
+  writeCodePointForOverwrite(codePoint: number): void {
     if (codePoint < 128) {
       this.overwriteByte(codePoint)
     }
@@ -521,7 +521,7 @@ export class ByteBuffer {
    * @param base - The base.
    * @returns The result array.
    */
-  private add(a: number[], b: number[], base: number): number[] {
+  add(a: number[], b: number[], base: number): number[] {
     const result: number[] = []
     let carry = 0
     let i = 0
@@ -541,7 +541,7 @@ export class ByteBuffer {
    * @param base - The base.
    * @returns The result array.
    */
-  private multiplyByNumber(num: number, digits: number[], base: number): number[] {
+  multiplyByNumber(num: number, digits: number[], base: number): number[] {
     if (num <= 0)
       return []
     let result: number[] = []
@@ -562,7 +562,7 @@ export class ByteBuffer {
    * @param base - The base.
    * @returns The digit array.
    */
-  private parseToDigitsArray(str: string, base: number): number[] {
+  parseToDigitsArray(str: string, base: number): number[] {
     const chars = str.split('')
     const digits: number[] = []
     for (let i = chars.length - 1; i >= 0; i--) {
@@ -580,7 +580,7 @@ export class ByteBuffer {
    * @param base - The base.
    * @returns The string.
    */
-  private parseFromDigitsArray(digits: number[], base: number): string {
+  parseFromDigitsArray(digits: number[], base: number): string {
     let result = ''
     for (let i = digits.length - 1; i >= 0; i--) {
       result += digits[i].toString(base)
@@ -595,7 +595,7 @@ export class ByteBuffer {
    * @param toBase - The target base.
    * @returns The converted string.
    */
-  private convertBase(value: string, fromBase: number, toBase: number): string {
+  convertBase(value: string, fromBase: number, toBase: number): string {
     const digits = this.parseToDigitsArray(value, fromBase)
     if (!digits.length)
       return ''

@@ -42,7 +42,7 @@ let p = d('hasRoleOrUserGroupAccess', (e, t, i) => {
 })
 d('isOauthAppDraft', e => [e.approvedOauthAppVersionId, '=', null])
 d('isOauthAppApprovedAndPublic', e => ez([[e.approvedOauthAppVersionId, '<>', null], [e.audience, '=', 'public']]))
-d('isOauthAppApprovedAndPrivate', e => ez([[e.approvedOauthAppVersionId, '<>', null], [e.audience, '=', 'private']]))
+d('isOauthAppApprovedAndPrivate', e => ez([[e.approvedOauthAppVersionId, '<>', null], [e.audience, '=', '']]))
 d('isHubFileAcceptedCocreator', (e, t) => eY([t.profileId, 'in', e.publisherProfileIds]))
 let m = d('isPublishedResource', e => [e.unpublishedAt, '=', null])
 d('isMonetizedResource', e => [e.monetizedResourceMetadataId, '<>', null])

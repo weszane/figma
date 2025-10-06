@@ -21,11 +21,11 @@ export let HISTORY_DOCUMENT_INDEX = 1;
 
 /** Error thrown when SceneGraph APIs are unavailable. */
 // SceneGraphUnavailableError
-export class SceneGraphUnavailableError extends Error {}
+export class SceneGraphUnavailableError extends Error { }
 
 /** Error thrown when NodeTsApi is unavailable. */
 // NodeTsApiUnavailableError
-export class NodeTsApiUnavailableError extends Error {}
+export class NodeTsApiUnavailableError extends Error { }
 
 /**
  * Returns all required API objects, or throws if unavailable.
@@ -54,10 +54,10 @@ function getApis() {
 // TSSceneGraph
 export class TSSceneGraph {
   sceneType: any;
-  private _nodeContext: any;
+  _nodeContext: any;
   changeListeners: any;
   deleteListeners: any;
-  /** @private */
+  /** @ */
 
   /** Returns the current node context. */
   get nodeContext() {

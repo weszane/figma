@@ -260,7 +260,7 @@ export function sendMappingSuggestion(suggestion: { requestId: string, mappings?
 
 // Message manager for requests with responses (original: $$O23)
 class MessageWithResponseManager {
-  private pendingMessagesById: Record<string, any> = {}
+  pendingMessagesById: Record<string, any> = {}
 
   /**
    * Sends a message and returns a promise for the response.
@@ -298,7 +298,7 @@ export const messageWithResponseManager = new MessageWithResponseManager()
 
 // Message manager for callbacks (original: $$R24)
 export class MessageWithCallbackManager {
-  private callbacksById: Record<string, Fn> = {}
+  callbacksById: Record<string, Fn> = {}
 
   /**
    * Registers a callback and returns a function to cancel it.

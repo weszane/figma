@@ -624,7 +624,7 @@ function getOrgParams(
     }
   }
 
-  // Handle private widgets model type
+  // Handle  widgets model type
   if (searchModelType && searchModelType === PublicModelType.PRIVATE_WIDGETS) {
     return {
       orgSearch: true,

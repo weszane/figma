@@ -20,11 +20,11 @@ function createSanitizedTemplate(html: string): HTMLTemplateElement {
  * Displays a user avatar with image fallback to initials
  */
 export class FigmaAvatarElement extends HTMLElement {
-  private _lastClassName: string | undefined = undefined
+  _lastClassName: string | undefined = undefined
 
   // CSS class names mapped from external constants
-  private readonly SPAN_CLASS = `${e7} ${Pp}`
-  private readonly IMG_CLASS = `${my} ${Pp}`
+  readonly SPAN_CLASS = `${e7} ${Pp}`
+  readonly IMG_CLASS = `${my} ${Pp}`
 
   constructor() {
     super()
@@ -58,7 +58,7 @@ export class FigmaAvatarElement extends HTMLElement {
    * Creates an error avatar element when image loading fails
    * @returns Div element styled as error avatar
    */
-  private createErrorAvatar(): HTMLDivElement {
+  createErrorAvatar(): HTMLDivElement {
     const errorElement = document.createElement("div")
     errorElement.classList.add(my)
     return errorElement
@@ -67,14 +67,14 @@ export class FigmaAvatarElement extends HTMLElement {
   /**
    * Gets the avatar image element
    */
-  private get avatarImg(): HTMLImageElement {
+  get avatarImg(): HTMLImageElement {
     return this.getElementsByTagName("img")[0] as HTMLImageElement
   }
 
   /**
    * Gets the fallback span element for initials
    */
-  private get fallbackSpan(): HTMLSpanElement {
+  get fallbackSpan(): HTMLSpanElement {
     return this.getElementsByTagName("span")[0] as HTMLSpanElement
   }
 
@@ -210,15 +210,15 @@ export class FigmaAvatarElement extends HTMLElement {
  * Manages a collection of avatars with overflow handling
  */
 export class FigmaAvatarsElement extends HTMLElement {
-  private lastAvatars: Array<{ initial: string, user_id: string, url?: string }> = []
+  lastAvatars: Array<{ initial: string, user_id: string, url?: string }> = []
 
   // CSS class names mapped from external constants
-  private readonly PRIMARY_CONTAINER_CLASS = q_
-  private readonly SECONDARY_CONTAINER_CLASS = Ws
-  private readonly OVERFLOW_CONTAINER_CLASS = OF
-  private readonly OVERFLOW_COUNT_CLASS = c_
-  private readonly AVATAR_OVERFLOW_CLASS = mp
-  private readonly CONTAINER_CLASS = u_
+  readonly PRIMARY_CONTAINER_CLASS = q_
+  readonly SECONDARY_CONTAINER_CLASS = Ws
+  readonly OVERFLOW_CONTAINER_CLASS = OF
+  readonly OVERFLOW_COUNT_CLASS = c_
+  readonly AVATAR_OVERFLOW_CLASS = mp
+  readonly CONTAINER_CLASS = u_
 
   constructor() {
     super()
@@ -237,28 +237,28 @@ export class FigmaAvatarsElement extends HTMLElement {
   /**
    * Gets the primary avatars container
    */
-  private get avatarsPrimaryContainer(): HTMLDivElement {
+  get avatarsPrimaryContainer(): HTMLDivElement {
     return this.getElementsByClassName(this.PRIMARY_CONTAINER_CLASS)[0] as HTMLDivElement
   }
 
   /**
    * Gets the secondary avatars container
    */
-  private get avatarsSecondaryContainer(): HTMLDivElement {
+  get avatarsSecondaryContainer(): HTMLDivElement {
     return this.getElementsByClassName(this.SECONDARY_CONTAINER_CLASS)[0] as HTMLDivElement
   }
 
   /**
    * Gets the overflow avatars container
    */
-  private get avatarsOverflowContainer(): HTMLDivElement {
+  get avatarsOverflowContainer(): HTMLDivElement {
     return this.getElementsByClassName(this.OVERFLOW_CONTAINER_CLASS)[0] as HTMLDivElement
   }
 
   /**
    * Gets the overflow avatar element
    */
-  private get overflowAvatar(): FigmaAvatarElement | null {
+  get overflowAvatar(): FigmaAvatarElement | null {
     const container = this.avatarsOverflowContainer
     return container?.getElementsByTagName("figma-avatar")[0] as FigmaAvatarElement || null
   }
@@ -266,7 +266,7 @@ export class FigmaAvatarsElement extends HTMLElement {
   /**
    * Gets the overflow count element
    */
-  private get overflowCount(): HTMLSpanElement | null {
+  get overflowCount(): HTMLSpanElement | null {
     const container = this.avatarsOverflowContainer
     return container?.getElementsByClassName(this.OVERFLOW_COUNT_CLASS)[0] as HTMLSpanElement || null
   }
@@ -316,7 +316,7 @@ export class FigmaAvatarsElement extends HTMLElement {
   /**
    * Gets all avatar elements indexed by user ID
    */
-  private get avatarElements(): Record<string, FigmaAvatarElement> {
+  get avatarElements(): Record<string, FigmaAvatarElement> {
     return Array.from(this.getElementsByTagName("figma-avatar"))
       .reduce((acc, element) => {
         acc[element.id] = element as FigmaAvatarElement
@@ -330,7 +330,7 @@ export class FigmaAvatarsElement extends HTMLElement {
    * @param avatars - Array of avatar data to render
    * @param existingElements - Map of existing avatar elements
    */
-  private render(
+  render(
     container: Element,
     avatars: Array<{ initial: string, user_id: string, url?: string }>,
     existingElements: Record<string, FigmaAvatarElement>,
@@ -370,7 +370,7 @@ export class FigmaAvatarsElement extends HTMLElement {
    * Renders all avatars with overflow handling
    * @param avatars - Array of avatar data to render
    */
-  private renderAvatars(
+  renderAvatars(
     avatars: Array<{ initial: string, user_id: string, url?: string }>,
   ): void {
     if (!this.isConnected

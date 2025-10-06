@@ -8,7 +8,7 @@ import { Jr } from '../../figma_app/624361'
 import { NFK, NfO } from '../../figma_app/763686'
 
 /**
- * Image Store Class - manages private image cache with hash-based storage and retrieval
+ * Image Store Class - manages  image cache with hash-based storage and retrieval
  * Handles image bytes loading, animated image info, and SHA1-based image management
  */
 export class ImageStore {
@@ -50,7 +50,7 @@ export class ImageStore {
   }
 
   /**
-   * Get private image or throw error if not found
+   * Get  image or throw error if not found
    */
   getPrivateImageOrThrow(hash) {
     const privateImage = this.hashToPrivateImage.get(hash)
@@ -61,7 +61,7 @@ export class ImageStore {
   }
 
   /**
-   * Get or create a private image entry
+   * Get or create a  image entry
    */
   getOrCreatePrivateImage(hash, animatedInfo) {
     let privateImage = this.hashToPrivateImage.get(hash)

@@ -414,7 +414,7 @@ class SearchAPIHandler {
   }
 
   /**
-   * Gets community plugins and optionally private plugins.
+   * Gets community plugins and optionally  plugins.
    * (Original: getCommunityPlugins)
    */
   getCommunityPlugins(
@@ -465,7 +465,7 @@ class SearchAPIHandler {
   }
 
   /**
-   * Gets community widgets and optionally private widgets.
+   * Gets community widgets and optionally  widgets.
    * (Original: getCommunityWidgets)
    */
   getCommunityWidgets(

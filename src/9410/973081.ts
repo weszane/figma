@@ -212,7 +212,7 @@ import { wo } from '../figma_app/109130';
 import { $c, au as _$$au, D6, H1 } from '../figma_app/124493';
 import { autosaveAtom, FileProcessingStatus } from '../figma_app/139113';
 import { isAssetSuggestionsEnabled, isRenameLayersEnabled } from '../figma_app/144974';
-import { ap as _$$ap } from '../figma_app/149304';
+import { shouldUseWebGL2 } from '../figma_app/149304';
 import { Dc, hV } from '../figma_app/151766';
 import { Vr } from '../figma_app/151869';
 import { hasLocalFileId, ManifestEditorType } from '../figma_app/155287';
@@ -243,7 +243,7 @@ import { handlePreviewTracking } from '../figma_app/274217';
 import { mapStyleKeyToType } from '../figma_app/276332';
 import { F as _$$F2 } from '../figma_app/284426';
 import { useSubscription } from '../figma_app/288654';
-import { dz, Jt } from '../figma_app/290668';
+import { FOCUS_NEXT_AREA, FOCUS_PREVIOUS_AREA } from '../figma_app/290668';
 import { FX } from '../figma_app/291792';
 import { imageProcessor } from '../figma_app/291892';
 import { R as _$$R2, y as _$$y3 } from '../figma_app/294349';
@@ -379,13 +379,13 @@ import { A as _$$A16 } from '../svg/821527';
 class O {
   static getCanvasColorSpace(e = {}) {
     let t = dX('fullscreen');
-    let i = t?.getContext(_$$ap() ? 'webgl2' : 'webgl')?.drawingBufferColorSpace;
+    let i = t?.getContext(shouldUseWebGL2() ? 'webgl2' : 'webgl')?.drawingBufferColorSpace;
     if (i === 'srgb') ;else if (i === 'display-p3') return e.returnString ? ColorSpaceEnum[ColorSpaceEnum.DISPLAY_P3] : ColorSpaceEnum.DISPLAY_P3;
     return e.returnString ? ColorSpaceEnum[ColorSpaceEnum.SRGB] : ColorSpaceEnum.SRGB;
   }
   static setCanvasColorSpace(e) {
     let t = dX('fullscreen');
-    let i = t?.getContext(_$$ap() ? 'webgl2' : 'webgl');
+    let i = t?.getContext(shouldUseWebGL2() ? 'webgl2' : 'webgl');
     'drawingBufferColorSpace' in i && (i.drawingBufferColorSpace = e);
   }
   static getDocumentColorProfile(e = {}) {
@@ -7572,9 +7572,9 @@ function sd(e) {
         }]
       }], [{
         shortcuts: [{
-          shortcutKey: dz
+          shortcutKey: FOCUS_NEXT_AREA
         }, {
-          shortcutKey: Jt
+          shortcutKey: FOCUS_PREVIOUS_AREA
         }]
       }]]
     },

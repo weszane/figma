@@ -1,5 +1,5 @@
 export class MarkdownBuilder {
-  private data: string[]
+  data: string[]
 
   constructor() {
     this.data = []

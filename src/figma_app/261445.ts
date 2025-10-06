@@ -19,15 +19,15 @@ interface IncrementalLoadAnalyticsData {
 }
 
 export class IncrementalLoadTimer {
-  private eventName: string
-  private fileKey: string | null
-  private nodeChangesSizes: number[]
-  private queries: string[]
-  private replies: string[]
-  private queriesTs: number[]
-  private nodeChangesTs: number[]
-  private repliesTs: number[]
-  private alreadySent: boolean
+  eventName: string
+  fileKey: string | null
+  nodeChangesSizes: number[]
+  queries: string[]
+  replies: string[]
+  queriesTs: number[]
+  nodeChangesTs: number[]
+  repliesTs: number[]
+  alreadySent: boolean
   public logEvent: (event: SceneGraphEvent) => void
 
   constructor(eventName: string) {
@@ -110,7 +110,7 @@ export class IncrementalLoadTimer {
    * Get current time in milliseconds
    * (Original: now)
    */
-  private getCurrentTime(): number {
+  getCurrentTime(): number {
     return Math.round(performance.now())
   }
 
@@ -126,7 +126,7 @@ export class IncrementalLoadTimer {
    * Sort and join query strings
    * (Original: s)
    */
-  private sortAndJoinQueries(queries: string[]): string {
+  sortAndJoinQueries(queries: string[]): string {
     return [...queries].sort().join(",")
   }
 
@@ -134,7 +134,7 @@ export class IncrementalLoadTimer {
    * Create timestamp object with limited entries
    * (Original: o)
    */
-  private createTimestampObject(timestamps: number[], prefix: string, limit: number): Record<string, number> {
+  createTimestampObject(timestamps: number[], prefix: string, limit: number): Record<string, number> {
     const result: Record<string, number> = {}
     timestamps.forEach((timestamp, index) => {
       if (index < limit) {

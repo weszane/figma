@@ -44,7 +44,7 @@ import { setKeyboardShortcutPanelTab } from "../905/26824";
 import { yJ } from "../figma_app/24841";
 import { postUserFlag } from "../905/985254";
 import { isTryWhiteboardFile } from "../figma_app/976749";
-import { hx } from "../figma_app/290668";
+import { handleAccessibilityKeyboardEvents } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectUserFlag } from "../905/940356";
@@ -3313,7 +3313,7 @@ let t7 = class e extends RecordingPureComponent {
           "data-fullscreen-intercept": !0,
           innerText: e.displayName,
           onClick: this.onInProductHelpClick,
-          onKeyDown: e => hx({
+          onKeyDown: e => handleAccessibilityKeyboardEvents({
             e,
             onClickHandler: this.onClick
           }),
@@ -3341,7 +3341,7 @@ let t7 = class e extends RecordingPureComponent {
           "data-onboarding-key": t8,
           innerText: e.displayName,
           onClick: this.onClick,
-          onKeyDown: e => hx({
+          onKeyDown: e => handleAccessibilityKeyboardEvents({
             e,
             onClickHandler: this.onClick
           }),

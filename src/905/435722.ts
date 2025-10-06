@@ -9,8 +9,8 @@ export interface VideoMap {
  * VideoManager class manages video elements and provides utility methods.
  */
 export class ThumbnailGenerator {
-  private videos: VideoMap;
-  private nextVideoID: number;
+  videos: VideoMap;
+  nextVideoID: number;
 
   constructor() {
     this.videos = {};

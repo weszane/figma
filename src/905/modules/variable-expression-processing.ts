@@ -42,10 +42,10 @@ export interface VariableExpressionConfig {
 
 // Advanced Variable Expression Processor
 export class AdvancedVariableExpressionProcessor {
-  private config: VariableExpressionConfig
-  private hrUtilities: any
-  private dIFunction: any
-  private sHFunction: any
+  config: VariableExpressionConfig
+  hrUtilities: any
+  dIFunction: any
+  sHFunction: any
 
   constructor(config: VariableExpressionConfig, hrUtilities: any, dIFunction: any, sHFunction: any) {
     this.config = config
@@ -74,7 +74,7 @@ export class AdvancedVariableExpressionProcessor {
   }
 
   // Process variable value with all supported types
-  private processVariableValue(e: any): VariableValue {
+  processVariableValue(e: any): VariableValue {
     let t: VariableValue = {}
 
     if (typeof e === 'boolean') {
@@ -120,7 +120,7 @@ export class AdvancedVariableExpressionProcessor {
   }
 
   // Convert expression function type
-  private convertExpressionFunction(e: string): string {
+  convertExpressionFunction(e: string): string {
     switch (e) {
       case 'ADDITION':
         return 'ADDITION'
@@ -166,7 +166,7 @@ export class AdvancedVariableExpressionProcessor {
   }
 
   // Convert data type from internal to external
-  private convertDataType(e: string): string {
+  convertDataType(e: string): string {
     switch (e) {
       case 'BOOLEAN':
         return 'BOOLEAN'
@@ -190,7 +190,7 @@ export class AdvancedVariableExpressionProcessor {
   }
 
   // Convert resolved data type
-  private convertResolvedDataType(e: string): string {
+  convertResolvedDataType(e: string): string {
     switch (e) {
       case 'BOOLEAN':
         return 'BOOLEAN'
@@ -208,8 +208,8 @@ export class AdvancedVariableExpressionProcessor {
 
 // Advanced Variable Parser for External to Internal Conversion
 export class AdvancedVariableParser {
-  private processor: AdvancedVariableExpressionProcessor
-  private dIFunction: any
+  processor: AdvancedVariableExpressionProcessor
+  dIFunction: any
 
   constructor(processor: AdvancedVariableExpressionProcessor, dIFunction: any) {
     this.processor = processor
@@ -239,7 +239,7 @@ export class AdvancedVariableParser {
   }
 
   // Parse variable value from external format
-  private parseVariableValue(e: any): any {
+  parseVariableValue(e: any): any {
     if (e.floatValue !== undefined)
       return e.floatValue
     if (e.textValue !== undefined)
@@ -279,7 +279,7 @@ export class AdvancedVariableParser {
   }
 
   // Parse expression function from external to internal
-  private parseExpressionFunction(e: string): string {
+  parseExpressionFunction(e: string): string {
     switch (e) {
       case 'ADDITION':
         return 'ADDITION'
@@ -325,7 +325,7 @@ export class AdvancedVariableParser {
   }
 
   // Parse data type from external to internal
-  private parseDataType(e: string): string {
+  parseDataType(e: string): string {
     switch (e) {
       case 'BOOLEAN':
         return 'BOOLEAN'
@@ -349,7 +349,7 @@ export class AdvancedVariableParser {
   }
 
   // Parse resolved data type
-  private parseResolvedDataType(e: string): string {
+  parseResolvedDataType(e: string): string {
     switch (e) {
       case 'BOOLEAN':
         return 'BOOLEAN'

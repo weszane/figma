@@ -3,17 +3,17 @@ import { useEffect, createContext, useContext, useMemo, useState, useCallback } 
 import { ColorSpaceEnum, ColorProfileEnum, colorManagementStateJs, webGPUBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, AtomProvider } from "../figma_app/27355";
-import { ap, WQ } from "../figma_app/149304";
+import { shouldUseWebGL2, isWebGL2Supported } from "../figma_app/149304";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { fullscreenValue } from "../figma_app/455680";
-import { l as _$$l } from "../figma_app/773170";
+import { colorProfileManagerInstance } from "../figma_app/773170";
 import { isUsingLocalBuild } from "../figma_app/298277";
 import { getObservableValue } from "../figma_app/84367";
 import { dX } from "../figma_app/837840";
 import { H } from "../905/769882";
 import { j } from "../905/51490";
 import { q } from "../figma_app/458300";
-import { jK } from "../figma_app/829197";
+import { useUserColorProfileSubscription } from "../figma_app/829197";
 let E = atom(!1);
 function y(e) {
   let [t, r] = useAtomValueAndSetter(E);
@@ -45,7 +45,7 @@ function A(e) {
   let o = H(s);
   let {
     colorProfilePreference
-  } = jK();
+  } = useUserColorProfileSubscription();
   let d = useMemo(() => ({
     documentColorProfile: s,
     documentExportColorProfile: j(s, colorProfilePreference),
@@ -57,7 +57,7 @@ function A(e) {
   });
 }
 export function $$x1(e) {
-  jK();
+  useUserColorProfileSubscription();
   return jsx(A, {
     colorManagementStateJs: colorManagementStateJs,
     children: e.children
@@ -78,11 +78,11 @@ function N({
       switch (e) {
         case "fullscreen":
         case "mobile-viewer":
-          r = ap() ? t.getContext("webgl2") : t.getContext("webgl");
+          r = shouldUseWebGL2() ? t.getContext("webgl2") : t.getContext("webgl");
           break;
         case "prototype":
         case "mirror":
-          r = WQ() ? t.getContext("webgl2") : t.getContext("webgl");
+          r = isWebGL2Supported() ? t.getContext("webgl2") : t.getContext("webgl");
       }
       n(r);
       return !0;
@@ -107,7 +107,7 @@ function N({
   let d = $$I3();
   useEffect(() => {
     if (webGPUBindings?.usingWebGPU()) {
-      _$$l.setCanvasColorProfile(d);
+      colorProfileManagerInstance.setCanvasColorProfile(d);
       return;
     }
     r && q.queueSwitchWebglColorSpace(r, d, e, t);

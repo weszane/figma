@@ -254,7 +254,7 @@ import { TabLoop } from "../905/718764";
 import { l as _$$l8 } from "../905/241412";
 import { AutoInteractableWrapper } from "../905/277716";
 import { k as _$$k7 } from "../905/582200";
-import { hx } from "../figma_app/290668";
+import { handleAccessibilityKeyboardEvents } from "../figma_app/290668";
 import { Mk, sP as _$$sP } from "../897/50897";
 import { Ad } from "../figma_app/811257";
 import { P as _$$P3 } from "../905/201667";
@@ -5341,7 +5341,7 @@ function sF({
       onClick: () => d({
         type: "SELECT_SLIDE_TRANSITION"
       }),
-      onKeyDown: e => hx({
+      onKeyDown: e => handleAccessibilityKeyboardEvents({
         e,
         onClickHandler: () => d({
           type: "SELECT_SLIDE_TRANSITION"

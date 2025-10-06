@@ -128,7 +128,7 @@ export class ViewDefinition {
   /**
    * Logs warning if view has no queries or computations
    */
-  private _logEmptyViewWarning(context: any, viewName: string, dslDef: any): void {
+  _logEmptyViewWarning(context: any, viewName: string, dslDef: any): void {
     if (context?.options?.logger &&
       this.root.queries.size === 0 &&
       this.root.computations.size === 0) {
@@ -159,7 +159,7 @@ export class ViewDefinition {
    * @param shouldParse - Whether to parse values (originally 't')
    * @returns Result containing parsed arguments or error
    */
-  private _parseAndValidateArguments(
+  _parseAndValidateArguments(
     args: Record<string, any>,
     shouldParse: boolean
   ): Result<Record<string, any>, CustomError> {

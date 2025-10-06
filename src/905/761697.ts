@@ -1,6 +1,6 @@
 var $$n6 = (e => (e.ORG_VIEW = "org_view", e.ORG_EDIT = "org_edit", e.VIEW = "view", e.EDIT = "edit", e.INHERIT = "inherit", e))($$n6 || {});
 var r = (e => (e.ORG_VIEW = "org_view", e.VIEW = "view", e.INHERIT = "inherit", e))(r || {});
-var $$a10 = (e => (e.PUBLIC = "public", e.PRIVATE = "private", e.SECRET = "secret", e))($$a10 || {});
+var $$a10 = (e => (e.PUBLIC = "public", e.PRIVATE = "", e.SECRET = "secret", e))($$a10 || {});
 var s = (e => (e.AUTO_APPROVE = "auto_approve", e.AUTO_APPROVE_WITH_SURPLUS_SEATS = "auto_approve_with_surplus_seats", e.ADMIN_APPROVAL = "admin_approval", e))(s || {});
 var $$o12 = (e => (e.ADMIN = "admin", e.MEMBER = "member", e.GUEST = "guest", e))($$o12 || {});
 var $$l3 = (e => (e.ADMIN = "admin", e.MEMBER = "member", e.GUEST = "guest", e))($$l3 || {});

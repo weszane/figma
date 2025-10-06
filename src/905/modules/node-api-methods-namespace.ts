@@ -5005,7 +5005,7 @@ function setupPluginData({
     key: 'getPluginData',
     metricsKey: 'node.getPluginData',
     cb(t) {
-      d(i, 'get private plugin data')
+      d(i, 'get  plugin data')
       let r = _$$u({
         vm: e,
         handle: t,
@@ -5022,7 +5022,7 @@ function setupPluginData({
     key: 'setPluginData',
     metricsKey: 'node.setPluginData',
     cb(t, a) {
-      d(i, 'set private plugin data')
+      d(i, 'set  plugin data')
       let s = _$$u({
         vm: e,
         handle: t,
@@ -5052,7 +5052,7 @@ function setupPluginData({
     key: 'getPluginDataKeys',
     metricsKey: 'node.getPluginDataKeys',
     cb() {
-      d(i, 'get private plugin data keys')
+      d(i, 'get  plugin data keys')
       return e.deepWrap(n(this).getPluginDataKeys(i))
     },
     isAllowedInReadOnly: !0,

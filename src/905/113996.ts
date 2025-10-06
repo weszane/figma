@@ -6,16 +6,16 @@ import { getVisibleChildNodes } from "../905/730910"
 type NodeCache = any
 type Node = any
 export class BasicNodeProperties {
-  private _cachedProperties: Record<string, any>
-  private nodeCache: NodeCache
-  private _EXPENSIVE_TO_READ_node: Node
+  _cachedProperties: Record<string, any>
+  nodeCache: NodeCache
+  _EXPENSIVE_TO_READ_node: Node
   constructor(e: Node, t: NodeCache) {
     this._cachedProperties = {}
     this.nodeCache = t
     this._EXPENSIVE_TO_READ_node = e
   }
 
-  private readValue<T>(key: string, getter: (node: Node) => T): T {
+  readValue<T>(key: string, getter: (node: Node) => T): T {
     return memoizeFn(this._cachedProperties, key, this._EXPENSIVE_TO_READ_node, getter)
   }
 

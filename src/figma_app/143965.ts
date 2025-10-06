@@ -19,7 +19,7 @@ import { isInvalidValue, isValidValue } from "../905/216495";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { hU, x6 } from "../figma_app/84580";
-import { _i, E8, U8 } from "../figma_app/800999";
+import { parseKeyCodes, getGamepadInputLabel, formatKeyboardShortcut } from "../figma_app/800999";
 import { T4 } from "../figma_app/151869";
 import { VZ, x0 } from "../figma_app/727192";
 import { _p, lz } from "../figma_app/826998";
@@ -89,10 +89,10 @@ class C {
         if (!e.keyTrigger || !e.keyTrigger.keyCodes) return {
           trigger: N()
         };
-        let t = _i(e.keyTrigger?.keyCodes);
-        let r = E8(e.keyTrigger, !0) || N();
+        let t = parseKeyCodes(e.keyTrigger?.keyCodes);
+        let r = getGamepadInputLabel(e.keyTrigger, !0) || N();
         return {
-          trigger: "KEYBOARD" === e.keyTrigger.triggerDevice && t ? U8(t) : r
+          trigger: "KEYBOARD" === e.keyTrigger.triggerDevice && t ? formatKeyboardShortcut(t) : r
         };
       case "ON_MEDIA_HIT":
         return {

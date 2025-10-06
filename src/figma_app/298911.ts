@@ -64,9 +64,9 @@ interface NavigationOptions {
  */
 class ViewportNavigator {
   static DEFAULT_NAVIGATE_BUFFER = 60
-  private viewport: ViewportInterface
-  private config: typeof defaultNavigationConfig
-  private delayTimeout?: NodeJS.Timeout | number
+  viewport: ViewportInterface
+  config: typeof defaultNavigationConfig
+  delayTimeout?: NodeJS.Timeout | number
   constructor(viewport: ViewportInterface, config: Partial<typeof defaultNavigationConfig> = {}) {
     this.viewport = viewport
     this.config = {
@@ -140,14 +140,14 @@ class ViewportNavigator {
   /**
    * Check if animation should be skipped
    */
-  private shouldSkipAnimation(options: NavigationOptions): boolean {
+  shouldSkipAnimation(options: NavigationOptions): boolean {
     return reducedMotionMediaQuery.matches || isInteractionPathCheck() || options.duration === 0
   }
 
   /**
    * Clear any pending navigation timeout
    */
-  private clearNavigationTimeout(): void {
+  clearNavigationTimeout(): void {
     clearTimeout(this.delayTimeout)
     this.delayTimeout = undefined
   }
@@ -155,7 +155,7 @@ class ViewportNavigator {
   /**
    * Check if target position is already visible
    */
-  private isTargetAlreadyVisible(targetPosition: any, currentViewport: any, options: NavigationOptions): boolean {
+  isTargetAlreadyVisible(targetPosition: any, currentViewport: any, options: NavigationOptions): boolean {
     if (!options.ignoreVisibleTargets)
       return false
     const relativePosition = Point.subtract(targetPosition, {
@@ -172,7 +172,7 @@ class ViewportNavigator {
   /**
    * Perform animated navigation
    */
-  private performAnimatedNavigation(initialViewport: any, targetPosition: any, targetZoom: number, options: NavigationOptions): Promise<{
+  performAnimatedNavigation(initialViewport: any, targetPosition: any, targetZoom: number, options: NavigationOptions): Promise<{
     cancelled: boolean
   }> {
     const animationStartTime = performance.now()
@@ -243,7 +243,7 @@ class ViewportNavigator {
   /**
    * Setup animation cancellation on user interaction
    */
-  private setupAnimationCancellation(onCancel: () => void): () => void {
+  setupAnimationCancellation(onCancel: () => void): () => void {
     const fullscreenRoot = document.getElementById('fullscreen-root')
     if (!fullscreenRoot)
       return noop
@@ -261,7 +261,7 @@ class ViewportNavigator {
   /**
    * Check if animation should be cancelled
    */
-  private shouldCancelAnimation(lastViewport: any, cancelled: boolean, options: NavigationOptions): boolean | undefined {
+  shouldCancelAnimation(lastViewport: any, cancelled: boolean, options: NavigationOptions): boolean | undefined {
     const currentViewport = this.getViewportInfo()
     const viewportChanged = this.config.isGetViewportAtomic && (lastViewport.offsetX !== currentViewport.offsetX || lastViewport.offsetY !== currentViewport.offsetY || lastViewport.zoomScale !== currentViewport.zoomScale)
     return viewportChanged || cancelled || options.signal?.aborted
@@ -270,7 +270,7 @@ class ViewportNavigator {
   /**
    * Track frame timing for performance metrics
    */
-  private trackFrameTiming(currentTime: number, lastTime: number | null, timings: number[]): void {
+  trackFrameTiming(currentTime: number, lastTime: number | null, timings: number[]): void {
     if (lastTime !== null) {
       timings.push(Math.round(currentTime - lastTime))
     }
@@ -279,7 +279,7 @@ class ViewportNavigator {
   /**
    * Perform frame update during animation
    */
-  private performFrameUpdate(initialViewport: any, zoomDelta: number, initialScaledOffset: any, positionDelta: any, progress: number): void {
+  performFrameUpdate(initialViewport: any, zoomDelta: number, initialScaledOffset: any, positionDelta: any, progress: number): void {
     const currentViewport = this.getViewportInfo()
     const currentZoom = initialViewport.zoomScale + zoomDelta * progress
     const currentScaledPosition = Point.add(initialScaledOffset, Point.scale(progress, positionDelta))
@@ -290,7 +290,7 @@ class ViewportNavigator {
   /**
    * Report animation performance metrics
    */
-  private reportAnimationMetrics(frameTimings: number[], cancelled: boolean, options: NavigationOptions): void {
+  reportAnimationMetrics(frameTimings: number[], cancelled: boolean, options: NavigationOptions): void {
     if (!options.metricsCallback)
       return
     let slowFrameCount = 0
@@ -315,7 +315,7 @@ class ViewportNavigator {
   /**
    * Report reduced motion metrics
    */
-  private reportReducedMotionMetrics(options: NavigationOptions): void {
+  reportReducedMotionMetrics(options: NavigationOptions): void {
     if (reducedMotionMediaQuery.matches && options.metricsCallback) {
       options.metricsCallback({
         prefersReducedMotion: true,
@@ -326,7 +326,7 @@ class ViewportNavigator {
   /**
    * Report instant navigation metrics
    */
-  private reportInstantNavigationMetrics(options: NavigationOptions): void {
+  reportInstantNavigationMetrics(options: NavigationOptions): void {
     options.metricsCallback?.({
       prefersReducedMotion: false,
     })
@@ -384,9 +384,9 @@ const defaultViewportNavigator = new ViewportNavigator({
     x: 0,
     y: 0,
   }),
-  setCanvasSpaceCenter: () => {},
-  setZoomScale: () => {},
-  setHovering: () => {},
+  setCanvasSpaceCenter: () => { },
+  setZoomScale: () => { },
+  setHovering: () => { },
   setCurrentPageIdAsync: () => Promise.resolve(),
   pageIdForNodeId: () => '1:0',
   getCommentDestinationForCanvasPosition: () => null,

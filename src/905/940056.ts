@@ -82,11 +82,11 @@ export class Violation {
 
   // Helper methods to split logic
 
-  private isColorVariableRule(): boolean {
+  isColorVariableRule(): boolean {
     return (this.ruleId === C.REQUIRE_FILL_COLOR_VARIABLES || this.ruleId === C.REQUIRE_STROKE_COLOR_VARIABLES) && 'color' in this.detectionContext;
   }
 
-  private getColorGroupKey(): string {
+  getColorGroupKey(): string {
     const { color, opacity } = this.detectionContext;
     let nodeType = this.nodeType;
     if (!['TEXT', 'FRAME'].includes(this.nodeType)) {
@@ -95,58 +95,58 @@ export class Violation {
     return `${this.ruleId}-${nodeType}-${colorToHex(color)}-${opacity}`;
   }
 
-  private getTextStyleGroupKey(): string {
+  getTextStyleGroupKey(): string {
     const { fontFamily, fontSize, lineHeight } = this.detectionContext;
     return `${this.ruleId}-${fontFamily}-${fontSize}-${lineHeight}`;
   }
 
-  private isCornerRadiusRule(): boolean {
+  isCornerRadiusRule(): boolean {
     return (this.ruleId === C.REQUIRE_BOTTOM_LEFT_CORNER_RADIUS_VARIABLES ||
-            this.ruleId === C.REQUIRE_BOTTOM_RIGHT_CORNER_RADIUS_VARIABLES ||
-            this.ruleId === C.REQUIRE_TOP_LEFT_CORNER_RADIUS_VARIABLES ||
-            this.ruleId === C.REQUIRE_TOP_RIGHT_CORNER_RADIUS_VARIABLES) &&
-           'numericValue' in this.detectionContext;
+      this.ruleId === C.REQUIRE_BOTTOM_RIGHT_CORNER_RADIUS_VARIABLES ||
+      this.ruleId === C.REQUIRE_TOP_LEFT_CORNER_RADIUS_VARIABLES ||
+      this.ruleId === C.REQUIRE_TOP_RIGHT_CORNER_RADIUS_VARIABLES) &&
+      'numericValue' in this.detectionContext;
   }
 
-  private getCornerRadiusGroupKey(): string {
+  getCornerRadiusGroupKey(): string {
     const { numericValue } = this.detectionContext;
     return `REQUIRE_CORNER_RADIUS_VARIABLES-${numericValue}`;
   }
 
-  private isHorizontalSpacingRule(): boolean {
+  isHorizontalSpacingRule(): boolean {
     return (this.ruleId === C.REQUIRE_HORIZONTAL_SPACING_VARIABLES || this.ruleId === C.REQUIRE_GRID_COLUMN_GAP_VARIABLES) &&
-           'numericValue' in this.detectionContext;
+      'numericValue' in this.detectionContext;
   }
 
-  private getHorizontalSpacingGroupKey(): string {
+  getHorizontalSpacingGroupKey(): string {
     const { numericValue } = this.detectionContext;
     return `REQUIRE_HORIZONTAL_SPACING_VARIABLES-${numericValue}`;
   }
 
-  private isVerticalSpacingRule(): boolean {
+  isVerticalSpacingRule(): boolean {
     return (this.ruleId === C.REQUIRE_VERTICAL_SPACING_VARIABLES || this.ruleId === C.REQUIRE_GRID_ROW_GAP_VARIABLES) &&
-           'numericValue' in this.detectionContext;
+      'numericValue' in this.detectionContext;
   }
 
-  private getVerticalSpacingGroupKey(): string {
+  getVerticalSpacingGroupKey(): string {
     const { numericValue } = this.detectionContext;
     return `REQUIRE_VERTICAL_SPACING_VARIABLES-${numericValue}`;
   }
 
-  private isPaddingRule(): boolean {
+  isPaddingRule(): boolean {
     return (this.ruleId === C.REQUIRE_TOP_PADDING_VARIABLES ||
-            this.ruleId === C.REQUIRE_BOTTOM_PADDING_VARIABLES ||
-            this.ruleId === C.REQUIRE_LEFT_PADDING_VARIABLES ||
-            this.ruleId === C.REQUIRE_RIGHT_PADDING_VARIABLES) &&
-           'numericValue' in this.detectionContext;
+      this.ruleId === C.REQUIRE_BOTTOM_PADDING_VARIABLES ||
+      this.ruleId === C.REQUIRE_LEFT_PADDING_VARIABLES ||
+      this.ruleId === C.REQUIRE_RIGHT_PADDING_VARIABLES) &&
+      'numericValue' in this.detectionContext;
   }
 
-  private getPaddingGroupKey(): string {
+  getPaddingGroupKey(): string {
     const { numericValue } = this.detectionContext;
     return `REQUIRE_PADDING_VARIABLES-${numericValue}`;
   }
 
-  private getContrastGroupKey(): string {
+  getContrastGroupKey(): string {
     const { backgroundColor, fillColor, fillOpacity } = this.detectionContext;
     return `${this.ruleId}-${colorToHex(fillColor)}-${fillOpacity}-${colorToHex(backgroundColor)}`;
   }

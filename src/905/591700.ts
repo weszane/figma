@@ -1,66 +1,158 @@
 import { kiwiParserCodec } from '../905/294864'
 
-export let $$n1
-let a = class {
-  _decodeMessageWithSingleNodeChange(e) {
-    let t = kiwiParserCodec.decodeMessage(e)
-    if (!t)
+export let JsKiwiSerializationInstance: JsKiwiSerialization | undefined
+
+/**
+ * Class responsible for decoding various types of node data received from C++.
+ *
+ * @class NodeDataDecoder
+ */
+class JsKiwiSerialization {
+  /**
+   * Decodes a message ensuring it contains exactly one node change.
+   *
+   * @param encodedMessage - The encoded message from C++
+   * @returns Object containing the single node change data and any blobs
+   * @throws Error if message is invalid or doesn't contain exactly one node change
+   */
+  _decodeMessageWithSingleNodeChange(encodedMessage: Uint8Array): {
+    data: any
+    blobs: Uint8Array[]
+  } {
+    const decodedMessage = kiwiParserCodec.decodeMessage(encodedMessage)
+    if (!decodedMessage) {
       throw new Error('Invalid message from C++')
-    if (t.nodeChanges?.length !== 1)
+    }
+
+    if (decodedMessage.nodeChanges?.length !== 1) {
       throw new Error('Invalid nodes changes from C++')
+    }
+
     return {
-      data: t.nodeChanges[0],
-      blobs: t.blobs || [],
+      data: decodedMessage.nodeChanges[0],
+      blobs: decodedMessage.blobs || [],
     }
   }
 
-  _decodeNodeChange(e) {
-    let t = kiwiParserCodec.decodeNodeChange(e)
-    if (!t)
+  /**
+   * Decodes a node change message.
+   *
+   * @param encodedNodeChange - The encoded node change from C++
+   * @returns The decoded node change object
+   * @throws Error if node change is invalid
+   */
+  _decodeNodeChange(encodedNodeChange: Uint8Array): any {
+    const decodedNodeChange = kiwiParserCodec.decodeNodeChange(encodedNodeChange)
+    if (!decodedNodeChange) {
       throw new Error('Invalid node change from C++')
-    return t
+    }
+    return decodedNodeChange
   }
 
-  decodeFillPaintData(e) {
-    let t = this._decodeMessageWithSingleNodeChange(e).data.fillPaints
-    if (!t)
+  /**
+   * Decodes fill paint data from a message.
+   *
+   * @param encodedMessage - The encoded message containing fill paint data
+   * @returns The decoded fill paint data
+   * @throws Error if fill paint data is missing
+   */
+  decodeFillPaintData(encodedMessage: Uint8Array): any {
+    const { data } = this._decodeMessageWithSingleNodeChange(encodedMessage)
+    const fillPaints = data.fillPaints
+
+    if (!fillPaints) {
       throw new Error('Missing paints from C++')
-    return t
+    }
+
+    return fillPaints
   }
 
-  decodeEffectData(e) {
-    let t = this._decodeMessageWithSingleNodeChange(e).data.effects
-    if (!t)
+  /**
+   * Decodes effect data from a message.
+   *
+   * @param encodedMessage - The encoded message containing effect data
+   * @returns The decoded effect data
+   * @throws Error if effect data is missing
+   */
+  decodeEffectData(encodedMessage: Uint8Array): any {
+    const { data } = this._decodeMessageWithSingleNodeChange(encodedMessage)
+    const effects = data.effects
+
+    if (!effects) {
       throw new Error('Missing effects from C++')
-    return t
+    }
+
+    return effects
   }
 
-  decodeVectorData(e) {
-    let t = this._decodeMessageWithSingleNodeChange(e)
-    if (!t)
+  /**
+   * Decodes vector data from a message.
+   *
+   * @param encodedMessage - The encoded message containing vector data
+   * @returns Object containing vector data and blobs
+   * @throws Error if vector data is missing
+   */
+  decodeVectorData(encodedMessage: Uint8Array): {
+    data: any
+    blobs: Uint8Array[]
+  } {
+    const result = this._decodeMessageWithSingleNodeChange(encodedMessage)
+
+    if (!result) {
       throw new Error('Missing vectorData from C++')
+    }
+
     return {
-      data: t.data.vectorData,
-      blobs: t.blobs,
+      data: result.data.vectorData,
+      blobs: result.blobs,
     }
   }
 
-  decodeTextData(e) {
-    let t = this._decodeMessageWithSingleNodeChange(e).data.textData
-    if (!t)
+  /**
+   * Decodes text data from a message.
+   *
+   * @param encodedMessage - The encoded message containing text data
+   * @returns The decoded text data
+   * @throws Error if text data is missing
+   */
+  decodeTextData(encodedMessage: Uint8Array): any {
+    const { data } = this._decodeMessageWithSingleNodeChange(encodedMessage)
+    const textData = data.textData
+
+    if (!textData) {
       throw new Error('Missing textData from C++')
-    return t
+    }
+
+    return textData
   }
 
-  decodePrototypeInteractions(e) {
-    let t = this._decodeNodeChange(e).prototypeInteractions
-    if (!t)
+  /**
+   * Decodes prototype interactions from a node change.
+   *
+   * @param encodedNodeChange - The encoded node change containing prototype interactions
+   * @returns The decoded prototype interactions
+   * @throws Error if prototype interactions are missing
+   */
+  decodePrototypeInteractions(encodedNodeChange: Uint8Array): any {
+    const nodeChange = this._decodeNodeChange(encodedNodeChange)
+    const prototypeInteractions = nodeChange.prototypeInteractions
+
+    if (!prototypeInteractions) {
       throw new Error('Missing prototype interactions from C++')
-    return t
+    }
+
+    return prototypeInteractions
   }
 }
-export function $$s0() {
-  $$n1 = new a()
+
+/**
+ * Initializes the global NodeDataDecoder instance.
+ *
+ * @function $$s0
+ */
+export function initJsKiwiSerialization(): void {
+  JsKiwiSerializationInstance = new JsKiwiSerialization()
 }
-export const G = $$s0
-export const K = $$n1
+
+export const G = initJsKiwiSerialization
+export const K = JsKiwiSerializationInstance

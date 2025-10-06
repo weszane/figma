@@ -13,9 +13,9 @@ export interface HashMapEntry<K, V> {
  * @template V - Type of the value.
  */
 export class HashMap<K, V> {
-  private _buckets: Map<number, HashMapEntry<K, V>[]>;
-  private _hash: (key: K) => number;
-  private _equals: (a: K, b: K) => boolean;
+  _buckets: Map<number, HashMapEntry<K, V>[]>;
+  _hash: (key: K) => number;
+  _equals: (a: K, b: K) => boolean;
 
   /**
    * @param hashFn - Function to compute hash from a key.

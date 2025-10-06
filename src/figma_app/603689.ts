@@ -20,13 +20,13 @@ import { useMemoCustom, useMemoStable, useStableMemo } from '../905/19536';
 import { a as _$$a8 } from '../905/29104';
 import { fullscreenAlias } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
-import { yx as DeprecatedXHRSendBindings } from '../905/41973';
+import { deprecatedXHRSendBindingsInstance } from '../905/41973';
 import { d as _$$d7 } from '../905/68441';
 import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677';
 import { executeWhenDomReady } from '../905/78171';
 import { resetTileSelection, selectTiles } from '../905/81009';
-import { x as CoreUtils } from '../905/89282';
-import { X as tsGlContextBindings } from '../905/91006';
+import { CoreUtils } from '../905/89282';
+import { createTsGlContextManager } from '../905/91006';
 import { FP as _$$FP } from '../905/98947';
 import { m as _$$m3 } from '../905/99004';
 import { selectWithShallowEqual } from '../905/103090';
@@ -63,12 +63,12 @@ import { d as _$$d6 } from '../905/241150';
 import { l as _$$l4 } from '../905/241412';
 import { W as _$$W3 } from '../905/244810';
 import { trackAuthEvent } from '../905/248178';
-import { H as AccessibleAreasBindings } from '../905/250770';
+import { AccessibleAreasBindings } from '../905/250770';
 import { A as _$$A9 } from '../905/251970';
 import { $7, o8 as _$$o4, B_, QB } from '../905/258397';
 import { F as WebReporting } from '../905/258517';
 import { PluginUIManager } from '../905/261467';
-import { F as WebAsync } from '../905/268366';
+import { WebAsyncInstance } from '../905/268366';
 import { Label } from '../905/270045';
 import { memoizeWithDeepEquality } from '../905/270781';
 import { LazyComponentFactory } from '../905/275748';
@@ -140,12 +140,12 @@ import { FlashActions } from '../905/573154';
 import { jO } from '../905/573265';
 import { VisualBellIcon } from '../905/576487';
 import { conditionalWrapper } from '../905/579635';
-import { uo as SceneGraphHookBindings } from '../905/581543';
+import { SceneGraphHookBindingsInstance } from '../905/581543';
 import { k as _$$k6 } from '../905/582200';
 import { loadFeatureFlags } from '../905/586361';
 import { c1 as _$$c2, SW } from '../905/589717';
 import { AvatarSize, TeamAvatar, UserAvatar } from '../905/590952';
-import { K as JsKiwiSerialization } from '../905/591700';
+import { JsKiwiSerializationInstance } from '../905/591700';
 import { h as _$$h4 } from '../905/593407';
 import { useIsCanvasEditDisabled } from '../905/595131';
 import { bL as _$$bL3, gZ, HG } from '../905/598775';
@@ -164,7 +164,7 @@ import { ButtonPrimitive } from '../905/632989';
 import { parseAndNormalizeQuery, parseQuery, parseQuerySimple } from '../905/634134';
 import { eo as _$$eo, fp as _$$fp, TX } from '../905/634218';
 import { getVisibleTheme, useCurrentTheme, useThemeContext } from '../905/640017';
-import { u as prototypingFormatter } from '../905/644087';
+import { prototypingFormatterInstance } from '../905/644087';
 import { FeatureFlag, PageFolderFile } from '../905/652992';
 import { getSessionStorage } from '../905/657224';
 import { isLocalFileKey } from '../905/657242';
@@ -178,11 +178,11 @@ import { e0 as _$$e9, qo } from '../905/696396';
 import { getSingletonSceneGraph } from '../905/700578';
 import { liveStoreInstance } from '../905/713695';
 import { alphaColorManipulator, defaultColorManipulator } from '../905/713722';
-import { XA as ComponentPropBindings } from '../905/714160';
+import { componentPropBindingsInstance } from '../905/714160';
 import { SvgComponent } from '../905/714743';
 import { l as _$$l } from '../905/716947';
 import { getFilteredFeatureFlags } from '../905/717445';
-import { N as screenBindings } from '../905/718123';
+import { ScreenBindings } from '../905/718123';
 import { S as _$$S3 } from '../905/720922';
 import { a as _$$a3 } from '../905/720941';
 import { ResourceStatus, createLoadedState, getResourceDataOrFallback } from '../905/723791';
@@ -196,14 +196,14 @@ import { AnnouncementPrimitive } from '../905/745591';
 import { u as _$$u5 } from '../905/747030';
 import { PositioningStrategy } from '../905/748636';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes, RootErrorBoundaryFallback, useErrorBoundaryContext } from '../905/751457';
-import { Bm as scenegraphStringManagementBindings } from '../905/755627';
+import { scenegraphStringManagementBindingsInstance } from '../905/755627';
 import { isDefaultFile } from '../905/760074';
 import { D as _$$D2 } from '../905/771179';
 import { X as _$$X3 } from '../905/776923';
 import { isSingleSceneGraphSelectionInDevHandoff } from '../905/782918';
 import { useSingleEffect } from '../905/791079';
 import { cq as _$$cq } from '../905/794154';
-import { B as BranchingWebBindings } from '../905/797453';
+import { branchingWebBindingsInstance } from '../905/797453';
 import { Ig } from '../905/805224';
 import { MultiValueMap } from '../905/810750';
 import { $ as _$$$ } from '../905/819786';
@@ -228,7 +228,7 @@ import { generateUUIDv4 } from '../905/871474';
 import { createDeferredPromise } from '../905/874553';
 import { replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset, replaceUsedLivegraphLocalNodeIdToDestinationFileName, replaceUsedLivegraphLocalNodeIdToDestinationKey, replaceUsedLivegraphSourceAssetKeyToDestinationKey, replaceUsedLivegraphSourceAssetKeyToFileName, replaceUsedLivegraphStyles, replaceUsedLivegraphUnnaturalKeyToNaturalKey } from '../905/879323';
 import { Db as thumbnailRequestManager } from '../905/881862';
-import { NP as webGPUTsContext } from '../905/889931';
+import { webGPUContextInstance } from '../905/889931';
 import { pdfImportManagerInstance } from '../905/901759';
 import { DragDataHandler } from '../905/904854';
 import { getRequest, sendWithRetry } from '../905/910117';
@@ -246,7 +246,7 @@ import { v as _$$v4 } from '../905/939922';
 import { selectUserFlag } from '../905/940356';
 import { styleBuilderInstance } from '../905/941192';
 import { fileEntityDataMapper } from '../905/943101';
-import { h as ScaleToolAPIBindings } from '../905/943864';
+import { ScaleToolAPIBindings } from '../905/943864';
 import { PluginIframeMode } from '../905/968269';
 import { O as _$$O2 } from '../905/969533';
 import { multiplayerSessionManager as WebUserSyncing } from '../905/977824';
@@ -259,7 +259,7 @@ import { colorCSSManipulatorInstance } from '../905/989956';
 import { resourceUtils } from '../905/989992';
 import { NONE_SYMBOL } from '../905/992467';
 import { pasteEmbedThunk } from '../905/994901';
-import { LineBreakProcessor as JSTextLayout } from '../905/994917';
+import { JSTextLayoutImpl as JSTextLayout } from '../905/994917';
 import { R as _$$R3 } from '../905/995587';
 import { a as _$$a2, j as _$$j } from '../1577/143479';
 import { e8 as _$$e2, fd, he, ql } from '../1577/159553';
@@ -302,7 +302,7 @@ import { AS } from '../figma_app/50271';
 import { I as _$$I4 } from '../figma_app/51637';
 import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { BannerInline } from '../figma_app/59509';
-import { h as FontManagerJs } from '../figma_app/61485';
+import { debugFontFetcher } from '../figma_app/61485';
 import { scaleRect, useFullscreenViewportUpdates } from '../figma_app/62612';
 import { jm as EmojiTsBindings } from '../figma_app/67099';
 import { mX as AutoLayoutBindings } from '../figma_app/76123';
@@ -324,7 +324,7 @@ import { KeyboardNavigationProvider, useKeyboardNavigationItem } from '../figma_
 import { yB } from '../figma_app/120294';
 import { $ as _$$$2, E as _$$E5 } from '../figma_app/126651';
 import { F as _$$F8 } from '../figma_app/127204';
-import { Iu as BoundsWatcherTs } from '../figma_app/141088';
+import { getBoundsChangeHandler } from '../figma_app/141088';
 import { allSubscribedStylesUniqueKeysFromLoadedPagesSelector, subscribedSymbolsUniqueKeysFromLoadedPagesSelector } from '../figma_app/141508';
 import { cQ as _$$cQ } from '../figma_app/144692';
 import { ub as _$$ub, jM, RO, wI } from '../figma_app/146905';
@@ -344,7 +344,7 @@ import { yesNoTrackingEnum } from '../figma_app/198712';
 import { a6 as _$$a6, M3 } from '../figma_app/198840';
 import { LK } from '../figma_app/199513';
 import { NM } from '../figma_app/204891';
-import { gR as statsigConfigBindings } from '../figma_app/204937';
+import { fullscreenConfigInstance } from '../figma_app/204937';
 import { Vm as SummaryBindings } from '../figma_app/209965';
 import { C5 as ColorRampBindings } from '../figma_app/213643';
 import { DropdownThemeProvider } from '../figma_app/215667';
@@ -437,7 +437,7 @@ import { Lj as AccessibilityBindings, xM } from '../figma_app/539925';
 import { yH } from '../figma_app/540726';
 import { TileType, createFileTile, TileUtils } from '../figma_app/543100';
 import { latestSurveyResponseDateAtom, userFlagAtomFamily, userFlagExistsAtomFamily } from '../figma_app/545877';
-import { N as _$$N, Gm } from '../figma_app/548577';
+import { SceneManagerHandler, SceneLoadingHandler } from '../figma_app/548577';
 import { isFigmakeSitesEnabled, useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { missingFontTrackerInstance } from '../figma_app/557318';
 import { isUserNotLoggedInAndEditorSupported } from '../figma_app/564183';
@@ -501,7 +501,7 @@ import { YA } from '../figma_app/755939';
 import { c as _$$c6 } from '../figma_app/763535';
 import { AppStateTsApi, Command, ComponentPropType, DesignGraphElements, DrawBindingsCpp, FileSourceType, Fullscreen, JoinType, LayoutTabType, OffsetPathTsApi, PerfQuality, RichTextType, SimplifyVectorToolTsApi, TextData_Internal, TextDirection, ThemeType, UserAppType, ViewType } from '../figma_app/763686';
 import { c as _$$c7 } from '../figma_app/765216';
-import { l as ColorManagementBindings } from '../figma_app/773170';
+import { colorProfileManagerInstance } from '../figma_app/773170';
 import { BrowserInfo } from '../figma_app/778880';
 import { jw, Yd } from '../figma_app/781981';
 import { parsePxNumber } from '../figma_app/783094';
@@ -1723,8 +1723,8 @@ let ns = {
   OOMHelpers: () => OOMHelpers,
   WebReporting: () => WebReporting,
   PlatformInfo: () => PlatformInfo,
-  FontManagerJs: () => FontManagerJs,
-  WebAsync: () => WebAsync,
+  FontManagerJs: () => debugFontFetcher,
+  WebAsync: () => WebAsyncInstance,
   JsBindingsTestHelpers: () => JsBindingsTestHelpers,
   ImageTsBindings: () => imageServiceInstance,
   PdfImportBindings: () => pdfImportManagerInstance,
@@ -1733,7 +1733,7 @@ let ns = {
   SitesJsBindings: () => SitesJsBindings,
   SlidesTsBindings: () => SlidesTsBindings,
   CooperTsBindings: () => CooperTsBindings,
-  BoundsWatcherTs,
+  BoundsWatcherTs: getBoundsChangeHandler,
   FigmaApp: () => FigmaApp,
   AutoLayoutBindings: () => AutoLayoutBindings,
   CurrentUserInfo: () => CurrentUserInfo,
@@ -1745,7 +1745,7 @@ let ns = {
   PluginCallbacks: () => PluginCallbacks,
   WidgetBindings: () => widgetBindings,
   VideoTsBindings: () => VideoTsBindings,
-  JsKiwiSerialization: () => JsKiwiSerialization,
+  JsKiwiSerialization: () => JsKiwiSerializationInstance,
   TsFontManualLoader: () => TsFontManualLoader,
   StylesCheckBindings: () => StylesCheckBindings,
   AutosaveSessionBindings: () => AutosaveSessionBindings,
@@ -1768,7 +1768,7 @@ let ns = {
   MentionsTsBindings: () => MentionsTsBindings,
   EditScopeWebBindings: () => EditScopeWebBindings,
   StateManagementBindings: () => StateManagementBindings,
-  ColorManagementBindings: () => ColorManagementBindings,
+  ColorManagementBindings: () => colorProfileManagerInstance,
   KeyboardShortcutBindings: () => KeyboardShortcutBindings,
   WhiteboardTemplatePreviewTsBindings: () => WhiteboardTemplatePreviewTsBindings,
   FrameDistributionTrackerBindings: () => FrameDistributionTrackerBindings,
@@ -1780,31 +1780,31 @@ let ns = {
   ZipImpl: () => zipImpl,
   CoreUtils: () => CoreUtils,
   SummaryBindings: () => SummaryBindings,
-  SceneGraphHookBindings: () => SceneGraphHookBindings,
+  SceneGraphHookBindings: () => SceneGraphHookBindingsInstance,
   MissingFontsTrackerJs: () => missingFontTrackerInstance,
-  StatsigConfigBindings: () => statsigConfigBindings,
+  StatsigConfigBindings: () => fullscreenConfigInstance,
   WhiteboardThemeTsBindings: () => whiteboardThemeTsBindings,
   QuickActionsBindings: () => QuickActionsBindings,
-  BranchingWebBindings: () => BranchingWebBindings,
+  BranchingWebBindings: () => branchingWebBindingsInstance,
   SafeModeOptions: () => safeModeRenderController,
   DSAWebBindings: () => DSAWebBindings,
   WhiteboardDltConstantBindings: () => WhiteboardDltConstantBindings,
-  DeprecatedXHRSendBindings: () => DeprecatedXHRSendBindings,
-  ComponentPropBindings: () => ComponentPropBindings,
+  DeprecatedXHRSendBindings: () => deprecatedXHRSendBindingsInstance,
+  ComponentPropBindings: () => componentPropBindingsInstance,
   ImageIo: () => imageAPI,
   HTMLWindowBindings: () => windowManagerInstance,
-  WebGPUTsContext: () => webGPUTsContext,
-  TsGlContextBindings: tsGlContextBindings,
-  ScreenBindings: () => screenBindings,
+  WebGPUTsContext: () => webGPUContextInstance,
+  TsGlContextBindings: createTsGlContextManager,
+  ScreenBindings: () => ScreenBindings,
   FullscreenWebSocketTsCallbacks: () => FullscreenWebSocketTsCallbacks,
   AutosuggestTextBindings: () => autosuggestTextBindings,
   VariablesJsRuntimeAliasTsBindings: () => variablesJsRuntimeAliasTsBindings,
   AutoSuggestAssetBindings: () => autoSuggestAssetBindings,
   UndoRedoEventsBindings: () => undoRedoEventsBindings,
-  ScenegraphStringManagementBindings: () => scenegraphStringManagementBindings,
+  ScenegraphStringManagementBindings: () => scenegraphStringManagementBindingsInstance,
   ThumbnailRequestManager: thumbnailRequestManager,
   UserActionTimingBindings: () => userActionTimingBindings,
-  PrototypingFormatter: () => prototypingFormatter,
+  PrototypingFormatter: () => prototypingFormatterInstance,
   SlotsBindingsWeb: () => slotsBindingsWeb,
   jsHelpers: {
     reportError: captureException,
@@ -9162,17 +9162,17 @@ executeWhenDomReady(async () => {
         AccessibleAreasBindings: () => AccessibleAreasBindings,
         OOMHelpers: () => OOMHelpers,
         PlatformInfo: () => PlatformInfo,
-        FontManagerJs: () => FontManagerJs,
+        FontManagerJs: () => debugFontFetcher,
         JSTextLayout: () => JSTextLayout,
         SitesBindings: () => SitesBindings,
         SitesJsBindings: () => SitesJsBindings,
         SlidesTsBindings: () => SlidesTsBindings,
         CooperTsBindings: () => CooperTsBindings,
-        BoundsWatcherTs,
+        BoundsWatcherTs: getBoundsChangeHandler,
         FigmaApp: () => FigmaApp,
         AutoLayoutBindings: () => AutoLayoutBindings,
         CurrentUserInfo: () => CurrentUserInfo,
-        WebAsync: () => WebAsync,
+        WebAsync: () => WebAsyncInstance,
         WebSelection: () => sessionValue,
         WebMultiplayer: () => WebMultiplayer,
         WebUserSyncing: () => WebUserSyncing,
@@ -9185,7 +9185,7 @@ executeWhenDomReady(async () => {
         ImageIo: () => imageAPI,
         ImageTsBindings: () => imageServiceInstance,
         VideoTsBindings: () => VideoTsBindings,
-        JsKiwiSerialization: () => JsKiwiSerialization,
+        JsKiwiSerialization: () => JsKiwiSerializationInstance,
         TsFontManualLoader: () => TsFontManualLoader,
         StylesCheckBindings: () => StylesCheckBindings,
         PdfImportBindings: () => pdfImportManagerInstance,
@@ -9208,7 +9208,7 @@ executeWhenDomReady(async () => {
         NodeChatMessageHelper: () => NodeChatMessageHelper,
         MentionsTsBindings: () => MentionsTsBindings,
         StateManagementBindings: () => StateManagementBindings,
-        ColorManagementBindings: () => ColorManagementBindings,
+        ColorManagementBindings: () => colorProfileManagerInstance,
         KeyboardShortcutBindings: () => KeyboardShortcutBindings,
         WhiteboardTemplatePreviewTsBindings: () => WhiteboardTemplatePreviewTsBindings,
         FrameDistributionTrackerBindings: () => FrameDistributionTrackerBindings,
@@ -9219,35 +9219,35 @@ executeWhenDomReady(async () => {
         ExperimentBuildersTsBindings: () => ExperimentBuildersTsBindings,
         CoreUtils: () => CoreUtils,
         SummaryBindings: () => SummaryBindings,
-        SceneGraphHookBindings: () => SceneGraphHookBindings,
+        SceneGraphHookBindings: () => SceneGraphHookBindingsInstance,
         MissingFontsTrackerJs: () => missingFontTrackerInstance,
         EditScopeWebBindings: () => EditScopeWebBindings,
         QuickActionsBindings: () => QuickActionsBindings,
-        BranchingWebBindings: () => BranchingWebBindings,
+        BranchingWebBindings: () => branchingWebBindingsInstance,
         DSAWebBindings: () => DSAWebBindings,
         WhiteboardDltConstantBindings: () => WhiteboardDltConstantBindings,
-        DeprecatedXHRSendBindings: () => DeprecatedXHRSendBindings,
-        ComponentPropBindings: () => ComponentPropBindings,
+        DeprecatedXHRSendBindings: () => deprecatedXHRSendBindingsInstance,
+        ComponentPropBindings: () => componentPropBindingsInstance,
         FullscreenWebSocketTsCallbacks: () => FullscreenWebSocketTsCallbacks,
         ThumbhashBindings: () => thumbhashBindings,
         AutosuggestTextBindings: () => autosuggestTextBindings,
         VariablesJsRuntimeAliasTsBindings: () => variablesJsRuntimeAliasTsBindings,
         AutoSuggestAssetBindings: () => autoSuggestAssetBindings,
         UndoRedoEventsBindings: () => undoRedoEventsBindings,
-        ScenegraphStringManagementBindings: () => scenegraphStringManagementBindings,
+        ScenegraphStringManagementBindings: () => scenegraphStringManagementBindingsInstance,
         ThumbnailRequestManager: thumbnailRequestManager,
         UserActionTimingBindings: () => userActionTimingBindings,
-        PrototypingFormatter: () => prototypingFormatter,
+        PrototypingFormatter: () => prototypingFormatterInstance,
         SlotsBindingsWeb: () => slotsBindingsWeb,
-        PrototypeApp: () => r.prototypeApp || new Gm(),
+        PrototypeApp: () => r.prototypeApp || new SceneLoadingHandler(),
         SkewKiwiSerialization: () => r.skewKiwiSerialization || null,
-        DeprecatedJsSceneHooks: () => r.deprecatedJsSceneHooks || new _$$N(),
+        DeprecatedJsSceneHooks: () => r.deprecatedJsSceneHooks || new SceneManagerHandler(),
         WidgetBindings: () => widgetBindings,
         ZipImpl: () => zipImpl,
-        StatsigConfigBindings: () => statsigConfigBindings,
-        WebGPUTsContext: () => webGPUTsContext,
-        TsGlContextBindings: tsGlContextBindings,
-        ScreenBindings: () => screenBindings,
+        StatsigConfigBindings: () => fullscreenConfigInstance,
+        WebGPUTsContext: () => webGPUContextInstance,
+        TsGlContextBindings: createTsGlContextManager,
+        ScreenBindings: () => ScreenBindings,
         WhiteboardThemeTsBindings: () => whiteboardThemeTsBindings,
         SafeModeOptions: () => safeModeRenderController,
         jsHelpers: {

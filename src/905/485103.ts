@@ -123,8 +123,8 @@ export async function sendBatchedHistograms(histograms: Array<{
  * (Original: $$A0)
  */
 export class WebLoggerTimer {
-  private _startTime: number;
-  private _timerId: ReturnType<typeof setTimeout> | null;
+  _startTime: number;
+  _timerId: ReturnType<typeof setTimeout> | null;
   public metadata: any;
   public finished: boolean;
   public backgrounded: boolean;

@@ -6,7 +6,7 @@ import { atom, atomStoreManager } from '../figma_app/27355'
  * Original: class r
  */
 class EventEmitter {
-  private listenerMap: Map<string, Set<(event: any) => void>> = new Map()
+  listenerMap: Map<string, Set<(event: any) => void>> = new Map()
 
   /**
    * Adds an event listener for a specific event type.
@@ -40,7 +40,7 @@ class EventEmitter {
    * @param eventType - The type of event.
    * @returns The set of listeners or undefined.
    */
-  private getListenersSet(eventType: string): Set<(event: any) => void> | undefined {
+  getListenersSet(eventType: string): Set<(event: any) => void> | undefined {
     return this.listenerMap.get(eventType)
   }
 

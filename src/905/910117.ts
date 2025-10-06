@@ -169,7 +169,7 @@ class MockRequest {
  */
 class MockServer {
   static SEND_REAL_REQUEST = 'SEND_REAL_REQUEST'
-  private _handlers: Array<(req: MockRequest) => void>
+  _handlers: Array<(req: MockRequest) => void>
   areUnitTestsRunning: boolean
   constructor({
     areUnitTestsRunning,
@@ -410,7 +410,7 @@ export class XHRError extends Error {
  */
 export function shouldSampleRequest(e, t?: any) {
   // $$x2
-  const excludedPatterns = ['api/web_logger', 's3-alpha-sig.figma.com', 's3-figma-videos-production-sig.com', 'figma-fonts-private-production', 'data:image/png;base64']
+  const excludedPatterns = ['api/web_logger', 's3-alpha-sig.figma.com', 's3-figma-videos-production-sig.com', 'figma-fonts--production', 'data:image/png;base64']
   for (const pattern of excludedPatterns) {
     if (t && t.includes(pattern)) {
       return false
@@ -747,8 +747,8 @@ async function getPaginated<T = any>(url: string, options: Record<string, any> =
  *  utility for tracking request duration and state.
  */
 class Timer {
-  private _startTime: number
-  private _timerId: ReturnType<typeof setTimeout> | null
+  _startTime: number
+  _timerId: ReturnType<typeof setTimeout> | null
   metadata: any
   finished: boolean
   backgrounded: boolean

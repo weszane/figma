@@ -11,7 +11,7 @@ import { InputComponent } from "../905/185998";
 import { useTheme } from "../905/289770";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
-import { f as _$$f, h as _$$h } from "../905/693155";
+import { trackAccessibilityEvent, AccessibilityActionType } from "../905/693155";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { Fj, jI } from "../905/763714";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -19,7 +19,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { fK } from "../905/469533";
 import { getCurrentFileType } from "../figma_app/976749";
-import { y as _$$y } from "../905/810168";
+import { useScreenReaderManager } from "../905/810168";
 import { FFileType } from "../figma_app/191312";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { KeyboardFocusManager } from "../905/826900";
@@ -27,7 +27,7 @@ export let $$C0 = registerModal(function ({
   open: e,
   onClose: t
 }) {
-  let [r, x] = _$$y();
+  let [r, x] = useScreenReaderManager();
   let [C, w] = useAtomValueAndSetter(Fj);
   let O = Xr(jI);
   let R = setupAutofocusHandler();
@@ -74,7 +74,7 @@ export let $$C0 = registerModal(function ({
             onChange: (e, {
               source: t
             }) => {
-              _$$f(e ? _$$h.TOGGLE_DOM_ON_MENU : _$$h.TOGGLE_DOM_OFF_MENU, {
+              trackAccessibilityEvent(e ? AccessibilityActionType.TOGGLE_DOM_ON_MENU : AccessibilityActionType.TOGGLE_DOM_OFF_MENU, {
                 isMouseEvent: "mouse" === t
               });
               x(e);
@@ -96,7 +96,7 @@ export let $$C0 = registerModal(function ({
             onChange: (e, {
               source: t
             }) => {
-              _$$f(e ? _$$h.TOGGLE_ENHANCED_CONTRAST_ON : _$$h.TOGGLE_ENHANCED_CONTRAST_OFF, {
+              trackAccessibilityEvent(e ? AccessibilityActionType.TOGGLE_ENHANCED_CONTRAST_ON : AccessibilityActionType.TOGGLE_ENHANCED_CONTRAST_OFF, {
                 isMouseEvent: "mouse" === t
               });
               L(fK({

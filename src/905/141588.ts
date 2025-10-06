@@ -173,7 +173,7 @@ export function $$A0(e, t = {}) {
     "MESSAGE" === t.kind && (x.push(`  bool skip${t.name}Field(kiwi::ByteBuffer &bb, uint32_t id) const;`), x.push(`  bool skip${t.name}(kiwi::ByteBuffer &bb) const;`));
     "STRUCT" === t.kind && _(t) && x.push(`  bool skip${t.name}(kiwi::ByteBuffer &bb) const;`);
   }
-  for (let t of (x.push(""), x.push("private:"), x.push("  kiwi::BinarySchema _schema;"), e.definitions)) "MESSAGE" === t.kind && x.push(`  uint32_t _index${t.name} = 0;`);
+  for (let t of (x.push(""), x.push(":"), x.push("  kiwi::BinarySchema _schema;"), e.definitions)) "MESSAGE" === t.kind && x.push(`  uint32_t _index${t.name} = 0;`);
   for (let t of (x.push("};"), x.push(""), separateEnumFile || b(e, x), [0, 1, 2, 3])) {
     let f = !1;
     if (3 === t) {
@@ -238,7 +238,7 @@ export function $$A0(e, t = {}) {
         r.push("  bool decode(kiwi::ByteBuffer &bb, kiwi::MemoryPool &pool, const BinarySchema *schema = nullptr);");
         r.push("  bool decode(kiwi::ByteBuffer &bb, kiwi::MemoryPool &pool, const BinarySchema *schema, std::vector<kiwi::SparseFields<Field>::Element> &tempFields);");
         r.push("");
-        r.push("private:");
+        r.push(":");
         r.push(`  uint32_t _flags[${n.length + 31 >> 5}] = {};`);
         let a = m(n);
         r.push("public:");
@@ -255,7 +255,7 @@ export function $$A0(e, t = {}) {
           c(t, e) ? r.push(s + `${n} *${i};`) : r.push(s + `${n} ${i};`);
         }
         r.push("  };");
-        r.push("private:");
+        r.push(":");
         r.push("  kiwi::SparseFields<Field> _fields;");
         r.push("  friend std::hash<Field>;");
         r.push("};");
@@ -272,7 +272,7 @@ export function $$A0(e, t = {}) {
           c(t, a) ? r.push(`  void set_${a.name}(${e} *value);`) : a.isArray ? r.push(`  ${e} &set_${a.name}(kiwi::MemoryPool &pool, uint32_t count);`) : r.push(`  void set_${a.name}(const ${e} &value);`);
           r.push("");
         }
-        for (let a of (r.push("  bool encode(kiwi::WriteBuffer &wb) const;"), r.push("  bool decode(kiwi::ByteBuffer &bb, kiwi::MemoryPool &pool, const BinarySchema *schema = nullptr);"), r.push(""), r.push("private:"), i && (r.push(`  ${e.name}(const ${e.name}&) = default;`), r.push(`  ${e.name}& operator=(const ${e.name}&) = default;`)), r.push(`  uint32_t _flags[${n.length + 31 >> 5}] = {};`), m(n))) {
+        for (let a of (r.push("  bool encode(kiwi::WriteBuffer &wb) const;"), r.push("  bool decode(kiwi::ByteBuffer &bb, kiwi::MemoryPool &pool, const BinarySchema *schema = nullptr);"), r.push(""), r.push(":"), i && (r.push(`  ${e.name}(const ${e.name}&) = default;`), r.push(`  ${e.name}& operator=(const ${e.name}&) = default;`)), r.push(`  uint32_t _flags[${n.length + 31 >> 5}] = {};`), m(n))) {
           if (a.isDeprecated) continue;
           let e = l(a);
           let i = o(t, a, a.isArray);
@@ -449,7 +449,7 @@ export function $$A0(e, t = {}) {
           let f = "  ";
           if ("MESSAGE" === e.kind && (r.push(`      case ${a.value}: {`), f = "        "), a.isArray) {
             if (r.push(f + "if (!_bb.readVarUint(count)) return false;"), a.isDeprecated) {
-              if ("byte" === a.type) r.push(f + "if (!_bb.skipCount(count)) return false;");else {
+              if ("byte" === a.type) r.push(f + "if (!_bb.skipCount(count)) return false;"); else {
                 let e = p(t, a, d, !1);
                 r.push(f + `for (${h} &_it : _pool.array<${h}>(count)) if (!${e}) return false;`);
               }

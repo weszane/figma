@@ -14,8 +14,8 @@ import { GLFailureType } from '../figma_app/763686';
 
 // Refactored class: original $$f0
 class FullscreenCrashHandler {
-  private _preventEnteringCpp: boolean;
-  private _fullscreenCrashState: any;
+  _preventEnteringCpp: boolean;
+  _fullscreenCrashState: any;
   constructor() {
     this._preventEnteringCpp = false;
     this._fullscreenCrashState = 'ok';

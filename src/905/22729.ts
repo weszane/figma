@@ -4,9 +4,9 @@
  * handles message passing with callbacks, and provides methods to send messages and terminate the worker.
  */
 export class ImageIOWorkerManager {
-  private nextID: number
-  private callbacks: Map<number, (data: any) => void>
-  private worker: Worker
+  nextID: number
+  callbacks: Map<number, (data: any) => void>
+  worker: Worker
 
   constructor() {
     this.nextID = 0

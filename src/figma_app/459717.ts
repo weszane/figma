@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, useRef, useCallback, useEffect, memo, useState, useLayoutEffect } from "react";
 import { LinkPrimitive } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
-import { f, h as _$$h } from "../905/693155";
+import { trackAccessibilityEvent, AccessibilityActionType } from "../905/693155";
 import { W } from "../905/898204";
 let d = "accessibilitytree--node--xYG8O";
 let c = "accessibilitytree--disabled--m1ByR accessibilitytree--node--xYG8O";
@@ -109,7 +109,7 @@ function p({
   let R = h(y, I, C ? "scrollContainer" : O);
   let L = isClickable ? {
     onClick: e => {
-      f(_$$h.PROTOTYPE_BUTTON_CLICKED, {
+      trackAccessibilityEvent(AccessibilityActionType.PROTOTYPE_BUTTON_CLICKED, {
         isMouseEvent: e?.screenX !== 0 && e?.screenY !== 0
       });
       y.nodeTriggerInteraction(I, "ON_CLICK");

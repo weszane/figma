@@ -19,9 +19,9 @@ import { ComponentPropertyManager, PluginNodeAdapter, PluginNodeRuntime, StyleMa
  * Event Processing and Handler Management
  */
 export class EventProcessingManager {
-  private eventQueue: Array<() => void> = []
-  private isProcessing = false
-  private promiseRegistry = new Map<string, Promise<any>>()
+  eventQueue: Array<() => void> = []
+  isProcessing = false
+  promiseRegistry = new Map<string, Promise<any>>()
 
   /**
    * Register and manage asynchronous operations
@@ -49,7 +49,7 @@ export class EventProcessingManager {
   /**
    * Process queued events
    */
-  private async processQueue(): Promise<void> {
+  async processQueue(): Promise<void> {
     if (this.isProcessing)
       return
 
@@ -97,9 +97,9 @@ export class EventProcessingManager {
  * Manages plugin lifecycle and API interactions
  */
 export class PluginRuntimeWrapper {
-  private runtime: PluginNodeRuntime
-  private eventManager: EventProcessingManager
-  private multiplayerSelection: any[] = []
+  runtime: PluginNodeRuntime
+  eventManager: EventProcessingManager
+  multiplayerSelection: any[] = []
 
   constructor(pluginId: string, scope: any) {
     this.runtime = new PluginNodeRuntime(pluginId, scope)
@@ -171,7 +171,7 @@ export class PluginRuntimeWrapper {
   /**
    * Get node by ID with caching
    */
-  private nodeCache = new Map<string, any>()
+  nodeCache = new Map<string, any>()
 
   getNodeById(nodeId: string): any {
     if (this.nodeCache.has(nodeId)) {
@@ -216,9 +216,9 @@ export class PluginRuntimeWrapper {
  * Provides high-level node manipulation interface
  */
 export class PluginNodeAdapterWrapper {
-  private adapter: PluginNodeAdapter
-  private componentManager: ComponentPropertyManager
-  private nodeId: string
+  adapter: PluginNodeAdapter
+  componentManager: ComponentPropertyManager
+  nodeId: string
 
   constructor(nodeId: string, nodeData: any, runtime: PluginRuntimeWrapper) {
     this.nodeId = nodeId
@@ -314,8 +314,8 @@ export class PluginNodeAdapterWrapper {
  * Enhanced style operations with event handling
  */
 export class StyleManagerWrapper {
-  private styleManager: StyleManagementRuntime
-  private styleCache = new Map<string, any>()
+  styleManager: StyleManagementRuntime
+  styleCache = new Map<string, any>()
 
   constructor(sceneGraph: any) {
     const mockRuntime = {
@@ -501,7 +501,7 @@ export class ReactionsActionProcessor {
   /**
    * Check if multiple actions are allowed (mock implementation)
    */
-  private static isMultipleActionsAllowed(): boolean {
+  static isMultipleActionsAllowed(): boolean {
     // This would normally check the user's plan/subscription
     return true // Mock: assume allowed for now
   }

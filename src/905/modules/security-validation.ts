@@ -72,8 +72,8 @@ export type ValidationBehavior = 'native' | 'aria' | 'builtin'
  */
 export class BaseValidator<T> {
   public debugKey: string
-  private readonly schema: any // Zod schema
-  private readonly logLevel: LogLevel
+  readonly schema: any // Zod schema
+  readonly logLevel: LogLevel
   protected _input: any = null
   protected _output: any = null
 
@@ -91,16 +91,16 @@ export class BaseValidator<T> {
     try {
       // Execute the request function
       const response = await requestFn({ xr: this.createMockHTTPClient() })
-      
+
       // Store input for debugging
       this._input = response
-      
+
       // Validate response data against schema
       const validatedData = this.schema.parse(response.data)
-      
+
       // Store validated output
       this._output = validatedData
-      
+
       return {
         ...response,
         data: validatedData
@@ -108,16 +108,16 @@ export class BaseValidator<T> {
     } catch (error) {
       if (this.isZodError(error)) {
         this.logValidationFailure(error)
-        
+
         // In non-enforcing mode, return original response
         if (this.logLevel === 'warn') {
           const response = await requestFn({ xr: this.createMockHTTPClient() })
           return response
         }
-        
+
         throw new Error(`Validation failed for ${this.debugKey}: ${error.message}`)
       }
-      
+
       throw error
     }
   }
@@ -126,14 +126,14 @@ export class BaseValidator<T> {
    * Logs validation failures for monitoring
    * Original: logValidationFailure from BaseValidator
    */
-  private logValidationFailure(error: any): void {
+  logValidationFailure(error: any): void {
     // Would integrate with analytics system
     console.warn('Validator Failure', {
       name: this.debugKey,
       level: this.logLevel,
       error: JSON.stringify(error)
     })
-    
+
     if (this.logLevel === 'error') {
       console.error(`Validation failed for api response for ${this.debugKey}`, this.formatValidationErrors(error))
     }
@@ -145,27 +145,27 @@ export class BaseValidator<T> {
    */
   protected formatValidationErrors(error: any): ValidationError {
     const formattedErrors: ValidationError = {}
-    
+
     if (error.issues) {
       error.issues.forEach((issue: any) => {
-        const path = issue.path.map((segment: any) => 
+        const path = issue.path.map((segment: any) =>
           typeof segment === 'number' ? '[#]' : segment
         ).join('.')
-        
+
         if (!formattedErrors[path]) {
           formattedErrors[path] = []
         }
         formattedErrors[path].push(issue.message)
       })
     }
-    
+
     return formattedErrors
   }
 
   /**
    * Check if error is a Zod validation error
    */
-  private isZodError(error: any): boolean {
+  isZodError(error: any): boolean {
     return error && error.issues && Array.isArray(error.issues)
   }
 
@@ -187,15 +187,15 @@ export class BaseValidator<T> {
  * Original: EnhancedValidator from 181241.ts
  */
 export class EnhancedValidator<T> extends BaseValidator<T> {
-  private readonly featureFlagKey?: string
-  private readonly enforce: boolean
-  private readonly reportAsSentryError: boolean
+  readonly featureFlagKey?: string
+  readonly enforce: boolean
+  readonly reportAsSentryError: boolean
 
   constructor(
-    debugKey: string, 
-    schema: any, 
-    featureFlagKey?: string, 
-    enforce: boolean = false, 
+    debugKey: string,
+    schema: any,
+    featureFlagKey?: string,
+    enforce: boolean = false,
     reportAsSentryError: boolean = false
   ) {
     super(debugKey, schema, enforce ? 'error' : 'warn')
@@ -221,11 +221,11 @@ export class EnhancedValidator<T> extends BaseValidator<T> {
       if (this.reportAsSentryError) {
         this.reportToSentry(error)
       }
-      
+
       if (this.enforce) {
         throw error
       }
-      
+
       // Non-enforcing mode, return original response
       return requestFn({ xr: this.createMockHTTPClient() })
     }
@@ -234,7 +234,7 @@ export class EnhancedValidator<T> extends BaseValidator<T> {
   /**
    * Check if feature flag is enabled
    */
-  private isFeatureEnabled(_flagKey: string): boolean {
+  isFeatureEnabled(_flagKey: string): boolean {
     // Would integrate with feature flag system
     return true // Default to enabled for now
   }
@@ -242,7 +242,7 @@ export class EnhancedValidator<T> extends BaseValidator<T> {
   /**
    * Report error to Sentry
    */
-  private reportToSentry(error: any): void {
+  reportToSentry(error: any): void {
     // Would integrate with Sentry error reporting
     console.error('Sentry Report:', this.debugKey, error)
   }
@@ -253,10 +253,10 @@ export class EnhancedValidator<T> extends BaseValidator<T> {
  * Original: security form operations from 744076.ts
  */
 export class SecurityFormManager {
-  private securityFormValidator: BaseValidator<any>
-  private getSecurityFormResponseValidator: BaseValidator<any>
-  private submitSecurityFormResponseValidator: BaseValidator<any>
-  private deleteSecurityFormResponseValidator: BaseValidator<any>
+  securityFormValidator: BaseValidator<any>
+  getSecurityFormResponseValidator: BaseValidator<any>
+  submitSecurityFormResponseValidator: BaseValidator<any>
+  deleteSecurityFormResponseValidator: BaseValidator<any>
 
   constructor() {
     // Initialize validators with mock schemas
@@ -295,7 +295,7 @@ export class SecurityFormManager {
     extensionType: 'plugin' | 'widget',
     formResponse: SecurityFormResponse
   ): Promise<void> {
-    const endpoint = extensionType === 'plugin' 
+    const endpoint = extensionType === 'plugin'
       ? `/api/plugins/${pluginId}/plugin_security_form_response`
       : `/api/widgets/${pluginId}/plugin_security_form_response`
 
@@ -337,7 +337,7 @@ export class SecurityFormManager {
     try {
       // Would make actual API call
       console.warn('Approving security form:', { pluginId, formVersion, securityFormId })
-      
+
       // Simulate success
       return Promise.resolve()
     } catch {
@@ -357,7 +357,7 @@ export class SecurityFormManager {
     try {
       // Would make actual API call
       console.warn('Rejecting security form:', { pluginId, formVersion, securityFormId })
-      
+
       // Simulate success
       return Promise.resolve()
     } catch {
@@ -369,11 +369,11 @@ export class SecurityFormManager {
    * Convert camelCase to snake_case recursively
    * Original: recursivelyChangeCamelCaseToSnakeCase from 744076.ts
    */
-  private convertCamelCaseToSnakeCase(obj: any): any {
+  convertCamelCaseToSnakeCase(obj: any): any {
     if (Array.isArray(obj)) {
       return obj.map(item => this.convertCamelCaseToSnakeCase(item))
     }
-    
+
     if (typeof obj === 'object' && obj !== null) {
       return Object.entries(obj).reduce((result, [key, value]) => {
         const snakeKey = key.replace(/([A-Z])/g, '_$1').toLowerCase()
@@ -383,7 +383,7 @@ export class SecurityFormManager {
         }
       }, {})
     }
-    
+
     return obj
   }
 }
@@ -393,8 +393,8 @@ export class SecurityFormManager {
  * Original: WAFManager from 394005.ts
  */
 export class WAFManager {
-  private pendingWAFVerification?: WAFVerificationState
-  private readonly challengeAttemptsKey = 'aws_waf_token_challenge_attempts'
+  pendingWAFVerification?: WAFVerificationState
+  readonly challengeAttemptsKey = 'aws_waf_token_challenge_attempts'
 
   /**
    * Wait for WAF validation to complete
@@ -407,13 +407,13 @@ export class WAFManager {
 
     const deferred = this.createDeferredPromise()
     const startTime = performance.now()
-    
+
     this.updateChallengeAttempts()
 
     if (validationType === 'challenge') {
       return this.initializeChallengeValidation(deferred, startTime)
     }
-    
+
     if (validationType === 'captcha') {
       return this.initializeCaptchaValidation(deferred, startTime)
     }
@@ -425,12 +425,12 @@ export class WAFManager {
    * Initialize challenge validation with iframe
    * Original: initializeChallengeValidation from 394005.ts
    */
-  private initializeChallengeValidation(deferred: any, startTime: number): Promise<void> {
+  initializeChallengeValidation(deferred: any, startTime: number): Promise<void> {
     const clearTimeoutFn = this.createTimeout(deferred, 5000)
     const iframe = this.createWAFIframe()
-    
+
     window.addEventListener('message', this.onMessage.bind(this))
-    
+
     this.pendingWAFVerification = {
       type: 'challenge',
       deferred,
@@ -438,7 +438,7 @@ export class WAFManager {
       clearTimeout: clearTimeoutFn,
       startTime
     }
-    
+
     return deferred.promise
   }
 
@@ -446,13 +446,13 @@ export class WAFManager {
    * Initialize captcha validation with popup
    * Original: initializeCaptchaValidation from 394005.ts
    */
-  private initializeCaptchaValidation(deferred: any, startTime: number): Promise<void> {
+  initializeCaptchaValidation(deferred: any, startTime: number): Promise<void> {
     this.pendingWAFVerification = {
       type: 'captcha',
       deferred,
       startTime
     }
-    
+
     this.openPopupInterstitialModal()
     return deferred.promise
   }
@@ -461,7 +461,7 @@ export class WAFManager {
    * Create WAF validation iframe
    * Original: createWAFIframe from 394005.ts
    */
-  private createWAFIframe(): HTMLIFrameElement {
+  createWAFIframe(): HTMLIFrameElement {
     const iframe = document.createElement('iframe')
     iframe.style.display = 'none'
     iframe.src = 'about:blank'
@@ -473,12 +473,12 @@ export class WAFManager {
    * Handle WAF validation messages
    * Original: onMessage handling from 394005.ts
    */
-  private onMessage(event: MessageEvent): void {
+  onMessage(event: MessageEvent): void {
     if (!this.pendingWAFVerification) return
 
     try {
       const data = event.data
-      
+
       if (data.type === 'waf_validation_success') {
         this.handleValidationSuccess()
       } else if (data.type === 'waf_validation_failure') {
@@ -494,7 +494,7 @@ export class WAFManager {
    * Handle successful WAF validation
    * Original: success handling from 394005.ts
    */
-  private handleValidationSuccess(): void {
+  handleValidationSuccess(): void {
     if (!this.pendingWAFVerification) return
 
     console.warn('WAF validation successful', {
@@ -513,7 +513,7 @@ export class WAFManager {
   /**
    * Handle WAF validation failure
    */
-  private handleValidationFailure(error: string): void {
+  handleValidationFailure(error: string): void {
     if (!this.pendingWAFVerification) return
 
     console.error('WAF validation failed:', error)
@@ -524,7 +524,7 @@ export class WAFManager {
    * Handle successful CAPTCHA validation
    * Original: handleCaptchaSuccess from 394005.ts
    */
-  private handleCaptchaSuccess(): void {
+  handleCaptchaSuccess(): void {
     // Close popup modal if open
     this.closePopupModal()
   }
@@ -533,7 +533,7 @@ export class WAFManager {
    * Handle successful challenge validation
    * Original: handleChallengeSuccess from 394005.ts
    */
-  private handleChallengeSuccess(): void {
+  handleChallengeSuccess(): void {
     // Remove iframe if present
     if (this.pendingWAFVerification?.iframe) {
       document.body.removeChild(this.pendingWAFVerification.iframe)
@@ -544,10 +544,10 @@ export class WAFManager {
    * Update challenge attempts in localStorage
    * Original: updateChallengeAttempts from 394005.ts
    */
-  private updateChallengeAttempts(): void {
+  updateChallengeAttempts(): void {
     try {
       const storedAttempts = localStorage.getItem(this.challengeAttemptsKey)
-      
+
       if (storedAttempts) {
         const attemptData = JSON.parse(storedAttempts)
         attemptData.attempts = 1
@@ -562,7 +562,7 @@ export class WAFManager {
    * Open popup interstitial modal
    * Original: openPopupInterstitialModal from 394005.ts
    */
-  private openPopupInterstitialModal(): void {
+  openPopupInterstitialModal(): void {
     // Would open actual popup modal
     console.warn('Opening WAF popup modal')
   }
@@ -570,7 +570,7 @@ export class WAFManager {
   /**
    * Close popup modal
    */
-  private closePopupModal(): void {
+  closePopupModal(): void {
     // Would close popup modal
     console.warn('Closing WAF popup modal')
   }
@@ -578,7 +578,7 @@ export class WAFManager {
   /**
    * Create timeout for validation
    */
-  private createTimeout(deferred: any, timeout: number): () => void {
+  createTimeout(deferred: any, timeout: number): () => void {
     const timeoutId = setTimeout(() => {
       this.handleValidationFailure('Validation timeout')
     }, timeout)
@@ -589,7 +589,7 @@ export class WAFManager {
   /**
    * Create deferred promise
    */
-  private createDeferredPromise(): any {
+  createDeferredPromise(): any {
     let resolve: (value?: any) => void
     let reject: (reason?: any) => void
 
@@ -608,7 +608,7 @@ export class WAFManager {
   /**
    * Cleanup and resolve validation
    */
-  private cleanupAndResolve(deferred: any, result: any): void {
+  cleanupAndResolve(deferred: any, result: any): void {
     this.cleanup()
     deferred.resolve(result)
   }
@@ -616,7 +616,7 @@ export class WAFManager {
   /**
    * Cleanup and reject validation
    */
-  private cleanupAndReject(deferred: any, error: any): void {
+  cleanupAndReject(deferred: any, error: any): void {
     this.cleanup()
     deferred.reject(new Error(error))
   }
@@ -624,7 +624,7 @@ export class WAFManager {
   /**
    * Cleanup WAF validation state
    */
-  private cleanup(): void {
+  cleanup(): void {
     if (this.pendingWAFVerification?.clearTimeout) {
       this.pendingWAFVerification.clearTimeout()
     }
@@ -645,23 +645,23 @@ export class PermissionValidator {
    */
   validateIframePermissions(options: PermissionOptions): string {
     const permissions: string[] = []
-    
+
     if (options.cameraAccess) {
       permissions.push('camera')
     }
-    
+
     if (options.microphoneAccess) {
       permissions.push('microphone')
     }
-    
+
     if (options.displayCaptureAccess) {
       permissions.push('display-capture')
     }
-    
+
     if (options.clipboardWriteAccess) {
       permissions.push('clipboard-write')
     }
-    
+
     return permissions.join('; ')
   }
 
@@ -672,11 +672,11 @@ export class PermissionValidator {
     if (allowedDomains.includes('*')) {
       return true
     }
-    
+
     if (allowedDomains.includes(requestedDomain)) {
       return true
     }
-    
+
     // Check wildcard domains
     for (const allowedDomain of allowedDomains) {
       if (allowedDomain.startsWith('*.')) {
@@ -686,7 +686,7 @@ export class PermissionValidator {
         }
       }
     }
-    
+
     return false
   }
 
@@ -705,7 +705,7 @@ export class PermissionValidator {
  * Original: security policy violation handling
  */
 export class CSPManager {
-  private violations: SecurityPolicyViolation[] = []
+  violations: SecurityPolicyViolation[] = []
 
   /**
    * Initialize CSP monitoring
@@ -721,7 +721,7 @@ export class CSPManager {
    * Handle CSP violations
    * Original: CSP violation logging from plugin-communication module
    */
-  private handleCSPViolation(event: SecurityPolicyViolationEvent): void {
+  handleCSPViolation(event: SecurityPolicyViolationEvent): void {
     const violation: SecurityPolicyViolation = {
       violatedDirective: event.violatedDirective,
       blockedURI: event.blockedURI,
@@ -730,9 +730,9 @@ export class CSPManager {
     }
 
     this.violations.push(violation)
-    
+
     console.warn('Security Policy Violation:', violation)
-    
+
     // Report to monitoring system
     this.reportCSPViolation(violation)
   }
@@ -740,7 +740,7 @@ export class CSPManager {
   /**
    * Report CSP violation to monitoring
    */
-  private reportCSPViolation(violation: any): void {
+  reportCSPViolation(violation: any): void {
     // Would send to monitoring system
     console.warn('CSP violation reported:', violation)
   }
@@ -783,15 +783,15 @@ export class InputValidationManager {
     return {
       realtimeValidation: realtimeValidation || validationBehavior === 'native',
       displayValidation: displayValidation || validationBehavior === 'aria',
-      
+
       updateValidation: (errors: ValidationError) => {
         console.warn('Updating validation:', errors)
       },
-      
+
       resetValidation: () => {
         console.warn('Resetting validation')
       },
-      
+
       commitValidation: () => {
         console.warn('Committing validation')
       }

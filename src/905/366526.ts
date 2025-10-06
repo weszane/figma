@@ -92,7 +92,7 @@ import { idpUserBatchPostAction } from '../905/240853';
 import { a as _$$a5 } from '../905/242083';
 import { trackAuthEvent } from '../905/248178';
 import { nE as _$$nE, EU } from '../905/255097';
-import { dK as _$$dK, TE, v9 } from '../905/266289';
+import { themeAttributeNames, getCurrentThemePreferences, compareThemePreferences } from '../905/266289';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { parentOrgIdAtom, teamOrOrgIdAtom } from '../905/276025';
 import { ThemeProvider2 } from '../905/289770';
@@ -370,7 +370,7 @@ import { EightSeven } from '../figma_app/111825';
 import { getCurrentCodeExtensionPreferences } from '../figma_app/120227';
 import { au as _$$au, cx as _$$cx, hL as _$$hL, Ho as _$$Ho, rT as _$$rT, D6, gA, H1, U6, Vw, w9 } from '../figma_app/124493';
 import { isStudentValidated } from '../figma_app/141320';
-import { dK as _$$dK2, xt } from '../figma_app/149304';
+import { testWebGLSupport, WebGLTestResult } from '../figma_app/149304';
 import { iO as _$$iO } from '../figma_app/149367';
 import { hV as _$$hV2, Dc } from '../figma_app/151766';
 import { p as _$$p5 } from '../figma_app/160942';
@@ -543,7 +543,7 @@ function m({
   initialVersion: t = 'ui2'
 }) {
   let [i, r] = useState(t);
-  let [a, s] = useState(TE);
+  let [a, s] = useState(getCurrentThemePreferences);
   useThemeContext() && console.error('Only one instance of theme provider should exist');
   let o = useMemo(() => ({
     version: i,
@@ -562,16 +562,16 @@ function m({
       s(e => {
         let t = {
           ...e,
-          ...TE()
+          ...getCurrentThemePreferences()
         };
-        if (v9(e, t)) return e;
+        if (compareThemePreferences(e, t)) return e;
         for (let e of l.current) e(t);
         return t;
       });
     });
     e.observe(document.body, {
       attributes: !0,
-      attributeFilter: _$$dK
+      attributeFilter: themeAttributeNames
     });
     return () => e.disconnect();
   }, []);
@@ -2562,9 +2562,9 @@ let nK = registerModal(e => {
           children: renderI18nText('webgl_error.message.we_cant_open_that_file_header')
         })
       }), jsx(DialogBody, {
-        children: (t = e.result, desktopAPIInstance && t !== xt.SUCCESS ? jsxs('p', {
+        children: (t = e.result, desktopAPIInstance && t !== WebGLTestResult.SUCCESS ? jsxs('p', {
           children: [renderI18nText('webgl_error.message.we_cant_open_this_file_webgl_trouble'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.if_this_problem_persists')]
-        }) : t === xt.NO_WEBGL ? jsx('p', {
+        }) : t === WebGLTestResult.NO_WEBGL ? jsx('p', {
           children: renderI18nText('webgl_error.message.webgl_disabled', {
             helpArticleLink: jsx(Link, {
               newTab: !0,
@@ -2573,7 +2573,7 @@ let nK = registerModal(e => {
               children: renderI18nText('webgl_error.message.this_help_article_link')
             })
           })
-        }) : t === xt.STENCIL_TEST_FAILURE ? jsxs('span', {
+        }) : t === WebGLTestResult.STENCIL_TEST_FAILURE ? jsxs('span', {
           children: [renderI18nText('webgl_error.message.browser_bug'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.figma_is_working_with_the_browser_developers')]
         }) : void 0)
       }), jsx(DialogFooter, {
@@ -2624,14 +2624,14 @@ let nQ = e => t => function (i) {
     })), r.view === 'fullscreen' && a.view !== 'fullscreen') {
       e.dispatch(closeFullscreenThunk());
     } else if (r.view !== 'fullscreen' && a.view === 'fullscreen') {
-      if (_$$dK2() !== xt.SUCCESS) {
+      if (testWebGLSupport() !== WebGLTestResult.SUCCESS) {
         n.user && !desktopAPIInstance && e.dispatch(selectViewAction({
           view: 'recentsAndSharing'
         }));
         e.dispatch(showModalHandler({
           type: nK,
           data: {
-            result: _$$dK2()
+            result: testWebGLSupport()
           }
         }));
         return;

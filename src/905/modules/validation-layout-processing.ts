@@ -80,7 +80,7 @@ export interface GridLayoutConfig {
   offsetVar?: any
   gutterSizeVar?: any
   boundVariables?: VariableAlias
-  alignment?: string  
+  alignment?: string
   count?: number
 }
 
@@ -212,21 +212,21 @@ export class AdvancedTextDecorationConverter {
         value: 10,
       }
     }
-    
+
     if (modernOffset.unit === 'PERCENT') {
       return {
         units: 'PERCENT',
         value: modernOffset.value || 0,
       }
     }
-    
+
     if (modernOffset.unit === 'PIXELS') {
       return {
         units: 'PIXELS',
         value: modernOffset.value || 0,
       }
     }
-    
+
     throw new Error('Unknown textDecorationOffset unit')
   }
 
@@ -237,21 +237,21 @@ export class AdvancedTextDecorationConverter {
         unit: 'AUTO',
       }
     }
-    
+
     if (legacyThickness.units === 'PERCENT') {
       return {
         unit: 'PERCENT',
         value: legacyThickness.value,
       }
     }
-    
+
     if (legacyThickness.units === 'PIXELS') {
       return {
         unit: 'PIXELS',
         value: legacyThickness.value,
       }
     }
-    
+
     throw new Error('Unknown textDecorationThickness unit')
   }
 
@@ -263,21 +263,21 @@ export class AdvancedTextDecorationConverter {
         value: 10,
       }
     }
-    
+
     if (modernThickness.unit === 'PERCENT') {
       return {
         units: 'PERCENT',
         value: modernThickness.value || 0,
       }
     }
-    
+
     if (modernThickness.unit === 'PIXELS') {
       return {
         units: 'PIXELS',
         value: modernThickness.value || 0,
       }
     }
-    
+
     throw new Error('Unknown textDecorationThickness unit')
   }
 
@@ -297,7 +297,7 @@ export class AdvancedLayoutProcessor {
   // Convert list option to list type (original iO function)
   convertListOption(listOption: string): ListType {
     let type: 'NONE' | 'ORDERED' | 'UNORDERED' = 'NONE'
-    
+
     if (listOption === 'ORDERED_LIST') {
       type = 'ORDERED'
     } else if (listOption === 'UNORDERED_LIST') {
@@ -307,7 +307,7 @@ export class AdvancedLayoutProcessor {
     } else {
       throw new Error('Unknown list option')
     }
-    
+
     return {
       type,
     }
@@ -331,7 +331,7 @@ export class AdvancedLayoutProcessor {
     }
 
     const processedConfig = Kb(gridConfig, defaultConfig)
-    
+
     const result: GridLayoutConfig = {
       pattern: processedConfig.pattern === 'COLUMNS' || processedConfig.pattern === 'ROWS' ? 'STRIPES' : processedConfig.pattern,
       axis: processedConfig.pattern === 'COLUMNS' ? 'X' : 'Y',
@@ -355,7 +355,7 @@ export class AdvancedLayoutProcessor {
           },
         }
       }
-      
+
       if (gridConfig.boundVariables?.sectionSize?.id) {
         result.sectionSizeVar = {
           dataType: 'ALIAS',
@@ -365,7 +365,7 @@ export class AdvancedLayoutProcessor {
           },
         }
       }
-      
+
       if (gridConfig.boundVariables?.offset?.id) {
         result.offsetVar = {
           dataType: 'ALIAS',
@@ -375,7 +375,7 @@ export class AdvancedLayoutProcessor {
           },
         }
       }
-      
+
       if (gridConfig.boundVariables?.gutterSize?.id) {
         result.gutterSizeVar = {
           dataType: 'ALIAS',
@@ -405,7 +405,7 @@ export class AdvancedLayoutProcessor {
 
 // Advanced Geometry Processor
 export class AdvancedGeometryProcessor {
-  private vm: any
+  vm: any
 
   constructor(vm: any) {
     this.vm = vm

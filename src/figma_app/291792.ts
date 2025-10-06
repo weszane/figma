@@ -28,7 +28,7 @@ import { isZoomIntegration } from "../figma_app/469876";
 import { isFigmaNativeApp } from "../905/575846";
 import { TY } from "../figma_app/701001";
 import { Zr } from "../figma_app/678782";
-import { r as _$$r } from "../905/210851";
+import { buildAnalyticsContext } from "../905/210851";
 import { resolveTeamId } from "../905/515860";
 import { eE } from "../figma_app/952446";
 import { selectCurrentFile, useCurrentFileKey, selectOpenFile } from "../figma_app/516028";
@@ -150,7 +150,7 @@ function Q({
       return e.sort((e, r) => e.editorType === t ? -1 : r.editorType === t ? 1 : 0);
     }, [t, A, k]);
     let U = useCallback(t => {
-      trackFullScreenAnalytics(t, _$$r({
+      trackFullScreenAnalytics(t, buildAnalyticsContext({
         source: e === FileBrowserLocation.EDITOR_MENU ? "menu" : "quick-actions"
       }));
     }, [e]);

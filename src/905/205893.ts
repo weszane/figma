@@ -4,7 +4,7 @@
  */
 export class EventEmitter {
   /** Set of registered event listeners */
-  private listeners: Set<(event: any) => void> = new Set();
+  listeners: Set<(event: any) => void> = new Set();
 
   /**
    * Adds a listener to the set.

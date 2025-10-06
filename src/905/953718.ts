@@ -15,7 +15,7 @@ export enum ChannelID {
 }
 
 export class Rule {
-  constructor(public name: string, public description: string, private ruleFn: (context: any, experience: any) => boolean) {}
+  constructor(public name: string, public description: string, ruleFn: (context: any, experience: any) => boolean) { }
 
   execute(context: any, experience: any): boolean {
     return this.ruleFn(context, experience)
@@ -39,9 +39,9 @@ function batchExecution(fn: (...args: any[]) => void) {
 }
 
 export class ExperienceManager {
-  private channels: any
-  private batchNumber = 0
-  private experienceMap = new Map<string, any>()
+  channels: any
+  batchNumber = 0
+  experienceMap = new Map<string, any>()
 
   public runExperiencesForChannel: (channelId: string) => void
 
@@ -217,9 +217,9 @@ export class ExperienceManager {
 }
 
 export class OverlayManager {
-  private overlayMap = new Map<string, any>()
-  private loadMap = new PriorityMap()
-  private showQueue: any[] = []
+  overlayMap = new Map<string, any>()
+  loadMap = new PriorityMap()
+  showQueue: any[] = []
 
   public showOverlay: (overlayId: string, showFn: (result: any) => void) => void
 
@@ -303,7 +303,7 @@ export class OverlayManager {
     })
   }
 
-  debugLog(..._args: any[]) {}
+  debugLog(..._args: any[]) { }
 
   getImmutableLoadingOverlays() {
     return JSON.parse(JSON.stringify(Array.from(this.loadMap.items.values())))
@@ -315,7 +315,7 @@ export class OverlayManager {
 }
 
 class PriorityMap {
-  private maxPriItem: any = null
+  maxPriItem: any = null
   public items = new Map<string, any>()
 
   set(key: string, item: any) {
@@ -341,7 +341,7 @@ class PriorityMap {
     return this.maxPriItem
   }
 
-  private updateMaxPriItem() {
+  updateMaxPriItem() {
     let maxItem: any = null
     for (const item of this.items.values()) {
       if (maxItem == null || item.priority > maxItem.priority) {

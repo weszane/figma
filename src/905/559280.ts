@@ -58,14 +58,14 @@ export class RcsFrame extends Component<ModalFrameProps> {
     title?: string;
     titleSetByStep?: any;
   } = {
-    modalHeight: 328,
-    rcsKeyLocation: null,
-    renderCount: 0
-  };
+      modalHeight: 328,
+      rcsKeyLocation: null,
+      renderCount: 0
+    };
 
   // Refactored instance variables
-  private getRcsKeyElementInterval: number | null = null;
-  private button: HTMLElement | null = null;
+  getRcsKeyElementInterval: number | null = null;
+  button: HTMLElement | null = null;
   constructor(props: ModalFrameProps) {
     super(props);
   }
@@ -121,7 +121,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
   /**
    * renderIfDocumentComplete - original method name
    */
-  private renderIfDocumentComplete = () => {
+  renderIfDocumentComplete = () => {
     if (document.readyState === 'complete') {
       this.forceRender();
     }
@@ -130,7 +130,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
   /**
    * startScanningForRcsKeyElement - original method name
    */
-  private startScanningForRcsKeyElement = () => {
+  startScanningForRcsKeyElement = () => {
     this.cleanUpRcsKeyElementScanner();
     const step = this.props.step;
     if (step.modalType === OverlayType.DRAGGABLE) {
@@ -161,7 +161,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
   /**
    * cleanUpRcsKeyElementScanner - original method name
    */
-  private cleanUpRcsKeyElementScanner = () => {
+  cleanUpRcsKeyElementScanner = () => {
     if (this.getRcsKeyElementInterval != null) {
       clearInterval(this.getRcsKeyElementInterval);
       this.getRcsKeyElementInterval = null;
@@ -171,14 +171,14 @@ export class RcsFrame extends Component<ModalFrameProps> {
   /**
    * acceptHeight - original method name
    */
-  private acceptHeight = (height: number) => this.setState({
+  acceptHeight = (height: number) => this.setState({
     modalHeight: height
   });
 
   /**
    * nextButtonRef - original method name
    */
-  private nextButtonRef = (element: HTMLElement | null) => {
+  nextButtonRef = (element: HTMLElement | null) => {
     if (element) {
       this.button = element;
       this.focusButton();
@@ -188,7 +188,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
   /**
    * focusButton - original method name
    */
-  private focusButton = () => {
+  focusButton = () => {
     if (this.button && !this.props.step.UNSAFE_disableFocus) {
       this.button.focus();
     }
@@ -197,7 +197,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
   /**
    * computeLocation - original method name
    */
-  private computeLocation = (rect: DOMRect): {
+  computeLocation = (rect: DOMRect): {
     top: number | null;
     left: number | null;
     arrowRelativeX: number | null;
@@ -258,7 +258,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
   /**
    * getFramePosition - original method name
    */
-  private getFramePosition = () => this.state.rcsKeyLocation || {
+  getFramePosition = () => this.state.rcsKeyLocation || {
     top: null,
     left: null,
     arrowPosition: null,
@@ -269,7 +269,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
   /**
    * getRcsKeyElement - original method name
    */
-  private getRcsKeyElement = () => {
+  getRcsKeyElement = () => {
     const step = this.props.step;
     return step.modalType === OverlayType.DRAGGABLE && step.onboardingKey ? xT(step.onboardingKey) : null;
   };
@@ -277,7 +277,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
   /**
    * acceptTitle - original method name
    */
-  private acceptTitle = (title: string) => {
+  acceptTitle = (title: string) => {
     this.setState({
       title,
       titleSetByStep: this.props.step
@@ -287,14 +287,14 @@ export class RcsFrame extends Component<ModalFrameProps> {
   /**
    * forceRender - original method name
    */
-  private forceRender = () => this.setState({
+  forceRender = () => this.setState({
     renderCount: this.state.renderCount + 1
   });
 
   /**
    * getPositionAndConstraints - original method name
    */
-  private getPositionAndConstraints = (defaultLocation, initialPosition?: Point) => {
+  getPositionAndConstraints = (defaultLocation, initialPosition?: Point) => {
     const framePosition = this.getFramePosition();
     if (framePosition.top && framePosition.left) {
       return {
@@ -354,7 +354,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
   }
 
   // Extracted render logic for modal types
-  private renderModalType = (step: any, framePosition: any, content: any) => {
+  renderModalType = (step: any, framePosition: any, content: any) => {
     switch (step.modalType) {
       case OverlayType.DRAGGABLE:
         return this.renderDraggableModal(step, framePosition, content);
@@ -374,7 +374,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
         return content;
     }
   };
-  private renderDraggableModal = (step: any, framePosition: any, content: any) => {
+  renderDraggableModal = (step: any, framePosition: any, content: any) => {
     const {
       initialPosition,
       initialConstraints
@@ -437,13 +437,13 @@ export class RcsFrame extends Component<ModalFrameProps> {
       })]
     });
   };
-  private renderFeatureUpdateModal = (step: any, content: any) => jsx(FeatureUpdateModal, {
+  renderFeatureUpdateModal = (step: any, content: any) => jsx(FeatureUpdateModal, {
     width: this.width,
     onAdditionalExplicitDismiss: this.props.additionalOnExplicitDismiss,
     onDismissModal: this.props.dismissModal,
     children: content
   });
-  private renderWalkThroughModal = (step: any, content: any) => jsxs(Fragment, {
+  renderWalkThroughModal = (step: any, content: any) => jsxs(Fragment, {
     children: [!step.disableHighlight && jsx(_$$x2, {
       target: step.onboardingKey
     }), jsx(CR, {
@@ -462,7 +462,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
       children: content
     })]
   });
-  private renderWelcomeModal = (step: any, content: any) => jsxs(Fragment, {
+  renderWelcomeModal = (step: any, content: any) => jsxs(Fragment, {
     children: [step.fullscreen && jsx('div', {
       className: qg
     }), jsx(WelcomeModal, {
@@ -472,7 +472,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
       })
     })]
   });
-  private renderPointerModal = (step: any, content: any) => jsxs(Fragment, {
+  renderPointerModal = (step: any, content: any) => jsxs(Fragment, {
     children: [step.showHighlight && jsx(_$$x2, {
       target: step.onboardingKey
     }), jsx(NJ, {
@@ -487,7 +487,7 @@ export class RcsFrame extends Component<ModalFrameProps> {
       children: content
     })]
   });
-  private renderAnnouncementPointerModal = (step: any, content: any) => {
+  renderAnnouncementPointerModal = (step: any, content: any) => {
     const title = typeof step.title === 'function' ? step.title() : step.title;
     return jsx(OA, {
       arrowPosition: step.arrowPosition,

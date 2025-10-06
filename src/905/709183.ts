@@ -7,7 +7,7 @@ import { camelCase, mapValues, snakeCase } from 'lodash-es'
  */
 interface TableConfigOptions {
   skipFromLiveGraphViews?: boolean
-  
+
   liveGraphField?: LiveGraphFieldConfig
   liveGraphFieldInterfaceOptions?: Record<string, any>
 }
@@ -87,7 +87,7 @@ export class DatabaseTable {
   public readonly liveGraphField?: LiveGraphFieldConfig
   public readonly skipFromLiveGraphViews: boolean = false
   public readonly livegraphTopLevelResourceName?: string
-  private readonly serializedValues: Record<string, string>
+  readonly serializedValues: Record<string, string>
 
   /**
    * Creates a new DatabaseTable instance
@@ -172,9 +172,9 @@ export class DatabaseTableField {
   public readonly table: DatabaseTable
   public readonly name: string
   public readonly liveGraphFieldName: string | null
-  private readonly serializedValues: Record<string, string>
-  private readonly livegraphParts: string[] | null = null
-  private readonly normalizedLivegraphParts: string[] | null = null
+  readonly serializedValues: Record<string, string>
+  readonly livegraphParts: string[] | null = null
+  readonly normalizedLivegraphParts: string[] | null = null
 
   /**
    * Creates a new DatabaseTableField instance

@@ -42,7 +42,7 @@ import { Rs } from '../figma_app/761870';
 import { isResourcePendingPublishing } from '../figma_app/777551';
 import { BrowserInfo } from '../figma_app/778880';
 import { centsToDollars, isGreater, isNotInteger, isPriceOutOfRange, isRatioHigh, MIN_PRICE } from '../figma_app/808294';
-import { isInteractionPathCheck, Lg } from '../figma_app/897289';
+import { isInteractionPathCheck, getFalseValue } from '../figma_app/897289';
 import { isValidUrl, stringToUint8Array } from '../figma_app/930338';
 import { getEditorTypeFromView } from '../figma_app/976749';
 
@@ -1342,7 +1342,7 @@ export function getOrgRole(resource: any, org: any, publisher: any): any {
 export function getPublishingRole(org: any, type: string): any {
   return type === Lu.ORG ? org ? {
     org
-  } : (logger.error('publishing a private plugin without a valid org entity.'), null) : {
+  } : (logger.error('publishing a  plugin without a valid org entity.'), null) : {
     is_public: true
   };
 }
@@ -1619,7 +1619,7 @@ export function getWidgetVersionData(params: any): any | undefined {
     } else {
       result = publishedCanvasWidgetVersions[widgetId]?.[params.widgetVersionId] || publishedWidgets[widgetId] && getPluginVersion(publishedWidgets[widgetId]);
       if (!result) return;
-      if (result.id === params.widgetVersionId || isInteractionPathCheck() || Lg()) {
+      if (result.id === params.widgetVersionId || isInteractionPathCheck() || getFalseValue()) {
         // ok
       } else {
         reportError(ServiceCategories.UNOWNED, new Error(`plugin versionId=${result?.id} doesn't match node.widgetVersionId=${params.widgetVersionId}`));
@@ -1734,7 +1734,7 @@ export function getResourceRoleInfo(resource: any): any {
     role: 'org',
     roleOrgId: resource.roles.org.id
   } : {
-    role: 'private'
+    role: ''
   };
 }
 

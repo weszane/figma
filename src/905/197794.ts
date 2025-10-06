@@ -1,11 +1,11 @@
 import { executeBinaryModule, registerBinaryModule } from '../905/189279'
-import { gx } from '../905/319279'
+import { initComposeApps } from '../905/319279'
 import { updateAppCapabilities } from '../905/544669'
 import { isFigmaNativeApp } from '../905/575846'
 import { getFeatureFlags } from '../905/601108'
 import { fetchFontList, updateFontList } from '../905/777093'
 import { createDeferredPromise } from '../905/874553'
-import { $$K0 } from '../905/896230'
+import { prototypeLibBindings } from '../905/896230'
 import { initializeWasm } from '../figma_app/298277'
 import { loadTimeTrackerModule, prototypeLibPerfModule } from '../figma_app/661568'
 import { initializeTsApiBindings } from '../figma_app/762706'
@@ -26,7 +26,7 @@ async function initializePrototypeWasm() {
       loadTimeTracker.fullscreenEvents.loadAndStartFullscreenIfNecessary = Math.round(performance.now())
     }
     isWasmInitialized = true
-    await initializeWasm($$K0, 'prototype-lib')
+    await initializeWasm(prototypeLibBindings, 'prototype-lib')
     wasmInitializationPromise.resolve()
   }
 }
@@ -35,7 +35,7 @@ async function initializePrototypeWasm() {
  * Font list loading promise
  * @type {Promise}
  */
-let fontListLoadingPromise = new Promise(() => { })
+let fontListLoadingPromise = new Promise(() => {})
 
 /**
  * Cache for initialized modules
@@ -50,14 +50,11 @@ let initializedModulesCache = {
  * Initialize prototype library module
  * @param {object} config - Configuration object
  * @param {any} t - Additional parameter
- * @returns {Promise<{cppModules: any, fontListPromise: Promise<any>}>}
  * @function $$v0 -> initializePrototypeLibModule
  */
 export async function initializePrototypeLibModule(config: any, _t: any) {
-  gx(config.prototypeApp, config.skewKiwiSerialization, config.deprecatedJsSceneHooks)
-
+  initComposeApps(config.prototypeApp, config.skewKiwiSerialization, config.deprecatedJsSceneHooks)
   const moduleName = 'prototype-lib'
-
   if (initializedModulesCache[moduleName] == null) {
     initializedModulesCache[moduleName] = (async () => {
       // Reset and start performance tracking
@@ -87,11 +84,9 @@ export async function initializePrototypeLibModule(config: any, _t: any) {
 
       // Initialize WASM
       await initializePrototypeWasm()
-
       if (!prototypeInternal) {
         throw new Error('PrototypeLib: error during initialization')
       }
-
       const loadTimeTracker = loadTimeTrackerModule.getLoadTimeTracker()
       const fontSourceTypes = [FontSourceType.LOCAL, FontSourceType.GOOGLE]
 
@@ -105,20 +100,15 @@ export async function initializePrototypeLibModule(config: any, _t: any) {
       })
 
       // Handle async font loading based on feature flag
-      fontListLoadingPromise = getFeatureFlags().prototype_async_font_loading
-        ? Promise.resolve()
-        : fontListPromise
+      fontListLoadingPromise = getFeatureFlags().prototype_async_font_loading ? Promise.resolve() : fontListPromise
 
       // End performance tracking
       prototypeLibPerfModule.end('initializePrototypeLib')
       console.debug('[prototype lib] Ready for interactions', performance.now())
-
       if (loadTimeTracker) {
         loadTimeTracker.fullscreenEvents.fullscreenIsReady = Math.round(performance.now())
       }
-
       prototypeLibPerfModule.loadTimer.report()
-
       return initializeFigmaServices()
     })()
   }
@@ -128,7 +118,7 @@ export async function initializePrototypeLibModule(config: any, _t: any) {
       callMain: () => {
         bindings.refreshJsCppBindings()
       },
-      tsApisForCpp: $$K0,
+      tsApisForCpp: prototypeLibBindings,
       registerRefreshCallback: (module) => {
         registerBinaryModule('prototype-lib', module)
       },
@@ -139,7 +129,6 @@ export async function initializePrototypeLibModule(config: any, _t: any) {
     executeBinaryModule('prototype-lib')
     await initializePrototypeWasm()
   }
-
   return {
     cppModules: await initializedModulesCache[moduleName],
     fontListPromise: fontListLoadingPromise,

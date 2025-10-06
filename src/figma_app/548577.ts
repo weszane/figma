@@ -1,213 +1,364 @@
-function n(e, t, r) {
-  t in e
-    ? Object.defineProperty(e, t, {
-        value: r,
-        enumerable: !0,
-        configurable: !0,
-        writable: !0,
-      })
-    : e[t] = r
-  return e
+/* eslint-disable unused-imports/no-unused-vars */
+interface EditScopeManager {
+  onMissingEditScope: (...args: any[]) => void
+  onIntentionalEdit: (...args: any[]) => void
 }
-export class $$i17 {
-  onMissingEditScope(...e) {
+export class EditScopeHandler implements EditScopeManager {
+  shouldThrow: boolean
+  onMissingEditScope(...args: any[]) {
     if (this.shouldThrow)
       throw new Error('Method not implemented.')
   }
 
-  onIntentionalEdit(...e) {
+  onIntentionalEdit(...args: any[]) {
     if (this.shouldThrow)
       throw new Error('Method not implemented.')
   }
 
   constructor(e = !1) {
-    
     this.shouldThrow = e
   }
 }
-export class $$a38 {
-  readyToAcceptAutosaveChanges(...e) {
-    if (this.shouldThrow)
+interface AutoSaveManager {
+  readyToAcceptAutosaveChanges: (...args: any[]) => boolean
+  hasOngoingCommitTask: (...args: any[]) => boolean
+  enqueueAutosaveCommit: (...args: any[]) => Promise<never>
+  createAutosaveManager: (...args: any[]) => void
+  destroyAutosaveManager: (...args: any[]) => void
+  isConnected: (...args: any[]) => boolean
+}
+
+interface ShadowReadLogger {
+  logShadowReadSuggestionsOnPaste: (...args: any[]) => void
+}
+
+interface RequestIdGenerator {
+  generateRequestId: (...args: any[]) => string
+  generateSessionId: (...args: any[]) => string
+  getSuggestion: (...args: any[]) => Promise<never>
+  onExplicitDismiss: (...args: any[]) => void
+  onFullOrPartialAccept: (...args: any[]) => void
+}
+
+interface EchoService {
+  jsEchoUintValue: (...args: any[]) => number
+  jsEchoUint64Value: (...args: any[]) => string
+  jsEchoInt64Value: (...args: any[]) => string
+  jsEchoInt64Struct: (...args: any[]) => { uvalue: string, ivalue: string }
+  jsEchoStringValue: (...args: any[]) => string
+  jsEchoIntArrayValue: (...args: any[]) => number[]
+  jsEchoBoolArrayValue: (...args: any[]) => boolean[]
+  jsEchoJsonValue: (...args: any[]) => string
+  jsEchoJsValue: (...args: any[]) => void
+  jsEchoOptionalJsValue: (...args: any[]) => null
+  jsEchoDeeplyNestedJsValue: (...args: any[]) => any[]
+  jsEchoIntMapValue: (...args: any[]) => Map<any, any>
+  jsEchoIntSetValue: (...args: any[]) => Set<any>
+  jsEchoOptionalStringValue: (...args: any[]) => null
+  jsEchoOptionalStringStruct: (...args: any[]) => { valueOpt2: null }
+  jsEchoFastParseableStructValue: (...args: any[]) => {
+    intValue: number
+    uintValue: number
+    int64Value: string
+    uint64Value: string
+    strValue: string
+    doubleValue: number
+    boolValue: boolean
+    guidValue: string
+    structValue: { value: number }
+    arrayIntValue: number[]
+    arrayStringValue: string[]
+    arrayBoolValue: boolean[]
+    jsValue: undefined
+  }
+  jsEchoNonFastParseableStructValue: (...args: any[]) => {
+    jsonValue: string
+    intValue: number
+    uintValue: number
+    int64Value: string
+    uint64Value: string
+    strValue: string
+    doubleValue: number
+    boolValue: boolean
+    guidValue: string
+    structValue: { value: number }
+    arrayIntValue: number[]
+    arrayStringValue: string[]
+    arrayBoolValue: boolean[]
+    jsValue: undefined
+  }
+  jsEchoCallbackValue: (...args: any[]) => () => void
+  getObservableCounter: (...args: any[]) => null
+  getObservableArray: (...args: any[]) => null
+  jsValueTestsDone: (...args: any[]) => void
+}
+
+interface SearchService {
+  rerunSearch: (...args: any[]) => void
+  getTextMatches: (...args: any[]) => any[]
+  rebuildIndex: (...args: any[]) => void
+  logIndex: (...args: any[]) => void
+  setResultInfo: (...args: any[]) => void
+  setFocusAndNavigate: (...args: any[]) => void
+  setCategoryCounts: (...args: any[]) => void
+  updateCategoryCounts: (...args: any[]) => void
+  showReplace: (...args: any[]) => void
+  showMissingFontBell: (...args: any[]) => void
+  detectTextTransform: (...args: any[]) => number
+  applyTextTransform: (...args: any[]) => string
+  getAnnotationTextContent: (...args: any[]) => string
+}
+
+interface CodeSnapshotManager {
+  clearCodeSnapshotsFromMessages: (...args: any[]) => any[]
+}
+
+interface CommentManager {
+  handleMouseDown: (...args: any[]) => void
+  handleMouseMove: (...args: any[]) => void
+  handleMouseUp: (...args: any[]) => void
+  createNewCommentAtPosition: (...args: any[]) => void
+}
+
+interface TemplatePicker {
+  openTemplatePicker: (...args: any[]) => void
+}
+
+export class AutosaveSessionBindings implements AutoSaveManager {
+  shouldThrow: boolean
+
+  readyToAcceptAutosaveChanges(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  hasOngoingCommitTask(...e) {
-    if (this.shouldThrow)
+  hasOngoingCommitTask(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  enqueueAutosaveCommit(...e) {
-    if (this.shouldThrow)
+  enqueueAutosaveCommit(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  createAutosaveManager(...e) {
-    if (this.shouldThrow)
+  createAutosaveManager(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  destroyAutosaveManager(...e) {
-    if (this.shouldThrow)
+  destroyAutosaveManager(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isConnected(...e) {
-    if (this.shouldThrow)
+  isConnected(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$s30 {
-  logShadowReadSuggestionsOnPaste(...e) {
-    if (this.shouldThrow)
+
+// $$s30
+export class AutoSuggestAssetBindings implements ShadowReadLogger {
+  shouldThrow: boolean
+
+  logShadowReadSuggestionsOnPaste(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$o54 {
-  generateRequestId(...e) {
-    if (this.shouldThrow)
+
+// AutosuggestTextBindings
+export class AutosuggestTextBindings implements RequestIdGenerator {
+  shouldThrow: boolean
+
+  generateRequestId(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  generateSessionId(...e) {
-    if (this.shouldThrow)
+  generateSessionId(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getSuggestion(...e) {
-    if (this.shouldThrow)
+  getSuggestion(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  onExplicitDismiss(...e) {
-    if (this.shouldThrow)
+  onExplicitDismiss(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  onFullOrPartialAccept(...e) {
-    if (this.shouldThrow)
+  onFullOrPartialAccept(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$l41 {
-  jsEchoUintValue(...e) {
-    if (this.shouldThrow)
+// JsBindingsTestHelpers
+export class JsBindingsTestHelpers implements EchoService {
+  shouldThrow: boolean
+
+  jsEchoUintValue(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  jsEchoUint64Value(...e) {
-    if (this.shouldThrow)
+  jsEchoUint64Value(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return '0'
   }
 
-  jsEchoInt64Value(...e) {
-    if (this.shouldThrow)
+  jsEchoInt64Value(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return '0'
   }
 
-  jsEchoInt64Struct(...e) {
-    if (this.shouldThrow)
+  jsEchoInt64Struct(...args: any[]): { uvalue: string, ivalue: string } {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return {
       uvalue: '0',
       ivalue: '0',
     }
   }
 
-  jsEchoStringValue(...e) {
-    if (this.shouldThrow)
+  jsEchoStringValue(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  jsEchoIntArrayValue(...e) {
-    if (this.shouldThrow)
+  jsEchoIntArrayValue(...args: any[]): number[] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return []
   }
 
-  jsEchoBoolArrayValue(...e) {
-    if (this.shouldThrow)
+  jsEchoBoolArrayValue(...args: any[]): boolean[] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return []
   }
 
-  jsEchoJsonValue(...e) {
-    if (this.shouldThrow)
+  jsEchoJsonValue(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  jsEchoJsValue(...e) {
-    if (this.shouldThrow)
+  jsEchoJsValue(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  jsEchoOptionalJsValue(...e) {
-    if (this.shouldThrow)
+  jsEchoOptionalJsValue(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  jsEchoDeeplyNestedJsValue(...e) {
-    if (this.shouldThrow)
+  jsEchoDeeplyNestedJsValue(...args: any[]): any[] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return []
   }
 
-  jsEchoIntMapValue(...e) {
-    if (this.shouldThrow)
+  jsEchoIntMapValue(...args: any[]): Map<any, any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Map()
   }
 
-  jsEchoIntSetValue(...e) {
-    if (this.shouldThrow)
+  jsEchoIntSetValue(...args: any[]): Set<any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Set()
   }
 
-  jsEchoOptionalStringValue(...e) {
-    if (this.shouldThrow)
+  jsEchoOptionalStringValue(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  jsEchoOptionalStringStruct(...e) {
-    if (this.shouldThrow)
+  jsEchoOptionalStringStruct(...args: any[]): { valueOpt2: null } {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return {
       valueOpt2: null,
     }
   }
 
-  jsEchoFastParseableStructValue(...e) {
-    if (this.shouldThrow)
+  jsEchoFastParseableStructValue(...args: any[]): {
+    intValue: number
+    uintValue: number
+    int64Value: string
+    uint64Value: string
+    strValue: string
+    doubleValue: number
+    boolValue: boolean
+    guidValue: string
+    structValue: { value: number }
+    arrayIntValue: number[]
+    arrayStringValue: string[]
+    arrayBoolValue: boolean[]
+    jsValue: undefined
+  } {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return {
       intValue: 0,
       uintValue: 0,
@@ -215,7 +366,7 @@ export class $$l41 {
       uint64Value: '0',
       strValue: '',
       doubleValue: 0,
-      boolValue: !1,
+      boolValue: false,
       guidValue: '-1:-1',
       structValue: {
         value: 0,
@@ -223,13 +374,29 @@ export class $$l41 {
       arrayIntValue: [],
       arrayStringValue: [],
       arrayBoolValue: [],
-      jsValue: void 0,
+      jsValue: undefined,
     }
   }
 
-  jsEchoNonFastParseableStructValue(...e) {
-    if (this.shouldThrow)
+  jsEchoNonFastParseableStructValue(...args: any[]): {
+    jsonValue: string
+    intValue: number
+    uintValue: number
+    int64Value: string
+    uint64Value: string
+    strValue: string
+    doubleValue: number
+    boolValue: boolean
+    guidValue: string
+    structValue: { value: number }
+    arrayIntValue: number[]
+    arrayStringValue: string[]
+    arrayBoolValue: boolean[]
+    jsValue: undefined
+  } {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return {
       jsonValue: '',
       intValue: 0,
@@ -238,7 +405,7 @@ export class $$l41 {
       uint64Value: '0',
       strValue: '',
       doubleValue: 0,
-      boolValue: !1,
+      boolValue: false,
       guidValue: '-1:-1',
       structValue: {
         value: 0,
@@ -246,3093 +413,6034 @@ export class $$l41 {
       arrayIntValue: [],
       arrayStringValue: [],
       arrayBoolValue: [],
-      jsValue: void 0,
+      jsValue: undefined,
     }
   }
 
-  jsEchoCallbackValue(...e) {
-    if (this.shouldThrow)
+  jsEchoCallbackValue(...args: any[]): () => void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return () => {}
+    }
+    return () => { }
   }
 
-  getObservableCounter(...e) {
-    if (this.shouldThrow)
+  getObservableCounter(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  getObservableArray(...e) {
-    if (this.shouldThrow)
+  getObservableArray(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  jsValueTestsDone(...e) {
-    if (this.shouldThrow)
+  jsValueTestsDone(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$d56 {
-  rerunSearch(...e) {
-    if (this.shouldThrow)
+// CanvasSearchBindings
+export class CanvasSearchBindings implements SearchService {
+  shouldThrow: boolean
+
+  rerunSearch(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getTextMatches(...e) {
-    if (this.shouldThrow)
+  getTextMatches(...args: any[]): any[] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return []
   }
 
-  rebuildIndex(...e) {
-    if (this.shouldThrow)
+  rebuildIndex(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  logIndex(...e) {
-    if (this.shouldThrow)
+  logIndex(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setResultInfo(...e) {
-    if (this.shouldThrow)
+  setResultInfo(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setFocusAndNavigate(...e) {
-    if (this.shouldThrow)
+  setFocusAndNavigate(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setCategoryCounts(...e) {
-    if (this.shouldThrow)
+  setCategoryCounts(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updateCategoryCounts(...e) {
-    if (this.shouldThrow)
+  updateCategoryCounts(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showReplace(...e) {
-    if (this.shouldThrow)
+  showReplace(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showMissingFontBell(...e) {
-    if (this.shouldThrow)
+  showMissingFontBell(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  detectTextTransform(...e) {
-    if (this.shouldThrow)
+  detectTextTransform(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  applyTextTransform(...e) {
-    if (this.shouldThrow)
+  applyTextTransform(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getAnnotationTextContent(...e) {
-    if (this.shouldThrow)
+  getAnnotationTextContent(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$c11 {
-  clearCodeSnapshotsFromMessages(...e) {
-    if (this.shouldThrow)
+// NodeChatMessageHelper
+export class NodeChatMessageHelper implements CodeSnapshotManager {
+  shouldThrow: boolean
+
+  clearCodeSnapshotsFromMessages(...args: any[]): any[] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return []
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$u57 {
-  handleMouseDown(...e) {
-    if (this.shouldThrow)
+// CommentManagerImpl
+export class CommentManagerImpl implements CommentManager {
+  shouldThrow: boolean
+
+  handleMouseDown(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  handleMouseMove(...e) {
-    if (this.shouldThrow)
+  handleMouseMove(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  handleMouseUp(...e) {
-    if (this.shouldThrow)
+  handleMouseUp(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  createNewCommentAtPosition(...e) {
-    if (this.shouldThrow)
+  createNewCommentAtPosition(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
-  }
-}
-export class $$p1 {
-  openTemplatePicker(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$_64 {
-  trackStyleAction(...e) {
-    if (this.shouldThrow)
+// CooperTsBindings
+export class CooperTsBindings implements TemplatePicker {
+  shouldThrow: boolean
+
+  openTemplatePicker(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  trackVariableAction(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  trackComponentAction(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$h42 {
-  convertEmojiNameToString(...e) {
-    if (this.shouldThrow)
+
+// DSAWebBindings
+export class DSAWebBindings {
+  shouldThrow: boolean
+
+  /**
+   * Tracks style-related actions
+   * Original name: DSAWebBindings.trackStyleAction
+   */
+  trackStyleAction(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return ''
+    }
   }
 
-  setEmojiTypeaheadQuery(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tracks variable-related actions
+   * Original name: DSAWebBindings.trackVariableAction
+   */
+  trackVariableAction(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  clearEmojiTypeaheadQuery(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tracks component-related actions
+   * Original name: DSAWebBindings.trackComponentAction
+   */
+  trackComponentAction(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isShowingEmojiTypeaheadResults(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return !1
-  }
-
-  setEmojiTypeaheadImageSet(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  setEmojiTypeaheadTargetRect(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
-  }
-}
-export class $$m39 {
-  startChat(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  closeWheel(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  handleShortcutPress(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  handleShortcutRelease(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$g7 {
-  requestEditorType(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
 
-  getDeviceInfoForSize(...e) {
-    if (this.shouldThrow)
+// EmojiTsBindings
+export class EmojiTsBindings {
+  shouldThrow: boolean
+
+  /**
+   * Converts an emoji name to its string representation
+   * Original name: EmojiTsBindings.convertEmojiNameToString
+   */
+  convertEmojiNameToString(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  presetDeviceSupportsTouch(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets the emoji typeahead query
+   * Original name: EmojiTsBindings.setEmojiTypeaheadQuery
+   */
+  setEmojiTypeaheadQuery(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  sizeMatchesFramePreset(...e) {
-    if (this.shouldThrow)
+  /**
+   * Clears the emoji typeahead query
+   * Original name: EmojiTsBindings.clearEmojiTypeaheadQuery
+   */
+  clearEmojiTypeaheadQuery(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  getFramePresetForSize(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if emoji typeahead results are being shown
+   * Original name: EmojiTsBindings.isShowingEmojiTypeaheadResults
+   */
+  isShowingEmojiTypeaheadResults(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Sets the emoji typeahead image set
+   * Original name: EmojiTsBindings.setEmojiTypeaheadImageSet
+   */
+  setEmojiTypeaheadImageSet(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sets the emoji typeahead target rectangle
+   * Original name: EmojiTsBindings.setEmojiTypeaheadTargetRect
+   */
+  setEmojiTypeaheadTargetRect(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
+  }
+}
+
+// EmojiWheelBindings
+export class EmojiWheelBindings {
+  shouldThrow: boolean
+
+  /**
+   * Starts a chat
+   * Original name: EmojiWheelBindings.startChat
+   */
+  startChat(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Closes the chat wheel
+   * Original name: EmojiWheelBindings.closeWheel
+   */
+  closeWheel(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Handles shortcut press events
+   * Original name: EmojiWheelBindings.handleShortcutPress
+   */
+  handleShortcutPress(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Handles shortcut release events
+   * Original name: EmojiWheelBindings.handleShortcutRelease
+   */
+  handleShortcutRelease(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
+  }
+}
+
+/**
+ * Main application handler for various UI and system operations
+ * Original name: MainAppHandler
+ */
+export class MainAppHandler {
+  shouldThrow: boolean
+
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
+  }
+
+  // === Editor and Document Management ===
+
+  /**
+   * Requests the editor type
+   * Original name: MainAppHandler.requestEditorType
+   */
+  requestEditorType(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Gets the current file name
+   * Original name: MainAppHandler.getCurrentFileName
+   */
+  getCurrentFileName(...args: any[]): any {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getCurrentFileName(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if the document is loaded
+   * Original name: MainAppHandler.documentIsLoaded
+   */
+  documentIsLoaded(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Checks if fullscreen is ready
+   * Original name: MainAppHandler.fullscreenIsReady
+   */
+  fullscreenIsReady(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Navigates back to files
+   * Original name: MainAppHandler.backToFiles
+   */
+  backToFiles(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sets the file version
+   * Original name: MainAppHandler.setFileVersion
+   */
+  setFileVersion(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Device and Viewport Management ===
+
+  /**
+   * Gets device info for a given size
+   * Original name: MainAppHandler.getDeviceInfoForSize
+   */
+  getDeviceInfoForSize(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  isUserPresent(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return !1
-  }
-
-  backToFiles(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  documentIsLoaded(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  fullscreenIsReady(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  isFontListLoaded(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return !1
-  }
-
-  afterFontsLoaded(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  setFileVersion(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openSettings(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openFontSettings(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  attemptedSketchFileDrop(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openExportPicker(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openExportSettingsPicker(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openPdfExportSettingsModal(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openCooperExportModal(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openShortcuts(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  toggleBrowseAllResourcesModal(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openPreferencesModal(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showNudgeAmountPicker(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openFplDebug(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  hidePicker(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  findInspiration(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  findCodebaseSuggestions(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openQuickActionsAssetsTab(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  inspectFragment(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  handleSignedOutEditAttempt(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  hasUnsavedChanges(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return !1
-  }
-
-  shouldSuppressUnsavedChangesUI(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return !1
-  }
-
-  toggleInteractionRecorderVisibility(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  toggleFeatureFlagBisectorModal(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showCanvasContextMenu(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showSelectLayerContextMenu(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showTextEditModeContextMenu(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showRulerGuideContextMenu(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showSelectionContextMenu(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showLeftPanelTab(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  toggleTeamLibraryModal(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  toggleComponentInsertModal(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  toggleVariablesModal(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showPublishDialog(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showTemplatePublishModal(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  forcePublishStateGroup(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  mobileAppPush(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showAutosaveVisualBell(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showReturnToInstanceVisualBell(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showReturnToVariantVisualBell(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showPasteWidgetsAsSublayersVisualBell(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showAiContentFillSuggestedVisualBell(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  clearAiContentFillSuggestedVisualBell(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showMagicLinkSuggestedVisualBell(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showUpscaleImageSuggestedVisualBell(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showPushOverridesVisualBell(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  NOT_LOCALIZED_showVisualBell(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  NOT_LOCALIZED_showVisualBellInf(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  NOT_LOCALIZED_showMobileNativeToast(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showMobileNativeToastLocalized(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showVisualBellForMultiEdit(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showVisualBellForMultiEditGlueError(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showVisualBellWithUndo(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showVisualBellWithNodesLocalized(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showVisualBellLocalized(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showVisualBellLocalizedInf(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showVisualBellWithReloadButtonLocalized(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showVisualBellWithUrlButtonLocalized(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  dismissEphemeralVisualBells(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showVisualBellWithDelayLocalized(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showVisualBellWithCloseButtonLocalized(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  clearVisualBellType(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  dismissMobileMediaLoadingToast(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  getUserLocale(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
+  /**
+   * Checks if a preset device supports touch
+   * Original name: MainAppHandler.presetDeviceSupportsTouch
+   */
+  presetDeviceSupportsTouch(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Checks if a size matches a frame preset
+   * Original name: MainAppHandler.sizeMatchesFramePreset
+   */
+  sizeMatchesFramePreset(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Gets the frame preset for a given size
+   * Original name: MainAppHandler.getFramePresetForSize
+   */
+  getFramePresetForSize(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getNaturalStyleKey(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates viewport info
+   * Original name: MainAppHandler.updateViewportInfo
+   */
+  updateViewportInfo(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+  }
+
+  // === User and Session Management ===
+
+  /**
+   * Checks if a user is present
+   * Original name: MainAppHandler.isUserPresent
+   */
+  isUserPresent(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Gets user locale
+   * Original name: MainAppHandler.getUserLocale
+   */
+  getUserLocale(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getLocalizedString(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets user name
+   * Original name: MainAppHandler.getUserName
+   */
+  getUserName(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  closeManageMemoryModal(...e) {
-    if (this.shouldThrow)
+  // === Settings and Preferences ===
+
+  /**
+   * Opens settings
+   * Original name: MainAppHandler.openSettings
+   */
+  openSettings(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showPasteLoadingIndicatorAndPaste(...e) {
-    if (this.shouldThrow)
+  /**
+   * Opens preferences modal
+   * Original name: MainAppHandler.openPreferencesModal
+   */
+  openPreferencesModal(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showPromptToMoveLibraryItems(...e) {
-    if (this.shouldThrow)
+  /**
+   * Opens font settings
+   * Original name: MainAppHandler.openFontSettings
+   */
+  openFontSettings(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  triggerFromFullscreen(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if the font list is loaded
+   * Original name: MainAppHandler.isFontListLoaded
+   */
+  isFontListLoaded(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+    return false
   }
 
-  updateViewportInfo(...e) {
-    if (this.shouldThrow)
+  /**
+   * Executes after fonts are loaded
+   * Original name: MainAppHandler.afterFontsLoaded
+   */
+  afterFontsLoaded(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showMissingFontDialog(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets keyboard layout
+   * Original name: MainAppHandler.getKeyboardLayout
+   */
+  getKeyboardLayout(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+    return 0
   }
 
-  hideMissingFontDialog(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets keyboard layout preference
+   * Original name: MainAppHandler.setKeyboardLayoutPreference
+   */
+  setKeyboardLayoutPreference(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getClipboardData(...e) {
-    if (this.shouldThrow)
+  /**
+   * Saves use numbers for opacity preference
+   * Original name: MainAppHandler.saveUseNumbersForOpacityPreference
+   */
+  saveUseNumbersForOpacityPreference(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Export and Import Functionality ===
+
+  /**
+   * Opens export picker
+   * Original name: MainAppHandler.openExportPicker
+   */
+  openExportPicker(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Opens export settings picker
+   * Original name: MainAppHandler.openExportSettingsPicker
+   */
+  openExportSettingsPicker(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Opens PDF export settings modal
+   * Original name: MainAppHandler.openPdfExportSettingsModal
+   */
+  openPdfExportSettingsModal(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Opens Cooper export modal
+   * Original name: MainAppHandler.openCooperExportModal
+   */
+  openCooperExportModal(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Handles attempted sketch file drop
+   * Original name: MainAppHandler.attemptedSketchFileDrop
+   */
+  attemptedSketchFileDrop(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Clipboard Operations ===
+
+  /**
+   * Gets clipboard data
+   * Original name: MainAppHandler.getClipboardData
+   */
+  getClipboardData(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  canUseClipboardAPI(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if clipboard API can be used
+   * Original name: MainAppHandler.canUseClipboardAPI
+   */
+  canUseClipboardAPI(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  readClipboardData(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reads clipboard data
+   * Original name: MainAppHandler.readClipboardData
+   */
+  readClipboardData(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  readFilesFromClipboard(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reads files from clipboard
+   * Original name: MainAppHandler.readFilesFromClipboard
+   */
+  readFilesFromClipboard(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  clipboardHasUnsanitizedPng(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if clipboard has unsanitized PNG
+   * Original name: MainAppHandler.clipboardHasUnsanitizedPng
+   */
+  clipboardHasUnsanitizedPng(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  decodePackedHTML(...e) {
-    if (this.shouldThrow)
+  /**
+   * Decodes packed HTML
+   * Original name: MainAppHandler.decodePackedHTML
+   */
+  decodePackedHTML(...args: any[]): Uint8Array {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Uint8Array()
   }
 
-  decodeMetadataFromHTML(...e) {
-    if (this.shouldThrow)
+  /**
+   * Decodes metadata from HTML
+   * Original name: MainAppHandler.decodeMetadataFromHTML
+   */
+  decodeMetadataFromHTML(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  detectSpreadsheetDataInHTML(...e) {
-    if (this.shouldThrow)
+  /**
+   * Detects spreadsheet data in HTML
+   * Original name: MainAppHandler.detectSpreadsheetDataInHTML
+   */
+  detectSpreadsheetDataInHTML(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  getHtmlString(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets HTML string
+   * Original name: MainAppHandler.getHtmlString
+   */
+  getHtmlString(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  writeToClipboard(...e) {
-    if (this.shouldThrow)
+  /**
+   * Writes to clipboard
+   * Original name: MainAppHandler.writeToClipboard
+   */
+  writeToClipboard(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  writeDataToClipboard(...e) {
-    if (this.shouldThrow)
+  /**
+   * Writes data to clipboard
+   * Original name: MainAppHandler.writeDataToClipboard
+   */
+  writeDataToClipboard(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  sendSerializedClipboardDataToS3(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sends serialized clipboard data to S3
+   * Original name: MainAppHandler.sendSerializedClipboardDataToS3
+   */
+  sendSerializedClipboardDataToS3(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getSerializedClipboardDataFromS3(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets serialized clipboard data from S3
+   * Original name: MainAppHandler.getSerializedClipboardDataFromS3
+   */
+  getSerializedClipboardDataFromS3(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  getKeyboardLayout(...e) {
-    if (this.shouldThrow)
+  // === UI Elements and Modals ===
+
+  /**
+   * Opens shortcuts
+   * Original name: MainAppHandler.openShortcuts
+   */
+  openShortcuts(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Toggles browse all resources modal
+   * Original name: MainAppHandler.toggleBrowseAllResourcesModal
+   */
+  toggleBrowseAllResourcesModal(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows nudge amount picker
+   * Original name: MainAppHandler.showNudgeAmountPicker
+   */
+  showNudgeAmountPicker(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Opens FPL debug
+   * Original name: MainAppHandler.openFplDebug
+   */
+  openFplDebug(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Hides picker
+   * Original name: MainAppHandler.hidePicker
+   */
+  hidePicker(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Finds inspiration
+   * Original name: MainAppHandler.findInspiration
+   */
+  findInspiration(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Finds codebase suggestions
+   * Original name: MainAppHandler.findCodebaseSuggestions
+   */
+  findCodebaseSuggestions(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Opens quick actions assets tab
+   * Original name: MainAppHandler.openQuickActionsAssetsTab
+   */
+  openQuickActionsAssetsTab(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Inspects fragment
+   * Original name: MainAppHandler.inspectFragment
+   */
+  inspectFragment(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Edit Scope Management ===
+
+  /**
+   * Handles signed out edit attempt
+   * Original name: MainAppHandler.handleSignedOutEditAttempt
+   */
+  handleSignedOutEditAttempt(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Save and Changes Management ===
+
+  /**
+   * Checks if there are unsaved changes
+   * Original name: MainAppHandler.hasUnsavedChanges
+   */
+  hasUnsavedChanges(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Checks if unsaved changes UI should be suppressed
+   * Original name: MainAppHandler.shouldSuppressUnsavedChangesUI
+   */
+  shouldSuppressUnsavedChangesUI(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Creates savepoint
+   * Original name: MainAppHandler.createSavepoint
+   */
+  createSavepoint(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return Promise.reject()
+  }
+
+  /**
+   * Shows savepoint modal
+   * Original name: MainAppHandler.showSavepointModal
+   */
+  showSavepointModal(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Visual Bell Notifications ===
+
+  /**
+   * Shows autosave visual bell
+   * Original name: MainAppHandler.showAutosaveVisualBell
+   */
+  showAutosaveVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows return to instance visual bell
+   * Original name: MainAppHandler.showReturnToInstanceVisualBell
+   */
+  showReturnToInstanceVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows return to variant visual bell
+   * Original name: MainAppHandler.showReturnToVariantVisualBell
+   */
+  showReturnToVariantVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows paste widgets as sublayers visual bell
+   * Original name: MainAppHandler.showPasteWidgetsAsSublayersVisualBell
+   */
+  showPasteWidgetsAsSublayersVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows AI content fill suggested visual bell
+   * Original name: MainAppHandler.showAiContentFillSuggestedVisualBell
+   */
+  showAiContentFillSuggestedVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Clears AI content fill suggested visual bell
+   * Original name: MainAppHandler.clearAiContentFillSuggestedVisualBell
+   */
+  clearAiContentFillSuggestedVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows magic link suggested visual bell
+   * Original name: MainAppHandler.showMagicLinkSuggestedVisualBell
+   */
+  showMagicLinkSuggestedVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows upscale image suggested visual bell
+   * Original name: MainAppHandler.showUpscaleImageSuggestedVisualBell
+   */
+  showUpscaleImageSuggestedVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows push overrides visual bell
+   * Original name: MainAppHandler.showPushOverridesVisualBell
+   */
+  showPushOverridesVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Context Menus ===
+
+  /**
+   * Shows canvas context menu
+   * Original name: MainAppHandler.showCanvasContextMenu
+   */
+  showCanvasContextMenu(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows select layer context menu
+   * Original name: MainAppHandler.showSelectLayerContextMenu
+   */
+  showSelectLayerContextMenu(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows text edit mode context menu
+   * Original name: MainAppHandler.showTextEditModeContextMenu
+   */
+  showTextEditModeContextMenu(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows ruler guide context menu
+   * Original name: MainAppHandler.showRulerGuideContextMenu
+   */
+  showRulerGuideContextMenu(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows selection context menu
+   * Original name: MainAppHandler.showSelectionContextMenu
+   */
+  showSelectionContextMenu(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows left panel tab
+   * Original name: MainAppHandler.showLeftPanelTab
+   */
+  showLeftPanelTab(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Modal and Library Management ===
+
+  /**
+   * Toggles team library modal
+   * Original name: MainAppHandler.toggleTeamLibraryModal
+   */
+  toggleTeamLibraryModal(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Toggles component insert modal
+   * Original name: MainAppHandler.toggleComponentInsertModal
+   */
+  toggleComponentInsertModal(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Toggles variables modal
+   * Original name: MainAppHandler.toggleVariablesModal
+   */
+  toggleVariablesModal(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Publishing ===
+
+  /**
+   * Shows publish dialog
+   * Original name: MainAppHandler.showPublishDialog
+   */
+  showPublishDialog(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows template publish modal
+   * Original name: MainAppHandler.showTemplatePublishModal
+   */
+  showTemplatePublishModal(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Forces publish state group
+   * Original name: MainAppHandler.forcePublishStateGroup
+   */
+  forcePublishStateGroup(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Mobile App Integration ===
+
+  /**
+   * Pushes to mobile app
+   * Original name: MainAppHandler.mobileAppPush
+   */
+  mobileAppPush(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Exports file in mobile app
+   * Original name: MainAppHandler.mobileAppExportFile
+   */
+  mobileAppExportFile(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sets mobile cut enabled
+   * Original name: MainAppHandler.setMobileCutEnabled
+   */
+  setMobileCutEnabled(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sets mobile copy enabled
+   * Original name: MainAppHandler.setMobileCopyEnabled
+   */
+  setMobileCopyEnabled(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sets mobile paste enabled
+   * Original name: MainAppHandler.setMobilePasteEnabled
+   */
+  setMobilePasteEnabled(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows context menu in mobile app
+   * Original name: MainAppHandler.mobileAppShowContextMenu
+   */
+  mobileAppShowContextMenu(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Localization and Internationalization ===
+
+  /**
+   * Gets natural style key
+   * Original name: MainAppHandler.getNaturalStyleKey
+   */
+  getNaturalStyleKey(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return ''
+  }
+
+  /**
+   * Gets localized string
+   * Original name: MainAppHandler.getLocalizedString
+   */
+  getLocalizedString(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return ''
+  }
+
+  /**
+   * Shows mobile native toast localized
+   * Original name: MainAppHandler.showMobileNativeToastLocalized
+   */
+  showMobileNativeToastLocalized(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Memory and Performance ===
+
+  /**
+   * Closes manage memory modal
+   * Original name: MainAppHandler.closeManageMemoryModal
+   */
+  closeManageMemoryModal(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Toggles PerfHUD visibility
+   * Original name: MainAppHandler.togglePerfHUDVisibility
+   */
+  togglePerfHUDVisibility(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Toggles fake MP activity
+   * Original name: MainAppHandler.toggleFakeMPActivity
+   */
+  toggleFakeMPActivity(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Toggles TSMER config
+   * Original name: MainAppHandler.toggleTSMERConfig
+   */
+  toggleTSMERConfig(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Renaming and Editing ===
+
+  /**
+   * Starts renaming nodes
+   * Original name: MainAppHandler.startRenamingNodes
+   */
+  startRenamingNodes(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Starts renaming page
+   * Original name: MainAppHandler.startRenamingPage
+   */
+  startRenamingPage(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Starts renaming pages
+   * Original name: MainAppHandler.startRenamingPages
+   */
+  startRenamingPages(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Component Management ===
+
+  /**
+   * Inserts component or shows error (deprecated)
+   * Original name: MainAppHandler.insertComponentOrShowError__DEPRECATED
+   */
+  insertComponentOrShowError__DEPRECATED(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Fetches component buffers
+   * Original name: MainAppHandler.fetchComponentBuffers
+   */
+  fetchComponentBuffers(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return Promise.reject()
+  }
+
+  /**
+   * Fetches component buffer for SEV repair
+   * Original name: MainAppHandler.fetchComponentBufferForSevRepair
+   */
+  fetchComponentBufferForSevRepair(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return Promise.reject()
+  }
+
+  /**
+   * Gets latest published version hash for component
+   * Original name: MainAppHandler.getLatestPublishedVersionHashForComponent
+   */
+  getLatestPublishedVersionHashForComponent(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return ''
+  }
+
+  /**
+   * Gets latest published version for state group
+   * Original name: MainAppHandler.getLatestPublishedVersionForStateGroup
+   */
+  getLatestPublishedVersionForStateGroup(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return ''
+  }
+
+  /**
+   * Links to component
+   * Original name: MainAppHandler.linkToComponent
+   */
+  linkToComponent(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Variable Management ===
+
+  /**
+   * Fetches variable set buffers
+   * Original name: MainAppHandler.fetchVariableSetBuffers
+   */
+  fetchVariableSetBuffers(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return Promise.reject()
+  }
+
+  /**
+   * Gets variable set number of modes allowed
+   * Original name: MainAppHandler.getVariableSetNumberOfModesAllowed
+   */
+  getVariableSetNumberOfModesAllowed(...args: any[]): number {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  setKeyboardLayoutPreference(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets default state key for state group
+   * Original name: MainAppHandler.getDefaultStateKeyForStateGroup
+   */
+  getDefaultStateKeyForStateGroup(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-  }
-
-  saveUseNumbersForOpacityPreference(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  updateSelectedStyleProperties(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  updateSelectedStyleThumbnail(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  updateStyleThumbnail(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  createSavepoint(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return Promise.reject()
-  }
-
-  showSavepointModal(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showBrowserAlert(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  toggleHistoryMode(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showViewChangesNotification(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  togglePerfHUDVisibility(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  toggleFakeMPActivity(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  toggleTSMERConfig(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showImageScaledDownWarning(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showGIFConvertedAndScaledDownWarning(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  showFragmentSearchSuggestion(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  usedKeyboardShortcut(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  startRenamingNodes(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  startRenamingPage(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  startRenamingPages(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  insertComponentOrShowError__DEPRECATED(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  fetchComponentBuffers(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return Promise.reject()
-  }
-
-  fetchComponentBufferForSevRepair(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return Promise.reject()
-  }
-
-  getLatestPublishedVersionHashForComponent(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getLatestPublishedVersionForStateGroup(...e) {
-    if (this.shouldThrow)
+  // === Image and Media Handling ===
+
+  /**
+   * Starts loading dropped image
+   * Original name: MainAppHandler.startLoadingDroppedImage
+   */
+  startLoadingDroppedImage(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Finishes loading dropped image
+   * Original name: MainAppHandler.finishLoadingDroppedImage
+   */
+  finishLoadingDroppedImage(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows image scaled down warning
+   * Original name: MainAppHandler.showImageScaledDownWarning
+   */
+  showImageScaledDownWarning(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows GIF converted and scaled down warning
+   * Original name: MainAppHandler.showGIFConvertedAndScaledDownWarning
+   */
+  showGIFConvertedAndScaledDownWarning(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Removes image background
+   * Original name: MainAppHandler.removeImageBackground
+   */
+  removeImageBackground(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Upscales image
+   * Original name: MainAppHandler.upscaleImage
+   */
+  upscaleImage(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === AI and Automation ===
+
+  /**
+   * Auto renames layers
+   * Original name: MainAppHandler.autoRenameLayers
+   */
+  autoRenameLayers(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Auto renames layers for dev handoff
+   * Original name: MainAppHandler.autoRenameLayersDevHandoff
+   */
+  autoRenameLayersDevHandoff(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Regenerates text
+   * Original name: MainAppHandler.regenerateText
+   */
+  regenerateText(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Checks if AI is disabled
+   * Original name: MainAppHandler.isAiDisabled
+   */
+  isAiDisabled(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Checks if AI is disabled in FigJam
+   * Original name: MainAppHandler.isAiDisabledFigJam
+   */
+  isAiDisabledFigJam(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Checks if org user is gated for Llama
+   * Original name: MainAppHandler.isOrgUserGatedForLlama
+   */
+  isOrgUserGatedForLlama(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Checks if in AI experiment or grantlist
+   * Original name: MainAppHandler.isInAiExperimentOrGrantlist
+   */
+  isInAiExperimentOrGrantlist(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Checks if AI rename layers permission is available
+   * Original name: MainAppHandler.hasAiRenameLayersPermission
+   */
+  hasAiRenameLayersPermission(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  // === Navigation and URLs ===
+
+  /**
+   * Validates and parses URL
+   * Original name: MainAppHandler.validateAndParseURL
+   */
+  validateAndParseURL(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  fetchVariableSetBuffers(...e) {
-    if (this.shouldThrow)
+  /**
+   * Navigates to URL
+   * Original name: MainAppHandler.navigateToURL
+   */
+  navigateToURL(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return Promise.reject()
+    }
   }
 
-  startLoadingDroppedImage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Copies link to page
+   * Original name: MainAppHandler.copyLinkToPage
+   */
+  copyLinkToPage(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  finishLoadingDroppedImage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Generates link to node
+   * Original name: MainAppHandler.generateLinkToNode
+   */
+  generateLinkToNode(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-  }
-
-  toggleMenu(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  trackInteractiveSlideElementInsertedForSprig(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  isCopyExportRestricted(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return !1
-  }
-
-  isInWorkshopMode(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return !1
-  }
-
-  requestOpenExternalSourceFileLibraryKey(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  validateAndParseURL(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  navigateToURL(...e) {
-    if (this.shouldThrow)
+  /**
+   * Generates link to CMS item page
+   * Original name: MainAppHandler.generateLinkToCmsItemPage
+   */
+  generateLinkToCmsItemPage(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-  }
-
-  setHyperlinkPopup(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  updateHyperlinkPopupPosition(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  handleUserClickOnHyperlink(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  setCanvasMentionPopup(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  updateCanvasMentionPopupPosition(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openHelp(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openSupportForum(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  openTutorials(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  keyboardWillShow(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  keyboardWillShowWithHeight(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  runLastPlugin(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  viewWidgetDetails(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  startMovePagesJob(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  retrieveMetadataAndSelectBrokenFixedScrollingNodes(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  desktopAppQueueFileForWriting(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  desktopAppWriteFiles(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  enableCodegenMcpServer(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  mobileAppExportFile(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  setMobileCutEnabled(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  setMobileCopyEnabled(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  setMobilePasteEnabled(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  mobileAppShowContextMenu(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  getDefaultOnOTFeatures(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  copyLinkToPage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Generates link to remote node
+   * Original name: MainAppHandler.generateLinkToRemoteNode
+   */
+  generateLinkToRemoteNode(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-  }
-
-  generateLinkToNode(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  generateLinkToCmsItemPage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets local GUID from URL
+   * Original name: MainAppHandler.getLocalGUIDFromUrl
+   */
+  getLocalGUIDFromUrl(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  generateLinkToRemoteNode(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets local version ID from URL
+   * Original name: MainAppHandler.getLocalVersionIdFromUrl
+   */
+  getLocalVersionIdFromUrl(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getLocalGUIDFromUrl(...e) {
-    if (this.shouldThrow)
+  // === Tool and Style Management ===
+
+  /**
+   * Syncs pencil style
+   * Original name: MainAppHandler.syncPencilStyle
+   */
+  syncPencilStyle(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Syncs brush style
+   * Original name: MainAppHandler.syncBrushStyle
+   */
+  syncBrushStyle(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Syncs pen style
+   * Original name: MainAppHandler.syncPenStyle
+   */
+  syncPenStyle(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Syncs highlighter style
+   * Original name: MainAppHandler.syncHighlighterStyle
+   */
+  syncHighlighterStyle(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Syncs tool styles
+   * Original name: MainAppHandler.syncToolStyles
+   */
+  syncToolStyles(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Syncs current tool set source
+   * Original name: MainAppHandler.syncCurrentToolSetSource
+   */
+  syncCurrentToolSetSource(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Gets default ON OT features
+   * Original name: MainAppHandler.getDefaultOnOTFeatures
+   */
+  getDefaultOnOTFeatures(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getLocalVersionIdFromUrl(...e) {
-    if (this.shouldThrow)
+  // === Event Handling ===
+
+  /**
+   * Handles keyboard will show
+   * Original name: MainAppHandler.keyboardWillShow
+   */
+  keyboardWillShow(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return ''
+    }
   }
 
-  syncPencilStyle(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles keyboard will show with height
+   * Original name: MainAppHandler.keyboardWillShowWithHeight
+   */
+  keyboardWillShowWithHeight(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  syncBrushStyle(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles action
+   * Original name: MainAppHandler.handleAction
+   */
+  handleAction(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  syncPenStyle(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles agenda changed
+   * Original name: MainAppHandler.onAgendaChanged
+   */
+  onAgendaChanged(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  syncHighlighterStyle(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles FigJam starter kit action
+   * Original name: MainAppHandler.onFigjamStarterKitAction
+   */
+  onFigjamStarterKitAction(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  syncToolStyles(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles node position changed
+   * Original name: MainAppHandler.onNodePositionChanged
+   */
+  onNodePositionChanged(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  syncCurrentToolSetSource(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles section preset picker created
+   * Original name: MainAppHandler.onSectionPresetPickerCreated
+   */
+  onSectionPresetPickerCreated(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setVideoShouldAutoplay(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles zoom action triggered to set onboarding flag
+   * Original name: MainAppHandler.handleZoomActionTriggeredToSetOnboardingFlag
+   */
+  handleZoomActionTriggeredToSetOnboardingFlag(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  sendActiveStackRegionAnalytics(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles pan action triggered to set onboarding flag
+   * Original name: MainAppHandler.handlePanActionTriggeredToSetOnboardingFlag
+   */
+  handlePanActionTriggeredToSetOnboardingFlag(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getUserName(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles node count reached for move draft
+   * Original name: MainAppHandler.handleNodeCountReachedForMoveDraft
+   */
+  handleNodeCountReachedForMoveDraft(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return ''
+    }
   }
 
-  getIsEmojiWheelOpen(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles loaded compare changes
+   * Original name: MainAppHandler.loadedCompareChanges
+   */
+  loadedCompareChanges(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  openStartingPointFlowInPrototypeViewer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles view only jiggle
+   * Original name: MainAppHandler.onViewOnlyJiggle
+   */
+  onViewOnlyJiggle(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  focusPrototypeStartingPointPanelToEditName(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles upsell libraries consecutive paste
+   * Original name: MainAppHandler.upsellLibrariesHandleConsecutivePaste
+   */
+  upsellLibrariesHandleConsecutivePaste(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setSentryTag(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles playground node change
+   * Original name: MainAppHandler.onPlaygroundNodeChange
+   */
+  onPlaygroundNodeChange(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles tiles rendered
+   * Original name: MainAppHandler.onTilesRendered
+   */
+  onTilesRendered(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  openTimerModal(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles create table
+   * Original name: MainAppHandler.onCreateTable
+   */
+  onCreateTable(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  resendTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles edit table text
+   * Original name: MainAppHandler.onEditTableText
+   */
+  onEditTableText(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setMusic(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles node drag start
+   * Original name: MainAppHandler.onNodeDragStart
+   */
+  onNodeDragStart(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  resendMusic(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles node drag end
+   * Original name: MainAppHandler.onNodeDragEnd
+   */
+  onNodeDragEnd(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  activateVotingStampTool(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles create sticky
+   * Original name: MainAppHandler.onCreateSticky
+   */
+  onCreateSticky(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setActiveAgendaItemId(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles different section clicked
+   * Original name: MainAppHandler.onDifferentSectionClicked
+   */
+  onDifferentSectionClicked(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  escapeAndSaveCSVData(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles connect diagram shape with connector
+   * Original name: MainAppHandler.onConnectDiagramShapeWithConnector
+   */
+  onConnectDiagramShapeWithConnector(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  parseCsvStringAndCreateNodes(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles tile renderer changed
+   * Original name: MainAppHandler.onTileRendererChanged
+   */
+  onTileRendererChanged(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  parseHtmlStringAndCreateNodes(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles after page change
+   * Original name: MainAppHandler.afterPageChange
+   */
+  afterPageChange(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  parseHtmlStringAndTriggerSmartPaste(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles after compute viewport settings
+   * Original name: MainAppHandler.afterComputeViewportSettings
+   */
+  afterComputeViewportSettings(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  parseHTMLStringIntoLineDirectionalities(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles after query completed
+   * Original name: MainAppHandler.afterQueryCompleted
+   */
+  afterQueryCompleted(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  isNavigatorClipboardWriteSupported(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles direct export completed
+   * Original name: MainAppHandler.onDirectExportCompleted
+   */
+  onDirectExportCompleted(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  onNodePositionChanged(...e) {
-    if (this.shouldThrow)
+  // === Feature Flags and Labs ===
+
+  /**
+   * Gets lab value
+   * Original name: MainAppHandler.getLabValue
+   */
+  getLabValue(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+    return false
   }
 
-  onSectionPresetPickerCreated(...e) {
-    if (this.shouldThrow)
+  // === Analytics and Logging ===
+
+  /**
+   * Logs enter mode
+   * Original name: MainAppHandler.logEnterMode
+   */
+  logEnterMode(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  generateEmbed(...e) {
-    if (this.shouldThrow)
+  /**
+   * Logs fullscreen action to Datadog RUM
+   * Original name: MainAppHandler.logFullscreenActionToDatadogRum
+   */
+  logFullscreenActionToDatadogRum(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  generateWidgetFromURL(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sends active stack region analytics
+   * Original name: MainAppHandler.sendActiveStackRegionAnalytics
+   */
+  sendActiveStackRegionAnalytics(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  handleAction(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
+  // === Math and Utilities ===
 
-  startExportAction(...e) {
-    if (this.shouldThrow)
+  /**
+   * Evaluates math expression
+   * Original name: MainAppHandler.evaluateMathExpression
+   */
+  evaluateMathExpression(...args: any[]): any {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-  }
-
-  sendEventToWebEventListener(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  onAgendaChanged(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  onFigjamStarterKitAction(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  canUploadAndEditVideo(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return !1
-  }
-
-  getVariableSetNumberOfModesAllowed(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return 0
-  }
-
-  getDefaultStateKeyForStateGroup(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return ''
-  }
-
-  selectPublishedAssetGuids(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return ''
-  }
-
-  handleZoomActionTriggeredToSetOnboardingFlag(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  handlePanActionTriggeredToSetOnboardingFlag(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  handleNodeCountReachedForMoveDraft(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  selectLocalStyles(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  formatDateTime(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return ''
-  }
-
-  setFigjamStarterKitBoundingBox(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  loadedCompareChanges(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  setUserFlag(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  onViewOnlyJiggle(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  shouldViewOnlyJiggle(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-    return !1
-  }
-
-  upsellLibrariesHandleConsecutivePaste(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  onPlaygroundNodeChange(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  triggerHaptics(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  logEnterMode(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  evaluateMathExpression(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  changeDocumentColorProfile(...e) {
-    if (this.shouldThrow)
+  /**
+   * Formats date time
+   * Original name: MainAppHandler.formatDateTime
+   */
+  formatDateTime(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+    return ''
   }
 
-  addWhiteboardToolToRecents(...e) {
-    if (this.shouldThrow)
+  // === Whiteboard ===
+
+  /**
+   * Adds whiteboard tool to recents
+   * Original name: MainAppHandler.addWhiteboardToolToRecents
+   */
+  addWhiteboardToolToRecents(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  addWhiteboardDiagrammingShapeToRecents(...e) {
-    if (this.shouldThrow)
+  /**
+   * Adds whiteboard diagramming shape to recents
+   * Original name: MainAppHandler.addWhiteboardDiagrammingShapeToRecents
+   */
+  addWhiteboardDiagrammingShapeToRecents(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  onTilesRendered(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
+  // === Query Management ===
 
-  onCreateTable(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets next query request ID
+   * Original name: MainAppHandler.getNextQueryRequestId
+   */
+  getNextQueryRequestId(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-  }
-
-  onEditTableText(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  onNodeDragStart(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  onNodeDragEnd(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  onCreateSticky(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  onDifferentSectionClicked(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  onConnectDiagramShapeWithConnector(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  onTileRendererChanged(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  afterPageChange(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  afterComputeViewportSettings(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
-
-  getNextQueryRequestId(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  afterQueryCompleted(...e) {
-    if (this.shouldThrow)
+  /**
+   * Rejects all scene graph queries
+   * Original name: MainAppHandler.rejectAllSceneGraphQueries
+   */
+  rejectAllSceneGraphQueries(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  rejectAllSceneGraphQueries(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
-  }
+  // === Slide Management ===
 
-  movedSingleNodeVisualBell(...e) {
-    if (this.shouldThrow)
+  /**
+   * Creates slide after focused slide
+   * Original name: MainAppHandler.createSlideAfterFocusedSlide
+   */
+  createSlideAfterFocusedSlide(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-  }
-
-  createSlideAfterFocusedSlide(...e) {
-    if (this.shouldThrow)
-      throw new Error('Method not implemented.')
+    }
     return '-1:-1'
   }
 
-  generateFlappFromPastedText(...e) {
-    if (this.shouldThrow)
+  // === Presentation and Prototyping ===
+
+  /**
+   * Opens make prototype modal
+   * Original name: MainAppHandler.openMakePrototypeModal
+   */
+  openMakePrototypeModal(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  isAiDisabled(...e) {
-    if (this.shouldThrow)
+  /**
+   * Opens starting point flow in prototype viewer
+   * Original name: MainAppHandler.openStartingPointFlowInPrototypeViewer
+   */
+  openStartingPointFlowInPrototypeViewer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  isAiDisabledFigJam(...e) {
-    if (this.shouldThrow)
+  /**
+   * Focuses prototype starting point panel to edit name
+   * Original name: MainAppHandler.focusPrototypeStartingPointPanelToEditName
+   */
+  focusPrototypeStartingPointPanelToEditName(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  isOrgUserGatedForLlama(...e) {
-    if (this.shouldThrow)
+  // === Timer and Music ===
+
+  /**
+   * Sets timer
+   * Original name: MainAppHandler.setTimer
+   */
+  setTimer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  isInAiExperimentOrGrantlist(...e) {
-    if (this.shouldThrow)
+  /**
+   * Opens timer modal
+   * Original name: MainAppHandler.openTimerModal
+   */
+  openTimerModal(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  removeImageBackground(...e) {
-    if (this.shouldThrow)
+  /**
+   * Resends timer
+   * Original name: MainAppHandler.resendTimer
+   */
+  resendTimer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  upscaleImage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets music
+   * Original name: MainAppHandler.setMusic
+   */
+  setMusic(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  autoRenameLayers(...e) {
-    if (this.shouldThrow)
+  /**
+   * Resends music
+   * Original name: MainAppHandler.resendMusic
+   */
+  resendMusic(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  autoRenameLayersDevHandoff(...e) {
-    if (this.shouldThrow)
+  // === Voting and Collaboration ===
+
+  /**
+   * Activates voting stamp tool
+   * Original name: MainAppHandler.activateVotingStampTool
+   */
+  activateVotingStampTool(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  regenerateText(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets active agenda item ID
+   * Original name: MainAppHandler.setActiveAgendaItemId
+   */
+  setActiveAgendaItemId(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  openMakePrototypeModal(...e) {
-    if (this.shouldThrow)
+  // === Data Parsing ===
+
+  /**
+   * Escapes and saves CSV data
+   * Original name: MainAppHandler.escapeAndSaveCSVData
+   */
+  escapeAndSaveCSVData(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isMagicLinkDone(...e) {
-    if (this.shouldThrow)
+  /**
+   * Parses CSV string and creates nodes
+   * Original name: MainAppHandler.parseCsvStringAndCreateNodes
+   */
+  parseCsvStringAndCreateNodes(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  isMagicLinkDoneToastShowing(...e) {
-    if (this.shouldThrow)
+  /**
+   * Parses HTML string and creates nodes
+   * Original name: MainAppHandler.parseHtmlStringAndCreateNodes
+   */
+  parseHtmlStringAndCreateNodes(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  linkToComponent(...e) {
-    if (this.shouldThrow)
+  /**
+   * Parses HTML string and triggers smart paste
+   * Original name: MainAppHandler.parseHtmlStringAndTriggerSmartPaste
+   */
+  parseHtmlStringAndTriggerSmartPaste(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+    return false
   }
 
-  getLabValue(...e) {
-    if (this.shouldThrow)
+  /**
+   * Parses HTML string into line directionalities
+   * Original name: MainAppHandler.parseHTMLStringIntoLineDirectionalities
+   */
+  parseHTMLStringIntoLineDirectionalities(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  hasAiRenameLayersPermission(...e) {
-    if (this.shouldThrow)
+  // === Embed and Widget Management ===
+
+  /**
+   * Generates embed
+   * Original name: MainAppHandler.generateEmbed
+   */
+  generateEmbed(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  logFullscreenActionToDatadogRum(...e) {
-    if (this.shouldThrow)
+  /**
+   * Generates widget from URL
+   * Original name: MainAppHandler.generateWidgetFromURL
+   */
+  generateWidgetFromURL(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+    return false
   }
 
-  designToCodeFiles(...e) {
-    if (this.shouldThrow)
+  /**
+   * Views widget details
+   * Original name: MainAppHandler.viewWidgetDetails
+   */
+  viewWidgetDetails(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Desktop App Integration ===
+
+  /**
+   * Queues file for writing in desktop app
+   * Original name: MainAppHandler.desktopAppQueueFileForWriting
+   */
+  desktopAppQueueFileForWriting(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Writes files in desktop app
+   * Original name: MainAppHandler.desktopAppWriteFiles
+   */
+  desktopAppWriteFiles(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Code Generation ===
+
+  /**
+   * Enables codegen MCP server
+   * Original name: MainAppHandler.enableCodegenMcpServer
+   */
+  enableCodegenMcpServer(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Designs to code files
+   * Original name: MainAppHandler.designToCodeFiles
+   */
+  designToCodeFiles(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  bulkExportDesignsToReact(...e) {
-    if (this.shouldThrow)
+  /**
+   * Bulk exports designs to React
+   * Original name: MainAppHandler.bulkExportDesignsToReact
+   */
+  bulkExportDesignsToReact(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  onDirectExportCompleted(...e) {
-    if (this.shouldThrow)
+  // === Help and Support ===
+
+  /**
+   * Opens help
+   * Original name: MainAppHandler.openHelp
+   */
+  openHelp(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setSitesViewFile(...e) {
-    if (this.shouldThrow)
+  /**
+   * Opens support forum
+   * Original name: MainAppHandler.openSupportForum
+   */
+  openSupportForum(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setSitesViewCode(...e) {
-    if (this.shouldThrow)
+  /**
+   * Opens tutorials
+   * Original name: MainAppHandler.openTutorials
+   */
+  openTutorials(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setSitesViewCms(...e) {
-    if (this.shouldThrow)
+  // === Plugin Management ===
+
+  /**
+   * Runs last plugin
+   * Original name: MainAppHandler.runLastPlugin
+   */
+  runLastPlugin(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setSitesInsertsOverlay(...e) {
-    if (this.shouldThrow)
+  // === Page Management ===
+
+  /**
+   * Starts move pages job
+   * Original name: MainAppHandler.startMovePagesJob
+   */
+  startMovePagesJob(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setSitesFindOverlay(...e) {
-    if (this.shouldThrow)
+  // === Missing Font Handling ===
+
+  /**
+   * Shows missing font dialog
+   * Original name: MainAppHandler.showMissingFontDialog
+   */
+  showMissingFontDialog(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setAnnotationEditingIndex(...e) {
-    if (this.shouldThrow)
+  /**
+   * Hides missing font dialog
+   * Original name: MainAppHandler.hideMissingFontDialog
+   */
+  hideMissingFontDialog(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showSlotPreferredContentPicker(...e) {
-    if (this.shouldThrow)
+  // === Paste and Loading Indicators ===
+
+  /**
+   * Shows paste loading indicator and paste
+   * Original name: MainAppHandler.showPasteLoadingIndicatorAndPaste
+   */
+  showPasteLoadingIndicatorAndPaste(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  pasteMermaidAsDiagram(...e) {
-    if (this.shouldThrow)
+  // === Library Management ===
+
+  /**
+   * Shows prompt to move library items
+   * Original name: MainAppHandler.showPromptToMoveLibraryItems
+   */
+  showPromptToMoveLibraryItems(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return Promise.reject()
+    }
   }
 
-  showNudgeDesignModeAfterTemplateSetPasted(...e) {
-    if (this.shouldThrow)
+  /**
+   * Requests open external source file library key
+   * Original name: MainAppHandler.requestOpenExternalSourceFileLibraryKey
+   */
+  requestOpenExternalSourceFileLibraryKey(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
-  }
-}
-export class $$f66 {
-  fontResourceStatusChanged(...e) {
-    if (this.shouldThrow)
+  // === Hyperlink and Mention Management ===
+
+  /**
+   * Sets hyperlink popup
+   * Original name: MainAppHandler.setHyperlinkPopup
+   */
+  setHyperlinkPopup(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
-  }
-}
-export class $$E29 {
-  connect(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates hyperlink popup position
+   * Original name: MainAppHandler.updateHyperlinkPopupPosition
+   */
+  updateHyperlinkPopupPosition(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  disconnect(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles user click on hyperlink
+   * Original name: MainAppHandler.handleUserClickOnHyperlink
+   */
+  handleUserClickOnHyperlink(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  send(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets canvas mention popup
+   * Original name: MainAppHandler.setCanvasMentionPopup
+   */
+  setCanvasMentionPopup(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
-  }
-}
-export class $$y13 {
-  getDefaultDocumentColorProfile(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates canvas mention popup position
+   * Original name: MainAppHandler.updateCanvasMentionPopupPosition
+   */
+  updateCanvasMentionPopupPosition(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return 0
+    }
   }
 
-  getCanvasColorProfile(...e) {
-    if (this.shouldThrow)
+  // === Menu Management ===
+
+  /**
+   * Toggles menu
+   * Original name: MainAppHandler.toggleMenu
+   */
+  toggleMenu(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return 0
+    }
   }
 
-  getUserColorProfile(...e) {
-    if (this.shouldThrow)
+  // === Copy and Export Restrictions ===
+
+  /**
+   * Checks if copy export is restricted
+   * Original name: MainAppHandler.isCopyExportRestricted
+   */
+  isCopyExportRestricted(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return 0
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
-  }
-}
-export class $$b47 {
-  getIsExtension(...e) {
-    if (this.shouldThrow)
+  // === Workshop Mode ===
+
+  /**
+   * Checks if in workshop mode
+   * Original name: MainAppHandler.isInWorkshopMode
+   */
+  isInWorkshopMode(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  setNodesReady(...e) {
-    if (this.shouldThrow)
+  // === Sprig Integration ===
+
+  /**
+   * Tracks interactive slide element inserted for Sprig
+   * Original name: MainAppHandler.trackInteractiveSlideElementInsertedForSprig
+   */
+  trackInteractiveSlideElementInsertedForSprig(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setNodesCompleted(...e) {
-    if (this.shouldThrow)
+  // === History Management ===
+
+  /**
+   * Toggles history mode
+   * Original name: MainAppHandler.toggleHistoryMode
+   */
+  toggleHistoryMode(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  forwardExportsToExtension(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows view changes notification
+   * Original name: MainAppHandler.showViewChangesNotification
+   */
+  showViewChangesNotification(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showStatusContextMenu(...e) {
-    if (this.shouldThrow)
+  // === Fragment Search ===
+
+  /**
+   * Shows fragment search suggestion
+   * Original name: MainAppHandler.showFragmentSearchSuggestion
+   */
+  showFragmentSearchSuggestion(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showLinterContextMenu(...e) {
-    if (this.shouldThrow)
+  // === Keyboard Shortcuts ===
+
+  /**
+   * Records used keyboard shortcut
+   * Original name: MainAppHandler.usedKeyboardShortcut
+   */
+  usedKeyboardShortcut(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isStatusContextMenuShowing(...e) {
-    if (this.shouldThrow)
+  // === Style Management ===
+
+  /**
+   * Updates selected style properties
+   * Original name: MainAppHandler.updateSelectedStyleProperties
+   */
+  updateSelectedStyleProperties(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  isLinterContextMenuShowing(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates selected style thumbnail
+   * Original name: MainAppHandler.updateSelectedStyleThumbnail
+   */
+  updateSelectedStyleThumbnail(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  showAnnotationsButtonContextMenu(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates style thumbnail
+   * Original name: MainAppHandler.updateStyleThumbnail
+   */
+  updateStyleThumbnail(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isDevModeOverview(...e) {
-    if (this.shouldThrow)
+  // === Browser Alerts ===
+
+  /**
+   * Shows browser alert
+   * Original name: MainAppHandler.showBrowserAlert
+   */
+  showBrowserAlert(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  enterDevModeFocusView(...e) {
-    if (this.shouldThrow)
+  // === Haptics ===
+
+  /**
+   * Triggers haptics
+   * Original name: MainAppHandler.triggerHaptics
+   */
+  triggerHaptics(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  exitDevModeFocusOrOverview(...e) {
-    if (this.shouldThrow)
+  // === Sentry Integration ===
+
+  /**
+   * Sets Sentry tag
+   * Original name: MainAppHandler.setSentryTag
+   */
+  setSentryTag(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isInteractiveInspectionEnabled(...e) {
-    if (this.shouldThrow)
+  // === User Flags ===
+
+  /**
+   * Sets user flag
+   * Original name: MainAppHandler.setUserFlag
+   */
+  setUserFlag(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
   }
 
-  isChangingInspectionValues(...e) {
-    if (this.shouldThrow)
+  // === View Only Mode ===
+
+  /**
+   * Checks if view only should jiggle
+   * Original name: MainAppHandler.shouldViewOnlyJiggle
+   */
+  shouldViewOnlyJiggle(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  onUnexpectedEditInFocusView(...e) {
-    if (this.shouldThrow)
+  // === Emoji Wheel ===
+
+  /**
+   * Checks if emoji wheel is open
+   * Original name: MainAppHandler.getIsEmojiWheelOpen
+   */
+  getIsEmojiWheelOpen(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+    return false
   }
 
-  getUnitName(...e) {
-    if (this.shouldThrow)
+  // === Video Management ===
+
+  /**
+   * Sets video should autoplay
+   * Original name: MainAppHandler.setVideoShouldAutoplay
+   */
+  setVideoShouldAutoplay(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Checks if video can be uploaded and edited
+   * Original name: MainAppHandler.canUploadAndEditVideo
+   */
+  canUploadAndEditVideo(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  // === Magic Link ===
+
+  /**
+   * Checks if magic link is done
+   * Original name: MainAppHandler.isMagicLinkDone
+   */
+  isMagicLinkDone(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Checks if magic link done toast is showing
+   * Original name: MainAppHandler.isMagicLinkDoneToastShowing
+   */
+  isMagicLinkDoneToastShowing(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  // === Query Management ===
+
+  /**
+   * Selects published asset GUIDs
+   * Original name: MainAppHandler.selectPublishedAssetGuids
+   */
+  selectPublishedAssetGuids(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
-  }
-}
-export class $$T53 {
-  nodeChange(...e) {
-    if (this.shouldThrow)
+  // === Local Styles ===
+
+  /**
+   * Selects local styles
+   * Original name: MainAppHandler.selectLocalStyles
+   */
+  selectLocalStyles(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  // === FigJam Starter Kit ===
+
+  /**
+   * Sets FigJam starter kit bounding box
+   * Original name: MainAppHandler.setFigjamStarterKitBoundingBox
+   */
+  setFigjamStarterKitBoundingBox(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Clipboard Write Support ===
+
+  /**
+   * Checks if navigator clipboard write is supported
+   * Original name: MainAppHandler.isNavigatorClipboardWriteSupported
+   */
+  isNavigatorClipboardWriteSupported(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  // === Send Events ===
+
+  /**
+   * Sends event to web event listener
+   * Original name: MainAppHandler.sendEventToWebEventListener
+   */
+  sendEventToWebEventListener(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Start Export Action ===
+
+  /**
+   * Starts export action
+   * Original name: MainAppHandler.startExportAction
+   */
+  startExportAction(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Trigger From Fullscreen ===
+
+  /**
+   * Triggers from fullscreen
+   * Original name: MainAppHandler.triggerFromFullscreen
+   */
+  triggerFromFullscreen(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Visual Bell - Not Localized ===
+
+  /**
+   * Shows visual bell (not localized)
+   * Original name: MainAppHandler.NOT_LOCALIZED_showVisualBell
+   */
+  NOT_LOCALIZED_showVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows visual bell inf (not localized)
+   * Original name: MainAppHandler.NOT_LOCALIZED_showVisualBellInf
+   */
+  NOT_LOCALIZED_showVisualBellInf(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows mobile native toast (not localized)
+   * Original name: MainAppHandler.NOT_LOCALIZED_showMobileNativeToast
+   */
+  NOT_LOCALIZED_showMobileNativeToast(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Visual Bell - Multi Edit ===
+
+  /**
+   * Shows visual bell for multi edit
+   * Original name: MainAppHandler.showVisualBellForMultiEdit
+   */
+  showVisualBellForMultiEdit(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows visual bell for multi edit glue error
+   * Original name: MainAppHandler.showVisualBellForMultiEditGlueError
+   */
+  showVisualBellForMultiEditGlueError(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Visual Bell - With Features ===
+
+  /**
+   * Shows visual bell with undo
+   * Original name: MainAppHandler.showVisualBellWithUndo
+   */
+  showVisualBellWithUndo(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows visual bell with nodes localized
+   * Original name: MainAppHandler.showVisualBellWithNodesLocalized
+   */
+  showVisualBellWithNodesLocalized(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows visual bell localized
+   * Original name: MainAppHandler.showVisualBellLocalized
+   */
+  showVisualBellLocalized(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows visual bell localized inf
+   * Original name: MainAppHandler.showVisualBellLocalizedInf
+   */
+  showVisualBellLocalizedInf(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows visual bell with reload button localized
+   * Original name: MainAppHandler.showVisualBellWithReloadButtonLocalized
+   */
+  showVisualBellWithReloadButtonLocalized(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows visual bell with URL button localized
+   * Original name: MainAppHandler.showVisualBellWithUrlButtonLocalized
+   */
+  showVisualBellWithUrlButtonLocalized(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Visual Bell - Ephemeral ===
+
+  /**
+   * Dismisses ephemeral visual bells
+   * Original name: MainAppHandler.dismissEphemeralVisualBells
+   */
+  dismissEphemeralVisualBells(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows visual bell with delay localized
+   * Original name: MainAppHandler.showVisualBellWithDelayLocalized
+   */
+  showVisualBellWithDelayLocalized(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows visual bell with close button localized
+   * Original name: MainAppHandler.showVisualBellWithCloseButtonLocalized
+   */
+  showVisualBellWithCloseButtonLocalized(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Clears visual bell type
+   * Original name: MainAppHandler.clearVisualBellType
+   */
+  clearVisualBellType(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Mobile Media Loading ===
+
+  /**
+   * Dismisses mobile media loading toast
+   * Original name: MainAppHandler.dismissMobileMediaLoadingToast
+   */
+  dismissMobileMediaLoadingToast(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Moved Single Node ===
+
+  /**
+   * Shows moved single node visual bell
+   * Original name: MainAppHandler.movedSingleNodeVisualBell
+   */
+  movedSingleNodeVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === FLAPP Generation ===
+
+  /**
+   * Generates FLAPP from pasted text
+   * Original name: MainAppHandler.generateFlappFromPastedText
+   */
+  generateFlappFromPastedText(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  // === Sites View ===
+
+  /**
+   * Sets sites view file
+   * Original name: MainAppHandler.setSitesViewFile
+   */
+  setSitesViewFile(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sets sites view code
+   * Original name: MainAppHandler.setSitesViewCode
+   */
+  setSitesViewCode(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sets sites view CMS
+   * Original name: MainAppHandler.setSitesViewCms
+   */
+  setSitesViewCms(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sets sites inserts overlay
+   * Original name: MainAppHandler.setSitesInsertsOverlay
+   */
+  setSitesInsertsOverlay(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sets sites find overlay
+   * Original name: MainAppHandler.setSitesFindOverlay
+   */
+  setSitesFindOverlay(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Annotation Editing ===
+
+  /**
+   * Sets annotation editing index
+   * Original name: MainAppHandler.setAnnotationEditingIndex
+   */
+  setAnnotationEditingIndex(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Slot Preferred Content ===
+
+  /**
+   * Shows slot preferred content picker
+   * Original name: MainAppHandler.showSlotPreferredContentPicker
+   */
+  showSlotPreferredContentPicker(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Mermaid Diagram ===
+
+  /**
+   * Pastes Mermaid as diagram
+   * Original name: MainAppHandler.pasteMermaidAsDiagram
+   */
+  pasteMermaidAsDiagram(...args: any[]): Promise<any> {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return Promise.reject()
+  }
+
+  // === Nudge Design Mode ===
+
+  /**
+   * Shows nudge design mode after template set pasted
+   * Original name: MainAppHandler.showNudgeDesignModeAfterTemplateSetPasted
+   */
+  showNudgeDesignModeAfterTemplateSetPasted(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Feature Flag Bisector ===
+
+  /**
+   * Toggles feature flag bisector modal
+   * Original name: MainAppHandler.toggleFeatureFlagBisectorModal
+   */
+  toggleFeatureFlagBisectorModal(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  // === Interaction Recorder ===
+
+  /**
+   * Toggles interaction recorder visibility
+   * Original name: MainAppHandler.toggleInteractionRecorderVisibility
+   */
+  toggleInteractionRecorderVisibility(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
   }
 }
-export class $$I58 {
-  createMouseBehavior(...e) {
-    if (this.shouldThrow)
+/**
+ * Handles font resource status changes
+ * Original name: TsFontManualLoader.fontResourceStatusChanged
+ */
+export class TsFontManualLoader {
+  shouldThrow: boolean
+
+  fontResourceStatusChanged(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
+  }
+
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
+  }
+}
+
+/**
+ * Manages connection establishment and termination
+ * Original name: FullscreenWebSocketTsCallbacks
+ */
+export class FullscreenWebSocketTsCallbacks {
+  shouldThrow: boolean
+
+  /**
+   * Establishes a connection
+   * Original name: FullscreenWebSocketTsCallbacks.connect
+   */
+  connect(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Terminates a connection
+   * Original name: FullscreenWebSocketTsCallbacks.disconnect
+   */
+  disconnect(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sends data
+   * Original name: FullscreenWebSocketTsCallbacks.send
+   */
+  send(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
+  }
+}
+
+/**
+ * Manages color profile information
+ * Original name: ColorManagementBindings
+ */
+export class ColorManagementBindings {
+  shouldThrow: boolean
+
+  /**
+   * Gets the default document color profile
+   * Original name: ColorManagementBindings.getDefaultDocumentColorProfile
+   */
+  getDefaultDocumentColorProfile(...args: any[]): number {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return 0
+  }
+
+  /**
+   * Gets the canvas color profile
+   * Original name: ColorManagementBindings.getCanvasColorProfile
+   */
+  getCanvasColorProfile(...args: any[]): number {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return 0
+  }
+
+  /**
+   * Gets the user color profile
+   * Original name: ColorManagementBindings.getUserColorProfile
+   */
+  getUserColorProfile(...args: any[]): number {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return 0
+  }
+
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
+  }
+}
+
+/**
+ * Handles extension-related functionality and dev mode features
+ * Original name: HandoffBindings
+ */
+export class HandoffBindings {
+  shouldThrow: boolean
+
+  /**
+   * Checks if it's an extension
+   * Original name: HandoffBindings.getIsExtension
+   */
+  getIsExtension(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Sets nodes as ready
+   * Original name: HandoffBindings.setNodesReady
+   */
+  setNodesReady(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Sets nodes as completed
+   * Original name: HandoffBindings.setNodesCompleted
+   */
+  setNodesCompleted(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Forwards exports to extension
+   * Original name: HandoffBindings.forwardExportsToExtension
+   */
+  forwardExportsToExtension(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows status context menu
+   * Original name: HandoffBindings.showStatusContextMenu
+   */
+  showStatusContextMenu(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Shows linter context menu
+   * Original name: HandoffBindings.showLinterContextMenu
+   */
+  showLinterContextMenu(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Checks if status context menu is showing
+   * Original name: HandoffBindings.isStatusContextMenuShowing
+   */
+  isStatusContextMenuShowing(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Checks if linter context menu is showing
+   * Original name: HandoffBindings.isLinterContextMenuShowing
+   */
+  isLinterContextMenuShowing(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Shows annotations button context menu
+   * Original name: HandoffBindings.showAnnotationsButtonContextMenu
+   */
+  showAnnotationsButtonContextMenu(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Checks if in dev mode overview
+   * Original name: HandoffBindings.isDevModeOverview
+   */
+  isDevModeOverview(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Enters dev mode focus view
+   * Original name: HandoffBindings.enterDevModeFocusView
+   */
+  enterDevModeFocusView(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Exits dev mode focus or overview
+   * Original name: HandoffBindings.exitDevModeFocusOrOverview
+   */
+  exitDevModeFocusOrOverview(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Checks if interactive inspection is enabled
+   * Original name: HandoffBindings.isInteractiveInspectionEnabled
+   */
+  isInteractiveInspectionEnabled(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Checks if changing inspection values
+   * Original name: HandoffBindings.isChangingInspectionValues
+   */
+  isChangingInspectionValues(...args: any[]): boolean {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return false
+  }
+
+  /**
+   * Handles unexpected edit in focus view
+   * Original name: HandoffBindings.onUnexpectedEditInFocusView
+   */
+  onUnexpectedEditInFocusView(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  /**
+   * Gets unit name
+   * Original name: HandoffBindings.getUnitName
+   */
+  getUnitName(...args: any[]): string {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+    return ''
+  }
+
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
+  }
+}
+
+/**
+ * Handles node change events
+ * Original name: HandoffCallbacks
+ */
+export class HandoffCallbacks {
+  shouldThrow: boolean
+
+  /**
+   * Handles node changes
+   * Original name: HandoffCallbacks.nodeChange
+   */
+  nodeChange(...args: any[]): void {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
+  }
+
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
+  }
+}
+
+/**
+ * Manages mouse behavior and table UI interactions
+ * Original name: MouseBehaviorManager
+ */
+export class MouseBehaviorManager {
+  shouldThrow: boolean
+
+  /**
+   * Creates mouse behavior
+   * Original name: MouseBehaviorManager.createMouseBehavior
+   */
+  createMouseBehavior(...args: any) {
+    if (this.shouldThrow) {
+      throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  tableUiReorderHandleHoveredLength(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets table UI reorder handle hovered length
+   * Original name: MouseBehaviorManager.tableUiReorderHandleHoveredLength
+   */
+  tableUiReorderHandleHoveredLength(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  tableUiAddButtonHoveredRadius(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets table UI add button hovered radius
+   * Original name: MouseBehaviorManager.tableUiAddButtonHoveredRadius
+   */
+  tableUiAddButtonHoveredRadius(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$S28 {
-  notifyLinterNodeUpdate(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages design linter functionality
+ * Original name: DesignLinterManager
+ */
+export class DesignLinterManager {
+  shouldThrow: boolean
+
+  /**
+   * Notifies linter node update
+   * Original name: DesignLinterManager.notifyLinterNodeUpdate
+   */
+  notifyLinterNodeUpdate(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isDesignLinterEnabled(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if design linter is enabled
+   * Original name: DesignLinterManager.isDesignLinterEnabled
+   */
+  isDesignLinterEnabled(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$v43 {
-  setMentionsTypeaheadQuery(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages mentions typeahead functionality and search sessions
+ * Original name: MentionsTypeaheadManager
+ */
+export class MentionsTypeaheadManager {
+  shouldThrow: boolean
+
+  /**
+   * Sets mentions typeahead query
+   * Original name: MentionsTypeaheadManager.setMentionsTypeaheadQuery
+   */
+  setMentionsTypeaheadQuery(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  clearMentionsTypeaheadQuery(...e) {
-    if (this.shouldThrow)
+  /**
+   * Clears mentions typeahead query
+   * Original name: MentionsTypeaheadManager.clearMentionsTypeaheadQuery
+   */
+  clearMentionsTypeaheadQuery(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isShowingMentionsTypeaheadResults(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if showing mentions typeahead results
+   * Original name: MentionsTypeaheadManager.isShowingMentionsTypeaheadResults
+   */
+  isShowingMentionsTypeaheadResults(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  setMentionsTypeaheadTargetRect(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets mentions typeahead target rect
+   * Original name: MentionsTypeaheadManager.setMentionsTypeaheadTargetRect
+   */
+  setMentionsTypeaheadTargetRect(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  startSearchSession(...e) {
-    if (this.shouldThrow)
+  /**
+   * Starts search session
+   * Original name: MentionsTypeaheadManager.startSearchSession
+   */
+  startSearchSession(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  endSearchSession(...e) {
-    if (this.shouldThrow)
+  /**
+   * Ends search session
+   * Original name: MentionsTypeaheadManager.endSearchSession
+   */
+  endSearchSession(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  showVisualBellForPastedMentions(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows visual bell for pasted mentions
+   * Original name: MentionsTypeaheadManager.showVisualBellForPastedMentions
+   */
+  showVisualBellForPastedMentions(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$A62 {
-  getPdfSource(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Handles PDF source management and conversion
+ * Original name: PdfImportBindings
+ */
+export class PdfImportBindings {
+  shouldThrow: boolean
+
+  /**
+   * Gets PDF source
+   * Original name: PdfImportBindings.getPdfSource
+   */
+  getPdfSource(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  resetPdfSource(...e) {
-    if (this.shouldThrow)
+  /**
+   * Resets PDF source
+   * Original name: PdfImportBindings.resetPdfSource
+   */
+  resetPdfSource(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  convertPdfToScene(...e) {
-    if (this.shouldThrow)
+  /**
+   * Converts PDF to scene
+   * Original name: PdfImportBindings.convertPdfToScene
+   */
+  convertPdfToScene(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  shouldBlockPdfImports(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if PDF imports should be blocked
+   * Original name: PdfImportBindings.shouldBlockPdfImports
+   */
+  shouldBlockPdfImports(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$x34 {
-  selectionChange(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Handles various state changes in the application
+ * Original name: PluginCallbacksManager
+ */
+export class PluginCallbacksManager {
+  shouldThrow: boolean
+
+  /**
+   * Handles selection changes
+   * Original name: PluginCallbacksManager.selectionChange
+   */
+  selectionChange(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  boxSelectionEnded(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles box selection ended
+   * Original name: PluginCallbacksManager.boxSelectionEnded
+   */
+  boxSelectionEnded(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  currentPageChange(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles current page changes
+   * Original name: PluginCallbacksManager.currentPageChange
+   */
+  currentPageChange(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  timerChange(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles timer changes
+   * Original name: PluginCallbacksManager.timerChange
+   */
+  timerChange(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  slidesViewChange(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles slides view changes
+   * Original name: PluginCallbacksManager.slidesViewChange
+   */
+  slidesViewChange(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  documentChange(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles document changes
+   * Original name: PluginCallbacksManager.documentChange
+   */
+  documentChange(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  codegenPreferencesChange(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles codegen preferences changes
+   * Original name: PluginCallbacksManager.codegenPreferencesChange
+   */
+  codegenPreferencesChange(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  stackInvariantsEnforced(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles stack invariants enforcement
+   * Original name: PluginCallbacksManager.stackInvariantsEnforced
+   */
+  stackInvariantsEnforced(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  pluginPageLoaded(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles plugin page loaded
+   * Original name: PluginCallbacksManager.pluginPageLoaded
+   */
+  pluginPageLoaded(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  pluginAccessibleNodeIds(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets plugin accessible node IDs
+   * Original name: PluginCallbacksManager.pluginAccessibleNodeIds
+   */
+  pluginAccessibleNodeIds(...args: any[]): any[] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return []
   }
 
-  pluginAccessiblePages(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets plugin accessible pages
+   * Original name: PluginCallbacksManager.pluginAccessiblePages
+   */
+  pluginAccessiblePages(...args: any[]): any[] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return []
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$$$N25 {
-  setSitesViewState(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages sites view state
+ * Original name: SitesViewManager
+ */
+export class SitesViewManager {
+  shouldThrow: boolean
+
+  /**
+   * Sets sites view state
+   * Original name: SitesViewManager.setSitesViewState
+   */
+  setSitesViewState(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getSitesViewState(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets sites view state
+   * Original name: SitesViewManager.getSitesViewState
+   */
+  getSitesViewState(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$C24 {
-  getAPIName(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Handles text spell checking and suggestions
+ * Original name: SpellCheckAPIBindings
+ */
+export class SpellCheckAPIBindings {
+  shouldThrow: boolean
+
+  /**
+   * Gets API name
+   * Original name: SpellCheckAPIBindings.getAPIName
+   */
+  getAPIName(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getSuggestionsForWord(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets suggestions for word
+   * Original name: SpellCheckAPIBindings.getSuggestionsForWord
+   */
+  getSuggestionsForWord(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  spellCheckText(...e) {
-    if (this.shouldThrow)
+  /**
+   * Spell checks text
+   * Original name: SpellCheckAPIBindings.spellCheckText
+   */
+  spellCheckText(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  runTextReviewPlugin(...e) {
-    if (this.shouldThrow)
+  /**
+   * Runs text review plugin
+   * Original name: SpellCheckAPIBindings.runTextReviewPlugin
+   */
+  runTextReviewPlugin(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  shouldEnableWhenFirstActivated(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if should enable when first activated
+   * Original name: SpellCheckAPIBindings.shouldEnableWhenFirstActivated
+   */
+  shouldEnableWhenFirstActivated(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$w52 {
-  resolveThumbnailRequest(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages thumbnail requests
+ * Original name: thumbnailrequestmanager
+ */
+export class ThumbnailRequestManager {
+  shouldThrow: boolean
+
+  /**
+   * Resolves thumbnail request
+   * Original name: thumbnailrequestmanager.resolveThumbnailRequest
+   */
+  resolveThumbnailRequest(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  rejectThumbnailRequest(...e) {
-    if (this.shouldThrow)
+  /**
+   * Rejects thumbnail request
+   * Original name: thumbnailrequestmanager.rejectThumbnailRequest
+   */
+  rejectThumbnailRequest(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$O0 {
-  isQuickActionsShown(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages quick actions visibility
+ * Original name: QUICKACTIONSMANAGER
+ */
+export class QuickActionsManager {
+  shouldThrow: boolean
+
+  /**
+   * Checks if quick actions are shown
+   * Original name: QUICKACTIONSMANAGER.isQuickActionsShown
+   */
+  isQuickActionsShown(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$R3 {
-  pasteVariablesWithLocalizationPopup(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Handles variable pasting with localization
+ * Original name: VARIABLEPASTEHANDLER
+ */
+export class VariablesBindingsWeb {
+  shouldThrow: boolean
+
+  /**
+   * Pastes variables with localization popup
+   * Original name: VARIABLEPASTEHANDLER.pasteVariablesWithLocalizationPopup
+   */
+  pasteVariablesWithLocalizationPopup(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$L44 {
-  reconnectingStarted(...e) {
-    if (this.shouldThrow)
+/**
+ * Manages multiplayer connection and presentation state
+ * Original name: MULTIPLAYERCONNECTIONMANAGER
+ */
+export class WebMultiplayerManager {
+  shouldThrow: boolean
+
+  /**
+   * Handles reconnection start event
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.reconnectingStarted
+   */
+  reconnectingStarted(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reconnectingSucceeded(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles successful reconnection
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.reconnectingSucceeded
+   */
+  reconnectingSucceeded(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  notifyCursorHidden(...e) {
-    if (this.shouldThrow)
+  /**
+   * Notifies when cursor is hidden
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.notifyCursorHidden
+   */
+  notifyCursorHidden(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  notifyCursorUnhiddenFromObserver(...e) {
-    if (this.shouldThrow)
+  /**
+   * Notifies when cursor is unhidden from observer
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.notifyCursorUnhiddenFromObserver
+   */
+  notifyCursorUnhiddenFromObserver(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  notifyCursorUnhiddenFromConnectionCount(...e) {
-    if (this.shouldThrow)
+  /**
+   * Notifies when cursor is unhidden from connection count
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.notifyCursorUnhiddenFromConnectionCount
+   */
+  notifyCursorUnhiddenFromConnectionCount(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  notifyEditorConvertedToViewer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Notifies when editor is converted to viewer
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.notifyEditorConvertedToViewer
+   */
+  notifyEditorConvertedToViewer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updateSaveStatus(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates save status
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.updateSaveStatus
+   */
+  updateSaveStatus(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updateMultiplayerState(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates multiplayer state
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.updateMultiplayerState
+   */
+  updateMultiplayerState(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  restartPresentation(...e) {
-    if (this.shouldThrow)
+  /**
+   * Restarts presentation
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.restartPresentation
+   */
+  restartPresentation(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showPresentationStoppedVisualBell(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows presentation stopped visual bell
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.showPresentationStoppedVisualBell
+   */
+  showPresentationStoppedVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  cancelPresentationStoppedVisualBell(...e) {
-    if (this.shouldThrow)
+  /**
+   * Cancels presentation stopped visual bell
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.cancelPresentationStoppedVisualBell
+   */
+  cancelPresentationStoppedVisualBell(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setBackgroundFlushInterval(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets background flush interval
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.setBackgroundFlushInterval
+   */
+  setBackgroundFlushInterval(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  startMonitorInterval(...e) {
-    if (this.shouldThrow)
+  /**
+   * Starts monitor interval
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.startMonitorInterval
+   */
+  startMonitorInterval(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  handleMultiplayerSignal(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles multiplayer signal
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.handleMultiplayerSignal
+   */
+  handleMultiplayerSignal(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showRestoreComponentDialog(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows restore component dialog
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.showRestoreComponentDialog
+   */
+  showRestoreComponentDialog(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showComponentRemovedDialog(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows component removed dialog
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.showComponentRemovedDialog
+   */
+  showComponentRemovedDialog(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isWindowActive(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if window is active
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.isWindowActive
+   */
+  isWindowActive(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  buildMultiplayerUrl(...e) {
-    if (this.shouldThrow)
+  /**
+   * Builds multiplayer URL
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.buildMultiplayerUrl
+   */
+  buildMultiplayerUrl(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  socketBufferedAmount(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets socket buffered amount
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.socketBufferedAmount
+   */
+  socketBufferedAmount(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  prettyPrintMessage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Pretty prints message
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.prettyPrintMessage
+   */
+  prettyPrintMessage(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reconnectSequenceNumberChanged(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles reconnect sequence number change
+   * Original name: MULTIPLAYERCONNECTIONMANAGER.reconnectSequenceNumberChanged
+   */
+  reconnectSequenceNumberChanged(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$P21 {
-  showEyedropper(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages color picker and selection paint operations
+ * Original name: WebSelectionManager
+ */
+export class WebSelectionManager {
+  shouldThrow: boolean
+
+  /**
+   * Shows eyedropper tool
+   * Original name: WebSelectionManager.showEyedropper
+   */
+  showEyedropper(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  hideEyedropper(...e) {
-    if (this.shouldThrow)
+  /**
+   * Hides eyedropper tool
+   * Original name: WebSelectionManager.hideEyedropper
+   */
+  hideEyedropper(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updateSelectionPaintsWithFillEncodedPaints(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates selection paints with fill encoded paints
+   * Original name: WebSelectionManager.updateSelectionPaintsWithFillEncodedPaints
+   */
+  updateSelectionPaintsWithFillEncodedPaints(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updateSelectionImages(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates selection images
+   * Original name: WebSelectionManager.updateSelectionImages
+   */
+  updateSelectionImages(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updateSelectionPaintsWithStyles(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates selection paints with styles
+   * Original name: WebSelectionManager.updateSelectionPaintsWithStyles
+   */
+  updateSelectionPaintsWithStyles(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updatePaintsDirectlyOnSingleNodeWithFillEncodedPaints(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates paints directly on single node with fill encoded paints
+   * Original name: WebSelectionManager.updatePaintsDirectlyOnSingleNodeWithFillEncodedPaints
+   */
+  updatePaintsDirectlyOnSingleNodeWithFillEncodedPaints(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updatePaintsDirectlyOnSingleNodeWithStyles(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates paints directly on single node with styles
+   * Original name: WebSelectionManager.updatePaintsDirectlyOnSingleNodeWithStyles
+   */
+  updatePaintsDirectlyOnSingleNodeWithStyles(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  clearSelectionPaintsDueToLimitExceeded(...e) {
-    if (this.shouldThrow)
+  /**
+   * Clears selection paints due to limit exceeded
+   * Original name: WebSelectionManager.clearSelectionPaintsDueToLimitExceeded
+   */
+  clearSelectionPaintsDueToLimitExceeded(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updateSelectionPaintFromDropper(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates selection paint from dropper
+   * Original name: WebSelectionManager.updateSelectionPaintFromDropper
+   */
+  updateSelectionPaintFromDropper(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  pickerHasSelectionPaintOpen(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if picker has selection paint open
+   * Original name: WebSelectionManager.pickerHasSelectionPaintOpen
+   */
+  pickerHasSelectionPaintOpen(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  originalPaintForCurrentSelectionPaintsPicker(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets original paint for current selection paints picker
+   * Original name: WebSelectionManager.originalPaintForCurrentSelectionPaintsPicker
+   */
+  originalPaintForCurrentSelectionPaintsPicker(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  colorPickerSelectedVariable(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets color picker selected variable
+   * Original name: WebSelectionManager.colorPickerSelectedVariable
+   */
+  colorPickerSelectedVariable(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  clearSelectionTextAndEffectStylesDueToLimitExceeded(...e) {
-    if (this.shouldThrow)
+  /**
+   * Clears selection text and effect styles due to limit exceeded
+   * Original name: WebSelectionManager.clearSelectionTextAndEffectStylesDueToLimitExceeded
+   */
+  clearSelectionTextAndEffectStylesDueToLimitExceeded(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updateSelectionTextAndEffectStyles(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates selection text and effect styles
+   * Original name: WebSelectionManager.updateSelectionTextAndEffectStyles
+   */
+  updateSelectionTextAndEffectStyles(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isPrototypingModalOpen(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if prototyping modal is open
+   * Original name: WebSelectionManager.isPrototypingModalOpen
+   */
+  isPrototypingModalOpen(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  validateCopyBuffer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Validates copy buffer
+   * Original name: WebSelectionManager.validateCopyBuffer
+   */
+  validateCopyBuffer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$D14 {
-  handleConnect(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages multiplayer user interactions and cursor states
+ * Original name: WebUserSyncing
+ */
+export class WebUserSyncing {
+  shouldThrow: boolean
+
+  /**
+   * Handles connection event
+   * Original name: WebUserSyncing.handleConnect
+   */
+  handleConnect(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  addUser(...e) {
-    if (this.shouldThrow)
+  /**
+   * Adds user to multiplayer session
+   * Original name: WebUserSyncing.addUser
+   */
+  addUser(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  removeUser(...e) {
-    if (this.shouldThrow)
+  /**
+   * Removes user from multiplayer session
+   * Original name: WebUserSyncing.removeUser
+   */
+  removeUser(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setMouseCursor(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets mouse cursor state
+   * Original name: WebUserSyncing.setMouseCursor
+   */
+  setMouseCursor(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setMousePosition(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets mouse position
+   * Original name: WebUserSyncing.setMousePosition
+   */
+  setMousePosition(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setIsHoveringWidgetWithHiddenCursors(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets if hovering widget with hidden cursors
+   * Original name: WebUserSyncing.setIsHoveringWidgetWithHiddenCursors
+   */
+  setIsHoveringWidgetWithHiddenCursors(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setHighFiveStatus(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets high five status
+   * Original name: WebUserSyncing.setHighFiveStatus
+   */
+  setHighFiveStatus(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setChatMessage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets chat message
+   * Original name: WebUserSyncing.setChatMessage
+   */
+  setChatMessage(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setFocusOnTextCursor(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets focus on text cursor
+   * Original name: WebUserSyncing.setFocusOnTextCursor
+   */
+  setFocusOnTextCursor(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setVoiceMetadata(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets voice metadata
+   * Original name: WebUserSyncing.setVoiceMetadata
+   */
+  setVoiceMetadata(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  handleReactionFromServer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles reaction from server
+   * Original name: WebUserSyncing.handleReactionFromServer
+   */
+  handleReactionFromServer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  sendReaction(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sends reaction
+   * Original name: WebUserSyncing.sendReaction
+   */
+  sendReaction(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$k8 {
-  clearTemplatePreview(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages template preview functionality
+ * Original name: WhiteboardTemplatePreviewTsBindings
+ */
+export class WhiteboardTemplatePreviewTsBindings {
+  shouldThrow: boolean
+
+  /**
+   * Clears template preview
+   * Original name: WhiteboardTemplatePreviewTsBindings.clearTemplatePreview
+   */
+  clearTemplatePreview(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$M27 {
-  getEyedropperContext(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages eyedropper context and palette operations
+ * Original name: WhiteboardTsBindings
+ */
+export class WhiteboardTsBindings {
+  shouldThrow: boolean
+
+  /**
+   * Gets eyedropper context
+   * Original name: WhiteboardTsBindings.getEyedropperContext
+   */
+  getEyedropperContext(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  updateEditPaletteModalColor(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates edit palette modal color
+   * Original name: WhiteboardTsBindings.updateEditPaletteModalColor
+   */
+  updateEditPaletteModalColor(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isCustomPaletteApplied(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if custom palette is applied
+   * Original name: WhiteboardTsBindings.isCustomPaletteApplied
+   */
+  isCustomPaletteApplied(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  showSectionPresets(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows section presets
+   * Original name: WhiteboardTsBindings.showSectionPresets
+   */
+  showSectionPresets(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$F20 {
-  onUndo(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages undo/redo operations
+ * Original name: UndoRedoEventsBindings
+ */
+export class UndoRedoEventsBindings {
+  shouldThrow: boolean
+
+  /**
+   * Handles undo operation
+   * Original name: UndoRedoEventsBindings.onUndo
+   */
+  onUndo(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  onRedo(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles redo operation
+   * Original name: UndoRedoEventsBindings.onRedo
+   */
+  onRedo(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$j45 {
-  dispatchAction(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages keyboard shortcuts and action dispatching
+ * Original name: KeyboardShortcutBindings
+ */
+export class KeyboardShortcutBindings {
+  shouldThrow: boolean
+
+  /**
+   * Dispatches an action
+   * Original name: KeyboardShortcutBindings.dispatchAction
+   */
+  dispatchAction(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  getCustomKeyboardShortcuts(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets custom keyboard shortcuts
+   * Original name: KeyboardShortcutBindings.getCustomKeyboardShortcuts
+   */
+  getCustomKeyboardShortcuts(...args: any[]): any[] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return []
   }
 
-  getDisplayStringFromKey(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets display string from key
+   * Original name: KeyboardShortcutBindings.getDisplayStringFromKey
+   */
+  getDisplayStringFromKey(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getKeyboardShortcutFromText(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets keyboard shortcut from text
+   * Original name: KeyboardShortcutBindings.getKeyboardShortcutFromText
+   */
+  getKeyboardShortcutFromText(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  getTextFromKeyboardShortcut(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets text from keyboard shortcut
+   * Original name: KeyboardShortcutBindings.getTextFromKeyboardShortcut
+   */
+  getTextFromKeyboardShortcut(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$U19 {
-  trackFromFullscreen(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages performance tracking and analytics
+ * Original name: PerformanceAnalyticsManager
+ */
+export class PerformanceAnalyticsManager {
+  shouldThrow: boolean
+
+  /**
+   * Tracks fullscreen events
+   * Original name: PerformanceAnalyticsManager.trackFromFullscreen
+   */
+  trackFromFullscreen(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  trackDefinedEventFromFullscreen(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tracks defined events from fullscreen
+   * Original name: PerformanceAnalyticsManager.trackDefinedEventFromFullscreen
+   */
+  trackDefinedEventFromFullscreen(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  resetDefinedAnalyticsForDocument(...e) {
-    if (this.shouldThrow)
+  /**
+   * Resets defined analytics for document
+   * Original name: PerformanceAnalyticsManager.resetDefinedAnalyticsForDocument
+   */
+  resetDefinedAnalyticsForDocument(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportConsecutiveFlushes(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports consecutive flushes
+   * Original name: PerformanceAnalyticsManager.reportConsecutiveFlushes
+   */
+  reportConsecutiveFlushes(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportConsecutiveImageChangeSkips(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports consecutive image change skips
+   * Original name: PerformanceAnalyticsManager.reportConsecutiveImageChangeSkips
+   */
+  reportConsecutiveImageChangeSkips(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportContextRestore(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports context restore
+   * Original name: PerformanceAnalyticsManager.reportContextRestore
+   */
+  reportContextRestore(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportBranchingLoadTime(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports branching load time
+   * Original name: PerformanceAnalyticsManager.reportBranchingLoadTime
+   */
+  reportBranchingLoadTime(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportMultiplayerRoundTripTime(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports multiplayer round trip time
+   * Original name: PerformanceAnalyticsManager.reportMultiplayerRoundTripTime
+   */
+  reportMultiplayerRoundTripTime(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportPerfEvent(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports performance event
+   * Original name: PerformanceAnalyticsManager.reportPerfEvent
+   */
+  reportPerfEvent(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportQuantizedColorEqualsUse(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports quantized color equals use
+   * Original name: PerformanceAnalyticsManager.reportQuantizedColorEqualsUse
+   */
+  reportQuantizedColorEqualsUse(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportContextLost(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports context lost
+   * Original name: PerformanceAnalyticsManager.reportContextLost
+   */
+  reportContextLost(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportContextRestored(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports context restored
+   * Original name: PerformanceAnalyticsManager.reportContextRestored
+   */
+  reportContextRestored(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportDirtyAfterLoad(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports dirty after load
+   * Original name: PerformanceAnalyticsManager.reportDirtyAfterLoad
+   */
+  reportDirtyAfterLoad(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  tryReportError(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tries to report error
+   * Original name: PerformanceAnalyticsManager.tryReportError
+   */
+  tryReportError(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  startPerfTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Starts performance timer
+   * Original name: PerformanceAnalyticsManager.startPerfTimer
+   */
+  startPerfTimer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  stopPerfTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Stops performance timer
+   * Original name: PerformanceAnalyticsManager.stopPerfTimer
+   */
+  stopPerfTimer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  startOpsTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Starts operations timer
+   * Original name: PerformanceAnalyticsManager.startOpsTimer
+   */
+  startOpsTimer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  stopOpsTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Stops operations timer
+   * Original name: PerformanceAnalyticsManager.stopOpsTimer
+   */
+  stopOpsTimer(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  pauseOpsTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Pauses operations timer
+   * Original name: PerformanceAnalyticsManager.pauseOpsTimer
+   */
+  pauseOpsTimer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  resumeOpsTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Resumes operations timer
+   * Original name: PerformanceAnalyticsManager.resumeOpsTimer
+   */
+  resumeOpsTimer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  tryStopOpsTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tries to stop operations timer
+   * Original name: PerformanceAnalyticsManager.tryStopOpsTimer
+   */
+  tryStopOpsTimer(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  trySetAttributeOpsTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tries to set attribute operations timer
+   * Original name: PerformanceAnalyticsManager.trySetAttributeOpsTimer
+   */
+  trySetAttributeOpsTimer(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  tryGetAttributesOpsTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tries to get attributes operations timer
+   * Original name: PerformanceAnalyticsManager.tryGetAttributesOpsTimer
+   */
+  tryGetAttributesOpsTimer(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getOpsTimer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets operations timer
+   * Original name: PerformanceAnalyticsManager.getOpsTimer
+   */
+  getOpsTimer(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  addToDistribution(...e) {
-    if (this.shouldThrow)
+  /**
+   * Adds to distribution
+   * Original name: PerformanceAnalyticsManager.addToDistribution
+   */
+  addToDistribution(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  createDistribution(...e) {
-    if (this.shouldThrow)
+  /**
+   * Creates distribution
+   * Original name: PerformanceAnalyticsManager.createDistribution
+   */
+  createDistribution(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  removeDistribution(...e) {
-    if (this.shouldThrow)
+  /**
+   * Removes distribution
+   * Original name: PerformanceAnalyticsManager.removeDistribution
+   */
+  removeDistribution(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getDistributionAnalyticsProperties(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets distribution analytics properties
+   * Original name: PerformanceAnalyticsManager.getDistributionAnalyticsProperties
+   */
+  getDistributionAnalyticsProperties(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  resetDistribution(...e) {
-    if (this.shouldThrow)
+  /**
+   * Resets distribution
+   * Original name: PerformanceAnalyticsManager.resetDistribution
+   */
+  resetDistribution(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportRenderLayerCount(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports render layer count
+   * Original name: PerformanceAnalyticsManager.reportRenderLayerCount
+   */
+  reportRenderLayerCount(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportIndependentLayerAnimationActive(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports independent layer animation active
+   * Original name: PerformanceAnalyticsManager.reportIndependentLayerAnimationActive
+   */
+  reportIndependentLayerAnimationActive(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportNonIndependentLayerAnimationActive(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports non-independent layer animation active
+   * Original name: PerformanceAnalyticsManager.reportNonIndependentLayerAnimationActive
+   */
+  reportNonIndependentLayerAnimationActive(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportRenderedTileBytesUsed(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports rendered tile bytes used
+   * Original name: PerformanceAnalyticsManager.reportRenderedTileBytesUsed
+   */
+  reportRenderedTileBytesUsed(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportAnimationFromCpp(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports animation from C++
+   * Original name: PerformanceAnalyticsManager.reportAnimationFromCpp
+   */
+  reportAnimationFromCpp(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportAnimationFromTs(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports animation from TypeScript
+   * Original name: PerformanceAnalyticsManager.reportAnimationFromTs
+   */
+  reportAnimationFromTs(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  recordRenderingEvent(...e) {
-    if (this.shouldThrow)
+  /**
+   * Records rendering event
+   * Original name: PerformanceAnalyticsManager.recordRenderingEvent
+   */
+  recordRenderingEvent(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  saveRenderingTrace(...e) {
-    if (this.shouldThrow)
+  /**
+   * Saves rendering trace
+   * Original name: PerformanceAnalyticsManager.saveRenderingTrace
+   */
+  saveRenderingTrace(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportIndependentLayerActive(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports independent layer active
+   * Original name: PerformanceAnalyticsManager.reportIndependentLayerActive
+   */
+  reportIndependentLayerActive(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportIndependentLayerAdded(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports independent layer added
+   * Original name: PerformanceAnalyticsManager.reportIndependentLayerAdded
+   */
+  reportIndependentLayerAdded(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reportIndependentLayerRemoved(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reports independent layer removed
+   * Original name: PerformanceAnalyticsManager.reportIndependentLayerRemoved
+   */
+  reportIndependentLayerRemoved(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  logNumericMetric(...e) {
-    if (this.shouldThrow)
+  /**
+   * Logs numeric metric
+   * Original name: PerformanceAnalyticsManager.logNumericMetric
+   */
+  logNumericMetric(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  logStringMetric(...e) {
-    if (this.shouldThrow)
+  /**
+   * Logs string metric
+   * Original name: PerformanceAnalyticsManager.logStringMetric
+   */
+  logStringMetric(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  handleAllocationFailureWithNative(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles allocation failure with native
+   * Original name: PerformanceAnalyticsManager.handleAllocationFailureWithNative
+   */
+  handleAllocationFailureWithNative(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  slogFromFullscreen(...e) {
-    if (this.shouldThrow)
+  /**
+   * Logs from fullscreen
+   * Original name: PerformanceAnalyticsManager.slogFromFullscreen
+   */
+  slogFromFullscreen(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$B22 {
-  getDefaultPencilStrokeWeight(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages default stroke weights for drawing tools
+ * Original name: DefaultStrokeWeightManager
+ */
+export class DefaultStrokeWeightManager {
+  shouldThrow: boolean
+
+  /**
+   * Gets default pencil stroke weight
+   * Original name: DefaultStrokeWeightManager.getDefaultPencilStrokeWeight
+   */
+  getDefaultPencilStrokeWeight(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  getDefaultHighlighterStrokeWeight(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets default highlighter stroke weight
+   * Original name: DefaultStrokeWeightManager.getDefaultHighlighterStrokeWeight
+   */
+  getDefaultHighlighterStrokeWeight(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$G31 {
-  isUI3(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages UI3 color settings
+ * Original name: UI3ColorManager
+ */
+export class UI3ColorManager {
+  shouldThrow: boolean
+
+  /**
+   * Checks if UI3 is enabled
+   * Original name: UI3ColorManager.isUI3
+   */
+  isUI3(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  showUI3Colors(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows UI3 colors
+   * Original name: UI3ColorManager.showUI3Colors
+   */
+  showUI3Colors(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  showUI3ColorsInitialValue(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows UI3 colors initial value
+   * Original name: UI3ColorManager.showUI3ColorsInitialValue
+   */
+  showUI3ColorsInitialValue(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$V63 {
-  readSync(...e) {
-    if (this.shouldThrow)
+/**
+ * Handles binary data read/write operations
+ * Original name: ZipImpl
+ */
+export class ZipImpl {
+  shouldThrow: boolean
+
+  /**
+   * Reads data synchronously
+   * Original name: ZipImpl.readSync
+   */
+  readSync(...args: any[]): any[] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return []
   }
 
-  writeSync(...e) {
-    if (this.shouldThrow)
+  /**
+   * Writes data synchronously
+   * Original name: ZipImpl.writeSync
+   */
+  writeSync(...args: any[]): Uint8Array {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Uint8Array()
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$H2 {
-  decodeImage(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages image decoding, encoding, and scaling operations
+ * Original name: ImageProcessorHandler
+ */
+export class ImageProcessorHandler {
+  shouldThrow: boolean
+
+  /**
+   * Decodes an image
+   * Original name: ImageProcessorHandler.decodeImage
+   */
+  decodeImage(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  encodeImage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Encodes an image
+   * Original name: ImageProcessorHandler.encodeImage
+   */
+  encodeImage(...args: any[]): Uint8Array {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Uint8Array()
   }
 
-  scaleImage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Scales an image
+   * Original name: ImageProcessorHandler.scaleImage
+   */
+  scaleImage(...args: any[]): Uint8Array {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Uint8Array()
   }
 
-  cancelCurrentImageWorkers(...e) {
-    if (this.shouldThrow)
+  /**
+   * Cancels current image processing workers
+   * Original name: ImageProcessorHandler.cancelCurrentImageWorkers
+   */
+  cancelCurrentImageWorkers(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  init(...e) {
-    if (this.shouldThrow)
+  /**
+   * Initializes the image processor
+   * Original name: ImageProcessorHandler.init
+   */
+  init(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$z50 {
-  createVideo(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages video operations including creation, loading, and permissions
+ * Original name: VideoTsBindings
+ */
+export class VideoTsBindings {
+  shouldThrow: boolean
+
+  /**
+   * Creates a video
+   * Original name: VideoTsBindings.createVideo
+   */
+  createVideo(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  deleteVideo(...e) {
-    if (this.shouldThrow)
+  /**
+   * Deletes a video
+   * Original name: VideoTsBindings.deleteVideo
+   */
+  deleteVideo(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getWidth(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets video width
+   * Original name: VideoTsBindings.getWidth
+   */
+  getWidth(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  getHeight(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets video height
+   * Original name: VideoTsBindings.getHeight
+   */
+  getHeight(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  getCoverImage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets video cover image
+   * Original name: VideoTsBindings.getCoverImage
+   */
+  getCoverImage(...args: any[]): Uint8Array {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Uint8Array()
   }
 
-  loadVideo(...e) {
-    if (this.shouldThrow)
+  /**
+   * Loads a video
+   * Original name: VideoTsBindings.loadVideo
+   */
+  loadVideo(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  copyVideoPermissions(...e) {
-    if (this.shouldThrow)
+  /**
+   * Copies video permissions
+   * Original name: VideoTsBindings.copyVideoPermissions
+   */
+  copyVideoPermissions(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  copyVideoPermissionsFromLibraryKey(...e) {
-    if (this.shouldThrow)
+  /**
+   * Copies video permissions from library key
+   * Original name: VideoTsBindings.copyVideoPermissionsFromLibraryKey
+   */
+  copyVideoPermissionsFromLibraryKey(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getSignedUrls(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets signed URLs for video
+   * Original name: VideoTsBindings.getSignedUrls
+   */
+  getSignedUrls(...args: any[]): Map<any, any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Map()
   }
 
-  setExternalSource(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets external source for video
+   * Original name: VideoTsBindings.setExternalSource
+   */
+  setExternalSource(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  loadAllVideos(...e) {
-    if (this.shouldThrow)
+  /**
+   * Loads all videos
+   * Original name: VideoTsBindings.loadAllVideos
+   */
+  loadAllVideos(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  contextLost(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles context lost event
+   * Original name: VideoTsBindings.contextLost
+   */
+  contextLost(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$W26 {
-  autoSegmentNodesByRegion(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages auto-layout and responsive design operations
+ * Original name: AutoLayoutBindings
+ */
+export class AutoLayoutBindings {
+  shouldThrow: boolean
+
+  /**
+   * Automatically segments nodes by region
+   * Original name: AutoLayoutBindings.autoSegmentNodesByRegion
+   */
+  autoSegmentNodesByRegion(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  shouldRunSimpleStackDetection(...e) {
-    if (this.shouldThrow)
+  /**
+   * Determines if simple stack detection should run
+   * Original name: AutoLayoutBindings.shouldRunSimpleStackDetection
+   */
+  shouldRunSimpleStackDetection(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  runMakeResponsiveHeuristics(...e) {
-    if (this.shouldThrow)
+  /**
+   * Runs make responsive heuristics
+   * Original name: AutoLayoutBindings.runMakeResponsiveHeuristics
+   */
+  runMakeResponsiveHeuristics(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  trackShouldShowMSALOnboarding(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tracks if MSAL onboarding should be shown
+   * Original name: AutoLayoutBindings.trackShouldShowMSALOnboarding
+   */
+  trackShouldShowMSALOnboarding(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  destroyAllAutoLayout(...e) {
-    if (this.shouldThrow)
+  /**
+   * Destroys all auto-layout
+   * Original name: AutoLayoutBindings.destroyAllAutoLayout
+   */
+  destroyAllAutoLayout(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  makeResponsive2(...e) {
-    if (this.shouldThrow)
+  /**
+   * Makes layout responsive
+   * Original name: AutoLayoutBindings.makeResponsive2
+   */
+  makeResponsive2(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$K4 {
-  getUserId(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages user information and flags
+ * Original name: CurrentUserInfo
+ */
+export class CurrentUserInfo {
+  shouldThrow: boolean
+
+  /**
+   * Gets user ID
+   * Original name: CurrentUserInfo.getUserId
+   */
+  getUserId(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  getUserLocale(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets user locale
+   * Original name: CurrentUserInfo.getUserLocale
+   */
+  getUserLocale(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  hasUserFlag(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if user has a specific flag
+   * Original name: CurrentUserInfo.hasUserFlag
+   */
+  hasUserFlag(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$Y16 {
-  createScene(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages scene creation and node operations
+ * Original name: SceneManagerHandler
+ */
+export class SceneManagerHandler {
+  shouldThrow: boolean
+
+  /**
+   * Creates a scene
+   * Original name: SceneManagerHandler.createScene
+   */
+  createScene(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  Node_created(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles node creation event
+   * Original name: SceneManagerHandler.Node_created
+   */
+  Node_created(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  Node_destroyed(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles node destruction event
+   * Original name: SceneManagerHandler.Node_destroyed
+   */
+  Node_destroyed(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  triggerSceneGraphEvent(...e) {
-    if (this.shouldThrow)
+  /**
+   * Triggers a scene graph event
+   * Original name: SceneManagerHandler.triggerSceneGraphEvent
+   */
+  triggerSceneGraphEvent(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updateNodeAfterPropertyChange(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates node after property change
+   * Original name: SceneManagerHandler.updateNodeAfterPropertyChange
+   */
+  updateNodeAfterPropertyChange(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  linkNodeToParent(...e) {
-    if (this.shouldThrow)
+  /**
+   * Links node to parent
+   * Original name: SceneManagerHandler.linkNodeToParent
+   */
+  linkNodeToParent(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  unlinkNodeFromParent(...e) {
-    if (this.shouldThrow)
+  /**
+   * Unlinks node from parent
+   * Original name: SceneManagerHandler.unlinkNodeFromParent
+   */
+  unlinkNodeFromParent(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$$9 {
-  markMissingFontScannerAsComplete(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages missing font scanning operations
+ * Original name: MissingFontScanner
+ */
+export class MissingFontScanner {
+  shouldThrow: boolean
+
+  /**
+   * Marks missing font scanner as complete
+   * Original name: MissingFontScanner.markMissingFontScannerAsComplete
+   */
+  markMissingFontScannerAsComplete(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$X18 {
-  submitDeveloperRelatedLinks(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Handles developer-related links and node status changes
+ * Original name: HandoffScenegraphBindings
+ */
+export class HandoffScenegraphBindings {
+  shouldThrow: boolean
+
+  /**
+   * Submits developer-related links
+   * Original name: HandoffScenegraphBindings.submitDeveloperRelatedLinks
+   */
+  submitDeveloperRelatedLinks(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  didGetNodeStatusChange(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles node status change
+   * Original name: HandoffScenegraphBindings.didGetNodeStatusChange
+   */
+  didGetNodeStatusChange(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isVariableAvailableInLibraryAsset(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if variable is available in library asset
+   * Original name: HandoffScenegraphBindings.isVariableAvailableInLibraryAsset
+   */
+  isVariableAvailableInLibraryAsset(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$q23 {
-  copyImagePermissions(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages image permissions, downloads, and uploads
+ * Original name: ImageTsBindings
+ */
+export class ImageTsBindings {
+  shouldThrow: boolean
+
+  /**
+   * Copies image permissions
+   * Original name: ImageTsBindings.copyImagePermissions
+   */
+  copyImagePermissions(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  copyImagePermissionsFromLibraryKey(...e) {
-    if (this.shouldThrow)
+  /**
+   * Copies image permissions from library key
+   * Original name: ImageTsBindings.copyImagePermissionsFromLibraryKey
+   */
+  copyImagePermissionsFromLibraryKey(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setImageDownloadPriority(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets image download priority
+   * Original name: ImageTsBindings.setImageDownloadPriority
+   */
+  setImageDownloadPriority(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  forceDownloadImage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Forces image download
+   * Original name: ImageTsBindings.forceDownloadImage
+   */
+  forceDownloadImage(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getSignedUrls(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets signed URLs for images
+   * Original name: ImageTsBindings.getSignedUrls
+   */
+  getSignedUrls(...args: any[]): Map<any, any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Map()
   }
 
-  getImageHostDomain(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets image host domain
+   * Original name: ImageTsBindings.getImageHostDomain
+   */
+  getImageHostDomain(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  setMinimumImagePriority(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets minimum image priority
+   * Original name: ImageTsBindings.setMinimumImagePriority
+   */
+  setMinimumImagePriority(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  forgetImage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Forgets an image
+   * Original name: ImageTsBindings.forgetImage
+   */
+  forgetImage(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setImageDecodePending(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets image decode as pending
+   * Original name: ImageTsBindings.setImageDecodePending
+   */
+  setImageDecodePending(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  clearImageDecodePending(...e) {
-    if (this.shouldThrow)
+  /**
+   * Clears image decode pending status
+   * Original name: ImageTsBindings.clearImageDecodePending
+   */
+  clearImageDecodePending(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  downloadEmoji(...e) {
-    if (this.shouldThrow)
+  /**
+   * Downloads an emoji
+   * Original name: ImageTsBindings.downloadEmoji
+   */
+  downloadEmoji(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  markImageUploading(...e) {
-    if (this.shouldThrow)
+  /**
+   * Marks image as uploading
+   * Original name: ImageTsBindings.markImageUploading
+   */
+  markImageUploading(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  markImageUploaded(...e) {
-    if (this.shouldThrow)
+  /**
+   * Marks image as uploaded
+   * Original name: ImageTsBindings.markImageUploaded
+   */
+  markImageUploaded(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  startUploadingImage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Starts uploading an image
+   * Original name: ImageTsBindings.startUploadingImage
+   */
+  startUploadingImage(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  pendingUploadStats(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets pending upload statistics
+   * Original name: ImageTsBindings.pendingUploadStats
+   */
+  pendingUploadStats(...args: any[]): [Set<any>, Set<any>] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return [new Set(), new Set()]
   }
 
-  logDebugInfo(...e) {
-    if (this.shouldThrow)
+  /**
+   * Logs debug information
+   * Original name: ImageTsBindings.logDebugInfo
+   */
+  logDebugInfo(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  pauseImageDownloads(...e) {
-    if (this.shouldThrow)
+  /**
+   * Pauses image downloads
+   * Original name: ImageTsBindings.pauseImageDownloads
+   */
+  pauseImageDownloads(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  resumeImageDownloads(...e) {
-    if (this.shouldThrow)
+  /**
+   * Resumes image downloads
+   * Original name: ImageTsBindings.resumeImageDownloads
+   */
+  resumeImageDownloads(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setExternalSource(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets external source
+   * Original name: ImageTsBindings.setExternalSource
+   */
+  setExternalSource(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  staticAssetWithPath(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets static asset with path
+   * Original name: ImageTsBindings.staticAssetWithPath
+   */
+  staticAssetWithPath(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$J5 {
-  rgbaToThumbhash(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Handles thumbhash encoding and decoding operations
+ * Original name: ThumbHashHandler
+ */
+export class ThumbHashHandler {
+  shouldThrow: boolean
+
+  /**
+   * Converts RGBA to thumbhash
+   * Original name: ThumbHashHandler.rgbaToThumbhash
+   */
+  rgbaToThumbhash(...args: any[]): Uint8Array {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Uint8Array()
   }
 
-  thumbhashToRgba(...e) {
-    if (this.shouldThrow)
+  /**
+   * Converts thumbhash to RGBA
+   * Original name: ThumbHashHandler.thumbhashToRgba
+   */
+  thumbhashToRgba(...args: any[]): { rgba: Uint8Array, width: number, height: number } {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return {
       rgba: new Uint8Array(),
       width: 0,
@@ -3340,901 +6448,1678 @@ export class $$J5 {
     }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$Z65 {
-  readRichTextFromHtml(...e) {
-    if (this.shouldThrow)
+/**
+ * Handles rich text and HTML conversion operations
+ * Original name: RichTextBindings
+ */
+export class RichTextBindings {
+  shouldThrow: boolean
+
+  /**
+   * Reads rich text from HTML content
+   * Original name: RichTextBindings.readRichTextFromHtml
+   */
+  readRichTextFromHtml(...args: any[]): any[] {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return []
   }
 
-  createHtmlFromTextNodes(...e) {
-    if (this.shouldThrow)
+  /**
+   * Creates HTML from text nodes
+   * Original name: RichTextBindings.createHtmlFromTextNodes
+   */
+  createHtmlFromTextNodes(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  createHtmlFromTextData(...e) {
-    if (this.shouldThrow)
+  /**
+   * Creates HTML from text data
+   * Original name: RichTextBindings.createHtmlFromTextData
+   */
+  createHtmlFromTextData(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$Q61 {
-  getParsedCodeTokens(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages code editor styling and appearance
+ * Original name: CodeBlockBindings
+ */
+export class CodeBlockBindings {
+  shouldThrow: boolean
+
+  /**
+   * Gets parsed code tokens for syntax highlighting
+   * Original name: CodeBlockBindings.getParsedCodeTokens
+   */
+  getParsedCodeTokens(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getBackgroundColor(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets background color for code editor
+   * Original name: CodeBlockBindings.getBackgroundColor
+   */
+  getBackgroundColor(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getLineNumberColor(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets line number color for code editor
+   * Original name: CodeBlockBindings.getLineNumberColor
+   */
+  getLineNumberColor(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  getCursorColor(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets cursor color for code editor
+   * Original name: CodeBlockBindings.getCursorColor
+   */
+  getCursorColor(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$ee46 {
-  onInsertFromExisting(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages widget operations and interactions
+ * Original name: WidgetManagerHandler
+ */
+export class WidgetManagerHandler {
+  shouldThrow: boolean
+
+  /**
+   * Handles insertion from existing widget
+   * Original name: WidgetManagerHandler.onInsertFromExisting
+   */
+  onInsertFromExisting(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  onImpression(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles widget impression event
+   * Original name: WidgetManagerHandler.onImpression
+   */
+  onImpression(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  mountWidget(...e) {
-    if (this.shouldThrow)
+  /**
+   * Mounts a widget
+   * Original name: WidgetManagerHandler.mountWidget
+   */
+  mountWidget(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  mountWidgetLowPriority(...e) {
-    if (this.shouldThrow)
+  /**
+   * Mounts a widget with low priority
+   * Original name: WidgetManagerHandler.mountWidgetLowPriority
+   */
+  mountWidgetLowPriority(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  trackSelectionStateInteraction(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tracks selection state interaction
+   * Original name: WidgetManagerHandler.trackSelectionStateInteraction
+   */
+  trackSelectionStateInteraction(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  clickWidget(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles widget click event
+   * Original name: WidgetManagerHandler.clickWidget
+   */
+  clickWidget(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  queueRender(...e) {
-    if (this.shouldThrow)
+  /**
+   * Queues widget render
+   * Original name: WidgetManagerHandler.queueRender
+   */
+  queueRender(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  renderFirstPartyWidget(...e) {
-    if (this.shouldThrow)
+  /**
+   * Renders first party widget
+   * Original name: WidgetManagerHandler.renderFirstPartyWidget
+   */
+  renderFirstPartyWidget(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  isRenderingWidget(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if widget is currently rendering
+   * Original name: WidgetManagerHandler.isRenderingWidget
+   */
+  isRenderingWidget(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  runPropertyMenuCallback(...e) {
-    if (this.shouldThrow)
+  /**
+   * Runs property menu callback
+   * Original name: WidgetManagerHandler.runPropertyMenuCallback
+   */
+  runPropertyMenuCallback(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  terminateRunningWidget(...e) {
-    if (this.shouldThrow)
+  /**
+   * Terminates running widget
+   * Original name: WidgetManagerHandler.terminateRunningWidget
+   */
+  terminateRunningWidget(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  clickHyperlink(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles hyperlink click in widget
+   * Original name: WidgetManagerHandler.clickHyperlink
+   */
+  clickHyperlink(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getWidgetIconBuffer(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets widget icon buffer
+   * Original name: WidgetManagerHandler.getWidgetIconBuffer
+   */
+  getWidgetIconBuffer(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  onTextEditEnd(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles text edit end event
+   * Original name: WidgetManagerHandler.onTextEditEnd
+   */
+  onTextEditEnd(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showTooltip(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows widget tooltip
+   * Original name: WidgetManagerHandler.showTooltip
+   */
+  showTooltip(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showNonInteractableWidgetTooltip(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows non-interactable widget tooltip
+   * Original name: WidgetManagerHandler.showNonInteractableWidgetTooltip
+   */
+  showNonInteractableWidgetTooltip(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  hideTooltip(...e) {
-    if (this.shouldThrow)
+  /**
+   * Hides widget tooltip
+   * Original name: WidgetManagerHandler.hideTooltip
+   */
+  hideTooltip(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  logMultipleInputEditorsInWidget(...e) {
-    if (this.shouldThrow)
+  /**
+   * Logs multiple input editors in widget
+   * Original name: WidgetManagerHandler.logMultipleInputEditorsInWidget
+   */
+  logMultipleInputEditorsInWidget(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  stickableAdded(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles stickable added event
+   * Original name: WidgetManagerHandler.stickableAdded
+   */
+  stickableAdded(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  stickableRemoved(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles stickable removed event
+   * Original name: WidgetManagerHandler.stickableRemoved
+   */
+  stickableRemoved(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  canInteractWithWidget(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if user can interact with widget
+   * Original name: WidgetManagerHandler.canInteractWithWidget
+   */
+  canInteractWithWidget(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  canViewWidgetDetails(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if user can view widget details
+   * Original name: WidgetManagerHandler.canViewWidgetDetails
+   */
+  canViewWidgetDetails(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$et36 {
-  prefersReducedMotion(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages accessibility features and announcements
+ * Original name: AccessibilityBindings
+ */
+export class AccessibilityBindings {
+  shouldThrow: boolean
+
+  /**
+   * Checks if user prefers reduced motion
+   * Original name: AccessibilityBindings.prefersReducedMotion
+   */
+  prefersReducedMotion(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  getWCAG2Contrast(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets WCAG 2.0 contrast ratio
+   * Original name: AccessibilityBindings.getWCAG2Contrast
+   */
+  getWCAG2Contrast(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  announceNodeCreated(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces node creation
+   * Original name: AccessibilityBindings.announceNodeCreated
+   */
+  announceNodeCreated(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceSingleNodeDeleted(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces single node deletion
+   * Original name: AccessibilityBindings.announceSingleNodeDeleted
+   */
+  announceSingleNodeDeleted(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceMultipleNodesDeleted(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces multiple nodes deletion
+   * Original name: AccessibilityBindings.announceMultipleNodesDeleted
+   */
+  announceMultipleNodesDeleted(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceTextSelection(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces text selection
+   * Original name: AccessibilityBindings.announceTextSelection
+   */
+  announceTextSelection(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceToolSelected(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces tool selection
+   * Original name: AccessibilityBindings.announceToolSelected
+   */
+  announceToolSelected(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceTableCellTextSelection(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces table cell text selection
+   * Original name: AccessibilityBindings.announceTableCellTextSelection
+   */
+  announceTableCellTextSelection(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceNodeResized(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces node resize
+   * Original name: AccessibilityBindings.announceNodeResized
+   */
+  announceNodeResized(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceNodeMoved(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces node movement
+   * Original name: AccessibilityBindings.announceNodeMoved
+   */
+  announceNodeMoved(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceSelectionBoxResized(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces selection box resize
+   * Original name: AccessibilityBindings.announceSelectionBoxResized
+   */
+  announceSelectionBoxResized(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceSelectionBoxMoved(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces selection box movement
+   * Original name: AccessibilityBindings.announceSelectionBoxMoved
+   */
+  announceSelectionBoxMoved(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceViewportPanned(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces viewport pan
+   * Original name: AccessibilityBindings.announceViewportPanned
+   */
+  announceViewportPanned(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceViewportZoomed(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces viewport zoom
+   * Original name: AccessibilityBindings.announceViewportZoomed
+   */
+  announceViewportZoomed(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  announceBooleanOperation(...e) {
-    if (this.shouldThrow)
+  /**
+   * Announces boolean operation
+   * Original name: AccessibilityBindings.announceBooleanOperation
+   */
+  announceBooleanOperation(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  showKeyboardSelectionModeChangedToast(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows keyboard selection mode changed toast
+   * Original name: AccessibilityBindings.showKeyboardSelectionModeChangedToast
+   */
+  showKeyboardSelectionModeChangedToast(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$er60 {
-  onFrameDistributionTrackedEvent(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Handles frame distribution tracking events
+ * Original name: FrameDistributionTrackerBindings
+ */
+export class FrameDistributionTrackerBindings {
+  shouldThrow: boolean
+
+  /**
+   * Handles frame distribution tracked event
+   * Original name: FrameDistributionTrackerBindings.onFrameDistributionTrackedEvent
+   */
+  onFrameDistributionTrackedEvent(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$en32 {
-  isCustomPaletteColor(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages custom palette colors
+ * Original name: WhiteboardAnalyticsTsBindings
+ */
+export class WhiteboardAnalyticsTsBindings {
+  shouldThrow: boolean
+
+  /**
+   * Checks if color is a custom palette color
+   * Original name: WhiteboardAnalyticsTsBindings.isCustomPaletteColor
+   */
+  isCustomPaletteColor(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$ei12 {
-  clearSlideThemeStylePreview(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages slide theme styling and synchronization
+ * Original name: SlidesTsBindings
+ */
+export class SlidesTsBindings {
+  shouldThrow: boolean
+
+  /**
+   * Clears slide theme style preview
+   * Original name: SlidesTsBindings.clearSlideThemeStylePreview
+   */
+  clearSlideThemeStylePreview(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  syncSlideThemeAtom(...e) {
-    if (this.shouldThrow)
+  /**
+   * Synchronizes slide theme atom
+   * Original name: SlidesTsBindings.syncSlideThemeAtom
+   */
+  syncSlideThemeAtom(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  computeThemeSwapColorVariableMapping(...e) {
-    if (this.shouldThrow)
+  /**
+   * Computes theme swap color variable mapping
+   * Original name: SlidesTsBindings.computeThemeSwapColorVariableMapping
+   */
+  computeThemeSwapColorVariableMapping(...args: any[]): Map<any, any> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return new Map()
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$ea15 {
-  updatePreview(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages code layer operations and code snapshots
+ * Original name: SitesJsBindings
+ */
+export class SitesJsBindings {
+  shouldThrow: boolean
+
+  /**
+   * Updates code preview
+   * Original name: SitesJsBindings.updatePreview
+   */
+  updatePreview(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  updateDirtyResponsiveSets(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates dirty responsive sets
+   * Original name: SitesJsBindings.updateDirtyResponsiveSets
+   */
+  updateDirtyResponsiveSets(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setLeftPanelTabToCode(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets left panel tab to code
+   * Original name: SitesJsBindings.setLeftPanelTabToCode
+   */
+  setLeftPanelTabToCode(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setCodeWindowPanelToChat(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets code window panel to chat
+   * Original name: SitesJsBindings.setCodeWindowPanelToChat
+   */
+  setCodeWindowPanelToChat(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  markNodeAsDesignToReact(...e) {
-    if (this.shouldThrow)
+  /**
+   * Marks node as design to React
+   * Original name: SitesJsBindings.markNodeAsDesignToReact
+   */
+  markNodeAsDesignToReact(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  markCodeNodesDirty(...e) {
-    if (this.shouldThrow)
+  /**
+   * Marks code nodes as dirty
+   * Original name: SitesJsBindings.markCodeNodesDirty
+   */
+  markCodeNodesDirty(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  syncNodeSourceCode(...e) {
-    if (this.shouldThrow)
+  /**
+   * Synchronizes node source code
+   * Original name: SitesJsBindings.syncNodeSourceCode
+   */
+  syncNodeSourceCode(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getAutomaticCodeFileNameForNodeName(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets automatic code file name for node name
+   * Original name: SitesJsBindings.getAutomaticCodeFileNameForNodeName
+   */
+  getAutomaticCodeFileNameForNodeName(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  updateCodeSnapshotState(...e) {
-    if (this.shouldThrow)
+  /**
+   * Updates code snapshot state
+   * Original name: SitesJsBindings.updateCodeSnapshotState
+   */
+  updateCodeSnapshotState(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  cleanupCodeSnapshotOverlays(...e) {
-    if (this.shouldThrow)
+  /**
+   * Cleans up code snapshot overlays
+   * Original name: SitesJsBindings.cleanupCodeSnapshotOverlays
+   */
+  cleanupCodeSnapshotOverlays(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getTimestampForCodeSnapshotInvalidatedAt(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets timestamp for code snapshot invalidated at
+   * Original name: SitesJsBindings.getTimestampForCodeSnapshotInvalidatedAt
+   */
+  getTimestampForCodeSnapshotInvalidatedAt(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  isCodeSnapshotStale(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if code snapshot is stale
+   * Original name: SitesJsBindings.isCodeSnapshotStale
+   */
+  isCodeSnapshotStale(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  resnapshotIfStale(...e) {
-    if (this.shouldThrow)
+  /**
+   * Resnapshots if stale
+   * Original name: SitesJsBindings.resnapshotIfStale
+   */
+  resnapshotIfStale(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  regenerateDerivedCodeFileDebounced(...e) {
-    if (this.shouldThrow)
+  /**
+   * Regenerates derived code file debounced
+   * Original name: SitesJsBindings.regenerateDerivedCodeFileDebounced
+   */
+  regenerateDerivedCodeFileDebounced(...args: any[]): Promise<never> {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return Promise.reject()
   }
 
-  showSupabaseDeployNudge(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows Supabase deploy nudge
+   * Original name: SitesJsBindings.showSupabaseDeployNudge
+   */
+  showSupabaseDeployNudge(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setAutoDeploySupabase(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets auto deploy Supabase
+   * Original name: SitesJsBindings.setAutoDeploySupabase
+   */
+  setAutoDeploySupabase(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  removeAttachment(...e) {
-    if (this.shouldThrow)
+  /**
+   * Removes attachment
+   * Original name: SitesJsBindings.removeAttachment
+   */
+  removeAttachment(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  pushAttachmentSourceCode(...e) {
-    if (this.shouldThrow)
+  /**
+   * Pushes attachment source code
+   * Original name: SitesJsBindings.pushAttachmentSourceCode
+   */
+  pushAttachmentSourceCode(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  pushAttachmentError(...e) {
-    if (this.shouldThrow)
+  /**
+   * Pushes attachment error
+   * Original name: SitesJsBindings.pushAttachmentError
+   */
+  pushAttachmentError(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  terminateOnePendingAttachment(...e) {
-    if (this.shouldThrow)
+  /**
+   * Terminates one pending attachment
+   * Original name: SitesJsBindings.terminateOnePendingAttachment
+   */
+  terminateOnePendingAttachment(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setSprigUserCreatedCodeLayerAtom(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets Sprig user created code layer atom
+   * Original name: SitesJsBindings.setSprigUserCreatedCodeLayerAtom
+   */
+  setSprigUserCreatedCodeLayerAtom(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  shouldHideDefaultSetOnCreation(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if default set should be hidden on creation
+   * Original name: SitesJsBindings.shouldHideDefaultSetOnCreation
+   */
+  shouldHideDefaultSetOnCreation(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  prewarmSandboxPool(...e) {
-    if (this.shouldThrow)
+  /**
+   * Prewarms sandbox pool
+   * Original name: SitesJsBindings.prewarmSandboxPool
+   */
+  prewarmSandboxPool(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getCodeLayersDefaultEntryPointFile(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets code layers default entry point file
+   * Original name: SitesJsBindings.getCodeLayersDefaultEntryPointFile
+   */
+  getCodeLayersDefaultEntryPointFile(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$es33 {
-  isInOrg(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Checks organization membership status
+ * Original name: OrganizationMembershipChecker
+ */
+export class OrganizationMembershipChecker {
+  shouldThrow: boolean
+
+  /**
+   * Checks if user is in organization
+   * Original name: OrganizationMembershipChecker.isInOrg
+   */
+  isInOrg(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$eo35 {
-  getSummaryAsClipboardText(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages clipboard summary operations
+ * Original name: SummaryBindings
+ */
+export class SummaryBindings {
+  shouldThrow: boolean
+
+  /**
+   * Gets summary as clipboard text
+   * Original name: SummaryBindings.getSummaryAsClipboardText
+   */
+  getSummaryAsClipboardText(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$el51 {
-  calculateColorWithRampValue(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Handles color calculations with ramp values and adjustments
+ * Original name: ColorRampBindings
+ */
+export class ColorRampBindings {
+  shouldThrow: boolean
+
+  /**
+   * Calculates color with ramp value
+   * Original name: ColorRampBindings.calculateColorWithRampValue
+   */
+  calculateColorWithRampValue(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  calculateColorWithRelativeAdjustment(...e) {
-    if (this.shouldThrow)
+  /**
+   * Calculates color with relative adjustment
+   * Original name: ColorRampBindings.calculateColorWithRelativeAdjustment
+   */
+  calculateColorWithRelativeAdjustment(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  getRampValueForColor(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets ramp value for color
+   * Original name: ColorRampBindings.getRampValueForColor
+   */
+  getRampValueForColor(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$ed48 {
-  isZombieStyle(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Checks for zombie styles
+ * Original name: StylesCheckBindings
+ */
+export class StylesCheckBindings {
+  shouldThrow: boolean
+
+  /**
+   * Checks if style is a zombie style
+   * Original name: StylesCheckBindings.isZombieStyle
+   */
+  isZombieStyle(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$ec49 {
-  storeVariableData(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages variable data storage and retrieval
+ * Original name: VariablesJsRuntimeAliasTsBindings
+ */
+export class VariablesJsRuntimeAliasTsBindings {
+  shouldThrow: boolean
+
+  /**
+   * Stores variable data
+   * Original name: VariablesJsRuntimeAliasTsBindings.storeVariableData
+   */
+  storeVariableData(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  fetchVariableData(...e) {
-    if (this.shouldThrow)
+  /**
+   * Fetches variable data
+   * Original name: VariablesJsRuntimeAliasTsBindings.fetchVariableData
+   */
+  fetchVariableData(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$eu59 {
-  trackUserActionTimings(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Tracks user action timings and frame timing requests
+ * Original name: UserActionTimingBindings
+ */
+export class UserActionTimingBindings {
+  shouldThrow: boolean
+
+  /**
+   * Tracks user action timings
+   * Original name: UserActionTimingBindings.trackUserActionTimings
+   */
+  trackUserActionTimings(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  requestFrameTiming(...e) {
-    if (this.shouldThrow)
+  /**
+   * Requests frame timing
+   * Original name: UserActionTimingBindings.requestFrameTiming
+   */
+  requestFrameTiming(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$ep40 {
-  enableSlotsForOpenFile(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages slot enabling for open files
+ * Original name: SlotsBindingsWeb
+ */
+export class SlotsBindingsWeb {
+  shouldThrow: boolean
+
+  /**
+   * Enables slots for open file
+   * Original name: SlotsBindingsWeb.enableSlotsForOpenFile
+   */
+  enableSlotsForOpenFile(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$e_37 {
-  syncChangedSubscribedConsumptions(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages synchronization of changed subscribed consumptions and mirror cache
+ * Original name: AssetConsumptionMirrorBindings
+ */
+export class AssetConsumptionMirrorBindings {
+  shouldThrow: boolean
+
+  /**
+   * Synchronizes changed subscribed consumptions
+   * Original name: AssetConsumptionMirrorBindings.syncChangedSubscribedConsumptions
+   */
+  syncChangedSubscribedConsumptions(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  resetMirrorCache(...e) {
-    if (this.shouldThrow)
+  /**
+   * Resets mirror cache
+   * Original name: AssetConsumptionMirrorBindings.resetMirrorCache
+   */
+  resetMirrorCache(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$eh55 {
-  syncAddedOrChangedAssets(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages asset synchronization and mirror cache
+ * Original name: AssetMirrorBindings
+ */
+export class AssetMirrorBindings {
+  shouldThrow: boolean
+
+  /**
+   * Synchronizes added or changed assets
+   * Original name: AssetMirrorBindings.syncAddedOrChangedAssets
+   */
+  syncAddedOrChangedAssets(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  syncRemovedAssets(...e) {
-    if (this.shouldThrow)
+  /**
+   * Synchronizes removed assets
+   * Original name: AssetMirrorBindings.syncRemovedAssets
+   */
+  syncRemovedAssets(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  resetMirrorCache(...e) {
-    if (this.shouldThrow)
+  /**
+   * Resets mirror cache
+   * Original name: AssetMirrorBindings.resetMirrorCache
+   */
+  resetMirrorCache(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$em10 {
-  ready(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Handles scene loading and node change events
+ * Original name: SceneLoadingHandler
+ */
+export class SceneLoadingHandler {
+  shouldThrow: boolean
+
+  /**
+   * Indicates readiness
+   * Original name: SceneLoadingHandler.ready
+   */
+  ready(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  track(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tracks events
+   * Original name: SceneLoadingHandler.track
+   */
+  track(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  triggerViewerEvent(...e) {
-    if (this.shouldThrow)
+  /**
+   * Triggers viewer event
+   * Original name: SceneLoadingHandler.triggerViewerEvent
+   */
+  triggerViewerEvent(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  handleUncompressedSchema(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles uncompressed schema
+   * Original name: SceneLoadingHandler.handleUncompressedSchema
+   */
+  handleUncompressedSchema(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  handleUncompressedMessage(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles uncompressed message
+   * Original name: SceneLoadingHandler.handleUncompressedMessage
+   */
+  handleUncompressedMessage(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  willReceiveNodeChanges(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles node changes before they are received
+   * Original name: SceneLoadingHandler.willReceiveNodeChanges
+   */
+  willReceiveNodeChanges(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  didReceiveNodeChanges(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles node changes after they are received
+   * Original name: SceneLoadingHandler.didReceiveNodeChanges
+   */
+  didReceiveNodeChanges(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getSceneLoadingPhase(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets scene loading phase
+   * Original name: SceneLoadingHandler.getSceneLoadingPhase
+   */
+  getSceneLoadingPhase(...args: any[]): number {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return 0
   }
 
-  retAffineTransform(...e) {
-    if (this.shouldThrow)
+  /**
+   * Returns affine transform
+   * Original name: SceneLoadingHandler.retAffineTransform
+   */
+  retAffineTransform(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  retArcData(...e) {
-    if (this.shouldThrow)
+  /**
+   * Returns arc data
+   * Original name: SceneLoadingHandler.retArcData
+   */
+  retArcData(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  retGUID(...e) {
-    if (this.shouldThrow)
+  /**
+   * Returns GUID
+   * Original name: SceneLoadingHandler.retGUID
+   */
+  retGUID(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  retStyleId(...e) {
-    if (this.shouldThrow)
+  /**
+   * Returns style ID
+   * Original name: SceneLoadingHandler.retStyleId
+   */
+  retStyleId(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  retVector(...e) {
-    if (this.shouldThrow)
+  /**
+   * Returns vector
+   * Original name: SceneLoadingHandler.retVector
+   */
+  retVector(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  forEachFieldCallback(...e) {
-    if (this.shouldThrow)
+  /**
+   * Executes for each field callback
+   * Original name: SceneLoadingHandler.forEachFieldCallback
+   */
+  forEachFieldCallback(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  reverseVariantBindingsForICsDisabled(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if reverse variant bindings for ICs are disabled
+   * Original name: SceneLoadingHandler.reverseVariantBindingsForICsDisabled
+   */
+  reverseVariantBindingsForICsDisabled(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  debugPrototypeActionFromPreview(...e) {
-    if (this.shouldThrow)
+  /**
+   * Debugs prototype action from preview
+   * Original name: SceneLoadingHandler.debugPrototypeActionFromPreview
+   */
+  debugPrototypeActionFromPreview(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  getBaseScreenId(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets base screen ID
+   * Original name: SceneLoadingHandler.getBaseScreenId
+   */
+  getBaseScreenId(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  isScalingModeResponsive(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if scaling mode is responsive
+   * Original name: SceneLoadingHandler.isScalingModeResponsive
+   */
+  isScalingModeResponsive(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export class $$eg6 {
-  windowSetupComplete(...e) {
-    if (this.shouldThrow)
+
+/**
+ * Manages window operations and clipboard interactions
+ * Original name: WindowManagerHandler
+ */
+export class WindowManagerHandler {
+  shouldThrow: boolean
+
+  /**
+   * Handles window setup completion
+   * Original name: WindowManagerHandler.windowSetupComplete
+   */
+  windowSetupComplete(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  windowHandleBeforeTick(...e) {
-    if (this.shouldThrow)
+  /**
+   * Handles window before tick
+   * Original name: WindowManagerHandler.windowHandleBeforeTick
+   */
+  windowHandleBeforeTick(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  initPrefersReducedMotion(...e) {
-    if (this.shouldThrow)
+  /**
+   * Initializes prefers reduced motion
+   * Original name: WindowManagerHandler.initPrefersReducedMotion
+   */
+  initPrefersReducedMotion(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  destroyWindow(...e) {
-    if (this.shouldThrow)
+  /**
+   * Destroys window
+   * Original name: WindowManagerHandler.destroyWindow
+   */
+  destroyWindow(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setTitle(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets window title
+   * Original name: WindowManagerHandler.setTitle
+   */
+  setTitle(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  title(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets window title
+   * Original name: WindowManagerHandler.title
+   */
+  title(...args: any[]): string {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return ''
   }
 
-  alert(...e) {
-    if (this.shouldThrow)
+  /**
+   * Shows alert
+   * Original name: WindowManagerHandler.alert
+   */
+  alert(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setTextCaretBounds(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets text caret bounds
+   * Original name: WindowManagerHandler.setTextCaretBounds
+   */
+  setTextCaretBounds(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  usingMultiTouchPointerEvents(...e) {
-    if (this.shouldThrow)
+  /**
+   * Checks if using multi-touch pointer events
+   * Original name: WindowManagerHandler.usingMultiTouchPointerEvents
+   */
+  usingMultiTouchPointerEvents(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  setExpectingTextInput(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets expecting text input
+   * Original name: WindowManagerHandler.setExpectingTextInput
+   */
+  setExpectingTextInput(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setExpectingCopyCutEvent(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets expecting copy/cut event
+   * Original name: WindowManagerHandler.setExpectingCopyCutEvent
+   */
+  setExpectingCopyCutEvent(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  setExpectingPasteEvent(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets expecting paste event
+   * Original name: WindowManagerHandler.setExpectingPasteEvent
+   */
+  setExpectingPasteEvent(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  execCommandCopy(...e) {
-    if (this.shouldThrow)
+  /**
+   * Executes copy command
+   * Original name: WindowManagerHandler.execCommandCopy
+   */
+  execCommandCopy(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  readClipboardContents(...e) {
-    if (this.shouldThrow)
+  /**
+   * Reads clipboard contents
+   * Original name: WindowManagerHandler.readClipboardContents
+   */
+  readClipboardContents(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  writeClipboardContents(...e) {
-    if (this.shouldThrow)
+  /**
+   * Writes clipboard contents
+   * Original name: WindowManagerHandler.writeClipboardContents
+   */
+  writeClipboardContents(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  clearClipboardContents(...e) {
-    if (this.shouldThrow)
+  /**
+   * Clears clipboard contents
+   * Original name: WindowManagerHandler.clearClipboardContents
+   */
+  clearClipboardContents(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  tryToReadFromClipboardAsBlobInHTML(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tries to read from clipboard as blob in HTML
+   * Original name: WindowManagerHandler.tryToReadFromClipboardAsBlobInHTML
+   */
+  tryToReadFromClipboardAsBlobInHTML(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  tryToReadSubstringFromClipboard(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tries to read substring from clipboard
+   * Original name: WindowManagerHandler.tryToReadSubstringFromClipboard
+   */
+  tryToReadSubstringFromClipboard(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  tryToReadFilesFromClipboard(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tries to read files from clipboard
+   * Original name: WindowManagerHandler.tryToReadFilesFromClipboard
+   */
+  tryToReadFilesFromClipboard(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  tryToDetectSpreadsheetDataOnClipboard(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tries to detect spreadsheet data on clipboard
+   * Original name: WindowManagerHandler.tryToDetectSpreadsheetDataOnClipboard
+   */
+  tryToDetectSpreadsheetDataOnClipboard(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  tryToDetectLineDataOnClipboard(...e) {
-    if (this.shouldThrow)
+  /**
+   * Tries to detect line data on clipboard
+   * Original name: WindowManagerHandler.tryToDetectLineDataOnClipboard
+   */
+  tryToDetectLineDataOnClipboard(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  writeToClipboardAsBlobInHTML(...e) {
-    if (this.shouldThrow)
+  /**
+   * Writes to clipboard as blob in HTML
+   * Original name: WindowManagerHandler.writeToClipboardAsBlobInHTML
+   */
+  writeToClipboardAsBlobInHTML(...args: any[]): boolean {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
-    return !1
+    }
+    return false
   }
 
-  focusView(...e) {
-    if (this.shouldThrow)
+  /**
+   * Focuses view
+   * Original name: WindowManagerHandler.focusView
+   */
+  focusView(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  viewWithFocus(...e) {
-    if (this.shouldThrow)
+  /**
+   * Gets view with focus
+   * Original name: WindowManagerHandler.viewWithFocus
+   */
+  viewWithFocus(...args: any[]): null {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
     return null
   }
 
-  setCanvasView(...e) {
-    if (this.shouldThrow)
+  /**
+   * Sets canvas view
+   * Original name: WindowManagerHandler.setCanvasView
+   */
+  setCanvasView(...args: any[]): void {
+    if (this.shouldThrow) {
       throw new Error('Method not implemented.')
+    }
   }
 
-  constructor(e = !1) {
-    
-    this.shouldThrow = e
+  constructor(shouldThrow = false) {
+    this.shouldThrow = shouldThrow
   }
 }
-export const $C = $$O0
-export const A1 = $$p1
-export const A2 = $$H2
-export const Ag = $$R3
-export const Bj = $$K4
-export const Bz = $$J5
-export const CJ = $$eg6
-export const EU = $$g7
-export const Fe = $$k8
-export const Gh = $$$9
-export const Gm = $$em10
-export const IW = $$c11
-export const Iz = $$ei12
-export const LY = $$y13
-export const Lz = $$D14
-export const M0 = $$ea15
-export const N = $$Y16
-export const RN = $$i17
-export const RU = $$X18
-export const Rx = $$U19
-export const S_ = $$F20
-export const TC = $$P21
-export const Ud = $$B22
-export const V3 = $$q23
-export const Vm = $$C24
-export const W3 = $$$$N25
-export const WF = $$W26
-export const Z3 = $$M27
-export const ZD = $$S28
-export const _L = $$E29
-export const a5 = $$s30
-export const aO = $$G31
-export const b_ = $$en32
-export const be = $$es33
-export const c2 = $$x34
-export const d1 = $$eo35
-export const dJ = $$et36
-export const d_ = $$e_37
-export const di = $$a38
-export const eZ = $$m39
-export const gQ = $$ep40
-export const jw = $$l41
-export const k0 = $$h42
-export const l5 = $$v43
-export const lM = $$L44
-export const mk = $$j45
-export const nn = $$ee46
-export const p6 = $$b47
-export const pG = $$ed48
-export const qP = $$ec49
-export const qQ = $$z50
-export const qV = $$el51
-export const rb = $$w52
-export const rf = $$T53
-export const rm = $$o54
-export const sG = $$eh55
-export const tO = $$d56
-export const tg = $$u57
-export const tz = $$I58
-export const uG = $$eu59
-export const uH = $$er60
-export const vv = $$Q61
-export const w4 = $$A62
-export const wm = $$V63
-export const xJ = $$_64
-export const yR = $$Z65
-export const yy = $$f66
+export const $C = QuickActionsManager
+export const A1 = CooperTsBindings
+export const A2 = ImageProcessorHandler
+export const Ag = VariablesBindingsWeb
+export const Bj = CurrentUserInfo
+export const Bz = ThumbHashHandler
+export const CJ = WindowManagerHandler
+export const EU = MainAppHandler
+export const Fe = WhiteboardTemplatePreviewTsBindings
+export const Gh = MissingFontScanner
+export const Gm = SceneLoadingHandler
+export const IW = NodeChatMessageHelper
+export const Iz = SlidesTsBindings
+export const LY = ColorManagementBindings
+export const Lz = WebUserSyncing
+export const M0 = SitesJsBindings
+export const N = SceneManagerHandler
+export const RN = EditScopeHandler
+export const RU = HandoffScenegraphBindings
+export const Rx = PerformanceAnalyticsManager
+export const S_ = UndoRedoEventsBindings
+export const TC = WebSelectionManager
+export const Ud = DefaultStrokeWeightManager
+export const V3 = ImageTsBindings
+export const Vm = SpellCheckAPIBindings
+export const W3 = SitesViewManager
+export const WF = AutoLayoutBindings
+export const Z3 = WhiteboardTsBindings
+export const ZD = DesignLinterManager
+export const _L = FullscreenWebSocketTsCallbacks
+export const a5 = AutoSuggestAssetBindings
+export const aO = UI3ColorManager
+export const b_ = WhiteboardAnalyticsTsBindings
+export const be = OrganizationMembershipChecker
+export const c2 = PluginCallbacksManager
+export const d1 = SummaryBindings
+export const dJ = AccessibilityBindings
+export const d_ = AssetConsumptionMirrorBindings
+export const di = AutosaveSessionBindings
+export const eZ = EmojiWheelBindings
+export const gQ = SlotsBindingsWeb
+export const jw = JsBindingsTestHelpers
+export const k0 = EmojiTsBindings
+export const l5 = MentionsTypeaheadManager
+export const lM = WebMultiplayerManager
+export const mk = KeyboardShortcutBindings
+export const nn = WidgetManagerHandler
+export const p6 = HandoffBindings
+export const pG = StylesCheckBindings
+export const qP = VariablesJsRuntimeAliasTsBindings
+export const qQ = VideoTsBindings
+export const qV = ColorRampBindings
+export const rb = ThumbnailRequestManager
+export const rf = HandoffCallbacks
+export const rm = AutosuggestTextBindings
+export const sG = AssetMirrorBindings
+export const tO = CanvasSearchBindings
+export const tg = CommentManagerImpl
+export const tz = MouseBehaviorManager
+export const uG = UserActionTimingBindings
+export const uH = FrameDistributionTrackerBindings
+export const vv = CodeBlockBindings
+export const w4 = PdfImportBindings
+export const wm = ZipImpl
+export const xJ = DSAWebBindings
+export const yR = RichTextBindings
+export const yy = TsFontManualLoader

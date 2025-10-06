@@ -79,7 +79,7 @@ export interface LetterSpacingLegacy {
 
 // Advanced Image Processing Manager
 export class AdvancedImageProcessor {
-  private vm: any
+  vm: any
 
   constructor(vm: any) {
     this.vm = vm
@@ -88,7 +88,7 @@ export class AdvancedImageProcessor {
   // Create image processor wrapper (original iA function)
   createImageProcessor(imageData: any): ImageProcessor {
     const processor = this.vm.newObject()
-    
+
     // Define hash property
     this.vm.defineProp(processor, 'hash', {
       enumerable: false,
@@ -100,22 +100,22 @@ export class AdvancedImageProcessor {
     this.vm.defineFunction(processor, 'getBytesAsync', 'image.getBytesAsync', () => {
       const { promise, resolve, reject } = this.vm.newPromise()
       const asyncOperation = this.vm.registerPromise(imageData.getBytesAsync())
-      
+
       asyncOperation.then((result: any) => {
         resolve(this.vm.deepWrap(result))
       })
-      
+
       asyncOperation.catch((error: any) => {
         reject(this.vm.deepWrap(error))
       })
-      
+
       return promise
     })
 
     // Define getSizeAsync function
     this.vm.defineFunction(processor, 'getSizeAsync', 'image.getSizeAsync', () => {
       const { promise, resolve, reject } = this.vm.newPromise()
-      
+
       const processImageSize = () => {
         if (imageData.bytes) {
           vX(imageData.bytes)
@@ -153,11 +153,11 @@ export class AdvancedImageProcessor {
   // Create prototype with handlers (original ib function)
   createPrototype(name: string, handlers: any[]): any {
     const prototype = this.vm.newPrototype(name)
-    
+
     for (const handler of handlers) {
       handler(this, prototype)
     }
-    
+
     this.vm.retainHandle(prototype)
     return prototype
   }
@@ -210,7 +210,7 @@ export class AdvancedEffectsManager {
     if (effect.yVar?.value?.alias) {
       boundVariables.offsetY = eQ(effect.yVar.value.alias)
     }
-    
+
     const processedEffect = { ...baseEffect, boundVariables }
 
     // Handle specific effect types
@@ -312,21 +312,21 @@ export class AdvancedUnitConverter {
         unit: 'AUTO',
       }
     }
-    
+
     if (legacyLineHeight.units === 'RAW') {
       return {
         unit: 'PERCENT',
         value: 100 * legacyLineHeight.value,
       }
     }
-    
+
     if (legacyLineHeight.units === 'PIXELS') {
       return {
         unit: 'PIXELS',
         value: legacyLineHeight.value,
       }
     }
-    
+
     throw new Error('Unknown lineHeight unit')
   }
 
@@ -338,21 +338,21 @@ export class AdvancedUnitConverter {
         value: 100,
       }
     }
-    
+
     if (modernLineHeight.unit === 'PERCENT') {
       return {
         units: 'RAW',
         value: (modernLineHeight.value || 0) / 100,
       }
     }
-    
+
     if (modernLineHeight.unit === 'PIXELS') {
       return {
         units: 'PIXELS',
         value: modernLineHeight.value || 0,
       }
     }
-    
+
     throw new Error('Unknown lineHeight unit')
   }
 
@@ -363,21 +363,21 @@ export class AdvancedUnitConverter {
         unit: 'AUTO',
       }
     }
-    
+
     if (legacyLetterSpacing.units === 'PERCENT') {
       return {
         unit: 'PERCENT',
         value: legacyLetterSpacing.value,
       }
     }
-    
+
     if (legacyLetterSpacing.units === 'PIXELS') {
       return {
         unit: 'PIXELS',
         value: legacyLetterSpacing.value,
       }
     }
-    
+
     throw new Error('Unknown letterSpacing unit')
   }
 
@@ -389,21 +389,21 @@ export class AdvancedUnitConverter {
         value: 0,
       }
     }
-    
+
     if (modernLetterSpacing.unit === 'PERCENT') {
       return {
         units: 'PERCENT',
         value: modernLetterSpacing.value || 0,
       }
     }
-    
+
     if (modernLetterSpacing.unit === 'PIXELS') {
       return {
         units: 'PIXELS',
         value: modernLetterSpacing.value || 0,
       }
     }
-    
+
     throw new Error('Unknown letterSpacing unit')
   }
 
@@ -457,7 +457,7 @@ export class ImageEffectsUtilities {
     advanced: Partial<EffectConfig>
   } {
     const { type, visible, radius, color, ...rest } = effect
-    
+
     return {
       core: { type, visible },
       visual: { radius, color },
@@ -499,19 +499,19 @@ export function createImageEffectsProcessingNew(vm: any): {
 
   return {
     createImageProcessor: (imageData: any) => imageProcessor.createImageProcessor(imageData),
-    processFeatureFlagFunctions: (featureFlag: string, functions: any[]) => 
+    processFeatureFlagFunctions: (featureFlag: string, functions: any[]) =>
       imageProcessor.processFeatureFlagFunctions(featureFlag, functions),
     createPrototype: (name: string, handlers: any[]) => imageProcessor.createPrototype(name, handlers),
     convertEffectType: (effectType: string) => effectsManager.convertEffectType(effectType),
     processEffectConfig: (effect: any) => effectsManager.processEffectConfig(effect),
     validateEffectConstraints: (effect: any, node?: any) => effectsManager.validateEffectConstraints(effect, node),
-    convertLineHeightFromLegacy: (legacyLineHeight: LineHeightLegacy) => 
+    convertLineHeightFromLegacy: (legacyLineHeight: LineHeightLegacy) =>
       unitConverter.convertLineHeightFromLegacy(legacyLineHeight),
-    convertLineHeightToLegacy: (modernLineHeight: LineHeightUnit) => 
+    convertLineHeightToLegacy: (modernLineHeight: LineHeightUnit) =>
       unitConverter.convertLineHeightToLegacy(modernLineHeight),
-    convertLetterSpacingFromLegacy: (legacyLetterSpacing: LetterSpacingLegacy) => 
+    convertLetterSpacingFromLegacy: (legacyLetterSpacing: LetterSpacingLegacy) =>
       unitConverter.convertLetterSpacingFromLegacy(legacyLetterSpacing),
-    convertLetterSpacingToLegacy: (modernLetterSpacing: LetterSpacingUnit) => 
+    convertLetterSpacingToLegacy: (modernLetterSpacing: LetterSpacingUnit) =>
       unitConverter.convertLetterSpacingToLegacy(modernLetterSpacing),
     clampValue: (value: number, min: number, max: number) => unitConverter.clampValue(value, min, max)
   }

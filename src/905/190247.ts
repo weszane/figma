@@ -17,7 +17,7 @@ export function addDeviceInfoToTarget(source: object, target: object): void {
  * @returns The GPU device info object or null if unavailable.
  */
 // Original function name: $$s0
-export function getGpuDeviceInfo(): unknown {
+export function getGpuDeviceInfo() {
   return FullscreenPerfMetrics ? FullscreenPerfMetrics.getGpuDeviceInfo() : null
 }
 

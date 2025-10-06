@@ -1,34 +1,41 @@
-export function $$n4() {}
-export function $$r2() {
+export function initializeTheme() {
+}
+
+export function getCurrentThemePreferences() {
   return {
     color: document.body.getAttribute('data-preferred-theme') || 'light',
     brand: document.body.getAttribute('data-editor-theme') || 'design',
     enhancedContrast: document.body.hasAttribute('data-enhanced-contrast'),
   }
 }
-export function $$a1(e) {
-  let t
-  t = 'data-enhanced-contrast'
-  e ? document.body.setAttribute(t, '') : document.body.removeAttribute(t)
+
+export function toggleEnhancedContrast(enabled: any) {
+  let attributeName = 'data-enhanced-contrast'
+  enabled ? document.body.setAttribute(attributeName, '') : document.body.removeAttribute(attributeName)
 }
-export let $$s3 = ['data-editor-theme', 'data-preferred-theme', 'data-enhanced-contrast']
-export function $$o0({
-  brand: e,
-  color: t,
-  enhancedContrast: i,
+
+export let themeAttributeNames = ['data-editor-theme', 'data-preferred-theme', 'data-enhanced-contrast']
+
+export function createThemeDataAttributes({
+  brand: brandTheme,
+  color: colorTheme,
+  enhancedContrast: isEnhancedContrast,
 }) {
   return {
-    'data-editor-theme': e,
-    'data-preferred-theme': t,
-    'data-enhanced-contrast': i || void 0,
+    'data-editor-theme': brandTheme,
+    'data-preferred-theme': colorTheme,
+    'data-enhanced-contrast': isEnhancedContrast || void 0,
   }
 }
-export function $$l5(e, t) {
-  return e === t || e.color === t.color && e.brand === t.brand && e.enhancedContrast === t.enhancedContrast
+
+export function compareThemePreferences(themeA, themeB) {
+  return themeA === themeB || themeA.color === themeB.color && themeA.brand === themeB.brand && themeA.enhancedContrast === themeB.enhancedContrast
 }
-export const Pd = $$o0
-export const Qf = $$a1
-export const TE = $$r2
-export const dK = $$s3
-export const lQ = $$n4
-export const v9 = $$l5
+
+// Export aliases for backward compatibility if needed
+export const Pd = createThemeDataAttributes
+export const Qf = toggleEnhancedContrast
+export const TE = getCurrentThemePreferences
+export const dK = themeAttributeNames
+export const lQ = initializeTheme
+export const v9 = compareThemePreferences

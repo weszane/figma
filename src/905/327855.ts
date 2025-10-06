@@ -97,9 +97,9 @@ function isCanceled(value: string): boolean {
  * Original name: b
  */
 class CancelableRequestManager {
-  private _resolveCancelPromise: (value: string) => void = () => {}
-  private _cancelPromise: Promise<string>
-  private _result: Promise<any>
+  _resolveCancelPromise: (value: string) => void = () => { }
+  _cancelPromise: Promise<string>
+  _result: Promise<any>
   constructor(requestFn: () => Promise<any>) {
     this._cancelPromise = new Promise<string>((resolve) => {
       this._resolveCancelPromise = resolve
@@ -127,9 +127,9 @@ class CancelableRequestManager {
    * @param requestFn - The function that makes the actual request
    * @returns The result of the successful request or cancellation
    */
-  private async startRequest(requestFn: () => Promise<any>): Promise<any> {
+  async startRequest(requestFn: () => Promise<any>): Promise<any> {
     let attemptCount = 0
-    for (;;) {
+    for (; ;) {
       const currentOnlinePromise = onlinePromise
       try {
         return await Promise.race([requestFn(), this._cancelPromise])
@@ -247,12 +247,12 @@ function processFileCreationResponse(dispatch: any, responseData: any, trackingI
   }
   const trackingData: Record<string, any> = trackingInfo
     ? {
-        ...(trackingInfo.triggerElement && {
-          uiTriggerElement: trackingInfo.triggerElement,
-        }),
-        uiTriggeredFrom: trackingInfo.from,
-        uiSelectedView: JSON.stringify(trackingInfo.selectedView),
-      }
+      ...(trackingInfo.triggerElement && {
+        uiTriggerElement: trackingInfo.triggerElement,
+      }),
+      uiTriggeredFrom: trackingInfo.from,
+      uiSelectedView: JSON.stringify(trackingInfo.selectedView),
+    }
     : {}
   trackingData.teamId = teamUser?.team_id || null
   trackingData.orgId = orgUser?.org_id || null
@@ -359,18 +359,18 @@ export async function loadAndOpenFileInFullscreen(store: any, fileKey: string, e
   Fullscreen.setEditorTheme(state.theme.visibleTheme || "")
   const fileMetadataResponse = (await (shouldUseOfflineMode
     ? (async () => {
-        const requestManager = new CancelableRequestManager(() => fileMetadataService.getFileMetadata({
-          fileKey,
-        }))
-        const result = await requestManager.getResult()
-        if (isCanceled(result)) {
-          throw new Error("Request was canceled")
-        }
-        return result
-      })()
-    : fileMetadataService.getFileMetadata({
+      const requestManager = new CancelableRequestManager(() => fileMetadataService.getFileMetadata({
         fileKey,
-      }))).data.meta
+      }))
+      const result = await requestManager.getResult()
+      if (isCanceled(result)) {
+        throw new Error("Request was canceled")
+      }
+      return result
+    })()
+    : fileMetadataService.getFileMetadata({
+      fileKey,
+    }))).data.meta
 
   // Re-check state after async operations
   state = store.getState()
@@ -434,9 +434,9 @@ export async function loadAndOpenFileInFullscreen(store: any, fileKey: string, e
   const sourceFile = updatedState.fileByKey[updatedFile.source_file_key || ""]
   const folderPermissions = folder
     ? {
-        ...FileCreationPermissionsGenerator.disabled(),
-        ...folder,
-      }
+      ...FileCreationPermissionsGenerator.disabled(),
+      ...folder,
+    }
     : null
   const fileObject = setupFileObject(updatedFile, {
     folder: folderPermissions,
@@ -561,12 +561,12 @@ async function handleNewFileCreation(store: any, newFileParams: any, fileCreatio
     const orgTemplateView = atomStoreManager.get(orgTemplatePickerViewAtom)
     newFileParams.cooperTemplateLibraryKey
       ? atomStoreManager.set(Lm, {
-          type: mF.TEMPLATES,
-          libraryKey: newFileParams.cooperTemplateLibraryKey,
-          parentView: {
-            type: mF.ALL,
-          },
-        })
+        type: mF.TEMPLATES,
+        libraryKey: newFileParams.cooperTemplateLibraryKey,
+        parentView: {
+          type: mF.ALL,
+        },
+      })
       : orgTemplateView && atomStoreManager.set(Lm, {
         type: mF.ORG,
       })
@@ -807,7 +807,7 @@ const fileCreationAnalytics = {
         }, {
           forwardToDatadog: true,
         })
-      })().catch(() => {})
+      })().catch(() => { })
     }
   },
   /**
@@ -960,8 +960,8 @@ export function createNewFileViaDesktopAPI(store: any, newFileParams: any): void
   // Clone tracking info to avoid mutation
   let trackingInfo = newFileParams.trackingInfo
     ? {
-        ...newFileParams.trackingInfo,
-      }
+      ...newFileParams.trackingInfo,
+    }
     : null
   try {
     if (trackingInfo?.selectedView) {

@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
 import { TabLoop } from "../905/718764";
-import { OC, jL } from "../figma_app/290668";
+import { useFocusAreaRef, useManagedFocusArea } from "../figma_app/290668";
 import { c } from "../905/814434";
 export function $$o0({
   children: e,
   ...t
 }) {
-  let i = OC();
+  let i = useFocusAreaRef();
   return jsx(TabLoop, {
     children: jsx("div", {
       ...t,
@@ -21,7 +21,7 @@ export function $$l1({
   children: t,
   ...i
 }) {
-  let o = jL(!e);
+  let o = useManagedFocusArea(!e);
   return jsx(TabLoop, {
     children: jsx("div", {
       ...i,
